@@ -1,0 +1,1081 @@
+21000	긴급 회피	20100	icon_skills.tumbling_tex	신속의 문장	icon_crest.e_crestactiveattackspeedup_tex	30% 확률로 10초 동안 공격 속도 15% 증가 효과 발생
+21001	기상 공격	130100	icon_skills.risingattack_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+21002	회피 공격	100100	icon_skills.evasionattack_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 30% 감소
+21003	발목 노리기	140100	icon_skills.aimingankle_tex	테스트	icon_skills.voidtrap_tex	효과 없음
+21004	연속 공격	10100	icon_skills.comboattack_tex	야수의 문장	icon_crest.e_crestpassiveaggroup_tex	적대치 5% 추가 획득
+21005	도발 난무	30100	icon_skills.nanmu_tex	야수의 문장	icon_crest.e_crestpassiveaggroup_tex	적대치 20% 추가 획득
+21006	몰아치기	40100	icon_skills.pointattack_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+21007	내려찍기	120100	icon_skills.downblowattack_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+21008	맹독의 일격	110100	icon_skills.poisonblowattack_tex	결의의 문장	icon_crest.e_crestpassiveskilleffectup_tex	맹독 지속 피해 15% 향상
+21009	강철의 결의	90100	icon_skills.ironwillb_tex	결의의 문장	icon_crest.e_crestpassiveskilleffectup_tex	맷집 증가 효과 10% 향상
+21010	기상 공격	130100	icon_skills.risingattack_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+21011	도발 난무	30100	icon_skills.nanmu_tex	연계 정신의 문장 [몰아치기]	icon_crest.e_crestnextskillmpdown_tex	연계 스킬로 몰아치기 사용 시 소모 MP 88 감소
+21012	기상 공격	130100	icon_skills.risingattack_tex	연계 정신의 문장 [내려찍기]	icon_crest.e_crestnextskillmpdown_tex	연계 스킬로 내려찍기 사용 시 소모 MP 75 감소
+21013	연속 공격	10100	icon_skills.comboattack_tex	정신의 문장	icon_crest.e_crestpassivemprecoveryup_tex	적중 시 MP 회복량 35% 증가
+21014	회피 공격	100100	icon_skills.evasionattack_tex	신속의 문장	icon_crest.e_crestactiveattackspeedup_tex	50% 확률로 10초 동안 공격 속도 15% 증가 효과 발생
+21015	긴급 회피	20100	icon_skills.tumbling_tex	집중의 문장	icon_crest.e_crestactivecooltimereset_tex	소모 ST 100 감소
+21016	충격의 외침	50100	icon_skills.thunderingroar_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+21017	몰아치기	40100	icon_skills.pointattack_tex	근성의 문장	icon_crest.e_crestpassivehpheal_tex	타격 성공 시 마다 전체 HP 기준 0.5%의 HP 즉시 회복
+21018	투지의 일격	180100	icon_skills.aggravatingstrike_tex	근성의 문장	icon_crest.e_crestpassivehpdown_tex	소모 HP 50% 감소
+21019	회오리 베기	170100	icon_skills.allroundslash_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+21020	돌진 베기	160100	icon_skills.rushingslash_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+21021	위협의 결의			테스트	icon_skills.voidtrap_tex	효과 없음
+21022	근성 연타	190100	icon_skills.tenaciousattack_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	25% 확률로 재사용 시간 초기화
+21023	그림자 분신	240100	icon_skills.decoy_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+21024	뒤잡기	220100	icon_skills.backattack_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 50% 향상
+21025	필살의 의지	200100	icon_skills.deadlywill_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+21026	반격 돌리기			투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+21027	강격 베기	210100	icon_skills.hardslash_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 88 감소
+21028	투지의 일격	180100	icon_skills.aggravatingstrike_tex	연계 투지의 문장 [근성 연타]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 근성 연타 사용 시 스킬 위력 20% 증가
+21029	돌진 베기	160100	icon_skills.rushingslash_tex	연계 정신의 문장 [맹독의 일격]	icon_crest.e_crestnextskillmpdown_tex	연계 스킬로 맹독의 일격 사용 시 소모 MP 50 감소
+21030	강격 베기	210100	icon_skills.hardslash_tex	연계 정신의 문장 [몰아치기]	icon_crest.e_crestnextskillmpdown_tex	연계 스킬로 몰아치기 사용 시 소모 MP 88 감소
+21031	강격 베기	210100	icon_skills.hardslash_tex	연계 투지의 문장 [몰아치기]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 몰아치기 사용 시 스킬 위력 20% 증가
+21032	강격 베기	210100	icon_skills.hardslash_tex	집중의 문장	icon_crest.e_crestactivecooltimereset_tex	재사용 시간 25% 감소
+21033	근성 연타	190100	icon_skills.tenaciousattack_tex	감속의 문장	icon_crest.e_crestactiveattackspeeddown_tex	10% 확률로 7초 동안 공격 속도 15% 감소 효과 발생
+21034	도발난무			나태의 문장	icon_crest.e_crestactivespeeddown_tex	25% 확률로 대상에게 4초 동안 이동 불가 효과 발생
+21035	돌진 베기	160100	icon_skills.rushingslash_tex	연계 투지의 문장 [투지의 일격]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 투지의 일격 사용 시 스킬 위력 20% 증가
+21036	뒤잡기	220100	icon_skills.backattack_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+21037	반격 뒤돌리기	230100	icon_skills.reversalturningattack_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 50% 향상
+21038	반격 뒤돌리기	230100	icon_skills.reversalturningattack_tex	집중의 문장	icon_crest.e_crestactivecooltimereset_tex	재사용 시간 20% 감소
+21039	연속 공격	10100	icon_skills.comboattack_tex	기절의 문장	icon_crest.e_crestactivestun_tex	5% 확률로 대상에게 2초 동안 기절 효과 발생
+21040	충격의 외침	50100	icon_skills.thunderingroar_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	시전 속도 50% 상승
+21041	충격의 외침	50100	icon_skills.thunderingroar_tex	관통의 문장	icon_crest.e_crestpassivethorns_tex	효과 적용 확률 10% 증가
+21042	충격의 외침	50100	icon_skills.thunderingroar_tex	야수의 문장	icon_crest.e_crestpassiveaggroup_tex	적대치 100% 추가 획득
+21043	투지의 일격	180100	icon_skills.aggravatingstrike_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 50% 향상
+21044	투지의 일격	180100	icon_skills.aggravatingstrike_tex	연계 투지의 문장 [내려찍기]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 내려찍기 사용 시 스킬 위력 35% 증가
+21045	회오리 베기	170100	icon_skills.allroundslash_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	30% 확률로 재사용 시간 초기화
+21046	긴급 회피	20100	icon_skills.tumbling_tex	연계 근성의 문장 [맹독의 일격]	icon_crest.e_crestnextskillhpheal_tex	연계 스킬로 맹독의 일격 적중 시 전체 HP를 기준으로 3%의 HP 즉시 회복
+21047	회피 공격	100100	icon_skills.evasionattack_tex	테스트	icon_skills.voidtrap_tex	효과 없음
+21048	물어뜯기			신속의 문장	icon_crest.e_crestactiveattackspeedup_tex	공격 속도 30% 증가
+21049	물어뜯기			집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+21050	무쌍난무_찌르기			시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 50% 향상
+21051	무쌍난무_찌르기			정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 75 감소
+21052	무쌍난무_가르기			투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+21053	무쌍난무_가르기			정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 80 감소
+21054	무쌍난무_가르기			기회의 문장	icon_crest.e_crestactivecooltimereset_tex	50% 확률로 재사용 시간 초기화
+21064	몰아치기	40100	icon_skills.pointattack_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+21065	회피 공격	100100	icon_skills.evasionattack_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 30% 감소
+21066	몰아치기	40100	icon_skills.pointattack_tex	근성의 문장	icon_crest.e_crestpassivehpheal_tex	타격 성공 시 마다 전체 HP 기준 0.5%의 HP 즉시 회복
+21067	긴급 회피	20100	icon_skills.tumbling_tex	집중의 문장	icon_crest.e_crestactivecooltimereset_tex	소모 ST 100 감소
+21068	강철의 결의	90100	icon_skills.ironwillb_tex	결의의 문장	icon_crest.e_crestpassiveskilleffectup_tex	맷집 증가 효과 10% 향상
+21069	투지의 일격	180100	icon_skills.aggravatingstrike_tex	근성의 문장	icon_crest.e_crestpassivehpdown_tex	소모 HP 50% 감소
+21070	연속 공격	10100	icon_skills.comboattack_tex	정신의 문장	icon_crest.e_crestpassivemprecoveryup_tex	적중 시 MP 회복량 35% 증가
+21071	그림자 분신	240100	icon_skills.decoy_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+21072	투지의 일격	180100	icon_skills.aggravatingstrike_tex	연계 투지의 문장 [내려찍기]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 내려찍기 사용 시 스킬 위력 45% 증가
+21073	돌진 베기	160100	icon_skills.rushingslash_tex	연계 투지의 문장 [투지의 일격]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 투지의 일격 사용 시 스킬 위력 50% 증가
+21074	회피공격			보호의 문장	icon_crest.e_crestactivedefenceup_tex	8초 동안 맷집 25 증가 효과 발생
+21075	뒤잡기	220100	icon_skills.backattack_tex	인내의 문장	icon_crest.e_crestactiveattackspeedup_tex	스택 1 증가
+21076	강격베기			투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+21077	강격베기			시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 25% 향상
+21078	반격 뒤돌리기	230100	icon_skills.reversalturningattack_tex	연계 투지의 문장 [강격 베기]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 강격 베기 사용 시 스킬 위력 10% 증가
+21079	질풍 가르기	300100	icon_skills.raker_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	몬스터 공격 시 치명타 발생 확률 2배 증가
+21080	질풍 가르기	300100	icon_skills.raker_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스택 폭발에 의해 증가하는 데미지 25% 증가
+21081	뒤잡기	220100	icon_skills.backattack_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 50% 향상
+21082	물어뜯기			신속의 문장	icon_crest.e_crestactiveattackspeedup_tex	공격 속도 30% 증가
+21083	맹독의 일격	110100	icon_skills.poisonblowattack_tex	결의의 문장	icon_crest.e_crestactiveattackspeedup_tex	맹독의 일격 이상상태 최대 중첩 2회 가능
+21084	가르기	290100	icon_skills.dualslash_tex	인내의 문장	icon_crest.e_crestactiveattackspeedup_tex	스택 1 증가
+21085	파열	310100	icon_skills.rupture_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+21086	쌍검 방어	320100	icon_skills.twinswordsdefence_tex	근력의 문장	icon_crest.e_crestactiveattackup_tex	방어 성공 시 30% 확률로 10초 동안 힘 15% 증가 효과 발생
+21087	그림자 바꾸기	330100	icon_skills.shadowchange_tex	야수의 문장	icon_crest.e_crestpassiveaggroup_tex	적대치 20% 추가 획득
+21088	속박의 검	340100	icon_skills.bindingblade_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+21089	속박의 검	340100	icon_skills.bindingblade_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+21090	속박의 검	340100	icon_skills.bindingblade_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+21091	필살의 의지	200100	icon_skills.deadlywill_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 20% 향상
+21092	속박의 검	340100	icon_skills.bindingblade_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+21093	분노 유발	350100	icon_skills.provokerage_tex	나태의 문장	icon_crest.e_crestpassivespeeddown_tex	5초 동안 이동 속도 50% 감소 효과 추가 발생
+21094	분노 유발	350100	icon_skills.provokerage_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+21095	긴급 회피	20100	icon_skills.tumbling_tex	신속의 문장	icon_crest.e_crestactiveattackspeedup_tex	40% 확률로 10초 동안 공격 속도 15% 증가 효과 발생
+21096	도발 난무	30100	icon_skills.nanmu_tex	야수의 문장	icon_crest.e_crestpassiveaggroup_tex	적대치 40% 추가 획득
+21097	회오리 베기	170100	icon_skills.allroundslash_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+21098	강격 베기	210100	icon_skills.hardslash_tex	연계 투지의 문장 [몰아치기]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 몰아치기 사용 시 스킬 위력 20% 증가
+21099	근성 연타	190100	icon_skills.tenaciousattack_tex	감속의 문장	icon_crest.e_crestactiveattackspeeddown_tex	20% 확률로 7초 동안 공격 속도 15% 감소 효과 발생
+21100	뒤잡기	220100	icon_skills.backattack_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+21101	긴급 회피	20100	icon_skills.tumbling_tex	집중의 문장	icon_crest.e_crestactivecooltimereset_tex	소모 ST 120 감소
+21102	강철의 결의	90100	icon_skills.ironwillb_tex	결의의 문장	icon_crest.e_crestpassiveskilleffectup_tex	맷집 증가 효과 10% 향상
+21103	돌진 베기	160100	icon_skills.rushingslash_tex	연계 투지의 문장 [투지의 일격]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 투지의 일격 사용 시 스킬 위력 50% 증가
+21104	질풍 가르기	300100	icon_skills.raker_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	몬스터 공격 시 치명타 발생 확률 3배 증가
+21105	질풍 가르기	300100	icon_skills.raker_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스택 폭발에 의해 증가하는 데미지 30% 증가
+21106	필살의 의지	200100	icon_skills.deadlywill_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 20% 향상
+21107	무쌍 난무_가르기			필살의 문장	icon_crest.e_crestpassivecriticalup_tex	몬스터 공격 시 치명타 발생 확률 2배 증가
+22000	방패 방어	20100	icon_skills.defence_tex	근력의 문장	icon_crest.e_crestactiveattackup_tex	방어 성공 시 30% 확률로 10초 동안 힘 15% 증가 효과 발생
+22001	방패 방어	20100	icon_skills.defence_tex	연계 투지의 문장 [반격 찌르기]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 반격 찌르기 사용 시 스킬 위력 25% 증가
+22002	방패 방어	20100	icon_skills.defence_tex	연계 정신의 문장 [반격 찌르기]	icon_crest.e_crestnextskillmpdown_tex	연계 스킬로 반격 찌르기 사용 시 소모 MP 115 감소
+22003	연속 공격	10100	icon_skills.comboattack_tex	야수의 문장	icon_crest.e_crestpassiveaggroup_tex	적대치 5% 추가 획득
+22004	도발의 포효	40100	icon_skills.roar_tex	야수의 문장	icon_crest.e_crestpassiveaggroup_tex	적대치 20% 추가 획득
+22005	도발의 포효	40100	icon_skills.roar_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 60 감소
+22006	분노 유발	120100	icon_skills.provokerage_tex	나태의 문장	icon_crest.e_crestpassivespeeddown_tex	5초 동안 이동 속도 50% 감소 효과 추가 발생
+22007	맹렬한 돌진	30100	icon_skills.screwthrough_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+22008	반격 찌르기	80100	icon_skills.riposte_tex	테스트	icon_skills.voidtrap_tex	효과 없음
+22009	방패 치기	50100	icon_skills.shieldstrike_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 25% 향상
+22010	신뢰의 오라	70100	icon_skills.inspiringroar_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 200 감소
+22012	기상 공격	110100	icon_skills.risingattack_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+22013	방패 연타	180100	icon_skills.shieldattack_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 19 감소
+22015	연속 공격	10100	icon_skills.comboattack_tex	정신의 문장	icon_crest.e_crestpassivemprecoveryup_tex	적중 시 MP 회복량 20% 증가
+22016	방어구 부수기	100100	icon_skills.armorbreak_tex	정신의 문장	icon_crest.e_crestactivempzero_tex	35% 확률로 MP 소모 없이 스킬 발동
+22017	포획	90100	icon_skills.hookthrow_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+22018	분노 유발	120100	icon_skills.provokerage_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+22019	방패 치기	50100	icon_skills.shieldstrike_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+22020	진격 찌르기	150100	icon_skills.advancingcharge_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+22021	회생의 의지	160100	icon_skills.rejuvenation_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+22022	전투의 의지	170100	icon_skills.fightingwill_tex	결의의 문장	icon_crest.e_crestpassiveskilleffectup_tex	공격 속도 10% 증가
+22023	도약 공격	130100	icon_skills.leaprampage_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 75 감소
+22024	기상 공격	110100	icon_skills.risingattack_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+22025	위협의 파동	200100	icon_skills.menacewave_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 60 감소
+22026	철갑의 의지	220100	icon_skills.armoredwill_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 50% 향상
+22027	연쇄 포획	230100	icon_skills.chaincapture_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	30% 확률로 재사용 시간 초기화
+22028	충격의 맹타	210100	icon_skills.shockblow_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+22029	수호의 맹세	190100	icon_skills.vowofprotection_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+22030	도약 공격	130100	icon_skills.leaprampage_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+22031	도발의 포효	40100	icon_skills.roar_tex	테스트	icon_skills.voidtrap_tex	효과 없음
+22032	맹렬한 돌진	30100	icon_skills.screwthrough_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 100 감소
+22033	반격 찌르기	80100	icon_skills.riposte_tex	야수의 문장	icon_crest.e_crestpassiveaggroup_tex	적대치 100% 추가 획득
+22034	방어구 부수기	100100	icon_skills.armorbreak_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 100% 향상
+22035	방패 치기	50100	icon_skills.shieldstrike_tex	연계 신속의 문장 [맹렬한 돌진]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 맹렬한 돌진 사용 시 시전 속도 25% 증가
+22036	수호의 맹세	190100	icon_skills.vowofprotection_tex	구원의 문장	icon_crest.e_crestactivehprecoveryup_tex	시전자에게 20초 동안 HP 회복 효과 적용 시 HP 회복량 20% 증가 효과 발생
+22037	신뢰의 오라	70100	icon_skills.inspiringroar_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+22038	위협의 파동	200100	icon_skills.menacewave_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 50% 향상
+22039	진격 찌르기	150100	icon_skills.advancingcharge_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+22040	진격 찌르기	150100	icon_skills.advancingcharge_tex	활력의 문장	icon_crest.e_crestactivespeedup_tex	7초 동안 전투 상태 이동 속도 10 증가 효과 발생
+22041	철갑의 의지	220100	icon_skills.armoredwill_tex	결의의 문장	icon_crest.e_crestpassiveskilleffectup_tex	피해 흡수량 25% 향상
+22042	충격의 맹타	210100	icon_skills.shockblow_tex	결의의 문장	icon_crest.e_crestpassiveskilleffectup_tex	이동 속도 감소 효과 30% 향상
+22043	포획	90100	icon_skills.hookthrow_tex	명중의 문장	icon_crest.e_crestpassiverangeup_tex	사정 거리 3m 증가
+22044	포획	90100	icon_skills.hookthrow_tex	나태의 문장	icon_crest.e_crestpassivespeeddown_tex	대상에게 4초 동안 이동 속도 50% 감소 효과 추가 발생
+22045	방패 치기	50100	icon_skills.shieldstrike_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 25% 향상
+22046	방패 치기	50100	icon_skills.shieldstrike_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+22047	포획	90100	icon_skills.hookthrow_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+22048	연속 공격	10100	icon_skills.comboattack_tex	야수의 문장	icon_crest.e_crestpassiveaggroup_tex	적대치 5% 추가 획득
+22049	도발의 포효	40100	icon_skills.roar_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 60 감소
+22050	충격의 맹타	210100	icon_skills.shockblow_tex	결의의 문장	icon_crest.e_crestpassiveskilleffectup_tex	이동 속도 감소 효과 30% 향상
+22051	맹렬한 돌진	30100	icon_skills.screwthrough_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 150 감소
+22052	신뢰의 오라	70100	icon_skills.inspiringroar_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 35% 감소
+22053	분노 유발	120100	icon_skills.provokerage_tex	나태의 문장	icon_crest.e_crestpassivespeeddown_tex	5초 동안 이동 속도 50% 감소 효과 추가 발생
+22054	포획	90100	icon_skills.hookthrow_tex	감속의 문장	icon_crest.e_crestpassivetargetspeeddown_tex	대상에게 4초 동안 공격 속도 40% 감소 효과 발생
+22055	포획	90100	icon_skills.hookthrow_tex	야수의 문장	icon_crest.e_crestpassiveaggroup_tex	적대치 30% 추가 획득
+22056	도발의 포효	40100	icon_skills.roar_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	시전 속도 25% 상승
+22057	도발의 포효	40100	icon_skills.roar_tex	보호의 문장	icon_crest.e_crestactivedefenceup_tex	적중 시 8초 동안 맷집 21 증가 효과 발생
+22058	맹렬한 돌진	30100	icon_skills.screwthrough_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 2배 증가
+22059	충격의 맹타	210100	icon_skills.shockblow_tex	야수의 문장	icon_crest.e_crestpassiveaggroup_tex	적대치 50% 추가 획득
+22060	작살 사슬	240100	icon_skills.harpoonshot_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+22061	작살 사슬	240100	icon_skills.harpoonshot_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 50% 향상
+22062	연속 공격	10100	icon_skills.comboattack_tex	정신의 문장	icon_crest.e_crestpassivemprecoveryup_tex	적중 시 MP 회복량 20% 증가
+22063	반격 찌르기	80100	icon_skills.riposte_tex	야수의 문장	icon_crest.e_crestpassiveaggroup_tex	적대치 100% 추가 획득
+22064	방패 연타	180100	icon_skills.shieldattack_tex	야수의 문장	icon_crest.e_crestpassiveaggroup_tex	적대치 200% 추가 획득
+22065	도약 공격	130100	icon_skills.leaprampage_tex	감속의 문장	icon_crest.e_crestactiveattackspeeddown_tex	30% 확률로 7초 동안 공격 속도 30% 감소 효과 발생
+22066	압도	250100	icon_skills.overhelm_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+22067	물러서기	260100	icon_skills.backstep_tex	집중의 문장	icon_crest.e_crestactivecooltimereset_tex	소모 ST 100 감소
+22068	도발의 포효	40100	icon_skills.roar_tex	의지의 문장	icon_crest.e_creststrecover_tex	스태미너 회복량 30% 증가
+22069	반격 찌르기	80100	icon_skills.riposte_tex	의지의 문장	icon_crest.e_creststrecover_tex	스태미너 회복량 50% 증가
+22070	회생의 의지	160100	icon_skills.rejuvenation_tex	의지의 문장	icon_crest.e_creststrecover_tex	스태미너 20%추가 회복
+22071	방패방어			의지의 문장	icon_crest.e_creststrecover_tex	스태미너 최대량 500 증가 
+22072	전선 유지	270100	icon_skills.holdtheline_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+22073	전선 유지	270100	icon_skills.holdtheline_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 30% 향상
+22074	전선 유지	270100	icon_skills.holdtheline_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 150 감소
+22075	전선 유지	270100	icon_skills.holdtheline_tex	야수의 문장	icon_crest.e_crestpassiveaggroup_tex	적대치 100% 추가 획득
+22076	전선 유지	270100	icon_skills.holdtheline_tex	야수의 문장	icon_crest.e_crestpassiveaggroup_tex	적대치 100% 추가 획득
+22077	전선 유지	270100	icon_skills.holdtheline_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 30% 향상
+22078	전선 유지	270100	icon_skills.holdtheline_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+22079	도발의 포효	40100	icon_skills.roar_tex	야수의 문장	icon_crest.e_crestpassiveaggroup_tex	적대치 40% 추가 획득
+22080	맹렬한 돌진	30100	icon_skills.screwthrough_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 30% 증가
+22081	도약 공격	130100	icon_skills.leaprampage_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 30% 증가
+22082	방어구 부수기	100100	icon_skills.armorbreak_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 100% 향상
+22083	진격 찌르기	150100	icon_skills.advancingcharge_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+22084	도발의 포효	40100	icon_skills.roar_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 80 감소
+22085	도발의 포효	40100	icon_skills.roar_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	시전 속도 25% 상승
+22086	반격 찌르기	80100	icon_skills.riposte_tex	야수의 문장	icon_crest.e_crestpassiveaggroup_tex	적대치 120% 추가 획득
+22087	방패 연타	180100	icon_skills.shieldattack_tex	야수의 문장	icon_crest.e_crestpassiveaggroup_tex	적대치 200% 추가 획득
+22088	압도	250100	icon_skills.overhelm_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+22089	물러서기	260100	icon_skills.backstep_tex	집중의 문장	icon_crest.e_crestactivecooltimereset_tex	소모 ST 100 감소
+22090	전선 유지	270100	icon_skills.holdtheline_tex	야수의 문장	icon_crest.e_crestpassiveaggroup_tex	적대치 120% 추가 획득
+23000	긴급 회피	40100	icon_skills.tumbling_tex	활력의 문장	icon_crest.e_crestactivespeedup_tex	30% 확률로 10초 동안 이동 속도 15% 증가 효과 발생
+23001	연속 공격	10100	icon_skills.comboattack_tex	신속의 문장	icon_crest.e_crestactiveattackspeedup_tex	10% 확률로 10초 동안 공격 속도 15% 증가 효과 발생
+23002	연속 공격	10100	icon_skills.comboattack_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+23003	힘 모으기	180100	icon_skills.gatheringstrength_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 33 감소
+23004	후려치기	20100	icon_skills.handyslash_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+23005	기상 공격	100100	icon_skills.risingattack_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+23007	후려치기	20100	icon_skills.handyslash_tex	연계 투지의 문장 [회전베기]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 회전베기 사용 시 스킬 위력 25% 증가
+23008	기상 공격	100100	icon_skills.risingattack_tex	연계 투지의 문장 [내려찍기]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 내려찍기 사용 시 스킬 위력 25% 증가
+23009	일도양단	80100	icon_skills.cuttingslash_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	50% 확률로 재사용 시간 초기화
+23010	연속 공격	10100	icon_skills.comboattack_tex	정신의 문장	icon_crest.e_crestpassivemprecoveryup_tex	적중 시 MP 회복량 10% 증가
+23011	집념	190100	icon_skills.tenacity_tex	정신의 문장	icon_crest.e_crestpassivemprecoveryup_tex	30% 확률로 1초마다 전체 MP 대비 6%씩 MP가 지속적으로 회복
+23012	회전 베기	30100	icon_skills.sworddance_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 63 감소
+23013	질주	50100	icon_skills.dash_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+23014	뒤잡기	60100	icon_skills.turnaroundattack_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 15% 감소
+23015	후려치기	20100	icon_skills.handyslash_tex	보호의 문장	icon_crest.e_crestpassivedeffeceup_tex	스킬 시전 중 피격 시 데미지 50% 감소
+23016	급소 치기	120100	icon_skills.stingerblade_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+23017	분노의 일격	160100	icon_skills.ragingstrike_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+23018	칼등 치기	130100	icon_skills.flatblade_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+23019	전진 도약	170100	icon_skills.advancingleap_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+23020	내려찍기	90100	icon_skills.downblow_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 50 감소
+23021	진공 3단 베기	140100	icon_skills.tripleslash_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 18 감소
+23022	후퇴 차기	150100	icon_skills.retreatingkick_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 30 감소
+23023	기상 공격	100100	icon_skills.risingattack_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+23024	일도양단	80100	icon_skills.cuttingslash_tex	근성의 문장	icon_crest.e_crestpassivehpheal_tex	스킬 적중 시 전체 HP 기준 3%의 HP 즉시 회복
+23025	집념	190100	icon_skills.tenacity_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+23026	신경 가르기	210100	icon_skills.veinslash_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+23027	파괴의 기백	200100	icon_skills.destructionvigor_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 50 감소
+23028	급소 치기	120100	icon_skills.stingerblade_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	35% 확률로 재사용 시간 초기화
+23029	집념	190100	icon_skills.tenacity_tex	보호의 문장	icon_crest.e_crestactivedefenceup_tex	10초 동안 맷집 20% 증가 효과 추가 발생
+23030	뒤잡기	60100	icon_skills.turnaroundattack_tex	연계 신속의 문장 [급소 치기]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 급소 치기 사용 시 시전 속도 25% 증가
+23031	뒤잡기	60100	icon_skills.turnaroundattack_tex	연계 신속의 문장 [후려치기]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 후려치기 사용 시 시전 속도 25% 증가
+23032	분노의 일격	160100	icon_skills.ragingstrike_tex	연계 신속의 문장 [회전 베기]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 회전 베기 사용 시 시전 속도 25% 증가
+23033	분노의 일격	160100	icon_skills.ragingstrike_tex	연계 근성의 문장 [칼등 치기]	icon_crest.e_crestnextskillhpheal_tex	연계 스킬로 칼등 치기 적중 시 전체 HP를 기준으로 4%의 HP 즉시 회복
+23034	신경 가르기	210100	icon_skills.veinslash_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+23035	신경 가르기	210100	icon_skills.veinslash_tex	감속의 문장	icon_crest.e_crestactiveattackspeeddown_tex	20% 확률로 대상에게 5초 동안 공격 속도 15% 감소 효과 발생
+23036	집념	190100	icon_skills.tenacity_tex	균형의 문장	icon_crest.e_crestactivereactionresist_tex	15초 동안 균형 1.5배 증가 효과 발생
+23037	파괴의 기백	200100	icon_skills.destructionvigor_tex	연계 신속의 문장 [급소 치기]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 급소 치기 사용 시 시전 속도 25% 증가
+23038	긴급 회피	40100	icon_skills.tumbling_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	20% 확률로 재사용 시간 초기화
+23039	긴급 회피	40100	icon_skills.tumbling_tex	연계 투지의 문장 [분노의 일격]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 분노의 일격 사용 시 스킬 위력 25% 증가
+23040	후려치기	20100	icon_skills.handyslash_tex	연계 투지의 문장 [일도양단]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 일도양단 사용 시 스킬 위력 20% 증가
+23041	후려치기	20100	icon_skills.handyslash_tex	충격의 문장	icon_crest.e_crestpassivereactionup_tex	다운 / 경직 발생 확률 20% 증가
+23042	후퇴 차기	150100	icon_skills.retreatingkick_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 30% 향상
+23043	후퇴 차기	150100	icon_skills.retreatingkick_tex	연계 신속의 문장 [급소 치기]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 급소 치기 사용 시 시전 속도 25% 증가
+23044	후퇴 차기	150100	icon_skills.retreatingkick_tex	연계 신속의 문장 [후려치기]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 후려치기 사용 시 시전 속도 25% 증가
+23046	일도양단	80100	icon_skills.cuttingslash_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	50% 확률로 재사용 시간 초기화
+23047	후려치기	20100	icon_skills.handyslash_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+23048	칼등 치기	130100	icon_skills.flatblade_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+23049	일도양단	80100	icon_skills.cuttingslash_tex	근성의 문장	icon_crest.e_crestpassivehpheal_tex	스킬 적중 시 전체 HP 기준 3%의 HP 즉시 회복
+23050	연속 공격	10100	icon_skills.comboattack_tex	신속의 문장	icon_crest.e_crestactiveattackspeedup_tex	10% 확률로 10초 동안 공격 속도 15% 증가 효과 발생
+23051	신경 가르기	210100	icon_skills.veinslash_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 35% 감소
+23052	집념	190100	icon_skills.tenacity_tex	균형의 문장	icon_crest.e_crestactivereactionresist_tex	15초 동안 균형 2배 증가 효과 발생
+23053	집념	190100	icon_skills.tenacity_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 30% 감소
+23054	뒤잡기	60100	icon_skills.turnaroundattack_tex	연계 신속의 문장 [급소 치기]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 급소 치기 사용 시 시전 속도 35% 증가
+23055	회전베기			필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 유발 3배 증가
+23056	긴급 회피	40100	icon_skills.tumbling_tex	연계 투지의 문장 [회피]	icon_crest.e_crestpassiveattackup_tex	연계 스킬로 뒤잡기 사용 시 위력 25% 증가
+23057	급소 치기	120100	icon_skills.stingerblade_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 유발 3배 증가
+23058	힘 모으기	180100	icon_skills.gatheringstrength_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	다음 1회 공격에 치명타 유발 2배 증가
+23059	힘 모으기	180100	icon_skills.gatheringstrength_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	다음 1회 공격에 스킬 위력 10% 증가
+23060	후퇴 차기	150100	icon_skills.retreatingkick_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	시전 속도 25% 상승
+23061	일섬	230100	icon_skills.cuthead_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 확률 2배 증가
+23062	일섬	230100	icon_skills.cuthead_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+23063	분노의 일격	160100	icon_skills.ragingstrike_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+23064	뒤잡기	60100	icon_skills.turnaroundattack_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+23065	진공 3단 베기	140100	icon_skills.tripleslash_tex	감속의 문장	icon_crest.e_crestactiveattackspeeddown_tex	30% 확률로 대상에게 5초 동안 공격 속도 15% 감소 효과 발생
+23066	전진 도약	170100	icon_skills.advancingleap_tex	연계 투지의 문장 [후려 치기]	icon_crest.e_crestpassiveattackup_tex	연계 스킬로 후려 치기 사용 시 스킬 위력 25% 증가
+23067	턱 부수기	220100	icon_skills.jawbreaker_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+23068	턱 부수기	220100	icon_skills.jawbreaker_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+23069	턱 부수기	220100	icon_skills.jawbreaker_tex	연계 투지의 문장 [일도양단]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 일도양단 사용 시 스킬 위력 25% 증가
+23070	턱 부수기	220100	icon_skills.jawbreaker_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+23071	턱 부수기	220100	icon_skills.jawbreaker_tex	연계 투지의 문장 [일섬]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 일섬 사용 시 스킬 위력 25% 증가
+23072	집념	190100	icon_skills.tenacity_tex	정신의 문장	icon_crest.e_crestpassivepartympup_tex	50% 확률로 1초마다 전체 MP 대비 6%씩 MP가 지속적으로 회복
+23073	긴급 회피	40100	icon_skills.tumbling_tex	활력의 문장	icon_crest.e_crestactivespeedup_tex	30% 확률로 10초 동안 이동 속도 15% 증가 효과 발생
+23074	급소 치기	120100	icon_skills.stingerblade_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 30% 증가
+23075	분노의 일격	160100	icon_skills.ragingstrike_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 40% 증가
+23076	후퇴 차기	150100	icon_skills.retreatingkick_tex	연계 신속의 문장 [급소 치기]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 급소 치기 사용 시 시전 속도 25% 증가
+23077	일도양단	80100	icon_skills.cuttingslash_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	60% 확률로 재사용 시간 초기화
+23078	후려치기	20100	icon_skills.handyslash_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 30% 증가
+23079	회전베기			필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 유발 3배 증가
+23080	힘 모으기	180100	icon_skills.gatheringstrength_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	다음 1회 공격에 치명타 유발 2배 증가
+23081	일섬	230100	icon_skills.cuthead_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 확률 3배 증가
+23082	일섬	230100	icon_skills.cuthead_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 30% 증가
+23083	턱 부수기	220100	icon_skills.jawbreaker_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+23084	턱 부수기	220100	icon_skills.jawbreaker_tex	연계 투지의 문장 [일도양단]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 일도양단 사용 시 스킬 위력 25% 증가
+24000	무기 방어	20100	icon_skills.weapondefence_tex	정신의 문장	icon_crest.e_crestpassivempheal_tex	방어 성공 시 MP 3% 회복
+24001	무기 방어	20100	icon_skills.weapondefence_tex	근력의 문장	icon_crest.e_crestactiveattackup_tex	방어 성공 시 30% 확률로 5초 동안 힘 20% 증가 효과 발생
+24002	모아 치기	30100	icon_skills.blastslash_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 2배 증가
+24003	소용돌이	100100	icon_skills.whirlwind_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 2배 증가
+24004	연속 공격	10100	icon_skills.comboattack_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 유발 10% 증가
+24005	모아 치기	30100	icon_skills.blastslash_tex	숙련의 문장	icon_crest.e_crestpassivepenaltydelete_tex	차지 시 이동 속도 감소 효과 제거
+24006	소용돌이	100100	icon_skills.whirlwind_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	오버 차지 시 증가된 위력의 24% 위력 증가
+24007	모아 치기	30100	icon_skills.blastslash_tex	근성의 문장	icon_crest.e_crestpassivehpdown_tex	오버 차지 시 소모 HP 50% 감소
+24008	대지 치기	40100	icon_skills.bash_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	시전 속도 25% 상승
+24009	소용돌이	100100	icon_skills.whirlwind_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	차지 속도 25% 상승
+24010	고함	70100	icon_skills.shockingshout_tex	연계 신속의 문장 [소용돌이]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 소용돌이 사용 시 차지 속도 30% 증가
+24011	광폭화	80100	icon_skills.berserk_tex	근력의 문장	icon_crest.e_crestactiveattackup_tex	30% 확률로 20초 동안 힘 10% 증가 효과 추가 발생
+24012	뒤돌리기	60100	icon_skills.turnback_tex	연계 정신의 문장 [대지치기]	icon_crest.e_crestnextskillmpdown_tex	연계 스킬로 대지치기 사용 시 소모 MP 63 감소
+24013	대지 치기	40100	icon_skills.bash_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+24015	연속 공격	10100	icon_skills.comboattack_tex	정신의 문장	icon_crest.e_crestpassivemprecoveryup_tex	적중 시 MP 회복량 15% 증가
+24016	집념	190100	icon_skills.tenacity_tex	정신의 문장	icon_crest.e_crestpassivemprecoveryup_tex	30% 확률로 1초마다 전체 MP 대비 6%씩 MP가 지속적으로 회복
+24017	광신 강림	120100	icon_skills.vitalconversion_tex	근성의 문장	icon_crest.e_crestpassivehpdown_tex	소모 HP 50% 감소
+24018	질주	50100	icon_skills.dash_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+24019	기상 공격	130100	icon_skills.risingattack_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+24020	뒤돌리기	60100	icon_skills.turnback_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+24021	내려찍기	110100	icon_skills.downattack_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+24022	흡혈 광타	150100	icon_skills.vampiricstrike_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+24023	광폭화	80100	icon_skills.berserk_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	광기 증폭 효과 지속 시간 30% 향상
+24024	날카로운 고함	160100	icon_skills.piercingshout_tex	테스트	icon_skills.voidtrap_tex	효과 없음
+24026	흡혈 광타	150100	icon_skills.vampiricstrike_tex	연계 투지의 문장	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 혼신의 일격 사용 시 스킬 위력 20% 증가
+24027	기상 공격	130100	icon_skills.risingattack_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+24028	격노	210100	icon_skills.fury_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 150 감소
+24029	집념	190100	icon_skills.tenacity_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+24030	살기 분출	200100	icon_skills.murderousvent_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+24031	집념	190100	icon_skills.tenacity_tex	연계 정신의 문장 [질주]	icon_crest.e_crestnextskillmpdown_tex	연계 스킬로 질주 사용 시 소모 MP 75 감소
+24032	혼신의 일격	180100	icon_skills.soulstrike_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+24033	살기 분출	200100	icon_skills.murderousvent_tex	연계 정신의 문장 [대지 치기]	icon_crest.e_crestnextskillmpdown_tex	연계 스킬로 대지 치기 사용 시 소모 MP 63 감소
+24034	고함	70100	icon_skills.shockingshout_tex	테스트	icon_skills.voidtrap_tex	효과 없음
+24035	고함	70100	icon_skills.shockingshout_tex	연계 투지의 문장 [뒤돌리기]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 뒤돌리기 사용 시 스킬 위력 25% 증가
+24036	광신 강림	120100	icon_skills.vitalconversion_tex	충격의 문장	icon_crest.e_crestactivereactionup_tex	20초 동안 충격 10% 증가 효과 발생
+24037	광신 강림	120100	icon_skills.vitalconversion_tex	조력의 문장	icon_crest.e_crestactiveinvokeskill_tex	25% 확률로 광기 증폭 I 효과 발생
+24038	광폭화	80100	icon_skills.berserk_tex	활력의 문장	icon_crest.e_crestactivespeedup_tex	15초 동안 전투 상태 이동 속도 20 증가 효과 추가 발생
+24039	날카로운 고함	160100	icon_skills.piercingshout_tex	연계 투지의 문장 [뒤돌리기]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 뒤돌리기 사용 시 스킬 위력 25% 증가
+24040	내려찍기	110100	icon_skills.downattack_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	30% 확률로 재사용 시간 초기화
+24041	살기 분출	200100	icon_skills.murderousvent_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 30% 향상
+24042	살기 분출	200100	icon_skills.murderousvent_tex	연계 신속의 문장 [대지 치기]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 대지 치기 사용 시 시전 속도 25% 증가
+24043	살기 분출	200100	icon_skills.murderousvent_tex	테스트	icon_skills.voidtrap_tex	효과 없음
+24044	집념	190100	icon_skills.tenacity_tex	균형의 문장	icon_crest.e_crestactivereactionresist_tex	15초 동안 균형 1.5 배 증가 효과 발생
+24045	혼신의 일격	180100	icon_skills.soulstrike_tex	숙련의 문장	icon_crest.e_crestpassivepenaltydelete_tex	차지 시 이동 속도 감소 효과 제거
+24046	내려찍기	110100	icon_skills.downattack_tex	연계 신속의 문장 [혼신의 일격]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 혼신의 일격 사용 시 차지 속도 30% 증가
+24047	뒤돌리기	60100	icon_skills.turnback_tex	연계 신속의 문장 [모아 치기]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 모아 치기 사용 시 차지 속도 30% 증가
+24048	모아 치기	30100	icon_skills.blastslash_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 2배 증가
+24049	모아 치기	30100	icon_skills.blastslash_tex	숙련의 문장	icon_crest.e_crestpassivepenaltydelete_tex	차지 시 이동 속도 감소 효과 제거
+24050	대지 치기	40100	icon_skills.bash_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	시전 속도 25% 상승
+24051	모아 치기	30100	icon_skills.blastslash_tex	근성의 문장	icon_crest.e_crestpassivehpdown_tex	오버 차지 시 소모 HP 50% 감소
+24052	소용돌이	100100	icon_skills.whirlwind_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	차지 속도 25% 상승
+24053	대지 치기	40100	icon_skills.bash_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+24054	집념	190100	icon_skills.tenacity_tex	균형의 문장	icon_crest.e_crestactivereactionresist_tex	15초 동안 균형 2배 증가 효과 발생
+24055	고함	70100	icon_skills.shockingshout_tex	연계 신속의 문장 [소용돌이]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 소용돌이 사용 시 차지 속도 30% 증가
+24056	살기 분출	200100	icon_skills.murderousvent_tex	연계 신속의 문장 [대지 치기]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 대지 치기 사용 시 시전 속도 30% 증가
+24057	집념	190100	icon_skills.tenacity_tex	보호의 문장	icon_crest.e_crestactivedefenceup_tex	12초 동안 맷집 16 증가 효과 추가 발생
+24058	질주	50100	icon_skills.dash_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	35% 확률로 재사용 시간 초기화
+24059	내려찍기	110100	icon_skills.downattack_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 유발 2배 증가
+24060	집념	190100	icon_skills.tenacity_tex	근성의 문장	icon_crest.e_crestpassivehpheal_tex	전체 HP 기준 12%의 HP 즉시 회복
+24061	집념	190100	icon_skills.tenacity_tex	정신의 문장	icon_crest.e_crestpassivemprecoveryup_tex	50% 확률로 1초마다 전체 MP 대비 6%씩 MP가 지속적으로 회복
+24062	기상 공격	130100	icon_skills.risingattack_tex	투지의 문장	icon_crest.e_crestpassivehpattackup_tex	HP가 낮을수록 스킬 위력이 증가하며 최대 4배까지 위력 증가
+24063	늑골 부수기	240100	icon_skills.ribbreaker_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+24064	늑골 부수기	240100	icon_skills.ribbreaker_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 2배 증가
+24065	무기 방어	20100	icon_skills.weapondefence_tex	정신의 문장	icon_crest.e_crestpassivemprecoveryup_tex	방어 성공 시 MP 3% 회복
+24066	소용돌이	100100	icon_skills.whirlwind_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 2배 증가
+24067	모아 치기	30100	icon_skills.blastslash_tex	신속의 문장	icon_crest.e_crestnextskillattackspeedup_tex	차지 속도 25% 상승
+24068	뒤돌리기	60100	icon_skills.turnback_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	35% 확률로 재사용 시간 초기화
+24069	불멸의 광전사	270100	icon_skills.selfbuff_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+24070	불멸의 광전사	270100	icon_skills.selfbuff_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+24071	불멸의 광전사	270100	icon_skills.selfbuff_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 20% 향상
+24072	전진 횡베기	230100	icon_skills.sideslash_tex	연계 신속의 문장 [모아 치기]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 모아 치기 사용 시 시전 속도 25% 증가
+24073	전진 횡베기	230100	icon_skills.sideslash_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	적중 시 MP 회복량 20% 증가
+24074	전진 횡베기	230100	icon_skills.sideslash_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+24075	강기 날리기	220100	icon_skills.throwaxe_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 150 감소
+24076	강기 날리기	220100	icon_skills.throwaxe_tex	활력의 문장	icon_crest.e_crestpassivechargemove_tex	15초 동안 전투 상태 이동 속도 20 증가 효과 추가 발생
+24077	강기 날리기	220100	icon_skills.throwaxe_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 유발 2배 증가
+24078	전진 횡베기	230100	icon_skills.sideslash_tex	신속의 문장	icon_crest.e_crestpassiveaggroup_tex	시전 속도 25% 상승
+24080	무기 방어	20100	icon_skills.weapondefence_tex	연계 투지의 문장 [되받아 치기]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 되받아 치기 사용 시 스킬 위력 25% 증가
+24081	무기 방어	20100	icon_skills.weapondefence_tex	연계 정신의 문장 [되받아 치기]	icon_crest.e_crestnextskillmpdown_tex	연계 스킬로 되받아 치기 사용 시 소모 MP 115 감소
+24082	되받아 치기	300100	icon_skills.determinationofadvance_tex	야수의 문장	icon_crest.e_crestpassiveaggroup_tex	적대치 100% 추가 획득
+24083	올려 베기	320100	icon_skills.upperslashcombo_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 25 감소
+24084	올려 베기	320100	icon_skills.upperslashcombo_tex	야수의 문장	icon_crest.e_crestpassiveaggroup_tex	적대치 100% 추가 획득
+24085	늑골 부수기	240100	icon_skills.ribbreaker_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+24086	광폭화	80100	icon_skills.berserk_tex	야수의 문장	icon_crest.e_crestpassiveaggroup_tex	적대치 20% 추가 획득
+24087	광폭화	80100	icon_skills.berserk_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 60 감소
+24088	강습 공격	310100	icon_skills.assaultattack_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+24089	광신 강림	120100	icon_skills.vitalconversion_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+24090	강습 공격	310100	icon_skills.assaultattack_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+24091	강습 공격	310100	icon_skills.assaultattack_tex	활력의 문장	icon_crest.e_crestactivespeedup_tex	7초 동안 전투 상태 이동 속도 10 증가 효과 발생
+24092	광폭화	80100	icon_skills.berserk_tex	근력의 문장	icon_crest.e_crestactiveattackup_tex	40% 확률로 20초 동안 힘 10% 증가 효과 추가 발생
+24093	광폭화	80100	icon_skills.berserk_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	광기 증폭 효과 지속 시간 35% 향상
+24094	혼신의 일격	180100	icon_skills.soulstrike_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 30% 증가
+24095	모아 치기	30100	icon_skills.blastslash_tex	숙련의 문장	icon_crest.e_crestpassivepenaltydelete_tex	차지 시 이동 속도 감소 효과 제거
+24096	소용돌이	100100	icon_skills.whirlwind_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	차지 속도 30% 상승
+24097	대지 치기	40100	icon_skills.bash_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 30% 증가
+24098	늑골 부수기	240100	icon_skills.ribbreaker_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+24099	소용돌이	100100	icon_skills.whirlwind_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 2배 증가
+24100	불멸의 광전사	270100	icon_skills.selfbuff_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 50% 감소
+24101	전진 횡베기	230100	icon_skills.sideslash_tex	연계 신속의 문장 [모아 치기]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 모아 치기 사용 시 시전 속도 25% 증가
+24102	강습 공격	310100	icon_skills.assaultattack_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+24103	강습 공격	310100	icon_skills.assaultattack_tex	활력의 문장	icon_crest.e_crestactivespeedup_tex	7초 동안 전투 상태 이동 속도 10 증가 효과 발생
+25000	화염구	10100	icon_skills.fireball_tex	명중의 문장	icon_crest.e_crestpassiverangeup_tex	사정 거리 3m 증가
+25001	추적의 업화	200100	icon_skills.trackinginferno_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	시전 속도 30% 상승
+25003	운석 낙하	60100	icon_skills.hellfire_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	시전 속도 17% 상승
+25004	마력 방패	100100	icon_skills.manashield_tex	근력의 문장	icon_crest.e_crestactiveattackup_tex	스킬 사용 시 15초 동안 힘 10% 증가 효과 추가 발생
+25005	마력 방패	100100	icon_skills.manashield_tex	보호의 문장	icon_crest.e_crestactivedefenceup_tex	스킬 사용 시 15초 동안 맷집 20% 증가 효과 추가 발생
+25006	번개의 각인	30100	icon_skills.shocktrap_tex	연계 투지의 문장 [운석 낙하]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 운석 낙하 사용 시 스킬 위력 20% 증가
+25009	마력 응집	50100	icon_skills.mpcondensing_tex	정신의 문장	icon_crest.e_crestpassivemprecoveryup_tex	MP 회복량 10% 증가
+25010	마력 강화	340100	icon_skills.c5_strengthenmana	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+25011	마력 방패	100100	icon_skills.manashield_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+25012	파멸의 광탄	120100	icon_skills.lightofruin_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+25013	서리 구체	20100	icon_skills.c5_iceorb	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 30% 감소
+25014	번개의 각인	30100	icon_skills.shocktrap_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 100 감소
+25015	파멸의 광탄	120100	icon_skills.lightofruin_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	몬스터 공격 시 치명타 확률 2배 증가
+25016	폭렬구	40100	icon_skills.blastball_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+25017	운석 낙하	60100	icon_skills.hellfire_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 250 감소
+25018	오염의 저주	160100	icon_skills.disease_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 40% 향상
+25019	화염 기둥	80100	icon_skills.auraburn_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+25021	마력 추출			과거의 문장 조각	icon_skills.voidtrap_tex	더 이상 사용되지 않는 과거의 문장 조각입니다.
+25022	수면의 바람	130100	icon_skills.sleepwind_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 25% 향상
+25023	마력 탈취	190100	icon_skills.manaextortion_tex	정신의 문장	icon_crest.e_crestpassivemprecoveryup_tex	MP 회복량 10% 증가
+25025	추적의 업화	200100	icon_skills.trackinginferno_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 150 감소
+25026	뇌격 강타	110100	icon_skills.c5_lightningstruck	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 150 감소
+25027	고통의 각인	170100	icon_skills.blastmine_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 75 감소
+25028	빙결의 대지	180100	icon_skills.freezingtheearth_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 40% 향상
+25029	폭렬구	40100	icon_skills.blastball_tex	연계 투지의 문장 [서리 구체]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 서리 구체 사용 시 스킬 위력 25% 증가
+25030	고통의 각인	170100	icon_skills.blastmine_tex	연계 정신의 문장 [화염 기둥]	icon_crest.e_crestnextskillmpdown_tex	연계 스킬로 화염 기둥 사용 시 소모 MP 80 감소
+25031	뇌격 강타	110100	icon_skills.c5_lightningstruck	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	몬스터 공격 시 치명타 확률 2배 증가
+25032	마력 응집	50100	icon_skills.mpcondensing_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 30% 감소
+25033	속박의 저주	250100	icon_skills.curseofshackle_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 15% 감소
+25034	불타는 숨결	220100	icon_skills.burningbreath_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 20% 향상
+25035	마력 강화	340100	icon_skills.c5_strengthenmana	시간의 문장	icon_crest.e_crestpassiveskilleffectup_tex	마력 강화 지속 시간 30% 향상
+25036	신경 쇠약	210100	icon_skills.neurasthenia_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+25037	정신 고갈	230100	icon_skills.mpsink_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 40% 향상
+25038	기상 공격	140100	icon_skills.risingattack_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+25039	기상 공격	140100	icon_skills.risingattack_tex	조력의 문장	icon_crest.e_crestactiveinvokeskill_tex	50% 확률로 마력 방패 II 효과 발생
+25040	마력 탈취	190100	icon_skills.manaextortion_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+25041	마력 방패	100100	icon_skills.manashield_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 50% 향상
+25042	마력 탈취	190100	icon_skills.manaextortion_tex	연계 신속의 문장 [추적의 업화]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 추적의 업화 사용 시 시전 속도 25% 증가
+25043	번개의 각인	30100	icon_skills.shocktrap_tex	연계 신속의 문장 [화염 기둥]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 화염 기둥 사용 시 시전 속도 25% 증가
+25044	불타는 숨결	220100	icon_skills.burningbreath_tex	연계 투지의 문장 [추적의 업화]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 추적의 업화 사용 시 스킬 위력 35% 증가
+25045	빙결의 대지	180100	icon_skills.freezingtheearth_tex	연계 신속의 문장 [번개의 각인]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 번개의 각인 사용 시 시전 속도 40% 증가
+25046	속박의 저주	250100	icon_skills.curseofshackle_tex	추적의 문장	icon_crest.e_crestpassivelockontargetup_tex	최대 락온 대상 수 100% 증가
+25047	속박의 저주	250100	icon_skills.curseofshackle_tex	연계 신속의 문장 [운석 낙하]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 운석 낙하 사용 시 시전 속도 25% 증가
+25048	수면의 바람	130100	icon_skills.sleepwind_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	시전 속도 30% 상승
+25049	수면의 바람	130100	icon_skills.sleepwind_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	25% 확률로 재사용 시간 초기화
+25050	서리 구체	20100	icon_skills.c5_iceorb	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 50% 향상
+25051	서리 구체	20100	icon_skills.c5_iceorb	결의의 문장	icon_crest.e_crestpassiveskilleffectup_tex	이동 속도 감소 효과 20% 향상
+25052	서리 구체	20100	icon_skills.c5_iceorb	연계 신속의 문장 [수면의 바람]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 수면의 바람 사용 시 시전 속도 40% 증가
+25053	오염의 저주	160100	icon_skills.disease_tex	결의의 문장	icon_crest.e_crestpassiveskilleffectup_tex	지속 피해량 20% 향상
+25054	오염의 저주	160100	icon_skills.disease_tex	나태의 문장	icon_crest.e_crestactivespeeddown_tex	100% 확률로 대상에게 7초 동안 이동 속도 50% 감소 효과 추가 발생
+25055	운석 낙하	60100	icon_skills.hellfire_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	몬스터 공격 시 치명타 확률 2배 증가
+25056	추적의 업화	200100	icon_skills.trackinginferno_tex	추적의 문장	icon_crest.e_crestpassivelockontargetup_tex	최대 락온 대상 수 0% 증가
+25057	폭렬구	40100	icon_skills.blastball_tex	테스트	icon_skills.voidtrap_tex	효과 없음
+25058	뇌격 강타	110100	icon_skills.c5_lightningstruck	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	30% 확률로 재사용 시간 초기화
+25059	화염 기둥	80100	icon_skills.auraburn_tex	연계 신속의 문장 [번개의 각인]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 번개의 각인 사용 시 시전 속도 40% 증가
+25060	수면의 바람	130100	icon_skills.sleepwind_tex	관통의 문장	icon_crest.e_crestpassivethorns_tex	복수 대상 타격 시 이상상태 발생 확률 30% 증가
+25061	운석 낙하	60100	icon_skills.hellfire_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 10% 감소
+25062	빙결의 대지	180100	icon_skills.freezingtheearth_tex	연계 신속의 문장 [폭렬구]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 폭렬구 사용시 차지 속도 30% 증가
+25063	순간 이동	260100	icon_skills.shortteleport_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 15% 감소
+25064	화염 기둥	80100	icon_skills.auraburn_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+25065	얼음 폭풍	270100	icon_skills.icestorm_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+25066	얼음 폭풍	270100	icon_skills.icestorm_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 300 감소
+25068	마력 강화	340100	icon_skills.c5_strengthenmana	시간의 문장	icon_crest.e_crestpassiveskilleffectup_tex	마력 강화 지속 시간 40% 향상
+25069	운석 낙하	60100	icon_skills.hellfire_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	시전 속도 25% 상승
+25070	운석 낙하	60100	icon_skills.hellfire_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+25071	번개의 각인	30100	icon_skills.shocktrap_tex	연계 투지의 문장 [운석 낙하]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 운석 낙하 사용 시 스킬 위력 20% 증가
+25072	파멸의 광탄	120100	icon_skills.lightofruin_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	몬스터 공격 시 치명타 확률 2배 증가
+25073	수면의 바람	130100	icon_skills.sleepwind_tex	관통의 문장	icon_crest.e_crestpassivethorns_tex	복수 대상 타격 시 이상상태 발생 확률 30% 증가
+25074	신경 쇠약	210100	icon_skills.neurasthenia_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 30% 감소
+25075	번개의 각인	30100	icon_skills.shocktrap_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 100 감소
+25076	속박의 저주	250100	icon_skills.curseofshackle_tex	추적의 문장	icon_crest.e_crestpassivelockontargetup_tex	최대 락온 대상 수 100% 증가
+25077	화염 기둥	80100	icon_skills.auraburn_tex	조력의 문장	icon_crest.e_crestpassivehpattackup_tex	스킬 적중 시 8% 확률로 마력 방패I 효과 발생
+25078	오염의 저주	160100	icon_skills.disease_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+25079	불타는 숨결	220100	icon_skills.burningbreath_tex	차단의 문장	icon_crest.e_crestpassivetargethealdown_tex	10초간 적PC에게만 HP 회복량 30% 감소 효과 발생
+25080	마력 방패	100100	icon_skills.manashield_tex	결의의 문장	icon_crest.e_crestpassivemaxabsorbup_tex	최대 대미지 흡수량 30% 증가
+25081	폭렬구	40100	icon_skills.blastball_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	5초동안 치명타 유발 2배 증가
+25082	폭렬구	40100	icon_skills.blastball_tex	활력의 문장	icon_crest.e_crestpassivechargemove_tex	차지 중 이동 가능
+25083	암석화	280100	icon_skills.stoneshape_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+25084	암석화	280100	icon_skills.stoneshape_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+25085	마력 방패	100100	icon_skills.manashield_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 50% 향상
+25086	운석 낙하	60100	icon_skills.hellfire_tex	정신의 문장	icon_crest.e_crestactivempzero_tex	소모 MP 400 감소
+25087	물러서기	70100	icon_skills.backstep_tex	활력의 문장	icon_crest.e_crestpassiveskilleffectup_tex	2초 동안 이동 속도 20% 증가 효과 발생
+25088	오염의 저주	160100	icon_skills.disease_tex	연계 투지의 문장 [추적의 업화]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 추적의 업화 사용 시 스킬 위력 25% 증가
+25089	마력 폭발	300100	icon_skills.manaburst_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	4초동안 치명타 유발 2배 증가
+25090	마력 폭발	300100	icon_skills.manaburst_tex	보호의 문장	icon_crest.e_crestactivedefenceup_tex	스킬 사용 시 15초 동안 맷집 20% 증가 효과 추가 발생
+25091	마력 폭발	300100	icon_skills.manaburst_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+25092	마력 폭발	300100	icon_skills.manaburst_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	시전 속도 30% 상승
+25093	공간 왜곡	310100	icon_skills.distortionfield_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+25094	공간 왜곡	310100	icon_skills.distortionfield_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+25095	공간 왜곡	310100	icon_skills.distortionfield_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 100% 향상
+25096	추적의 업화	200100	icon_skills.trackinginferno_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	시전 속도 40% 상승
+25097	파멸의 광탄	120100	icon_skills.lightofruin_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+25098	화염 기둥	80100	icon_skills.auraburn_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+25099	불타는 숨결	220100	icon_skills.burningbreath_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 20% 향상
+25100	빙결의 대지	180100	icon_skills.freezingtheearth_tex	연계 신속의 문장 [번개의 각인]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 번개의 각인 사용 시 시전 속도 40% 증가
+25101	뇌격 강타	110100	icon_skills.c5_lightningstruck	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	40% 확률로 재사용 시간 초기화
+25102	빙결의 대지	180100	icon_skills.freezingtheearth_tex	연계 신속의 문장 [폭렬구]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 폭렬구 사용시 차지 속도 30% 증가
+25103	마력 강화	340100	icon_skills.c5_strengthenmana	시간의 문장	icon_crest.e_crestpassiveskilleffectup_tex	마력 강화 지속 시간 40% 향상
+25104	속박의 저주	250100	icon_skills.curseofshackle_tex	추적의 문장	icon_crest.e_crestpassivelockontargetup_tex	최대 락온 대상 수 100% 증가
+25105	폭렬구	40100	icon_skills.blastball_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	5초동안 치명타 유발 2.5배 증가
+25106	암석화	280100	icon_skills.stoneshape_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 30% 감소
+25107	마력 폭발	300100	icon_skills.manaburst_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	4초동안 치명타 유발 2.5배 증가
+26000	다중 사격	20100	icon_skills.arrowshower_tex	추적의 문장	icon_crest.e_crestpassivelockontargetup_tex	최대 락온 대상 수 0% 증가
+26001	집중 사격	30100	icon_skills.chargearrow_tex	명중의 문장	icon_crest.e_crestpassiverangeup_tex	사정 거리 3m 증가
+26002	관통 사격	40100	icon_skills.througharrow_tex	명중의 문장	icon_crest.e_crestpassiverangeup_tex	사정 거리 3m 증가
+26004	관통 사격	40100	icon_skills.througharrow_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+26005	중독의 덫	110100	icon_skills.venomtrap_tex	테스트	s_tex	효과 없음
+26006	거미줄 덫	90100	icon_skills.webtrap_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 50% 향상
+26007	기절의 덫	100100	icon_skills.paralysistrap_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 25% 향상
+26008	일반 사격	10100	icon_skills.arrowshot_tex	나태의 문장	icon_crest.e_crestactivespeeddown_tex	5% 확률로 3초 동안 이동 속도 50% 감소 효과 추가 발생
+26009	일반 사격	10100	icon_skills.arrowshot_tex	기절의 문장	icon_crest.e_crestactivestun_tex	5% 확률로 1초 동안 기절 효과 추가 발생
+26010	일반 사격	10100	icon_skills.arrowshot_tex	투지의 문장	icon_crest.e_crestactivekill_tex	10% 확률로 2배의 피해 발생
+26011	집중 사격	30100	icon_skills.chargearrow_tex	숙련의 문장	icon_crest.e_crestpassivepenaltydelete_tex	차지 시 이동 속도 감소 효과 제거
+26012	관통 사격	40100	icon_skills.througharrow_tex	숙련의 문장	icon_crest.e_crestpassivepenaltydelete_tex	차지 시 이동 속도 감소 효과 제거
+26017	속사	80100	icon_skills.rapidshot_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	15% 확률로 재사용 시간 초기화
+26018	물러서기	60100	icon_skills.backstep_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 29% 감소
+26019	죽은 척 하기	70100	icon_skills.feigndeath_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+26020	기상 공격	140100	icon_skills.risingattack_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+26021	화살의 비	50100	icon_skills.arrowfall_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+26022	이탈 공격	160100	icon_skills.escapingattack_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+26023	폭발의 덫	150100	icon_skills.explosiontrap_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+26024	거미줄 화살	170100	icon_skills.spiderarrow_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 40% 향상
+26025	기상 공격	140100	icon_skills.risingattack_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+26026	중독의 덫	110100	icon_skills.venomtrap_tex	테스트	icon_skills.voidtrap_tex	효과 없음
+26027	맹독의 화살	190100	icon_skills.venomarrow_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 40% 향상
+26028	집중 자세 : 용맹	210100	icon_skills.focusstance_tex	연계 정신의 문장 [거미줄 화살]	icon_crest.e_crestnextskillmpdown_tex	연계 스킬로 거미줄 화살 사용 시 소모 MP 13 감소
+26029	견제 사격	200100	icon_skills.contaningshot_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 50% 향상
+26030	궁수의 징표	120100	icon_skills.markingofarcher_tex	연계 정신의 문장 [맹독의 화살]	icon_crest.e_crestnextskillmpdown_tex	연계 스킬로 맹독의 화살 사용 시 소모 MP 31 감소
+26031	다중 사격	20100	icon_skills.arrowshower_tex	연계 정신의 문장 [폭발의 덫]	icon_crest.e_crestnextskillmpdown_tex	연계 스킬로 폭발의 덫 사용 시 소모 MP 75 감소
+26032	이탈 공격	160100	icon_skills.escapingattack_tex	연계 투지의 문장 [관통 사격]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 관통 사격 사용 시 스킬 위력 25% 증가
+26033	거미줄 화살	170100	icon_skills.spiderarrow_tex	활력의 문장	icon_crest.e_crestactivespeedup_tex	스킬 적중 시 20% 확률로 12초 동안 전투 상태 이동 속도 10 증가 효과 추가 발생
+26034	견제 사격	200100	icon_skills.contaningshot_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+26035	견제 사격	200100	icon_skills.contaningshot_tex	기절의 문장	icon_crest.e_crestactivestun_tex	20% 확률로 3초 동안 기절 효과 추가 발생
+26036	궁수의 징표	120100	icon_skills.markingofarcher_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 25% 향상
+26037	궁수의 징표	120100	icon_skills.markingofarcher_tex	연계 신속의 문장 [맹독의 화살]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 맹독의 화살 사용 시 시전 속도 25% 증가
+26038	다중 사격	20100	icon_skills.arrowshower_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	30% 확률로 재사용 시간 초기화
+26039	다중 사격	20100	icon_skills.arrowshower_tex	연계 신속의 문장 [기절의 덫]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 기절의 덫 사용 시 시전 속도 40% 증가
+26040	돌려차기	180100	icon_skills.turningkick_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+26041	속사	80100	icon_skills.rapidshot_tex	정신의 문장	icon_crest.e_crestpassivemprecoveryup_tex	타격 적중 시 MP 회복량 20% 증가
+26042	연사	220100	icon_skills.chain_arrow	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+26043	이탈 공격	160100	icon_skills.escapingattack_tex	활력의 문장	icon_crest.e_crestactivespeedup_tex	30% 확률로 8초 동안 전투 상태 이동 속도 10 증가 효과 추가 발생
+26044	이탈 공격	160100	icon_skills.escapingattack_tex	테스트	icon_skills.voidtrap_tex	효과 없음
+26045	죽은 척 하기	70100	icon_skills.feigndeath_tex	근성의 문장	icon_crest.e_crestpassivehpheal_tex	스킬 사용 시 10초 동안 1초마다 전체 HP 대비 2%의 HP 지속 회복
+26046	폭발의 덫	150100	icon_skills.explosiontrap_tex	연계 투지의 문장 [다중 사격]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 다중 사격 사용 시 스킬 위력 25% 증가
+26047	화살의 비	50100	icon_skills.arrowfall_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+26048	기절의 덫	100100	icon_skills.paralysistrap_tex	연계 신속의 문장 [관통 사격]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 관통 사격 사용시 차지 속도 30% 증가
+26049	다중 사격	20100	icon_skills.arrowshower_tex	연계 신속의 문장 [관통 사격]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 관통 사격 사용시 차지 속도 30% 증가
+26050	맹독의 화살	190100	icon_skills.venomarrow_tex	연계 신속의 문장 [집중 사격]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 집중 사격 사용시 차지 속도 30% 증가
+26051	연사	220100	icon_skills.chain_arrow	연계 신속의 문장 [관통 사격]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 관통 사격 사용시 차지 속도 30% 증가
+26053	관통 사격	40100	icon_skills.througharrow_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+26054	관통 사격	40100	icon_skills.througharrow_tex	숙련의 문장	icon_crest.e_crestpassivepenaltydelete_tex	차지 시 이동 속도 감소 효과 제거
+26055	집중 사격	30100	icon_skills.chargearrow_tex	숙련의 문장	icon_crest.e_crestpassivepenaltydelete_tex	차지 시 이동 속도 감소 효과 제거
+26056	물러서기	60100	icon_skills.backstep_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 29% 감소
+26057	관통 사격	40100	icon_skills.througharrow_tex	명중의 문장	icon_crest.e_crestpassiverangeup_tex	사정 거리 3m 증가
+26058	거미줄 덫	90100	icon_skills.webtrap_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 50% 향상
+26059	다중 사격	20100	icon_skills.arrowshower_tex	연계 신속의 문장 [관통 사격]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 관통 사격 사용시 차지 속도 40% 증가
+26060	다중 사격	20100	icon_skills.arrowshower_tex	연계 신속의 문장 [기절의 덫]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 기절의 덫 사용 시 시전 속도 50% 증가
+26061	다중 사격	20100	icon_skills.arrowshower_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	40% 확률로 재사용 시간 초기화
+26062	죽은 척 하기	70100	icon_skills.feigndeath_tex	근성의 문장	icon_crest.e_crestpassivehpheal_tex	스킬 사용 시 10초 동안 1초마다 전체 HP 대비 3%의 HP 지속 회복
+26063	집중 사격	30100	icon_skills.chargearrow_tex	근성의 문장	icon_crest.e_crestpassiveoverchargehpdown_tex	오버 차지 시 소모 HP 40% 감소
+26064	집중 사격	30100	icon_skills.chargearrow_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 2배 증가
+26065	돌려차기	180100	icon_skills.turningkick_tex	활력의 문장	icon_crest.e_crestpassiveskilleffectup_tex	3초 동안 이동 속도 50 증가 효과 발생
+26066	돌려차기	180100	icon_skills.turningkick_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 40% 향상
+26067	이탈 공격	160100	icon_skills.escapingattack_tex	나태의 문장	icon_crest.e_crestactivespeeddown_tex	100% 확률로 6초 동안 이동 속도 40% 감소 효과 발생
+26068	마비덫화살			집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+26069	거미덫화살			집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+26070	폭발덫화살			투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+26071	마비덫화살			집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 30% 감소
+26072	뇌룡의 일격	260100	icon_skills.thunderdrake_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 2배 증가
+26073	폭발덫화살			투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 35% 증가
+26074	이탈 공격	160100	icon_skills.escapingattack_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+26075	견제 사격	200100	icon_skills.contaningshot_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+26076	속사	80100	icon_skills.rapidshot_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+26077	화살의 비	50100	icon_skills.arrowfall_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	시전 속도 40% 상승
+26084	집념	310100	icon_skills.tenacity_tex	균형의 문장	icon_crest.e_crestactivereactionresist_tex	15초 동안 균형 1.5배 증가 효과 발생
+26085	집념	310100	icon_skills.tenacity_tex	균형의 문장	icon_crest.e_crestactivereactionresist_tex	15초 동안 균형 2배 증가 효과 발생
+26086	집념	310100	icon_skills.tenacity_tex	정신의 문장	icon_crest.e_crestpassivepartympup_tex	50% 확률로 1초마다 전체 MP 대비 6%씩 MP가 지속적으로 회복
+26087	집념	310100	icon_skills.tenacity_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+26088	집념	310100	icon_skills.tenacity_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+26089	뇌룡의 일격	260100	icon_skills.thunderdrake_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	시전 속도 30% 상승
+26090	뇌룡의 일격	260100	icon_skills.thunderdrake_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+26091	뇌룡의 일격	260100	icon_skills.thunderdrake_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+26092	집중 사격	30100	icon_skills.chargearrow_tex	명중의 문장	icon_crest.e_crestpassiverangeup_tex	사정 거리 5m 증가
+26093	기절의 덫	100100	icon_skills.paralysistrap_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 25% 향상
+26094	거미줄 화살	170100	icon_skills.spiderarrow_tex	활력의 문장	icon_crest.e_crestactivespeedup_tex	스킬 적중 시 60% 확률로 12초 동안 전투 상태 이동 속도 10 증가 효과 추가 발생
+26095	연사	220100	icon_skills.chain_arrow	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 35% 감소
+26096	화살의 비	50100	icon_skills.arrowfall_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+26097	관통 사격	40100	icon_skills.througharrow_tex	명중의 문장	icon_crest.e_crestpassiverangeup_tex	사정 거리 5m 증가
+26098	다중 사격	20100	icon_skills.arrowshower_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	60% 확률로 재사용 시간 초기화
+26099	집중 사격	30100	icon_skills.chargearrow_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 3배 증가
+26100	뇌룡의 일격	260100	icon_skills.thunderdrake_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 3배 증가
+26101	폭발덫화살			투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 35% 증가
+26102	뇌룡의 일격	260100	icon_skills.thunderdrake_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	시전 속도 30% 상승
+26103	뇌룡의 일격	260100	icon_skills.thunderdrake_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+26104	연사	220100	icon_skills.chain_arrow	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	50% 확률로 재사용 시간 초기화
+26105	추격	330100	icon_skills.advancingleap_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+27000	회복탄	50100	icon_skills.healshot_tex	추적의 문장	icon_crest.e_crestpassivelockontargetup_tex	최대 락온 대상 수 100% 증가
+27002	환생의 축복	120100	icon_skills.autoresurrect_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 40% 감소
+27003	정화탄	90100	icon_skills.purifyshot_tex	추적의 문장	icon_crest.e_crestpassivelockontargetup_tex	최대 락온 대상 수 100% 증가
+27005	섬광탄	60100	icon_skills.flashball_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 40% 향상
+27006	구속탄	40100	icon_skills.slowball_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 50% 향상
+27007	흡혈의 결계			테스트	icon_skills.voidtrap_tex	효과 없음
+27008	고통의 결계			테스트	icon_skills.voidtrap_tex	효과 없음
+27009	분노의 결계	130100	icon_skills.criticalupaura_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 120 감소
+27010	신속의 결계	140100	icon_skills.speedupaura_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 50 감소
+27011	정령탄	10100	icon_skills.elementalshot_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+27012	징벌의 장막	80100	icon_skills.punishingshield_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+27013	정기 흡수	20100	icon_skills.suckhp_tex	테스트	icon_skills.voidtrap_tex	효과 없음
+27014	정기 흡수	20100	icon_skills.suckhp_tex	정신의 문장	icon_crest.e_crestpassivepartympup_tex	MP 방출량 50% 증가
+27015	정기 흡수	20100	icon_skills.suckhp_tex	보호의 문장	icon_crest.e_crestpassivedeffeceup_tex	스킬 시전 중 피격 시 데미지 50% 감소
+27016	순간 이동	170100	icon_skills.shortteleport_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 15% 감소
+27017	마력 회복	70100	icon_skills.mpcharge_tex	정신의 문장	icon_crest.e_crestpassivemprecoveryup_tex	MP 회복량 20% 증가
+27019	마력 추출			과거의 문장 조각	icon_skills.voidtrap_tex	더 이상 사용되지 않는 과거의 문장 조각입니다.
+27020	기상 공격	210100	icon_skills.risingattack_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+27021	대지의 분노	230100	icon_skills.rageofearth_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 40% 감소
+27022	정령 소환 : 수호의 정령	250100	icon_skills.summonspiritofaggro_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 10% 감소
+27023	정령 소환 : 힘의 정령			테스트	icon_skills.voidtrap_tex	효과 없음
+27024	정령 소환 : 생명의 정령	270100	icon_skills.summonspiritofheal_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+27025	동료 소환	110100	icon_skills.recallfriend_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 800 감소
+27026	부활	100100	icon_skills.resurrect_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 510 감소
+27027	고통의 주박	240100	icon_skills.painfulshackle_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 20% 향상
+27029	부활	100100	icon_skills.resurrect_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 50% 감소
+27030	기상 공격	210100	icon_skills.risingattack_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+27031	유사의 속박	280100	icon_skills.shackleofquicksand_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 188 감소
+27032	축복 해제	290100	icon_skills.dispell_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+27033	바위의 속박	320100	icon_skills.shackleofstone_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+27034	나태의 저주	300100	icon_skills.spiritoflassitude_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+27035	혼돈의 저주	310100	icon_skills.spiritofconfusion_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 25% 향상
+27036	대지의 분노	230100	icon_skills.rageofearth_tex	연계 정신의 문장 [징벌의 장막]	icon_crest.e_crestnextskillmpdown_tex	연계 스킬로 징벌의 장막 사용 시 소모 MP 41 감소
+27037	고통의 주박	240100	icon_skills.painfulshackle_tex	연계 정신의 문장 [고통의 주박]	icon_crest.e_crestnextskillmpdown_tex	연계 스킬로 고통의 주박 사용 시 소모 MP 33 감소
+27039	정기 흡수	20100	icon_skills.suckhp_tex	연계 정신의 문장 [마력의 정기]	icon_crest.e_crestnextskillmpdown_tex	연계 스킬로 마력의 정기 사용 시 소모 MP 100 감소
+27040	고통의 주박	240100	icon_skills.painfulshackle_tex	추적의 문장	icon_crest.e_crestpassivelockontargetup_tex	최대 락온 대상 수 0% 증가
+27041	구속탄	40100	icon_skills.slowball_tex	감속의 문장	icon_crest.e_crestactiveattackspeeddown_tex	50% 확률로 6초 동안 공격 속도 30% 감소 효과 추가 발생
+27042	대지의 분노	230100	icon_skills.rageofearth_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+27043	동료 소환	110100	icon_skills.recallfriend_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+27044	마력 회복	70100	icon_skills.mpcharge_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	시전 속도 25% 상승
+27045	마력의 정기	220100	icon_skills.mprefresher_tex	연계 신속의 문장 [회복의 정기]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 회복의 정기 사용 시 시전 속도 25% 증가
+27046	정령 소환 : 번개의 정령	330100	icon_skills.summonspiritofrange_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	번개의 정령 공격력 25% 증가
+27047	정령 소환 : 번개의 정령	330100	icon_skills.summonspiritofrange_tex	보호의 문장	icon_crest.e_crestpassivedeffeceup_tex	번개의 정령 방어력 25% 증가
+27048	정령 소환 : 번개의 정령	330100	icon_skills.summonspiritofrange_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	번개의 정령 소환 유지 시간 25% 증가
+27049	부활	100100	icon_skills.resurrect_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	시전 속도 40% 상승
+27051	정령 소환 : 수호의 정령	250100	icon_skills.summonspiritofaggro_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	수호의 정령 공격력 25% 증가
+27052	정령 소환 : 수호의 정령	250100	icon_skills.summonspiritofaggro_tex	보호의 문장	icon_crest.e_crestpassivedeffeceup_tex	수호의 정령 방어력 25% 증가
+27053	순간 이동	170100	icon_skills.shortteleport_tex	연계 신속의 문장 [회복의 정기]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 회복의 정기 사용 시 시전 속도 25% 증가
+27054	순간 이동	170100	icon_skills.shortteleport_tex	연계 신속의 문장 [정령 소환 : 생명의 정령]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 정령 소환 : 생명의 정령 사용 시 시전 속도 25% 증가
+27055	정령 소환 : 파괴의 정령	340100	icon_skills.summonspiritofattack_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 50% 감소
+27056	정령 소환 : 파괴의 정령	340100	icon_skills.summonspiritofattack_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	파괴의 정령 공격력 25% 증가
+27057	정령 소환 : 파괴의 정령	340100	icon_skills.summonspiritofattack_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	시전 속도 30% 상승
+27058	환생의 축복	120100	icon_skills.autoresurrect_tex	조력의 문장	icon_crest.e_crestactiveinvokeskill_tex	다른 대상에게 효과 적용 시 시전자에게도 환생의 축복 I 효과 적용
+27059	회복의 정기	180100	icon_skills.hprefresher_tex	연계 신속의 문장 [마력의 정기]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 마력의 정기 사용 시 시전 속도 25% 증가
+27060	회복탄	50100	icon_skills.healshot_tex	명중의 문장	icon_crest.e_crestpassiverangeup_tex	사정 거리 3m 증가
+27062	순간 이동	170100	icon_skills.shortteleport_tex	집중의 문장	icon_crest.e_crestactivecooltimereset_tex	재사용 시간 15% 감소
+27063	정화탄	90100	icon_skills.purifyshot_tex	추적의 문장	icon_crest.e_crestpassivelockontargetup_tex	최대 락온 대상 수 100% 증가
+27064	환생의 축복	120100	icon_skills.autoresurrect_tex	조력의 문장	icon_crest.e_crestactiveinvokeskill_tex	다른 대상에게 효과 적용 시 시전자에게도 환생의 축복 I 효과 적용
+27065	정령 소환 : 생명의 정령	270100	icon_skills.summonspiritofheal_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+27066	섬광탄	60100	icon_skills.flashball_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 40% 향상
+27067	회복탄	50100	icon_skills.healshot_tex	명중의 문장	icon_crest.e_crestpassiverangeup_tex	사정 거리 3m 증가
+27068	고통의 주박	240100	icon_skills.painfulshackle_tex	연계 정신의 문장 [고통의 주박]	icon_crest.e_crestnextskillmpdown_tex	연계 스킬로 고통의 주박 사용 시 소모 MP 33 감소
+27069	정령 소환 : 번개의 정령	330100	icon_skills.summonspiritofrange_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	번개의 정령 소환 유지 시간 35% 증가
+27070	유사의 속박	280100	icon_skills.shackleofquicksand_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 188 감소
+27071	섬광탄	60100	icon_skills.flashball_tex	활력의 문장	icon_crest.e_crestpassiveskilleffectup_tex	스킬 적중 시 3초 동안 전투 중 이동 속도 50 증가 효과 발생
+27072	기상 공격	210100	icon_skills.risingattack_tex	기회의 문장	icon_crest.e_crestpassivereactionup_tex	순간이동 재사용 시간 초기화
+27073	기상 공격	210100	icon_skills.risingattack_tex	균형의 문장	icon_crest.e_crestactivereactionresist_tex	2초간 균형 5배 증가 효과 발생
+27074	환생의 축복	120100	icon_skills.autoresurrect_tex	명중의 문장	icon_crest.e_crestpassiverangeup_tex	사정 거리 3m 증가
+27075	유사의 속박	280100	icon_skills.shackleofquicksand_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+27076	정령 소환 : 수호의 정령	250100	icon_skills.summonspiritofaggro_tex	협동의 문장	icon_crest.e_crestactivedefenceup_tex	나와 파티원에게 10분 동안 맷집 10% 증가 효과 발생
+27077	영기 소환 - 보호			정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 300 감소
+27078	영기 소환 - 보호			구원의 문장	icon_crest.e_crestactivehprecoveryup_tex	HP 회복량 20% 증가
+27079	부활	100100	icon_skills.resurrect_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	시전 속도 40% 상승
+27080	환생의 축복	120100	icon_skills.autoresurrect_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 40% 감소
+27081	회복의 정기	180100	icon_skills.hprefresher_tex	근성의 문장	icon_crest.e_crestpassivehprecoveryup_tex	스킬 종료 시 전체 HP 기준 20%의 HP 즉시 회복
+27082	생명의 정령	270100	icon_skills.summonspiritofheal_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	생명의 정령 소환 유지 시간 25% 증가
+27084	고통의 주박	240100	icon_skills.painfulshackle_tex	약화의 문장	icon_crest.e_crestactivedefencedown_tex	21초간 맷집 9%감소 추가 효과 발생
+27085	부활	100100	icon_skills.resurrect_tex	영혼의 문장	icon_crest.e_crestpassivehprecoveryup_tex	부활 시 HP/MP 100% 회복
+27086	역병 창궐	410100	icon_skills.plague_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 20% 향상
+27087	신비한 구슬	420100	icon_skills.mysticorb_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 225 감소
+27088	신비한 구슬	420100	icon_skills.mysticorb_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+27089	신비한 구슬	420100	icon_skills.mysticorb_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+27090	환생의 축복	120100	icon_skills.autoresurrect_tex	추적의 문장	icon_crest.e_crestpassivelockontargetup_tex	최대 락온 대상 수 0% 증가
+27091	징벌의 장막	80100	icon_skills.punishingshield_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 40% 증가
+27092	정기 흡수	20100	icon_skills.suckhp_tex	보호의 문장	icon_crest.e_crestpassivedeffeceup_tex	스킬 시전 중 피격 시 데미지 50% 감소
+27093	부활	100100	icon_skills.resurrect_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 50% 감소
+27094	정령 소환 : 수호의 정령	250100	icon_skills.summonspiritofaggro_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	수호의 정령 공격력 30% 증가
+27095	순간 이동	170100	icon_skills.shortteleport_tex	집중의 문장	icon_crest.e_crestactivecooltimereset_tex	재사용 시간 20% 감소
+27096	회복탄	50100	icon_skills.healshot_tex	명중의 문장	icon_crest.e_crestpassiverangeup_tex	사정 거리 5m 증가
+27097	기상 공격	210100	icon_skills.risingattack_tex	기회의 문장	icon_crest.e_crestpassivereactionup_tex	순간이동 재사용 시간 초기화
+27098	정령 소환 : 수호의 정령	250100	icon_skills.summonspiritofaggro_tex	협동의 문장	icon_crest.e_crestactivedefenceup_tex	나와 파티원에게 10분 동안 맷집 10% 증가 효과 발생
+27099	영기 소환 - 보호			구원의 문장	icon_crest.e_crestactivehprecoveryup_tex	HP 회복량 25% 증가
+27100	고통의 주박	240100	icon_skills.painfulshackle_tex	약화의 문장	icon_crest.e_crestactivedefencedown_tex	21초간 맷집 9%감소 추가 효과 발생
+27101	역병 창궐	410100	icon_skills.plague_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 30% 향상
+27102	징벌의 장막	80100	icon_skills.punishingshield_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	50% 확률로 재사용 시간 초기화
+28000	치유의 기도	180100	icon_skills.healingpray_tex	구원의 문장	icon_crest.e_crestpassivehprecoveryup_tex	HP 회복량 20% 증가
+28001	치유의 바람	30100	icon_skills.healarea_tex	구원의 문장	icon_crest.e_crestpassivehprecoveryup_tex	HP 회복량 10% 증가
+28002	재생의 바람	20100	icon_skills.healingwind_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 30% 향상
+28003	치유의 빛	190100	icon_skills.healinglightlockon_tex	추적의 문장	icon_crest.e_crestpassivelockontargetup_tex	최대 락온 대상 수 100% 증가
+28004	수호의 갑옷	220100	icon_skills.armorofprotection_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+28005	정화의 바람	100100	icon_skills.purify_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+28006	아룬의 축복	50100	icon_skills.attackup_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 30% 향상
+28009	샤라의 축복	230100	icon_skills.agilitybless_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 30% 향상
+28012	징벌의 빛	10100	icon_skills.magicshot_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+28013	징벌의 장막	110100	icon_skills.punishingshield_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 33 감소
+28014	심판의 손길	160100	icon_skills.damagedeal_tex	연계 투지의 문장 [징벌의 손길]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 징벌의 손길 사용 시 스킬 위력 25% 증가
+28018	재생의 바람	20100	icon_skills.healingwind_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+28019	마력 회복	80100	icon_skills.mpcharge_tex	정신의 문장	icon_crest.e_crestpassivemprecoveryup_tex	MP 회복량 20% 증가
+28020	마력 추출			과거의 문장 조각	icon_skills.voidtrap_tex	더 이상 사용되지 않는 과거의 문장 조각입니다.
+28021	평정	170100	icon_skills.agrorelease_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	시전 속도 100% 상승
+28022	각성	60100	icon_skills.recovery_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 50% 감소
+28023	기상 공격	250100	icon_skills.risingattack_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+28024	천벌의 연쇄	290100	icon_skills.divineretribution_tex	연계 투지의 문장 [징벌의 장막]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 징벌의 장막 사용 시 스킬 위력 25% 증가
+28026	부활	120100	icon_skills.resurrect_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 510 감소
+28027	아룬의 축복	50100	icon_skills.attackup_tex	결의의 문장	icon_crest.e_crestpassiveskilleffectup_tex	이동 속도 상승 효과 50% 증가
+28028	동료 소환	140100	icon_skills.recallfriend_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 800 감소
+28030	속박의 낙인	260100	icon_skills.sanctuary_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 30 감소
+28031	마력 재생	280100	icon_skills.manarejuvenation_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	차지 속도 25% 상승
+28032	부활	120100	icon_skills.resurrect_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 50% 감소
+28033	기상 공격	250100	icon_skills.risingattack_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+28034	이샤라의 자장가	330100	icon_skills.lullabyoflshara_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+28035	수호자의 성역	310100	icon_skills.guardianaura_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+28036	쾌유의 가호	320100	icon_skills.restoration_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+28037	무기력의 예언	300100	icon_skills.prophecyoflethargy_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+28038	재생의 바람	20100	icon_skills.healingwind_tex	연계 정신의 문장 [치유의 빛]	icon_crest.e_crestnextskillmpdown_tex	연계 스킬로 치유의 빛 사용 시 소모 MP 85 감소
+28039	마력 재생	280100	icon_skills.manarejuvenation_tex	범위의 문장	icon_crest.e_crestpassiveskillrangeup_tex	스킬 적용 반경 4M 증가
+28040	수호의 갑옷	220100	icon_skills.armorofprotection_tex	보호의 문장	icon_crest.e_crestactivedefenceup_tex	스킬 사용 시 시전자에 한해 12초 동안 맷집 30% 증가 효과 추가 발생
+28041	아룬의 축복	50100	icon_skills.attackup_tex	활력의 문장	icon_crest.e_crestactivespeedup_tex	스킬 사용 시 시전자에 한해 10분 동안 전투 이동 속도 15 증가 효과 추가 발생
+28042	동료 소환	140100	icon_skills.recallfriend_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+28043	마력 재생	280100	icon_skills.manarejuvenation_tex	연계 투지의 문장 [심판의 손길]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 심판의 손길 사용 시 스킬 위력 25% 증가
+28044	마력 회복	80100	icon_skills.mpcharge_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	시전 속도 25% 상승
+28045	부활	120100	icon_skills.resurrect_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	시전 속도 30% 상승
+28046	신성의 번개	350100	icon_skills.divinelightning_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 25% 향상
+28047	신성의 번개	350100	icon_skills.divinelightning_tex	결의의 문장	icon_crest.e_crestpassivecooltimedown_tex	신성의 번개 효과 20% 향상
+28048	재생의 성역	340100	icon_skills.sanctuaryofregeneration_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 20% 향상
+28049	재생의 성역	340100	icon_skills.sanctuaryofregeneration_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 275 감소
+28050	징벌의 손길	270100	icon_skills.punishingtouch_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 62 감소
+28051	징벌의 손길	270100	icon_skills.punishingtouch_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	40% 확률로 재사용 시간 초기화
+28052	징벌의 손길	270100	icon_skills.punishingtouch_tex	나태의 문장	icon_crest.e_crestactivespeeddown_tex	20% 확률로 4초 동안 이동 속도 30% 감소 효과 추가 발생
+28053	징벌의 장막	110100	icon_skills.punishingshield_tex	감속의 문장	icon_crest.e_crestactiveattackspeeddown_tex	20% 확률로 7초 동안 공격 속도 15% 감소 효과 추가 발생
+28054	천벌의 연쇄	290100	icon_skills.divineretribution_tex	약화의 문장	icon_crest.e_crestactivedefencedown_tex	100% 확률로 12초 동안 맷집 10% 감소 효과 추가 발생
+28055	치유의 빛	190100	icon_skills.healinglightlockon_tex	명중의 문장	icon_crest.e_crestpassiverangeup_tex	사정 거리 3m 증가
+28057	치유의 기도	180100	icon_skills.healingpray_tex	구원의 문장	icon_crest.e_crestpassivehprecoveryup_tex	HP 회복량 20% 증가
+28058	심판의 손길	160100	icon_skills.damagedeal_tex	연계 투지의 문장 [징벌의 손길]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 징벌의 손길 사용 시 스킬 위력 25% 증가
+28059	마력 회복	80100	icon_skills.mpcharge_tex	정신의 문장	icon_crest.e_crestpassivemprecoveryup_tex	MP 회복량 20% 증가
+28060	천벌의 연쇄	290100	icon_skills.divineretribution_tex	연계 투지의 문장 [징벌의 장막]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 징벌의 장막 사용 시 스킬 위력 25% 증가
+28061	아룬의 축복	50100	icon_skills.attackup_tex	활력의 문장	icon_crest.e_crestactivespeedup_tex	스킬 사용 시 시전자에 한해 10분 동안 전투 이동 속도 15 증가 효과 추가 발생
+28062	재생의 바람	20100	icon_skills.healingwind_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 30% 감소
+28063	무기력의 예언	300100	icon_skills.prophecyoflethargy_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 30% 감소
+28064	재생의 성역	340100	icon_skills.sanctuaryofregeneration_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 275 감소
+28065	부활	120100	icon_skills.resurrect_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 510 감소
+28066	속박의 낙인	260100	icon_skills.sanctuary_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 15% 감소
+28067	수호의 갑옷	220100	icon_skills.armorofprotection_tex	구원의 문장	icon_crest.e_crestpassivehpwhileheal_tex	대상 모두에게 전체 HP 기준 6초간 2초마다 HP 5% 회복 효과 추가 발생
+28068	마력 재생	280100	icon_skills.manarejuvenation_tex	정신의 문장	icon_crest.e_crestpassivepartympup_tex	MP 회복량 50% 증가
+28069	치유의 빛	190100	icon_skills.healinglightlockon_tex	자유의 문장	icon_crest.e_crestpassivecooltimedown_tex	스킬의 적대치 20% 감소
+28070	수호자의 성역	310100	icon_skills.guardianaura_tex	균형의 문장	icon_crest.e_crestactivereactionresist_tex	30초간 균형 2배 증가 효과 발생
+28071	각성	60100	icon_skills.recovery_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 100% 향상
+28072	마력 재생	280100	icon_skills.manarejuvenation_tex	정신의 문장	icon_crest.e_crestpassivepartympup_tex	MP 회복량 25% 증가
+28073	치유의 날개	370100	icon_skills.curewing_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	40% 확률로 재사용 시간 초기화
+28074	부활의 가호	390100	icon_skills.selfpreresurrection_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 40% 감소
+28075	치유의 날개	370100	icon_skills.curewing_tex	구원의 문장	icon_crest.e_crestpassivehprecoveryup_tex	HP 회복량 20% 증가
+28076	아룬의 축복	50100	icon_skills.attackup_tex	결의의 문장	icon_crest.e_crestpassiveskilleffectup_tex	이동 속도 상승 효과 50% 증가
+28077	마력회복			신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	시전 속도 25% 상승
+28078	재생의 영역			정신의 문장	icon_crest.e_crestpassivemprecoveryup_tex	대상 모두에게 1초마다 MP 50 회복 효과 추가 발생
+28079	부활	120100	icon_skills.resurrect_tex	영혼의 문장	icon_crest.e_crestpassivehprecoveryup_tex	부활 시 HP/MP 100% 회복
+28082	구원의 손길	410100	icon_skills.helpinghand_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+28083	구원의 손길	410100	icon_skills.helpinghand_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 150 감소
+28084	구원의 손길	410100	icon_skills.helpinghand_tex	범위의 문장	icon_crest.e_crestpassiveskillrangeup_tex	스킬 적용 반경 4M 증가
+28085	신의 숨결	400100	icon_skills.godbreath_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+28086	신의 숨결	400100	icon_skills.godbreath_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+28087	신의 숨결	400100	icon_skills.godbreath_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 100 감소
+28088	신의 숨결	400100	icon_skills.godbreath_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+28089	수호의 갑옷	220100	icon_skills.armorofprotection_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+28090	부활	120100	icon_skills.resurrect_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 60% 감소
+28091	마력 재생	280100	icon_skills.manarejuvenation_tex	연계 투지의 문장 [심판의 손길]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 심판의 손길 사용 시 스킬 위력 40% 증가
+28092	징벌의 손길	270100	icon_skills.punishingtouch_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	50% 확률로 재사용 시간 초기화
+28093	천벌의 연쇄	290100	icon_skills.divineretribution_tex	약화의 문장	icon_crest.e_crestactivedefencedown_tex	100% 확률로 12초 동안 맷집 10% 감소 효과 추가 발생
+28094	심판의 손길	160100	icon_skills.damagedeal_tex	연계 투지의 문장 [징벌의 손길]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 징벌의 손길 사용 시 스킬 위력 40% 증가
+28095	무기력의 예언	300100	icon_skills.prophecyoflethargy_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 30% 감소
+28096	속박의 낙인	260100	icon_skills.sanctuary_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 15% 감소
+28097	마력 재생	280100	icon_skills.manarejuvenation_tex	정신의 문장	icon_crest.e_crestpassivepartympup_tex	MP 회복량 50% 증가
+28098	부활	120100	icon_skills.resurrect_tex	영혼의 문장	icon_crest.e_crestpassivehprecoveryup_tex	부활 시 HP/MP 100% 회복
+28099	구원의 손길	410100	icon_skills.helpinghand_tex	범위의 문장	icon_crest.e_crestpassiveskillrangeup_tex	스킬 적용 반경 4M 증가
+28100	신의 숨결	400100	icon_skills.godbreath_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 30% 감소
+28101	물러서기	380100	icon_skills.backstep_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 10% 감소
+29000	비검 연타	10100	icon_skills.comboattack2_tex	투지의 문장	icon_crest.e_crestactivekill_tex	15% 확률로 2배의 피해 발생
+29001	비검 연타	10100	icon_skills.comboattack2_tex	정신의 문장	icon_crest.e_crestpassivemprecoveryup_tex	적중 시 MP 회복량 20% 증가
+29002	비검 연타	10100	icon_skills.comboattack2_tex	신속의 문장	icon_crest.e_crestactiveattackspeedup_tex	10% 확률로 10초 동안 공격 속도 15% 증가 효과 발생
+29003	비검 연타	10100	icon_skills.comboattack2_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 2배 증가
+29004	비검 가르기	30100	icon_skills.chainsmash_tex	근성의 문장	icon_crest.e_crestpassivehpheal_tex	타격 성공 시 마다 전체 HP 기준 1.5%의 HP 즉시 회복
+29005	비검 가르기	30100	icon_skills.chainsmash_tex	연계 투지의 문장 [비검 내려치기]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 비검 내려치기 사용 시 5초 간 스킬 위력 30% 증가
+29006	비검 최후의 일격	40100	icon_skills.chainblow_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 15% 증가
+29007	비검 최후의 일격	40100	icon_skills.chainblow_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 2배 증가
+29009	비검 내려치기	50100	icon_skills.chainsuperblow_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	30% 확률로 재사용 시간 초기화
+29010	비검 내려치기	50100	icon_skills.chainsuperblow_tex	연계 신속의 문장 [비검 가르기]	icon_crest.e_crestnextskillattackspeedup_tex	연계 스킬로 비검 가르기 사용 시 시전 속도 25% 증가
+29011	비검 휘두르기	60100	icon_skills.chainbrandish_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+29012	비검 휘두르기	60100	icon_skills.chainbrandish_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 50% 향상
+29013	비검 휘두르기	60100	icon_skills.chainbrandish_tex	연계 투지의 문장 [비검 가르기]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 비검 가르기 사용 시 스킬 위력 20% 증가
+29014	비검 휘두르기	60100	icon_skills.chainbrandish_tex	연계 투지의 문장 [비검 내려치기]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 비검 내려치기 사용 시 5초 간 스킬 위력 30% 증가
+29015	비검 회전 칼날	80100	icon_skills.chainblade_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+29016	비검 회전 칼날	80100	icon_skills.chainblade_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+29017	비검 회전 칼날	80100	icon_skills.chainblade_tex	감속의 문장	icon_crest.e_crestactiveattackspeeddown_tex	타격 성공 시 마다 20% 확률로 대상에게 7초 동안 공격 속도 10% 감소 효과(최대 5중첩) 발생 
+29018	비검 강타	90100	icon_skills.chainstrike_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+29019	비검 강타	90100	icon_skills.chainstrike_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 25% 향상
+29020	비검 올려치기	100100	icon_skills.chainuppercut_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+29021	비검 올려치기	100100	icon_skills.chainuppercut_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+29022	비검 올려치기	100100	icon_skills.chainuppercut_tex	연계 투지의 문장 [비검 회전 칼날]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 비검 회전 칼날 사용 시 치명타 유발 확률 30% 증가
+29023	암흑 채찍	110100	icon_skills.chainflurry_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+29024	암흑 채찍	110100	icon_skills.chainflurry_tex	정신의 문장	icon_crest.e_crestpassivemprecoveryup_tex	적중 시 MP 회복량 20% 증가
+29025	암흑 폭발	120100	icon_skills.darkexplosion_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+29026	암흑 폭발	120100	icon_skills.darkexplosion_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	시전 속도 25% 상승
+29027	위치 교환	130100	icon_skills.darkgrasp_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	어둠의 촉수와 위치 교환 스킬 각각 소모 MP 150씩 감소
+29028	위치 교환	130100	icon_skills.darkgrasp_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+29029	기상 공격	140100	icon_skills.risingattack2_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+29030	기상 공격	140100	icon_skills.risingattack2_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+29031	반격	150100	icon_skills.counterattack_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+29032	어둠 강림	160100	icon_skills.descentofdarkness_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 150 감소
+29033	어둠 강림	160100	icon_skills.descentofdarkness_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 30% 향상
+29035	역포획	200100	icon_skills.reversecapture_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+29036	역포획	200100	icon_skills.reversecapture_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	타격 성공 시 다음 사용하는 스킬의 시전 속도 50% 상승
+29037	역포획	200100	icon_skills.reversecapture_tex	연계 투지의 문장 [암흑 폭발]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 암흑 폭발 사용 시 스킬 위력 20% 증가
+29038	순간 도약	400100	icon_skills.instantleap_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 15% 감소
+29039	순간 도약	400100	icon_skills.instantleap_tex	활력의 문장	icon_crest.e_crestactivespeedup_tex	스킬 사용 시 2초 동안 전투 중 이동 속도 50 증가 효과 발생
+29046	비검 강타	90100	icon_skills.chainstrike_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+29047	비검 회전 칼날	80100	icon_skills.chainblade_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+29048	비검 휘두르기	60100	icon_skills.chainbrandish_tex	연계 투지의 문장 [비검 내려치기]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 비검 내려치기 사용 시 5초 간 스킬 위력 30% 증가
+29049	암흑 폭발	120100	icon_skills.darkexplosion_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	각 폭발 당 소모 MP 150 감소
+29050	비검 내려치기	50100	icon_skills.chainsuperblow_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 유발 2배 증가
+29051	어둠숨기			집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+29052	어둠숨기			시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 50% 향상
+29053	비검 가르기	30100	icon_skills.chainsmash_tex	연계 투지의 문장 [비검 내려치기]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 비검 내려치기 사용 시 5초 간 스킬 위력 30% 증가
+29054	비검 최후의 일격	40100	icon_skills.chainblow_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 15% 증가
+29055	비검 최후의 일격	40100	icon_skills.chainblow_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 2배 증가
+29056	비검 회전 칼날	80100	icon_skills.chainblade_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 30% 감소
+29057	비검 올려치기	100100	icon_skills.chainuppercut_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 30% 감소
+29058	비검 올려치기	100100	icon_skills.chainuppercut_tex	연계 투지의 문장 [비검 회전 칼날]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 비검 회전 칼날 사용 시 치명타 유발 확률 30% 증가
+29059	순간 도약	400100	icon_skills.instantleap_tex	활력의 문장	icon_crest.e_crestactivespeedup_tex	스킬 사용 시 2초 동안 전투 중 이동 속도 50 증가 효과 발생
+29060	비검 회전 칼날	80100	icon_skills.chainblade_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 30% 증가
+29061	비검 휘두르기	60100	icon_skills.chainbrandish_tex	연계 투지의 문장 [비검 내려치기]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 비검 내려치기 사용 시 5초 간 스킬 위력 35% 증가
+29062	비검 내려치기	50100	icon_skills.chainsuperblow_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 유발 3배 증가
+29063	어둠숨기			집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 35% 감소
+29064	어둠숨기			시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 100% 향상
+29065	비검 회전 칼날	80100	icon_skills.chainblade_tex	근력의 문장	icon_crest.e_crestactiveattackup_tex	전체 HP의 1.5%를 소모하는 대신 스킬 위력 30% 증가
+30000	일반 포탄 발사	10100	icon_skills.cannonshot_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+30001	일반 포탄 발사	10100	icon_skills.cannonshot_tex	정신의 문장	icon_crest.e_creststrecover_tex	스킬 적중 시 아케인 에너지 5 추가 획득
+30002	일반 포탄 발사	10100	icon_skills.cannonshot_tex	신속의 문장	icon_crest.e_crestactiveattackspeedup_tex	15% 확률로 10초 동안 공격 속도 15% 증가 효과 발생
+30003	폭격탄 발사	20100	icon_skills.mortarshot_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 1.5배 증가
+30004	폭격탄 발사	20100	icon_skills.mortarshot_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	시전 속도 25% 상승
+30005	산탄 발사	30100	icon_skills.buckshot_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+30006	휘두르기/밀쳐내기	40100	icon_skills.gunbrandish_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	스킬 사용 시 20% 확률로 [비전 수류탄 투척] 스킬의 재사용 시간 초기화
+30007	산탄 발사	30100	icon_skills.buckshot_tex	숙련의 문장	icon_crest.e_crestpassivepenaltydelete_tex	밀려나는 거리 40% 감소
+30008	산탄 발사	30100	icon_skills.buckshot_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 50 감소
+30009	휘두르기/밀쳐내기	40100	icon_skills.gunbrandish_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+30010	휘두르기/밀쳐내기	40100	icon_skills.gunbrandish_tex	근성의 문장	icon_crest.e_crestpassivehpheal_tex	타격 성공 시 마다 전체 HP 기준 2%의 HP 즉시 회복
+30011	휘두르기/밀쳐내기	40100	icon_skills.gunbrandish_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 30% 감소
+30012	속사포 발사	50100	icon_skills.gatlingshot_tex	근성의 문장	icon_crest.e_crestpassivehpheal_tex	타격 성공 시 마다 전체 HP 기준 1%의 HP 즉시 회복
+30013	속사포 발사	50100	icon_skills.gatlingshot_tex	명중의 문장	icon_crest.e_crestpassiverangeup_tex	사정 거리 5m 증가
+30014	시한포탄 발사	60100	icon_skills.timebombshot_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+30015	시한포탄 발사	60100	icon_skills.timebombshot_tex	정신의 문장	icon_crest.e_creststrecover_tex	스킬 적중 시 아케인 에너지 15 추가 획득
+30016	비전 충격탄 발사	70100	icon_skills.arcaneshockshot01_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+30017	비전 충격탄 발사	70100	icon_skills.arcaneshockshot01_tex	조력의 문장	icon_crest.e_crestactiveinvokeskill_tex	비전 충격탄 폭발 직전까지 공격 속도 30% 증가
+30018	비전 충격탄 발사	70100	icon_skills.arcaneshockshot01_tex	정신의 문장	icon_crest.e_creststrecover_tex	스킬 적중 시 아케인 에너지 15 추가 획득
+30019	비전 미사일 발사	90100	icon_skills.aimedshot_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 2배 증가
+30021	비전 수류탄 투척	100100	icon_skills.arcanegrenadethrow_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+30022	비전 수류탄 투척	100100	icon_skills.arcanegrenadethrow_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 50% 향상
+30023	비전 수류탄 투척	100100	icon_skills.arcanegrenadethrow_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 50 감소
+30024	로켓 도약	110100	icon_skills.rocketjump_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+30028	섬멸의 빛	130100	icon_skills.flashcannon_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+30029	로켓 도약	110100	icon_skills.rocketjump_tex	활력의 문장	icon_crest.e_crestactivespeedup_tex	5초 동안 이동 속도 50% 증가 효과 발생
+30030	마력 장전	150100	icon_skills.reload_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+30031	마력 장전	150100	icon_skills.reload_tex	정신의 문장	icon_crest.e_creststrecover_tex	스킬 사용 시 아케인 에너지 50 추가 획득
+30032	센트리 타워 설치	190100	icon_skills.summonsentrytower_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 15% 감소
+30033	디스펜서 소환			투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 100% 증가
+30034	센트리 타워 설치	190100	icon_skills.summonsentrytower_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	센트리 타워의 공격력 20% 증가
+30035	센트리 타워 설치	190100	icon_skills.summonsentrytower_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	센트리 타워 유지 시간 30% 증가
+30036	센트리 타워 설치	190100	icon_skills.summonsentrytower_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 100 감소
+30037	기상 로켓	200100	icon_skills.risingrocket_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+30038	기상 로켓	200100	icon_skills.risingrocket_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+30039	명령: 전하 역류	210100	icon_skills.command_counterflow_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+30040	명령: 자폭	220100	icon_skills.command_selfdestruct_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+30041	기습 회피			기회의 문장	icon_crest.e_crestactivecooltimereset_tex	25% 확률로 재사용 시간 초기화
+30042	구르기: 산탄 장전	400100	icon_skills.ambushrolling_tex	연계 투지의 문장 [산탄 발사]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 [산탄 발사] 사용 시 스킬 위력 20% 증가
+30043	폭격탄 발사	20100	icon_skills.mortarshot_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 2배 증가
+30044	산탄 발사	30100	icon_skills.buckshot_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+30045	휘두르기/밀쳐내기	40100	icon_skills.gunbrandish_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+30046	속사포 발사	50100	icon_skills.gatlingshot_tex	정신의 문장	icon_crest.e_creststrecover_tex	소모 아케인 에너지 10 감소
+30047	속사포 발사	50100	icon_skills.gatlingshot_tex	명중의 문장	icon_crest.e_crestpassiverangeup_tex	사정 거리 5m 증가
+30048	비전 충격탄 발사	70100	icon_skills.arcaneshockshot01_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+30049	비전 충격탄 발사	70100	icon_skills.arcaneshockshot01_tex	조력의 문장	icon_crest.e_crestactiveinvokeskill_tex	비전 충격탄 폭발 직전까지 공격 속도 30% 증가
+30050	비전 미사일 발사	90100	icon_skills.aimedshot_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 3배 증가
+30051	비전 수류탄 투척	100100	icon_skills.arcanegrenadethrow_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+30052	로켓 도약	110100	icon_skills.rocketjump_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+30055	섬멸의 빛	130100	icon_skills.flashcannon_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+30056	마력 장전	150100	icon_skills.reload_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+30057	센트리 타워 설치	190100	icon_skills.summonsentrytower_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 15% 감소
+30058	섬멸의 빛	130100	icon_skills.flashcannon_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+30059	구르기: 산탄 장전	400100	icon_skills.ambushrolling_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	30% 확률로 재사용 시간 초기화
+30060	명령: 전하 역류	210100	icon_skills.command_counterflow_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+30061	휘두르기/밀쳐내기	40100	icon_skills.gunbrandish_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 30% 증가
+30062	로켓 도약	110100	icon_skills.rocketjump_tex	활력의 문장	icon_crest.e_crestactivespeedup_tex	5초 동안 이동 속도 50% 증가 효과 발생
+30063	마력 장전	150100	icon_skills.reload_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 30% 감소
+30064	센트리 타워 설치	190100	icon_skills.summonsentrytower_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	센트리 타워의 공격력 20% 증가
+30065	명령: 자폭	220100	icon_skills.command_selfdestruct_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+30066	구르기: 산탄 장전	400100	icon_skills.ambushrolling_tex	연계 투지의 문장 [산탄 발사]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 [산탄 발사] 사용 시 스킬 위력 20% 증가
+30067	폭격탄 발사	20100	icon_skills.mortarshot_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 2배 증가
+30068	산탄 발사	30100	icon_skills.buckshot_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+30069	속사포 발사	50100	icon_skills.gatlingshot_tex	명중의 문장	icon_crest.e_crestpassiverangeup_tex	사정 거리 5m 증가
+30070	비전 미사일 발사	90100	icon_skills.aimedshot_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 3배 증가
+30071	섬멸의 빛	130100	icon_skills.flashcannon_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+30072	구르기: 산탄 장전	400100	icon_skills.ambushrolling_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	35% 확률로 재사용 시간 초기화
+30073	디스펜서 소환			필살의 문장	icon_crest.e_crestpassivecriticalup_tex	회복 기능이 없는 디스펜서를 소환하는 대신 1초간 치명타 유발 2배 증가
+31000	연타	10100	icon_skills.comboattack01_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+31001	연타	10100	icon_skills.comboattack01_tex	정신의 문장	icon_crest.e_crestpassivemprecoveryup_tex	적중 시 MP 회복량 15% 증가
+31002	연타	10100	icon_skills.comboattack01_tex	신속의 문장	icon_crest.e_crestactiveattackspeedup_tex	10% 확률로 10초 동안 공격 속도 15% 증가 효과 발생
+31003	강타	20100	icon_skills.smashattack02_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+31004	강타	20100	icon_skills.smashattack02_tex	연계 투지의 문장	icon_crest.e_crestnextskillattackup_tex	완벽한 방어 시 30% 확률로 6초간 모든 스킬 위력 50% 증가
+31005	올려 차기	70100	icon_skills.upperkick_tex	연계 투지의 문장	icon_crest.e_crestnextskillattackup_tex	스킬 적중 시 100% 확률로 3초간 모든 스킬 위력 10% 증가
+31006	올려 차기	70100	icon_skills.upperkick_tex	보호의 문장	icon_crest.e_crestactivedefenceup_tex	스킬 사용 시 5초 내 사용하는 폭연타/승천타/일격타 스킬 1회에 한하여 전방 방어 효과 적용
+31007	올려 차기	70100	icon_skills.upperkick_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 15% 감소
+31008	분노의 승천타	30100	icon_skills.dragonrisingblow_tex	정신의 문장	icon_crest.e_creststrecover_tex	타격 성공 시 전체 분노의 50% 생성
+31009	지면 강타	40100	icon_skills.poundonground_tex	정신의 문장	icon_crest.e_creststrecover_tex	타격 성공 시마다 전체 분노의 3%씩 생성
+31010	지면 강타	40100	icon_skills.poundonground_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+31011	지면 강타	40100	icon_skills.poundonground_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+31012	난폭한 돌진	50100	icon_skills.bulldozer_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+31013	일격타	60100	icon_skills.blowattack_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+31014	일격타	60100	icon_skills.blowattack_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 2배 증가
+31015	일격타	60100	icon_skills.blowattack_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 100 감소
+31016	일격타	60100	icon_skills.blowattack_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	20% 확률로 [일격타] 재사용 시간 초기화
+31017	승천타	30100	icon_skills.dragonrisingblow_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+31018	승천타	30100	icon_skills.dragonrisingblow_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	몬스터 타격 성공 시 60% 확률로 [올려 차기] 재사용 시간 초기화
+31019	승천타	30100	icon_skills.dragonrisingblow_tex	정신의 문장	icon_crest.e_creststrecover_tex	타격 성공 시 마다 전체 분노의 2% 생성
+31020	폭연타	90100	icon_skills.rapidattack_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+31021	폭연타	90100	icon_skills.rapidattack_tex	조력의 문장	icon_crest.e_crestactiveinvokeskill_tex	공중에 뜬 대상 타격 시 피해 25% 증가
+31022	폭연타	90100	icon_skills.rapidattack_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 1.5배 증가
+31023	반격타	100100	icon_skills.counterattack2_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+31024	반격타	100100	icon_skills.counterattack2_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+31025	기상 공격	120100	icon_skills.risingattack_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+31026	기상 공격	120100	icon_skills.risingattack_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+31027	도발	130100	icon_skills.roar2_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 100 감소
+31028	도발	130100	icon_skills.roar2_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+31029	분노 유발	140100	icon_skills.enrage_tex	나태의 문장	icon_crest.e_crestpassivespeeddown_tex	5초 동안 이동 속도 50% 감소 효과 추가 발생
+31030	분노 유발	140100	icon_skills.enrage_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+31031	걷어 차기	150100	icon_skills.kick2_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	다운된 대상에게 피해 2배 증가
+31032	공중 차기	160100	icon_skills.airkick_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 50% 향상
+31033	공중 차기	160100	icon_skills.airkick_tex	조력의 문장	icon_crest.e_crestactiveinvokeskill_tex	공중에 뜬 대상 타격 시 피해 50% 증가
+31034	분노의 난타	170100	icon_skills.dashattack_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+31035	분노의 난타	170100	icon_skills.dashattack_tex	정신의 문장	icon_crest.e_crestpassivemprecoveryup_tex	타격 성공 시 마다 전체 MP 기준 2%의 MP 즉시 회복
+31036	분노의 난타	170100	icon_skills.dashattack_tex	근성의 문장	icon_crest.e_crestpassivehpheal_tex	타격 성공 시 마다 전체 HP 기준 1%의 HP 즉시 회복
+31037	분노 해방			근력의 문장	icon_crest.e_crestpassiveattackup_tex	효과 지속 중 힘 25 상승
+31038	분노 해방			야수의 문장	icon_crest.e_crestpassiveaggroup_tex	적대치 20% 추가 획득
+31039	비공 연타	200100	icon_skills.catchair_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+31040	비공 연타	200100	icon_skills.catchair_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+31041	진정	190100	icon_skills.relax_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+31042	차오르는 분노	210100	icon_skills.arouseangercancel_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+31043	순간 돌진	400100	icon_skills.instancerush_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	20% 확률로 재사용 시간 초기화
+31044	연타	10100	icon_skills.comboattack01_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 30% 증가
+31045	올려 차기	70100	icon_skills.upperkick_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+31046	분노의 승천타	30100	icon_skills.dragonrisingblow_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+31047	지면 강타	40100	icon_skills.poundonground_tex	정신의 문장	icon_crest.e_creststrecover_tex	타격 성공 시마다 전체 분노의 3%씩 회복
+31048	지면 강타	40100	icon_skills.poundonground_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 2배 증가
+31049	지면 강타	40100	icon_skills.poundonground_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 30% 증가
+31050	일격타	60100	icon_skills.blowattack_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+31051	일격타	60100	icon_skills.blowattack_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 2.5배 증가
+31052	승천타	30100	icon_skills.dragonrisingblow_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	몬스터 타격 성공 시 60% 확률로 [올려 차기] 재사용 시간 초기화
+31053	승천타	30100	icon_skills.dragonrisingblow_tex	정신의 문장	icon_crest.e_creststrecover_tex	타격 성공 시 마다 전체 분노의 2% 회복
+31054	폭연타	90100	icon_skills.rapidattack_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+31055	폭연타	90100	icon_skills.rapidattack_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 2배 증가
+31056	폭연타	90100	icon_skills.rapidattack_tex	정신의 문장	icon_crest.e_creststrecover_tex	타격 성공 시 마다 전체 분노의 1% 회복
+31057	반격타	100100	icon_skills.counterattack2_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+31058	분노 유발	140100	icon_skills.enrage_tex	나태의 문장	icon_crest.e_crestpassivespeeddown_tex	5초 동안 이동 속도 50% 감소 효과 추가 발생
+31059	승천타	30100	icon_skills.dragonrisingblow_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+31060	강타	20100	icon_skills.smashattack02_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 30% 증가
+31061	반격타	100100	icon_skills.counterattack2_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 30% 증가
+31062	분노의 난타	170100	icon_skills.dashattack_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+31063	분노의 난타	170100	icon_skills.dashattack_tex	근성의 문장	icon_crest.e_crestpassivehpheal_tex	타격 성공 시 마다 전체 HP 기준 1.5%의 HP 즉시 회복
+31064	비공 연타	200100	icon_skills.catchair_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+31065	순간 돌진	400100	icon_skills.instancerush_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	30% 확률로 재사용 시간 초기화
+31066	강타	20100	icon_skills.smashattack02_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 2배 증가
+31067	올려 차기	70100	icon_skills.upperkick_tex	연계 투지의 문장	icon_crest.e_crestnextskillattackup_tex	스킬 적중 시 100% 확률로 3초간 모든 스킬 위력 15% 증가
+31068	지면 강타	40100	icon_skills.poundonground_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 3배 증가
+31069	일격타	60100	icon_skills.blowattack_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 3배 증가
+31070	걷어 차기	150100	icon_skills.kick2_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	다운된 대상에게 피해 3배 증가
+32000	연속 공격	10100	icon_skills.c12_meleecombo	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+32001	연속 공격	10100	icon_skills.c12_meleecombo	정신의 문장	icon_crest.e_crestpassivemprecoveryup_tex	적중 시 MP 회복량 15% 증가
+32002	연속 공격	10100	icon_skills.c12_meleecombo	신속의 문장	icon_crest.e_crestactiveattackspeedup_tex	10% 확률로 5초 동안 공격 속도 10% 증가 효과 발생
+32003	표창 연사	30100	icon_skills.c12_rapidshot	조력의 문장	icon_crest.e_crestactiveinvokeskill_tex	공중에 뜬 대상 타격 시 피해 40% 증가
+32004	표창 연사	30100	icon_skills.c12_rapidshot	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 15% 감소
+32005	연쇄 도약	40100	icon_skills.c12_dashattack	연계 투지의 문장	icon_crest.e_crestnextskillattackup_tex	스킬 적중 시 100% 확률로 3초간 모든 스킬 위력 10% 증가
+32006	화염탄 투척	50100	icon_skills.c12_flamebomb	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 15% 감소
+32007	쾌속 베기	60100	icon_skills.c12_rapidslash	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+32008	쾌속 베기	60100	icon_skills.c12_rapidslash	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+32009	후방 이동술	70100	icon_skills.c12_catchback	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 125 감소
+32010	후방 이동술	70100	icon_skills.c12_catchback	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	몬스터 타격 성공 시 25% 확률로 [이단 베기] 재사용 시간 초기화
+32011	후방 이동술	70100	icon_skills.c12_catchback	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+32012	폭염술	80100	icon_skills.c12_flamestrike	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+32013	연막술	90100	icon_skills.c12_smokebomb	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 15% 감소
+32014	기상 공격	100100	icon_skills.risingattack_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+32015	기상 공격	100100	icon_skills.risingattack_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+32018	삼각 베기	120100	icon_skills.c12_airstepstrike	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 125 감소
+32019	삼각 베기	120100	icon_skills.c12_airstepstrike	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 1.5배 증가
+32020	삼각 베기	120100	icon_skills.c12_airstepstrike	연계 투지의 문장	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 [돌려 베기] 사용 시 스킬 위력 25% 증가
+32021	돌려 베기	130100	icon_skills.c12_rotateslash	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 175 감소
+32022	돌려 베기	130100	icon_skills.c12_rotateslash	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+32023	이단 베기	140100	icon_skills.c12_twinslash	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 100 감소
+32024	이단 베기	140100	icon_skills.c12_twinslash	연계 투지의 문장	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 [삼각 베기] 사용 시 스킬 위력 25% 증가
+32025	이단 베기	140100	icon_skills.c12_twinslash	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+32026	화염술	150100	icon_skills.c12_flamebreath	조력의 문장	icon_crest.e_crestactiveinvokeskill_tex	공중에 뜬 대상 타격 시 피해 30% 증가
+32027	화염술	150100	icon_skills.c12_flamebreath	정신의 문장	icon_crest.e_crestpassivemprecoveryup_tex	타격 성공 시 마다 전체 MP 기준 1%의 MP 즉시 회복
+32028	수리검 펼치기	160100	icon_skills.c12_rotateshurikenshot	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 150 감소
+32029	수리검 펼치기	160100	icon_skills.c12_rotateshurikenshot	근성의 문장	icon_crest.e_crestpassivehpheal_tex	타격 성공 시 마다 전체 HP 기준 3%의 HP 즉시 회복
+32030	수리검 펼치기	160100	icon_skills.c12_rotateshurikenshot	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+32031	차크라 회복술	170100	icon_skills.c12_chakracharge	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 100 감소
+32032	차크라 회복술	170100	icon_skills.c12_chakracharge	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+32033	차크라 회복술	170100	icon_skills.c12_chakracharge	신속의 문장	icon_crest.e_crestactiveattackspeedup_tex	10초 동안 [화염술] [폭염술] 시전 속도 20% 증가
+32034	회오리 수리검 투척	180100	icon_skills.c12_tornadoshot	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 175 감소
+32035	회오리 수리검 투척	180100	icon_skills.c12_tornadoshot	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+32036	명치 찌르기	190100	icon_skills.c12_evadestingshot	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 150 감소
+32037	명치 찌르기	190100	icon_skills.c12_evadestingshot	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+32038	연속 공격	10100	icon_skills.c12_meleecombo	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 30% 증가
+32039	표창 연사	30100	icon_skills.c12_rapidshot	조력의 문장	icon_crest.e_crestactiveinvokeskill_tex	공중에 뜬 대상 타격 시 피해 60% 증가
+32040	화염탄 투척	50100	icon_skills.c12_flamebomb	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+32041	쾌속 베기	60100	icon_skills.c12_rapidslash	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+32042	후방 이동술	70100	icon_skills.c12_catchback	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	몬스터 타격 성공 시 50% 확률로 [이단 베기] 재사용 시간 초기화
+32043	폭염술	80100	icon_skills.c12_flamestrike	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 2배 증가
+32044	삼각 베기	120100	icon_skills.c12_airstepstrike	연계 투지의 문장	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 [돌려 베기] 사용 시 스킬 위력 30% 증가
+32045	삼각 베기	120100	icon_skills.c12_airstepstrike	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 2배 증가
+32046	돌려 베기	130100	icon_skills.c12_rotateslash	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+32047	이단 베기	140100	icon_skills.c12_twinslash	연계 투지의 문장	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 [삼각 베기] 사용 시 스킬 위력 30% 증가
+32048	이단 베기	140100	icon_skills.c12_twinslash	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 2배 증가
+32049	화염술	150100	icon_skills.c12_flamebreath	조력의 문장	icon_crest.e_crestactiveinvokeskill_tex	공중에 뜬 대상 타격 시 피해 50% 증가
+32050	수리검 펼치기	160100	icon_skills.c12_rotateshurikenshot	근성의 문장	icon_crest.e_crestpassivehpheal_tex	타격 성공 시 마다 전체 HP 기준 5%의 HP 즉시 회복
+32051	회오리 수리검 투척	180100	icon_skills.c12_tornadoshot	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+32052	명치 찌르기	190100	icon_skills.c12_evadestingshot	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+32053	표창 연사	30100	icon_skills.c12_rapidshot	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+32054	쾌속 베기	60100	icon_skills.c12_rapidslash	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+32055	폭염술	80100	icon_skills.c12_flamestrike	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+32056	연막술	90100	icon_skills.c12_smokebomb	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+32057	돌려 베기	130100	icon_skills.c12_rotateslash	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+32058	차크라 회복술	170100	icon_skills.c12_chakracharge	신속의 문장	icon_crest.e_crestactiveattackspeedup_tex	10초 동안 [화염술] [폭염술] 시전 속도 30% 증가
+32059	명치 찌르기	190100	icon_skills.c12_evadestingshot	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+32060	연속 공격	10100	icon_skills.c12_meleecombo	신속의 문장	icon_crest.e_crestactiveattackspeedup_tex	15% 확률로 5초 동안 공격 속도 10% 증가 효과 발생
+32061	폭염술	80100	icon_skills.c12_flamestrike	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 3배 증가
+32062	이단 베기	140100	icon_skills.c12_twinslash	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 3배 증가
+32063	화염술	150100	icon_skills.c12_flamebreath	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 30% 증가
+32064	회피 기동	20100	icon_skills.c12_dash	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+33000	연격참	10100	icon_skills.combo_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+33001	연격참	10100	icon_skills.combo_tex	정신의 문장	icon_crest.e_crestpassivemprecoveryup_tex	적중 시 MP 회복량 15% 증가
+33002	연격참	10100	icon_skills.combo_tex	신속의 문장	icon_crest.e_crestactiveattackspeedup_tex	10% 확률로 10초 동안 공격 속도 15% 증가 효과 발생
+33003	혼격참	20100	icon_skills.fatalshot_tex	연계 투지의 문장 [승격참]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 [승격참] 사용 시 스킬 위력 25% 증가
+33004	혼격참	20100	icon_skills.fatalshot_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+33005	월광폭	30100	icon_skills.throwglave_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+33006	월광폭	30100	icon_skills.throwglave_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 2배 증가
+33007	월광폭	30100	icon_skills.throwglave_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+33008	월광도약			집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+33009	선풍참	50100	icon_skills.twister_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 2배 증가
+33010	선풍참	50100	icon_skills.twister_tex	근성의 문장	icon_crest.e_crestpassivehpheal_tex	타격 성공 시 마다 전체 HP 기준 3%의 HP 즉시 회복
+33011	선풍참	50100	icon_skills.twister_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 15% 감소
+33012	승격참	60100	icon_skills.risingshot_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+33013	승격참	60100	icon_skills.risingshot_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 100 감소
+33014	연화참	70100	icon_skills.helicoptercuts_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+33015	연화참	70100	icon_skills.helicoptercuts_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 적중 시(1,2,3타 모두) 3초 간 모든 공격 스킬의 위력 15% 증가
+33016	만월	80100	icon_skills.fullmoon_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+33017	만월	80100	icon_skills.fullmoon_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 50 감소
+33018	지격참	90100	icon_skills.cutting_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 2배 증가
+33019	지격참	90100	icon_skills.cutting_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+33020	월파참	100100	icon_skills.split_tex	신속의 문장	icon_crest.e_crestpassiveskillspeedup_tex	시전 속도 20% 상승
+33021	월파참	100100	icon_skills.split_tex	나태의 문장	icon_crest.e_crestpassivespeeddown_tex	5초 동안 이동 속도 50% 감소 효과 추가 발생
+33022	월파참	100100	icon_skills.split_tex	투지의 문장	icon_crest.e_crestpassivecriticalup_tex	다운된 대상에게 피해 2배 증가
+33023	월파참	100100	icon_skills.split_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 2배 증가
+33024	신월	110100	icon_skills.crescentcut_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 50 감소
+33025	신월	110100	icon_skills.crescentcut_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+33026	신월	110100	icon_skills.crescentcut_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 15% 감소
+33027	적월	120100	icon_skills.redmoon_tex	시간의 문장	icon_crest.e_crestpassivedurationup_tex	효과 지속 시간 15% 향상
+33028	파열참	130100	icon_skills.brust_tex	정신의 문장	icon_crest.e_creststrecover_tex	스킬 적중 시 월광력 5 추가 획득
+33029	파열참	130100	icon_skills.brust_tex	필살의 문장	icon_crest.e_creststrecover_tex	치명타 위력 100%배 증가
+33030	파열참	130100	icon_skills.brust_tex	연계 투지의 문장 [승격참]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 [승격참] 사용 시 스킬 위력 25% 증가
+33031	회피	140100	icon_skills.moonshadow_tex	기회의 문장	icon_crest.e_crestactivecooltimereset_tex	30% 확률로 재사용 시간 초기화
+33032	회피	140100	icon_skills.moonshadow_tex	연계 기회의 문장 [파열참]	icon_crest.e_crestpassivecooltimedown_tex	완벽한 회피 성공 시 [파열참] 재사용 시간 초기화
+33033	풍참	50100	icon_skills.twister_tex	연계 투지의 문장 [승격참]	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 [승격참] 사용 시 스킬 위력 25% 증가
+33034	달빛의 공명	110100	icon_skills.crescentcut_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+33035	달빛의 공명	110100	icon_skills.crescentcut_tex	정신의 문장	icon_crest.e_creststrecover_tex	스킬 적중 시 월광력 5 추가 획득
+33036	달빛의 가호	170100	icon_skills.moongracebuff_tex	근성의 문장	icon_crest.e_crestpassivehpheal_tex	스킬 사용 시 12초 동안 1초마다 전체 HP 대비 3%의 HP 지속 회복
+33037	달빛의 가호	170100	icon_skills.moongracebuff_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+33038	기상 공격	180100	icon_skills.risingattack_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+33039	기상 공격	180100	icon_skills.risingattack_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+33040	진월명	190100	icon_skills.moonlight_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+33041	달빛의 인력	210100	icon_skills.moongravity_tex	연계 투지의 문장 [달빛의 공명] 	icon_crest.e_crestnextskillattackup_tex	연계 스킬로 [달빛의 공명] 사용 시 스킬 위력 25% 증가
+33042	연격참	10100	icon_skills.combo_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+33043	혼격참	20100	icon_skills.fatalshot_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 25% 감소
+33045	월광도약			투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+33046	선풍참	50100	icon_skills.twister_tex	근성의 문장	icon_crest.e_crestpassivehpheal_tex	타격 성공 시 마다 전체 HP 기준 5%의 HP 즉시 회복
+33048	승격참	60100	icon_skills.risingshot_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+33049	연화참	70100	icon_skills.helicoptercuts_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 적중 시(1,2,3타 모두) 3초 간 모든 공격 스킬의 위력 20% 증가
+33050	만월	80100	icon_skills.fullmoon_tex	집중의 문장	icon_crest.e_crestpassivecooltimedown_tex	재사용 시간 20% 감소
+33051	만월	80100	icon_skills.fullmoon_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 50 감소
+33052	월파참	100100	icon_skills.split_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 3배 증가
+33053	파열참	130100	icon_skills.brust_tex	필살의 문장	icon_crest.e_creststrecover_tex	치명타 위력 100%배 증가
+33055	월광폭	30100	icon_skills.throwglave_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+33056	선풍참	50100	icon_skills.twister_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 3배 증가
+33057	선풍참	50100	icon_skills.twister_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+33058	승격참	60100	icon_skills.risingshot_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 2배 증가
+33059	만월	80100	icon_skills.fullmoon_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+33060	신월	110100	icon_skills.crescentcut_tex	정신의 문장	icon_crest.e_crestpassivempdown_tex	소모 MP 50 감소
+33061	신월	110100	icon_skills.crescentcut_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+33062	회피	140100	icon_skills.moonshadow_tex	연계 기회의 문장 [파열참]	icon_crest.e_crestpassivecooltimedown_tex	완벽한 회피 성공 시 [파열참] 재사용 시간 초기화
+33063	달빛의 공명	110100	icon_skills.crescentcut_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+33064	풍참	50100	icon_skills.twister_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 20% 증가
+33065	월광폭	30100	icon_skills.throwglave_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 30% 증가
+33066	지격참	90100	icon_skills.cutting_tex	필살의 문장	icon_crest.e_crestpassivecriticalup_tex	치명타 발생 확률 3배 증가
+33067	지격참	90100	icon_skills.cutting_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 25% 증가
+33068	신월	110100	icon_skills.crescentcut_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 30% 증가
+33069	달빛의 공명	110100	icon_skills.crescentcut_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	스킬 위력 30% 증가
+33070	월광연	200100	icon_skills.mooncatch_tex	투지의 문장	icon_crest.e_crestpassiveattackup_tex	다음 1회 공격에 스킬 위력 30% 증가

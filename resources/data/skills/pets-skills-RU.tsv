@@ -1,0 +1,181 @@
+48	2000	Осадное орудие	1101	Залп	icon_skills.vehicleex_att01_tex
+48	2000	Осадное орудие	1201	Покинуть	icon_skills.vehicleex_getoff_tex
+111	1000	Инженерный танк	1101	Залп кассетной бомбой	icon_skills.darkexplosion_tex
+111	1000	Инженерный танк	1102	Залп кассетной бомбой	icon_skills.darkexplosion_tex
+111	1000	Инженерный танк	1201	Выйти	icon_skills.vehicleex_getoff_tex
+111	1000	Инженерный танк	2101	Установка мины	icon_skills.paralysistrap_tex
+111	1000	Инженерный танк	2102	Установка мины	icon_skills.paralysistrap_tex
+111	1000	Инженерный танк	3102	Залп кассетной бомбой	icon_skills.darkexplosion_tex
+111	2000	Боевой танк	1101	Залп	icon_skills.vehicleex_att02_tex
+111	2000	Боевой танк	1102	Залп	icon_skills.vehicleex_att02_tex
+111	2000	Боевой танк	1201	Выйти	icon_skills.vehicleex_getoff_tex
+111	3000	Танк-разведчик	1101	Залп	icon_skills.spawnunioncannon_tex
+111	3000	Танк-разведчик	1102	Залп	icon_skills.spawnunioncannon_tex
+111	3000	Танк-разведчик	1201	Выйти	icon_skills.vehicleex_getoff_tex
+111	3000	Танк-разведчик	2101	Ледяная буря	icon_skills.darkexplosion_tex
+111	6000	Великая пушка	1301	Залп	icon_skills.vehicleex_att01_tex
+111	6000	Великая пушка	1302	Залп	icon_skills.vehicleex_att01_tex
+111	6000	Великая пушка	1401	Выйти	icon_skills.vehicleex_getoff_tex
+111	6000	Великая пушка	1501	Бомбардировка	icon_skills.warmonger_tex
+111	6000	Великая пушка	1501	Бомбардировка	icon_skills.howitzer_tex
+111	7000	Великий танк	1101	Залп кассетной бомбой	icon_skills.darkexplosion_tex
+111	7000	Великий танк	1102	Залп кассетной бомбой	icon_skills.darkexplosion_tex
+111	7000	Великий танк	1201	Выйти	icon_skills.vehicleex_getoff_tex
+111	7000	Великий танк	2101	Установка мины	icon_skills.paralysistrap_tex
+111	7000	Великий танк	2102	Установка мины	icon_skills.paralysistrap_tex
+111	7000	Великий танк	3102	Залп кассетной бомбой	icon_skills.darkexplosion_tex
+116	1001	Дирижабль	1101	Отдать швартовы	icon_skills.vehicle_drive_tex
+116	1001	Дирижабль	1201	Прыжок	icon_skills.vehicleex_getoff_tex
+116	1002	Дирижабль	1102	Отдать швартовы	icon_skills.vehicle_drive_tex
+116	1002	Дирижабль	1202	Прыжок	icon_skills.vehicleex_getoff_tex
+116	1003	Дирижабль	1103	Отдать швартовы	icon_skills.vehicle_drive_tex
+116	1003	Дирижабль	1203	Прыжок	icon_skills.vehicleex_getoff_tex
+116	4000	Осадное орудие	1101	Залп	icon_skills.vehicleex_att01_tex
+116	4000	Осадное орудие	1102	Залп	icon_skills.vehicleex_att01_tex
+116	4000	Осадное орудие	1201	Покинуть	icon_skills.vehicleex_getoff_tex
+116	4001	Осадное орудие	1301	Залп	icon_skills.vehicleex_att01_tex
+116	4001	Осадное орудие	1302	Залп	icon_skills.vehicleex_att01_tex
+116	4001	Осадное орудие	1401	Покинуть	icon_skills.vehicleex_getoff_tex
+116	4002	Осадное орудие	1501	Залп	icon_skills.vehicleex_att01_tex
+116	4002	Осадное орудие	1502	Залп	icon_skills.vehicleex_att01_tex
+116	4002	Осадное орудие	1503	Покинуть	icon_skills.vehicleex_getoff_tex
+116	4003	Осадное орудие	1501	Залп	icon_skills.vehicleex_att01_tex
+116	4003	Осадное орудие	1502	Залп	icon_skills.vehicleex_att01_tex
+116	4003	Осадное орудие	1503	Покинуть	icon_skills.vehicleex_getoff_tex
+117	5000		1102	Натиск пузом	icon_skills.kumas_frontjump_tex
+117	5000		1103	Шлепок	icon_skills.kumas_3combo_tex
+117	5000		1104	Мощный приступ гнева	icon_skills.kumas_energy_tex
+117	5000		1105	Мощный приступ гнева	icon_skills.kumas_energy_tex
+117	5000		1111	Большая отрыжка	icon_skills.kumas_breath_tex
+117	5000		1212	Прыжок назад	icon_skills.kumas_backjump_tex
+117	5000		1318	Летающие кулаки	icon_skills.kumas_rocketpunch_tex
+117	5000		2201	Очищение кумасов	icon_skills.purify_tex
+117	5000		2202	Исцеление кумасов	icon_skills.healarea_tex
+117	6000		1102	Натиск пузом	icon_skills.kumas_frontjump_tex
+117	6000		1104	Приступ гнева	icon_skills.kumas_energy_tex
+117	6000		1105	Приступ гнева	icon_skills.kumas_energy_tex
+117	6000		1106	Отрыжка	icon_skills.kumas_breath_tex
+117	6000		1108	С разворота влево	icon_skills.kumas_righthit_tex
+117	6000		1109	С разворота вправо	icon_skills.kumas_lefthit_tex
+117	6000		1311	Катящееся пузо	icon_skills.kumas_frontroll_tex
+117	6000		2201	Очищение кумасов	icon_skills.purify_tex
+117	7000		1103	Шлепок	icon_skills.kumas_3combo_tex
+117	7000		1212	Отступление	icon_skills.kumas_backjump_tex
+118	5000	Главный кумас	1103	Три шлепка	icon_skills.kw_atk1_tex
+118	5000	Главный кумас	3101	Прыжок на месте	icon_skills.kw_stomp_tex
+118	5000	Главный кумас	3110	Отравленное дыхание	icon_skills.kw_breath_tex
+118	5000	Главный кумас	4110	Луч гнева	icon_skills.kw_flashcannon_tex
+118	5000	Главный кумас	4170	Град яростных ударов	icon_skills.kw_dashattack_tex
+118	5000	Главный кумас	4180	Прыжок вперед	icon_skills.kw_leapattack_tex
+118	6000		1101	Базовая атака	icon_skills.kw_atk2_tex
+118	6000		3110	Дыхание ребенка	icon_skills.kw_minibreath_tex
+118	6000		4120	Запуск ракеты	icon_skills.kw_rocket_tex
+118	6000		4121	Запуск ракеты	icon_skills.kw_rocket_tex
+118	6000		4130	Разряд энергии	icon_skills.kw_energyball_tex
+118	6000		4131	Разряд энергии	icon_skills.kw_energyball_tex
+118	6000		4140	Аплодисменты	icon_skills.kw_clap_tex
+118	6000		4150	Отступление	icon_skills.kw_backjump_tex
+118	6000		4160	Перекат вперед	icon_skills.kumas_frontroll_tex
+118	8000	Главный кумас	1103	Три шлепка	icon_skills.kw_atk1_tex
+118	8000	Главный кумас	3101	Прыжок на месте	icon_skills.kw_stomp_tex
+118	8000	Главный кумас	3110	Отравленное дыхание	icon_skills.kw_breath_tex
+118	8000	Главный кумас	4110	Луч гнева	icon_skills.kw_flashcannon_tex
+118	8000	Главный кумас	4170	Град яростных ударов	icon_skills.kw_dashattack_tex
+118	8000	Главный кумас	4180	Перекат вперед	icon_skills.kw_leapattack_tex
+118	9000		1101	Базовая атака	icon_skills.kw_atk2_tex
+118	9000		3110	Дыхание ребенка	icon_skills.kw_minibreath_tex
+118	9000		4120	Запуск ракеты	icon_skills.kw_rocket_tex
+118	9000		4121	Запуск ракеты	icon_skills.kw_rocket_tex
+118	9000		4130	Разряд энергии	icon_skills.kw_energyball_tex
+118	9000		4131	Разряд энергии	icon_skills.kw_energyball_tex
+118	9000		4140	Аплодисменты	icon_skills.kw_clap_tex
+118	9000		4150	Отступление	icon_skills.kw_backjump_tex
+118	9000		4160	Перекат вперед	icon_skills.kumas_frontroll_tex
+121	9005		1301	Залп	icon_skills.vehicleex_att01_tex
+121	9005		1302	Залп	icon_skills.vehicleex_att01_tex
+121	9005		1501	Покинуть	icon_skills.vehicleex_getoff_tex
+122	9005		1301	Залп	icon_skills.vehicleex_att01_tex
+122	9005		1302	Залп	icon_skills.vehicleex_att01_tex
+122	9005		1501	Покинуть	icon_skills.vehicleex_getoff_tex
+123	9005		1301	Залп	icon_skills.vehicleex_att01_tex
+123	9005		1302	Залп	icon_skills.vehicleex_att01_tex
+123	9005		1501	Покинуть	icon_skills.vehicleex_getoff_tex
+191	1601	Осадное орудие	1101	Залп	icon_skills.vehicleex_att01_tex
+191	1601	Осадное орудие	1102	Залп	icon_skills.vehicleex_att01_tex
+191	1601	Осадное орудие	1201	Прыжок	icon_skills.vehicleex_getoff_tex
+191	1604	Дирижабль	1101	Отдать швартовы	icon_skills.vehicle_drive_tex
+191	1604	Дирижабль	1201	Прыжок	icon_skills.vehicleex_getoff_tex
+191	1605	Дирижабль	1101	Отдать швартовы	icon_skills.vehicle_drive_tex
+191	1605	Дирижабль	1201	Прыжок	icon_skills.vehicleex_getoff_tex
+210	2999	Береговая пушка	1101	Залп	icon_items.q_arogonnmucus_tex
+210	2999	Береговая пушка	1201	Покинуть	icon_skills.vehicleex_getoff_tex
+210	3000	Береговая пушка	1101	Залп	icon_items.q_arogonnmucus_tex
+210	3000	Береговая пушка	1201	Покинуть	icon_skills.vehicleex_getoff_tex
+210	4000	Игрушечный танк	1101	Залп	icon_skills.vehicleex_att01_tex
+210	4000	Игрушечный танк	1102	Залп	icon_skills.vehicleex_att01_tex
+210	4000	Игрушечный танк	1201	Покинуть	icon_skills.vehicleex_getoff_tex
+425	8041	Пушка	1101	Залп	icon_skills.vehicleex_att01_tex
+425	8041	Пушка	1201	Покинуть	icon_skills.vehicleex_getoff_tex
+443	4000	Передвижное осадное орудие	1101	Залп	icon_skills.vehicleex_att01_tex
+443	4000	Передвижное осадное орудие	1102	Залп	icon_skills.vehicleex_att01_tex
+443	4000	Передвижное осадное орудие	1201	Покинуть	icon_skills.vehicleex_getoff_tex
+447	300	Конфетная пушка для Хэллоуина	1201	Покинуть	icon_skills.vehicleex_getoff_tex
+447	300	Конфетная пушка для Хэллоуина	2101	Выстрел тыквой	icon_skills.vehicleex_att01_tex
+447	300	Конфетная пушка для Хэллоуина	2102	Выстрел тыквой	icon_skills.vehicleex_att01_tex
+447	310		1201	Покинуть	icon_skills.vehicleex_getoff_tex
+447	310		2101	Выстрел тыквой	icon_skills.vehicleex_att01_tex
+447	310		2102	Выстрел тыквой	icon_skills.vehicleex_att01_tex
+447	311	Конфетная пушка для Хэллоуина	1201	Покинуть	icon_skills.vehicleex_getoff_tex
+447	311	Конфетная пушка для Хэллоуина	2101	Выстрел тыквой	icon_skills.vehicleex_att01_tex
+447	311	Конфетная пушка для Хэллоуина	2102	Выстрел тыквой	icon_skills.vehicleex_att01_tex
+450	5000	Дирижабль	1101	Отдать швартовы	icon_skills.vehicle_drive_tex
+450	5000	Дирижабль	1201	Прыжок	icon_skills.vehicleex_getoff_tex
+453	500		1101	Залп	icon_skills.vehicleex_att01_tex
+453	500		1201	Покинуть	icon_skills.vehicleex_getoff_tex
+453	501		1101	Залп	icon_skills.vehicleex_att01_tex
+453	501		1201	Покинуть	icon_skills.vehicleex_getoff_tex
+643	4000	Передвижное осадное орудие	1101	Залп	icon_skills.vehicleex_att01_tex
+643	4000	Передвижное осадное орудие	1102	Залп	icon_skills.vehicleex_att01_tex
+643	4000	Передвижное осадное орудие	1201	Выйти	icon_skills.vehicleex_getoff_tex
+725	8041	Пушка	1101	Залп	icon_skills.vehicleex_att01_tex
+725	8041	Пушка	1201	Покинуть	icon_skills.vehicleex_getoff_tex
+743	4000	Передвижное осадное орудие	1101	Залп	icon_skills.vehicleex_att01_tex
+743	4000	Передвижное осадное орудие	1102	Залп	icon_skills.vehicleex_att01_tex
+743	4000	Передвижное осадное орудие	1201	Покинуть	icon_skills.vehicleex_getoff_tex
+750	5000	Дирижабль	1101	Отдать швартовы	icon_skills.vehicle_drive_tex
+750	5000	Дирижабль	1201	Прыжок	icon_skills.vehicleex_getoff_tex
+750	5001	Дирижабль	1101	Отдать швартовы	icon_skills.vehicle_drive_tex
+750	5001	Дирижабль	1201	Прыжок	icon_skills.vehicleex_getoff_tex
+750	5002	Дирижабль	1101	Отдать швартовы	icon_skills.vehicle_drive_tex
+750	5002	Дирижабль	1201	Прыжок	icon_skills.vehicleex_getoff_tex
+750	5003	Дирижабль	1101	Отдать швартовы	icon_skills.vehicle_drive_tex
+750	5003	Дирижабль	1201	Прыжок	icon_skills.vehicleex_getoff_tex
+750	5004	Дирижабль	1101	Отдать швартовы	icon_skills.vehicle_drive_tex
+750	5004	Дирижабль	1201	Прыжок	icon_skills.vehicleex_getoff_tex
+750	5005	Дирижабль	1101	Отдать швартовы	icon_skills.vehicle_drive_tex
+750	5005	Дирижабль	1201	Прыжок	icon_skills.vehicleex_getoff_tex
+750	5006	Дирижабль	1101	Отдать швартовы	icon_skills.vehicle_drive_tex
+750	5006	Дирижабль	1201	Прыжок	icon_skills.vehicleex_getoff_tex
+750	5007	Дирижабль	1101	Отдать швартовы	icon_skills.vehicle_drive_tex
+750	5007	Дирижабль	1201	Прыжок	icon_skills.vehicleex_getoff_tex
+750	5008	Дирижабль	1101	Отдать швартовы	icon_skills.vehicle_drive_tex
+750	5008	Дирижабль	1201	Прыжок	icon_skills.vehicleex_getoff_tex
+750	5009	Дирижабль	1101	Отдать швартовы	icon_skills.vehicle_drive_tex
+885	885158	Мастер осколков	1101	Залп	icon_skills.vehicleex_att01_tex
+885	885158	Мастер осколков	1102	Залп	icon_skills.vehicleex_att01_tex
+885	885158	Мастер осколков	1201	Покинуть	icon_skills.vehicleex_getoff_tex
+950	2003		4120	Заградительный огонь	icon_status.shotarrowblindly_tex
+950	2003		4121	Заградительный огонь	icon_status.shotarrowblindly_tex
+950	2003		4130	Выстрел стрелой	icon_status.shotarrow_tex
+950	2003		4131	Выстрел стрелой	icon_status.shotarrow_tex
+950	2003		4160	Срочная мобилизация	icon_status.accelration_tex
+950	2003		4500	Выйти	icon_status.vehicleex_getoff_tex
+950	2005	Баллиста Врат в Новый мир	4120	Заградительный огонь	icon_status.shotarrowblindly_tex
+950	2005	Баллиста Врат в Новый мир	4121	Заградительный огонь	icon_status.shotarrowblindly_tex
+950	2005	Баллиста Врат в Новый мир	4130	Выстрел стрелой	icon_status.shotarrow_tex
+950	2005	Баллиста Врат в Новый мир	4131	Выстрел стрелой	icon_status.shotarrow_tex
+950	2005	Баллиста Врат в Новый мир	4160	Срочная мобилизация	icon_status.accelration_tex
+950	2005	Баллиста Врат в Новый мир	4500	Выйти	icon_status.vehicleex_getoff_tex
+1023	3000007	Пушка альянса	1101	Залп	icon_skills.vehicleex_att01_tex
+1023	3000007	Пушка альянса	1102	Залп	icon_skills.vehicleex_att01_tex
+1023	3000007	Пушка альянса	1201	Покинуть	icon_skills.vehicleex_getoff_tex

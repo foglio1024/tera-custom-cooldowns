@@ -1,0 +1,12 @@
+New version of [opcode dll](https://github.com/neowutran/TeraDpsMeterData/raw/master/copypaste-tuto/OpcodeDLL.dll) included.
+Now it:
+1. doesn't require any CheatEngine manipulations/recompilation 
+2. export opcodes with correct version name
+3. export sysmsg code list as well
+
+Not sure that done all right, since this is the first C code I wrote and my first reverse engineering trial. Sorry for ugly code. =)
+May be opcode version detection algo is wrong, but it works at least for current RU and KR clients, hope it will work later as well. If not - should affect only filename.
+To use - just inject dll into Tera.exe and it will create 2 files near tera.exe:
+
+- <version>.txt 	with opcodes 
+- smt_<version>.txt	with sysmsg codes

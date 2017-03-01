@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<window>
+  <location>
+    <x>923</x>
+    <y>343</y>
+  </location>
+  <language>Auto</language>
+  <ui_language>Auto</ui_language>
+  <opacity>
+    <mainWindow>50</mainWindow>
+    <skillWindow>70</skillWindow>
+  </opacity>
+  <autoupdate>true</autoupdate>
+  <remember_position>true</remember_position>
+  <winpcap>true</winpcap>
+  <invisible_ui_when_no_stats>false</invisible_ui_when_no_stats>
+  <allow_transparency>true</allow_transparency>
+  <topmost>true</topmost>
+  <debug>true</debug>
+  <excel>false</excel>
+  <date_in_excel_path>false</date_in_excel_path>
+  <excel_save_directory>D:\uTorrent\Documenti\ShinraMeter/</excel_save_directory>
+  <excel_cma_dps_seconds>1</excel_cma_dps_seconds>
+  <always_visible>false</always_visible>
+  <scale>1</scale>
+  <lf_delay>150</lf_delay>
+  <partyonly>false</partyonly>
+  <showhealcrit>true</showhealcrit>
+  <detect_bosses_only_by_hp_bar>false</detect_bosses_only_by_hp_bar>
+  <only_bosses>false</only_bosses>
+  <low_priority>true</low_priority>
+  <number_of_players_displayed>5</number_of_players_displayed>
+  <remove_tera_alt_enter_hotkey>false</remove_tera_alt_enter_hotkey>
+  <enable_chat_and_notifications>true</enable_chat_and_notifications>
+  <mute_sound>false</mute_sound>
+  <copy_inspect>true</copy_inspect>
+  <format_paste_string>true</format_paste_string>
+  <say_color>#FFFFFFFF</say_color>
+  <alliance_color>#FF008000</alliance_color>
+  <area_color>#FF800080</area_color>
+  <guild_color>#FF90EE90</guild_color>
+  <whisper_color>#FFFFC0CB</whisper_color>
+  <general_color>#FFFFFF00</general_color>
+  <group_color>#FF00FFFF</group_color>
+  <trading_color>#FFA0522D</trading_color>
+  <emotes_color>#FFFFFFFF</emotes_color>
+  <private_channel_color>#FFFF0000</private_channel_color>
+  <disable_party_event>false</disable_party_event>
+  <show_afk_events_ingame>false</show_afk_events_ingame>
+  <teradps.io>
+    <user></user>
+    <token></token>
+    <enabled>false</enabled>
+    <private_servers enabled="false">
+      <server></server>
+    </private_servers>
+  </teradps.io>
+  <discord>
+    <login></login>
+    <password></password>
+    <guilds />
+  </discord>
+</window>

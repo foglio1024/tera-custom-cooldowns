@@ -1,0 +1,1009 @@
+21000	Roulade	20100	icon_skills.tumbling_tex	Roulade rapide	icon_crest.e_crestactiveattackspeedup_tex	30% de chances d'augmenter la vitesse d'attaque de 15 % pendant 10 secondes.
+21001	Réaction	130100	icon_skills.risingattack_tex	Réaction énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+21002	La mort venue des cieux	100100	icon_skills.evasionattack_tex	La mort venue des cieux énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 30%.
+21003	Mutilation	140100	icon_skills.aimingankle_tex	Test	icon_skills.voidtrap_tex	Sans effet
+21004	Attaque combinée	10100	icon_skills.comboattack_tex	Attaque combinée menaçante	icon_crest.e_crestpassiveaggroup_tex	Augmente le taux d'agression de 5%.
+21005	Déluge de coups	30100	icon_skills.nanmu_tex	Déluge de coups menaçant	icon_crest.e_crestpassiveaggroup_tex	Augmente le taux d'agression de 20%.
+21006	Pluie de coups	40100	icon_skills.pointattack_tex	Pluie de coups puissante	icon_crest.e_crestpassiveattackup_tex	Les dégâts de la compétence augmentent de 25%.
+21007	Frappe bondissante	120100	icon_skills.downblowattack_tex	Frappe bondissante puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+21008	Lame empoisonnée	110100	icon_skills.poisonblowattack_tex	Lame empoisonnée virulente	icon_crest.e_crestpassiveskilleffectup_tex	Augmente les dégâts d'empoisonnement de 15%.
+21009	Position défensive	90100	icon_skills.ironwillb_tex	Position défensive fondée	icon_crest.e_crestpassiveskilleffectup_tex	Augmente la constitution de 10%.
+21010	Réaction	130100	icon_skills.risingattack_tex	Réaction puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+21011	Déluge de coups	30100	icon_skills.nanmu_tex	Déluge de coups d'influence	icon_crest.e_crestnextskillmpdown_tex	Réduit le coût en PM de Pluie de coups de 88.
+21012	Réaction	130100	icon_skills.risingattack_tex	Réaction d'influence	icon_crest.e_crestnextskillmpdown_tex	Réduit le coût en PM de Frappe bondissante de 75 pendant quelques secondes.
+21013	Attaque combinée	10100	icon_skills.comboattack_tex	Attaque combinée spirituelle	icon_crest.e_crestpassivemprecoveryup_tex	Augmente la régénération de PM de 35%.
+21014	La mort venue des cieux	100100	icon_skills.evasionattack_tex	Mort venue des cieux rapide	icon_crest.e_crestactiveattackspeedup_tex	50% de chances d'augmenter la vitesse d'attaque de 15 % pendant 10 secondes.
+21015	Roulade	20100	icon_skills.tumbling_tex	Roulade infinie	icon_crest.e_crestactivecooltimereset_tex	Diminue de 100 le coût en détermination.
+21016	Cri de bataille	50100	icon_skills.thunderingroar_tex	Cri de bataille énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+21017	Pluie de coups	40100	icon_skills.pointattack_tex	Pluie de coups de restauration	icon_crest.e_crestpassivehpheal_tex	Restaure immédiatement 0.5% PV.
+21018	Frappe combattive	180100	icon_skills.aggravatingstrike_tex	Frappe combattive guérisseuse	icon_crest.e_crestpassivehpdown_tex	Réduit la consommation de PV de 50%.
+21019	Entaille Vortex	170100	icon_skills.allroundslash_tex	Entaille vortex puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+21020	Charge taillade	160100	icon_skills.rushingslash_tex	Charge taillade énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+21021	Position offensive	80100	icon_skills.ironwilla_tex	Test	icon_skills.voidtrap_tex	Sans effet
+21022	Fureur montante	190100	icon_skills.tenaciousattack_tex	Fureur montante tenace	icon_crest.e_crestactivecooltimereset_tex	25% de chances de supprimer le temps de recharge.
+21023	Agression enfumée	240100	icon_skills.decoy_tex	Agression enfumée énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+21024	Attaque sournoise	220100	icon_skills.backattack_tex	Attaque sournoise de lacération	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 50%.
+21025	Pari mortel	200100	icon_skills.deadlywill_tex	Pari mortel énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+21026	Contre-attaque étourdissante	230100	icon_skills.reversalturningattack_tex	Contre-attaque étourdissante puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+21027	Cascade d'étourdissements			Cascade d'étourdissements brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 88.
+21028	Frappe combattive	180100	icon_skills.aggravatingstrike_tex	Frappe combattive alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Fureur montante de 20 % pendant quelques secondes.
+21029	Charge taillade	160100	icon_skills.rushingslash_tex	Charge taillade d'influence	icon_crest.e_crestnextskillmpdown_tex	Réduit le coût en PM de Lame empoisonnée de 50 pendant quelques secondes.
+21030	Cascade d'étourdissements			Étourdissements en cascade d'influence	icon_crest.e_crestnextskillmpdown_tex	Réduit le coût en PM de Pluie de coups de 88 pendant quelques secondes.
+21031	Étourdissements en cascade			Étourdissements en cascade alimentés	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Pluie de coups de 20 % pendant quelques secondes.
+21032	Étourdissements en cascade			Étourdissements en cascade énergétiques	icon_crest.e_crestactivecooltimereset_tex	Réduit le temps de recharge de 25%.
+21033	Fureur montante	190100	icon_skills.tenaciousattack_tex	Fureur montante d'hébétude	icon_crest.e_crestactiveattackspeeddown_tex	10% de chances de réduire la vitesse d'attaque de l'adversaire de 15 % pendant 7 secondes.
+21034	Déluge de coups	30100	icon_skills.nanmu_tex	Déluge de coups de lien	icon_crest.e_crestactivespeeddown_tex	25% de chances d'immobiliser la cible pendant 4 secondes.
+21035	Charge taillade	160100	icon_skills.rushingslash_tex	Charge taillade alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Frappe combattive de 20 % pendant quelques secondes.
+21036	Attaque sournoise	220100	icon_skills.backattack_tex	Attaque sournoise énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+21037	Contre-attaque étourdissante	230100	icon_skills.reversalturningattack_tex	Contre-attaque étourdissante persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 50%.
+21038	Contre-attaque étourdissante	230100	icon_skills.reversalturningattack_tex	Contre-attaque étourdissante énergétique	icon_crest.e_crestactivecooltimereset_tex	Réduit le temps de recharge de 20%.
+21039	Attaque combinée	10100	icon_skills.comboattack_tex	Attaque combinée de sape	icon_crest.e_crestactivestun_tex	5% de chances d'assommer la cible pendant 2 secondes.
+21040	Cri de bataille	50100	icon_skills.thunderingroar_tex	Cri de bataille hâtif	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse d'incantation de 50%.
+21041	Cri de bataille	50100	icon_skills.thunderingroar_tex	Cri de bataille de chance	icon_crest.e_crestpassivethorns_tex	Augmente les chances de faire effet de 10%.
+21042	Cri de bataille	50100	icon_skills.thunderingroar_tex	Cri de bataille menaçant	icon_crest.e_crestpassiveaggroup_tex	Augmente le taux d'agressivité de 100%.
+21043	Frappe combattive	180100	icon_skills.aggravatingstrike_tex	Frappe combattive persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 50%.
+21044	Frappe combattive	180100	icon_skills.aggravatingstrike_tex	Frappe combattive alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Frappe bondissante de 20 % pendant quelques secondes.
+21045	Entaille Vortex	170100	icon_skills.allroundslash_tex	Entaille vortex tenace	icon_crest.e_crestactivecooltimereset_tex	30% de chances de supprimer le temps de recharge.
+21046	Roulade	20100	icon_skills.tumbling_tex	Roulade de restauration	icon_crest.e_crestnextskillhpheal_tex	Restaure immédiatement 3 % du total des PV lorsque vous portez un coup avec Lame empoisonnée.
+21047	La mort venue des cieux	100100	icon_skills.evasionattack_tex	Test	icon_skills.voidtrap_tex	Sans effet
+21048	Bond	270100	icon_skills.heavybite_tex	Bond rapide	icon_crest.e_crestactiveattackspeedup_tex	Augmente la vitesse d'attaque du Bond de 30%.
+21049	Bond	270100	icon_skills.heavybite_tex	Bond énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+21050	Coupe latérale	280100	icon_skills.dualrapidpiercing_tex	Coupe latérale persistant	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 50%.
+21051	Coupe latérale	280100	icon_skills.dualrapidpiercing_tex	Coupe latérale brillant	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 75.
+21052	En garde	290100	icon_skills.dualslash_tex	En garde puissant	icon_crest.e_crestpassiveattackup_tex	Les dégâts de la compétence augmentent de 25%.
+21053	En garde	290100	icon_skills.dualslash_tex	En garde brillant	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 80.
+21054	En garde	290100	icon_skills.dualslash_tex	En garde tenace	icon_crest.e_crestactivecooltimereset_tex	50% de chances de supprimer le temps de recharge.
+21064	Pluie de coups	40100	icon_skills.pointattack_tex	Pluie de coups puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts des compétences de 25%.
+21065	La mort venue des cieux	100100	icon_skills.evasionattack_tex	La mort venue des cieux énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 30%.
+21066	Pluie de coups	40100	icon_skills.pointattack_tex	Pluie de coups de restauration	icon_crest.e_crestpassivehpheal_tex	Restaure immédiatement 0.5% PV.
+21067	Roulade	20100	icon_skills.tumbling_tex	Roulade infinie	icon_crest.e_crestactivecooltimereset_tex	Diminue de 100 le coût en détermination.
+21068	Position défensive	90100	icon_skills.ironwillb_tex	Position défensive fondée	icon_crest.e_crestpassiveskilleffectup_tex	Augmente la constitution de 10%.
+21069	Frappe combattive	180100	icon_skills.aggravatingstrike_tex	Frappe combattive guérisseuse	icon_crest.e_crestpassivehpdown_tex	Réduit la consommation de PV de 50%.
+21070	Attaque combinée	10100	icon_skills.comboattack_tex	Attaque combinée spirituelle	icon_crest.e_crestpassivemprecoveryup_tex	Augmente la régénération de PM de 35%.
+21071	Agression enfumée	240100	icon_skills.decoy_tex	Agression enfumée énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+21072	Frappe combattive	180100	icon_skills.aggravatingstrike_tex	Frappe combattive alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Frappe bondissante de 45 % pendant quelques secondes.
+21073	Charge taillade	160100	icon_skills.rushingslash_tex	Charge taillade alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Frappe combattive de 50 % pendant quelques secondes.
+21074	La mort venue des cieux	100100	icon_skills.evasionattack_tex	La mort venue des cieux fondée	icon_crest.e_crestactivedefenceup_tex	Augmente la constitution de 25 pendant 8 secondes.
+21075	Attaque sournoise	220100	icon_skills.backattack_tex	Attaque sournoise avantageuse	icon_crest.e_crestactiveattackspeedup_tex	Augmente la régénération de fureur de 1.
+21076	Cascade d'étourdissements			Étourdissements en cascade puissants	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+21077	Cascade d'étourdissements			Étourdissements en cascade persistants	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 25%.
+21078	Contre-attaque étourdissante	230100	icon_skills.reversalturningattack_tex	Contre-attaque étourdissante alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Cascade d'étourdissements de 10 % pendant quelques secondes.
+21079	Faux	300100	icon_skills.raker_tex	Faux de gravure	icon_crest.e_crestpassivecriticalup_tex	Double les chances de porter un coup critique
+21080	Faux	300100	icon_skills.raker_tex	Faux puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la fureur de 25 %.
+21081	Attaque sournoise	220100	icon_skills.backattack_tex	Attaque sournoise persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 50%.
+21082	Bond	270100	icon_skills.heavybite_tex	Bond rapide	icon_crest.e_crestactiveattackspeedup_tex	Augmente la vitesse d'attaque du Bond de 30%.
+21083	Lame empoisonnée	110100	icon_skills.poisonblowattack_tex	Lame empoisonnée cumulable	icon_crest.e_crestactiveattackspeedup_tex	Cumule les dégâts de Lame empoisonnée jusqu'à 2 fois.
+21084	En garde	290100	icon_skills.dualslash_tex	En garde avantageuse	icon_crest.e_crestactiveattackspeedup_tex	Augmente la régénération de fureur de 1 par coup.
+21085	Taillade faucheuse	310100	icon_skills.rupture_tex	Taillade faucheuse puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts des compétences de 25%.
+21086	Parade croisée	320100	icon_skills.twinswordsdefence_tex	Parade croisée renforcée	icon_crest.e_crestactiveattackup_tex	30% de chances d'augmenter la puissance de 15 % pendant 10 secondes en cas de blocage réussi.
+21087	Ailier ombreux	330100	icon_skills.shadowchange_tex	Ailier ombreux menaçant	icon_crest.e_crestpassiveaggroup_tex	Augmente le taux d'agression de 20%.
+21088	Epée captivante	340100	icon_skills.bindingblade_tex	Épée captivante puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 20%.
+21089	Epée captivante	340100	icon_skills.bindingblade_tex	Épée captivante puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 20%.
+21090	Epée captivante	340100	icon_skills.bindingblade_tex	Epée captivante énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+21091	Pari mortel	200100	icon_skills.deadlywill_tex	Pari mortel persistant	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 20%.
+21092	Epée captivante	340100	icon_skills.bindingblade_tex	Epée captivante énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+21093	Exaspération	350100	icon_skills.provokerage_tex	Exaspération ralentissante	icon_crest.e_crestpassivespeeddown_tex	Réduit la vitesse de déplacement de l'adversaire de 50 % pendant 5 secondes.
+21094	Exaspération	350100	icon_skills.provokerage_tex	Exaspération énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+21095	Roulade	20100	icon_skills.tumbling_tex	Roulade rapide	icon_crest.e_crestactiveattackspeedup_tex	40% de chances d'augmenter la vitesse d'attaque de 15 % pendant 10 secondes.
+21096	Déluge de coups	30100	icon_skills.nanmu_tex	Déluge de coups brutaux	icon_crest.e_crestpassiveaggroup_tex	Augmente le taux d'agression de 40%.
+21097	Entaille Vortex	170100	icon_skills.allroundslash_tex	Entaille vortex puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+21098	Étourdissements en cascade			Étourdissements en cascade alimentés	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Pluie de coups de 20 % pendant quelques secondes.
+21099	Fureur montante	190100	icon_skills.tenaciousattack_tex	Fureur montante d'hébétude	icon_crest.e_crestactiveattackspeeddown_tex	20% de chances de réduire la vitesse d'attaque d'un adversaire de 15 % pendant 7 secondes.
+21100	Attaque sournoise	220100	icon_skills.backattack_tex	Attaque sournoise énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+21101	Roulade	20100	icon_skills.tumbling_tex	Roulade énergétique	icon_crest.e_crestactivecooltimereset_tex	Réduit le coût en détermination de 120.
+21102	Position défensive	90100	icon_skills.ironwillb_tex	Position défensive fondée	icon_crest.e_crestpassiveskilleffectup_tex	Augmente la constitution de 10%.
+21103	Charge taillade	160100	icon_skills.rushingslash_tex	Charge taillade alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Frappe combattive de 50 % pendant quelques secondes.
+21104	Faux	300100	icon_skills.raker_tex	Faux de gravure	icon_crest.e_crestpassivecriticalup_tex	Double les chances d'infliger un coup critique.
+21105	Faux	300100	icon_skills.raker_tex	Faux puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la Fureur de 30 %.
+21106	Pari mortel	200100	icon_skills.deadlywill_tex	Pari mortel persistant	icon_crest.e_crestpassivedurationup_tex	Augmente la durée de l'effet de 20%.
+21107	En garde	290100	icon_skills.dualslash_tex	En garde de gravure	icon_crest.e_crestpassivecriticalup_tex	Double les chances de coups critiques en attaquant des monstres.
+22000	Inébranlable	20100	icon_skills.defence_tex	Inébranlable renforcé	icon_crest.e_crestactiveattackup_tex	30% de chances d'augmenter la puissance de 15 % pendant 10 secondes en cas de blocage réussi.
+22001	Inébranlable	20100	icon_skills.defence_tex	Inébranlable alimenté	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Poussée du bouclier de 25 % pendant quelques secondes.
+22002	Inébranlable	20100	icon_skills.defence_tex	Inébranlable d'influence	icon_crest.e_crestnextskillmpdown_tex	Réduit le coût en PM de Poussée du bouclier de 115 pendant quelques secondes.
+22003	Attaque combinée	10100	icon_skills.comboattack_tex	Attaque combinée menaçante	icon_crest.e_crestpassiveaggroup_tex	Augmente le taux d'agression de 5%.
+22004	Cri de défi	40100	icon_skills.roar_tex	Cri de défi menaçant	icon_crest.e_crestpassiveaggroup_tex	Augmente le taux d'agression de 20%.
+22005	Cri de défi	40100	icon_skills.roar_tex	Cri de défi brillant	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 60.
+22006	Exaspération	120100	icon_skills.provokerage_tex	Exaspération ralentissante	icon_crest.e_crestpassivespeeddown_tex	Réduit la vitesse de déplacement de la cible de 50% pendant 5 secondes
+22007	Assaut	30100	icon_skills.screwthrough_tex	Assaut puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+22008	Poussée du bouclier	80100	icon_skills.riposte_tex	Test	icon_skills.voidtrap_tex	Sans effet
+22009	Coup de bouclier	50100	icon_skills.shieldstrike_tex	Coup de bouclier retentissant	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 25%.
+22010	Cri du gardien	70100	icon_skills.inspiringroar_tex	Cri du gardien brillant	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 200.
+22012	Réaction	110100	icon_skills.risingattack_tex	Réaction puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+22013	Barrage au bouclier	180100	icon_skills.shieldattack_tex	Barrage au bouclier brillant	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 19.
+22015	Attaque combinée	10100	icon_skills.comboattack_tex	Attaque combinée spirituelle	icon_crest.e_crestpassivemprecoveryup_tex	Augmente la régénération de PM de 20%.
+22016	Affaiblissement	100100	icon_skills.armorbreak_tex	Affaiblissement impulsif	icon_crest.e_crestactivempzero_tex	35% de chances de réduire le coût en PM à 0.
+22017	Chaîne	90100	icon_skills.hookthrow_tex	Chaîne énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+22018	Exaspération	120100	icon_skills.provokerage_tex	Exaspération énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+22019	Coup de bouclier	50100	icon_skills.shieldstrike_tex	Coup de bouclier énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+22020	Fente chargée	150100	icon_skills.advancingcharge_tex	Fente chargée puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+22021	Second souffle	160100	icon_skills.rejuvenation_tex	Second souffle énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+22022	Poussée d'adrénaline	170100	icon_skills.fightingwill_tex	Poussée d'adrénaline rapide	icon_crest.e_crestpassiveskilleffectup_tex	Augmente la vitesse d'attaque de 10% en plus.
+22023	Attaque bondissante	130100	icon_skills.leaprampage_tex	Attaque bondissante brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 75.
+22024	Réaction	110100	icon_skills.risingattack_tex	Réaction énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+22025	Vague menaçante	200100	icon_skills.menacewave_tex	Vague menaçante brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 60.
+22026	Volonté de fer	220100	icon_skills.armoredwill_tex	Volonté de fer persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 50%.
+22027	Chaîne du maître	230100	icon_skills.chaincapture_tex	Chaîne du maître tenace	icon_crest.e_crestactivecooltimereset_tex	30% de chances de supprimer le temps de recharge.
+22028	Coup d'entrave	210100	icon_skills.shockblow_tex	Coup d'entrave puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 20%.
+22029	Serment de protection	190100	icon_skills.vowofprotection_tex	Serment de protection énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+22030	Attaque bondissante	130100	icon_skills.leaprampage_tex	Attaque bondissante puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+22031	Cri de défi	40100	icon_skills.roar_tex	Test	icon_skills.voidtrap_tex	Sans effet
+22032	Assaut	30100	icon_skills.screwthrough_tex	Assaut brillant	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 100.
+22033	Poussée du bouclier	80100	icon_skills.riposte_tex	Poussée du bouclier menaçante	icon_crest.e_crestpassiveaggroup_tex	Augmente le taux d'agression de 100%.
+22034	Affaiblissement	100100	icon_skills.armorbreak_tex	Affaiblissement persistant	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 100%.
+22035	Coup de bouclier	50100	icon_skills.shieldstrike_tex	Coup de bouclier embrasé	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse d'incantation d'Assaut de 25 % pendant quelques secondes.
+22036	Serment de protection	190100	icon_skills.vowofprotection_tex	Serment de protection de restauration	icon_crest.e_crestactivehprecoveryup_tex	Augmente le taux de récupération de PV du lanceur de 20% pendant 20 secondes.
+22037	Cri du gardien	70100	icon_skills.inspiringroar_tex	Cri du gardien énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+22038	Vague menaçante	200100	icon_skills.menacewave_tex	Vague menaçante persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 50%.
+22039	Fente chargée	150100	icon_skills.advancingcharge_tex	Fente chargée énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+22040	Fente chargée	150100	icon_skills.advancingcharge_tex	Fente chargée de prestesse	icon_crest.e_crestactivespeedup_tex	Augmente la vitesse de déplacement en combat de 10 pendant 7 secondes.
+22041	Volonté de fer	220100	icon_skills.armoredwill_tex	Volonté de fer de protection	icon_crest.e_crestpassiveskilleffectup_tex	Augmente l'absorption des dégâts de 25%.
+22042	Coup d'entrave	210100	icon_skills.shockblow_tex	Coup d'entrave ralentissant	icon_crest.e_crestpassiveskilleffectup_tex	Réduit la vitesse de déplacement de l'ennemi de 30% supplémentaires.
+22043	Chaîne	90100	icon_skills.hookthrow_tex	Chaîne de précision	icon_crest.e_crestpassiverangeup_tex	Augmente la portée de 3 mètres.
+22044	Chaîne	90100	icon_skills.hookthrow_tex	Chaîne ralentissante	icon_crest.e_crestpassivespeeddown_tex	Réduit la vitesse de déplacement de l'adversaire de 50% pendant 4 secondes
+22045	Coup de bouclier	50100	icon_skills.shieldstrike_tex	Coup de bouclier retentissant	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 25%.
+22046	Coup de bouclier	50100	icon_skills.shieldstrike_tex	Coup de bouclier énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+22047	Chaîne	90100	icon_skills.hookthrow_tex	Chaîne énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+22048	Attaque combinée	10100	icon_skills.comboattack_tex	Attaque combinée menaçante	icon_crest.e_crestpassiveaggroup_tex	Augmente le taux d'agression de 5%.
+22049	Cri de défi	40100	icon_skills.roar_tex	Cri de défi brillant	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 60.
+22050	Coup d'entrave	210100	icon_skills.shockblow_tex	Coup d'entrave ralentissant	icon_crest.e_crestpassiveskilleffectup_tex	Réduit la vitesse de déplacement de l'ennemi de 30% supplémentaires.
+22051	Assaut	30100	icon_skills.screwthrough_tex	Assaut brillant	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 150.
+22052	Cri du gardien	70100	icon_skills.inspiringroar_tex	Cri du gardien énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 35%.
+22053	Exaspération	120100	icon_skills.provokerage_tex	Exaspération ralentissante	icon_crest.e_crestpassivespeeddown_tex	Réduit la vitesse de l'adversaire de 50% pendant 5 secondes.
+22054	Chaîne	90100	icon_skills.hookthrow_tex	Chaîne d'hébétude	icon_crest.e_crestpassivetargetspeeddown_tex	Réduit la vitesse d'attaque de l'adversaire de 40 % pendant 4 secondes.
+22055	Chaîne	90100	icon_skills.hookthrow_tex	Chaîne menaçante	icon_crest.e_crestpassiveaggroup_tex	Augmente le taux d'agression de 30%.
+22056	Cri de défi	40100	icon_skills.roar_tex	Cri de défi hâtif	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse d'incantation de 25%.
+22057	Cri de défi	40100	icon_skills.roar_tex	Cri de défi fondé	icon_crest.e_crestactivedefenceup_tex	Augmente la constitution de 21 en cas d'attaque réussie.
+22058	Assaut	30100	icon_skills.screwthrough_tex	Assaut de gravure	icon_crest.e_crestpassivecriticalup_tex	Double les chances de coups critiques.
+22059	Coup d'entrave	210100	icon_skills.shockblow_tex	Coup d'entrave menaçant	icon_crest.e_crestpassiveaggroup_tex	Augmente le taux d'agression de 50%.
+22060	Laisse en chaîne	240100	icon_skills.harpoonshot_tex	Laisse en chaîne énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+22061	Laisse en chaîne	240100	icon_skills.harpoonshot_tex	Laisse en chaîne persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 50%.
+22062	Attaque combinée	10100	icon_skills.comboattack_tex	Attaque combinée spirituelle	icon_crest.e_crestpassivemprecoveryup_tex	Augmente la régénération de PM de 20%.
+22063	Poussée du bouclier	80100	icon_skills.riposte_tex	Poussée du bouclier menaçante	icon_crest.e_crestpassiveaggroup_tex	Augmente le taux d'agression de 100%.
+22064	Barrage au bouclier	180100	icon_skills.shieldattack_tex	Barrage au bouclier menaçant	icon_crest.e_crestpassiveaggroup_tex	Augmente le taux d'agression de 200%.
+22065	Attaque bondissante	130100	icon_skills.leaprampage_tex	Attaque bondissante d'hébétude	icon_crest.e_crestactiveattackspeeddown_tex	30% de chances de réduire la vitesse d'attaque de l'adversaire de 30 % pendant 7 secondes.
+22066	Bourrade	250100	icon_skills.overhelm_tex	Bourrade puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts des compétences de 25%.
+22067	Retraite	260100	icon_skills.backstep_tex	Retraite énergétique	icon_crest.e_crestactivecooltimereset_tex	Réduit le coût en détermination de 100.
+22068	Cri de défi	40100	icon_skills.roar_tex	Cri de défi enthousiaste	icon_crest.e_creststrecover_tex	Augmente la régénération de détermination de 30%.
+22069	Poussée du bouclier	80100	icon_skills.riposte_tex	Poussée du bouclier enthousiaste	icon_crest.e_creststrecover_tex	Augmente la régénération de détermination de 50%.
+22070	Second souffle	160100	icon_skills.rejuvenation_tex	Second souffle enthousiaste	icon_crest.e_creststrecover_tex	Restaure 20 % de détermination supplémentaire.
+22071	Inébranlable	20100	icon_skills.defence_tex	Inébranlable renforcé	icon_crest.e_creststrecover_tex	Augmente la détermination maximum de 500.
+22072	Défense frontale	270100	icon_skills.holdtheline_tex	Cri de ralliement énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+22073	Défense frontale	270100	icon_skills.holdtheline_tex	Cri de ralliement persistant	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 30%.
+22074	Défense frontale	270100	icon_skills.holdtheline_tex	Cri de ralliement brillant	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 150.
+22075	Défense frontale	270100	icon_skills.holdtheline_tex	Cri de ralliement menaçant	icon_crest.e_crestpassiveaggroup_tex	Augmente le taux d'agression de 100%.
+22076	Défense frontale	270100	icon_skills.holdtheline_tex	Cri de ralliement menaçant	icon_crest.e_crestpassiveaggroup_tex	Augmente le taux d'agression de 100%.
+22077	Défense frontale	270100	icon_skills.holdtheline_tex	Cri de ralliement persistant	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 30%.
+22078	Défense frontale	270100	icon_skills.holdtheline_tex	Cri de ralliement énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+22079	Cri de défi	40100	icon_skills.roar_tex	Cri de défi brutal	icon_crest.e_crestpassiveaggroup_tex	Augmente le taux d'agression de 40%.
+22080	Assaut	30100	icon_skills.screwthrough_tex	Assaut puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 30%.
+22081	Attaque bondissante	130100	icon_skills.leaprampage_tex	Attaque bondissante puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 30%.
+22082	Affaiblissement	100100	icon_skills.armorbreak_tex	Affaiblissement persistant	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 100%.
+22083	Fente chargée	150100	icon_skills.advancingcharge_tex	Fente chargée énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de chargement de 20%.
+22084	Cri de défi	40100	icon_skills.roar_tex	Cri de défi brillant	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 80.
+22085	Cri de défi	40100	icon_skills.roar_tex	Cri de défi rapide	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse d'incantation de 25%.
+22086	Poussée du bouclier	80100	icon_skills.riposte_tex	Poussée du bouclier brutale	icon_crest.e_crestpassiveaggroup_tex	Augmente le taux d'agression de 120%.
+22087	Barrage au bouclier	180100	icon_skills.shieldattack_tex	Barrage au bouclier brutal	icon_crest.e_crestpassiveaggroup_tex	Augmente le taux d'agression de 200%.
+22088	Bourrade	250100	icon_skills.overhelm_tex	Bourrade puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+22089	Retraite	260100	icon_skills.backstep_tex	Retraite énergétique	icon_crest.e_crestactivecooltimereset_tex	Réduit la consommation en détermination de 100.
+22090	Cri de ralliement	270100	icon_skills.holdtheline_tex	Cri de ralliement brutal	icon_crest.e_crestpassiveaggroup_tex	Augmente le taux d'agression de 120%.
+23000	Roulade	40100	icon_skills.tumbling_tex	Roulade de prestesse	icon_crest.e_crestactivespeedup_tex	30% de chances d'augmenter la vitesse de déplacement en combat de 15 % pendant 10 secondes.
+23001	Attaque combinée	10100	icon_skills.comboattack_tex	Attaque combinée rapide	icon_crest.e_crestactiveattackspeedup_tex	10% de chances d'augmenter la vitesse d'attaque de 15 % pendant 10 secondes.
+23002	Attaque combinée	10100	icon_skills.comboattack_tex	Attaque combinée puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+23003	Surpuissance	180100	icon_skills.gatheringstrength_tex	Surpuissance brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 33.
+23004	Coup renversant	20100	icon_skills.handyslash_tex	Coup renversant puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+23005	Réaction	100100	icon_skills.risingattack_tex	Réaction puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+23007	Coup renversant	20100	icon_skills.handyslash_tex	Coup renversant alimenté	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Tourbillon de 25 % pendant quelques secondes.
+23008	Réaction	100100	icon_skills.risingattack_tex	Réaction alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Frappe bondissante de 25 % pendant quelques secondes.
+23009	Frappe verticale	80100	icon_skills.cuttingslash_tex	Frappe verticale tenace	icon_crest.e_crestactivecooltimereset_tex	50% de chances de supprimer le temps de recharge.
+23010	Attaque combinée	10100	icon_skills.comboattack_tex	Attaque combinée spirituelle	icon_crest.e_crestpassivemprecoveryup_tex	Augmente la régénération de PM de 10%.
+23011	Cri de triomphe	70100	icon_skills.shout_tex	Cri de triomphe spirituel	icon_crest.e_crestpassivemprecoveryup_tex	Augmente la régénération de PM de 50%.
+23012	Tourbillon	30100	icon_skills.sworddance_tex	Tourbillon brillant	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 63.
+23013	Célérité	50100	icon_skills.dash_tex	Célérité énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+23014	Attaque sournoise	60100	icon_skills.turnaroundattack_tex	Attaque sournoise énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 15%.
+23015	Cri de triomphe	70100	icon_skills.shout_tex	Cri de triomphe énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+23016	Poussée du cœur	120100	icon_skills.stingerblade_tex	Poussée du cœur puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+23017	Coup furieux	160100	icon_skills.ragingstrike_tex	Coup furieux puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+23018	Revers étourdissant	130100	icon_skills.flatblade_tex	Revers étourdissant puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+23019	Tête baissée	170100	icon_skills.advancingleap_tex	Tête baissée énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+23020	Frappe bondissante	90100	icon_skills.downblow_tex	Frappe bondissante brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 50.
+23021	Lame distante	140100	icon_skills.tripleslash_tex	Lame distante brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 18.
+23022	Coup de pied surprenant	150100	icon_skills.retreatingkick_tex	Coup de pied surprenant brillant	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 30.
+23023	Réaction	100100	icon_skills.risingattack_tex	Réaction énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+23024	Frappe verticale	80100	icon_skills.cuttingslash_tex	Coup vertical de restauration	icon_crest.e_crestpassivehpheal_tex	Restaure immédiatement 3% HP.
+23025	Ténacité	190100	icon_skills.tenacity_tex	Ténacité énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+23026	Coup épuisant	210100	icon_skills.veinslash_tex	Coup épuisant puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+23027	Sang-froid	200100	icon_skills.destructionvigor_tex	Sang-froid brillant	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 50.
+23028	Poussée du cœur	120100	icon_skills.stingerblade_tex	Poussée du cœur tenace	icon_crest.e_crestactivecooltimereset_tex	35% de chances de supprimer le temps de recharge.
+23029	Cri de triomphe	70100	icon_skills.shout_tex	Cri de triomphe fondé	icon_crest.e_crestactivedefenceup_tex	Augmente la constitution de 20 % pendant 10 secondes.
+23030	Attaque sournoise	60100	icon_skills.turnaroundattack_tex	Attaque sournoise embrasée	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse d'incantation de Poussée du cœur de 25 % pendant quelques secondes.
+23031	Attaque sournoise	60100	icon_skills.turnaroundattack_tex	Attaque sournoise embrasée	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse d'incantation de Coup renversant de 25 % pendant quelques secondes.
+23032	Coup furieux	160100	icon_skills.ragingstrike_tex	Coup furieux embrasé	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse d'incantation de Tourbillon de 25 % pendant quelques secondes.
+23033	Coup furieux	160100	icon_skills.ragingstrike_tex	Coup furieux de restauration	icon_crest.e_crestnextskillhpheal_tex	Restaure immédiatement 4 % du total des PV lorsque vous enchaînez avec Revers étourdissant.
+23034	Coup épuisant	210100	icon_skills.veinslash_tex	Coup épuisant énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+23035	Lame distante	140100	icon_skills.tripleslash_tex	Lame distante d'hébétude	icon_crest.e_crestactiveattackspeeddown_tex	20% de chances de réduire la vitesse d'attaque de votre adversaire de 15% pendant 5 secondes.
+23036	Ténacité	190100	icon_skills.tenacity_tex	Ténacité équilibrante	icon_crest.e_crestactivereactionresist_tex	Augmente l'équilibre de 50% pendant 15 secondes.
+23037	Sang-froid	200100	icon_skills.destructionvigor_tex	Sang-froid embrasé	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse d'incantation de Poussée du cœur de 25 % pendant quelques secondes.
+23038	Roulade	40100	icon_skills.tumbling_tex	Roulade tenace	icon_crest.e_crestactivecooltimereset_tex	20% de chances de supprimer le temps de recharge.
+23039	Roulade	40100	icon_skills.tumbling_tex	Roulade alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Coup furieux de 25 % pendant quelques secondes.
+23040	Coup renversant	20100	icon_skills.handyslash_tex	Coup renversant alimenté	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Frappe verticale de 20 % pendant quelques secondes.
+23041	Coup renversant	20100	icon_skills.handyslash_tex	Coup renversant renforcé	icon_crest.e_crestpassivereactionup_tex	Augmente les chances de renversement et de stupeur de 20%.
+23042	Coup de pied surprenant	150100	icon_skills.retreatingkick_tex	Coup de pied surprenant persistant	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 30%.
+23043	Coup de pied surprenant	150100	icon_skills.retreatingkick_tex	Coup de pied surprenant embrasé	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse d'incantation de Poussée du cœur de 25 % pendant quelques secondes.
+23044	Coup de pied surprenant	150100	icon_skills.retreatingkick_tex	Coup de pied surprenant embrasé	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse d'incantation de Coup renversant de 25 % pendant quelques secondes.
+23046	Frappe verticale	80100	icon_skills.cuttingslash_tex	Frappe verticale tenace	icon_crest.e_crestactivecooltimereset_tex	50% de chances de supprimer le temps de recharge.
+23047	Coup renversant	20100	icon_skills.handyslash_tex	Coup renversant puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+23048	Revers étourdissant	130100	icon_skills.flatblade_tex	Revers étourdissant puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+23049	Frappe verticale	80100	icon_skills.cuttingslash_tex	Coup vertical de restauration	icon_crest.e_crestpassivehpheal_tex	Restaure immédiatement 3% PV.
+23050	Attaque combinée	10100	icon_skills.comboattack_tex	Attaque combinée rapide	icon_crest.e_crestactiveattackspeedup_tex	10% de chances d'augmenter la vitesse d'attaque de 15% pendant 10 secondes.
+23051	Coup épuisant	210100	icon_skills.veinslash_tex	Coup épuisant énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 35%.
+23052	Ténacité	190100	icon_skills.tenacity_tex	Ténacité équilibrante	icon_crest.e_crestactivereactionresist_tex	Double l'équilibre pendant 15 secondes.
+23053	Ténacité	190100	icon_skills.tenacity_tex	Ténacité énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 30%.
+23054	Attaque sournoise	60100	icon_skills.turnaroundattack_tex	Attaque sournoise embrasée	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse d'incantation de Poussée du cœur de 35 % pendant quelques secondes.
+23055	Tourbillon	30100	icon_skills.sworddance_tex	Tourbillon tranchant	icon_crest.e_crestpassivecriticalup_tex	Triple le facteur de coups critiques.
+23056	Roulade	40100	icon_skills.tumbling_tex	Roulade alimentée	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de Frappe sournoise de 25 % pendant quelques secondes.
+23057	Poussée du cœur	120100	icon_skills.stingerblade_tex	Poussée du cœur tranchante	icon_crest.e_crestpassivecriticalup_tex	Triple le facteur de coups critiques.
+23058	Surpuissance	180100	icon_skills.gatheringstrength_tex	Surpuissance tranchante	icon_crest.e_crestpassivecriticalup_tex	Double le facteur de coups critiques pour la prochaine attaque.
+23059	Surpuissance	180100	icon_skills.gatheringstrength_tex	Surpuissance améliorée	icon_crest.e_crestpassiveattackup_tex	Ajoute 10% de dégâts supplémentaires à la prochaine attaque.
+23060	Coup de pied surprenant	150100	icon_skills.retreatingkick_tex	Coup de pied surprenant rapide	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse d'attaque du Coup de pied surprenant de 25%.
+23061	Entaille mesurée	230100	icon_skills.cuthead_tex	Entaille mesurée tranchante	icon_crest.e_crestpassivecriticalup_tex	Double le facteur de coups critiques.
+23062	Entaille mesurée	230100	icon_skills.cuthead_tex	Entaille mesurée puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+23063	Coup furieux	160100	icon_skills.ragingstrike_tex	Coup furieux puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+23064	Attaque sournoise	60100	icon_skills.turnaroundattack_tex	Attaque sournoise énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+23065	Lame distante	140100	icon_skills.tripleslash_tex	Lame distante d'hébétude	icon_crest.e_crestactiveattackspeeddown_tex	30% de chances de réduire la vitesse d'attaque de votre adversaire de 15% pendant 5 secondes.
+23066	Tête baissée	170100	icon_skills.advancingleap_tex	Tête baissée alimentée	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de Coup renversant de 25 % pendant quelques secondes.
+23067	Eviscération	220100	icon_skills.jawbreaker_tex	Éviscération puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+23068	Eviscération	220100	icon_skills.jawbreaker_tex	Éviscération puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+23069	Eviscération	220100	icon_skills.jawbreaker_tex	Frappe verticale puissante	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Frappe verticale de 25 % pendant quelques secondes.
+23070	Eviscération	220100	icon_skills.jawbreaker_tex	Eviscération énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+23071	Eviscération	220100	icon_skills.jawbreaker_tex	Eviscération alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts d'Entaille mesurée de 25 % pendant quelques secondes
+23072	Ténacité	190100	icon_skills.tenacity_tex	Ténacité spirituelle	icon_crest.e_crestpassivepartympup_tex	50% de chances de régénérer 6 % du total des PM chaque seconde.
+23073	Roulade	40100	icon_skills.tumbling_tex	Roulade de prestesse	icon_crest.e_crestactivespeedup_tex	30% de chances d'augmenter la vitesse de déplacement de 15 % pendant 10 secondes.
+23074	Poussée du cœur	120100	icon_skills.stingerblade_tex	Poussée du cœur puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 30%.
+23075	Coup furieux	160100	icon_skills.ragingstrike_tex	Coup furieux puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 40%.
+23076	Coup de pied surprenant	150100	icon_skills.retreatingkick_tex	Poussée du cœur rapide [Enchaînement]	icon_crest.e_crestnextskillattackspeedup_tex	Accélère l'invocation de Poussée du cœur de 25 % lorsqu'il s'agit de la prochaine compétence de l'enchaînement.
+23077	Frappe verticale	80100	icon_skills.cuttingslash_tex	Frappe verticale énergétique	icon_crest.e_crestactivecooltimereset_tex	60% de chances de supprimer le temps de recharge.
+23078	Coup renversant	20100	icon_skills.handyslash_tex	Coup renversant puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 30%.
+23079	Tourbillon	30100	icon_skills.sworddance_tex	Tourbillon de gravure	icon_crest.e_crestpassivecriticalup_tex	Triple le facteur de coups critiques.
+23080	Surpuissance	180100	icon_skills.gatheringstrength_tex	Surpuissance de gravure	icon_crest.e_crestpassivecriticalup_tex	Double le facteur de coups critiques pour la prochaine attaque.
+23081	Entaille mesurée	230100	icon_skills.cuthead_tex	Entaille mesurée de gravure	icon_crest.e_crestpassivecriticalup_tex	Triple le facteur de coups critiques.
+23082	Entaille mesurée	230100	icon_skills.cuthead_tex	Entaille mesurée puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 30%.
+23083	Éviscération			Éviscération puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+23084	Éviscération			Éviscération alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Frappe verticale de 25 % pendant quelques secondes.
+24000	Blocage frontal	20100	icon_skills.weapondefence_tex	Blocage frontal de stimulation	icon_crest.e_crestpassivempheal_tex	Restaure 3 % des PM en cas de blocage réussi.
+24001	Blocage frontal	20100	icon_skills.weapondefence_tex	Blocage frontal renforcé	icon_crest.e_crestactiveattackup_tex	30% de chances d'augmenter la puissance de 20 % pendant 5 secondes en cas de blocage réussi.
+24002	Frappe de tonnerre	30100	icon_skills.blastslash_tex	Frappe de tonnerre gravée	icon_crest.e_crestpassivecriticalup_tex	Double les chances d'infliger un coup critique.
+24003	Cyclone	100100	icon_skills.whirlwind_tex	Cyclone gravé	icon_crest.e_crestpassivecriticalup_tex	Double les chances d'infliger un coup critique.
+24004	Attaque combinée	10100	icon_skills.comboattack_tex	Attaque combinée gravée	icon_crest.e_crestpassivecriticalup_tex	Augmente le facteur de coups critiques de 90%.
+24005	Frappe de tonnerre	30100	icon_skills.blastslash_tex	Frappe de tonnerre lissée	icon_crest.e_crestpassivepenaltydelete_tex	Annule la restriction de mouvements ralentis.
+24006	Cyclone	100100	icon_skills.whirlwind_tex	Cyclone puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts supplémentaires de surcharge de 12%.
+24007	Frappe de tonnerre	30100	icon_skills.blastslash_tex	Frappe de tonnerre guérisseuse	icon_crest.e_crestpassivehpdown_tex	Réduit la consommation de PV de 50% en cas de surcharge.
+24008	Écrasement	40100	icon_skills.bash_tex	Écrasement rapide	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse d'attaque de l'Écrasement de 25%.
+24009	Cyclone	100100	icon_skills.whirlwind_tex	Cyclone hâtif	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse de charge de 25%.
+24010	Cri moqueur	70100	icon_skills.shockingshout_tex	Cyclone embrasé	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse d'incantation du Cyclone de 30&nbsp;%
+24011	Rage féroce	80100	icon_skills.berserk_tex	Rage féroce renforcée	icon_crest.e_crestactiveattackup_tex	30% de chances d'augmenter la puissance de 10 % supplémentaires pendant 20 secondes.
+24012	Frappe étourdissante	60100	icon_skills.turnback_tex	Frappe étourdissante d'influence	icon_crest.e_crestnextskillmpdown_tex	Réduit le coût en PM d'Ecrasement de 63 pendant quelques secondes.
+24013	Écrasement	40100	icon_skills.bash_tex	Écrasement puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+24015	Attaque combinée	10100	icon_skills.comboattack_tex	Attaque combinée spirituelle	icon_crest.e_crestpassivemprecoveryup_tex	Augmente la régénération de PM de 15%.
+24016	Cri de triomphe	90100	icon_skills.shout_tex	Cri de triomphe spirituel	icon_crest.e_crestpassivemprecoveryup_tex	Augmente la régénération de PM de 50%.
+24017	Colère déchaînée	120100	icon_skills.vitalconversion_tex	Colère déchaînée guérisseuse	icon_crest.e_crestpassivehpdown_tex	Réduit la consommation de PV de 50%.
+24018	Célérité	50100	icon_skills.dash_tex	Célérité énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+24019	Réaction	130100	icon_skills.risingattack_tex	Réaction énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+24020	Frappe étourdissante	60100	icon_skills.turnback_tex	Frappe étourdissante énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+24021	Frappe bondissante	110100	icon_skills.downattack_tex	Frappe bondissante puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+24022	Coup vampirique	150100	icon_skills.vampiricstrike_tex	Coup vampirique puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+24023	Frénésie	170100	icon_skills.gatheringrage_tex	Avalanche de coups persistante	icon_crest.e_crestpassivedurationup_tex	La durée de l'Avalanche de coups est rallongée de 30%.
+24024	Cri effrayant	160100	icon_skills.piercingshout_tex	Test	icon_skills.voidtrap_tex	Sans effet
+24026	Cri de triomphe	90100	icon_skills.shout_tex	Cri de triomphe énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 30%.
+24027	Réaction	130100	icon_skills.risingattack_tex	Réaction puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+24028	Soif de sang	210100	icon_skills.fury_tex	Soif de sang brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 150.
+24029	Ténacité	190100	icon_skills.tenacity_tex	Ténacité énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+24030	Destin inéluctable	200100	icon_skills.murderousvent_tex	Destin inéluctable énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+24031	Cri de triomphe	90100	icon_skills.shout_tex	Cri de triomphe d'influence	icon_crest.e_crestnextskillmpdown_tex	Réduit le coût en PM de Célérité de 75 pendant quelques secondes.
+24032	Coup mortel	180100	icon_skills.soulstrike_tex	Coup mortel puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+24033	Destin inéluctable	200100	icon_skills.murderousvent_tex	Destin inéluctable d'influence	icon_crest.e_crestnextskillmpdown_tex	Réduit le coût en PM d'Ecrasement de 63 pendant quelques secondes.
+24034	Cri moqueur	70100	icon_skills.shockingshout_tex	Test	icon_skills.voidtrap_tex	Sans effet
+24035	Cri moqueur	70100	icon_skills.shockingshout_tex	Cri moqueur alimenté	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Frappe étourdissante de 25 % pendant quelques secondes.
+24036	Colère déchaînée	120100	icon_skills.vitalconversion_tex	Colère déchaînée renforcée	icon_crest.e_crestactivereactionup_tex	Augmente le renversement de 10% pendant 20 secondes.
+24037	Colère déchaînée	120100	icon_skills.vitalconversion_tex	Colère déchaînée enragée	icon_crest.e_crestactiveinvokeskill_tex	25% de chances d'activer Avalanche de coups I.
+24038	Rage féroce	80100	icon_skills.berserk_tex	Rage féroce de prestesse	icon_crest.e_crestactivespeedup_tex	Augmente la vitesse de déplacement en combat de 20 pendant 15 secondes.
+24039	Cri effrayant	160100	icon_skills.piercingshout_tex	Cri effrayant alimenté	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Frappe étourdissante de 25 % pendant quelques secondes.
+24040	Frappe bondissante	110100	icon_skills.downattack_tex	Frappe bondissante tenace	icon_crest.e_crestactivecooltimereset_tex	30% de chances de supprimer le temps de recharge.
+24041	Destin inéluctable	200100	icon_skills.murderousvent_tex	Destin inéluctable persistant	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 30%.
+24042	Destin inéluctable	200100	icon_skills.murderousvent_tex	Destin inéluctable embrasé	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse d'incantation d'Ecrasement de 25 % pendant quelques secondes.
+24043	Destin inéluctable	200100	icon_skills.murderousvent_tex	Test	icon_skills.voidtrap_tex	Sans effet
+24044	Ténacité	190100	icon_skills.tenacity_tex	Ténacité équilibrante	icon_crest.e_crestactivereactionresist_tex	Augmente l'équilibre de 50% pendant 15 secondes.
+24045	Coup mortel	180100	icon_skills.soulstrike_tex	Coup mortel acéré	icon_crest.e_crestpassivepenaltydelete_tex	Annule la restriction de mouvements ralentis.
+24046	Frappe bondissante	110100	icon_skills.downattack_tex	Frappe bondissante embrasée	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse d'incantation de Coup mortel de 30 % pendant quelques secondes.
+24047	Frappe étourdissante	60100	icon_skills.turnback_tex	Frappe étourdissante embrasée	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse de chargement de Frappe de tonnerre de 25 % pendant quelques secondes.
+24048	Frappe de tonnerre	30100	icon_skills.blastslash_tex	Frappe de tonnerre gravée	icon_crest.e_crestpassivecriticalup_tex	Double les chances d'infliger un coup critique.
+24049	Frappe de tonnerre	30100	icon_skills.blastslash_tex	Frappe de tonnerre lissée	icon_crest.e_crestpassivepenaltydelete_tex	Annule la restriction de mouvements ralentis.
+24050	Écrasement	40100	icon_skills.bash_tex	Écrasement rapide	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse d'attaque de l'Écrasement de 25%.
+24051	Frappe de tonnerre	30100	icon_skills.blastslash_tex	Frappe de tonnerre guérisseuse	icon_crest.e_crestpassivehpdown_tex	Réduit la consommation de PV de 50%.
+24052	Cyclone	100100	icon_skills.whirlwind_tex	Cyclone hâtif	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse de charge de 25%.
+24053	Écrasement	40100	icon_skills.bash_tex	Écrasement puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+24054	Ténacité	190100	icon_skills.tenacity_tex	Ténacité équilibrante	icon_crest.e_crestactivereactionresist_tex	Double l'équilibre pendant 15 secondes.
+24055	Cri moqueur	70100	icon_skills.shockingshout_tex	Cyclone embrasé	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse d'incantation du Cyclone de 30&nbsp;%
+24056	Destin inéluctable	200100	icon_skills.murderousvent_tex	Destin inéluctable embrasé	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse d'incantation d'Ecrasement de 30 % pendant quelques secondes.
+24057	Cri de triomphe	90100	icon_skills.shout_tex	Cri de triomphe fondé	icon_crest.e_crestactivedefenceup_tex	Augmente la constitution de 16 pendant 12 secondes.
+24058	Célérité	50100	icon_skills.dash_tex	Célérité tenace	icon_crest.e_crestactivecooltimereset_tex	35% de chances de supprimer le temps de recharge.
+24059	Frappe bondissante	110100	icon_skills.downattack_tex	Frappe bondissante tranchante	icon_crest.e_crestpassivecriticalup_tex	Double le facteur de coups critiques.
+24060	Ténacité	190100	icon_skills.tenacity_tex	Ténacité de restauration	icon_crest.e_crestpassivehpheal_tex	Restaure immédiatement 12% du total des PV.
+24061	Ténacité	190100	icon_skills.tenacity_tex	Ténacité spirituelle	icon_crest.e_crestpassivemprecoveryup_tex	50% de chances de régénérer 6 % du total des PM chaque seconde.
+24062	Réaction	130100	icon_skills.risingattack_tex	Réaction furieuse	icon_crest.e_crestpassivehpattackup_tex	Vos dégâts augmentent tandis que vos PV baissent (jusqu'à 4 fois).
+24063	Frappe évasive	240100	icon_skills.ribbreaker_tex	Frappe évasive puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+24064	Frappe évasive	240100	icon_skills.ribbreaker_tex	Frappe évasive taillante	icon_crest.e_crestpassivecriticalup_tex	Double les chances d'infliger un coup critique.
+24065	Blocage frontal	20100	icon_skills.weapondefence_tex	Blocage frontal de stimulation	icon_crest.e_crestpassivemprecoveryup_tex	Restaure 3% des PM en cas de blocage réussi.
+24066	Cyclone	100100	icon_skills.whirlwind_tex	Cyclone gravé	icon_crest.e_crestpassivecriticalup_tex	Double les chances d'infliger un coup critique.
+24067	Frappe de tonnerre	30100	icon_skills.blastslash_tex	Frappe de tonnerre rapide	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse de charge de 25%.
+24068	Frappe étourdissante	60100	icon_skills.turnback_tex	Frappe étourdissante tenace	icon_crest.e_crestactivecooltimereset_tex	35% de chances de supprimer le temps de recharge.
+24069	Incassable	270100	icon_skills.selfbuff_tex	Incassable énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+24070	Incassable	270100	icon_skills.selfbuff_tex	Incassable énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+24071	Incassable	270100	icon_skills.selfbuff_tex	Incassable persistant	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 20%.
+24072	Offensive foudroyante	230100	icon_skills.sideslash_tex	Frappe de tonnerre embrasée	icon_crest.e_crestnextskillattackspeedup_tex	Accélère la vitesse d'incantation de Frappe de tonnerre de 25 % pendant quelques secondes.
+24073	Offensive foudroyante	230100	icon_skills.sideslash_tex	Offensive foudroyante spirituelle	icon_crest.e_crestpassivempdown_tex	Augmente la régénération de PM de 20%.
+24074	Offensive foudroyante	230100	icon_skills.sideslash_tex	Offensive foudroyante énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+24075	Coup destructeur	220100	icon_skills.throwaxe_tex	Coup destructeur brillant	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 150.
+24076	Coup destructeur	220100	icon_skills.throwaxe_tex	Coup destructeur de prestesse	icon_crest.e_crestpassivechargemove_tex	Augmente la vitesse de déplacement en combat de 20 pendant 15 secondes.
+24077	Coup destructeur	220100	icon_skills.throwaxe_tex	Coup destructeur tranchant	icon_crest.e_crestpassivecriticalup_tex	Double le facteur de coups critiques.
+24078	Offensive foudroyante	230100	icon_skills.sideslash_tex	Offensive foudroyante	icon_crest.e_crestpassiveaggroup_tex	Augmente la vitesse d'incantation de 25%.
+24080	Blocage frontal	20100	icon_skills.weapondefence_tex	Riposte frontale alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Riposte frontale de 25 % pendant quelques secondes.
+24081	Blocage frontal	20100	icon_skills.weapondefence_tex	Riposte frontale d'influence	icon_crest.e_crestnextskillmpdown_tex	Réduit le coût en PM de Riposte frontale de 115 pendant quelques secondes.
+24082	Riposte frontale	300100	icon_skills.determinationofadvance_tex	Riposte frontale menaçante	icon_crest.e_crestpassiveaggroup_tex	Augmente le taux d'agression de 100%.
+24083	Frappe punitive	320100	icon_skills.upperslashcombo_tex	Frappe punitive brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 25.
+24084	Frappe punitive	320100	icon_skills.upperslashcombo_tex	Frappe punitive menaçante	icon_crest.e_crestpassiveaggroup_tex	Augmente le taux d'agression de 100%.
+24085	Frappe évasive	240100	icon_skills.ribbreaker_tex	Roulade énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+24086	Rage féroce	80100	icon_skills.berserk_tex	Rage féroce menaçante	icon_crest.e_crestpassiveaggroup_tex	Augmente le taux d'agression de 20%.
+24087	Rage féroce	80100	icon_skills.berserk_tex	Rage féroce brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 60.
+24088	Terrasser	310100	icon_skills.assaultattack_tex	Terrasser puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+24089	Colère déchaînée	120100	icon_skills.vitalconversion_tex	Colère déchaînée énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+24090	Terrasser	310100	icon_skills.assaultattack_tex	Terrasser énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+24091	Terrasser	310100	icon_skills.assaultattack_tex	Terrasser de prestesse	icon_crest.e_crestactivespeedup_tex	Augmente la vitesse de déplacement en combat de 10 pendant 7 secondes.
+24092	Rage féroce	80100	icon_skills.berserk_tex	Rage féroce renforcée	icon_crest.e_crestactiveattackup_tex	40% de chances d'augmenter la puissance de 10 % supplémentaires pendant 20 secondes.
+24093	Frénésie	170100	icon_skills.gatheringrage_tex	Avalanche de coups persistante	icon_crest.e_crestpassivedurationup_tex	La durée de l'Avalanche de coups est rallongée de 35%.
+24094	Coup mortel	180100	icon_skills.soulstrike_tex	Coup mortel puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 30%.
+24095	Frappe de tonnerre	30100	icon_skills.blastslash_tex	Frappe de tonnerre lissée	icon_crest.e_crestpassivepenaltydelete_tex	Annule la restriction de mouvements ralentis.
+24096	Cyclone	100100	icon_skills.whirlwind_tex	Cyclone rapide	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse de charge de 30%.
+24097	Écrasement	40100	icon_skills.bash_tex	Écrasement puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 30%.
+24098	Frappe évasive	240100	icon_skills.ribbreaker_tex	Frappe évasive puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+24099	Cyclone	100100	icon_skills.whirlwind_tex	Cyclone de gravure	icon_crest.e_crestpassivecriticalup_tex	Double le facteur de coups critiques.
+24100	Incassable	270100	icon_skills.selfbuff_tex	Incassable énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 50%.
+24101	Offensive foudroyante	230100	icon_skills.sideslash_tex	Frappe de tonnerre rapide [Enchaînement]	icon_crest.e_crestnextskillattackspeedup_tex	Accélère la vitesse d'incantation de Frappe de tonnerre de 25 % pendant quelques secondes.
+24102	Terrasser	310100	icon_skills.assaultattack_tex	Terrasser énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+24103	Terrasser	310100	icon_skills.assaultattack_tex	Terrasser de prestesse	icon_crest.e_crestactivespeedup_tex	Augmente la vitesse de déplacement au combat de 10 pendant 7 secondes.
+25000	Boule de feu	10100	icon_skills.fireball_tex	Boule de feu de précision	icon_crest.e_crestpassiverangeup_tex	Augmente la portée de 3 mètres.
+25001	Barrage de flammes	200100	icon_skills.trackinginferno_tex	Glyphe du rapide	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse de charge de 30%.
+25003	Chute de météores	60100	icon_skills.hellfire_tex	Glyphe de rapidité	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse d'incantation de 17%.
+25004	Barrière de mana	100100	icon_skills.manashield_tex	Barrière de mana renforcée	icon_crest.e_crestactiveattackup_tex	Augmente la puissance de 10 % pendant 15 secondes.
+25005	Barrière de mana	100100	icon_skills.manashield_tex	Barrière de mana fondée	icon_crest.e_crestactivedefenceup_tex	Augmente la constitution de 20 % pendant 15 secondes.
+25006	Piège de foudre	30100	icon_skills.shocktrap_tex	Glyphe d'enchaînement [Chute de météores puissante]	icon_crest.e_crestnextskillattackup_tex	Les dégâts de la Chute de météores augmentent de 20 % quand la compétence est utilisée dans un enchaînement.
+25009	Infusion de mana	50100	icon_skills.mpcondensing_tex	Infusion de mana spirituelle	icon_crest.e_crestpassivemprecoveryup_tex	Augmente la régénération de PM de 10%.
+25010	Fortifiant magique	340100	icon_skills.c5_strengthenmana	Surcharge énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+25011	Barrière de mana	100100	icon_skills.manashield_tex	Barrière de mana énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+25012	Pulsation du vide	120100	icon_skills.lightofruin_tex	Pulsation du vide énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+25013	Sphère glaciale	20100	icon_skills.c5_iceorb	Glyphe d'énergie	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 30%.
+25014	Piège de foudre	30100	icon_skills.shocktrap_tex	Piège de foudre brillant	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 100.
+25015	Pulsation du vide	120100	icon_skills.lightofruin_tex	Pulsation du vide de gravure	icon_crest.e_crestpassivecriticalup_tex	Augmente le facteur de coups critiques de 20&nbsp;% en attaquant des monstres.
+25016	Impulsion arcanique	40100	icon_skills.blastball_tex	Impulsion arcanique puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+25017	Chute de météores	60100	icon_skills.hellfire_tex	Glyphe de brillance	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 250.
+25018	Explosion de douleur	160100	icon_skills.disease_tex	Explosion de douleur persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 40%.
+25019	Colonne de feu	80100	icon_skills.auraburn_tex	Colonne de feu puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+25021	Extraction de mana			Éclat de glyphe du passé	icon_skills.voidtrap_tex	Ce vieux glyphe fragmenté n'est plus utilisé.
+25022	Explosion spirituelle	130100	icon_skills.sleepwind_tex	Explosion spirituelle persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 25%.
+25023	Siphon de mana	190100	icon_skills.manaextortion_tex	Siphon de mana spirituel	icon_crest.e_crestpassivemprecoveryup_tex	Augmente la régénération de PM de 10%.
+25025	Barrage de flammes	200100	icon_skills.trackinginferno_tex	Barrage de flammes brillant	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 150.
+25026	Attaque torpille	110100	icon_skills.c5_lightningstruck	Glyphe de brillance	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 150.
+25027	Piège douloureux	170100	icon_skills.blastmine_tex	Piège douloureux brillant	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 75.
+25028	Retraite glaciale	180100	icon_skills.freezingtheearth_tex	Retraite glaciale persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 40%.
+25029	Impulsion arcanique	40100	icon_skills.blastball_tex	Glyphe d'enchaînement [Sphère glaciale puissante]	icon_crest.e_crestnextskillattackup_tex	Les dégâts de la Sphère glaciale augmentent de 25 % quand la compétence est utilisée dans un enchaînement.
+25030	Piège douloureux	170100	icon_skills.blastmine_tex	Piège douloureux d'influence	icon_crest.e_crestnextskillmpdown_tex	Réduit le coût en PM de Colonne de feu de 80 pendant quelques secondes.
+25031	Attaque torpille	110100	icon_skills.c5_lightningstruck	Glyphe de gravure	icon_crest.e_crestpassivecriticalup_tex	Double le facteur de coups critiques en attaquant des monstres.
+25032	Infusion de mana	50100	icon_skills.mpcondensing_tex	Glyphe d'énergie	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 30%.
+25033	Gyre temporel	250100	icon_skills.curseofshackle_tex	Gyre temporel énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 15%.
+25034	Souffle embrasé	220100	icon_skills.burningbreath_tex	Souffle embrasé persistant	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 20%.
+25035	Fortifiant magique	340100	icon_skills.c5_strengthenmana	Glyphe de persistance	icon_crest.e_crestpassiveskilleffectup_tex	Augmente la durée de l'effet du Fortifiant magique de 30%.
+25036	Epuisement nerveux	210100	icon_skills.neurasthenia_tex	Epuisement nerveux énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+25037	Volée de mana	230100	icon_skills.mpsink_tex	Volée de mana persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 40%.
+25038	Réaction	140100	icon_skills.risingattack_tex	Réaction énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+25039	Réaction	140100	icon_skills.risingattack_tex	Réaction de bouclier	icon_crest.e_crestactiveinvokeskill_tex	50% de chances d'activer Barrière de mana II.
+25040	Siphon de mana	190100	icon_skills.manaextortion_tex	Siphon de mana énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+25041	Barrière de mana	100100	icon_skills.manashield_tex	Barrière de mana persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 50%.
+25042	Siphon de mana	190100	icon_skills.manaextortion_tex	Siphon de mana embrasé	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse d'incantation de Barrage embrasé de 25 % pendant quelques secondes.
+25043	Piège de foudre	30100	icon_skills.shocktrap_tex	Piège de foudre embrasé	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse d'incantation de Colonne de feu de 25 % pendant quelques secondes.
+25044	Souffle embrasé	220100	icon_skills.burningbreath_tex	Souffle embrasé alimenté	icon_crest.e_crestnextskillattackup_tex	Augmente la vitesse d'incantation de Barrage embrasé de 35 % pendant quelques secondes.
+25045	Retraite glaciale	180100	icon_skills.freezingtheearth_tex	Retraite glaciale embrasée	icon_crest.e_crestnextskillattackspeedup_tex	Augmente de la vitesse d'incantation de Piège de foudre de 40 % pendant quelques secondes.
+25046	Gyre temporel	250100	icon_skills.curseofshackle_tex	Gyre temporel multiplicatif	icon_crest.e_crestpassivelockontargetup_tex	Augmente le nombre de cibles verrouillées de 100%.
+25047	Gyre temporel	250100	icon_skills.curseofshackle_tex	Glyphe d'enchaînement [Chute de météores preste]	icon_crest.e_crestnextskillattackspeedup_tex	La vitesse de rechargement de la Chute de météores augmente de 25 % quand la compétence est utilisée dans un enchaînement.
+25048	Explosion spirituelle	130100	icon_skills.sleepwind_tex	Explosion spirituelle hâtive	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse d'incantation de 30%.
+25049	Explosion spirituelle	130100	icon_skills.sleepwind_tex	Explosion spirituelle tenace	icon_crest.e_crestactivecooltimereset_tex	25% de chances de supprimer le temps de recharge.
+25050	Sphère glaciale	20100	icon_skills.c5_iceorb	Glyphe de persistance	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 50%.
+25051	Sphère glaciale	20100	icon_skills.c5_iceorb	Glyphe d'interdiction	icon_crest.e_crestpassiveskilleffectup_tex	Réduit la vitesse de déplacement de l'ennemi de 20% supplémentaires.
+25052	Sphère glaciale	20100	icon_skills.c5_iceorb	Glyphe d'enchaînement [explosion spirituelle]	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse d'incantation d'Explosion spirituelle de 40 % pendant quelques secondes.
+25053	Explosion de douleur	160100	icon_skills.disease_tex	Explosion de douleur florissante	icon_crest.e_crestpassiveskilleffectup_tex	Augmente les dégâts répétés de 20%.
+25054	Explosion de douleur	160100	icon_skills.disease_tex	Explosion de douleur ralentissante	icon_crest.e_crestactivespeeddown_tex	100% de chances de réduire la vitesse de déplacement de l'adversaire de 50% pendant 7 secondes.
+25055	Chute de météores	60100	icon_skills.hellfire_tex	Glyphe de gravure	icon_crest.e_crestpassivecriticalup_tex	Double le facteur de coups critiques en attaquant des monstres.
+25056	Barrage de flammes	200100	icon_skills.trackinginferno_tex	Barrage de flammes multiplicatif	icon_crest.e_crestpassivelockontargetup_tex	Augmente le nombre de cibles verrouillées de 0%.
+25057	Impulsion arcanique	40100	icon_skills.blastball_tex	Test	icon_skills.voidtrap_tex	Sans effet
+25058	Attaque torpille	110100	icon_skills.c5_lightningstruck	Glyphe d'énergie	icon_crest.e_crestactivecooltimereset_tex	30% de chances de supprimer le temps de recharge.
+25059	Colonne de feu	80100	icon_skills.auraburn_tex	Colonne de feu embrasée	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse d'incantation de Piège de foudre de 40 % pendant quelques secondes.
+25060	Explosion spirituelle	130100	icon_skills.sleepwind_tex	Explosion spirituelle partagée	icon_crest.e_crestpassivethorns_tex	Augmente de 30% les chances de provoquer un affaiblissement en touchant plusieurs cibles.
+25061	Chute de météores	60100	icon_skills.hellfire_tex	Glyphe d'énergie	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 10%.
+25062	Retraite glaciale	180100	icon_skills.freezingtheearth_tex	Retraite glaciale embrasée	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse de charge d'Impulsion arcanique de 30 % pendant quelques secondes.
+25063	Téléportation	260100	icon_skills.shortteleport_tex	Téléportation énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 15%.
+25064	Colonne de feu	80100	icon_skills.auraburn_tex	Colonne de feu énergique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+25065	Tempête de grêle	270100	icon_skills.icestorm_tex	Tempête de grêle énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+25066	Tempête de grêle	270100	icon_skills.icestorm_tex	Tempête de grêle brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 300.
+25068	Fortifiant magique	340100	icon_skills.c5_strengthenmana	Glyphe de persistance	icon_crest.e_crestpassiveskilleffectup_tex	Augmente la durée de l'effet du Fortifiant magique de 40%.
+25069	Chute de météores	60100	icon_skills.hellfire_tex	Glyphe de rapidité	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse d'incantation de 25%.
+25070	Chute de météores	60100	icon_skills.hellfire_tex	Glyphe d'énergie	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+25071	Piège de foudre	30100	icon_skills.shocktrap_tex	Glyphe d'enchaînement [Chute de météores puissante]	icon_crest.e_crestnextskillattackup_tex	Les dégâts de la Chute de météores augmentent de 20 % quand la compétence est utilisée dans un enchaînement.
+25072	Pulsation du vide	120100	icon_skills.lightofruin_tex	Pulsation du vide de gravure	icon_crest.e_crestpassivecriticalup_tex	Augmente le facteur de coups critiques en attaquant des monstres.
+25073	Explosion spirituelle	130100	icon_skills.sleepwind_tex	Explosion spirituelle partagée	icon_crest.e_crestpassivethorns_tex	Augmente de 30% les chances de provoquer un affaiblissement en touchant plusieurs cibles.
+25074	Epuisement nerveux	210100	icon_skills.neurasthenia_tex	Epuisement nerveux énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 30%.
+25075	Piège de foudre	30100	icon_skills.shocktrap_tex	Piège de foudre brillant	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 100.
+25076	Gyre temporel	250100	icon_skills.curseofshackle_tex	Gyre temporel multiplicatif	icon_crest.e_crestpassivelockontargetup_tex	Augmente le nombre de cibles verrouillées de 100%.
+25077	Colonne de feu	80100	icon_skills.auraburn_tex	Colonne de feu de bouclier	icon_crest.e_crestpassivehpattackup_tex	8% de chances d'activer Barrière de mana I.
+25078	Explosion de douleur	160100	icon_skills.disease_tex	Explosion de douleur énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+25079	Souffle embrasé	220100	icon_skills.burningbreath_tex	Souffle embrasé entravant	icon_crest.e_crestpassivetargethealdown_tex	Réduit la Régénération de PV des joueurs hostiles de 30&nbsp;% pendant 10 secondes.
+25080	Barrière de mana	100100	icon_skills.manashield_tex	Barrière de mana de protection	icon_crest.e_crestpassivemaxabsorbup_tex	Augmente l'absorption des dégâts de 30 %.
+25081	Impulsion arcanique	40100	icon_skills.blastball_tex	Impulsion arcanique tranchante	icon_crest.e_crestpassivecriticalup_tex	Double le facteur de coups critiques pendant 5 secondes.
+25082	Impulsion arcanique	40100	icon_skills.blastball_tex	Impulsion arcanique acérée	icon_crest.e_crestpassivechargemove_tex	Permet de se déplacer tout en chargeant.
+25083	Peau de pierre	280100	icon_skills.stoneshape_tex	Peau de pierre énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+25084	Peau de pierre	280100	icon_skills.stoneshape_tex	Peau de pierre énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+25085	Barrière de mana	100100	icon_skills.manashield_tex	Barrière de mana persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 50%.
+25086	Chute de météores	60100	icon_skills.hellfire_tex	Glyphe de brillance	icon_crest.e_crestactivempzero_tex	Réduit le coût en PM de 400.
+25087	Retraite	70100	icon_skills.backstep_tex	Retraite de prestesse	icon_crest.e_crestpassiveskilleffectup_tex	Augmente la vitesse de déplacement de 20 % pendant 2 secondes.
+25088	Explosion de douleur	160100	icon_skills.disease_tex	Glyphe d'hébétude	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Barrage de flammes de 25 % pendant quelques secondes.
+25089	Nova	300100	icon_skills.manaburst_tex	Nova tranchante	icon_crest.e_crestpassivecriticalup_tex	Double le facteur de coups critiques pendant 4 secondes.
+25090	Nova	300100	icon_skills.manaburst_tex	Nova fondée	icon_crest.e_crestactivedefenceup_tex	Augmente la constitution de 20 % pendant 15 secondes.
+25091	Nova	300100	icon_skills.manaburst_tex	Nova énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+25092	Nova	300100	icon_skills.manaburst_tex	Nova de rapidité	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse d'incantation de 30%.
+25093	Barrière distordante	310100	icon_skills.distortionfield_tex	Barrière distordante énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+25094	Barrière distordante	310100	icon_skills.distortionfield_tex	Barrière distordante énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+25095	Barrière distordante	310100	icon_skills.distortionfield_tex	Barrière distordante persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 100%.
+25096	Barrage de flammes	200100	icon_skills.trackinginferno_tex	Glyphe du rapide	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse de charge de 40%.
+25097	Pulsation du vide	120100	icon_skills.lightofruin_tex	Pulsation du vide énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+25098	Colonne de feu	80100	icon_skills.auraburn_tex	Colonne de feu puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+25099	Souffle embrasé	220100	icon_skills.burningbreath_tex	Souffle embrasé persistant	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 20%.
+25100	Retraite glaciale	180100	icon_skills.freezingtheearth_tex	Piège de foudre rapide [Enchaînement]	icon_crest.e_crestnextskillattackspeedup_tex	Augmente de la vitesse d'incantation de Piège de foudre de 40 % pendant quelques secondes.
+25101	Attaque torpille	110100	icon_skills.c5_lightningstruck	Bombe de magma énergétique	icon_crest.e_crestactivecooltimereset_tex	40% de chances de supprimer le temps de recharge.
+25102	Retraite glaciale	180100	icon_skills.freezingtheearth_tex	Impulsion arcanique rapide	icon_crest.e_crestnextskillattackspeedup_tex	Accélère l'invocation d'Impulsion arcanique de 30 % lorsqu'il s'agit de la prochaine compétence de l'enchaînement.
+25103	Fortifiant magique	340100	icon_skills.c5_strengthenmana	Glyphe de persistance	icon_crest.e_crestpassiveskilleffectup_tex	Augmente la durée de l'effet du Fortifiant magique de 40%.
+25104	Gyre temporel	250100	icon_skills.curseofshackle_tex	Gyre temporel multiplicatif	icon_crest.e_crestpassivelockontargetup_tex	Augmente le nombre de cibles verrouillées de 100%.
+25105	Impulsion arcanique	40100	icon_skills.blastball_tex	Impulsion arcanique de gravure	icon_crest.e_crestpassivecriticalup_tex	Augmente le facteur de coups critiques de 150 % pendant 5 secondes.
+25106	Peau de pierre	280100	icon_skills.stoneshape_tex	Peau de pierre énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 30%.
+25107	Nova	300100	icon_skills.manaburst_tex	Nova de gravure	icon_crest.e_crestpassivecriticalup_tex	Ajoute 150 % au facteur de coups critiques pendant 4 secondes.
+26000	Volée de flèches	20100	icon_skills.arrowshower_tex	Volée de flèches multiplicative	icon_crest.e_crestpassivelockontargetup_tex	Augmente le nombre de cibles verrouillées de 0%.
+26001	Flèche irradiante	30100	icon_skills.chargearrow_tex	Flèche irradiante de précision	icon_crest.e_crestpassiverangeup_tex	Augmente la portée de 3 mètres.
+26002	Flèche pénétrante	40100	icon_skills.througharrow_tex	Flèche pénétrante de précision	icon_crest.e_crestpassiverangeup_tex	Augmente la portée de 3 mètres.
+26004	Flèche pénétrante	40100	icon_skills.througharrow_tex	Flèche pénétrante puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+26005	Piège empoisonné	110100	icon_skills.venomtrap_tex	Test	s_tex	Sans effet
+26006	Piège paralysant	90100	icon_skills.webtrap_tex	Piège paralysant persistant	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 50%.
+26007	Piège assommant	230100	icon_skills.paralysistraparrow_tex	Piège assommant persistant	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 25%.
+26008	Flèche	10100	icon_skills.arrowshot_tex	Flèche ralentissante	icon_crest.e_crestactivespeeddown_tex	5% de chances de réduire la vitesse de déplacement de l'adversaire de 50% pendant 3 secondes.
+26009	Flèche	10100	icon_skills.arrowshot_tex	Flèche de sape	icon_crest.e_crestactivestun_tex	5% de chances d'étourdir l'adversaire.
+26010	Flèche	10100	icon_skills.arrowshot_tex	Flèche perçante	icon_crest.e_crestactivekill_tex	10% de chances de doubler les dégâts.
+26011	Flèche irradiante	30100	icon_skills.chargearrow_tex	Flèche irradiante lissée	icon_crest.e_crestpassivepenaltydelete_tex	Annule la restriction de mouvements ralentis.
+26012	Flèche pénétrante	40100	icon_skills.througharrow_tex	Flèche pénétrante lissée	icon_crest.e_crestpassivepenaltydelete_tex	Annule la restriction de mouvements ralentis.
+26017	Rafale de flèches	80100	icon_skills.rapidshot_tex	Rafale de flèches tenace	icon_crest.e_crestactivecooltimereset_tex	15% de chances de supprimer le temps de recharge.
+26018	Retraite	60100	icon_skills.backstep_tex	Retraite énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 29%.
+26019	Mort feinte	70100	icon_skills.feigndeath_tex	Mort feinte énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+26020	Réaction	140100	icon_skills.risingattack_tex	Réaction puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+26021	Pluie de flèches	50100	icon_skills.arrowfall_tex	Pluie de flèches énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+26022	Trait de rupture	160100	icon_skills.escapingattack_tex	Trait de rupture énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+26023	Piège incendiaire	150100	icon_skills.explosiontrap_tex	Piège incendiaire puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+26024	Flèche de toile	170100	icon_skills.spiderarrow_tex	Flèche de toile persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 40%.
+26025	Réaction	140100	icon_skills.risingattack_tex	Réaction énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+26026	Piège empoisonné	110100	icon_skills.venomtrap_tex	Test	icon_skills.voidtrap_tex	Sans effet
+26027	Flèche empoisonnée	190100	icon_skills.venomarrow_tex	Flèche empoisonnée persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 40%.
+26028	Œil de faucon	210100	icon_skills.focusstance_tex	Œil de faucon d'influence	icon_crest.e_crestnextskillmpdown_tex	Réduit le coût en PM de Flèche de toile de 13 pendant quelques secondes.
+26029	Flèche d'entrave	200100	icon_skills.contaningshot_tex	Flèche d'entrave persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 50%.
+26030	Marque de Velik	120100	icon_skills.markingofarcher_tex	Marque de Velik d'influence	icon_crest.e_crestnextskillmpdown_tex	Réduit le coût en PM de Flèche empoisonnée de 31 pendant quelques secondes.
+26031	Volée de flèches	20100	icon_skills.arrowshower_tex	Volée de flèches d'influence	icon_crest.e_crestnextskillmpdown_tex	Réduit le coût en PM de Piège incendiaire de 75 pendant quelques secondes.
+26032	Trait de rupture	160100	icon_skills.escapingattack_tex	Trait de rupture alimenté	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Flèche pénétrante de 25 % pendant quelques secondes.
+26033	Flèche de toile	170100	icon_skills.spiderarrow_tex	Flèche de toile de prestesse	icon_crest.e_crestactivespeedup_tex	20% de chances d'augmenter la vitesse de déplacement en combat de 10 pendant 12 secondes.
+26034	Flèche d'entrave	200100	icon_skills.contaningshot_tex	Flèche d'entrave énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+26035	Flèche d'entrave	200100	icon_skills.contaningshot_tex	Flèche d'entrave de sape	icon_crest.e_crestactivestun_tex	20% de chances d'étourdir la cible pendant 3 secondes.
+26036	Marque de Velik	120100	icon_skills.markingofarcher_tex	Marque de Velik persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 25%.
+26037	Marque de Velik	120100	icon_skills.markingofarcher_tex	Marque de Velik embrasée	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse d'incantation de Flèche empoisonnée de 25 % pendant quelques secondes.
+26038	Volée de flèches	20100	icon_skills.arrowshower_tex	Volée de flèches tenace	icon_crest.e_crestactivecooltimereset_tex	30% de chances de supprimer le temps de recharge.
+26039	Volée de flèches	20100	icon_skills.arrowshower_tex	Volée de flèches embrasée	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse d'incantation de Piège étourdissant de 40 % pendant quelques secondes.
+26040	Combat rapproché	180100	icon_skills.turningkick_tex	Combat rapproché puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 20%.
+26041	Rafale de flèches	80100	icon_skills.rapidshot_tex	Rafale de flèches spirituelle	icon_crest.e_crestpassivemprecoveryup_tex	Augmente la régénération de PM de 20% lorsque vous touchez la cible.
+26042	Salve ultime	220100	icon_skills.chain_arrow	Salve ultime tenace	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de rechargement de 25%.
+26043	Trait de rupture	160100	icon_skills.escapingattack_tex	Trait de rupture de prestesse	icon_crest.e_crestactivespeedup_tex	30% de chances d'augmenter la vitesse de déplacement en combat de 10 pendant 8 secondes.
+26044	Trait de rupture	160100	icon_skills.escapingattack_tex	Test	icon_skills.voidtrap_tex	Sans effet
+26045	Mort feinte	70100	icon_skills.feigndeath_tex	Mort feinte régénérante	icon_crest.e_crestpassivehpheal_tex	Soigne 2 % du total des PV toutes les secondes pendant 10 secondes.
+26046	Piège incendiaire	150100	icon_skills.explosiontrap_tex	Piège incendiaire alimenté	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Volée de flèches de 25 % pendant quelques secondes.
+26047	Pluie de flèches	50100	icon_skills.arrowfall_tex	Pluie de flèches puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+26048	Piège assommant	230100	icon_skills.paralysistraparrow_tex	Piège assommant embrasé	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse d'incantation de Flèche pénétrante de 30 % pendant quelques secondes.
+26049	Volée de flèches	20100	icon_skills.arrowshower_tex	Volée de flèches embrasée	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse d'incantation de Flèche pénétrante de 30 % pendant quelques secondes.
+26050	Flèche empoisonnée	190100	icon_skills.venomarrow_tex	Flèche empoisonnée embrasée	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse d'incantation de Flèche irradiante de 30 % pendant quelques secondes.
+26051	Salve ultime	220100	icon_skills.chain_arrow	Salve ultime embrasée	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse d'incantation de Flèche pénétrante de 30 % pendant quelques secondes.
+26053	Flèche pénétrante	40100	icon_skills.througharrow_tex	Flèche pénétrante puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+26054	Flèche pénétrante	40100	icon_skills.througharrow_tex	Flèche pénétrante lissée	icon_crest.e_crestpassivepenaltydelete_tex	Annule la restriction de mouvements ralentis.
+26055	Flèche irradiante	30100	icon_skills.chargearrow_tex	Flèche irradiante lissée	icon_crest.e_crestpassivepenaltydelete_tex	Annule la restriction de mouvements ralentis.
+26056	Retraite	60100	icon_skills.backstep_tex	Retraite énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 29%.
+26057	Flèche pénétrante	40100	icon_skills.througharrow_tex	Flèche pénétrante de précision	icon_crest.e_crestpassiverangeup_tex	Augmente la portée de 3 mètres.
+26058	Piège paralysant	90100	icon_skills.webtrap_tex	Piège paralysant persistant	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 50%.
+26059	Volée de flèches	20100	icon_skills.arrowshower_tex	Volée de flèches embrasée	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse d'incantation de Flèche pénétrante de 40 % pendant quelques secondes.
+26060	Volée de flèches	20100	icon_skills.arrowshower_tex	Piège assommant embrasé	icon_crest.e_crestnextskillattackspeedup_tex	Augment la vitesse d'incantation de Piège étourdissant de 50 % pendant quelques secondes.
+26061	Volée de flèches	20100	icon_skills.arrowshower_tex	Volée de flèches tenace	icon_crest.e_crestactivecooltimereset_tex	40% de chances de supprimer le temps de recharge.
+26062	Mort feinte	70100	icon_skills.feigndeath_tex	Mort feinte régénérante	icon_crest.e_crestpassivehpheal_tex	Soigne 3 % du total des PV toutes les secondes pendant 10 secondes.
+26063	Flèche irradiante	30100	icon_skills.chargearrow_tex	Flèche irradiante guérisseuse	icon_crest.e_crestpassiveoverchargehpdown_tex	Réduit la consommation de PV de 40%.
+26064	Flèche irradiante	30100	icon_skills.chargearrow_tex	Flèche irradiante de gravure	icon_crest.e_crestpassivecriticalup_tex	Triple les chances de coups critiques.
+26065	Combat rapproché	180100	icon_skills.turningkick_tex	Combat rapproché de prestesse	icon_crest.e_crestpassiveskilleffectup_tex	Augmente la vitesse de déplacement en combat de 50 pendant 3 secondes.
+26066	Combat rapproché	180100	icon_skills.turningkick_tex	Combat rapproché persistant	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 40%.
+26067	Trait de rupture	160100	icon_skills.escapingattack_tex	Trait de rupture ralentissant	icon_crest.e_crestactivespeeddown_tex	100% de chances de réduire la vitesse de déplacement de l'adversaire de 40% pendant 6 secondes.
+26068	Piège assommant	230100	icon_skills.paralysistraparrow_tex	Piège assommant énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+26069	Piège entravant	240100	icon_skills.webtraparrow_tex	Piège entravant énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+26070	Piège explosif	250100	icon_skills.explosiontraparrow_tex	Piège explosif puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+26071	Piège assommant	230100	icon_skills.paralysistraparrow_tex	Piège assommant énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 30%.
+26072	Tir percutant	260100	icon_skills.thunderdrake_tex	Glyphe de gravure	icon_crest.e_crestpassivecriticalup_tex	Double les chances de porter un coup critique
+26073	Piège explosif	250100	icon_skills.explosiontraparrow_tex	Piège explosif puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 35%.
+26074	Trait de rupture	160100	icon_skills.escapingattack_tex	Trait de rupture énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+26075	Flèche d'entrave	200100	icon_skills.contaningshot_tex	Flèche d'entrave énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+26076	Rafale de flèches	80100	icon_skills.rapidshot_tex	Rafale de flèches puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 20%.
+26077	Pluie de flèches	50100	icon_skills.arrowfall_tex	Pluie de flèches rapide	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse d'attaque de 40%.
+26084	Ténacité	310100	icon_skills.tenacity_tex	Ténacité équilibrante	icon_crest.e_crestactivereactionresist_tex	Augmente l'équilibre de 150 & pendant 15 secondes.
+26085	Ténacité	310100	icon_skills.tenacity_tex	Ténacité équilibrante	icon_crest.e_crestactivereactionresist_tex	Double l'équilibre pendant 15 secondes.
+26086	Ténacité	310100	icon_skills.tenacity_tex	Ténacité spirituelle	icon_crest.e_crestpassivepartympup_tex	50% de chances de régénérer 6 % du total des PM chaque seconde.
+26087	Ténacité	310100	icon_skills.tenacity_tex	Ténacité énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+26088	Ténacité	310100	icon_skills.tenacity_tex	Ténacité énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+26089	Tir percutant	260100	icon_skills.thunderdrake_tex	Tir percutant de rapidité	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse d'incantation de 30%.
+26090	Tir percutant	260100	icon_skills.thunderdrake_tex	Tir percutant puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 20%.
+26091	Tir percutant	260100	icon_skills.thunderdrake_tex	Tir percutant puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 20%.
+26092	Flèche irradiante	30100	icon_skills.chargearrow_tex	Flèche irradiante de précision	icon_crest.e_crestpassiverangeup_tex	Augmente la portée de 5 mètres.
+26093	Piège assommant	230100	icon_skills.paralysistraparrow_tex	Piège assommant persistant	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 25%.
+26094	Flèche de toile	170100	icon_skills.spiderarrow_tex	Flèche de toile de prestesse	icon_crest.e_crestactivespeedup_tex	60% de chances d'augmenter la vitesse de déplacement en combat de 10 pendant 12 secondes.
+26095	Salve ultime	220100	icon_skills.chain_arrow	Salve ultime énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de rechargement de 35%.
+26096	Pluie de flèches	50100	icon_skills.arrowfall_tex	Pluie de flèches puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+26097	Flèche pénétrante	40100	icon_skills.througharrow_tex	Flèche pénétrante de précision	icon_crest.e_crestpassiverangeup_tex	Augmente la portée de 5 mètres.
+26098	Volée de flèches	20100	icon_skills.arrowshower_tex	Volée de flèches énergétique	icon_crest.e_crestactivecooltimereset_tex	60% de chances d'annuler le temps de recharge.
+26099	Flèche irradiante	30100	icon_skills.chargearrow_tex	Flèche irradiante de gravure	icon_crest.e_crestpassivecriticalup_tex	Triple les chances de porter un coup critique.
+26100	Tir percutant	260100	icon_skills.thunderdrake_tex	Glyphe de gravure	icon_crest.e_crestpassivecriticalup_tex	Triple les chances de porter un coup critique.
+26101	Piège explosif	250100	icon_skills.explosiontraparrow_tex	Piège explosif puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 35%.
+26102	Tir percutant	260100	icon_skills.thunderdrake_tex	Tir percutant rapide	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse d'incantation de 30%.
+26103	Tir percutant	260100	icon_skills.thunderdrake_tex	Tir percutant puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 20%.
+27000	Faveur du titan	50100	icon_skills.healshot_tex	Faveur du titan multiplicative	icon_crest.e_crestpassivelockontargetup_tex	Augmente le nombre de cibles verrouillées de 100%.
+27002	Vœu de renaissance	120100	icon_skills.autoresurrect_tex	Vœu de renaissance énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 40%.
+27003	Toucher épurateur d'Arun	90100	icon_skills.purifyshot_tex	Epuration arunique multiplicative	icon_crest.e_crestpassivelockontargetup_tex	Augmente le nombre de cibles verrouillées de 100%.
+27005	Fouet de Shara	60100	icon_skills.flashball_tex	Fouet de Shara persistant	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 40%.
+27006	Lien antique	40100	icon_skills.slowball_tex	Lien antique persistant	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 50%.
+27007	Aura de rajeunissement			Test	icon_skills.voidtrap_tex	Sans effet
+27008	Aura de ténacité	160100	icon_skills.areampgain_tex	Test	icon_skills.voidtrap_tex	Sans effet
+27009	Aura d'inclémence	130100	icon_skills.criticalupaura_tex	Aura d'inclémence brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 120.
+27010	Aura de vivacité	140100	icon_skills.speedupaura_tex	Aura de vivacité brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 50.
+27011	Éclair de Shara	10100	icon_skills.elementalshot_tex	Éclair de Shara puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+27012	Coup de métamorphose	80100	icon_skills.punishingshield_tex	Coup de métamorphose puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+27013	Anneau de corruption	20100	icon_skills.suckhp_tex	Test	icon_skills.voidtrap_tex	Sans effet
+27014	Anneau de corruption	20100	icon_skills.suckhp_tex	Anneau de corruption brillant	icon_crest.e_crestpassivepartympup_tex	Augmente les PM libérés par l'Anneau d'infusion de 50&nbsp;%.
+27015	Anneau de corruption	20100	icon_skills.suckhp_tex	Anneau de corruption insensible	icon_crest.e_crestpassivedeffeceup_tex	Réduit les dégâts de 50%.
+27016	Tour de téléporteur	170100	icon_skills.shortteleport_tex	Téléportation énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 15%.
+27017	Infusion de mana	70100	icon_skills.mpcharge_tex	Infusion de mana spirituelle	icon_crest.e_crestpassivemprecoveryup_tex	Augmente la régénération de PM de 20%.
+27019	Extraction de mana			Éclat de glyphe du passé	icon_skills.voidtrap_tex	Ce vieux glyphe fragmenté n'est plus utilisé.
+27020	Réaction	210100	icon_skills.risingattack_tex	Réaction puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+27021	Châtiment de métamorphose	230100	icon_skills.rageofearth_tex	Châtiment de métamorphose énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 40%.
+27022	Serviteur de protection	250100	icon_skills.summonspiritofaggro_tex	Serviteur de protection énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 10%.
+27023	Serviteur de courroux	340100	icon_skills.summonspiritofattack_tex	Test	icon_skills.voidtrap_tex	Sans effet
+27024	Serviteur de vie	270100	icon_skills.summonspiritofheal_tex	Serviteur de vie énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+27025	Invocation du groupe			Invocation du groupe brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 800.
+27026	Résurrection	100100	icon_skills.resurrect_tex	Résurrection brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 510.
+27027	Volée de malédictions	240100	icon_skills.painfulshackle_tex	Volée de malédictions persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 20%.
+27029	Résurrection	100100	icon_skills.resurrect_tex	Résurrection énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 50%.
+27030	Réaction	210100	icon_skills.risingattack_tex	Réaction énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+27031	Rêves sonores	280100	icon_skills.shackleofquicksand_tex	Rêves sonores brillants	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 188.
+27032	Régression	290100	icon_skills.dispell_tex	Régression énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+27033	Bourbe	320100	icon_skills.shackleofstone_tex	Bourbe énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+27034	Malédiction d'épuisement	300100	icon_skills.spiritoflassitude_tex	Malédiction d'épuisement énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+27035	Malédiction de confusion	310100	icon_skills.spiritofconfusion_tex	Malédiction de confusion persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 25%.
+27036	Châtiment de métamorphose	230100	icon_skills.rageofearth_tex	Châtiment de métamorphose d'influence	icon_crest.e_crestnextskillmpdown_tex	Réduit le coût en PM de Coup de métamorphose de 41 pendant quelques secondes.
+27037	Volée de malédictions	240100	icon_skills.painfulshackle_tex	Volée de malédictions d'influence	icon_crest.e_crestnextskillmpdown_tex	Réduit le coût en PM de Volée de malédictions de 33 pendant quelques secondes.
+27039	Anneau de corruption	20100	icon_skills.suckhp_tex	Anneau de corruption d'influence	icon_crest.e_crestnextskillmpdown_tex	Réduit le coût en PM de Larmes d'Arun de 100 pendant quelques secondes.
+27040	Volée de malédictions	240100	icon_skills.painfulshackle_tex	Volée de malédictions multiplicative	icon_crest.e_crestpassivelockontargetup_tex	Augmente le nombre de cibles verrouillées de 0%.
+27041	Lien antique	40100	icon_skills.slowball_tex	Lien antique d'hébétude	icon_crest.e_crestactiveattackspeeddown_tex	50% de chances de réduire la vitesse d'attaque de l'adversaire de 30 % pendant 6 secondes.
+27042	Châtiment de métamorphose	230100	icon_skills.rageofearth_tex	Châtiment de métamorphose puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+27043	Invocation du groupe			Invocation du groupe énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+27044	Infusion de mana	70100	icon_skills.mpcharge_tex	Infusion de mana hâtive	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse d'incantation de 25%.
+27045	Larmes d'Arun	220100	icon_skills.mprefresher_tex	Larmes d'Arun embrasées	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse d'incantation de Vie d'Arun de 25 % pendant quelques secondes.
+27046	Serviteur de vengeance	330100	icon_skills.summonspiritofrange_tex	Serviteur de vengeance puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts du Serviteur de vengeance de 25%.
+27047	Serviteur de vengeance	330100	icon_skills.summonspiritofrange_tex	Serviteur de vengeance fortifié	icon_crest.e_crestpassivedeffeceup_tex	Augmente la défense du Serviteur de vengeance de 25%.
+27048	Serviteur de vengeance	330100	icon_skills.summonspiritofrange_tex	Serviteur de vengeance persistant	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des serviteurs de 25%.
+27049	Résurrection	100100	icon_skills.resurrect_tex	Résurrection hâtive	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse d'incantation de 40%.
+27051	Serviteur de protection	250100	icon_skills.summonspiritofaggro_tex	Serviteur de protection puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts du Serviteur de protection de 25%.
+27052	Serviteur de protection	250100	icon_skills.summonspiritofaggro_tex	Serviteur de protection fortifié	icon_crest.e_crestpassivedeffeceup_tex	Augmente la défense du Serviteur de protection de 25%.
+27053	Téléportation	170100	icon_skills.shortteleport_tex	Téléportation embrasée	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse d'incantation de Vie d'Arun de 25 % pendant quelques secondes.
+27054	Téléportation	170100	icon_skills.shortteleport_tex	Téléportation embrasée	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse d'incantation de Serviteur de vie de 25 % pendant quelques secondes.
+27055	Serviteur de courroux	340100	icon_skills.summonspiritofattack_tex	Serviteur de courroux énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 50%.
+27056	Serviteur de courroux	340100	icon_skills.summonspiritofattack_tex	Serviteur de courroux puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts du Serviteur de courroux de 25%.
+27057	Serviteur de courroux	340100	icon_skills.summonspiritofattack_tex	Serviteur de courroux hâtif	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse d'incantation de 30%.
+27058	Vœu de renaissance	120100	icon_skills.autoresurrect_tex	Vœu de renaissance altruiste	icon_crest.e_crestactiveinvokeskill_tex	Le lanceur bénéficie des mêmes effets de Vœu de renaissance que sa cible.
+27059	Vie d'Arun	180100	icon_skills.hprefresher_tex	Vie d'Arun embrasée	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse d'incantation de Larmes d'Arun de 25 % pendant quelques secondes.
+27060	Faveur du titan	50100	icon_skills.healshot_tex	Faveur du titan de précision	icon_crest.e_crestpassiverangeup_tex	Augmente la portée de 3 mètres.
+27062	Téléportation	170100	icon_skills.shortteleport_tex	Téléportation énergétique	icon_crest.e_crestactivecooltimereset_tex	Réduit le temps de recharge de 15%.
+27063	Toucher épurateur d'Arun	90100	icon_skills.purifyshot_tex	Epuration arunique multiplicative	icon_crest.e_crestpassivelockontargetup_tex	Augmente le nombre de cibles verrouillées de 100%.
+27064	Vœu de renaissance	120100	icon_skills.autoresurrect_tex	Vœu de renaissance altruiste	icon_crest.e_crestactiveinvokeskill_tex	Le lanceur bénéficie des mêmes effets de Vœu de renaissance que sa cible.
+27065	Serviteur de vie	270100	icon_skills.summonspiritofheal_tex	Serviteur de vie énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+27066	Fouet de Shara	60100	icon_skills.flashball_tex	Fouet de Shara persistant	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 40%.
+27067	Faveur du titan	50100	icon_skills.healshot_tex	Faveur du titan de précision	icon_crest.e_crestpassiverangeup_tex	Augmente la portée de 3 mètres.
+27068	Volée de malédictions	240100	icon_skills.painfulshackle_tex	Volée de malédictions d'influence	icon_crest.e_crestnextskillmpdown_tex	Réduit le coût en PM de Volée de malédictions de 33 pendant quelques secondes.
+27069	Serviteur de vengeance	330100	icon_skills.summonspiritofrange_tex	Serviteur de vengeance persistant	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des serviteurs de 35%.
+27070	Rêves sonores	280100	icon_skills.shackleofquicksand_tex	Rêves sonores brillants	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 188.
+27071	Fouet de Shara	60100	icon_skills.flashball_tex	Fouet de Shara de prestesse	icon_crest.e_crestpassiveskilleffectup_tex	Augmente la vitesse de déplacement en combat de 50 pendant 3 secondes en cas d'attaque réussie.
+27072	Réaction	210100	icon_skills.risingattack_tex	Réaction opportuniste	icon_crest.e_crestpassivereactionup_tex	100% de chances d'annuler le temps de recharge de Téléportation.
+27073	Réaction	210100	icon_skills.risingattack_tex	Réaction équilibrante	icon_crest.e_crestactivereactionresist_tex	Augmente l'équilibre de 500% pendant 2 secondes.
+27074	Vœu de résurrection			Colère du titan de précision	icon_crest.e_crestpassiverangeup_tex	Augmente la portée de 3&nbsp;m.
+27075	Rêves sonores	280100	icon_skills.shackleofquicksand_tex	Rêves sonores énergétiques	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+27076	Serviteur de protection	250100	icon_skills.summonspiritofaggro_tex	Serviteur de protection fondé	icon_crest.e_crestactivedefenceup_tex	Augmente la constitution de tous les membres du groupe de 10 % pendant 10 minutes.
+27077	Totem de protection	370100	icon_skills.energiesofprotection_tex	Totem de protection brillant	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 300.
+27078	Totem de protection	370100	icon_skills.energiesofprotection_tex	Totem de protection restaurateur	icon_crest.e_crestactivehprecoveryup_tex	Augmente le taux de régénération de PV de 20%.
+27079	Résurrection	100100	icon_skills.resurrect_tex	Résurrection hâtive	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse d'incantation de 40%.
+27080	Vœu de renaissance	120100	icon_skills.autoresurrect_tex	Vœu de renaissance énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 40%.
+27081	Vie d'Arun	180100	icon_skills.hprefresher_tex	Vie d'Arun restauratrice	icon_crest.e_crestpassivehprecoveryup_tex	Restaure immédiatement 20 % du total de PV.
+27082	Serviteur de vie	270100	icon_skills.summonspiritofheal_tex	Serviteur de vie persistant	icon_crest.e_crestpassivedurationup_tex	Augmente la durée du serviteur de 25%.
+27084	Volée de malédictions	240100	icon_skills.painfulshackle_tex	Volée de malédictions d'affaiblissement	icon_crest.e_crestactivedefencedown_tex	Réduit la constitution de la cible de 9&nbsp;% pendant 21 secondes.
+27085	Résurrection	100100	icon_skills.resurrect_tex	Résurrection enthousiaste	icon_crest.e_crestpassivehprecoveryup_tex	Les PV et PM sont restaurés à 100 % en cas de résurrection.
+27086	Contagion	410100	icon_skills.plague_tex	Contagion persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 20%.
+27087	Impulsion vampirique	420100	icon_skills.mysticorb_tex	Impulsion vampirique brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 225.
+27088	Impulsion vampirique	420100	icon_skills.mysticorb_tex	Impulsion vampirique énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+27089	Impulsion vampirique	420100	icon_skills.mysticorb_tex	Impulsion vampirique énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+27090	Vœu de résurrection	30100	icon_skills.rage_tex	Colère du titan multiplicative	icon_crest.e_crestpassivelockontargetup_tex	Augmente le nombre de cibles verrouillées de 0%.
+27091	Coup de métamorphose	80100	icon_skills.punishingshield_tex	Coup de métamorphose puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 40%.
+27092	Anneau de corruption	20100	icon_skills.suckhp_tex	Anneau de corruption fondé	icon_crest.e_crestpassivedeffeceup_tex	Réduit les dégâts de 50% en cas d'attaque pendant l'invocation de la compétence.
+27093	Résurrection	100100	icon_skills.resurrect_tex	Résurrection énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 50%.
+27094	Serviteur de protection	250100	icon_skills.summonspiritofaggro_tex	Serviteur de protection puissant	icon_crest.e_crestpassiveattackup_tex	Augmente l'attaque du Serviteur de protection de 30 %.
+27095	Téléportation	170100	icon_skills.shortteleport_tex	Téléportation énergétique	icon_crest.e_crestactivecooltimereset_tex	Réduit le temps de recharge de 20%.
+27096	Faveur du titan	50100	icon_skills.healshot_tex	Faveur du titan de précision	icon_crest.e_crestpassiverangeup_tex	Augmente la portée de 5 mètres.
+27097	Réaction	210100	icon_skills.risingattack_tex	Réaction énergétique	icon_crest.e_crestpassivereactionup_tex	100% de chances d'annuler le temps de recharge de Téléportation.
+27098	Serviteur de protection	250100	icon_skills.summonspiritofaggro_tex	Serviteur de protection fondé	icon_crest.e_crestactivedefenceup_tex	Augmente la constitution de tous les membres du groupe de 10 % pendant 10 minutes.
+27099	Totem de protection	370100	icon_skills.energiesofprotection_tex	Totem de protection restaurateur	icon_crest.e_crestactivehprecoveryup_tex	Augmente la régénération de PV de 25 %.
+27100	Volée de malédictions	240100	icon_skills.painfulshackle_tex	Volée de malédictions d'affaiblissement	icon_crest.e_crestactivedefencedown_tex	Réduit la constitution de la cible de 9&nbsp;% supplémentaires pendant 21 secondes.
+27101	Contagion	410100	icon_skills.plague_tex	Contagion persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 30%.
+27102	Coup de métamorphose	80100	icon_skills.punishingshield_tex	Coup de métamorphose énergétique	icon_crest.e_crestactivecooltimereset_tex	50% de chances de supprimer le temps de recharge.
+28000	Soin personnel	180100	icon_skills.healingpray_tex	Soin personnel de restauration	icon_crest.e_crestpassivehprecoveryup_tex	Augmente la régénération de PV de 20%.
+28001	Cercle de soins	30100	icon_skills.healarea_tex	Cercle de soin de restauration	icon_crest.e_crestpassivehprecoveryup_tex	Augmente la régénération de PV de 10%.
+28002	Cercle de régénération	20100	icon_skills.healingwind_tex	Cercle de régénération persistant	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 30%.
+28003	Soin focalisé	190100	icon_skills.healinglightlockon_tex	Soin focalisé multiplicatif	icon_crest.e_crestpassivelockontargetup_tex	Augmente le nombre de cibles verrouillées de 100%.
+28004	Bouclier de Kaia	220100	icon_skills.armorofprotection_tex	Bouclier de Kaia énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+28005	Cercle purificateur	100100	icon_skills.purify_tex	Cercle purificateur énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+28006	Bénédiction d'Arun	50100	icon_skills.attackup_tex	Bénédiction de Shakan persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 30%.
+28009	Bénédiction de Shara	230100	icon_skills.agilitybless_tex	Bénédiction de Balder persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 30%.
+28012	Lueur divine	10100	icon_skills.magicshot_tex	Lueur divine puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+28013	Coup de métamorphose	110100	icon_skills.punishingshield_tex	Coup de métamorphose brillant	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 33.
+28014	Implosion électrique	160100	icon_skills.damagedeal_tex	Implosion électrique alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Contre-attaque finale de 25 % pendant quelques secondes.
+28018	Cercle de régénération	20100	icon_skills.healingwind_tex	Cercle de régénération énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+28019	Infusion de mana	80100	icon_skills.mpcharge_tex	Infusion de mana spirituelle	icon_crest.e_crestpassivemprecoveryup_tex	Augmente la régénération de PM de 20%.
+28020	Extraction de mana			Éclat de glyphe du passé	icon_skills.voidtrap_tex	Ce vieux glyphe fragmenté n'est plus utilisé.
+28021	Prière de paix	170100	icon_skills.agrorelease_tex	Prière de paix hâtive	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse d'incantation de 100%.
+28022	Renaissance	60100	icon_skills.recovery_tex	Renaissance énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 50%.
+28023	Réaction	250100	icon_skills.risingattack_tex	Réaction puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+28024	Triple némésis	290100	icon_skills.divineretribution_tex	Triple némésis alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Coup de métamorphose de 25 % pendant quelques secondes.
+28026	Résurrection	120100	icon_skills.resurrect_tex	Résurrection brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 510.
+28027	Bénédiction d'Arun	50100	icon_skills.attackup_tex	Bénédiction de Zenobia augmentée	icon_crest.e_crestpassiveskilleffectup_tex	Augmente la vitesse de déplacement de 50%.
+28028	Invocation du groupe			Invocation du groupe brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 800.
+28030	Fuite féroce	260100	icon_skills.sanctuary_tex	Fuite féroce brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 30.
+28031	Charge de mana	280100	icon_skills.manarejuvenation_tex	Charge de mana hâtive	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse de charge de 25%.
+28032	Résurrection	120100	icon_skills.resurrect_tex	Résurrection énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 50%.
+28033	Réaction	250100	icon_skills.risingattack_tex	Réaction énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+28034	Berceuse d'Ishara	330100	icon_skills.lullabyoflshara_tex	Berceuse d'Ishara énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+28035	Sanctuaire du gardien	310100	icon_skills.guardianaura_tex	Sanctuaire du gardien énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+28036	Repos divin	320100	icon_skills.restoration_tex	Repos divin énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+28037	Fléau d'épuisement	300100	icon_skills.prophecyoflethargy_tex	Fléau d'épuisement énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+28038	Cercle de régénération	20100	icon_skills.healingwind_tex	Cercle de régénération d'influence	icon_crest.e_crestnextskillmpdown_tex	Réduit le coût en PM de Soin focalisé de 85 pendant quelques secondes.
+28039	Charge de mana	280100	icon_skills.manarejuvenation_tex	Charge de mana de précision	icon_crest.e_crestpassiveskillrangeup_tex	Augmente la portée de 4 mètres.
+28040	Bouclier de Kaia	220100	icon_skills.armorofprotection_tex	Bouclier de Kaia fondé	icon_crest.e_crestactivedefenceup_tex	Augmente la constitution du lanceur de 30 % pendant 12 secondes.
+28041	Bénédiction d'Arun	50100	icon_skills.attackup_tex	Bénédiction de Zenobia de prestesse	icon_crest.e_crestactivespeedup_tex	Augmente la vitesse de déplacement du lanceur en combat de 15 pendant 10 minutes.
+28042	Invocation du groupe			Invocation du groupe énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+28043	Charge de mana	280100	icon_skills.manarejuvenation_tex	Charge de mana alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts d'Implosion électrique de 25 % pendant quelques secondes.
+28044	Infusion de mana	80100	icon_skills.mpcharge_tex	Infusion de mana hâtive	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse d'incantation de 25%.
+28045	Résurrection	120100	icon_skills.resurrect_tex	Résurrection hâtive	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse d'incantation de 30%.
+28046	Étoiles énergétiques			Étoiles énergétiques persistantes	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 25%.
+28047	Étoiles énergétiques			Étoiles énergétiques sauvages	icon_crest.e_crestpassivecooltimedown_tex	Augmente l'effet des étoiles énergétiques de 20%.
+28048	Poussée restauratrice	340100	icon_skills.sanctuaryofregeneration_tex	Poussée restauratrice persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 20%.
+28049	Poussée restauratrice	340100	icon_skills.sanctuaryofregeneration_tex	Poussée restauratrice brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 275.
+28050	Contre-attaque finale	270100	icon_skills.punishingtouch_tex	Contre-attaque finale brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 62.
+28051	Contre-attaque finale	270100	icon_skills.punishingtouch_tex	Contre-attaque finale tenace	icon_crest.e_crestactivecooltimereset_tex	40% de chances de supprimer le temps de recharge.
+28052	Contre-attaque finale	270100	icon_skills.punishingtouch_tex	Contre-attaque finale ralentissante	icon_crest.e_crestactivespeeddown_tex	20% de chances de réduire la vitesse de déplacement de l'adversaire de 30 % pendant 4 secondes.
+28053	Coup de métamorphose	110100	icon_skills.punishingshield_tex	Coup de métamorphose d'hébétude	icon_crest.e_crestactiveattackspeeddown_tex	20% de chances de réduire la vitesse d'attaque de l'adversaire de 15 % pendant 7 secondes.
+28054	Triple némésis	290100	icon_skills.divineretribution_tex	Triple némésis d'affaiblissement	icon_crest.e_crestactivedefencedown_tex	100% de chances de réduire la constitution de 10 % pendant 12 secondes. Ne se cumule pas avec le Lien de Kaia.
+28055	Soin focalisé	190100	icon_skills.healinglightlockon_tex	Soin focalisé de précision	icon_crest.e_crestpassiverangeup_tex	Augmente la portée de 3 mètres.
+28057	Soin personnel	180100	icon_skills.healingpray_tex	Soin personnel de restauration	icon_crest.e_crestpassivehprecoveryup_tex	Augmente la régénération de PV de 20%.
+28058	Implosion électrique	160100	icon_skills.damagedeal_tex	Implosion électrique alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Contre-attaque finale de 25 % pendant quelques secondes.
+28059	Infusion de mana	80100	icon_skills.mpcharge_tex	Infusion de mana spirituelle	icon_crest.e_crestpassivemprecoveryup_tex	Augmente la régénération de PM de 20%.
+28060	Triple némésis	290100	icon_skills.divineretribution_tex	Triple némésis alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Coup de métamorphose de 25 % pendant quelques secondes.
+28061	Bénédiction d'Arun	50100	icon_skills.attackup_tex	Bénédiction de Zenobia de prestesse	icon_crest.e_crestactivespeedup_tex	Augmente la vitesse de déplacement du lanceur en combat de 15 pendant 10 minutes.
+28062	Cercle de régénération	20100	icon_skills.healingwind_tex	Cercle de régénération énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 30%.
+28063	Fléau d'épuisement	300100	icon_skills.prophecyoflethargy_tex	Fléau d'épuisement énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 30%.
+28064	Poussée restauratrice	340100	icon_skills.sanctuaryofregeneration_tex	Poussée restauratrice brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 275.
+28065	Résurrection	120100	icon_skills.resurrect_tex	Résurrection brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 510.
+28066	Fuite féroce	260100	icon_skills.sanctuary_tex	Fuite féroce énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 15%.
+28067	Bouclier de Kaia	220100	icon_skills.armorofprotection_tex	Bouclier de Kaia régénérant	icon_crest.e_crestpassivehpwhileheal_tex	Restaure 5% du total des PV de toutes les cibles toutes les 2 secondes pendant 6 secondes.
+28068	Charge de mana	280100	icon_skills.manarejuvenation_tex	Charge de mana spirituelle	icon_crest.e_crestpassivepartympup_tex	Augmente la régénération de PM de 50%.
+28069	Soin focalisé	190100	icon_skills.healinglightlockon_tex	Soin focalisé apaisant	icon_crest.e_crestpassivecooltimedown_tex	Réduit l'agressivité de 20%.
+28070	Sanctuaire du gardien	310100	icon_skills.guardianaura_tex	Sanctuaire du gardien équilibrant	icon_crest.e_crestactivereactionresist_tex	Double l'équilibre pendant 30 secondes.
+28071	Renaissance	60100	icon_skills.recovery_tex	Renaissance persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 100%.
+28072	Charge de mana	280100	icon_skills.manarejuvenation_tex	Charge de mana spirituelle	icon_crest.e_crestpassivepartympup_tex	Augmente la régénération de PM de 25%.
+28073	Concentration de soins	370100	icon_skills.curewing_tex	Concentration de soins tenace	icon_crest.e_crestactivecooltimereset_tex	40% de chances de supprimer le temps de recharge.
+28074	Grâce de la résurrection	390100	icon_skills.selfpreresurrection_tex	Grâce de la résurrection énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 40%.
+28075	Concentration de soins	370100	icon_skills.curewing_tex	Concentration de soins restaurateurs	icon_crest.e_crestpassivehprecoveryup_tex	Augmente la régénération de PV de 20%.
+28076	Bénédiction d'Arun	50100	icon_skills.attackup_tex	Bénédiction de Zenobia augmentée	icon_crest.e_crestpassiveskilleffectup_tex	Augmente la vitesse de déplacement de 50% points supplémentaires.
+28077	Infusion de mana	80100	icon_skills.mpcharge_tex	Infusion de mana hâtive	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse d'incantation de 25%.
+28078	Poussée restauratrice	340100	icon_skills.sanctuaryofregeneration_tex	Poussée restauratrice fougueuse	icon_crest.e_crestpassivemprecoveryup_tex	Restaure 50 PM par seconde à toutes les cibles.
+28079	Résurrection	120100	icon_skills.resurrect_tex	Résurrection enthousiaste	icon_crest.e_crestpassivehprecoveryup_tex	Les PV et PM sont restaurés à 100 % en cas de résurrection.
+28082	Intervention divine	410100	icon_skills.helpinghand_tex	Intervention divine énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+28083	Intervention divine	410100	icon_skills.helpinghand_tex	Intervention divine brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 150.
+28084	Intervention divine	410100	icon_skills.helpinghand_tex	Intervention divine de précision	icon_crest.e_crestpassiveskillrangeup_tex	Augmente la portée de 4 mètres.
+28085	Vortex de Zenobia	400100	icon_skills.godbreath_tex	Vortex de Zenobia énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+28086	Vortex de Zenobia	400100	icon_skills.godbreath_tex	Vortex de Zenobia énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+28087	Vortex de Zenobia	400100	icon_skills.godbreath_tex	Vortex de Zenobia brillant	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 100.
+28088	Vortex de Zenobia	400100	icon_skills.godbreath_tex	Vortex de Zenobia puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+28089	Bouclier de Kaia	220100	icon_skills.armorofprotection_tex	Bouclier de Kaia énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+28090	Résurrection	120100	icon_skills.resurrect_tex	Résurrection énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 60%.
+28091	Charge de mana	280100	icon_skills.manarejuvenation_tex	Charge de mana alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts d'Implosion électrique de 40 % pendant quelques secondes.
+28092	Contre-attaque finale	270100	icon_skills.punishingtouch_tex	Contre-attaque finale énergétique	icon_crest.e_crestactivecooltimereset_tex	50% de chances d'éliminer le temps de recharge.
+28093	Triple némésis	290100	icon_skills.divineretribution_tex	Triple némésis d'affaiblissement	icon_crest.e_crestactivedefencedown_tex	100% de chances de réduire la constitution de 10 % pendant 12 secondes.
+28094	Implosion électrique	160100	icon_skills.damagedeal_tex	Implosion électrique alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Contre-attaque finale de 40 % pendant quelques secondes.
+28095	Fléau d'épuisement	300100	icon_skills.prophecyoflethargy_tex	Fléau d'épuisement énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 30%.
+28096	Fuite féroce	260100	icon_skills.sanctuary_tex	Fuite féroce énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 15%.
+28097	Charge de mana	280100	icon_skills.manarejuvenation_tex	Charge de mana brillante	icon_crest.e_crestpassivepartympup_tex	Augmente la régénération de PM de 50%.
+28098	Résurrection	120100	icon_skills.resurrect_tex	Résurrection enthousiaste	icon_crest.e_crestpassivehprecoveryup_tex	Les PV et PM sont restaurés à 100 % en cas de résurrection.
+28099	Intervention divine	410100	icon_skills.helpinghand_tex	Intervention divine de précision	icon_crest.e_crestpassiveskillrangeup_tex	Augmente la portée de 4 mètres.
+28100	Vortex de Zenobia	400100	icon_skills.godbreath_tex	Vortex de Zenobia énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 30%.
+28101	Retraite	380100	icon_skills.backstep_tex	Retraite énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 10%.
+29000	Vagues à lames	10100	icon_skills.comboattack2_tex	Vagues à lames puissantes	icon_crest.e_crestactivekill_tex	15% de chances de doubler les dégâts.
+29001	Vagues à lames	10100	icon_skills.comboattack2_tex	Vagues à lames spirituelles	icon_crest.e_crestpassivemprecoveryup_tex	Augmente la régénération de PM de 20%.
+29002	Vagues à lames	10100	icon_skills.comboattack2_tex	Vagues à lames rapides	icon_crest.e_crestactiveattackspeedup_tex	10% de chances d'augmenter la vitesse d'attaque de 15 % pendant 10 secondes.
+29003	Vagues à lames	10100	icon_skills.comboattack2_tex	Vagues à lames de gravure	icon_crest.e_crestpassivecriticalup_tex	Double les chances de porter un coup critique.
+29004	Double cisaille	30100	icon_skills.chainsmash_tex	Double cisaille restauratrice	icon_crest.e_crestpassivehpheal_tex	Restaure 1.5% du total de PV à chaque coup porté.
+29005	Double cisaille	30100	icon_skills.chainsmash_tex	Double cisaille alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Coup sinistre de 30&nbsp;% pendant 5 secondes.
+29006	Frappe déchirante	40100	icon_skills.chainblow_tex	Frappe déchirante puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 15%.
+29007	Frappe déchirante	40100	icon_skills.chainblow_tex	Frappe déchirante de gravure	icon_crest.e_crestpassivecriticalup_tex	Double les chances de porter un coup critique.
+29009	Coup sinistre	50100	icon_skills.chainsuperblow_tex	Coup sinistre énergétique	icon_crest.e_crestactivecooltimereset_tex	30% de chances de supprimer le temps de recharge.
+29010	Coup sinistre	50100	icon_skills.chainsuperblow_tex	Coup sinistre embrasé	icon_crest.e_crestnextskillattackspeedup_tex	Augmente la vitesse d'incantation de Double cisaille de 25 % pendant quelques secondes.
+29011	Spirale funeste	60100	icon_skills.chainbrandish_tex	Spirale funeste puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+29012	Spirale funeste	60100	icon_skills.chainbrandish_tex	Spirale funeste persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 50%.
+29013	Spirale funeste	60100	icon_skills.chainbrandish_tex	Spirale funeste alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Double cisaille de 20 % pendant quelques secondes.
+29014	Spirale funeste	60100	icon_skills.chainbrandish_tex	Spirale funeste alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Coup sinistre de 30&nbsp;% pendant 5 secondes.
+29015	Torrent de lames	80100	icon_skills.chainblade_tex	Torrent de lames puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+29016	Torrent de lames	80100	icon_skills.chainblade_tex	Torrent de lames énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+29017	Torrent de lames	80100	icon_skills.chainblade_tex	Torrent de lames d'hébétude	icon_crest.e_crestactiveattackspeeddown_tex	20% de chances de réduire la vitesse d'attaque de l'adversaire de 10 % durant 7 secondes pour chaque coup porté. (L'effet de ralentissement est cumulable jusqu'à cinq fois).
+29018	Assommoir	90100	icon_skills.chainstrike_tex	Assommoir énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+29019	Assommoir	90100	icon_skills.chainstrike_tex	Assommoir persistant	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 25%.
+29020	Frappe pendulaire	100100	icon_skills.chainuppercut_tex	Frappe pendulaire puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+29021	Frappe pendulaire	100100	icon_skills.chainuppercut_tex	Frappe pendulaire énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+29022	Frappe pendulaire	100100	icon_skills.chainuppercut_tex	Frappe pendulaire alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les chances de coups critiques de Torrent de lames de 30 % pendant quelques secondes.
+29023	Fouet d'ombres	110100	icon_skills.chainflurry_tex	Fouet d'ombres énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+29024	Fouet d'ombres	110100	icon_skills.chainflurry_tex	Fouet d'ombres spirituel	icon_crest.e_crestpassivemprecoveryup_tex	Augmente la régénération des PM de 20%.
+29025	Déferlement macabre	120100	icon_skills.darkexplosion_tex	Déferlement macabre	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+29026	Déferlement macabre	120100	icon_skills.darkexplosion_tex	Déferlement macabre véloce	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse d'incantation de 25%.
+29027	Ame captive	130100	icon_skills.darkgrasp_tex	Ame captive éclatante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de l'invocation et de l'échange de position de 150.
+29028	Ame captive	130100	icon_skills.darkgrasp_tex	Ame captive énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+29029	Réaction	140100	icon_skills.risingattack2_tex	Réaction puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 20%.
+29030	Réaction	140100	icon_skills.risingattack2_tex	Réaction énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+29031	Riposte	150100	icon_skills.counterattack_tex	Riposte énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+29032	Aura ténébreuse	160100	icon_skills.descentofdarkness_tex	Aura ténébreuse éclatante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 150.
+29033	Aura ténébreuse	160100	icon_skills.descentofdarkness_tex	Moisson d'ombres persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 30%.
+29035	Etreinte fulgurante	200100	icon_skills.reversecapture_tex	Etreinte fulgurante énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+29036	Etreinte fulgurante	200100	icon_skills.reversecapture_tex	Etreinte fulgurante rapide	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse d'attaque de la prochaine de compétence de 50 % en cas de coup réussi.
+29037	Etreinte fulgurante	200100	icon_skills.reversecapture_tex	Etreinte fulgurante alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Déferlement macabre de 20 % pendant quelques secondes.
+29038	Danse des ombres	400100	icon_skills.instantleap_tex	Danse des ombres énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 15%.
+29039	Danse des ombres	400100	icon_skills.instantleap_tex	Danse des ombres de prestesse	icon_crest.e_crestactivespeedup_tex	Augmente la vitesse de déplacement en combat de 50 pendant 2 secondes.
+29046	Assommoir	90100	icon_skills.chainstrike_tex	Assommoir énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+29047	Torrent de lames	80100	icon_skills.chainblade_tex	Torrent de lames puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+29048	Spirale funeste	60100	icon_skills.chainbrandish_tex	Spirale funeste alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Coup sinistre de 30&nbsp;% pendant 5 secondes.
+29049	Déferlement macabre	120100	icon_skills.darkexplosion_tex	Déferlement macabre brillant	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 150.
+29050	Coup sinistre	50100	icon_skills.chainsuperblow_tex	Coup sinistre tranchant	icon_crest.e_crestpassivecriticalup_tex	Double le facteur de coups critiques.
+29051	Evasion voilée	180100	icon_skills.hideindarkness_tex	Evasion voilée énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+29052	Evasion voilée	180100	icon_skills.hideindarkness_tex	Evasion voilée persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 50%.
+29053	Double cisaille	30100	icon_skills.chainsmash_tex	Double cisaille alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Coup sinistre de 30&nbsp;% pendant 5&nbsp;secondes.
+29054	Frappe déchirante	40100	icon_skills.chainblow_tex	Frappe déchirante puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 15%.
+29055	Frappe déchirante	40100	icon_skills.chainblow_tex	Frappe déchirante de gravure	icon_crest.e_crestpassivecriticalup_tex	Double les chances d'infliger un coup critique.
+29056	Torrent de lames	80100	icon_skills.chainblade_tex	Torrent de lames énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 30%.
+29057	Frappe pendulaire	100100	icon_skills.chainuppercut_tex	Frappe pendulaire énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 30%.
+29058	Frappe pendulaire	100100	icon_skills.chainuppercut_tex	Frappe pendulaire alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente de 30 % les chances de coups critiques de la prochaine compétence de l'enchaînement: Torrent de lames
+29059	Danse des ombres	400100	icon_skills.instantleap_tex	Danse des ombres de prestesse	icon_crest.e_crestactivespeedup_tex	Augmente la vitesse de déplacement en combat de 50 pendant 2 secondes en utilisant la compétence.
+29060	Torrent de lames	80100	icon_skills.chainblade_tex	Torrent de lames puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 30%.
+29061	Spirale funeste	60100	icon_skills.chainbrandish_tex	Spirale funeste alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Coup sinistre de 35&nbsp;% pendant 5&nbsp;secondes.
+29062	Coup sinistre	50100	icon_skills.chainsuperblow_tex	Coup sinistre de gravure	icon_crest.e_crestpassivecriticalup_tex	Triple le facteur de coups critiques.
+29063	Évasion voilée			Évasion voilée énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 35%.
+29064	Évasion voilée			Évasion voilée persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 100%.
+30000	Déflagration	10100	icon_skills.cannonshot_tex	Déflagration puissante	icon_crest.e_crestpassiveattackup_tex	Augment les dégâts de la compétence de 20%
+30001	Déflagration	10100	icon_skills.cannonshot_tex	Déflagration décisive	icon_crest.e_creststrecover_tex	Récupérez 5 points de volonté par coup porté.
+30002	Déflagration	10100	icon_skills.cannonshot_tex	Glyphe rapide	icon_crest.e_crestactiveattackspeedup_tex	15% de chances d'augmenter la vitesse d'attaque de 15 % pendant 10 secondes.
+30003	Bombardement	20100	icon_skills.mortarshot_tex	Bombardement de gravure	icon_crest.e_crestpassivecriticalup_tex	Multiplie les chances de coups critiques de 50 %.
+30004	Bombardement	20100	icon_skills.mortarshot_tex	Bombardement rapide	icon_crest.e_crestpassiveskillspeedup_tex	Augmente la vitesse d'incantation de 25%
+30005	Salve de dispersion	30100	icon_skills.buckshot_tex	Salve de dispersion puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 20%.
+30006	A bout portant	40100	icon_skills.gunbrandish_tex	À bout portant d'influence	icon_crest.e_crestpassivecooltimedown_tex	20% de chances d'annuler le temps de recharge de Bombe lobée.
+30007	Salve de dispersion	30100	icon_skills.buckshot_tex	Salve de dispersion acérée	icon_crest.e_crestpassivepenaltydelete_tex	Réduit le recul de 40 %.
+30008	Salve de dispersion	30100	icon_skills.buckshot_tex	Salve de dispersion brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 50.
+30009	A bout portant	40100	icon_skills.gunbrandish_tex	À bout portant puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+30010	A bout portant	40100	icon_skills.gunbrandish_tex	À bout portant de récupération	icon_crest.e_crestpassivehpheal_tex	Restaure 2% du total de PV à chaque coup porté.
+30011	A bout portant	40100	icon_skills.gunbrandish_tex	À bout portant énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 30%.
+30012	Tir en rafale	50100	icon_skills.gatlingshot_tex	Tir en rafale de récupération	icon_crest.e_crestpassivehpheal_tex	Restaure 1% du total de PV à chaque coup porté.
+30013	Tir en rafale	50100	icon_skills.gatlingshot_tex	Tir en rafale de précision	icon_crest.e_crestpassiverangeup_tex	Augmente la portée de 5 mètres.
+30014	Bombe à retardement	60100	icon_skills.timebombshot_tex	Bombe à retardement puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+30015	Bombe à retardement	60100	icon_skills.timebombshot_tex	Bombe à retardement décisive	icon_crest.e_creststrecover_tex	Récupérez 15 points de volonté en cas d'attaque réussie.
+30016	Barrage arcanique	70100	icon_skills.arcaneshockshot01_tex	Barrage arcanique puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 20%.
+30017	Barrage arcanique	70100	icon_skills.arcaneshockshot01_tex	Barrage arcanique rapide	icon_crest.e_crestactiveinvokeskill_tex	Augmente la vitesse d'attaque de 30 % jusqu'à la détonation du Barrage arcanique.
+30018	Barrage arcanique	70100	icon_skills.arcaneshockshot01_tex	Barrage arcanique décisif	icon_crest.e_creststrecover_tex	Récupérez 15 points de volonté par coup porté.
+30019	Missiles de mana	90100	icon_skills.aimedshot_tex	Missiles de mana de gravure	icon_crest.e_crestpassivecriticalup_tex	Double les chances de porter un coup critique.
+30021	Bombe lobée	100100	icon_skills.arcanegrenadethrow_tex	Bombe lobée puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 20%.
+30022	Bombe lobée	100100	icon_skills.arcanegrenadethrow_tex	Bombe lobée persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée de l'étourdissement de 50%.
+30023	Bombe lobée	100100	icon_skills.arcanegrenadethrow_tex	Bombe lobée brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 50.
+30024	Saut de roquette	110100	icon_skills.rocketjump_tex	Saut de roquette énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+30028	Vengeance de Balder	130100	icon_skills.flashcannon_tex	Vengeance énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+30029	Saut de roquette	110100	icon_skills.rocketjump_tex	Saut de roquette de prestesse	icon_crest.e_crestactivespeedup_tex	Augmente la vitesse d'attaque de 50 % pendant 5 secondes.
+30030	Régénération	150100	icon_skills.reload_tex	Régénération énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+30031	Régénération	150100	icon_skills.reload_tex	Régénération décisive	icon_crest.e_creststrecover_tex	Récupérez 50 points de volonté supplémentaire quand la compétence est utilisée.
+30032	ST	190100	icon_skills.summonsentrytower_tex	Tourelle énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 15%.
+30033	HB	180100	icon_skills.summondispenser_tex	Compagnon puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 100%.
+30034	ST	190100	icon_skills.summonsentrytower_tex	Tourelle puissante	icon_crest.e_crestpassiveattackup_tex	Augmente la puissance d'attaque de ST de 20 %.
+30035	ST	190100	icon_skills.summonsentrytower_tex	Tourelle persistante	icon_crest.e_crestpassivedurationup_tex	Augmente la durée de ST de 30 %
+30036	ST	190100	icon_skills.summonsentrytower_tex	Tourelle brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 100.
+30037	Réaction	200100	icon_skills.risingrocket_tex	Réaction puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 20%.
+30038	Réaction	200100	icon_skills.risingrocket_tex	Réaction énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+30039	Commande : Rappel	210100	icon_skills.command_counterflow_tex	Rappel énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+30040	Commande : Autodestruction	220100	icon_skills.command_selfdestruct_tex	Autodestruction énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+30041	Roulade de réarmement	400100	icon_skills.ambushrolling_tex	Roulade de réarmement énergétique	icon_crest.e_crestactivecooltimereset_tex	25% de chances de supprimer le temps de recharge.
+30042	Roulade de réarmement	400100	icon_skills.ambushrolling_tex	Roulade de réarmement alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Salve de dispersion de 20 % pendant quelques secondes.
+30043	Bombardement	20100	icon_skills.mortarshot_tex	Bombardement de gravure	icon_crest.e_crestpassivecriticalup_tex	Double les chances de porter un coup critique.
+30044	Salve de dispersion	30100	icon_skills.buckshot_tex	Salve de dispersion puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+30045	A bout portant	40100	icon_skills.gunbrandish_tex	À bout portant puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+30046	Tir en rafale	50100	icon_skills.gatlingshot_tex	Tir en rafale décisif	icon_crest.e_creststrecover_tex	Réduit le coût en volonté de 10.
+30047	Tir en rafale	50100	icon_skills.gatlingshot_tex	Tir en rafale de précision	icon_crest.e_crestpassiverangeup_tex	Augmente la portée de 5 mètres.
+30048	Barrage arcanique	70100	icon_skills.arcaneshockshot01_tex	Barrage arcanique puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 20%.
+30049	Barrage arcanique	70100	icon_skills.arcaneshockshot01_tex	Barrage arcanique rapide	icon_crest.e_crestactiveinvokeskill_tex	Augmente la vitesse d'attaque de 30 % jusqu'à la détonation du Barrage arcanique.
+30050	Missiles de mana	90100	icon_skills.aimedshot_tex	Missiles de mana de gravure	icon_crest.e_crestpassivecriticalup_tex	Triple les chances de porter un coup critique.
+30051	Bombe lobée	100100	icon_skills.arcanegrenadethrow_tex	Bombe lobée puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+30052	Saut de roquette	110100	icon_skills.rocketjump_tex	Saut de roquette énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+30055	Vengeance de Balder	130100	icon_skills.flashcannon_tex	Vengeance énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+30056	Régénération	150100	icon_skills.reload_tex	Régénération énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+30057	ST	190100	icon_skills.summonsentrytower_tex	Tourelle énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 15%.
+30058	Vengance de Balder	330100	icon_skills.summonspiritofrange_tex	Vengeance puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 20%.
+30059	Roulade de réarmement	400100	icon_skills.ambushrolling_tex	Roulade de réarmement énergétique	icon_crest.e_crestactivecooltimereset_tex	30% de chances de supprimer le temps de recharge.
+30060	Commande : Rappel	210100	icon_skills.command_counterflow_tex	Rappel énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+30061	À bout portant			À bout portant puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 30%.
+30062	Saut de roquette	110100	icon_skills.rocketjump_tex	Saut de roquette de prestesse	icon_crest.e_crestactivespeedup_tex	Augmente la vitesse d'attaque de 50 % pendant 5 secondes.
+30063	Régénération	150100	icon_skills.reload_tex	Régénération énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 30%.
+30064	ST	190100	icon_skills.summonsentrytower_tex	ST puissant	icon_crest.e_crestpassiveattackup_tex	Augmente la puissance d'attaque de ST de 20 %.
+30065	Commande: Autodestruction			Commande: Autodestruction énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+30066	Roulade de réarmement	400100	icon_skills.ambushrolling_tex	Frappe combattive alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de Salve de dispersion de 20 % pendant quelques secondes.
+30067	Bombardement	20100	icon_skills.mortarshot_tex	Bombardement de gravure	icon_crest.e_crestpassivecriticalup_tex	Double les chances d'infliger un coup critique.
+30068	Salve de dispersion	30100	icon_skills.buckshot_tex	Salve de dispersion puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+30069	Tir en rafale	50100	icon_skills.gatlingshot_tex	Tir en rafale de précision	icon_crest.e_crestpassiverangeup_tex	Augmente la portée de 5 mètres.
+30070	Missiles de mana	90100	icon_skills.aimedshot_tex	Missiles de mana de gravure	icon_crest.e_crestpassivecriticalup_tex	Triple le facteur de coups critiques.
+30071	Vengeance de Balder	130100	icon_skills.flashcannon_tex	Vengeance de Balder puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 20%.
+30072	Roulade de réarmement	400100	icon_skills.ambushrolling_tex	Roulade de réarmement énergétique	icon_crest.e_crestactivecooltimereset_tex	35% de chances de supprimer le temps de recharge.
+31000	Direct	10100	icon_skills.comboattack01_tex	Direct puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 20%.
+31001	Direct	10100	icon_skills.comboattack01_tex	Direct brillant	icon_crest.e_crestpassivemprecoveryup_tex	Augmente la régénération de PM de 15% en touchant la cible.
+31002	Direct	10100	icon_skills.comboattack01_tex	Direct rapide	icon_crest.e_crestactiveattackspeedup_tex	10% de chances d'augmenter la vitesse d'attaque de 15 % pendant 10 secondes.
+31003	Contre	20100	icon_skills.smashattack02_tex	Contre puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 20%.
+31004	Contre	20100	icon_skills.smashattack02_tex	Contre alimenté	icon_crest.e_crestnextskillattackup_tex	Les dégâts de toutes les compétences augmentent de 50 % en cas de défense réussie.
+31005	Tourniquet	70100	icon_skills.upperkick_tex	Tourniquet alimenté	icon_crest.e_crestnextskillattackup_tex	Les dégâts de toutes les compétences augmentent de 10 % suite à un coup réussi.
+31006	Tourniquet	70100	icon_skills.upperkick_tex	Tourniquet fondé	icon_crest.e_crestactivedefenceup_tex	Active la défense frontale en cas d'utilisation d'une des compétences Dérouillée/Marteau-pilon/Torpille dans un délai de 5 secondes.
+31007	Tourniquet	70100	icon_skills.upperkick_tex	Tourniquet énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 15%.
+31008	Colère divine	30100	icon_skills.dragonrisingblow_tex	Colère divine brillante	icon_crest.e_creststrecover_tex	50 % de rage supplémentaire régénérée en cas d'attaque réussie.
+31009	Frappe sismique	40100	icon_skills.poundonground_tex	Frappe sismique brillante.	icon_crest.e_creststrecover_tex	3 % de rage supplémentaire régénérée en cas d'attaque réussie.
+31010	Frappe sismique	40100	icon_skills.poundonground_tex	Frappe sismique puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de 20%.
+31011	Frappe sismique	40100	icon_skills.poundonground_tex	Frappe sismique énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+31012	Charge	50100	icon_skills.bulldozer_tex	Charge énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+31013	Torpille	60100	icon_skills.blowattack_tex	Torpille puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+31014	Torpille	60100	icon_skills.blowattack_tex	Torpille de gravure	icon_crest.e_crestpassivecriticalup_tex	Double les chances de porter un coup critique.
+31015	Torpille	60100	icon_skills.blowattack_tex	Torpille brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 100.
+31016	Torpille	60100	icon_skills.blowattack_tex	Torpille énergétique	icon_crest.e_crestactivecooltimereset_tex	20% de chances de supprimer le temps de recharge.
+31017	Marteau-pilon	80100	icon_skills.risingblow_tex	Marteau-pilon	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+31018	Marteau-pilon	80100	icon_skills.risingblow_tex	Marteau-pilon énergétique	icon_crest.e_crestactivecooltimereset_tex	60% de chances d'éliminer le temps de recharge de Tourniquet en cas d'attaque réussie sur un monstre.
+31019	Marteau-pilon	80100	icon_skills.risingblow_tex	Marteau-pilon brillant	icon_crest.e_creststrecover_tex	Augmente la rage de 2 % en cas d'attaque réussie
+31020	Dérouillée	90100	icon_skills.rapidattack_tex	Dérouillée puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+31021	Dérouillée	90100	icon_skills.rapidattack_tex	Dérouillée indignée	icon_crest.e_crestactiveinvokeskill_tex	Augmente les dégâts de 25 % sur une cible suspendue dans les airs.
+31022	Dérouillée	90100	icon_skills.rapidattack_tex	Dérouillée de gravure	icon_crest.e_crestpassivecriticalup_tex	Augmente les chances de porter des coups critiques de 50&nbsp;%.
+31023	Riposte	100100	icon_skills.counterattack2_tex	Riposte énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+31024	Riposte	100100	icon_skills.counterattack2_tex	Riposte puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 20%.
+31025	Réaction	120100	icon_skills.risingattack_tex	Réaction puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 20%.
+31026	Réaction	120100	icon_skills.risingattack_tex	Réaction énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+31027	Provocation	130100	icon_skills.roar2_tex	Provocation brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 100.
+31028	Provocation	130100	icon_skills.roar2_tex	Provocation énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+31029	Exaspération	140100	icon_skills.enrage_tex	Exaspération ralentissante	icon_crest.e_crestpassivespeeddown_tex	Réduit la vitesse de déplacement d'un surplus de 50 % pendant 5 secondes.
+31030	Exaspération	140100	icon_skills.enrage_tex	Exaspération énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+31031	Catapultage	150100	icon_skills.kick2_tex	Catapultage de gravure	icon_crest.e_crestpassivecriticalup_tex	Double les dégâts sur les cibles renversées.
+31032	Retourné	160100	icon_skills.airkick_tex	Retourné persistant	icon_crest.e_crestpassivedurationup_tex	Augmente la durée des effets de 50%.
+31033	Retourné	160100	icon_skills.airkick_tex	Retourné indigné	icon_crest.e_crestactiveinvokeskill_tex	Augmente les dégâts de 50 % sur une cible suspendue dans les airs.
+31034	Carnage	170100	icon_skills.dashattack_tex	Carnage puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de compétence de 20%.
+31035	Carnage	170100	icon_skills.dashattack_tex	Carnage brillant	icon_crest.e_crestpassivemprecoveryup_tex	Restaure 2% MP par coup porté
+31036	Carnage	170100	icon_skills.dashattack_tex	Carnage restaurateur	icon_crest.e_crestpassivehpheal_tex	Restaure 1% PV par coup porté
+31037	Décharge de Rage			Décharge de Rage renforcée	icon_crest.e_crestpassiveattackup_tex	Augmente la puissance de 25 pendant la durée de l'effet
+31038	Décharge de Rage			Décharge de Rage renforcée énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+31039	Défouloir	200100	icon_skills.catchair_tex	Défouloir énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+31040	Défouloir	200100	icon_skills.catchair_tex	Défouloir puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 20%.
+31041	Rage vivifiante	190100	icon_skills.relax_tex	Rage vivifiante énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+31042	Rage vivifiante	190100	icon_skills.relax_tex	Rage vivifiante énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+31043	Esquive rapide	400100	icon_skills.instancerush_tex	Esquive rapide énergétique	icon_crest.e_crestactivecooltimereset_tex	20% de chances de supprimer le temps de recharge.
+31044	Direct	10100	icon_skills.comboattack01_tex	Direct puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de 30%.
+31045	Tourniquet	70100	icon_skills.upperkick_tex	Tourniquet énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+31046	Colère divine	30100	icon_skills.dragonrisingblow_tex	Colère divine énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+31047	Frappe sismique	40100	icon_skills.poundonground_tex	Frappe sismique brillante	icon_crest.e_creststrecover_tex	Régénère 3 % de Rage par coup porté
+31048	Frappe sismique	40100	icon_skills.poundonground_tex	Frappe sismique de gravure	icon_crest.e_crestpassivecriticalup_tex	Double les chances d'infliger un coup critique.
+31049	Frappe sismique	40100	icon_skills.poundonground_tex	Frappe sismique puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 30%.
+31050	Torpille	60100	icon_skills.blowattack_tex	Torpille puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+31051	Torpille	60100	icon_skills.blowattack_tex	Torpille de gravure	icon_crest.e_crestpassivecriticalup_tex	Multiplie le facteur de coups critiques par 2,5.
+31052	Torpille	60100	icon_skills.blowattack_tex	Torpille énergétique	icon_crest.e_crestactivecooltimereset_tex	60% de chances de supprimer le temps de recharge de Tourniquet en cas d'attaque réussie sur un monstre.
+31053	Marteau-pilon	80100	icon_skills.risingblow_tex	Marteau-pilon brillant	icon_crest.e_creststrecover_tex	Régénère 2 % de Rage par coup porté.
+31054	Dérouillée	90100	icon_skills.rapidattack_tex	Dérouillée puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+31055	Dérouillée	90100	icon_skills.rapidattack_tex	Dérouillée de gravure	icon_crest.e_crestpassivecriticalup_tex	Double les chances de porter un coup critique.
+31056	Dérouillée	90100	icon_skills.rapidattack_tex	Dérouillée brillante	icon_crest.e_creststrecover_tex	Régénère 1 % de Rage par coup porté.
+31057	Riposte	100100	icon_skills.counterattack2_tex	Riposte énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+31058	Exaspération	140100	icon_skills.enrage_tex	Exaspération ralentissante	icon_crest.e_crestpassivespeeddown_tex	Réduit la vitesse de déplacement de 50 % supplémentaires pendant 5 secondes.
+31059	Marteau-pilon	80100	icon_skills.risingblow_tex	Marteau-pilon puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+31060	Contre	20100	icon_skills.smashattack02_tex	Contre puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 30%.
+31061	Riposte	100100	icon_skills.counterattack2_tex	Riposte puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 30%.
+31062	Carnage	170100	icon_skills.dashattack_tex	Carnage puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 20%.
+31063	Carnage	170100	icon_skills.dashattack_tex	Carnage restaurateur	icon_crest.e_crestpassivehpheal_tex	Régénère les PV de 1.5% par coup porté
+31064	Défouloir	200100	icon_skills.catchair_tex	Défouloir puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+31065	Esquive rapide	400100	icon_skills.instancerush_tex	Esquive rapide énergétique	icon_crest.e_crestactivecooltimereset_tex	30% de chances de supprimer le temps de recharge.
+31066	Contre	20100	icon_skills.smashattack02_tex	Contre de gravure	icon_crest.e_crestpassivecriticalup_tex	Double les chances de porter un coup critique.
+31067	Tourniquet	70100	icon_skills.upperkick_tex	Tourniquet alimenté	icon_crest.e_crestnextskillattackup_tex	Les dégâts de toutes les compétences augmentent de 15 % par coup porté.
+31068	Frappe sismique	40100	icon_skills.poundonground_tex	Frappe sismique de gravure	icon_crest.e_crestpassivecriticalup_tex	Triple les chances de porter un coup critique.
+31069	Torpille	60100	icon_skills.blowattack_tex	Torpille de gravure	icon_crest.e_crestpassivecriticalup_tex	Triple les chances de porter un coup critique.
+31070	Catapultage	150100	icon_skills.kick2_tex	Catapultage de gravure	icon_crest.e_crestpassivecriticalup_tex	Triple les dégâts sur la cible renversée
+32000	Étoiles acharnées	10100	icon_skills.c12_meleecombo	Étoiles acharnées puissantes	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 20%.
+32001	Étoiles acharnées	10100	icon_skills.c12_meleecombo	Étoiles acharnées brillantes	icon_crest.e_crestpassivemprecoveryup_tex	Augmente la régénération de PM de 15%.
+32002	Étoiles acharnées	10100	icon_skills.c12_meleecombo	Étoiles acharnées rapides	icon_crest.e_crestactiveattackspeedup_tex	10% de chances d'augmenter la vitesse d'attaque de 10&nbsp;% pendant 5&nbsp;secondes.
+32003	Volée de dagues	30100	icon_skills.c12_rapidshot	Volée de dagues indignée	icon_crest.e_crestactiveinvokeskill_tex	Augmente les dégâts de 40&nbsp;% sur une cible suspendue dans les airs.
+32004	Volée de dagues	30100	icon_skills.c12_rapidshot	Volée de dagues énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 15%.
+32005	Bonds sinueux	40100	icon_skills.c12_dashattack	Bonds sinueux alimentés	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de compétence de 10&nbsp;% suite à un coup réussi.
+32006	Bombe incendiaire	50100	icon_skills.c12_flamebomb	Bombe incendiaire énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 15%.
+32007	Lacération	60100	icon_skills.c12_rapidslash	Lacération puissante	icon_crest.e_crestpassiveattackup_tex	Les dégâts de la compétence augmentent de 20%.
+32008	Lacération	60100	icon_skills.c12_rapidslash	Lacération énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+32009	Frappe sournoise	70100	icon_skills.c12_catchback	Frappe sournoise brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 125.
+32010	Frappe sournoise	70100	icon_skills.c12_catchback	Frappe sournoise d'influence	icon_crest.e_crestactivecooltimereset_tex	25% de chance de réduire le temps de recharge de Double entaille en cas d'attaque réussie sur un monstre.
+32011	Frappe sournoise	70100	icon_skills.c12_catchback	Frappe sournoise puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 20%.
+32012	Éruption volcanique	80100	icon_skills.c12_flamestrike	Éruption volcanique puissante	icon_crest.e_crestpassiveattackup_tex	Les dégâts de la compétence augmentent de 20%.
+32013	Rideau de brume	90100	icon_skills.c12_smokebomb	Rideau de brume énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 15%.
+32014	Réaction	100100	icon_skills.risingattack_tex	Réaction puissante	icon_crest.e_crestpassiveattackup_tex	Augmentent les dégâts de la compétence de 20%.
+32015	Réaction	100100	icon_skills.risingattack_tex	Réaction énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+32018	Taillade triangulaire	120100	icon_skills.c12_airstepstrike	Taillade triangulaire brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 125.
+32019	Taillade triangulaire	120100	icon_skills.c12_airstepstrike	Taillade triangulaire de gravure	icon_crest.e_crestpassivecriticalup_tex	Augmente les chances de coups critiques de 50&nbsp;%,
+32020	Taillade triangulaire	120100	icon_skills.c12_airstepstrike	Taillade triangulaire alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de la compétence Scie circulaire de 25&nbsp;% dans le cadre d'un enchaînement.
+32021	Scie circulaire	130100	icon_skills.c12_rotateslash	Scie circulaire brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 175.
+32022	Scie circulaire	130100	icon_skills.c12_rotateslash	Scie circulaire puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 20%.
+32023	Double entaille	140100	icon_skills.c12_twinslash	Double entaille brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 100.
+32024	Double entaille	140100	icon_skills.c12_twinslash	Double entaille alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de la compétence Taillade triangulaire de 25&nbsp;% dans le cadre d'un enchaînement.
+32025	Double entaille	140100	icon_skills.c12_twinslash	Double entaille énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+32026	Jet de flammes	150100	icon_skills.c12_flamebreath	Jet de flammes indigné	icon_crest.e_crestactiveinvokeskill_tex	Augmente les dégâts de 30&nbsp;% sur une cible suspendue dans les airs.
+32027	Jet de flammes	150100	icon_skills.c12_flamebreath	Jet de flammes brillant	icon_crest.e_crestpassivemprecoveryup_tex	Restaure 1% PM par coup porté.
+32028	Étoile filante	160100	icon_skills.c12_rotateshurikenshot	Étoile filante brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 150.
+32029	Étoile filante	160100	icon_skills.c12_rotateshurikenshot	Étoile filante restauratrice	icon_crest.e_crestpassivehpheal_tex	Restaure 3% du total de PV à chaque coup porté.
+32030	Étoile filante	160100	icon_skills.c12_rotateshurikenshot	Étoile filante énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+32031	Méditation	170100	icon_skills.c12_chakracharge	Méditation brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 100.
+32032	Méditation	170100	icon_skills.c12_chakracharge	Méditation énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+32033	Méditation	170100	icon_skills.c12_chakracharge	Méditation enflammée	icon_crest.e_crestactiveattackspeedup_tex	Augmente la vitesse de recharge de Jet de flammes et d'Éruption volcanique de 20&nbsp;% pendant 10&nbsp;secondes.
+32034	Tornade de lames	180100	icon_skills.c12_tornadoshot	Tornade de lames brillante	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 175.
+32035	Tornade de lames	180100	icon_skills.c12_tornadoshot	Tornade de lames énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+32036	Coup bas	190100	icon_skills.c12_evadestingshot	Coup bas brillant	icon_crest.e_crestpassivempdown_tex	Réduit le coût en PM de 150.
+32037	Coup bas	190100	icon_skills.c12_evadestingshot	Coup bas énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+32038	Étoiles acharnées	10100	icon_skills.c12_meleecombo	Étoiles acharnées puissantes	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de compétence de 30%.
+32039	Volée de dagues	30100	icon_skills.c12_rapidshot	Volée de dagues indignée	icon_crest.e_crestactiveinvokeskill_tex	Augmente les dégâts de 60&nbsp;% sur une cible suspendue dans les airs.
+32040	Bombe incendiaire	50100	icon_skills.c12_flamebomb	Bombe incendiaire énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+32041	Lacération	60100	icon_skills.c12_rapidslash	Lacération puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+32042	Frappe sournoise	70100	icon_skills.c12_catchback	Frappe sournoise d'influence	icon_crest.e_crestactivecooltimereset_tex	50% de chance d'annuler le temps de recharge de Double entaille quand vous attaquez des monstres.
+32043	Éruption volcanique	80100	icon_skills.c12_flamestrike	Éruption volcanique de gravure	icon_crest.e_crestpassivecriticalup_tex	Double le taux de coups critiques.
+32044	Taillade triangulaire	120100	icon_skills.c12_airstepstrike	Taillade triangulaire alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de la compétence Scie circulaire de 30&nbsp;% dans le cadre d'un enchaînement.
+32045	Taillade triangulaire	120100	icon_skills.c12_airstepstrike	Taillade triangulaire de gravure	icon_crest.e_crestpassivecriticalup_tex	Double le taux de coups critiques.
+32046	Scie circulaire	130100	icon_skills.c12_rotateslash	Scie circulaire puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+32047	Double entaille	140100	icon_skills.c12_twinslash	Double entaille alimentée	icon_crest.e_crestnextskillattackup_tex	Augmente les dégâts de la compétence Taillade triangulaire de 30&nbsp;% dans le cadre d'un enchaînement.
+32048	Double entaille	140100	icon_skills.c12_twinslash	Double entaille de gravure	icon_crest.e_crestpassivecriticalup_tex	Double le taux de coups critiques.
+32049	Jet de flammes	150100	icon_skills.c12_flamebreath	Jet de flammes indigné	icon_crest.e_crestactiveinvokeskill_tex	Augmente les dégâts de 50&nbsp;% sur une cible suspendue dans les airs.
+32050	Étoile filante	160100	icon_skills.c12_rotateshurikenshot	Étoile filante restauratrice	icon_crest.e_crestpassivehpheal_tex	Restaure 5% du total de PV à chaque coup porté.
+32051	Tornade de lames	180100	icon_skills.c12_tornadoshot	Tornade de lames puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+32052	Coup bas	190100	icon_skills.c12_evadestingshot	Coup bas énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+32053	Volée de dagues	30100	icon_skills.c12_rapidshot	Volée de dagues énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+32054	Lacération	60100	icon_skills.c12_rapidslash	Lacération énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de rechargement de 25%.
+32055	Éruption volcanique	80100	icon_skills.c12_flamestrike	Éruption volcanique puissante	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+32056	Rideau de brume	90100	icon_skills.c12_smokebomb	Rideau de brume énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 25%.
+32057	Scie circulaire	130100	icon_skills.c12_rotateslash	Scie circulaire énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de recharge de 20%.
+32058	Méditation	170100	icon_skills.c12_chakracharge	Méditation enflammée	icon_crest.e_crestactiveattackspeedup_tex	Augmente la vitesse de recharge de Jet de flammes et d'Éruption volcanique de 30&nbsp;% pendant 10&nbsp;secondes.
+32059	Coup bas	190100	icon_skills.c12_evadestingshot	Coup bas puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 25%.
+32060	Étoiles acharnées	10100	icon_skills.c12_meleecombo	Étoiles acharnées rapides	icon_crest.e_crestactiveattackspeedup_tex	15% de chances d'augmenter la vitesse d'attaque de 10&nbsp;% pendant 5&nbsp;secondes.
+32061	Éruption volcanique	80100	icon_skills.c12_flamestrike	Éruption volcanique de gravure	icon_crest.e_crestpassivecriticalup_tex	Triple le taux de coups critiques.
+32062	Double entaille	140100	icon_skills.c12_twinslash	Double entaille de gravure	icon_crest.e_crestpassivecriticalup_tex	Triple le taux de coups critiques.
+32063	Jet de flammes	150100	icon_skills.c12_flamebreath	Jet de flammes puissant	icon_crest.e_crestpassiveattackup_tex	Augmente les dégâts de la compétence de 30%.
+32064	Manœuvre d'esquive	20100	icon_skills.c12_dash	Manœuvre d'esquive énergétique	icon_crest.e_crestpassivecooltimedown_tex	Réduit le temps de rechargement de 20%.

@@ -1,0 +1,134 @@
+#include "stdafx.h"
+#include <Windows.h>
+#include <string>
+#include <fstream>
+#include <locale>
+//Usinng
+using namespace std;
+
+char* UTF16ToUTF8(const u16string& TextUTF16) {
+	if (TextUTF16.empty())return 0;
+	int bNeed = WideCharToMultiByte(CP_UTF8, 0, (LPCWCH)TextUTF16.data(), -1, NULL, 0, NULL, NULL);
+	char* strUTF8 = new char[bNeed];
+	int result = WideCharToMultiByte(CP_UTF8, 0, (LPCWCH)TextUTF16.data(), -1, (LPSTR)strUTF8, bNeed, NULL, NULL);
+	
+	return strUTF8;
+}
+
+size_t SearchMem(size_t pStartAddress, size_t pEndAddress, const char sz[], size_t szlength)
+{
+	pEndAddress -= szlength;
+	while (pStartAddress < pEndAddress)
+	{
+		while (IsBadReadPtr(reinterpret_cast<char*>(pStartAddress), szlength) || *(reinterpret_cast<char*>(pStartAddress)) == NULL)
+		{
+			++pStartAddress;
+			if (pStartAddress == pEndAddress)
+				return 0;
+		}
+		if (memcmp(reinterpret_cast<char*>(pStartAddress), sz, szlength) == 0)
+		{
+			return pStartAddress;
+		}
+		++pStartAddress;
+	}
+	return 0;
+}
+
+size_t SearchForSubstringU16(size_t pStartAddress, size_t pEndAddress, const u16string& SubString)
+{
+	size_t  szlength = sizeof(char16_t) * SubString.length();
+	return SearchMem(pStartAddress, pEndAddress, (char*)SubString.c_str(), szlength);
+}
+
+size_t SearchForSubstring(size_t pStartAddress, size_t pEndAddress, const string& SubString)
+{
+	size_t  szlength = SubString.length();
+	return SearchMem(pStartAddress, pEndAddress, SubString.data(), szlength);
+}
+
+size_t SearchForDWORD(size_t pStartAddress, size_t pEndAddress, const DWORD32 pTarget)
+{
+	return SearchMem(pStartAddress, pEndAddress, (char*)&pTarget, 4);
+}
+
+u16string GetSMTName(size_t address) 
+{
+	u16string S;
+	S.assign(reinterpret_cast<char16_t*>(address));
+	return S;
+}
+
+string GetOpCodeName(DWORD Opcode, DWORD32 GetOpCodeNameAddress)
+{
+	unsigned int pointer = 0;
+
+	_asm
+	{
+		push Opcode
+			call GetOpCodeNameAddress
+			add esp, 4
+			mov[pointer], eax
+	}
+
+	return string((LPCSTR)pointer);
+}
+
+DWORD WINAPI Thread(LPVOID nothing)
+{
+	size_t ver = SearchForDWORD(0x00400000, 0x7fffffff, 0x358BEC55);
+	ver += 4;
+	DWORD32 version = *(DWORD32*)(*(DWORD32*)ver);
+	char opcodeversion[10];
+	_itoa_s(version, opcodeversion, 10);
+	size_t i_teleport = SearchForSubstring(0x00400000, 0x7fffffff, "I_TELEPORT");
+	size_t opcodes = SearchForDWORD(0x00400000, 0x7fffffff, i_teleport);
+	DWORD32 GetOpCodeNameAddress = opcodes-42;
+	ofstream fileOut;
+	fileOut.open((string)opcodeversion + ".txt", ios::out);
+	string name = "";
+
+	for (int i = 0; i < 0x10000; i++)
+	{
+		name = GetOpCodeName(i, GetOpCodeNameAddress);
+		if (name != "")
+		{
+			fileOut << name << " = " << i << endl;
+		}
+	}
+
+	fileOut.close();
+	
+	ofstream fileOut2;
+	fileOut2.open("smt_"+(string)opcodeversion+".txt", ios::out);
+	size_t address = SearchForSubstringU16(0x00400000, 0x7fffffff, u"SMT_UNDEFINED");
+	size_t smt_0 = SearchForDWORD(0x00400000, 0x7fffffff, address);
+	size_t smt;
+	for (int i = 0; i < 0x10000; i++)
+	{
+		smt = *(DWORD32*)(smt_0 + i * 4);
+		name = UTF16ToUTF8(GetSMTName(smt));
+		if (name != "")
+		{
+			fileOut2 << name << " = " << std::dec << i << endl;
+		}
+		if (name == "SMT_MAX") break;
+	}
+
+	fileOut2.close();
+	return 1;
+}
+
+BOOL WINAPI DllMain(HINSTANCE Hinst, DWORD  Reason, LPVOID nothing)
+{
+	switch (Reason)
+	{
+		case DLL_PROCESS_ATTACH:
+			MessageBoxA(0, "Injected", "Desu", 0);
+			CreateThread(0, 0, Thread, 0, 0, 0);
+		case DLL_PROCESS_DETACH:
+			MessageBoxA(0, "Finished.", "Desu", 0);
+	}
+
+	return 1;
+}

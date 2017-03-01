@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Zones>
+	<!-- Ghillede -->
+	<Zone id="713">
+		<Monster id="81301" isBoss="True" />
+		<Monster id="81398" isBoss="True" />
+		<Monster id="81399" isBoss="True" />
+	</Zone>
+	<Zone id="813">
+		<Monster id="81301" isBoss="True" />
+		<Monster id="81398" isBoss="True" />
+		<Monster id="81399" isBoss="True" />
+	</Zone>
+	
+	<!-- Sabex Armory -->
+	<Zone id="808">
+		<Monster id="20081000" isBoss="False" />
+		<Monster id="20081001" isBoss="False" />
+		<Monster id="20081002" isBoss="False" />
+		<Monster id="20081003" isBoss="False" />
+		<Monster id="20081004" isBoss="False" />
+	</Zone>
+	
+	<Zone id="759">
+		<Monster id="1003" isBoss="True" />
+		<Monster id="1004" isBoss="False" />
+		<Monster id="1005" isBoss="False" />
+	</Zone>
+
+	<!-- Shattered Fleet -->
+	<Zone id="766">
+		<Monster id="76611" isBoss="False" />
+	</Zone>
+	
+	<!-- SCHM -->
+	<Zone id="916">
+		<Monster id="1001" isBoss="False" name="Trash darkan" />
+	</Zone>
+</Zones>

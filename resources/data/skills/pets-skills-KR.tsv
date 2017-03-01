@@ -1,0 +1,181 @@
+48	2000	공성병기	1101	포탄 발사	icon_skills.vehicleex_att01_tex
+48	2000	공성병기	1201	내리기	icon_skills.vehicleex_getoff_tex
+111	1000	기능형 전차	1101	확산탄 발사	icon_skills.darkexplosion_tex
+111	1000	기능형 전차	1102	확산탄 발사	icon_skills.darkexplosion_tex
+111	1000	기능형 전차	1201	내리기	icon_skills.vehicleex_getoff_tex
+111	1000	기능형 전차	2101	지뢰 설치	icon_skills.paralysistrap_tex
+111	1000	기능형 전차	2102	지뢰 설치	icon_skills.paralysistrap_tex
+111	1000	기능형 전차	3102	확산탄 발사	icon_skills.darkexplosion_tex
+111	2000	파워형 전차	1101	포탄 발사	icon_skills.vehicleex_att02_tex
+111	2000	파워형 전차	1102	포탄 발사	icon_skills.vehicleex_att02_tex
+111	2000	파워형 전차	1201	내리기	icon_skills.vehicleex_getoff_tex
+111	3000	기동형 전차	1101	포탄 발사	icon_skills.spawnunioncannon_tex
+111	3000	기동형 전차	1102	포탄 발사	icon_skills.spawnunioncannon_tex
+111	3000	기동형 전차	1201	내리기	icon_skills.vehicleex_getoff_tex
+111	3000	기동형 전차	2101	얼음 폭풍 설치	icon_skills.darkexplosion_tex
+111	6000	고정형 대포	1301	포탄 발사	icon_skills.vehicleex_att01_tex
+111	6000	고정형 대포	1302	포탄 발사	icon_skills.vehicleex_att01_tex
+111	6000	고정형 대포	1401	내리기	icon_skills.vehicleex_getoff_tex
+111	6000	고정형 대포	1501	공중 폭격	icon_skills.warmonger_tex
+111	6000	고정형 대포	1501	공중 폭격	icon_skills.howitzer_tex
+111	7000	만능형 전차	1101	확산탄 발사	icon_skills.darkexplosion_tex
+111	7000	만능형 전차	1102	확산탄 발사	icon_skills.darkexplosion_tex
+111	7000	만능형 전차	1201	내리기	icon_skills.vehicleex_getoff_tex
+111	7000	만능형 전차	2101	지뢰 설치	icon_skills.paralysistrap_tex
+111	7000	만능형 전차	2102	지뢰 설치	icon_skills.paralysistrap_tex
+111	7000	만능형 전차	3102	확산탄 발사	icon_skills.darkexplosion_tex
+116	1001	비공정	1101	출발	icon_skills.vehicle_drive_tex
+116	1001	비공정	1201	내리기	icon_skills.vehicleex_getoff_tex
+116	1002	비공정	1102	출발	icon_skills.vehicle_drive_tex
+116	1002	비공정	1202	내리기	icon_skills.vehicleex_getoff_tex
+116	1003	비공정	1103	출발	icon_skills.vehicle_drive_tex
+116	1003	비공정	1203	내리기	icon_skills.vehicleex_getoff_tex
+116	4000	공성병기	1101	포탄 발사	icon_skills.vehicleex_att01_tex
+116	4000	공성병기	1102	포탄 발사	icon_skills.vehicleex_att01_tex
+116	4000	공성병기	1201	내리기	icon_skills.vehicleex_getoff_tex
+116	4001	공성병기	1301	포탄 발사	icon_skills.vehicleex_att01_tex
+116	4001	공성병기	1302	포탄 발사	icon_skills.vehicleex_att01_tex
+116	4001	공성병기	1401	내리기	icon_skills.vehicleex_getoff_tex
+116	4002	공성병기	1501	포탄 발사	icon_skills.vehicleex_att01_tex
+116	4002	공성병기	1502	포탄 발사	icon_skills.vehicleex_att01_tex
+116	4002	공성병기	1503	내리기	icon_skills.vehicleex_getoff_tex
+116	4003	공성병기	1501	포탄 발사	icon_skills.vehicleex_att01_tex
+116	4003	공성병기	1502	포탄 발사	icon_skills.vehicleex_att01_tex
+116	4003	공성병기	1503	내리기	icon_skills.vehicleex_getoff_tex
+117	5000		1102	분노의 도약	icon_skills.kumas_frontjump_tex
+117	5000		1103	3단 몰아찍기	icon_skills.kumas_3combo_tex
+117	5000		1104	필살원기 발사	icon_skills.kumas_energy_tex
+117	5000		1105	필살원기 발사	icon_skills.kumas_energy_tex
+117	5000		1111	브레스 폭발	icon_skills.kumas_breath_tex
+117	5000		1212	백 점프	icon_skills.kumas_backjump_tex
+117	5000		1318	로켓주먹	icon_skills.kumas_rocketpunch_tex
+117	5000		2201	정화	icon_skills.purify_tex
+117	5000		2202	치유	icon_skills.healarea_tex
+117	6000		1102	분노의 도약	icon_skills.kumas_frontjump_tex
+117	6000		1104	원기 발사	icon_skills.kumas_energy_tex
+117	6000		1105	원기 발사	icon_skills.kumas_energy_tex
+117	6000		1106	브레스	icon_skills.kumas_breath_tex
+117	6000		1108	왼손 후리기	icon_skills.kumas_righthit_tex
+117	6000		1109	오른손 후리기	icon_skills.kumas_lefthit_tex
+117	6000		1311	앞 구르기	icon_skills.kumas_frontroll_tex
+117	6000		2201	정화	icon_skills.purify_tex
+117	7000		1103	3단 몰아찍기	icon_skills.kumas_3combo_tex
+117	7000		1212	물러서기	icon_skills.kumas_backjump_tex
+118	5000	대장 쿠마스	1103	3단 몰아찍기	icon_skills.kw_atk1_tex
+118	5000	대장 쿠마스	3101	제자리 뛰기	icon_skills.kw_stomp_tex
+118	5000	대장 쿠마스	3110	침묵의 브레스	icon_skills.kw_breath_tex
+118	5000	대장 쿠마스	4110	분노의 빔	icon_skills.kw_flashcannon_tex
+118	5000	대장 쿠마스	4170	분노의 몰아치기	icon_skills.kw_dashattack_tex
+118	5000	대장 쿠마스	4180	분노의 도약	icon_skills.kw_leapattack_tex
+118	6000		1101	기본공격	icon_skills.kw_atk2_tex
+118	6000		3110	아기 브레스	icon_skills.kw_minibreath_tex
+118	6000		4120	로켓 폭죽 발사	icon_skills.kw_rocket_tex
+118	6000		4121	로켓 폭죽 발사	icon_skills.kw_rocket_tex
+118	6000		4130	에너지 볼트	icon_skills.kw_energyball_tex
+118	6000		4131	에너지 볼트	icon_skills.kw_energyball_tex
+118	6000		4140	박수치기	icon_skills.kw_clap_tex
+118	6000		4150	물러서기	icon_skills.kw_backjump_tex
+118	6000		4160	앞 구르기	icon_skills.kumas_frontroll_tex
+118	8000	대장 쿠마스	1103	3단 몰아찍기	icon_skills.kw_atk1_tex
+118	8000	대장 쿠마스	3101	제자리 뛰기	icon_skills.kw_stomp_tex
+118	8000	대장 쿠마스	3110	침묵의 브레스	icon_skills.kw_breath_tex
+118	8000	대장 쿠마스	4110	분노의 빔	icon_skills.kw_flashcannon_tex
+118	8000	대장 쿠마스	4170	분노의 몰아치기	icon_skills.kw_dashattack_tex
+118	8000	대장 쿠마스	4180	분노의 도약	icon_skills.kw_leapattack_tex
+118	9000		1101	기본공격	icon_skills.kw_atk2_tex
+118	9000		3110	아기 브레스	icon_skills.kw_minibreath_tex
+118	9000		4120	로켓 폭죽 발사	icon_skills.kw_rocket_tex
+118	9000		4121	로켓 폭죽 발사	icon_skills.kw_rocket_tex
+118	9000		4130	에너지 볼트	icon_skills.kw_energyball_tex
+118	9000		4131	에너지 볼트	icon_skills.kw_energyball_tex
+118	9000		4140	박수치기	icon_skills.kw_clap_tex
+118	9000		4150	물러서기	icon_skills.kw_backjump_tex
+118	9000		4160	앞 구르기	icon_skills.kumas_frontroll_tex
+121	9005		1301	포탄 발사	icon_skills.vehicleex_att01_tex
+121	9005		1302	포탄 발사	icon_skills.vehicleex_att01_tex
+121	9005		1501	내리기	icon_skills.vehicleex_getoff_tex
+122	9005		1301	포탄 발사	icon_skills.vehicleex_att01_tex
+122	9005		1302	포탄 발사	icon_skills.vehicleex_att01_tex
+122	9005		1501	내리기	icon_skills.vehicleex_getoff_tex
+123	9005		1301	포탄 발사	icon_skills.vehicleex_att01_tex
+123	9005		1302	포탄 발사	icon_skills.vehicleex_att01_tex
+123	9005		1501	내리기	icon_skills.vehicleex_getoff_tex
+191	1601	공성병기	1101	포탄 발사	icon_skills.vehicleex_att01_tex
+191	1601	공성병기	1102	포탄 발사	icon_skills.vehicleex_att01_tex
+191	1601	공성병기	1201	내리기	icon_skills.vehicleex_getoff_tex
+191	1604	비공정	1101	출발	icon_skills.vehicle_drive_tex
+191	1604	비공정	1201	내리기	icon_skills.vehicleex_getoff_tex
+191	1605	비공정	1101	출발	icon_skills.vehicle_drive_tex
+191	1605	비공정	1201	내리기	icon_skills.vehicleex_getoff_tex
+210	2999	물대포	1101	포탄 발사	icon_items.q_arogonnmucus_tex
+210	2999	물대포	1201	내리기	icon_skills.vehicleex_getoff_tex
+210	3000	물대포	1101	포탄 발사	icon_items.q_arogonnmucus_tex
+210	3000	물대포	1201	내리기	icon_skills.vehicleex_getoff_tex
+210	4000	장난감 태양 전차	1101	포탄 발사	icon_skills.vehicleex_att01_tex
+210	4000	장난감 태양 전차	1102	포탄 발사	icon_skills.vehicleex_att01_tex
+210	4000	장난감 태양 전차	1201	내리기	icon_skills.vehicleex_getoff_tex
+425	8041	대포	1101	포탄 발사	icon_skills.vehicleex_att01_tex
+425	8041	대포	1201	내리기	icon_skills.vehicleex_getoff_tex
+443	4000	이동형 공성병기	1101	포탄 발사	icon_skills.vehicleex_att01_tex
+443	4000	이동형 공성병기	1102	포탄 발사	icon_skills.vehicleex_att01_tex
+443	4000	이동형 공성병기	1201	내리기	icon_skills.vehicleex_getoff_tex
+447	300	할로윈 대포	1201	내리기	icon_skills.vehicleex_getoff_tex
+447	300	할로윈 대포	2101	호박 발사	icon_skills.vehicleex_att01_tex
+447	300	할로윈 대포	2102	호박 발사	icon_skills.vehicleex_att01_tex
+447	310	할로윈 대포	1201	내리기	icon_skills.vehicleex_getoff_tex
+447	310	할로윈 대포	2101	호박 발사	icon_skills.vehicleex_att01_tex
+447	310	할로윈 대포	2102	호박 발사	icon_skills.vehicleex_att01_tex
+447	311	할로윈 대포	1201	내리기	icon_skills.vehicleex_getoff_tex
+447	311	할로윈 대포	2101	호박 발사	icon_skills.vehicleex_att01_tex
+447	311	할로윈 대포	2102	호박 발사	icon_skills.vehicleex_att01_tex
+450	5000	비공정	1101	출발	icon_skills.vehicle_drive_tex
+450	5000	비공정	1201	내리기	icon_skills.vehicleex_getoff_tex
+453	500		1101	포탄 발사	icon_skills.vehicleex_att01_tex
+453	500		1201	내리기	icon_skills.vehicleex_getoff_tex
+453	501		1101	포탄 발사	icon_skills.vehicleex_att01_tex
+453	501		1201	내리기	icon_skills.vehicleex_getoff_tex
+643	4000	이동형 공성병기	1101	포탄 발사	icon_skills.vehicleex_att01_tex
+643	4000	이동형 공성병기	1102	포탄 발사	icon_skills.vehicleex_att01_tex
+643	4000	이동형 공성병기	1201	내리기	icon_skills.vehicleex_getoff_tex
+725	8041	대포	1101	포탄 발사	icon_skills.vehicleex_att01_tex
+725	8041	대포	1201	내리기	icon_skills.vehicleex_getoff_tex
+743	4000	이동형 공성병기	1101	포탄 발사	icon_skills.vehicleex_att01_tex
+743	4000	이동형 공성병기	1102	포탄 발사	icon_skills.vehicleex_att01_tex
+743	4000	이동형 공성병기	1201	내리기	icon_skills.vehicleex_getoff_tex
+750	5000	비공정	1101	출발	icon_skills.vehicle_drive_tex
+750	5000	비공정	1201	내리기	icon_skills.vehicleex_getoff_tex
+750	5001	비공정	1101	출발	icon_skills.vehicle_drive_tex
+750	5001	비공정	1201	내리기	icon_skills.vehicleex_getoff_tex
+750	5002	비공정	1101	출발	icon_skills.vehicle_drive_tex
+750	5002	비공정	1201	내리기	icon_skills.vehicleex_getoff_tex
+750	5003	비공정	1101	출발	icon_skills.vehicle_drive_tex
+750	5003	비공정	1201	내리기	icon_skills.vehicleex_getoff_tex
+750	5004	비공정	1101	출발	icon_skills.vehicle_drive_tex
+750	5004	비공정	1201	내리기	icon_skills.vehicleex_getoff_tex
+750	5005	비공정	1101	출발	icon_skills.vehicle_drive_tex
+750	5005	비공정	1201	내리기	icon_skills.vehicleex_getoff_tex
+750	5006	비공정	1101	출발	icon_skills.vehicle_drive_tex
+750	5006	비공정	1201	내리기	icon_skills.vehicleex_getoff_tex
+750	5007	비공정	1101	출발	icon_skills.vehicle_drive_tex
+750	5007	비공정	1201	내리기	icon_skills.vehicleex_getoff_tex
+750	5008	비공정	1101	출발	icon_skills.vehicle_drive_tex
+750	5008	비공정	1201	내리기	icon_skills.vehicleex_getoff_tex
+750	5009	비공정	1101	출발	icon_skills.vehicle_drive_tex
+885	885158	환영의 대포	1101	포탄 발사	icon_skills.vehicleex_att01_tex
+885	885158	환영의 대포	1102	포탄 발사	icon_skills.vehicleex_att01_tex
+885	885158	환영의 대포	1201	내리기	icon_skills.vehicleex_getoff_tex
+950	2003		4120	연속 발사	icon_status.shotarrowblindly_tex
+950	2003		4121	연속 발사	icon_status.shotarrowblindly_tex
+950	2003		4130	화살 발사	icon_status.shotarrow_tex
+950	2003		4131	화살 발사	icon_status.shotarrow_tex
+950	2003		4160	긴급 기동	icon_status.accelration_tex
+950	2003		4500	내리기	icon_status.vehicleex_getoff_tex
+950	2005	신계의 관문 발리스타	4120	연속 발사	icon_status.shotarrowblindly_tex
+950	2005	신계의 관문 발리스타	4121	연속 발사	icon_status.shotarrowblindly_tex
+950	2005	신계의 관문 발리스타	4130	화살 발사	icon_status.shotarrow_tex
+950	2005	신계의 관문 발리스타	4131	화살 발사	icon_status.shotarrow_tex
+950	2005	신계의 관문 발리스타	4160	긴급 기동	icon_status.accelration_tex
+950	2005	신계의 관문 발리스타	4500	내리기	icon_status.vehicleex_getoff_tex
+1023	3000007	연맹 대포	1101	포탄 발사	icon_skills.vehicleex_att01_tex
+1023	3000007	연맹 대포	1102	포탄 발사	icon_skills.vehicleex_att01_tex
+1023	3000007	연맹 대포	1201	내리기	icon_skills.vehicleex_getoff_tex

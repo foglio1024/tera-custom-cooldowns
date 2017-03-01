@@ -1,0 +1,181 @@
+48	2000	Belagerungswaffe	1101	Salve abfeuern	icon_skills.vehicleex_att01_tex
+48	2000	Belagerungswaffe	1201	Absitzen	icon_skills.vehicleex_getoff_tex
+111	1000	Funktionaler Panzer	1101	Streubombe	icon_skills.darkexplosion_tex
+111	1000	Funktionaler Panzer	1102	Streubombe	icon_skills.darkexplosion_tex
+111	1000	Funktionaler Panzer	1201	Aussteigen	icon_skills.vehicleex_getoff_tex
+111	1000	Funktionaler Panzer	2101	Mine legen	icon_skills.paralysistrap_tex
+111	1000	Funktionaler Panzer	2102	Mine legen	icon_skills.paralysistrap_tex
+111	1000	Funktionaler Panzer	3102	Streubombe	icon_skills.darkexplosion_tex
+111	2000	Machtvoller Panzer	1101	Kanonenkugel abfeuern	icon_skills.vehicleex_att02_tex
+111	2000	Machtvoller Panzer	1102	Kanonenkugel abfeuern	icon_skills.vehicleex_att02_tex
+111	2000	Machtvoller Panzer	1201	Aussteigen	icon_skills.vehicleex_getoff_tex
+111	3000	Schneller Panzer	1101	Kanonenkugel abfeuern	icon_skills.spawnunioncannon_tex
+111	3000	Schneller Panzer	1102	Kanonenkugel abfeuern	icon_skills.spawnunioncannon_tex
+111	3000	Schneller Panzer	1201	Aussteigen	icon_skills.vehicleex_getoff_tex
+111	3000	Schneller Panzer	2101	Hagelsturm starten	icon_skills.darkexplosion_tex
+111	6000	Fixierte Kanone	1301	Kanonenkugel abfeuern	icon_skills.vehicleex_att01_tex
+111	6000	Fixierte Kanone	1302	Kanonenkugel abfeuern	icon_skills.vehicleex_att01_tex
+111	6000	Fixierte Kanone	1401	Aussteigen	icon_skills.vehicleex_getoff_tex
+111	6000	Fixierte Kanone	1501	Luftbombardierung	icon_skills.warmonger_tex
+111	6000	Fixierte Kanone	1501	Luftbombardierung	icon_skills.howitzer_tex
+111	7000	Universeller Panzer	1101	Streubombe	icon_skills.darkexplosion_tex
+111	7000	Universeller Panzer	1102	Streubombe	icon_skills.darkexplosion_tex
+111	7000	Universeller Panzer	1201	Aussteigen	icon_skills.vehicleex_getoff_tex
+111	7000	Universeller Panzer	2101	Mine legen	icon_skills.paralysistrap_tex
+111	7000	Universeller Panzer	2102	Mine legen	icon_skills.paralysistrap_tex
+111	7000	Universeller Panzer	3102	Streubombe	icon_skills.darkexplosion_tex
+116	1001	Luftschiff	1101	Abflug	icon_skills.vehicle_drive_tex
+116	1001	Luftschiff	1201	Springen	icon_skills.vehicleex_getoff_tex
+116	1002	Luftschiff	1102	Abflug	icon_skills.vehicle_drive_tex
+116	1002	Luftschiff	1202	Springen	icon_skills.vehicleex_getoff_tex
+116	1003	Luftschiff	1103	Abflug	icon_skills.vehicle_drive_tex
+116	1003	Luftschiff	1203	Springen	icon_skills.vehicleex_getoff_tex
+116	4000	Belagerungswaffe	1101	Salve abfeuern	icon_skills.vehicleex_att01_tex
+116	4000	Belagerungswaffe	1102	Salve abfeuern	icon_skills.vehicleex_att01_tex
+116	4000	Belagerungswaffe	1201	Absitzen	icon_skills.vehicleex_getoff_tex
+116	4001	Belagerungswaffe	1301	Salve abfeuern	icon_skills.vehicleex_att01_tex
+116	4001	Belagerungswaffe	1302	Salve abfeuern	icon_skills.vehicleex_att01_tex
+116	4001	Belagerungswaffe	1401	Absitzen	icon_skills.vehicleex_getoff_tex
+116	4002	Belagerungswaffe	1501	Salve abfeuern	icon_skills.vehicleex_att01_tex
+116	4002	Belagerungswaffe	1502	Salve abfeuern	icon_skills.vehicleex_att01_tex
+116	4002	Belagerungswaffe	1503	Absitzen	icon_skills.vehicleex_getoff_tex
+116	4003	Belagerungswaffe	1501	Salve abfeuern	icon_skills.vehicleex_att01_tex
+116	4003	Belagerungswaffe	1502	Salve abfeuern	icon_skills.vehicleex_att01_tex
+116	4003	Belagerungswaffe	1503	Absitzen	icon_skills.vehicleex_getoff_tex
+117	5000		1102	Bauchklatscher	icon_skills.kumas_frontjump_tex
+117	5000		1103	3er Klaps	icon_skills.kumas_3combo_tex
+117	5000		1104	Großer Wutanfall	icon_skills.kumas_energy_tex
+117	5000		1105	Großer Wutanfall	icon_skills.kumas_energy_tex
+117	5000		1111	Kräftiger Feueratem	icon_skills.kumas_breath_tex
+117	5000		1212	Rückwärtssprung	icon_skills.kumas_backjump_tex
+117	5000		1318	Fliegende Fäuste	icon_skills.kumas_rocketpunch_tex
+117	5000		2201	Kumasreinigung	icon_skills.purify_tex
+117	5000		2202	Kumasheilung	icon_skills.healarea_tex
+117	6000		1102	Bauchklatscher	icon_skills.kumas_frontjump_tex
+117	6000		1104	Wutanfall	icon_skills.kumas_energy_tex
+117	6000		1105	Wutanfall	icon_skills.kumas_energy_tex
+117	6000		1106	Feueratem	icon_skills.kumas_breath_tex
+117	6000		1108	Rundumschlag mit Links	icon_skills.kumas_righthit_tex
+117	6000		1109	Rundumschlag mit Rechts	icon_skills.kumas_lefthit_tex
+117	6000		1311	Bauchrolle	icon_skills.kumas_frontroll_tex
+117	6000		2201	Kumasreinigung	icon_skills.purify_tex
+117	7000		1103	3er Klaps	icon_skills.kumas_3combo_tex
+117	7000		1212	Rückschritt	icon_skills.kumas_backjump_tex
+118	5000	Anführerkumas	1103	3er Klaps	icon_skills.kw_atk1_tex
+118	5000	Anführerkumas	3101	Sprung aus dem Stand	icon_skills.kw_stomp_tex
+118	5000	Anführerkumas	3110	Atem des Schweigens	icon_skills.kw_breath_tex
+118	5000	Anführerkumas	4110	Strahl des Zorns	icon_skills.kw_flashcannon_tex
+118	5000	Anführerkumas	4170	Schlagregen des Zorns	icon_skills.kw_dashattack_tex
+118	5000	Anführerkumas	4180	Bauchklatscher	icon_skills.kw_leapattack_tex
+118	6000		1101	Basisangriff	icon_skills.kw_atk2_tex
+118	6000		3110	Babyatem	icon_skills.kw_minibreath_tex
+118	6000		4120	Feuerwerksrakete	icon_skills.kw_rocket_tex
+118	6000		4121	Feuerwerksrakete	icon_skills.kw_rocket_tex
+118	6000		4130	Energiebolzen	icon_skills.kw_energyball_tex
+118	6000		4131	Energiebolzen	icon_skills.kw_energyball_tex
+118	6000		4140	Klatschen	icon_skills.kw_clap_tex
+118	6000		4150	Rückschritt	icon_skills.kw_backjump_tex
+118	6000		4160	Bauchrolle	icon_skills.kumas_frontroll_tex
+118	8000	Anführerkumas	1103	3er Klaps	icon_skills.kw_atk1_tex
+118	8000	Anführerkumas	3101	Sprung aus dem Stand	icon_skills.kw_stomp_tex
+118	8000	Anführerkumas	3110	Atem des Schweigens	icon_skills.kw_breath_tex
+118	8000	Anführerkumas	4110	Strahl des Zorns	icon_skills.kw_flashcannon_tex
+118	8000	Anführerkumas	4170	Schlagregen des Zorns	icon_skills.kw_dashattack_tex
+118	8000	Anführerkumas	4180	Bauchklatscher	icon_skills.kw_leapattack_tex
+118	9000		1101	Basisangriff	icon_skills.kw_atk2_tex
+118	9000		3110	Babyatem	icon_skills.kw_minibreath_tex
+118	9000		4120	Feuerwerksrakete	icon_skills.kw_rocket_tex
+118	9000		4121	Feuerwerksrakete	icon_skills.kw_rocket_tex
+118	9000		4130	Energiebolzen	icon_skills.kw_energyball_tex
+118	9000		4131	Energiebolzen	icon_skills.kw_energyball_tex
+118	9000		4140	Klatschen	icon_skills.kw_clap_tex
+118	9000		4150	Rückschritt	icon_skills.kw_backjump_tex
+118	9000		4160	Bauchrolle	icon_skills.kumas_frontroll_tex
+121	9005		1301	Salve abfeuern	icon_skills.vehicleex_att01_tex
+121	9005		1302	Salve abfeuern	icon_skills.vehicleex_att01_tex
+121	9005		1501	Absitzen	icon_skills.vehicleex_getoff_tex
+122	9005		1301	Salve abfeuern	icon_skills.vehicleex_att01_tex
+122	9005		1302	Salve abfeuern	icon_skills.vehicleex_att01_tex
+122	9005		1501	Absitzen	icon_skills.vehicleex_getoff_tex
+123	9005		1301	Salve abfeuern	icon_skills.vehicleex_att01_tex
+123	9005		1302	Salve abfeuern	icon_skills.vehicleex_att01_tex
+123	9005		1501	Absitzen	icon_skills.vehicleex_getoff_tex
+191	1601	Belagerungswaffe	1101	Salve abfeuern	icon_skills.vehicleex_att01_tex
+191	1601	Belagerungswaffe	1102	Salve abfeuern	icon_skills.vehicleex_att01_tex
+191	1601	Belagerungswaffe	1201	Springen	icon_skills.vehicleex_getoff_tex
+191	1604	Luftschiff	1101	Abflug	icon_skills.vehicle_drive_tex
+191	1604	Luftschiff	1201	Springen	icon_skills.vehicleex_getoff_tex
+191	1605	Luftschiff	1101	Abflug	icon_skills.vehicle_drive_tex
+191	1605	Luftschiff	1201	Springen	icon_skills.vehicleex_getoff_tex
+210	2999	Spritzkanone	1101	Salve abfeuern	icon_items.q_arogonnmucus_tex
+210	2999	Spritzkanone	1201	Absitzen	icon_skills.vehicleex_getoff_tex
+210	3000	Spritzkanone	1101	Salve abfeuern	icon_items.q_arogonnmucus_tex
+210	3000	Spritzkanone	1201	Absitzen	icon_skills.vehicleex_getoff_tex
+210	4000	Spielzeugpanzer	1101	Salve abfeuern	icon_skills.vehicleex_att01_tex
+210	4000	Spielzeugpanzer	1102	Salve abfeuern	icon_skills.vehicleex_att01_tex
+210	4000	Spielzeugpanzer	1201	Absitzen	icon_skills.vehicleex_getoff_tex
+425	8041	Kanone	1101	Salve abfeuern	icon_skills.vehicleex_att01_tex
+425	8041	Kanone	1201	Absitzen	icon_skills.vehicleex_getoff_tex
+443	4000	Mobile Belagerungswaffe	1101	Salve abfeuern	icon_skills.vehicleex_att01_tex
+443	4000	Mobile Belagerungswaffe	1102	Salve abfeuern	icon_skills.vehicleex_att01_tex
+443	4000	Mobile Belagerungswaffe	1201	Verlassen	icon_skills.vehicleex_getoff_tex
+447	300	Halloweenkanone	1201	Absitzen	icon_skills.vehicleex_getoff_tex
+447	300	Halloweenkanone	2101	Kürbis schießen	icon_skills.vehicleex_att01_tex
+447	300	Halloweenkanone	2102	Kürbis schießen	icon_skills.vehicleex_att01_tex
+447	310		1201	Absitzen	icon_skills.vehicleex_getoff_tex
+447	310		2101	Kürbis schießen	icon_skills.vehicleex_att01_tex
+447	310		2102	Kürbis schießen	icon_skills.vehicleex_att01_tex
+447	311	Halloweenkanone	1201	Absitzen	icon_skills.vehicleex_getoff_tex
+447	311	Halloweenkanone	2101	Kürbis schießen	icon_skills.vehicleex_att01_tex
+447	311	Halloweenkanone	2102	Kürbis schießen	icon_skills.vehicleex_att01_tex
+450	5000	Luftschiff	1101	Abflug	icon_skills.vehicle_drive_tex
+450	5000	Luftschiff	1201	Springen	icon_skills.vehicleex_getoff_tex
+453	500		1101	Salve abfeuern	icon_skills.vehicleex_att01_tex
+453	500		1201	Absitzen	icon_skills.vehicleex_getoff_tex
+453	501		1101	Salve abfeuern	icon_skills.vehicleex_att01_tex
+453	501		1201	Absitzen	icon_skills.vehicleex_getoff_tex
+643	4000	Mobile Belagerungswaffe	1101	Kanonenkugel abfeuern	icon_skills.vehicleex_att01_tex
+643	4000	Mobile Belagerungswaffe	1102	Kanonenkugel abfeuern	icon_skills.vehicleex_att01_tex
+643	4000	Mobile Belagerungswaffe	1201	Aussteigen	icon_skills.vehicleex_getoff_tex
+725	8041	Kanone	1101	Salve abfeuern	icon_skills.vehicleex_att01_tex
+725	8041	Kanone	1201	Absitzen	icon_skills.vehicleex_getoff_tex
+743	4000	Mobile Belagerungswaffe	1101	Salve abfeuern	icon_skills.vehicleex_att01_tex
+743	4000	Mobile Belagerungswaffe	1102	Salve abfeuern	icon_skills.vehicleex_att01_tex
+743	4000	Mobile Belagerungswaffe	1201	Absitzen	icon_skills.vehicleex_getoff_tex
+750	5000	Luftschiff	1101	Abflug	icon_skills.vehicle_drive_tex
+750	5000	Luftschiff	1201	Springen	icon_skills.vehicleex_getoff_tex
+750	5001	Luftschiff	1101	Abflug	icon_skills.vehicle_drive_tex
+750	5001	Luftschiff	1201	Springen	icon_skills.vehicleex_getoff_tex
+750	5002	Luftschiff	1101	Abflug	icon_skills.vehicle_drive_tex
+750	5002	Luftschiff	1201	Springen	icon_skills.vehicleex_getoff_tex
+750	5003	Luftschiff	1101	Abflug	icon_skills.vehicle_drive_tex
+750	5003	Luftschiff	1201	Springen	icon_skills.vehicleex_getoff_tex
+750	5004	Luftschiff	1101	Abflug	icon_skills.vehicle_drive_tex
+750	5004	Luftschiff	1201	Springen	icon_skills.vehicleex_getoff_tex
+750	5005	Luftschiff	1101	Abflug	icon_skills.vehicle_drive_tex
+750	5005	Luftschiff	1201	Springen	icon_skills.vehicleex_getoff_tex
+750	5006	Luftschiff	1101	Abflug	icon_skills.vehicle_drive_tex
+750	5006	Luftschiff	1201	Springen	icon_skills.vehicleex_getoff_tex
+750	5007	Luftschiff	1101	Abflug	icon_skills.vehicle_drive_tex
+750	5007	Luftschiff	1201	Springen	icon_skills.vehicleex_getoff_tex
+750	5008	Luftschiff	1101	Abflug	icon_skills.vehicle_drive_tex
+750	5008	Luftschiff	1201	Springen	icon_skills.vehicleex_getoff_tex
+750	5009	Luftschiff	1101	Abflug	icon_skills.vehicle_drive_tex
+885	885158	Scherbenmacher	1101	Salve abfeuern	icon_skills.vehicleex_att01_tex
+885	885158	Scherbenmacher	1102	Salve abfeuern	icon_skills.vehicleex_att01_tex
+885	885158	Scherbenmacher	1201	Absteigen	icon_skills.vehicleex_getoff_tex
+950	2003		4120	Wiederholtes Abfeuern	icon_status.shotarrowblindly_tex
+950	2003		4121	Wiederholtes Abfeuern	icon_status.shotarrowblindly_tex
+950	2003		4130	Pfeil abfeuern	icon_status.shotarrow_tex
+950	2003		4131	Pfeil abfeuern	icon_status.shotarrow_tex
+950	2003		4160	Schneller Einsatz	icon_status.accelration_tex
+950	2003		4500	Absteigen	icon_status.vehicleex_getoff_tex
+950	2005	Katapult des Zugangs zum Himmelreich der Götter	4120	Wiederholtes Abfeuern	icon_status.shotarrowblindly_tex
+950	2005	Katapult des Zugangs zum Himmelreich der Götter	4121	Wiederholtes Abfeuern	icon_status.shotarrowblindly_tex
+950	2005	Katapult des Zugangs zum Himmelreich der Götter	4130	Pfeil abfeuern	icon_status.shotarrow_tex
+950	2005	Katapult des Zugangs zum Himmelreich der Götter	4131	Pfeil abfeuern	icon_status.shotarrow_tex
+950	2005	Katapult des Zugangs zum Himmelreich der Götter	4160	Schneller Einsatz	icon_status.accelration_tex
+950	2005	Katapult des Zugangs zum Himmelreich der Götter	4500	Absteigen	icon_status.vehicleex_getoff_tex
+1023	3000007	Allianzkanone	1101	Salve abfeuern	icon_skills.vehicleex_att01_tex
+1023	3000007	Allianzkanone	1102	Salve abfeuern	icon_skills.vehicleex_att01_tex
+1023	3000007	Allianzkanone	1201	Absitzen	icon_skills.vehicleex_getoff_tex

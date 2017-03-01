@@ -1,0 +1,181 @@
+48	2000	Arme de siège	1101	Salve	icon_skills.vehicleex_att01_tex
+48	2000	Arme de siège	1201	Descendre	icon_skills.vehicleex_getoff_tex
+111	1000	Tank fonctionnel	1101	Bombe à fragmentation	icon_skills.darkexplosion_tex
+111	1000	Tank fonctionnel	1102	Bombe à fragmentation	icon_skills.darkexplosion_tex
+111	1000	Tank fonctionnel	1201	Descendre	icon_skills.vehicleex_getoff_tex
+111	1000	Tank fonctionnel	2101	Poser une mine	icon_skills.paralysistrap_tex
+111	1000	Tank fonctionnel	2102	Poser une mine	icon_skills.paralysistrap_tex
+111	1000	Tank fonctionnel	3102	Bombe à fragmentation	icon_skills.darkexplosion_tex
+111	2000	Tank puissant	1101	Tirer un boulet	icon_skills.vehicleex_att02_tex
+111	2000	Tank puissant	1102	Tirer un boulet	icon_skills.vehicleex_att02_tex
+111	2000	Tank puissant	1201	Descendre	icon_skills.vehicleex_getoff_tex
+111	3000	Tank rapide	1101	Tirer un boulet	icon_skills.spawnunioncannon_tex
+111	3000	Tank rapide	1102	Tirer un boulet	icon_skills.spawnunioncannon_tex
+111	3000	Tank rapide	1201	Descendre	icon_skills.vehicleex_getoff_tex
+111	3000	Tank rapide	2101	Démarrer la tempête de grêle	icon_skills.darkexplosion_tex
+111	6000	Canon fixé	1301	Tirer un boulet	icon_skills.vehicleex_att01_tex
+111	6000	Canon fixé	1302	Tirer un boulet	icon_skills.vehicleex_att01_tex
+111	6000	Canon fixé	1401	Descendre	icon_skills.vehicleex_getoff_tex
+111	6000	Canon fixé	1501	Bombardement aérien	icon_skills.warmonger_tex
+111	6000	Canon fixé	1501	Bombardement aérien	icon_skills.howitzer_tex
+111	7000	Tank universel	1101	Bombe à fragmentation	icon_skills.darkexplosion_tex
+111	7000	Tank universel	1102	Bombe à fragmentation	icon_skills.darkexplosion_tex
+111	7000	Tank universel	1201	Descendre	icon_skills.vehicleex_getoff_tex
+111	7000	Tank universel	2101	Poser une mine	icon_skills.paralysistrap_tex
+111	7000	Tank universel	2102	Poser une mine	icon_skills.paralysistrap_tex
+111	7000	Tank universel	3102	Bombe à fragmentation	icon_skills.darkexplosion_tex
+116	1001	Aéronef	1101	Décollage	icon_skills.vehicle_drive_tex
+116	1001	Aéronef	1201	Sauter	icon_skills.vehicleex_getoff_tex
+116	1002	Aéronef	1102	Décollage	icon_skills.vehicle_drive_tex
+116	1002	Aéronef	1202	Sauter	icon_skills.vehicleex_getoff_tex
+116	1003	Aéronef	1103	Décollage	icon_skills.vehicle_drive_tex
+116	1003	Aéronef	1203	Sauter	icon_skills.vehicleex_getoff_tex
+116	4000	Arme de siège	1101	Salve	icon_skills.vehicleex_att01_tex
+116	4000	Arme de siège	1102	Salve	icon_skills.vehicleex_att01_tex
+116	4000	Arme de siège	1201	Descendre	icon_skills.vehicleex_getoff_tex
+116	4001	Arme de siège	1301	Salve	icon_skills.vehicleex_att01_tex
+116	4001	Arme de siège	1302	Salve	icon_skills.vehicleex_att01_tex
+116	4001	Arme de siège	1401	Descendre	icon_skills.vehicleex_getoff_tex
+116	4002	Arme de siège	1501	Salve	icon_skills.vehicleex_att01_tex
+116	4002	Arme de siège	1502	Salve	icon_skills.vehicleex_att01_tex
+116	4002	Arme de siège	1503	Descendre	icon_skills.vehicleex_getoff_tex
+116	4003	Arme de siège	1501	Salve	icon_skills.vehicleex_att01_tex
+116	4003	Arme de siège	1502	Salve	icon_skills.vehicleex_att01_tex
+116	4003	Arme de siège	1503	Descendre	icon_skills.vehicleex_getoff_tex
+117	5000		1102	Saut ventral	icon_skills.kumas_frontjump_tex
+117	5000		1103	Fessée	icon_skills.kumas_3combo_tex
+117	5000		1104	Colère noire	icon_skills.kumas_energy_tex
+117	5000		1105	Colère noire	icon_skills.kumas_energy_tex
+117	5000		1111	Rot retentissant	icon_skills.kumas_breath_tex
+117	5000		1212	Saut arrière	icon_skills.kumas_backjump_tex
+117	5000		1318	Poings fulgurants	icon_skills.kumas_rocketpunch_tex
+117	5000		2201	Purification de Kumas	icon_skills.purify_tex
+117	5000		2202	Guérison de Kumas	icon_skills.healarea_tex
+117	6000		1102	Saut ventral	icon_skills.kumas_frontjump_tex
+117	6000		1104	Colère	icon_skills.kumas_energy_tex
+117	6000		1105	Colère	icon_skills.kumas_energy_tex
+117	6000		1106	Rot	icon_skills.kumas_breath_tex
+117	6000		1108	Coup circulaire à gauche	icon_skills.kumas_righthit_tex
+117	6000		1109	Coup circulaire à droite	icon_skills.kumas_lefthit_tex
+117	6000		1311	Roulé ventral	icon_skills.kumas_frontroll_tex
+117	6000		2201	Purification de Kumas	icon_skills.purify_tex
+117	7000		1103	Fessée	icon_skills.kumas_3combo_tex
+117	7000		1212	Retraite	icon_skills.kumas_backjump_tex
+118	5000	Commandant kumas	1103	Trio de gifles	icon_skills.kw_atk1_tex
+118	5000	Commandant kumas	3101	À pieds joints	icon_skills.kw_stomp_tex
+118	5000	Commandant kumas	3110	Souffle du silence	icon_skills.kw_breath_tex
+118	5000	Commandant kumas	4110	Rayon de fureur	icon_skills.kw_flashcannon_tex
+118	5000	Commandant kumas	4170	Pluie de coups de fureur	icon_skills.kw_dashattack_tex
+118	5000	Commandant kumas	4180	Saut ventral	icon_skills.kw_leapattack_tex
+118	6000		1101	Attaque de base	icon_skills.kw_atk2_tex
+118	6000		3110	Souffle infantile	icon_skills.kw_minibreath_tex
+118	6000		4120	Fusée d'artifice	icon_skills.kw_rocket_tex
+118	6000		4121	Fusée d'artifice	icon_skills.kw_rocket_tex
+118	6000		4130	Carreau d'énergie	icon_skills.kw_energyball_tex
+118	6000		4131	Carreau d'énergie	icon_skills.kw_energyball_tex
+118	6000		4140	Claquement des mains	icon_skills.kw_clap_tex
+118	6000		4150	Retraite	icon_skills.kw_backjump_tex
+118	6000		4160	Roulé ventral	icon_skills.kumas_frontroll_tex
+118	8000	Commandant kumas	1103	Trio de gifles	icon_skills.kw_atk1_tex
+118	8000	Commandant kumas	3101	À pieds joints	icon_skills.kw_stomp_tex
+118	8000	Commandant kumas	3110	Souffle du silence	icon_skills.kw_breath_tex
+118	8000	Commandant kumas	4110	Rayon de fureur	icon_skills.kw_flashcannon_tex
+118	8000	Commandant kumas	4170	Pluie de coups de fureur	icon_skills.kw_dashattack_tex
+118	8000	Commandant kumas	4180	Saut ventral	icon_skills.kw_leapattack_tex
+118	9000		1101	Attaque de base	icon_skills.kw_atk2_tex
+118	9000		3110	Souffle infantile	icon_skills.kw_minibreath_tex
+118	9000		4120	Fusée d'artifice	icon_skills.kw_rocket_tex
+118	9000		4121	Fusée d'artifice	icon_skills.kw_rocket_tex
+118	9000		4130	Carreau d'énergie	icon_skills.kw_energyball_tex
+118	9000		4131	Carreau d'énergie	icon_skills.kw_energyball_tex
+118	9000		4140	Claquement des mains	icon_skills.kw_clap_tex
+118	9000		4150	Retraite	icon_skills.kw_backjump_tex
+118	9000		4160	Roulé ventral	icon_skills.kumas_frontroll_tex
+121	9005		1301	Salve	icon_skills.vehicleex_att01_tex
+121	9005		1302	Salve	icon_skills.vehicleex_att01_tex
+121	9005		1501	Descendre	icon_skills.vehicleex_getoff_tex
+122	9005		1301	Salve	icon_skills.vehicleex_att01_tex
+122	9005		1302	Salve	icon_skills.vehicleex_att01_tex
+122	9005		1501	Descendre	icon_skills.vehicleex_getoff_tex
+123	9005		1301	Salve	icon_skills.vehicleex_att01_tex
+123	9005		1302	Salve	icon_skills.vehicleex_att01_tex
+123	9005		1501	Descendre	icon_skills.vehicleex_getoff_tex
+191	1601	Arme de siège	1101	Salve	icon_skills.vehicleex_att01_tex
+191	1601	Arme de siège	1102	Salve	icon_skills.vehicleex_att01_tex
+191	1601	Arme de siège	1201	Sauter	icon_skills.vehicleex_getoff_tex
+191	1604	Aéronef	1101	Décollage	icon_skills.vehicle_drive_tex
+191	1604	Aéronef	1201	Sauter	icon_skills.vehicleex_getoff_tex
+191	1605	Aéronef	1101	Décollage	icon_skills.vehicle_drive_tex
+191	1605	Aéronef	1201	Sauter	icon_skills.vehicleex_getoff_tex
+210	2999	Canon pulvérisant	1101	Salve	icon_items.q_arogonnmucus_tex
+210	2999	Canon pulvérisant	1201	Descendre	icon_skills.vehicleex_getoff_tex
+210	3000	Canon pulvérisant	1101	Salve	icon_items.q_arogonnmucus_tex
+210	3000	Canon pulvérisant	1201	Descendre	icon_skills.vehicleex_getoff_tex
+210	4000	Jouet tank	1101	Salve	icon_skills.vehicleex_att01_tex
+210	4000	Jouet tank	1102	Salve	icon_skills.vehicleex_att01_tex
+210	4000	Jouet tank	1201	Descendre	icon_skills.vehicleex_getoff_tex
+425	8041	Canon	1101	Salve	icon_skills.vehicleex_att01_tex
+425	8041	Canon	1201	Descendre	icon_skills.vehicleex_getoff_tex
+443	4000	Arme de siège mobile	1101	Salve	icon_skills.vehicleex_att01_tex
+443	4000	Arme de siège mobile	1102	Salve	icon_skills.vehicleex_att01_tex
+443	4000	Arme de siège mobile	1201	Descendre	icon_skills.vehicleex_getoff_tex
+447	300	Canon à bonbons d'Halloween	1201	Descendre	icon_skills.vehicleex_getoff_tex
+447	300	Canon à bonbons d'Halloween	2101	Citrouille de feu	icon_skills.vehicleex_att01_tex
+447	300	Canon à bonbons d'Halloween	2102	Citrouille de feu	icon_skills.vehicleex_att01_tex
+447	310		1201	Descendre	icon_skills.vehicleex_getoff_tex
+447	310		2101	Citrouille de feu	icon_skills.vehicleex_att01_tex
+447	310		2102	Citrouille de feu	icon_skills.vehicleex_att01_tex
+447	311	Canon à bonbons d'Halloween	1201	Descendre	icon_skills.vehicleex_getoff_tex
+447	311	Canon à bonbons d'Halloween	2101	Citrouille de feu	icon_skills.vehicleex_att01_tex
+447	311	Canon à bonbons d'Halloween	2102	Citrouille de feu	icon_skills.vehicleex_att01_tex
+450	5000	Aéronef	1101	Décollage	icon_skills.vehicle_drive_tex
+450	5000	Aéronef	1201	Sauter	icon_skills.vehicleex_getoff_tex
+453	500		1101	Salve	icon_skills.vehicleex_att01_tex
+453	500		1201	Descendre	icon_skills.vehicleex_getoff_tex
+453	501		1101	Salve	icon_skills.vehicleex_att01_tex
+453	501		1201	Descendre	icon_skills.vehicleex_getoff_tex
+643	4000	Arme de siège mobile	1101	Tirer un boulet	icon_skills.vehicleex_att01_tex
+643	4000	Arme de siège mobile	1102	Tirer un boulet	icon_skills.vehicleex_att01_tex
+643	4000	Arme de siège mobile	1201	Descendre	icon_skills.vehicleex_getoff_tex
+725	8041	Canon	1101	Salve	icon_skills.vehicleex_att01_tex
+725	8041	Canon	1201	Descendre	icon_skills.vehicleex_getoff_tex
+743	4000	Arme de siège mobile	1101	Salve	icon_skills.vehicleex_att01_tex
+743	4000	Arme de siège mobile	1102	Salve	icon_skills.vehicleex_att01_tex
+743	4000	Arme de siège mobile	1201	Descendre	icon_skills.vehicleex_getoff_tex
+750	5000	Aéronef	1101	Décollage	icon_skills.vehicle_drive_tex
+750	5000	Aéronef	1201	Sauter	icon_skills.vehicleex_getoff_tex
+750	5001	Aéronef	1101	Décollage	icon_skills.vehicle_drive_tex
+750	5001	Aéronef	1201	Sauter	icon_skills.vehicleex_getoff_tex
+750	5002	Aéronef	1101	Décollage	icon_skills.vehicle_drive_tex
+750	5002	Aéronef	1201	Sauter	icon_skills.vehicleex_getoff_tex
+750	5003	Aéronef	1101	Décollage	icon_skills.vehicle_drive_tex
+750	5003	Aéronef	1201	Sauter	icon_skills.vehicleex_getoff_tex
+750	5004	Aéronef	1101	Décollage	icon_skills.vehicle_drive_tex
+750	5004	Aéronef	1201	Sauter	icon_skills.vehicleex_getoff_tex
+750	5005	Aéronef	1101	Décollage	icon_skills.vehicle_drive_tex
+750	5005	Aéronef	1201	Sauter	icon_skills.vehicleex_getoff_tex
+750	5006	Aéronef	1101	Décollage	icon_skills.vehicle_drive_tex
+750	5006	Aéronef	1201	Sauter	icon_skills.vehicleex_getoff_tex
+750	5007	Aéronef	1101	Décollage	icon_skills.vehicle_drive_tex
+750	5007	Aéronef	1201	Sauter	icon_skills.vehicleex_getoff_tex
+750	5008	Aéronef	1101	Décollage	icon_skills.vehicle_drive_tex
+750	5008	Aéronef	1201	Sauter	icon_skills.vehicleex_getoff_tex
+750	5009	Aéronef	1101	Décollage	icon_skills.vehicle_drive_tex
+885	885158	Tessonnier	1101	Salve	icon_skills.vehicleex_att01_tex
+885	885158	Tessonnier	1102	Salve	icon_skills.vehicleex_att01_tex
+885	885158	Tessonnier	1201	Descendre	icon_skills.vehicleex_getoff_tex
+950	2003		4120	Salve répétée	icon_status.shotarrowblindly_tex
+950	2003		4121	Salve répétée	icon_status.shotarrowblindly_tex
+950	2003		4130	Décocher une flèche	icon_status.shotarrow_tex
+950	2003		4131	Décocher une flèche	icon_status.shotarrow_tex
+950	2003		4160	Intervention rapide	icon_status.accelration_tex
+950	2003		4500	Descendre	icon_status.vehicleex_getoff_tex
+950	2005	Catapulte du Passage détruit du royaume des dieux	4120	Salve répétée	icon_status.shotarrowblindly_tex
+950	2005	Catapulte du Passage détruit du royaume des dieux	4121	Salve répétée	icon_status.shotarrowblindly_tex
+950	2005	Catapulte du Passage détruit du royaume des dieux	4130	Décocher une flèche	icon_status.shotarrow_tex
+950	2005	Catapulte du Passage détruit du royaume des dieux	4131	Décocher une flèche	icon_status.shotarrow_tex
+950	2005	Catapulte du Passage détruit du royaume des dieux	4160	Intervention rapide	icon_status.accelration_tex
+950	2005	Catapulte du Passage détruit du royaume des dieux	4500	Descendre	icon_status.vehicleex_getoff_tex
+1023	3000007	Canon de l'alliance	1101	Salve	icon_skills.vehicleex_att01_tex
+1023	3000007	Canon de l'alliance	1102	Salve	icon_skills.vehicleex_att01_tex
+1023	3000007	Canon de l'alliance	1201	Descendre	icon_skills.vehicleex_getoff_tex

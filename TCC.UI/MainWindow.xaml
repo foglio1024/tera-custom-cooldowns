@@ -1,0 +1,28 @@
+﻿<Window x:Class="TCC.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TCC.UI"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="70" Width="Auto" SizeToContent="Width" Closing="Window_Closing" Topmost="True" AllowsTransparency="True" ShowInTaskbar="False" WindowStyle="None" Background="#20000000" MouseLeftButtonDown="Window_MouseRightButtonDown" MouseRightButtonDown="TB_ConnectionStatus_MouseRightButtonDown">
+    <Window.Resources>
+        <DataTemplate x:Key="SkillDataTemplate">
+            <local:SkillIconControl IconBrush="{Binding Skill.IconBrush}" Cooldown="{Binding Cooldown}" Id="{Binding Skill.Id}" ></local:SkillIconControl>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Name="TB_ConnectionStatus" Grid.Row="0"  Height="0"></TextBlock>
+        <ItemsControl x:Name="SP" Grid.Row="1" ItemTemplate="{StaticResource SkillDataTemplate}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+    </Grid>
+</Window>

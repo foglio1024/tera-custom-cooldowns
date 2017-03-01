@@ -1,0 +1,181 @@
+48	2000	砲台	1101	砲弾発射	icon_skills.vehicleex_att01_tex
+48	2000	砲台	1201	降りる	icon_skills.vehicleex_getoff_tex
+111	1000	妨害型戦車	1101	拡散弾発射	icon_skills.darkexplosion_tex
+111	1000	妨害型戦車	1102	拡散弾発射	icon_skills.darkexplosion_tex
+111	1000	妨害型戦車	1201	降りる	icon_skills.vehicleex_getoff_tex
+111	1000	妨害型戦車	2101	地雷設置	icon_skills.paralysistrap_tex
+111	1000	妨害型戦車	2102	地雷設置	icon_skills.paralysistrap_tex
+111	1000	妨害型戦車	3102	拡散弾発射	icon_skills.darkexplosion_tex
+111	2000	強攻型戦車	1101	砲弾発射	icon_skills.vehicleex_att02_tex
+111	2000	強攻型戦車	1102	砲弾発射	icon_skills.vehicleex_att02_tex
+111	2000	強攻型戦車	1201	降りる	icon_skills.vehicleex_getoff_tex
+111	3000	高機動型戦車	1101	砲弾発射	icon_skills.spawnunioncannon_tex
+111	3000	高機動型戦車	1102	砲弾発射	icon_skills.spawnunioncannon_tex
+111	3000	高機動型戦車	1201	降りる	icon_skills.vehicleex_getoff_tex
+111	3000	高機動型戦車	2101	アイスブラスト設置	icon_skills.darkexplosion_tex
+111	6000	固定砲台	1301	砲弾発射	icon_skills.vehicleex_att01_tex
+111	6000	固定砲台	1302	砲弾発射	icon_skills.vehicleex_att01_tex
+111	6000	固定砲台	1401	降りる	icon_skills.vehicleex_getoff_tex
+111	6000	固定砲台	1501	空爆	icon_skills.warmonger_tex
+111	6000	固定砲台	1501	空爆	icon_skills.howitzer_tex
+111	7000	万能型戦車	1101	拡散弾発射	icon_skills.darkexplosion_tex
+111	7000	万能型戦車	1102	拡散弾発射	icon_skills.darkexplosion_tex
+111	7000	万能型戦車	1201	降りる	icon_skills.vehicleex_getoff_tex
+111	7000	万能型戦車	2101	地雷設置	icon_skills.paralysistrap_tex
+111	7000	万能型戦車	2102	地雷設置	icon_skills.paralysistrap_tex
+111	7000	万能型戦車	3102	拡散弾発射	icon_skills.darkexplosion_tex
+116	1001	飛空艇	1101	出発	icon_skills.vehicle_drive_tex
+116	1001	飛空艇	1201	降りる	icon_skills.vehicleex_getoff_tex
+116	1002	飛空艇	1102	出発	icon_skills.vehicle_drive_tex
+116	1002	飛空艇	1202	降りる	icon_skills.vehicleex_getoff_tex
+116	1003	飛行艇	1103	出発	icon_skills.vehicle_drive_tex
+116	1003	飛行艇	1203	降りる	icon_skills.vehicleex_getoff_tex
+116	4000	砲台	1101	砲弾発射	icon_skills.vehicleex_att01_tex
+116	4000	砲台	1102	砲弾発射	icon_skills.vehicleex_att01_tex
+116	4000	砲台	1201	降りる	icon_skills.vehicleex_getoff_tex
+116	4001	砲台	1301	砲弾発射	icon_skills.vehicleex_att01_tex
+116	4001	砲台	1302	砲弾発射	icon_skills.vehicleex_att01_tex
+116	4001	砲台	1401	降りる	icon_skills.vehicleex_getoff_tex
+116	4002	砲台	1501	砲弾発射	icon_skills.vehicleex_att01_tex
+116	4002	砲台	1502	砲弾発射	icon_skills.vehicleex_att01_tex
+116	4002	砲台	1503	降りる	icon_skills.vehicleex_getoff_tex
+116	4003	砲台	1501	砲弾発射	icon_skills.vehicleex_att01_tex
+116	4003	砲台	1502	砲弾発射	icon_skills.vehicleex_att01_tex
+116	4003	砲台	1503	降りる	icon_skills.vehicleex_getoff_tex
+117	5000		1102	憤怒の跳躍	icon_skills.kumas_frontjump_tex
+117	5000		1103	三段突き	icon_skills.kumas_3combo_tex
+117	5000		1104	必殺円気発射	icon_skills.kumas_energy_tex
+117	5000		1105	必殺円気発射	icon_skills.kumas_energy_tex
+117	5000		1111	ブレス爆発	icon_skills.kumas_breath_tex
+117	5000		1212	バックジャンプ	icon_skills.kumas_backjump_tex
+117	5000		1318	強拳発射	icon_skills.kumas_rocketpunch_tex
+117	5000		2201	浄化	icon_skills.purify_tex
+117	5000		2202	治癒	icon_skills.healarea_tex
+117	6000		1102	憤怒の跳躍	icon_skills.kumas_frontjump_tex
+117	6000		1104	円気発射	icon_skills.kumas_energy_tex
+117	6000		1105	円気発射	icon_skills.kumas_energy_tex
+117	6000		1106	ブレス	icon_skills.kumas_breath_tex
+117	6000		1108	左手払い	icon_skills.kumas_righthit_tex
+117	6000		1109	右手払い	icon_skills.kumas_lefthit_tex
+117	6000		1311	前転	icon_skills.kumas_frontroll_tex
+117	6000		2201	浄化	icon_skills.purify_tex
+117	7000		1103	三段突き	icon_skills.kumas_3combo_tex
+117	7000		1212	後方跳躍	icon_skills.kumas_backjump_tex
+118	5000	大将クーマス	1103	三段突き	icon_skills.kw_atk1_tex
+118	5000	大将クーマス	3101	ヒッププレス	icon_skills.kw_stomp_tex
+118	5000	大将クーマス	3110	沈黙のブレス	icon_skills.kw_breath_tex
+118	5000	大将クーマス	4110	憤怒のビーム	icon_skills.kw_flashcannon_tex
+118	5000	大将クーマス	4170	憤怒の追撃	icon_skills.kw_dashattack_tex
+118	5000	大将クーマス	4180	憤怒の跳躍	icon_skills.kw_leapattack_tex
+118	6000		1101	基本攻撃	icon_skills.kw_atk2_tex
+118	6000		3110	赤ちゃんブレス	icon_skills.kw_minibreath_tex
+118	6000		4120	ロケット花火発射	icon_skills.kw_rocket_tex
+118	6000		4121	ロケット花火発射	icon_skills.kw_rocket_tex
+118	6000		4130	エネルギーボルト	icon_skills.kw_energyball_tex
+118	6000		4131	エネルギーボルト	icon_skills.kw_energyball_tex
+118	6000		4140	張り手	icon_skills.kw_clap_tex
+118	6000		4150	後方跳躍	icon_skills.kw_backjump_tex
+118	6000		4160	前転	icon_skills.kumas_frontroll_tex
+118	8000	大将クーマス	1103	三段突き	icon_skills.kw_atk1_tex
+118	8000	大将クーマス	3101	ヒッププレス	icon_skills.kw_stomp_tex
+118	8000	大将クーマス	3110	沈黙のブレス	icon_skills.kw_breath_tex
+118	8000	大将クーマス	4110	憤怒のビーム	icon_skills.kw_flashcannon_tex
+118	8000	大将クーマス	4170	憤怒の追撃	icon_skills.kw_dashattack_tex
+118	8000	大将クーマス	4180	憤怒の跳躍	icon_skills.kw_leapattack_tex
+118	9000		1101	基本攻撃	icon_skills.kw_atk2_tex
+118	9000		3110	赤ちゃんブレス	icon_skills.kw_minibreath_tex
+118	9000		4120	ロケット花火発射	icon_skills.kw_rocket_tex
+118	9000		4121	ロケット花火発射	icon_skills.kw_rocket_tex
+118	9000		4130	エネルギーボルト	icon_skills.kw_energyball_tex
+118	9000		4131	エネルギーボルト	icon_skills.kw_energyball_tex
+118	9000		4140	張り手	icon_skills.kw_clap_tex
+118	9000		4150	後方跳躍	icon_skills.kw_backjump_tex
+118	9000		4160	前転	icon_skills.kumas_frontroll_tex
+121	9005		1301	砲弾発射	icon_skills.vehicleex_att01_tex
+121	9005		1302	砲弾発射	icon_skills.vehicleex_att01_tex
+121	9005		1501	降りる	icon_skills.vehicleex_getoff_tex
+122	9005		1301	砲弾発射	icon_skills.vehicleex_att01_tex
+122	9005		1302	砲弾発射	icon_skills.vehicleex_att01_tex
+122	9005		1501	降りる	icon_skills.vehicleex_getoff_tex
+123	9005		1301	砲弾発射	icon_skills.vehicleex_att01_tex
+123	9005		1302	砲弾発射	icon_skills.vehicleex_att01_tex
+123	9005		1501	降りる	icon_skills.vehicleex_getoff_tex
+191	1601	砲台	1101	砲弾発射	icon_skills.vehicleex_att01_tex
+191	1601	砲台	1102	砲弾発射	icon_skills.vehicleex_att01_tex
+191	1601	砲台	1201	降りる	icon_skills.vehicleex_getoff_tex
+191	1604	飛空艇	1101	出発	icon_skills.vehicle_drive_tex
+191	1604	飛空艇	1201	降りる	icon_skills.vehicleex_getoff_tex
+191	1605	飛空艇	1101	出発	icon_skills.vehicle_drive_tex
+191	1605	飛空艇	1201	降りる	icon_skills.vehicleex_getoff_tex
+210	2999	水大砲	1101	砲弾発射	icon_items.q_arogonnmucus_tex
+210	2999	水大砲	1201	降りる	icon_skills.vehicleex_getoff_tex
+210	3000	水大砲	1101	砲弾発射	icon_items.q_arogonnmucus_tex
+210	3000	水大砲	1201	降りる	icon_skills.vehicleex_getoff_tex
+210	4000	おもちゃ戦車	1101	砲弾発射	icon_skills.vehicleex_att01_tex
+210	4000	おもちゃ戦車	1102	砲弾発射	icon_skills.vehicleex_att01_tex
+210	4000	おもちゃ戦車	1201	降りる	icon_skills.vehicleex_getoff_tex
+425	8041	大砲	1101	砲弾発射	icon_skills.vehicleex_att01_tex
+425	8041	大砲	1201	降りる	icon_skills.vehicleex_getoff_tex
+443	4000	移動型砲台	1101	砲弾発射	icon_skills.vehicleex_att01_tex
+443	4000	移動型砲台	1102	砲弾発射	icon_skills.vehicleex_att01_tex
+443	4000	移動型砲台	1201	降りる	icon_skills.vehicleex_getoff_tex
+447	300	ハロウィン大砲	1201	降りる	icon_skills.vehicleex_getoff_tex
+447	300	ハロウィン大砲	2101	カボチャ発射	icon_skills.vehicleex_att01_tex
+447	300	ハロウィン大砲	2102	カボチャ発射	icon_skills.vehicleex_att01_tex
+447	310	ハロウィン大砲	1201	降りる	icon_skills.vehicleex_getoff_tex
+447	310	ハロウィン大砲	2101	カボチャ発射	icon_skills.vehicleex_att01_tex
+447	310	ハロウィン大砲	2102	カボチャ発射	icon_skills.vehicleex_att01_tex
+447	311	ハロウィン大砲	1201	降りる	icon_skills.vehicleex_getoff_tex
+447	311	ハロウィン大砲	2101	カボチャ発射	icon_skills.vehicleex_att01_tex
+447	311	ハロウィン大砲	2102	カボチャ発射	icon_skills.vehicleex_att01_tex
+450	5000	飛空艇	1101	出発	icon_skills.vehicle_drive_tex
+450	5000	飛空艇	1201	降りる	icon_skills.vehicleex_getoff_tex
+453	500		1101	砲弾発射	icon_skills.vehicleex_att01_tex
+453	500		1201	降りる	icon_skills.vehicleex_getoff_tex
+453	501		1101	砲弾発射	icon_skills.vehicleex_att01_tex
+453	501		1201	降りる	icon_skills.vehicleex_getoff_tex
+643	4000	移動型砲台	1101	砲弾発射	icon_skills.vehicleex_att01_tex
+643	4000	移動型砲台	1102	砲弾発射	icon_skills.vehicleex_att01_tex
+643	4000	移動型砲台	1201	降りる	icon_skills.vehicleex_getoff_tex
+725	8041	大砲	1101	砲弾発射	icon_skills.vehicleex_att01_tex
+725	8041	大砲	1201	降りる	icon_skills.vehicleex_getoff_tex
+743	4000	移動型砲台	1101	砲弾発射	icon_skills.vehicleex_att01_tex
+743	4000	移動型砲台	1102	砲弾発射	icon_skills.vehicleex_att01_tex
+743	4000	移動型砲台	1201	降りる	icon_skills.vehicleex_getoff_tex
+750	5000	飛空艇	1101	出発	icon_skills.vehicle_drive_tex
+750	5000	飛空艇	1201	降りる	icon_skills.vehicleex_getoff_tex
+750	5001	飛空艇	1101	出発	icon_skills.vehicle_drive_tex
+750	5001	飛空艇	1201	降りる	icon_skills.vehicleex_getoff_tex
+750	5002	飛空艇	1101	出発	icon_skills.vehicle_drive_tex
+750	5002	飛空艇	1201	降りる	icon_skills.vehicleex_getoff_tex
+750	5003	飛空艇	1101	出発	icon_skills.vehicle_drive_tex
+750	5003	飛空艇	1201	降りる	icon_skills.vehicleex_getoff_tex
+750	5004	飛空艇	1101	出発	icon_skills.vehicle_drive_tex
+750	5004	飛空艇	1201	降りる	icon_skills.vehicleex_getoff_tex
+750	5005	飛空艇	1101	出発	icon_skills.vehicle_drive_tex
+750	5005	飛空艇	1201	降りる	icon_skills.vehicleex_getoff_tex
+750	5006	飛空艇	1101	出発	icon_skills.vehicle_drive_tex
+750	5006	飛空艇	1201	降りる	icon_skills.vehicleex_getoff_tex
+750	5007	飛空艇	1101	出発	icon_skills.vehicle_drive_tex
+750	5007	飛空艇	1201	降りる	icon_skills.vehicleex_getoff_tex
+750	5008	飛空艇	1101	出発	icon_skills.vehicle_drive_tex
+750	5008	飛空艇	1201	降りる	icon_skills.vehicleex_getoff_tex
+750	5009	飛空艇	1101	出発	icon_skills.vehicle_drive_tex
+885	885158	幻影の大砲	1101	砲弾発射	icon_skills.vehicleex_att01_tex
+885	885158	幻影の大砲	1102	砲弾発射	icon_skills.vehicleex_att01_tex
+885	885158	幻影の大砲	1201	降りる	icon_skills.vehicleex_getoff_tex
+950	2003		4120	連続発射	icon_status.shotarrowblindly_tex
+950	2003		4121	連続発射	icon_status.shotarrowblindly_tex
+950	2003		4130	矢の発射	icon_status.shotarrow_tex
+950	2003		4131	矢の発射	icon_status.shotarrow_tex
+950	2003		4160	緊急起動	icon_status.accelration_tex
+950	2003		4500	降りる	icon_status.vehicleex_getoff_tex
+950	2005	神界の巨大弓	4120	連続発射	icon_status.shotarrowblindly_tex
+950	2005	神界の巨大弓	4121	連続発射	icon_status.shotarrowblindly_tex
+950	2005	神界の巨大弓	4130	矢の発射	icon_status.shotarrow_tex
+950	2005	神界の巨大弓	4131	矢の発射	icon_status.shotarrow_tex
+950	2005	神界の巨大弓	4160	緊急起動	icon_status.accelration_tex
+950	2005	神界の巨大弓	4500	降りる	icon_status.vehicleex_getoff_tex
+1023	3000007	連盟大砲	1101	砲弾発射	icon_skills.vehicleex_att01_tex
+1023	3000007	連盟大砲	1102	砲弾発射	icon_skills.vehicleex_att01_tex
+1023	3000007	連盟大砲	1201	降りる	icon_skills.vehicleex_getoff_tex

@@ -1,0 +1,1009 @@
+21000	Уклонение	20100	icon_skills.tumbling_tex	Быстрое уклонение	icon_crest.e_crestactiveattackspeedup_tex	30% вероятность на 10 секунд повысить скорость атаки на 15%.
+21001	Ответный удар	130100	icon_skills.risingattack_tex	Стремительный ответный удар	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+21002	Смерть с небес	100100	icon_skills.evasionattack_tex	Неизбежная смерть с небес	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 30%.
+21003	Инстинкт охотника	140100	icon_skills.aimingankle_tex	Тест	icon_skills.voidtrap_tex	Нет эффекта
+21004	Комбо-атака	10100	icon_skills.comboattack_tex	Угрожающая комбо-атака	icon_crest.e_crestpassiveaggroup_tex	Дает 5% дополнительной агрессии.
+21005	Шквал ударов	30100	icon_skills.nanmu_tex	Угрожающий шквал ударов	icon_crest.e_crestpassiveaggroup_tex	Дает 20% дополнительной агрессии.
+21006	Град ударов	40100	icon_skills.pointattack_tex	Усиленный град ударов	icon_crest.e_crestpassiveattackup_tex	Повышает урон умения на 25% и увеличивает получение преимущества от него.
+21007	Удар в прыжке	120100	icon_skills.downblowattack_tex	Усиленный удар в прыжке	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+21008	Отравленный клинок	110100	icon_skills.poisonblowattack_tex	Опасный отравленный клинок	icon_crest.e_crestpassiveskilleffectup_tex	Увеличивает урон от яда на 15%.
+21009	Защитная стойка	90100	icon_skills.ironwillb_tex	Несокрушимая защитная стойка	icon_crest.e_crestpassiveskilleffectup_tex	Увеличивает выносливость на 10%.
+21010	Ответный удар	130100	icon_skills.risingattack_tex	Усиленный ответный удар	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+21011	Шквал ударов	30100	icon_skills.nanmu_tex	Весомый шквал ударов (Град ударов)	icon_crest.e_crestnextskillmpdown_tex	На 88 MP снижает стоимость умения "Град ударов" в течение нескольких секунд.
+21012	Ответный удар	130100	icon_skills.risingattack_tex	Весомый ответный удар (Удар в прыжке)	icon_crest.e_crestnextskillmpdown_tex	На 75 MP снижает стоимость умения "Удар в прыжке" в течение нескольких секунд.
+21013	Комбо-атака	10100	icon_skills.comboattack_tex	Энергичная комбо-атака	icon_crest.e_crestpassivemprecoveryup_tex	При поражении цели увеличивает количество восстанавливаемых МР на 35%.
+21014	Смерть с небес	100100	icon_skills.evasionattack_tex	Быстрая смерть с небес	icon_crest.e_crestactiveattackspeedup_tex	50% вероятность на 10 секунд повысить скорость атаки на 15%.
+21015	Уклонение	20100	icon_skills.tumbling_tex	Нескончаемое уклонение	icon_crest.e_crestactivecooltimereset_tex	Снижает расход решимости на 100 единиц.
+21016	Боевой клич	50100	icon_skills.thunderingroar_tex	Стремительный боевой клич	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+21017	Град ударов	40100	icon_skills.pointattack_tex	Восстанавливающий град ударов	icon_crest.e_crestpassivehpheal_tex	Мгновенно восстанавливает 0.5% HP.
+21018	Удар воина	180100	icon_skills.aggravatingstrike_tex	Живительный удар воина	icon_crest.e_crestpassivehpdown_tex	Снижает расход HP на 50%.
+21019	Круговой удар	170100	icon_skills.allroundslash_tex	Усиленный круговой удар	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+21020	Разъяряющий порез	160100	icon_skills.rushingslash_tex	Стремительный разъяряющий порез	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+21021	Штурмовая стойка	80100	icon_skills.ironwilla_tex	Тест	icon_skills.voidtrap_tex	Нет эффекта
+21022	Нарастающая ярость	190100	icon_skills.tenaciousattack_tex	Неутомимая нарастающая ярость	icon_crest.e_crestactivecooltimereset_tex	25% вероятность сбросить время перезарядки умения.
+21023	Призрачный воин	240100	icon_skills.decoy_tex	Стремительный призрачный воин	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+21024	Удар в спину	220100	icon_skills.backattack_tex	Калечащий удар в спину	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 50%.
+21025	Смертельная игра	200100	icon_skills.deadlywill_tex	Стремительная смертельная игра	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+21026	Ошеломление	230100	icon_skills.reversalturningattack_tex	Усиленное ошеломление	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+21027	Каскад оглушений	210100	icon_skills.hardslash_tex	Блистательный каскад оглушений	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 88.
+21028	Удар воина	180100	icon_skills.aggravatingstrike_tex	Лихой удар воина (Нарастающая ярость)	icon_crest.e_crestnextskillattackup_tex	Повышает урон умения "Нарастающая ярость" на 20% на несколько секунд.
+21029	Разъяряющий порез	160100	icon_skills.rushingslash_tex	Весомый разъяряющий порез (Отравленный клинок)	icon_crest.e_crestnextskillmpdown_tex	На 50 MP снижает стоимость умения "Отравленный клинок" в течение нескольких секунд.
+21030	Каскад оглушений	210100	icon_skills.hardslash_tex	Весомый каскад оглушений (Град ударов)	icon_crest.e_crestnextskillmpdown_tex	На 88 MP снижает стоимость умения "Град ударов" в течение нескольких секунд.
+21031	Каскад оглушений	210100	icon_skills.hardslash_tex	Лихой каскад оглушений (Град ударов)	icon_crest.e_crestnextskillattackup_tex	На 20% увеличивает урон умения "Град ударов" в течение нескольких секунд.
+21032	Каскад оглушений	210100	icon_skills.hardslash_tex	Стремительный каскад оглушений	icon_crest.e_crestactivecooltimereset_tex	Снижает время перезарядки умения на 25%.
+21033	Нарастающая ярость	190100	icon_skills.tenaciousattack_tex	Ошеломляющая нарастающая ярость	icon_crest.e_crestactiveattackspeeddown_tex	10% вероятность на 7 секунд понизить скорость атаки противника на 15%.
+21034	Шквал ударов	30100	icon_skills.nanmu_tex	Сковывающий шквал ударов	icon_crest.e_crestactivespeeddown_tex	25% вероятность обездвижить цель на 4 секунды.
+21035	Разъяряющий порез	160100	icon_skills.rushingslash_tex	Лихой разъяряющий порез (Удар воина)	icon_crest.e_crestnextskillattackup_tex	Повышает урон умения "Удар воина" на 20% на несколько секунд.
+21036	Удар в спину	220100	icon_skills.backattack_tex	Стремительный удар в спину	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+21037	Ошеломление	230100	icon_skills.reversalturningattack_tex	Задерживающее ошеломление	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 50%.
+21038	Ошеломление	230100	icon_skills.reversalturningattack_tex	Стремительное ошеломление	icon_crest.e_crestactivecooltimereset_tex	Снижает время перезарядки умения на 20%.
+21039	Комбо-атака	10100	icon_skills.comboattack_tex	Иссушающая комбо-атака	icon_crest.e_crestactivestun_tex	5% вероятность оглушить цель на 2 секунды.
+21040	Боевой клич	50100	icon_skills.thunderingroar_tex	Ускоренный боевой клич	icon_crest.e_crestpassiveskillspeedup_tex	Увеличивает скорость использования умения на 50%.
+21041	Боевой клич	50100	icon_skills.thunderingroar_tex	Звонкий боевой клич	icon_crest.e_crestpassivethorns_tex	Повышает вероятность срабатывания эффекта на 10%.
+21042	Боевой клич	50100	icon_skills.thunderingroar_tex	Угрожающий боевой клич	icon_crest.e_crestpassiveaggroup_tex	Дает 100% дополнительной агрессии.
+21043	Удар воина	180100	icon_skills.aggravatingstrike_tex	Задерживающий удар воина	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 50%.
+21044	Удар воина	180100	icon_skills.aggravatingstrike_tex	Лихой удар воина (Удар в прыжке)	icon_crest.e_crestnextskillattackup_tex	Повышает урон умения "Удар в прыжке" на 35% на несколько секунд.
+21045	Круговой удар	170100	icon_skills.allroundslash_tex	Неутомимый круговой удар	icon_crest.e_crestactivecooltimereset_tex	30% вероятность сбросить время перезарядки умения.
+21046	Уклонение	20100	icon_skills.tumbling_tex	Восстанавливающее уклонение (Отравленный клинок)	icon_crest.e_crestnextskillhpheal_tex	Мгновенно восстанавливает 3% от общего количества HP при использовании умения "Отравленный клинок".
+21047	Смерть с небес	100100	icon_skills.evasionattack_tex	Тест	icon_skills.voidtrap_tex	Нет эффекта
+21048	Наскок	270100	icon_skills.heavybite_tex	Быстрый наскок	icon_crest.e_crestactiveattackspeedup_tex	Увеличивает скорость атаки умения "Наскок" на 30%.
+21049	Наскок	270100	icon_skills.heavybite_tex	Стремительный наскок	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+21050	Прорезающий выпад	280100	icon_skills.dualrapidpiercing_tex	Задерживающий прорезающий выпад	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 50%.
+21051	Прорезающий выпад	280100	icon_skills.dualrapidpiercing_tex	Блистательный прорезающий выпад	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 75.
+21052	Рваная рана	290100	icon_skills.dualslash_tex	Усиленная рваная рана	icon_crest.e_crestpassiveattackup_tex	Увеличивает урон умения на 25% и увеличивает получение преимущества от него.
+21053	Рваная рана	290100	icon_skills.dualslash_tex	Блистательная рваная рана	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 80.
+21054	Рваная рана	290100	icon_skills.dualslash_tex	Неутомимая рваная рана	icon_crest.e_crestactivecooltimereset_tex	50% вероятность сбросить время перезарядки умения.
+21064	Град ударов	40100	icon_skills.pointattack_tex	Усиленный град ударов	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+21065	Смерть с небес	100100	icon_skills.evasionattack_tex	Неизбежная смерть с небес	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 30%.
+21066	Град ударов	40100	icon_skills.pointattack_tex	Восстанавливающий град ударов	icon_crest.e_crestpassivehpheal_tex	Мгновенно восстанавливает 0.5% HP.
+21067	Уклонение	20100	icon_skills.tumbling_tex	Нескончаемое уклонение	icon_crest.e_crestactivecooltimereset_tex	Снижает расход решимости на 100 единиц.
+21068	Защитная стойка	90100	icon_skills.ironwillb_tex	Несокрушимая защитная стойка	icon_crest.e_crestpassiveskilleffectup_tex	Увеличивает выносливость на 10%.
+21069	Удар воина	180100	icon_skills.aggravatingstrike_tex	Живительный удар воина	icon_crest.e_crestpassivehpdown_tex	Снижает расход HP на 50%.
+21070	Комбо-атака	10100	icon_skills.comboattack_tex	Энергичная комбо-атака	icon_crest.e_crestpassivemprecoveryup_tex	При поражении цели увеличивает количество восстанавливаемых МР на 35%.
+21071	Призрачный воин	240100	icon_skills.decoy_tex	Стремительный призрачный воин	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+21072	Удар воина	180100	icon_skills.aggravatingstrike_tex	Лихой удар воина (Удар в прыжке)	icon_crest.e_crestnextskillattackup_tex	Повышает урон умения "Удар в прыжке" на 45% на несколько секунд.
+21073	Разъяряющий порез	160100	icon_skills.rushingslash_tex	Лихой разъяряющий порез (Удар воина)	icon_crest.e_crestnextskillattackup_tex	Повышает урон умения "Удар воина" на 50% на несколько секунд.
+21074	Смерть с небес	100100	icon_skills.evasionattack_tex	Неотвратимая смерть с небес	icon_crest.e_crestactivedefenceup_tex	Увеличивает выносливость на 25 на 8 секунд.
+21075	Удар в спину	220100	icon_skills.backattack_tex	Выгодный удар в спину	icon_crest.e_crestactiveattackspeedup_tex	Повышает преимущество воина на 1.
+21076	Каскад оглушений	210100	icon_skills.hardslash_tex	Усиленный каскад оглушений	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+21077	Каскад оглушений	210100	icon_skills.hardslash_tex	Задерживающий каскад оглушений	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 25%.
+21078	Ошеломление	230100	icon_skills.reversalturningattack_tex	Лихое ошеломление (Каскад оглушений)	icon_crest.e_crestnextskillattackup_tex	Повышает урон умения "Каскад оглушений" на 10% на несколько секунд.
+21079	Коса	300100	icon_skills.raker_tex	Режущая коса	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность нанесения критического удара.
+21080	Коса	300100	icon_skills.raker_tex	Мощная коса	icon_crest.e_crestpassiveattackup_tex	Повышает дополнительный урон от преимущества воина на 25%.
+21081	Удар в спину	220100	icon_skills.backattack_tex	Задерживающий удар в спину	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 50%.
+21082	Наскок	270100	icon_skills.heavybite_tex	Быстрый наскок	icon_crest.e_crestactiveattackspeedup_tex	Увеличивает скорость атаки умения "Наскок" на 30%.
+21083	Отравленный клинок	110100	icon_skills.poisonblowattack_tex	Накапливающий отравленный клинок	icon_crest.e_crestactiveattackspeedup_tex	Эффект умения "Отравленный клинок" суммируется до двух раз.
+21084	Рваная рана	290100	icon_skills.dualslash_tex	Выгодная рваная рана	icon_crest.e_crestactiveattackspeedup_tex	Повышает преимущество воина на 1.
+21085	Удар жнеца	310100	icon_skills.rupture_tex	Усиленный удар жнеца	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+21086	Скрещенные мечи	320100	icon_skills.twinswordsdefence_tex	Пульсирующие скрещенные мечи	icon_crest.e_crestactiveattackup_tex	30% вероятность при успешном блоке на 10 секунд повысить силу на 15%.
+21087	Теневой удар	330100	icon_skills.shadowchange_tex	Угрожающий теневой удар	icon_crest.e_crestpassiveaggroup_tex	Дает 20% дополнительной агрессии.
+21088	Связующий меч	340100	icon_skills.bindingblade_tex	Мощный связующий меч	icon_crest.e_crestpassiveattackup_tex	+20% к наносимому умением урону.
+21089	Связующий меч	340100	icon_skills.bindingblade_tex	Мощный связующий меч	icon_crest.e_crestpassiveattackup_tex	+20% к наносимому умением урону.
+21090	Связующий меч	340100	icon_skills.bindingblade_tex	Стремительный связующий меч	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+21091	Смертельная игра	200100	icon_skills.deadlywill_tex	Задерживающая смертельная игра	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 20%.
+21092	Связующий меч	340100	icon_skills.bindingblade_tex	Стремительный связующий меч	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+21093	Вспышка гнева	350100	icon_skills.provokerage_tex	Замедляющая вспышка гнева	icon_crest.e_crestpassivespeeddown_tex	На 5 секунд снижает скорость перемещения противника на 50%.
+21094	Вспышка гнева	350100	icon_skills.provokerage_tex	Стремительная вспышка гнева	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+21095	Уклонение	20100	icon_skills.tumbling_tex	Ускоренное уклонение	icon_crest.e_crestactiveattackspeedup_tex	40% вероятность на 10 секунд повысить скорость атаки на 15%.
+21096	Шквал ударов	30100	icon_skills.nanmu_tex	Угрожающий шквал ударов	icon_crest.e_crestpassiveaggroup_tex	Дает 40% дополнительной агрессии.
+21097	Круговой удар	170100	icon_skills.allroundslash_tex	Усиленный круговой удар	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+21098	Каскад оглушений	210100	icon_skills.hardslash_tex	Усиленный каскад оглушений (Град ударов)	icon_crest.e_crestnextskillattackup_tex	Повышает урон умения "Град ударов" на 20% на несколько секунд.
+21099	Нарастающая ярость	190100	icon_skills.tenaciousattack_tex	Ошеломляющая нарастающая ярость	icon_crest.e_crestactiveattackspeeddown_tex	20% вероятность на 7 секунд понизить скорость атаки противника на 15%.
+21100	Удар в спину	220100	icon_skills.backattack_tex	Стремительный удар в спину	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+21101	Уклонение	20100	icon_skills.tumbling_tex	Стремительное уклонение	icon_crest.e_crestactivecooltimereset_tex	Снижает расход решимости на 120 единиц.
+21102	Защитная стойка	90100	icon_skills.ironwillb_tex	Несокрушимая защитная стойка	icon_crest.e_crestpassiveskilleffectup_tex	Увеличивает выносливость на 10%.
+21103	Разъяряющий порез	160100	icon_skills.rushingslash_tex	Усиленный разъяряющий порез (Удар воина)	icon_crest.e_crestnextskillattackup_tex	Повышает урон умения "Удар воина" на 50% на несколько секунд.
+21104	Коса	300100	icon_skills.raker_tex	Режущая коса	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность нанесения критического удара.
+21105	Коса	300100	icon_skills.raker_tex	Усиленная коса	icon_crest.e_crestpassiveattackup_tex	Повышает дополнительный урон от преимущества воина на 30%.
+21106	Смертельная игра	200100	icon_skills.deadlywill_tex	Задерживающая смертельная игра	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 20%.
+21107	Рваная рана	290100	icon_skills.dualslash_tex	Режущая рваная рана	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность нанесения критического удара против монстров.
+22000	Незыблемость	20100	icon_skills.defence_tex	Пульсирующая незыблемость	icon_crest.e_crestactiveattackup_tex	30% вероятность при успешном блоке на 10 секунд повысить силу на 15%.
+22001	Незыблемость	20100	icon_skills.defence_tex	Лихая незыблемость (Контрудар)	icon_crest.e_crestnextskillattackup_tex	На 25% увеличивает урон умения "Контрудар" в течение нескольких секунд.
+22002	Незыблемость	20100	icon_skills.defence_tex	Весомая незыблемость (Контрудар)	icon_crest.e_crestnextskillmpdown_tex	На 115 MP снижает стоимость умения "Контрудар" в течение нескольких секунд.
+22003	Комбо-атака	10100	icon_skills.comboattack_tex	Угрожающая комбо-атака	icon_crest.e_crestpassiveaggroup_tex	Дает 5% дополнительной агрессии.
+22004	Агрессивный крик	40100	icon_skills.roar_tex	Угрожающий агрессивный крик	icon_crest.e_crestpassiveaggroup_tex	+20% дополнительной агрессии.
+22005	Агрессивный крик	40100	icon_skills.roar_tex	Блистательный агрессивный крик	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 60.
+22006	Вспышка гнева	120100	icon_skills.provokerage_tex	Замедляющая вспышка гнева	icon_crest.e_crestpassivespeeddown_tex	На 5 секунд снижает скорость перемещения противника на 50%.
+22007	Натиск	30100	icon_skills.screwthrough_tex	Усиленный натиск	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+22008	Контрудар	80100	icon_skills.riposte_tex	Тест	icon_skills.voidtrap_tex	Нет эффекта
+22009	Удар щитом	50100	icon_skills.shieldstrike_tex	Гулкий удар щитом	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 25%.
+22010	Клич стража	70100	icon_skills.inspiringroar_tex	Блистательный клич стража	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 200.
+22012	Ответный удар	110100	icon_skills.risingattack_tex	Усиленный ответный удар	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+22013	Штурм	180100	icon_skills.shieldattack_tex	Блистательный штурм	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 19.
+22015	Комбо-атака	10100	icon_skills.comboattack_tex	Энергичная комбо-атака	icon_crest.e_crestpassivemprecoveryup_tex	При поражении цели увеличивает количество восстанавливаемых МР на 20%.
+22016	Изнурение	100100	icon_skills.armorbreak_tex	Подгоняемое изнурение	icon_crest.e_crestactivempzero_tex	С вероятностью 35% позволяет использовать умение без затрат МР.
+22017	Гарпун	90100	icon_skills.hookthrow_tex	Стремительный гарпун	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+22018	Вспышка гнева	120100	icon_skills.provokerage_tex	Стремительная вспышка гнева	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+22019	Удар щитом	50100	icon_skills.shieldstrike_tex	Стремительный удар щитом	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+22020	Молниеносный бросок	150100	icon_skills.advancingcharge_tex	Усиленный молниеносный бросок	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+22021	Второе дыхание	160100	icon_skills.rejuvenation_tex	Стремительное второе дыхание	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+22022	Выброс адреналина	170100	icon_skills.fightingwill_tex	Быстрый выброс адреналина	icon_crest.e_crestpassiveskilleffectup_tex	+10% к скорости атаки.
+22023	Атака с выпадом	130100	icon_skills.leaprampage_tex	Блистательная атака с выпадом	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 75.
+22024	Ответный удар	110100	icon_skills.risingattack_tex	Стремительный ответный удар	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+22025	Грозный вал	200100	icon_skills.menacewave_tex	Блистательный грозный вал	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 60.
+22026	Железная воля	220100	icon_skills.armoredwill_tex	Задерживающая железная воля	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 50%.
+22027	Гарпун мастера	230100	icon_skills.chaincapture_tex	Неутомимый гарпун мастера	icon_crest.e_crestactivecooltimereset_tex	30% вероятность сбросить время перезарядки умения.
+22028	Калечащий удар	210100	icon_skills.shockblow_tex	Усиленный калечащий удар	icon_crest.e_crestpassiveattackup_tex	+20% к наносимому умением урону.
+22029	Клятва защиты	190100	icon_skills.vowofprotection_tex	Стремительная клятва защиты	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+22030	Атака с выпадом	130100	icon_skills.leaprampage_tex	Усиленная атака с выпадом	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+22031	Агрессивный крик	40100	icon_skills.roar_tex	Тест	icon_skills.voidtrap_tex	Нет эффекта
+22032	Натиск	30100	icon_skills.screwthrough_tex	Блистательный натиск	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 100.
+22033	Контрудар	80100	icon_skills.riposte_tex	Угрожающий контрудар	icon_crest.e_crestpassiveaggroup_tex	+100% дополнительной агрессии.
+22034	Изнурение	100100	icon_skills.armorbreak_tex	Задерживающее изнурение	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 100%.
+22035	Удар щитом	50100	icon_skills.shieldstrike_tex	Полыхающий удар щитом (Натиск)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость зарядки умения "Натиск" на 25% в течение нескольких секунд.
+22036	Клятва защиты	190100	icon_skills.vowofprotection_tex	Восстанавливающая клятва защиты	icon_crest.e_crestactivehprecoveryup_tex	На 20 секунд повышает эффективность восстановления HP на 20%.
+22037	Клич стража	70100	icon_skills.inspiringroar_tex	Стремительный клич стража	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+22038	Грозный вал	200100	icon_skills.menacewave_tex	Задерживающий грозный вал	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 50%.
+22039	Молниеносный бросок	150100	icon_skills.advancingcharge_tex	Стремительный молниеносный бросок	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+22040	Молниеносный бросок	150100	icon_skills.advancingcharge_tex	Проворный молниеносный бросок	icon_crest.e_crestactivespeedup_tex	На 7 секунд увеличивает скорость перемещения в бою на 10.
+22041	Железная воля	220100	icon_skills.armoredwill_tex	Парирующая железная воля	icon_crest.e_crestpassiveskilleffectup_tex	Увеличивает поглощение урона на 25%.
+22042	Калечащий удар	210100	icon_skills.shockblow_tex	Замедляющий калечащий удар	icon_crest.e_crestpassiveskilleffectup_tex	Снижает скорость перемещения противника на 30%.
+22043	Гарпун	90100	icon_skills.hookthrow_tex	Дальнобойный гарпун	icon_crest.e_crestpassiverangeup_tex	Увеличивает дальность на 3 метра.
+22044	Гарпун	90100	icon_skills.hookthrow_tex	Замедляющий гарпун	icon_crest.e_crestpassivespeeddown_tex	На 4 секунды снижает скорость перемещения противника на 50%.
+22045	Удар щитом	50100	icon_skills.shieldstrike_tex	Гулкий удар щитом	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 25%.
+22046	Удар щитом	50100	icon_skills.shieldstrike_tex	Стремительный удар щитом	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+22047	Гарпун	90100	icon_skills.hookthrow_tex	Стремительный гарпун	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+22048	Комбо-атака	10100	icon_skills.comboattack_tex	Угрожающая комбо-атака	icon_crest.e_crestpassiveaggroup_tex	Дает 5% дополнительной агрессии.
+22049	Агрессивный крик	40100	icon_skills.roar_tex	Блистательный агрессивный крик	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 60.
+22050	Калечащий удар	210100	icon_skills.shockblow_tex	Замедляющий калечащий удар	icon_crest.e_crestpassiveskilleffectup_tex	Снижает скорость перемещения противника на 30%.
+22051	Натиск	30100	icon_skills.screwthrough_tex	Блистательный натиск	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 150.
+22052	Клич стража	70100	icon_skills.inspiringroar_tex	Стремительный клич стража	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 35%.
+22053	Вспышка гнева	120100	icon_skills.provokerage_tex	Замедляющая вспышка гнева	icon_crest.e_crestpassivespeeddown_tex	На 5 секунд снижает скорость перемещения противника на 50%.
+22054	Гарпун	90100	icon_skills.hookthrow_tex	Ошеломляющий гарпун	icon_crest.e_crestpassivetargetspeeddown_tex	-40% к скорости атаки противника на 4 секунды.
+22055	Гарпун	90100	icon_skills.hookthrow_tex	Угрожающий гарпун	icon_crest.e_crestpassiveaggroup_tex	Дает 30% дополнительной агрессии.
+22056	Агрессивный крик	40100	icon_skills.roar_tex	Ускоренный агрессивный крик	icon_crest.e_crestpassiveskillspeedup_tex	Увеличивает скорость использования умения на 25%.
+22057	Агрессивный крик	40100	icon_skills.roar_tex	Несокрушимый агрессивный крик	icon_crest.e_crestactivedefenceup_tex	+21 к выносливости после успешного попадания.
+22058	Натиск	30100	icon_skills.screwthrough_tex	Режущий натиск	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность нанесения критического удара.
+22059	Калечащий удар	210100	icon_skills.shockblow_tex	Угрожающий калечащий удар	icon_crest.e_crestpassiveaggroup_tex	Дает 50% дополнительной агрессии.
+22060	Идеальный гарпун	240100	icon_skills.harpoonshot_tex	Стремительный идеальный гарпун	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+22061	Идеальный гарпун	240100	icon_skills.harpoonshot_tex	Задерживающий идеальный гарпун	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 50%.
+22062	Комбо-атака	10100	icon_skills.comboattack_tex	Энергичная комбо-атака	icon_crest.e_crestpassivemprecoveryup_tex	При поражении цели увеличивает количество восстанавливаемых МР на 20%.
+22063	Контрудар	80100	icon_skills.riposte_tex	Угрожающий контрудар	icon_crest.e_crestpassiveaggroup_tex	+100% дополнительной агрессии.
+22064	Штурм	180100	icon_skills.shieldattack_tex	Угрожающий штурм	icon_crest.e_crestpassiveaggroup_tex	+200% дополнительной агрессии.
+22065	Атака с выпадом	130100	icon_skills.leaprampage_tex	Ошеломляющая атака с выпадом	icon_crest.e_crestactiveattackspeeddown_tex	30% вероятность на 7 секунд понизить скорость атаки противника на 30%.
+22066	Буйство силы	250100	icon_skills.overhelm_tex	Усиленное буйство силы	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+22067	Отступление	260100	icon_skills.backstep_tex	Стремительное отступление	icon_crest.e_crestactivecooltimereset_tex	Уменьшает затраты решительности на 100 единиц.
+22068	Агрессивный крик	40100	icon_skills.roar_tex	Мощный агрессивный крик	icon_crest.e_creststrecover_tex	Увеличивает количество восстанавливаемой решимости на 30%.
+22069	Контрудар	80100	icon_skills.riposte_tex	Мощный контрудар	icon_crest.e_creststrecover_tex	Увеличивает количество восстанавливаемой решимости на 50%.
+22070	Второе дыхание	160100	icon_skills.rejuvenation_tex	Мощное второе дыхание	icon_crest.e_creststrecover_tex	Восстанавливает на 20% больше решимости.
+22071	Незыблемость 	20100	icon_skills.defence_tex	Дюжая незыблемость	icon_crest.e_creststrecover_tex	Увеличивает максимальную решимость на 500.
+22072	Фронтальная защита	270100	icon_skills.holdtheline_tex	Стремительный сзывающий клич	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+22073	Фронтальная защита	270100	icon_skills.holdtheline_tex	Задерживающий сзывающий клич	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 30%.
+22074	Фронтальная защита	270100	icon_skills.holdtheline_tex	Блистательный сзывающий клич	icon_crest.e_crestpassivempdown_tex	Снижает потребление МР на 150.
+22075	Фронтальная защита	270100	icon_skills.holdtheline_tex	Угрожающий сзывающий клич	icon_crest.e_crestpassiveaggroup_tex	+100% дополнительной агрессии.
+22076	Фронтальная защита	270100	icon_skills.holdtheline_tex	Угрожающий сзывающий клич	icon_crest.e_crestpassiveaggroup_tex	+100% дополнительной агрессии.
+22077	Фронтальная защита	270100	icon_skills.holdtheline_tex	Задерживающий сзывающий клич	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 30%.
+22078	Фронтальная защита	270100	icon_skills.holdtheline_tex	Стремительный сзывающий клич	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+22079	Агрессивный крик	40100	icon_skills.roar_tex	Угрожающий агрессивный крик	icon_crest.e_crestpassiveaggroup_tex	+40% дополнительной агрессии.
+22080	Натиск	30100	icon_skills.screwthrough_tex	Усиленный натиск	icon_crest.e_crestpassiveattackup_tex	+30% к наносимому умением урону.
+22081	Атака с выпадом	130100	icon_skills.leaprampage_tex	Усиленная атака с выпадом	icon_crest.e_crestpassiveattackup_tex	+30% к наносимому умением урону.
+22082	Изнурение	100100	icon_skills.armorbreak_tex	Задерживающее изнурение	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 100%.
+22083	Молниеносный бросок	150100	icon_skills.advancingcharge_tex	Неутомимый молниеносный бросок	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+22084	Агрессивный крик	40100	icon_skills.roar_tex	Блистательный агрессивный крик	icon_crest.e_crestpassivempdown_tex	Снижает потребление МР на 80.
+22085	Агрессивный крик	40100	icon_skills.roar_tex	Ускоренный агрессивный крик	icon_crest.e_crestpassiveskillspeedup_tex	Увеличивает скорость использования умения на 25%.
+22086	Контрудар	80100	icon_skills.riposte_tex	Угрожающий контрудар	icon_crest.e_crestpassiveaggroup_tex	+120% дополнительной агрессии.
+22087	Штурм	180100	icon_skills.shieldattack_tex	Угрожающий штурм	icon_crest.e_crestpassiveaggroup_tex	+200% дополнительной агрессии.
+22088	Буйство силы	250100	icon_skills.overhelm_tex	Усиленное буйство силы	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+22089	Отступление	260100	icon_skills.backstep_tex	Стремительное отступление	icon_crest.e_crestactivecooltimereset_tex	Уменьшает затраты решительности на 100 единиц.
+22090	Фронтальная защита	270100	icon_skills.holdtheline_tex	Угрожающая фронтальная защита	icon_crest.e_crestpassiveaggroup_tex	+120% дополнительной агрессии.
+23000	Уклонение	40100	icon_skills.tumbling_tex	Проворное уклонение	icon_crest.e_crestactivespeedup_tex	30% вероятность на 10 секунд увеличить скорость перемещения в бою на 15%.
+23001	Комбо-атака	10100	icon_skills.comboattack_tex	Быстрая комбо-атака	icon_crest.e_crestactiveattackspeedup_tex	10% вероятность на 10 секунд повысить скорость атаки на 15%.
+23002	Комбо-атака	10100	icon_skills.comboattack_tex	Усиленная комбо-атака	icon_crest.e_crestpassiveattackup_tex	+25% к урону от умения.
+23003	Концентрация силы	180100	icon_skills.gatheringstrength_tex	Блистательная концентрация силы	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 33.
+23004	Нокаутирующий удар	20100	icon_skills.handyslash_tex	Усиленный нокаутирующий удар	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+23005	Ответный удар	100100	icon_skills.risingattack_tex	Усиленный ответный удар	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+23007	Нокаутирующий удар	20100	icon_skills.handyslash_tex	Лихой нокаутирующий удар (Смерч)	icon_crest.e_crestnextskillattackup_tex	На 25% увеличивает урон умения "Смерч" в течение нескольких секунд.
+23008	Ответный удар	100100	icon_skills.risingattack_tex	Лихой ответный удар (Удар в прыжке)	icon_crest.e_crestnextskillattackup_tex	На 25% увеличивает урон умения "Удар в прыжке" в течение нескольких секунд.
+23009	Рубящий удар	80100	icon_skills.cuttingslash_tex	Неутомимый рубящий удар	icon_crest.e_crestactivecooltimereset_tex	50% вероятность сбросить время перезарядки умения.
+23010	Комбо-атака	10100	icon_skills.comboattack_tex	Энергичная комбо-атака	icon_crest.e_crestpassivemprecoveryup_tex	При поражении цели увеличивает количество восстанавливаемых МР на 10%.
+23011	Клич победителя	70100	icon_skills.shout_tex	Энергичный клич победителя	icon_crest.e_crestpassivemprecoveryup_tex	Увеличивает количество восстанавливаемых МР на 50%.
+23012	Смерч	30100	icon_skills.sworddance_tex	Блистательный смерч	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 63.
+23013	Рывок	50100	icon_skills.dash_tex	Стремительный рывок	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+23014	Удар в спину	60100	icon_skills.turnaroundattack_tex	Стремительный удар в спину	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 15%.
+23015	Клич победителя	70100	icon_skills.shout_tex	Стремительный клич победителя	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+23016	Удар в сердце	120100	icon_skills.stingerblade_tex	Усиленный удар в сердце	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+23017	Яростная атака	160100	icon_skills.ragingstrike_tex	Усиленная яростная атака	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+23018	Удар с размаха	130100	icon_skills.flatblade_tex	Усиленный удар с размаха	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+23019	Безрассудный рывок	170100	icon_skills.advancingleap_tex	Стремительный безрассудный рывок	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+23020	Удар в прыжке	90100	icon_skills.downblow_tex	Блистательный удар в прыжке	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 50.
+23021	Клинок ветра	140100	icon_skills.tripleslash_tex	Блистательный клинок ветра	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 18.
+23022	Сотрясающий удар	150100	icon_skills.retreatingkick_tex	Блистательный сотрясающий удар	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 30.
+23023	Ответный удар	100100	icon_skills.risingattack_tex	Стремительный ответный удар	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+23024	Рубящий удар	80100	icon_skills.cuttingslash_tex	Восстанавливающий рубящий удар	icon_crest.e_crestpassivehpheal_tex	Мгновенно восстанавливает 3% HP.
+23025	Упорство	190100	icon_skills.tenacity_tex	Стремительное упорство	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+23026	Истощающий удар	210100	icon_skills.veinslash_tex	Усиленный истощающий удар	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+23027	Хладнокровие	200100	icon_skills.destructionvigor_tex	Мастерское хладнокровие	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 50.
+23028	Удар в сердце	120100	icon_skills.stingerblade_tex	Неутомимый удар в сердце	icon_crest.e_crestactivecooltimereset_tex	35% вероятность сбросить время перезарядки умения.
+23029	Клич победителя	70100	icon_skills.shout_tex	Несокрушимый клич победителя	icon_crest.e_crestactivedefenceup_tex	+20% к выносливости на 10 секунд.
+23030	Удар в спину	60100	icon_skills.turnaroundattack_tex	Полыхающий удар в спину (Удар в сердце)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения "Удар в сердце" на 25% в течение нескольких секунд.
+23031	Удар в спину	60100	icon_skills.turnaroundattack_tex	Полыхающий удар в спину (Нокаутирующий удар)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает урон умения "Нокаутирующий удар" на 25% в течение нескольких секунд.
+23032	Яростная атака	160100	icon_skills.ragingstrike_tex	Полыхающая яростная атака (Смерч)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения "Смерч" на 25% в течение нескольких секунд.
+23033	Яростная атака	160100	icon_skills.ragingstrike_tex	Восстанавливающая яростная атака (Удар с размаха)	icon_crest.e_crestnextskillhpheal_tex	Мгновенно восстанавливает 4% от общего количества HP при использовании умения "Удар с размаха".
+23034	Истощающий удар	210100	icon_skills.veinslash_tex	Стремительный истощающий удар	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+23035	Клинок ветра	140100	icon_skills.tripleslash_tex	Ошеломляющий клинок ветра	icon_crest.e_crestactiveattackspeeddown_tex	20% вероятность на 5 секунд понизить скорость атаки противника на 15%.
+23036	Упорство	190100	icon_skills.tenacity_tex	Достойное упорство	icon_crest.e_crestactivereactionresist_tex	На 15 секунд повышает равновесие на 50%.
+23037	Хладнокровие	200100	icon_skills.destructionvigor_tex	Полыхающее хладнокровие (Удар в сердце)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения "Удар в сердце" на 25% в течение нескольких секунд.
+23038	Уклонение	40100	icon_skills.tumbling_tex	Неутомимое уклонение	icon_crest.e_crestactivecooltimereset_tex	20% вероятность сбросить время перезарядки умения.
+23039	Уклонение	40100	icon_skills.tumbling_tex	Лихое уклонение (Яростная атака)	icon_crest.e_crestnextskillattackup_tex	На 25% увеличивает урон умения "Яростная атака" в течение нескольких секунд.
+23040	Нокаутирующий удар	20100	icon_skills.handyslash_tex	Лихой нокаутирующий удар (Рубящий удар)	icon_crest.e_crestnextskillattackup_tex	Увеличивает урон умения "Рубящий удар" на 20% в течение нескольких секунд.
+23041	Нокаутирующий удар	20100	icon_skills.handyslash_tex	Значительный нокаутирующий удар	icon_crest.e_crestpassivereactionup_tex	+20% к вероятности опрокинуть и оглушить противника.
+23042	Сотрясающий удар	150100	icon_skills.retreatingkick_tex	Задерживающий сотрясающий удар	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 30%.
+23043	Сотрясающий удар	150100	icon_skills.retreatingkick_tex	Полыхающий сотрясающий удар (Удар в сердце)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения "Удар в сердце" на 25% в течение нескольких секунд.
+23044	Сотрясающий удар	150100	icon_skills.retreatingkick_tex	Полыхающий сотрясающий удар (Нокаутирующий удар)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает урон умения "Нокаутирующий удар" на 25% в течение нескольких секунд.
+23046	Рубящий удар	80100	icon_skills.cuttingslash_tex	Неутомимый рубящий удар	icon_crest.e_crestactivecooltimereset_tex	50% вероятность сбросить время перезарядки умения.
+23047	Нокаутирующий удар	20100	icon_skills.handyslash_tex	Усиленный нокаутирующий удар	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+23048	Удар с размаха	130100	icon_skills.flatblade_tex	Усиленный удар с размаха	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+23049	Рубящий удар	80100	icon_skills.cuttingslash_tex	Восстанавливающий рубящий удар	icon_crest.e_crestpassivehpheal_tex	Восстанавливает 3% от общего количества HP.
+23050	Комбо-атака	10100	icon_skills.comboattack_tex	Быстрая комбо-атака	icon_crest.e_crestactiveattackspeedup_tex	10% вероятность на 10 секунд повысить скорость атаки на 15%.
+23051	Истощающий удар	210100	icon_skills.veinslash_tex	Стремительный истощающий удар	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 35%.
+23052	Упорство	190100	icon_skills.tenacity_tex	Достойное упорство	icon_crest.e_crestactivereactionresist_tex	На 15 секунд удваивает равновесие.
+23053	Упорство	190100	icon_skills.tenacity_tex	Стремительное упорство	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 30%.
+23054	Удар в спину	60100	icon_skills.turnaroundattack_tex	Полыхающий удар в спину (Удар в сердце)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения "Удар в сердце" на 35% в течение нескольких секунд.
+23055	Смерч	30100	icon_skills.sworddance_tex	Режущий смерч	icon_crest.e_crestpassivecriticalup_tex	Утраивает вероятность нанесения критического удара.
+23056	Уклонение	40100	icon_skills.tumbling_tex	Лихое уклонение (Уклонение)	icon_crest.e_crestpassiveattackup_tex	Увеличивает на 25% урон от умения "Удар в спину" после уклонения в течение нескольких секунд.
+23057	Удар в сердце	120100	icon_skills.stingerblade_tex	Режущий удар в сердце	icon_crest.e_crestpassivecriticalup_tex	Утраивает вероятность нанесения критического удара.
+23058	Концентрация силы	180100	icon_skills.gatheringstrength_tex	Режущая концентрация силы	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность нанесения критического удара при следующей атаке.
+23059	Концентрация силы	180100	icon_skills.gatheringstrength_tex	Форсированная концентрация силы	icon_crest.e_crestpassiveattackup_tex	На 10% увеличивает урон от следующей атаки.
+23060	Сотрясающий удар	150100	icon_skills.retreatingkick_tex	Быстрый сотрясающий удар	icon_crest.e_crestpassiveskillspeedup_tex	Повышает скорость атаки "Сотрясающего удара" на 25%.
+23061	Выверенный удар	230100	icon_skills.cuthead_tex	Режущий выверенный удар	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность нанесения критического удара.
+23062	Выверенный удар	230100	icon_skills.cuthead_tex	Усиленный выверенный удар	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+23063	Яростная атака	160100	icon_skills.ragingstrike_tex	Усиленная яростная атака	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+23064	Удар в спину	60100	icon_skills.turnaroundattack_tex	Стремительный удар в спину	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+23065	Клинок ветра	140100	icon_skills.tripleslash_tex	Ошеломляющий клинок ветра	icon_crest.e_crestactiveattackspeeddown_tex	30% вероятность на 5 секунд понизить скорость атаки противника на 15%.
+23066	Безрассудный рывок	170100	icon_skills.advancingleap_tex	Лихой безрассудный рывок (Нокаутирующий удар)	icon_crest.e_crestpassiveattackup_tex	Увеличивает урон умения "Нокаутирующий удар" на 25% в течение нескольких секунд.
+23067	Потрошение	220100	icon_skills.jawbreaker_tex	Мощное потрошение	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+23068	Потрошение	220100	icon_skills.jawbreaker_tex	Мощное потрошение	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+23069	Потрошение	220100	icon_skills.jawbreaker_tex	Лихое потрошение (Рубящий удар)	icon_crest.e_crestnextskillattackup_tex	Увеличивает урон умения "Рубящий удар" на 25% в течение нескольких секунд.
+23070	Потрошение	220100	icon_skills.jawbreaker_tex	Стремительное потрошение	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+23071	Потрошение	220100	icon_skills.jawbreaker_tex	Лихое потрошение (Выверенный удар)	icon_crest.e_crestnextskillattackup_tex	Увеличивает урон умения "Выверенный удар" на 25% в течение нескольких секунд.
+23072	Упорство	190100	icon_skills.tenacity_tex	Энергичное упорство	icon_crest.e_crestpassivepartympup_tex	50% вероятность восстановления 6% от общего количества MP каждую секунду.
+23073	Уклонение	40100	icon_skills.tumbling_tex	Проворное уклонение	icon_crest.e_crestactivespeedup_tex	30% вероятность на 10 секунд увеличить скорость перемещения в бою на 15%.
+23074	Удар в сердце	120100	icon_skills.stingerblade_tex	Усиленный удар в сердце	icon_crest.e_crestpassiveattackup_tex	+30% к наносимому умением урону.
+23075	Яростная атака	160100	icon_skills.ragingstrike_tex	Усиленная яростная атака	icon_crest.e_crestpassiveattackup_tex	+40% к наносимому умением урону.
+23076	Сотрясающий удар	150100	icon_skills.retreatingkick_tex	Быстрый сотрясающий удар (Удар в сердце)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения "Удар в сердце" на 25% в течение нескольких секунд.
+23077	Рубящий удар	80100	icon_skills.cuttingslash_tex	Стремительный рубящий удар	icon_crest.e_crestactivecooltimereset_tex	60% вероятность сбросить время перезарядки умения.
+23078	Нокаутирующий удар	20100	icon_skills.handyslash_tex	Усиленный нокаутирующий удар	icon_crest.e_crestpassiveattackup_tex	+30% к наносимому умением урону.
+23079	Смерч	30100	icon_skills.sworddance_tex	Режущий смерч	icon_crest.e_crestpassivecriticalup_tex	Утраивает вероятность нанесения критического удара.
+23080	Концентрация силы	180100	icon_skills.gatheringstrength_tex	Режущая концентрация силы	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность нанесения критического удара при следующей атаке.
+23081	Выверенный удар	230100	icon_skills.cuthead_tex	Режущий выверенный удар	icon_crest.e_crestpassivecriticalup_tex	Утраивает вероятность нанесения критического удара.
+23082	Выверенный удар	230100	icon_skills.cuthead_tex	Усиленный выверенный удар	icon_crest.e_crestpassiveattackup_tex	+30% к наносимому умением урону.
+23083	Потрошение	220100	icon_skills.jawbreaker_tex	Усиленное потрошение	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+23084	Потрошение	220100	icon_skills.jawbreaker_tex	Лихое потрошение (Рубящий удар)	icon_crest.e_crestnextskillattackup_tex	Увеличивает урон умения "Рубящий удар" на 25% в течение нескольких секунд.
+24000	Блок топором	20100	icon_skills.weapondefence_tex	Искрометный блок топором	icon_crest.e_crestpassivempheal_tex	При успешном блоке восстанавливает 3% от общего количества MP.
+24001	Блок топором	20100	icon_skills.weapondefence_tex	Пульсирующий блок топором	icon_crest.e_crestactiveattackup_tex	30% вероятность при успешном блоке на 5 секунд повысить силу на 20%.
+24002	Громовой удар	30100	icon_skills.blastslash_tex	Режущий громовой удар	icon_crest.e_crestpassivecriticalup_tex	Удваивает и добавляет дополнительные 20% к вероятности нанесения критического удара.
+24003	Вихрь	100100	icon_skills.whirlwind_tex	Режущий вихрь	icon_crest.e_crestpassivecriticalup_tex	Удваивает и добавляет дополнительные 20% к вероятности нанесения критического удара.
+24004	Комбо-атака	10100	icon_skills.comboattack_tex	Режущая комбо-атака	icon_crest.e_crestpassivecriticalup_tex	Увеличивает вероятность нанесения критического удара в 10%.
+24005	Громовой удар	30100	icon_skills.blastslash_tex	Искусный громовой удар	icon_crest.e_crestpassivepenaltydelete_tex	Снимает эффект замедленного перемещения при зарядке умения.
+24006	Вихрь	100100	icon_skills.whirlwind_tex	Усиленный вихрь	icon_crest.e_crestpassiveattackup_tex	+12% к наносимому урону в случае заряда сверх максимального.
+24007	Громовой удар	30100	icon_skills.blastslash_tex	Живительный громовой удар	icon_crest.e_crestpassivehpdown_tex	Снижает расход HP в случае зарядки умения выше максимального значения на 50%.
+24008	Землетрясение	40100	icon_skills.bash_tex	Быстрое землетрясение	icon_crest.e_crestpassiveskillspeedup_tex	Увеличивает скорость атаки "Землетрясения" на 25%.
+24009	Вихрь	100100	icon_skills.whirlwind_tex	Ускоренный вихрь	icon_crest.e_crestpassiveskillspeedup_tex	Увеличивает скорость зарядки умения на 25%.
+24010	Насмешка	70100	icon_skills.shockingshout_tex	Ускоренная насмешка (Вихрь)	icon_crest.e_crestnextskillattackspeedup_tex	При использовании вместе с умением "Вихрь" скорость зарядки увеличивается на 30%.
+24011	Огненная ярость	80100	icon_skills.berserk_tex	Пульсирующая огненная ярость	icon_crest.e_crestactiveattackup_tex	30% вероятность на 20 секунд повысить силу на 10%.
+24012	Ошеломляющий удар	60100	icon_skills.turnback_tex	Весомый ошеломляющий удар (Землетрясение)	icon_crest.e_crestnextskillmpdown_tex	На 63 MP снижает стоимость умения "Землетрясение" в течение нескольких секунд.
+24013	Землетрясение	40100	icon_skills.bash_tex	Усиленное землетрясение	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+24015	Комбо-атака	10100	icon_skills.comboattack_tex	Энергичная комбо-атака	icon_crest.e_crestpassivemprecoveryup_tex	При поражении цели увеличивает количество восстанавливаемых МР на 15%.
+24016	Клич победителя	90100	icon_skills.shout_tex	Энергичный клич победителя	icon_crest.e_crestpassivemprecoveryup_tex	Увеличивает количество восстанавливаемых МР на 50%.
+24017	Неудержимый гнев	120100	icon_skills.vitalconversion_tex	Живительный неудержимый гнев	icon_crest.e_crestpassivehpdown_tex	Снижает расход HP на 50%.
+24018	Рывок	50100	icon_skills.dash_tex	Стремительный рывок	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+24019	Ответный удар	130100	icon_skills.risingattack_tex	Стремительный ответный удар	icon_crest.e_crestpassivecooltimedown_tex	-20% к времени перезарядки умения.
+24020	Ошеломляющий удар	60100	icon_skills.turnback_tex	Стремительный ошеломляющий удар	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+24021	Удар в прыжке	110100	icon_skills.downattack_tex	Усиленный удар в прыжке	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+24022	Удар вампира	150100	icon_skills.vampiricstrike_tex	Усиленный удар вампира	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+24023	Огненная ярость	80100	icon_skills.berserk_tex	Задерживающая огненная ярость	icon_crest.e_crestpassivedurationup_tex	+ 30% к продолжительности эффекта "Ураган ударов".
+24024	Ужасающий крик	160100	icon_skills.piercingshout_tex	Тест	icon_skills.voidtrap_tex	Нет эффекта
+24026	Клич победителя	90100	icon_skills.shout_tex	Стремительный клич победителя	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 30%.
+24027	Ответный удар	130100	icon_skills.risingattack_tex	Усиленный ответный удар	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+24028	Кровожадность	210100	icon_skills.fury_tex	Блистательная кровожадность	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 150.
+24029	Упорство	190100	icon_skills.tenacity_tex	Стремительное упорство	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+24030	Неотвратимый рок	200100	icon_skills.murderousvent_tex	Стремительный неотвратимый рок	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+24031	Клич победителя	90100	icon_skills.shout_tex	Весомый клич победителя (Рывок)	icon_crest.e_crestnextskillmpdown_tex	На 75 MP снижает стоимость умения "Рывок" в течение нескольких секунд.
+24032	Смертельный удар	180100	icon_skills.soulstrike_tex	Усиленный смертельный удар	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+24033	Неотвратимый рок	200100	icon_skills.murderousvent_tex	Весомый неотвратимый рок (Землетрясение)	icon_crest.e_crestnextskillmpdown_tex	На 63 MP снижает стоимость умения "Землетрясение" в течение нескольких секунд.
+24034	Насмешка	70100	icon_skills.shockingshout_tex	Тест	icon_skills.voidtrap_tex	Нет эффекта
+24035	Насмешка	70100	icon_skills.shockingshout_tex	Лихая насмешка (Ошеломляющий удар)	icon_crest.e_crestnextskillattackup_tex	На 25% повышает урон умения "Ошеломляющий удар" в течение нескольких секунд.
+24036	Неудержимый гнев	120100	icon_skills.vitalconversion_tex	Значительный неудержимый гнев	icon_crest.e_crestactivereactionup_tex	На 20 секунд повышает вероятность опрокидывания противника на 10%.
+24037	Неудержимый гнев	120100	icon_skills.vitalconversion_tex	Неистовый неудержимый гнев	icon_crest.e_crestactiveinvokeskill_tex	25% вероятность активировать "Ураган ударов I".
+24038	Огненная ярость	80100	icon_skills.berserk_tex	Проворная огненная ярость	icon_crest.e_crestactivespeedup_tex	На 15 секунд увеличивает скорость перемещения в бою на 20.
+24039	Ужасающий крик	160100	icon_skills.piercingshout_tex	Лихой ужасающий крик (Ошеломляющий удар)	icon_crest.e_crestnextskillattackup_tex	На 25% увеличивает урон умения "Ошеломляющий удар" в течение нескольких секунд.
+24040	Удар в прыжке	110100	icon_skills.downattack_tex	Неутомимый удар в прыжке	icon_crest.e_crestactivecooltimereset_tex	30% вероятность сбросить время перезарядки умения.
+24041	Неотвратимый рок	200100	icon_skills.murderousvent_tex	Задерживающий неотвратимый рок	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 30%.
+24042	Неотвратимый рок	200100	icon_skills.murderousvent_tex	Полыхающий неотвратимый рок (Землетрясение)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения "Землетрясение" на 25% в течение нескольких секунд.
+24043	Неотвратимый рок	200100	icon_skills.murderousvent_tex	Тест	icon_skills.voidtrap_tex	Нет эффекта
+24044	Упорство	190100	icon_skills.tenacity_tex	Достойное упорство	icon_crest.e_crestactivereactionresist_tex	На 15 секунд повышает равновесие на 50%.
+24045	Смертельный удар	180100	icon_skills.soulstrike_tex	Искусный смертельный удар	icon_crest.e_crestpassivepenaltydelete_tex	 Снимает ограничения замедленного перемещения при использовании умения.
+24046	Удар в прыжке	110100	icon_skills.downattack_tex	Полыхающий удар в прыжке (Смертельный удар)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения "Смертельный удар" на 30% в течение нескольких секунд.
+24047	Ошеломляющий удар	60100	icon_skills.turnback_tex	Полыхающий ошеломляющий удар (Громовой удар)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость зарядки умения "Громовой удар" на 30% в течение нескольких секунд.
+24048	Громовой удар	30100	icon_skills.blastslash_tex	Режущий громовой удар	icon_crest.e_crestpassivecriticalup_tex	Удваивает и добавляет дополнительные 20% к вероятности нанесения критического удара.
+24049	Громовой удар	30100	icon_skills.blastslash_tex	Искусный громовой удар	icon_crest.e_crestpassivepenaltydelete_tex	Снимает эффект замедленного перемещения при зарядке умения.
+24050	Землетрясение	40100	icon_skills.bash_tex	Быстрое землетрясение	icon_crest.e_crestpassiveskillspeedup_tex	Увеличивает скорость атаки "Землетрясения" на 25%.
+24051	Громовой удар	30100	icon_skills.blastslash_tex	Живительный громовой удар	icon_crest.e_crestpassivehpdown_tex	Снижает расход HP в случае зарядки умения выше максимального значения на 50%.
+24052	Вихрь	100100	icon_skills.whirlwind_tex	Ускоренный вихрь	icon_crest.e_crestpassiveskillspeedup_tex	Увеличивает скорость зарядки умения на 25%.
+24053	Землетрясение	40100	icon_skills.bash_tex	Усиленное землетрясение	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+24054	Упорство	190100	icon_skills.tenacity_tex	Достойное упорство	icon_crest.e_crestactivereactionresist_tex	На 15 секунд удваивает равновесие.
+24055	Насмешка	70100	icon_skills.shockingshout_tex	Ускоренная насмешка (Вихрь)	icon_crest.e_crestnextskillattackspeedup_tex	При использовании вместе с умением "Вихрь" скорость зарядки увеличивается на 30%.
+24056	Неотвратимый рок	200100	icon_skills.murderousvent_tex	Полыхающий неотвратимый рок (Землетрясение)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения "Землетрясение" на 30% в течение нескольких секунд.
+24057	Клич победителя	90100	icon_skills.shout_tex	Несокрушимый клич победителя	icon_crest.e_crestactivedefenceup_tex	Увеличивает выносливость на 16% на 12 секунд.
+24058	Рывок	50100	icon_skills.dash_tex	Неутомимый рывок	icon_crest.e_crestactivecooltimereset_tex	35% вероятность сбросить время перезарядки умения.
+24059	Удар в прыжке	110100	icon_skills.downattack_tex	Режущий удар в прыжке	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность нанесения критического удара.
+24060	Упорство	190100	icon_skills.tenacity_tex	Восстанавливающее упорство	icon_crest.e_crestpassivehpheal_tex	Мгновенно восстанавливает 12% от общего количества НР использовавшего умение.
+24061	Упорство	190100	icon_skills.tenacity_tex	Энергичное упорство	icon_crest.e_crestpassivemprecoveryup_tex	50% вероятность восстановления 6% от общего количества MP каждую секунду.
+24062	Ответный удар	130100	icon_skills.risingattack_tex	Свирепый ответный удар	icon_crest.e_crestpassivehpattackup_tex	Ваш урон растет по мере снижения вашего количества HP (максимум до 400% от базового урона умения).
+24063	Обманный удар	240100	icon_skills.ribbreaker_tex	Усиленный обманный удар	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+24064	Обманный удар	240100	icon_skills.ribbreaker_tex	Режущий обманный удар	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность нанесения критического удара.
+24065	Блок топором	20100	icon_skills.weapondefence_tex	Искрометный блок топором	icon_crest.e_crestpassivemprecoveryup_tex	При успешном блоке восстанавливает 3% от общего количества MP.
+24066	Вихрь	100100	icon_skills.whirlwind_tex	Режущий вихрь	icon_crest.e_crestpassivecriticalup_tex	Удваивает и добавляет дополнительные 20% к вероятности нанесения критического удара.
+24067	Громовой удар	30100	icon_skills.blastslash_tex	Быстрый громовой удар	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость зарядки умения на 25%.
+24068	Ошеломляющий удар	60100	icon_skills.turnback_tex	Неутомимый ошеломляющий удар	icon_crest.e_crestactivecooltimereset_tex	35% вероятность сбросить время перезарядки умения.
+24069	Неразрушимость	270100	icon_skills.selfbuff_tex	Стремительная неразрушимость	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+24070	Неразрушимость	270100	icon_skills.selfbuff_tex	Стремительная неразрушимость	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+24071	Неразрушимость	270100	icon_skills.selfbuff_tex	Задерживающая неразрушимость	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 20%.
+24072	Разрушение	230100	icon_skills.sideslash_tex	Полыхающее разрушение (Громовой удар)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения на 25%.
+24073	Разрушение	230100	icon_skills.sideslash_tex	Энергичное разрушение	icon_crest.e_crestpassivempdown_tex	Увеличивает количество восстанавливаемых МР на 20%.
+24074	Разрушение	230100	icon_skills.sideslash_tex	Стремительное разрушение	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+24075	Подножка	220100	icon_skills.throwaxe_tex	Блистательная подножка	icon_crest.e_crestpassivempdown_tex	Снижает потребление МР на 150.
+24076	Подножка	220100	icon_skills.throwaxe_tex	Проворная подножка	icon_crest.e_crestpassivechargemove_tex	На 15 секунд увеличивает скорость перемещения в бою на 20.
+24077	Подножка	220100	icon_skills.throwaxe_tex	Режущая подножка	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность нанесения критического удара.
+24078	Разрушение	230100	icon_skills.sideslash_tex	Быстрое разрушение	icon_crest.e_crestpassiveaggroup_tex	Увеличивает скорость использования умения на 25%.
+24080	Блок топором	20100	icon_skills.weapondefence_tex	Лихой блок топором (Контрудар топором)	icon_crest.e_crestnextskillattackup_tex	В течение нескольких секунд на 25% увеличивает урон умения "Контрудар топором".
+24081	Блок топором	20100	icon_skills.weapondefence_tex	Весомый блок топором (Контрудар топором)	icon_crest.e_crestnextskillmpdown_tex	В течение нескольких секунд снижает стоимость умения "Контрудар топором" на 115 MP.
+24082	Контрудар топором	300100	icon_skills.determinationofadvance_tex	Угрожающий контрудар топором	icon_crest.e_crestpassiveaggroup_tex	Дает 100% дополнительной агрессии.
+24083	Карающий удар	320100	icon_skills.upperslashcombo_tex	Блистательный карающий удар	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 25.
+24084	Карающий удар	320100	icon_skills.upperslashcombo_tex	Угрожающий карающий удар	icon_crest.e_crestpassiveaggroup_tex	Дает 100% дополнительной агрессии.
+24085	Обманный удар	240100	icon_skills.ribbreaker_tex	Стремительный обманный удар	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+24086	Огненная ярость	80100	icon_skills.berserk_tex	Угрожающая огненная ярость	icon_crest.e_crestpassiveaggroup_tex	Дает 20% дополнительной агрессии.
+24087	Огненная ярость	80100	icon_skills.berserk_tex	Блистательная огненная ярость	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 60.
+24088	Подавление	310100	icon_skills.assaultattack_tex	Усиленное подавление	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+24089	Неудержимый гнев	120100	icon_skills.vitalconversion_tex	Стремительный неудержимый гнев	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+24090	Подавление	310100	icon_skills.assaultattack_tex	Стремительное подавление	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+24091	Подавление	310100	icon_skills.assaultattack_tex	Проворное подавление	icon_crest.e_crestactivespeedup_tex	На 7 секунд увеличивает скорость перемещения в бою на 10.
+24092	Огненная ярость	80100	icon_skills.berserk_tex	Пульсирующая огненная ярость	icon_crest.e_crestactiveattackup_tex	40% вероятность на 20 секунд повысить силу на 10%.
+24093	Огненная ярость	80100	icon_skills.berserk_tex	Задерживающая огненная ярость	icon_crest.e_crestpassivedurationup_tex	+ 35% к продолжительности эффекта "Ураган ударов".
+24094	Смертельный удар	180100	icon_skills.soulstrike_tex	Усиленный смертельный удар	icon_crest.e_crestpassiveattackup_tex	+30% к наносимому умением урону.
+24095	Громовой удар	30100	icon_skills.blastslash_tex	Искусный громовой удар	icon_crest.e_crestpassivepenaltydelete_tex	Снимает эффект замедленного перемещения при зарядке умения.
+24096	Вихрь	100100	icon_skills.whirlwind_tex	Ускоренный вихрь	icon_crest.e_crestpassiveskillspeedup_tex	Повышает скорость зарядки на 30%.
+24097	Землетрясение	40100	icon_skills.bash_tex	Усиленное землетрясение	icon_crest.e_crestpassiveattackup_tex	+30% к наносимому умением урону.
+24098	Обманный удар	240100	icon_skills.ribbreaker_tex	Усиленный обманный удар	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+24099	Вихрь	100100	icon_skills.whirlwind_tex	Режущий вихрь	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность нанесения критического удара.
+24100	Неразрушимость	270100	icon_skills.selfbuff_tex	Неутомимая неразрушимость	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 50%.
+24101	Разрушение	230100	icon_skills.sideslash_tex	Ускоренное разрушение (Громовой удар)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения на 25%.
+24102	Подавление	310100	icon_skills.assaultattack_tex	Стремительное подавление	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+24103	Подавление	310100	icon_skills.assaultattack_tex	Проворное подавление	icon_crest.e_crestactivespeedup_tex	На 7 секунд повышает скорость перемещения в бою на 10.
+25000	Огненный шар	10100	icon_skills.fireball_tex	Дальнобойный огненный шар	icon_crest.e_crestpassiverangeup_tex	Увеличивает дальность на 3 метра.
+25001	Огненная завеса	200100	icon_skills.trackinginferno_tex	Быстрая огненная завеса	icon_crest.e_crestpassiveskillspeedup_tex	+30% к скорости использования.
+25003	Комета	60100	icon_skills.hellfire_tex	Ускоренная комета	icon_crest.e_crestpassiveskillspeedup_tex	Увеличивает скорость использования умения на 17%.
+25004	Магический барьер	100100	icon_skills.manashield_tex	Пульсирующий магический барьер	icon_crest.e_crestactiveattackup_tex	+ 10% к силе на 15 секунд.
+25005	Магический барьер	100100	icon_skills.manashield_tex	Несокрушимый магический барьер	icon_crest.e_crestactivedefenceup_tex	+ 20% к выносливости на 15 секунд.
+25006	Печать молний	30100	icon_skills.shocktrap_tex	Лихая печать молний (Комета)	icon_crest.e_crestnextskillattackup_tex	+20% к наносимому умением "Комета" урону в цепочке умений.
+25009	Восстановление маны	50100	icon_skills.mpcondensing_tex	Энергичное восстановление маны	icon_crest.e_crestpassivemprecoveryup_tex	Увеличивает количество восстанавливаемых МР на 10%.
+25010	Магическое усиление	340100	icon_skills.c5_strengthenmana	Стремительное магическое усиление	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+25011	Магический барьер	100100	icon_skills.manashield_tex	Стремительный магический барьер	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+25012	Разрушающий луч	120100	icon_skills.lightofruin_tex	Стремительный разрушающий луч	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+25013	Ледяная сфера	20100	icon_skills.c5_iceorb	Стремительная ледяная сфера	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 30%.
+25014	Печать молний	30100	icon_skills.shocktrap_tex	Блистательная печать молний	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 100.
+25015	Разрушающий луч	120100	icon_skills.lightofruin_tex	Режущий разрушающий луч	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность критического удара против монстров.
+25016	Мистический шар	40100	icon_skills.blastball_tex	Усиленный мистический шар	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+25017	Комета	60100	icon_skills.hellfire_tex	Блистательная комета	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 250.
+25018	Проклятие разложения	160100	icon_skills.disease_tex	Задерживающее проклятие разложения	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 40%.
+25019	Огненный столп	80100	icon_skills.auraburn_tex	Усиленный огненный столп	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+25021	Извлечение маны			Осколок символа прошлого	icon_skills.voidtrap_tex	Этот старинный расколотый символ больше не используется.
+25022	Сон разума	130100	icon_skills.sleepwind_tex	Задерживающий сон разума	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 25%.
+25023	Кража маны	190100	icon_skills.manaextortion_tex	Энергичная кража маны	icon_crest.e_crestpassivemprecoveryup_tex	Увеличивает количество восстанавливаемых МР на 10%.
+25025	Огненная завеса	200100	icon_skills.trackinginferno_tex	Блистательная огненная завеса	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 150.
+25026	Разряд молнии	110100	icon_skills.c5_lightningstruck	Блистательный разряд молнии	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 150.
+25027	Печать боли	170100	icon_skills.blastmine_tex	Блистательная печать боли	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 75.
+25028	Ледяное отступление	180100	icon_skills.freezingtheearth_tex	Задерживающее ледяное отступление	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 40%.
+25029	Мистический шар	40100	icon_skills.blastball_tex	Лихой мистический шар (Ледяная сфера)	icon_crest.e_crestnextskillattackup_tex	+25% к наносимому умением "Ледяная сфера" урону в цепочке умений.
+25030	Печать боли	170100	icon_skills.blastmine_tex	Весомая печать боли (Огненный столп)	icon_crest.e_crestnextskillmpdown_tex	На 80 MP снижает стоимость умения "Огненный столп" в течение нескольких секунд.
+25031	Разряд молнии	110100	icon_skills.c5_lightningstruck	Режущий разряд молнии	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность нанесения критического удара по монстру
+25032	Восстановление маны	50100	icon_skills.mpcondensing_tex	Стремительное восстановление маны	icon_crest.e_crestpassivecooltimedown_tex	-30% к времени перезарядки умений.
+25033	Заточение	250100	icon_skills.curseofshackle_tex	Стремительное заточение	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 15%.
+25034	Огненное дыхание	220100	icon_skills.burningbreath_tex	Задерживающее огненное дыхание	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 20%.
+25035	Магическое усиление	340100	icon_skills.c5_strengthenmana	Задерживающее магическое усиление	icon_crest.e_crestpassiveskilleffectup_tex	+30% к времени действия умения "Магическое усиление".
+25036	Нервное истощение	210100	icon_skills.neurasthenia_tex	Стремительное нервное истощение	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+25037	Истощение разума	230100	icon_skills.mpsink_tex	Задерживающее истощение разума	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 40%.
+25038	Ответный удар	140100	icon_skills.risingattack_tex	Стремительный ответный удар	icon_crest.e_crestpassivecooltimedown_tex	-20% к времени перезарядки умения.
+25039	Ответный удар	140100	icon_skills.risingattack_tex	Укрывающий ответный удар	icon_crest.e_crestactiveinvokeskill_tex	50% вероятность активировать "Магический барьер II".
+25040	Кража маны	190100	icon_skills.manaextortion_tex	Стремительная кража маны	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+25041	Магический барьер	100100	icon_skills.manashield_tex	Задерживающий магический барьер	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 50%.
+25042	Кража маны	190100	icon_skills.manaextortion_tex	Полыхающая кража маны (Огненная завеса)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения "Огненная завеса" на 25% в течение нескольких секунд.
+25043	Печать молний	30100	icon_skills.shocktrap_tex	Полыхающая печать молний (Огненный столп)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения "Огненный столп" на 25% в течение нескольких секунд.
+25044	Огненное дыхание	220100	icon_skills.burningbreath_tex	Лихое огненное дыхание (Огненная завеса)	icon_crest.e_crestnextskillattackup_tex	На 35% увеличивает урон умения "Огненная завеса" в течение нескольких секунд.
+25045	Ледяное отступление	180100	icon_skills.freezingtheearth_tex	Полыхающее ледяное отступление (Печать молний)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения "Печать молний" на 40% в течение нескольких секунд.
+25046	Заточение	250100	icon_skills.curseofshackle_tex	Возрастающее заточение	icon_crest.e_crestpassivelockontargetup_tex	Увеличивает максимальное количество захватываемых умением целей на 100%.
+25047	Заточение	250100	icon_skills.curseofshackle_tex	Ускоренное заточение (Комета)	icon_crest.e_crestnextskillattackspeedup_tex	+25% к скорости активации при использовании умения "Комета" в цепочке.
+25048	Сон разума	130100	icon_skills.sleepwind_tex	Ускоренный сон разума	icon_crest.e_crestpassiveskillspeedup_tex	Увеличивает скорость использования умения на 30%.
+25049	Сон разума	130100	icon_skills.sleepwind_tex	Неутомимый сон разума	icon_crest.e_crestactivecooltimereset_tex	25% вероятность сбросить время перезарядки умения.
+25050	Ледяная сфера	20100	icon_skills.c5_iceorb	Задерживающая ледяная сфера	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 50%.
+25051	Ледяная сфера	20100	icon_skills.c5_iceorb	Замедляющая ледяная сфера	icon_crest.e_crestpassiveskilleffectup_tex	Снижает скорость перемещения противника на 20%.
+25052	Ледяная сфера	20100	icon_skills.c5_iceorb	Полыхающая ледяная сфера (Сон разума)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения "Сон разума" на 40% в течение нескольких секунд.
+25053	Проклятие разложения	160100	icon_skills.disease_tex	Расцветающее проклятие разложения	icon_crest.e_crestpassiveskilleffectup_tex	Повышает периодический урон на 20%.
+25054	Проклятие разложения	160100	icon_skills.disease_tex	Замедляющее проклятие разложения	icon_crest.e_crestactivespeeddown_tex	100% вероятность на 7 секунд понизить скорость перемещения противника на 50%.
+25055	Комета	60100	icon_skills.hellfire_tex	Подгоняемая комета	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность критического удара против монстров.
+25056	Огненная завеса	200100	icon_skills.trackinginferno_tex	Возрастающая огненная завеса	icon_crest.e_crestpassivelockontargetup_tex	Увеличивает максимальное количество захватываемых умением целей на 0%.
+25057	Мистический шар	40100	icon_skills.blastball_tex	Тест	icon_skills.voidtrap_tex	Нет эффекта
+25058	Разряд молнии	110100	icon_skills.c5_lightningstruck	Неутомимый разряд молнии	icon_crest.e_crestactivecooltimereset_tex	30% вероятность сбросить время перезарядки умения.
+25059	Огненный столп	80100	icon_skills.auraburn_tex	Полыхающий огненный столп (Печать молний)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения "Печать молний" на 40% в течение нескольких секунд.
+25060	Сон разума	130100	icon_skills.sleepwind_tex	Разделенный сон разума	icon_crest.e_crestpassivethorns_tex	На 30% увеличивает вероятность наложить негативный эффект при поражении нескольких целей.
+25061	Комета	60100	icon_skills.hellfire_tex	Стремительная комета	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 10%.
+25062	Ледяное отступление	180100	icon_skills.freezingtheearth_tex	Полыхающее ледяное отступление (Мистический шар)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость зарядки умения "Мистический шар" на 30% в течение нескольких секунд.
+25063	Телепортация	260100	icon_skills.shortteleport_tex	Стремительная телепортация	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 15%.
+25064	Огненный столп	80100	icon_skills.auraburn_tex	Стремительный огненный столп	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+25065	Ледяная буря	270100	icon_skills.icestorm_tex	Стремительная ледяная буря	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+25066	Ледяная буря	270100	icon_skills.icestorm_tex	Блистательная ледяная буря	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 300.
+25068	Магическое усиление	340100	icon_skills.c5_strengthenmana	Задерживающее магическое усиление	icon_crest.e_crestpassiveskilleffectup_tex	+40% к времени действия умения "Магическое усиление".
+25069	Комета	60100	icon_skills.hellfire_tex	Ускоренная комета	icon_crest.e_crestpassiveskillspeedup_tex	Увеличивает скорость использования умения на 25%.
+25070	Комета	60100	icon_skills.hellfire_tex	Стремительная комета	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+25071	Печать молний	30100	icon_skills.shocktrap_tex	Лихая печать молний (Комета)	icon_crest.e_crestnextskillattackup_tex	+20% к наносимому умением "Комета" урону в цепочке умений.
+25072	Разрушающий луч	120100	icon_skills.lightofruin_tex	Режущий разрушающий луч	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность критического удара против монстров.
+25073	Сон разума	130100	icon_skills.sleepwind_tex	Разделенный сон разума	icon_crest.e_crestpassivethorns_tex	На 30% увеличивает вероятность наложить негативный эффект при поражении нескольких целей.
+25074	Нервное истощение	210100	icon_skills.neurasthenia_tex	Стремительное нервное истощение	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 30%.
+25075	Печать молний	30100	icon_skills.shocktrap_tex	Блистательная печать молний	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 100.
+25076	Заточение	250100	icon_skills.curseofshackle_tex	Возрастающее заточение	icon_crest.e_crestpassivelockontargetup_tex	Увеличивает максимальное количество захватываемых умением целей на 100%.
+25077	Огненный столп	80100	icon_skills.auraburn_tex	Укрывающий огненный столп	icon_crest.e_crestpassivehpattackup_tex	8% вероятность активировать "Магический барьер I".
+25078	Проклятие разложения	160100	icon_skills.disease_tex	Стремительное проклятие разложения	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+25079	Огненное дыхание	220100	icon_skills.burningbreath_tex	Мешающее огненное дыхание	icon_crest.e_crestpassivetargethealdown_tex	На 10 секунд снижает количество восстанавливаемых НР вашего противника на 30%.
+25080	Магический барьер	100100	icon_skills.manashield_tex	Парирующий магический барьер	icon_crest.e_crestpassivemaxabsorbup_tex	Увеличивает поглощение урона на 30%.
+25081	Мистический шар	40100	icon_skills.blastball_tex	Режущий мистический шар	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность нанесения критического удара на 5 секунд.
+25082	Мистический шар	40100	icon_skills.blastball_tex	Искусный мистический шар	icon_crest.e_crestpassivechargemove_tex	Позволяет перемещаться во время зарядки умения.
+25083	Каменная кожа	280100	icon_skills.stoneshape_tex	Стремительная каменная кожа	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+25084	Каменная кожа	280100	icon_skills.stoneshape_tex	Стремительная каменная кожа	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+25085	Магический барьер	100100	icon_skills.manashield_tex	Задерживающий магический барьер	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 50%.
+25086	Комета	60100	icon_skills.hellfire_tex	Блистательная комета	icon_crest.e_crestactivempzero_tex	Снижает потребление MP на 400.
+25087	Отступление	70100	icon_skills.backstep_tex	Проворное отступление	icon_crest.e_crestpassiveskilleffectup_tex	На 2 секунды увеличивает скорость перемещения в бою на 20%.
+25088	Проклятие разложения	160100	icon_skills.disease_tex	Лихое проклятие разложения (Огненная завеса)	icon_crest.e_crestnextskillattackup_tex	Когда противник находится под воздействием "Сгустка боли", на 25% увеличивается урон от умения "Огненная завеса" в течение нескольких секунд.
+25089	Новая звезда	300100	icon_skills.manaburst_tex	Режущая новая звезда	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность нанесения критического удара на 4 секунды.
+25090	Новая звезда	300100	icon_skills.manaburst_tex	Несокрушимая новая звезда	icon_crest.e_crestactivedefenceup_tex	+ 20% к выносливости на 15 секунд.
+25091	Новая звезда	300100	icon_skills.manaburst_tex	Стремительная новая звезда	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+25092	Новая звезда	300100	icon_skills.manaburst_tex	Быстрая новая звезда	icon_crest.e_crestpassiveskillspeedup_tex	Увеличивает скорость использования умения на 30%.
+25093	Искривляющий барьер	310100	icon_skills.distortionfield_tex	Стремительный искривляющий барьер	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+25094	Искривляющий барьер	310100	icon_skills.distortionfield_tex	Стремительный искривляющий барьер	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+25095	Искривляющий барьер	310100	icon_skills.distortionfield_tex	Задерживающий искривляющий барьер	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 100%.
+25096	Огненная завеса	200100	icon_skills.trackinginferno_tex	Быстрая огненная завеса	icon_crest.e_crestpassiveskillspeedup_tex	+40% к скорости использования.
+25097	Разрушающий луч	120100	icon_skills.lightofruin_tex	Стремительный разрушающий луч	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+25098	Огненный столп	80100	icon_skills.auraburn_tex	Усиленный огненный столп	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+25099	Огненное дыхание	220100	icon_skills.burningbreath_tex	Задерживающее огненное дыхание	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 20%.
+25100	Ледяное отступление	180100	icon_skills.freezingtheearth_tex	Ускоренное ледяное отступление (Печать молний)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения "Печать молний" на 40% в течение нескольких секунд.
+25101	Разряд молнии	110100	icon_skills.c5_lightningstruck	Стремительный разряд молнии	icon_crest.e_crestactivecooltimereset_tex	40% вероятность сбросить время перезарядки умения.
+25102	Ледяное отступление	180100	icon_skills.freezingtheearth_tex	Ускоренное ледяное отступление (Мистический шар)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость зарядки умения "Мистический шар" на 30% в течение нескольких секунд.
+25103	Магическое усиление	340100	icon_skills.c5_strengthenmana	Задерживающее магическое усиление	icon_crest.e_crestpassiveskilleffectup_tex	+40% к времени действия умения "Магическое усиление".
+25104	Заточение	250100	icon_skills.curseofshackle_tex	Возрастающее заточение	icon_crest.e_crestpassivelockontargetup_tex	Увеличивает максимальное количество захватываемых умением целей на 100%.
+25105	Мистический шар	40100	icon_skills.blastball_tex	Режущий мистический шар	icon_crest.e_crestpassivecriticalup_tex	Увеличивает вероятность нанесения критического удара в 2,5 раза на 5 секунд.
+25106	Каменная кожа	280100	icon_skills.stoneshape_tex	Неутомимая каменная кожа	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 30%.
+25107	Новая звезда	300100	icon_skills.manaburst_tex	Режущая новая звезда	icon_crest.e_crestpassivecriticalup_tex	Увеличивает вероятность нанесения критического удара в 2,5 раза на 4 секунды.
+26000	Град стрел	20100	icon_skills.arrowshower_tex	Возрастающий град стрел	icon_crest.e_crestpassivelockontargetup_tex	Увеличивает максимальное количество захватываемых умением целей на 0%.
+26001	Прицельный выстрел	30100	icon_skills.chargearrow_tex	Дальнобойный прицельный выстрел	icon_crest.e_crestpassiverangeup_tex	Увеличивает радиус действия на 3 метра.
+26002	Проникающий выстрел	40100	icon_skills.througharrow_tex	Дальнобойный проникающий выстрел	icon_crest.e_crestpassiverangeup_tex	Увеличивает радиус действия на 3 метра.
+26004	Проникающий выстрел	40100	icon_skills.througharrow_tex	Усиленный проникающий выстрел	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+26005	Ядовитая ловушка	110100	icon_skills.venomtrap_tex	Тест	s_tex	Нет эффекта
+26006	Замедляющая ловушка	90100	icon_skills.webtrap_tex	Задерживающая замедляющая ловушка	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 50%.
+26007	Оглушающая ловушка	100100	icon_skills.paralysistrap_tex	Задерживающая оглушающая ловушка	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 25%.
+26008	Стрела	10100	icon_skills.arrowshot_tex	Замедляющая стрела	icon_crest.e_crestactivespeeddown_tex	5% вероятность на 50% понизить скорость перемещения противника на 3 секунды.
+26009	Стрела	10100	icon_skills.arrowshot_tex	Иссушающая стрела	icon_crest.e_crestactivestun_tex	5% вероятность оглушить противника.
+26010	Стрела	10100	icon_skills.arrowshot_tex	Пронзающая стрела	icon_crest.e_crestactivekill_tex	10% вероятность нанести двойной урон.
+26011	Прицельный выстрел	30100	icon_skills.chargearrow_tex	Искусный прицельный выстрел	icon_crest.e_crestpassivepenaltydelete_tex	 Снимает ограничения замедленного перемещения при использовании умения.
+26012	Проникающий выстрел	40100	icon_skills.througharrow_tex	Искусный проникающий выстрел	icon_crest.e_crestpassivepenaltydelete_tex	Снимает ограничения замедленного перемещения при использовании умения.
+26017	Беглый огонь	80100	icon_skills.rapidshot_tex	Неутомимый беглый огонь	icon_crest.e_crestactivecooltimereset_tex	15% вероятность сбросить время перезарядки умения.
+26018	Отступление	60100	icon_skills.backstep_tex	Стремительное отступление	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 29%.
+26019	Ложная смерть	70100	icon_skills.feigndeath_tex	Стремительная ложная смерть	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+26020	Ответный удар	140100	icon_skills.risingattack_tex	Усиленный ответный удар	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+26021	Дождь стрел	50100	icon_skills.arrowfall_tex	Стремительный дождь стрел	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+26022	Бегство	160100	icon_skills.escapingattack_tex	Стремительное бегство	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+26023	Ловушка-бомба	150100	icon_skills.explosiontrap_tex	Усиленная ловушка-бомба	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+26024	Замедляющая стрела	170100	icon_skills.spiderarrow_tex	Останавливающая замедляющая стрела	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 40%.
+26025	Ответный удар	140100	icon_skills.risingattack_tex	Стремительный ответный удар	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+26026	Ядовитая ловушка	110100	icon_skills.venomtrap_tex	Тест	icon_skills.voidtrap_tex	Нет эффекта
+26027	Ядовитая стрела	190100	icon_skills.venomarrow_tex	Задерживающая ядовитая стрела	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 40%.
+26028	Глаз стрелка	210100	icon_skills.focusstance_tex	Бдящий глаз стрелка (Замедляющая стрела)	icon_crest.e_crestnextskillmpdown_tex	На 13 MP снижает стоимость умения "Замедляющая стрела" в течение нескольких секунд.
+26029	Опутывающая стрела	200100	icon_skills.contaningshot_tex	Задерживающая опутывающая стрела	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 50%.
+26030	Клеймо Велики	120100	icon_skills.markingofarcher_tex	Весомое клеймо Велики (Ядовитая стрела)	icon_crest.e_crestnextskillmpdown_tex	На 31 MP снижает стоимость умения "Ядовитая стрела" в течение нескольких секунд.
+26031	Град стрел	20100	icon_skills.arrowshower_tex	Весомый град стрел (Ловушка-бомба)	icon_crest.e_crestnextskillmpdown_tex	На 75 MP снижает стоимость умения "Ловушка-бомба" в течение нескольких секунд.
+26032	Бегство	160100	icon_skills.escapingattack_tex	Лихое бегство (Проникающий выстрел)	icon_crest.e_crestnextskillattackup_tex	На 25% увеличивает урон умения "Проникающий выстрел" в течение нескольких секунд.
+26033	Замедляющая стрела	170100	icon_skills.spiderarrow_tex	Быстрая замедляющая стрела	icon_crest.e_crestactivespeedup_tex	20% вероятность на 12 секунд увеличить скорость перемещения в бою на 10.
+26034	Опутывающая стрела	200100	icon_skills.contaningshot_tex	Стремительная опутывающая стрела	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+26035	Опутывающая стрела	200100	icon_skills.contaningshot_tex	Иссушающая опутывающая стрела	icon_crest.e_crestactivestun_tex	20% вероятность оглушить цель на 3 секунды.
+26036	Клеймо Велики	120100	icon_skills.markingofarcher_tex	Задерживающее клеймо Велики	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 25%.
+26037	Клеймо Велики	120100	icon_skills.markingofarcher_tex	Полыхающее клеймо Велики (Ядовитая стрела)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения "Ядовитая стрела" на 25% в течение нескольких секунд.
+26038	Град стрел	20100	icon_skills.arrowshower_tex	Неутомимый град стрел	icon_crest.e_crestactivecooltimereset_tex	30% вероятность сбросить время перезарядки умения.
+26039	Град стрел	20100	icon_skills.arrowshower_tex	Полыхающий град стрел (Оглушающая ловушка)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения "Оглушающая ловушка" на 40% в течение нескольких секунд.
+26040	Удар ногой	180100	icon_skills.turningkick_tex	Сильный удар ногой	icon_crest.e_crestpassiveattackup_tex	+20% к наносимому умением урону.
+26041	Беглый огонь	80100	icon_skills.rapidshot_tex	Энергичный беглый огонь	icon_crest.e_crestpassivemprecoveryup_tex	Увеличивает количество восстанавливаемых МР на 20% при поражении цели.
+26042	Залп	220100	icon_skills.chain_arrow	Неутомимый последний залп	icon_crest.e_crestpassivecooltimedown_tex	-25% к времени перезарядки умения.
+26043	Бегство	160100	icon_skills.escapingattack_tex	Проворное бегство	icon_crest.e_crestactivespeedup_tex	30% вероятность на 8 секунд увеличить скорость перемещения в бою на 10.
+26044	Бегство	160100	icon_skills.escapingattack_tex	Тест	icon_skills.voidtrap_tex	Нет эффекта
+26045	Ложная смерть	70100	icon_skills.feigndeath_tex	Восстанавливающая ложная смерть	icon_crest.e_crestpassivehpheal_tex	Каждую секунду восстанавливает 2% HP в течение 10 сек.
+26046	Ловушка-бомба	150100	icon_skills.explosiontrap_tex	Мощная ловушка-бомба (Град стрел)	icon_crest.e_crestnextskillattackup_tex	На 25% увеличивает урон умения "Град стрел" в течение нескольких секунд.
+26047	Дождь стрел	50100	icon_skills.arrowfall_tex	Усиленный дождь стрел	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+26048	Оглушающая ловушка	100100	icon_skills.paralysistrap_tex	Полыхающая оглушающая ловушка (Проникающий выстрел)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения "Проникающий выстрел" на 30% в течение нескольких секунд.
+26049	Град стрел	20100	icon_skills.arrowshower_tex	Полыхающий град стрел (Проникающий выстрел)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения "Проникающий выстрел" на 30% в течение нескольких секунд.
+26050	Ядовитая стрела	190100	icon_skills.venomarrow_tex	Полыхающая ядовитая стрела (Прицельный выстрел)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения "Прицельный выстрел" на 30% в течение нескольких секунд.
+26051	Последний залп			Полыхающий последний залп (Проникающий выстрел)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения "Проникающий выстрел" на 30% в течение нескольких секунд.
+26053	Проникающий выстрел	40100	icon_skills.througharrow_tex	Усиленный проникающий выстрел	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+26054	Проникающий выстрел	40100	icon_skills.througharrow_tex	Искусный проникающий выстрел	icon_crest.e_crestpassivepenaltydelete_tex	 Снимает ограничения замедленного перемещения при использовании умения.
+26055	Прицельный выстрел	30100	icon_skills.chargearrow_tex	Искусный прицельный выстрел	icon_crest.e_crestpassivepenaltydelete_tex	 Снимает ограничения замедленного перемещения при использовании умения.
+26056	Отступление	60100	icon_skills.backstep_tex	Стремительное отступление	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 29%.
+26057	Проникающий выстрел	40100	icon_skills.througharrow_tex	Дальнобойный проникающий выстрел	icon_crest.e_crestpassiverangeup_tex	Увеличивает радиус действия на 3 метра.
+26058	Замедляющая ловушка	90100	icon_skills.webtrap_tex	Задерживающая замедляющая ловушка	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 50%.
+26059	Град стрел	20100	icon_skills.arrowshower_tex	Полыхающий град стрел (Проникающий выстрел)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения "Проникающий выстрел" на 40% в течение нескольких секунд.
+26060	Град стрел	20100	icon_skills.arrowshower_tex	Полыхающий град стрел (Оглушающая ловушка)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения "Оглушающая ловушка" на 50% в течение нескольких секунд.
+26061	Град стрел	20100	icon_skills.arrowshower_tex	Неутомимый град стрел	icon_crest.e_crestactivecooltimereset_tex	40% вероятность сбросить время перезарядки умения.
+26062	Ложная смерть	70100	icon_skills.feigndeath_tex	Восстанавливающая ложная смерть	icon_crest.e_crestpassivehpheal_tex	Вне боя каждую секунду восстанавливает 3% от общего количества НР в течение 10 секунд.
+26063	Прицельный выстрел	30100	icon_skills.chargearrow_tex	Живительный прицельный выстрел	icon_crest.e_crestpassiveoverchargehpdown_tex	Снижает расход HP в случае зарядки умения выше максимального значения на 40%.
+26064	Прицельный выстрел	30100	icon_skills.chargearrow_tex	Сверхточный прицельный выстрел	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность нанесения критического удара.
+26065	Удар ногой	180100	icon_skills.turningkick_tex	Быстрый удар ногой	icon_crest.e_crestpassiveskilleffectup_tex	На 3 секунды увеличивает скорость перемещения в бою на 50.
+26066	Удар ногой	180100	icon_skills.turningkick_tex	Останавливающий удар ногой	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 40%.
+26067	Бегство	160100	icon_skills.escapingattack_tex	Замедляющее бегство	icon_crest.e_crestactivespeeddown_tex	100% вероятность на 6 секунд понизить скорость перемещения противника на 40%.
+26068	Парализующая ловушка	230100	icon_skills.paralysistraparrow_tex	Стремительная парализующая ловушка	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+26069	Опутывающая ловушка	240100	icon_skills.webtraparrow_tex	Стремительная опутывающая ловушка	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+26070	Взрывная ловушка	250100	icon_skills.explosiontraparrow_tex	Усиленная взрывная ловушка	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+26071	Парализующая ловушка	230100	icon_skills.paralysistraparrow_tex	Стремительная парализующая ловушка	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 30%.
+26072	Грозовой разряд	260100	icon_skills.thunderdrake_tex	Режущий грозовой разряд	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность критического удара.
+26073	Взрывная ловушка	250100	icon_skills.explosiontraparrow_tex	Усиленная взрывная ловушка	icon_crest.e_crestpassiveattackup_tex	+35% к наносимому умением урону.
+26074	Бегство	160100	icon_skills.escapingattack_tex	Стремительное бегство	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+26075	Опутывающая стрела	200100	icon_skills.contaningshot_tex	Стремительная опутывающая стрела	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+26076	Беглый огонь	80100	icon_skills.rapidshot_tex	Усиленный беглый огонь	icon_crest.e_crestpassiveattackup_tex	+20% к наносимому умением урону.
+26077	Дождь стрел	50100	icon_skills.arrowfall_tex	Быстрый дождь стрел	icon_crest.e_crestpassiveskillspeedup_tex	Увеличивает скорость использования умения "Дождь стрел" на 40%.
+26084	Упорство	310100	icon_skills.tenacity_tex	Достойное упорство	icon_crest.e_crestactivereactionresist_tex	На 15 секунд повышает равновесие на 150%.
+26085	Упорство	310100	icon_skills.tenacity_tex	Достойное упорство	icon_crest.e_crestactivereactionresist_tex	На 15 секунд удваивает равновесие.
+26086	Упорство	310100	icon_skills.tenacity_tex	Энергичное упорство	icon_crest.e_crestpassivepartympup_tex	50% вероятность восстановления 6% от общего количества MP каждую секунду.
+26087	Упорство	310100	icon_skills.tenacity_tex	Стремительное упорство	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+26088	Упорство	310100	icon_skills.tenacity_tex	Стремительное упорство	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+26089	Грозовой разряд	260100	icon_skills.thunderdrake_tex	Быстрый грозовой разряд	icon_crest.e_crestpassiveskillspeedup_tex	Увеличивает скорость использования умения на 30%.
+26090	Грозовой разряд	260100	icon_skills.thunderdrake_tex	Мощный грозовой разряд	icon_crest.e_crestpassiveattackup_tex	+20% к наносимому умением урону.
+26091	Грозовой разряд	260100	icon_skills.thunderdrake_tex	Мощный грозовой разряд	icon_crest.e_crestpassiveattackup_tex	+20% к наносимому умением урону.
+26092	Прицельный выстрел	30100	icon_skills.chargearrow_tex	Дальнобойный прицельный выстрел	icon_crest.e_crestpassiverangeup_tex	+5 метров к радиусу действия.
+26093	Оглушающая ловушка	100100	icon_skills.paralysistrap_tex	Задерживающая оглушающая ловушка	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 25%.
+26094	Замедляющая стрела	170100	icon_skills.spiderarrow_tex	Проворная замедляющая стрела	icon_crest.e_crestactivespeedup_tex	60% вероятность на 12 секунд увеличить скорость перемещения в бою на 10 при поражении цели умением.
+26095	Залп	220100	icon_skills.chain_arrow	Стремительный залп	icon_crest.e_crestpassivecooltimedown_tex	-35% к времени перезарядки умения.
+26096	Дождь стрел	50100	icon_skills.arrowfall_tex	Усиленный дождь стрел	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+26097	Проникающий выстрел	40100	icon_skills.througharrow_tex	Дальнобойный проникающий выстрел	icon_crest.e_crestpassiverangeup_tex	+5 метров к радиусу действия.
+26098	Град стрел	20100	icon_skills.arrowshower_tex	Стремительный град стрел	icon_crest.e_crestactivecooltimereset_tex	60% вероятность сбросить время перезарядки умения.
+26099	Прицельный выстрел	30100	icon_skills.chargearrow_tex	Режущий прицельный выстрел	icon_crest.e_crestpassivecriticalup_tex	Утраивает вероятность нанесения критического удара.
+26100	Грозовой разряд	260100	icon_skills.thunderdrake_tex	Режущий грозовой разряд	icon_crest.e_crestpassivecriticalup_tex	Утраивает вероятность нанесения критического удара.
+26101	Взрывная ловушка	250100	icon_skills.explosiontraparrow_tex	Усиленная взрывная ловушка	icon_crest.e_crestpassiveattackup_tex	+35% к наносимому умением урону.
+26102	Грозовой разряд	260100	icon_skills.thunderdrake_tex	Быстрый грозовой разряд	icon_crest.e_crestpassiveskillspeedup_tex	Увеличивает скорость использования умения на 30%.
+26103	Грозовой разряд	260100	icon_skills.thunderdrake_tex	Усиленный грозовой разряд	icon_crest.e_crestpassiveattackup_tex	+20% к наносимому умением урону.
+27000	Милость титанов	50100	icon_skills.healshot_tex	Возрастающая милость титанов	icon_crest.e_crestpassivelockontargetup_tex	Увеличивает максимальное количество захватываемых умением целей на 100%.
+27002	Обет перерождения	120100	icon_skills.autoresurrect_tex	Стремительный обет перерождения	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 40%.
+27003	Прикосновение Аруна	90100	icon_skills.purifyshot_tex	Возрастающее прикосновение Аруна	icon_crest.e_crestpassivelockontargetup_tex	Увеличивает максимальное количество захватываемых умением целей на 100%.
+27005	Плеть Шары	60100	icon_skills.flashball_tex	Задерживающая плеть Шары	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 40%.
+27006	Оковы древних	40100	icon_skills.slowball_tex	Задерживающие оковы древних	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 50%.
+27007	Аура обновления			Тест	icon_skills.voidtrap_tex	Нет эффекта
+27008	Аура упорства	160100	icon_skills.areampgain_tex	Тест	icon_skills.voidtrap_tex	Нет эффекта
+27009	Аура безжалостности	130100	icon_skills.criticalupaura_tex	Блистательная аура безжалостности	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 120.
+27010	Аура скорости	140100	icon_skills.speedupaura_tex	Блистательная аура скорости	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 50.
+27011	Удар Шары	10100	icon_skills.elementalshot_tex	Усиленный удар Шары	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+27012	Взрыв метаморфозы	80100	icon_skills.punishingshield_tex	Усиленный взрыв метаморфозы	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+27013	Кольцо разрушения	20100	icon_skills.suckhp_tex	Тест	icon_skills.voidtrap_tex	Нет эффекта
+27014	Кольцо разрушения	20100	icon_skills.suckhp_tex	Блистательное кольцо разрушения	icon_crest.e_crestpassivepartympup_tex	Увеличивает количество поглощаемых MP на 50%
+27015	Кольцо разрушения	20100	icon_skills.suckhp_tex	Холодное кольцо разрушения	icon_crest.e_crestpassivedeffeceup_tex	Снижает урон на 50%.
+27016	Телепортация	170100	icon_skills.shortteleport_tex	Стремительная телепортация	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 15%.
+27017	Восстановление маны	70100	icon_skills.mpcharge_tex	Энергичное восстановление маны	icon_crest.e_crestpassivemprecoveryup_tex	Увеличивает количество восстанавливаемых МР на 20%.
+27019	Извлечение маны			Осколок символа прошлого	icon_skills.voidtrap_tex	Этот старинный расколотый символ больше не используется.
+27020	Ответный удар	210100	icon_skills.risingattack_tex	Усиленный ответный удар	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+27021	Удар метаморфозы	230100	icon_skills.rageofearth_tex	Стремительный удар метаморфозы	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 40%.
+27022	Миньон-защитник	250100	icon_skills.summonspiritofaggro_tex	Стремительный миньон-защитник	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 10%.
+27023	Миньон-разрушитель	340100	icon_skills.summonspiritofattack_tex	Тест	icon_skills.voidtrap_tex	Нет эффекта
+27024	Миньон-целитель	270100	icon_skills.summonspiritofheal_tex	Стремительный миньон-целитель	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+27025	Призыв союзников	110100	icon_skills.recallfriend_tex	Блистательный призыв союзников	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 800.
+27026	Воскрешение	100100	icon_skills.resurrect_tex	Блистательное воскрешение	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 510.
+27027	Град проклятий	240100	icon_skills.painfulshackle_tex	Задерживающий град проклятий	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 20%.
+27029	Воскрешение	100100	icon_skills.resurrect_tex	Стремительное воскрешение	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 50%.
+27030	Ответный удар	210100	icon_skills.risingattack_tex	Стремительный ответный удар	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+27031	Глубокий сон	280100	icon_skills.shackleofquicksand_tex	Блистательный глубокий сон	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 188.
+27032	Упадок	290100	icon_skills.dispell_tex	Стремительный упадок	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+27033	Трясина	320100	icon_skills.shackleofstone_tex	Стремительная трясина	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+27034	Проклятие изнурения	300100	icon_skills.spiritoflassitude_tex	Стремительное проклятие изнурения	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+27035	Ужасное проклятие	310100	icon_skills.spiritofconfusion_tex	Задерживающее ужасное проклятие	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 25%.
+27036	Удар метаморфозы	230100	icon_skills.rageofearth_tex	Весомый удар метаморфозы (Взрыв метаморфозы)	icon_crest.e_crestnextskillmpdown_tex	На 41 MP снижает стоимость умения "Взрыв метаморфозы" в течение нескольких секунд.
+27037	Град проклятий	240100	icon_skills.painfulshackle_tex	Весомый град проклятий (Град проклятий)	icon_crest.e_crestnextskillmpdown_tex	На 33 MP снижает стоимость умения "Град проклятий" в течение нескольких секунд.
+27039	Кольцо разрушения	20100	icon_skills.suckhp_tex	Весомое кольцо разрушения (Слезы Аруна)	icon_crest.e_crestnextskillmpdown_tex	На 100 MP снижает стоимость умения "Слезы Аруна" в течение нескольких секунд.
+27040	Град проклятий	240100	icon_skills.painfulshackle_tex	Возрастающий град проклятий	icon_crest.e_crestpassivelockontargetup_tex	Увеличивает максимальное количество захватываемых умением целей на 0%.
+27041	Оковы древних	40100	icon_skills.slowball_tex	Ошеломляющие оковы древних	icon_crest.e_crestactiveattackspeeddown_tex	50% вероятность на 6 секунд понизить скорость атаки противника на 30%.
+27042	Удар метаморфозы	230100	icon_skills.rageofearth_tex	Усиленный удар метаморфозы	icon_crest.e_crestpassiveattackup_tex	Повышает урон от умения на 25%.
+27043	Призыв союзников	110100	icon_skills.recallfriend_tex	Стремительный призыв союзников	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+27044	Восстановление маны	70100	icon_skills.mpcharge_tex	Ускоренное восстановление маны	icon_crest.e_crestpassiveskillspeedup_tex	Увеличивает скорость использования умения на 25%.
+27045	Слезы Аруна	220100	icon_skills.mprefresher_tex	Полыхающие слезы Аруна (Сфера жизни Аруна)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения "Сфера жизни Аруна" на 25% в течение нескольких секунд.
+27046	Миньон-мститель	330100	icon_skills.summonspiritofrange_tex	Усиленный миньон-мститель	icon_crest.e_crestpassiveattackup_tex	Увеличивает урон миньона-мстителя на 25%.
+27047	Миньон-мститель	330100	icon_skills.summonspiritofrange_tex	Крепкий миньон-мститель	icon_crest.e_crestpassivedeffeceup_tex	Повышает защиту миньона-мстителя на 25%.
+27048	Миньон-мститель	330100	icon_skills.summonspiritofrange_tex	Задерживающий миньон-мститель	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность жизни миньона на 25%.
+27049	Воскрешение	100100	icon_skills.resurrect_tex	Ускоренное воскрешение	icon_crest.e_crestpassiveskillspeedup_tex	Увеличивает скорость использования умения на 40%.
+27051	Миньон-защитник	250100	icon_skills.summonspiritofaggro_tex	Усиленный миньон-защитник	icon_crest.e_crestpassiveattackup_tex	Увеличивает урон миньона-защитника на 25%.
+27052	Миньон-защитник	250100	icon_skills.summonspiritofaggro_tex	Крепкий миньон-защитник	icon_crest.e_crestpassivedeffeceup_tex	Повышает защиту миньона-защитника на 25%.
+27053	Телепортация	170100	icon_skills.shortteleport_tex	Полыхающая телепортация (Сфера жизни Аруна)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения "Сфера жизни Аруна" на 25% в течение нескольких секунд.
+27054	Телепортация	170100	icon_skills.shortteleport_tex	Полыхающая телепортация (Миньон-целитель)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения "Миньон-целитель" на 25% в течение нескольких секунд.
+27055	Миньон-разрушитель	340100	icon_skills.summonspiritofattack_tex	Стремительный миньон-разрушитель	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 50%.
+27056	Миньон-разрушитель	340100	icon_skills.summonspiritofattack_tex	Усиленный миньон-разрушитель	icon_crest.e_crestpassiveattackup_tex	Увеличивает урон миньона-разрушителя на 25%.
+27057	Миньон-разрушитель	340100	icon_skills.summonspiritofattack_tex	Ускоренный миньон-разрушитель	icon_crest.e_crestpassiveskillspeedup_tex	Увеличивает скорость использования умения на 30%.
+27058	Обет перерождения	120100	icon_skills.autoresurrect_tex	Самоотверженный обет перерождения	icon_crest.e_crestactiveinvokeskill_tex	Применивший получает эффект "Благословения перерождения" при использовании на другой цели.
+27059	Сфера жизни Аруна	180100	icon_skills.hprefresher_tex	Полыхающая сфера жизни Аруна (Слезы Аруна)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения "Слезы Аруна" на 25% в течение нескольких секунд.
+27060	Милость титанов	50100	icon_skills.healshot_tex	Дальнобойная милость титанов	icon_crest.e_crestpassiverangeup_tex	Увеличивает радиус действия на 3 метра.
+27062	Телепортация	170100	icon_skills.shortteleport_tex	Стремительная телепортация	icon_crest.e_crestactivecooltimereset_tex	Снижает время перезарядки умения на 15%.
+27063	Прикосновение Аруна	90100	icon_skills.purifyshot_tex	Возрастающее прикосновение Аруна	icon_crest.e_crestpassivelockontargetup_tex	Увеличивает максимальное количество захватываемых умением целей на 100%.
+27064	Обет перерождения	120100	icon_skills.autoresurrect_tex	Самоотверженный обет перерождения	icon_crest.e_crestactiveinvokeskill_tex	Применивший получает эффект "Благословения перерождения" при использовании на другой цели.
+27065	Миньон-целитель	270100	icon_skills.summonspiritofheal_tex	Стремительный миньон-целитель	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+27066	Плеть Шары	60100	icon_skills.flashball_tex	Задерживающая плеть Шары	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 40%.
+27067	Милость титанов	50100	icon_skills.healshot_tex	Дальнобойная милость титанов	icon_crest.e_crestpassiverangeup_tex	Увеличивает радиус действия на 3 метра.
+27068	Град проклятий	240100	icon_skills.painfulshackle_tex	Весомый град проклятий (Град проклятий)	icon_crest.e_crestnextskillmpdown_tex	На 33 MP снижает стоимость умения "Град проклятий" в течение нескольких секунд.
+27069	Миньон-мститель	330100	icon_skills.summonspiritofrange_tex	Задерживающий миньон-мститель	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность жизни миньона на 35%.
+27070	Глубокий сон	280100	icon_skills.shackleofquicksand_tex	Блистательный глубокий сон	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 188.
+27071	Плеть Шары	60100	icon_skills.flashball_tex	Проворная плеть Шары	icon_crest.e_crestpassiveskilleffectup_tex	При попадании в цель на 3 секунды увеличивает скорость перемещения в бою на 50.
+27072	Ответный удар	210100	icon_skills.risingattack_tex	Ловкий ответный удар	icon_crest.e_crestpassivereactionup_tex	100% вероятность сбросить время перезарядки умения "Телепортация".
+27073	Ответный удар	210100	icon_skills.risingattack_tex	Достойный ответный удар	icon_crest.e_crestactivereactionresist_tex	На 2 секунды повышает равновесие на 500%.
+27074	Обет перерождения	120100	icon_skills.autoresurrect_tex	Дальнобойный обет перерождения	icon_crest.e_crestpassiverangeup_tex	Увеличивает радиус действия на 3 метра.
+27075	Глубокий сон	280100	icon_skills.shackleofquicksand_tex	Стремительный глубокий сон	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+27076	Миньон-защитник	250100	icon_skills.summonspiritofaggro_tex	Несокрушимый миньон-защитник	icon_crest.e_crestactivedefenceup_tex	В течение 10 минут увеличивает выносливость у вас и вашей группы на 10%.
+27077	Оберегающий тотем	370100	icon_skills.energiesofprotection_tex	Блистательный оберегающий тотем	icon_crest.e_crestpassivempdown_tex	Снижает расход MP на 300.
+27078	Оберегающий тотем	370100	icon_skills.energiesofprotection_tex	Восстанавливающий оберегающий тотем	icon_crest.e_crestactivehprecoveryup_tex	Увеличивает количество восстанавливаемых HP на 20%.
+27079	Воскрешение	100100	icon_skills.resurrect_tex	Ускоренное воскрешение	icon_crest.e_crestpassiveskillspeedup_tex	Увеличивает скорость использования умения на 40%.
+27080	Обет перерождения	120100	icon_skills.autoresurrect_tex	Стремительный обет перерождения	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 40%.
+27081	Сфера жизни Аруна	180100	icon_skills.hprefresher_tex	Восстанавливающая сфера жизни Аруна	icon_crest.e_crestpassivehprecoveryup_tex	Мгновенно восстанавливает 20% от общего количества НР использовавшего умение.
+27082	Миньон-целитель	270100	icon_skills.summonspiritofheal_tex	Задерживающий миньон-целитель	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность жизни миньона на 25%.
+27084	Град проклятий	240100	icon_skills.painfulshackle_tex	Ослабляющий град проклятий	icon_crest.e_crestactivedefencedown_tex	-9% к выносливости цели в течение 21 сек.
+27085	Воскрешение	100100	icon_skills.resurrect_tex	Мощное воскрешение	icon_crest.e_crestpassivehprecoveryup_tex	100% восстановление HP/MP при воскрешении.
+27086	Зараза	410100	icon_skills.plague_tex	Задерживающая зараза	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 20%.
+27087	Разряд бумеранга	420100	icon_skills.mysticorb_tex	Блистательный разряд бумеранга	icon_crest.e_crestpassivempdown_tex	Снижает потребление МР на 225.
+27088	Разряд бумеранга	420100	icon_skills.mysticorb_tex	Стремительный разряд бумеранга	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+27089	Разряд бумеранга	420100	icon_skills.mysticorb_tex	Стремительный разряд бумеранга	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+27090	Обет перерождения	120100	icon_skills.autoresurrect_tex	Возрастающий обет перерождения	icon_crest.e_crestpassivelockontargetup_tex	Повышает максимальное количество целей захвата на 0%.
+27091	Взрыв метаморфозы	80100	icon_skills.punishingshield_tex	Усиленный взрыв метаморфозы	icon_crest.e_crestpassiveattackup_tex	+40% к наносимому умением урону.
+27092	Кольцо разрушения	20100	icon_skills.suckhp_tex	Несокрушимое кольцо разрушения	icon_crest.e_crestpassivedeffeceup_tex	-50% урона во время использования умения.
+27093	Воскрешение	100100	icon_skills.resurrect_tex	Стремительное воскрешение	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 50%.
+27094	Миньон-защитник	250100	icon_skills.summonspiritofaggro_tex	Усиленный Миньон-защитник	icon_crest.e_crestpassiveattackup_tex	+30% к урону миньона-защитника.
+27095	Телепортация	170100	icon_skills.shortteleport_tex	Стремительная телепортация	icon_crest.e_crestactivecooltimereset_tex	Снижает время перезарядки умения на 20%.
+27096	Милость титанов	50100	icon_skills.healshot_tex	Дальнобойная милость титанов	icon_crest.e_crestpassiverangeup_tex	+5 метров к радиусу действия.
+27097	Ответный удар	210100	icon_skills.risingattack_tex	Стремительный ответный удар	icon_crest.e_crestpassivereactionup_tex	100% вероятность сбросить время перезарядки умения "Телепортация".
+27098	Миньон-защитник	250100	icon_skills.summonspiritofaggro_tex	Несокрушимый миньон-защитник	icon_crest.e_crestactivedefenceup_tex	В течение 10 минут увеличивает выносливость у вас и вашей группы на 10%.
+27099	Оберегающий тотем	370100	icon_skills.energiesofprotection_tex	Восстанавливающий оберегающий тотем	icon_crest.e_crestactivehprecoveryup_tex	Увеличивает количество восстанавливаемых HP на 25%.
+27100	Град проклятий	240100	icon_skills.painfulshackle_tex	Ослабляющий град проклятий	icon_crest.e_crestactivedefencedown_tex	Уменьшает выносливость цели на 9% в течение 21 сек.
+27101	Зараза	410100	icon_skills.plague_tex	задерживающая зараза	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 30%.
+27102	Взрыв метаморфозы	80100	icon_skills.punishingshield_tex	Стремительный взрыв метаморфозы	icon_crest.e_crestactivecooltimereset_tex	50% вероятность сбросить время перезарядки.
+28000	Самоисцеление	180100	icon_skills.healingpray_tex	Восстанавливающее самоисцеление	icon_crest.e_crestpassivehprecoveryup_tex	Увеличивает количество восстанавливаемых HP на 20%.
+28001	Круг исцеления	30100	icon_skills.healarea_tex	Восстанавливающий круг исцеления	icon_crest.e_crestpassivehprecoveryup_tex	Увеличивает количество восстанавливаемых HP на 10%.
+28002	Круг регенерации	20100	icon_skills.healingwind_tex	Задерживающий круг регенерации	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 30%.
+28003	Исцеляющий луч	190100	icon_skills.healinglightlockon_tex	Возрастающий исцеляющий луч	icon_crest.e_crestpassivelockontargetup_tex	Увеличивает максимальное количество захватываемых умением целей на 100%.
+28004	Щит Кайи	220100	icon_skills.armorofprotection_tex	Стремительный щит Кайи	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+28005	Круг очищения	100100	icon_skills.purify_tex	Стремительный круг очищения	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+28006	Благословение Аруна	50100	icon_skills.attackup_tex	Задерживающее благословение Аруна	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 30%.
+28009	Благословение Шары	230100	icon_skills.agilitybless_tex	Задерживающее благословение Шары	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 30%.
+28012	Божественное сияние	10100	icon_skills.magicshot_tex	Усиленное божественное сияние	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+28013	Взрыв метаморфозы	110100	icon_skills.punishingshield_tex	Блистательный взрыв метаморфозы	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 33.
+28014	Разряд энергии	160100	icon_skills.damagedeal_tex	Лихой разряд энергии (Крайняя мера)	icon_crest.e_crestnextskillattackup_tex	На 25% увеличивает урон умения "Крайняя мера" в течение нескольких секунд.
+28018	Круг регенерации	20100	icon_skills.healingwind_tex	Стремительный круг регенерации	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+28019	Восстановление маны	80100	icon_skills.mpcharge_tex	Энергичное восстановление маны	icon_crest.e_crestpassivemprecoveryup_tex	Увеличивает количество восстанавливаемых МР на 20%.
+28020	Извлечение маны			Осколок символа прошлого	icon_skills.voidtrap_tex	Этот старинный расколотый символ больше не используется.
+28021	Умиротворение	170100	icon_skills.agrorelease_tex	Ускоренное умиротворение	icon_crest.e_crestpassiveskillspeedup_tex	Увеличивает скорость использования умения на 100%.
+28022	Пробуждение			Стремительное пробуждение	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 50%.
+28023	Ответный удар	250100	icon_skills.risingattack_tex	Усиленный ответный удар	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+28024	Тройное возмездие	290100	icon_skills.divineretribution_tex	Лихое тройное возмездие (Взрыв метаморфозы)	icon_crest.e_crestnextskillattackup_tex	На 25% увеличивает урон умения "Взрыв метаморфозы" в течение нескольких секунд.
+28026	Воскрешение	120100	icon_skills.resurrect_tex	Блистательное воскрешение	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 510.
+28027	Благословение Аруна	50100	icon_skills.attackup_tex	Форсированное благословение Аруна	icon_crest.e_crestpassiveskilleffectup_tex	Дополнительно повышает скорость перемещения на 50%.
+28028	Призыв союзников	140100	icon_skills.recallfriend_tex	Блистательный призыв союзников	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 800.
+28030	Огненное бегство	260100	icon_skills.sanctuary_tex	Блистательное огненное бегство	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 30.
+28031	Заряд маны	280100	icon_skills.manarejuvenation_tex	Ускоренный заряд маны	icon_crest.e_crestpassiveskillspeedup_tex	Повышает скорость зарядки на 25%.
+28032	Воскрешение	120100	icon_skills.resurrect_tex	Стремительное воскрешение	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 50%.
+28033	Ответный удар	250100	icon_skills.risingattack_tex	Стремительный ответный удар	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+28034	Колыбельная Ишары	330100	icon_skills.lullabyoflshara_tex	Стремительная колыбельная Ишары	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+28035	Священный щит	310100	icon_skills.guardianaura_tex	Стремительный священный щит	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+28036	Божественная передышка	320100	icon_skills.restoration_tex	Стремительная божественная передышка	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+28037	Изнуряющая чума	300100	icon_skills.prophecyoflethargy_tex	Стремительная изнуряющая чума	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+28038	Круг регенерации	20100	icon_skills.healingwind_tex	Весомый круг регенерации (Исцеляющий луч)	icon_crest.e_crestnextskillmpdown_tex	На 85 MP снижает стоимость умения "Исцеляющий луч" в течение нескольких секунд.
+28039	Заряд маны	280100	icon_skills.manarejuvenation_tex	Дальнобойный заряд маны	icon_crest.e_crestpassiveskillrangeup_tex	Увеличивает радиус действия на 4 метра.
+28040	Щит Кайи	220100	icon_skills.armorofprotection_tex	Несокрушимый щит Кайи	icon_crest.e_crestactivedefenceup_tex	Увеличивает выносливость на 30% на 12 секунд.
+28041	Благословение Аруна	50100	icon_skills.attackup_tex	Проворное благословение Аруна	icon_crest.e_crestactivespeedup_tex	На 10 минут увеличивает вашу скорость перемещения в бою на 15.
+28042	Призыв союзников	140100	icon_skills.recallfriend_tex	Стремительный призыв союзников	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+28043	Заряд маны	280100	icon_skills.manarejuvenation_tex	Лихой заряд маны (Разряд энергии)	icon_crest.e_crestnextskillattackup_tex	На 25% увеличивает урон умения "Разряд энергии" в течение нескольких секунд.
+28044	Восстановление маны	80100	icon_skills.mpcharge_tex	Ускоренное восстановление маны	icon_crest.e_crestpassiveskillspeedup_tex	Увеличивает скорость использования умения на 25%.
+28045	Воскрешение	120100	icon_skills.resurrect_tex	Ускоренное воскрешение	icon_crest.e_crestpassiveskillspeedup_tex	Увеличивает скорость использования умения на 30%.
+28046	Энергия звезд	350100	icon_skills.divinelightning_tex	Задерживающая энергия звезд	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 25%.
+28047	Энергия звезд	350100	icon_skills.divinelightning_tex	Варварская энергия звезд	icon_crest.e_crestpassivecooltimedown_tex	Увеличивает эффект умения "Энергия звезд" на 20%.
+28048	Лечебный колодец	340100	icon_skills.sanctuaryofregeneration_tex	Задерживающий лечебный колодец	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 20%.
+28049	Лечебный колодец	340100	icon_skills.sanctuaryofregeneration_tex	Блистательный лечебный колодец	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 275.
+28050	Крайняя мера	270100	icon_skills.punishingtouch_tex	Блистательная крайняя мера	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 62.
+28051	Крайняя мера	270100	icon_skills.punishingtouch_tex	Неутомимая крайняя мера	icon_crest.e_crestactivecooltimereset_tex	40% вероятность сбросить время перезарядки умения.
+28052	Крайняя мера	270100	icon_skills.punishingtouch_tex	Замедляющая крайняя мера	icon_crest.e_crestactivespeeddown_tex	20% вероятность на 30% понизить скорость перемещения противника на 4 секунды.
+28053	Взрыв метаморфозы	110100	icon_skills.punishingshield_tex	Ошеломляющий взрыв метаморфозы	icon_crest.e_crestactiveattackspeeddown_tex	20% вероятность на 7 секунд понизить скорость атаки противника на 15%.
+28054	Тройное возмездие	290100	icon_skills.divineretribution_tex	Ослабляющее тройное возмездие	icon_crest.e_crestactivedefencedown_tex	100% вероятность на 12 секунд понизить выносливость цели на 10%. Не складывается с эффектом "Оков Кайи".
+28055	Исцеляющий луч	190100	icon_skills.healinglightlockon_tex	Дальнобойный исцеляющий луч	icon_crest.e_crestpassiverangeup_tex	Увеличивает радиус действия на 3 метра.
+28057	Самоисцеление	180100	icon_skills.healingpray_tex	Восстанавливающее самоисцеление	icon_crest.e_crestpassivehprecoveryup_tex	Увеличивает количество восстанавливаемых НР на 20%.
+28058	Разряд энергии	160100	icon_skills.damagedeal_tex	Лихой разряд энергии (Крайняя мера)	icon_crest.e_crestnextskillattackup_tex	На 25% увеличивает урон умения "Крайняя мера" в течение нескольких секунд.
+28059	Восстановление маны	80100	icon_skills.mpcharge_tex	Энергичное восстановление маны	icon_crest.e_crestpassivemprecoveryup_tex	Увеличивает количество восстанавливаемых МР на 20%.
+28060	Тройное возмездие	290100	icon_skills.divineretribution_tex	Лихое тройное возмездие (Взрыв метаморфозы)	icon_crest.e_crestnextskillattackup_tex	На 25% увеличивает урон умения "Взрыв метаморфозы" в течение нескольких секунд.
+28061	Благословение Аруна	50100	icon_skills.attackup_tex	Проворное благословение Аруна	icon_crest.e_crestactivespeedup_tex	На 10 минут увеличивает вашу скорость перемещения в бою на 15.
+28062	Круг регенерации	20100	icon_skills.healingwind_tex	Стремительный круг регенерации	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 30%.
+28063	Изнуряющая чума	300100	icon_skills.prophecyoflethargy_tex	Стремительная изнуряющая чума	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 30%.
+28064	Лечебный колодец	340100	icon_skills.sanctuaryofregeneration_tex	Блистательный лечебный колодец	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 275.
+28065	Воскрешение	120100	icon_skills.resurrect_tex	Блистательное воскрешение	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 510.
+28066	Огненное бегство	260100	icon_skills.sanctuary_tex	Стремительное огненное бегство	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 15%.
+28067	Щит Кайи	220100	icon_skills.armorofprotection_tex	Восстанавливающий щит Кайи	icon_crest.e_crestpassivehpwhileheal_tex	В течение 6 секунд раз в 2 секунды восстанавливает 5% от общего количества HP всем целям.
+28068	Заряд маны	280100	icon_skills.manarejuvenation_tex	Энергичный заряд маны	icon_crest.e_crestpassivepartympup_tex	Увеличивает количество восстанавливаемых МР на 50%.
+28069	Исцеляющий луч	190100	icon_skills.healinglightlockon_tex	Облегчающий исцеляющий луч	icon_crest.e_crestpassivecooltimedown_tex	На 20% уменьшает агрессию по отношению к использовавшему умение.
+28070	Священный щит	310100	icon_skills.guardianaura_tex	Равновесный священный щит	icon_crest.e_crestactivereactionresist_tex	На 30 секунд удваивает равновесие.
+28071	Пробуждение			Задерживающее пробуждение	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 100%.
+28072	Заряд маны	280100	icon_skills.manarejuvenation_tex	Энергичный заряд маны	icon_crest.e_crestpassivepartympup_tex	Увеличивает количество восстанавливаемых МР на 25%.
+28073	Исцеляющий свет	370100	icon_skills.curewing_tex	Неутомимый исцеляющий свет	icon_crest.e_crestactivecooltimereset_tex	40% вероятность сбросить время перезарядки умения.
+28074	Дар возрождения	390100	icon_skills.selfpreresurrection_tex	Стремительный дар возрождения	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 40%.
+28075	Исцеляющий свет	370100	icon_skills.curewing_tex	Восстанавливающий исцеляющий свет	icon_crest.e_crestpassivehprecoveryup_tex	Увеличивает количество восстанавливаемых НР на 20%.
+28076	Благословение Аруна	50100	icon_skills.attackup_tex	Форсированное благословение Аруна	icon_crest.e_crestpassiveskilleffectup_tex	Увеличивает скорость перемещения на 50%.
+28077	Восстановление маны	80100	icon_skills.mpcharge_tex	Ускоренное восстановление маны	icon_crest.e_crestpassiveskillspeedup_tex	Увеличивает скорость использования умения на 25%.
+28078	Лечебный колодец	340100	icon_skills.sanctuaryofregeneration_tex	Энергичный лечебный колодец	icon_crest.e_crestpassivemprecoveryup_tex	Каждую секунду восстанавливает 50 МР всем целям.
+28079	Воскрешение	120100	icon_skills.resurrect_tex	Мощное воскрешение	icon_crest.e_crestpassivehprecoveryup_tex	100% восстановление HP/MP при воскрешении.
+28082	Божественное вмешательство	410100	icon_skills.helpinghand_tex	Стремительное божественное вмешательство	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+28083	Божественное вмешательство	410100	icon_skills.helpinghand_tex	Блистательное божественное вмешательство	icon_crest.e_crestpassivempdown_tex	Снижает потребление МР на 150.
+28084	Божественное вмешательство	410100	icon_skills.helpinghand_tex	Дальнобойное божественное вмешательство	icon_crest.e_crestpassiveskillrangeup_tex	Увеличивает радиус действия на 4 метра.
+28085	Вихрь Зенобии	400100	icon_skills.godbreath_tex	Стремительный вихрь Зенобии	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+28086	Вихрь Зенобии	400100	icon_skills.godbreath_tex	Стремительный вихрь Зенобии	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+28087	Вихрь Зенобии	400100	icon_skills.godbreath_tex	Блистательный вихрь Зенобии	icon_crest.e_crestpassivempdown_tex	Снижает потребление МР на 100.
+28088	Вихрь Зенобии	400100	icon_skills.godbreath_tex	Мощный вихрь Зенобии	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+28089	Щит Кайи	220100	icon_skills.armorofprotection_tex	Неутомимый щит Кайи	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+28090	Воскрешение	120100	icon_skills.resurrect_tex	Стремительное воскрешение	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 60%.
+28091	Заряд маны	280100	icon_skills.manarejuvenation_tex	Усиленный заряд маны (Разряд энергии)	icon_crest.e_crestnextskillattackup_tex	На 40% увеличивает урон умения "Разряд энергии" в течение нескольких секунд.
+28092	Крайняя мера	270100	icon_skills.punishingtouch_tex	Стремительная крайняя мера	icon_crest.e_crestactivecooltimereset_tex	50% вероятность сбросить время перезарядки умения.
+28093	Тройное возмездие	290100	icon_skills.divineretribution_tex	Ослабляющее тройное возмездие	icon_crest.e_crestactivedefencedown_tex	100% вероятность на 12 секунд понизить выносливость цели на 10%.
+28094	Разряд энергии	160100	icon_skills.damagedeal_tex	Усиленный разряд энергии (Крайняя мера)	icon_crest.e_crestnextskillattackup_tex	На 40% увеличивает урон умения "Крайняя мера" в течение нескольких секунд.
+28095	Изнуряющая чума	300100	icon_skills.prophecyoflethargy_tex	Стремительная изнуряющая чума	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 30%.
+28096	Огненное бегство	260100	icon_skills.sanctuary_tex	Стремительное огненное бегство	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 15%.
+28097	Заряд маны	280100	icon_skills.manarejuvenation_tex	Блистательный заряд маны	icon_crest.e_crestpassivepartympup_tex	Увеличивает количество восстанавливаемых МР на 50%.
+28098	Воскрешение	120100	icon_skills.resurrect_tex	Мощное воскрешение	icon_crest.e_crestpassivehprecoveryup_tex	100% восстановление HP/MP при воскрешении.
+28099	Божественное вмешательство	410100	icon_skills.helpinghand_tex	Дальнобойное божественное вмешательство	icon_crest.e_crestpassiveskillrangeup_tex	Увеличивает радиус действия умения на 4 метра.
+28100	Вихрь Зенобии	400100	icon_skills.godbreath_tex	Стремительный вихрь Зенобии	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 30%.
+28101	Отступление	380100	icon_skills.backstep_tex	Стремительное отступление	icon_crest.e_crestpassivecooltimedown_tex	-10% к времени перезарядки умения.
+29000	Лязгающие косы	10100	icon_skills.comboattack2_tex	Мощные лязгающие косы	icon_crest.e_crestactivekill_tex	15% вероятность нанести двойной урон.
+29001	Лязгающие косы	10100	icon_skills.comboattack2_tex	Энергичные лязгающие косы	icon_crest.e_crestpassivemprecoveryup_tex	Увеличивает количество восстанавливаемых МР на 20%.
+29002	Лязгающие косы	10100	icon_skills.comboattack2_tex	Быстрые лязгающие косы	icon_crest.e_crestactiveattackspeedup_tex	10% вероятность на 10 секунд повысить скорость атаки на 15%.
+29003	Лязгающие косы	10100	icon_skills.comboattack2_tex	Режущие лязгающие косы	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность нанесения критического удара.
+29004	Двойной разрез	30100	icon_skills.chainsmash_tex	Восстанавливающий двойной разрез	icon_crest.e_crestpassivehpheal_tex	При каждом ударе восстанавливает 1.5% HP.
+29005	Двойной разрез	30100	icon_skills.chainsmash_tex	Лихой двойной разрез (Свирепый удар)	icon_crest.e_crestnextskillattackup_tex	На 30% увеличивает урон умения "Свирепый удар" в течение 5 секунд.
+29006	Разделяющий удар	40100	icon_skills.chainblow_tex	Мощный разделяющий удар	icon_crest.e_crestpassiveattackup_tex	+15% к наносимому умением урону.
+29007	Разделяющий удар	40100	icon_skills.chainblow_tex	Режущий разделяющий удар	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность нанесения критического удара.
+29009	Свирепый удар	50100	icon_skills.chainsuperblow_tex	Стремительный свирепый удар	icon_crest.e_crestactivecooltimereset_tex	30% вероятность сбросить время перезарядки умения.
+29010	Свирепый удар	50100	icon_skills.chainsuperblow_tex	Полыхающий свирепый удар (Двойной разрез)	icon_crest.e_crestnextskillattackspeedup_tex	Увеличивает скорость использования умения "Двойной разрез" на 25% в течение нескольких секунд.
+29011	Спираль смерти	60100	icon_skills.chainbrandish_tex	Мощная спираль смерти	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+29012	Спираль смерти	60100	icon_skills.chainbrandish_tex	Задерживающая спираль смерти	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 50%.
+29013	Спираль смерти	60100	icon_skills.chainbrandish_tex	Лихая спираль смерти (Двойной разрез)	icon_crest.e_crestnextskillattackup_tex	На 20% увеличивает урон умения "Двойной разрез" в течение нескольких секунд.
+29014	Спираль смерти	60100	icon_skills.chainbrandish_tex	Лихая спираль смерти (Свирепый удар)	icon_crest.e_crestnextskillattackup_tex	На 30% увеличивает урон умения "Свирепый удар" в течение 5 секунд.
+29015	Пила	80100	icon_skills.chainblade_tex	Мощная пила	icon_crest.e_crestpassiveattackup_tex	Увеличивает урон от умения на  25%.
+29016	Пила	80100	icon_skills.chainblade_tex	Стремительная пила	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+29017	Пила	80100	icon_skills.chainblade_tex	Ошеломляющая пила	icon_crest.e_crestactiveattackspeeddown_tex	20% вероятность с каждым ударом на 7 секунд понизить скорость атаки противника на 10%. (Эффект замедления складывается до 5 раз).
+29018	Безжалостный удар	90100	icon_skills.chainstrike_tex	Стремительный безжалостный удар	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+29019	Безжалостный удар	90100	icon_skills.chainstrike_tex	Задерживающий безжалостный удар	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 25%.
+29020	Удар маятника	100100	icon_skills.chainuppercut_tex	Мощный удар маятника	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+29021	Удар маятника	100100	icon_skills.chainuppercut_tex	Стремительный удар маятника	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+29022	Удар маятника	100100	icon_skills.chainuppercut_tex	Лихой удар маятника (Пила)	icon_crest.e_crestnextskillattackup_tex	+30% к вероятности критического удара при использовании умения "Пила" в течение нескольких секунд.
+29023	Призрачная плеть	110100	icon_skills.chainflurry_tex	Стремительная призрачная плеть	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+29024	Призрачная плеть	110100	icon_skills.chainflurry_tex	Энергичная призрачная плеть	icon_crest.e_crestpassivemprecoveryup_tex	Увеличивает количество восстанавливаемых МР на  20%.
+29025	Призрачный шквал	120100	icon_skills.darkexplosion_tex	Стремительный призрачный шквал	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+29026	Призрачный шквал	120100	icon_skills.darkexplosion_tex	Быстрый призрачный шквал	icon_crest.e_crestpassiveskillspeedup_tex	Увеличивает скорость использования умения на 25%.
+29027	Смена мест	130100	icon_skills.darkgrasp_tex	Блистательная смена мест	icon_crest.e_crestpassivempdown_tex	На 150 MP снижает стоимость использования умений и смены мест.
+29028	Смена мест	130100	icon_skills.darkgrasp_tex	Стремительная смена мест	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+29029	Ответный удар	140100	icon_skills.risingattack2_tex	Мощный ответный удар	icon_crest.e_crestpassiveattackup_tex	+20% к наносимому умением урону.
+29030	Ответный удар	140100	icon_skills.risingattack2_tex	Стремительный ответный удар	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+29031	Воздаяние	150100	icon_skills.counterattack_tex	Стремительное воздаяние	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+29032	Темная жатва	160100	icon_skills.descentofdarkness_tex	Блистательная темная жатва	icon_crest.e_crestpassivempdown_tex	Снижает потребление MP на 150.
+29033	Темная жатва	160100	icon_skills.descentofdarkness_tex	Задерживающая темная жатва	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 30%.
+29035	Бросок косы	200100	icon_skills.reversecapture_tex	Стремительный бросок косы	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+29036	Бросок косы	200100	icon_skills.reversecapture_tex	Быстрый бросок косы	icon_crest.e_crestpassiveskillspeedup_tex	При ударе повышает скорость атаки следующего умения на 50%.
+29037	Бросок косы	200100	icon_skills.reversecapture_tex	Лихой бросок косы (Призрачный шквал)	icon_crest.e_crestnextskillattackup_tex	На 20% увеличивает урон умения "Призрачный шквал" в течение нескольких секунд.
+29038	Призрачный шаг	400100	icon_skills.instantleap_tex	Стремительный призрачный шаг	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 15%.
+29039	Призрачный шаг	400100	icon_skills.instantleap_tex	Проворный призрачный шаг	icon_crest.e_crestactivespeedup_tex	Увеличивает скорость перемещения на 50% в течение 2 секунд.
+29046	Безжалостный удар	90100	icon_skills.chainstrike_tex	Стремительный безжалостный удар	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+29047	Пила	80100	icon_skills.chainblade_tex	Мощная пила	icon_crest.e_crestpassiveattackup_tex	Увеличивает урон от умения на 25%.
+29048	Спираль смерти	60100	icon_skills.chainbrandish_tex	Лихая спираль смерти (Свирепый удар)	icon_crest.e_crestnextskillattackup_tex	На 30% увеличивает урон умения "Свирепый удар" в течение 5 секунд.
+29049	Призрачный шквал	120100	icon_skills.darkexplosion_tex	Блистательный призрачный шквал	icon_crest.e_crestpassivempdown_tex	Снижает потребление МР на 150.
+29050	Свирепый удар	50100	icon_skills.chainsuperblow_tex	Прорезающий свирепый удар	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность нанесения критического удара.
+29051	Бегство в тень	180100	icon_skills.hideindarkness_tex	Стремительное бегство в тень	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+29052	Бегство в тень	180100	icon_skills.hideindarkness_tex	Задерживающее бегство в тень	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 50%.
+29053	Двойной разрез	30100	icon_skills.chainsmash_tex	Усиленный двойной разрез (Свирепый удар)	icon_crest.e_crestnextskillattackup_tex	На 30% увеличивает урон умения "Свирепый удар" в течение 5 секунд.
+29054	Разделяющий удар	40100	icon_skills.chainblow_tex	Усиленный разделяющий удар	icon_crest.e_crestpassiveattackup_tex	+15% к наносимому умением урону.
+29055	Разделяющий удар	40100	icon_skills.chainblow_tex	Режущий разделяющий удар	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность нанесения критического удара.
+29056	Пила	80100	icon_skills.chainblade_tex	Стремительная пила	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 30%.
+29057	Удар маятника	100100	icon_skills.chainuppercut_tex	Стремительный удар маятника	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 30%.
+29058	Удар маятника	100100	icon_skills.chainuppercut_tex	Усиленный удар маятника (Пила)	icon_crest.e_crestnextskillattackup_tex	+30% к вероятности критического удара при использовании умения "Пила" в течение нескольких секунд.
+29059	Призрачный шаг	400100	icon_skills.instantleap_tex	Проворный призрачный шаг	icon_crest.e_crestactivespeedup_tex	Увеличивает скорость перемещения на 50% в течение 2 секунд.
+29060	Пила	80100	icon_skills.chainblade_tex	Усиленная пила	icon_crest.e_crestpassiveattackup_tex	+30% к наносимому умением урону.
+29061	Спираль смерти	60100	icon_skills.chainbrandish_tex	Усиленная спираль смерти (Свирепый удар)	icon_crest.e_crestnextskillattackup_tex	На 35% увеличивает урон умения "Свирепый удар" в течение 5 секунд.
+29062	Свирепый удар	50100	icon_skills.chainsuperblow_tex	Режущий свирепый удар	icon_crest.e_crestpassivecriticalup_tex	Утраивает вероятность нанесения критического удара.
+29063	Бегство в тень	180100	icon_skills.hideindarkness_tex	Стремительное бегство в тень	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 35%.
+29064	Бегство в тень	180100	icon_skills.hideindarkness_tex	Задерживающее бегство в тень	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 100%.
+30000	Выстрел	10100	icon_skills.cannonshot_tex	Усиленный выстрел	icon_crest.e_crestpassiveattackup_tex	+20% к наносимому умением урону.
+30001	Выстрел	10100	icon_skills.cannonshot_tex	Допустимый выстрел	icon_crest.e_creststrecover_tex	+5 ед. силы воли за каждое попадание.
+30002	Выстрел	10100	icon_skills.cannonshot_tex	Быстрый выстрел	icon_crest.e_crestactiveattackspeedup_tex	15% вероятность на 10 секунд повысить скорость атаки на 15%.
+30003	Бомбардировка	20100	icon_skills.mortarshot_tex	Осколочная бомбардировка	icon_crest.e_crestpassivecriticalup_tex	+50% к вероятности нанесения критического удара.
+30004	Бомбардировка	20100	icon_skills.mortarshot_tex	Быстрая бомбардировка	icon_crest.e_crestpassiveskillspeedup_tex	Увеличивает скорость использования умения на 25%.
+30005	Залп картечью	30100	icon_skills.buckshot_tex	Усиленный залп картечью	icon_crest.e_crestpassiveattackup_tex	+20% к наносимому умением урону.
+30006	Удар прикладом	40100	icon_skills.gunbrandish_tex	Весомый удар прикладом	icon_crest.e_crestpassivecooltimedown_tex	20% вероятность сбросить время перезарядки умения "Граната".
+30007	Залп картечью	30100	icon_skills.buckshot_tex	Ловкий залп картечью	icon_crest.e_crestpassivepenaltydelete_tex	-40% к отдаче.
+30008	Залп картечью	30100	icon_skills.buckshot_tex	Отличный залп картечью	icon_crest.e_crestpassivempdown_tex	Снижает потребление МР на 50.
+30009	Удар прикладом	40100	icon_skills.gunbrandish_tex	Усиленный удар прикладом	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+30010	Удар прикладом	40100	icon_skills.gunbrandish_tex	Восстанавливающий удар прикладом	icon_crest.e_crestpassivehpheal_tex	При каждом ударе восстанавливает 2% HP.
+30011	Удар прикладом	40100	icon_skills.gunbrandish_tex	Энергетический удар прикладом	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 30%.
+30012	Заградительный огонь	50100	icon_skills.gatlingshot_tex	Восстанавливающий заградительный огонь	icon_crest.e_crestpassivehpheal_tex	При каждом ударе восстанавливает 1% HP.
+30013	Заградительный огонь	50100	icon_skills.gatlingshot_tex	Прицельный заградительный огонь	icon_crest.e_crestpassiverangeup_tex	+5 метров к радиусу действия.
+30014	Часовая бомба	60100	icon_skills.timebombshot_tex	Усиленная часовая бомба	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+30015	Часовая бомба	60100	icon_skills.timebombshot_tex	Допустимая часовая бомба	icon_crest.e_creststrecover_tex	+15 ед. силы воли за каждое успешное попадание.
+30016	Разрывной снаряд	70100	icon_skills.arcaneshockshot01_tex	Усиленный разрывной снаряд	icon_crest.e_crestpassiveattackup_tex	+20% к наносимому умением урону.
+30017	Разрывной снаряд	70100	icon_skills.arcaneshockshot01_tex	Быстрый разрывной снаряд	icon_crest.e_crestactiveinvokeskill_tex	+30% к скорости атаки до детонации умения "Разрывной снаряд".
+30018	Разрывной снаряд	70100	icon_skills.arcaneshockshot01_tex	Допустимый разрывной снаряд	icon_crest.e_creststrecover_tex	+15 ед. силы воли за каждое попадание.
+30019	Мана-ракеты	90100	icon_skills.aimedshot_tex	Осколочные мана-ракеты	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность нанесения критического удара.
+30021	Граната	100100	icon_skills.arcanegrenadethrow_tex	Усиленная граната	icon_crest.e_crestpassiveattackup_tex	+20% к наносимому умением урону.
+30022	Граната	100100	icon_skills.arcanegrenadethrow_tex	Задерживающая граната 	icon_crest.e_crestpassivedurationup_tex	+50% к продолжительности оглушения.
+30023	Граната	100100	icon_skills.arcanegrenadethrow_tex	Отличная граната	icon_crest.e_crestpassivempdown_tex	Снижает потребление МР на 50.
+30024	Взрывной прыжок	110100	icon_skills.rocketjump_tex	Стремительный взрывной прыжок	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+30028	Месть Балдера	130100	icon_skills.flashcannon_tex	Стремительная месть Балдера	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+30029	Взрывной прыжок	110100	icon_skills.rocketjump_tex	Проворный взрывной прыжок	icon_crest.e_crestactivespeedup_tex	Увеличивает скорость перемещения на 50% в течение 5 секунд.
+30030	Перезарядка	150100	icon_skills.reload_tex	Стремительная перезарядка	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+30031	Перезарядка	150100	icon_skills.reload_tex	Допустимая перезарядка	icon_crest.e_creststrecover_tex	+50 ед. силы воли дополнительно при использовании умения.
+30032	СТ	190100	icon_skills.summonsentrytower_tex	Энергетическая турель	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 15%.
+30033	РП	180100	icon_skills.summondispenser_tex	Усиленный спутник	icon_crest.e_crestpassiveattackup_tex	+100% к наносимому умением урону.
+30034	СТ	190100	icon_skills.summonsentrytower_tex	Усиленная турель	icon_crest.e_crestpassiveattackup_tex	+20% к силе атаки СТ.
+30035	СТ	190100	icon_skills.summonsentrytower_tex	Задерживающая турель	icon_crest.e_crestpassivedurationup_tex	+30% к времени жизни СТ.
+30036	СТ	190100	icon_skills.summonsentrytower_tex	Блистательная турель	icon_crest.e_crestpassivempdown_tex	Снижает потребление МР на 100.
+30037	Ответный удар	200100	icon_skills.risingrocket_tex	Мощный ответный удар	icon_crest.e_crestpassiveattackup_tex	+20% к наносимому умением урону.
+30038	Ответный удар	200100	icon_skills.risingrocket_tex	Стремительный ответный удар	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+30039	Команда: Возвращение	210100	icon_skills.command_counterflow_tex	Стремительное возвращение	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+30040	Команда: Самоуничтожение	220100	icon_skills.command_selfdestruct_tex	Стремительное самоуничтожение	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+30041	Перезарядка с перекатом	400100	icon_skills.ambushrolling_tex	Стремительная перезарядка с перекатом	icon_crest.e_crestactivecooltimereset_tex	25% вероятность сбросить время перезарядки умения.
+30042	Перезарядка с перекатом   			Лихая перезарядка с перекатом (Залп картечью)	icon_crest.e_crestnextskillattackup_tex	+20% к урону от умения "Залп картечью" в течение нескольких секунд.
+30043	Бомбардировка	20100	icon_skills.mortarshot_tex	Осколочная бомбардировка	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность нанесения критического удара.
+30044	Залп картечью	30100	icon_skills.buckshot_tex	Усиленный залп картечью	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+30045	Удар прикладом	40100	icon_skills.gunbrandish_tex	Усиленный удар прикладом	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+30046	Заградительный огонь	50100	icon_skills.gatlingshot_tex	Допустимый заградительный огонь	icon_crest.e_creststrecover_tex	-10 к затратам силы воли.
+30047	Заградительный огонь	50100	icon_skills.gatlingshot_tex	Прицельный заградительный огонь	icon_crest.e_crestpassiverangeup_tex	+5 метров к радиусу действия.
+30048	Разрывной снаряд	70100	icon_skills.arcaneshockshot01_tex	Усиленный разрывной снаряд	icon_crest.e_crestpassiveattackup_tex	+20% к наносимому умением урону.
+30049	Разрывной снаряд	70100	icon_skills.arcaneshockshot01_tex	Быстрый разрывной снаряд	icon_crest.e_crestactiveinvokeskill_tex	+30% к скорости атаки до детонации умения "Разрывной снаряд".
+30050	Мана-ракеты	90100	icon_skills.aimedshot_tex	Осколочные мана-ракеты	icon_crest.e_crestpassivecriticalup_tex	Утраивает вероятность нанесения критического удара.
+30051	Граната	100100	icon_skills.arcanegrenadethrow_tex	Усиленная граната	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+30052	Взрывной прыжок	110100	icon_skills.rocketjump_tex	Стремительный взрывной прыжок	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+30055	Месть Балдера	130100	icon_skills.flashcannon_tex	Стремительная месть Балдера	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+30056	Перезарядка	150100	icon_skills.reload_tex	Стремительная перезарядка	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+30057	СТ	190100	icon_skills.summonsentrytower_tex	Энергетическая турель	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 15%.
+30058	Месть Балдера	130100	icon_skills.flashcannon_tex	Усиленная месть Балдера	icon_crest.e_crestpassiveattackup_tex	+20% к наносимому умением урону.
+30059	Перезарядка с перекатом	400100	icon_skills.ambushrolling_tex	Стремительная перезарядка с перекатом	icon_crest.e_crestactivecooltimereset_tex	30% вероятность сбросить время перезарядки умения.
+30060	Команда: Возвращение	210100	icon_skills.command_counterflow_tex	Стремительное возвращение	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+30061	Удар прикладом	40100	icon_skills.gunbrandish_tex	Усиленный удар прикладом	icon_crest.e_crestpassiveattackup_tex	+30% к наносимому умением урону.
+30062	Взрывной прыжок	110100	icon_skills.rocketjump_tex	Проворный взрывной прыжок	icon_crest.e_crestactivespeedup_tex	Увеличивает скорость перемещения на 50% в течение 5 секунд.
+30063	Перезарядка	150100	icon_skills.reload_tex	Стремительная перезарядка	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 30%.
+30064	СТ	190100	icon_skills.summonsentrytower_tex	Усиленная турель	icon_crest.e_crestpassiveattackup_tex	+20% к силе атаки СТ.
+30065	Команда: Самоуничтожение	220100	icon_skills.command_selfdestruct_tex	Стремительная команда: Самоуничтожение	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+30066	Перезарядка с перекатом	400100	icon_skills.ambushrolling_tex	Усиленная перезарядка с перекатом (Залп картечью)	icon_crest.e_crestnextskillattackup_tex	+20% к урону от умения "Залп картечью" в течение нескольких секунд.
+30067	Бомбардировка	20100	icon_skills.mortarshot_tex	Режущая бомбардировка	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность нанесения критического удара.
+30068	Залп картечью	30100	icon_skills.buckshot_tex	Усиленный залп картечью	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+30069	Заградительный огонь	50100	icon_skills.gatlingshot_tex	Дальнобойный заградительный огонь	icon_crest.e_crestpassiverangeup_tex	+5 метров к радиусу действия.
+30070	Мана-ракеты	90100	icon_skills.aimedshot_tex	Режущие мана-ракеты	icon_crest.e_crestpassivecriticalup_tex	Утраивает вероятность нанесения критического удара.
+30071	Месть Балдера	130100	icon_skills.flashcannon_tex	Усиленная месть Балдера	icon_crest.e_crestpassiveattackup_tex	+20% к наносимому умением урону.
+30072	Перезарядка с перекатом	400100	icon_skills.ambushrolling_tex	Стремительная перезарядка с перекатом	icon_crest.e_crestactivecooltimereset_tex	35% вероятность сбросить время перезарядки умения.
+31000	Серия ударов	10100	icon_skills.comboattack01_tex	Усиленная серия ударов	icon_crest.e_crestpassiveattackup_tex	+20% к наносимому умением урону.
+31001	Серия ударов	10100	icon_skills.comboattack01_tex	Блистательная серия ударов	icon_crest.e_crestpassivemprecoveryup_tex	Увеличивает количество восстанавливаемых МР на 15% при поражении цели.
+31002	Серия ударов	10100	icon_skills.comboattack01_tex	Быстрая серия ударов	icon_crest.e_crestactiveattackspeedup_tex	10% вероятность на 10 секунд повысить скорость атаки на 15%.
+31003	Сильный удар	20100	icon_skills.smashattack02_tex	Лихой сильный удар	icon_crest.e_crestpassiveattackup_tex	+20% к наносимому умением урону.
+31004	Сильный удар	20100	icon_skills.smashattack02_tex	Лихой сильный удар	icon_crest.e_crestnextskillattackup_tex	При совершенной защите с вероятностью 30% на 6 сек. урон, наносимый умением, повышается на 50%
+31005	Удар ногой с разворота	70100	icon_skills.upperkick_tex	Усиленный удар ногой с разворота	icon_crest.e_crestnextskillattackup_tex	При поражении цели с вероятностью в 100% увеличивает урон от всех умений на 10% на 3 сек.
+31006	Удар ногой с разворота	70100	icon_skills.upperkick_tex	Несокрушимый удар ногой с разворота	icon_crest.e_crestactivedefenceup_tex	Если использовать умение Серия взрывных ударов/Смертельный удар/Мощный удар в течение 5 секунд после использования этого умения, вы получаете эффект защиты от ударов спереди.
+31007	Удар ногой с разворота	70100	icon_skills.upperkick_tex	Стремительный удар ногой с разворота	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 15%.
+31008	Яростный бросок	30100	icon_skills.dragonrisingblow_tex	Блистательный яростный бросок	icon_crest.e_creststrecover_tex	В случае успешной атаки восстанавливает 50% ярости
+31009	Сильный удар о землю	40100	icon_skills.poundonground_tex	Блистательный сильный удар о землю	icon_crest.e_creststrecover_tex	С каждым ударом восстанавливает 3% ярости.
+31010	Сильный удар о землю	40100	icon_skills.poundonground_tex	Лихой сильный удар о землю	icon_crest.e_crestpassiveattackup_tex	+20% к наносимому умением урону.
+31011	Сильный удар о землю	40100	icon_skills.poundonground_tex	Стремительный сильный удар о землю	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+31012	Яростный прорыв	50100	icon_skills.bulldozer_tex	Стремительный яростный прорыв	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+31013	Мощный удар	60100	icon_skills.blowattack_tex	Усиленный мощный удар	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+31014	Мощный удар	60100	icon_skills.blowattack_tex	Режущий мощный удар	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность нанесения критического удара.
+31015	Мощный удар	60100	icon_skills.blowattack_tex	Блистательный мощный удар	icon_crest.e_crestpassivempdown_tex	-100 затраты MP.
+31016	Мощный удар	60100	icon_skills.blowattack_tex	Стремительный мощный удар	icon_crest.e_crestactivecooltimereset_tex	20% вероятность сбросить время перезарядки умения "Мощный удар".
+31017	Смертельный удар	80100	icon_skills.risingblow_tex	Усиленный смертельный удар	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+31018	Мощный удар	60100	icon_skills.blowattack_tex	Стремительный мощный удар	icon_crest.e_crestactivecooltimereset_tex	При нанесении удара монстру, с вероятностью 60% обнуляется перезарядка умения "Удар ногой с разворота".
+31019	Смертельный удар	80100	icon_skills.risingblow_tex	Блистательный смертельный удар	icon_crest.e_creststrecover_tex	С каждым ударом восстанавливает 2% ярости.
+31020	Серия взрывных ударов	90100	icon_skills.rapidattack_tex	Усиленная серия взрывных ударов	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+31021	Серия взрывных ударов	90100	icon_skills.rapidattack_tex	Быстрая серия взрывных ударов	icon_crest.e_crestactiveinvokeskill_tex	При нанесении урона цели, подброшенной в воздух, урон повышается на 25%
+31022	Серия взрывных ударов	90100	icon_skills.rapidattack_tex	Режущая серия взрывных ударов	icon_crest.e_crestpassivecriticalup_tex	+50% к вероятности нанесения критического удара.
+31023	Контрудар	100100	icon_skills.counterattack2_tex	Стремительный контрудар	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+31024	Контрудар	100100	icon_skills.counterattack2_tex	Усиленный контрудар	icon_crest.e_crestpassiveattackup_tex	+20% к наносимому умением урону.
+31025	Ответный удар	120100	icon_skills.risingattack_tex	Усиленный ответный удар	icon_crest.e_crestpassiveattackup_tex	+20% к наносимому умением урону.
+31026	Ответный удар	120100	icon_skills.risingattack_tex	Стремительный ответный удар	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+31027	Насмешка	70100	icon_skills.shockingshout_tex	Энергичная насмешка	icon_crest.e_crestpassivempdown_tex	-100 затраты MP.
+31028	Насмешка	70100	icon_skills.shockingshout_tex	Неутомимая насмешка	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+31029	Вспышка гнева	140100	icon_skills.enrage_tex	Замедляющая вспышка гнева	icon_crest.e_crestpassivespeeddown_tex	На 5 секунд снижает скорость перемещения противника на 50%.
+31030	Вспышка гнева	140100	icon_skills.enrage_tex	Стремительная вспышка гнева	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+31031	Беспощадный удар	150100	icon_skills.kick2_tex	Режущий беспощадный удар	icon_crest.e_crestpassivecriticalup_tex	Двойной урон опрокинутой цели.
+31032	Удар в воздухе	160100	icon_skills.airkick_tex	Задерживающий удар в воздухе	icon_crest.e_crestpassivedurationup_tex	Увеличивает продолжительность эффекта на 50%.
+31033	Удар в воздухе	160100	icon_skills.airkick_tex	Быстрый удар в воздухе	icon_crest.e_crestactiveinvokeskill_tex	При нанесении урона цели, подброшенной в воздух, урон повышается на 50%.
+31034	Яростный удар сверху	170100	icon_skills.dashattack_tex	Усиленный яростный удар сверху	icon_crest.e_crestpassiveattackup_tex	+20% к наносимому умением урону.
+31035	Яростный удар сверху	170100	icon_skills.dashattack_tex	Блистательный яростный удар сверху	icon_crest.e_crestpassivemprecoveryup_tex	Восстанавливает 2% от общего количества MP при каждом ударе.
+31036	Яростный удар сверху	170100	icon_skills.dashattack_tex	Восстанавливающий яростный удар сверху	icon_crest.e_crestpassivehpheal_tex	При каждом ударе восстанавливает 1% HP.
+31037	Всплеск ярости	180100	icon_skills.rampage_tex	Пульсирующий всплеск ярости	icon_crest.e_crestpassiveattackup_tex	+25 силы во время действия эффекта
+31038	Всплеск ярости	180100	icon_skills.rampage_tex	Стремительный всплеск ярости	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+31039	Серия ударов	10100	icon_skills.comboattack01_tex	Стремительная серия ударов	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+31040	Серия ударов	10100	icon_skills.comboattack01_tex	Усиленная серия ударов	icon_crest.e_crestpassiveattackup_tex	+20% к наносимому умением урону.
+31041	Спокойствие	190100	icon_skills.relax_tex	Безмятежное спокойствие	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+31042	Переполняющая ярость	210100	icon_skills.arouseangercancel_tex	Стремительная переполняющая ярость	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+31043	Мгновенный прорыв	400100	icon_skills.instancerush_tex	Неутомимый мгновенный прорыв	icon_crest.e_crestactivecooltimereset_tex	20% вероятность сбросить время перезарядки умения.
+31044	Серия ударов	10100	icon_skills.comboattack01_tex	Усиленная серия ударов	icon_crest.e_crestpassiveattackup_tex	+30% к наносимому умением урону.
+31045	Удар ногой с разворота	70100	icon_skills.upperkick_tex	Стремительный удар ногой с разворота	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+31046	Яростный бросок	30100	icon_skills.dragonrisingblow_tex	Стремительный яростный бросок	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 20%.
+31047	Сильный удар о землю	40100	icon_skills.poundonground_tex	Блистательный сильный удар о землю	icon_crest.e_creststrecover_tex	С каждым ударом восстанавливает 3% ярости.
+31048	Сильный удар о землю	40100	icon_skills.poundonground_tex	Режущий сильный удар о землю	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность нанесения критического удара.
+31049	Сильный удар о землю	40100	icon_skills.poundonground_tex	Лихой сильный удар о землю	icon_crest.e_crestpassiveattackup_tex	+30% к наносимому умением урону.
+31050	Мощный удар	60100	icon_skills.blowattack_tex	Усиленный мощный удар	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+31051	Мощный удар	60100	icon_skills.blowattack_tex	Режущий мощный удар	icon_crest.e_crestpassivecriticalup_tex	+150% к вероятности нанесения критического удара.
+31052	Мощный удар	60100	icon_skills.blowattack_tex	Стремительный мощный удар	icon_crest.e_crestactivecooltimereset_tex	При нанесении удара монстру, с вероятностью 60% обнуляется перезарядка умения "Удар ногой с разворота".
+31053	Смертельный удар	80100	icon_skills.risingblow_tex	Блистательный смертельный удар	icon_crest.e_creststrecover_tex	С каждым ударом восстанавливает 2% ярости.
+31054	Серия взрывных ударов	90100	icon_skills.rapidattack_tex	Усиленная серия взрывных ударов	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+31055	Серия взрывных ударов	90100	icon_skills.rapidattack_tex	Режущая серия взрывных ударов	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность нанесения критического удара.
+31056	Серия взрывных ударов	90100	icon_skills.rapidattack_tex	Блистательная серия взрывных ударов	icon_crest.e_creststrecover_tex	С каждым ударом восстанавливает 1% ярости.
+31057	Контрудар	100100	icon_skills.counterattack2_tex	Стремительный контрудар	icon_crest.e_crestpassivecooltimedown_tex	Снижает время перезарядки умения на 25%.
+31058	Вспышка гнева	140100	icon_skills.enrage_tex	Замедляющая вспышка гнева	icon_crest.e_crestpassivespeeddown_tex	На 5 секунд снижает скорость перемещения противника на 50%.
+31059	Смертельный удар	80100	icon_skills.risingblow_tex	Усиленный смертельный удар	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+31060	Сильный удар	20100	icon_skills.smashattack02_tex	Лихой сильный удар	icon_crest.e_crestpassiveattackup_tex	+30% к наносимому умением урону.
+31061	Контрудар	100100	icon_skills.counterattack2_tex	Усиленный контрудар	icon_crest.e_crestpassiveattackup_tex	+30% к наносимому умением урону.
+31062	Яростный удар сверху	170100	icon_skills.dashattack_tex	Усиленый яростный удар сверху	icon_crest.e_crestpassiveattackup_tex	+20% к наносимому умением урону.
+31063	Яростный удар сверху	170100	icon_skills.dashattack_tex	Восстанавливающий яростный удар сверху	icon_crest.e_crestpassivehpheal_tex	При каждом ударе восстанавливает 1.5% HP.
+31064	Серия ударов	10100	icon_skills.comboattack01_tex	Усиленная серия ударов	icon_crest.e_crestpassiveattackup_tex	+25% к наносимому умением урону.
+31065	Мгновенный прорыв	400100	icon_skills.instancerush_tex	Неутомимый мгновенный прорыв	icon_crest.e_crestactivecooltimereset_tex	30% вероятность сбросить время перезарядки умения.
+31066	Сильный удар	20100	icon_skills.smashattack02_tex	Режущий сильный удар 	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность нанесения критического удара.
+31067	Удар ногой с разворота	70100	icon_skills.upperkick_tex	Усиленный удар ногой с разворота	icon_crest.e_crestnextskillattackup_tex	При поражении цели с вероятностью в 100% увеличивает урон от всех умений на 15% на 3 сек.
+31068	Сильный удар о землю	40100	icon_skills.poundonground_tex	Режущий сильный удар о землю	icon_crest.e_crestpassivecriticalup_tex	Утраивает вероятность нанесения критического удара.
+31069	Мощный удар	60100	icon_skills.blowattack_tex	Режущий мощный удар	icon_crest.e_crestpassivecriticalup_tex	Утраивает вероятность нанесения критического удара.
+31070	Беспощадный удар	150100	icon_skills.kick2_tex	Режущий беспощадный удар	icon_crest.e_crestpassivecriticalup_tex	Тройной урон опрокинутой цели.
+32000	Комбо-атака	10100	icon_skills.c12_meleecombo	Усиленная комбо-атака	icon_crest.e_crestpassiveattackup_tex	Повышает урон от умения на 20%.
+32001	Комбо-атака	10100	icon_skills.c12_meleecombo	Допустимая комбо-атака	icon_crest.e_crestpassivemprecoveryup_tex	+15% к количеству восстанавливаемых MP при поражении цели.
+32002	Комбо-атака	10100	icon_skills.c12_meleecombo	Быстрая комбо-атака	icon_crest.e_crestactiveattackspeedup_tex	10% вероятность на 5 секунд повысить скорость атаки на 10%.
+32003	Бросок кинжалов	30100	icon_skills.c12_rapidshot	Быстрый бросок кинжалов	icon_crest.e_crestactiveinvokeskill_tex	+40% к урону от умения по цели, подброшенной в воздух.
+32004	Бросок кинжалов	30100	icon_skills.c12_rapidshot	Стремительный бросок кинжалов	icon_crest.e_crestpassivecooltimedown_tex	-15% к времени перезарядки умения.
+32005	Рывок к цели	40100	icon_skills.c12_dashattack	Лихой рывок к цели	icon_crest.e_crestnextskillattackup_tex	При поражении цели умением, с вероятностью 100% на 3 сек. повышает наносимый умением урон на 10%
+32006	Огненная бомба	50100	icon_skills.c12_flamebomb	Стремительная огненная бомба	icon_crest.e_crestpassivecooltimedown_tex	-15% к времени перезарядки умения.
+32007	Быстрое рассечение	60100	icon_skills.c12_rapidslash	Усиленное быстрое рассечение	icon_crest.e_crestpassiveattackup_tex	+20% к урону от умения.
+32008	Быстрое рассечение	60100	icon_skills.c12_rapidslash	Стремительное быстрое рассечение	icon_crest.e_crestpassivecooltimedown_tex	-20% к времени перезарядки умений.
+32009	Обманный маневр	70100	icon_skills.c12_catchback	Допустимый обманный маневр	icon_crest.e_crestpassivempdown_tex	Снижает расход MP на 125.
+32010	Обманный маневр	70100	icon_skills.c12_catchback	Стремительный обманный маневр	icon_crest.e_crestactivecooltimereset_tex	В случае успешной атаки монстра с вероятностью 25% сбрасывает время перезарядки умения "Двойной удар".
+32011	Обманный маневр	70100	icon_skills.c12_catchback	Усиленный обманный маневр	icon_crest.e_crestpassiveattackup_tex	Повышает урон от умения на 20%.
+32012	Тепловой удар	80100	icon_skills.c12_flamestrike	Усиленный тепловой удар	icon_crest.e_crestpassiveattackup_tex	+20% к урону от умения.
+32013	Дымовая завеса	90100	icon_skills.c12_smokebomb	Стремительная дымовая завеса	icon_crest.e_crestpassivecooltimedown_tex	-15% к времени перезарядки умения.
+32014	Ответный удар	100100	icon_skills.risingattack_tex	Усиленный ответный удар	icon_crest.e_crestpassiveattackup_tex	Повышает урон от умения на 20%.
+32015	Ответный удар	100100	icon_skills.risingattack_tex	Стремительный ответный удар	icon_crest.e_crestpassivecooltimedown_tex	-20% к времени перезарядки умений.
+32018	Тройной удар	120100	icon_skills.c12_airstepstrike	Допустимый тройной удар	icon_crest.e_crestpassivempdown_tex	Снижает расход MP на 125.
+32019	Тройной удар	120100	icon_skills.c12_airstepstrike	Режущий тройной удар	icon_crest.e_crestpassivecriticalup_tex	+50% к вероятности нанесения критического удара.
+32020	Тройной удар	120100	icon_skills.c12_airstepstrike	Усиленный тройной удар	icon_crest.e_crestnextskillattackup_tex	+25% к урону от умения "Удар наотмашь".
+32021	Удар наотмашь	130100	icon_skills.c12_rotateslash	Допустимый удар наотмашь	icon_crest.e_crestpassivempdown_tex	Снижает расход MP на 175.
+32022	Удар наотмашь	130100	icon_skills.c12_rotateslash	Усиленный удар наотмашь	icon_crest.e_crestpassiveattackup_tex	Повышает урон от умения на 20%.
+32023	Двойной удар	140100	icon_skills.c12_twinslash	Допустимый двойной удар	icon_crest.e_crestpassivempdown_tex	Снижает расход MP на 100.
+32024	Двойной удар	140100	icon_skills.c12_twinslash	Усиленный двойной удар	icon_crest.e_crestnextskillattackup_tex	На 25% повышает урон умения "Тройной удар".
+32025	Двойной удар	140100	icon_skills.c12_twinslash	Стремительный двойной удар	icon_crest.e_crestpassivecooltimedown_tex	-20% к времени перезарядки умения.
+32026	Огненная атака	150100	icon_skills.c12_flamebreath	Быстрая огненная атака	icon_crest.e_crestactiveinvokeskill_tex	+30% к урону от умения при атаке цели, подброшенной в воздух.
+32027	Огненная атака	150100	icon_skills.c12_flamebreath	Блистательная огненная атака	icon_crest.e_crestpassivemprecoveryup_tex	Восстанавливает 1% от общего количества MP при каждом ударе.
+32028	Кольцо сюрикенов	160100	icon_skills.c12_rotateshurikenshot	Блистательное кольцо сюрикенов	icon_crest.e_crestpassivempdown_tex	Снижает расход MP на 150.
+32029	Кольцо сюрикенов	160100	icon_skills.c12_rotateshurikenshot	Живительное кольцо сюрикенов	icon_crest.e_crestpassivehpheal_tex	Восстанавливает 3% от общего количества HP при каждом ударе.
+32030	Кольцо сюрикенов	160100	icon_skills.c12_rotateshurikenshot	Стремительное кольцо сюрикенов	icon_crest.e_crestpassivecooltimedown_tex	-20% к времени перезарядки умений.
+32031	Восстановление чакры	170100	icon_skills.c12_chakracharge	Блистательное восстановление чакры	icon_crest.e_crestpassivempdown_tex	Снижает расход MP на 100.
+32032	Восстановление чакры	170100	icon_skills.c12_chakracharge	Стремительное восстановление чакры	icon_crest.e_crestpassivecooltimedown_tex	-20% к времени перезарядки умения.
+32033	Восстановление чакры	170100	icon_skills.c12_chakracharge	Быстрое восстановление чакры	icon_crest.e_crestactiveattackspeedup_tex	На 10 секунд повышает скорость активации умений "Огненная атака" и "Тепловой удар" на 20%.
+32034	Ураганный сюрикен	180100	icon_skills.c12_tornadoshot	Блистательный ураганный сюрикен	icon_crest.e_crestpassivempdown_tex	Снижает расход MP на 175.
+32035	Ураганный сюрикен	180100	icon_skills.c12_tornadoshot	Стремительный ураганный сюрикен	icon_crest.e_crestpassivecooltimedown_tex	-20% к времени перезарядки умения.
+32036	Удар в солнечное сплетение	190100	icon_skills.c12_evadestingshot	Блистательный удар в солнечное сплетение	icon_crest.e_crestpassivempdown_tex	Снижает расход MP на 150.
+32037	Удар в солнечное сплетение	190100	icon_skills.c12_evadestingshot	Стремительный удар в солнечное сплетение	icon_crest.e_crestpassivecooltimedown_tex	-20% к времени перезарядки умения.
+32038	Комбо-атака	10100	icon_skills.c12_meleecombo	Усиленная комбо-атака	icon_crest.e_crestpassiveattackup_tex	Повышает урон от умения на 30%.
+32039	Бросок кинжалов	30100	icon_skills.c12_rapidshot	Быстрый бросок кинжалов	icon_crest.e_crestactiveinvokeskill_tex	+60% к урону от умения по цели, подброшенной в воздух.
+32040	Огненная бомба	50100	icon_skills.c12_flamebomb	Стремительная огненная бомба	icon_crest.e_crestpassivecooltimedown_tex	-20% к времени перезарядки умения.
+32041	Быстрое рассечение	60100	icon_skills.c12_rapidslash	Усиленное быстрое рассечение	icon_crest.e_crestpassiveattackup_tex	+25% к урону от умения.
+32042	Обманный маневр	70100	icon_skills.c12_catchback	Стремительный обманный маневр	icon_crest.e_crestactivecooltimereset_tex	В случае успешной атаки монстра с вероятностью 50% сбрасывает время перезарядки умения "Двойной удар".
+32043	Тепловой удар	80100	icon_skills.c12_flamestrike	Режущий тепловой удар	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность нанесения критического удара.
+32044	Тройной удар	120100	icon_skills.c12_airstepstrike	Усиленный тройной удар	icon_crest.e_crestnextskillattackup_tex	На 30% повышает урон умения "Удар наотмашь".
+32045	Тройной удар	120100	icon_skills.c12_airstepstrike	Режущий тройной удар	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность нанесения критического удара.
+32046	Удар наотмашь	130100	icon_skills.c12_rotateslash	Усиленный удар наотмашь	icon_crest.e_crestpassiveattackup_tex	Повышает урон от умения на 25%.
+32047	Двойной удар	140100	icon_skills.c12_twinslash	Усиленный двойной удар	icon_crest.e_crestnextskillattackup_tex	На 30% повышает урон умения "Тройной удар".
+32048	Двойной удар	140100	icon_skills.c12_twinslash	Режущий двойной удар	icon_crest.e_crestpassivecriticalup_tex	Удваивает вероятность нанесения критического удара.
+32049	Огненная атака	150100	icon_skills.c12_flamebreath	Быстрая огненная атака	icon_crest.e_crestactiveinvokeskill_tex	+50% к урону от умения при атаке цели, подброшенной в воздух.
+32050	Кольцо сюрикенов	160100	icon_skills.c12_rotateshurikenshot	Живительное кольцо сюрикенов	icon_crest.e_crestpassivehpheal_tex	Восстанавливает 5% от общего количества HP при каждом ударе.
+32051	Ураганный сюрикен	180100	icon_skills.c12_tornadoshot	Усиленный ураганный сюрикен	icon_crest.e_crestpassiveattackup_tex	Повышает урон от умения на 25%.
+32052	Удар в солнечное сплетение	190100	icon_skills.c12_evadestingshot	Стремительный удар в солнечное сплетение	icon_crest.e_crestpassivecooltimedown_tex	-25% к времени перезарядки умений.
+32053	Бросок кинжалов	30100	icon_skills.c12_rapidshot	Стремительный бросок кинжалов	icon_crest.e_crestpassivecooltimedown_tex	-20% к времени перезарядки умения.
+32054	Быстрое рассечение	60100	icon_skills.c12_rapidslash	Стремительное быстрое рассечение	icon_crest.e_crestpassivecooltimedown_tex	-25% к времени перезарядки умения.
+32055	Тепловой удар	80100	icon_skills.c12_flamestrike	Усиленнай тепловой удар	icon_crest.e_crestpassiveattackup_tex	Повышает урон от умения на 25%.
+32056	Дымовая завеса	90100	icon_skills.c12_smokebomb	Стремительная дымовая завеса	icon_crest.e_crestpassivecooltimedown_tex	-25% к времени перезарядки умения.
+32057	Удар наотмашь	130100	icon_skills.c12_rotateslash	Стремительный удар наотмашь	icon_crest.e_crestpassivecooltimedown_tex	-20% к времени перезарядки умения.
+32058	Восстановление чакры	170100	icon_skills.c12_chakracharge	Быстрое восстановление чакры	icon_crest.e_crestactiveattackspeedup_tex	На 10 секунд повышает скорость активации умений "Огненная атака" и "Тепловой удар" на 30%.
+32059	Удар в солнечное сплетение	190100	icon_skills.c12_evadestingshot	Усиленный удар в солнечное сплетение	icon_crest.e_crestpassiveattackup_tex	+25% к урону от умения.
+32060	Комбо-атака	10100	icon_skills.c12_meleecombo	Быстрая комбо-атака	icon_crest.e_crestactiveattackspeedup_tex	15% вероятность на 5 секунд повысить скорость атаки на 10%.
+32061	Тепловой удар	80100	icon_skills.c12_flamestrike	Режущий тепловой удар	icon_crest.e_crestpassivecriticalup_tex	Утраивает вероятность нанесения критического удара.
+32062	Двойной удар	140100	icon_skills.c12_twinslash	Режущий двойной удар	icon_crest.e_crestpassivecriticalup_tex	Утраивает вероятность нанесения критического удара.
+32063	Огненная атака	150100	icon_skills.c12_flamebreath	Усиленная огненная атака	icon_crest.e_crestpassiveattackup_tex	+30% к урону от умения.
+32064	Быстрые уклонения	20100	icon_skills.c12_dash	Стремительные быстрые уклонения	icon_crest.e_crestpassivecooltimedown_tex	-20% к времени перезарядки умения.

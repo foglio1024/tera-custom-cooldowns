@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SkillIconData>
+  <Icon class="Common" skillId="111136" iconName="Icon_Skills.Skeleton_Horse_Tex" toolTip="망자의 해골 군마 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="111137" iconName="Icon_Skills.GreenGiant_Tex" toolTip="쿠카 Original 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="111138" iconName="Icon_Skills.RedGiant_Tex" toolTip="챠카 Original 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="111141" iconName="Icon_Skills.Unicon_Tex" toolTip="별빛 유니콘 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="111142" iconName="Icon_Skills.Argonite_Horse_Tex" toolTip="아르곤 전투 군마 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="111147" iconName="Icon_Skills.Vehicle_Horse_Zebra_Tex" toolTip="얼룩마 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="111149" iconName="Icon_Skills.Vehicle_Horse_White_Tex" toolTip="백색 전투마 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="111150" iconName="Icon_Skills.Trans_SnowLeopard_Tex" toolTip="설표범 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="111151" iconName="Icon_Skills.SteelVehicle_Tex" toolTip="마도기계 BTS-001 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="111152" iconName="Icon_Skills.SpiderVehicle_Tex" toolTip="카마로스 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="111153" iconName="Icon_Skills.GreenGiant_Tex" toolTip="수다쟁이 쿠카 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="111154" iconName="Icon_Skills.RedGiant_Tex" toolTip="변덕쟁이 챠카 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="111155" iconName="Icon_Skills.Vehicle_Ostrich_Tex" toolTip="날쌘돌이 쿠쿠 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="111156" iconName="Icon_Skills.Vehicle_Ostrich_B_Tex" toolTip="불꽃날개 타키 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="111157" iconName="Icon_Skills.Vehicle_Ostrich_Tex" toolTip="바람돌이 쿠쿠 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="111158" iconName="Icon_Skills.Vehicle_Ostrich_B_Tex" toolTip="지옥불 날개 타키 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="211141" iconName="Icon_Skills.Unicon_Tex" toolTip="별빛 유니콘 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="211150" iconName="Icon_Skills.Trans_SnowLeopard_Tex" toolTip="설표범 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1111363" iconName="Icon_Skills.Skeleton_Horse_Tex" toolTip="망자의 해골 군마 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1111512" iconName="Icon_Skills.Trans_Lion_Tex" toolTip="광사자 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1111514" iconName="Icon_Skills.Vehicle_Pig_Tex" toolTip="아기돼지 꼬미 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1111515" iconName="Icon_Skills.Vehicle_Pig_A_Tex" toolTip="얼룩돼지 똘이 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1111516" iconName="Icon_Skills.Vehicle_Pig_B_Tex" toolTip="검정돼지 까미 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1111517" iconName="Icon_Skills.Vehicle_Pig_C_Tex" toolTip="꽃돼지 도나 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1111518" iconName="Icon_Skills.Vehicle_Ostrich_A_Tex" toolTip="털모자 더키 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1111519" iconName="Icon_Skills.Vehicle_Ostrich_A01_Tex" toolTip="야구모자 더키 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1111525" iconName="Icon_Skills.Vehicle_Ostrich_C01_Tex" toolTip="화이트 펑키 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1111526" iconName="Icon_Skills.Vehicle_Ostrich_C02_Tex" toolTip="블랙 펑키 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1111527" iconName="Icon_Skills.Vehicle_Horse_Black_Tex" toolTip="흑마 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1111528" iconName="Icon_Skills.Vehicle_Horse_Undead_Tex" toolTip="죽음의 군마 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1111531" iconName="Icon_Skills.Vehicle_Pig_D" toolTip="폭주돼지 뭉치 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1111532" iconName="Icon_Skills.Trans_Lion_Wolf_Tex" toolTip="그레이 샤프팽 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1111533" iconName="Icon_Skills.Trans_Tiger_A_Tex" toolTip="호랑이A 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1111534" iconName="Icon_Skills.Trans_Tiger_B_Tex" toolTip="호랑이B 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1111535" iconName="Icon_Skills.Trans_Tiger_C_Tex" toolTip="호랑이C 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1111536" iconName="Icon_Skills.Trans_Tiger_D_Tex" toolTip="호랑이D 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1111537" iconName="Icon_Skills.Trans_Lion_Wolf_Gold_Tex" toolTip="골드글로스 샤프팽 소환 " gender="Common" race="Common" />
+  <Icon class="Common" skillId="1111538" iconName="Icon_Skills.Trans_Lion_Wolf_Gold_Tex" toolTip="골드 샤프팽 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1111539" iconName="Icon_Skills.Trans_Lion_Wolf_Black_Tex" toolTip="다크퍼플 샤프팽 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1111540" iconName="Icon_Skills.Trans_Lion_Wolf_Metal_Tex" toolTip="실버 샤프팽 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1111552" iconName="Icon_Skills.Vehicle_Ostrich_A_Tex" toolTip="털모자 더키 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1111553" iconName="Icon_Skills.Vehicle_Ostrich_A01_Tex" toolTip="야구모자 더키 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1111554" iconName="Icon_Skills.Vehicle_Ostrich_C01_Tex" toolTip="화이트 펑키 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1111555" iconName="Icon_Skills.Vehicle_Ostrich_C02_Tex" toolTip="블랙 펑키 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1111911" iconName="Icon_Skills.Vehicle_Horse_Black_Tex" toolTip="훈련된 흑마 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1111921" iconName="Icon_Skills.Vehicle_Horse_Glod_Tex" toolTip="벨릭의 축제 군마 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1111961" iconName="Icon_Skills.Vehicle_Horse_Undead_Tex" toolTip="훈련된 죽음의 군마 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1112001" iconName="Icon_Skills.WorldcupGiant_BRA_Tex" toolTip="남국 호랑이 Original 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1112002" iconName="Icon_Skills.WorldcupGiant_BRA_W_Tex" toolTip="남국 백호 Original 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1112003" iconName="Icon_Skills.WorldcupGiant_BRA_us_Tex" toolTip="남국 호랑이 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1112004" iconName="Icon_Skills.WorldcupGiant_BRA_W_us_Tex" toolTip="남국 백호 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1701270" iconName="Icon_Skills.Ookami_Tex" toolTip="오오카미 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1701271" iconName="Icon_Skills.Ookami_Red_Tex" toolTip="붉은 오오카미 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1701272" iconName="Icon_Skills.Vehicle_PoliceCar_Tex" toolTip="경찰차 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1701273" iconName="Icon_Skills.Vehicle_Kirin_Tex" toolTip="기린 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1701274" iconName="Icon_Skills.Vehicle_Kumas_A_Tex" toolTip="스노우볼 쿠마스 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1701275" iconName="Icon_Skills.Vehicle_Kumas_B_Tex" toolTip="브래스 쿠마스 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1701276" iconName="Icon_Skills.Vehicle_Snowman_Tex" toolTip="스노우볼 거인 눈사람 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1701277" iconName="Icon_Skills.Vehicle_Kumas_A_Tex" toolTip="산타 쿠마스 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1701278" iconName="Icon_Skills.Vehicle_Kirin_Gold_Tex" toolTip="기린 (황금) 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1701279" iconName="Icon_Skills.Vehicle_Snowman_Tex" toolTip="루돌프 거인 눈사람 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1701280" iconName="Icon_Skills.Vehicle_Kumas_A_Tex" toolTip="돌아온 쿠마스A 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1701281" iconName="Icon_Skills.Vehicle_Kumas_B_US_Tex" toolTip="돌아온 쿠마스B 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1701282" iconName="Icon_Skills.Vehicle_Snowman_Tex" toolTip="돌아온 눈사람A 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1701283" iconName="Icon_Skills.Vehicle_Kumas_A_US_Tex" toolTip="돌아온 쿠마스C 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1701284" iconName="Icon_Skills.Vehicle_Snowman_US_Tex" toolTip="돌아온 눈사람B 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1701285" iconName="Icon_Skills.Vehicle_Pig_D_Gold_Tex" toolTip="황금 돼지 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1701292" iconName="Icon_Skills.GreenGiant_Tex" toolTip="수다쟁이 쿠카 소환(7일)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1701293" iconName="Icon_Skills.Trans_Lion_Wolf_Tex" toolTip="늑대 소환(7일)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1701294" iconName="Icon_Skills.Vehicle_Pig_C_Tex" toolTip="꽃돼지 도나 소환(7일)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="1701295" iconName="Icon_Skills.Vehicle_Ostrich_Tex" toolTip="날쌘돌이 쿠쿠 소환(7일)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="12300000" iconName="Icon_Items.PetSkillbook_Tex" toolTip="돈줍는 황금도니 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000000" iconName="Icon_Skills.Vehicle_Bear_A_Tex" toolTip="백곰 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000001" iconName="Icon_Skills.Vehicle_Bear_B_Tex" toolTip="불곰 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000002" iconName="Icon_Skills.Vehicle_Bear_C_Tex" toolTip="판다 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000003" iconName="Icon_Skills.Vehicle_SportCar_Tex" toolTip="스포츠카 (노랑) 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000004" iconName="Icon_Skills.Vehicle_SportCar_A_Tex" toolTip="스포츠카 (검정) 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000005" iconName="Icon_Skills.Vehicle_SportCar_B_Tex" toolTip="스포츠카 (빨강) 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000009" iconName="Icon_Skills.Vehicle_Kirin_Green_Tex" toolTip="청록의 기린 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000010" iconName="Icon_Skills.Vehicle_Beetle_A_Tex" toolTip="순한 땡그리(레어)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000011" iconName="Icon_Skills.Vehicle_Beetle_B_Tex" toolTip="화난 앵그리(레어)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000012" iconName="Icon_Skills.Vehicle_Beetle_C_Tex" toolTip="졸린 삐질이(레어)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000013" iconName="Icon_Skills.Vehicle_Beetle_A_Tex" toolTip="순한 땡그리" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000014" iconName="Icon_Skills.Vehicle_Beetle_B_Tex" toolTip="화난 앵그리" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000015" iconName="Icon_Skills.Vehicle_Beetle_C_Tex" toolTip="졸린 삐질이" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000016" iconName="Icon_Skills.Ookami_Red_Tex" toolTip="붉은 갈기의 늑대(10일) 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000017" iconName="Icon_Skills.Trans_Tiger_C_Tex" toolTip="호랑이C(7일) 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000018" iconName="Icon_Skills.Ookami_Red_Tex" toolTip="붉은 오오카미(7일) 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000019" iconName="Icon_Skills.Vehicle_Ostrich_B_Tex" toolTip="불꽃날개 타키(7일) 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000020" iconName="Icon_Skills.Vehicle_Pig_A_Tex" toolTip="얼룩돼지 똘이(7일) 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000021" iconName="Icon_Skills.Vehicle_Kirin_Black_Tex" toolTip="기린 뿔(7일) 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000022" iconName="Icon_Skills.Ookami_Black_Tex" toolTip="블랙 오오카미 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000023" iconName="Icon_Skills.Ookami_Green_Tex" toolTip="그린 오오카미 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000024" iconName="Icon_Skills.Unicon_Pink_Tex" toolTip="별빛 유니콘(핑크) 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000025" iconName="Icon_Skills.Vehicle_Cat_A_Tex" toolTip="스킬교본: 초밥고양이 검정(레어)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000026" iconName="Icon_Skills.Vehicle_Cat_B_Tex" toolTip="스킬교본: 초밥고양이 노랑(레어)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000027" iconName="Icon_Skills.Vehicle_Cat_C_Tex" toolTip="스킬교본: 초밥고양이 회색(레어)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000028" iconName="Icon_Skills.Vehicle_Cat_A_Tex" toolTip="스킬교본: 초밥고양이 검정" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000029" iconName="Icon_Skills.Vehicle_Cat_B_Tex" toolTip="스킬교본: 초밥고양이 노랑" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000030" iconName="Icon_Skills.Vehicle_Cat_C_Tex" toolTip="스킬교본: 초밥고양이 회색" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000031" iconName="Icon_Skills.Vehicle_GhostHorse_A_Tex" toolTip="스킬교본: 구리빛 철갑 유령마" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000032" iconName="Icon_Skills.Vehicle_GhostHorse_B_Tex" toolTip="스킬교본: 황금빛 철갑 유령마" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000033" iconName="Icon_Skills.Vehicle_GhostHorse_C_Tex" toolTip="스킬교본: 은빛 철갑 유령마" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000034" iconName="Icon_Skills.Vehicle_GhostHorse_D_Tex" toolTip="스킬교본: 붉은빛 철갑 유령마" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000035" iconName="Icon_Skills.Vehicle_GhostHorse_A_R_Tex" toolTip="스킬교본: 반투명 철갑 유령마" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000036" iconName="Icon_Skills.Vehicle_Kirin_Black_Tex" toolTip="기린 뿔 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000037" iconName="Icon_Skills.Vehicle_Lion_White_Tex" toolTip="해방된 백사자 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000038" iconName="Icon_Skills.Vehicle_Lion_Black_01_Tex" toolTip="해방된 흑사자 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000039" iconName="Icon_Skills.Vehicle_Lion_Black_Tex" toolTip="해방된 바하르의 사자 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000040" iconName="Icon_Skills.Vehicle_Lion_Bahar_Brown_Tex" toolTip="해방된 바하르의 사자[브라운] 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000041" iconName="Icon_Skills.Vehicle_Lion_Bahar_Gold_Tex" toolTip="해방된 바하르의 사자[골드] 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000042" iconName="Icon_Skills.Vehicle_Lion_Bahar_Silver_Tex" toolTip="해방된 바하르의 사자[실버] 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000043" iconName="Icon_Skills.Vehicle_Pig_Kitty_Tex" toolTip="키티 돼지 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000044" iconName="Icon_Skills.Vehicle_Pegasus_Black_Tex" toolTip="칠흑의 페가수스 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000045" iconName="Icon_Skills.Vehicle_Pegasus_Tex" toolTip="해방된 페가수스 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000046" iconName="Icon_Skills.Vehicle_Pig_Tex" toolTip="흰 날개의 아기돼지 꼬미 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000047" iconName="Icon_Skills.Vehicle_Pig_A_Tex" toolTip="흰 날개의 얼룩돼지 똘이 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000048" iconName="Icon_Skills.Vehicle_Pig_B_Tex" toolTip="흰 날개의 검정돼지 까미 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000049" iconName="Icon_Skills.Vehicle_Pig_C_Tex" toolTip="흰 날개의 꽃돼지 도나 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000050" iconName="Icon_Skills.Vehicle_Pig_D" toolTip="흰 날개의 폭주돼지 뭉치 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000051" iconName="Icon_Skills.Vehicle_Pig_Tex" toolTip="무지개 날개의 아기돼지 꼬미 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000052" iconName="Icon_Skills.Vehicle_Pig_A_Tex" toolTip="무지개 날개의 얼룩돼지 똘이 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000053" iconName="Icon_Skills.Vehicle_Pig_B_Tex" toolTip="무지개 날개의 검정돼지 까미 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000054" iconName="Icon_Skills.Vehicle_Pig_C_Tex" toolTip="무지개 날개의 꽃돼지 도나 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000055" iconName="Icon_Skills.Vehicle_Pig_D" toolTip="무지개 날개의 폭주돼지 뭉치 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000056" iconName="Icon_Skills.Vehicle_Llama_A_Tex" toolTip="귀여운 종목걸이 라마(흰색) 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000057" iconName="Icon_Skills.Vehicle_Llama_B_Tex" toolTip="멋쟁이 턱시도 넥타이 라마(흰색) 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000058" iconName="Icon_Skills.Vehicle_Llama_C_Tex" toolTip="귀여운 종목걸이 라마(갈색) 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13000059" iconName="Icon_Skills.Vehicle_Llama_D_Tex" toolTip="멋쟁이 턱시도 넥타이 라마(갈색) 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13300009" iconName="Icon_Skills.Vehicle_NX_Kart_A_01_Tex" toolTip="범버카[블루] 소환(기간제)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13300010" iconName="Icon_Skills.Vehicle_NX_Kart_A_02_Tex" toolTip="범버카[레드] 소환(기간제)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13300011" iconName="Icon_Skills.Vehicle_NX_Kart_A_03_Tex" toolTip="범버카[그린]  소환(기간제)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13300012" iconName="Icon_Skills.Vehicle_NX_Kart_A_04_Tex" toolTip="범버카[옐로] 소환(기간제)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13300013" iconName="Icon_Skills.Vehicle_NX_Kart_B_01_Tex" toolTip="F-1[블루] 소환(기간제)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13300014" iconName="Icon_Skills.Vehicle_NX_Kart_B_02_Tex" toolTip="F-1[레드] 소환(기간제)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13300015" iconName="Icon_Skills.Vehicle_NX_Kart_B_03_Tex" toolTip="F-1[그린] 소환(기간제)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13300016" iconName="Icon_Skills.Vehicle_NX_Kart_B_04_Tex" toolTip="F-1[옐로] 소환(기간제)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13300017" iconName="Icon_Skills.Vehicle_NX_Kart_A_01_Tex" toolTip="범버카[블루] 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13300018" iconName="Icon_Skills.Vehicle_NX_Kart_A_02_Tex" toolTip="범버카[레드] 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13300019" iconName="Icon_Skills.Vehicle_NX_Kart_A_03_Tex" toolTip="범버카[그린]  소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13300020" iconName="Icon_Skills.Vehicle_NX_Kart_A_04_Tex" toolTip="범버카[옐로] 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13300021" iconName="Icon_Skills.Vehicle_NX_Kart_B_01_Tex" toolTip="F-1[블루] 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13300022" iconName="Icon_Skills.Vehicle_NX_Kart_B_02_Tex" toolTip="F-1[레드] 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13300023" iconName="Icon_Skills.Vehicle_NX_Kart_B_03_Tex" toolTip="F-1[그린] 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13300024" iconName="Icon_Skills.Vehicle_NX_Kart_B_04_Tex" toolTip="F-1[옐로] 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13301001" iconName="Icon_Skills.Vehicle_Pegasus_Tex" toolTip="해방된 페가수스 소환 (30일)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13301002" iconName="Icon_Skills.Vehicle_Pegasus_Tex" toolTip="해방된 페가수스 소환 (1일)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13301003" iconName="Icon_Skills.Vehicle_Kirin_Green_Tex" toolTip="청록의 기린 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13301004" iconName="Icon_Skills.Vehicle_Kumas_B_Tex" toolTip="브래스 쿠마스 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13600068" iconName="Icon_Skills.HorseInferno_Tex" toolTip="지옥불 군마 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13600069" iconName="Icon_Skills.Vehicle_Horse_Zebra_Tex" toolTip="훈련된 얼룩마 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13600070" iconName="Icon_Items.PetSkillbook_Tex" toolTip="수집꾼 쿠링 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13600109" iconName="Icon_Skills.Pet_TinyDragon_Gold_Tex" toolTip="타이니 드래곤 골드 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13600110" iconName="Icon_Skills.Pet_TinyDragon_Black_Tex" toolTip="타이니 드래곤 블랙 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13600111" iconName="Icon_Skills.Pet_TinyDragon_Green_Tex" toolTip="타이니 드래곤 그린 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13600112" iconName="Icon_Skills.Pet_TinyDragon_Red_Tex" toolTip="타이니 드래곤 레드 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13600113" iconName="Icon_Skills.Pet_TinyDragon_Silver_Tex" toolTip="타이니 드래곤 실버 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="13600177" iconName="Icon_Skills.Pet_Pig_Kitty_Tex" toolTip="키티 돼지 펫 " gender="Common" race="Common" />
+  <Icon class="Common" skillId="13600179" iconName="Icon_Items.PetSkillbook_Tex" toolTip="벚꽃 길리두 펫 " gender="Common" race="Common" />
+  <Icon class="Common" skillId="61900007" iconName="Icon_Items.SnowmanGreen_Scroll_Tex" toolTip="초록 눈사람 요정 변신" gender="Common" race="Common" />
+  <Icon class="Common" skillId="61900008" iconName="Icon_Items.SnowmanYellow_Scroll_Tex" toolTip="노랑 눈사람 요정 변신" gender="Common" race="Common" />
+  <Icon class="Common" skillId="61900009" iconName="Icon_Items.SnowmanBlue_Scroll_Tex" toolTip="파랑 눈사람 요정 변신" gender="Common" race="Common" />
+  <Icon class="Common" skillId="61900010" iconName="Icon_Items.Snowman_Scroll_Tex" toolTip="빨강 눈사람 요정 변신" gender="Common" race="Common" />
+  <Icon class="Common" skillId="61903023" iconName="Icon_Items.PetSkillbook_Tex" toolTip="화난 식충이 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="61903024" iconName="Icon_Items.PetSkillbook_Tex" toolTip="발랄한 껑충이 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="61903026" iconName="Icon_Items.PetSkillbook_Tex" toolTip="창고지기 포논 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="61905002" iconName="Icon_Items.PetSkillbook_Tex" toolTip="싸리싸리킹 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="61905003" iconName="Icon_Items.PetSkillbook_Tex" toolTip="다혈질 타미 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="61905004" iconName="Icon_Items.PetSkillbook_Tex" toolTip="무쇠머리 범피 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="61905005" iconName="Icon_Items.PetSkillbook_Tex" toolTip="창고지기 포포 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="61905006" iconName="Icon_Items.PetSkillbook_Tex" toolTip="할로윈 꼬마 유령 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="61905007" iconName="Icon_Items.PetSkillbook_Tex" toolTip="할로윈 꼬마 유령 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="61905012" iconName="Icon_Items.PetSkillbook_Tex" toolTip="재간둥이 루이 소환" gender="Common" race="Common" />
+</SkillIconData>

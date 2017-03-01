@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<hotkeys>
+  <topmost>
+    <ctrl>False</ctrl>
+    <shift>False</shift>
+    <window>False</window>
+    <alt>False</alt>
+    <key>None</key>
+  </topmost>
+  <paste>
+    <ctrl>False</ctrl>
+    <shift>False</shift>
+    <window>False</window>
+    <key>Home</key>
+  </paste>
+  <reset>
+    <ctrl>False</ctrl>
+    <shift>False</shift>
+    <window>False</window>
+    <alt>False</alt>
+    <key>Delete</key>
+  </reset>
+  <reset_current>
+    <ctrl>True</ctrl>
+    <shift>False</shift>
+    <window>False</window>
+    <alt>False</alt>
+    <key>Delete</key>
+  </reset_current>
+  <excel_save>
+    <ctrl>True</ctrl>
+    <shift>False</shift>
+    <window>False</window>
+    <alt>False</alt>
+    <key>Next</key>
+  </excel_save>
+  <click_throu>
+    <ctrl>True</ctrl>
+    <shift>False</shift>
+    <window>False</window>
+    <alt>False</alt>
+    <key>PageUp</key>
+  </click_throu>
+  <copys>
+    <copy>
+      <ctrl>True</ctrl>
+      <shift>False</shift>
+      <window>False</window>
+      <key>End</key>
+      <string>
+        <header>Damage Taken @ {encounter} {timer}:\</header>
+        <content>[{class}] {name}: Hits: {hits_received} = {damage_received}; Death {deaths} = {death_duration} Aggro {aggro} = {aggro_duration}\</content>
+        <low_dps_content>[{class}] {name}: Hits: {hits_received} = {damage_received}; Death {deaths} = {death_duration} Aggro {aggro} = {aggro_duration}\</low_dps_content>
+        <low_dps_threshold>4</low_dps_threshold>
+        <footer></footer>
+        <order_by>hits_received</order_by>
+        <order>descending</order>
+      </string>
+    </copy>
+    <copy>
+      <ctrl>False</ctrl>
+      <shift>True</shift>
+      <window>False</window>
+      <key>End</key>
+      <string>
+        <header>Damage Done @ {encounter} {timer} {partyDps} {enrage}:\</header>
+        <content>[{class}] {name}: {damage_percentage} ({damage_dealt}) | Crit: {crit_rate} | {global_dps}\</content>
+        <low_dps_content>[{class}] {name}: {debuff_list}\</low_dps_content>
+        <low_dps_threshold>4</low_dps_threshold>
+        <footer></footer>
+        <order_by>damage_percentage</order_by>
+        <order>descending</order>
+      </string>
+    </copy>
+  </copys>
+</hotkeys>
