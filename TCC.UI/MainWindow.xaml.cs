@@ -44,13 +44,16 @@ namespace TCC.UI
             Instance = this;
             
             SkillsDatabase.Populate();
+            BroochesDatabase.SetBroochesIcons();
 
             NormalSkillsModel = new SkillsModel();
             LongSkillsModel = new SkillsModel();
 
             TeraSniffer.Instance.MessageReceived += PacketParser.MessageReceived;
             TeraSniffer.Instance.Enabled = true;
-       
+            TeraSniffer.Instance.NewConnection += (srv) => SkillManager.Clear();
+            TeraSniffer.Instance.EndConnection += () => SkillManager.Clear();
+
             InitializeComponent();
             NormalSkillsPanel.ItemsSource = NormalSkillsModel.SkillIndicators;
             NormalSkillsPanel.DataContext = NormalSkillsModel;
@@ -78,7 +81,17 @@ namespace TCC.UI
         {
             Instance.Dispatcher.Invoke(() =>
             {
-                Instance.LongSkillsModel.SkillIndicators.Add(new SkillIndicator(SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass), (int)sk.Cooldown));
+                switch (sk.Type)
+                {
+                    case CooldownType.Skill:
+                        Instance.LongSkillsModel.SkillIndicators.Add(new SkillIndicator(SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass), (int)sk.Cooldown));
+                        break;
+                    case CooldownType.Item:
+                        Instance.LongSkillsModel.SkillIndicators.Add(new SkillIndicator(BroochesDatabase.GetBrooch(sk.Id), (int)sk.Cooldown));
+                        break;
+                    default:
+                        break;
+                }
             });
         }
 
@@ -102,7 +115,17 @@ namespace TCC.UI
             {
                 try
                 {
-                    Instance.LongSkillsModel.SkillIndicators.Remove(Instance.LongSkillsModel.SkillIndicators.Where(x => x.Skill.Id == sk.Id).Single());
+                    switch (sk.Type)
+                    {
+                        case CooldownType.Skill:
+                            Instance.LongSkillsModel.SkillIndicators.Remove(Instance.LongSkillsModel.SkillIndicators.Where(x => x.Skill.Id == sk.Id).Single());
+                            break;
+                        case CooldownType.Item:
+                            Instance.LongSkillsModel.SkillIndicators.Remove(Instance.LongSkillsModel.SkillIndicators.Where(x => x.Skill.Id == sk.Id).Single());
+                            break;
+                        default:
+                            break;
+                    }
                 }
                 catch (Exception)
                 {
@@ -119,7 +142,7 @@ namespace TCC.UI
         private void TB_ConnectionStatus_MouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             System.Console.WriteLine("Adding skill");
-            SkillManager.NormalSkillsQueue.Add(new SkillCooldown(100700, 2565));
+            SkillManager.NormalSkillsQueue.Add(new SkillCooldown(100700, 2565, CooldownType.Skill));
         }
 
         private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

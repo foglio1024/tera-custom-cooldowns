@@ -58,14 +58,15 @@ namespace TCC.UI
                     break;
                 case ("S_START_COOLTIME_SKILL"):
                     var m = new S_START_COOLTIME_SKILL(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer));
-                    SkillManager.AddSkill(new SkillCooldown(m.SkillId, m.Cooldown));
+                    SkillManager.AddSkill(new SkillCooldown(m.SkillId, m.Cooldown, CooldownType.Skill));
                     break;
                 case ("S_START_COOLTIME_ITEM"):
-                    // parse item id and cooldown time
+                    var i = new S_START_COOLTIME_ITEM(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer));
+                    SkillManager.AddSkill(new SkillCooldown(i.ItemId, i.Cooldown, CooldownType.Item));
                     break;
                 case ("S_DECREASE_COOLTIME_SKILL"):
                     var n = new S_DECREASE_COOLTIME_SKILL(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer));
-                    SkillManager.ChangeSkillCooldown(new SkillCooldown(n.SkillId, n.Cooldown));
+                    SkillManager.ChangeSkillCooldown(new SkillCooldown(n.SkillId, n.Cooldown, CooldownType.Skill));
                     break;
                 case ("S_RETURN_TO_LOBBY"):
                     SkillManager.Clear();

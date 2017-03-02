@@ -20,6 +20,7 @@ namespace TCC.UI
         Engineer = 9,
         Fighter = 10,
         Assassin = 11,
-        Moon_Dancer = 12
+        Moon_Dancer = 12,
+        Common = 13
     }
 }

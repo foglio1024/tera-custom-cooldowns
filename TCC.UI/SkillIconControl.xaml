@@ -7,13 +7,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Loaded="UserControl_Loaded">
     <Grid Width="Auto" Height="Auto" Margin="2">
-        <Ellipse Width="50" Height="50" x:Name="icon" Fill="{Binding IconBrush}" Stroke="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <Ellipse Width="50" Height="50" x:Name="icon" Fill="{Binding IconBrush}" Stroke="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <local:Arc x:Name="arc" Width="53" Height="53" StrokeThickness="4" Stroke="White" EndAngle="150.9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
             <!--<local:Arc.Effect>
                 <DropShadowEffect ShadowDepth="0" BlurRadius="3"/>
             </local:Arc.Effect>-->
         </local:Arc>
-        <Grid Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-48,0,0">
+        <Grid Width="22" Height="22" x:Name="g" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-48,0,0">
             
             <Ellipse x:Name="fill" Fill="White"  Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
             <Viewbox StretchDirection="DownOnly" Stretch="Uniform">

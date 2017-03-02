@@ -74,10 +74,12 @@
     <Compile Include="CharListProcessor.cs" />
     <Compile Include="CharLoginProcessor.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="BroochesDatabase.cs" />
     <Compile Include="ListParser.cs" />
     <Compile Include="Messages\S_DECREASE_COOLTIME_SKILL.cs" />
     <Compile Include="Messages\S_GET_USER_LIST.cs" />
     <Compile Include="Messages\S_LOGIN.cs" />
+    <Compile Include="Messages\S_START_COOLTIME_ITEM.cs" />
     <Compile Include="Skill.cs" />
     <Compile Include="SkillIconControl.xaml.cs">
       <DependentUpon>SkillIconControl.xaml</DependentUpon>
@@ -313,6 +315,9 @@
     <Content Include="resources\icons\BattleField_High_ranking_Tex.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="resources\icons\Beautiful_Wings_brooch_Cachebar_Tex.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="resources\icons\Behindmenace_Tex.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -335,6 +340,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\icons\Botanist_Tex.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\icons\brooch_vergos_Tex.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\icons\btpet_attack_Tex.png">
@@ -811,6 +819,9 @@
     <Content Include="resources\icons\extract_icon_04_Tex.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="resources\icons\F2P_VIPCustomer_Tex.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="resources\icons\fastwalk_Tex.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -875,6 +886,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\icons\GodBreath_Tex.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\icons\Goddess_brooch_Tex.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\icons\GreatFortitude_Tex.png">
@@ -1429,6 +1443,9 @@
     <Content Include="resources\icons\Paralysistrap_Tex.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="resources\icons\parts_magicweaponC8_Tex.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="resources\icons\PetOrderAttack_Tex.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1814,6 +1831,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\icons\Stingerblade_Tex.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\icons\stoneoflife_Tex.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\icons\Stoneshape_Tex.png">

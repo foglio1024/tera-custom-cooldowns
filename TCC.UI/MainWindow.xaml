@@ -5,17 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCC.UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="Auto" Width="Auto" SizeToContent="WidthAndHeight" Closing="Window_Closing" Topmost="True" AllowsTransparency="True" ShowInTaskbar="False" WindowStyle="None" Background="#20000000" MouseLeftButtonDown="Window_MouseLeftButtonDown" MouseRightButtonDown="TB_ConnectionStatus_MouseRightButtonDown">
+        Title="Tera Custom Cooldowns"
+        Height="Auto" 
+        Width="1024" 
+        SizeToContent="Height" 
+        Closing="Window_Closing" 
+        Topmost="True" 
+        AllowsTransparency="True" 
+        ShowInTaskbar="False" 
+        WindowStyle="None" 
+        Background="#00000000" 
+        MouseLeftButtonDown="Window_MouseLeftButtonDown" 
+        MouseRightButtonDown="TB_ConnectionStatus_MouseRightButtonDown">
     <Window.Resources>
         <DataTemplate x:Key="SkillDataTemplate">
             <local:SkillIconControl IconBrush="{Binding Skill.IconBrush}" Cooldown="{Binding Cooldown}" Id="{Binding Skill.Id}" ></local:SkillIconControl>
         </DataTemplate>
     </Window.Resources>
-    <Grid>
+    <Grid Width="Auto">
         <Grid.RowDefinitions>
             <RowDefinition Height="72"/>
             <RowDefinition Height="72"/>
         </Grid.RowDefinitions>
+        <Ellipse Fill="Black" Opacity=".2" Width="50" Height="50" HorizontalAlignment="Left" Margin="5"></Ellipse>
+        <!--<Ellipse Fill="Black" Opacity=".2" Width="50" Height="50" Grid.Row="1" HorizontalAlignment="Left" Margin="5"></Ellipse>-->
         <ItemsControl x:Name="NormalSkillsPanel" Grid.Row="0" ItemTemplate="{StaticResource SkillDataTemplate}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -29,6 +42,8 @@
                     <StackPanel Orientation="Horizontal"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
+
         </ItemsControl>
+        
     </Grid>
 </Window>

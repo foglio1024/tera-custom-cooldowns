@@ -18,6 +18,7 @@ namespace TCC.UI
 
         public static SkillQueue NormalSkillsQueue = new SkillQueue();
         public static SkillQueue LongSkillsQueue = new SkillQueue();
+
         public static SkillListener NormalSkillsQueueListener = new SkillListener(NormalSkillsQueue);
         public static SkillListener LongSkillsQueueListener = new SkillListener(LongSkillsQueue);
         public static string LastSkillName;
@@ -26,29 +27,40 @@ namespace TCC.UI
 
         public static void AddSkill(SkillCooldown sk)
         {
-            string skillName = SkillsDatabase.SkillIdToName(sk.Id, PacketParser.CurrentClass);
-            if (sk.Cooldown == 0)
+            switch (sk.Type)
             {
-                ResetSkill(sk.Id);
-            }
-            else if (
-                    skillName != "Unknown" &&
-                    skillName != LastSkillName &&
-                    !skillName.Contains("Summon:") &&
-                    !skillName.Contains("Flight:") &&
-                    !skillName.Contains("greeting"))
-            {
-                if (sk.Cooldown >= LongSkillTreshold)
-                {
-                    LongSkillsQueue.Add(new SkillCooldown(sk.Id, sk.Cooldown));
-                    LastSkillName = skillName;
-                }
-                else
-                {
-                    NormalSkillsQueue.Add(new SkillCooldown(sk.Id, sk.Cooldown));
-                    LastSkillName = skillName;
-                }
+                case CooldownType.Skill:
+                    string skillName = SkillsDatabase.SkillIdToName(sk.Id, PacketParser.CurrentClass);
+                    if (sk.Cooldown == 0)
+                    {
+                        ResetSkill(sk.Id);
+                    }
+                    else if (
+                            skillName != "Unknown" &&
+                            skillName != LastSkillName &&
+                            !skillName.Contains("Summon:") &&
+                            !skillName.Contains("Flight:") &&
+                            !skillName.Contains("greeting") ||
+                            skillName == "Summon: Party")
+                    {
+                        if (sk.Cooldown >= LongSkillTreshold)
+                        {
+                            LongSkillsQueue.Add(sk);
+                            LastSkillName = skillName;
+                        }
+                        else
+                        {
+                            NormalSkillsQueue.Add(sk);
+                            LastSkillName = skillName;
+                        }
 
+                    }
+                    break;
+                case CooldownType.Item:
+                    LongSkillsQueue.Add(sk);
+                    break;
+                default:
+                    break;
             }
 
         }
@@ -58,29 +70,58 @@ namespace TCC.UI
             {
                 LongSkillsQueue.Where(x => x.Id == id).Single().Timer.Stop();
                 LongSkillsQueue.Remove(LongSkillsQueue.Where(x => x.Id == id).Single());
-                MainWindow.RemoveNormalSkill(new SkillCooldown(id, 0));
+                MainWindow.RemoveLongSkill(new SkillCooldown(id, 0, CooldownType.Skill));
                 LastSkillName = string.Empty;
                 Console.WriteLine(id + " reset.");
+            }
+            else if (NormalSkillsQueue.Where(x => x.Id == id).Count() > 0)
+            {
+                NormalSkillsQueue.Where(x => x.Id == id).Single().Timer.Stop();
+                NormalSkillsQueue.Remove(NormalSkillsQueue.Where(x => x.Id == id).Single());
+                MainWindow.RemoveNormalSkill(new SkillCooldown(id, 0, CooldownType.Skill));
+                LastSkillName = string.Empty;
+                Console.WriteLine(id + " reset.");
+
             }
         }
         public static void ChangeSkillCooldown(SkillCooldown sk)
         {
-            if (LongSkillsQueue.Where(X => X.Id == sk.Id).Count() > 0)
+            if (sk.Cooldown > SkillManager.LongSkillTreshold)
             {
-                if (sk.Cooldown == 0)
+                if (LongSkillsQueue.Where(X => X.Id == sk.Id).Count() > 0)
                 {
-                    ResetSkill(sk.Id);
-                }
-                else
-                {
-                    LongSkillsQueue.Where(x => x.Id == sk.Id).Single().Timer.Interval = sk.Cooldown;
-                    
-                    Changed?.Invoke(null, null, sk);
+                    if (sk.Cooldown == 0)
+                    {
+                        ResetSkill(sk.Id);
+                    }
+                    else
+                    {
+                        LongSkillsQueue.Where(x => x.Id == sk.Id).Single().Timer.Interval = sk.Cooldown;
+
+                        Changed?.Invoke(null, null, sk);
+                    }
                 }
             }
+            else
+            {
+                if (NormalSkillsQueue.Where(X => X.Id == sk.Id).Count() > 0)
+                {
+                    if (sk.Cooldown == 0)
+                    {
+                        ResetSkill(sk.Id);
+                    }
+                    else
+                    {
+                        NormalSkillsQueue.Where(x => x.Id == sk.Id).Single().Timer.Interval = sk.Cooldown;
+
+                        Changed?.Invoke(null, null, sk);
+                    }
+                }
+
+            }
         }
-            
-        
+
+
 
         public static void Clear()
         {

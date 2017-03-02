@@ -706,6 +706,7 @@
   <Icon class="Fighter" skillId="61001" iconName="Icon_Skills.BlowAttack_Tex" toolTip="일격타 X" gender="Common" race="Common" />
   <Icon class="Fighter" skillId="61002" iconName="Icon_Skills.BlowAttack_Tex" toolTip="일격타 X" gender="Common" race="Common" />
   <Icon class="Fighter" skillId="61030" iconName="Icon_Skills.BlowAttack_Tex" toolTip="일격타 X" gender="Common" race="Common" />
+  <Icon class="Assassin" skillId="61030" iconName="Icon_Skills.C12_RapidSlash" toolTip="쾌속 베기 X" gender="Common" race="Common" />
   <Icon class="Fighter" skillId="61031" iconName="Icon_Skills.BlowAttack_Tex" toolTip="일격타 X" gender="Common" race="Common" />
   <Icon class="Engineer" skillId="61100" iconName="Icon_Skills.TimebombShot_Tex" toolTip="시한포탄 발사 XI" gender="Common" race="Common" />
   <Icon class="Fighter" skillId="61100" iconName="Icon_Skills.BlowAttack_Tex" toolTip="일격타 XI" gender="Common" race="Common" />
@@ -1804,6 +1805,7 @@
   <Icon class="Priest" skillId="190410" iconName="Icon_Skills.healinglightlockon_Tex" toolTip="치유의 빛 IV" gender="Common" race="Common" />
   <Icon class="Archer" skillId="190500" iconName="Icon_Skills.venomarrow_Tex" toolTip="맹독의 화살 V" gender="Common" race="Common" />
   <Icon class="Assassin" skillId="190500" iconName="Icon_Skills.C12_EvadeStingShot" toolTip="명치 찌르기 V" gender="Common" race="Common" />
+  <Icon class="Assassin" skillId="190530" iconName="Icon_Skills.C12_EvadeStingShot" toolTip="명치 찌르기 V" gender="Common" race="Common" />
   <Icon class="Engineer" skillId="190500" iconName="Icon_Skills.summonspiritofrange_Tex" toolTip="센트리 타워 설치 V" gender="Common" race="Common" />
   <Icon class="Priest" skillId="190500" iconName="Icon_Skills.healinglightlockon_Tex" toolTip="치유의 빛 V" gender="Common" race="Common" />
   <Icon class="Warrior" skillId="190500" iconName="Icon_Skills.tenaciousattack_Tex" toolTip="근성 연타 V" gender="Common" race="Common" />

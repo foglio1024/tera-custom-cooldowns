@@ -68,13 +68,29 @@ namespace TCC.UI
         {
             Dispatcher.Invoke(() =>
             {
-
                 if (s.Id == this.Id)
                 {
-                    double current = (double)s.Cooldown / (double)Cooldown;
+                    double newAngle = (double)s.Cooldown / (double)Cooldown;
+                    currentCd = (double)s.Cooldown / 1000;
+                    if (s.Cooldown > ending)
+                    {
+                        MainTimer.Interval = s.Cooldown - ending;
 
+                    }
+                    else
+                    {
+                        MainTimer.Interval = 1;
+                    }
+                    if (currentCd > 0)
+                    {
+                        number.Text = String.Format("{0:N0}", (currentCd));
+                    }
+                    else
+                    {
+                        number.Text = 0.ToString();
+                    }
                     arc.BeginAnimation(Arc.EndAngleProperty, null);
-                    var a = new DoubleAnimation(359.9 * current, 0, TimeSpan.FromMilliseconds(s.Cooldown));
+                    var a = new DoubleAnimation(359.9 * newAngle, 0, TimeSpan.FromMilliseconds(s.Cooldown));
                     var b = new DoubleAnimation(.5, 1, TimeSpan.FromMilliseconds(150));
                     arc.BeginAnimation(Arc.EndAngleProperty, a);
                     this.BeginAnimation(OpacityProperty, b);
@@ -83,26 +99,78 @@ namespace TCC.UI
         }
 
         Timer NumberTimer;
+        Timer MainTimer;
+        double currentCd;
+        int ending = 250;
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            var a = new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(Cooldown));
-            //var b = new DoubleAnimation(.4, 0, TimeSpan.FromMilliseconds(Cooldown));
-            arc.BeginAnimation(Arc.EndAngleProperty, a);
-            //fill.BeginAnimation(OpacityProperty, b);
+            currentCd = (double)Cooldown / 1000;
+
             NumberTimer = new Timer(1000);
-            double cd = (double)Cooldown / 1000;
-            number.Text = String.Format("{0:N0}",cd);
+            MainTimer = new Timer(Cooldown - ending);
+
             NumberTimer.Elapsed += (s, o) => {
                 Dispatcher.Invoke(() => {
-                    cd --;
-                        number.Text = String.Format("{0:N0}", cd); 
+                    currentCd --;
+                    number.Text = String.Format("{0:N0}", currentCd); 
+                    if(currentCd < 0)
+                    {
+                        number.Text = "0";
+                        NumberTimer.Stop();
+                    }
                 });
             };
+            MainTimer.Elapsed += (s, o) =>
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    var c = new DoubleAnimation(22, 0, TimeSpan.FromMilliseconds(ending))
+                    {
+                        EasingFunction = new QuadraticEase()
+                        {
+                            EasingMode = EasingMode.EaseInOut
+                        }
+                    };
+                    var w = new DoubleAnimation(0, TimeSpan.FromMilliseconds(ending))
+                    {
+                        EasingFunction = new QuadraticEase()
+                        {
+                            EasingMode = EasingMode.EaseInOut
+                        }
+                    };
+                    var h = new DoubleAnimation(0, TimeSpan.FromMilliseconds(ending))
+                    {
+                        EasingFunction = new QuadraticEase()
+                        {
+                            EasingMode = EasingMode.EaseInOut
+                        }
+                    };
+                    var t = new ThicknessAnimation(new Thickness(0), TimeSpan.FromMilliseconds(ending))
+                    {
+                        EasingFunction = new QuadraticEase()
+                        {
+                            EasingMode = EasingMode.EaseInOut
+                        }
+                    };
+
+                    g.BeginAnimation(WidthProperty, c);
+                    g.BeginAnimation(HeightProperty, c);
+                    g.BeginAnimation(MarginProperty, t);
+                    icon.BeginAnimation(WidthProperty, w);
+                    icon.BeginAnimation(HeightProperty, h);
+                    arc.BeginAnimation(WidthProperty, w);
+                    arc.BeginAnimation(HeightProperty, h);
+                    MainTimer.Stop();
+                });
+            };
+
+            var a = new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(Cooldown));
+            arc.BeginAnimation(Arc.EndAngleProperty, a);
+
+            number.Text = String.Format("{0:N0}", currentCd);
+
             NumberTimer.Enabled = true;
-        }
-        ~SkillIconControl()
-        {
-            NumberTimer.Stop();
+            MainTimer.Enabled = true;
         }
     }
 }
