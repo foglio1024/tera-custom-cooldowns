@@ -2226,6 +2226,7 @@
   <Icon class="Elementalist" skillId="320100" iconName="Icon_Skills.shackleofstone_Tex" toolTip="바위의 속박 I" gender="Common" race="Common" />
   <Icon class="Priest" skillId="320100" iconName="Icon_Skills.restoration_Tex" toolTip="쾌유의 가호 I" gender="Common" race="Common" />
   <Icon class="Warrior" skillId="320100" iconName="Icon_Skills.TwinSwordsDefence_Tex" toolTip="쌍검 방어 I" gender="Common" race="Common" />
+  <Icon class="Sorcerer" skillId="320100" iconName="Icon_Skills.hellfire_Tex" toolTip="운석 낙하 VII" gender="Common" race="Common" />
   <Icon class="Elementalist" skillId="320110" iconName="Icon_Skills.shackleofstone_Tex" toolTip="바위의 속박 I" gender="Common" race="Common" />
   <Icon class="Elementalist" skillId="320200" iconName="Icon_Skills.shackleofstone_Tex" toolTip="바위의 속박 II" gender="Common" race="Common" />
   <Icon class="Priest" skillId="320200" iconName="Icon_Skills.restoration_Tex" toolTip="쾌유의 가호 II" gender="Common" race="Common" />
@@ -2296,13 +2297,18 @@
   <Icon class="Priest" skillId="350410" iconName="Icon_Skills.divinelightning_Tex" toolTip="신성의 번개 IV" gender="Common" race="Common" />
   <Icon class="Elementalist" skillId="360100" iconName="Icon_Skills.petorderfollowme_Tex" toolTip="명령하기 : 따라와" gender="Common" race="Common" />
   <Icon class="Priest" skillId="360100" iconName="Icon_Skills.Adventgoddess_Tex" toolTip="여신강림 I" gender="Common" race="Common" />
+  <Icon class="Warrior" skillId="360100" iconName="Icon_Skills.pointattack_Tex" toolTip="몰아치기 XI" gender="Common" race="Common" />
   <Icon class="Elementalist" skillId="370100" iconName="Icon_Skills.EnergiesofProtection_Tex" toolTip="영기 소환 : 보호 I" gender="Common" race="Common" />
   <Icon class="Priest" skillId="370100" iconName="Icon_Skills.Curewing_Tex" toolTip="치유의 날개 I" gender="Common" race="Common" />
+  <Icon class="Warrior" skillId="370100" iconName="Icon_Skills.dualslash_Tex" toolTip="무쌍난무 : 가르기 VII" gender="Common" race="Common" />
   <Icon class="Priest" skillId="370110" iconName="Icon_Skills.Curewing_Tex" toolTip="치유의 날개 I" gender="Common" race="Common" />
+  <Icon class="Warrior" skillId="370130" iconName="Icon_Skills.dualslash_Tex" toolTip="무쌍난무 : 가르기 VII" gender="Common" race="Common" />
   <Icon class="Elementalist" skillId="370200" iconName="Icon_Skills.EnergiesofProtection_Tex" toolTip="영기 소환 : 보호 II" gender="Common" race="Common" />
   <Icon class="Priest" skillId="370200" iconName="Icon_Skills.Curewing_Tex" toolTip="치유의 날개 II" gender="Common" race="Common" />
   <Icon class="Elementalist" skillId="380100" iconName="Icon_Skills.Energiesofrestriction_Tex" toolTip="영기 소환 : 속박 I" gender="Common" race="Common" />
   <Icon class="Priest" skillId="380100" iconName="Icon_Skills.backstep_Tex" toolTip="물러서기 I" gender="Common" race="Common" />
+  <Icon class="Warrior" skillId="380100" iconName="Icon_Skills.Raker_Tex" toolTip="질풍 가르기 II" gender="Common" race="Common" />
+  <Icon class="Warrior" skillId="380130" iconName="Icon_Skills.Raker_Tex" toolTip="질풍 가르기 II" gender="Common" race="Common" />
   <Icon class="Elementalist" skillId="390100" iconName="Icon_Skills.Energiesofquickness_Tex" toolTip="영기 소환 : 신속 I" gender="Common" race="Common" />
   <Icon class="Priest" skillId="390100" iconName="Icon_Skills.SelfPreResurrection_Tex" toolTip="부활의 가호 I" gender="Common" race="Common" />
   <Icon class="Elementalist" skillId="400100" iconName="Icon_Skills.Energiesofwillpower_Tex" toolTip="영기 소환 : 의지 I" gender="Common" race="Common" />
@@ -2448,6 +2454,8 @@
   <Icon class="Common" skillId="12200030" iconName="Icon_Equipments.vehicle_Dragon_B_Tex" toolTip="레드 드래곤(레어) 소환(비전투)" gender="Common" race="Common" />
   <Icon class="Common" skillId="12200031" iconName="Icon_Equipments.vehicle_Dragon_C_Tex" toolTip="유령 드래곤(레어) 소환(비전투)" gender="Common" race="Common" />
   <Icon class="Common" skillId="12200032" iconName="Icon_Equipments.vehicle_Dragon_D_Tex" toolTip="다이아몬드 드래곤(레어) 소환(비전투)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="12200033" iconName="Icon_Skills.Vehicle_Pegasus_Tex" toolTip="(TEST) 메카닉 A" gender="Common" race="Common" />
+  <Icon class="Common" skillId="12200034" iconName="Icon_Skills.Vehicle_Pegasus_Tex" toolTip="(TEST) 메카닉 B" gender="Common" race="Common" />
   <Icon class="Common" skillId="12300002" iconName="Icon_Items.PetSkillbook_Tex" toolTip="발랄한 토토 소환" gender="Common" race="Common" />
   <Icon class="Common" skillId="12300003" iconName="Icon_Items.PetSkillbook_Tex" toolTip="재간둥이 루이 펫 소환(30일)" gender="Common" race="Common" />
   <Icon class="Common" skillId="12300010" iconName="Icon_Items.PetSkillbook_Tex" toolTip="재간둥이 루이 펫 소환(30일)" gender="Common" race="Common" />

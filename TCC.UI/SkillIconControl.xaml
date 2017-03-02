@@ -7,8 +7,34 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Loaded="UserControl_Loaded">
     <Grid Width="Auto" Height="Auto" Margin="2">
-        <Ellipse Width="50" Height="50" x:Name="icon" Fill="{Binding IconBrush}"/>
-        <local:Arc x:Name="arc" Width="59" Height="59" StrokeThickness="4" Stroke="White" EndAngle="150.9">
+        <Ellipse Width="50" Height="50" x:Name="icon" Fill="{Binding IconBrush}" Stroke="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <local:Arc x:Name="arc" Width="53" Height="53" StrokeThickness="4" Stroke="White" EndAngle="150.9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+            <!--<local:Arc.Effect>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="3"/>
+            </local:Arc.Effect>-->
         </local:Arc>
+        <Grid Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-48,0,0">
+            
+            <Ellipse x:Name="fill" Fill="White"  Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
+            <TextBlock Foreground="Black" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" 
+                   TextAlignment="Center"
+                   FontWeight="Normal" 
+                   FontSize="16" 
+                   x:Name="number" 
+                   FontFamily="Roboto Mono" 
+                   FontStyle="Normal"
+                   Opacity="1" 
+                   Margin="3"
+                   Text="">
+            <!--<TextBlock.Effect>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="0" Color="White"></DropShadowEffect>
+            </TextBlock.Effect>-->
+        </TextBlock>
+            </Viewbox>
+                
+        </Grid>
     </Grid>
 </UserControl>

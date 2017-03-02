@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -13,6 +14,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace TCC.UI
 {
@@ -80,11 +82,27 @@ namespace TCC.UI
             });
         }
 
-
+        Timer NumberTimer;
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             var a = new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(Cooldown));
+            //var b = new DoubleAnimation(.4, 0, TimeSpan.FromMilliseconds(Cooldown));
             arc.BeginAnimation(Arc.EndAngleProperty, a);
+            //fill.BeginAnimation(OpacityProperty, b);
+            NumberTimer = new Timer(1000);
+            double cd = (double)Cooldown / 1000;
+            number.Text = String.Format("{0:N0}",cd);
+            NumberTimer.Elapsed += (s, o) => {
+                Dispatcher.Invoke(() => {
+                    cd --;
+                        number.Text = String.Format("{0:N0}", cd); 
+                });
+            };
+            NumberTimer.Enabled = true;
+        }
+        ~SkillIconControl()
+        {
+            NumberTimer.Stop();
         }
     }
 }

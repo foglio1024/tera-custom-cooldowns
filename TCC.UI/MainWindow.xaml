@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCC.UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="70" Width="Auto" SizeToContent="Width" Closing="Window_Closing" Topmost="True" AllowsTransparency="True" ShowInTaskbar="False" WindowStyle="None" Background="#20000000" MouseLeftButtonDown="Window_MouseRightButtonDown" MouseRightButtonDown="TB_ConnectionStatus_MouseRightButtonDown">
+        Title="MainWindow" Height="Auto" Width="Auto" SizeToContent="WidthAndHeight" Closing="Window_Closing" Topmost="True" AllowsTransparency="True" ShowInTaskbar="False" WindowStyle="None" Background="#20000000" MouseLeftButtonDown="Window_MouseLeftButtonDown" MouseRightButtonDown="TB_ConnectionStatus_MouseRightButtonDown">
     <Window.Resources>
         <DataTemplate x:Key="SkillDataTemplate">
             <local:SkillIconControl IconBrush="{Binding Skill.IconBrush}" Cooldown="{Binding Cooldown}" Id="{Binding Skill.Id}" ></local:SkillIconControl>
@@ -13,11 +13,17 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="72"/>
+            <RowDefinition Height="72"/>
         </Grid.RowDefinitions>
-        <TextBlock Name="TB_ConnectionStatus" Grid.Row="0"  Height="0"></TextBlock>
-        <ItemsControl x:Name="SP" Grid.Row="1" ItemTemplate="{StaticResource SkillDataTemplate}">
+        <ItemsControl x:Name="NormalSkillsPanel" Grid.Row="0" ItemTemplate="{StaticResource SkillDataTemplate}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+        <ItemsControl x:Name="LongSkillsPanel" Grid.Row="1" ItemTemplate="{StaticResource SkillDataTemplate}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal"/>

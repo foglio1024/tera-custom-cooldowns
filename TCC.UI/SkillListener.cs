@@ -20,14 +20,29 @@ namespace TCC.UI
         void RunSkill(object sender, EventArgs e, SkillCooldown sk)
         {
             sk.Timer.Elapsed += (s, ev) => RemoveSkill(null, null, sk);
-            MainWindow.AddSkill(sk);
+            if(sk.Cooldown < SkillManager.LongSkillTreshold)
+            {
+                MainWindow.AddNormalSkill(sk);
+            }
+            else
+            {
+                MainWindow.AddLongSkill(sk);
+            }
+
             sk.Timer.Enabled = true;
         }
 
         void RemoveSkill(object sender, EventArgs e, SkillCooldown sk)
         {
             sk.Timer.Stop();
-            MainWindow.RemoveSkill(sk);
+            if(sk.Cooldown < SkillManager.LongSkillTreshold)
+            {
+                MainWindow.RemoveNormalSkill(sk);
+            }
+            else
+            {
+                MainWindow.RemoveLongSkill(sk);
+            }
             queue.Remove(sk);
             SkillManager.LastSkillName = string.Empty;
 

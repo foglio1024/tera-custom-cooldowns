@@ -37,45 +37,58 @@ namespace TCC.UI
     public partial class MainWindow : Window
     {
         public static MainWindow Instance;
-        public SkillsModel skModel;
+        public SkillsModel NormalSkillsModel;
+        public SkillsModel LongSkillsModel;
         public MainWindow()
         {
             Instance = this;
             
             SkillsDatabase.Populate();
-            skModel = new SkillsModel();
+
+            NormalSkillsModel = new SkillsModel();
+            LongSkillsModel = new SkillsModel();
 
             TeraSniffer.Instance.MessageReceived += PacketParser.MessageReceived;
-            TeraSniffer.Instance.NewConnection += Instance_NewConnection;
             TeraSniffer.Instance.Enabled = true;
        
             InitializeComponent();
-            SP.ItemsSource = skModel.SkillIndicators;
-            SP.DataContext = skModel;
+            NormalSkillsPanel.ItemsSource = NormalSkillsModel.SkillIndicators;
+            NormalSkillsPanel.DataContext = NormalSkillsModel;
+            LongSkillsPanel.ItemsSource = LongSkillsModel.SkillIndicators;
+            LongSkillsPanel.DataContext = LongSkillsModel;
         }
 
-        internal static void ClearSkills()
+        public static void ClearSkills()
         {
             Instance.Dispatcher.Invoke(() =>
             {
-                Instance.skModel.SkillIndicators.Clear();
+                Instance.NormalSkillsModel.SkillIndicators.Clear();
+                Instance.LongSkillsModel.SkillIndicators.Clear();
             });
         }
-        
-        public static void AddSkill(SkillCooldown sk)
+
+        public static void AddNormalSkill(SkillCooldown sk)
         {
             Instance.Dispatcher.Invoke(() =>
             {
-                Instance.skModel.SkillIndicators.Add(new SkillIndicator(SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass), (int)sk.Cooldown));
+                Instance.NormalSkillsModel.SkillIndicators.Add(new SkillIndicator(SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass), (int)sk.Cooldown));
             });
         }
-        public static void RemoveSkill(SkillCooldown sk)
+        public static void AddLongSkill(SkillCooldown sk)
+        {
+            Instance.Dispatcher.Invoke(() =>
+            {
+                Instance.LongSkillsModel.SkillIndicators.Add(new SkillIndicator(SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass), (int)sk.Cooldown));
+            });
+        }
+
+        public static void RemoveNormalSkill(SkillCooldown sk)
         {
             Instance.Dispatcher.Invoke(() =>
             {
                 try
                 {
-                    Instance.skModel.SkillIndicators.Remove(Instance.skModel.SkillIndicators.Where(x => x.Skill.Id == sk.Id).Single());
+                    Instance.NormalSkillsModel.SkillIndicators.Remove(Instance.NormalSkillsModel.SkillIndicators.Where(x => x.Skill.Id == sk.Id).Single());
                 }
                 catch (Exception)
                 {
@@ -83,10 +96,19 @@ namespace TCC.UI
                 }
             });
         }
-        
-        private void Instance_NewConnection(Server obj)
+        public static void RemoveLongSkill(SkillCooldown sk)
         {
-            Dispatcher.Invoke(()=> TB_ConnectionStatus.Text = obj.Name);
+            Instance.Dispatcher.Invoke(() =>
+            {
+                try
+                {
+                    Instance.LongSkillsModel.SkillIndicators.Remove(Instance.LongSkillsModel.SkillIndicators.Where(x => x.Skill.Id == sk.Id).Single());
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Can't remove indicator.");
+                }
+            });
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -96,11 +118,11 @@ namespace TCC.UI
 
         private void TB_ConnectionStatus_MouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            //System.Console.WriteLine("Adding skill");
-            //SkillManager.SQ.Add(new SkillCooldown(100700, 5000));
+            System.Console.WriteLine("Adding skill");
+            SkillManager.NormalSkillsQueue.Add(new SkillCooldown(100700, 2565));
         }
 
-        private void Window_MouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             this.DragMove();
         }
