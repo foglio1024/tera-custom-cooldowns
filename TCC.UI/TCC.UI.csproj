@@ -7,7 +7,7 @@
     <ProjectGuid>{B3F6E516-CD4B-404E-93C5-FFC729406FA9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>TCC.UI</RootNamespace>
-    <AssemblyName>TCC.UI</AssemblyName>
+    <AssemblyName>TCC</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -33,6 +33,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>resources\tcc.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DamageMeter.Sniffing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -76,6 +79,7 @@
     <Compile Include="Enums.cs" />
     <Compile Include="BroochesDatabase.cs" />
     <Compile Include="ListParser.cs" />
+    <Compile Include="Messages\S_ABNORMALITY_BEGIN.cs" />
     <Compile Include="Messages\S_DECREASE_COOLTIME_SKILL.cs" />
     <Compile Include="Messages\S_GET_USER_LIST.cs" />
     <Compile Include="Messages\S_LOGIN.cs" />
@@ -2397,6 +2401,28 @@
     <Content Include="resources\icons\WorldcupGiant_KOR_W_us_Tex.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="resources\data\opcodes\306637.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\opcodes\311259.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\opcodes\311378.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\opcodes\smt_306637.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\opcodes\smt_311259.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\opcodes\smt_311378.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\servers.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="resources\tcc.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

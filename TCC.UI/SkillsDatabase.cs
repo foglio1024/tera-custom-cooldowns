@@ -76,16 +76,28 @@ namespace TCC.UI
             SkillIconData = new List<XDocument>();
             Skills = new List<Skill>();
             LoadFiles();
+            var n = SkillIconData.Count;
+            Progress?.Invoke(1*100 / (n - 1));
             foreach (var doc in StrSheet_UserSkillsDocs)
             {
                 ParseUserSkillDoc(doc);
             }
+            Progress?.Invoke(2 * 100 / (n - 1));
+
             foreach (var doc in SkillIconData)
             {
                 ParseSkillIconDoc(doc);
+                Progress?.Invoke((SkillIconData.IndexOf(doc)+2) * 100 / (n +1));
             }
-        }
 
+            var s = new Skill(60010, Class.Elementalist, "Hurricane", "");
+            s.SetSkillIcon("Icon_Skills.Armorbreak_Tex");
+            Skills.Add(s);
+
+            SkillIconData.Clear();
+            StrSheet_UserSkillsDocs.Clear();
+        }
+        public static event Action<double> Progress;
         public static string SkillIdToName(uint id, Class c)
         {
             if (Skills.Where(x => x.Id == id).Where(x => x.Class == c).Count() > 0)
@@ -95,14 +107,14 @@ namespace TCC.UI
             else return "Unknown";
         }
 
-        public static BitmapImage SkillIdToIcon(uint id, Class c)
-        {
-            if (Skills.Where(x => x.Id == id).Where(x => x.Class == c).Count() > 0)
-            {
-                return Skills.Where(x => x.Id == id).Where(x => x.Class == c).First().Icon;
-            }
-            else return null;
-        }
+        //public static BitmapImage SkillIdToIcon(uint id, Class c)
+        //{
+        //    if (Skills.Where(x => x.Id == id).Where(x => x.Class == c).Count() > 0)
+        //    {
+        //        return Skills.Where(x => x.Id == id).Where(x => x.Class == c).First().Icon;
+        //    }
+        //    else return null;
+        //}
 
         public static Skill GetSkill(uint id, Class c)
         {

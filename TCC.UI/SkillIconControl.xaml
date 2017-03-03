@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.UI"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" Loaded="UserControl_Loaded">
+             d:DesignHeight="300" d:DesignWidth="300" Loaded="UserControl_Loaded" ToolTip="{Binding SkillName}">
     <Grid Width="Auto" Height="Auto" Margin="2">
-        <Ellipse Width="50" Height="50" x:Name="icon" Fill="{Binding IconBrush}" Stroke="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Ellipse Width="50" Height="50" x:Name="icon" Fill="{Binding IconBrush}" Stroke="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <local:Arc x:Name="arc" Width="53" Height="53" StrokeThickness="4" Stroke="White" EndAngle="150.9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
             <!--<local:Arc.Effect>
                 <DropShadowEffect ShadowDepth="0" BlurRadius="3"/>

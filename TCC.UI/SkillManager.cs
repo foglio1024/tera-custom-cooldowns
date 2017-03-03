@@ -56,9 +56,14 @@ namespace TCC.UI
 
                     }
                     break;
+
                 case CooldownType.Item:
-                    LongSkillsQueue.Add(sk);
+                    if(BroochesDatabase.GetBrooch(sk.Id) != null)
+                    {
+                        LongSkillsQueue.Add(sk);
+                    }
                     break;
+
                 default:
                     break;
             }

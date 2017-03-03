@@ -12,7 +12,7 @@ namespace TCC.UI
         public Class Class { get; set; }
         public string Name { get; set; }
         public string ToolTip { get; set; }
-        public BitmapImage Icon { get { return icon; } set { if (icon != value) icon = value; } }
+        //public BitmapImage Icon { get { return icon; } set { if (icon != value) icon = value; } }
         public ImageBrush IconBrush { get; set; }
         BitmapImage icon;
         Bitmap iconBitmap;
@@ -21,19 +21,20 @@ namespace TCC.UI
             Id = id;
             Class = c;
             Name = name;
-            ToolTip = toolTip;
-
-            
+            ToolTip = toolTip;           
         }
 
         public void SetSkillIcon(string iconName)
         {
             if (!iconName.Contains("Icon_Skills.")) return;
             iconName = iconName.Replace("Icon_Skills.", "");
-            iconBitmap = (Bitmap)Image.FromFile(Environment.CurrentDirectory + @"/resources/icons/" + iconName + ".png");
-            icon = BitmapToImageSource(iconBitmap);
-            IconBrush = new ImageBrush(icon);
-        }
+            MainWindow.Instance.Dispatcher.Invoke(() =>
+            {
+                iconBitmap = (Bitmap)Image.FromFile(Environment.CurrentDirectory + @"/resources/icons/" + iconName + ".png");
+                icon = BitmapToImageSource(iconBitmap);
+                IconBrush = new ImageBrush(icon);
+            });
+            }
 
         BitmapImage BitmapToImageSource(System.Drawing.Bitmap bitmap)
         {

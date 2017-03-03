@@ -57,6 +57,24 @@ namespace TCC.UI
         public static readonly DependencyProperty CooldownProperty =
             DependencyProperty.Register("Cooldown", typeof(int), typeof(SkillIconControl));
 
+
+
+
+
+        public string SkillName
+        {
+            get { return (string)GetValue(SkillNameProperty); }
+            set { SetValue(SkillNameProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SkillName.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SkillNameProperty =
+            DependencyProperty.Register("SkillName", typeof(string), typeof(SkillIconControl));
+
+
+
+
+
         public SkillIconControl()
         {
             InitializeComponent();
@@ -75,7 +93,6 @@ namespace TCC.UI
                     if (s.Cooldown > ending)
                     {
                         MainTimer.Interval = s.Cooldown - ending;
-
                     }
                     else
                     {
@@ -101,11 +118,11 @@ namespace TCC.UI
         Timer NumberTimer;
         Timer MainTimer;
         double currentCd;
-        int ending = 250;
+        int ending = 100;
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             currentCd = (double)Cooldown / 1000;
-
+            this.ToolTip = SkillName;
             NumberTimer = new Timer(1000);
             MainTimer = new Timer(Cooldown - ending);
 

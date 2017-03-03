@@ -71,6 +71,13 @@ namespace TCC.UI
                 case ("S_RETURN_TO_LOBBY"):
                     SkillManager.Clear();
                     break;
+                case ("S_ABNORMALITY_BEGIN"):
+                    var h = new S_ABNORMALITY_BEGIN(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer));
+                    if (h.isHurricane && (CurrentClass == Class.Elementalist))
+                    {
+                        SkillManager.AddSkill(new SkillCooldown(60010, 120000, CooldownType.Skill));
+                    }
+                    break;
                 default:
                     break;
             }

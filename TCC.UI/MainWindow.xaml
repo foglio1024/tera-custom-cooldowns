@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="Tera Custom Cooldowns"
         Height="Auto" 
-        Width="1024" 
-        SizeToContent="Height" 
+        Width="Auto" 
+        SizeToContent="WidthAndHeight" 
         Closing="Window_Closing" 
         Topmost="True" 
         AllowsTransparency="True" 
@@ -16,10 +16,14 @@
         WindowStyle="None" 
         Background="#00000000" 
         MouseLeftButtonDown="Window_MouseLeftButtonDown" 
-        MouseRightButtonDown="TB_ConnectionStatus_MouseRightButtonDown">
+        MouseRightButtonDown="Window_RightClick"
+        IsTabStop="False"
+        MouseDoubleClick="Window_MouseDoubleClick"
+        Loaded="Window_Loaded"
+        >
     <Window.Resources>
         <DataTemplate x:Key="SkillDataTemplate">
-            <local:SkillIconControl IconBrush="{Binding Skill.IconBrush}" Cooldown="{Binding Cooldown}" Id="{Binding Skill.Id}" ></local:SkillIconControl>
+            <local:SkillIconControl IconBrush="{Binding Skill.IconBrush}" Cooldown="{Binding Cooldown}" Id="{Binding Skill.Id}" SkillName="{Binding Skill.Name}"></local:SkillIconControl>
         </DataTemplate>
     </Window.Resources>
     <Grid Width="Auto">
@@ -27,19 +31,20 @@
             <RowDefinition Height="72"/>
             <RowDefinition Height="72"/>
         </Grid.RowDefinitions>
-        <Ellipse Fill="Black" Opacity=".2" Width="50" Height="50" HorizontalAlignment="Left" Margin="5"></Ellipse>
-        <!--<Ellipse Fill="Black" Opacity=".2" Width="50" Height="50" Grid.Row="1" HorizontalAlignment="Left" Margin="5"></Ellipse>-->
+        <Ellipse Fill="Black" Opacity=".2" Width="50" Height="50" HorizontalAlignment="Left" Margin="5" x:Name="baseEll" ToolTip="The circle shows first skill of first row's position. Low-cd skills are added to the right, long-cd skills are added at the bottom. Right click to close the app."
+/>
+        <local:Arc x:Name="loadArc" Width="45" Height="45" Stroke="#ffff0000" StrokeThickness="3" HorizontalAlignment="Left" VerticalAlignment="Center" EndAngle="0" Grid.Row="0" Margin="7.5,0"/>
         <ItemsControl x:Name="NormalSkillsPanel" Grid.Row="0" ItemTemplate="{StaticResource SkillDataTemplate}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,60,0"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
         <ItemsControl x:Name="LongSkillsPanel" Grid.Row="1" ItemTemplate="{StaticResource SkillDataTemplate}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,60,0"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
 
