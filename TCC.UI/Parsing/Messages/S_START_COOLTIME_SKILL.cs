@@ -7,7 +7,7 @@ using Tera;
 using Tera.Game;
 using Tera.Game.Messages;
 
-namespace TCC.UI.Messages
+namespace TCC.Messages
 {
     public class S_START_COOLTIME_SKILL : ParsedMessage
     {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Tera.Game;
 using Tera.Game.Messages;
 
-namespace TCC.UI.Messages
+namespace TCC.Messages
 {
     class S_LOGIN : ParsedMessage
     {
