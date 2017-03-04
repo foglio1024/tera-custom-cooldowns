@@ -13,8 +13,11 @@ namespace TCC.UI
         public string Name { get; set; }
         public string ToolTip { get; set; }
         //public BitmapImage Icon { get { return icon; } set { if (icon != value) icon = value; } }
-        public ImageBrush IconBrush { get; set; }
-        BitmapImage icon;
+        public ImageBrush IconBrush { get
+            {
+                return new ImageBrush(BitmapToImageSource(iconBitmap));
+            }
+        }
         Bitmap iconBitmap;
         public Skill(uint id, Class c, string name, string toolTip)
         {
@@ -31,8 +34,8 @@ namespace TCC.UI
             MainWindow.Instance.Dispatcher.Invoke(() =>
             {
                 iconBitmap = (Bitmap)Image.FromFile(Environment.CurrentDirectory + @"/resources/icons/" + iconName + ".png");
-                icon = BitmapToImageSource(iconBitmap);
-                IconBrush = new ImageBrush(icon);
+                //icon = BitmapToImageSource(iconBitmap);
+                //IconBrush = new ImageBrush(icon);
             });
             }
 
@@ -47,7 +50,7 @@ namespace TCC.UI
                 bitmapimage.StreamSource = memory;
                 bitmapimage.CacheOption = BitmapCacheOption.OnLoad;
                 bitmapimage.EndInit();
-
+                memory.Close();
                 return bitmapimage;
             }
         }

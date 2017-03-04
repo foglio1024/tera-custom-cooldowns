@@ -53,6 +53,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -76,13 +77,21 @@
     <Compile Include="Character.cs" />
     <Compile Include="CharListProcessor.cs" />
     <Compile Include="CharLoginProcessor.cs" />
+    <Compile Include="EdgeArc.xaml.cs">
+      <DependentUpon>EdgeArc.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EdgeWindow.xaml.cs">
+      <DependentUpon>EdgeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Enums.cs" />
     <Compile Include="BroochesDatabase.cs" />
+    <Compile Include="FocusManager.cs" />
     <Compile Include="ListParser.cs" />
     <Compile Include="Messages\S_ABNORMALITY_BEGIN.cs" />
     <Compile Include="Messages\S_DECREASE_COOLTIME_SKILL.cs" />
     <Compile Include="Messages\S_GET_USER_LIST.cs" />
     <Compile Include="Messages\S_LOGIN.cs" />
+    <Compile Include="Messages\S_PLAYER_STAT_UPDATE.cs" />
     <Compile Include="Messages\S_START_COOLTIME_ITEM.cs" />
     <Compile Include="Skill.cs" />
     <Compile Include="SkillIconControl.xaml.cs">
@@ -94,6 +103,15 @@
     <Compile Include="SkillManager.cs" />
     <Compile Include="SkillsDatabase.cs" />
     <Compile Include="StringUtils.cs" />
+    <Compile Include="S_USER_STATUS.cs" />
+    <Page Include="EdgeArc.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EdgeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -2422,6 +2440,7 @@
     <Content Include="resources\data\servers.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="resources\tccIcon.ico" />
     <Resource Include="resources\tcc.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

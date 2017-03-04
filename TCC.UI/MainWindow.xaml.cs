@@ -1,17 +1,15 @@
 ﻿using DamageMeter.Sniffing;
-using System.Collections.Generic;
+using System;
 using System.Collections.ObjectModel;
-using System.IO;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-using Tera.Game;
-using System;
-using System.Threading;
-using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Threading;
+
 
 namespace TCC.UI
 {
@@ -41,23 +39,38 @@ namespace TCC.UI
     public partial class MainWindow : Window
     {
         public static MainWindow Instance;
-
+        public static EdgeWindow EdgeGauge;
         public SkillsModel NormalSkillsModel;
         public SkillsModel LongSkillsModel;
-
+        DispatcherTimer FocusTimer;
+        System.Windows.Forms.NotifyIcon NI;
+        ContextMenu CM;
         public MainWindow()
         {
             Instance = this;
 
+            NI = new System.Windows.Forms.NotifyIcon()
+            {
+                Icon = Properties.Resources.tcc,
+                Visible = true
+            };
+
+            NI.MouseDown += NI_MouseDown;
+
+            CM = new ContextMenu();
+            var c = new MenuItem() { Header = "Close" };
+            c.Click += (s, ev) => CloseApp();
+            CM.Items.Add(c);
             NormalSkillsModel = new SkillsModel();
             LongSkillsModel = new SkillsModel();
-
             TeraSniffer.Instance.MessageReceived += PacketParser.MessageReceived;
             TeraSniffer.Instance.Enabled = true;
             TeraSniffer.Instance.NewConnection += (srv) => SkillManager.Clear();
             TeraSniffer.Instance.EndConnection += () => SkillManager.Clear();
             SkillsDatabase.Progress += UpdateLoadGauge;
-
+            PacketParser.CurrentClass = Class.Common;
+            EdgeGauge = new EdgeWindow();
+            ShowEdgeGauge();
             InitializeComponent();
 
             NormalSkillsPanel.ItemsSource = NormalSkillsModel.SkillIndicators;
@@ -66,6 +79,14 @@ namespace TCC.UI
             LongSkillsPanel.DataContext = LongSkillsModel;
 
 
+        }
+
+        private void NI_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if(e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                CM.IsOpen = true;
+            }
         }
 
         public static void ClearSkills()
@@ -82,6 +103,7 @@ namespace TCC.UI
             Instance.Dispatcher.Invoke(() =>
             {
                 Instance.NormalSkillsModel.SkillIndicators.Add(new SkillIndicator(SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass), (int)sk.Cooldown));
+                Console.WriteLine("Added {0} indicator.", SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass).Name);
             });
         }
         public static void AddLongSkill(SkillCooldown sk)
@@ -92,9 +114,13 @@ namespace TCC.UI
                 {
                     case CooldownType.Skill:
                         Instance.LongSkillsModel.SkillIndicators.Add(new SkillIndicator(SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass), (int)sk.Cooldown));
+                        Console.WriteLine("Added {0} indicator.", SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass).Name);
+
                         break;
                     case CooldownType.Item:
                         Instance.LongSkillsModel.SkillIndicators.Add(new SkillIndicator(BroochesDatabase.GetBrooch(sk.Id), (int)sk.Cooldown));
+                        Console.WriteLine("Added {0} indicator.", BroochesDatabase.GetBrooch(sk.Id).Name);
+
                         break;
                     default:
                         break;
@@ -108,11 +134,13 @@ namespace TCC.UI
             {
                 try
                 {
-                    Instance.NormalSkillsModel.SkillIndicators.Remove(Instance.NormalSkillsModel.SkillIndicators.Where(x => x.Skill.Id == sk.Id).Single());
+                    Instance.NormalSkillsModel.SkillIndicators.Remove(Instance.NormalSkillsModel.SkillIndicators.Where(x => x.Skill.Id == sk.Id).First());
+                    Console.WriteLine("Removed {0} indicator.", SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass).Name);
+
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Can't remove indicator.");
+                    Console.WriteLine("Can't remove {0} indicator.", SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass).Name);
                 }
             });
         }
@@ -125,39 +153,41 @@ namespace TCC.UI
                     switch (sk.Type)
                     {
                         case CooldownType.Skill:
-                            Instance.LongSkillsModel.SkillIndicators.Remove(Instance.LongSkillsModel.SkillIndicators.Where(x => x.Skill.Id == sk.Id).Single());
+                            Instance.LongSkillsModel.SkillIndicators.Remove(Instance.LongSkillsModel.SkillIndicators.Where(x => x.Skill.Id == sk.Id).First());
+                            Console.WriteLine("Removed {0} indicator.", SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass).Name);
                             break;
+
                         case CooldownType.Item:
-                            Instance.LongSkillsModel.SkillIndicators.Remove(Instance.LongSkillsModel.SkillIndicators.Where(x => x.Skill.Id == sk.Id).Single());
+                            Instance.LongSkillsModel.SkillIndicators.Remove(Instance.LongSkillsModel.SkillIndicators.Where(x => x.Skill.Id == sk.Id).First());
+                            Console.WriteLine("Removed {0} indicator.", BroochesDatabase.GetBrooch(sk.Id).Name);
                             break;
+
                         default:
                             break;
                     }
+
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Can't remove indicator.");
+                    Console.WriteLine("Can't remove {0} indicator.", SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass).Name);
                 }
             });
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-        }
-        private void Window_RightClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
             Properties.Settings.Default.Left = this.Left;
             Properties.Settings.Default.Top = this.Top;
+            Properties.Settings.Default.ELeft = EdgeGauge.Left;
+            Properties.Settings.Default.ETop = EdgeGauge.Top;
 
             Properties.Settings.Default.Save();
 
-            TeraSniffer.Instance.Enabled = false;
-
-            Close();
         }
 
         private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            //SkillManager.AddSkill(new SkillCooldown(100700, 2000, CooldownType.Skill)); //test skill
             this.DragMove();
         }
 
@@ -179,15 +209,32 @@ namespace TCC.UI
             });
         }
 
+        public void CloseApp()
+        {
+            TeraSniffer.Instance.Enabled = false;
+
+            FocusTimer.Stop();
+            Close();
+            NI.Visible = false;
+            Environment.Exit(0);
+
+        }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             this.Top = Properties.Settings.Default.Top;
             this.Left = Properties.Settings.Default.Left;
-            var a = new DoubleAnimation(0,359.9, TimeSpan.FromSeconds(.5))
+
+            var a = new DoubleAnimation(0,359.9, TimeSpan.FromSeconds(.7))
             {
                 EasingFunction = new QuadraticEase()
             };
-            a.Completed += (s, o) => loadArc.Visibility = Visibility.Hidden;
+            a.Completed += (s, o) =>
+            {
+                loadArc.Visibility = Visibility.Hidden;
+                FocusTimer.Start();
+            };
+
+
             var t = new Thread(new ThreadStart(() =>
             {
                 SkillsDatabase.Populate();
@@ -199,7 +246,70 @@ namespace TCC.UI
                 });
             }));
             t.Start();
+            
+            FocusTimer = new DispatcherTimer();
+            FocusTimer.Interval = TimeSpan.FromSeconds(1);
+            FocusTimer.Tick += CheckForegroundWindow;
 
+        }
+
+        public static void ShowEdgeGauge()
+        {
+            Instance.Dispatcher.Invoke(() =>
+            {
+                EdgeGauge.Show();
+            });
+        }
+        public static void HideEdgeGauge()
+        {
+            Instance.Dispatcher.Invoke(() =>
+            {
+                EdgeGauge.Hide();
+            });
+        }
+        public static void DimEdgeGauge()
+        {
+            Instance.Dispatcher.Invoke(() =>
+            {
+                var a = new DoubleAnimation(0, TimeSpan.FromMilliseconds(300))
+                {
+                    EasingFunction = new QuadraticEase()
+                };
+                EdgeGauge.BeginAnimation(OpacityProperty, a);
+            });
+
+        }
+        public static void UndimEdgeGauge()
+        {
+            Instance.Dispatcher.Invoke(() =>
+            {
+                var a = new DoubleAnimation(1, TimeSpan.FromMilliseconds(300))
+                {
+                    EasingFunction = new QuadraticEase()
+                };
+                EdgeGauge.BeginAnimation(OpacityProperty, a);
+            });
+
+        }
+        private void CheckForegroundWindow(object sender, EventArgs e)
+        {
+            IntPtr hwnd = FocusManager.GetForegroundWindow();
+            FocusManager.GetWindowThreadProcessId(hwnd, out uint procId);
+            var proc = Process.GetProcessById((int)procId);
+
+            if(proc.ProcessName == "TERA" || proc.ProcessName == "TCC" || proc.ProcessName == "devenv")
+            {
+                this.Show();
+                if(PacketParser.CurrentClass == Class.Warrior)
+                {
+                    ShowEdgeGauge();
+                }
+            }
+            else
+            {
+                this.Hide();
+                HideEdgeGauge();
+            }
         }
     }
 }

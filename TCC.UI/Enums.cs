@@ -21,6 +21,6 @@ namespace TCC.UI
         Fighter = 10,
         Assassin = 11,
         Moon_Dancer = 12,
-        Common = 13
+        Common = 255
     }
 }

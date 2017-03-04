@@ -79,6 +79,7 @@ namespace TCC.UI
         {
             InitializeComponent();
             icon.DataContext = this;
+            
             SkillManager.Changed += SkillIconControl_Changed;
         }
 
@@ -118,25 +119,29 @@ namespace TCC.UI
         Timer NumberTimer;
         Timer MainTimer;
         double currentCd;
-        int ending = 100;
+        int ending = SkillManager.Ending;
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             currentCd = (double)Cooldown / 1000;
             this.ToolTip = SkillName;
             NumberTimer = new Timer(1000);
-            MainTimer = new Timer(Cooldown - ending);
+            MainTimer = new Timer(Cooldown);
 
             NumberTimer.Elapsed += (s, o) => {
                 Dispatcher.Invoke(() => {
                     currentCd --;
-                    number.Text = String.Format("{0:N0}", currentCd); 
                     if(currentCd < 0)
                     {
-                        number.Text = "0";
+                        number.Text = "";
                         NumberTimer.Stop();
+                    }
+                    else
+                    {
+                        number.Text = String.Format("{0:N0}", currentCd); 
                     }
                 });
             };
+
             MainTimer.Elapsed += (s, o) =>
             {
                 Dispatcher.Invoke(() =>
@@ -177,6 +182,7 @@ namespace TCC.UI
                     icon.BeginAnimation(HeightProperty, h);
                     arc.BeginAnimation(WidthProperty, w);
                     arc.BeginAnimation(HeightProperty, h);
+                    this.BeginAnimation(MarginProperty, t);
                     MainTimer.Stop();
                 });
             };

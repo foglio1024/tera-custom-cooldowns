@@ -9,17 +9,16 @@
         Height="Auto" 
         Width="Auto" 
         SizeToContent="WidthAndHeight" 
-        Closing="Window_Closing" 
         Topmost="True" 
         AllowsTransparency="True" 
         ShowInTaskbar="False" 
         WindowStyle="None" 
         Background="#00000000" 
         MouseLeftButtonDown="Window_MouseLeftButtonDown" 
-        MouseRightButtonDown="Window_RightClick"
         IsTabStop="False"
         MouseDoubleClick="Window_MouseDoubleClick"
         Loaded="Window_Loaded"
+        Closing="Window_Closing"
         >
     <Window.Resources>
         <DataTemplate x:Key="SkillDataTemplate">
@@ -28,12 +27,12 @@
     </Window.Resources>
     <Grid Width="Auto">
         <Grid.RowDefinitions>
-            <RowDefinition Height="72"/>
-            <RowDefinition Height="72"/>
+            <RowDefinition Height="76"/>
+            <RowDefinition Height="76"/>
         </Grid.RowDefinitions>
-        <Ellipse Fill="Black" Opacity=".2" Width="50" Height="50" HorizontalAlignment="Left" Margin="5" x:Name="baseEll" ToolTip="The circle shows first skill of first row's position. Low-cd skills are added to the right, long-cd skills are added at the bottom. Right click to close the app."
+        <Ellipse Fill="Black" Opacity=".2" Width="50" Height="50" HorizontalAlignment="Left" Margin="5" x:Name="baseEll" ToolTip="The circle shows first skill of first row's position. Low-cd skills are added to the right, long-cd skills are added at the bottom."
 />
-        <local:Arc x:Name="loadArc" Width="45" Height="45" Stroke="#ffff0000" StrokeThickness="3" HorizontalAlignment="Left" VerticalAlignment="Center" EndAngle="0" Grid.Row="0" Margin="7.5,0"/>
+        <local:Arc x:Name="loadArc" Width="50" Height="50" Stroke="#ffff0000" StrokeThickness="2" HorizontalAlignment="Left" VerticalAlignment="Center" EndAngle="0" Grid.Row="0" Margin="5"/>
         <ItemsControl x:Name="NormalSkillsPanel" Grid.Row="0" ItemTemplate="{StaticResource SkillDataTemplate}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using TCC.Messages;
 using TCC.UI.Messages;
 using Tera.Game;
@@ -17,11 +18,12 @@ namespace TCC.UI
         public static OpCodeNamer OpCodeNamer;
         public static OpCodeNamer SystemMessageNamer;
         public static uint Version;
-
-        public static CharListProcessor clp = new CharListProcessor();
+        
+        //public static CharListProcessor clp = new CharListProcessor();
         public static CharLoginProcessor cl = new CharLoginProcessor();
 
         public static Class CurrentClass;
+        public static ulong CurrentCharId;
 
         public static void MessageReceived(global::Tera.Message obj)
         {
@@ -48,34 +50,54 @@ namespace TCC.UI
         {
             switch (TeraSniffer.Instance.opn.GetName(msg.OpCode))
             {
-                case ("S_GET_USER_LIST"):
-                    clp.ParseCharacters(PacketData(msg));
-                    break;
                 case ("S_LOGIN"):
-                    CurrentClass = clp.GetClassFromName(cl.GetName(PacketData(msg)));
-                    clp.Clear();
-                    Console.WriteLine(CurrentClass);
+                    var sLogin = new S_LOGIN(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer));
+                    CurrentClass = sLogin.GetClass();
+                    CurrentCharId = sLogin.entityId;
+                    if(CurrentClass == Class.Warrior)
+                    {
+                        MainWindow.ShowEdgeGauge();
+                    }
+                    Console.WriteLine("{0} - {1}", CurrentClass, CurrentCharId);
                     break;
                 case ("S_START_COOLTIME_SKILL"):
-                    var m = new S_START_COOLTIME_SKILL(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer));
-                    SkillManager.AddSkill(new SkillCooldown(m.SkillId, m.Cooldown, CooldownType.Skill));
+                    var sStartCooltimeSkill = new S_START_COOLTIME_SKILL(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer));
+                    SkillManager.AddSkill(new SkillCooldown(sStartCooltimeSkill.SkillId, sStartCooltimeSkill.Cooldown, CooldownType.Skill));
                     break;
                 case ("S_START_COOLTIME_ITEM"):
-                    var i = new S_START_COOLTIME_ITEM(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer));
-                    SkillManager.AddSkill(new SkillCooldown(i.ItemId, i.Cooldown, CooldownType.Item));
+                    var sStartCooltimeItem = new S_START_COOLTIME_ITEM(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer));
+                    SkillManager.AddSkill(new SkillCooldown(sStartCooltimeItem.ItemId, sStartCooltimeItem.Cooldown, CooldownType.Item));
                     break;
                 case ("S_DECREASE_COOLTIME_SKILL"):
-                    var n = new S_DECREASE_COOLTIME_SKILL(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer));
-                    SkillManager.ChangeSkillCooldown(new SkillCooldown(n.SkillId, n.Cooldown, CooldownType.Skill));
+                    var sDecreaseCooltimeSkill = new S_DECREASE_COOLTIME_SKILL(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer));
+                    SkillManager.ChangeSkillCooldown(new SkillCooldown(sDecreaseCooltimeSkill.SkillId, sDecreaseCooltimeSkill.Cooldown, CooldownType.Skill));
                     break;
                 case ("S_RETURN_TO_LOBBY"):
                     SkillManager.Clear();
                     break;
                 case ("S_ABNORMALITY_BEGIN"):
-                    var h = new S_ABNORMALITY_BEGIN(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer));
-                    if (h.isHurricane && (CurrentClass == Class.Elementalist))
+                    var sAbnormalityBegin = new S_ABNORMALITY_BEGIN(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer));
+                    if (sAbnormalityBegin.isHurricane && sAbnormalityBegin.casterId == CurrentCharId)
                     {
                         SkillManager.AddSkill(new SkillCooldown(60010, 120000, CooldownType.Skill));
+                    }
+                    break;
+                case ("S_PLAYER_STAT_UPDATE"):
+                    if (CurrentClass == Class.Warrior)
+                    {
+                        var sPlayerStatUpdate = new S_PLAYER_STAT_UPDATE(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer));
+                        EdgeWindow.SetEdge(sPlayerStatUpdate.edge);
+                    }
+                    break;
+                case ("S_USER_STATUS"):
+                    var sUserStatus = new S_USER_STATUS(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer));
+                    if (sUserStatus.isInCombat)
+                    {
+                        MainWindow.UndimEdgeGauge();
+                    }
+                    else
+                    {
+                        MainWindow.DimEdgeGauge();
                     }
                     break;
                 default:

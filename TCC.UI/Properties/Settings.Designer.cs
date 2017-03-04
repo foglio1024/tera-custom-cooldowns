@@ -46,5 +46,29 @@ namespace TCC.UI.Properties {
                 this["Left"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double ETop {
+            get {
+                return ((double)(this["ETop"]));
+            }
+            set {
+                this["ETop"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double ELeft {
+            get {
+                return ((double)(this["ELeft"]));
+            }
+            set {
+                this["ELeft"] = value;
+            }
+        }
     }
 }

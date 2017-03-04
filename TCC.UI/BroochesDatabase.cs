@@ -8,21 +8,21 @@ namespace TCC.UI
     {
         static List<Skill> BroochSkills = new List<Skill>
         {
-            new Skill(51028, Class.Common, "",""),//marrow
-            new Skill(51011, Class.Common, "",""),//quatrefoil
-            new Skill(19698, Class.Common, "",""),//simple grounding
-            new Skill(19699, Class.Common, "",""),//grounding
-            new Skill(19702, Class.Common, "",""),//simple empowered
-            new Skill(19703, Class.Common, "",""),//empowered
-            new Skill(19705, Class.Common, "",""),//simple quickcarve
-            new Skill(19706, Class.Common, "",""),//quickcarve
-            new Skill(19734, Class.Common, "",""),//simple cleansing
-            new Skill(19735, Class.Common, "",""),//cleansing
-            new Skill(6466,  Class.Common, "",""), //iridescent threat
-            new Skill(6469,  Class.Common, "",""), //iridescent empowered
-            new Skill(6472,  Class.Common, "",""), //iridescent quickcarve
-            new Skill(80280, Class.Common, "",""),//simple purifying
-            new Skill(80281, Class.Common, "",""),//purifying
+            new Skill(51028, Class.Common, "Marrow brooch",""),//marrow
+            new Skill(51011, Class.Common, "Quatrefoil brooch",""),//quatrefoil
+            new Skill(19698, Class.Common, "Simple grounding brooch",""),//simple grounding
+            new Skill(19699, Class.Common, "Grounding brooch",""),//grounding
+            new Skill(19702, Class.Common, "Simple empowered brooch",""),//simple empowered
+            new Skill(19703, Class.Common, "Empowered brooch",""),//empowered
+            new Skill(19705, Class.Common, "Simple quickcarve brooch",""),//simple quickcarve
+            new Skill(19706, Class.Common, "Quickcarve brooch",""),//quickcarve
+            new Skill(19734, Class.Common, "Simple cleansing brooch",""),//simple cleansing
+            new Skill(19735, Class.Common, "Cleansing brooch",""),//cleansing
+            new Skill(6466,  Class.Common, "Iridescent treatening brooch",""), //iridescent threat
+            new Skill(6469,  Class.Common, "Iridescent powerful brooch",""), //iridescent empowered
+            new Skill(6472,  Class.Common, "Iridescent keen brooch",""), //iridescent quickcarve
+            new Skill(80280, Class.Common, "Simple purifying brooch",""),//simple purifying
+            new Skill(80281, Class.Common, "Purifying brooch",""),//purifying
         };
         static List<string> IconsList = new List<string>
         {

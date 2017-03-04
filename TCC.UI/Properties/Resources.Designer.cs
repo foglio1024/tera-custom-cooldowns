@@ -59,5 +59,15 @@ namespace TCC.UI.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Icon simile a (Icona).
+        /// </summary>
+        internal static System.Drawing.Icon tcc {
+            get {
+                object obj = ResourceManager.GetObject("tcc", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
     }
 }

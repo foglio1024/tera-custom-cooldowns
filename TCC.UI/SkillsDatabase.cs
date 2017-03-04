@@ -43,7 +43,6 @@ namespace TCC.UI
                 {
                     name = s.Attribute("name").Value;
                 }
-
                 Enum.TryParse(s.Attribute("class").Value, out Class c);
                 string toolTip = string.Empty;
 
@@ -51,9 +50,12 @@ namespace TCC.UI
                 {
                     toolTip = s.Attribute("toolTip").Value;
                 }
+                if(s.Attribute("class").Value != "Common")
+                {
+                    var skill = new Skill(id, c, name, toolTip);
+                    Skills.Add(skill);
+                }
 
-                var skill = new Skill(id, c, name, toolTip);
-                Skills.Add(skill);
             }
         }
         static void ParseSkillIconDoc(XDocument doc)

@@ -1,0 +1,26 @@
+﻿<Window x:Class="TCC.UI.EdgeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TCC.UI"
+        mc:Ignorable="d"
+        Title="EdgeWindow" Height="60" Width="60" Opacity="0" AllowsTransparency="True" WindowStyle="None" ShowInTaskbar="False" Background="Transparent" MouseLeftButtonDown="Window_MouseLeftButtonDown" Topmost="True">
+    <Grid x:Name="MainGrid">
+        <Grid.Resources>
+        </Grid.Resources>
+        <Ellipse Width="50" Height="50">
+            <Ellipse.Fill>
+                <ImageBrush ImageSource="resources/icons/Raker_Tex.png" Opacity=".7"/>
+            </Ellipse.Fill>
+        </Ellipse>
+        <Ellipse Width = "60" Height="60" Fill="#65000000"></Ellipse>
+        <TextBlock Name="num"
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" 
+                   FontSize="25" 
+                   FontFamily="Roboto Mono" 
+                   Foreground="#f0ffffff"
+                   FontWeight="UltraLight">0</TextBlock>
+    </Grid>
+</Window>
