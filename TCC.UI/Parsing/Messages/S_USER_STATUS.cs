@@ -11,10 +11,11 @@ namespace TCC.UI
     public class S_USER_STATUS : ParsedMessage
     {
         public bool isInCombat;
+        public ulong id;
 
         public S_USER_STATUS(TeraMessageReader reader) : base(reader)
         {
-            reader.Skip(8);
+            id = reader.ReadUInt64();
             if(reader.ReadInt32() == 1)
             {
                 isInCombat = true;

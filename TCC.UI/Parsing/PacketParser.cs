@@ -91,7 +91,7 @@ namespace TCC.UI
                     break;
                 case ("S_USER_STATUS"):
                     var sUserStatus = new S_USER_STATUS(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer));
-                    if (sUserStatus.isInCombat)
+                    if (sUserStatus.id == CurrentCharId && sUserStatus.isInCombat)
                     {
                         MainWindow.UndimEdgeGauge();
                     }

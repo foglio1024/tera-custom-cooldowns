@@ -73,42 +73,42 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Arc.cs" />
-    <Compile Include="Character.cs" />
-    <Compile Include="CharListProcessor.cs" />
-    <Compile Include="CharLoginProcessor.cs" />
-    <Compile Include="EdgeArc.xaml.cs">
+    <Compile Include="UI elements\Arc.cs" />
+    <Compile Include="Data\Character.cs" />
+    <Compile Include="Parsing\CharListProcessor.cs" />
+    <Compile Include="Parsing\CharLoginProcessor.cs" />
+    <Compile Include="Edge\EdgeArc.xaml.cs">
       <DependentUpon>EdgeArc.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EdgeWindow.xaml.cs">
+    <Compile Include="Edge\EdgeWindow.xaml.cs">
       <DependentUpon>EdgeWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Enums.cs" />
-    <Compile Include="BroochesDatabase.cs" />
+    <Compile Include="Data\Enums.cs" />
+    <Compile Include="Data\BroochesDatabase.cs" />
     <Compile Include="FocusManager.cs" />
-    <Compile Include="ListParser.cs" />
-    <Compile Include="Messages\S_ABNORMALITY_BEGIN.cs" />
-    <Compile Include="Messages\S_DECREASE_COOLTIME_SKILL.cs" />
-    <Compile Include="Messages\S_GET_USER_LIST.cs" />
-    <Compile Include="Messages\S_LOGIN.cs" />
-    <Compile Include="Messages\S_PLAYER_STAT_UPDATE.cs" />
-    <Compile Include="Messages\S_START_COOLTIME_ITEM.cs" />
-    <Compile Include="Skill.cs" />
-    <Compile Include="SkillIconControl.xaml.cs">
+    <Compile Include="Parsing\ListParser.cs" />
+    <Compile Include="Parsing\Messages\S_ABNORMALITY_BEGIN.cs" />
+    <Compile Include="Parsing\Messages\S_DECREASE_COOLTIME_SKILL.cs" />
+    <Compile Include="Parsing\Messages\S_GET_USER_LIST.cs" />
+    <Compile Include="Parsing\Messages\S_LOGIN.cs" />
+    <Compile Include="Parsing\Messages\S_PLAYER_STAT_UPDATE.cs" />
+    <Compile Include="Parsing\Messages\S_START_COOLTIME_ITEM.cs" />
+    <Compile Include="Data\Skill.cs" />
+    <Compile Include="UI elements\SkillIconControl.xaml.cs">
       <DependentUpon>SkillIconControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SkillQueue.cs" />
-    <Compile Include="SkillCooldown.cs" />
-    <Compile Include="SkillListener.cs" />
+    <Compile Include="Data\SkillQueue.cs" />
+    <Compile Include="Data\SkillCooldown.cs" />
+    <Compile Include="Data\SkillListener.cs" />
     <Compile Include="SkillManager.cs" />
-    <Compile Include="SkillsDatabase.cs" />
-    <Compile Include="StringUtils.cs" />
-    <Compile Include="S_USER_STATUS.cs" />
-    <Page Include="EdgeArc.xaml">
+    <Compile Include="Data\SkillsDatabase.cs" />
+    <Compile Include="Parsing\StringUtils.cs" />
+    <Compile Include="Parsing\Messages\S_USER_STATUS.cs" />
+    <Page Include="Edge\EdgeArc.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EdgeWindow.xaml">
+    <Page Include="Edge\EdgeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -120,20 +120,20 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CustomReader.cs" />
+    <Compile Include="Parsing\CustomReader.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="SkillIconControl.xaml">
+    <Page Include="UI elements\SkillIconControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Messages\C_CHECK_VERSION_CUSTOM.cs" />
-    <Compile Include="Messages\S_START_COOLTIME_SKILL.cs" />
-    <Compile Include="PacketParser.cs" />
+    <Compile Include="Parsing\Messages\C_CHECK_VERSION_CUSTOM.cs" />
+    <Compile Include="Parsing\Messages\S_START_COOLTIME_SKILL.cs" />
+    <Compile Include="Parsing\PacketParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
