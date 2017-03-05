@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Tera.Game;
 
-namespace TCC.UI
+namespace TCC
 {
     class CustomReader : BinaryReader
     {

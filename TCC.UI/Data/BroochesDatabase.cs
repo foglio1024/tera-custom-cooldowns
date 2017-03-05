@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Xml.Linq;
 
-namespace TCC.UI
+namespace TCC
 {
     public static class BroochesDatabase
     {

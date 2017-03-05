@@ -10,13 +10,14 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
-namespace TCC.UI
+namespace TCC
 {
 
     public partial class EdgeWindow : Window
@@ -55,6 +56,8 @@ namespace TCC.UI
             t.Interval = TimeSpan.FromSeconds(.5);
             t.Tick += T_Tick;
             //t.Start();
+
+
 
         }
         static int i = 0;
@@ -127,6 +130,13 @@ namespace TCC.UI
                 Instance.ExpireEdge.Elapsed += (s, o) => { SetEdge(0); };
                 Instance.ExpireEdge.Enabled = true;
             });
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            IntPtr hwnd = new WindowInteropHelper(this).Handle;
+            FocusManager.MakeUnfocusable(hwnd);
+            FocusManager.HideFromToolBar(hwnd);
         }
     }
 

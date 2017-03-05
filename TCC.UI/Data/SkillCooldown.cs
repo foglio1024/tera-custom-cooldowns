@@ -5,7 +5,7 @@ using System.Text;
 using System.Timers;
 using System.Threading.Tasks;
 
-namespace TCC.UI
+namespace TCC
 {
     public enum CooldownType
     {

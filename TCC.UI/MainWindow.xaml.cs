@@ -6,12 +6,13 @@ using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 
 
-namespace TCC.UI
+namespace TCC
 {
 
 
@@ -224,6 +225,10 @@ namespace TCC.UI
             this.Top = Properties.Settings.Default.Top;
             this.Left = Properties.Settings.Default.Left;
 
+            IntPtr hwnd = new WindowInteropHelper(this).Handle;
+            FocusManager.MakeUnfocusable(hwnd);
+            FocusManager.HideFromToolBar(hwnd);
+
             var a = new DoubleAnimation(0,359.9, TimeSpan.FromSeconds(.7))
             {
                 EasingFunction = new QuadraticEase()
@@ -250,6 +255,7 @@ namespace TCC.UI
             FocusTimer = new DispatcherTimer();
             FocusTimer.Interval = TimeSpan.FromSeconds(1);
             FocusTimer.Tick += CheckForegroundWindow;
+
 
         }
 

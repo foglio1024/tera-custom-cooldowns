@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TCC.Messages;
-using TCC.UI.Messages;
 
-namespace TCC.UI
+namespace TCC
 {
     public delegate void SkillAddedEventHandler(object sender, EventArgs e, SkillCooldown s);
     public delegate void SkillOverEventHandler(object sender, EventArgs e, SkillCooldown s);
@@ -62,7 +61,7 @@ namespace TCC.UI
                     break;
 
                 case CooldownType.Item:
-                    if(BroochesDatabase.GetBrooch(sk.Id) != null)
+                    if (BroochesDatabase.GetBrooch(sk.Id) != null)
                     {
                         var name = BroochesDatabase.GetBrooch(sk.Id).Name;
                         if (!LastSkills.Contains(name))
@@ -81,7 +80,6 @@ namespace TCC.UI
         }
         public static void ResetSkill(uint id)
         {
-            var name = SkillsDatabase.GetSkill(id, PacketParser.CurrentClass).Name;
             if (LongSkillsQueue.Where(x => x.Id == id).Count() > 0)
             {
                 LongSkillsQueue.Where(x => x.Id == id).Single().Timer.Stop();
@@ -95,8 +93,17 @@ namespace TCC.UI
                 MainWindow.RemoveNormalSkill(new SkillCooldown(id, 0, CooldownType.Skill));
 
             }
-            LastSkills.Remove(name);
-            Console.WriteLine(id + " reset.");
+
+            try
+            {
+                var name = SkillsDatabase.GetSkill(id, PacketParser.CurrentClass).Name;
+                LastSkills.Remove(name);
+                Console.WriteLine(name + " reset.");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Cannot reset skill.");
+            }
         }
         public static void ChangeSkillCooldown(SkillCooldown sk)
         {
@@ -134,7 +141,16 @@ namespace TCC.UI
 
             }
 
-            Console.WriteLine("{0} cooldown reduced.", SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass).Name);
+            try
+            {
+                Console.WriteLine("{0} cooldown reduced.", SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass).Name);
+
+            }
+            catch (Exception)
+            {
+
+                Console.WriteLine("Unknown's skill cooldown reduced.");
+            }
         }
 
         public static void Clear()

@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B3F6E516-CD4B-404E-93C5-FFC729406FA9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>TCC.UI</RootNamespace>
+    <RootNamespace>TCC</RootNamespace>
     <AssemblyName>TCC</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

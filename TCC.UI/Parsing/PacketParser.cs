@@ -7,10 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using TCC.Messages;
-using TCC.UI.Messages;
 using Tera.Game;
 
-namespace TCC.UI
+namespace TCC
 {
     public static class PacketParser
     {

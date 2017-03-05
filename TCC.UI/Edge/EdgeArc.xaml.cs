@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TCC.UI
+namespace TCC
 {
     /// <summary>
     /// Logica di interazione per EdgeArc.xaml
