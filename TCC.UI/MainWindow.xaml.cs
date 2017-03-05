@@ -46,6 +46,7 @@ namespace TCC
         DispatcherTimer FocusTimer;
         System.Windows.Forms.NotifyIcon NI;
         ContextMenu CM;
+        bool transparent;
         public MainWindow()
         {
             Instance = this;
@@ -60,8 +61,26 @@ namespace TCC
 
             CM = new ContextMenu();
             var c = new MenuItem() { Header = "Close" };
+            var d = new MenuItem() { Header = "Click through" };
             c.Click += (s, ev) => CloseApp();
+            d.Click += (s, ev) =>
+            {
+                if (transparent)
+                {
+                    FocusManager.UndoTransparent(new WindowInteropHelper(this).Handle);
+                    d.IsChecked = false;
+                    transparent = false;
+                }
+                else
+                {
+                    FocusManager.MakeTransparent(new WindowInteropHelper(this).Handle);
+                    d.IsChecked = true;
+                    transparent = true;
+                }
+
+            };
             CM.Items.Add(c);
+            CM.Items.Add(d);
             NormalSkillsModel = new SkillsModel();
             LongSkillsModel = new SkillsModel();
             TeraSniffer.Instance.MessageReceived += PacketParser.MessageReceived;
@@ -181,6 +200,7 @@ namespace TCC
             Properties.Settings.Default.Top = this.Top;
             Properties.Settings.Default.ELeft = EdgeGauge.Left;
             Properties.Settings.Default.ETop = EdgeGauge.Top;
+            Properties.Settings.Default.Transparent = transparent;
 
             Properties.Settings.Default.Save();
 
@@ -224,6 +244,19 @@ namespace TCC
         {
             this.Top = Properties.Settings.Default.Top;
             this.Left = Properties.Settings.Default.Left;
+            if(Properties.Settings.Default.Transparent)
+            {
+                this.transparent = true;
+                ((MenuItem)CM.Items[1]).IsChecked = true;
+                FocusManager.MakeTransparent(new WindowInteropHelper(this).Handle);
+            }
+            else
+            {
+                this.transparent = false;
+                ((MenuItem)CM.Items[1]).IsChecked = false;
+            }
+
+
 
             IntPtr hwnd = new WindowInteropHelper(this).Handle;
             FocusManager.MakeUnfocusable(hwnd);

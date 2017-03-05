@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TCC.UI.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TCC.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="Top" Type="System.Double" Scope="User">
@@ -13,6 +13,9 @@
     </Setting>
     <Setting Name="ELeft" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Transparent" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -70,5 +70,17 @@ namespace TCC.Properties {
                 this["ELeft"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Transparent {
+            get {
+                return ((bool)(this["Transparent"]));
+            }
+            set {
+                this["Transparent"] = value;
+            }
+        }
     }
 }

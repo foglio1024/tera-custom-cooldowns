@@ -9,9 +9,9 @@ namespace TCC
 {
     static class FocusManager
     {
-        const int WS_EX_TRANSPARENT = 0x20;      //clickthru
-        const int WS_EX_NOACTIVATE = 0x08000000; //don't focus
-        const int WS_EX_TOOLWINDOW = 0x00000080; //don't show in alt-tab
+        const uint WS_EX_TRANSPARENT = 0x20;      //clickthru
+        const uint WS_EX_NOACTIVATE = 0x08000000; //don't focus
+        const uint WS_EX_TOOLWINDOW = 0x00000080; //don't show in alt-tab
         const int GWL_EXSTYLE = (-20);           //set new exStyle
 
         [DllImport("user32.dll")]
@@ -21,33 +21,33 @@ namespace TCC
         public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
 
         [DllImport("user32.dll")]
-        static extern int GetWindowLong(IntPtr hwnd, int index);
+        static extern uint GetWindowLong(IntPtr hwnd, int index);
 
         [DllImport("user32.dll")]
-        static extern int SetWindowLong(IntPtr hwnd, int index, int newStyle);
+        static extern uint SetWindowLong(IntPtr hwnd, int index, uint newStyle);
 
         public static void MakeUnfocusable(IntPtr hwnd)
         {
-            int extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
+            uint extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
             SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_NOACTIVATE);
         }
 
         public static void HideFromToolBar(IntPtr hwnd)
         {
-            int extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
+            uint extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
             SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_TOOLWINDOW);
         }
 
         public static void MakeTransparent(IntPtr hwnd)
         {
-            int extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
+            uint extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
             SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_TRANSPARENT);
         }
 
         public static void UndoTransparent(IntPtr hwnd)
         {
-            int extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
-            SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | ~WS_EX_TRANSPARENT);
+            uint extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
+            SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle & ~WS_EX_TRANSPARENT);
         }
 
     }
