@@ -155,7 +155,7 @@ namespace TCC
                     {
                         case CooldownType.Skill:
                             Instance.LongSkillsModel.SkillIndicators.Remove(Instance.LongSkillsModel.SkillIndicators.Where(x => x.Skill.Id == sk.Id).First());
-                            Console.WriteLine("Removed {0} indicator.", SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass).Name);
+                            Console.WriteLine("Removed {0} indicator.", SkillsDatabase.SkillIdToName(sk.Id, PacketParser.CurrentClass));
                             break;
 
                         case CooldownType.Item:
@@ -170,7 +170,7 @@ namespace TCC
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Can't remove {0} indicator.", SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass).Name);
+                    Console.WriteLine("Can't remove {0} indicator.", SkillsDatabase.SkillIdToName(sk.Id, PacketParser.CurrentClass));
                 }
             });
         }
@@ -264,6 +264,7 @@ namespace TCC
             Instance.Dispatcher.Invoke(() =>
             {
                 EdgeGauge.Show();
+                Console.WriteLine("Edge showed");
             });
         }
         public static void HideEdgeGauge()
@@ -271,6 +272,7 @@ namespace TCC
             Instance.Dispatcher.Invoke(() =>
             {
                 EdgeGauge.Hide();
+                Console.WriteLine("Edge hidden");
             });
         }
         public static void DimEdgeGauge()
@@ -282,6 +284,7 @@ namespace TCC
                     EasingFunction = new QuadraticEase()
                 };
                 EdgeGauge.BeginAnimation(OpacityProperty, a);
+                Console.WriteLine("Edge dim");
             });
 
         }
@@ -294,6 +297,8 @@ namespace TCC
                     EasingFunction = new QuadraticEase()
                 };
                 EdgeGauge.BeginAnimation(OpacityProperty, a);
+                Console.WriteLine("Edge undim");
+
             });
 
         }

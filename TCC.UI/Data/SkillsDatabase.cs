@@ -124,7 +124,7 @@ namespace TCC
             {
                 return Skills.Where(x => x.Id == id).Where(x => x.Class == c).First();
             }
-            else return null;
+            else return new Skill(0, Class.None, string.Empty, string.Empty);
 
         }
     }

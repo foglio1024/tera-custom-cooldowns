@@ -21,6 +21,7 @@ namespace TCC
         Fighter = 10,
         Assassin = 11,
         Moon_Dancer = 12,
-        Common = 255
+        Common = 255,
+        None = 256
     }
 }

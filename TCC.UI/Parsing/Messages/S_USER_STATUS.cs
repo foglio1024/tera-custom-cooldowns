@@ -20,12 +20,10 @@ namespace TCC.Messages
             if(reader.ReadInt32() == 1)
             {
                 isInCombat = true;
-                Console.WriteLine("Combat");
             }
             else
             {
                 isInCombat = false;
-                Console.WriteLine("Out of combat");
             }
         }
     }

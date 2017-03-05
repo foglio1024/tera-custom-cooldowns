@@ -10,11 +10,8 @@
         <Grid.Resources>
         </Grid.Resources>
         <Ellipse Width="50" Height="50">
-            <Ellipse.Fill>
-                <ImageBrush Opacity=".7" ImageSource="../resources/icons/Raker_Tex.png"/>
-            </Ellipse.Fill>
         </Ellipse>
-        <Ellipse Width = "60" Height="60" Fill="#65000000"></Ellipse>
+        <Ellipse Width = "60" Height="60" Fill="#90000000"></Ellipse>
         <TextBlock Name="num"
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center" 

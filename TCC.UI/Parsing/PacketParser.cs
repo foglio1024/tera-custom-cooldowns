@@ -90,13 +90,18 @@ namespace TCC
                     break;
                 case ("S_USER_STATUS"):
                     var sUserStatus = new S_USER_STATUS(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer));
-                    if (sUserStatus.id == CurrentCharId && sUserStatus.isInCombat)
+                    if (sUserStatus.id == CurrentCharId)
                     {
-                        MainWindow.UndimEdgeGauge();
-                    }
-                    else
-                    {
-                        MainWindow.DimEdgeGauge();
+                        if (sUserStatus.isInCombat)
+                        {
+                            Console.WriteLine("received:{0} - current:{1} -- combat, undimming", sUserStatus.id, CurrentCharId);
+                            MainWindow.UndimEdgeGauge();
+                        }
+                        else
+                        {
+                            Console.WriteLine("received:{0} - current:{1} -- not in combat, dimming", sUserStatus.id, CurrentCharId);
+                            MainWindow.DimEdgeGauge();
+                        }
                     }
                     break;
                 default:
