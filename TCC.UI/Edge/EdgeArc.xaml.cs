@@ -25,8 +25,19 @@ namespace TCC
         {
             InitializeComponent();
             ChangeStatus += OnStatusChanged;
+            EdgeWindow.Instance.MaxedEdge += Instance_MaxedEdge;
+            EdgeWindow.Instance.NormalEdge += Instance_NormalEdge;
         }
 
+        private void Instance_NormalEdge()
+        {
+            arc.Stroke.BeginAnimation(SolidColorBrush.ColorProperty, new ColorAnimation(Colors.White, TimeSpan.FromMilliseconds(EdgeWindow.spawnTime)));
+        }
+
+        private void Instance_MaxedEdge()
+        {
+            arc.Stroke.BeginAnimation(SolidColorBrush.ColorProperty, new ColorAnimation(Colors.Red, TimeSpan.FromMilliseconds(EdgeWindow.spawnTime)));
+        }
 
         bool isBuilt;
         public bool IsBuilt { get { return isBuilt; }
@@ -69,6 +80,11 @@ namespace TCC
                     arc.BeginAnimation(Arc.EndAngleProperty, null);
                 };
             }
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            arc.Stroke = new SolidColorBrush(Colors.White);
         }
     }
 }

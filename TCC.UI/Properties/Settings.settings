@@ -2,16 +2,22 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TCC.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="Top" Type="System.Double" Scope="User">
+    <Setting Name="CooldownBarTop" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="Left" Type="System.Double" Scope="User">
+    <Setting Name="CooldownBarLeft" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="ETop" Type="System.Double" Scope="User">
+    <Setting Name="EdgeWindowTop" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="ELeft" Type="System.Double" Scope="User">
+    <Setting Name="EdgeWindowLeft" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="HPBarTop" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="HPBarLeft" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="Transparent" Type="System.Boolean" Scope="User">

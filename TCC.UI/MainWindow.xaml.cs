@@ -29,7 +29,6 @@ namespace TCC
     {
         public Skill Skill { get; set; }
         public int Cooldown { get; set; }
-
         public SkillIndicator(Skill sk, int cd)
         {
             Skill = sk;
@@ -37,76 +36,29 @@ namespace TCC
         }
     }
 
-    public partial class MainWindow : Window
+    public partial class CooldownsBarWindow : Window
     {
-        public static MainWindow Instance;
-        public static EdgeWindow EdgeGauge;
+        public static CooldownsBarWindow Instance;
         public SkillsModel NormalSkillsModel;
         public SkillsModel LongSkillsModel;
-        DispatcherTimer FocusTimer;
-        System.Windows.Forms.NotifyIcon NI;
-        ContextMenu CM;
-        bool transparent;
-        public MainWindow()
+        public CooldownsBarWindow()
         {
             Instance = this;
 
-            NI = new System.Windows.Forms.NotifyIcon()
-            {
-                Icon = Properties.Resources.tcc,
-                Visible = true
-            };
-
-            NI.MouseDown += NI_MouseDown;
-
-            CM = new ContextMenu();
-            var c = new MenuItem() { Header = "Close" };
-            var d = new MenuItem() { Header = "Click through" };
-            c.Click += (s, ev) => CloseApp();
-            d.Click += (s, ev) =>
-            {
-                if (transparent)
-                {
-                    FocusManager.UndoTransparent(new WindowInteropHelper(this).Handle);
-                    d.IsChecked = false;
-                    transparent = false;
-                }
-                else
-                {
-                    FocusManager.MakeTransparent(new WindowInteropHelper(this).Handle);
-                    d.IsChecked = true;
-                    transparent = true;
-                }
-
-            };
-            CM.Items.Add(c);
-            CM.Items.Add(d);
             NormalSkillsModel = new SkillsModel();
             LongSkillsModel = new SkillsModel();
-            TeraSniffer.Instance.MessageReceived += PacketParser.MessageReceived;
-            TeraSniffer.Instance.Enabled = true;
-            TeraSniffer.Instance.NewConnection += (srv) => SkillManager.Clear();
-            TeraSniffer.Instance.EndConnection += () => SkillManager.Clear();
+
             SkillsDatabase.Progress += UpdateLoadGauge;
-            PacketParser.CurrentClass = Class.Common;
-            EdgeGauge = new EdgeWindow();
-            ShowEdgeGauge();
+
             InitializeComponent();
 
             NormalSkillsPanel.ItemsSource = NormalSkillsModel.SkillIndicators;
             NormalSkillsPanel.DataContext = NormalSkillsModel;
+
             LongSkillsPanel.ItemsSource = LongSkillsModel.SkillIndicators;
             LongSkillsPanel.DataContext = LongSkillsModel;
 
 
-        }
-
-        private void NI_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
-        {
-            if(e.Button == System.Windows.Forms.MouseButtons.Right)
-            {
-                CM.IsOpen = true;
-            }
         }
 
         public static void ClearSkills()
@@ -194,24 +146,11 @@ namespace TCC
             });
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            Properties.Settings.Default.Left = this.Left;
-            Properties.Settings.Default.Top = this.Top;
-            Properties.Settings.Default.ELeft = EdgeGauge.Left;
-            Properties.Settings.Default.ETop = EdgeGauge.Top;
-            Properties.Settings.Default.Transparent = transparent;
-
-            Properties.Settings.Default.Save();
-
-        }
-
         private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             //SkillManager.AddSkill(new SkillCooldown(100700, 2000, CooldownType.Skill)); //test skill
             this.DragMove();
         }
-
         private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             ClearSkills();
@@ -230,130 +169,33 @@ namespace TCC
             });
         }
 
-        public void CloseApp()
-        {
-            TeraSniffer.Instance.Enabled = false;
-
-            FocusTimer.Stop();
-            Close();
-            NI.Visible = false;
-            Environment.Exit(0);
-
-        }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Top = Properties.Settings.Default.Top;
-            this.Left = Properties.Settings.Default.Left;
-            if(Properties.Settings.Default.Transparent)
-            {
-                this.transparent = true;
-                ((MenuItem)CM.Items[1]).IsChecked = true;
-                FocusManager.MakeTransparent(new WindowInteropHelper(this).Handle);
-            }
-            else
-            {
-                this.transparent = false;
-                ((MenuItem)CM.Items[1]).IsChecked = false;
-            }
-
-
+            this.Top = Properties.Settings.Default.CooldownBarTop;
+            this.Left = Properties.Settings.Default.CooldownBarLeft;
 
             IntPtr hwnd = new WindowInteropHelper(this).Handle;
             FocusManager.MakeUnfocusable(hwnd);
             FocusManager.HideFromToolBar(hwnd);
 
-            var a = new DoubleAnimation(0,359.9, TimeSpan.FromSeconds(.7))
-            {
-                EasingFunction = new QuadraticEase()
-            };
-            a.Completed += (s, o) =>
-            {
-                loadArc.Visibility = Visibility.Hidden;
-                FocusTimer.Start();
-            };
-
-
-            var t = new Thread(new ThreadStart(() =>
-            {
-                SkillsDatabase.Populate();
-                BroochesDatabase.SetBroochesIcons();
-                Dispatcher.Invoke(() =>
-                {
-                    loadArc.Stroke = new SolidColorBrush(Color.FromArgb(255, 100, 255, 100));
-                    loadArc.BeginAnimation(Arc.StartAngleProperty, a);
-                });
-            }));
-            t.Start();
-            
-            FocusTimer = new DispatcherTimer();
-            FocusTimer.Interval = TimeSpan.FromSeconds(1);
-            FocusTimer.Tick += CheckForegroundWindow;
-
-
         }
-
-        public static void ShowEdgeGauge()
+        public void LoadingDone()
         {
-            Instance.Dispatcher.Invoke(() =>
+            Dispatcher.Invoke(() =>
             {
-                EdgeGauge.Show();
-                Console.WriteLine("Edge showed");
-            });
-        }
-        public static void HideEdgeGauge()
-        {
-            Instance.Dispatcher.Invoke(() =>
-            {
-                EdgeGauge.Hide();
-                Console.WriteLine("Edge hidden");
-            });
-        }
-        public static void DimEdgeGauge()
-        {
-            Instance.Dispatcher.Invoke(() =>
-            {
-                var a = new DoubleAnimation(0, TimeSpan.FromMilliseconds(300))
+                var a = new DoubleAnimation(0, 359.9, TimeSpan.FromSeconds(.7))
                 {
                     EasingFunction = new QuadraticEase()
                 };
-                EdgeGauge.BeginAnimation(OpacityProperty, a);
-                Console.WriteLine("Edge dim");
-            });
-
-        }
-        public static void UndimEdgeGauge()
-        {
-            Instance.Dispatcher.Invoke(() =>
-            {
-                var a = new DoubleAnimation(1, TimeSpan.FromMilliseconds(300))
+                a.Completed += (s, o) =>
                 {
-                    EasingFunction = new QuadraticEase()
+                    loadArc.Visibility = Visibility.Hidden;
+                    FocusManager.FocusTimer.Start();
+                    this.Hide();
                 };
-                EdgeGauge.BeginAnimation(OpacityProperty, a);
-                Console.WriteLine("Edge undim");
-
+                loadArc.Stroke = new SolidColorBrush(Color.FromArgb(255, 100, 255, 100));
+                loadArc.BeginAnimation(Arc.StartAngleProperty, a);
             });
-
-        }
-        private void CheckForegroundWindow(object sender, EventArgs e)
-        {
-            IntPtr hwnd = FocusManager.GetForegroundWindow();
-            FocusManager.GetWindowThreadProcessId(hwnd, out uint procId);
-            var proc = Process.GetProcessById((int)procId);
-
-            if(proc.ProcessName == "TERA" || proc.ProcessName == "TCC" || proc.ProcessName == "devenv")
-            {
-                this.Show();
-                if(PacketParser.CurrentClass == Class.Warrior)
-                {
-                    ShowEdgeGauge();
-                }
-            }
-            else
-            {
-                this.Hide();
-                HideEdgeGauge();
-            }
         }
     }
 }

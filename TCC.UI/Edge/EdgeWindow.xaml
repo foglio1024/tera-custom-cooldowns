@@ -5,19 +5,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCC"
         mc:Ignorable="d"
-        Title="EdgeWindow" Height="60" Width="60" Opacity="0" AllowsTransparency="True" WindowStyle="None" ShowInTaskbar="False" Background="Transparent" MouseLeftButtonDown="Window_MouseLeftButtonDown" Topmost="True" Loaded="Window_Loaded">
-    <Grid x:Name="MainGrid">
-        <Grid.Resources>
-        </Grid.Resources>
-        <Ellipse Width="50" Height="50">
-        </Ellipse>
-        <Ellipse Width = "60" Height="60" Fill="#90000000"></Ellipse>
+        Title="EdgeWindow" 
+        SizeToContent="WidthAndHeight" 
+        Opacity="1" 
+        AllowsTransparency="True" 
+        WindowStyle="None" 
+        ShowInTaskbar="False" 
+        Background="Transparent" 
+        MouseLeftButtonDown="Window_MouseLeftButtonDown" 
+        Topmost="True" 
+        Loaded="Window_Loaded"
+        Width="Auto"
+        Height="Auto" d:DesignWidth="300" d:DesignHeight="300">
+    <Grid x:Name="MainGrid" Margin="20">
+        <Grid.Effect>
+            <DropShadowEffect x:Name="glow" Color="Red" ShadowDepth="0" BlurRadius="25" Opacity="0"/>
+        </Grid.Effect>
+        <Ellipse Width="70" Height="70" Fill="#80000000" Name="baseEll" Stroke="#90000000" StrokeThickness="3"/>
+
+        <Grid Name="cdGrid" Margin="0" Width="Auto" Height="Auto">
+            <local:Arc x:Name="scytheCd" Stroke="White" StrokeThickness="3" EndAngle="0"></local:Arc>
+        </Grid>
+        <Grid Name="GambleGrid" Margin="6" Width="Auto" Height="Auto">
+            <local:Arc x:Name="gambleCd" Stroke="Gray" Opacity=".8" StrokeThickness="3" EndAngle="0"></local:Arc>
+            <local:Arc x:Name="gambleDuration" Stroke="Orange" StrokeThickness="3" EndAngle="0">
+                <local:Arc.Effect>
+                    <DropShadowEffect Color="Orange" ShadowDepth="0" BlurRadius="7"/>
+                </local:Arc.Effect>
+            </local:Arc>
+        </Grid>
+        <Grid Name="ArcsGrid" Margin="12">
+
+        </Grid>
         <TextBlock Name="num"
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center" 
                    FontSize="25" 
                    FontFamily="Roboto Mono" 
                    Foreground="#f0ffffff"
-                   FontWeight="UltraLight">0</TextBlock>
+                   FontWeight="UltraLight">0
+            <TextBlock.Effect>
+                <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="20"></DropShadowEffect>
+            </TextBlock.Effect>
+        </TextBlock>
     </Grid>
 </Window>

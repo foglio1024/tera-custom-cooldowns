@@ -13,66 +13,97 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace TCC
 {
-
+    public delegate void MaxEdge();
+    public delegate void EdgeReset();
     public partial class EdgeWindow : Window
     {
-        DispatcherTimer t;
-        Timer ExpireEdge;
-        static Color arcBaseColor = Colors.Orange;
-        public static int spawnTime = 100;
-        List<EdgeArc> edgeArcs;
         public static EdgeWindow Instance;
+
+        DispatcherTimer TestTimer;
+        Timer ExpireEdge;
+        public event MaxEdge MaxedEdge;
+        public event EdgeReset NormalEdge;
+
+        List<EdgeArc> edgeArcs;
+
+        static Color arcBaseColor = Color.FromArgb(0xff,0xff,0xbf,0);
+        public static int spawnTime = 100;
+
         public EdgeWindow()
         {
             Instance = this;
             InitializeComponent();
 
-            Left = Properties.Settings.Default.ELeft;
-            Top = Properties.Settings.Default.ETop;
+            Warrior.Scythed += StartScytheCooldown;
+            Warrior.GambleBuff += StartGambleBuff;
+            Warrior.GambleCooldown += StartGambleCooldown;
+
+            Left = Properties.Settings.Default.EdgeWindowLeft;
+            Top = Properties.Settings.Default.EdgeWindowTop;
 
             edgeArcs = new List<EdgeArc>();
+
             for (int i = 0; i < 10; i++)
             {
                 var a = new EdgeArc();
                 a.arc.RenderTransform = new RotateTransform(i * 36);
-                a.arc.Stroke = new SolidColorBrush(arcBaseColor);
                 edgeArcs.Add(a);
             }
+
             foreach (var item in edgeArcs)
             {
-                MainGrid.Children.Add(item);
+                ArcsGrid.Children.Add(item);
             }
 
-            ExpireEdge = new Timer(8000);
+            ExpireEdge = new Timer(7000);
             ExpireEdge.Elapsed += (s, o) => { SetEdge(0); };
 
-            t = new DispatcherTimer();
-            t.Interval = TimeSpan.FromSeconds(.5);
-            t.Tick += T_Tick;
-            //t.Start();
+            TestTimer = new DispatcherTimer()
+            {
+                Interval = TimeSpan.FromSeconds(1)
+            };
+            TestTimer.Tick += TestTimer_Tick;
+            //TestTimer.Start();
+        }
 
-
+        private void StartGambleCooldown(int cd)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                gambleCd.BeginAnimation(Arc.EndAngleProperty, EdgeAnimations.GetArcAnimation(cd));
+            });
 
         }
-        static int i = 0;
-        private void T_Tick(object sender, EventArgs e)
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if(i == 10)
+            IntPtr hwnd = new WindowInteropHelper(this).Handle;
+            FocusManager.MakeUnfocusable(hwnd);
+            FocusManager.HideFromToolBar(hwnd);
+        }
+
+        static int testEdge = 0;
+        private void TestTimer_Tick(object sender, EventArgs e)
+        {
+            if(testEdge == 10)
             {
-                i = 0;
+                testEdge = 0;
+                StartScytheCooldown(3000);
+                StartGambleBuff(7000);
+                StartGambleCooldown(9000);
             }
             else
             {
-                i++;
+                testEdge++;
             }
-            SetEdge(i);
-
+            SetEdge(testEdge);
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -80,7 +111,7 @@ namespace TCC
             DragMove();
         }
 
-
+        int oldEdge = 0;
         public static void SetEdge(int edge)
         {
             
@@ -89,31 +120,32 @@ namespace TCC
                 Instance.ExpireEdge.Stop();
                 if (edge == 0)
                 {
-                    var a = new ColorAnimation(arcBaseColor, TimeSpan.FromMilliseconds(spawnTime));
-                    var sb = new SolidColorBrush(Colors.Red);
                     foreach (var item in Instance.edgeArcs)
                     {
                         item.IsBuilt = false;
-
-                        item.arc.Stroke = sb;
-                        sb.BeginAnimation(SolidColorBrush.ColorProperty, a);
-
+                        //item.arc.Stroke.BeginAnimation(SolidColorBrush.ColorProperty, EdgeAnimations.GetColorAnimation(arcBaseColor));
+                        Instance.baseEll.Stroke.BeginAnimation(SolidColorBrush.ColorProperty, EdgeAnimations.GetColorAnimation(Color.FromArgb(0x90,0,0,0)));
+                    }
+                    if(Instance.oldEdge == 10)
+                    {
+                        Instance.glow.BeginAnimation(DropShadowEffect.OpacityProperty, EdgeAnimations.ShadowOpacityAnimationDown);
+                        Instance.NormalEdge?.Invoke();
                     }
                 }
                 else if(edge == 10)
                 {
-                    var a = new ColorAnimation(Colors.Red, TimeSpan.FromMilliseconds(spawnTime));
-                    var sb = new SolidColorBrush( arcBaseColor);
                     foreach (var item in Instance.edgeArcs)
                     {
                         if (!item.IsBuilt)
                         {
                             item.IsBuilt = true;
                         }
-                        item.arc.Stroke = sb;
-                        sb.BeginAnimation(SolidColorBrush.ColorProperty, a);
-                        
+                        //item.arc.Stroke.BeginAnimation(SolidColorBrush.ColorProperty, EdgeAnimations.GetColorAnimation(Colors.Red));   
+                        Instance.MaxedEdge?.Invoke();
                     }
+                    Instance.glow.BeginAnimation(DropShadowEffect.OpacityProperty, EdgeAnimations.ShadowOpacityAnimationUp);
+                    Instance.baseEll.Stroke.BeginAnimation(SolidColorBrush.ColorProperty, EdgeAnimations.GetColorAnimation(Colors.Red));
+
                 }
                 else
                 {
@@ -130,23 +162,41 @@ namespace TCC
                 Instance.ExpireEdge.Elapsed += (s, o) => { SetEdge(0); };
                 Instance.ExpireEdge.Enabled = true;
             });
+
+            Instance.oldEdge = edge;
+
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        void StartScytheCooldown(int cd)
         {
-            IntPtr hwnd = new WindowInteropHelper(this).Handle;
-            FocusManager.MakeUnfocusable(hwnd);
-            FocusManager.HideFromToolBar(hwnd);
+            Dispatcher.Invoke(() =>
+            {
+                scytheCd.BeginAnimation(Arc.EndAngleProperty, EdgeAnimations.GetArcAnimation(cd));
+            });
         }
-    }
 
-    public class RotOffset
-    {
-        public double Rot { get; set; }
-        public RotOffset(double r)
+        void StartGambleBuff(int duration)
         {
-            Rot = r;
+            Dispatcher.Invoke(() => 
+            {
+                gambleDuration.BeginAnimation(Arc.EndAngleProperty, EdgeAnimations.GetArcAnimation(duration));
+            });
         }
-    }
 
+        static class EdgeAnimations
+        {
+            public static DoubleAnimation ShadowOpacityAnimationUp = new DoubleAnimation(1, TimeSpan.FromMilliseconds(spawnTime));
+            public static DoubleAnimation ShadowOpacityAnimationDown = new DoubleAnimation(0, TimeSpan.FromMilliseconds(spawnTime));
+
+            public static ColorAnimation GetColorAnimation(Color c)
+            {
+                return new ColorAnimation(c, TimeSpan.FromMilliseconds(spawnTime));
+            }
+            public static DoubleAnimation GetArcAnimation(int time)
+            {
+                return new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(time));
+            }
+        }
+
+    }
 }

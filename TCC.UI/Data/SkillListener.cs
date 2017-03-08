@@ -29,15 +29,15 @@ namespace TCC
                 case CooldownType.Skill:
                     if (sk.Cooldown < SkillManager.LongSkillTreshold)
                     {
-                        MainWindow.AddNormalSkill(sk);
+                        CooldownsBarWindow.AddNormalSkill(sk);
                     }
                     else
                     {
-                        MainWindow.AddLongSkill(sk);
+                        CooldownsBarWindow.AddLongSkill(sk);
                     }
                     break;
                 case CooldownType.Item:
-                    MainWindow.AddLongSkill(sk);
+                    CooldownsBarWindow.AddLongSkill(sk);
                     break;
                 default:
                     break;
@@ -77,16 +77,16 @@ namespace TCC
                 case CooldownType.Skill:
                     if (sk.Cooldown < SkillManager.LongSkillTreshold)
                     {
-                        MainWindow.RemoveNormalSkill(sk);
+                        CooldownsBarWindow.RemoveNormalSkill(sk);
                     }
                     else
                     {
-                        MainWindow.RemoveLongSkill(sk);
+                        CooldownsBarWindow.RemoveLongSkill(sk);
                     }
                     
                     break;
                 case CooldownType.Item:
-                    MainWindow.RemoveLongSkill(sk);
+                    CooldownsBarWindow.RemoveLongSkill(sk);
                     break;
                 default:
                     break;

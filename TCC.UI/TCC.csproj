@@ -46,9 +46,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Tera Character Tracker\TCTMain\bin\Debug\Data.dll</HintPath>
     </Reference>
-    <Reference Include="NetworkSniffer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Shinra Meter\NetworkSniffer\bin\Debug\NetworkSniffer.dll</HintPath>
+    <Reference Include="NetworkSniffer">
+      <HintPath>..\..\..\Shinra Meter\NetworkSniffer\bin\Release\NetworkSniffer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -73,6 +72,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ClassSpecific\Warrior.cs" />
+    <Compile Include="HPbar.xaml.cs">
+      <DependentUpon>HPbar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Parsing\S_CREATURE_CHANGE_HP.cs" />
+    <Compile Include="Parsing\S_LOAD_ACHIEVEMENT_LIST.cs" />
+    <Compile Include="Parsing\S_PLAYER_CHANGE_MP.cs" />
+    <Compile Include="Parsing\S_PLAYER_CHANGE_STAMINA.cs" />
     <Compile Include="UI elements\Arc.cs" />
     <Compile Include="Data\Character.cs" />
     <Compile Include="Parsing\CharListProcessor.cs" />
@@ -104,11 +111,16 @@
     <Compile Include="Data\SkillsDatabase.cs" />
     <Compile Include="Parsing\StringUtils.cs" />
     <Compile Include="Parsing\Messages\S_USER_STATUS.cs" />
+    <Compile Include="WindowManager.cs" />
     <Page Include="Edge\EdgeArc.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Edge\EdgeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HPbar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -160,6 +172,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="resources\warrior.png" />
+    <None Include="resources\sorcerer.png" />
+    <None Include="resources\slayer.png" />
+    <None Include="resources\reaper.png" />
+    <None Include="resources\priest.png" />
+    <None Include="resources\ninja.png" />
+    <None Include="resources\mystic.png" />
+    <None Include="resources\lancer.png" />
+    <None Include="resources\archer.png" />
+    <None Include="resources\berserker.png" />
+    <None Include="resources\brawler.png" />
+    <None Include="resources\common.png" />
     <Content Include="resources\database\SkillIconData\SkillIconData-0.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -214,6 +238,14 @@
     <Content Include="resources\database\StrSheet_UserSkill\StrSheet_UserSkill-8.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="resources\data\opcodes\311380.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\opcodes\smt_311380.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="resources\glaiver.png" />
+    <None Include="resources\gunner.png" />
     <Content Include="resources\icons\Acrobat_Tex.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

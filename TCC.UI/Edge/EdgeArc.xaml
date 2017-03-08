@@ -5,17 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300"
+             Loaded="UserControl_Loaded">
     <Grid>
         <Grid.Resources>
             <Style x:Key="arc" TargetType="local:Arc">
-                <Setter Property="Stroke" Value="White"/>
-                <Setter Property="StrokeThickness" Value="3"/>
+                <Setter Property="StrokeThickness" Value="4"/>
                 <Setter Property="StartAngle" Value="0"/>
                 <Setter Property="EndAngle" Value="0"/>
             </Style>
         </Grid.Resources>
-        <local:Arc x:Name="arc" RenderTransformOrigin="0.5,0.5" Style="{StaticResource arc}" />
+        <local:Arc x:Name="arc" Stroke="White" RenderTransformOrigin="0.5,0.5" Style="{StaticResource arc}" />
 
 
     </Grid>

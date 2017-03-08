@@ -15,20 +15,25 @@ namespace TCC
     {
         public const int LongSkillTreshold = 40000;
         public const int Ending = 250;
+        public const uint HurricaneId = 60010;
 
         public static SkillQueue NormalSkillsQueue = new SkillQueue();
         public static SkillQueue LongSkillsQueue = new SkillQueue();
 
         public static SkillListener NormalSkillsQueueListener = new SkillListener(NormalSkillsQueue);
         public static SkillListener LongSkillsQueueListener = new SkillListener(LongSkillsQueue);
-        //public static string LastSkillName;
+
         public static List<string> LastSkills = new List<string>();
+
+
         public static event SkillCooldownChangedEventHandler Changed;
+
         static bool Filter(string name)
         {
             if (name != "Unknown" &&
                 !name.Contains("Summon:") &&
                 !name.Contains("Flight:") &&
+                !name.Contains("Super Rocket Jump")&&
                 !name.Contains("greeting") ||
                 name == "Summon: Party") return true;
             else return false;
@@ -84,13 +89,13 @@ namespace TCC
             {
                 LongSkillsQueue.Where(x => x.Id == id).Single().Timer.Stop();
                 LongSkillsQueue.Remove(LongSkillsQueue.Where(x => x.Id == id).Single());
-                MainWindow.RemoveLongSkill(new SkillCooldown(id, 0, CooldownType.Skill));
+                CooldownsBarWindow.RemoveLongSkill(new SkillCooldown(id, 0, CooldownType.Skill));
             }
             else if (NormalSkillsQueue.Where(x => x.Id == id).Count() > 0)
             {
                 NormalSkillsQueue.Where(x => x.Id == id).Single().Timer.Stop();
                 NormalSkillsQueue.Remove(NormalSkillsQueue.Where(x => x.Id == id).Single());
-                MainWindow.RemoveNormalSkill(new SkillCooldown(id, 0, CooldownType.Skill));
+                CooldownsBarWindow.RemoveNormalSkill(new SkillCooldown(id, 0, CooldownType.Skill));
 
             }
 
@@ -159,8 +164,8 @@ namespace TCC
             LongSkillsQueue.Clear();
             PacketParser.CurrentClass = Class.Common;
             PacketParser.CurrentCharId = 0;
-            MainWindow.ClearSkills();
-            MainWindow.HideEdgeGauge();
+            CooldownsBarWindow.ClearSkills();
+            WindowManager.HideEdgeGauge();
             LastSkills.Clear();
 
             Console.WriteLine("Manager cleared.");

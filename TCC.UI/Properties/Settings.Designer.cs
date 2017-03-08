@@ -26,48 +26,72 @@ namespace TCC.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double Top {
+        public double CooldownBarTop {
             get {
-                return ((double)(this["Top"]));
+                return ((double)(this["CooldownBarTop"]));
             }
             set {
-                this["Top"] = value;
+                this["CooldownBarTop"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double Left {
+        public double CooldownBarLeft {
             get {
-                return ((double)(this["Left"]));
+                return ((double)(this["CooldownBarLeft"]));
             }
             set {
-                this["Left"] = value;
+                this["CooldownBarLeft"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double ETop {
+        public double EdgeWindowTop {
             get {
-                return ((double)(this["ETop"]));
+                return ((double)(this["EdgeWindowTop"]));
             }
             set {
-                this["ETop"] = value;
+                this["EdgeWindowTop"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double ELeft {
+        public double EdgeWindowLeft {
             get {
-                return ((double)(this["ELeft"]));
+                return ((double)(this["EdgeWindowLeft"]));
             }
             set {
-                this["ELeft"] = value;
+                this["EdgeWindowLeft"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double HPBarTop {
+            get {
+                return ((double)(this["HPBarTop"]));
+            }
+            set {
+                this["HPBarTop"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double HPBarLeft {
+            get {
+                return ((double)(this["HPBarLeft"]));
+            }
+            set {
+                this["HPBarLeft"] = value;
             }
         }
         

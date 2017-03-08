@@ -31,7 +31,7 @@ namespace TCC
         {
             if (!iconName.Contains("Icon_Skills.")) return;
             iconName = iconName.Replace("Icon_Skills.", "");
-            MainWindow.Instance.Dispatcher.Invoke(() =>
+            CooldownsBarWindow.Instance.Dispatcher.Invoke(() =>
             {
                 iconBitmap = (Bitmap)Image.FromFile(Environment.CurrentDirectory + @"/resources/icons/" + iconName + ".png");
                 //icon = BitmapToImageSource(iconBitmap);

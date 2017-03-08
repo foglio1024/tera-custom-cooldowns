@@ -8,24 +8,20 @@ using Tera.Game.Messages;
 
 namespace TCC.Messages
 {
-    class S_ABNORMALITY_BEGIN : ParsedMessage
+    public class S_ABNORMALITY_BEGIN : ParsedMessage
     {
-        public bool isHurricane;
+
+        public ulong targetId;
         public ulong casterId;
+        public uint id;
+        public int duration;
         
         public S_ABNORMALITY_BEGIN(TeraMessageReader reader) : base(reader)
         {
-            reader.Skip(8);
+            targetId = reader.ReadUInt64();
             casterId = reader.ReadUInt64();
-            if (reader.ReadUInt32() == 60010)
-            {
-                isHurricane = true;
-            }
-            else
-            {
-                isHurricane = false;
-            }
-
+            id = reader.ReadUInt32();
+            duration = reader.ReadInt32();
         }
     }
 }
