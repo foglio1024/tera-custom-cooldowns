@@ -30,13 +30,29 @@ namespace TCC
         static int MaxHP, MaxMP, MaxST = 0;
 
         Class currentClass = Class.None;
-        public Class CurrentClass { get => currentClass;
+        public Class CurrentClass
+        {
+            get => currentClass;
             set
             {
                 if (value != currentClass)
                 {
                     currentClass = value;
                     NotifyPropertyChanged("CurrentClass");
+                }
+            }
+        }
+
+        Laurel currentLaurel = Laurel.None;
+        public Laurel CurrentLaurel
+        {
+            get => currentLaurel;
+            set
+            {
+                if (value != currentLaurel)
+                {
+                    currentLaurel = value;
+                    NotifyPropertyChanged("CurrentLaurel");
                 }
             }
         }
@@ -76,15 +92,24 @@ namespace TCC
             mpBar.Width = 0;
             stBar.Width = 0;
 
-            Binding b = new Binding
+            Binding classBinding = new Binding
             {
                 Source = this,
                 Path = new PropertyPath("CurrentClass"),
                 UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
-                Converter = new ImageConverter(),
+                Converter = new ClassImageConverter(),
             };
 
-            classIcon.SetBinding(Rectangle.OpacityMaskProperty, b);
+            Binding laurelBinding = new Binding
+            {
+                Source = this,
+                Path = new PropertyPath("CurrentLaurel"),
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                Converter = new LaurelImageConverter()
+            };
+
+            laurel.SetBinding(Rectangle.FillProperty, laurelBinding);
+            classIcon.SetBinding(Rectangle.OpacityMaskProperty, classBinding);
 
             var d = new DispatcherTimer();
             d.Interval = TimeSpan.FromMilliseconds(333);
@@ -197,8 +222,69 @@ namespace TCC
             });
         }
     }
+    public class LaurelImageConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            Laurel l = (Laurel)value;
+            System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(50, 50);
 
-    public class ImageConverter : IValueConverter
+            switch (l)
+            {
+                case Laurel.None:
+                    break;
+                case Laurel.Bronze:
+                    bitmap = Properties.Resources.bronze;
+                    break;
+                case Laurel.Silver:
+                    bitmap = Properties.Resources.silver;
+
+                    break;
+                case Laurel.Gold:
+                    bitmap = Properties.Resources.gold;
+
+                    break;
+                case Laurel.Diamond:
+                    bitmap = Properties.Resources.diamond;
+
+                    break;
+                case Laurel.Champion:
+                    bitmap = Properties.Resources.champion;
+
+                    break;
+                default:
+                    break;
+            }
+            return new ImageBrush(Bitmap2BitmapImage(bitmap));
+        }
+
+        [System.Runtime.InteropServices.DllImport("gdi32.dll")]
+        static extern bool DeleteObject(IntPtr hObject);
+
+        private BitmapImage Bitmap2BitmapImage(System.Drawing.Bitmap bitmap)
+        {
+            using (var memory = new MemoryStream())
+            {
+                bitmap.Save(memory, ImageFormat.Png);
+                memory.Position = 0;
+
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = memory;
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.EndInit();
+
+                return bitmapImage;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class ClassImageConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

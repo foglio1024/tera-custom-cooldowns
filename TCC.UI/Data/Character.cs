@@ -10,10 +10,12 @@ namespace TCC
     {
         public string Name { get; set; }
         public Class Class { get; set; }
-        public Character(string _name, Class c)
+        public Laurel Laurel { get; set; }
+        public Character(string _name, Class c, Laurel l)
         {
             Name = _name;
             Class = c;
+            Laurel = l;
         }
     }
 }

@@ -44,7 +44,7 @@ namespace TCC
             }
             
             sk.Timer.Enabled = true;
-            Console.WriteLine("Running {0}", sk.Id);
+            //Console.WriteLine("Running {0}", sk.Id);
         }
         
         void RemoveSkill(object sender, EventArgs e, SkillCooldown sk)
@@ -65,7 +65,7 @@ namespace TCC
             SkillManager.LastSkills.Remove(name);
             t.Elapsed += (s, o) => RemoveFromMainWindow(sk);
             t.Start();
-            Console.WriteLine("{0} skill removed", sk.Id);
+            //Console.WriteLine("{0} skill removed", sk.Id);
         }
 
         void RemoveFromMainWindow(SkillCooldown sk)

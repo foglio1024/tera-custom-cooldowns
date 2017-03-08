@@ -45,8 +45,8 @@ namespace TCC
             CloseButton.Click += (s, ev) => App.CloseApp();
             ClickThruButton.Click += (s, ev) => SetTransparentWindows();
 
-            CM.Items.Add(CloseButton);
             CM.Items.Add(ClickThruButton);
+            CM.Items.Add(CloseButton);
 
             Transparent = Properties.Settings.Default.Transparent;
 
@@ -58,6 +58,8 @@ namespace TCC
 
                 ClickThruButton.IsChecked = true;
             }
+
+            DimEdgeGauge();
 
             FocusManager.FocusTimer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
             FocusManager.FocusTimer.Tick += FocusManager.CheckForegroundWindow;
@@ -105,6 +107,11 @@ namespace TCC
             CDBar.Close();
             EdgeGauge.Close();
             HPBars.Close();
+        }
+
+        internal static void SetLaurel(Laurel laurel)
+        {
+            HPBars.CurrentLaurel = laurel;
         }
 
         internal static void ShowHPBars()

@@ -75,7 +75,7 @@ namespace TCC
             Instance.Dispatcher.Invoke(() =>
             {
                 Instance.NormalSkillsModel.SkillIndicators.Add(new SkillIndicator(SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass), (int)sk.Cooldown));
-                Console.WriteLine("Added {0} indicator.", SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass).Name);
+                //Console.WriteLine("Added {0} indicator.", SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass).Name);
             });
         }
         public static void AddLongSkill(SkillCooldown sk)
@@ -86,12 +86,12 @@ namespace TCC
                 {
                     case CooldownType.Skill:
                         Instance.LongSkillsModel.SkillIndicators.Add(new SkillIndicator(SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass), (int)sk.Cooldown));
-                        Console.WriteLine("Added {0} indicator.", SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass).Name);
+                        //Console.WriteLine("Added {0} indicator.", SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass).Name);
 
                         break;
                     case CooldownType.Item:
                         Instance.LongSkillsModel.SkillIndicators.Add(new SkillIndicator(BroochesDatabase.GetBrooch(sk.Id), (int)sk.Cooldown));
-                        Console.WriteLine("Added {0} indicator.", BroochesDatabase.GetBrooch(sk.Id).Name);
+                        //Console.WriteLine("Added {0} indicator.", BroochesDatabase.GetBrooch(sk.Id).Name);
 
                         break;
                     default:
@@ -107,12 +107,12 @@ namespace TCC
                 try
                 {
                     Instance.NormalSkillsModel.SkillIndicators.Remove(Instance.NormalSkillsModel.SkillIndicators.Where(x => x.Skill.Id == sk.Id).First());
-                    Console.WriteLine("Removed {0} indicator.", SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass).Name);
+                    //Console.WriteLine("Removed {0} indicator.", SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass).Name);
 
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Can't remove {0} indicator.", SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass).Name);
+                    //Console.WriteLine("Can't remove {0} indicator.", SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass).Name);
                 }
             });
         }
@@ -126,12 +126,12 @@ namespace TCC
                     {
                         case CooldownType.Skill:
                             Instance.LongSkillsModel.SkillIndicators.Remove(Instance.LongSkillsModel.SkillIndicators.Where(x => x.Skill.Id == sk.Id).First());
-                            Console.WriteLine("Removed {0} indicator.", SkillsDatabase.SkillIdToName(sk.Id, PacketParser.CurrentClass));
+                            //Console.WriteLine("Removed {0} indicator.", SkillsDatabase.SkillIdToName(sk.Id, PacketParser.CurrentClass));
                             break;
 
                         case CooldownType.Item:
                             Instance.LongSkillsModel.SkillIndicators.Remove(Instance.LongSkillsModel.SkillIndicators.Where(x => x.Skill.Id == sk.Id).First());
-                            Console.WriteLine("Removed {0} indicator.", BroochesDatabase.GetBrooch(sk.Id).Name);
+                            //Console.WriteLine("Removed {0} indicator.", BroochesDatabase.GetBrooch(sk.Id).Name);
                             break;
 
                         default:

@@ -184,6 +184,11 @@
     <None Include="resources\berserker.png" />
     <None Include="resources\brawler.png" />
     <None Include="resources\common.png" />
+    <None Include="resources\CharacterWindow_I1B9.png" />
+    <None Include="resources\CharacterWindow_I1BB.png" />
+    <None Include="resources\CharacterWindow_I1BD.png" />
+    <None Include="resources\CharacterWindow_I1BF.png" />
+    <None Include="resources\CharacterWindow_I1C1.png" />
     <Content Include="resources\database\SkillIconData\SkillIconData-0.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

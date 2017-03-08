@@ -1,6 +1,7 @@
 ﻿using DamageMeter.Sniffing;
 using Data;
 using System;
+using System.Collections.Generic;
 using TCC.Messages;
 using Tera.Game;
 
@@ -10,10 +11,13 @@ namespace TCC
 
     public static class PacketParser
     {
-
         public static OpCodeNamer OpCodeNamer;
         public static OpCodeNamer SystemMessageNamer;
         public static uint Version;
+
+        static CharListProcessor CLP = new CharListProcessor();
+
+        public static Dictionary<string, Laurel> LaurelsDictionary;
 
         public static bool Logged { get; set; }
         
@@ -32,7 +36,7 @@ namespace TCC
             }
             RoutePacket(obj);
         }
-        static string PacketData(Tera.Message msg)
+        public static string PacketData(Tera.Message msg)
         {
             byte[] data = new byte[msg.Data.Count];
             Array.Copy(msg.Data.Array, 0, data, 2, msg.Data.Count - 2);
@@ -60,7 +64,7 @@ namespace TCC
                     CurrentClass = sLogin.CharacterClass;
                     CurrentCharId = sLogin.entityId;
                     WindowManager.SetClass(CurrentClass);
-                    WindowManager.ShowHPBars();
+                    WindowManager.SetLaurel(CLP.GetLaurelFromName(sLogin.Name));
                     switch (CurrentClass)
                     {
                         case Class.Warrior:
@@ -112,7 +116,6 @@ namespace TCC
                         default:
                             break;
                     }
-                    
                     Console.WriteLine("{0} - {1}", CurrentClass, CurrentCharId);
                     break;
                 case ("S_START_COOLTIME_SKILL"):
@@ -172,7 +175,7 @@ namespace TCC
                     MaxSTUpdated?.Invoke(sPlayerStatUpdate.maxRe);
                     HPUpdated?.Invoke(sPlayerStatUpdate.currHp);
                     MPUpdated?.Invoke(sPlayerStatUpdate.currMp);
-                    Console.WriteLine("Re:{0} - St:{1}",sPlayerStatUpdate.currRe, sPlayerStatUpdate.currStamina);
+                    STUpdated?.Invoke(sPlayerStatUpdate.currRe);
                     break;
                 case ("S_PLAYER_CHANGE_MP"):
                     var sPlayerChangeMP = new S_PLAYER_CHANGE_MP(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer));
@@ -198,12 +201,10 @@ namespace TCC
                             {
                                 if (sUserStatus.isInCombat)
                                 {
-                                    Console.WriteLine("received:{0} - current:{1} -- combat, undimming", sUserStatus.id, CurrentCharId);
                                     WindowManager.UndimEdgeGauge();
                                 }
                                 else
                                 {
-                                    Console.WriteLine("received:{0} - current:{1} -- not in combat, dimming", sUserStatus.id, CurrentCharId);
                                     WindowManager.DimEdgeGauge();
                                 }
                             }
@@ -212,9 +213,11 @@ namespace TCC
                             break;
                     }
                     break;
-                case ("S_LOAD_ACHIEVEMENT_LIST"):
-                    var sLoadAchievementList = new S_LOAD_ACHIEVEMENT_LIST(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer));
-
+                case ("S_SPAWN_ME"):
+                    WindowManager.ShowHPBars();
+                    break;
+                case ("S_GET_USER_LIST"):
+                    CLP.ParseCharacters(PacketData(msg));
                     break;
                 default:
                     break;

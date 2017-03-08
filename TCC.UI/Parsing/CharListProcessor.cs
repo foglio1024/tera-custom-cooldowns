@@ -64,17 +64,39 @@ namespace TCC
             return cl;
 
         }
-        public Class GetClassFromName(string name)
+        private Laurel GetLaurel(string s)
+        {
+            StringBuilder b = new StringBuilder();
+            string c = s.Substring(LAUREL_OFFSET_FROM_START, 8);
+
+            for (int i = 4; i > 0; i--)
+            {
+                b.Append(c[2 * (i - 1)]);
+                b.Append(c[2 * (i - 1) + 1]);
+            }
+
+            uint laurelIndex = Convert.ToUInt32(b.ToString(), 16);
+
+            Laurel cl = (Laurel)laurelIndex;
+            return cl;
+
+        }
+        private Class GetClassFromName(string name)
         {
             return CurrentList.Where(x => x.Name == name).Single().Class;
+        }
+        public Laurel GetLaurelFromName(string name)
+        {
+            return CurrentList.Where(x => x.Name == name).Single().Laurel;
         }
         Character StringToCharacter(string s)
         {
             string name = GetName(s);
             Class charClass = GetClass(s);
-
+            Laurel charLaurel = GetLaurel(s);
             return new Character(_name: name,
-                                c: charClass);
+                                c: charClass,
+                                l: charLaurel);
         }
         public void ParseCharacters(string p)
         {

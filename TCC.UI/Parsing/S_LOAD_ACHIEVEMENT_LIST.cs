@@ -31,16 +31,9 @@ namespace TCC
             unk3 = reader.ReadInt32();
             unk4 = reader.ReadInt32();
             reader.Skip(ACHIEVEMENT_LENGHT * achiCount);
-            for (int i = 0; i < historyCount; i++)
-            {
-                laurel = reader.ReadInt32();
-                System.Console.WriteLine("laurel:{0}",laurel);
-                System.Console.WriteLine("season:{0}", reader.ReadInt32());
-                reader.Skip(8);
-            }
+            //System.Console.WriteLine("{0}-{1}-{2}", unk1, unk3, unk4);
 
 
-            
         }
     }
 }

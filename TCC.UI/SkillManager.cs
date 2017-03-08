@@ -60,7 +60,7 @@ namespace TCC
                             NormalSkillsQueue.Add(sk);
                         }
                         LastSkills.Add(skillName);
-                        Console.WriteLine("{0} added.", skillName);
+                        //Console.WriteLine("{0} added.", skillName);
 
                     }
                     break;
@@ -73,7 +73,7 @@ namespace TCC
                         {
                             LongSkillsQueue.Add(sk);
                             LastSkills.Add(name);
-                            Console.WriteLine("{0} added.", name);
+                            //Console.WriteLine("{0} added.", name);
                         }
                     }
                     break;
@@ -103,7 +103,7 @@ namespace TCC
             {
                 var name = SkillsDatabase.GetSkill(id, PacketParser.CurrentClass).Name;
                 LastSkills.Remove(name);
-                Console.WriteLine(name + " reset.");
+                //Console.WriteLine(name + " reset.");
             }
             catch (Exception)
             {
@@ -148,7 +148,7 @@ namespace TCC
 
             try
             {
-                Console.WriteLine("{0} cooldown reduced.", SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass).Name);
+                //Console.WriteLine("{0} cooldown reduced.", SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass).Name);
 
             }
             catch (Exception)
