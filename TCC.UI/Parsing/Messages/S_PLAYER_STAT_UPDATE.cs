@@ -23,7 +23,7 @@ namespace TCC.Messages
         public int level;
         public byte status;
         public short vitality;
-        public int bonusHp, bonusMp, currStamina, maxStamina, currRe, maxRe, unk5, unk6, ilvlInven, ilvl, edge, unk8, unk9, unk10, unk11;
+        public int bonusHp, bonusMp, currStamina, maxStamina, currRe, maxRe, bonusRe, unk6, ilvlInven, ilvl, edge, unk8, unk9, unk10, unk11;
 
         public S_PLAYER_STAT_UPDATE(TeraMessageReader reader) : base(reader)
         {
@@ -78,7 +78,7 @@ namespace TCC.Messages
             maxStamina = reader.ReadInt32();//26
             currRe = reader.ReadInt32();//22
             maxRe = reader.ReadInt32();//18
-            unk5 = reader.ReadInt32();//14
+            bonusRe = reader.ReadInt32();//14
             unk6 = reader.ReadInt32();//10
             ilvlInven = reader.ReadInt32();//6
             ilvl = reader.ReadInt32();//2

@@ -8,16 +8,16 @@
     <Setting Name="CooldownBarLeft" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="EdgeWindowTop" Type="System.Double" Scope="User">
+    <Setting Name="GaugeWindowTop" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="EdgeWindowLeft" Type="System.Double" Scope="User">
+    <Setting Name="GaugeWindowLeft" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="HPBarTop" Type="System.Double" Scope="User">
+    <Setting Name="CharacterWindowTop" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="HPBarLeft" Type="System.Double" Scope="User">
+    <Setting Name="CharacterWindowLeft" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="Transparent" Type="System.Boolean" Scope="User">

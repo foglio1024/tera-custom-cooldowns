@@ -25,7 +25,7 @@ namespace TCC.Messages
         byte unk2{ get; set; }
         ulong appearance { get; set; }
         short unk6 { get; set; }
-        short level       { get; set; }
+        public short Level       { get; set; }
         short gatherEn    { get; set; }
         short gatherUnk   { get; set; }
         short gatherPl    { get; set; }
@@ -119,7 +119,7 @@ namespace TCC.Messages
             unk5=reader.ReadInt32();
             appearance = reader.ReadUInt64();
             unk6=reader.ReadInt16();
-            level=reader.ReadInt16();
+            Level=reader.ReadInt16();
             gatherEn=reader.ReadInt16();
             gatherUnk=reader.ReadInt16();
             gatherPl=reader.ReadInt16();

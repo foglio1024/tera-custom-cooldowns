@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -57,6 +58,19 @@ namespace TCC
                 return BroochSkills.Where(x => x.Id == id).Single();
             }
             else return null;
+
+        }
+
+        internal static bool TryGetBrooch(uint itemId, out Skill brooch)
+        {
+            bool result = false;
+            brooch = new Skill(0, Class.None, string.Empty, string.Empty);
+            if (BroochSkills.Where(x => x.Id == itemId).Count() > 0)
+            {
+                result = true;
+                brooch = BroochSkills.Where(x => x.Id == itemId).Single();
+            }
+            return result;
 
         }
     }

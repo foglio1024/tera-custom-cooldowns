@@ -1,4 +1,4 @@
-﻿<Window x:Class="TCC.CooldownsBarWindow"
+﻿<Window x:Class="TCC.CooldownWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -15,14 +15,20 @@
         WindowStyle="None" 
         Background="#00000000" 
         MouseLeftButtonDown="Window_MouseLeftButtonDown" 
-        IsTabStop="False"
         MouseDoubleClick="Window_MouseDoubleClick"
-        Loaded="Window_Loaded"        >
+        Loaded="Window_Loaded"    
+                ResizeMode="NoResize"
+>
     <Window.Resources>
         <DataTemplate x:Key="SkillDataTemplate">
-            <local:SkillIconControl IconBrush="{Binding Skill.IconBrush}" Cooldown="{Binding Cooldown}" Id="{Binding Skill.Id}" SkillName="{Binding Skill.Name}"></local:SkillIconControl>
+            <local:SkillIconControl IconBrush="{Binding Skill.IconBrush}" 
+                                    Cooldown="{Binding Cooldown}" 
+                                    Id="{Binding Skill.Id}" 
+                                    SkillName="{Binding Skill.Name}" 
+                                    Skill="{Binding Skill}"/>
         </DataTemplate>
     </Window.Resources>
+    
     <Grid Width="Auto">
         <Grid.RowDefinitions>
             <RowDefinition Height="76"/>

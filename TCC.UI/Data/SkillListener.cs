@@ -15,82 +15,85 @@ namespace TCC
         public SkillListener(SkillQueue q)
         {
             queue = q;
-            queue.Added += new SkillAddedEventHandler(RunSkill); // start cd
-            queue.Over += new SkillOverEventHandler(RemoveSkill);   // remove skill
+            //queue.Added += new SkillAddedEventHandler(OnSkillAdded); // start cd
+            //queue.Over += new SkillOverEventHandler(RemoveSkill);   // remove skill
 
             t = new Timer(SkillManager.Ending);
         }
-
-        void RunSkill(object sender, EventArgs e, SkillCooldown sk)
+        /// <summary>
+        /// Executed when a new skill is added
+        /// </summary>
+        /// <param name="sender">Not used</param>
+        /// <param name="e">Not used</param>
+        /// <param name="sk">Skill cooldown info</param>
+        void OnSkillAdded(SkillCooldownNew sk)
         {
-            sk.Timer.Elapsed += (s, ev) => RemoveSkill(null, null, sk);
-            switch (sk.Type)
-            {
-                case CooldownType.Skill:
-                    if (sk.Cooldown < SkillManager.LongSkillTreshold)
-                    {
-                        CooldownsBarWindow.AddNormalSkill(sk);
-                    }
-                    else
-                    {
-                        CooldownsBarWindow.AddLongSkill(sk);
-                    }
-                    break;
-                case CooldownType.Item:
-                    CooldownsBarWindow.AddLongSkill(sk);
-                    break;
-                default:
-                    break;
-            }
+            //sk.Timer.Elapsed += (s, ev) => RemoveSkill(null, null, sk);
+            //switch (sk.Type)
+            //{
+            //    case CooldownType.Skill:
+            //        if (sk.Cooldown < SkillManager.LongSkillTreshold)
+            //        {
+            //            CooldownWindow.AddNormalSkill(sk);
+            //        }
+            //        else
+            //        {
+            //            CooldownWindow.AddLongSkill(sk);
+            //        }
+            //        break;
+            //    case CooldownType.Item:
+            //        CooldownWindow.AddLongSkill(sk);
+            //        break;
+            //    default:
+            //        break;
+            //}
             
-            sk.Timer.Enabled = true;
-            //Console.WriteLine("Running {0}", sk.Id);
-        }
-        
-        void RemoveSkill(object sender, EventArgs e, SkillCooldown sk)
+            //sk.Timer.Enabled = true;
+            ////Console.WriteLine("Running {0}", sk.Id);
+        }   
+        void RemoveSkill(SkillCooldownNew sk)
         {
-            sk.Timer.Stop();
-            queue.Remove(sk);
-            string name = string.Empty;
+            //sk.Timer.Stop();
+            //queue.Remove(sk);
+            //string name = string.Empty;
 
-            if (SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass)!=null)
-            {
-                name = SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass).Name;
-            }
-            else if (BroochesDatabase.GetBrooch(sk.Id) != null)
-            {
-                name = BroochesDatabase.GetBrooch(sk.Id).Name;
-            }
+            //if (SkillsDatabase.SkillIdToName(sk.Id, SessionManager.CurrentClass)!="Unknown")
+            //{
+            //    name = SkillsDatabase.SkillIdToName(sk.Id, SessionManager.CurrentClass);
+            //}
+            //else if (BroochesDatabase.GetBrooch(sk.Id) != null)
+            //{
+            //    name = BroochesDatabase.GetBrooch(sk.Id).Name;
+            //}
   
-            SkillManager.LastSkills.Remove(name);
-            t.Elapsed += (s, o) => RemoveFromMainWindow(sk);
-            t.Start();
+            //SkillManager.LastSkills.Remove(name);
+            //t.Elapsed += (s, o) => RemoveFromMainWindow(sk);
+            //t.Start();
             //Console.WriteLine("{0} skill removed", sk.Id);
         }
-
-        void RemoveFromMainWindow(SkillCooldown sk)
+        void RemoveFromMainWindow(SkillCooldownOld sk)
         {
-            t.Stop();
-            t = new Timer();
-            switch (sk.Type)
-            {
-                case CooldownType.Skill:
-                    if (sk.Cooldown < SkillManager.LongSkillTreshold)
-                    {
-                        CooldownsBarWindow.RemoveNormalSkill(sk);
-                    }
-                    else
-                    {
-                        CooldownsBarWindow.RemoveLongSkill(sk);
-                    }
+            //t.Stop();
+            //t = new Timer();
+            //switch (sk.Type)
+            //{
+            //    case CooldownType.Skill:
+            //        if (sk.Cooldown < SkillManager.LongSkillTreshold)
+            //        {
+            //            CooldownWindow.RemoveNormalSkill(sk);
+            //        }
+            //        else
+            //        {
+            //            CooldownWindow.RemoveLongSkill(sk);
+            //        }
                     
-                    break;
-                case CooldownType.Item:
-                    CooldownsBarWindow.RemoveLongSkill(sk);
-                    break;
-                default:
-                    break;
-            }
+            //        break;
+            //    case CooldownType.Item:
+            //        CooldownWindow.RemoveLongSkill(sk);
+            //        break;
+            //    default:
+            //        break;
+            //}
 
         }
     }

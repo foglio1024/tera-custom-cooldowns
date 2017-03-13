@@ -7,19 +7,14 @@ using System.Threading.Tasks;
 
 namespace TCC
 {
-    public enum CooldownType
-    {
-        Skill,
-        Item
-    }
-    public class SkillCooldown
+    public class SkillCooldownOld
     {
         public uint Id { get; set; }
         public uint Cooldown { get; set; }
         public CooldownType Type { get; set; }
         public Timer Timer { get; set; }
 
-        public SkillCooldown(uint id, uint cd, CooldownType t)
+        public SkillCooldownOld(uint id, uint cd, CooldownType t)
         {
             Id = id;
             Cooldown = cd;

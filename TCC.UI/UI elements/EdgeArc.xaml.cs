@@ -25,18 +25,18 @@ namespace TCC
         {
             InitializeComponent();
             ChangeStatus += OnStatusChanged;
-            EdgeWindow.Instance.MaxedEdge += Instance_MaxedEdge;
-            EdgeWindow.Instance.NormalEdge += Instance_NormalEdge;
+            EdgeGaugeWindow.Instance.MaxedEdge += Instance_MaxedEdge;
+            EdgeGaugeWindow.Instance.NormalEdge += Instance_NormalEdge;
         }
 
         private void Instance_NormalEdge()
         {
-            arc.Stroke.BeginAnimation(SolidColorBrush.ColorProperty, new ColorAnimation(Colors.White, TimeSpan.FromMilliseconds(EdgeWindow.spawnTime)));
+            arc.Stroke.BeginAnimation(SolidColorBrush.ColorProperty, new ColorAnimation(Colors.White, TimeSpan.FromMilliseconds(EdgeGaugeWindow.spawnTime)));
         }
 
         private void Instance_MaxedEdge()
         {
-            arc.Stroke.BeginAnimation(SolidColorBrush.ColorProperty, new ColorAnimation(Colors.Red, TimeSpan.FromMilliseconds(EdgeWindow.spawnTime)));
+            arc.Stroke.BeginAnimation(SolidColorBrush.ColorProperty, new ColorAnimation(Colors.Red, TimeSpan.FromMilliseconds(EdgeGaugeWindow.spawnTime)));
         }
 
         bool isBuilt;
@@ -55,11 +55,11 @@ namespace TCC
             if (status)
             {
                 arc.BeginAnimation(OpacityProperty, null);
-                var a = new DoubleAnimation(0, 30, TimeSpan.FromMilliseconds(EdgeWindow.spawnTime))
+                var a = new DoubleAnimation(0, 30, TimeSpan.FromMilliseconds(EdgeGaugeWindow.spawnTime))
                 {
                     EasingFunction = new QuadraticEase()
                 };
-                var b = new DoubleAnimation(0.2, 1, TimeSpan.FromMilliseconds(EdgeWindow.spawnTime))
+                var b = new DoubleAnimation(0.2, 1, TimeSpan.FromMilliseconds(EdgeGaugeWindow.spawnTime))
                 {
                     EasingFunction = new QuadraticEase()
                 };
@@ -70,7 +70,7 @@ namespace TCC
             }
             else
             {
-                var a = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(EdgeWindow.spawnTime))
+                var a = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(EdgeGaugeWindow.spawnTime))
                 {
                     EasingFunction = new QuadraticEase()
                 };

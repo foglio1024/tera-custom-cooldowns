@@ -72,27 +72,42 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ClassSpecific\Warrior.cs" />
-    <Compile Include="HPbar.xaml.cs">
-      <DependentUpon>HPbar.xaml</DependentUpon>
+    <Compile Include="UI elements\BossGage.xaml.cs">
+      <DependentUpon>BossGage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Parsing\S_CREATURE_CHANGE_HP.cs" />
-    <Compile Include="Parsing\S_LOAD_ACHIEVEMENT_LIST.cs" />
-    <Compile Include="Parsing\S_PLAYER_CHANGE_MP.cs" />
-    <Compile Include="Parsing\S_PLAYER_CHANGE_STAMINA.cs" />
+    <Compile Include="ClassSpecific\Mystic.cs" />
+    <Compile Include="ClassSpecific\Warrior.cs" />
+    <Compile Include="Data\MonsterDatabase.cs" />
+    <Compile Include="Parsing\Messages\S_BOSS_GAGE_INFO.cs" />
+    <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_FLIGHT_ENERGY.cs" />
+    <Compile Include="Parsing\S_NPC_STATUS.cs" />
+    <Compile Include="Windows\BossGageWindow.xaml.cs">
+      <DependentUpon>BossGageWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\CharacterWindow.xaml.cs">
+      <DependentUpon>CharacterWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Parsing\Messages\S_CREATURE_CHANGE_HP.cs" />
+    <Compile Include="Parsing\Messages\S_LOAD_ACHIEVEMENT_LIST.cs" />
+    <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_MP.cs" />
+    <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_STAMINA.cs" />
+    <Compile Include="Parsing\PacketRouter.cs" />
+    <Compile Include="Windows\StaminaGauge.xaml.cs">
+      <DependentUpon>StaminaGauge.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI elements\Arc.cs" />
     <Compile Include="Data\Character.cs" />
     <Compile Include="Parsing\CharListProcessor.cs" />
     <Compile Include="Parsing\CharLoginProcessor.cs" />
-    <Compile Include="Edge\EdgeArc.xaml.cs">
+    <Compile Include="UI elements\EdgeArc.xaml.cs">
       <DependentUpon>EdgeArc.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Edge\EdgeWindow.xaml.cs">
+    <Compile Include="Windows\EdgeWindow.xaml.cs">
       <DependentUpon>EdgeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\Enums.cs" />
     <Compile Include="Data\BroochesDatabase.cs" />
-    <Compile Include="FocusManager.cs" />
+    <Compile Include="Windows\FocusManager.cs" />
     <Compile Include="Parsing\ListParser.cs" />
     <Compile Include="Parsing\Messages\S_ABNORMALITY_BEGIN.cs" />
     <Compile Include="Parsing\Messages\S_DECREASE_COOLTIME_SKILL.cs" />
@@ -111,20 +126,28 @@
     <Compile Include="Data\SkillsDatabase.cs" />
     <Compile Include="Parsing\StringUtils.cs" />
     <Compile Include="Parsing\Messages\S_USER_STATUS.cs" />
-    <Compile Include="WindowManager.cs" />
-    <Page Include="Edge\EdgeArc.xaml">
+    <Compile Include="Windows\WindowManager.cs" />
+    <Page Include="UI elements\BossGage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Edge\EdgeWindow.xaml">
+    <Page Include="UI elements\EdgeArc.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="HPbar.xaml">
+    <Page Include="Windows\BossGageWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Windows\EdgeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\CharacterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\CooldownWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -133,10 +156,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Parsing\CustomReader.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="Windows\CooldownWindow.xaml.cs">
+      <DependentUpon>CooldownWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\StaminaGauge.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI elements\SkillIconControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -145,7 +172,7 @@
   <ItemGroup>
     <Compile Include="Parsing\Messages\C_CHECK_VERSION_CUSTOM.cs" />
     <Compile Include="Parsing\Messages\S_START_COOLTIME_SKILL.cs" />
-    <Compile Include="Parsing\PacketParser.cs" />
+    <Compile Include="SessionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -189,6 +216,12 @@
     <None Include="resources\CharacterWindow_I1BD.png" />
     <None Include="resources\CharacterWindow_I1BF.png" />
     <None Include="resources\CharacterWindow_I1C1.png" />
+    <Content Include="resources\database\ConnectedSkills.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\database\monsters-EU-EN.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="resources\database\SkillIconData\SkillIconData-0.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -251,6 +284,7 @@
     </Content>
     <None Include="resources\glaiver.png" />
     <None Include="resources\gunner.png" />
+    <Resource Include="resources\enraged.png" />
     <Content Include="resources\icons\Acrobat_Tex.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

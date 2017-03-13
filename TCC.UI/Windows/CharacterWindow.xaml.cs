@@ -18,16 +18,18 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using TCC.Parsing;
 
 namespace TCC
 {
     /// <summary>
     /// Logica di interazione per HPbar.xaml
     /// </summary>
-    public partial class HPWindow : Window, INotifyPropertyChanged
+    public partial class CharacterWindow : Window, INotifyPropertyChanged
     {
-        static int AnimationTime = 100;
+        static int AnimationTime = 200;
         static int MaxHP, MaxMP, MaxST = 0;
+        static int MaxFlightEnergy = 1000;
 
         Class currentClass = Class.None;
         public Class CurrentClass
@@ -39,6 +41,20 @@ namespace TCC
                 {
                     currentClass = value;
                     NotifyPropertyChanged("CurrentClass");
+                }
+            }
+        }
+
+        string currentName;
+        public string CurrentName
+        {
+            get => currentName;
+            set
+            {
+                if (value != currentName)
+                {
+                    currentName = value;
+                    NotifyPropertyChanged("CurrentName");
                 }
             }
         }
@@ -57,36 +73,71 @@ namespace TCC
             }
         }
 
+        private int currentLevel;
+        public int CurrentLevel
+        {
+            get => currentLevel; 
+            set
+            {
+                if (currentLevel != value)
+                {
+                    currentLevel = value;
+                    NotifyPropertyChanged("CurrentLevel");
+                }
+
+            }
+        }
+
+        private int currentIlvl;
+        public int CurrentIlvl
+        {
+            get => currentIlvl;
+            set
+            {
+                if (value != currentIlvl)
+                {
+                    currentIlvl = value;
+                    NotifyPropertyChanged("CurrentIlvl");
+                }
+            }
+        }
+
+
+
         private void NotifyPropertyChanged(string prop)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
-        public HPWindow()
+        public CharacterWindow()
         {
             InitializeComponent();
         }
 
-        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             IntPtr hwnd = new WindowInteropHelper(this).Handle;
             FocusManager.MakeUnfocusable(hwnd);
             FocusManager.HideFromToolBar(hwnd);
+            if (Properties.Settings.Default.Transparent)
+            {
+                FocusManager.MakeTransparent(hwnd);
+            }
 
-            this.Top = Properties.Settings.Default.HPBarTop;
-            this.Left = Properties.Settings.Default.HPBarLeft;
+            this.Top = Properties.Settings.Default.CharacterWindowTop;
+            this.Left = Properties.Settings.Default.CharacterWindowLeft;
 
-            PacketParser.HPUpdated += UpdateHP;
-            PacketParser.MPUpdated += UpdateMP;
-            PacketParser.STUpdated += UpdateST;
+            PacketRouter.HPUpdated += UpdateHP;
+            PacketRouter.MPUpdated += UpdateMP;
+            PacketRouter.STUpdated += UpdateST;
+            PacketRouter.FlightEnergyUpdated += UpdateFlightEnergy;
 
-            PacketParser.MaxHPUpdated += SetMaxHP;
-            PacketParser.MaxMPUpdated += SetMaxMP;
-            PacketParser.MaxSTUpdated += SetMaxST;
+            PacketRouter.IlvlUpdated += UpdateIlvl;
+
+            PacketRouter.MaxHPUpdated += SetMaxHP;
+            PacketRouter.MaxMPUpdated += SetMaxMP;
+            PacketRouter.MaxSTUpdated += SetMaxST;
+            //PacketRouter.MaxFlightEnergyUpdated += SetMaxFlightEnergy;
 
             hpBar.Width = 0;
             mpBar.Width = 0;
@@ -99,7 +150,6 @@ namespace TCC
                 UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
                 Converter = new ClassImageConverter(),
             };
-
             Binding laurelBinding = new Binding
             {
                 Source = this,
@@ -107,9 +157,30 @@ namespace TCC
                 UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
                 Converter = new LaurelImageConverter()
             };
+            Binding nameBinding = new Binding
+            {
+                Source = this,
+                Path = new PropertyPath("CurrentName"),
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+            };
+            Binding levelBinding = new Binding
+            {
+                Source = this,
+                Path = new PropertyPath("CurrentLevel"),
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+            };
+            Binding ilvlBinding = new Binding
+            {
+                Source = this,
+                Path = new PropertyPath("CurrentIlvl"),
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+            };
 
-            laurel.SetBinding(Rectangle.FillProperty, laurelBinding);
             classIcon.SetBinding(Rectangle.OpacityMaskProperty, classBinding);
+            laurel.SetBinding(Rectangle.FillProperty, laurelBinding);
+            nameTB.SetBinding(TextBlock.TextProperty, nameBinding);
+            levelTB.SetBinding(TextBlock.TextProperty, levelBinding);
+            ilvlTB.SetBinding(TextBlock.TextProperty, ilvlBinding);
 
             var d = new DispatcherTimer();
             d.Interval = TimeSpan.FromMilliseconds(333);
@@ -118,21 +189,24 @@ namespace TCC
 
         }
 
-        internal void ShowStamina()
+        private void UpdateIlvl(int statValue)
+        {
+            CurrentIlvl = statValue;
+        }
+
+        internal void ShowResolve()
         {
             Dispatcher.Invoke(() => {
                 StaminaRow.Height = GridLength.Auto;
             });
         }
-        internal void HideStamina()
+        internal void HideResolve()
         {
             Dispatcher.Invoke(() =>
             {
                 StaminaRow.Height = new GridLength(0);
             });
         }
-
-
 
         int currHp = 0;
 
@@ -171,7 +245,9 @@ namespace TCC
         {
             Dispatcher.Invoke(() => {
                 hpBar.BeginAnimation(WidthProperty, BarAnimation(ValueToLength(newValue, MaxHP)));
-            hpTB.Text = newValue.ToString();
+                hpTB.Text = newValue.ToString();
+                var perc = 100 * newValue / MaxHP;
+                hpPercTB.Text = perc + "%";
             });
         }
         private void UpdateMP(int newValue)
@@ -190,12 +266,41 @@ namespace TCC
             });
         }
 
+        private void UpdateFlightEnergy(double newValue)
+        {
+            Dispatcher.Invoke(() => {
+                DoubleAnimation an = new DoubleAnimation(dummyFlightBar.ActualWidth * newValue / 1000, TimeSpan.FromMilliseconds(300)) { EasingFunction = new QuadraticEase() };
+                flightBar.BeginAnimation(WidthProperty, an);
+            });
+        }
+        private void SetMaxFlightEnergy(int statValue)
+        {
+            MaxFlightEnergy = statValue;
+        }
+
+        private void ShowFlightBar()
+        {
+            Dispatcher.Invoke(() =>
+            {
+            });
+        }
+
         private DoubleAnimation BarAnimation(double value)
         {
             return new DoubleAnimation(value, TimeSpan.FromMilliseconds(AnimationTime)) { EasingFunction = new QuadraticEase() };
         }
 
-        double ValueToLength(int value, int maxValue)
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+        private void Window_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Properties.Settings.Default.CharacterWindowLeft = Left;
+            Properties.Settings.Default.CharacterWindowTop = Top;
+        }
+
+        double ValueToLength(double value, int maxValue)
         {
             if(maxValue == 0)
             {
@@ -219,6 +324,10 @@ namespace TCC
                 MaxHP = 0;
                 MaxMP = 0;
                 MaxST = 0;
+                CurrentLaurel = Laurel.None;
+                CurrentName = "";
+                CurrentLevel = 1;
+                CurrentClass = Class.None;
             });
         }
     }

@@ -18,7 +18,7 @@ using System.Windows.Threading;
 
 namespace TCC
 {
-
+    public delegate void SkillEndedEventHandler(Skill sk, int cd);
     /// <summary>
     /// Logica di interazione per SkillIconControl.xaml
     /// </summary>
@@ -26,8 +26,11 @@ namespace TCC
     {
         Timer NumberTimer;
         Timer MainTimer;
+        Timer CloseTimer;
         double currentCd;
         int ending = SkillManager.Ending;
+
+        public static event SkillEndedEventHandler SkillEnded;
 
         public ImageBrush IconBrush
         {
@@ -57,19 +60,41 @@ namespace TCC
         }
         public static readonly DependencyProperty SkillNameProperty = DependencyProperty.Register("SkillName", typeof(string), typeof(SkillIconControl));
 
+        public Skill Skill
+        {
+            get { return (Skill)GetValue(SkillProperty); }
+            set { SetValue(SkillProperty, value); }
+        }
+        public static readonly DependencyProperty SkillProperty =
+            DependencyProperty.Register("Skill", typeof(Skill), typeof(SkillIconControl));
+
+        public void Reset(Skill sk)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                if (sk == Skill)
+                {
+                    CloseTimer.Stop();
+                    RemoveSkill();
+                }
+            });
+        }
+
+
+
         public SkillIconControl()
         {
             InitializeComponent();
             icon.DataContext = this;
-            
-            SkillManager.Changed += SkillIconControl_Changed;
+            SkillManager.Changed += ChangeCooldown;
+            SkillManager.Reset += Reset;
         }
 
-        private void SkillIconControl_Changed(object sender, EventArgs e, SkillCooldown s)
+        private void ChangeCooldown(SkillCooldownNew s)
         {
             Dispatcher.Invoke(() =>
             {
-                if (s.Id == this.Id)
+                if (s.Skill.Name == this.Skill.Name)
                 {
                     double newAngle = (double)s.Cooldown / (double)Cooldown;
                     currentCd = (double)s.Cooldown / 1000;
@@ -97,12 +122,15 @@ namespace TCC
                 }
             });
         }
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        private void ControlLoaded(object sender, RoutedEventArgs e)
         {
             currentCd = (double)Cooldown / 1000;
             ToolTip = SkillName;
             NumberTimer = new Timer(1000);
             MainTimer = new Timer(Cooldown);
+
+            CloseTimer = new Timer(ending);
+            CloseTimer.Elapsed += CloseTimer_Elapsed;
 
             NumberTimer.Elapsed += (s, o) => {
                 Dispatcher.Invoke(() => {
@@ -159,12 +187,34 @@ namespace TCC
                     arc.BeginAnimation(WidthProperty, w);
                     arc.BeginAnimation(HeightProperty, h);
                     this.BeginAnimation(MarginProperty, t);
+                    CloseTimer.Enabled = true;
+
                     MainTimer.Stop();
                 });
             };
 
             number.Text = String.Format("{0:N0}", currentCd);
             AnimateCooldown();
+        }
+
+        private void CloseTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            RemoveSkill();
+        }
+
+        private void RemoveSkill()
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                MainTimer.Stop();
+                MainTimer.Close();
+                NumberTimer.Stop();
+                NumberTimer.Close();
+                CloseTimer.Stop();
+                CloseTimer.Close();
+                SkillEnded?.Invoke(Skill, Cooldown);
+            });
+
         }
 
         void AnimateCooldown()

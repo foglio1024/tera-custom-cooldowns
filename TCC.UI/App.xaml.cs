@@ -4,9 +4,12 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using TCC.Data;
+using TCC.Parsing;
 
 namespace TCC
 {
@@ -15,28 +18,27 @@ namespace TCC
     /// </summary>
     public partial class App : Application
     {
-        
-
         private void OnStartup(object sender, StartupEventArgs ev)
         {
             TeraSniffer.Instance.Enabled = true;
 
             WindowManager.Init();
-
-            TeraSniffer.Instance.MessageReceived += PacketParser.MessageReceived;
+            PacketRouter.Init();
             TeraSniffer.Instance.NewConnection += (srv) => SkillManager.Clear();
             TeraSniffer.Instance.EndConnection += () => SkillManager.Clear();
 
             var LoadThread = new Thread(new ThreadStart(() =>
             {
+
                 SkillsDatabase.Populate();
                 BroochesDatabase.SetBroochesIcons();
-                WindowManager.CDBar.LoadingDone();
+                MonsterDatabase.Populate();
+                WindowManager.CooldownWindow.LoadingDone();
             }));
 
-            PacketParser.CurrentClass = Class.None;
+            SessionManager.CurrentClass = Class.None;
 
-            WindowManager.CDBar.Show();
+            WindowManager.ShowWindow(WindowManager.CooldownWindow);
             LoadThread.Start();
         }
 
@@ -44,8 +46,8 @@ namespace TCC
         {
             TeraSniffer.Instance.Enabled = false;
             WindowManager.Dispose();
-            Environment.Exit(0);
 
+            Environment.Exit(0);
         }
 
     }

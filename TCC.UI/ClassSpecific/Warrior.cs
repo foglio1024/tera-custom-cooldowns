@@ -19,15 +19,15 @@ namespace TCC
         public static event Gamble GambleBuff;
         public static event Gamble GambleCooldown;
 
-        public static void CheckGamble(S_ABNORMALITY_BEGIN sAbnormalityBegin)
+        public static void CheckGambleBuff(S_ABNORMALITY_BEGIN sAbnormalityBegin)
         {
-            if (GambleIDs.Contains(sAbnormalityBegin.id))
+            if (GambleIDs.Contains(sAbnormalityBegin.id) && sAbnormalityBegin.casterId == SessionManager.CurrentCharId)
             {
                 GambleBuff.Invoke(sAbnormalityBegin.duration);
             }
         }
 
-        public static void CheckScytheAndGamble(S_START_COOLTIME_SKILL sk)
+        public static void CheckWarriorsSkillCooldown(S_START_COOLTIME_SKILL sk)
         {
             if (SkillsDatabase.SkillIdToName(sk.SkillId, Class.Warrior).Contains("Scythe I"))
             {

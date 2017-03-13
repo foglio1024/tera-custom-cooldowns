@@ -5,13 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" Loaded="UserControl_Loaded" >
+             d:DesignHeight="100" d:DesignWidth="100" Loaded="ControlLoaded" >
     <Grid Width="Auto" Height="Auto" Margin="2">
-        <Ellipse Width="50" Height="50" x:Name="icon" Fill="{Binding IconBrush}" ToolTip="{Binding SkillName}" Stroke="#90000000" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <local:Arc x:Name="arc" Opacity="1" Width="55" Height="55" StrokeThickness="3" Stroke="White" EndAngle="270.9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-            <!--<local:Arc.Effect>
-                <DropShadowEffect ShadowDepth="0" BlurRadius="3"/>
-            </local:Arc.Effect>-->
+        <Ellipse Width="50" Height="50" x:Name="icon" Fill="{Binding IconBrush}" ToolTip="{Binding SkillName}" Stroke="#90ffffff" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <local:Arc x:Name="arc" Opacity="1" Width="55" Height="55" StrokeThickness="4" Stroke="White" EndAngle="270.9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
         </local:Arc>
         <Grid Width="22" Height="22" x:Name="g" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,38,-38,0">
             

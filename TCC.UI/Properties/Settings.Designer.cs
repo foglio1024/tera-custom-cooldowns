@@ -50,48 +50,48 @@ namespace TCC.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double EdgeWindowTop {
+        public double GaugeWindowTop {
             get {
-                return ((double)(this["EdgeWindowTop"]));
+                return ((double)(this["GaugeWindowTop"]));
             }
             set {
-                this["EdgeWindowTop"] = value;
+                this["GaugeWindowTop"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double EdgeWindowLeft {
+        public double GaugeWindowLeft {
             get {
-                return ((double)(this["EdgeWindowLeft"]));
+                return ((double)(this["GaugeWindowLeft"]));
             }
             set {
-                this["EdgeWindowLeft"] = value;
+                this["GaugeWindowLeft"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double HPBarTop {
+        public double CharacterWindowTop {
             get {
-                return ((double)(this["HPBarTop"]));
+                return ((double)(this["CharacterWindowTop"]));
             }
             set {
-                this["HPBarTop"] = value;
+                this["CharacterWindowTop"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double HPBarLeft {
+        public double CharacterWindowLeft {
             get {
-                return ((double)(this["HPBarLeft"]));
+                return ((double)(this["CharacterWindowLeft"]));
             }
             set {
-                this["HPBarLeft"] = value;
+                this["CharacterWindowLeft"] = value;
             }
         }
         

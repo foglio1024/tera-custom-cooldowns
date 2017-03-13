@@ -1,0 +1,169 @@
+﻿<Window x:Class="TCC.CharacterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TCC"
+        mc:Ignorable="d"
+        Title="HPbar" 
+        Height="Auto" Width="Auto"
+        Topmost="True" 
+        Background="#00000000" 
+        ShowInTaskbar="False" 
+        WindowStyle="None" 
+        AllowsTransparency="True" 
+        SizeToContent="WidthAndHeight" 
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        MouseLeftButtonUp="Window_MouseLeftButtonUp"
+        Loaded="Window_Loaded"      
+        SnapsToDevicePixels="True"
+        ResizeMode="NoResize"      
+        >
+    <Window.Resources>
+        <Style x:Key="baseRectangle" TargetType="Rectangle">
+            <Setter Property="Height" Value="16"/>
+            <Setter Property="Margin" Value="0,0,0,0"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Fill" Value="#30000000"/>
+            <Setter Property="Width" Value="Auto"/>
+            <Setter Property="Stroke" Value="#00ffffff"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+        </Style>
+        <Style x:Key="barRectangle" TargetType="Rectangle">
+            <Setter Property="Height" Value="14"/>
+            <Setter Property="Margin" Value="1,1,1,1"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="hpBarNumber" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Text" Value="0"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="TextAlignment" Value="Right"/>
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="Margin" Value="5,0,5,0"/>
+            <Setter Property="FontFamily" Value="Calibri"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="10,0">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Border Margin="0,14,0,16" CornerRadius="2" Height="Auto" Width="Auto" BorderThickness="0" BorderBrush="#70ffffff" Background="#202020" Grid.ColumnSpan="2" Grid.RowSpan="1" Grid.Row="2" >
+            <Border.Effect>
+                <DropShadowEffect Opacity="0.6" ShadowDepth="3"/>
+            </Border.Effect>
+        </Border>
+        <Grid Margin="0,0,0,0" Grid.ColumnSpan="2" Width="Auto" Height="22">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" Name="flightDef" />
+            </Grid.ColumnDefinitions>
+            <Border Margin="0" CornerRadius="2" Grid.ColumnSpan="5" Background="#202020" Width="Auto" HorizontalAlignment="Stretch" Height="Auto">
+                    <Border.Effect>
+                        <DropShadowEffect Opacity="0.6" ShadowDepth="3"/>
+                    </Border.Effect>
+                </Border>
+
+                <TextBlock Text="Lv." Margin="4,0,0,1" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0"
+                       Style="{StaticResource hpBarNumber}" />
+
+                <TextBlock Text="65" Margin="0" Name="levelTB" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"
+                       Style="{StaticResource hpBarNumber}" />
+                <TextBlock Text="Name" Name="nameTB" FontSize="18" VerticalAlignment="Center" Margin="7,0" HorizontalAlignment="Left" Grid.Column="2"
+                       Style="{StaticResource hpBarNumber}" />
+                <TextBlock Text="ilvl" Name="ilvlTB" FontSize="18" VerticalAlignment="Center" Margin="20,0" HorizontalAlignment="Left" Grid.Column="3"
+                       Style="{StaticResource hpBarNumber}" />
+            <Rectangle Name="flightBar" Width="0" Grid.Column="4" Fill="#906090ff" Height="3" Margin="10,0" HorizontalAlignment="Left" />
+            <Rectangle Name="dummyFlightBar" Width="100" Grid.Column="4" Fill="Transparent" Height="3" Margin="10,0" HorizontalAlignment="Stretch" />
+        </Grid>
+        <Grid Margin="8,8" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1">
+            <Rectangle Name="laurel" Width="74" Height="80" Margin="0,-8,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Rectangle.Effect>
+                    <DropShadowEffect Opacity="0.3" ShadowDepth="3"/>
+                </Rectangle.Effect>
+
+            </Rectangle>
+            <Rectangle Name="classIcon" Fill="White" Width="50" Height="50" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Rectangle.OpacityMask>
+                    <ImageBrush/>
+                </Rectangle.OpacityMask>
+                <Rectangle.Effect>
+                    <DropShadowEffect Color="#ff20f0ff" BlurRadius="7" ShadowDepth="0"/>
+                </Rectangle.Effect>
+            </Rectangle>
+        </Grid>
+        <Grid Width="Auto" Height="Auto" Grid.Column="1" Margin="0,20,5,20" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Name="StaminaRow" Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid>
+                <Rectangle Name="base" Style="{StaticResource baseRectangle}"/>
+                <Rectangle Name="hpBar" Fill="#d50000" Width="200" Style="{StaticResource barRectangle}" />
+                <TextBlock Name="hpPercTB" Style="{StaticResource hpBarNumber}" HorizontalAlignment="Center" FontSize="14" Opacity="1"></TextBlock>
+            </Grid>
+
+            <Grid  Grid.Row="1">
+                <Rectangle Style="{StaticResource baseRectangle}" Grid.Row="1"/>
+                <Rectangle Name="mpBar"  Width="50" Fill="#4aa5f5" Style="{StaticResource barRectangle}">
+                </Rectangle>
+            </Grid>
+
+            <Grid  Grid.Row="2" VerticalAlignment="Center">
+                <Rectangle Style="{StaticResource baseRectangle}" Grid.Row="2" Height="6"/>
+                <Rectangle Name="stBar" Height="4"  Width="50" Style="{StaticResource barRectangle}" Fill="#FF58F0FF" />
+            </Grid>
+
+            <Grid Grid.Column="1" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Name="hpTB" Style="{StaticResource hpBarNumber}" Margin="10,0,0,0" Grid.Column="0"/>
+                <TextBlock Style="{StaticResource hpBarNumber}" Grid.Column="1" Text="/" Margin="4,0"  Foreground="#ffcccccc"/>
+                <TextBlock Name="hpMaxTB" Style="{StaticResource hpBarNumber}" Margin="0,0,10,0" Grid.Column="2" Foreground="#ffcccccc"/>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Name="mpTB" Style="{StaticResource hpBarNumber}" Margin="10,0,0,0" Grid.Column="0"/>
+                <TextBlock Style="{StaticResource hpBarNumber}" Grid.Column="1" Text="/" Margin="4,0" Foreground="#ffcccccc"/>
+                <TextBlock Name="mpMaxTB" Style="{StaticResource hpBarNumber}" Margin="0,0,10,0" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Foreground="#ffcccccc"/>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Name="stTB" Style="{StaticResource hpBarNumber}" Margin="10,0,0,0" Grid.Column="0" Grid.Row="2" FontSize="10"/>
+                <TextBlock Style="{StaticResource hpBarNumber}" Grid.Column="1" Text="/" Margin="4,0" Grid.Row="2" Foreground="#ffcccccc" FontSize="10"/>
+                <TextBlock Name="stMaxTB" Style="{StaticResource hpBarNumber}" Margin="0,0,15,0" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" Foreground="#ffcccccc" FontSize="10"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

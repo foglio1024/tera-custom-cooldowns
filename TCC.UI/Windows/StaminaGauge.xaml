@@ -1,0 +1,46 @@
+﻿<Window x:Class="TCC.StaminaGauge"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TCC"
+        mc:Ignorable="d"
+        Title="StaminaGauge" Height="Auto" Width="Auto"
+        Background="#00000000"
+        Loaded="Window_Loaded"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        MouseLeftButtonUp="Window_MouseLeftButtonUp"
+        SizeToContent="WidthAndHeight"
+        Topmost="True"
+        AllowsTransparency="True"
+        ShowInTaskbar="False"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+
+        >
+    <Grid Margin="20">
+        <Grid.Effect>
+            <DropShadowEffect x:Name="glow" Color="#FFFF6AFF" ShadowDepth="0" BlurRadius="25" Opacity="0"/>
+        </Grid.Effect>
+        <Ellipse Width="70" Height="70" Fill="#202020" Name="baseEll" Stroke="#00000000" StrokeThickness="3">
+            <Ellipse.Effect>
+                <DropShadowEffect Opacity="0.6" ShadowDepth="3"/>
+            </Ellipse.Effect>
+        </Ellipse>
+        <Grid Name="StaminaAmountGrid" Margin="0" Width="70" Height="70">
+            <local:Arc x:Name="StaminaAmount" Stroke="Orange" StrokeThickness="3" EndAngle="0" />
+        </Grid>
+        <TextBlock Name="num"
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" 
+                   FontSize="25" 
+                   FontFamily="Roboto Mono" 
+                   Foreground="#f0ffffff"
+                   FontWeight="UltraLight">0
+            <!--<TextBlock.Effect>
+                <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="20"></DropShadowEffect>
+            </TextBlock.Effect>-->
+        </TextBlock>
+
+    </Grid>
+</Window>

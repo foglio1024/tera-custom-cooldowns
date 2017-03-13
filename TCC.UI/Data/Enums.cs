@@ -33,4 +33,10 @@ namespace TCC
         Diamond = 4,
         Champion = 5
     }
+    public enum CooldownType
+    {
+        Skill,
+        Item
+    }
+
 }
