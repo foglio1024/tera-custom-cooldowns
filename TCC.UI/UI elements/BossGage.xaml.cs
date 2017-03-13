@@ -99,7 +99,7 @@ namespace TCC
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            HPrect.Fill = new SolidColorBrush(Colors.OrangeRed);
+            HPrect.Fill = new SolidColorBrush(Color.FromArgb(0xff, 0x4a, 0x82, 0xbd));
         }
 
         private void BossGage_HPUpdated(ulong id, object hp)
