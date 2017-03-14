@@ -42,7 +42,7 @@ namespace TCC
         bool isBuilt;
         public bool IsBuilt { get { return isBuilt; }
             set {
-                    if(value != isBuilt)
+                if(value != isBuilt)
                 {
                     isBuilt = value;
                     ChangeStatus?.Invoke(value);

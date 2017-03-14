@@ -19,13 +19,13 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Border Margin="0,0,0,0" CornerRadius="2" Height="Auto" Width="Auto" BorderThickness="0" BorderBrush="#70ffffff" Background="#202020"  Grid.RowSpan="3" Grid.Row="0" >
-                <Border.Effect>
+                <!--<Border.Effect>
                     <DropShadowEffect Opacity="0.6" ShadowDepth="3"/>
-                </Border.Effect>
+                </Border.Effect>-->
             </Border>
             <Grid Grid.Row="1" Margin="10,10">
                 <Rectangle Name="BaseRect"  Fill="#90000000" Height="Auto" Width="400"/>
-                <Rectangle Name="HPrect"  Fill="#4a82bd" Width="260" HorizontalAlignment="Left" Grid.ColumnSpan="1">
+                <Rectangle Name="HPrect"  Fill="#4a82bd" Width="400" HorizontalAlignment="Left" Grid.ColumnSpan="1">
                     <Rectangle.Effect>
                         <DropShadowEffect ShadowDepth="0" BlurRadius="30" Color="Red" Opacity="0"/>
                     </Rectangle.Effect>
@@ -50,11 +50,20 @@
                     <Border BorderThickness="1,0,1,0" BorderBrush="#40000000" Grid.Column="9"></Border>
                 </Grid>
                 <Rectangle Name="NextEnrage" Margin="358,0,0,0"  Fill="White" Width="2" HorizontalAlignment="Left" Grid.Column="1" />
-                <TextBlock Name="Perc" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Margin="0" >100%</TextBlock>
+                <TextBlock Name="Perc" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Margin="0" FontSize="13">100%
+                    <TextBlock.CacheMode>
+                        <BitmapCache RenderAtScale="1.5"></BitmapCache>
+                    </TextBlock.CacheMode></TextBlock>
             </Grid>
             <Grid Margin="10,2">
-                <TextBlock Name="BossNameTB" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" Text="{Binding BossName}" ></TextBlock>
-                <TextBlock Name="Perc2" HorizontalAlignment="Right" Foreground="White" VerticalAlignment="Center">-</TextBlock>
+                <TextBlock Name="BossNameTB" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" Foreground="White" Text="{Binding BossName}" >
+                    <TextBlock.CacheMode>
+                        <BitmapCache RenderAtScale="1.5"></BitmapCache>
+                    </TextBlock.CacheMode></TextBlock>
+                <TextBlock Name="Perc2" HorizontalAlignment="Right" Foreground="White" VerticalAlignment="Center" FontSize="13">-
+                    <TextBlock.CacheMode>
+                        <BitmapCache RenderAtScale="1.5"></BitmapCache>
+                    </TextBlock.CacheMode></TextBlock>
             </Grid>
 
             <Grid Name="EnrageGrid" Grid.Column="1" Grid.RowSpan="3" Width="0" Height="60" Margin="5,0">

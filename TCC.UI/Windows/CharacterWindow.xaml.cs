@@ -102,17 +102,18 @@ namespace TCC
             }
         }
 
-
-
         private void NotifyPropertyChanged(string prop)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
+
         public CharacterWindow()
         {
             InitializeComponent();
-        }
 
+            _doubleAnimation.EasingFunction = new QuadraticEase();
+            _doubleAnimation.Duration = TimeSpan.FromMilliseconds(AnimationTime);
+        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -196,16 +197,17 @@ namespace TCC
 
         internal void ShowResolve()
         {
-            Dispatcher.Invoke(() => {
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
                 StaminaRow.Height = GridLength.Auto;
-            });
+            }));
         }
         internal void HideResolve()
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
                 StaminaRow.Height = new GridLength(0);
-            });
+            }));
         }
 
         int currHp = 0;
@@ -221,75 +223,90 @@ namespace TCC
         private void SetMaxHP(int statValue)
         {
             MaxHP = statValue;
-            Dispatcher.Invoke(() => {
-            hpMaxTB.Text = statValue.ToString();
-            });
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                hpMaxTB.Text = statValue.ToString();
+            }));
         }
         private void SetMaxMP(int statValue)
         {
             MaxMP = statValue;
-            Dispatcher.Invoke(() => {
-            mpMaxTB.Text = statValue.ToString();
-            });
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                mpMaxTB.Text = statValue.ToString();
+            }));
 
         }
         private void SetMaxST(int statValue)
         {
             MaxST = statValue;
-            Dispatcher.Invoke(() => {
-            stMaxTB.Text = statValue.ToString();
-            });
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                stMaxTB.Text = statValue.ToString();
+            }));
         }
 
         private void UpdateHP(int newValue)
         {
-            Dispatcher.Invoke(() => {
-                hpBar.BeginAnimation(WidthProperty, BarAnimation(ValueToLength(newValue, MaxHP)));
+            Dispatcher.BeginInvoke(new Action(() =>  
+            {
+                _doubleAnimation.To = ValueToLength(newValue, MaxHP);
+                hpBar.BeginAnimation(WidthProperty, _doubleAnimation);
+
                 hpTB.Text = newValue.ToString();
-                var perc = 100 * newValue / MaxHP;
-                hpPercTB.Text = perc + "%";
-            });
+                if (MaxHP != 0)
+                {
+
+                    var perc = 100 * newValue / MaxHP;
+                    hpPercTB.Text = perc + "%";
+                }
+                else
+                {
+                    hpPercTB.Text = "-";
+                }
+            }));
         }
         private void UpdateMP(int newValue)
         {
-            Dispatcher.Invoke(() => {
-            mpBar.BeginAnimation(WidthProperty, BarAnimation(ValueToLength(newValue, MaxMP)));
-            mpTB.Text = newValue.ToString();
-            });
+            Dispatcher.BeginInvoke(new Action(() => 
+            {
+                _doubleAnimation.To = ValueToLength(newValue, MaxMP);
+                mpBar.BeginAnimation(WidthProperty, _doubleAnimation);
+
+                mpTB.Text = newValue.ToString();
+            }));
 
         }
         private void UpdateST(int newValue)
         {
-            Dispatcher.Invoke(() => {
-            stBar.BeginAnimation(WidthProperty, BarAnimation(ValueToLength(newValue, MaxST)));
-            stTB.Text = newValue.ToString();
-            });
+            Dispatcher.BeginInvoke(new Action(() => 
+            {
+                _doubleAnimation.To = ValueToLength(newValue, MaxST);
+                stBar.BeginAnimation(WidthProperty, _doubleAnimation);
+
+                stTB.Text = newValue.ToString();
+            }));
         }
 
         private void UpdateFlightEnergy(double newValue)
         {
-            Dispatcher.Invoke(() => {
-                DoubleAnimation an = new DoubleAnimation(dummyFlightBar.ActualWidth * newValue / 1000, TimeSpan.FromMilliseconds(300)) { EasingFunction = new QuadraticEase() };
-                flightBar.BeginAnimation(WidthProperty, an);
-            });
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                _doubleAnimation.To = dummyFlightBar.ActualWidth * newValue / 1000;
+                flightBar.BeginAnimation(WidthProperty, _doubleAnimation);
+            }));
         }
         private void SetMaxFlightEnergy(int statValue)
         {
             MaxFlightEnergy = statValue;
         }
 
-        private void ShowFlightBar()
-        {
-            Dispatcher.Invoke(() =>
-            {
-            });
-        }
 
-        private DoubleAnimation BarAnimation(double value)
-        {
-            return new DoubleAnimation(value, TimeSpan.FromMilliseconds(AnimationTime)) { EasingFunction = new QuadraticEase() };
-        }
-
+        //private DoubleAnimation BarAnimation(double value)
+        //{
+        //    return new DoubleAnimation(value, TimeSpan.FromMilliseconds(AnimationTime)) { EasingFunction = new QuadraticEase() };
+        //}
+        DoubleAnimation _doubleAnimation = new DoubleAnimation();
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
@@ -316,7 +333,7 @@ namespace TCC
 
         internal void Reset()
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
                 UpdateHP(0);
                 UpdateMP(0);
@@ -328,7 +345,7 @@ namespace TCC
                 CurrentName = "";
                 CurrentLevel = 1;
                 CurrentClass = Class.None;
-            });
+            }));
         }
     }
     public class LaurelImageConverter : IValueConverter

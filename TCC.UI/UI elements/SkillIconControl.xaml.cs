@@ -70,14 +70,14 @@ namespace TCC
 
         public void Reset(Skill sk)
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
                 if (sk == Skill)
                 {
                     CloseTimer.Stop();
                     RemoveSkill();
                 }
-            });
+            }));
         }
 
 
@@ -92,7 +92,7 @@ namespace TCC
 
         private void ChangeCooldown(SkillCooldownNew s)
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
                 if (s.Skill.Name == this.Skill.Name)
                 {
@@ -120,7 +120,7 @@ namespace TCC
                     arc.BeginAnimation(Arc.EndAngleProperty, a);
                     this.BeginAnimation(OpacityProperty, b);
                 }
-            });
+            }));
         }
         private void ControlLoaded(object sender, RoutedEventArgs e)
         {
@@ -133,7 +133,7 @@ namespace TCC
             CloseTimer.Elapsed += CloseTimer_Elapsed;
 
             NumberTimer.Elapsed += (s, o) => {
-                Dispatcher.Invoke(() => {
+                Dispatcher.BeginInvoke(new Action(() => {
                     currentCd --;
                     if(currentCd < 0)
                     {
@@ -144,11 +144,11 @@ namespace TCC
                     {
                         number.Text = String.Format("{0:N0}", currentCd); 
                     }
-                });
+                }));
             };
             MainTimer.Elapsed += (s, o) =>
             {
-                Dispatcher.Invoke(() =>
+                Dispatcher.BeginInvoke(new Action(() =>
                 {
                     var c = new DoubleAnimation(22, 0, TimeSpan.FromMilliseconds(ending))
                     {
@@ -190,7 +190,7 @@ namespace TCC
                     CloseTimer.Enabled = true;
 
                     MainTimer.Stop();
-                });
+                }));
             };
 
             number.Text = String.Format("{0:N0}", currentCd);
@@ -204,7 +204,7 @@ namespace TCC
 
         private void RemoveSkill()
         {
-            this.Dispatcher.Invoke(() =>
+            this.Dispatcher.BeginInvoke(new Action(() =>
             {
                 MainTimer.Stop();
                 MainTimer.Close();
@@ -213,7 +213,7 @@ namespace TCC
                 CloseTimer.Stop();
                 CloseTimer.Close();
                 SkillEnded?.Invoke(Skill, Cooldown);
-            });
+            }));
 
         }
 

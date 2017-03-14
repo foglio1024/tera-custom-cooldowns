@@ -8,11 +8,10 @@ using System.Threading.Tasks;
 using TCC.Messages;
 using TCC.Parsing.Messages;
 using Tera.Game;
-using Tera.Game.Messages;
 
 namespace TCC.Parsing
 {
-    public delegate void ParsedMessageEventHandler(ParsedMessage p);
+    public delegate void ParsedMessageEventHandler(Tera.Game.Messages.ParsedMessage p);
     public delegate void EmptyPacketEventHandler();
     public delegate void UpdateIntStatEventHandler(int statValue);
     public delegate void UpdateFloatStatEventHandler(double statValue);
@@ -26,22 +25,22 @@ namespace TCC.Parsing
         public static OpCodeNamer SystemMessageNamer;
         static CharListProcessor CLP = new CharListProcessor();
 
-        static event ParsedMessageEventHandler CharLogin;
-        static event ParsedMessageEventHandler SkillCooldown;
-        static event ParsedMessageEventHandler ItemCooldown;
-        static event ParsedMessageEventHandler DecreaseSkillCooldown;
-        static event EmptyPacketEventHandler   ReturnToLobby;
-        static event ParsedMessageEventHandler AbnormalityBegin;
-        static event ParsedMessageEventHandler PlayerStatUpdate;
-        static event ParsedMessageEventHandler PlayerMPChanged;
-        static event ParsedMessageEventHandler CreatureHPChanged;
-        static event ParsedMessageEventHandler PlayerStaminaChanged;
-        static event ParsedMessageEventHandler UserStatusChanged;
-        static event ParsedMessageEventHandler FlightEnergyChanged;
-        static event EmptyPacketEventHandler   UserSpawned;
-        static event MessageEventHandler       CharList;
-        static event ParsedMessageEventHandler BossGageReceived;
-        static event ParsedMessageEventHandler NpcStatusChanged;
+        //static event ParsedMessageEventHandler CharLogin;
+        //static event ParsedMessageEventHandler SkillCooldown;
+        //static event ParsedMessageEventHandler ItemCooldown;
+        //static event ParsedMessageEventHandler DecreaseSkillCooldown;
+        //static event EmptyPacketEventHandler   ReturnToLobby;
+        //static event ParsedMessageEventHandler AbnormalityBegin;
+        //static event ParsedMessageEventHandler PlayerStatUpdate;
+        //static event ParsedMessageEventHandler PlayerMPChanged;
+        //static event ParsedMessageEventHandler CreatureHPChanged;
+        //static event ParsedMessageEventHandler PlayerStaminaChanged;
+        //static event ParsedMessageEventHandler UserStatusChanged;
+        //static event ParsedMessageEventHandler FlightEnergyChanged;
+        //static event EmptyPacketEventHandler   UserSpawned;
+        //static event MessageEventHandler       CharList;
+        //static event ParsedMessageEventHandler BossGageReceived;
+        //static event ParsedMessageEventHandler NpcStatusChanged;
 
         public static event UpdateIntStatEventHandler MaxHPUpdated;
         public static event UpdateIntStatEventHandler MaxMPUpdated;
@@ -63,22 +62,22 @@ namespace TCC.Parsing
         {
             TeraSniffer.Instance.MessageReceived += MessageReceived;
 
-            CharLogin += OnCharLogin;
-            SkillCooldown += OnNewSkillCooldown;
-            ItemCooldown += OnNewItemCooldown;
-            DecreaseSkillCooldown += OnDecreaseSkillCooldown;
-            ReturnToLobby += OnReturnToLobby;
-            AbnormalityBegin += OnAbnormalityBegin;
-            PlayerStatUpdate += OnPlayerStatUpdate;
-            PlayerMPChanged += OnPlayerChangeMP;
-            CreatureHPChanged += OnCreatureChangeHP;
-            PlayerStaminaChanged += OnPlayerChangeStamina;
-            UserStatusChanged += OnUserStatusChanged;
-            UserSpawned += OnSpawn;
-            CharList += OnCharList;
-            FlightEnergyChanged += OnPlayerChangeFlightEnergy;
-            BossGageReceived += OnGageReceived;
-            NpcStatusChanged += OnNpcStatusChanged;
+            //CharLogin += OnCharLogin;
+            //CharList += OnCharList;
+            //SkillCooldown += OnNewSkillCooldown;
+            //ItemCooldown += OnNewItemCooldown;
+            //DecreaseSkillCooldown += OnDecreaseSkillCooldown;
+            //ReturnToLobby += OnReturnToLobby;
+            //AbnormalityBegin += OnAbnormalityBegin;
+            //PlayerStatUpdate += OnPlayerStatUpdate;
+            //PlayerMPChanged += OnPlayerChangeMP;
+            //CreatureHPChanged += OnCreatureChangeHP;
+            //PlayerStaminaChanged += OnPlayerChangeStamina;
+            //UserStatusChanged += OnUserStatusChanged;
+            //UserSpawned += OnSpawn;
+            //FlightEnergyChanged += OnPlayerChangeFlightEnergy;
+            //BossGageReceived += OnGageReceived;
+            //NpcStatusChanged += OnNpcStatusChanged;
 
         }
 
@@ -110,59 +109,59 @@ namespace TCC.Parsing
             switch (OpCodeNamer.GetName(msg.OpCode))
             {
                 case ("S_START_COOLTIME_SKILL"):
-                    SkillCooldown?.Invoke(new TCC.Messages.S_START_COOLTIME_SKILL(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
+                    HandleNewSkillCooldown(new TCC.Messages.S_START_COOLTIME_SKILL(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
                     break;
                 case ("S_DECREASE_COOLTIME_SKILL"):
-                    DecreaseSkillCooldown?.Invoke(new S_DECREASE_COOLTIME_SKILL(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
+                    HandleDecreaseSkillCooldown(new S_DECREASE_COOLTIME_SKILL(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
                     break;
                 case ("S_ABNORMALITY_BEGIN"):
-                    AbnormalityBegin?.Invoke(new S_ABNORMALITY_BEGIN(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
+                    HandleAbnormalityBegin(new S_ABNORMALITY_BEGIN(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
                     break;
                 case ("S_CREATURE_CHANGE_HP"):
-                    CreatureHPChanged?.Invoke(new S_CREATURE_CHANGE_HP(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
+                    HandleCreatureChangeHP(new S_CREATURE_CHANGE_HP(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
                     break;
                 case ("S_PLAYER_CHANGE_MP"):
-                    PlayerMPChanged?.Invoke(new S_PLAYER_CHANGE_MP(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
+                    HandlePlayerChangeMP(new S_PLAYER_CHANGE_MP(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
                     break;
                 case ("S_BOSS_GAGE_INFO"):
-                    BossGageReceived?.Invoke(new TCC.Messages.S_BOSS_GAGE_INFO(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
+                    HandleGageReceived(new TCC.Messages.S_BOSS_GAGE_INFO(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
                     break;
                 case ("S_PLAYER_CHANGE_STAMINA"):
-                    PlayerStaminaChanged?.Invoke(new S_PLAYER_CHANGE_STAMINA(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
+                    HandlePlayerChangeStamina(new S_PLAYER_CHANGE_STAMINA(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
                     break;
                 case ("S_PLAYER_CHANGE_FLIGHT_ENERGY"):
-                    FlightEnergyChanged?.Invoke(new S_PLAYER_CHANGE_FLIGHT_ENERGY(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
+                    HandlePlayerChangeFlightEnergy(new S_PLAYER_CHANGE_FLIGHT_ENERGY(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
                     break;
                 case ("S_START_COOLTIME_ITEM"):
-                    ItemCooldown?.Invoke(new S_START_COOLTIME_ITEM(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
+                    HandleNewItemCooldown(new S_START_COOLTIME_ITEM(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
                     break;
                 case ("S_PLAYER_STAT_UPDATE"):
-                    PlayerStatUpdate?.Invoke(new TCC.Messages.S_PLAYER_STAT_UPDATE(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
+                    HandlePlayerStatUpdate(new TCC.Messages.S_PLAYER_STAT_UPDATE(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
                     break;
                 case ("S_USER_STATUS"):
-                    UserStatusChanged?.Invoke(new S_USER_STATUS(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
+                    HandleUserStatusChanged(new S_USER_STATUS(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
                     break;
                 case ("S_NPC_STATUS"):
-                    NpcStatusChanged?.Invoke(new S_NPC_STATUS(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
+                    HandleNpcStatusChanged(new S_NPC_STATUS(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
                     break;
                 case ("S_SPAWN_ME"):
-                    UserSpawned?.Invoke();
+                    HandleSpawn();
                     break;
                 case ("S_GET_USER_LIST"):
-                    CharList?.Invoke(msg);
+                    HandleCharList(msg);
                     break;
                 case ("S_RETURN_TO_LOBBY"):
-                    ReturnToLobby?.Invoke();
+                    HandleReturnToLobby();
                     break;
                 case ("S_LOGIN"):
-                    CharLogin?.Invoke(new S_LOGIN(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
+                    HandleCharLogin(new S_LOGIN(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
                     break;
                 default:
                     break;
             }
         }
 
-        static void OnCharLogin(ParsedMessage p)
+        static void HandleCharLogin(S_LOGIN p)
         {
             var sLogin = (S_LOGIN)p;
             SessionManager.Logged = true;
@@ -176,7 +175,6 @@ namespace TCC.Parsing
             {
                 case Class.Warrior:
                     WindowManager.InitClassGauge(Class.Warrior);
-                    WindowManager.ShowWindow(WindowManager.ClassSpecificGauge);
                     WindowManager.CharacterWindow.ShowResolve();
                     break;
                 case Class.Lancer:
@@ -184,22 +182,18 @@ namespace TCC.Parsing
                     break;
                 case Class.Engineer:
                     WindowManager.InitClassGauge(Class.Engineer);
-                    WindowManager.ShowWindow(WindowManager.ClassSpecificGauge);
                     WindowManager.CharacterWindow.HideResolve();
                     break;
                 case Class.Fighter:
                     WindowManager.InitClassGauge(Class.Fighter);
-                    WindowManager.ShowWindow(WindowManager.ClassSpecificGauge);
                     WindowManager.CharacterWindow.HideResolve();
                     break;
                 case Class.Assassin:
                     WindowManager.CharacterWindow.HideResolve();
                     WindowManager.InitClassGauge(Class.Assassin);
-                    WindowManager.ShowWindow(WindowManager.ClassSpecificGauge);
                     break;
                 case Class.Moon_Dancer:
                     WindowManager.InitClassGauge(Class.Moon_Dancer);
-                    WindowManager.ShowWindow(WindowManager.ClassSpecificGauge);
                     WindowManager.CharacterWindow.HideResolve();
                     break;
                 default:
@@ -207,7 +201,7 @@ namespace TCC.Parsing
                     break;
             }
         }
-        static void OnNewSkillCooldown(ParsedMessage p)
+        static void HandleNewSkillCooldown(S_START_COOLTIME_SKILL p)
         {
             var sStartCooltimeSkill = (TCC.Messages.S_START_COOLTIME_SKILL)p;
 
@@ -221,23 +215,23 @@ namespace TCC.Parsing
                     break;
             }
         }
-        static void OnNewItemCooldown(ParsedMessage p)
+        static void HandleNewItemCooldown(S_START_COOLTIME_ITEM p)
         {
             var sStartCooltimeItem = (S_START_COOLTIME_ITEM)p;
             SkillManager.AddBrooch(sStartCooltimeItem);
         }
-        static void OnDecreaseSkillCooldown(ParsedMessage p)
+        static void HandleDecreaseSkillCooldown(S_DECREASE_COOLTIME_SKILL p)
         {
             var sDecreaseCooltimeSkill = (S_DECREASE_COOLTIME_SKILL)p;
             SkillManager.ChangeSkillCooldown(sDecreaseCooltimeSkill);
         }
-        static void OnReturnToLobby()
+        static void HandleReturnToLobby()
         {
             SessionManager.Logged = false;
             WindowManager.CharacterWindow.Reset();
             SkillManager.Clear();
         }
-        static void OnAbnormalityBegin(ParsedMessage p)
+        static void HandleAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
             var sAbnormalityBegin = (S_ABNORMALITY_BEGIN)p;
             switch (SessionManager.CurrentClass)
@@ -252,7 +246,7 @@ namespace TCC.Parsing
                     break;
             }
         }
-        static void OnPlayerStatUpdate(ParsedMessage p)
+        static void HandlePlayerStatUpdate(S_PLAYER_STAT_UPDATE p)
         {
             var sPlayerStatUpdate = (TCC.Messages.S_PLAYER_STAT_UPDATE)p;
 
@@ -293,12 +287,12 @@ namespace TCC.Parsing
             IlvlUpdated?.Invoke(sPlayerStatUpdate.ilvl);
 
         }
-        static void OnPlayerChangeMP(ParsedMessage p)
+        static void HandlePlayerChangeMP(S_PLAYER_CHANGE_MP p)
         {
             var sPlayerChangeMP = (S_PLAYER_CHANGE_MP)p;
             MPUpdated?.Invoke(sPlayerChangeMP.currentMP);
         }
-        static void OnCreatureChangeHP(ParsedMessage p)
+        static void HandleCreatureChangeHP(S_CREATURE_CHANGE_HP p)
         {
             var sCreatureChangeHP = (S_CREATURE_CHANGE_HP)p;
 
@@ -308,7 +302,7 @@ namespace TCC.Parsing
             }
 
         }
-        static void OnPlayerChangeStamina(ParsedMessage p)
+        static void HandlePlayerChangeStamina(S_PLAYER_CHANGE_STAMINA p)
         {
             var sPlayerChangeStamina = (S_PLAYER_CHANGE_STAMINA)p;
             switch (SessionManager.CurrentClass)
@@ -336,7 +330,7 @@ namespace TCC.Parsing
             }
 
         }
-        static void OnUserStatusChanged(ParsedMessage p)
+        static void HandleUserStatusChanged(S_USER_STATUS p)
         {
             var sUserStatus = (S_USER_STATUS)p;
             if (sUserStatus.id == SessionManager.CurrentCharId)
@@ -354,21 +348,21 @@ namespace TCC.Parsing
             }
 
         }
-        static void OnSpawn()
+        static void HandleSpawn()
         {
             WindowManager.ShowWindow(WindowManager.CharacterWindow);
         }
-        static void OnCharList(Tera.Message msg)
+        static void HandleCharList(Tera.Message msg)
         {
             CLP.ParseCharacters(PacketData(msg));
 
         }
-        static void OnPlayerChangeFlightEnergy(ParsedMessage p)
+        static void HandlePlayerChangeFlightEnergy(S_PLAYER_CHANGE_FLIGHT_ENERGY p)
         {
             var sPlayerChangeFlightEnergy = (S_PLAYER_CHANGE_FLIGHT_ENERGY)p;
             FlightEnergyUpdated?.Invoke(sPlayerChangeFlightEnergy.energy);
         }
-        static void OnGageReceived(ParsedMessage p)
+        static void HandleGageReceived(S_BOSS_GAGE_INFO p)
         {
             var sBossGageInfo = (TCC.Messages.S_BOSS_GAGE_INFO)p;
             if(SessionManager.CurrentBosses.Where(x => x.EntityId == sBossGageInfo.EntityId).Count() > 0)
@@ -377,11 +371,11 @@ namespace TCC.Parsing
                 {
                     if(sBossGageInfo.CurrentHP == 0)
                     {
-                        App.Current.Dispatcher.Invoke(() =>
+                        App.Current.Dispatcher.BeginInvoke(new Action(() =>
                         {
 
                             SessionManager.CurrentBosses.Remove(SessionManager.CurrentBosses.Where(x => x.EntityId == sBossGageInfo.EntityId).Single());
-                        });
+                        }));
                         return;
                     }
                     SessionManager.CurrentBosses.Where(x => x.EntityId == sBossGageInfo.EntityId).Single().CurrentHP = sBossGageInfo.CurrentHP;
@@ -390,17 +384,17 @@ namespace TCC.Parsing
             }
             else
             {
-                App.Current.Dispatcher.Invoke(() =>
+                App.Current.Dispatcher.BeginInvoke(new Action(() =>
                 {
                     SessionManager.CurrentBosses.Add(new Boss(sBossGageInfo.EntityId, sBossGageInfo.Type, sBossGageInfo.Npc, sBossGageInfo.CurrentHP, sBossGageInfo.MaxHP));
-                });
+                }));
             }
 
-            //Console.WriteLine("type:{0} - npc:{1}", sBossGageInfo.Type, sBossGageInfo.Npc);
+            //CHandlesole.WriteLine("type:{0} - npc:{1}", sBossGageInfo.Type, sBossGageInfo.Npc);
             //if first time => retreive name and show window
             //event => update hp
         }
-        static void OnNpcStatusChanged(ParsedMessage p)
+        static void HandleNpcStatusChanged(S_NPC_STATUS p)
         {
             var sNpcStatus = (S_NPC_STATUS)p;
             if (SessionManager.CurrentBosses.Where(x => x.EntityId == sNpcStatus.EntityId).Count() > 0)
@@ -413,7 +407,7 @@ namespace TCC.Parsing
             }
 
 
-            //if (sNpcStatus.EntityId != SessionManager.CurrentBossEntityId) return;
+            //if (sNpcStatus.EntityId != SessiHandleManager.CurrentBossEntityId) return;
             //WindowManager.BossGauge.SetEnraged(sNpcStatus.IsEnraged);
         }
 

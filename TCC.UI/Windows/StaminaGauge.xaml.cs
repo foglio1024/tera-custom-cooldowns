@@ -28,7 +28,7 @@ namespace TCC
     {
         public event MaxStamina Maxed;
         static int MaxStamina = 1;
-
+        public static bool Visible { get; set; }
         private System.Windows.Media.Color color;
 
         public StaminaGauge(System.Windows.Media.Color color)
@@ -46,9 +46,15 @@ namespace TCC
 
             StaminaAmount.Stroke = new SolidColorBrush(color);
             glow.Color = color;
+            baseEll.Fill = new SolidColorBrush(System.Windows.Media.Color.FromArgb(0xff, 0x20, 0x20, 0x20));
+            App.Current.Dispatcher.Invoke(() =>
+            {
+                _doubleAnimation.Duration = TimeSpan.FromMilliseconds(400);
+                _colorAnimation.Duration = TimeSpan.FromMilliseconds(200);
+            });
+
 
         }
-
 
         private void PacketParser_MaxSTUpdated(int statValue)
         {
@@ -57,21 +63,30 @@ namespace TCC
 
         private void StaminaGauge_StaminaChanged(int stamina)
         {
-            Dispatcher.Invoke(() => {
+            Dispatcher.BeginInvoke(new Action(() => {
                 num.Text = stamina.ToString();
-                StaminaAmount.BeginAnimation(Arc.EndAngleProperty, GetDoubleAnimation(ValueToAngle(stamina)));
+
+                _doubleAnimation.To = ValueToAngle(stamina);
+                StaminaAmount.BeginAnimation(Arc.EndAngleProperty, _doubleAnimation);
+
                 if(stamina == MaxStamina)
                 {
                     Maxed?.Invoke();
                 }
                 else
                 {
-                    StaminaAmount.Stroke.BeginAnimation(SolidColorBrush.ColorProperty, GetColorAnimation(color));
-                    glow.BeginAnimation(DropShadowEffect.OpacityProperty, GetDoubleAnimation(0));
+                    _colorAnimation.To = color;
+                    StaminaAmount.Stroke.BeginAnimation(SolidColorBrush.ColorProperty, _colorAnimation);
+
+                    _colorAnimation.To = System.Windows.Media.Color.FromArgb(0xff, 0x20, 0x20, 0x20);
+                    baseEll.Fill.BeginAnimation(SolidColorBrush.ColorProperty, _colorAnimation);
+
+                    _doubleAnimation.To = 0;
+                    glow.BeginAnimation(DropShadowEffect.OpacityProperty, _doubleAnimation);
 
                 }
 
-            });
+            }));
         }
 
         double ValueToAngle(int val)
@@ -87,10 +102,14 @@ namespace TCC
         }
         private void StaminaGauge_Maxed()
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
-                glow.BeginAnimation(DropShadowEffect.OpacityProperty, GetDoubleAnimation(1));
-            });
+                _doubleAnimation.To = 1;
+                glow.BeginAnimation(DropShadowEffect.OpacityProperty, _doubleAnimation);
+
+                _colorAnimation.To = color;
+                baseEll.Fill.BeginAnimation(SolidColorBrush.ColorProperty, _colorAnimation);
+            }));
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -104,15 +123,6 @@ namespace TCC
             }
         }
 
-        DoubleAnimation GetDoubleAnimation(double newAngle)
-        {
-            if (newAngle == double.NaN) newAngle = 0;
-            return new DoubleAnimation(newAngle, TimeSpan.FromMilliseconds(350)) { EasingFunction = new QuadraticEase() };
-        }
-        ColorAnimation GetColorAnimation(System.Windows.Media.Color col)
-        {
-            return new ColorAnimation(col, TimeSpan.FromMilliseconds(200));
-        }
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
@@ -122,6 +132,8 @@ namespace TCC
             Properties.Settings.Default.GaugeWindowLeft = Left;
             Properties.Settings.Default.GaugeWindowTop = Top;
         }
+        static DoubleAnimation _doubleAnimation = new DoubleAnimation();
+        static ColorAnimation _colorAnimation = new ColorAnimation();
 
     }
 }

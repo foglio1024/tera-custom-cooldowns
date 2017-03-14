@@ -200,11 +200,11 @@ namespace TCC
 
         public static void Clear()
         {
-            App.Current.Dispatcher.Invoke(() =>
+            App.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
                 NormalSkillsQueue.Clear();
                 LongSkillsQueue.Clear();
-            });
+            }));
 
             SessionManager.CurrentClass = Class.None;
             SessionManager.CurrentCharId = 0;

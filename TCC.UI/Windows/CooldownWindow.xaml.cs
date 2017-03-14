@@ -80,97 +80,11 @@ namespace TCC
                 if (SkillManager.LongSkillsQueue.Where(x => x.Skill == sk).Count() > 0)
                     SkillManager.LongSkillsQueue.Remove(SkillManager.LongSkillsQueue.Where(x => x.Skill == sk).Single());
             }
-            Console.WriteLine("{0} - {1} removed.", sk.Id, sk.Name);
         }
 
-        //public static void ClearSkills()
-        //{
-        //    Instance.Dispatcher.Invoke(() =>
-        //    {
-        //        Instance.NormalSkillsModel.SkillIndicators.Clear();
-        //        Instance.LongSkillsModel.SkillIndicators.Clear();
-        //    });
-        //}
-
-        //public static void AddNormalSkill(SkillCooldownOld sk)
-        //{
-        //    Instance.Dispatcher.Invoke(() =>
-        //    {
-        //        Instance.NormalSkillsModel.SkillIndicators.Add(new SkillCooldownNew(SkillsDatabase.GetSkill(sk.Id, SessionManager.CurrentClass), (int)sk.Cooldown));
-        //        //Console.WriteLine("Added {0} indicator.", SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass).Name);
-        //    });
-        //}
-        //public static void AddLongSkill(SkillCooldownOld sk)
-        //{
-        //    Instance.Dispatcher.Invoke(() =>
-        //    {
-        //        switch (sk.Type)
-        //        {
-        //            case CooldownType.Skill:
-        //                Instance.LongSkillsModel.SkillIndicators.Add(new SkillCooldownNew(SkillsDatabase.GetSkill(sk.Id, SessionManager.CurrentClass), (int)sk.Cooldown));
-        //                //Console.WriteLine("Added {0} indicator.", SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass).Name);
-
-        //                break;
-        //            case CooldownType.Item:
-        //                Instance.LongSkillsModel.SkillIndicators.Add(new SkillCooldownNew(BroochesDatabase.GetBrooch(sk.Id), (int)sk.Cooldown));
-        //                //Console.WriteLine("Added {0} indicator.", BroochesDatabase.GetBrooch(sk.Id).Name);
-
-        //                break;
-        //            default:
-        //                break;
-        //        }
-        //    });
-        //}
-
-        //public static void RemoveNormalSkill(SkillCooldownOld sk)
-        //{
-        //    Instance.Dispatcher.Invoke(() =>
-        //    {
-        //        try
-        //        {
-        //            Instance.NormalSkillsModel.SkillIndicators.Remove(Instance.NormalSkillsModel.SkillIndicators.Where(x => x.Skill.Id == sk.Id).First());
-        //            //Console.WriteLine("Removed {0} indicator.", SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass).Name);
-
-        //        }
-        //        catch (Exception)
-        //        {
-        //            //Console.WriteLine("Can't remove {0} indicator.", SkillsDatabase.GetSkill(sk.Id, PacketParser.CurrentClass).Name);
-        //        }
-        //    });
-        //}
-        //public static void RemoveLongSkill(SkillCooldownOld sk)
-        //{
-        //    Instance.Dispatcher.Invoke(() =>
-        //    {
-        //        try
-        //        {
-        //            switch (sk.Type)
-        //            {
-        //                case CooldownType.Skill:
-        //                    Instance.LongSkillsModel.SkillIndicators.Remove(Instance.LongSkillsModel.SkillIndicators.Where(x => x.Skill.Id == sk.Id).First());
-        //                    //Console.WriteLine("Removed {0} indicator.", SkillsDatabase.SkillIdToName(sk.Id, PacketParser.CurrentClass));
-        //                    break;
-
-        //                case CooldownType.Item:
-        //                    Instance.LongSkillsModel.SkillIndicators.Remove(Instance.LongSkillsModel.SkillIndicators.Where(x => x.Skill.Id == sk.Id).First());
-        //                    //Console.WriteLine("Removed {0} indicator.", BroochesDatabase.GetBrooch(sk.Id).Name);
-        //                    break;
-
-        //                default:
-        //                    break;
-        //            }
-
-        //        }
-        //        catch (Exception)
-        //        {
-        //            Console.WriteLine("Can't remove {0} indicator.", SkillsDatabase.SkillIdToName(sk.Id, SessionManager.CurrentClass));
-        //        }
-        //    });
-        //}
 
         private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            //SkillManager.AddSkill(new SkillCooldown(100700, 2000, CooldownType.Skill)); //test skill
             this.DragMove();
         }
         private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -180,7 +94,7 @@ namespace TCC
 
         public void UpdateLoadGauge(double val)
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
                 var v = val * 359.9 / 100;
                 var a = new DoubleAnimation(Instance.loadArc.EndAngle, v, TimeSpan.FromMilliseconds(350))
@@ -188,7 +102,7 @@ namespace TCC
                     EasingFunction = new QuadraticEase()
                 };
                 Instance.loadArc.BeginAnimation(Arc.EndAngleProperty, a);
-            });
+            }));
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -208,7 +122,7 @@ namespace TCC
         }
         public void LoadingDone()
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
                 var a = new DoubleAnimation(0, 359.9, TimeSpan.FromSeconds(.7))
                 {
@@ -222,7 +136,7 @@ namespace TCC
                 };
                 loadArc.Stroke = new SolidColorBrush(Color.FromArgb(255, 100, 255, 100));
                 loadArc.BeginAnimation(Arc.StartAngleProperty, a);
-            });
+            }));
         }
     }
 }

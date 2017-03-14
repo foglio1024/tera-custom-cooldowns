@@ -47,10 +47,10 @@ namespace TCC.Windows
 
         private void Window_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            App.Current.Dispatcher.Invoke(() =>
+            App.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
                 SessionManager.CurrentBosses.Clear();
-            });
+            }));
         }
     }
 }

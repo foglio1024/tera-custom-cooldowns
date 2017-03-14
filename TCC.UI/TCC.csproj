@@ -80,7 +80,7 @@
     <Compile Include="Data\MonsterDatabase.cs" />
     <Compile Include="Parsing\Messages\S_BOSS_GAGE_INFO.cs" />
     <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_FLIGHT_ENERGY.cs" />
-    <Compile Include="Parsing\S_NPC_STATUS.cs" />
+    <Compile Include="Parsing\Messages\S_NPC_STATUS.cs" />
     <Compile Include="Windows\BossGageWindow.xaml.cs">
       <DependentUpon>BossGageWindow.xaml</DependentUpon>
     </Compile>

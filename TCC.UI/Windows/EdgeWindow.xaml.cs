@@ -28,6 +28,9 @@ namespace TCC
 
         DispatcherTimer TestTimer;
         Timer ExpireEdge;
+        Timer HideTimer;
+        public static bool Visible { get; set; }
+
         public event MaxEdge MaxedEdge;
         public event EdgeReset NormalEdge;
 
@@ -77,10 +80,10 @@ namespace TCC
 
         private void StartGambleCooldown(int cd)
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
                 gambleCd.BeginAnimation(Arc.EndAngleProperty, EdgeAnimations.GetArcAnimation(cd));
-            });
+            }));
 
         }
 
@@ -175,19 +178,19 @@ namespace TCC
 
         void StartScytheCooldown(int cd)
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
                 scytheCd.Stroke.BeginAnimation(SolidColorBrush.ColorProperty, EdgeAnimations.GetColorAnimation(Colors.Red, Colors.White, Convert.ToInt32(cd*.1)));
                 scytheCd.BeginAnimation(Arc.EndAngleProperty, EdgeAnimations.GetArcAnimation(cd));
-            });
+            }));
         }
 
         void StartGambleBuff(int duration)
         {
-            Dispatcher.Invoke(() => 
+            Dispatcher.BeginInvoke(new Action(() => 
             {
                 gambleDuration.BeginAnimation(Arc.EndAngleProperty, EdgeAnimations.GetArcAnimation(duration));
-            });
+            }));
         }
 
         static class EdgeAnimations

@@ -16,19 +16,24 @@
         ShowInTaskbar="False"
         WindowStyle="None"
         ResizeMode="NoResize"
-
+        
         >
+    <Window.CacheMode>
+        <BitmapCache RenderAtScale="2"/>
+    </Window.CacheMode>
     <Grid Margin="20">
         <Grid.Effect>
             <DropShadowEffect x:Name="glow" Color="#FFFF6AFF" ShadowDepth="0" BlurRadius="25" Opacity="0"/>
         </Grid.Effect>
         <Ellipse Width="70" Height="70" Fill="#202020" Name="baseEll" Stroke="#00000000" StrokeThickness="3">
-            <Ellipse.Effect>
+            <!--<Ellipse.Effect>
                 <DropShadowEffect Opacity="0.6" ShadowDepth="3"/>
-            </Ellipse.Effect>
+            </Ellipse.Effect>-->
         </Ellipse>
-        <Grid Name="StaminaAmountGrid" Margin="0" Width="70" Height="70">
-            <local:Arc x:Name="StaminaAmount" Stroke="Orange" StrokeThickness="3" EndAngle="0" />
+        <Grid Name="StaminaAmountGrid" Margin="0" Width="65" Height="65">
+            <local:Arc x:Name="StaminaAmount" Stroke="Orange" StrokeThickness="3" EndAngle="100" >
+                
+            </local:Arc>
         </Grid>
         <TextBlock Name="num"
                    HorizontalAlignment="Center" 

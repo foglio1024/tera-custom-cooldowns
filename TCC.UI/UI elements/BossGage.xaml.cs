@@ -96,6 +96,14 @@ namespace TCC
             PacketRouter.BossHPChanged += BossGage_HPUpdated;
             BossNameTB.DataContext = this;
 
+            SlideAnimation.EasingFunction = new QuadraticEase();
+            ColorChangeAnimation.EasingFunction = new QuadraticEase();
+            DoubleAnimation.EasingFunction = new QuadraticEase();
+
+            SlideAnimation.Duration = TimeSpan.FromMilliseconds(250);
+            ColorChangeAnimation.Duration = TimeSpan.FromMilliseconds(AnimationTime);
+            DoubleAnimation.Duration = TimeSpan.FromMilliseconds(AnimationTime);
+
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -106,25 +114,29 @@ namespace TCC
         {
             float val = (float)hp;
 
-            Dispatcher.Invoke(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
                 if (id == EntityId)
                 {
-                    HPrect.BeginAnimation(WidthProperty, GetDoubleAnimation(ValueToLength(val, MaxHP)));
+                    DoubleAnimation.To = ValueToLength(val, MaxHP);
+                    HPrect.BeginAnimation(WidthProperty, DoubleAnimation);
+
                     Perc.Text = String.Format("{0:0.0}%", 100 * val / MaxHP);
                     Perc2.Text = String.Format("{0} / {1}", val.ToString("n", nfi), MaxHP.ToString("n", nfi));
+
                     if (Enraged)
                     {
-                        NextEnrage.BeginAnimation(MarginProperty, SlideNextEnrageIndicatorDirectAnimation(HPrect.ActualWidth - 2));
+                        SlideAnimation.To = new Thickness(HPrect.ActualWidth - 2, 0, 0, 0);
+                        NextEnrage.BeginAnimation(MarginProperty, SlideAnimation);
                     }
                     CurrentHP = val;
                 }
-            });
+            }));
         }
 
         private void BossGage_EnragedUpdated(ulong id, object enraged)
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
                 Enraged = (bool)enraged;
 
@@ -134,21 +146,32 @@ namespace TCC
                     {
                         Enraged = (bool)enraged;
                         number.Text = CurrentEnrageTime.ToString();
-                        NextEnrage.BeginAnimation(MarginProperty, SlideNextEnrageIndicatorDirectAnimation(HPrect.ActualWidth - 2));
-                        HPrect.Effect.BeginAnimation(DropShadowEffect.OpacityProperty, GetDoubleAnimation(1));
-                        HPrect.Fill.BeginAnimation(SolidColorBrush.ColorProperty, GetColorAnimation(Colors.Red));
+
+                        SlideAnimation.To = new Thickness(HPrect.ActualWidth - 2, 0, 0, 0);
+                        NextEnrage.BeginAnimation(MarginProperty, SlideAnimation);
+
+                        DoubleAnimation.To = 1;
+                        HPrect.Effect.BeginAnimation(DropShadowEffect.OpacityProperty, DoubleAnimation);
+
+                        ColorChangeAnimation.To = Colors.Red;
+                        HPrect.Fill.BeginAnimation(SolidColorBrush.ColorProperty, ColorChangeAnimation);
+
+                        DoubleAnimation.To = 60;
+                        EnrageGrid.BeginAnimation(WidthProperty, DoubleAnimation);
+
                         EnrageArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(EnrageDuration)));
-                        EnrageGrid.BeginAnimation(WidthProperty, GetDoubleAnimation(60));
+
                         NumberTimer = new Timer(1000);
                         NumberTimer.Elapsed += (s, ev) =>
                         {
-                            Dispatcher.Invoke(() =>
+                            Dispatcher.BeginInvoke(new Action(() =>
                             {
                                 number.Text = CurrentEnrageTime.ToString();
                                 CurrentEnrageTime--;
-                            });
+                            }));
                         };
                         NumberTimer.Enabled = true;
+
                     }
                     else
                     {
@@ -156,15 +179,22 @@ namespace TCC
                         {
                             NumberTimer.Stop();
                         }
-                        NextEnrage.BeginAnimation(MarginProperty, SlideNextEnrageIndicatorAnimation(LastEnragePercent - 10));
-                        HPrect.Effect.BeginAnimation(DropShadowEffect.OpacityProperty, GetDoubleAnimation(0));
-                        HPrect.Fill.BeginAnimation(SolidColorBrush.ColorProperty, GetColorAnimation(Color.FromArgb(0xff,0x4a,0x82,0xbd)));
-                        EnrageGrid.BeginAnimation(WidthProperty, GetDoubleAnimation(0));
+
+                        SlideAnimation.To = new Thickness((LastEnragePercent - 10) * 398 / 100, 0,0,0);
+                        NextEnrage.BeginAnimation(MarginProperty, SlideAnimation);
+
+                        ColorChangeAnimation.To = Color.FromArgb(0xff, 0x4a, 0x82, 0xbd);
+                        HPrect.Fill.BeginAnimation(SolidColorBrush.ColorProperty, ColorChangeAnimation);
+
+                        DoubleAnimation.To = 0;
+                        EnrageGrid.BeginAnimation(WidthProperty, DoubleAnimation);
+                        HPrect.Effect.BeginAnimation(DropShadowEffect.OpacityProperty, DoubleAnimation);
+
                         CurrentEnrageTime = 36;
                     }
 
                 }
-            });
+            }));
         }
         double ValueToLength(double value, double maxValue)
         {
@@ -179,28 +209,9 @@ namespace TCC
             }
 
         }
-        private DoubleAnimation GetDoubleAnimation(double value)
-        {
-            return new DoubleAnimation(value, TimeSpan.FromMilliseconds(AnimationTime)) { EasingFunction = new QuadraticEase() };
-        }
-        private ColorAnimation GetColorAnimation(Color c)
-        {
-            return new ColorAnimation(c, TimeSpan.FromMilliseconds(AnimationTime)) { EasingFunction = new QuadraticEase() };
-        }
-
-        private ThicknessAnimation SlideNextEnrageIndicatorAnimation(double percentage)
-        {
-            var t = percentage * 398 / 100;
-            //Console.WriteLine("New position: {0}", t);
-            return new ThicknessAnimation(new Thickness(t, 0, 0, 0), TimeSpan.FromSeconds(.4)) { EasingFunction = new QuadraticEase() };
-        }
-        private ThicknessAnimation SlideNextEnrageIndicatorDirectAnimation(double thickness)
-        {
-            Console.WriteLine("New direct position: {0}", thickness);
-            return new ThicknessAnimation(new Thickness(thickness, 0, 0, 0), TimeSpan.FromSeconds(.4)) { EasingFunction = new QuadraticEase() };
-
-        }
-
+        static ThicknessAnimation SlideAnimation = new ThicknessAnimation();
+        static ColorAnimation ColorChangeAnimation = new ColorAnimation();
+        static DoubleAnimation DoubleAnimation = new DoubleAnimation();
     }
 
 }

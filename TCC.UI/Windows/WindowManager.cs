@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
@@ -67,9 +68,34 @@ namespace TCC
 
             FocusManager.FocusTimer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
             FocusManager.FocusTimer.Tick += FocusManager.CheckForegroundWindow;
+            SessionManager.OutOfCombat += SessionManager_OutOfCombat;
+            SessionManager.InCombat += SessionManager_InCombat;
 
             FocusManager.ForegroundWindowChanged += FocusManager_ForegroundWindowChanged;
         }
+
+        private static void SessionManager_InCombat()
+        {
+            StaminaGauge.Visible = true;
+            EdgeGaugeWindow.Visible = true;
+        }
+
+        private static void SessionManager_OutOfCombat()
+        {
+            var t = new Timer(5000);
+            t.Elapsed += (s, o) =>
+            {
+                if (!SessionManager.Combat)
+                {
+                    StaminaGauge.Visible = false;
+                    EdgeGaugeWindow.Visible = false;
+                    HideWindow(ClassSpecificGauge);
+                }
+                t.Stop();
+            };
+            t.Enabled=true;
+        }
+
 
         private static void FocusManager_ForegroundWindowChanged(bool visible)
         {
@@ -82,19 +108,34 @@ namespace TCC
                 switch (SessionManager.CurrentClass)
                 {
                     case Class.Warrior:
-                        ShowWindow(ClassSpecificGauge);
+                        if (EdgeGaugeWindow.Visible)
+                        {
+                            ShowWindow(ClassSpecificGauge);
+                        }
                         break;
                     case Class.Engineer:
-                        ShowWindow(ClassSpecificGauge);
+                        if (StaminaGauge.Visible)
+                        {
+                            ShowWindow(ClassSpecificGauge);
+                        }
                         break;
                     case Class.Fighter:
-                        ShowWindow(ClassSpecificGauge);
+                        if (StaminaGauge.Visible)
+                        {
+                            ShowWindow(ClassSpecificGauge);
+                        }
                         break;
                     case Class.Assassin:
-                        ShowWindow(ClassSpecificGauge);
+                        if (StaminaGauge.Visible)
+                        {
+                            ShowWindow(ClassSpecificGauge);
+                        }
                         break;
                     case Class.Moon_Dancer:
-                        ShowWindow(ClassSpecificGauge);
+                        if (StaminaGauge.Visible)
+                        {
+                            ShowWindow(ClassSpecificGauge);
+                        }
                         break;
                     default:
                         break;
@@ -146,40 +187,40 @@ namespace TCC
         {
             if (ClassSpecificGauge != null)
             {
-                ClassSpecificGauge.Dispatcher.Invoke(() => ClassSpecificGauge.Close());
+                ClassSpecificGauge.Dispatcher.BeginInvoke(new Action(() => ClassSpecificGauge.Close()));
             }
 
             switch (c)
             {
                 case Class.Warrior:
-                    App.Current.Dispatcher.Invoke(() =>
+                    App.Current.Dispatcher.BeginInvoke(new Action(() =>
                     {
                         ClassSpecificGauge = new EdgeGaugeWindow();
-                    });
+                    }));
                     break;
                 case Class.Engineer:
-                    App.Current.Dispatcher.Invoke(() =>
+                    App.Current.Dispatcher.BeginInvoke(new Action(() =>
                     {
                         ClassSpecificGauge = new StaminaGauge(Colors.Orange);
-                    });
+                    }));
                     break;
                 case Class.Fighter:
-                    App.Current.Dispatcher.Invoke(() =>
+                    App.Current.Dispatcher.BeginInvoke(new Action(() =>
                     {
                         ClassSpecificGauge = new StaminaGauge(Colors.OrangeRed);
-                    });
+                    }));
                     break;
                 case Class.Assassin:
-                    App.Current.Dispatcher.Invoke(() =>
+                    App.Current.Dispatcher.BeginInvoke(new Action(() =>
                     {
                         ClassSpecificGauge = new StaminaGauge(System.Windows.Media.Color.FromArgb(0xff,0xff,0x6a,0xff));
-                    });
+                    }));
                     break;
                 case Class.Moon_Dancer:
-                    App.Current.Dispatcher.Invoke(() =>
+                    App.Current.Dispatcher.BeginInvoke(new Action(() =>
                     {
                         ClassSpecificGauge = new StaminaGauge(Colors.White);
-                    });
+                    }));
                     break;
                 default:
                     return;
@@ -219,11 +260,11 @@ namespace TCC
         {
             if (w != null)
             {
-                w.Dispatcher.Invoke(() =>
+                w.Dispatcher.BeginInvoke(new Action(() =>
                 {
                     w.Show();
                     w.BeginAnimation(EdgeGaugeWindow.OpacityProperty, OpacityAnimation(1));
-                });
+                }));
             }
 
         }
@@ -231,12 +272,12 @@ namespace TCC
         {
             if (w != null)
             {
-                w.Dispatcher.Invoke(() =>
+                w.Dispatcher.BeginInvoke(new Action(() =>
                 {
                     var a = OpacityAnimation(0);
                     a.Completed += (s, ev) => w.Hide();
                     w.BeginAnimation(EdgeGaugeWindow.OpacityProperty, a);
-                });
+                }));
             }
         }
 

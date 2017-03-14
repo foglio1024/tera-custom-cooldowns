@@ -49,6 +49,9 @@
         </Style>
     </Window.Resources>
     <Grid Margin="10,0">
+        <Grid.CacheMode>
+            <BitmapCache RenderAtScale="3"/>
+        </Grid.CacheMode>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -58,11 +61,11 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Border Margin="0,14,0,16" CornerRadius="2" Height="Auto" Width="Auto" BorderThickness="0" BorderBrush="#70ffffff" Background="#202020" Grid.ColumnSpan="2" Grid.RowSpan="1" Grid.Row="2" >
-            <Border.Effect>
+            <!--<Border.Effect>
                 <DropShadowEffect Opacity="0.6" ShadowDepth="3"/>
-            </Border.Effect>
+            </Border.Effect>-->
         </Border>
-        <Grid Margin="0,0,0,0" Grid.ColumnSpan="2" Width="Auto" Height="22">
+        <Grid Margin="0,0,0,-8" Grid.ColumnSpan="2" Width="Auto" Height="22">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -71,20 +74,32 @@
                 <ColumnDefinition Width="Auto" Name="flightDef" />
             </Grid.ColumnDefinitions>
             <Border Margin="0" CornerRadius="2" Grid.ColumnSpan="5" Background="#202020" Width="Auto" HorizontalAlignment="Stretch" Height="Auto">
-                    <Border.Effect>
+                    <!--<Border.Effect>
                         <DropShadowEffect Opacity="0.6" ShadowDepth="3"/>
-                    </Border.Effect>
+                    </Border.Effect>-->
                 </Border>
 
-                <TextBlock Text="Lv." Margin="4,0,0,1" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0"
-                       Style="{StaticResource hpBarNumber}" />
-
-                <TextBlock Text="65" Margin="0" Name="levelTB" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"
-                       Style="{StaticResource hpBarNumber}" />
-                <TextBlock Text="Name" Name="nameTB" FontSize="18" VerticalAlignment="Center" Margin="7,0" HorizontalAlignment="Left" Grid.Column="2"
-                       Style="{StaticResource hpBarNumber}" />
-                <TextBlock Text="ilvl" Name="ilvlTB" FontSize="18" VerticalAlignment="Center" Margin="20,0" HorizontalAlignment="Left" Grid.Column="3"
-                       Style="{StaticResource hpBarNumber}" />
+            <TextBlock Text="Lv." Margin="4,0,0,1" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0"
+                       Style="{StaticResource hpBarNumber}" >
+                <TextBlock.CacheMode>
+                    <BitmapCache RenderAtScale="2" />
+                </TextBlock.CacheMode>
+            </TextBlock>
+            <TextBlock Text="65" Margin="0" Name="levelTB" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"
+                       Style="{StaticResource hpBarNumber}" >
+                <TextBlock.CacheMode>
+                    <BitmapCache RenderAtScale="2"></BitmapCache>
+                </TextBlock.CacheMode></TextBlock>
+            <TextBlock Text="Name" Name="nameTB" FontSize="18" VerticalAlignment="Center" Margin="7,0" HorizontalAlignment="Left" Grid.Column="2"
+                       Style="{StaticResource hpBarNumber}" >
+                <TextBlock.CacheMode>
+                    <BitmapCache RenderAtScale="2"></BitmapCache>
+                </TextBlock.CacheMode></TextBlock>
+            <TextBlock Text="ilvl" Name="ilvlTB" FontSize="18" VerticalAlignment="Center" Margin="20,0" HorizontalAlignment="Left" Grid.Column="3"
+                       Style="{StaticResource hpBarNumber}" >
+                <TextBlock.CacheMode>
+                    <BitmapCache RenderAtScale="2"></BitmapCache>
+                </TextBlock.CacheMode></TextBlock>
             <Rectangle Name="flightBar" Width="0" Grid.Column="4" Fill="#906090ff" Height="3" Margin="10,0" HorizontalAlignment="Left" />
             <Rectangle Name="dummyFlightBar" Width="100" Grid.Column="4" Fill="Transparent" Height="3" Margin="10,0" HorizontalAlignment="Stretch" />
         </Grid>
@@ -93,7 +108,6 @@
                 <Rectangle.Effect>
                     <DropShadowEffect Opacity="0.3" ShadowDepth="3"/>
                 </Rectangle.Effect>
-
             </Rectangle>
             <Rectangle Name="classIcon" Fill="White" Width="50" Height="50" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Rectangle.OpacityMask>
@@ -118,7 +132,10 @@
             <Grid>
                 <Rectangle Name="base" Style="{StaticResource baseRectangle}"/>
                 <Rectangle Name="hpBar" Fill="#d50000" Width="200" Style="{StaticResource barRectangle}" />
-                <TextBlock Name="hpPercTB" Style="{StaticResource hpBarNumber}" HorizontalAlignment="Center" FontSize="14" Opacity="1"></TextBlock>
+                <TextBlock Name="hpPercTB" Style="{StaticResource hpBarNumber}" HorizontalAlignment="Center" FontSize="16" Opacity="1">
+                    <TextBlock.CacheMode>
+                        <BitmapCache RenderAtScale="2"></BitmapCache>
+                    </TextBlock.CacheMode></TextBlock>
             </Grid>
 
             <Grid  Grid.Row="1">
@@ -139,9 +156,18 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Name="hpTB" Style="{StaticResource hpBarNumber}" Margin="10,0,0,0" Grid.Column="0"/>
-                <TextBlock Style="{StaticResource hpBarNumber}" Grid.Column="1" Text="/" Margin="4,0"  Foreground="#ffcccccc"/>
-                <TextBlock Name="hpMaxTB" Style="{StaticResource hpBarNumber}" Margin="0,0,10,0" Grid.Column="2" Foreground="#ffcccccc"/>
+                <TextBlock Name="hpTB" Style="{StaticResource hpBarNumber}" Margin="10,0,0,0" Grid.Column="0">
+                    <TextBlock.CacheMode>
+                        <BitmapCache RenderAtScale="2"></BitmapCache>
+                    </TextBlock.CacheMode></TextBlock>
+                <TextBlock Style="{StaticResource hpBarNumber}" Grid.Column="1" Text="/" Margin="4,0"  Foreground="#ffcccccc">
+                    <TextBlock.CacheMode>
+                        <BitmapCache RenderAtScale="2"></BitmapCache>
+                    </TextBlock.CacheMode></TextBlock>
+                <TextBlock Name="hpMaxTB" Style="{StaticResource hpBarNumber}" Margin="0,0,10,0" Grid.Column="2" Foreground="#ffcccccc">
+                    <TextBlock.CacheMode>
+                        <BitmapCache RenderAtScale="2"></BitmapCache>
+                    </TextBlock.CacheMode></TextBlock>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -149,9 +175,18 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Name="mpTB" Style="{StaticResource hpBarNumber}" Margin="10,0,0,0" Grid.Column="0"/>
-                <TextBlock Style="{StaticResource hpBarNumber}" Grid.Column="1" Text="/" Margin="4,0" Foreground="#ffcccccc"/>
-                <TextBlock Name="mpMaxTB" Style="{StaticResource hpBarNumber}" Margin="0,0,10,0" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Foreground="#ffcccccc"/>
+                <TextBlock Name="mpTB" Style="{StaticResource hpBarNumber}" Margin="10,0,0,0" Grid.Column="0">
+                    <TextBlock.CacheMode>
+                        <BitmapCache RenderAtScale="2"></BitmapCache>
+                    </TextBlock.CacheMode></TextBlock>
+                <TextBlock Style="{StaticResource hpBarNumber}" Grid.Column="1" Text="/" Margin="4,0" Foreground="#ffcccccc">
+                    <TextBlock.CacheMode>
+                        <BitmapCache RenderAtScale="2"></BitmapCache>
+                    </TextBlock.CacheMode></TextBlock>
+                <TextBlock Name="mpMaxTB" Style="{StaticResource hpBarNumber}" Margin="0,0,10,0" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Foreground="#ffcccccc">
+                    <TextBlock.CacheMode>
+                        <BitmapCache RenderAtScale="2"></BitmapCache>
+                    </TextBlock.CacheMode></TextBlock>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="2">
                 <Grid.ColumnDefinitions>
@@ -160,9 +195,18 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Name="stTB" Style="{StaticResource hpBarNumber}" Margin="10,0,0,0" Grid.Column="0" Grid.Row="2" FontSize="10"/>
-                <TextBlock Style="{StaticResource hpBarNumber}" Grid.Column="1" Text="/" Margin="4,0" Grid.Row="2" Foreground="#ffcccccc" FontSize="10"/>
-                <TextBlock Name="stMaxTB" Style="{StaticResource hpBarNumber}" Margin="0,0,15,0" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" Foreground="#ffcccccc" FontSize="10"/>
+                <TextBlock Name="stTB" Style="{StaticResource hpBarNumber}" Margin="10,0,0,0" Grid.Column="0" Grid.Row="2" FontSize="10">
+                    <TextBlock.CacheMode>
+                        <BitmapCache RenderAtScale="1"></BitmapCache>
+                    </TextBlock.CacheMode></TextBlock>
+                <TextBlock Style="{StaticResource hpBarNumber}" Grid.Column="1" Text="/" Margin="4,0" Grid.Row="2" Foreground="#ffcccccc" FontSize="10">
+                    <TextBlock.CacheMode>
+                        <BitmapCache RenderAtScale="1"></BitmapCache>
+                    </TextBlock.CacheMode></TextBlock>
+                <TextBlock Name="stMaxTB" Style="{StaticResource hpBarNumber}" Margin="0,0,15,0" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" Foreground="#ffcccccc" FontSize="10">
+                    <TextBlock.CacheMode>
+                        <BitmapCache RenderAtScale="1"></BitmapCache>
+                    </TextBlock.CacheMode></TextBlock>
             </Grid>
         </Grid>
     </Grid>

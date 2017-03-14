@@ -24,6 +24,9 @@
         </DataTemplate>
     </Window.Resources>
     <Grid>
+        <Grid.CacheMode>
+            <BitmapCache RenderAtScale="3"/>
+        </Grid.CacheMode>
         <ItemsControl Name="Bosses" ItemTemplate="{StaticResource BossGageDataTemplate}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>

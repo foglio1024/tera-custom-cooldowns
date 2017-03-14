@@ -13,7 +13,25 @@ namespace TCC
     public static class SessionManager
     {
         public static bool Logged;
-        public static bool Combat;
+        static bool combat;
+        public static bool Combat {
+            get { return combat; }
+            set
+            {
+                if(value != combat)
+                {
+                    combat = value;
+                    if (!combat)
+                    {
+                        OutOfCombat?.Invoke();
+                    }
+                    else
+                    {
+                        InCombat?.Invoke();
+                    }
+                }
+            }
+        }
 
         public static string CurrentCharName;
         public static ulong CurrentCharId;
@@ -21,6 +39,9 @@ namespace TCC
         public static Laurel CurrentLaurel;
         public static int CurrentLevel;
         public static ObservableCollection<Boss> CurrentBosses = new ObservableCollection<Boss>();
+
+        public static event Action OutOfCombat;
+        public static event Action InCombat;
     }
     public class Boss 
     {

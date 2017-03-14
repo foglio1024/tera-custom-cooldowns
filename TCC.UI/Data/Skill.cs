@@ -33,10 +33,10 @@ namespace TCC
         {
             if (!iconName.Contains("Icon_Skills.")) return;
             iconName = iconName.Replace("Icon_Skills.", "");
-            CooldownWindow.Instance.Dispatcher.Invoke(() =>
+            CooldownWindow.Instance.Dispatcher.BeginInvoke(new Action(() =>
             {
                 iconBitmap = (Bitmap)Image.FromFile(Environment.CurrentDirectory + @"/resources/icons/" + iconName + ".png");
-            });
+            }));
         }
 
     }
