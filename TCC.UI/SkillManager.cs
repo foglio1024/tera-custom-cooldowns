@@ -7,10 +7,10 @@ using TCC.Messages;
 
 namespace TCC
 {
-    public delegate void SkillAddedEventHandler(SkillCooldownNew s);
-    public delegate void SkillOverEventHandler( SkillCooldownNew s);
+    public delegate void SkillAddedEventHandler(SkillCooldown s);
+    public delegate void SkillOverEventHandler( SkillCooldown s);
 
-    public delegate void SkillCooldownChangedEventHandler(SkillCooldownNew s);
+    public delegate void SkillCooldownChangedEventHandler(SkillCooldown s);
     public delegate void SkillResetEventHandler(Skill s);
 
     public static class SkillManager
@@ -43,7 +43,7 @@ namespace TCC
 
         public static void AddSkill(Skill skill, int cooldown)
         {
-            LongSkillsQueue.Add(new SkillCooldownNew(skill, cooldown, CooldownType.Skill));
+            LongSkillsQueue.Add(new SkillCooldown(skill, cooldown, CooldownType.Skill));
         }
         public static void AddSkill(S_START_COOLTIME_SKILL packet)
         {
@@ -54,7 +54,7 @@ namespace TCC
                 {
                     return;
                 }
-                SkillCooldownNew skillCooldown = new SkillCooldownNew(skill, (int)packet.Cooldown, CooldownType.Skill);
+                SkillCooldown skillCooldown = new SkillCooldown(skill, (int)packet.Cooldown, CooldownType.Skill);
                 //Console.WriteLine("Received {0} - {1}", skillCooldown.Skill.Id, skillCooldown.Skill.Name);
 
                 if (skillCooldown.Cooldown == 0)
@@ -105,7 +105,7 @@ namespace TCC
         {
             if (BroochesDatabase.TryGetBrooch(packet.ItemId, out Skill brooch))
             {
-                SkillCooldownNew broochCooldown = new SkillCooldownNew(brooch, (int)packet.Cooldown, CooldownType.Item);
+                SkillCooldown broochCooldown = new SkillCooldown(brooch, (int)packet.Cooldown, CooldownType.Item);
                 //Console.WriteLine("Received {0} - {1}", broochCooldown.Skill.Id, broochCooldown.Skill.Name);
                 if (LongSkillsQueue.Where(x => x.Skill.Name == broochCooldown.Skill.Name).Count() > 0)
                 {
@@ -141,7 +141,7 @@ namespace TCC
         {
             if (SkillsDatabase.TryGetSkill(packet.SkillId, SessionManager.CurrentClass, out Skill skill))
             {
-                Changed?.Invoke(new SkillCooldownNew(skill, (int)packet.Cooldown, CooldownType.Skill));
+                Changed?.Invoke(new SkillCooldown(skill, (int)packet.Cooldown, CooldownType.Skill));
             }
 
             //if (sk.Cooldown > SkillManager.LongSkillTreshold)

@@ -58,7 +58,7 @@ namespace TCC
                 }
             }
         }
-
+        public ObservableCollection<BuffDuration> Buffs;
 
         public bool Enraged { get; set; }
         public float CurrentHP { get; set; }
@@ -69,6 +69,7 @@ namespace TCC
             Name = MonsterDatabase.GetName(tId, zId);
             MaxHP = maxHP;
             CurrentHP = curHP;
+            Buffs = new ObservableCollection<BuffDuration>();
         }
     }
 }

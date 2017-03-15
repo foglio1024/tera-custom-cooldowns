@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AbnormalityIconData>
+  <Icon abnormalityId="25" iconName="Icon_Status.pluswill_Tex" />
+  <Icon abnormalityId="28" iconName="Icon_Status.pluswill_Tex" />
+  <Icon abnormalityId="29" />
+  <Icon abnormalityId="31" iconName="Icon_Status.buff_of_kaia_Tex" />
+  <Icon abnormalityId="32" />
+  <Icon abnormalityId="35" />
+  <Icon abnormalityId="39" iconName="Icon_Status.plusecritical_Tex" />
+  <Icon abnormalityId="40" iconName="Icon_Items.ArtisanAll_Up_Tex" />
+  <Icon abnormalityId="41" iconName="Icon_Items.parts_heavyarmorC5_Tex" />
+  <Icon abnormalityId="42" iconName="Icon_Items.parts_heavyarmorC5_Tex" />
+  <Icon abnormalityId="43" iconName="Icon_Items.parts_heavyarmorC5_Tex" />
+  <Icon abnormalityId="44" iconName="Icon_Items.parts_heavyarmorC5_Tex" />
+  <Icon abnormalityId="45" iconName="Icon_Items.parts_heavyarmorC5_Tex" />
+  <Icon abnormalityId="46" iconName="Icon_Items.parts_heavyarmorC5_Tex" />
+  <Icon abnormalityId="1101" iconName="Icon_Items.EXP_Buff_Potion1_Tex" />
+  <Icon abnormalityId="1102" iconName="Icon_Items.EXP_Buff_Potion2_Tex" />
+  <Icon abnormalityId="1103" iconName="Icon_Items.EXP_Buff_Potion1_Tex" />
+  <Icon abnormalityId="1104" iconName="Icon_Items.EXP_Buff_Potion2_Tex" />
+</AbnormalityIconData>

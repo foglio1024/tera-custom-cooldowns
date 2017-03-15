@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AbnormalityIconData>
+  <Icon abnormalityId="16300006" iconName="Icon_Status.Icon_PoongU_ab_Tex" />
+  <Icon abnormalityId="16300007" iconName="Icon_Status.Icon_JangShin_ab_Tex" />
+  <Icon abnormalityId="16300008" iconName="Icon_Status.Icon_YookDuk00_ab_Tex" />
+  <Icon abnormalityId="16300009" iconName="Icon_Status.Collect_SpeedUp_Tex" />
+  <Icon abnormalityId="16300010" iconName="Icon_Status.Collect_SpeedUp_Tex" />
+  <Icon abnormalityId="16300011" iconName="Icon_Status.Collect_SpeedUp_Tex" />
+  <Icon abnormalityId="16300012" iconName="Icon_Status.Collect_SpeedUp_Tex" />
+  <Icon abnormalityId="16300013" iconName="Icon_Items.potion10_Tex" />
+  <Icon abnormalityId="16300015" iconName="Icon_Items.potion10_Tex" />
+  <Icon abnormalityId="16300017" iconName="Icon_Items.F2P_VIPCustomer_Tex" />
+</AbnormalityIconData>

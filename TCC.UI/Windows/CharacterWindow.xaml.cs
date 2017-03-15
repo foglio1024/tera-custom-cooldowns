@@ -246,7 +246,7 @@ namespace TCC
             }));
         }
 
-        private void UpdateHP(int newValue)
+        private void UpdateHP(float newValue)
         {
             Dispatcher.BeginInvoke(new Action(() =>  
             {
@@ -288,7 +288,7 @@ namespace TCC
             }));
         }
 
-        private void UpdateFlightEnergy(double newValue)
+        private void UpdateFlightEnergy(float newValue)
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
@@ -360,22 +360,22 @@ namespace TCC
                 case Laurel.None:
                     break;
                 case Laurel.Bronze:
-                    bitmap = Properties.Resources.bronze;
+                    bitmap = Properties.Icon_Laurels.bronze;
                     break;
                 case Laurel.Silver:
-                    bitmap = Properties.Resources.silver;
+                    bitmap = Properties.Icon_Laurels.silver;
 
                     break;
                 case Laurel.Gold:
-                    bitmap = Properties.Resources.gold;
+                    bitmap = Properties.Icon_Laurels.gold;
 
                     break;
                 case Laurel.Diamond:
-                    bitmap = Properties.Resources.diamond;
+                    bitmap = Properties.Icon_Laurels.diamond;
 
                     break;
                 case Laurel.Champion:
-                    bitmap = Properties.Resources.champion;
+                    bitmap = Properties.Icon_Laurels.champion;
 
                     break;
                 default:
@@ -419,43 +419,43 @@ namespace TCC
             switch (c)
             {
                 case Class.Warrior:
-                    bitmap = Properties.Resources.warrior;
+                    bitmap = Properties.Icon_Classes.warrior;
                     break;
                 case Class.Lancer:
-                    bitmap = Properties.Resources.lancer;
+                    bitmap = Properties.Icon_Classes.lancer;
                     break;
                 case Class.Slayer:
-                    bitmap = Properties.Resources.slayer;
+                    bitmap = Properties.Icon_Classes.slayer;
                     break;
                 case Class.Berserker:
-                    bitmap = Properties.Resources.berserker;
+                    bitmap = Properties.Icon_Classes.berserker;
                     break;
                 case Class.Sorcerer:
-                    bitmap = Properties.Resources.sorcerer;
+                    bitmap = Properties.Icon_Classes.sorcerer;
                     break;
                 case Class.Archer:
-                    bitmap = Properties.Resources.archer;
+                    bitmap = Properties.Icon_Classes.archer;
                     break;
                 case Class.Priest:
-                    bitmap = Properties.Resources.priest;
+                    bitmap = Properties.Icon_Classes.priest;
                     break;
                 case Class.Elementalist:
-                    bitmap = Properties.Resources.mystic;
+                    bitmap = Properties.Icon_Classes.mystic;
                     break;
                 case Class.Soulless:
-                    bitmap = Properties.Resources.reaper;
+                    bitmap = Properties.Icon_Classes.reaper;
                     break;
                 case Class.Engineer:
-                    bitmap = Properties.Resources.gunner;
+                    bitmap = Properties.Icon_Classes.gunner;
                     break;
                 case Class.Fighter:
-                    bitmap = Properties.Resources.brawler;
+                    bitmap = Properties.Icon_Classes.brawler;
                     break;
                 case Class.Assassin:
-                    bitmap = Properties.Resources.ninja;
+                    bitmap = Properties.Icon_Classes.ninja;
                     break;
                 case Class.Moon_Dancer:
-                    bitmap = Properties.Resources.glaiver;
+                    bitmap = Properties.Icon_Classes.glaiver;
                     break;
                 default:
                     break;

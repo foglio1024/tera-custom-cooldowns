@@ -1,0 +1,1058 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<StrSheet_Abnormality>
+  <String id="81000001" name="EP XP Revision Test" tooltip="Testing" />
+  <String id="81000002" name="EP XP increases by 30" tooltip="EP XP increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="81000003" name="EP XP increases by 50" tooltip="EP XP increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="81000004" name="EP XP increases by 100" tooltip="EP XP increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="81010101" name="Damage Decreased" tooltip="Damage is decreased. Effect ends in combat mode" />
+  <String id="81010102" name="Damage Decreased" tooltip="Damage is decreased. Effect ends in combat mode" />
+  <String id="81010103" name="Damage Decreased" tooltip="Damage is decreased. Effect ends in combat mode" />
+  <String id="81010104" name="Damage Decreased" tooltip="Damage is decreased. Effect ends in combat mode" />
+  <String id="81010105" name="Damage Decreased" tooltip="Damage is decreased. Effect ends in combat mode" />
+  <String id="81010106" name="Damage Decreased" tooltip="Damage is decreased. Effect ends in combat mode" />
+  <String id="81010107" name="Damage Decreased" tooltip="Damage is decreased. Effect ends in combat mode" />
+  <String id="81010108" name="Damage Decreased" tooltip="Damage is decreased. Effect ends in combat mode" />
+  <String id="81010109" name="Damage Decreased" tooltip="Damage is decreased. Effect ends in combat mode" />
+  <String id="81010110" name="Damage Decreased" tooltip="Damage is decreased. Effect ends in combat mode" />
+  <String id="81010201" name="Movement Speed Increased" tooltip="Non-combat Movement Speed increases by 30. Effect ends in combat mode" />
+  <String id="81010202" name="Movement Speed Increased" tooltip="Non-combat Movement Speed increases by 40. Effect ends in combat mode" />
+  <String id="81010203" name="Movement Speed Increased" tooltip="Non-combat Movement Speed increases by 50. Effect ends in combat mode" />
+  <String id="81010204" name="Movement Speed Increased" tooltip="Non-combat Movement Speed increases by 60. Effect ends in combat mode" />
+  <String id="81010205" name="Movement Speed Increased" tooltip="Non-combat Movement Speed increases by 30. Effect ends in combat mode" />
+  <String id="81010206" name="Movement Speed Increased" tooltip="Non-combat Movement Speed increases by 70. Effect ends in combat mode" />
+  <String id="81010207" name="Movement Speed Increased" tooltip="Non-combat Movement Speed increases by 80. Effect ends in combat mode" />
+  <String id="81010208" name="Movement Speed Increased" tooltip="Non-combat Movement Speed increases by 100. Effect ends in combat mode" />
+  <String id="81010209" name="Movement Speed Increased" tooltip="Non-combat Movement Speed increases by 110. Effect ends in combat mode" />
+  <String id="81010210" name="Movement Speed Increased" tooltip="Non-combat Movement Speed increases by 120. Effect ends in combat mode" />
+  <String id="81020101" name="Acceleration Boost" tooltip="Movement Speed increases while on a mount" />
+  <String id="81020102" name="Acceleration Boost" tooltip="Movement Speed increases while on a mount" />
+  <String id="81020103" name="Acceleration Boost" tooltip="Movement Speed increases while on a mount" />
+  <String id="81020104" name="Acceleration Boost" tooltip="Movement Speed increases while on a mount" />
+  <String id="81020105" name="Acceleration Boost" tooltip="Movement Speed increases while on a mount" />
+  <String id="81020106" name="Acceleration Boost" tooltip="Movement Speed increases while on a mount" />
+  <String id="81020107" name="Acceleration Boost" tooltip="Movement Speed increases while on a mount" />
+  <String id="81110401" name="Damage: Stage I" tooltip="Movement Speed decreases by $H_W_BAD1%$COLOR_END and HP constantly decreases by $H_W_BAD0.5%$COLOR_END (max 1000)" />
+  <String id="81110402" name="Damage: Stage II" tooltip="Movement Speed decreases by $H_W_BAD2%$COLOR_END and HP constantly decreases by $H_W_BAD0.7%$COLOR_END (max 1400)" />
+  <String id="81110403" name="Damage: Stage III" tooltip="Movement Speed decreases by $H_W_BAD3%$COLOR_END and HP constantly decreases by $H_W_BAD0.9%$COLOR_END (max 1800)" />
+  <String id="81110404" name="Damage: Stage IV" tooltip="Movement Speed decreases by $H_W_BAD4%$COLOR_END and HP constantly decreases by $H_W_BAD1.1%$COLOR_END (max 2200)" />
+  <String id="81110405" name="Damage: Stage V" tooltip="Movement Speed decreases by $H_W_BAD5%$COLOR_END and HP constantly decreases by $H_W_BAD1.3%$COLOR_END (max 2600)" />
+  <String id="81110406" name="Damage: Stage VI" tooltip="Movement Speed decreases by $H_W_BAD6%$COLOR_END and HP constantly decreases by $H_W_BAD1.5%$COLOR_END (max 3000)" />
+  <String id="81110407" name="Damage: Stage VII" tooltip="Movement Speed decreases by $H_W_BAD7%$COLOR_END and HP constantly decreases by $H_W_BAD1.7%$COLOR_END (max 3400)" />
+  <String id="81110408" name="Damage: Stage VIII" tooltip="Movement Speed decreases by $H_W_BAD8%$COLOR_END and HP constantly decreases by $H_W_BAD1.9%$COLOR_END (max 3800)" />
+  <String id="81110409" name="Damage: Stage IX" tooltip="Movement Speed decreases by $H_W_BAD9%$COLOR_END and HP constantly decreases by $H_W_BAD2%$COLOR_END (max 4000)" />
+  <String id="81110410" name="Damage: Stage X" tooltip="Movement Speed decreases by $H_W_BAD10%$COLOR_END and HP constantly decreases by $H_W_BAD2%$COLOR_END (max 4000)" />
+  <String id="81110501" name="Stunned" tooltip="Cannot Move" />
+  <String id="81110502" name="Stunned" tooltip="Cannot Move" />
+  <String id="81110503" name="Stunned" tooltip="Cannot Move" />
+  <String id="81110504" name="Stunned" tooltip="Cannot Move" />
+  <String id="81110505" name="Stunned" tooltip="Cannot Move" />
+  <String id="81111001" name="Pummel" tooltip="Crit Rate for next attack increases by $H_W_GOOD$value$COLOR_END" />
+  <String id="81111002" name="Pummel" tooltip="Crit Rate for next attack increases by $H_W_GOOD$value$COLOR_END" />
+  <String id="81111003" name="Pummel" tooltip="Crit Rate for next attack increases by $H_W_GOOD$value$COLOR_END" />
+  <String id="81111004" name="Pummel" tooltip="Crit Rate for next attack increases by $H_W_GOOD$value$COLOR_END" />
+  <String id="81111005" name="Pummel" tooltip="Crit Rate for next attack increases by $H_W_GOOD$value$COLOR_END" />
+  <String id="81111006" name="Pummel" tooltip="Crit Rate for next attack increases by $H_W_GOOD$value$COLOR_END" />
+  <String id="81111007" name="Pummel" tooltip="Crit Rate for next attack increases by $H_W_GOOD$value$COLOR_END" />
+  <String id="81111008" name="Pummel" tooltip="Crit Rate for next attack increases by $H_W_GOOD$value$COLOR_END" />
+  <String id="81111009" name="Pummel" tooltip="Crit Rate for next attack increases by $H_W_GOOD$value$COLOR_END" />
+  <String id="81111010" name="Pummel" tooltip="Crit Rate for next attack increases by $H_W_GOOD$value$COLOR_END" />
+  <String id="81111011" name="Pummel" tooltip="Crit Rate for next attack increases by $H_W_GOOD$value$COLOR_END" />
+  <String id="81111012" name="Pummel" tooltip="Crit Rate for next attack increases by $H_W_GOOD$value$COLOR_END" />
+  <String id="81111013" name="Pummel" tooltip="Crit Rate for next attack increases by $H_W_GOOD$value$COLOR_END" />
+  <String id="81111014" name="Pummel" tooltip="Crit Rate for next attack increases by $H_W_GOOD$value$COLOR_END" />
+  <String id="81111015" name="Pummel" tooltip="Crit Rate for next attack increases by $H_W_GOOD$value$COLOR_END" />
+  <String id="81111016" name="Pummel" tooltip="Crit Rate for next attack increases by $H_W_GOOD$value$COLOR_END" />
+  <String id="81111017" name="Pummel" tooltip="Crit Rate for next attack increases by $H_W_GOOD$value$COLOR_END" />
+  <String id="81111018" name="Pummel" tooltip="Crit Rate for next attack increases by $H_W_GOOD$value$COLOR_END" />
+  <String id="81111019" name="Pummel" tooltip="Crit Rate for next attack increases by $H_W_GOOD$value$COLOR_END" />
+  <String id="81111020" name="Pummel" tooltip="Crit Rate for next attack increases by $H_W_GOOD$value$COLOR_END" />
+  <String id="81112001" name="Chained Speed Skating" tooltip="Attack Speed for next skill increases by $H_W_GOOD$value$COLOR_END " />
+  <String id="81112002" name="Chained Speed Skating" tooltip="Attack Speed for next skill increases by $H_W_GOOD$value$COLOR_END " />
+  <String id="81112003" name="Chained Speed Skating" tooltip="Attack Speed for next skill increases by $H_W_GOOD$value$COLOR_END " />
+  <String id="81112004" name="Chained Speed Skating" tooltip="Attack Speed for next skill increases by $H_W_GOOD$value$COLOR_END " />
+  <String id="81112005" name="Chained Speed Skating" tooltip="Attack Speed for next skill increases by $H_W_GOOD$value$COLOR_END " />
+  <String id="81112006" name="Chained Speed Skating" tooltip="Attack Speed for next skill increases by $H_W_GOOD$value$COLOR_END " />
+  <String id="81112007" name="Chained Speed Skating" tooltip="Attack Speed for next skill increases by $H_W_GOOD$value$COLOR_END " />
+  <String id="81112008" name="Chained Speed Skating" tooltip="Attack Speed for next skill increases by $H_W_GOOD$value$COLOR_END " />
+  <String id="81112009" name="Chained Speed Skating" tooltip="Attack Speed for next skill increases by $H_W_GOOD$value$COLOR_END " />
+  <String id="81112010" name="Chained Speed Skating" tooltip="Attack Speed for next skill increases by $H_W_GOOD$value$COLOR_END " />
+  <String id="81112011" name="Chained Speed Skating" tooltip="Attack Speed for next skill increases by $H_W_GOOD$value$COLOR_END " />
+  <String id="81112012" name="Chained Speed Skating" tooltip="Attack Speed for next skill increases by $H_W_GOOD$value$COLOR_END " />
+  <String id="81112013" name="Chained Speed Skating" tooltip="Attack Speed for next skill increases by $H_W_GOOD$value$COLOR_END " />
+  <String id="81112014" name="Chained Speed Skating" tooltip="Attack Speed for next skill increases by $H_W_GOOD$value$COLOR_END " />
+  <String id="81112015" name="Chained Speed Skating" tooltip="Attack Speed for next skill increases by $H_W_GOOD$value$COLOR_END " />
+  <String id="81112016" name="Chained Speed Skating" tooltip="Attack Speed for next skill increases by $H_W_GOOD$value$COLOR_END " />
+  <String id="81112017" name="Chained Speed Skating" tooltip="Attack Speed for next skill increases by $H_W_GOOD$value$COLOR_END " />
+  <String id="81112018" name="Chained Speed Skating" tooltip="Attack Speed for next skill increases by $H_W_GOOD$value$COLOR_END " />
+  <String id="81112019" name="Chained Speed Skating" tooltip="Attack Speed for next skill increases by $H_W_GOOD$value$COLOR_END " />
+  <String id="81112020" name="Chained Speed Skating" tooltip="Attack Speed for next skill increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="81112100" name="Chained Speed Skating" tooltip="Attack Speed for next skill increases by $H_W_GOOD$value$COLOR_END. Can be stacked up, and ends when resisting." />
+  <String id="81112201" name="Speed Skating" tooltip="Attack Speed increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="81112202" name="Speed Skating" tooltip="Attack Speed increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="81112203" name="Speed Skating" tooltip="Attack Speed increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="81112204" name="Speed Skating" tooltip="Attack Speed increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="81112205" name="Speed Skating" tooltip="Attack Speed increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="81112206" name="Speed Skating" tooltip="Attack Speed increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="81112207" name="Speed Skating" tooltip="Attack Speed increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="81112208" name="Speed Skating" tooltip="Attack Speed increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="81112209" name="Speed Skating" tooltip="Attack Speed increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="81112210" name="Speed Skating" tooltip="Attack Speed increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="81120001" name="EP Purification" tooltip="BTS" />
+  <String id="81120002" name="Ending EP Blessing" tooltip="BTS" />
+  <String id="81120101" name="Lethal Lesson" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="81120102" name="Lethal Lesson" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="81120103" name="Lethal Lesson" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="81120104" name="Lethal Lesson" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="81120105" name="Lethal Lesson" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="81120106" name="Lethal Lesson" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="81120107" name="Lethal Lesson" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="81120108" name="Lethal Lesson" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="81120109" name="Lethal Lesson" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="81120110" name="Lethal Lesson" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="81120111" name="Lethal Lesson" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="81120112" name="Lethal Lesson" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="81120113" name="Lethal Lesson" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="81120114" name="Lethal Lesson" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="81120115" name="Lethal Lesson" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="81120201" name="Immune to Damage" tooltip="Immune to all attacks. Effect ends when casting skills." />
+  <String id="81120202" name="Immune to Damage" tooltip="Immune to all attacks. Effect ends when casting skills." />
+  <String id="81120203" name="Immune to Damage" tooltip="Immune to all attacks. Effect ends when casting skills." />
+  <String id="81120204" name="Immune to Damage" tooltip="Immune to all attacks. Effect ends when casting skills." />
+  <String id="81120205" name="Immune to Damage" tooltip="Immune to all attacks. Effect ends when casting skills." />
+  <String id="81120206" name="Immune to Damage" tooltip="Immune to all attacks. Effect ends when casting skills." />
+  <String id="81120207" name="Immune to Damage" tooltip="Immune to all attacks. Effect ends when casting skills." />
+  <String id="81120208" name="Immune to Damage" tooltip="Immune to all attacks. Effect ends when casting skills." />
+  <String id="81120209" name="Immune to Damage" tooltip="Immune to all attacks. Effect ends when casting skills." />
+  <String id="81120210" name="Immune to Damage" tooltip="Immune to all attacks. Effect ends when casting skills." />
+  <String id="81120301" name="Resistance to Crit Decreases" tooltip="Critical resistance decreases by $H_W_BAD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81120302" name="Resistance to Crit Decreases" tooltip="Critical resistance decreases by $H_W_BAD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81120303" name="Resistance to Crit Decreases" tooltip="Critical resistance decreases by $H_W_BAD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81120304" name="Resistance to Crit Decreases" tooltip="Critical resistance decreases by $H_W_BAD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81120305" name="Resistance to Crit Decreases" tooltip="Critical resistance decreases by $H_W_BAD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81120306" name="Resistance to Crit Decreases" tooltip="Critical resistance decreases by $H_W_BAD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81120307" name="Resistance to Crit Decreases" tooltip="Critical resistance decreases by $H_W_BAD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81120308" name="Resistance to Crit Decreases" tooltip="Critical resistance decreases by $H_W_BAD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81120309" name="Resistance to Crit Decreases" tooltip="Critical resistance decreases by $H_W_BAD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81120310" name="Resistance to Crit Decreases" tooltip="Critical resistance decreases by $H_W_BAD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81120401" name="Resistance to Crit Decreases" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81120402" name="Resistance to Crit Decreases" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81120403" name="Resistance to Crit Decreases" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81120404" name="Resistance to Crit Decreases" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81120405" name="Resistance to Crit Decreases" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81120406" name="Resistance to Crit Decreases" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81120407" name="Resistance to Crit Decreases" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81120408" name="Resistance to Crit Decreases" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81120409" name="Resistance to Crit Decreases" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81120410" name="Resistance to Crit Decreases" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81120411" name="Resistance to Crit Decreases" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81120412" name="Resistance to Crit Decreases" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81120413" name="Resistance to Crit Decreases" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81120414" name="Resistance to Crit Decreases" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81120415" name="Resistance to Crit Decreases" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81120416" name="Resistance to Crit Decreases" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81120417" name="Resistance to Crit Decreases" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81120418" name="Resistance to Crit Decreases" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81120419" name="Resistance to Crit Decreases" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81120420" name="Resistance to Crit Decreases" tooltip="Critical resistance increases by $H_W_GOOD$value$COLOR_END. Knockdown, stun, or stagger cancel the effect." />
+  <String id="81121000" name="Immune to Resist" tooltip="Immune to knockdown and immobilization " />
+  <String id="81121101" name="Shield: Stage I" tooltip="Absorbs up to $H_W_GOOD$value$COLOR_END damage. Effect ends when the damage is higher than absorption capacity." />
+  <String id="81121102" name="Shield: Stage II" tooltip="Absorbs up to $H_W_GOOD$value$COLOR_END damage. Effect ends when the damage is higher than absorption capacity." />
+  <String id="81121103" name="Shield: Stage III" tooltip="Absorbs up to $H_W_GOOD$value$COLOR_END damage. Effect ends when the damage is higher than absorption capacity." />
+  <String id="81121104" name="Shield: Stage VI" tooltip="Absorbs up to $H_W_GOOD$value$COLOR_END damage. Effect ends when the damage is higher than absorption capacity." />
+  <String id="81121105" name="Shield: Stage V" tooltip="Absorbs up to $H_W_GOOD$value$COLOR_END damage. Effect ends when the damage is higher than absorption capacity." />
+  <String id="81121201" name="Power Shield: Stage I" tooltip="Absorbs up to $H_W_GOOD$value$COLOR_END damage. Effect ends when the damage is higher than absorption capacity." />
+  <String id="81121202" name="Power Shield: Stage II" tooltip="Absorbs up to $H_W_GOOD$value$COLOR_END damage. Effect ends when the damage is higher than absorption capacity." />
+  <String id="81121203" name="Power Shield: Stage III" tooltip="Absorbs up to $H_W_GOOD$value$COLOR_END damage. Effect ends when the damage is higher than absorption capacity." />
+  <String id="81121204" name="Power Shield: Stage IV" tooltip="Absorbs up to $H_W_GOOD$value$COLOR_END damage. Effect ends when the damage is higher than absorption capacity." />
+  <String id="81121205" name="Power Shield: Stage V" tooltip="Absorbs up to $H_W_GOOD$value$COLOR_END damage. Effect ends when the damage is higher than absorption capacity." />
+  <String id="81122034" name="Reloading Retaliate" tooltip="BTS" />
+  <String id="81123001" name="Combat Speed: Stage I" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123002" name="Combat Speed: Stage II" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123003" name="Combat Speed: Stage III" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123004" name="Combat Speed: Stage IV" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123005" name="Combat Speed: Stage V" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123006" name="Combat Speed: Stage VI" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123007" name="Combat Speed: Stage VII" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123008" name="Combat Speed: Stage VIII" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123009" name="Combat Speed: Stage IX" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123010" name="Combat Speed: Stage X" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123011" name="Combat Speed: Stage XI" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123012" name="Combat Speed: Stage XII" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123013" name="Combat Speed: Stage XIII" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123014" name="Combat Speed: Stage XIV" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123015" name="Combat Speed: Stage XV" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123101" name="Combat Dash: Stage I" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123102" name="Combat Dash: Stage II" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123103" name="Combat Dash: Stage III" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123104" name="Combat Dash: Stage IV" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123105" name="Combat Dash: Stage V" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123106" name="Combat Dash: Stage VI" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123107" name="Combat Dash: Stage VII" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123108" name="Combat Dash: Stage VIII" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123109" name="Combat Dash: Stage IX" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123110" name="Combat Dash: Stage X" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123111" name="Combat Dash: Stage XI" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123112" name="Combat Dash: Stage XII" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123113" name="Combat Dash: Stage XIII" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123114" name="Combat Dash: Stage XIV" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123115" name="Combat Dash: Stage XV" tooltip="Movement Speed increases by $H_W_GOOD$value$COLOR_END while in combat. Effect ends when resisting." />
+  <String id="81123201" name="Acceleration: Stage I" tooltip="Out-of Combat Movement Speed increases by $H_W_GOOD$value$COLOR_END. Effect ends when resisting." />
+  <String id="81123202" name="Acceleration: Stage II" tooltip="Out-of Combat Movement Speed increases by $H_W_GOOD$value$COLOR_END. Effect ends when resisting." />
+  <String id="81123203" name="Acceleration: Stage III" tooltip="Out-of Combat Movement Speed increases by $H_W_GOOD$value$COLOR_END. Effect ends when resisting." />
+  <String id="81123204" name="Acceleration: Stage IV" tooltip="Out-of Combat Movement Speed increases by $H_W_GOOD$value$COLOR_END. Effect ends when resisting." />
+  <String id="81123205" name="Acceleration: Stage V" tooltip="Out-of Combat Movement Speed increases by $H_W_GOOD$value$COLOR_END. Effect ends when resisting." />
+  <String id="81123206" name="Acceleration: Stage VI" tooltip="Out-of Combat Movement Speed increases by $H_W_GOOD$value$COLOR_END. Effect ends when resisting." />
+  <String id="81123207" name="Acceleration: Stage VII" tooltip="Out-of Combat Movement Speed increases by $H_W_GOOD$value$COLOR_END. Effect ends when resisting." />
+  <String id="81123208" name="Acceleration: Stage VIII" tooltip="Out-of Combat Movement Speed increases by $H_W_GOOD$value$COLOR_END. Effect ends when resisting." />
+  <String id="81123209" name="Acceleration: Stage IX" tooltip="Out-of Combat Movement Speed increases by $H_W_GOOD$value$COLOR_END. Effect ends when resisting." />
+  <String id="81123210" name="Acceleration: Stage X" tooltip="Out-of Combat Movement Speed increases by $H_W_GOOD$value$COLOR_END. Effect ends when resisting." />
+  <String id="81123211" name="Acceleration: Stage XI" tooltip="Out-of Combat Movement Speed increases by $H_W_GOOD$value$COLOR_END. Effect ends when resisting." />
+  <String id="81123212" name="Acceleration: Stage XII" tooltip="Out-of Combat Movement Speed increases by $H_W_GOOD$value$COLOR_END. Effect ends when resisting." />
+  <String id="81123213" name="Acceleration: Stage XIII" tooltip="Out-of Combat Movement Speed increases by $H_W_GOOD$value$COLOR_END. Effect ends when resisting." />
+  <String id="81123214" name="Acceleration: Stage XIV" tooltip="Out-of Combat Movement Speed increases by $H_W_GOOD$value$COLOR_END. Effect ends when resisting." />
+  <String id="81123215" name="Acceleration: Stage XV" tooltip="Out-of Combat Movement Speed increases by $H_W_GOOD$value$COLOR_END. Effect ends when resisting." />
+  <String id="81124101" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="81124102" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="81124103" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="81124104" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="81124105" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="81124106" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="81124107" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="81124108" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="81124109" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="81124110" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="81130101" name="Rejuvenation" tooltip="Rejuvenates Stamina. Effect canceled by combat." />
+  <String id="81130102" name="Rejuvenation" tooltip="Rejuvenates Stamina. Effect canceled by combat." />
+  <String id="81130103" name="Rejuvenation" tooltip="Rejuvenates Stamina. Effect canceled by combat." />
+  <String id="81130104" name="Rejuvenation" tooltip="Rejuvenates Stamina. Effect canceled by combat." />
+  <String id="81130105" name="Rejuvenation" tooltip="Rejuvenates Stamina. Effect canceled by combat." />
+  <String id="81130106" name="Rejuvenation" tooltip="Rejuvenates Stamina. Effect canceled by combat." />
+  <String id="81130107" name="Rejuvenation" tooltip="Rejuvenates Stamina. Effect canceled by combat." />
+  <String id="81130108" name="Rejuvenation" tooltip="Rejuvenates Stamina. Effect canceled by combat." />
+  <String id="81130109" name="Rejuvenation" tooltip="Rejuvenates Stamina. Effect canceled by combat." />
+  <String id="81130110" name="Rejuvenation" tooltip="Rejuvenates Stamina. Effect canceled by combat." />
+  <String id="81130111" name="Rejuvenation" tooltip="Rejuvenates Stamina. Effect canceled by combat." />
+  <String id="81130112" name="Rejuvenation" tooltip="Rejuvenates Stamina. Effect canceled by combat." />
+  <String id="81130113" name="Rejuvenation" tooltip="Rejuvenates Stamina. Effect canceled by combat." />
+  <String id="81130114" name="Rejuvenation" tooltip="Rejuvenates Stamina. Effect canceled by combat." />
+  <String id="81130115" name="Rejuvenation" tooltip="Rejuvenates Stamina. Effect canceled by combat." />
+  <String id="81130116" name="Rejuvenation" tooltip="Rejuvenates Stamina. Effect canceled by combat." />
+  <String id="81130117" name="Rejuvenation" tooltip="Rejuvenates Stamina. Effect canceled by combat." />
+  <String id="81130118" name="Rejuvenation" tooltip="Rejuvenates Stamina. Effect canceled by combat." />
+  <String id="81130119" name="Rejuvenation" tooltip="Rejuvenates Stamina. Effect canceled by combat." />
+  <String id="81130120" name="Rejuvenation" tooltip="Rejuvenates Stamina. Effect canceled by combat." />
+  <String id="81401001" name="Mired" tooltip="Decreases Movement Speed by $H_W_BAD$value$COLOR_END." />
+  <String id="81401002" name="Mired" tooltip="Decreases Movement Speed by $H_W_BAD$value$COLOR_END." />
+  <String id="81401003" name="Mired" tooltip="Decreases Movement Speed by $H_W_BAD$value$COLOR_END." />
+  <String id="81401004" name="Mired" tooltip="Decreases Movement Speed by $H_W_BAD$value$COLOR_END." />
+  <String id="81401005" name="Mired" tooltip="Decreases Movement Speed by $H_W_BAD$value$COLOR_END." />
+  <String id="81401006" name="Mired" tooltip="Decreases Movement Speed by $H_W_BAD$value$COLOR_END." />
+  <String id="81401007" name="Mired" tooltip="Decreases Movement Speed by $H_W_BAD$value$COLOR_END." />
+  <String id="81401008" name="Mired" tooltip="Decreases Movement Speed by $H_W_BAD$value$COLOR_END." />
+  <String id="81401009" name="Mired" tooltip="Decreases Movement Speed by $H_W_BAD$value$COLOR_END." />
+  <String id="81401010" name="Mired" tooltip="Decreases Movement Speed by $H_W_BAD$value$COLOR_END." />
+  <String id="81401101" name="Mired" tooltip="Decreases Movement Speed by $H_W_BAD$value$COLOR_END." />
+  <String id="81401102" name="Mired" tooltip="Decreases Movement Speed by $H_W_BAD$value$COLOR_END." />
+  <String id="81401103" name="Mired" tooltip="Decreases Movement Speed by $H_W_BAD$value$COLOR_END." />
+  <String id="81401104" name="Mired" tooltip="Decreases Movement Speed by $H_W_BAD$value$COLOR_END." />
+  <String id="81401105" name="Mired" tooltip="Decreases Movement Speed by $H_W_BAD$value$COLOR_END." />
+  <String id="81401106" name="Mired" tooltip="Decreases Movement Speed by $H_W_BAD$value$COLOR_END." />
+  <String id="81401107" name="Mired" tooltip="Decreases Movement Speed by $H_W_BAD$value$COLOR_END." />
+  <String id="81401108" name="Mired" tooltip="Decreases Movement Speed by $H_W_BAD$value$COLOR_END." />
+  <String id="81401109" name="Mired" tooltip="Decreases Movement Speed by $H_W_BAD$value$COLOR_END." />
+  <String id="81401110" name="Mired" tooltip="Decreases Movement Speed by $H_W_BAD$value$COLOR_END." />
+  <String id="88102301" name="(Hidden) RE recovery" tooltip="BTS" />
+  <String id="88102302" name="(Hidden) RE recovery" tooltip="BTS" />
+  <String id="88102303" name="(Hidden) RE recovery" tooltip="BTS" />
+  <String id="88102304" name="(Hidden) RE recovery" tooltip="BTS" />
+  <String id="88102305" name="(Hidden) RE recovery" tooltip="BTS" />
+  <String id="88102306" name="(Hidden) RE recovery" tooltip="BTS" />
+  <String id="88102307" name="(Hidden) RE recovery" tooltip="BTS" />
+  <String id="88102308" name="(Hidden) RE recovery" tooltip="BTS" />
+  <String id="88102309" name="(Hidden) RE recovery" tooltip="BTS" />
+  <String id="88102310" name="(Hidden) RE recovery" tooltip="BTS" />
+  <String id="88116100" name="Reload_Charging Slash" tooltip="(Hidden) Cooldown decreases when the next skill hits the target" />
+  <String id="88120101" name="Desperate Force" tooltip="Increases Power by XX. Effect stacks up to XX times. " />
+  <String id="88120102" name="Desperate Force" tooltip="Increases Power by XX. Effect stacks up to XX times. " />
+  <String id="88120103" name="Desperate Force" tooltip="Increases Power by XX. Effect stacks up to XX times. " />
+  <String id="88120104" name="Desperate Force" tooltip="Increases Power by XX. Effect stacks up to XX times. " />
+  <String id="88120105" name="Desperate Force" tooltip="Increases Power by XX. Effect stacks up to XX times. " />
+  <String id="88120106" name="Desperate Force" tooltip="Increases Power by XX. Effect stacks up to XX times. " />
+  <String id="88120107" name="Desperate Force" tooltip="Increases Power by XX. Effect stacks up to XX times. " />
+  <String id="88120108" name="Desperate Force" tooltip="Increases Power by XX. Effect stacks up to XX times. " />
+  <String id="88120109" name="Desperate Force" tooltip="Increases Power by XX. Effect stacks up to XX times. " />
+  <String id="88120110" name="Desperate Force" tooltip="Increases Power by XX. Effect stacks up to XX times. " />
+  <String id="88120111" name="Desperate Force" tooltip="Increases Power by XX. Effect stacks up to XX times. " />
+  <String id="88120112" name="Desperate Force" tooltip="Increases Power by XX. Effect stacks up to XX times. " />
+  <String id="88120113" name="Desperate Force" tooltip="Increases Power by XX. Effect stacks up to XX times. " />
+  <String id="88120114" name="Desperate Force" tooltip="Increases Power by XX. Effect stacks up to XX times. " />
+  <String id="88120115" name="Desperate Force" tooltip="Increases Power by XX. Effect stacks up to XX times. " />
+  <String id="88120116" name="Desperate Force" tooltip="Increases Power by XX. Effect stacks up to XX times. " />
+  <String id="88120117" name="Desperate Force" tooltip="Increases Power by XX. Effect stacks up to XX times. " />
+  <String id="88120118" name="Desperate Force" tooltip="Increases Power by XX. Effect stacks up to XX times. " />
+  <String id="88120119" name="Desperate Force" tooltip="Increases Power by XX. Effect stacks up to XX times. " />
+  <String id="88120120" name="Desperate Force" tooltip="Increases Power by XX. Effect stacks up to XX times. " />
+  <String id="88128200" name="(Hidden) For checking Endurance Decrease max stack" tooltip="BTS" />
+  <String id="88131100" name="Reloading Reaping Slash" tooltip="BTS" />
+  <String id="88132201" name="(Hidden) RE recovery on a successful block" tooltip="BTS" />
+  <String id="88132202" name="(Hidden) RE recovery on a successful block" tooltip="BTS" />
+  <String id="88132203" name="(Hidden) RE recovery on a successful block" tooltip="BTS" />
+  <String id="88132204" name="(Hidden) RE recovery on a successful block" tooltip="BTS" />
+  <String id="88132205" name="(Hidden) RE recovery on a successful block" tooltip="BTS" />
+  <String id="88132206" name="(Hidden) RE recovery on a successful block" tooltip="BTS" />
+  <String id="88132207" name="(Hidden) RE recovery on a successful block" tooltip="BTS" />
+  <String id="88132208" name="(Hidden) RE recovery on a successful block" tooltip="BTS" />
+  <String id="88132209" name="(Hidden) RE recovery on a successful block" tooltip="BTS" />
+  <String id="88132210" name="(Hidden) RE recovery on a successful block" tooltip="BTS" />
+  <String id="88132211" name="(Hidden) RE recovery on a successful block" tooltip="BTS" />
+  <String id="88132212" name="(Hidden) RE recovery on a successful block" tooltip="BTS" />
+  <String id="88132213" name="(Hidden) RE recovery on a successful block" tooltip="BTS" />
+  <String id="88132214" name="(Hidden) RE recovery on a successful block" tooltip="BTS" />
+  <String id="88132215" name="(Hidden) RE recovery on a successful block" tooltip="BTS" />
+  <String id="88202101" name="Spirit of Vengeance" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88202102" name="Spirit of Vengeance" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88202103" name="Spirit of Vengeance" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88202104" name="Spirit of Vengeance" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88202105" name="Spirit of Vengeance" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88202106" name="Spirit of Vengeance" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88202107" name="Spirit of Vengeance" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88202108" name="Spirit of Vengeance" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88202109" name="Spirit of Vengeance" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88202110" name="Spirit of Vengeance" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88202301" name="Chained Speed Skating: Shield Counter" tooltip="Attack Speed increases when casting Shield Counter" />
+  <String id="88202302" name="Chained Speed Skating: Shield Counter" tooltip="Attack Speed increases when casting Shield Counter" />
+  <String id="88202303" name="Chained Speed Skating: Shield Counter" tooltip="Attack Speed increases when casting Shield Counter" />
+  <String id="88202304" name="Chained Speed Skating: Shield Counter" tooltip="Attack Speed increases when casting Shield Counter" />
+  <String id="88202305" name="Chained Speed Skating: Shield Counter" tooltip="Attack Speed increases when casting Shield Counter" />
+  <String id="88202306" name="Chained Speed Skating: Shield Counter" tooltip="Attack Speed increases when casting Shield Counter" />
+  <String id="88202307" name="Chained Speed Skating: Shield Counter" tooltip="Attack Speed increases when casting Shield Counter" />
+  <String id="88202308" name="Chained Speed Skating: Shield Counter" tooltip="Attack Speed increases when casting Shield Counter" />
+  <String id="88202309" name="Chained Speed Skating: Shield Counter" tooltip="Attack Speed increases when casting Shield Counter" />
+  <String id="88202310" name="Chained Speed Skating: Shield Counter" tooltip="Attack Speed increases when casting Shield Counter" />
+  <String id="88205100" name="Reloading Shield Bash" tooltip="BTS" />
+  <String id="88207100" name="Reloading Guardian Shout" tooltip="BTS" />
+  <String id="88212101" name="Raising Aggression" tooltip="Increases Aggro by casting skill" />
+  <String id="88212102" name="Raising Aggression" tooltip="Increases Aggro by casting skill" />
+  <String id="88212103" name="Raising Aggression" tooltip="Increases Aggro by casting skill" />
+  <String id="88212104" name="Raising Aggression" tooltip="Increases Aggro by casting skill" />
+  <String id="88212105" name="Raising Aggression" tooltip="Increases Aggro by casting skill" />
+  <String id="88212106" name="Raising Aggression" tooltip="Increases Aggro by casting skill" />
+  <String id="88212107" name="Raising Aggression" tooltip="Increases Aggro by casting skill" />
+  <String id="88212108" name="Raising Aggression" tooltip="Increases Aggro by casting skill" />
+  <String id="88212109" name="Raising Aggression" tooltip="Increases Aggro by casting skill" />
+  <String id="88212110" name="Raising Aggression" tooltip="Increases Aggro by casting skill" />
+  <String id="88212200" name="Reloading Infuriate" tooltip="BTS" />
+  <String id="88217201" name="Unbending Force" tooltip="Effect stacks up when attacking. " />
+  <String id="88217202" name="Unbending Force" tooltip="Effect stacks up when attacking. " />
+  <String id="88217203" name="Unbending Force" tooltip="Effect stacks up when attacking. " />
+  <String id="88217204" name="Unbending Force" tooltip="Effect stacks up when attacking. " />
+  <String id="88217205" name="Unbending Force" tooltip="Effect stacks up when attacking. " />
+  <String id="88217206" name="Unbending Force" tooltip="Effect stacks up when attacking. " />
+  <String id="88217207" name="Unbending Force" tooltip="Effect stacks up when attacking. " />
+  <String id="88217208" name="Unbending Force" tooltip="Effect stacks up when attacking. " />
+  <String id="88217209" name="Unbending Force" tooltip="Effect stacks up when attacking. " />
+  <String id="88217210" name="Unbending Force" tooltip="Effect stacks up when attacking. " />
+  <String id="88217211" name="Unbending Force" tooltip="Effect stacks up when attacking. " />
+  <String id="88217212" name="Unbending Force" tooltip="Effect stacks up when attacking. " />
+  <String id="88217213" name="Unbending Force" tooltip="Effect stacks up when attacking. " />
+  <String id="88217214" name="Unbending Force" tooltip="Effect stacks up when attacking. " />
+  <String id="88217215" name="Unbending Force" tooltip="Effect stacks up when attacking. " />
+  <String id="88217216" name="Unbending Force" tooltip="Effect stacks up when attacking. " />
+  <String id="88217217" name="Unbending Force" tooltip="Effect stacks up when attacking. " />
+  <String id="88217218" name="Unbending Force" tooltip="Effect stacks up when attacking. " />
+  <String id="88217219" name="Unbending Force" tooltip="Effect stacks up when attacking. " />
+  <String id="88217220" name="Unbending Force" tooltip="Effect stacks up when attacking. " />
+  <String id="88219101" name="Spirit of Guardian" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88219102" name="Spirit of Guardian" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88219103" name="Spirit of Guardian" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88219104" name="Spirit of Guardian" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88219105" name="Spirit of Guardian" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88219106" name="Spirit of Guardian" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88219107" name="Spirit of Guardian" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88219108" name="Spirit of Guardian" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88219109" name="Spirit of Guardian" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88219110" name="Spirit of Guardian" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88219111" name="Spirit of Guardian" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88219112" name="Spirit of Guardian" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88219113" name="Spirit of Guardian" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88219114" name="Spirit of Guardian" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88219115" name="Spirit of Guardian" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88219116" name="Spirit of Guardian" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88219117" name="Spirit of Guardian" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88219118" name="Spirit of Guardian" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88219119" name="Spirit of Guardian" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88219120" name="Spirit of Guardian" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88222101" name="EP Recovery" tooltip="Provides HP restoration of $H_W_GOOD$value$COLOR_END per second.Effect ends when Iron Will effect ends." />
+  <String id="88222102" name="EP Recovery" tooltip="Provides HP restoration of $H_W_GOOD$value$COLOR_END per second.Effect ends when Iron Will effect ends." />
+  <String id="88222103" name="EP Recovery" tooltip="Provides HP restoration of $H_W_GOOD$value$COLOR_END per second.Effect ends when Iron Will effect ends." />
+  <String id="88222104" name="EP Recovery" tooltip="Provides HP restoration of $H_W_GOOD$value$COLOR_END per second.Effect ends when Iron Will effect ends." />
+  <String id="88222105" name="EP Recovery" tooltip="Provides HP restoration of $H_W_GOOD$value$COLOR_END per second.Effect ends when Iron Will effect ends." />
+  <String id="88222106" name="EP Recovery" tooltip="Provides HP restoration of $H_W_GOOD$value$COLOR_END per second.Effect ends when Iron Will effect ends." />
+  <String id="88222107" name="EP Recovery" tooltip="Provides HP restoration of $H_W_GOOD$value$COLOR_END per second.Effect ends when Iron Will effect ends." />
+  <String id="88222108" name="EP Recovery" tooltip="Provides HP restoration of $H_W_GOOD$value$COLOR_END per second.Effect ends when Iron Will effect ends." />
+  <String id="88222109" name="EP Recovery" tooltip="Provides HP restoration of $H_W_GOOD$value$COLOR_END per second.Effect ends when Iron Will effect ends." />
+  <String id="88222110" name="EP Recovery" tooltip="Provides HP restoration of $H_W_GOOD$value$COLOR_END per second.Effect ends when Iron Will effect ends." />
+  <String id="88222200" name="Reloading Iron Will" tooltip="BTS" />
+  <String id="88227101" name="(Hidden) Debuff Spirit of Iron for party members" tooltip="BTS" />
+  <String id="88227102" name="(Hidden) Debuff Spirit of Iron for party members" tooltip="BTS" />
+  <String id="88227103" name="(Hidden) Debuff Spirit of Iron for party members" tooltip="BTS" />
+  <String id="88227104" name="(Hidden) Debuff Spirit of Iron for party members" tooltip="BTS" />
+  <String id="88227105" name="(Hidden) Debuff Spirit of Iron for party members" tooltip="BTS" />
+  <String id="88227106" name="(Hidden) Debuff Spirit of Iron for party members" tooltip="BTS" />
+  <String id="88227107" name="(Hidden) Debuff Spirit of Iron for party members" tooltip="BTS" />
+  <String id="88227108" name="(Hidden) Debuff Spirit of Iron for party members" tooltip="BTS" />
+  <String id="88227109" name="(Hidden) Debuff Spirit of Iron for party members" tooltip="BTS" />
+  <String id="88227110" name="(Hidden) Debuff Spirit of Iron for party members" tooltip="BTS" />
+  <String id="88227151" name="Keen Front" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="88227152" name="Keen Front" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="88227153" name="Keen Front" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="88227154" name="Keen Front" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="88227155" name="Keen Front" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="88227156" name="Keen Front" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="88227157" name="Keen Front" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="88227158" name="Keen Front" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="88227159" name="Keen Front" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="88227160" name="Keen Front" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="88302101" name="Crit Rate of Leaping Strike increases" tooltip="Increases Crit rate of Leaping Strite by 5% " />
+  <String id="88302102" name="Crit Rate of Leaping Strike increases" tooltip="Increases Crit rate of Leaping Strite by 7% " />
+  <String id="88302103" name="Crit Rate of Leaping Strike increases" tooltip="Increases Crit rate of Leaping Strite by 9% " />
+  <String id="88302104" name="Crit Rate of Leaping Strike increases" tooltip="Increases Crit rate of Leaping Strite by 11% " />
+  <String id="88302105" name="Crit Rate of Leaping Strike increases" tooltip="Increases Crit rate of Leaping Strite by 13% " />
+  <String id="88302106" name="Crit Rate of Leaping Strike increases" tooltip="Increases Crit rate of Leaping Strite by 15% " />
+  <String id="88302107" name="Crit Rate of Leaping Strike increases" tooltip="Increases Crit rate of Leaping Strite by 17% " />
+  <String id="88302108" name="Crit Rate of Leaping Strike increases" tooltip="Increases Crit rate of Leaping Strite by 19% " />
+  <String id="88302109" name="Crit Rate of Leaping Strike increases" tooltip="Increases Crit rate of Leaping Strite by 21% " />
+  <String id="88302110" name="Crit Rate of Leaping Strike increases" tooltip="Increases Crit rate of Leaping Strite by 23% " />
+  <String id="88302111" name="Crit Rate of Leaping Strike increases" tooltip="Increases Crit rate of Leaping Strite by 25% " />
+  <String id="88302112" name="Crit Rate of Leaping Strike increases" tooltip="Increases Crit rate of Leaping Strite by 27% " />
+  <String id="88302113" name="Crit Rate of Leaping Strike increases" tooltip="Increases Crit rate of Leaping Strite by 29% " />
+  <String id="88302114" name="Crit Rate of Leaping Strike increases" tooltip="Increases Crit rate of Leaping Strite by 31% " />
+  <String id="88302115" name="Crit Rate of Leaping Strike increases" tooltip="Increases Crit rate of Leaping Strite by 33% " />
+  <String id="88312301" name="Attack Speed of Heart Thrust increases" tooltip="Attack Speed increases by $H_W_GOOD$value$COLOR_END when casting Heart Thrust. Effect ends when knocked down or stunned." />
+  <String id="88312302" name="Attack Speed of Heart Thrust increases" tooltip="Attack Speed increases by $H_W_GOOD$value$COLOR_END when casting Heart Thrust. Effect ends when knocked down or stunned." />
+  <String id="88312303" name="Attack Speed of Heart Thrust increases" tooltip="Attack Speed increases by $H_W_GOOD$value$COLOR_END when casting Heart Thrust. Effect ends when knocked down or stunned." />
+  <String id="88312304" name="Attack Speed of Heart Thrust increases" tooltip="Attack Speed increases by $H_W_GOOD$value$COLOR_END when casting Heart Thrust. Effect ends when knocked down or stunned." />
+  <String id="88312305" name="Attack Speed of Heart Thrust increases" tooltip="Attack Speed increases by $H_W_GOOD$value$COLOR_END when casting Heart Thrust. Effect ends when knocked down or stunned." />
+  <String id="88312306" name="Attack Speed of Heart Thrust increases" tooltip="Attack Speed increases by $H_W_GOOD$value$COLOR_END when casting Heart Thrust. Effect ends when knocked down or stunned." />
+  <String id="88312307" name="Attack Speed of Heart Thrust increases" tooltip="Attack Speed increases by $H_W_GOOD$value$COLOR_END when casting Heart Thrust. Effect ends when knocked down or stunned." />
+  <String id="88312308" name="Attack Speed of Heart Thrust increases" tooltip="Attack Speed increases by $H_W_GOOD$value$COLOR_END when casting Heart Thrust. Effect ends when knocked down or stunned." />
+  <String id="88312309" name="Attack Speed of Heart Thrust increases" tooltip="Attack Speed increases by $H_W_GOOD$value$COLOR_END when casting Heart Thrust. Effect ends when knocked down or stunned." />
+  <String id="88312310" name="Attack Speed of Heart Thrust increases" tooltip="Attack Speed increases by $H_W_GOOD$value$COLOR_END when casting Heart Thrust. Effect ends when knocked down or stunned." />
+  <String id="88316101" name="Desperate Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88316102" name="Desperate Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88316103" name="Desperate Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88316104" name="Desperate Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88316105" name="Desperate Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88316106" name="Desperate Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88316107" name="Desperate Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88316108" name="Desperate Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88316109" name="Desperate Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88316110" name="Desperate Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88316201" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88316202" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88316203" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88316204" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88316205" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88316206" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88316207" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88316208" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88316209" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88316210" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88318200" name="Spirit of Iron" tooltip="BTS" />
+  <String id="88325101" name="Relentless Force" tooltip="Effect Effect stacks up when Ultimate: Overhand Strike hits the target" />
+  <String id="88325102" name="Relentless Force" tooltip="Effect Effect stacks up when Ultimate: Overhand Strike hits the target" />
+  <String id="88325103" name="Relentless Force" tooltip="Effect Effect stacks up when Ultimate: Overhand Strike hits the target" />
+  <String id="88325104" name="Relentless Force" tooltip="Effect Effect stacks up when Ultimate: Overhand Strike hits the target" />
+  <String id="88325105" name="Relentless Force" tooltip="Effect Effect stacks up when Ultimate: Overhand Strike hits the target" />
+  <String id="88325106" name="Relentless Force" tooltip="Effect Effect stacks up when Ultimate: Overhand Strike hits the target" />
+  <String id="88325107" name="Relentless Force" tooltip="Effect Effect stacks up when Ultimate: Overhand Strike hits the target" />
+  <String id="88325108" name="Relentless Force" tooltip="Effect Effect stacks up when Ultimate: Overhand Strike hits the target" />
+  <String id="88325109" name="Relentless Force" tooltip="Effect Effect stacks up when Ultimate: Overhand Strike hits the target" />
+  <String id="88325110" name="Relentless Force" tooltip="Effect Effect stacks up when Ultimate: Overhand Strike hits the target" />
+  <String id="88325111" name="Relentless Force" tooltip="Effect Effect stacks up when Ultimate: Overhand Strike hits the target" />
+  <String id="88325112" name="Relentless Force" tooltip="Effect Effect stacks up when Ultimate: Overhand Strike hits the target" />
+  <String id="88325113" name="Relentless Force" tooltip="Effect Effect stacks up when Ultimate: Overhand Strike hits the target" />
+  <String id="88325114" name="Relentless Force" tooltip="Effect Effect stacks up when Ultimate: Overhand Strike hits the target" />
+  <String id="88325115" name="Relentless Force" tooltip="Effect Effect stacks up when Ultimate: Overhand Strike hits the target" />
+  <String id="88325116" name="Relentless Force" tooltip="Effect Effect stacks up when Ultimate: Overhand Strike hits the target" />
+  <String id="88325117" name="Relentless Force" tooltip="Effect Effect stacks up when Ultimate: Overhand Strike hits the target" />
+  <String id="88325118" name="Relentless Force" tooltip="Effect Effect stacks up when Ultimate: Overhand Strike hits the target" />
+  <String id="88325119" name="Relentless Force" tooltip="Effect Effect stacks up when Ultimate: Overhand Strike hits the target" />
+  <String id="88325120" name="Relentless Force" tooltip="Effect Effect stacks up when Ultimate: Overhand Strike hits the target" />
+  <String id="88402101" name="Chained Speed Skating: Retribution" tooltip="Attack Speed increases when casting Axe Counter" />
+  <String id="88402102" name="Chained Speed Skating: Retribution" tooltip="Attack Speed increases when casting Axe Counter" />
+  <String id="88402103" name="Chained Speed Skating: Retribution" tooltip="Attack Speed increases when casting Axe Counter" />
+  <String id="88402104" name="Chained Speed Skating: Retribution" tooltip="Attack Speed increases when casting Axe Counter" />
+  <String id="88402105" name="Chained Speed Skating: Retribution" tooltip="Attack Speed increases when casting Axe Counter" />
+  <String id="88402106" name="Chained Speed Skating: Retribution" tooltip="Attack Speed increases when casting Axe Counter" />
+  <String id="88402107" name="Chained Speed Skating: Retribution" tooltip="Attack Speed increases when casting Axe Counter" />
+  <String id="88402108" name="Chained Speed Skating: Retribution" tooltip="Attack Speed increases when casting Axe Counter" />
+  <String id="88402109" name="Chained Speed Skating: Retribution" tooltip="Attack Speed increases when casting Axe Counter" />
+  <String id="88402110" name="Chained Speed Skating: Retribution" tooltip="Attack Speed increases when casting Axe Counter" />
+  <String id="88406201" name="Chained Speed Skating: Staggering Strike" tooltip="Attack Speed increases when casting Staggering Strike" />
+  <String id="88406202" name="Chained Speed Skating: Staggering Strike" tooltip="Attack Speed increases when casting Staggering Strike" />
+  <String id="88406203" name="Chained Speed Skating: Staggering Strike" tooltip="Attack Speed increases when casting Staggering Strike" />
+  <String id="88406204" name="Chained Speed Skating: Staggering Strike" tooltip="Attack Speed increases when casting Staggering Strike" />
+  <String id="88406205" name="Chained Speed Skating: Staggering Strike" tooltip="Attack Speed increases when casting Staggering Strike" />
+  <String id="88406206" name="Chained Speed Skating: Staggering Strike" tooltip="Attack Speed increases when casting Staggering Strike" />
+  <String id="88406207" name="Chained Speed Skating: Staggering Strike" tooltip="Attack Speed increases when casting Staggering Strike" />
+  <String id="88406208" name="Chained Speed Skating: Staggering Strike" tooltip="Attack Speed increases when casting Staggering Strike" />
+  <String id="88406209" name="Chained Speed Skating: Staggering Strike" tooltip="Attack Speed increases when casting Staggering Strike" />
+  <String id="88406210" name="Chained Speed Skating: Staggering Strike" tooltip="Attack Speed increases when casting Staggering Strike" />
+  <String id="88406211" name="Chained Speed Skating: Staggering Strike" tooltip="Attack Speed increases when casting Staggering Strike" />
+  <String id="88406212" name="Chained Speed Skating: Staggering Strike" tooltip="Attack Speed increases when casting Staggering Strike" />
+  <String id="88406213" name="Chained Speed Skating: Staggering Strike" tooltip="Attack Speed increases when casting Staggering Strike" />
+  <String id="88406214" name="Chained Speed Skating: Staggering Strike" tooltip="Attack Speed increases when casting Staggering Strike" />
+  <String id="88406215" name="Chained Speed Skating: Staggering Strike" tooltip="Attack Speed increases when casting Staggering Strike" />
+  <String id="88407101" name="Taunting" tooltip="Aggro increases by $H_W_GOOD$value$COLOR_END through casting the skill." />
+  <String id="88407102" name="Taunting" tooltip="Aggro increases by $H_W_GOOD$value$COLOR_END through casting the skill." />
+  <String id="88407103" name="Taunting" tooltip="Aggro increases by $H_W_GOOD$value$COLOR_END through casting the skill." />
+  <String id="88407104" name="Taunting" tooltip="Aggro increases by $H_W_GOOD$value$COLOR_END through casting the skill." />
+  <String id="88407105" name="Taunting" tooltip="Aggro increases by $H_W_GOOD$value$COLOR_END through casting the skill." />
+  <String id="88407106" name="Taunting" tooltip="Aggro increases by $H_W_GOOD$value$COLOR_END through casting the skill." />
+  <String id="88407107" name="Taunting" tooltip="Aggro increases by $H_W_GOOD$value$COLOR_END through casting the skill." />
+  <String id="88407108" name="Taunting" tooltip="Aggro increases by $H_W_GOOD$value$COLOR_END through casting the skill." />
+  <String id="88407109" name="Taunting" tooltip="Aggro increases by $H_W_GOOD$value$COLOR_END through casting the skill." />
+  <String id="88407110" name="Taunting" tooltip="Aggro increases by $H_W_GOOD$value$COLOR_END through casting the skill." />
+  <String id="88410201" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88410202" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88410203" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88410204" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88410205" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88410206" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88410207" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88410208" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88410209" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88410210" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88410301" name="" tooltip="" />
+  <String id="88410302" name="" tooltip="" />
+  <String id="88410303" name="" tooltip="" />
+  <String id="88410304" name="" tooltip="" />
+  <String id="88410305" name="" tooltip="" />
+  <String id="88410306" name="" tooltip="" />
+  <String id="88410307" name="" tooltip="" />
+  <String id="88410308" name="" tooltip="" />
+  <String id="88410309" name="" tooltip="" />
+  <String id="88410310" name="" tooltip="" />
+  <String id="88424200" name="Reloading Evasive Smash" tooltip="BTS" />
+  <String id="88426101" name="Chained Speed Skating: Leaping Strike" tooltip="Attack Speed increases when casting Leaping Strike" />
+  <String id="88426102" name="Chained Speed Skating: Leaping Strike" tooltip="Attack Speed increases when casting Leaping Strike" />
+  <String id="88426103" name="Chained Speed Skating: Leaping Strike" tooltip="Attack Speed increases when casting Leaping Strike" />
+  <String id="88426104" name="Chained Speed Skating: Leaping Strike" tooltip="Attack Speed increases when casting Leaping Strike" />
+  <String id="88426105" name="Chained Speed Skating: Leaping Strike" tooltip="Attack Speed increases when casting Leaping Strike" />
+  <String id="88426106" name="Chained Speed Skating: Leaping Strike" tooltip="Attack Speed increases when casting Leaping Strike" />
+  <String id="88426107" name="Chained Speed Skating: Leaping Strike" tooltip="Attack Speed increases when casting Leaping Strike" />
+  <String id="88426108" name="Chained Speed Skating: Leaping Strike" tooltip="Attack Speed increases when casting Leaping Strike" />
+  <String id="88426109" name="Chained Speed Skating: Leaping Strike" tooltip="Attack Speed increases when casting Leaping Strike" />
+  <String id="88426110" name="Chained Speed Skating: Leaping Strike" tooltip="Attack Speed increases when casting Leaping Strike" />
+  <String id="88426111" name="Chained Speed Skating: Leaping Strike" tooltip="Attack Speed increases when casting Leaping Strike" />
+  <String id="88426112" name="Chained Speed Skating: Leaping Strike" tooltip="Attack Speed increases when casting Leaping Strike" />
+  <String id="88426113" name="Chained Speed Skating: Leaping Strike" tooltip="Attack Speed increases when casting Leaping Strike" />
+  <String id="88426114" name="Chained Speed Skating: Leaping Strike" tooltip="Attack Speed increases when casting Leaping Strike" />
+  <String id="88426115" name="Chained Speed Skating: Leaping Strike" tooltip="Attack Speed increases when casting Leaping Strike" />
+  <String id="88430200" name="Reloading Axe Counter" tooltip="BTS" />
+  <String id="88500010" name="Burnt Wound" tooltip="Constant damage to HP by $H_W_BAD0.5%$COLOR_END% (max 1000) every second." />
+  <String id="88500100" name="Frostbite" tooltip="Movement Speed decreases by  $H_W_BAD$value$COLOR_END. If the effect stacks up 5 times, Movement Speed decreases dramatically." />
+  <String id="88500150" name="Severe Frostbite" tooltip="Movement Speed decreases by  $H_W_BAD$value$COLOR_END due to multiple Frosbites. Effect ends when knocked down." />
+  <String id="88505101" name="(Hidden) Infusion charge" tooltip="BTS" />
+  <String id="88505102" name="(Hidden) Infusion charge" tooltip="BTS" />
+  <String id="88505103" name="(Hidden) Infusion charge" tooltip="BTS" />
+  <String id="88505104" name="(Hidden) Infusion charge" tooltip="BTS" />
+  <String id="88505105" name="(Hidden) Infusion charge" tooltip="BTS" />
+  <String id="88505106" name="(Hidden) Infusion charge" tooltip="BTS" />
+  <String id="88505107" name="(Hidden) Infusion charge" tooltip="BTS" />
+  <String id="88505108" name="(Hidden) Infusion charge" tooltip="BTS" />
+  <String id="88505109" name="(Hidden) Infusion charge" tooltip="BTS" />
+  <String id="88505110" name="(Hidden) Infusion charge" tooltip="BTS" />
+  <String id="88506201" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88506202" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88506203" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88506204" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88506205" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88506206" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88506207" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88506208" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88506209" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88506210" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88509201" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88509202" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88509203" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88509204" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88509205" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88509206" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88509207" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88509208" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88509209" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88509210" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88509211" name="Recharge" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88509212" name="Recharge" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88509213" name="Recharge" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88509214" name="Recharge" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88509215" name="Recharge" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88509216" name="Recharge" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88509217" name="Recharge" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88509218" name="Recharge" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88509219" name="Recharge" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88509220" name="Recharge" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88510200" name="Reloading Mana Barrier" tooltip="BTS" />
+  <String id="88512100" name="Reloading Void Pulse" tooltip="BTS" />
+  <String id="88514201" name="Chained Speed Skating: Runes" tooltip="Casting speed for Rune skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88514202" name="Chained Speed Skating: Runes" tooltip="Casting speed for Rune skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88514203" name="Chained Speed Skating: Runes" tooltip="Casting speed for Rune skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88514204" name="Chained Speed Skating: Runes" tooltip="Casting speed for Rune skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88514205" name="Chained Speed Skating: Runes" tooltip="Casting speed for Rune skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88514206" name="Chained Speed Skating: Runes" tooltip="Casting speed for Rune skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88514207" name="Chained Speed Skating: Runes" tooltip="Casting speed for Rune skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88514208" name="Chained Speed Skating: Runes" tooltip="Casting speed for Rune skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88514209" name="Chained Speed Skating: Runes" tooltip="Casting speed for Rune skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88514210" name="Chained Speed Skating: Runes" tooltip="Casting speed for Rune skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88514211" name="Chained Speed Skating: Runes" tooltip="Casting speed for Rune skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88514212" name="Chained Speed Skating: Runes" tooltip="Casting speed for Rune skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88514213" name="Chained Speed Skating: Runes" tooltip="Casting speed for Rune skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88514214" name="Chained Speed Skating: Runes" tooltip="Casting speed for Rune skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88514215" name="Chained Speed Skating: Runes" tooltip="Casting speed for Rune skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88524201" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88524202" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88524203" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88524204" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88524205" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88524206" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88524207" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88524208" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88524209" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88524210" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88531101" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88531102" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88531103" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88531104" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88531105" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88531106" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88531107" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88531108" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88531109" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88531110" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88603100" name="(Hidden) Radiant Arrow combo" tooltip="BTS" />
+  <String id="88604201" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88604202" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88604203" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88604204" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88604205" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88604206" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88604207" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88604208" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88604209" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88604210" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88604300" name="Reloading Penetrating Arrow" tooltip="BTS" />
+  <String id="88605101" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88605102" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88605103" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88605104" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88605105" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88605106" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88605107" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88605108" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88605109" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88605110" name="Indomitable" tooltip="Knockdown and stun rates decrease by $H_W_GOOD$value$COLOR_END while casting the skill." />
+  <String id="88605201" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88605202" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88605203" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88605204" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88605205" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88605206" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88605207" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88605208" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88605209" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88605210" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88606100" name="Reloading Backstep" tooltip="BTS" />
+  <String id="88607101" name="Immune to Damage" tooltip="Immune to all attacks. Effect ends when you use a skill." />
+  <String id="88607102" name="Immune to Damage" tooltip="Immune to all attacks. Effect ends when you use a skill." />
+  <String id="88607103" name="Immune to Damage" tooltip="Immune to all attacks. Effect ends when you use a skill." />
+  <String id="88607104" name="Immune to Damage" tooltip="Immune to all attacks. Effect ends when you use a skill." />
+  <String id="88607105" name="Immune to Damage" tooltip="Immune to all attacks. Effect ends when you use a skill." />
+  <String id="88607106" name="Immune to Damage" tooltip="Immune to all attacks. Effect ends when you use a skill." />
+  <String id="88607107" name="Immune to Damage" tooltip="Immune to all attacks. Effect ends when you use a skill." />
+  <String id="88607108" name="Immune to Damage" tooltip="Immune to all attacks. Effect ends when you use a skill." />
+  <String id="88607109" name="Immune to Damage" tooltip="Immune to all attacks. Effect ends when you use a skill." />
+  <String id="88607110" name="Immune to Damage" tooltip="Immune to all attacks. Effect ends when you use a skill." />
+  <String id="88608101" name="Blinding Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88608102" name="Blinding Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88608103" name="Blinding Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88608104" name="Blinding Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88608105" name="Blinding Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88608106" name="Blinding Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88608107" name="Blinding Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88608108" name="Blinding Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88608109" name="Blinding Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88608110" name="Blinding Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88614201" name="Chained Speed Skating: Traps" tooltip="Casting speed for Trap skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88614202" name="Chained Speed Skating: Traps" tooltip="Casting speed for Trap skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88614203" name="Chained Speed Skating: Traps" tooltip="Casting speed for Trap skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88614204" name="Chained Speed Skating: Traps" tooltip="Casting speed for Trap skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88614205" name="Chained Speed Skating: Traps" tooltip="Casting speed for Trap skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88614206" name="Chained Speed Skating: Traps" tooltip="Casting speed for Trap skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88614207" name="Chained Speed Skating: Traps" tooltip="Casting speed for Trap skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88614208" name="Chained Speed Skating: Traps" tooltip="Casting speed for Trap skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88614209" name="Chained Speed Skating: Traps" tooltip="Casting speed for Trap skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88614210" name="Chained Speed Skating: Traps" tooltip="Casting speed for Trap skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88614211" name="Chained Speed Skating: Traps" tooltip="Casting speed for Trap skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88614212" name="Chained Speed Skating: Traps" tooltip="Casting speed for Trap skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88614213" name="Chained Speed Skating: Traps" tooltip="Casting speed for Trap skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88614214" name="Chained Speed Skating: Traps" tooltip="Casting speed for Trap skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88614215" name="Chained Speed Skating: Traps" tooltip="Casting speed for Trap skills increases by  $H_W_GOOD$value$COLOR_END." />
+  <String id="88616100" name="Reloading Breakaway Bolt" tooltip="BTS" />
+  <String id="88618101" name="Breaking Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END when casting Breakaway Bolt." />
+  <String id="88618102" name="Breaking Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END when casting Breakaway Bolt." />
+  <String id="88618103" name="Breaking Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END when casting Breakaway Bolt." />
+  <String id="88618104" name="Breaking Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END when casting Breakaway Bolt." />
+  <String id="88618105" name="Breaking Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END when casting Breakaway Bolt." />
+  <String id="88618106" name="Breaking Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END when casting Breakaway Bolt." />
+  <String id="88618107" name="Breaking Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END when casting Breakaway Bolt." />
+  <String id="88618108" name="Breaking Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END when casting Breakaway Bolt." />
+  <String id="88618109" name="Breaking Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END when casting Breakaway Bolt." />
+  <String id="88618110" name="Breaking Pummel" tooltip="Crit rate increases by $H_W_GOOD$value$COLOR_END when casting Breakaway Bolt." />
+  <String id="88629101" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88629102" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88629103" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88629104" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88629105" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88629106" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88629107" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88629108" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88629109" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88629110" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
+  <String id="88631101" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88631102" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88631103" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88631104" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88631105" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88631106" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88631107" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88631108" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88631109" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88631110" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88631201" name="Spirit of Steel" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88631202" name="Spirit of Steel" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88631203" name="Spirit of Steel" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88631204" name="Spirit of Steel" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88631205" name="Spirit of Steel" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88631206" name="Spirit of Steel" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88631207" name="Spirit of Steel" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88631208" name="Spirit of Steel" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88631209" name="Spirit of Steel" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88631210" name="Spirit of Steel" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88722101" name="(Hidden) Ending Effect" tooltip="BTS" />
+  <String id="88722102" name="(Hidden) Ending Effect" tooltip="BTS" />
+  <String id="88722103" name="(Hidden) Ending Effect" tooltip="BTS" />
+  <String id="88722104" name="(Hidden) Ending Effect" tooltip="BTS" />
+  <String id="88722105" name="(Hidden) Ending Effect" tooltip="BTS" />
+  <String id="88722106" name="(Hidden) Ending Effect" tooltip="BTS" />
+  <String id="88722107" name="(Hidden) Ending Effect" tooltip="BTS" />
+  <String id="88722108" name="(Hidden) Ending Effect" tooltip="BTS" />
+  <String id="88722109" name="(Hidden) Ending Effect" tooltip="BTS" />
+  <String id="88722110" name="(Hidden) Ending Effect" tooltip="BTS" />
+  <String id="88722151" name="Spirit of Iron" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88722152" name="Spirit of Iron" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88722153" name="Spirit of Iron" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88722154" name="Spirit of Iron" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88722155" name="Spirit of Iron" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88722156" name="Spirit of Iron" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88722157" name="Spirit of Iron" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88722158" name="Spirit of Iron" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88722159" name="Spirit of Iron" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88722160" name="Spirit of Iron" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88728201" name="Constant Charge" tooltip="Replenishes MP by $H_W_GOOD$value$COLOR_END every $H_W_GOOD$tickInterval$COLOR_END. Effect ends when knocked down, stunned, or staggered." />
+  <String id="88728202" name="Constant Charge" tooltip="Replenishes MP by $H_W_GOOD$value$COLOR_END every $H_W_GOOD$tickInterval$COLOR_END. Effect ends when knocked down, stunned, or staggered." />
+  <String id="88728203" name="Constant Charge" tooltip="Replenishes MP by $H_W_GOOD$value$COLOR_END every $H_W_GOOD$tickInterval$COLOR_END. Effect ends when knocked down, stunned, or staggered." />
+  <String id="88728204" name="Constant Charge" tooltip="Replenishes MP by $H_W_GOOD$value$COLOR_END every $H_W_GOOD$tickInterval$COLOR_END. Effect ends when knocked down, stunned, or staggered." />
+  <String id="88728205" name="Constant Charge" tooltip="Replenishes MP by $H_W_GOOD$value$COLOR_END every $H_W_GOOD$tickInterval$COLOR_END. Effect ends when knocked down, stunned, or staggered." />
+  <String id="88728206" name="Constant Charge" tooltip="Replenishes MP by $H_W_GOOD$value$COLOR_END every $H_W_GOOD$tickInterval$COLOR_END. Effect ends when knocked down, stunned, or staggered." />
+  <String id="88728207" name="Constant Charge" tooltip="Replenishes MP by $H_W_GOOD$value$COLOR_END every $H_W_GOOD$tickInterval$COLOR_END. Effect ends when knocked down, stunned, or staggered." />
+  <String id="88728208" name="Constant Charge" tooltip="Replenishes MP by $H_W_GOOD$value$COLOR_END every $H_W_GOOD$tickInterval$COLOR_END. Effect ends when knocked down, stunned, or staggered." />
+  <String id="88728209" name="Constant Charge" tooltip="Replenishes MP by $H_W_GOOD$value$COLOR_END every $H_W_GOOD$tickInterval$COLOR_END. Effect ends when knocked down, stunned, or staggered." />
+  <String id="88728210" name="Constant Charge" tooltip="Replenishes MP by $H_W_GOOD$value$COLOR_END every $H_W_GOOD$tickInterval$COLOR_END. Effect ends when knocked down, stunned, or staggered." />
+  <String id="88728211" name="Constant Charge" tooltip="Replenishes MP by $H_W_GOOD$value$COLOR_END every $H_W_GOOD$tickInterval$COLOR_END. Effect ends when knocked down, stunned, or staggered." />
+  <String id="88728212" name="Constant Charge" tooltip="Replenishes MP by $H_W_GOOD$value$COLOR_END every $H_W_GOOD$tickInterval$COLOR_END. Effect ends when knocked down, stunned, or staggered." />
+  <String id="88728213" name="Constant Charge" tooltip="Replenishes MP by $H_W_GOOD$value$COLOR_END every $H_W_GOOD$tickInterval$COLOR_END. Effect ends when knocked down, stunned, or staggered." />
+  <String id="88728214" name="Constant Charge" tooltip="Replenishes MP by $H_W_GOOD$value$COLOR_END every $H_W_GOOD$tickInterval$COLOR_END. Effect ends when knocked down, stunned, or staggered." />
+  <String id="88728215" name="Constant Charge" tooltip="Replenishes MP by $H_W_GOOD$value$COLOR_END every $H_W_GOOD$tickInterval$COLOR_END. Effect ends when knocked down, stunned, or staggered." />
+  <String id="88729100" name="(Hidden) Triple Nemesis 2 hits" tooltip="BTS" />
+  <String id="88729110" name="(Hidden) Triple Nemesis 1 hit" tooltip="BTS" />
+  <String id="88733100" name="Reloading Ishara's Lullaby" tooltip="BTS" />
+  <String id="88733201" name="(Hidden) Ending Effect in TimeOut" tooltip="BTS" />
+  <String id="88733202" name="(Hidden) Ending Effect in TimeOut" tooltip="BTS" />
+  <String id="88733203" name="(Hidden) Ending Effect in TimeOut" tooltip="BTS" />
+  <String id="88733204" name="(Hidden) Ending Effect in TimeOut" tooltip="BTS" />
+  <String id="88733205" name="(Hidden) Ending Effect in TimeOut" tooltip="BTS" />
+  <String id="88733206" name="(Hidden) Ending Effect in TimeOut" tooltip="BTS" />
+  <String id="88733207" name="(Hidden) Ending Effect in TimeOut" tooltip="BTS" />
+  <String id="88733208" name="(Hidden) Ending Effect in TimeOut" tooltip="BTS" />
+  <String id="88733209" name="(Hidden) Ending Effect in TimeOut" tooltip="BTS" />
+  <String id="88733210" name="(Hidden) Ending Effect in TimeOut" tooltip="BTS" />
+  <String id="88733221" name="Nightmare" tooltip="BTS" />
+  <String id="88733222" name="Nightmare" tooltip="BTS" />
+  <String id="88733223" name="Nightmare" tooltip="BTS" />
+  <String id="88733224" name="Nightmare" tooltip="BTS" />
+  <String id="88733225" name="Nightmare" tooltip="BTS" />
+  <String id="88733226" name="Nightmare" tooltip="BTS" />
+  <String id="88733227" name="Nightmare" tooltip="BTS" />
+  <String id="88733228" name="Nightmare" tooltip="BTS" />
+  <String id="88733229" name="Nightmare" tooltip="BTS" />
+  <String id="88733230" name="Nightmare" tooltip="BTS" />
+  <String id="88733251" name="Aftermath of Nightmare: Stage 1" tooltip="Movement Speed constantly decreases by $H_W_BAD1%$COLOR_END and HP constantly decreases by $H_W_BAD0.5%$COLOR_END (max 1000)" />
+  <String id="88733252" name="Aftermath of Nightmare: Stage 2" tooltip="Movement Speed constantly decreases by $H_W_BAD2%$COLOR_END and HP constantly decreases by $H_W_BAD0.7%$COLOR_END (max 1000)" />
+  <String id="88733253" name="Aftermath of Nightmare: Stage 3" tooltip="Movement Speed constantly decreases by $H_W_BAD3%$COLOR_END and HP constantly decreases by $H_W_BAD0.9%$COLOR_END (max 1000)" />
+  <String id="88733254" name="Aftermath of Nightmare: Stage 4" tooltip="Movement Speed constantly decreases by $H_W_BAD4%$COLOR_END and HP constantly decreases by $H_W_BAD1.1%$COLOR_END (max 1000)" />
+  <String id="88733255" name="Aftermath of Nightmare: Stage 5" tooltip="Movement Speed constantly decreases by $H_W_BAD5%$COLOR_END and HP constantly decreases by $H_W_BAD1.3%$COLOR_END (max 1000)" />
+  <String id="88733256" name="Aftermath of Nightmare: Stage 6" tooltip="Movement Speed constantly decreases by $H_W_BAD6%$COLOR_END and HP constantly decreases by $H_W_BAD1.5%$COLOR_END (max 1000)" />
+  <String id="88733257" name="Aftermath of Nightmare: Stage 7" tooltip="Movement Speed constantly decreases by $H_W_BAD7%$COLOR_END and HP constantly decreases by $H_W_BAD1.7%$COLOR_END (max 1000)" />
+  <String id="88733258" name="Aftermath of Nightmare: Stage 8" tooltip="Movement Speed constantly decreases by $H_W_BAD8%$COLOR_END and HP constantly decreases by $H_W_BAD1.9%$COLOR_END (max 1000)" />
+  <String id="88733259" name="Aftermath of Nightmare: Stage 9" tooltip="Movement Speed constantly decreases by $H_W_BAD9%$COLOR_END and HP constantly decreases by $H_W_BAD2%$COLOR_END (max 1000)" />
+  <String id="88733260" name="Aftermath of Nightmare: Stage 10" tooltip="Movement Speed constantly decreases by $H_W_BAD10%$COLOR_END and HP constantly decreases by $H_W_BAD2%$COLOR_END (max 1000)" />
+  <String id="88802201" name="Sloth" tooltip="Your energy has been absorbed by the enemy when your HP was low. Movement Speed decreases. Effect ends when knocked down or attacked." />
+  <String id="88802202" name="Sloth" tooltip="Your energy has been absorbed by the enemy when your HP was low. Movement Speed decreases. Effect ends when knocked down or attacked." />
+  <String id="88802203" name="Sloth" tooltip="Your energy has been absorbed by the enemy when your HP was low. Movement Speed decreases. Effect ends when knocked down or attacked." />
+  <String id="88802204" name="Sloth" tooltip="Your energy has been absorbed by the enemy when your HP was low. Movement Speed decreases. Effect ends when knocked down or attacked." />
+  <String id="88802205" name="Sloth" tooltip="Your energy has been absorbed by the enemy when your HP was low. Movement Speed decreases. Effect ends when knocked down or attacked." />
+  <String id="88802206" name="Sloth" tooltip="Your energy has been absorbed by the enemy when your HP was low. Movement Speed decreases. Effect ends when knocked down or attacked." />
+  <String id="88802207" name="Sloth" tooltip="Your energy has been absorbed by the enemy when your HP was low. Movement Speed decreases. Effect ends when knocked down or attacked." />
+  <String id="88802208" name="Sloth" tooltip="Your energy has been absorbed by the enemy when your HP was low. Movement Speed decreases. Effect ends when knocked down or attacked." />
+  <String id="88802209" name="Sloth" tooltip="Your energy has been absorbed by the enemy when your HP was low. Movement Speed decreases. Effect ends when knocked down or attacked." />
+  <String id="88802210" name="Sloth" tooltip="Your energy has been absorbed by the enemy when your HP was low. Movement Speed decreases. Effect ends when knocked down or attacked." />
+  <String id="88808100" name="Reloading Metamorphic Smite" tooltip="BTS" />
+  <String id="88812100" name="Reloading Vow of Rebirth" tooltip="BTS" />
+  <String id="88823101" name="Fortified Metamorphic Blast" tooltip="Damage of Metamorphic Blast increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="88823102" name="Fortified Metamorphic Blast" tooltip="Damage of Metamorphic Blast increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="88823103" name="Fortified Metamorphic Blast" tooltip="Damage of Metamorphic Blast increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="88823104" name="Fortified Metamorphic Blast" tooltip="Damage of Metamorphic Blast increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="88823105" name="Fortified Metamorphic Blast" tooltip="Damage of Metamorphic Blast increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="88825101" name="(Hidden) Mystic Synergy for allies" tooltip="BTS" />
+  <String id="88825102" name="(Hidden) Mystic Synergy for allies" tooltip="BTS" />
+  <String id="88825103" name="(Hidden) Mystic Synergy for allies" tooltip="BTS" />
+  <String id="88825104" name="(Hidden) Mystic Synergy for allies" tooltip="BTS" />
+  <String id="88825105" name="(Hidden) Mystic Synergy for allies" tooltip="BTS" />
+  <String id="88825106" name="(Hidden) Mystic Synergy for allies" tooltip="BTS" />
+  <String id="88825107" name="(Hidden) Mystic Synergy for allies" tooltip="BTS" />
+  <String id="88825108" name="(Hidden) Mystic Synergy for allies" tooltip="BTS" />
+  <String id="88825109" name="(Hidden) Mystic Synergy for allies" tooltip="BTS" />
+  <String id="88825110" name="(Hidden) Mystic Synergy for allies" tooltip="BTS" />
+  <String id="88825201" name="(Hidden) Damage share for allies" tooltip="BTS" />
+  <String id="88825202" name="(Hidden) Damage share for allies" tooltip="BTS" />
+  <String id="88825203" name="(Hidden) Damage share for allies" tooltip="BTS" />
+  <String id="88825204" name="(Hidden) Damage share for allies" tooltip="BTS" />
+  <String id="88825205" name="(Hidden) Damage share for allies" tooltip="BTS" />
+  <String id="88825206" name="(Hidden) Damage share for allies" tooltip="BTS" />
+  <String id="88825207" name="(Hidden) Damage share for allies" tooltip="BTS" />
+  <String id="88825208" name="(Hidden) Damage share for allies" tooltip="BTS" />
+  <String id="88825209" name="(Hidden) Damage share for allies" tooltip="BTS" />
+  <String id="88825210" name="(Hidden) Damage share for allies" tooltip="BTS" />
+  <String id="88825251" name="Spirit of Iron" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88825252" name="Spirit of Iron" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88825253" name="Spirit of Iron" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88825254" name="Spirit of Iron" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88825255" name="Spirit of Iron" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88825256" name="Spirit of Iron" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88825257" name="Spirit of Iron" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88825258" name="Spirit of Iron" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88825259" name="Spirit of Iron" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88825260" name="Spirit of Iron" tooltip="Endurance increases by $H_W_GOOD$value$COLOR_END. Effect ends when knocked down." />
+  <String id="88827101" name="(Hidden) Protection for Thrall of Life for allies" tooltip="BTS" />
+  <String id="88827102" name="(Hidden) Protection for Thrall of Life for allies" tooltip="BTS" />
+  <String id="88827103" name="(Hidden) Protection for Thrall of Life for allies" tooltip="BTS" />
+  <String id="88827104" name="(Hidden) Protection for Thrall of Life for allies" tooltip="BTS" />
+  <String id="88827105" name="(Hidden) Protection for Thrall of Life for allies" tooltip="BTS" />
+  <String id="88827200" name="(Hidden) Thrall of Life ended " tooltip="BTS" />
+  <String id="88827210" name="(Hidden) Thrall of Life ended  for allies" tooltip="BTS" />
+  <String id="88827220" name="Blessed Health" tooltip="Provides HP restoration of $H_W_GOOD$value$COLOR_END HP per second." />
+  <String id="88829101" name="Broken Spirit" tooltip="MP decreases by $H_W_BAD$value$COLOR_END every second. Knockdown, stun, or stagger cancel the effect." />
+  <String id="88829102" name="Broken Spirit" tooltip="MP decreases by $H_W_BAD$value$COLOR_END every second. Knockdown, stun, or stagger cancel the effect." />
+  <String id="88829103" name="Broken Spirit" tooltip="MP decreases by $H_W_BAD$value$COLOR_END every second. Knockdown, stun, or stagger cancel the effect." />
+  <String id="88829104" name="Broken Spirit" tooltip="MP decreases by $H_W_BAD$value$COLOR_END every second. Knockdown, stun, or stagger cancel the effect." />
+  <String id="88829105" name="Broken Spirit" tooltip="MP decreases by $H_W_BAD$value$COLOR_END every second. Knockdown, stun, or stagger cancel the effect." />
+  <String id="88829106" name="Broken Spirit" tooltip="MP decreases by $H_W_BAD$value$COLOR_END every second. Knockdown, stun, or stagger cancel the effect." />
+  <String id="88829107" name="Broken Spirit" tooltip="MP decreases by $H_W_BAD$value$COLOR_END every second. Knockdown, stun, or stagger cancel the effect." />
+  <String id="88829108" name="Broken Spirit" tooltip="MP decreases by $H_W_BAD$value$COLOR_END every second. Knockdown, stun, or stagger cancel the effect." />
+  <String id="88829109" name="Broken Spirit" tooltip="MP decreases by $H_W_BAD$value$COLOR_END every second. Knockdown, stun, or stagger cancel the effect." />
+  <String id="88829110" name="Broken Spirit" tooltip="MP decreases by $H_W_BAD$value$COLOR_END every second. Knockdown, stun, or stagger cancel the effect." />
+  <String id="88829201" name="Curse of Death" tooltip="Healing decreases by $H_W_BAD$value$COLOR_END." />
+  <String id="88829202" name="Curse of Death" tooltip="Healing decreases by $H_W_BAD$value$COLOR_END." />
+  <String id="88829203" name="Curse of Death" tooltip="Healing decreases by $H_W_BAD$value$COLOR_END." />
+  <String id="88829204" name="Curse of Death" tooltip="Healing decreases by $H_W_BAD$value$COLOR_END." />
+  <String id="88829205" name="Curse of Death" tooltip="Healing decreases by $H_W_BAD$value$COLOR_END." />
+  <String id="88837101" name="(Hidden) Combat Speed Up for allies" tooltip="BTS" />
+  <String id="88837102" name="(Hidden) Combat Speed Up for allies" tooltip="BTS" />
+  <String id="88837103" name="(Hidden) Combat Speed Up for allies" tooltip="BTS" />
+  <String id="88837104" name="(Hidden) Combat Speed Up for allies" tooltip="BTS" />
+  <String id="88837105" name="(Hidden) Combat Speed Up for allies" tooltip="BTS" />
+  <String id="88837106" name="(Hidden) Combat Speed Up for allies" tooltip="BTS" />
+  <String id="88837107" name="(Hidden) Combat Speed Up for allies" tooltip="BTS" />
+  <String id="88837201" name="(Hidden) Charging for allies" tooltip="BTS" />
+  <String id="88837202" name="(Hidden) Charging for allies" tooltip="BTS" />
+  <String id="88837203" name="(Hidden) Charging for allies" tooltip="BTS" />
+  <String id="88837204" name="(Hidden) Charging for allies" tooltip="BTS" />
+  <String id="88837205" name="(Hidden) Charging for allies" tooltip="BTS" />
+  <String id="88837206" name="(Hidden) Charging for allies" tooltip="BTS" />
+  <String id="88837207" name="(Hidden) Charging for allies" tooltip="BTS" />
+  <String id="88837208" name="(Hidden) Charging for allies" tooltip="BTS" />
+  <String id="88837209" name="(Hidden) Charging for allies" tooltip="BTS" />
+  <String id="88837210" name="(Hidden) Charging for allies" tooltip="BTS" />
+  <String id="88837251" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88837252" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88837253" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88837254" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88837255" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88837256" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88837257" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88837258" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88837259" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="88837260" name="Charging" tooltip="Constantly replenishes MP every second by $H_W_GOOD$value$COLOR_END MP. Effect ends when attacked." />
+  <String id="89003100" name="Reloading Sundering Strike" tooltip="BTS" />
+  <String id="89010100" name="Reloading Pendulum Strike" tooltip="BTS" />
+  <String id="89011301" name="(Hidden) Shadow Lash 1 hit" tooltip="BTS" />
+  <String id="89011302" name="(Hidden) Shadow Lash 2 hits" tooltip="BTS" />
+  <String id="89011303" name="(Hidden) Shadow Lash 3 hits" tooltip="BTS" />
+  <String id="89011311" name="Critical Pummel" tooltip="Crit Chance increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89011312" name="Critical Pummel" tooltip="Crit Chance increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89011313" name="Critical Pummel" tooltip="Crit Chance increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89011314" name="Critical Pummel" tooltip="Crit Chance increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89011315" name="Critical Pummel" tooltip="Crit Chance increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89011316" name="Critical Pummel" tooltip="Crit Chance increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89011317" name="Critical Pummel" tooltip="Crit Chance increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89011318" name="Critical Pummel" tooltip="Crit Chance increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89011319" name="Critical Pummel" tooltip="Crit Chance increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89011320" name="Critical Pummel" tooltip="Crit Chance increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89011321" name="Critical Pummel" tooltip="Crit Chance increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89011322" name="Critical Pummel" tooltip="Crit Chance increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89011323" name="Critical Pummel" tooltip="Crit Chance increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89011324" name="Critical Pummel" tooltip="Crit Chance increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89011325" name="Critical Pummel" tooltip="Crit Chance increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89015100" name="Reloading Retribution" tooltip="BTS" />
+  <String id="89016101" name="Dark Force" tooltip="Effect stacks up when attacking. " />
+  <String id="89016102" name="Dark Force" tooltip="Effect stacks up when attacking. " />
+  <String id="89016103" name="Dark Force" tooltip="Effect stacks up when attacking. " />
+  <String id="89016104" name="Dark Force" tooltip="Effect stacks up when attacking. " />
+  <String id="89016105" name="Dark Force" tooltip="Effect stacks up when attacking. " />
+  <String id="89016106" name="Dark Force" tooltip="Effect stacks up when attacking. " />
+  <String id="89016107" name="Dark Force" tooltip="Effect stacks up when attacking. " />
+  <String id="89016108" name="Dark Force" tooltip="Effect stacks up when attacking. " />
+  <String id="89016109" name="Dark Force" tooltip="Effect stacks up when attacking. " />
+  <String id="89016110" name="Dark Force" tooltip="Effect stacks up when attacking. " />
+  <String id="89016111" name="Dark Force" tooltip="Effect stacks up when attacking. " />
+  <String id="89016112" name="Dark Force" tooltip="Effect stacks up when attacking. " />
+  <String id="89016113" name="Dark Force" tooltip="Effect stacks up when attacking. " />
+  <String id="89016114" name="Dark Force" tooltip="Effect stacks up when attacking. " />
+  <String id="89016115" name="Dark Force" tooltip="Effect stacks up when attacking. " />
+  <String id="89016116" name="Dark Force" tooltip="Effect stacks up when attacking. " />
+  <String id="89016117" name="Dark Force" tooltip="Effect stacks up when attacking. " />
+  <String id="89016118" name="Dark Force" tooltip="Effect stacks up when attacking. " />
+  <String id="89016119" name="Dark Force" tooltip="Effect stacks up when attacking. " />
+  <String id="89016120" name="Dark Force" tooltip="Effect stacks up when attacking. " />
+  <String id="89020201" name="Chained Speed Skating: Shadow Burst" tooltip="Attack Speed increases when casting Shadow Burst" />
+  <String id="89020202" name="Chained Speed Skating: Shadow Burst" tooltip="Attack Speed increases when casting Shadow Burst" />
+  <String id="89020203" name="Chained Speed Skating: Shadow Burst" tooltip="Attack Speed increases when casting Shadow Burst" />
+  <String id="89020204" name="Chained Speed Skating: Shadow Burst" tooltip="Attack Speed increases when casting Shadow Burst" />
+  <String id="89020205" name="Chained Speed Skating: Shadow Burst" tooltip="Attack Speed increases when casting Shadow Burst" />
+  <String id="89020206" name="Chained Speed Skating: Shadow Burst" tooltip="Attack Speed increases when casting Shadow Burst" />
+  <String id="89020207" name="Chained Speed Skating: Shadow Burst" tooltip="Attack Speed increases when casting Shadow Burst" />
+  <String id="89020208" name="Chained Speed Skating: Shadow Burst" tooltip="Attack Speed increases when casting Shadow Burst" />
+  <String id="89020209" name="Chained Speed Skating: Shadow Burst" tooltip="Attack Speed increases when casting Shadow Burst" />
+  <String id="89020210" name="Chained Speed Skating: Shadow Burst" tooltip="Attack Speed increases when casting Shadow Burst" />
+  <String id="89103100" name="Reloading Replenishment" tooltip="BTS" />
+  <String id="89105101" name="Reloading Scattershot" tooltip="Effect stacks up when attacking. Effect ends when resisting." />
+  <String id="89105102" name="Blinding Force" tooltip="Effect stacks up when attacking. Effect ends when resisting." />
+  <String id="89105103" name="Blinding Force" tooltip="Effect stacks up when attacking. Effect ends when resisting." />
+  <String id="89105104" name="Blinding Force" tooltip="Effect stacks up when attacking. Effect ends when resisting." />
+  <String id="89105105" name="Blinding Force" tooltip="Effect stacks up when attacking. Effect ends when resisting." />
+  <String id="89105106" name="Blinding Force" tooltip="Effect stacks up when attacking. Effect ends when resisting." />
+  <String id="89105107" name="Blinding Force" tooltip="Effect stacks up when attacking. Effect ends when resisting." />
+  <String id="89105108" name="Blinding Force" tooltip="Effect stacks up when attacking. Effect ends when resisting." />
+  <String id="89105109" name="Blinding Force" tooltip="Effect stacks up when attacking. Effect ends when resisting." />
+  <String id="89105110" name="Blinding Force" tooltip="Effect stacks up when attacking. Effect ends when resisting." />
+  <String id="89105111" name="Blinding Force" tooltip="Effect stacks up when attacking. Effect ends when resisting." />
+  <String id="89105112" name="Blinding Force" tooltip="Effect stacks up when attacking. Effect ends when resisting." />
+  <String id="89105113" name="Blinding Force" tooltip="Effect stacks up when attacking. Effect ends when resisting." />
+  <String id="89105114" name="Blinding Force" tooltip="Effect stacks up when attacking. Effect ends when resisting." />
+  <String id="89105115" name="Blinding Force" tooltip="Effect stacks up when attacking. Effect ends when resisting." />
+  <String id="89105116" name="Blinding Force" tooltip="Effect stacks up when attacking. Effect ends when resisting." />
+  <String id="89105117" name="Blinding Force" tooltip="Effect stacks up when attacking. Effect ends when resisting." />
+  <String id="89105118" name="Blinding Force" tooltip="Effect stacks up when attacking. Effect ends when resisting." />
+  <String id="89105119" name="Blinding Force" tooltip="Effect stacks up when attacking. Effect ends when resisting." />
+  <String id="89105120" name="Blinding Force" tooltip="Effect stacks up when attacking. Effect ends when resisting." />
+  <String id="89107200" name="Blinding Force" tooltip="BTS" />
+  <String id="89111100" name="Reloading Arcane Barrage" tooltip="BTS" />
+  <String id="89200001" name="Reloading Super Rocket Jump" tooltip="BTS" />
+  <String id="89203100" name="(Hidden)Perfect Defense" tooltip="BTS" />
+  <String id="89207100" name="Reloading Enraged Heavenway (Defense) " tooltip="BTS" />
+  <String id="89210100" name="Reloading Roundhouse Kick" tooltip="100% of Crit Chance" />
+  <String id="89216101" name=" Counter chained with Flip Kick " tooltip="Attack Damage of next skill increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89216102" name=" Counter chained with Flip Kick " tooltip="Attack Damage of next skill increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89216103" name=" Counter chained with Flip Kick " tooltip="Attack Damage of next skill increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89216104" name=" Counter chained with Flip Kick " tooltip="Attack Damage of next skill increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89216105" name=" Counter chained with Flip Kick " tooltip="Attack Damage of next skill increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89216106" name=" Counter chained with Flip Kick " tooltip="Attack Damage of next skill increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89216107" name=" Counter chained with Flip Kick " tooltip="Attack Damage of next skill increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89216108" name=" Counter chained with Flip Kick " tooltip="Attack Damage of next skill increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89216109" name=" Counter chained with Flip Kick " tooltip="Attack Damage of next skill increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89216110" name=" Counter chained with Flip Kick " tooltip="Attack Damage of next skill increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89216111" name=" Counter chained with Flip Kick " tooltip="Attack Damage of next skill increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89216112" name=" Counter chained with Flip Kick " tooltip="Attack Damage of next skill increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89216113" name=" Counter chained with Flip Kick " tooltip="Attack Damage of next skill increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89216114" name=" Counter chained with Flip Kick " tooltip="Attack Damage of next skill increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89216115" name=" Counter chained with Flip Kick " tooltip="Attack Damage of next skill increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89216116" name=" Counter chained with Flip Kick " tooltip="Attack Damage of next skill increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89216117" name=" Counter chained with Flip Kick " tooltip="Attack Damage of next skill increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89216118" name=" Counter chained with Flip Kick " tooltip="Attack Damage of next skill increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89216119" name=" Counter chained with Flip Kick " tooltip="Attack Damage of next skill increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89216120" name=" Counter chained with Flip Kick " tooltip="Attack Damage of next skill increases by $H_W_GOOD$value$COLOR_END." />
+  <String id="89217101" name="Powerful Counter" tooltip="Power increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="89217102" name="Powerful Counter" tooltip="Power increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="89217103" name="Powerful Counter" tooltip="Power increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="89217104" name="Powerful Counter" tooltip="Power increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="89217105" name="Powerful Counter" tooltip="Power increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="89217106" name="Powerful Counter" tooltip="Power increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="89217107" name="Powerful Counter" tooltip="Power increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="89217108" name="Powerful Counter" tooltip="Power increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="89217109" name="Powerful Counter" tooltip="Power increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="89217110" name="Powerful Counter" tooltip="Power increases by $H_W_GOOD$value$COLOR_END. Knockdown cancels the effect." />
+  <String id="89221100" name="Recovering EP Rage" tooltip="BTS" />
+  <String id="89303100" name="More Leaves on the Wind" tooltip="BTS" />
+  <String id="89308100" name="Burning Blood" tooltip="Decreases HP by $H_W_BAD0.5%$COLOR_END every second, to a maximum of 1000." />
+  <String id="89308201" name="Steel Resolve" tooltip="Decreases damage taken from attacks by $H_W_GOOD$value$COLOR_END while casting. Effect ends when knocked-down." />
+  <String id="89308202" name="Steel Resolve" tooltip="Decreases damage taken from attacks by $H_W_GOOD$value$COLOR_END while casting. Effect ends when knocked-down." />
+  <String id="89308203" name="Steel Resolve" tooltip="Decreases damage taken from attacks by $H_W_GOOD$value$COLOR_END while casting. Effect ends when knocked-down." />
+  <String id="89308204" name="Steel Resolve" tooltip="Decreases damage taken from attacks by $H_W_GOOD$value$COLOR_END while casting. Effect ends when knocked-down." />
+  <String id="89308205" name="Steel Resolve" tooltip="Decreases damage taken from attacks by $H_W_GOOD$value$COLOR_END while casting. Effect ends when knocked-down." />
+  <String id="89308206" name="Steel Resolve" tooltip="Decreases damage taken from attacks by $H_W_GOOD$value$COLOR_END while casting. Effect ends when knocked-down." />
+  <String id="89308207" name="Steel Resolve" tooltip="Decreases damage taken from attacks by $H_W_GOOD$value$COLOR_END while casting. Effect ends when knocked-down." />
+  <String id="89308208" name="Steel Resolve" tooltip="Decreases damage taken from attacks by $H_W_GOOD$value$COLOR_END while casting. Effect ends when knocked-down." />
+  <String id="89308209" name="Steel Resolve" tooltip="Decreases damage taken from attacks by $H_W_GOOD$value$COLOR_END while casting. Effect ends when knocked-down." />
+  <String id="89308210" name="Steel Resolve" tooltip="Decreases damage taken from attacks by $H_W_GOOD$value$COLOR_END while casting. Effect ends when knocked-down." />
+  <String id="89309001" name="(Hidden) Ninja Protection for allies" tooltip="BTS" />
+  <String id="89309002" name="(Hidden) Ninja Protection for allies" tooltip="BTS" />
+  <String id="89309003" name="(Hidden) Ninja Protection for allies" tooltip="BTS" />
+  <String id="89309004" name="(Hidden) Ninja Protection for allies" tooltip="BTS" />
+  <String id="89309005" name="(Hidden) Ninja Protection for allies" tooltip="BTS" />
+  <String id="89312200" name="Atunement" tooltip="BTS" />
+  <String id="89312211" name="(Hidden) Ninja Chakra Restoration Stack" tooltip="BTS" />
+  <String id="89314100" name="Minor Bleeding" tooltip="Decreases HP by $H_W_BAD0.2%$COLOR_END every second, to a maximum of 400." />
+  <String id="89314201" name="Double Cut" tooltip="Stacks up to five times." />
+  <String id="89314202" name="Double Cut" tooltip="Stacks up to five times." />
+  <String id="89314203" name="Double Cut" tooltip="Stacks up to five times." />
+  <String id="89314204" name="Double Cut" tooltip="Stacks up to five times." />
+  <String id="89314205" name="Double Cut" tooltip="Stacks up to five times." />
+  <String id="89314206" name="Double Cut" tooltip="Stacks up to five times." />
+  <String id="89314207" name="Double Cut" tooltip="Stacks up to five times." />
+  <String id="89314208" name="Double Cut" tooltip="Stacks up to five times." />
+  <String id="89314209" name="Double Cut" tooltip="Stacks up to five times." />
+  <String id="89314210" name="Double Cut" tooltip="Stacks up to five times." />
+  <String id="89314211" name="Double Cut" tooltip="Stacks up to five times." />
+  <String id="89314212" name="Double Cut" tooltip="Stacks up to five times." />
+  <String id="89314213" name="Double Cut" tooltip="Stacks up to five times." />
+  <String id="89314214" name="Double Cut" tooltip="Stacks up to five times." />
+  <String id="89314215" name="Double Cut" tooltip="Stacks up to five times." />
+  <String id="89314216" name="Double Cut" tooltip="Stacks up to five times." />
+  <String id="89314217" name="Double Cut" tooltip="Stacks up to five times." />
+  <String id="89314218" name="Double Cut" tooltip="Stacks up to five times." />
+  <String id="89314219" name="Double Cut" tooltip="Stacks up to five times." />
+  <String id="89314220" name="Double Cut" tooltip="Stacks up to five times." />
+  <String id="89317000" name="Chi Restoration" tooltip="BTS" />
+</StrSheet_Abnormality>

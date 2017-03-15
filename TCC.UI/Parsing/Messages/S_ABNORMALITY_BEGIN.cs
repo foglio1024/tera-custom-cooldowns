@@ -15,13 +15,16 @@ namespace TCC.Messages
         public ulong casterId;
         public uint id;
         public int duration;
-        
+        public int stacks;
+
         public S_ABNORMALITY_BEGIN(TeraMessageReader reader) : base(reader)
         {
             targetId = reader.ReadUInt64();
             casterId = reader.ReadUInt64();
             id = reader.ReadUInt32();
             duration = reader.ReadInt32();
+            reader.Skip(4);
+            stacks = reader.ReadInt32();
         }
     }
 }

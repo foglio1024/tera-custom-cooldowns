@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TCC.Data;
 using TCC.Messages;
 using TCC.Parsing.Messages;
 using Tera.Game;
@@ -14,7 +15,7 @@ namespace TCC.Parsing
     public delegate void ParsedMessageEventHandler(Tera.Game.Messages.ParsedMessage p);
     public delegate void EmptyPacketEventHandler();
     public delegate void UpdateIntStatEventHandler(int statValue);
-    public delegate void UpdateFloatStatEventHandler(double statValue);
+    public delegate void UpdateFloatStatEventHandler(float statValue);
     public delegate void UpdateStatWithIdEventHandler(ulong id, object statValue);
     public delegate void MessageEventHandler(Tera.Message msg);
 
@@ -46,7 +47,7 @@ namespace TCC.Parsing
         public static event UpdateIntStatEventHandler MaxMPUpdated;
         public static event UpdateIntStatEventHandler MaxSTUpdated;
 
-        public static event UpdateIntStatEventHandler HPUpdated;
+        public static event UpdateFloatStatEventHandler HPUpdated;
         public static event UpdateIntStatEventHandler MPUpdated;
         public static event UpdateIntStatEventHandler STUpdated;
 
@@ -144,6 +145,9 @@ namespace TCC.Parsing
                 case ("S_NPC_STATUS"):
                     HandleNpcStatusChanged(new S_NPC_STATUS(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
                     break;
+                case ("S_DESPAWN_NPC"):
+                    HandlerNpcDespawn(new S_DESPAWN_NPC(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
+                    break;
                 case ("S_SPAWN_ME"):
                     HandleSpawn();
                     break;
@@ -163,13 +167,12 @@ namespace TCC.Parsing
 
         static void HandleCharLogin(S_LOGIN p)
         {
-            var sLogin = (S_LOGIN)p;
             SessionManager.Logged = true;
-            SessionManager.CurrentClass = sLogin.CharacterClass;
-            SessionManager.CurrentCharId = sLogin.entityId;
-            SessionManager.CurrentCharName = sLogin.Name;
-            SessionManager.CurrentLaurel = CLP.GetLaurelFromName(sLogin.Name);
-            SessionManager.CurrentLevel = (int)sLogin.Level;
+            SessionManager.CurrentClass = p.CharacterClass;
+            SessionManager.CurrentCharId = p.entityId;
+            SessionManager.CurrentCharName = p.Name;
+            SessionManager.CurrentLaurel = CLP.GetLaurelFromName(p.Name);
+            SessionManager.CurrentLevel = (int)p.Level;
             WindowManager.SetCharInfo();
             switch (SessionManager.CurrentClass)
             {
@@ -203,13 +206,11 @@ namespace TCC.Parsing
         }
         static void HandleNewSkillCooldown(S_START_COOLTIME_SKILL p)
         {
-            var sStartCooltimeSkill = (TCC.Messages.S_START_COOLTIME_SKILL)p;
-
-            SkillManager.AddSkill(sStartCooltimeSkill);
+            SkillManager.AddSkill(p);
             switch (SessionManager.CurrentClass)
             {
                 case Class.Warrior:
-                    Warrior.CheckWarriorsSkillCooldown(sStartCooltimeSkill);
+                    Warrior.CheckWarriorsSkillCooldown(p);
                     break;
                 default:
                     break;
@@ -217,13 +218,11 @@ namespace TCC.Parsing
         }
         static void HandleNewItemCooldown(S_START_COOLTIME_ITEM p)
         {
-            var sStartCooltimeItem = (S_START_COOLTIME_ITEM)p;
-            SkillManager.AddBrooch(sStartCooltimeItem);
+            SkillManager.AddBrooch(p);
         }
         static void HandleDecreaseSkillCooldown(S_DECREASE_COOLTIME_SKILL p)
         {
-            var sDecreaseCooltimeSkill = (S_DECREASE_COOLTIME_SKILL)p;
-            SkillManager.ChangeSkillCooldown(sDecreaseCooltimeSkill);
+            SkillManager.ChangeSkillCooldown(p);
         }
         static void HandleReturnToLobby()
         {
@@ -233,97 +232,130 @@ namespace TCC.Parsing
         }
         static void HandleAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
-            var sAbnormalityBegin = (S_ABNORMALITY_BEGIN)p;
             switch (SessionManager.CurrentClass)
             {
                 case Class.Warrior:
-                    Warrior.CheckGambleBuff(sAbnormalityBegin);
+                    Warrior.CheckGambleBuff(p);
                     break;
                 case Class.Elementalist:
-                    Mystic.CheckHurricane(sAbnormalityBegin);
+                    Mystic.CheckHurricane(p);
                     break;
                 default:
                     break;
             }
+            if(SessionManager.CurrentBosses.Where(x => x.EntityId == p.targetId).Count() > 0)
+            {
+                if(AbnormalityDatabase.TryGetAbnormality(p.id, out Abnormality ab))
+                {
+                    App.Current.Dispatcher.Invoke(() =>
+                    {
+                        if (SessionManager.CurrentBosses.Where(x => x.EntityId == p.targetId).First().Buffs.Where(x => x.Buff.Id == p.id).Count() > 0)
+                        {
+                            Console.WriteLine("{0} already present, skipping", ab.Name);
+                            return;
+                        }
+                        else
+                        {
+                            SessionManager.CurrentBosses.Where(x => x.EntityId == p.targetId).First().Buffs.Add(new BuffDuration(ab, p.duration, p.stacks));
+                            Console.WriteLine("Added {0} to {1}", ab.Name, SessionManager.CurrentBosses.Where(x => x.EntityId == p.targetId).First().Name);
+                        }
+                    });
+                }
+            }
         }
+
+
+
         static void HandlePlayerStatUpdate(S_PLAYER_STAT_UPDATE p)
         {
-            var sPlayerStatUpdate = (TCC.Messages.S_PLAYER_STAT_UPDATE)p;
-
             switch (SessionManager.CurrentClass)
             {
                 case Class.Warrior:
-                    EdgeGaugeWindow.SetEdge(sPlayerStatUpdate.edge);
-                    MaxSTUpdated?.Invoke(sPlayerStatUpdate.maxRe + sPlayerStatUpdate.bonusRe);
-                    STUpdated?.Invoke(sPlayerStatUpdate.currRe);
+                    EdgeGaugeWindow.SetEdge(p.edge);
+                    MaxSTUpdated?.Invoke(p.maxRe + p.bonusRe);
+                    STUpdated?.Invoke(p.currRe);
                     break;
                 case Class.Lancer:
-                    MaxSTUpdated?.Invoke(sPlayerStatUpdate.maxRe + sPlayerStatUpdate.bonusRe);
-                    STUpdated?.Invoke(sPlayerStatUpdate.currRe);
+                    MaxSTUpdated?.Invoke(p.maxRe + p.bonusRe);
+                    STUpdated?.Invoke(p.currRe);
                     break;
                 case Class.Engineer:
-                    MaxSTUpdated?.Invoke(sPlayerStatUpdate.maxRe + sPlayerStatUpdate.bonusRe);
-                    STUpdated?.Invoke(sPlayerStatUpdate.currRe);
+                    MaxSTUpdated?.Invoke(p.maxRe + p.bonusRe);
+                    STUpdated?.Invoke(p.currRe);
                     break;
                 case Class.Fighter:
-                    MaxSTUpdated?.Invoke(sPlayerStatUpdate.maxRe + sPlayerStatUpdate.bonusRe);
-                    STUpdated?.Invoke(sPlayerStatUpdate.currRe);
+                    MaxSTUpdated?.Invoke(p.maxRe + p.bonusRe);
+                    STUpdated?.Invoke(p.currRe);
                     break;
                 case Class.Assassin:
-                    MaxSTUpdated?.Invoke(sPlayerStatUpdate.maxRe + sPlayerStatUpdate.bonusRe);
-                    STUpdated?.Invoke(sPlayerStatUpdate.currRe);
+                    MaxSTUpdated?.Invoke(p.maxRe + p.bonusRe);
+                    STUpdated?.Invoke(p.currRe);
                     break;
                 case Class.Moon_Dancer:
-                    MaxSTUpdated?.Invoke(sPlayerStatUpdate.maxRe + sPlayerStatUpdate.bonusRe);
-                    STUpdated?.Invoke(sPlayerStatUpdate.currRe);
+                    MaxSTUpdated?.Invoke(p.maxRe + p.bonusRe);
+                    STUpdated?.Invoke(p.currRe);
                     break;
                 default:
                     break;
             }
-            MaxHPUpdated?.Invoke(sPlayerStatUpdate.maxHp);
-            MaxMPUpdated?.Invoke(sPlayerStatUpdate.maxMp);
-            HPUpdated?.Invoke(sPlayerStatUpdate.currHp);
-            MPUpdated?.Invoke(sPlayerStatUpdate.currMp);
-            IlvlUpdated?.Invoke(sPlayerStatUpdate.ilvl);
+            MaxHPUpdated?.Invoke(p.maxHp);
+            MaxMPUpdated?.Invoke(p.maxMp);
+            HPUpdated?.Invoke(p.currHp);
+            MPUpdated?.Invoke(p.currMp);
+            IlvlUpdated?.Invoke(p.ilvl);
 
         }
         static void HandlePlayerChangeMP(S_PLAYER_CHANGE_MP p)
         {
-            var sPlayerChangeMP = (S_PLAYER_CHANGE_MP)p;
-            MPUpdated?.Invoke(sPlayerChangeMP.currentMP);
+            MPUpdated?.Invoke(p.currentMP);
+            
         }
         static void HandleCreatureChangeHP(S_CREATURE_CHANGE_HP p)
         {
-            var sCreatureChangeHP = (S_CREATURE_CHANGE_HP)p;
+            //if (SessionManager.CurrentBosses.Where(x => x.EntityId == p.target).Count() > 0)
+            //{
+            //    if (SessionManager.CurrentBosses.Where(x => x.EntityId == p.target).Single().CurrentHP != p.currentHP)
+            //    {
+            //        if (p.currentHP == 0)
+            //        {
+            //            App.Current.Dispatcher.BeginInvoke(new Action(() =>
+            //            {
+            //                SessionManager.CurrentBosses.Remove(SessionManager.CurrentBosses.Where(x => x.EntityId == p.target).Single());
+            //            }));
+            //            return;
+            //        }
+            //        SessionManager.CurrentBosses.Where(x => x.EntityId == p.target).Single().CurrentHP = p.currentHP;
+            //        BossHPChanged?.Invoke(p.target, p.currentHP);
+            //    }
+            //}
 
-            if (sCreatureChangeHP.target == SessionManager.CurrentCharId)
+            if (p.target == SessionManager.CurrentCharId)
             {
-                HPUpdated.Invoke(sCreatureChangeHP.currentHP);
+                HPUpdated.Invoke(p.currentHP);
             }
 
         }
         static void HandlePlayerChangeStamina(S_PLAYER_CHANGE_STAMINA p)
         {
-            var sPlayerChangeStamina = (S_PLAYER_CHANGE_STAMINA)p;
             switch (SessionManager.CurrentClass)
             {
                 case Class.Warrior:
-                    STUpdated.Invoke(sPlayerChangeStamina.currentStamina);
+                    STUpdated.Invoke(p.currentStamina);
                     break;
                 case Class.Lancer:
-                    STUpdated.Invoke(sPlayerChangeStamina.currentStamina);
+                    STUpdated.Invoke(p.currentStamina);
                     break;
                 case Class.Engineer:
-                    STUpdated.Invoke(sPlayerChangeStamina.currentStamina);
+                    STUpdated.Invoke(p.currentStamina);
                     break;
                 case Class.Fighter:
-                    STUpdated.Invoke(sPlayerChangeStamina.currentStamina);
+                    STUpdated.Invoke(p.currentStamina);
                     break;
                 case Class.Assassin:
-                    STUpdated.Invoke(sPlayerChangeStamina.currentStamina);
+                    STUpdated.Invoke(p.currentStamina);
                     break;
                 case Class.Moon_Dancer:
-                    STUpdated.Invoke(sPlayerChangeStamina.currentStamina);
+                    STUpdated.Invoke(p.currentStamina);
                     break;
                 default:
                     break;
@@ -332,17 +364,14 @@ namespace TCC.Parsing
         }
         static void HandleUserStatusChanged(S_USER_STATUS p)
         {
-            var sUserStatus = (S_USER_STATUS)p;
-            if (sUserStatus.id == SessionManager.CurrentCharId)
+            if (p.id == SessionManager.CurrentCharId)
             {
-                if (sUserStatus.isInCombat)
+                if (p.isInCombat)
                 {
-                    //WindowManager.ShowWindow(WindowManager.ClassSpecificGauge);
                     SessionManager.Combat = true;
                 }
                 else
                 {
-                    //WindowManager.HideWindow(WindowManager.ClassSpecificGauge);
                     SessionManager.Combat = false;
                 }
             }
@@ -359,58 +388,56 @@ namespace TCC.Parsing
         }
         static void HandlePlayerChangeFlightEnergy(S_PLAYER_CHANGE_FLIGHT_ENERGY p)
         {
-            var sPlayerChangeFlightEnergy = (S_PLAYER_CHANGE_FLIGHT_ENERGY)p;
-            FlightEnergyUpdated?.Invoke(sPlayerChangeFlightEnergy.energy);
+            FlightEnergyUpdated?.Invoke(p.energy);
         }
         static void HandleGageReceived(S_BOSS_GAGE_INFO p)
         {
-            var sBossGageInfo = (TCC.Messages.S_BOSS_GAGE_INFO)p;
-            if(SessionManager.CurrentBosses.Where(x => x.EntityId == sBossGageInfo.EntityId).Count() > 0)
+            if(SessionManager.CurrentBosses.Where(x => x.EntityId == p.EntityId).Count() > 0)
             {
-                if (SessionManager.CurrentBosses.Where(x => x.EntityId == sBossGageInfo.EntityId).Single().CurrentHP != sBossGageInfo.CurrentHP)
+                //return;
+                if (SessionManager.CurrentBosses.Where(x => x.EntityId == p.EntityId).Single().CurrentHP != p.CurrentHP)
                 {
-                    if(sBossGageInfo.CurrentHP == 0)
-                    {
-                        App.Current.Dispatcher.BeginInvoke(new Action(() =>
-                        {
-
-                            SessionManager.CurrentBosses.Remove(SessionManager.CurrentBosses.Where(x => x.EntityId == sBossGageInfo.EntityId).Single());
-                        }));
-                        return;
-                    }
-                    SessionManager.CurrentBosses.Where(x => x.EntityId == sBossGageInfo.EntityId).Single().CurrentHP = sBossGageInfo.CurrentHP;
-                    BossHPChanged?.Invoke(sBossGageInfo.EntityId, sBossGageInfo.CurrentHP);
+                    //if (p.CurrentHP == 0)
+                    //{
+                    //    App.Current.Dispatcher.BeginInvoke(new Action(() =>
+                    //    {
+                    //        SessionManager.CurrentBosses.Remove(SessionManager.CurrentBosses.Where(x => x.EntityId == p.EntityId).Single());
+                    //    }));
+                    //    return;
+                    //}
+                    SessionManager.CurrentBosses.Where(x => x.EntityId == p.EntityId).Single().CurrentHP = p.CurrentHP;
+                    BossHPChanged?.Invoke(p.EntityId, p.CurrentHP);
                 }
             }
             else
             {
                 App.Current.Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    SessionManager.CurrentBosses.Add(new Boss(sBossGageInfo.EntityId, sBossGageInfo.Type, sBossGageInfo.Npc, sBossGageInfo.CurrentHP, sBossGageInfo.MaxHP));
+                    SessionManager.CurrentBosses.Add(new Boss(p.EntityId, p.Type, p.Npc, p.CurrentHP, p.MaxHP));
                 }));
             }
-
-            //CHandlesole.WriteLine("type:{0} - npc:{1}", sBossGageInfo.Type, sBossGageInfo.Npc);
-            //if first time => retreive name and show window
-            //event => update hp
         }
         static void HandleNpcStatusChanged(S_NPC_STATUS p)
         {
-            var sNpcStatus = (S_NPC_STATUS)p;
-            if (SessionManager.CurrentBosses.Where(x => x.EntityId == sNpcStatus.EntityId).Count() > 0)
+            if (SessionManager.CurrentBosses.Where(x => x.EntityId == p.EntityId).Count() > 0)
             {
-                if (SessionManager.CurrentBosses.Where(x => x.EntityId == sNpcStatus.EntityId).Single().Enraged != sNpcStatus.IsEnraged)
+                if (SessionManager.CurrentBosses.Where(x => x.EntityId == p.EntityId).Single().Enraged != p.IsEnraged)
                 {
-                    SessionManager.CurrentBosses.Where(x => x.EntityId == sNpcStatus.EntityId).Single().Enraged = sNpcStatus.IsEnraged;
-                    EnragedChanged?.Invoke(sNpcStatus.EntityId, sNpcStatus.IsEnraged);
+                    SessionManager.CurrentBosses.Where(x => x.EntityId == p.EntityId).Single().Enraged = p.IsEnraged;
+                    EnragedChanged?.Invoke(p.EntityId, p.IsEnraged);
                 }
             }
-
-
-            //if (sNpcStatus.EntityId != SessiHandleManager.CurrentBossEntityId) return;
-            //WindowManager.BossGauge.SetEnraged(sNpcStatus.IsEnraged);
         }
-
+        static void HandlerNpcDespawn(S_DESPAWN_NPC p)
+        {
+            if(SessionManager.CurrentBosses.Where(x => x.EntityId == p.target).Count() > 0)
+            {
+                App.Current.Dispatcher.Invoke(() =>
+                {
+                    SessionManager.CurrentBosses.Remove(SessionManager.CurrentBosses.Where(x => x.EntityId == p.target).Single());
+                });
+            }
+        }
     }
 }
 

@@ -26,7 +26,7 @@ namespace TCC
         /// <param name="sender">Not used</param>
         /// <param name="e">Not used</param>
         /// <param name="sk">Skill cooldown info</param>
-        void OnSkillAdded(SkillCooldownNew sk)
+        void OnSkillAdded(SkillCooldown sk)
         {
             //sk.Timer.Elapsed += (s, ev) => RemoveSkill(null, null, sk);
             //switch (sk.Type)
@@ -51,7 +51,7 @@ namespace TCC
             //sk.Timer.Enabled = true;
             ////Console.WriteLine("Running {0}", sk.Id);
         }   
-        void RemoveSkill(SkillCooldownNew sk)
+        void RemoveSkill(SkillCooldown sk)
         {
             //sk.Timer.Stop();
             //queue.Remove(sk);

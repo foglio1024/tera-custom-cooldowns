@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="TCC.UI_elements.AbnormalityIndicator"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TCC"
+             mc:Ignorable="d" 
+             Loaded="UserControl_Loaded"
+             >
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Name="abnormalityName" Grid.Row="0" Text="" Grid.Column="1" Foreground="White"/>
+        <!--<TextBlock Name="abnormalityId" Grid.Row="1" Text="{Binding AbnormalityId}"/>-->
+        <Ellipse Name="abnormalityIcon" Fill="{Binding Icon}" ToolTip="{Binding AbnormalityName}" Width="30" Height="30" Stroke="#80ffffff" StrokeThickness="1"/>
+        <local:Arc x:Name="arc" Stroke="#bbbbbb" StrokeThickness="3" Width="34" Height="34" />
+    </Grid>
+</UserControl>

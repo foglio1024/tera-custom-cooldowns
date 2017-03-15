@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<StrSheet_Abnormality>
+  <String id="33" name="Ultra-Hyper-Fire-Turbo Time" tooltip="Feel the fever! Decreases all skill cooldowns by 80%. Greatly increases MP replenishment. Is not active while in dungeons or battlegrounds." />
+  <String id="34" name="Blessing of Amarun" tooltip="Increases maximum HP for the first venture into the dungeon." />
+  <String id="48" name="Baldera's Blessing " tooltip="Increases your gathering proficiencies by 30 and shortens your gathering and crafting time." />
+  <String id="1133" name="Shining Candy" tooltip="Replenishes $H_W_GOOD4%$COLOR_END of maximum MP every $H_W_GOOD$tickInterval$COLOR_END." />
+  <String id="4611" name="Complete Crystalbind" tooltip="Circumvents crystal breakage upon death." />
+  <String id="4613" name="Complete Crystalbind" tooltip="Circumvents crystal breakage upon death." />
+  <String id="4614" name="" tooltip="" />
+  <String id="4832" name="Bravery (JPN event buff)" tooltip="Increases skill damage by $H_W_GOOD$value2$COLOR_END, and reduces damage taken by $H_W_GOOD$value3$COLOR_END. Additionally increases attack speed by $H_W_GOOD$value$COLOR_END." />
+  <String id="4954" name="Rookie's Oversight" tooltip="Resurrects instantly if killed." />
+  <String id="5010000" name="" tooltip="" />
+  <String id="5010001" name="" tooltip="" />
+  <String id="5010002" name="" tooltip="" />
+  <String id="5010003" name="" tooltip="" />
+  <String id="5010004" name="" tooltip="" />
+  <String id="8000091" name="100% XP Boost (Premium)" tooltip="While VIP Pack is in use, increases hunting XP reward by 100%." />
+  <String id="8000092" name="100% Reputation Boost (Premium)" tooltip="While VIP Pack is in use, increases reputation and credits gained by 100%. Does not apply to battleground reputation or credits." />
+</StrSheet_Abnormality>

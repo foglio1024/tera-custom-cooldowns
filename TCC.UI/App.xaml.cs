@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using TCC.Data;
 using TCC.Parsing;
+using TCC.Properties;
 
 namespace TCC
 {
@@ -20,6 +21,8 @@ namespace TCC
     {
         private void OnStartup(object sender, StartupEventArgs ev)
         {
+            Icon_Skills.ResourceManager.IgnoreCase = true;
+            Icon_Status.ResourceManager.IgnoreCase = true;
             TeraSniffer.Instance.Enabled = true;
 
             WindowManager.Init();
@@ -33,6 +36,7 @@ namespace TCC
                 SkillsDatabase.Populate();
                 BroochesDatabase.SetBroochesIcons();
                 MonsterDatabase.Populate();
+                AbnormalityDatabase.Populate();
                 WindowManager.CooldownWindow.LoadingDone();
             }));
 

@@ -25,14 +25,14 @@ namespace TCC
     //    }
     //}
 
-    public class SkillCooldownNew
+    public class SkillCooldown
     {
         public Skill Skill { get; set; }
         public int Cooldown { get; set; }
         public CooldownType Type { get; set; }
         public System.Timers.Timer Timer { get; set; }
 
-        public SkillCooldownNew(Skill sk, int cd, CooldownType t)
+        public SkillCooldown(Skill sk, int cd, CooldownType t)
         {
             Skill = sk;
             Cooldown = cd;

@@ -1,0 +1,721 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Accelration_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Accelration_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AngerWarrior_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\AngerWarrior_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="archerspirit_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\archerspirit_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="aura_of_collect_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\aura_of_collect_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="aura_of_condition_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\aura_of_condition_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="aura_of_damage_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\aura_of_damage_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="aura_of_regeneration_hp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\aura_of_regeneration_hp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="aura_of_regeneration_mp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\aura_of_regeneration_mp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="aura_of_wind_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\aura_of_wind_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="balancedown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\balancedown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="balanceup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\balanceup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BattleCommand01_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\BattleCommand01_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BattleCommand02_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\BattleCommand02_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BattleCommand03_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\BattleCommand03_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BattleCommand04_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\BattleCommand04_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BattleFieldBuff01_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\BattleFieldBuff01_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BattleFieldBuff02_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\BattleFieldBuff02_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BattleFieldBuff03_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\BattleFieldBuff03_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BattleFieldBuff04_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\BattleFieldBuff04_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bless_of_velic_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\bless_of_velic_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BloodMadness_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\BloodMadness_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BloodUanty_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\BloodUanty_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="boundmovedown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\boundmovedown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="boundmoveup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\boundmoveup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="buff_of_kaia_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\buff_of_kaia_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CallDimension_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\CallDimension_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ChainSnare_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\ChainSnare_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CliantEffect_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\CliantEffect_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Collect_SpeedUp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Collect_SpeedUp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Concentrating_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Concentrating_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="confusedown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\confusedown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="confusestatusNPC_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\confusestatusNPC_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="confusestatusPC_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\confusestatusPC_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="confuseup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\confuseup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cruel_slayer_1_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\cruel_slayer_1_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cruel_slayer_2_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\cruel_slayer_2_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cruel_slayer_3_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\cruel_slayer_3_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cruel_slayer_4_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\cruel_slayer_4_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Curse_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Curse_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="damagedown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\damagedown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="damageup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\damageup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DarkEffect_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\DarkEffect_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DarkMind_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\DarkMind_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DarkRiftAreaDance_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\DarkRiftAreaDance_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DarkRiftAreaFunny_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\DarkRiftAreaFunny_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DarkRiftAreaRage_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\DarkRiftAreaRage_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DarkRiftAreaSword_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\DarkRiftAreaSword_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DarkRiftAreaTimeShift_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\DarkRiftAreaTimeShift_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DarkRiftAreaWind_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\DarkRiftAreaWind_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DarkRiftDestroy_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\DarkRiftDestroy_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DarkRiftGravity_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\DarkRiftGravity_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DarkRiftRage_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\DarkRiftRage_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DarkRiftRecovery_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\DarkRiftRecovery_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DarkRiftReward_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\DarkRiftReward_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DarkRiftWhisper_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\DarkRiftWhisper_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DarkRiftWill_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\DarkRiftWill_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DarkWater_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\DarkWater_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="delaydamage_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\delaydamage_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="delayheal_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\delayheal_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="delaympgain_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\delaympgain_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="delaymploss_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\delaymploss_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DescentOFDarkness_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\DescentOFDarkness_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DiffusionAbnormality_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\DiffusionAbnormality_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DiffusionAggro_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\DiffusionAggro_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DimensionGuard_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\DimensionGuard_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="diseasedown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\diseasedown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="diseaseup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\diseaseup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DragonBerserk_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\DragonBerserk_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EarthBlessing_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\EarthBlessing_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EarthPower_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\EarthPower_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ElectricCharge1_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\ElectricCharge1_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ElectricCharge2_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\ElectricCharge2_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ElectricCharge3_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\ElectricCharge3_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ElectricEffect1_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\ElectricEffect1_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ElectricEffect2_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\ElectricEffect2_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ElectricEffect3_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\ElectricEffect3_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="exhaustion_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\exhaustion_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EXP_Buff_SerenParty_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\EXP_Buff_SerenParty_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EXP_Buff_SerenSolo_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\EXP_Buff_SerenSolo_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="F2P_Accumtime_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\F2P_Accumtime_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="F2P_DungeonCooltime_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\F2P_DungeonCooltime_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="F2P_DungeonNovice_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\F2P_DungeonNovice_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="F2P_OldCustomer_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\F2P_OldCustomer_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="F2P_PCCustomer_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\F2P_PCCustomer_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="F2P_RewardBox_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\F2P_RewardBox_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="F2P_TradeBuyComi_Down_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\F2P_TradeBuyComi_Down_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="F2P_TradeSellComi_Down_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\F2P_TradeSellComi_Down_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="F2P_TradeSellQty_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\F2P_TradeSellQty_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="F2P_VIPCustomer_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\F2P_VIPCustomer_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FearStatus_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\FearStatus_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FireDamage_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\FireDamage_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FullCharge_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\FullCharge_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FullelectricEffect_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\FullelectricEffect_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GodSpell_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\GodSpell_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Heat_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Heat_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Holybless_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Holybless_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="IceDamage_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\IceDamage_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Icon_DeaDoo_ab_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Icon_DeaDoo_ab_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Icon_DeaDoo_ab_Tex_Minus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Icon_DeaDoo_ab_Tex_Minus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Icon_JangGoe_ab_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Icon_JangGoe_ab_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Icon_JangGoe_ab_Tex_Minus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Icon_JangGoe_ab_Tex_Minus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Icon_JangShin_ab_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Icon_JangShin_ab_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Icon_JangShin_ab_Tex_Minus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Icon_JangShin_ab_Tex_Minus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Icon_PoongU_ab_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Icon_PoongU_ab_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Icon_PoongU_ab_Tex_Minus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Icon_PoongU_ab_Tex_Minus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Icon_YookDuk00_ab_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Icon_YookDuk00_ab_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Icon_YookDuk00_ab_Tex_Minus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Icon_YookDuk00_ab_Tex_Minus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImmuneDebuff_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\ImmuneDebuff_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="InjuredBtDarkness_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\InjuredBtDarkness_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="InstantLeap_Continuous_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\InstantLeap_Continuous_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Lavar_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Lavar_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Laver_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Laver_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="laxyarcher_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\laxyarcher_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LightEffect_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\LightEffect_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LightWeight_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\LightWeight_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="majorexhaustion_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\majorexhaustion_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Merit_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Merit_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MindDomination_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\MindDomination_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="minorexhaustion_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\minorexhaustion_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MinusAbnormality_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\MinusAbnormality_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="minusattack_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\minusattack_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="minusconfuseresist_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\minusconfuseresist_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="minuscriticalresist_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\minuscriticalresist_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="minuscritical_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\minuscritical_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="minusdefence_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\minusdefence_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="minusdiseaseresist_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\minusdiseaseresist_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="minusfocus_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\minusfocus_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="minushp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\minushp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="minusmove_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\minusmove_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="minusmp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\minusmp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="minuspoisonresist_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\minuspoisonresist_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="minusspeedresist_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\minusspeedresist_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="minuswill_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\minuswill_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mprecoverdown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\mprecoverdown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mprecoverup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\mprecoverup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mpsuckdown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\mpsuckdown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mpsuckup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\mpsuckup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OmniousSpell_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\OmniousSpell_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OrangeAura_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\OrangeAura_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="paralyzestatus_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\paralyzestatus_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Passive_DragonBlood" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Passive_DragonBlood.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Passive_DragonBlood2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Passive_DragonBlood2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Petrifaction_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Petrifaction_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="petrifystatus_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\petrifystatus_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PhotoneShield_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\PhotoneShield_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlusAbnormality_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\PlusAbnormality_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="plusattack_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\plusattack_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="plusciriticalresist_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\plusciriticalresist_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="plusdiseaseresist_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\plusdiseaseresist_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pluseconfuseresist_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\pluseconfuseresist_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="plusecritical_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\plusecritical_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="plusedefence_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\plusedefence_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="plusepoisonresist_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\plusepoisonresist_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="plusfocus_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\plusfocus_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="plushp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\plushp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="plusmove_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\plusmove_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="plusmp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\plusmp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pluspoisonresist_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\pluspoisonresist_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="plusspeedresist_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\plusspeedresist_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pluswill_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\pluswill_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="poisondown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\poisondown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="poisonstatus_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\poisonstatus_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="poisonup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\poisonup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PositionSwap_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\PositionSwap_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PurifyDagon_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\PurifyDagon_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RedAura_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\RedAura_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ReviveNow_Status_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\ReviveNow_Status_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RisinDagon_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\RisinDagon_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Rock_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Rock_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Scald_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Scald_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sealskill_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\sealskill_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ShotArrowBlindly_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\ShotArrowBlindly_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ShotArrow_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\ShotArrow_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ShotCannon_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\ShotCannon_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ShotPhotonCannon_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\ShotPhotonCannon_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sleepstatus_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\sleepstatus_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="smile_firecracker_abnormality_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\smile_firecracker_abnormality_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Snowman_Scroll_Status_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Snowman_Scroll_Status_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="speedystatus_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\speedystatus_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="StackAbnormality_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\StackAbnormality_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="StaminaDown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\StaminaDown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="StaminaUp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\StaminaUp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="StrikeSkull_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\StrikeSkull_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="StrongHeat_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\StrongHeat_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Struggle_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Struggle_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SummonVergos_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\SummonVergos_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Valrhona_Devil_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Valrhona_Devil_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Valrhona_Goddess_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Valrhona_Goddess_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Valrhona_Sun_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Valrhona_Sun_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="VergosBlood_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\VergosBlood_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="VergosCurse_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\VergosCurse_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="VergosDust_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\VergosDust_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="VergosFear_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\VergosFear_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="VergosFlame_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\VergosFlame_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="VergosFocus_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\VergosFocus_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="vitality_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\vitality_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Whirl_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\Whirl_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WhiteAura_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\WhiteAura_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WindTyrant_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\WindTyrant_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="YellowAura_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Status\YellowAura_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+</root>

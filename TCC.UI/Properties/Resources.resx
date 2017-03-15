@@ -118,64 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="archer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\archer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="berserker" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\berserker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="brawler" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\brawler.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="bronze" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\CharacterWindow_I1B9.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="champion" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\CharacterWindow_I1C1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="common" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\common.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="diamond" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\CharacterWindow_I1BF.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="glaiver" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\glaiver.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="gold" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\CharacterWindow_I1BD.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="gunner" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\gunner.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="lancer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\lancer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="mystic" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\mystic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ninja" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\ninja.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="priest" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\priest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="reaper" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\reaper.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="silver" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\CharacterWindow_I1BB.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="slayer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\slayer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="sorcerer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\sorcerer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="defaultIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\defaultIcon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="tcc" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\tcc.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="warrior" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\warrior.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

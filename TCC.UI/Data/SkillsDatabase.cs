@@ -227,6 +227,7 @@ namespace TCC
         {
             using (MemoryStream memory = new MemoryStream())
             {
+
                 bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Bmp);
                 memory.Position = 0;
                 BitmapImage bitmapimage = new BitmapImage();

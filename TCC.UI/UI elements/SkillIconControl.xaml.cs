@@ -90,7 +90,7 @@ namespace TCC
             SkillManager.Reset += Reset;
         }
 
-        private void ChangeCooldown(SkillCooldownNew s)
+        private void ChangeCooldown(SkillCooldown s)
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {

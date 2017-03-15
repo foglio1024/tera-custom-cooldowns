@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TCC
 {
-    public class SkillQueue : ObservableCollection<SkillCooldownNew>
+    public class SkillQueue : ObservableCollection<SkillCooldown>
     {
         public event SkillAddedEventHandler Added;
         public event SkillOverEventHandler Over;
@@ -22,7 +22,7 @@ namespace TCC
             Over?.Invoke(this.Last());
         }
 
-        public new void Add(SkillCooldownNew s)
+        public new void Add(SkillCooldown s)
         {
             App.Current.Dispatcher.Invoke(() =>
             {
