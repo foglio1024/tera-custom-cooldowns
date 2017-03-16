@@ -1,4 +1,5 @@
-﻿using Tera.Game;
+﻿using TCC.Data;
+using Tera.Game;
 using Tera.Game.Messages;
 
 namespace TCC.Messages
@@ -27,6 +28,8 @@ namespace TCC.Messages
             enrage = reader.ReadByte();
             currHp = reader.ReadSingle();
             maxHp = reader.ReadSingle();
+
+            //System.Console.WriteLine("[S_BOSS_GAGE_INFO] id:{0} name:{1}", EntityId, MonsterDatabase.GetName((uint)npc, (uint)type));
             //unk3 = reader.ReadByte();
         }
     }

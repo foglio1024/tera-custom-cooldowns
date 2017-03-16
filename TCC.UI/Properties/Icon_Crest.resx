@@ -1,0 +1,1558 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="CR12_AirStepStrike" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CR12_AirStepStrike.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CR12_AtkUpBuff" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CR12_AtkUpBuff.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CR12_CatchBack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CR12_CatchBack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CR12_ChakraCharge" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CR12_ChakraCharge.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CR12_Dash" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CR12_Dash.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CR12_DashAttack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CR12_DashAttack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CR12_EvadeStingShot" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CR12_EvadeStingShot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CR12_FlameBomb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CR12_FlameBomb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CR12_FlameBreath" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CR12_FlameBreath.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CR12_FlameStrike" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CR12_FlameStrike.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CR12_MeleeCombo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CR12_MeleeCombo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CR12_RapidShot" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CR12_RapidShot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CR12_RapidSlash" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CR12_RapidSlash.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CR12_RotateShurikenShot" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CR12_RotateShurikenShot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CR12_RotateSlash" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CR12_RotateSlash.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CR12_SmokeBomb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CR12_SmokeBomb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CR12_TornadoShot" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CR12_TornadoShot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CR12_TwinSlash" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CR12_TwinSlash.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CR5_IceOrb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CR5_IceOrb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CR5_Lightningstruck" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CR5_Lightningstruck.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestActiveAttackSpeedDown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestActiveAttackSpeedDown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestActiveAttackSpeedUp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestActiveAttackSpeedUp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestActiveAttackUp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestActiveAttackUp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestactivecooltimereset_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestactivecooltimereset_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestActiveDefenceDown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestActiveDefenceDown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestActiveDefenceUp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestActiveDefenceUp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestActiveHpRecoveryUp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestActiveHpRecoveryUp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestactiveinvokeskill_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestactiveinvokeskill_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestactivekill_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestactivekill_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestactivempheal_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestactivempheal_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestactivempzero_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestactivempzero_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestactivepenaltydelete_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestactivepenaltydelete_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestactivepoison_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestactivepoison_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestActiveReactionResist_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestActiveReactionResist_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestActiveReactionUp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestActiveReactionUp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestactivespeeddown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestactivespeeddown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestactivespeedup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestactivespeedup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestactivestun_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestactivestun_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestadvancingcharge_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestadvancingcharge_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestadvancingleap_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestadvancingleap_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestAdventgoddess_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestAdventgoddess_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestageofearth_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestageofearth_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestaggravatingstrike_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestaggravatingstrike_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestagilitybless_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestagilitybless_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestagrorelease_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestagrorelease_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestAimedShot_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestAimedShot_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestaimingankle_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestaimingankle_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestAirKick_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestAirKick_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestallroundslash_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestallroundslash_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestAmbushRolling_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestAmbushRolling_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestArcaneGrenadeThrow_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestArcaneGrenadeThrow_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestArcaneShockShot01_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestArcaneShockShot01_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestareahpgain_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestareahpgain_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestareampgain_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestareampgain_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestarmorbreak_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestarmorbreak_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestarmoredwill_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestarmoredwill_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestarmorofprotection_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestarmorofprotection_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestArouseAnger_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestArouseAnger_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestarrowfall_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestarrowfall_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestarrowshot_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestarrowshot_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestarrowshower_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestarrowshower_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestAssaultattack_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestAssaultattack_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestattackup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestattackup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestauraburn_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestauraburn_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestautoresurrect_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestautoresurrect_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestbackattack_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestbackattack_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestbackstep_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestbackstep_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestbash_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestbash_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestberserk_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestberserk_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestBindingBlade_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestBindingBlade_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestblastball_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestblastball_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestblastmine_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestblastmine_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestblastslash_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestblastslash_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestBlowAttack_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestBlowAttack_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestBuckShot_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestBuckShot_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestBulldozer_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestBulldozer_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestburningbreath_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestburningbreath_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestCannonShot_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestCannonShot_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestCatchAir_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestCatchAir_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestChainBlade_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestChainBlade_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestChainBlow_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestChainBlow_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestChainBrandish_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestChainBrandish_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestchaincapture_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestchaincapture_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestchainrapidshot_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestchainrapidshot_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestChainSmash_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestChainSmash_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestChainStrike_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestChainStrike_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestChainSuperBlow_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestChainSuperBlow_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestChainUppercut_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestChainUppercut_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestchangetrait_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestchangetrait_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestchargearrow_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestchargearrow_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestComboAttack01_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestComboAttack01_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestcomboattack_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestcomboattack_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestCommand_CounterFlow_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestCommand_CounterFlow_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestCommand_ElectricBallShot_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestCommand_ElectricBallShot_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestCommand_SelfDestruct_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestCommand_SelfDestruct_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestcontaningshot_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestcontaningshot_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestcontractofquickness_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestcontractofquickness_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestCounterAttack2_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestCounterAttack2_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestcriticalupaura_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestcriticalupaura_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestCurewing_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestCurewing_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestcurseofshackle_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestcurseofshackle_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestCuthead_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestCuthead_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestcuttingslash_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestcuttingslash_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestdamagedeal_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestdamagedeal_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestDarkExplosion_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestDarkExplosion_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestDashAttack_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestDashAttack_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestdash_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestdash_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestdeadlywill_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestdeadlywill_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestdecoy_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestdecoy_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestdefence_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestdefence_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestdestructionvigor_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestdestructionvigor_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestDeterminationofadvance_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestDeterminationofadvance_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestdisease_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestdisease_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestdispell_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestdispell_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestDistortionField_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestDistortionField_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestdivinelightning_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestdivinelightning_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestdivineretribution_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestdivineretribution_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestdownattack_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestdownattack_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestdownblowattack_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestdownblowattack_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestdownblow_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestdownblow_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestDragonRisingBlow_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestDragonRisingBlow_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestdualrapidpiercing_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestdualrapidpiercing_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestdualslash_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestdualslash_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestelementalshot_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestelementalshot_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestEnergiesofProtection_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestEnergiesofProtection_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestEnergiesofquickness_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestEnergiesofquickness_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestEnergiesofrestriction_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestEnergiesofrestriction_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestEnergiesofshock_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestEnergiesofshock_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestEnergiesofwillpower_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestEnergiesofwillpower_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestEnrage_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestEnrage_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestescapingattack_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestescapingattack_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestevasionattack_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestevasionattack_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestevolution_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestevolution_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestExplosiontraparrow_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestExplosiontraparrow_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestexplosiontrap_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestexplosiontrap_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestfastwalk_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestfastwalk_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestfeigndeath_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestfeigndeath_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestfightingwill_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestfightingwill_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestfireball_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestfireball_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestflashball_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestflashball_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestFlashCannon_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestFlashCannon_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestflatblade_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestflatblade_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestFocusStance_MoveSlow_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestFocusStance_MoveSlow_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestfocusstance_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestfocusstance_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestfreezingtheearth_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestfreezingtheearth_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestfury_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestfury_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestgatheringrage_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestgatheringrage_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestgatheringstrength_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestgatheringstrength_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestGatlingShot_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestGatlingShot_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestGodBreath_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestGodBreath_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestguardianaura_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestguardianaura_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestGunBrandish_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestGunBrandish_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cresthandyslash_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Cresthandyslash_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cresthardslash_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Cresthardslash_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestHarpoonshot_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestHarpoonshot_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cresthealarea_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Cresthealarea_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cresthealinglightlockon_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Cresthealinglightlockon_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cresthealingpray_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Cresthealingpray_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cresthealingwind_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Cresthealingwind_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cresthealshot_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Cresthealshot_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestheavybite_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestheavybite_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cresthellfire_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Cresthellfire_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestHelpingHand_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestHelpingHand_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestHideInDarkness_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestHideInDarkness_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestHoldtheLine_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestHoldtheLine_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cresthookthrow_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Cresthookthrow_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cresthowitzer_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Cresthowitzer_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cresthprefresher_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Cresthprefresher_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cresticestorm_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\cresticestorm_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cresticicle_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Cresticicle_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestinspiringroar_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestinspiringroar_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestInstanceRush_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestInstanceRush_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestInstantLeap_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestInstantLeap_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestironwillA_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestironwillA_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestironwillB_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestironwillB_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestJawbreaker_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestJawbreaker_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestkicharge_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestkicharge_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestKick2_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestKick2_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestleaprampage_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestleaprampage_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestlightofruin_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestlightofruin_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestlullabyoflshara_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestlullabyoflshara_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestmagicshot_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestmagicshot_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestManaBurst_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestManaBurst_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestManaExchange_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestManaExchange_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestmanaextortion_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestmanaextortion_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestmanarejuvenation_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestmanarejuvenation_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestmanashield_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestmanashield_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestmarkingofarcher_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestmarkingofarcher_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestmenacewave_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestmenacewave_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestMortarShot_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestMortarShot_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestmpcharge_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestmpcharge_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestmpcondensing_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestmpcondensing_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestmprefresher_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestmprefresher_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestmpsink_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestmpsink_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestmurderousvent_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestmurderousvent_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestMysticOrb_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestMysticOrb_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestnanmu_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestnanmu_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestneurasthenia_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestneurasthenia_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestNextSkillAttackSpeedUp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestNextSkillAttackSpeedUp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestNextSkillAttackUp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestNextSkillAttackUp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestNextSkillHpHeal_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestNextSkillHpHeal_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestNextSkillMpDown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestNextSkillMpDown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestOverhelm_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestOverhelm_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestpainfulshackle_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestpainfulshackle_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestParalysistraparrow_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestParalysistraparrow_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestparalysistrap_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestparalysistrap_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestpassiveaggroup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestpassiveaggroup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestpassiveattackup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestpassiveattackup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestpassivebalanceup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestpassivebalanceup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestpassivechargemove_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestpassivechargemove_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestpassivecooltimedown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestpassivecooltimedown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestpassivecriticalup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestpassivecriticalup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestpassivedeffeceup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestpassivedeffeceup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestpassivedurationup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestpassivedurationup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestpassivehealabnormality_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestpassivehealabnormality_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestpassivehpattackup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestpassivehpattackup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestPassiveHpDown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestPassiveHpDown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestpassivehpheal_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestpassivehpheal_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestpassivehpmpheal_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestpassivehpmpheal_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestpassivehprecoveryup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestpassivehprecoveryup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestpassivehpwhileheal_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestpassivehpwhileheal_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestpassivelockontargetup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestpassivelockontargetup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestpassivemasicdefence_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestpassivemasicdefence_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestpassivemaxabsorbup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestpassivemaxabsorbup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestpassivempdown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestpassivempdown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestpassivempheal_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestpassivempheal_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestpassivemprecoveryup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestpassivemprecoveryup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestpassiveoverchargehpdown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestpassiveoverchargehpdown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestpassivepartympup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestpassivepartympup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestpassivepenaltydelete_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestpassivepenaltydelete_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestpassiverangeup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestpassiverangeup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestpassivereactionresist_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestpassivereactionresist_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestPassiveReactionUp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestPassiveReactionUp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestpassiveskillcancel_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestpassiveskillcancel_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestpassiveskilleffectdown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestpassiveskilleffectdown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestpassiveskilleffectup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestpassiveskilleffectup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestpassiveskillrangeup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestpassiveskillrangeup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestpassiveskillspeedup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestpassiveskillspeedup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestpassivespeeddown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestpassivespeeddown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestpassivestunpercentup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestpassivestunpercentup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestpassivestuntimeup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestpassivestuntimeup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestpassivetargethealdown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestpassivetargethealdown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestpassivetargetspeeddown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestpassivetargetspeeddown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestpassivethorns_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestpassivethorns_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestpiercingshout_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestpiercingshout_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestPlague_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestPlague_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestpointattack_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestpointattack_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestpoisonblowattack_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestpoisonblowattack_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestPoundOnGround_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestPoundOnGround_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestprophecyoflethargy_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestprophecyoflethargy_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestprovokerage_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestprovokerage_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestpunishingshield_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestpunishingshield_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestpunishingtouch_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestpunishingtouch_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestpurifyshot_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestpurifyshot_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestpurify_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestpurify_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestrageofearth_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestrageofearth_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestrage_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestrage_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestragingstrike_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestragingstrike_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestRaker_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestRaker_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestRampage_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestRampage_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestRapidAttack_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestRapidAttack_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestrapidshot_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestrapidshot_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestrecallfriend_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestrecallfriend_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestrecovery_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestrecovery_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestrefreshbless_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestrefreshbless_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestrejuvenation_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestrejuvenation_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestRelax_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestRelax_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestReload_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestReload_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestresistancebless_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestresistancebless_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestrestoration_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestrestoration_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestresurrect_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestresurrect_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestretreatingkick_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestretreatingkick_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestreversalturningattack_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestreversalturningattack_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestRibbreaker_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestRibbreaker_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestriposte_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestriposte_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestrisingattack_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestrisingattack_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestRisingBlow_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestRisingBlow_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestRisingRocket_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestRisingRocket_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestRoar2_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestRoar2_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestroar_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestroar_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestRocketJump_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestRocketJump_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestRolling_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestRolling_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestRupture_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestRupture_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestrurningkick_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestrurningkick_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestrushingslash_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestrushingslash_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestsanctuaryofregeneration_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestsanctuaryofregeneration_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestsanctuary_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestsanctuary_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestscrewthough_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestscrewthough_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crestsealed_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\crestsealed_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestselfbuff_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestselfbuff_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestSelfPreResurrection_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestSelfPreResurrection_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestshackleofquicksand_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestshackleofquicksand_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestshackleofstone_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestshackleofstone_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestShadowchange_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestShadowchange_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestshieldattack_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestshieldattack_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestshieldstrike_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestshieldstrike_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestshockblow_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestshockblow_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestshockingshout_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestshockingshout_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestshocktrap_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestshocktrap_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestshortteleport_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestshortteleport_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestshout_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestshout_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestSideSlash_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestSideSlash_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestsleepwind_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestsleepwind_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestsleep_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestsleep_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestslowball_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestslowball_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestSmashAttack00_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestSmashAttack00_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestSmashAttack02_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestSmashAttack02_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestsoulstrike_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestsoulstrike_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestspeedupaura_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestspeedupaura_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestspiderarrow_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestspiderarrow_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestspiritofconfusion_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestspiritofconfusion_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestspiritoflassitude_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestspiritoflassitude_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Creststingerblade_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Creststingerblade_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestStoneshape_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestStoneshape_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestSTRecover_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestSTRecover_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Creststructionvigor_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Creststructionvigor_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestsuckhp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestsuckhp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestSummonDispenser_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestSummonDispenser_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestSummonSentryTower_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestSummonSentryTower_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestsummonspiritofaggro_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestsummonspiritofaggro_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestsummonspiritofattack_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestsummonspiritofattack_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestsummonspiritofheal_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestsummonspiritofheal_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestsummonspiritofrange_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestsummonspiritofrange_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestSuperRocketJump_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestSuperRocketJump_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestsworddance_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestsworddance_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestteleportall_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestteleportall_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cresttenaciousattack_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Cresttenaciousattack_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cresttenacity_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Cresttenacity_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestthrougharrow_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestthrougharrow_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestThrowaxe_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestThrowaxe_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestThunderdrake_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestThunderdrake_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestthunderingroar_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestthunderingroar_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestTimebombShot_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestTimebombShot_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestTornadoprison_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestTornadoprison_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestToughspirit_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestToughspirit_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cresttrackinginferno_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Cresttrackinginferno_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cresttripleslash_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Cresttripleslash_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cresttumbling_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Cresttumbling_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestturnaroundattack_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestturnaroundattack_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestturnback_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestturnback_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestturningkick_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestturningkick_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestTwinSwordsDefence_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestTwinSwordsDefence_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestUpperKick_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestUpperKick_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestUpperSlashCombo_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestUpperSlashCombo_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestuseholywater_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestuseholywater_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestvampiricstrike_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestvampiricstrike_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestveinslash_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestveinslash_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestvenomarrow_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestvenomarrow_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestvenomtrap_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestvenomtrap_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestvitalconversion_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestvitalconversion_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestvowofprotection_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestvowofprotection_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestweapondefence_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestweapondefence_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrestWebtraparrow_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CrestWebtraparrow_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestwebtrap_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestwebtrap_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crestwhirlwind_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\Crestwhirlwind_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CR_Chain_Arrow1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CR_Chain_Arrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CR_weak_point_observed1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\CR_weak_point_observed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_CrestActiveAttackSpeedDown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_CrestActiveAttackSpeedDown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_CrestActiveAttackSpeedUp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_CrestActiveAttackSpeedUp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_CrestActiveAttackUp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_CrestActiveAttackUp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestactivecooltimereset_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestactivecooltimereset_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_CrestActiveDefenceDown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_CrestActiveDefenceDown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_CrestActiveDefenceUp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_CrestActiveDefenceUp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_CrestActiveHpRecoveryUp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_CrestActiveHpRecoveryUp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestactiveinvokeskill_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestactiveinvokeskill_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestactivekill_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestactivekill_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestactivempheal_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestactivempheal_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestactivempzero_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestactivempzero_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestactivepenaltydelete_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestactivepenaltydelete_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestactivepoison_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestactivepoison_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_CrestActiveReactionResist_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_CrestActiveReactionResist_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_CrestActiveReactionUp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_CrestActiveReactionUp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestactivespeeddown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestactivespeeddown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestactivespeedup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestactivespeedup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestactivestun_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestactivestun_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_CrestNextSkillAttackSpeedUp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_CrestNextSkillAttackSpeedUp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_CrestNextSkillAttackUp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_CrestNextSkillAttackUp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_CrestNextSkillHpHeal_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_CrestNextSkillHpHeal_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_CrestNextSkillMpDown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_CrestNextSkillMpDown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestpassiveaggroup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestpassiveaggroup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestpassiveattackup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestpassiveattackup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_Crestpassivebalanceup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_Crestpassivebalanceup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_Crestpassivechargemove_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_Crestpassivechargemove_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestpassivecooltimedown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestpassivecooltimedown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestpassivecriticalup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestpassivecriticalup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestpassivedeffeceup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestpassivedeffeceup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestpassivedurationup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestpassivedurationup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_Crestpassivehealabnormality_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_Crestpassivehealabnormality_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_Crestpassivehpattackup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_Crestpassivehpattackup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_CrestPassiveHpDown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_CrestPassiveHpDown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestpassivehpheal_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestpassivehpheal_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestpassivehpmpheal_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestpassivehpmpheal_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestpassivehprecoveryup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestpassivehprecoveryup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_Crestpassivehpwhileheal_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_Crestpassivehpwhileheal_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestpassivelockontargetup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestpassivelockontargetup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_Crestpassivemasicdefence_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_Crestpassivemasicdefence_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_Crestpassivemaxabsorbup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_Crestpassivemaxabsorbup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestpassivempdown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestpassivempdown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestpassivempheal_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestpassivempheal_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestpassivemprecoveryup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestpassivemprecoveryup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_Crestpassiveoverchargehpdown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_Crestpassiveoverchargehpdown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_Crestpassivepartympup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_Crestpassivepartympup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestpassivepenaltydelete_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestpassivepenaltydelete_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestpassiverangeup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestpassiverangeup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestpassivereactionresist_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestpassivereactionresist_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_CrestPassiveReactionUp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_CrestPassiveReactionUp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestpassiveskillcancel_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestpassiveskillcancel_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_Crestpassiveskilleffectdown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_Crestpassiveskilleffectdown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestpassiveskilleffectup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestpassiveskilleffectup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_Crestpassiveskillrangeup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_Crestpassiveskillrangeup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestpassiveskillspeedup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestpassiveskillspeedup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestpassivespeeddown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestpassivespeeddown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_Crestpassivestunpercentup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_Crestpassivestunpercentup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_Crestpassivestuntimeup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_Crestpassivestuntimeup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_Crestpassivetargethealdown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_Crestpassivetargethealdown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_Crestpassivetargetspeeddown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_Crestpassivetargetspeeddown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_crestpassivethorns_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_crestpassivethorns_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D_CrestSTRecover_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\D_CrestSTRecover_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_CrestActiveAttackSpeedDown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_CrestActiveAttackSpeedDown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_CrestActiveAttackSpeedUp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_CrestActiveAttackSpeedUp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_CrestActiveAttackUp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_CrestActiveAttackUp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestactivecooltimereset_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestactivecooltimereset_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_CrestActiveDefenceDown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_CrestActiveDefenceDown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_CrestActiveDefenceUp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_CrestActiveDefenceUp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_CrestActiveHpRecoveryUp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_CrestActiveHpRecoveryUp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestactiveinvokeskill_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestactiveinvokeskill_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestactivekill_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestactivekill_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestactivempheal_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestactivempheal_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestactivempzero_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestactivempzero_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestactivepenaltydelete_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestactivepenaltydelete_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestactivepoison_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestactivepoison_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_CrestActiveReactionResist_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_CrestActiveReactionResist_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_CrestActiveReactionUp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_CrestActiveReactionUp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestactivespeeddown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestactivespeeddown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestactivespeedup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestactivespeedup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestactivestun_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestactivestun_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_CrestNextSkillAttackSpeedUp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_CrestNextSkillAttackSpeedUp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_CrestNextSkillAttackUp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_CrestNextSkillAttackUp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_CrestNextSkillHpHeal_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_CrestNextSkillHpHeal_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_CrestNextSkillMpDown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_CrestNextSkillMpDown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestpassiveaggroup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestpassiveaggroup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestpassiveattackup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestpassiveattackup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_Crestpassivebalanceup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_Crestpassivebalanceup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_Crestpassivechargemove_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_Crestpassivechargemove_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestpassivecooltimedown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestpassivecooltimedown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestpassivecriticalup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestpassivecriticalup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestpassivedeffeceup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestpassivedeffeceup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestpassivedurationup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestpassivedurationup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_Crestpassivehealabnormality_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_Crestpassivehealabnormality_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_Crestpassivehpattackup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_Crestpassivehpattackup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestpassivehpdown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestpassivehpdown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestpassivehpheal_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestpassivehpheal_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestpassivehpmpheal_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestpassivehpmpheal_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestpassivehprecoveryup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestpassivehprecoveryup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_Crestpassivehpwhileheal_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_Crestpassivehpwhileheal_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestpassivelockontargetup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestpassivelockontargetup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_Crestpassivemasicdefence_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_Crestpassivemasicdefence_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_Crestpassivemaxabsorbup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_Crestpassivemaxabsorbup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestpassivempdown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestpassivempdown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestpassivempheal_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestpassivempheal_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestpassivemprecoveryup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestpassivemprecoveryup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_Crestpassiveoverchargehpdown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_Crestpassiveoverchargehpdown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_Crestpassivepartympup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_Crestpassivepartympup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestpassivepenaltydelete_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestpassivepenaltydelete_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestpassiverangeup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestpassiverangeup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestpassivereactionresist_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestpassivereactionresist_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_CrestPassiveReactionUp_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_CrestPassiveReactionUp_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestpassiveskillcancel_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestpassiveskillcancel_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_Crestpassiveskilleffectdown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_Crestpassiveskilleffectdown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestpassiveskilleffectup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestpassiveskilleffectup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_Crestpassiveskillrangeup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_Crestpassiveskillrangeup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestpassiveskillspeedup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestpassiveskillspeedup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestpassivespeeddown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestpassivespeeddown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_Crestpassivestunpercentup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_Crestpassivestunpercentup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_Crestpassivestuntimeup_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_Crestpassivestuntimeup_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_Crestpassivetargethealdown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_Crestpassivetargethealdown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_Crestpassivetargetspeeddown_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_Crestpassivetargetspeeddown_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_crestpassivethorns_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_crestpassivethorns_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="E_CrestSTRecover_Tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Icon_Crest\E_CrestSTRecover_Tex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+</root>

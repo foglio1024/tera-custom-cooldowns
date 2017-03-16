@@ -20,7 +20,8 @@
         <DataTemplate x:Key="BossGageDataTemplate">
             <local:BossGage EntityId="{Binding EntityId}"
                             MaxHP="{Binding MaxHP}"
-                            BossName="{Binding Name}"/>
+                            BossName="{Binding Name}"
+                            Visibility="{Binding Visible}"/>
         </DataTemplate>
     </Window.Resources>
     <Grid>

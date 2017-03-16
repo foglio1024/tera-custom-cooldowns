@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded"
              >
-    <Grid Margin="5">
+    <Grid Margin="2">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -18,7 +18,32 @@
         </Grid.ColumnDefinitions>
         <TextBlock Name="abnormalityName" Grid.Row="0" Text="" Grid.Column="1" Foreground="White"/>
         <!--<TextBlock Name="abnormalityId" Grid.Row="1" Text="{Binding AbnormalityId}"/>-->
-        <Ellipse Name="abnormalityIcon" Fill="{Binding Icon}" ToolTip="{Binding AbnormalityName}" Width="30" Height="30" Stroke="#80ffffff" StrokeThickness="1"/>
-        <local:Arc x:Name="arc" Stroke="#bbbbbb" StrokeThickness="3" Width="34" Height="34" />
+        <Ellipse Name="abnormalityIcon" Fill="{Binding Icon}" ToolTip="{Binding AbnormalityName}" Width="35" Height="35" Stroke="#ffffffff" StrokeThickness="1"/>
+        <local:Arc x:Name="arc" Stroke="#fff" StrokeThickness="3" Width="39" Height="39" EndAngle="0"/>
+        <Grid Width="18" Height="18" x:Name="g" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,22,-22,0">
+            <!--<Grid.CacheMode>
+                <BitmapCache RenderAtScale="1.5"/>
+            </Grid.CacheMode>-->
+            <Ellipse x:Name="fill" Fill="White"  Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stroke="#40000000"/>
+            <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
+                <TextBlock Foreground="#d9000000" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" 
+                   TextAlignment="Center"
+                   FontWeight="Normal" 
+                   FontSize="14" 
+                   x:Name="number" 
+                   FontFamily="Roboto Mono" 
+                   FontStyle="Normal"
+                   Opacity="1" 
+                   Margin="3"
+                   Text="">
+            <!--<TextBlock.Effect>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="0" Color="White"></DropShadowEffect>
+            </TextBlock.Effect>-->
+                </TextBlock>
+            </Viewbox>
+
+        </Grid>
     </Grid>
 </UserControl>

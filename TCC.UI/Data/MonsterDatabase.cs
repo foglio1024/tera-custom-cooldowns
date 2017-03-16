@@ -43,28 +43,57 @@ namespace TCC.Data
                     var id = Convert.ToInt32(monster.Attribute("id").Value);
                     var name = monster.Attribute("name").Value;
                     var isBoss = monster.Attribute("isBoss").Value;
+                    var maxHP = Convert.ToInt32(monster.Attribute("hp").Value);
 
-                    if(isBoss == "True")
-                    {
-                        Monster m = new Monster(id, name);
-                        z.AddMonster(m);
-                    }
+                    //if(isBoss == "True")
+                    //{
+                    //}
+                    Monster m = new Monster(id, name, maxHP);
+                    z.AddMonster(m);
                 }
                 Zones.Add(z);
             }
         }
 
-        public static string GetName(int npc, int type)
+        public static bool TryGetMonster(uint npc, uint type, out Monster m)
         {
             if(Zones.Where(x => x.Id == type).Count() > 0)
             {
-                if (Zones.Where(x => x.Id == type).Single().Monsters.Where(x => x.Id == npc).Count() > 0)
+                //found zone
+                if(Zones.Where(x => x.Id == type).Single().Monsters.Where(x => x.Id == npc).Count() > 0)
                 {
-                    return Zones.Where(x => x.Id == type).Single().Monsters.Where(x => x.Id == npc).Single().Name;
+                    //found monster
+                    m = Zones.Where(x => x.Id == type).Single().Monsters.Where(x => x.Id == npc).FirstOrDefault();
+                    return true;
                 }
-                else return "Unknown";
+                else
+                {
+                    m = new Monster(0, "Unknown", 0);
+                    return false;
+                }
+            }
+            else
+            {
+                m = new Monster(0, "Unknown", 0);
+                return false;
+            }
+        }
+
+        public static string GetName(uint npc, uint type)
+        {
+            if (TryGetMonster(npc, type, out Monster m))
+            {
+                return m.Name;
             }
             else return "Unknown";
+        }
+        public static int GetMaxHP(uint npc, uint type)
+        {
+            if (TryGetMonster(npc, type, out Monster m))
+            {
+                return m.MaxHP;
+            }
+            else return 1;
         }
     }
 
@@ -84,14 +113,17 @@ namespace TCC.Data
             Id = id;
         }
     }
-    class Monster
+    public class Monster
     {
         public int Id { get; private set; } //npc
         public string Name { get; private set; }
-        public Monster(int npc, string name)
+        public int MaxHP { get; private set; }
+
+        public Monster(int npc, string name, int maxHp)
         {
             Id = npc;
             Name = name;
+            MaxHP = maxHp;
         }
     }
 }

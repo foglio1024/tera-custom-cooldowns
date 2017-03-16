@@ -65,8 +65,7 @@ namespace TCC
             get { return (Skill)GetValue(SkillProperty); }
             set { SetValue(SkillProperty, value); }
         }
-        public static readonly DependencyProperty SkillProperty =
-            DependencyProperty.Register("Skill", typeof(Skill), typeof(SkillIconControl));
+        public static readonly DependencyProperty SkillProperty = DependencyProperty.Register("Skill", typeof(Skill), typeof(SkillIconControl));
 
         public void Reset(Skill sk)
         {

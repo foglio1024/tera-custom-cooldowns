@@ -23,6 +23,10 @@ namespace TCC
         {
             Icon_Skills.ResourceManager.IgnoreCase = true;
             Icon_Status.ResourceManager.IgnoreCase = true;
+            Icon_Crest.ResourceManager.IgnoreCase = true;
+
+            System.Diagnostics.Process.GetCurrentProcess().PriorityClass = System.Diagnostics.ProcessPriorityClass.RealTime;
+
             TeraSniffer.Instance.Enabled = true;
 
             WindowManager.Init();

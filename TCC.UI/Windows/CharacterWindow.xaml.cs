@@ -256,9 +256,8 @@ namespace TCC
                 hpTB.Text = newValue.ToString();
                 if (MaxHP != 0)
                 {
-
                     var perc = 100 * newValue / MaxHP;
-                    hpPercTB.Text = perc + "%";
+                    hpPercTB.Text = String.Format("{0:0.#}%",perc);
                 }
                 else
                 {
@@ -348,6 +347,7 @@ namespace TCC
             }));
         }
     }
+
     public class LaurelImageConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

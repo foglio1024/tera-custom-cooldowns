@@ -13,6 +13,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TCC.Parsing;
 
 namespace TCC.UI_elements
 {
@@ -25,12 +26,82 @@ namespace TCC.UI_elements
         {
             InitializeComponent();
 
+            PacketRouter.BossBuffUpdated += PacketRouter_BossBuffUpdated;
+
             //abnormalityId.DataContext = this;
             abnormalityName.DataContext = this;
             abnormalityIcon.DataContext = this;
+
+
+
+
+        }
+        void InitTimer()
+        {
+            SecondsTimer = new System.Timers.Timer(1000);
+            SecondsTimer.Elapsed += ((s, ev) =>
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    CurrentTime--;
+                    if (CurrentTime < 0)
+                    {
+                        number.Text = "";
+                        SecondsTimer.Stop();
+                    }
+                    else if (CurrentTime > 60 * 60 * 24)
+                    {
+                        number.Text = String.Format("{0:0}d", CurrentTime / 3600 * 24);
+                    }
+                    else if (CurrentTime > 3600)
+                    {
+                        number.Text = String.Format("{0:0}h", CurrentTime / 3600);
+                    }
+                    else if (CurrentTime > 60)
+                    {
+                        number.Text = String.Format("{0:0}m", CurrentTime / 60);
+                    }
+                    else
+                    {
+                        number.Text = String.Format("{0:0}", CurrentTime);
+                    }
+                });
+            });
+
+        }
+        private void PacketRouter_BossBuffUpdated(Boss b, Data.Abnormality ab, int duration, int stacks)
+        {
+            //SecondsTimer.Stop();
+
+            Dispatcher.Invoke(() =>
+            {
+                if (b.EntityId == BossId)
+                {
+                    if(ab.Id == AbnormalityId)
+                    {
+                        Duration = duration;
+                        CurrentTime = duration / 1000;
+                        number.Text = (duration/1000).ToString();
+
+                        //InitTimer();
+                        SecondsTimer.Stop();
+                        SecondsTimer.Enabled = true;
+                        arc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(duration)));
+                    }
+                }
+
+            });
         }
 
 
+
+        public ulong BossId
+        {
+            get { return (ulong)GetValue(BossIdProperty); }
+            set { SetValue(BossIdProperty, value); }
+        }
+        public static readonly DependencyProperty BossIdProperty =
+            DependencyProperty.Register("BossId", typeof(ulong), typeof(AbnormalityIndicator));
 
         public uint AbnormalityId
         {
@@ -64,9 +135,34 @@ namespace TCC.UI_elements
         public static readonly DependencyProperty DurationProperty =
             DependencyProperty.Register("Duration", typeof(int), typeof(AbnormalityIndicator));
 
+        System.Timers.Timer SecondsTimer;
+        int CurrentTime;
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            arc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(Duration)));
+
+            Dispatcher.Invoke(() =>
+            {
+
+                this.RenderTransform = new ScaleTransform(1, 1, .5, .5);
+                this.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(300)) { EasingFunction = new QuadraticEase() });
+                this.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(300)) { EasingFunction = new QuadraticEase() });
+
+                if (Duration < 2000000000)
+                {
+                    arc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(Duration)));
+                    CurrentTime = Duration / 1000;
+                    number.Text = (Duration / 1000).ToString();
+
+                    InitTimer();
+                    SecondsTimer.Stop();
+                    SecondsTimer.Enabled = true;
+                }
+                else
+                {
+                    number.Text = "-";
+                }
+            });
         }
     }
 }

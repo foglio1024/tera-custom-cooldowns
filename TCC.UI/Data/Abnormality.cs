@@ -49,7 +49,14 @@ namespace TCC.Data
                     iconBitmap = (Bitmap)Properties.Icon_Status.ResourceManager.GetObject(iconName);
                 }));
             }
-
+            else if (iconName.Contains("Icon_Crest."))
+            {
+                iconName = iconName.Replace("Icon_Crest.", "");
+                CooldownWindow.Instance.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    iconBitmap = (Bitmap)Properties.Icon_Crest.ResourceManager.GetObject(iconName);
+                }));
+            }
             else
             {
                 iconBitmap = (Bitmap)Properties.Icon_Classes.common;

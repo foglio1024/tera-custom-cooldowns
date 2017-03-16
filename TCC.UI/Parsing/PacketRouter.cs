@@ -18,6 +18,7 @@ namespace TCC.Parsing
     public delegate void UpdateFloatStatEventHandler(float statValue);
     public delegate void UpdateStatWithIdEventHandler(ulong id, object statValue);
     public delegate void MessageEventHandler(Tera.Message msg);
+    public delegate void UpdateBuffEventHandler(Boss b, Abnormality ab, int duration, int stacks);
 
     public static class PacketRouter
     {
@@ -58,6 +59,7 @@ namespace TCC.Parsing
         public static event UpdateStatWithIdEventHandler BossHPChanged;
         public static event UpdateStatWithIdEventHandler EnragedChanged;
 
+        public static event UpdateBuffEventHandler BossBuffUpdated;
 
         public static void Init()
         {
@@ -110,7 +112,7 @@ namespace TCC.Parsing
             switch (OpCodeNamer.GetName(msg.OpCode))
             {
                 case ("S_START_COOLTIME_SKILL"):
-                    HandleNewSkillCooldown(new TCC.Messages.S_START_COOLTIME_SKILL(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
+                    HandleNewSkillCooldown(new S_START_COOLTIME_SKILL(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
                     break;
                 case ("S_DECREASE_COOLTIME_SKILL"):
                     HandleDecreaseSkillCooldown(new S_DECREASE_COOLTIME_SKILL(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
@@ -125,7 +127,7 @@ namespace TCC.Parsing
                     HandlePlayerChangeMP(new S_PLAYER_CHANGE_MP(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
                     break;
                 case ("S_BOSS_GAGE_INFO"):
-                    HandleGageReceived(new TCC.Messages.S_BOSS_GAGE_INFO(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
+                    HandleGageReceived(new S_BOSS_GAGE_INFO(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
                     break;
                 case ("S_PLAYER_CHANGE_STAMINA"):
                     HandlePlayerChangeStamina(new S_PLAYER_CHANGE_STAMINA(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
@@ -137,7 +139,7 @@ namespace TCC.Parsing
                     HandleNewItemCooldown(new S_START_COOLTIME_ITEM(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
                     break;
                 case ("S_PLAYER_STAT_UPDATE"):
-                    HandlePlayerStatUpdate(new TCC.Messages.S_PLAYER_STAT_UPDATE(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
+                    HandlePlayerStatUpdate(new S_PLAYER_STAT_UPDATE(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
                     break;
                 case ("S_USER_STATUS"):
                     HandleUserStatusChanged(new S_USER_STATUS(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
@@ -146,7 +148,16 @@ namespace TCC.Parsing
                     HandleNpcStatusChanged(new S_NPC_STATUS(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
                     break;
                 case ("S_DESPAWN_NPC"):
-                    HandlerNpcDespawn(new S_DESPAWN_NPC(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
+                    HandleNpcDespawn(new S_DESPAWN_NPC(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
+                    break;
+                case ("S_SPAWN_NPC"):
+                    HandleNpcSpawn(new S_SPAWN_NPC(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
+                    break;
+                case ("S_ABNORMALITY_REFRESH"):
+                    HandleAbnormalityRefresh(new S_ABNORMALITY_REFRESH(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
+                    break;
+                case ("S_ABNORMALITY_END"):
+                    HandleAbnormalityEnd(new S_ABNORMALITY_END(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
                     break;
                 case ("S_SPAWN_ME"):
                     HandleSpawn();
@@ -243,29 +254,64 @@ namespace TCC.Parsing
                 default:
                     break;
             }
-            if(SessionManager.CurrentBosses.Where(x => x.EntityId == p.targetId).Count() > 0)
+            if(SessionManager.TryGetBossById(p.targetId, out Boss b))
             {
                 if(AbnormalityDatabase.TryGetAbnormality(p.id, out Abnormality ab))
                 {
                     App.Current.Dispatcher.Invoke(() =>
                     {
-                        if (SessionManager.CurrentBosses.Where(x => x.EntityId == p.targetId).First().Buffs.Where(x => x.Buff.Id == p.id).Count() > 0)
+                        if (b.HasBuff(ab))
                         {
-                            Console.WriteLine("{0} already present, skipping", ab.Name);
-                            return;
+                            BossBuffUpdated?.Invoke(b, ab, p.duration, p.stacks);
+                            //SessionManager.CurrentBosses.Where(x => x.EntityId == p.targetId).First().Buffs.Where(x => x.Buff.Id == p.id).FirstOrDefault().Duration = p.duration;
+                            //SessionManager.CurrentBosses.Where(x => x.EntityId == p.targetId).First().Buffs.Where(x => x.Buff.Id == p.id).FirstOrDefault().Stacks = p.stacks;
                         }
                         else
                         {
-                            SessionManager.CurrentBosses.Where(x => x.EntityId == p.targetId).First().Buffs.Add(new BuffDuration(ab, p.duration, p.stacks));
-                            Console.WriteLine("Added {0} to {1}", ab.Name, SessionManager.CurrentBosses.Where(x => x.EntityId == p.targetId).First().Name);
+                            SessionManager.CurrentBosses.Where(x => x.EntityId == p.targetId).First().Buffs.Add(new BuffDuration(ab, p.duration, p.stacks, p.targetId));
                         }
                     });
                 }
             }
         }
+        static void HandleAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
+        {
+            if (AbnormalityDatabase.TryGetAbnormality(p.AbnormalityId, out Abnormality ab))
+            {
+                App.Current.Dispatcher.Invoke(() =>
+                {
+                    if (SessionManager.TryGetBossById(p.TargetId, out Boss b))
+                    {
+                        if (b.HasBuff(ab))
+                        {
+                            BossBuffUpdated?.Invoke(b, ab, p.Duration, p.Stacks);
 
+                            //SessionManager.CurrentBosses.Where(x => x.EntityId == p.TargetId).First().Buffs.Where(x => x.Buff.Id == p.AbnormalityId).FirstOrDefault().Duration = p.Duration;
+                            b.Buffs.Where(x => x.Buff.Id == p.AbnormalityId).FirstOrDefault().Stacks = p.Stacks;
+                        }
+                        else
+                        {
+                            b.Buffs.Add(new BuffDuration(ab, p.Duration, p.Stacks, p.TargetId));
+                        }
+                    }
+                });
+            }
 
+        }
+        static void HandleAbnormalityEnd(S_ABNORMALITY_END p)
+        {
+            if (AbnormalityDatabase.TryGetAbnormality(p.id, out Abnormality ab))
+            {
+                App.Current.Dispatcher.Invoke(() =>
+                {
+                    if (SessionManager.TryGetBossById(p.target, out Boss b) && b.HasBuff(ab))
+                    {
+                        b.EndBuff(ab);
+                    }
+                });
+            }
 
+        }
         static void HandlePlayerStatUpdate(S_PLAYER_STAT_UPDATE p)
         {
             switch (SessionManager.CurrentClass)
@@ -380,6 +426,12 @@ namespace TCC.Parsing
         static void HandleSpawn()
         {
             WindowManager.ShowWindow(WindowManager.CharacterWindow);
+            Console.WriteLine("[S_SPAWN_ME]");
+            App.Current.Dispatcher.Invoke(() =>
+            {
+
+                SessionManager.CurrentBosses.Clear();
+            });
         }
         static void HandleCharList(Tera.Message msg)
         {
@@ -392,49 +444,53 @@ namespace TCC.Parsing
         }
         static void HandleGageReceived(S_BOSS_GAGE_INFO p)
         {
-            if(SessionManager.CurrentBosses.Where(x => x.EntityId == p.EntityId).Count() > 0)
+            if(SessionManager.TryGetBossById(p.EntityId, out Boss b))
             {
-                //return;
-                if (SessionManager.CurrentBosses.Where(x => x.EntityId == p.EntityId).Single().CurrentHP != p.CurrentHP)
+                b.MaxHP = p.MaxHP;
+                b.Visible = System.Windows.Visibility.Visible;
+
+                if (b.CurrentHP != p.CurrentHP)
                 {
-                    //if (p.CurrentHP == 0)
-                    //{
-                    //    App.Current.Dispatcher.BeginInvoke(new Action(() =>
-                    //    {
-                    //        SessionManager.CurrentBosses.Remove(SessionManager.CurrentBosses.Where(x => x.EntityId == p.EntityId).Single());
-                    //    }));
-                    //    return;
-                    //}
-                    SessionManager.CurrentBosses.Where(x => x.EntityId == p.EntityId).Single().CurrentHP = p.CurrentHP;
+                    b.CurrentHP = p.CurrentHP;
                     BossHPChanged?.Invoke(p.EntityId, p.CurrentHP);
                 }
             }
             else
             {
-                App.Current.Dispatcher.BeginInvoke(new Action(() =>
+                App.Current.Dispatcher.Invoke(() =>
                 {
-                    SessionManager.CurrentBosses.Add(new Boss(p.EntityId, p.Type, p.Npc, p.CurrentHP, p.MaxHP));
-                }));
+                    SessionManager.CurrentBosses.Add(new Boss(p.EntityId, (uint)p.Type, (uint)p.Npc, p.CurrentHP, p.MaxHP, System.Windows.Visibility.Visible));
+                });
             }
         }
         static void HandleNpcStatusChanged(S_NPC_STATUS p)
         {
-            if (SessionManager.CurrentBosses.Where(x => x.EntityId == p.EntityId).Count() > 0)
+            if (SessionManager.TryGetBossById(p.EntityId, out Boss b))
             {
-                if (SessionManager.CurrentBosses.Where(x => x.EntityId == p.EntityId).Single().Enraged != p.IsEnraged)
+                if (b.Enraged != p.IsEnraged)
                 {
-                    SessionManager.CurrentBosses.Where(x => x.EntityId == p.EntityId).Single().Enraged = p.IsEnraged;
+                    b.Enraged = p.IsEnraged;
                     EnragedChanged?.Invoke(p.EntityId, p.IsEnraged);
                 }
             }
         }
-        static void HandlerNpcDespawn(S_DESPAWN_NPC p)
+        static void HandleNpcDespawn(S_DESPAWN_NPC p)
         {
-            if(SessionManager.CurrentBosses.Where(x => x.EntityId == p.target).Count() > 0)
+            if(SessionManager.TryGetBossById(p.target, out Boss b))
             {
                 App.Current.Dispatcher.Invoke(() =>
                 {
-                    SessionManager.CurrentBosses.Remove(SessionManager.CurrentBosses.Where(x => x.EntityId == p.target).Single());
+                    SessionManager.CurrentBosses.Remove(b);
+                });
+            }
+        }
+        static void HandleNpcSpawn(S_SPAWN_NPC p)
+        {
+            if (MonsterDatabase.TryGetMonster(p.Npc, (uint)p.Type, out Monster m))
+            {
+                App.Current.Dispatcher.Invoke(() =>
+                {
+                    SessionManager.CurrentBosses.Add(new Boss(p.EntityId, (uint)p.Type, p.Npc, System.Windows.Visibility.Collapsed));
                 });
             }
         }

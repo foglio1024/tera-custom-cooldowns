@@ -1,22 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using TCC.Data;
 using TCC.Parsing;
 
@@ -24,15 +15,17 @@ namespace TCC
 {
     public class BuffDuration
     {
+        public ulong Target { get; set; }
         public Abnormality Buff { get; set; }
         public int Duration { get; set; }
         public int Stacks { get; set; }
 
-        public BuffDuration(Abnormality b, int d, int s)
+        public BuffDuration(Abnormality b, int d, int s, ulong t)
         {
             Buff = b;
             Duration = d;
             Stacks = s;
+            Target = t;
         }
     }
 
@@ -149,7 +142,15 @@ namespace TCC
         {
             Dispatcher.Invoke(() =>
             {
-                SlideAnimation.To = BaseRect.ActualWidth * (val/100);
+                if(BaseRect.ActualWidth*(val/100) < 0)
+                {
+                    SlideAnimation.To = 0;
+                }
+                else
+                {
+                    SlideAnimation.To = BaseRect.ActualWidth * (val/100);
+                }
+
                 NextEnrage.RenderTransform.BeginAnimation(TranslateTransform.XProperty, SlideAnimation);
             });
         }

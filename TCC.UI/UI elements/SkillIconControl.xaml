@@ -7,9 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="100" Loaded="ControlLoaded" >
     <Grid Width="Auto" Height="Auto" Margin="2">
-        <Grid.CacheMode>
-            <BitmapCache RenderAtScale="3"/>
-        </Grid.CacheMode>
+        <!--<Grid.CacheMode>
+            <BitmapCache RenderAtScale="1"/>
+        </Grid.CacheMode>-->
         <Ellipse Width="50" Height="50" x:Name="icon" Fill="{Binding IconBrush}" ToolTip="{Binding SkillName}" Stroke="#90ffffff" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <local:Arc x:Name="arc" Opacity="1" Width="55" Height="55" StrokeThickness="4" Stroke="White" EndAngle="270.9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
         </local:Arc>

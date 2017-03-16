@@ -25,6 +25,8 @@ namespace TCC.Messages
             duration = reader.ReadInt32();
             reader.Skip(4);
             stacks = reader.ReadInt32();
+
+            //Console.WriteLine("[S_ABNORMALITY_BEGIN] target:{0} id:{1} duration:{2} stacks:{3}", targetId, id, duration, stacks);
         }
     }
 }

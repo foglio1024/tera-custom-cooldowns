@@ -82,6 +82,9 @@ namespace TCC.Data
             {
                 ParseAbnormalityIconDoc(doc);
             }
+
+            StrSheet_AbnormalityDocs.Clear();
+            AbnormalityIconDataDocs.Clear();
         }
         public static bool TryGetAbnormality(uint id, out Abnormality ab)
         {
