@@ -183,6 +183,8 @@ namespace TCC
             levelTB.SetBinding(TextBlock.TextProperty, levelBinding);
             ilvlTB.SetBinding(TextBlock.TextProperty, ilvlBinding);
 
+            
+
             var d = new DispatcherTimer();
             d.Interval = TimeSpan.FromMilliseconds(333);
             d.Tick += D_Tick;
@@ -346,6 +348,22 @@ namespace TCC
                 CurrentClass = Class.None;
             }));
         }
+        public static BitmapImage Bitmap2BitmapImage(System.Drawing.Bitmap bitmap)
+        {
+            using (var memory = new MemoryStream())
+            {
+                bitmap.Save(memory, ImageFormat.Png);
+                memory.Position = 0;
+
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = memory;
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.EndInit();
+
+                return bitmapImage;
+            }
+        }
     }
 
     public class LaurelImageConverter : IValueConverter
@@ -381,28 +399,12 @@ namespace TCC
                 default:
                     break;
             }
-            return new ImageBrush(Bitmap2BitmapImage(bitmap));
+            return new ImageBrush(CharacterWindow.Bitmap2BitmapImage(bitmap));
         }
 
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
         static extern bool DeleteObject(IntPtr hObject);
 
-        private BitmapImage Bitmap2BitmapImage(System.Drawing.Bitmap bitmap)
-        {
-            using (var memory = new MemoryStream())
-            {
-                bitmap.Save(memory, ImageFormat.Png);
-                memory.Position = 0;
-
-                var bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.StreamSource = memory;
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.EndInit();
-
-                return bitmapImage;
-            }
-        }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -461,28 +463,12 @@ namespace TCC
                     break;
 
             }
-            return new ImageBrush(Bitmap2BitmapImage(bitmap));
+            return new ImageBrush(CharacterWindow.Bitmap2BitmapImage(bitmap));
         }
 
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
         static extern bool DeleteObject(IntPtr hObject);
 
-        private BitmapImage Bitmap2BitmapImage(System.Drawing.Bitmap bitmap)
-        {
-            using (var memory = new MemoryStream())
-            {
-                bitmap.Save(memory, ImageFormat.Png);
-                memory.Position = 0;
-
-                var bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.StreamSource = memory;
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.EndInit();
-
-                return bitmapImage;
-            }
-        }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

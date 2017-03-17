@@ -30,6 +30,7 @@ namespace TCC.Messages
             //199
             currHp = reader.ReadInt32();//195
             currMp = reader.ReadInt32();//191
+            //Console.WriteLine("unk1:"+unk1);
             unk1 = reader.ReadInt32();//187
             maxHp = reader.ReadInt32();//183
             maxMp = reader.ReadInt32();//179
@@ -39,6 +40,7 @@ namespace TCC.Messages
             baseBalanceFactor = reader.ReadInt32();//163
             baseMovSpeed = reader.ReadInt16();//161
             unk2 = reader.ReadInt16();//159
+            //Console.WriteLine("unk2:" + unk2);
             baseAtkSpeed = reader.ReadInt16();//157
             baseCritRate = reader.ReadSingle();//153
             baseCritResist = reader.ReadSingle();//149

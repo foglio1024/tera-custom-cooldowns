@@ -290,7 +290,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\database\monsters-EU-EN.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\database\SkillIconData\SkillIconData-0.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -376,6 +376,7 @@
     <Content Include="resources\data\opcodes\smt_311380.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="resources\ribbon.png" />
     <None Include="resources\Icon_Crest\E_CrestSTRecover_Tex.png" />
     <None Include="resources\Icon_Crest\E_crestpassivethorns_Tex.png" />
     <None Include="resources\Icon_Crest\E_Crestpassivetargetspeeddown_Tex.png" />

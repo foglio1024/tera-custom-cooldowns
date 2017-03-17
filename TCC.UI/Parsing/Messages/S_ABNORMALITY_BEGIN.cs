@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TCC.Data;
 using Tera.Game;
 using Tera.Game.Messages;
 
@@ -26,7 +27,13 @@ namespace TCC.Messages
             reader.Skip(4);
             stacks = reader.ReadInt32();
 
-            //Console.WriteLine("[S_ABNORMALITY_BEGIN] target:{0} id:{1} duration:{2} stacks:{3}", targetId, id, duration, stacks);
+            if(targetId == SessionManager.CurrentCharId)
+            {
+                var name = string.Empty;
+                if (TCC.Data.AbnormalityDatabase.TryGetAbnormality(id, out Abnormality ab)) name = ab.Name;
+                //Console.WriteLine("[S_ABNORMALITY_BEGIN] target:{0} id:{1} name:{4} duration:{2} stacks:{3}", targetId, id, duration, stacks, name);
+            }
         }
     }
 }
+

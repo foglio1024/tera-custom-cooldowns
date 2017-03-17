@@ -4,6 +4,14 @@
              xmlns:local="clr-namespace:TCC"
              Startup="OnStartup">
     <Application.Resources>
-         
+        <Style x:Key="border" TargetType="Border">
+            <Setter Property="Background" Value="#ff202020"/>
+            <Setter Property="CornerRadius" Value="0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#444"/>
+            <Setter Property="Height" Value="Auto" />
+            <Setter Property="Width" Value="Auto"/>
+        </Style>
+
     </Application.Resources>
 </Application>

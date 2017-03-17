@@ -28,7 +28,7 @@ namespace TCC.Parsing.Messages
             npc = reader.ReadUInt32();
             type = reader.ReadInt16();
 
-            Console.WriteLine("[S_SPAWN NPC] id:{0} name:{1}", id, MonsterDatabase.GetName(npc, (uint)type));
+           // Console.WriteLine("[S_SPAWN NPC] id:{0} name:{1}", id, MonsterDatabase.GetName(npc, (uint)type));
         }
     }
 }

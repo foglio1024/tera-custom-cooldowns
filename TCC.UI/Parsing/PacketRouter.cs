@@ -171,11 +171,21 @@ namespace TCC.Parsing
                 case ("S_LOGIN"):
                     HandleCharLogin(new S_LOGIN(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
                     break;
+                case ("S_GMEVENT_OX_QUIZ_OPEN"):
+                    var evtPacket = new EventQuestion(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer));
+                    break;
                 default:
                     break;
             }
         }
-
+        class EventQuestion : Tera.Game.Messages.ParsedMessage
+        {
+            public EventQuestion(TeraMessageReader reader) : base(reader)
+            {
+                reader.Skip(10);
+                Console.WriteLine(reader.ReadTeraString());
+            }
+        }
         static void HandleCharLogin(S_LOGIN p)
         {
             SessionManager.Logged = true;
@@ -260,6 +270,11 @@ namespace TCC.Parsing
                 {
                     App.Current.Dispatcher.Invoke(() =>
                     {
+                        if (ab.Name.Contains("(Hidden)") || ab.Name.Equals("Unknown") || ab.Name.Equals(string.Empty))
+                        {
+                            //Console.WriteLine("Skipping {0}", ab.Name);
+                            return;
+                        }
                         if (b.HasBuff(ab))
                         {
                             BossBuffUpdated?.Invoke(b, ab, p.duration, p.stacks);
@@ -268,7 +283,15 @@ namespace TCC.Parsing
                         }
                         else
                         {
-                            SessionManager.CurrentBosses.Where(x => x.EntityId == p.targetId).First().Buffs.Add(new BuffDuration(ab, p.duration, p.stacks, p.targetId));
+                            if(p.duration < 200000000)
+                            {
+                                SessionManager.CurrentBosses.Where(x => x.EntityId == p.targetId).First().Buffs.Add(new BuffDuration(ab, p.duration, p.stacks, p.targetId));
+                            }
+                            else
+                            {
+                                SessionManager.CurrentBosses.Where(x => x.EntityId == p.targetId).First().Buffs.Insert(0,new BuffDuration(ab, p.duration, p.stacks, p.targetId));
+                            }
+
                         }
                     });
                 }
@@ -291,7 +314,20 @@ namespace TCC.Parsing
                         }
                         else
                         {
-                            b.Buffs.Add(new BuffDuration(ab, p.Duration, p.Stacks, p.TargetId));
+                            if (ab.Name.Contains("(Hidden)") || ab.Name.Equals("Unknown") || ab.Name.Equals(string.Empty))
+                            {
+                                //Console.WriteLine("Skipping refresh: {0}", ab.Name);
+                                return;
+                            }
+                            if (p.Duration < 2000000000)
+                            {
+                                b.Buffs.Add(new BuffDuration(ab, p.Duration, p.Stacks, p.TargetId));
+                            }
+                            else
+                            {
+                                b.Buffs.Insert(0,new BuffDuration(ab, p.Duration, p.Stacks, p.TargetId));
+                            }
+
                         }
                     }
                 });
@@ -460,8 +496,12 @@ namespace TCC.Parsing
                 App.Current.Dispatcher.Invoke(() =>
                 {
                     SessionManager.CurrentBosses.Add(new Boss(p.EntityId, (uint)p.Type, (uint)p.Npc, p.CurrentHP, p.MaxHP, System.Windows.Visibility.Visible));
+
                 });
             }
+
+            //Console.WriteLine("GAGE: {0} - {1}", MonsterDatabase.GetName((uint)p.Npc, (uint)p.Type), p.MaxHP);
+
         }
         static void HandleNpcStatusChanged(S_NPC_STATUS p)
         {
@@ -491,6 +531,8 @@ namespace TCC.Parsing
                 App.Current.Dispatcher.Invoke(() =>
                 {
                     SessionManager.CurrentBosses.Add(new Boss(p.EntityId, (uint)p.Type, p.Npc, System.Windows.Visibility.Collapsed));
+                    //Console.WriteLine("SPAWNED: {0} - {1}", m.Name, m.MaxHP);
+                    Console.WriteLine(SessionManager.CurrentBosses.Count);
                 });
             }
         }

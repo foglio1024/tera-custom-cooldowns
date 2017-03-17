@@ -61,24 +61,49 @@ namespace TCC
     public class Boss : INotifyPropertyChanged
     {
         public ulong EntityId { get; set; }
-        public float MaxHP { get; set; }
         string name;
         public string Name
         { get => name;
             set
             {
-                if(name != value)
+                if (name != value)
                 {
                     name = value;
                 }
             }
         }
+
         public ObservableCollection<BuffDuration> Buffs;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public bool Enraged { get; set; }
-        public float CurrentHP { get; set; }
+        float maxHP;
+        public float MaxHP
+        {
+            get => maxHP;
+            set
+            {
+                if (maxHP != value)
+                {
+                    maxHP = value;
+                    NotifyPropertyChanged("MaxHP");
+                }
+            }
+        }
+        float currentHP;
+        public float CurrentHP
+        {
+            get => currentHP;
+            set
+            {
+                if (currentHP != value)
+                {
+                    currentHP = value;
+                    NotifyPropertyChanged("CurrentHP");
+                }
+            }
+        }
         Visibility visible;
         public Visibility Visible { get { return visible; }  set {
                 if(visible != value)
@@ -135,7 +160,7 @@ namespace TCC
             EntityId = eId;
             Name = MonsterDatabase.GetName(tId, zId);
             MaxHP = MonsterDatabase.GetMaxHP(tId, zId);
-            CurrentHP = 0;
+            CurrentHP = MaxHP;
             Buffs = new ObservableCollection<BuffDuration>();
             Visible = visible;
         }

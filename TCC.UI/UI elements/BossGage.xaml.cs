@@ -34,7 +34,7 @@ namespace TCC
     /// </summary>
     public partial class BossGage : UserControl, INotifyPropertyChanged
     {
-        NumberFormatInfo nfi = new NumberFormatInfo { NumberGroupSeparator = "`", NumberDecimalDigits = 0 };
+        NumberFormatInfo nfi = new NumberFormatInfo { NumberGroupSeparator = ".", NumberDecimalDigits = 0 };
 
         public ulong EntityId
         {
@@ -57,6 +57,15 @@ namespace TCC
         }
         public static readonly DependencyProperty BossNameProperty = DependencyProperty.Register("BossName", typeof(string), typeof(BossGage));
 
+        public float CurrentHP
+        {
+            get { return (float)GetValue(CurrentHPProperty); }
+            set { SetValue(CurrentHPProperty, value); }
+        }
+        public static readonly DependencyProperty CurrentHPProperty =
+            DependencyProperty.Register("CurrentHP", typeof(float), typeof(BossGage));
+
+
         bool enraged;
         public bool Enraged
         {
@@ -75,15 +84,15 @@ namespace TCC
             }
         }
 
-        float currentHP;
-        public float CurrentHP
-        {
-            get { return currentHP; }
-            set
-            {
-                currentHP = value;
-            }
-        }
+        //float currentHP;
+        //public float CurrentHP
+        //{
+        //    get { return currentHP; }
+        //    set
+        //    {
+        //        currentHP = value;
+        //    }
+        //}
 
         float CurrentPercentage
         {
@@ -121,13 +130,14 @@ namespace TCC
             SlideAnimation.Duration = TimeSpan.FromMilliseconds(250);
             ColorChangeAnimation.Duration = TimeSpan.FromMilliseconds(AnimationTime);
             DoubleAnimation.Duration = TimeSpan.FromMilliseconds(AnimationTime);
-            NextEnrage.RenderTransform = new TranslateTransform(600*.9,0);
             SetEnragePercTB(90);
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             HPrect.Fill = new SolidColorBrush(Color.FromArgb(0xff, 0x4a, 0x82, 0xbd));
             Abnormalities.ItemsSource = SessionManager.CurrentBosses.Where(x => x.EntityId == EntityId).First().Buffs;
+            NextEnrage.RenderTransform = new TranslateTransform(BaseRect.Width * .9, 0);
+            Perc2.Text = String.Format("{0} / {1}", CurrentHP.ToString("n", nfi), MaxHP.ToString("n", nfi));
 
         }
 
@@ -135,7 +145,7 @@ namespace TCC
         {
             Dispatcher.Invoke(() =>
             {
-                NextEnrageTB.Text = String.Format("{0:0.0}", v);
+                NextEnrageTB.Text = String.Format("{0:0.#}", v);
             });
         }
         void SlideNextEnrage(double val)
@@ -188,7 +198,7 @@ namespace TCC
         {
             Dispatcher.Invoke(() =>
             {
-                DoubleAnimation.To = 60;
+                DoubleAnimation.To = EnrageGrid.ActualHeight;
                 EnrageGrid.BeginAnimation(WidthProperty, DoubleAnimation);
 
                 EnrageArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(EnrageDuration)));
@@ -218,10 +228,10 @@ namespace TCC
 
         private void BossGage_HPUpdated(ulong id, object hp)
         {      
-            CurrentHP = Convert.ToInt32(hp);
 
             Dispatcher.BeginInvoke(new Action(() =>
                 {
+                    CurrentHP = Convert.ToInt32(hp);
                     if (id == EntityId)
                     {
                         DoubleAnimation.To = ValueToLength(CurrentHP, MaxHP);

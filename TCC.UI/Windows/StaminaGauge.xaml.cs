@@ -47,9 +47,13 @@ namespace TCC
             StaminaAmount.Stroke = new SolidColorBrush(color);
             glow.Color = color;
             baseEll.Fill = new SolidColorBrush(System.Windows.Media.Color.FromArgb(0xff, 0x20, 0x20, 0x20));
-            _doubleAnimation.Duration = TimeSpan.FromMilliseconds(400);
-            _colorAnimation.Duration = TimeSpan.FromMilliseconds(200);
+            App.Current.Dispatcher.Invoke(() =>
+            {
 
+                _doubleAnimation.Duration = TimeSpan.FromMilliseconds(400);
+                _colorAnimation.Duration = TimeSpan.FromMilliseconds(200);
+
+            });
 
         }
 
