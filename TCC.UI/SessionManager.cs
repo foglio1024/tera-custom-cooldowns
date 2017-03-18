@@ -43,15 +43,15 @@ namespace TCC
         public static ObservableCollection<Boss> CurrentBosses = new ObservableCollection<Boss>();
         public static bool TryGetBossById(ulong id, out Boss b)
         {
-            if(CurrentBosses.Where(x => x.EntityId == id).Count() > 0)
-            {
-                b = CurrentBosses.Where(x => x.EntityId == id).FirstOrDefault();
-                return true;
-            }
-            else
+            b = CurrentBosses.FirstOrDefault(x => x.EntityId == id);
+            if(b == null)
             {
                 b = new Boss(0, 0, 0, Visibility.Collapsed);
                 return false;
+            }
+            else
+            {
+                return true;
             }
         }
 

@@ -272,14 +272,11 @@ namespace TCC.Parsing
                     {
                         if (ab.Name.Contains("(Hidden)") || ab.Name.Equals("Unknown") || ab.Name.Equals(string.Empty))
                         {
-                            //Console.WriteLine("Skipping {0}", ab.Name);
                             return;
                         }
                         if (b.HasBuff(ab))
                         {
                             BossBuffUpdated?.Invoke(b, ab, p.duration, p.stacks);
-                            //SessionManager.CurrentBosses.Where(x => x.EntityId == p.targetId).First().Buffs.Where(x => x.Buff.Id == p.id).FirstOrDefault().Duration = p.duration;
-                            //SessionManager.CurrentBosses.Where(x => x.EntityId == p.targetId).First().Buffs.Where(x => x.Buff.Id == p.id).FirstOrDefault().Stacks = p.stacks;
                         }
                         else
                         {
@@ -532,7 +529,6 @@ namespace TCC.Parsing
                 {
                     SessionManager.CurrentBosses.Add(new Boss(p.EntityId, (uint)p.Type, p.Npc, System.Windows.Visibility.Collapsed));
                     //Console.WriteLine("SPAWNED: {0} - {1}", m.Name, m.MaxHP);
-                    Console.WriteLine(SessionManager.CurrentBosses.Count);
                 });
             }
         }
