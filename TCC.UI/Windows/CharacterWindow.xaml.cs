@@ -111,8 +111,11 @@ namespace TCC
         {
             InitializeComponent();
 
-            _doubleAnimation.EasingFunction = new QuadraticEase();
-            _doubleAnimation.Duration = TimeSpan.FromMilliseconds(AnimationTime);
+            //_doubleAnimation.EasingFunction = new QuadraticEase();
+            //_doubleAnimation.Duration = TimeSpan.FromMilliseconds(AnimationTime);
+
+
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -140,9 +143,15 @@ namespace TCC
             PacketRouter.MaxSTUpdated += SetMaxST;
             //PacketRouter.MaxFlightEnergyUpdated += SetMaxFlightEnergy;
 
-            hpBar.Width = 0;
-            mpBar.Width = 0;
-            stBar.Width = 0;
+            hpBar.RenderTransform = new ScaleTransform(1, 1, 0, .5);
+            mpBar.RenderTransform = new ScaleTransform(1, 1, 0, .5);
+            stBar.RenderTransform = new ScaleTransform(1, 1, 0, .5);
+            flightBar.RenderTransform = new ScaleTransform(1, 1, 0, .5);
+
+            hpBar.Width = @base.Width;
+            mpBar.Width = @base.Width;
+            stBar.Width = @base.Width;
+            flightBar.Width = dummyFlightBar.Width;
 
             Binding classBinding = new Binding
             {
@@ -252,14 +261,14 @@ namespace TCC
         {
             Dispatcher.BeginInvoke(new Action(() =>  
             {
-                _doubleAnimation.To = ValueToLength(newValue, MaxHP);
-                hpBar.BeginAnimation(WidthProperty, _doubleAnimation);
+                //_doubleAnimation.To = ValueToLength(newValue, MaxHP);
+                hpBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation((double)newValue / (double)MaxHP, TimeSpan.FromMilliseconds(AnimationTime)) { EasingFunction = new QuadraticEase() });
 
                 hpTB.Text = newValue.ToString();
                 if (MaxHP != 0)
                 {
                     var perc = 100 * newValue / MaxHP;
-                    hpPercTB.Text = String.Format("{0:0.#}%",perc);
+                    hpPercTB.Text = String.Format("{0:0.0}%",perc);
                 }
                 else
                 {
@@ -271,8 +280,8 @@ namespace TCC
         {
             Dispatcher.BeginInvoke(new Action(() => 
             {
-                _doubleAnimation.To = ValueToLength(newValue, MaxMP);
-                mpBar.BeginAnimation(WidthProperty, _doubleAnimation);
+                //_doubleAnimation.To = ValueToLength(newValue, MaxMP);
+                mpBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation((double)newValue / (double)MaxMP, TimeSpan.FromMilliseconds(AnimationTime)) { EasingFunction = new QuadraticEase() });
 
                 mpTB.Text = newValue.ToString();
             }));
@@ -282,8 +291,8 @@ namespace TCC
         {
             Dispatcher.BeginInvoke(new Action(() => 
             {
-                _doubleAnimation.To = ValueToLength(newValue, MaxST);
-                stBar.BeginAnimation(WidthProperty, _doubleAnimation);
+                //_doubleAnimation.To = ValueToLength(newValue, MaxST);
+                stBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation((double)newValue / (double)MaxST, TimeSpan.FromMilliseconds(AnimationTime)) { EasingFunction = new QuadraticEase() });
 
                 stTB.Text = newValue.ToString();
             }));
@@ -293,8 +302,8 @@ namespace TCC
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                _doubleAnimation.To = dummyFlightBar.ActualWidth * newValue / 1000;
-                flightBar.BeginAnimation(WidthProperty, _doubleAnimation);
+                //_doubleAnimation.To = dummyFlightBar.ActualWidth * newValue / 1000;
+                flightBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation((double)newValue / (double)1000, TimeSpan.FromMilliseconds(AnimationTime)) { EasingFunction = new QuadraticEase() });
             }));
         }
         private void SetMaxFlightEnergy(int statValue)
@@ -307,7 +316,7 @@ namespace TCC
         //{
         //    return new DoubleAnimation(value, TimeSpan.FromMilliseconds(AnimationTime)) { EasingFunction = new QuadraticEase() };
         //}
-        DoubleAnimation _doubleAnimation = new DoubleAnimation();
+        //DoubleAnimation _doubleAnimation = new DoubleAnimation();
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();

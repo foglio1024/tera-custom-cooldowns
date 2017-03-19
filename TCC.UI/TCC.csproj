@@ -377,6 +377,7 @@
     <Content Include="resources\data\opcodes\smt_311380.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="resources\OpenSans-Regular.ttf" />
     <None Include="resources\ribbon.png" />
     <None Include="resources\Icon_Crest\E_CrestSTRecover_Tex.png" />
     <None Include="resources\Icon_Crest\E_crestpassivethorns_Tex.png" />

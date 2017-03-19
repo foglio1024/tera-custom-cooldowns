@@ -58,7 +58,7 @@
                     </TextBlock.CacheMode>--></TextBlock>
             </Grid>
 
-            <Grid Grid.Row="1" Margin="6,0,6,0">
+            <Grid Grid.Row="1" Margin="10,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition />
@@ -69,6 +69,27 @@
                         <DropShadowEffect ShadowDepth="0" BlurRadius="20" Color="Red" Opacity="0"/>
                     </Rectangle.Effect>
                 </Rectangle>
+                <Path Fill="{StaticResource bgColor}" Data="M 0,0 H 4 C 0,0 0,5 4,5 H 0" VerticalAlignment="Center" Margin="0,0,-1,0" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5">
+                    <Path.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Path.RenderTransform>
+                </Path>
+                <Path Fill="{StaticResource bgColor}" Data="M 0,0 H 4 C 0,0 0,5 4,5 H 0" Margin="-1,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5">
+                    <Path.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Path.RenderTransform>
+                </Path>
+
                 <Grid Height="{Binding ElementName=BaseRect, Path=Height}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -86,7 +107,7 @@
                     <Border BorderThickness=".8,0,.8,0" BorderBrush="#90ffffff" Grid.Column="3"></Border>
                     <Border BorderThickness=".8,0,.8,0" BorderBrush="#90ffffff" Grid.Column="5"></Border>
                     <Border BorderThickness=".8,0,.8,0" BorderBrush="#90ffffff" Grid.Column="7"></Border>
-                    <Border BorderThickness=".8,0,.8,0" BorderBrush="#90ffffff" Grid.Column="9"></Border>
+                    <Border BorderThickness=".8,0,0,0" BorderBrush="#90ffffff" Grid.Column="9"></Border>
                 </Grid>
                 <StackPanel Width="Auto" Height="Auto" Name="NextEnrage" Margin="-15,0,0,3" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" Grid.Row="2">
                         <StackPanel.RenderTransform>

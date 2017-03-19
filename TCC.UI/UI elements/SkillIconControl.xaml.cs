@@ -147,35 +147,23 @@ namespace TCC
             };
             MainTimer.Elapsed += (s, o) =>
             {
-                Dispatcher.BeginInvoke(new Action(() =>
+                Dispatcher.Invoke(() =>
                 {
                     var c = new DoubleAnimation(22, 0, TimeSpan.FromMilliseconds(ending))
                     {
                         EasingFunction = new QuadraticEase()
-                        {
-                            EasingMode = EasingMode.EaseInOut
-                        }
                     };
                     var w = new DoubleAnimation(0, TimeSpan.FromMilliseconds(ending))
                     {
                         EasingFunction = new QuadraticEase()
-                        {
-                            EasingMode = EasingMode.EaseInOut
-                        }
                     };
                     var h = new DoubleAnimation(0, TimeSpan.FromMilliseconds(ending))
                     {
                         EasingFunction = new QuadraticEase()
-                        {
-                            EasingMode = EasingMode.EaseInOut
-                        }
                     };
                     var t = new ThicknessAnimation(new Thickness(0), TimeSpan.FromMilliseconds(ending))
                     {
                         EasingFunction = new QuadraticEase()
-                        {
-                            EasingMode = EasingMode.EaseInOut
-                        }
                     };
 
                     g.BeginAnimation(WidthProperty, c);
@@ -189,7 +177,7 @@ namespace TCC
                     CloseTimer.Enabled = true;
 
                     MainTimer.Stop();
-                }));
+                });
             };
 
             number.Text = String.Format("{0:N0}", currentCd);

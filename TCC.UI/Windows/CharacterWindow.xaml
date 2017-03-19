@@ -25,33 +25,36 @@
             <Setter Property="Margin" Value="0,0,0,0"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Fill" Value="#30000000"/>
-            <Setter Property="Width" Value="Auto"/>
+            <Setter Property="Fill" Value="#80000000"/>
+            <Setter Property="Width" Value="400"/>
             <Setter Property="Stroke" Value="#00ffffff"/>
             <Setter Property="StrokeThickness" Value="1"/>
         </Style>
         <Style x:Key="barRectangle" TargetType="Rectangle">
-            <Setter Property="Height" Value="14"/>
-            <Setter Property="Margin" Value="1,1,1,1"/>
+            <Setter Property="Height" Value="16"/>
+            <Setter Property="Margin" Value="0,0,0,0"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
         <Style x:Key="hpBarNumber" TargetType="TextBlock">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
-            <Setter Property="Text" Value="0"/>
+            <Setter Property="Text" Value="-"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="TextAlignment" Value="Right"/>
-            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontSize" Value="13" />
             <Setter Property="Margin" Value="5,0,5,0"/>
-            <Setter Property="FontFamily" Value="Calibri"/>
-            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="FontFamily" Value="/TCC;component/resources/#Open Sans"/>
+            <Setter Property="FontWeight" Value="Light"/>
+        </Style>
+        <Style x:Key="borderPolygon" TargetType="Polygon">
+            <Setter Property="Fill" Value="{StaticResource bgColor}"></Setter>
         </Style>
     </Window.Resources>
     <Grid Margin="10,0">
-        <Grid.CacheMode>
+        <!--<Grid.CacheMode>
             <BitmapCache RenderAtScale="3"/>
-        </Grid.CacheMode>
+        </Grid.CacheMode>-->
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -61,9 +64,6 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Border Margin="0,14,0,16" Style="{StaticResource border}" Grid.ColumnSpan="2" Grid.RowSpan="1" Grid.Row="2" >
-            <!--<Border.Effect>
-                <DropShadowEffect Opacity="0.6" ShadowDepth="3"/>
-            </Border.Effect>-->
         </Border>
         <Grid Margin="0,0,0,-8" Grid.ColumnSpan="2" Width="Auto" Height="Auto">
             <Grid.ColumnDefinitions>
@@ -74,34 +74,34 @@
                 <ColumnDefinition Width="Auto" Name="flightDef" />
             </Grid.ColumnDefinitions>
             <Border Margin="0" Style="{StaticResource border}"  HorizontalAlignment="Stretch"  Grid.ColumnSpan="6">
-                    <!--<Border.Effect>
+                <!--<Border.Effect>
                         <DropShadowEffect Opacity="0.6" ShadowDepth="3"/>
                     </Border.Effect>-->
-                </Border>
+            </Border>
 
-            <TextBlock Text="Lv." Margin="4,0,0,1" FontSize="13" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0"
+            <TextBlock Text="Lv." Margin="4,0,0,1"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0"
                        Style="{StaticResource hpBarNumber}" >
                 <TextBlock.CacheMode>
-                    <BitmapCache RenderAtScale="2" />
+                    <BitmapCache RenderAtScale="1.8" />
                 </TextBlock.CacheMode>
             </TextBlock>
-            <TextBlock Text="65" Margin="0" Name="levelTB" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"
+            <TextBlock Text="-" Margin="0" Name="levelTB"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"
                        Style="{StaticResource hpBarNumber}" >
                 <TextBlock.CacheMode>
-                    <BitmapCache RenderAtScale="2"></BitmapCache>
+                    <BitmapCache RenderAtScale="1.8"></BitmapCache>
                 </TextBlock.CacheMode></TextBlock>
-            <TextBlock Text="Name" Name="nameTB" FontSize="15" VerticalAlignment="Center" Margin="7,0" HorizontalAlignment="Left" Grid.Column="2"
+            <TextBlock Text="-" Name="nameTB"  VerticalAlignment="Center" Margin="7,0" HorizontalAlignment="Left" Grid.Column="2"
                        Style="{StaticResource hpBarNumber}" >
                 <TextBlock.CacheMode>
-                    <BitmapCache RenderAtScale="2"></BitmapCache>
+                    <BitmapCache RenderAtScale="1.8"></BitmapCache>
                 </TextBlock.CacheMode></TextBlock>
-            <TextBlock Text="ilvl" Name="ilvlTB" FontSize="15" VerticalAlignment="Center" Margin="20,0" HorizontalAlignment="Left" Grid.Column="3"
+            <TextBlock Text="-" Name="ilvlTB" VerticalAlignment="Center" Margin="20,0" HorizontalAlignment="Left" Grid.Column="3"
                        Style="{StaticResource hpBarNumber}" >
                 <TextBlock.CacheMode>
-                    <BitmapCache RenderAtScale="2"></BitmapCache>
+                    <BitmapCache RenderAtScale="1.8"></BitmapCache>
                 </TextBlock.CacheMode></TextBlock>
             <Rectangle Name="flightBar" Width="0" Grid.Column="4" Fill="#906090ff" Height="3" Margin="10,0" HorizontalAlignment="Left" />
-            <Rectangle Name="dummyFlightBar" Width="100" Grid.Column="4" Fill="Transparent" Height="3" Margin="10,0" HorizontalAlignment="Stretch" />
+            <Rectangle Name="dummyFlightBar" Width="100" Grid.Column="4" Fill="Transparent" Height="3" Margin="10,10" HorizontalAlignment="Stretch" />
         </Grid>
         <Grid Margin="8,8" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1">
             <Rectangle Name="laurel" Width="74" Height="80" Margin="0,-8,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -117,6 +117,9 @@
                     <DropShadowEffect Color="#ff20f0ff" BlurRadius="7" ShadowDepth="0"/>
                 </Rectangle.Effect>
             </Rectangle>
+            <Grid.CacheMode>
+                <BitmapCache RenderAtScale="3"/>
+            </Grid.CacheMode>
         </Grid>
         <Grid Width="Auto" Height="Auto" Grid.Column="1" Margin="0,20,5,20" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Row="1">
             <Grid.RowDefinitions>
@@ -125,88 +128,134 @@
                 <RowDefinition Name="StaminaRow" Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
             <Grid>
                 <Rectangle Name="base" Style="{StaticResource baseRectangle}"/>
-                <Rectangle Name="hpBar" Fill="#d50000" Width="200" Style="{StaticResource barRectangle}" />
-                <TextBlock Name="hpPercTB" Style="{StaticResource hpBarNumber}" HorizontalAlignment="Center" FontSize="16" Opacity="1">
-                    <TextBlock.CacheMode>
-                        <BitmapCache RenderAtScale="2"></BitmapCache>
-                    </TextBlock.CacheMode></TextBlock>
-            </Grid>
-
-            <Grid  Grid.Row="1">
-                <Rectangle Style="{StaticResource baseRectangle}" Grid.Row="1"/>
-                <Rectangle Name="mpBar"  Width="50" Fill="#4aa5f5" Style="{StaticResource barRectangle}">
+                <Rectangle Name="hpBar" Width="400" Style="{StaticResource barRectangle}">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#c00" Offset=".5"/>
+                            <GradientStop Color="#900" Offset=".5"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
                 </Rectangle>
+                <!--<Polygon Points="0,16 16,16 16,0" Style="{StaticResource borderPolygon}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="Auto" Height="Auto"></Polygon>-->
+                <!--<Polygon Points="0,16 0,0 16,0" Style="{StaticResource borderPolygon}" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="Auto" Height="Auto"></Polygon>-->
+                <Path Fill="{StaticResource bgColor}" Data="M 0,0 H 10 C 0,0 0,16 10,16 H 0" VerticalAlignment="Center" HorizontalAlignment="Left"></Path>
+                <Path Fill="{StaticResource bgColor}" Data="M 0,0 H 10 C 0,0 0,16 10,16 H 0" VerticalAlignment="Center" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5">
+                    <Path.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Path.RenderTransform>
+                </Path>
+
+                <TextBlock Name="hpPercTB" Style="{StaticResource hpBarNumber}" HorizontalAlignment="Right" Margin="5,2,20,2" Opacity=".9">
+                    <TextBlock.CacheMode>
+                        <BitmapCache RenderAtScale="1.8"></BitmapCache>
+                    </TextBlock.CacheMode>
+                </TextBlock>
+                <TextBlock Style="{StaticResource hpBarNumber}" Text="HP" HorizontalAlignment="Left" Opacity=".9" FontSize="11" Margin="15,0,0,0"></TextBlock>
             </Grid>
 
-            <Grid  Grid.Row="2" VerticalAlignment="Center">
-                <Rectangle Style="{StaticResource baseRectangle}" Grid.Row="2" Height="6"/>
-                <Rectangle Name="stBar" Height="4"  Width="50" Style="{StaticResource barRectangle}" Fill="#FF58F0FF" />
+            <Grid Grid.Row="1">
+                <Rectangle Style="{StaticResource baseRectangle}" Grid.Row="1"/>
+                <Rectangle Name="mpBar" Width="400" Style="{StaticResource barRectangle}" >
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#06e" Offset=".5"/>
+                            <GradientStop Color="#059" Offset=".5"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+
+                <!--<Polygon Points="0,16 16,16 16,0" HorizontalAlignment="Right" Style="{StaticResource borderPolygon}" VerticalAlignment="Center" Width="Auto" Height="Auto"></Polygon>
+                <Polygon Points="0,16 0,0 16,0" HorizontalAlignment="Left" Style="{StaticResource borderPolygon}" VerticalAlignment="Center" Width="Auto" Height="Auto"></Polygon>-->
+                <Path Fill="{StaticResource bgColor}" Data="M 0,0 H 10 C 0,0 0,16 10,16 H 0" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <Path Fill="{StaticResource bgColor}" Data="M 0,0 H 10 C 0,0 0,16 10,16 H 0" VerticalAlignment="Center" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5">
+                    <Path.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Path.RenderTransform>
+                </Path>
+
+                <TextBlock Style="{StaticResource hpBarNumber}" HorizontalAlignment="Left" Opacity=".9" FontSize="11" Margin="15,0,0,0" Text="MP"></TextBlock>
+
+
             </Grid>
 
-            <Grid Grid.Column="1" Grid.Row="0">
+            <Grid  Grid.Row="2" VerticalAlignment="Center" Opacity="1">
+                <Rectangle Style="{StaticResource baseRectangle}" Grid.Row="2" Height="11"/>
+                <Rectangle Name="stBar" Height="11"  Width="400" Style="{StaticResource barRectangle}" Opacity=".8" >
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#8de" Offset=".5"/>
+                            <GradientStop Color="#4ad" Offset=".5"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Polygon Points="0,11 11,11 11,0" HorizontalAlignment="Right" Style="{StaticResource borderPolygon}" VerticalAlignment="Center" Width="Auto" Height="Auto"></Polygon>
+                <Polygon Points="0,11 0,0 11,0" HorizontalAlignment="Left" Style="{StaticResource borderPolygon}" VerticalAlignment="Center" Width="Auto" Height="Auto"></Polygon>
+                <TextBlock Style="{StaticResource hpBarNumber}" HorizontalAlignment="Left" Opacity="1" Margin="15,0,0,0" FontSize="10" VerticalAlignment="Center" Text="RE"></TextBlock>
+
+            </Grid>
+
+            <Grid Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" Opacity=".9">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.CacheMode>
+                    <BitmapCache RenderAtScale="1.8"/>
+                </Grid.CacheMode>
+
+
+                <TextBlock Name="hpTB" Style="{StaticResource hpBarNumber}" Margin="10,0,0,0" Grid.Column="0" />
+                <TextBlock Style="{StaticResource hpBarNumber}" Grid.Column="1" Text="/" Margin="4,0,4,0"  Foreground="#aaffffff" />
+                <TextBlock Name="hpMaxTB" Style="{StaticResource hpBarNumber}" Margin="0,0,10,0" Grid.Column="2" Foreground="#aaffffff" />
+
+            </Grid>
+            <Grid Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" Opacity=".9">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.CacheMode>
+                    <BitmapCache RenderAtScale="1.8"/>
+                </Grid.CacheMode>
+
+
+                <TextBlock Name="mpTB" Style="{StaticResource hpBarNumber}" Margin="10,-1,0,0" Grid.Column="0" />
+                <TextBlock Style="{StaticResource hpBarNumber}" Grid.Column="1" Text="/" Margin="4,-1,4,0" Foreground="#ffcccccc" />
+                <TextBlock Name="mpMaxTB" Style="{StaticResource hpBarNumber}" Margin="0,-1,10,0" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Foreground="#ffcccccc" />
+
+            </Grid>
+            <Grid Grid.Column="0" Grid.Row="2" Opacity=".9">
+                <Grid.CacheMode>
+                    <BitmapCache RenderAtScale="2"/>
+                </Grid.CacheMode>
+
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Name="hpTB" Style="{StaticResource hpBarNumber}" Margin="10,0,0,0" Grid.Column="0">
-                    <TextBlock.CacheMode>
-                        <BitmapCache RenderAtScale="2"></BitmapCache>
-                    </TextBlock.CacheMode></TextBlock>
-                <TextBlock Style="{StaticResource hpBarNumber}" Grid.Column="1" Text="/" Margin="4,0"  Foreground="#ffcccccc">
-                    <TextBlock.CacheMode>
-                        <BitmapCache RenderAtScale="2"></BitmapCache>
-                    </TextBlock.CacheMode></TextBlock>
-                <TextBlock Name="hpMaxTB" Style="{StaticResource hpBarNumber}" Margin="0,0,10,0" Grid.Column="2" Foreground="#ffcccccc">
-                    <TextBlock.CacheMode>
-                        <BitmapCache RenderAtScale="2"></BitmapCache>
-                    </TextBlock.CacheMode></TextBlock>
-            </Grid>
-            <Grid Grid.Column="1" Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Name="mpTB" Style="{StaticResource hpBarNumber}" Margin="10,0,0,0" Grid.Column="0">
-                    <TextBlock.CacheMode>
-                        <BitmapCache RenderAtScale="2"></BitmapCache>
-                    </TextBlock.CacheMode></TextBlock>
-                <TextBlock Style="{StaticResource hpBarNumber}" Grid.Column="1" Text="/" Margin="4,0" Foreground="#ffcccccc">
-                    <TextBlock.CacheMode>
-                        <BitmapCache RenderAtScale="2"></BitmapCache>
-                    </TextBlock.CacheMode></TextBlock>
-                <TextBlock Name="mpMaxTB" Style="{StaticResource hpBarNumber}" Margin="0,0,10,0" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Foreground="#ffcccccc">
-                    <TextBlock.CacheMode>
-                        <BitmapCache RenderAtScale="2"></BitmapCache>
-                    </TextBlock.CacheMode></TextBlock>
-            </Grid>
-            <Grid Grid.Column="1" Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Name="stTB" Style="{StaticResource hpBarNumber}" Margin="10,0,0,0" Grid.Column="0" Grid.Row="2" FontSize="10">
-                    <TextBlock.CacheMode>
-                        <BitmapCache RenderAtScale="1"></BitmapCache>
-                    </TextBlock.CacheMode></TextBlock>
-                <TextBlock Style="{StaticResource hpBarNumber}" Grid.Column="1" Text="/" Margin="4,0" Grid.Row="2" Foreground="#ffcccccc" FontSize="10">
-                    <TextBlock.CacheMode>
-                        <BitmapCache RenderAtScale="1"></BitmapCache>
-                    </TextBlock.CacheMode></TextBlock>
-                <TextBlock Name="stMaxTB" Style="{StaticResource hpBarNumber}" Margin="0,0,15,0" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" Foreground="#ffcccccc" FontSize="10">
-                    <TextBlock.CacheMode>
-                        <BitmapCache RenderAtScale="1"></BitmapCache>
-                    </TextBlock.CacheMode></TextBlock>
+                <TextBlock Name="stTB" Style="{StaticResource hpBarNumber}" Margin="10,0,0,0" Grid.Column="0" Grid.Row="2" FontSize="12" Foreground="#ffffff" />
+                <TextBlock Style="{StaticResource hpBarNumber}" Grid.Column="1" Text="/" Margin="4,0" Grid.Row="2" Foreground="#ffffff" FontSize="12" />
+                <TextBlock Name="stMaxTB" Style="{StaticResource hpBarNumber}" Margin="0,0,15,0" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" Foreground="#ffffff" FontSize="12" />
             </Grid>
         </Grid>
     </Grid>

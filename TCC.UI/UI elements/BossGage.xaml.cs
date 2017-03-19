@@ -145,6 +145,7 @@ namespace TCC
         {
             Dispatcher.Invoke(() =>
             {
+                if (v < 0) v = 0;
                 NextEnrageTB.Text = String.Format("{0:0.#}", v);
             });
         }
@@ -152,7 +153,7 @@ namespace TCC
         {
             Dispatcher.Invoke(() =>
             {
-                if(BaseRect.ActualWidth*(val/100) < 0)
+                if(val < 0)
                 {
                     SlideAnimation.To = 0;
                 }

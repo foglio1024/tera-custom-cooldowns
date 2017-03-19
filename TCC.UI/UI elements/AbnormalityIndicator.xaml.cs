@@ -162,9 +162,9 @@ namespace TCC.UI_elements
         {
             Dispatcher.Invoke(() =>
             {
-                this.RenderTransform = new ScaleTransform(1, 1, .5, .5);
-                this.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(300)) { EasingFunction = new QuadraticEase() });
-                this.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(300)) { EasingFunction = new QuadraticEase() });
+                this.RenderTransform = new ScaleTransform(0, 0, .5, .5);
+                this.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
+                this.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
 
                 SetStacksNumber();
 
