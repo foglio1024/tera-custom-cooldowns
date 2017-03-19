@@ -26,6 +26,7 @@ namespace TCC.Data
             //        Console.WriteLine("Monster: {0} ({1})", m.Name, m.Id);
             //    }
             //}
+            MonstersDoc = null;
         }
         static void LoadDoc()
         {
@@ -42,13 +43,14 @@ namespace TCC.Data
                 {
                     var id = Convert.ToInt32(monster.Attribute("id").Value);
                     var name = monster.Attribute("name").Value;
-                    var isBoss = monster.Attribute("isBoss").Value;
+                    bool isBoss = false;
+                    if(monster.Attribute("isBoss").Value == "True")
+                    {
+                        isBoss = true;
+                    }
                     var maxHP = Convert.ToInt32(monster.Attribute("hp").Value);
 
-                    //if(isBoss == "True")
-                    //{
-                    //}
-                    Monster m = new Monster(id, name, maxHP);
+                    Monster m = new Monster(id, name, maxHP, isBoss);
                     z.AddMonster(m);
                 }
                 Zones.Add(z);
@@ -68,13 +70,13 @@ namespace TCC.Data
                 }
                 else
                 {
-                    m = new Monster(0, "Unknown", 0);
+                    m = new Monster(0, "Unknown", 0, false);
                     return false;
                 }
             }
             else
             {
-                m = new Monster(0, "Unknown", 0);
+                m = new Monster(0, "Unknown", 0, false);
                 return false;
             }
         }
@@ -118,12 +120,14 @@ namespace TCC.Data
         public int Id { get; private set; } //npc
         public string Name { get; private set; }
         public int MaxHP { get; private set; }
+        public bool IsBoss { get; private set; }
 
-        public Monster(int npc, string name, int maxHp)
+        public Monster(int npc, string name, int maxHp, bool isBoss)
         {
             Id = npc;
             Name = name;
             MaxHP = maxHp;
+            IsBoss = isBoss;
         }
     }
 }

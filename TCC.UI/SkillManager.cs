@@ -16,7 +16,7 @@ namespace TCC
     public static class SkillManager
     {
         public const int LongSkillTreshold = 40000;
-        public const int Ending = 250;
+        public const int Ending = 120;
 
         public static event SkillCooldownChangedEventHandler Changed;
         public static event SkillResetEventHandler Reset;

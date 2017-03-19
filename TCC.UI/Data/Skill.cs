@@ -10,6 +10,7 @@ namespace TCC
     public class Skill
     {
         Bitmap iconBitmap;
+        string iconName;
         public uint Id { get; set; }
         public Class Class { get; set; }
         public string Name { get; set; }
@@ -17,7 +18,7 @@ namespace TCC
         public ImageBrush IconBrush { get
             {
 
-                    return new ImageBrush(SkillsDatabase.BitmapToImageSource(iconBitmap));
+                return new ImageBrush(Utils.BitmapToImageSource((Bitmap)Properties.Icon_Skills.ResourceManager.GetObject(iconName)));
 
             }
         }
@@ -34,11 +35,12 @@ namespace TCC
         public void SetSkillIcon(string iconName)
         {
             if (!iconName.Contains("Icon_Skills.")) return;
-            iconName = iconName.Replace("Icon_Skills.", "");
-            CooldownWindow.Instance.Dispatcher.BeginInvoke(new Action(() =>
-            {
-                iconBitmap = (Bitmap)Properties.Icon_Skills.ResourceManager.GetObject(iconName);
-            }));
+            this.iconName = iconName.Replace("Icon_Skills.", "");
+
+            //CooldownWindow.Instance.Dispatcher.BeginInvoke(new Action(() =>
+            //{
+            //    iconBitmap = (Bitmap)Properties.Icon_Skills.ResourceManager.GetObject(iconName);
+            //}));
         }
 
     }

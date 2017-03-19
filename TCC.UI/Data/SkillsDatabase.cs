@@ -13,7 +13,8 @@ namespace TCC
 {
     public static class SkillsDatabase
     {
-        public static List<Skill> Skills;
+        public static Dictionary<Class, Dictionary<uint, Skill>> Skills;
+
         public static event Action<double> Progress;
 
         static List<XDocument> StrSheet_UserSkillsDocs;
@@ -22,22 +23,22 @@ namespace TCC
         static List<SkillConnection> SkillConnections;
 
         class SkillConnection
-    {
-        public Class Class;
-        public int Id;
-        public List<int> ConnectedSkills;
+        {
+            public Class Class;
+            public int Id;
+            public List<int> ConnectedSkills;
 
-        public SkillConnection(int id, Class c)
-        {
-            ConnectedSkills = new List<int>();
-            Id = id;
-            Class = c;
+            public SkillConnection(int id, Class c)
+            {
+                ConnectedSkills = new List<int>();
+                Id = id;
+                Class = c;
+            }
+            public void AddConnectedSkill(int id)
+            {
+                ConnectedSkills.Add(id);
+            }
         }
-        public void AddConnectedSkill(int id)
-        {
-            ConnectedSkills.Add(id);
-        }
-    }
 
         static void LoadFiles()
         {
@@ -75,7 +76,7 @@ namespace TCC
                 if((s.Attribute("class").Value != "Common") && (!name.Contains("Summon: ") || name == "Summon: Party"))
                 {
                     var skill = new Skill(id, c, name, toolTip);
-                    Skills.Add(skill);
+                    Skills[c].Add(id, skill);
                 }
             }
         }
@@ -86,9 +87,9 @@ namespace TCC
                 var id = Convert.ToUInt32(s.Attribute("skillId").Value);
                 var iconName = s.Attribute("iconName").Value;
                 Enum.TryParse(s.Attribute("class").Value, out Class c);
-                if(Skills.Where(x => x.Id == id).Where(x => x.Class == c).Count() > 0)
+                if(Skills[c].TryGetValue(id, out Skill sk))
                 {
-                    Skills.Where(x => x.Id == id).Where(x => x.Class == c).First().SetSkillIcon(iconName);              
+                    sk.SetSkillIcon(iconName);
                 }
             }
         }
@@ -107,13 +108,14 @@ namespace TCC
                 SkillConnections.Add(skc);
             }
         }
-        static string FindSkillNameByIdClass(int id, Class c)
+        static string FindSkillNameByIdClass(uint id, Class c)
         {
-            if (Skills.Where(x => x.Id == id).Where(x => x.Class == c).Count() > 0)
+            if (Skills[c].TryGetValue(id, out Skill sk))
             {
-                return Skills.Where(x => x.Id == id).Where(x => x.Class == c).First().Name;
+                return sk.Name;
             }
             else return "Not found";
+
         }
         static int GetSkillIdByConnectedId(uint id, Class c)
         {
@@ -142,7 +144,14 @@ namespace TCC
         {
             StrSheet_UserSkillsDocs = new List<XDocument>();
             SkillIconData = new List<XDocument>();
-            Skills = new List<Skill>();
+
+            Skills = new Dictionary<Class, Dictionary<uint, Skill>>();
+            for (int i = 0; i <= 12; i++)
+            {
+                Skills.Add((Class)i, new Dictionary<uint, Skill>());
+            }
+            Skills.Add(Class.Common, new Dictionary<uint, Skill>());
+
             LoadFiles();
             var n = SkillIconData.Count;
             Progress?.Invoke(1*100 / (n - 1));
@@ -162,7 +171,7 @@ namespace TCC
 
             var s = new Skill(60010, Class.Common, "Hurricane", "");
             s.SetSkillIcon("Icon_Skills.Armorbreak_Tex");
-            Skills.Add(s);
+            Skills[Class.Common].Add(s.Id, s);
 
             ParseConnectedSkills();
 
@@ -172,7 +181,7 @@ namespace TCC
         }
         public static string SkillIdToName(uint id, Class c)
         {
-            var name = FindSkillNameByIdClass((int)id, c);
+            var name = FindSkillNameByIdClass(id, c);
             var connSkill = GetSkillIdByConnectedId(id, c);
 
             if (name != "Not found") //found skill
@@ -181,64 +190,41 @@ namespace TCC
             }
             else if (connSkill != -1) //skill found in connected skills
             {
-                name = FindSkillNameByIdClass((int)id, c);
+                name = FindSkillNameByIdClass(id, c);
             }
             return name;
         }
-        public static Skill GetSkill(uint id, Class c)
-        {
-            if (Skills.Where(x => x.Id == id).Where(x => x.Class == c).Count() > 0)
-            {
-                return Skills.Where(x => x.Id == id).Where(x => x.Class == c).First();
-            }
-            else return new Skill(0, Class.None, string.Empty, string.Empty);
+        //public static Skill GetSkill(uint id, Class c)
+        //{
+        //    if (Skills.Where(x => x.Id == id).Where(x => x.Class == c).Count() > 0)
+        //    {
+        //        return Skills.Where(x => x.Id == id).Where(x => x.Class == c).First();
+        //    }
+        //    else return new Skill(0, Class.None, string.Empty, string.Empty);
 
-        }
+        //}
 
         public static bool TryGetSkill(uint id, Class c, out Skill sk)
         {
             bool result = false;
             var connSkills = GetSkillIdByConnectedId(id, c);
             sk = new Skill(0, Class.None, string.Empty, string.Empty);
-            if (Skills.Where(x => x.Id == id).Where(x => x.Class == c).Count() > 0)
+            if (Skills[c].TryGetValue(id, out sk))
             {
-                sk = Skills.Where(x => x.Id == id).Where(x => x.Class == c).First();
+                //sk = Skills.Where(x => x.Id == id).Where(x => x.Class == c).First();
                 result = true;
             }
             else if (connSkills != -1)
             {
-                if (Skills.Where(x => x.Id == connSkills).Where(x => x.Class == c).Count() > 0)
+                if (Skills[c].TryGetValue((uint)connSkills, out sk))
                 {
-                    sk = Skills.Where(x => x.Id == connSkills).Where(x => x.Class == c).First();
                     result = true;
                 }
-
-            }
-            else
-            {
-                sk = new Skill(0, Class.None, string.Empty, string.Empty);
-                result = false;
             }
             return result;
 
         }
 
-        public static BitmapImage BitmapToImageSource(System.Drawing.Bitmap bitmap)
-        {
-            using (MemoryStream memory = new MemoryStream())
-            {
-
-                bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Bmp);
-                memory.Position = 0;
-                BitmapImage bitmapimage = new BitmapImage();
-                bitmapimage.BeginInit();
-                bitmapimage.StreamSource = memory;
-                bitmapimage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapimage.EndInit();
-                memory.Close();
-                return bitmapimage;
-            }
-        }
 
         //public static BitmapImage SkillIdToIcon(uint id, Class c)
         //{

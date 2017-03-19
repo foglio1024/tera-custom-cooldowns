@@ -25,7 +25,7 @@ namespace TCC
             Icon_Status.ResourceManager.IgnoreCase = true;
             Icon_Crest.ResourceManager.IgnoreCase = true;
 
-            System.Diagnostics.Process.GetCurrentProcess().PriorityClass = System.Diagnostics.ProcessPriorityClass.RealTime;
+            System.Diagnostics.Process.GetCurrentProcess().PriorityClass = System.Diagnostics.ProcessPriorityClass.High;
 
             TeraSniffer.Instance.Enabled = true;
 
@@ -36,11 +36,14 @@ namespace TCC
 
             var LoadThread = new Thread(new ThreadStart(() =>
             {
-
                 SkillsDatabase.Populate();
+                Console.WriteLine("Skills loaded.");
                 BroochesDatabase.SetBroochesIcons();
+                Console.WriteLine("Set brooches icons");
                 MonsterDatabase.Populate();
+                Console.WriteLine("Monsters loaded");
                 AbnormalityDatabase.Populate();
+                Console.WriteLine("Abnormalities loaded");
                 WindowManager.CooldownWindow.LoadingDone();
             }));
 

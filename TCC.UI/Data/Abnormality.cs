@@ -10,8 +10,8 @@ namespace TCC.Data
 {
     public class Abnormality
     {
-        Bitmap iconBitmap;
-
+        //Bitmap iconBitmap;
+        string iconName;
         public uint Id { get; set; }
         public string Name { get; set; }
         public string ToolTip { get; set; }
@@ -19,7 +19,34 @@ namespace TCC.Data
         {
             get
             {
-                return new ImageBrush(SkillsDatabase.BitmapToImageSource(iconBitmap));
+                Bitmap iconBitmap = (Bitmap)Properties.Icon_Classes.common;
+
+                if (iconName.Contains("Icon_Skills."))
+                {
+                    iconName = iconName.Replace("Icon_Skills.", "");
+                    CooldownWindow.Instance.Dispatcher.Invoke(() =>
+                    {
+                        iconBitmap = (Bitmap)Properties.Icon_Skills.ResourceManager.GetObject(iconName);
+                    });
+                }
+                else if (iconName.Contains("Icon_Status."))
+                {
+                    iconName = iconName.Replace("Icon_Status.", "");
+                    CooldownWindow.Instance.Dispatcher.Invoke(() =>
+                    {
+                        iconBitmap = (Bitmap)Properties.Icon_Status.ResourceManager.GetObject(iconName);
+                    });
+                }
+                else if (iconName.Contains("Icon_Crest."))
+                {
+                    iconName = iconName.Replace("Icon_Crest.", "");
+                    CooldownWindow.Instance.Dispatcher.Invoke(() =>
+                    {
+                        iconBitmap = (Bitmap)Properties.Icon_Crest.ResourceManager.GetObject(iconName);
+                    });
+                }
+
+                return new ImageBrush(Utils.BitmapToImageSource(iconBitmap));
             }
         }
 
@@ -32,35 +59,37 @@ namespace TCC.Data
 
         public void SetIcon(string iconName)
         {
-            if (iconName.Contains("Icon_Skills."))
-            {
-                iconName = iconName.Replace("Icon_Skills.", "");
-                CooldownWindow.Instance.Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    iconBitmap = (Bitmap)Properties.Icon_Skills.ResourceManager.GetObject(iconName);
-                }));
+            this.iconName = iconName;
+            //if (iconName.Contains("Icon_Skills."))
+            //{
+            //    this.iconName = iconName.Replace("Icon_Skills.", "");
+            //    //CooldownWindow.Instance.Dispatcher.BeginInvoke(new Action(() =>
+            //    //{
+            //    //    iconBitmap = (Bitmap)Properties.Icon_Skills.ResourceManager.GetObject(iconName);
+            //    //}));
 
-            }
-            else if (iconName.Contains("Icon_Status."))
-            {
-                iconName = iconName.Replace("Icon_Status.", "");
-                CooldownWindow.Instance.Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    iconBitmap = (Bitmap)Properties.Icon_Status.ResourceManager.GetObject(iconName);
-                }));
-            }
-            else if (iconName.Contains("Icon_Crest."))
-            {
-                iconName = iconName.Replace("Icon_Crest.", "");
-                CooldownWindow.Instance.Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    iconBitmap = (Bitmap)Properties.Icon_Crest.ResourceManager.GetObject(iconName);
-                }));
-            }
-            else
-            {
-                iconBitmap = (Bitmap)Properties.Icon_Classes.common;
-            }
+            //}
+            //else if (iconName.Contains("Icon_Status."))
+            //{
+            //    this.iconName = iconName.Replace("Icon_Status.", "");
+            //    //CooldownWindow.Instance.Dispatcher.BeginInvoke(new Action(() =>
+            //    //{
+            //    //    iconBitmap = (Bitmap)Properties.Icon_Status.ResourceManager.GetObject(iconName);
+            //    //}));
+            //}
+            //else if (iconName.Contains("Icon_Crest."))
+            //{
+            //    this.iconName = iconName.Replace("Icon_Crest.", "");
+            //    //CooldownWindow.Instance.Dispatcher.BeginInvoke(new Action(() =>
+            //    //{
+            //    //    iconBitmap = (Bitmap)Properties.Icon_Crest.ResourceManager.GetObject(iconName);
+            //    //}));
+            //}
+            //else
+            //{
+
+            //    //iconBitmap = (Bitmap)Properties.Icon_Classes.common;
+            //}
         }
 
     }

@@ -525,11 +525,14 @@ namespace TCC.Parsing
         {
             if (MonsterDatabase.TryGetMonster(p.Npc, (uint)p.Type, out Monster m))
             {
-                App.Current.Dispatcher.Invoke(() =>
+                if (m.IsBoss || m.MaxHP >= 40000000)
                 {
-                    SessionManager.CurrentBosses.Add(new Boss(p.EntityId, (uint)p.Type, p.Npc, System.Windows.Visibility.Collapsed));
+                    App.Current.Dispatcher.Invoke(() =>
+                    {
+                        SessionManager.CurrentBosses.Add(new Boss(p.EntityId, (uint)p.Type, p.Npc, System.Windows.Visibility.Collapsed));
                     //Console.WriteLine("SPAWNED: {0} - {1}", m.Name, m.MaxHP);
                 });
+                }
             }
         }
     }
