@@ -65,10 +65,10 @@ namespace TCC
         {
             bool result = false;
             brooch = new Skill(0, Class.None, string.Empty, string.Empty);
-            if (BroochSkills.Where(x => x.Id == itemId).Count() > 0)
+            if (BroochSkills.Any(x => x.Id == itemId))
             {
                 result = true;
-                brooch = BroochSkills.Where(x => x.Id == itemId).Single();
+                brooch = BroochSkills.FirstOrDefault(x => x.Id == itemId);
             }
             return result;
 
