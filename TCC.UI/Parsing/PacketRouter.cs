@@ -266,7 +266,7 @@ namespace TCC.Parsing
             }
             if(SessionManager.TryGetBossById(p.targetId, out Boss b))
             {
-                if(AbnormalityDatabase.TryGetAbnormality(p.id, out Abnormality ab))
+                if(AbnormalityDatabase.Abnormalities.TryGetValue(p.id, out Abnormality ab))
                 {
                     App.Current.Dispatcher.Invoke(() =>
                     {
@@ -296,7 +296,7 @@ namespace TCC.Parsing
         }
         static void HandleAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
-            if (AbnormalityDatabase.TryGetAbnormality(p.AbnormalityId, out Abnormality ab))
+            if (AbnormalityDatabase.Abnormalities.TryGetValue(p.AbnormalityId, out Abnormality ab))
             {
                 App.Current.Dispatcher.Invoke(() =>
                 {
@@ -333,7 +333,7 @@ namespace TCC.Parsing
         }
         static void HandleAbnormalityEnd(S_ABNORMALITY_END p)
         {
-            if (AbnormalityDatabase.TryGetAbnormality(p.id, out Abnormality ab))
+            if (AbnormalityDatabase.Abnormalities.TryGetValue(p.id, out Abnormality ab))
             {
                 App.Current.Dispatcher.Invoke(() =>
                 {

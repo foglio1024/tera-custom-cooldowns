@@ -10,7 +10,7 @@ namespace TCC.Data
 {
     public static class AbnormalityDatabase
     {
-        public static List<Abnormality> Abnormalities;
+        public static Dictionary<uint ,Abnormality> Abnormalities;
 
         static List<XDocument> StrSheet_AbnormalityDocs;
         static List<XDocument> AbnormalityIconDataDocs;
@@ -46,7 +46,7 @@ namespace TCC.Data
                 }
 
                 Abnormality ab = new Abnormality(id, name, toolTip);
-                Abnormalities.Add(ab);
+                Abnormalities.Add(id, ab);
             }
         }
         static void ParseAbnormalityIconDoc(XDocument doc)
@@ -55,20 +55,20 @@ namespace TCC.Data
             {
                 var id = Convert.ToUInt32(s.Attribute("abnormalityId").Value);
                 string iconName = string.Empty;
-                if(s.Attributes().Where(x => x.Name == "iconName").Count() > 0)
+                if(s.Attributes().Any(x => x.Name == "iconName"))
                 {
                     iconName = s.Attribute("iconName").Value;
                 }
 
-                if (Abnormalities.Where(x => x.Id == id).Count() > 0)
+                if (Abnormalities.TryGetValue(id, out Abnormality a))
                 {
-                    Abnormalities.Where(x => x.Id == id).First().SetIcon(iconName);
+                    a.SetIcon(iconName);
                 }
             }
         }
         public static void Populate()
         {
-            Abnormalities = new List<Abnormality>();
+            Abnormalities = new Dictionary<uint, Abnormality>();
             StrSheet_AbnormalityDocs = new List<XDocument>();
             AbnormalityIconDataDocs = new List<XDocument>();
 
@@ -86,23 +86,22 @@ namespace TCC.Data
             StrSheet_AbnormalityDocs.Clear();
             AbnormalityIconDataDocs.Clear();
         }
-        public static bool TryGetAbnormality(uint id, out Abnormality ab)
-        {
-            bool result = false;
-            ab = new Abnormality(0, string.Empty, string.Empty);
-            if (Abnormalities.Where(x => x.Id == id).Count() > 0)
-            {
-                ab = Abnormalities.Where(x => x.Id == id).First();
-                result = true;
-            }
-            else
-            {
-                ab = new Abnormality(0, "Unknown", string.Empty);
-                result = false;
-            }
-            return result;
+        //public static bool TryGetAbnormality(uint id, out Abnormality ab)
+        //{
+        //    bool result = false;
+        //    ab = new Abnormality(0, string.Empty, string.Empty);
+        //    if (Abnormalities.TryGetValue(id, out ab))
+        //    {
+        //        result = true;
+        //    }
+        //    else
+        //    {
+        //        ab = new Abnormality(0, "Unknown", string.Empty);
+        //        result = false;
+        //    }
+        //    return result;
 
-        }
+        //}
 
     }
 }

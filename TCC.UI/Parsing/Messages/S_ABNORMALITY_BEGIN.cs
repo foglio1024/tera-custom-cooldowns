@@ -27,12 +27,12 @@ namespace TCC.Messages
             reader.Skip(4);
             stacks = reader.ReadInt32();
 
-            if(targetId == SessionManager.CurrentCharId)
-            {
-                var name = string.Empty;
-                if (TCC.Data.AbnormalityDatabase.TryGetAbnormality(id, out Abnormality ab)) name = ab.Name;
-                //Console.WriteLine("[S_ABNORMALITY_BEGIN] target:{0} id:{1} name:{4} duration:{2} stacks:{3}", targetId, id, duration, stacks, name);
-            }
+            //if(targetId == SessionManager.CurrentCharId)
+            //{
+            //    var name = string.Empty;
+            //    if (TCC.Data.AbnormalityDatabase.Abnormalities.TryGetValue(id, out Abnormality ab)) name = ab.Name;
+            //    //Console.WriteLine("[S_ABNORMALITY_BEGIN] target:{0} id:{1} name:{4} duration:{2} stacks:{3}", targetId, id, duration, stacks, name);
+            //}
         }
     }
 }

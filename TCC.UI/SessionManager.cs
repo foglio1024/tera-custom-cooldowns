@@ -120,7 +120,7 @@ namespace TCC
         }
         public bool HasBuff(Abnormality ab)
         {
-            if(Buffs.Where(x => x.Buff.Id == ab.Id).Count() > 0)
+            if(Buffs.Any(x => x.Buff.Id == ab.Id))
             {
                 return true;
             }
@@ -136,7 +136,7 @@ namespace TCC
             {
                 try
                 {
-                    Buffs.Remove(Buffs.Where(x => x.Buff.Id == ab.Id).FirstOrDefault());
+                    Buffs.Remove(Buffs.FirstOrDefault(x => x.Buff.Id == ab.Id));
                 }
                 catch (Exception)
                 {
