@@ -25,11 +25,9 @@
         <Grid.Effect>
             <DropShadowEffect x:Name="glow" Color="#FFFF6AFF" ShadowDepth="0" BlurRadius="25" Opacity="0"/>
         </Grid.Effect>
-        <Ellipse Width="70" Height="70" Fill="#202020" Name="baseEll" Stroke="#00000000" StrokeThickness="3">
-            <!--<Ellipse.Effect>
-                <DropShadowEffect Opacity="0.6" ShadowDepth="3"/>
-            </Ellipse.Effect>-->
-        </Ellipse>
+        <Border Margin="3" Name="b" Style="{StaticResource border}" CornerRadius="{Binding ElementName=b, Path=ActualHeight}"></Border>
+        <Ellipse Width="70" Height="70" Fill="Transparent" Name="baseEll" Stroke="#00000000" StrokeThickness="3" />
+
         <Grid Name="StaminaAmountGrid" Margin="0" Width="65" Height="65">
             <local:Arc x:Name="StaminaAmount" Stroke="Orange" StrokeThickness="3" EndAngle="100" >
                 
@@ -38,10 +36,10 @@
         <TextBlock Name="num"
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center" 
-                   FontSize="25" 
-                   FontFamily="Roboto Mono" 
+                   FontSize="22" 
+                   FontFamily="/TCC;component/resources/#Open Sans" 
                    Foreground="#f0ffffff"
-                   FontWeight="UltraLight">0
+                   FontWeight="Light">0
             <!--<TextBlock.Effect>
                 <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="20"></DropShadowEffect>
             </TextBlock.Effect>-->

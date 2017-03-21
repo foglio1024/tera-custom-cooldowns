@@ -262,7 +262,7 @@ namespace TCC
             Dispatcher.BeginInvoke(new Action(() =>  
             {
                 //_doubleAnimation.To = ValueToLength(newValue, MaxHP);
-                hpBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation((double)newValue / (double)MaxHP, TimeSpan.FromMilliseconds(AnimationTime)) { EasingFunction = new QuadraticEase() });
+                hpBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(ValueToLength((double)newValue, (double)MaxHP), TimeSpan.FromMilliseconds(AnimationTime)) { EasingFunction = new QuadraticEase() });
 
                 hpTB.Text = newValue.ToString();
                 if (MaxHP != 0)
@@ -281,7 +281,7 @@ namespace TCC
             Dispatcher.BeginInvoke(new Action(() => 
             {
                 //_doubleAnimation.To = ValueToLength(newValue, MaxMP);
-                mpBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation((double)newValue / (double)MaxMP, TimeSpan.FromMilliseconds(AnimationTime)) { EasingFunction = new QuadraticEase() });
+                mpBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(ValueToLength((double)newValue, (double)MaxMP), TimeSpan.FromMilliseconds(AnimationTime)) { EasingFunction = new QuadraticEase() });
 
                 mpTB.Text = newValue.ToString();
             }));
@@ -292,7 +292,7 @@ namespace TCC
             Dispatcher.BeginInvoke(new Action(() => 
             {
                 //_doubleAnimation.To = ValueToLength(newValue, MaxST);
-                stBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation((double)newValue / (double)MaxST, TimeSpan.FromMilliseconds(AnimationTime)) { EasingFunction = new QuadraticEase() });
+                stBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(ValueToLength((double)newValue, (double)MaxST), TimeSpan.FromMilliseconds(AnimationTime)) { EasingFunction = new QuadraticEase() });
 
                 stTB.Text = newValue.ToString();
             }));
@@ -303,7 +303,7 @@ namespace TCC
             Dispatcher.BeginInvoke(new Action(() =>
             {
                 //_doubleAnimation.To = dummyFlightBar.ActualWidth * newValue / 1000;
-                flightBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation((double)newValue / (double)1000, TimeSpan.FromMilliseconds(AnimationTime)) { EasingFunction = new QuadraticEase() });
+                flightBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(ValueToLength((double)newValue, 1000), TimeSpan.FromMilliseconds(AnimationTime)) { EasingFunction = new QuadraticEase() });
             }));
         }
         private void SetMaxFlightEnergy(int statValue)
@@ -327,7 +327,7 @@ namespace TCC
             Properties.Settings.Default.CharacterWindowTop = Top;
         }
 
-        double ValueToLength(double value, int maxValue)
+        double ValueToLength(double value, double maxValue)
         {
             if(maxValue == 0)
             {
@@ -335,7 +335,7 @@ namespace TCC
             }
             else
             {
-                double n = @base.ActualWidth * ((double)value / (double)maxValue);
+                double n = ((double)value / (double)maxValue);
                 return n;
             }
 

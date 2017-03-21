@@ -110,25 +110,33 @@
                     <Border BorderThickness=".8,0,0,0" BorderBrush="#90ffffff" Grid.Column="9"></Border>
                 </Grid>
                 <StackPanel Width="Auto" Height="Auto" Name="NextEnrage" Margin="-15,0,0,3" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" Grid.Row="2">
-                        <StackPanel.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </StackPanel.RenderTransform>
-                        <Polygon Points="0,7 5,0 10,7"  Margin="0,0,0,0"  Fill="Orange" VerticalAlignment="Center" Height="Auto"  HorizontalAlignment="Center" Grid.Column="1" >
-                        </Polygon>
-                                <TextBlock Width="30" Text="100" Name="NextEnrageTB" FontSize="10" Foreground="White" TextAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,0" Padding="0">
+                    <StackPanel.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </StackPanel.RenderTransform>
+                    <Polygon Points="0,7 5,0 10,7"  Margin="0,0,0,0"  Fill="Orange" VerticalAlignment="Center" Height="Auto"  HorizontalAlignment="Center" Grid.Column="1" >
+                    </Polygon>
+                    <TextBlock Width="30" Text="100" Name="NextEnrageTB" FontSize="10" Foreground="White" TextAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,0" Padding="0">
                                 <!--<TextBlock.CacheMode>
                                     <BitmapCache RenderAtScale="2"/>
                                 </TextBlock.CacheMode>-->
-                            </TextBlock>
-                    </StackPanel>
+                    </TextBlock>
+                </StackPanel>
             </Grid>
 
-            <Grid Name="EnrageGrid" Grid.Column="1" Grid.RowSpan="3" Width="0" Height="Auto" Margin="1,0">
+            <Grid Name="EnrageGrid" Grid.Column="1" Grid.RowSpan="3" Width="{Binding ElementName=EnrageGrid, Path=ActualHeight}" Height="Auto" Margin="1,0" RenderTransformOrigin="0,0.5">
+                <Grid.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Grid.RenderTransform>
 
                 <Border Margin="0,0,0,0" Style="{StaticResource border}" Grid.Column="1" Grid.RowSpan="3" Grid.Row="0" >
                     <!--<Border.Effect>

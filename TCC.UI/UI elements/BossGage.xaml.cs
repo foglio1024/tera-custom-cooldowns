@@ -123,6 +123,7 @@ namespace TCC
             BossNameTB.DataContext = this;
             NextEnrageTB.DataContext = this;
 
+            EnrageGrid.RenderTransform = new ScaleTransform(0, 1, 0, .5);
 
             SlideAnimation.EasingFunction = new QuadraticEase();
             ColorChangeAnimation.EasingFunction = new QuadraticEase();
@@ -199,8 +200,8 @@ namespace TCC
         {
             Dispatcher.Invoke(() =>
             {
-                DoubleAnimation.To = EnrageGrid.ActualHeight;
-                EnrageGrid.BeginAnimation(WidthProperty, DoubleAnimation);
+                DoubleAnimation.To = 1;
+                EnrageGrid.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, DoubleAnimation);
 
                 EnrageArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(EnrageDuration)));
 
@@ -222,7 +223,7 @@ namespace TCC
             Dispatcher.Invoke(() =>
             {
                 DoubleAnimation.To = 0;
-                EnrageGrid.BeginAnimation(WidthProperty, DoubleAnimation);
+                EnrageGrid.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, DoubleAnimation);
 
             });
         }

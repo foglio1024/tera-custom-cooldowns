@@ -138,7 +138,7 @@
                     <Rectangle.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#c00" Offset=".5"/>
-                            <GradientStop Color="#900" Offset=".5"/>
+                            <GradientStop Color="#900" Offset="1"/>
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
@@ -170,7 +170,7 @@
                     <Rectangle.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#06e" Offset=".5"/>
-                            <GradientStop Color="#059" Offset=".5"/>
+                            <GradientStop Color="#059" Offset="1"/>
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
@@ -199,8 +199,8 @@
                 <Rectangle Name="stBar" Height="11"  Width="400" Style="{StaticResource barRectangle}" Opacity=".8" >
                     <Rectangle.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#8de" Offset=".5"/>
-                            <GradientStop Color="#4ad" Offset=".5"/>
+                            <GradientStop Color="#8de" Offset="0"/>
+                            <GradientStop Color="#4ad" Offset=".8"/>
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>

@@ -30,7 +30,7 @@ namespace TCC
         static int MaxStamina = 1;
         public static bool Visible { get; set; }
         private System.Windows.Media.Color color;
-
+        
         public StaminaGauge(System.Windows.Media.Color color)
         {
             InitializeComponent();
@@ -46,15 +46,7 @@ namespace TCC
 
             StaminaAmount.Stroke = new SolidColorBrush(color);
             glow.Color = color;
-            baseEll.Fill = new SolidColorBrush(System.Windows.Media.Color.FromArgb(0xff, 0x20, 0x20, 0x20));
-            App.Current.Dispatcher.Invoke(() =>
-            {
-
-                _doubleAnimation.Duration = TimeSpan.FromMilliseconds(400);
-                _colorAnimation.Duration = TimeSpan.FromMilliseconds(200);
-
-            });
-
+            baseEll.Fill = new SolidColorBrush(Colors.Transparent);
         }
 
         private void PacketParser_MaxSTUpdated(int statValue)
@@ -67,8 +59,7 @@ namespace TCC
             Dispatcher.BeginInvoke(new Action(() => {
                 num.Text = stamina.ToString();
 
-                _doubleAnimation.To = ValueToAngle(stamina);
-                StaminaAmount.BeginAnimation(Arc.EndAngleProperty, _doubleAnimation);
+                StaminaAmount.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(ValueToAngle(stamina), TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() });
 
                 if(stamina == MaxStamina)
                 {
@@ -76,14 +67,11 @@ namespace TCC
                 }
                 else
                 {
-                    _colorAnimation.To = color;
-                    StaminaAmount.Stroke.BeginAnimation(SolidColorBrush.ColorProperty, _colorAnimation);
+                    StaminaAmount.Stroke.BeginAnimation(SolidColorBrush.ColorProperty, new ColorAnimation(color, TimeSpan.FromMilliseconds(200)));
 
-                    _colorAnimation.To = System.Windows.Media.Color.FromArgb(0xff, 0x20, 0x20, 0x20);
-                    baseEll.Fill.BeginAnimation(SolidColorBrush.ColorProperty, _colorAnimation);
+                    baseEll.Fill.BeginAnimation(SolidColorBrush.ColorProperty, new ColorAnimation(System.Windows.Media.Color.FromArgb(0xff, 0x20, 0x20, 0x20), TimeSpan.FromMilliseconds(200)));
 
-                    _doubleAnimation.To = 0;
-                    glow.BeginAnimation(DropShadowEffect.OpacityProperty, _doubleAnimation);
+                    glow.BeginAnimation(DropShadowEffect.OpacityProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(200)));
 
                 }
 
@@ -105,11 +93,9 @@ namespace TCC
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                _doubleAnimation.To = 1;
-                glow.BeginAnimation(DropShadowEffect.OpacityProperty, _doubleAnimation);
+                glow.BeginAnimation(DropShadowEffect.OpacityProperty, new DoubleAnimation(1, TimeSpan.FromMilliseconds(200)));
 
-                _colorAnimation.To = color;
-                baseEll.Fill.BeginAnimation(SolidColorBrush.ColorProperty, _colorAnimation);
+                baseEll.Fill.BeginAnimation(SolidColorBrush.ColorProperty, new ColorAnimation(color, TimeSpan.FromMilliseconds(200)));
             }));
         }
 
@@ -133,8 +119,6 @@ namespace TCC
             Properties.Settings.Default.GaugeWindowLeft = Left;
             Properties.Settings.Default.GaugeWindowTop = Top;
         }
-        static DoubleAnimation _doubleAnimation = new DoubleAnimation();
-        static ColorAnimation _colorAnimation = new ColorAnimation();
 
     }
 }

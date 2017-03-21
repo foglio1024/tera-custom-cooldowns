@@ -23,26 +23,26 @@ namespace TCC.Data
 
                 if (iconName.Contains("Icon_Skills."))
                 {
-                    iconName = iconName.Replace("Icon_Skills.", "");
+                    var img = iconName.Replace("Icon_Skills.", "");
                     CooldownWindow.Instance.Dispatcher.Invoke(() =>
                     {
-                        iconBitmap = (Bitmap)Properties.Icon_Skills.ResourceManager.GetObject(iconName);
+                        iconBitmap = (Bitmap)Properties.Icon_Skills.ResourceManager.GetObject(img);
                     });
                 }
                 else if (iconName.Contains("Icon_Status."))
                 {
-                    iconName = iconName.Replace("Icon_Status.", "");
+                    var img = iconName.Replace("Icon_Status.", "");
                     CooldownWindow.Instance.Dispatcher.Invoke(() =>
                     {
-                        iconBitmap = (Bitmap)Properties.Icon_Status.ResourceManager.GetObject(iconName);
+                        iconBitmap = (Bitmap)Properties.Icon_Status.ResourceManager.GetObject(img);
                     });
                 }
                 else if (iconName.Contains("Icon_Crest."))
                 {
-                    iconName = iconName.Replace("Icon_Crest.", "");
+                    var img = iconName.Replace("Icon_Crest.", "");
                     CooldownWindow.Instance.Dispatcher.Invoke(() =>
                     {
-                        iconBitmap = (Bitmap)Properties.Icon_Crest.ResourceManager.GetObject(iconName);
+                        iconBitmap = (Bitmap)Properties.Icon_Crest.ResourceManager.GetObject(img);
                     });
                 }
 

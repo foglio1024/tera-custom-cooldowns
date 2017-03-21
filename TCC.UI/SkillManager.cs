@@ -62,8 +62,8 @@ namespace TCC
                     ResetSkill(skillCooldown.Skill);
                     //Console.WriteLine("Resetting {0} - {1}", skill.Id, skill.Name);
                 }
-                else if (NormalSkillsQueue.Where(x => x.Skill.Name == skillCooldown.Skill.Name).Count() > 0 ||
-                         LongSkillsQueue.Where(x => x.Skill.Name == skillCooldown.Skill.Name).Count() > 0)
+                else if (NormalSkillsQueue.Any(x => x.Skill.Name == skillCooldown.Skill.Name)||
+                         LongSkillsQueue.Any(x => x.Skill.Name == skillCooldown.Skill.Name))
                 {
                     return;
                 }
@@ -107,7 +107,7 @@ namespace TCC
             {
                 SkillCooldown broochCooldown = new SkillCooldown(brooch, (int)packet.Cooldown, CooldownType.Item);
                 //Console.WriteLine("Received {0} - {1}", broochCooldown.Skill.Id, broochCooldown.Skill.Name);
-                if (LongSkillsQueue.Where(x => x.Skill.Name == broochCooldown.Skill.Name).Count() > 0)
+                if (LongSkillsQueue.Any(x => x.Skill.Name == broochCooldown.Skill.Name))
                 {
                     return;
                 }
