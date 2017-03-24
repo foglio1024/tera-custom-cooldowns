@@ -9,7 +9,7 @@ using Tera.Game.Messages;
 
 namespace TCC.Messages
 {
-    class S_LOGIN : ParsedMessage
+    public class S_LOGIN : ParsedMessage
     {
         short nameOffset { get; set; }
         short detailsOffset { get; set; }

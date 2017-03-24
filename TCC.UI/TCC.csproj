@@ -77,9 +77,13 @@
     </ApplicationDefinition>
     <Compile Include="Data\Abnormality.cs" />
     <Compile Include="Data\AbnormalityDatabase.cs" />
+    <Compile Include="Parsing\MessageFactory.cs" />
     <Compile Include="Parsing\Messages\S_ABNORMALITY_END.cs" />
     <Compile Include="Parsing\Messages\S_ABNORMALITY_REFRESH.cs" />
+    <Compile Include="Parsing\Messages\S_CHAT.cs" />
     <Compile Include="Parsing\Messages\S_DESPAWN_NPC.cs" />
+    <Compile Include="Parsing\Messages\S_RETURN_TO_LOBBY.cs" />
+    <Compile Include="Parsing\Messages\S_SPAWN_ME.cs" />
     <Compile Include="Parsing\Messages\S_SPAWN_NPC.cs" />
     <Compile Include="Properties\Icon_Crest.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1837,5 +1841,6 @@
     <None Include="resources\Icon_Laurels\CharacterWindow_I1BF.png" />
     <Resource Include="resources\tcc.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

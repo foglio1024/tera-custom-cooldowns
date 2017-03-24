@@ -64,7 +64,7 @@ namespace TCC
                     EasingFunction = new QuadraticEase()
                 };
 
-                arc.BeginAnimation(Arc.EndAngleProperty, a);
+                //arc.BeginAnimation(Arc.EndAngleProperty, a);
                 arc.BeginAnimation(Arc.OpacityProperty, b);
 
             }
@@ -75,10 +75,10 @@ namespace TCC
                     EasingFunction = new QuadraticEase()
                 };
                 arc.BeginAnimation(OpacityProperty, a);
-                a.Completed += (s, o) => 
-                {
-                    arc.BeginAnimation(Arc.EndAngleProperty, null);
-                };
+                //a.Completed += (s, o) =>
+                //{
+                //    arc.BeginAnimation(Arc.EndAngleProperty, null);
+                //};
             }
         }
 

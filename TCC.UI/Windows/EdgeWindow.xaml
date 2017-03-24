@@ -20,6 +20,11 @@
         Height="Auto" d:DesignWidth="300" d:DesignHeight="300"
                 ResizeMode="NoResize"
 >
+    <Window.Resources>
+        <DataTemplate x:Key="arc">
+            <local:EdgeArc></local:EdgeArc>
+        </DataTemplate>
+    </Window.Resources>
     <Grid x:Name="MainGrid" Margin="20">
         <Grid.Effect>
             <DropShadowEffect x:Name="glow" Color="Red" ShadowDepth="0" BlurRadius="25" Opacity="0"/>
@@ -40,9 +45,13 @@
                 </local:Arc.Effect>
             </local:Arc>
         </Grid>
-        <Grid Name="ArcsGrid" Margin="12">
-
-        </Grid>
+        <ItemsControl Name="ArcsGrid" ItemTemplate="{StaticResource arc}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid Margin="12"></Grid>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
         <TextBlock Name="num"
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center" 

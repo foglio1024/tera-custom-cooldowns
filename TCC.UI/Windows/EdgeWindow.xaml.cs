@@ -26,7 +26,7 @@ namespace TCC
     {
         public static EdgeGaugeWindow Instance;
 
-        DispatcherTimer TestTimer;
+        //DispatcherTimer TestTimer;
         Timer ExpireEdge;
         Timer HideTimer;
         public static bool Visible { get; set; }
@@ -34,7 +34,7 @@ namespace TCC
         public event MaxEdge MaxedEdge;
         public event EdgeReset NormalEdge;
 
-        List<EdgeArc> edgeArcs;
+        ObservableCollection<EdgeArc> edgeArcs;
 
         static Color arcBaseColor = Color.FromArgb(0xff,0xff,0xbf,0);
         public static int spawnTime = 50;
@@ -51,8 +51,9 @@ namespace TCC
             Left = Properties.Settings.Default.GaugeWindowLeft;
             Top = Properties.Settings.Default.GaugeWindowTop;
 
-            edgeArcs = new List<EdgeArc>();
-
+            edgeArcs = new ObservableCollection<EdgeArc>();
+            ArcsGrid.DataContext = edgeArcs;
+            ArcsGrid.ItemsSource = edgeArcs;
             scytheCd.Stroke = new SolidColorBrush(Colors.White);
 
             for (int i = 0; i < 10; i++)
@@ -62,19 +63,19 @@ namespace TCC
                 edgeArcs.Add(a);
             }
 
-            foreach (var item in edgeArcs)
-            {
-                ArcsGrid.Children.Add(item);
-            }
+            //foreach (var item in edgeArcs)
+            //{
+            //    ArcsGrid.Children.Add(item);
+            //}
 
             ExpireEdge = new Timer(7000);
             ExpireEdge.Elapsed += (s, o) => { SetEdge(0); };
 
-            TestTimer = new DispatcherTimer()
-            {
-                Interval = TimeSpan.FromSeconds(1)
-            };
-            TestTimer.Tick += TestTimer_Tick;
+            //TestTimer = new DispatcherTimer()
+            //{
+            //    Interval = TimeSpan.FromSeconds(1)
+            //};
+            //TestTimer.Tick += TestTimer_Tick;
             //TestTimer.Start();
         }
 
@@ -99,22 +100,22 @@ namespace TCC
 
         }
 
-        static int testEdge = 0;
-        private void TestTimer_Tick(object sender, EventArgs e)
-        {
-            if(testEdge == 10)
-            {
-                testEdge = 0;
-                StartScytheCooldown(3000);
-                StartGambleBuff(7000);
-                StartGambleCooldown(9000);
-            }
-            else
-            {
-                testEdge++;
-            }
-            SetEdge(testEdge);
-        }
+        //static int testEdge = 0;
+        //private void TestTimer_Tick(object sender, EventArgs e)
+        //{
+        //    if(testEdge == 10)
+        //    {
+        //        testEdge = 0;
+        //        StartScytheCooldown(3000);
+        //        StartGambleBuff(7000);
+        //        StartGambleCooldown(9000);
+        //    }
+        //    else
+        //    {
+        //        testEdge++;
+        //    }
+        //    SetEdge(testEdge);
+        //}
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

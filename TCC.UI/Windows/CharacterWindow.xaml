@@ -85,17 +85,17 @@
                     <BitmapCache RenderAtScale="1.8" />
                 </TextBlock.CacheMode>
             </TextBlock>
-            <TextBlock Text="-" Margin="0" Name="levelTB"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"
+            <TextBlock Text="{Binding CurrentLevel}" Margin="0" Name="levelTB"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"
                        Style="{StaticResource hpBarNumber}" >
                 <TextBlock.CacheMode>
                     <BitmapCache RenderAtScale="1.8"></BitmapCache>
                 </TextBlock.CacheMode></TextBlock>
-            <TextBlock Text="-" Name="nameTB"  VerticalAlignment="Center" Margin="7,0" HorizontalAlignment="Left" Grid.Column="2"
+            <TextBlock Text="{Binding CurrentName}" Name="nameTB"  VerticalAlignment="Center" Margin="7,0" HorizontalAlignment="Left" Grid.Column="2"
                        Style="{StaticResource hpBarNumber}" >
                 <TextBlock.CacheMode>
                     <BitmapCache RenderAtScale="1.8"></BitmapCache>
                 </TextBlock.CacheMode></TextBlock>
-            <TextBlock Text="-" Name="ilvlTB" VerticalAlignment="Center" Margin="20,0" HorizontalAlignment="Left" Grid.Column="3"
+            <TextBlock Text="{Binding CurrentIlvl}" Name="ilvlTB" VerticalAlignment="Center" Margin="20,0" HorizontalAlignment="Left" Grid.Column="3"
                        Style="{StaticResource hpBarNumber}" >
                 <TextBlock.CacheMode>
                     <BitmapCache RenderAtScale="1.8"></BitmapCache>
@@ -156,7 +156,7 @@
                     </Path.RenderTransform>
                 </Path>
 
-                <TextBlock Name="hpPercTB" Style="{StaticResource hpBarNumber}" HorizontalAlignment="Right" Margin="5,2,20,2" Opacity=".9">
+                <TextBlock Text="{Binding PercentageHP, StringFormat=#.#%}" Name="hpPercTB" Style="{StaticResource hpBarNumber}" HorizontalAlignment="Right" Margin="5,2,20,2" Opacity=".9">
                     <TextBlock.CacheMode>
                         <BitmapCache RenderAtScale="1.8"></BitmapCache>
                     </TextBlock.CacheMode>
@@ -221,7 +221,7 @@
                 </Grid.CacheMode>
 
 
-                <TextBlock Name="hpTB" Style="{StaticResource hpBarNumber}" Margin="10,0,0,0" Grid.Column="0" />
+                <TextBlock Name="hpTB" Text="{Binding CurrentHP}" Style="{StaticResource hpBarNumber}" Margin="10,0,0,0" Grid.Column="0" />
                 <TextBlock Style="{StaticResource hpBarNumber}" Grid.Column="1" Text="/" Margin="4,0,4,0"  Foreground="#aaffffff" />
                 <TextBlock Name="hpMaxTB" Style="{StaticResource hpBarNumber}" Margin="0,0,10,0" Grid.Column="2" Foreground="#aaffffff" />
 
@@ -237,7 +237,7 @@
                 </Grid.CacheMode>
 
 
-                <TextBlock Name="mpTB" Style="{StaticResource hpBarNumber}" Margin="10,-1,0,0" Grid.Column="0" />
+                <TextBlock Name="mpTB" Text="{Binding CurrentMP}" Style="{StaticResource hpBarNumber}" Margin="10,-1,0,0" Grid.Column="0" />
                 <TextBlock Style="{StaticResource hpBarNumber}" Grid.Column="1" Text="/" Margin="4,-1,4,0" Foreground="#ffcccccc" />
                 <TextBlock Name="mpMaxTB" Style="{StaticResource hpBarNumber}" Margin="0,-1,10,0" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Foreground="#ffcccccc" />
 
@@ -253,7 +253,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Name="stTB" Style="{StaticResource hpBarNumber}" Margin="10,0,0,0" Grid.Column="0" Grid.Row="2" FontSize="12" Foreground="#ffffff" />
+                <TextBlock Name="stTB" Text="{Binding CurrentST}" Style="{StaticResource hpBarNumber}" Margin="10,0,0,0" Grid.Column="0" Grid.Row="2" FontSize="12" Foreground="#ffffff" />
                 <TextBlock Style="{StaticResource hpBarNumber}" Grid.Column="1" Text="/" Margin="4,0" Grid.Row="2" Foreground="#ffffff" FontSize="12" />
                 <TextBlock Name="stMaxTB" Style="{StaticResource hpBarNumber}" Margin="0,0,15,0" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" Foreground="#ffffff" FontSize="12" />
             </Grid>

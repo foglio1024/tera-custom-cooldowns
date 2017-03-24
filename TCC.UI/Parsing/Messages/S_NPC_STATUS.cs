@@ -3,7 +3,7 @@ using Tera.Game.Messages;
 
 namespace TCC.Parsing
 {
-    internal class S_NPC_STATUS : ParsedMessage
+    public class S_NPC_STATUS : ParsedMessage
     {
         ulong entityId, targetId;
         byte enraged;

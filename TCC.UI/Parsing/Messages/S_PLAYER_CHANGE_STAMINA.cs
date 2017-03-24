@@ -3,7 +3,7 @@ using Tera.Game.Messages;
 
 namespace TCC
 {
-    internal class S_PLAYER_CHANGE_STAMINA : ParsedMessage
+    public class S_PLAYER_CHANGE_STAMINA : ParsedMessage
     {
         public int currentStamina, maxStamina, unk1, unk2, unk3;
 

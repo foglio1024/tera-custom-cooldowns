@@ -3,7 +3,7 @@ using Tera.Game.Messages;
 
 namespace TCC
 {
-    internal class S_PLAYER_CHANGE_MP : ParsedMessage
+    public class S_PLAYER_CHANGE_MP : ParsedMessage
     {
         public int currentMP, maxMP, diff;
         public uint type;

@@ -31,6 +31,7 @@ namespace TCC
 
             WindowManager.Init();
             PacketRouter.Init();
+
             TeraSniffer.Instance.NewConnection += (srv) => SkillManager.Clear();
             TeraSniffer.Instance.EndConnection += () => SkillManager.Clear();
 

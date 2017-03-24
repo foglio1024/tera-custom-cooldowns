@@ -8,7 +8,7 @@ using Tera.Game.Messages;
 
 namespace TCC.Messages
 {
-    class S_PLAYER_STAT_UPDATE : ParsedMessage
+    public class S_PLAYER_STAT_UPDATE : ParsedMessage
     {
         public int currHp, currMp, unk1, maxHp, maxMp, basePower, baseEndu, baseImpactFactor, baseBalanceFactor;
         public short baseMovSpeed, unk2, baseAtkSpeed;

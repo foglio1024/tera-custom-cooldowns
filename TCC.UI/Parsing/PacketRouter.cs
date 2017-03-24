@@ -1,9 +1,11 @@
 ﻿using DamageMeter.Sniffing;
 using Data;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using TCC.Data;
 using TCC.Messages;
@@ -26,7 +28,7 @@ namespace TCC.Parsing
         public static OpCodeNamer OpCodeNamer;
         public static OpCodeNamer SystemMessageNamer;
         static CharListProcessor CLP = new CharListProcessor();
-
+        static ConcurrentQueue<Tera.Message> Packets = new ConcurrentQueue<Tera.Message>();
         //static event ParsedMessageEventHandler CharLogin;
         //static event ParsedMessageEventHandler SkillCooldown;
         //static event ParsedMessageEventHandler ItemCooldown;
@@ -64,26 +66,30 @@ namespace TCC.Parsing
         public static void Init()
         {
             TeraSniffer.Instance.MessageReceived += MessageReceived;
-
-            //CharLogin += OnCharLogin;
-            //CharList += OnCharList;
-            //SkillCooldown += OnNewSkillCooldown;
-            //ItemCooldown += OnNewItemCooldown;
-            //DecreaseSkillCooldown += OnDecreaseSkillCooldown;
-            //ReturnToLobby += OnReturnToLobby;
-            //AbnormalityBegin += OnAbnormalityBegin;
-            //PlayerStatUpdate += OnPlayerStatUpdate;
-            //PlayerMPChanged += OnPlayerChangeMP;
-            //CreatureHPChanged += OnCreatureChangeHP;
-            //PlayerStaminaChanged += OnPlayerChangeStamina;
-            //UserStatusChanged += OnUserStatusChanged;
-            //UserSpawned += OnSpawn;
-            //FlightEnergyChanged += OnPlayerChangeFlightEnergy;
-            //BossGageReceived += OnGageReceived;
-            //NpcStatusChanged += OnNpcStatusChanged;
-
+            var analysisThread = new Thread(PacketAnalysisLoop);
+            analysisThread.Start();
         }
 
+        static void PacketAnalysisLoop()
+        {
+            while (true)
+            {
+                Tera.Message msg;
+                var successDequeue = Packets.TryDequeue(out msg);
+                if (!successDequeue)
+                {
+                    Thread.Sleep(1);
+                    continue;
+                }
+                var message = MessageFactory.Create(msg);
+                if (message.GetType() == typeof(Tera.Game.Messages.UnknownMessage)) continue;
+
+                if (!MessageFactory.Process(message))
+                {
+                }
+
+            }
+        }
 
         public static void MessageReceived(global::Tera.Message obj)
         {
@@ -94,8 +100,11 @@ namespace TCC.Parsing
                 TeraSniffer.Instance.opn = new OpCodeNamer(System.IO.Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/{Version}.txt"));
                 OpCodeNamer = TeraSniffer.Instance.opn;
                 SystemMessageNamer = new OpCodeNamer(System.IO.Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/smt_{Version}.txt"));
+                MessageFactory.Init();
+
             }
-            RoutePacket(obj);
+            //RoutePacket(obj);
+            Packets.Enqueue(obj);
         }
         public static string PacketData(Tera.Message msg)
         {
@@ -160,19 +169,16 @@ namespace TCC.Parsing
                     HandleAbnormalityEnd(new S_ABNORMALITY_END(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
                     break;
                 case ("S_SPAWN_ME"):
-                    HandleSpawn();
+                    //HandleSpawn();
                     break;
                 case ("S_GET_USER_LIST"):
                     HandleCharList(msg);
                     break;
                 case ("S_RETURN_TO_LOBBY"):
-                    HandleReturnToLobby();
+                    //HandleReturnToLobby();
                     break;
                 case ("S_LOGIN"):
                     HandleCharLogin(new S_LOGIN(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
-                    break;
-                case ("S_GMEVENT_OX_QUIZ_OPEN"):
-                    var evtPacket = new EventQuestion(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer));
                     break;
                 default:
                     break;
@@ -186,7 +192,7 @@ namespace TCC.Parsing
                 Console.WriteLine(reader.ReadTeraString());
             }
         }
-        static void HandleCharLogin(S_LOGIN p)
+        public static void HandleCharLogin(S_LOGIN p)
         {
             SessionManager.Logged = true;
             SessionManager.CurrentClass = p.CharacterClass;
@@ -225,7 +231,7 @@ namespace TCC.Parsing
                     break;
             }
         }
-        static void HandleNewSkillCooldown(S_START_COOLTIME_SKILL p)
+        public static void HandleNewSkillCooldown(S_START_COOLTIME_SKILL p)
         {
             SkillManager.AddSkill(p);
             switch (SessionManager.CurrentClass)
@@ -237,21 +243,21 @@ namespace TCC.Parsing
                     break;
             }
         }
-        static void HandleNewItemCooldown(S_START_COOLTIME_ITEM p)
+        public static void HandleNewItemCooldown(S_START_COOLTIME_ITEM p)
         {
             SkillManager.AddBrooch(p);
         }
-        static void HandleDecreaseSkillCooldown(S_DECREASE_COOLTIME_SKILL p)
+        public static void HandleDecreaseSkillCooldown(S_DECREASE_COOLTIME_SKILL p)
         {
             SkillManager.ChangeSkillCooldown(p);
         }
-        static void HandleReturnToLobby()
+        public static void HandleReturnToLobby(S_RETURN_TO_LOBBY p)
         {
             SessionManager.Logged = false;
             WindowManager.CharacterWindow.Reset();
             SkillManager.Clear();
         }
-        static void HandleAbnormalityBegin(S_ABNORMALITY_BEGIN p)
+        public static void HandleAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
             switch (SessionManager.CurrentClass)
             {
@@ -294,7 +300,7 @@ namespace TCC.Parsing
                 }
             }
         }
-        static void HandleAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
+        public static void HandleAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
             if (AbnormalityDatabase.Abnormalities.TryGetValue(p.AbnormalityId, out Abnormality ab))
             {
@@ -331,7 +337,7 @@ namespace TCC.Parsing
             }
 
         }
-        static void HandleAbnormalityEnd(S_ABNORMALITY_END p)
+        public static void HandleAbnormalityEnd(S_ABNORMALITY_END p)
         {
             if (AbnormalityDatabase.Abnormalities.TryGetValue(p.id, out Abnormality ab))
             {
@@ -345,7 +351,7 @@ namespace TCC.Parsing
             }
 
         }
-        static void HandlePlayerStatUpdate(S_PLAYER_STAT_UPDATE p)
+        public static void HandlePlayerStatUpdate(S_PLAYER_STAT_UPDATE p)
         {
             switch (SessionManager.CurrentClass)
             {
@@ -384,12 +390,12 @@ namespace TCC.Parsing
             IlvlUpdated?.Invoke(p.ilvl);
 
         }
-        static void HandlePlayerChangeMP(S_PLAYER_CHANGE_MP p)
+        public static void HandlePlayerChangeMP(S_PLAYER_CHANGE_MP p)
         {
             MPUpdated?.Invoke(p.currentMP);
             
         }
-        static void HandleCreatureChangeHP(S_CREATURE_CHANGE_HP p)
+        public static void HandleCreatureChangeHP(S_CREATURE_CHANGE_HP p)
         {
             //if (SessionManager.CurrentBosses.Where(x => x.EntityId == p.target).Count() > 0)
             //{
@@ -414,7 +420,7 @@ namespace TCC.Parsing
             }
 
         }
-        static void HandlePlayerChangeStamina(S_PLAYER_CHANGE_STAMINA p)
+        public static void HandlePlayerChangeStamina(S_PLAYER_CHANGE_STAMINA p)
         {
             switch (SessionManager.CurrentClass)
             {
@@ -441,7 +447,7 @@ namespace TCC.Parsing
             }
 
         }
-        static void HandleUserStatusChanged(S_USER_STATUS p)
+        public static void HandleUserStatusChanged(S_USER_STATUS p)
         {
             if (p.id == SessionManager.CurrentCharId)
             {
@@ -456,7 +462,7 @@ namespace TCC.Parsing
             }
 
         }
-        static void HandleSpawn()
+        public static void HandleSpawn(S_SPAWN_ME p)
         {
             WindowManager.ShowWindow(WindowManager.CharacterWindow);
             Console.WriteLine("[S_SPAWN_ME]");
@@ -466,16 +472,16 @@ namespace TCC.Parsing
                 SessionManager.CurrentBosses.Clear();
             });
         }
-        static void HandleCharList(Tera.Message msg)
+        public static void HandleCharList(Tera.Message msg)
         {
             CLP.ParseCharacters(PacketData(msg));
 
         }
-        static void HandlePlayerChangeFlightEnergy(S_PLAYER_CHANGE_FLIGHT_ENERGY p)
+        public static void HandlePlayerChangeFlightEnergy(S_PLAYER_CHANGE_FLIGHT_ENERGY p)
         {
             FlightEnergyUpdated?.Invoke(p.energy);
         }
-        static void HandleGageReceived(S_BOSS_GAGE_INFO p)
+        public static void HandleGageReceived(S_BOSS_GAGE_INFO p)
         {
             if(SessionManager.TryGetBossById(p.EntityId, out Boss b))
             {
@@ -500,7 +506,7 @@ namespace TCC.Parsing
             //Console.WriteLine("GAGE: {0} - {1}", MonsterDatabase.GetName((uint)p.Npc, (uint)p.Type), p.MaxHP);
 
         }
-        static void HandleNpcStatusChanged(S_NPC_STATUS p)
+        public static void HandleNpcStatusChanged(S_NPC_STATUS p)
         {
             if (SessionManager.TryGetBossById(p.EntityId, out Boss b))
             {
@@ -511,7 +517,7 @@ namespace TCC.Parsing
                 }
             }
         }
-        static void HandleNpcDespawn(S_DESPAWN_NPC p)
+        public static void HandleNpcDespawn(S_DESPAWN_NPC p)
         {
             if(SessionManager.TryGetBossById(p.target, out Boss b))
             {
@@ -521,7 +527,7 @@ namespace TCC.Parsing
                 });
             }
         }
-        static void HandleNpcSpawn(S_SPAWN_NPC p)
+        public static void HandleNpcSpawn(S_SPAWN_NPC p)
         {
             if (MonsterDatabase.TryGetMonster(p.Npc, (uint)p.Type, out Monster m))
             {

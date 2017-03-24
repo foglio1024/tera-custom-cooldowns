@@ -9,7 +9,7 @@ using Tera.Game.Messages;
 
 namespace TCC.Parsing.Messages
 {
-    class S_SPAWN_NPC : ParsedMessage
+    public class S_SPAWN_NPC : ParsedMessage
     {
 
         ulong id;

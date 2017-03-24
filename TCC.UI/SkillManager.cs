@@ -62,11 +62,11 @@ namespace TCC
                     ResetSkill(skillCooldown.Skill);
                     //Console.WriteLine("Resetting {0} - {1}", skill.Id, skill.Name);
                 }
-                else if (NormalSkillsQueue.Any(x => x.Skill.Name == skillCooldown.Skill.Name)||
-                         LongSkillsQueue.Any(x => x.Skill.Name == skillCooldown.Skill.Name))
-                {
-                    return;
-                }
+                else if (NormalSkillsQueue.ToList().Any(x => x.Skill.Name == skillCooldown.Skill.Name)||
+                         LongSkillsQueue.ToList().Any(x => x.Skill.Name == skillCooldown.Skill.Name))
+                     {
+                         return;
+                     }
                 else if (skillCooldown.Cooldown < LongSkillTreshold)
                 {
                     NormalSkillsQueue.Add(skillCooldown);

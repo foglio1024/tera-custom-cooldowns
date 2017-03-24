@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,15 +23,19 @@ namespace TCC
     /// <summary>
     /// Logica di interazione per SkillIconControl.xaml
     /// </summary>
-    public partial class SkillIconControl : UserControl
+    public partial class SkillIconControl : UserControl, INotifyPropertyChanged
     {
-        Timer NumberTimer;
-        Timer MainTimer;
-        Timer CloseTimer;
-        double currentCd;
+        DispatcherTimer NumberTimer;
+        DispatcherTimer MainTimer;
+        DispatcherTimer CloseTimer;
         int ending = SkillManager.Ending;
 
         public static event SkillEndedEventHandler SkillEnded;
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void NotifyPropertyChanged(string p)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
+        }
 
         public ImageBrush IconBrush
         {
@@ -79,12 +84,24 @@ namespace TCC
             }));
         }
 
-
+        private double currentCD;
+        public double CurrentCD
+        {
+            get { return currentCD; }
+            set {
+                if (currentCD != value)
+                {
+                    currentCD = value;
+                    NotifyPropertyChanged("CurrentCD");
+                }
+            }
+        }
 
         public SkillIconControl()
         {
             InitializeComponent();
             icon.DataContext = this;
+            number.DataContext = this;
             SkillManager.Changed += ChangeCooldown;
             SkillManager.Reset += Reset;
         }
@@ -96,120 +113,89 @@ namespace TCC
                 if (s.Skill.Name == this.Skill.Name)
                 {
                     double newAngle = (double)s.Cooldown / (double)Cooldown;
-                    currentCd = (double)s.Cooldown / 1000;
+                    CurrentCD = (double)s.Cooldown / 1000;
                     if (s.Cooldown > ending)
                     {
-                        MainTimer.Interval = s.Cooldown - ending;
+                        MainTimer.Interval = TimeSpan.FromMilliseconds(s.Cooldown - ending);
                     }
                     else
                     {
-                        MainTimer.Interval = 1;
-                    }
-                    if (currentCd > 0)
-                    {
-                        number.Text = String.Format("{0:N0}", (currentCd));
-                    }
-                    else
-                    {
-                        number.Text = 0.ToString();
+                        MainTimer.Interval = TimeSpan.FromMilliseconds(1);
                     }
                     arc.BeginAnimation(Arc.EndAngleProperty, null);
-                    var a = new DoubleAnimation(359.9 * newAngle, 0, TimeSpan.FromMilliseconds(s.Cooldown));
-                    var b = new DoubleAnimation(.5, 1, TimeSpan.FromMilliseconds(150));
-                    arc.BeginAnimation(Arc.EndAngleProperty, a);
-                    this.BeginAnimation(OpacityProperty, b);
+                    arc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9 * newAngle, 0, TimeSpan.FromMilliseconds(s.Cooldown)));
+                    this.BeginAnimation(OpacityProperty, new DoubleAnimation(.5, 1, TimeSpan.FromMilliseconds(150)));
                 }
             }));
         }
         private void ControlLoaded(object sender, RoutedEventArgs e)
         {
-            currentCd = (double)Cooldown / 1000;
+            CurrentCD = (double)Cooldown / 1000;
             ToolTip = SkillName;
-            NumberTimer = new Timer(1000);
-            MainTimer = new Timer(Cooldown);
+            NumberTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(1000) };
+            MainTimer = new DispatcherTimer() {Interval = TimeSpan.FromMilliseconds(Cooldown) };
+            CloseTimer = new DispatcherTimer() {Interval = TimeSpan.FromMilliseconds(ending)};
 
-            CloseTimer = new Timer(ending);
-            CloseTimer.Elapsed += CloseTimer_Elapsed;
+            CloseTimer.Tick += CloseTimer_Tick; ;
 
-            NumberTimer.Elapsed += (s, o) => {
-                Dispatcher.BeginInvoke(new Action(() => {
-                    currentCd --;
-                    if(currentCd < 0)
-                    {
-                        number.Text = "";
-                        NumberTimer.Stop();
-                    }
-                    else
-                    {
-                        number.Text = String.Format("{0:N0}", currentCd); 
-                    }
-                }));
-            };
-            MainTimer.Elapsed += (s, o) =>
+            NumberTimer.Tick += (s, o) =>
             {
-                Dispatcher.Invoke(() =>
-                {
-                    var c = new DoubleAnimation(22, 0, TimeSpan.FromMilliseconds(ending))
-                    {
-                        EasingFunction = new QuadraticEase()
-                    };
-                    var w = new DoubleAnimation(0, TimeSpan.FromMilliseconds(ending))
-                    {
-                        EasingFunction = new QuadraticEase()
-                    };
-                    var h = new DoubleAnimation(0, TimeSpan.FromMilliseconds(ending))
-                    {
-                        EasingFunction = new QuadraticEase()
-                    };
-                    var t = new ThicknessAnimation(new Thickness(0), TimeSpan.FromMilliseconds(ending))
-                    {
-                        EasingFunction = new QuadraticEase()
-                    };
-
-                    g.BeginAnimation(WidthProperty, c);
-                    g.BeginAnimation(HeightProperty, c);
-                    g.BeginAnimation(MarginProperty, t);
-                    icon.BeginAnimation(WidthProperty, w);
-                    icon.BeginAnimation(HeightProperty, h);
-                    arc.BeginAnimation(WidthProperty, w);
-                    arc.BeginAnimation(HeightProperty, h);
-                    this.BeginAnimation(MarginProperty, t);
-                    CloseTimer.Enabled = true;
-
-                    MainTimer.Stop();
-                });
+                CurrentCD--;
             };
+            
+            MainTimer.Tick += (s, o) =>
+            {
+                var c = new DoubleAnimation(22, 0, TimeSpan.FromMilliseconds(ending))
+                {
+                    EasingFunction = new QuadraticEase()
+                };
+                var w = new DoubleAnimation(0, TimeSpan.FromMilliseconds(ending))
+                {
+                    EasingFunction = new QuadraticEase()
+                };
+                var h = new DoubleAnimation(0, TimeSpan.FromMilliseconds(ending))
+                {
+                    EasingFunction = new QuadraticEase()
+                };
+                var t = new ThicknessAnimation(new Thickness(0), TimeSpan.FromMilliseconds(ending))
+                {
+                    EasingFunction = new QuadraticEase()
+                };
 
-            number.Text = String.Format("{0:N0}", currentCd);
+                //g.BeginAnimation(WidthProperty, c);
+                //g.BeginAnimation(HeightProperty, c);
+                //g.BeginAnimation(MarginProperty, t);
+                MainGrid.BeginAnimation(WidthProperty, w);
+                MainGrid.BeginAnimation(HeightProperty, h);
+                //arc.BeginAnimation(WidthProperty, w);
+                //arc.BeginAnimation(HeightProperty, h);
+                //this.BeginAnimation(MarginProperty, t);
+                CloseTimer.IsEnabled = true;
+
+                MainTimer.Stop();
+            };
             AnimateCooldown();
         }
 
-        private void CloseTimer_Elapsed(object sender, ElapsedEventArgs e)
+        private void CloseTimer_Tick(object sender, EventArgs e)
         {
             RemoveSkill();
         }
 
-        private void RemoveSkill()
+        void RemoveSkill()
         {
-            this.Dispatcher.BeginInvoke(new Action(() =>
-            {
-                MainTimer.Stop();
-                MainTimer.Close();
-                NumberTimer.Stop();
-                NumberTimer.Close();
-                CloseTimer.Stop();
-                CloseTimer.Close();
-                SkillEnded?.Invoke(Skill, Cooldown);
-            }));
+            MainTimer.Stop();
+            NumberTimer.Stop();
+            CloseTimer.Stop();
+            SkillEnded?.Invoke(Skill, Cooldown);
 
         }
 
         void AnimateCooldown()
         {
-            var a = new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(Cooldown));
-            arc.BeginAnimation(Arc.EndAngleProperty, a);
-            NumberTimer.Enabled = true;
-            MainTimer.Enabled = true;
+            arc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(Cooldown)));
+            NumberTimer.IsEnabled = true;
+            MainTimer.IsEnabled = true;
         }
 
     }

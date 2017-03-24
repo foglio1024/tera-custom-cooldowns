@@ -8,7 +8,7 @@ using Tera.Game.Messages;
 
 namespace TCC.Parsing.Messages
 {
-    class S_ABNORMALITY_END : ParsedMessage
+    public class S_ABNORMALITY_END : ParsedMessage
     {
         public ulong target;
         public uint id;

@@ -10,9 +10,10 @@
     <Grid>
         <Grid.Resources>
             <Style x:Key="arc" TargetType="local:Arc">
-                <Setter Property="StrokeThickness" Value="4"/>
+                <Setter Property="StrokeThickness" Value="2"/>
                 <Setter Property="StartAngle" Value="0"/>
-                <Setter Property="EndAngle" Value="0"/>
+                <Setter Property="EndAngle" Value="30"/>
+                <Setter Property="Opacity" Value="0"/>
             </Style>
         </Grid.Resources>
         <local:Arc x:Name="arc" Stroke="White" RenderTransformOrigin="0.5,0.5" Style="{StaticResource arc}" />
