@@ -50,6 +50,8 @@
         <Style x:Key="borderPolygon" TargetType="Polygon">
             <Setter Property="Fill" Value="{StaticResource bgColor}"></Setter>
         </Style>
+        <local:ClassImageConverter x:Key="classConv"/>
+        <local:LaurelImageConverter x:Key="laurelConv"/>
     </Window.Resources>
     <Grid Margin="10,0">
         <!--<Grid.CacheMode>
@@ -105,13 +107,16 @@
         </Grid>
         <Grid Margin="8,8" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1">
             <Rectangle Name="laurel" Width="74" Height="80" Margin="0,-8,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="{Binding CurrentLaurel, Converter={StaticResource laurelConv}}"/>
+                </Rectangle.Fill>
                 <Rectangle.Effect>
                     <DropShadowEffect Opacity="0.3" ShadowDepth="3"/>
                 </Rectangle.Effect>
             </Rectangle>
             <Rectangle Name="classIcon" Fill="White" Width="50" Height="50" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Rectangle.OpacityMask>
-                    <ImageBrush/>
+                    <ImageBrush ImageSource="{Binding CurrentClass, Converter={StaticResource classConv}}"/>
                 </Rectangle.OpacityMask>
                 <Rectangle.Effect>
                     <DropShadowEffect Color="#ff20f0ff" BlurRadius="7" ShadowDepth="0"/>

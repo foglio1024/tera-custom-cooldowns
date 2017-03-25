@@ -11,44 +11,44 @@ namespace TCC.Data
     public class Abnormality
     {
         //Bitmap iconBitmap;
-        string iconName;
+        public string IconName { get; set; }
         public uint Id { get; set; }
         public string Name { get; set; }
         public string ToolTip { get; set; }
-        public ImageBrush IconBrush
-        {
-            get
-            {
-                Bitmap iconBitmap = (Bitmap)Properties.Icon_Classes.common;
+        //public ImageBrush IconBrush
+        //{
+        //    get
+        //    {
+        //        Bitmap iconBitmap = (Bitmap)Properties.Icon_Classes.common;
 
-                if (iconName.Contains("Icon_Skills."))
-                {
-                    var img = iconName.Replace("Icon_Skills.", "");
-                    CooldownWindow.Instance.Dispatcher.Invoke(() =>
-                    {
-                        iconBitmap = (Bitmap)Properties.Icon_Skills.ResourceManager.GetObject(img);
-                    });
-                }
-                else if (iconName.Contains("Icon_Status."))
-                {
-                    var img = iconName.Replace("Icon_Status.", "");
-                    CooldownWindow.Instance.Dispatcher.Invoke(() =>
-                    {
-                        iconBitmap = (Bitmap)Properties.Icon_Status.ResourceManager.GetObject(img);
-                    });
-                }
-                else if (iconName.Contains("Icon_Crest."))
-                {
-                    var img = iconName.Replace("Icon_Crest.", "");
-                    CooldownWindow.Instance.Dispatcher.Invoke(() =>
-                    {
-                        iconBitmap = (Bitmap)Properties.Icon_Crest.ResourceManager.GetObject(img);
-                    });
-                }
+        //        if (iconName.Contains("Icon_Skills."))
+        //        {
+        //            var img = iconName.Replace("Icon_Skills.", "");
+        //            CooldownWindow.Instance.Dispatcher.Invoke(() =>
+        //            {
+        //                iconBitmap = (Bitmap)Properties.Icon_Skills.ResourceManager.GetObject(img);
+        //            });
+        //        }
+        //        else if (iconName.Contains("Icon_Status."))
+        //        {
+        //            var img = iconName.Replace("Icon_Status.", "");
+        //            CooldownWindow.Instance.Dispatcher.Invoke(() =>
+        //            {
+        //                iconBitmap = (Bitmap)Properties.Icon_Status.ResourceManager.GetObject(img);
+        //            });
+        //        }
+        //        else if (iconName.Contains("Icon_Crest."))
+        //        {
+        //            var img = iconName.Replace("Icon_Crest.", "");
+        //            CooldownWindow.Instance.Dispatcher.Invoke(() =>
+        //            {
+        //                iconBitmap = (Bitmap)Properties.Icon_Crest.ResourceManager.GetObject(img);
+        //            });
+        //        }
 
-                return new ImageBrush(Utils.BitmapToImageSource(iconBitmap));
-            }
-        }
+        //        return new ImageBrush(Utils.BitmapToImageSource(iconBitmap));
+        //    }
+        //}
 
         public Abnormality(uint id, string name, string toolTip)
         {
@@ -59,7 +59,7 @@ namespace TCC.Data
 
         public void SetIcon(string iconName)
         {
-            this.iconName = iconName;
+            this.IconName = iconName;
             //if (iconName.Contains("Icon_Skills."))
             //{
             //    this.iconName = iconName.Replace("Icon_Skills.", "");

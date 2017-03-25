@@ -10,18 +10,18 @@ namespace TCC
     public class Skill
     {
         Bitmap iconBitmap;
-        string iconName;
+        public string IconName { get; set; }
         public uint Id { get; set; }
         public Class Class { get; set; }
         public string Name { get; set; }
         public string ToolTip { get; set; }
-        public ImageBrush IconBrush { get
-            {
+        //public ImageBrush IconBrush { get
+        //    {
 
-                return new ImageBrush(Utils.BitmapToImageSource((Bitmap)Properties.Icon_Skills.ResourceManager.GetObject(iconName)));
+        //        return new ImageBrush(Utils.BitmapToImageSource((Bitmap)Properties.Icon_Skills.ResourceManager.GetObject(iconName)));
 
-            }
-        }
+        //    }
+        //}
 
 
         public Skill(uint id, Class c, string name, string toolTip)
@@ -35,7 +35,7 @@ namespace TCC
         public void SetSkillIcon(string iconName)
         {
             if (!iconName.Contains("Icon_Skills.")) return;
-            this.iconName = iconName.Replace("Icon_Skills.", "");
+            this.IconName = iconName;//.Replace("Icon_Skills.", "");
 
             //CooldownWindow.Instance.Dispatcher.BeginInvoke(new Action(() =>
             //{

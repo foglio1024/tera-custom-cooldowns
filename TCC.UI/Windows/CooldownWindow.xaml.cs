@@ -73,7 +73,7 @@ namespace TCC
             if(cd < SkillManager.LongSkillTreshold)
             {
                 if(SkillManager.NormalSkillsQueue.Where(x => x.Skill == sk).Count() > 0)
-                SkillManager.NormalSkillsQueue.Remove(SkillManager.NormalSkillsQueue.Where(x => x.Skill == sk).Single());
+                    SkillManager.NormalSkillsQueue.Remove(SkillManager.NormalSkillsQueue.Where(x => x.Skill == sk).Single());
             }
             else
             {

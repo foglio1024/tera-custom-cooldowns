@@ -134,12 +134,19 @@ namespace TCC.UI_elements
         }
         public static readonly DependencyProperty AbnormalityNameProperty = DependencyProperty.Register("AbnormalityName", typeof(string), typeof(AbnormalityIndicator));
 
-        public ImageBrush Icon
+
+
+        public string IconName
         {
-            get { return (ImageBrush)GetValue(IconProperty); }
-            set { SetValue(IconProperty, value); }
+            get { return (string)GetValue(IconNameProperty); }
+            set { SetValue(IconNameProperty, value); }
         }
-        public static readonly DependencyProperty IconProperty = DependencyProperty.Register("Icon", typeof(ImageBrush), typeof(AbnormalityIndicator));
+
+        // Using a DependencyProperty as the backing store for IconName.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IconNameProperty =
+            DependencyProperty.Register("IconName", typeof(string), typeof(AbnormalityIndicator));
+
+
 
         public int Duration
         {

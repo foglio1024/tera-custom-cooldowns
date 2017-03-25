@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,12 +38,19 @@ namespace TCC
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
         }
 
-        public ImageBrush IconBrush
+
+
+        public string IconName
         {
-            get { return (ImageBrush)GetValue(IconBrushProperty); }
-            set { SetValue(IconBrushProperty, value); }
+            get { return (string)GetValue(IconNameProperty); }
+            set { SetValue(IconNameProperty, value); }
         }
-        public static readonly DependencyProperty IconBrushProperty = DependencyProperty.Register("IconBrush", typeof(ImageBrush), typeof(SkillIconControl));
+
+        // Using a DependencyProperty as the backing store for IconName.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IconNameProperty =
+            DependencyProperty.Register("IconName", typeof(string), typeof(SkillIconControl));
+
+
 
         public uint Id
         {
@@ -108,25 +116,26 @@ namespace TCC
 
         private void ChangeCooldown(SkillCooldown s)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.Invoke(() =>
             {
-                if (s.Skill.Name == this.Skill.Name)
+                if (s.Skill.Name != this.Skill.Name) return;
+
+                CurrentCD = (double)s.Cooldown / 1000;
+                double newAngle = (double)s.Cooldown / (double)Cooldown;
+
+                if (s.Cooldown > ending)
                 {
-                    double newAngle = (double)s.Cooldown / (double)Cooldown;
-                    CurrentCD = (double)s.Cooldown / 1000;
-                    if (s.Cooldown > ending)
-                    {
-                        MainTimer.Interval = TimeSpan.FromMilliseconds(s.Cooldown - ending);
-                    }
-                    else
-                    {
-                        MainTimer.Interval = TimeSpan.FromMilliseconds(1);
-                    }
-                    arc.BeginAnimation(Arc.EndAngleProperty, null);
-                    arc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9 * newAngle, 0, TimeSpan.FromMilliseconds(s.Cooldown)));
-                    this.BeginAnimation(OpacityProperty, new DoubleAnimation(.5, 1, TimeSpan.FromMilliseconds(150)));
+                    MainTimer.Interval = TimeSpan.FromMilliseconds(s.Cooldown - ending);
                 }
-            }));
+                else
+                {
+                    MainTimer.Interval = TimeSpan.FromMilliseconds(1);
+                }
+
+                //arc.BeginAnimation(Arc.EndAngleProperty, null);
+                arc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9 * newAngle, 0, TimeSpan.FromMilliseconds(s.Cooldown)));
+                //this.BeginAnimation(OpacityProperty, new DoubleAnimation(.5, 1, TimeSpan.FromMilliseconds(150)));
+            });
         }
         private void ControlLoaded(object sender, RoutedEventArgs e)
         {
@@ -166,7 +175,7 @@ namespace TCC
                 //g.BeginAnimation(HeightProperty, c);
                 //g.BeginAnimation(MarginProperty, t);
                 MainGrid.BeginAnimation(WidthProperty, w);
-                MainGrid.BeginAnimation(HeightProperty, h);
+                //MainGrid.BeginAnimation(HeightProperty, h);
                 //arc.BeginAnimation(WidthProperty, w);
                 //arc.BeginAnimation(HeightProperty, h);
                 //this.BeginAnimation(MarginProperty, t);
@@ -198,5 +207,21 @@ namespace TCC
             MainTimer.IsEnabled = true;
         }
 
+    }
+
+    public class IconConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value == null) return "";
+            string iconName = value.ToString();
+            iconName = iconName.Replace(".", "/");
+            return "/resources/" + iconName + ".png";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

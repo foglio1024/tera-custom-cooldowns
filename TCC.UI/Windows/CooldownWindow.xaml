@@ -21,7 +21,7 @@
 >
     <Window.Resources>
         <DataTemplate x:Key="SkillDataTemplate">
-            <local:SkillIconControl IconBrush="{Binding Skill.IconBrush}" 
+            <local:SkillIconControl  
                                     Cooldown="{Binding Cooldown}" 
                                     Id="{Binding Skill.Id}" 
                                     SkillName="{Binding Skill.Name}" 

@@ -211,20 +211,20 @@ namespace TCC
             stBar.Width = @base.Width;
             flightBar.Width = dummyFlightBar.Width;
 
-            Binding classBinding = new Binding
-            {
-                Source = this,
-                Path = new PropertyPath("CurrentClass"),
-                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
-                Converter = new ClassImageConverter(),
-            };
-            Binding laurelBinding = new Binding
-            {
-                Source = this,
-                Path = new PropertyPath("CurrentLaurel"),
-                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
-                Converter = new LaurelImageConverter()
-            };
+            //Binding classBinding = new Binding
+            //{
+            //    Source = this,
+            //    Path = new PropertyPath("CurrentClass"),
+            //    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+            //    Converter = new ClassImageConverter(),
+            //};
+            //Binding laurelBinding = new Binding
+            //{
+            //    Source = this,
+            //    Path = new PropertyPath("CurrentLaurel"),
+            //    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+            //    Converter = new LaurelImageConverter()
+            //};
             //Binding nameBinding = new Binding
             //{
             //    Source = this,
@@ -244,8 +244,8 @@ namespace TCC
             //    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
             //};
 
-            classIcon.SetBinding(Rectangle.OpacityMaskProperty, classBinding);
-            laurel.SetBinding(Rectangle.FillProperty, laurelBinding);
+            //classIcon.SetBinding(Rectangle.OpacityMaskProperty, classBinding);
+            //laurel.SetBinding(Rectangle.FillProperty, laurelBinding);
             //nameTB.SetBinding(TextBlock.TextProperty, nameBinding);
             //levelTB.SetBinding(TextBlock.TextProperty, levelBinding);
             //ilvlTB.SetBinding(TextBlock.TextProperty, ilvlBinding);
@@ -436,35 +436,30 @@ namespace TCC
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             Laurel l = (Laurel)value;
-            System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(50, 50);
-
+            //System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(50, 50);
+            string laurel = "";
             switch (l)
             {
                 case Laurel.None:
-                    break;
+                    return "";
                 case Laurel.Bronze:
-                    bitmap = Properties.Icon_Laurels.bronze;
+                    laurel = "bronze";
                     break;
                 case Laurel.Silver:
-                    bitmap = Properties.Icon_Laurels.silver;
-
+                    laurel = "silver";
                     break;
                 case Laurel.Gold:
-                    bitmap = Properties.Icon_Laurels.gold;
-
+                    laurel = "gold";
                     break;
                 case Laurel.Diamond:
-                    bitmap = Properties.Icon_Laurels.diamond;
-
+                    laurel = "diamond";
                     break;
                 case Laurel.Champion:
-                    bitmap = Properties.Icon_Laurels.champion;
-
-                    break;
-                default:
+                    laurel = "champion";
                     break;
             }
-            return new ImageBrush(CharacterWindow.Bitmap2BitmapImage(bitmap));
+            // return new ImageBrush(CharacterWindow.Bitmap2BitmapImage(bitmap));
+            return "/resources/Icon_Laurels/" + laurel + ".png";
         }
 
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
@@ -481,53 +476,56 @@ namespace TCC
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             Class c = (Class)value;
-            System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(50, 50);
+            //System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(50, 50);
+            string className = "common";
             switch (c)
             {
                 case Class.Warrior:
-                    bitmap = Properties.Icon_Classes.warrior;
+                    className = "warrior";
                     break;
                 case Class.Lancer:
-                    bitmap = Properties.Icon_Classes.lancer;
+                    className = "lancer";
                     break;
                 case Class.Slayer:
-                    bitmap = Properties.Icon_Classes.slayer;
+                    className = "slayer";
                     break;
                 case Class.Berserker:
-                    bitmap = Properties.Icon_Classes.berserker;
+                    className = "berserker";
                     break;
                 case Class.Sorcerer:
-                    bitmap = Properties.Icon_Classes.sorcerer;
+                    className = "sorcerer";
                     break;
                 case Class.Archer:
-                    bitmap = Properties.Icon_Classes.archer;
+                    className = "archer";
                     break;
                 case Class.Priest:
-                    bitmap = Properties.Icon_Classes.priest;
+                    className = "priest";
                     break;
                 case Class.Elementalist:
-                    bitmap = Properties.Icon_Classes.mystic;
+                    className = "mystic";
                     break;
                 case Class.Soulless:
-                    bitmap = Properties.Icon_Classes.reaper;
+                    className = "reaper";
                     break;
                 case Class.Engineer:
-                    bitmap = Properties.Icon_Classes.gunner;
+                    className = "gunner";
                     break;
                 case Class.Fighter:
-                    bitmap = Properties.Icon_Classes.brawler;
+                    className = "brawler";
                     break;
                 case Class.Assassin:
-                    bitmap = Properties.Icon_Classes.ninja;
+                    className = "ninja";
                     break;
                 case Class.Moon_Dancer:
-                    bitmap = Properties.Icon_Classes.glaiver;
+                    className = "glaiver";
                     break;
                 default:
+                    className = "common";
                     break;
 
             }
-            return new ImageBrush(CharacterWindow.Bitmap2BitmapImage(bitmap));
+            //return new ImageBrush(CharacterWindow.Bitmap2BitmapImage(bitmap));
+            return "/resources/Icon_Classes/" + className + ".png";
         }
 
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]

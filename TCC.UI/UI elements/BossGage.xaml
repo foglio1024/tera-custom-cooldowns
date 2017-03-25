@@ -12,7 +12,7 @@
         <DataTemplate x:Key="BossBuffDataTemplate">
             <controls:AbnormalityIndicator AbnormalityId="{Binding Buff.Id}"
                                            AbnormalityName="{Binding Buff.Name}"
-                                           Icon="{Binding Buff.IconBrush}"
+                                           IconName="{Binding Buff.IconName}"
                                            Duration="{Binding Duration}"
                                            Stacks="{Binding Stacks}"
                                            BossId="{Binding Target}"/>

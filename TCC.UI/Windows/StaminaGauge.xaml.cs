@@ -53,29 +53,29 @@ namespace TCC
         {
             MaxStamina = statValue;
         }
-
+        int oldStamina;
         private void StaminaGauge_StaminaChanged(int stamina)
         {
-            Dispatcher.BeginInvoke(new Action(() => {
+            Dispatcher.Invoke(() => {
                 num.Text = stamina.ToString();
-
-                StaminaAmount.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(ValueToAngle(stamina), TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() });
+                double newAngle = ValueToAngle(stamina);
+                DoubleAnimation anim = new DoubleAnimation(newAngle, TimeSpan.FromMilliseconds(100)) { EasingFunction = new QuadraticEase() };
+                StaminaAmount.BeginAnimation(Arc.EndAngleProperty, anim);
 
                 if(stamina == MaxStamina)
                 {
                     Maxed?.Invoke();
                 }
-                else
+                else if(stamina < oldStamina && oldStamina == MaxStamina)
                 {
                     StaminaAmount.Stroke.BeginAnimation(SolidColorBrush.ColorProperty, new ColorAnimation(color, TimeSpan.FromMilliseconds(200)));
-
                     baseEll.Fill.BeginAnimation(SolidColorBrush.ColorProperty, new ColorAnimation(System.Windows.Media.Color.FromArgb(0xff, 0x20, 0x20, 0x20), TimeSpan.FromMilliseconds(200)));
-
                     glow.BeginAnimation(DropShadowEffect.OpacityProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(200)));
-
                 }
 
-            }));
+            });
+            oldStamina = stamina;
+
         }
 
         double ValueToAngle(int val)
