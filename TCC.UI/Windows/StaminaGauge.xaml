@@ -25,7 +25,7 @@
         <Grid.Effect>
             <DropShadowEffect x:Name="glow" Color="#FFFF6AFF" ShadowDepth="0" BlurRadius="25" Opacity="0"/>
         </Grid.Effect>
-        <Border Margin="3" Name="b" Style="{StaticResource border}" CornerRadius="{Binding ElementName=b, Path=ActualHeight}"></Border>
+        <Border Margin="3" Name="b" Style="{StaticResource border}" CornerRadius="{Binding ElementName=b, Path=ActualHeight}" Width="65" Height="65"></Border>
         <Ellipse Width="70" Height="70" Fill="Transparent" Name="baseEll" Stroke="#00000000" StrokeThickness="3" />
 
         <Grid Name="StaminaAmountGrid" Margin="0" Width="65" Height="65">

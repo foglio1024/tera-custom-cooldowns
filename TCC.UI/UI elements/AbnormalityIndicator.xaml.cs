@@ -191,5 +191,10 @@ namespace TCC.UI_elements
                 }
             });
         }
+
+        private void UserControl_Unloaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -38,11 +38,8 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Border Margin="0,0,0,0" Style="{StaticResource border}"  Grid.RowSpan="3" Grid.Row="0" >
-                <!--<Border.Effect>
-                    <DropShadowEffect Opacity="0.6" ShadowDepth="3"/>
-                </Border.Effect>-->
-            </Border>
+            <Border Margin="0,0,0,0" Style="{StaticResource border}"  Grid.RowSpan="3" Grid.Row="0" />
+
             <Grid Margin="6,2">
                 <TextBlock Name="BossNameTB" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Normal" FontStretch="Condensed" FontSize="12" Foreground="White" Text="{Binding BossName}" >
                     <!--<TextBlock.CacheMode>
@@ -69,7 +66,7 @@
                         <DropShadowEffect ShadowDepth="0" BlurRadius="20" Color="Red" Opacity="0"/>
                     </Rectangle.Effect>
                 </Rectangle>
-                <Path Fill="{StaticResource bgColor}" Data="M 0,0 H 4 C 0,0 0,5 4,5 H 0" VerticalAlignment="Center" Margin="0,0,-1,0" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5">
+                <!--<Path Fill="{StaticResource bgColor}" Data="M 0,0 H 4 C 0,0 0,5 4,5 H 0" VerticalAlignment="Center" Margin="0,0,-1,0" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5">
                     <Path.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform ScaleX="-1"/>
@@ -88,7 +85,7 @@
                             <TranslateTransform/>
                         </TransformGroup>
                     </Path.RenderTransform>
-                </Path>
+                </Path>-->
 
                 <Grid Height="{Binding ElementName=BaseRect, Path=Height}">
                     <Grid.ColumnDefinitions>
@@ -192,15 +189,12 @@
 
             </Grid>
             <Grid Grid.Row="4" Height="Auto" Margin="0,2,0,0" HorizontalAlignment="Left">
-                <Border Margin="0,0,0,0" Style="{StaticResource border}"  Grid.RowSpan="3" Grid.Row="0" >
-                    <!--<Border.Effect>
-                    <DropShadowEffect Opacity="0.6" ShadowDepth="3"/>
-                </Border.Effect>-->
-                </Border>
+                <!--<Border Margin="0,0,0,0" Style="{StaticResource border}"  Grid.RowSpan="3" Grid.Row="0" />-->
+
                 <ItemsControl Name="Abnormalities" ItemTemplate="{StaticResource BossBuffDataTemplate}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="2"/>
+                            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="2" Width="416"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>

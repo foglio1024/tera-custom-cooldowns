@@ -1,6 +1,7 @@
 ﻿using DamageMeter.Sniffing;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -45,7 +46,7 @@ namespace TCC
             
             NI = new System.Windows.Forms.NotifyIcon()
             {
-                Icon = Properties.Resources.tcc,
+                Icon = Icon.ExtractAssociatedIcon(Process.GetCurrentProcess().MainModule.FileName),
                 Visible = true
             };
             NI.MouseDown += NI_MouseDown;

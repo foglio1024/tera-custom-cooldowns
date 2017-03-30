@@ -21,9 +21,9 @@ namespace TCC
     {
         private void OnStartup(object sender, StartupEventArgs ev)
         {
-            Icon_Skills.ResourceManager.IgnoreCase = true;
-            Icon_Status.ResourceManager.IgnoreCase = true;
-            Icon_Crest.ResourceManager.IgnoreCase = true;
+            //Icon_Skills.ResourceManager.IgnoreCase = true;
+            //Icon_Status.ResourceManager.IgnoreCase = true;
+            //Icon_Crest.ResourceManager.IgnoreCase = true;
 
             System.Diagnostics.Process.GetCurrentProcess().PriorityClass = System.Diagnostics.ProcessPriorityClass.High;
 

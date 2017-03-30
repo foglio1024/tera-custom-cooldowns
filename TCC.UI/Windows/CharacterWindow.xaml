@@ -142,14 +142,14 @@
                 <Rectangle Name="hpBar" Width="400" Style="{StaticResource barRectangle}">
                     <Rectangle.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#c00" Offset=".5"/>
-                            <GradientStop Color="#900" Offset="1"/>
+                            <GradientStop Color="#d00" Offset=".5"/>
+                            <GradientStop Color="#d00" Offset="1"/>
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
                 <!--<Polygon Points="0,16 16,16 16,0" Style="{StaticResource borderPolygon}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="Auto" Height="Auto"></Polygon>-->
                 <!--<Polygon Points="0,16 0,0 16,0" Style="{StaticResource borderPolygon}" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="Auto" Height="Auto"></Polygon>-->
-                <Path Fill="{StaticResource bgColor}" Data="M 0,0 H 10 C 0,0 0,16 10,16 H 0" VerticalAlignment="Center" HorizontalAlignment="Left"></Path>
+                <!--<Path Fill="{StaticResource bgColor}" Data="M 0,0 H 10 C 0,0 0,16 10,16 H 0" VerticalAlignment="Center" HorizontalAlignment="Left"></Path>
                 <Path Fill="{StaticResource bgColor}" Data="M 0,0 H 10 C 0,0 0,16 10,16 H 0" VerticalAlignment="Center" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5">
                     <Path.RenderTransform>
                         <TransformGroup>
@@ -159,14 +159,14 @@
                             <TranslateTransform/>
                         </TransformGroup>
                     </Path.RenderTransform>
-                </Path>
+                </Path>-->
 
-                <TextBlock Text="{Binding PercentageHP, StringFormat=#.#%}" Name="hpPercTB" Style="{StaticResource hpBarNumber}" HorizontalAlignment="Right" Margin="5,2,20,2" Opacity=".9">
+                <TextBlock Text="{Binding PercentageHP, StringFormat=#.#%}" Name="hpPercTB" Style="{StaticResource hpBarNumber}" HorizontalAlignment="Right" Margin="5,2,5,2" Opacity=".9">
                     <TextBlock.CacheMode>
                         <BitmapCache RenderAtScale="1.8"></BitmapCache>
                     </TextBlock.CacheMode>
                 </TextBlock>
-                <TextBlock Style="{StaticResource hpBarNumber}" Text="HP" HorizontalAlignment="Left" Opacity=".9" FontSize="11" Margin="15,0,0,0"></TextBlock>
+                <TextBlock Style="{StaticResource hpBarNumber}" Text="HP" HorizontalAlignment="Left" Opacity=".9" FontSize="11" Margin="5,0,0,0"></TextBlock>
             </Grid>
 
             <Grid Grid.Row="1">
@@ -175,14 +175,14 @@
                     <Rectangle.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#06e" Offset=".5"/>
-                            <GradientStop Color="#059" Offset="1"/>
+                            <GradientStop Color="#06e" Offset="1"/>
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
 
                 <!--<Polygon Points="0,16 16,16 16,0" HorizontalAlignment="Right" Style="{StaticResource borderPolygon}" VerticalAlignment="Center" Width="Auto" Height="Auto"></Polygon>
                 <Polygon Points="0,16 0,0 16,0" HorizontalAlignment="Left" Style="{StaticResource borderPolygon}" VerticalAlignment="Center" Width="Auto" Height="Auto"></Polygon>-->
-                <Path Fill="{StaticResource bgColor}" Data="M 0,0 H 10 C 0,0 0,16 10,16 H 0" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <!--<Path Fill="{StaticResource bgColor}" Data="M 0,0 H 10 C 0,0 0,16 10,16 H 0" VerticalAlignment="Center" HorizontalAlignment="Left" />
                 <Path Fill="{StaticResource bgColor}" Data="M 0,0 H 10 C 0,0 0,16 10,16 H 0" VerticalAlignment="Center" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5">
                     <Path.RenderTransform>
                         <TransformGroup>
@@ -192,9 +192,9 @@
                             <TranslateTransform/>
                         </TransformGroup>
                     </Path.RenderTransform>
-                </Path>
+                </Path>-->
 
-                <TextBlock Style="{StaticResource hpBarNumber}" HorizontalAlignment="Left" Opacity=".9" FontSize="11" Margin="15,0,0,0" Text="MP"></TextBlock>
+                <TextBlock Style="{StaticResource hpBarNumber}" HorizontalAlignment="Left" Opacity=".9" FontSize="11" Margin="5,0,0,0" Text="MP"></TextBlock>
 
 
             </Grid>
@@ -204,14 +204,14 @@
                 <Rectangle Name="stBar" Height="11"  Width="400" Style="{StaticResource barRectangle}" Opacity=".8" >
                     <Rectangle.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#8de" Offset="0"/>
-                            <GradientStop Color="#4ad" Offset=".8"/>
+                            <GradientStop Color="#6bf" Offset="0"/>
+                            <GradientStop Color="#6bf" Offset=".8"/>
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Polygon Points="0,11 11,11 11,0" HorizontalAlignment="Right" Style="{StaticResource borderPolygon}" VerticalAlignment="Center" Width="Auto" Height="Auto"></Polygon>
-                <Polygon Points="0,11 0,0 11,0" HorizontalAlignment="Left" Style="{StaticResource borderPolygon}" VerticalAlignment="Center" Width="Auto" Height="Auto"></Polygon>
-                <TextBlock Style="{StaticResource hpBarNumber}" HorizontalAlignment="Left" Opacity="1" Margin="15,0,0,0" FontSize="10" VerticalAlignment="Center" Text="RE"></TextBlock>
+                <!--<Polygon Points="0,11 11,11 11,0" HorizontalAlignment="Right" Style="{StaticResource borderPolygon}" VerticalAlignment="Center" Width="Auto" Height="Auto"></Polygon>
+                <Polygon Points="0,11 0,0 11,0" HorizontalAlignment="Left" Style="{StaticResource borderPolygon}" VerticalAlignment="Center" Width="Auto" Height="Auto"></Polygon>-->
+                <TextBlock Style="{StaticResource hpBarNumber}" HorizontalAlignment="Left" Opacity="1" Margin="5,0,0,0" FontSize="10" VerticalAlignment="Center" Text="RE"></TextBlock>
 
             </Grid>
 
