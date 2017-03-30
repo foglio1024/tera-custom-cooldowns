@@ -19,16 +19,40 @@ using TCC.Parsing;
 
 namespace TCC
 {
-    public delegate void MaxStamina();
+    public delegate void StaminaCapEvent();
 
     /// <summary>
     /// Logica di interazione per StaminaGauge.xaml
     /// </summary>
     public partial class StaminaGauge : Window
     {
-        public event MaxStamina Maxed;
+        public event StaminaCapEvent Maxed;
+        public event StaminaCapEvent UnMaxed;
         static int MaxStamina = 1;
         public static bool Visible { get; set; }
+        bool maxed;
+        bool IsMaxed {
+            get
+            {
+                return maxed;
+            }
+            set
+            {
+                if(value != maxed)
+                {
+                    maxed = value;
+                    if (maxed)
+                    {
+                        Maxed?.Invoke();
+                    }
+                    else
+                    {
+                        UnMaxed?.Invoke();
+                    }
+
+                }
+            }
+        }
         private System.Windows.Media.Color color;
         
         public StaminaGauge(System.Windows.Media.Color color)
@@ -36,6 +60,7 @@ namespace TCC
             InitializeComponent();
             this.color = color;
             Maxed += StaminaGauge_Maxed;
+            UnMaxed += StaminaGauge_Unmaxed;
             PacketRouter.STUpdated += StaminaGauge_StaminaChanged;
             PacketRouter.MaxSTUpdated += PacketParser_MaxSTUpdated;
 
@@ -56,7 +81,8 @@ namespace TCC
         int oldStamina;
         private void StaminaGauge_StaminaChanged(int stamina)
         {
-            Dispatcher.Invoke(() => {
+            Dispatcher.Invoke(() => 
+            {
                 num.Text = stamina.ToString();
                 double newAngle = ValueToAngle(stamina);
                 DoubleAnimation anim = new DoubleAnimation(newAngle, TimeSpan.FromMilliseconds(100)) { EasingFunction = new QuadraticEase() };
@@ -64,19 +90,20 @@ namespace TCC
 
                 if(stamina == MaxStamina)
                 {
-                    Maxed?.Invoke();
+                    IsMaxed = true;
                 }
-                else if(stamina < oldStamina && oldStamina == MaxStamina)
+                else
                 {
-                    StaminaAmount.Stroke.BeginAnimation(SolidColorBrush.ColorProperty, new ColorAnimation(color, TimeSpan.FromMilliseconds(200)));
-                    baseEll.Fill.BeginAnimation(SolidColorBrush.ColorProperty, new ColorAnimation(System.Windows.Media.Color.FromArgb(0xff, 0x20, 0x20, 0x20), TimeSpan.FromMilliseconds(200)));
-                    glow.BeginAnimation(DropShadowEffect.OpacityProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(200)));
+                    IsMaxed = false;
                 }
-
+                //else if(stamina < oldStamina && oldStamina == MaxStamina)
+                //{
+                //}
+                oldStamina = stamina;
             });
-            oldStamina = stamina;
-
         }
+
+
 
         double ValueToAngle(int val)
         {
@@ -91,12 +118,21 @@ namespace TCC
         }
         private void StaminaGauge_Maxed()
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.Invoke(() =>
             {
                 glow.BeginAnimation(DropShadowEffect.OpacityProperty, new DoubleAnimation(1, TimeSpan.FromMilliseconds(200)));
-
                 baseEll.Fill.BeginAnimation(SolidColorBrush.ColorProperty, new ColorAnimation(color, TimeSpan.FromMilliseconds(200)));
-            }));
+            });
+        }
+        private void StaminaGauge_Unmaxed()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                StaminaAmount.Stroke.BeginAnimation(SolidColorBrush.ColorProperty, new ColorAnimation(color, TimeSpan.FromMilliseconds(200)));
+                baseEll.Fill.BeginAnimation(SolidColorBrush.ColorProperty, new ColorAnimation(System.Windows.Media.Color.FromArgb(0xff, 0x20, 0x20, 0x20), TimeSpan.FromMilliseconds(200)));
+                glow.BeginAnimation(DropShadowEffect.OpacityProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(200)));
+            });
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
