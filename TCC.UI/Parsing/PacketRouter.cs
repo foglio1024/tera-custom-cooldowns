@@ -388,6 +388,7 @@ namespace TCC.Parsing
             HPUpdated?.Invoke(p.currHp);
             MPUpdated?.Invoke(p.currMp);
             IlvlUpdated?.Invoke(p.ilvl);
+            
 
         }
         public static void HandlePlayerChangeMP(S_PLAYER_CHANGE_MP p)

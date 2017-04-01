@@ -151,6 +151,23 @@ namespace TCC
             }
         }
 
+        bool combat;
+        public bool Combat
+        {
+            get
+            {
+                return combat;
+            }
+            set
+            {
+                if(combat != value)
+                {
+                    combat = value;
+                    NotifyPropertyChanged("Combat");
+                }
+            }
+        }
+
         double percentageHP;
         public double PercentageHP
         {
@@ -199,6 +216,9 @@ namespace TCC
             PacketRouter.MaxHPUpdated += SetMaxHP;
             PacketRouter.MaxMPUpdated += SetMaxMP;
             PacketRouter.MaxSTUpdated += SetMaxST;
+
+            SessionManager.InCombat += () => { Combat = true; };
+            SessionManager.OutOfCombat += () => { Combat = false; };
             //PacketRouter.MaxFlightEnergyUpdated += SetMaxFlightEnergy;
 
             hpBar.RenderTransform = new ScaleTransform(1, 1, 0, .5);
@@ -531,6 +551,28 @@ namespace TCC
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
         static extern bool DeleteObject(IntPtr hObject);
 
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class CombatToColorCOnverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            bool c = (bool)value;
+
+            if (c)
+            {
+                return new SolidColorBrush(Colors.Red);
+            }
+            else
+            {
+                return new SolidColorBrush(Colors.Black);
+            }
+        }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

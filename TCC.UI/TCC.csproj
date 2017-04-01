@@ -253,6 +253,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="resources\combat.png" />
     <Content Include="resources\database\AbnormalityIconData\AbnormalityIconData-0.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -52,6 +52,7 @@
         </Style>
         <local:ClassImageConverter x:Key="classConv"/>
         <local:LaurelImageConverter x:Key="laurelConv"/>
+        <local:CombatToColorCOnverter x:Key="combatConv"/>
     </Window.Resources>
     <Grid Margin="10,0">
         <!--<Grid.CacheMode>
@@ -65,8 +66,11 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Border Margin="0,14,0,16" Style="{StaticResource border}" Grid.ColumnSpan="2" Grid.RowSpan="1" Grid.Row="2" >
-        </Border>
+        <Grid Width="20" Height="20" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="0,30" HorizontalAlignment="Right" VerticalAlignment="Top">
+
+        </Grid>
+        <Border Margin="0,14,0,16" Style="{StaticResource border}" Grid.ColumnSpan="2" Grid.RowSpan="1" Grid.Row="2" />
+
         <Grid Margin="0,0,0,-8" Grid.ColumnSpan="2" Width="Auto" Height="Auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -74,12 +78,19 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto" Name="flightDef" />
+                <ColumnDefinition Width="Auto"/>
+
             </Grid.ColumnDefinitions>
             <Border Margin="0" Style="{StaticResource border}"  HorizontalAlignment="Stretch"  Grid.ColumnSpan="6">
                 <!--<Border.Effect>
                         <DropShadowEffect Opacity="0.6" ShadowDepth="3"/>
                     </Border.Effect>-->
             </Border>
+            <Rectangle Width="21" Height="21" Margin="0" Grid.Column="5" Fill="{Binding Combat, Converter={StaticResource combatConv}}" VerticalAlignment="Center"  HorizontalAlignment="Center">
+                <Rectangle.OpacityMask>
+                    <ImageBrush ImageSource="/resources/combat.png"/>
+                </Rectangle.OpacityMask>
+            </Rectangle>
 
             <TextBlock Text="Lv." Margin="4,0,0,1"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0"
                        Style="{StaticResource hpBarNumber}" >
