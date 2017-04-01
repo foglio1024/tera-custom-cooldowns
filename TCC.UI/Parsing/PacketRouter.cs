@@ -392,6 +392,7 @@ namespace TCC.Parsing
         }
         public static void HandlePlayerChangeMP(S_PLAYER_CHANGE_MP p)
         {
+            if (p.target != SessionManager.CurrentCharId) return;
             MPUpdated?.Invoke(p.currentMP);
             
         }
@@ -414,10 +415,10 @@ namespace TCC.Parsing
             //    }
             //}
 
-            if (p.target == SessionManager.CurrentCharId)
-            {
+            if (p.target != SessionManager.CurrentCharId) return;
+            
                 HPUpdated.Invoke(p.currentHP);
-            }
+            
 
         }
         public static void HandlePlayerChangeStamina(S_PLAYER_CHANGE_STAMINA p)

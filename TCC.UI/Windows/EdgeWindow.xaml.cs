@@ -39,6 +39,20 @@ namespace TCC
         static Color arcBaseColor = Color.FromArgb(0xff,0xff,0xbf,0);
         public static int spawnTime = 50;
 
+
+
+        public int CurrentEdge
+        {
+            get { return (int)GetValue(CurrentEdgeProperty); }
+            set { SetValue(CurrentEdgeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CurrentEdge.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CurrentEdgeProperty =
+            DependencyProperty.Register("CurrentEdge", typeof(int), typeof(EdgeGaugeWindow));
+
+
+
         public EdgeGaugeWindow()
         {
             Instance = this;
@@ -54,6 +68,7 @@ namespace TCC
             edgeArcs = new ObservableCollection<EdgeArc>();
             ArcsGrid.DataContext = edgeArcs;
             ArcsGrid.ItemsSource = edgeArcs;
+            num.DataContext = this;
             scytheCd.Stroke = new SolidColorBrush(Colors.White);
 
             for (int i = 0; i < 10; i++)
@@ -167,7 +182,7 @@ namespace TCC
                         }
                     }
                 }
-                Instance.num.Text = edge.ToString();
+                Instance.CurrentEdge = edge;
                 Instance.ExpireEdge = new Timer(8000);
                 Instance.ExpireEdge.Elapsed += (s, o) => { SetEdge(0); };
                 Instance.ExpireEdge.Enabled = true;

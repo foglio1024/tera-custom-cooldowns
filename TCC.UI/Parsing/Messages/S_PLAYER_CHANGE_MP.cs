@@ -17,6 +17,12 @@ namespace TCC
             type = reader.ReadUInt32();
             target = reader.ReadUInt64();
             source = reader.ReadUInt64();
+            //System.Console.WriteLine(this);
+
+        }
+        public override string ToString()
+        {
+            return string.Format("Current:{0} Max:{1} Diff:{2} Type:{3} Target:{4} Source:{5}", currentMP, maxMP, diff, type, target, source);
         }
     }
 }
