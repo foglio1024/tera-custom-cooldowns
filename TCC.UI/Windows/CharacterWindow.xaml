@@ -113,8 +113,8 @@
                 <TextBlock.CacheMode>
                     <BitmapCache RenderAtScale="1.8"></BitmapCache>
                 </TextBlock.CacheMode></TextBlock>
-            <Rectangle Name="flightBar" Width="0" Grid.Column="4" Fill="#906090ff" Height="3" Margin="10,0" HorizontalAlignment="Left" />
-            <Rectangle Name="dummyFlightBar" Width="100" Grid.Column="4" Fill="Transparent" Height="3" Margin="10,10" HorizontalAlignment="Stretch" />
+            <Rectangle Name="dummyFlightBar" Width="100" Grid.Column="4" Fill="Black" Height="3" Margin="10,10" HorizontalAlignment="Left" />
+            <Rectangle Name="flightBar" Width="100" Grid.Column="4" Fill="#9ac" Height="3" Margin="10,0" HorizontalAlignment="Left" />
         </Grid>
         <Grid Margin="8,8" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1">
             <Rectangle Name="laurel" Width="74" Height="80" Margin="0,-8,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -185,8 +185,8 @@
                 <Rectangle Name="mpBar" Width="400" Style="{StaticResource barRectangle}" >
                     <Rectangle.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#06e" Offset=".5"/>
-                            <GradientStop Color="#06e" Offset="1"/>
+                            <GradientStop Color="#18c" Offset=".5"/>
+                            <GradientStop Color="#18c" Offset="1"/>
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>

@@ -36,11 +36,11 @@ namespace TCC.Data
                 var id = Convert.ToUInt32(abn.Attribute("id").Value);
                 string name = String.Empty;
                 string toolTip = String.Empty;
-                if(abn.Attributes().Where(x => x.Name == "name").Count() > 0)
+                if(abn.Attributes().Any(x => x.Name == "name"))
                 {
                     name = abn.Attribute("name").Value;
                 }
-                if (abn.Attributes().Where(x => x.Name == "tooltip").Count() > 0)
+                if (abn.Attributes().Any(x => x.Name == "tooltip"))
                 {
                     toolTip = abn.Attribute("tooltip").Value;
                 }
