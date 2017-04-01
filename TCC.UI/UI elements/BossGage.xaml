@@ -15,7 +15,7 @@
                                            IconName="{Binding Buff.IconName}"
                                            Duration="{Binding Duration}"
                                            Stacks="{Binding Stacks}"
-                                           BossId="{Binding Target}"/>
+                                           TargetId="{Binding Target}"/>
         </DataTemplate>
         <!--<Style x:Key="border" TargetType="Border">
             <Setter Property="Background" Value="#ff202020"/>

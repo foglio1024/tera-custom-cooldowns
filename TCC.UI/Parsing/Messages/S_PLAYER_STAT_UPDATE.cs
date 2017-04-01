@@ -90,7 +90,7 @@ namespace TCC.Messages
             unk10 = reader.ReadInt32();//
             unk11 = reader.ReadInt32();//
             //reader.Skip(199);
-
+            //Console.WriteLine("level:{0} - unk11:{1}", level, unk11);
             //edge = reader.ReadUInt16();
         }
     }

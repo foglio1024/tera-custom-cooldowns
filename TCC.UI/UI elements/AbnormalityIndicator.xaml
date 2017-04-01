@@ -6,12 +6,13 @@
              xmlns:local="clr-namespace:TCC"
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded"
+             FlowDirection="LeftToRight"
              >
     <UserControl.Resources>
         <local:IconConverter x:Key ="iconConv"></local:IconConverter>
     </UserControl.Resources>
         
-    <Grid Margin="0,0,1,0">
+    <Grid Margin="0,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -20,40 +21,46 @@
             <ColumnDefinition />
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        
         <TextBlock Name="abnormalityName" Grid.Row="0" Text="" Grid.Column="1" Foreground="White"/>
         <!--<TextBlock Name="abnormalityId" Grid.Row="1" Text="{Binding AbnormalityId}"/>-->
-        <Ellipse Name="abnormalityIcon" ToolTip="{Binding AbnormalityName}" Width="25" Height="25" Stroke="#80ffffff" StrokeThickness="1">
+        <Ellipse Name="abnormalityIcon" ToolTip="{Binding AbnormalityName}" Width="34" Height="34" Stroke="#80ffffff" StrokeThickness="1">
             <Ellipse.Fill>
                 <ImageBrush ImageSource="{Binding IconName, Converter={StaticResource iconConv}}"/>
             </Ellipse.Fill>
         </Ellipse>
-        <local:Arc x:Name="arc" Stroke="#fff" StrokeThickness="3" Width="28" Height="28" EndAngle="0"/>
-        <Grid Width="14" Height="14" x:Name="g" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,12,20,0">
+        <local:Arc x:Name="arc" Stroke="#a000" StrokeThickness="17" EndAngle="0" Width="33" Height="33" />
+
+        <Grid Width="30" Height="20" x:Name="g" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5,0,5,-15">
             <!--<Grid.CacheMode>
                 <BitmapCache RenderAtScale="1.5"/>
             </Grid.CacheMode>-->
-            <Ellipse x:Name="fill" Fill="White"  Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stroke="#40000000"/>
-            <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
+            <Border x:Name="fill" Background="White" Height="15" Width="30" Opacity="1" CornerRadius="7.5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#40000000"/>
+
+            <Viewbox StretchDirection="DownOnly" Stretch="Uniform" Margin="1.5">
                 <TextBlock Foreground="#d9000000" 
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center" 
                    TextAlignment="Center"
-                   FontWeight="Normal" 
+                   FontWeight="SemiBold" 
                    FontSize="14" 
                    x:Name="number" 
                    FontFamily="Roboto Mono" 
                    FontStyle="Normal"
                    Opacity="1" 
                    Margin="2"
-                   Text="-">
+                   Text="-"
+                   ToolTip="{Binding ElementName=number, Path=Text}">
             <!--<TextBlock.Effect>
                 <DropShadowEffect ShadowDepth="0" BlurRadius="0" Color="White"></DropShadowEffect>
             </TextBlock.Effect>-->
+                    
                 </TextBlock>
+
             </Viewbox>
 
         </Grid>
-        <Grid Width="14" Height="14" x:Name="s" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-12,20,0" Visibility="Hidden">
+        <Grid Width="16" Height="16" x:Name="s" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,0,0" Visibility="Hidden">
             <!--<Grid.CacheMode>
                 <BitmapCache RenderAtScale="1.5"/>
             </Grid.CacheMode>-->

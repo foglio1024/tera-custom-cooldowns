@@ -32,7 +32,7 @@
         <ItemsControl Name="Bosses" ItemTemplate="{StaticResource BossGageDataTemplate}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Height="176" Background="Transparent" Orientation="Vertical"/>
+                    <WrapPanel Height="180" Background="Transparent" Orientation="Vertical"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>

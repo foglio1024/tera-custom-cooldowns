@@ -40,6 +40,7 @@ namespace TCC
         public static Class CurrentClass;
         public static Laurel CurrentLaurel;
         public static int CurrentLevel;
+        public static ObservableCollection<BuffDuration> CurrentPlayerBuffs = new ObservableCollection<BuffDuration>();
         public static ObservableCollection<Boss> CurrentBosses = new ObservableCollection<Boss>();
         public static bool TryGetBossById(ulong id, out Boss b)
         {

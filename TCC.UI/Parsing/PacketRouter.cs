@@ -20,7 +20,8 @@ namespace TCC.Parsing
     public delegate void UpdateFloatStatEventHandler(float statValue);
     public delegate void UpdateStatWithIdEventHandler(ulong id, object statValue);
     public delegate void MessageEventHandler(Tera.Message msg);
-    public delegate void UpdateBuffEventHandler(Boss b, Abnormality ab, int duration, int stacks);
+    public delegate void UpdateBuffEventHandler(ulong target, Abnormality ab, int duration, int stacks);
+    public delegate void UpdateBossBuffEventHandler(Boss b, Abnormality ab, int duration, int stacks);
 
     public static class PacketRouter
     {
@@ -61,7 +62,7 @@ namespace TCC.Parsing
         public static event UpdateStatWithIdEventHandler BossHPChanged;
         public static event UpdateStatWithIdEventHandler EnragedChanged;
 
-        public static event UpdateBuffEventHandler BossBuffUpdated;
+        public static event UpdateBuffEventHandler BuffUpdated;
 
         public static void Init()
         {
@@ -256,7 +257,12 @@ namespace TCC.Parsing
             SessionManager.Logged = false;
             WindowManager.CharacterWindow.Reset();
             SkillManager.Clear();
+            App.Current.Dispatcher.Invoke(() =>
+            {
+                SessionManager.CurrentPlayerBuffs.Clear();
+            });
         }
+
         public static void HandleAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
             switch (SessionManager.CurrentClass)
@@ -270,7 +276,39 @@ namespace TCC.Parsing
                 default:
                     break;
             }
-            if(SessionManager.TryGetBossById(p.targetId, out Boss b))
+            if(p.targetId == SessionManager.CurrentCharId)
+            {
+                //return;
+                if (AbnormalityDatabase.Abnormalities.TryGetValue(p.id, out Abnormality ab))
+                {
+                    if (ab.Name.Contains("BTS")) return;
+                    App.Current.Dispatcher.Invoke(() =>
+                    {
+                        if (ab.Name.Contains("(Hidden)") || ab.Name.Equals("Unknown") || ab.Name.Equals(string.Empty))
+                        {
+                            return;
+                        }
+                        if (SessionManager.CurrentPlayerBuffs.Any(x => x.Buff == ab))
+                        {
+                            BuffUpdated?.Invoke(SessionManager.CurrentCharId,ab, p.duration, p.stacks);
+                        }
+                        else
+                        {
+                            if (p.duration < 200000000)
+                            {
+                                SessionManager.CurrentPlayerBuffs.Add(new BuffDuration(ab, p.duration, p.stacks, p.targetId));
+                            }
+                            else
+                            {
+                                SessionManager.CurrentPlayerBuffs.Insert(0, new BuffDuration(ab, p.duration, p.stacks, p.targetId));
+                            }
+
+                        }
+                    });
+                }
+                return;
+            }
+            if (SessionManager.TryGetBossById(p.targetId, out Boss b))
             {
                 if(AbnormalityDatabase.Abnormalities.TryGetValue(p.id, out Abnormality ab))
                 {
@@ -282,7 +320,7 @@ namespace TCC.Parsing
                         }
                         if (b.HasBuff(ab))
                         {
-                            BossBuffUpdated?.Invoke(b, ab, p.duration, p.stacks);
+                            BuffUpdated?.Invoke(b.EntityId, ab, p.duration, p.stacks);
                         }
                         else
                         {
@@ -306,11 +344,41 @@ namespace TCC.Parsing
             {
                 App.Current.Dispatcher.Invoke(() =>
                 {
+                    if (SessionManager.CurrentCharId==p.TargetId)
+                    {
+                        //return;
+                        if (SessionManager.CurrentPlayerBuffs.Any(x => x.Buff == ab))
+                        {
+                            BuffUpdated?.Invoke(SessionManager.CurrentCharId, ab, p.Duration, p.Stacks);
+
+                            //SessionManager.CurrentBosses.Where(x => x.EntityId == p.TargetId).First().Buffs.Where(x => x.Buff.Id == p.AbnormalityId).FirstOrDefault().Duration = p.Duration;
+                            SessionManager.CurrentPlayerBuffs.First(x => x.Buff.Id == p.AbnormalityId).Stacks = p.Stacks;
+                        }
+                        else
+                        {
+                            if (ab.Name.Contains("(Hidden)") || ab.Name.Equals("Unknown") || ab.Name.Equals(string.Empty))
+                            {
+                                //Console.WriteLine("Skipping refresh: {0}", ab.Name);
+                                return;
+                            }
+                            if (p.Duration < 2000000000)
+                            {
+                               SessionManager.CurrentPlayerBuffs.Add(new BuffDuration(ab, p.Duration, p.Stacks, p.TargetId));
+                            }
+                            else
+                            {
+                                SessionManager.CurrentPlayerBuffs.Insert(0, new BuffDuration(ab, p.Duration, p.Stacks, p.TargetId));
+                            }
+
+                        }
+                        return;
+                    }
+
                     if (SessionManager.TryGetBossById(p.TargetId, out Boss b))
                     {
                         if (b.HasBuff(ab))
                         {
-                            BossBuffUpdated?.Invoke(b, ab, p.Duration, p.Stacks);
+                            BuffUpdated?.Invoke(b.EntityId, ab, p.Duration, p.Stacks);
 
                             //SessionManager.CurrentBosses.Where(x => x.EntityId == p.TargetId).First().Buffs.Where(x => x.Buff.Id == p.AbnormalityId).FirstOrDefault().Duration = p.Duration;
                             b.Buffs.Where(x => x.Buff.Id == p.AbnormalityId).FirstOrDefault().Stacks = p.Stacks;
@@ -343,6 +411,11 @@ namespace TCC.Parsing
             {
                 App.Current.Dispatcher.Invoke(() =>
                 {
+                    if(p.target == SessionManager.CurrentCharId)
+                    {
+                        SessionManager.CurrentPlayerBuffs.Remove(SessionManager.CurrentPlayerBuffs.FirstOrDefault(x => x.Buff.Id == ab.Id));
+                        return;
+                    }
                     if (SessionManager.TryGetBossById(p.target, out Boss b) && b.HasBuff(ab))
                     {
                         b.EndBuff(ab);

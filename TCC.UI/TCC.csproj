@@ -128,6 +128,9 @@
     <Compile Include="UI elements\AbnormalityIndicator.xaml.cs">
       <DependentUpon>AbnormalityIndicator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI elements\ArcCustom.xaml.cs">
+      <DependentUpon>ArcCustom.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI elements\BossGage.xaml.cs">
       <DependentUpon>BossGage.xaml</DependentUpon>
     </Compile>
@@ -138,6 +141,9 @@
     <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_FLIGHT_ENERGY.cs" />
     <Compile Include="Parsing\Messages\S_NPC_STATUS.cs" />
     <Compile Include="Utils.cs" />
+    <Compile Include="Windows\AbnormalitiesWindow.xaml.cs">
+      <DependentUpon>AbnormalitiesWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\BossGageWindow.xaml.cs">
       <DependentUpon>BossGageWindow.xaml</DependentUpon>
     </Compile>
@@ -188,11 +194,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI elements\ArcCustom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI elements\BossGage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI elements\EdgeArc.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\AbnormalitiesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -244,6 +258,7 @@
     </Compile>
     <None Include="app.manifest" />
     <Resource Include="resources\Icon_Skills\Resources.resx" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -567,6 +582,7 @@
     <Resource Include="resources\Icon_Items\weapon_Enchant_Scroll_3_Tex.png" />
     <Resource Include="resources\Icon_Items\Wings_Of_Fairy_Tex.png" />
     <Resource Include="resources\combat.png" />
+    <Resource Include="readme.txt" />
     <Content Include="resources\database\AbnormalityIconData\AbnormalityIconData-0.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

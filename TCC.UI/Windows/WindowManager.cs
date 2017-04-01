@@ -23,7 +23,7 @@ namespace TCC
         public static Window ClassSpecificGauge;
         public static CharacterWindow CharacterWindow;
         public static BossGageWindow BossGauge;
-
+        public static AbnormalitiesWindow BuffBar;
         static ContextMenu CM;
         static MenuItem ClickThruButton;
         static System.Windows.Forms.NotifyIcon NI;
@@ -37,6 +37,7 @@ namespace TCC
             ClassSpecificGauge = new Window();
             CharacterWindow = new CharacterWindow();
             BossGauge = new BossGageWindow();
+            BuffBar = new AbnormalitiesWindow();
             /*TODO: move to each window*/
             CooldownWindow.Opacity = 0;
             ClassSpecificGauge.Opacity = 0;
@@ -104,6 +105,7 @@ namespace TCC
             {
                 ShowWindow(CooldownWindow);
                 ShowWindow(CharacterWindow);
+                ShowWindow(BuffBar);
 
                 //TODO: add setting for gauge visibility
                 switch (SessionManager.CurrentClass)

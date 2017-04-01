@@ -204,16 +204,15 @@ namespace TCC
             {
                 NormalSkillsQueue.Clear();
                 LongSkillsQueue.Clear();
+                SessionManager.CurrentPlayerBuffs.Clear();
             }));
 
             SessionManager.CurrentClass = Class.None;
             SessionManager.CurrentCharId = 0;
-            //CooldownWindow.ClearSkills();
             WindowManager.HideWindow(WindowManager.ClassSpecificGauge);
             WindowManager.ClassSpecificGauge = null;
             LastSkills.Clear();
             SessionManager.Logged = false;
-            //Console.WriteLine("Manager cleared.");
         }
     }
 }

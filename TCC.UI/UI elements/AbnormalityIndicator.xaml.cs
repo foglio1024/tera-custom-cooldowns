@@ -26,7 +26,7 @@ namespace TCC.UI_elements
         {
             InitializeComponent();
 
-            PacketRouter.BossBuffUpdated += PacketRouter_BossBuffUpdated;
+            PacketRouter.BuffUpdated += PacketRouter_BuffUpdated;
 
             //abnormalityId.DataContext = this;
             abnormalityName.DataContext = this;
@@ -82,13 +82,13 @@ namespace TCC.UI_elements
                 }
             });
         }
-        private void PacketRouter_BossBuffUpdated(Boss b, Data.Abnormality ab, int duration, int stacks)
+        private void PacketRouter_BuffUpdated(ulong target, Data.Abnormality ab, int duration, int stacks)
         {
             //SecondsTimer.Stop();
 
             Dispatcher.Invoke(() =>
             {
-                if (b.EntityId == BossId)
+                if (target == TargetId)
                 {
                     if(ab.Id == AbnormalityId)
                     {
@@ -104,7 +104,7 @@ namespace TCC.UI_elements
                             SecondsTimer.Enabled = true;
                         }
 
-                        arc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(duration)));
+                        arc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(duration)));
                     }
                 }
 
@@ -113,12 +113,12 @@ namespace TCC.UI_elements
 
 
 
-        public ulong BossId
+        public ulong TargetId
         {
-            get { return (ulong)GetValue(BossIdProperty); }
-            set { SetValue(BossIdProperty, value); }
+            get { return (ulong)GetValue(TargetIdProperty); }
+            set { SetValue(TargetIdProperty, value); }
         }
-        public static readonly DependencyProperty BossIdProperty = DependencyProperty.Register("BossId", typeof(ulong), typeof(AbnormalityIndicator));
+        public static readonly DependencyProperty TargetIdProperty = DependencyProperty.Register("TargetId", typeof(ulong), typeof(AbnormalityIndicator));
 
         public uint AbnormalityId
         {
@@ -175,9 +175,11 @@ namespace TCC.UI_elements
 
                 SetStacksNumber();
 
-                if (Duration < 2000000000)
+                if (Duration < 2000000000 && Duration > 0)
                 {
-                    arc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(Duration)));
+                    var an = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(Duration));
+                    //Timeline.SetDesiredFrameRate(an, 25);
+                    arc.BeginAnimation(Arc.EndAngleProperty, an);
                     CurrentTime = Duration / 1000;
                     number.Text = (Duration / 1000).ToString();
 

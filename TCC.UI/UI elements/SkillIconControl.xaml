@@ -11,18 +11,19 @@
     </UserControl.Resources>
     <Grid Width="55" Height="55" Margin="2" HorizontalAlignment="Left" Name="MainGrid">
         <!--<Grid.CacheMode>
-            <BitmapCache RenderAtScale="1"/>
+            <BitmapCache RenderAtScale="2"/>
         </Grid.CacheMode>-->
         <Ellipse Width="50" Height="50" x:Name="icon" Stroke="#90ffffff" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Ellipse.Fill>
                 <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource iconConv}}"/>
             </Ellipse.Fill>
         </Ellipse>
-        <local:Arc x:Name="arc" Opacity="1" Width="55" Height="55" StrokeThickness="4" Stroke="White" EndAngle="270.9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+        <local:Arc x:Name="arc" Opacity="1" Width="49" Height="49" StrokeThickness="25" Stroke="#8000" EndAngle="359.9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
             <local:Arc.CacheMode>
                 <BitmapCache RenderAtScale="2"></BitmapCache>
             </local:Arc.CacheMode>
         </local:Arc>
+        
         <Grid Width="22" Height="22" x:Name="g" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0">
             <Grid.CacheMode>
                 <BitmapCache RenderAtScale="1.5"/>

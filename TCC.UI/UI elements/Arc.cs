@@ -62,10 +62,10 @@ namespace TCC
             get { return GetArcGeometry(); }
         }
 
-        protected override void OnRender(System.Windows.Media.DrawingContext drawingContext)
-        {
-            drawingContext.DrawGeometry(null, new Pen(Stroke, StrokeThickness), GetArcGeometry());
-        }
+        //protected override void OnRender(System.Windows.Media.DrawingContext drawingContext)
+        //{
+        //    drawingContext.DrawGeometry(null, new Pen(Stroke, StrokeThickness), GetArcGeometry());
+        //}
 
         private Geometry GetArcGeometry()
         {

@@ -37,7 +37,7 @@ namespace TCC
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
         }
-
+        
 
 
         public string IconName
@@ -50,7 +50,7 @@ namespace TCC
         public static readonly DependencyProperty IconNameProperty =
             DependencyProperty.Register("IconName", typeof(string), typeof(SkillIconControl));
 
-
+        
 
         public uint Id
         {
