@@ -103,7 +103,7 @@ namespace TCC
                 var skc = new SkillConnection(id, c);
                 foreach (var conn in sk.Descendants())
                 {
-                    skc.AddConnectedSkill(Convert.ToInt32(sk.Attribute("id").Value));
+                    skc.AddConnectedSkill(Convert.ToInt32(conn.Attribute("id").Value));
                 }
                 SkillConnections.Add(skc);
             }

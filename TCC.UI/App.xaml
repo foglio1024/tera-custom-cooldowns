@@ -11,7 +11,7 @@
             <Setter Property="Background" Value="{StaticResource bgColor}"/>
             <Setter Property="CornerRadius" Value="0"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="BorderBrush" Value="#444"/>
+            <Setter Property="BorderBrush" Value="#222"/>
             <Setter Property="Height" Value="Auto" />
             <Setter Property="Width" Value="Auto"/>
             <Setter Property="Effect" Value="{StaticResource dropShadow}" />

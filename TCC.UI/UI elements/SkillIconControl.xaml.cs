@@ -154,10 +154,10 @@ namespace TCC
             
             MainTimer.Tick += (s, o) =>
             {
-                var c = new DoubleAnimation(22, 0, TimeSpan.FromMilliseconds(ending))
-                {
-                    EasingFunction = new QuadraticEase()
-                };
+                //var c = new DoubleAnimation(22, 0, TimeSpan.FromMilliseconds(ending))
+                //{
+                //    EasingFunction = new QuadraticEase()
+                //};
                 var w = new DoubleAnimation(0, TimeSpan.FromMilliseconds(ending))
                 {
                     EasingFunction = new QuadraticEase()
@@ -166,16 +166,16 @@ namespace TCC
                 {
                     EasingFunction = new QuadraticEase()
                 };
-                var t = new ThicknessAnimation(new Thickness(0), TimeSpan.FromMilliseconds(ending))
-                {
-                    EasingFunction = new QuadraticEase()
-                };
+                //var t = new ThicknessAnimation(new Thickness(0), TimeSpan.FromMilliseconds(ending))
+                //{
+                //    EasingFunction = new QuadraticEase()
+                //};
 
                 //g.BeginAnimation(WidthProperty, c);
                 //g.BeginAnimation(HeightProperty, c);
                 //g.BeginAnimation(MarginProperty, t);
                 MainGrid.BeginAnimation(WidthProperty, w);
-                //MainGrid.BeginAnimation(HeightProperty, h);
+                MainGrid.BeginAnimation(HeightProperty, h);
                 //arc.BeginAnimation(WidthProperty, w);
                 //arc.BeginAnimation(HeightProperty, h);
                 //this.BeginAnimation(MarginProperty, t);
