@@ -60,7 +60,7 @@
                    Foreground="#ffffffff"
                    FontWeight="UltraLight"
                    Text="{Binding CurrentEdge}"
-                   >0
+                   >
             <!--<TextBlock.Effect>
                 <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="20"></DropShadowEffect>
             </TextBlock.Effect>-->
