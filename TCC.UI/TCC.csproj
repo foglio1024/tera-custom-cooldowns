@@ -261,6 +261,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="UI elements\XMLFile1.xml" />
     <Resource Include="resources\Icon_Items\Add_Extract_Potion_2_Tex.png" />
     <Resource Include="resources\Icon_Items\Argon_Plants_Tex.png" />
     <Resource Include="resources\Icon_Items\ArtisanAll_Up_Tex.png" />
@@ -597,6 +598,30 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\database\AbnormalityIconData\AbnormalityIconData-7.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\database\Abnormality\Abnormality-0.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\database\Abnormality\Abnormality-1.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\database\Abnormality\Abnormality-2.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\database\Abnormality\Abnormality-3.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\database\Abnormality\Abnormality-4.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\database\Abnormality\Abnormality-5.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\database\Abnormality\Abnormality-6.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\database\Abnormality\Abnormality-7.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\database\ConnectedSkills.xml">

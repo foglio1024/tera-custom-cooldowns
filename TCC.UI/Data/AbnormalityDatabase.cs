@@ -14,6 +14,7 @@ namespace TCC.Data
 
         static List<XDocument> StrSheet_AbnormalityDocs;
         static List<XDocument> AbnormalityIconDataDocs;
+        static List<XDocument> AbnormalityDataDocs;
 
         static void LoadFiles()
         {
@@ -28,8 +29,16 @@ namespace TCC.Data
                 var d = XDocument.Load(f);
                 AbnormalityIconDataDocs.Add(d);
             }
+
+            foreach (var f in Directory.EnumerateFiles(Environment.CurrentDirectory + @"/resources/database/Abnormality"))
+            {
+                var d = XDocument.Load(f);
+                AbnormalityDataDocs.Add(d);
+            }
+
+
         }
-        static void ParseAbnormalityDoc(XDocument doc)
+        static void ParseStrSheetAbnormalityDoc(XDocument doc)
         {
             foreach (XElement abn in doc.Descendants().Where(x => x.Name == "String"))
             {
@@ -45,8 +54,13 @@ namespace TCC.Data
                     toolTip = abn.Attribute("tooltip").Value;
                 }
 
-                Abnormality ab = new Abnormality(id, name, toolTip);
-                Abnormalities.Add(id, ab);
+                //Abnormality ab = new Abnormality(id, name, toolTip);
+                //Abnormalities.Add(id, ab);
+                if (Abnormalities.TryGetValue(id, out Abnormality a))
+                {
+                    a.SetInfo(name, toolTip);
+                }
+
             }
         }
         static void ParseAbnormalityIconDoc(XDocument doc)
@@ -66,17 +80,51 @@ namespace TCC.Data
                 }
             }
         }
+        static void ParseAbnormalityDataDoc(XDocument doc)
+        {
+            foreach (var a in doc.Descendants().Where(x => x.Name == "Abnormal"))
+            {
+                uint id = Convert.ToUInt32(a.Attribute("id").Value);
+                bool isBuff = false;
+                if(a.Attribute("isBuff").Value == "True")
+                {
+                    isBuff = true;
+                }
+                bool isShow = false;
+                if (a.Attribute("isShow").Value == "True" || a.Attribute("isShow").Value == "onlyIcon")
+                {
+                    isShow = true;
+                }
+                bool infinity = false;
+                if (a.Attribute("infinity").Value == "True")
+                {
+                    infinity = true;
+                }
+                int prop = Convert.ToInt32(a.Attribute("property").Value);
+
+                Abnormality ab = new Abnormality(id, isBuff, isShow, infinity, prop);
+                Abnormalities.Add(ab.Id, ab);
+
+
+
+            }
+        }
         public static void Populate()
         {
             Abnormalities = new Dictionary<uint, Abnormality>();
             StrSheet_AbnormalityDocs = new List<XDocument>();
             AbnormalityIconDataDocs = new List<XDocument>();
+            AbnormalityDataDocs = new List<XDocument>();
 
             LoadFiles();
 
+            foreach (var doc in AbnormalityDataDocs)
+            {
+                ParseAbnormalityDataDoc(doc);
+            }
             foreach (var  doc in StrSheet_AbnormalityDocs)
             {
-                ParseAbnormalityDoc(doc);
+                ParseStrSheetAbnormalityDoc(doc);
             }
             foreach (var doc in AbnormalityIconDataDocs)
             {
@@ -85,23 +133,20 @@ namespace TCC.Data
 
             StrSheet_AbnormalityDocs.Clear();
             AbnormalityIconDataDocs.Clear();
+            AbnormalityDataDocs.Clear();
+            var toBeRemovedList = new List<Abnormality>();
+            foreach (var item in Abnormalities)
+            {
+                if(item.Value.Name == null)
+                {
+                    toBeRemovedList.Add(item.Value);
+                }
+            }
+            foreach (var item in toBeRemovedList)
+            {
+                Abnormalities.Remove(item.Id);
+            }
         }
-        //public static bool TryGetAbnormality(uint id, out Abnormality ab)
-        //{
-        //    bool result = false;
-        //    ab = new Abnormality(0, string.Empty, string.Empty);
-        //    if (Abnormalities.TryGetValue(id, out ab))
-        //    {
-        //        result = true;
-        //    }
-        //    else
-        //    {
-        //        ab = new Abnormality(0, "Unknown", string.Empty);
-        //        result = false;
-        //    }
-        //    return result;
-
-        //}
 
     }
 }

@@ -103,8 +103,13 @@ namespace TCC.UI_elements
                             SecondsTimer.Stop();
                             SecondsTimer.Enabled = true;
                         }
-
-                        arc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(duration)));
+                        if (duration < 0)
+                        {
+                            g.Visibility = Visibility.Hidden;
+                            number.Text = "-";
+                            return;
+                        }
+                         arc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(duration)));
                     }
                 }
 
@@ -189,6 +194,7 @@ namespace TCC.UI_elements
                 }
                 else
                 {
+                    g.Visibility = Visibility.Hidden;
                     number.Text = "-";
                 }
             });

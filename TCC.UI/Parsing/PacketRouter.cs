@@ -276,134 +276,191 @@ namespace TCC.Parsing
                 default:
                     break;
             }
-            if(p.targetId == SessionManager.CurrentCharId)
+           
+            if (AbnormalityDatabase.Abnormalities.TryGetValue(p.id, out Abnormality ab))
             {
-                //return;
-                if (AbnormalityDatabase.Abnormalities.TryGetValue(p.id, out Abnormality ab))
+                if (ab.Name.Contains("BTS") || ab.ToolTip.Contains("BTS") || !ab.IsShow) return;
+                if (ab.Name.Contains("(Hidden)") || ab.Name.Equals("Unknown") || ab.Name.Equals(string.Empty)) return;
+                //Console.WriteLine("{1} {0}",ab.Name, ab.Property);
+                if (p.targetId == SessionManager.CurrentCharId)
                 {
-                    if (ab.Name.Contains("BTS")) return;
                     App.Current.Dispatcher.Invoke(() =>
+                {
+                    if (ab.Property == 4)
                     {
-                        if (ab.Name.Contains("(Hidden)") || ab.Name.Equals("Unknown") || ab.Name.Equals(string.Empty))
+                        if (ab.Infinity)
                         {
-                            return;
-                        }
-                        if (SessionManager.CurrentPlayerBuffs.Any(x => x.Buff == ab))
-                        {
-                            BuffUpdated?.Invoke(SessionManager.CurrentCharId,ab, p.duration, p.stacks);
+                            if (SessionManager.CurrentPlayerInfBuffs.Any(x => x.Buff == ab))
+                            {
+                                BuffUpdated?.Invoke(p.targetId, ab, -1, p.stacks);
+                            }
+                            else
+                            {
+                                SessionManager.CurrentPlayerInfBuffs.Add(new BuffDuration(ab, -1, p.stacks, p.targetId));
+                            }
                         }
                         else
                         {
-                            if (p.duration < 200000000)
+                            if (SessionManager.CurrentPlayerBuffs.Any(x => x.Buff == ab))
+                            {
+                                BuffUpdated?.Invoke(p.targetId, ab, p.duration, p.stacks);
+                            }
+                            else
                             {
                                 SessionManager.CurrentPlayerBuffs.Add(new BuffDuration(ab, p.duration, p.stacks, p.targetId));
                             }
+                        }
+                    }
+                    else
+                    {
+                        if (ab.Infinity)
+                        {
+                            if (SessionManager.CurrentPlayerDebuffs.Any(x => x.Buff == ab))
+                            {
+                                BuffUpdated?.Invoke(p.targetId, ab, -1, p.stacks);
+                            }
                             else
                             {
-                                SessionManager.CurrentPlayerBuffs.Insert(0, new BuffDuration(ab, p.duration, p.stacks, p.targetId));
+                                SessionManager.CurrentPlayerDebuffs.Insert(0, new BuffDuration(ab, -1, p.stacks, p.targetId));
                             }
-
-                        }
-                    });
-                }
-                return;
-            }
-            if (SessionManager.TryGetBossById(p.targetId, out Boss b))
-            {
-                if(AbnormalityDatabase.Abnormalities.TryGetValue(p.id, out Abnormality ab))
-                {
-                    App.Current.Dispatcher.Invoke(() =>
-                    {
-                        if (ab.Name.Contains("(Hidden)") || ab.Name.Equals("Unknown") || ab.Name.Equals(string.Empty))
-                        {
-                            return;
-                        }
-                        if (b.HasBuff(ab))
-                        {
-                            BuffUpdated?.Invoke(b.EntityId, ab, p.duration, p.stacks);
                         }
                         else
                         {
-                            if(p.duration < 200000000)
+                            if (SessionManager.CurrentPlayerDebuffs.Any(x => x.Buff == ab))
                             {
-                                SessionManager.CurrentBosses.Where(x => x.EntityId == p.targetId).First().Buffs.Add(new BuffDuration(ab, p.duration, p.stacks, p.targetId));
+                                BuffUpdated?.Invoke(p.targetId, ab, p.duration, p.stacks);
                             }
                             else
                             {
-                                SessionManager.CurrentBosses.Where(x => x.EntityId == p.targetId).First().Buffs.Insert(0,new BuffDuration(ab, p.duration, p.stacks, p.targetId));
+                                SessionManager.CurrentPlayerDebuffs.Add(new BuffDuration(ab, p.duration, p.stacks, p.targetId));
                             }
-
                         }
-                    });
+                    }
+                });
+                }
+                else
+                {
+                    if (SessionManager.TryGetBossById(p.targetId, out Boss b))
+                {
+                        App.Current.Dispatcher.Invoke(() =>
+                        {
+                            if (b.HasBuff(ab))
+                            {
+                                BuffUpdated?.Invoke(b.EntityId, ab, p.duration, p.stacks);
+                            }
+                            else
+                            {
+                                if(!ab.Infinity)
+                                {
+                                    SessionManager.CurrentBosses.Where(x => x.EntityId == p.targetId).First().Buffs.Add(new BuffDuration(ab, p.duration, p.stacks, p.targetId));
+                                }
+                                else
+                                {
+                                    SessionManager.CurrentBosses.Where(x => x.EntityId == p.targetId).First().Buffs.Insert(0,new BuffDuration(ab, -1, p.stacks, p.targetId));
+                                }
+
+                            }
+                        });
+                
+                }
                 }
             }
+
+            
         }
         public static void HandleAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
             if (AbnormalityDatabase.Abnormalities.TryGetValue(p.AbnormalityId, out Abnormality ab))
             {
-                App.Current.Dispatcher.Invoke(() =>
-                {
-                    if (SessionManager.CurrentCharId==p.TargetId)
-                    {
-                        //return;
-                        if (SessionManager.CurrentPlayerBuffs.Any(x => x.Buff == ab))
-                        {
-                            BuffUpdated?.Invoke(SessionManager.CurrentCharId, ab, p.Duration, p.Stacks);
+                if (ab.Name.Contains("BTS") || ab.ToolTip.Contains("BTS") || !ab.IsShow) return;
+                if (ab.Name.Contains("(Hidden)") || ab.Name.Equals("Unknown") || ab.Name.Equals(string.Empty)) return;
+                //Console.WriteLine("{1} {0}", ab.Name, ab.Property);
 
-                            //SessionManager.CurrentBosses.Where(x => x.EntityId == p.TargetId).First().Buffs.Where(x => x.Buff.Id == p.AbnormalityId).FirstOrDefault().Duration = p.Duration;
-                            SessionManager.CurrentPlayerBuffs.First(x => x.Buff.Id == p.AbnormalityId).Stacks = p.Stacks;
-                        }
-                        else
+                if (p.TargetId == SessionManager.CurrentCharId)
+                {
+
+                    App.Current.Dispatcher.Invoke(() =>
+                {
+                    if (ab.IsBuff)
+                    {
+                        if (ab.Infinity)
                         {
-                            if (ab.Name.Contains("(Hidden)") || ab.Name.Equals("Unknown") || ab.Name.Equals(string.Empty))
+                            if (SessionManager.CurrentPlayerInfBuffs.Any(x => x.Buff == ab))
                             {
-                                //Console.WriteLine("Skipping refresh: {0}", ab.Name);
-                                return;
-                            }
-                            if (p.Duration < 2000000000)
-                            {
-                               SessionManager.CurrentPlayerBuffs.Add(new BuffDuration(ab, p.Duration, p.Stacks, p.TargetId));
+                                BuffUpdated?.Invoke(p.TargetId, ab, -1, p.Stacks);
                             }
                             else
                             {
-                                SessionManager.CurrentPlayerBuffs.Insert(0, new BuffDuration(ab, p.Duration, p.Stacks, p.TargetId));
+                                SessionManager.CurrentPlayerInfBuffs.Add(new BuffDuration(ab, -1, p.Stacks, p.TargetId));
                             }
-
                         }
-                        return;
+                        else
+                        {
+                            if (SessionManager.CurrentPlayerBuffs.Any(x => x.Buff == ab))
+                            {
+                                BuffUpdated?.Invoke(p.TargetId, ab, p.Duration, p.Stacks);
+                            }
+                            else
+                            {
+                                SessionManager.CurrentPlayerBuffs.Add(new BuffDuration(ab, p.Duration, p.Stacks, p.TargetId));
+                            }
+                        }
                     }
+                    else
+                    {
+                        if (ab.Infinity)
+                        {
+                            if (SessionManager.CurrentPlayerDebuffs.Any(x => x.Buff == ab))
+                            {
+                                BuffUpdated?.Invoke(p.TargetId, ab, -1, p.Stacks);
+                            }
+                            else
+                            {
+                                SessionManager.CurrentPlayerDebuffs.Insert(0, new BuffDuration(ab, -1, p.Stacks, p.TargetId));
+                            }
+                        }
+                        else
+                        {
+                            if (SessionManager.CurrentPlayerDebuffs.Any(x => x.Buff == ab))
+                            {
+                                BuffUpdated?.Invoke(p.TargetId, ab, p.Duration, p.Stacks);
+                            }
+                            else
+                            {
+                                SessionManager.CurrentPlayerDebuffs.Add(new BuffDuration(ab, p.Duration, p.Stacks, p.TargetId));
+                            }
+                        }
+                    }
+                });
+                }
+                else
+                {
 
-                    if (SessionManager.TryGetBossById(p.TargetId, out Boss b))
+                if (SessionManager.TryGetBossById(p.TargetId, out Boss b))
+                {
+                    App.Current.Dispatcher.Invoke(() =>
                     {
                         if (b.HasBuff(ab))
                         {
                             BuffUpdated?.Invoke(b.EntityId, ab, p.Duration, p.Stacks);
-
-                            //SessionManager.CurrentBosses.Where(x => x.EntityId == p.TargetId).First().Buffs.Where(x => x.Buff.Id == p.AbnormalityId).FirstOrDefault().Duration = p.Duration;
-                            b.Buffs.Where(x => x.Buff.Id == p.AbnormalityId).FirstOrDefault().Stacks = p.Stacks;
                         }
                         else
                         {
-                            if (ab.Name.Contains("(Hidden)") || ab.Name.Equals("Unknown") || ab.Name.Equals(string.Empty))
+                            if (!ab.Infinity)
                             {
-                                //Console.WriteLine("Skipping refresh: {0}", ab.Name);
-                                return;
-                            }
-                            if (p.Duration < 2000000000)
-                            {
-                                b.Buffs.Add(new BuffDuration(ab, p.Duration, p.Stacks, p.TargetId));
+                                SessionManager.CurrentBosses.Where(x => x.EntityId == p.TargetId).First().Buffs.Add(new BuffDuration(ab, p.Duration, p.Stacks, p.TargetId));
                             }
                             else
                             {
-                                b.Buffs.Insert(0,new BuffDuration(ab, p.Duration, p.Stacks, p.TargetId));
+                                SessionManager.CurrentBosses.Where(x => x.EntityId == p.TargetId).First().Buffs.Insert(0, new BuffDuration(ab, -1, p.Stacks, p.TargetId));
                             }
 
                         }
-                    }
-                });
-            }
+                    });
 
+                }
+                }
+            }
         }
         public static void HandleAbnormalityEnd(S_ABNORMALITY_END p)
         {
@@ -414,6 +471,9 @@ namespace TCC.Parsing
                     if(p.target == SessionManager.CurrentCharId)
                     {
                         SessionManager.CurrentPlayerBuffs.Remove(SessionManager.CurrentPlayerBuffs.FirstOrDefault(x => x.Buff.Id == ab.Id));
+                        SessionManager.CurrentPlayerDebuffs.Remove(SessionManager.CurrentPlayerDebuffs.FirstOrDefault(x => x.Buff.Id == ab.Id));
+                        SessionManager.CurrentPlayerInfBuffs.Remove(SessionManager.CurrentPlayerInfBuffs.FirstOrDefault(x => x.Buff.Id == ab.Id));
+
                         return;
                     }
                     if (SessionManager.TryGetBossById(p.target, out Boss b) && b.HasBuff(ab))

@@ -34,7 +34,14 @@
             </controls:AbnormalityIndicator>
         </DataTemplate>
     </Window.Resources>
-    <Grid>
+    <StackPanel>
+        <ItemsControl Name="infBuffs" ItemTemplate="{StaticResource abTemplate}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" HorizontalAlignment="Right" Height="50" Width="1000"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
         <ItemsControl Name="buffs" ItemTemplate="{StaticResource abTemplate}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -42,5 +49,13 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-    </Grid>
+        <ItemsControl Name="debuffs" ItemTemplate="{StaticResource abTemplate}" Background="#00000000">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" HorizontalAlignment="Right" Height="50" Width="1000"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+
+    </StackPanel>
 </Window>

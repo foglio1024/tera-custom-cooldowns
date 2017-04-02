@@ -15,6 +15,10 @@ namespace TCC.Data
         public uint Id { get; set; }
         public string Name { get; set; }
         public string ToolTip { get; set; }
+        public bool IsBuff { get; set; }
+        public bool IsShow { get; set; }
+        public bool Infinity { get; set; }
+        public int Property { get; set; }
         //public ImageBrush IconBrush
         //{
         //    get
@@ -50,11 +54,13 @@ namespace TCC.Data
         //    }
         //}
 
-        public Abnormality(uint id, string name, string toolTip)
+        public Abnormality(uint id, bool isBuff, bool isShow, bool infinity, int prop)
         {
             Id = id;
-            Name = name;
-            ToolTip = toolTip;
+            IsBuff = isBuff;
+            IsShow = isShow;
+            Infinity = infinity;
+            Property = prop;
         }
 
         public void SetIcon(string iconName)
@@ -90,6 +96,12 @@ namespace TCC.Data
 
             //    //iconBitmap = (Bitmap)Properties.Icon_Classes.common;
             //}
+        }
+
+        public void SetInfo(string name, string toolTip)
+        {
+            Name = name;
+            ToolTip = toolTip;
         }
 
     }

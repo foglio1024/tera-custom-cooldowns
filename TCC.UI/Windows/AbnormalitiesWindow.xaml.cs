@@ -26,6 +26,11 @@ namespace TCC.Windows
 
             buffs.ItemsSource = SessionManager.CurrentPlayerBuffs;
             buffs.DataContext = SessionManager.CurrentPlayerBuffs;
+            debuffs.ItemsSource = SessionManager.CurrentPlayerDebuffs;
+            debuffs.DataContext = SessionManager.CurrentPlayerDebuffs;
+            infBuffs.ItemsSource = SessionManager.CurrentPlayerInfBuffs;
+            infBuffs.DataContext = SessionManager.CurrentPlayerInfBuffs;
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
