@@ -861,6 +861,7 @@
   <Icon abnormalityId="24180" iconName="Icon_Crest.crestnextskillmpdown_Tex" />
   <Icon abnormalityId="24181" iconName="Icon_Crest.crestnextskillattackup_Tex" />
   <Icon abnormalityId="24190" iconName="Icon_Crest.crestnextskillattackspeedup_Tex" />
+  <Icon abnormalityId="24200" iconName="Icon_Crest.crestnextskillattackup_Tex" />
   <Icon abnormalityId="25010" iconName="Icon_Crest.crestactiveattackup_Tex" />
   <Icon abnormalityId="25020" iconName="Icon_Crest.crestactivedefenceup_Tex" />
   <Icon abnormalityId="25021" iconName="Icon_Crest.crestactivedefenceup_Tex" />
@@ -975,6 +976,7 @@
   <Icon abnormalityId="30080" iconName="Icon_Crest.crestactivespeedup_Tex" />
   <Icon abnormalityId="30090" iconName="Icon_Crest.crestnextskillattackup_Tex" />
   <Icon abnormalityId="30100" iconName="Icon_Crest.crestnextskillattackup_Tex" />
+  <Icon abnormalityId="30200" iconName="Icon_Crest.crestpassivecriticalup_Tex" />
   <Icon abnormalityId="31010" iconName="Icon_Crest.E_crestactiveattackspeedup_Tex" />
   <Icon abnormalityId="31020" iconName="Icon_Crest.crestnextskillattackup_Tex" />
   <Icon abnormalityId="31030" iconName="Icon_Crest.crestnextskillattackup_Tex" />
@@ -1191,6 +1193,7 @@
   <Icon abnormalityId="100101" iconName="Icon_Skills.ironwillA_Tex" />
   <Icon abnormalityId="100102" iconName="Icon_Skills.ironwillA_Tex" />
   <Icon abnormalityId="100103" iconName="Icon_Skills.ironwillA_Tex" />
+  <Icon abnormalityId="100150" />
   <Icon abnormalityId="100200" iconName="Icon_Skills.ironwillB_Tex" />
   <Icon abnormalityId="100201" iconName="Icon_Skills.ironwillB_Tex" />
   <Icon abnormalityId="100202" iconName="Icon_Skills.ironwillB_Tex" />
@@ -1352,6 +1355,8 @@
   <Icon abnormalityId="400624" iconName="Icon_Skills.piercingshout_Tex" />
   <Icon abnormalityId="400700" iconName="Icon_Skills.fury_Tex" />
   <Icon abnormalityId="400701" iconName="Icon_Skills.fury_Tex" />
+  <Icon abnormalityId="400710" iconName="Icon_Skills.gatheringrage_Tex" />
+  <Icon abnormalityId="400711" iconName="Icon_Skills.gatheringrage_Tex" />
   <Icon abnormalityId="400800" iconName="Icon_Skills.murderousvent_Tex" />
   <Icon abnormalityId="400801" iconName="Icon_Skills.murderousvent_Tex" />
   <Icon abnormalityId="400900" iconName="Icon_Skills.Ribbreaker_Tex" />
@@ -2671,6 +2676,8 @@
   <Icon abnormalityId="950195" />
   <Icon abnormalityId="950196" />
   <Icon abnormalityId="950197" iconName="Icon_Status.plusedefence_Tex" />
+  <Icon abnormalityId="950198" />
+  <Icon abnormalityId="950199" />
   <Icon abnormalityId="950300" iconName="Icon_Status.EarthBlessing_Tex" />
   <Icon abnormalityId="950301" />
   <Icon abnormalityId="950302" />
@@ -3297,6 +3304,8 @@
   <Icon abnormalityId="10151031" iconName="Icon_Status.DarkWater_Tex" />
   <Icon abnormalityId="10151032" iconName="Icon_Status.PositionSwap_Tex" />
   <Icon abnormalityId="10151033" iconName="Icon_Skills.DarkGrasp_Tex" />
+  <Icon abnormalityId="10151034" />
+  <Icon abnormalityId="10151035" />
   <Icon abnormalityId="10151040" iconName="Icon_Skills.ChainFlurry_Tex" />
   <Icon abnormalityId="10151041" />
   <Icon abnormalityId="10151042" />
@@ -3317,6 +3326,7 @@
   <Icon abnormalityId="10151160" iconName="Icon_Status.InjuredBtDarkness_Tex" />
   <Icon abnormalityId="10151170" iconName="Icon_Skills.CounterAttack_Tex" />
   <Icon abnormalityId="10151171" iconName="Icon_Skills.HideInDarkness_Tex" />
+  <Icon abnormalityId="10151180" />
   <Icon abnormalityId="10151200" iconName="Icon_Skills.Explosiontrap_Tex" />
   <Icon abnormalityId="10151201" />
   <Icon abnormalityId="10151202" iconName="Icon_Status.minusfocus_Tex" />

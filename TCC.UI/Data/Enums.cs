@@ -20,7 +20,7 @@ namespace TCC
         Engineer = 9,
         Fighter = 10,
         Assassin = 11,
-        Moon_Dancer = 12,
+        Valkyrie = 12,
         Common = 255,
         None = 256
     }
@@ -39,4 +39,11 @@ namespace TCC
         Item
     }
 
+    public enum AbnormalityType
+    {
+        WeakeningEffect = 1,
+        DamageOverTime = 2,
+        Stun = 3,
+        Buff = 4
+    }
 }

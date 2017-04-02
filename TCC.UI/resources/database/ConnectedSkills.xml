@@ -2057,6 +2057,12 @@
   <Skill class="Priest" id="271300">
     <connectedSkill id="270930" />
   </Skill>
+  <Skill class="Slayer" id="21300">
+    <connectedSkill id="21330" />
+  </Skill>
+  <Skill class="Slayer" id="21400">
+    <connectedSkill id="21430" />
+  </Skill>
   <Skill class="Sorcerer" id="40910">
     <connectedSkill id="330150" />
     <connectedSkill id="330110" />

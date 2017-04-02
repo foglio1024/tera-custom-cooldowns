@@ -134,7 +134,7 @@ namespace TCC
                             ShowWindow(ClassSpecificGauge);
                         }
                         break;
-                    case Class.Moon_Dancer:
+                    case Class.Valkyrie:
                         if (StaminaGauge.Visible)
                         {
                             ShowWindow(ClassSpecificGauge);
@@ -219,7 +219,7 @@ namespace TCC
                         ClassSpecificGauge = new StaminaGauge(System.Windows.Media.Color.FromArgb(0xff,0xff,0x6a,0xff));
                     }));
                     break;
-                case Class.Moon_Dancer:
+                case Class.Valkyrie:
                     App.Current.Dispatcher.BeginInvoke(new Action(() =>
                     {
                         ClassSpecificGauge = new StaminaGauge(Colors.White);

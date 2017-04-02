@@ -18,7 +18,7 @@ namespace TCC.Data
         public bool IsBuff { get; set; }
         public bool IsShow { get; set; }
         public bool Infinity { get; set; }
-        public int Property { get; set; }
+        public AbnormalityType Type { get; set; }
         //public ImageBrush IconBrush
         //{
         //    get
@@ -60,7 +60,7 @@ namespace TCC.Data
             IsBuff = isBuff;
             IsShow = isShow;
             Infinity = infinity;
-            Property = prop;
+            Type = (AbnormalityType)prop;
         }
 
         public void SetIcon(string iconName)

@@ -859,6 +859,7 @@
   <String id="24180" name="Glyph of Influence" tooltip="Decreases MP consumption of Axe Counter by $H_W_GOOD$value$COLOR_END." />
   <String id="24181" name="Glyph of Powerlink" tooltip="Increases damage of Axe Counter by $H_W_GOOD$value$COLOR_END." />
   <String id="24190" name="Glyph of Powerlink" tooltip="Speeds charging of Cyclone by $H_W_GOOD$value$COLOR_END." />
+  <String id="24200" name="Glyph of Powerlink" tooltip="Increases damage of Lethal Strike by $H_W_GOOD$value$COLOR_END." />
   <String id="25010" name="Glyph of the Pump" tooltip="Power increases by $H_W_GOOD$value$COLOR_END." />
   <String id="25020" name="Glyph of Grounding" tooltip="Increases Endurance by $H_W_GOOD$value$COLOR_END." />
   <String id="25021" name="Glyph of Grounding" tooltip="Increases Endurance by $H_W_GOOD$value$COLOR_END." />
@@ -973,6 +974,7 @@
   <String id="30080" name="Glyph of Fleetfoot" tooltip="Increases Movement Speed by $H_W_GOOD$value$COLOR_END." />
   <String id="30090" name="Glyph of Powerlink" tooltip="Increases skill damage by $H_W_GOOD$value$COLOR_END for the next attack." />
   <String id="30100" name="Glyph of Powerlink" tooltip="Increases Power for the next chain skill by $H_W_GOOD$value$COLOR_END: Shotgun." />
+  <String id="30200" name="Glyph of Keenness" tooltip="$H_W_GOODDoubles$COLOR_END Crit Factor for the next attack." />
   <String id="31010" name="Glyph of the Swift" tooltip="Increases Attack Speed by $H_W_GOOD$value$COLOR_END." />
   <String id="31020" name="Glyph of Powerlink" tooltip="Increases skill damage by $H_W_GOOD$value$COLOR_END" />
   <String id="31030" name="Glyph of Powerlink" tooltip="Increases skill damage by $H_W_GOOD$value$COLOR_END" />
@@ -1185,10 +1187,10 @@
   <String id="96907" />
   <String id="96908" />
   <String id="96909" />
-  <String id="100100" name="Assault Stance I" tooltip="Increases Power by $H_W_GOOD$value$COLOR_END, Crit Factor by $H_W_GOOD$value3$COLOR_END, and skill damage by $H_W_GOOD10%$COLOR_END when attacking monsters. However, decreases Endurance by $H_W_BAD$value2$COLOR_END." />
-  <String id="100101" name="Assault Stance II" tooltip="Increases Power by $H_W_GOOD$value$COLOR_END, Crit Factor by $H_W_GOOD$value3$COLOR_END, and skill damage by $H_W_GOOD10%$COLOR_END when attacking monsters. However, decreases Endurance by $H_W_BAD$value2$COLOR_END." />
-  <String id="100102" name="Assault Stance III" tooltip="Increases Power by $H_W_GOOD$value$COLOR_END, Crit Factor by $H_W_GOOD$value3$COLOR_END, and skill damage by $H_W_GOOD10%$COLOR_END when attacking monsters. However, decreases Endurance by $H_W_BAD$value2$COLOR_END." />
-  <String id="100103" name="Assault Stance IV" tooltip="Increases Power by $H_W_GOOD$value$COLOR_END, Crit Factor by $H_W_GOOD$value3$COLOR_END, and skill damage by $H_W_GOOD10%$COLOR_END when attacking monsters. However, decreases Endurance by $H_W_BAD$value2$COLOR_END." />
+  <String id="100100" name="Assault Stance I" tooltip="Increases Power by $H_W_GOOD$value$COLOR_END, Crit Factor by $H_W_GOOD$value3$COLOR_END, and skill damage by $H_W_GOOD$value4$COLOR_END when attacking monsters. However, decreases Endurance by $H_W_BAD$value2$COLOR_END." />
+  <String id="100101" name="Assault Stance II" tooltip="Increases Power by $H_W_GOOD$value$COLOR_END, Crit Factor by $H_W_GOOD$value3$COLOR_END, and skill damage by $H_W_GOOD$value4$COLOR_END when attacking monsters. However, decreases Endurance by $H_W_BAD$value2$COLOR_END." />
+  <String id="100102" name="Assault Stance III" tooltip="Increases Power by $H_W_GOOD$value$COLOR_END, Crit Factor by $H_W_GOOD$value3$COLOR_END, and skill damage by $H_W_GOOD$value4$COLOR_END when attacking monsters. However, decreases Endurance by $H_W_BAD$value2$COLOR_END." />
+  <String id="100103" name="Assault Stance IV" tooltip="Increases Power by $H_W_GOOD$value$COLOR_END, Crit Factor by $H_W_GOOD$value3$COLOR_END, and skill damage by $H_W_GOOD$value4$COLOR_END when attacking monsters. However, decreases Endurance by $H_W_BAD$value2$COLOR_END." />
   <String id="100150" name="Invisible abnormality (If shown BTS)" tooltip="Increases damage by 10% when attacking monsters." />
   <String id="100200" name="Defensive Stance I" tooltip="Increases Endurance by $H_W_GOOD$value$COLOR_END and Balance Factor by $H_W_GOOD$value2$COLOR_END. Attacks draw $H_W_GOOD$value3$COLOR_END more aggro. Immune to push-back from monsters, save for certain special attacks." />
   <String id="100201" name="Defensive Stance II" tooltip="Increases Endurance by $H_W_GOOD$value$COLOR_END and Balance Factor by $H_W_GOOD$value2$COLOR_END. Attacks draw $H_W_GOOD$value3$COLOR_END more aggro. Immune to push-back from monsters, save for certain special attacks." />
@@ -1351,6 +1353,8 @@
   <String id="400624" name="Fearsome Shout V" tooltip="Panicked! Fleeing! Knockdown cancels the effect. In PvP, Fear effect ends if attacked." />
   <String id="400700" name="Bloodlust I" tooltip="Increases Power by $value. $BRIncreases Balance Factor and Impact Factor by $value3.$BRIncreases damage to monsters by $value2$COLOR_END." />
   <String id="400701" name="Bloodlust II" tooltip="Increases Power by $value. $BRIncreases Balance Factor and Impact Factor by $value3.$BRIncreases damage to monsters by $value2$COLOR_END." />
+  <String id="400710" name="Flurry of Blows I" tooltip="Increases Attack Speed and charging speed by $H_W_GOOD$value$COLOR_END." />
+  <String id="400711" name="Flurry of Blows II" tooltip="Increases Attack Speed and charging speed by $H_W_GOOD$value$COLOR_END." />
   <String id="400800" name="Inescapable Doom I" tooltip="Decreases Movement Speed by $value.$BRPlayers cannot use evasive or movement skills." />
   <String id="400801" name="Inescapable Doom II" tooltip="Decreases Movement Speed by $value.$BRPlayers cannot use evasive or movement skills." />
   <String id="400900" name="Evasive Smash" tooltip="Use Evasive Smash again to activate the rib-crushing uppercut." />
@@ -1501,7 +1505,7 @@
   <String id="468002" name="Teleportation" tooltip="Nightmare Dakuryon has escaped. Again." />
   <String id="468003" />
   <String id="468004" name="Archdevan Curse" tooltip="Reduces HP while in range of an Dark Orb." />
-  <String id="468005" name="Gathering Darkness" tooltip="Nightmare Dakuryon is absorbing power from Bloodshard. You need to stop him immediately!" />
+  <String id="468005" name="Gathering Darkness" tooltip="Nightmare Dakuryon is absorbing power from the Bloodshard. You need to stop him immediately!" />
   <String id="468006" name="Blood Rune" tooltip="Stunned." />
   <String id="468007" />
   <String id="468008" name="Dark Clutches" tooltip="Stunned." />
@@ -1545,7 +1549,7 @@
   <String id="468046" />
   <String id="468047" name="Stabilized" tooltip="Nightmare Imperator is temporarily unstoppable." />
   <String id="468048" name="Impaled" tooltip="Stunned. Blood magic is spreading in your body." />
-  <String id="468049" name="Bloodshard Suffusion" tooltip="Nightmare Pahoegar's damage and Atack Speed are dramatically increased." />
+  <String id="468049" name="Bloodshard Suffusion" tooltip="Nightmare Pahoegar's damage and Attack Speed are dramatically increased." />
   <String id="468050" name="Immunity" tooltip="Immunity" />
   <String id="470000" tooltip="Not supposed to be shown" />
   <String id="470001" name="Manglemore's Change of Heart" tooltip="If this effect stacks up enough, Manglemore lies. How often Manglemore lies is up to him." />
@@ -2035,7 +2039,7 @@
   <String id="768002" name="Teleportation" tooltip="Dakuryon has escaped. Again." />
   <String id="768003" />
   <String id="768004" name="Archdevan Curse" tooltip="Reduces HP while in range of an Dark Orb." />
-  <String id="768005" name="Gathering Darkness" tooltip="Dakuryon is absorbing power from Bloodshard. You need to stop him immediately!" />
+  <String id="768005" name="Gathering Darkness" tooltip="Dakuryon is absorbing power from the Bloodshard. You need to stop him immediately!" />
   <String id="768006" name="Blood Rune" tooltip="Stunned." />
   <String id="768007" />
   <String id="768008" name="Dark Clutches" tooltip="Stunned." />
@@ -2107,7 +2111,7 @@
   <String id="777015" name="Parasitic Hatching" tooltip="Parasites will soon hatch." />
   <String id="777023" name="Imminent Hatching" tooltip="Parasites are ready to hatch." />
   <String id="777026" name="Queen's Wrath" tooltip="Increases Power by $H_W_GOOD$value$COLOR_END. Increases Attack Speed by $H_W_GOOD$value2$COLOR_END." />
-  <String id="777027" name="Queen's Wrath" tooltip="Increases Power by $H_W_GOOD$value$COLOR_END. IncreasesAttack Speed by $H_W_GOOD$value2$COLOR_END." />
+  <String id="777027" name="Queen's Wrath" tooltip="Increases Power by $H_W_GOOD$value$COLOR_END. Increases Attack Speed by $H_W_GOOD$value2$COLOR_END." />
   <String id="777028" name="Eat Infection" tooltip="No debuff tooltip display (isShow=False). If this tooltip displays, BTS is required!" />
   <String id="777029" name="Extinction" tooltip="No debuff tooltip display (isShow=False). If this tooltip displays, BTS is required!" />
   <String id="777032" name="Demokron Absorption" tooltip="Krakatox gains strength from devouring demokrons." />
@@ -2699,6 +2703,8 @@
   <String id="950195" />
   <String id="950196" />
   <String id="950197" name="Celestial Power Absorption" tooltip="Vergos is absorbing celestial power, increasing his Defense by 1.5 times." />
+  <String id="950198" />
+  <String id="950199" />
   <String id="950215" name="Left Fire and Right Ice" tooltip="Fire to the left, Ice to the right." />
   <String id="950216" name="Right Fire and Left Ice" tooltip="Fire to the right, Ice to the left." />
   <String id="950217" />
@@ -3329,6 +3335,8 @@
   <String id="10151031" name="Soul Reversal Ready" tooltip="Soul Reversal skill ready." />
   <String id="10151032" name="Shadowy Cables" tooltip="Entangled by shadowy cables that inflict 3,454 damage every 2 seconds. The entangled target can be forced to switch positions with the caster of this skill at any time." />
   <String id="10151033" name="Entrapped" tooltip="Temporarily stunned." />
+  <String id="10151034" />
+  <String id="10151035" />
   <String id="10151040" name="Shadow Lash Cooldown Resetting Device" tooltip="If you see this buff, report it as a bug!" />
   <String id="10151041" />
   <String id="10151042" />
@@ -3349,6 +3357,7 @@
   <String id="10151160" name="Whipsaw Wound" tooltip="Reduces the effect of healing skills on you by 6% per Whipsaw hit." />
   <String id="10151170" name="Retribution" tooltip="Reaper is prepared to exact retribution on next attacker. Immune to all abnormal states while preparing." />
   <String id="10151171" name="Shrouded Escape" tooltip="Reaper hides in the shadows for $time, dropping all aggro. This effect automatically ends on using a skill or being attacked." />
+  <String id="10151180" />
   <String id="10151200" name="Da Bomb" tooltip="Blow yourself up in time or face meaningless death. You may not ride a mount when you are da bomb. " />
   <String id="10151201" />
   <String id="10151202" name="Ringing Explosion" tooltip="Can not recover HP for 5 seconds." />

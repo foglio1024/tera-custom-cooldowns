@@ -223,8 +223,8 @@ namespace TCC.Parsing
                     WindowManager.CharacterWindow.HideResolve();
                     WindowManager.InitClassGauge(Class.Assassin);
                     break;
-                case Class.Moon_Dancer:
-                    WindowManager.InitClassGauge(Class.Moon_Dancer);
+                case Class.Valkyrie:
+                    WindowManager.InitClassGauge(Class.Valkyrie);
                     WindowManager.CharacterWindow.HideResolve();
                     break;
                 default:
@@ -273,6 +273,10 @@ namespace TCC.Parsing
                 case Class.Elementalist:
                     Mystic.CheckHurricane(p);
                     break;
+                case Class.Assassin:
+                    //redirect intense focus to 10154032
+                    if (p.id == 10154031) p.id++;
+                    break;
                 default:
                     break;
             }
@@ -286,7 +290,7 @@ namespace TCC.Parsing
                 {
                     App.Current.Dispatcher.Invoke(() =>
                 {
-                    if (ab.Property == 4)
+                    if (ab.Type == AbnormalityType.Buff)
                     {
                         if (ab.Infinity)
                         {
@@ -509,7 +513,7 @@ namespace TCC.Parsing
                     MaxSTUpdated?.Invoke(p.maxRe + p.bonusRe);
                     STUpdated?.Invoke(p.currRe);
                     break;
-                case Class.Moon_Dancer:
+                case Class.Valkyrie:
                     MaxSTUpdated?.Invoke(p.maxRe + p.bonusRe);
                     STUpdated?.Invoke(p.currRe);
                     break;
@@ -574,7 +578,7 @@ namespace TCC.Parsing
                 case Class.Assassin:
                     STUpdated.Invoke(p.currentStamina);
                     break;
-                case Class.Moon_Dancer:
+                case Class.Valkyrie:
                     STUpdated.Invoke(p.currentStamina);
                     break;
                 default:

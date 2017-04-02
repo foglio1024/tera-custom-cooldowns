@@ -706,7 +706,6 @@
   <Icon class="Fighter" skillId="61001" iconName="Icon_Skills.BlowAttack_Tex" toolTip="일격타 X" gender="Common" race="Common" />
   <Icon class="Fighter" skillId="61002" iconName="Icon_Skills.BlowAttack_Tex" toolTip="일격타 X" gender="Common" race="Common" />
   <Icon class="Fighter" skillId="61030" iconName="Icon_Skills.BlowAttack_Tex" toolTip="일격타 X" gender="Common" race="Common" />
-  <Icon class="Assassin" skillId="61030" iconName="Icon_Skills.C12_RapidSlash" toolTip="쾌속 베기 X" gender="Common" race="Common" />
   <Icon class="Fighter" skillId="61031" iconName="Icon_Skills.BlowAttack_Tex" toolTip="일격타 X" gender="Common" race="Common" />
   <Icon class="Engineer" skillId="61100" iconName="Icon_Skills.TimebombShot_Tex" toolTip="시한포탄 발사 XI" gender="Common" race="Common" />
   <Icon class="Fighter" skillId="61100" iconName="Icon_Skills.BlowAttack_Tex" toolTip="일격타 XI" gender="Common" race="Common" />
@@ -1805,7 +1804,6 @@
   <Icon class="Priest" skillId="190410" iconName="Icon_Skills.healinglightlockon_Tex" toolTip="치유의 빛 IV" gender="Common" race="Common" />
   <Icon class="Archer" skillId="190500" iconName="Icon_Skills.venomarrow_Tex" toolTip="맹독의 화살 V" gender="Common" race="Common" />
   <Icon class="Assassin" skillId="190500" iconName="Icon_Skills.C12_EvadeStingShot" toolTip="명치 찌르기 V" gender="Common" race="Common" />
-  <Icon class="Assassin" skillId="190530" iconName="Icon_Skills.C12_EvadeStingShot" toolTip="명치 찌르기 V" gender="Common" race="Common" />
   <Icon class="Engineer" skillId="190500" iconName="Icon_Skills.summonspiritofrange_Tex" toolTip="센트리 타워 설치 V" gender="Common" race="Common" />
   <Icon class="Priest" skillId="190500" iconName="Icon_Skills.healinglightlockon_Tex" toolTip="치유의 빛 V" gender="Common" race="Common" />
   <Icon class="Warrior" skillId="190500" iconName="Icon_Skills.tenaciousattack_Tex" toolTip="근성 연타 V" gender="Common" race="Common" />
@@ -2228,7 +2226,6 @@
   <Icon class="Elementalist" skillId="320100" iconName="Icon_Skills.shackleofstone_Tex" toolTip="바위의 속박 I" gender="Common" race="Common" />
   <Icon class="Priest" skillId="320100" iconName="Icon_Skills.restoration_Tex" toolTip="쾌유의 가호 I" gender="Common" race="Common" />
   <Icon class="Warrior" skillId="320100" iconName="Icon_Skills.TwinSwordsDefence_Tex" toolTip="쌍검 방어 I" gender="Common" race="Common" />
-  <Icon class="Sorcerer" skillId="320100" iconName="Icon_Skills.hellfire_Tex" toolTip="운석 낙하 VII" gender="Common" race="Common" />
   <Icon class="Elementalist" skillId="320110" iconName="Icon_Skills.shackleofstone_Tex" toolTip="바위의 속박 I" gender="Common" race="Common" />
   <Icon class="Elementalist" skillId="320200" iconName="Icon_Skills.shackleofstone_Tex" toolTip="바위의 속박 II" gender="Common" race="Common" />
   <Icon class="Priest" skillId="320200" iconName="Icon_Skills.restoration_Tex" toolTip="쾌유의 가호 II" gender="Common" race="Common" />
@@ -2432,14 +2429,14 @@
   <Icon class="Common" skillId="12200006" iconName="Icon_Equipments.vehicle_Dragon_B_Tex" toolTip="레드 드래곤(레어) 소환" gender="Common" race="Common" />
   <Icon class="Common" skillId="12200007" iconName="Icon_Equipments.vehicle_Dragon_C_Tex" toolTip="유령 드래곤(레어) 소환" gender="Common" race="Common" />
   <Icon class="Common" skillId="12200008" iconName="Icon_Equipments.vehicle_Dragon_D_Tex" toolTip="다이아몬드 드래곤(레어) 소환" gender="Common" race="Common" />
-  <Icon class="Common" skillId="12200009" iconName="Icon_Equipments.vehicle_Dragon_A_Tex" toolTip="강철 드래곤 소환 (7일)" gender="Common" race="Common" />
-  <Icon class="Common" skillId="12200010" iconName="Icon_Equipments.vehicle_Dragon_B_Tex" toolTip="레드 드래곤 소환 (7일)" gender="Common" race="Common" />
-  <Icon class="Common" skillId="12200011" iconName="Icon_Equipments.vehicle_Dragon_C_Tex" toolTip="유령 드래곤 소환 (7일)" gender="Common" race="Common" />
-  <Icon class="Common" skillId="12200012" iconName="Icon_Equipments.vehicle_Dragon_D_Tex" toolTip="다이아몬드 드래곤 소환 (7일)" gender="Common" race="Common" />
-  <Icon class="Common" skillId="12200013" iconName="Icon_Equipments.vehicle_Dragon_A_Tex" toolTip="강철 드래곤(레어) 소환 (7일)" gender="Common" race="Common" />
-  <Icon class="Common" skillId="12200014" iconName="Icon_Equipments.vehicle_Dragon_B_Tex" toolTip="레드 드래곤(레어) 소환 (7일)" gender="Common" race="Common" />
-  <Icon class="Common" skillId="12200015" iconName="Icon_Equipments.vehicle_Dragon_C_Tex" toolTip="유령 드래곤(레어) 소환 (7일)" gender="Common" race="Common" />
-  <Icon class="Common" skillId="12200016" iconName="Icon_Equipments.vehicle_Dragon_D_Tex" toolTip="다이아몬드 드래곤(레어) 소환 (7일)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="12200009" iconName="Icon_Equipments.vehicle_Dragon_A_Tex" toolTip="강철 드래곤 소환 (기간제)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="12200010" iconName="Icon_Equipments.vehicle_Dragon_B_Tex" toolTip="레드 드래곤 소환 (기간제)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="12200011" iconName="Icon_Equipments.vehicle_Dragon_C_Tex" toolTip="유령 드래곤 소환 (기간제)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="12200012" iconName="Icon_Equipments.vehicle_Dragon_D_Tex" toolTip="다이아몬드 드래곤 소환 (기간제)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="12200013" iconName="Icon_Equipments.vehicle_Dragon_A_Tex" toolTip="강철 드래곤(레어) 소환 (기간제)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="12200014" iconName="Icon_Equipments.vehicle_Dragon_B_Tex" toolTip="레드 드래곤(레어) 소환 (기간제)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="12200015" iconName="Icon_Equipments.vehicle_Dragon_C_Tex" toolTip="유령 드래곤(레어) 소환 (기간제)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="12200016" iconName="Icon_Equipments.vehicle_Dragon_D_Tex" toolTip="다이아몬드 드래곤(레어) 소환 (기간제)" gender="Common" race="Common" />
   <Icon class="Common" skillId="12200017" iconName="Icon_Equipments.vehicle_Dragon_A_Tex" toolTip="강철 드래곤 소환(비전투)" gender="Common" race="Common" />
   <Icon class="Common" skillId="12200018" iconName="Icon_Equipments.vehicle_Dragon_B_Tex" toolTip="레드 드래곤 소환(비전투)" gender="Common" race="Common" />
   <Icon class="Common" skillId="12200019" iconName="Icon_Equipments.vehicle_Dragon_C_Tex" toolTip="유령 드래곤 소환(비전투)" gender="Common" race="Common" />
@@ -2497,6 +2494,7 @@
   <Icon class="Common" skillId="60951904" iconName="Icon_Skills.Tornadoprison_Tex" toolTip="회오리 소환" gender="Common" race="Common" />
   <Icon class="Common" skillId="60951905" iconName="Icon_Skills.VehicleEx_att02_Tex" toolTip="소멸의 광선" gender="Common" race="Common" />
   <Icon class="Common" skillId="60951906" iconName="Icon_Skills.voidtrap_Tex" toolTip="균열의 구체" gender="Common" race="Common" />
+  <Icon class="Common" skillId="60951907" iconName="Icon_Customizing.Decal.ICON_Popori_M_Decal07_00" toolTip="쉿!" gender="Common" race="Common" />
   <Icon class="Common" skillId="61000100" iconName="Icon_Skills.Union_SkillIcon1_Tex" toolTip="벨릭의 행운" gender="Common" race="Common" />
   <Icon class="Common" skillId="61000200" iconName="Icon_Skills.Union_SkillIcon2_Tex" toolTip="젤리아드의 요청" gender="Common" race="Common" />
   <Icon class="Common" skillId="61000300" iconName="Icon_Skills.Union_SkillIcon3_Tex" toolTip="장로회의 외교력" gender="Common" race="Common" />
@@ -2523,6 +2521,7 @@
   <Icon class="Common" skillId="61905010" iconName="Icon_Items.PetSkillbook_Tex" toolTip="펫캘사이크 소환" gender="Common" race="Common" />
   <Icon class="Common" skillId="61905011" iconName="Icon_Items.PetSkillbook_Tex" toolTip="펫바실리스크" gender="Common" race="Common" />
   <Icon class="Common" skillId="61905013" iconName="Icon_Items.PetSkillbook_Tex" toolTip="수집꾼 몽실 소환" gender="Common" race="Common" />
+  <Icon class="Common" skillId="61905014" iconName="Icon_Items.PetSkillbook_Tex" toolTip="수집꾼 쿠링 소환(기간제)" gender="Common" race="Common" />
   <Icon class="Common" skillId="61906001" iconName="Icon_Items.PetSkillbook_Tex" toolTip="수집꾼 쿠링 소환(30일_7일)" gender="Common" race="Common" />
   <Icon class="Common" skillId="61906003" iconName="Icon_Items.PetSkillbook_Tex" toolTip="다혈질 타미 소환(30일_7일)" gender="Common" race="Common" />
   <Icon class="Common" skillId="61906004" iconName="Icon_Items.PetSkillbook_Tex" toolTip="무쇠머리 범피 소환(30일_7일)" gender="Common" race="Common" />

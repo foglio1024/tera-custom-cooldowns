@@ -536,7 +536,7 @@ namespace TCC
                 case Class.Assassin:
                     className = "ninja";
                     break;
-                case Class.Moon_Dancer:
+                case Class.Valkyrie:
                     className = "glaiver";
                     break;
                 default:

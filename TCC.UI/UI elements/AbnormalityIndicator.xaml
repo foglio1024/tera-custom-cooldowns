@@ -10,46 +10,51 @@
              >
     <UserControl.Resources>
         <local:IconConverter x:Key ="iconConv"></local:IconConverter>
+        <local:AbnormalityStrokeConverter x:Key="strokeConv"></local:AbnormalityStrokeConverter>
+        <local:DurationLabelConverter x:Key="durationConv"></local:DurationLabelConverter>
     </UserControl.Resources>
         
-    <Grid Margin="0,0,0,0">
+    <Grid Margin="0,0,0,0" Width="40">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
-            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         
         <TextBlock Name="abnormalityName" Grid.Row="0" Text="" Grid.Column="1" Foreground="White"/>
         <!--<TextBlock Name="abnormalityId" Grid.Row="1" Text="{Binding AbnormalityId}"/>-->
-        <Ellipse Name="abnormalityIcon" ToolTip="{Binding AbnormalityName}" Width="34" Height="34" Stroke="#80ffffff" StrokeThickness="1">
+        <Ellipse Name="abnormalityIcon" ToolTip="{Binding AbnormalityName}" Margin="0,0" Width="34" Height="34" Stroke="{Binding Type, Converter={StaticResource strokeConv}}" StrokeThickness="1.2">
             <Ellipse.Fill>
                 <ImageBrush ImageSource="{Binding IconName, Converter={StaticResource iconConv}}"/>
             </Ellipse.Fill>
         </Ellipse>
         <local:Arc x:Name="arc" Stroke="#a000" StrokeThickness="17" EndAngle="0" Width="33" Height="33" />
 
-        <Grid Width="30" Height="20" x:Name="g" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5,0,5,-15">
+        <Grid Width="Auto" Height="20" x:Name="g" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5,0,5,-15">
             <!--<Grid.CacheMode>
                 <BitmapCache RenderAtScale="1.5"/>
             </Grid.CacheMode>-->
-            <Border x:Name="fill" Background="White" Height="15" Width="30" Opacity="1" CornerRadius="7.5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#40000000"/>
+            <Border x:Name="fill" Background="White" 
+                    Height="17" Width="Auto" 
+                    Opacity=".9" CornerRadius="7.5" 
+                    VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                    BorderBrush="{Binding Type, Converter={StaticResource strokeConv}}" BorderThickness="1.5"/>
 
-            <Viewbox StretchDirection="DownOnly" Stretch="Uniform" Margin="1.5">
+            <Viewbox StretchDirection="DownOnly" Stretch="Uniform" Margin="0">
                 <TextBlock Foreground="#d9000000" 
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center" 
                    TextAlignment="Center"
                    FontWeight="SemiBold" 
-                   FontSize="14" 
+                   FontSize="16" 
                    x:Name="number" 
                    FontFamily="Roboto Mono" 
                    FontStyle="Normal"
                    Opacity="1" 
-                   Margin="2"
-                   Text="-"
+                   Margin="6,4"
+                   Text="{Binding CurrentTime, Converter={StaticResource durationConv}}"
                    ToolTip="{Binding ElementName=number, Path=Text}">
             <!--<TextBlock.Effect>
                 <DropShadowEffect ShadowDepth="0" BlurRadius="0" Color="White"></DropShadowEffect>

@@ -25,6 +25,7 @@
                                            Duration="{Binding Duration}"
                                            Stacks="{Binding Stacks}"
                                            TargetId="{Binding Target}"
+                                           Type="{Binding Buff.Type}"
                                            HorizontalAlignment="Right">
                 <controls:AbnormalityIndicator.Resources>
                     <Style TargetType="{x:Type Path}">

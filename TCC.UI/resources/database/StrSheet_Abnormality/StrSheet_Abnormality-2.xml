@@ -524,16 +524,16 @@
   <String id="88410208" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
   <String id="88410209" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
   <String id="88410210" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
-  <String id="88410301" name="" tooltip="" />
-  <String id="88410302" name="" tooltip="" />
-  <String id="88410303" name="" tooltip="" />
-  <String id="88410304" name="" tooltip="" />
-  <String id="88410305" name="" tooltip="" />
-  <String id="88410306" name="" tooltip="" />
-  <String id="88410307" name="" tooltip="" />
-  <String id="88410308" name="" tooltip="" />
-  <String id="88410309" name="" tooltip="" />
-  <String id="88410310" name="" tooltip="" />
+  <String id="88418101" name="" tooltip="" />
+  <String id="88418102" name="" tooltip="" />
+  <String id="88418103" name="" tooltip="" />
+  <String id="88418104" name="" tooltip="" />
+  <String id="88418105" name="" tooltip="" />
+  <String id="88418106" name="" tooltip="" />
+  <String id="88418107" name="" tooltip="" />
+  <String id="88418108" name="" tooltip="" />
+  <String id="88418109" name="" tooltip="" />
+  <String id="88418110" name="" tooltip="" />
   <String id="88424200" name="Reloading Evasive Smash" tooltip="BTS" />
   <String id="88426101" name="Chained Speed Skating: Leaping Strike" tooltip="Attack Speed increases when casting Leaping Strike" />
   <String id="88426102" name="Chained Speed Skating: Leaping Strike" tooltip="Attack Speed increases when casting Leaping Strike" />

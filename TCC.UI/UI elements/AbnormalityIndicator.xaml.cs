@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +22,7 @@ namespace TCC.UI_elements
     /// <summary>
     /// Logica di interazione per AbnormalityIndicator.xaml
     /// </summary>
-    public partial class AbnormalityIndicator : UserControl
+    public partial class AbnormalityIndicator : UserControl, INotifyPropertyChanged
     {
         public AbnormalityIndicator()
         {
@@ -31,6 +33,8 @@ namespace TCC.UI_elements
             //abnormalityId.DataContext = this;
             abnormalityName.DataContext = this;
             abnormalityIcon.DataContext = this;
+            number.DataContext = this;
+            fill.DataContext = this;
         }
 
         void InitTimer()
@@ -43,25 +47,25 @@ namespace TCC.UI_elements
                     CurrentTime--;
                     if (CurrentTime < 0)
                     {
-                        number.Text = "";
+                        //number.Text = "";
                         SecondsTimer.Stop();
                     }
-                    else if (CurrentTime > 60 * 60 * 24)
-                    {
-                        number.Text = String.Format("{0:0}d", CurrentTime / 3600 * 24);
-                    }
-                    else if (CurrentTime > 3600)
-                    {
-                        number.Text = String.Format("{0:0}h", CurrentTime / 3600);
-                    }
-                    else if (CurrentTime > 60)
-                    {
-                        number.Text = String.Format("{0:0}m", CurrentTime / 60);
-                    }
-                    else
-                    {
-                        number.Text = String.Format("{0:0}", CurrentTime);
-                    }
+                    //else if (CurrentTime > 60 * 60 * 24)
+                    //{
+                    //    number.Text = String.Format("{0:0}d", CurrentTime / 3600 * 24);
+                    //}
+                    //else if (CurrentTime > 3600)
+                    //{
+                    //    number.Text = String.Format("{0:0}h", CurrentTime / 3600);
+                    //}
+                    //else if (CurrentTime > 60)
+                    //{
+                    //    number.Text = String.Format("{0:0}m", CurrentTime / 60);
+                    //}
+                    //else
+                    //{
+                    //    number.Text = String.Format("{0:0}", CurrentTime);
+                    //}
                 });
             });
 
@@ -90,12 +94,12 @@ namespace TCC.UI_elements
             {
                 if (target == TargetId)
                 {
-                    if(ab.Id == AbnormalityId)
+                    if (ab.Id == AbnormalityId)
                     {
                         Duration = duration;
                         Stacks = stacks;
                         CurrentTime = duration / 1000;
-                        number.Text = (duration/1000).ToString();
+                        //number.Text = (duration / 1000).ToString();
                         SetStacksNumber();
                         //InitTimer();
                         if (SecondsTimer != null)
@@ -106,17 +110,15 @@ namespace TCC.UI_elements
                         if (duration < 0)
                         {
                             g.Visibility = Visibility.Hidden;
-                            number.Text = "-";
+                            //number.Text = "-";
                             return;
                         }
-                         arc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(duration)));
+                        arc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(duration)));
                     }
                 }
 
             });
         }
-
-
 
         public ulong TargetId
         {
@@ -139,19 +141,19 @@ namespace TCC.UI_elements
         }
         public static readonly DependencyProperty AbnormalityNameProperty = DependencyProperty.Register("AbnormalityName", typeof(string), typeof(AbnormalityIndicator));
 
-
+        public AbnormalityType Type
+        {
+            get { return (AbnormalityType)GetValue(TypeProperty); }
+            set { SetValue(TypeProperty, value); }
+        }
+        public static readonly DependencyProperty TypeProperty = DependencyProperty.Register("Type", typeof(AbnormalityType), typeof(AbnormalityIndicator));
 
         public string IconName
         {
             get { return (string)GetValue(IconNameProperty); }
             set { SetValue(IconNameProperty, value); }
         }
-
-        // Using a DependencyProperty as the backing store for IconName.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IconNameProperty =
-            DependencyProperty.Register("IconName", typeof(string), typeof(AbnormalityIndicator));
-
-
+        public static readonly DependencyProperty IconNameProperty = DependencyProperty.Register("IconName", typeof(string), typeof(AbnormalityIndicator));
 
         public int Duration
         {
@@ -168,8 +170,25 @@ namespace TCC.UI_elements
         public static readonly DependencyProperty StacksProperty = DependencyProperty.Register("Stacks", typeof(int), typeof(AbnormalityIndicator));
 
         System.Timers.Timer SecondsTimer;
-        int CurrentTime;
+        int currentTime;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void NotifyPropertyChanged(string prop)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
+        public int CurrentTime
+        {
+            get { return currentTime; }
+            set
+            {
+                if (value != currentTime)
+                {
+                    currentTime = value;
+                    NotifyPropertyChanged("CurrentTime");
+                }
+            }
+        }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             Dispatcher.Invoke(() =>
@@ -183,10 +202,9 @@ namespace TCC.UI_elements
                 if (Duration < 2000000000 && Duration > 0)
                 {
                     var an = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(Duration));
-                    //Timeline.SetDesiredFrameRate(an, 25);
                     arc.BeginAnimation(Arc.EndAngleProperty, an);
                     CurrentTime = Duration / 1000;
-                    number.Text = (Duration / 1000).ToString();
+                    //number.Text = (Duration / 1000).ToString();
 
                     InitTimer();
                     SecondsTimer.Stop();
@@ -195,7 +213,7 @@ namespace TCC.UI_elements
                 else
                 {
                     g.Visibility = Visibility.Hidden;
-                    number.Text = "-";
+                    //number.Text = "-";
                 }
             });
         }
@@ -203,6 +221,67 @@ namespace TCC.UI_elements
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
 
+        }
+    }
+}
+namespace TCC
+{
+    public class DurationLabelConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            int seconds = (int)value;
+            int minutes = seconds / 60;
+            int hours = minutes / 60;
+            int days = hours / 24;
+
+            if(minutes < 3)
+            {
+                return seconds.ToString();
+            }
+            else if(hours < 3)
+            {
+                return minutes + "m";
+            }
+            else if(days < 1)
+            {
+                return hours + "h";
+            }
+            else
+            {
+                return days + "d";
+            }
+
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class AbnormalityStrokeConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var val = (AbnormalityType)value;
+            switch (val)
+            {
+                case AbnormalityType.Stun:
+                    return new SolidColorBrush(Colors.Red);
+                case AbnormalityType.DamageOverTime:
+                    return new SolidColorBrush(Color.FromRgb(0x98, 0x42, 0x24));
+                case AbnormalityType.WeakeningEffect:
+                    return new SolidColorBrush(Color.FromRgb(0x8f, 0xf4, 0x42));
+                case AbnormalityType.Buff:
+                    return new SolidColorBrush(Color.FromRgb(0x3f, 0x9f, 0xff));
+                default:
+                    return new SolidColorBrush(Colors.White);
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 }

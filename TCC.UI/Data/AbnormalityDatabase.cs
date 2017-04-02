@@ -90,10 +90,10 @@ namespace TCC.Data
                 {
                     isBuff = true;
                 }
-                bool isShow = false;
-                if (a.Attribute("isShow").Value == "True" || a.Attribute("isShow").Value == "onlyIcon")
+                bool isShow = true;
+                if (a.Attribute("isShow").Value == "False")
                 {
-                    isShow = true;
+                    isShow = false;
                 }
                 bool infinity = false;
                 if (a.Attribute("infinity").Value == "True")
