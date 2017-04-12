@@ -49,7 +49,7 @@ namespace TCC.Parsing
 
         //public static event UpdateIntStatEventHandler MaxHPUpdated;
         //public static event UpdateIntStatEventHandler MaxMPUpdated;
-        //public static event UpdateIntStatEventHandler MaxSTUpdated;
+        public static event UpdateIntStatEventHandler MaxSTUpdated;
 
         public static event UpdateStatWithIdEventHandler BossHPChanged;
         public static event UpdateStatWithIdEventHandler EnragedChanged;

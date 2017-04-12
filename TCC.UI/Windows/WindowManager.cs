@@ -28,7 +28,7 @@ namespace TCC
         static MenuItem ClickThruButton;
         static System.Windows.Forms.NotifyIcon TrayIcon;
 
-        static bool Transparent;
+        public static bool Transparent;
         static bool IsClassWindowVisible;
 
         public static void Init()
@@ -44,16 +44,16 @@ namespace TCC
             ClassSpecificWindow.Opacity = 0;
             CharacterWindow.Opacity = 0;
 
-            CooldownWindow.Top = Properties.Settings.Default.CooldownBarTop;
-            CooldownWindow.Left = Properties.Settings.Default.CooldownBarLeft;
-            ClassSpecificWindow.Top = Properties.Settings.Default.ClassGaugeTop;
-            ClassSpecificWindow.Left = Properties.Settings.Default.ClassGaugeLeft;
-            CharacterWindow.Top = Properties.Settings.Default.CharacterWindowTop;
-            CharacterWindow.Left = Properties.Settings.Default.CharacterWindowLeft;
-            BossGauge.Top = Properties.Settings.Default.BossGaugeWindowTop;
-            BossGauge.Left = Properties.Settings.Default.BossGaugeWindowLeft;
-            BuffBar.Top = Properties.Settings.Default.BuffBarTop;
-            BuffBar.Left = Properties.Settings.Default.BuffBarLeft;
+            //CooldownWindow.Top = Properties.Settings.Default.CooldownBarTop;
+            //CooldownWindow.Left = Properties.Settings.Default.CooldownBarLeft;
+            //ClassSpecificWindow.Top = Properties.Settings.Default.ClassGaugeTop;
+            //ClassSpecificWindow.Left = Properties.Settings.Default.ClassGaugeLeft;
+            //CharacterWindow.Top = Properties.Settings.Default.CharacterWindowTop;
+            //CharacterWindow.Left = Properties.Settings.Default.CharacterWindowLeft;
+            //BossGauge.Top = Properties.Settings.Default.BossGaugeWindowTop;
+            //BossGauge.Left = Properties.Settings.Default.BossGaugeWindowLeft;
+            //BuffBar.Top = Properties.Settings.Default.BuffBarTop;
+            //BuffBar.Left = Properties.Settings.Default.BuffBarLeft;
 
             ContextMenu = new ContextMenu();
             
@@ -73,12 +73,6 @@ namespace TCC
             ContextMenu.Items.Add(ClickThruButton);
             ContextMenu.Items.Add(CloseButton);
 
-            Transparent = Properties.Settings.Default.Transparent;
-
-            if (Transparent)
-            {
-                ClickThruButton.IsChecked = true;
-            }
 
             FocusManager.FocusTimer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
             FocusManager.FocusTimer.Tick += FocusManager.CheckForegroundWindow;
@@ -87,31 +81,46 @@ namespace TCC
 
             FocusManager.ForegroundWindowChanged += FocusManager_ForegroundWindowChanged;
         }
+        public static void SetTransparent(bool v)
+        {
+            if (v)
+            {
+                Transparent = true;
+                ClickThruButton.IsChecked = true;
+            }
+            else
+            {
+                Transparent = false;
+                ClickThruButton.IsChecked = false;
+            }
+
+            SetTransparentWindows();
+        }
+
         public static void Dispose()
         {
             FocusManager.FocusTimer.Stop();
             TrayIcon.Visible = false;
 
-            Properties.Settings.Default.CooldownBarLeft = CooldownWindow.Left;
-            Properties.Settings.Default.CooldownBarTop= CooldownWindow.Top;
-            Properties.Settings.Default.CharacterWindowLeft = CharacterWindow.Left;
-            Properties.Settings.Default.CharacterWindowTop = CharacterWindow.Top;
-            Properties.Settings.Default.BuffBarTop = BuffBar.Top;
-            Properties.Settings.Default.BuffBarLeft = BuffBar.Left;
-            Properties.Settings.Default.BossGaugeWindowTop = BossGauge.Top;
-            Properties.Settings.Default.BossGaugeWindowLeft = BossGauge.Left;
+            //Properties.Settings.Default.CooldownBarLeft = CooldownWindow.Left;
+            //Properties.Settings.Default.CooldownBarTop= CooldownWindow.Top;
+            //Properties.Settings.Default.CharacterWindowLeft = CharacterWindow.Left;
+            //Properties.Settings.Default.CharacterWindowTop = CharacterWindow.Top;
+            //Properties.Settings.Default.BuffBarTop = BuffBar.Top;
+            //Properties.Settings.Default.BuffBarLeft = BuffBar.Left;
+            //Properties.Settings.Default.BossGaugeWindowTop = BossGauge.Top;
+            //Properties.Settings.Default.BossGaugeWindowLeft = BossGauge.Left;
 
-            if(ClassSpecificWindow != null)
-            {
-                ClassSpecificWindow.Close();
-                Properties.Settings.Default.ClassGaugeLeft = ClassSpecificWindow.Left;
-                Properties.Settings.Default.ClassGaugeTop = ClassSpecificWindow.Top;
-            }
-            Properties.Settings.Default.Transparent = Transparent;
+            //if(ClassSpecificWindow != null)
+            //{
+            //    ClassSpecificWindow.Close();
+            //    Properties.Settings.Default.ClassGaugeLeft = ClassSpecificWindow.Left;
+            //    Properties.Settings.Default.ClassGaugeTop = ClassSpecificWindow.Top;
+            //}
+            //Properties.Settings.Default.Transparent = Transparent;
 
-            Properties.Settings.Default.Save();
-
-
+            //Properties.Settings.Default.Save();
+            App.SaveSettings();
             CooldownWindow.Close();
             CharacterWindow.Close();
         }
@@ -125,41 +134,44 @@ namespace TCC
             switch (c)
             {
                 case Class.Warrior:
-                    App.Current.Dispatcher.BeginInvoke(new Action(() =>
+                    App.Current.Dispatcher.Invoke(() =>
                     {
                         ClassSpecificWindow = new EdgeGaugeWindow();
-                    }));
+                    });
                     break;
                 case Class.Engineer:
-                    App.Current.Dispatcher.BeginInvoke(new Action(() =>
+                    App.Current.Dispatcher.Invoke(() =>
                     {
                         ClassSpecificWindow = new StaminaGauge(Colors.Orange);
-                    }));
+                    });
                     break;
                 case Class.Fighter:
-                    App.Current.Dispatcher.BeginInvoke(new Action(() =>
+                    App.Current.Dispatcher.Invoke(() =>
                     {
                         ClassSpecificWindow = new StaminaGauge(Colors.OrangeRed);
-                    }));
+                    });
                     break;
                 case Class.Assassin:
-                    App.Current.Dispatcher.BeginInvoke(new Action(() =>
+                    App.Current.Dispatcher.Invoke(() =>
                     {
                         ClassSpecificWindow = new StaminaGauge(System.Windows.Media.Color.FromArgb(0xff,0xff,0x6a,0xff));
-                    }));
+                    });
                     break;
                 case Class.Glaiver:
-                    App.Current.Dispatcher.BeginInvoke(new Action(() =>
+                    App.Current.Dispatcher.Invoke(() =>
                     {
                         ClassSpecificWindow = new StaminaGauge(System.Windows.Media.Color.FromRgb(230,240,255));
-                    }));
+                    });
                     break;
                 default:
                     return;
             }
             if (Transparent)
             {
-                FocusManager.MakeTransparent(new WindowInteropHelper(ClassSpecificWindow).Handle);
+                App.Current.Dispatcher.Invoke(() =>
+                {
+                    FocusManager.MakeTransparent(new WindowInteropHelper(ClassSpecificWindow).Handle);
+                });
             }
         }
         public static void ShowWindow(Window w)
@@ -269,23 +281,27 @@ namespace TCC
         {
             if (Transparent)
             {
+                FocusManager.UndoTransparent(new WindowInteropHelper(BossGauge).Handle);
+                FocusManager.UndoTransparent(new WindowInteropHelper(BuffBar).Handle);
+                FocusManager.UndoTransparent(new WindowInteropHelper(CharacterWindow).Handle);
                 FocusManager.UndoTransparent(new WindowInteropHelper(CooldownWindow).Handle);
-                if(ClassSpecificWindow != null)
+                if (ClassSpecificWindow != null)
                 {
                     FocusManager.UndoTransparent(new WindowInteropHelper(ClassSpecificWindow).Handle);
                 }
-                FocusManager.UndoTransparent(new WindowInteropHelper(CharacterWindow).Handle);
                 ClickThruButton.IsChecked = false;
                 Transparent = false;
             }
             else
             {
+                FocusManager.MakeTransparent(new WindowInteropHelper(BossGauge).Handle);
+                FocusManager.MakeTransparent(new WindowInteropHelper(BuffBar).Handle);
                 FocusManager.MakeTransparent(new WindowInteropHelper(CooldownWindow).Handle);
+                FocusManager.MakeTransparent(new WindowInteropHelper(CharacterWindow).Handle);
                 if(ClassSpecificWindow != null)
                 {
                     FocusManager.MakeTransparent(new WindowInteropHelper(ClassSpecificWindow).Handle);
                 }
-                FocusManager.MakeTransparent(new WindowInteropHelper(CharacterWindow).Handle);
                 ClickThruButton.IsChecked = true;
                 Transparent = true;
             }
