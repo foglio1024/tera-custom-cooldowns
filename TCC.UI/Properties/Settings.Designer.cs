@@ -50,24 +50,24 @@ namespace TCC.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double GaugeWindowTop {
+        public double BossGaugeWindowTop {
             get {
-                return ((double)(this["GaugeWindowTop"]));
+                return ((double)(this["BossGaugeWindowTop"]));
             }
             set {
-                this["GaugeWindowTop"] = value;
+                this["BossGaugeWindowTop"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double GaugeWindowLeft {
+        public double BossGaugeWindowLeft {
             get {
-                return ((double)(this["GaugeWindowLeft"]));
+                return ((double)(this["BossGaugeWindowLeft"]));
             }
             set {
-                this["GaugeWindowLeft"] = value;
+                this["BossGaugeWindowLeft"] = value;
             }
         }
         
@@ -104,6 +104,54 @@ namespace TCC.Properties {
             }
             set {
                 this["Transparent"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double ClassGaugeTop {
+            get {
+                return ((double)(this["ClassGaugeTop"]));
+            }
+            set {
+                this["ClassGaugeTop"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double ClassGaugeLeft {
+            get {
+                return ((double)(this["ClassGaugeLeft"]));
+            }
+            set {
+                this["ClassGaugeLeft"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double BuffBarTop {
+            get {
+                return ((double)(this["BuffBarTop"]));
+            }
+            set {
+                this["BuffBarTop"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double BuffBarLeft {
+            get {
+                return ((double)(this["BuffBarLeft"]));
+            }
+            set {
+                this["BuffBarLeft"] = value;
             }
         }
     }

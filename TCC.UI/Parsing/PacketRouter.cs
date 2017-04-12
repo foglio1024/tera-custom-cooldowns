@@ -47,17 +47,9 @@ namespace TCC.Parsing
         //static event ParsedMessageEventHandler BossGageReceived;
         //static event ParsedMessageEventHandler NpcStatusChanged;
 
-        public static event UpdateIntStatEventHandler MaxHPUpdated;
-        public static event UpdateIntStatEventHandler MaxMPUpdated;
-        public static event UpdateIntStatEventHandler MaxSTUpdated;
-
-        public static event UpdateFloatStatEventHandler HPUpdated;
-        public static event UpdateIntStatEventHandler MPUpdated;
-        public static event UpdateIntStatEventHandler STUpdated;
-
-        public static event UpdateFloatStatEventHandler FlightEnergyUpdated;
-
-        public static event UpdateIntStatEventHandler IlvlUpdated;
+        //public static event UpdateIntStatEventHandler MaxHPUpdated;
+        //public static event UpdateIntStatEventHandler MaxMPUpdated;
+        //public static event UpdateIntStatEventHandler MaxSTUpdated;
 
         public static event UpdateStatWithIdEventHandler BossHPChanged;
         public static event UpdateStatWithIdEventHandler EnragedChanged;
@@ -83,6 +75,7 @@ namespace TCC.Parsing
                     continue;
                 }
                 var message = MessageFactory.Create(msg);
+                //PacketInspector.InspectPacket(msg);
                 if (message.GetType() == typeof(Tera.Game.Messages.UnknownMessage)) continue;
 
                 if (!MessageFactory.Process(message))
@@ -196,16 +189,15 @@ namespace TCC.Parsing
         public static void HandleCharLogin(S_LOGIN p)
         {
             SessionManager.Logged = true;
-            SessionManager.CurrentClass = p.CharacterClass;
-            SessionManager.CurrentCharId = p.entityId;
-            SessionManager.CurrentCharName = p.Name;
-            SessionManager.CurrentLaurel = CLP.GetLaurelFromName(p.Name);
-            SessionManager.CurrentLevel = (int)p.Level;
-            WindowManager.SetCharInfo();
-            switch (SessionManager.CurrentClass)
+            SessionManager.CurrentPlayer.Class = p.CharacterClass;
+            SessionManager.CurrentPlayer.EntityId = p.entityId;
+            SessionManager.CurrentPlayer.Name = p.Name;
+            SessionManager.CurrentPlayer.Laurel = CLP.GetLaurelFromName(p.Name);
+            SessionManager.CurrentPlayer.Level = (int)p.Level;
+            switch (SessionManager.CurrentPlayer.Class)
             {
                 case Class.Warrior:
-                    WindowManager.InitClassGauge(Class.Warrior);
+                    //WindowManager.InitClassGauge(Class.Warrior);
                     WindowManager.CharacterWindow.ShowResolve();
                     break;
                 case Class.Lancer:
@@ -223,8 +215,8 @@ namespace TCC.Parsing
                     WindowManager.CharacterWindow.HideResolve();
                     WindowManager.InitClassGauge(Class.Assassin);
                     break;
-                case Class.Valkyrie:
-                    WindowManager.InitClassGauge(Class.Valkyrie);
+                case Class.Glaiver:
+                    WindowManager.InitClassGauge(Class.Glaiver);
                     WindowManager.CharacterWindow.HideResolve();
                     break;
                 default:
@@ -235,7 +227,7 @@ namespace TCC.Parsing
         public static void HandleNewSkillCooldown(S_START_COOLTIME_SKILL p)
         {
             SkillManager.AddSkill(p);
-            switch (SessionManager.CurrentClass)
+            switch (SessionManager.CurrentPlayer.Class)
             {
                 case Class.Warrior:
                     Warrior.CheckWarriorsSkillCooldown(p);
@@ -259,13 +251,12 @@ namespace TCC.Parsing
             SkillManager.Clear();
             App.Current.Dispatcher.Invoke(() =>
             {
-                SessionManager.CurrentPlayerBuffs.Clear();
+                SessionManager.CurrentPlayer.Buffs.Clear();
             });
         }
-
         public static void HandleAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
-            switch (SessionManager.CurrentClass)
+            switch (SessionManager.CurrentPlayer.Class)
             {
                 case Class.Warrior:
                     Warrior.CheckGambleBuff(p);
@@ -286,7 +277,7 @@ namespace TCC.Parsing
                 if (ab.Name.Contains("BTS") || ab.ToolTip.Contains("BTS") || !ab.IsShow) return;
                 if (ab.Name.Contains("(Hidden)") || ab.Name.Equals("Unknown") || ab.Name.Equals(string.Empty)) return;
                 //Console.WriteLine("{1} {0}",ab.Name, ab.Property);
-                if (p.targetId == SessionManager.CurrentCharId)
+                if (p.targetId == SessionManager.CurrentPlayer.EntityId)
                 {
                     App.Current.Dispatcher.Invoke(() =>
                 {
@@ -294,24 +285,24 @@ namespace TCC.Parsing
                     {
                         if (ab.Infinity)
                         {
-                            if (SessionManager.CurrentPlayerInfBuffs.Any(x => x.Buff == ab))
+                            if (SessionManager.CurrentPlayer.InfBuffs.Any(x => x.Buff == ab))
                             {
                                 BuffUpdated?.Invoke(p.targetId, ab, -1, p.stacks);
                             }
                             else
                             {
-                                SessionManager.CurrentPlayerInfBuffs.Add(new BuffDuration(ab, -1, p.stacks, p.targetId));
+                                SessionManager.CurrentPlayer.InfBuffs.Add(new BuffDuration(ab, -1, p.stacks, p.targetId));
                             }
                         }
                         else
                         {
-                            if (SessionManager.CurrentPlayerBuffs.Any(x => x.Buff == ab))
+                            if (SessionManager.CurrentPlayer.Buffs.Any(x => x.Buff == ab))
                             {
                                 BuffUpdated?.Invoke(p.targetId, ab, p.duration, p.stacks);
                             }
                             else
                             {
-                                SessionManager.CurrentPlayerBuffs.Add(new BuffDuration(ab, p.duration, p.stacks, p.targetId));
+                                SessionManager.CurrentPlayer.Buffs.Add(new BuffDuration(ab, p.duration, p.stacks, p.targetId));
                             }
                         }
                     }
@@ -319,24 +310,24 @@ namespace TCC.Parsing
                     {
                         if (ab.Infinity)
                         {
-                            if (SessionManager.CurrentPlayerDebuffs.Any(x => x.Buff == ab))
+                            if (SessionManager.CurrentPlayer.Debuffs.Any(x => x.Buff == ab))
                             {
                                 BuffUpdated?.Invoke(p.targetId, ab, -1, p.stacks);
                             }
                             else
                             {
-                                SessionManager.CurrentPlayerDebuffs.Insert(0, new BuffDuration(ab, -1, p.stacks, p.targetId));
+                                SessionManager.CurrentPlayer.Debuffs.Insert(0, new BuffDuration(ab, -1, p.stacks, p.targetId));
                             }
                         }
                         else
                         {
-                            if (SessionManager.CurrentPlayerDebuffs.Any(x => x.Buff == ab))
+                            if (SessionManager.CurrentPlayer.Debuffs.Any(x => x.Buff == ab))
                             {
                                 BuffUpdated?.Invoke(p.targetId, ab, p.duration, p.stacks);
                             }
                             else
                             {
-                                SessionManager.CurrentPlayerDebuffs.Add(new BuffDuration(ab, p.duration, p.stacks, p.targetId));
+                                SessionManager.CurrentPlayer.Debuffs.Add(new BuffDuration(ab, p.duration, p.stacks, p.targetId));
                             }
                         }
                     }
@@ -380,33 +371,33 @@ namespace TCC.Parsing
                 if (ab.Name.Contains("(Hidden)") || ab.Name.Equals("Unknown") || ab.Name.Equals(string.Empty)) return;
                 //Console.WriteLine("{1} {0}", ab.Name, ab.Property);
 
-                if (p.TargetId == SessionManager.CurrentCharId)
+                if (p.TargetId == SessionManager.CurrentPlayer.EntityId)
                 {
 
                     App.Current.Dispatcher.Invoke(() =>
                 {
-                    if (ab.IsBuff)
+                    if (ab.Type == AbnormalityType.Buff)
                     {
                         if (ab.Infinity)
                         {
-                            if (SessionManager.CurrentPlayerInfBuffs.Any(x => x.Buff == ab))
+                            if (SessionManager.CurrentPlayer.InfBuffs.Any(x => x.Buff == ab))
                             {
                                 BuffUpdated?.Invoke(p.TargetId, ab, -1, p.Stacks);
                             }
                             else
                             {
-                                SessionManager.CurrentPlayerInfBuffs.Add(new BuffDuration(ab, -1, p.Stacks, p.TargetId));
+                                SessionManager.CurrentPlayer.InfBuffs.Add(new BuffDuration(ab, -1, p.Stacks, p.TargetId));
                             }
                         }
                         else
                         {
-                            if (SessionManager.CurrentPlayerBuffs.Any(x => x.Buff == ab))
+                            if (SessionManager.CurrentPlayer.Buffs.Any(x => x.Buff == ab))
                             {
                                 BuffUpdated?.Invoke(p.TargetId, ab, p.Duration, p.Stacks);
                             }
                             else
                             {
-                                SessionManager.CurrentPlayerBuffs.Add(new BuffDuration(ab, p.Duration, p.Stacks, p.TargetId));
+                                SessionManager.CurrentPlayer.Buffs.Add(new BuffDuration(ab, p.Duration, p.Stacks, p.TargetId));
                             }
                         }
                     }
@@ -414,24 +405,24 @@ namespace TCC.Parsing
                     {
                         if (ab.Infinity)
                         {
-                            if (SessionManager.CurrentPlayerDebuffs.Any(x => x.Buff == ab))
+                            if (SessionManager.CurrentPlayer.Debuffs.Any(x => x.Buff == ab))
                             {
                                 BuffUpdated?.Invoke(p.TargetId, ab, -1, p.Stacks);
                             }
                             else
                             {
-                                SessionManager.CurrentPlayerDebuffs.Insert(0, new BuffDuration(ab, -1, p.Stacks, p.TargetId));
+                                SessionManager.CurrentPlayer.Debuffs.Insert(0, new BuffDuration(ab, -1, p.Stacks, p.TargetId));
                             }
                         }
                         else
                         {
-                            if (SessionManager.CurrentPlayerDebuffs.Any(x => x.Buff == ab))
+                            if (SessionManager.CurrentPlayer.Debuffs.Any(x => x.Buff == ab))
                             {
                                 BuffUpdated?.Invoke(p.TargetId, ab, p.Duration, p.Stacks);
                             }
                             else
                             {
-                                SessionManager.CurrentPlayerDebuffs.Add(new BuffDuration(ab, p.Duration, p.Stacks, p.TargetId));
+                                SessionManager.CurrentPlayer.Debuffs.Add(new BuffDuration(ab, p.Duration, p.Stacks, p.TargetId));
                             }
                         }
                     }
@@ -472,11 +463,11 @@ namespace TCC.Parsing
             {
                 App.Current.Dispatcher.Invoke(() =>
                 {
-                    if(p.target == SessionManager.CurrentCharId)
+                    if(p.target == SessionManager.CurrentPlayer.EntityId)
                     {
-                        SessionManager.CurrentPlayerBuffs.Remove(SessionManager.CurrentPlayerBuffs.FirstOrDefault(x => x.Buff.Id == ab.Id));
-                        SessionManager.CurrentPlayerDebuffs.Remove(SessionManager.CurrentPlayerDebuffs.FirstOrDefault(x => x.Buff.Id == ab.Id));
-                        SessionManager.CurrentPlayerInfBuffs.Remove(SessionManager.CurrentPlayerInfBuffs.FirstOrDefault(x => x.Buff.Id == ab.Id));
+                        SessionManager.CurrentPlayer.Buffs.Remove(SessionManager.CurrentPlayer.Buffs.FirstOrDefault(x => x.Buff.Id == ab.Id));
+                        SessionManager.CurrentPlayer.Debuffs.Remove(SessionManager.CurrentPlayer.Debuffs.FirstOrDefault(x => x.Buff.Id == ab.Id));
+                        SessionManager.CurrentPlayer.InfBuffs.Remove(SessionManager.CurrentPlayer.InfBuffs.FirstOrDefault(x => x.Buff.Id == ab.Id));
 
                         return;
                     }
@@ -490,113 +481,90 @@ namespace TCC.Parsing
         }
         public static void HandlePlayerStatUpdate(S_PLAYER_STAT_UPDATE p)
         {
-            switch (SessionManager.CurrentClass)
+            switch (SessionManager.CurrentPlayer.Class)
             {
                 case Class.Warrior:
                     EdgeGaugeWindow.SetEdge(p.edge);
-                    MaxSTUpdated?.Invoke(p.maxRe + p.bonusRe);
-                    STUpdated?.Invoke(p.currRe);
-                    break;
-                case Class.Lancer:
-                    MaxSTUpdated?.Invoke(p.maxRe + p.bonusRe);
-                    STUpdated?.Invoke(p.currRe);
-                    break;
-                case Class.Engineer:
-                    MaxSTUpdated?.Invoke(p.maxRe + p.bonusRe);
-                    STUpdated?.Invoke(p.currRe);
-                    break;
-                case Class.Fighter:
-                    MaxSTUpdated?.Invoke(p.maxRe + p.bonusRe);
-                    STUpdated?.Invoke(p.currRe);
-                    break;
-                case Class.Assassin:
-                    MaxSTUpdated?.Invoke(p.maxRe + p.bonusRe);
-                    STUpdated?.Invoke(p.currRe);
-                    break;
-                case Class.Valkyrie:
-                    MaxSTUpdated?.Invoke(p.maxRe + p.bonusRe);
-                    STUpdated?.Invoke(p.currRe);
                     break;
                 default:
                     break;
             }
-            MaxHPUpdated?.Invoke(p.maxHp);
-            MaxMPUpdated?.Invoke(p.maxMp);
-            HPUpdated?.Invoke(p.currHp);
-            MPUpdated?.Invoke(p.currMp);
-            IlvlUpdated?.Invoke(p.ilvl);
-            
+
+            SessionManager.CurrentPlayer.MaxHP = p.maxHp;
+            SessionManager.CurrentPlayer.MaxMP = p.maxMp;
+            SessionManager.CurrentPlayer.MaxST = p.maxRe + p.bonusRe;
+            SessionManager.CurrentPlayer.ItemLevel = p.ilvl;
+            SessionManager.CurrentPlayer.CurrentST = p.currRe;
+            SessionManager.CurrentPlayer.CurrentHP = p.currHp;
+            SessionManager.CurrentPlayer.CurrentMP = p.currMp;
+
 
         }
         public static void HandlePlayerChangeMP(S_PLAYER_CHANGE_MP p)
         {
-            if (p.target != SessionManager.CurrentCharId) return;
-            MPUpdated?.Invoke(p.currentMP);
+            if (p.target != SessionManager.CurrentPlayer.EntityId)
+            {
+                return;
+            }
+            else
+            {
+                SessionManager.CurrentPlayer.CurrentMP = p.currentMP;
+
+            }
             
         }
         public static void HandleCreatureChangeHP(S_CREATURE_CHANGE_HP p)
         {
-            //if (SessionManager.CurrentBosses.Where(x => x.EntityId == p.target).Count() > 0)
-            //{
-            //    if (SessionManager.CurrentBosses.Where(x => x.EntityId == p.target).Single().CurrentHP != p.currentHP)
-            //    {
-            //        if (p.currentHP == 0)
-            //        {
-            //            App.Current.Dispatcher.BeginInvoke(new Action(() =>
-            //            {
-            //                SessionManager.CurrentBosses.Remove(SessionManager.CurrentBosses.Where(x => x.EntityId == p.target).Single());
-            //            }));
-            //            return;
-            //        }
-            //        SessionManager.CurrentBosses.Where(x => x.EntityId == p.target).Single().CurrentHP = p.currentHP;
-            //        BossHPChanged?.Invoke(p.target, p.currentHP);
-            //    }
-            //}
-
-            if (p.target != SessionManager.CurrentCharId) return;
+            if (p.target != SessionManager.CurrentPlayer.EntityId)
+            {
+                return;
+            }
+            else
+            {
+                SessionManager.CurrentPlayer.CurrentHP = p.currentHP;
+            }
             
-                HPUpdated.Invoke(p.currentHP);
-            
-
         }
         public static void HandlePlayerChangeStamina(S_PLAYER_CHANGE_STAMINA p)
         {
-            switch (SessionManager.CurrentClass)
-            {
-                case Class.Warrior:
-                    STUpdated.Invoke(p.currentStamina);
-                    break;
-                case Class.Lancer:
-                    STUpdated.Invoke(p.currentStamina);
-                    break;
-                case Class.Engineer:
-                    STUpdated.Invoke(p.currentStamina);
-                    break;
-                case Class.Fighter:
-                    STUpdated.Invoke(p.currentStamina);
-                    break;
-                case Class.Assassin:
-                    STUpdated.Invoke(p.currentStamina);
-                    break;
-                case Class.Valkyrie:
-                    STUpdated.Invoke(p.currentStamina);
-                    break;
-                default:
-                    break;
-            }
+            SessionManager.CurrentPlayer.CurrentST = p.currentStamina;
+
+            //switch (SessionManager.CurrentPlayer.Class)
+            //{
+            //    case Class.Warrior:
+            //        SessionManager.CurrentPlayer.CurrentST = p.currentStamina;
+            //        break;
+            //    case Class.Lancer:
+            //        STUpdated.Invoke(p.currentStamina);
+            //        break;
+            //    case Class.Engineer:
+            //        STUpdated.Invoke(p.currentStamina);
+            //        break;
+            //    case Class.Fighter:
+            //        STUpdated.Invoke(p.currentStamina);
+            //        break;
+            //    case Class.Assassin:
+            //        STUpdated.Invoke(p.currentStamina);
+            //        break;
+            //    case Class.Valkyrie:
+            //        STUpdated.Invoke(p.currentStamina);
+            //        break;
+            //    default:
+            //        break;
+            //}
 
         }
         public static void HandleUserStatusChanged(S_USER_STATUS p)
         {
-            if (p.id == SessionManager.CurrentCharId)
+            if (p.id == SessionManager.CurrentPlayer.EntityId)
             {
                 if (p.isInCombat)
                 {
-                    SessionManager.Combat = true;
+                    SessionManager.CurrentPlayer.IsInCombat = true;
                 }
                 else
                 {
-                    SessionManager.Combat = false;
+                    SessionManager.CurrentPlayer.IsInCombat = false;
                 }
             }
 
@@ -618,7 +586,7 @@ namespace TCC.Parsing
         }
         public static void HandlePlayerChangeFlightEnergy(S_PLAYER_CHANGE_FLIGHT_ENERGY p)
         {
-            FlightEnergyUpdated?.Invoke(p.energy);
+            SessionManager.CurrentPlayer.FlightEnergy = p.energy;
         }
         public static void HandleGageReceived(S_BOSS_GAGE_INFO p)
         {
@@ -675,8 +643,13 @@ namespace TCC.Parsing
                     App.Current.Dispatcher.Invoke(() =>
                     {
                         SessionManager.CurrentBosses.Add(new Boss(p.EntityId, (uint)p.Type, p.Npc, System.Windows.Visibility.Collapsed));
-                    //Console.WriteLine("SPAWNED: {0} - {1}", m.Name, m.MaxHP);
-                });
+                        //Console.WriteLine("SPAWNED: {0} - {1}   [{2}]", m.Name, m.MaxHP, SessionManager.CurrentBosses.Count);
+                    });
+                }
+
+                else
+                {
+                    //Console.WriteLine("SKIPPED: {0} - {1}   [{2}]", m.Name, m.MaxHP, SessionManager.CurrentBosses.Count);
                 }
             }
         }

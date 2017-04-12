@@ -1247,6 +1247,8 @@
   <Icon class="Common" skillId="14100623" iconName="Icon_Equipments.vehicle_Dragon_B_Tex" toolTip="레드 드래곤(레어) 소환 (기간제, 비전투)" gender="Common" race="Common" />
   <Icon class="Common" skillId="14100624" iconName="Icon_Equipments.vehicle_Dragon_C_Tex" toolTip="유령 드래곤(레어) 소환 (기간제, 비전투)" gender="Common" race="Common" />
   <Icon class="Common" skillId="14100625" iconName="Icon_Equipments.vehicle_Dragon_D_Tex" toolTip="다이아몬드 드래곤(레어) 소환 (기간제, 비전투)" gender="Common" race="Common" />
+  <Icon class="Common" skillId="14100626" iconName="Icon_Equipments.Vehicle_SportCar_C_Tex" toolTip="이동수단 스포츠카C(일본5주년)  !" gender="Common" race="Common" />
+  <Icon class="Common" skillId="14100627" iconName="Icon_Equipments.Vehicle_SportCar_C_Tex" toolTip="이동수단 스포츠카C(일본5주년)  !" gender="Common" race="Common" />
   <Icon class="Common" skillId="14300002" iconName="Icon_Items.PetSkillbook_Tex" toolTip="돈줍는 황금도니 소환" gender="Common" race="Common" />
   <Icon class="Common" skillId="14300003" iconName="Icon_Items.PetSkillbook_Tex" toolTip="돈줍는 황금도니 소환" gender="Common" race="Common" />
   <Icon class="Common" skillId="14300004" iconName="Icon_Items.PetSkillbook_Tex" toolTip="돈줍는 황금도니 소환 3일" gender="Common" race="Common" />
@@ -1255,6 +1257,7 @@
   <Icon class="Common" skillId="61905009" iconName="Icon_Items.PetSkillbook_Tex" toolTip="창고지기 포포 소환" gender="Common" race="Common" />
   <Icon class="Common" skillId="61905010" iconName="Icon_Items.PetSkillbook_Tex" toolTip="펫캘사이크 소환" gender="Common" race="Common" />
   <Icon class="Common" skillId="61905011" iconName="Icon_Items.PetSkillbook_Tex" toolTip="펫바실리스크" gender="Common" race="Common" />
+  <Icon class="Common" skillId="61905018" iconName="Icon_Items.PetSkillbook_Tex" toolTip="북미 다혈질 타미 실버 소환(30일_7일)" gender="Common" race="Common" />
   <Icon class="Common" skillId="61906001" iconName="Icon_Items.PetSkillbook_Tex" toolTip="수집꾼 쿠링 소환(30일_7일)" gender="Common" race="Common" />
   <Icon class="Common" skillId="61906003" iconName="Icon_Items.PetSkillbook_Tex" toolTip="다혈질 타미 소환(30일_7일)" gender="Common" race="Common" />
   <Icon class="Common" skillId="61906004" iconName="Icon_Items.PetSkillbook_Tex" toolTip="무쇠머리 범피 소환(30일_7일)" gender="Common" race="Common" />

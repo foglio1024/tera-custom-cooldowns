@@ -24,12 +24,12 @@ namespace TCC.Windows
         {
             InitializeComponent();
 
-            buffs.ItemsSource = SessionManager.CurrentPlayerBuffs;
-            buffs.DataContext = SessionManager.CurrentPlayerBuffs;
-            debuffs.ItemsSource = SessionManager.CurrentPlayerDebuffs;
-            debuffs.DataContext = SessionManager.CurrentPlayerDebuffs;
-            infBuffs.ItemsSource = SessionManager.CurrentPlayerInfBuffs;
-            infBuffs.DataContext = SessionManager.CurrentPlayerInfBuffs;
+            buffs.ItemsSource = SessionManager.CurrentPlayer.Buffs;
+            buffs.DataContext = SessionManager.CurrentPlayer.Buffs;
+            debuffs.ItemsSource = SessionManager.CurrentPlayer.Debuffs;
+            debuffs.DataContext = SessionManager.CurrentPlayer.Debuffs;
+            infBuffs.ItemsSource = SessionManager.CurrentPlayer.InfBuffs;
+            infBuffs.DataContext = SessionManager.CurrentPlayer.InfBuffs;
 
         }
 

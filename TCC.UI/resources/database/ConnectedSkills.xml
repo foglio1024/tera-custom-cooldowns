@@ -1967,6 +1967,1073 @@
   <Skill class="Fighter" id="210100">
     <connectedSkill id="210102" />
   </Skill>
+  <Skill class="Glaiver" id="10199">
+    <connectedSkill id="15100" />
+  </Skill>
+  <Skill class="Glaiver" id="10299">
+    <connectedSkill id="15200" />
+  </Skill>
+  <Skill class="Glaiver" id="10399">
+    <connectedSkill id="15300" />
+  </Skill>
+  <Skill class="Glaiver" id="10499">
+    <connectedSkill id="15400" />
+  </Skill>
+  <Skill class="Glaiver" id="10599">
+    <connectedSkill id="15500" />
+  </Skill>
+  <Skill class="Glaiver" id="10699">
+    <connectedSkill id="15600" />
+  </Skill>
+  <Skill class="Glaiver" id="10799">
+    <connectedSkill id="15700" />
+  </Skill>
+  <Skill class="Glaiver" id="10899">
+    <connectedSkill id="15800" />
+  </Skill>
+  <Skill class="Glaiver" id="10999">
+    <connectedSkill id="15900" />
+  </Skill>
+  <Skill class="Glaiver" id="11099">
+    <connectedSkill id="16000" />
+  </Skill>
+  <Skill class="Glaiver" id="11199">
+    <connectedSkill id="16100" />
+  </Skill>
+  <Skill class="Glaiver" id="11299">
+    <connectedSkill id="16200" />
+  </Skill>
+  <Skill class="Glaiver" id="15100">
+    <connectedSkill id="15101" />
+    <connectedSkill id="15102" />
+    <connectedSkill id="15103" />
+    <connectedSkill id="15130" />
+  </Skill>
+  <Skill class="Glaiver" id="15130">
+    <connectedSkill id="10101" />
+    <connectedSkill id="10102" />
+    <connectedSkill id="10103" />
+    <connectedSkill id="10130" />
+  </Skill>
+  <Skill class="Glaiver" id="15200">
+    <connectedSkill id="15201" />
+    <connectedSkill id="15202" />
+    <connectedSkill id="15203" />
+    <connectedSkill id="15230" />
+  </Skill>
+  <Skill class="Glaiver" id="15230">
+    <connectedSkill id="10201" />
+    <connectedSkill id="10202" />
+    <connectedSkill id="10203" />
+    <connectedSkill id="10230" />
+  </Skill>
+  <Skill class="Glaiver" id="15300">
+    <connectedSkill id="15301" />
+    <connectedSkill id="15302" />
+    <connectedSkill id="15303" />
+    <connectedSkill id="15330" />
+  </Skill>
+  <Skill class="Glaiver" id="15330">
+    <connectedSkill id="10301" />
+    <connectedSkill id="10302" />
+    <connectedSkill id="10303" />
+    <connectedSkill id="10330" />
+  </Skill>
+  <Skill class="Glaiver" id="15400">
+    <connectedSkill id="15401" />
+    <connectedSkill id="15402" />
+    <connectedSkill id="15403" />
+    <connectedSkill id="15430" />
+  </Skill>
+  <Skill class="Glaiver" id="15430">
+    <connectedSkill id="10401" />
+    <connectedSkill id="10402" />
+    <connectedSkill id="10403" />
+    <connectedSkill id="10430" />
+  </Skill>
+  <Skill class="Glaiver" id="15500">
+    <connectedSkill id="15501" />
+    <connectedSkill id="15502" />
+    <connectedSkill id="15503" />
+    <connectedSkill id="15530" />
+  </Skill>
+  <Skill class="Glaiver" id="15530">
+    <connectedSkill id="10501" />
+    <connectedSkill id="10502" />
+    <connectedSkill id="10503" />
+    <connectedSkill id="10530" />
+  </Skill>
+  <Skill class="Glaiver" id="15600">
+    <connectedSkill id="15601" />
+    <connectedSkill id="15602" />
+    <connectedSkill id="15603" />
+    <connectedSkill id="15630" />
+  </Skill>
+  <Skill class="Glaiver" id="15630">
+    <connectedSkill id="10601" />
+    <connectedSkill id="10602" />
+    <connectedSkill id="10603" />
+    <connectedSkill id="10630" />
+  </Skill>
+  <Skill class="Glaiver" id="15700">
+    <connectedSkill id="15701" />
+    <connectedSkill id="15702" />
+    <connectedSkill id="15703" />
+    <connectedSkill id="15730" />
+  </Skill>
+  <Skill class="Glaiver" id="15730">
+    <connectedSkill id="10701" />
+    <connectedSkill id="10702" />
+    <connectedSkill id="10703" />
+    <connectedSkill id="10730" />
+  </Skill>
+  <Skill class="Glaiver" id="15800">
+    <connectedSkill id="15801" />
+    <connectedSkill id="15802" />
+    <connectedSkill id="15803" />
+    <connectedSkill id="15830" />
+  </Skill>
+  <Skill class="Glaiver" id="15830">
+    <connectedSkill id="10801" />
+    <connectedSkill id="10802" />
+    <connectedSkill id="10803" />
+    <connectedSkill id="10830" />
+  </Skill>
+  <Skill class="Glaiver" id="15900">
+    <connectedSkill id="15901" />
+    <connectedSkill id="15902" />
+    <connectedSkill id="15903" />
+    <connectedSkill id="15930" />
+  </Skill>
+  <Skill class="Glaiver" id="15930">
+    <connectedSkill id="10901" />
+    <connectedSkill id="10902" />
+    <connectedSkill id="10903" />
+    <connectedSkill id="10930" />
+  </Skill>
+  <Skill class="Glaiver" id="16000">
+    <connectedSkill id="16001" />
+    <connectedSkill id="16002" />
+    <connectedSkill id="16003" />
+    <connectedSkill id="16030" />
+  </Skill>
+  <Skill class="Glaiver" id="16030">
+    <connectedSkill id="11001" />
+    <connectedSkill id="11002" />
+    <connectedSkill id="11003" />
+    <connectedSkill id="11030" />
+  </Skill>
+  <Skill class="Glaiver" id="16100">
+    <connectedSkill id="16101" />
+    <connectedSkill id="16102" />
+    <connectedSkill id="16103" />
+    <connectedSkill id="16130" />
+  </Skill>
+  <Skill class="Glaiver" id="16130">
+    <connectedSkill id="11101" />
+    <connectedSkill id="11102" />
+    <connectedSkill id="11103" />
+    <connectedSkill id="11130" />
+  </Skill>
+  <Skill class="Glaiver" id="16200">
+    <connectedSkill id="16201" />
+    <connectedSkill id="16202" />
+    <connectedSkill id="16203" />
+    <connectedSkill id="16230" />
+  </Skill>
+  <Skill class="Glaiver" id="16230">
+    <connectedSkill id="11201" />
+    <connectedSkill id="11202" />
+    <connectedSkill id="11203" />
+    <connectedSkill id="11230" />
+  </Skill>
+  <Skill class="Glaiver" id="20130">
+    <connectedSkill id="20130" />
+  </Skill>
+  <Skill class="Glaiver" id="20199">
+    <connectedSkill id="25100" />
+  </Skill>
+  <Skill class="Glaiver" id="20230">
+    <connectedSkill id="20230" />
+  </Skill>
+  <Skill class="Glaiver" id="20299">
+    <connectedSkill id="25200" />
+  </Skill>
+  <Skill class="Glaiver" id="20330">
+    <connectedSkill id="20330" />
+  </Skill>
+  <Skill class="Glaiver" id="20399">
+    <connectedSkill id="25300" />
+  </Skill>
+  <Skill class="Glaiver" id="20430">
+    <connectedSkill id="20430" />
+  </Skill>
+  <Skill class="Glaiver" id="20499">
+    <connectedSkill id="25400" />
+  </Skill>
+  <Skill class="Glaiver" id="20530">
+    <connectedSkill id="20530" />
+  </Skill>
+  <Skill class="Glaiver" id="20599">
+    <connectedSkill id="25500" />
+  </Skill>
+  <Skill class="Glaiver" id="20630">
+    <connectedSkill id="20630" />
+  </Skill>
+  <Skill class="Glaiver" id="20699">
+    <connectedSkill id="25600" />
+  </Skill>
+  <Skill class="Glaiver" id="20730">
+    <connectedSkill id="20730" />
+  </Skill>
+  <Skill class="Glaiver" id="20799">
+    <connectedSkill id="25700" />
+  </Skill>
+  <Skill class="Glaiver" id="25100">
+    <connectedSkill id="25130" />
+  </Skill>
+  <Skill class="Glaiver" id="25130">
+    <connectedSkill id="20130" />
+  </Skill>
+  <Skill class="Glaiver" id="25200">
+    <connectedSkill id="25230" />
+  </Skill>
+  <Skill class="Glaiver" id="25230">
+    <connectedSkill id="20230" />
+  </Skill>
+  <Skill class="Glaiver" id="25300">
+    <connectedSkill id="25330" />
+  </Skill>
+  <Skill class="Glaiver" id="25330">
+    <connectedSkill id="20330" />
+  </Skill>
+  <Skill class="Glaiver" id="25400">
+    <connectedSkill id="25430" />
+  </Skill>
+  <Skill class="Glaiver" id="25430">
+    <connectedSkill id="20430" />
+  </Skill>
+  <Skill class="Glaiver" id="25500">
+    <connectedSkill id="25530" />
+  </Skill>
+  <Skill class="Glaiver" id="25530">
+    <connectedSkill id="20530" />
+  </Skill>
+  <Skill class="Glaiver" id="25600">
+    <connectedSkill id="25630" />
+  </Skill>
+  <Skill class="Glaiver" id="25630">
+    <connectedSkill id="20630" />
+  </Skill>
+  <Skill class="Glaiver" id="25700">
+    <connectedSkill id="25730" />
+  </Skill>
+  <Skill class="Glaiver" id="25730">
+    <connectedSkill id="20730" />
+  </Skill>
+  <Skill class="Glaiver" id="30199">
+    <connectedSkill id="35100" />
+  </Skill>
+  <Skill class="Glaiver" id="30299">
+    <connectedSkill id="35200" />
+  </Skill>
+  <Skill class="Glaiver" id="30399">
+    <connectedSkill id="35300" />
+  </Skill>
+  <Skill class="Glaiver" id="30499">
+    <connectedSkill id="35400" />
+  </Skill>
+  <Skill class="Glaiver" id="30599">
+    <connectedSkill id="35500" />
+  </Skill>
+  <Skill class="Glaiver" id="30699">
+    <connectedSkill id="35600" />
+  </Skill>
+  <Skill class="Glaiver" id="30799">
+    <connectedSkill id="35700" />
+  </Skill>
+  <Skill class="Glaiver" id="30899">
+    <connectedSkill id="35800" />
+  </Skill>
+  <Skill class="Glaiver" id="30999">
+    <connectedSkill id="35900" />
+  </Skill>
+  <Skill class="Glaiver" id="35100">
+    <connectedSkill id="35130" />
+  </Skill>
+  <Skill class="Glaiver" id="35200">
+    <connectedSkill id="35230" />
+  </Skill>
+  <Skill class="Glaiver" id="35300">
+    <connectedSkill id="35330" />
+  </Skill>
+  <Skill class="Glaiver" id="35400">
+    <connectedSkill id="35430" />
+  </Skill>
+  <Skill class="Glaiver" id="35500">
+    <connectedSkill id="35530" />
+  </Skill>
+  <Skill class="Glaiver" id="35600">
+    <connectedSkill id="35630" />
+  </Skill>
+  <Skill class="Glaiver" id="35700">
+    <connectedSkill id="35730" />
+  </Skill>
+  <Skill class="Glaiver" id="35800">
+    <connectedSkill id="35830" />
+  </Skill>
+  <Skill class="Glaiver" id="35900">
+    <connectedSkill id="35930" />
+  </Skill>
+  <Skill class="Glaiver" id="40199">
+    <connectedSkill id="45100" />
+  </Skill>
+  <Skill class="Glaiver" id="40299">
+    <connectedSkill id="45200" />
+  </Skill>
+  <Skill class="Glaiver" id="40399">
+    <connectedSkill id="45300" />
+  </Skill>
+  <Skill class="Glaiver" id="40499">
+    <connectedSkill id="45400" />
+  </Skill>
+  <Skill class="Glaiver" id="40599">
+    <connectedSkill id="45500" />
+  </Skill>
+  <Skill class="Glaiver" id="40699">
+    <connectedSkill id="45600" />
+  </Skill>
+  <Skill class="Glaiver" id="40799">
+    <connectedSkill id="45700" />
+  </Skill>
+  <Skill class="Glaiver" id="40899">
+    <connectedSkill id="45800" />
+  </Skill>
+  <Skill class="Glaiver" id="40999">
+    <connectedSkill id="45900" />
+  </Skill>
+  <Skill class="Glaiver" id="41099">
+    <connectedSkill id="46000" />
+  </Skill>
+  <Skill class="Glaiver" id="50199">
+    <connectedSkill id="55100" />
+  </Skill>
+  <Skill class="Glaiver" id="50299">
+    <connectedSkill id="55200" />
+  </Skill>
+  <Skill class="Glaiver" id="50399">
+    <connectedSkill id="55300" />
+  </Skill>
+  <Skill class="Glaiver" id="50499">
+    <connectedSkill id="55400" />
+  </Skill>
+  <Skill class="Glaiver" id="50599">
+    <connectedSkill id="55500" />
+  </Skill>
+  <Skill class="Glaiver" id="55100">
+    <connectedSkill id="55130" />
+  </Skill>
+  <Skill class="Glaiver" id="55200">
+    <connectedSkill id="55230" />
+  </Skill>
+  <Skill class="Glaiver" id="55300">
+    <connectedSkill id="55330" />
+  </Skill>
+  <Skill class="Glaiver" id="55400">
+    <connectedSkill id="55430" />
+  </Skill>
+  <Skill class="Glaiver" id="55500">
+    <connectedSkill id="55530" />
+  </Skill>
+  <Skill class="Glaiver" id="60199">
+    <connectedSkill id="65100" />
+  </Skill>
+  <Skill class="Glaiver" id="60299">
+    <connectedSkill id="65200" />
+  </Skill>
+  <Skill class="Glaiver" id="60399">
+    <connectedSkill id="65300" />
+  </Skill>
+  <Skill class="Glaiver" id="60499">
+    <connectedSkill id="65400" />
+  </Skill>
+  <Skill class="Glaiver" id="60599">
+    <connectedSkill id="65500" />
+  </Skill>
+  <Skill class="Glaiver" id="60699">
+    <connectedSkill id="65600" />
+  </Skill>
+  <Skill class="Glaiver" id="60799">
+    <connectedSkill id="65700" />
+  </Skill>
+  <Skill class="Glaiver" id="60899">
+    <connectedSkill id="65800" />
+  </Skill>
+  <Skill class="Glaiver" id="60999">
+    <connectedSkill id="65900" />
+  </Skill>
+  <Skill class="Glaiver" id="61099">
+    <connectedSkill id="66000" />
+  </Skill>
+  <Skill class="Glaiver" id="61199">
+    <connectedSkill id="66100" />
+  </Skill>
+  <Skill class="Glaiver" id="61200">
+    <connectedSkill id="61230" />
+  </Skill>
+  <Skill class="Glaiver" id="61299">
+    <connectedSkill id="66200" />
+  </Skill>
+  <Skill class="Glaiver" id="65100">
+    <connectedSkill id="65130" />
+  </Skill>
+  <Skill class="Glaiver" id="65200">
+    <connectedSkill id="65230" />
+  </Skill>
+  <Skill class="Glaiver" id="65300">
+    <connectedSkill id="65330" />
+  </Skill>
+  <Skill class="Glaiver" id="65400">
+    <connectedSkill id="65430" />
+  </Skill>
+  <Skill class="Glaiver" id="65500">
+    <connectedSkill id="65530" />
+  </Skill>
+  <Skill class="Glaiver" id="65600">
+    <connectedSkill id="65630" />
+  </Skill>
+  <Skill class="Glaiver" id="65700">
+    <connectedSkill id="65730" />
+  </Skill>
+  <Skill class="Glaiver" id="65800">
+    <connectedSkill id="65830" />
+  </Skill>
+  <Skill class="Glaiver" id="65900">
+    <connectedSkill id="65930" />
+  </Skill>
+  <Skill class="Glaiver" id="66000">
+    <connectedSkill id="66030" />
+  </Skill>
+  <Skill class="Glaiver" id="66100">
+    <connectedSkill id="66130" />
+  </Skill>
+  <Skill class="Glaiver" id="66200">
+    <connectedSkill id="66230" />
+  </Skill>
+  <Skill class="Glaiver" id="70199">
+    <connectedSkill id="75100" />
+  </Skill>
+  <Skill class="Glaiver" id="70299">
+    <connectedSkill id="75200" />
+  </Skill>
+  <Skill class="Glaiver" id="70399">
+    <connectedSkill id="75300" />
+  </Skill>
+  <Skill class="Glaiver" id="70499">
+    <connectedSkill id="75400" />
+  </Skill>
+  <Skill class="Glaiver" id="70599">
+    <connectedSkill id="75500" />
+  </Skill>
+  <Skill class="Glaiver" id="70699">
+    <connectedSkill id="75600" />
+  </Skill>
+  <Skill class="Glaiver" id="70799">
+    <connectedSkill id="75700" />
+  </Skill>
+  <Skill class="Glaiver" id="70899">
+    <connectedSkill id="75800" />
+  </Skill>
+  <Skill class="Glaiver" id="70999">
+    <connectedSkill id="75900" />
+  </Skill>
+  <Skill class="Glaiver" id="75100">
+    <connectedSkill id="75102" />
+    <connectedSkill id="75101" />
+    <connectedSkill id="75130" />
+  </Skill>
+  <Skill class="Glaiver" id="75200">
+    <connectedSkill id="75202" />
+    <connectedSkill id="75201" />
+    <connectedSkill id="75230" />
+  </Skill>
+  <Skill class="Glaiver" id="75300">
+    <connectedSkill id="75302" />
+    <connectedSkill id="75301" />
+    <connectedSkill id="75330" />
+  </Skill>
+  <Skill class="Glaiver" id="75400">
+    <connectedSkill id="75402" />
+    <connectedSkill id="75401" />
+    <connectedSkill id="75430" />
+  </Skill>
+  <Skill class="Glaiver" id="75500">
+    <connectedSkill id="75502" />
+    <connectedSkill id="75501" />
+    <connectedSkill id="75530" />
+  </Skill>
+  <Skill class="Glaiver" id="75600">
+    <connectedSkill id="75602" />
+    <connectedSkill id="75601" />
+    <connectedSkill id="75630" />
+  </Skill>
+  <Skill class="Glaiver" id="75700">
+    <connectedSkill id="75702" />
+    <connectedSkill id="75701" />
+    <connectedSkill id="75730" />
+  </Skill>
+  <Skill class="Glaiver" id="75800">
+    <connectedSkill id="75802" />
+    <connectedSkill id="75801" />
+    <connectedSkill id="75830" />
+  </Skill>
+  <Skill class="Glaiver" id="75900">
+    <connectedSkill id="75902" />
+    <connectedSkill id="75901" />
+    <connectedSkill id="75930" />
+  </Skill>
+  <Skill class="Glaiver" id="80199">
+    <connectedSkill id="85100" />
+  </Skill>
+  <Skill class="Glaiver" id="85100">
+    <connectedSkill id="85101" />
+    <connectedSkill id="85130" />
+  </Skill>
+  <Skill class="Glaiver" id="90199">
+    <connectedSkill id="95100" />
+  </Skill>
+  <Skill class="Glaiver" id="90299">
+    <connectedSkill id="95200" />
+  </Skill>
+  <Skill class="Glaiver" id="90399">
+    <connectedSkill id="95300" />
+  </Skill>
+  <Skill class="Glaiver" id="90499">
+    <connectedSkill id="95400" />
+  </Skill>
+  <Skill class="Glaiver" id="90599">
+    <connectedSkill id="95500" />
+  </Skill>
+  <Skill class="Glaiver" id="90699">
+    <connectedSkill id="95600" />
+  </Skill>
+  <Skill class="Glaiver" id="90799">
+    <connectedSkill id="95700" />
+  </Skill>
+  <Skill class="Glaiver" id="90899">
+    <connectedSkill id="95800" />
+  </Skill>
+  <Skill class="Glaiver" id="90999">
+    <connectedSkill id="95900" />
+  </Skill>
+  <Skill class="Glaiver" id="91099">
+    <connectedSkill id="96000" />
+  </Skill>
+  <Skill class="Glaiver" id="91199">
+    <connectedSkill id="96100" />
+  </Skill>
+  <Skill class="Glaiver" id="95100">
+    <connectedSkill id="95130" />
+  </Skill>
+  <Skill class="Glaiver" id="95200">
+    <connectedSkill id="95230" />
+  </Skill>
+  <Skill class="Glaiver" id="95300">
+    <connectedSkill id="95330" />
+  </Skill>
+  <Skill class="Glaiver" id="95400">
+    <connectedSkill id="95430" />
+  </Skill>
+  <Skill class="Glaiver" id="95500">
+    <connectedSkill id="95530" />
+  </Skill>
+  <Skill class="Glaiver" id="95600">
+    <connectedSkill id="95630" />
+  </Skill>
+  <Skill class="Glaiver" id="95700">
+    <connectedSkill id="95730" />
+  </Skill>
+  <Skill class="Glaiver" id="95800">
+    <connectedSkill id="95830" />
+  </Skill>
+  <Skill class="Glaiver" id="95900">
+    <connectedSkill id="95930" />
+  </Skill>
+  <Skill class="Glaiver" id="96000">
+    <connectedSkill id="96030" />
+  </Skill>
+  <Skill class="Glaiver" id="96100">
+    <connectedSkill id="96130" />
+  </Skill>
+  <Skill class="Glaiver" id="100199">
+    <connectedSkill id="105100" />
+  </Skill>
+  <Skill class="Glaiver" id="100299">
+    <connectedSkill id="105200" />
+  </Skill>
+  <Skill class="Glaiver" id="100399">
+    <connectedSkill id="105300" />
+  </Skill>
+  <Skill class="Glaiver" id="100499">
+    <connectedSkill id="105400" />
+  </Skill>
+  <Skill class="Glaiver" id="100599">
+    <connectedSkill id="105500" />
+  </Skill>
+  <Skill class="Glaiver" id="100699">
+    <connectedSkill id="105600" />
+  </Skill>
+  <Skill class="Glaiver" id="100799">
+    <connectedSkill id="105700" />
+  </Skill>
+  <Skill class="Glaiver" id="100899">
+    <connectedSkill id="105800" />
+  </Skill>
+  <Skill class="Glaiver" id="100999">
+    <connectedSkill id="105900" />
+  </Skill>
+  <Skill class="Glaiver" id="101099">
+    <connectedSkill id="106000" />
+  </Skill>
+  <Skill class="Glaiver" id="101199">
+    <connectedSkill id="106100" />
+  </Skill>
+  <Skill class="Glaiver" id="105100">
+    <connectedSkill id="105130" />
+  </Skill>
+  <Skill class="Glaiver" id="105200">
+    <connectedSkill id="105230" />
+  </Skill>
+  <Skill class="Glaiver" id="105300">
+    <connectedSkill id="105330" />
+  </Skill>
+  <Skill class="Glaiver" id="105400">
+    <connectedSkill id="105430" />
+  </Skill>
+  <Skill class="Glaiver" id="105500">
+    <connectedSkill id="105530" />
+  </Skill>
+  <Skill class="Glaiver" id="105600">
+    <connectedSkill id="105630" />
+  </Skill>
+  <Skill class="Glaiver" id="105700">
+    <connectedSkill id="105730" />
+  </Skill>
+  <Skill class="Glaiver" id="105800">
+    <connectedSkill id="105830" />
+  </Skill>
+  <Skill class="Glaiver" id="105900">
+    <connectedSkill id="105930" />
+  </Skill>
+  <Skill class="Glaiver" id="106000">
+    <connectedSkill id="106030" />
+  </Skill>
+  <Skill class="Glaiver" id="106100">
+    <connectedSkill id="106130" />
+  </Skill>
+  <Skill class="Glaiver" id="110130">
+    <connectedSkill id="110101" />
+    <connectedSkill id="110130" />
+  </Skill>
+  <Skill class="Glaiver" id="110131">
+    <connectedSkill id="110131" />
+  </Skill>
+  <Skill class="Glaiver" id="110199">
+    <connectedSkill id="110101" />
+    <connectedSkill id="115101" />
+    <connectedSkill id="115100" />
+  </Skill>
+  <Skill class="Glaiver" id="110230">
+    <connectedSkill id="110201" />
+    <connectedSkill id="110230" />
+  </Skill>
+  <Skill class="Glaiver" id="110231">
+    <connectedSkill id="110231" />
+  </Skill>
+  <Skill class="Glaiver" id="110299">
+    <connectedSkill id="110201" />
+    <connectedSkill id="115201" />
+    <connectedSkill id="115200" />
+  </Skill>
+  <Skill class="Glaiver" id="110330">
+    <connectedSkill id="110301" />
+    <connectedSkill id="110330" />
+  </Skill>
+  <Skill class="Glaiver" id="110331">
+    <connectedSkill id="110331" />
+  </Skill>
+  <Skill class="Glaiver" id="110399">
+    <connectedSkill id="110301" />
+    <connectedSkill id="115301" />
+    <connectedSkill id="115300" />
+  </Skill>
+  <Skill class="Glaiver" id="110430">
+    <connectedSkill id="110401" />
+    <connectedSkill id="110430" />
+  </Skill>
+  <Skill class="Glaiver" id="110431">
+    <connectedSkill id="110431" />
+  </Skill>
+  <Skill class="Glaiver" id="110499">
+    <connectedSkill id="110401" />
+    <connectedSkill id="115401" />
+    <connectedSkill id="115400" />
+  </Skill>
+  <Skill class="Glaiver" id="115100">
+    <connectedSkill id="115130" />
+  </Skill>
+  <Skill class="Glaiver" id="115101">
+    <connectedSkill id="115131" />
+  </Skill>
+  <Skill class="Glaiver" id="115130">
+    <connectedSkill id="110101" />
+    <connectedSkill id="110130" />
+  </Skill>
+  <Skill class="Glaiver" id="115131">
+    <connectedSkill id="115131" />
+  </Skill>
+  <Skill class="Glaiver" id="115200">
+    <connectedSkill id="115230" />
+  </Skill>
+  <Skill class="Glaiver" id="115201">
+    <connectedSkill id="115231" />
+  </Skill>
+  <Skill class="Glaiver" id="115230">
+    <connectedSkill id="110201" />
+    <connectedSkill id="110230" />
+  </Skill>
+  <Skill class="Glaiver" id="115231">
+    <connectedSkill id="115231" />
+  </Skill>
+  <Skill class="Glaiver" id="115300">
+    <connectedSkill id="115330" />
+  </Skill>
+  <Skill class="Glaiver" id="115301">
+    <connectedSkill id="115331" />
+  </Skill>
+  <Skill class="Glaiver" id="115330">
+    <connectedSkill id="110301" />
+    <connectedSkill id="110330" />
+  </Skill>
+  <Skill class="Glaiver" id="115331">
+    <connectedSkill id="115331" />
+  </Skill>
+  <Skill class="Glaiver" id="115400">
+    <connectedSkill id="115430" />
+  </Skill>
+  <Skill class="Glaiver" id="115401">
+    <connectedSkill id="115431" />
+  </Skill>
+  <Skill class="Glaiver" id="115430">
+    <connectedSkill id="110401" />
+    <connectedSkill id="110430" />
+  </Skill>
+  <Skill class="Glaiver" id="115431">
+    <connectedSkill id="115431" />
+  </Skill>
+  <Skill class="Glaiver" id="120199">
+    <connectedSkill id="120100" />
+  </Skill>
+  <Skill class="Glaiver" id="130199">
+    <connectedSkill id="135100" />
+  </Skill>
+  <Skill class="Glaiver" id="130299">
+    <connectedSkill id="135200" />
+  </Skill>
+  <Skill class="Glaiver" id="130399">
+    <connectedSkill id="135300" />
+  </Skill>
+  <Skill class="Glaiver" id="130499">
+    <connectedSkill id="135400" />
+  </Skill>
+  <Skill class="Glaiver" id="130599">
+    <connectedSkill id="135500" />
+  </Skill>
+  <Skill class="Glaiver" id="130699">
+    <connectedSkill id="135600" />
+  </Skill>
+  <Skill class="Glaiver" id="130799">
+    <connectedSkill id="135700" />
+  </Skill>
+  <Skill class="Glaiver" id="130899">
+    <connectedSkill id="135800" />
+  </Skill>
+  <Skill class="Glaiver" id="130999">
+    <connectedSkill id="135900" />
+  </Skill>
+  <Skill class="Glaiver" id="131099">
+    <connectedSkill id="136000" />
+  </Skill>
+  <Skill class="Glaiver" id="131100">
+    <connectedSkill id="131130" />
+  </Skill>
+  <Skill class="Glaiver" id="131199">
+    <connectedSkill id="136100" />
+  </Skill>
+  <Skill class="Glaiver" id="135100">
+    <connectedSkill id="135130" />
+  </Skill>
+  <Skill class="Glaiver" id="135200">
+    <connectedSkill id="135230" />
+  </Skill>
+  <Skill class="Glaiver" id="135300">
+    <connectedSkill id="135330" />
+  </Skill>
+  <Skill class="Glaiver" id="135400">
+    <connectedSkill id="135430" />
+  </Skill>
+  <Skill class="Glaiver" id="135500">
+    <connectedSkill id="135530" />
+  </Skill>
+  <Skill class="Glaiver" id="135600">
+    <connectedSkill id="135630" />
+  </Skill>
+  <Skill class="Glaiver" id="135700">
+    <connectedSkill id="135730" />
+  </Skill>
+  <Skill class="Glaiver" id="135800">
+    <connectedSkill id="135830" />
+  </Skill>
+  <Skill class="Glaiver" id="135900">
+    <connectedSkill id="135930" />
+  </Skill>
+  <Skill class="Glaiver" id="136000">
+    <connectedSkill id="136030" />
+  </Skill>
+  <Skill class="Glaiver" id="136100">
+    <connectedSkill id="136130" />
+  </Skill>
+  <Skill class="Glaiver" id="140199">
+    <connectedSkill id="140101" />
+  </Skill>
+  <Skill class="Glaiver" id="150199">
+    <connectedSkill id="155100" />
+  </Skill>
+  <Skill class="Glaiver" id="150299">
+    <connectedSkill id="155200" />
+  </Skill>
+  <Skill class="Glaiver" id="150399">
+    <connectedSkill id="155300" />
+  </Skill>
+  <Skill class="Glaiver" id="150499">
+    <connectedSkill id="155400" />
+  </Skill>
+  <Skill class="Glaiver" id="150599">
+    <connectedSkill id="155500" />
+  </Skill>
+  <Skill class="Glaiver" id="150699">
+    <connectedSkill id="155600" />
+  </Skill>
+  <Skill class="Glaiver" id="150799">
+    <connectedSkill id="155700" />
+  </Skill>
+  <Skill class="Glaiver" id="150899">
+    <connectedSkill id="155800" />
+  </Skill>
+  <Skill class="Glaiver" id="150999">
+    <connectedSkill id="155900" />
+  </Skill>
+  <Skill class="Glaiver" id="151099">
+    <connectedSkill id="156000" />
+  </Skill>
+  <Skill class="Glaiver" id="151100">
+    <connectedSkill id="151130" />
+  </Skill>
+  <Skill class="Glaiver" id="151199">
+    <connectedSkill id="156100" />
+  </Skill>
+  <Skill class="Glaiver" id="155100">
+    <connectedSkill id="155130" />
+  </Skill>
+  <Skill class="Glaiver" id="155200">
+    <connectedSkill id="155230" />
+  </Skill>
+  <Skill class="Glaiver" id="155300">
+    <connectedSkill id="155330" />
+  </Skill>
+  <Skill class="Glaiver" id="155400">
+    <connectedSkill id="155430" />
+  </Skill>
+  <Skill class="Glaiver" id="155500">
+    <connectedSkill id="155530" />
+  </Skill>
+  <Skill class="Glaiver" id="155600">
+    <connectedSkill id="155630" />
+  </Skill>
+  <Skill class="Glaiver" id="155700">
+    <connectedSkill id="155730" />
+  </Skill>
+  <Skill class="Glaiver" id="155800">
+    <connectedSkill id="155830" />
+  </Skill>
+  <Skill class="Glaiver" id="155900">
+    <connectedSkill id="155930" />
+  </Skill>
+  <Skill class="Glaiver" id="156000">
+    <connectedSkill id="156030" />
+  </Skill>
+  <Skill class="Glaiver" id="156100">
+    <connectedSkill id="156130" />
+  </Skill>
+  <Skill class="Glaiver" id="160199">
+    <connectedSkill id="165100" />
+  </Skill>
+  <Skill class="Glaiver" id="160299">
+    <connectedSkill id="165200" />
+  </Skill>
+  <Skill class="Glaiver" id="160399">
+    <connectedSkill id="165300" />
+  </Skill>
+  <Skill class="Glaiver" id="160499">
+    <connectedSkill id="165400" />
+  </Skill>
+  <Skill class="Glaiver" id="160599">
+    <connectedSkill id="165500" />
+  </Skill>
+  <Skill class="Glaiver" id="160600">
+    <connectedSkill id="160630" />
+  </Skill>
+  <Skill class="Glaiver" id="160699">
+    <connectedSkill id="165600" />
+  </Skill>
+  <Skill class="Glaiver" id="160700">
+    <connectedSkill id="160730" />
+  </Skill>
+  <Skill class="Glaiver" id="160799">
+    <connectedSkill id="165700" />
+  </Skill>
+  <Skill class="Glaiver" id="160800">
+    <connectedSkill id="160830" />
+  </Skill>
+  <Skill class="Glaiver" id="160899">
+    <connectedSkill id="165800" />
+  </Skill>
+  <Skill class="Glaiver" id="160900">
+    <connectedSkill id="160930" />
+  </Skill>
+  <Skill class="Glaiver" id="160999">
+    <connectedSkill id="165900" />
+  </Skill>
+  <Skill class="Glaiver" id="161000">
+    <connectedSkill id="161030" />
+  </Skill>
+  <Skill class="Glaiver" id="161099">
+    <connectedSkill id="166000" />
+  </Skill>
+  <Skill class="Glaiver" id="161100">
+    <connectedSkill id="161130" />
+  </Skill>
+  <Skill class="Glaiver" id="161199">
+    <connectedSkill id="166100" />
+  </Skill>
+  <Skill class="Glaiver" id="161200">
+    <connectedSkill id="161230" />
+  </Skill>
+  <Skill class="Glaiver" id="161299">
+    <connectedSkill id="166200" />
+  </Skill>
+  <Skill class="Glaiver" id="165100">
+    <connectedSkill id="165130" />
+  </Skill>
+  <Skill class="Glaiver" id="165200">
+    <connectedSkill id="165230" />
+  </Skill>
+  <Skill class="Glaiver" id="165300">
+    <connectedSkill id="165330" />
+  </Skill>
+  <Skill class="Glaiver" id="165400">
+    <connectedSkill id="165430" />
+  </Skill>
+  <Skill class="Glaiver" id="165500">
+    <connectedSkill id="165530" />
+  </Skill>
+  <Skill class="Glaiver" id="165600">
+    <connectedSkill id="165630" />
+  </Skill>
+  <Skill class="Glaiver" id="165700">
+    <connectedSkill id="165730" />
+  </Skill>
+  <Skill class="Glaiver" id="165800">
+    <connectedSkill id="165830" />
+  </Skill>
+  <Skill class="Glaiver" id="165900">
+    <connectedSkill id="165930" />
+  </Skill>
+  <Skill class="Glaiver" id="166000">
+    <connectedSkill id="166030" />
+  </Skill>
+  <Skill class="Glaiver" id="166100">
+    <connectedSkill id="166130" />
+  </Skill>
+  <Skill class="Glaiver" id="166200">
+    <connectedSkill id="166230" />
+  </Skill>
+  <Skill class="Glaiver" id="170199">
+    <connectedSkill id="170100" />
+  </Skill>
+  <Skill class="Glaiver" id="180199">
+    <connectedSkill id="185100" />
+  </Skill>
+  <Skill class="Glaiver" id="180299">
+    <connectedSkill id="185200" />
+  </Skill>
+  <Skill class="Glaiver" id="180399">
+    <connectedSkill id="185300" />
+  </Skill>
+  <Skill class="Glaiver" id="180499">
+    <connectedSkill id="185400" />
+  </Skill>
+  <Skill class="Glaiver" id="180599">
+    <connectedSkill id="185500" />
+  </Skill>
+  <Skill class="Glaiver" id="180699">
+    <connectedSkill id="185600" />
+  </Skill>
+  <Skill class="Glaiver" id="180799">
+    <connectedSkill id="185700" />
+  </Skill>
+  <Skill class="Glaiver" id="180899">
+    <connectedSkill id="185800" />
+  </Skill>
+  <Skill class="Glaiver" id="180999">
+    <connectedSkill id="185900" />
+  </Skill>
+  <Skill class="Glaiver" id="181099">
+    <connectedSkill id="186000" />
+  </Skill>
+  <Skill class="Glaiver" id="190130">
+    <connectedSkill id="190130" />
+  </Skill>
+  <Skill class="Glaiver" id="190199">
+    <connectedSkill id="190100" />
+  </Skill>
+  <Skill class="Glaiver" id="200199">
+    <connectedSkill id="205100" />
+  </Skill>
+  <Skill class="Glaiver" id="200299">
+    <connectedSkill id="205200" />
+  </Skill>
+  <Skill class="Glaiver" id="200399">
+    <connectedSkill id="205300" />
+  </Skill>
+  <Skill class="Glaiver" id="200499">
+    <connectedSkill id="205400" />
+  </Skill>
+  <Skill class="Glaiver" id="200599">
+    <connectedSkill id="205500" />
+  </Skill>
+  <Skill class="Glaiver" id="200699">
+    <connectedSkill id="205600" />
+  </Skill>
+  <Skill class="Glaiver" id="200799">
+    <connectedSkill id="205700" />
+  </Skill>
+  <Skill class="Glaiver" id="200899">
+    <connectedSkill id="205800" />
+  </Skill>
+  <Skill class="Glaiver" id="210199">
+    <connectedSkill id="215100" />
+  </Skill>
   <Skill class="Lancer" id="31200">
     <connectedSkill id="31230" />
   </Skill>
@@ -1978,9 +3045,6 @@
   </Skill>
   <Skill class="Lancer" id="31500">
     <connectedSkill id="31530" />
-  </Skill>
-  <Skill class="Lancer" id="131100">
-    <connectedSkill id="131130" />
   </Skill>
   <Skill class="Lancer" id="131200">
     <connectedSkill id="131030" />

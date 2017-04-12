@@ -524,16 +524,16 @@
   <Icon abnormalityId="88410208" iconName="icon_ep.ep_defense_well_tex" />
   <Icon abnormalityId="88410209" iconName="icon_ep.ep_defense_well_tex" />
   <Icon abnormalityId="88410210" iconName="icon_ep.ep_defense_well_tex" />
-  <Icon abnormalityId="88418101" iconName="icon_ep.ep_resources_mpmore_tex" />
-  <Icon abnormalityId="88418102" iconName="icon_ep.ep_resources_mpmore_tex" />
-  <Icon abnormalityId="88418103" iconName="icon_ep.ep_resources_mpmore_tex" />
-  <Icon abnormalityId="88418104" iconName="icon_ep.ep_resources_mpmore_tex" />
-  <Icon abnormalityId="88418105" iconName="icon_ep.ep_resources_mpmore_tex" />
-  <Icon abnormalityId="88418106" iconName="icon_ep.ep_resources_mpmore_tex" />
-  <Icon abnormalityId="88418107" iconName="icon_ep.ep_resources_mpmore_tex" />
-  <Icon abnormalityId="88418108" iconName="icon_ep.ep_resources_mpmore_tex" />
-  <Icon abnormalityId="88418109" iconName="icon_ep.ep_resources_mpmore_tex" />
-  <Icon abnormalityId="88418110" iconName="icon_ep.ep_resources_mpmore_tex" />
+  <Icon abnormalityId="88410301" iconName="icon_ep.ep_transfer_speed_tex" />
+  <Icon abnormalityId="88410302" iconName="icon_ep.ep_transfer_speed_tex" />
+  <Icon abnormalityId="88410303" iconName="icon_ep.ep_transfer_speed_tex" />
+  <Icon abnormalityId="88410304" iconName="icon_ep.ep_transfer_speed_tex" />
+  <Icon abnormalityId="88410305" iconName="icon_ep.ep_transfer_speed_tex" />
+  <Icon abnormalityId="88410306" iconName="icon_ep.ep_transfer_speed_tex" />
+  <Icon abnormalityId="88410307" iconName="icon_ep.ep_transfer_speed_tex" />
+  <Icon abnormalityId="88410308" iconName="icon_ep.ep_transfer_speed_tex" />
+  <Icon abnormalityId="88410309" iconName="icon_ep.ep_transfer_speed_tex" />
+  <Icon abnormalityId="88410310" iconName="icon_ep.ep_transfer_speed_tex" />
   <Icon abnormalityId="88424200" iconName="icon_ep.ep_cooltime_restart_tex" />
   <Icon abnormalityId="88426101" iconName="icon_ep.ep_attack_speed_tex" />
   <Icon abnormalityId="88426102" iconName="icon_ep.ep_attack_speed_tex" />
@@ -1055,4 +1055,24 @@
   <Icon abnormalityId="89314219" iconName="icon_ep.ep_attack_strong_tex" />
   <Icon abnormalityId="89314220" iconName="icon_ep.ep_attack_strong_tex" />
   <Icon abnormalityId="89317000" iconName="icon_ep.ep_resources_st_tex" />
+  <Icon abnormalityId="89404100" iconName="icon_ep.ep_cooltime_restart_tex" />
+  <Icon abnormalityId="89407101" iconName="icon_ep.ep_fatal_hitfinish_tex" />
+  <Icon abnormalityId="89407102" iconName="icon_ep.ep_fatal_hitfinish_tex" />
+  <Icon abnormalityId="89407103" iconName="icon_ep.ep_fatal_hitfinish_tex" />
+  <Icon abnormalityId="89407111" iconName="icon_ep.ep_fatal_hitfinish_tex" />
+  <Icon abnormalityId="89407112" iconName="icon_ep.ep_fatal_hitfinish_tex" />
+  <Icon abnormalityId="89407113" iconName="icon_ep.ep_fatal_hitfinish_tex" />
+  <Icon abnormalityId="89407114" iconName="icon_ep.ep_fatal_hitfinish_tex" />
+  <Icon abnormalityId="89407115" iconName="icon_ep.ep_fatal_hitfinish_tex" />
+  <Icon abnormalityId="89407116" iconName="icon_ep.ep_fatal_hitfinish_tex" />
+  <Icon abnormalityId="89407117" iconName="icon_ep.ep_fatal_hitfinish_tex" />
+  <Icon abnormalityId="89407118" iconName="icon_ep.ep_fatal_hitfinish_tex" />
+  <Icon abnormalityId="89407119" iconName="icon_ep.ep_fatal_hitfinish_tex" />
+  <Icon abnormalityId="89407120" iconName="icon_ep.ep_fatal_hitfinish_tex" />
+  <Icon abnormalityId="89407121" iconName="icon_ep.ep_fatal_hitfinish_tex" />
+  <Icon abnormalityId="89407122" iconName="icon_ep.ep_fatal_hitfinish_tex" />
+  <Icon abnormalityId="89407123" iconName="icon_ep.ep_fatal_hitfinish_tex" />
+  <Icon abnormalityId="89407124" iconName="icon_ep.ep_fatal_hitfinish_tex" />
+  <Icon abnormalityId="89407125" iconName="icon_ep.ep_fatal_hitfinish_tex" />
+  <Icon abnormalityId="89419000" iconName="icon_ep.ep_resources_st_tex" />
 </AbnormalityIconData>

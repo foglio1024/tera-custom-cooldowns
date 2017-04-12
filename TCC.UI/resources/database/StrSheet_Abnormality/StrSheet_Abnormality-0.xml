@@ -898,8 +898,8 @@
   <String id="26111" name="Glyph of Blaze" tooltip="Speeds casting by $H_W_GOOD$value$COLOR_END for Stunning Trap." />
   <String id="26120" name="Glyph of Fleetfoot" tooltip="Increases combat Movement Speed by $H_W_GOOD$value$COLOR_END." />
   <String id="26130" name="Glyph of Powerlink" tooltip="Increases damage of Incendiary Trap by $H_W_GOOD$value$COLOR_END." />
-  <String id="26140" name="Glyph of Restoration" tooltip="Recovers $H_W_GOOD2%$COLOR_END of maximum HP every $H_W_GOOD$tickInterval$COLOR_END. Ends when you enter combat." />
-  <String id="26141" name="Glyph of Restoration" tooltip="Recovers $H_W_GOOD3%$COLOR_END of maximum HP every $H_W_GOOD$tickInterval$COLOR_END. Ends when you enter combat." />
+  <String id="26140" name="Glyph of Restoration" tooltip="Recovers $H_W_GOOD2%$COLOR_END of maximum HP every $H_W_GOOD$tickInterval$COLOR_END." />
+  <String id="26141" name="Glyph of Restoration" tooltip="Recovers $H_W_GOOD3%$COLOR_END of maximum HP every $H_W_GOOD$tickInterval$COLOR_END." />
   <String id="26150" name="Glyph of Powerlink" tooltip="Increases damage of Arrow Volley by $H_W_GOOD$value$COLOR_END." />
   <String id="26160" name="Glyph of Blaze" tooltip="Speeds charging by $H_W_GOOD$value$COLOR_END for Penetrating Arrow." />
   <String id="26170" name="Glyph of Blaze" tooltip="Speeds charging by $H_W_GOOD$value$COLOR_END for Penetrating Arrow." />
@@ -941,9 +941,9 @@
   <String id="28070" name="Glyph of Slowing" tooltip="Decreases Movement Speed by $H_W_BAD$value$COLOR_END." />
   <String id="28080" name="Glyph of Numbing" tooltip="Decreases Attack Speed by $H_W_BAD$value$COLOR_END." />
   <String id="28090" name="Glyph of Enfeeblement" tooltip="Decreases Endurance by $H_W_BAD$value$COLOR_END." />
-  <String id="28100" name="Glyph of Restoration" tooltip="Recovers $H_W_GOOD5%$COLOR_END of maximum HP every $H_W_GOOD$tickInterval$COLOR_END. Ends when you enter combat." />
+  <String id="28100" name="Glyph of Restoration" tooltip="Recovers $H_W_GOOD5%$COLOR_END of maximum HP every $H_W_GOOD$tickInterval$COLOR_END." />
   <String id="28101" name="Glyph of Restoration" tooltip="[Test]" />
-  <String id="28110" name="Glyph of Restoration" tooltip="Recovers $H_W_GOOD15%$COLOR_END of maximum HP every $H_W_GOOD$tickInterval$COLOR_END. Ends when you enter combat." />
+  <String id="28110" name="Glyph of Restoration" tooltip="Recovers $H_W_GOOD15%$COLOR_END of maximum HP every $H_W_GOOD$tickInterval$COLOR_END." />
   <String id="28111" name="Hearty Resurrection" tooltip="Abnormality Tooltip Not Supposed To Be Shown (isShow=False) If this Tooltip is Shown Register it as BTS" />
   <String id="28120" name="Glyph of Balance" tooltip="Increases Balance Factor by $H_W_GOOD100%$COLOR_END." />
   <String id="28130" name="Glyph of Infusion" tooltip="Replenishes $H_W_GOOD50$COLOR_END MP every $H_W_GOOD$H_W_GOOD$tickInterval$COLOR_END$COLOR_END." />
@@ -998,6 +998,20 @@
   <String id="32047" name="Glyph of Powerlink" tooltip="Increases damage of Skyfall by $H_W_GOOD$value$COLOR_END." />
   <String id="32058" name="Glyph of Blaze" tooltip="Speeds casting of Burning Heart and Fire Avalanche by $H_W_GOOD$value$COLOR_END." />
   <String id="32060" name="Glyph of the Swift" tooltip="Increases Attack Speed by $H_W_GOOD$value$COLOR_END." />
+  <String id="33010" name="Glyph of the Swift" tooltip="Increases Attack Speed by $H_W_GOOD$value$COLOR_END." />
+  <String id="33020" name="Glyph of Powerlink" tooltip="Increases damage of Leaping Slash by $H_W_GOOD$value$COLOR_END." />
+  <String id="33070" name="Glyph of Powerlink" tooltip="Increases damage of all attack skills by 15% for 3 seconds." />
+  <String id="33071" name="Glyph of Powerlink" tooltip="Increases damage of all attack skills by 15% for 3 seconds." />
+  <String id="33072" name="Glyph of Powerlink" tooltip="Increases damage of all attack skills by 20% for 3 seconds." />
+  <String id="33073" name="Glyph of Powerlink" tooltip="Increases damage of all attack skills by 20% for 3 seconds." />
+  <String id="33100" name="Glyph of Slowing" tooltip="Decreases Movement Speed by $H_W_BAD$value$COLOR_END." />
+  <String id="33130" name="Glyph of Powerlink" tooltip="Increases damage of Leaping Slash by $H_W_GOOD$value$COLOR_END." />
+  <String id="33140" />
+  <String id="33141" />
+  <String id="33150" name="Glyph of Powerlink" tooltip="Increases damage of Leaping Slash by $H_W_GOOD$value$COLOR_END." />
+  <String id="33170" name="Glyph of Restoration" tooltip="Recovers $H_W_GOOD2%$COLOR_END of maximum HP every $H_W_GOOD$tickInterval$COLOR_END." />
+  <String id="33200" name="Glyph of Powerlink" tooltip="Increases skill damage of your next attack by 30%." />
+  <String id="33210" name="Glyph of Powerlink" tooltip="Increases skill damage of Runeburst by $H_W_GOOD$value$COLOR_END." />
   <String id="45301" name="Great Shock" tooltip="Massively shocked." />
   <String id="45302" name="Blown Over" tooltip="Shocked and knocked over." />
   <String id="45303" tooltip="The drill will disappear in 13 seconds." />
@@ -1187,15 +1201,18 @@
   <String id="96907" />
   <String id="96908" />
   <String id="96909" />
-  <String id="100100" name="Assault Stance I" tooltip="Increases Power by $H_W_GOOD$value$COLOR_END, Crit Factor by $H_W_GOOD$value3$COLOR_END, and skill damage by $H_W_GOOD$value4$COLOR_END when attacking monsters. However, decreases Endurance by $H_W_BAD$value2$COLOR_END." />
-  <String id="100101" name="Assault Stance II" tooltip="Increases Power by $H_W_GOOD$value$COLOR_END, Crit Factor by $H_W_GOOD$value3$COLOR_END, and skill damage by $H_W_GOOD$value4$COLOR_END when attacking monsters. However, decreases Endurance by $H_W_BAD$value2$COLOR_END." />
-  <String id="100102" name="Assault Stance III" tooltip="Increases Power by $H_W_GOOD$value$COLOR_END, Crit Factor by $H_W_GOOD$value3$COLOR_END, and skill damage by $H_W_GOOD$value4$COLOR_END when attacking monsters. However, decreases Endurance by $H_W_BAD$value2$COLOR_END." />
-  <String id="100103" name="Assault Stance IV" tooltip="Increases Power by $H_W_GOOD$value$COLOR_END, Crit Factor by $H_W_GOOD$value3$COLOR_END, and skill damage by $H_W_GOOD$value4$COLOR_END when attacking monsters. However, decreases Endurance by $H_W_BAD$value2$COLOR_END." />
+  <String id="100100" name="Assault Stance I" tooltip="Increases Power by $H_W_GOOD$value$COLOR_END, Crit Factor by $H_W_GOOD$value3$COLOR_END, and skill damage by $H_W_GOOD10%$COLOR_END when attacking monsters. However, decreases Endurance by $H_W_BAD$value2$COLOR_END." />
+  <String id="100101" name="Assault Stance II" tooltip="Increases Power by $H_W_GOOD$value$COLOR_END, Crit Factor by $H_W_GOOD$value3$COLOR_END, and skill damage by $H_W_GOOD10%$COLOR_END when attacking monsters. However, decreases Endurance by $H_W_BAD$value2$COLOR_END." />
+  <String id="100102" name="Assault Stance III" tooltip="Increases Power by $H_W_GOOD$value$COLOR_END, Crit Factor by $H_W_GOOD$value3$COLOR_END, and skill damage by $H_W_GOOD10%$COLOR_END when attacking monsters. However, decreases Endurance by $H_W_BAD$value2$COLOR_END." />
+  <String id="100103" name="Assault Stance IV" tooltip="Increases Power by $H_W_GOOD$value$COLOR_END, Crit Factor by $H_W_GOOD$value3$COLOR_END, and skill damage by $H_W_GOOD10%$COLOR_END when attacking monsters. However, decreases Endurance by $H_W_BAD$value2$COLOR_END." />
   <String id="100150" name="Invisible abnormality (If shown BTS)" tooltip="Increases damage by 10% when attacking monsters." />
-  <String id="100200" name="Defensive Stance I" tooltip="Increases Endurance by $H_W_GOOD$value$COLOR_END and Balance Factor by $H_W_GOOD$value2$COLOR_END. Attacks draw $H_W_GOOD$value3$COLOR_END more aggro. Immune to push-back from monsters, save for certain special attacks." />
-  <String id="100201" name="Defensive Stance II" tooltip="Increases Endurance by $H_W_GOOD$value$COLOR_END and Balance Factor by $H_W_GOOD$value2$COLOR_END. Attacks draw $H_W_GOOD$value3$COLOR_END more aggro. Immune to push-back from monsters, save for certain special attacks." />
-  <String id="100202" name="Defensive Stance III" tooltip="Increases Endurance by $H_W_GOOD$value$COLOR_END and Balance Factor by $H_W_GOOD$value2$COLOR_END. Attacks draw $H_W_GOOD$value3$COLOR_END more aggro. Immune to push-back from monsters, save for certain special attacks." />
-  <String id="100203" name="Defensive Stance IV" tooltip="Increases Endurance by $H_W_GOOD$value$COLOR_END and Balance Factor by $H_W_GOOD$value2$COLOR_END. Attacks draw $H_W_GOOD$value3$COLOR_END more aggro. Immune to push-back from monsters, save for certain special attacks." />
+  <String id="100200" name="Defensive Stance I" tooltip="Increases Endurance by $H_W_GOOD$value$COLOR_END and Balance Factor by $H_W_GOOD$value2$COLOR_END. Increases the chance to crit by $H_W_GOOD15%$COLOR_END when attacking monsters. Attacks draw $H_W_GOOD$value3$COLOR_END more aggro. Immune to push-back from monsters, save for certain special attacks." />
+  <String id="100201" name="Defensive Stance II" tooltip="Increases Endurance by $H_W_GOOD$value$COLOR_END and Balance Factor by $H_W_GOOD$value2$COLOR_END. Increases the chance to crit by $H_W_GOOD15%$COLOR_END when attacking monsters. Attacks draw $H_W_GOOD$value3$COLOR_END more aggro. Immune to push-back from monsters, save for certain special attacks." />
+  <String id="100202" name="Defensive Stance III" tooltip="Increases Endurance by $H_W_GOOD$value$COLOR_END and Balance Factor by $H_W_GOOD$value2$COLOR_END. Increases the chance to crit by $H_W_GOOD15%$COLOR_END when attacking monsters. Attacks draw $H_W_GOOD$value3$COLOR_END more aggro. Immune to push-back from monsters, save for certain special attacks." />
+  <String id="100203" name="Defensive Stance IV" tooltip="Increases Endurance by $H_W_GOOD$value$COLOR_END and Balance Factor by $H_W_GOOD$value2$COLOR_END. Increases the chance to crit by $H_W_GOOD15%$COLOR_END when attacking monsters. Attacks draw $H_W_GOOD$value3$COLOR_END more aggro. Immune to push-back from monsters, save for certain special attacks." />
+  <String id="100293" name="Twinsword Parry_Basic Abnormality" tooltip="Abnormality Tooltip Not Supposed To Be Shown (isShow=False) If this Tooltip is Shown Register it as BTS" />
+  <String id="100294" name="Perseverance" tooltip="Replenishes 5% MP." />
+  <String id="100296" name="Defensive Stance (additional chance to crit on monsters)" tooltip="Increases the chance to crit on monsters by 15% (Invisible abnormality)." />
   <String id="100297" />
   <String id="100298" name="Defensive Stance IV-2" tooltip="Abnormality Tooltip Not Supposed To Be Shown (isShow=False) If this Tooltip is Shown Register it as BTS" />
   <String id="100299" name="Defensive Stance IV-3" tooltip="Abnormality Tooltip Not Supposed To Be Shown (isShow=False) If this Tooltip is Shown Register it as BTS" />
@@ -1787,12 +1804,14 @@
   <String id="600928" name="Poison Arrow" tooltip="Reduces HP by $H_W_BAD$value$COLOR_END every $H_W_BAD$tickInterval$COLOR_END. This effect can be stacked up to 3 times." />
   <String id="601000" name="Restraining Arrow" tooltip="Decreases Movement Speed by $value2 and Attack Speed by $value." />
   <String id="601001" name="Restraining Arrow" tooltip="Decreases Movement Speed by $value2 and Attack Speed by $value." />
-  <String id="601100" name="Sniper's Eye I" tooltip="Increases Power by $value, Attack Speed by $value2, and Movement Speed by $value3. Increases damage to monsters by $H_W_GOOD7%$COLOR_END." />
-  <String id="601101" name="Sniper's Eye II" tooltip="Increases Power by $value, Attack Speed by $value2, and Movement Speed by $value3. Increases damage to monsters by $H_W_GOOD7%$COLOR_END." />
+  <String id="601100" name="Sniper's Eye I" tooltip="Increases Power by $value, Attack Speed by $value2, and Movement Speed by $value3. Increases damage to monsters by $H_W_GOOD7%$COLOR_END. Increases damage to enemy players by $H_W_GOOD10%$COLOR_END. " />
+  <String id="601101" name="Sniper's Eye II" tooltip="Increases Power by $value, Attack Speed by $value2, and Movement Speed by $value3. Increases damage to monsters by $H_W_GOOD7%$COLOR_END. Increases damage to enemy players by $H_W_GOOD10%$COLOR_END. " />
   <String id="601110" name="Eagle's Eye I" tooltip="Increases Power by $value, Attack Speed by $value2, and Endurance by $value3. Increases damage to monsters by $H_W_GOOD10%$COLOR_END. Cannot be used in conjunction with Sniper's Eye." />
   <String id="601111" name="Eagle's Eye II" tooltip="Increases Power by $value, Attack Speed by $value2, and Endurance by $value3. Increases damage to monsters by $H_W_GOOD10%$COLOR_END. Cannot be used in conjunction with Sniper's Eye." />
   <String id="601130" name="Sniper's Eye(Additional Damage To Boss Monsters)" tooltip="Additional Damage To Boss Monsters (Invisible Abnormality)" />
   <String id="601131" name="Sniper's Eye(Additional Damage To Boss Monsters)" tooltip="Additional Damage To Boss Monsters (Invisible Abnormality)" />
+  <String id="601132" tooltip="Additional damage to users (Invisible abnormality)" />
+  <String id="601133" tooltip="Additional damage to users (Invisible abnormality)" />
   <String id="601140" name="Eagle's Eye(Additional Damage To monsters)" tooltip="Additional Damage To monsters (Invisible Abnormality)" />
   <String id="601141" name="Eagle's Eye(Additional Damage To monsters)" tooltip="Additional Damage To monsters (Invisible Abnormality)" />
   <String id="601200" name="Stunning Trap Arrow" tooltip="Stunned. Cannot move." />
@@ -2121,6 +2140,20 @@
   <String id="777036" name="Demokron's Token" tooltip="Slowed and marked as the demokron's target." />
   <String id="777037" name="Demokron's Token" tooltip="Evasion and movement-related skills are unavailable." />
   <String id="777038" name="Must Be Invisible" tooltip="If you can see this, register BTS." />
+  <String id="780001" name="BTS" tooltip="BTS" />
+  <String id="780002" name="BTS" tooltip="BTS" />
+  <String id="780003" name="BTS" tooltip="BTS" />
+  <String id="780004" name="BTS" tooltip="BTS" />
+  <String id="780005" name="BTS" tooltip="BTS" />
+  <String id="780100" name="BTS" tooltip="BTS" />
+  <String id="780101" name="BTS" tooltip="BTS" />
+  <String id="780102" name="BTS" tooltip="BTS" />
+  <String id="780103" name="Burning Wounds" tooltip="Blue flames reduce $H_W_BAD7%$COLOR_END of max HP every $H_W_BAD$tickInterval$COLOR_END." />
+  <String id="780104" name="Burning Feet" tooltip="Burns your feet, reducing Movement Speed by $H_W_BAD50%$COLOR_END." />
+  <String id="780200" name="Acidic Fluid" tooltip="Acidic fluid reduces $H_W_BAD5%$COLOR_END of your max HP every $H_W_BAD$tickInterval$COLOR_END." />
+  <String id="780201" name="Stunned" tooltip="Stunned. Cannot move." />
+  <String id="780202" name="Bleeding" tooltip="Bleed damage reduces $H_W_BAD1%$COLOR_END of your max HP every $H_W_BAD$tickInterval$COLOR_END." />
+  <String id="780203" name="Hemorrhage" tooltip="Reduces $H_W_BAD10%$COLOR_END of your max HP every $H_W_BAD$tickInterval$COLOR_END." />
   <String id="800100" name="Regeneration Circle I" tooltip="Recovers HP every $H_W_GOOD$tickInterval$COLOR_END." />
   <String id="800101" name="Regeneration Circle II" tooltip="Recovers HP every $H_W_GOOD$tickInterval$COLOR_END." />
   <String id="800102" name="Regeneration Circle III" tooltip="Recovers HP every $H_W_GOOD$tickInterval$COLOR_END." />
@@ -2271,6 +2304,7 @@
   <String id="830041" name="Venom" tooltip="Poisoned. Decreases $H_W_BAD1%$COLOR_END of maximum HP every $H_W_BAD$tickInterval$COLOR_END." />
   <String id="830042" name="For Oak Barrel Effect" tooltip="BTS (isShow=False)!" />
   <String id="830043" name="Venom" tooltip="Poisoned. Decreases $H_W_BAD5%$COLOR_END of maximum HP every $H_W_BAD$tickInterval$COLOR_END." />
+  <String id="830044" name="Celestial Arena(Solo)-Valkyrie" tooltip="Abnormality Tooltip Not Supposed To Be Shown (isShow=False) If this Tooltip is Shown Register it as BTS" />
   <String id="860001" name="Suicidal Target" tooltip="Targeted by suicide soldiers." />
   <String id="860002" name="Display Character" tooltip="BTS" />
   <String id="860003" name="Electrical Overload" tooltip="Beware of overload—and avoid water!" />
@@ -2798,6 +2832,31 @@
   <String id="975672" />
   <String id="975673" />
   <String id="979501" />
+  <String id="980001" name="BTS" tooltip="BTS" />
+  <String id="980002" name="BTS" tooltip="BTS" />
+  <String id="980003" name="BTS" tooltip="BTS" />
+  <String id="980004" name="BTS" tooltip="BTS" />
+  <String id="980005" name="BTS" tooltip="BTS" />
+  <String id="980100" name="BTS" tooltip="BTS" />
+  <String id="980101" name="BTS" tooltip="BTS" />
+  <String id="980102" name="BTS" tooltip="BTS" />
+  <String id="980103" name="Burning Wound" tooltip="Blue flames reduce $H_W_BAD7%$COLOR_END of max HP every $H_W_BAD$tickInterval$COLOR_END." />
+  <String id="980104" name="Burning Feet" tooltip="Burns your feet, reducing movement speed by $H_W_BAD50%$COLOR_END." />
+  <String id="980200" name="Acidic Fluid" tooltip="Acidic fluid reduces $H_W_BAD5%$COLOR_END of your max HP every $H_W_BAD$tickInterval$COLOR_END." />
+  <String id="980201" name="Stunned" tooltip="Stunned. Cannot move." />
+  <String id="980202" name="Bleeding" tooltip="Bleed damage reduces $H_W_BAD1%$COLOR_END of your max HP every $H_W_BAD$tickInterval$COLOR_END." />
+  <String id="980203" name="Hemorrhage" tooltip="Reduces $H_W_BAD10%$COLOR_END of your max HP every $H_W_BAD$tickInterval$COLOR_END." />
+  <String id="980204" name="Burning Weapon" tooltip="Veldeg prepares an $H_W_BADabominable attack$COLOR_END. Everything will be destroyed if Veldeg is not stopped." />
+  <String id="980205" name="Burning Rage" tooltip="Veldeg's wrath is out of control. $H_W_BADIt is time to meet your doom.$COLOR_END" />
+  <String id="980206" name="Burning Agony" tooltip="Reduces $H_W_BAD10%$COLOR_END of your max HP every $H_W_BAD$tickInterval$COLOR_END." />
+  <String id="980207" name="BTS" tooltip="BTS" />
+  <String id="980208" name="BTS" tooltip="BTS" />
+  <String id="980209" name="BTS" tooltip="BTS" />
+  <String id="980210" name="BTS" tooltip="BTS" />
+  <String id="980211" name="BTS" tooltip="BTS" />
+  <String id="980212" name="BTS" tooltip="BTS" />
+  <String id="980213" name="BTS" tooltip="BTS" />
+  <String id="980214" name="BTS" tooltip="BTS" />
   <String id="988501" name="Endurance Minor" tooltip="HP Increase 1st Stage Release" />
   <String id="988502" name="Endurance Major" tooltip="HP Increase 2nd Stage Release" />
   <String id="988503" name="Endurance Maximus" tooltip="HP Increase 3rd Stage Release" />
@@ -3327,6 +3386,7 @@
   <String id="9999019" name="Wibbley Wobbley Timey Wimey" tooltip="Increases damage by 10%. This effect does not stack with the effects of Chain of Protection, Chain of Attack, Chain of Recovery, or Bravery Potion." />
   <String id="10151000" name="Shadow Step" tooltip="Using Shadow Jump again will trigger a cooldown." />
   <String id="10151010" name="Shadow Reaping" tooltip="Reap the shadows around you. While  reaping, the cooldown time of Double Shear, Grim Strike, Pendulum Strike, Whipsaw, Sundering Strike, Cable Step, Death Spiral, and Smite are reduced by 70%." />
+  <String id="10151011" name="Shadow Reaping" tooltip="Resets the cooldowns of Double Shear, Grim Strike, Pendulum Strike, Whipsaw, Sundering Strike, Cable Step, Death Spiral, and Smite." />
   <String id="10151020" name="Chain with 2 normal attacks" tooltip="Invisible buff. If you see this buff, report it as a bug!" />
   <String id="10151021" name="Chain with 3 normal attacks" tooltip="Invisible buff. If you see this buff, report it as a bug!" />
   <String id="10151022" name="Chain with 4 normal attacks" tooltip="Invisible buff. If you see this buff, report it as a bug!" />
@@ -3530,6 +3590,72 @@
   <String id="10154090" name="Disguised" tooltip="Duplicating a target." />
   <String id="10154100" />
   <String id="10154101" />
+  <String id="10155006" name="BTS" tooltip="No debuff display" />
+  <String id="10155007" name="BTS" tooltip="No debuff display" />
+  <String id="10155008" name="BTS" tooltip="No debuff display" />
+  <String id="10155009" name="BTS" tooltip="No debuff display" />
+  <String id="10155010" name="End of Days" tooltip="The Ragnarok meter does not decrease over time." />
+  <String id="10155020" name="Quick Evasion" tooltip="Can use Evasion again." />
+  <String id="10155030" name="Arun's Wail" tooltip="Increases all skill damage by 20% per stack." />
+  <String id="10155031" name="Shara's Scream" tooltip="Increases all skill damage by 30% per stack." />
+  <String id="10155033" />
+  <String id="10155034" />
+  <String id="10155036" name="Arun's Wail" tooltip="Increases the skill damage and chance to crit of Titansbane by 20% per stack." />
+  <String id="10155037" name="Shara's Scream" tooltip="Increases the skill damage and chance to crit of Titansbane by 30% per stack." />
+  <String id="10155040" name="Bleeding" tooltip="When stacked 6 times, causes stun." />
+  <String id="10155041" name="Bloodflower" tooltip="Stunned, cannot move." />
+  <String id="10155050" name="BTS" tooltip="No debuff display" />
+  <String id="10155051" name="BTS" tooltip="No debuff display" />
+  <String id="10155052" name="BTS" tooltip="No debuff display" />
+  <String id="10155053" name="BTS" tooltip="No debuff display" />
+  <String id="10155060" name="BTS" tooltip="No debuff display" />
+  <String id="10155070" name="Spin, Spin!" tooltip="Can use Spinning Death." />
+  <String id="10155071" name="Spin, Spin, Spin!" tooltip="Can use Spinning Death." />
+  <String id="10155072" />
+  <String id="10155080" name="BTS" tooltip="No debuff display" />
+  <String id="10155081" />
+  <String id="10155100" name="Stunned" tooltip="Stunned." />
+  <String id="10155110" name="BTS" tooltip="No debuff display" />
+  <String id="10155111" name="BTS" tooltip="No debuff display" />
+  <String id="10155112" name="BTS" tooltip="No debuff display" />
+  <String id="10155113" name="BTS" tooltip="No debuff display" />
+  <String id="10155130" name="Ragnarok" tooltip="Increases Power by 50, Crit Factor by 50, Attack Speed by 20, attack range by 20%, and decreases skill cooldowns by 60% when casting skills with cooldowns of 60 sec or less (excluding Evasion and Retaliate)." />
+  <String id="10155131" />
+  <String id="10155140" name="Reclamation" tooltip="Greatly increases resistance to stun." />
+  <String id="10155141" />
+  <String id="10155150" name="Perfect Evasion" tooltip="Your next attack with any skill but Slash has a guaranteed chance to crit." />
+  <String id="10155170" name="Dark Herald" tooltip="Stunned." />
+  <String id="10155190" name="BTS" tooltip="No debuff display" />
+  <String id="10155200" name="BTS" tooltip="No debuff display" />
+  <String id="10155201" name="BTS" tooltip="No debuff display" />
+  <String id="10155202" name="BTS" tooltip="No debuff display" />
+  <String id="10155203" />
+  <String id="10155204" />
+  <String id="10155205" />
+  <String id="10155206" />
+  <String id="10155207" />
+  <String id="10155210" name="BTS" tooltip="No debuff display" />
+  <String id="10155220" name="BTS" tooltip="No debuff display" />
+  <String id="10155230" name="BTS" tooltip="No debuff display" />
+  <String id="10155240" name="Twilight" tooltip="The Ragnarok meter is full. Ragnarok points do not decay." />
+  <String id="10155250" name="Balder's Tears" tooltip="Immune to knockdown, stagger, and push-back. Receives 70% less damage." />
+  <String id="10155251" name="BTS" tooltip="No debuff display" />
+  <String id="10155252" />
+  <String id="10155253" />
+  <String id="10155254" />
+  <String id="10155255" />
+  <String id="10155270" name="Aesir's Might" tooltip="Immune to the effect of Dark Herald." />
+  <String id="10155280" />
+  <String id="10155281" />
+  <String id="10155282" />
+  <String id="10155283" />
+  <String id="10155284" />
+  <String id="10155285" />
+  <String id="10155290" />
+  <String id="10155291" />
+  <String id="10155300" />
+  <String id="10155310" />
+  <String id="10155320" />
   <String id="15200001" name="Lavathus' Shell" tooltip="Increases Endurance and maximum HP by $H_W_GOOD$value$COLOR_END for $time. Effect persists after death, but ends when leaving the Civil Unrest zone." />
   <String id="15200002" name="Drakhan's Flame" tooltip="Increases Power by $H_W_GOOD$value$COLOR_END for $time. Effect persists after death, but ends when leaving the Civil Unrest zone." />
   <String id="15200003" name="Kaithan's Fear" tooltip="Increases Attack Speed and the chance to crit by $H_W_GOOD$value$COLOR_END. Increases Movement Speed by $H_W_GOOD$value2$COLOR_END for $time. Effect persists after death, but ends when leaving the Civil Unrest zone." />
@@ -4144,6 +4270,8 @@
   <String id="77703445" />
   <String id="77703446" name="Abomination Tentacle Prison_Basic Abnormal Status" tooltip="No debuff tooltip display (isShow=False). If this tooltip displays, BTS is required!" />
   <String id="77703447" name="Abomination Shield Tentacles_Basic Abnormal Status" tooltip="No debuff tooltip display (isShow=False). If this tooltip displays, BTS is required!" />
+  <String id="78100013" />
+  <String id="78100014" />
   <String id="80401500" name="Kelsaik's Armor of Doom" tooltip="Absorbs up to $H_W_GOOD$value$COLOR_END damage." />
   <String id="80900001" name="Gutripped" tooltip="Decreases Endurance and Movement Speed by $H_W_BAD$value2$COLOR_END. Effect cannot be removed." />
   <String id="80900002" name="Cacophonous Slash" tooltip="Stunned by the strike. Cacophonous slash can be removed." />
@@ -4796,6 +4924,8 @@
   <String id="99070033" name="Sugar Rush" tooltip="A kumas with rock candy is invincible!" />
   <String id="99070034" name="Feather Fall" tooltip="Your body is light as a feather for 1 minute. You do not receive any damage from falling." />
   <String id="99070035" name="Heavenly Feather - if you see this icon, it's a bug" tooltip="Your body is light as a feather. You do not receive any damage from falling." />
+  <String id="472000001" />
+  <String id="488000001" />
   <String id="990070311" name="Warm Shrine Blessing" tooltip="Recovers HP for 3 minutes. Shrine blessings do not stack." />
   <String id="990070312" name="Bountiful Shrine Blessing" tooltip="Replenishes MP for 3 minutes. Shrine blessings do not stack." />
   <String id="990070313" name="Relentless Shrine Blessing" tooltip="Greatly increases Defense for 3 minutes. Shrine blessings do not stack." />

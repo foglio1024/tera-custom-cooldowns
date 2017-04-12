@@ -1000,6 +1000,19 @@
   <Icon abnormalityId="32047" iconName="Icon_Crest.crestnextskillattackup_Tex" />
   <Icon abnormalityId="32058" iconName="Icon_Crest.crestnextskillattackspeedup_Tex" />
   <Icon abnormalityId="32060" iconName="Icon_Crest.E_crestactiveattackspeedup_Tex" />
+  <Icon abnormalityId="33010" iconName="Icon_Crest.crestactiveattackspeedup_Tex" />
+  <Icon abnormalityId="33020" iconName="Icon_Crest.crestnextskillattackup_Tex" />
+  <Icon abnormalityId="33070" iconName="Icon_Crest.crestnextskillattackup_Tex" />
+  <Icon abnormalityId="33071" iconName="Icon_Crest.crestnextskillattackup_Tex" />
+  <Icon abnormalityId="33072" iconName="Icon_Crest.crestnextskillattackup_Tex" />
+  <Icon abnormalityId="33073" iconName="Icon_Crest.crestnextskillattackup_Tex" />
+  <Icon abnormalityId="33100" iconName="Icon_Crest.crestpassivespeeddown_Tex" />
+  <Icon abnormalityId="33130" iconName="Icon_Crest.crestnextskillattackup_Tex" />
+  <Icon abnormalityId="33140" iconName="Icon_Crest.crestpassivecriticalup_Tex" />
+  <Icon abnormalityId="33150" iconName="Icon_Crest.crestnextskillattackup_Tex" />
+  <Icon abnormalityId="33170" iconName="Icon_Crest.crestpassivehpheal_Tex" />
+  <Icon abnormalityId="33200" iconName="Icon_Crest.crestnextskillattackup_Tex" />
+  <Icon abnormalityId="33210" iconName="Icon_Crest.crestpassivehpheal_Tex" />
   <Icon abnormalityId="45301" iconName="Icon_Status.minusdefence_Tex" />
   <Icon abnormalityId="45302" iconName="Icon_Status.minuscriticalresist_Tex" />
   <Icon abnormalityId="45303" />
@@ -1198,6 +1211,9 @@
   <Icon abnormalityId="100201" iconName="Icon_Skills.ironwillB_Tex" />
   <Icon abnormalityId="100202" iconName="Icon_Skills.ironwillB_Tex" />
   <Icon abnormalityId="100203" iconName="Icon_Skills.ironwillB_Tex" />
+  <Icon abnormalityId="100293" iconName="Icon_Skills.TwinSwordsDefence_Tex" />
+  <Icon abnormalityId="100294" iconName="Icon_Skills.TwinSwordsDefence_Tex" />
+  <Icon abnormalityId="100296" iconName="Icon_Skills.ironwillB_Tex" />
   <Icon abnormalityId="100297" />
   <Icon abnormalityId="100298" iconName="Icon_Skills.ironwillB_Tex" />
   <Icon abnormalityId="100299" iconName="Icon_Skills.ironwillB_Tex" />
@@ -1793,6 +1809,8 @@
   <Icon abnormalityId="601111" iconName="Icon_Skills.focusstance_MoveSlow_Tex" />
   <Icon abnormalityId="601130" iconName="Icon_Skills.focusstance_Tex" />
   <Icon abnormalityId="601131" iconName="Icon_Skills.focusstance_Tex" />
+  <Icon abnormalityId="601132" iconName="Icon_Skills.focusstance_Tex" />
+  <Icon abnormalityId="601133" iconName="Icon_Skills.focusstance_Tex" />
   <Icon abnormalityId="601140" iconName="Icon_Skills.focusstance_Tex" />
   <Icon abnormalityId="601141" iconName="Icon_Skills.focusstance_Tex" />
   <Icon abnormalityId="601200" iconName="Icon_Skills.Paralysistraparrow_Tex" />
@@ -2121,6 +2139,20 @@
   <Icon abnormalityId="777036" iconName="Icon_Status.poisonup_Tex" />
   <Icon abnormalityId="777037" iconName="Icon_Items.cancel_Evade_Potion_Level_51_Tex" />
   <Icon abnormalityId="777038" iconName="Icon_Status.confuseup_Tex" />
+  <Icon abnormalityId="780001" />
+  <Icon abnormalityId="780002" />
+  <Icon abnormalityId="780003" />
+  <Icon abnormalityId="780004" />
+  <Icon abnormalityId="780005" />
+  <Icon abnormalityId="780100" />
+  <Icon abnormalityId="780101" />
+  <Icon abnormalityId="780102" />
+  <Icon abnormalityId="780103" iconName="Icon_Status.minusmp_Tex" />
+  <Icon abnormalityId="780104" iconName="Icon_Skills.kumas_frontroll_Tex" />
+  <Icon abnormalityId="780200" iconName="Icon_Status.poisonstatus_Tex" />
+  <Icon abnormalityId="780201" iconName="Icon_Status.confuseup_Tex" />
+  <Icon abnormalityId="780202" iconName="Icon_Status.InjuredBtDarkness_Tex" />
+  <Icon abnormalityId="780203" iconName="Icon_Status.damagedown_Tex" />
   <Icon abnormalityId="800100" iconName="Icon_Skills.healingwind_Tex" />
   <Icon abnormalityId="800101" iconName="Icon_Skills.healingwind_Tex" />
   <Icon abnormalityId="800102" iconName="Icon_Skills.healingwind_Tex" />
@@ -2271,6 +2303,7 @@
   <Icon abnormalityId="830041" iconName="Icon_Status.poisonstatus_Tex" />
   <Icon abnormalityId="830042" iconName="Icon_Status.poisonstatus_Tex" />
   <Icon abnormalityId="830043" iconName="Icon_Status.poisonstatus_Tex" />
+  <Icon abnormalityId="830044" iconName="Icon_Status.diseaseup_Tex" />
   <Icon abnormalityId="860001" iconName="Icon_Skills.Markingofarcher_Tex" />
   <Icon abnormalityId="860002" iconName="Icon_Skills.GodBreath_Tex" />
   <Icon abnormalityId="860003" iconName="Icon_Skills.ExcessElectron_Tex" />
@@ -2768,6 +2801,31 @@
   <Icon abnormalityId="975672" />
   <Icon abnormalityId="975673" />
   <Icon abnormalityId="979501" />
+  <Icon abnormalityId="980001" />
+  <Icon abnormalityId="980002" />
+  <Icon abnormalityId="980003" />
+  <Icon abnormalityId="980004" />
+  <Icon abnormalityId="980005" />
+  <Icon abnormalityId="980100" />
+  <Icon abnormalityId="980101" />
+  <Icon abnormalityId="980102" />
+  <Icon abnormalityId="980103" iconName="Icon_Status.minusmp_Tex" />
+  <Icon abnormalityId="980104" iconName="Icon_Skills.kumas_frontroll_Tex" />
+  <Icon abnormalityId="980200" iconName="Icon_Status.poisonstatus_Tex" />
+  <Icon abnormalityId="980201" iconName="Icon_Status.confuseup_Tex" />
+  <Icon abnormalityId="980202" iconName="Icon_Status.InjuredBtDarkness_Tex" />
+  <Icon abnormalityId="980203" iconName="Icon_Status.damagedown_Tex" />
+  <Icon abnormalityId="980204" iconName="Icon_Skills.Downattack_Tex" />
+  <Icon abnormalityId="980205" iconName="Icon_Skills.DragonRisingBlow_Tex" />
+  <Icon abnormalityId="980206" iconName="Icon_Status.FireDamage_Tex" />
+  <Icon abnormalityId="980207" />
+  <Icon abnormalityId="980208" />
+  <Icon abnormalityId="980209" />
+  <Icon abnormalityId="980210" />
+  <Icon abnormalityId="980211" />
+  <Icon abnormalityId="980212" />
+  <Icon abnormalityId="980213" />
+  <Icon abnormalityId="980214" />
   <Icon abnormalityId="988501" iconName="Icon_Status.delayheal_Tex" />
   <Icon abnormalityId="988502" iconName="Icon_Status.delayheal_Tex" />
   <Icon abnormalityId="988503" iconName="Icon_Status.delayheal_Tex" />
@@ -3296,6 +3354,7 @@
   <Icon abnormalityId="9999019" iconName="Icon_Status.speedystatus_Tex" />
   <Icon abnormalityId="10151000" iconName="Icon_Status.InstantLeap_Continuous_Tex" />
   <Icon abnormalityId="10151010" iconName="Icon_Status.DescentOfDarkness_Tex" />
+  <Icon abnormalityId="10151011" iconName="Icon_Status.DescentOfDarkness_Tex" />
   <Icon abnormalityId="10151020" iconName="Icon_Skills.ComboAttack2_Tex" />
   <Icon abnormalityId="10151021" iconName="Icon_Skills.ComboAttack2_Tex" />
   <Icon abnormalityId="10151022" iconName="Icon_Skills.ComboAttack2_Tex" />
@@ -3475,6 +3534,72 @@
   <Icon abnormalityId="10154090" iconName="Icon_Skills.C12_TransForm" />
   <Icon abnormalityId="10154100" />
   <Icon abnormalityId="10154101" />
+  <Icon abnormalityId="10155006" />
+  <Icon abnormalityId="10155007" />
+  <Icon abnormalityId="10155008" />
+  <Icon abnormalityId="10155009" />
+  <Icon abnormalityId="10155010" iconName="Icon_Skills.MoonGrace_Tex" />
+  <Icon abnormalityId="10155020" iconName="Icon_Skills.Moonshadow_Tex" />
+  <Icon abnormalityId="10155030" iconName="Icon_Skills.Fullmoon_Tex" />
+  <Icon abnormalityId="10155031" iconName="Icon_Skills.Fullmoon_Red_Tex" />
+  <Icon abnormalityId="10155033" />
+  <Icon abnormalityId="10155034" />
+  <Icon abnormalityId="10155036" iconName="Icon_Skills.Fullmoon_Tex" />
+  <Icon abnormalityId="10155037" iconName="Icon_Skills.Fullmoon_Red_Tex" />
+  <Icon abnormalityId="10155040" iconName="Icon_Items.Vicious_Red_Blood_Tex" />
+  <Icon abnormalityId="10155041" iconName="Icon_Skills.Brust_Tex" />
+  <Icon abnormalityId="10155050" />
+  <Icon abnormalityId="10155051" />
+  <Icon abnormalityId="10155052" />
+  <Icon abnormalityId="10155053" />
+  <Icon abnormalityId="10155060" />
+  <Icon abnormalityId="10155070" iconName="Icon_Skills.HelicopterCuts_Tex" />
+  <Icon abnormalityId="10155071" iconName="Icon_Skills.HelicopterCuts_Tex" />
+  <Icon abnormalityId="10155072" />
+  <Icon abnormalityId="10155080" />
+  <Icon abnormalityId="10155081" />
+  <Icon abnormalityId="10155100" iconName="Icon_Skills.FatalShot_Tex" />
+  <Icon abnormalityId="10155110" />
+  <Icon abnormalityId="10155111" />
+  <Icon abnormalityId="10155112" />
+  <Icon abnormalityId="10155113" />
+  <Icon abnormalityId="10155130" iconName="Icon_Skills.Redmoon_Tex" />
+  <Icon abnormalityId="10155131" />
+  <Icon abnormalityId="10155140" iconName="Icon_Skills.MoonLight_Tex" />
+  <Icon abnormalityId="10155141" />
+  <Icon abnormalityId="10155150" iconName="Icon_Status.DarkRiftAreaDance_Tex" />
+  <Icon abnormalityId="10155170" iconName="Icon_Skills.MoonGravity_Tex" />
+  <Icon abnormalityId="10155190" />
+  <Icon abnormalityId="10155200" />
+  <Icon abnormalityId="10155201" />
+  <Icon abnormalityId="10155202" />
+  <Icon abnormalityId="10155203" />
+  <Icon abnormalityId="10155204" />
+  <Icon abnormalityId="10155205" />
+  <Icon abnormalityId="10155206" />
+  <Icon abnormalityId="10155207" />
+  <Icon abnormalityId="10155210" />
+  <Icon abnormalityId="10155220" />
+  <Icon abnormalityId="10155230" />
+  <Icon abnormalityId="10155240" iconName="Icon_Items.FullMoon_Gemstone_Tex" />
+  <Icon abnormalityId="10155250" iconName="Icon_Skills.MoonGraceBuff_Tex" />
+  <Icon abnormalityId="10155251" />
+  <Icon abnormalityId="10155252" />
+  <Icon abnormalityId="10155253" />
+  <Icon abnormalityId="10155254" />
+  <Icon abnormalityId="10155255" />
+  <Icon abnormalityId="10155270" iconName="Icon_Skills.MoonGravity_Tex" />
+  <Icon abnormalityId="10155280" />
+  <Icon abnormalityId="10155281" />
+  <Icon abnormalityId="10155282" />
+  <Icon abnormalityId="10155283" />
+  <Icon abnormalityId="10155284" />
+  <Icon abnormalityId="10155285" />
+  <Icon abnormalityId="10155290" />
+  <Icon abnormalityId="10155291" />
+  <Icon abnormalityId="10155300" />
+  <Icon abnormalityId="10155310" />
+  <Icon abnormalityId="10155320" />
   <Icon abnormalityId="15200001" iconName="Icon_Skills.EmergencyShield_Tex" />
   <Icon abnormalityId="15200002" iconName="Icon_Items.campfire_Tex" />
   <Icon abnormalityId="15200003" iconName="Icon_Status.DarkRiftRage_Tex" />
@@ -4725,6 +4850,8 @@
   <Icon abnormalityId="99070033" iconName="Icon_Status.pluswill_Tex" />
   <Icon abnormalityId="99070034" iconName="Icon_Items.q_feather_Tex" />
   <Icon abnormalityId="99070035" iconName="Icon_Items.q_feather_Tex" />
+  <Icon abnormalityId="472000001" />
+  <Icon abnormalityId="488000001" />
   <Icon abnormalityId="990070311" iconName="Icon_Status.delayheal_Tex" />
   <Icon abnormalityId="990070312" iconName="Icon_Items.potion19_Tex" />
   <Icon abnormalityId="990070313" iconName="Icon_Status.plusedefence_Tex" />

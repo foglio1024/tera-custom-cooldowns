@@ -307,6 +307,13 @@ namespace TCC
         static ColorAnimation ColorChangeAnimation = new ColorAnimation();
         static DoubleAnimation DoubleAnimation = new DoubleAnimation();
         public event PropertyChangedEventHandler PropertyChanged;
+
+        private void UserControl_Unloaded(object sender, RoutedEventArgs e)
+        {
+            PacketRouter.EnragedChanged -= BossGage_EnragedUpdated;
+            PacketRouter.BossHPChanged -= BossGage_HPUpdated;
+
+        }
     }
 
 }

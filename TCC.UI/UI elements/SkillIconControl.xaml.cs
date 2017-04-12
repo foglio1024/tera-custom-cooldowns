@@ -45,12 +45,7 @@ namespace TCC
             get { return (string)GetValue(IconNameProperty); }
             set { SetValue(IconNameProperty, value); }
         }
-
-        // Using a DependencyProperty as the backing store for IconName.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IconNameProperty =
-            DependencyProperty.Register("IconName", typeof(string), typeof(SkillIconControl));
-
-        
+        public static readonly DependencyProperty IconNameProperty = DependencyProperty.Register("IconName", typeof(string), typeof(SkillIconControl));
 
         public uint Id
         {
@@ -207,6 +202,12 @@ namespace TCC
             MainTimer.IsEnabled = true;
         }
 
+        private void UserControl_Unloaded(object sender, RoutedEventArgs e)
+        {
+            SkillManager.Changed -= ChangeCooldown;
+            SkillManager.Reset -= Reset;
+
+        }
     }
 
     public class IconConverter : IValueConverter

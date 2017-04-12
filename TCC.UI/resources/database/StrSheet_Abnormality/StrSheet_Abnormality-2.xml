@@ -524,16 +524,16 @@
   <String id="88410208" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
   <String id="88410209" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
   <String id="88410210" name="Spirit of Iron" tooltip="Damage from enemy decreases by $H_W_GOOD$value$COLOR_END while casting skill. Effect ends when knocked down." />
-  <String id="88418101" name="" tooltip="" />
-  <String id="88418102" name="" tooltip="" />
-  <String id="88418103" name="" tooltip="" />
-  <String id="88418104" name="" tooltip="" />
-  <String id="88418105" name="" tooltip="" />
-  <String id="88418106" name="" tooltip="" />
-  <String id="88418107" name="" tooltip="" />
-  <String id="88418108" name="" tooltip="" />
-  <String id="88418109" name="" tooltip="" />
-  <String id="88418110" name="" tooltip="" />
+  <String id="88410301" name="" tooltip="" />
+  <String id="88410302" name="" tooltip="" />
+  <String id="88410303" name="" tooltip="" />
+  <String id="88410304" name="" tooltip="" />
+  <String id="88410305" name="" tooltip="" />
+  <String id="88410306" name="" tooltip="" />
+  <String id="88410307" name="" tooltip="" />
+  <String id="88410308" name="" tooltip="" />
+  <String id="88410309" name="" tooltip="" />
+  <String id="88410310" name="" tooltip="" />
   <String id="88424200" name="Reloading Evasive Smash" tooltip="BTS" />
   <String id="88426101" name="Chained Speed Skating: Leaping Strike" tooltip="Attack Speed increases when casting Leaping Strike" />
   <String id="88426102" name="Chained Speed Skating: Leaping Strike" tooltip="Attack Speed increases when casting Leaping Strike" />
@@ -1055,4 +1055,24 @@
   <String id="89314219" name="Double Cut" tooltip="Stacks up to five times." />
   <String id="89314220" name="Double Cut" tooltip="Stacks up to five times." />
   <String id="89317000" name="Chi Restoration" tooltip="BTS" />
+  <String id="89404100" name="" tooltip="" />
+  <String id="89407101" name="" tooltip="" />
+  <String id="89407102" name="" tooltip="" />
+  <String id="89407103" name="" tooltip="" />
+  <String id="89407111" name="" tooltip="" />
+  <String id="89407112" name="" tooltip="" />
+  <String id="89407113" name="" tooltip="" />
+  <String id="89407114" name="" tooltip="" />
+  <String id="89407115" name="" tooltip="" />
+  <String id="89407116" name="" tooltip="" />
+  <String id="89407117" name="" tooltip="" />
+  <String id="89407118" name="" tooltip="" />
+  <String id="89407119" name="" tooltip="" />
+  <String id="89407120" name="" tooltip="" />
+  <String id="89407121" name="" tooltip="" />
+  <String id="89407122" name="" tooltip="" />
+  <String id="89407123" name="" tooltip="" />
+  <String id="89407124" name="" tooltip="" />
+  <String id="89407125" name="" tooltip="" />
+  <String id="89419000" name="" tooltip="" />
 </StrSheet_Abnormality>

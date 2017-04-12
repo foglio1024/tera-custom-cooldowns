@@ -220,7 +220,7 @@ namespace TCC.UI_elements
 
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
-
+            PacketRouter.BuffUpdated -= PacketRouter_BuffUpdated;
         }
     }
 }
@@ -269,7 +269,7 @@ namespace TCC
                 case AbnormalityType.Stun:
                     return new SolidColorBrush(Colors.Red);
                 case AbnormalityType.DamageOverTime:
-                    return new SolidColorBrush(Color.FromRgb(0x98, 0x42, 0x24));
+                    return new SolidColorBrush(Color.FromRgb(0x98, 0x42, 0xf4));
                 case AbnormalityType.WeakeningEffect:
                     return new SolidColorBrush(Color.FromRgb(0x8f, 0xf4, 0x42));
                 case AbnormalityType.Buff:

@@ -52,7 +52,8 @@
         </Style>
         <local:ClassImageConverter x:Key="classConv"/>
         <local:LaurelImageConverter x:Key="laurelConv"/>
-        <local:CombatToColorCOnverter x:Key="combatConv"/>
+        <local:CombatToColorConverter x:Key="combatConv"/>
+        <local:HP_PercentageConverter x:Key="hpPercConv"/>
     </Window.Resources>
     <Grid Margin="10,0">
         <!--<Grid.CacheMode>
@@ -86,7 +87,7 @@
                         <DropShadowEffect Opacity="0.6" ShadowDepth="3"/>
                     </Border.Effect>-->
             </Border>
-            <Rectangle Width="21" Height="21" Margin="0" Grid.Column="5" Fill="{Binding Combat, Converter={StaticResource combatConv}}" VerticalAlignment="Center"  HorizontalAlignment="Center">
+            <Rectangle Width="21" Height="21" Margin="0" Grid.Column="5" Fill="{Binding IsInCombat, Converter={StaticResource combatConv}}" VerticalAlignment="Center"  HorizontalAlignment="Center">
                 <Rectangle.OpacityMask>
                     <ImageBrush ImageSource="/resources/combat.png"/>
                 </Rectangle.OpacityMask>
@@ -98,17 +99,17 @@
                     <BitmapCache RenderAtScale="1.8" />
                 </TextBlock.CacheMode>
             </TextBlock>
-            <TextBlock Text="{Binding CurrentLevel}" Margin="0" Name="levelTB"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"
+            <TextBlock Text="{Binding Level}" Margin="0" Name="levelTB"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"
                        Style="{StaticResource hpBarNumber}" >
                 <TextBlock.CacheMode>
                     <BitmapCache RenderAtScale="1.8"></BitmapCache>
                 </TextBlock.CacheMode></TextBlock>
-            <TextBlock Text="{Binding CurrentName}" Name="nameTB"  VerticalAlignment="Center" Margin="7,0" HorizontalAlignment="Left" Grid.Column="2"
+            <TextBlock Text="{Binding Name}" Name="nameTB"  VerticalAlignment="Center" Margin="7,0" HorizontalAlignment="Left" Grid.Column="2"
                        Style="{StaticResource hpBarNumber}" >
                 <TextBlock.CacheMode>
                     <BitmapCache RenderAtScale="1.8"></BitmapCache>
                 </TextBlock.CacheMode></TextBlock>
-            <TextBlock Text="{Binding CurrentIlvl}" Name="ilvlTB" VerticalAlignment="Center" Margin="20,0" HorizontalAlignment="Left" Grid.Column="3"
+            <TextBlock Text="{Binding ItemLevel}" Name="ilvlTB" VerticalAlignment="Center" Margin="20,0" HorizontalAlignment="Left" Grid.Column="3"
                        Style="{StaticResource hpBarNumber}" >
                 <TextBlock.CacheMode>
                     <BitmapCache RenderAtScale="1.8"></BitmapCache>
@@ -119,7 +120,7 @@
         <Grid Margin="8,8" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1">
             <Rectangle Name="laurel" Width="74" Height="80" Margin="0,-8,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Rectangle.Fill>
-                    <ImageBrush ImageSource="{Binding CurrentLaurel, Converter={StaticResource laurelConv}}"/>
+                    <ImageBrush ImageSource="{Binding Laurel, Converter={StaticResource laurelConv}}"/>
                 </Rectangle.Fill>
                 <Rectangle.Effect>
                     <DropShadowEffect Opacity="0.3" ShadowDepth="3"/>
@@ -127,7 +128,7 @@
             </Rectangle>
             <Rectangle Name="classIcon" Fill="White" Width="50" Height="50" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Rectangle.OpacityMask>
-                    <ImageBrush ImageSource="{Binding CurrentClass, Converter={StaticResource classConv}}"/>
+                    <ImageBrush ImageSource="{Binding Class, Converter={StaticResource classConv}}"/>
                 </Rectangle.OpacityMask>
                 <Rectangle.Effect>
                     <DropShadowEffect Color="#ff20f0ff" BlurRadius="7" ShadowDepth="0"/>
@@ -172,7 +173,7 @@
                     </Path.RenderTransform>
                 </Path>-->
 
-                <TextBlock Text="{Binding PercentageHP, StringFormat=#.#%}" Name="hpPercTB" Style="{StaticResource hpBarNumber}" HorizontalAlignment="Right" Margin="5,2,5,2" Opacity=".9">
+                <TextBlock Text="{Binding CurrentHP, StringFormat=#.#%, Converter={StaticResource hpPercConv}}" Name="hpPercTB" Style="{StaticResource hpBarNumber}" HorizontalAlignment="Right" Margin="5,2,5,2" Opacity=".9">
                     <TextBlock.CacheMode>
                         <BitmapCache RenderAtScale="1.8"></BitmapCache>
                     </TextBlock.CacheMode>
@@ -239,7 +240,7 @@
 
                 <TextBlock Name="hpTB" Text="{Binding CurrentHP}" Style="{StaticResource hpBarNumber}" Margin="10,0,0,0" Grid.Column="0" />
                 <TextBlock Style="{StaticResource hpBarNumber}" Grid.Column="1" Text="/" Margin="4,0,4,0"  Foreground="#aaffffff" />
-                <TextBlock Name="hpMaxTB" Style="{StaticResource hpBarNumber}" Margin="0,0,10,0" Grid.Column="2" Foreground="#aaffffff" />
+                <TextBlock Name="hpMaxTB" Style="{StaticResource hpBarNumber}" Text="{Binding MaxHP}" Margin="0,0,10,0" Grid.Column="2" Foreground="#aaffffff" />
 
             </Grid>
             <Grid Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" Opacity=".9">
@@ -255,7 +256,7 @@
 
                 <TextBlock Name="mpTB" Text="{Binding CurrentMP}" Style="{StaticResource hpBarNumber}" Margin="10,-1,0,0" Grid.Column="0" />
                 <TextBlock Style="{StaticResource hpBarNumber}" Grid.Column="1" Text="/" Margin="4,-1,4,0" Foreground="#ffcccccc" />
-                <TextBlock Name="mpMaxTB" Style="{StaticResource hpBarNumber}" Margin="0,-1,10,0" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Foreground="#ffcccccc" />
+                <TextBlock Name="mpMaxTB" Style="{StaticResource hpBarNumber}" Text="{Binding MaxMP}" Margin="0,-1,10,0" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Foreground="#ffcccccc" />
 
             </Grid>
             <Grid Grid.Column="0" Grid.Row="2" Opacity=".9">
@@ -271,7 +272,7 @@
 
                 <TextBlock Name="stTB" Text="{Binding CurrentST}" Style="{StaticResource hpBarNumber}" Margin="10,0,0,0" Grid.Column="0" Grid.Row="2" FontSize="12" Foreground="#ffffff" />
                 <TextBlock Style="{StaticResource hpBarNumber}" Grid.Column="1" Text="/" Margin="4,0" Grid.Row="2" Foreground="#ffffff" FontSize="12" />
-                <TextBlock Name="stMaxTB" Style="{StaticResource hpBarNumber}" Margin="0,0,15,0" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" Foreground="#ffffff" FontSize="12" />
+                <TextBlock Name="stMaxTB" Style="{StaticResource hpBarNumber}" Text="{Binding MaxST}" Margin="0,0,15,0" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" Foreground="#ffffff" FontSize="12" />
             </Grid>
         </Grid>
     </Grid>

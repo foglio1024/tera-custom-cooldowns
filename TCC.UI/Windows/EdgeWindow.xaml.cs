@@ -29,7 +29,7 @@ namespace TCC
         //DispatcherTimer TestTimer;
         Timer ExpireEdge;
         Timer HideTimer;
-        public static bool Visible { get; set; }
+        //public static bool Visible { get; set; }
 
         public event MaxEdge MaxedEdge;
         public event EdgeReset NormalEdge;
@@ -46,10 +46,7 @@ namespace TCC
             get { return (int)GetValue(CurrentEdgeProperty); }
             set { SetValue(CurrentEdgeProperty, value); }
         }
-
-        // Using a DependencyProperty as the backing store for CurrentEdge.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty CurrentEdgeProperty =
-            DependencyProperty.Register("CurrentEdge", typeof(int), typeof(EdgeGaugeWindow));
+        public static readonly DependencyProperty CurrentEdgeProperty = DependencyProperty.Register("CurrentEdge", typeof(int), typeof(EdgeGaugeWindow));
 
 
 
@@ -62,8 +59,8 @@ namespace TCC
             Warrior.GambleBuff += StartGambleBuff;
             Warrior.GambleCooldown += StartGambleCooldown;
 
-            Left = Properties.Settings.Default.GaugeWindowLeft;
-            Top = Properties.Settings.Default.GaugeWindowTop;
+            Left = Properties.Settings.Default.ClassGaugeLeft;
+            Top = Properties.Settings.Default.ClassGaugeTop;
 
             edgeArcs = new ObservableCollection<EdgeArc>();
             ArcsGrid.DataContext = edgeArcs;
@@ -230,8 +227,9 @@ namespace TCC
 
         private void Window_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Properties.Settings.Default.GaugeWindowLeft = Left;
-            Properties.Settings.Default.GaugeWindowTop = Top;
+            Properties.Settings.Default.ClassGaugeLeft = Left;
+            Properties.Settings.Default.ClassGaugeTop = Top;
+            Properties.Settings.Default.Save();
         }
     }
 }

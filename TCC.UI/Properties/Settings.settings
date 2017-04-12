@@ -8,10 +8,10 @@
     <Setting Name="CooldownBarLeft" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="GaugeWindowTop" Type="System.Double" Scope="User">
+    <Setting Name="BossGaugeWindowTop" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="GaugeWindowLeft" Type="System.Double" Scope="User">
+    <Setting Name="BossGaugeWindowLeft" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="CharacterWindowTop" Type="System.Double" Scope="User">
@@ -22,6 +22,18 @@
     </Setting>
     <Setting Name="Transparent" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ClassGaugeTop" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="ClassGaugeLeft" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="BuffBarTop" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="BuffBarLeft" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

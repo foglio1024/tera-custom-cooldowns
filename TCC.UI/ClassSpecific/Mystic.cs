@@ -14,7 +14,7 @@ namespace TCC
 
         public static void CheckHurricane(S_ABNORMALITY_BEGIN msg)
         {
-            if (msg.id == HURRICANE_ID && msg.casterId == SessionManager.CurrentCharId)
+            if (msg.id == HURRICANE_ID && msg.casterId == SessionManager.CurrentPlayer.EntityId)
             {
                 SkillsDatabase.TryGetSkill(HURRICANE_ID, Class.Common, out Skill hurricane);
                 SkillManager.AddSkill(hurricane, HURRICANE_DURATION);

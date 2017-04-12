@@ -28,159 +28,75 @@ namespace TCC
     public partial class CharacterWindow : Window, INotifyPropertyChanged
     {
         static int AnimationTime = 200;
-        int MaxHP, MaxMP, MaxST = 0;
+        //int MaxHP, MaxMP, MaxST = 0;
         static int MaxFlightEnergy = 1000;
 
-        Class currentClass = Class.None;
-        public Class CurrentClass
-        {
-            get => currentClass;
-            set
-            {
-                if (value != currentClass)
-                {
-                    currentClass = value;
-                    NotifyPropertyChanged("CurrentClass");
-                }
-            }
-        }
+        //private float currentHP;
+        //public float CurrentHP
+        //{
+        //    get
+        //    {
+        //        return currentHP;
+        //    }
+        //    set
+        //    {
+        //        if(currentHP != value)
+        //        {
+        //            currentHP = value;
+        //            NotifyPropertyChanged("CurrentHP");
+        //        }
+        //    }
+        //}
+        //private float currentMP;
+        //public float CurrentMP
+        //{
+        //    get
+        //    {
+        //        return currentMP;
+        //    }
+        //    set
+        //    {
+        //        if (currentMP != value)
+        //        {
+        //            currentMP = value;
+        //            NotifyPropertyChanged("CurrentMP");
+        //        }
+        //    }
+        //}
+        //private float currentST;
+        //public float CurrentST
+        //{
+        //    get
+        //    {
+        //        return currentST;
+        //    }
+        //    set
+        //    {
+        //        if (currentST != value)
+        //        {
+        //            currentST = value;
+        //            NotifyPropertyChanged("CurrentST");
+        //        }
+        //    }
+        //}
 
-        string currentName;
-        public string CurrentName
-        {
-            get => currentName;
-            set
-            {
-                if (value != currentName)
-                {
-                    currentName = value;
-                    NotifyPropertyChanged("CurrentName");
-                }
-            }
-        }
+        //bool combat;
+        //public bool Combat
+        //{
+        //    get
+        //    {
+        //        return combat;
+        //    }
+        //    set
+        //    {
+        //        if(combat != value)
+        //        {
+        //            combat = value;
+        //            NotifyPropertyChanged("Combat");
+        //        }
+        //    }
+        //}
 
-        Laurel currentLaurel = Laurel.None;
-        public Laurel CurrentLaurel
-        {
-            get => currentLaurel;
-            set
-            {
-                if (value != currentLaurel)
-                {
-                    currentLaurel = value;
-                    NotifyPropertyChanged("CurrentLaurel");
-                }
-            }
-        }
-
-        private int currentLevel;
-        public int CurrentLevel
-        {
-            get => currentLevel; 
-            set
-            {
-                if (currentLevel != value)
-                {
-                    currentLevel = value;
-                    NotifyPropertyChanged("CurrentLevel");
-                }
-
-            }
-        }
-
-        private int currentIlvl;
-        public int CurrentIlvl
-        {
-            get => currentIlvl;
-            set
-            {
-                if (value != currentIlvl)
-                {
-                    currentIlvl = value;
-                    NotifyPropertyChanged("CurrentIlvl");
-                }
-            }
-        }
-
-        private float currentHP;
-        public float CurrentHP
-        {
-            get
-            {
-                return currentHP;
-            }
-            set
-            {
-                if(currentHP != value)
-                {
-                    currentHP = value;
-                    NotifyPropertyChanged("CurrentHP");
-                }
-            }
-        }
-        private float currentMP;
-        public float CurrentMP
-        {
-            get
-            {
-                return currentMP;
-            }
-            set
-            {
-                if (currentMP != value)
-                {
-                    currentMP = value;
-                    NotifyPropertyChanged("CurrentMP");
-                }
-            }
-        }
-        private float currentST;
-        public float CurrentST
-        {
-            get
-            {
-                return currentST;
-            }
-            set
-            {
-                if (currentST != value)
-                {
-                    currentST = value;
-                    NotifyPropertyChanged("CurrentST");
-                }
-            }
-        }
-
-        bool combat;
-        public bool Combat
-        {
-            get
-            {
-                return combat;
-            }
-            set
-            {
-                if(combat != value)
-                {
-                    combat = value;
-                    NotifyPropertyChanged("Combat");
-                }
-            }
-        }
-
-        double percentageHP;
-        public double PercentageHP
-        {
-            get { return percentageHP; }
-            set
-            {
-                if(percentageHP != value)
-                {
-                    percentageHP = value;
-                    NotifyPropertyChanged("PercentageHP");
-                }
-            }
-        }
 
         private void NotifyPropertyChanged(string prop)
         {
@@ -190,7 +106,7 @@ namespace TCC
         public CharacterWindow()
         {
             InitializeComponent();
-            this.DataContext = this;
+            this.DataContext = SessionManager.CurrentPlayer;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -206,20 +122,17 @@ namespace TCC
             this.Top = Properties.Settings.Default.CharacterWindowTop;
             this.Left = Properties.Settings.Default.CharacterWindowLeft;
 
-            PacketRouter.HPUpdated += UpdateHP;
-            PacketRouter.MPUpdated += UpdateMP;
-            PacketRouter.STUpdated += UpdateST;
-            PacketRouter.FlightEnergyUpdated += UpdateFlightEnergy;
+            SessionManager.CurrentPlayer.HPUpdated += UpdateHP;
+            SessionManager.CurrentPlayer.MPUpdated += UpdateMP;
+            SessionManager.CurrentPlayer.STUpdated += UpdateST;
+            SessionManager.CurrentPlayer.FlightEnergyUpdated += UpdateFlightEnergy;
 
-            PacketRouter.IlvlUpdated += UpdateIlvl;
+            //PacketRouter.MaxHPUpdated += SetMaxHP;
+            //PacketRouter.MaxMPUpdated += SetMaxMP;
+            //PacketRouter.MaxSTUpdated += SetMaxST;
 
-            PacketRouter.MaxHPUpdated += SetMaxHP;
-            PacketRouter.MaxMPUpdated += SetMaxMP;
-            PacketRouter.MaxSTUpdated += SetMaxST;
-
-            SessionManager.InCombat += () => { Combat = true; };
-            SessionManager.OutOfCombat += () => { Combat = false; };
-            //PacketRouter.MaxFlightEnergyUpdated += SetMaxFlightEnergy;
+            //SessionManager.CurrentPlayer.InCombat += () => { Combat = true; };
+            //SessionManager.CurrentPlayer.OutOfCombat += () => { Combat = false; };
 
             hpBar.RenderTransform = new ScaleTransform(1, 1, 0, .5);
             mpBar.RenderTransform = new ScaleTransform(1, 1, 0, .5);
@@ -231,57 +144,12 @@ namespace TCC
             stBar.Width = @base.Width;
             flightBar.Width = dummyFlightBar.Width;
 
-            //Binding classBinding = new Binding
-            //{
-            //    Source = this,
-            //    Path = new PropertyPath("CurrentClass"),
-            //    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
-            //    Converter = new ClassImageConverter(),
-            //};
-            //Binding laurelBinding = new Binding
-            //{
-            //    Source = this,
-            //    Path = new PropertyPath("CurrentLaurel"),
-            //    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
-            //    Converter = new LaurelImageConverter()
-            //};
-            //Binding nameBinding = new Binding
-            //{
-            //    Source = this,
-            //    Path = new PropertyPath("CurrentName"),
-            //    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
-            //};
-            //Binding levelBinding = new Binding
-            //{
-            //    Source = this,
-            //    Path = new PropertyPath("CurrentLevel"),
-            //    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
-            //};
-            //Binding ilvlBinding = new Binding
-            //{
-            //    Source = this,
-            //    Path = new PropertyPath("CurrentIlvl"),
-            //    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
-            //};
-
-            //classIcon.SetBinding(Rectangle.OpacityMaskProperty, classBinding);
-            //laurel.SetBinding(Rectangle.FillProperty, laurelBinding);
-            //nameTB.SetBinding(TextBlock.TextProperty, nameBinding);
-            //levelTB.SetBinding(TextBlock.TextProperty, levelBinding);
-            //ilvlTB.SetBinding(TextBlock.TextProperty, ilvlBinding);
-
-            
+          
 
             var d = new DispatcherTimer();
             d.Interval = TimeSpan.FromMilliseconds(333);
             d.Tick += D_Tick;
             //d.Start();
-
-        }
-
-        private void UpdateIlvl(int statValue)
-        {
-            CurrentIlvl = statValue;
         }
 
         internal void ShowResolve()
@@ -299,7 +167,6 @@ namespace TCC
             }));
         }
 
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void D_Tick(object sender, EventArgs e)
@@ -308,70 +175,52 @@ namespace TCC
             //currHp += 3000;
         }
 
-        private void SetMaxHP(int statValue)
-        {
-            MaxHP = statValue;
-            Dispatcher.BeginInvoke(new Action(() =>
-            {
-                hpMaxTB.Text = statValue.ToString();
-            }));
-        }
-        private void SetMaxMP(int statValue)
-        {
-            MaxMP = statValue;
-            Dispatcher.BeginInvoke(new Action(() =>
-            {
-                mpMaxTB.Text = statValue.ToString();
-            }));
+        //private void SetMaxHP(int statValue)
+        //{
+        //    MaxHP = statValue;
+        //    Dispatcher.BeginInvoke(new Action(() =>
+        //    {
+        //        hpMaxTB.Text = statValue.ToString();
+        //    }));
+        //}
+        //private void SetMaxMP(int statValue)
+        //{
+        //    MaxMP = statValue;
+        //    Dispatcher.BeginInvoke(new Action(() =>
+        //    {
+        //        mpMaxTB.Text = statValue.ToString();
+        //    }));
 
-        }
-        private void SetMaxST(int statValue)
-        {
-            MaxST = statValue;
-            Dispatcher.BeginInvoke(new Action(() =>
-            {
-                stMaxTB.Text = statValue.ToString();
-            }));
-        }
+        //}
+        //private void SetMaxST(int statValue)
+        //{
+        //    MaxST = statValue;
+        //    Dispatcher.BeginInvoke(new Action(() =>
+        //    {
+        //        stMaxTB.Text = statValue.ToString();
+        //    }));
+        //}
 
         private void UpdateHP(float newValue)
         {
-            CurrentHP = newValue;
-            PercentageHP = newValue / MaxHP;
             Dispatcher.BeginInvoke(new Action(() =>  
             {
-                hpBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(ValueToLength((double)newValue, (double)MaxHP), TimeSpan.FromMilliseconds(AnimationTime)) { EasingFunction = new QuadraticEase() });
-
-                //if (MaxHP != 0)
-                //{
-                //    var perc = 100 * newValue / MaxHP;
-                //    hpPercTB.Text = String.Format("{0:0.0}%", perc);
-                //}
-                //else
-                //{
-                //    hpPercTB.Text = "-";
-                //}
+                hpBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(ValueToLength((double)newValue, (double)SessionManager.CurrentPlayer.MaxHP), TimeSpan.FromMilliseconds(AnimationTime)) { EasingFunction = new QuadraticEase() });
             }));
         }
-        private void UpdateMP(int newValue)
+        private void UpdateMP(float newValue)
         {
-            CurrentMP = newValue;
             Dispatcher.BeginInvoke(new Action(() => 
             {
-                //_doubleAnimation.To = ValueToLength(newValue, MaxMP);
-                mpBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(ValueToLength((double)newValue, (double)MaxMP), TimeSpan.FromMilliseconds(AnimationTime)) { EasingFunction = new QuadraticEase() });
-                //mpTB.Text = newValue.ToString();
+                mpBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(ValueToLength((double)newValue, (double)SessionManager.CurrentPlayer.MaxMP), TimeSpan.FromMilliseconds(AnimationTime)) { EasingFunction = new QuadraticEase() });
             }));
 
         }
-        private void UpdateST(int newValue)
+        private void UpdateST(float newValue)
         {
-            CurrentST = newValue;
             Dispatcher.BeginInvoke(new Action(() => 
             {
-                //_doubleAnimation.To = ValueToLength(newValue, MaxST);
-                stBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(ValueToLength((double)newValue, (double)MaxST), TimeSpan.FromMilliseconds(AnimationTime)) { EasingFunction = new QuadraticEase() });
-                //stTB.Text = newValue.ToString();
+                stBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(ValueToLength((double)newValue, (double)SessionManager.CurrentPlayer.MaxST), TimeSpan.FromMilliseconds(AnimationTime)) { EasingFunction = new QuadraticEase() });
             }));
         }
 
@@ -381,10 +230,6 @@ namespace TCC
             {
                 flightBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(ValueToLength((double)newValue, 1000), TimeSpan.FromMilliseconds(AnimationTime)) { EasingFunction = new QuadraticEase() });
             }));
-        }
-        private void SetMaxFlightEnergy(int statValue)
-        {
-            MaxFlightEnergy = statValue;
         }
 
 
@@ -424,13 +269,10 @@ namespace TCC
                 UpdateHP(0);
                 UpdateMP(0);
                 UpdateST(0);
-                MaxHP = 0;
-                MaxMP = 0;
-                MaxST = 0;
-                CurrentLaurel = Laurel.None;
-                CurrentName = "";
-                CurrentLevel = 1;
-                CurrentClass = Class.None;
+                //MaxHP = 0;
+                //MaxMP = 0;
+                //MaxST = 0;
+                //CurrentLevel = 1;
             }));
         }
         public static BitmapImage Bitmap2BitmapImage(System.Drawing.Bitmap bitmap)
@@ -536,7 +378,7 @@ namespace TCC
                 case Class.Assassin:
                     className = "ninja";
                     break;
-                case Class.Valkyrie:
+                case Class.Glaiver:
                     className = "glaiver";
                     break;
                 default:
@@ -558,7 +400,7 @@ namespace TCC
         }
     }
 
-    public class CombatToColorCOnverter : IValueConverter
+    public class CombatToColorConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -571,6 +413,27 @@ namespace TCC
             else
             {
                 return new SolidColorBrush(Colors.Black);
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class HP_PercentageConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            float hp = (float)value;
+            if(SessionManager.CurrentPlayer.MaxHP > 0)
+            {
+                return hp / SessionManager.CurrentPlayer.MaxHP;
+            }
+            else
+            {
+                return 0;
             }
         }
 

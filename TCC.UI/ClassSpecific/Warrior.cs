@@ -21,7 +21,7 @@ namespace TCC
 
         public static void CheckGambleBuff(S_ABNORMALITY_BEGIN sAbnormalityBegin)
         {
-            if (GambleIDs.Contains(sAbnormalityBegin.id) && sAbnormalityBegin.casterId == SessionManager.CurrentCharId)
+            if (GambleIDs.Contains(sAbnormalityBegin.id) && sAbnormalityBegin.casterId == SessionManager.CurrentPlayer.EntityId)
             {
                 GambleBuff.Invoke(sAbnormalityBegin.duration);
             }

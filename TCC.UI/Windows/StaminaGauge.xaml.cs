@@ -29,7 +29,7 @@ namespace TCC
         public event StaminaCapEvent Maxed;
         public event StaminaCapEvent UnMaxed;
         static int MaxStamina = 1;
-        public static bool Visible { get; set; }
+        //public static bool Visible { get; set; }
         bool maxed;
         bool IsMaxed {
             get
@@ -61,11 +61,11 @@ namespace TCC
             this.color = color;
             Maxed += StaminaGauge_Maxed;
             UnMaxed += StaminaGauge_Unmaxed;
-            PacketRouter.STUpdated += StaminaGauge_StaminaChanged;
+            SessionManager.CurrentPlayer.STUpdated += StaminaGauge_StaminaChanged;
             PacketRouter.MaxSTUpdated += PacketParser_MaxSTUpdated;
 
-            Left = Properties.Settings.Default.GaugeWindowLeft;
-            Top = Properties.Settings.Default.GaugeWindowTop;
+            Left = Properties.Settings.Default.ClassGaugeLeft;
+            Top = Properties.Settings.Default.ClassGaugeTop;
 
             StaminaAmount.EndAngle = 0;
 
@@ -78,13 +78,13 @@ namespace TCC
         {
             MaxStamina = statValue;
         }
-        int oldStamina;
-        private void StaminaGauge_StaminaChanged(int stamina)
+        float oldStamina;
+        private void StaminaGauge_StaminaChanged(float stamina)
         {
             Dispatcher.Invoke(() => 
             {
                 num.Text = stamina.ToString();
-                double newAngle = ValueToAngle(stamina);
+                double newAngle = ValueToAngle(Convert.ToInt32(stamina));
                 DoubleAnimation anim = new DoubleAnimation(newAngle, TimeSpan.FromMilliseconds(100)) { EasingFunction = new QuadraticEase() };
                 StaminaAmount.BeginAnimation(Arc.EndAngleProperty, anim);
 
@@ -152,8 +152,9 @@ namespace TCC
         }
         private void Window_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Properties.Settings.Default.GaugeWindowLeft = Left;
-            Properties.Settings.Default.GaugeWindowTop = Top;
+            Properties.Settings.Default.ClassGaugeLeft = Left;
+            Properties.Settings.Default.ClassGaugeTop= Top;
+            Properties.Settings.Default.Save();
         }
 
     }

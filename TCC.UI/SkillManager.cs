@@ -48,7 +48,7 @@ namespace TCC
         public static void AddSkill(S_START_COOLTIME_SKILL packet)
         {
 
-            if(SkillsDatabase.TryGetSkill(packet.SkillId, SessionManager.CurrentClass, out Skill skill))
+            if(SkillsDatabase.TryGetSkill(packet.SkillId, SessionManager.CurrentPlayer.Class, out Skill skill))
             {
                 if (!Filter(skill.Name))
                 {
@@ -139,7 +139,7 @@ namespace TCC
         }
         public static void ChangeSkillCooldown(S_DECREASE_COOLTIME_SKILL packet)
         {
-            if (SkillsDatabase.TryGetSkill(packet.SkillId, SessionManager.CurrentClass, out Skill skill))
+            if (SkillsDatabase.TryGetSkill(packet.SkillId, SessionManager.CurrentPlayer.Class, out Skill skill))
             {
                 Changed?.Invoke(new SkillCooldown(skill, (int)packet.Cooldown, CooldownType.Skill));
             }
@@ -204,13 +204,15 @@ namespace TCC
             {
                 NormalSkillsQueue.Clear();
                 LongSkillsQueue.Clear();
-                SessionManager.CurrentPlayerBuffs.Clear();
+                SessionManager.CurrentPlayer.Buffs.Clear();
+                SessionManager.CurrentPlayer.Debuffs.Clear();
+                SessionManager.CurrentPlayer.InfBuffs.Clear();
             }));
 
-            SessionManager.CurrentClass = Class.None;
-            SessionManager.CurrentCharId = 0;
-            WindowManager.HideWindow(WindowManager.ClassSpecificGauge);
-            WindowManager.ClassSpecificGauge = null;
+            SessionManager.CurrentPlayer.Class = Class.None;
+            SessionManager.CurrentPlayer.EntityId = 0;
+            WindowManager.HideWindow(WindowManager.ClassSpecificWindow);
+            WindowManager.ClassSpecificWindow = null;
             LastSkills.Clear();
             SessionManager.Logged = false;
         }

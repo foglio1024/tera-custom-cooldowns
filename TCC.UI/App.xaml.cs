@@ -48,7 +48,7 @@ namespace TCC
                 WindowManager.CooldownWindow.LoadingDone();
             }));
 
-            SessionManager.CurrentClass = Class.None;
+            SessionManager.CurrentPlayer.Class = Class.None;
 
             WindowManager.ShowWindow(WindowManager.CooldownWindow);
             LoadThread.Start();

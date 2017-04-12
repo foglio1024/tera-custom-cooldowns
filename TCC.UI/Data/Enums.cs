@@ -20,7 +20,7 @@ namespace TCC
         Engineer = 9,
         Fighter = 10,
         Assassin = 11,
-        Valkyrie = 12,
+        Glaiver = 12,
         Common = 255,
         None = 256
     }
