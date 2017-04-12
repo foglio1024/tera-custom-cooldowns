@@ -28,7 +28,7 @@ namespace TCC
     {
         public event StaminaCapEvent Maxed;
         public event StaminaCapEvent UnMaxed;
-        static int MaxStamina = 1;
+        //static int MaxStamina = 1;
         //public static bool Visible { get; set; }
         bool maxed;
         bool IsMaxed {
@@ -62,7 +62,7 @@ namespace TCC
             Maxed += StaminaGauge_Maxed;
             UnMaxed += StaminaGauge_Unmaxed;
             SessionManager.CurrentPlayer.STUpdated += StaminaGauge_StaminaChanged;
-            PacketRouter.MaxSTUpdated += PacketParser_MaxSTUpdated;
+            //PacketRouter.MaxSTUpdated += PacketParser_MaxSTUpdated;
 
             Left = Properties.Settings.Default.ClassGaugeLeft;
             Top = Properties.Settings.Default.ClassGaugeTop;
@@ -74,10 +74,10 @@ namespace TCC
             baseEll.Fill = new SolidColorBrush(Colors.Transparent);
         }
 
-        private void PacketParser_MaxSTUpdated(int statValue)
-        {
-            MaxStamina = statValue;
-        }
+        //private void PacketParser_MaxSTUpdated(int statValue)
+        //{
+        //    MaxStamina = statValue;
+        //}
         float oldStamina;
         private void StaminaGauge_StaminaChanged(float stamina)
         {
@@ -88,7 +88,7 @@ namespace TCC
                 DoubleAnimation anim = new DoubleAnimation(newAngle, TimeSpan.FromMilliseconds(100)) { EasingFunction = new QuadraticEase() };
                 StaminaAmount.BeginAnimation(Arc.EndAngleProperty, anim);
 
-                if(stamina == MaxStamina)
+                if(stamina == SessionManager.CurrentPlayer.MaxST)
                 {
                     IsMaxed = true;
                 }
@@ -96,9 +96,7 @@ namespace TCC
                 {
                     IsMaxed = false;
                 }
-                //else if(stamina < oldStamina && oldStamina == MaxStamina)
-                //{
-                //}
+
                 oldStamina = stamina;
             });
         }
@@ -107,9 +105,9 @@ namespace TCC
 
         double ValueToAngle(int val)
         {
-            if (359.9 * ((double)val / (double)MaxStamina) != Double.NaN)
+            if (359.9 * ((double)val / (double)SessionManager.CurrentPlayer.MaxST) != Double.NaN)
             {
-                return 359.9 * ((double)val / (double)MaxStamina);
+                return 359.9 * ((double)val / (double)SessionManager.CurrentPlayer.MaxST);
             }
             else
             {
@@ -140,10 +138,15 @@ namespace TCC
             IntPtr hwnd = new WindowInteropHelper(this).Handle;
             FocusManager.MakeUnfocusable(hwnd);
             FocusManager.HideFromToolBar(hwnd);
-            if (Properties.Settings.Default.Transparent)
+            Opacity = 0;
+            ContextMenu = new ContextMenu();
+            var HideButton = new MenuItem() { Header = "Hide" };
+            HideButton.Click += (s, ev) => 
             {
-                FocusManager.MakeTransparent(hwnd);
-            }
+                this.Visibility = Visibility.Collapsed;
+            };
+            ContextMenu.Items.Add(HideButton);
+
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -152,10 +155,14 @@ namespace TCC
         }
         private void Window_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Properties.Settings.Default.ClassGaugeLeft = Left;
-            Properties.Settings.Default.ClassGaugeTop= Top;
-            Properties.Settings.Default.Save();
+            //Properties.Settings.Default.ClassGaugeLeft = Left;
+            //Properties.Settings.Default.ClassGaugeTop= Top;
+            //Properties.Settings.Default.Save();
         }
 
+        private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ContextMenu.IsOpen = true;
+        }
     }
 }

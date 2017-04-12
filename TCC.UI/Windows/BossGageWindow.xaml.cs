@@ -33,10 +33,15 @@ namespace TCC.Windows
             IntPtr hwnd = new WindowInteropHelper(this).Handle;
             FocusManager.MakeUnfocusable(hwnd);
             FocusManager.HideFromToolBar(hwnd);
-            if (Properties.Settings.Default.Transparent)
+            Opacity = 0;
+            ContextMenu = new ContextMenu();
+            var HideButton = new MenuItem() { Header = "Hide" };
+            HideButton.Click += (s, ev) =>
             {
-                FocusManager.MakeTransparent(hwnd);
-            }
+                this.Visibility = Visibility.Collapsed;
+            };
+            ContextMenu.Items.Add(HideButton);
+
 
         }
 
@@ -51,6 +56,11 @@ namespace TCC.Windows
             {
                 SessionManager.CurrentBosses.Clear();
             }));
+        }
+
+        private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ContextMenu.IsOpen = true;
         }
     }
 }

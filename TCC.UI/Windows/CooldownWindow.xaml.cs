@@ -55,7 +55,7 @@ namespace TCC
         public CooldownWindow()
         {
             Instance = this;
-
+            Opacity = 0;
             InitializeComponent();
 
             SkillsDatabase.Progress += UpdateLoadGauge;
@@ -107,16 +107,20 @@ namespace TCC
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Top = Properties.Settings.Default.CooldownBarTop;
-            this.Left = Properties.Settings.Default.CooldownBarLeft;
+            //this.Top = Properties.Settings.Default.CooldownBarTop;
+            //this.Left = Properties.Settings.Default.CooldownBarLeft;
 
             IntPtr hwnd = new WindowInteropHelper(this).Handle;
             FocusManager.MakeUnfocusable(hwnd);
             FocusManager.HideFromToolBar(hwnd);
-            if (Properties.Settings.Default.Transparent)
+
+            ContextMenu = new ContextMenu();
+            var HideButton = new MenuItem() { Header = "Hide" };
+            HideButton.Click += (s, ev) =>
             {
-                FocusManager.MakeTransparent(hwnd);
-            }
+                this.Visibility = Visibility.Collapsed;
+            };
+            ContextMenu.Items.Add(HideButton);
 
 
         }
@@ -132,11 +136,16 @@ namespace TCC
                 {
                     loadArc.Visibility = Visibility.Hidden;
                     FocusManager.FocusTimer.Start();
-                    this.Hide();
+                    //this.Hide();
                 };
                 loadArc.Stroke = new SolidColorBrush(Color.FromArgb(255, 100, 255, 100));
                 loadArc.BeginAnimation(Arc.StartAngleProperty, a);
             }));
+        }
+
+        private void Window_MouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            ContextMenu.IsOpen = true;
         }
     }
 }

@@ -24,8 +24,13 @@ namespace TCC
         public static CharacterWindow CharacterWindow;
         public static BossGageWindow BossGauge;
         public static AbnormalitiesWindow BuffBar;
-        static ContextMenu ContextMenu;
+        public static ContextMenu ContextMenu;
         static MenuItem ClickThruButton;
+        static MenuItem CharacterWindowVisibilityButton;
+        static MenuItem CooldownWindowVisibilityButton;
+        static MenuItem ClassSpecificWindowVisibilityButton;
+        static MenuItem BossGaugeWindowVisibilityButton;
+        static MenuItem BuffBarWindowVisibilityButton;
         static System.Windows.Forms.NotifyIcon TrayIcon;
 
         public static bool Transparent;
@@ -34,15 +39,15 @@ namespace TCC
         public static void Init()
         {
             CooldownWindow = new CooldownWindow();
-            ClassSpecificWindow = new Window();
+            ClassSpecificWindow = new StaminaGauge(Colors.Red);
             CharacterWindow = new CharacterWindow();
             BossGauge = new BossGageWindow();
             BuffBar = new AbnormalitiesWindow();
 
             /*TODO: move to each window*/
-            CooldownWindow.Opacity = 0;
-            ClassSpecificWindow.Opacity = 0;
-            CharacterWindow.Opacity = 0;
+            //CooldownWindow.Opacity = 0;
+            //ClassSpecificWindow.Opacity = 0;
+            //CharacterWindow.Opacity = 0;
 
             //CooldownWindow.Top = Properties.Settings.Default.CooldownBarTop;
             //CooldownWindow.Left = Properties.Settings.Default.CooldownBarLeft;
@@ -67,9 +72,44 @@ namespace TCC
             ClickThruButton = new MenuItem() { Header = "Click through"};
             var CloseButton = new MenuItem() { Header = "Close" };
 
-            CloseButton.Click += (s, ev) => App.CloseApp();
-            ClickThruButton.Click += (s, ev) => SetTransparentWindows();
+            CharacterWindowVisibilityButton = new MenuItem() { Header = "Unhide character window" };
+            CharacterWindowVisibilityButton.Click += (s, ev) =>
+            {
+                CharacterWindow.Visibility = Visibility.Visible;
+            };
+            CooldownWindowVisibilityButton  = new MenuItem() { Header = "Unhide cooldowns bar" };
+            CooldownWindowVisibilityButton.Click += (s, ev) =>
+            {
+                CooldownWindow.Visibility = Visibility.Visible;
+            };
+            ClassSpecificWindowVisibilityButton = new MenuItem() { Header = "Unhide stamina gauge" };
+            ClassSpecificWindowVisibilityButton.Click += (s, ev) =>
+            {
+                ClassSpecificWindow.Visibility = Visibility.Visible;
+            };
+            BossGaugeWindowVisibilityButton = new MenuItem() { Header = "Unhide boss bar" };
+            BossGaugeWindowVisibilityButton.Click += (s, ev) =>
+            {
+                BossGauge.Visibility = Visibility.Visible;
+            };
+            BuffBarWindowVisibilityButton = new MenuItem() { Header = "Unhide buffs bar" };
+            BuffBarWindowVisibilityButton.Click += (s, ev) =>
+            {
+                BuffBar.Visibility = Visibility.Visible;
+            };
 
+
+
+
+            CloseButton.Click += (s, ev) => App.CloseApp();
+            ClickThruButton.Click += (s, ev) => ToggleClickThru();
+
+            ContextMenu.Items.Add(CooldownWindowVisibilityButton);
+            ContextMenu.Items.Add(BuffBarWindowVisibilityButton);
+            ContextMenu.Items.Add(BossGaugeWindowVisibilityButton);
+            ContextMenu.Items.Add(ClassSpecificWindowVisibilityButton);
+            ContextMenu.Items.Add(CharacterWindowVisibilityButton);
+            ContextMenu.Items.Add(new Separator());
             ContextMenu.Items.Add(ClickThruButton);
             ContextMenu.Items.Add(CloseButton);
 
@@ -81,20 +121,20 @@ namespace TCC
 
             FocusManager.ForegroundWindowChanged += FocusManager_ForegroundWindowChanged;
         }
-        public static void SetTransparent(bool v)
+        public static void ChangeClickThru(bool v)
         {
             if (v)
             {
                 Transparent = true;
                 ClickThruButton.IsChecked = true;
+                SetClickThru();
             }
             else
             {
                 Transparent = false;
                 ClickThruButton.IsChecked = false;
+                UnsetClickThru();
             }
-
-            SetTransparentWindows();
         }
 
         public static void Dispose()
@@ -126,10 +166,10 @@ namespace TCC
         }
         public static void InitClassGauge(Class c)
         {
-            if (ClassSpecificWindow != null)
-            {
-                ClassSpecificWindow.Dispatcher.BeginInvoke(new Action(() => ClassSpecificWindow.Close()));
-            }
+            //if (ClassSpecificWindow != null)
+            //{
+            //    ClassSpecificWindow.Dispatcher.BeginInvoke(new Action(() => ClassSpecificWindow.Close()));
+            //}
 
             switch (c)
             {
@@ -180,7 +220,7 @@ namespace TCC
             {
                 w.Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    w.Show();
+                    //w.Show();
                     w.BeginAnimation(Window.OpacityProperty, OpacityAnimation(1));
                 }));
             }
@@ -193,7 +233,7 @@ namespace TCC
                 w.Dispatcher.BeginInvoke(new Action(() =>
                 {
                     var a = OpacityAnimation(0);
-                    a.Completed += (s, ev) => w.Hide();
+                    //a.Completed += (s, ev) => w.Hide();
                     w.BeginAnimation(Window.OpacityProperty, a);
                 }));
             }
@@ -277,31 +317,35 @@ namespace TCC
                 BossGauge.Hide();
             }
         }
-        private static void SetTransparentWindows()
+        private static void SetClickThru()
+        {
+            FocusManager.MakeTransparent(new WindowInteropHelper(BossGauge).Handle);
+            FocusManager.MakeTransparent(new WindowInteropHelper(BuffBar).Handle);
+            FocusManager.MakeTransparent(new WindowInteropHelper(CooldownWindow).Handle);
+            FocusManager.MakeTransparent(new WindowInteropHelper(CharacterWindow).Handle);
+            FocusManager.MakeTransparent(new WindowInteropHelper(ClassSpecificWindow).Handle);
+
+        }
+        private static void UnsetClickThru()
+        {
+            FocusManager.UndoTransparent(new WindowInteropHelper(BossGauge).Handle);
+            FocusManager.UndoTransparent(new WindowInteropHelper(BuffBar).Handle);
+            FocusManager.UndoTransparent(new WindowInteropHelper(CharacterWindow).Handle);
+            FocusManager.UndoTransparent(new WindowInteropHelper(CooldownWindow).Handle);
+            FocusManager.UndoTransparent(new WindowInteropHelper(ClassSpecificWindow).Handle);
+
+        }
+        private static void ToggleClickThru()
         {
             if (Transparent)
             {
-                FocusManager.UndoTransparent(new WindowInteropHelper(BossGauge).Handle);
-                FocusManager.UndoTransparent(new WindowInteropHelper(BuffBar).Handle);
-                FocusManager.UndoTransparent(new WindowInteropHelper(CharacterWindow).Handle);
-                FocusManager.UndoTransparent(new WindowInteropHelper(CooldownWindow).Handle);
-                if (ClassSpecificWindow != null)
-                {
-                    FocusManager.UndoTransparent(new WindowInteropHelper(ClassSpecificWindow).Handle);
-                }
+                UnsetClickThru();
                 ClickThruButton.IsChecked = false;
                 Transparent = false;
             }
             else
             {
-                FocusManager.MakeTransparent(new WindowInteropHelper(BossGauge).Handle);
-                FocusManager.MakeTransparent(new WindowInteropHelper(BuffBar).Handle);
-                FocusManager.MakeTransparent(new WindowInteropHelper(CooldownWindow).Handle);
-                FocusManager.MakeTransparent(new WindowInteropHelper(CharacterWindow).Handle);
-                if(ClassSpecificWindow != null)
-                {
-                    FocusManager.MakeTransparent(new WindowInteropHelper(ClassSpecificWindow).Handle);
-                }
+                SetClickThru();
                 ClickThruButton.IsChecked = true;
                 Transparent = true;
             }

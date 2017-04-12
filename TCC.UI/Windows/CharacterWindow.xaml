@@ -15,6 +15,7 @@
         SizeToContent="WidthAndHeight" 
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         MouseLeftButtonUp="Window_MouseLeftButtonUp"
+        MouseRightButtonDown="Window_MouseRightButtonDown"
         Loaded="Window_Loaded"      
         SnapsToDevicePixels="True"
         ResizeMode="NoResize"      

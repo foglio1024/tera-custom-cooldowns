@@ -212,7 +212,7 @@ namespace TCC
             SessionManager.CurrentPlayer.Class = Class.None;
             SessionManager.CurrentPlayer.EntityId = 0;
             WindowManager.HideWindow(WindowManager.ClassSpecificWindow);
-            WindowManager.ClassSpecificWindow = null;
+            //WindowManager.ClassSpecificWindow = null;
             LastSkills.Clear();
             SessionManager.Logged = false;
         }

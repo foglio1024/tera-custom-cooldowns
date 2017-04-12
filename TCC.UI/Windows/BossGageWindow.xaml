@@ -14,6 +14,7 @@
         Background="#00000000"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         MouseDoubleClick="Window_MouseDoubleClick"
+        MouseRightButtonDown="Window_MouseRightButtonDown"
         Loaded="Window_Loaded"
         ResizeMode="NoResize">
     <Window.Resources>

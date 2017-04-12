@@ -16,6 +16,7 @@
         SizeToContent="WidthAndHeight"
         Loaded="Window_Loaded"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        MouseRightButtonDown="Window_MouseRightButtonDown"
         >
     <Window.Resources>
         <DataTemplate x:Key="abTemplate">

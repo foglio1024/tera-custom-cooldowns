@@ -10,6 +10,7 @@
         Loaded="Window_Loaded"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         MouseLeftButtonUp="Window_MouseLeftButtonUp"
+        MouseRightButtonDown="Window_MouseRightButtonDown"
         SizeToContent="WidthAndHeight"
         Topmost="True"
         AllowsTransparency="True"

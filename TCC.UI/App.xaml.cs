@@ -56,34 +56,38 @@ namespace TCC
             if (File.Exists(Environment.CurrentDirectory + @"/settings.csv"))
             {
                 var sr = File.OpenText(Environment.CurrentDirectory + @"/settings.csv");
-                SetWindowPosition(WindowManager.BossGauge, sr); //0
-                SetWindowPosition(WindowManager.BuffBar, sr); //1
-                SetWindowPosition(WindowManager.CharacterWindow, sr); //2
-                SetWindowPosition(WindowManager.ClassSpecificWindow, sr); //3
-                SetWindowPosition(WindowManager.CooldownWindow, sr); //4
+                SetWindowParameters(WindowManager.BossGauge, sr); //0
+                SetWindowParameters(WindowManager.BuffBar, sr); //1
+                SetWindowParameters(WindowManager.CharacterWindow, sr); //2
+                SetWindowParameters(WindowManager.ClassSpecificWindow, sr); //3
+                SetWindowParameters(WindowManager.CooldownWindow, sr); //4
                 var t = sr.ReadLine(); //5
                 if (t.Equals("true"))
                 {
-                    WindowManager.SetTransparent(true);
+                    WindowManager.ChangeClickThru(true);
                 }
                 else
                 {
-                    WindowManager.SetTransparent(false);
+                    WindowManager.ChangeClickThru(false);
                 }
                 sr.Close();
             }
             else
             {
-                WindowManager.SetTransparent(false);
+                WindowManager.ChangeClickThru(false);
             }
         }
 
-        private static void SetWindowPosition(Window w, StreamReader sr)
+        private static void SetWindowParameters(Window w, StreamReader sr)
         {
             var line = sr.ReadLine();
             var vals = line.Split(',');
             w.Top = Convert.ToDouble(vals[0]);
             w.Left = Convert.ToDouble(vals[1]);
+            if(Enum.TryParse(vals[2], out Visibility v))
+            {
+                w.Visibility = v;
+            }
         }
 
         public static void SaveSettings()
@@ -100,7 +104,7 @@ namespace TCC
 
         private static void AddSetting(Window w, string[] vals, int i)
         {
-            vals[i] = String.Format("{0},{1}", w.Top, w.Left);
+            vals[i] = String.Format("{0},{1},{2}", w.Top, w.Left, w.Visibility.ToString());
         }
         public static void CloseApp()
         {
