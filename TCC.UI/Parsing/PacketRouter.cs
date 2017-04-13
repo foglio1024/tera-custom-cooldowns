@@ -223,6 +223,10 @@ namespace TCC.Parsing
                     WindowManager.CharacterWindow.HideResolve();
                     break;
             }
+            App.Current.Dispatcher.Invoke(() =>
+            {
+                WindowManager.ChangeClickThru(WindowManager.Transparent);
+            });
         }
         public static void HandleNewSkillCooldown(S_START_COOLTIME_SKILL p)
         {
@@ -481,14 +485,14 @@ namespace TCC.Parsing
         }
         public static void HandlePlayerStatUpdate(S_PLAYER_STAT_UPDATE p)
         {
-            switch (SessionManager.CurrentPlayer.Class)
-            {
-                case Class.Warrior:
-                    EdgeGaugeWindow.SetEdge(p.edge);
-                    break;
-                default:
-                    break;
-            }
+            //switch (SessionManager.CurrentPlayer.Class)
+            //{
+            //    case Class.Warrior:
+            //        EdgeGaugeWindow.SetEdge(p.edge);
+            //        break;
+            //    default:
+            //        break;
+            //}
 
             SessionManager.CurrentPlayer.MaxHP = p.maxHp;
             SessionManager.CurrentPlayer.MaxMP = p.maxMp;

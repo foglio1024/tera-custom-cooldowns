@@ -263,6 +263,7 @@ namespace TCC
                 ShowWindow(CooldownWindow);
                 ShowWindow(CharacterWindow);
                 ShowWindow(BuffBar);
+                ShowWindow(BossGauge);
 
                 //TODO: add setting for gauge visibility
                 switch (SessionManager.CurrentPlayer.Class)
@@ -306,16 +307,17 @@ namespace TCC
                 HideWindow(CooldownWindow);
                 HideWindow(CharacterWindow);
                 HideWindow(ClassSpecificWindow);
+                HideWindow(BossGauge);
             }
 
-            if(visible && SessionManager.Logged)
-            {
-                BossGauge.Show();
-            }
-            else
-            {
-                BossGauge.Hide();
-            }
+            //if(visible && SessionManager.Logged)
+            //{
+            //    BossGauge.Show();
+            //}
+            //else
+            //{
+            //    BossGauge.Hide();
+            //}
         }
         private static void SetClickThru()
         {
