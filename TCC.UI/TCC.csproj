@@ -81,20 +81,16 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DamageMeter.Sniffing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Tera Character Tracker\TCTMain\bin\Debug\DamageMeter.Sniffing.dll</HintPath>
+    <Reference Include="PacketDotNet">
+      <HintPath>..\..\..\Shinra Meter\NetworkSniffer\bin\Release\PacketDotNet.dll</HintPath>
     </Reference>
-    <Reference Include="Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Tera Character Tracker\TCTMain\bin\Debug\Data.dll</HintPath>
-    </Reference>
-    <Reference Include="NetworkSniffer">
-      <HintPath>..\..\..\Shinra Meter\NetworkSniffer\bin\Release\NetworkSniffer.dll</HintPath>
+    <Reference Include="SharpPcap">
+      <HintPath>..\..\..\Shinra Meter\NetworkSniffer\bin\Release\SharpPcap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -104,9 +100,6 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="Tera.Core">
-      <HintPath>..\..\..\Shinra Meter\NetworkSniffer\bin\Release\Tera.Core.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -128,6 +121,158 @@
     <Compile Include="Parsing\Messages\S_RETURN_TO_LOBBY.cs" />
     <Compile Include="Parsing\Messages\S_SPAWN_ME.cs" />
     <Compile Include="Parsing\Messages\S_SPAWN_NPC.cs" />
+    <Compile Include="Sniffing\ConnectionId.cs" />
+    <Compile Include="Sniffing\EndpointIpv4.cs" />
+    <Compile Include="Sniffing\IpSniffer.cs" />
+    <Compile Include="Sniffing\IpSnifferRawSocketMultipleInterfaces.cs" />
+    <Compile Include="Sniffing\IpSnifferRawSocketSingleInterface.cs" />
+    <Compile Include="Sniffing\IpSnifferWinPcap.cs" />
+    <Compile Include="Sniffing\Packets\IpPacket.cs" />
+    <Compile Include="Sniffing\Packets\ParserHelpers.cs" />
+    <Compile Include="Sniffing\Packets\TcpFlags.cs" />
+    <Compile Include="Sniffing\Packets\TcpPacket.cs" />
+    <Compile Include="Sniffing\TcpConnection.cs" />
+    <Compile Include="Sniffing\TcpSniffer.cs" />
+    <Compile Include="Sniffing\TeraSniffer.cs" />
+    <Compile Include="Tera.Data\BasicTeraData.cs" />
+    <Compile Include="Tera.Data\ClassIcons.cs" />
+    <Compile Include="Tera.Data\CopyKey.cs" />
+    <Compile Include="Tera.Data\DiscordInfoByGuild.cs" />
+    <Compile Include="Tera.Data\HotkeysData.cs" />
+    <Compile Include="Tera.Data\ImageDatabase.cs" />
+    <Compile Include="Tera.Data\InvalidConfigFileException.cs" />
+    <Compile Include="Tera.Data\TeraData.cs" />
+    <Compile Include="Tera.Data\WindowData.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Client\C_PLAYER_LOCATION.cs" />
+    <Compile Include="TeraCommon\Game\Messages\ParsedMessage.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\EachSkillResultServerMessage.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\LoginServerMessage.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\SBanPartyMember.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\SNpcOccupierInfo.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\SNpcTargetUser.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\SpawnMeServerMessage.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\SpawnNpcServerMessage.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\SpawnProjectileServerMessage.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\SpawnUserServerMessage.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\STargetInfo.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\StartUserProjectileServerMessage.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_ABNORMALITY_BEGIN.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_ABNORMALITY_END.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_ABNORMALITY_REFRESH.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_ACTION_END.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_ACTION_STAGE.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_AVAILABLE_EVENT_MATCHING_LIST.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_BAN_PARTY.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_BATTLE_FIELD_ENTRANCE_INFO.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_BEGIN_THROUGH_ARBITER_CONTRACT.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_BOSS_GAGE_INFO.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_CHANGE_DESTPOS_PROJECTILE.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_CHAT.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_CHECK_TO_READY_PARTY.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_CREATURE_CHANGE_HP.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_CREATURE_LIFE.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_CREATURE_ROTATE.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_CREST_INFO.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_CREST_MESSAGE.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_DESPAWN_NPC.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_DESPAWN_USER.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_FIN_INTER_PARTY_MATCH.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_GET_USER_GUILD_LOGO.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_GET_USER_LIST.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_GUILD_QUEST_LIST.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_INSTANT_MOVE.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_LEAVE_PARTY.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_LEAVE_PARTY_MEMBER.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_LOAD_TOPO.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_MOUNT_VEHICLE_EX.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_NPC_LOCATION.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_NPC_STATUS.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_OTHER_USER_APPLY_PARTY.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_PARTY_MEMBER_ABNORMAL_ADD.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_PARTY_MEMBER_ABNORMAL_CLEAR.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_PARTY_MEMBER_ABNORMAL_DEL.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_PARTY_MEMBER_ABNORMAL_REFRESH.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_PARTY_MEMBER_CHANGE_HP.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_PARTY_MEMBER_CHANGE_MP.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_PARTY_MEMBER_LIST.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_PARTY_MEMBER_STAT_UPDATE.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_PLAYER_CHANGE_MP.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_PLAYER_STAT_UPDATE.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_PRIVATE_CHAT.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_REQUEST_CONTRACT.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_START_COOLTIME_SKILL.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_START_GUILD_QUEST.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_SYSTEM_MESSAGE.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_TRADE_BROKER_DEAL_SUGGESTED.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_UPDATE_NPCGUILD.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_USER_LOCATION.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_USER_STATUS.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_WHISPER.cs" />
+    <Compile Include="TeraCommon\Game\Messages\UnknownMessage.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Client\C_CHECK_VERSION.cs" />
+    <Compile Include="TeraCommon\Game\Services\AbnormalityTracker.cs" />
+    <Compile Include="TeraCommon\Game\Services\EntityTracker.cs" />
+    <Compile Include="TeraCommon\Game\Services\Helpers.cs" />
+    <Compile Include="TeraCommon\Game\Services\HotDotDatabase.cs" />
+    <Compile Include="TeraCommon\Game\Services\IconsDatabase.cs" />
+    <Compile Include="TeraCommon\Game\Services\MessageFactory.cs" />
+    <Compile Include="TeraCommon\Game\Services\NpcDatabase.cs" />
+    <Compile Include="TeraCommon\Game\Services\OpCodeNamer.cs" />
+    <Compile Include="TeraCommon\Game\Services\PetSkillDatabase.cs" />
+    <Compile Include="TeraCommon\Game\Services\PlayerTracker.cs" />
+    <Compile Include="TeraCommon\Game\Services\QuestInfoDatabase.cs" />
+    <Compile Include="TeraCommon\Game\Services\ServerDatabase.cs" />
+    <Compile Include="TeraCommon\Game\Services\SkillDatabase.cs" />
+    <Compile Include="TeraCommon\Game\Services\TeraMessageReader.cs" />
+    <Compile Include="TeraCommon\Game\Services\UserLogoTracker.cs" />
+    <Compile Include="TeraCommon\Message.cs" />
+    <Compile Include="TeraCommon\MessageDirection.cs" />
+    <Compile Include="TeraCommon\Game\Angle.cs" />
+    <Compile Include="TeraCommon\Game\Entity.cs" />
+    <Compile Include="TeraCommon\Game\EntityId.cs" />
+    <Compile Include="TeraCommon\Game\Gender.cs" />
+    <Compile Include="TeraCommon\Game\GuildQuest.cs" />
+    <Compile Include="TeraCommon\Game\GuildQuestItem.cs" />
+    <Compile Include="TeraCommon\Game\GuildQuestTarget.cs" />
+    <Compile Include="TeraCommon\Game\HotDot.cs" />
+    <Compile Include="TeraCommon\Game\IHasOwner.cs" />
+    <Compile Include="TeraCommon\Game\Abnormality\Abnormality.cs" />
+    <Compile Include="TeraCommon\Game\Abnormality\AbnormalityDuration.cs" />
+    <Compile Include="TeraCommon\Game\Abnormality\AbnormalityStorage.cs" />
+    <Compile Include="TeraCommon\Game\Abnormality\Death.cs" />
+    <Compile Include="TeraCommon\Game\Abnormality\Duration.cs" />
+    <Compile Include="TeraCommon\Game\Abnormality\PlayerAbnormals.cs" />
+    <Compile Include="TeraCommon\Game\NpcEntity.cs" />
+    <Compile Include="TeraCommon\Game\NpcInfo.cs" />
+    <Compile Include="TeraCommon\Game\PlaceHolderEntity.cs" />
+    <Compile Include="TeraCommon\Game\Player.cs" />
+    <Compile Include="TeraCommon\Game\PlayerClass.cs" />
+    <Compile Include="TeraCommon\Game\ProjectileEntity.cs" />
+    <Compile Include="TeraCommon\Game\Race.cs" />
+    <Compile Include="TeraCommon\Game\RaceGenderClass.cs" />
+    <Compile Include="TeraCommon\Game\Region.cs" />
+    <Compile Include="TeraCommon\Game\Server.cs" />
+    <Compile Include="TeraCommon\Game\Skill.cs" />
+    <Compile Include="TeraCommon\Game\SkillResult.cs" />
+    <Compile Include="TeraCommon\Game\UserEntity.cs" />
+    <Compile Include="TeraCommon\Game\Vector3f.cs" />
+    <Compile Include="TeraCommon\PacketLog\LogHeader.cs" />
+    <Compile Include="TeraCommon\PacketLog\PacketLogFile.cs" />
+    <Compile Include="TeraCommon\PacketLog\PacketLogReader.cs" />
+    <Compile Include="TeraCommon\PacketLog\PacketLogWriter.cs" />
+    <Compile Include="TeraCommon\PacketLog\Parsing\BlockHelper.cs" />
+    <Compile Include="TeraCommon\PacketLog\Parsing\BlockSplitter.cs" />
+    <Compile Include="TeraCommon\PacketLog\Parsing\BlockType.cs" />
+    <Compile Include="TeraCommon\PacketLog\Parsing\LogHelper.cs" />
+    <Compile Include="TeraCommon\PacketLog\Parsing\StreamHelper.cs" />
+    <Compile Include="TeraCommon\Sniffing\ConnectionDecrypter.cs" />
+    <Compile Include="TeraCommon\Sniffing\Crypt\Cryptor.cs" />
+    <Compile Include="TeraCommon\Sniffing\Crypt\CryptorKey.cs" />
+    <Compile Include="TeraCommon\Sniffing\Crypt\Session.cs" />
+    <Compile Include="TeraCommon\Sniffing\Crypt\Sha.cs" />
+    <Compile Include="TeraCommon\Sniffing\Crypt\Utils.cs" />
+    <Compile Include="TeraCommon\Sniffing\ITeraSniffer.cs" />
+    <Compile Include="TeraCommon\Sniffing\MessageSplitter.cs" />
     <Compile Include="UI elements\AbnormalityIndicator.xaml.cs">
       <DependentUpon>AbnormalityIndicator.xaml</DependentUpon>
     </Compile>
