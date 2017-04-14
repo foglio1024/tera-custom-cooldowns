@@ -23,7 +23,7 @@ namespace TCC
         {
             if (GambleIDs.Contains(sAbnormalityBegin.id) && sAbnormalityBegin.casterId == SessionManager.CurrentPlayer.EntityId)
             {
-                GambleBuff.Invoke(sAbnormalityBegin.duration);
+                GambleBuff?.Invoke(sAbnormalityBegin.duration);
             }
         }
 

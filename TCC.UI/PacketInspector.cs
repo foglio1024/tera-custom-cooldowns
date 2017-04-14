@@ -43,7 +43,7 @@ namespace TCC
 
             };
             var opName = PacketRouter.OpCodeNamer.GetName(msg.OpCode);
-            if (exclusionList.Any(opName.Contains)) return;
+            //if (exclusionList.Any(opName.Contains)) return;
 
             Console.WriteLine(opName);
         }

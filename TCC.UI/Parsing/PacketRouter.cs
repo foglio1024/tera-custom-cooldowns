@@ -75,7 +75,7 @@ namespace TCC.Parsing
                     continue;
                 }
                 var message = MessageFactory.Create(msg);
-                //PacketInspector.InspectPacket(msg);
+                PacketInspector.InspectPacket(msg);
                 if (message.GetType() == typeof(Tera.Game.Messages.UnknownMessage)) continue;
 
                 if (!MessageFactory.Process(message))
@@ -576,7 +576,7 @@ namespace TCC.Parsing
         public static void HandleSpawn(S_SPAWN_ME p)
         {
             WindowManager.ShowWindow(WindowManager.CharacterWindow);
-            Console.WriteLine("[S_SPAWN_ME]");
+            //Console.WriteLine("[S_SPAWN_ME]");
             App.Current.Dispatcher.Invoke(() =>
             {
 
