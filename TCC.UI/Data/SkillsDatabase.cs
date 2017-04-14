@@ -14,6 +14,128 @@ namespace TCC
     public static class SkillsDatabase
     {
         public static Dictionary<Class, Dictionary<uint, Skill>> Skills;
+        static List<SkillConnection> SkillConnections;
+
+        class SkillConnection
+        {
+            public Class Class;
+            public int Id;
+            public List<int> ConnectedSkills;
+
+            public SkillConnection(int id, Class c)
+            {
+                ConnectedSkills = new List<int>();
+                Id = id;
+                Class = c;
+            }
+            public void AddConnectedSkill(int id)
+            {
+                ConnectedSkills.Add(id);
+            }
+        }
+
+
+        public static void Load()
+        {
+            var f = File.OpenText(Environment.CurrentDirectory + "/resources/database/skills.tsv");
+
+            Skills = new Dictionary<Class, Dictionary<uint, Skill>>();
+            for (int i = 0; i <= 12; i++)
+            {
+                Skills.Add((Class)i, new Dictionary<uint, Skill>());
+            }
+            Skills.Add(Class.Common, new Dictionary<uint, Skill>());
+
+            while (true)
+            {
+                var line = f.ReadLine();
+                if (line == null) break;
+                var s = line.Split('\t');
+                var id = Convert.ToUInt32(s[0]);
+                Enum.TryParse(s[1], out Class c);
+                var name = s[2];
+                var tooltip = s[3];
+                var iconName = s[4];
+
+                var sk = new Skill(id, c, name, tooltip);
+                sk.SetSkillIcon(iconName);
+                Skills[c].Add(id, sk);
+
+                SkillConnections = new List<SkillConnection>();
+
+                var skc = new SkillConnection((int)id, c);
+                for (int i = 5; i < s.Count(); i++)
+                {
+                    skc.AddConnectedSkill(Convert.ToInt32(s[i]));
+                }
+            }
+
+        }
+        static string FindSkillNameByIdClass(uint id, Class c)
+        {
+            if (Skills[c].TryGetValue(id, out Skill sk))
+            {
+                return sk.Name;
+            }
+            else return "Not found";
+
+        }
+        static int GetSkillIdByConnectedId(uint id, Class c)
+        {
+            foreach (var skillConnection in SkillConnections.Where(x => x.Class == c))
+            {
+                foreach (var connectedSkill in skillConnection.ConnectedSkills)
+                {
+                    if ((int)id == connectedSkill)
+                    {
+                        return skillConnection.Id;
+                    }
+                }
+            }
+            return -1;
+        }
+        public static string SkillIdToName(uint id, Class c)
+        {
+            var name = FindSkillNameByIdClass(id, c);
+            var connSkill = GetSkillIdByConnectedId(id, c);
+
+            if (name != "Not found") //found skill
+            {
+                return name;
+            }
+            else if (connSkill != -1) //skill found in connected skills
+            {
+                name = FindSkillNameByIdClass(id, c);
+            }
+            return name;
+        }
+        public static bool TryGetSkill(uint id, Class c, out Skill sk)
+        {
+            bool result = false;
+            var connSkills = GetSkillIdByConnectedId(id, c);
+            sk = new Skill(0, Class.None, string.Empty, string.Empty);
+            if (Skills[c].TryGetValue(id, out sk))
+            {
+                //sk = Skills.Where(x => x.Id == id).Where(x => x.Class == c).First();
+                result = true;
+            }
+            else if (connSkills != -1)
+            {
+                if (Skills[c].TryGetValue((uint)connSkills, out sk))
+                {
+                    result = true;
+                }
+            }
+            return result;
+
+        }
+
+
+    }
+
+    public static class SkillsDatabaseOld
+    {
+        public static Dictionary<Class, Dictionary<uint, Skill>> Skills;
 
         public static event Action<double> Progress;
 
@@ -194,16 +316,6 @@ namespace TCC
             }
             return name;
         }
-        //public static Skill GetSkill(uint id, Class c)
-        //{
-        //    if (Skills.Where(x => x.Id == id).Where(x => x.Class == c).Count() > 0)
-        //    {
-        //        return Skills.Where(x => x.Id == id).Where(x => x.Class == c).First();
-        //    }
-        //    else return new Skill(0, Class.None, string.Empty, string.Empty);
-
-        //}
-
         public static bool TryGetSkill(uint id, Class c, out Skill sk)
         {
             bool result = false;
@@ -225,6 +337,16 @@ namespace TCC
 
         }
 
+
+        //public static Skill GetSkill(uint id, Class c)
+        //{
+        //    if (Skills.Where(x => x.Id == id).Where(x => x.Class == c).Count() > 0)
+        //    {
+        //        return Skills.Where(x => x.Id == id).Where(x => x.Class == c).First();
+        //    }
+        //    else return new Skill(0, Class.None, string.Empty, string.Empty);
+
+        //}
 
         //public static BitmapImage SkillIdToIcon(uint id, Class c)
         //{

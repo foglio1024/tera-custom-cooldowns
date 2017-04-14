@@ -58,7 +58,7 @@ namespace TCC
             Opacity = 0;
             InitializeComponent();
 
-            SkillsDatabase.Progress += UpdateLoadGauge;
+            //SkillsDatabase.Progress += UpdateLoadGauge;
             SkillIconControl.SkillEnded += SkillIconControl_SkillEnded;
 
             NormalSkillsPanel.ItemsSource = SkillManager.NormalSkillsQueue;

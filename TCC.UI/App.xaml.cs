@@ -34,13 +34,13 @@ namespace TCC
 
             var LoadThread = new Thread(new ThreadStart(() =>
             {
-                SkillsDatabase.Populate();
+                SkillsDatabase.Load();
                 Console.WriteLine("Skills loaded.");
                 BroochesDatabase.SetBroochesIcons();
                 Console.WriteLine("Set brooches icons");
                 MonsterDatabase.Populate();
                 Console.WriteLine("Monsters loaded");
-                AbnormalityDatabase.Populate();
+                AbnormalityDatabase.Load();
                 Console.WriteLine("Abnormalities loaded");
                 WindowManager.CooldownWindow.LoadingDone();
             }));

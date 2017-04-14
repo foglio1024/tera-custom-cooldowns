@@ -15,7 +15,7 @@ namespace TCC.Data
         public uint Id { get; set; }
         public string Name { get; set; }
         public string ToolTip { get; set; }
-        public bool IsBuff { get; set; }
+        //public bool IsBuff { get; set; }
         public bool IsShow { get; set; }
         public bool Infinity { get; set; }
         public AbnormalityType Type { get; set; }
@@ -54,13 +54,13 @@ namespace TCC.Data
         //    }
         //}
 
-        public Abnormality(uint id, bool isBuff, bool isShow, bool infinity, int prop)
+        public Abnormality(uint id, bool isShow, bool infinity, AbnormalityType prop)
         {
             Id = id;
-            IsBuff = isBuff;
+            //IsBuff = isBuff;
             IsShow = isShow;
             Infinity = infinity;
-            Type = (AbnormalityType)prop;
+            Type = prop;
         }
 
         public void SetIcon(string iconName)
