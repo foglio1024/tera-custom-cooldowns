@@ -20,7 +20,7 @@ namespace TCC
     public static class WindowManager
     {
         public static CooldownWindow CooldownWindow;
-        public static Window ClassSpecificWindow;
+        //public static StaminaGauge ClassSpecificWindow;
         public static CharacterWindow CharacterWindow;
         public static BossGageWindow BossGauge;
         public static AbnormalitiesWindow BuffBar;
@@ -28,7 +28,7 @@ namespace TCC
         static MenuItem ClickThruButton;
         static MenuItem CharacterWindowVisibilityButton;
         static MenuItem CooldownWindowVisibilityButton;
-        static MenuItem ClassSpecificWindowVisibilityButton;
+        //static MenuItem ClassSpecificWindowVisibilityButton;
         static MenuItem BossGaugeWindowVisibilityButton;
         static MenuItem BuffBarWindowVisibilityButton;
         static System.Windows.Forms.NotifyIcon TrayIcon;
@@ -36,29 +36,17 @@ namespace TCC
         public static bool Transparent;
         static bool IsClassWindowVisible;
 
+        public static Visibility StaminaGaugeVisibility;
+        public static double StaminaGaugeTop;
+        public static double StaminaGaugeLeft;
+
         public static void Init()
         {
             CooldownWindow = new CooldownWindow();
-            ClassSpecificWindow = new StaminaGauge(Colors.Red);
+            //ClassSpecificWindow = new StaminaGauge();
             CharacterWindow = new CharacterWindow();
             BossGauge = new BossGageWindow();
             BuffBar = new AbnormalitiesWindow();
-
-            /*TODO: move to each window*/
-            //CooldownWindow.Opacity = 0;
-            //ClassSpecificWindow.Opacity = 0;
-            //CharacterWindow.Opacity = 0;
-
-            //CooldownWindow.Top = Properties.Settings.Default.CooldownBarTop;
-            //CooldownWindow.Left = Properties.Settings.Default.CooldownBarLeft;
-            //ClassSpecificWindow.Top = Properties.Settings.Default.ClassGaugeTop;
-            //ClassSpecificWindow.Left = Properties.Settings.Default.ClassGaugeLeft;
-            //CharacterWindow.Top = Properties.Settings.Default.CharacterWindowTop;
-            //CharacterWindow.Left = Properties.Settings.Default.CharacterWindowLeft;
-            //BossGauge.Top = Properties.Settings.Default.BossGaugeWindowTop;
-            //BossGauge.Left = Properties.Settings.Default.BossGaugeWindowLeft;
-            //BuffBar.Top = Properties.Settings.Default.BuffBarTop;
-            //BuffBar.Left = Properties.Settings.Default.BuffBarLeft;
 
             ContextMenu = new ContextMenu();
             
@@ -82,11 +70,11 @@ namespace TCC
             {
                 CooldownWindow.Visibility = Visibility.Visible;
             };
-            ClassSpecificWindowVisibilityButton = new MenuItem() { Header = "Unhide stamina gauge" };
-            ClassSpecificWindowVisibilityButton.Click += (s, ev) =>
-            {
-                ClassSpecificWindow.Visibility = Visibility.Visible;
-            };
+            //ClassSpecificWindowVisibilityButton = new MenuItem() { Header = "Unhide stamina gauge" };
+            //ClassSpecificWindowVisibilityButton.Click += (s, ev) =>
+            //{
+            //    ClassSpecificWindow.Visibility = Visibility.Visible;
+            //};
             BossGaugeWindowVisibilityButton = new MenuItem() { Header = "Unhide boss bar" };
             BossGaugeWindowVisibilityButton.Click += (s, ev) =>
             {
@@ -107,7 +95,7 @@ namespace TCC
             ContextMenu.Items.Add(CooldownWindowVisibilityButton);
             ContextMenu.Items.Add(BuffBarWindowVisibilityButton);
             ContextMenu.Items.Add(BossGaugeWindowVisibilityButton);
-            ContextMenu.Items.Add(ClassSpecificWindowVisibilityButton);
+            //ContextMenu.Items.Add(ClassSpecificWindowVisibilityButton);
             ContextMenu.Items.Add(CharacterWindowVisibilityButton);
             ContextMenu.Items.Add(new Separator());
             ContextMenu.Items.Add(ClickThruButton);
@@ -164,56 +152,51 @@ namespace TCC
             CooldownWindow.Close();
             CharacterWindow.Close();
         }
-        public static void InitClassGauge(Class c)
-        {
-            //if (ClassSpecificWindow != null)
-            //{
-            //    ClassSpecificWindow.Dispatcher.BeginInvoke(new Action(() => ClassSpecificWindow.Close()));
-            //}
+        //public static void InitClassGauge(Class c)
+        //{
 
-            switch (c)
-            {
-                case Class.Warrior:
-                    App.Current.Dispatcher.Invoke(() =>
-                    {
-                        ClassSpecificWindow = new EdgeGaugeWindow();
-                    });
-                    break;
-                case Class.Engineer:
-                    App.Current.Dispatcher.Invoke(() =>
-                    {
-                        ClassSpecificWindow = new StaminaGauge(Colors.Orange);
-                    });
-                    break;
-                case Class.Fighter:
-                    App.Current.Dispatcher.Invoke(() =>
-                    {
-                        ClassSpecificWindow = new StaminaGauge(Colors.OrangeRed);
-                    });
-                    break;
-                case Class.Assassin:
-                    App.Current.Dispatcher.Invoke(() =>
-                    {
-                        ClassSpecificWindow = new StaminaGauge(System.Windows.Media.Color.FromArgb(0xff,0xff,0x6a,0xff));
-                    });
-                    break;
-                case Class.Glaiver:
-                    App.Current.Dispatcher.Invoke(() =>
-                    {
-                        ClassSpecificWindow = new StaminaGauge(System.Windows.Media.Color.FromRgb(230,240,255));
-                    });
-                    break;
-                default:
-                    return;
-            }
-            if (Transparent)
-            {
-                App.Current.Dispatcher.Invoke(() =>
-                {
-                    FocusManager.MakeTransparent(new WindowInteropHelper(ClassSpecificWindow).Handle);
-                });
-            }
-        }
+        //    switch (c)
+        //    {
+        //        case Class.Engineer:
+        //            App.Current.Dispatcher.Invoke(() =>
+        //            {
+        //                ClassSpecificWindow.Init(Colors.Orange);
+        //                ClassSpecificWindow.Enabled = true;
+        //            });
+        //            break;
+        //        case Class.Fighter:
+        //            App.Current.Dispatcher.Invoke(() =>
+        //            {
+        //                ClassSpecificWindow.Init(Colors.OrangeRed);
+        //                ClassSpecificWindow.Enabled = true;
+        //            });
+        //            break;
+        //        case Class.Assassin:
+        //            App.Current.Dispatcher.Invoke(() =>
+        //            {
+        //                ClassSpecificWindow.Init(System.Windows.Media.Color.FromArgb(0xff,0xff,0x6a,0xff));
+        //                ClassSpecificWindow.Enabled = true;
+        //            });
+        //            break;
+        //        case Class.Glaiver:
+        //            App.Current.Dispatcher.Invoke(() =>
+        //            {
+        //                ClassSpecificWindow.Init(System.Windows.Media.Color.FromRgb(230,240,255));
+        //                ClassSpecificWindow.Enabled = true;
+        //            });
+        //            break;
+        //        default:
+        //            ClassSpecificWindow.Enabled = false;
+        //            return;
+        //    }
+        //    if (Transparent)
+        //    {
+        //        App.Current.Dispatcher.Invoke(() =>
+        //        {
+        //            FocusManager.MakeTransparent(new WindowInteropHelper(ClassSpecificWindow).Handle);
+        //        });
+        //    }
+        //}
         public static void ShowWindow(Window w)
         {
             if (w != null)
@@ -250,7 +233,7 @@ namespace TCC
                 if (!SessionManager.CurrentPlayer.IsInCombat)
                 {
                     IsClassWindowVisible = false;
-                    HideWindow(ClassSpecificWindow);
+                    //HideWindow(ClassSpecificWindow);
                 }
                 t.Stop();
             };
@@ -264,50 +247,55 @@ namespace TCC
                 ShowWindow(CharacterWindow);
                 ShowWindow(BuffBar);
                 ShowWindow(BossGauge);
-
+                CooldownWindow.Topmost = true;
+                CharacterWindow.Topmost = true;
+                BuffBar.Topmost = true;
+                BossGauge.Topmost = true;
+                //ShowWindow(ClassSpecificWindow);
                 //TODO: add setting for gauge visibility
-                switch (SessionManager.CurrentPlayer.Class)
-                {
-                    case Class.Warrior:
-                        if (IsClassWindowVisible)
-                        {
-                            ShowWindow(ClassSpecificWindow);
-                        }
-                        break;
-                    case Class.Engineer:
-                        if (IsClassWindowVisible)
-                        {
-                            ShowWindow(ClassSpecificWindow);
-                        }
-                        break;
-                    case Class.Fighter:
-                        if (IsClassWindowVisible)
-                        {
-                            ShowWindow(ClassSpecificWindow);
-                        }
-                        break;
-                    case Class.Assassin:
-                        if (IsClassWindowVisible)
-                        {
-                            ShowWindow(ClassSpecificWindow);
-                        }
-                        break;
-                    case Class.Glaiver:
-                        if (IsClassWindowVisible)
-                        {
-                            ShowWindow(ClassSpecificWindow);
-                        }
-                        break;
-                    default:
-                        break;
-                }
+                //switch (SessionManager.CurrentPlayer.Class)
+                //{
+                //    //case Class.Warrior:
+                //    //    if (IsClassWindowVisible)
+                //    //    {
+                //    //        ShowWindow(ClassSpecificWindow);
+                //    //    }
+                //    //    break;
+                //    case Class.Engineer:
+                //        if (IsClassWindowVisible)
+                //        {
+                //            ShowWindow(ClassSpecificWindow);
+                //        }
+                //        break;
+                //    case Class.Fighter:
+                //        if (IsClassWindowVisible)
+                //        {
+                //            ShowWindow(ClassSpecificWindow);
+                //        }
+                //        break;
+                //    case Class.Assassin:
+                //        if (IsClassWindowVisible)
+                //        {
+                //            ShowWindow(ClassSpecificWindow);
+                //        }
+                //        break;
+                //    case Class.Glaiver:
+                //        if (IsClassWindowVisible)
+                //        {
+                //            ShowWindow(ClassSpecificWindow);
+                //        }
+                //        break;
+                //    default:
+                //        break;
+                //}
             }
             else
             {
                 HideWindow(CooldownWindow);
                 HideWindow(CharacterWindow);
-                HideWindow(ClassSpecificWindow);
+                //HideWindow(ClassSpecificWindow);
                 HideWindow(BossGauge);
+                HideWindow(BuffBar);
             }
 
             //if(visible && SessionManager.Logged)
@@ -325,7 +313,7 @@ namespace TCC
             FocusManager.MakeTransparent(new WindowInteropHelper(BuffBar).Handle);
             FocusManager.MakeTransparent(new WindowInteropHelper(CooldownWindow).Handle);
             FocusManager.MakeTransparent(new WindowInteropHelper(CharacterWindow).Handle);
-            FocusManager.MakeTransparent(new WindowInteropHelper(ClassSpecificWindow).Handle);
+            //FocusManager.MakeTransparent(new WindowInteropHelper(ClassSpecificWindow).Handle);
 
         }
         private static void UnsetClickThru()
@@ -334,7 +322,7 @@ namespace TCC
             FocusManager.UndoTransparent(new WindowInteropHelper(BuffBar).Handle);
             FocusManager.UndoTransparent(new WindowInteropHelper(CharacterWindow).Handle);
             FocusManager.UndoTransparent(new WindowInteropHelper(CooldownWindow).Handle);
-            FocusManager.UndoTransparent(new WindowInteropHelper(ClassSpecificWindow).Handle);
+            //FocusManager.UndoTransparent(new WindowInteropHelper(ClassSpecificWindow).Handle);
 
         }
         private static void ToggleClickThru()

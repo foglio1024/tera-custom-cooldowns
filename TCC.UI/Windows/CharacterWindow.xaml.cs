@@ -107,6 +107,7 @@ namespace TCC
         {
             InitializeComponent();
             this.DataContext = SessionManager.CurrentPlayer;
+            stBar.Fill = new SolidColorBrush(Color.FromRgb(0x6, 0xb, 0xf));
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -114,6 +115,7 @@ namespace TCC
             IntPtr hwnd = new WindowInteropHelper(this).Handle;
             FocusManager.MakeUnfocusable(hwnd);
             FocusManager.HideFromToolBar(hwnd);
+            Topmost = true;
             Opacity = 0;
             ContextMenu = new ContextMenu();
             var HideButton = new MenuItem() { Header = "Hide" };
@@ -159,6 +161,19 @@ namespace TCC
             Dispatcher.BeginInvoke(new Action(() =>
             {
                 StaminaRow.Height = GridLength.Auto;
+                stBar.Fill = new SolidColorBrush(Color.FromRgb(0x66, 0xbb, 0xff));
+                UpdateST(0);
+
+            }));
+        }
+        internal void ShowResolve(Color c)
+        {
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                StaminaRow.Height = GridLength.Auto;
+                stBar.Fill = new SolidColorBrush(c);
+                UpdateST(0);
+
             }));
         }
         internal void HideResolve()

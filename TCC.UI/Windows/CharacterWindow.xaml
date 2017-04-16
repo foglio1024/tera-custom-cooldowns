@@ -214,13 +214,7 @@
 
             <Grid  Grid.Row="2" VerticalAlignment="Center" Opacity="1">
                 <Rectangle Style="{StaticResource baseRectangle}" Grid.Row="2" Height="11"/>
-                <Rectangle Name="stBar" Height="11"  Width="400" Style="{StaticResource barRectangle}" Opacity=".8" >
-                    <Rectangle.Fill>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#6bf" Offset="0"/>
-                            <GradientStop Color="#6bf" Offset=".8"/>
-                        </LinearGradientBrush>
-                    </Rectangle.Fill>
+                <Rectangle Name="stBar" Height="11"  Width="400" Style="{StaticResource barRectangle}" Opacity=".8" Fill="#6bf">
                 </Rectangle>
                 <!--<Polygon Points="0,11 11,11 11,0" HorizontalAlignment="Right" Style="{StaticResource borderPolygon}" VerticalAlignment="Center" Width="Auto" Height="Auto"></Polygon>
                 <Polygon Points="0,11 0,0 11,0" HorizontalAlignment="Left" Style="{StaticResource borderPolygon}" VerticalAlignment="Center" Width="Auto" Height="Auto"></Polygon>-->
@@ -271,9 +265,21 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Name="stTB" Text="{Binding CurrentST}" Style="{StaticResource hpBarNumber}" Margin="10,0,0,0" Grid.Column="0" Grid.Row="2" FontSize="12" Foreground="#ffffff" />
-                <TextBlock Style="{StaticResource hpBarNumber}" Grid.Column="1" Text="/" Margin="4,0" Grid.Row="2" Foreground="#ffffff" FontSize="12" />
-                <TextBlock Name="stMaxTB" Style="{StaticResource hpBarNumber}" Text="{Binding MaxST}" Margin="0,0,15,0" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" Foreground="#ffffff" FontSize="12" />
+                <TextBlock Name="stTB" Text="{Binding CurrentST}" Style="{StaticResource hpBarNumber}" Margin="10,0,0,0" Grid.Column="0" Grid.Row="2" FontSize="10.5" Foreground="#ffffff" >
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="0" BlurRadius="4"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock Style="{StaticResource hpBarNumber}" Grid.Column="1" Text="/" Margin="4,0,4,0" Grid.Row="2" Foreground="#ffffff" FontSize="12" >
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="0" BlurRadius="4"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock Name="stMaxTB" Style="{StaticResource hpBarNumber}" Text="{Binding MaxST}" Margin="0,0,15,0" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" Foreground="#ffffff" FontSize="10.5" >
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="0" BlurRadius="4"/>
+                    </TextBlock.Effect>
+                </TextBlock>
             </Grid>
         </Grid>
     </Grid>

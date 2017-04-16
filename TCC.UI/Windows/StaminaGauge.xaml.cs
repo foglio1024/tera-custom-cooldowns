@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,118 +21,45 @@ using TCC.Parsing;
 
 namespace TCC
 {
-    public delegate void StaminaCapEvent();
 
     /// <summary>
     /// Logica di interazione per StaminaGauge.xaml
     /// </summary>
-    public partial class StaminaGauge : Window
+    public partial class StaminaGauge : Window, INotifyPropertyChanged
     {
-        public event StaminaCapEvent Maxed;
-        public event StaminaCapEvent UnMaxed;
-        //static int MaxStamina = 1;
-        //public static bool Visible { get; set; }
-        bool maxed;
-        bool IsMaxed {
-            get
-            {
-                return maxed;
-            }
-            set
-            {
-                if(value != maxed)
-                {
-                    maxed = value;
-                    if (maxed)
-                    {
-                        Maxed?.Invoke();
-                    }
-                    else
-                    {
-                        UnMaxed?.Invoke();
-                    }
-
-                }
-            }
-        }
-        private System.Windows.Media.Color color;
-        
-        public StaminaGauge(System.Windows.Media.Color color)
+        public StaminaGauge()
         {
             InitializeComponent();
-            this.color = color;
-            Maxed += StaminaGauge_Maxed;
-            UnMaxed += StaminaGauge_Unmaxed;
-            SessionManager.CurrentPlayer.STUpdated += StaminaGauge_StaminaChanged;
-            //PacketRouter.MaxSTUpdated += PacketParser_MaxSTUpdated;
-
-            Left = Properties.Settings.Default.ClassGaugeLeft;
-            Top = Properties.Settings.Default.ClassGaugeTop;
-
-            StaminaAmount.EndAngle = 0;
-
-            StaminaAmount.Stroke = new SolidColorBrush(color);
-            glow.Color = color;
-            baseEll.Fill = new SolidColorBrush(Colors.Transparent);
         }
 
-        //private void PacketParser_MaxSTUpdated(int statValue)
-        //{
-        //    MaxStamina = statValue;
-        //}
-        float oldStamina;
-        private void StaminaGauge_StaminaChanged(float stamina)
-        {
-            Dispatcher.Invoke(() => 
-            {
-                num.Text = stamina.ToString();
-                double newAngle = ValueToAngle(Convert.ToInt32(stamina));
-                DoubleAnimation anim = new DoubleAnimation(newAngle, TimeSpan.FromMilliseconds(100)) { EasingFunction = new QuadraticEase() };
-                StaminaAmount.BeginAnimation(Arc.EndAngleProperty, anim);
+        private bool enabled;
 
-                if(stamina == SessionManager.CurrentPlayer.MaxST)
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public bool Enabled
+        {
+            get { return enabled; }
+            set {
+                if(enabled != value)
                 {
-                    IsMaxed = true;
-                }
-                else
-                {
-                    IsMaxed = false;
+                    enabled = value;
+                    NotifyPropertyChanged("Enabled");
                 }
 
-                oldStamina = stamina;
-            });
+            }
         }
 
-
-
-        double ValueToAngle(int val)
+        private void NotifyPropertyChanged(string v)
         {
-            if (359.9 * ((double)val / (double)SessionManager.CurrentPlayer.MaxST) != Double.NaN)
-            {
-                return 359.9 * ((double)val / (double)SessionManager.CurrentPlayer.MaxST);
-            }
-            else
-            {
-                return 0;
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(v));
         }
-        private void StaminaGauge_Maxed()
+
+        public void Init(System.Windows.Media.Color c)
         {
             Dispatcher.Invoke(() =>
             {
-                glow.BeginAnimation(DropShadowEffect.OpacityProperty, new DoubleAnimation(1, TimeSpan.FromMilliseconds(200)));
-                baseEll.Fill.BeginAnimation(SolidColorBrush.ColorProperty, new ColorAnimation(color, TimeSpan.FromMilliseconds(200)));
+                gauge = new StaminaGaugeControl(c);
             });
-        }
-        private void StaminaGauge_Unmaxed()
-        {
-            Dispatcher.Invoke(() =>
-            {
-                StaminaAmount.Stroke.BeginAnimation(SolidColorBrush.ColorProperty, new ColorAnimation(color, TimeSpan.FromMilliseconds(200)));
-                baseEll.Fill.BeginAnimation(SolidColorBrush.ColorProperty, new ColorAnimation(System.Windows.Media.Color.FromArgb(0xff, 0x20, 0x20, 0x20), TimeSpan.FromMilliseconds(200)));
-                glow.BeginAnimation(DropShadowEffect.OpacityProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(200)));
-            });
-
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -138,7 +67,7 @@ namespace TCC
             IntPtr hwnd = new WindowInteropHelper(this).Handle;
             FocusManager.MakeUnfocusable(hwnd);
             FocusManager.HideFromToolBar(hwnd);
-            Opacity = 0;
+            //Opacity = 0;
             ContextMenu = new ContextMenu();
             var HideButton = new MenuItem() { Header = "Hide" };
             HideButton.Click += (s, ev) => 
@@ -163,6 +92,26 @@ namespace TCC
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             ContextMenu.IsOpen = true;
+        }
+    }
+
+    public class VisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if ((bool)value)
+            {
+                return Visibility.Visible;
+            }
+            else
+            {
+                return Visibility.Collapsed;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 }

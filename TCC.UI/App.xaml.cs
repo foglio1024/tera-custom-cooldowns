@@ -59,7 +59,7 @@ namespace TCC
                 SetWindowParameters(WindowManager.BossGauge, sr); //0
                 SetWindowParameters(WindowManager.BuffBar, sr); //1
                 SetWindowParameters(WindowManager.CharacterWindow, sr); //2
-                SetWindowParameters(WindowManager.ClassSpecificWindow, sr); //3
+                //SetWindowParameters(WindowManager.ClassSpecificWindow, sr); //3
                 SetWindowParameters(WindowManager.CooldownWindow, sr); //4
                 var t = sr.ReadLine(); //5
                 if (t.Equals("true"))
@@ -75,6 +75,27 @@ namespace TCC
             else
             {
                 WindowManager.ChangeClickThru(false);
+
+                WindowManager.BossGauge.Visibility = Visibility.Visible;
+                WindowManager.BossGauge.Top = 20;
+                WindowManager.BossGauge.Left = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width / 2 - 200;
+
+                WindowManager.BuffBar.Visibility = Visibility.Visible;
+                WindowManager.BuffBar.Top = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height / 1.5;
+                WindowManager.BuffBar.Left = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width - 1000;
+
+                WindowManager.CharacterWindow.Visibility = Visibility.Visible;
+                WindowManager.CharacterWindow.Top = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height - 120;
+                WindowManager.CharacterWindow.Left = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width /2 - 200;
+
+                //WindowManager.ClassSpecificWindow.Visibility = Visibility.Visible;
+                //WindowManager.ClassSpecificWindow.Top = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height / 2;
+                //WindowManager.ClassSpecificWindow.Left = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width /2 - 100;
+
+                WindowManager.CooldownWindow.Visibility = Visibility.Visible;
+                WindowManager.CooldownWindow.Top = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height /1.5;
+                WindowManager.CooldownWindow.Left = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width /3;
+
             }
         }
 
@@ -82,23 +103,30 @@ namespace TCC
         {
             var line = sr.ReadLine();
             var vals = line.Split(',');
-            w.Top = Convert.ToDouble(vals[0]);
-            w.Left = Convert.ToDouble(vals[1]);
-            if(Enum.TryParse(vals[2], out Visibility v))
+            try
             {
-                w.Visibility = v;
+                w.Top = Convert.ToDouble(vals[0]);
+                w.Left = Convert.ToDouble(vals[1]);
+                if (Enum.TryParse(vals[2], out Visibility v))
+                {
+                    w.Visibility = v;
+                }
+            }
+            catch (Exception)
+            {
+                             
             }
         }
 
         public static void SaveSettings()
         {
-            string[] vals = new string[6];
+            string[] vals = new string[5];
             AddSetting(WindowManager.BossGauge, vals, 0);
             AddSetting(WindowManager.BuffBar, vals, 1);
             AddSetting(WindowManager.CharacterWindow, vals, 2);
-            AddSetting(WindowManager.ClassSpecificWindow, vals, 3);
-            AddSetting(WindowManager.CooldownWindow, vals, 4);
-            vals[5] = WindowManager.Transparent.ToString().ToLower();
+            //AddSetting(WindowManager.ClassSpecificWindow, vals, 3);
+            AddSetting(WindowManager.CooldownWindow, vals, 3);
+            vals[4] = WindowManager.Transparent.ToString().ToLower();
             File.WriteAllLines(Environment.CurrentDirectory + @"/settings.csv", vals);
         }
 

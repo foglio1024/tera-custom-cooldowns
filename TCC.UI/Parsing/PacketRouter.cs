@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Media;
 using TCC.Data;
 using TCC.Messages;
 using TCC.Parsing.Messages;
@@ -30,26 +31,6 @@ namespace TCC.Parsing
         public static OpCodeNamer SystemMessageNamer;
         static CharListProcessor CLP = new CharListProcessor();
         static ConcurrentQueue<Tera.Message> Packets = new ConcurrentQueue<Tera.Message>();
-        //static event ParsedMessageEventHandler CharLogin;
-        //static event ParsedMessageEventHandler SkillCooldown;
-        //static event ParsedMessageEventHandler ItemCooldown;
-        //static event ParsedMessageEventHandler DecreaseSkillCooldown;
-        //static event EmptyPacketEventHandler   ReturnToLobby;
-        //static event ParsedMessageEventHandler AbnormalityBegin;
-        //static event ParsedMessageEventHandler PlayerStatUpdate;
-        //static event ParsedMessageEventHandler PlayerMPChanged;
-        //static event ParsedMessageEventHandler CreatureHPChanged;
-        //static event ParsedMessageEventHandler PlayerStaminaChanged;
-        //static event ParsedMessageEventHandler UserStatusChanged;
-        //static event ParsedMessageEventHandler FlightEnergyChanged;
-        //static event EmptyPacketEventHandler   UserSpawned;
-        //static event MessageEventHandler       CharList;
-        //static event ParsedMessageEventHandler BossGageReceived;
-        //static event ParsedMessageEventHandler NpcStatusChanged;
-
-        //public static event UpdateIntStatEventHandler MaxHPUpdated;
-        //public static event UpdateIntStatEventHandler MaxMPUpdated;
-        public static event UpdateIntStatEventHandler MaxSTUpdated;
 
         public static event UpdateStatWithIdEventHandler BossHPChanged;
         public static event UpdateStatWithIdEventHandler EnragedChanged;
@@ -75,7 +56,7 @@ namespace TCC.Parsing
                     continue;
                 }
                 var message = MessageFactory.Create(msg);
-                PacketInspector.InspectPacket(msg);
+                //PacketInspector.InspectPacket(msg);
                 if (message.GetType() == typeof(Tera.Game.Messages.UnknownMessage)) continue;
 
                 if (!MessageFactory.Process(message))
@@ -110,74 +91,6 @@ namespace TCC.Parsing
 
         }
 
-        static void RoutePacket(Tera.Message msg)
-        {
-            switch (OpCodeNamer.GetName(msg.OpCode))
-            {
-                case ("S_START_COOLTIME_SKILL"):
-                    HandleNewSkillCooldown(new S_START_COOLTIME_SKILL(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
-                    break;
-                case ("S_DECREASE_COOLTIME_SKILL"):
-                    HandleDecreaseSkillCooldown(new S_DECREASE_COOLTIME_SKILL(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
-                    break;
-                case ("S_ABNORMALITY_BEGIN"):
-                    HandleAbnormalityBegin(new S_ABNORMALITY_BEGIN(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
-                    break;
-                case ("S_CREATURE_CHANGE_HP"):
-                    HandleCreatureChangeHP(new S_CREATURE_CHANGE_HP(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
-                    break;
-                case ("S_PLAYER_CHANGE_MP"):
-                    HandlePlayerChangeMP(new S_PLAYER_CHANGE_MP(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
-                    break;
-                case ("S_BOSS_GAGE_INFO"):
-                    HandleGageReceived(new S_BOSS_GAGE_INFO(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
-                    break;
-                case ("S_PLAYER_CHANGE_STAMINA"):
-                    HandlePlayerChangeStamina(new S_PLAYER_CHANGE_STAMINA(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
-                    break;
-                case ("S_PLAYER_CHANGE_FLIGHT_ENERGY"):
-                    HandlePlayerChangeFlightEnergy(new S_PLAYER_CHANGE_FLIGHT_ENERGY(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
-                    break;
-                case ("S_START_COOLTIME_ITEM"):
-                    HandleNewItemCooldown(new S_START_COOLTIME_ITEM(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
-                    break;
-                case ("S_PLAYER_STAT_UPDATE"):
-                    HandlePlayerStatUpdate(new S_PLAYER_STAT_UPDATE(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
-                    break;
-                case ("S_USER_STATUS"):
-                    HandleUserStatusChanged(new S_USER_STATUS(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
-                    break;
-                case ("S_NPC_STATUS"):
-                    HandleNpcStatusChanged(new S_NPC_STATUS(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
-                    break;
-                case ("S_DESPAWN_NPC"):
-                    HandleNpcDespawn(new S_DESPAWN_NPC(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
-                    break;
-                case ("S_SPAWN_NPC"):
-                    HandleNpcSpawn(new S_SPAWN_NPC(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
-                    break;
-                case ("S_ABNORMALITY_REFRESH"):
-                    HandleAbnormalityRefresh(new S_ABNORMALITY_REFRESH(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
-                    break;
-                case ("S_ABNORMALITY_END"):
-                    HandleAbnormalityEnd(new S_ABNORMALITY_END(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
-                    break;
-                case ("S_SPAWN_ME"):
-                    //HandleSpawn();
-                    break;
-                case ("S_GET_USER_LIST"):
-                    HandleCharList(msg);
-                    break;
-                case ("S_RETURN_TO_LOBBY"):
-                    //HandleReturnToLobby();
-                    break;
-                case ("S_LOGIN"):
-                    HandleCharLogin(new S_LOGIN(new TeraMessageReader(msg, OpCodeNamer, Version, SystemMessageNamer)));
-                    break;
-                default:
-                    break;
-            }
-        }
         class EventQuestion : Tera.Game.Messages.ParsedMessage
         {
             public EventQuestion(TeraMessageReader reader) : base(reader)
@@ -197,27 +110,31 @@ namespace TCC.Parsing
             switch (SessionManager.CurrentPlayer.Class)
             {
                 case Class.Warrior:
-                    //WindowManager.InitClassGauge(Class.Warrior);
                     WindowManager.CharacterWindow.ShowResolve();
                     break;
                 case Class.Lancer:
                     WindowManager.CharacterWindow.ShowResolve();
                     break;
                 case Class.Engineer:
-                    WindowManager.InitClassGauge(Class.Engineer);
-                    WindowManager.CharacterWindow.HideResolve();
+                    //WindowManager.InitClassGauge(Class.Engineer);
+                    //WindowManager.CharacterWindow.HideResolve();
+                    WindowManager.CharacterWindow.ShowResolve(Colors.Orange);
                     break;
                 case Class.Fighter:
-                    WindowManager.InitClassGauge(Class.Fighter);
-                    WindowManager.CharacterWindow.HideResolve();
+                    //WindowManager.InitClassGauge(Class.Fighter);
+                    //WindowManager.CharacterWindow.HideResolve();
+                    WindowManager.CharacterWindow.ShowResolve(Colors.OrangeRed);
                     break;
                 case Class.Assassin:
-                    WindowManager.CharacterWindow.HideResolve();
-                    WindowManager.InitClassGauge(Class.Assassin);
+                    //WindowManager.CharacterWindow.HideResolve();
+                    //WindowManager.InitClassGauge(Class.Assassin);
+                    WindowManager.CharacterWindow.ShowResolve(Color.FromArgb(0xff, 0xff, 0x6a, 0xff));
                     break;
                 case Class.Glaiver:
-                    WindowManager.InitClassGauge(Class.Glaiver);
-                    WindowManager.CharacterWindow.HideResolve();
+                    //WindowManager.InitClassGauge(Class.Glaiver);
+                    //WindowManager.CharacterWindow.HideResolve();
+                    WindowManager.CharacterWindow.ShowResolve(Color.FromRgb(210, 220, 235));
+
                     break;
                 default:
                     WindowManager.CharacterWindow.HideResolve();
