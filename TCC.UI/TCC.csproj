@@ -308,7 +308,6 @@
     </Compile>
     <Compile Include="UI elements\Arc.cs" />
     <Compile Include="Data\Character.cs" />
-    <Compile Include="Parsing\CharListProcessor.cs" />
     <Compile Include="Parsing\CharLoginProcessor.cs" />
     <Compile Include="UI elements\EdgeArc.xaml.cs">
       <DependentUpon>EdgeArc.xaml</DependentUpon>
