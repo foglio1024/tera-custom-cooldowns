@@ -29,7 +29,7 @@ namespace TCC.Parsing
         public static uint Version;
         public static OpCodeNamer OpCodeNamer;
         public static OpCodeNamer SystemMessageNamer;
-        static CharListProcessor CLP = new CharListProcessor();
+        static List<Character> CurrentAccountCharacters;
         static ConcurrentQueue<Tera.Message> Packets = new ConcurrentQueue<Tera.Message>();
 
         public static event UpdateStatWithIdEventHandler BossHPChanged;
@@ -105,7 +105,7 @@ namespace TCC.Parsing
             SessionManager.CurrentPlayer.Class = p.CharacterClass;
             SessionManager.CurrentPlayer.EntityId = p.entityId;
             SessionManager.CurrentPlayer.Name = p.Name;
-            SessionManager.CurrentPlayer.Laurel = CLP.GetLaurelFromName(p.Name);
+            SessionManager.CurrentPlayer.Laurel = CurrentAccountCharacters.First(x => x.Name == p.Name).Laurel;
             SessionManager.CurrentPlayer.Level = (int)p.Level;
             switch (SessionManager.CurrentPlayer.Class)
             {
@@ -195,8 +195,8 @@ namespace TCC.Parsing
            
             if (AbnormalityDatabase.Abnormalities.TryGetValue(p.id, out Abnormality ab))
             {
-                if (ab.Name.Contains("BTS") || ab.ToolTip.Contains("BTS") || !ab.IsShow) return;
-                if (ab.Name.Contains("(Hidden)") || ab.Name.Equals("Unknown") || ab.Name.Equals(string.Empty)) return;
+                //if (ab.Name.Contains("BTS") || ab.ToolTip.Contains("BTS") || !ab.IsShow) return;
+                //if (ab.Name.Contains("(Hidden)") || ab.Name.Equals("Unknown") || ab.Name.Equals(string.Empty)) return;
                 //Console.WriteLine("{1} {0}",ab.Name, ab.Property);
                 if (p.targetId == SessionManager.CurrentPlayer.EntityId)
                 {
@@ -288,8 +288,8 @@ namespace TCC.Parsing
         {
             if (AbnormalityDatabase.Abnormalities.TryGetValue(p.AbnormalityId, out Abnormality ab))
             {
-                if (ab.Name.Contains("BTS") || ab.ToolTip.Contains("BTS") || !ab.IsShow) return;
-                if (ab.Name.Contains("(Hidden)") || ab.Name.Equals("Unknown") || ab.Name.Equals(string.Empty)) return;
+                //if (ab.Name.Contains("BTS") || ab.ToolTip.Contains("BTS") || !ab.IsShow) return;
+                //if (ab.Name.Contains("(Hidden)") || ab.Name.Equals("Unknown") || ab.Name.Equals(string.Empty)) return;
                 //Console.WriteLine("{1} {0}", ab.Name, ab.Property);
 
                 if (p.TargetId == SessionManager.CurrentPlayer.EntityId)
@@ -500,10 +500,18 @@ namespace TCC.Parsing
                 SessionManager.CurrentBosses.Clear();
             });
         }
-        public static void HandleCharList(Tera.Message msg)
-        {
-            CLP.ParseCharacters(PacketData(msg));
+        //public static void HandleCharList(Tera.Message msg)
+        //{
+        //    CLP.ParseCharacters(PacketData(msg));
 
+        //}
+        public static void HandleCharList(S_GET_USER_LIST p)
+        {
+            CurrentAccountCharacters = p.CharacterList;
+            foreach (var c in p.RawCharacters)
+            {
+                Console.WriteLine(c);
+            }
         }
         public static void HandlePlayerChangeFlightEnergy(S_PLAYER_CHANGE_FLIGHT_ENERGY p)
         {
