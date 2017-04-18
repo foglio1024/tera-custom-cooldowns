@@ -14,8 +14,8 @@
         <local:AbnormalityStrokeConverter x:Key="strokeConv"></local:AbnormalityStrokeConverter>
         <local:DurationLabelConverter x:Key="durationConv"></local:DurationLabelConverter>
     </UserControl.Resources>
-        
-    <Grid Margin="0,0,0,0" Width="40">
+
+    <Grid Margin="0,0,0,0" Width="40" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -26,12 +26,14 @@
         
         <TextBlock Name="abnormalityName" Grid.Row="0" Text="" Grid.Column="1" Foreground="White"/>
         <!--<TextBlock Name="abnormalityId" Grid.Row="1" Text="{Binding AbnormalityId}"/>-->
-        <Ellipse Name="abnormalityIcon" ToolTip="{Binding AbnormalityName}" Margin="0,0" Width="34" Height="34" Stroke="{Binding Type, Converter={StaticResource strokeConv}}" StrokeThickness="1.2">
+        <Ellipse Name="bgEll" Fill="{Binding Type, Converter={StaticResource strokeConv}}" Width="34" Height="34" ToolTip="{Binding AbnormalityId}">
+        </Ellipse>
+        <Ellipse Name="abnormalityIcon" ToolTip="{Binding AbnormalityName}" Margin="0,0" Width="30" Height="30">
             <Ellipse.Fill>
                 <ImageBrush ImageSource="{Binding IconName, Converter={StaticResource iconConv}}"/>
             </Ellipse.Fill>
         </Ellipse>
-        <local:Arc x:Name="arc" Stroke="#a000" StrokeThickness="17" EndAngle="0" Width="33" Height="33" />
+        <local:Arc x:Name="arc" Stroke="#a000" StrokeThickness="15" EndAngle="0" Width="30" Height="30" />
 
         <Grid Width="Auto" Height="20" x:Name="g" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5,0,5,-15">
             <!--<Grid.CacheMode>
@@ -41,7 +43,8 @@
                     Height="17" Width="Auto" 
                     Opacity=".9" CornerRadius="7.5" 
                     VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
-                    BorderBrush="{Binding Type, Converter={StaticResource strokeConv}}" BorderThickness="1.5"/>
+                    BorderBrush="{Binding Type, Converter={StaticResource strokeConv}}" BorderThickness="1.5"
+                    ToolTip="{Binding AbnormalityId}"/>
 
             <Viewbox StretchDirection="DownOnly" Stretch="Uniform" Margin="0">
                 <TextBlock Foreground="#d9000000" 
@@ -56,7 +59,7 @@
                    Opacity="1" 
                    Margin="6,4"
                    Text="{Binding CurrentTime, Converter={StaticResource durationConv}}"
-                   ToolTip="{Binding ElementName=number, Path=Text}">
+                   >
             <!--<TextBlock.Effect>
                 <DropShadowEffect ShadowDepth="0" BlurRadius="0" Color="White"></DropShadowEffect>
             </TextBlock.Effect>-->

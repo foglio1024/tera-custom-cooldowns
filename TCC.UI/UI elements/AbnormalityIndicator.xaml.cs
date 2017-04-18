@@ -33,6 +33,7 @@ namespace TCC.UI_elements
             //abnormalityId.DataContext = this;
             abnormalityName.DataContext = this;
             abnormalityIcon.DataContext = this;
+            bgEll.DataContext = this;
             number.DataContext = this;
             fill.DataContext = this;
         }
