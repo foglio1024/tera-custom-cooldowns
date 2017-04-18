@@ -56,7 +56,7 @@ namespace TCC
                 Visible = true
             };
             TrayIcon.MouseDown += NI_MouseDown;
-
+            var ForceShowButton = new MenuItem() { Header = "Force visibility on" };
             ClickThruButton = new MenuItem() { Header = "Click through"};
             var CloseButton = new MenuItem() { Header = "Close" };
 
@@ -70,11 +70,7 @@ namespace TCC
             {
                 CooldownWindow.Visibility = Visibility.Visible;
             };
-            //ClassSpecificWindowVisibilityButton = new MenuItem() { Header = "Unhide stamina gauge" };
-            //ClassSpecificWindowVisibilityButton.Click += (s, ev) =>
-            //{
-            //    ClassSpecificWindow.Visibility = Visibility.Visible;
-            //};
+            
             BossGaugeWindowVisibilityButton = new MenuItem() { Header = "Unhide boss bar" };
             BossGaugeWindowVisibilityButton.Click += (s, ev) =>
             {
@@ -87,10 +83,9 @@ namespace TCC
             };
 
 
-
-
             CloseButton.Click += (s, ev) => App.CloseApp();
             ClickThruButton.Click += (s, ev) => ToggleClickThru();
+            ForceShowButton.Click += (s, ev) => ForceShow();
 
             ContextMenu.Items.Add(CooldownWindowVisibilityButton);
             ContextMenu.Items.Add(BuffBarWindowVisibilityButton);
@@ -98,6 +93,7 @@ namespace TCC
             //ContextMenu.Items.Add(ClassSpecificWindowVisibilityButton);
             ContextMenu.Items.Add(CharacterWindowVisibilityButton);
             ContextMenu.Items.Add(new Separator());
+            ContextMenu.Items.Add(ForceShowButton);
             ContextMenu.Items.Add(ClickThruButton);
             ContextMenu.Items.Add(CloseButton);
 
@@ -109,6 +105,19 @@ namespace TCC
 
             FocusManager.ForegroundWindowChanged += FocusManager_ForegroundWindowChanged;
         }
+
+        private static void ForceShow()
+        {
+            CooldownWindow.Show();
+            CooldownWindow.Topmost = true;
+            CharacterWindow.Show();
+            CharacterWindow.Topmost = true;
+            BossGauge.Show();
+            BossGauge.Topmost = true;
+            BuffBar.Show();
+            BuffBar.Topmost = true;
+        }
+
         public static void ChangeClickThru(bool v)
         {
             if (v)
