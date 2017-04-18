@@ -105,7 +105,14 @@ namespace TCC.Parsing
             SessionManager.CurrentPlayer.Class = p.CharacterClass;
             SessionManager.CurrentPlayer.EntityId = p.entityId;
             SessionManager.CurrentPlayer.Name = p.Name;
-            SessionManager.CurrentPlayer.Laurel = CurrentAccountCharacters.First(x => x.Name == p.Name).Laurel;
+            try
+            {
+                SessionManager.CurrentPlayer.Laurel = CurrentAccountCharacters.First(x => x.Name == p.Name).Laurel;
+            }
+            catch (Exception)
+            {
+                SessionManager.CurrentPlayer.Laurel = Laurel.None;
+            }
             SessionManager.CurrentPlayer.Level = (int)p.Level;
             switch (SessionManager.CurrentPlayer.Class)
             {
@@ -187,7 +194,7 @@ namespace TCC.Parsing
                     break;
                 case Class.Assassin:
                     //redirect intense focus to 10154032
-                    if (p.id == 10154031) p.id++;
+                    //if (p.id == 10154031) p.id++;
                     break;
                 default:
                     break;
@@ -195,8 +202,8 @@ namespace TCC.Parsing
            
             if (AbnormalityDatabase.Abnormalities.TryGetValue(p.id, out Abnormality ab))
             {
-                //if (ab.Name.Contains("BTS") || ab.ToolTip.Contains("BTS") || !ab.IsShow) return;
-                //if (ab.Name.Contains("(Hidden)") || ab.Name.Equals("Unknown") || ab.Name.Equals(string.Empty)) return;
+                if (ab.Name.Contains("BTS") || ab.ToolTip.Contains("BTS") || !ab.IsShow) return;
+                if (ab.Name.Contains("(Hidden)") || ab.Name.Equals("Unknown") || ab.Name.Equals(string.Empty)) return;
                 //Console.WriteLine("{1} {0}",ab.Name, ab.Property);
                 if (p.targetId == SessionManager.CurrentPlayer.EntityId)
                 {
@@ -288,8 +295,8 @@ namespace TCC.Parsing
         {
             if (AbnormalityDatabase.Abnormalities.TryGetValue(p.AbnormalityId, out Abnormality ab))
             {
-                //if (ab.Name.Contains("BTS") || ab.ToolTip.Contains("BTS") || !ab.IsShow) return;
-                //if (ab.Name.Contains("(Hidden)") || ab.Name.Equals("Unknown") || ab.Name.Equals(string.Empty)) return;
+                if (ab.Name.Contains("BTS") || ab.ToolTip.Contains("BTS") || !ab.IsShow) return;
+                if (ab.Name.Contains("(Hidden)") || ab.Name.Equals("Unknown") || ab.Name.Equals(string.Empty)) return;
                 //Console.WriteLine("{1} {0}", ab.Name, ab.Property);
 
                 if (p.TargetId == SessionManager.CurrentPlayer.EntityId)
@@ -508,10 +515,10 @@ namespace TCC.Parsing
         public static void HandleCharList(S_GET_USER_LIST p)
         {
             CurrentAccountCharacters = p.CharacterList;
-            foreach (var c in p.RawCharacters)
-            {
-                Console.WriteLine(c);
-            }
+            //foreach (var c in p.RawCharacters)
+            //{
+            //    Console.WriteLine(c);
+            //}
         }
         public static void HandlePlayerChangeFlightEnergy(S_PLAYER_CHANGE_FLIGHT_ENERGY p)
         {
