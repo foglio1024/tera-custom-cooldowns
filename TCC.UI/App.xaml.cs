@@ -20,8 +20,19 @@ namespace TCC
     /// </summary>
     public partial class App : Application
     {
+        private static void GlobalUnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
+        {
+            var ex = (Exception)e.ExceptionObject;
+            File.WriteAllText(Environment.CurrentDirectory + "/error.txt", "##### CRASH #####\r\n" + ex.Message + "\r\n" +
+                     ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" + ex.InnerException +
+                     "\r\n" + ex.TargetSite);
+        }
+
         private void OnStartup(object sender, StartupEventArgs ev)
         {
+            var cd = AppDomain.CurrentDomain;
+            cd.UnhandledException += GlobalUnhandledExceptionHandler;
+
             System.Diagnostics.Process.GetCurrentProcess().PriorityClass = System.Diagnostics.ProcessPriorityClass.High;
 
             TeraSniffer.Instance.Enabled = true;
