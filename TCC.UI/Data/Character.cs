@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TCC
 {
-    class Character
+    public class Character
     {
         public string Name { get; set; }
         public Class Class { get; set; }
