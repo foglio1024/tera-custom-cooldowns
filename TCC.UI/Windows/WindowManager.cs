@@ -28,13 +28,11 @@ namespace TCC
         static MenuItem ClickThruButton;
         static MenuItem CharacterWindowVisibilityButton;
         static MenuItem CooldownWindowVisibilityButton;
-        //static MenuItem ClassSpecificWindowVisibilityButton;
         static MenuItem BossGaugeWindowVisibilityButton;
         static MenuItem BuffBarWindowVisibilityButton;
         static System.Windows.Forms.NotifyIcon TrayIcon;
 
         public static bool Transparent;
-        static bool IsClassWindowVisible;
 
         public static Visibility StaminaGaugeVisibility;
         public static double StaminaGaugeTop;
@@ -43,7 +41,6 @@ namespace TCC
         public static void Init()
         {
             CooldownWindow = new CooldownWindow();
-            //ClassSpecificWindow = new StaminaGauge();
             CharacterWindow = new CharacterWindow();
             BossGauge = new BossGageWindow();
             BuffBar = new AbnormalitiesWindow();
@@ -90,18 +87,14 @@ namespace TCC
             ContextMenu.Items.Add(CooldownWindowVisibilityButton);
             ContextMenu.Items.Add(BuffBarWindowVisibilityButton);
             ContextMenu.Items.Add(BossGaugeWindowVisibilityButton);
-            //ContextMenu.Items.Add(ClassSpecificWindowVisibilityButton);
             ContextMenu.Items.Add(CharacterWindowVisibilityButton);
             ContextMenu.Items.Add(new Separator());
-            ContextMenu.Items.Add(ForceShowButton);
             ContextMenu.Items.Add(ClickThruButton);
             ContextMenu.Items.Add(CloseButton);
 
 
             FocusManager.FocusTimer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
             FocusManager.FocusTimer.Tick += FocusManager.CheckForegroundWindow;
-            SessionManager.CurrentPlayer.InCombat += SessionManager_InCombat;
-            SessionManager.CurrentPlayer.OutOfCombat += SessionManager_OutOfCombat;
 
             FocusManager.ForegroundWindowChanged += FocusManager_ForegroundWindowChanged;
         }
@@ -139,27 +132,12 @@ namespace TCC
             FocusManager.FocusTimer.Stop();
             TrayIcon.Visible = false;
 
-            //Properties.Settings.Default.CooldownBarLeft = CooldownWindow.Left;
-            //Properties.Settings.Default.CooldownBarTop= CooldownWindow.Top;
-            //Properties.Settings.Default.CharacterWindowLeft = CharacterWindow.Left;
-            //Properties.Settings.Default.CharacterWindowTop = CharacterWindow.Top;
-            //Properties.Settings.Default.BuffBarTop = BuffBar.Top;
-            //Properties.Settings.Default.BuffBarLeft = BuffBar.Left;
-            //Properties.Settings.Default.BossGaugeWindowTop = BossGauge.Top;
-            //Properties.Settings.Default.BossGaugeWindowLeft = BossGauge.Left;
-
-            //if(ClassSpecificWindow != null)
-            //{
-            //    ClassSpecificWindow.Close();
-            //    Properties.Settings.Default.ClassGaugeLeft = ClassSpecificWindow.Left;
-            //    Properties.Settings.Default.ClassGaugeTop = ClassSpecificWindow.Top;
-            //}
-            //Properties.Settings.Default.Transparent = Transparent;
-
-            //Properties.Settings.Default.Save();
             App.SaveSettings();
-            CooldownWindow.Close();
-            CharacterWindow.Close();
+
+            foreach (Window w in Application.Current.Windows)
+            {
+                w.Close();
+            }
         }
         //public static void InitClassGauge(Class c)
         //{
@@ -212,7 +190,6 @@ namespace TCC
             {
                 w.Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    //w.Show();
                     w.BeginAnimation(Window.OpacityProperty, OpacityAnimation(1));
                 }));
             }
@@ -225,113 +202,43 @@ namespace TCC
                 w.Dispatcher.BeginInvoke(new Action(() =>
                 {
                     var a = OpacityAnimation(0);
-                    //a.Completed += (s, ev) => w.Hide();
                     w.BeginAnimation(Window.OpacityProperty, a);
                 }));
             }
-        }
-        private static void SessionManager_InCombat()
-        {
-            IsClassWindowVisible = true;
-        }
-        private static void SessionManager_OutOfCombat()
-        {
-            var t = new Timer(5000);
-            t.Elapsed += (s, o) =>
-            {
-                if (!SessionManager.CurrentPlayer.IsInCombat)
-                {
-                    IsClassWindowVisible = false;
-                    //HideWindow(ClassSpecificWindow);
-                }
-                t.Stop();
-            };
-            t.Enabled=true;
         }
         private static void FocusManager_ForegroundWindowChanged(bool visible)
         {
             if (visible && SessionManager.Logged)
             {
-                ShowWindow(CooldownWindow);
-                ShowWindow(CharacterWindow);
-                ShowWindow(BuffBar);
-                ShowWindow(BossGauge);
-                CooldownWindow.Topmost = true;
-                CharacterWindow.Topmost = true;
-                BuffBar.Topmost = true;
-                BossGauge.Topmost = true;
-                //ShowWindow(ClassSpecificWindow);
-                //TODO: add setting for gauge visibility
-                //switch (SessionManager.CurrentPlayer.Class)
-                //{
-                //    //case Class.Warrior:
-                //    //    if (IsClassWindowVisible)
-                //    //    {
-                //    //        ShowWindow(ClassSpecificWindow);
-                //    //    }
-                //    //    break;
-                //    case Class.Engineer:
-                //        if (IsClassWindowVisible)
-                //        {
-                //            ShowWindow(ClassSpecificWindow);
-                //        }
-                //        break;
-                //    case Class.Fighter:
-                //        if (IsClassWindowVisible)
-                //        {
-                //            ShowWindow(ClassSpecificWindow);
-                //        }
-                //        break;
-                //    case Class.Assassin:
-                //        if (IsClassWindowVisible)
-                //        {
-                //            ShowWindow(ClassSpecificWindow);
-                //        }
-                //        break;
-                //    case Class.Glaiver:
-                //        if (IsClassWindowVisible)
-                //        {
-                //            ShowWindow(ClassSpecificWindow);
-                //        }
-                //        break;
-                //    default:
-                //        break;
-                //}
+                foreach (Window w in Application.Current.Windows)
+                {
+                    ShowWindow(w);
+                    w.Topmost = false;
+                    w.Topmost = true;
+                }
             }
             else
             {
-                HideWindow(CooldownWindow);
-                HideWindow(CharacterWindow);
-                //HideWindow(ClassSpecificWindow);
-                HideWindow(BossGauge);
-                HideWindow(BuffBar);
+                foreach (Window w in Application.Current.Windows)
+                {
+                    HideWindow(w);
+                }
             }
 
-            //if(visible && SessionManager.Logged)
-            //{
-            //    BossGauge.Show();
-            //}
-            //else
-            //{
-            //    BossGauge.Hide();
-            //}
         }
         private static void SetClickThru()
         {
-            FocusManager.MakeTransparent(new WindowInteropHelper(BossGauge).Handle);
-            FocusManager.MakeTransparent(new WindowInteropHelper(BuffBar).Handle);
-            FocusManager.MakeTransparent(new WindowInteropHelper(CooldownWindow).Handle);
-            FocusManager.MakeTransparent(new WindowInteropHelper(CharacterWindow).Handle);
-            //FocusManager.MakeTransparent(new WindowInteropHelper(ClassSpecificWindow).Handle);
-
+            foreach (Window w in Application.Current.Windows)
+            {
+                FocusManager.MakeTransparent(new WindowInteropHelper(w).Handle);
+            }
         }
         private static void UnsetClickThru()
         {
-            FocusManager.UndoTransparent(new WindowInteropHelper(BossGauge).Handle);
-            FocusManager.UndoTransparent(new WindowInteropHelper(BuffBar).Handle);
-            FocusManager.UndoTransparent(new WindowInteropHelper(CharacterWindow).Handle);
-            FocusManager.UndoTransparent(new WindowInteropHelper(CooldownWindow).Handle);
-            //FocusManager.UndoTransparent(new WindowInteropHelper(ClassSpecificWindow).Handle);
+            foreach (Window w in Application.Current.Windows)
+            {
+                FocusManager.UndoTransparent(new WindowInteropHelper(w).Handle);
+            }
 
         }
         private static void ToggleClickThru()
