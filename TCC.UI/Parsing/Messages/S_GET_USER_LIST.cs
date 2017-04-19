@@ -126,19 +126,19 @@ namespace TCC.Messages
                 c.guildId = reader.ReadInt32();
                 c.name = reader.ReadTeraString();
 
-                c.details = new byte[c.detailsCount];
-                for (int j = 0; j < c.detailsCount; j++)
-                {
-                    c.details[j] = reader.ReadByte();
-                }
+                //c.details = new byte[c.detailsCount];
+                //for (int j = 0; j < c.detailsCount; j++)
+                //{
+                //    c.details[j] = reader.ReadByte();
+                //}
 
-                c.details2 = new byte[c.details2count];
-                for (int k = 0; k < c.details2count; k++)
-                {
-                    c.details2[k] = reader.ReadByte();
-                }
+                //c.details2 = new byte[c.details2count];
+                //for (int k = 0; k < c.details2count; k++)
+                //{
+                //    c.details2[k] = reader.ReadByte();
+                //}
 
-                c.guild = reader.ReadTeraString();
+                //c.guild = reader.ReadTeraString();
 
                 CharacterList.Add(new Character(c.name, (Class)c.charClass, (Laurel)c.laurel));
                 RawCharacters.Add(c);
