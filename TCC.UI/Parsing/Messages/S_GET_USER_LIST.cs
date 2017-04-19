@@ -27,9 +27,9 @@ namespace TCC.Messages
         {
             CharacterList = new List<Character>();
             RawCharacters = new List<RawChar>();
-
             count = reader.ReadInt16();
             offset = reader.ReadInt16();
+            short nextAddr = offset;
             unkh1 = reader.ReadByte();
             unkh2 = reader.ReadInt32();
             maxChar = reader.ReadInt32();
@@ -42,7 +42,9 @@ namespace TCC.Messages
             for (int i = 0; i < count; i++)
             {
                 var c = new RawChar();
-                reader.Skip(4);
+                reader.BaseStream.Position = nextAddr - 4;
+                reader.Skip(2);
+                nextAddr = reader.ReadInt16();
                 c.unk1 = reader.ReadInt32();
                 c.nameOffset = reader.ReadInt16();
                 c.detailsOffset = reader.ReadInt16();
