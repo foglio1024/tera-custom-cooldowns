@@ -39,12 +39,14 @@ namespace TCC
         {
             var f = File.OpenText(Environment.CurrentDirectory + "/resources/database/skills.tsv");
 
+            SkillConnections = new List<SkillConnection>();
             Skills = new Dictionary<Class, Dictionary<uint, Skill>>();
             for (int i = 0; i <= 12; i++)
             {
                 Skills.Add((Class)i, new Dictionary<uint, Skill>());
             }
             Skills.Add(Class.Common, new Dictionary<uint, Skill>());
+
 
             while (true)
             {
@@ -61,12 +63,15 @@ namespace TCC
                 sk.SetSkillIcon(iconName);
                 Skills[c].Add(id, sk);
 
-                SkillConnections = new List<SkillConnection>();
 
                 var skc = new SkillConnection((int)id, c);
                 for (int i = 5; i < s.Count(); i++)
                 {
                     skc.AddConnectedSkill(Convert.ToInt32(s[i]));
+                }
+                if(skc.ConnectedSkills.Count > 0)
+                {
+                    SkillConnections.Add(skc);
                 }
             }
 
@@ -88,10 +93,12 @@ namespace TCC
                 {
                     if ((int)id == connectedSkill)
                     {
+                        //Console.WriteLine("GetSkillByConnectedId({0}, {1}) => {2}.", id, c, skillConnection.Id);
                         return skillConnection.Id;
                     }
                 }
             }
+            //Console.WriteLine("GetSkillByConnectedId({0}, {1}) => failed.", id, c);
             return -1;
         }
         public static string SkillIdToName(uint id, Class c)
