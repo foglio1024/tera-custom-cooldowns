@@ -144,7 +144,7 @@
                 </Border>
                 <Ellipse Margin="8" Width="Auto" Height="Auto">
                     <Ellipse.Fill>
-                        <ImageBrush ImageSource="/resources/enraged.png">
+                        <ImageBrush ImageSource="/resources/images/enraged.png">
                             <ImageBrush.RelativeTransform>
                                 <TransformGroup>
                                     <ScaleTransform CenterY="0.5" CenterX="0.5"/>
