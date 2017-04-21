@@ -108,6 +108,11 @@ namespace TCC
             InitializeComponent();
             this.DataContext = SessionManager.CurrentPlayer;
             stBar.Fill = new SolidColorBrush(Color.FromRgb(0x6, 0xb, 0xf));
+            hpBar.RenderTransform = new ScaleTransform(1, 1, 0, .5);
+            mpBar.RenderTransform = new ScaleTransform(1, 1, 0, .5);
+            stBar.RenderTransform = new ScaleTransform(1, 1, 0, .5);
+            flightBar.RenderTransform = new ScaleTransform(1, 1, 0, .5);
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -131,29 +136,10 @@ namespace TCC
             SessionManager.CurrentPlayer.STUpdated += UpdateST;
             SessionManager.CurrentPlayer.FlightEnergyUpdated += UpdateFlightEnergy;
 
-            //PacketRouter.MaxHPUpdated += SetMaxHP;
-            //PacketRouter.MaxMPUpdated += SetMaxMP;
-            //PacketRouter.MaxSTUpdated += SetMaxST;
-
-            //SessionManager.CurrentPlayer.InCombat += () => { Combat = true; };
-            //SessionManager.CurrentPlayer.OutOfCombat += () => { Combat = false; };
-
-            hpBar.RenderTransform = new ScaleTransform(1, 1, 0, .5);
-            mpBar.RenderTransform = new ScaleTransform(1, 1, 0, .5);
-            stBar.RenderTransform = new ScaleTransform(1, 1, 0, .5);
-            flightBar.RenderTransform = new ScaleTransform(1, 1, 0, .5);
-
             hpBar.Width = @base.Width;
             mpBar.Width = @base.Width;
             stBar.Width = @base.Width;
             flightBar.Width = dummyFlightBar.Width;
-
-          
-
-            var d = new DispatcherTimer();
-            d.Interval = TimeSpan.FromMilliseconds(333);
-            d.Tick += D_Tick;
-            //d.Start();
         }
 
         internal void ShowResolve()
