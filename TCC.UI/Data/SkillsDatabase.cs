@@ -34,6 +34,28 @@ namespace TCC
             }
         }
 
+        public static void CheckIcons()
+        {
+            foreach (var classDict in Skills)
+            {
+                foreach (var skill in classDict.Value)
+                {
+
+                    string filePath = Environment.CurrentDirectory + "/resources/images/" + skill.Value.IconName.Replace('.', '/') + ".png";
+                    if (File.Exists(filePath))
+                    {
+                        Console.Write("\r[Icon Check] - Abnormality ID:{0} \t File name:{1} \t OK", skill.Value.Id, skill.Value.IconName);
+                    }
+                    else
+                    {
+                        if (skill.Value.IconName != "")
+                        {
+                            Console.WriteLine("[Icon Check] - File name:{1} \t Path:{0}", filePath, skill.Value.IconName);
+                        }
+                    }
+                }
+            }
+        }
 
         public static void Load()
         {
