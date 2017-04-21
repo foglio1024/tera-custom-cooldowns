@@ -27,7 +27,7 @@ namespace TCC
             if(v < newVer)
             {
                 //update
-                if(MessageBox.Show("Updated icons database available. Download now?", "Update available", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                if(MessageBox.Show("Updated icons database available. Download now?", "TCC", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
                     DownloadDatabase();
                     ExtractDatabase();
@@ -44,7 +44,7 @@ namespace TCC
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Couldn't download database.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);                    
+                    MessageBox.Show("Couldn't download database.", "TCC", MessageBoxButton.OK, MessageBoxImage.Error);                    
                 }
             }
         }
@@ -68,6 +68,7 @@ namespace TCC
             }
 
             CleanTempDatabase();
+            MessageBox.Show("Database updated.", "TCC", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         static void CleanTempDatabase()
         {
