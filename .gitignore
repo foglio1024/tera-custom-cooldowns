@@ -261,3 +261,5 @@ __pycache__/
 *.pyc
 /Report20170318-1911.diagsession
 *.diagsession
+/TCC.UI/resources/images/Icon_Items
+/TCC.UI/resources/images/Icon_Items/Vicious_Red_Blood_Tex.png

@@ -60,6 +60,7 @@ namespace TCC
 
             WindowManager.ShowWindow(WindowManager.CooldownWindow);
             LoadThread.Start();
+            UpdateManager.CheckDatabaseVersion();
         }
 
         static void LoadSettings()
