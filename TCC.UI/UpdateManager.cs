@@ -27,7 +27,7 @@ namespace TCC
             if(v < newVer)
             {
                 //update
-                if(MessageBox.Show("Updated icons database available. Download now?", "TCC", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                if(MessageBox.Show(String.Format("Updated icons database available (v{0}). Download now?", newVer), "TCC", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
                     DownloadDatabase();
                     ExtractDatabase();
