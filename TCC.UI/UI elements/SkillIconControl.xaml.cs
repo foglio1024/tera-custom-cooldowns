@@ -217,7 +217,7 @@ namespace TCC
             if (value == null) return "";
             string iconName = value.ToString();
             iconName = iconName.Replace(".", "/");
-            return "/resources/" + iconName + ".png";
+            return Environment.CurrentDirectory + "/resources/images/" + iconName + ".png";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

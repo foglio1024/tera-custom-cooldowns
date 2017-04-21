@@ -329,7 +329,7 @@ namespace TCC
                     break;
             }
             // return new ImageBrush(CharacterWindow.Bitmap2BitmapImage(bitmap));
-            return "/resources/Icon_Laurels/" + laurel + ".png";
+            return Environment.CurrentDirectory + "/resources/images/Icon_Laurels/" + laurel + ".png";
         }
 
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
@@ -395,7 +395,7 @@ namespace TCC
 
             }
             //return new ImageBrush(CharacterWindow.Bitmap2BitmapImage(bitmap));
-            return "/resources/Icon_Classes/" + className + ".png";
+            return Environment.CurrentDirectory + "/resources/images/Icon_Classes/" + className + ".png";
         }
 
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]

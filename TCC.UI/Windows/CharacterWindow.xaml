@@ -90,7 +90,7 @@
             </Border>
             <Rectangle Width="21" Height="21" Margin="0" Grid.Column="5" Fill="{Binding IsInCombat, Converter={StaticResource combatConv}}" VerticalAlignment="Center"  HorizontalAlignment="Center">
                 <Rectangle.OpacityMask>
-                    <ImageBrush ImageSource="/resources/combat.png"/>
+                    <ImageBrush ImageSource="/resources/images/combat.png"/>
                 </Rectangle.OpacityMask>
             </Rectangle>
 
