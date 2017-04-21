@@ -34,7 +34,7 @@ namespace TCC
 
         public void SetSkillIcon(string iconName)
         {
-            if (!iconName.Contains("Icon_Skills.")) return;
+            //if (!iconName.Contains("Icon_Skills.")) return;
             this.IconName = iconName;//.Replace("Icon_Skills.", "");
 
             //CooldownWindow.Instance.Dispatcher.BeginInvoke(new Action(() =>
