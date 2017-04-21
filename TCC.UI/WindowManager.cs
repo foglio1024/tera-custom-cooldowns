@@ -206,6 +206,8 @@ namespace TCC
                 }));
             }
         }
+
+        static bool isForeground = false;
         private static void FocusManager_ForegroundWindowChanged(bool visible)
         {
             if (visible && SessionManager.Logged)
@@ -213,9 +215,14 @@ namespace TCC
                 foreach (Window w in Application.Current.Windows)
                 {
                     ShowWindow(w);
-                    w.Topmost = false;
-                    w.Topmost = true;
+                    if (!isForeground)
+                    {
+                        w.Topmost = false;
+                        w.Topmost = true;
+                    }
                 }
+                isForeground = true;
+
             }
             else
             {
@@ -223,6 +230,7 @@ namespace TCC
                 {
                     HideWindow(w);
                 }
+                isForeground = false;
             }
 
         }

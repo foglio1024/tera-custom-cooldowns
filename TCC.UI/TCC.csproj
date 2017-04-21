@@ -338,7 +338,7 @@
     <Compile Include="Data\SkillsDatabase.cs" />
     <Compile Include="Parsing\StringUtils.cs" />
     <Compile Include="Parsing\Messages\S_USER_STATUS.cs" />
-    <Compile Include="Windows\WindowManager.cs" />
+    <Compile Include="WindowManager.cs" />
     <Page Include="UI elements\AbnormalityIndicator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
