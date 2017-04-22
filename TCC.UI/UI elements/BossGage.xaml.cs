@@ -234,6 +234,10 @@ namespace TCC
             Dispatcher.BeginInvoke(new Action(() =>
                 {
                     CurrentHP = Convert.ToInt32(hp);
+                    if(CurrentHP > MaxHP)
+                    {
+                        MaxHP = CurrentHP;
+                    }
                     if (id == EntityId)
                     {
                         DoubleAnimation.To = ValueToLength(CurrentHP, MaxHP);
