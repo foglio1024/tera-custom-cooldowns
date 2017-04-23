@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCC"
+        xmlns:converters="clr-namespace:TCC.Converters"
         mc:Ignorable="d"
         Title="HPbar" 
         Height="Auto" Width="Auto"
@@ -51,10 +52,10 @@
         <Style x:Key="borderPolygon" TargetType="Polygon">
             <Setter Property="Fill" Value="{StaticResource bgColor}"></Setter>
         </Style>
-        <local:ClassImageConverter x:Key="classConv"/>
-        <local:LaurelImageConverter x:Key="laurelConv"/>
-        <local:CombatToColorConverter x:Key="combatConv"/>
-        <local:HP_PercentageConverter x:Key="hpPercConv"/>
+        <converters:ClassImageConverter x:Key="classConv"/>
+        <converters:LaurelImageConverter x:Key="laurelConv"/>
+        <converters:CombatToColorConverter x:Key="combatConv"/>
+        <converters:HP_PercentageConverter x:Key="hpPercConv"/>
     </Window.Resources>
     <Grid Margin="10,0">
         <!--<Grid.CacheMode>
@@ -214,11 +215,18 @@
 
             <Grid  Grid.Row="2" VerticalAlignment="Center" Opacity="1">
                 <Rectangle Style="{StaticResource baseRectangle}" Grid.Row="2" Height="11"/>
-                <Rectangle Name="stBar" Height="11"  Width="400" Style="{StaticResource barRectangle}" Opacity=".8" Fill="#6bf">
+                <Rectangle Name="stBar" Height="11"  Width="400" Style="{StaticResource barRectangle}" Opacity="1" Fill="#6bf">
+                    <!--<Rectangle.Effect>
+                        <DropShadowEffect Color="{Binding ElementName=stBar, Path=Fill.Color}" Opacity="1" BlurRadius="15" ShadowDepth="0"/>
+                    </Rectangle.Effect>-->
                 </Rectangle>
                 <!--<Polygon Points="0,11 11,11 11,0" HorizontalAlignment="Right" Style="{StaticResource borderPolygon}" VerticalAlignment="Center" Width="Auto" Height="Auto"></Polygon>
                 <Polygon Points="0,11 0,0 11,0" HorizontalAlignment="Left" Style="{StaticResource borderPolygon}" VerticalAlignment="Center" Width="Auto" Height="Auto"></Polygon>-->
-                <TextBlock Style="{StaticResource hpBarNumber}" HorizontalAlignment="Left" Opacity="1" Margin="5,0,0,0" FontSize="10" VerticalAlignment="Center" Text="RE"></TextBlock>
+                <TextBlock Style="{StaticResource hpBarNumber}" HorizontalAlignment="Left" Opacity="1" Margin="5,-1,0,0" FontSize="10" VerticalAlignment="Center" Text="RE">
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="1" BlurRadius="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
 
             </Grid>
 

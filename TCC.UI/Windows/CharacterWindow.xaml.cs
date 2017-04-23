@@ -28,75 +28,6 @@ namespace TCC
     public partial class CharacterWindow : Window, INotifyPropertyChanged
     {
         static int AnimationTime = 200;
-        //int MaxHP, MaxMP, MaxST = 0;
-        static int MaxFlightEnergy = 1000;
-
-        //private float currentHP;
-        //public float CurrentHP
-        //{
-        //    get
-        //    {
-        //        return currentHP;
-        //    }
-        //    set
-        //    {
-        //        if(currentHP != value)
-        //        {
-        //            currentHP = value;
-        //            NotifyPropertyChanged("CurrentHP");
-        //        }
-        //    }
-        //}
-        //private float currentMP;
-        //public float CurrentMP
-        //{
-        //    get
-        //    {
-        //        return currentMP;
-        //    }
-        //    set
-        //    {
-        //        if (currentMP != value)
-        //        {
-        //            currentMP = value;
-        //            NotifyPropertyChanged("CurrentMP");
-        //        }
-        //    }
-        //}
-        //private float currentST;
-        //public float CurrentST
-        //{
-        //    get
-        //    {
-        //        return currentST;
-        //    }
-        //    set
-        //    {
-        //        if (currentST != value)
-        //        {
-        //            currentST = value;
-        //            NotifyPropertyChanged("CurrentST");
-        //        }
-        //    }
-        //}
-
-        //bool combat;
-        //public bool Combat
-        //{
-        //    get
-        //    {
-        //        return combat;
-        //    }
-        //    set
-        //    {
-        //        if(combat != value)
-        //        {
-        //            combat = value;
-        //            NotifyPropertyChanged("Combat");
-        //        }
-        //    }
-        //}
-
 
         private void NotifyPropertyChanged(string prop)
         {
@@ -206,14 +137,14 @@ namespace TCC
 
         private void UpdateHP(float newValue)
         {
-            Dispatcher.BeginInvoke(new Action(() =>  
+            Dispatcher.BeginInvoke(new Action(() =>
             {
                 hpBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(ValueToLength((double)newValue, (double)SessionManager.CurrentPlayer.MaxHP), TimeSpan.FromMilliseconds(AnimationTime)) { EasingFunction = new QuadraticEase() });
             }));
         }
         private void UpdateMP(float newValue)
         {
-            Dispatcher.BeginInvoke(new Action(() => 
+            Dispatcher.BeginInvoke(new Action(() =>
             {
                 mpBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(ValueToLength((double)newValue, (double)SessionManager.CurrentPlayer.MaxMP), TimeSpan.FromMilliseconds(AnimationTime)) { EasingFunction = new QuadraticEase() });
             }));
@@ -221,7 +152,7 @@ namespace TCC
         }
         private void UpdateST(float newValue)
         {
-            Dispatcher.BeginInvoke(new Action(() => 
+            Dispatcher.BeginInvoke(new Action(() =>
             {
                 stBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(ValueToLength((double)newValue, (double)SessionManager.CurrentPlayer.MaxST), TimeSpan.FromMilliseconds(AnimationTime)) { EasingFunction = new QuadraticEase() });
             }));
@@ -253,7 +184,7 @@ namespace TCC
 
         double ValueToLength(double value, double maxValue)
         {
-            if(maxValue == 0)
+            if (maxValue == 0)
             {
                 return 0;
             }
@@ -278,29 +209,15 @@ namespace TCC
                 //CurrentLevel = 1;
             }));
         }
-        public static BitmapImage Bitmap2BitmapImage(System.Drawing.Bitmap bitmap)
-        {
-            using (var memory = new MemoryStream())
-            {
-                bitmap.Save(memory, ImageFormat.Png);
-                memory.Position = 0;
-
-                var bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.StreamSource = memory;
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.EndInit();
-
-                return bitmapImage;
-            }
-        }
 
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             ContextMenu.IsOpen = true;
         }
     }
-
+}
+namespace TCC.Converters
+{
     public class LaurelImageConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -407,7 +324,6 @@ namespace TCC
             throw new NotImplementedException();
         }
     }
-
     public class CombatToColorConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -429,7 +345,6 @@ namespace TCC
             throw new NotImplementedException();
         }
     }
-
     public class HP_PercentageConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
