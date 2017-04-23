@@ -4,10 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC"
+             xmlns:converters="clr-namespace:TCC.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="100" Loaded="ControlLoaded" Unloaded="UserControl_Unloaded">
     <UserControl.Resources>
-        <local:IconConverter x:Key="iconConv"/>
+        <converters:IconConverter x:Key="iconConv"/>
     </UserControl.Resources>
     <Grid Width="55" Height="55" Margin="2" HorizontalAlignment="Left" Name="MainGrid">
         <!--<Grid.CacheMode>

@@ -37,7 +37,7 @@ namespace TCC
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
         }
-        
+
 
 
         public string IconName
@@ -53,14 +53,14 @@ namespace TCC
             set { SetValue(IdProperty, value); }
         }
         public static readonly DependencyProperty IdProperty = DependencyProperty.Register("Id", typeof(uint), typeof(SkillIconControl));
-        
+
         public int Cooldown
         {
             get { return (int)GetValue(CooldownProperty); }
             set { SetValue(CooldownProperty, value); }
         }
         public static readonly DependencyProperty CooldownProperty = DependencyProperty.Register("Cooldown", typeof(int), typeof(SkillIconControl));
-        
+
         public string SkillName
         {
             get { return (string)GetValue(SkillNameProperty); }
@@ -137,8 +137,8 @@ namespace TCC
             CurrentCD = (double)Cooldown / 1000;
             ToolTip = SkillName;
             NumberTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(1000) };
-            MainTimer = new DispatcherTimer() {Interval = TimeSpan.FromMilliseconds(Cooldown) };
-            CloseTimer = new DispatcherTimer() {Interval = TimeSpan.FromMilliseconds(ending)};
+            MainTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(Cooldown) };
+            CloseTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(ending) };
 
             CloseTimer.Tick += CloseTimer_Tick; ;
 
@@ -146,7 +146,7 @@ namespace TCC
             {
                 CurrentCD--;
             };
-            
+
             MainTimer.Tick += (s, o) =>
             {
                 //var c = new DoubleAnimation(22, 0, TimeSpan.FromMilliseconds(ending))
@@ -209,7 +209,9 @@ namespace TCC
 
         }
     }
-
+}
+namespace TCC.Converters
+{
     public class IconConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
