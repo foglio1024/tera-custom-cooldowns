@@ -61,6 +61,8 @@ namespace TCC
             WindowManager.ShowWindow(WindowManager.CooldownWindow);
             LoadThread.Start();
             UpdateManager.CheckDatabaseVersion();
+            //Debug();
+
         }
 
         static void LoadSettings()
@@ -154,5 +156,41 @@ namespace TCC
             Environment.Exit(0);
         }
 
+        public static void Debug()
+        {
+            SessionManager.Logged = true;
+            SessionManager.CurrentPlayer.EntityId = 9;
+            AbnormalityDatabase.Abnormalities.TryGetValue(1300, out Abnormality a);
+            SessionManager.CurrentPlayer.Buffs.Add(new BuffDuration(a,5000000,10,9));
+            SessionManager.CurrentBosses.Add(new Boss(10, 950, 4000, 2100000000, 2100000000, System.Windows.Visibility.Visible));
+            for (int i = 0; i < 20; i++)
+            {
+                SessionManager.TryGetBossById(10, out Boss b);
+                AbnormalityDatabase.Abnormalities.TryGetValue(1300, out Abnormality ab);
+                b.Buffs.Add(new BuffDuration(ab, 200000, 1, 10));
+            }
+            SessionManager.CurrentBosses.Add(new Boss(20, 950, 4000, 2100000000, 2100000000, System.Windows.Visibility.Visible));
+            for (int i = 0; i < 20; i++)
+            {
+                SessionManager.TryGetBossById(20, out Boss b);
+                AbnormalityDatabase.Abnormalities.TryGetValue(1300, out Abnormality ab);
+                b.Buffs.Add(new BuffDuration(ab, 200000, 2, 20));
+            }
+            SessionManager.CurrentBosses.Add(new Boss(30, 950, 4000, 2100000000, 2100000000, System.Windows.Visibility.Visible));
+            for (int i = 0; i < 10; i++)
+            {
+                SessionManager.TryGetBossById(30, out Boss b);
+                AbnormalityDatabase.Abnormalities.TryGetValue(1300, out Abnormality ab);
+                b.Buffs.Add(new BuffDuration(ab, 200000, 3, 30));
+            }
+            SessionManager.CurrentBosses.Add(new Boss(40, 950, 4000, 2100000000, 2100000000, System.Windows.Visibility.Visible));
+            for (int i = 0; i < 10; i++)
+            {
+                SessionManager.TryGetBossById(40, out Boss b);
+                AbnormalityDatabase.Abnormalities.TryGetValue(1300, out Abnormality ab);
+                b.Buffs.Add(new BuffDuration(ab, 200000, 10, 40));
+            }
+
+        }
     }
 }
