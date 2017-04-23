@@ -21,7 +21,15 @@ namespace TCC
             {
                 c.DownloadFile(databaseVersion, "newDbVer");
             }
-            int v = Convert.ToInt32(File.ReadAllText("resources/images/current_version"));
+            int v = 0;
+            try
+            {
+                v = Convert.ToInt32(File.ReadAllText("resources/images/current_version"));
+            }
+            catch (Exception)
+            {
+                v = 0;
+            }
             int newVer = Convert.ToInt32(File.ReadAllText("newDbVer"));
 
             if(v < newVer)
