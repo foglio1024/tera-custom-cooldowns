@@ -213,24 +213,24 @@ namespace TCC.Parsing
                         {
                             if (ab.Infinity)
                             {
-                                if (SessionManager.CurrentPlayer.InfBuffs.Any(x => x.Buff == ab))
+                                if (SessionManager.CurrentPlayer.InfBuffs.Any(x => x.Abnormality == ab))
                                 {
                                     BuffUpdated?.Invoke(p.targetId, ab, -1, p.stacks);
                                 }
                                 else
                                 {
-                                    SessionManager.CurrentPlayer.InfBuffs.Add(new BuffDuration(ab, -1, p.stacks, p.targetId));
+                                    SessionManager.CurrentPlayer.InfBuffs.Add(new AbnormalityDuration(ab, -1, p.stacks, p.targetId));
                                 }
                             }
                             else
                             {
-                                if (SessionManager.CurrentPlayer.Buffs.Any(x => x.Buff == ab))
+                                if (SessionManager.CurrentPlayer.Buffs.Any(x => x.Abnormality == ab))
                                 {
                                     BuffUpdated?.Invoke(p.targetId, ab, p.duration, p.stacks);
                                 }
                                 else
                                 {
-                                    SessionManager.CurrentPlayer.Buffs.Add(new BuffDuration(ab, p.duration, p.stacks, p.targetId));
+                                    SessionManager.CurrentPlayer.Buffs.Add(new AbnormalityDuration(ab, p.duration, p.stacks, p.targetId));
                                 }
                             }
                         }
@@ -238,24 +238,24 @@ namespace TCC.Parsing
                         {
                             if (ab.Infinity)
                             {
-                                if (SessionManager.CurrentPlayer.Debuffs.Any(x => x.Buff == ab))
+                                if (SessionManager.CurrentPlayer.Debuffs.Any(x => x.Abnormality == ab))
                                 {
                                     BuffUpdated?.Invoke(p.targetId, ab, -1, p.stacks);
                                 }
                                 else
                                 {
-                                    SessionManager.CurrentPlayer.Debuffs.Insert(0, new BuffDuration(ab, -1, p.stacks, p.targetId));
+                                    SessionManager.CurrentPlayer.Debuffs.Insert(0, new AbnormalityDuration(ab, -1, p.stacks, p.targetId));
                                 }
                             }
                             else
                             {
-                                if (SessionManager.CurrentPlayer.Debuffs.Any(x => x.Buff == ab))
+                                if (SessionManager.CurrentPlayer.Debuffs.Any(x => x.Abnormality == ab))
                                 {
                                     BuffUpdated?.Invoke(p.targetId, ab, p.duration, p.stacks);
                                 }
                                 else
                                 {
-                                    SessionManager.CurrentPlayer.Debuffs.Add(new BuffDuration(ab, p.duration, p.stacks, p.targetId));
+                                    SessionManager.CurrentPlayer.Debuffs.Add(new AbnormalityDuration(ab, p.duration, p.stacks, p.targetId));
                                 }
                             }
                         }
@@ -275,11 +275,11 @@ namespace TCC.Parsing
                             {
                                 if(!ab.Infinity)
                                 {
-                                    SessionManager.CurrentBosses.Where(x => x.EntityId == p.targetId).First().Buffs.Add(new BuffDuration(ab, p.duration, p.stacks, p.targetId));
+                                    SessionManager.CurrentBosses.Where(x => x.EntityId == p.targetId).First().Buffs.Add(new AbnormalityDuration(ab, p.duration, p.stacks, p.targetId));
                                 }
                                 else
                                 {
-                                    SessionManager.CurrentBosses.Where(x => x.EntityId == p.targetId).First().Buffs.Insert(0,new BuffDuration(ab, -1, p.stacks, p.targetId));
+                                    SessionManager.CurrentBosses.Where(x => x.EntityId == p.targetId).First().Buffs.Insert(0,new AbnormalityDuration(ab, -1, p.stacks, p.targetId));
                                 }
 
                             }
@@ -308,24 +308,24 @@ namespace TCC.Parsing
                     {
                         if (ab.Infinity)
                         {
-                            if (SessionManager.CurrentPlayer.InfBuffs.Any(x => x.Buff == ab))
+                            if (SessionManager.CurrentPlayer.InfBuffs.Any(x => x.Abnormality == ab))
                             {
                                 BuffUpdated?.Invoke(p.TargetId, ab, -1, p.Stacks);
                             }
                             else
                             {
-                                SessionManager.CurrentPlayer.InfBuffs.Add(new BuffDuration(ab, -1, p.Stacks, p.TargetId));
+                                SessionManager.CurrentPlayer.InfBuffs.Add(new AbnormalityDuration(ab, -1, p.Stacks, p.TargetId));
                             }
                         }
                         else
                         {
-                            if (SessionManager.CurrentPlayer.Buffs.Any(x => x.Buff == ab))
+                            if (SessionManager.CurrentPlayer.Buffs.Any(x => x.Abnormality == ab))
                             {
                                 BuffUpdated?.Invoke(p.TargetId, ab, p.Duration, p.Stacks);
                             }
                             else
                             {
-                                SessionManager.CurrentPlayer.Buffs.Add(new BuffDuration(ab, p.Duration, p.Stacks, p.TargetId));
+                                SessionManager.CurrentPlayer.Buffs.Add(new AbnormalityDuration(ab, p.Duration, p.Stacks, p.TargetId));
                             }
                         }
                     }
@@ -333,24 +333,24 @@ namespace TCC.Parsing
                     {
                         if (ab.Infinity)
                         {
-                            if (SessionManager.CurrentPlayer.Debuffs.Any(x => x.Buff == ab))
+                            if (SessionManager.CurrentPlayer.Debuffs.Any(x => x.Abnormality == ab))
                             {
                                 BuffUpdated?.Invoke(p.TargetId, ab, -1, p.Stacks);
                             }
                             else
                             {
-                                SessionManager.CurrentPlayer.Debuffs.Insert(0, new BuffDuration(ab, -1, p.Stacks, p.TargetId));
+                                SessionManager.CurrentPlayer.Debuffs.Insert(0, new AbnormalityDuration(ab, -1, p.Stacks, p.TargetId));
                             }
                         }
                         else
                         {
-                            if (SessionManager.CurrentPlayer.Debuffs.Any(x => x.Buff == ab))
+                            if (SessionManager.CurrentPlayer.Debuffs.Any(x => x.Abnormality == ab))
                             {
                                 BuffUpdated?.Invoke(p.TargetId, ab, p.Duration, p.Stacks);
                             }
                             else
                             {
-                                SessionManager.CurrentPlayer.Debuffs.Add(new BuffDuration(ab, p.Duration, p.Stacks, p.TargetId));
+                                SessionManager.CurrentPlayer.Debuffs.Add(new AbnormalityDuration(ab, p.Duration, p.Stacks, p.TargetId));
                             }
                         }
                     }
@@ -371,11 +371,11 @@ namespace TCC.Parsing
                         {
                             if (!ab.Infinity)
                             {
-                                SessionManager.CurrentBosses.Where(x => x.EntityId == p.TargetId).First().Buffs.Add(new BuffDuration(ab, p.Duration, p.Stacks, p.TargetId));
+                                SessionManager.CurrentBosses.Where(x => x.EntityId == p.TargetId).First().Buffs.Add(new AbnormalityDuration(ab, p.Duration, p.Stacks, p.TargetId));
                             }
                             else
                             {
-                                SessionManager.CurrentBosses.Where(x => x.EntityId == p.TargetId).First().Buffs.Insert(0, new BuffDuration(ab, -1, p.Stacks, p.TargetId));
+                                SessionManager.CurrentBosses.Where(x => x.EntityId == p.TargetId).First().Buffs.Insert(0, new AbnormalityDuration(ab, -1, p.Stacks, p.TargetId));
                             }
 
                         }
@@ -393,9 +393,9 @@ namespace TCC.Parsing
                 {
                     if(p.target == SessionManager.CurrentPlayer.EntityId)
                     {
-                        SessionManager.CurrentPlayer.Buffs.Remove(SessionManager.CurrentPlayer.Buffs.FirstOrDefault(x => x.Buff.Id == ab.Id));
-                        SessionManager.CurrentPlayer.Debuffs.Remove(SessionManager.CurrentPlayer.Debuffs.FirstOrDefault(x => x.Buff.Id == ab.Id));
-                        SessionManager.CurrentPlayer.InfBuffs.Remove(SessionManager.CurrentPlayer.InfBuffs.FirstOrDefault(x => x.Buff.Id == ab.Id));
+                        SessionManager.CurrentPlayer.Buffs.Remove(SessionManager.CurrentPlayer.Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id));
+                        SessionManager.CurrentPlayer.Debuffs.Remove(SessionManager.CurrentPlayer.Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id));
+                        SessionManager.CurrentPlayer.InfBuffs.Remove(SessionManager.CurrentPlayer.InfBuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id));
 
                         return;
                     }
