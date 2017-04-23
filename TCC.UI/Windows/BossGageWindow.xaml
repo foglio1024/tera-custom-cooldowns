@@ -13,7 +13,6 @@
         WindowStyle="None"
         Background="#00000000"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
-        MouseDoubleClick="Window_MouseDoubleClick"
         MouseRightButtonDown="Window_MouseRightButtonDown"
         Loaded="Window_Loaded"
         ResizeMode="NoResize">
@@ -33,7 +32,7 @@
         <ItemsControl Name="Bosses" ItemTemplate="{StaticResource BossGageDataTemplate}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Background="Transparent" Orientation="Vertical" ItemHeight="110" Height="220"/>
+                    <WrapPanel Background="Transparent" Orientation="Vertical" ItemHeight="Auto" Height="270"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
