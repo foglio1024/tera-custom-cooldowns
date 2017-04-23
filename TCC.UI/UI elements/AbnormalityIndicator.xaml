@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC"
              xmlns:converters="clr-namespace:TCC.Converters"
+             xmlns:elements="clr-namespace:TCC.UI_elements"
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded"
              FlowDirection="LeftToRight"
@@ -20,7 +21,8 @@
         <converters:SizeToDurationLabelSizeConverter x:Key="sizeToDurationLabelSizeConv"/>
         <converters:SizeToDurationLabelMarginConverter x:Key="sizeToDurationLabelMarginConv"/>
     </UserControl.Resources>
-    <Grid Margin="2,2" Width="Auto" Height="Auto">
+
+    <Grid Margin="2,2" Width="Auto" Height="Auto" Name="rootGrid"  ToolTipService.InitialShowDelay="0" ToolTipService.ShowDuration="50000">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -28,12 +30,19 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        
+        <Grid.ToolTip>
+            <ToolTip Background="Transparent" BorderBrush="Transparent" >
+                <Grid>
+                    <elements:AbnormalityToolTipControl AbnormalityName="{Binding AbnormalityName}" AbnormalityToolTip="{Binding AbnormalityTooltip}"/>
+                </Grid>
+            </ToolTip>
+        </Grid.ToolTip>
+
         <!--<TextBlock Name="abnormalityName" Grid.Row="0" Text="" Grid.Column="1" Foreground="White"/>-->
         <!--<TextBlock Name="abnormalityId" Grid.Row="1" Text="{Binding AbnormalityId}"/>-->
-        <Ellipse Name="bgEll" Fill="{Binding Type, Converter={StaticResource strokeConv}}" ToolTip="{Binding AbnormalityId}">
+        <Ellipse Name="bgEll" Fill="{Binding Type, Converter={StaticResource strokeConv}}" >
         </Ellipse>
-        <Ellipse Name="abnormalityIcon" ToolTip="{Binding AbnormalityName}" Margin="0,0" Width="32" Height="32">
+        <Ellipse Name="abnormalityIcon" Margin="0,0" Width="32" Height="32">
             <Ellipse.Fill>
                 <ImageBrush ImageSource="{Binding IconName, Converter={StaticResource iconConv}}"/>
             </Ellipse.Fill>
@@ -52,7 +61,7 @@
                     Opacity=".9" CornerRadius="7.5" 
                     VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                     BorderBrush="{Binding Type, Converter={StaticResource strokeConv}}" BorderThickness="1.5"
-                    ToolTip="{Binding AbnormalityId}"/>
+                    />
 
             <Viewbox StretchDirection="DownOnly" Stretch="Uniform" Margin="0">
                 <TextBlock Foreground="#d9000000" 

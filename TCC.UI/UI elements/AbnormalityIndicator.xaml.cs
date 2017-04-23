@@ -31,6 +31,7 @@ namespace TCC.UI_elements
             PacketRouter.BuffUpdated += PacketRouter_BuffUpdated;
 
             //abnormalityName.DataContext = this;
+            rootGrid.DataContext = this;
             abnormalityIcon.DataContext = this;
             bgEll.DataContext = this;
             number.DataContext = this;
@@ -145,6 +146,13 @@ namespace TCC.UI_elements
             set { SetValue(AbnormalityNameProperty, value); }
         }
         public static readonly DependencyProperty AbnormalityNameProperty = DependencyProperty.Register("AbnormalityName", typeof(string), typeof(AbnormalityIndicator));
+
+        public string AbnormalityTooltip
+        {
+            get { return (string)GetValue(AbnormalityTooltipProperty); }
+            set { SetValue(AbnormalityTooltipProperty, value); }
+        }
+        public static readonly DependencyProperty AbnormalityTooltipProperty = DependencyProperty.Register("AbnormalityTooltip", typeof(string), typeof(AbnormalityIndicator));
 
         public AbnormalityType Type
         {
