@@ -4,18 +4,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC"
+             xmlns:converters="clr-namespace:TCC.Converters"
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded"
              FlowDirection="LeftToRight"
              Unloaded="UserControl_Unloaded"
-             >
+            >
     <UserControl.Resources>
-        <local:IconConverter x:Key ="iconConv"></local:IconConverter>
-        <local:AbnormalityStrokeConverter x:Key="strokeConv"></local:AbnormalityStrokeConverter>
-        <local:DurationLabelConverter x:Key="durationConv"></local:DurationLabelConverter>
+        <converters:IconConverter x:Key ="iconConv"/>
+        <converters:AbnormalityStrokeConverter x:Key="strokeConv"/>
+        <converters:DurationLabelConverter x:Key="durationConv"/>
+        <converters:StacksToVisibilityConverter x:Key="stacksToVisibilityConv"/>
+        <converters:DurationToVisibilityConverter x:Key="durationToVisibilityConv"/>
+        <converters:SizeToStackLabelSizeConverter x:Key="sizeToStackLabelSizeConv"/>
+        <converters:SizeToDurationLabelSizeConverter x:Key="sizeToDurationLabelSizeConv"/>
+        <converters:SizeToDurationLabelMarginConverter x:Key="sizeToDurationLabelMarginConv"/>
     </UserControl.Resources>
-
-    <Grid Margin="0,0,0,0" Width="40" >
+    <Grid Margin="2,2" Width="Auto" Height="Auto">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -24,23 +29,26 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         
-        <TextBlock Name="abnormalityName" Grid.Row="0" Text="" Grid.Column="1" Foreground="White"/>
+        <!--<TextBlock Name="abnormalityName" Grid.Row="0" Text="" Grid.Column="1" Foreground="White"/>-->
         <!--<TextBlock Name="abnormalityId" Grid.Row="1" Text="{Binding AbnormalityId}"/>-->
-        <Ellipse Name="bgEll" Fill="{Binding Type, Converter={StaticResource strokeConv}}" Width="34" Height="34" ToolTip="{Binding AbnormalityId}">
+        <Ellipse Name="bgEll" Fill="{Binding Type, Converter={StaticResource strokeConv}}" ToolTip="{Binding AbnormalityId}">
         </Ellipse>
-        <Ellipse Name="abnormalityIcon" ToolTip="{Binding AbnormalityName}" Margin="0,0" Width="30" Height="30">
+        <Ellipse Name="abnormalityIcon" ToolTip="{Binding AbnormalityName}" Margin="0,0" Width="32" Height="32">
             <Ellipse.Fill>
                 <ImageBrush ImageSource="{Binding IconName, Converter={StaticResource iconConv}}"/>
             </Ellipse.Fill>
         </Ellipse>
-        <local:Arc x:Name="arc" Stroke="#a000" StrokeThickness="15" EndAngle="0" Width="30" Height="30" />
+        <local:Arc x:Name="arc" Stroke="#8000" StrokeThickness="15" EndAngle="0" Width="0" Height="0"/>
 
-        <Grid Width="Auto" Height="20" x:Name="g" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5,0,5,-15">
+        <Grid Width="Auto" MaxWidth="{Binding Size}" Height="{Binding Size,Converter={StaticResource sizeToDurationLabelSizeConv}}" 
+              x:Name="durationLabel" Visibility="{Binding Duration, Converter={StaticResource durationToVisibilityConv}}" 
+              HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1"
+              Margin="0,-4,0,0">
             <!--<Grid.CacheMode>
                 <BitmapCache RenderAtScale="1.5"/>
             </Grid.CacheMode>-->
             <Border x:Name="fill" Background="White" 
-                    Height="17" Width="Auto" 
+                    Height="Auto" Width="Auto" 
                     Opacity=".9" CornerRadius="7.5" 
                     VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                     BorderBrush="{Binding Type, Converter={StaticResource strokeConv}}" BorderThickness="1.5"
@@ -57,7 +65,7 @@
                    FontFamily="Roboto Mono" 
                    FontStyle="Normal"
                    Opacity="1" 
-                   Margin="6,4"
+                   Margin="6,3"
                    Text="{Binding CurrentTime, Converter={StaticResource durationConv}}"
                    >
             <!--<TextBlock.Effect>
@@ -69,11 +77,17 @@
             </Viewbox>
 
         </Grid>
-        <Grid Width="16" Height="16" x:Name="s" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,0,0" Visibility="Hidden">
+        <Grid Width="{Binding Size, Converter={StaticResource sizeToStackLabelSizeConv}}" 
+              Height="{Binding ElementName=stacksLabel, Path=Width}" 
+              x:Name="stacksLabel" 
+              HorizontalAlignment="Right" 
+              VerticalAlignment="Top" 
+              Margin="0,0,0,0" 
+              Visibility="{Binding Stacks, Converter={StaticResource stacksToVisibilityConv}}">
             <!--<Grid.CacheMode>
                 <BitmapCache RenderAtScale="1.5"/>
             </Grid.CacheMode>-->
-            <Ellipse Fill="#202020"  Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stroke="#40ffffff"/>
+            <Ellipse Fill="#202020"  Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stroke="#40ffffff" StrokeThickness="1.5"/>
             <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
                 <TextBlock Foreground="#d9ffffff" 
                    HorizontalAlignment="Center" 
@@ -85,8 +99,8 @@
                    FontFamily="Roboto Mono" 
                    FontStyle="Normal"
                    Opacity="1" 
-                   Margin="2"
-                   Text="-">
+                   Margin="2.5"
+                   Text="{Binding Stacks}">
             <!--<TextBlock.Effect>
                 <DropShadowEffect ShadowDepth="0" BlurRadius="0" Color="White"></DropShadowEffect>
             </TextBlock.Effect>-->

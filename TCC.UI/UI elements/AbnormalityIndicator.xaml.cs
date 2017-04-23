@@ -30,12 +30,16 @@ namespace TCC.UI_elements
 
             PacketRouter.BuffUpdated += PacketRouter_BuffUpdated;
 
-            //abnormalityId.DataContext = this;
-            abnormalityName.DataContext = this;
+            //abnormalityName.DataContext = this;
             abnormalityIcon.DataContext = this;
             bgEll.DataContext = this;
             number.DataContext = this;
             fill.DataContext = this;
+            durationLabel.DataContext = this;
+            stacksLabel.DataContext = this;
+            arc.DataContext = this;
+
+
         }
 
         void InitTimer()
@@ -72,21 +76,21 @@ namespace TCC.UI_elements
 
         }
 
-        void SetStacksNumber()
-        {
-            Dispatcher.Invoke(() =>
-            {
-                if (Stacks > 1)
-                {
-                    s.Visibility = Visibility.Visible;
-                    stacksnumber.Text = Stacks.ToString();
-                }
-                else
-                {
-                    s.Visibility = Visibility.Hidden;
-                }
-            });
-        }
+        //void SetStacksNumber()
+        //{
+        //    Dispatcher.Invoke(() =>
+        //    {
+        //        if (Stacks > 1)
+        //        {
+        //            s.Visibility = Visibility.Visible;
+        //            stacksnumber.Text = Stacks.ToString();
+        //        }
+        //        else
+        //        {
+        //            s.Visibility = Visibility.Hidden;
+        //        }
+        //    });
+        //}
         private void PacketRouter_BuffUpdated(ulong target, Data.Abnormality ab, int duration, int stacks)
         {
             //SecondsTimer.Stop();
@@ -101,7 +105,7 @@ namespace TCC.UI_elements
                         Stacks = stacks;
                         CurrentTime = duration / 1000;
                         //number.Text = (duration / 1000).ToString();
-                        SetStacksNumber();
+                        //SetStacksNumber();
                         //InitTimer();
                         if (SecondsTimer != null)
                         {
@@ -110,7 +114,7 @@ namespace TCC.UI_elements
                         }
                         if (duration < 0)
                         {
-                            g.Visibility = Visibility.Hidden;
+                            //durationLabel.Visibility = Visibility.Hidden;
                             //number.Text = "-";
                             return;
                         }
@@ -169,15 +173,25 @@ namespace TCC.UI_elements
             set { SetValue(StacksProperty, value); }
         }
         public static readonly DependencyProperty StacksProperty = DependencyProperty.Register("Stacks", typeof(int), typeof(AbnormalityIndicator));
+        
+        public double Size
+        {
+            get { return (double)GetValue(SizeProperty); }
+            set { SetValue(SizeProperty, value); }
+        }
+        public static readonly DependencyProperty SizeProperty = DependencyProperty.Register("Size", typeof(double), typeof(AbnormalityIndicator));
+
+
+
 
         System.Timers.Timer SecondsTimer;
-        int currentTime;
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(string prop)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
+        int currentTime;
         public int CurrentTime
         {
             get { return currentTime; }
@@ -190,6 +204,7 @@ namespace TCC.UI_elements
                 }
             }
         }
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             Dispatcher.Invoke(() =>
@@ -197,10 +212,14 @@ namespace TCC.UI_elements
                 this.RenderTransform = new ScaleTransform(0, 0, .5, .5);
                 this.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
                 this.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
+                abnormalityIcon.Width = Size * .9;
+                abnormalityIcon.Height = Size * .9;
+                bgEll.Width = Size;
+                bgEll.Height = Size;
+                arc.Width = Size * .9;
+                arc.Height = Size * .9;
 
-                SetStacksNumber();
-
-                if (Duration < 2000000000 && Duration > 0)
+                if (Duration > 0)
                 {
                     var an = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(Duration));
                     arc.BeginAnimation(Arc.EndAngleProperty, an);
@@ -213,7 +232,7 @@ namespace TCC.UI_elements
                 }
                 else
                 {
-                    g.Visibility = Visibility.Hidden;
+                    //g.Visibility = Visibility.Hidden;
                     //number.Text = "-";
                 }
             });
@@ -225,7 +244,7 @@ namespace TCC.UI_elements
         }
     }
 }
-namespace TCC
+namespace TCC.Converters
 {
     public class DurationLabelConverter : IValueConverter
     {
@@ -285,4 +304,84 @@ namespace TCC
             throw new NotImplementedException();
         }
     }
+    public class StacksToVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            int stacks = (int)value;
+            if(stacks > 1)
+            {
+                return Visibility.Visible; 
+            }
+            else
+            {
+                return Visibility.Hidden;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class DurationToVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            int duration = (int)value;
+            if(duration < 0)
+            {
+                return Visibility.Hidden;
+            }
+            else
+            {
+                return Visibility.Visible;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class SizeToStackLabelSizeConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            double size = (double)value;
+            return size / 2;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class SizeToDurationLabelSizeConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            double size = (double)value;
+            return size / 1.8;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class SizeToDurationLabelMarginConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            double size = (double)value;
+            return new Thickness(0, 0, 0, -size * 1.25);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
 }
