@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
@@ -53,6 +54,8 @@ namespace TCC
                 Visible = true
             };
             TrayIcon.MouseDown += NI_MouseDown;
+            var v = Assembly.GetExecutingAssembly().GetName().Version;
+            TrayIcon.Text = String.Format("TCC v{0}.{1}.{2}", v.Major, v.Minor, v.Build);
             var ForceShowButton = new MenuItem() { Header = "Force visibility on" };
             ClickThruButton = new MenuItem() { Header = "Click through"};
             var CloseButton = new MenuItem() { Header = "Close" };
