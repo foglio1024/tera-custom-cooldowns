@@ -13,16 +13,16 @@ using TCC.Parsing;
 
 namespace TCC
 {
-    public class BuffDuration
+    public class AbnormalityDuration
     {
         public ulong Target { get; set; }
-        public Abnormality Buff { get; set; }
+        public Abnormality Abnormality { get; set; }
         public int Duration { get; set; }
         public int Stacks { get; set; }
 
-        public BuffDuration(Abnormality b, int d, int s, ulong t)
+        public AbnormalityDuration(Abnormality b, int d, int s, ulong t)
         {
-            Buff = b;
+            Abnormality = b;
             Duration = d;
             Stacks = s;
             Target = t;

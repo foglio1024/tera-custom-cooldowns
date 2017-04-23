@@ -11,13 +11,13 @@
              >
     <UserControl.Resources>
         <DataTemplate x:Key="BossBuffDataTemplate">
-            <controls:AbnormalityIndicator AbnormalityId="{Binding Buff.Id}"
-                                           AbnormalityName="{Binding Buff.Name}"
-                                           IconName="{Binding Buff.IconName}"
+            <controls:AbnormalityIndicator AbnormalityId="{Binding Abnormality.Id}"
+                                           AbnormalityName="{Binding Abnormality.Name}"
+                                           IconName="{Binding Abnormality.IconName}"
                                            Duration="{Binding Duration}"
                                            Stacks="{Binding Stacks}"
                                            TargetId="{Binding Target}"
-                                           Type="{Binding Buff.Type}"
+                                           Type="{Binding Abnormality.Type}"
                                            Size="25"/>
         </DataTemplate>
         <!--<Style x:Key="border" TargetType="Border">

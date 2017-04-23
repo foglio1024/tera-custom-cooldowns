@@ -49,7 +49,7 @@ namespace TCC
             }
         }
 
-        public ObservableCollection<BuffDuration> Buffs;
+        public ObservableCollection<AbnormalityDuration> Buffs;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -96,7 +96,7 @@ namespace TCC
         }
         public bool HasBuff(Abnormality ab)
         {
-            if(Buffs.Any(x => x.Buff.Id == ab.Id))
+            if(Buffs.Any(x => x.Abnormality.Id == ab.Id))
             {
                 return true;
             }
@@ -112,7 +112,7 @@ namespace TCC
             {
                 try
                 {
-                    Buffs.Remove(Buffs.FirstOrDefault(x => x.Buff.Id == ab.Id));
+                    Buffs.Remove(Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id));
                 }
                 catch (Exception)
                 {
@@ -127,7 +127,7 @@ namespace TCC
             Name = MonsterDatabase.GetName(tId, zId);
             MaxHP = maxHP;
             CurrentHP = curHP;
-            Buffs = new ObservableCollection<BuffDuration>();
+            Buffs = new ObservableCollection<AbnormalityDuration>();
             Visible = visible;
         }
 
@@ -137,7 +137,7 @@ namespace TCC
             Name = MonsterDatabase.GetName(tId, zId);
             MaxHP = MonsterDatabase.GetMaxHP(tId, zId);
             CurrentHP = MaxHP;
-            Buffs = new ObservableCollection<BuffDuration>();
+            Buffs = new ObservableCollection<AbnormalityDuration>();
             Visible = visible;
         }
 
@@ -387,9 +387,9 @@ namespace TCC
             }
         }
 
-        public ObservableCollection<BuffDuration> Buffs = new ObservableCollection<BuffDuration>();
-        public ObservableCollection<BuffDuration> Debuffs = new ObservableCollection<BuffDuration>();
-        public ObservableCollection<BuffDuration> InfBuffs = new ObservableCollection<BuffDuration>();
+        public ObservableCollection<AbnormalityDuration> Buffs = new ObservableCollection<AbnormalityDuration>();
+        public ObservableCollection<AbnormalityDuration> Debuffs = new ObservableCollection<AbnormalityDuration>();
+        public ObservableCollection<AbnormalityDuration> InfBuffs = new ObservableCollection<AbnormalityDuration>();
 
         public event Action OutOfCombat;
         public event Action InCombat;
