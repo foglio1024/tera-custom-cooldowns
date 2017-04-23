@@ -27,7 +27,8 @@
                                            Stacks="{Binding Stacks}"
                                            TargetId="{Binding Target}"
                                            Type="{Binding Buff.Type}"
-                                           HorizontalAlignment="Right">
+                                           HorizontalAlignment="Right"
+                                           Size ="32">
                 <controls:AbnormalityIndicator.Resources>
                     <Style TargetType="{x:Type Path}">
                         <Setter Property="FlowDirection" Value="RightToLeft"/>
