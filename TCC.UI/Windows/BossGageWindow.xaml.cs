@@ -43,14 +43,6 @@ namespace TCC.Windows
             this.DragMove();
         }
 
-        private void Window_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            //App.Current.Dispatcher.BeginInvoke(new Action(() =>
-            //{
-            //    //SessionManager.CurrentBosses.Clear();
-            //}));
-        }
-
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             ContextMenu.IsOpen = true;
