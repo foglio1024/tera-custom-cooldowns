@@ -135,12 +135,12 @@ namespace TCC.Parsing
                 case Class.Assassin:
                     //WindowManager.CharacterWindow.HideResolve();
                     //WindowManager.InitClassGauge(Class.Assassin);
-                    WindowManager.CharacterWindow.ShowResolve(Color.FromArgb(0xff, 0xff, 0x6a, 0xff));
+                    WindowManager.CharacterWindow.ShowResolve(Color.FromRgb(208, 165, 255));
                     break;
                 case Class.Glaiver:
                     //WindowManager.InitClassGauge(Class.Glaiver);
                     //WindowManager.CharacterWindow.HideResolve();
-                    WindowManager.CharacterWindow.ShowResolve(Color.FromRgb(210, 220, 235));
+                    WindowManager.CharacterWindow.ShowResolve(Color.FromRgb(204, 224, 255));
 
                     break;
                 default:
@@ -208,58 +208,58 @@ namespace TCC.Parsing
                 if (p.targetId == SessionManager.CurrentPlayer.EntityId)
                 {
                     App.Current.Dispatcher.Invoke(() =>
-                {
-                    if (ab.Type == AbnormalityType.Buff)
                     {
-                        if (ab.Infinity)
+                        if (ab.Type == AbnormalityType.Buff)
                         {
-                            if (SessionManager.CurrentPlayer.InfBuffs.Any(x => x.Buff == ab))
+                            if (ab.Infinity)
                             {
-                                BuffUpdated?.Invoke(p.targetId, ab, -1, p.stacks);
+                                if (SessionManager.CurrentPlayer.InfBuffs.Any(x => x.Buff == ab))
+                                {
+                                    BuffUpdated?.Invoke(p.targetId, ab, -1, p.stacks);
+                                }
+                                else
+                                {
+                                    SessionManager.CurrentPlayer.InfBuffs.Add(new BuffDuration(ab, -1, p.stacks, p.targetId));
+                                }
                             }
                             else
                             {
-                                SessionManager.CurrentPlayer.InfBuffs.Add(new BuffDuration(ab, -1, p.stacks, p.targetId));
+                                if (SessionManager.CurrentPlayer.Buffs.Any(x => x.Buff == ab))
+                                {
+                                    BuffUpdated?.Invoke(p.targetId, ab, p.duration, p.stacks);
+                                }
+                                else
+                                {
+                                    SessionManager.CurrentPlayer.Buffs.Add(new BuffDuration(ab, p.duration, p.stacks, p.targetId));
+                                }
                             }
                         }
                         else
                         {
-                            if (SessionManager.CurrentPlayer.Buffs.Any(x => x.Buff == ab))
+                            if (ab.Infinity)
                             {
-                                BuffUpdated?.Invoke(p.targetId, ab, p.duration, p.stacks);
+                                if (SessionManager.CurrentPlayer.Debuffs.Any(x => x.Buff == ab))
+                                {
+                                    BuffUpdated?.Invoke(p.targetId, ab, -1, p.stacks);
+                                }
+                                else
+                                {
+                                    SessionManager.CurrentPlayer.Debuffs.Insert(0, new BuffDuration(ab, -1, p.stacks, p.targetId));
+                                }
                             }
                             else
                             {
-                                SessionManager.CurrentPlayer.Buffs.Add(new BuffDuration(ab, p.duration, p.stacks, p.targetId));
+                                if (SessionManager.CurrentPlayer.Debuffs.Any(x => x.Buff == ab))
+                                {
+                                    BuffUpdated?.Invoke(p.targetId, ab, p.duration, p.stacks);
+                                }
+                                else
+                                {
+                                    SessionManager.CurrentPlayer.Debuffs.Add(new BuffDuration(ab, p.duration, p.stacks, p.targetId));
+                                }
                             }
                         }
-                    }
-                    else
-                    {
-                        if (ab.Infinity)
-                        {
-                            if (SessionManager.CurrentPlayer.Debuffs.Any(x => x.Buff == ab))
-                            {
-                                BuffUpdated?.Invoke(p.targetId, ab, -1, p.stacks);
-                            }
-                            else
-                            {
-                                SessionManager.CurrentPlayer.Debuffs.Insert(0, new BuffDuration(ab, -1, p.stacks, p.targetId));
-                            }
-                        }
-                        else
-                        {
-                            if (SessionManager.CurrentPlayer.Debuffs.Any(x => x.Buff == ab))
-                            {
-                                BuffUpdated?.Invoke(p.targetId, ab, p.duration, p.stacks);
-                            }
-                            else
-                            {
-                                SessionManager.CurrentPlayer.Debuffs.Add(new BuffDuration(ab, p.duration, p.stacks, p.targetId));
-                            }
-                        }
-                    }
-                });
+                    });
                 }
                 else
                 {
@@ -503,8 +503,9 @@ namespace TCC.Parsing
             //Console.WriteLine("[S_SPAWN_ME]");
             App.Current.Dispatcher.Invoke(() =>
             {
-
                 SessionManager.CurrentBosses.Clear();
+
+
             });
         }
         //public static void HandleCharList(Tera.Message msg)
