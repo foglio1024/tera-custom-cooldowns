@@ -277,6 +277,9 @@
     <Compile Include="UI elements\AbnormalityIndicator.xaml.cs">
       <DependentUpon>AbnormalityIndicator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI elements\AbnormalityTooltip.xaml.cs">
+      <DependentUpon>AbnormalityTooltip.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI elements\BossGage.xaml.cs">
       <DependentUpon>BossGage.xaml</DependentUpon>
     </Compile>
@@ -340,6 +343,10 @@
     <Compile Include="Parsing\Messages\S_USER_STATUS.cs" />
     <Compile Include="WindowManager.cs" />
     <Page Include="UI elements\AbnormalityIndicator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI elements\AbnormalityTooltip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
