@@ -19,13 +19,8 @@ namespace TCC
 }
 namespace TCC.Parsing
 {
-    public delegate void ParsedMessageEventHandler(Tera.Game.Messages.ParsedMessage p);
-    public delegate void EmptyPacketEventHandler();
-    public delegate void UpdateIntStatEventHandler(int statValue);
-    public delegate void UpdateFloatStatEventHandler(float statValue);
-    public delegate void MessageEventHandler(Tera.Message msg);
+
     public delegate void UpdateBuffEventHandler(ulong target, Abnormality ab, int duration, int stacks);
-    public delegate void UpdateBossBuffEventHandler(Boss b, Abnormality ab, int duration, int stacks);
 
     public static class PacketRouter
     {
