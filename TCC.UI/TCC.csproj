@@ -111,6 +111,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\Boss.cs" />
     <Compile Include="Data\Abnormality.cs" />
     <Compile Include="Data\AbnormalityDatabase.cs" />
     <Compile Include="PacketInspector.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Parsing\Messages\S_RETURN_TO_LOBBY.cs" />
     <Compile Include="Parsing\Messages\S_SPAWN_ME.cs" />
     <Compile Include="Parsing\Messages\S_SPAWN_NPC.cs" />
+    <Compile Include="Data\Player.cs" />
     <Compile Include="Sniffing\ConnectionId.cs" />
     <Compile Include="Sniffing\EndpointIpv4.cs" />
     <Compile Include="Sniffing\IpSniffer.cs" />

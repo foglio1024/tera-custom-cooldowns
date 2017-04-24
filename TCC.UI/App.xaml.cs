@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 using TCC.Data;
 using TCC.Parsing;
 using TCC.Properties;
@@ -61,7 +62,7 @@ namespace TCC
             WindowManager.ShowWindow(WindowManager.CooldownWindow);
             LoadThread.Start();
             UpdateManager.CheckDatabaseVersion();
-//            Debug();
+            //Debug();
 
         }
 
@@ -155,22 +156,30 @@ namespace TCC
             SaveSettings();
             Environment.Exit(0);
         }
-
+        static bool x = true;
         public static void Debug()
         {
             SessionManager.Logged = true;
-
-            var w = new Window();
             
-            SessionManager.CurrentPlayer.EntityId = 9;
-            AbnormalityDatabase.Abnormalities.TryGetValue(4021, out Abnormality a);
-            SessionManager.CurrentPlayer.Buffs.Add(new AbnormalityDuration(a,5000000,10,9));
-            //SessionManager.CurrentBosses.Add(new Boss(10, 950, 4000, 2100000000, 2100000000, System.Windows.Visibility.Visible));
+            //SessionManager.CurrentPlayer.EntityId = 9;
+            //AbnormalityDatabase.Abnormalities.TryGetValue(4021, out Abnormality a);
+            //SessionManager.CurrentPlayer.Buffs.Add(new AbnormalityDuration(a,5000000,10,9));
+            SessionManager.CurrentBosses.Add(new Boss(10, 950, 4000, 2100000000, 2100000000, System.Windows.Visibility.Visible));
+
+            PacketRouter.DebugEnrage(true);
+            var t = new DispatcherTimer();
+            t.Interval = TimeSpan.FromSeconds(.5);
+            t.Tick += (s, ev) =>
+            {
+                PacketRouter.Debug(x);
+                x = !x;
+            };
+            t.IsEnabled = true;
             //for (int i = 0; i < 20; i++)
             //{
             //    SessionManager.TryGetBossById(10, out Boss b);
             //    AbnormalityDatabase.Abnormalities.TryGetValue(1300, out Abnormality ab);
-            //    b.Buffs.Add(new BuffDuration(ab, 200000, 1, 10));
+            //    b.Buffs.Add(new AbnormalityDuration(ab, 200000, 1, 10));
             //}
             //SessionManager.CurrentBosses.Add(new Boss(20, 950, 4000, 2100000000, 2100000000, System.Windows.Visibility.Visible));
             //for (int i = 0; i < 20; i++)
