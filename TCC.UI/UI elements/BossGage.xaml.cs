@@ -5,6 +5,7 @@ using System.Linq;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
@@ -106,7 +107,7 @@ namespace TCC
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(pr));
         }
 
-        int AnimationTime = 150;
+        int AnimationTime = 350;
         float LastEnragePercent = 100;
         int EnrageDuration = 36000;
         int CurrentEnrageTime = 36;
@@ -117,8 +118,8 @@ namespace TCC
         {
             InitializeComponent();
 
-            PacketRouter.EnragedChanged += BossGage_EnragedUpdated;
-            PacketRouter.BossHPChanged += BossGage_HPUpdated;
+            Boss.EnragedChanged += BossGage_EnragedUpdated;
+            Boss.BossHPChanged += BossGage_HPUpdated;
 
             BossNameTB.DataContext = this;
             NextEnrageTB.DataContext = this;
@@ -231,37 +232,36 @@ namespace TCC
         private void BossGage_HPUpdated(ulong id, object hp)
         {      
 
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.Invoke(() =>
+            {
+                if (id == EntityId)
                 {
                     CurrentHP = Convert.ToInt32(hp);
-                    if(CurrentHP > MaxHP)
+                    if (CurrentHP > MaxHP)
                     {
                         MaxHP = CurrentHP;
                     }
-                    if (id == EntityId)
+                    DoubleAnimation.To = ValueToLength(CurrentHP, MaxHP);
+                    HPrect.BeginAnimation(WidthProperty, DoubleAnimation);
+
+                    Perc.Text = String.Format("{0:0.0}%", CurrentPercentage);
+                    Perc2.Text = String.Format("{0} / {1}", CurrentHP.ToString("n", nfi), MaxHP.ToString("n", nfi));
+
+                    if (Enraged)
                     {
-                        DoubleAnimation.To = ValueToLength(CurrentHP, MaxHP);
-                        HPrect.BeginAnimation(WidthProperty, DoubleAnimation);
-
-                        Perc.Text = String.Format("{0:0.0}%", CurrentPercentage);
-                        Perc2.Text = String.Format("{0} / {1}", CurrentHP.ToString("n", nfi), MaxHP.ToString("n", nfi));
-
-                        if (Enraged)
-                        {
-                            SlideNextEnrage(CurrentPercentage);
-                            SetEnragePercTB(CurrentPercentage);
-                        }
+                        SlideNextEnrage(CurrentPercentage);
+                        SetEnragePercTB(CurrentPercentage);
                     }
-                }));
+                }
+            });
         }
         private void BossGage_EnragedUpdated(ulong id, object enraged)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.Invoke(() =>
             {
-                Enraged = (bool)enraged;
-
                 if (id == this.EntityId)
                 {
+                    Enraged = (bool)enraged;
                     if ((bool)enraged)
                     {
                         Enraged = (bool)enraged;
@@ -291,7 +291,7 @@ namespace TCC
                     }
 
                 }
-            }));
+            });
         }
         double ValueToLength(double value, double maxValue)
         {
@@ -314,8 +314,8 @@ namespace TCC
 
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
-            PacketRouter.EnragedChanged -= BossGage_EnragedUpdated;
-            PacketRouter.BossHPChanged -= BossGage_HPUpdated;
+            Boss.EnragedChanged -= BossGage_EnragedUpdated;
+            Boss.BossHPChanged -= BossGage_HPUpdated;
 
         }
     }
