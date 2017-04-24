@@ -12,14 +12,17 @@ using TCC.Data;
 using TCC.Messages;
 using TCC.Parsing.Messages;
 using Tera.Game;
+namespace TCC
+{
+    public delegate void UpdateStatWithIdEventHandler(ulong id, object statValue);
 
+}
 namespace TCC.Parsing
 {
     public delegate void ParsedMessageEventHandler(Tera.Game.Messages.ParsedMessage p);
     public delegate void EmptyPacketEventHandler();
     public delegate void UpdateIntStatEventHandler(int statValue);
     public delegate void UpdateFloatStatEventHandler(float statValue);
-    public delegate void UpdateStatWithIdEventHandler(ulong id, object statValue);
     public delegate void MessageEventHandler(Tera.Message msg);
     public delegate void UpdateBuffEventHandler(ulong target, Abnormality ab, int duration, int stacks);
     public delegate void UpdateBossBuffEventHandler(Boss b, Abnormality ab, int duration, int stacks);
@@ -32,8 +35,6 @@ namespace TCC.Parsing
         static List<Character> CurrentAccountCharacters;
         static ConcurrentQueue<Tera.Message> Packets = new ConcurrentQueue<Tera.Message>();
 
-        public static event UpdateStatWithIdEventHandler BossHPChanged;
-        public static event UpdateStatWithIdEventHandler EnragedChanged;
 
         public static event UpdateBuffEventHandler BuffUpdated;
 
@@ -535,7 +536,6 @@ namespace TCC.Parsing
                 if (b.CurrentHP != p.CurrentHP)
                 {
                     b.CurrentHP = p.CurrentHP;
-                    BossHPChanged?.Invoke(p.EntityId, p.CurrentHP);
                 }
             }
             else
@@ -557,7 +557,6 @@ namespace TCC.Parsing
                 if (b.Enraged != p.IsEnraged)
                 {
                     b.Enraged = p.IsEnraged;
-                    EnragedChanged?.Invoke(p.EntityId, p.IsEnraged);
                 }
             }
         }
@@ -590,6 +589,29 @@ namespace TCC.Parsing
                 }
             }
         }
+
+        public static void Debug(bool x)
+        {
+            SessionManager.TryGetBossById(10, out Boss b);
+            if (x)
+            {
+                b.CurrentHP = b.MaxHP/2;
+            }
+            else
+            {
+                b.CurrentHP = b.MaxHP;
+            }
+
+        }
+        public static void DebugEnrage(bool e)
+        {
+            SessionManager.TryGetBossById(10, out Boss b);
+
+            b.Enraged = e;
+            //EnragedChanged?.Invoke(10, e);
+
+        }
     }
+
 }
 
