@@ -63,8 +63,7 @@ namespace TCC
             get { return (float)GetValue(CurrentHPProperty); }
             set { SetValue(CurrentHPProperty, value); }
         }
-        public static readonly DependencyProperty CurrentHPProperty =
-            DependencyProperty.Register("CurrentHP", typeof(float), typeof(BossGage));
+        public static readonly DependencyProperty CurrentHPProperty = DependencyProperty.Register("CurrentHP", typeof(float), typeof(BossGage));
 
 
         bool enraged;
@@ -206,17 +205,6 @@ namespace TCC
 
                 EnrageArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(EnrageDuration)));
 
-                NumberTimer = new Timer(1000);
-                NumberTimer.Elapsed += (s, ev) =>
-                {
-                    Dispatcher.BeginInvoke(new Action(() =>
-                    {
-                        number.Text = CurrentEnrageTime.ToString();
-                        CurrentEnrageTime--;
-                    }));
-                };
-                NumberTimer.Enabled = true;
-
             });
         }
         void CloseEnrageGrid()
@@ -250,7 +238,7 @@ namespace TCC
                     if (Enraged)
                     {
                         SlideNextEnrage(CurrentPercentage);
-                        SetEnragePercTB(CurrentPercentage);
+                        //SetEnragePercTB(CurrentPercentage);
                     }
                 }
             });
@@ -265,13 +253,26 @@ namespace TCC
                     if ((bool)enraged)
                     {
                         Enraged = (bool)enraged;
-                        number.Text = CurrentEnrageTime.ToString();
+                        //number.Text = CurrentEnrageTime.ToString();
+                        NextEnrageTB.Text = CurrentEnrageTime.ToString();
 
                         SlideNextEnrage(CurrentPercentage);
-                        SetEnragePercTB(CurrentPercentage);
+                        //SetEnragePercTB(CurrentPercentage);
 
                         GlowOn();
-                        DeployEnrageGrid();
+                        //DeployEnrageGrid();
+                        NumberTimer = new Timer(1000);
+                        NumberTimer.Elapsed += (s, ev) =>
+                        {
+                            Dispatcher.BeginInvoke(new Action(() =>
+                            {
+                                NextEnrageTB.Text = CurrentEnrageTime.ToString();
+                                CurrentEnrageTime--;
+                            }));
+                        };
+                        NumberTimer.Enabled = true;
+
+
 
                     }
                     else
@@ -282,7 +283,7 @@ namespace TCC
                         }
 
                         GlowOff();
-                        CloseEnrageGrid();
+                        //CloseEnrageGrid();
 
                         SlideNextEnrage(CurrentPercentage - 10);
                         SetEnragePercTB(CurrentPercentage - 10);

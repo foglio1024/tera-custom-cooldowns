@@ -46,4 +46,13 @@ namespace TCC
         Stun = 3,
         Buff = 4
     }
+
+    public enum Dragon
+    {
+        None,
+        Aquadrax,
+        Ignidrax,
+        Umbradrax,
+        Terradrax
+    }
 }

@@ -116,6 +116,7 @@
     <Compile Include="Data\AbnormalityDatabase.cs" />
     <Compile Include="PacketInspector.cs" />
     <Compile Include="Parsing\MessageFactory.cs" />
+    <Compile Include="Parsing\Messages\C_PLAYER_LOCATION.cs" />
     <Compile Include="Parsing\Messages\S_ABNORMALITY_END.cs" />
     <Compile Include="Parsing\Messages\S_ABNORMALITY_REFRESH.cs" />
     <Compile Include="Parsing\Messages\S_CHAT.cs" />
@@ -291,6 +292,12 @@
     <Compile Include="Parsing\Messages\S_BOSS_GAGE_INFO.cs" />
     <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_FLIGHT_ENERGY.cs" />
     <Compile Include="Parsing\Messages\S_NPC_STATUS.cs" />
+    <Compile Include="UI elements\DragonSmallGauge.xaml.cs">
+      <DependentUpon>DragonSmallGauge.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI elements\HarrowholdBossesControl.xaml.cs">
+      <DependentUpon>HarrowholdBossesControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI elements\StaminaGaugeControl.xaml.cs">
       <DependentUpon>StaminaGaugeControl.xaml</DependentUpon>
     </Compile>
@@ -356,7 +363,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI elements\DragonSmallGauge.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI elements\EdgeArc.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI elements\HarrowholdBossesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

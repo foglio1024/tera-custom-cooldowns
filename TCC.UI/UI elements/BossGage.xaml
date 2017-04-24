@@ -44,9 +44,9 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="0"/>
             </Grid.ColumnDefinitions>
-            <Border Margin="0,0,0,0" Style="{StaticResource border}"  Grid.RowSpan="3" Grid.Row="0" HorizontalAlignment="Stretch"/>
+            <Border Margin="0,0,0,0" Style="{StaticResource border}" x:Name="mainBorder" Grid.RowSpan="2" Grid.Row="0" HorizontalAlignment="Stretch"/>
 
             <Grid Margin="6,2">
                 <TextBlock Name="BossNameTB" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Normal" FontStretch="Condensed" FontSize="12" Foreground="White" Text="{Binding BossName}" >
@@ -170,7 +170,7 @@
                         </ImageBrush>
                     </Ellipse.Fill>
                 </Ellipse>
-                <local:Arc x:Name="EnrageArc" Margin="5" Width="Auto" Height="Auto" Stroke="White" StrokeThickness="3"></local:Arc>
+                <local:Arc x:Name="EnrageArc" Margin="5" Width="0" Height="0" Stroke="White" StrokeThickness="3"></local:Arc>
                 <Grid Width="18" Height="18" x:Name="g" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="4,4">
 
                     <Ellipse x:Name="fill" Fill="White"  Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stroke="#40000000"/>
@@ -203,7 +203,7 @@
                 <ItemsControl Name="Abnormalities" ItemTemplate="{StaticResource BossBuffDataTemplate}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0" Width="500"/>
+                            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0" Width="{Binding ElementName=mainBorder, Path=ActualWidth}"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>

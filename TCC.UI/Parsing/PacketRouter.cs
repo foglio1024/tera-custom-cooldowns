@@ -148,6 +148,46 @@ namespace TCC.Parsing
                 WindowManager.ChangeClickThru(WindowManager.Transparent);
             });
         }
+
+        public static void HandlePlayerLocation(C_PLAYER_LOCATION p)
+        {
+            if (WindowManager.BossGauge.HarrowholdMode)
+            {
+                double relX = p.X + 7672;
+                double relY = p.Y + 84453;
+                Dragon d;
+                if (relY > .8 * relX - 78)
+                {
+                    if (relY > -1.3 * relX - 94)
+                    {
+                        d = Dragon.Aquadrax;
+                        
+                    }
+                    else
+                    {
+                        d = Dragon.Umbradrax;
+                    }
+                }
+                else
+                {
+                    if (relY > -1.3 * relX - 94)
+                    {
+                        d = Dragon.Terradrax;
+                    }
+                    else
+                    {
+                        d = Dragon.Ignidrax;
+                    }
+                }
+                if(SessionManager.CurrentDragon != d)
+                {
+                    SessionManager.CurrentDragon = d;
+                    WindowManager.BossGauge.HHBosses.Select(SessionManager.CurrentDragon);
+                }
+               
+            }
+        }
+
         public static void HandleNewSkillCooldown(S_START_COOLTIME_SKILL p)
         {
             SkillManager.AddSkill(p);
@@ -564,24 +604,39 @@ namespace TCC.Parsing
                     SessionManager.CurrentBosses.Remove(b);
                 });
             }
+            UnsetDragonsContexts(p.target);
+
         }
         public static void HandleNpcSpawn(S_SPAWN_NPC p)
         {
-            if (MonsterDatabase.TryGetMonster(p.Npc, (uint)p.Type, out Monster m))
+            if (MonsterDatabase.TryGetMonster(p.TemplateId, (uint)p.HuntingZoneId, out Monster m))
             {
                 if (m.IsBoss || m.MaxHP >= 40000000)
                 {
                     App.Current.Dispatcher.Invoke(() =>
                     {
-                        SessionManager.CurrentBosses.Add(new Boss(p.EntityId, (uint)p.Type, p.Npc, System.Windows.Visibility.Collapsed));
-                        //Console.WriteLine("SPAWNED: {0} - {1}   [{2}]", m.Name, m.MaxHP, SessionManager.CurrentBosses.Count);
+                        SessionManager.CurrentBosses.Add(new Boss(p.EntityId, (uint)p.HuntingZoneId, p.TemplateId, System.Windows.Visibility.Collapsed));
                     });
                 }
+            }
+            if (p.HuntingZoneId != 950)
+            {
 
-                else
+                WindowManager.BossGauge.HarrowholdMode = false;
+            }
+            else
+            {
+                if(p.TemplateId >= 1100 && p.TemplateId <= 1103)
                 {
-                    //Console.WriteLine("SKIPPED: {0} - {1}   [{2}]", m.Name, m.MaxHP, SessionManager.CurrentBosses.Count);
+                    WindowManager.BossGauge.HarrowholdMode = true;
+                    SetDragonsContexts(p);
                 }
+                else if(p.TemplateId == 2000 || p.TemplateId == 3000 || p.TemplateId == 4000)
+                {
+                    WindowManager.BossGauge.HarrowholdMode = false;
+
+                }
+                //Console.WriteLine("{0}, {1}", p.TemplateId, m.Name);
             }
         }
 
@@ -606,7 +661,82 @@ namespace TCC.Parsing
             //EnragedChanged?.Invoke(10, e);
 
         }
+
+        static void SetDragonsContexts(S_SPAWN_NPC p)
+        {
+            if (p.TemplateId == 1100)
+            {
+                WindowManager.BossGauge.Dispatcher.Invoke(() =>
+                {
+                    WindowManager.BossGauge.HHBosses.ignidrax.DataContext = SessionManager.CurrentBosses.FirstOrDefault(x => x.Name == "Ignidrax");
+                });
+            }
+            if (p.TemplateId == 1101)
+            {
+                WindowManager.BossGauge.Dispatcher.Invoke(() =>
+                {
+                    WindowManager.BossGauge.HHBosses.terradrax.DataContext = SessionManager.CurrentBosses.FirstOrDefault(x => x.Name == "Terradrax");
+                });
+            }
+            if (p.TemplateId == 1102)
+            {
+                WindowManager.BossGauge.Dispatcher.Invoke(() =>
+                {
+                    WindowManager.BossGauge.HHBosses.umbradrax.DataContext = SessionManager.CurrentBosses.FirstOrDefault(x => x.Name == "Umbradrax");
+                });
+            }
+            if (p.TemplateId == 1103)
+            {
+                WindowManager.BossGauge.Dispatcher.Invoke(() =>
+                {
+                    WindowManager.BossGauge.HHBosses.aquadrax.DataContext = SessionManager.CurrentBosses.FirstOrDefault(x => x.Name == "Aquadrax");
+                });
+            }
+
+        }
+        static void UnsetDragonsContexts(ulong target)
+        {
+            WindowManager.BossGauge.Dispatcher.Invoke(() =>
+            {
+                if(WindowManager.BossGauge.HHBosses.ignidrax.EntityId == target)
+                {
+                    WindowManager.BossGauge.HHBosses.ignidrax.DataContext = null;
+                    WindowManager.BossGauge.HHBosses.ignidrax.ForceEnrageOff();
+                    WindowManager.BossGauge.HHBosses.abnormalities.DataContext = null;
+                    WindowManager.BossGauge.HHBosses.abnormalities.ItemsSource = null;
+                }
+                if (WindowManager.BossGauge.HHBosses.aquadrax.EntityId == target)
+                {
+                    WindowManager.BossGauge.HHBosses.aquadrax.DataContext = null;
+                    WindowManager.BossGauge.HHBosses.aquadrax.ForceEnrageOff();
+                    WindowManager.BossGauge.HHBosses.abnormalities.DataContext = null;
+                    WindowManager.BossGauge.HHBosses.abnormalities.ItemsSource = null;
+
+                }
+                if (WindowManager.BossGauge.HHBosses.terradrax.EntityId == target)
+                {
+                    WindowManager.BossGauge.HHBosses.terradrax.DataContext = null;
+                    WindowManager.BossGauge.HHBosses.terradrax.ForceEnrageOff();
+                    WindowManager.BossGauge.HHBosses.abnormalities.DataContext = null;
+                    WindowManager.BossGauge.HHBosses.abnormalities.ItemsSource = null;
+
+                }
+                if (WindowManager.BossGauge.HHBosses.umbradrax.EntityId == target)
+                {
+                    WindowManager.BossGauge.HHBosses.umbradrax.DataContext = null;
+                    WindowManager.BossGauge.HHBosses.umbradrax.ForceEnrageOff();
+                    WindowManager.BossGauge.HHBosses.abnormalities.DataContext = null;
+                    WindowManager.BossGauge.HHBosses.abnormalities.ItemsSource = null;
+
+
+                }
+            });
+        }
     }
 
 }
 
+//<Monster name = "Ignidrax" id="1100" isBoss="True" hp="1500000000" />
+//<Monster name = "Terradrax" id="1101" isBoss="True" hp="1500000000" />
+//<Monster name = "Umbradrax" id="1102" isBoss="True" hp="1500000000" />
+//<Monster name = "Aquadrax" id="1103" isBoss="True" hp="1350000000" />

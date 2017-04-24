@@ -38,6 +38,7 @@ namespace TCC.Parsing
             { "S_GET_USER_LIST" , Contructor<Func<TeraMessageReader,S_GET_USER_LIST>>()},
             { "S_SPAWN_ME" , Contructor<Func<TeraMessageReader,S_SPAWN_ME>>()},
             { "S_RETURN_TO_LOBBY" , Contructor<Func<TeraMessageReader,S_RETURN_TO_LOBBY>>()},
+            { "C_PLAYER_LOCATION" , Contructor<Func<TeraMessageReader,C_PLAYER_LOCATION>>() }
         };
 
         private static Dictionary<Type, Delegate> MainProcessor = new Dictionary<Type, Delegate>();
@@ -63,6 +64,7 @@ namespace TCC.Parsing
             { typeof(S_SPAWN_ME), new Action<S_SPAWN_ME>(x => PacketRouter.HandleSpawn(x)) },
             { typeof(S_RETURN_TO_LOBBY), new Action<S_RETURN_TO_LOBBY>(x => PacketRouter.HandleReturnToLobby(x)) },
             { typeof(S_BOSS_GAGE_INFO), new Action<S_BOSS_GAGE_INFO>(x => PacketRouter.HandleGageReceived(x)) },
+            {typeof(C_PLAYER_LOCATION), new Action<C_PLAYER_LOCATION>(x => PacketRouter.HandlePlayerLocation(x)) }
 
         };
 
