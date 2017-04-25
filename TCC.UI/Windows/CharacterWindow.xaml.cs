@@ -39,6 +39,7 @@ namespace TCC
             InitializeComponent();
             this.DataContext = SessionManager.CurrentPlayer;
             stBar.Fill = new SolidColorBrush(Color.FromRgb(0x6, 0xb, 0xf));
+            
             hpBar.RenderTransform = new ScaleTransform(1, 1, 0, .5);
             mpBar.RenderTransform = new ScaleTransform(1, 1, 0, .5);
             stBar.RenderTransform = new ScaleTransform(1, 1, 0, .5);
@@ -357,6 +358,26 @@ namespace TCC.Converters
             else
             {
                 return 0;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class HPbarColorConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if ((bool)value)
+            {
+                return new SolidColorBrush(Color.FromRgb(0xb7, 0x4b, 0xe5));
+            }
+            else
+            {
+                return new SolidColorBrush(Color.FromRgb(0xd0, 0, 0));
             }
         }
 
