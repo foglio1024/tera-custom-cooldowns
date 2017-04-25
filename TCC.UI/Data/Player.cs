@@ -223,6 +223,20 @@ namespace TCC.Data
             }
         }
 
+        bool isDebuffed;
+        public bool IsDebuffed
+        {
+            get => isDebuffed;
+            set
+            {
+                if(isDebuffed != value)
+                {
+                    isDebuffed = value;
+                    NotifyPropertyChanged("IsDebuffed");
+                }
+            }
+        }
+
         bool isInCombat;
         public  bool IsInCombat
         {
