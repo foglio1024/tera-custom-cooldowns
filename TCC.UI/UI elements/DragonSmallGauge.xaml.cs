@@ -194,7 +194,7 @@ namespace TCC.UI_elements
             {
                 if (id == EntityId)
                 {
-                    Console.WriteLine("{0} enraged updated.", DragonName);
+                    //Console.WriteLine("{0} enraged updated.", DragonName);
 
                     Enraged = (bool)enraged;
                     if ((bool)enraged)
