@@ -93,21 +93,21 @@ namespace TCC
             if (zoneId != 950)
             {
                 WindowManager.BossGauge.HarrowholdMode = false;
-                System.Console.WriteLine("{0} {1} spawned, exiting hh mode", zoneId, templateId);
+                //System.Console.WriteLine("{0} {1} spawned, exiting hh mode", zoneId, templateId);
             }
             else
             {
                 if (templateId >= 1100 && templateId <= 1103)
                 {
                     WindowManager.BossGauge.HarrowholdMode = true;
-                    System.Console.WriteLine("{0} {1} spawned, entering hh mode", zoneId, templateId);
+                    //System.Console.WriteLine("{0} {1} spawned, entering hh mode", zoneId, templateId);
 
                     SetDragonsContexts(templateId);
                 }
                 else if (templateId == 2000 || templateId == 3000 || templateId == 4000)
                 {
                     WindowManager.BossGauge.HarrowholdMode = false;
-                    System.Console.WriteLine("{0} {1} spawned, exiting hh mode", zoneId, templateId);
+                    //System.Console.WriteLine("{0} {1} spawned, exiting hh mode", zoneId, templateId);
                 }
             }
 
@@ -153,6 +153,7 @@ namespace TCC
             {
                 WindowManager.BossGauge.Dispatcher.Invoke(() =>
                 {
+                    WindowManager.BossGauge.HHBosses.ignidrax.Reset();
                     WindowManager.BossGauge.HHBosses.ignidrax.DataContext = CurrentBosses.FirstOrDefault(x => x.Name == "Ignidrax");
                 });
             }
@@ -160,6 +161,7 @@ namespace TCC
             {
                 WindowManager.BossGauge.Dispatcher.Invoke(() =>
                 {
+                    WindowManager.BossGauge.HHBosses.terradrax.Reset();
                     WindowManager.BossGauge.HHBosses.terradrax.DataContext = CurrentBosses.FirstOrDefault(x => x.Name == "Terradrax");
                 });
             }
@@ -167,6 +169,7 @@ namespace TCC
             {
                 WindowManager.BossGauge.Dispatcher.Invoke(() =>
                 {
+                    WindowManager.BossGauge.HHBosses.umbradrax.Reset();
                     WindowManager.BossGauge.HHBosses.umbradrax.DataContext = CurrentBosses.FirstOrDefault(x => x.Name == "Umbradrax");
                 });
             }
@@ -174,6 +177,7 @@ namespace TCC
             {
                 WindowManager.BossGauge.Dispatcher.Invoke(() =>
                 {
+                    WindowManager.BossGauge.HHBosses.aquadrax.Reset();
                     WindowManager.BossGauge.HHBosses.aquadrax.DataContext = CurrentBosses.FirstOrDefault(x => x.Name == "Aquadrax");
                 });
             }
