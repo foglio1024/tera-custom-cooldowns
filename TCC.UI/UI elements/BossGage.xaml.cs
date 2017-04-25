@@ -136,7 +136,7 @@ namespace TCC
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             HPrect.Fill = new SolidColorBrush(Color.FromArgb(0xff, 0x4a, 0x82, 0xbd));
-            Abnormalities.ItemsSource = SessionManager.CurrentBosses.Where(x => x.EntityId == EntityId).First().Buffs;
+            Abnormalities.ItemsSource = EntitiesManager.CurrentBosses.Where(x => x.EntityId == EntityId).First().Buffs;
             NextEnrage.RenderTransform = new TranslateTransform(BaseRect.Width * .9, 0);
             Perc2.Text = String.Format("{0} / {1}", CurrentHP.ToString("n", nfi), MaxHP.ToString("n", nfi));
 

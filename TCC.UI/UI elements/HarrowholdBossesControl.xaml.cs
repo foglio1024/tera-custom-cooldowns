@@ -44,7 +44,8 @@ namespace TCC.UI_elements
                         umbradrax.Opacity = .6;
                         try
                         {
-                            abnormalities.ItemsSource = SessionManager.CurrentBosses.FirstOrDefault(x => x.EntityId == aquadrax.EntityId).Buffs;
+                            abnormalities.ItemsSource = EntitiesManager.CurrentBosses.FirstOrDefault(x => x.EntityId == aquadrax.EntityId).Buffs;
+                            abnormalities.DataContext = EntitiesManager.CurrentBosses.FirstOrDefault(x => x.EntityId == aquadrax.EntityId).Buffs;
                         }
                         catch (Exception){ }
 
@@ -56,8 +57,8 @@ namespace TCC.UI_elements
                         umbradrax.Opacity = .6;
                         try
                         {
-                            abnormalities.ItemsSource = SessionManager.CurrentBosses.FirstOrDefault(x => x.EntityId == ignidrax.EntityId).Buffs;
-                            abnormalities.DataContext = SessionManager.CurrentBosses.FirstOrDefault(x => x.EntityId == ignidrax.EntityId).Buffs;
+                            abnormalities.ItemsSource = EntitiesManager.CurrentBosses.FirstOrDefault(x => x.EntityId == ignidrax.EntityId).Buffs;
+                            abnormalities.DataContext = EntitiesManager.CurrentBosses.FirstOrDefault(x => x.EntityId == ignidrax.EntityId).Buffs;
                         }
                         catch (Exception){}
 
@@ -69,8 +70,8 @@ namespace TCC.UI_elements
                         umbradrax.Opacity = 1;
                         try
                         {
-                            abnormalities.ItemsSource = SessionManager.CurrentBosses.FirstOrDefault(x => x.EntityId == umbradrax.EntityId).Buffs;
-                            abnormalities.DataContext = SessionManager.CurrentBosses.FirstOrDefault(x => x.EntityId == umbradrax.EntityId).Buffs;
+                            abnormalities.ItemsSource = EntitiesManager.CurrentBosses.FirstOrDefault(x => x.EntityId == umbradrax.EntityId).Buffs;
+                            abnormalities.DataContext = EntitiesManager.CurrentBosses.FirstOrDefault(x => x.EntityId == umbradrax.EntityId).Buffs;
                         }
                         catch (Exception){}
 
@@ -82,8 +83,8 @@ namespace TCC.UI_elements
                         umbradrax.Opacity = .6;
                         try
                         {
-                            abnormalities.ItemsSource = SessionManager.CurrentBosses.FirstOrDefault(x => x.EntityId == terradrax.EntityId).Buffs;
-                            abnormalities.DataContext = SessionManager.CurrentBosses.FirstOrDefault(x => x.EntityId == terradrax.EntityId).Buffs;
+                            abnormalities.ItemsSource = EntitiesManager.CurrentBosses.FirstOrDefault(x => x.EntityId == terradrax.EntityId).Buffs;
+                            abnormalities.DataContext = EntitiesManager.CurrentBosses.FirstOrDefault(x => x.EntityId == terradrax.EntityId).Buffs;
                         }
                         catch (Exception){}
                         break;
