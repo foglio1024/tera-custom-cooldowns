@@ -45,7 +45,7 @@ namespace TCC.UI_elements
             SlideAnimation.Duration = TimeSpan.FromMilliseconds(250);
             ColorChangeAnimation.Duration = TimeSpan.FromMilliseconds(AnimationTime);
             DoubleAnimation.Duration = TimeSpan.FromMilliseconds(AnimationTime);
-            SetEnragePercTB(90);
+            SetEnragePercTB(86);
 
         }
 
@@ -227,8 +227,8 @@ namespace TCC.UI_elements
 
                         GlowOff();
 
-                        SlideNextEnrage(CurrentPercentage - 10);
-                        SetEnragePercTB(CurrentPercentage - 10);
+                        SlideNextEnrage(CurrentPercentage - 14);
+                        SetEnragePercTB(CurrentPercentage - 14);
 
                         CurrentEnrageTime = 50;
                     }
@@ -262,7 +262,7 @@ namespace TCC.UI_elements
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             HPrect.Fill = new SolidColorBrush(Color.FromArgb(0xff, 0x4a, 0x82, 0xbd));
-            NextEnrage.RenderTransform = new TranslateTransform(BaseRect.Width * .9, 0);
+            NextEnrage.RenderTransform = new TranslateTransform(BaseRect.Width * .86, 0);
             
         }
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
@@ -278,8 +278,8 @@ namespace TCC.UI_elements
             {
                 CurrentHP = MaxHP;
                 ForceEnrageOff();
-                SetEnragePercTB(90);
-                SlideNextEnrage(90);
+                SetEnragePercTB(86);
+                SlideNextEnrage(86);
             });
         }
     }
