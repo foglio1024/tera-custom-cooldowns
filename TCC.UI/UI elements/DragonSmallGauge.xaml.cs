@@ -272,5 +272,15 @@ namespace TCC.UI_elements
 
         }
 
+        public void Reset()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                CurrentHP = MaxHP;
+                ForceEnrageOff();
+                SetEnragePercTB(90);
+                SlideNextEnrage(90);
+            });
+        }
     }
 }
