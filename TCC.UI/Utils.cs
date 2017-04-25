@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace TCC
@@ -32,5 +33,9 @@ namespace TCC
             //}
         }
 
+        public static Point GetRelativePoint(double x, double y, double cx, double cy)
+        {
+            return new Point(x - cx, y - cy);
+        }
     }
 }

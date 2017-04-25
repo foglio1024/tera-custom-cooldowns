@@ -213,7 +213,7 @@ namespace TCC
         static bool isForeground = false;
         private static void FocusManager_ForegroundWindowChanged(bool visible)
         {
-            if (visible && SessionManager.Logged)
+            if (visible && SessionManager.Logged && !SessionManager.LoadingScreen)
             {
                 foreach (Window w in Application.Current.Windows)
                 {
