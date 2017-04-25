@@ -23,23 +23,25 @@ namespace TCC
             var opName = PacketRouter.OpCodeNamer.GetName(msg.OpCode);
             TeraMessageReader tmr = new TeraMessageReader(msg, PacketRouter.OpCodeNamer, PacketRouter.Version, PacketRouter.SystemMessageNamer);
             if (exclusionList.Any(opName.Contains)) return;
-            if (opName.Equals("S_LOAD_HINT"))
-            {
-                Console.WriteLine("[{0}] ({1})", opName, msg.Payload.Count);
-                StringBuilder sb = new StringBuilder();
-                foreach (var b in msg.Payload)
-                {
-                    sb.Append(b);
+            //if (opName.Equals("S_LOAD_HINT"))
+            //{
+            //    Console.WriteLine("[{0}] ({1})", opName, msg.Payload.Count);
+            //    StringBuilder sb = new StringBuilder();
+            //    foreach (var b in msg.Payload)
+            //    {
+            //        sb.Append(b);
 
-                }
-                int j = 0;
-                for (int i = 8; i+j < sb.Length; i+=8)
-                {
-                    sb.Insert(i+j, " ");
-                    j++;
-                }
-                Console.WriteLine(sb.ToString());
-            }
+            //    }
+            //    int j = 0;
+            //    for (int i = 8; i+j < sb.Length; i+=8)
+            //    {
+            //        sb.Insert(i+j, " ");
+            //        j++;
+            //    }
+            //    Console.WriteLine(sb.ToString());
+            //}
+            if(opName.Equals("S_LOAD_TOPO") || opName.Equals("C_LOAD_TOPO_FIN")|| opName.Equals("S_SPAWN_ME"))
+                Console.WriteLine(opName);
         }
     }
 }
