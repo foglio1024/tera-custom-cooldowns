@@ -59,7 +59,7 @@ namespace TCC.Parsing
                     continue;
                 }
                 var message = MessageFactory.Create(msg);
-                PacketInspector.InspectPacket(msg);
+                //PacketInspector.InspectPacket(msg);
                 if (message.GetType() == typeof(Tera.Game.Messages.UnknownMessage)) continue;
 
                 if (!MessageFactory.Process(message))
