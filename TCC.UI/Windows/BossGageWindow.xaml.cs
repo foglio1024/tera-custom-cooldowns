@@ -67,8 +67,8 @@ namespace TCC.Windows
         {
             InitializeComponent();
 
-            Bosses.DataContext = SessionManager.CurrentBosses;
-            Bosses.ItemsSource = SessionManager.CurrentBosses;
+            Bosses.DataContext = EntitiesManager.CurrentBosses;
+            Bosses.ItemsSource = EntitiesManager.CurrentBosses;
 
             HHBosses.DataContext = this;
 
@@ -104,7 +104,7 @@ namespace TCC.Windows
                 }
                 else
                 {
-                    Bosses.ItemsSource = SessionManager.CurrentBosses;
+                    Bosses.ItemsSource = EntitiesManager.CurrentBosses;
                 }
             });
         }
