@@ -20,7 +20,7 @@
                                            Stacks="{Binding Stacks}"
                                            TargetId="{Binding Target}"
                                            Type="{Binding Abnormality.Type}"
-                                           Size="25"/>
+                                           Size="27"/>
         </DataTemplate>
 
     </UserControl.Resources>
