@@ -38,7 +38,9 @@ namespace TCC.Parsing
             { "S_GET_USER_LIST" , Contructor<Func<TeraMessageReader,S_GET_USER_LIST>>()},
             { "S_SPAWN_ME" , Contructor<Func<TeraMessageReader,S_SPAWN_ME>>()},
             { "S_RETURN_TO_LOBBY" , Contructor<Func<TeraMessageReader,S_RETURN_TO_LOBBY>>()},
-            { "C_PLAYER_LOCATION" , Contructor<Func<TeraMessageReader,C_PLAYER_LOCATION>>() }
+            { "C_PLAYER_LOCATION" , Contructor<Func<TeraMessageReader,C_PLAYER_LOCATION>>() },
+            { "S_LOAD_TOPO" , Contructor<Func<TeraMessageReader,S_LOAD_TOPO>>() },
+            { "C_LOAD_TOPO_FIN" , Contructor<Func<TeraMessageReader,C_LOAD_TOPO_FIN>>() }
         };
 
         private static Dictionary<Type, Delegate> MainProcessor = new Dictionary<Type, Delegate>();
@@ -61,10 +63,12 @@ namespace TCC.Parsing
             { typeof(S_ABNORMALITY_REFRESH), new Action<S_ABNORMALITY_REFRESH>(x => PacketRouter.HandleAbnormalityRefresh(x)) },
             { typeof(S_ABNORMALITY_END), new Action<S_ABNORMALITY_END>(x => PacketRouter.HandleAbnormalityEnd(x)) },
             { typeof(S_GET_USER_LIST), new Action<S_GET_USER_LIST>(x => PacketRouter.HandleCharList(x)) },
-            { typeof(S_SPAWN_ME), new Action<S_SPAWN_ME>(x => PacketRouter.HandleSpawn(x)) },
+            { typeof(S_SPAWN_ME), new Action<S_SPAWN_ME>(x => PacketRouter.HandleSpawnMe(x)) },
             { typeof(S_RETURN_TO_LOBBY), new Action<S_RETURN_TO_LOBBY>(x => PacketRouter.HandleReturnToLobby(x)) },
             { typeof(S_BOSS_GAGE_INFO), new Action<S_BOSS_GAGE_INFO>(x => PacketRouter.HandleGageReceived(x)) },
-            {typeof(C_PLAYER_LOCATION), new Action<C_PLAYER_LOCATION>(x => PacketRouter.HandlePlayerLocation(x)) }
+            {typeof(C_PLAYER_LOCATION), new Action<C_PLAYER_LOCATION>(x => PacketRouter.HandlePlayerLocation(x)) },
+            {typeof(S_LOAD_TOPO), new Action<S_LOAD_TOPO>(x => PacketRouter.HandleLoadTopo(x)) },
+            {typeof(C_LOAD_TOPO_FIN), new Action<C_LOAD_TOPO_FIN>(x => PacketRouter.HandleLoadTopoFin(x)) }
 
         };
 
