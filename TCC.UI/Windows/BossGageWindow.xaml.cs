@@ -105,6 +105,10 @@ namespace TCC.Windows
                 else
                 {
                     Bosses.ItemsSource = EntitiesManager.CurrentBosses;
+                    HHBosses.aquadrax.Reset();
+                    HHBosses.ignidrax.Reset();
+                    HHBosses.umbradrax.Reset();
+                    HHBosses.terradrax.Reset();
                 }
             });
         }
