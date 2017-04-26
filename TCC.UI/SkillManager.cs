@@ -51,31 +51,22 @@ namespace TCC
             {
                 ResetSkill(skillCooldown.Skill);
             }
-            else if (skillCooldown.Cooldown < LongSkillTreshold)
+
+            if (NormalSkillsQueue.ToList().Any(x => x.Skill.Name == skillCooldown.Skill.Name) || LongSkillsQueue.ToList().Any(x => x.Skill.Name == skillCooldown.Skill.Name))
             {
-                if (NormalSkillsQueue.ToList().Any(x => x.Skill.Name == skillCooldown.Skill.Name))
-                {
-                    Refresh?.Invoke(skillCooldown);
-                }
-                else
-                {
-                    //not present
-                    App.Current.Dispatcher.Invoke(() => NormalSkillsQueue.Add(skillCooldown));
-                }
+                Refresh?.Invoke(skillCooldown);
             }
             else
             {
-                if (LongSkillsQueue.ToList().Any(x => x.Skill.Name == skillCooldown.Skill.Name))
+                if (skillCooldown.Cooldown < LongSkillTreshold)
                 {
-                    Refresh?.Invoke(skillCooldown);
+                    App.Current.Dispatcher.Invoke(() => NormalSkillsQueue.Add(skillCooldown));
                 }
                 else
                 {
-                    //not present
                     App.Current.Dispatcher.Invoke(() => LongSkillsQueue.Add(skillCooldown));
                 }
             }
-
         }
         public static void AddSkill(uint id, uint cd)
         {
