@@ -111,6 +111,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AbnormalityManager.cs" />
     <Compile Include="Data\Boss.cs" />
     <Compile Include="Data\Abnormality.cs" />
     <Compile Include="Data\AbnormalityDatabase.cs" />
@@ -280,6 +281,7 @@
     <Compile Include="TeraCommon\Sniffing\Crypt\Utils.cs" />
     <Compile Include="TeraCommon\Sniffing\ITeraSniffer.cs" />
     <Compile Include="TeraCommon\Sniffing\MessageSplitter.cs" />
+    <Compile Include="UI elements\AbnormalityDuration.cs" />
     <Compile Include="UI elements\AbnormalityIndicator.xaml.cs">
       <DependentUpon>AbnormalityIndicator.xaml</DependentUpon>
     </Compile>
