@@ -33,8 +33,8 @@ namespace TCC
         {
             var cd = AppDomain.CurrentDomain;
             cd.UnhandledException += GlobalUnhandledExceptionHandler;
-
             System.Diagnostics.Process.GetCurrentProcess().PriorityClass = System.Diagnostics.ProcessPriorityClass.High;
+
 
             TeraSniffer.Instance.Enabled = true;
             WindowManager.Init();
@@ -62,6 +62,7 @@ namespace TCC
             WindowManager.ShowWindow(WindowManager.CooldownWindow);
             LoadThread.Start();
             UpdateManager.CheckDatabaseVersion();
+
             //Debug();
 
         }

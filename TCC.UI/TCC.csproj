@@ -346,9 +346,7 @@
     <Compile Include="UI elements\SkillIconControl.xaml.cs">
       <DependentUpon>SkillIconControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Data\SkillQueue.cs" />
     <Compile Include="Data\SkillCooldown.cs" />
-    <Compile Include="Data\SkillListener.cs" />
     <Compile Include="SkillManager.cs" />
     <Compile Include="Data\SkillsDatabase.cs" />
     <Compile Include="Parsing\StringUtils.cs" />
