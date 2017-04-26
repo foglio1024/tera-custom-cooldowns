@@ -30,11 +30,17 @@ namespace TCC.UI_elements
             ignidrax.DataContext = null;
             umbradrax.DataContext = null;
         }
-
         internal void Select(Dragon d)
         {
             Dispatcher.Invoke(() =>
             {
+                Console.WriteLine("Switching to {0}", d.ToString());
+
+                foreach (var item in EntitiesManager.CurrentBosses.FirstOrDefault(x => x.Name == EntitiesManager.CurrentDragon.ToString()).Buffs)
+                {
+                    item.Duration = item.DurationLeft;
+                }
+
                 switch (d)
                 {
                     case Dragon.Aquadrax:
