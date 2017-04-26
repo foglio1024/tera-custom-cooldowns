@@ -20,8 +20,8 @@ namespace TCC.Messages
         public S_BOSS_GAGE_INFO(TeraMessageReader reader) : base(reader)
         {
             id = reader.ReadUInt64();
-            templateId = reader.ReadInt32();
             huntingZoneId = reader.ReadInt32();
+            templateId = reader.ReadInt32();
             targetId = reader.ReadUInt64();
             reader.Skip(4); //unk1 = reader.ReadInt32();
             hpDiff = reader.ReadSingle();
