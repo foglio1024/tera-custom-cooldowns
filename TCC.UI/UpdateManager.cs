@@ -21,26 +21,30 @@ namespace TCC
         {
             using (WebClient c = new WebClient())
             {
-                c.DownloadFile(databaseVersion, "newDbVer");
-            }
-            int v = 0;
-            try
-            {
-                v = Convert.ToInt32(File.ReadAllText("resources/images/current_version"));
-            }
-            catch (Exception)
-            {
-                v = 0;
-            }
-            int newVer = Convert.ToInt32(File.ReadAllText("newDbVer"));
-
-            if(v < newVer)
-            {
-                //update
-                if(MessageBox.Show(String.Format("Updated icons database available (v{0}). Download now?", newVer), "TCC", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                try
                 {
-                    DownloadDatabase();
-                    ExtractDatabase();
+                    var st = c.OpenRead(databaseVersion);
+                    StreamReader sr = new StreamReader(st);
+
+                    int newVersion = Convert.ToInt32(sr.ReadLine());
+                    int currentVersion = 0;
+                    if (File.Exists("resources/images/current_version"))
+                    {
+                        currentVersion = Convert.ToInt32(File.OpenText("resources/images/current_version").ReadLine());
+                    }
+
+                    if (newVersion > currentVersion)
+                    {
+                        if (MessageBox.Show(String.Format("Icons database v{0} available. Download now?", newVersion), "TCC", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                        {
+                            DownloadDatabase();
+                            ExtractDatabase();
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error while checking database updates.", "TCC", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -99,18 +103,25 @@ namespace TCC
         {
             using (WebClient c = new WebClient())
             {
-                var st = c.OpenRead(appVersion);
-                StreamReader sr = new StreamReader(st);
-                string newVersionInfo = sr.ReadLine();
-                string newVersionUrl = sr.ReadLine();
-
-                var v = Version.Parse(newVersionInfo);
-                if(v > Assembly.GetExecutingAssembly().GetName().Version)
+                try
                 {
-                    if (MessageBox.Show(String.Format("TCC v{0} available. Download now?", newVersionInfo), "TCC", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    var st = c.OpenRead(appVersion);
+                    StreamReader sr = new StreamReader(st);
+                    string newVersionInfo = sr.ReadLine();
+                    string newVersionUrl = sr.ReadLine();
+
+                    var v = Version.Parse(newVersionInfo);
+                    if (v > Assembly.GetExecutingAssembly().GetName().Version)
                     {
-                        Update(newVersionUrl);
+                        if (MessageBox.Show(String.Format("TCC v{0} available. Download now?", newVersionInfo), "TCC", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                        {
+                            Update(newVersionUrl);
+                        }
                     }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error while checking updates.", "TCC", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -120,11 +131,20 @@ namespace TCC
         {
             using (WebClient c = new WebClient())
             {
-                c.DownloadFile(url, "update.zip");
-                ZipFile.ExtractToDirectory("update.zip", Environment.CurrentDirectory + "/tmp");
-                File.Move(Environment.CurrentDirectory + "/tmp/TCCupdater.exe", Environment.CurrentDirectory + "/TCCupdater.exe");
-                Process.Start(Environment.CurrentDirectory + "/TCCupdater.exe");
-                Environment.Exit(0);
+                try
+                {
+                    c.DownloadFile(url, "update.zip");
+                    ZipFile.ExtractToDirectory("update.zip", Environment.CurrentDirectory + "/tmp");
+                    File.Move(Environment.CurrentDirectory + "/tmp/TCCupdater.exe", Environment.CurrentDirectory + "/TCCupdater.exe");
+                    Process.Start(Environment.CurrentDirectory + "/TCCupdater.exe");
+                    Environment.Exit(0);
+                }
+                catch (Exception)
+                {
+
+                    MessageBox.Show("Couldn't download update.", "TCC", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                }
             }
         }
     }

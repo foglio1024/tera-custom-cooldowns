@@ -34,7 +34,10 @@ namespace TCC
             var cd = AppDomain.CurrentDomain;
             cd.UnhandledException += GlobalUnhandledExceptionHandler;
             System.Diagnostics.Process.GetCurrentProcess().PriorityClass = System.Diagnostics.ProcessPriorityClass.High;
-
+            if (File.Exists(Environment.CurrentDirectory + "/TCCupdater.exe"))
+            {
+                File.Delete(Environment.CurrentDirectory + "/TCCupdater.exe");
+            }
             UpdateManager.CheckAppVersion();
             UpdateManager.CheckDatabaseVersion();
 
