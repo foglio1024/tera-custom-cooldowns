@@ -14,21 +14,6 @@ using TCC.Parsing;
 
 namespace TCC
 {
-    public class AbnormalityDuration
-    {
-        public ulong Target { get; set; }
-        public Abnormality Abnormality { get; set; }
-        public int Duration { get; set; }
-        public int Stacks { get; set; }
-
-        public AbnormalityDuration(Abnormality b, int d, int s, ulong t)
-        {
-            Abnormality = b;
-            Duration = d;
-            Stacks = s;
-            Target = t;
-        }
-    }
 
     /// <summary>
     /// Logica di interazione per BossGage.xaml
