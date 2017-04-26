@@ -158,17 +158,14 @@ namespace TCC.Parsing
                     break;
             }                   
         }
-
         public static void HandleLoadTopo(S_LOAD_TOPO x)
         {
             SessionManager.LoadingScreen = true;
         }
-
         public static void HandleLoadTopoFin(C_LOAD_TOPO_FIN x)
         {
             //SessionManager.LoadingScreen = false;
         }
-
         public static void HandlePlayerStatUpdate(S_PLAYER_STAT_UPDATE p)
         {
             SessionManager.CurrentPlayer.MaxHP = p.maxHp;
@@ -229,7 +226,7 @@ namespace TCC.Parsing
         }
         public static void HandleNpcSpawn(S_SPAWN_NPC p)
         {
-            EntitiesManager.SpawnNPC(p.HuntingZoneId, p.TemplateId, p.EntityId, System.Windows.Visibility.Collapsed);
+            EntitiesManager.SpawnNPC(p.HuntingZoneId, p.TemplateId, p.EntityId, System.Windows.Visibility.Collapsed, false);
             EntitiesManager.CheckHarrowholdMode(p.HuntingZoneId, p.TemplateId);
         }
 

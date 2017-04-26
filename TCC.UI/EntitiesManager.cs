@@ -24,11 +24,11 @@ namespace TCC
 
         public static Dragon CurrentDragon = Dragon.None;
 
-        public static void SpawnNPC(ushort zoneId, uint templateId, ulong entityId, Visibility v)
+        public static void SpawnNPC(ushort zoneId, uint templateId, ulong entityId, Visibility v, bool force)
         {
             if (MonsterDatabase.TryGetMonster(templateId, zoneId, out Monster m))
             {
-                if (m.IsBoss || m.MaxHP >= 40000000)
+                if ((m.IsBoss && m.MaxHP >= 40000000) || force)
                 {
                     App.Current.Dispatcher.Invoke(() =>
                     {
@@ -76,7 +76,7 @@ namespace TCC
             }
             else
             {
-                SpawnNPC(zoneId, templateId, target, Visibility.Visible);
+                SpawnNPC(zoneId, templateId, target, Visibility.Visible, true);
             }
         }
         public static void ClearNPC()
