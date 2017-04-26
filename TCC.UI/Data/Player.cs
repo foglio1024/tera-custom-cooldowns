@@ -259,9 +259,9 @@ namespace TCC.Data
             }
         }
 
-        public ObservableCollection<AbnormalityDuration> Buffs = new ObservableCollection<AbnormalityDuration>();
-        public ObservableCollection<AbnormalityDuration> Debuffs = new ObservableCollection<AbnormalityDuration>();
-        public ObservableCollection<AbnormalityDuration> InfBuffs = new ObservableCollection<AbnormalityDuration>();
+        public ObservableCollection<AbnormalityDuration> Buffs    ;
+        public ObservableCollection<AbnormalityDuration> Debuffs  ;
+        public ObservableCollection<AbnormalityDuration> InfBuffs ;
 
         public event Action OutOfCombat;
         public event Action InCombat;
@@ -278,5 +278,11 @@ namespace TCC.Data
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
 
+        public Player()
+        {
+            Buffs = new ObservableCollection<AbnormalityDuration>();
+            Debuffs = new ObservableCollection<AbnormalityDuration>();
+            InfBuffs = new ObservableCollection<AbnormalityDuration>();
+        }
     }
 }
