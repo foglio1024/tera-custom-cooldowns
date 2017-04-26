@@ -51,25 +51,8 @@ namespace TCC.UI_elements
                     CurrentTime--;
                     if (CurrentTime < 0)
                     {
-                        //number.Text = "";
                         SecondsTimer.Stop();
                     }
-                    //else if (CurrentTime > 60 * 60 * 24)
-                    //{
-                    //    number.Text = String.Format("{0:0}d", CurrentTime / 3600 * 24);
-                    //}
-                    //else if (CurrentTime > 3600)
-                    //{
-                    //    number.Text = String.Format("{0:0}h", CurrentTime / 3600);
-                    //}
-                    //else if (CurrentTime > 60)
-                    //{
-                    //    number.Text = String.Format("{0:0}m", CurrentTime / 60);
-                    //}
-                    //else
-                    //{
-                    //    number.Text = String.Format("{0:0}", CurrentTime);
-                    //}
                 });
             });
 
