@@ -35,6 +35,10 @@ namespace TCC
             cd.UnhandledException += GlobalUnhandledExceptionHandler;
             System.Diagnostics.Process.GetCurrentProcess().PriorityClass = System.Diagnostics.ProcessPriorityClass.High;
 
+            UpdateManager.CheckAppVersion();
+            UpdateManager.CheckDatabaseVersion();
+
+
 
             TeraSniffer.Instance.Enabled = true;
             WindowManager.Init();
@@ -61,8 +65,6 @@ namespace TCC
 
             WindowManager.ShowWindow(WindowManager.CooldownWindow);
             LoadThread.Start();
-            UpdateManager.CheckDatabaseVersion();
-
             //Debug();
 
         }

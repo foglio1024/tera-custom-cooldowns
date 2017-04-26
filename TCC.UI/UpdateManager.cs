@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.IO.Compression;
 using System.IO;
+using System.Reflection;
+using System.Diagnostics;
 
 namespace TCC
 {
@@ -88,6 +90,41 @@ namespace TCC
             catch (Exception)
             {
 
+            }
+        }
+
+        static string appVersion = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/master/version";
+
+        public static void CheckAppVersion()
+        {
+            using (WebClient c = new WebClient())
+            {
+                var st = c.OpenRead(appVersion);
+                StreamReader sr = new StreamReader(st);
+                string newVersionInfo = sr.ReadLine();
+                string newVersionUrl = sr.ReadLine();
+
+                var v = Version.Parse(newVersionInfo);
+                if(v > Assembly.GetExecutingAssembly().GetName().Version)
+                {
+                    if (MessageBox.Show(String.Format("TCC v{0} available. Download now?", newVersionInfo), "TCC", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        Update(newVersionUrl);
+                    }
+                }
+            }
+        }
+
+
+        private static void Update(string url)
+        {
+            using (WebClient c = new WebClient())
+            {
+                c.DownloadFile(url, "update.zip");
+                ZipFile.ExtractToDirectory("update.zip", Environment.CurrentDirectory + "/tmp");
+                File.Move(Environment.CurrentDirectory + "/tmp/TCCupdater.exe", Environment.CurrentDirectory + "/TCCupdater.exe");
+                Process.Start(Environment.CurrentDirectory + "/TCCupdater.exe");
+                Environment.Exit(0);
             }
         }
     }
