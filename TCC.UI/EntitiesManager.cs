@@ -108,7 +108,7 @@ namespace TCC
 
                     SetDragonsContexts(templateId);
                 }
-                else if (templateId == 2000 || templateId == 3000 || templateId == 4000)
+                else if (templateId == 1000 || templateId == 2000 || templateId == 3000 || templateId == 4000)
                 {
                     WindowManager.BossGauge.HarrowholdMode = false;
                     //System.Console.WriteLine("{0} {1} spawned, exiting hh mode", zoneId, templateId);
