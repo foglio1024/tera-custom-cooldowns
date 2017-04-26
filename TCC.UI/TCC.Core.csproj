@@ -281,7 +281,7 @@
     <Compile Include="TeraCommon\Sniffing\Crypt\Utils.cs" />
     <Compile Include="TeraCommon\Sniffing\ITeraSniffer.cs" />
     <Compile Include="TeraCommon\Sniffing\MessageSplitter.cs" />
-    <Compile Include="UI elements\AbnormalityDuration.cs" />
+    <Compile Include="Data\AbnormalityDuration.cs" />
     <Compile Include="UI elements\AbnormalityIndicator.xaml.cs">
       <DependentUpon>AbnormalityIndicator.xaml</DependentUpon>
     </Compile>
