@@ -32,7 +32,7 @@ namespace TCC
                 {
                     System.Console.WriteLine("[S_SPAWN_NPC] 950 - {0} - {1}", templateId, m.Name);
                 }
-                if ((m.IsBoss && m.MaxHP >= 40000000) || force)
+                if ((m.IsBoss || m.MaxHP >= 40000000) || force)
                 {
                     App.Current.Dispatcher.Invoke(() =>
                     {
