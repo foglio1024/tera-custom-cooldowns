@@ -34,12 +34,15 @@ namespace TCC.UI_elements
         {
             Dispatcher.Invoke(() =>
             {
-                Console.WriteLine("Switching to {0}", d.ToString());
-
-                foreach (var item in EntitiesManager.CurrentBosses.FirstOrDefault(x => x.Name == EntitiesManager.CurrentDragon.ToString()).Buffs)
+                try
                 {
-                    item.Duration = item.DurationLeft;
+                    foreach (var item in EntitiesManager.CurrentBosses.FirstOrDefault(x => x.Name == EntitiesManager.CurrentDragon.ToString()).Buffs)
+                    {
+                        item.Duration = item.DurationLeft;
+                    }
                 }
+                catch (Exception)
+                { }
 
                 switch (d)
                 {
