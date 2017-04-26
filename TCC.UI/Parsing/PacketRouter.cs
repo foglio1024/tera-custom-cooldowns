@@ -123,7 +123,7 @@ namespace TCC.Parsing
         }
         public static void HandleNewItemCooldown(S_START_COOLTIME_ITEM p)
         {
-            SkillManager.AddBrooch(p);
+            SkillManager.AddBrooch(p.ItemId, p.Cooldown);
         }
         public static void HandleDecreaseSkillCooldown(S_DECREASE_COOLTIME_SKILL p)
         {

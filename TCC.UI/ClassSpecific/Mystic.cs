@@ -14,10 +14,11 @@ namespace TCC
 
         public static void CheckHurricane(S_ABNORMALITY_BEGIN msg)
         {
+            if(msg.id == HURRICANE_ID) Console.WriteLine("Checking hurricane; id={0} caster={1} player={2}", msg.id, msg.casterId, SessionManager.CurrentPlayer.EntityId);
             if (msg.id == HURRICANE_ID && msg.casterId == SessionManager.CurrentPlayer.EntityId)
             {
-                //SkillsDatabase.TryGetSkill(HURRICANE_ID, Class.Common, out Skill hurricane);
-                SkillManager.AddSkill(HURRICANE_ID, HURRICANE_DURATION);
+                SkillsDatabase.TryGetSkill(HURRICANE_ID, Class.Common, out Skill hurricane);
+                SkillManager.AddSkillDirectly(hurricane, HURRICANE_DURATION);
             }
 
         }

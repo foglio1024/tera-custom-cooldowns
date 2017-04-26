@@ -40,7 +40,43 @@ namespace TCC
             else return false;
 
         }
+        public static void AddSkillDirectly(Skill sk, uint cd)
+        {
+            RouteSkill(new SkillCooldown(sk, (int)cd, CooldownType.Skill));
+        }
 
+        static void RouteSkill(SkillCooldown skillCooldown)
+        {
+            if (skillCooldown.Cooldown == 0)
+            {
+                ResetSkill(skillCooldown.Skill);
+            }
+            else if (skillCooldown.Cooldown < LongSkillTreshold)
+            {
+                if (NormalSkillsQueue.ToList().Any(x => x.Skill.Name == skillCooldown.Skill.Name))
+                {
+                    Refresh?.Invoke(skillCooldown);
+                }
+                else
+                {
+                    //not present
+                    App.Current.Dispatcher.Invoke(() => NormalSkillsQueue.Add(skillCooldown));
+                }
+            }
+            else
+            {
+                if (LongSkillsQueue.ToList().Any(x => x.Skill.Name == skillCooldown.Skill.Name))
+                {
+                    Refresh?.Invoke(skillCooldown);
+                }
+                else
+                {
+                    //not present
+                    App.Current.Dispatcher.Invoke(() => LongSkillsQueue.Add(skillCooldown));
+                }
+            }
+
+        }
         public static void AddSkill(uint id, uint cd)
         {
             if(SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out Skill skill))
@@ -49,51 +85,14 @@ namespace TCC
                 {
                     return;
                 }
-                SkillCooldown skillCooldown = new SkillCooldown(skill, (int)cd, CooldownType.Skill);
-
-                if (skillCooldown.Cooldown == 0)
-                {
-                    ResetSkill(skillCooldown.Skill);
-                }
-                else if(skillCooldown.Cooldown < LongSkillTreshold)
-                {
-                    if(NormalSkillsQueue.ToList().Any(x => x.Skill.Name == skillCooldown.Skill.Name))
-                    {
-                        Refresh?.Invoke(skillCooldown);
-                    }
-                    else
-                    {
-                        //not present
-                        App.Current.Dispatcher.Invoke(() => NormalSkillsQueue.Add(skillCooldown));
-                    }
-                }
-                else 
-                {
-                    if (LongSkillsQueue.ToList().Any(x => x.Skill.Name == skillCooldown.Skill.Name))
-                    {
-                        Refresh?.Invoke(skillCooldown);
-                    }
-                    else
-                    {
-                        //not present
-                        App.Current.Dispatcher.Invoke(() => LongSkillsQueue.Add(skillCooldown));
-                    }
-                }
+                RouteSkill(new SkillCooldown(skill, (int)cd, CooldownType.Skill));
             }
         }
-        public static void AddBrooch(S_START_COOLTIME_ITEM packet)
+        public static void AddBrooch(uint id, uint cd)
         {
-            if (BroochesDatabase.TryGetBrooch(packet.ItemId, out Skill brooch))
+            if (BroochesDatabase.TryGetBrooch(id, out Skill brooch))
             {
-                SkillCooldown broochCooldown = new SkillCooldown(brooch, (int)packet.Cooldown, CooldownType.Item);
-                if (LongSkillsQueue.Any(x => x.Skill.Name == broochCooldown.Skill.Name))
-                {
-                    return;
-                }
-                else
-                {
-                    App.Current.Dispatcher.Invoke(()=> LongSkillsQueue.Add(broochCooldown));
-                }
+                RouteSkill(new SkillCooldown(brooch, (int)cd, CooldownType.Item));
             }
 
         }
@@ -164,8 +163,7 @@ namespace TCC
         }
 
         public static void Clear()
-        {
-            
+        {          
             App.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
                 NormalSkillsQueue.Clear();
@@ -177,7 +175,6 @@ namespace TCC
 
             SessionManager.CurrentPlayer.Class = Class.None;
             SessionManager.CurrentPlayer.EntityId = 0;
-            //WindowManager.ClassSpecificWindow.Enabled = false;
             LastSkills.Clear();
             SessionManager.Logged = false;
         }
