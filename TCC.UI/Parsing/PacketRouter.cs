@@ -119,7 +119,7 @@ namespace TCC.Parsing
         }
         public static void HandleNewSkillCooldown(S_START_COOLTIME_SKILL p)
         {
-            SkillManager.AddSkill(p);
+            SkillManager.AddSkill(p.SkillId, p.Cooldown);
         }
         public static void HandleNewItemCooldown(S_START_COOLTIME_ITEM p)
         {
@@ -127,7 +127,7 @@ namespace TCC.Parsing
         }
         public static void HandleDecreaseSkillCooldown(S_DECREASE_COOLTIME_SKILL p)
         {
-            SkillManager.ChangeSkillCooldown(p);
+            SkillManager.ChangeSkillCooldown(p.SkillId, (int)p.Cooldown);
         }
         public static void HandleReturnToLobby(S_RETURN_TO_LOBBY p)
         {
