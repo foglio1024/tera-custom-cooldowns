@@ -28,6 +28,10 @@ namespace TCC
         {
             if (MonsterDatabase.TryGetMonster(templateId, zoneId, out Monster m))
             {
+                if(zoneId == 950)
+                {
+                    System.Console.WriteLine("[S_SPAWN_NPC] 950 - {0} - {1}", templateId, m.Name);
+                }
                 if ((m.IsBoss && m.MaxHP >= 40000000) || force)
                 {
                     App.Current.Dispatcher.Invoke(() =>
