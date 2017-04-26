@@ -56,6 +56,7 @@
         <converters:LaurelImageConverter x:Key="laurelConv"/>
         <converters:CombatToColorConverter x:Key="combatConv"/>
         <converters:HP_PercentageConverter x:Key="hpPercConv"/>
+        <converters:HPbarColorConverter x:Key="hpDebuffColConv"/>
     </Window.Resources>
     <Grid Margin="10,0">
         <!--<Grid.CacheMode>
@@ -153,14 +154,8 @@
 
             <Grid>
                 <Rectangle Name="base" Style="{StaticResource baseRectangle}"/>
-                <Rectangle Name="hpBar" Width="400" Style="{StaticResource barRectangle}">
-                    <Rectangle.Fill>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#d00" Offset=".5"/>
-                            <GradientStop Color="#d00" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Rectangle.Fill>
-                </Rectangle>
+                <Rectangle Name="hpBar" Width="400" Style="{StaticResource barRectangle}" Fill="{Binding IsDebuffed, Converter={StaticResource hpDebuffColConv}}"/>
+
                 <!--<Polygon Points="0,16 16,16 16,0" Style="{StaticResource borderPolygon}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="Auto" Height="Auto"></Polygon>-->
                 <!--<Polygon Points="0,16 0,0 16,0" Style="{StaticResource borderPolygon}" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="Auto" Height="Auto"></Polygon>-->
                 <!--<Path Fill="{StaticResource bgColor}" Data="M 0,0 H 10 C 0,0 0,16 10,16 H 0" VerticalAlignment="Center" HorizontalAlignment="Left"></Path>

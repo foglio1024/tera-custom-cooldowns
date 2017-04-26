@@ -13,20 +13,20 @@ namespace TCC.Parsing.Messages
     {
 
         ulong id;
-        uint npc;
-        short type;
+        uint templateId;
+        ushort huntingZoneId;
 
         public ulong EntityId { get => id;}
-        public uint Npc { get => npc;  }
-        public short Type { get => type; }
+        public uint TemplateId { get => templateId;  }
+        public ushort HuntingZoneId { get => huntingZoneId; }
 
         public S_SPAWN_NPC(TeraMessageReader reader) : base(reader)
         {
             reader.Skip(10);
             id = reader.ReadUInt64();
             reader.Skip(26);
-            npc = reader.ReadUInt32();
-            type = reader.ReadInt16();
+            templateId = reader.ReadUInt32();
+            huntingZoneId = reader.ReadUInt16();
 
            // Console.WriteLine("[S_SPAWN NPC] id:{0} name:{1}", id, MonsterDatabase.GetName(npc, (uint)type));
         }

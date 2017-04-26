@@ -28,8 +28,6 @@ namespace TCC.UI_elements
         {
             InitializeComponent();
 
-            PacketRouter.BuffUpdated += PacketRouter_BuffUpdated;
-
             //abnormalityName.DataContext = this;
             rootGrid.DataContext = this;
             abnormalityIcon.DataContext = this;
@@ -213,10 +211,22 @@ namespace TCC.UI_elements
             }
         }
 
+        bool isPlayer; //used in UserControl_Unloaded to decide which event handler to remove
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             Dispatcher.Invoke(() =>
             {
+                if(TargetId == SessionManager.CurrentPlayer.EntityId)
+                {
+                    AbnormalityManager.PlayerAbnormalityUpdated += PacketRouter_BuffUpdated;
+                    isPlayer = true;
+                }
+                else
+                {
+                    AbnormalityManager.NPCAbnormalityUpdated += PacketRouter_BuffUpdated;
+                    isPlayer = false; 
+                }
                 this.RenderTransform = new ScaleTransform(0, 0, .5, .5);
                 this.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
                 this.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
@@ -248,7 +258,15 @@ namespace TCC.UI_elements
 
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
-            PacketRouter.BuffUpdated -= PacketRouter_BuffUpdated;
+            if (isPlayer)
+            {
+                AbnormalityManager.PlayerAbnormalityUpdated -= PacketRouter_BuffUpdated;
+
+            }
+            else
+            {
+                AbnormalityManager.NPCAbnormalityUpdated -= PacketRouter_BuffUpdated;
+            }
         }
     }
 }

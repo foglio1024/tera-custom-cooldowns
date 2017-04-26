@@ -39,6 +39,10 @@ namespace TCC.Data
                     enraged = value;
                     NotifyPropertyChanged("Enraged");
                     EnragedChanged?.Invoke(EntityId, value);
+                    if(Name == "Terradrax")
+                    {
+                        Console.WriteLine("Terradrax enrage changed ({0})", value);
+                    }
                 }
             }
         }

@@ -63,8 +63,7 @@ namespace TCC
             get { return (float)GetValue(CurrentHPProperty); }
             set { SetValue(CurrentHPProperty, value); }
         }
-        public static readonly DependencyProperty CurrentHPProperty =
-            DependencyProperty.Register("CurrentHP", typeof(float), typeof(BossGage));
+        public static readonly DependencyProperty CurrentHPProperty = DependencyProperty.Register("CurrentHP", typeof(float), typeof(BossGage));
 
 
         bool enraged;
@@ -137,7 +136,7 @@ namespace TCC
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             HPrect.Fill = new SolidColorBrush(Color.FromArgb(0xff, 0x4a, 0x82, 0xbd));
-            Abnormalities.ItemsSource = SessionManager.CurrentBosses.Where(x => x.EntityId == EntityId).First().Buffs;
+            Abnormalities.ItemsSource = EntitiesManager.CurrentBosses.Where(x => x.EntityId == EntityId).First().Buffs;
             NextEnrage.RenderTransform = new TranslateTransform(BaseRect.Width * .9, 0);
             Perc2.Text = String.Format("{0} / {1}", CurrentHP.ToString("n", nfi), MaxHP.ToString("n", nfi));
 
@@ -206,17 +205,6 @@ namespace TCC
 
                 EnrageArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(EnrageDuration)));
 
-                NumberTimer = new Timer(1000);
-                NumberTimer.Elapsed += (s, ev) =>
-                {
-                    Dispatcher.BeginInvoke(new Action(() =>
-                    {
-                        number.Text = CurrentEnrageTime.ToString();
-                        CurrentEnrageTime--;
-                    }));
-                };
-                NumberTimer.Enabled = true;
-
             });
         }
         void CloseEnrageGrid()
@@ -250,7 +238,7 @@ namespace TCC
                     if (Enraged)
                     {
                         SlideNextEnrage(CurrentPercentage);
-                        SetEnragePercTB(CurrentPercentage);
+                        //SetEnragePercTB(CurrentPercentage);
                     }
                 }
             });
@@ -265,13 +253,26 @@ namespace TCC
                     if ((bool)enraged)
                     {
                         Enraged = (bool)enraged;
-                        number.Text = CurrentEnrageTime.ToString();
+                        //number.Text = CurrentEnrageTime.ToString();
+                        NextEnrageTB.Text = CurrentEnrageTime.ToString();
 
                         SlideNextEnrage(CurrentPercentage);
-                        SetEnragePercTB(CurrentPercentage);
+                        //SetEnragePercTB(CurrentPercentage);
 
                         GlowOn();
-                        DeployEnrageGrid();
+                        //DeployEnrageGrid();
+                        NumberTimer = new Timer(1000);
+                        NumberTimer.Elapsed += (s, ev) =>
+                        {
+                            Dispatcher.BeginInvoke(new Action(() =>
+                            {
+                                NextEnrageTB.Text = CurrentEnrageTime.ToString();
+                                CurrentEnrageTime--;
+                            }));
+                        };
+                        NumberTimer.Enabled = true;
+
+
 
                     }
                     else
@@ -282,7 +283,7 @@ namespace TCC
                         }
 
                         GlowOff();
-                        CloseEnrageGrid();
+                        //CloseEnrageGrid();
 
                         SlideNextEnrage(CurrentPercentage - 10);
                         SetEnragePercTB(CurrentPercentage - 10);

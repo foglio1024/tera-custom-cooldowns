@@ -25,12 +25,13 @@ namespace TCC.Data
                 var id = Convert.ToUInt32(s[0]);
                 Enum.TryParse(s[1], out AbnormalityType t);
                 var isShow = bool.Parse(s[2]);
-                var infinity = bool.Parse(s[3]);
-                var name = s[4];
-                var tooltip = s[5].Replace("&#xA;", "\n");
-                var iconName = s[6];
+                var isBuff = bool.Parse(s[3]);
+                var infinity = bool.Parse(s[4]);
+                var name = s[5];
+                var tooltip = s[6].Replace("&#xA;", "\n");
+                var iconName = s[7];
 
-                var ab = new Abnormality(id, isShow, infinity, t);
+                var ab = new Abnormality(id, isShow, isBuff, infinity, t);
                 ab.SetIcon(iconName);
                 ab.SetInfo(name, tooltip);
 

@@ -4,6 +4,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCC"
+        xmlns:elements="clr-namespace:TCC.UI_elements"
+        xmlns:converters="clr-namespace:TCC.Converters"
         mc:Ignorable="d"
         Title="BossGageWindow" Height="Auto" Width="Auto"
         SizeToContent="WidthAndHeight"
@@ -24,17 +26,16 @@
                             BossName="{Binding Name}"
                             Visibility="{Binding Visible}"/>
         </DataTemplate>
+        <converters:HarrowholdBossesVisibilityConverter x:Key="hhBossesVisConv"/>
     </Window.Resources>
     <Grid>
-        <!--<Grid.CacheMode>
-            <BitmapCache RenderAtScale="1"/>
-        </Grid.CacheMode>-->
-        <ItemsControl Name="Bosses" ItemTemplate="{StaticResource BossGageDataTemplate}">
+        <ItemsControl Name="Bosses" ItemTemplate="{StaticResource BossGageDataTemplate}" >
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Background="Transparent" Orientation="Vertical" ItemHeight="Auto" Height="270"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
+        <elements:HarrowholdBossesControl x:Name="HHBosses" Visibility="{Binding HarrowholdMode, Converter={StaticResource hhBossesVisConv}}"/>
     </Grid>
 </Window>
