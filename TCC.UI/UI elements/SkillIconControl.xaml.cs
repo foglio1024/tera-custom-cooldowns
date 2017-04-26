@@ -106,6 +106,7 @@ namespace TCC
             icon.DataContext = this;
             number.DataContext = this;
             SkillManager.Changed += ChangeCooldown;
+            SkillManager.Refresh += ChangeCooldown;
             SkillManager.Reset += Reset;
         }
 
@@ -114,9 +115,11 @@ namespace TCC
             Dispatcher.Invoke(() =>
             {
                 if (s.Skill.Name != this.Skill.Name) return;
-
+                NumberTimer.Stop();
+                NumberTimer.IsEnabled = true;
                 CurrentCD = (double)s.Cooldown / 1000;
                 double newAngle = (double)s.Cooldown / (double)Cooldown;
+                if (newAngle > 1) newAngle = 1;
 
                 if (s.Cooldown > ending)
                 {
@@ -128,31 +131,26 @@ namespace TCC
                 }
 
                 //arc.BeginAnimation(Arc.EndAngleProperty, null);
+                //Console.WriteLine("Animating to newAngle = {1}/{2} {0}", newAngle, s.Cooldown, Cooldown);
                 arc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9 * newAngle, 0, TimeSpan.FromMilliseconds(s.Cooldown)));
-                //this.BeginAnimation(OpacityProperty, new DoubleAnimation(.5, 1, TimeSpan.FromMilliseconds(150)));
             });
         }
         private void ControlLoaded(object sender, RoutedEventArgs e)
         {
             CurrentCD = (double)Cooldown / 1000;
             ToolTip = SkillName;
+
             NumberTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(1000) };
             MainTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(Cooldown) };
             CloseTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(ending) };
 
-            CloseTimer.Tick += CloseTimer_Tick; ;
-
+            CloseTimer.Tick += CloseTimer_Tick;
             NumberTimer.Tick += (s, o) =>
             {
                 CurrentCD--;
             };
-
             MainTimer.Tick += (s, o) =>
             {
-                //var c = new DoubleAnimation(22, 0, TimeSpan.FromMilliseconds(ending))
-                //{
-                //    EasingFunction = new QuadraticEase()
-                //};
                 var w = new DoubleAnimation(0, TimeSpan.FromMilliseconds(ending))
                 {
                     EasingFunction = new QuadraticEase()
@@ -161,19 +159,8 @@ namespace TCC
                 {
                     EasingFunction = new QuadraticEase()
                 };
-                //var t = new ThicknessAnimation(new Thickness(0), TimeSpan.FromMilliseconds(ending))
-                //{
-                //    EasingFunction = new QuadraticEase()
-                //};
-
-                //g.BeginAnimation(WidthProperty, c);
-                //g.BeginAnimation(HeightProperty, c);
-                //g.BeginAnimation(MarginProperty, t);
                 MainGrid.BeginAnimation(WidthProperty, w);
                 MainGrid.BeginAnimation(HeightProperty, h);
-                //arc.BeginAnimation(WidthProperty, w);
-                //arc.BeginAnimation(HeightProperty, h);
-                //this.BeginAnimation(MarginProperty, t);
                 CloseTimer.IsEnabled = true;
 
                 MainTimer.Stop();
@@ -206,7 +193,7 @@ namespace TCC
         {
             SkillManager.Changed -= ChangeCooldown;
             SkillManager.Reset -= Reset;
-
+            SkillManager.Refresh -= ChangeCooldown;
         }
     }
 }
