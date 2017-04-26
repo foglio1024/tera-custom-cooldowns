@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 using TCC.Messages;
 
 namespace TCC
@@ -20,12 +22,10 @@ namespace TCC
 
         public static event SkillCooldownChangedEventHandler Changed;
         public static event SkillResetEventHandler Reset;
+        public static event SkillCooldownChangedEventHandler Refresh;
 
-        public static SkillQueue NormalSkillsQueue = new SkillQueue();
-        public static SkillQueue LongSkillsQueue = new SkillQueue();
-
-        static SkillListener NormalSkillsQueueListener = new SkillListener(NormalSkillsQueue);
-        static SkillListener LongSkillsQueueListener = new SkillListener(LongSkillsQueue);
+        public static ObservableCollection<SkillCooldown> NormalSkillsQueue = new ObservableCollection<SkillCooldown>();
+        public static ObservableCollection<SkillCooldown> LongSkillsQueue = new ObservableCollection<SkillCooldown>();
 
         public static List<string> LastSkills = new List<string>();
 
@@ -41,95 +41,60 @@ namespace TCC
 
         }
 
-        public static void AddSkill(Skill skill, int cooldown)
+        public static void AddSkill(uint id, uint cd)
         {
-            LongSkillsQueue.Add(new SkillCooldown(skill, cooldown, CooldownType.Skill));
-        }
-        public static void AddSkill(S_START_COOLTIME_SKILL packet)
-        {
-
-            if(SkillsDatabase.TryGetSkill(packet.SkillId, SessionManager.CurrentPlayer.Class, out Skill skill))
+            if(SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out Skill skill))
             {
                 if (!Filter(skill.Name))
                 {
                     return;
                 }
-                SkillCooldown skillCooldown = new SkillCooldown(skill, (int)packet.Cooldown, CooldownType.Skill);
-                //Console.WriteLine("Received {0} - {1}", skillCooldown.Skill.Id, skillCooldown.Skill.Name);
+                SkillCooldown skillCooldown = new SkillCooldown(skill, (int)cd, CooldownType.Skill);
 
                 if (skillCooldown.Cooldown == 0)
                 {
                     ResetSkill(skillCooldown.Skill);
-                    //Console.WriteLine("Resetting {0} - {1}", skill.Id, skill.Name);
                 }
-                else if (NormalSkillsQueue.ToList().Any(x => x.Skill.Name == skillCooldown.Skill.Name)||
-                         LongSkillsQueue.ToList().Any(x => x.Skill.Name == skillCooldown.Skill.Name))
-                     {
-                         return;
-                     }
-                else if (skillCooldown.Cooldown < LongSkillTreshold)
+                else if(skillCooldown.Cooldown < LongSkillTreshold)
                 {
-                    NormalSkillsQueue.Add(skillCooldown);
+                    if(NormalSkillsQueue.ToList().Any(x => x.Skill.Name == skillCooldown.Skill.Name))
+                    {
+                        Refresh?.Invoke(skillCooldown);
+                    }
+                    else
+                    {
+                        //not present
+                        App.Current.Dispatcher.Invoke(() => NormalSkillsQueue.Add(skillCooldown));
+                    }
                 }
-                else
+                else 
                 {
-                    LongSkillsQueue.Add(skillCooldown);
+                    if (LongSkillsQueue.ToList().Any(x => x.Skill.Name == skillCooldown.Skill.Name))
+                    {
+                        Refresh?.Invoke(skillCooldown);
+                    }
+                    else
+                    {
+                        //not present
+                        App.Current.Dispatcher.Invoke(() => LongSkillsQueue.Add(skillCooldown));
+                    }
                 }
             }
-
-
-            //string skillName = SkillsDatabase.SkillIdToName(sk.Id, SessionManager.CurrentClass);
-            //if (sk.Cooldown == 0)
-            //{
-            //    ResetSkill(sk.Id);
-            //}
-            //else if (Filter(skillName) && !LastSkills.Contains(skillName))
-            //{
-            //    if (sk.Cooldown >= LongSkillTreshold)
-            //    {
-            //        LongSkillsQueue.Add(sk);
-            //    }
-            //    else
-            //    {
-            //        NormalSkillsQueue.Add(sk);
-            //    }
-            //    LastSkills.Add(skillName);
-            //}
-            //else
-            //{
-            //    Console.WriteLine("Skill not added: {0} {1}", sk.Id, SessionManager.CurrentClass);
-
-            //}
         }
         public static void AddBrooch(S_START_COOLTIME_ITEM packet)
         {
             if (BroochesDatabase.TryGetBrooch(packet.ItemId, out Skill brooch))
             {
                 SkillCooldown broochCooldown = new SkillCooldown(brooch, (int)packet.Cooldown, CooldownType.Item);
-                //Console.WriteLine("Received {0} - {1}", broochCooldown.Skill.Id, broochCooldown.Skill.Name);
                 if (LongSkillsQueue.Any(x => x.Skill.Name == broochCooldown.Skill.Name))
                 {
                     return;
                 }
                 else
                 {
-                    LongSkillsQueue.Add(broochCooldown);
+                    App.Current.Dispatcher.Invoke(()=> LongSkillsQueue.Add(broochCooldown));
                 }
             }
-            //if (BroochesDatabase.GetBrooch(sk.Id) != null)
-            //{
-            //    var name = BroochesDatabase.GetBrooch(sk.Id).Name;
-            //    if (!LastSkills.Contains(name))
-            //    {
-            //        LongSkillsQueue.Add(sk);
-            //        LastSkills.Add(name);
-            //        //Console.WriteLine("{0} added.", name);
-            //    }
-            //    else
-            //    {
-            //        Console.WriteLine("Brooch not added: {0}", sk.Id);
-            //    }
-            //}
 
         }
 
@@ -137,11 +102,11 @@ namespace TCC
         {
             Reset?.Invoke(sk);
         }
-        public static void ChangeSkillCooldown(S_DECREASE_COOLTIME_SKILL packet)
+        public static void ChangeSkillCooldown(uint id, int cd)
         {
-            if (SkillsDatabase.TryGetSkill(packet.SkillId, SessionManager.CurrentPlayer.Class, out Skill skill))
+            if (SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out Skill skill))
             {
-                Changed?.Invoke(new SkillCooldown(skill, (int)packet.Cooldown, CooldownType.Skill));
+                Changed?.Invoke(new SkillCooldown(skill, cd, CooldownType.Skill));
             }
 
             //if (sk.Cooldown > SkillManager.LongSkillTreshold)
@@ -200,6 +165,7 @@ namespace TCC
 
         public static void Clear()
         {
+            
             App.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
                 NormalSkillsQueue.Clear();
