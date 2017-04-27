@@ -443,6 +443,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="resources\images\Icon_Laurels\blank.png" />
     <Resource Include="resources\images\combat.png" />
     <Content Include="resources\database\monsters-EU-EN.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
