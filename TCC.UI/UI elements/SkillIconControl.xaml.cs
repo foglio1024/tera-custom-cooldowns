@@ -119,6 +119,7 @@ namespace TCC
                 NumberTimer.IsEnabled = true;
                 CurrentCD = (double)s.Cooldown / 1000;
                 double newAngle = (double)s.Cooldown / (double)Cooldown;
+                if (Cooldown == 0) newAngle = 0;
                 if (newAngle > 1) newAngle = 1;
 
                 if (s.Cooldown > ending)
@@ -129,9 +130,7 @@ namespace TCC
                 {
                     MainTimer.Interval = TimeSpan.FromMilliseconds(1);
                 }
-
-                //arc.BeginAnimation(Arc.EndAngleProperty, null);
-                //Console.WriteLine("Animating to newAngle = {1}/{2} {0}", newAngle, s.Cooldown, Cooldown);
+                
                 arc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9 * newAngle, 0, TimeSpan.FromMilliseconds(s.Cooldown)));
             });
         }
@@ -203,9 +202,15 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null) return "";
-            string iconName = value.ToString();
-            iconName = iconName.Replace(".", "/");
+            string iconName = "unknown";
+            if (value != null)
+            {
+                if (value.ToString() != "")
+                {
+                    iconName = value.ToString();
+                    iconName = iconName.Replace(".", "/");
+                }
+            }
             return Environment.CurrentDirectory + "/resources/images/" + iconName + ".png";
         }
 
