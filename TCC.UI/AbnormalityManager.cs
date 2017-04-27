@@ -14,7 +14,7 @@ namespace TCC
         {
             if (AbnormalityDatabase.Abnormalities.TryGetValue(id, out Abnormality ab))
             {
-                Filter(ab);
+                if(!Filter(ab)) return;
                 if (target == SessionManager.CurrentPlayer.EntityId)
                 {
                     BeginPlayerAbnormality(ab, stacks, duration, target);
