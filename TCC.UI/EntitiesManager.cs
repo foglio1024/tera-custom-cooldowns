@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using TCC.Data;
@@ -8,6 +9,7 @@ namespace TCC
     public static class EntitiesManager
     {
         public static ObservableCollection<Boss> CurrentBosses = new ObservableCollection<Boss>();
+        public static ObservableCollection<Player> CurrentUsers = new ObservableCollection<Player>();
         public static bool TryGetBossById(ulong id, out Boss b)
         {
             b = CurrentBosses.FirstOrDefault(x => x.EntityId == id);
@@ -28,18 +30,28 @@ namespace TCC
         {
             if (MonsterDatabase.TryGetMonster(templateId, zoneId, out Monster m))
             {
-                if(zoneId == 950)
-                {
-                    System.Console.WriteLine("[S_SPAWN_NPC] 950 - {0} - {1}", templateId, m.Name);
-                }
-                if ((m.IsBoss || m.MaxHP >= 40000000) || force)
+                System.Console.WriteLine("[S_SPAWN_NPC] {0} {1} - {2}", zoneId,templateId, m.Name);
+
+                if ((m.IsBoss || m.MaxHP >= 20000000) || force)
                 {
                     App.Current.Dispatcher.Invoke(() =>
                     {
                         CurrentBosses.Add(new Boss(entityId, zoneId, templateId, v));
+                        System.Console.WriteLine("\t[ADDED] {0} {1} - {2}", zoneId, templateId, m.Name);
+
                     });
                 }
+                else
+                {
+                    System.Console.WriteLine("\t[SKIPPED] {0} {1} - {2}", zoneId, templateId, m.Name);
+                }
             }
+            else
+            {
+                System.Console.WriteLine("\t[NOT FOUND] {0} {1}", zoneId, templateId);
+
+            }
+
         }
         public static void DespawnNPC(ulong target)
         {
@@ -88,6 +100,14 @@ namespace TCC
             App.Current.Dispatcher.Invoke(() =>
             {
                 CurrentBosses.Clear();
+                Console.WriteLine("NPCs cleared");
+            });
+        }
+        public static void ClearUsers()
+        {
+            App.Current.Dispatcher.Invoke(() =>
+            {
+                CurrentUsers.Clear();
             });
         }
         public static void CheckHarrowholdMode(ushort zoneId, uint templateId)
@@ -187,6 +207,25 @@ namespace TCC
             }
 
         }
+
+        public static void SpawnUser(ulong entityId, string name)
+        {
+            App.Current.Dispatcher.Invoke(() =>
+            {
+                CurrentUsers.Add(new Player(entityId, name));
+            });
+        }
+        public static void DespawnUser(ulong entityId)
+        {
+            if(TryGetUserById(entityId, out Player p))
+            {
+                App.Current.Dispatcher.Invoke(() =>
+                {
+                    CurrentUsers.Remove(p);
+                });
+            }
+        }
+
         static void UnsetDragonsContexts(ulong target)
         {
             WindowManager.BossGauge.Dispatcher.Invoke(() =>
@@ -226,5 +265,19 @@ namespace TCC
             });
         }
 
+        public static bool TryGetUserById(ulong id, out Player p)
+        {
+            p = CurrentUsers.FirstOrDefault(x => x.EntityId == id);
+            if (p == null)
+            {
+                p = new Player();
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
     }
 }
