@@ -10,11 +10,7 @@ using TCC.Data;
 using TCC.Messages;
 using TCC.Parsing.Messages;
 using Tera.Game;
-namespace TCC
-{
-    public delegate void UpdateStatWithIdEventHandler(ulong id, object statValue);
 
-}
 namespace TCC.Parsing
 {
 
@@ -65,7 +61,6 @@ namespace TCC.Parsing
                 if (!MessageFactory.Process(message))
                 {
                 }
-
             }
         }
 
@@ -158,10 +153,46 @@ namespace TCC.Parsing
                     break;
             }                   
         }
+        public static void HandleUserEffect(S_USER_EFFECT p)
+        {
+            if(EntitiesManager.TryGetBossById(p.Source, out Boss b))
+            {
+                if (p.Action == AggroAction.Remove)
+                {
+                    b.Target = p.User;
+                    switch (p.Circle)
+                    {
+                        case AggroCircle.Main:
+                            break;
+                        case AggroCircle.Secondary:
+                            b.CurrentAggroType = AggroCircle.Main;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else 
+                {
+                    b.Target = p.User;
+                    b.CurrentAggroType = p.Circle;
+                }
+            }
+        }
         public static void HandleLoadTopo(S_LOAD_TOPO x)
         {
             SessionManager.LoadingScreen = true;
         }
+
+        public static void HandleDespawnUser(S_DESPAWN_USER p)
+        {
+            EntitiesManager.DespawnUser(p.EntityId);
+        }
+
+        public static void HandleSpawnUser(S_SPAWN_USER p)
+        {
+            EntitiesManager.SpawnUser(p.EntityId, p.Name);
+        }
+
         public static void HandleLoadTopoFin(C_LOAD_TOPO_FIN x)
         {
             //SessionManager.LoadingScreen = false;
@@ -183,6 +214,21 @@ namespace TCC.Parsing
         public static void HandleCreatureChangeHP(S_CREATURE_CHANGE_HP p)
         {
             SessionManager.SetPlayerHP(p.target, p.currentHP);
+            if(EntitiesManager.TryGetBossById(p.target, out Boss b))
+            {
+                if(b.Visible == System.Windows.Visibility.Collapsed)
+                {
+                    b.Visible = System.Windows.Visibility.Visible;
+                }
+                if (b.MaxHP != p.maxHP)
+                {
+                    b.MaxHP = p.maxHP;
+                }
+                Console.WriteLine("Changing hp from {0} to {1}", b.CurrentHP, p.currentHP);
+                b.CurrentHP = p.currentHP;
+                Console.WriteLine("Result: {0}", b.CurrentHP);
+
+            }
         }
         public static void HandlePlayerChangeStamina(S_PLAYER_CHANGE_STAMINA p)
         {
@@ -196,6 +242,7 @@ namespace TCC.Parsing
         {
             //WindowManager.ShowWindow(WindowManager.CharacterWindow);
             EntitiesManager.ClearNPC();
+            EntitiesManager.ClearUsers();
             System.Timers.Timer t = new System.Timers.Timer(2000);
             t.Elapsed += (s, ev) =>
             {
@@ -219,12 +266,20 @@ namespace TCC.Parsing
         public static void HandleNpcStatusChanged(S_NPC_STATUS p)
         {
             EntitiesManager.SetNPCStatus(p.EntityId, p.IsEnraged);
+            if(EntitiesManager.TryGetBossById(p.EntityId, out Boss b))
+            {
+                if (p.Target == 0)
+                {
+                    b.Target = 0;
+                    b.CurrentAggroType = AggroCircle.None;
+                }
+            }
         }
-        public static void HandleNpcDespawn(S_DESPAWN_NPC p)
+        public static void HandleDespawnNpc(S_DESPAWN_NPC p)
         {
             EntitiesManager.DespawnNPC(p.target);
         }
-        public static void HandleNpcSpawn(S_SPAWN_NPC p)
+        public static void HandleSpawnNpc(S_SPAWN_NPC p)
         {
             EntitiesManager.SpawnNPC(p.HuntingZoneId, p.TemplateId, p.EntityId, System.Windows.Visibility.Collapsed, false);
             EntitiesManager.CheckHarrowholdMode(p.HuntingZoneId, p.TemplateId);

@@ -39,36 +39,42 @@ namespace TCC.Parsing
             { "S_SPAWN_ME" , Contructor<Func<TeraMessageReader,S_SPAWN_ME>>()},
             { "S_RETURN_TO_LOBBY" , Contructor<Func<TeraMessageReader,S_RETURN_TO_LOBBY>>()},
             { "C_PLAYER_LOCATION" , Contructor<Func<TeraMessageReader,C_PLAYER_LOCATION>>() },
+            { "S_USER_EFFECT" , Contructor<Func<TeraMessageReader,S_USER_EFFECT>>() },
             { "S_LOAD_TOPO" , Contructor<Func<TeraMessageReader,S_LOAD_TOPO>>() },
-            { "C_LOAD_TOPO_FIN" , Contructor<Func<TeraMessageReader,C_LOAD_TOPO_FIN>>() }
+            { "C_LOAD_TOPO_FIN" , Contructor<Func<TeraMessageReader,C_LOAD_TOPO_FIN>>() },
+            {"S_SPAWN_USER", Contructor<Func<TeraMessageReader, S_SPAWN_USER>>() },
+            {"S_DESPAWN_USER", Contructor<Func<TeraMessageReader, S_DESPAWN_USER>>() }
         };
 
         private static Dictionary<Type, Delegate> MainProcessor = new Dictionary<Type, Delegate>();
         private static readonly Dictionary<Type, Delegate> MessageToProcessing = new Dictionary<Type, Delegate>
         {
-            { typeof(S_LOGIN), new Action<S_LOGIN>(x => PacketRouter.HandleCharLogin(x)) },
-            { typeof(S_START_COOLTIME_SKILL), new Action<S_START_COOLTIME_SKILL>(x => PacketRouter.HandleNewSkillCooldown(x)) },
-            { typeof(S_DECREASE_COOLTIME_SKILL), new Action<S_DECREASE_COOLTIME_SKILL>(x => PacketRouter.HandleDecreaseSkillCooldown(x)) },
-            { typeof(S_START_COOLTIME_ITEM), new Action<S_START_COOLTIME_ITEM>(x => PacketRouter.HandleNewItemCooldown(x)) },
-            { typeof(S_PLAYER_CHANGE_MP), new Action<S_PLAYER_CHANGE_MP>(x => PacketRouter.HandlePlayerChangeMP(x)) },
-            { typeof(S_CREATURE_CHANGE_HP), new Action<S_CREATURE_CHANGE_HP>(x => PacketRouter.HandleCreatureChangeHP(x)) },
-            { typeof(S_PLAYER_CHANGE_STAMINA), new Action<S_PLAYER_CHANGE_STAMINA>(x => PacketRouter.HandlePlayerChangeStamina(x)) },
-            { typeof(S_PLAYER_CHANGE_FLIGHT_ENERGY), new Action<S_PLAYER_CHANGE_FLIGHT_ENERGY>(x => PacketRouter.HandlePlayerChangeFlightEnergy(x)) },
-            { typeof(S_PLAYER_STAT_UPDATE), new Action<S_PLAYER_STAT_UPDATE>(x => PacketRouter.HandlePlayerStatUpdate(x)) },
-            { typeof(S_USER_STATUS), new Action<S_USER_STATUS>(x => PacketRouter.HandleUserStatusChanged(x)) },
-            { typeof(S_SPAWN_NPC), new Action<S_SPAWN_NPC>(x => PacketRouter.HandleNpcSpawn(x)) },
-            { typeof(S_DESPAWN_NPC), new Action<S_DESPAWN_NPC>(x => PacketRouter.HandleNpcDespawn(x)) },
-            { typeof(S_NPC_STATUS), new Action<S_NPC_STATUS>(x => PacketRouter.HandleNpcStatusChanged(x)) },
-            { typeof(S_ABNORMALITY_BEGIN), new Action<S_ABNORMALITY_BEGIN>(x => PacketRouter.HandleAbnormalityBegin(x)) },
-            { typeof(S_ABNORMALITY_REFRESH), new Action<S_ABNORMALITY_REFRESH>(x => PacketRouter.HandleAbnormalityRefresh(x)) },
-            { typeof(S_ABNORMALITY_END), new Action<S_ABNORMALITY_END>(x => PacketRouter.HandleAbnormalityEnd(x)) },
-            { typeof(S_GET_USER_LIST), new Action<S_GET_USER_LIST>(x => PacketRouter.HandleCharList(x)) },
-            { typeof(S_SPAWN_ME), new Action<S_SPAWN_ME>(x => PacketRouter.HandleSpawnMe(x)) },
-            { typeof(S_RETURN_TO_LOBBY), new Action<S_RETURN_TO_LOBBY>(x => PacketRouter.HandleReturnToLobby(x)) },
-            { typeof(S_BOSS_GAGE_INFO), new Action<S_BOSS_GAGE_INFO>(x => PacketRouter.HandleGageReceived(x)) },
+            {typeof(S_LOGIN), new Action<S_LOGIN>(x => PacketRouter.HandleCharLogin(x)) },
+            {typeof(S_START_COOLTIME_SKILL), new Action<S_START_COOLTIME_SKILL>(x => PacketRouter.HandleNewSkillCooldown(x)) },
+            {typeof(S_DECREASE_COOLTIME_SKILL), new Action<S_DECREASE_COOLTIME_SKILL>(x => PacketRouter.HandleDecreaseSkillCooldown(x)) },
+            {typeof(S_START_COOLTIME_ITEM), new Action<S_START_COOLTIME_ITEM>(x => PacketRouter.HandleNewItemCooldown(x)) },
+            {typeof(S_PLAYER_CHANGE_MP), new Action<S_PLAYER_CHANGE_MP>(x => PacketRouter.HandlePlayerChangeMP(x)) },
+            {typeof(S_CREATURE_CHANGE_HP), new Action<S_CREATURE_CHANGE_HP>(x => PacketRouter.HandleCreatureChangeHP(x)) },
+            {typeof(S_PLAYER_CHANGE_STAMINA), new Action<S_PLAYER_CHANGE_STAMINA>(x => PacketRouter.HandlePlayerChangeStamina(x)) },
+            {typeof(S_PLAYER_CHANGE_FLIGHT_ENERGY), new Action<S_PLAYER_CHANGE_FLIGHT_ENERGY>(x => PacketRouter.HandlePlayerChangeFlightEnergy(x)) },
+            {typeof(S_PLAYER_STAT_UPDATE), new Action<S_PLAYER_STAT_UPDATE>(x => PacketRouter.HandlePlayerStatUpdate(x)) },
+            {typeof(S_USER_STATUS), new Action<S_USER_STATUS>(x => PacketRouter.HandleUserStatusChanged(x)) },
+            {typeof(S_SPAWN_NPC), new Action<S_SPAWN_NPC>(x => PacketRouter.HandleSpawnNpc(x)) },
+            {typeof(S_DESPAWN_NPC), new Action<S_DESPAWN_NPC>(x => PacketRouter.HandleDespawnNpc(x)) },
+            {typeof(S_NPC_STATUS), new Action<S_NPC_STATUS>(x => PacketRouter.HandleNpcStatusChanged(x)) },
+            {typeof(S_ABNORMALITY_BEGIN), new Action<S_ABNORMALITY_BEGIN>(x => PacketRouter.HandleAbnormalityBegin(x)) },
+            {typeof(S_ABNORMALITY_REFRESH), new Action<S_ABNORMALITY_REFRESH>(x => PacketRouter.HandleAbnormalityRefresh(x)) },
+            {typeof(S_ABNORMALITY_END), new Action<S_ABNORMALITY_END>(x => PacketRouter.HandleAbnormalityEnd(x)) },
+            {typeof(S_GET_USER_LIST), new Action<S_GET_USER_LIST>(x => PacketRouter.HandleCharList(x)) },
+            {typeof(S_SPAWN_ME), new Action<S_SPAWN_ME>(x => PacketRouter.HandleSpawnMe(x)) },
+            {typeof(S_RETURN_TO_LOBBY), new Action<S_RETURN_TO_LOBBY>(x => PacketRouter.HandleReturnToLobby(x)) },
+            {typeof(S_BOSS_GAGE_INFO), new Action<S_BOSS_GAGE_INFO>(x => PacketRouter.HandleGageReceived(x)) },
             {typeof(C_PLAYER_LOCATION), new Action<C_PLAYER_LOCATION>(x => PacketRouter.HandlePlayerLocation(x)) },
+            {typeof(S_USER_EFFECT), new Action<S_USER_EFFECT>(x => PacketRouter.HandleUserEffect(x)) },
             {typeof(S_LOAD_TOPO), new Action<S_LOAD_TOPO>(x => PacketRouter.HandleLoadTopo(x)) },
-            {typeof(C_LOAD_TOPO_FIN), new Action<C_LOAD_TOPO_FIN>(x => PacketRouter.HandleLoadTopoFin(x)) }
+            {typeof(C_LOAD_TOPO_FIN), new Action<C_LOAD_TOPO_FIN>(x => PacketRouter.HandleLoadTopoFin(x)) },
+            {typeof(S_SPAWN_USER), new Action<S_SPAWN_USER>(x => PacketRouter.HandleSpawnUser(x)) },
+            {typeof(S_DESPAWN_USER), new Action<S_DESPAWN_USER>(x => PacketRouter.HandleDespawnUser(x)) }
 
         };
 
