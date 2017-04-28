@@ -14,6 +14,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using TCC.ViewModels;
 using TCC.Windows;
 
 namespace TCC
@@ -43,6 +44,8 @@ namespace TCC
         {
             CooldownWindow = new CooldownWindow();
             CharacterWindow = new CharacterWindow();
+            //CharacterWindow.DataContext = new CharacterWindowViewModel();
+
             BossGauge = new BossGageWindow();
             BuffBar = new AbnormalitiesWindow();
 

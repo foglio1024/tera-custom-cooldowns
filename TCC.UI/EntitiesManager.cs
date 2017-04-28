@@ -30,20 +30,20 @@ namespace TCC
         {
             if (MonsterDatabase.TryGetMonster(templateId, zoneId, out Monster m))
             {
-                System.Console.WriteLine("[S_SPAWN_NPC] {0} {1} - {2}", zoneId,templateId, m.Name);
+                //System.Console.WriteLine("[S_SPAWN_NPC] {0} {1} - {2}", zoneId,templateId, m.Name);
 
                 if ((m.IsBoss || m.MaxHP >= 20000000) || force)
                 {
                     App.Current.Dispatcher.Invoke(() =>
                     {
                         CurrentBosses.Add(new Boss(entityId, zoneId, templateId, v));
-                        System.Console.WriteLine("\t[ADDED] {0} {1} - {2}", zoneId, templateId, m.Name);
+                        //System.Console.WriteLine("\t[ADDED] {0} {1} - {2}", zoneId, templateId, m.Name);
 
                     });
                 }
                 else
                 {
-                    System.Console.WriteLine("\t[SKIPPED] {0} {1} - {2}", zoneId, templateId, m.Name);
+                    //System.Console.WriteLine("\t[SKIPPED] {0} {1} - {2}", zoneId, templateId, m.Name);
                 }
             }
             else

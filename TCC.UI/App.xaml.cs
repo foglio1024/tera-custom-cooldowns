@@ -62,7 +62,7 @@ namespace TCC
                 AbnormalityDatabase.Load();
                 Console.WriteLine("Abnormalities loaded");
                 WindowManager.CooldownWindow.LoadingDone();
-                Debug();
+                //Debug();
 
             }));
 

@@ -9,6 +9,7 @@ using System.Windows.Media;
 using TCC.Data;
 using TCC.Messages;
 using TCC.Parsing.Messages;
+using TCC.ViewModels;
 using Tera.Game;
 
 namespace TCC.Parsing
@@ -104,6 +105,8 @@ namespace TCC.Parsing
             {
                 WindowManager.ChangeClickThru(WindowManager.Transparent);
             });
+
+
         }
         public static void HandlePlayerLocation(C_PLAYER_LOCATION p)
         {
@@ -127,7 +130,7 @@ namespace TCC.Parsing
         public static void HandleReturnToLobby(S_RETURN_TO_LOBBY p)
         {
             SessionManager.Logged = false;
-            WindowManager.CharacterWindow.Reset();
+            //WindowManager.CharacterWindow.Reset();
             SkillManager.Clear();
             SessionManager.ClearPlayersAbnormalities();
             EntitiesManager.ClearNPC();
@@ -182,17 +185,14 @@ namespace TCC.Parsing
         {
             SessionManager.LoadingScreen = true;
         }
-
         public static void HandleDespawnUser(S_DESPAWN_USER p)
         {
             EntitiesManager.DespawnUser(p.EntityId);
         }
-
         public static void HandleSpawnUser(S_SPAWN_USER p)
         {
             EntitiesManager.SpawnUser(p.EntityId, p.Name);
         }
-
         public static void HandleLoadTopoFin(C_LOAD_TOPO_FIN x)
         {
             //SessionManager.LoadingScreen = false;

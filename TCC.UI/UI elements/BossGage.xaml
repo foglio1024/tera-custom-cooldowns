@@ -153,7 +153,7 @@
                         <!--<Polygon Points="0,7 5,0 10,7"  Margin="0,0,0,0"  Fill="Orange" VerticalAlignment="Center" Height="Auto"  HorizontalAlignment="Center" Grid.Column="1" >
                         </Polygon>-->
                         <Ellipse Fill="#fa0" Width="6" Height="{Binding ElementName=enrageEll, Path=Width}" Name="enrageEll" Stroke="#fb0"/>
-                        <TextBlock Width="Auto" Text="100" Name="NextEnrageTB" FontSize="10" Foreground="White" TextAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,0" Padding="0"></TextBlock>
+                        <TextBlock Width="Auto" Text="100" Name="NextEnrageTB" FontSize="12" Foreground="White" TextAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,0" Padding="0"></TextBlock>
                     </StackPanel>
                 </Grid>
             </Grid>

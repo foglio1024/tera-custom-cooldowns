@@ -311,6 +311,8 @@
     </Compile>
     <Compile Include="UpdateManager.cs" />
     <Compile Include="Utils.cs" />
+    <Compile Include="ViewModels\BaseINPC.cs" />
+    <Compile Include="ViewModels\CharacterWindowViewModel.cs" />
     <Compile Include="Windows\AbnormalitiesWindow.xaml.cs">
       <DependentUpon>AbnormalitiesWindow.xaml</DependentUpon>
     </Compile>
@@ -325,6 +327,11 @@
     <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_MP.cs" />
     <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_STAMINA.cs" />
     <Compile Include="Parsing\PacketRouter.cs" />
+    <Compile Include="Converters\ClassImageConverter.cs" />
+    <Compile Include="Converters\CombatToColorConverter.cs" />
+    <Compile Include="Converters\HPbarColorConverter.cs" />
+    <Compile Include="Converters\HP_PercentageConverter.cs" />
+    <Compile Include="Converters\LaurelImageConverter.cs" />
     <Compile Include="Windows\StaminaGauge.xaml.cs">
       <DependentUpon>StaminaGauge.xaml</DependentUpon>
     </Compile>
