@@ -4,7 +4,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 
+namespace TCC
+{
+    public delegate void UpdateBossEnrageEventHandler(ulong id, bool enraged);
+    public delegate void UpdateBossHPEventHandler(ulong id, float hp);
 
+}
 namespace TCC.Data
 {
     public class Boss : INotifyPropertyChanged
@@ -25,8 +30,8 @@ namespace TCC.Data
         public ObservableCollection<AbnormalityDuration> Buffs;
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public static event UpdateStatWithIdEventHandler BossHPChanged;
-        public static event UpdateStatWithIdEventHandler EnragedChanged;
+        public static event UpdateBossHPEventHandler BossHPChanged;
+        public static event UpdateBossEnrageEventHandler EnragedChanged;
 
         bool enraged;
         public bool Enraged
@@ -39,10 +44,6 @@ namespace TCC.Data
                     enraged = value;
                     NotifyPropertyChanged("Enraged");
                     EnragedChanged?.Invoke(EntityId, value);
-                    if(Name == "Terradrax")
-                    {
-                        Console.WriteLine("Terradrax enrage changed ({0})", value);
-                    }
                 }
             }
         }
@@ -82,6 +83,34 @@ namespace TCC.Data
                 }
             }
         }
+
+        private ulong target;
+        public ulong Target
+        {
+            get { return target; }
+            set {
+                if (target != value)
+                {
+                    target = value;
+                    NotifyPropertyChanged("Target");
+                }
+            }
+        }
+
+        private AggroCircle currentAggroType = AggroCircle.None;
+        public AggroCircle CurrentAggroType
+        {
+            get { return currentAggroType; }
+            set
+            {
+                if (currentAggroType != value)
+                { 
+                    currentAggroType = value;
+                    NotifyPropertyChanged("CurrentAggroType");
+                }
+            }
+        }
+
 
         public void NotifyPropertyChanged(string v)
         {

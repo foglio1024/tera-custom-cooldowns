@@ -55,4 +55,16 @@ namespace TCC
         Umbradrax,
         Terradrax
     }
+
+    public enum AggroCircle
+    {
+        Main = 2,
+        Secondary = 3,
+        None = 255 //arbitrary
+    }
+    public enum AggroAction
+    {
+        Add = 1,
+        Remove = 2
+    }
 }

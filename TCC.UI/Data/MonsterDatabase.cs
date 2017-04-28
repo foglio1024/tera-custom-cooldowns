@@ -57,15 +57,15 @@ namespace TCC.Data
             }
         }
 
-        public static bool TryGetMonster(uint npc, uint type, out Monster m)
+        public static bool TryGetMonster(uint templateId, uint zoneId, out Monster m)
         {
-            if(Zones.Where(x => x.Id == type).Count() > 0)
+            if(Zones.Where(x => x.Id == zoneId).Count() > 0)
             {
                 //found zone
-                if(Zones.Where(x => x.Id == type).Single().Monsters.Where(x => x.Id == npc).Count() > 0)
+                if(Zones.Where(x => x.Id == zoneId).Single().Monsters.Where(x => x.Id == templateId).Count() > 0)
                 {
                     //found monster
-                    m = Zones.Where(x => x.Id == type).Single().Monsters.Where(x => x.Id == npc).FirstOrDefault();
+                    m = Zones.Where(x => x.Id == zoneId).Single().Monsters.Where(x => x.Id == templateId).FirstOrDefault();
                     return true;
                 }
                 else
@@ -81,17 +81,17 @@ namespace TCC.Data
             }
         }
 
-        public static string GetName(uint npc, uint type)
+        public static string GetName(uint templateId, uint zoneId)
         {
-            if (TryGetMonster(npc, type, out Monster m))
+            if (TryGetMonster(templateId, zoneId, out Monster m))
             {
                 return m.Name;
             }
             else return "Unknown";
         }
-        public static int GetMaxHP(uint npc, uint type)
+        public static int GetMaxHP(uint templateId, uint zoneId)
         {
-            if (TryGetMonster(npc, type, out Monster m))
+            if (TryGetMonster(templateId, zoneId, out Monster m))
             {
                 return m.MaxHP;
             }

@@ -284,5 +284,14 @@ namespace TCC.Data
             Debuffs = new ObservableCollection<AbnormalityDuration>();
             InfBuffs = new ObservableCollection<AbnormalityDuration>();
         }
+
+        public Player(ulong id, string name)
+        {
+            Buffs = new ObservableCollection<AbnormalityDuration>();
+            Debuffs = new ObservableCollection<AbnormalityDuration>();
+            InfBuffs = new ObservableCollection<AbnormalityDuration>();
+            entityId = id;
+            this.name = name;
+        }
     }
 }
