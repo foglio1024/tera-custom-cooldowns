@@ -26,6 +26,10 @@ namespace TCC
                 timer.Start();
             }
         }
+        public AbnormalityDuration()
+        {
+
+        }
         ~AbnormalityDuration()
         {
             timer.Stop();
