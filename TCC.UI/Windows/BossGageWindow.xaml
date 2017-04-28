@@ -24,7 +24,9 @@
                             MaxHP="{Binding MaxHP}"
                             CurrentHP="{Binding CurrentHP}"
                             BossName="{Binding Name}"
-                            Visibility="{Binding Visible}"/>
+                            Visibility="{Binding Visible}"
+                            Target="{Binding Target}"
+                            CurrentAggroType="{Binding CurrentAggroType}"/>
         </DataTemplate>
         <converters:HarrowholdBossesVisibilityConverter x:Key="hhBossesVisConv"/>
     </Window.Resources>

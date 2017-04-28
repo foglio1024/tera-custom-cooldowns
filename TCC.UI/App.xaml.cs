@@ -62,13 +62,14 @@ namespace TCC
                 AbnormalityDatabase.Load();
                 Console.WriteLine("Abnormalities loaded");
                 WindowManager.CooldownWindow.LoadingDone();
+                Debug();
+
             }));
 
             SessionManager.CurrentPlayer.Class = Class.None;
 
             WindowManager.ShowWindow(WindowManager.CooldownWindow);
             LoadThread.Start();
-            //Debug();
 
         }
 
@@ -166,7 +167,26 @@ namespace TCC
         public static void Debug()
         {
             SessionManager.Logged = true;
-            
+            SessionManager.LoadingScreen = false;
+            EntitiesManager.SpawnNPC(970, 3000, 1, Visibility.Visible, true);
+            System.Timers.Timer t = new System.Timers.Timer(1000);
+            EntitiesManager.TryGetBossById(1, out Boss b);
+            EntitiesManager.SetNPCStatus(1, true);
+            t.Elapsed += (se, ev) =>
+            {
+                if (b.CurrentHP == 0)
+                {
+                    b.CurrentHP = b.MaxHP;
+                }
+                else
+                {
+
+                    b.CurrentHP = 0;
+                }
+            };
+
+            t.Enabled = true;
+
 
         }
     }

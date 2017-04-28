@@ -68,6 +68,8 @@ namespace TCC
             SessionManager.CurrentPlayer.STUpdated += UpdateST;
             SessionManager.CurrentPlayer.FlightEnergyUpdated += UpdateFlightEnergy;
 
+            
+
             hpBar.Width = @base.Width;
             mpBar.Width = @base.Width;
             stBar.Width = @base.Width;

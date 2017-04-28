@@ -162,14 +162,14 @@ namespace TCC.UI_elements
                 NextEnrage.RenderTransform.BeginAnimation(TranslateTransform.XProperty, SlideAnimation);
             });
         }
-        private void BossGage_HPUpdated(ulong id, object hp)
+        private void BossGage_HPUpdated(ulong id, float hp)
         {
 
             Dispatcher.Invoke(() =>
             {
                 if (id == EntityId)
                 {
-                    CurrentHP = Convert.ToInt32(hp);
+                    CurrentHP = hp;
                     if (CurrentHP > MaxHP)
                     {
                         MaxHP = CurrentHP;
@@ -188,7 +188,7 @@ namespace TCC.UI_elements
                 }
             });
         }
-        private void BossGage_EnragedUpdated(ulong id, object enraged)
+        private void BossGage_EnragedUpdated(ulong id, bool enraged)
         {
             Dispatcher.Invoke(() =>
             {
@@ -196,10 +196,10 @@ namespace TCC.UI_elements
                 {
                     //Console.WriteLine("{0} enraged updated.", DragonName);
 
-                    Enraged = (bool)enraged;
-                    if ((bool)enraged)
+                    Enraged = enraged;
+                    if (enraged)
                     {
-                        Enraged = (bool)enraged;
+                        Enraged = enraged;
                         NextEnrageTB.Text = CurrentEnrageTime.ToString();
 
                         SlideNextEnrage(CurrentPercentage);

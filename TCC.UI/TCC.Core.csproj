@@ -29,7 +29,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -124,11 +124,14 @@
     <Compile Include="Parsing\Messages\S_ABNORMALITY_REFRESH.cs" />
     <Compile Include="Parsing\Messages\S_CHAT.cs" />
     <Compile Include="Parsing\Messages\S_DESPAWN_NPC.cs" />
+    <Compile Include="Parsing\Messages\S_DESPAWN_USER.cs" />
     <Compile Include="Parsing\Messages\S_LOAD_TOPO.cs" />
     <Compile Include="Parsing\Messages\S_RETURN_TO_LOBBY.cs" />
     <Compile Include="Parsing\Messages\S_SPAWN_ME.cs" />
     <Compile Include="Parsing\Messages\S_SPAWN_NPC.cs" />
     <Compile Include="Data\Player.cs" />
+    <Compile Include="Parsing\Messages\S_SPAWN_USER.cs" />
+    <Compile Include="Parsing\Messages\S_USER_EFFECT.cs" />
     <Compile Include="Sniffing\ConnectionId.cs" />
     <Compile Include="Sniffing\EndpointIpv4.cs" />
     <Compile Include="Sniffing\IpSniffer.cs" />

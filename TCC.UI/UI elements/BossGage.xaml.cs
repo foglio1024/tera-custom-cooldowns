@@ -21,7 +21,7 @@ namespace TCC
     public partial class BossGage : UserControl, INotifyPropertyChanged
     {
         NumberFormatInfo nfi = new NumberFormatInfo { NumberGroupSeparator = ".", NumberDecimalDigits = 0 };
-
+        Color BaseHpColor = Color.FromRgb(0x00,0x97,0xce);
         public ulong EntityId
         {
             get { return (ulong)GetValue(EntityIdProperty); }
@@ -49,6 +49,21 @@ namespace TCC
             set { SetValue(CurrentHPProperty, value); }
         }
         public static readonly DependencyProperty CurrentHPProperty = DependencyProperty.Register("CurrentHP", typeof(float), typeof(BossGage));
+
+        public ulong Target
+        {
+            get { return (ulong)GetValue(TargetProperty); }
+            set { SetValue(TargetProperty, value); }
+        }
+        public static readonly DependencyProperty TargetProperty = DependencyProperty.Register("Target", typeof(ulong), typeof(BossGage));
+
+        public AggroCircle CurrentAggroType
+        {
+            get { return (AggroCircle)GetValue(CurrentAggroTypeProperty); }
+            set { SetValue(CurrentAggroTypeProperty, value); }
+        }
+        public static readonly DependencyProperty CurrentAggroTypeProperty = DependencyProperty.Register("CurrentAggroType", typeof(AggroCircle), typeof(BossGage));
+
 
 
         bool enraged;
@@ -107,8 +122,9 @@ namespace TCC
 
             BossNameTB.DataContext = this;
             NextEnrageTB.DataContext = this;
-
-            EnrageGrid.RenderTransform = new ScaleTransform(0, 1, 0, .5);
+            AggroHolderNameTB.DataContext = this;
+            
+            //EnrageGrid.RenderTransform = new ScaleTransform(0, 1, 0, .5);
 
             SlideAnimation.EasingFunction = new QuadraticEase();
             ColorChangeAnimation.EasingFunction = new QuadraticEase();
@@ -116,14 +132,21 @@ namespace TCC
             SlideAnimation.Duration = TimeSpan.FromMilliseconds(250);
             ColorChangeAnimation.Duration = TimeSpan.FromMilliseconds(AnimationTime);
             DoubleAnimation.Duration = TimeSpan.FromMilliseconds(AnimationTime);
+
+            HPrect.RenderTransform = new ScaleTransform(1, 1,0,.5);
+
             SetEnragePercTB(90);
+
+            Console.WriteLine("Boss gauge created: {0}", BossName);
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            HPrect.Fill = new SolidColorBrush(Color.FromArgb(0xff, 0x4a, 0x82, 0xbd));
+            HPrect.Fill = new SolidColorBrush(BaseHpColor);
             Abnormalities.ItemsSource = EntitiesManager.CurrentBosses.Where(x => x.EntityId == EntityId).First().Buffs;
             NextEnrage.RenderTransform = new TranslateTransform(BaseRect.Width * .9, 0);
             Perc2.Text = String.Format("{0} / {1}", CurrentHP.ToString("n", nfi), MaxHP.ToString("n", nfi));
+            Console.WriteLine("Boss gauge loaded: {0}", BossName);
+
 
         }
 
@@ -177,7 +200,7 @@ namespace TCC
                 DoubleAnimation.To = 0;
                 HPrect.Effect.BeginAnimation(DropShadowEffect.OpacityProperty, DoubleAnimation);
 
-                ColorChangeAnimation.To = Color.FromArgb(0xff, 0x4a, 0x82, 0xbd);
+                ColorChangeAnimation.To = BaseHpColor;
                 HPrect.Fill.BeginAnimation(SolidColorBrush.ColorProperty, ColorChangeAnimation);
             });
         }
@@ -186,9 +209,9 @@ namespace TCC
             Dispatcher.Invoke(() =>
             {
                 DoubleAnimation.To = 1;
-                EnrageGrid.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, DoubleAnimation);
+                //EnrageGrid.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, DoubleAnimation);
 
-                EnrageArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(EnrageDuration)));
+                //EnrageArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(EnrageDuration)));
 
             });
         }
@@ -197,25 +220,25 @@ namespace TCC
             Dispatcher.Invoke(() =>
             {
                 DoubleAnimation.To = 0;
-                EnrageGrid.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, DoubleAnimation);
+                //EnrageGrid.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, DoubleAnimation);
 
             });
         }
 
-        private void BossGage_HPUpdated(ulong id, object hp)
+        private void BossGage_HPUpdated(ulong id, float hp)
         {      
 
             Dispatcher.Invoke(() =>
             {
                 if (id == EntityId)
                 {
-                    CurrentHP = Convert.ToInt32(hp);
+                    CurrentHP = hp;
                     if (CurrentHP > MaxHP)
                     {
                         MaxHP = CurrentHP;
                     }
                     DoubleAnimation.To = ValueToLength(CurrentHP, MaxHP);
-                    HPrect.BeginAnimation(WidthProperty, DoubleAnimation);
+                    HPrect.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, DoubleAnimation);
 
                     Perc.Text = String.Format("{0:0.0}%", CurrentPercentage);
                     Perc2.Text = String.Format("{0} / {1}", CurrentHP.ToString("n", nfi), MaxHP.ToString("n", nfi));
@@ -228,16 +251,16 @@ namespace TCC
                 }
             });
         }
-        private void BossGage_EnragedUpdated(ulong id, object enraged)
+        private void BossGage_EnragedUpdated(ulong id, bool enraged)
         {
             Dispatcher.Invoke(() =>
             {
                 if (id == this.EntityId)
                 {
-                    Enraged = (bool)enraged;
-                    if ((bool)enraged)
+                    Enraged = enraged;
+                    if (enraged)
                     {
-                        Enraged = (bool)enraged;
+                        Enraged = enraged;
                         //number.Text = CurrentEnrageTime.ToString();
                         NextEnrageTB.Text = CurrentEnrageTime.ToString();
 
@@ -283,11 +306,11 @@ namespace TCC
         {
             if (maxValue == 0)
             {
-                return 0;
+                return 1;
             }
             else
             {
-                double n = BaseRect.ActualWidth * ((double)value / (double)maxValue);
+                double n = ((double)value / (double)maxValue);
                 return n;
             }
 
@@ -306,4 +329,59 @@ namespace TCC
         }
     }
 
+}
+
+namespace TCC.Converters
+{
+    public class EntityIdToNameConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if((ulong)value == SessionManager.CurrentPlayer.EntityId)
+            {
+                return SessionManager.CurrentPlayer.Name;
+            }
+            else
+            {
+                if(EntitiesManager.TryGetUserById((ulong)value, out Player p))
+                {
+                    return p.Name;
+                }
+                else
+                {
+                    return "";
+                }
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class AggroTypeToFill : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            AggroCircle x = (AggroCircle)value;
+
+            switch (x)
+            {
+                case AggroCircle.Main:
+                    return new SolidColorBrush(Colors.Orange);
+                case AggroCircle.Secondary:
+                    return new SolidColorBrush(Color.FromRgb(0x70,0x40,0xff));
+                case AggroCircle.None:
+                    return new SolidColorBrush(Colors.Transparent);
+                default:
+                    return new SolidColorBrush(Colors.Transparent);
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
