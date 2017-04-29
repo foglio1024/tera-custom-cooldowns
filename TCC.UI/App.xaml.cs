@@ -62,7 +62,7 @@ namespace TCC
                 AbnormalityDatabase.Load();
                 Console.WriteLine("Abnormalities loaded");
                 WindowManager.CooldownWindow.LoadingDone();
-                //Debug();
+                Debug();
 
             }));
 
@@ -170,6 +170,8 @@ namespace TCC
             SessionManager.LoadingScreen = false;
             SessionManager.CurrentPlayer.MaxHP = 100;
             SessionManager.CurrentPlayer.CurrentHP = 80;
+            SessionManager.CurrentPlayer.Class = Class.Warrior;
+            SessionManager.CurrentPlayer.Laurel = Laurel.Champion;
             //EntitiesManager.SpawnNPC(970, 3000, 1, Visibility.Visible, true);
             //System.Timers.Timer t = new System.Timers.Timer(1000);
             //EntitiesManager.TryGetBossById(1, out Boss b);

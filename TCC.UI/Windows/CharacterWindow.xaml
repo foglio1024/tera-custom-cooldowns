@@ -73,19 +73,14 @@
     <Window.DataContext>
         <vm:CharacterWindowViewModel/>
     </Window.DataContext>
-    <Grid Margin="10,0" UseLayoutRounding="True" SnapsToDevicePixels="True" Name="rootGrid">
+    <Grid Margin="20" UseLayoutRounding="True" SnapsToDevicePixels="True" Name="rootGrid">
         <!--<Grid.CacheMode>
             <BitmapCache RenderAtScale="3"/>
         </Grid.CacheMode>-->
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
 
         <Grid Margin="0,0,0,0" Grid.ColumnSpan="2" Grid.Row="0" Width="Auto" Height="Auto" Name="infoGrid">
             <Grid.ColumnDefinitions>
@@ -112,16 +107,15 @@
             <controls:GenericGauge Height="3" Margin="3,0" Width="50" BarColor="#91ffffff" Grid.Column="1"
                                    GaugeName="HP" ShowPercentage="False" ShowName="False" ShowValues="False"
                                    CurrentVal="{Binding Player.FlightEnergy}" MaxVal="{Binding Player.MaxFlightEnergy}"/>
-
         </Grid>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="0,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Border Style="{StaticResource border}" Grid.ColumnSpan="2" Width="Auto" Height="Auto" Margin="0,12"></Border>
-            <Grid Name="imageGrid" Margin="0,8" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0">
+            <Border Style="{StaticResource border}" Grid.ColumnSpan="2" Width="Auto" Height="Auto" Margin="0,5"></Border>
+            <Grid Name="imageGrid" Margin="0,0" Width="80" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0">
                 <Rectangle Name="laurel" Width="74" Height="80" Margin="0,-8,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Rectangle.Fill>
                         <ImageBrush ImageSource="{Binding Player.Laurel, Converter={StaticResource laurelConv}}"/>
@@ -142,7 +136,7 @@
                     <BitmapCache RenderAtScale="3"/>
                 </Grid.CacheMode>
             </Grid>
-            <Grid x:Name="barsHolder" Width="400" Height="Auto" Grid.Column="1" Margin="3,3,3,3" 
+            <Grid x:Name="barsHolder" Width="400" Height="Auto" Grid.Column="1" Margin="3" 
               VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Row="1" SnapsToDevicePixels="True" UseLayoutRounding="True">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
