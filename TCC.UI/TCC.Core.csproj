@@ -318,10 +318,11 @@
     <Compile Include="UpdateManager.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="ViewModels\BaseINPC.cs" />
-    <Compile Include="Converters\CharacterWindowViewModel.cs" />
+    <Compile Include="ViewModels\CharacterWindowViewModel.cs" />
     <Compile Include="Converters\FactorFromValuesConverter.cs" />
     <Compile Include="Converters\StaminaBarColorConverter.cs" />
     <Compile Include="Converters\StaminaBarVisibilityConverter.cs" />
+    <Compile Include="ViewModels\CooldownWindowViewModel.cs" />
     <Compile Include="Windows\AbnormalitiesWindow.xaml.cs">
       <DependentUpon>AbnormalitiesWindow.xaml</DependentUpon>
     </Compile>
@@ -341,6 +342,7 @@
     <Compile Include="Converters\HPbarColorConverter.cs" />
     <Compile Include="Converters\HP_PercentageConverter.cs" />
     <Compile Include="Converters\LaurelImageConverter.cs" />
+    <Compile Include="Windows\SkillCooldown.cs" />
     <Compile Include="Windows\StaminaGauge.xaml.cs">
       <DependentUpon>StaminaGauge.xaml</DependentUpon>
     </Compile>
@@ -355,7 +357,7 @@
     </Compile>
     <Compile Include="Data\Enums.cs" />
     <Compile Include="Data\BroochesDatabase.cs" />
-    <Compile Include="Windows\FocusManager.cs" />
+    <Compile Include="FocusManager.cs" />
     <Compile Include="Parsing\ListParser.cs" />
     <Compile Include="Parsing\Messages\S_ABNORMALITY_BEGIN.cs" />
     <Compile Include="Parsing\Messages\S_DECREASE_COOLTIME_SKILL.cs" />

@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:TCC"
              xmlns:converters="clr-namespace:TCC.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="100" Loaded="ControlLoaded" Unloaded="UserControl_Unloaded">
+             d:DesignHeight="100" d:DesignWidth="100" Loaded="ControlLoaded" Unloaded="UserControl_Unloaded"
+             UseLayoutRounding="True" SnapsToDevicePixels="True" ToolTip="{Binding SkillName, RelativeSource={RelativeSource Self}}">
     <UserControl.Resources>
         <converters:IconConverter x:Key="iconConv"/>
     </UserControl.Resources>
@@ -14,24 +15,24 @@
         <!--<Grid.CacheMode>
             <BitmapCache RenderAtScale="2"/>
         </Grid.CacheMode>-->
-        <Ellipse Width="50" Height="50" x:Name="icon" Stroke="#90ffffff" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Ellipse Width="50" Height="{Binding ElementName=icon, Path=ActualWidth}" x:Name="icon" Stroke="#9fff" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Ellipse.Fill>
-                <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource iconConv}}"/>
+                <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource iconConv}, RelativeSource={RelativeSource AncestorType=local:SkillIconControl}}"/>
             </Ellipse.Fill>
         </Ellipse>
-        <local:Arc x:Name="arc" Opacity="1" Width="49" Height="49" StrokeThickness="25" Stroke="#8000" EndAngle="359.9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+        <local:Arc x:Name="arc" Opacity="1" Width="50" Height="{Binding ElementName=arc, Path=ActualWidth}" StrokeThickness="25" Stroke="#8000" EndAngle="359.9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
             <local:Arc.CacheMode>
-                <BitmapCache RenderAtScale="2"></BitmapCache>
+                <BitmapCache RenderAtScale="1"></BitmapCache>
             </local:Arc.CacheMode>
         </local:Arc>
         
         <Grid Width="22" Height="22" x:Name="g" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0">
             <Grid.CacheMode>
-                <BitmapCache RenderAtScale="1.5"/>
+                <BitmapCache RenderAtScale="2"/>
             </Grid.CacheMode>
-            <Ellipse x:Name="fill" Fill="White"  Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stroke="#40000000"/>
-            <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
-            <TextBlock Foreground="#d9000000" 
+            <Ellipse x:Name="fill" Fill="#dfff"  Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stroke="#40000000"/>
+            <Viewbox StretchDirection="DownOnly" Stretch="Uniform" SnapsToDevicePixels="True" UseLayoutRounding="True">
+                <TextBlock Foreground="#d9000000" 
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center" 
                    TextAlignment="Center"
@@ -42,12 +43,8 @@
                    FontStyle="Normal"
                    Opacity="1" 
                    Margin="3"
-                   Text="{Binding CurrentCD, StringFormat=0}">
-            <!--<TextBlock.Effect>
-                <DropShadowEffect ShadowDepth="0" BlurRadius="0" Color="White"></DropShadowEffect>
-            </TextBlock.Effect>-->
-                
-        </TextBlock>
+                   Text="{Binding CurrentCD, StringFormat=0, RelativeSource={RelativeSource AncestorType=local:SkillIconControl}}">
+                </TextBlock>
                 <Viewbox.CacheMode>
                     <BitmapCache RenderAtScale="2" />
                 </Viewbox.CacheMode>

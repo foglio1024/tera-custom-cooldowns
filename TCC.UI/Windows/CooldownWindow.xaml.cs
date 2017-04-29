@@ -14,107 +14,20 @@ using System.Windows.Threading;
 
 namespace TCC
 {
-
-
-    //public class SkillsModel
-    //{
-    //    public ObservableCollection<SkillIndicator> SkillIndicators;
-    //    public SkillsModel()
-    //    {
-    //        SkillIndicators = new ObservableCollection<SkillIndicator>();
-    //    }
-    //}
-
-    public class SkillCooldown
-    {
-        public Skill Skill { get; set; }
-        public int Cooldown { get; set; }
-        public CooldownType Type { get; set; }
-        public System.Timers.Timer Timer { get; set; }
-
-        public SkillCooldown(Skill sk, int cd, CooldownType t)
-        {
-            Skill = sk;
-            Cooldown = cd;
-            if (t == CooldownType.Item)
-            {
-                Cooldown = Cooldown * 1000;
-            }
-
-            if (cd != 0)
-            {
-                Timer = new System.Timers.Timer(Cooldown);
-            }
-
-        }
-    }
-
     public partial class CooldownWindow : Window
     {
-        public static CooldownWindow Instance;
         public CooldownWindow()
         {
-            Instance = this;
-            Opacity = 0;
             InitializeComponent();
-
-            //SkillsDatabase.Progress += UpdateLoadGauge;
-            SkillIconControl.SkillEnded += SkillIconControl_SkillEnded;
-
-            NormalSkillsPanel.ItemsSource = SkillManager.NormalSkillsQueue;
-            LongSkillsPanel.ItemsSource = SkillManager.LongSkillsQueue;
-
-            NormalSkillsPanel.DataContext = SkillManager.NormalSkillsQueue;
-            LongSkillsPanel.DataContext = SkillManager.LongSkillsQueue;
-        }
-
-        private void SkillIconControl_SkillEnded(Skill sk, int cd)
-        {
-            if(cd < SkillManager.LongSkillTreshold)
-            {
-                if(SkillManager.NormalSkillsQueue.Where(x => x.Skill == sk).Count() > 0)
-                    SkillManager.NormalSkillsQueue.Remove(SkillManager.NormalSkillsQueue.Where(x => x.Skill == sk).Single());
-            }
-            else
-            {
-                if (SkillManager.LongSkillsQueue.Where(x => x.Skill == sk).Count() > 0)
-                    SkillManager.LongSkillsQueue.Remove(SkillManager.LongSkillsQueue.Where(x => x.Skill == sk).Single());
-            }
-        }
-
-
-        private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            this.DragMove();
-        }
-        private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            //ClearSkills();
-        }
-
-        public void UpdateLoadGauge(double val)
-        {
-            Dispatcher.BeginInvoke(new Action(() =>
-            {
-                var v = val * 359.9 / 100;
-                var a = new DoubleAnimation(Instance.loadArc.EndAngle, v, TimeSpan.FromMilliseconds(350))
-                {
-                    EasingFunction = new QuadraticEase()
-                };
-                Instance.loadArc.BeginAnimation(Arc.EndAngleProperty, a);
-            }));
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //this.Top = Properties.Settings.Default.CooldownBarTop;
-            //this.Left = Properties.Settings.Default.CooldownBarLeft;
-
             IntPtr hwnd = new WindowInteropHelper(this).Handle;
             FocusManager.MakeUnfocusable(hwnd);
             FocusManager.HideFromToolBar(hwnd);
             Topmost = true;
-
+            Opacity = 0;
             ContextMenu = new ContextMenu();
             var HideButton = new MenuItem() { Header = "Hide" };
             HideButton.Click += (s, ev) =>
@@ -122,26 +35,11 @@ namespace TCC
                 this.Visibility = Visibility.Collapsed;
             };
             ContextMenu.Items.Add(HideButton);
-
-
         }
-        public void LoadingDone()
+
+        private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
-            {
-                var a = new DoubleAnimation(0, 359.9, TimeSpan.FromSeconds(.7))
-                {
-                    EasingFunction = new QuadraticEase()
-                };
-                a.Completed += (s, o) =>
-                {
-                    loadArc.Visibility = Visibility.Hidden;
-                    FocusManager.FocusTimer.Start();
-                    //this.Hide();
-                };
-                loadArc.Stroke = new SolidColorBrush(Color.FromArgb(255, 100, 255, 100));
-                loadArc.BeginAnimation(Arc.StartAngleProperty, a);
-            }));
+            this.DragMove();
         }
 
         private void Window_MouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

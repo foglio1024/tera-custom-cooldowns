@@ -16,7 +16,7 @@ namespace TCC.Parsing
 {
 
 
-    public static class PacketRouter
+    public static class PacketProcessor
     {
         public static uint Version;
         public static OpCodeNamer OpCodeNamer;

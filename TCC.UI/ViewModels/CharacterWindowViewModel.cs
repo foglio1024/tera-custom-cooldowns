@@ -10,7 +10,6 @@ namespace TCC.ViewModels
             get => SessionManager.CurrentPlayer;
         }
 
-        
         public string STname
         {
             get

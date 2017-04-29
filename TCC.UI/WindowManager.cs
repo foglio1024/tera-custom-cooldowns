@@ -42,10 +42,8 @@ namespace TCC
 
         public static void Init()
         {
-            CooldownWindow = new CooldownWindow();
             CharacterWindow = new CharacterWindow();
-            //CharacterWindow.DataContext = new CharacterWindowViewModel();
-
+            CooldownWindow = new CooldownWindow();
             BossGauge = new BossGageWindow();
             BuffBar = new AbnormalitiesWindow();
 

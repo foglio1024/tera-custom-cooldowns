@@ -49,39 +49,39 @@ namespace TCC.Parsing
         private static Dictionary<Type, Delegate> MainProcessor = new Dictionary<Type, Delegate>();
         private static readonly Dictionary<Type, Delegate> MessageToProcessing = new Dictionary<Type, Delegate>
         {
-            {typeof(S_LOGIN), new Action<S_LOGIN>(x => PacketRouter.HandleCharLogin(x)) },
-            {typeof(S_START_COOLTIME_SKILL), new Action<S_START_COOLTIME_SKILL>(x => PacketRouter.HandleNewSkillCooldown(x)) },
-            {typeof(S_DECREASE_COOLTIME_SKILL), new Action<S_DECREASE_COOLTIME_SKILL>(x => PacketRouter.HandleDecreaseSkillCooldown(x)) },
-            {typeof(S_START_COOLTIME_ITEM), new Action<S_START_COOLTIME_ITEM>(x => PacketRouter.HandleNewItemCooldown(x)) },
-            {typeof(S_PLAYER_CHANGE_MP), new Action<S_PLAYER_CHANGE_MP>(x => PacketRouter.HandlePlayerChangeMP(x)) },
-            {typeof(S_CREATURE_CHANGE_HP), new Action<S_CREATURE_CHANGE_HP>(x => PacketRouter.HandleCreatureChangeHP(x)) },
-            {typeof(S_PLAYER_CHANGE_STAMINA), new Action<S_PLAYER_CHANGE_STAMINA>(x => PacketRouter.HandlePlayerChangeStamina(x)) },
-            {typeof(S_PLAYER_CHANGE_FLIGHT_ENERGY), new Action<S_PLAYER_CHANGE_FLIGHT_ENERGY>(x => PacketRouter.HandlePlayerChangeFlightEnergy(x)) },
-            {typeof(S_PLAYER_STAT_UPDATE), new Action<S_PLAYER_STAT_UPDATE>(x => PacketRouter.HandlePlayerStatUpdate(x)) },
-            {typeof(S_USER_STATUS), new Action<S_USER_STATUS>(x => PacketRouter.HandleUserStatusChanged(x)) },
-            {typeof(S_SPAWN_NPC), new Action<S_SPAWN_NPC>(x => PacketRouter.HandleSpawnNpc(x)) },
-            {typeof(S_DESPAWN_NPC), new Action<S_DESPAWN_NPC>(x => PacketRouter.HandleDespawnNpc(x)) },
-            {typeof(S_NPC_STATUS), new Action<S_NPC_STATUS>(x => PacketRouter.HandleNpcStatusChanged(x)) },
-            {typeof(S_ABNORMALITY_BEGIN), new Action<S_ABNORMALITY_BEGIN>(x => PacketRouter.HandleAbnormalityBegin(x)) },
-            {typeof(S_ABNORMALITY_REFRESH), new Action<S_ABNORMALITY_REFRESH>(x => PacketRouter.HandleAbnormalityRefresh(x)) },
-            {typeof(S_ABNORMALITY_END), new Action<S_ABNORMALITY_END>(x => PacketRouter.HandleAbnormalityEnd(x)) },
-            {typeof(S_GET_USER_LIST), new Action<S_GET_USER_LIST>(x => PacketRouter.HandleCharList(x)) },
-            {typeof(S_SPAWN_ME), new Action<S_SPAWN_ME>(x => PacketRouter.HandleSpawnMe(x)) },
-            {typeof(S_RETURN_TO_LOBBY), new Action<S_RETURN_TO_LOBBY>(x => PacketRouter.HandleReturnToLobby(x)) },
-            {typeof(S_BOSS_GAGE_INFO), new Action<S_BOSS_GAGE_INFO>(x => PacketRouter.HandleGageReceived(x)) },
-            {typeof(C_PLAYER_LOCATION), new Action<C_PLAYER_LOCATION>(x => PacketRouter.HandlePlayerLocation(x)) },
-            {typeof(S_USER_EFFECT), new Action<S_USER_EFFECT>(x => PacketRouter.HandleUserEffect(x)) },
-            {typeof(S_LOAD_TOPO), new Action<S_LOAD_TOPO>(x => PacketRouter.HandleLoadTopo(x)) },
-            {typeof(C_LOAD_TOPO_FIN), new Action<C_LOAD_TOPO_FIN>(x => PacketRouter.HandleLoadTopoFin(x)) },
-            {typeof(S_SPAWN_USER), new Action<S_SPAWN_USER>(x => PacketRouter.HandleSpawnUser(x)) },
-            {typeof(S_DESPAWN_USER), new Action<S_DESPAWN_USER>(x => PacketRouter.HandleDespawnUser(x)) }
+            {typeof(S_LOGIN), new Action<S_LOGIN>(x => PacketProcessor.HandleCharLogin(x)) },
+            {typeof(S_START_COOLTIME_SKILL), new Action<S_START_COOLTIME_SKILL>(x => PacketProcessor.HandleNewSkillCooldown(x)) },
+            {typeof(S_DECREASE_COOLTIME_SKILL), new Action<S_DECREASE_COOLTIME_SKILL>(x => PacketProcessor.HandleDecreaseSkillCooldown(x)) },
+            {typeof(S_START_COOLTIME_ITEM), new Action<S_START_COOLTIME_ITEM>(x => PacketProcessor.HandleNewItemCooldown(x)) },
+            {typeof(S_PLAYER_CHANGE_MP), new Action<S_PLAYER_CHANGE_MP>(x => PacketProcessor.HandlePlayerChangeMP(x)) },
+            {typeof(S_CREATURE_CHANGE_HP), new Action<S_CREATURE_CHANGE_HP>(x => PacketProcessor.HandleCreatureChangeHP(x)) },
+            {typeof(S_PLAYER_CHANGE_STAMINA), new Action<S_PLAYER_CHANGE_STAMINA>(x => PacketProcessor.HandlePlayerChangeStamina(x)) },
+            {typeof(S_PLAYER_CHANGE_FLIGHT_ENERGY), new Action<S_PLAYER_CHANGE_FLIGHT_ENERGY>(x => PacketProcessor.HandlePlayerChangeFlightEnergy(x)) },
+            {typeof(S_PLAYER_STAT_UPDATE), new Action<S_PLAYER_STAT_UPDATE>(x => PacketProcessor.HandlePlayerStatUpdate(x)) },
+            {typeof(S_USER_STATUS), new Action<S_USER_STATUS>(x => PacketProcessor.HandleUserStatusChanged(x)) },
+            {typeof(S_SPAWN_NPC), new Action<S_SPAWN_NPC>(x => PacketProcessor.HandleSpawnNpc(x)) },
+            {typeof(S_DESPAWN_NPC), new Action<S_DESPAWN_NPC>(x => PacketProcessor.HandleDespawnNpc(x)) },
+            {typeof(S_NPC_STATUS), new Action<S_NPC_STATUS>(x => PacketProcessor.HandleNpcStatusChanged(x)) },
+            {typeof(S_ABNORMALITY_BEGIN), new Action<S_ABNORMALITY_BEGIN>(x => PacketProcessor.HandleAbnormalityBegin(x)) },
+            {typeof(S_ABNORMALITY_REFRESH), new Action<S_ABNORMALITY_REFRESH>(x => PacketProcessor.HandleAbnormalityRefresh(x)) },
+            {typeof(S_ABNORMALITY_END), new Action<S_ABNORMALITY_END>(x => PacketProcessor.HandleAbnormalityEnd(x)) },
+            {typeof(S_GET_USER_LIST), new Action<S_GET_USER_LIST>(x => PacketProcessor.HandleCharList(x)) },
+            {typeof(S_SPAWN_ME), new Action<S_SPAWN_ME>(x => PacketProcessor.HandleSpawnMe(x)) },
+            {typeof(S_RETURN_TO_LOBBY), new Action<S_RETURN_TO_LOBBY>(x => PacketProcessor.HandleReturnToLobby(x)) },
+            {typeof(S_BOSS_GAGE_INFO), new Action<S_BOSS_GAGE_INFO>(x => PacketProcessor.HandleGageReceived(x)) },
+            {typeof(C_PLAYER_LOCATION), new Action<C_PLAYER_LOCATION>(x => PacketProcessor.HandlePlayerLocation(x)) },
+            {typeof(S_USER_EFFECT), new Action<S_USER_EFFECT>(x => PacketProcessor.HandleUserEffect(x)) },
+            {typeof(S_LOAD_TOPO), new Action<S_LOAD_TOPO>(x => PacketProcessor.HandleLoadTopo(x)) },
+            {typeof(C_LOAD_TOPO_FIN), new Action<C_LOAD_TOPO_FIN>(x => PacketProcessor.HandleLoadTopoFin(x)) },
+            {typeof(S_SPAWN_USER), new Action<S_SPAWN_USER>(x => PacketProcessor.HandleSpawnUser(x)) },
+            {typeof(S_DESPAWN_USER), new Action<S_DESPAWN_USER>(x => PacketProcessor.HandleDespawnUser(x)) }
 
         };
 
         public static void Init()
         {
             OpcodeNameToType.Clear();
-            TeraMessages.ToList().ForEach(x => OpcodeNameToType[PacketRouter.OpCodeNamer.GetCode(x.Key)] = x.Value);
+            TeraMessages.ToList().ForEach(x => OpcodeNameToType[PacketProcessor.OpCodeNamer.GetCode(x.Key)] = x.Value);
             MessageToProcessing.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
         }
         private static Tera.Game.Messages.ParsedMessage Instantiate(ushort opCode, TeraMessageReader reader)
@@ -93,7 +93,7 @@ namespace TCC.Parsing
         }
         public static Tera.Game.Messages.ParsedMessage Create(Message message)
         {
-            var reader = new TeraMessageReader(message, PacketRouter.OpCodeNamer, PacketRouter.Version, PacketRouter.SystemMessageNamer);
+            var reader = new TeraMessageReader(message, PacketProcessor.OpCodeNamer, PacketProcessor.Version, PacketProcessor.SystemMessageNamer);
             return Instantiate(message.OpCode, reader);
         }
 

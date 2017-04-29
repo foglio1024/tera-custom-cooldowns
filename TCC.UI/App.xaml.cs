@@ -46,7 +46,8 @@ namespace TCC
             TeraSniffer.Instance.Enabled = true;
             WindowManager.Init();
             LoadSettings();
-            PacketRouter.Init();
+            FocusManager.FocusTimer.Start();
+            PacketProcessor.Init();
 
             TeraSniffer.Instance.NewConnection += (srv) => SkillManager.Clear();
             TeraSniffer.Instance.EndConnection += () => SkillManager.Clear();
@@ -61,14 +62,10 @@ namespace TCC
                 Console.WriteLine("Monsters loaded");
                 AbnormalityDatabase.Load();
                 Console.WriteLine("Abnormalities loaded");
-                WindowManager.CooldownWindow.LoadingDone();
-                Debug();
-
+                //Debug();
             }));
 
-            SessionManager.CurrentPlayer.Class = Class.None;
-
-            WindowManager.ShowWindow(WindowManager.CooldownWindow);
+            SessionManager.CurrentPlayer.Class = Class.Lancer;
             LoadThread.Start();
 
         }
@@ -169,27 +166,18 @@ namespace TCC
             SessionManager.Logged = true;
             SessionManager.LoadingScreen = false;
             SessionManager.CurrentPlayer.MaxHP = 100;
-            SessionManager.CurrentPlayer.CurrentHP = 80;
-            SessionManager.CurrentPlayer.Class = Class.Warrior;
-            SessionManager.CurrentPlayer.Laurel = Laurel.Champion;
+            SessionManager.CurrentPlayer.CurrentHP = 100;
             //EntitiesManager.SpawnNPC(970, 3000, 1, Visibility.Visible, true);
-            //System.Timers.Timer t = new System.Timers.Timer(1000);
+            System.Timers.Timer t = new System.Timers.Timer(6000);
             //EntitiesManager.TryGetBossById(1, out Boss b);
             //EntitiesManager.SetNPCStatus(1, true);
-            //t.Elapsed += (se, ev) =>
-            //{
-            //    if (b.CurrentHP == 0)
-            //    {
-            //        b.CurrentHP = b.MaxHP;
-            //    }
-            //    else
-            //    {
+            t.Elapsed += (se, ev) =>
+            {
+                SkillManager.AddSkill(131100, 5000);
+                SkillManager.AddSkill(151000, 50000);
+            };
 
-            //        b.CurrentHP = 0;
-            //    }
-            //};
-
-            //t.Enabled = true;
+            t.Enabled = true;
 
 
         }
