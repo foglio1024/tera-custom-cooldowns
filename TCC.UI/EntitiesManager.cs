@@ -48,7 +48,7 @@ namespace TCC
             }
             else
             {
-                System.Console.WriteLine("\t[NOT FOUND] {0} {1}", zoneId, templateId);
+                //System.Console.WriteLine("\t[NOT FOUND] {0} {1}", zoneId, templateId);
 
             }
 

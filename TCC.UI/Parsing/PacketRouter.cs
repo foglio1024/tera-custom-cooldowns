@@ -75,32 +75,6 @@ namespace TCC.Parsing
             SessionManager.CurrentPlayer.Level = p.Level;
             SessionManager.SetPlayerLaurel(p.Name);
 
-            switch (SessionManager.CurrentPlayer.Class)
-            {
-                case Class.Warrior:
-                    WindowManager.CharacterWindow.ShowResolve();
-                    break;
-                case Class.Lancer:
-                    WindowManager.CharacterWindow.ShowResolve();
-                    break;
-                case Class.Engineer:
-                    WindowManager.CharacterWindow.ShowResolve(Colors.Orange);
-                    break;
-                case Class.Fighter:
-                    WindowManager.CharacterWindow.ShowResolve(Colors.OrangeRed);
-                    break;
-                case Class.Assassin:
-                    WindowManager.CharacterWindow.ShowResolve(Color.FromRgb(208, 165, 255));
-                    break;
-                case Class.Glaiver:
-                    WindowManager.CharacterWindow.ShowResolve(Color.FromRgb(204, 224, 255));
-
-                    break;
-                default:
-                    WindowManager.CharacterWindow.HideResolve();
-                    break;
-            }
-
             App.Current.Dispatcher.Invoke(() =>
             {
                 WindowManager.ChangeClickThru(WindowManager.Transparent);

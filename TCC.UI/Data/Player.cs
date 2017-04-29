@@ -237,14 +237,6 @@ namespace TCC.Data
                 if (value != isInCombat)
                 {
                     isInCombat = value;
-                    if (!isInCombat)
-                    {
-                        OutOfCombat?.Invoke();
-                    }
-                    else
-                    {
-                        InCombat?.Invoke();
-                    }
                     NotifyPropertyChanged("IsInCombat");
                 }
             }
@@ -254,13 +246,12 @@ namespace TCC.Data
         public ObservableCollection<AbnormalityDuration> Debuffs  ;
         public ObservableCollection<AbnormalityDuration> InfBuffs ;
 
-        public event Action OutOfCombat;
-        public event Action InCombat;
         public event Action<float> HPUpdated;
         public event Action<float> MPUpdated;
         public event Action<float> STUpdated;
-
         public event Action<float> FlightEnergyUpdated;
+
+        public string ValueOverMaxFormat { get; set; } = "{0}/{1}";
 
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -303,6 +303,12 @@
     <Compile Include="UI elements\DragonSmallGauge.xaml.cs">
       <DependentUpon>DragonSmallGauge.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI elements\GenericGauge.xaml.cs">
+      <DependentUpon>GenericGauge.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI elements\HPGauge.xaml.cs">
+      <DependentUpon>HPGauge.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI elements\HarrowholdBossesControl.xaml.cs">
       <DependentUpon>HarrowholdBossesControl.xaml</DependentUpon>
     </Compile>
@@ -313,6 +319,9 @@
     <Compile Include="Utils.cs" />
     <Compile Include="ViewModels\BaseINPC.cs" />
     <Compile Include="ViewModels\CharacterWindowViewModel.cs" />
+    <Compile Include="ViewModels\FactorFromValuesConverter.cs" />
+    <Compile Include="ViewModels\StaminaBarColorConverter.cs" />
+    <Compile Include="ViewModels\StaminaBarVisibilityConverter.cs" />
     <Compile Include="Windows\AbnormalitiesWindow.xaml.cs">
       <DependentUpon>AbnormalitiesWindow.xaml</DependentUpon>
     </Compile>
@@ -381,6 +390,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI elements\EdgeArc.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI elements\GenericGauge.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI elements\HPGauge.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

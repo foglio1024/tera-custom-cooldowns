@@ -168,24 +168,26 @@ namespace TCC
         {
             SessionManager.Logged = true;
             SessionManager.LoadingScreen = false;
-            EntitiesManager.SpawnNPC(970, 3000, 1, Visibility.Visible, true);
-            System.Timers.Timer t = new System.Timers.Timer(1000);
-            EntitiesManager.TryGetBossById(1, out Boss b);
-            EntitiesManager.SetNPCStatus(1, true);
-            t.Elapsed += (se, ev) =>
-            {
-                if (b.CurrentHP == 0)
-                {
-                    b.CurrentHP = b.MaxHP;
-                }
-                else
-                {
+            SessionManager.CurrentPlayer.MaxHP = 100;
+            SessionManager.CurrentPlayer.CurrentHP = 80;
+            //EntitiesManager.SpawnNPC(970, 3000, 1, Visibility.Visible, true);
+            //System.Timers.Timer t = new System.Timers.Timer(1000);
+            //EntitiesManager.TryGetBossById(1, out Boss b);
+            //EntitiesManager.SetNPCStatus(1, true);
+            //t.Elapsed += (se, ev) =>
+            //{
+            //    if (b.CurrentHP == 0)
+            //    {
+            //        b.CurrentHP = b.MaxHP;
+            //    }
+            //    else
+            //    {
 
-                    b.CurrentHP = 0;
-                }
-            };
+            //        b.CurrentHP = 0;
+            //    }
+            //};
 
-            t.Enabled = true;
+            //t.Enabled = true;
 
 
         }
