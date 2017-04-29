@@ -318,10 +318,10 @@
     <Compile Include="UpdateManager.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="ViewModels\BaseINPC.cs" />
-    <Compile Include="ViewModels\CharacterWindowViewModel.cs" />
-    <Compile Include="ViewModels\FactorFromValuesConverter.cs" />
-    <Compile Include="ViewModels\StaminaBarColorConverter.cs" />
-    <Compile Include="ViewModels\StaminaBarVisibilityConverter.cs" />
+    <Compile Include="Converters\CharacterWindowViewModel.cs" />
+    <Compile Include="Converters\FactorFromValuesConverter.cs" />
+    <Compile Include="Converters\StaminaBarColorConverter.cs" />
+    <Compile Include="Converters\StaminaBarVisibilityConverter.cs" />
     <Compile Include="Windows\AbnormalitiesWindow.xaml.cs">
       <DependentUpon>AbnormalitiesWindow.xaml</DependentUpon>
     </Compile>
