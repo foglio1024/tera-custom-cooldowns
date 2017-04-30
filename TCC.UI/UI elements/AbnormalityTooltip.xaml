@@ -14,7 +14,8 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Border Grid.RowSpan="2" Style="{StaticResource border}"></Border>
-        <TextBlock Text="{Binding AbnormalityName, RelativeSource={RelativeSource AncestorType=local:AbnormalityToolTipControl}}" Foreground="White" Margin="10"></TextBlock>
+        <TextBlock Text="{Binding AbnormalityName, RelativeSource={RelativeSource AncestorType=local:AbnormalityToolTipControl}}" 
+                   Foreground="White" Margin="10"></TextBlock>
         <Border Grid.Row="1" BorderBrush="#20ffffff" BorderThickness="0,1,0,0" Margin="15,0"></Border>
         <TextBlock x:Name="toolTipTB" Grid.Row="1" Foreground="#91ffffff" TextWrapping="Wrap" Margin="10,10,10,10"></TextBlock>
     </Grid>

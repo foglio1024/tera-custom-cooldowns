@@ -12,13 +12,9 @@
         <converters:HP_PercentageConverter x:Key="hpPercConv"/>
         <converters:PercentageVisibiltyConverter x:Key="percVisConv"/>
         <DropShadowEffect x:Key="textShadow" BlurRadius="2" ShadowDepth="1" Opacity="1" RenderingBias="Performance"/>
-        <Style TargetType="TextBlock" x:Key="text">
-            <Setter Property="Foreground" Value="#bbffffff"/>
-            <Setter Property="FontFamily" Value="/TCC;component/resources/#Open Sans"/>
+        <Style TargetType="TextBlock" x:Key="text" BasedOn="{StaticResource text1}">
             <Setter Property="FontSize" Value="11"/>
             <Setter Property="Effect" Value="{StaticResource textShadow}"/>
-            <Setter Property="UseLayoutRounding" Value="True"/>
-            <Setter Property="SnapsToDevicePixels" Value="True"/>
             <Setter Property="Margin" Value="0,-1,0,0"/>
         </Style>
     </UserControl.Resources>

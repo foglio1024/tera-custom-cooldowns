@@ -23,16 +23,12 @@
         ResizeMode="NoResize" 
         >
     <Window.Resources>
-        <Style x:Key="hpBarNumber" TargetType="TextBlock">
+        <Style x:Key="hpBarNumber" TargetType="TextBlock" BasedOn="{StaticResource text1}">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
-            <Setter Property="Text" Value="-"/>
-            <Setter Property="Foreground" Value="White"/>
             <Setter Property="TextAlignment" Value="Right"/>
             <Setter Property="FontSize" Value="13" />
             <Setter Property="Margin" Value="5,0,5,0"/>
-            <Setter Property="FontFamily" Value="/TCC;component/resources/#Open Sans"/>
-            <Setter Property="FontWeight" Value="Light"/>
         </Style>
         <converters:ClassImageConverter x:Key="classConv"/>
         <converters:LaurelImageConverter x:Key="laurelConv"/>
@@ -65,12 +61,12 @@
                 </Rectangle.OpacityMask>
             </Rectangle>
             <TextBlock Margin="4,-1,0,0" Text="" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Style="{StaticResource hpBarNumber}">
-                <Run Text="Lv." Foreground="#70ffffff"/>
+                <Run Text="Lv."/>
                 <Run Text="{Binding Player.Level}"/>
                 <Run Text=" "/>
                 <Run Text="{Binding Player.Name}"/>
                 <Run Text=" "/>
-                <Run Text="{Binding Player.ItemLevel}" Foreground="#70ffffff"/>
+                <Run Text="{Binding Player.ItemLevel}"/>
             </TextBlock>
 
             <controls:GenericGauge Height="3" Margin="3,0" Width="50" BarColor="#91ffffff" Grid.Column="1"
