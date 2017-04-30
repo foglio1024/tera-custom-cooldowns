@@ -125,8 +125,10 @@ namespace TCC
                 {
                     MainTimer.Interval = TimeSpan.FromMilliseconds(1);
                 }
-                
-                arc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9 * newAngle, 0, TimeSpan.FromMilliseconds(s.Cooldown)));
+
+                var an = new DoubleAnimation(359.9 * newAngle, 0, TimeSpan.FromMilliseconds(s.Cooldown));
+                DoubleAnimation.SetDesiredFrameRate(an, 30);
+                arc.BeginAnimation(Arc.EndAngleProperty, an);
             });
         }
         private void ControlLoaded(object sender, RoutedEventArgs e)
@@ -176,7 +178,9 @@ namespace TCC
 
         void AnimateCooldown()
         {
-            arc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(Cooldown)));
+            var an = new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(Cooldown));
+            DoubleAnimation.SetDesiredFrameRate(an,30);
+            arc.BeginAnimation(Arc.EndAngleProperty, an);
             NumberTimer.IsEnabled = true;
             MainTimer.IsEnabled = true;
         }

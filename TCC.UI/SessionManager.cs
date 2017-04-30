@@ -1,18 +1,35 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using TCC.Data;
 
 namespace TCC
 {
+    public delegate void HarrowholdModeEventHandler(bool val);
+
     public static class SessionManager
     {
         public static bool Logged = false;
         public static bool LoadingScreen = true;
-
+        static bool harrowHoldMode = false;
+        public static bool HarrowholdMode
+        {
+            get => harrowHoldMode;
+            set
+            {
+                if(harrowHoldMode != value)
+                {
+                    harrowHoldMode = value;
+                    HhModeChanged?.Invoke(harrowHoldMode);
+                }
+            }
+        }
         public static Player CurrentPlayer = new Player();
         public static List<Character> CurrentAccountCharacters;
+
+        public static event HarrowholdModeEventHandler HhModeChanged;
 
         public static void SetDebuffedStatus(bool debuffed)
         {

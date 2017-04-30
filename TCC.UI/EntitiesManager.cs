@@ -62,7 +62,7 @@ namespace TCC
                     CurrentBosses.Remove(b);
                 });
             }
-            if (WindowManager.BossGauge.HarrowholdMode)
+            if (SessionManager.HarrowholdMode)
             {
                 UnsetDragonsContexts(target);
             }
@@ -116,21 +116,21 @@ namespace TCC
             if (zoneId == 63 && templateId >= 1960 && templateId <= 1963) return;
             if (zoneId != 950)
             {
-                WindowManager.BossGauge.HarrowholdMode = false;
+                SessionManager.HarrowholdMode = false;
                 //System.Console.WriteLine("{0} {1} spawned, exiting hh mode", zoneId, templateId);
             }
             else
             {
                 if (templateId >= 1100 && templateId <= 1103)
                 {
-                    WindowManager.BossGauge.HarrowholdMode = true;
+                    SessionManager.HarrowholdMode = true;
                     //System.Console.WriteLine("{0} {1} spawned, entering hh mode", zoneId, templateId);
 
                     SetDragonsContexts(templateId);
                 }
                 else if (templateId == 1000 || templateId == 2000 || templateId == 3000 || templateId == 4000)
                 {
-                    WindowManager.BossGauge.HarrowholdMode = false;
+                    SessionManager.HarrowholdMode = false;
                     //System.Console.WriteLine("{0} {1} spawned, exiting hh mode", zoneId, templateId);
                 }
             }

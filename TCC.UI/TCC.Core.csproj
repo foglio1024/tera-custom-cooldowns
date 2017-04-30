@@ -291,6 +291,7 @@
     <Compile Include="UI elements\AbnormalityTooltip.xaml.cs">
       <DependentUpon>AbnormalityTooltip.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI elements\Arc2.cs" />
     <Compile Include="UI elements\BossGage.xaml.cs">
       <DependentUpon>BossGage.xaml</DependentUpon>
     </Compile>
@@ -300,6 +301,9 @@
     <Compile Include="Parsing\Messages\S_BOSS_GAGE_INFO.cs" />
     <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_FLIGHT_ENERGY.cs" />
     <Compile Include="Parsing\Messages\S_NPC_STATUS.cs" />
+    <Compile Include="UI elements\CircularGauge.xaml.cs">
+      <DependentUpon>CircularGauge.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI elements\DragonSmallGauge.xaml.cs">
       <DependentUpon>DragonSmallGauge.xaml</DependentUpon>
     </Compile>
@@ -317,7 +321,10 @@
     </Compile>
     <Compile Include="UpdateManager.cs" />
     <Compile Include="Utils.cs" />
+    <Compile Include="ViewModels\AbnormalityViewModel.cs" />
+    <Compile Include="ViewModels\AbnormalityWindowViewModel.cs" />
     <Compile Include="ViewModels\BaseINPC.cs" />
+    <Compile Include="ViewModels\BossGaugeWindowViewModel.cs" />
     <Compile Include="ViewModels\CharacterWindowViewModel.cs" />
     <Compile Include="Converters\FactorFromValuesConverter.cs" />
     <Compile Include="Converters\StaminaBarColorConverter.cs" />
@@ -384,6 +391,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI elements\BossGage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI elements\CircularGauge.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

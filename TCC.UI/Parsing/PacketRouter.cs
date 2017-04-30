@@ -84,7 +84,7 @@ namespace TCC.Parsing
         }
         public static void HandlePlayerLocation(C_PLAYER_LOCATION p)
         {
-            if (WindowManager.BossGauge.HarrowholdMode)
+            if (SessionManager.HarrowholdMode)
             {
                 EntitiesManager.CheckCurrentDragon(new System.Windows.Point(p.X, p.Y));
             }

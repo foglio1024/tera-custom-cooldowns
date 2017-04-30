@@ -20,10 +20,10 @@
                 <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource iconConv}, RelativeSource={RelativeSource AncestorType=local:SkillIconControl}}"/>
             </Ellipse.Fill>
         </Ellipse>
-        <local:Arc x:Name="arc" Opacity="1" Width="50" Height="{Binding ElementName=arc, Path=ActualWidth}" StrokeThickness="25" Stroke="#8000" EndAngle="359.9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-            <local:Arc.CacheMode>
-                <BitmapCache RenderAtScale="1"></BitmapCache>
-            </local:Arc.CacheMode>
+        <local:Arc x:Name="arc" Opacity="1" Width="50" Height="{Binding ElementName=arc, Path=ActualWidth}" StrokeThickness="25" Stroke="#8000" EndAngle="359.9" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <!--<local:Arc.CacheMode>
+                <BitmapCache RenderAtScale=".5"></BitmapCache>
+            </local:Arc.CacheMode>-->
         </local:Arc>
         
         <Grid Width="22" Height="22" x:Name="g" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0">

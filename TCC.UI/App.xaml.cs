@@ -167,18 +167,21 @@ namespace TCC
             SessionManager.LoadingScreen = false;
             SessionManager.CurrentPlayer.MaxHP = 100;
             SessionManager.CurrentPlayer.CurrentHP = 100;
+            SessionManager.CurrentPlayer.EntityId = 1;
             //EntitiesManager.SpawnNPC(970, 3000, 1, Visibility.Visible, true);
             System.Timers.Timer t = new System.Timers.Timer(6000);
             //EntitiesManager.TryGetBossById(1, out Boss b);
             //EntitiesManager.SetNPCStatus(1, true);
             t.Elapsed += (se, ev) =>
             {
-                SkillManager.AddSkill(131100, 5000);
-                SkillManager.AddSkill(151000, 50000);
+                //SkillManager.AddSkill(131100, 5000);
+                //SkillManager.AddSkill(151000, 50000);
+                AbnormalityManager.EndAbnormality(1, 100801);
+                AbnormalityManager.BeginAbnormality(100801, 1, 5000, 0);
             };
+            AbnormalityManager.BeginAbnormality(100801, 1, 5000, 0);
 
             t.Enabled = true;
-
 
         }
     }

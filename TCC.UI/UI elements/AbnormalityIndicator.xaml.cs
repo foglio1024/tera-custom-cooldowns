@@ -27,83 +27,46 @@ namespace TCC.UI_elements
         public AbnormalityIndicator()
         {
             InitializeComponent();
-
-            //abnormalityName.DataContext = this;
-            rootGrid.DataContext = this;
-            abnormalityIcon.DataContext = this;
-            bgEll.DataContext = this;
-            number.DataContext = this;
-            fill.DataContext = this;
-            durationLabel.DataContext = this;
-            stacksLabel.DataContext = this;
-            arc.DataContext = this;
-
-
         }
 
-        void InitTimer()
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            SecondsTimer = new System.Timers.Timer(1000);
-            SecondsTimer.Elapsed += ((s, ev) =>
-            {
-                Dispatcher.Invoke(() =>
-                {
-                    CurrentTime--;
-                    if (CurrentTime < 0)
-                    {
-                        SecondsTimer.Stop();
-                    }
-                });
-            });
-
-        }
-
-        //void SetStacksNumber()
-        //{
-        //    Dispatcher.Invoke(() =>
-        //    {
-        //        if (Stacks > 1)
-        //        {
-        //            s.Visibility = Visibility.Visible;
-        //            stacksnumber.Text = Stacks.ToString();
-        //        }
-        //        else
-        //        {
-        //            s.Visibility = Visibility.Hidden;
-        //        }
-        //    });
-        //}
-        private void PacketRouter_BuffUpdated(ulong target, Data.Abnormality ab, int duration, int stacks)
-        {
-            //SecondsTimer.Stop();
-
             Dispatcher.Invoke(() =>
             {
-                if (target == TargetId)
+                if (TargetId == SessionManager.CurrentPlayer.EntityId)
                 {
-                    if (ab.Id == AbnormalityId)
-                    {
-                        Duration = duration;
-                        Stacks = stacks;
-                        CurrentTime = duration / 1000;
-                        //number.Text = (duration / 1000).ToString();
-                        //SetStacksNumber();
-                        //InitTimer();
-                        if (SecondsTimer != null)
-                        {
-                            SecondsTimer.Stop();
-                            SecondsTimer.Enabled = true;
-                        }
-                        if (duration < 0)
-                        {
-                            //durationLabel.Visibility = Visibility.Hidden;
-                            //number.Text = "-";
-                            return;
-                        }
-                        arc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(duration)));
-                    }
+                    AbnormalityManager.PlayerAbnormalityUpdated += PacketRouter_BuffUpdated;
+                    isPlayer = true;
                 }
+                else
+                {
+                    AbnormalityManager.NPCAbnormalityUpdated += PacketRouter_BuffUpdated;
+                    isPlayer = false;
+                }
+                this.RenderTransform = new ScaleTransform(0, 0, .5, .5);
+                this.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
+                this.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
+                abnormalityIcon.Width = Size * .9;
+                abnormalityIcon.Height = Size * .9;
+                bgEll.Width = Size;
+                bgEll.Height = Size;
+                arc.Width = Size * .9;
+                arc.Height = Size * .9;
 
+                if (Duration > 0)
+                {
+                    var an = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(Duration));
+                    DoubleAnimation.SetDesiredFrameRate(an, 25);
+                    arc.BeginAnimation(Arc.EndAngleProperty, an);
+                    CurrentTime = Duration / 1000;
+
+                    InitTimer();
+                    SecondsTimer.Stop();
+                    SecondsTimer.Enabled = true;
+                }
+                else
+                {
+                }
             });
         }
 
@@ -169,6 +132,47 @@ namespace TCC.UI_elements
             set { SetValue(SizeProperty, value); }
         }
         public static readonly DependencyProperty SizeProperty = DependencyProperty.Register("Size", typeof(double), typeof(AbnormalityIndicator));
+        private void InitTimer()
+        {
+            SecondsTimer = new System.Timers.Timer(1000);
+            SecondsTimer.Elapsed += ((s, ev) =>
+            {
+                    CurrentTime--;
+                    if (CurrentTime < 0)
+                    {
+                        SecondsTimer.Stop();
+                    }
+            });
+
+        }
+
+        private void PacketRouter_BuffUpdated(ulong target, Data.Abnormality ab, int duration, int stacks)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                if (target == TargetId)
+                {
+                    if (ab.Id == AbnormalityId)
+                    {
+                        Duration = duration;
+                        Stacks = stacks;
+                        CurrentTime = duration / 1000;
+                        if (SecondsTimer != null)
+                        {
+                            SecondsTimer.Stop();
+                            SecondsTimer.Enabled = true;
+                        }
+                        if (duration < 0)
+                        {
+                            return;
+                        }
+                        arc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(duration)));
+                    }
+                }
+
+            });
+        }
+
 
 
 
@@ -196,48 +200,6 @@ namespace TCC.UI_elements
 
         bool isPlayer; //used in UserControl_Unloaded to decide which event handler to remove
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            Dispatcher.Invoke(() =>
-            {
-                if(TargetId == SessionManager.CurrentPlayer.EntityId)
-                {
-                    AbnormalityManager.PlayerAbnormalityUpdated += PacketRouter_BuffUpdated;
-                    isPlayer = true;
-                }
-                else
-                {
-                    AbnormalityManager.NPCAbnormalityUpdated += PacketRouter_BuffUpdated;
-                    isPlayer = false; 
-                }
-                this.RenderTransform = new ScaleTransform(0, 0, .5, .5);
-                this.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
-                this.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
-                abnormalityIcon.Width = Size * .9;
-                abnormalityIcon.Height = Size * .9;
-                bgEll.Width = Size;
-                bgEll.Height = Size;
-                arc.Width = Size * .9;
-                arc.Height = Size * .9;
-
-                if (Duration > 0)
-                {
-                    var an = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(Duration));
-                    arc.BeginAnimation(Arc.EndAngleProperty, an);
-                    CurrentTime = Duration / 1000;
-                    //number.Text = (Duration / 1000).ToString();
-
-                    InitTimer();
-                    SecondsTimer.Stop();
-                    SecondsTimer.Enabled = true;
-                }
-                else
-                {
-                    //g.Visibility = Visibility.Hidden;
-                    //number.Text = "-";
-                }
-            });
-        }
 
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {

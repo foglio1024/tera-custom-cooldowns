@@ -23,14 +23,6 @@ namespace TCC.Windows
         public AbnormalitiesWindow()
         {
             InitializeComponent();
-
-            buffs.ItemsSource = SessionManager.CurrentPlayer.Buffs;
-            buffs.DataContext = SessionManager.CurrentPlayer.Buffs;
-            debuffs.ItemsSource = SessionManager.CurrentPlayer.Debuffs;
-            debuffs.DataContext = SessionManager.CurrentPlayer.Debuffs;
-            infBuffs.ItemsSource = SessionManager.CurrentPlayer.InfBuffs;
-            infBuffs.DataContext = SessionManager.CurrentPlayer.InfBuffs;
-
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

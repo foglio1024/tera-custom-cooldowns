@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:TCC"
         xmlns:elements="clr-namespace:TCC.UI_elements"
         xmlns:converters="clr-namespace:TCC.Converters"
+        xmlns:vm="clr-namespace:TCC.ViewModels"
         mc:Ignorable="d"
         Title="BossGageWindow" Height="Auto" Width="Auto"
         SizeToContent="WidthAndHeight"
@@ -29,9 +30,13 @@
                             CurrentAggroType="{Binding CurrentAggroType}"/>
         </DataTemplate>
         <converters:HarrowholdBossesVisibilityConverter x:Key="hhBossesVisConv"/>
+        
     </Window.Resources>
+    <Window.DataContext>
+        <vm:BossGaugeWindowViewModel/>
+    </Window.DataContext>
     <Grid>
-        <ItemsControl Name="Bosses" ItemTemplate="{StaticResource BossGageDataTemplate}" >
+        <ItemsControl Name="Bosses" ItemTemplate="{StaticResource BossGageDataTemplate}" ItemsSource="{Binding CurrentNPCs}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Background="Transparent" Orientation="Vertical" ItemHeight="Auto" Height="270"/>
