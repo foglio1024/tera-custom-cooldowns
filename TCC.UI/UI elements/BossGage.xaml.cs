@@ -142,7 +142,7 @@ namespace TCC
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             HPrect.Fill = new SolidColorBrush(BaseHpColor);
-            Abnormalities.ItemsSource = EntitiesManager.CurrentBosses.Where(x => x.EntityId == EntityId).First().Buffs;
+            Abnormalities.ItemsSource = EntitiesManager.CurrentBosses.FirstOrDefault(x => x.EntityId == EntityId).Buffs;
             NextEnrage.RenderTransform = new TranslateTransform(BaseRect.Width * .9, 0);
             Perc2.Text = String.Format("{0} / {1}", CurrentHP.ToString("n", nfi), MaxHP.ToString("n", nfi));
             Console.WriteLine("Boss gauge loaded: {0}", BossName);
