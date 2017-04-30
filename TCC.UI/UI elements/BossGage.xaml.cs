@@ -21,6 +21,7 @@ namespace TCC
     public partial class BossGage : UserControl, INotifyPropertyChanged
     {
         NumberFormatInfo nfi = new NumberFormatInfo { NumberGroupSeparator = ".", NumberDecimalDigits = 0 };
+        readonly double barLength = 400;
         Color BaseHpColor = Color.FromRgb(0x00,0x97,0xce);
         public ulong EntityId
         {
@@ -64,65 +65,96 @@ namespace TCC
         }
         public static readonly DependencyProperty CurrentAggroTypeProperty = DependencyProperty.Register("CurrentAggroType", typeof(AggroCircle), typeof(BossGage));
 
-
-
-        bool enraged;
         public bool Enraged
         {
-            get { return enraged; }
-            set
+            get { return (bool)GetValue(EnragedProperty); }
+            set { SetValue(EnragedProperty, value); }
+        }
+        public static readonly DependencyProperty EnragedProperty = DependencyProperty.Register("Enraged", typeof(bool), typeof(BossGage));
+
+        public float CurrentPercentage
+        {
+            get
             {
-                if (value != Enraged)
+                if(MaxHP > 0)
                 {
-                    if (!value)
-                    {
-                        LastEnragePercent = CurrentPercentage;
-                        //Console.WriteLine("Last enrage percentage = {0} ({1}/{2})", LastEnragePercent, CurrentHP, MaxHP);
-                    }
-                    enraged = value;
+                    return (CurrentHP / MaxHP);
+                }
+                else
+                {
+                    return 0;
                 }
             }
         }
 
-        //float currentHP;
-        //public float CurrentHP
-        //{
-        //    get { return currentHP; }
-        //    set
-        //    {
-        //        currentHP = value;
-        //    }
-        //}
-
-        float CurrentPercentage
+        float nextEnragePerc = 90;
+        public float NextEnragePercentage
         {
-            get
+            get => nextEnragePerc;
+            set
             {
-                return (CurrentHP / MaxHP) * 100;
+                if(nextEnragePerc != value)
+                {
+                    nextEnragePerc = value;
+                    NotifyPropertyChanged("NextEnragePercentage");
+                    NotifyPropertyChanged("EnrageTBtext");
+                }
             }
         }
+
         void NotifyPropertyChanged(string pr)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(pr));
         }
 
         int AnimationTime = 350;
-        float LastEnragePercent = 100;
         int EnrageDuration = 36000;
-        int CurrentEnrageTime = 36;
+        int curEnrageTime = 36;
+        public int CurrentEnrageTime
+        {
+            get => curEnrageTime;
+            set
+            {
+                if(curEnrageTime != value)
+                {
+                    curEnrageTime = value;
+                    NotifyPropertyChanged("CurrentEnrageTime");
+                    NotifyPropertyChanged("EnrageTBtext");
+                }
+            }
+        }
+        public string EnrageTBtext
+        {
+            get
+            {
+                if (Enraged)
+                {
+                    return CurrentEnrageTime.ToString() + "s";
+                }
+                else
+                {
+                    return NextEnragePercentage.ToString();
+                }
+            }
+        }
+
 
         Timer NumberTimer = new Timer(1000);
+
+        private DependencyPropertyWatcher<float> maxHPwatcher;
+        private DependencyPropertyWatcher<float> currentHPwatcher;
+        private DependencyPropertyWatcher<bool> enrageWatcher;
 
         public BossGage()
         {
             InitializeComponent();
 
-            Boss.EnragedChanged += BossGage_EnragedUpdated;
-            Boss.BossHPChanged += BossGage_HPUpdated;
+            //Boss.EnragedChanged += BossGage_EnragedUpdated;
+            //Boss.BossHPChanged += BossGage_HPUpdated;
 
-            BossNameTB.DataContext = this;
-            NextEnrageTB.DataContext = this;
-            AggroHolderNameTB.DataContext = this;
+            //BossNameTB.DataContext = this;
+            //NextEnrageTB.DataContext = this;
+            //AggroHolderNameTB.DataContext = this;
             
             //EnrageGrid.RenderTransform = new ScaleTransform(0, 1, 0, .5);
 
@@ -133,34 +165,85 @@ namespace TCC
             ColorChangeAnimation.Duration = TimeSpan.FromMilliseconds(AnimationTime);
             DoubleAnimation.Duration = TimeSpan.FromMilliseconds(AnimationTime);
 
-            HPrect.RenderTransform = new ScaleTransform(1, 1,0,.5);
+            maxHPwatcher = new DependencyPropertyWatcher<float>(this, "MaxHP");
+            currentHPwatcher = new DependencyPropertyWatcher<float>(this, "CurrentHP");
+            enrageWatcher = new DependencyPropertyWatcher<bool>(this, "Enraged");
 
-            SetEnragePercTB(90);
+            maxHPwatcher.PropertyChanged += HPchanged;
+            currentHPwatcher.PropertyChanged += HPchanged;
+            enrageWatcher.PropertyChanged += EnrageChanged;
+            //HPrect.RenderTransform = new ScaleTransform(1, 1,0,.5);
 
-            Console.WriteLine("Boss gauge created: {0}", BossName);
+            //SetEnragePercTB(90);
         }
+
+        private void EnrageChanged(object sender, EventArgs e)
+        {
+            if (!Enraged)
+            {
+                NextEnragePercentage = CurrentPercentage*100 - 10;
+                NotifyPropertyChanged("Enraged");
+
+                if (NumberTimer != null)
+                {
+                    NumberTimer.Stop();
+                }
+
+                SlideEnrageIndicator(NextEnragePercentage);
+
+                NotifyPropertyChanged("EnrageTBtext");
+                CurrentEnrageTime = 36;
+
+            }
+            else
+            {
+                SlideEnrageIndicator(CurrentPercentage*100);
+                NumberTimer = new Timer(1000);
+                NumberTimer.Elapsed += (s, ev) =>
+                {
+                    Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        CurrentEnrageTime--;
+                    }));
+                };
+                NumberTimer.Enabled = true;
+                NotifyPropertyChanged("Enraged");
+                NotifyPropertyChanged("EnrageTBtext");
+            }
+        }
+
+        private void HPchanged(object sender, EventArgs e)
+        {
+            NotifyPropertyChanged("CurrentPercentage");
+            if (CurrentHP > MaxHP)
+            {
+                MaxHP = CurrentHP;
+            }
+            if (Enraged)
+            {
+                SlideEnrageIndicator(CurrentPercentage*100);
+            }
+        }
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            HPrect.Fill = new SolidColorBrush(BaseHpColor);
+            //HPrect.Fill = new SolidColorBrush(BaseHpColor);
             Abnormalities.ItemsSource = EntitiesManager.CurrentBosses.FirstOrDefault(x => x.EntityId == EntityId).Buffs;
-            NextEnrage.RenderTransform = new TranslateTransform(BaseRect.Width * .9, 0);
-            Perc2.Text = String.Format("{0} / {1}", CurrentHP.ToString("n", nfi), MaxHP.ToString("n", nfi));
-            Console.WriteLine("Boss gauge loaded: {0}", BossName);
-
-
+            NextEnrage.RenderTransform = new TranslateTransform(HPgauge.Width * .9, 0);
+            //Perc2.Text = String.Format("{0} / {1}", CurrentHP.ToString("n", nfi), MaxHP.ToString("n", nfi));
         }
 
-        void SetEnragePercTB(double v)
+        //void SetEnragePercTB(double v)
+        //{
+        //    Dispatcher.Invoke(() =>
+        //    {
+        //        if (v < 0) v = 0;
+        //        NextEnrageTB.Text = String.Format("{0:0.#}", v);
+        //    });
+        //}
+        void SlideEnrageIndicator(double val)
         {
-            Dispatcher.Invoke(() =>
-            {
-                if (v < 0) v = 0;
-                NextEnrageTB.Text = String.Format("{0:0.#}", v);
-            });
-        }
-        void SlideNextEnrage(double val)
-        {
-            Dispatcher.Invoke(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
                 if(val < 0)
                 {
@@ -168,67 +251,59 @@ namespace TCC
                 }
                 else
                 {
-                    SlideAnimation.To = BaseRect.ActualWidth * (val/100);
+                    SlideAnimation.To = HPgauge.ActualWidth * (val/100);
                 }
 
                 NextEnrage.RenderTransform.BeginAnimation(TranslateTransform.XProperty, SlideAnimation);
-            });
+            }));
         }
-        void SlideNextEnrageDirect()
-        {
-            Dispatcher.Invoke(() =>
-            {
-                SlideAnimation.To = HPrect.ActualWidth;
-                NextEnrage.RenderTransform.BeginAnimation(TranslateTransform.XProperty, SlideAnimation);
-            });
-        }
-        void GlowOn()
-        {
-            Dispatcher.Invoke(() =>
-            {
-                DoubleAnimation.To = 1;
-                HPrect.Effect.BeginAnimation(DropShadowEffect.OpacityProperty, DoubleAnimation);
+        //void GlowOn()
+        //{
+        //    Dispatcher.BeginInvoke(new Action(() =>
+        //    {
+        //        DoubleAnimation.To = 1;
+        //        HPrect.Effect.BeginAnimation(DropShadowEffect.OpacityProperty, DoubleAnimation);
 
-                ColorChangeAnimation.To = Colors.Red;
-                HPrect.Fill.BeginAnimation(SolidColorBrush.ColorProperty, ColorChangeAnimation);
-            });
-        }
-        void GlowOff()
-        {
-            Dispatcher.Invoke(() =>
-            {
-                DoubleAnimation.To = 0;
-                HPrect.Effect.BeginAnimation(DropShadowEffect.OpacityProperty, DoubleAnimation);
+        //        ColorChangeAnimation.To = Colors.Red;
+        //        HPrect.Fill.BeginAnimation(SolidColorBrush.ColorProperty, ColorChangeAnimation);
+        //    }));
+        //}
+        //void GlowOff()
+        //{
+        //    Dispatcher.BeginInvoke(new Action(() =>
+        //    {
+        //        DoubleAnimation.To = 0;
+        //        HPrect.Effect.BeginAnimation(DropShadowEffect.OpacityProperty, DoubleAnimation);
 
-                ColorChangeAnimation.To = BaseHpColor;
-                HPrect.Fill.BeginAnimation(SolidColorBrush.ColorProperty, ColorChangeAnimation);
-            });
-        }
-        void DeployEnrageGrid()
-        {
-            Dispatcher.Invoke(() =>
-            {
-                DoubleAnimation.To = 1;
-                //EnrageGrid.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, DoubleAnimation);
+        //        ColorChangeAnimation.To = BaseHpColor;
+        //        HPrect.Fill.BeginAnimation(SolidColorBrush.ColorProperty, ColorChangeAnimation);
+        //    }));
+        //}
+        //void DeployEnrageGrid()
+        //{
+        //    Dispatcher.Invoke(() =>
+        //    {
+        //        DoubleAnimation.To = 1;
+        //        //EnrageGrid.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, DoubleAnimation);
 
-                //EnrageArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(EnrageDuration)));
+        //        //EnrageArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(EnrageDuration)));
 
-            });
-        }
-        void CloseEnrageGrid()
-        {
-            Dispatcher.Invoke(() =>
-            {
-                DoubleAnimation.To = 0;
-                //EnrageGrid.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, DoubleAnimation);
+        //    });
+        //}
+        //void CloseEnrageGrid()
+        //{
+        //    Dispatcher.Invoke(() =>
+        //    {
+        //        DoubleAnimation.To = 0;
+        //        //EnrageGrid.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, DoubleAnimation);
 
-            });
-        }
+        //    });
+        //}
 
         private void BossGage_HPUpdated(ulong id, float hp)
         {      
 
-            Dispatcher.Invoke(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
                 if (id == EntityId)
                 {
@@ -237,51 +312,48 @@ namespace TCC
                     {
                         MaxHP = CurrentHP;
                     }
-                    DoubleAnimation.To = ValueToLength(CurrentHP, MaxHP);
-                    HPrect.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, DoubleAnimation);
+                    //DoubleAnimation.To = ValueToLength(CurrentHP, MaxHP);
+                    //HPrect.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, DoubleAnimation);
 
-                    Perc.Text = String.Format("{0:0.0}%", CurrentPercentage);
-                    Perc2.Text = String.Format("{0} / {1}", CurrentHP.ToString("n", nfi), MaxHP.ToString("n", nfi));
+                    //Perc.Text = String.Format("{0:0.0}%", CurrentPercentage);
+                    //Perc2.Text = String.Format("{0} / {1}", CurrentHP.ToString("n", nfi), MaxHP.ToString("n", nfi));
 
                     if (Enraged)
                     {
-                        SlideNextEnrage(CurrentPercentage);
+                        SlideEnrageIndicator(CurrentPercentage);
                         //SetEnragePercTB(CurrentPercentage);
                     }
                 }
-            });
+            }));
         }
         private void BossGage_EnragedUpdated(ulong id, bool enraged)
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
-                if (id == this.EntityId)
-                {
-                    Enraged = enraged;
+                //if (id == this.EntityId)
+                //{
+                    //Enraged = enraged;
                     if (enraged)
                     {
-                        Enraged = enraged;
+                        //Enraged = enraged;
                         //number.Text = CurrentEnrageTime.ToString();
-                        NextEnrageTB.Text = CurrentEnrageTime.ToString();
+                        //NextEnrageTB.Text = CurrentEnrageTime.ToString();
 
-                        SlideNextEnrage(CurrentPercentage);
+                        SlideEnrageIndicator(CurrentPercentage);
                         //SetEnragePercTB(CurrentPercentage);
 
-                        GlowOn();
+                        //GlowOn();
                         //DeployEnrageGrid();
                         NumberTimer = new Timer(1000);
                         NumberTimer.Elapsed += (s, ev) =>
                         {
                             Dispatcher.BeginInvoke(new Action(() =>
                             {
-                                NextEnrageTB.Text = CurrentEnrageTime.ToString();
+                                //NextEnrageTB.Text = CurrentEnrageTime.ToString() + "s";
                                 CurrentEnrageTime--;
                             }));
                         };
                         NumberTimer.Enabled = true;
-
-
-
                     }
                     else
                     {
@@ -290,17 +362,17 @@ namespace TCC
                             NumberTimer.Stop();
                         }
 
-                        GlowOff();
+                        //GlowOff();
                         //CloseEnrageGrid();
 
-                        SlideNextEnrage(CurrentPercentage - 10);
-                        SetEnragePercTB(CurrentPercentage - 10);
+                        SlideEnrageIndicator(CurrentPercentage - 10);
+                        //SetEnragePercTB(CurrentPercentage - 10);
 
                         CurrentEnrageTime = 36;
                     }
 
-                }
-            });
+        //        }
+            }));
         }
         double ValueToLength(double value, double maxValue)
         {
@@ -323,8 +395,8 @@ namespace TCC
 
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
-            Boss.EnragedChanged -= BossGage_EnragedUpdated;
-            Boss.BossHPChanged -= BossGage_HPUpdated;
+            //Boss.EnragedChanged -= BossGage_EnragedUpdated;
+            //Boss.BossHPChanged -= BossGage_HPUpdated;
 
         }
     }
@@ -376,6 +448,26 @@ namespace TCC.Converters
                     return new SolidColorBrush(Colors.Transparent);
                 default:
                     return new SolidColorBrush(Colors.Transparent);
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class BossHPbarColorConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if ((bool)value)
+            {
+                return new SolidColorBrush(Colors.Red);
+            }
+            else
+            {
+                return new SolidColorBrush(Color.FromRgb(0x00, 0x97, 0xce));
             }
         }
 
