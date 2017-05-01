@@ -70,7 +70,7 @@ namespace TCC
                 //Debug();
             }));
 
-            SessionManager.CurrentPlayer.Class = Class.Lancer;
+            SessionManager.CurrentPlayer.Class = Class.None;
             LoadThread.Start();
 
         }
