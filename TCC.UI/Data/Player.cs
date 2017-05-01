@@ -22,6 +22,7 @@ namespace TCC.Data
                 }
             }
         }
+
         ulong entityId;
         public ulong EntityId
         {
@@ -38,6 +39,7 @@ namespace TCC.Data
                 }
             }
         }
+
         Class playerclass;
         public Class Class
         {
@@ -54,6 +56,7 @@ namespace TCC.Data
                 }
             }
         }
+
         Laurel laurel;
         public Laurel Laurel
         {
@@ -70,6 +73,7 @@ namespace TCC.Data
                 }
             }
         }
+
         int level;
         public int Level
         {
@@ -86,6 +90,7 @@ namespace TCC.Data
                 }
             }
         }
+
         private int itemLevel;
         public int ItemLevel
         {
@@ -207,21 +212,7 @@ namespace TCC.Data
                 }
             }
         }
-
-        public double PercentageHP
-        {
-            get
-            {
-                if(MaxHP > 0)
-                {
-                    return CurrentHP/MaxHP;
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-        }
+        public float MaxFlightEnergy { get; } = 1000;
 
         bool isDebuffed;
         public bool IsDebuffed
@@ -246,14 +237,6 @@ namespace TCC.Data
                 if (value != isInCombat)
                 {
                     isInCombat = value;
-                    if (!isInCombat)
-                    {
-                        OutOfCombat?.Invoke();
-                    }
-                    else
-                    {
-                        InCombat?.Invoke();
-                    }
                     NotifyPropertyChanged("IsInCombat");
                 }
             }
@@ -263,13 +246,12 @@ namespace TCC.Data
         public ObservableCollection<AbnormalityDuration> Debuffs  ;
         public ObservableCollection<AbnormalityDuration> InfBuffs ;
 
-        public event Action OutOfCombat;
-        public event Action InCombat;
         public event Action<float> HPUpdated;
         public event Action<float> MPUpdated;
         public event Action<float> STUpdated;
-
         public event Action<float> FlightEnergyUpdated;
+
+        public string ValueOverMaxFormat { get; set; } = "{0}/{1}";
 
 
         public event PropertyChangedEventHandler PropertyChanged;

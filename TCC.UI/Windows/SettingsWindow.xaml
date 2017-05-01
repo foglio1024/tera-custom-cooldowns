@@ -1,0 +1,70 @@
+﻿<Window x:Class="TCC.Windows.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TCC.Windows"
+        xmlns:ui_elements="clr-namespace:TCC.UI_elements"
+        xmlns:vm="clr-namespace:TCC.ViewModels" Topmost="True"
+        mc:Ignorable="d" WindowStyle="None" AllowsTransparency="True"
+        Title="TCC settings" Height="Auto" Width="Auto" ResizeMode="NoResize" SizeToContent="WidthAndHeight" Background="Transparent" UseLayoutRounding="True" SnapsToDevicePixels="True">
+    <Window.DataContext>
+        <vm:SettingsWindowViewModel/>
+    </Window.DataContext>
+    <Grid Margin="10" Width="270">
+        <Grid.RowDefinitions >
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Border Style="{StaticResource border}" Grid.ColumnSpan="10" Grid.RowSpan="10"/>
+        <Grid MouseLeftButtonDown="Window_MouseLeftButtonDown">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.ColumnSpan="2" Background="#1c1c22" BorderBrush="#303036" BorderThickness="1,1,1,0"  >
+                <Border.Effect>
+                    <DropShadowEffect Direction="270" Opacity=".5" BlurRadius="4" ShadowDepth="3"/>
+                </Border.Effect>
+            </Border>
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Height="26" Margin="10,5">
+                <!--<Image Source="/TCC;component/resources/tcc.ico" Width="20"/>-->
+                <TextBlock Style="{StaticResource text1}" Text="{Binding Path=Title, RelativeSource={RelativeSource AncestorType=local:SettingsWindow}}" VerticalAlignment="Center" Margin="0,0" FontSize="16"></TextBlock>
+            </StackPanel>
+            <Image Source="/TCC;component/resources/images/ic_close_white_24dp_2x.png" Width="20" Grid.Column="1" HorizontalAlignment="Right" Margin="5" Opacity=".9" Cursor="Hand" MouseLeftButtonDown="Image_MouseLeftButtonDown"></Image>
+        </Grid>
+        <Grid Grid.Row="1" Margin="0,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Border Background="#09ffffff"></Border>
+            <TextBlock Text="Windows visibility settings" Style="{StaticResource text1}" Opacity=".3" Margin="15,0" VerticalAlignment="Center"/>
+            <ui_elements:BoolSetting Margin="0,0,0,0" SettingName="Cooldown window" Grid.Row="1" IsOn="{Binding IsCooldownWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_access_time_white_24dp_2x.png" />
+            <ui_elements:BoolSetting Margin="0,0,0,0" SettingName="Character window" Grid.Row="2" IsOn="{Binding IsCharacterWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_person_white_24dp_2x.png"/>
+            <ui_elements:BoolSetting Margin="0,0,0,0" SettingName="Buffs window" Grid.Row="4" IsOn="{Binding IsBuffWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_data_usage_white_24dp_2x.png"/>
+            <ui_elements:BoolSetting Margin="0,0,0,0" SettingName="Boss window" Grid.Row="3" IsOn="{Binding IsBossWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/combat_white.png"/>
+
+
+        </Grid>
+        <Grid Grid.Row="2" Margin="0,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Border Background="#09ffffff"></Border>
+            <TextBlock Text="Input settings" Style="{StaticResource text1}" Opacity=".3" Margin="15,0" VerticalAlignment="Center"/>
+            <ui_elements:BoolSetting Margin="0,0,0,0" SettingName="Click through" Grid.Row="1" IsOn="{Binding IsClickThruOn, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_mouse_white_24dp_2x.png"/>
+
+
+        </Grid>
+
+    </Grid>
+</Window>

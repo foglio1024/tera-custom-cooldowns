@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCC"
         xmlns:converters="clr-namespace:TCC.Converters"
+        xmlns:vm="clr-namespace:TCC.ViewModels"
+        xmlns:controls="clr-namespace:TCC.UI_elements"
         mc:Ignorable="d"
         Title="HPbar" 
         Height="Auto" Width="Auto"
@@ -15,274 +17,128 @@
         AllowsTransparency="True" 
         SizeToContent="WidthAndHeight" 
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
-        MouseLeftButtonUp="Window_MouseLeftButtonUp"
         MouseRightButtonDown="Window_MouseRightButtonDown"
         Loaded="Window_Loaded"      
         SnapsToDevicePixels="True"
-        ResizeMode="NoResize"      
+        ResizeMode="NoResize" 
         >
     <Window.Resources>
-        <Style x:Key="baseRectangle" TargetType="Rectangle">
-            <Setter Property="Height" Value="16"/>
-            <Setter Property="Margin" Value="0,0,0,0"/>
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Fill" Value="#80000000"/>
-            <Setter Property="Width" Value="400"/>
-            <Setter Property="Stroke" Value="#00ffffff"/>
-            <Setter Property="StrokeThickness" Value="1"/>
-        </Style>
-        <Style x:Key="barRectangle" TargetType="Rectangle">
-            <Setter Property="Height" Value="16"/>
-            <Setter Property="Margin" Value="0,0,0,0"/>
-            <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
-        <Style x:Key="hpBarNumber" TargetType="TextBlock">
+        <Style x:Key="hpBarNumber" TargetType="TextBlock" BasedOn="{StaticResource text1}">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
-            <Setter Property="Text" Value="-"/>
-            <Setter Property="Foreground" Value="White"/>
             <Setter Property="TextAlignment" Value="Right"/>
             <Setter Property="FontSize" Value="13" />
             <Setter Property="Margin" Value="5,0,5,0"/>
-            <Setter Property="FontFamily" Value="/TCC;component/resources/#Open Sans"/>
-            <Setter Property="FontWeight" Value="Light"/>
-        </Style>
-        <Style x:Key="borderPolygon" TargetType="Polygon">
-            <Setter Property="Fill" Value="{StaticResource bgColor}"></Setter>
         </Style>
         <converters:ClassImageConverter x:Key="classConv"/>
         <converters:LaurelImageConverter x:Key="laurelConv"/>
         <converters:CombatToColorConverter x:Key="combatConv"/>
-        <converters:HP_PercentageConverter x:Key="hpPercConv"/>
         <converters:HPbarColorConverter x:Key="hpDebuffColConv"/>
+        <converters:StaminaBarVisibilityConverter x:Key="staminaVisConv"/>
+        <converters:StaminaBarColorConverter x:Key="staminaColConv"/>
+        <converters:FactorFromValuesConverter x:Key="factorFromValConv"/>
+        <converters:HP_PercentageConverter x:Key="hpPercConv"/>
     </Window.Resources>
-    <Grid Margin="10,0">
-        <!--<Grid.CacheMode>
-            <BitmapCache RenderAtScale="3"/>
-        </Grid.CacheMode>-->
+    <Window.DataContext>
+        <vm:CharacterWindowViewModel/>
+    </Window.DataContext>
+    <Grid Margin="20" UseLayoutRounding="True" SnapsToDevicePixels="True" Name="rootGrid">
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid Width="20" Height="20" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="0,30" HorizontalAlignment="Right" VerticalAlignment="Top">
-
-        </Grid>
-        <Border Margin="0,14,0,16" Style="{StaticResource border}" Grid.ColumnSpan="2" Grid.RowSpan="1" Grid.Row="2" />
-
-        <Grid Margin="0,0,0,-8" Grid.ColumnSpan="2" Width="Auto" Height="Auto">
+        <Grid Margin="0,0,0,0" Grid.ColumnSpan="2" Grid.Row="0" Width="Auto" Height="Auto" Name="infoGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto" Name="flightDef" />
-                <ColumnDefinition Width="Auto"/>
-
             </Grid.ColumnDefinitions>
-            <Border Margin="0" Style="{StaticResource border}"  HorizontalAlignment="Stretch"  Grid.ColumnSpan="6">
-                <!--<Border.Effect>
-                        <DropShadowEffect Opacity="0.6" ShadowDepth="3"/>
-                    </Border.Effect>-->
-            </Border>
-            <Rectangle Width="21" Height="21" Margin="0" Grid.Column="5" Fill="{Binding IsInCombat, Converter={StaticResource combatConv}}" VerticalAlignment="Center"  HorizontalAlignment="Center">
+            <Border Margin="0" Style="{StaticResource border}"  HorizontalAlignment="Stretch"  Grid.ColumnSpan="3"/>
+            <Rectangle Width="21" Height="21" Margin="0,0,3,0" Grid.Column="2" 
+                       Fill="{Binding Player.IsInCombat, Converter={StaticResource combatConv}}" VerticalAlignment="Center"  HorizontalAlignment="Center">
                 <Rectangle.OpacityMask>
                     <ImageBrush ImageSource="/resources/images/combat.png"/>
                 </Rectangle.OpacityMask>
             </Rectangle>
-
-            <TextBlock Text="Lv." Margin="4,0,0,1"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0"
-                       Style="{StaticResource hpBarNumber}" >
-                <TextBlock.CacheMode>
-                    <BitmapCache RenderAtScale="1.8" />
-                </TextBlock.CacheMode>
+            <TextBlock Margin="4,-1,0,0" Text="" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Style="{StaticResource hpBarNumber}">
+                <Run Text="Lv."/>
+                <Run Text="{Binding Player.Level}"/>
+                <Run Text=" "/>
+                <Run Text="{Binding Player.Name}"/>
+                <Run Text=" "/>
+                <Run Text="{Binding Player.ItemLevel}"/>
             </TextBlock>
-            <TextBlock Text="{Binding Level}" Margin="0" Name="levelTB"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"
-                       Style="{StaticResource hpBarNumber}" >
-                <TextBlock.CacheMode>
-                    <BitmapCache RenderAtScale="1.8"></BitmapCache>
-                </TextBlock.CacheMode></TextBlock>
-            <TextBlock Text="{Binding Name}" Name="nameTB"  VerticalAlignment="Center" Margin="7,0" HorizontalAlignment="Left" Grid.Column="2"
-                       Style="{StaticResource hpBarNumber}" >
-                <TextBlock.CacheMode>
-                    <BitmapCache RenderAtScale="1.8"></BitmapCache>
-                </TextBlock.CacheMode></TextBlock>
-            <TextBlock Text="{Binding ItemLevel}" Name="ilvlTB" VerticalAlignment="Center" Margin="20,0" HorizontalAlignment="Left" Grid.Column="3"
-                       Style="{StaticResource hpBarNumber}" >
-                <TextBlock.CacheMode>
-                    <BitmapCache RenderAtScale="1.8"></BitmapCache>
-                </TextBlock.CacheMode></TextBlock>
-            <Rectangle Name="dummyFlightBar" Width="100" Grid.Column="4" Fill="Black" Height="3" Margin="10,10" HorizontalAlignment="Left" />
-            <Rectangle Name="flightBar" Width="100" Grid.Column="4" Fill="#9ac" Height="3" Margin="10,0" HorizontalAlignment="Left" />
+
+            <controls:GenericGauge Height="3" Margin="3,0" Width="50" BarColor="#91ffffff" Grid.Column="1"
+                                   GaugeName="HP" ShowPercentage="False" ShowName="False" ShowValues="False"
+                                   CurrentVal="{Binding Player.FlightEnergy}" MaxVal="{Binding Player.MaxFlightEnergy}"/>
         </Grid>
-        <Grid Margin="8,8" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1">
-            <Rectangle Name="laurel" Width="74" Height="80" Margin="0,-8,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Rectangle.Fill>
-                    <ImageBrush ImageSource="{Binding Laurel, Converter={StaticResource laurelConv}}"/>
-                </Rectangle.Fill>
-                <Rectangle.Effect>
-                    <DropShadowEffect Opacity="0.3" ShadowDepth="3"/>
-                </Rectangle.Effect>
-            </Rectangle>
-            <Rectangle Name="classIcon" Fill="White" Width="50" Height="50" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Rectangle.OpacityMask>
-                    <ImageBrush ImageSource="{Binding Class, Converter={StaticResource classConv}}"/>
-                </Rectangle.OpacityMask>
-                <Rectangle.Effect>
-                    <DropShadowEffect Color="#ff20f0ff" BlurRadius="7" ShadowDepth="0"/>
-                </Rectangle.Effect>
-            </Rectangle>
-            <Grid.CacheMode>
-                <BitmapCache RenderAtScale="3"/>
-            </Grid.CacheMode>
-        </Grid>
-        <Grid Width="Auto" Height="Auto" Grid.Column="1" Margin="0,20,5,20" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Name="StaminaRow" Height="*"/>
-            </Grid.RowDefinitions>
+        <Grid Name="bottomGrid" Grid.Row="1" Margin="0,0,0,0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-
-            <Grid>
-                <Rectangle Name="base" Style="{StaticResource baseRectangle}"/>
-                <Rectangle Name="hpBar" Width="400" Style="{StaticResource barRectangle}" Fill="{Binding IsDebuffed, Converter={StaticResource hpDebuffColConv}}"/>
-
-                <!--<Polygon Points="0,16 16,16 16,0" Style="{StaticResource borderPolygon}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="Auto" Height="Auto"></Polygon>-->
-                <!--<Polygon Points="0,16 0,0 16,0" Style="{StaticResource borderPolygon}" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="Auto" Height="Auto"></Polygon>-->
-                <!--<Path Fill="{StaticResource bgColor}" Data="M 0,0 H 10 C 0,0 0,16 10,16 H 0" VerticalAlignment="Center" HorizontalAlignment="Left"></Path>
-                <Path Fill="{StaticResource bgColor}" Data="M 0,0 H 10 C 0,0 0,16 10,16 H 0" VerticalAlignment="Center" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5">
-                    <Path.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleX="-1"/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Path.RenderTransform>
-                </Path>-->
-
-                <TextBlock Text="{Binding CurrentHP, StringFormat=#.#%, Converter={StaticResource hpPercConv}}" Name="hpPercTB" Style="{StaticResource hpBarNumber}" HorizontalAlignment="Right" Margin="5,2,5,2" Opacity=".9">
-                    <TextBlock.CacheMode>
-                        <BitmapCache RenderAtScale="1.8"></BitmapCache>
-                    </TextBlock.CacheMode>
-                </TextBlock>
-                <TextBlock Style="{StaticResource hpBarNumber}" Text="HP" HorizontalAlignment="Left" Opacity=".9" FontSize="11" Margin="5,0,0,0"></TextBlock>
-            </Grid>
-
-            <Grid Grid.Row="1">
-                <Rectangle Style="{StaticResource baseRectangle}" Grid.Row="1"/>
-                <Rectangle Name="mpBar" Width="400" Style="{StaticResource barRectangle}" >
+            <Border Style="{StaticResource border}" Grid.ColumnSpan="2" Width="Auto" Height="Auto" Margin="0,5"></Border>
+            <Grid Name="imageGrid" Margin="0,0" Width="80" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0">
+                <Rectangle Name="laurel" Width="74" Height="80" Margin="0,-8,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Rectangle.Fill>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#18c" Offset=".5"/>
-                            <GradientStop Color="#18c" Offset="1"/>
-                        </LinearGradientBrush>
+                        <ImageBrush ImageSource="{Binding Player.Laurel, Converter={StaticResource laurelConv}}"/>
                     </Rectangle.Fill>
+                    <Rectangle.Effect>
+                        <DropShadowEffect Opacity="0.3" ShadowDepth="3"/>
+                    </Rectangle.Effect>
                 </Rectangle>
-
-                <!--<Polygon Points="0,16 16,16 16,0" HorizontalAlignment="Right" Style="{StaticResource borderPolygon}" VerticalAlignment="Center" Width="Auto" Height="Auto"></Polygon>
-                <Polygon Points="0,16 0,0 16,0" HorizontalAlignment="Left" Style="{StaticResource borderPolygon}" VerticalAlignment="Center" Width="Auto" Height="Auto"></Polygon>-->
-                <!--<Path Fill="{StaticResource bgColor}" Data="M 0,0 H 10 C 0,0 0,16 10,16 H 0" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                <Path Fill="{StaticResource bgColor}" Data="M 0,0 H 10 C 0,0 0,16 10,16 H 0" VerticalAlignment="Center" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5">
-                    <Path.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleX="-1"/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Path.RenderTransform>
-                </Path>-->
-
-                <TextBlock Style="{StaticResource hpBarNumber}" HorizontalAlignment="Left" Opacity=".9" FontSize="11" Margin="5,0,0,0" Text="MP"></TextBlock>
-
-
-            </Grid>
-
-            <Grid  Grid.Row="2" VerticalAlignment="Center" Opacity="1">
-                <Rectangle Style="{StaticResource baseRectangle}" Grid.Row="2" Height="11"/>
-                <Rectangle Name="stBar" Height="11"  Width="400" Style="{StaticResource barRectangle}" Opacity="1" Fill="#6bf">
-                    <!--<Rectangle.Effect>
-                        <DropShadowEffect Color="{Binding ElementName=stBar, Path=Fill.Color}" Opacity="1" BlurRadius="15" ShadowDepth="0"/>
-                    </Rectangle.Effect>-->
+                <Rectangle Name="classIcon" Fill="White" Width="50" Height="50" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Rectangle.OpacityMask>
+                        <ImageBrush ImageSource="{Binding Player.Class, Converter={StaticResource classConv}}"/>
+                    </Rectangle.OpacityMask>
+                    <Rectangle.Effect>
+                        <DropShadowEffect Color="#ff20f0ff" BlurRadius="7" ShadowDepth="0"/>
+                    </Rectangle.Effect>
                 </Rectangle>
-                <!--<Polygon Points="0,11 11,11 11,0" HorizontalAlignment="Right" Style="{StaticResource borderPolygon}" VerticalAlignment="Center" Width="Auto" Height="Auto"></Polygon>
-                <Polygon Points="0,11 0,0 11,0" HorizontalAlignment="Left" Style="{StaticResource borderPolygon}" VerticalAlignment="Center" Width="Auto" Height="Auto"></Polygon>-->
-                <TextBlock Style="{StaticResource hpBarNumber}" HorizontalAlignment="Left" Opacity="1" Margin="5,-1,0,0" FontSize="10" VerticalAlignment="Center" Text="RE">
-                    <TextBlock.Effect>
-                        <DropShadowEffect ShadowDepth="1" BlurRadius="3"/>
-                    </TextBlock.Effect>
-                </TextBlock>
-
-            </Grid>
-
-            <Grid Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" Opacity=".9">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
                 <Grid.CacheMode>
-                    <BitmapCache RenderAtScale="1.8"/>
+                    <BitmapCache RenderAtScale="3"/>
                 </Grid.CacheMode>
-
-
-                <TextBlock Name="hpTB" Text="{Binding CurrentHP}" Style="{StaticResource hpBarNumber}" Margin="10,0,0,0" Grid.Column="0" />
-                <TextBlock Style="{StaticResource hpBarNumber}" Grid.Column="1" Text="/" Margin="4,0,4,0"  Foreground="#aaffffff" />
-                <TextBlock Name="hpMaxTB" Style="{StaticResource hpBarNumber}" Text="{Binding MaxHP}" Margin="0,0,10,0" Grid.Column="2" Foreground="#aaffffff" />
-
             </Grid>
-            <Grid Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" Opacity=".9">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.CacheMode>
-                    <BitmapCache RenderAtScale="1.8"/>
-                </Grid.CacheMode>
+            <Grid x:Name="barsGrid" Width="400" Height="Auto" Grid.Column="1" Margin="3" 
+              VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Row="1" SnapsToDevicePixels="True" UseLayoutRounding="True">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Name="StaminaRow" Height="{Binding Player.Class, Converter={StaticResource staminaVisConv}}"/>
+                </Grid.RowDefinitions>
 
-
-                <TextBlock Name="mpTB" Text="{Binding CurrentMP}" Style="{StaticResource hpBarNumber}" Margin="10,-1,0,0" Grid.Column="0" />
-                <TextBlock Style="{StaticResource hpBarNumber}" Grid.Column="1" Text="/" Margin="4,-1,4,0" Foreground="#ffcccccc" />
-                <TextBlock Name="mpMaxTB" Style="{StaticResource hpBarNumber}" Text="{Binding MaxMP}" Margin="0,-1,10,0" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Foreground="#ffcccccc" />
-
-            </Grid>
-            <Grid Grid.Column="0" Grid.Row="2" Opacity=".9">
-                <Grid.CacheMode>
-                    <BitmapCache RenderAtScale="2"/>
-                </Grid.CacheMode>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Name="stTB" Text="{Binding CurrentST}" Style="{StaticResource hpBarNumber}" Margin="10,0,0,0" Grid.Column="0" Grid.Row="2" FontSize="10.5" Foreground="#ffffff" >
-                    <TextBlock.Effect>
-                        <DropShadowEffect ShadowDepth="0" BlurRadius="4"/>
-                    </TextBlock.Effect>
-                </TextBlock>
-                <TextBlock Style="{StaticResource hpBarNumber}" Grid.Column="1" Text="/" Margin="4,0,4,0" Grid.Row="2" Foreground="#ffffff" FontSize="12" >
-                    <TextBlock.Effect>
-                        <DropShadowEffect ShadowDepth="0" BlurRadius="4"/>
-                    </TextBlock.Effect>
-                </TextBlock>
-                <TextBlock Name="stMaxTB" Style="{StaticResource hpBarNumber}" Text="{Binding MaxST}" Margin="0,0,15,0" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" Foreground="#ffffff" FontSize="10.5" >
-                    <TextBlock.Effect>
-                        <DropShadowEffect ShadowDepth="0" BlurRadius="4"/>
-                    </TextBlock.Effect>
-                </TextBlock>
+                <controls:GenericGauge Height="14" 
+                                       Margin="2" 
+                                       BarColor="{Binding Player.IsDebuffed, Converter={StaticResource hpDebuffColConv}}"
+                                       GaugeName="HP" 
+                                       ShowPercentage="True" 
+                                       ShowName="True" 
+                                       ShowValues="True"
+                                       CurrentVal="{Binding Player.CurrentHP}" 
+                                       MaxVal="{Binding Player.MaxHP}">
+                </controls:GenericGauge>
+                <controls:GenericGauge Height="14" 
+                                       BarColor="#18c" 
+                                       Grid.Row="1" 
+                                       GaugeName="MP" 
+                                       Margin="2" 
+                                       ShowPercentage="False" 
+                                       ShowName="True" 
+                                       ShowValues="True"
+                                       CurrentVal="{Binding Player.CurrentMP}" 
+                                       MaxVal="{Binding Player.MaxMP}">
+                </controls:GenericGauge>
+                <controls:GenericGauge Height="14" 
+                                       BarColor="{Binding Player.Class, Converter={StaticResource staminaColConv}}" 
+                                       Grid.Row="2" GaugeName="{Binding STname}" 
+                                       Margin="2" 
+                                       ShowPercentage="False" 
+                                       ShowName="True" 
+                                       ShowValues="True"
+                                       CurrentVal="{Binding Player.CurrentST}" 
+                                       MaxVal="{Binding Player.MaxST}">
+                </controls:GenericGauge>
             </Grid>
         </Grid>
     </Grid>

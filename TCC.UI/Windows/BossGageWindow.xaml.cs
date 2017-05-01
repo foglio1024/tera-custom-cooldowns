@@ -35,46 +35,19 @@ namespace TCC.Converters
 namespace TCC.Windows
 {
 
-    public partial class BossGageWindow : Window, INotifyPropertyChanged
+    public partial class BossGageWindow : Window
     {
-        bool harrowholdMode;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        
-        public bool HarrowholdMode
-        {
-            get
-            {
-                return harrowholdMode;
-            }
-            set
-            {
-                if(harrowholdMode != value)
-                {
-                    harrowholdMode = value;
-                    HarrowholdModeChanged(value);
-                    NotifyPropertyChanged("HarrowholdMode");
-                }
-            }
-        }
-
-        private void NotifyPropertyChanged(string v)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(v));
-        }
 
         public BossGageWindow()
         {
             InitializeComponent();
 
-            Bosses.DataContext = EntitiesManager.CurrentBosses;
-            Bosses.ItemsSource = EntitiesManager.CurrentBosses;
+            //Bosses.DataContext = EntitiesManager.CurrentBosses;
+            //Bosses.ItemsSource = EntitiesManager.CurrentBosses;
 
-            HHBosses.DataContext = this;
+            //HHBosses.DataContext = this;
 
-            HarrowholdMode = false;
         }
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             IntPtr hwnd = new WindowInteropHelper(this).Handle;
@@ -88,26 +61,14 @@ namespace TCC.Windows
             HideButton.Click += (s, ev) =>
             {
                 this.Visibility = Visibility.Collapsed;
+                VisibilityChanged?.Invoke(this, new PropertyChangedEventArgs("Visiblity"));
+                Console.WriteLine("Boss visibility change invoked");
+
             };
-            ContextMenu.Items.Add(HideButton);
-
-
+            ContextMenu.Items.Add(HideButton);           
         }
 
-        void HarrowholdModeChanged(bool hh)
-        {
-            Dispatcher.Invoke(() =>
-            {
-                if (hh)
-                {
-                    Bosses.ItemsSource = null;
-                }
-                else
-                {
-                    Bosses.ItemsSource = EntitiesManager.CurrentBosses;
-                }
-            });
-        }
+        public event PropertyChangedEventHandler VisibilityChanged;
 
         private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {

@@ -9,13 +9,14 @@ using System.Windows.Media;
 using TCC.Data;
 using TCC.Messages;
 using TCC.Parsing.Messages;
+using TCC.ViewModels;
 using Tera.Game;
 
 namespace TCC.Parsing
 {
 
 
-    public static class PacketRouter
+    public static class PacketProcessor
     {
         public static uint Version;
         public static OpCodeNamer OpCodeNamer;
@@ -74,40 +75,16 @@ namespace TCC.Parsing
             SessionManager.CurrentPlayer.Level = p.Level;
             SessionManager.SetPlayerLaurel(p.Name);
 
-            switch (SessionManager.CurrentPlayer.Class)
-            {
-                case Class.Warrior:
-                    WindowManager.CharacterWindow.ShowResolve();
-                    break;
-                case Class.Lancer:
-                    WindowManager.CharacterWindow.ShowResolve();
-                    break;
-                case Class.Engineer:
-                    WindowManager.CharacterWindow.ShowResolve(Colors.Orange);
-                    break;
-                case Class.Fighter:
-                    WindowManager.CharacterWindow.ShowResolve(Colors.OrangeRed);
-                    break;
-                case Class.Assassin:
-                    WindowManager.CharacterWindow.ShowResolve(Color.FromRgb(208, 165, 255));
-                    break;
-                case Class.Glaiver:
-                    WindowManager.CharacterWindow.ShowResolve(Color.FromRgb(204, 224, 255));
-
-                    break;
-                default:
-                    WindowManager.CharacterWindow.HideResolve();
-                    break;
-            }
-
             App.Current.Dispatcher.Invoke(() =>
             {
-                WindowManager.ChangeClickThru(WindowManager.Transparent);
+                WindowManager.ChangeClickThru(WindowManager.ClickThru);
             });
+
+
         }
         public static void HandlePlayerLocation(C_PLAYER_LOCATION p)
         {
-            if (WindowManager.BossGauge.HarrowholdMode)
+            if (SessionManager.HarrowholdMode)
             {
                 EntitiesManager.CheckCurrentDragon(new System.Windows.Point(p.X, p.Y));
             }
@@ -127,7 +104,7 @@ namespace TCC.Parsing
         public static void HandleReturnToLobby(S_RETURN_TO_LOBBY p)
         {
             SessionManager.Logged = false;
-            WindowManager.CharacterWindow.Reset();
+            //WindowManager.CharacterWindow.Reset();
             SkillManager.Clear();
             SessionManager.ClearPlayersAbnormalities();
             EntitiesManager.ClearNPC();
@@ -182,17 +159,14 @@ namespace TCC.Parsing
         {
             SessionManager.LoadingScreen = true;
         }
-
         public static void HandleDespawnUser(S_DESPAWN_USER p)
         {
             EntitiesManager.DespawnUser(p.EntityId);
         }
-
         public static void HandleSpawnUser(S_SPAWN_USER p)
         {
             EntitiesManager.SpawnUser(p.EntityId, p.Name);
         }
-
         public static void HandleLoadTopoFin(C_LOAD_TOPO_FIN x)
         {
             //SessionManager.LoadingScreen = false;

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCC.Windows"
         xmlns:controls="clr-namespace:TCC.UI_elements"
+        xmlns:vm="clr-namespace:TCC.ViewModels"
         mc:Ignorable="d"
         Title="AbnormalitiesWindow" Height="Auto" Width="Auto"
         Topmost="True"
@@ -18,18 +19,22 @@
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         MouseRightButtonDown="Window_MouseRightButtonDown"
         >
+    <Window.DataContext>
+        <vm:AbnormalityWindowViewModel />
+    </Window.DataContext>
     <Window.Resources>
         <DataTemplate x:Key="abTemplate">
             <controls:AbnormalityIndicator AbnormalityId="{Binding Abnormality.Id}"
                                            AbnormalityName="{Binding Abnormality.Name}"
                                            IconName="{Binding Abnormality.IconName}"
+                                           Type="{Binding Abnormality.Type}"
+                                           AbnormalityTooltip="{Binding Abnormality.ToolTip}"
                                            Duration="{Binding Duration}"
                                            Stacks="{Binding Stacks}"
                                            TargetId="{Binding Target}"
-                                           Type="{Binding Abnormality.Type}"
-                                           AbnormalityTooltip="{Binding Abnormality.ToolTip}"
                                            HorizontalAlignment="Right"
                                            Size ="32">
+                
                 <controls:AbnormalityIndicator.Resources>
                     <Style TargetType="{x:Type Path}">
                         <Setter Property="FlowDirection" Value="RightToLeft"/>
@@ -39,21 +44,21 @@
         </DataTemplate>
     </Window.Resources>
     <StackPanel>
-        <ItemsControl Name="infBuffs" ItemTemplate="{StaticResource abTemplate}">
+        <ItemsControl Name="infBuffs" ItemTemplate="{StaticResource abTemplate}" ItemsSource="{Binding InfiniteBuffs}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" HorizontalAlignment="Right" Height="50" Width="1000"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <ItemsControl Name="buffs" ItemTemplate="{StaticResource abTemplate}">
+        <ItemsControl Name="buffs" ItemTemplate="{StaticResource abTemplate}" ItemsSource="{Binding Buffs}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" HorizontalAlignment="Right" Height="50" Width="1000"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <ItemsControl Name="debuffs" ItemTemplate="{StaticResource abTemplate}" Background="#00000000">
+        <ItemsControl Name="debuffs" ItemTemplate="{StaticResource abTemplate}" ItemsSource="{Binding Debuffs}" Background="#00000000">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" HorizontalAlignment="Right" Height="50" Width="1000"/>

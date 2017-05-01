@@ -30,25 +30,25 @@ namespace TCC
         {
             if (MonsterDatabase.TryGetMonster(templateId, zoneId, out Monster m))
             {
-                System.Console.WriteLine("[S_SPAWN_NPC] {0} {1} - {2}", zoneId,templateId, m.Name);
+                //System.Console.WriteLine("[S_SPAWN_NPC] {0} {1} - {2}", zoneId,templateId, m.Name);
 
                 if ((m.IsBoss || m.MaxHP >= 20000000) || force)
                 {
                     App.Current.Dispatcher.Invoke(() =>
                     {
                         CurrentBosses.Add(new Boss(entityId, zoneId, templateId, v));
-                        System.Console.WriteLine("\t[ADDED] {0} {1} - {2}", zoneId, templateId, m.Name);
+                        //System.Console.WriteLine("\t[ADDED] {0} {1} - {2}", zoneId, templateId, m.Name);
 
                     });
                 }
                 else
                 {
-                    System.Console.WriteLine("\t[SKIPPED] {0} {1} - {2}", zoneId, templateId, m.Name);
+                    //System.Console.WriteLine("\t[SKIPPED] {0} {1} - {2}", zoneId, templateId, m.Name);
                 }
             }
             else
             {
-                System.Console.WriteLine("\t[NOT FOUND] {0} {1}", zoneId, templateId);
+                //System.Console.WriteLine("\t[NOT FOUND] {0} {1}", zoneId, templateId);
 
             }
 
@@ -62,7 +62,7 @@ namespace TCC
                     CurrentBosses.Remove(b);
                 });
             }
-            if (WindowManager.BossGauge.HarrowholdMode)
+            if (SessionManager.HarrowholdMode)
             {
                 UnsetDragonsContexts(target);
             }
@@ -116,21 +116,21 @@ namespace TCC
             if (zoneId == 63 && templateId >= 1960 && templateId <= 1963) return;
             if (zoneId != 950)
             {
-                WindowManager.BossGauge.HarrowholdMode = false;
+                SessionManager.HarrowholdMode = false;
                 //System.Console.WriteLine("{0} {1} spawned, exiting hh mode", zoneId, templateId);
             }
             else
             {
                 if (templateId >= 1100 && templateId <= 1103)
                 {
-                    WindowManager.BossGauge.HarrowholdMode = true;
+                    SessionManager.HarrowholdMode = true;
                     //System.Console.WriteLine("{0} {1} spawned, entering hh mode", zoneId, templateId);
 
                     SetDragonsContexts(templateId);
                 }
                 else if (templateId == 1000 || templateId == 2000 || templateId == 3000 || templateId == 4000)
                 {
-                    WindowManager.BossGauge.HarrowholdMode = false;
+                    SessionManager.HarrowholdMode = false;
                     //System.Console.WriteLine("{0} {1} spawned, exiting hh mode", zoneId, templateId);
                 }
             }

@@ -21,9 +21,6 @@ using System.Windows.Threading;
 namespace TCC
 {
     public delegate void SkillEndedEventHandler(Skill sk, int cd);
-    /// <summary>
-    /// Logica di interazione per SkillIconControl.xaml
-    /// </summary>
     public partial class SkillIconControl : UserControl, INotifyPropertyChanged
     {
         DispatcherTimer NumberTimer;
@@ -103,8 +100,6 @@ namespace TCC
         public SkillIconControl()
         {
             InitializeComponent();
-            icon.DataContext = this;
-            number.DataContext = this;
             SkillManager.Changed += ChangeCooldown;
             SkillManager.Refresh += ChangeCooldown;
             SkillManager.Reset += Reset;
@@ -130,14 +125,15 @@ namespace TCC
                 {
                     MainTimer.Interval = TimeSpan.FromMilliseconds(1);
                 }
-                
-                arc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9 * newAngle, 0, TimeSpan.FromMilliseconds(s.Cooldown)));
+
+                var an = new DoubleAnimation(359.9 * newAngle, 0, TimeSpan.FromMilliseconds(s.Cooldown));
+                DoubleAnimation.SetDesiredFrameRate(an, 30);
+                arc.BeginAnimation(Arc.EndAngleProperty, an);
             });
         }
         private void ControlLoaded(object sender, RoutedEventArgs e)
         {
             CurrentCD = (double)Cooldown / 1000;
-            ToolTip = SkillName;
 
             NumberTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(1000) };
             MainTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(Cooldown) };
@@ -178,12 +174,13 @@ namespace TCC
             NumberTimer.Stop();
             CloseTimer.Stop();
             SkillEnded?.Invoke(Skill, Cooldown);
-
         }
 
         void AnimateCooldown()
         {
-            arc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(Cooldown)));
+            var an = new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(Cooldown));
+            DoubleAnimation.SetDesiredFrameRate(an,30);
+            arc.BeginAnimation(Arc.EndAngleProperty, an);
             NumberTimer.IsEnabled = true;
             MainTimer.IsEnabled = true;
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,14 +24,6 @@ namespace TCC.Windows
         public AbnormalitiesWindow()
         {
             InitializeComponent();
-
-            buffs.ItemsSource = SessionManager.CurrentPlayer.Buffs;
-            buffs.DataContext = SessionManager.CurrentPlayer.Buffs;
-            debuffs.ItemsSource = SessionManager.CurrentPlayer.Debuffs;
-            debuffs.DataContext = SessionManager.CurrentPlayer.Debuffs;
-            infBuffs.ItemsSource = SessionManager.CurrentPlayer.InfBuffs;
-            infBuffs.DataContext = SessionManager.CurrentPlayer.InfBuffs;
-
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -46,10 +39,15 @@ namespace TCC.Windows
             HideButton.Click += (s, ev) =>
             {
                 this.Visibility = Visibility.Collapsed;
+                VisibilityChanged?.Invoke(this, new PropertyChangedEventArgs("Visibility"));
+                Console.WriteLine("Buff visibility change invoked");
+
+
             };
             ContextMenu.Items.Add(HideButton);
 
         }
+        public event PropertyChangedEventHandler VisibilityChanged;
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

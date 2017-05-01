@@ -1,6 +1,7 @@
 ﻿using DamageMeter.Sniffing;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -14,6 +15,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using TCC.ViewModels;
 using TCC.Windows;
 
 namespace TCC
@@ -25,6 +27,7 @@ namespace TCC
         public static CharacterWindow CharacterWindow;
         public static BossGageWindow BossGauge;
         public static AbnormalitiesWindow BuffBar;
+        public static SettingsWindow Settings;
         public static ContextMenu ContextMenu;
         static MenuItem ClickThruButton;
         static MenuItem CharacterWindowVisibilityButton;
@@ -33,7 +36,21 @@ namespace TCC
         static MenuItem BuffBarWindowVisibilityButton;
         static System.Windows.Forms.NotifyIcon TrayIcon;
 
-        public static bool Transparent;
+        private static bool clickThru;
+        public static bool ClickThru
+        {
+            get => clickThru;
+            set
+            {
+                if (clickThru != value)
+                {
+                    clickThru = value;
+                    ClickThruChanged?.Invoke(null, new PropertyChangedEventArgs("ClickThru"));
+                }
+            }
+        }
+
+        public static event PropertyChangedEventHandler ClickThruChanged;
 
         public static Visibility StaminaGaugeVisibility;
         public static double StaminaGaugeTop;
@@ -41,23 +58,23 @@ namespace TCC
 
         public static void Init()
         {
-            CooldownWindow = new CooldownWindow();
             CharacterWindow = new CharacterWindow();
+            CooldownWindow = new CooldownWindow();
             BossGauge = new BossGageWindow();
             BuffBar = new AbnormalitiesWindow();
-
             ContextMenu = new ContextMenu();
-            
+
             TrayIcon = new System.Windows.Forms.NotifyIcon()
             {
                 Icon = Icon.ExtractAssociatedIcon(Process.GetCurrentProcess().MainModule.FileName),
                 Visible = true
             };
             TrayIcon.MouseDown += NI_MouseDown;
+            TrayIcon.MouseDoubleClick += TrayIcon_MouseDoubleClick;
             var v = Assembly.GetExecutingAssembly().GetName().Version;
             TrayIcon.Text = String.Format("TCC v{0}.{1}.{2}", v.Major, v.Minor, v.Build);
             var ForceShowButton = new MenuItem() { Header = "Force visibility on" };
-            ClickThruButton = new MenuItem() { Header = "Click through"};
+            ClickThruButton = new MenuItem() { Header = "Click through" };
             var CloseButton = new MenuItem() { Header = "Close" };
 
             CharacterWindowVisibilityButton = new MenuItem() { Header = "Unhide character window" };
@@ -65,12 +82,12 @@ namespace TCC
             {
                 CharacterWindow.Visibility = Visibility.Visible;
             };
-            CooldownWindowVisibilityButton  = new MenuItem() { Header = "Unhide cooldowns bar" };
+            CooldownWindowVisibilityButton = new MenuItem() { Header = "Unhide cooldowns bar" };
             CooldownWindowVisibilityButton.Click += (s, ev) =>
             {
                 CooldownWindow.Visibility = Visibility.Visible;
             };
-            
+
             BossGaugeWindowVisibilityButton = new MenuItem() { Header = "Unhide boss bar" };
             BossGaugeWindowVisibilityButton.Click += (s, ev) =>
             {
@@ -87,12 +104,12 @@ namespace TCC
             ClickThruButton.Click += (s, ev) => ToggleClickThru();
             ForceShowButton.Click += (s, ev) => ForceShow();
 
-            ContextMenu.Items.Add(CooldownWindowVisibilityButton);
-            ContextMenu.Items.Add(BuffBarWindowVisibilityButton);
-            ContextMenu.Items.Add(BossGaugeWindowVisibilityButton);
-            ContextMenu.Items.Add(CharacterWindowVisibilityButton);
-            ContextMenu.Items.Add(new Separator());
-            ContextMenu.Items.Add(ClickThruButton);
+            //ContextMenu.Items.Add(CooldownWindowVisibilityButton);
+            //ContextMenu.Items.Add(BuffBarWindowVisibilityButton);
+            //ContextMenu.Items.Add(BossGaugeWindowVisibilityButton);
+            //ContextMenu.Items.Add(CharacterWindowVisibilityButton);
+            //ContextMenu.Items.Add(new Separator());
+            //ContextMenu.Items.Add(ClickThruButton);
             ContextMenu.Items.Add(CloseButton);
 
 
@@ -100,6 +117,15 @@ namespace TCC
             FocusManager.FocusTimer.Tick += FocusManager.CheckForegroundWindow;
 
             FocusManager.ForegroundWindowChanged += FocusManager_ForegroundWindowChanged;
+            ClickThruChanged += (s, ev) => UpdateClickThru();
+
+        }
+
+        private static void TrayIcon_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            Settings.Opacity = 0;
+            Settings.Show();
+            Settings.BeginAnimation(Window.OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
         }
 
         private static void ForceShow()
@@ -118,13 +144,13 @@ namespace TCC
         {
             if (v)
             {
-                Transparent = true;
+                ClickThru = true;
                 ClickThruButton.IsChecked = true;
                 SetClickThru();
             }
             else
             {
-                Transparent = false;
+                ClickThru = false;
                 ClickThruButton.IsChecked = false;
                 UnsetClickThru();
             }
@@ -231,6 +257,7 @@ namespace TCC
             {
                 foreach (Window w in Application.Current.Windows)
                 {
+                    if (w.Name == "Settings") continue;
                     HideWindow(w);
                 }
                 isForeground = false;
@@ -241,6 +268,7 @@ namespace TCC
         {
             foreach (Window w in Application.Current.Windows)
             {
+                if (w.GetType() == typeof(SettingsWindow)) continue;
                 FocusManager.MakeTransparent(new WindowInteropHelper(w).Handle);
             }
         }
@@ -248,26 +276,38 @@ namespace TCC
         {
             foreach (Window w in Application.Current.Windows)
             {
+                if (w.GetType() == typeof(SettingsWindow)) continue;
                 FocusManager.UndoTransparent(new WindowInteropHelper(w).Handle);
             }
 
         }
         private static void ToggleClickThru()
         {
-            if (Transparent)
+            if (ClickThru)
             {
                 UnsetClickThru();
                 ClickThruButton.IsChecked = false;
-                Transparent = false;
+                ClickThru = false;
             }
             else
             {
                 SetClickThru();
                 ClickThruButton.IsChecked = true;
-                Transparent = true;
+                ClickThru = true;
             }
         }
-                
+        private static void UpdateClickThru()
+        {
+            if (ClickThru)
+            {
+                SetClickThru();
+            }
+            else
+            {
+                UnsetClickThru();
+            }
+
+        }
         private static DoubleAnimation OpacityAnimation(double to)
         {
             return new DoubleAnimation(to, TimeSpan.FromMilliseconds(300)) { EasingFunction = new QuadraticEase() };
@@ -278,7 +318,7 @@ namespace TCC
             {
                 ContextMenu.IsOpen = true;
             }
-            else if(e.Button == System.Windows.Forms.MouseButtons.Left)
+            else if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
                 ContextMenu.IsOpen = false;
             }

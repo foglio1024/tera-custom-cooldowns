@@ -13,6 +13,7 @@ using System.Windows.Threading;
 using TCC.Data;
 using TCC.Parsing;
 using TCC.Properties;
+using TCC.Windows;
 
 namespace TCC
 {
@@ -46,7 +47,12 @@ namespace TCC
             TeraSniffer.Instance.Enabled = true;
             WindowManager.Init();
             LoadSettings();
-            PacketRouter.Init();
+            WindowManager.Settings = new SettingsWindow()
+            {
+                Name = "Settings"
+            };
+            FocusManager.FocusTimer.Start();
+            PacketProcessor.Init();
 
             TeraSniffer.Instance.NewConnection += (srv) => SkillManager.Clear();
             TeraSniffer.Instance.EndConnection += () => SkillManager.Clear();
@@ -61,14 +67,10 @@ namespace TCC
                 Console.WriteLine("Monsters loaded");
                 AbnormalityDatabase.Load();
                 Console.WriteLine("Abnormalities loaded");
-                WindowManager.CooldownWindow.LoadingDone();
-                Debug();
-
+                //Debug();
             }));
 
-            SessionManager.CurrentPlayer.Class = Class.None;
-
-            WindowManager.ShowWindow(WindowManager.CooldownWindow);
+            SessionManager.CurrentPlayer.Class = Class.Lancer;
             LoadThread.Start();
 
         }
@@ -148,7 +150,7 @@ namespace TCC
             AddSetting(WindowManager.CharacterWindow, vals, 2);
             //AddSetting(WindowManager.ClassSpecificWindow, vals, 3);
             AddSetting(WindowManager.CooldownWindow, vals, 3);
-            vals[4] = WindowManager.Transparent.ToString().ToLower();
+            vals[4] = WindowManager.ClickThru.ToString().ToLower();
             File.WriteAllLines(Environment.CurrentDirectory + @"/settings.csv", vals);
         }
 
@@ -168,25 +170,23 @@ namespace TCC
         {
             SessionManager.Logged = true;
             SessionManager.LoadingScreen = false;
-            EntitiesManager.SpawnNPC(970, 3000, 1, Visibility.Visible, true);
-            System.Timers.Timer t = new System.Timers.Timer(1000);
-            EntitiesManager.TryGetBossById(1, out Boss b);
-            EntitiesManager.SetNPCStatus(1, true);
+            SessionManager.CurrentPlayer.MaxHP = 100;
+            SessionManager.CurrentPlayer.CurrentHP = 100;
+            SessionManager.CurrentPlayer.EntityId = 1;
+            //EntitiesManager.SpawnNPC(970, 3000, 1, Visibility.Visible, true);
+            System.Timers.Timer t = new System.Timers.Timer(6000);
+            //EntitiesManager.TryGetBossById(1, out Boss b);
+            //EntitiesManager.SetNPCStatus(1, true);
             t.Elapsed += (se, ev) =>
             {
-                if (b.CurrentHP == 0)
-                {
-                    b.CurrentHP = b.MaxHP;
-                }
-                else
-                {
-
-                    b.CurrentHP = 0;
-                }
+                //SkillManager.AddSkill(131100, 5000);
+                //SkillManager.AddSkill(151000, 50000);
+                AbnormalityManager.EndAbnormality(1, 100801);
+                AbnormalityManager.BeginAbnormality(100801, 1, 5000, 0);
             };
+            AbnormalityManager.BeginAbnormality(100801, 1, 5000, 0);
 
             t.Enabled = true;
-
 
         }
     }

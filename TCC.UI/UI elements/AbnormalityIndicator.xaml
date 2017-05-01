@@ -33,35 +33,33 @@
         <Grid.ToolTip>
             <ToolTip Background="Transparent" BorderBrush="Transparent" >
                 <Grid>
-                    <elements:AbnormalityToolTipControl AbnormalityName="{Binding AbnormalityName}" AbnormalityToolTip="{Binding AbnormalityTooltip}"/>
+                    <elements:AbnormalityToolTipControl AbnormalityName="{Binding Abnormality.Name}" 
+                                                        AbnormalityToolTip="{Binding Abnormality.ToolTip}"/>
                 </Grid>
             </ToolTip>
         </Grid.ToolTip>
 
-        <!--<TextBlock Name="abnormalityName" Grid.Row="0" Text="" Grid.Column="1" Foreground="White"/>-->
-        <!--<TextBlock Name="abnormalityId" Grid.Row="1" Text="{Binding AbnormalityId}"/>-->
-        <Ellipse Name="bgEll" Fill="{Binding Type, Converter={StaticResource strokeConv}}" >
-        </Ellipse>
+        <Ellipse Name="bgEll" Fill="{Binding Abnormality.Type, Converter={StaticResource strokeConv}}" />
         <Ellipse Name="abnormalityIcon" Margin="0,0" Width="32" Height="32">
             <Ellipse.Fill>
-                <ImageBrush ImageSource="{Binding IconName, Converter={StaticResource iconConv}}"/>
+                <ImageBrush ImageSource="{Binding IconName, Converter={StaticResource iconConv}, RelativeSource={RelativeSource AncestorType=elements:AbnormalityIndicator}}"/>
             </Ellipse.Fill>
         </Ellipse>
-        <local:Arc x:Name="arc" Stroke="#8000" StrokeThickness="15" EndAngle="0" Width="0" Height="0"/>
-
-        <Grid Width="Auto" MaxWidth="{Binding Size}" Height="{Binding Size,Converter={StaticResource sizeToDurationLabelSizeConv}}" 
-              x:Name="durationLabel" Visibility="{Binding Duration, Converter={StaticResource durationToVisibilityConv}}" 
+        <local:Arc x:Name="arc" Stroke="#8000" StrokeThickness="15" EndAngle="0" Width="0" Height="0">
+            <!--<local:Arc.CacheMode>
+                <BitmapCache  RenderAtScale="2"/>
+            </local:Arc.CacheMode>-->
+        </local:Arc>
+        <Grid Width="Auto" MaxWidth="{Binding Size, RelativeSource={RelativeSource AncestorType=elements:AbnormalityIndicator}}" 
+              Height="{Binding Size,Converter={StaticResource sizeToDurationLabelSizeConv}, RelativeSource={RelativeSource AncestorType=elements:AbnormalityIndicator}}" 
+              x:Name="durationLabel" Visibility="{Binding Duration, Converter={StaticResource durationToVisibilityConv}, RelativeSource={RelativeSource AncestorType=elements:AbnormalityIndicator}}" 
               HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1"
               Margin="0,-4,0,0">
-            <!--<Grid.CacheMode>
-                <BitmapCache RenderAtScale="1.5"/>
-            </Grid.CacheMode>-->
             <Border x:Name="fill" Background="White" 
                     Height="Auto" Width="Auto" 
                     Opacity=".9" CornerRadius="7.5" 
                     VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
-                    BorderBrush="{Binding Type, Converter={StaticResource strokeConv}}" BorderThickness="1.5"
-                    />
+                    BorderBrush="{Binding Abnormality.Type, Converter={StaticResource strokeConv}}" BorderThickness="1.5"/>
 
             <Viewbox StretchDirection="DownOnly" Stretch="Uniform" Margin="0">
                 <TextBlock Foreground="#d9000000" 
@@ -75,7 +73,7 @@
                    FontStyle="Normal"
                    Opacity="1" 
                    Margin="6,3"
-                   Text="{Binding CurrentTime, Converter={StaticResource durationConv}}"
+                   Text="{Binding CurrentTime, Converter={StaticResource durationConv}, RelativeSource={RelativeSource AncestorType=elements:AbnormalityIndicator}}"
                    >
             <!--<TextBlock.Effect>
                 <DropShadowEffect ShadowDepth="0" BlurRadius="0" Color="White"></DropShadowEffect>
@@ -86,13 +84,13 @@
             </Viewbox>
 
         </Grid>
-        <Grid Width="{Binding Size, Converter={StaticResource sizeToStackLabelSizeConv}}" 
+        <Grid Width="{Binding Size, Converter={StaticResource sizeToStackLabelSizeConv},RelativeSource={RelativeSource AncestorType=elements:AbnormalityIndicator}}" 
               Height="{Binding ElementName=stacksLabel, Path=Width}" 
               x:Name="stacksLabel" 
               HorizontalAlignment="Right" 
               VerticalAlignment="Top" 
               Margin="0,0,0,0" 
-              Visibility="{Binding Stacks, Converter={StaticResource stacksToVisibilityConv}}">
+              Visibility="{Binding Stacks, Converter={StaticResource stacksToVisibilityConv},RelativeSource={RelativeSource AncestorType=elements:AbnormalityIndicator}}">
             <!--<Grid.CacheMode>
                 <BitmapCache RenderAtScale="1.5"/>
             </Grid.CacheMode>-->
@@ -109,7 +107,7 @@
                    FontStyle="Normal"
                    Opacity="1" 
                    Margin="2.5"
-                   Text="{Binding Stacks}">
+                   Text="{Binding Stacks, RelativeSource={RelativeSource AncestorType=elements:AbnormalityIndicator}}">
             <!--<TextBlock.Effect>
                 <DropShadowEffect ShadowDepth="0" BlurRadius="0" Color="White"></DropShadowEffect>
             </TextBlock.Effect>-->

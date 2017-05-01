@@ -27,6 +27,7 @@
         </DataTemplate>
         <converters:EntityIdToNameConverter x:Key="userIdToName"/>
         <converters:AggroTypeToFill x:Key="aggroTypeToFill"/>
+        <converters:BossHPbarColorConverter x:Key="barColorConv"/>
     </UserControl.Resources>
     <Grid Width="Auto" Name="rootGrid">
         <Grid.RowDefinitions>
@@ -55,20 +56,22 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Name="Perc2" 
+                    <TextBlock  Style="{StaticResource text1}"
                                HorizontalAlignment="Left" 
                                VerticalAlignment="Center" 
-                               Foreground="#91ffffff" 
                                FontSize="11"
-                               Text="-"
-                               Grid.Row="1"/>
-                    <TextBlock Name="Perc" 
+                               Grid.Row="1">
+                        <Run Text="{Binding CurrentHP, RelativeSource={RelativeSource AncestorType=local:BossGage}, StringFormat={}{0:N0}}"/>
+                        <Run Text=" / "/>
+                        <Run Text="{Binding MaxHP, RelativeSource={RelativeSource AncestorType=local:BossGage},StringFormat={}{0:N0}}"/>
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource text1}"
                                HorizontalAlignment="Center" 
                                FontWeight="DemiBold" 
                                VerticalAlignment="Center" 
-                               Foreground="#ffffffff" Margin="0" 
+                               Margin="0" 
                                FontSize="14"
-                               Text="100%"
+                               Text="{Binding CurrentPercentage, RelativeSource={RelativeSource AncestorType=local:BossGage}, StringFormat=#.#%}"
                                Grid.Row="1"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -78,14 +81,11 @@
 
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Name="BossNameTB" 
+                        <TextBlock Name="BossNameTB" Style="{StaticResource text1}"
                                HorizontalAlignment="Left" 
                                VerticalAlignment="Center" 
-                               FontWeight="Normal" 
-                               FontStretch="Condensed" 
                                FontSize="13" 
-                               Foreground="#91ffffff" 
-                               Text="{Binding BossName}" 
+                               Text="{Binding BossName, RelativeSource={RelativeSource AncestorType=local:BossGage}}" 
                                Grid.Row="0"/>
                         <Polygon Points="0,10 5,0 10,10"  Margin="10,0"  Fill="{Binding CurrentAggroType, Converter={StaticResource aggroTypeToFill}}" Name="aggroArrow"
                                  VerticalAlignment="Center" Height="Auto"  HorizontalAlignment="Center"
@@ -95,13 +95,12 @@
                             </Polygon.RenderTransform>
                         </Polygon>
 
-                        <TextBlock Name="AggroHolderNameTB" 
+                        <TextBlock Name="AggroHolderNameTB" Style="{StaticResource text1}"
                                HorizontalAlignment="Left" 
                                VerticalAlignment="Center" 
                                FontWeight="Normal" 
                                FontStretch="Condensed" 
                                FontSize="12" 
-                               Foreground="#91ffffff" 
                                Text="{Binding Target, Converter={StaticResource userIdToName}}" 
                                Grid.Row="0" Grid.Column="2" TextTrimming="WordEllipsis" MaxWidth="200"/>
 
@@ -112,7 +111,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <Rectangle Name="BaseRect"  Fill="#90000000" Height="4" Width="400" 
+                    <!--<Rectangle Name="BaseRect"  Fill="#90000000" Height="4" Width="400" 
                                HorizontalAlignment="Stretch" SnapsToDevicePixels="True"/>
                     <Rectangle Name="HPrect" Fill="#0097ce"
                                Width="{Binding ElementName=BaseRect, Path=Width}" 
@@ -121,8 +120,19 @@
                         <Rectangle.Effect>
                             <DropShadowEffect ShadowDepth="0" BlurRadius="20" Color="Red" Opacity="0"/>
                         </Rectangle.Effect>
-                    </Rectangle>
-                    <Grid Height="{Binding ElementName=BaseRect, Path=Height}">
+                    </Rectangle>-->
+                    <controls:GenericGauge Height="4" Width="400"
+                                           BarColor="{Binding Enraged, RelativeSource={RelativeSource AncestorType=local:BossGage}, Converter={StaticResource barColorConv}}"
+                                           GaugeName=""
+                                           ShowPercentage="False"
+                                           ShowName="False"
+                                           ShowValues="False"
+                                           CurrentVal="{Binding CurrentHP}"
+                                           MaxVal="{Binding MaxHP}"
+                                           x:Name="HPgauge"
+                                           ></controls:GenericGauge>
+                    
+                    <Grid Height="{Binding ElementName=HPgauge, Path=Height}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition />
@@ -141,7 +151,7 @@
                         <Border BorderThickness=".8,0,.8,0" BorderBrush="#90000000" Grid.Column="7"></Border>
                         <Border BorderThickness=".8,0,0,0"  BorderBrush="#90000000" Grid.Column="9"></Border>
                     </Grid>
-                    <StackPanel Width="20" Height="Auto" Orientation="Vertical" Name="NextEnrage" Margin="-10,-5,0,0" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" Grid.Row="2">
+                    <StackPanel Width="22" Height="Auto" Orientation="Vertical" Opacity="1" Name="NextEnrage" Margin="-11,-5,0,0" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" Grid.Row="2">
                         <StackPanel.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -153,7 +163,9 @@
                         <!--<Polygon Points="0,7 5,0 10,7"  Margin="0,0,0,0"  Fill="Orange" VerticalAlignment="Center" Height="Auto"  HorizontalAlignment="Center" Grid.Column="1" >
                         </Polygon>-->
                         <Ellipse Fill="#fa0" Width="6" Height="{Binding ElementName=enrageEll, Path=Width}" Name="enrageEll" Stroke="#fb0"/>
-                        <TextBlock Width="Auto" Text="100" Name="NextEnrageTB" FontSize="10" Foreground="White" TextAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,0" Padding="0"></TextBlock>
+                        <TextBlock Width="Auto" FontSize="12" Style="{StaticResource text1}"
+                                   TextAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,0" Padding="0"
+                                   Text="{Binding EnrageTBtext, RelativeSource={RelativeSource AncestorType=local:BossGage}}"></TextBlock>
                     </StackPanel>
                 </Grid>
             </Grid>

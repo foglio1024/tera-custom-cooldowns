@@ -5,7 +5,7 @@
              Startup="OnStartup">
     <Application.Resources>
         <DropShadowEffect x:Key="dropShadow" BlurRadius="5" ShadowDepth="3" Opacity=".6" />
-        <SolidColorBrush x:Key="bgColor" Color="#202026" />
+        <SolidColorBrush x:Key="bgColor" Color="#202027" />
         
         <Style x:Key="border" TargetType="Border">
             <Setter Property="Background" Value="{StaticResource bgColor}"/>
@@ -15,7 +15,14 @@
             <Setter Property="Height" Value="Auto" />
             <Setter Property="Width" Value="Auto"/>
             <Setter Property="Effect" Value="{StaticResource dropShadow}" />
+            <Setter Property="Opacity" Value="1"/>
         </Style>
 
+        <Style x:Key="text1" TargetType="TextBlock">
+            <Setter Property="UseLayoutRounding" Value="True"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Foreground" Value="#bbffffff"/>
+            <Setter Property="FontFamily" Value="/TCC;component/resources/#Open Sans"/>
+        </Style>
     </Application.Resources>
 </Application>
