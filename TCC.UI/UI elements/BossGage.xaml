@@ -151,7 +151,7 @@
                         <Border BorderThickness=".8,0,.8,0" BorderBrush="#90000000" Grid.Column="7"></Border>
                         <Border BorderThickness=".8,0,0,0"  BorderBrush="#90000000" Grid.Column="9"></Border>
                     </Grid>
-                    <StackPanel Width="22" Height="Auto" Orientation="Vertical" Opacity="1" Name="NextEnrage" Margin="-11,-5,0,0" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" Grid.Row="2">
+                    <StackPanel Width="28" Height="Auto" Orientation="Vertical" Opacity="1" Name="NextEnrage" Margin="-14,-5,0,0" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" Grid.Row="2">
                         <StackPanel.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
