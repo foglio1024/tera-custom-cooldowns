@@ -292,6 +292,9 @@
       <DependentUpon>AbnormalityTooltip.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI elements\Arc2.cs" />
+    <Compile Include="UI elements\BoolSetting.xaml.cs">
+      <DependentUpon>BoolSetting.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI elements\BossGage.xaml.cs">
       <DependentUpon>BossGage.xaml</DependentUpon>
     </Compile>
@@ -316,6 +319,10 @@
     <Compile Include="UI elements\HarrowholdBossesControl.xaml.cs">
       <DependentUpon>HarrowholdBossesControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI elements\MaterialSwitch.xaml.cs">
+      <DependentUpon>MaterialSwitch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI elements\SettingsWindowViewModel.cs" />
     <Compile Include="UI elements\StaminaGaugeControl.xaml.cs">
       <DependentUpon>StaminaGaugeControl.xaml</DependentUpon>
     </Compile>
@@ -349,6 +356,9 @@
     <Compile Include="Converters\HPbarColorConverter.cs" />
     <Compile Include="Converters\HP_PercentageConverter.cs" />
     <Compile Include="Converters\LaurelImageConverter.cs" />
+    <Compile Include="Windows\SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\SkillCooldown.cs" />
     <Compile Include="Windows\StaminaGauge.xaml.cs">
       <DependentUpon>StaminaGauge.xaml</DependentUpon>
@@ -390,6 +400,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI elements\BoolSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI elements\BossGage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -415,6 +429,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI elements\HarrowholdBossesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI elements\MaterialSwitch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -451,6 +469,10 @@
       <DependentUpon>CooldownWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\SettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\StaminaGauge.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -483,6 +505,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="resources\images\combat_white.png" />
+    <Resource Include="resources\images\ic_person_white_24dp_2x.png" />
+    <Resource Include="resources\images\ic_mouse_white_24dp_2x.png" />
+    <Resource Include="resources\images\ic_access_time_white_24dp_2x.png" />
+    <Resource Include="resources\images\ic_data_usage_white_24dp_2x.png" />
+    <Resource Include="resources\images\ic_close_white_24dp_2x.png" />
     <Resource Include="resources\images\Icon_Laurels\blank.png" />
     <Resource Include="resources\images\combat.png" />
     <Content Include="resources\database\monsters-EU-EN.xml">

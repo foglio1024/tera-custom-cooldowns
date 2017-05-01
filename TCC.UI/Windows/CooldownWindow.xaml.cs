@@ -1,6 +1,7 @@
 ﻿using DamageMeter.Sniffing;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
@@ -33,9 +34,13 @@ namespace TCC
             HideButton.Click += (s, ev) =>
             {
                 this.Visibility = Visibility.Collapsed;
+                VisibilityChanged?.Invoke(this, new PropertyChangedEventArgs("Visibility"));
+                Console.WriteLine("Cooldown visibility change invoked");
             };
             ContextMenu.Items.Add(HideButton);
         }
+        public event PropertyChangedEventHandler VisibilityChanged;
+
 
         private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {

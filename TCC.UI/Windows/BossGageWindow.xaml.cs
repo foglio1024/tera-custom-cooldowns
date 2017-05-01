@@ -61,10 +61,14 @@ namespace TCC.Windows
             HideButton.Click += (s, ev) =>
             {
                 this.Visibility = Visibility.Collapsed;
+                VisibilityChanged?.Invoke(this, new PropertyChangedEventArgs("Visiblity"));
+                Console.WriteLine("Boss visibility change invoked");
+
             };
             ContextMenu.Items.Add(HideButton);           
         }
 
+        public event PropertyChangedEventHandler VisibilityChanged;
 
         private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {

@@ -13,6 +13,7 @@ using System.Windows.Threading;
 using TCC.Data;
 using TCC.Parsing;
 using TCC.Properties;
+using TCC.Windows;
 
 namespace TCC
 {
@@ -46,6 +47,10 @@ namespace TCC
             TeraSniffer.Instance.Enabled = true;
             WindowManager.Init();
             LoadSettings();
+            WindowManager.Settings = new SettingsWindow()
+            {
+                Name = "Settings"
+            };
             FocusManager.FocusTimer.Start();
             PacketProcessor.Init();
 
@@ -145,7 +150,7 @@ namespace TCC
             AddSetting(WindowManager.CharacterWindow, vals, 2);
             //AddSetting(WindowManager.ClassSpecificWindow, vals, 3);
             AddSetting(WindowManager.CooldownWindow, vals, 3);
-            vals[4] = WindowManager.Transparent.ToString().ToLower();
+            vals[4] = WindowManager.ClickThru.ToString().ToLower();
             File.WriteAllLines(Environment.CurrentDirectory + @"/settings.csv", vals);
         }
 

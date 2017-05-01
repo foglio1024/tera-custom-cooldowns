@@ -96,6 +96,7 @@ namespace TCC
                 if(nextEnragePerc != value)
                 {
                     nextEnragePerc = value;
+                    if (value < 0) nextEnragePerc = 0;
                     NotifyPropertyChanged("NextEnragePercentage");
                     NotifyPropertyChanged("EnrageTBtext");
                 }

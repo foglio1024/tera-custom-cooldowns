@@ -77,7 +77,7 @@ namespace TCC.Parsing
 
             App.Current.Dispatcher.Invoke(() =>
             {
-                WindowManager.ChangeClickThru(WindowManager.Transparent);
+                WindowManager.ChangeClickThru(WindowManager.ClickThru);
             });
 
 
