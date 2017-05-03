@@ -33,18 +33,23 @@ namespace TCC.ViewModels
                 }
             }
         }
-
-        public CharacterWindowViewModel()
+        public bool IsTeraOnTop
         {
-            Player.PropertyChanged += Player_PropertyChanged;
+            get => WindowManager.IsTccVisible;
         }
-
         private void Player_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if(e.PropertyName == "Class")
             {
                 RaisePropertyChanged("STname");
             }
+        }
+
+
+        public CharacterWindowViewModel()
+        {
+            Player.PropertyChanged += Player_PropertyChanged;
+            WindowManager.TccVisibilityChanged += (s, ev) => RaisePropertyChanged("IsTeraOnTop");
         }
     }
 

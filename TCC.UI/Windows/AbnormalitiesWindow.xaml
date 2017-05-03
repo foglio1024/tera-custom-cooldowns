@@ -43,7 +43,7 @@
             </controls:AbnormalityIndicator>
         </DataTemplate>
     </Window.Resources>
-    <StackPanel>
+    <StackPanel Style="{StaticResource opacityAnimatedContainer}">
         <ItemsControl Name="infBuffs" ItemTemplate="{StaticResource abTemplate}" ItemsSource="{Binding InfiniteBuffs}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>

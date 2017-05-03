@@ -9,8 +9,8 @@ namespace TCC.ViewModels
 {
     public class CooldownWindowViewModel : BaseINPC
     {
-        public ObservableCollection<SkillCooldown> ShortSkills { get => SkillManager.NormalSkillsQueue;}
-        public ObservableCollection<SkillCooldown> LongSkills { get => SkillManager.LongSkillsQueue;}
+        public ObservableCollection<SkillCooldown> ShortSkills { get => SkillManager.NormalSkillsQueue; }
+        public ObservableCollection<SkillCooldown> LongSkills { get => SkillManager.LongSkillsQueue; }
 
         private void RemoveSkill(Skill sk, int cd)
         {
@@ -29,10 +29,16 @@ namespace TCC.ViewModels
                 }
             }
         }
+        public bool IsTeraOnTop
+        {
+            get => WindowManager.IsTccVisible;
+        }
 
         public CooldownWindowViewModel()
         {
             SkillIconControl.SkillEnded += RemoveSkill;
+            WindowManager.TccVisibilityChanged += (s, ev) => RaisePropertyChanged("IsTeraOnTop");
+
         }
     }
 }

@@ -42,18 +42,12 @@ namespace TCC.Windows
         {
             InitializeComponent();
 
-            //Bosses.DataContext = EntitiesManager.CurrentBosses;
-            //Bosses.ItemsSource = EntitiesManager.CurrentBosses;
-
-            //HHBosses.DataContext = this;
-
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             IntPtr hwnd = new WindowInteropHelper(this).Handle;
             FocusManager.MakeUnfocusable(hwnd);
             FocusManager.HideFromToolBar(hwnd);
-            Opacity = 0;
             Topmost = true;
 
             ContextMenu = new ContextMenu();

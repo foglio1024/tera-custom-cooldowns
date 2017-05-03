@@ -31,7 +31,6 @@ namespace TCC.Windows
             IntPtr hwnd = new WindowInteropHelper(this).Handle;
             FocusManager.MakeUnfocusable(hwnd);
             FocusManager.HideFromToolBar(hwnd);
-            Opacity = 0;
             Topmost = true;
 
             ContextMenu = new ContextMenu();

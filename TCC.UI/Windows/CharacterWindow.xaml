@@ -30,6 +30,7 @@
             <Setter Property="FontSize" Value="13" />
             <Setter Property="Margin" Value="5,0,5,0"/>
         </Style>
+
         <converters:ClassImageConverter x:Key="classConv"/>
         <converters:LaurelImageConverter x:Key="laurelConv"/>
         <converters:CombatToColorConverter x:Key="combatConv"/>
@@ -42,7 +43,7 @@
     <Window.DataContext>
         <vm:CharacterWindowViewModel/>
     </Window.DataContext>
-    <Grid Margin="20" UseLayoutRounding="True" SnapsToDevicePixels="True" Name="rootGrid">
+    <Grid Margin="20" UseLayoutRounding="True" SnapsToDevicePixels="True" Name="rootGrid" Style="{StaticResource opacityAnimatedContainer}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>

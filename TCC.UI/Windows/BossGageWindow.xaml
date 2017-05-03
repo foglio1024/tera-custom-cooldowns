@@ -18,7 +18,7 @@
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         MouseRightButtonDown="Window_MouseRightButtonDown"
         Loaded="Window_Loaded"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize" >
     <Window.Resources>
         <DataTemplate x:Key="BossGageDataTemplate">
             <local:BossGage EntityId="{Binding EntityId}"
@@ -31,12 +31,12 @@
                             Enraged="{Binding Enraged}"/>
         </DataTemplate>
         <converters:HarrowholdBossesVisibilityConverter x:Key="hhBossesVisConv"/>
-        
+
     </Window.Resources>
     <Window.DataContext>
         <vm:BossGaugeWindowViewModel/>
     </Window.DataContext>
-    <Grid>
+    <Grid Style="{StaticResource opacityAnimatedContainer}">
         <ItemsControl Name="Bosses" ItemTemplate="{StaticResource BossGageDataTemplate}" ItemsSource="{Binding CurrentNPCs}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>

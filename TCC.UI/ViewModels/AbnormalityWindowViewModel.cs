@@ -22,9 +22,14 @@ namespace TCC.ViewModels
             get => SessionManager.CurrentPlayer.InfBuffs;
         }
 
+        public bool IsTeraOnTop
+        {
+            get => WindowManager.IsTccVisible;
+        }
+
         public AbnormalityWindowViewModel()
         {
-
+            WindowManager.TccVisibilityChanged += (s, ev) => RaisePropertyChanged("IsTeraOnTop");
         }
     }
 }

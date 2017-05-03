@@ -28,15 +28,22 @@ namespace TCC.ViewModels
         {
             get => SessionManager.HarrowholdMode;            
         }
-        public BossGaugeWindowViewModel()
+        public bool IsTeraOnTop
         {
-            SessionManager.HhModeChanged += SessionManager_HhModeChanged;
+            get => WindowManager.IsTccVisible;
         }
-
         private void SessionManager_HhModeChanged(bool val)
         {
             RaisePropertyChanged("CurrentNPCs");
             RaisePropertyChanged("HarrowholdMode");
         }
+
+        public BossGaugeWindowViewModel()
+        {
+            SessionManager.HhModeChanged += SessionManager_HhModeChanged;
+            WindowManager.TccVisibilityChanged += (s, ev) => RaisePropertyChanged("IsTeraOnTop");
+
+        }
+
     }
 }

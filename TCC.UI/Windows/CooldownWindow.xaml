@@ -30,9 +30,10 @@
                                     SkillName="{Binding Skill.Name}" 
                                     Skill="{Binding Skill}"/>
         </DataTemplate>
+
     </Window.Resources>
     
-    <Grid Width="800">
+    <Grid Width="800" Style="{StaticResource opacityAnimatedContainer}">
         <Grid.RowDefinitions>
             <RowDefinition Height="76"/>
             <RowDefinition Height="76"/>

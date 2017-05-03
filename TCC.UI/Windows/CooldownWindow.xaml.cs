@@ -28,7 +28,6 @@ namespace TCC
             FocusManager.MakeUnfocusable(hwnd);
             FocusManager.HideFromToolBar(hwnd);
             Topmost = true;
-            Opacity = 0;
             ContextMenu = new ContextMenu();
             var HideButton = new MenuItem() { Header = "Hide" };
             HideButton.Click += (s, ev) =>
