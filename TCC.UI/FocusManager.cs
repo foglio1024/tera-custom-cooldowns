@@ -20,8 +20,6 @@ namespace TCC
 
         public static DispatcherTimer FocusTimer;
 
-        public static event ForegroundWindowChangedEventHandler ForegroundWindowChanged;
-
         [DllImport("user32.dll")]
         public static extern IntPtr GetForegroundWindow();
 
@@ -62,11 +60,13 @@ namespace TCC
 
             if (proc.ProcessName == "TERA" || proc.ProcessName == "TCC" || proc.ProcessName == "devenv")
             {
-                ForegroundWindowChanged?.Invoke(true);
+                //ForegroundWindowChanged?.Invoke(true);
+                WindowManager.IsFocused = true;
             }
             else
             {
-                ForegroundWindowChanged?.Invoke(false);
+                //ForegroundWindowChanged?.Invoke(false);
+                WindowManager.IsFocused = false;
             }
         }
     }

@@ -52,6 +52,7 @@ namespace TCC
                 Name = "Settings"
             };
             FocusManager.FocusTimer.Start();
+            
             PacketProcessor.Init();
 
             TeraSniffer.Instance.NewConnection += (srv) => SkillManager.Clear();
@@ -63,8 +64,8 @@ namespace TCC
                 Console.WriteLine("Skills loaded.");
                 BroochesDatabase.SetBroochesIcons();
                 Console.WriteLine("Set brooches icons");
-                MonsterDatabase.Populate();
-                Console.WriteLine("Monsters loaded");
+                //MonsterDatabase.Populate();
+                //Console.WriteLine("Monsters loaded");
                 AbnormalityDatabase.Load();
                 Console.WriteLine("Abnormalities loaded");
                 //Debug();

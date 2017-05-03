@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -10,6 +11,7 @@ namespace TCC
     {
         public static ObservableCollection<Boss> CurrentBosses = new ObservableCollection<Boss>();
         public static ObservableCollection<Player> CurrentUsers = new ObservableCollection<Player>();
+        public static MonsterDatabase CurrentDatabase;
         public static bool TryGetBossById(ulong id, out Boss b)
         {
             b = CurrentBosses.FirstOrDefault(x => x.EntityId == id);
@@ -25,19 +27,23 @@ namespace TCC
         }
 
         public static Dragon CurrentDragon = Dragon.None;
-
+        public static ObservableCollection<ulong> chestList = new ObservableCollection<ulong>();
         public static void SpawnNPC(ushort zoneId, uint templateId, ulong entityId, Visibility v, bool force)
         {
-            if (MonsterDatabase.TryGetMonster(templateId, zoneId, out Monster m))
+            if (CurrentDatabase.TryGetMonster(templateId, zoneId, out Monster m))
             {
                 //System.Console.WriteLine("[S_SPAWN_NPC] {0} {1} - {2}", zoneId,templateId, m.Name);
-
                 if ((m.IsBoss || m.MaxHP >= 20000000) || force)
                 {
                     App.Current.Dispatcher.Invoke(() =>
                     {
                         CurrentBosses.Add(new Boss(entityId, zoneId, templateId, v));
                         //System.Console.WriteLine("\t[ADDED] {0} {1} - {2}", zoneId, templateId, m.Name);
+                        if (m.Name == "Treasure Chest")
+                        {
+                            chestList.Add(entityId);
+                            Console.WriteLine("Chest spawned [{0}]", chestList.Count);
+                        }
 
                     });
                 }
@@ -66,6 +72,17 @@ namespace TCC
             {
                 UnsetDragonsContexts(target);
             }
+            if (chestList.Contains(target))
+            {
+                App.Current.Dispatcher.Invoke(() =>
+                {
+                    chestList.Remove(target);
+                });
+
+                Console.WriteLine("Chest removed [{0}]", chestList.Count);
+            }
+
+
         }
         public static void SetNPCStatus(ulong entityId, bool enraged)
         {
@@ -100,7 +117,7 @@ namespace TCC
             App.Current.Dispatcher.Invoke(() =>
             {
                 CurrentBosses.Clear();
-                Console.WriteLine("NPCs cleared");
+                //Console.WriteLine("NPCs cleared");
             });
         }
         public static void ClearUsers()

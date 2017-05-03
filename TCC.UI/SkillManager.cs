@@ -52,7 +52,7 @@ namespace TCC
                 ResetSkill(skillCooldown.Skill);
             }
 
-            if (NormalSkillsQueue.ToList().Any(x => x.Skill.Name == skillCooldown.Skill.Name) || LongSkillsQueue.ToList().Any(x => x.Skill.Name == skillCooldown.Skill.Name))
+            if (NormalSkillsQueue.ToList().Any(x => x!=null && x.Skill.Name == skillCooldown.Skill.Name) || LongSkillsQueue.ToList().Any(x => x!=null && x.Skill.Name == skillCooldown.Skill.Name))
             {
                 Refresh?.Invoke(skillCooldown);
             }

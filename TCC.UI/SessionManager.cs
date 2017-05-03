@@ -11,8 +11,33 @@ namespace TCC
 
     public static class SessionManager
     {
-        public static bool Logged = false;
-        public static bool LoadingScreen = true;
+        private static bool logged = false;
+        public static bool Logged
+        {
+            get => logged;
+            set
+            {
+                if(logged != value)
+                {
+                    logged = value;
+                    WindowManager.NotifyVisibilityChanged();
+                }
+            }
+        }
+        private static bool loadingScreen = true;
+        public static bool LoadingScreen
+        {
+            get => loadingScreen;
+            set
+            {
+                if(loadingScreen != value)
+                {
+                    loadingScreen = value;
+                    WindowManager.NotifyVisibilityChanged();
+                }
+            }
+        }
+
         static bool harrowHoldMode = false;
         public static bool HarrowholdMode
         {

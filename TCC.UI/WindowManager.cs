@@ -50,7 +50,52 @@ namespace TCC
             }
         }
 
+        private static bool isTccVisible;
+        public static bool IsTccVisible
+        {
+            get
+            {
+                if(SessionManager.Logged && !SessionManager.LoadingScreen && IsFocused)
+                {
+                    isTccVisible = true;
+                    return isTccVisible;
+                }
+                else
+                {
+                    isTccVisible = false;
+                    return isTccVisible;
+                }
+            }
+            set
+            {
+                if(isTccVisible != value)
+                {
+                    isTccVisible = value;
+                    NotifyVisibilityChanged();
+                }
+            }
+        }
+        private static bool isFocused;
+        public static bool IsFocused
+        {
+            get => isFocused;
+            set
+            {
+                if(isFocused != value)
+                {
+                    isFocused = value;
+                    NotifyVisibilityChanged();
+                }
+            }
+        }
+
+        public static void NotifyVisibilityChanged()
+        {
+            TccVisibilityChanged?.Invoke(null, new PropertyChangedEventArgs("IsTeraOnTop"));
+        }
+
         public static event PropertyChangedEventHandler ClickThruChanged;
+        public static event PropertyChangedEventHandler TccVisibilityChanged;
 
         public static Visibility StaminaGaugeVisibility;
         public static double StaminaGaugeTop;
@@ -102,7 +147,7 @@ namespace TCC
 
             CloseButton.Click += (s, ev) => App.CloseApp();
             ClickThruButton.Click += (s, ev) => ToggleClickThru();
-            ForceShowButton.Click += (s, ev) => ForceShow();
+            //ForceShowButton.Click += (s, ev) => ForceShow();
 
             //ContextMenu.Items.Add(CooldownWindowVisibilityButton);
             //ContextMenu.Items.Add(BuffBarWindowVisibilityButton);
@@ -116,8 +161,13 @@ namespace TCC
             FocusManager.FocusTimer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
             FocusManager.FocusTimer.Tick += FocusManager.CheckForegroundWindow;
 
-            FocusManager.ForegroundWindowChanged += FocusManager_ForegroundWindowChanged;
+            //FocusManager.ForegroundWindowChanged += FocusManager_ForegroundWindowChanged;
+            //FocusManager_ForegroundWindowChanged(true);
+
             ClickThruChanged += (s, ev) => UpdateClickThru();
+
+            var tw = new TestWindow();
+            tw.Show();
 
         }
 
@@ -126,18 +176,6 @@ namespace TCC
             Settings.Opacity = 0;
             Settings.Show();
             Settings.BeginAnimation(Window.OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
-        }
-
-        private static void ForceShow()
-        {
-            CooldownWindow.Show();
-            CooldownWindow.Topmost = true;
-            CharacterWindow.Show();
-            CharacterWindow.Topmost = true;
-            BossGauge.Show();
-            BossGauge.Topmost = true;
-            BuffBar.Show();
-            BuffBar.Topmost = true;
         }
 
         public static void ChangeClickThru(bool v)

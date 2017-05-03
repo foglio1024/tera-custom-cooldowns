@@ -322,7 +322,7 @@
     <Compile Include="UI elements\MaterialSwitch.xaml.cs">
       <DependentUpon>MaterialSwitch.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI elements\SettingsWindowViewModel.cs" />
+    <Compile Include="ViewModels\SettingsWindowViewModel.cs" />
     <Compile Include="UI elements\StaminaGaugeControl.xaml.cs">
       <DependentUpon>StaminaGaugeControl.xaml</DependentUpon>
     </Compile>
@@ -337,6 +337,7 @@
     <Compile Include="Converters\StaminaBarColorConverter.cs" />
     <Compile Include="Converters\StaminaBarVisibilityConverter.cs" />
     <Compile Include="ViewModels\CooldownWindowViewModel.cs" />
+    <Compile Include="ViewModels\TestWindowViewModel.cs" />
     <Compile Include="Windows\AbnormalitiesWindow.xaml.cs">
       <DependentUpon>AbnormalitiesWindow.xaml</DependentUpon>
     </Compile>
@@ -392,6 +393,9 @@
     <Compile Include="Parsing\StringUtils.cs" />
     <Compile Include="Parsing\Messages\S_USER_STATUS.cs" />
     <Compile Include="WindowManager.cs" />
+    <Compile Include="Windows\TestWindow.xaml.cs">
+      <DependentUpon>TestWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="UI elements\AbnormalityIndicator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -481,6 +485,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\TestWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Parsing\Messages\C_CHECK_VERSION_CUSTOM.cs" />
@@ -513,7 +521,31 @@
     <Resource Include="resources\images\ic_close_white_24dp_2x.png" />
     <Resource Include="resources\images\Icon_Laurels\blank.png" />
     <Resource Include="resources\images\combat.png" />
-    <Content Include="resources\database\monsters-EU-EN.xml">
+    <Content Include="resources\data\monsters\monsters-EU-EN.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\monsters\monsters-EU-FR.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\monsters\monsters-EU-GER.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\monsters\monsters-JP.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\monsters\monsters-KR.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\monsters\monsters-NA.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\monsters\monsters-override.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\monsters\monsters-RU.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\monsters\monsters-TW.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\data\opcodes\311383.txt">
@@ -539,16 +571,22 @@
     <Resource Include="resources\images\Icon_Laurels\gold.png" />
     <Resource Include="resources\images\Icon_Laurels\silver.png" />
     <Resource Include="resources\OpenSans-Regular.ttf" />
-    <Content Include="resources\database\abnormalities.tsv">
+    <Content Include="resources\data\abnormalities.tsv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\database\skills.tsv">
+    <Content Include="resources\data\skills.tsv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="resources\defaultIcon.ico" />
     <Resource Include="resources\images\enraged.png" />
+    <Content Include="resources\data\opcodes\313623.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="resources\data\opcodes\smt_311383.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\opcodes\smt_313623.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\data\servers.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

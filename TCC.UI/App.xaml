@@ -24,5 +24,33 @@
             <Setter Property="Foreground" Value="#bbffffff"/>
             <Setter Property="FontFamily" Value="/TCC;component/resources/#Open Sans"/>
         </Style>
+
+        <Style x:Key="opacityAnimatedContainer" TargetType="FrameworkElement">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsTeraOnTop}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation From="0" To="1"
+                                     Duration="0:0:0.2"
+                                     Storyboard.TargetProperty="Opacity"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation From="1" To="0"
+                                                 Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="Opacity"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </Style.Triggers>
+            <Setter Property="Opacity" Value="0"/>
+        </Style>
+
+
     </Application.Resources>
 </Application>
