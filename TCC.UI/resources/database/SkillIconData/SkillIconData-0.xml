@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<SkillIconData>
-  <Icon class="Common" skillId="8881001" iconName="Icon_Skills.GuildSkills_CallClan_Tex" toolTip="집결" gender="Common" race="Common" />
-  <Icon class="Common" skillId="8881002" iconName="Icon_Skills.GuildSkills_CcRes2_Tex" toolTip="결전" gender="Common" race="Common" />
-  <Icon class="Common" skillId="8881003" iconName="Icon_Skills.GuildSkills_BaseHP2_Tex" toolTip="난공불락" gender="Common" race="Common" />
-</SkillIconData>

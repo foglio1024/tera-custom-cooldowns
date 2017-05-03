@@ -138,7 +138,7 @@ namespace TCC.Data
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Cannot remove {0}", ab.Name);
+                    //Console.WriteLine("Cannot remove {0}", ab.Name);
                 }
             });
         }
@@ -146,7 +146,7 @@ namespace TCC.Data
         public Boss(ulong eId, uint zId, uint tId, float curHP, float maxHP, Visibility visible)
         {
             EntityId = eId;
-            Name = MonsterDatabase.GetName(tId, zId);
+            Name = EntitiesManager.CurrentDatabase.GetName(tId, zId);
             MaxHP = maxHP;
             CurrentHP = curHP;
             Buffs = new ObservableCollection<AbnormalityDuration>();
@@ -156,8 +156,8 @@ namespace TCC.Data
         public Boss(ulong eId, uint zId, uint tId, Visibility visible)
         {
             EntityId = eId;
-            Name = MonsterDatabase.GetName(tId, zId);
-            MaxHP = MonsterDatabase.GetMaxHP(tId, zId);
+            Name = EntitiesManager.CurrentDatabase.GetName(tId, zId);
+            MaxHP = EntitiesManager.CurrentDatabase.GetMaxHP(tId, zId);
             CurrentHP = MaxHP;
             Buffs = new ObservableCollection<AbnormalityDuration>();
             Visible = visible;

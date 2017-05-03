@@ -13,7 +13,7 @@ namespace TCC.Data
         public static Dictionary<uint, Abnormality> Abnormalities;
         public static void Load()
         {
-            var f = File.OpenText(Environment.CurrentDirectory + "/resources/database/abnormalities.tsv");
+            var f = File.OpenText(Environment.CurrentDirectory + "/resources/data/abnormalities.tsv");
             Abnormalities = new Dictionary<uint, Abnormality>();
             while (true)
             {

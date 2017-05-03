@@ -59,7 +59,7 @@ namespace TCC
 
         public static void Load()
         {
-            var f = File.OpenText(Environment.CurrentDirectory + "/resources/database/skills.tsv");
+            var f = File.OpenText(Environment.CurrentDirectory + "/resources/data/skills.tsv");
 
             SkillConnections = new List<SkillConnection>();
             Skills = new Dictionary<Class, Dictionary<uint, Skill>>();

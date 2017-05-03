@@ -7,32 +7,28 @@ using System.Xml.Linq;
 
 namespace TCC.Data
 {
-    public static class MonsterDatabase
+    public class MonsterDatabase
     {
-        static XDocument MonstersDoc;
-        static List<Zone> Zones;
+        XDocument MonstersDoc;
+        List<Zone> Zones;
 
-        public static void Populate()
+        public MonsterDatabase(string lang)
         {
             Zones = new List<Zone>();
 
-            LoadDoc();
+            LoadDoc(lang);
             ParseDoc();
-            //foreach (var item in Zones)
-            //{
-            //    Console.WriteLine("Zone: {0}", item.Id);
-            //    foreach (var m in item.Monsters)
-            //    {
-            //        Console.WriteLine("Monster: {0} ({1})", m.Name, m.Id);
-            //    }
-            //}
             MonstersDoc = null;
         }
-        static void LoadDoc()
+        public void Populate(string region)
         {
-            MonstersDoc = XDocument.Load(Environment.CurrentDirectory + @"/resources/database/monsters-EU-EN.xml");
+
         }
-        static void ParseDoc()
+        void LoadDoc(string region)
+        {
+            MonstersDoc = XDocument.Load(Environment.CurrentDirectory + @"/resources/data/monsters/monsters-"+region+".xml");
+        }
+        void ParseDoc()
         {
             foreach (var zone in MonstersDoc.Descendants().Where(x => x.Name == "Zone"))
             {
@@ -57,7 +53,7 @@ namespace TCC.Data
             }
         }
 
-        public static bool TryGetMonster(uint templateId, uint zoneId, out Monster m)
+        public bool TryGetMonster(uint templateId, uint zoneId, out Monster m)
         {
             if(Zones.Where(x => x.Id == zoneId).Count() > 0)
             {
@@ -81,7 +77,7 @@ namespace TCC.Data
             }
         }
 
-        public static string GetName(uint templateId, uint zoneId)
+        public string GetName(uint templateId, uint zoneId)
         {
             if (TryGetMonster(templateId, zoneId, out Monster m))
             {
@@ -89,7 +85,7 @@ namespace TCC.Data
             }
             else return "Unknown";
         }
-        public static int GetMaxHP(uint templateId, uint zoneId)
+        public int GetMaxHP(uint templateId, uint zoneId)
         {
             if (TryGetMonster(templateId, zoneId, out Monster m))
             {

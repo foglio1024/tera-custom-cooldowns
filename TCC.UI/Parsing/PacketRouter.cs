@@ -19,6 +19,7 @@ namespace TCC.Parsing
     public static class PacketProcessor
     {
         public static uint Version;
+        public static string Region;
         public static OpCodeNamer OpCodeNamer;
         public static OpCodeNamer SystemMessageNamer;
         static ConcurrentQueue<Tera.Message> Packets = new ConcurrentQueue<Tera.Message>();
@@ -26,8 +27,17 @@ namespace TCC.Parsing
         public static void Init()
         {
             TeraSniffer.Instance.MessageReceived += MessageReceived;
+            TeraSniffer.Instance.NewConnection += Instance_NewConnection;
             var analysisThread = new Thread(PacketAnalysisLoop);
             analysisThread.Start();
+        }
+
+        private static void Instance_NewConnection(Server obj)
+        {
+            Region = obj.Region;
+            var td = new TeraData(Region);
+            var lang = td.GetLanguage(Region);
+            EntitiesManager.CurrentDatabase = new MonsterDatabase(lang);
         }
 
         public static void MessageReceived(global::Tera.Message obj)
@@ -198,9 +208,9 @@ namespace TCC.Parsing
                 {
                     b.MaxHP = p.maxHP;
                 }
-                Console.WriteLine("Changing hp from {0} to {1}", b.CurrentHP, p.currentHP);
+                //Console.WriteLine("Changing hp from {0} to {1}", b.CurrentHP, p.currentHP);
                 b.CurrentHP = p.currentHP;
-                Console.WriteLine("Result: {0}", b.CurrentHP);
+                //Console.WriteLine("Result: {0}", b.CurrentHP);
 
             }
         }

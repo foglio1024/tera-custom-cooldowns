@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<StrSheet_UserSkill>
-  <String id="8881001" name="Convergence" class="Common" tooltip="Summon your guild members to your side. Does not work on characters in dungeons or battlegrounds.&lt;br&gt;&lt;br&gt;Costs $H_W_GOOD480$COLOR_END Guild  Funds." gender="Common" race="Common" />
-  <String id="8881002" name="Battle Will" class="Common" tooltip="Increases the Attack Speed and PvP Attack of all guild members by $H_W_GOOD10$COLOR_END. Effects last 5 minutes. Does not work on characters in dungeons or battlegrounds.&lt;br&gt;&lt;br&gt;Costs $H_W_GOOD2400$COLOR_END Guild Funds." gender="Common" race="Common" />
-  <String id="8881003" name="Impregnable" class="Common" tooltip="Increases the PvP Defense of all guild members by $H_W_GOOD20$COLOR_END. Effects last 5 minutes. Does not work on characters in dungeons or battlegrounds.&lt;br&gt;&lt;br&gt;Costs $H_W_GOOD1440$COLOR_END Guild Funds." gender="Common" race="Common" />
-</StrSheet_UserSkill>
