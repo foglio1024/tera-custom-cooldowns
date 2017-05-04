@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
@@ -103,8 +104,18 @@ namespace TCC
 
         public static void Init()
         {
+            var t = new Thread(() =>
+            {
+                CooldownWindow = new CooldownWindow();
+                SkillManager.LongSkillsQueue = new System.Collections.ObjectModel.ObservableCollection<SkillCooldown>();
+                SkillManager.NormalSkillsQueue = new System.Collections.ObjectModel.ObservableCollection<SkillCooldown>();
+                CooldownWindow.Show();
+                Dispatcher.Run();
+
+            });
+            t.SetApartmentState(ApartmentState.STA);
+            t.Start();
             CharacterWindow = new CharacterWindow();
-            CooldownWindow = new CooldownWindow();
             BossGauge = new BossGageWindow();
             BuffBar = new AbnormalitiesWindow();
             ContextMenu = new ContextMenu();

@@ -33,11 +33,15 @@ namespace TCC.ViewModels
 
                     if (value)
                     {
-                        WindowManager.CooldownWindow.Visibility = System.Windows.Visibility.Visible;
+                        WindowManager.CooldownWindow.Dispatcher.Invoke(() =>
+                        WindowManager.CooldownWindow.Visibility = System.Windows.Visibility.Visible
+                        );
                     }
                     else
                     {
-                        WindowManager.CooldownWindow.Visibility = System.Windows.Visibility.Collapsed;
+                        WindowManager.CooldownWindow.Dispatcher.Invoke(() =>
+                        WindowManager.CooldownWindow.Visibility = System.Windows.Visibility.Collapsed
+                        );
                     }
                     RaisePropertyChanged("IsCooldownWindowVisible");
                 }
@@ -163,7 +167,7 @@ namespace TCC.ViewModels
             }
             set
             {
-                if(value != WindowManager.ClickThru)
+                if (value != WindowManager.ClickThru)
                 {
                     WindowManager.ClickThru = value;
                 }

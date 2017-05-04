@@ -82,10 +82,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PacketDotNet">
-      <HintPath>..\..\..\Shinra Meter\NetworkSniffer\bin\Release\PacketDotNet.dll</HintPath>
+      <HintPath>..\..\..\ShinraMeter\SharpPcap\PacketDotNet.dll</HintPath>
     </Reference>
     <Reference Include="SharpPcap">
-      <HintPath>..\..\..\Shinra Meter\NetworkSniffer\bin\Release\SharpPcap.dll</HintPath>
+      <HintPath>..\..\..\ShinraMeter\SharpPcap\SharpPcap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

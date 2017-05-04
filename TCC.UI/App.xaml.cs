@@ -52,7 +52,7 @@ namespace TCC
                 Name = "Settings"
             };
             FocusManager.FocusTimer.Start();
-            
+
             PacketProcessor.Init();
 
             TeraSniffer.Instance.NewConnection += (srv) => SkillManager.Clear();
@@ -111,15 +111,15 @@ namespace TCC
 
                 WindowManager.CharacterWindow.Visibility = Visibility.Visible;
                 WindowManager.CharacterWindow.Top = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height - 120;
-                WindowManager.CharacterWindow.Left = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width /2 - 200;
+                WindowManager.CharacterWindow.Left = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width / 2 - 200;
 
                 //WindowManager.ClassSpecificWindow.Visibility = Visibility.Visible;
                 //WindowManager.ClassSpecificWindow.Top = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height / 2;
                 //WindowManager.ClassSpecificWindow.Left = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width /2 - 100;
 
                 WindowManager.CooldownWindow.Visibility = Visibility.Visible;
-                WindowManager.CooldownWindow.Top = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height /1.5;
-                WindowManager.CooldownWindow.Left = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width /3;
+                WindowManager.CooldownWindow.Top = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height / 1.5;
+                WindowManager.CooldownWindow.Left = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width / 3;
 
             }
         }
@@ -130,16 +130,16 @@ namespace TCC
             var vals = line.Split(',');
             try
             {
-                w.Top = Convert.ToDouble(vals[0]);
-                w.Left = Convert.ToDouble(vals[1]);
+                w.Dispatcher.Invoke(() => w.Top = Convert.ToDouble(vals[0]));
+                w.Dispatcher.Invoke(() => w.Left = Convert.ToDouble(vals[1]));
                 if (Enum.TryParse(vals[2], out Visibility v))
                 {
-                    w.Visibility = v;
+                    w.Dispatcher.Invoke(() => w.Visibility = v);
                 }
             }
             catch (Exception)
             {
-                             
+
             }
         }
 
@@ -157,7 +157,7 @@ namespace TCC
 
         private static void AddSetting(Window w, string[] vals, int i)
         {
-            vals[i] = String.Format("{0},{1},{2}", w.Top, w.Left, w.Visibility.ToString());
+            w.Dispatcher.Invoke(() => vals[i] = String.Format("{0},{1},{2}", w.Top, w.Left, w.Visibility.ToString()));
         }
         public static void CloseApp()
         {

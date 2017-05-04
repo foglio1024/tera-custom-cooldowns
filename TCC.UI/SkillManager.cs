@@ -60,11 +60,12 @@ namespace TCC
             {
                 if (skillCooldown.Cooldown < LongSkillTreshold)
                 {
-                    App.Current.Dispatcher.Invoke(() => NormalSkillsQueue.Add(skillCooldown));
+                    
+                    WindowManager.CooldownWindow.Dispatcher.Invoke(() => NormalSkillsQueue.Add(skillCooldown));
                 }
                 else
                 {
-                    App.Current.Dispatcher.Invoke(() => LongSkillsQueue.Add(skillCooldown));
+                    WindowManager.CooldownWindow.Dispatcher.Invoke(() => LongSkillsQueue.Add(skillCooldown));
                 }
             }
         }
