@@ -8,7 +8,7 @@
         xmlns:vm="clr-namespace:TCC.ViewModels"
         mc:Ignorable="d"
         Title="AbnormalitiesWindow" Height="Auto" Width="Auto"
-        Topmost="True"
+        Topmost="{Binding TopMost}"
         ShowInTaskbar="False"
         WindowStyle="None"
         Background="#00000000"

@@ -10,7 +10,7 @@
         mc:Ignorable="d"
         Title="HPbar" 
         Height="Auto" Width="Auto"
-        Topmost="True" 
+        Topmost="{Binding TopMost}" 
         Background="#00000000" 
         ShowInTaskbar="False" 
         WindowStyle="None" 

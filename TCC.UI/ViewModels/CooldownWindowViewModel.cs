@@ -34,10 +34,32 @@ namespace TCC.ViewModels
             get => WindowManager.IsTccVisible;
         }
 
+        private bool topMost;
+        public bool TopMost
+        {
+            get => topMost;
+            set
+            {
+                if (topMost != value)
+                {
+                    topMost = value;
+                    RaisePropertyChanged("TopMost");
+                }
+            }
+        }
+
         public CooldownWindowViewModel()
         {
             SkillIconControl.SkillEnded += RemoveSkill;
-            WindowManager.TccVisibilityChanged += (s, ev) => RaisePropertyChanged("IsTeraOnTop");
+            WindowManager.TccVisibilityChanged += (s, ev) =>
+            {
+                RaisePropertyChanged("IsTeraOnTop");
+                if (IsTeraOnTop)
+                {
+                    TopMost = false;
+                    TopMost = true;
+                }
+            };
 
         }
     }

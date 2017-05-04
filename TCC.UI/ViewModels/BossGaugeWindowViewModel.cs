@@ -37,11 +37,32 @@ namespace TCC.ViewModels
             RaisePropertyChanged("CurrentNPCs");
             RaisePropertyChanged("HarrowholdMode");
         }
+        private bool topMost;
+        public bool TopMost
+        {
+            get => topMost;
+            set
+            {
+                if (topMost != value)
+                {
+                    topMost = value;
+                    RaisePropertyChanged("TopMost");
+                }
+            }
+        }
 
         public BossGaugeWindowViewModel()
         {
             SessionManager.HhModeChanged += SessionManager_HhModeChanged;
-            WindowManager.TccVisibilityChanged += (s, ev) => RaisePropertyChanged("IsTeraOnTop");
+            WindowManager.TccVisibilityChanged += (s, ev) =>
+            {
+                RaisePropertyChanged("IsTeraOnTop");
+                if (IsTeraOnTop)
+                {
+                    TopMost = false;
+                    TopMost = true;
+                }
+            };
 
         }
 

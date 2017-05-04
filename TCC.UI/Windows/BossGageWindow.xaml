@@ -10,7 +10,7 @@
         mc:Ignorable="d"
         Title="BossGageWindow" Height="Auto" Width="Auto"
         SizeToContent="WidthAndHeight"
-        Topmost="True"
+        Topmost="{Binding TopMost}"
         AllowsTransparency="True"
         ShowInTaskbar="False"
         WindowStyle="None"
