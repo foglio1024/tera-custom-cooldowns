@@ -97,7 +97,7 @@ namespace DamageMeter.Sniffing
 
         protected virtual void OnMessageReceived(Message message)
         {
-            Packets.Enqueue(message);
+            //Packets.Enqueue(message);
             var handler = MessageReceived;
             handler?.Invoke(message);
 
