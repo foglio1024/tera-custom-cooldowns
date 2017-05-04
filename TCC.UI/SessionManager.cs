@@ -70,9 +70,21 @@ namespace TCC
         }
         public static void EndPlayerAbnormality(Abnormality ab)
         {
-            CurrentPlayer.Buffs.Remove(CurrentPlayer.Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id));
-            CurrentPlayer.Debuffs.Remove(CurrentPlayer.Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id));
-            CurrentPlayer.InfBuffs.Remove(CurrentPlayer.InfBuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id));
+            if(CurrentPlayer.Buffs.Any(x => x.Abnormality.Id == ab.Id))
+            {
+                CurrentPlayer.Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id).Dispose();
+                CurrentPlayer.Buffs.Remove(CurrentPlayer.Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id));
+            }
+            else if (CurrentPlayer.Debuffs.Any(x => x.Abnormality.Id == ab.Id))
+            {
+                CurrentPlayer.Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id).Dispose();
+                CurrentPlayer.Debuffs.Remove(CurrentPlayer.Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id));
+            }
+            else if (CurrentPlayer.InfBuffs.Any(x => x.Abnormality.Id == ab.Id))
+            {
+                CurrentPlayer.InfBuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id).Dispose();
+                CurrentPlayer.InfBuffs.Remove(CurrentPlayer.InfBuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id));
+            }
             if (!ab.IsBuff)
             {
                 SetDebuffedStatus(false);
