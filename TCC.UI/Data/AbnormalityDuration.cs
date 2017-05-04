@@ -1,9 +1,10 @@
-﻿using System.Timers;
+﻿using System;
+using System.Timers;
 using TCC.Data;
 
 namespace TCC
 {
-    public class AbnormalityDuration
+    public class AbnormalityDuration : IDisposable
     {
         public ulong Target { get; set; }
         public Abnormality Abnormality { get; set; }
@@ -30,9 +31,11 @@ namespace TCC
         {
 
         }
-        ~AbnormalityDuration()
+
+        public void Dispose()
         {
             timer.Stop();
+            timer.Dispose();
         }
     }
 
