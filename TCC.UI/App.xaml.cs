@@ -84,7 +84,6 @@ namespace TCC
                 SetWindowParameters(WindowManager.BossGauge, sr); //0
                 SetWindowParameters(WindowManager.BuffBar, sr); //1
                 SetWindowParameters(WindowManager.CharacterWindow, sr); //2
-                //SetWindowParameters(WindowManager.ClassSpecificWindow, sr); //3
                 SetWindowParameters(WindowManager.CooldownWindow, sr); //4
                 var t = sr.ReadLine(); //5
                 if (t.Equals("true"))

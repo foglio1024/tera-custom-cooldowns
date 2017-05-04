@@ -130,11 +130,11 @@ namespace TCC
             {
                 if (Enraged)
                 {
-                    return CurrentEnrageTime.ToString() + "s";
+                    return String.Format("{0}s", CurrentEnrageTime.ToString());
                 }
                 else
                 {
-                    return NextEnragePercentage.ToString();
+                    return String.Format("{0:0.#}", NextEnragePercentage.ToString());
                 }
             }
         }
