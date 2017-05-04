@@ -134,6 +134,7 @@ namespace TCC.Data
             {
                 try
                 {
+                    Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id).Dispose();
                     Buffs.Remove(Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id));
                 }
                 catch (Exception)
