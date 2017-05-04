@@ -166,8 +166,8 @@ namespace TCC
 
             ClickThruChanged += (s, ev) => UpdateClickThru();
 
-            var tw = new TestWindow();
-            tw.Show();
+            //var tw = new TestWindow();
+            //tw.Show();
 
         }
 

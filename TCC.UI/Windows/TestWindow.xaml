@@ -1,0 +1,22 @@
+﻿<Window x:Class="TCC.Windows.TestWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TCC.Windows"
+        xmlns:vm="clr-namespace:TCC.ViewModels"
+        mc:Ignorable="d" WindowStyle="None" AllowsTransparency="True" Background="Transparent" Topmost="True"
+        Title="TestWindow" Height="Auto" Width="Auto" ResizeMode="NoResize" SizeToContent="WidthAndHeight"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
+    <Window.DataContext>
+        <vm:TestWindowViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Border Style="{StaticResource border}" Height="40" Width="40" Margin="5" CornerRadius="15"/>
+        <TextBlock Style="{StaticResource text1}" 
+                   Text="{Binding CurrentChestsCount}" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"
+                   FontSize="30"/>
+    </Grid>
+</Window>
