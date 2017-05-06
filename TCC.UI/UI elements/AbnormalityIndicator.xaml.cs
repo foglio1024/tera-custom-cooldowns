@@ -56,7 +56,8 @@ namespace TCC.UI_elements
                 if (Duration > 0)
                 {
                     var an = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(Duration));
-                    DoubleAnimation.SetDesiredFrameRate(an, 25);
+                    int fps = (Duration > 2 * 60 * 1000) ? 1 : 30;
+                    DoubleAnimation.SetDesiredFrameRate(an, fps);
                     arc.BeginAnimation(Arc.EndAngleProperty, an);
                     CurrentTime = Duration / 1000;
 
@@ -166,7 +167,11 @@ namespace TCC.UI_elements
                         {
                             return;
                         }
-                        arc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(duration)));
+                        var an = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(duration));
+                        int fps = (Duration > 2*60*1000) ? 1 : 30;
+                        DoubleAnimation.SetDesiredFrameRate(an, fps);
+
+                        arc.BeginAnimation(Arc.EndAngleProperty,an);
                     }
                 }
 

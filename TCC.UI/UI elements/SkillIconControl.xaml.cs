@@ -127,7 +127,8 @@ namespace TCC
                 }
 
                 var an = new DoubleAnimation(359.9 * newAngle, 0, TimeSpan.FromMilliseconds(s.Cooldown));
-                DoubleAnimation.SetDesiredFrameRate(an, 30);
+                var fps = (s.Cooldown > 2 * 60 * 1000) ? 1 : 30;
+                DoubleAnimation.SetDesiredFrameRate(an, fps);
                 arc.BeginAnimation(Arc.EndAngleProperty, an);
             });
         }
@@ -179,7 +180,8 @@ namespace TCC
         void AnimateCooldown()
         {
             var an = new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(Cooldown));
-            DoubleAnimation.SetDesiredFrameRate(an,30);
+            var fps = (Cooldown > 2 * 60 * 1000) ? 1 : 30;
+            DoubleAnimation.SetDesiredFrameRate(an,fps);
             arc.BeginAnimation(Arc.EndAngleProperty, an);
             NumberTimer.IsEnabled = true;
             MainTimer.IsEnabled = true;
