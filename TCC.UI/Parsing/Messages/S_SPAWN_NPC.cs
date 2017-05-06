@@ -28,7 +28,7 @@ namespace TCC.Parsing.Messages
             templateId = reader.ReadUInt32();
             huntingZoneId = reader.ReadUInt16();
 
-           // Console.WriteLine("[S_SPAWN NPC] id:{0} name:{1}", id, MonsterDatabase.GetName(npc, (uint)type));
+           //Console.WriteLine("[S_SPAWN NPC] id:{0} tId:{1} hzId:{2}", id, templateId, huntingZoneId);
         }
     }
 }
