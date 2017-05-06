@@ -37,7 +37,6 @@ namespace TCC
             timer.Stop();
             timer.Dispose();
         }
-
     }
 
 }
