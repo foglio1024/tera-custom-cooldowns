@@ -71,7 +71,7 @@
                                VerticalAlignment="Center" 
                                Margin="0" 
                                FontSize="14"
-                               Text="{Binding CurrentPercentage, RelativeSource={RelativeSource AncestorType=local:BossGage}, StringFormat=#.#%}"
+                               Text="{Binding CurrentPercentage, RelativeSource={RelativeSource AncestorType=local:BossGage}, StringFormat=0.#%}"
                                Grid.Row="1"/>
                     <Grid>
                         <Grid.ColumnDefinitions>

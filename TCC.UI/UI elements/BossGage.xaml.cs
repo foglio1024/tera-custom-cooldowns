@@ -134,7 +134,7 @@ namespace TCC
                 }
                 else
                 {
-                    return String.Format("{0:0.#}", NextEnragePercentage.ToString());
+                    return String.Format("{0:0.#}", NextEnragePercentage);
                 }
             }
         }
