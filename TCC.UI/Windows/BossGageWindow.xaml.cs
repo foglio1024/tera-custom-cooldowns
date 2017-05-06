@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Interop;
+using TCC.ViewModels;
 
 namespace TCC.Converters
 {
@@ -41,6 +42,7 @@ namespace TCC.Windows
         public BossGageWindow()
         {
             InitializeComponent();
+            Bosses.DataContext = BossGaugeWindowViewModel.Instance.CurrentNPCs;
 
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)

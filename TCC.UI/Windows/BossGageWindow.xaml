@@ -37,7 +37,7 @@
         <vm:BossGaugeWindowViewModel/>
     </Window.DataContext>
     <Grid Style="{StaticResource opacityAnimatedContainer}">
-        <ItemsControl Name="Bosses" ItemTemplate="{StaticResource BossGageDataTemplate}" ItemsSource="{Binding CurrentNPCs}">
+        <ItemsControl Name="Bosses" ItemTemplate="{StaticResource BossGageDataTemplate}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Background="Transparent" Orientation="Vertical" ItemHeight="Auto" Height="270"/>

@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
+using TCC.ViewModels;
 
 namespace TCC
 {
@@ -12,7 +13,7 @@ namespace TCC
 }
 namespace TCC.Data
 {
-    public class Boss : INotifyPropertyChanged
+    public class Boss : TSPropertyChanged
     {
         public ulong EntityId { get; set; }
         string name;
@@ -27,9 +28,19 @@ namespace TCC.Data
             }
         }
 
-        public ObservableCollection<AbnormalityDuration> Buffs;
+        private SynchronizedObservableCollection<AbnormalityDuration> _buffs;
+        public SynchronizedObservableCollection<AbnormalityDuration> Buffs
+        {
+            get { return _buffs; }
+            set
+            {
+                if (_buffs == value) return;
+                _buffs = value;
+                NotifyPropertyChanged("Buffs")
+            }
+        }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        //public event PropertyChangedEventHandler PropertyChanged;
         public static event UpdateBossHPEventHandler BossHPChanged;
         public static event UpdateBossEnrageEventHandler EnragedChanged;
 
@@ -112,10 +123,10 @@ namespace TCC.Data
         }
 
 
-        public void NotifyPropertyChanged(string v)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(v));
-        }
+        //public void NotifyPropertyChanged(string v)
+        //{
+        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(v));
+        //}
         public bool HasBuff(Abnormality ab)
         {
             if(Buffs.Any(x => x.Abnormality.Id == ab.Id))
