@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using TCC.Data;
+using TCC.ViewModels;
 
 namespace TCC
 {
@@ -32,32 +33,15 @@ namespace TCC
         {
             if (CurrentDatabase.TryGetMonster(templateId, zoneId, out Monster m))
             {
-                //System.Console.WriteLine("[S_SPAWN_NPC] {0} {1} - {2}", zoneId,templateId, m.Name);
-                if ((m.IsBoss || m.MaxHP >= 20000000) || force)
+                if (m.IsBoss || force)
                 {
                     App.Current.Dispatcher.Invoke(() =>
                     {
                         CurrentBosses.Add(new Boss(entityId, zoneId, templateId, v));
-                        //System.Console.WriteLine("\t[ADDED] {0} {1} - {2}", zoneId, templateId, m.Name);
-                        if (m.Name == "Treasure Chest")
-                        {
-                            chestList.Add(entityId);
-                            Console.WriteLine("Chest spawned [{0}]", chestList.Count);
-                        }
-
+                        BossGageWindowManager.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP);
                     });
                 }
-                else
-                {
-                    //System.Console.WriteLine("\t[SKIPPED] {0} {1} - {2}", zoneId, templateId, m.Name);
-                }
             }
-            else
-            {
-                //System.Console.WriteLine("\t[NOT FOUND] {0} {1}", zoneId, templateId);
-
-            }
-
         }
         public static void DespawnNPC(ulong target)
         {
@@ -66,20 +50,12 @@ namespace TCC
                 App.Current.Dispatcher.Invoke(() =>
                 {
                     CurrentBosses.Remove(b);
+                    BossGageWindowManager.Instance.RemoveBoss(target);
                 });
             }
             if (SessionManager.HarrowholdMode)
             {
                 UnsetDragonsContexts(target);
-            }
-            if (chestList.Contains(target))
-            {
-                App.Current.Dispatcher.Invoke(() =>
-                {
-                    chestList.Remove(target);
-                });
-
-                Console.WriteLine("Chest removed [{0}]", chestList.Count);
             }
 
 
@@ -106,6 +82,7 @@ namespace TCC
                 {
                     b.CurrentHP = curHP;
                 }
+                BossGageWindowManager.Instance.AddOrUpdateBoss(target, maxHP, curHP);
             }
             else
             {
@@ -117,8 +94,8 @@ namespace TCC
             App.Current.Dispatcher.Invoke(() =>
             {
                 CurrentBosses.Clear();
-                //Console.WriteLine("NPCs cleared");
             });
+            BossGageWindowManager.Instance.ClearBosses();
         }
         public static void ClearUsers()
         {

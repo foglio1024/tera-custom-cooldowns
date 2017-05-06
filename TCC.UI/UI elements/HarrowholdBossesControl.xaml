@@ -12,15 +12,7 @@
         <DataTemplate x:Key="dragonSmallGauge">
         </DataTemplate>
         <DataTemplate x:Key="BossBuffDataTemplate">
-            <elements:AbnormalityIndicator AbnormalityId="{Binding Abnormality.Id}"
-                                           AbnormalityName="{Binding Abnormality.Name}"
-                                           AbnormalityTooltip="{Binding Abnormality.ToolTip}"
-                                           IconName="{Binding Abnormality.IconName}"
-                                           Duration="{Binding Duration}"
-                                           Stacks="{Binding Stacks}"
-                                           TargetId="{Binding Target}"
-                                           Type="{Binding Abnormality.Type}"
-                                           Size="27"/>
+            <elements:AbnormalityIndicator Size="27"/>
         </DataTemplate>
 
     </UserControl.Resources>

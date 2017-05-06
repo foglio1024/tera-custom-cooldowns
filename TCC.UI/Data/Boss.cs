@@ -13,12 +13,13 @@ namespace TCC
 }
 namespace TCC.Data
 {
-    public class Boss : TSPropertyChanged
+    public class Boss : TSPropertyChanged, IDisposable
     {
         public ulong EntityId { get; set; }
         string name;
         public string Name
-        { get => name;
+        {
+            get => name;
             set
             {
                 if (name != value)
@@ -90,8 +91,12 @@ namespace TCC.Data
         public float CurrentPercentage => _maxHP == 0 ? 0 : (_currentHP / _maxHP);
 
         Visibility visible;
-        public Visibility Visible { get { return visible; }  set {
-                if(visible != value)
+        public Visibility Visible
+        {
+            get { return visible; }
+            set
+            {
+                if (visible != value)
                 {
                     visible = value;
                     NotifyPropertyChanged("Visible");
@@ -103,7 +108,8 @@ namespace TCC.Data
         public ulong Target
         {
             get { return target; }
-            set {
+            set
+            {
                 if (target != value)
                 {
                     target = value;
@@ -119,7 +125,7 @@ namespace TCC.Data
             set
             {
                 if (currentAggroType != value)
-                { 
+                {
                     currentAggroType = value;
                     NotifyPropertyChanged("CurrentAggroType");
                 }
@@ -135,43 +141,44 @@ namespace TCC.Data
         public void AddorRefresh(AbnormalityDuration ab)
         {
             var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Abnormality.Id);
-            if(existing == null)
+            if (existing == null)
             {
-                Buffs.Add(ab);
+                if (ab.Abnormality.Infinity) Buffs.Insert(0, ab);
+                else Buffs.Add(ab);
                 return;
             }
             existing.Duration = ab.Duration;
             existing.DurationLeft = ab.DurationLeft;
             existing.Stacks = ab.Stacks;
-            
+            existing.Refresh();
+
         }
 
-        public bool HasBuff(Abnormality ab)
-        {
-            if(Buffs.Any(x => x.Abnormality.Id == ab.Id))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        //public bool HasBuff(Abnormality ab)
+        //{
+        //    if (Buffs.Any(x => x.Abnormality.Id == ab.Id))
+        //    {
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
 
         public void EndBuff(Abnormality ab)
         {
-            App.Current.Dispatcher.Invoke(() =>
+            try
             {
-                try
-                {
-                    Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id).Dispose();
-                    Buffs.Remove(Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id));
-                }
-                catch (Exception)
-                {
-                    //Console.WriteLine("Cannot remove {0}", ab.Name);
-                }
-            });
+                var buff = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
+                if (buff == null) return;
+                Buffs.Remove(buff);
+                buff.Dispose();
+            }
+            catch (Exception)
+            {
+                //Console.WriteLine("Cannot remove {0}", ab.Name);
+            }
         }
 
         public Boss(ulong eId, uint zId, uint tId, float curHP, float maxHP, Visibility visible)
@@ -197,6 +204,11 @@ namespace TCC.Data
         public override string ToString()
         {
             return String.Format("{0} - {1}", EntityId, Name);
+        }
+
+        public void Dispose()
+        {
+            foreach (var buff in _buffs) buff.Dispose();
         }
     }
 }

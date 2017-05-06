@@ -21,22 +21,15 @@
         ResizeMode="NoResize" >
     <Window.Resources>
         <DataTemplate x:Key="BossGageDataTemplate">
-            <local:BossGage EntityId="{Binding EntityId}"
-                            MaxHP="{Binding MaxHP}"
-                            CurrentHP="{Binding CurrentHP}"
-                            BossName="{Binding Name}"
-                            Visibility="{Binding Visible}"
-                            Target="{Binding Target}"
-                            CurrentAggroType="{Binding CurrentAggroType}"
-                            Enraged="{Binding Enraged}"/>
+            <local:BossGage/>
         </DataTemplate>
         <converters:HarrowholdBossesVisibilityConverter x:Key="hhBossesVisConv"/>
 
     </Window.Resources>
     <Window.DataContext>
-        <vm:BossGaugeWindowViewModel/>
+        <vm:BossGageWindowManager/>
     </Window.DataContext>
-    <Grid Style="{StaticResource opacityAnimatedContainer}">
+    <Grid Style="{StaticResource opacityAnimatedContainer}" Opacity="1">
         <ItemsControl Name="Bosses" ItemTemplate="{StaticResource BossGageDataTemplate}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -44,6 +37,6 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <elements:HarrowholdBossesControl x:Name="HHBosses" Visibility="{Binding HarrowholdMode, Converter={StaticResource hhBossesVisConv}}"/>
+        <elements:HarrowholdBossesControl x:Name="HHBosses" Opacity="0" Visibility="{Binding HarrowholdMode, Converter={StaticResource hhBossesVisConv}}"/>
     </Grid>
 </Window>

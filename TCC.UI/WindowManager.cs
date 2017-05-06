@@ -104,20 +104,27 @@ namespace TCC
 
         public static void Init()
         {
+            //var t = new Thread(() =>
+            //{
+            CooldownWindow = new CooldownWindow();
+            SkillManager.LongSkillsQueue = new System.Collections.ObjectModel.ObservableCollection<SkillCooldown>();
+            SkillManager.NormalSkillsQueue = new System.Collections.ObjectModel.ObservableCollection<SkillCooldown>();
+            //CooldownWindow.Show();
+            //Dispatcher.Run();
+
+            //});
+            //t.SetApartmentState(ApartmentState.STA);
+            //t.Start();
+            CharacterWindow = new CharacterWindow();
+            BuffBar = new AbnormalitiesWindow();
             var t = new Thread(() =>
             {
-                CooldownWindow = new CooldownWindow();
-                SkillManager.LongSkillsQueue = new System.Collections.ObjectModel.ObservableCollection<SkillCooldown>();
-                SkillManager.NormalSkillsQueue = new System.Collections.ObjectModel.ObservableCollection<SkillCooldown>();
-                CooldownWindow.Show();
+                BossGauge = new BossGageWindow();
                 Dispatcher.Run();
-
             });
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
-            CharacterWindow = new CharacterWindow();
-            BossGauge = new BossGageWindow();
-            BuffBar = new AbnormalitiesWindow();
+            Thread.Sleep(500);
             ContextMenu = new ContextMenu();
 
             TrayIcon = new System.Windows.Forms.NotifyIcon()

@@ -147,56 +147,11 @@ namespace TCC.ViewModels
             }
         }
     }
-
-    public class BossGaugeWindowViewModel : DependencyObject
+    public class BossGageWindowViewModel : BaseINPC
     {
-        private static BossGaugeWindowViewModel _instance;
-        public static BossGaugeWindowViewModel Instance => _instance ?? (_instance = new BossGaugeWindowViewModel());
-
-        private SynchronizedObservableCollection<Boss> _bosses = new SynchronizedObservableCollection<Boss>();
-        public SynchronizedObservableCollection<Boss> CurrentNPCs
-        {
-            get
-            {
-                if (HarrowholdMode)
-                {
-                    return null;
-                }
-                else
-                {
-                    return _bosses;
-                }
-            }
-            set
-            {
-                if (_bosses == value) return;
-                _bosses = value;
-            }
-        }
-
-        public void AddOrUpdateBoss(S_BOSS_GAGE_INFO msg)
-        {
-            var boss = _bosses.FirstOrDefault(x => x.EntityId == msg.EntityId);
-            if(boss == null)
-            {
-                if (!EntitiesManager.TryGetBossById(msg.EntityId, out Boss b)) return;
-                boss = b;
-                _bosses.Add(b);
-            }
-            boss.MaxHP = msg.MaxHP;
-            boss.CurrentHP = msg.CurrentHP;
-        }
-
-        public void RemoveBoss(S_DESPAWN_NPC msg)
-        {
-            var boss = _bosses.FirstOrDefault(x => x.EntityId == msg.target);
-            if (boss == null) return;
-            _bosses.Remove(boss);
-        }
-
         public bool HarrowholdMode
         {
-            get => SessionManager.HarrowholdMode;            
+            get => SessionManager.HarrowholdMode;
         }
         public bool IsTeraOnTop
         {
@@ -221,7 +176,7 @@ namespace TCC.ViewModels
             }
         }
 
-        public BossGaugeWindowViewModel()
+        public BossGageWindowViewModel()
         {
             SessionManager.HhModeChanged += SessionManager_HhModeChanged;
             WindowManager.TccVisibilityChanged += (s, ev) =>
@@ -233,6 +188,65 @@ namespace TCC.ViewModels
                     TopMost = true;
                 }
             };
+
+        }
+    }
+    public class BossGageWindowManager : DependencyObject
+    {
+        private static BossGageWindowManager _instance;
+        public static BossGageWindowManager Instance => _instance ?? (_instance = new BossGageWindowManager());
+
+        private SynchronizedObservableCollection<Boss> _bosses = new SynchronizedObservableCollection<Boss>();
+        public SynchronizedObservableCollection<Boss> CurrentNPCs
+        {
+            get
+            {
+                if (SessionManager.HarrowholdMode)
+                {
+                    return null;
+                }
+                else
+                {
+                    return _bosses;
+                }
+            }
+            set
+            {
+                if (_bosses == value) return;
+                _bosses = value;
+            }
+        }
+
+        public void AddOrUpdateBoss(ulong entityId, float maxHp, float curHp)
+        {
+            var boss = _bosses.FirstOrDefault(x => x.EntityId == entityId);
+            if (boss == null)
+            {
+                if (!EntitiesManager.TryGetBossById(entityId, out Boss b)) return;
+                boss = b;
+                _bosses.Add(b);
+            }
+            boss.MaxHP = maxHp;
+            boss.CurrentHP = curHp;
+        }
+
+        public void RemoveBoss(ulong id)
+        {
+            var boss = _bosses.FirstOrDefault(x => x.EntityId == id);
+            if (boss == null) return;
+            _bosses.Remove(boss);
+        }
+
+        internal void ClearBosses()
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                _bosses = new SynchronizedObservableCollection<Boss>();
+            });
+        }
+
+        public BossGageWindowManager()
+        {
 
         }
 

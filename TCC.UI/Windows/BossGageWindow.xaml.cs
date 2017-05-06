@@ -42,7 +42,8 @@ namespace TCC.Windows
         public BossGageWindow()
         {
             InitializeComponent();
-            Bosses.DataContext = BossGaugeWindowViewModel.Instance.CurrentNPCs;
+            Bosses.DataContext = BossGageWindowManager.Instance.CurrentNPCs;
+            Bosses.ItemsSource = BossGageWindowManager.Instance.CurrentNPCs;
 
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)

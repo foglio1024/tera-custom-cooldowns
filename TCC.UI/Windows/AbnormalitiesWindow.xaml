@@ -24,15 +24,7 @@
     </Window.DataContext>
     <Window.Resources>
         <DataTemplate x:Key="abTemplate">
-            <controls:AbnormalityIndicator AbnormalityId="{Binding Abnormality.Id}"
-                                           AbnormalityName="{Binding Abnormality.Name}"
-                                           IconName="{Binding Abnormality.IconName}"
-                                           Type="{Binding Abnormality.Type}"
-                                           AbnormalityTooltip="{Binding Abnormality.ToolTip}"
-                                           Duration="{Binding Duration}"
-                                           Stacks="{Binding Stacks}"
-                                           TargetId="{Binding Target}"
-                                           HorizontalAlignment="Right"
+            <controls:AbnormalityIndicator HorizontalAlignment="Right"
                                            Size ="32">
                 
                 <controls:AbnormalityIndicator.Resources>

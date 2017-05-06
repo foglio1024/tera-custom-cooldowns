@@ -30,17 +30,17 @@ namespace TCC
         {
             if (AbnormalityDatabase.Abnormalities.TryGetValue(id, out Abnormality ab))
             {
-                App.Current.Dispatcher.Invoke(() =>
+                if(target == SessionManager.CurrentPlayer.EntityId)
                 {
-                    if (target == SessionManager.CurrentPlayer.EntityId)
+                    App.Current.Dispatcher.Invoke(() =>
                     {
                         SessionManager.EndPlayerAbnormality(ab);
-                    }
-                    else if (EntitiesManager.TryGetBossById(target, out Boss b) && b.HasBuff(ab))
-                    {
-                        b.EndBuff(ab);
-                    }
-                });
+                    });
+                }
+                else if (EntitiesManager.TryGetBossById(target, out Boss b))
+                {
+                    b.EndBuff(ab);
+                }
             }
 
         }
@@ -123,25 +123,26 @@ namespace TCC
         {
             if (EntitiesManager.TryGetBossById(target, out Boss b))
             {
-                App.Current.Dispatcher.Invoke(() =>
-                {
-                    if (b.HasBuff(ab))
-                    {
-                        NPCAbnormalityUpdated?.Invoke(b.EntityId, ab, duration, stacks);
-                    }
-                    else
-                    {
-                        if (!ab.Infinity)
-                        {
-                            EntitiesManager.CurrentBosses.Where(x => x.EntityId == target).First().Buffs.Add(new AbnormalityDuration(ab, duration, stacks, target));
-                        }
-                        else
-                        {
-                            EntitiesManager.CurrentBosses.Where(x => x.EntityId == target).First().Buffs.Insert(0, new AbnormalityDuration(ab, -1, stacks, target));
-                        }
+                b.AddorRefresh(new AbnormalityDuration(ab, duration, stacks, target));
+                //App.Current.Dispatcher.Invoke(() =>
+                //{
+                //    if (b.HasBuff(ab))
+                //    {
+                //        NPCAbnormalityUpdated?.Invoke(b.EntityId, ab, duration, stacks);
+                //    }
+                //    else
+                //    {
+                //        if (!ab.Infinity)
+                //        {
+                //            EntitiesManager.CurrentBosses.Where(x => x.EntityId == target).First().Buffs.Add(new AbnormalityDuration(ab, duration, stacks, target));
+                //        }
+                //        else
+                //        {
+                //            EntitiesManager.CurrentBosses.Where(x => x.EntityId == target).First().Buffs.Insert(0, new AbnormalityDuration(ab, -1, stacks, target));
+                //        }
 
-                    }
-                });
+                //    }
+                //});
 
             }
 
