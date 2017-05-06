@@ -36,7 +36,7 @@ namespace TCC.Data
             {
                 if (_buffs == value) return;
                 _buffs = value;
-                NotifyPropertyChanged("Buffs")
+                NotifyPropertyChanged("Buffs");
             }
         }
 
@@ -58,33 +58,37 @@ namespace TCC.Data
                 }
             }
         }
-        float maxHP;
+        float _maxHP;
         public float MaxHP
         {
-            get => maxHP;
+            get => _maxHP;
             set
             {
-                if (maxHP != value)
+                if (_maxHP != value)
                 {
-                    maxHP = value;
+                    _maxHP = value;
                     NotifyPropertyChanged("MaxHP");
                 }
             }
         }
-        float currentHP;
+        float _currentHP;
         public float CurrentHP
         {
-            get => currentHP;
+            get => _currentHP;
             set
             {
-                if (currentHP != value)
+                if (_currentHP != value)
                 {
-                    currentHP = value;
+                    _currentHP = value;
                     NotifyPropertyChanged("CurrentHP");
-                    BossHPChanged?.Invoke(EntityId, value);
+                    NotifyPropertyChanged("CurrentPercentage");
+                    //BossHPChanged?.Invoke(EntityId, value);
                 }
             }
         }
+
+        public float CurrentPercentage => _maxHP == 0 ? 0 : (_currentHP / _maxHP);
+
         Visibility visible;
         public Visibility Visible { get { return visible; }  set {
                 if(visible != value)
@@ -127,6 +131,21 @@ namespace TCC.Data
         //{
         //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(v));
         //}
+
+        public void AddorRefresh(AbnormalityDuration ab)
+        {
+            var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Abnormality.Id);
+            if(existing == null)
+            {
+                Buffs.Add(ab);
+                return;
+            }
+            existing.Duration = ab.Duration;
+            existing.DurationLeft = ab.DurationLeft;
+            existing.Stacks = ab.Stacks;
+            
+        }
+
         public bool HasBuff(Abnormality ab)
         {
             if(Buffs.Any(x => x.Abnormality.Id == ab.Id))
@@ -161,7 +180,7 @@ namespace TCC.Data
             Name = EntitiesManager.CurrentDatabase.GetName(tId, zId);
             MaxHP = maxHP;
             CurrentHP = curHP;
-            Buffs = new ObservableCollection<AbnormalityDuration>();
+            Buffs = new SynchronizedObservableCollection<AbnormalityDuration>();
             Visible = visible;
         }
 
@@ -171,7 +190,7 @@ namespace TCC.Data
             Name = EntitiesManager.CurrentDatabase.GetName(tId, zId);
             MaxHP = EntitiesManager.CurrentDatabase.GetMaxHP(tId, zId);
             CurrentHP = MaxHP;
-            Buffs = new ObservableCollection<AbnormalityDuration>();
+            Buffs = new SynchronizedObservableCollection<AbnormalityDuration>();
             Visible = visible;
         }
 
