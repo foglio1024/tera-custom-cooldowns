@@ -32,29 +32,27 @@ namespace TCC
         {
             if (CurrentDatabase.TryGetMonster(templateId, zoneId, out Monster m))
             {
-                //System.Console.WriteLine("[S_SPAWN_NPC] {0} {1} - {2}", zoneId,templateId, m.Name);
-                if ((m.IsBoss || m.MaxHP >= 20000000) || force)
+                if ((m.IsBoss) || force)
                 {
                     App.Current.Dispatcher.Invoke(() =>
                     {
                         CurrentBosses.Add(new Boss(entityId, zoneId, templateId, v));
-                        //System.Console.WriteLine("\t[ADDED] {0} {1} - {2}", zoneId, templateId, m.Name);
-                        if (m.Name == "Treasure Chest")
-                        {
-                            chestList.Add(entityId);
-                            Console.WriteLine("Chest spawned [{0}]", chestList.Count);
-                        }
-
                     });
                 }
                 else
                 {
-                    //System.Console.WriteLine("\t[SKIPPED] {0} {1} - {2}", zoneId, templateId, m.Name);
+                    App.Current.Dispatcher.Invoke(() =>
+                    {
+                        if (m.Name == "Treasure Chest")
+                        {
+                            chestList.Add(entityId);
+                        }
+                    });
+
                 }
             }
             else
             {
-                //System.Console.WriteLine("\t[NOT FOUND] {0} {1}", zoneId, templateId);
 
             }
 
@@ -156,7 +154,7 @@ namespace TCC
         public static void CheckCurrentDragon(Point p)
         {
             var rel = Utils.GetRelativePoint(p.X, p.Y, -7672, -84453);
-            
+
             Dragon d;
             if (rel.Y > .8 * rel.X - 78)
             {
@@ -234,7 +232,7 @@ namespace TCC
         }
         public static void DespawnUser(ulong entityId)
         {
-            if(TryGetUserById(entityId, out Player p))
+            if (TryGetUserById(entityId, out Player p))
             {
                 App.Current.Dispatcher.Invoke(() =>
                 {
