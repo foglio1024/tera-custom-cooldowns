@@ -164,13 +164,16 @@ namespace TCC.ViewModels
             var shortSkill = _shortSkills.FirstOrDefault(x => x.Skill.Name == sk.Name);
             if (shortSkill != null)
             {
+                
                 _shortSkills.Remove(shortSkill);
+                shortSkill.Dispose();
                 return;
             }
             var longSkill = _longSkills.FirstOrDefault(x => x.Skill.Name == sk.Name);
             if (longSkill != null)
             {
                 _longSkills.Remove(longSkill);
+                longSkill.Dispose();
             }
         }
     }

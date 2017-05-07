@@ -25,7 +25,7 @@ namespace TCC
     public partial class SkillIconControl : UserControl, INotifyPropertyChanged, IDisposable
     {
         private DispatcherTimer NumberTimer;
-        private DispatcherTimer MainTimer;
+        //private DispatcherTimer MainTimer;
         private DispatcherTimer CloseTimer;
         private int ending = SkillManager.Ending;
 
@@ -61,10 +61,12 @@ namespace TCC
             _context = (SkillCooldown)DataContext;
             _context.PropertyChanged += _context_PropertyChanged;
 
+            LayoutTransform = new ScaleTransform(1, 1, .5, .5);
+
             CurrentCD = (double)_context.Cooldown / 1000;
 
             NumberTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(1000) };
-            MainTimer = new   DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(_context.Cooldown) };
+            //MainTimer = new   DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(_context.Cooldown) };
             CloseTimer = new  DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(ending) };
 
             CloseTimer.Tick += CloseTimer_Tick;
@@ -72,25 +74,25 @@ namespace TCC
             {
                 CurrentCD--;
             };
-            MainTimer.Tick += (s, o) =>
-            {
-                var w = new DoubleAnimation(0, TimeSpan.FromMilliseconds(ending))
-                {
-                    EasingFunction = new QuadraticEase()
-                };
-                var h = new DoubleAnimation(0, TimeSpan.FromMilliseconds(ending))
-                {
-                    EasingFunction = new QuadraticEase()
-                };
-                CooldownBarWindowManager.Instance.Dispatcher.Invoke(() =>
-                {
-                    MainGrid.BeginAnimation(WidthProperty, w);
-                    MainGrid.BeginAnimation(HeightProperty, h);
-                });
-                CloseTimer.IsEnabled = true;
+            //MainTimer.Tick += (s, o) =>
+            //{
+            //    var w = new DoubleAnimation(0, TimeSpan.FromMilliseconds(ending))
+            //    {
+            //        EasingFunction = new QuadraticEase()
+            //    };
+            //    var h = new DoubleAnimation(0, TimeSpan.FromMilliseconds(ending))
+            //    {
+            //        EasingFunction = new QuadraticEase()
+            //    };
+            //    CooldownBarWindowManager.Instance.Dispatcher.Invoke(() =>
+            //    {
+            //        MainGrid.BeginAnimation(WidthProperty, w);
+            //        MainGrid.BeginAnimation(HeightProperty, h);
+            //    });
+            //    CloseTimer.IsEnabled = true;
 
-                MainTimer.Stop();
-            };
+            //    MainTimer.Stop();
+            //};
             AnimateCooldown();
         }
 
@@ -106,15 +108,32 @@ namespace TCC
                 if (_context.Cooldown == 0) newAngle = 0;
                 if (newAngle > 1) newAngle = 1;
 
-                if (_context.Cooldown > ending)
-                {
-                    MainTimer.Interval = TimeSpan.FromMilliseconds(_context.Cooldown - ending);
-                }
-                else
-                {
-                    MainTimer.Interval = TimeSpan.FromMilliseconds(1);
-                }
+                //if (_context.Cooldown > ending)
+                //{
+                //    MainTimer.Interval = TimeSpan.FromMilliseconds(_context.Cooldown - ending);
+                //}
+                //else
+                //{
+                //    MainTimer.Interval = TimeSpan.FromMilliseconds(1);
+                //}
                 AnimateCooldown(newAngle);
+            }
+            else if(e.PropertyName == "Ending")
+            {
+                var w = new DoubleAnimation(0, TimeSpan.FromMilliseconds(ending))
+                {
+                    EasingFunction = new QuadraticEase()
+                };
+                var h = new DoubleAnimation(0, TimeSpan.FromMilliseconds(ending))
+                {
+                    EasingFunction = new QuadraticEase()
+                };
+                CooldownBarWindowManager.Instance.Dispatcher.Invoke(() =>
+                {
+                    this.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, w);
+                    this.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, h);
+                });
+                CloseTimer.IsEnabled = true;
             }
         }
 
@@ -131,18 +150,23 @@ namespace TCC
             DoubleAnimation.SetDesiredFrameRate(an, fps);
             arc.BeginAnimation(Arc.EndAngleProperty, an);
             NumberTimer.IsEnabled = true;
-            MainTimer.IsEnabled = true;
+            //MainTimer.IsEnabled = true;
         }
 
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
+
         }
 
         public void Dispose()
         {
             NumberTimer.Stop();
-            MainTimer.Stop();
+            //MainTimer.Stop();
             CloseTimer.Stop();
+
+            NumberTimer = null;
+            //MainTimer = null;
+            CloseTimer = null;
         }
     }
 }

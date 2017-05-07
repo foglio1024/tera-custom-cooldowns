@@ -1,18 +1,23 @@
-﻿using System.Windows.Threading;
+﻿using System;
+using System.Timers;
+using System.Windows.Threading;
 using TCC.ViewModels;
 
 namespace TCC
 {
-    public class SkillCooldown : TSPropertyChanged
+    public class SkillCooldown : TSPropertyChanged, IDisposable
     {
         public Skill Skill { get; set; }
         public int Cooldown { get; set; }
         public int OriginalCooldown { get; set; }
         public CooldownType Type { get; set; }
+        private Timer _timer;
 
         public SkillCooldown(Skill sk, int cd, CooldownType t)
         {
             _dispatcher = CooldownBarWindowManager.Instance.Dispatcher;
+
+
             Skill = sk;
             Cooldown = cd;
             OriginalCooldown = Cooldown;
@@ -20,10 +25,33 @@ namespace TCC
             {
                 Cooldown = Cooldown * 1000;
             }
+
+            if (cd == 0) return;
+            _timer = new Timer(cd);
+            _timer.Elapsed += _timer_Elapsed;
+            _timer.Start();
+
         }
+
+        private void _timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            NotifyPropertyChanged("Ending");
+            _timer?.Stop();
+        }
+
         public void Refresh()
         {
             NotifyPropertyChanged("Refresh");
+            if (_timer == null) return;
+            _timer.Stop();
+            _timer.Interval = Cooldown;
+            _timer.Start();
+        }
+
+        public void Dispose()
+        {
+            _timer?.Stop();
+            _timer?.Dispose();
         }
     }
 }
