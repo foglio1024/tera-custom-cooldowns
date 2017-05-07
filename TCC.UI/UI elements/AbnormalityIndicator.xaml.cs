@@ -22,7 +22,7 @@ namespace TCC.UI_elements
     /// <summary>
     /// Logica di interazione per AbnormalityIndicator.xaml
     /// </summary>
-    public partial class AbnormalityIndicator : UserControl, INotifyPropertyChanged
+    public partial class AbnormalityIndicator : UserControl
     {
         public AbnormalityIndicator()
         {
@@ -33,7 +33,11 @@ namespace TCC.UI_elements
         {
             if (e.PropertyName == "Refresh")
             {
-                arc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(((AbnormalityDuration)sender).Duration)));
+                if (((AbnormalityDuration)sender).Duration < 0) return;
+                var an = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(((AbnormalityDuration)sender).Duration));
+                int fps = ((AbnormalityDuration)sender).Duration > 80000 ? 1 : 30;
+                DoubleAnimation.SetDesiredFrameRate(an, fps);
+                arc.BeginAnimation(Arc.EndAngleProperty, an);
             }
         }
 
@@ -49,9 +53,10 @@ namespace TCC.UI_elements
         {
             _context = (AbnormalityDuration)DataContext;
             _context.PropertyChanged += buff_PropertyChanged;
-            this.RenderTransform = new ScaleTransform(0, 0, .5, .5);
-            this.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
-            this.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
+            this.RenderTransform = new ScaleTransform(1, 1, .5, .5);
+            //this.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(100)) { EasingFunction = new QuadraticEase() });
+            //this.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
+            this.BeginAnimation(OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(85)));
             abnormalityIcon.Width = Size * .9;
             abnormalityIcon.Height = Size * .9;
             bgEll.Width = Size;
@@ -62,39 +67,12 @@ namespace TCC.UI_elements
             if (((AbnormalityDuration)DataContext).Duration > 0)
             {
                 var an = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(((AbnormalityDuration)DataContext).Duration));
+                int fps = ((AbnormalityDuration)DataContext).Duration > 80000 ? 1 : 30;
+                DoubleAnimation.SetDesiredFrameRate(an, fps);
                 arc.BeginAnimation(Arc.EndAngleProperty, an);
             }
 
         }
-        //private void PacketRouter_BuffUpdated(ulong target, Data.Abnormality ab, int duration, int stacks)
-        //{
-        //    Dispatcher.Invoke(() =>
-        //    {
-        //        if (target == TargetId)
-        //        {
-        //            if (ab.Id == AbnormalityId)
-        //            {
-        //                Duration = duration;
-        //                Stacks = stacks;
-        //                CurrentTime = duration / 1000;
-        //                if (SecondsTimer != null)
-        //                {
-        //                    SecondsTimer.Stop();
-        //                    SecondsTimer.Enabled = true;
-        //                }
-        //                if (duration < 0)
-        //                {
-        //                    return;
-        //                }
-        //                arc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(duration)));
-        //            }
-        //        }
-
-        //    });
-        //}
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
             _context.PropertyChanged -= buff_PropertyChanged;

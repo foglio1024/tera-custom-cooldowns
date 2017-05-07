@@ -12,10 +12,11 @@
              Unloaded="UserControl_Unloaded"
              SnapsToDevicePixels="True"
              UseLayoutRounding="True"
+             Visibility="{Binding Visible}"
              >
     <UserControl.Resources>
         <DataTemplate x:Key="BossBuffDataTemplate">
-            <controls:AbnormalityIndicator Size="25"/>
+            <controls:AbnormalityIndicator Size="26"/>
         </DataTemplate>
         <converters:EntityIdToNameConverter x:Key="userIdToName"/>
         <converters:AggroTypeToFill x:Key="aggroTypeToFill"/>

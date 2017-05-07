@@ -54,7 +54,7 @@ namespace TCC.Parsing
             }
             Packets.Enqueue(obj);
         }
-        static void PacketAnalysisLoop()
+        private static void PacketAnalysisLoop()
         {
             while (true)
             {
@@ -75,7 +75,6 @@ namespace TCC.Parsing
             }
         }
 
-
         public static void HandleCharLogin(S_LOGIN p)
         {
             SessionManager.Logged = true;
@@ -83,7 +82,12 @@ namespace TCC.Parsing
             SessionManager.CurrentPlayer.EntityId = p.entityId;
             SessionManager.CurrentPlayer.Name = p.Name;
             SessionManager.CurrentPlayer.Level = p.Level;
-            SessionManager.SetPlayerLaurel(p.Name);
+            SessionManager.SetPlayerLaurel(SessionManager.CurrentPlayer);
+
+            CharacterWindowManager.Instance.Player.Class = p.CharacterClass;
+            CharacterWindowManager.Instance.Player.Name = p.Name;
+            CharacterWindowManager.Instance.Player.Level = p.Level;
+            SessionManager.SetPlayerLaurel(CharacterWindowManager.Instance.Player);
 
             App.Current.Dispatcher.Invoke(() =>
             {
@@ -114,9 +118,9 @@ namespace TCC.Parsing
         public static void HandleReturnToLobby(S_RETURN_TO_LOBBY p)
         {
             SessionManager.Logged = false;
-            //WindowManager.CharacterWindow.Reset();
+            SessionManager.CurrentPlayer.ClearAbnormalities();
+            BuffBarWindowManager.Instance.Player.ClearAbnormalities();
             SkillManager.Clear();
-            SessionManager.ClearPlayersAbnormalities();
             EntitiesManager.ClearNPC();
         }
         public static void HandleAbnormalityEnd(S_ABNORMALITY_END p)
@@ -190,6 +194,14 @@ namespace TCC.Parsing
             SessionManager.CurrentPlayer.CurrentST = p.currRe;
             SessionManager.CurrentPlayer.CurrentHP = p.currHp;
             SessionManager.CurrentPlayer.CurrentMP = p.currMp;
+
+            CharacterWindowManager.Instance.Player.MaxHP = p.maxHp;
+            CharacterWindowManager.Instance.Player.MaxMP = p.maxMp;
+            CharacterWindowManager.Instance.Player.MaxST = p.maxRe + p.bonusRe;
+            CharacterWindowManager.Instance.Player.ItemLevel = p.ilvl;
+            CharacterWindowManager.Instance.Player.CurrentST = p.currRe;
+            CharacterWindowManager.Instance.Player.CurrentHP = p.currHp;
+            CharacterWindowManager.Instance.Player.CurrentMP = p.currMp;
         }
         public static void HandlePlayerChangeMP(S_PLAYER_CHANGE_MP p)
         {
@@ -217,6 +229,7 @@ namespace TCC.Parsing
         public static void HandlePlayerChangeStamina(S_PLAYER_CHANGE_STAMINA p)
         {
             SessionManager.CurrentPlayer.CurrentST = p.currentStamina;
+            CharacterWindowManager.Instance.Player.CurrentST = p.currentStamina;
         }
         public static void HandleUserStatusChanged(S_USER_STATUS p)
         {
@@ -242,6 +255,7 @@ namespace TCC.Parsing
         public static void HandlePlayerChangeFlightEnergy(S_PLAYER_CHANGE_FLIGHT_ENERGY p)
         {
             SessionManager.CurrentPlayer.FlightEnergy = p.energy;
+            CharacterWindowManager.Instance.Player.FlightEnergy = p.energy;
         }
         public static void HandleGageReceived(S_BOSS_GAGE_INFO p)
         {
@@ -265,7 +279,7 @@ namespace TCC.Parsing
         }
         public static void HandleSpawnNpc(S_SPAWN_NPC p)
         {
-            EntitiesManager.SpawnNPC(p.HuntingZoneId, p.TemplateId, p.EntityId, System.Windows.Visibility.Collapsed, false);
+            EntitiesManager.SpawnNPC(p.HuntingZoneId, p.TemplateId, p.EntityId, System.Windows.Visibility.Hidden, false);
             EntitiesManager.CheckHarrowholdMode(p.HuntingZoneId, p.TemplateId);
         }
 

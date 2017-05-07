@@ -7,14 +7,15 @@
         xmlns:elements="clr-namespace:TCC.UI_elements"
         xmlns:converters="clr-namespace:TCC.Converters"
         xmlns:vm="clr-namespace:TCC.ViewModels"
+        xmlns:local1="clr-namespace:TCC.Data"
         mc:Ignorable="d"
         Title="BossGageWindow" Height="Auto" Width="Auto"
         SizeToContent="WidthAndHeight"
         Topmost="{Binding TopMost}"
         AllowsTransparency="True"
         ShowInTaskbar="False"
-        WindowStyle="None"
-        Background="#00000000"
+        WindowStyle="None" Opacity=".85"
+        Background="#00000000"        
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         MouseRightButtonDown="Window_MouseRightButtonDown"
         Loaded="Window_Loaded"
@@ -24,16 +25,15 @@
             <local:BossGage/>
         </DataTemplate>
         <converters:HarrowholdBossesVisibilityConverter x:Key="hhBossesVisConv"/>
-
     </Window.Resources>
     <Window.DataContext>
-        <vm:BossGageWindowManager/>
+        <vm:BossGageWindowViewModel/>
     </Window.DataContext>
-    <Grid Style="{StaticResource opacityAnimatedContainer}" Opacity="1">
+    <Grid Style="{StaticResource opacityAnimatedContainer}">
         <ItemsControl Name="Bosses" ItemTemplate="{StaticResource BossGageDataTemplate}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Background="Transparent" Orientation="Vertical" ItemHeight="Auto" Height="270"/>
+                    <WrapPanel Orientation="Vertical" ItemHeight="Auto" Height="270"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>

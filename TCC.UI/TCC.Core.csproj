@@ -322,6 +322,8 @@
     <Compile Include="UI elements\MaterialSwitch.xaml.cs">
       <DependentUpon>MaterialSwitch.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\BossGageWindowViewModel.cs" />
+    <Compile Include="Converters\ClassToStaminaLabelConverter.cs" />
     <Compile Include="ViewModels\SettingsWindowViewModel.cs" />
     <Compile Include="UI elements\StaminaGaugeControl.xaml.cs">
       <DependentUpon>StaminaGaugeControl.xaml</DependentUpon>
@@ -331,7 +333,7 @@
     <Compile Include="ViewModels\AbnormalityViewModel.cs" />
     <Compile Include="ViewModels\AbnormalityWindowViewModel.cs" />
     <Compile Include="ViewModels\BaseINPC.cs" />
-    <Compile Include="ViewModels\BossGaugeWindowViewModel.cs" />
+    <Compile Include="ViewModels\MultithreadManagers.cs" />
     <Compile Include="ViewModels\CharacterWindowViewModel.cs" />
     <Compile Include="Converters\FactorFromValuesConverter.cs" />
     <Compile Include="Converters\StaminaBarColorConverter.cs" />

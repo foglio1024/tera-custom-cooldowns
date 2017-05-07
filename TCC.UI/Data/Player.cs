@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
+using System.Windows.Threading;
+using TCC.ViewModels;
 
 namespace TCC.Data
 {
-    public class Player :INotifyPropertyChanged
+    public class Player : TSPropertyChanged
     {
         string name;
         public string Name
@@ -15,7 +18,7 @@ namespace TCC.Data
             }
             set
             {
-                if(name != value)
+                if (name != value)
                 {
                     name = value;
                     NotifyPropertyChanged("Name");
@@ -32,7 +35,7 @@ namespace TCC.Data
             }
             set
             {
-                if(entityId != value)
+                if (entityId != value)
                 {
                     entityId = value;
                     NotifyPropertyChanged("EntityId");
@@ -49,7 +52,7 @@ namespace TCC.Data
             }
             set
             {
-                if(playerclass != value)
+                if (playerclass != value)
                 {
                     playerclass = value;
                     NotifyPropertyChanged("Class");
@@ -66,7 +69,7 @@ namespace TCC.Data
             }
             set
             {
-                if(laurel != value)
+                if (laurel != value)
                 {
                     laurel = value;
                     NotifyPropertyChanged("Laurel");
@@ -83,7 +86,7 @@ namespace TCC.Data
             }
             set
             {
-                if(level != value)
+                if (level != value)
                 {
                     level = value;
                     NotifyPropertyChanged("Level");
@@ -109,14 +112,15 @@ namespace TCC.Data
         public int MaxHP
         {
             get { return maxHP; }
-            set {
-                if(maxHP != value)
+            set
+            {
+                if (maxHP != value)
                 {
                     maxHP = value;
                     NotifyPropertyChanged("MaxHP");
                 }
 
-                }
+            }
         }
         private int maxMP;
         public int MaxMP
@@ -160,7 +164,6 @@ namespace TCC.Data
                 {
                     currentHP = value;
                     NotifyPropertyChanged("CurrentHP");
-                    HPUpdated?.Invoke(value);
                 }
             }
         }
@@ -177,7 +180,6 @@ namespace TCC.Data
                 {
                     currentMP = value;
                     NotifyPropertyChanged("CurrentMP");
-                    MPUpdated?.Invoke(value);
                 }
             }
         }
@@ -194,7 +196,6 @@ namespace TCC.Data
                 {
                     currentST = value;
                     NotifyPropertyChanged("CurrentST");
-                    STUpdated?.Invoke(value);
                 }
             }
         }
@@ -203,12 +204,12 @@ namespace TCC.Data
         public float FlightEnergy
         {
             get { return flightEnergy; }
-            set {
+            set
+            {
                 if (flightEnergy != value)
                 {
                     flightEnergy = value;
                     NotifyPropertyChanged("FlightEnergy");
-                    FlightEnergyUpdated?.Invoke(value);
                 }
             }
         }
@@ -220,7 +221,7 @@ namespace TCC.Data
             get => isDebuffed;
             set
             {
-                if(isDebuffed != value)
+                if (isDebuffed != value)
                 {
                     isDebuffed = value;
                     NotifyPropertyChanged("IsDebuffed");
@@ -229,7 +230,7 @@ namespace TCC.Data
         }
 
         bool isInCombat;
-        public  bool IsInCombat
+        public bool IsInCombat
         {
             get { return isInCombat; }
             set
@@ -242,36 +243,143 @@ namespace TCC.Data
             }
         }
 
-        public ObservableCollection<AbnormalityDuration> Buffs    ;
-        public ObservableCollection<AbnormalityDuration> Debuffs  ;
-        public ObservableCollection<AbnormalityDuration> InfBuffs ;
-
-        public event Action<float> HPUpdated;
-        public event Action<float> MPUpdated;
-        public event Action<float> STUpdated;
-        public event Action<float> FlightEnergyUpdated;
-
-        public string ValueOverMaxFormat { get; set; } = "{0}/{1}";
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        void NotifyPropertyChanged(string prop)
+        private SynchronizedObservableCollection<AbnormalityDuration> _buffs;
+        public SynchronizedObservableCollection<AbnormalityDuration> Buffs
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+            get { return _buffs; }
+            set
+            {
+                if (_buffs == value) return;
+                _buffs = value;
+            }
+        }
+        private SynchronizedObservableCollection<AbnormalityDuration> _debuffs;
+        public SynchronizedObservableCollection<AbnormalityDuration> Debuffs
+        {
+            get { return _debuffs; }
+            set
+            {
+                if (_debuffs == value) return;
+                _debuffs = value;
+            }
+        }
+        private SynchronizedObservableCollection<AbnormalityDuration> _infBuffs;
+        public SynchronizedObservableCollection<AbnormalityDuration> InfBuffs
+        {
+            get { return _infBuffs; }
+            set
+            {
+                if (_infBuffs == value) return;
+                _infBuffs = value;
+            }
+        }
+
+        public void AddOrRefreshBuff(AbnormalityDuration ab)
+        {
+            var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Abnormality.Id);
+            if (existing == null)
+            {
+                Buffs.Add(ab);
+                return;
+            }
+            existing.Duration = ab.Duration;
+            existing.DurationLeft = ab.DurationLeft;
+            existing.Stacks = ab.Stacks;
+            existing.Refresh();
+
+        }
+        public void AddOrRefreshDebuff(AbnormalityDuration ab)
+        {
+            var existing = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Abnormality.Id);
+            if (existing == null)
+            {
+                Debuffs.Add(ab);
+                if (!ab.Abnormality.IsBuff)
+                {
+                    IsDebuffed = true;
+                }
+                return;
+            }
+            existing.Duration = ab.Duration;
+            existing.DurationLeft = ab.DurationLeft;
+            existing.Stacks = ab.Stacks;
+            existing.Refresh();
+        }
+        public void AddOrRefreshInfBuff(AbnormalityDuration ab)
+        {
+            var existing = InfBuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Abnormality.Id);
+            if (existing == null)
+            {
+                InfBuffs.Add(ab);
+                return;
+            }
+            existing.Duration = ab.Duration;
+            existing.DurationLeft = ab.DurationLeft;
+            existing.Stacks = ab.Stacks;
+            existing.Refresh();
+
+        }
+
+        public void RemoveBuff(Abnormality ab)
+        {
+            var buff = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
+            if (buff == null) return;
+            Buffs.Remove(buff);
+            buff.Dispose();
+        }
+        public void RemoveDebuff(Abnormality ab)
+        {
+            var buff = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
+            if (buff == null) return;
+            Debuffs.Remove(buff);
+            buff.Dispose();
+
+            if(ab.IsBuff == false)
+            {
+                IsDebuffed = false;
+            }
+        }
+        public void RemoveInfBuff(Abnormality ab)
+        {
+            var buff = InfBuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
+            if (buff == null) return;
+            InfBuffs.Remove(buff);
+            buff.Dispose();
+        }
+
+        public void ClearAbnormalities()
+        {
+            foreach (var item in _buffs)
+            {
+                item.Dispose();
+            }
+            foreach (var item in _debuffs)
+            {
+                item.Dispose();
+            }
+            foreach (var item in _infBuffs)
+            {
+                item.Dispose();
+            }
+            _buffs.Clear();
+            _debuffs.Clear();
+            _infBuffs.Clear();
         }
 
         public Player()
         {
-            Buffs = new ObservableCollection<AbnormalityDuration>();
-            Debuffs = new ObservableCollection<AbnormalityDuration>();
-            InfBuffs = new ObservableCollection<AbnormalityDuration>();
+            _dispatcher = Dispatcher.CurrentDispatcher;
+            _buffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
+            _debuffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
+            _infBuffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
         }
 
         public Player(ulong id, string name)
         {
-            Buffs = new ObservableCollection<AbnormalityDuration>();
-            Debuffs = new ObservableCollection<AbnormalityDuration>();
-            InfBuffs = new ObservableCollection<AbnormalityDuration>();
+            _dispatcher = Dispatcher.CurrentDispatcher;
+            _buffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
+            _debuffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
+            _infBuffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
             entityId = id;
             this.name = name;
         }

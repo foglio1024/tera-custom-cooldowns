@@ -21,6 +21,7 @@
         Loaded="Window_Loaded"      
         SnapsToDevicePixels="True"
         ResizeMode="NoResize" 
+        Opacity=".85"
         >
     <Window.Resources>
         <Style x:Key="hpBarNumber" TargetType="TextBlock" BasedOn="{StaticResource text1}">
@@ -39,6 +40,7 @@
         <converters:StaminaBarColorConverter x:Key="staminaColConv"/>
         <converters:FactorFromValuesConverter x:Key="factorFromValConv"/>
         <converters:HP_PercentageConverter x:Key="hpPercConv"/>
+        <converters:ClassToStaminaLabelConverter x:Key="staminaLabelConv"/>
     </Window.Resources>
     <Window.DataContext>
         <vm:CharacterWindowViewModel/>
@@ -56,23 +58,23 @@
             </Grid.ColumnDefinitions>
             <Border Margin="0" Style="{StaticResource border}"  HorizontalAlignment="Stretch"  Grid.ColumnSpan="3"/>
             <Rectangle Width="21" Height="21" Margin="0,0,3,0" Grid.Column="2" 
-                       Fill="{Binding Player.IsInCombat, Converter={StaticResource combatConv}}" VerticalAlignment="Center"  HorizontalAlignment="Center">
+                       Fill="{Binding IsInCombat, Converter={StaticResource combatConv}}" VerticalAlignment="Center"  HorizontalAlignment="Center">
                 <Rectangle.OpacityMask>
                     <ImageBrush ImageSource="/resources/images/combat.png"/>
                 </Rectangle.OpacityMask>
             </Rectangle>
             <TextBlock Margin="4,-1,0,0" Text="" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Style="{StaticResource hpBarNumber}">
                 <Run Text="Lv."/>
-                <Run Text="{Binding Player.Level}"/>
+                <Run Text="{Binding Level}"/>
                 <Run Text=" "/>
-                <Run Text="{Binding Player.Name}"/>
+                <Run Text="{Binding Name}"/>
                 <Run Text=" "/>
-                <Run Text="{Binding Player.ItemLevel}"/>
+                <Run Text="{Binding ItemLevel}"/>
             </TextBlock>
 
             <controls:GenericGauge Height="3" Margin="3,0" Width="50" BarColor="#91ffffff" Grid.Column="1"
                                    GaugeName="HP" ShowPercentage="False" ShowName="False" ShowValues="False"
-                                   CurrentVal="{Binding Player.FlightEnergy}" MaxVal="{Binding Player.MaxFlightEnergy}"/>
+                                   CurrentVal="{Binding FlightEnergy}" MaxVal="{Binding MaxFlightEnergy}"/>
         </Grid>
         <Grid Name="bottomGrid" Grid.Row="1" Margin="0,0,0,0">
             <Grid.ColumnDefinitions>
@@ -83,7 +85,7 @@
             <Grid Name="imageGrid" Margin="0,0" Width="80" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0">
                 <Rectangle Name="laurel" Width="74" Height="80" Margin="0,-8,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Rectangle.Fill>
-                        <ImageBrush ImageSource="{Binding Player.Laurel, Converter={StaticResource laurelConv}}"/>
+                        <ImageBrush ImageSource="{Binding Laurel, Converter={StaticResource laurelConv}}"/>
                     </Rectangle.Fill>
                     <Rectangle.Effect>
                         <DropShadowEffect Opacity="0.3" ShadowDepth="3"/>
@@ -91,7 +93,7 @@
                 </Rectangle>
                 <Rectangle Name="classIcon" Fill="White" Width="50" Height="50" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Rectangle.OpacityMask>
-                        <ImageBrush ImageSource="{Binding Player.Class, Converter={StaticResource classConv}}"/>
+                        <ImageBrush ImageSource="{Binding Class, Converter={StaticResource classConv}}"/>
                     </Rectangle.OpacityMask>
                     <Rectangle.Effect>
                         <DropShadowEffect Color="#ff20f0ff" BlurRadius="7" ShadowDepth="0"/>
@@ -106,18 +108,18 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Name="StaminaRow" Height="{Binding Player.Class, Converter={StaticResource staminaVisConv}}"/>
+                    <RowDefinition Name="StaminaRow" Height="{Binding Class, Converter={StaticResource staminaVisConv}}"/>
                 </Grid.RowDefinitions>
 
                 <controls:GenericGauge Height="14" 
                                        Margin="2" 
-                                       BarColor="{Binding Player.IsDebuffed, Converter={StaticResource hpDebuffColConv}}"
+                                       BarColor="{Binding IsDebuffed, Converter={StaticResource hpDebuffColConv}}"
                                        GaugeName="HP" 
                                        ShowPercentage="True" 
                                        ShowName="True" 
                                        ShowValues="True"
-                                       CurrentVal="{Binding Player.CurrentHP}" 
-                                       MaxVal="{Binding Player.MaxHP}">
+                                       CurrentVal="{Binding CurrentHP}" 
+                                       MaxVal="{Binding MaxHP}">
                 </controls:GenericGauge>
                 <controls:GenericGauge Height="14" 
                                        BarColor="#18c" 
@@ -127,18 +129,18 @@
                                        ShowPercentage="False" 
                                        ShowName="True" 
                                        ShowValues="True"
-                                       CurrentVal="{Binding Player.CurrentMP}" 
-                                       MaxVal="{Binding Player.MaxMP}">
+                                       CurrentVal="{Binding CurrentMP}" 
+                                       MaxVal="{Binding MaxMP}">
                 </controls:GenericGauge>
                 <controls:GenericGauge Height="14" 
-                                       BarColor="{Binding Player.Class, Converter={StaticResource staminaColConv}}" 
-                                       Grid.Row="2" GaugeName="{Binding STname}" 
+                                       BarColor="{Binding Class, Converter={StaticResource staminaColConv}}" 
+                                       Grid.Row="2" GaugeName="{Binding Class, Converter={StaticResource staminaLabelConv}}" 
                                        Margin="2" 
                                        ShowPercentage="False" 
                                        ShowName="True" 
                                        ShowValues="True"
-                                       CurrentVal="{Binding Player.CurrentST}" 
-                                       MaxVal="{Binding Player.MaxST}">
+                                       CurrentVal="{Binding CurrentST}" 
+                                       MaxVal="{Binding MaxST}">
                 </controls:GenericGauge>
             </Grid>
         </Grid>

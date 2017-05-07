@@ -45,11 +45,8 @@
                 <ImageBrush ImageSource="{Binding Abnormality.IconName, Converter={StaticResource iconConv}}"/>
             </Ellipse.Fill>
         </Ellipse>
-        <local:Arc x:Name="arc" Stroke="#8000" StrokeThickness="15" EndAngle="0" Width="0" Height="0">
-            <!--<local:Arc.CacheMode>
-                <BitmapCache  RenderAtScale="2"/>
-            </local:Arc.CacheMode>-->
-        </local:Arc>
+        <local:Arc x:Name="arc" Stroke="#8000" StrokeThickness="15" EndAngle="0" Width="0" Height="0"/>
+
         <Grid Width="Auto" MaxWidth="{Binding ElementName=bgEll, Path=Width}" Height="{Binding ElementName=bgEll, Path=Width, Converter={StaticResource sizeToDurationLabelSizeConv}}"
               x:Name="durationLabel" Visibility="{Binding Duration, Converter={StaticResource durationToVisibilityConv}}" 
               HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1"
@@ -72,14 +69,7 @@
                    FontStyle="Normal"
                    Opacity="1" 
                    Margin="6,3"
-                   Text="{Binding DurationLeft, Converter={StaticResource durationConv}}"
-                   >
-            <!--<TextBlock.Effect>
-                <DropShadowEffect ShadowDepth="0" BlurRadius="0" Color="White"></DropShadowEffect>
-            </TextBlock.Effect>-->
-                    
-                </TextBlock>
-
+                   Text="{Binding DurationLeft, Converter={StaticResource durationConv}}"/>
             </Viewbox>
 
         </Grid>
@@ -90,9 +80,6 @@
               VerticalAlignment="Top" 
               Margin="0,0,0,0" 
               Visibility="{Binding Stacks, Converter={StaticResource stacksToVisibilityConv}}">
-            <!--<Grid.CacheMode>
-                <BitmapCache RenderAtScale="1.5"/>
-            </Grid.CacheMode>-->
             <Ellipse Fill="#202020"  Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stroke="#40ffffff" StrokeThickness="1.5"/>
             <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
                 <TextBlock Foreground="#d9ffffff" 
@@ -107,12 +94,8 @@
                    Opacity="1" 
                    Margin="2.5"
                    Text="{Binding Stacks}">
-            <!--<TextBlock.Effect>
-                <DropShadowEffect ShadowDepth="0" BlurRadius="0" Color="White"></DropShadowEffect>
-            </TextBlock.Effect>-->
                 </TextBlock>
             </Viewbox>
-
         </Grid>
     </Grid>
 </UserControl>

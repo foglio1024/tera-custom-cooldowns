@@ -24,11 +24,7 @@
     </Window.DataContext>
     <Window.Resources>
         <DataTemplate x:Key="SkillDataTemplate">
-            <local:SkillIconControl  
-                                    Cooldown="{Binding Cooldown}" 
-                                    Id="{Binding Skill.Id}" 
-                                    SkillName="{Binding Skill.Name}" 
-                                    Skill="{Binding Skill}"/>
+            <local:SkillIconControl />
         </DataTemplate>
 
     </Window.Resources>
@@ -39,14 +35,14 @@
             <RowDefinition Height="76"/>
         </Grid.RowDefinitions>
         <Ellipse Fill="Black" Opacity=".2" Width="26" Height="26" HorizontalAlignment="Left" Margin="16,0" x:Name="baseEll"/>
-        <ItemsControl x:Name="NormalSkillsPanel" Grid.Row="0" ItemTemplate="{StaticResource SkillDataTemplate}" ItemsSource="{Binding ShortSkills}" Width="800" HorizontalAlignment="Stretch" >
+        <ItemsControl x:Name="NormalSkillsPanel" Grid.Row="0" ItemTemplate="{StaticResource SkillDataTemplate}" Width="800" HorizontalAlignment="Stretch" >
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Width="800"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <ItemsControl x:Name="LongSkillsPanel" Grid.Row="1" ItemTemplate="{StaticResource SkillDataTemplate}" ItemsSource="{Binding LongSkills}" Width="800">
+        <ItemsControl x:Name="LongSkillsPanel" Grid.Row="1" ItemTemplate="{StaticResource SkillDataTemplate}" Width="800">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Width="800"/>

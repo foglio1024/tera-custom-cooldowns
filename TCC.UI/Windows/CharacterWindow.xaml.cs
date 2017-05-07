@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using TCC.Parsing;
+using TCC.ViewModels;
 
 namespace TCC
 {
@@ -46,6 +47,8 @@ namespace TCC
 
             };
             ContextMenu.Items.Add(HideButton);
+
+            rootGrid.DataContext = CharacterWindowManager.Instance.Player;
         }
 
         public event PropertyChangedEventHandler VisibilityChanged;

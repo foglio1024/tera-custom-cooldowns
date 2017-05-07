@@ -46,7 +46,7 @@ namespace TCC
 
             TeraSniffer.Instance.Enabled = true;
             WindowManager.Init();
-            LoadSettings();
+            //LoadSettings();
             WindowManager.Settings = new SettingsWindow()
             {
                 Name = "Settings"

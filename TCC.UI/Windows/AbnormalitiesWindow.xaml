@@ -36,21 +36,21 @@
         </DataTemplate>
     </Window.Resources>
     <StackPanel Style="{StaticResource opacityAnimatedContainer}">
-        <ItemsControl Name="infBuffs" ItemTemplate="{StaticResource abTemplate}" ItemsSource="{Binding InfiniteBuffs}">
+        <ItemsControl Name="infBuffs" ItemTemplate="{StaticResource abTemplate}" >
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" HorizontalAlignment="Right" Height="50" Width="1000"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <ItemsControl Name="buffs" ItemTemplate="{StaticResource abTemplate}" ItemsSource="{Binding Buffs}">
+        <ItemsControl Name="buffs" ItemTemplate="{StaticResource abTemplate}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" HorizontalAlignment="Right" Height="50" Width="1000"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <ItemsControl Name="debuffs" ItemTemplate="{StaticResource abTemplate}" ItemsSource="{Binding Debuffs}" Background="#00000000">
+        <ItemsControl Name="debuffs" ItemTemplate="{StaticResource abTemplate}" Background="#00000000">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" HorizontalAlignment="Right" Height="50" Width="1000"/>

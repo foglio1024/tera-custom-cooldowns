@@ -104,26 +104,56 @@ namespace TCC
 
         public static void Init()
         {
-            //var t = new Thread(() =>
-            //{
-            CooldownWindow = new CooldownWindow();
-            SkillManager.LongSkillsQueue = new System.Collections.ObjectModel.ObservableCollection<SkillCooldown>();
-            SkillManager.NormalSkillsQueue = new System.Collections.ObjectModel.ObservableCollection<SkillCooldown>();
-            //CooldownWindow.Show();
-            //Dispatcher.Run();
 
-            //});
-            //t.SetApartmentState(ApartmentState.STA);
-            //t.Start();
-            CharacterWindow = new CharacterWindow();
-            BuffBar = new AbnormalitiesWindow();
-            var t = new Thread(() =>
+            var charWindowThread = new Thread(new ThreadStart(() =>
             {
-                BossGauge = new BossGageWindow();
+                SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                CharacterWindow = new CharacterWindow();
+                CharacterWindowManager.Instance.Player = new Data.Player();
+                CharacterWindow.Show();
                 Dispatcher.Run();
-            });
-            t.SetApartmentState(ApartmentState.STA);
-            t.Start();
+            }));
+            charWindowThread.Name = "Character window thread";
+            charWindowThread.SetApartmentState(ApartmentState.STA);
+            charWindowThread.Start();
+
+            var cooldownWindowThread = new Thread(new ThreadStart(() =>
+            {
+                SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                CooldownWindow = new CooldownWindow();
+                CooldownBarWindowManager.Instance.ShortSkills = new SynchronizedObservableCollection<SkillCooldown>(CooldownWindow.Dispatcher);
+                CooldownBarWindowManager.Instance.LongSkills = new SynchronizedObservableCollection<SkillCooldown>(CooldownWindow.Dispatcher);
+                CooldownWindow.Show();
+                Dispatcher.Run();
+            }));
+            cooldownWindowThread.Name = "Cooldown bar thread";
+            cooldownWindowThread.SetApartmentState(ApartmentState.STA);
+            cooldownWindowThread.Start();
+
+            var bossGaugeThread = new Thread(new ThreadStart(() =>
+            {
+                SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                BossGauge = new BossGageWindow();
+                BossGageWindowManager.Instance.CurrentNPCs = new SynchronizedObservableCollection<Data.Boss>(BossGauge.Dispatcher);
+                BossGauge.Show();
+                Dispatcher.Run();
+            }));
+            bossGaugeThread.Name = "Boss gauge thread";
+            bossGaugeThread.SetApartmentState(ApartmentState.STA);
+            bossGaugeThread.Start();
+
+            var buffBarThread = new Thread(new ThreadStart(() =>
+            {
+                SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                BuffBar = new AbnormalitiesWindow();
+                BuffBarWindowManager.Instance.Player = new Data.Player();
+                BuffBar.Show();
+                Dispatcher.Run();
+            }));
+            buffBarThread.Name = "Buff bar thread";
+            buffBarThread.SetApartmentState(ApartmentState.STA);
+            buffBarThread.Start();
+
             Thread.Sleep(500);
             ContextMenu = new ContextMenu();
 

@@ -13,18 +13,24 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TCC.ViewModels;
 
 namespace TCC.Windows
 {
     /// <summary>
     /// Logica di interazione per AbnormalitiesWindow.xaml
     /// </summary>
-    public partial class AbnormalitiesWindow : Window
+    public partial class AbnormalitiesWindow : Window, INotifyPropertyChanged
     {
         public AbnormalitiesWindow()
         {
             InitializeComponent();
         }
+        void NotifyPropertyChanged(string pr)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(pr));
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -40,10 +46,15 @@ namespace TCC.Windows
                 this.Visibility = Visibility.Collapsed;
                 VisibilityChanged?.Invoke(this, new PropertyChangedEventArgs("Visibility"));
                 Console.WriteLine("Buff visibility change invoked");
-
-
             };
             ContextMenu.Items.Add(HideButton);
+
+            buffs.DataContext = BuffBarWindowManager.Instance.Player.Buffs;
+            buffs.ItemsSource = BuffBarWindowManager.Instance.Player.Buffs;
+            debuffs.DataContext = BuffBarWindowManager.Instance.Player.Debuffs;
+            debuffs.ItemsSource = BuffBarWindowManager.Instance.Player.Debuffs;
+            infBuffs.DataContext = BuffBarWindowManager.Instance.Player.InfBuffs;
+            infBuffs.ItemsSource = BuffBarWindowManager.Instance.Player.InfBuffs;
 
         }
         public event PropertyChangedEventHandler VisibilityChanged;

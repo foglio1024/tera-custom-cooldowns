@@ -1,20 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TCC.ViewModels
+﻿namespace TCC.ViewModels
 {
-    public class CooldownWindowViewModel : BaseINPC
+    public class BossGageWindowViewModel : BaseINPC
     {
-
+        public bool HarrowholdMode
+        {
+            get => SessionManager.HarrowholdMode;
+        }
+        private void SessionManager_HhModeChanged(bool val)
+        {
+            RaisePropertyChanged("CurrentNPCs");
+            RaisePropertyChanged("HarrowholdMode");
+        }
         public bool IsTeraOnTop
         {
             get => WindowManager.IsTccVisible;
         }
-
         private bool topMost;
         public bool TopMost
         {
@@ -29,8 +29,9 @@ namespace TCC.ViewModels
             }
         }
 
-        public CooldownWindowViewModel()
+        public BossGageWindowViewModel()
         {
+            SessionManager.HhModeChanged += SessionManager_HhModeChanged;
             WindowManager.TccVisibilityChanged += (s, ev) =>
             {
                 RaisePropertyChanged("IsTeraOnTop");
@@ -40,6 +41,7 @@ namespace TCC.ViewModels
                     TopMost = true;
                 }
             };
+
         }
     }
 }

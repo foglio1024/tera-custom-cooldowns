@@ -7,7 +7,7 @@
              xmlns:converters="clr-namespace:TCC.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="100" Loaded="ControlLoaded" Unloaded="UserControl_Unloaded"
-             UseLayoutRounding="True" SnapsToDevicePixels="True" ToolTip="{Binding SkillName, RelativeSource={RelativeSource Self}}">
+             UseLayoutRounding="True" SnapsToDevicePixels="True" ToolTip="{Binding Skill.Name}">
     <UserControl.Resources>
         <converters:IconConverter x:Key="iconConv"/>
     </UserControl.Resources>
@@ -17,7 +17,7 @@
         </Grid.CacheMode>-->
         <Ellipse Width="50" Height="{Binding ElementName=icon, Path=ActualWidth}" x:Name="icon" Stroke="#9fff" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Ellipse.Fill>
-                <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource iconConv}, RelativeSource={RelativeSource AncestorType=local:SkillIconControl}}"/>
+                <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource iconConv}}"/>
             </Ellipse.Fill>
         </Ellipse>
         <local:Arc x:Name="arc" Opacity="1" Width="50" Height="{Binding ElementName=arc, Path=ActualWidth}" StrokeThickness="25" Stroke="#8000" EndAngle="359.9" HorizontalAlignment="Center" VerticalAlignment="Center" >

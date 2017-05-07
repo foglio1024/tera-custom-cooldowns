@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Threading;
 using System.Timers;
+using System.Windows;
+using System.Windows.Threading;
 using TCC.Data;
 using TCC.ViewModels;
 
@@ -31,7 +34,7 @@ namespace TCC
                 NotifyPropertyChanged("Stacks");
             }
         }
-        private readonly Timer timer;
+        private readonly System.Timers.Timer timer;
         private int _durationLeft;
         public int DurationLeft
         {
@@ -43,24 +46,21 @@ namespace TCC
                 NotifyPropertyChanged("DurationLeft");
             }
         }
-        public AbnormalityDuration(Abnormality b, int d, int s, ulong t)
+        public AbnormalityDuration(Abnormality b, int d, int s, ulong t, Dispatcher disp)
         {
+            _dispatcher = disp;
             Abnormality = b;
             Duration = d;
             Stacks = s;
             Target = t;
 
             DurationLeft = d;
-            timer = new Timer(1000);
+            timer = new System.Timers.Timer(1000);
             timer.Elapsed += (se, ev) => DurationLeft = DurationLeft - 1000;
             if (!Abnormality.Infinity)
             {
                 timer.Start();
             }
-        }
-        public AbnormalityDuration()
-        {
-
         }
         public void Refresh()
         {

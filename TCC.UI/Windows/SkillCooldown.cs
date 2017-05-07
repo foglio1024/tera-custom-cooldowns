@@ -1,26 +1,29 @@
-﻿namespace TCC
+﻿using System.Windows.Threading;
+using TCC.ViewModels;
+
+namespace TCC
 {
-    public class SkillCooldown
+    public class SkillCooldown : TSPropertyChanged
     {
         public Skill Skill { get; set; }
         public int Cooldown { get; set; }
+        public int OriginalCooldown { get; set; }
         public CooldownType Type { get; set; }
-        public System.Timers.Timer Timer { get; set; }
 
         public SkillCooldown(Skill sk, int cd, CooldownType t)
         {
+            _dispatcher = CooldownBarWindowManager.Instance.Dispatcher;
             Skill = sk;
             Cooldown = cd;
+            OriginalCooldown = Cooldown;
             if (t == CooldownType.Item)
             {
                 Cooldown = Cooldown * 1000;
             }
-
-            if (cd != 0)
-            {
-                Timer = new System.Timers.Timer(Cooldown);
-            }
-
+        }
+        public void Refresh()
+        {
+            NotifyPropertyChanged("Refresh");
         }
     }
 }

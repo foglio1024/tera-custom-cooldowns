@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Threading;
 using TCC.ViewModels;
 
 namespace TCC
@@ -16,7 +17,7 @@ namespace TCC.Data
     public class Boss : TSPropertyChanged, IDisposable
     {
         public ulong EntityId { get; set; }
-        string name;
+        private string name;
         public string Name
         {
             get => name;
@@ -41,11 +42,7 @@ namespace TCC.Data
             }
         }
 
-        //public event PropertyChangedEventHandler PropertyChanged;
-        public static event UpdateBossHPEventHandler BossHPChanged;
-        public static event UpdateBossEnrageEventHandler EnragedChanged;
-
-        bool enraged;
+        private bool enraged;
         public bool Enraged
         {
             get => enraged;
@@ -55,11 +52,10 @@ namespace TCC.Data
                 {
                     enraged = value;
                     NotifyPropertyChanged("Enraged");
-                    EnragedChanged?.Invoke(EntityId, value);
                 }
             }
         }
-        float _maxHP;
+        private float _maxHP;
         public float MaxHP
         {
             get => _maxHP;
@@ -72,7 +68,7 @@ namespace TCC.Data
                 }
             }
         }
-        float _currentHP;
+        private float _currentHP;
         public float CurrentHP
         {
             get => _currentHP;
@@ -83,14 +79,13 @@ namespace TCC.Data
                     _currentHP = value;
                     NotifyPropertyChanged("CurrentHP");
                     NotifyPropertyChanged("CurrentPercentage");
-                    //BossHPChanged?.Invoke(EntityId, value);
                 }
             }
         }
 
         public float CurrentPercentage => _maxHP == 0 ? 0 : (_currentHP / _maxHP);
 
-        Visibility visible;
+        private Visibility visible;
         public Visibility Visible
         {
             get { return visible; }
@@ -133,10 +128,6 @@ namespace TCC.Data
         }
 
 
-        //public void NotifyPropertyChanged(string v)
-        //{
-        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(v));
-        //}
 
         public void AddorRefresh(AbnormalityDuration ab)
         {
@@ -153,19 +144,6 @@ namespace TCC.Data
             existing.Refresh();
 
         }
-
-        //public bool HasBuff(Abnormality ab)
-        //{
-        //    if (Buffs.Any(x => x.Abnormality.Id == ab.Id))
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
-
         public void EndBuff(Abnormality ab)
         {
             try
@@ -183,24 +161,32 @@ namespace TCC.Data
 
         public Boss(ulong eId, uint zId, uint tId, float curHP, float maxHP, Visibility visible)
         {
+            _dispatcher = BossGageWindowManager.Instance.Dispatcher;
             EntityId = eId;
             Name = EntitiesManager.CurrentDatabase.GetName(tId, zId);
             MaxHP = maxHP;
             CurrentHP = curHP;
-            Buffs = new SynchronizedObservableCollection<AbnormalityDuration>();
+            _buffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
             Visible = visible;
         }
 
         public Boss(ulong eId, uint zId, uint tId, Visibility visible)
         {
+            _dispatcher = BossGageWindowManager.Instance.Dispatcher;
             EntityId = eId;
             Name = EntitiesManager.CurrentDatabase.GetName(tId, zId);
             MaxHP = EntitiesManager.CurrentDatabase.GetMaxHP(tId, zId);
             CurrentHP = MaxHP;
-            Buffs = new SynchronizedObservableCollection<AbnormalityDuration>();
+            _buffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
             Visible = visible;
         }
 
+        public Boss()
+        {
+            _dispatcher = BossGageWindowManager.Instance.Dispatcher;
+            _buffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
+            Visible = Visibility.Visible;
+        }
         public override string ToString()
         {
             return String.Format("{0} - {1}", EntityId, Name);

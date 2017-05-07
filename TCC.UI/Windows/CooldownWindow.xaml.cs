@@ -11,7 +11,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
-
+using TCC.ViewModels;
 
 namespace TCC
 {
@@ -37,6 +37,11 @@ namespace TCC
                 Console.WriteLine("Cooldown visibility change invoked");
             };
             ContextMenu.Items.Add(HideButton);
+
+            LongSkillsPanel.ItemsSource = CooldownBarWindowManager.Instance.LongSkills;
+            LongSkillsPanel.DataContext = CooldownBarWindowManager.Instance.LongSkills;
+            NormalSkillsPanel.ItemsSource = CooldownBarWindowManager.Instance.ShortSkills;
+            NormalSkillsPanel.DataContext = CooldownBarWindowManager.Instance.ShortSkills;
         }
         public event PropertyChangedEventHandler VisibilityChanged;
 
