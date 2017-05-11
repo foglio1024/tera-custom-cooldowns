@@ -45,8 +45,8 @@ namespace TCC
 
 
             TeraSniffer.Instance.Enabled = true;
+            LoadSettings();
             WindowManager.Init();
-            //LoadSettings();
             WindowManager.Settings = new SettingsWindow()
             {
                 Name = "Settings"
@@ -81,61 +81,42 @@ namespace TCC
             if (File.Exists(Environment.CurrentDirectory + @"/settings.csv"))
             {
                 var sr = File.OpenText(Environment.CurrentDirectory + @"/settings.csv");
-                SetWindowParameters(WindowManager.BossGauge, sr); //0
-                SetWindowParameters(WindowManager.BuffBar, sr); //1
-                SetWindowParameters(WindowManager.CharacterWindow, sr); //2
-                //SetWindowParameters(WindowManager.ClassSpecificWindow, sr); //3
-                SetWindowParameters(WindowManager.CooldownWindow, sr); //4
-                var t = sr.ReadLine(); //5
-                if (t.Equals("true"))
-                {
-                    WindowManager.ChangeClickThru(true);
-                }
-                else
-                {
-                    WindowManager.ChangeClickThru(false);
-                }
+
+                SetWindowParameters(SettingsManager.BossGaugeWindowSettings, sr); //0
+                SetWindowParameters(SettingsManager.BuffBarWindowSettings, sr); //1
+                SetWindowParameters(SettingsManager.CharacterWindowSettings, sr); //2
+                SetWindowParameters(SettingsManager.CooldownWindowSettings, sr); //4
+
+                //var t = sr.ReadLine(); //5
+                //if (t.Equals("true"))
+                //{
+                //    WindowManager.ChangeClickThru(true);
+                //}
+                //else
+                //{
+                //    WindowManager.ChangeClickThru(false);
+                //}
                 sr.Close();
-            }
-            else
-            {
-                WindowManager.ChangeClickThru(false);
-
-                WindowManager.BossGauge.Visibility = Visibility.Visible;
-                WindowManager.BossGauge.Top = 20;
-                WindowManager.BossGauge.Left = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width / 2 - 200;
-
-                WindowManager.BuffBar.Visibility = Visibility.Visible;
-                WindowManager.BuffBar.Top = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height / 1.5;
-                WindowManager.BuffBar.Left = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width - 1000;
-
-                WindowManager.CharacterWindow.Visibility = Visibility.Visible;
-                WindowManager.CharacterWindow.Top = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height - 120;
-                WindowManager.CharacterWindow.Left = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width / 2 - 200;
-
-                //WindowManager.ClassSpecificWindow.Visibility = Visibility.Visible;
-                //WindowManager.ClassSpecificWindow.Top = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height / 2;
-                //WindowManager.ClassSpecificWindow.Left = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width /2 - 100;
-
-                WindowManager.CooldownWindow.Visibility = Visibility.Visible;
-                WindowManager.CooldownWindow.Top = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height / 1.5;
-                WindowManager.CooldownWindow.Left = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width / 3;
-
             }
         }
 
-        private static void SetWindowParameters(Window w, StreamReader sr)
+        private static void SetWindowParameters(WindowSettings ws, StreamReader sr)
         {
             var line = sr.ReadLine();
             var vals = line.Split(',');
             try
             {
-                w.Dispatcher.Invoke(() => w.Top = Convert.ToDouble(vals[0]));
-                w.Dispatcher.Invoke(() => w.Left = Convert.ToDouble(vals[1]));
+                ws.Y = Convert.ToDouble(vals[0]);
+                ws.X = Convert.ToDouble(vals[1]);
                 if (Enum.TryParse(vals[2], out Visibility v))
                 {
-                    w.Dispatcher.Invoke(() => w.Visibility = v);
+                    ws.Visibility = v;
                 }
+                if(Boolean.TryParse(vals[3], out bool ct))
+                {
+                    ws.ClickThru = ct;
+                }
+
             }
             catch (Exception)
             {
@@ -146,24 +127,23 @@ namespace TCC
         public static void SaveSettings()
         {
             string[] vals = new string[5];
-            AddSetting(WindowManager.BossGauge, vals, 0);
-            AddSetting(WindowManager.BuffBar, vals, 1);
-            AddSetting(WindowManager.CharacterWindow, vals, 2);
-            //AddSetting(WindowManager.ClassSpecificWindow, vals, 3);
-            AddSetting(WindowManager.CooldownWindow, vals, 3);
-            vals[4] = WindowManager.ClickThru.ToString().ToLower();
+            AddSetting(SettingsManager.BossGaugeWindowSettings, vals, 0);
+            AddSetting(SettingsManager.BuffBarWindowSettings, vals, 1);
+            AddSetting(SettingsManager.CharacterWindowSettings, vals, 2);
+            AddSetting(SettingsManager.CooldownWindowSettings, vals, 3);
+
             File.WriteAllLines(Environment.CurrentDirectory + @"/settings.csv", vals);
         }
 
-        private static void AddSetting(Window w, string[] vals, int i)
+        private static void AddSetting(WindowSettings ws, string[] vals, int i)
         {
-            w.Dispatcher.Invoke(() => vals[i] = String.Format("{0},{1},{2}", w.Top, w.Left, w.Visibility.ToString()));
+            vals[i] = String.Format("{0},{1},{2},{3}", ws.Y, ws.X, ws.Visibility.ToString(), ws.ClickThru.ToString());
         }
         public static void CloseApp()
         {
             TeraSniffer.Instance.Enabled = false;
-            WindowManager.Dispose();
             SaveSettings();
+            WindowManager.Dispose();
             Environment.Exit(0);
         }
         static bool x = true;
@@ -174,20 +154,34 @@ namespace TCC
             SessionManager.CurrentPlayer.MaxHP = 100;
             SessionManager.CurrentPlayer.CurrentHP = 100;
             SessionManager.CurrentPlayer.EntityId = 1;
-            //EntitiesManager.SpawnNPC(970, 3000, 1, Visibility.Visible, true);
-            System.Timers.Timer t = new System.Timers.Timer(6000);
-            //EntitiesManager.TryGetBossById(1, out Boss b);
-            //EntitiesManager.SetNPCStatus(1, true);
-            t.Elapsed += (se, ev) =>
-            {
-                //SkillManager.AddSkill(131100, 5000);
-                //SkillManager.AddSkill(151000, 50000);
-                AbnormalityManager.EndAbnormality(1, 100801);
-                AbnormalityManager.BeginAbnormality(100801, 1, 5000, 0);
-            };
-            AbnormalityManager.BeginAbnormality(100801, 1, 5000, 0);
 
-            t.Enabled = true;
+            for (int i = 0; i < 1; i++)
+            {
+                var u = new User(WindowManager.GroupWindow.Dispatcher);
+                u.Name = "Test D" + i;
+                u.UserClass = Class.Warrior;
+                u.Laurel = Laurel.Champion;
+                u.PlayerId = (uint)i;
+                ViewModels.GroupWindowManager.Instance.AddOrUpdateMember(u);
+            }
+            for (int i = 0; i < 1; i++)
+            {
+                var u = new User(WindowManager.GroupWindow.Dispatcher);
+                u.Name = "Test H" + i;
+                u.UserClass = Class.Elementalist;
+                u.Laurel = Laurel.Champion;
+                u.PlayerId = (uint)i*2;
+                ViewModels.GroupWindowManager.Instance.AddOrUpdateMember(u);
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                var u = new User(WindowManager.GroupWindow.Dispatcher);
+                u.Name = "Test T" + i;
+                u.UserClass = Class.Lancer;
+                u.Laurel = Laurel.Champion;
+                u.PlayerId = (uint)i*3;
+                ViewModels.GroupWindowManager.Instance.AddOrUpdateMember(u);
+            }
 
         }
     }
