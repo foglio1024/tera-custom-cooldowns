@@ -16,7 +16,7 @@ namespace TCC.Parsing.Messages
         public uint ItemId { get; set; }
 
         /// <summary>
-        /// Item's cooldown in milliseconds
+        /// Item's cooldown in seconds
         /// </summary>
         public uint Cooldown { get; set; }
 

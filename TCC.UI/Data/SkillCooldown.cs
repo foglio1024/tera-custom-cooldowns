@@ -19,15 +19,11 @@ namespace TCC
 
 
             Skill = sk;
-            Cooldown = cd;
+            Cooldown = t==CooldownType.Skill ? cd : cd*1000;
             OriginalCooldown = Cooldown;
-            if (t == CooldownType.Item)
-            {
-                Cooldown = Cooldown * 1000;
-            }
 
             if (cd == 0) return;
-            _timer = new Timer(cd);
+            _timer = new Timer(Cooldown);
             _timer.Elapsed += _timer_Elapsed;
             _timer.Start();
 
