@@ -7,7 +7,6 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Media;
 using TCC.Data;
-using TCC.Messages;
 using TCC.Parsing.Messages;
 using TCC.ViewModels;
 using Tera.Game;
@@ -75,34 +74,6 @@ namespace TCC.Parsing
             }
         }
 
-        public static void HandleCharLogin(S_LOGIN p)
-        {
-            SessionManager.Logged = true;
-            SessionManager.CurrentPlayer.Class = p.CharacterClass;
-            SessionManager.CurrentPlayer.EntityId = p.entityId;
-            SessionManager.CurrentPlayer.Name = p.Name;
-            SessionManager.CurrentPlayer.Level = p.Level;
-            SessionManager.SetPlayerLaurel(SessionManager.CurrentPlayer);
-
-            CharacterWindowManager.Instance.Player.Class = p.CharacterClass;
-            CharacterWindowManager.Instance.Player.Name = p.Name;
-            CharacterWindowManager.Instance.Player.Level = p.Level;
-            SessionManager.SetPlayerLaurel(CharacterWindowManager.Instance.Player);
-
-            App.Current.Dispatcher.Invoke(() =>
-            {
-                WindowManager.ChangeClickThru(WindowManager.ClickThru);
-            });
-
-
-        }
-        public static void HandlePlayerLocation(C_PLAYER_LOCATION p)
-        {
-            if (SessionManager.HarrowholdMode)
-            {
-                EntitiesManager.CheckCurrentDragon(new System.Windows.Point(p.X, p.Y));
-            }
-        }
         public static void HandleNewSkillCooldown(S_START_COOLTIME_SKILL p)
         {
             SkillManager.AddSkill(p.SkillId, p.Cooldown);
@@ -115,34 +86,78 @@ namespace TCC.Parsing
         {
             SkillManager.ChangeSkillCooldown(p.SkillId, (int)p.Cooldown);
         }
-        public static void HandleReturnToLobby(S_RETURN_TO_LOBBY p)
-        {
-            SessionManager.Logged = false;
-            SessionManager.CurrentPlayer.ClearAbnormalities();
-            BuffBarWindowManager.Instance.Player.ClearAbnormalities();
-            SkillManager.Clear();
-            EntitiesManager.ClearNPC();
-        }
-        public static void HandleAbnormalityEnd(S_ABNORMALITY_END p)
-        {
-            AbnormalityManager.EndAbnormality(p.target, p.id);
-        }
-        public static void HandleAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
-        {
-            AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.Duration, p.Stacks);
-        }
-        public static void HandleAbnormalityBegin(S_ABNORMALITY_BEGIN p)
-        {
-            AbnormalityManager.BeginAbnormality(p.id, p.targetId, p.duration, p.stacks);
 
-            switch (SessionManager.CurrentPlayer.Class)
+        public static void HandlePlayerStatUpdate(S_PLAYER_STAT_UPDATE p)
+        {
+            SessionManager.CurrentPlayer.MaxHP = p.maxHp;
+            SessionManager.CurrentPlayer.MaxMP = p.maxMp;
+            SessionManager.CurrentPlayer.MaxST = p.maxRe + p.bonusRe;
+            SessionManager.CurrentPlayer.ItemLevel = p.ilvl;
+            SessionManager.CurrentPlayer.CurrentST = p.currRe;
+            SessionManager.CurrentPlayer.CurrentHP = p.currHp;
+            SessionManager.CurrentPlayer.CurrentMP = p.currMp;
+
+            CharacterWindowManager.Instance.Player.MaxHP = p.maxHp;
+            CharacterWindowManager.Instance.Player.MaxMP = p.maxMp;
+            CharacterWindowManager.Instance.Player.MaxST = p.maxRe + p.bonusRe;
+            CharacterWindowManager.Instance.Player.ItemLevel = p.ilvl;
+            CharacterWindowManager.Instance.Player.CurrentST = p.currRe;
+            CharacterWindowManager.Instance.Player.CurrentHP = p.currHp;
+            CharacterWindowManager.Instance.Player.CurrentMP = p.currMp;
+        }
+        public static void HandleCreatureChangeHP(S_CREATURE_CHANGE_HP p)
+        {
+            SessionManager.SetPlayerHP(p.target, p.currentHP);
+            if(EntitiesManager.TryGetBossById(p.target, out Boss b))
             {
-                case Class.Elementalist:
-                    Mystic.CheckHurricane(p);
-                    break;
-                default:
-                    break;
-            }                   
+                if(b.Visible == System.Windows.Visibility.Collapsed)
+                {
+                    b.Visible = System.Windows.Visibility.Visible;
+                }
+                if (b.MaxHP != p.maxHP)
+                {
+                    b.MaxHP = p.maxHP;
+                }
+                //Console.WriteLine("Changing hp from {0} to {1}", b.CurrentHP, p.currentHP);
+                b.CurrentHP = p.currentHP;
+                //Console.WriteLine("Result: {0}", b.CurrentHP);
+
+            }
+        }
+        public static void HandlePlayerChangeMP(S_PLAYER_CHANGE_MP p)
+        {
+            SessionManager.SetPlayerMP(p.target, p.currentMP); 
+        }
+        public static void HandlePlayerChangeStamina(S_PLAYER_CHANGE_STAMINA p)
+        {
+            SessionManager.CurrentPlayer.CurrentST = p.currentStamina;
+            CharacterWindowManager.Instance.Player.CurrentST = p.currentStamina;
+        }
+        public static void HandlePlayerChangeFlightEnergy(S_PLAYER_CHANGE_FLIGHT_ENERGY p)
+        {
+            SessionManager.CurrentPlayer.FlightEnergy = p.energy;
+            CharacterWindowManager.Instance.Player.FlightEnergy = p.energy;
+        }
+        public static void HandleUserStatusChanged(S_USER_STATUS p)
+        {
+            SessionManager.SetCombatStatus(p.id, p.isInCombat);
+        }
+
+        public static void HandleGageReceived(S_BOSS_GAGE_INFO p)
+        {
+            EntitiesManager.UpdateNPCbyGauge(p.EntityId, p.CurrentHP, p.MaxHP, (ushort)p.HuntingZoneId, (uint)p.TemplateId);
+        }
+        public static void HandleNpcStatusChanged(S_NPC_STATUS p)
+        {
+            EntitiesManager.SetNPCStatus(p.EntityId, p.IsEnraged);
+            if(EntitiesManager.TryGetBossById(p.EntityId, out Boss b))
+            {
+                if (p.Target == 0)
+                {
+                    b.Target = 0;
+                    b.CurrentAggroType = AggroCircle.None;
+                }
+            }
         }
         public static void HandleUserEffect(S_USER_EFFECT p)
         {
@@ -169,72 +184,65 @@ namespace TCC.Parsing
                 }
             }
         }
+
+
+        public static void HandleCharList(S_GET_USER_LIST p)
+        {
+            SessionManager.CurrentAccountCharacters = p.CharacterList;
+        }
+
+
+
+        public static void HandleCharLogin(S_LOGIN p)
+        {
+            SessionManager.CurrentPlayer.ClearAbnormalities();
+            BuffBarWindowManager.Instance.Player.ClearAbnormalities();
+
+            SessionManager.Logged = true;
+            SessionManager.CurrentPlayer.Class = p.CharacterClass;
+            SessionManager.CurrentPlayer.EntityId = p.entityId;
+            SessionManager.CurrentPlayer.Name = p.Name;
+            SessionManager.CurrentPlayer.Level = p.Level;
+            SessionManager.SetPlayerLaurel(SessionManager.CurrentPlayer);
+
+            CharacterWindowManager.Instance.Player.Class = p.CharacterClass;
+            CharacterWindowManager.Instance.Player.Name = p.Name;
+            CharacterWindowManager.Instance.Player.Level = p.Level;
+            SessionManager.SetPlayerLaurel(CharacterWindowManager.Instance.Player);
+
+            App.Current.Dispatcher.Invoke(() =>
+            {
+                WindowManager.ChangeClickThru(WindowManager.ClickThru);
+            });
+
+
+        }
+
+
+        public static void HandleReturnToLobby(S_RETURN_TO_LOBBY p)
+        {
+            SessionManager.Logged = false;
+            SessionManager.CurrentPlayer.ClearAbnormalities();
+            BuffBarWindowManager.Instance.Player.ClearAbnormalities();
+            SkillManager.Clear();
+            EntitiesManager.ClearNPC();
+            GroupWindowManager.Instance.ClearAll();
+        }
+
+        public static void HandlePartyMemberStats(S_PARTY_MEMBER_STAT_UPDATE p)
+        {
+            GroupWindowManager.Instance.UpdateMember(p);
+        }
+
         public static void HandleLoadTopo(S_LOAD_TOPO x)
         {
             SessionManager.LoadingScreen = true;
-        }
-        public static void HandleDespawnUser(S_DESPAWN_USER p)
-        {
-            EntitiesManager.DespawnUser(p.EntityId);
-        }
-        public static void HandleSpawnUser(S_SPAWN_USER p)
-        {
-            EntitiesManager.SpawnUser(p.EntityId, p.Name);
         }
         public static void HandleLoadTopoFin(C_LOAD_TOPO_FIN x)
         {
             //SessionManager.LoadingScreen = false;
         }
-        public static void HandlePlayerStatUpdate(S_PLAYER_STAT_UPDATE p)
-        {
-            SessionManager.CurrentPlayer.MaxHP = p.maxHp;
-            SessionManager.CurrentPlayer.MaxMP = p.maxMp;
-            SessionManager.CurrentPlayer.MaxST = p.maxRe + p.bonusRe;
-            SessionManager.CurrentPlayer.ItemLevel = p.ilvl;
-            SessionManager.CurrentPlayer.CurrentST = p.currRe;
-            SessionManager.CurrentPlayer.CurrentHP = p.currHp;
-            SessionManager.CurrentPlayer.CurrentMP = p.currMp;
 
-            CharacterWindowManager.Instance.Player.MaxHP = p.maxHp;
-            CharacterWindowManager.Instance.Player.MaxMP = p.maxMp;
-            CharacterWindowManager.Instance.Player.MaxST = p.maxRe + p.bonusRe;
-            CharacterWindowManager.Instance.Player.ItemLevel = p.ilvl;
-            CharacterWindowManager.Instance.Player.CurrentST = p.currRe;
-            CharacterWindowManager.Instance.Player.CurrentHP = p.currHp;
-            CharacterWindowManager.Instance.Player.CurrentMP = p.currMp;
-        }
-        public static void HandlePlayerChangeMP(S_PLAYER_CHANGE_MP p)
-        {
-            SessionManager.SetPlayerMP(p.target, p.currentMP); 
-        }
-        public static void HandleCreatureChangeHP(S_CREATURE_CHANGE_HP p)
-        {
-            SessionManager.SetPlayerHP(p.target, p.currentHP);
-            if(EntitiesManager.TryGetBossById(p.target, out Boss b))
-            {
-                if(b.Visible == System.Windows.Visibility.Collapsed)
-                {
-                    b.Visible = System.Windows.Visibility.Visible;
-                }
-                if (b.MaxHP != p.maxHP)
-                {
-                    b.MaxHP = p.maxHP;
-                }
-                //Console.WriteLine("Changing hp from {0} to {1}", b.CurrentHP, p.currentHP);
-                b.CurrentHP = p.currentHP;
-                //Console.WriteLine("Result: {0}", b.CurrentHP);
-
-            }
-        }
-        public static void HandlePlayerChangeStamina(S_PLAYER_CHANGE_STAMINA p)
-        {
-            SessionManager.CurrentPlayer.CurrentST = p.currentStamina;
-            CharacterWindowManager.Instance.Player.CurrentST = p.currentStamina;
-        }
-        public static void HandleUserStatusChanged(S_USER_STATUS p)
-        {
-            SessionManager.SetCombatStatus(p.id, p.isInCombat);
-        }
         public static void HandleSpawnMe(S_SPAWN_ME p)
         {
             //WindowManager.ShowWindow(WindowManager.CharacterWindow);
@@ -248,39 +256,94 @@ namespace TCC.Parsing
             };
             t.Enabled = true;
         }
-        public static void HandleCharList(S_GET_USER_LIST p)
+        public static void HandleSpawnNpc(S_SPAWN_NPC p)
         {
-            SessionManager.CurrentAccountCharacters = p.CharacterList;
+            EntitiesManager.SpawnNPC(p.HuntingZoneId, p.TemplateId, p.EntityId, System.Windows.Visibility.Hidden, false);
+            EntitiesManager.CheckHarrowholdMode(p.HuntingZoneId, p.TemplateId);
         }
-        public static void HandlePlayerChangeFlightEnergy(S_PLAYER_CHANGE_FLIGHT_ENERGY p)
+        public static void HandleSpawnUser(S_SPAWN_USER p)
         {
-            SessionManager.CurrentPlayer.FlightEnergy = p.energy;
-            CharacterWindowManager.Instance.Player.FlightEnergy = p.energy;
-        }
-        public static void HandleGageReceived(S_BOSS_GAGE_INFO p)
-        {
-            EntitiesManager.UpdateNPCbyGauge(p.EntityId, p.CurrentHP, p.MaxHP, (ushort)p.HuntingZoneId, (uint)p.TemplateId);
-        }
-        public static void HandleNpcStatusChanged(S_NPC_STATUS p)
-        {
-            EntitiesManager.SetNPCStatus(p.EntityId, p.IsEnraged);
-            if(EntitiesManager.TryGetBossById(p.EntityId, out Boss b))
-            {
-                if (p.Target == 0)
-                {
-                    b.Target = 0;
-                    b.CurrentAggroType = AggroCircle.None;
-                }
-            }
+            EntitiesManager.SpawnUser(p.EntityId, p.Name);
         }
         public static void HandleDespawnNpc(S_DESPAWN_NPC p)
         {
             EntitiesManager.DespawnNPC(p.target);
         }
-        public static void HandleSpawnNpc(S_SPAWN_NPC p)
+        public static void HandleDespawnUser(S_DESPAWN_USER p)
         {
-            EntitiesManager.SpawnNPC(p.HuntingZoneId, p.TemplateId, p.EntityId, System.Windows.Visibility.Hidden, false);
-            EntitiesManager.CheckHarrowholdMode(p.HuntingZoneId, p.TemplateId);
+            EntitiesManager.DespawnUser(p.EntityId);
+        }
+
+        public static void HandleAbnormalityBegin(S_ABNORMALITY_BEGIN p)
+        {
+            AbnormalityManager.BeginAbnormality(p.id, p.targetId, p.duration, p.stacks);
+
+            switch (SessionManager.CurrentPlayer.Class)
+            {
+                case Class.Elementalist:
+                    Mystic.CheckHurricane(p);
+                    break;
+                default:
+                    break;
+            }                   
+        }
+        public static void HandleAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
+        {
+            AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.Duration, p.Stacks);
+        }
+        public static void HandleAbnormalityEnd(S_ABNORMALITY_END p)
+        {
+            AbnormalityManager.EndAbnormality(p.target, p.id);
+        }
+
+        public static void HandlePlayerLocation(C_PLAYER_LOCATION p)
+        {
+            if (SessionManager.HarrowholdMode)
+            {
+                EntitiesManager.CheckCurrentDragon(new System.Windows.Point(p.X, p.Y));
+            }
+        }
+
+        public static void HandlePartyMemberList(S_PARTY_MEMBER_LIST p)
+        {
+            foreach (var user in p.Members)
+            {
+                GroupWindowManager.Instance.AddOrUpdateMember(user);
+                System.Threading.Tasks.Task.Delay(500).ContinueWith(t => { });
+            }
+        }
+        public static void HandlePartyMemberLeave(S_LEAVE_PARTY_MEMBER p)
+        {
+            GroupWindowManager.Instance.RemoveMember(p.PlayerId, p.ServerId);
+        }
+        public static void HandlePartyMemberLogout(S_LOGOUT_PARTY_MEMBER p)
+        {
+            GroupWindowManager.Instance.LogoutMember(p.PlayerId, p.ServerId);
+        }
+        public static void HandlePartyMemberKick(S_BAN_PARTY_MEMBER p)
+        {
+            GroupWindowManager.Instance.RemoveMember(p.PlayerId, p.ServerId);
+        }
+        public static void HandlePartyMemberHP(S_PARTY_MEMBER_CHANGE_HP p)
+        {
+            GroupWindowManager.Instance.UpdateMemberHP(p.PlayerId, p.ServerId, p.CurrentHP, p.MaxHP);
+        }
+        public static void HandlePartyMemberMP(S_PARTY_MEMBER_CHANGE_MP p)
+        {
+            GroupWindowManager.Instance.UpdateMemberMP(p.PlayerId, p.ServerId, p.CurrentMP, p.MaxMP);
+        }
+        public static void HandleLeaveParty(S_LEAVE_PARTY x)
+        {
+            GroupWindowManager.Instance.ClearAll();
+        }
+
+        public static void HandlePartyMemberInfo(S_PARTY_MEMBER_INFO p)
+        {
+            foreach (var user in p.Members)
+            {
+                //GroupWindowManager.Instance.AddOrUpdateMember(user);
+                //System.Threading.Tasks.Task.Delay(500).ContinueWith(t => { });
+            }
         }
 
         //public static void Debug(bool x)
