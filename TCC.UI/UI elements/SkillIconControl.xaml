@@ -7,7 +7,7 @@
              xmlns:converters="clr-namespace:TCC.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="100" Loaded="ControlLoaded" Unloaded="UserControl_Unloaded"
-             UseLayoutRounding="True" SnapsToDevicePixels="True" ToolTip="{Binding Skill.Name}">
+             UseLayoutRounding="True"  ToolTip="{Binding Skill.Name}">
     <UserControl.Resources>
         <converters:IconConverter x:Key="iconConv"/>
     </UserControl.Resources>
@@ -15,12 +15,12 @@
         <!--<Grid.CacheMode>
             <BitmapCache RenderAtScale="2"/>
         </Grid.CacheMode>-->
-        <Ellipse Width="50" Height="{Binding ElementName=icon, Path=ActualWidth}" x:Name="icon" Stroke="#9fff" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Ellipse Width="51" Height="{Binding ElementName=icon, Path=ActualWidth}" x:Name="icon" Stroke="#ffff" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Ellipse.Fill>
                 <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource iconConv}}"/>
             </Ellipse.Fill>
         </Ellipse>
-        <local:Arc x:Name="arc" Opacity="1" Width="50" Height="{Binding ElementName=arc, Path=ActualWidth}" StrokeThickness="25" Stroke="#8000" EndAngle="359.9" HorizontalAlignment="Center" VerticalAlignment="Center" >
+        <local:Arc x:Name="arc" Opacity="1" UseLayoutRounding="True" Width="Auto" Height="Auto" StrokeThickness="25" Margin="3" Stroke="#7000" EndAngle="359.9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
             <!--<local:Arc.CacheMode>
                 <BitmapCache RenderAtScale=".5"></BitmapCache>
             </local:Arc.CacheMode>-->
@@ -31,7 +31,7 @@
                 <BitmapCache RenderAtScale="2"/>
             </Grid.CacheMode>
             <Ellipse x:Name="fill" Fill="#dfff"  Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stroke="#40000000"/>
-            <Viewbox StretchDirection="DownOnly" Stretch="Uniform" SnapsToDevicePixels="True" UseLayoutRounding="True">
+            <Viewbox StretchDirection="DownOnly" Stretch="Uniform" UseLayoutRounding="True">
                 <TextBlock Foreground="#d9000000" 
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center" 
