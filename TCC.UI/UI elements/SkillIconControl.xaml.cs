@@ -66,7 +66,6 @@ namespace TCC
             CurrentCD = (double)_context.Cooldown / 1000;
 
             NumberTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(1000) };
-            //MainTimer = new   DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(_context.Cooldown) };
             CloseTimer = new  DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(ending) };
 
             CloseTimer.Tick += CloseTimer_Tick;
@@ -74,25 +73,6 @@ namespace TCC
             {
                 CurrentCD--;
             };
-            //MainTimer.Tick += (s, o) =>
-            //{
-            //    var w = new DoubleAnimation(0, TimeSpan.FromMilliseconds(ending))
-            //    {
-            //        EasingFunction = new QuadraticEase()
-            //    };
-            //    var h = new DoubleAnimation(0, TimeSpan.FromMilliseconds(ending))
-            //    {
-            //        EasingFunction = new QuadraticEase()
-            //    };
-            //    CooldownBarWindowManager.Instance.Dispatcher.Invoke(() =>
-            //    {
-            //        MainGrid.BeginAnimation(WidthProperty, w);
-            //        MainGrid.BeginAnimation(HeightProperty, h);
-            //    });
-            //    CloseTimer.IsEnabled = true;
-
-            //    MainTimer.Stop();
-            //};
             AnimateCooldown();
         }
 
