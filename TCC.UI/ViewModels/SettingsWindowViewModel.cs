@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows;
+using TCC.Windows;
 
 namespace TCC.ViewModels
 {
@@ -13,7 +10,7 @@ namespace TCC.ViewModels
         {
             get
             {
-                if (WindowManager.CooldownWindow.Visibility == System.Windows.Visibility.Visible)
+                if (SettingsManager.CooldownWindowSettings.Visibility == Visibility.Visible)
                 {
                     isCooldownWindowVisible = true;
                     return isCooldownWindowVisible;
@@ -26,34 +23,30 @@ namespace TCC.ViewModels
             }
             set
             {
-                if (value != isCooldownWindowVisible)
-                {
-                    isCooldownWindowVisible = value;
-                    Console.WriteLine("Cooldown window set to {0}", value);
+                if (value == isCooldownWindowVisible) return;
 
-                    if (value)
-                    {
-                        WindowManager.CooldownWindow.Dispatcher.Invoke(() =>
-                        WindowManager.CooldownWindow.Visibility = System.Windows.Visibility.Visible
-                        );
-                    }
-                    else
-                    {
-                        WindowManager.CooldownWindow.Dispatcher.Invoke(() =>
-                        WindowManager.CooldownWindow.Visibility = System.Windows.Visibility.Collapsed
-                        );
-                    }
-                    RaisePropertyChanged("IsCooldownWindowVisible");
+                isCooldownWindowVisible = value;
+                if (isCooldownWindowVisible)
+                {
+                    WindowManager.CooldownWindow.Dispatcher.Invoke(() => WindowManager.CooldownWindow.Visibility = Visibility.Visible);
+                    SettingsManager.CooldownWindowSettings.Visibility = Visibility.Visible;
+
                 }
+                else
+                {
+                    WindowManager.CooldownWindow.Dispatcher.Invoke(() => WindowManager.CooldownWindow.Visibility = Visibility.Hidden);
+                    SettingsManager.CooldownWindowSettings.Visibility = Visibility.Hidden; ;
+                }
+
+                RaisePropertyChanged("IsCooldownWindowVisible");
             }
         }
-
         private bool isBuffWindowVisible;
         public bool IsBuffWindowVisible
         {
             get
             {
-                if (WindowManager.BuffBar.Visibility == System.Windows.Visibility.Visible)
+                if (SettingsManager.BuffBarWindowSettings.Visibility == Visibility.Visible)
                 {
                     isBuffWindowVisible = true;
                     return isBuffWindowVisible;
@@ -66,31 +59,30 @@ namespace TCC.ViewModels
             }
             set
             {
-                if (value != isBuffWindowVisible)
+                if (value == isBuffWindowVisible) return;
+
+                isBuffWindowVisible = value;
+                if (isBuffWindowVisible)
                 {
-                    isBuffWindowVisible = value;
-                    Console.WriteLine("Buff window set to {0}", value);
-
-                    if (value)
-                    {
-                        WindowManager.BuffBar.Visibility = System.Windows.Visibility.Visible;
-                    }
-                    else
-                    {
-                        WindowManager.BuffBar.Visibility = System.Windows.Visibility.Collapsed;
-                    }
-                    RaisePropertyChanged("IsBuffWindowVisible");
-
+                    WindowManager.BuffBar.Dispatcher.Invoke(() => WindowManager.BuffBar.Visibility = Visibility.Visible);
+                    SettingsManager.BuffBarWindowSettings.Visibility = Visibility.Visible;
                 }
+                else
+                {
+                    WindowManager.BuffBar.Dispatcher.Invoke(() => WindowManager.BuffBar.Visibility = Visibility.Hidden);
+                    SettingsManager.BuffBarWindowSettings.Visibility = Visibility.Hidden;
+                }
+                RaisePropertyChanged("IsBuffWindowVisible");
+
+
             }
         }
-
         public bool isBossWindowVisible;
         public bool IsBossWindowVisible
         {
             get
             {
-                if (WindowManager.BossGauge.Visibility == System.Windows.Visibility.Visible)
+                if (SettingsManager.BossGaugeWindowSettings.Visibility == Visibility.Visible)
                 {
                     isBossWindowVisible = true;
                     return isBossWindowVisible;
@@ -103,31 +95,29 @@ namespace TCC.ViewModels
             }
             set
             {
-                if (value != isBossWindowVisible)
+                if (value == isBossWindowVisible) return;
+                isBossWindowVisible = value;
+
+                if (isBossWindowVisible)
                 {
-                    isBossWindowVisible = value;
-                    Console.WriteLine("Boss window set to {0}", value);
-
-                    if (value)
-                    {
-                        WindowManager.BossGauge.Visibility = System.Windows.Visibility.Visible;
-                    }
-                    else
-                    {
-                        WindowManager.BossGauge.Visibility = System.Windows.Visibility.Collapsed;
-                    }
-                    RaisePropertyChanged("IsBossWindowVisible");
-
+                    WindowManager.BossGauge.Dispatcher.Invoke(() => WindowManager.BossGauge.Visibility = Visibility.Visible);
+                    SettingsManager.BossGaugeWindowSettings.Visibility = Visibility.Visible;
                 }
+                else
+                {
+                    WindowManager.BossGauge.Dispatcher.Invoke(() => WindowManager.BossGauge.Visibility = Visibility.Hidden);
+                    SettingsManager.BossGaugeWindowSettings.Visibility = Visibility.Hidden;
+                }
+
+                RaisePropertyChanged("IsBossWindowVisible");
             }
         }
-
         private bool isCharacterWindowVisible;
         public bool IsCharacterWindowVisible
         {
             get
             {
-                if (WindowManager.CharacterWindow.Visibility == System.Windows.Visibility.Visible)
+                if (SettingsManager.CharacterWindowSettings.Visibility == Visibility.Visible)
                 {
                     isCharacterWindowVisible = true;
                     return isCharacterWindowVisible;
@@ -140,49 +130,127 @@ namespace TCC.ViewModels
             }
             set
             {
-                if (isCharacterWindowVisible != value)
+                if (isCharacterWindowVisible == value) return;
+
+                isCharacterWindowVisible = value;
+                if (isCharacterWindowVisible)
                 {
-                    isCharacterWindowVisible = value;
-                    Console.WriteLine("Char window set to {0}", value);
-                    if (value)
-                    {
-                        WindowManager.CharacterWindow.Visibility = System.Windows.Visibility.Visible;
-                    }
-                    else
-                    {
-                        WindowManager.CharacterWindow.Visibility = System.Windows.Visibility.Collapsed;
-                    }
-                    RaisePropertyChanged("IsCharacterWindowVisible");
-
+                    WindowManager.CharacterWindow.Dispatcher.Invoke(() => WindowManager.CharacterWindow.Visibility = Visibility.Visible);
+                    SettingsManager.CharacterWindowSettings.Visibility = Visibility.Visible;
                 }
-            }
+                else
+                {
+                    WindowManager.CharacterWindow.Dispatcher.Invoke(() => WindowManager.CharacterWindow.Visibility = Visibility.Hidden);
+                    SettingsManager.CharacterWindowSettings.Visibility = Visibility.Hidden;
+                }
 
+                RaisePropertyChanged("IsCharacterWindowVisible");
+            }
         }
 
-        public bool IsClickThruOn
+        private bool isCooldownWindowTransparent;
+        public bool IsCooldownWindowTransparent
         {
-            get
-            {
-                return WindowManager.ClickThru;
-            }
+            get { return SettingsManager.CooldownWindowSettings.ClickThru; }
             set
             {
-                if (value != WindowManager.ClickThru)
-                {
-                    WindowManager.ClickThru = value;
-                }
+                if (SettingsManager.CooldownWindowSettings.ClickThru == value) return;
+                SettingsManager.CooldownWindowSettings.ClickThru = value;
+                WindowManager.CooldownWindow.Dispatcher.Invoke(() => WindowManager.CooldownWindow.SetClickThru(SettingsManager.CooldownWindowSettings.ClickThru));
+                RaisePropertyChanged("IsCooldownWindowTransparent");
             }
-
+        }
+        private bool isCharacterWindowTransparent;
+        public bool IsCharacterWindowTransparent
+        {
+            get { return SettingsManager.CharacterWindowSettings.ClickThru; }
+            set
+            {
+                if (SettingsManager.CharacterWindowSettings.ClickThru == value) return;
+                SettingsManager.CharacterWindowSettings.ClickThru = value;
+                WindowManager.CharacterWindow.Dispatcher.Invoke(() => WindowManager.CharacterWindow.SetClickThru(SettingsManager.CharacterWindowSettings.ClickThru));
+                RaisePropertyChanged("IsCharacterWindowTransparent");
+            }
+        }
+        private bool isBuffWindowTransparent;
+        public bool IsBuffWindowTransparent
+        {
+            get { return SettingsManager.BuffBarWindowSettings.ClickThru; }
+            set
+            {
+                if (SettingsManager.BuffBarWindowSettings.ClickThru == value) return;
+                SettingsManager.BuffBarWindowSettings.ClickThru = value;
+                WindowManager.BuffBar.Dispatcher.Invoke(() =>
+                WindowManager.BuffBar.SetClickThru(SettingsManager.BuffBarWindowSettings.ClickThru));
+                RaisePropertyChanged("IsBuffWindowTransparent");
+            }
+        }
+        private bool isBossWindowTransparent;
+        public bool IsBossWindowTransparent
+        {
+            get { return SettingsManager.BossGaugeWindowSettings.ClickThru; }
+            set
+            {
+                if (SettingsManager.BossGaugeWindowSettings.ClickThru == value) return;
+                SettingsManager.BossGaugeWindowSettings.ClickThru = value;
+                WindowManager.BossGauge.Dispatcher.Invoke(() => WindowManager.BossGauge.SetClickThru(SettingsManager.BossGaugeWindowSettings.ClickThru));
+                RaisePropertyChanged("IsBossWindowTransparent");
+            }
         }
 
         public SettingsWindowViewModel()
         {
-            WindowManager.CooldownWindow.VisibilityChanged += (s, ev) => RaisePropertyChanged("IsCooldownWindowVisible");
-            WindowManager.CharacterWindow.VisibilityChanged += (s, ev) => RaisePropertyChanged("IsCharacterWindowVisible");
-            WindowManager.BossGauge.VisibilityChanged += (s, ev) => RaisePropertyChanged("IsBossWindowVisible");
-            WindowManager.BuffBar.VisibilityChanged += (s, ev) => RaisePropertyChanged("IsBuffWindowVisible");
-            WindowManager.ClickThruChanged += (s, ev) => RaisePropertyChanged("IsClickThruOn");
 
+            WindowManager.CooldownWindow.PropertyChanged += CooldownWindow_PropertyChanged;
+            WindowManager.CharacterWindow.PropertyChanged += CharacterWindow_PropertyChanged;
+            WindowManager.BossGauge.PropertyChanged += BossGauge_PropertyChanged;
+            WindowManager.BuffBar.PropertyChanged += BuffBar_PropertyChanged;
+        }
+
+        private void BuffBar_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Visibility")
+            {
+                RaisePropertyChanged("IsBuffWindowVisible");
+            }
+            else if (e.PropertyName == "ClickThru")
+            {
+                IsBuffWindowTransparent = ((TccWindow)sender).ClickThru;
+            }
+        }
+        private void BossGauge_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Visibility")
+            {
+                RaisePropertyChanged("IsBossWindowVisible");
+
+            }
+            else if (e.PropertyName == "ClickThru")
+            {
+                IsBossWindowTransparent = ((TccWindow)sender).ClickThru;
+            }
+        }
+        private void CharacterWindow_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Visibility")
+            {
+                RaisePropertyChanged("IsCharacterWindowVisible");
+            }
+            else if (e.PropertyName == "ClickThru")
+            {
+                IsCharacterWindowTransparent = ((TccWindow)sender).ClickThru;
+            }
+        }
+        private void CooldownWindow_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Visibility")
+            {
+                RaisePropertyChanged("IsCooldownWindowVisible");
+            }
+            else if (e.PropertyName == "ClickThru")
+            {
+                IsCooldownWindowTransparent = ((TccWindow)sender).ClickThru;
+            }
         }
     }
 }
