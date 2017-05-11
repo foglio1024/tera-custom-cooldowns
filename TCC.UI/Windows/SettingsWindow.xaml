@@ -7,18 +7,26 @@
         xmlns:ui_elements="clr-namespace:TCC.UI_elements"
         xmlns:vm="clr-namespace:TCC.ViewModels" Topmost="True"
         mc:Ignorable="d" WindowStyle="None" AllowsTransparency="True"
-        Title="TCC settings" Height="Auto" Width="Auto" ResizeMode="NoResize" SizeToContent="WidthAndHeight" Background="Transparent" UseLayoutRounding="True" SnapsToDevicePixels="True">
+        Title="TCC settings" Height="Auto" Width="Auto" ResizeMode="NoResize" SizeToContent="WidthAndHeight" Background="Transparent" UseLayoutRounding="True" >
     <Window.DataContext>
         <vm:SettingsWindowViewModel/>
     </Window.DataContext>
-    <Grid Margin="10" Width="270">
+    <Grid Margin="10" Width="500">
         <Grid.RowDefinitions >
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Border Style="{StaticResource border}" Grid.ColumnSpan="10" Grid.RowSpan="10"/>
-        <Grid MouseLeftButtonDown="Window_MouseLeftButtonDown">
+        <Grid MouseLeftButtonDown="Window_MouseLeftButtonDown" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*"/>
@@ -36,35 +44,75 @@
         </Grid>
         <Grid Grid.Row="1" Margin="0,0,0,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="30"/>
-                <RowDefinition />
-                <RowDefinition />
+                <RowDefinition Height="35"/>
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Border Background="#09ffffff"></Border>
-            <TextBlock Text="Windows visibility settings" Style="{StaticResource text1}" Opacity=".3" Margin="15,0" VerticalAlignment="Center"/>
-            <ui_elements:BoolSetting Margin="0,0,0,0" SettingName="Cooldown window" Grid.Row="1" IsOn="{Binding IsCooldownWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_access_time_white_24dp_2x.png" />
-            <ui_elements:BoolSetting Margin="0,0,0,0" SettingName="Character window" Grid.Row="2" IsOn="{Binding IsCharacterWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_person_white_24dp_2x.png"/>
-            <ui_elements:BoolSetting Margin="0,0,0,0" SettingName="Buffs window" Grid.Row="4" IsOn="{Binding IsBuffWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_data_usage_white_24dp_2x.png"/>
-            <ui_elements:BoolSetting Margin="0,0,0,0" SettingName="Boss window" Grid.Row="3" IsOn="{Binding IsBossWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/combat_white.png"/>
-
-
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border Background="#09ffffff" Grid.ColumnSpan="2" />
+                <Image Source="/TCC;component/resources/images/ic_access_time_white_24dp_2x.png" Margin="7,5" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
+                <TextBlock Text="Cooldown window settings" Style="{StaticResource text1}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+            </Grid>
+            <ui_elements:BoolSetting Margin="0,0,0,0" SettingName="Visibility" Grid.Row="1" IsOn="{Binding IsCooldownWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
+            <ui_elements:BoolSetting Margin="0,0,0,0" SettingName="Click through" Grid.Row="2" IsOn="{Binding IsCooldownWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_mouse_white_24dp_2x.png" />
         </Grid>
         <Grid Grid.Row="2" Margin="0,0,0,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="30"/>
-                <RowDefinition />
-                <RowDefinition />
+                <RowDefinition Height="35"/>
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Border Background="#09ffffff"></Border>
-            <TextBlock Text="Input settings" Style="{StaticResource text1}" Opacity=".3" Margin="15,0" VerticalAlignment="Center"/>
-            <ui_elements:BoolSetting Margin="0,0,0,0" SettingName="Click through" Grid.Row="1" IsOn="{Binding IsClickThruOn, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_mouse_white_24dp_2x.png"/>
-
-
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border Background="#09ffffff" Grid.ColumnSpan="2" />
+                <Image Source="/TCC;component/resources/images/ic_person_white_24dp_2x.png" Margin="7,5" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
+                <TextBlock Text="Character window settings" Style="{StaticResource text1}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+            </Grid>
+            <ui_elements:BoolSetting Margin="0,0,0,0" SettingName="Visibility" Grid.Row="1" IsOn="{Binding IsCharacterWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
+            <ui_elements:BoolSetting Margin="0,0,0,0" SettingName="Click through" Grid.Row="2" IsOn="{Binding IsCharacterWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_mouse_white_24dp_2x.png"/>
         </Grid>
-
+        <Grid Grid.Row="1" Grid.Column="1" Margin="0,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border Background="#09ffffff" Grid.ColumnSpan="2" />
+                <Image Source="/TCC;component/resources/images/ic_data_usage_white_24dp_2x.png" Margin="7,5" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
+                <TextBlock Text="Buffs window settings" Style="{StaticResource text1}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+            </Grid>
+            <ui_elements:BoolSetting Margin="0,0,0,0" SettingName="Visibility" Grid.Row="1" IsOn="{Binding IsBuffWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
+            <ui_elements:BoolSetting Margin="0,0,0,0" SettingName="Click through" Grid.Row="2" IsOn="{Binding IsBuffWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_mouse_white_24dp_2x.png"/>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="1" Margin="0,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border Background="#09ffffff" Grid.ColumnSpan="2" />
+                <Image Source="/TCC;component/resources/images/combat_white.png" Margin="7,5" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
+                <TextBlock Text="Boss window settings" Style="{StaticResource text1}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+            </Grid>
+            <ui_elements:BoolSetting Margin="0,0,0,0" SettingName="Visibility" Grid.Row="1" IsOn="{Binding IsBossWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
+            <ui_elements:BoolSetting Margin="0,0,0,0" SettingName="Click through" Grid.Row="2" IsOn="{Binding IsBossWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_mouse_white_24dp_2x.png"/>
+        </Grid>
     </Grid>
 </Window>
