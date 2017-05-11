@@ -47,8 +47,8 @@
         </Ellipse>
         <local:Arc x:Name="arc" Stroke="#8000" StrokeThickness="15" EndAngle="0" Width="0" Height="0"/>
 
-        <Grid Width="Auto" MaxWidth="{Binding ElementName=bgEll, Path=Width}" Height="{Binding ElementName=bgEll, Path=Width, Converter={StaticResource sizeToDurationLabelSizeConv}}"
-              x:Name="durationLabel" Visibility="{Binding Duration, Converter={StaticResource durationToVisibilityConv}}" 
+        <Grid x:Name="durationLabel"  Width="Auto" MaxWidth="{Binding Size, RelativeSource={RelativeSource AncestorType=elements:AbnormalityIndicator}}" Height="{Binding ElementName=bgEll, Path=Width, Converter={StaticResource sizeToDurationLabelSizeConv}}"
+              Visibility="{Binding Duration, Converter={StaticResource durationToVisibilityConv}}" 
               HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1"
               Margin="0,-4,0,0">
             <Border x:Name="fill" Background="White" 
