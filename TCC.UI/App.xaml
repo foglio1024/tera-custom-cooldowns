@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:TCC"
              Startup="OnStartup">
     <Application.Resources>
-        <DropShadowEffect x:Key="dropShadow" BlurRadius="5" ShadowDepth="3" Opacity=".6" />
+        <DropShadowEffect x:Key="dropShadow" BlurRadius="5" ShadowDepth="3" Opacity=".4" />
         <SolidColorBrush x:Key="bgColor" Color="#202027" />
         
         <Style x:Key="border" TargetType="Border">
@@ -20,37 +20,8 @@
 
         <Style x:Key="text1" TargetType="TextBlock">
             <Setter Property="UseLayoutRounding" Value="True"/>
-            <Setter Property="SnapsToDevicePixels" Value="True"/>
             <Setter Property="Foreground" Value="#bbffffff"/>
             <Setter Property="FontFamily" Value="/TCC;component/resources/#Open Sans"/>
         </Style>
-
-        <Style x:Key="opacityAnimatedContainer" TargetType="FrameworkElement">
-            <!--<Setter Property="Opacity" Value="0"/>
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding IsTeraOnTop}" Value="True">
-                    <DataTrigger.EnterActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation From="0" To="1"
-                                     Duration="0:0:0.2"
-                                     Storyboard.TargetProperty="Opacity"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </DataTrigger.EnterActions>
-                    <DataTrigger.ExitActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation From="1" To="0"
-                                                 Duration="0:0:0.2"
-                                                 Storyboard.TargetProperty="Opacity"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </DataTrigger.ExitActions>
-                </DataTrigger>
-            </Style.Triggers>-->
-        </Style>
-
-
     </Application.Resources>
 </Application>
