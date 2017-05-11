@@ -12,10 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using TCC.ViewModels;
+using TCC.Windows;
 
 namespace TCC
 {
-    public partial class CooldownWindow : Window
+    public partial class CooldownWindow : TccWindow
     {
         public CooldownWindow()
         {
@@ -24,31 +25,27 @@ namespace TCC
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            IntPtr hwnd = new WindowInteropHelper(this).Handle;
-            FocusManager.MakeUnfocusable(hwnd);
-            FocusManager.HideFromToolBar(hwnd);
-            Topmost = true;
-            ContextMenu = new ContextMenu();
-            var HideButton = new MenuItem() { Header = "Hide" };
-            HideButton.Click += (s, ev) =>
-            {
-                this.Visibility = Visibility.Collapsed;
-                VisibilityChanged?.Invoke(this, new PropertyChangedEventArgs("Visibility"));
-                Console.WriteLine("Cooldown visibility change invoked");
-            };
-            ContextMenu.Items.Add(HideButton);
+            InitWindow();
+
+            Left = SettingsManager.CooldownWindowSettings.X;
+            Top = SettingsManager.CooldownWindowSettings.Y;
+            Visibility = SettingsManager.CooldownWindowSettings.Visibility;
+            SetClickThru(SettingsManager.CooldownWindowSettings.ClickThru);
+
 
             LongSkillsPanel.ItemsSource = CooldownBarWindowManager.Instance.LongSkills;
             LongSkillsPanel.DataContext = CooldownBarWindowManager.Instance.LongSkills;
             NormalSkillsPanel.ItemsSource = CooldownBarWindowManager.Instance.ShortSkills;
             NormalSkillsPanel.DataContext = CooldownBarWindowManager.Instance.ShortSkills;
         }
-        public event PropertyChangedEventHandler VisibilityChanged;
 
 
         private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             this.DragMove();
+            SettingsManager.CooldownWindowSettings.X = this.Left;
+            SettingsManager.CooldownWindowSettings.Y = this.Top;
+
         }
 
         private void Window_MouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

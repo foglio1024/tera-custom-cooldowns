@@ -1,10 +1,11 @@
-﻿<Window x:Class="TCC.CooldownWindow"
+﻿<w:TccWindow x:Class="TCC.CooldownWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCC"
         xmlns:vm="clr-namespace:TCC.ViewModels"
+        xmlns:w="clr-namespace:TCC.Windows"
         mc:Ignorable="d"
         Title="Tera Custom Cooldowns"
         Height="Auto" 
@@ -19,15 +20,40 @@
         MouseRightButtonDown="Window_MouseRightButtonDown"
         Loaded="Window_Loaded"    
         ResizeMode="NoResize">
-    <Window.DataContext>
+    <w:TccWindow.DataContext>
         <vm:CooldownWindowViewModel />
-    </Window.DataContext>
-    <Window.Resources>
+    </w:TccWindow.DataContext>
+    <w:TccWindow.Resources>
         <DataTemplate x:Key="SkillDataTemplate">
             <local:SkillIconControl />
         </DataTemplate>
+        <Style x:Key="opacityAnimatedContainer" TargetType="FrameworkElement">
+            <Setter Property="Opacity" Value="0"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsTeraOnTop}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation From="0" To="1"
+                                     Duration="0:0:0.2"
+                                     Storyboard.TargetProperty="Opacity"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation From="1" To="0"
+                                                 Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="Opacity"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
 
-    </Window.Resources>
+    </w:TccWindow.Resources>
     
     <Grid Width="800" Style="{StaticResource opacityAnimatedContainer}">
         <Grid.RowDefinitions>
@@ -52,4 +78,4 @@
         </ItemsControl>
         
     </Grid>
-</Window>
+</w:TccWindow>

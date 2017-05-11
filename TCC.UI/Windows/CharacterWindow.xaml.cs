@@ -19,12 +19,12 @@ using System.Windows.Threading;
 using TCC.Parsing;
 using TCC.ViewModels;
 
-namespace TCC
+namespace TCC.Windows
 {
     /// <summary>
     /// Logica di interazione per HPbar.xaml
     /// </summary>
-    public partial class CharacterWindow : Window
+    public partial class CharacterWindow : TccWindow
     {
         public CharacterWindow()
         {
@@ -33,29 +33,22 @@ namespace TCC
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            IntPtr hwnd = new WindowInteropHelper(this).Handle;
-            FocusManager.MakeUnfocusable(hwnd);
-            FocusManager.HideFromToolBar(hwnd);
-            Topmost = true;
-            ContextMenu = new ContextMenu();
-            var HideButton = new MenuItem() { Header = "Hide" };
-            HideButton.Click += (s, ev) =>
-            {
-                this.Visibility = Visibility.Collapsed;
-                VisibilityChanged?.Invoke(this, new PropertyChangedEventArgs("Visibility"));
-                Console.WriteLine("Character visibility change invoked");
+            InitWindow();
 
-            };
-            ContextMenu.Items.Add(HideButton);
+            Left = SettingsManager.CharacterWindowSettings.X;
+            Top = SettingsManager.CharacterWindowSettings.Y;
+            Visibility = SettingsManager.CharacterWindowSettings.Visibility;
+            SetClickThru(SettingsManager.CharacterWindowSettings.ClickThru);
 
             rootGrid.DataContext = CharacterWindowManager.Instance.Player;
         }
 
-        public event PropertyChangedEventHandler VisibilityChanged;
-
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
+
+            SettingsManager.CharacterWindowSettings.X = this.Left;
+            SettingsManager.CharacterWindowSettings.Y = this.Top;
         }
 
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)

@@ -36,7 +36,7 @@ namespace TCC.Converters
 namespace TCC.Windows
 {
 
-    public partial class BossGageWindow : Window
+    public partial class BossGageWindow : TccWindow
     {
 
         public BossGageWindow()
@@ -46,32 +46,25 @@ namespace TCC.Windows
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            IntPtr hwnd = new WindowInteropHelper(this).Handle;
-            FocusManager.MakeUnfocusable(hwnd);
-            FocusManager.HideFromToolBar(hwnd);
-            Topmost = true;
-
-            ContextMenu = new ContextMenu();
-            var HideButton = new MenuItem() { Header = "Hide" };
-            HideButton.Click += (s, ev) =>
-            {
-                this.Visibility = Visibility.Collapsed;
-                VisibilityChanged?.Invoke(this, new PropertyChangedEventArgs("Visiblity"));
-                Console.WriteLine("Boss visibility change invoked");
-
-            };
-            ContextMenu.Items.Add(HideButton);
+            InitWindow();
 
             Bosses.DataContext = BossGageWindowManager.Instance.CurrentNPCs;
             Bosses.ItemsSource = BossGageWindowManager.Instance.CurrentNPCs;
 
+            Left = SettingsManager.BuffBarWindowSettings.X;
+            Top = SettingsManager.BossGaugeWindowSettings.Y;
+            Visibility = SettingsManager.BossGaugeWindowSettings.Visibility;
+            SetClickThru(SettingsManager.BossGaugeWindowSettings.ClickThru);
+
         }
 
-        public event PropertyChangedEventHandler VisibilityChanged;
 
         private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             this.DragMove();
+            SettingsManager.BossGaugeWindowSettings.X = this.Left;
+            SettingsManager.BossGaugeWindowSettings.Y = this.Top;
+
         }
 
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
