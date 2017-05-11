@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
-using TCC.Messages;
+using TCC.Parsing.Messages;
 using TCC.ViewModels;
 
 namespace TCC
