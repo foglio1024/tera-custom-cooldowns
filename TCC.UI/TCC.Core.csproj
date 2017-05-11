@@ -82,10 +82,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PacketDotNet">
-      <HintPath>..\..\..\ShinraMeter\SharpPcap\PacketDotNet.dll</HintPath>
+      <HintPath>..\..\..\ShinraMeter\packages\PacketDotNet.0.13.0\lib\net\PacketDotNet.dll</HintPath>
     </Reference>
     <Reference Include="SharpPcap">
-      <HintPath>..\..\..\ShinraMeter\SharpPcap\SharpPcap.dll</HintPath>
+      <HintPath>..\..\..\ShinraMeter\packages\SharpPcap.4.2.0\lib\net\SharpPcap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -115,6 +115,7 @@
     <Compile Include="Data\Boss.cs" />
     <Compile Include="Data\Abnormality.cs" />
     <Compile Include="Data\AbnormalityDatabase.cs" />
+    <Compile Include="Data\User.cs" />
     <Compile Include="EntitiesManager.cs" />
     <Compile Include="PacketInspector.cs" />
     <Compile Include="Parsing\MessageFactory.cs" />
@@ -125,13 +126,23 @@
     <Compile Include="Parsing\Messages\S_CHAT.cs" />
     <Compile Include="Parsing\Messages\S_DESPAWN_NPC.cs" />
     <Compile Include="Parsing\Messages\S_DESPAWN_USER.cs" />
+    <Compile Include="Parsing\Messages\S_LEAVE_PARTY_MEMBER.cs" />
     <Compile Include="Parsing\Messages\S_LOAD_TOPO.cs" />
+    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_LIST.cs" />
     <Compile Include="Parsing\Messages\S_RETURN_TO_LOBBY.cs" />
     <Compile Include="Parsing\Messages\S_SPAWN_ME.cs" />
     <Compile Include="Parsing\Messages\S_SPAWN_NPC.cs" />
     <Compile Include="Data\Player.cs" />
     <Compile Include="Parsing\Messages\S_SPAWN_USER.cs" />
     <Compile Include="Parsing\Messages\S_USER_EFFECT.cs" />
+    <Compile Include="Parsing\Messages\S_LOGOUT_PARTY_MEMBER.cs" />
+    <Compile Include="Parsing\Messages\S_BAN_PARTY_MEMBER.cs" />
+    <Compile Include="Parsing\Messages\S_LEAVE_PARTY.cs" />
+    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_CHANGE_HP.cs" />
+    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_CHANGE_MP.cs" />
+    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_INFO.cs" />
+    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_STAT_UPDATE.cs" />
+    <Compile Include="SettingsManager.cs" />
     <Compile Include="Sniffing\ConnectionId.cs" />
     <Compile Include="Sniffing\EndpointIpv4.cs" />
     <Compile Include="Sniffing\IpSniffer.cs" />
@@ -322,24 +333,33 @@
     <Compile Include="UI elements\MaterialSwitch.xaml.cs">
       <DependentUpon>MaterialSwitch.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI elements\PartyMember.xaml.cs">
+      <DependentUpon>PartyMember.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI elements\RaidMember.xaml.cs">
+      <DependentUpon>RaidMember.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\BossGageWindowViewModel.cs" />
     <Compile Include="Converters\ClassToStaminaLabelConverter.cs" />
+    <Compile Include="ViewModels\GroupWindowViewModel.cs" />
+    <Compile Include="ViewModels\MultiThreadManagers\BossGageWindowManager.cs" />
+    <Compile Include="ViewModels\MultiThreadManagers\BuffBarWindowManager.cs" />
+    <Compile Include="ViewModels\MultiThreadManagers\CharacterWindowManager.cs" />
+    <Compile Include="ViewModels\MultiThreadManagers\CooldownBarWindowManager.cs" />
+    <Compile Include="ViewModels\MultiThreadManagers\GroupWindowManager.cs" />
     <Compile Include="ViewModels\SettingsWindowViewModel.cs" />
     <Compile Include="UI elements\StaminaGaugeControl.xaml.cs">
       <DependentUpon>StaminaGaugeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UpdateManager.cs" />
     <Compile Include="Utils.cs" />
-    <Compile Include="ViewModels\AbnormalityViewModel.cs" />
     <Compile Include="ViewModels\AbnormalityWindowViewModel.cs" />
-    <Compile Include="ViewModels\BaseINPC.cs" />
-    <Compile Include="ViewModels\MultithreadManagers.cs" />
+    <Compile Include="ViewModels\Helpers\BaseINPC.cs" />
     <Compile Include="ViewModels\CharacterWindowViewModel.cs" />
     <Compile Include="Converters\FactorFromValuesConverter.cs" />
     <Compile Include="Converters\StaminaBarColorConverter.cs" />
     <Compile Include="Converters\StaminaBarVisibilityConverter.cs" />
     <Compile Include="ViewModels\CooldownWindowViewModel.cs" />
-    <Compile Include="ViewModels\TestWindowViewModel.cs" />
     <Compile Include="Windows\AbnormalitiesWindow.xaml.cs">
       <DependentUpon>AbnormalitiesWindow.xaml</DependentUpon>
     </Compile>
@@ -359,22 +379,16 @@
     <Compile Include="Converters\HPbarColorConverter.cs" />
     <Compile Include="Converters\HP_PercentageConverter.cs" />
     <Compile Include="Converters\LaurelImageConverter.cs" />
+    <Compile Include="Windows\GroupWindow.xaml.cs">
+      <DependentUpon>GroupWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\SkillCooldown.cs" />
-    <Compile Include="Windows\StaminaGauge.xaml.cs">
-      <DependentUpon>StaminaGauge.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Data\SkillCooldown.cs" />
     <Compile Include="UI elements\Arc.cs" />
     <Compile Include="Data\Character.cs" />
     <Compile Include="Parsing\CharLoginProcessor.cs" />
-    <Compile Include="UI elements\EdgeArc.xaml.cs">
-      <DependentUpon>EdgeArc.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\EdgeWindow.xaml.cs">
-      <DependentUpon>EdgeWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Data\Enums.cs" />
     <Compile Include="Data\BroochesDatabase.cs" />
     <Compile Include="FocusManager.cs" />
@@ -389,15 +403,12 @@
     <Compile Include="UI elements\SkillIconControl.xaml.cs">
       <DependentUpon>SkillIconControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Data\SkillCooldown.cs" />
     <Compile Include="SkillManager.cs" />
     <Compile Include="Data\SkillsDatabase.cs" />
     <Compile Include="Parsing\StringUtils.cs" />
     <Compile Include="Parsing\Messages\S_USER_STATUS.cs" />
     <Compile Include="WindowManager.cs" />
-    <Compile Include="Windows\TestWindow.xaml.cs">
-      <DependentUpon>TestWindow.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Windows\TccWindow.cs" />
     <Page Include="UI elements\AbnormalityIndicator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -422,10 +433,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI elements\EdgeArc.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UI elements\GenericGauge.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -442,6 +449,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI elements\PartyMember.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI elements\RaidMember.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI elements\StaminaGaugeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -451,10 +466,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\BossGageWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\EdgeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -475,19 +486,15 @@
       <DependentUpon>CooldownWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\GroupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\StaminaGauge.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UI elements\SkillIconControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\TestWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -515,6 +522,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="resources\images\ic_remove_red_eye_white_24dp_2x.png" />
     <Resource Include="resources\images\combat_white.png" />
     <Resource Include="resources\images\ic_person_white_24dp_2x.png" />
     <Resource Include="resources\images\ic_mouse_white_24dp_2x.png" />
