@@ -15,6 +15,8 @@ namespace TCC.ViewModels
         private static GroupWindowManager _instance;
         public static GroupWindowManager Instance => _instance ?? (_instance = new GroupWindowManager());
 
+        const int GROUP_SIZE_THRESHOLD = 7;
+
         private int _groupSize;
         public int GroupSize
         {
@@ -24,7 +26,7 @@ namespace TCC.ViewModels
                 if (_groupSize == value) return;
                 _groupSize = value;
 
-                if (_groupSize > 10)
+                if (_groupSize > GROUP_SIZE_THRESHOLD)
                 {
                     WindowManager.GroupWindow.SwitchTemplate(true);
                 }
@@ -34,6 +36,145 @@ namespace TCC.ViewModels
                 }
 
                 Console.WriteLine("Group size: " + _groupSize);
+            }
+        }
+
+        public void BeginOrRefreshUserAbnormality(Abnormality ab, int stacks, int duration, uint playerId, uint serverId)
+        {
+            //if (SettingsManager.IgnoreMyBuffsInGroupWindow && target == SessionManager.CurrentPlayer.EntityId) return;
+            var size = GroupSize > GROUP_SIZE_THRESHOLD ? AbnormalityManager.RAID_AB_SIZE : AbnormalityManager.PARTY_AB_SIZE;
+            var margin = GroupSize > GROUP_SIZE_THRESHOLD ? AbnormalityManager.RAID_AB_LEFT_MARGIN : AbnormalityManager.PARTY_AB_LEFT_MARGIN;
+
+            if (ab.Infinity || duration == Int32.MaxValue) duration = -1;
+            User u;
+            if (TryGetUser(_dps, serverId, playerId, out u))
+            {
+                if (ab.Type == AbnormalityType.Buff)
+                {
+                    u.AddOrRefreshBuff(new AbnormalityDuration(ab, duration, stacks, u.EntityId, this.Dispatcher, false, size*.9, size , new Thickness(margin,1,1,1)));
+                    if (u.UserClass == Class.Warrior && ab.Id >= 100200 && ab.Id <= 100203) MoveUser(Dps, Tanks, u.ServerId, u.PlayerId);
+                }
+                else
+                {
+                    u.AddOrRefreshDebuff(new AbnormalityDuration(ab, duration, stacks, u.EntityId, this.Dispatcher, false, size * .9, size, new Thickness(margin, 1, 1, 1)));
+                }
+                return;
+            }
+            if (TryGetUser(_tanks, serverId, playerId, out u))
+            {
+                if (ab.Type == AbnormalityType.Buff)
+                {
+                    u.AddOrRefreshBuff(new AbnormalityDuration(ab, duration, stacks, u.EntityId, this.Dispatcher, false, size * .9, size, new Thickness(margin, 1, 1, 1)));
+                }
+                else
+                {
+                    u.AddOrRefreshDebuff(new AbnormalityDuration(ab, duration, stacks, u.EntityId, this.Dispatcher, false, size * .9, size, new Thickness(margin, 1, 1, 1)));
+                }
+                return;
+            }
+            if (TryGetUser(_healers, serverId, playerId, out u))
+            {
+                if (ab.Type == AbnormalityType.Buff)
+                {
+                    u.AddOrRefreshBuff(new AbnormalityDuration(ab, duration, stacks, u.EntityId, this.Dispatcher, false, size*.9, size, new Thickness(margin, 1, 1, 1)));
+                }
+                else
+                {
+                    u.AddOrRefreshDebuff(new AbnormalityDuration(ab, duration, stacks, u.EntityId, this.Dispatcher, false, size * .9, size, new Thickness(margin, 1, 1, 1)));
+                }
+                return;
+            }
+
+        }
+        public void EndUserAbnormality(Abnormality ab, uint playerId, uint serverId)
+        {
+            User u;
+            if (TryGetUser(_dps, serverId, playerId, out u))
+            {
+                if (ab.Type == AbnormalityType.Buff)
+                {
+                    u.RemoveBuff(ab);
+                }
+                else
+                {
+                    u.RemoveDebuff(ab);
+                }
+                return;
+            }
+            if (TryGetUser(_tanks, serverId, playerId, out u))
+            {
+                if (ab.Type == AbnormalityType.Buff)
+                {
+                    u.RemoveBuff(ab);
+                    if (u.UserClass == Class.Warrior && ab.Id >= 100200 && ab.Id <= 100203) MoveUser(Tanks, Dps, u.ServerId, u.PlayerId);
+
+                }
+                else
+                {
+                    u.RemoveDebuff(ab);
+                }
+                return;
+            }
+            if (TryGetUser(_healers, serverId, playerId, out u))
+            {
+                if (ab.Type == AbnormalityType.Buff)
+                {
+                    u.RemoveBuff(ab);
+                }
+                else
+                {
+                    u.RemoveDebuff(ab);
+                }
+                return;
+            }
+        }
+        public void ClearUserAbnormality(uint playerId, uint serverId)
+        {
+            User u;
+            if (TryGetUser(_dps, serverId, playerId, out u))
+            {
+                foreach (var b in u.Buffs)
+                {
+                    b.Dispose();
+                }
+                u.Buffs.Clear();
+
+                foreach (var b in u.Debuffs)
+                {
+                    b.Dispose();
+                }
+                u.Debuffs.Clear();
+                return;
+            }
+            if (TryGetUser(_tanks, serverId, playerId, out u))
+            {
+                foreach (var b in u.Buffs)
+                {
+                    b.Dispose();
+                }
+                u.Buffs.Clear();
+
+                foreach (var b in u.Debuffs)
+                {
+                    b.Dispose();
+                }
+                u.Debuffs.Clear();
+                return;
+            }
+            if (TryGetUser(_healers, serverId, playerId, out u))
+            {
+                foreach (var b in u.Buffs)
+                {
+                    b.Dispose();
+                }
+                u.Buffs.Clear();
+
+                foreach (var b in u.Debuffs)
+                {
+                    b.Dispose();
+                }
+                u.Debuffs.Clear();
+                return;
             }
         }
 
@@ -77,9 +218,9 @@ namespace TCC.ViewModels
             }
         }
 
-
         public void AddOrUpdateMember(User p)
         {
+            if (SettingsManager.IgnoreMeInGroupWindow && p.EntityId == SessionManager.CurrentPlayer.EntityId) return;
             switch (p.UserClass)
             {
                 case Class.Priest:
@@ -114,6 +255,8 @@ namespace TCC.ViewModels
                 return;
             }
             dps.Online = p.Online;
+            dps.EntityId = p.EntityId;
+            dps.IsLeader = p.IsLeader;
             //update here
         }
         private void AddOrUpdateTank(User p)
@@ -125,6 +268,9 @@ namespace TCC.ViewModels
                 return;
             }
             tank.Online = p.Online;
+            tank.EntityId = p.EntityId;
+            tank.IsLeader = p.IsLeader;
+
             //update here
         }
         private void AddOrUpdateHealer(User p)
@@ -136,53 +282,34 @@ namespace TCC.ViewModels
                 return;
             }
             healer.Online = p.Online;
+            healer.EntityId = p.EntityId;
+            healer.IsLeader = p.IsLeader;
+
+
             //update here
         }
 
         public void RemoveMember(uint playerId, uint serverId)
         {
-            var dps = _dps.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
-            if (dps != null)
+            User u;
+            if(TryGetUser(_dps, serverId, playerId, out u))
             {
-                _dps.Remove(dps);
+                Dps.Remove(u);
                 GroupSize = GetCount();
                 return;
             }
-            var tank = _tanks.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
-            if (tank != null)
+            if (TryGetUser(_tanks, serverId, playerId, out u))
             {
-                _tanks.Remove(tank);
+                Tanks.Remove(u);
                 GroupSize = GetCount();
-                return;
             }
-            var healer = _healers.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
-            if (healer != null)
+            if (TryGetUser(_healers, serverId, playerId, out u))
             {
-                _healers.Remove(healer);
+                Healers.Remove(u);
                 GroupSize = GetCount();
-                return;
             }
 
         }
-        private void RemoveHealer(uint playerId, uint serverId)
-        {
-            var healer = _healers.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
-            if (healer == null) return;
-            _healers.Remove(healer);
-        }
-        private void RemoveTank(uint playerId, uint serverId)
-        {
-            var tank = _tanks.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
-            if (tank == null) return;
-            _tanks.Remove(tank);
-        }
-        private void RemoveDps(uint playerId, uint serverId)
-        {
-            var dps = _dps.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
-            if (dps == null) return;
-            _dps.Remove(dps);
-        }
-
         public void ClearAll()
         {
             _healers.Clear();
@@ -213,6 +340,284 @@ namespace TCC.ViewModels
                 return;
             }
         }
+
+        internal void RemoveMe()
+        {
+            User u;
+            if (TryGetUser(_dps, SessionManager.CurrentPlayer.EntityId, out u)) { _dps.Remove(u); return; }
+            if (TryGetUser(_tanks, SessionManager.CurrentPlayer.EntityId, out u)) { _tanks.Remove(u); return; }
+            if (TryGetUser(_healers, SessionManager.CurrentPlayer.EntityId, out u)) { _healers.Remove(u); return; }
+        }
+
+        internal void ClearMyBuffs()
+        {
+            User u;
+            if (TryGetUser(_dps, SessionManager.CurrentPlayer.EntityId, out u)) { u.Buffs.Clear(); return; }
+            if (TryGetUser(_tanks, SessionManager.CurrentPlayer.EntityId, out u)) { u.Buffs.Clear(); return; }
+            if (TryGetUser(_healers, SessionManager.CurrentPlayer.EntityId, out u)) { u.Buffs.Clear(); return; }
+        }
+
+        internal void SetNewLeader(ulong entityId, string name)
+        {
+            foreach (var u in _dps)
+            {
+                if (u.Name == name) u.IsLeader = true;
+                else u.IsLeader = false;
+            }
+            foreach (var u in _tanks)
+            {
+                if (u.Name == name) u.IsLeader = true;
+                else u.IsLeader = false;
+            }
+            foreach (var u in _healers)
+            {
+                if (u.Name == name) u.IsLeader = true;
+                else u.IsLeader = false;
+            }
+        }
+
+        internal void ClearAllBuffs()
+        {
+            foreach (var user in _dps)
+            {
+                foreach (var b in user.Buffs)
+                {
+                    b.Dispose();
+                }
+                user.Buffs.Clear();
+            }
+            foreach (var user in _tanks)
+            {
+                foreach (var b in user.Buffs)
+                {
+                    b.Dispose();
+                }
+                user.Buffs.Clear();
+            }
+            foreach (var user in _healers)
+            {
+                foreach (var b in user.Buffs)
+                {
+                    b.Dispose();
+                }
+                user.Buffs.Clear();
+            }
+
+        }
+        internal void ClearAllAbnormalities()
+        {
+            foreach (var user in _dps)
+            {
+                foreach (var b in user.Buffs)
+                {
+                    b.Dispose();
+                }
+                user.Buffs.Clear();
+                foreach (var b in user.Debuffs)
+                {
+                    b.Dispose();
+                }
+                user.Debuffs.Clear();
+
+            }
+            foreach (var user in _tanks)
+            {
+                foreach (var b in user.Buffs)
+                {
+                    b.Dispose();
+                }
+                user.Buffs.Clear();
+                foreach (var b in user.Debuffs)
+                {
+                    b.Dispose();
+                }
+                user.Debuffs.Clear();
+
+            }
+            foreach (var user in _healers)
+            {
+                foreach (var b in user.Buffs)
+                {
+                    b.Dispose();
+                }
+                user.Buffs.Clear();
+                foreach (var b in user.Debuffs)
+                {
+                    b.Dispose();
+                }
+                user.Debuffs.Clear();
+
+            }
+        }
+
+        public void EndRoll()
+        {
+            //Task.Delay(2000).ContinueWith(t =>
+            //{
+                foreach (var user in _dps)
+                {
+                    user.IsRolling = false;
+                    user.IsWinning = false;
+                    user.RollResult = 0;
+                }
+                foreach (var user in _tanks)
+                {
+                    user.IsRolling = false;
+                    user.IsWinning = false;
+                    user.RollResult = 0;
+                }
+                foreach (var user in _healers)
+                {
+                    user.IsRolling = false;
+                    user.IsWinning = false;
+                    user.RollResult = 0;
+                }
+            //});
+        }
+        public void SetRoll(ulong entityId, int rollResult)
+        {
+            if (rollResult == Int32.MaxValue) rollResult = -1;
+            User user;
+            if (TryGetUser(_dps, entityId, out user))
+            {
+                user.RollResult = rollResult;
+                FindHighestRoll();
+                return;
+            }
+            if (TryGetUser(_tanks, entityId, out user))
+            {
+                user.RollResult = rollResult;
+                FindHighestRoll();
+
+                return;
+            }
+            if (TryGetUser(_healers, entityId, out user))
+            {
+                user.RollResult = rollResult;
+                FindHighestRoll();
+
+                return;
+            }
+
+        }
+        public void StartRoll()
+        {
+            foreach (var user in _dps)
+            {
+                user.IsRolling = true;
+            }
+            foreach (var user in _tanks)
+            {
+                user.IsRolling = true;
+            }
+            foreach (var user in _healers)
+            {
+                user.IsRolling = true;
+            }
+        }
+
+        private void FindHighestRoll()
+        {
+            User winningUser = new User(this.Dispatcher) { RollResult = 0 };
+            foreach (var user in _dps)
+            {
+                if (user.RollResult > winningUser.RollResult) winningUser = user;
+            }
+            foreach (var user in _tanks)
+            {
+                if (user.RollResult > winningUser.RollResult) winningUser = user;
+            }
+            foreach (var user in _healers)
+            {
+                if (user.RollResult > winningUser.RollResult) winningUser = user;
+            }
+            User u;
+            if (TryGetUser(_dps, winningUser.EntityId, out u)) u.IsWinning = true;
+            if (TryGetUser(_tanks, winningUser.EntityId, out u)) u.IsWinning = true;
+            if (TryGetUser(_healers, winningUser.EntityId, out u)) u.IsWinning = true;
+            foreach (var user in _dps)
+            {
+                if (user.EntityId != winningUser.EntityId) user.IsWinning = false;
+            }
+            foreach (var user in _tanks)
+            {
+                if (user.EntityId != winningUser.EntityId) user.IsWinning = false;
+            }
+            foreach (var user in _healers)
+            {
+                if (user.EntityId != winningUser.EntityId) user.IsWinning = false;
+            }
+
+        }
+
+        private bool TryGetUser(SynchronizedObservableCollection<User> userList, ulong entityId, out User u)
+        {
+            u = userList.FirstOrDefault(x => x.EntityId == entityId);
+            if (u != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private bool TryGetUser(SynchronizedObservableCollection<User> userList, uint serverId, uint playerId, out User u)
+        {
+            u = userList.FirstOrDefault(x => x.ServerId == serverId && x.PlayerId == playerId);
+            if (u != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+        public void SetReadyStatus(ReadyPartyMembers p)
+        {
+            User user;
+            if (TryGetUser(_dps, p.ServerId, p.PlayerId, out user))
+            {
+                if (p.Status == 0) user.Ready = ReadyStatus.NotReady;
+                else if (p.Status == 1) user.Ready = ReadyStatus.Ready;
+                return;
+            }
+            if (TryGetUser(_healers, p.ServerId, p.PlayerId, out user))
+            {
+                if (p.Status == 0) user.Ready = ReadyStatus.NotReady;
+                else if (p.Status == 1) user.Ready = ReadyStatus.Ready;
+                return;
+            }
+            if (TryGetUser(_tanks, p.ServerId, p.PlayerId, out user))
+            {
+                if (p.Status == 0) user.Ready = ReadyStatus.NotReady;
+                else if (p.Status == 1) user.Ready = ReadyStatus.Ready;
+                return;
+            }
+        }
+        public void EndReadyCheck()
+        {
+            Task.Delay(4000).ContinueWith(t =>
+            {
+                foreach (var user in _dps)
+                {
+                    user.Ready = ReadyStatus.Undefined;
+                }
+                foreach (var user in _tanks)
+                {
+                    user.Ready = ReadyStatus.Undefined;
+                }
+                foreach (var user in _healers)
+                {
+                    user.Ready = ReadyStatus.Undefined;
+                }
+            });
+        }
+
+        //use TryGetUser
         public void UpdateMemberHP(uint playerId, uint serverId, int curHP, int maxHP)
         {
             var dps = _dps.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
@@ -263,13 +668,7 @@ namespace TCC.ViewModels
             }
 
         }
-
-        private int GetCount()
-        {
-            return _healers.Count + _dps.Count + _tanks.Count;
-        }
-
-        internal void UpdateMember(S_PARTY_MEMBER_STAT_UPDATE p)
+        public void UpdateMember(S_PARTY_MEMBER_STAT_UPDATE p)
         {
             var dps = _dps.FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
             if (dps != null)
@@ -279,7 +678,7 @@ namespace TCC.ViewModels
                 dps.MaxHP = p.MaxHP;
                 dps.MaxMP = p.MaxMP;
                 dps.Level = (uint)p.Level;
-              //dps.Combat = p.Combat;
+                //dps.Combat = p.Combat;
                 dps.Alive = p.Alive;
                 //dps.Online = true;
                 return;
@@ -292,7 +691,7 @@ namespace TCC.ViewModels
                 tank.MaxHP = p.MaxHP;
                 tank.MaxMP = p.MaxMP;
                 tank.Level = (uint)p.Level;
-              //tank.Combat = p.Combat;
+                //tank.Combat = p.Combat;
                 tank.Alive = p.Alive;
                 //tank.Online = true;
                 return;
@@ -305,10 +704,26 @@ namespace TCC.ViewModels
                 healer.MaxHP = p.MaxHP;
                 healer.MaxMP = p.MaxMP;
                 healer.Level = (uint)p.Level;
-              //healer.Combat = p.Combat;
+                //healer.Combat = p.Combat;
                 healer.Alive = p.Alive;
                 //healer.Online = true;
                 return;
+            }
+        }
+
+        private int GetCount()
+        {
+            var c = _healers.Count + _dps.Count + _tanks.Count;
+            if (SettingsManager.IgnoreMeInGroupWindow) c++;
+            return c;
+        }
+
+        public void MoveUser(SynchronizedObservableCollection<User> startList, SynchronizedObservableCollection<User> endList,uint serverId, uint playerId)
+        {
+            if(TryGetUser(startList, serverId,playerId, out User u))
+            {
+                endList.Add(u);
+                startList.Remove(u);
             }
         }
     }
