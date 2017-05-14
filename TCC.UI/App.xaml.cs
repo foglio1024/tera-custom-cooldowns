@@ -45,7 +45,7 @@ namespace TCC
 
 
             TeraSniffer.Instance.Enabled = true;
-            LoadSettings();
+            SettingsManager.LoadSettings();
             WindowManager.Init();
             WindowManager.Settings = new SettingsWindow()
             {
@@ -76,73 +76,10 @@ namespace TCC
 
         }
 
-        static void LoadSettings()
-        {
-            if (File.Exists(Environment.CurrentDirectory + @"/settings.csv"))
-            {
-                var sr = File.OpenText(Environment.CurrentDirectory + @"/settings.csv");
-
-                SetWindowParameters(SettingsManager.BossGaugeWindowSettings, sr); //0
-                SetWindowParameters(SettingsManager.BuffBarWindowSettings, sr); //1
-                SetWindowParameters(SettingsManager.CharacterWindowSettings, sr); //2
-                SetWindowParameters(SettingsManager.CooldownWindowSettings, sr); //4
-
-                //var t = sr.ReadLine(); //5
-                //if (t.Equals("true"))
-                //{
-                //    WindowManager.ChangeClickThru(true);
-                //}
-                //else
-                //{
-                //    WindowManager.ChangeClickThru(false);
-                //}
-                sr.Close();
-            }
-        }
-
-        private static void SetWindowParameters(WindowSettings ws, StreamReader sr)
-        {
-            var line = sr.ReadLine();
-            var vals = line.Split(',');
-            try
-            {
-                ws.Y = Convert.ToDouble(vals[0]);
-                ws.X = Convert.ToDouble(vals[1]);
-                if (Enum.TryParse(vals[2], out Visibility v))
-                {
-                    ws.Visibility = v;
-                }
-                if(Boolean.TryParse(vals[3], out bool ct))
-                {
-                    ws.ClickThru = ct;
-                }
-
-            }
-            catch (Exception)
-            {
-
-            }
-        }
-
-        public static void SaveSettings()
-        {
-            string[] vals = new string[5];
-            AddSetting(SettingsManager.BossGaugeWindowSettings, vals, 0);
-            AddSetting(SettingsManager.BuffBarWindowSettings, vals, 1);
-            AddSetting(SettingsManager.CharacterWindowSettings, vals, 2);
-            AddSetting(SettingsManager.CooldownWindowSettings, vals, 3);
-
-            File.WriteAllLines(Environment.CurrentDirectory + @"/settings.csv", vals);
-        }
-
-        private static void AddSetting(WindowSettings ws, string[] vals, int i)
-        {
-            vals[i] = String.Format("{0},{1},{2},{3}", ws.Y, ws.X, ws.Visibility.ToString(), ws.ClickThru.ToString());
-        }
         public static void CloseApp()
         {
             TeraSniffer.Instance.Enabled = false;
-            SaveSettings();
+            SettingsManager.SaveSettings();
             WindowManager.Dispose();
             Environment.Exit(0);
         }
@@ -155,13 +92,15 @@ namespace TCC
             SessionManager.CurrentPlayer.CurrentHP = 100;
             SessionManager.CurrentPlayer.EntityId = 1;
 
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < 5; i++)
             {
                 var u = new User(WindowManager.GroupWindow.Dispatcher);
                 u.Name = "Test D" + i;
                 u.UserClass = Class.Warrior;
                 u.Laurel = Laurel.Champion;
                 u.PlayerId = (uint)i;
+                u.Online = true;
+                u.Ready = ReadyStatus.Ready;
                 ViewModels.GroupWindowManager.Instance.AddOrUpdateMember(u);
             }
             for (int i = 0; i < 1; i++)
@@ -171,15 +110,18 @@ namespace TCC
                 u.UserClass = Class.Elementalist;
                 u.Laurel = Laurel.Champion;
                 u.PlayerId = (uint)i*2;
+                u.Online = true;
+                u.Ready = ReadyStatus.NotReady;
                 ViewModels.GroupWindowManager.Instance.AddOrUpdateMember(u);
             }
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 5; i++)
             {
                 var u = new User(WindowManager.GroupWindow.Dispatcher);
                 u.Name = "Test T" + i;
                 u.UserClass = Class.Lancer;
                 u.Laurel = Laurel.Champion;
                 u.PlayerId = (uint)i*3;
+                u.Online = true;
                 ViewModels.GroupWindowManager.Instance.AddOrUpdateMember(u);
             }
 
