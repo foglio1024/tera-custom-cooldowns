@@ -1,5 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Windows;
 using TCC.Data;
+using TCC.Parsing.Messages;
 using TCC.ViewModels;
 
 namespace TCC
@@ -8,30 +11,40 @@ namespace TCC
 
     public static class AbnormalityManager
     {
+        public const double PLAYER_AB_SIZE = 32;
+        public const double PARTY_AB_SIZE = 28;
+        public const double RAID_AB_SIZE = 24;
+        public const double BOSS_AB_SIZE = 30;
+        public const double PLAYER_AB_LEFT_MARGIN = 2;
+        public const double PARTY_AB_LEFT_MARGIN = 1;
+        public const double RAID_AB_LEFT_MARGIN = -9;
+        public const double BOSS_AB_LEFT_MARGIN = 2;
 
         public static void BeginAbnormality(uint id, ulong target, int duration, int stacks)
         {
             if (AbnormalityDatabase.Abnormalities.TryGetValue(id, out Abnormality ab))
             {
-                if(!Filter(ab)) return;
+                if (!Filter(ab)) return;
                 if (target == SessionManager.CurrentPlayer.EntityId)
                 {
                     BeginPlayerAbnormality(ab, stacks, duration, target);
+                    GroupWindowManager.Instance.BeginOrRefreshUserAbnormality(ab, stacks, duration, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
                 }
                 else
                 {
                     BeginNPCAbnormality(ab, stacks, duration, target);
                 }
             }
-
         }
         public static void EndAbnormality(ulong target, uint id)
         {
             if (AbnormalityDatabase.Abnormalities.TryGetValue(id, out Abnormality ab))
             {
-                if(target == SessionManager.CurrentPlayer.EntityId)
+                if (target == SessionManager.CurrentPlayer.EntityId)
                 {
                     EndPlayerAbnormality(ab);
+                    GroupWindowManager.Instance.EndUserAbnormality(ab, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
+
                 }
                 else if (EntitiesManager.TryGetBossById(target, out Boss b))
                 {
@@ -42,7 +55,7 @@ namespace TCC
         }
         static void BeginPlayerAbnormality(Abnormality ab, int stacks, int duration, ulong target)
         {
-            var newAb = new AbnormalityDuration(ab, duration, stacks, target, BuffBarWindowManager.Instance.Dispatcher);
+            var newAb = new AbnormalityDuration(ab, duration, stacks, target, BuffBarWindowManager.Instance.Dispatcher, true, PLAYER_AB_SIZE * .9, PLAYER_AB_SIZE, new System.Windows.Thickness(PLAYER_AB_LEFT_MARGIN));
             if (ab.Infinity)
             {
                 newAb.Duration = -1;
@@ -51,7 +64,7 @@ namespace TCC
             }
             else
             {
-                if(ab.Type == AbnormalityType.Buff)
+                if (ab.Type == AbnormalityType.Buff)
                 {
                     SessionManager.CurrentPlayer.AddOrRefreshBuff(newAb);
                     BuffBarWindowManager.Instance.Player.AddOrRefreshBuff(newAb);
@@ -65,78 +78,6 @@ namespace TCC
                 }
             }
 
-            //App.Current.Dispatcher.Invoke(() =>
-            //{
-            //    if (ab.Type == AbnormalityType.Buff)
-            //    {
-            //        if (ab.Infinity)
-            //        {
-            //            if (SessionManager.CurrentPlayer.InfBuffs.Any(x => x.Abnormality == ab))
-            //            {
-            //                PlayerAbnormalityUpdated?.Invoke(target, ab, -1, stacks);
-            //            }
-            //            else
-            //            {
-            //                SessionManager.CurrentPlayer.InfBuffs.Add(new AbnormalityDuration(ab, -1, stacks, target));
-            //                if (!ab.IsBuff)
-            //                {
-            //                    SessionManager.SetDebuffedStatus(true);
-            //                }
-            //            }
-            //        }
-            //        else
-            //        {
-            //            if (SessionManager.CurrentPlayer.Buffs.Any(x => x.Abnormality == ab))
-            //            {
-            //                PlayerAbnormalityUpdated?.Invoke(target, ab, duration, stacks);
-            //            }
-            //            else
-            //            {
-            //                SessionManager.CurrentPlayer.Buffs.Add(new AbnormalityDuration(ab, duration, stacks, target));
-            //                if (!ab.IsBuff)
-            //                {
-            //                    SessionManager.SetDebuffedStatus(true);
-            //                }
-
-            //            }
-            //        }
-            //    }
-            //    else
-            //    {
-            //        if (ab.Infinity)
-            //        {
-            //            if (SessionManager.CurrentPlayer.Debuffs.Any(x => x.Abnormality == ab))
-            //            {
-            //                PlayerAbnormalityUpdated?.Invoke(target, ab, -1, stacks);
-            //            }
-            //            else
-            //            {
-            //                SessionManager.CurrentPlayer.Debuffs.Insert(0, new AbnormalityDuration(ab, -1, stacks, target));
-            //                if (!ab.IsBuff)
-            //                {
-            //                    SessionManager.SetDebuffedStatus(true);
-            //                }
-
-            //            }
-            //        }
-            //        else
-            //        {
-            //            if (SessionManager.CurrentPlayer.Debuffs.Any(x => x.Abnormality == ab))
-            //            {
-            //                PlayerAbnormalityUpdated?.Invoke(target, ab, duration, stacks);
-            //            }
-            //            else
-            //            {
-            //                SessionManager.CurrentPlayer.Debuffs.Add(new AbnormalityDuration(ab, duration, stacks, target));
-            //                if (!ab.IsBuff)
-            //                {
-            //                    SessionManager.SetDebuffedStatus(true);
-            //                }
-            //            }
-            //        }
-            //    }
-            //});
-
         }
         static void EndPlayerAbnormality(Abnormality ab)
         {
@@ -147,7 +88,7 @@ namespace TCC
             }
             else
             {
-                if(ab.Type == AbnormalityType.Buff)
+                if (ab.Type == AbnormalityType.Buff)
                 {
                     SessionManager.CurrentPlayer.RemoveBuff(ab);
                     BuffBarWindowManager.Instance.Player.RemoveBuff(ab);
@@ -185,35 +126,32 @@ namespace TCC
         {
             if (EntitiesManager.TryGetBossById(target, out Boss b))
             {
-                b.AddorRefresh(new AbnormalityDuration(ab, duration, stacks, target, BossGageWindowManager.Instance.Dispatcher));
-                //App.Current.Dispatcher.Invoke(() =>
-                //{
-                //    if (b.HasBuff(ab))
-                //    {
-                //        NPCAbnormalityUpdated?.Invoke(b.EntityId, ab, duration, stacks);
-                //    }
-                //    else
-                //    {
-                //        if (!ab.Infinity)
-                //        {
-                //            EntitiesManager.CurrentBosses.Where(x => x.EntityId == target).First().Buffs.Add(new AbnormalityDuration(ab, duration, stacks, target));
-                //        }
-                //        else
-                //        {
-                //            EntitiesManager.CurrentBosses.Where(x => x.EntityId == target).First().Buffs.Insert(0, new AbnormalityDuration(ab, -1, stacks, target));
-                //        }
-
-                //    }
-                //});
-
+                b.AddorRefresh(new AbnormalityDuration(ab, duration, stacks, target, BossGageWindowManager.Instance.Dispatcher, true, BOSS_AB_SIZE*.9, BOSS_AB_SIZE, new System.Windows.Thickness(BOSS_AB_LEFT_MARGIN)));
             }
-
         }
         static bool Filter(Abnormality ab)
         {
             if (ab.Name.Contains("BTS") || ab.ToolTip.Contains("BTS") || !ab.IsShow) return false;
             if (ab.Name.Contains("(Hidden)") || ab.Name.Equals("Unknown") || ab.Name.Equals(string.Empty)) return false;
             return true;
+        }
+
+        public static void BeginOrRefreshPartyMemberAbnormality(uint playerId, uint serverId, uint id, int duration, int stacks)
+        {
+            if (AbnormalityDatabase.Abnormalities.TryGetValue(id, out Abnormality ab))
+            {
+                if (!Filter(ab)) return;
+                GroupWindowManager.Instance.BeginOrRefreshUserAbnormality(ab, stacks, duration, playerId, serverId);
+            }
+        }
+
+        internal static void EndPartyMemberAbnormality(uint playerId, uint serverId, uint id)
+        {
+            if (AbnormalityDatabase.Abnormalities.TryGetValue(id, out Abnormality ab))
+            {
+                if (!Filter(ab)) return;
+                GroupWindowManager.Instance.EndUserAbnormality(ab, playerId, serverId);
+            }
         }
     }
 }
