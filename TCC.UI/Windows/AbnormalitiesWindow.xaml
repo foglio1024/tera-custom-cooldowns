@@ -24,8 +24,7 @@
     </w:TccWindow.DataContext>
     <w:TccWindow.Resources>
         <DataTemplate x:Key="abTemplate">
-            <controls:AbnormalityIndicator HorizontalAlignment="Right"
-                                           Size ="32">
+            <controls:AbnormalityIndicator HorizontalAlignment="Right">
                 
                 <controls:AbnormalityIndicator.Resources>
                     <Style TargetType="{x:Type Path}">
