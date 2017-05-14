@@ -45,14 +45,14 @@ namespace TCC
 
 
             TeraSniffer.Instance.Enabled = true;
+            SettingsManager.LoadSettings();
             WindowManager.Init();
-            LoadSettings();
             WindowManager.Settings = new SettingsWindow()
             {
                 Name = "Settings"
             };
             FocusManager.FocusTimer.Start();
-            
+
             PacketProcessor.Init();
 
             TeraSniffer.Instance.NewConnection += (srv) => SkillManager.Clear();
@@ -76,6 +76,7 @@ namespace TCC
 
         }
 
+<<<<<<< HEAD
         static void LoadSettings()
         {
             if (File.Exists(Environment.CurrentDirectory + @"/settings.csv"))
@@ -158,11 +159,13 @@ namespace TCC
         {
             vals[i] = String.Format("{0},{1},{2}", w.Top, w.Left, w.Visibility.ToString());
         }
+=======
+>>>>>>> refs/remotes/origin/multithread-test
         public static void CloseApp()
         {
             TeraSniffer.Instance.Enabled = false;
+            SettingsManager.SaveSettings();
             WindowManager.Dispose();
-            SaveSettings();
             Environment.Exit(0);
         }
         static bool x = true;
@@ -173,20 +176,39 @@ namespace TCC
             SessionManager.CurrentPlayer.MaxHP = 100;
             SessionManager.CurrentPlayer.CurrentHP = 100;
             SessionManager.CurrentPlayer.EntityId = 1;
-            //EntitiesManager.SpawnNPC(970, 3000, 1, Visibility.Visible, true);
-            System.Timers.Timer t = new System.Timers.Timer(6000);
-            //EntitiesManager.TryGetBossById(1, out Boss b);
-            //EntitiesManager.SetNPCStatus(1, true);
-            t.Elapsed += (se, ev) =>
-            {
-                //SkillManager.AddSkill(131100, 5000);
-                //SkillManager.AddSkill(151000, 50000);
-                AbnormalityManager.EndAbnormality(1, 100801);
-                AbnormalityManager.BeginAbnormality(100801, 1, 5000, 0);
-            };
-            AbnormalityManager.BeginAbnormality(100801, 1, 5000, 0);
 
-            t.Enabled = true;
+            for (int i = 0; i < 5; i++)
+            {
+                var u = new User(WindowManager.GroupWindow.Dispatcher);
+                u.Name = "Test D" + i;
+                u.UserClass = Class.Warrior;
+                u.Laurel = Laurel.Champion;
+                u.PlayerId = (uint)i;
+                u.Online = true;
+                u.Ready = ReadyStatus.Ready;
+                ViewModels.GroupWindowManager.Instance.AddOrUpdateMember(u);
+            }
+            for (int i = 0; i < 1; i++)
+            {
+                var u = new User(WindowManager.GroupWindow.Dispatcher);
+                u.Name = "Test H" + i;
+                u.UserClass = Class.Elementalist;
+                u.Laurel = Laurel.Champion;
+                u.PlayerId = (uint)i*2;
+                u.Online = true;
+                u.Ready = ReadyStatus.NotReady;
+                ViewModels.GroupWindowManager.Instance.AddOrUpdateMember(u);
+            }
+            for (int i = 0; i < 5; i++)
+            {
+                var u = new User(WindowManager.GroupWindow.Dispatcher);
+                u.Name = "Test T" + i;
+                u.UserClass = Class.Lancer;
+                u.Laurel = Laurel.Champion;
+                u.PlayerId = (uint)i*3;
+                u.Online = true;
+                ViewModels.GroupWindowManager.Instance.AddOrUpdateMember(u);
+            }
 
         }
     }

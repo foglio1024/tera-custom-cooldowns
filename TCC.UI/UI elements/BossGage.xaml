@@ -10,20 +10,12 @@
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded"
              Unloaded="UserControl_Unloaded"
-             SnapsToDevicePixels="True"
              UseLayoutRounding="True"
+             Visibility="{Binding Visible}"
              >
     <UserControl.Resources>
         <DataTemplate x:Key="BossBuffDataTemplate">
-            <controls:AbnormalityIndicator AbnormalityId="{Binding Abnormality.Id}"
-                                           AbnormalityName="{Binding Abnormality.Name}"
-                                           AbnormalityTooltip="{Binding Abnormality.ToolTip}"
-                                           IconName="{Binding Abnormality.IconName}"
-                                           Duration="{Binding Duration}"
-                                           Stacks="{Binding Stacks}"
-                                           TargetId="{Binding Target}"
-                                           Type="{Binding Abnormality.Type}"
-                                           Size="25"/>
+            <controls:AbnormalityIndicator/>
         </DataTemplate>
         <converters:EntityIdToNameConverter x:Key="userIdToName"/>
         <converters:AggroTypeToFill x:Key="aggroTypeToFill"/>
@@ -61,9 +53,9 @@
                                VerticalAlignment="Center" 
                                FontSize="11"
                                Grid.Row="1">
-                        <Run Text="{Binding CurrentHP, RelativeSource={RelativeSource AncestorType=local:BossGage}, StringFormat={}{0:N0}}"/>
+                        <Run Text="{Binding CurrentHP, StringFormat={}{0:N0}}"/>
                         <Run Text=" / "/>
-                        <Run Text="{Binding MaxHP, RelativeSource={RelativeSource AncestorType=local:BossGage},StringFormat={}{0:N0}}"/>
+                        <Run Text="{Binding MaxHP, StringFormat={}{0:N0}}"/>
                     </TextBlock>
                     <TextBlock Style="{StaticResource text1}"
                                HorizontalAlignment="Center" 
@@ -71,7 +63,11 @@
                                VerticalAlignment="Center" 
                                Margin="0" 
                                FontSize="14"
+<<<<<<< HEAD
                                Text="{Binding CurrentPercentage, RelativeSource={RelativeSource AncestorType=local:BossGage}, StringFormat=0.#%}"
+=======
+                               Text="{Binding CurrentPercentage, StringFormat=##0.#%}"
+>>>>>>> refs/remotes/origin/multithread-test
                                Grid.Row="1"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -85,7 +81,7 @@
                                HorizontalAlignment="Left" 
                                VerticalAlignment="Center" 
                                FontSize="13" 
-                               Text="{Binding BossName, RelativeSource={RelativeSource AncestorType=local:BossGage}}" 
+                               Text="{Binding Name}" 
                                Grid.Row="0"/>
                         <Polygon Points="0,10 5,0 10,10"  Margin="10,0"  Fill="{Binding CurrentAggroType, Converter={StaticResource aggroTypeToFill}}" Name="aggroArrow"
                                  VerticalAlignment="Center" Height="Auto"  HorizontalAlignment="Center"
@@ -122,7 +118,7 @@
                         </Rectangle.Effect>
                     </Rectangle>-->
                     <controls:GenericGauge Height="4" Width="400"
-                                           BarColor="{Binding Enraged, RelativeSource={RelativeSource AncestorType=local:BossGage}, Converter={StaticResource barColorConv}}"
+                                           BarColor="{Binding Enraged, Converter={StaticResource barColorConv}}"
                                            GaugeName=""
                                            ShowPercentage="False"
                                            ShowName="False"
@@ -162,7 +158,7 @@
                         </StackPanel.RenderTransform>
                         <!--<Polygon Points="0,7 5,0 10,7"  Margin="0,0,0,0"  Fill="Orange" VerticalAlignment="Center" Height="Auto"  HorizontalAlignment="Center" Grid.Column="1" >
                         </Polygon>-->
-                        <Ellipse Fill="#fa0" Width="6" Height="{Binding ElementName=enrageEll, Path=Width}" Name="enrageEll" Stroke="#fb0"/>
+                        <Ellipse Fill="#fa0" Width="6" Height="6" Name="enrageEll" Stroke="#fb0"/>
                         <TextBlock Width="Auto" FontSize="12" Style="{StaticResource text1}"
                                    TextAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,0" Padding="0"
                                    Text="{Binding EnrageTBtext, RelativeSource={RelativeSource AncestorType=local:BossGage}}"/>
@@ -231,7 +227,7 @@
             </Grid>-->
         </Grid>
         <Grid Grid.Row="1" Height="Auto" Margin="0,0,0,0" HorizontalAlignment="Left" Name="abnormalitiesGrid">
-                <ItemsControl Name="Abnormalities" ItemTemplate="{StaticResource BossBuffDataTemplate}">
+                <ItemsControl Name="Abnormalities" ItemTemplate="{StaticResource BossBuffDataTemplate}" ItemsSource="{Binding Buffs}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0" Width="{Binding ElementName=mainBorder, Path=ActualWidth}"/>

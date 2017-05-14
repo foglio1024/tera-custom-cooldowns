@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using TCC.Data;
+using TCC.ViewModels;
 
 namespace TCC
 {
@@ -32,11 +33,16 @@ namespace TCC
         {
             if (CurrentDatabase.TryGetMonster(templateId, zoneId, out Monster m))
             {
+<<<<<<< HEAD
                 if ((m.IsBoss) || force)
+=======
+                if (m.IsBoss || force)
+>>>>>>> refs/remotes/origin/multithread-test
                 {
                     App.Current.Dispatcher.Invoke(() =>
                     {
                         CurrentBosses.Add(new Boss(entityId, zoneId, templateId, v));
+<<<<<<< HEAD
                     });
                 }
                 else
@@ -54,8 +60,12 @@ namespace TCC
             else
             {
 
+=======
+                        BossGageWindowManager.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP);
+                    });
+                }
+>>>>>>> refs/remotes/origin/multithread-test
             }
-
         }
         public static void DespawnNPC(ulong target)
         {
@@ -64,20 +74,12 @@ namespace TCC
                 App.Current.Dispatcher.Invoke(() =>
                 {
                     CurrentBosses.Remove(b);
+                    BossGageWindowManager.Instance.RemoveBoss(target);
                 });
             }
             if (SessionManager.HarrowholdMode)
             {
                 UnsetDragonsContexts(target);
-            }
-            if (chestList.Contains(target))
-            {
-                App.Current.Dispatcher.Invoke(() =>
-                {
-                    chestList.Remove(target);
-                });
-
-                Console.WriteLine("Chest removed [{0}]", chestList.Count);
             }
 
 
@@ -104,6 +106,7 @@ namespace TCC
                 {
                     b.CurrentHP = curHP;
                 }
+                BossGageWindowManager.Instance.AddOrUpdateBoss(target, maxHP, curHP);
             }
             else
             {
@@ -115,8 +118,8 @@ namespace TCC
             App.Current.Dispatcher.Invoke(() =>
             {
                 CurrentBosses.Clear();
-                //Console.WriteLine("NPCs cleared");
             });
+            BossGageWindowManager.Instance.ClearBosses();
         }
         public static void ClearUsers()
         {

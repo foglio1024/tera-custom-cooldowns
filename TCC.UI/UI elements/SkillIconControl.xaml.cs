@@ -17,78 +17,32 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using TCC.ViewModels;
 
 namespace TCC
 {
     public delegate void SkillEndedEventHandler(Skill sk, int cd);
-    public partial class SkillIconControl : UserControl, INotifyPropertyChanged
+    public partial class SkillIconControl : UserControl, INotifyPropertyChanged, IDisposable
     {
-        DispatcherTimer NumberTimer;
-        DispatcherTimer MainTimer;
-        DispatcherTimer CloseTimer;
-        int ending = SkillManager.Ending;
+        private DispatcherTimer NumberTimer;
+        //private DispatcherTimer MainTimer;
+        private DispatcherTimer CloseTimer;
+        private int ending = SkillManager.Ending;
 
-        public static event SkillEndedEventHandler SkillEnded;
+        private SkillCooldown _context;
+
         public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(string p)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
         }
 
-
-
-        public string IconName
-        {
-            get { return (string)GetValue(IconNameProperty); }
-            set { SetValue(IconNameProperty, value); }
-        }
-        public static readonly DependencyProperty IconNameProperty = DependencyProperty.Register("IconName", typeof(string), typeof(SkillIconControl));
-
-        public uint Id
-        {
-            get { return (uint)GetValue(IdProperty); }
-            set { SetValue(IdProperty, value); }
-        }
-        public static readonly DependencyProperty IdProperty = DependencyProperty.Register("Id", typeof(uint), typeof(SkillIconControl));
-
-        public int Cooldown
-        {
-            get { return (int)GetValue(CooldownProperty); }
-            set { SetValue(CooldownProperty, value); }
-        }
-        public static readonly DependencyProperty CooldownProperty = DependencyProperty.Register("Cooldown", typeof(int), typeof(SkillIconControl));
-
-        public string SkillName
-        {
-            get { return (string)GetValue(SkillNameProperty); }
-            set { SetValue(SkillNameProperty, value); }
-        }
-        public static readonly DependencyProperty SkillNameProperty = DependencyProperty.Register("SkillName", typeof(string), typeof(SkillIconControl));
-
-        public Skill Skill
-        {
-            get { return (Skill)GetValue(SkillProperty); }
-            set { SetValue(SkillProperty, value); }
-        }
-        public static readonly DependencyProperty SkillProperty = DependencyProperty.Register("Skill", typeof(Skill), typeof(SkillIconControl));
-
-        public void Reset(Skill sk)
-        {
-            Dispatcher.BeginInvoke(new Action(() =>
-            {
-                if (sk == Skill)
-                {
-                    CloseTimer.Stop();
-                    RemoveSkill();
-                }
-            }));
-        }
-
         private double currentCD;
         public double CurrentCD
         {
             get { return currentCD; }
-            set {
+            set
+            {
                 if (currentCD != value)
                 {
                     currentCD = value;
@@ -100,32 +54,16 @@ namespace TCC
         public SkillIconControl()
         {
             InitializeComponent();
-            SkillManager.Changed += ChangeCooldown;
-            SkillManager.Refresh += ChangeCooldown;
-            SkillManager.Reset += Reset;
         }
 
-        private void ChangeCooldown(SkillCooldown s)
+        private void ControlLoaded(object sender, RoutedEventArgs e)
         {
-            Dispatcher.Invoke(() =>
-            {
-                if (s.Skill.Name != this.Skill.Name) return;
-                NumberTimer.Stop();
-                NumberTimer.IsEnabled = true;
-                CurrentCD = (double)s.Cooldown / 1000;
-                double newAngle = (double)s.Cooldown / (double)Cooldown;
-                if (Cooldown == 0) newAngle = 0;
-                if (newAngle > 1) newAngle = 1;
+            _context = (SkillCooldown)DataContext;
+            _context.PropertyChanged += _context_PropertyChanged;
 
-                if (s.Cooldown > ending)
-                {
-                    MainTimer.Interval = TimeSpan.FromMilliseconds(s.Cooldown - ending);
-                }
-                else
-                {
-                    MainTimer.Interval = TimeSpan.FromMilliseconds(1);
-                }
+            LayoutTransform = new ScaleTransform(1, 1, .5, .5);
 
+<<<<<<< HEAD
                 var an = new DoubleAnimation(359.9 * newAngle, 0, TimeSpan.FromMilliseconds(s.Cooldown));
                 var fps = (s.Cooldown > 2 * 60 * 1000) ? 1 : 30;
                 DoubleAnimation.SetDesiredFrameRate(an, fps);
@@ -135,17 +73,44 @@ namespace TCC
         private void ControlLoaded(object sender, RoutedEventArgs e)
         {
             CurrentCD = (double)Cooldown / 1000;
+=======
+            CurrentCD = (double)_context.Cooldown / 1000;
+>>>>>>> refs/remotes/origin/multithread-test
 
             NumberTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(1000) };
-            MainTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(Cooldown) };
-            CloseTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(ending) };
+            CloseTimer = new  DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(ending) };
 
             CloseTimer.Tick += CloseTimer_Tick;
             NumberTimer.Tick += (s, o) =>
             {
                 CurrentCD--;
             };
-            MainTimer.Tick += (s, o) =>
+            AnimateCooldown();
+        }
+
+        private void _context_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Refresh")
+            {
+                if (_context.Cooldown == _context.OriginalCooldown) return;
+                NumberTimer.Stop();
+                NumberTimer.IsEnabled = true;
+                CurrentCD = (double)_context.Cooldown / 1000;
+                double newAngle = (double)_context.Cooldown / (double)_context.OriginalCooldown;
+                if (_context.Cooldown == 0) newAngle = 0;
+                if (newAngle > 1) newAngle = 1;
+
+                //if (_context.Cooldown > ending)
+                //{
+                //    MainTimer.Interval = TimeSpan.FromMilliseconds(_context.Cooldown - ending);
+                //}
+                //else
+                //{
+                //    MainTimer.Interval = TimeSpan.FromMilliseconds(1);
+                //}
+                AnimateCooldown(newAngle);
+            }
+            else if(e.PropertyName == "Ending")
             {
                 var w = new DoubleAnimation(0, TimeSpan.FromMilliseconds(ending))
                 {
@@ -155,43 +120,51 @@ namespace TCC
                 {
                     EasingFunction = new QuadraticEase()
                 };
-                MainGrid.BeginAnimation(WidthProperty, w);
-                MainGrid.BeginAnimation(HeightProperty, h);
+                CooldownBarWindowManager.Instance.Dispatcher.Invoke(() =>
+                {
+                    this.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, w);
+                    this.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, h);
+                });
                 CloseTimer.IsEnabled = true;
-
-                MainTimer.Stop();
-            };
-            AnimateCooldown();
+            }
         }
 
         private void CloseTimer_Tick(object sender, EventArgs e)
         {
-            RemoveSkill();
+            Dispose();
+            CooldownBarWindowManager.Instance.RemoveSkill(_context.Skill);
         }
 
-        void RemoveSkill()
+        void AnimateCooldown(double angle = 1)
         {
-            MainTimer.Stop();
-            NumberTimer.Stop();
-            CloseTimer.Stop();
-            SkillEnded?.Invoke(Skill, Cooldown);
-        }
-
-        void AnimateCooldown()
-        {
+<<<<<<< HEAD
             var an = new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(Cooldown));
             var fps = (Cooldown > 2 * 60 * 1000) ? 1 : 30;
             DoubleAnimation.SetDesiredFrameRate(an,fps);
+=======
+            var an = new DoubleAnimation(angle*359.9, 0, TimeSpan.FromMilliseconds(_context.Cooldown));
+            int fps = _context.Cooldown > 80000 ? 1 : 30;
+            DoubleAnimation.SetDesiredFrameRate(an, fps);
+>>>>>>> refs/remotes/origin/multithread-test
             arc.BeginAnimation(Arc.EndAngleProperty, an);
             NumberTimer.IsEnabled = true;
-            MainTimer.IsEnabled = true;
+            //MainTimer.IsEnabled = true;
         }
 
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
-            SkillManager.Changed -= ChangeCooldown;
-            SkillManager.Reset -= Reset;
-            SkillManager.Refresh -= ChangeCooldown;
+
+        }
+
+        public void Dispose()
+        {
+            NumberTimer.Stop();
+            //MainTimer.Stop();
+            CloseTimer.Stop();
+
+            NumberTimer = null;
+            //MainTimer = null;
+            CloseTimer = null;
         }
     }
 }

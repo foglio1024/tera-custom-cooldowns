@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using TCC.Data;
+using TCC.ViewModels;
 
 namespace TCC
 {
@@ -56,41 +57,7 @@ namespace TCC
 
         public static event HarrowholdModeEventHandler HhModeChanged;
 
-        public static void SetDebuffedStatus(bool debuffed)
-        {
-            CurrentPlayer.IsDebuffed = debuffed;
-        }
 
-        public static void ClearPlayersAbnormalities()
-        {
-            App.Current.Dispatcher.Invoke(() =>
-            {
-                CurrentPlayer.Buffs.Clear();
-            });
-        }
-        public static void EndPlayerAbnormality(Abnormality ab)
-        {
-            if(CurrentPlayer.Buffs.Any(x => x.Abnormality.Id == ab.Id))
-            {
-                CurrentPlayer.Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id).Dispose();
-                CurrentPlayer.Buffs.Remove(CurrentPlayer.Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id));
-            }
-            else if (CurrentPlayer.Debuffs.Any(x => x.Abnormality.Id == ab.Id))
-            {
-                CurrentPlayer.Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id).Dispose();
-                CurrentPlayer.Debuffs.Remove(CurrentPlayer.Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id));
-            }
-            else if (CurrentPlayer.InfBuffs.Any(x => x.Abnormality.Id == ab.Id))
-            {
-                CurrentPlayer.InfBuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id).Dispose();
-                CurrentPlayer.InfBuffs.Remove(CurrentPlayer.InfBuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id));
-            }
-            if (!ab.IsBuff)
-            {
-                SetDebuffedStatus(false);
-            }
-
-        }
         public static void SetCombatStatus(ulong target, bool combat)
         {
             if (target == CurrentPlayer.EntityId)
@@ -98,10 +65,12 @@ namespace TCC
                 if (combat)
                 {
                     CurrentPlayer.IsInCombat = true;
+                    CharacterWindowManager.Instance.Player.IsInCombat = true;
                 }
                 else
                 {
                     CurrentPlayer.IsInCombat = false;
+                    CharacterWindowManager.Instance.Player.IsInCombat = false;
                 }
             }
 
@@ -112,6 +81,7 @@ namespace TCC
             if (target == CurrentPlayer.EntityId)
             {
                 CurrentPlayer.CurrentHP = hp;
+                CharacterWindowManager.Instance.Player.CurrentHP = hp;
             }
         }
         public static void SetPlayerMP(ulong target, float mp)
@@ -119,17 +89,18 @@ namespace TCC
             if (target == CurrentPlayer.EntityId)
             {
                 CurrentPlayer.CurrentMP = mp;
+                CharacterWindowManager.Instance.Player.CurrentMP = mp;
             }
         }
-        public static void SetPlayerLaurel(string name)
+        public static void SetPlayerLaurel(Player p)
         {
             try
             {
-                CurrentPlayer.Laurel = CurrentAccountCharacters.First(x => x.Name == name).Laurel;
+                p.Laurel = CurrentAccountCharacters.First(x => x.Name == p.Name).Laurel;
             }
             catch
             {
-                CurrentPlayer.Laurel = Laurel.None;
+                p.Laurel = Laurel.None;
             }
         }
     }

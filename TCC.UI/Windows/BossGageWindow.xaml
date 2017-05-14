@@ -1,4 +1,4 @@
-﻿<Window x:Class="TCC.Windows.BossGageWindow"
+﻿<w:TccWindow x:Class="TCC.Windows.BossGageWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -7,44 +7,62 @@
         xmlns:elements="clr-namespace:TCC.UI_elements"
         xmlns:converters="clr-namespace:TCC.Converters"
         xmlns:vm="clr-namespace:TCC.ViewModels"
+        xmlns:w="clr-namespace:TCC.Windows"
         mc:Ignorable="d"
         Title="BossGageWindow" Height="Auto" Width="Auto"
         SizeToContent="WidthAndHeight"
         Topmost="{Binding TopMost}"
         AllowsTransparency="True"
         ShowInTaskbar="False"
-        WindowStyle="None"
-        Opacity=".85"
-        Background="#00000000"
+        WindowStyle="None" Opacity=".85"
+        Background="#00000000"        
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         MouseRightButtonDown="Window_MouseRightButtonDown"
         Loaded="Window_Loaded"
         ResizeMode="NoResize" >
-    <Window.Resources>
+    <w:TccWindow.Resources>
         <DataTemplate x:Key="BossGageDataTemplate">
-            <local:BossGage EntityId="{Binding EntityId}"
-                            MaxHP="{Binding MaxHP}"
-                            CurrentHP="{Binding CurrentHP}"
-                            BossName="{Binding Name}"
-                            Visibility="{Binding Visible}"
-                            Target="{Binding Target}"
-                            CurrentAggroType="{Binding CurrentAggroType}"
-                            Enraged="{Binding Enraged}"/>
+            <local:BossGage/>
         </DataTemplate>
-        <converters:HarrowholdBossesVisibilityConverter x:Key="hhBossesVisConv"/>
+        <Style x:Key="opacityAnimatedContainer" TargetType="FrameworkElement">
+            <Setter Property="Opacity" Value="0"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsTeraOnTop}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation From="0" To="1"
+                                     Duration="0:0:0.2"
+                                     Storyboard.TargetProperty="Opacity"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation From="1" To="0"
+                                                 Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="Opacity"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
 
-    </Window.Resources>
-    <Window.DataContext>
-        <vm:BossGaugeWindowViewModel/>
-    </Window.DataContext>
+        <converters:HarrowholdBossesVisibilityConverter x:Key="hhBossesVisConv"/>
+    </w:TccWindow.Resources>
+    <w:TccWindow.DataContext>
+        <vm:BossGageWindowViewModel/>
+    </w:TccWindow.DataContext>
     <Grid Style="{StaticResource opacityAnimatedContainer}">
-        <ItemsControl Name="Bosses" ItemTemplate="{StaticResource BossGageDataTemplate}" ItemsSource="{Binding CurrentNPCs}">
+        <ItemsControl Name="Bosses" ItemTemplate="{StaticResource BossGageDataTemplate}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Background="Transparent" Orientation="Vertical" ItemHeight="Auto" Height="270"/>
+                    <WrapPanel Orientation="Vertical" ItemHeight="Auto" Height="270"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <elements:HarrowholdBossesControl x:Name="HHBosses" Visibility="{Binding HarrowholdMode, Converter={StaticResource hhBossesVisConv}}"/>
+        <elements:HarrowholdBossesControl x:Name="HHBosses" Opacity="0" Visibility="{Binding HarrowholdMode, Converter={StaticResource hhBossesVisConv}}"/>
     </Grid>
-</Window>
+</w:TccWindow>

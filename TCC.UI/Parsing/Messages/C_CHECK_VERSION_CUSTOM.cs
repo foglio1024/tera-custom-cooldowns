@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TCC;
 
-namespace TCC.Messages
+namespace TCC.Parsing.Messages
 {
     class C_CHECK_VERSION_CUSTOM
     {

@@ -22,12 +22,13 @@ namespace TCC.UI_elements
     /// <summary>
     /// Logica di interazione per AbnormalityIndicator.xaml
     /// </summary>
-    public partial class AbnormalityIndicator : UserControl, INotifyPropertyChanged
+    public partial class AbnormalityIndicator : UserControl
     {
         public AbnormalityIndicator()
         {
             InitializeComponent();
         }
+<<<<<<< HEAD
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -128,27 +129,27 @@ namespace TCC.UI_elements
         public static readonly DependencyProperty StacksProperty = DependencyProperty.Register("Stacks", typeof(int), typeof(AbnormalityIndicator));
         
         public double Size
+=======
+        private AbnormalityDuration _context;
+        private void buff_PropertyChanged(object sender, PropertyChangedEventArgs e)
+>>>>>>> refs/remotes/origin/multithread-test
         {
-            get { return (double)GetValue(SizeProperty); }
-            set { SetValue(SizeProperty, value); }
-        }
-        public static readonly DependencyProperty SizeProperty = DependencyProperty.Register("Size", typeof(double), typeof(AbnormalityIndicator));
-        private void InitTimer()
-        {
-            SecondsTimer = new System.Timers.Timer(1000);
-            SecondsTimer.Elapsed += ((s, ev) =>
+            if (e.PropertyName == "Refresh")
             {
-                    CurrentTime--;
-                    if (CurrentTime < 0)
-                    {
-                        SecondsTimer.Stop();
-                    }
-            });
+                if (((AbnormalityDuration)sender).Duration < 0) return;
+                if (!((AbnormalityDuration)sender).Animated) return;
+                var an = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(((AbnormalityDuration)sender).Duration));
+                int fps = ((AbnormalityDuration)sender).Duration > 80000 ? 1 : 30;
+                DoubleAnimation.SetDesiredFrameRate(an, fps);
+                arc.BeginAnimation(Arc.EndAngleProperty, an);
+            }
 
         }
 
-        private void PacketRouter_BuffUpdated(ulong target, Data.Abnormality ab, int duration, int stacks)
+       
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+<<<<<<< HEAD
             Dispatcher.Invoke(() =>
             {
                 if (target == TargetId)
@@ -181,42 +182,26 @@ namespace TCC.UI_elements
 
 
 
+=======
+            _context = (AbnormalityDuration)DataContext;
+            _context.PropertyChanged += buff_PropertyChanged;
+            this.RenderTransform = new ScaleTransform(1, 1, .5, .5);
+            this.BeginAnimation(OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(85)));
+>>>>>>> refs/remotes/origin/multithread-test
 
-        System.Timers.Timer SecondsTimer;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void NotifyPropertyChanged(string prop)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
-        int currentTime;
-        public int CurrentTime
-        {
-            get { return currentTime; }
-            set
+            if (((AbnormalityDuration)DataContext).Duration > 0 && ((AbnormalityDuration)DataContext).Animated)
             {
-                if (value != currentTime)
-                {
-                    currentTime = value;
-                    NotifyPropertyChanged("CurrentTime");
-                }
+                var an = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(((AbnormalityDuration)DataContext).Duration));
+                int fps = ((AbnormalityDuration)DataContext).Duration > 80000 ? 1 : 30;
+                DoubleAnimation.SetDesiredFrameRate(an, fps);
+                arc.BeginAnimation(Arc.EndAngleProperty, an);
             }
+
         }
-
-        bool isPlayer; //used in UserControl_Unloaded to decide which event handler to remove
-
-
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
-            if (isPlayer)
-            {
-                AbnormalityManager.PlayerAbnormalityUpdated -= PacketRouter_BuffUpdated;
-
-            }
-            else
-            {
-                AbnormalityManager.NPCAbnormalityUpdated -= PacketRouter_BuffUpdated;
-            }
+            _context.PropertyChanged -= buff_PropertyChanged;
+            _context = null;
         }
     }
 }
@@ -226,7 +211,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            int seconds = (int)value;
+            int seconds = (int)value/1000;
             int minutes = seconds / 60;
             int hours = minutes / 60;
             int days = hours / 24;
@@ -325,7 +310,7 @@ namespace TCC.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             double size = (double)value;
-            return size / 2;
+            return size / 1.7;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -338,7 +323,7 @@ namespace TCC.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             double size = (double)value;
-            return size / 1.8;
+            return size / 1.9;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

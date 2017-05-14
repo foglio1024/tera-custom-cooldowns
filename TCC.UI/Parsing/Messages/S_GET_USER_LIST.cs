@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TCC.Data;
 using Tera.Game;
 using Tera.Game.Messages;
 
-namespace TCC.Messages
+namespace TCC.Parsing.Messages
 {
     public class S_GET_USER_LIST : ParsedMessage
     {
@@ -148,6 +149,10 @@ namespace TCC.Messages
             }
         }
     }
+}
+namespace TCC.Data
+{
+
 
     public class RawChar
     {

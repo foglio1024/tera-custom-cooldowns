@@ -9,18 +9,6 @@ namespace TCC.ViewModels
 {
     public class AbnormalityWindowViewModel : BaseINPC
     {
-        public ObservableCollection<AbnormalityDuration> Buffs
-        {
-            get => SessionManager.CurrentPlayer.Buffs;
-        }
-        public ObservableCollection<AbnormalityDuration> Debuffs
-        {
-            get => SessionManager.CurrentPlayer.Debuffs;
-        }
-        public ObservableCollection<AbnormalityDuration> InfiniteBuffs
-        {
-            get => SessionManager.CurrentPlayer.InfBuffs;
-        }
 
         public bool IsTeraOnTop
         {

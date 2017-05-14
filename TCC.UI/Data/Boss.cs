@@ -3,6 +3,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Threading;
+using TCC.ViewModels;
 
 namespace TCC
 {
@@ -12,12 +14,13 @@ namespace TCC
 }
 namespace TCC.Data
 {
-    public class Boss : INotifyPropertyChanged
+    public class Boss : TSPropertyChanged, IDisposable
     {
         public ulong EntityId { get; set; }
-        string name;
+        private string name;
         public string Name
-        { get => name;
+        {
+            get => name;
             set
             {
                 if (name != value)
@@ -27,13 +30,19 @@ namespace TCC.Data
             }
         }
 
-        public ObservableCollection<AbnormalityDuration> Buffs;
+        private SynchronizedObservableCollection<AbnormalityDuration> _buffs;
+        public SynchronizedObservableCollection<AbnormalityDuration> Buffs
+        {
+            get { return _buffs; }
+            set
+            {
+                if (_buffs == value) return;
+                _buffs = value;
+                NotifyPropertyChanged("Buffs");
+            }
+        }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        public static event UpdateBossHPEventHandler BossHPChanged;
-        public static event UpdateBossEnrageEventHandler EnragedChanged;
-
-        bool enraged;
+        private bool enraged;
         public bool Enraged
         {
             get => enraged;
@@ -43,40 +52,46 @@ namespace TCC.Data
                 {
                     enraged = value;
                     NotifyPropertyChanged("Enraged");
-                    EnragedChanged?.Invoke(EntityId, value);
                 }
             }
         }
-        float maxHP;
+        private float _maxHP;
         public float MaxHP
         {
-            get => maxHP;
+            get => _maxHP;
             set
             {
-                if (maxHP != value)
+                if (_maxHP != value)
                 {
-                    maxHP = value;
+                    _maxHP = value;
                     NotifyPropertyChanged("MaxHP");
                 }
             }
         }
-        float currentHP;
+        private float _currentHP;
         public float CurrentHP
         {
-            get => currentHP;
+            get => _currentHP;
             set
             {
-                if (currentHP != value)
+                if (_currentHP != value)
                 {
-                    currentHP = value;
+                    _currentHP = value;
                     NotifyPropertyChanged("CurrentHP");
-                    BossHPChanged?.Invoke(EntityId, value);
+                    NotifyPropertyChanged("CurrentPercentage");
                 }
             }
         }
-        Visibility visible;
-        public Visibility Visible { get { return visible; }  set {
-                if(visible != value)
+
+        public float CurrentPercentage => _maxHP == 0 ? 0 : (_currentHP / _maxHP);
+
+        private Visibility visible;
+        public Visibility Visible
+        {
+            get { return visible; }
+            set
+            {
+                if (visible != value)
                 {
                     visible = value;
                     NotifyPropertyChanged("Visible");
@@ -88,7 +103,8 @@ namespace TCC.Data
         public ulong Target
         {
             get { return target; }
-            set {
+            set
+            {
                 if (target != value)
                 {
                     target = value;
@@ -104,7 +120,7 @@ namespace TCC.Data
             set
             {
                 if (currentAggroType != value)
-                { 
+                {
                     currentAggroType = value;
                     NotifyPropertyChanged("CurrentAggroType");
                 }
@@ -112,61 +128,73 @@ namespace TCC.Data
         }
 
 
-        public void NotifyPropertyChanged(string v)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(v));
-        }
-        public bool HasBuff(Abnormality ab)
-        {
-            if(Buffs.Any(x => x.Abnormality.Id == ab.Id))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
 
+        public void AddorRefresh(AbnormalityDuration ab)
+        {
+            var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Abnormality.Id);
+            if (existing == null)
+            {
+                if (ab.Abnormality.Infinity) Buffs.Insert(0, ab);
+                else Buffs.Add(ab);
+                return;
+            }
+            existing.Duration = ab.Duration;
+            existing.DurationLeft = ab.DurationLeft;
+            existing.Stacks = ab.Stacks;
+            existing.Refresh();
+
+        }
         public void EndBuff(Abnormality ab)
         {
-            App.Current.Dispatcher.Invoke(() =>
+            try
             {
-                try
-                {
-                    Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id).Dispose();
-                    Buffs.Remove(Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id));
-                }
-                catch (Exception)
-                {
-                    //Console.WriteLine("Cannot remove {0}", ab.Name);
-                }
-            });
+                var buff = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
+                if (buff == null) return;
+                Buffs.Remove(buff);
+                buff.Dispose();
+            }
+            catch (Exception)
+            {
+                //Console.WriteLine("Cannot remove {0}", ab.Name);
+            }
         }
 
         public Boss(ulong eId, uint zId, uint tId, float curHP, float maxHP, Visibility visible)
         {
+            _dispatcher = BossGageWindowManager.Instance.Dispatcher;
             EntityId = eId;
             Name = EntitiesManager.CurrentDatabase.GetName(tId, zId);
             MaxHP = maxHP;
             CurrentHP = curHP;
-            Buffs = new ObservableCollection<AbnormalityDuration>();
+            _buffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
             Visible = visible;
         }
 
         public Boss(ulong eId, uint zId, uint tId, Visibility visible)
         {
+            _dispatcher = BossGageWindowManager.Instance.Dispatcher;
             EntityId = eId;
             Name = EntitiesManager.CurrentDatabase.GetName(tId, zId);
             MaxHP = EntitiesManager.CurrentDatabase.GetMaxHP(tId, zId);
             CurrentHP = MaxHP;
-            Buffs = new ObservableCollection<AbnormalityDuration>();
+            _buffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
             Visible = visible;
         }
 
+        public Boss()
+        {
+            _dispatcher = BossGageWindowManager.Instance.Dispatcher;
+            _buffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
+            Visible = Visibility.Visible;
+        }
         public override string ToString()
         {
             return String.Format("{0} - {1}", EntityId, Name);
+        }
+
+        public void Dispose()
+        {
+            foreach (var buff in _buffs) buff.Dispose();
         }
     }
 }

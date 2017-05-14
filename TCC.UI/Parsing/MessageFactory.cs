@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Tera;
 using Tera.Game;
-using TCC.Messages;
 using TCC.Parsing.Messages;
 
 namespace TCC.Parsing
@@ -43,7 +42,29 @@ namespace TCC.Parsing
             { "S_LOAD_TOPO" , Contructor<Func<TeraMessageReader,S_LOAD_TOPO>>() },
             { "C_LOAD_TOPO_FIN" , Contructor<Func<TeraMessageReader,C_LOAD_TOPO_FIN>>() },
             {"S_SPAWN_USER", Contructor<Func<TeraMessageReader, S_SPAWN_USER>>() },
-            {"S_DESPAWN_USER", Contructor<Func<TeraMessageReader, S_DESPAWN_USER>>() }
+            {"S_DESPAWN_USER", Contructor<Func<TeraMessageReader, S_DESPAWN_USER>>() },
+            {"S_PARTY_MEMBER_LIST", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_LIST>>() },
+            //{"S_PARTY_MEMBER_INFO", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_INFO>>() },
+            {"S_LOGOUT_PARTY_MEMBER", Contructor<Func<TeraMessageReader, S_LOGOUT_PARTY_MEMBER>>() },
+            { "S_LEAVE_PARTY_MEMBER", Contructor<Func<TeraMessageReader, S_LEAVE_PARTY_MEMBER>>() },
+            {"S_LEAVE_PARTY", Contructor<Func<TeraMessageReader, S_LEAVE_PARTY>>() },
+            {"S_BAN_PARTY_MEMBER", Contructor<Func<TeraMessageReader, S_BAN_PARTY_MEMBER>>() },
+            {"S_PARTY_MEMBER_CHANGE_HP", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_CHANGE_HP>>() },
+            {"S_PARTY_MEMBER_CHANGE_MP", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_CHANGE_MP>>() },
+            {"S_PARTY_MEMBER_STAT_UPDATE", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_STAT_UPDATE>>() },
+            {"S_CHECK_TO_READY_PARTY", Contructor<Func<TeraMessageReader, S_CHECK_TO_READY_PARTY>>() },
+            {"S_CHECK_TO_READY_PARTY_FIN", Contructor<Func<TeraMessageReader, S_CHECK_TO_READY_PARTY_FIN>>() },
+            {"S_ASK_BIDDING_RARE_ITEM", Contructor<Func<TeraMessageReader, S_ASK_BIDDING_RARE_ITEM>>() },
+            {"S_RESULT_ITEM_BIDDING", Contructor<Func<TeraMessageReader, S_RESULT_ITEM_BIDDING>>() },
+            {"S_RESULT_BIDDING_DICE_THROW", Contructor<Func<TeraMessageReader, S_RESULT_BIDDING_DICE_THROW>>() },
+
+            {"S_PARTY_MEMBER_BUFF_UPDATE", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_BUFF_UPDATE>>() },
+            {"S_PARTY_MEMBER_ABNORMAL_ADD", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_ABNORMAL_ADD>>() },
+            {"S_PARTY_MEMBER_ABNORMAL_REFRESH", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_ABNORMAL_REFRESH>>() },
+            {"S_PARTY_MEMBER_ABNORMAL_DEL", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_ABNORMAL_DEL>>() },
+            {"S_PARTY_MEMBER_ABNORMAL_CLEAR", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_ABNORMAL_CLEAR>>() },
+            {"S_CHANGE_PARTY_MANAGER", Contructor<Func<TeraMessageReader, S_CHANGE_PARTY_MANAGER>>() },
+
         };
 
         private static Dictionary<Type, Delegate> MainProcessor = new Dictionary<Type, Delegate>();
@@ -74,7 +95,32 @@ namespace TCC.Parsing
             {typeof(S_LOAD_TOPO), new Action<S_LOAD_TOPO>(x => PacketProcessor.HandleLoadTopo(x)) },
             {typeof(C_LOAD_TOPO_FIN), new Action<C_LOAD_TOPO_FIN>(x => PacketProcessor.HandleLoadTopoFin(x)) },
             {typeof(S_SPAWN_USER), new Action<S_SPAWN_USER>(x => PacketProcessor.HandleSpawnUser(x)) },
-            {typeof(S_DESPAWN_USER), new Action<S_DESPAWN_USER>(x => PacketProcessor.HandleDespawnUser(x)) }
+            {typeof(S_DESPAWN_USER), new Action<S_DESPAWN_USER>(x => PacketProcessor.HandleDespawnUser(x)) },
+            {typeof(S_PARTY_MEMBER_LIST), new Action<S_PARTY_MEMBER_LIST>(x => PacketProcessor.HandlePartyMemberList(x)) },
+            //{typeof(S_PARTY_MEMBER_INFO), new Action<S_PARTY_MEMBER_INFO>(x => PacketProcessor.HandlePartyMemberInfo(x)) },
+
+            {typeof(S_LOGOUT_PARTY_MEMBER), new Action<S_LOGOUT_PARTY_MEMBER>(x => PacketProcessor.HandlePartyMemberLogout(x)) },
+            {typeof(S_LEAVE_PARTY_MEMBER), new Action<S_LEAVE_PARTY_MEMBER>(x => PacketProcessor.HandlePartyMemberLeave(x)) },
+            {typeof(S_LEAVE_PARTY), new Action<S_LEAVE_PARTY>(x => PacketProcessor.HandleLeaveParty(x)) },
+            {typeof(S_BAN_PARTY_MEMBER), new Action<S_BAN_PARTY_MEMBER>(x => PacketProcessor.HandlePartyMemberKick(x)) },
+
+            {typeof(S_PARTY_MEMBER_CHANGE_HP), new Action<S_PARTY_MEMBER_CHANGE_HP>(x => PacketProcessor.HandlePartyMemberHP(x)) },
+            {typeof(S_PARTY_MEMBER_CHANGE_MP), new Action<S_PARTY_MEMBER_CHANGE_MP>(x => PacketProcessor.HandlePartyMemberMP(x)) },
+
+            {typeof(S_PARTY_MEMBER_STAT_UPDATE), new Action<S_PARTY_MEMBER_STAT_UPDATE>(x => PacketProcessor.HandlePartyMemberStats(x)) },
+            {typeof(S_CHECK_TO_READY_PARTY), new Action<S_CHECK_TO_READY_PARTY>(x => PacketProcessor.HandleReadyCheck(x)) },
+            {typeof(S_CHECK_TO_READY_PARTY_FIN), new Action<S_CHECK_TO_READY_PARTY_FIN>(x => PacketProcessor.HandleReadyCheckFin(x)) },
+
+            {typeof(S_ASK_BIDDING_RARE_ITEM), new Action<S_ASK_BIDDING_RARE_ITEM>(x => PacketProcessor.HandleStartRoll(x)) },
+            {typeof(S_RESULT_ITEM_BIDDING), new Action<S_RESULT_ITEM_BIDDING>(x => PacketProcessor.HandleEndRoll(x)) },
+            {typeof(S_RESULT_BIDDING_DICE_THROW), new Action<S_RESULT_BIDDING_DICE_THROW>(x => PacketProcessor.HandleRollResult(x)) },
+
+            {typeof(S_PARTY_MEMBER_BUFF_UPDATE), new Action<S_PARTY_MEMBER_BUFF_UPDATE>(x => PacketProcessor.HandlePartyMemberBuffUpdate(x)) },
+            {typeof(S_PARTY_MEMBER_ABNORMAL_ADD), new Action<S_PARTY_MEMBER_ABNORMAL_ADD>(x => PacketProcessor.HandlePartyMemberAbnormalAdd(x)) },
+            {typeof(S_PARTY_MEMBER_ABNORMAL_REFRESH), new Action<S_PARTY_MEMBER_ABNORMAL_REFRESH>(x => PacketProcessor.HandlePartyMemberAbnormalRefresh(x)) },
+            {typeof(S_PARTY_MEMBER_ABNORMAL_DEL), new Action<S_PARTY_MEMBER_ABNORMAL_DEL>(x => PacketProcessor.HandlePartyMemberAbnormalDel(x)) },
+            {typeof(S_PARTY_MEMBER_ABNORMAL_CLEAR), new Action<S_PARTY_MEMBER_ABNORMAL_CLEAR>(x => PacketProcessor.HandlePartyMemberAbnormalClear(x)) },
+            {typeof(S_CHANGE_PARTY_MANAGER), new Action<S_CHANGE_PARTY_MANAGER>(x => PacketProcessor.HandleChangeLeader(x)) },
 
         };
 

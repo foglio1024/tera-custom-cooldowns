@@ -13,44 +13,42 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TCC.ViewModels;
 
 namespace TCC.Windows
 {
     /// <summary>
     /// Logica di interazione per AbnormalitiesWindow.xaml
     /// </summary>
-    public partial class AbnormalitiesWindow : Window
+    public partial class AbnormalitiesWindow : TccWindow
     {
         public AbnormalitiesWindow()
         {
             InitializeComponent();
         }
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            IntPtr hwnd = new WindowInteropHelper(this).Handle;
-            FocusManager.MakeUnfocusable(hwnd);
-            FocusManager.HideFromToolBar(hwnd);
-            Topmost = true;
+            InitWindow();
 
-            ContextMenu = new ContextMenu();
-            var HideButton = new MenuItem() { Header = "Hide" };
-            HideButton.Click += (s, ev) =>
-            {
-                this.Visibility = Visibility.Collapsed;
-                VisibilityChanged?.Invoke(this, new PropertyChangedEventArgs("Visibility"));
-                Console.WriteLine("Buff visibility change invoked");
+            buffs.DataContext = BuffBarWindowManager.Instance.Player.Buffs;
+            buffs.ItemsSource = BuffBarWindowManager.Instance.Player.Buffs;
+            debuffs.DataContext = BuffBarWindowManager.Instance.Player.Debuffs;
+            debuffs.ItemsSource = BuffBarWindowManager.Instance.Player.Debuffs;
+            infBuffs.DataContext = BuffBarWindowManager.Instance.Player.InfBuffs;
+            infBuffs.ItemsSource = BuffBarWindowManager.Instance.Player.InfBuffs;
 
-
-            };
-            ContextMenu.Items.Add(HideButton);
+            Left = SettingsManager.BuffBarWindowSettings.X;
+            Top = SettingsManager.BuffBarWindowSettings.Y;
+            Visibility = SettingsManager.BuffBarWindowSettings.Visibility;
+            SetClickThru(SettingsManager.BuffBarWindowSettings.ClickThru);
 
         }
-        public event PropertyChangedEventHandler VisibilityChanged;
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
+            SettingsManager.BuffBarWindowSettings.X = this.Left;
+            SettingsManager.BuffBarWindowSettings.Y = this.Top;
         }
 
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)

@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
@@ -23,17 +24,16 @@ namespace TCC
     public static class WindowManager
     {
         public static CooldownWindow CooldownWindow;
-        //public static StaminaGauge ClassSpecificWindow;
         public static CharacterWindow CharacterWindow;
         public static BossGageWindow BossGauge;
         public static AbnormalitiesWindow BuffBar;
+        public static GroupWindow GroupWindow;
+
         public static SettingsWindow Settings;
+
+
         public static ContextMenu ContextMenu;
-        static MenuItem ClickThruButton;
-        static MenuItem CharacterWindowVisibilityButton;
-        static MenuItem CooldownWindowVisibilityButton;
-        static MenuItem BossGaugeWindowVisibilityButton;
-        static MenuItem BuffBarWindowVisibilityButton;
+
         static System.Windows.Forms.NotifyIcon TrayIcon;
 
         private static bool clickThru;
@@ -55,7 +55,7 @@ namespace TCC
         {
             get
             {
-                if(SessionManager.Logged && !SessionManager.LoadingScreen && IsFocused)
+                if (SessionManager.Logged && !SessionManager.LoadingScreen && IsFocused)
                 {
                     isTccVisible = true;
                     return isTccVisible;
@@ -68,7 +68,7 @@ namespace TCC
             }
             set
             {
-                if(isTccVisible != value)
+                if (isTccVisible != value)
                 {
                     isTccVisible = value;
                     NotifyVisibilityChanged();
@@ -81,7 +81,7 @@ namespace TCC
             get => isFocused;
             set
             {
-                if(isFocused != value)
+                if (isFocused != value)
                 {
                     isFocused = value;
                     NotifyVisibilityChanged();
@@ -103,10 +103,71 @@ namespace TCC
 
         public static void Init()
         {
-            CharacterWindow = new CharacterWindow();
-            CooldownWindow = new CooldownWindow();
-            BossGauge = new BossGageWindow();
-            BuffBar = new AbnormalitiesWindow();
+
+            var charWindowThread = new Thread(new ThreadStart(() =>
+            {
+                SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                CharacterWindow = new CharacterWindow();
+                CharacterWindowManager.Instance.Player = new Data.Player();
+                CharacterWindow.Show();
+                Dispatcher.Run();
+            }));
+            charWindowThread.Name = "Character window thread";
+            charWindowThread.SetApartmentState(ApartmentState.STA);
+            charWindowThread.Start();
+
+            var cooldownWindowThread = new Thread(new ThreadStart(() =>
+            {
+                SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                CooldownWindow = new CooldownWindow();
+                CooldownBarWindowManager.Instance.ShortSkills = new SynchronizedObservableCollection<SkillCooldown>(CooldownWindow.Dispatcher);
+                CooldownBarWindowManager.Instance.LongSkills = new SynchronizedObservableCollection<SkillCooldown>(CooldownWindow.Dispatcher);
+                CooldownWindow.Show();
+                Dispatcher.Run();
+            }));
+            cooldownWindowThread.Name = "Cooldown bar thread";
+            cooldownWindowThread.SetApartmentState(ApartmentState.STA);
+            cooldownWindowThread.Start();
+
+            var bossGaugeThread = new Thread(new ThreadStart(() =>
+            {
+                SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                BossGauge = new BossGageWindow();
+                BossGageWindowManager.Instance.CurrentNPCs = new SynchronizedObservableCollection<Data.Boss>(BossGauge.Dispatcher);
+                BossGauge.Show();
+                Dispatcher.Run();
+            }));
+            bossGaugeThread.Name = "Boss gauge thread";
+            bossGaugeThread.SetApartmentState(ApartmentState.STA);
+            bossGaugeThread.Start();
+
+            var buffBarThread = new Thread(new ThreadStart(() =>
+            {
+                SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                BuffBar = new AbnormalitiesWindow();
+                BuffBarWindowManager.Instance.Player = new Data.Player();
+                BuffBar.Show();
+                Dispatcher.Run();
+            }));
+            buffBarThread.Name = "Buff bar thread";
+            buffBarThread.SetApartmentState(ApartmentState.STA);
+            buffBarThread.Start();
+
+            var groupWindowThread = new Thread(new ThreadStart(() =>
+            {
+                SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                GroupWindow = new GroupWindow();
+                GroupWindowManager.Instance.Dps = new SynchronizedObservableCollection<Data.User>(GroupWindow.Dispatcher);
+                GroupWindowManager.Instance.Healers = new SynchronizedObservableCollection<Data.User>(GroupWindow.Dispatcher);
+                GroupWindowManager.Instance.Tanks = new SynchronizedObservableCollection<Data.User>(GroupWindow.Dispatcher);
+                GroupWindow.Show();
+                Dispatcher.Run();
+            }));
+            groupWindowThread.Name = "Group window thread";
+            groupWindowThread.SetApartmentState(ApartmentState.STA);
+            groupWindowThread.Start();
+
+            Thread.Sleep(500);
             ContextMenu = new ContextMenu();
 
             TrayIcon = new System.Windows.Forms.NotifyIcon()
@@ -118,57 +179,16 @@ namespace TCC
             TrayIcon.MouseDoubleClick += TrayIcon_MouseDoubleClick;
             var v = Assembly.GetExecutingAssembly().GetName().Version;
             TrayIcon.Text = String.Format("TCC v{0}.{1}.{2}", v.Major, v.Minor, v.Build);
-            var ForceShowButton = new MenuItem() { Header = "Force visibility on" };
-            ClickThruButton = new MenuItem() { Header = "Click through" };
             var CloseButton = new MenuItem() { Header = "Close" };
 
-            CharacterWindowVisibilityButton = new MenuItem() { Header = "Unhide character window" };
-            CharacterWindowVisibilityButton.Click += (s, ev) =>
-            {
-                CharacterWindow.Visibility = Visibility.Visible;
-            };
-            CooldownWindowVisibilityButton = new MenuItem() { Header = "Unhide cooldowns bar" };
-            CooldownWindowVisibilityButton.Click += (s, ev) =>
-            {
-                CooldownWindow.Visibility = Visibility.Visible;
-            };
-
-            BossGaugeWindowVisibilityButton = new MenuItem() { Header = "Unhide boss bar" };
-            BossGaugeWindowVisibilityButton.Click += (s, ev) =>
-            {
-                BossGauge.Visibility = Visibility.Visible;
-            };
-            BuffBarWindowVisibilityButton = new MenuItem() { Header = "Unhide buffs bar" };
-            BuffBarWindowVisibilityButton.Click += (s, ev) =>
-            {
-                BuffBar.Visibility = Visibility.Visible;
-            };
-
-
             CloseButton.Click += (s, ev) => App.CloseApp();
-            ClickThruButton.Click += (s, ev) => ToggleClickThru();
-            //ForceShowButton.Click += (s, ev) => ForceShow();
-
-            //ContextMenu.Items.Add(CooldownWindowVisibilityButton);
-            //ContextMenu.Items.Add(BuffBarWindowVisibilityButton);
-            //ContextMenu.Items.Add(BossGaugeWindowVisibilityButton);
-            //ContextMenu.Items.Add(CharacterWindowVisibilityButton);
-            //ContextMenu.Items.Add(new Separator());
-            //ContextMenu.Items.Add(ClickThruButton);
             ContextMenu.Items.Add(CloseButton);
 
 
             FocusManager.FocusTimer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
             FocusManager.FocusTimer.Tick += FocusManager.CheckForegroundWindow;
 
-            //FocusManager.ForegroundWindowChanged += FocusManager_ForegroundWindowChanged;
-            //FocusManager_ForegroundWindowChanged(true);
-
             ClickThruChanged += (s, ev) => UpdateClickThru();
-
-            //var tw = new TestWindow();
-            //tw.Show();
-
         }
 
         private static void TrayIcon_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
@@ -183,13 +203,13 @@ namespace TCC
             if (v)
             {
                 ClickThru = true;
-                ClickThruButton.IsChecked = true;
+                //ClickThruButton.IsChecked = true;
                 SetClickThru();
             }
             else
             {
                 ClickThru = false;
-                ClickThruButton.IsChecked = false;
+                //ClickThruButton.IsChecked = false;
                 UnsetClickThru();
             }
         }
@@ -199,7 +219,6 @@ namespace TCC
             FocusManager.FocusTimer.Stop();
             TrayIcon.Visible = false;
 
-            App.SaveSettings();
 
             foreach (Window w in Application.Current.Windows)
             {
@@ -324,13 +343,13 @@ namespace TCC
             if (ClickThru)
             {
                 UnsetClickThru();
-                ClickThruButton.IsChecked = false;
+                //ClickThruButton.IsChecked = false;
                 ClickThru = false;
             }
             else
             {
                 SetClickThru();
-                ClickThruButton.IsChecked = true;
+                //ClickThruButton.IsChecked = true;
                 ClickThru = true;
             }
         }

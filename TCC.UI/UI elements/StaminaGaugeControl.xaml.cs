@@ -65,7 +65,6 @@ namespace TCC
             this.color = color;
             Maxed += StaminaGauge_Maxed;
             UnMaxed += StaminaGauge_Unmaxed;
-            SessionManager.CurrentPlayer.STUpdated += StaminaGauge_StaminaChanged;
 
             StaminaAmount.EndAngle = 0;
 

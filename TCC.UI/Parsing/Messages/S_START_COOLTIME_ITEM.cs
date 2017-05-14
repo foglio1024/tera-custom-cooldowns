@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Tera.Game;
 using Tera.Game.Messages;
 
-namespace TCC.Messages
+namespace TCC.Parsing.Messages
 {
     public class S_START_COOLTIME_ITEM : ParsedMessage
     {
@@ -16,7 +16,7 @@ namespace TCC.Messages
         public uint ItemId { get; set; }
 
         /// <summary>
-        /// Item's cooldown in milliseconds
+        /// Item's cooldown in seconds
         /// </summary>
         public uint Cooldown { get; set; }
 

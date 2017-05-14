@@ -1,9 +1,9 @@
-﻿<Window x:Class="TCC.Windows.AbnormalitiesWindow"
+﻿<w:TccWindow x:Class="TCC.Windows.AbnormalitiesWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TCC.Windows"
+        xmlns:w="clr-namespace:TCC.Windows"
         xmlns:controls="clr-namespace:TCC.UI_elements"
         xmlns:vm="clr-namespace:TCC.ViewModels"
         mc:Ignorable="d"
@@ -19,21 +19,12 @@
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         MouseRightButtonDown="Window_MouseRightButtonDown"
         >
-    <Window.DataContext>
+    <w:TccWindow.DataContext>
         <vm:AbnormalityWindowViewModel />
-    </Window.DataContext>
-    <Window.Resources>
+    </w:TccWindow.DataContext>
+    <w:TccWindow.Resources>
         <DataTemplate x:Key="abTemplate">
-            <controls:AbnormalityIndicator AbnormalityId="{Binding Abnormality.Id}"
-                                           AbnormalityName="{Binding Abnormality.Name}"
-                                           IconName="{Binding Abnormality.IconName}"
-                                           Type="{Binding Abnormality.Type}"
-                                           AbnormalityTooltip="{Binding Abnormality.ToolTip}"
-                                           Duration="{Binding Duration}"
-                                           Stacks="{Binding Stacks}"
-                                           TargetId="{Binding Target}"
-                                           HorizontalAlignment="Right"
-                                           Size ="32">
+            <controls:AbnormalityIndicator HorizontalAlignment="Right">
                 
                 <controls:AbnormalityIndicator.Resources>
                     <Style TargetType="{x:Type Path}">
@@ -42,23 +33,49 @@
                 </controls:AbnormalityIndicator.Resources>
             </controls:AbnormalityIndicator>
         </DataTemplate>
-    </Window.Resources>
+        <Style x:Key="opacityAnimatedContainer" TargetType="FrameworkElement">
+            <Setter Property="Opacity" Value="0"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsTeraOnTop}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation From="0" To="1"
+                                     Duration="0:0:0.2"
+                                     Storyboard.TargetProperty="Opacity"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation From="1" To="0"
+                                                 Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="Opacity"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+    </w:TccWindow.Resources>
     <StackPanel Style="{StaticResource opacityAnimatedContainer}">
-        <ItemsControl Name="infBuffs" ItemTemplate="{StaticResource abTemplate}" ItemsSource="{Binding InfiniteBuffs}">
+        <ItemsControl Name="infBuffs" ItemTemplate="{StaticResource abTemplate}" >
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" HorizontalAlignment="Right" Height="50" Width="1000"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <ItemsControl Name="buffs" ItemTemplate="{StaticResource abTemplate}" ItemsSource="{Binding Buffs}">
+        <ItemsControl Name="buffs" ItemTemplate="{StaticResource abTemplate}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" HorizontalAlignment="Right" Height="50" Width="1000"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <ItemsControl Name="debuffs" ItemTemplate="{StaticResource abTemplate}" ItemsSource="{Binding Debuffs}" Background="#00000000">
+        <ItemsControl Name="debuffs" ItemTemplate="{StaticResource abTemplate}" Background="#00000000">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" HorizontalAlignment="Right" Height="50" Width="1000"/>
@@ -67,4 +84,4 @@
         </ItemsControl>
 
     </StackPanel>
-</Window>
+</w:TccWindow>

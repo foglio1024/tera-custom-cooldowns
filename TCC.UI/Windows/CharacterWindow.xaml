@@ -1,9 +1,9 @@
-﻿<Window x:Class="TCC.CharacterWindow"
+﻿<w:TccWindow x:Class="TCC.Windows.CharacterWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TCC"
+        xmlns:w="clr-namespace:TCC.Windows"
         xmlns:converters="clr-namespace:TCC.Converters"
         xmlns:vm="clr-namespace:TCC.ViewModels"
         xmlns:controls="clr-namespace:TCC.UI_elements"
@@ -20,16 +20,42 @@
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         MouseRightButtonDown="Window_MouseRightButtonDown"
         Loaded="Window_Loaded"      
-        SnapsToDevicePixels="True"
+        
         ResizeMode="NoResize" 
+        Opacity=".85"
         >
-    <Window.Resources>
+    <w:TccWindow.Resources>
         <Style x:Key="hpBarNumber" TargetType="TextBlock" BasedOn="{StaticResource text1}">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="TextAlignment" Value="Right"/>
             <Setter Property="FontSize" Value="13" />
             <Setter Property="Margin" Value="5,0,5,0"/>
+        </Style>
+        <Style x:Key="opacityAnimatedContainer" TargetType="FrameworkElement">
+            <Setter Property="Opacity" Value="0"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsTeraOnTop}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation From="0" To="1"
+                                     Duration="0:0:0.2"
+                                     Storyboard.TargetProperty="Opacity"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation From="1" To="0"
+                                                 Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="Opacity"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
 
         <converters:ClassImageConverter x:Key="classConv"/>
@@ -40,87 +66,89 @@
         <converters:StaminaBarColorConverter x:Key="staminaColConv"/>
         <converters:FactorFromValuesConverter x:Key="factorFromValConv"/>
         <converters:HP_PercentageConverter x:Key="hpPercConv"/>
-    </Window.Resources>
-    <Window.DataContext>
+        <converters:ClassToStaminaLabelConverter x:Key="staminaLabelConv"/>
+    </w:TccWindow.Resources>
+    <w:TccWindow.DataContext>
         <vm:CharacterWindowViewModel/>
-    </Window.DataContext>
-    <Grid Margin="20" UseLayoutRounding="True" SnapsToDevicePixels="True" Name="rootGrid" Style="{StaticResource opacityAnimatedContainer}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid Margin="0,0,0,0" Grid.ColumnSpan="2" Grid.Row="0" Width="Auto" Height="Auto" Name="infoGrid">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Border Margin="0" Style="{StaticResource border}"  HorizontalAlignment="Stretch"  Grid.ColumnSpan="3"/>
-            <Rectangle Width="21" Height="21" Margin="0,0,3,0" Grid.Column="2" 
-                       Fill="{Binding Player.IsInCombat, Converter={StaticResource combatConv}}" VerticalAlignment="Center"  HorizontalAlignment="Center">
-                <Rectangle.OpacityMask>
-                    <ImageBrush ImageSource="/resources/images/combat.png"/>
-                </Rectangle.OpacityMask>
-            </Rectangle>
-            <TextBlock Margin="4,-1,0,0" Text="" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Style="{StaticResource hpBarNumber}">
-                <Run Text="Lv."/>
-                <Run Text="{Binding Player.Level}"/>
-                <Run Text=" "/>
-                <Run Text="{Binding Player.Name}"/>
-                <Run Text=" "/>
-                <Run Text="{Binding Player.ItemLevel}"/>
-            </TextBlock>
-
-            <controls:GenericGauge Height="3" Margin="3,0" Width="50" BarColor="#91ffffff" Grid.Column="1"
-                                   GaugeName="HP" ShowPercentage="False" ShowName="False" ShowValues="False"
-                                   CurrentVal="{Binding Player.FlightEnergy}" MaxVal="{Binding Player.MaxFlightEnergy}"/>
-        </Grid>
-        <Grid Name="bottomGrid" Grid.Row="1" Margin="0,0,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Border Style="{StaticResource border}" Grid.ColumnSpan="2" Width="Auto" Height="Auto" Margin="0,5"></Border>
-            <Grid Name="imageGrid" Margin="0,0" Width="80" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0">
-                <Rectangle Name="laurel" Width="74" Height="80" Margin="0,-8,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Rectangle.Fill>
-                        <ImageBrush ImageSource="{Binding Player.Laurel, Converter={StaticResource laurelConv}}"/>
-                    </Rectangle.Fill>
-                    <Rectangle.Effect>
-                        <DropShadowEffect Opacity="0.3" ShadowDepth="3"/>
-                    </Rectangle.Effect>
-                </Rectangle>
-                <Rectangle Name="classIcon" Fill="White" Width="50" Height="50" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+    </w:TccWindow.DataContext>
+    <Grid Style="{StaticResource opacityAnimatedContainer}">
+        <Grid Margin="20" UseLayoutRounding="True" Name="rootGrid" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Margin="0,0,0,0" Grid.ColumnSpan="2" Grid.Row="0" Width="Auto" Height="Auto" Name="infoGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Border Margin="0" Style="{StaticResource border}"  HorizontalAlignment="Stretch"  Grid.ColumnSpan="3"/>
+                <Rectangle Width="21" Height="21" Margin="0,0,3,0" Grid.Column="2" 
+                       Fill="{Binding IsInCombat, Converter={StaticResource combatConv}}" VerticalAlignment="Center"  HorizontalAlignment="Center">
                     <Rectangle.OpacityMask>
-                        <ImageBrush ImageSource="{Binding Player.Class, Converter={StaticResource classConv}}"/>
+                        <ImageBrush ImageSource="/resources/images/combat.png"/>
                     </Rectangle.OpacityMask>
-                    <Rectangle.Effect>
-                        <DropShadowEffect Color="#ff20f0ff" BlurRadius="7" ShadowDepth="0"/>
-                    </Rectangle.Effect>
                 </Rectangle>
-                <Grid.CacheMode>
-                    <BitmapCache RenderAtScale="3"/>
-                </Grid.CacheMode>
-            </Grid>
-            <Grid x:Name="barsGrid" Width="400" Height="Auto" Grid.Column="1" Margin="3" 
-              VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Row="1" SnapsToDevicePixels="True" UseLayoutRounding="True">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Name="StaminaRow" Height="{Binding Player.Class, Converter={StaticResource staminaVisConv}}"/>
-                </Grid.RowDefinitions>
+                <TextBlock Margin="4,-1,0,0" Text="" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Style="{StaticResource hpBarNumber}">
+                <Run Text="Lv."/>
+                <Run Text="{Binding Level}"/>
+                <Run Text=" "/>
+                <Run Text="{Binding Name}"/>
+                <Run Text=" "/>
+                <Run Text="{Binding ItemLevel}"/>
+                </TextBlock>
 
-                <controls:GenericGauge Height="14" 
+                <controls:GenericGauge Height="3" Margin="3,0" Width="50" BarColor="#91ffffff" Grid.Column="1"
+                                   GaugeName="HP" ShowPercentage="False" ShowName="False" ShowValues="False"
+                                   CurrentVal="{Binding FlightEnergy}" MaxVal="{Binding MaxFlightEnergy}"/>
+            </Grid>
+            <Grid Name="bottomGrid" Grid.Row="1" Margin="0,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border Style="{StaticResource border}" Grid.ColumnSpan="2" Width="Auto" Height="Auto" Margin="0,5"></Border>
+                <Grid Name="imageGrid" Margin="0,0" Width="80" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0">
+                    <Rectangle Name="laurel" Width="74" Height="80" Margin="0,-8,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="{Binding Laurel, Converter={StaticResource laurelConv}}"/>
+                        </Rectangle.Fill>
+                        <Rectangle.Effect>
+                            <DropShadowEffect Opacity="0.3" ShadowDepth="3"/>
+                        </Rectangle.Effect>
+                    </Rectangle>
+                    <Rectangle Name="classIcon" Fill="White" Width="50" Height="50" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Rectangle.OpacityMask>
+                            <ImageBrush ImageSource="{Binding Class, Converter={StaticResource classConv}}"/>
+                        </Rectangle.OpacityMask>
+                        <Rectangle.Effect>
+                            <DropShadowEffect Color="#ff20f0ff" BlurRadius="7" ShadowDepth="0"/>
+                        </Rectangle.Effect>
+                    </Rectangle>
+                    <Grid.CacheMode>
+                        <BitmapCache RenderAtScale="3"/>
+                    </Grid.CacheMode>
+                </Grid>
+                <Grid x:Name="barsGrid" Width="400" Height="Auto" Grid.Column="1" Margin="3" 
+              VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Row="1" UseLayoutRounding="True">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Name="StaminaRow" Height="{Binding Class, Converter={StaticResource staminaVisConv}}"/>
+                    </Grid.RowDefinitions>
+
+                    <controls:GenericGauge Height="14" 
                                        Margin="2" 
-                                       BarColor="{Binding Player.IsDebuffed, Converter={StaticResource hpDebuffColConv}}"
+                                       BarColor="{Binding IsDebuffed, Converter={StaticResource hpDebuffColConv}}"
                                        GaugeName="HP" 
                                        ShowPercentage="True" 
                                        ShowName="True" 
                                        ShowValues="True"
-                                       CurrentVal="{Binding Player.CurrentHP}" 
-                                       MaxVal="{Binding Player.MaxHP}">
-                </controls:GenericGauge>
-                <controls:GenericGauge Height="14" 
+                                       CurrentVal="{Binding CurrentHP}" 
+                                       MaxVal="{Binding MaxHP}">
+                    </controls:GenericGauge>
+                    <controls:GenericGauge Height="14" 
                                        BarColor="#18c" 
                                        Grid.Row="1" 
                                        GaugeName="MP" 
@@ -128,20 +156,21 @@
                                        ShowPercentage="False" 
                                        ShowName="True" 
                                        ShowValues="True"
-                                       CurrentVal="{Binding Player.CurrentMP}" 
-                                       MaxVal="{Binding Player.MaxMP}">
-                </controls:GenericGauge>
-                <controls:GenericGauge Height="14" 
-                                       BarColor="{Binding Player.Class, Converter={StaticResource staminaColConv}}" 
-                                       Grid.Row="2" GaugeName="{Binding STname}" 
+                                       CurrentVal="{Binding CurrentMP}" 
+                                       MaxVal="{Binding MaxMP}">
+                    </controls:GenericGauge>
+                    <controls:GenericGauge Height="14" 
+                                       BarColor="{Binding Class, Converter={StaticResource staminaColConv}}" 
+                                       Grid.Row="2" GaugeName="{Binding Class, Converter={StaticResource staminaLabelConv}}" 
                                        Margin="2" 
                                        ShowPercentage="False" 
                                        ShowName="True" 
                                        ShowValues="True"
-                                       CurrentVal="{Binding Player.CurrentST}" 
-                                       MaxVal="{Binding Player.MaxST}">
-                </controls:GenericGauge>
+                                       CurrentVal="{Binding CurrentST}" 
+                                       MaxVal="{Binding MaxST}">
+                    </controls:GenericGauge>
+                </Grid>
             </Grid>
         </Grid>
     </Grid>
-</Window>
+</w:TccWindow>

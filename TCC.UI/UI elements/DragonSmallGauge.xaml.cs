@@ -32,8 +32,8 @@ namespace TCC.UI_elements
         public DragonSmallGauge()
         {
             InitializeComponent();
-            Boss.EnragedChanged += BossGage_EnragedUpdated;
-            Boss.BossHPChanged += BossGage_HPUpdated;
+            //Boss.EnragedChanged += BossGage_EnragedUpdated;
+            //Boss.BossHPChanged += BossGage_HPUpdated;
 
             dragonHPpercTB.DataContext = this;
             dragonNameTB.DataContext = this;
@@ -267,8 +267,8 @@ namespace TCC.UI_elements
         }
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
-            Boss.EnragedChanged -= BossGage_EnragedUpdated;
-            Boss.BossHPChanged -= BossGage_HPUpdated;
+            //Boss.EnragedChanged -= BossGage_EnragedUpdated;
+            //Boss.BossHPChanged -= BossGage_HPUpdated;
 
         }
 

@@ -100,20 +100,6 @@ namespace DamageMeter.Sniffing
             //Packets.Enqueue(message);
             var handler = MessageReceived;
             handler?.Invoke(message);
-
-            //TCTParser.DataParser.StoreMessage(message);
-        }
-
-
-
-
-        private void SendPacketToParser(Message message)
-        {
-            byte[] data = new byte[message.Data.Count];
-            Array.Copy(message.Data.Array, 0, data, 2, message.Data.Count - 2);
-            data[0] = (byte)(((short)message.Data.Count) & 255);
-            data[1] = (byte)(((short)message.Data.Count) >> 8);
-            //TCTParser.DataParser.StoreLastPacket(opn.GetName(message.OpCode), TCTParser.StringUtils.ByteArrayToString(data).ToUpper());
         }
 
         protected virtual void OnWarning(string obj)

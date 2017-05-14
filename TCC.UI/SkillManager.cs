@@ -5,7 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
-using TCC.Messages;
+using TCC.Parsing.Messages;
+using TCC.ViewModels;
 
 namespace TCC
 {
@@ -24,8 +25,8 @@ namespace TCC
         public static event SkillResetEventHandler Reset;
         public static event SkillCooldownChangedEventHandler Refresh;
 
-        public static ObservableCollection<SkillCooldown> NormalSkillsQueue = new ObservableCollection<SkillCooldown>();
-        public static ObservableCollection<SkillCooldown> LongSkillsQueue = new ObservableCollection<SkillCooldown>();
+        //public static ObservableCollection<SkillCooldown> NormalSkillsQueue = new ObservableCollection<SkillCooldown>();
+        //public static ObservableCollection<SkillCooldown> LongSkillsQueue = new ObservableCollection<SkillCooldown>();
 
         public static List<string> LastSkills = new List<string>();
 
@@ -49,24 +50,30 @@ namespace TCC
         {
             if (skillCooldown.Cooldown == 0)
             {
-                ResetSkill(skillCooldown.Skill);
-            }
-
-            if (NormalSkillsQueue.ToList().Any(x => x!=null && x.Skill.Name == skillCooldown.Skill.Name) || LongSkillsQueue.ToList().Any(x => x!=null && x.Skill.Name == skillCooldown.Skill.Name))
-            {
-                Refresh?.Invoke(skillCooldown);
+                CooldownBarWindowManager.Instance.RemoveSkill(skillCooldown.Skill);
+                //ResetSkill(skillCooldown.Skill);
             }
             else
             {
-                if (skillCooldown.Cooldown < LongSkillTreshold)
-                {
-                    App.Current.Dispatcher.Invoke(() => NormalSkillsQueue.Add(skillCooldown));
-                }
-                else
-                {
-                    App.Current.Dispatcher.Invoke(() => LongSkillsQueue.Add(skillCooldown));
-                }
+                CooldownBarWindowManager.Instance.AddOrRefreshSkill(skillCooldown);
             }
+
+            //if (NormalSkillsQueue.ToList().Any(x => x!=null && x.Skill.Name == skillCooldown.Skill.Name) || LongSkillsQueue.ToList().Any(x => x!=null && x.Skill.Name == skillCooldown.Skill.Name))
+            //{
+            //    Refresh?.Invoke(skillCooldown);
+            //}
+            //else
+            //{
+            //    if (skillCooldown.Cooldown < LongSkillTreshold)
+            //    {
+                    
+            //        App.Current.Dispatcher.Invoke(() => NormalSkillsQueue.Add(skillCooldown));
+            //    }
+            //    else
+            //    {
+            //        App.Current.Dispatcher.Invoke(() => LongSkillsQueue.Add(skillCooldown));
+            //    }
+            //}
         }
         public static void AddSkill(uint id, uint cd)
         {
@@ -96,7 +103,8 @@ namespace TCC
         {
             if (SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out Skill skill))
             {
-                Changed?.Invoke(new SkillCooldown(skill, cd, CooldownType.Skill));
+                //Changed?.Invoke(new SkillCooldown(skill, cd, CooldownType.Skill));
+                CooldownBarWindowManager.Instance.AddOrRefreshSkill(new SkillCooldown(skill, cd, CooldownType.Skill));
             }
 
             //if (sk.Cooldown > SkillManager.LongSkillTreshold)
@@ -157,12 +165,15 @@ namespace TCC
         {          
             App.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
-                NormalSkillsQueue.Clear();
-                LongSkillsQueue.Clear();
+                //NormalSkillsQueue.Clear();
+                //LongSkillsQueue.Clear();
                 SessionManager.CurrentPlayer.Buffs.Clear();
                 SessionManager.CurrentPlayer.Debuffs.Clear();
                 SessionManager.CurrentPlayer.InfBuffs.Clear();
             }));
+            CooldownBarWindowManager.Instance.ShortSkills.Clear();
+            CooldownBarWindowManager.Instance.LongSkills.Clear();
+
 
             SessionManager.CurrentPlayer.Class = Class.None;
             SessionManager.CurrentPlayer.EntityId = 0;
