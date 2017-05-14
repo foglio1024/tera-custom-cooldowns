@@ -15,20 +15,6 @@ namespace TCC.ViewModels
             get => WindowManager.IsTccVisible;
         }
 
-        private bool topMost;
-        public bool TopMost
-        {
-            get => topMost;
-            set
-            {
-                if (topMost != value)
-                {
-                    topMost = value;
-                    RaisePropertyChanged("TopMost");
-                }
-            }
-        }
-
         public CooldownWindowViewModel()
         {
             WindowManager.TccVisibilityChanged += (s, ev) =>
@@ -36,8 +22,11 @@ namespace TCC.ViewModels
                 RaisePropertyChanged("IsTeraOnTop");
                 if (IsTeraOnTop)
                 {
-                    TopMost = false;
-                    TopMost = true;
+                    WindowManager.CooldownWindow.Dispatcher.Invoke(() =>
+                    {
+                       WindowManager.CooldownWindow.Topmost = false;
+                       WindowManager.CooldownWindow.Topmost = true;
+                    });
                 }
             };
         }

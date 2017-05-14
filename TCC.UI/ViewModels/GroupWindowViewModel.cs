@@ -13,19 +13,6 @@ namespace TCC.ViewModels
         {
             get => WindowManager.IsTccVisible;
         }
-        private bool topMost;
-        public bool TopMost
-        {
-            get => topMost;
-            set
-            {
-                if (topMost != value)
-                {
-                    topMost = value;
-                    RaisePropertyChanged("TopMost");
-                }
-            }
-        }
 
         public GroupWindowViewModel()
         {
@@ -34,8 +21,11 @@ namespace TCC.ViewModels
                 RaisePropertyChanged("IsTeraOnTop");
                 if (IsTeraOnTop)
                 {
-                    TopMost = false;
-                    TopMost = true;
+                    GroupWindowManager.Instance.Dispatcher.Invoke(() =>
+                    {
+                        WindowManager.GroupWindow.Topmost = false;
+                        WindowManager.GroupWindow.Topmost = true;
+                    });
                 }
             };
         }

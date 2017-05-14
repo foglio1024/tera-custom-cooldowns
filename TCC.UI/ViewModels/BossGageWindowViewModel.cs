@@ -1,4 +1,6 @@
-﻿namespace TCC.ViewModels
+﻿using System;
+
+namespace TCC.ViewModels
 {
     public class BossGageWindowViewModel : BaseINPC
     {
@@ -15,19 +17,6 @@
         {
             get => WindowManager.IsTccVisible;
         }
-        private bool topMost;
-        public bool TopMost
-        {
-            get => topMost;
-            set
-            {
-                if (topMost != value)
-                {
-                    topMost = value;
-                    RaisePropertyChanged("TopMost");
-                }
-            }
-        }
 
         public BossGageWindowViewModel()
         {
@@ -37,8 +26,11 @@
                 RaisePropertyChanged("IsTeraOnTop");
                 if (IsTeraOnTop)
                 {
-                    TopMost = false;
-                    TopMost = true;
+                    BossGageWindowManager.Instance.Dispatcher.Invoke(() =>
+                    {
+                        WindowManager.BossGauge.Topmost = false;
+                        WindowManager.BossGauge.Topmost = true;
+                    });
                 }
             };
 

@@ -12,7 +12,7 @@
                  WindowStyle="None"
                  AllowsTransparency="True"
                  ResizeMode="NoResize"
-                 Topmost="{Binding TopMost}"
+                 Topmost="True"
                  Opacity=".9" SizeToContent="WidthAndHeight"
                  Background="Transparent"
                  Title="GroupWindow" Height="Auto" Width="Auto"

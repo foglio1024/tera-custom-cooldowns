@@ -11,7 +11,7 @@
         Height="Auto" 
         Width="Auto" 
         SizeToContent="WidthAndHeight" 
-        Topmost="{Binding TopMost}" 
+        Topmost="True" 
         AllowsTransparency="True" 
         ShowInTaskbar="False" 
         WindowStyle="None" 

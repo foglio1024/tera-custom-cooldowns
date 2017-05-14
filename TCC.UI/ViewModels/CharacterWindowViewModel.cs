@@ -1,4 +1,5 @@
-﻿using TCC.Data;
+﻿using System;
+using TCC.Data;
 
 namespace TCC.ViewModels
 {
@@ -17,20 +18,6 @@ namespace TCC.ViewModels
             }
         }
 
-        private bool topMost;
-        public bool TopMost
-        {
-            get => topMost;
-            set
-            {
-                if (topMost != value)
-                {
-                    topMost = value;
-                    RaisePropertyChanged("TopMost");
-                }
-            }
-        }
-
 
         public CharacterWindowViewModel()
         {
@@ -39,8 +26,11 @@ namespace TCC.ViewModels
                 RaisePropertyChanged("IsTeraOnTop");
                 if (IsTeraOnTop)
                 {
-                    TopMost = false;
-                    TopMost = true;
+                    CharacterWindowManager.Instance.Dispatcher.Invoke(() =>
+                    {
+                        WindowManager.CharacterWindow.Topmost = false;
+                        WindowManager.CharacterWindow.Topmost = true;
+                    });
                 }
             };
         }

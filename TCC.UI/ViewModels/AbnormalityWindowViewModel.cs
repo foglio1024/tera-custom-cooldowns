@@ -14,19 +14,6 @@ namespace TCC.ViewModels
         {
             get => WindowManager.IsTccVisible;
         }
-        private bool topMost;
-        public bool TopMost
-        {
-            get => topMost;
-            set
-            {
-                if (topMost != value)
-                {
-                    topMost = value;
-                    RaisePropertyChanged("TopMost");
-                }
-            }
-        }
 
         public AbnormalityWindowViewModel()
         {
@@ -35,8 +22,11 @@ namespace TCC.ViewModels
                 RaisePropertyChanged("IsTeraOnTop");
                 if (IsTeraOnTop)
                 {
-                    TopMost = false;
-                    TopMost = true;
+                    BuffBarWindowManager.Instance.Dispatcher.Invoke(() =>
+                    {
+                        WindowManager.BuffBar.Topmost = false;
+                        WindowManager.BuffBar.Topmost = true;
+                    });
                 }
             };
         }
