@@ -5,6 +5,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Media;
 using TCC.Data;
 using TCC.Parsing.Messages;
@@ -185,14 +186,10 @@ namespace TCC.Parsing
             }
         }
 
-
         public static void HandleCharList(S_GET_USER_LIST p)
         {
             SessionManager.CurrentAccountCharacters = p.CharacterList;
         }
-
-
-
         public static void HandleCharLogin(S_LOGIN p)
         {
             SessionManager.CurrentPlayer.ClearAbnormalities();
@@ -201,6 +198,8 @@ namespace TCC.Parsing
             SessionManager.Logged = true;
             SessionManager.CurrentPlayer.Class = p.CharacterClass;
             SessionManager.CurrentPlayer.EntityId = p.entityId;
+            SessionManager.CurrentPlayer.PlayerId = p.PlayerId;
+            SessionManager.CurrentPlayer.ServerId = p.ServerId;
             SessionManager.CurrentPlayer.Name = p.Name;
             SessionManager.CurrentPlayer.Level = p.Level;
             SessionManager.SetPlayerLaurel(SessionManager.CurrentPlayer);
@@ -217,8 +216,6 @@ namespace TCC.Parsing
 
 
         }
-
-
         public static void HandleReturnToLobby(S_RETURN_TO_LOBBY p)
         {
             SessionManager.Logged = false;
@@ -228,12 +225,7 @@ namespace TCC.Parsing
             EntitiesManager.ClearNPC();
             GroupWindowManager.Instance.ClearAll();
         }
-
-        public static void HandlePartyMemberStats(S_PARTY_MEMBER_STAT_UPDATE p)
-        {
-            GroupWindowManager.Instance.UpdateMember(p);
-        }
-
+        
         public static void HandleLoadTopo(S_LOAD_TOPO x)
         {
             SessionManager.LoadingScreen = true;
@@ -241,6 +233,19 @@ namespace TCC.Parsing
         public static void HandleLoadTopoFin(C_LOAD_TOPO_FIN x)
         {
             //SessionManager.LoadingScreen = false;
+        }
+
+        internal static void HandleStartRoll(S_ASK_BIDDING_RARE_ITEM x)
+        {
+            GroupWindowManager.Instance.StartRoll();
+        }
+        internal static void HandleRollResult(S_RESULT_BIDDING_DICE_THROW x)
+        {
+            GroupWindowManager.Instance.SetRoll(x.EntityId, x.RollResult);
+        }
+        internal static void HandleEndRoll(S_RESULT_ITEM_BIDDING x)
+        {
+            GroupWindowManager.Instance.EndRoll();
         }
 
         public static void HandleSpawnMe(S_SPAWN_ME p)
@@ -265,6 +270,37 @@ namespace TCC.Parsing
         {
             EntitiesManager.SpawnUser(p.EntityId, p.Name);
         }
+
+        public static void HandlePartyMemberBuffUpdate(S_PARTY_MEMBER_BUFF_UPDATE x)
+        {
+            foreach (var buff in x.Abnormals)
+            {
+                AbnormalityManager.BeginOrRefreshPartyMemberAbnormality(x.PlayerId, x.ServerId, buff.Id, buff.Duration, buff.Stacks);
+            }
+        }
+        public static void HandlePartyMemberAbnormalAdd(S_PARTY_MEMBER_ABNORMAL_ADD x)
+        {
+            AbnormalityManager.BeginOrRefreshPartyMemberAbnormality(x.PlayerId, x.ServerId, x.Id, x.Duration, x.Stacks);
+        }
+        public static void HandlePartyMemberAbnormalDel(S_PARTY_MEMBER_ABNORMAL_DEL x)
+        {
+            AbnormalityManager.EndPartyMemberAbnormality(x.PlayerId, x.ServerId, x.Id);
+        }
+
+        internal static void HandleChangeLeader(S_CHANGE_PARTY_MANAGER x)
+        {
+            GroupWindowManager.Instance.SetNewLeader(x.EntityId, x.Name);
+        }
+
+        public static void HandlePartyMemberAbnormalClear(S_PARTY_MEMBER_ABNORMAL_CLEAR x)
+        {
+            GroupWindowManager.Instance.ClearUserAbnormality(x.PlayerId, x.ServerId);
+        }
+        public static void HandlePartyMemberAbnormalRefresh(S_PARTY_MEMBER_ABNORMAL_REFRESH x)
+        {
+            AbnormalityManager.BeginOrRefreshPartyMemberAbnormality(x.PlayerId, x.ServerId, x.Id, x.Duration, x.Stacks);
+        }
+
         public static void HandleDespawnNpc(S_DESPAWN_NPC p)
         {
             EntitiesManager.DespawnNPC(p.target);
@@ -319,6 +355,8 @@ namespace TCC.Parsing
         public static void HandlePartyMemberLogout(S_LOGOUT_PARTY_MEMBER p)
         {
             GroupWindowManager.Instance.LogoutMember(p.PlayerId, p.ServerId);
+            GroupWindowManager.Instance.ClearUserAbnormality(p.PlayerId, p.ServerId);
+
         }
         public static void HandlePartyMemberKick(S_BAN_PARTY_MEMBER p)
         {
@@ -332,11 +370,28 @@ namespace TCC.Parsing
         {
             GroupWindowManager.Instance.UpdateMemberMP(p.PlayerId, p.ServerId, p.CurrentMP, p.MaxMP);
         }
+        public static void HandlePartyMemberStats(S_PARTY_MEMBER_STAT_UPDATE p)
+        {
+            GroupWindowManager.Instance.UpdateMember(p);
+        }
         public static void HandleLeaveParty(S_LEAVE_PARTY x)
         {
             GroupWindowManager.Instance.ClearAll();
         }
 
+        public static void HandleReadyCheck(S_CHECK_TO_READY_PARTY p)
+        {
+            foreach (var item in p.Party)
+            {
+                GroupWindowManager.Instance.SetReadyStatus(item);
+            }
+        }
+        public static void HandleReadyCheckFin(S_CHECK_TO_READY_PARTY_FIN x)
+        {
+            GroupWindowManager.Instance.EndReadyCheck();
+        }
+
+        //for lfg, not used
         public static void HandlePartyMemberInfo(S_PARTY_MEMBER_INFO p)
         {
             foreach (var user in p.Members)

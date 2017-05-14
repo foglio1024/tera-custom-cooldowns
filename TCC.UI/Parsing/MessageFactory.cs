@@ -52,6 +52,19 @@ namespace TCC.Parsing
             {"S_PARTY_MEMBER_CHANGE_HP", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_CHANGE_HP>>() },
             {"S_PARTY_MEMBER_CHANGE_MP", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_CHANGE_MP>>() },
             {"S_PARTY_MEMBER_STAT_UPDATE", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_STAT_UPDATE>>() },
+            {"S_CHECK_TO_READY_PARTY", Contructor<Func<TeraMessageReader, S_CHECK_TO_READY_PARTY>>() },
+            {"S_CHECK_TO_READY_PARTY_FIN", Contructor<Func<TeraMessageReader, S_CHECK_TO_READY_PARTY_FIN>>() },
+            {"S_ASK_BIDDING_RARE_ITEM", Contructor<Func<TeraMessageReader, S_ASK_BIDDING_RARE_ITEM>>() },
+            {"S_RESULT_ITEM_BIDDING", Contructor<Func<TeraMessageReader, S_RESULT_ITEM_BIDDING>>() },
+            {"S_RESULT_BIDDING_DICE_THROW", Contructor<Func<TeraMessageReader, S_RESULT_BIDDING_DICE_THROW>>() },
+
+            {"S_PARTY_MEMBER_BUFF_UPDATE", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_BUFF_UPDATE>>() },
+            {"S_PARTY_MEMBER_ABNORMAL_ADD", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_ABNORMAL_ADD>>() },
+            {"S_PARTY_MEMBER_ABNORMAL_REFRESH", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_ABNORMAL_REFRESH>>() },
+            {"S_PARTY_MEMBER_ABNORMAL_DEL", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_ABNORMAL_DEL>>() },
+            {"S_PARTY_MEMBER_ABNORMAL_CLEAR", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_ABNORMAL_CLEAR>>() },
+            {"S_CHANGE_PARTY_MANAGER", Contructor<Func<TeraMessageReader, S_CHANGE_PARTY_MANAGER>>() },
+
         };
 
         private static Dictionary<Type, Delegate> MainProcessor = new Dictionary<Type, Delegate>();
@@ -95,6 +108,19 @@ namespace TCC.Parsing
             {typeof(S_PARTY_MEMBER_CHANGE_MP), new Action<S_PARTY_MEMBER_CHANGE_MP>(x => PacketProcessor.HandlePartyMemberMP(x)) },
 
             {typeof(S_PARTY_MEMBER_STAT_UPDATE), new Action<S_PARTY_MEMBER_STAT_UPDATE>(x => PacketProcessor.HandlePartyMemberStats(x)) },
+            {typeof(S_CHECK_TO_READY_PARTY), new Action<S_CHECK_TO_READY_PARTY>(x => PacketProcessor.HandleReadyCheck(x)) },
+            {typeof(S_CHECK_TO_READY_PARTY_FIN), new Action<S_CHECK_TO_READY_PARTY_FIN>(x => PacketProcessor.HandleReadyCheckFin(x)) },
+
+            {typeof(S_ASK_BIDDING_RARE_ITEM), new Action<S_ASK_BIDDING_RARE_ITEM>(x => PacketProcessor.HandleStartRoll(x)) },
+            {typeof(S_RESULT_ITEM_BIDDING), new Action<S_RESULT_ITEM_BIDDING>(x => PacketProcessor.HandleEndRoll(x)) },
+            {typeof(S_RESULT_BIDDING_DICE_THROW), new Action<S_RESULT_BIDDING_DICE_THROW>(x => PacketProcessor.HandleRollResult(x)) },
+
+            {typeof(S_PARTY_MEMBER_BUFF_UPDATE), new Action<S_PARTY_MEMBER_BUFF_UPDATE>(x => PacketProcessor.HandlePartyMemberBuffUpdate(x)) },
+            {typeof(S_PARTY_MEMBER_ABNORMAL_ADD), new Action<S_PARTY_MEMBER_ABNORMAL_ADD>(x => PacketProcessor.HandlePartyMemberAbnormalAdd(x)) },
+            {typeof(S_PARTY_MEMBER_ABNORMAL_REFRESH), new Action<S_PARTY_MEMBER_ABNORMAL_REFRESH>(x => PacketProcessor.HandlePartyMemberAbnormalRefresh(x)) },
+            {typeof(S_PARTY_MEMBER_ABNORMAL_DEL), new Action<S_PARTY_MEMBER_ABNORMAL_DEL>(x => PacketProcessor.HandlePartyMemberAbnormalDel(x)) },
+            {typeof(S_PARTY_MEMBER_ABNORMAL_CLEAR), new Action<S_PARTY_MEMBER_ABNORMAL_CLEAR>(x => PacketProcessor.HandlePartyMemberAbnormalClear(x)) },
+            {typeof(S_CHANGE_PARTY_MANAGER), new Action<S_CHANGE_PARTY_MANAGER>(x => PacketProcessor.HandleChangeLeader(x)) },
 
         };
 
