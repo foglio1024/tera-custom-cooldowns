@@ -112,6 +112,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AbnormalityManager.cs" />
+    <Compile Include="ClassSpecific\Priest.cs" />
+    <Compile Include="Converters\RollToStringConverter.cs" />
+    <Compile Include="Converters\WinningToColorConverter.cs" />
     <Compile Include="Data\Boss.cs" />
     <Compile Include="Data\Abnormality.cs" />
     <Compile Include="Data\AbnormalityDatabase.cs" />
@@ -123,12 +126,23 @@
     <Compile Include="Parsing\Messages\C_PLAYER_LOCATION.cs" />
     <Compile Include="Parsing\Messages\S_ABNORMALITY_END.cs" />
     <Compile Include="Parsing\Messages\S_ABNORMALITY_REFRESH.cs" />
+    <Compile Include="Parsing\Messages\S_ASK_BIDDING_RARE_ITEM.cs" />
+    <Compile Include="Parsing\Messages\S_CHANGE_PARTY_MANAGER.cs" />
     <Compile Include="Parsing\Messages\S_CHAT.cs" />
+    <Compile Include="Parsing\Messages\S_CHECK_TO_READY_PARTY.cs" />
+    <Compile Include="Parsing\Messages\S_CHECK_TO_READY_PARTY_FIN.cs" />
     <Compile Include="Parsing\Messages\S_DESPAWN_NPC.cs" />
     <Compile Include="Parsing\Messages\S_DESPAWN_USER.cs" />
     <Compile Include="Parsing\Messages\S_LEAVE_PARTY_MEMBER.cs" />
     <Compile Include="Parsing\Messages\S_LOAD_TOPO.cs" />
+    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_ABNORMAL_ADD.cs" />
+    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_ABNORMAL_CLEAR.cs" />
+    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_ABNORMAL_DEL.cs" />
+    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_ABNORMAL_REFRESH.cs" />
+    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_BUFF_UPDATE.cs" />
     <Compile Include="Parsing\Messages\S_PARTY_MEMBER_LIST.cs" />
+    <Compile Include="Parsing\Messages\S_RESULT_BIDDING_DICE_THROW.cs" />
+    <Compile Include="Parsing\Messages\S_RESULT_ITEM_BIDDING.cs" />
     <Compile Include="Parsing\Messages\S_RETURN_TO_LOBBY.cs" />
     <Compile Include="Parsing\Messages\S_SPAWN_ME.cs" />
     <Compile Include="Parsing\Messages\S_SPAWN_NPC.cs" />
@@ -522,6 +536,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="resources\images\crown.png" />
+    <Resource Include="resources\images\ic_done_white_24dp_2x.png" />
+    <Resource Include="resources\images\ic_people_white_24dp_2x.png" />
     <Resource Include="resources\images\ic_remove_red_eye_white_24dp_2x.png" />
     <Resource Include="resources\images\combat_white.png" />
     <Resource Include="resources\images\ic_person_white_24dp_2x.png" />
