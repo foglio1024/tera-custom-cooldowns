@@ -114,5 +114,30 @@
             <ui_elements:BoolSetting Margin="0,0,0,0" SettingName="Visibility" Grid.Row="1" IsOn="{Binding IsBossWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
             <ui_elements:BoolSetting Margin="0,0,0,0" SettingName="Click through" Grid.Row="2" IsOn="{Binding IsBossWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_mouse_white_24dp_2x.png"/>
         </Grid>
+        <Grid Grid.Row="3" Grid.Column="0" Margin="0,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border Background="#09ffffff" Grid.ColumnSpan="2" />
+                <Image Source="/TCC;component/resources/images/ic_people_white_24dp_2x.png" Margin="7,5" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
+                <TextBlock Text="Group window settings" Style="{StaticResource text1}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+            </Grid>
+            <ui_elements:BoolSetting Margin="0,0,0,0" SettingName="Visibility" Grid.Row="1" IsOn="{Binding IsGroupWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
+            <ui_elements:BoolSetting Margin="0,0,0,0" SettingName="Click through" Grid.Row="2" IsOn="{Binding IsGroupWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_mouse_white_24dp_2x.png"/>
+            <ui_elements:BoolSetting Margin="0,0,0,0" SettingName="Hide me" Grid.Row="3" IsOn="{Binding HideMe, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_person_white_24dp_2x.png" ToolTip="Hides current player from group window. Note: if turned back on while in a party, player will not be visible until party composition changes."/>
+            <ui_elements:BoolSetting Margin="0,0,0,0" SettingName="Hide buffs" Grid.Row="4" IsOn="{Binding HideAllBuffs, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_data_usage_white_24dp_2x.png"  ToolTip="Hides all group members' buffs from group window. Debuffs will still be showed (only for healers' buffs). Note: if turned back on while in a party, pre-existing buffs will not be visible until refreshed."/>
+            <ui_elements:BoolSetting Margin="0,0,0,0" SettingName="Hide raid (de)buffs" Grid.Row="6" IsOn="{Binding HideRaidAbnormalities, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_data_usage_white_24dp_2x.png" ToolTip="Hides all buffs and debuffs for every group member (only 10+ people raids). Note: if turned back on while in a party, pre-existing (de)buffs will not be visible until refreshed."/>
+        </Grid>
     </Grid>
 </Window>
