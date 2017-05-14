@@ -41,43 +41,59 @@ namespace TCC.ViewModels
 
         public void AddOrRefreshSkill(SkillCooldown sk)
         {
-            if (sk.Cooldown < SkillManager.LongSkillTreshold)
+            try
             {
-                var existing = _shortSkills.FirstOrDefault(x => x.Skill.Name == sk.Skill.Name);
-                if (existing == null)
+
+                if (sk.Cooldown < SkillManager.LongSkillTreshold)
                 {
-                    _shortSkills.Add(sk);
-                    return;
+                    var existing = _shortSkills.FirstOrDefault(x => x.Skill.Name == sk.Skill.Name);
+                    if (existing == null)
+                    {
+                        _shortSkills.Add(sk);
+                        return;
+                    }
+                    existing.Cooldown = sk.Cooldown;
+                    existing.Refresh();
                 }
-                existing.Cooldown = sk.Cooldown;
-                existing.Refresh();
+                else
+                {
+                    var existing = _longSkills.FirstOrDefault(x => x.Skill.Name == sk.Skill.Name);
+                    if (existing == null)
+                    {
+                        _longSkills.Add(sk);
+                        return;
+                    }
+                    existing.Cooldown = sk.Cooldown;
+                    existing.Refresh();
+                }
             }
-            else
+            catch
             {
-                var existing = _longSkills.FirstOrDefault(x => x.Skill.Name == sk.Skill.Name);
-                if (existing == null)
-                {
-                    _longSkills.Add(sk);
-                    return;
-                }
-                existing.Cooldown = sk.Cooldown;
-                existing.Refresh();
+
             }
         }
         public void RemoveSkill(Skill sk)
         {
-            var shortSkill = _shortSkills.FirstOrDefault(x => x.Skill.Name == sk.Name);
-            if (shortSkill != null)
+            try
             {
-                
-                _shortSkills.Remove(shortSkill);
-                shortSkill.Dispose();
+
+                var shortSkill = _shortSkills.FirstOrDefault(x => x.Skill.Name == sk.Name);
+                if (shortSkill != null)
+                {
+
+                    _shortSkills.Remove(shortSkill);
+                    shortSkill.Dispose();
+                }
+                var longSkill = _longSkills.FirstOrDefault(x => x.Skill.Name == sk.Name);
+                if (longSkill != null)
+                {
+                    _longSkills.Remove(longSkill);
+                    longSkill.Dispose();
+                }
             }
-            var longSkill = _longSkills.FirstOrDefault(x => x.Skill.Name == sk.Name);
-            if (longSkill != null)
+            catch
             {
-                _longSkills.Remove(longSkill);
-                longSkill.Dispose();
+
             }
         }
     }
