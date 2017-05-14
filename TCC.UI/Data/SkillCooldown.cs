@@ -47,6 +47,7 @@ namespace TCC
         public void Dispose()
         {
             _timer?.Stop();
+            if(_timer != null) _timer.Elapsed -= _timer_Elapsed;
             _timer?.Dispose();
         }
     }
