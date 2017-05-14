@@ -20,28 +20,6 @@ namespace TCC
             {
                 "S_USER_LOCATION",
                 "S_SOCIAL",
-<<<<<<< HEAD
-                "S_PARTY_MATCH_LINK",
-                "C_PLAYER_LOCATION",
-                "S_PLAYER_CHANGE_STAMINA",
-                "S_START_COOLTIME_SKILL",
-                "S_PLAYER_CHANGE_MP",
-                "S_CREATURE_CHANGE_HP",
-                "S_SPAWN_COLLECTION",
-                "S_F2P_PremiumUser_Permission",
-                "S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA",
-                "C_SHOW_INVEN",
-                "S_INVEN",
-                "C_SHOW_ITEM_TOOLTIP_EX",
-                "S_SHOW_ITEM_TOOLTIP",
-                "S_CURRENT_CHANNEL",
-                "S_ACTION_END",
-                "S_ACTION_STAGE",
-                "S_NPC_LOCATION",
-                "S_BATTLE_FIELD_SEASON_RANKER",
-                "S_ABNORMALITY_BEGIN",
-                "S_DIALOG_EVENT"
-=======
                 "PROJECTILE",
                 "S_PARTY_MATCH_LINK",
                 "C_PLAYER_LOCATION",
@@ -116,9 +94,6 @@ namespace TCC
                 "S_UPDATE_ACHIEVEMENT_PROGRESS",
                 "S_WORLD_QUEST_VILLAGER_INFO",
                 "S_INSTANT_DASH"
-
->>>>>>> refs/remotes/origin/multithread-test
-
 
 
 

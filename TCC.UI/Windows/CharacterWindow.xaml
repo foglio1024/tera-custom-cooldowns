@@ -19,10 +19,8 @@
         SizeToContent="WidthAndHeight" 
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         MouseRightButtonDown="Window_MouseRightButtonDown"
-        Loaded="Window_Loaded"      
-        
+        Loaded="Window_Loaded"            
         ResizeMode="NoResize" 
-        Opacity=".85"
         >
     <w:TccWindow.Resources>
         <Style x:Key="hpBarNumber" TargetType="TextBlock" BasedOn="{StaticResource text1}">

@@ -63,11 +63,7 @@
                                VerticalAlignment="Center" 
                                Margin="0" 
                                FontSize="14"
-<<<<<<< HEAD
-                               Text="{Binding CurrentPercentage, RelativeSource={RelativeSource AncestorType=local:BossGage}, StringFormat=0.#%}"
-=======
                                Text="{Binding CurrentPercentage, StringFormat=##0.#%}"
->>>>>>> refs/remotes/origin/multithread-test
                                Grid.Row="1"/>
                     <Grid>
                         <Grid.ColumnDefinitions>

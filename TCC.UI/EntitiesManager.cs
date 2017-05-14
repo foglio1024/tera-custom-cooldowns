@@ -33,16 +33,13 @@ namespace TCC
         {
             if (CurrentDatabase.TryGetMonster(templateId, zoneId, out Monster m))
             {
-<<<<<<< HEAD
-                if ((m.IsBoss) || force)
-=======
+
                 if (m.IsBoss || force)
->>>>>>> refs/remotes/origin/multithread-test
                 {
                     App.Current.Dispatcher.Invoke(() =>
                     {
                         CurrentBosses.Add(new Boss(entityId, zoneId, templateId, v));
-<<<<<<< HEAD
+
                     });
                 }
                 else
@@ -59,12 +56,7 @@ namespace TCC
             }
             else
             {
-
-=======
                         BossGageWindowManager.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP);
-                    });
-                }
->>>>>>> refs/remotes/origin/multithread-test
             }
         }
         public static void DespawnNPC(ulong target)

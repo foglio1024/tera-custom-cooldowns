@@ -4,7 +4,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:converters="clr-namespace:TCC.Converters"
-             xmlns:mock="clr-namespace:TCC.MockData"
              xmlns:controls="clr-namespace:TCC.UI_elements"
              mc:Ignorable="d"
              Loaded="UserControl_Loaded"

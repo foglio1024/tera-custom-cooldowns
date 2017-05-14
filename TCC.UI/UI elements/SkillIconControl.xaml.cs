@@ -63,19 +63,7 @@ namespace TCC
 
             LayoutTransform = new ScaleTransform(1, 1, .5, .5);
 
-<<<<<<< HEAD
-                var an = new DoubleAnimation(359.9 * newAngle, 0, TimeSpan.FromMilliseconds(s.Cooldown));
-                var fps = (s.Cooldown > 2 * 60 * 1000) ? 1 : 30;
-                DoubleAnimation.SetDesiredFrameRate(an, fps);
-                arc.BeginAnimation(Arc.EndAngleProperty, an);
-            });
-        }
-        private void ControlLoaded(object sender, RoutedEventArgs e)
-        {
-            CurrentCD = (double)Cooldown / 1000;
-=======
             CurrentCD = (double)_context.Cooldown / 1000;
->>>>>>> refs/remotes/origin/multithread-test
 
             NumberTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(1000) };
             CloseTimer = new  DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(ending) };
@@ -137,18 +125,11 @@ namespace TCC
 
         void AnimateCooldown(double angle = 1)
         {
-<<<<<<< HEAD
-            var an = new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(Cooldown));
-            var fps = (Cooldown > 2 * 60 * 1000) ? 1 : 30;
-            DoubleAnimation.SetDesiredFrameRate(an,fps);
-=======
             var an = new DoubleAnimation(angle*359.9, 0, TimeSpan.FromMilliseconds(_context.Cooldown));
             int fps = _context.Cooldown > 80000 ? 1 : 30;
             DoubleAnimation.SetDesiredFrameRate(an, fps);
->>>>>>> refs/remotes/origin/multithread-test
             arc.BeginAnimation(Arc.EndAngleProperty, an);
             NumberTimer.IsEnabled = true;
-            //MainTimer.IsEnabled = true;
         }
 
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
@@ -159,11 +140,9 @@ namespace TCC
         public void Dispose()
         {
             NumberTimer.Stop();
-            //MainTimer.Stop();
             CloseTimer.Stop();
 
             NumberTimer = null;
-            //MainTimer = null;
             CloseTimer = null;
         }
     }

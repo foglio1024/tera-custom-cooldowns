@@ -28,111 +28,9 @@ namespace TCC.UI_elements
         {
             InitializeComponent();
         }
-<<<<<<< HEAD
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            Dispatcher.Invoke(() =>
-            {
-                if (TargetId == SessionManager.CurrentPlayer.EntityId)
-                {
-                    AbnormalityManager.PlayerAbnormalityUpdated += PacketRouter_BuffUpdated;
-                    isPlayer = true;
-                }
-                else
-                {
-                    AbnormalityManager.NPCAbnormalityUpdated += PacketRouter_BuffUpdated;
-                    isPlayer = false;
-                }
-                this.RenderTransform = new ScaleTransform(0, 0, .5, .5);
-                this.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
-                this.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
-                abnormalityIcon.Width = Size * .9;
-                abnormalityIcon.Height = Size * .9;
-                bgEll.Width = Size;
-                bgEll.Height = Size;
-                arc.Width = Size * .9;
-                arc.Height = Size * .9;
-
-                if (Duration > 0)
-                {
-                    var an = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(Duration));
-                    int fps = (Duration > 2 * 60 * 1000) ? 1 : 30;
-                    DoubleAnimation.SetDesiredFrameRate(an, fps);
-                    arc.BeginAnimation(Arc.EndAngleProperty, an);
-                    CurrentTime = Duration / 1000;
-
-                    InitTimer();
-                    SecondsTimer.Stop();
-                    SecondsTimer.Enabled = true;
-                }
-                else
-                {
-                }
-            });
-        }
-
-        public ulong TargetId
-        {
-            get { return (ulong)GetValue(TargetIdProperty); }
-            set { SetValue(TargetIdProperty, value); }
-        }
-        public static readonly DependencyProperty TargetIdProperty = DependencyProperty.Register("TargetId", typeof(ulong), typeof(AbnormalityIndicator));
-
-        public uint AbnormalityId
-        {
-            get { return (uint)GetValue(AbnormalityIdProperty); }
-            set { SetValue(AbnormalityIdProperty, value); }
-        }
-        public static readonly DependencyProperty AbnormalityIdProperty = DependencyProperty.Register("AbnormalityId", typeof(uint), typeof(AbnormalityIndicator));
-
-        public string AbnormalityName
-        {
-            get { return (string)GetValue(AbnormalityNameProperty); }
-            set { SetValue(AbnormalityNameProperty, value); }
-        }
-        public static readonly DependencyProperty AbnormalityNameProperty = DependencyProperty.Register("AbnormalityName", typeof(string), typeof(AbnormalityIndicator));
-
-        public string AbnormalityTooltip
-        {
-            get { return (string)GetValue(AbnormalityTooltipProperty); }
-            set { SetValue(AbnormalityTooltipProperty, value); }
-        }
-        public static readonly DependencyProperty AbnormalityTooltipProperty = DependencyProperty.Register("AbnormalityTooltip", typeof(string), typeof(AbnormalityIndicator));
-
-        public AbnormalityType Type
-        {
-            get { return (AbnormalityType)GetValue(TypeProperty); }
-            set { SetValue(TypeProperty, value); }
-        }
-        public static readonly DependencyProperty TypeProperty = DependencyProperty.Register("Type", typeof(AbnormalityType), typeof(AbnormalityIndicator));
-
-        public string IconName
-        {
-            get { return (string)GetValue(IconNameProperty); }
-            set { SetValue(IconNameProperty, value); }
-        }
-        public static readonly DependencyProperty IconNameProperty = DependencyProperty.Register("IconName", typeof(string), typeof(AbnormalityIndicator));
-
-        public int Duration
-        {
-            get { return (int)GetValue(DurationProperty); }
-            set { SetValue(DurationProperty, value); }
-        }
-        public static readonly DependencyProperty DurationProperty = DependencyProperty.Register("Duration", typeof(int), typeof(AbnormalityIndicator));
-
-        public int Stacks
-        {
-            get { return (int)GetValue(StacksProperty); }
-            set { SetValue(StacksProperty, value); }
-        }
-        public static readonly DependencyProperty StacksProperty = DependencyProperty.Register("Stacks", typeof(int), typeof(AbnormalityIndicator));
-        
-        public double Size
-=======
         private AbnormalityDuration _context;
         private void buff_PropertyChanged(object sender, PropertyChangedEventArgs e)
->>>>>>> refs/remotes/origin/multithread-test
         {
             if (e.PropertyName == "Refresh")
             {
@@ -149,45 +47,10 @@ namespace TCC.UI_elements
        
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-<<<<<<< HEAD
-            Dispatcher.Invoke(() =>
-            {
-                if (target == TargetId)
-                {
-                    if (ab.Id == AbnormalityId)
-                    {
-                        Duration = duration;
-                        Stacks = stacks;
-                        CurrentTime = duration / 1000;
-                        if (SecondsTimer != null)
-                        {
-                            SecondsTimer.Stop();
-                            SecondsTimer.Enabled = true;
-                        }
-                        if (duration < 0)
-                        {
-                            return;
-                        }
-                        var an = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(duration));
-                        int fps = (Duration > 2*60*1000) ? 1 : 30;
-                        DoubleAnimation.SetDesiredFrameRate(an, fps);
-
-                        arc.BeginAnimation(Arc.EndAngleProperty,an);
-                    }
-                }
-
-            });
-        }
-
-
-
-
-=======
             _context = (AbnormalityDuration)DataContext;
             _context.PropertyChanged += buff_PropertyChanged;
             this.RenderTransform = new ScaleTransform(1, 1, .5, .5);
             this.BeginAnimation(OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(85)));
->>>>>>> refs/remotes/origin/multithread-test
 
             if (((AbnormalityDuration)DataContext).Duration > 0 && ((AbnormalityDuration)DataContext).Animated)
             {
