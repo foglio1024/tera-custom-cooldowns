@@ -12,7 +12,7 @@
         <DataTemplate x:Key="dragonSmallGauge">
         </DataTemplate>
         <DataTemplate x:Key="BossBuffDataTemplate">
-            <elements:AbnormalityIndicator Size="27"/>
+            <elements:AbnormalityIndicator/>
         </DataTemplate>
 
     </UserControl.Resources>
