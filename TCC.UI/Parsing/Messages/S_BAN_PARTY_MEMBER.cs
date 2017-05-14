@@ -20,9 +20,9 @@ namespace TCC.Parsing.Messages
         public S_BAN_PARTY_MEMBER(TeraMessageReader reader) : base(reader)
         {
             var nameOffset = reader.ReadUInt16();
-            reader.Skip(4); //0xFFFFFFFF
             serverId = reader.ReadUInt32();
             playerId = reader.ReadUInt32();
+            reader.Skip(4); //0xFFFFFFFF
             name = reader.ReadTeraString();
         }
 

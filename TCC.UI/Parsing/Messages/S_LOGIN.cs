@@ -17,7 +17,8 @@ namespace TCC.Parsing.Messages
         short details2Offset { get; set; }
         short details2Count { get; set; }
         public ulong entityId { get; set; }
-        ulong pId { get; set; }
+        public uint ServerId { get; set; }
+        public uint PlayerId { get; set; }
         int unk1 { get; set; } 
         int unk3 { get; set; } 
         int unk4 { get; set; } 
@@ -94,6 +95,7 @@ namespace TCC.Parsing.Messages
         byte[] details{ get; set; }
         byte[] details2{ get; set; }
         byte unk34{ get; set; }
+
         
         public Class CharacterClass { get
             {
@@ -111,7 +113,8 @@ namespace TCC.Parsing.Messages
             details2Count = reader.ReadInt16();
             model = reader.ReadUInt32();
             entityId = reader.ReadUInt64();
-            pId = reader.ReadUInt64();
+            ServerId = reader.ReadUInt32();
+            PlayerId = reader.ReadUInt32();
             unk1 = reader.ReadInt32();
             unk2=reader.ReadByte();
             unk3=reader.ReadInt32();

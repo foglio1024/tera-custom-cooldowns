@@ -76,6 +76,8 @@ namespace TCC.Parsing.Messages
                 u.CanInvite = reader.ReadBoolean();
                 u.Laurel = (Laurel)reader.ReadUInt32();
                 u.Name = reader.ReadTeraString();
+                u.Alive = true;
+                if (u.ServerId == LeaderServerId && u.PlayerId == LeaderPlayerId) u.IsLeader = true;
                 members.Add(u);
             }
         }
