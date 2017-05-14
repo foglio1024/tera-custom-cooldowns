@@ -45,9 +45,7 @@
                                 </Storyboard>
                             </BeginStoryboard>
                         </DataTrigger.EnterActions>
-                    </DataTrigger>
-                    <DataTrigger Binding="{Binding Online}" Value="True">
-                        <DataTrigger.EnterActions>
+                        <DataTrigger.ExitActions>
                             <BeginStoryboard>
                                 <Storyboard>
                                     <DoubleAnimation From=".5" To="1"
@@ -55,7 +53,7 @@
                                      Storyboard.TargetProperty="Opacity"/>
                                 </Storyboard>
                             </BeginStoryboard>
-                        </DataTrigger.EnterActions>
+                        </DataTrigger.ExitActions>
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
