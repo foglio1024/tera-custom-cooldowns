@@ -34,37 +34,24 @@ namespace TCC.UI_elements
             if (e.PropertyName == "Refresh")
             {
                 if (((AbnormalityDuration)sender).Duration < 0) return;
+                if (!((AbnormalityDuration)sender).Animated) return;
                 var an = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(((AbnormalityDuration)sender).Duration));
                 int fps = ((AbnormalityDuration)sender).Duration > 80000 ? 1 : 30;
                 DoubleAnimation.SetDesiredFrameRate(an, fps);
                 arc.BeginAnimation(Arc.EndAngleProperty, an);
             }
+
         }
 
-        
-        public double Size
-        {
-            get { return (double)GetValue(SizeProperty); }
-            set { SetValue(SizeProperty, value); }
-        }
-        public static readonly DependencyProperty SizeProperty = DependencyProperty.Register("Size", typeof(double), typeof(AbnormalityIndicator));
-
+       
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             _context = (AbnormalityDuration)DataContext;
             _context.PropertyChanged += buff_PropertyChanged;
             this.RenderTransform = new ScaleTransform(1, 1, .5, .5);
-            //this.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(100)) { EasingFunction = new QuadraticEase() });
-            //this.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
             this.BeginAnimation(OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(85)));
-            abnormalityIcon.Width = Size * .9;
-            abnormalityIcon.Height = Size * .9;
-            bgEll.Width = Size;
-            bgEll.Height = Size;
-            arc.Width = Size * .9;
-            arc.Height = Size * .9;
 
-            if (((AbnormalityDuration)DataContext).Duration > 0)
+            if (((AbnormalityDuration)DataContext).Duration > 0 && ((AbnormalityDuration)DataContext).Animated)
             {
                 var an = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(((AbnormalityDuration)DataContext).Duration));
                 int fps = ((AbnormalityDuration)DataContext).Duration > 80000 ? 1 : 30;
