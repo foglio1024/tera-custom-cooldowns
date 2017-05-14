@@ -67,4 +67,11 @@ namespace TCC
         Add = 1,
         Remove = 2
     }
+
+    public enum ReadyStatus
+    {
+        NotReady = 0,
+        Ready = 1,
+        Undefined = 255 //arbitrary
+    }
 }
