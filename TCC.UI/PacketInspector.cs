@@ -104,7 +104,7 @@ namespace TCC
             TeraMessageReader tmr = new TeraMessageReader(msg, PacketProcessor.OpCodeNamer, PacketProcessor.Version, PacketProcessor.SystemMessageNamer);
             if (exclusionList.Any(opName.Contains)) return;
 //            if(opName.Equals("S_LOAD_TOPO") || opName.Equals("C_LOAD_TOPO_FIN")|| opName.Equals("S_SPAWN_ME"))
-                Console.WriteLine(opName);
+                Console.WriteLine(opName + " " + msg.OpCode);
         }
     }
 }
