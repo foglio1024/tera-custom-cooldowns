@@ -291,7 +291,7 @@ namespace TCC.ViewModels
         {
             if (e.PropertyName == "Visibility")
             {
-                RaisePropertyChanged("IsGroupWindowVisible");
+                IsGroupWindowVisible = ((TccWindow)sender).Visibility == Visibility.Hidden ? false : true;
             }
             else if (e.PropertyName == "ClickThru")
             {
@@ -302,7 +302,7 @@ namespace TCC.ViewModels
         {
             if (e.PropertyName == "Visibility")
             {
-                RaisePropertyChanged("IsBuffWindowVisible");
+                IsBuffWindowVisible = ((TccWindow)sender).Visibility == Visibility.Hidden ? false : true;
             }
             else if (e.PropertyName == "ClickThru")
             {
@@ -313,7 +313,7 @@ namespace TCC.ViewModels
         {
             if (e.PropertyName == "Visibility")
             {
-                RaisePropertyChanged("IsBossWindowVisible");
+                IsBossWindowVisible = ((TccWindow)sender).Visibility == Visibility.Hidden ? false : true;
 
             }
             else if (e.PropertyName == "ClickThru")
@@ -325,7 +325,7 @@ namespace TCC.ViewModels
         {
             if (e.PropertyName == "Visibility")
             {
-                RaisePropertyChanged("IsCharacterWindowVisible");
+                IsCharacterWindowVisible = ((TccWindow)sender).Visibility == Visibility.Hidden ? false : true;
             }
             else if (e.PropertyName == "ClickThru")
             {
@@ -336,7 +336,7 @@ namespace TCC.ViewModels
         {
             if (e.PropertyName == "Visibility")
             {
-                RaisePropertyChanged("IsCooldownWindowVisible");
+                IsCooldownWindowVisible = ((TccWindow)sender).Visibility == Visibility.Hidden ? false : true;
             }
             else if (e.PropertyName == "ClickThru")
             {
