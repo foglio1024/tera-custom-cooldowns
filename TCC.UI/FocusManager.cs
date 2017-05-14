@@ -58,7 +58,7 @@ namespace TCC
             FocusManager.GetWindowThreadProcessId(hwnd, out uint procId);
             Process proc = Process.GetProcessById((int)procId);
 
-            if (proc.ProcessName == "TERA" || proc.ProcessName == "TCC" || proc.ProcessName == "devenv")
+            if (proc.ProcessName == "TERA" || proc.ProcessName == "TCC" || proc.ProcessName == "devenv" || proc.ProcessName == "ShinraMeter")
             {
                 //ForegroundWindowChanged?.Invoke(true);
                 WindowManager.IsFocused = true;
