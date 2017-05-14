@@ -67,6 +67,9 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <Grid.LayoutTransform>
+            <ScaleTransform ScaleX="1" ScaleY="1"></ScaleTransform>
+        </Grid.LayoutTransform>
         <ItemsControl x:Name="dps"  Width="Auto" Style="{StaticResource itemTemplateSwap}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
