@@ -47,10 +47,6 @@ namespace TCC
             TeraSniffer.Instance.Enabled = true;
             SettingsManager.LoadSettings();
             WindowManager.Init();
-            WindowManager.Settings = new SettingsWindow()
-            {
-                Name = "Settings"
-            };
             FocusManager.FocusTimer.Start();
 
             PacketProcessor.Init();
@@ -92,38 +88,38 @@ namespace TCC
             SessionManager.CurrentPlayer.CurrentHP = 100;
             SessionManager.CurrentPlayer.EntityId = 1;
 
-            for (int i = 0; i < 5; i++)
-            {
-                var u = new User(WindowManager.GroupWindow.Dispatcher);
-                u.Name = "Test D" + i;
-                u.UserClass = Class.Warrior;
-                u.Laurel = Laurel.Champion;
-                u.PlayerId = (uint)i;
-                u.Online = true;
-                u.Ready = ReadyStatus.Ready;
-                ViewModels.GroupWindowManager.Instance.AddOrUpdateMember(u);
-            }
-            for (int i = 0; i < 1; i++)
-            {
-                var u = new User(WindowManager.GroupWindow.Dispatcher);
-                u.Name = "Test H" + i;
-                u.UserClass = Class.Elementalist;
-                u.Laurel = Laurel.Champion;
-                u.PlayerId = (uint)i*2;
-                u.Online = true;
-                u.Ready = ReadyStatus.NotReady;
-                ViewModels.GroupWindowManager.Instance.AddOrUpdateMember(u);
-            }
-            for (int i = 0; i < 5; i++)
-            {
-                var u = new User(WindowManager.GroupWindow.Dispatcher);
-                u.Name = "Test T" + i;
-                u.UserClass = Class.Lancer;
-                u.Laurel = Laurel.Champion;
-                u.PlayerId = (uint)i*3;
-                u.Online = true;
-                ViewModels.GroupWindowManager.Instance.AddOrUpdateMember(u);
-            }
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    var u = new User(WindowManager.GroupWindow.Dispatcher);
+            //    u.Name = "Test D" + i;
+            //    u.UserClass = Class.Warrior;
+            //    u.Laurel = Laurel.Champion;
+            //    u.PlayerId = (uint)i;
+            //    u.Online = true;
+            //    u.Ready = ReadyStatus.Ready;
+            //    ViewModels.GroupWindowManager.Instance.AddOrUpdateMember(u);
+            //}
+            //for (int i = 0; i < 1; i++)
+            //{
+            //    var u = new User(WindowManager.GroupWindow.Dispatcher);
+            //    u.Name = "Test H" + i;
+            //    u.UserClass = Class.Elementalist;
+            //    u.Laurel = Laurel.Champion;
+            //    u.PlayerId = (uint)i*2;
+            //    u.Online = true;
+            //    u.Ready = ReadyStatus.NotReady;
+            //    ViewModels.GroupWindowManager.Instance.AddOrUpdateMember(u);
+            //}
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    var u = new User(WindowManager.GroupWindow.Dispatcher);
+            //    u.Name = "Test T" + i;
+            //    u.UserClass = Class.Lancer;
+            //    u.Laurel = Laurel.Champion;
+            //    u.PlayerId = (uint)i*3;
+            //    u.Online = true;
+            //    ViewModels.GroupWindowManager.Instance.AddOrUpdateMember(u);
+            //}
 
         }
     }

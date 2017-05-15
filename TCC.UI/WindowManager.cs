@@ -193,6 +193,13 @@ namespace TCC
 
         private static void TrayIcon_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
         {
+            if (Settings == null)
+            {
+                Settings = new SettingsWindow()
+                {
+                    Name = "Settings"
+                };
+            }
             Settings.Opacity = 0;
             Settings.Show();
             Settings.BeginAnimation(Window.OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
