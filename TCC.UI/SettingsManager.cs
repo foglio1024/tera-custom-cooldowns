@@ -73,7 +73,7 @@ namespace TCC
         public static bool IgnoreGroupBuffs { get; set; }
         public static bool IgnoreAllBuffsInGroupWindow { get; set; }
         public static bool IgnoreRaidAbnormalitiesInGroupWindow { get; set; }
-
+        public static FlowDirection BuffsDirection { get; set; } = FlowDirection.RightToLeft;
         public static void LoadSettings()
         {
             if (File.Exists(Environment.CurrentDirectory + @"/tcc-config.xml"))
@@ -105,12 +105,36 @@ namespace TCC
 
                 var b = settingsDoc.Descendants("OtherSettings").FirstOrDefault();
                 if (b == null) return;
-                IgnoreMeInGroupWindow = Boolean.Parse(b.Attribute("IgnoreMeInGroupWindow").Value);
-                IgnoreMyBuffsInGroupWindow = Boolean.Parse(b.Attribute("IgnoreMyBuffsInGroupWindow").Value);
-                IgnoreGroupBuffs = Boolean.Parse(b.Attribute("IgnoreGroupBuffs").Value);
-                IgnoreAllBuffsInGroupWindow = Boolean.Parse(b.Attribute("IgnoreAllBuffsInGroupWindow").Value);
-                IgnoreRaidAbnormalitiesInGroupWindow = Boolean.Parse(b.Attribute("IgnoreRaidAbnormalitiesInGroupWindow").Value);
-
+                try
+                {
+                    IgnoreMeInGroupWindow = Boolean.Parse(b.Attribute("IgnoreMeInGroupWindow").Value);
+                }
+                catch (Exception) { }
+                try
+                {
+                    IgnoreMyBuffsInGroupWindow = Boolean.Parse(b.Attribute("IgnoreMyBuffsInGroupWindow").Value);
+                }
+                catch (Exception) { }
+                try
+                {
+                    IgnoreGroupBuffs = Boolean.Parse(b.Attribute("IgnoreGroupBuffs").Value);
+                }
+                catch (Exception) { }
+                try
+                {
+                    IgnoreAllBuffsInGroupWindow = Boolean.Parse(b.Attribute("IgnoreAllBuffsInGroupWindow").Value);
+                }
+                catch (Exception) { }
+                try
+                {
+                    IgnoreRaidAbnormalitiesInGroupWindow = Boolean.Parse(b.Attribute("IgnoreRaidAbnormalitiesInGroupWindow").Value);
+                }
+                catch (Exception) { }
+                try
+                {
+                    BuffsDirection = (FlowDirection)Enum.Parse(typeof(FlowDirection), b.Attribute("BuffsDirection").Value);
+                }
+                catch (Exception) { }
             }
         }
 
@@ -197,7 +221,8 @@ namespace TCC
                 new XAttribute("IgnoreMyBuffsInGroupWindow", IgnoreMyBuffsInGroupWindow),
                 new XAttribute("IgnoreGroupBuffs", IgnoreGroupBuffs),
                 new XAttribute("IgnoreAllBuffsInGroupWindow", IgnoreAllBuffsInGroupWindow),
-                new XAttribute("IgnoreRaidAbnormalitiesInGroupWindow", IgnoreRaidAbnormalitiesInGroupWindow)
+                new XAttribute("IgnoreRaidAbnormalitiesInGroupWindow", IgnoreRaidAbnormalitiesInGroupWindow),
+                new XAttribute("BuffsDirection", BuffsDirection)
                 )
             );
             xSettings.Save(Environment.CurrentDirectory + @"/tcc-config.xml");

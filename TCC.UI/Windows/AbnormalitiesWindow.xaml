@@ -57,7 +57,9 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-
+        <Style x:Key="flowPanel" TargetType="StackPanel">
+            <Setter Property="FlowDirection" Value="{Binding Direction}"/>
+        </Style>
     </w:TccWindow.Resources>
     <StackPanel Style="{StaticResource opacityAnimatedContainer}">
         <StackPanel.LayoutTransform>
@@ -66,21 +68,21 @@
         <ItemsControl Name="infBuffs" ItemTemplate="{StaticResource abTemplate}" >
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" HorizontalAlignment="Right" Height="50" Width="1000"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" FlowDirection="{Binding Direction}"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
         <ItemsControl Name="buffs" ItemTemplate="{StaticResource abTemplate}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" HorizontalAlignment="Right" Height="50" Width="1000"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" FlowDirection="{Binding Direction}"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
         <ItemsControl Name="debuffs" ItemTemplate="{StaticResource abTemplate}" Background="#00000000">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" HorizontalAlignment="Right" Height="50" Width="1000"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" FlowDirection="{Binding Direction}"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
