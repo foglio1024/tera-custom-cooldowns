@@ -264,3 +264,11 @@ __pycache__/
 /TCC.UI/resources/images/Icon_Items
 /TCC.UI/resources/images/Icon_Items/Vicious_Red_Blood_Tex.png
 /TCC.UI/resources
+
+TCC\.Core/resources/images/Icon_Crest/
+
+TCC\.Core/resources/images/Icon_Items/
+
+TCC\.Core/resources/images/Icon_Skills/
+
+TCC\.Core/resources/images/Icon_Status/
