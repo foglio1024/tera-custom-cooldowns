@@ -349,6 +349,24 @@ namespace TCC.ViewModels
             }
         }
 
+        public bool IsLeftToRightOn
+        {
+            get { return SettingsManager.BuffsDirection == FlowDirection.LeftToRight ? true : false; }
+            set
+            {
+                FlowDirection s;
+                if (value == true) s = FlowDirection.LeftToRight;
+                else s = FlowDirection.RightToLeft;
+                if (SettingsManager.BuffsDirection == s) return;
+                SettingsManager.BuffsDirection = s;
+                WindowManager.BuffBar.Dispatcher.Invoke(() =>
+                {
+                    ((AbnormalityWindowViewModel)WindowManager.BuffBar.DataContext).Direction = s;
+                });
+                RaisePropertyChanged("IsLeftToRightOn");
+            }
+        }
+
         public SettingsWindowViewModel()
         {
 
