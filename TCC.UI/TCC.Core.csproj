@@ -353,6 +353,9 @@
     <Compile Include="UI elements\RaidMember.xaml.cs">
       <DependentUpon>RaidMember.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI elements\ValueSetting.xaml.cs">
+      <DependentUpon>ValueSetting.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\BossGageWindowViewModel.cs" />
     <Compile Include="Converters\ClassToStaminaLabelConverter.cs" />
     <Compile Include="ViewModels\GroupWindowViewModel.cs" />
@@ -475,6 +478,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI elements\ValueSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\AbnormalitiesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -536,6 +543,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="resources\images\ic_aspect_ratio_white_24dp_2x.png" />
     <Resource Include="resources\images\crown.png" />
     <Resource Include="resources\images\ic_done_white_24dp_2x.png" />
     <Resource Include="resources\images\ic_people_white_24dp_2x.png" />
