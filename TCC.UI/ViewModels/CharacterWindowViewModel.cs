@@ -19,6 +19,17 @@ namespace TCC.ViewModels
         }
 
 
+        private double scale = SettingsManager.CharacterWindowSettings.Scale;
+        public double Scale
+        {
+            get { return scale; }
+            set
+            {
+                if (scale == value) return;
+                scale = value;
+                RaisePropertyChanged("Scale");
+            }
+        }
         public CharacterWindowViewModel()
         {
             WindowManager.TccVisibilityChanged += (s, ev) =>

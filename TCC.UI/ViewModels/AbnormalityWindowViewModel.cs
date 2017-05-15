@@ -14,7 +14,20 @@ namespace TCC.ViewModels
         {
             get => WindowManager.IsTccVisible;
         }
-
+        private double scale = SettingsManager.BuffBarWindowSettings.Scale;
+        public double Scale
+        {
+            get
+            {
+                return scale;
+            }
+            set
+            {
+                if (scale == value) return;
+                scale = value;
+                RaisePropertyChanged("Scale");
+            }
+        }
         public AbnormalityWindowViewModel()
         {
             WindowManager.TccVisibilityChanged += (s, ev) =>

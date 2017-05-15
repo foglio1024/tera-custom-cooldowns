@@ -277,6 +277,78 @@ namespace TCC.ViewModels
                 if (value == true) GroupWindowManager.Instance.ClearAllAbnormalities();
             }
         }
+
+        public double CooldownWindowScale
+        {
+            get { return SettingsManager.CooldownWindowSettings.Scale; }
+            set
+            {
+                if (SettingsManager.CooldownWindowSettings.Scale == value) return;
+                SettingsManager.CooldownWindowSettings.Scale = value;
+                WindowManager.CooldownWindow.Dispatcher.Invoke(() =>
+                {
+                    ((CooldownWindowViewModel)WindowManager.CooldownWindow.DataContext).Scale = value;
+                });
+                RaisePropertyChanged("CooldownWindowScale");
+            }
+        }
+        public double GroupWindowScale
+        {
+            get { return SettingsManager.GroupWindowSettings.Scale; }
+            set
+            {
+                if (SettingsManager.GroupWindowSettings.Scale == value) return;
+                SettingsManager.GroupWindowSettings.Scale = value;
+                WindowManager.GroupWindow.Dispatcher.Invoke(() =>
+                {
+                    ((GroupWindowViewModel)WindowManager.GroupWindow.DataContext).Scale = value;
+                });
+                RaisePropertyChanged("GroupWindowScale");
+            }
+        }
+        public double CharacterWindowScale
+        {
+            get { return SettingsManager.CharacterWindowSettings.Scale; }
+            set
+            {
+                if (SettingsManager.CharacterWindowSettings.Scale == value) return;
+                SettingsManager.CharacterWindowSettings.Scale = value;
+                WindowManager.CharacterWindow.Dispatcher.Invoke(() =>
+                {
+                    ((CharacterWindowViewModel)WindowManager.CharacterWindow.DataContext).Scale = value;
+                });
+                RaisePropertyChanged("CharacterWindowScale");
+            }
+        }
+        public double BuffsWindowScale
+        {
+            get { return SettingsManager.BuffBarWindowSettings.Scale; }
+            set
+            {
+                if (SettingsManager.BuffBarWindowSettings.Scale == value) return;
+                SettingsManager.BuffBarWindowSettings.Scale = value;
+                WindowManager.BuffBar.Dispatcher.Invoke(() =>
+                {
+                    ((AbnormalityWindowViewModel)WindowManager.BuffBar.DataContext).Scale = value;
+                });
+                RaisePropertyChanged("BuffsWindowScale");
+            }
+        }
+        public double BossWindowScale
+        {
+            get { return SettingsManager.BossGaugeWindowSettings.Scale; }
+            set
+            {
+                if (SettingsManager.BossGaugeWindowSettings.Scale == value) return;
+                SettingsManager.BossGaugeWindowSettings.Scale = value;
+                WindowManager.BossGauge.Dispatcher.Invoke(() =>
+                {
+                    ((BossGageWindowViewModel)WindowManager.BossGauge.DataContext).Scale = value;
+                });
+                RaisePropertyChanged("BossWindowScale");
+            }
+        }
+
         public SettingsWindowViewModel()
         {
 

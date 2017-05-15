@@ -56,11 +56,14 @@
 
     </w:TccWindow.Resources>
     
-    <Grid Width="800" Style="{StaticResource opacityAnimatedContainer}">
+    <Grid Width="800" Style="{StaticResource opacityAnimatedContainer}" Name="root">
         <Grid.RowDefinitions>
             <RowDefinition Height="76"/>
             <RowDefinition Height="76"/>
         </Grid.RowDefinitions>
+        <Grid.LayoutTransform>
+            <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
+        </Grid.LayoutTransform>
         <Ellipse Fill="Black" Opacity=".2" Width="26" Height="26" HorizontalAlignment="Left" Margin="16,0" x:Name="baseEll"/>
         <ItemsControl x:Name="NormalSkillsPanel" Grid.Row="0" ItemTemplate="{StaticResource SkillDataTemplate}" Width="800" HorizontalAlignment="Stretch" >
             <ItemsControl.ItemsPanel>

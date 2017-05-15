@@ -14,6 +14,17 @@ namespace TCC.ViewModels
         {
             get => WindowManager.IsTccVisible;
         }
+        private double scale = SettingsManager.CooldownWindowSettings.Scale;
+        public double Scale
+        {
+            get { return scale; }
+            set
+            {
+                if (scale == value) return;
+                scale = value;
+                RaisePropertyChanged("Scale");
+            }
+        }
 
         public CooldownWindowViewModel()
         {
@@ -24,8 +35,8 @@ namespace TCC.ViewModels
                 {
                     WindowManager.CooldownWindow.Dispatcher.Invoke(() =>
                     {
-                       WindowManager.CooldownWindow.Topmost = false;
-                       WindowManager.CooldownWindow.Topmost = true;
+                        WindowManager.CooldownWindow.Topmost = false;
+                        WindowManager.CooldownWindow.Topmost = true;
                     });
                 }
             };

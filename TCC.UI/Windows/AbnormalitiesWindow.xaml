@@ -25,7 +25,6 @@
     <w:TccWindow.Resources>
         <DataTemplate x:Key="abTemplate">
             <controls:AbnormalityIndicator HorizontalAlignment="Right">
-                
                 <controls:AbnormalityIndicator.Resources>
                     <Style TargetType="{x:Type Path}">
                         <Setter Property="FlowDirection" Value="RightToLeft"/>
@@ -61,6 +60,9 @@
 
     </w:TccWindow.Resources>
     <StackPanel Style="{StaticResource opacityAnimatedContainer}">
+        <StackPanel.LayoutTransform>
+            <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
+        </StackPanel.LayoutTransform>
         <ItemsControl Name="infBuffs" ItemTemplate="{StaticResource abTemplate}" >
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>

@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Interop;
+using System.Windows.Media;
 using TCC.ViewModels;
 
 namespace TCC.Converters
@@ -55,7 +56,6 @@ namespace TCC.Windows
             Top = SettingsManager.BossGaugeWindowSettings.Y;
             Visibility = SettingsManager.BossGaugeWindowSettings.Visibility;
             SetClickThru(SettingsManager.BossGaugeWindowSettings.ClickThru);
-
         }
 
 

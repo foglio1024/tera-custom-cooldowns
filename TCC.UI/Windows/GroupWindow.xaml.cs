@@ -75,6 +75,8 @@ namespace TCC.Windows
             Top = SettingsManager.GroupWindowSettings.Y;
             Visibility = SettingsManager.GroupWindowSettings.Visibility;
             SetClickThru(SettingsManager.GroupWindowSettings.ClickThru);
+
+
         }
 
         private void TccWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

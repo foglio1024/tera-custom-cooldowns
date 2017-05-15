@@ -61,14 +61,14 @@
             <Setter Property="ItemTemplate" Value="{StaticResource party}"/>
         </Style>
     </local:TccWindow.Resources>
-    <Grid Style="{StaticResource opacityAnimatedContainer}"  Background="#00000000" Margin="10" Width="Auto">
+    <Grid Style="{StaticResource opacityAnimatedContainer}"  Background="#00000000" Margin="10" Width="Auto" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.LayoutTransform>
-            <ScaleTransform ScaleX="1" ScaleY="1"></ScaleTransform>
+            <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"></ScaleTransform>
         </Grid.LayoutTransform>
         <ItemsControl x:Name="dps"  Width="Auto" Style="{StaticResource itemTemplateSwap}">
             <ItemsControl.ItemsPanel>

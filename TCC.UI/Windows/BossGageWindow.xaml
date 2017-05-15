@@ -56,6 +56,9 @@
         <vm:BossGageWindowViewModel/>
     </w:TccWindow.DataContext>
     <Grid Style="{StaticResource opacityAnimatedContainer}">
+        <Grid.LayoutTransform>
+            <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
+        </Grid.LayoutTransform>
         <ItemsControl Name="Bosses" ItemTemplate="{StaticResource BossGageDataTemplate}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>

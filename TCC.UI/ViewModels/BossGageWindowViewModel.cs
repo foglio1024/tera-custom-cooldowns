@@ -18,6 +18,17 @@ namespace TCC.ViewModels
             get => WindowManager.IsTccVisible;
         }
 
+        private double scale = SettingsManager.BossGaugeWindowSettings.Scale;
+        public double Scale
+        {
+            get { return scale; }
+            set
+            {
+                if (scale == value) return;
+                scale = value;
+                RaisePropertyChanged("Scale");
+            }
+        }
         public BossGageWindowViewModel()
         {
             SessionManager.HhModeChanged += SessionManager_HhModeChanged;

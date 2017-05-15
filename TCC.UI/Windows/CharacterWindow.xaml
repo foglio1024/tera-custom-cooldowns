@@ -69,7 +69,10 @@
     <w:TccWindow.DataContext>
         <vm:CharacterWindowViewModel/>
     </w:TccWindow.DataContext>
-    <Grid Style="{StaticResource opacityAnimatedContainer}">
+    <Grid Style="{StaticResource opacityAnimatedContainer}" >
+        <Grid.LayoutTransform>
+            <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
+        </Grid.LayoutTransform>
         <Grid Margin="20" UseLayoutRounding="True" Name="rootGrid" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
