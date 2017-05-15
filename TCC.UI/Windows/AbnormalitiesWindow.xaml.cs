@@ -30,11 +30,11 @@ namespace TCC.Windows
         {
             InitWindow();
 
-            buffs.DataContext = BuffBarWindowManager.Instance.Player.Buffs;
+            //buffs.DataContext = BuffBarWindowManager.Instance.Player.Buffs;
             buffs.ItemsSource = BuffBarWindowManager.Instance.Player.Buffs;
-            debuffs.DataContext = BuffBarWindowManager.Instance.Player.Debuffs;
+            //debuffs.DataContext = BuffBarWindowManager.Instance.Player.Debuffs;
             debuffs.ItemsSource = BuffBarWindowManager.Instance.Player.Debuffs;
-            infBuffs.DataContext = BuffBarWindowManager.Instance.Player.InfBuffs;
+            //infBuffs.DataContext = BuffBarWindowManager.Instance.Player.InfBuffs;
             infBuffs.ItemsSource = BuffBarWindowManager.Instance.Player.InfBuffs;
 
             Left = SettingsManager.BuffBarWindowSettings.X;

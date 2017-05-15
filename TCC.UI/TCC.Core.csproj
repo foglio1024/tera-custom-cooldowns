@@ -543,6 +543,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="resources\images\ic_swap_horiz_white_24dp_2x.png" />
     <Resource Include="resources\images\ic_aspect_ratio_white_24dp_2x.png" />
     <Resource Include="resources\images\crown.png" />
     <Resource Include="resources\images\ic_done_white_24dp_2x.png" />
