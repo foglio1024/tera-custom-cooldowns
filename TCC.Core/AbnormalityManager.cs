@@ -56,28 +56,28 @@ namespace TCC
         static void BeginPlayerAbnormality(Abnormality ab, int stacks, int duration, ulong target)
         {
             var newAb = new AbnormalityDuration(ab, duration, stacks, target, BuffBarWindowManager.Instance.Dispatcher, true, PLAYER_AB_SIZE * .9, PLAYER_AB_SIZE, new System.Windows.Thickness(PLAYER_AB_LEFT_MARGIN));
-            if (ab.Infinity)
+
+            if(ab.Type == AbnormalityType.Buff)
             {
-                newAb.Duration = -1;
-                SessionManager.CurrentPlayer.AddOrRefreshInfBuff(newAb);
-                BuffBarWindowManager.Instance.Player.AddOrRefreshInfBuff(newAb);
-            }
-            else
-            {
-                if (ab.Type == AbnormalityType.Buff)
+                if (ab.Infinity)
                 {
-                    SessionManager.CurrentPlayer.AddOrRefreshBuff(newAb);
-                    BuffBarWindowManager.Instance.Player.AddOrRefreshBuff(newAb);
+                    newAb.Duration = -1;
+                    SessionManager.CurrentPlayer.AddOrRefreshInfBuff(newAb);
+                    BuffBarWindowManager.Instance.Player.AddOrRefreshInfBuff(newAb);
 
                 }
                 else
                 {
-                    SessionManager.CurrentPlayer.AddOrRefreshDebuff(newAb);
-                    BuffBarWindowManager.Instance.Player.AddOrRefreshDebuff(newAb);
-
+                    SessionManager.CurrentPlayer.AddOrRefreshBuff(newAb);
+                    BuffBarWindowManager.Instance.Player.AddOrRefreshBuff(newAb);
                 }
             }
+            else
+            {
+                SessionManager.CurrentPlayer.AddOrRefreshDebuff(newAb);
+                BuffBarWindowManager.Instance.Player.AddOrRefreshDebuff(newAb);
 
+            }
         }
         static void EndPlayerAbnormality(Abnormality ab)
         {
