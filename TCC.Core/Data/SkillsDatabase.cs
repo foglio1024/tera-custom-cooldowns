@@ -158,6 +158,19 @@ namespace TCC
             return result;
 
         }
+        public static bool TryGetSkillByName(string name, Class c, out Skill sk)
+        {
+            var classSkills = Skills[c];
+            sk = classSkills.FirstOrDefault(x => x.Value.Name.Contains(name) || x.Value.Name.Equals(name)).Value;
+            if (sk != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
 
     }
@@ -344,6 +357,19 @@ namespace TCC
                 name = FindSkillNameByIdClass(id, c);
             }
             return name;
+        }
+        public static bool TryGetSkillByName(string name, Class c, out Skill sk)
+        {
+            var classSkills = Skills[c];
+            sk = classSkills.FirstOrDefault(x => x.Value.Name.Contains(name) || x.Value.Name.Equals(name)).Value;
+            if(sk != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         public static bool TryGetSkill(uint id, Class c, out Skill sk)
         {
