@@ -79,6 +79,7 @@ namespace TCC.Controls
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
             _context = (FixedSkillCooldown)DataContext;
             _context.PropertyChanged += _context_PropertyChanged;
             cdBar.RenderTransform = new ScaleTransform(0, 1, 0, .5);

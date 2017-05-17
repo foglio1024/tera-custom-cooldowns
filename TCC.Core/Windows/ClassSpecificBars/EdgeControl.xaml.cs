@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,6 +57,7 @@ namespace TCC.Controls
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
             _context = (EdgeCounter)DataContext;
             _context.PropertyChanged += _context_PropertyChanged;
         }
