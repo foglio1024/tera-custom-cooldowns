@@ -110,10 +110,12 @@ namespace TCC.Controls
         private void CloseTimer_Tick(object sender, EventArgs e)
         {
             Dispose();
-            if (SettingsManager.ClassWindowOn)
+            if (SettingsManager.ClassWindowOn && ViewModels.ClassWindowViewModel.ClassWindowExists())
             {
-                //switch case?
-                WarriorBarManager.Instance.RemoveSkill(_context.Skill);
+                WindowManager.ClassWindow.Dispatcher.Invoke(() =>
+                {
+                    ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).RemoveSkill(_context.Skill);
+                });
             }
             else
             {
@@ -139,9 +141,6 @@ namespace TCC.Controls
         {
             NumberTimer.Stop();
             CloseTimer.Stop();
-
-            NumberTimer = null;
-            CloseTimer = null;
         }
     }
 }

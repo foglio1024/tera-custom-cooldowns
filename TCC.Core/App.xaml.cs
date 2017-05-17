@@ -77,8 +77,12 @@ namespace TCC
             SessionManager.LoadingScreen = false;
             SessionManager.CurrentPlayer.MaxHP = 100;
             SessionManager.CurrentPlayer.CurrentHP = 100;
-            SessionManager.CurrentPlayer.EntityId = 1;
-
+            SessionManager.CurrentPlayer.Class = Class.Warrior;
+            WindowManager.ClassWindow.Dispatcher.Invoke(() =>
+            {
+                ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).ClearSkills();
+                ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).BarTemplate = Class.Warrior;
+            });
 
             //for (int i = 0; i < 5; i++)
             //{

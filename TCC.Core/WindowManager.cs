@@ -171,16 +171,12 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 ClassWindow = new ClassWindow();
-                WarriorBarManager.Instance.SecondarySkills = new SynchronizedObservableCollection<Data.FixedSkillCooldown>(ClassWindow.Dispatcher);
-                WarriorBarManager.Instance.MainSkills = new SynchronizedObservableCollection<Data.FixedSkillCooldown>(ClassWindow.Dispatcher);
-                WarriorBarManager.Instance.OtherSkills = new SynchronizedObservableCollection<SkillCooldown>(ClassWindow.Dispatcher);
-
                 ClassWindow.Closed += (s, ev) => ClassWindow.Dispatcher.InvokeShutdown();
                 ClassWindow.Show();
                 Dispatcher.Run();
             }))
             {
-                Name = "Warrior bar thread"
+                Name = "Class bar thread"
             };
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
@@ -221,6 +217,7 @@ namespace TCC
             Settings.Show();
             Settings.BeginAnimation(Window.OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
         }
+
 
         internal static void InitClassBar()
         {

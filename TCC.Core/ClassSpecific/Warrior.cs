@@ -24,7 +24,7 @@ namespace TCC
         {
             if (GambleIDs.Contains(sAbnormalityBegin.id) && sAbnormalityBegin.casterId == SessionManager.CurrentPlayer.EntityId)
             {
-                WarriorBarManager.Instance.DeadlyGambleBuff.Start(sAbnormalityBegin.duration);
+                ((WarriorBarManager)ClassManager.CurrentClassManager).DeadlyGambleBuff.Start(sAbnormalityBegin.duration);
             }
         }
 

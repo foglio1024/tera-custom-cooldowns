@@ -162,6 +162,7 @@
     <Compile Include="Parsing\Messages\S_PARTY_MEMBER_CHANGE_MP.cs" />
     <Compile Include="Parsing\Messages\S_PARTY_MEMBER_INFO.cs" />
     <Compile Include="Parsing\Messages\S_PARTY_MEMBER_STAT_UPDATE.cs" />
+    <Compile Include="Parsing\ThreadSafeManager.cs" />
     <Compile Include="SettingsManager.cs" />
     <Compile Include="Sniffing\ConnectionId.cs" />
     <Compile Include="Sniffing\EndpointIpv4.cs" />
@@ -399,10 +400,17 @@
     <Compile Include="Converters\HPbarColorConverter.cs" />
     <Compile Include="Converters\HP_PercentageConverter.cs" />
     <Compile Include="Converters\LaurelImageConverter.cs" />
+    <Compile Include="Windows\ClassSpecificBars\EdgeControl.xaml.cs">
+      <DependentUpon>EdgeControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\ClassSpecificBars\Managers\WarriorBarManager.cs" />
     <Compile Include="Windows\ClassSpecificBars\ViewModels\ClassWindowViewModel.cs" />
     <Compile Include="Windows\ClassSpecificBars\ClassWindow.xaml.cs">
       <DependentUpon>ClassWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\FixedSkillCooldown.cs" />
+    <Compile Include="Windows\ClassSpecificBars\WarriorBar.xaml.cs">
+      <DependentUpon>WarriorBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\GroupWindow.xaml.cs">
       <DependentUpon>GroupWindow.xaml</DependentUpon>
@@ -507,6 +515,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\ClassSpecificBars\ClassWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ClassSpecificBars\EdgeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ClassSpecificBars\WarriorBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

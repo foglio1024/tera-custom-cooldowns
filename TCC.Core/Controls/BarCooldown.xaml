@@ -14,12 +14,12 @@
     <Grid  HorizontalAlignment="Stretch">
         <Rectangle Fill="{Binding Color, RelativeSource={RelativeSource AncestorType=local:BarCooldown}}" Name="cdBar" Height="5"/>
         <Grid x:Name="circle" HorizontalAlignment="Left" Margin="-12.5,0" Opacity="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=local:BarCooldown}, Converter={StaticResource boolToOpacity}}">
-            <Ellipse Width="25" Height="25"  Stroke="#5fff" StrokeThickness="1" Fill="{Binding Color, RelativeSource={RelativeSource AncestorType=local:BarCooldown}}" >
+            <Ellipse Width="22" Height="22"  Stroke="#5fff" StrokeThickness="1" Fill="{Binding Color, RelativeSource={RelativeSource AncestorType=local:BarCooldown}}" >
                 <Ellipse.Effect>
                     <DropShadowEffect ShadowDepth="1" Opacity=".7"/>
                 </Ellipse.Effect>
             </Ellipse>
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#9fff" FontSize="13" Text="{Binding CurrentCD, RelativeSource={RelativeSource AncestorType=local:BarCooldown}, StringFormat={}{0:N0}}"></TextBlock>
+            <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Foreground="#ffff" FontSize="12" FontWeight="SemiBold" Text="{Binding CurrentCD, RelativeSource={RelativeSource AncestorType=local:BarCooldown}, StringFormat={}{0:N0}}"></TextBlock>
         </Grid>
     </Grid>
 </UserControl>

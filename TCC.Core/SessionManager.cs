@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -82,6 +83,7 @@ namespace TCC
             {
                 CurrentPlayer.CurrentHP = hp;
                 CharacterWindowManager.Instance.Player.CurrentHP = hp;
+                ClassManager.SetHP(Convert.ToInt32(hp));
             }
         }
         public static void SetPlayerMP(ulong target, float mp)
@@ -90,6 +92,7 @@ namespace TCC
             {
                 CurrentPlayer.CurrentMP = mp;
                 CharacterWindowManager.Instance.Player.CurrentMP = mp;
+                ClassManager.SetMP(Convert.ToInt32(mp));
             }
         }
         public static void SetPlayerLaurel(Player p)

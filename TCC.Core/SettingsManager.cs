@@ -67,6 +67,14 @@ namespace TCC
             Scale = 1
 
         };
+        public static WindowSettings ClassWindowSettings = new WindowSettings()
+        {
+            X = _screen.Width / 3,
+            Y = _screen.Height - 200,
+            Visibility = Visibility.Visible,
+            ClickThru = false,
+            Scale = 1
+        };
 
         public static bool IgnoreMeInGroupWindow { get; set; }
         public static bool IgnoreMyBuffsInGroupWindow { get; set; }
@@ -102,6 +110,11 @@ namespace TCC
                     {
                         ParseWindowSettings(GroupWindowSettings, ws);
                     }
+                    else if (ws.Attribute("Name").Value == "ClassWindow")
+                    {
+                        ParseWindowSettings(ClassWindowSettings, ws);
+                    }
+                    //add window here
                 }
 
                 var b = settingsDoc.Descendants("OtherSettings").FirstOrDefault();
@@ -136,6 +149,12 @@ namespace TCC
                     BuffsDirection = (FlowDirection)Enum.Parse(typeof(FlowDirection), b.Attribute("BuffsDirection").Value);
                 }
                 catch (Exception) { }
+                try
+                {
+                    ClassWindowOn = Boolean.Parse(b.Attribute("ClassWindowOn").Value);
+                }
+                catch (Exception) { }
+                //add settings here
             }
         }
 
@@ -215,15 +234,27 @@ namespace TCC
                         new XAttribute("ClickThru", GroupWindowSettings.ClickThru),
                         new XAttribute("Visibility", GroupWindowSettings.Visibility),
                         new XAttribute("Scale", GroupWindowSettings.Scale)
+                        ),
+                    new XElement("WindowSetting",
+                        new XAttribute("Name", "ClassWindow"),
+                        new XAttribute("X", ClassWindowSettings.X),
+                        new XAttribute("Y", ClassWindowSettings.Y),
+                        new XAttribute("ClickThru", ClassWindowSettings.ClickThru),
+                        new XAttribute("Visibility", ClassWindowSettings.Visibility),
+                        new XAttribute("Scale", ClassWindowSettings.Scale)
                         )
+                    //add window here
                     ),
+
                 new XElement("OtherSettings",
                 new XAttribute("IgnoreMeInGroupWindow", IgnoreMeInGroupWindow),
                 new XAttribute("IgnoreMyBuffsInGroupWindow", IgnoreMyBuffsInGroupWindow),
                 new XAttribute("IgnoreGroupBuffs", IgnoreGroupBuffs),
                 new XAttribute("IgnoreAllBuffsInGroupWindow", IgnoreAllBuffsInGroupWindow),
                 new XAttribute("IgnoreRaidAbnormalitiesInGroupWindow", IgnoreRaidAbnormalitiesInGroupWindow),
-                new XAttribute("BuffsDirection", BuffsDirection)
+                new XAttribute("BuffsDirection", BuffsDirection),
+                new XAttribute("ClassWindowOn", ClassWindowOn)
+                //add setting here
                 )
             );
             xSettings.Save(Environment.CurrentDirectory + @"/tcc-config.xml");

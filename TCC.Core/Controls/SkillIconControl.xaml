@@ -11,7 +11,9 @@
     <UserControl.Resources>
         <converters:IconConverter x:Key="iconConv"/>
     </UserControl.Resources>
-
+    <UserControl.LayoutTransform>
+        <ScaleTransform ScaleX=".9" ScaleY=".9"/>
+    </UserControl.LayoutTransform>
     <Grid Width="55" Height="55" Margin="2" HorizontalAlignment="Left" Name="MainGrid">
         <!--<Grid.CacheMode>
             <BitmapCache RenderAtScale="2"/>

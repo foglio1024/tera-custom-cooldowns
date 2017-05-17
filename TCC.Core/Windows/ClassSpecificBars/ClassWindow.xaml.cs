@@ -31,15 +31,30 @@ namespace TCC.Windows
             DragMove();
         }
 
+        ClassWindowViewModel _context;
+
         private void TccWindow_Loaded(object sender, RoutedEventArgs e)
         {
             InitWindow();
+            _context = (ClassWindowViewModel)DataContext;
+            _context.PropertyChanged += _context_PropertyChanged;
 
-            mainSkills.ItemsSource = WarriorBarManager.Instance.MainSkills;
-            secSkills.ItemsSource = WarriorBarManager.Instance.SecondarySkills;
-            otherSkills.ItemsSource = WarriorBarManager.Instance.OtherSkills;
-            gambleCD.DataContext = WarriorBarManager.Instance.DeadlyGamble;
-            gambleBuff.DataContext = WarriorBarManager.Instance.DeadlyGambleBuff;
+        }
+
+        private void _context_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == "BarTemplate")
+            {
+                switch (_context.BarTemplate)
+                {
+                    case Class.Warrior:
+                        root.ContentTemplate = FindResource("warrior") as DataTemplate;
+                        break;
+                    default:
+                        root.ContentTemplate = FindResource("emptyTemplate") as DataTemplate;
+                        break;
+                }
+            }
         }
     }
 }

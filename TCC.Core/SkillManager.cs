@@ -35,9 +35,9 @@ namespace TCC
         {
             if (skillCooldown.Cooldown == 0)
             {
-                if (SettingsManager.ClassWindowOn)
+                if (SettingsManager.ClassWindowOn && ClassWindowViewModel.ClassWindowExists())
                 {
-                    WarriorBarManager.Instance.ResetCooldown(skillCooldown);
+                    ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).ResetCooldown(skillCooldown);
                 }
                 else
                 {
@@ -46,9 +46,12 @@ namespace TCC
             }
             else
             {
-                if (SettingsManager.ClassWindowOn)
+                if (SettingsManager.ClassWindowOn && ClassWindowViewModel.ClassWindowExists())
                 {
-                    WarriorBarManager.Instance.StartCooldown(skillCooldown);
+                    WindowManager.ClassWindow.Dispatcher.Invoke(() =>
+                    {
+                        ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).StartCooldown(skillCooldown);
+                    });
                 }
                 else
                 {
@@ -56,6 +59,8 @@ namespace TCC
                 }
             }
         }
+
+
         public static void AddSkill(uint id, uint cd)
         {
             if (SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out Skill skill))

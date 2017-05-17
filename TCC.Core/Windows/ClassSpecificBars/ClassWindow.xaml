@@ -10,70 +10,46 @@
              xmlns:tcc="clr-namespace:TCC"
              xmlns:controls="clr-namespace:TCC.Controls"
              AllowsTransparency="True" Loaded="TccWindow_Loaded"
-             WindowStyle="None" Topmost="True" SizeToContent="Width"
+             WindowStyle="None" Topmost="True" SizeToContent="WidthAndHeight"
              Background="#00000000" MouseLeftButtonDown="TccWindow_MouseLeftButtonDown"
-             mc:Ignorable="d" Opacity=".9"
-             Title="WarriorBar" Height="200" Width="Auto" UseLayoutRounding="True" x:Name="win">
+             mc:Ignorable="d" Opacity=".9" ShowInTaskbar="False"
+             Title="WarriorBar" Height="Auto" Width="Auto" UseLayoutRounding="True" x:Name="win">
     <w:TccWindow.DataContext>
         <wm:ClassWindowViewModel />
     </w:TccWindow.DataContext>
     <w:TccWindow.Resources>
-        <DataTemplate x:Key="skill">
-            <controls:FixedSkillControl>
-            </controls:FixedSkillControl>
+        <DataTemplate x:Key="warrior">
+            <controls:WarriorBar />
         </DataTemplate>
-        <DataTemplate x:Key="skill2">
-            <controls:SkillIconControl />
+        <DataTemplate x:Key="emptyTemplate">
         </DataTemplate>
-
-        <Style x:Key="skillsPanel" TargetType="UniformGrid">
-            <Setter Property="Columns" Value="{Binding SkillCount}"/>
+        <Style x:Key="opacityAnimatedContainer" TargetType="FrameworkElement">
+            <Setter Property="Opacity" Value="0"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsTeraOnTop}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation From="0" To="1"
+                                     Duration="0:0:0.2"
+                                     Storyboard.TargetProperty="Opacity"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation From="1" To="0"
+                                                 Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="Opacity"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
+
     </w:TccWindow.Resources>
-    <Grid Width="Auto" Margin="20" Name="root">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Border Style="{StaticResource border}" Grid.RowSpan="2" CornerRadius="0,0,25,25" Grid.ColumnSpan="2" x:Name="mainBorder" Opacity="1" />
-        <Border BorderBrush="#555" Background="#303037" BorderThickness="0,0,0,0" Grid.Column="0" Grid.Row="0" Grid.RowSpan="1" 
-                Grid.ColumnSpan="2" Margin="0" Opacity="1"/>
+    <ContentControl x:Name="root" Style="{StaticResource opacityAnimatedContainer}" Content="{Binding CurrentBar}" Margin="10"/>
 
-        <Grid Grid.Row="1" Grid.Column="1" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" UseLayoutRounding="True">
-            <ItemsControl Name="mainSkills" ItemTemplate="{StaticResource skill}" Width="Auto" Height="Auto">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Style="{StaticResource skillsPanel}" Rows="1" Margin="0,0,0,0" IsItemsHost="True" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-        </Grid>
-        <Grid Grid.Row="2" Grid.Column="1" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" UseLayoutRounding="True" Opacity=".9">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <ItemsControl Name="secSkills" ItemTemplate="{StaticResource skill}" Width="Auto" Height="Auto">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Style="{StaticResource skillsPanel}" Rows="1" Margin="0,0,0,0" IsItemsHost="True" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-            <ItemsControl Name="otherSkills" ItemTemplate="{StaticResource skill2}" Width="Auto"  Height="Auto" Grid.Column="1" HorizontalAlignment="Left">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Margin="0,0,0,0" IsItemsHost="True" Width="Auto" Height="Auto" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-
-        </Grid>
-
-        <controls:BarCooldown Color="DimGray" Height="25" Margin="0,-10.5"  Grid.ColumnSpan="2" x:Name="gambleCD" HorizontalAlignment="Left" Width="{Binding ElementName=mainBorder, Path=ActualWidth}"/>
-        <controls:BarCooldown Color="Orange" Height="25" Margin="0,-10.5"  Grid.ColumnSpan="2" x:Name="gambleBuff" HorizontalAlignment="Left" Width="{Binding ElementName=mainBorder, Path=ActualWidth}"/>
-
-    </Grid>
 </w:TccWindow>

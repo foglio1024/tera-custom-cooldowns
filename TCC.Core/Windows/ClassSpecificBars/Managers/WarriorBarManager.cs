@@ -3,75 +3,91 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Threading;
 using System.Xml.Linq;
 using TCC.Data;
 
 namespace TCC.ViewModels
 {
-    public class WarriorBarManager : DependencyObject
+    public class EdgeCounter : TSPropertyChanged
+    {
+        private int edge = 0;
+        public int Edge
+        {
+            get => edge;
+            set
+            {
+                if (edge == value) return;
+                edge = value;
+                RefreshTimer();
+                NotifyPropertyChanged("Edge");
+            }
+        }
+
+        DispatcherTimer _expire;
+        void RefreshTimer()
+        {
+            _expire.Stop();
+            if (edge == 0) return;
+            _expire.Start();
+        }
+        public EdgeCounter()
+        {
+            _dispatcher = Dispatcher.CurrentDispatcher;
+            _expire = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(8000) };
+            _expire.Tick += (s ,ev) => Edge = 0;
+        }
+    }
+    public class IntTracker : TSPropertyChanged
+    {
+        private int val = 0;
+        public int Val
+        {
+            get { return val; }
+            set {
+                if (val == value) return;
+                val = value;
+                NotifyPropertyChanged("Val");
+            }            
+        }
+        public IntTracker()
+        {
+            _dispatcher = Dispatcher.CurrentDispatcher;
+        }
+    }
+    public class WarriorBarManager : ClassManager
     {
         private static WarriorBarManager _instance;
         public static WarriorBarManager Instance => _instance ?? (_instance = new WarriorBarManager());
 
+
+
         public FixedSkillCooldown DeadlyGamble { get; set; }
         public FixedSkillCooldown DeadlyGambleBuff { get; set; }
 
-        private SynchronizedObservableCollection<FixedSkillCooldown> mainSkills;
-        public SynchronizedObservableCollection<FixedSkillCooldown> MainSkills
-        {
-            get
-            {
-                return mainSkills; ;
-            }
-            set
-            {
-                if (mainSkills == value) return;
-                mainSkills = value;
-            }
-        }
-
-        private SynchronizedObservableCollection<FixedSkillCooldown> secondarySkills;
-        public SynchronizedObservableCollection<FixedSkillCooldown> SecondarySkills
-        {
-            get
-            {
-                return secondarySkills; ;
-            }
-            set
-            {
-                if (secondarySkills == value) return;
-                secondarySkills = value;
-            }
-        }
-
-        private SynchronizedObservableCollection<SkillCooldown> otherSkills;
-        public SynchronizedObservableCollection<SkillCooldown> OtherSkills
-        {
-            get
-            {
-                return otherSkills;
-            }
-            set
-            {
-                if (otherSkills == value) return;
-                otherSkills = value;
-            }
-        }
+        public EdgeCounter EdgeCounter { get; set; }
+        public IntTracker RE { get; set; }
+        public int SkillCount { get; set; }
 
         public WarriorBarManager()
         {
+            _instance = this;
+            CurrentClassManager = this;
+            EdgeCounter = new EdgeCounter();
+            RE = new IntTracker();
             LoadSkills();
+            SkillCount = Math.Max(SecondarySkills.Count, MainSkills.Count);
         }
 
         void LoadSkills()
         {
             //User defined skills
-
-            XDocument warriorSkillsDoc = XDocument.Load("config/warrior-skills.xml");
-            foreach (XElement skillElement in warriorSkillsDoc.Descendants("Skill"))
+            XDocument skillsDoc = XDocument.Load("resources/config/warrior-skills.xml");
+            foreach (XElement skillElement in skillsDoc.Descendants("Skill"))
             {
                 uint skillId = Convert.ToUInt32(skillElement.Attribute("id").Value);
                 int row = Convert.ToInt32(skillElement.Attribute("row").Value);
@@ -98,13 +114,13 @@ namespace TCC.ViewModels
         internal void ResetCooldown(SkillCooldown s)
         {
             s.SetDispatcher(this.Dispatcher);
-            var skill = mainSkills.FirstOrDefault(x => x.Skill.IconName == s.Skill.IconName);
+            var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == s.Skill.IconName);
             if (skill != null)
             {
                 skill.Refresh(0);
                 return;
             }
-            skill = secondarySkills.FirstOrDefault(x => x.Skill.IconName == s.Skill.IconName);
+            skill = SecondarySkills.FirstOrDefault(x => x.Skill.IconName == s.Skill.IconName);
             if (skill != null)
             {
                 skill.Refresh(0);
@@ -112,27 +128,26 @@ namespace TCC.ViewModels
             }
             try
             {
-                var otherSkill = otherSkills.FirstOrDefault(x => x.Skill.Name == s.Skill.Name);
+                var otherSkill = OtherSkills.FirstOrDefault(x => x.Skill.Name == s.Skill.Name);
                 if (otherSkill != null)
                 {
 
-                    otherSkills.Remove(otherSkill);
+                    OtherSkills.Remove(otherSkill);
                     otherSkill.Dispose();
                 }
             }
             catch { }
         }
-
         internal void RemoveSkill(Skill skill)
         {
             try
             {
 
-                var otherSkill = otherSkills.FirstOrDefault(x => x.Skill.Name == skill.Name);
+                var otherSkill = OtherSkills.FirstOrDefault(x => x.Skill.Name == skill.Name);
                 if (otherSkill != null)
                 {
 
-                    otherSkills.Remove(otherSkill);
+                    OtherSkills.Remove(otherSkill);
                     otherSkill.Dispose();
                 }
             }
@@ -143,16 +158,21 @@ namespace TCC.ViewModels
 
         }
 
+        internal void SetRE(int currRe)
+        {
+            throw new NotImplementedException();
+        }
+
         internal void StartCooldown(SkillCooldown sk)
         {
-            var skill = mainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
+            var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
             if (skill != null)
             {
                 skill.Start(sk.Cooldown);
 
                 return;
             }
-            skill = secondarySkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
+            skill = SecondarySkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
             if (skill != null)
             {
                 skill.Start(sk.Cooldown);
@@ -175,10 +195,10 @@ namespace TCC.ViewModels
 
             try
             {
-                var existing = otherSkills.FirstOrDefault(x => x.Skill.Name == sk.Skill.Name);
+                var existing = OtherSkills.FirstOrDefault(x => x.Skill.Name == sk.Skill.Name);
                 if (existing == null)
                 {
-                    otherSkills.Add(sk);
+                    OtherSkills.Add(sk);
                     return;
                 }
                 existing.Refresh(sk.Cooldown);
