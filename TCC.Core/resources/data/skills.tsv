@@ -568,15 +568,15 @@
 130800	Berserker	Retaliate VIII		icon_skills.risingattack_tex
 130900	Berserker	Retaliate IX		icon_skills.risingattack_tex
 131000	Berserker	Retaliate X		icon_skills.risingattack_tex
-150100	Berserker	Vampiric Blow I		icon_skills.vampiricstrike_tex
-150200	Berserker	Vampiric Blow II		icon_skills.vampiricstrike_tex
-150300	Berserker	Vampiric Blow III		icon_skills.vampiricstrike_tex
-150400	Berserker	Vampiric Blow IV		icon_skills.vampiricstrike_tex
-150500	Berserker	Vampiric Blow V		icon_skills.vampiricstrike_tex
-150600	Berserker	Vampiric Blow VI		icon_skills.vampiricstrike_tex
-150700	Berserker	Vampiric Blow VII		icon_skills.vampiricstrike_tex
-150800	Berserker	Vampiric Blow VIII		icon_skills.vampiricstrike_tex
-150900	Berserker	Vampiric Blow IX		icon_skills.vampiricstrike_tex
+150100	Berserker	Vampiric Blow I		icon_skills.vampiricstrike_tex	150114
+150200	Berserker	Vampiric Blow II		icon_skills.vampiricstrike_tex	150214
+150300	Berserker	Vampiric Blow III		icon_skills.vampiricstrike_tex	150314
+150400	Berserker	Vampiric Blow IV		icon_skills.vampiricstrike_tex	150414
+150500	Berserker	Vampiric Blow V		icon_skills.vampiricstrike_tex	150514
+150600	Berserker	Vampiric Blow VI		icon_skills.vampiricstrike_tex	150614
+150700	Berserker	Vampiric Blow VII		icon_skills.vampiricstrike_tex	150714
+150800	Berserker	Vampiric Blow VIII		icon_skills.vampiricstrike_tex	150814
+150900	Berserker	Vampiric Blow IX		icon_skills.vampiricstrike_tex	150914
 160100	Berserker	Fearsome Shout I		icon_skills.piercingshout_tex
 160200	Berserker	Fearsome Shout II		icon_skills.piercingshout_tex
 160300	Berserker	Fearsome Shout III		icon_skills.piercingshout_tex
