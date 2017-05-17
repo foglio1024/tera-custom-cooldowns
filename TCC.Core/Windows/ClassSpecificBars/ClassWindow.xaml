@@ -50,6 +50,10 @@
         </Style>
 
     </w:TccWindow.Resources>
-    <ContentControl x:Name="root" Style="{StaticResource opacityAnimatedContainer}" Content="{Binding CurrentBar}" Margin="10"/>
+    <ContentControl x:Name="root" Style="{StaticResource opacityAnimatedContainer}" Content="{Binding CurrentBar}" Margin="10">
+        <ContentControl.LayoutTransform>
+            <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
+        </ContentControl.LayoutTransform>
+    </ContentControl>
 
 </w:TccWindow>
