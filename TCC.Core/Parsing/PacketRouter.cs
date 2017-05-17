@@ -108,11 +108,12 @@ namespace TCC.Parsing
 
             ClassManager.SetHP(p.currHp);
             ClassManager.SetMP(p.currMp);
+            ClassManager.SetST(p.currRe);
+            
 
             if (SessionManager.CurrentPlayer.Class == Class.Warrior)
             {
                 ((WarriorBarManager)ClassManager.CurrentClassManager).EdgeCounter.Edge = p.edge;
-                ((WarriorBarManager)ClassManager.CurrentClassManager).SetRE(p.currRe);
 
             }
 
@@ -142,6 +143,8 @@ namespace TCC.Parsing
         {
             SessionManager.CurrentPlayer.CurrentST = p.currentStamina;
             CharacterWindowManager.Instance.Player.CurrentST = p.currentStamina;
+            ClassManager.SetST(p.currentStamina);
+
         }
         public static void HandlePlayerChangeFlightEnergy(S_PLAYER_CHANGE_FLIGHT_ENERGY p)
         {
