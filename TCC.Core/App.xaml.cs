@@ -13,6 +13,7 @@ using System.Windows.Threading;
 using TCC.Data;
 using TCC.Parsing;
 using TCC.Properties;
+using TCC.ViewModels;
 using TCC.Windows;
 
 namespace TCC
@@ -42,7 +43,9 @@ namespace TCC
             UpdateManager.CheckAppVersion();
             UpdateManager.CheckDatabaseVersion();
 
-
+            SkillsDatabase.Load();
+            BroochesDatabase.SetBroochesIcons();
+            AbnormalityDatabase.Load();
 
             TeraSniffer.Instance.Enabled = true;
             SettingsManager.LoadSettings();
@@ -54,22 +57,10 @@ namespace TCC
             TeraSniffer.Instance.NewConnection += (srv) => SkillManager.Clear();
             TeraSniffer.Instance.EndConnection += () => SkillManager.Clear();
 
-            var LoadThread = new Thread(new ThreadStart(() =>
-            {
-                SkillsDatabase.Load();
-                Console.WriteLine("Skills loaded.");
-                BroochesDatabase.SetBroochesIcons();
-                Console.WriteLine("Set brooches icons");
-                //MonsterDatabase.Populate();
-                //Console.WriteLine("Monsters loaded");
-                AbnormalityDatabase.Load();
-                Console.WriteLine("Abnormalities loaded");
-                //Debug();
-            }));
+            //Debug();
+
 
             SessionManager.CurrentPlayer.Class = Class.None;
-            LoadThread.Start();
-
         }
 
         public static void CloseApp()
@@ -87,6 +78,7 @@ namespace TCC
             SessionManager.CurrentPlayer.MaxHP = 100;
             SessionManager.CurrentPlayer.CurrentHP = 100;
             SessionManager.CurrentPlayer.EntityId = 1;
+
 
             //for (int i = 0; i < 5; i++)
             //{

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TCC.Parsing.Messages;
+using TCC.ViewModels;
 
 namespace TCC
 {
@@ -23,7 +24,7 @@ namespace TCC
         {
             if (GambleIDs.Contains(sAbnormalityBegin.id) && sAbnormalityBegin.casterId == SessionManager.CurrentPlayer.EntityId)
             {
-                GambleBuff?.Invoke(sAbnormalityBegin.duration);
+                WarriorBarManager.Instance.DeadlyGambleBuff.Start(sAbnormalityBegin.duration);
             }
         }
 

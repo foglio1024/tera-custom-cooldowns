@@ -28,9 +28,9 @@ namespace TCC
         public static BossGageWindow BossGauge;
         public static AbnormalitiesWindow BuffBar;
         public static GroupWindow GroupWindow;
+        public static TccWindow ClassWindow;
 
         public static SettingsWindow Settings;
-
 
         public static ContextMenu ContextMenu;
 
@@ -167,6 +167,23 @@ namespace TCC
             groupWindowThread.SetApartmentState(ApartmentState.STA);
             groupWindowThread.Start();
 
+            var t = new Thread(new ThreadStart(() =>
+            {
+                SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                ClassWindow = new WarriorBar();
+                WarriorBarManager.Instance.SecondarySkills = new SynchronizedObservableCollection<Data.FixedSkillCooldown>(ClassWindow.Dispatcher);
+                WarriorBarManager.Instance.MainSkills = new SynchronizedObservableCollection<Data.FixedSkillCooldown>(ClassWindow.Dispatcher);
+                WarriorBarManager.Instance.OtherSkills = new SynchronizedObservableCollection<SkillCooldown>(ClassWindow.Dispatcher);
+                WarriorBarManager.Instance.LoadSkills();
+                ClassWindow.Closed += (s, ev) => ClassWindow.Dispatcher.InvokeShutdown();
+                ClassWindow.Show();
+                Dispatcher.Run();
+            }))
+            {
+                Name = "Warrior bar thread"
+            };
+            t.SetApartmentState(ApartmentState.STA);
+            t.Start();
             Thread.Sleep(500);
             ContextMenu = new ContextMenu();
 
@@ -203,6 +220,45 @@ namespace TCC
             Settings.Opacity = 0;
             Settings.Show();
             Settings.BeginAnimation(Window.OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
+        }
+
+        internal static void InitClassBar()
+        {
+            switch (SessionManager.CurrentPlayer.Class)
+            {
+                case Class.Warrior:
+                    break;
+                case Class.Lancer:
+                    break;
+                case Class.Slayer:
+                    break;
+                case Class.Berserker:
+                    break;
+                case Class.Sorcerer:
+                    break;
+                case Class.Archer:
+                    break;
+                case Class.Priest:
+                    break;
+                case Class.Elementalist:
+                    break;
+                case Class.Soulless:
+                    break;
+                case Class.Engineer:
+                    break;
+                case Class.Fighter:
+                    break;
+                case Class.Assassin:
+                    break;
+                case Class.Glaiver:
+                    break;
+                case Class.Common:
+                    break;
+                case Class.None:
+                    break;
+                default:
+                    break;
+            }
         }
 
         public static void ChangeClickThru(bool v)

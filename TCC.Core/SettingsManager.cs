@@ -74,6 +74,7 @@ namespace TCC
         public static bool IgnoreAllBuffsInGroupWindow { get; set; }
         public static bool IgnoreRaidAbnormalitiesInGroupWindow { get; set; }
         public static FlowDirection BuffsDirection { get; set; } = FlowDirection.RightToLeft;
+        public static bool ClassWindowOn { get; set; } = true;
         public static void LoadSettings()
         {
             if (File.Exists(Environment.CurrentDirectory + @"/tcc-config.xml"))

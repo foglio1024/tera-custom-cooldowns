@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCC.Windows"
-        xmlns:ui_elements="clr-namespace:TCC.UI_elements"
+        xmlns:ui_elements="clr-namespace:TCC.Controls"
         xmlns:vm="clr-namespace:TCC.ViewModels" Topmost="True"
         mc:Ignorable="d" WindowStyle="None" AllowsTransparency="True" 
         Title="TCC settings" Height="Auto" Width="Auto" ResizeMode="NoResize" SizeToContent="WidthAndHeight" Background="Transparent" UseLayoutRounding="True" >

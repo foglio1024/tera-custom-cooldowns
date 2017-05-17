@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:w="clr-namespace:TCC.Windows"
-        xmlns:controls="clr-namespace:TCC.UI_elements"
+        xmlns:controls="clr-namespace:TCC.Controls"
         xmlns:vm="clr-namespace:TCC.ViewModels"
         mc:Ignorable="d"
         Title="AbnormalitiesWindow" Height="Auto" Width="Auto"

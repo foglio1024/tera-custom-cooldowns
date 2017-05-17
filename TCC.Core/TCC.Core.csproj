@@ -113,6 +113,12 @@
     </ApplicationDefinition>
     <Compile Include="AbnormalityManager.cs" />
     <Compile Include="ClassSpecific\Priest.cs" />
+    <Compile Include="Controls\BarCooldown.xaml.cs">
+      <DependentUpon>BarCooldown.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FixedSkillControl.xaml.cs">
+      <DependentUpon>FixedSkillControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\RollToStringConverter.cs" />
     <Compile Include="Converters\WinningToColorConverter.cs" />
     <Compile Include="Data\Boss.cs" />
@@ -310,17 +316,17 @@
     <Compile Include="TeraCommon\Sniffing\ITeraSniffer.cs" />
     <Compile Include="TeraCommon\Sniffing\MessageSplitter.cs" />
     <Compile Include="Data\AbnormalityDuration.cs" />
-    <Compile Include="UI elements\AbnormalityIndicator.xaml.cs">
+    <Compile Include="Controls\AbnormalityIndicator.xaml.cs">
       <DependentUpon>AbnormalityIndicator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI elements\AbnormalityTooltip.xaml.cs">
+    <Compile Include="Controls\AbnormalityTooltip.xaml.cs">
       <DependentUpon>AbnormalityTooltip.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI elements\Arc2.cs" />
-    <Compile Include="UI elements\BoolSetting.xaml.cs">
+    <Compile Include="Controls\Arc2.cs" />
+    <Compile Include="Controls\BoolSetting.xaml.cs">
       <DependentUpon>BoolSetting.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI elements\BossGage.xaml.cs">
+    <Compile Include="Controls\BossGage.xaml.cs">
       <DependentUpon>BossGage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ClassSpecific\Mystic.cs" />
@@ -329,31 +335,31 @@
     <Compile Include="Parsing\Messages\S_BOSS_GAGE_INFO.cs" />
     <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_FLIGHT_ENERGY.cs" />
     <Compile Include="Parsing\Messages\S_NPC_STATUS.cs" />
-    <Compile Include="UI elements\CircularGauge.xaml.cs">
+    <Compile Include="Controls\CircularGauge.xaml.cs">
       <DependentUpon>CircularGauge.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI elements\DragonSmallGauge.xaml.cs">
+    <Compile Include="Controls\DragonSmallGauge.xaml.cs">
       <DependentUpon>DragonSmallGauge.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI elements\GenericGauge.xaml.cs">
+    <Compile Include="Controls\GenericGauge.xaml.cs">
       <DependentUpon>GenericGauge.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI elements\HPGauge.xaml.cs">
+    <Compile Include="Controls\HPGauge.xaml.cs">
       <DependentUpon>HPGauge.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI elements\HarrowholdBossesControl.xaml.cs">
+    <Compile Include="Controls\HarrowholdBossesControl.xaml.cs">
       <DependentUpon>HarrowholdBossesControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI elements\MaterialSwitch.xaml.cs">
+    <Compile Include="Controls\MaterialSwitch.xaml.cs">
       <DependentUpon>MaterialSwitch.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI elements\PartyMember.xaml.cs">
+    <Compile Include="Controls\PartyMember.xaml.cs">
       <DependentUpon>PartyMember.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI elements\RaidMember.xaml.cs">
+    <Compile Include="Controls\RaidMember.xaml.cs">
       <DependentUpon>RaidMember.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI elements\ValueSetting.xaml.cs">
+    <Compile Include="Controls\ValueSetting.xaml.cs">
       <DependentUpon>ValueSetting.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\BossGageWindowViewModel.cs" />
@@ -365,9 +371,6 @@
     <Compile Include="ViewModels\MultiThreadManagers\CooldownBarWindowManager.cs" />
     <Compile Include="ViewModels\MultiThreadManagers\GroupWindowManager.cs" />
     <Compile Include="ViewModels\SettingsWindowViewModel.cs" />
-    <Compile Include="UI elements\StaminaGaugeControl.xaml.cs">
-      <DependentUpon>StaminaGaugeControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UpdateManager.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="ViewModels\AbnormalityWindowViewModel.cs" />
@@ -396,6 +399,11 @@
     <Compile Include="Converters\HPbarColorConverter.cs" />
     <Compile Include="Converters\HP_PercentageConverter.cs" />
     <Compile Include="Converters\LaurelImageConverter.cs" />
+    <Compile Include="Windows\ClassSpecificBars\Managers\WarriorBarManager.cs" />
+    <Compile Include="Windows\ClassSpecificBars\ViewModels\WarriorBarViewModel.cs" />
+    <Compile Include="Windows\ClassSpecificBars\WarriorBar.xaml.cs">
+      <DependentUpon>WarriorBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\GroupWindow.xaml.cs">
       <DependentUpon>GroupWindow.xaml</DependentUpon>
     </Compile>
@@ -403,7 +411,7 @@
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\SkillCooldown.cs" />
-    <Compile Include="UI elements\Arc.cs" />
+    <Compile Include="Controls\Arc.cs" />
     <Compile Include="Data\Character.cs" />
     <Compile Include="Parsing\CharLoginProcessor.cs" />
     <Compile Include="Data\Enums.cs" />
@@ -417,7 +425,7 @@
     <Compile Include="Parsing\Messages\S_PLAYER_STAT_UPDATE.cs" />
     <Compile Include="Parsing\Messages\S_START_COOLTIME_ITEM.cs" />
     <Compile Include="Data\Skill.cs" />
-    <Compile Include="UI elements\SkillIconControl.xaml.cs">
+    <Compile Include="Controls\SkillIconControl.xaml.cs">
       <DependentUpon>SkillIconControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="SkillManager.cs" />
@@ -426,59 +434,63 @@
     <Compile Include="Parsing\Messages\S_USER_STATUS.cs" />
     <Compile Include="WindowManager.cs" />
     <Compile Include="Windows\TccWindow.cs" />
-    <Page Include="UI elements\AbnormalityIndicator.xaml">
+    <Page Include="Controls\AbnormalityIndicator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI elements\AbnormalityTooltip.xaml">
+    <Page Include="Controls\AbnormalityTooltip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI elements\BoolSetting.xaml">
+    <Page Include="Controls\BarCooldown.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI elements\BossGage.xaml">
+    <Page Include="Controls\BoolSetting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI elements\CircularGauge.xaml">
+    <Page Include="Controls\BossGage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI elements\DragonSmallGauge.xaml">
+    <Page Include="Controls\CircularGauge.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI elements\GenericGauge.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UI elements\HPGauge.xaml">
+    <Page Include="Controls\DragonSmallGauge.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI elements\HarrowholdBossesControl.xaml">
+    <Page Include="Controls\FixedSkillControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI elements\MaterialSwitch.xaml">
+    <Page Include="Controls\GenericGauge.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\HPGauge.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI elements\PartyMember.xaml">
+    <Page Include="Controls\HarrowholdBossesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI elements\RaidMember.xaml">
+    <Page Include="Controls\MaterialSwitch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI elements\StaminaGaugeControl.xaml">
+    <Page Include="Controls\PartyMember.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI elements\ValueSetting.xaml">
+    <Page Include="Controls\RaidMember.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ValueSetting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -491,6 +503,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\CharacterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ClassSpecificBars\WarriorBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -515,7 +531,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI elements\SkillIconControl.xaml">
+    <Page Include="Controls\SkillIconControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

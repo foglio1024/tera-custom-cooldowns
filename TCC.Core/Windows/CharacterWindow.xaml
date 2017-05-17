@@ -6,7 +6,7 @@
         xmlns:w="clr-namespace:TCC.Windows"
         xmlns:converters="clr-namespace:TCC.Converters"
         xmlns:vm="clr-namespace:TCC.ViewModels"
-        xmlns:controls="clr-namespace:TCC.UI_elements"
+        xmlns:controls="clr-namespace:TCC.Controls"
         mc:Ignorable="d"
         Title="HPbar" 
         Height="Auto" Width="Auto"

@@ -209,12 +209,7 @@ namespace TCC.Parsing
             CharacterWindowManager.Instance.Player.Level = p.Level;
             SessionManager.SetPlayerLaurel(CharacterWindowManager.Instance.Player);
 
-            App.Current.Dispatcher.Invoke(() =>
-            {
-                WindowManager.ChangeClickThru(WindowManager.ClickThru);
-            });
-
-
+            WindowManager.InitClassBar();
         }
         public static void HandleReturnToLobby(S_RETURN_TO_LOBBY p)
         {
@@ -318,6 +313,9 @@ namespace TCC.Parsing
             {
                 case Class.Elementalist:
                     Mystic.CheckHurricane(p);
+                    break;
+                case Class.Warrior:
+                    Warrior.CheckGambleBuff(p);
                     break;
                 default:
                     break;

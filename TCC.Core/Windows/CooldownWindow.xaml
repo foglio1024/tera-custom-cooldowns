@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:TCC"
         xmlns:vm="clr-namespace:TCC.ViewModels"
         xmlns:w="clr-namespace:TCC.Windows"
+             xmlns:controls="clr-namespace:TCC.Controls"
         mc:Ignorable="d"
         Title="Tera Custom Cooldowns"
         Height="Auto" 
@@ -26,7 +27,7 @@
     </w:TccWindow.DataContext>
     <w:TccWindow.Resources>
         <DataTemplate x:Key="SkillDataTemplate">
-            <local:SkillIconControl />
+            <controls:SkillIconControl />
         </DataTemplate>
         <Style x:Key="opacityAnimatedContainer" TargetType="FrameworkElement">
             <Setter Property="Opacity" Value="0"/>

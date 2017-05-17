@@ -52,8 +52,7 @@ namespace TCC.ViewModels
                         _shortSkills.Add(sk);
                         return;
                     }
-                    existing.Cooldown = sk.Cooldown;
-                    existing.Refresh();
+                    existing.Refresh(sk.Cooldown);
                 }
                 else
                 {
@@ -63,8 +62,7 @@ namespace TCC.ViewModels
                         _longSkills.Add(sk);
                         return;
                     }
-                    existing.Cooldown = sk.Cooldown;
-                    existing.Refresh();
+                    existing.Refresh(sk.Cooldown);
                 }
             }
             catch
