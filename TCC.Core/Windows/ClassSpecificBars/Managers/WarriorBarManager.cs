@@ -23,6 +23,10 @@ namespace TCC.ViewModels
             {
                 if (edge == value) return;
                 edge = value;
+                if (edge == 10)
+                {
+                    NotifyPropertyChanged("Maxed");
+                }
                 RefreshTimer();
                 NotifyPropertyChanged("Edge");
             }
@@ -51,6 +55,7 @@ namespace TCC.ViewModels
             set {
                 if (val == value) return;
                 val = value;
+
                 NotifyPropertyChanged("Val");
             }            
         }
