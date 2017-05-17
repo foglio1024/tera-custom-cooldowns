@@ -33,7 +33,7 @@ namespace TCC.Controls
             edgeBar.DataContext = ((WarriorBarManager)DataContext).EdgeCounter;
             hpText.DataContext = ((WarriorBarManager)DataContext).HP;
             mpText.DataContext = ((WarriorBarManager)DataContext).MP;
-            reText.DataContext = ((WarriorBarManager)DataContext).RE;
+            reText.DataContext = ((WarriorBarManager)DataContext).ST;
         }
     }
 }
