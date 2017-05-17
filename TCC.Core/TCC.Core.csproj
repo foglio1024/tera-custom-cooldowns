@@ -365,9 +365,6 @@
     <Compile Include="ViewModels\MultiThreadManagers\CooldownBarWindowManager.cs" />
     <Compile Include="ViewModels\MultiThreadManagers\GroupWindowManager.cs" />
     <Compile Include="ViewModels\SettingsWindowViewModel.cs" />
-    <Compile Include="UI elements\StaminaGaugeControl.xaml.cs">
-      <DependentUpon>StaminaGaugeControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UpdateManager.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="ViewModels\AbnormalityWindowViewModel.cs" />
@@ -471,10 +468,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI elements\RaidMember.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI elements\StaminaGaugeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
