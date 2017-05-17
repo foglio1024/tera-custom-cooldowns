@@ -139,17 +139,6 @@ namespace TCC.ViewModels
 
         public static ClassManager CurrentClassManager;
 
-        public static void SetHP(int hp)
-        {
-            if (CurrentClassManager == null) return;
-            WindowManager.ClassWindow.Dispatcher.Invoke(() => { CurrentClassManager.HP.Val = hp; });
-
-        }
-        public static void SetMP(int mp)
-        {
-            if (CurrentClassManager == null) return;
-            WindowManager.ClassWindow.Dispatcher.Invoke(() => { CurrentClassManager.MP.Val = mp; });
-        }
 
         private SynchronizedObservableCollection<FixedSkillCooldown> mainSkills;
         public SynchronizedObservableCollection<FixedSkillCooldown> MainSkills
@@ -193,16 +182,36 @@ namespace TCC.ViewModels
             }
         }
 
+
         public IntTracker HP { get; set; }
         public IntTracker MP { get; set; }
+        public IntTracker ST { get; set; }
+
+        public static void SetHP(int hp)
+        {
+            if (CurrentClassManager == null) return;
+            WindowManager.ClassWindow.Dispatcher.Invoke(() => { CurrentClassManager.HP.Val = hp; });
+
+        }
+        public static void SetMP(int mp)
+        {
+            if (CurrentClassManager == null) return;
+            WindowManager.ClassWindow.Dispatcher.Invoke(() => { CurrentClassManager.MP.Val = mp; });
+        }
+        public static void SetST(int currentStamina)
+        {
+            if (CurrentClassManager == null) return;
+            WindowManager.ClassWindow.Dispatcher.Invoke(() => { CurrentClassManager.ST.Val = currentStamina; });
+        }
 
         public ClassManager()
         {
-            SecondarySkills = new SynchronizedObservableCollection<Data.FixedSkillCooldown>(WindowManager.ClassWindow.Dispatcher);
-            MainSkills = new SynchronizedObservableCollection<Data.FixedSkillCooldown>(WindowManager.ClassWindow.Dispatcher);
+            SecondarySkills = new SynchronizedObservableCollection<FixedSkillCooldown>(WindowManager.ClassWindow.Dispatcher);
+            MainSkills = new SynchronizedObservableCollection<FixedSkillCooldown>(WindowManager.ClassWindow.Dispatcher);
             OtherSkills = new SynchronizedObservableCollection<SkillCooldown>(WindowManager.ClassWindow.Dispatcher);
             HP = new IntTracker();
             MP = new IntTracker();
+            ST = new IntTracker();
         }
 
     }
