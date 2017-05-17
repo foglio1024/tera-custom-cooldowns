@@ -19,6 +19,8 @@ namespace Data
         //private static readonly ILog _log = LogManager.GetLogger("ShinraMeter");
         private static int _errorCount = 10; //limit number of debug messages in one session
 
+        string defaultOverride = "###########################################################\n# Add additional servers in this file (needed only for\n# VPN/Proxy that is not supported out-of-box)\n#\n# Format must follow the format IP Region ServerName\n#\n# Example:\n# 111.22.33.44 NA VPN Server 1\n#\n# Current possible regions: EU, NA, RU, KR, TW, JP\n#\n# Lines starting with '#' are ignored\n# Place servers below the next line\n###########################################################";
+
         private BasicTeraData() : this(FindResourceDirectory())
         {
         }
@@ -34,11 +36,11 @@ namespace Data
             _dataForRegion = Helpers.Memoize<string, TeraData>(region => new TeraData(region));
             Servers = new ServerDatabase(Path.Combine(ResourceDirectory, "data"));
             //handle overrides
-            //var serversOverridePath = Path.Combine(ResourceDirectory, "config/server-overrides.txt");
-            //if (!File.Exists(serversOverridePath))//create the default file if it doesn't exist
-            //    File.WriteAllText(serversOverridePath, LP.ServerOverrides );
-            //var overriddenServers = GetServers(serversOverridePath).ToList();
-            //Servers.AddOverrides(overriddenServers);
+            var serversOverridePath = Path.Combine(ResourceDirectory, "config/server-overrides.txt");
+            if (!File.Exists(serversOverridePath))//create the default file if it doesn't exist
+                File.WriteAllText(serversOverridePath, defaultOverride );
+            var overriddenServers = GetServers(serversOverridePath).ToList();
+            Servers.AddOverrides(overriddenServers);
 
 
             ImageDatabase = new ImageDatabase(Path.Combine(ResourceDirectory, "img/"));
