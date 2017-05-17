@@ -70,7 +70,6 @@ namespace TCC.ViewModels
         public FixedSkillCooldown DeadlyGambleBuff { get; set; }
 
         public EdgeCounter EdgeCounter { get; set; }
-        public IntTracker RE { get; set; }
         public int SkillCount { get; set; }
 
         public WarriorBarManager()
@@ -78,7 +77,6 @@ namespace TCC.ViewModels
             _instance = this;
             CurrentClassManager = this;
             EdgeCounter = new EdgeCounter();
-            RE = new IntTracker();
             LoadSkills();
             SkillCount = Math.Max(SecondarySkills.Count, MainSkills.Count);
         }
