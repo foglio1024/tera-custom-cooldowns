@@ -42,9 +42,9 @@
             <Border Background="#f55" Grid.Column="0" Width="80" Height="16"  CornerRadius="8" Margin="0,0,-20,0" Style="{StaticResource border}" BorderThickness="0"/>
             <Border Background="#59f" Grid.Column="2" Width="80" Height="16" Margin="-20,0,0,0" CornerRadius="8" Style="{StaticResource border}" BorderThickness="0"/>
             <Border Background="#5ff" Grid.Column="1" Width="80" Height="16" Margin="0,26,0,0" CornerRadius="0,0,16,16" Style="{StaticResource border}" BorderThickness="0"/>
-            <TextBlock Name="hpText" Style="{StaticResource text1}" FontSize="12" Margin="0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Val}"/>
-            <TextBlock Name="mpText" Style="{StaticResource text1}" Grid.Column="2" FontSize="12" Margin="0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Val}"/>
-            <TextBlock Name="reText" Style="{StaticResource text1}" Foreground="#f555" Grid.Column="1" FontSize="10" Margin="0,30,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Val}"/>
+            <TextBlock Name="hpText" Style="{StaticResource text1}" FontSize="13" Margin="0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Val}"/>
+            <TextBlock Name="mpText" Style="{StaticResource text1}" Grid.Column="2" FontSize="13" Margin="0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Val}"/>
+            <TextBlock Name="reText" Style="{StaticResource text1}" FontWeight="DemiBold" Foreground="#f555" Grid.Column="1" FontSize="10" Margin="0,30,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Val}"/>
             <!--Edge-->
             <local:EdgeControl x:Name="edgeBar" Margin="0,0,0,0" Grid.Column="1"/>
             
