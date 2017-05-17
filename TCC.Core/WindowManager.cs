@@ -170,11 +170,11 @@ namespace TCC
             var t = new Thread(new ThreadStart(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
-                ClassWindow = new WarriorBar();
+                ClassWindow = new ClassWindow();
                 WarriorBarManager.Instance.SecondarySkills = new SynchronizedObservableCollection<Data.FixedSkillCooldown>(ClassWindow.Dispatcher);
                 WarriorBarManager.Instance.MainSkills = new SynchronizedObservableCollection<Data.FixedSkillCooldown>(ClassWindow.Dispatcher);
                 WarriorBarManager.Instance.OtherSkills = new SynchronizedObservableCollection<SkillCooldown>(ClassWindow.Dispatcher);
-                WarriorBarManager.Instance.LoadSkills();
+
                 ClassWindow.Closed += (s, ev) => ClassWindow.Dispatcher.InvokeShutdown();
                 ClassWindow.Show();
                 Dispatcher.Run();

@@ -400,9 +400,9 @@
     <Compile Include="Converters\HP_PercentageConverter.cs" />
     <Compile Include="Converters\LaurelImageConverter.cs" />
     <Compile Include="Windows\ClassSpecificBars\Managers\WarriorBarManager.cs" />
-    <Compile Include="Windows\ClassSpecificBars\ViewModels\WarriorBarViewModel.cs" />
-    <Compile Include="Windows\ClassSpecificBars\WarriorBar.xaml.cs">
-      <DependentUpon>WarriorBar.xaml</DependentUpon>
+    <Compile Include="Windows\ClassSpecificBars\ViewModels\ClassWindowViewModel.cs" />
+    <Compile Include="Windows\ClassSpecificBars\ClassWindow.xaml.cs">
+      <DependentUpon>ClassWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\GroupWindow.xaml.cs">
       <DependentUpon>GroupWindow.xaml</DependentUpon>
@@ -506,7 +506,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\ClassSpecificBars\WarriorBar.xaml">
+    <Page Include="Windows\ClassSpecificBars\ClassWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

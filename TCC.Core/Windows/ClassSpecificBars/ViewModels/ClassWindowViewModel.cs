@@ -8,13 +8,14 @@ using TCC.Data;
 
 namespace TCC.ViewModels
 {
-    public class WarriorBarViewModel : BaseINPC
+    public class ClassWindowViewModel : BaseINPC
     {
         public int SkillCount
         {
             get { return Math.Max(WarriorBarManager.Instance.SecondarySkills.Count, WarriorBarManager.Instance.MainSkills.Count); }
         }
-        public WarriorBarViewModel()
+
+        public ClassWindowViewModel()
         {
 
         }
@@ -38,7 +39,6 @@ namespace TCC.Data
         }
         public void Start(int cd)
         {
-            Console.WriteLine("FixedSkillCooldown: Skill started");
             Cooldown = _type == CooldownType.Skill ? cd : cd * 1000;
             OriginalCooldown = Cooldown;
             NotifyPropertyChanged("Start");

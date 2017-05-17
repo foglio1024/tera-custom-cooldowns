@@ -18,9 +18,9 @@ namespace TCC.Windows
     /// <summary>
     /// Logica di interazione per WarriorBar.xaml
     /// </summary>
-    public partial class WarriorBar : TccWindow
+    public partial class ClassWindow : TccWindow
     {
-        public WarriorBar()
+        public ClassWindow()
         {
             InitializeComponent();
 

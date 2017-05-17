@@ -61,11 +61,16 @@ namespace TCC.ViewModels
             }
         }
 
-        internal void LoadSkills()
+        public WarriorBarManager()
+        {
+            LoadSkills();
+        }
+
+        void LoadSkills()
         {
             //User defined skills
 
-            XDocument warriorSkillsDoc = XDocument.Load("warrior-config.xml");
+            XDocument warriorSkillsDoc = XDocument.Load("config/warrior-skills.xml");
             foreach (XElement skillElement in warriorSkillsDoc.Descendants("Skill"))
             {
                 uint skillId = Convert.ToUInt32(skillElement.Attribute("id").Value);
