@@ -285,51 +285,6 @@ namespace TCC
                 w.Close();
             }
         }
-        //public static void InitClassGauge(Class c)
-        //{
-
-        //    switch (c)
-        //    {
-        //        case Class.Engineer:
-        //            App.Current.Dispatcher.Invoke(() =>
-        //            {
-        //                ClassSpecificWindow.Init(Colors.Orange);
-        //                ClassSpecificWindow.Enabled = true;
-        //            });
-        //            break;
-        //        case Class.Fighter:
-        //            App.Current.Dispatcher.Invoke(() =>
-        //            {
-        //                ClassSpecificWindow.Init(Colors.OrangeRed);
-        //                ClassSpecificWindow.Enabled = true;
-        //            });
-        //            break;
-        //        case Class.Assassin:
-        //            App.Current.Dispatcher.Invoke(() =>
-        //            {
-        //                ClassSpecificWindow.Init(System.Windows.Media.Color.FromArgb(0xff,0xff,0x6a,0xff));
-        //                ClassSpecificWindow.Enabled = true;
-        //            });
-        //            break;
-        //        case Class.Glaiver:
-        //            App.Current.Dispatcher.Invoke(() =>
-        //            {
-        //                ClassSpecificWindow.Init(System.Windows.Media.Color.FromRgb(230,240,255));
-        //                ClassSpecificWindow.Enabled = true;
-        //            });
-        //            break;
-        //        default:
-        //            ClassSpecificWindow.Enabled = false;
-        //            return;
-        //    }
-        //    if (Transparent)
-        //    {
-        //        App.Current.Dispatcher.Invoke(() =>
-        //        {
-        //            FocusManager.MakeTransparent(new WindowInteropHelper(ClassSpecificWindow).Handle);
-        //        });
-        //    }
-        //}
         public static void ShowWindow(Window w)
         {
             if (w != null)
