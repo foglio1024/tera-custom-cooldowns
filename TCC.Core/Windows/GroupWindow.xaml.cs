@@ -85,6 +85,8 @@ namespace TCC.Windows
             //add settings
             SettingsManager.GroupWindowSettings.X = Left;
             SettingsManager.GroupWindowSettings.Y = Top;
+            SettingsManager.SaveSettings();
+
         }
 
         private void TccWindow_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)

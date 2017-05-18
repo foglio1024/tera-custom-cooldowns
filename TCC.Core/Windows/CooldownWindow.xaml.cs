@@ -45,6 +45,7 @@ namespace TCC
             this.DragMove();
             SettingsManager.CooldownWindowSettings.X = this.Left;
             SettingsManager.CooldownWindowSettings.Y = this.Top;
+            SettingsManager.SaveSettings();
 
         }
 
