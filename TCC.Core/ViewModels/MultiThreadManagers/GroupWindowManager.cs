@@ -41,7 +41,9 @@ namespace TCC.ViewModels
 
         public void BeginOrRefreshUserAbnormality(Abnormality ab, int stacks, int duration, uint playerId, uint serverId)
         {
-            //if (SettingsManager.IgnoreMyBuffsInGroupWindow && target == SessionManager.CurrentPlayer.EntityId) return;
+            if (SettingsManager.IgnoreRaidAbnormalitiesInGroupWindow) return;
+            if (SettingsManager.IgnoreAllBuffsInGroupWindow && ab.Type == AbnormalityType.Buff) return;
+
             var size = GroupSize > GROUP_SIZE_THRESHOLD ? AbnormalityManager.RAID_AB_SIZE : AbnormalityManager.PARTY_AB_SIZE;
             var margin = GroupSize > GROUP_SIZE_THRESHOLD ? AbnormalityManager.RAID_AB_LEFT_MARGIN : AbnormalityManager.PARTY_AB_LEFT_MARGIN;
 
