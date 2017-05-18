@@ -102,21 +102,16 @@ namespace TCC.Parsing
             CharacterWindowManager.Instance.Player.MaxMP = p.maxMp;
             CharacterWindowManager.Instance.Player.MaxST = p.maxRe + p.bonusRe;
             CharacterWindowManager.Instance.Player.ItemLevel = p.ilvl;
-            CharacterWindowManager.Instance.Player.CurrentST = p.currRe;
-            CharacterWindowManager.Instance.Player.CurrentHP = p.currHp;
-            CharacterWindowManager.Instance.Player.CurrentMP = p.currMp;
 
-            ClassManager.SetHP(p.currHp);
-            ClassManager.SetMP(p.currMp);
-            ClassManager.SetST(p.currRe);
-            
+            SessionManager.SetPlayerHP(SessionManager.CurrentPlayer.EntityId, p.currHp);
+            SessionManager.SetPlayerMP(SessionManager.CurrentPlayer.EntityId, p.currMp);
+            SessionManager.SetPlayerST(SessionManager.CurrentPlayer.EntityId, p.currRe);
+                       
 
             if (SessionManager.CurrentPlayer.Class == Class.Warrior)
             {
                 ((WarriorBarManager)ClassManager.CurrentClassManager).EdgeCounter.Edge = p.edge;
-
             }
-
         }
         public static void HandleCreatureChangeHP(S_CREATURE_CHANGE_HP p)
         {
@@ -141,15 +136,11 @@ namespace TCC.Parsing
         }
         public static void HandlePlayerChangeStamina(S_PLAYER_CHANGE_STAMINA p)
         {
-            SessionManager.CurrentPlayer.CurrentST = p.currentStamina;
-            CharacterWindowManager.Instance.Player.CurrentST = p.currentStamina;
-            ClassManager.SetST(p.currentStamina);
-
+            SessionManager.SetPlayerST(SessionManager.CurrentPlayer.EntityId, p.currentStamina);
         }
         public static void HandlePlayerChangeFlightEnergy(S_PLAYER_CHANGE_FLIGHT_ENERGY p)
         {
-            SessionManager.CurrentPlayer.FlightEnergy = p.energy;
-            CharacterWindowManager.Instance.Player.FlightEnergy = p.energy;
+            SessionManager.SetPlayerFE(p.energy);
         }
         public static void HandleUserStatusChanged(S_USER_STATUS p)
         {
@@ -204,8 +195,12 @@ namespace TCC.Parsing
         }
         public static void HandleCharLogin(S_LOGIN p)
         {
-            SessionManager.CurrentPlayer.ClearAbnormalities();
+            EntitiesManager.ClearNPC();
+            GroupWindowManager.Instance.ClearAll();
+            //SessionManager.CurrentPlayer.ClearAbnormalities();
             BuffBarWindowManager.Instance.Player.ClearAbnormalities();
+            SkillManager.Clear();
+
             SessionManager.LoadingScreen = true;
             SessionManager.Logged = true;
             SessionManager.CurrentPlayer.Class = p.CharacterClass;
@@ -360,7 +355,7 @@ namespace TCC.Parsing
             foreach (var user in p.Members)
             {
                 GroupWindowManager.Instance.AddOrUpdateMember(user);
-                System.Threading.Tasks.Task.Delay(500).ContinueWith(t => { });
+                Task.Delay(500).ContinueWith(t => { });
             }
         }
         public static void HandlePartyMemberLeave(S_LEAVE_PARTY_MEMBER p)
