@@ -56,7 +56,7 @@ namespace TCC
             }
             else
             {
-                        BossGageWindowManager.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP);
+                BossGageWindowManager.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP);
             }
         }
         public static void DespawnNPC(ulong target)
