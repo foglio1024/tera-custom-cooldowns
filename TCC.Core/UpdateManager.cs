@@ -30,7 +30,12 @@ namespace TCC
                     int currentVersion = 0;
                     if (File.Exists("resources/images/current_version"))
                     {
-                        currentVersion = Convert.ToInt32(File.OpenText("resources/images/current_version").ReadLine());
+                        using (var str = File.OpenText("resources/images/current_version"))
+                        {
+                            currentVersion = Convert.ToInt32(str.ReadLine());
+                            str.Close();
+                        }
+                        
                     }
 
                     if (newVersion > currentVersion)
