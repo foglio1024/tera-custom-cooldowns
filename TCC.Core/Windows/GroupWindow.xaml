@@ -13,7 +13,7 @@
                  AllowsTransparency="True"
                  ResizeMode="NoResize"
                  Topmost="True"
-                 Opacity=".9" SizeToContent="WidthAndHeight"
+                 SizeToContent="WidthAndHeight"
                  Background="Transparent"
                  Title="GroupWindow" Height="Auto" Width="Auto"
                  Loaded="TccWindow_Loaded" 

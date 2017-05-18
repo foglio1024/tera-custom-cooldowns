@@ -14,7 +14,6 @@
         Background="#00000000" 
         ShowInTaskbar="False" 
         WindowStyle="None" 
-        Opacity=".85"
         AllowsTransparency="True" 
         SizeToContent="WidthAndHeight" 
         MouseLeftButtonDown="Window_MouseLeftButtonDown"

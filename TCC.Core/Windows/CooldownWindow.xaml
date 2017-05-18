@@ -16,7 +16,6 @@
         AllowsTransparency="True" 
         ShowInTaskbar="False" 
         WindowStyle="None" 
-        Opacity=".9"
         Background="#00000000" 
         MouseLeftButtonDown="Window_MouseLeftButtonDown" 
         MouseRightButtonDown="Window_MouseRightButtonDown"
