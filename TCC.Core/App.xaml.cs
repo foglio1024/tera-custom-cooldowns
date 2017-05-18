@@ -57,7 +57,7 @@ namespace TCC
             TeraSniffer.Instance.NewConnection += (srv) => SkillManager.Clear();
             TeraSniffer.Instance.EndConnection += () => SkillManager.Clear();
 
-            //Debug();
+            Debug();
 
 
             SessionManager.CurrentPlayer.Class = Class.None;
@@ -75,8 +75,6 @@ namespace TCC
         {
             SessionManager.Logged = true;
             SessionManager.LoadingScreen = false;
-            SessionManager.CurrentPlayer.MaxHP = 100;
-            SessionManager.CurrentPlayer.CurrentHP = 100;
             SessionManager.CurrentPlayer.Class = Class.Warrior;
             WindowManager.ClassWindow.Dispatcher.Invoke(() =>
             {
