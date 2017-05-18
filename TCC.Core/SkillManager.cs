@@ -92,12 +92,12 @@ namespace TCC
 
         public static void Clear()
         {
-            App.Current.Dispatcher.BeginInvoke(new Action(() =>
-            {
-                SessionManager.CurrentPlayer.Buffs.Clear();
-                SessionManager.CurrentPlayer.Debuffs.Clear();
-                SessionManager.CurrentPlayer.InfBuffs.Clear();
-            }));
+            //App.Current.Dispatcher.BeginInvoke(new Action(() =>
+            //{
+            //    SessionManager.CurrentPlayer.Buffs.Clear();
+            //    SessionManager.CurrentPlayer.Debuffs.Clear();
+            //    SessionManager.CurrentPlayer.InfBuffs.Clear();
+            //}));
             CooldownBarWindowManager.Instance.ShortSkills.Clear();
             CooldownBarWindowManager.Instance.LongSkills.Clear();
 
