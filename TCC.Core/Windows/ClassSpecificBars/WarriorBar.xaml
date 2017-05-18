@@ -29,7 +29,7 @@
         <Border Style="{StaticResource border}" Grid.Row="1" Grid.RowSpan="2" CornerRadius="0,0,25,25" Grid.ColumnSpan="2" x:Name="mainBorder" Opacity="1" />
 
         <!--Top border-->
-        <Border BorderBrush="#555" Background="#303037" Height="5" BorderThickness="0,0,0,0" Grid.Column="0" Grid.Row="1" Grid.RowSpan="1" Grid.ColumnSpan="2" Margin="0" Opacity="1"/>
+        <Border BorderBrush="#555" Background="#303037" Height="5" BorderThickness="0,0,0,0" Grid.Column="0" Grid.Row="1" Grid.RowSpan="1" Grid.ColumnSpan="2" Margin="0"/>
 
         <!--HP/MP-->
         <Grid HorizontalAlignment="Center" Margin="0,0,0,10">
