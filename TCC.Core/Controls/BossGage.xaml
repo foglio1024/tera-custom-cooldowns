@@ -36,7 +36,11 @@
                 <ColumnDefinition Width="0"/>
             </Grid.ColumnDefinitions>
 
-            <Border Margin="0,0,0,0" Style="{StaticResource border}" x:Name="mainBorder" Grid.RowSpan="2" Grid.Row="0" HorizontalAlignment="Stretch"/>
+            <Border Margin="0,0,0,0" Style="{StaticResource border}" x:Name="mainBorder" Grid.RowSpan="2" Grid.Row="0" HorizontalAlignment="Stretch">
+                <Border.CacheMode>
+                    <BitmapCache RenderAtScale="1"/>
+                </Border.CacheMode>
+            </Border>
             <Grid Margin="6,2" Name="mainGrid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -48,6 +52,9 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
+                    <Grid.CacheMode>
+                        <BitmapCache RenderAtScale="1"/>
+                    </Grid.CacheMode>
                     <TextBlock  Style="{StaticResource text1}"
                                HorizontalAlignment="Left" 
                                VerticalAlignment="Center" 
@@ -103,16 +110,6 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <!--<Rectangle Name="BaseRect"  Fill="#90000000" Height="4" Width="400" 
-                               HorizontalAlignment="Stretch" SnapsToDevicePixels="True"/>
-                    <Rectangle Name="HPrect" Fill="#0097ce"
-                               Width="{Binding ElementName=BaseRect, Path=Width}" 
-                               Height="{Binding ElementName=BaseRect, Path=Height}" 
-                               HorizontalAlignment="Left" SnapsToDevicePixels="True">
-                        <Rectangle.Effect>
-                            <DropShadowEffect ShadowDepth="0" BlurRadius="20" Color="Red" Opacity="0"/>
-                        </Rectangle.Effect>
-                    </Rectangle>-->
                     <controls:GenericGauge Height="4" Width="400"
                                            BarColor="{Binding Enraged, Converter={StaticResource barColorConv}}"
                                            GaugeName=""
@@ -137,11 +134,14 @@
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Border BorderThickness=".8,0,.8,0" BorderBrush="#90000000" Grid.Column="1"></Border>
-                        <Border BorderThickness=".8,0,.8,0" BorderBrush="#90000000" Grid.Column="3"></Border>
-                        <Border BorderThickness=".8,0,.8,0" BorderBrush="#90000000" Grid.Column="5"></Border>
-                        <Border BorderThickness=".8,0,.8,0" BorderBrush="#90000000" Grid.Column="7"></Border>
-                        <Border BorderThickness=".8,0,0,0"  BorderBrush="#90000000" Grid.Column="9"></Border>
+                        <Grid.CacheMode>
+                            <BitmapCache RenderAtScale="1"/>
+                        </Grid.CacheMode>
+                        <Border BorderThickness=".8,0,.8,0" BorderBrush="#90000000" Grid.Column="1"/>
+                        <Border BorderThickness=".8,0,.8,0" BorderBrush="#90000000" Grid.Column="3"/>
+                        <Border BorderThickness=".8,0,.8,0" BorderBrush="#90000000" Grid.Column="5"/>
+                        <Border BorderThickness=".8,0,.8,0" BorderBrush="#90000000" Grid.Column="7"/>
+                        <Border BorderThickness=".8,0,0,0"  BorderBrush="#90000000" Grid.Column="9"/>
                     </Grid>
                     <StackPanel Width="28" Height="Auto" Orientation="Vertical" Opacity="1" Name="NextEnrage" Margin="-14,-5,0,0" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" Grid.Row="2">
                         <StackPanel.RenderTransform>

@@ -20,6 +20,9 @@
                 </Ellipse.Effect>
             </Ellipse>
             <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Foreground="#ffff" FontSize="12" FontWeight="SemiBold" Text="{Binding CurrentCD, RelativeSource={RelativeSource AncestorType=local:BarCooldown}, StringFormat={}{0:N0}}"></TextBlock>
+            <Grid.CacheMode>
+                <BitmapCache RenderAtScale="1"/>
+            </Grid.CacheMode>
         </Grid>
     </Grid>
 </UserControl>

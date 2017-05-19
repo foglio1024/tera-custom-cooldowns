@@ -22,8 +22,7 @@
         <converters:SizeToDurationLabelMarginConverter x:Key="sizeToDurationLabelMarginConv"/>
     </UserControl.Resources>
 
-    <Grid Margin="0" Name="rootGrid"  ToolTipService.InitialShowDelay="0" ToolTipService.ShowDuration="50000" 
->
+    <Grid Margin="0" Name="rootGrid"  ToolTipService.InitialShowDelay="0" ToolTipService.ShowDuration="50000" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -39,14 +38,18 @@
                 </Grid>
             </ToolTip>
         </Grid.ToolTip>
-
-        <Ellipse Name="bgEll" Fill="{Binding Abnormality.Type, Converter={StaticResource strokeConv}}"  
+        <Grid>
+            <Ellipse Name="bgEll" Fill="{Binding Abnormality.Type, Converter={StaticResource strokeConv}}"  
                  Width="{Binding BackgroundEllipseSize}" Height="{Binding BackgroundEllipseSize}"/>
-        <Ellipse Name="abnormalityIcon" Margin="0,0" Width="{Binding IconSize}" Height="{Binding IconSize}"  UseLayoutRounding="False">
-            <Ellipse.Fill>
-                <ImageBrush ImageSource="{Binding Abnormality.IconName, Converter={StaticResource iconConv}}"/>
-            </Ellipse.Fill>
-        </Ellipse>
+            <Ellipse Name="abnormalityIcon" Margin="0,0" Width="{Binding IconSize}" Height="{Binding IconSize}"  UseLayoutRounding="False">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="{Binding Abnormality.IconName, Converter={StaticResource iconConv}}"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Grid.CacheMode>
+                <BitmapCache RenderAtScale="1" />
+            </Grid.CacheMode>
+        </Grid>
         <controls:Arc x:Name="arc" Stroke="#8000" StrokeThickness="15" EndAngle="1" Width="{Binding IconSize}" Height="{Binding IconSize}"/>
 
         <Grid x:Name="durationLabel"  Width="Auto" MaxWidth="{Binding IconSize}" Height="{Binding BackgroundEllipseSize, Converter={StaticResource sizeToDurationLabelSizeConv}}"

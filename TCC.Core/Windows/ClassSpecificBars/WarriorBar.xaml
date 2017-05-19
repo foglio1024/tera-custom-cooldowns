@@ -38,7 +38,9 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            
+            <Grid.CacheMode>
+                <BitmapCache RenderAtScale="1"/>
+            </Grid.CacheMode>
             <Border Background="#f55" Grid.Column="0" Width="80" Height="16"  CornerRadius="8" Margin="0,0,-20,0" Style="{StaticResource border}" BorderThickness="0"/>
             <Border Background="#59f" Grid.Column="2" Width="80" Height="16" Margin="-20,0,0,0" CornerRadius="8" Style="{StaticResource border}" BorderThickness="0"/>
             <Border Background="#5ff" Grid.Column="1" Width="80" Height="16" Margin="0,26,0,0" CornerRadius="0,0,16,16" Style="{StaticResource border}" BorderThickness="0"/>

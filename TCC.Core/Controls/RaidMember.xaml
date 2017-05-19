@@ -32,6 +32,9 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <Grid.CacheMode>
+            <BitmapCache RenderAtScale="1"/>
+        </Grid.CacheMode>
         <Grid.Style>
             <Style>
                 <Style.Triggers>

@@ -15,20 +15,22 @@
         <ScaleTransform ScaleX=".9" ScaleY=".9"/>
     </UserControl.LayoutTransform>
     <Grid Width="55" Height="55" Margin="2" HorizontalAlignment="Left" Name="MainGrid">
-        <!--<Grid.CacheMode>
-            <BitmapCache RenderAtScale="2"/>
-        </Grid.CacheMode>-->
-        <Ellipse Width="51" Height="{Binding ElementName=icon, Path=ActualWidth}" x:Name="icon" Stroke="#ffff" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Ellipse.Fill>
-                <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource iconConv}}"/>
-            </Ellipse.Fill>
-        </Ellipse>
+        <Grid>
+            <Ellipse Width="51" Height="{Binding ElementName=icon, Path=ActualWidth}" x:Name="icon" Stroke="#ffff" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource iconConv}}"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Grid.CacheMode>
+                <BitmapCache RenderAtScale="1"/>
+            </Grid.CacheMode>
+        </Grid>
         <local:Arc x:Name="arc" Opacity="1" UseLayoutRounding="True" Width="Auto" Height="Auto" StrokeThickness="25" Margin="3" Stroke="#7000" EndAngle="359.9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
             <!--<local:Arc.CacheMode>
                 <BitmapCache RenderAtScale=".5"></BitmapCache>
             </local:Arc.CacheMode>-->
         </local:Arc>
-        
+
         <Grid Width="22" Height="22" x:Name="g" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0">
             <Grid.CacheMode>
                 <BitmapCache RenderAtScale="2"/>
@@ -52,7 +54,7 @@
                     <BitmapCache RenderAtScale="2" />
                 </Viewbox.CacheMode>
             </Viewbox>
-                
+
         </Grid>
     </Grid>
 </UserControl>

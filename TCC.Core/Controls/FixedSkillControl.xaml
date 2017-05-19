@@ -14,11 +14,16 @@
         <ScaleTransform ScaleX=".9" ScaleY=".9"/>
     </UserControl.LayoutTransform>
     <Grid Width="55" Height="55" Margin="2" HorizontalAlignment="Left" Name="MainGrid">
-        <Ellipse Width="51" Height="{Binding ElementName=icon, Path=ActualWidth}" x:Name="icon" Stroke="#afff" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid>
+            <Ellipse Width="51" Height="{Binding ElementName=icon, Path=ActualWidth}" x:Name="icon" Stroke="#afff" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Ellipse.Fill>
                 <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource iconConv}}"/>
             </Ellipse.Fill>
         </Ellipse>
+            <Grid.CacheMode>
+                <BitmapCache RenderAtScale="1"/>
+            </Grid.CacheMode>
+        </Grid>
         <local:Arc x:Name="arc" 
                    Opacity="1" 
                    UseLayoutRounding="True" 
