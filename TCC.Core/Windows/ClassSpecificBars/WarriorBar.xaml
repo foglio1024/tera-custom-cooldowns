@@ -12,9 +12,6 @@
         <DataTemplate x:Key="skill2">
             <local:SkillIconControl />
         </DataTemplate>
-        <Style x:Key="skillsPanel" TargetType="UniformGrid">
-            <Setter Property="Columns" Value="{Binding SkillCount}"/>
-        </Style>
     </UserControl.Resources>
     <Grid Width="Auto" Margin="20" Name="root">
         <Grid.RowDefinitions>
@@ -57,7 +54,7 @@
             <ItemsControl Name="mainSkills" ItemTemplate="{StaticResource skill}" Width="Auto" Height="Auto" ItemsSource="{Binding MainSkills}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <UniformGrid Style="{StaticResource skillsPanel}" Rows="1" Margin="0,0,0,0" IsItemsHost="True" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <UniformGrid Columns="{Binding MainSkills.Count}" Rows="1" Margin="0,0,0,0" IsItemsHost="True" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
@@ -73,7 +70,7 @@
             <ItemsControl Name="secSkills" ItemTemplate="{StaticResource skill}" Width="Auto" Height="Auto" ItemsSource="{Binding SecondarySkills}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <UniformGrid Style="{StaticResource skillsPanel}" Rows="1" Margin="0,0,0,0" IsItemsHost="True" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <UniformGrid Columns="{Binding SecondarySkills.Count}" Rows="1" Margin="0,0,0,0" IsItemsHost="True" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>

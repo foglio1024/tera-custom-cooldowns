@@ -77,7 +77,6 @@ namespace TCC.ViewModels
         public FixedSkillCooldown DeadlyGambleBuff { get; set; }
 
         public EdgeCounter EdgeCounter { get; set; }
-        public int SkillCount { get; set; }
 
         public WarriorBarManager()
         {
@@ -85,7 +84,6 @@ namespace TCC.ViewModels
             CurrentClassManager = this;
             EdgeCounter = new EdgeCounter();
             LoadSkills();
-            SkillCount = Math.Max(SecondarySkills.Count, MainSkills.Count);
         }
 
         void LoadSkills()
