@@ -20,7 +20,7 @@ namespace TCC.Parsing.Messages
         private uint type;
 
         public ulong Target { get; private set; }
-        public uint AddedRunemarks { get; private set; }
+        public uint TotalRunemarks { get; private set; }
         public uint RemovedRunemarks { get; private set; }
         public RunemarksActionType Type { get => (RunemarksActionType)type; }
         public uint SkillId { get; private set; }
@@ -28,15 +28,15 @@ namespace TCC.Parsing.Messages
         public S_WEAK_POINT(TeraMessageReader reader) : base(reader)
         {
             Target = reader.ReadUInt64();
-            AddedRunemarks = reader.ReadUInt32();
             RemovedRunemarks = reader.ReadUInt32();
+            TotalRunemarks = reader.ReadUInt32();
             type = reader.ReadUInt32();
             SkillId = reader.ReadUInt32();
         }
 
         public override string ToString()
         {
-            return String.Format("T:{0} | moved:{1} | total:{2} | {3} | S:{4}", Target, AddedRunemarks, RemovedRunemarks, Type, SkillId);
+            return String.Format("T:{0} | total:{1} | moved:{2} | {3} | S:{4}", Target, TotalRunemarks, RemovedRunemarks, Type, SkillId);
         }
     }
 }
