@@ -39,8 +39,14 @@ namespace TCC.Windows
         private void TccWindow_Loaded(object sender, RoutedEventArgs e)
         {
             InitWindow();
+            Left = SettingsManager.ClassWindowSettings.X;
+            Top = SettingsManager.ClassWindowSettings.Y;
+            SetClickThru(SettingsManager.ClassWindowSettings.ClickThru);
+            SetVisibility(SettingsManager.ClassWindowSettings.Visibility);
+
             _context = (ClassWindowViewModel)DataContext;
             _context.PropertyChanged += _context_PropertyChanged;
+
 
         }
 
