@@ -7,33 +7,23 @@ namespace TCC.Parsing.Messages
     public class S_NPC_STATUS : ParsedMessage
     {
         ulong entityId, targetId;
-        byte enraged;
+        bool enraged;
         int unk1, unk2;
 
         public ulong EntityId { get => entityId; }
         public ulong Target { get => targetId; }
         public bool IsEnraged
         {
-            get
-            {
-                if (enraged == 1)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
+            get => enraged;
         }
 
         public S_NPC_STATUS(TeraMessageReader reader) : base(reader)
         {
             entityId = reader.ReadUInt64();
-            enraged = reader.ReadByte();
-            unk1 = reader.ReadInt32();
+            enraged = reader.ReadBoolean();
+            reader.Skip(4); //unk1 = reader.ReadInt32();
             targetId = reader.ReadUInt64();
-            unk2 = reader.ReadInt32();
+            reader.Skip(4); //unk2 = reader.ReadInt32();
 
             //string npcName = entityId.ToString();
             //if (EntitiesManager.CurrentBosses.FirstOrDefault(x => x.EntityId == entityId) != null) 

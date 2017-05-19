@@ -12,27 +12,20 @@ namespace TCC.Parsing.Messages
     public class S_ABNORMALITY_BEGIN : ParsedMessage
     {
 
-        public ulong targetId;
-        public ulong casterId;
-        public uint id;
-        public int duration;
-        public int stacks;
+        public ulong TargetId { get; private set; }
+        public ulong CasterId { get; private set; }
+        public uint Id { get; private set; }
+        public int Duration { get; private set; }
+        public int Stacks { get; private set; }
 
         public S_ABNORMALITY_BEGIN(TeraMessageReader reader) : base(reader)
         {
-            targetId = reader.ReadUInt64();
-            casterId = reader.ReadUInt64();
-            id = reader.ReadUInt32();
-            duration = reader.ReadInt32();
+            TargetId = reader.ReadUInt64();
+            CasterId = reader.ReadUInt64();
+            Id = reader.ReadUInt32();
+            Duration = reader.ReadInt32();
             reader.Skip(4);
-            stacks = reader.ReadInt32();
-
-            //if(targetId == SessionManager.CurrentCharId)
-            //{
-            //    var name = string.Empty;
-            //    if (TCC.Data.AbnormalityDatabase.Abnormalities.TryGetValue(id, out Abnormality ab)) name = ab.Name;
-            //    //Console.WriteLine("[S_ABNORMALITY_BEGIN] target:{0} id:{1} name:{4} duration:{2} stacks:{3}", targetId, id, duration, stacks, name);
-            //}
+            Stacks = reader.ReadInt32();
         }
     }
 }

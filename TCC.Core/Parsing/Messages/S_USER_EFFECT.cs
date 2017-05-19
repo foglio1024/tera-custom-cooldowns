@@ -10,9 +10,9 @@ namespace TCC.Parsing.Messages
 {
     public class S_USER_EFFECT : ParsedMessage
     {
+        int circle, action;
         public ulong User { get; private set; }
         public ulong Source { get; private set; }
-        int circle, action;
         public AggroAction Action
         {
             get

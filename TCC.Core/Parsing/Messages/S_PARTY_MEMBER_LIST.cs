@@ -43,21 +43,23 @@ namespace TCC.Parsing.Messages
             im = reader.ReadBoolean();
             raid = reader.ReadBoolean();
 
-            unk1 = reader.ReadUInt32();
-            unk2 = reader.ReadUInt32();
-            unk3 = reader.ReadUInt16();
-            unk4 = reader.ReadUInt16();
+            reader.Skip(12);
+            //unk1 = reader.ReadUInt32();
+            //unk2 = reader.ReadUInt32();
+            //unk3 = reader.ReadUInt16();
+            //unk4 = reader.ReadUInt16();
 
             leaderServerId = reader.ReadUInt32();
             leaderPlayerId = reader.ReadUInt32();
 
-            unk5 = reader.ReadUInt32();
-            unk6 = reader.ReadUInt32();
-            unk7 = reader.ReadByte();
-            unk8 = reader.ReadUInt32();
-            unk9 = reader.ReadByte();
-            unk10 = reader.ReadUInt32();
-            unk11 = reader.ReadByte();
+            reader.Skip(19);
+            //unk5 = reader.ReadUInt32();
+            //unk6 = reader.ReadUInt32();
+            //unk7 = reader.ReadByte();
+            //unk8 = reader.ReadUInt32();
+            //unk9 = reader.ReadByte();
+            //unk10 = reader.ReadUInt32();
+            //unk11 = reader.ReadByte();
 
             members = new List<User>();
 

@@ -13,7 +13,6 @@ namespace TCC.Parsing.Messages
         }
 
         private string name;
-
         public string Name
         {
             get { return name; }
@@ -22,9 +21,9 @@ namespace TCC.Parsing.Messages
 
         public S_SPAWN_USER(TeraMessageReader reader) : base(reader)
         {
-            reader.Skip(2 + 2 + 2 + 2);
+            reader.Skip(8);
             var nameOffset = reader.ReadUInt16() - 4;
-            reader.Skip(2 + 2 + 2 + 2 + 2 + 2 + 2 + 8);
+            reader.Skip(22);
             entityId = reader.ReadUInt64();
             reader.BaseStream.Position = nameOffset;
             name = reader.ReadTeraString();

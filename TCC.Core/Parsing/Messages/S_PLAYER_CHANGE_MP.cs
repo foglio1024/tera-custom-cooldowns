@@ -5,9 +5,16 @@ namespace TCC
 {
     public class S_PLAYER_CHANGE_MP : ParsedMessage
     {
-        public int currentMP, maxMP, diff;
-        public uint type;
-        public ulong target, source;
+        int currentMP, maxMP, diff;
+        uint type;
+        ulong target, source;
+
+        public int CurrentMP { get => currentMP; }
+        public int MaxMP { get => maxMP; }
+        public int Diff { get => diff; }
+        public uint Type { get => type; }
+        public ulong Target { get => target; }
+        public ulong Source { get => source; }
 
         public S_PLAYER_CHANGE_MP(TeraMessageReader reader) : base(reader)
         {

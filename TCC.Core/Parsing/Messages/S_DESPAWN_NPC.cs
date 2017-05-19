@@ -10,13 +10,11 @@ namespace TCC.Parsing.Messages
 {
     public class S_DESPAWN_NPC : ParsedMessage
     {
-        public ulong target;
-        float x, y, z;
-        uint type;
-        int unk;
+        public ulong Target { get; private set; }
+
         public S_DESPAWN_NPC(TeraMessageReader reader) : base(reader)
         {
-            target = reader.ReadUInt64();
+            Target = reader.ReadUInt64();
         }
     }
 }

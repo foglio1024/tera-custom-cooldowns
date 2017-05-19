@@ -14,12 +14,12 @@ namespace TCC.Parsing.Messages
         /// <summary>
         /// Skill's ID
         /// </summary>
-        public uint SkillId { get; set; }
+        public uint SkillId { get; private set; }
 
         /// <summary>
         /// Skill's cooldown in milliseconds
         /// </summary>
-        public uint Cooldown { get; set; }
+        public uint Cooldown { get; private set; }
 
         public S_START_COOLTIME_SKILL(TeraMessageReader reader) : base(reader)
         {

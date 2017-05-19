@@ -11,19 +11,19 @@ namespace TCC.Parsing.Messages
 {
     public class S_USER_STATUS : ParsedMessage
     {
-        public bool isInCombat;
-        public ulong id;
+        public bool IsInCombat { get; private set; }
+        public ulong EntityId { get; private set; }
 
         public S_USER_STATUS(TeraMessageReader reader) : base(reader)
         {
-            id = reader.ReadUInt64();
+            EntityId = reader.ReadUInt64();
             if(reader.ReadInt32() == 1)
             {
-                isInCombat = true;
+                IsInCombat = true;
             }
             else
             {
-                isInCombat = false;
+                IsInCombat = false;
             }
         }
     }

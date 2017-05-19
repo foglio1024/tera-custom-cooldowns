@@ -31,7 +31,7 @@ namespace TCC.Parsing.Messages
 
         public S_LEAVE_PARTY_MEMBER(TeraMessageReader reader) : base(reader)
         {
-            var nameOffset = reader.ReadUInt16();
+            reader.Skip(2); //var nameOffset = reader.ReadUInt16();
             serverId = reader.ReadUInt32();
             playerId = reader.ReadUInt32();
             name = reader.ReadTeraString();

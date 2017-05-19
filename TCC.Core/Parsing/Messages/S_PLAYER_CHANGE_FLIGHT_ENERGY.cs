@@ -10,10 +10,10 @@ namespace TCC.Parsing.Messages
 {
     public class S_PLAYER_CHANGE_FLIGHT_ENERGY : ParsedMessage
     {
-        public float energy;
+        public float Energy { get; private set; }
         public S_PLAYER_CHANGE_FLIGHT_ENERGY(TeraMessageReader reader) : base(reader)
         {
-            energy = reader.ReadSingle();
+            Energy = reader.ReadSingle();
         }
     }
 }

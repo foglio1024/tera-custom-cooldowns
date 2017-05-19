@@ -90,61 +90,58 @@ namespace TCC.Parsing
 
         public static void HandlePlayerStatUpdate(S_PLAYER_STAT_UPDATE p)
         {
-            SessionManager.CurrentPlayer.MaxHP = p.maxHp;
-            SessionManager.CurrentPlayer.MaxMP = p.maxMp;
-            SessionManager.CurrentPlayer.MaxST = p.maxRe + p.bonusRe;
-            SessionManager.CurrentPlayer.ItemLevel = p.ilvl;
-            SessionManager.CurrentPlayer.CurrentST = p.currRe;
-            SessionManager.CurrentPlayer.CurrentHP = p.currHp;
-            SessionManager.CurrentPlayer.CurrentMP = p.currMp;
+            SessionManager.CurrentPlayer.MaxHP = p.MaxHP;
+            SessionManager.CurrentPlayer.MaxMP = p.MaxMP;
+            SessionManager.CurrentPlayer.MaxST = p.MaxST + p.BonusST;
+            SessionManager.CurrentPlayer.ItemLevel = p.Ilvl;
 
-            CharacterWindowManager.Instance.Player.MaxHP = p.maxHp;
-            CharacterWindowManager.Instance.Player.MaxMP = p.maxMp;
-            CharacterWindowManager.Instance.Player.MaxST = p.maxRe + p.bonusRe;
-            CharacterWindowManager.Instance.Player.ItemLevel = p.ilvl;
+            CharacterWindowManager.Instance.Player.MaxHP = p.MaxHP;
+            CharacterWindowManager.Instance.Player.MaxMP = p.MaxMP;
+            CharacterWindowManager.Instance.Player.MaxST = p.MaxST + p.BonusST;
+            CharacterWindowManager.Instance.Player.ItemLevel = p.Ilvl;
 
-            SessionManager.SetPlayerHP(SessionManager.CurrentPlayer.EntityId, p.currHp);
-            SessionManager.SetPlayerMP(SessionManager.CurrentPlayer.EntityId, p.currMp);
-            SessionManager.SetPlayerST(SessionManager.CurrentPlayer.EntityId, p.currRe);
+            SessionManager.SetPlayerHP(SessionManager.CurrentPlayer.EntityId, p.CurrentHP);
+            SessionManager.SetPlayerMP(SessionManager.CurrentPlayer.EntityId, p.CurrentMP);
+            SessionManager.SetPlayerST(SessionManager.CurrentPlayer.EntityId, p.CurrentST);
                        
 
             if (SessionManager.CurrentPlayer.Class == Class.Warrior)
             {
-                ((WarriorBarManager)ClassManager.CurrentClassManager).EdgeCounter.Edge = p.edge;
+                ((WarriorBarManager)ClassManager.CurrentClassManager).EdgeCounter.Edge = p.Edge;
             }
         }
         public static void HandleCreatureChangeHP(S_CREATURE_CHANGE_HP p)
         {
-            SessionManager.SetPlayerHP(p.target, p.currentHP);
-            if (EntitiesManager.TryGetBossById(p.target, out Boss b))
+            SessionManager.SetPlayerHP(p.Target, p.CurrentHP);
+            if (EntitiesManager.TryGetBossById(p.Target, out Boss b))
             {
                 if (b.Visible == System.Windows.Visibility.Collapsed)
                 {
                     b.Visible = System.Windows.Visibility.Visible;
                 }
-                if (b.MaxHP != p.maxHP)
+                if (b.MaxHP != p.MaxHP)
                 {
-                    b.MaxHP = p.maxHP;
+                    b.MaxHP = p.MaxHP;
                 }
-                b.CurrentHP = p.currentHP;
+                b.CurrentHP = p.CurrentHP;
 
             }
         }
         public static void HandlePlayerChangeMP(S_PLAYER_CHANGE_MP p)
         {
-            SessionManager.SetPlayerMP(p.target, p.currentMP);
+            SessionManager.SetPlayerMP(p.Target, p.CurrentMP);
         }
         public static void HandlePlayerChangeStamina(S_PLAYER_CHANGE_STAMINA p)
         {
-            SessionManager.SetPlayerST(SessionManager.CurrentPlayer.EntityId, p.currentStamina);
+            SessionManager.SetPlayerST(SessionManager.CurrentPlayer.EntityId, p.CurrentST);
         }
         public static void HandlePlayerChangeFlightEnergy(S_PLAYER_CHANGE_FLIGHT_ENERGY p)
         {
-            SessionManager.SetPlayerFE(p.energy);
+            SessionManager.SetPlayerFE(p.Energy);
         }
         public static void HandleUserStatusChanged(S_USER_STATUS p)
         {
-            SessionManager.SetCombatStatus(p.id, p.isInCombat);
+            SessionManager.SetCombatStatus(p.EntityId, p.IsInCombat);
         }
 
         public static void HandleGageReceived(S_BOSS_GAGE_INFO p)
@@ -310,7 +307,7 @@ namespace TCC.Parsing
 
         public static void HandleDespawnNpc(S_DESPAWN_NPC p)
         {
-            EntitiesManager.DespawnNPC(p.target);
+            EntitiesManager.DespawnNPC(p.Target);
         }
         public static void HandleDespawnUser(S_DESPAWN_USER p)
         {
@@ -319,7 +316,7 @@ namespace TCC.Parsing
 
         public static void HandleAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
-            AbnormalityManager.BeginAbnormality(p.id, p.targetId, p.duration, p.stacks);
+            AbnormalityManager.BeginAbnormality(p.Id, p.TargetId, p.Duration, p.Stacks);
 
             switch (SessionManager.CurrentPlayer.Class)
             {
@@ -339,7 +336,7 @@ namespace TCC.Parsing
         }
         public static void HandleAbnormalityEnd(S_ABNORMALITY_END p)
         {
-            AbnormalityManager.EndAbnormality(p.target, p.id);
+            AbnormalityManager.EndAbnormality(p.Target, p.Id);
         }
 
         public static void HandlePlayerLocation(C_PLAYER_LOCATION p)

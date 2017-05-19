@@ -10,10 +10,18 @@ namespace TCC
 {
     public class S_CREATURE_CHANGE_HP : ParsedMessage
     {
-        public int currentHP, maxHP, diff;
-        public uint type;
-        public ulong target, source;
-        public byte crit;
+        int currentHP, maxHP, diff;
+        uint type;
+        ulong target, source;
+        byte crit;
+
+        public int CurrentHP { get => currentHP; }
+        public int MaxHP { get => maxHP; }
+        public int Diff { get => diff; }
+        public ulong Target { get => target; }
+        public ulong Source { get => source; }
+        public byte Crit { get => crit; }
+
         public S_CREATURE_CHANGE_HP(TeraMessageReader reader) : base(reader)
         {
             currentHP = reader.ReadInt32();

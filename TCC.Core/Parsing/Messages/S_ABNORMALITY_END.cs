@@ -10,13 +10,13 @@ namespace TCC.Parsing.Messages
 {
     public class S_ABNORMALITY_END : ParsedMessage
     {
-        public ulong target;
-        public uint id;
+        public ulong Target { get; private set; }
+        public uint Id { get; private set; }
 
         public S_ABNORMALITY_END(TeraMessageReader reader) : base(reader)
         {
-            target = reader.ReadUInt64();
-            id = reader.ReadUInt32();
+            Target = reader.ReadUInt64();
+            Id = reader.ReadUInt32();
         }
     }
 }
