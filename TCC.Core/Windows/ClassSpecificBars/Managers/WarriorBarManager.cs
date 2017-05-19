@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,7 +44,7 @@ namespace TCC.ViewModels
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
             _expire = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(8000) };
-            _expire.Tick += (s ,ev) => Edge = 0;
+            _expire.Tick += (s, ev) => Edge = 0;
         }
     }
     public class IntTracker : TSPropertyChanged
@@ -52,12 +53,13 @@ namespace TCC.ViewModels
         public int Val
         {
             get { return val; }
-            set {
+            set
+            {
                 if (val == value) return;
                 val = value;
 
                 NotifyPropertyChanged("Val");
-            }            
+            }
         }
         public IntTracker()
         {
@@ -89,24 +91,55 @@ namespace TCC.ViewModels
         void LoadSkills()
         {
             //User defined skills
-            XDocument skillsDoc = XDocument.Load("resources/config/warrior-skills.xml");
-            foreach (XElement skillElement in skillsDoc.Descendants("Skill"))
+            if (!File.Exists("resources/config/warrior-skills.xml"))
             {
-                uint skillId = Convert.ToUInt32(skillElement.Attribute("id").Value);
-                int row = Convert.ToInt32(skillElement.Attribute("row").Value);
+                //create default warrior file
+                XElement skills = new XElement("Skills",
+                    new XElement("Skill", new XAttribute("id", 181100), new XAttribute("row", 1)),
+                    new XElement("Skill", new XAttribute("id", 41100), new XAttribute("row", 1)),
+                    new XElement("Skill", new XAttribute("id", 110800), new XAttribute("row", 1)),
+                    new XElement("Skill", new XAttribute("id", 280730), new XAttribute("row", 1)),
+                    new XElement("Skill", new XAttribute("id", 290730), new XAttribute("row", 1)),
+                    new XElement("Skill", new XAttribute("id", 160700), new XAttribute("row", 1)),
+                    new XElement("Skill", new XAttribute("id", 171100), new XAttribute("row", 1)),
+                    new XElement("Skill", new XAttribute("id", 191000), new XAttribute("row", 1)),
+                    new XElement("Skill", new XAttribute("id", 300100), new XAttribute("row", 1)),
+                    new XElement("Skill", new XAttribute("id", 100700), new XAttribute("row", 2)),
+                    new XElement("Skill", new XAttribute("id", 220200), new XAttribute("row", 2)),
+                    new XElement("Skill", new XAttribute("id", 120800), new XAttribute("row", 0)),
+                    new XElement("Skill", new XAttribute("id", 230200), new XAttribute("row", 0)),
+                    new XElement("Skill", new XAttribute("id", 210200), new XAttribute("row", 0)),
+                    new XElement("Skill", new XAttribute("id", 270800), new XAttribute("row", 0)),
+                    new XElement("Skill", new XAttribute("id", 310900), new XAttribute("row", 0)),
+                    new XElement("Skill", new XAttribute("id", 30900), new XAttribute("row", 0)),
+                    new XElement("Skill", new XAttribute("id", 50900), new XAttribute("row", 0)),
+                    new XElement("Skill", new XAttribute("id", 240900), new XAttribute("row", 0)),
+                    new XElement("Skill", new XAttribute("id", 330900), new XAttribute("row", 0)),
+                    new XElement("Skill", new XAttribute("id", 340100), new XAttribute("row", 0)),
+                    new XElement("Skill", new XAttribute("id", 350100), new XAttribute("row", 0))
+                    );
+                skills.Save("resources/config/warrior-skills.xml");
+            }
 
-                if (SkillsDatabase.TryGetSkill(skillId, Class.Warrior, out Skill sk))
+            XDocument skillsDoc = XDocument.Load("resources/config/warrior-skills.xml");
+                foreach (XElement skillElement in skillsDoc.Descendants("Skill"))
                 {
-                    if (row == 1)
+                    uint skillId = Convert.ToUInt32(skillElement.Attribute("id").Value);
+                    int row = Convert.ToInt32(skillElement.Attribute("row").Value);
+
+                    if (SkillsDatabase.TryGetSkill(skillId, Class.Warrior, out Skill sk))
                     {
-                        MainSkills.Add(new FixedSkillCooldown(sk, CooldownType.Skill, Dispatcher));
-                    }
-                    else if (row == 2)
-                    {
-                        SecondarySkills.Add(new FixedSkillCooldown(sk, CooldownType.Skill, Dispatcher));
+                        if (row == 1)
+                        {
+                            MainSkills.Add(new FixedSkillCooldown(sk, CooldownType.Skill, Dispatcher));
+                        }
+                        else if (row == 2)
+                        {
+                            SecondarySkills.Add(new FixedSkillCooldown(sk, CooldownType.Skill, Dispatcher));
+                        }
                     }
                 }
-            }
+
 
             //Deadly gamble
             SkillsDatabase.TryGetSkill(200200, Class.Warrior, out Skill dg);
