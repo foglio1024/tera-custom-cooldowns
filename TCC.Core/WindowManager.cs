@@ -28,7 +28,7 @@ namespace TCC
         public static BossGageWindow BossGauge;
         public static AbnormalitiesWindow BuffBar;
         public static GroupWindow GroupWindow;
-        public static TccWindow ClassWindow;
+        public static ClassWindow ClassWindow;
 
         public static SettingsWindow Settings;
 
