@@ -14,37 +14,42 @@ using TCC.Data;
 
 namespace TCC.ViewModels
 {
-    public class EdgeCounter : TSPropertyChanged
+    public class Counter : TSPropertyChanged
     {
-        private int edge = 0;
-        public int Edge
+        private int val = 0;
+        public int Val
         {
-            get => edge;
+            get => val;
             set
             {
-                if (edge == value) return;
-                edge = value;
-                if (edge == 10)
+                if (val == value) return;
+                val = value;
+                if (val == _max)
                 {
                     NotifyPropertyChanged("Maxed");
                 }
                 RefreshTimer();
-                NotifyPropertyChanged("Edge");
+                NotifyPropertyChanged("Val");
             }
         }
 
         DispatcherTimer _expire;
+        int _max;
+        bool _autoexpire;
         void RefreshTimer()
         {
             _expire.Stop();
-            if (edge == 0) return;
+            if (val == 0) return;
+            if (!_autoexpire) return;
             _expire.Start();
         }
-        public EdgeCounter()
+        public Counter(int max, bool autoexpire)
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
+            _max = max;
+            _autoexpire = autoexpire;
             _expire = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(8000) };
-            _expire.Tick += (s, ev) => Edge = 0;
+            _expire.Tick += (s, ev) => Val = 0;
         }
     }
     public class IntTracker : TSPropertyChanged
@@ -76,13 +81,13 @@ namespace TCC.ViewModels
         public FixedSkillCooldown DeadlyGamble { get; set; }
         public FixedSkillCooldown DeadlyGambleBuff { get; set; }
 
-        public EdgeCounter EdgeCounter { get; set; }
+        public Counter EdgeCounter { get; set; }
 
         public WarriorBarManager()
         {
             _instance = this;
             CurrentClassManager = this;
-            EdgeCounter = new EdgeCounter();
+            EdgeCounter = new Counter(10, true);
             LoadSkills();
         }
 
@@ -145,6 +150,32 @@ namespace TCC.ViewModels
             DeadlyGambleBuff = new FixedSkillCooldown(dg, CooldownType.Skill, Dispatcher);
         }
 
+        internal void StartCooldown(SkillCooldown sk)
+        {
+            var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
+            if (skill != null)
+            {
+                skill.Start(sk.Cooldown);
+
+                return;
+            }
+            skill = SecondarySkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
+            if (skill != null)
+            {
+                skill.Start(sk.Cooldown);
+                return;
+            }
+
+            if (sk.Skill.IconName == DeadlyGamble.Skill.IconName)
+            {
+                DeadlyGamble.Start(sk.Cooldown);
+                return;
+            }
+            AddOrRefreshSkill(sk);
+
+
+
+        }
         internal void ResetCooldown(SkillCooldown s)
         {
             s.SetDispatcher(this.Dispatcher);
@@ -192,37 +223,7 @@ namespace TCC.ViewModels
 
         }
 
-        internal void SetRE(int currRe)
-        {
-            throw new NotImplementedException();
-        }
 
-        internal void StartCooldown(SkillCooldown sk)
-        {
-            var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
-            if (skill != null)
-            {
-                skill.Start(sk.Cooldown);
-
-                return;
-            }
-            skill = SecondarySkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
-            if (skill != null)
-            {
-                skill.Start(sk.Cooldown);
-                return;
-            }
-
-            if (sk.Skill.IconName == DeadlyGamble.Skill.IconName)
-            {
-                DeadlyGamble.Start(sk.Cooldown);
-                return;
-            }
-            AddOrRefreshSkill(sk);
-
-
-
-        }
         void AddOrRefreshSkill(SkillCooldown sk)
         {
             sk.SetDispatcher(this.Dispatcher);
