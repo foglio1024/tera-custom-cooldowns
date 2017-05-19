@@ -54,20 +54,20 @@ namespace TCC.Controls
             _currentEdge = newEdge;
         }
 
-        EdgeCounter _context;
+        Counter _context;
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
-            _context = (EdgeCounter)DataContext;
+            _context = (Counter)DataContext;
             _context.PropertyChanged += _context_PropertyChanged;
         }
 
         private void _context_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if(e.PropertyName == "Edge")
+            if(e.PropertyName == "Val")
             {
-                SetEdge(_context.Edge);
+                SetEdge(_context.Val);
             }
             else if(e.PropertyName == "Maxed")
             {
