@@ -53,7 +53,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.CacheMode>
-                        <BitmapCache RenderAtScale="1"/>
+                        <BitmapCache RenderAtScale="2"/>
                     </Grid.CacheMode>
                     <TextBlock  Style="{StaticResource text1}"
                                HorizontalAlignment="Left" 
