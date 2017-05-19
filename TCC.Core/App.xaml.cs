@@ -57,7 +57,7 @@ namespace TCC
             TeraSniffer.Instance.NewConnection += (srv) => SkillManager.Clear();
             TeraSniffer.Instance.EndConnection += () => SkillManager.Clear();
 
-            Debug();
+            //Debug();
 
 
             SessionManager.CurrentPlayer.Class = Class.None;
