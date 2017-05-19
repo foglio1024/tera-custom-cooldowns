@@ -19,7 +19,7 @@
                     <DropShadowEffect ShadowDepth="1" Opacity=".7"/>
                 </Ellipse.Effect>
             </Ellipse>
-            <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Foreground="#ffff" FontSize="12" FontWeight="SemiBold" Text="{Binding CurrentCD, RelativeSource={RelativeSource AncestorType=local:BarCooldown}, StringFormat={}{0:N0}}"></TextBlock>
+            <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=local:BarCooldown}}" FontSize="12" FontWeight="SemiBold" Text="{Binding CurrentCD, RelativeSource={RelativeSource AncestorType=local:BarCooldown}, StringFormat={}{0:N0}}"></TextBlock>
             <Grid.CacheMode>
                 <BitmapCache RenderAtScale="1"/>
             </Grid.CacheMode>
