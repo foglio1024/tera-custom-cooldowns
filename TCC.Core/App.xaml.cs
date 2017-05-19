@@ -79,8 +79,11 @@ namespace TCC
             WindowManager.ClassWindow.Dispatcher.Invoke(() =>
             {
                 ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).ClearSkills();
-                ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).BarTemplate = Class.Warrior;
+                ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).CurrentClass = Class.Glaiver;
             });
+
+            ((ValkyrieBarManager)ClassManager.CurrentClassManager).RagnarokBuff.Start(25000);
+            ((ValkyrieBarManager)ClassManager.CurrentClassManager).RunemarksCounter.Val = 5;
 
             //for (int i = 0; i < 5; i++)
             //{
