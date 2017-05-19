@@ -1,6 +1,8 @@
 ﻿using System;
+
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -43,36 +45,39 @@ namespace TCC.ViewModels
                 RaisePropertyChanged("Scale");
             }
         }
-        private Class _barTemplate = Class.None;
-        public Class BarTemplate
+        private Class currentClass = Class.None;
+        public Class CurrentClass
         {
-            get { return _barTemplate; }
+            get { return currentClass; }
             set
             {
-                if (_barTemplate == value) return;
-                _barTemplate = value;
-                switch (_barTemplate)
+                if (currentClass == value) return;
+                currentClass = value;
+                RaisePropertyChanged("CurrentClass");
+                switch (currentClass)
                 {
                     case Class.Warrior:
-                        CurrentBar = WarriorBarManager.Instance;
+                        CurrentManager = WarriorBarManager.Instance;
+                        break;
+                    case Class.Glaiver:
+                        CurrentManager = ValkyrieBarManager.Instance;
                         break;
                     default:
-                        CurrentBar = null;
+                        CurrentManager = null;
                         break;
                 }
-                RaisePropertyChanged("BarTemplate");
             }
         }
 
-        private ClassManager currentBar;
-        public ClassManager CurrentBar
+        private ClassManager currentManager;
+        public ClassManager CurrentManager
         {
-            get { return currentBar; }
+            get { return currentManager; }
             set
             {
-                if (currentBar == value) return;
-                currentBar = value;
-                RaisePropertyChanged("CurrentBar");
+                if (currentManager == value) return;
+                currentManager = value;
+                RaisePropertyChanged("CurrentManager");
             }
         }
 
@@ -81,56 +86,74 @@ namespace TCC.ViewModels
             var result = false;
             WindowManager.ClassWindow.Dispatcher.Invoke(() =>
             {
-                if (((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).CurrentBar != null) result = true;
+                if (((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).CurrentManager != null) result = true;
                 else result = false;
             });
             return result;
         }
 
-
         public void StartCooldown(SkillCooldown skillCooldown)
         {
-            switch (SessionManager.CurrentPlayer.Class)
+            CurrentManager.Dispatcher.Invoke(() =>
             {
-                case Class.Warrior:
-                    (CurrentBar as WarriorBarManager).StartCooldown(skillCooldown);
-                    break;
-                default:
-                    break;
-            }
+                switch (SessionManager.CurrentPlayer.Class)
+                {
+                    case Class.Warrior:
+                        (CurrentManager as WarriorBarManager).StartCooldown(skillCooldown);
+                        break;
+                    case Class.Glaiver:
+                        (CurrentManager as ValkyrieBarManager).StartCooldown(skillCooldown);
+                        break;
+                    default:
+                        break;
+                }
+            });
         }
+
         public void ResetCooldown(SkillCooldown skillCooldown)
         {
-            switch (SessionManager.CurrentPlayer.Class)
+            CurrentManager.Dispatcher.Invoke(() =>
             {
-                case Class.Warrior:
-                    (CurrentBar as WarriorBarManager).ResetCooldown(skillCooldown);
-                    break;
-                default:
-                    break;
-            }
+                switch (SessionManager.CurrentPlayer.Class)
+                {
+                    case Class.Warrior:
+                        (CurrentManager as WarriorBarManager).ResetCooldown(skillCooldown);
+                        break;
+                    case Class.Glaiver:
+                        (CurrentManager as ValkyrieBarManager).ResetCooldown(skillCooldown);
+                        break;
+                    default:
+                        break;
+                }
+            });
 
         }
         public void RemoveSkill(Skill skill)
         {
-            switch (SessionManager.CurrentPlayer.Class)
+            CurrentManager.Dispatcher.Invoke(() =>
             {
-                case Class.Warrior:
-                    (CurrentBar as WarriorBarManager).RemoveSkill(skill);
-                    break;
-                default:
-                    break;
-            }
+                switch (SessionManager.CurrentPlayer.Class)
+                {
+                    case Class.Warrior:
+                        (CurrentManager as WarriorBarManager).RemoveSkill(skill);
+                        break;
+                    case Class.Glaiver:
+                        (CurrentManager as ValkyrieBarManager).RemoveSkill(skill);
+                        break;
+                    default:
+                        break;
+                }
+            });
         }
 
         internal void ClearSkills()
         {
-            if (CurrentBar == null) return;
-            CurrentBar.Dispatcher.Invoke(() =>
+            if (CurrentManager == null) return;
+            CurrentManager.Dispatcher.Invoke(() =>
             {
-                CurrentBar.OtherSkills.Clear();
+                CurrentManager.OtherSkills.Clear();
             });
-            
+
         }
     }
 

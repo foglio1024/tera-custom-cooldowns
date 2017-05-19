@@ -113,6 +113,7 @@
     </ApplicationDefinition>
     <Compile Include="AbnormalityManager.cs" />
     <Compile Include="ClassSpecific\Priest.cs" />
+    <Compile Include="ClassSpecific\Valkyrie.cs" />
     <Compile Include="Controls\BarCooldown.xaml.cs">
       <DependentUpon>BarCooldown.xaml</DependentUpon>
     </Compile>
@@ -405,11 +406,18 @@
       <DependentUpon>EdgeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ClassSpecificBars\Managers\WarriorBarManager.cs" />
+    <Compile Include="Windows\ClassSpecificBars\RunemarksControl.xaml.cs">
+      <DependentUpon>RunemarksControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ClassSpecificBars\ValkyrieBar.xaml.cs">
+      <DependentUpon>ValkyrieBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\ClassSpecificBars\ViewModels\ClassWindowViewModel.cs" />
     <Compile Include="Windows\ClassSpecificBars\ClassWindow.xaml.cs">
       <DependentUpon>ClassWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\FixedSkillCooldown.cs" />
+    <Compile Include="Windows\ClassSpecificBars\Managers\ValkyrieBarManager.cs" />
     <Compile Include="Windows\ClassSpecificBars\WarriorBar.xaml.cs">
       <DependentUpon>WarriorBar.xaml</DependentUpon>
     </Compile>
@@ -520,6 +528,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\ClassSpecificBars\EdgeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ClassSpecificBars\RunemarksControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ClassSpecificBars\ValkyrieBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
