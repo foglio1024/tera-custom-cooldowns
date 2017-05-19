@@ -21,7 +21,7 @@
             </Ellipse.Fill>
         </Ellipse>
             <Grid.CacheMode>
-                <BitmapCache RenderAtScale="1"/>
+                <BitmapCache RenderAtScale="2"/>
             </Grid.CacheMode>
         </Grid>
         <local:Arc x:Name="arc" 
