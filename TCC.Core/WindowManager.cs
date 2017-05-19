@@ -28,9 +28,9 @@ namespace TCC
         public static BossGageWindow BossGauge;
         public static AbnormalitiesWindow BuffBar;
         public static GroupWindow GroupWindow;
+        public static TccWindow ClassWindow;
 
         public static SettingsWindow Settings;
-
 
         public static ContextMenu ContextMenu;
 
@@ -167,6 +167,19 @@ namespace TCC
             groupWindowThread.SetApartmentState(ApartmentState.STA);
             groupWindowThread.Start();
 
+            var t = new Thread(new ThreadStart(() =>
+            {
+                SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                ClassWindow = new ClassWindow();
+                ClassWindow.Closed += (s, ev) => ClassWindow.Dispatcher.InvokeShutdown();
+                ClassWindow.Show();
+                Dispatcher.Run();
+            }))
+            {
+                Name = "Class bar thread"
+            };
+            t.SetApartmentState(ApartmentState.STA);
+            t.Start();
             Thread.Sleep(500);
             ContextMenu = new ContextMenu();
 
@@ -205,6 +218,46 @@ namespace TCC
             Settings.BeginAnimation(Window.OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
         }
 
+
+        internal static void InitClassBar()
+        {
+            switch (SessionManager.CurrentPlayer.Class)
+            {
+                case Class.Warrior:
+                    break;
+                case Class.Lancer:
+                    break;
+                case Class.Slayer:
+                    break;
+                case Class.Berserker:
+                    break;
+                case Class.Sorcerer:
+                    break;
+                case Class.Archer:
+                    break;
+                case Class.Priest:
+                    break;
+                case Class.Elementalist:
+                    break;
+                case Class.Soulless:
+                    break;
+                case Class.Engineer:
+                    break;
+                case Class.Fighter:
+                    break;
+                case Class.Assassin:
+                    break;
+                case Class.Glaiver:
+                    break;
+                case Class.Common:
+                    break;
+                case Class.None:
+                    break;
+                default:
+                    break;
+            }
+        }
+
         public static void ChangeClickThru(bool v)
         {
             if (v)
@@ -232,51 +285,6 @@ namespace TCC
                 w.Close();
             }
         }
-        //public static void InitClassGauge(Class c)
-        //{
-
-        //    switch (c)
-        //    {
-        //        case Class.Engineer:
-        //            App.Current.Dispatcher.Invoke(() =>
-        //            {
-        //                ClassSpecificWindow.Init(Colors.Orange);
-        //                ClassSpecificWindow.Enabled = true;
-        //            });
-        //            break;
-        //        case Class.Fighter:
-        //            App.Current.Dispatcher.Invoke(() =>
-        //            {
-        //                ClassSpecificWindow.Init(Colors.OrangeRed);
-        //                ClassSpecificWindow.Enabled = true;
-        //            });
-        //            break;
-        //        case Class.Assassin:
-        //            App.Current.Dispatcher.Invoke(() =>
-        //            {
-        //                ClassSpecificWindow.Init(System.Windows.Media.Color.FromArgb(0xff,0xff,0x6a,0xff));
-        //                ClassSpecificWindow.Enabled = true;
-        //            });
-        //            break;
-        //        case Class.Glaiver:
-        //            App.Current.Dispatcher.Invoke(() =>
-        //            {
-        //                ClassSpecificWindow.Init(System.Windows.Media.Color.FromRgb(230,240,255));
-        //                ClassSpecificWindow.Enabled = true;
-        //            });
-        //            break;
-        //        default:
-        //            ClassSpecificWindow.Enabled = false;
-        //            return;
-        //    }
-        //    if (Transparent)
-        //    {
-        //        App.Current.Dispatcher.Invoke(() =>
-        //        {
-        //            FocusManager.MakeTransparent(new WindowInteropHelper(ClassSpecificWindow).Handle);
-        //        });
-        //    }
-        //}
         public static void ShowWindow(Window w)
         {
             if (w != null)

@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCC.Windows"
-        xmlns:ui_elements="clr-namespace:TCC.UI_elements"
+        xmlns:ui_elements="clr-namespace:TCC.Controls"
         xmlns:vm="clr-namespace:TCC.ViewModels" Topmost="True"
         mc:Ignorable="d" WindowStyle="None" AllowsTransparency="True" 
         Title="TCC settings" Height="Auto" Width="Auto" ResizeMode="NoResize" SizeToContent="WidthAndHeight" Background="Transparent" UseLayoutRounding="True" >
@@ -125,6 +125,26 @@
                 <ui_elements:BoolSetting SettingName="Show left to right" Grid.Row="4" IsOn="{Binding IsLeftToRightOn, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_swap_horiz_white_24dp_2x.png"/>
 
             </Grid>
+            <!-- Other settings -->
+            <Grid Grid.Row="3" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Background="#09ffffff" Grid.ColumnSpan="2" />
+                    <Image Source="/TCC;component/resources/images/ic_data_usage_white_24dp_2x.png" Margin="7,5" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
+                    <TextBlock Text="Buffs window settings" Style="{StaticResource text1}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+                </Grid>
+                <ui_elements:BoolSetting SettingName="Use new cooldown bar" Grid.Row="1" IsOn="{Binding ClassWindowOn, Mode=TwoWay}" />
+            </Grid>
 
         </Grid>
         <Grid Grid.Column="1" Grid.Row="1">
@@ -182,7 +202,29 @@
                 <ui_elements:ValueSetting SettingName="Scale" Grid.Row="3" Value="{Binding GroupWindowScale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></ui_elements:ValueSetting>
                 <ui_elements:BoolSetting SettingName="Hide me" Grid.Row="4" IsOn="{Binding HideMe, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_person_white_24dp_2x.png" ToolTip="Hides current player from group window. Note: if turned back on while in a party, player will not be visible until party composition changes."/>
                 <ui_elements:BoolSetting SettingName="Hide buffs" Grid.Row="5" IsOn="{Binding HideAllBuffs, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_data_usage_white_24dp_2x.png"  ToolTip="Hides all group members' buffs from group window. Debuffs will still be showed (only for healers' buffs). Note: if turned back on while in a party, pre-existing buffs will not be visible until refreshed."/>
-                <ui_elements:BoolSetting SettingName="Hide raid (de)buffs" Grid.Row="6" IsOn="{Binding HideRaidAbnormalities, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_data_usage_white_24dp_2x.png" ToolTip="Hides all buffs and debuffs for every group member (only 7+ people raids). Note: if turned back on while in a party, pre-existing (de)buffs will not be visible until refreshed."/>
+                <ui_elements:BoolSetting SettingName="Hide buffs and debuffs" Grid.Row="6" IsOn="{Binding HideRaidAbnormalities, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_data_usage_white_24dp_2x.png" ToolTip="Hides all buffs and debuffs for every group member. Note: if turned back on while in a party, pre-existing (de)buffs will not be visible until refreshed."/>
+            </Grid>
+
+            <!-- Class window settings -->
+            <Grid Grid.Row="2" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Background="#09ffffff" Grid.ColumnSpan="2" />
+                    <Image Source="/TCC;component/resources/images/ic_person_white_24dp_2x.png" Margin="7,5" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
+                    <TextBlock Text="Class window settings" Style="{StaticResource text1}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+                </Grid>
+                <ui_elements:BoolSetting SettingName="Visibility" Grid.Row="1" IsOn="{Binding IsClassWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
+                <ui_elements:BoolSetting SettingName="Click through" Grid.Row="2" IsOn="{Binding IsClassWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_mouse_white_24dp_2x.png"/>
+                <ui_elements:ValueSetting SettingName="Scale" Grid.Row="3" Value="{Binding ClassWindowScale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"/>
             </Grid>
 
         </Grid>

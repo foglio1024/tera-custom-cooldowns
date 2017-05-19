@@ -7,15 +7,20 @@ namespace TCC
 {
     public class SkillCooldown : TSPropertyChanged, IDisposable
     {
+        public Dispatcher Dispatcher { get => _dispatcher; }
         public Skill Skill { get; set; }
         public int Cooldown { get; set; }
         public int OriginalCooldown { get; set; }
-        public CooldownType Type { get; set; }
         private Timer _timer;
 
-        public SkillCooldown(Skill sk, int cd, CooldownType t)
+        public void SetDispatcher(Dispatcher d)
         {
-            _dispatcher = CooldownBarWindowManager.Instance.Dispatcher;
+            _dispatcher = d;
+        }
+
+        public SkillCooldown(Skill sk, int cd, CooldownType t, Dispatcher d)
+        {
+            _dispatcher = d;
 
 
             Skill = sk;
@@ -35,8 +40,9 @@ namespace TCC
             _timer?.Stop();
         }
 
-        public void Refresh()
+        public void Refresh(int cd)
         {
+            Cooldown = cd;
             NotifyPropertyChanged("Refresh");
             if (_timer == null) return;
             _timer.Stop();

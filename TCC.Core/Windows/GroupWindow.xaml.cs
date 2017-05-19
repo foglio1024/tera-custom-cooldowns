@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TCC.Data;
-using TCC.UI_elements;
+using TCC.Controls;
 using TCC.ViewModels;
 using TCC.Windows;
 
@@ -85,6 +85,8 @@ namespace TCC.Windows
             //add settings
             SettingsManager.GroupWindowSettings.X = Left;
             SettingsManager.GroupWindowSettings.Y = Top;
+            SettingsManager.SaveSettings();
+
         }
 
         private void TccWindow_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)

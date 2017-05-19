@@ -62,19 +62,19 @@ namespace TCC
                 if (ab.Infinity)
                 {
                     newAb.Duration = -1;
-                    SessionManager.CurrentPlayer.AddOrRefreshInfBuff(newAb);
+                    //SessionManager.CurrentPlayer.AddOrRefreshInfBuff(newAb);
                     BuffBarWindowManager.Instance.Player.AddOrRefreshInfBuff(newAb);
 
                 }
                 else
                 {
-                    SessionManager.CurrentPlayer.AddOrRefreshBuff(newAb);
+                    //SessionManager.CurrentPlayer.AddOrRefreshBuff(newAb);
                     BuffBarWindowManager.Instance.Player.AddOrRefreshBuff(newAb);
                 }
             }
             else
             {
-                SessionManager.CurrentPlayer.AddOrRefreshDebuff(newAb);
+                //SessionManager.CurrentPlayer.AddOrRefreshDebuff(newAb);
                 BuffBarWindowManager.Instance.Player.AddOrRefreshDebuff(newAb);
 
             }
@@ -83,43 +83,23 @@ namespace TCC
         {
             if (ab.Infinity)
             {
-                SessionManager.CurrentPlayer.RemoveInfBuff(ab);
+                //SessionManager.CurrentPlayer.RemoveInfBuff(ab);
                 BuffBarWindowManager.Instance.Player.RemoveInfBuff(ab);
             }
             else
             {
                 if (ab.Type == AbnormalityType.Buff)
                 {
-                    SessionManager.CurrentPlayer.RemoveBuff(ab);
+                    //SessionManager.CurrentPlayer.RemoveBuff(ab);
                     BuffBarWindowManager.Instance.Player.RemoveBuff(ab);
 
                 }
                 else
                 {
-                    SessionManager.CurrentPlayer.RemoveDebuff(ab);
+                    //SessionManager.CurrentPlayer.RemoveDebuff(ab);
                     BuffBarWindowManager.Instance.Player.RemoveDebuff(ab);
                 }
             }
-            //if (CurrentPlayer.Buffs.Any(x => x.Abnormality.Id == ab.Id))
-            //{
-            //    CurrentPlayer.Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id).Dispose();
-            //    CurrentPlayer.Buffs.Remove(CurrentPlayer.Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id));
-            //}
-            //else if (CurrentPlayer.Debuffs.Any(x => x.Abnormality.Id == ab.Id))
-            //{
-            //    CurrentPlayer.Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id).Dispose();
-            //    CurrentPlayer.Debuffs.Remove(CurrentPlayer.Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id));
-            //}
-            //else if (CurrentPlayer.InfBuffs.Any(x => x.Abnormality.Id == ab.Id))
-            //{
-            //    CurrentPlayer.InfBuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id).Dispose();
-            //    CurrentPlayer.InfBuffs.Remove(CurrentPlayer.InfBuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id));
-            //}
-            //if (!ab.IsBuff)
-            //{
-            //    SetDebuffedStatus(false);
-            //}
-
         }
 
         static void BeginNPCAbnormality(Abnormality ab, int stacks, int duration, ulong target)

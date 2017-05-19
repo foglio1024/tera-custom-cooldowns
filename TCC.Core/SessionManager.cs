@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace TCC
             get => logged;
             set
             {
-                if(logged != value)
+                if (logged != value)
                 {
                     logged = value;
                     WindowManager.NotifyVisibilityChanged();
@@ -31,7 +32,7 @@ namespace TCC
             get => loadingScreen;
             set
             {
-                if(loadingScreen != value)
+                if (loadingScreen != value)
                 {
                     loadingScreen = value;
                     WindowManager.NotifyVisibilityChanged();
@@ -45,7 +46,7 @@ namespace TCC
             get => harrowHoldMode;
             set
             {
-                if(harrowHoldMode != value)
+                if (harrowHoldMode != value)
                 {
                     harrowHoldMode = value;
                     HhModeChanged?.Invoke(harrowHoldMode);
@@ -82,6 +83,7 @@ namespace TCC
             {
                 CurrentPlayer.CurrentHP = hp;
                 CharacterWindowManager.Instance.Player.CurrentHP = hp;
+                ClassManager.SetHP(Convert.ToInt32(hp));
             }
         }
         public static void SetPlayerMP(ulong target, float mp)
@@ -90,7 +92,22 @@ namespace TCC
             {
                 CurrentPlayer.CurrentMP = mp;
                 CharacterWindowManager.Instance.Player.CurrentMP = mp;
+                ClassManager.SetMP(Convert.ToInt32(mp));
             }
+        }
+        public static void SetPlayerST(ulong target, float st)
+        {
+            if (target == CurrentPlayer.EntityId)
+            {
+                CurrentPlayer.CurrentST = st;
+                CharacterWindowManager.Instance.Player.CurrentST = st;
+                ClassManager.SetST(Convert.ToInt32(st));
+            }
+        }
+        public static void SetPlayerFE(float en)
+        {
+            CurrentPlayer.FlightEnergy = en;
+            CharacterWindowManager.Instance.Player.FlightEnergy = en;
         }
         public static void SetPlayerLaurel(Player p)
         {

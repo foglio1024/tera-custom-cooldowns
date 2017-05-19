@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="TCC.Controls.EdgeControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TCC.Controls" Loaded="UserControl_Loaded"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style x:Key="ell" TargetType="Ellipse">
+            <Setter Property="Height" Value="10"></Setter>
+            <Setter Property="Width" Value="10"></Setter>
+            <Setter Property="Opacity" Value="0"></Setter>
+            <Setter Property="Stroke" Value="White"></Setter>
+            <Setter Property="StrokeThickness" Value="0"></Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid Grid.Row="0">
+        <Border Style="{StaticResource border}" Background="#202027" Width="184" Height="20" CornerRadius="10" BorderThickness="0" x:Name="baseBorder">
+        </Border>
+        <UniformGrid Width="180" Height="20" Rows="1" Columns="10" Opacity="1">
+            <Ellipse Style="{StaticResource ell}" StrokeThickness="0" Fill="Gray" Opacity=".3"/>
+            <Ellipse Style="{StaticResource ell}" StrokeThickness="0" Fill="Gray" Opacity=".3"/>
+            <Ellipse Style="{StaticResource ell}" StrokeThickness="0" Fill="Gray" Opacity=".3"/>
+            <Ellipse Style="{StaticResource ell}" StrokeThickness="0" Fill="Gray" Opacity=".3"/>
+            <Ellipse Style="{StaticResource ell}" StrokeThickness="0" Fill="Gray" Opacity=".3"/>
+            <Ellipse Style="{StaticResource ell}" StrokeThickness="0" Fill="Gray" Opacity=".3"/>
+            <Ellipse Style="{StaticResource ell}" StrokeThickness="0" Fill="Gray" Opacity=".3"/>
+            <Ellipse Style="{StaticResource ell}" StrokeThickness="0" Fill="Gray" Opacity=".3"/>
+            <Ellipse Style="{StaticResource ell}" StrokeThickness="0" Fill="Gray" Opacity=".3"/>
+            <Ellipse Style="{StaticResource ell}" StrokeThickness="0" Fill="Gray" Opacity=".3"/>
+        </UniformGrid>
+        <UniformGrid Width="180" Height="20" Rows="1" Columns="10" Opacity="1" x:Name="edgeContainer">
+            <Ellipse Name="e1" Style="{StaticResource ell}" Fill="White"/>
+            <Ellipse Name="e2" Style="{StaticResource ell}" Fill="White"/>
+            <Ellipse Name="e3" Style="{StaticResource ell}" Fill="Orange"/>
+            <Ellipse Name="e4" Style="{StaticResource ell}" Fill="Orange"/>
+            <Ellipse Name="e5" Style="{StaticResource ell}" Fill="Orange"/>
+            <Ellipse Name="e6" Style="{StaticResource ell}" Fill="Orange"/>
+            <Ellipse Name="e7" Style="{StaticResource ell}" Fill="Orange"/>
+            <Ellipse Name="e8" Style="{StaticResource ell}" Fill="Orange"/>
+            <Ellipse Name="e9" Style="{StaticResource ell}" Fill="Orange"/>
+            <Ellipse Name="e10" Style="{StaticResource ell}" Fill="Orange"/>
+
+        </UniformGrid>
+
+    </Grid>
+
+</UserControl>

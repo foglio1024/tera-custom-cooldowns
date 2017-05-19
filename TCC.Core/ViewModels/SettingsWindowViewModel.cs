@@ -5,6 +5,7 @@ namespace TCC.ViewModels
 {
     public class SettingsWindowViewModel : BaseINPC
     {
+        //visibility settings
         private bool isCooldownWindowVisible;
         public bool IsCooldownWindowVisible
         {
@@ -27,13 +28,13 @@ namespace TCC.ViewModels
                 isCooldownWindowVisible = value;
                 if (isCooldownWindowVisible)
                 {
-                    WindowManager.CooldownWindow.Dispatcher.Invoke(() => WindowManager.CooldownWindow.Visibility = Visibility.Visible);
+                    WindowManager.CooldownWindow.SetVisibility(Visibility.Visible);
                     SettingsManager.CooldownWindowSettings.Visibility = Visibility.Visible;
 
                 }
                 else
                 {
-                    WindowManager.CooldownWindow.Dispatcher.Invoke(() => WindowManager.CooldownWindow.Visibility = Visibility.Hidden);
+                    WindowManager.CooldownWindow.SetVisibility(Visibility.Hidden);
                     SettingsManager.CooldownWindowSettings.Visibility = Visibility.Hidden; ;
                 }
 
@@ -62,12 +63,12 @@ namespace TCC.ViewModels
                 isBuffWindowVisible = value;
                 if (isBuffWindowVisible)
                 {
-                    WindowManager.BuffBar.Dispatcher.Invoke(() => WindowManager.BuffBar.Visibility = Visibility.Visible);
+                    WindowManager.BuffBar.SetVisibility(Visibility.Visible);
                     SettingsManager.BuffBarWindowSettings.Visibility = Visibility.Visible;
                 }
                 else
                 {
-                    WindowManager.BuffBar.Dispatcher.Invoke(() => WindowManager.BuffBar.Visibility = Visibility.Hidden);
+                    WindowManager.BuffBar.SetVisibility(Visibility.Hidden);
                     SettingsManager.BuffBarWindowSettings.Visibility = Visibility.Hidden;
                 }
                 RaisePropertyChanged("IsBuffWindowVisible");
@@ -97,12 +98,12 @@ namespace TCC.ViewModels
 
                 if (isBossWindowVisible)
                 {
-                    WindowManager.BossGauge.Dispatcher.Invoke(() => WindowManager.BossGauge.Visibility = Visibility.Visible);
+                    WindowManager.BossGauge.SetVisibility(Visibility.Visible);
                     SettingsManager.BossGaugeWindowSettings.Visibility = Visibility.Visible;
                 }
                 else
                 {
-                    WindowManager.BossGauge.Dispatcher.Invoke(() => WindowManager.BossGauge.Visibility = Visibility.Hidden);
+                    WindowManager.BossGauge.SetVisibility(Visibility.Hidden);
                     SettingsManager.BossGaugeWindowSettings.Visibility = Visibility.Hidden;
                 }
 
@@ -131,12 +132,12 @@ namespace TCC.ViewModels
                 isCharacterWindowVisible = value;
                 if (isCharacterWindowVisible)
                 {
-                    WindowManager.CharacterWindow.Dispatcher.Invoke(() => WindowManager.CharacterWindow.Visibility = Visibility.Visible);
+                    WindowManager.CharacterWindow.SetVisibility(Visibility.Visible);
                     SettingsManager.CharacterWindowSettings.Visibility = Visibility.Visible;
                 }
                 else
                 {
-                    WindowManager.CharacterWindow.Dispatcher.Invoke(() => WindowManager.CharacterWindow.Visibility = Visibility.Hidden);
+                    WindowManager.CharacterWindow.SetVisibility(Visibility.Hidden);
                     SettingsManager.CharacterWindowSettings.Visibility = Visibility.Hidden;
                 }
 
@@ -164,19 +165,53 @@ namespace TCC.ViewModels
                 isGroupWindowVisible = value;
                 if (isGroupWindowVisible)
                 {
-                    WindowManager.GroupWindow.Dispatcher.Invoke(() => WindowManager.GroupWindow.Visibility = Visibility.Visible);
+                    WindowManager.GroupWindow.SetVisibility(Visibility.Visible);
                     SettingsManager.GroupWindowSettings.Visibility = Visibility.Visible;
                 }
                 else
                 {
-                    WindowManager.GroupWindow.Dispatcher.Invoke(() => WindowManager.GroupWindow.Visibility = Visibility.Hidden);
+                    WindowManager.GroupWindow.SetVisibility(Visibility.Hidden);
                     SettingsManager.GroupWindowSettings.Visibility = Visibility.Hidden;
                 }
 
                 RaisePropertyChanged("IsGroupWindowVisible");
             }
         }
+        private bool isClassWindowVisible;
+        public bool IsClassWindowVisible
+        {
+            get
+            {
+                if (SettingsManager.ClassWindowSettings.Visibility == Visibility.Visible)
+                {
+                    isClassWindowVisible = true;
+                }
+                else
+                {
+                    isClassWindowVisible = false;
+                }
+                return isClassWindowVisible;
+            }
+            set
+            {
+                if (isClassWindowVisible == value) return;
+                isClassWindowVisible = value;
+                if (isClassWindowVisible)
+                {
+                    WindowManager.ClassWindow.SetVisibility(Visibility.Visible);
+                    SettingsManager.ClassWindowSettings.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    WindowManager.ClassWindow.SetVisibility(Visibility.Hidden);
+                    SettingsManager.ClassWindowSettings.Visibility = Visibility.Hidden;
+                }
 
+                RaisePropertyChanged("IsClassWindowVisible");
+            }
+        }
+
+        //clickthru settings
         public bool IsCooldownWindowTransparent
         {
             get { return SettingsManager.CooldownWindowSettings.ClickThru; }
@@ -184,7 +219,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.CooldownWindowSettings.ClickThru == value) return;
                 SettingsManager.CooldownWindowSettings.ClickThru = value;
-                WindowManager.CooldownWindow.Dispatcher.Invoke(() => WindowManager.CooldownWindow.SetClickThru(SettingsManager.CooldownWindowSettings.ClickThru));
+                WindowManager.CooldownWindow.SetClickThru(SettingsManager.CooldownWindowSettings.ClickThru);
                 RaisePropertyChanged("IsCooldownWindowTransparent");
             }
         }
@@ -195,7 +230,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.CharacterWindowSettings.ClickThru == value) return;
                 SettingsManager.CharacterWindowSettings.ClickThru = value;
-                WindowManager.CharacterWindow.Dispatcher.Invoke(() => WindowManager.CharacterWindow.SetClickThru(SettingsManager.CharacterWindowSettings.ClickThru));
+                WindowManager.CharacterWindow.SetClickThru(SettingsManager.CharacterWindowSettings.ClickThru);
                 RaisePropertyChanged("IsCharacterWindowTransparent");
             }
         }
@@ -206,8 +241,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.BuffBarWindowSettings.ClickThru == value) return;
                 SettingsManager.BuffBarWindowSettings.ClickThru = value;
-                WindowManager.BuffBar.Dispatcher.Invoke(() =>
-                WindowManager.BuffBar.SetClickThru(SettingsManager.BuffBarWindowSettings.ClickThru));
+                WindowManager.BuffBar.SetClickThru(SettingsManager.BuffBarWindowSettings.ClickThru);
                 RaisePropertyChanged("IsBuffWindowTransparent");
             }
         }
@@ -218,7 +252,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.BossGaugeWindowSettings.ClickThru == value) return;
                 SettingsManager.BossGaugeWindowSettings.ClickThru = value;
-                WindowManager.BossGauge.Dispatcher.Invoke(() => WindowManager.BossGauge.SetClickThru(SettingsManager.BossGaugeWindowSettings.ClickThru));
+                WindowManager.BossGauge.SetClickThru(SettingsManager.BossGaugeWindowSettings.ClickThru);
                 RaisePropertyChanged("IsBossWindowTransparent");
             }
         }
@@ -229,55 +263,24 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.GroupWindowSettings.ClickThru == value) return;
                 SettingsManager.GroupWindowSettings.ClickThru = value;
-                WindowManager.GroupWindow.Dispatcher.Invoke(() => WindowManager.GroupWindow.SetClickThru(SettingsManager.GroupWindowSettings.ClickThru));
+                WindowManager.GroupWindow.SetClickThru(SettingsManager.GroupWindowSettings.ClickThru);
                 RaisePropertyChanged("IsGroupWindowTransparent");
             }
         }
-
-        public bool HideMe
+        public bool IsClassWindowTransparent
         {
-            get { return SettingsManager.IgnoreMeInGroupWindow; }
-            set { if (SettingsManager.IgnoreMeInGroupWindow == value) return;
-                SettingsManager.IgnoreMeInGroupWindow = value;
-                if (value == true) GroupWindowManager.Instance.RemoveMe();
-                RaisePropertyChanged("HideMe");
-            }
-        }
-        public bool HideMyBuffs
-        {
-            get { return SettingsManager.IgnoreMyBuffsInGroupWindow; }
+            get { return SettingsManager.ClassWindowSettings.ClickThru; }
             set
             {
-                if (SettingsManager.IgnoreMyBuffsInGroupWindow == value) return;
-                SettingsManager.IgnoreMyBuffsInGroupWindow = value;
-                RaisePropertyChanged("HideMyBuffs");
-                if(value == true) GroupWindowManager.Instance.ClearMyBuffs();
-
-            }
-        }
-        public bool HideAllBuffs
-        {
-            get { return SettingsManager.IgnoreAllBuffsInGroupWindow; }
-            set
-            {
-                if (SettingsManager.IgnoreAllBuffsInGroupWindow == value) return;
-                SettingsManager.IgnoreAllBuffsInGroupWindow = value;
-                RaisePropertyChanged("HideAllBuffs");
-                if (value == true) GroupWindowManager.Instance.ClearAllBuffs();
-            }
-        }
-        public bool HideRaidAbnormalities
-        {
-            get { return SettingsManager.IgnoreRaidAbnormalitiesInGroupWindow; }
-            set
-            {
-                if (SettingsManager.IgnoreRaidAbnormalitiesInGroupWindow == value) return;
-                SettingsManager.IgnoreRaidAbnormalitiesInGroupWindow = value;
-                RaisePropertyChanged("HideRaidAbnormalities");
-                if (value == true) GroupWindowManager.Instance.ClearAllAbnormalities();
+                if (SettingsManager.ClassWindowSettings.ClickThru == value) return;
+                SettingsManager.ClassWindowSettings.ClickThru = value;
+                WindowManager.ClassWindow.SetClickThru(SettingsManager.ClassWindowSettings.ClickThru);
+                RaisePropertyChanged("IsClassWindowTransparent");
             }
         }
 
+
+        //scale settings
         public double CooldownWindowScale
         {
             get { return SettingsManager.CooldownWindowSettings.Scale; }
@@ -348,7 +351,65 @@ namespace TCC.ViewModels
                 RaisePropertyChanged("BossWindowScale");
             }
         }
+        public double ClassWindowScale
+        {
+            get { return SettingsManager.ClassWindowSettings.Scale; }
+            set
+            {
+                if (SettingsManager.ClassWindowSettings.Scale == value) return;
+                SettingsManager.ClassWindowSettings.Scale = value;
+                WindowManager.ClassWindow.Dispatcher.Invoke(() =>
+                {
+                    ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).Scale = value;
+                });
+                RaisePropertyChanged("ClassWindowScale");
+            }
+        }
 
+        //other settings
+        public bool HideMe
+        {
+            get { return SettingsManager.IgnoreMeInGroupWindow; }
+            set { if (SettingsManager.IgnoreMeInGroupWindow == value) return;
+                SettingsManager.IgnoreMeInGroupWindow = value;
+                if (value == true) GroupWindowManager.Instance.RemoveMe();
+                RaisePropertyChanged("HideMe");
+            }
+        }
+        public bool HideMyBuffs
+        {
+            get { return SettingsManager.IgnoreMyBuffsInGroupWindow; }
+            set
+            {
+                if (SettingsManager.IgnoreMyBuffsInGroupWindow == value) return;
+                SettingsManager.IgnoreMyBuffsInGroupWindow = value;
+                RaisePropertyChanged("HideMyBuffs");
+                if(value == true) GroupWindowManager.Instance.ClearMyBuffs();
+
+            }
+        }
+        public bool HideAllBuffs
+        {
+            get { return SettingsManager.IgnoreAllBuffsInGroupWindow; }
+            set
+            {
+                if (SettingsManager.IgnoreAllBuffsInGroupWindow == value) return;
+                SettingsManager.IgnoreAllBuffsInGroupWindow = value;
+                RaisePropertyChanged("HideAllBuffs");
+                if (value == true) GroupWindowManager.Instance.ClearAllBuffs();
+            }
+        }
+        public bool HideRaidAbnormalities
+        {
+            get { return SettingsManager.IgnoreRaidAbnormalitiesInGroupWindow; }
+            set
+            {
+                if (SettingsManager.IgnoreRaidAbnormalitiesInGroupWindow == value) return;
+                SettingsManager.IgnoreRaidAbnormalitiesInGroupWindow = value;
+                RaisePropertyChanged("HideRaidAbnormalities");
+                if (value == true) GroupWindowManager.Instance.ClearAllAbnormalities();
+            }
+        }
         public bool IsLeftToRightOn
         {
             get { return SettingsManager.BuffsDirection == FlowDirection.LeftToRight ? true : false; }
@@ -366,6 +427,16 @@ namespace TCC.ViewModels
                 RaisePropertyChanged("IsLeftToRightOn");
             }
         }
+        public bool ClassWindowOn
+        {
+            get { return SettingsManager.ClassWindowOn; }
+            set
+            {
+                if (SettingsManager.ClassWindowOn == value) return;
+                SettingsManager.ClassWindowOn = value;
+                RaisePropertyChanged("ClassWindowOn");
+            }
+        }
 
         public SettingsWindowViewModel()
         {
@@ -375,8 +446,20 @@ namespace TCC.ViewModels
             WindowManager.BossGauge.PropertyChanged += BossGauge_PropertyChanged;
             WindowManager.BuffBar.PropertyChanged += BuffBar_PropertyChanged;
             WindowManager.GroupWindow.PropertyChanged += GroupWindow_PropertyChanged;
+            WindowManager.ClassWindow.PropertyChanged += ClassWindow_PropertyChanged;
         }
 
+        private void ClassWindow_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Visibility")
+            {
+                IsClassWindowVisible = ((TccWindow)sender).Visibility == Visibility.Hidden ? false : true;
+            }
+            else if (e.PropertyName == "ClickThru")
+            {
+                IsClassWindowTransparent = ((TccWindow)sender).ClickThru;
+            }
+        }
         private void GroupWindow_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "Visibility")

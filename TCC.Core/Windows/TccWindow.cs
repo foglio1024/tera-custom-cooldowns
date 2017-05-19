@@ -42,8 +42,7 @@ namespace TCC.Windows
             var HideButton = new MenuItem() { Header = "Hide" };
             HideButton.Click += (s, ev) =>
             {
-                this.Visibility = Visibility.Hidden;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Visibility"));
+                SetVisibility(Visibility.Hidden);
             };
             ContextMenu.Items.Add(HideButton);
 
@@ -59,6 +58,15 @@ namespace TCC.Windows
         public void SetClickThru(bool t)
         {
             ClickThru = t;
+        }
+
+        public void SetVisibility(Visibility v)
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                Visibility = v;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Visibility"));
+            });
         }
         public event PropertyChangedEventHandler PropertyChanged;
 

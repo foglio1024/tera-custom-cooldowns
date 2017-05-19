@@ -49,6 +49,9 @@ namespace TCC.Windows
             DragMove();
             SettingsManager.BuffBarWindowSettings.X = this.Left;
             SettingsManager.BuffBarWindowSettings.Y = this.Top;
+            SettingsManager.SaveSettings();
+
+
         }
 
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)

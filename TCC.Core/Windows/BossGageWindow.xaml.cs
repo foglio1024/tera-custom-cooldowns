@@ -64,6 +64,7 @@ namespace TCC.Windows
             this.DragMove();
             SettingsManager.BossGaugeWindowSettings.X = this.Left;
             SettingsManager.BossGaugeWindowSettings.Y = this.Top;
+            SettingsManager.SaveSettings();
 
         }
 

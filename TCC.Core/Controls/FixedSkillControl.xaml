@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="TCC.Controls.FixedSkillControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TCC.Controls"
+             xmlns:converters="clr-namespace:TCC.Converters"
+             mc:Ignorable="d" Loaded="Control_Loaded"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <converters:IconConverter x:Key="iconConv"/>
+    </UserControl.Resources>
+    <UserControl.LayoutTransform>
+        <ScaleTransform ScaleX=".9" ScaleY=".9"/>
+    </UserControl.LayoutTransform>
+    <Grid Width="55" Height="55" Margin="2" HorizontalAlignment="Left" Name="MainGrid">
+        <Grid>
+            <Ellipse Width="51" Height="{Binding ElementName=icon, Path=ActualWidth}" x:Name="icon" Stroke="#afff" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Ellipse.Fill>
+                <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource iconConv}}"/>
+            </Ellipse.Fill>
+        </Ellipse>
+            <Grid.CacheMode>
+                <BitmapCache RenderAtScale="1"/>
+            </Grid.CacheMode>
+        </Grid>
+        <local:Arc x:Name="arc" 
+                   Opacity="1" 
+                   UseLayoutRounding="True" 
+                   Width="Auto" 
+                   Height="Auto" 
+                   StrokeThickness="25" Margin="3" 
+                   Stroke="#9000" 
+                   EndAngle=".01" 
+                   HorizontalAlignment="Stretch" 
+                   VerticalAlignment="Stretch" />
+        <Ellipse Fill="White" Name="glow" Opacity="0"/>
+
+        <Grid Width="22" Height="22" x:Name="g" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0" Opacity="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=local:FixedSkillControl}, Converter={StaticResource boolToOpacity}}">
+            <Grid.CacheMode>
+                <BitmapCache RenderAtScale="2"/>
+            </Grid.CacheMode>
+            <Ellipse x:Name="fill" Fill="#dfff"  Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stroke="#40000000"/>
+            <Viewbox StretchDirection="DownOnly" Stretch="Uniform" UseLayoutRounding="True">
+                <TextBlock Foreground="#d9000000" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" 
+                   TextAlignment="Center"
+                   FontWeight="Normal" 
+                   FontSize="16" 
+                   x:Name="number" 
+                   FontFamily="Roboto Mono" 
+                   FontStyle="Normal"
+                   Opacity="1" 
+                   Margin="3"
+                   Text="{Binding CurrentCD, StringFormat=0, RelativeSource={RelativeSource AncestorType=local:FixedSkillControl}}">
+                </TextBlock>
+                <Viewbox.CacheMode>
+                    <BitmapCache RenderAtScale="2" />
+                </Viewbox.CacheMode>
+            </Viewbox>
+
+        </Grid>
+    </Grid>
+</UserControl>

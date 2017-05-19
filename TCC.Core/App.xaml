@@ -6,7 +6,7 @@
              Startup="OnStartup">
     <Application.Resources>
         <DropShadowEffect x:Key="dropShadow" BlurRadius="5" ShadowDepth="3" Opacity=".4" />
-        <SolidColorBrush x:Key="bgColor" Color="#202027" />
+        <SolidColorBrush x:Key="bgColor" Color="#202027" Opacity=".85"/>
         
         <Style x:Key="border" TargetType="Border">
             <Setter Property="Background" Value="{StaticResource bgColor}"/>

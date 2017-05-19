@@ -49,6 +49,7 @@ namespace TCC.Windows
 
             SettingsManager.CharacterWindowSettings.X = this.Left;
             SettingsManager.CharacterWindowSettings.Y = this.Top;
+            SettingsManager.SaveSettings();
         }
 
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)

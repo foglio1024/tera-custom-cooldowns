@@ -102,16 +102,23 @@ namespace TCC.Parsing
             CharacterWindowManager.Instance.Player.MaxMP = p.maxMp;
             CharacterWindowManager.Instance.Player.MaxST = p.maxRe + p.bonusRe;
             CharacterWindowManager.Instance.Player.ItemLevel = p.ilvl;
-            CharacterWindowManager.Instance.Player.CurrentST = p.currRe;
-            CharacterWindowManager.Instance.Player.CurrentHP = p.currHp;
-            CharacterWindowManager.Instance.Player.CurrentMP = p.currMp;
+
+            SessionManager.SetPlayerHP(SessionManager.CurrentPlayer.EntityId, p.currHp);
+            SessionManager.SetPlayerMP(SessionManager.CurrentPlayer.EntityId, p.currMp);
+            SessionManager.SetPlayerST(SessionManager.CurrentPlayer.EntityId, p.currRe);
+                       
+
+            if (SessionManager.CurrentPlayer.Class == Class.Warrior)
+            {
+                ((WarriorBarManager)ClassManager.CurrentClassManager).EdgeCounter.Edge = p.edge;
+            }
         }
         public static void HandleCreatureChangeHP(S_CREATURE_CHANGE_HP p)
         {
             SessionManager.SetPlayerHP(p.target, p.currentHP);
-            if(EntitiesManager.TryGetBossById(p.target, out Boss b))
+            if (EntitiesManager.TryGetBossById(p.target, out Boss b))
             {
-                if(b.Visible == System.Windows.Visibility.Collapsed)
+                if (b.Visible == System.Windows.Visibility.Collapsed)
                 {
                     b.Visible = System.Windows.Visibility.Visible;
                 }
@@ -119,25 +126,21 @@ namespace TCC.Parsing
                 {
                     b.MaxHP = p.maxHP;
                 }
-                //Console.WriteLine("Changing hp from {0} to {1}", b.CurrentHP, p.currentHP);
                 b.CurrentHP = p.currentHP;
-                //Console.WriteLine("Result: {0}", b.CurrentHP);
 
             }
         }
         public static void HandlePlayerChangeMP(S_PLAYER_CHANGE_MP p)
         {
-            SessionManager.SetPlayerMP(p.target, p.currentMP); 
+            SessionManager.SetPlayerMP(p.target, p.currentMP);
         }
         public static void HandlePlayerChangeStamina(S_PLAYER_CHANGE_STAMINA p)
         {
-            SessionManager.CurrentPlayer.CurrentST = p.currentStamina;
-            CharacterWindowManager.Instance.Player.CurrentST = p.currentStamina;
+            SessionManager.SetPlayerST(SessionManager.CurrentPlayer.EntityId, p.currentStamina);
         }
         public static void HandlePlayerChangeFlightEnergy(S_PLAYER_CHANGE_FLIGHT_ENERGY p)
         {
-            SessionManager.CurrentPlayer.FlightEnergy = p.energy;
-            CharacterWindowManager.Instance.Player.FlightEnergy = p.energy;
+            SessionManager.SetPlayerFE(p.energy);
         }
         public static void HandleUserStatusChanged(S_USER_STATUS p)
         {
@@ -151,7 +154,7 @@ namespace TCC.Parsing
         public static void HandleNpcStatusChanged(S_NPC_STATUS p)
         {
             EntitiesManager.SetNPCStatus(p.EntityId, p.IsEnraged);
-            if(EntitiesManager.TryGetBossById(p.EntityId, out Boss b))
+            if (EntitiesManager.TryGetBossById(p.EntityId, out Boss b))
             {
                 if (p.Target == 0)
                 {
@@ -162,7 +165,7 @@ namespace TCC.Parsing
         }
         public static void HandleUserEffect(S_USER_EFFECT p)
         {
-            if(EntitiesManager.TryGetBossById(p.Source, out Boss b))
+            if (EntitiesManager.TryGetBossById(p.Source, out Boss b))
             {
                 if (p.Action == AggroAction.Remove)
                 {
@@ -178,7 +181,7 @@ namespace TCC.Parsing
                             break;
                     }
                 }
-                else 
+                else
                 {
                     b.Target = p.User;
                     b.CurrentAggroType = p.Circle;
@@ -192,9 +195,13 @@ namespace TCC.Parsing
         }
         public static void HandleCharLogin(S_LOGIN p)
         {
-            SessionManager.CurrentPlayer.ClearAbnormalities();
+            EntitiesManager.ClearNPC();
+            GroupWindowManager.Instance.ClearAll();
+            //SessionManager.CurrentPlayer.ClearAbnormalities();
             BuffBarWindowManager.Instance.Player.ClearAbnormalities();
+            SkillManager.Clear();
 
+            SessionManager.LoadingScreen = true;
             SessionManager.Logged = true;
             SessionManager.CurrentPlayer.Class = p.CharacterClass;
             SessionManager.CurrentPlayer.EntityId = p.entityId;
@@ -209,11 +216,11 @@ namespace TCC.Parsing
             CharacterWindowManager.Instance.Player.Level = p.Level;
             SessionManager.SetPlayerLaurel(CharacterWindowManager.Instance.Player);
 
-            App.Current.Dispatcher.Invoke(() =>
+            WindowManager.ClassWindow.Dispatcher.Invoke(() =>
             {
-                WindowManager.ChangeClickThru(WindowManager.ClickThru);
+                ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).ClearSkills();
+                ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).BarTemplate = p.CharacterClass;
             });
-
 
         }
         public static void HandleReturnToLobby(S_RETURN_TO_LOBBY p)
@@ -225,7 +232,7 @@ namespace TCC.Parsing
             EntitiesManager.ClearNPC();
             GroupWindowManager.Instance.ClearAll();
         }
-        
+
         public static void HandleLoadTopo(S_LOAD_TOPO x)
         {
             SessionManager.LoadingScreen = true;
@@ -235,15 +242,15 @@ namespace TCC.Parsing
             //SessionManager.LoadingScreen = false;
         }
 
-        internal static void HandleStartRoll(S_ASK_BIDDING_RARE_ITEM x)
+        public static void HandleStartRoll(S_ASK_BIDDING_RARE_ITEM x)
         {
             GroupWindowManager.Instance.StartRoll();
         }
-        internal static void HandleRollResult(S_RESULT_BIDDING_DICE_THROW x)
+        public static void HandleRollResult(S_RESULT_BIDDING_DICE_THROW x)
         {
             GroupWindowManager.Instance.SetRoll(x.EntityId, x.RollResult);
         }
-        internal static void HandleEndRoll(S_RESULT_ITEM_BIDDING x)
+        public static void HandleEndRoll(S_RESULT_ITEM_BIDDING x)
         {
             GroupWindowManager.Instance.EndRoll();
         }
@@ -287,7 +294,7 @@ namespace TCC.Parsing
             AbnormalityManager.EndPartyMemberAbnormality(x.PlayerId, x.ServerId, x.Id);
         }
 
-        internal static void HandleChangeLeader(S_CHANGE_PARTY_MANAGER x)
+        public static void HandleChangeLeader(S_CHANGE_PARTY_MANAGER x)
         {
             GroupWindowManager.Instance.SetNewLeader(x.EntityId, x.Name);
         }
@@ -319,9 +326,12 @@ namespace TCC.Parsing
                 case Class.Elementalist:
                     Mystic.CheckHurricane(p);
                     break;
+                case Class.Warrior:
+                    Warrior.CheckGambleBuff(p);
+                    break;
                 default:
                     break;
-            }                   
+            }
         }
         public static void HandleAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
@@ -345,7 +355,7 @@ namespace TCC.Parsing
             foreach (var user in p.Members)
             {
                 GroupWindowManager.Instance.AddOrUpdateMember(user);
-                System.Threading.Tasks.Task.Delay(500).ContinueWith(t => { });
+                Task.Delay(500).ContinueWith(t => { });
             }
         }
         public static void HandlePartyMemberLeave(S_LEAVE_PARTY_MEMBER p)
