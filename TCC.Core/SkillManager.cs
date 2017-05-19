@@ -37,7 +37,10 @@ namespace TCC
             {
                 if (SettingsManager.ClassWindowOn && ClassWindowViewModel.ClassWindowExists())
                 {
-                    ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).ResetCooldown(skillCooldown);
+
+                    WindowManager.ClassWindow.Context.ResetCooldown(skillCooldown);
+
+
                 }
                 else
                 {
@@ -48,10 +51,10 @@ namespace TCC
             {
                 if (SettingsManager.ClassWindowOn && ClassWindowViewModel.ClassWindowExists())
                 {
-                    WindowManager.ClassWindow.Dispatcher.Invoke(() =>
-                    {
-                        ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).StartCooldown(skillCooldown);
-                    });
+
+                    WindowManager.ClassWindow.Context.StartCooldown(skillCooldown);
+
+
                 }
                 else
                 {
