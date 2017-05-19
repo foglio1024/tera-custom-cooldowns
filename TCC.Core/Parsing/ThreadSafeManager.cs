@@ -17,7 +17,7 @@ namespace TCC
 
         public static ClassManager CurrentClassBar()
         {
-            return ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).CurrentBar;
+            return ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).CurrentManager;
         }
     }
 }

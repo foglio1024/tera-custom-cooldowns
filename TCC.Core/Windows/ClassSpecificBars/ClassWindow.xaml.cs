@@ -35,7 +35,10 @@ namespace TCC.Windows
         }
 
         ClassWindowViewModel _context;
-
+        public ClassWindowViewModel Context
+        {
+            get => _context;
+        }
         private void TccWindow_Loaded(object sender, RoutedEventArgs e)
         {
             InitWindow();
@@ -52,18 +55,23 @@ namespace TCC.Windows
 
         private void _context_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if(e.PropertyName == "BarTemplate")
+
+            if (e.PropertyName == "CurrentClass")
             {
-                switch (_context.BarTemplate)
+                switch (_context.CurrentClass)
                 {
                     case Class.Warrior:
                         root.ContentTemplate = FindResource("warrior") as DataTemplate;
+                        break;
+                    case Class.Glaiver:
+                        root.ContentTemplate = FindResource("valkyrie") as DataTemplate;
                         break;
                     default:
                         root.ContentTemplate = FindResource("emptyTemplate") as DataTemplate;
                         break;
                 }
             }
+
         }
     }
 }
