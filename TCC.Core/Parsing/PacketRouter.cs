@@ -104,12 +104,16 @@ namespace TCC.Parsing
             SessionManager.SetPlayerHP(SessionManager.CurrentPlayer.EntityId, p.CurrentHP);
             SessionManager.SetPlayerMP(SessionManager.CurrentPlayer.EntityId, p.CurrentMP);
             SessionManager.SetPlayerST(SessionManager.CurrentPlayer.EntityId, p.CurrentST);
-                       
 
-            if (SessionManager.CurrentPlayer.Class == Class.Warrior)
+            switch (SessionManager.CurrentPlayer.Class)
             {
-                ((WarriorBarManager)ClassManager.CurrentClassManager).EdgeCounter.Edge = p.Edge;
+                case Class.Warrior:
+                    ((WarriorBarManager)ClassManager.CurrentClassManager).EdgeCounter.Val = p.Edge;
+                    break;
+                default:
+                    break;
             }
+
         }
         public static void HandleCreatureChangeHP(S_CREATURE_CHANGE_HP p)
         {
@@ -217,9 +221,11 @@ namespace TCC.Parsing
 
             WindowManager.ClassWindow.Dispatcher.Invoke(() =>
             {
-                ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).ClearSkills();
-                ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).BarTemplate = p.CharacterClass;
+
+                WindowManager.ClassWindow.Context.ClearSkills();
+                WindowManager.ClassWindow.Context.CurrentClass = p.CharacterClass;
             });
+
 
         }
         public static void HandleReturnToLobby(S_RETURN_TO_LOBBY p)
@@ -295,7 +301,8 @@ namespace TCC.Parsing
 
         public static void HandleRunemark(S_WEAK_POINT x)
         {
-            Console.WriteLine(x.ToString());
+            if (SessionManager.CurrentPlayer.Class != Class.Glaiver) return;
+            ((ValkyrieBarManager)ClassManager.CurrentClassManager).RunemarksCounter.Val = (int)x.TotalRunemarks;
         }
 
         public static void HandleChangeLeader(S_CHANGE_PARTY_MANAGER x)
@@ -332,6 +339,9 @@ namespace TCC.Parsing
                     break;
                 case Class.Warrior:
                     Warrior.CheckGambleBuff(p);
+                    break;
+                case Class.Glaiver:
+                    Valkyrie.CheckRagnarok(p);
                     break;
                 default:
                     break;
