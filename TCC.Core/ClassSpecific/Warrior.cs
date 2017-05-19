@@ -22,9 +22,9 @@ namespace TCC
 
         public static void CheckGambleBuff(S_ABNORMALITY_BEGIN sAbnormalityBegin)
         {
-            if (GambleIDs.Contains(sAbnormalityBegin.id) && sAbnormalityBegin.casterId == SessionManager.CurrentPlayer.EntityId)
+            if (GambleIDs.Contains(sAbnormalityBegin.Id) && sAbnormalityBegin.CasterId == SessionManager.CurrentPlayer.EntityId)
             {
-                ((WarriorBarManager)ClassManager.CurrentClassManager).DeadlyGambleBuff.Start(sAbnormalityBegin.duration);
+                ((WarriorBarManager)ClassManager.CurrentClassManager).DeadlyGambleBuff.Start(sAbnormalityBegin.Duration);
             }
         }
 
