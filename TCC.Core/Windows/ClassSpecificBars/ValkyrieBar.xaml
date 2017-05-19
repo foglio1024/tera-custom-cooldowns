@@ -1,0 +1,93 @@
+﻿<UserControl x:Class="TCC.Controls.ValkyrieBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TCC.Controls"
+             mc:Ignorable="d" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <DataTemplate x:Key="skill">
+            <local:FixedSkillControl/>
+        </DataTemplate>
+        <DataTemplate x:Key="skill2">
+            <local:SkillIconControl />
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid Width="Auto" Margin="20" Name="root">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!--Main border-->
+        <Border Style="{StaticResource border}" Grid.Row="1" Grid.RowSpan="2" CornerRadius="0,0,25,25" Grid.ColumnSpan="2" x:Name="mainBorder" Opacity="1" />
+
+        <!--Top border-->
+        <Border BorderBrush="#555" Background="#303037" Height="5" BorderThickness="0,0,0,0" Grid.Column="0" Grid.Row="1" Grid.RowSpan="1" Grid.ColumnSpan="2" Margin="0"/>
+
+        <!--HP/MP-->
+        <Grid HorizontalAlignment="Center" Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.CacheMode>
+                <BitmapCache RenderAtScale="1"/>
+            </Grid.CacheMode>
+            <Border Background="#f55" Grid.Column="0" Width="80" Height="16"  CornerRadius="8" Margin="0,0,-20,0" Style="{StaticResource border}" BorderThickness="0"/>
+            <Border Background="#59f" Grid.Column="2" Width="80" Height="16" Margin="-20,0,0,0" CornerRadius="8" Style="{StaticResource border}" BorderThickness="0"/>
+            <Border Background="#adf" Grid.Column="1" Width="80" Height="16" Margin="0,30,0,0" CornerRadius="0,0,16,16" Style="{StaticResource border}" BorderThickness="0"/>
+            <TextBlock Name="hpText" Style="{StaticResource text1}" FontSize="13" Margin="0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Val}"/>
+            <TextBlock Name="mpText" Style="{StaticResource text1}" Grid.Column="2" FontSize="13" Margin="0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Val}"/>
+            <TextBlock Name="reText" Style="{StaticResource text1}" FontWeight="DemiBold" Foreground="#c000" Grid.Column="1" FontSize="13" Margin="0,32,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Val}"/>
+            <!--Runemarks-->
+            <local:RunemarksControl x:Name="runemarksBar" Margin="0,0,0,0" Grid.Column="1"/>
+
+        </Grid>
+
+        <!--Main skills grid-->
+        <Grid Grid.Row="2" Grid.Column="1" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" UseLayoutRounding="True">
+            <ItemsControl Name="mainSkills" ItemTemplate="{StaticResource skill}" Width="Auto" Height="Auto" ItemsSource="{Binding MainSkills}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="{Binding MainSkills.Count}" Rows="1" Margin="0,0,0,0" IsItemsHost="True" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </Grid>
+
+        <!--Secondary + other skills grid-->
+        <Grid Grid.Row="3" Grid.Column="1" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" UseLayoutRounding="True" Opacity=".9">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <!--Secondary skills-->
+            <ItemsControl Name="secSkills" ItemTemplate="{StaticResource skill}" Width="Auto" Height="Auto" ItemsSource="{Binding SecondarySkills}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="{Binding SecondarySkills.Count}" Rows="1" Margin="0,0,0,0" IsItemsHost="True" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+
+            <!--Other skills-->
+            <ItemsControl Name="otherSkills" ItemTemplate="{StaticResource skill2}" Width="Auto"  Height="Auto" Grid.Column="1" HorizontalAlignment="Left" ItemsSource="{Binding OtherSkills}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Margin="0,0,0,0" IsItemsHost="True" Width="Auto" Height="Auto" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </Grid>
+
+        <!--Deadly gamble bars-->
+        <local:BarCooldown Grid.Row="1" Color="#adf" Foreground="#e000" Height="22" Margin="0,-10.5"  Grid.ColumnSpan="2" x:Name="ragnarokDuration" HorizontalAlignment="Left" Width="{Binding ElementName=mainBorder, Path=ActualWidth}"/>
+    </Grid>
+
+</UserControl>
