@@ -57,7 +57,7 @@ namespace TCC
         {
             var newAb = new AbnormalityDuration(ab, duration, stacks, target, BuffBarWindowManager.Instance.Dispatcher, true, PLAYER_AB_SIZE * .9, PLAYER_AB_SIZE, new System.Windows.Thickness(PLAYER_AB_LEFT_MARGIN));
 
-            if(ab.Type == AbnormalityType.Buff)
+            if (ab.Type == AbnormalityType.Buff)
             {
                 if (ab.Infinity)
                 {
@@ -81,24 +81,24 @@ namespace TCC
         }
         static void EndPlayerAbnormality(Abnormality ab)
         {
-            if (ab.Infinity)
+            if (ab.Type == AbnormalityType.Buff)
             {
-                //SessionManager.CurrentPlayer.RemoveInfBuff(ab);
-                BuffBarWindowManager.Instance.Player.RemoveInfBuff(ab);
-            }
-            else
-            {
-                if (ab.Type == AbnormalityType.Buff)
+                if (ab.Infinity)
                 {
-                    //SessionManager.CurrentPlayer.RemoveBuff(ab);
-                    BuffBarWindowManager.Instance.Player.RemoveBuff(ab);
-
+                    //SessionManager.CurrentPlayer.RemoveInfBuff(ab);
+                    BuffBarWindowManager.Instance.Player.RemoveInfBuff(ab);
                 }
                 else
                 {
-                    //SessionManager.CurrentPlayer.RemoveDebuff(ab);
-                    BuffBarWindowManager.Instance.Player.RemoveDebuff(ab);
+
+                    //SessionManager.CurrentPlayer.RemoveBuff(ab);
+                    BuffBarWindowManager.Instance.Player.RemoveBuff(ab);
                 }
+            }
+            else
+            {
+                //SessionManager.CurrentPlayer.RemoveDebuff(ab);
+                BuffBarWindowManager.Instance.Player.RemoveDebuff(ab);
             }
         }
 
@@ -106,7 +106,7 @@ namespace TCC
         {
             if (EntitiesManager.TryGetBossById(target, out Boss b))
             {
-                b.AddorRefresh(new AbnormalityDuration(ab, duration, stacks, target, BossGageWindowManager.Instance.Dispatcher, true, BOSS_AB_SIZE*.9, BOSS_AB_SIZE, new System.Windows.Thickness(BOSS_AB_LEFT_MARGIN)));
+                b.AddorRefresh(new AbnormalityDuration(ab, duration, stacks, target, BossGageWindowManager.Instance.Dispatcher, true, BOSS_AB_SIZE * .9, BOSS_AB_SIZE, new System.Windows.Thickness(BOSS_AB_LEFT_MARGIN)));
             }
         }
         static bool Filter(Abnormality ab)
