@@ -24,6 +24,7 @@ namespace TCC.Updater
             //Copy all the files & Replaces any files with the same name
             foreach (string newPath in Directory.GetFiles(SourcePath, "*.*", SearchOption.AllDirectories))
             {
+                if (newPath.Contains(@"\config\")) continue;
                 File.Copy(newPath, newPath.Replace(SourcePath, DestinationPath), true);
                 Console.WriteLine("Copied file {0}", Path.GetFileName(newPath));
             }
