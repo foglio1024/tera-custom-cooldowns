@@ -293,6 +293,11 @@ namespace TCC.Parsing
             AbnormalityManager.EndPartyMemberAbnormality(x.PlayerId, x.ServerId, x.Id);
         }
 
+        public static void HandleRunemark(S_WEAK_POINT x)
+        {
+            Console.WriteLine(x.ToString());
+        }
+
         public static void HandleChangeLeader(S_CHANGE_PARTY_MANAGER x)
         {
             GroupWindowManager.Instance.SetNewLeader(x.EntityId, x.Name);

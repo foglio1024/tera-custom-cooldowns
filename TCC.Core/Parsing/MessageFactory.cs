@@ -64,6 +64,7 @@ namespace TCC.Parsing
             {"S_PARTY_MEMBER_ABNORMAL_DEL", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_ABNORMAL_DEL>>() },
             {"S_PARTY_MEMBER_ABNORMAL_CLEAR", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_ABNORMAL_CLEAR>>() },
             {"S_CHANGE_PARTY_MANAGER", Contructor<Func<TeraMessageReader, S_CHANGE_PARTY_MANAGER>>() },
+            {"S_WEAK_POINT", Contructor<Func<TeraMessageReader, S_WEAK_POINT>>() },
 
         };
 
@@ -121,6 +122,7 @@ namespace TCC.Parsing
             {typeof(S_PARTY_MEMBER_ABNORMAL_DEL), new Action<S_PARTY_MEMBER_ABNORMAL_DEL>(x => PacketProcessor.HandlePartyMemberAbnormalDel(x)) },
             {typeof(S_PARTY_MEMBER_ABNORMAL_CLEAR), new Action<S_PARTY_MEMBER_ABNORMAL_CLEAR>(x => PacketProcessor.HandlePartyMemberAbnormalClear(x)) },
             {typeof(S_CHANGE_PARTY_MANAGER), new Action<S_CHANGE_PARTY_MANAGER>(x => PacketProcessor.HandleChangeLeader(x)) },
+            {typeof(S_WEAK_POINT), new Action<S_WEAK_POINT>(x => PacketProcessor.HandleRunemark(x)) },
 
         };
 
