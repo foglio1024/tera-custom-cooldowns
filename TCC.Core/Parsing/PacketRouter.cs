@@ -27,14 +27,15 @@ namespace TCC.Parsing
         public static void Init()
         {
             TeraSniffer.Instance.MessageReceived += MessageReceived;
-            TeraSniffer.Instance.NewConnection += Instance_NewConnection;
+            //TeraSniffer.Instance.NewConnection += InitDB;
             var analysisThread = new Thread(PacketAnalysisLoop);
             analysisThread.Start();
         }
 
-        private static void Instance_NewConnection(Server obj)
+        private static void InitDB(uint serverId)
         {
-            Region = obj.Region;
+            var server = BasicTeraData.Instance.Servers.GetServer(serverId);
+            Region = server.Region;
             var td = new TeraData(Region);
             var lang = td.GetLanguage(Region);
             EntitiesManager.CurrentDatabase = new MonsterDatabase(lang);
@@ -192,9 +193,10 @@ namespace TCC.Parsing
         }
         public static void HandleCharLogin(S_LOGIN p)
         {
+            InitDB(p.ServerId);
             EntitiesManager.ClearNPC();
             GroupWindowManager.Instance.ClearAll();
-            //SessionManager.CurrentPlayer.ClearAbnormalities();
+
             BuffBarWindowManager.Instance.Player.ClearAbnormalities();
             SkillManager.Clear();
 
