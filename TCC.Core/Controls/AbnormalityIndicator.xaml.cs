@@ -34,7 +34,7 @@ namespace TCC.Controls
         {
             if (e.PropertyName == "Refresh")
             {
-                if (((AbnormalityDuration)sender).Duration < 0) return;
+                if (((AbnormalityDuration)sender).Duration == uint.MaxValue) return;
                 if (!((AbnormalityDuration)sender).Animated) return;
                 var an = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(((AbnormalityDuration)sender).Duration));
                 int fps = ((AbnormalityDuration)sender).Duration > 80000 ? 1 : 30;
@@ -44,15 +44,15 @@ namespace TCC.Controls
 
         }
 
-       
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             _context = (AbnormalityDuration)DataContext;
             _context.PropertyChanged += buff_PropertyChanged;
             this.RenderTransform = new ScaleTransform(1, 1, .5, .5);
             this.BeginAnimation(OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(85)));
+            if (_context.Abnormality.Infinity || _context.Duration == uint.MaxValue) durationLabel.Visibility = Visibility.Hidden;
 
-            if (((AbnormalityDuration)DataContext).Duration > 0 && ((AbnormalityDuration)DataContext).Animated)
+            if (_context.Duration != uint.MaxValue && _context.Animated)
             {
                 var an = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(((AbnormalityDuration)DataContext).Duration));
                 int fps = ((AbnormalityDuration)DataContext).Duration > 80000 ? 1 : 30;
@@ -74,10 +74,10 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            int seconds = (int)value/1000;
-            int minutes = seconds / 60;
-            int hours = minutes / 60;
-            int days = hours / 24;
+            uint seconds = (uint)value/1000;
+            uint minutes = seconds / 60;
+            uint hours = minutes / 60;
+            uint days = hours / 24;
 
             if(minutes < 3)
             {
@@ -152,8 +152,8 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            int duration = (int)value;
-            if(duration < 0)
+            uint duration = (uint)value;
+            if (duration == uint.MaxValue)
             {
                 return Visibility.Hidden;
             }
