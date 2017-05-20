@@ -22,7 +22,7 @@ namespace TCC.ViewModels
             LoadSkills("valkyrie-skills.xml", Class.Glaiver);
         }
 
-        void LoadSkills(string filename, Class c)
+        protected override void LoadSkills(string filename, Class c)
         {
             //User defined skills
             if (!File.Exists("resources/config/"+filename))
@@ -86,7 +86,7 @@ namespace TCC.ViewModels
 
             }
         }
-        internal void StartCooldown(SkillCooldown sk)
+        public override void StartCooldown(SkillCooldown sk)
         {
             var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
             if (skill != null)
@@ -112,7 +112,7 @@ namespace TCC.ViewModels
 
 
         }
-        internal void ResetCooldown(SkillCooldown s)
+        public override void ResetCooldown(SkillCooldown s)
         {
             s.SetDispatcher(this.Dispatcher);
             var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == s.Skill.IconName);
@@ -139,7 +139,7 @@ namespace TCC.ViewModels
             }
             catch { }
         }
-        internal void RemoveSkill(Skill skill)
+        public override void RemoveSkill(Skill skill)
         {
             try
             {

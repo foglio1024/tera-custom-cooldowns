@@ -8,75 +8,16 @@ using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Threading;
 using System.Xml.Linq;
 using TCC.Data;
 
 namespace TCC.ViewModels
 {
-    public class Counter : TSPropertyChanged
-    {
-        private int val = 0;
-        public int Val
-        {
-            get => val;
-            set
-            {
-                if (val == value) return;
-                val = value;
-                if (val == _max)
-                {
-                    NotifyPropertyChanged("Maxed");
-                }
-                RefreshTimer();
-                NotifyPropertyChanged("Val");
-            }
-        }
 
-        DispatcherTimer _expire;
-        int _max;
-        bool _autoexpire;
-        void RefreshTimer()
-        {
-            _expire.Stop();
-            if (val == 0) return;
-            if (!_autoexpire) return;
-            _expire.Start();
-        }
-        public Counter(int max, bool autoexpire)
-        {
-            _dispatcher = Dispatcher.CurrentDispatcher;
-            _max = max;
-            _autoexpire = autoexpire;
-            _expire = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(8000) };
-            _expire.Tick += (s, ev) => Val = 0;
-        }
-    }
-    public class IntTracker : TSPropertyChanged
-    {
-        private int val = 0;
-        public int Val
-        {
-            get { return val; }
-            set
-            {
-                if (val == value) return;
-                val = value;
-
-                NotifyPropertyChanged("Val");
-            }
-        }
-        public IntTracker()
-        {
-            _dispatcher = Dispatcher.CurrentDispatcher;
-        }
-    }
     public class WarriorBarManager : ClassManager
     {
         private static WarriorBarManager _instance;
         public static WarriorBarManager Instance => _instance ?? (_instance = new WarriorBarManager());
-
-
 
         public FixedSkillCooldown DeadlyGamble { get; set; }
         public FixedSkillCooldown DeadlyGambleBuff { get; set; }
@@ -88,13 +29,13 @@ namespace TCC.ViewModels
             _instance = this;
             CurrentClassManager = this;
             EdgeCounter = new Counter(10, true);
-            LoadSkills();
+            LoadSkills("warrior-skills.xml", Class.Warrior);
         }
 
-        void LoadSkills()
+        protected override void LoadSkills(string filename, Class c)
         {
             //User defined skills
-            if (!File.Exists("resources/config/warrior-skills.xml"))
+            if (!File.Exists("resources/config/"+ filename))
             {
                 //create default warrior file
                 XElement skills = new XElement("Skills",
@@ -121,16 +62,16 @@ namespace TCC.ViewModels
                     new XElement("Skill", new XAttribute("id", 340100), new XAttribute("row", 0)),
                     new XElement("Skill", new XAttribute("id", 350100), new XAttribute("row", 0))
                     );
-                skills.Save("resources/config/warrior-skills.xml");
+                skills.Save("resources/config/" + filename);
             }
 
-            XDocument skillsDoc = XDocument.Load("resources/config/warrior-skills.xml");
+            XDocument skillsDoc = XDocument.Load("resources/config/" + filename);
                 foreach (XElement skillElement in skillsDoc.Descendants("Skill"))
                 {
                     uint skillId = Convert.ToUInt32(skillElement.Attribute("id").Value);
                     int row = Convert.ToInt32(skillElement.Attribute("row").Value);
 
-                    if (SkillsDatabase.TryGetSkill(skillId, Class.Warrior, out Skill sk))
+                    if (SkillsDatabase.TryGetSkill(skillId, c, out Skill sk))
                     {
                         if (row == 1)
                         {
@@ -145,12 +86,12 @@ namespace TCC.ViewModels
 
 
             //Deadly gamble
-            SkillsDatabase.TryGetSkill(200200, Class.Warrior, out Skill dg);
+            SkillsDatabase.TryGetSkill(200200, c, out Skill dg);
             DeadlyGamble = new FixedSkillCooldown(dg, CooldownType.Skill, Dispatcher);
             DeadlyGambleBuff = new FixedSkillCooldown(dg, CooldownType.Skill, Dispatcher);
         }
 
-        internal void StartCooldown(SkillCooldown sk)
+        public override void StartCooldown(SkillCooldown sk)
         {
             var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
             if (skill != null)
@@ -176,7 +117,7 @@ namespace TCC.ViewModels
 
 
         }
-        internal void ResetCooldown(SkillCooldown s)
+        public override void ResetCooldown(SkillCooldown s)
         {
             s.SetDispatcher(this.Dispatcher);
             var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == s.Skill.IconName);
@@ -203,7 +144,7 @@ namespace TCC.ViewModels
             }
             catch { }
         }
-        internal void RemoveSkill(Skill skill)
+        public override void RemoveSkill(Skill skill)
         {
             try
             {
