@@ -150,6 +150,7 @@ namespace TCC
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+
             _boss = (Boss)DataContext;
             _boss.PropertyChanged += boss_PropertyChanged;
 
