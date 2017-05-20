@@ -10,7 +10,7 @@
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded"
              Unloaded="UserControl_Unloaded"
-             UseLayoutRounding="True"
+             UseLayoutRounding="True" 
              Visibility="{Binding Visible}"
              >
     <UserControl.Resources>
@@ -36,33 +36,59 @@
                 <ColumnDefinition Width="0"/>
             </Grid.ColumnDefinitions>
 
-            <Border Margin="0,0,0,0" Style="{StaticResource border}" x:Name="mainBorder" Grid.RowSpan="2" Grid.Row="0" HorizontalAlignment="Stretch">
-                <Border.CacheMode>
-                    <BitmapCache RenderAtScale="1"/>
-                </Border.CacheMode>
-            </Border>
+
             <Grid Margin="6,2" Name="mainGrid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
+                <Border Margin="0,0,0,0" Style="{StaticResource border}" x:Name="mainBorder" Grid.RowSpan="2" Grid.Row="1" HorizontalAlignment="Stretch" />
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                <Grid Margin="9,2" Name="topInfoGrid">
+                    <TextBlock Name="BossNameTB" Style="{StaticResource text1}"
+                               HorizontalAlignment="Left" 
+                               VerticalAlignment="Center" 
+                               FontSize="15" 
+                               Text="{Binding Name}" 
+                               Grid.Row="0"/>
+                    <Polygon Points="0,10 5,0 10,10"  Margin="10,0"  Fill="{Binding CurrentAggroType, Converter={StaticResource aggroTypeToFill}}" Name="aggroArrow"
+                                 VerticalAlignment="Center" Height="Auto"  HorizontalAlignment="Center"
+                                 Grid.Column="1" RenderTransformOrigin=".5,.5">
+                        <Polygon.RenderTransform>
+                            <RotateTransform Angle="90"/>
+                        </Polygon.RenderTransform>
+                    </Polygon>
+                    <TextBlock Name="AggroHolderNameTB" Style="{StaticResource text1}"
+                               HorizontalAlignment="Left" 
+                               VerticalAlignment="Center" 
+                               FontWeight="Normal" 
+                               FontStretch="Condensed" 
+                               FontSize="13" 
+                               Text="{Binding Target, Converter={StaticResource userIdToName}}" 
+                               Grid.Row="0" Grid.Column="2" TextTrimming="WordEllipsis" MaxWidth="200"/>
+
+                </Grid>
+
+                <Grid Margin="9,2" Name="topInfoGrid" Grid.Row="1" UseLayoutRounding="True">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Grid.CacheMode>
-                        <BitmapCache RenderAtScale="2"/>
-                    </Grid.CacheMode>
                     <TextBlock  Style="{StaticResource text1}"
                                HorizontalAlignment="Left" 
                                VerticalAlignment="Center" 
                                FontSize="11"
-                               Grid.Row="1">
+                               Grid.Row="1"
+                                Margin="0,3">
                         <Run Text="{Binding CurrentHP, StringFormat={}{0:N0}}"/>
-                        <Run Text=" / "/>
-                        <Run Text="{Binding MaxHP, StringFormat={}{0:N0}}"/>
+                        <Run Text=" / " Foreground="#5fff"/>
+                        <Run Text="{Binding MaxHP, StringFormat={}{0:N0}}" Foreground="#5fff"/>
                     </TextBlock>
                     <TextBlock Style="{StaticResource text1}"
                                HorizontalAlignment="Center" 
@@ -70,46 +96,15 @@
                                VerticalAlignment="Center" 
                                Margin="0" 
                                FontSize="14"
-                               Text="{Binding CurrentPercentage, StringFormat=##0.#%}"
+                               Text="{Binding CurrentPercentage, StringFormat=##0.# %}"
                                Grid.Row="1"/>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-
-                        </Grid.ColumnDefinitions>
-
-                        <TextBlock Name="BossNameTB" Style="{StaticResource text1}"
-                               HorizontalAlignment="Left" 
-                               VerticalAlignment="Center" 
-                               FontSize="13" 
-                               Text="{Binding Name}" 
-                               Grid.Row="0"/>
-                        <Polygon Points="0,10 5,0 10,10"  Margin="10,0"  Fill="{Binding CurrentAggroType, Converter={StaticResource aggroTypeToFill}}" Name="aggroArrow"
-                                 VerticalAlignment="Center" Height="Auto"  HorizontalAlignment="Center"
-                                 Grid.Column="1" RenderTransformOrigin=".5,.5">
-                            <Polygon.RenderTransform>
-                                <RotateTransform Angle="90"/>
-                            </Polygon.RenderTransform>
-                        </Polygon>
-
-                        <TextBlock Name="AggroHolderNameTB" Style="{StaticResource text1}"
-                               HorizontalAlignment="Left" 
-                               VerticalAlignment="Center" 
-                               FontWeight="Normal" 
-                               FontStretch="Condensed" 
-                               FontSize="12" 
-                               Text="{Binding Target, Converter={StaticResource userIdToName}}" 
-                               Grid.Row="0" Grid.Column="2" TextTrimming="WordEllipsis" MaxWidth="200"/>
-
-                    </Grid>
                 </Grid>
-                <Grid Grid.Row="1" Margin="10,0.5,10,0.5" Name="hpBarGrid" >
+                <Grid Grid.Row="2" Margin="10,0.5,10,0.5" Name="hpBarGrid" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
+
                     <controls:GenericGauge Height="4" Width="400"
                                            BarColor="{Binding Enraged, Converter={StaticResource barColorConv}}"
                                            GaugeName=""
@@ -222,7 +217,7 @@
 
             </Grid>-->
         </Grid>
-        <Grid Grid.Row="1" Height="Auto" Margin="0,0,0,0" HorizontalAlignment="Left" Name="abnormalitiesGrid">
+        <Grid Grid.Row="1" Height="Auto" Margin="6,0,6,0" HorizontalAlignment="Left" Name="abnormalitiesGrid">
                 <ItemsControl Name="Abnormalities" ItemTemplate="{StaticResource BossBuffDataTemplate}" ItemsSource="{Binding Buffs}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
