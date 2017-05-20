@@ -96,17 +96,18 @@ namespace TCC.ViewModels
         {
             CurrentManager.Dispatcher.Invoke(() =>
             {
-                switch (SessionManager.CurrentPlayer.Class)
-                {
-                    case Class.Warrior:
-                        (CurrentManager as WarriorBarManager).StartCooldown(skillCooldown);
-                        break;
-                    case Class.Glaiver:
-                        (CurrentManager as ValkyrieBarManager).StartCooldown(skillCooldown);
-                        break;
-                    default:
-                        break;
-                }
+                //switch (SessionManager.CurrentPlayer.Class)
+                //{
+                //    case Class.Warrior:
+                //        (CurrentManager as WarriorBarManager).StartCooldown(skillCooldown);
+                //        break;
+                //    case Class.Glaiver:
+                //        (CurrentManager as ValkyrieBarManager).StartCooldown(skillCooldown);
+                //        break;
+                //    default:
+                //        break;
+                //}
+                CurrentManager.StartCooldown(skillCooldown);
             });
         }
 
@@ -114,17 +115,18 @@ namespace TCC.ViewModels
         {
             CurrentManager.Dispatcher.Invoke(() =>
             {
-                switch (SessionManager.CurrentPlayer.Class)
-                {
-                    case Class.Warrior:
-                        (CurrentManager as WarriorBarManager).ResetCooldown(skillCooldown);
-                        break;
-                    case Class.Glaiver:
-                        (CurrentManager as ValkyrieBarManager).ResetCooldown(skillCooldown);
-                        break;
-                    default:
-                        break;
-                }
+                //switch (SessionManager.CurrentPlayer.Class)
+                //{
+                //    case Class.Warrior:
+                //        (CurrentManager as WarriorBarManager).ResetCooldown(skillCooldown);
+                //        break;
+                //    case Class.Glaiver:
+                //        (CurrentManager as ValkyrieBarManager).ResetCooldown(skillCooldown);
+                //        break;
+                //    default:
+                //        break;
+                //}
+                CurrentManager.ResetCooldown(skillCooldown);
             });
 
         }
@@ -132,17 +134,18 @@ namespace TCC.ViewModels
         {
             CurrentManager.Dispatcher.Invoke(() =>
             {
-                switch (SessionManager.CurrentPlayer.Class)
-                {
-                    case Class.Warrior:
-                        (CurrentManager as WarriorBarManager).RemoveSkill(skill);
-                        break;
-                    case Class.Glaiver:
-                        (CurrentManager as ValkyrieBarManager).RemoveSkill(skill);
-                        break;
-                    default:
-                        break;
-                }
+                CurrentManager.RemoveSkill(skill);
+                //switch (SessionManager.CurrentPlayer.Class)
+                //{
+                //    case Class.Warrior:
+                //        (CurrentManager as WarriorBarManager).RemoveSkill(skill);
+                //        break;
+                //    case Class.Glaiver:
+                //        (CurrentManager as ValkyrieBarManager).RemoveSkill(skill);
+                //        break;
+                //    default:
+                //        break;
+                //}
             });
         }
 
@@ -153,11 +156,10 @@ namespace TCC.ViewModels
             {
                 CurrentManager.OtherSkills.Clear();
             });
-
         }
     }
 
-    public class ClassManager : DependencyObject
+    public abstract class ClassManager : DependencyObject
     {
 
         public static ClassManager CurrentClassManager;
@@ -205,6 +207,11 @@ namespace TCC.ViewModels
             }
         }
 
+        public abstract void StartCooldown(SkillCooldown sk);
+        public abstract void ResetCooldown(SkillCooldown sk);
+        public abstract void RemoveSkill(Skill sk);
+
+        protected abstract void LoadSkills(string filename, Class c);
 
         public IntTracker HP { get; set; }
         public IntTracker MP { get; set; }
