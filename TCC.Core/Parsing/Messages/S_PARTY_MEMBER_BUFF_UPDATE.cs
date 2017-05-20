@@ -11,14 +11,14 @@ namespace TCC.Parsing.Messages
     public struct MemberAbnormal
     {
         public uint Id;
-        public int Duration;
+        public uint Duration;
         public int Stacks;
     }
 
     public struct MemberCondition
     {
         public uint Id;
-        public int Duration;
+        public uint Duration;
         public byte Status;
     }
     public class S_PARTY_MEMBER_BUFF_UPDATE : ParsedMessage
@@ -45,18 +45,19 @@ namespace TCC.Parsing.Messages
                 reader.Skip(4);
                 var ab = new MemberAbnormal();
                 ab.Id = reader.ReadUInt32();
-                ab.Duration = reader.ReadInt32();
+                ab.Duration = reader.ReadUInt32();
                 reader.Skip(4);
                 ab.Stacks = reader.ReadInt32();
 
                 Abnormals.Add(ab);
             }
+            return;
             for (int i = 0; i < conditionsCount; i++)
             {
                 reader.Skip(4);
                 var cond = new MemberCondition();
                 cond.Id = reader.ReadUInt32();
-                cond.Duration = reader.ReadInt32();
+                cond.Duration = reader.ReadUInt32();
                 cond.Status = reader.ReadByte();
 
                 Conditions.Add(cond);

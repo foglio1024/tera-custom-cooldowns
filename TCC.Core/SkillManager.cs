@@ -28,7 +28,7 @@ namespace TCC
         }
         public static void AddSkillDirectly(Skill sk, uint cd)
         {
-            RouteSkill(new SkillCooldown(sk, (int)cd, CooldownType.Skill, CooldownBarWindowManager.Instance.Dispatcher));
+            RouteSkill(new SkillCooldown(sk, cd, CooldownType.Skill, CooldownBarWindowManager.Instance.Dispatcher));
         }
 
         static void RouteSkill(SkillCooldown skillCooldown)
@@ -39,8 +39,6 @@ namespace TCC
                 {
 
                     WindowManager.ClassWindow.Context.ResetCooldown(skillCooldown);
-
-
                 }
                 else
                 {
@@ -73,19 +71,19 @@ namespace TCC
                 {
                     return;
                 }
-                RouteSkill(new SkillCooldown(skill, (int)cd, CooldownType.Skill, CooldownBarWindowManager.Instance.Dispatcher));
+                RouteSkill(new SkillCooldown(skill, cd, CooldownType.Skill, CooldownBarWindowManager.Instance.Dispatcher));
             }
         }
         public static void AddBrooch(uint id, uint cd)
         {
             if (BroochesDatabase.TryGetBrooch(id, out Skill brooch))
             {
-                RouteSkill(new SkillCooldown(brooch, (int)cd, CooldownType.Item, CooldownBarWindowManager.Instance.Dispatcher));
+                RouteSkill(new SkillCooldown(brooch, cd, CooldownType.Item, CooldownBarWindowManager.Instance.Dispatcher));
             }
 
         }
 
-        public static void ChangeSkillCooldown(uint id, int cd)
+        public static void ChangeSkillCooldown(uint id, uint cd)
         {
             if (SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out Skill skill))
             {

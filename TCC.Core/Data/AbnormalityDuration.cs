@@ -21,8 +21,8 @@ namespace TCC
                     _abnormality = value;
                 }
             }
-            private int _duration;
-            public int Duration
+            private uint _duration;
+            public uint Duration
             {
                 get { return _duration; }
                 set
@@ -44,8 +44,8 @@ namespace TCC
                 }
             }
             private readonly System.Timers.Timer timer;
-            private int _durationLeft;
-            public int DurationLeft
+            private uint _durationLeft;
+            public uint DurationLeft
             {
                 get { return _durationLeft; }
                 set
@@ -70,7 +70,7 @@ namespace TCC
             public Thickness IndicatorMargin { get; set; }
 
             public bool Animated { get; private set; }
-            public AbnormalityDuration(Abnormality b, int d, int s, ulong t, Dispatcher disp, bool animated, double iconSize, double bgEllSize, Thickness margin)
+            public AbnormalityDuration(Abnormality b, uint d, int s, ulong t, Dispatcher disp, bool animated, double iconSize, double bgEllSize, Thickness margin)
             {
                 _dispatcher = disp;
                 Animated = animated;

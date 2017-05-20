@@ -5,8 +5,8 @@ namespace TCC.Data
     {
         CooldownType _type;
         public Skill Skill { get; set; }
-        public int Cooldown { get; set; }
-        public int OriginalCooldown { get; set; }
+        public uint Cooldown { get; set; }
+        public uint OriginalCooldown { get; set; }
 
         public FixedSkillCooldown(Skill sk, CooldownType t, Dispatcher d)
         {
@@ -14,13 +14,13 @@ namespace TCC.Data
             _type = t;
             Skill = sk;
         }
-        public void Start(int cd)
+        public void Start(uint cd)
         {
             Cooldown = _type == CooldownType.Skill ? cd : cd * 1000;
             OriginalCooldown = Cooldown;
             NotifyPropertyChanged("Start");
         }
-        public void Refresh(int cd)
+        public void Refresh(uint cd)
         {
             Cooldown = cd;
             NotifyPropertyChanged("Refresh");

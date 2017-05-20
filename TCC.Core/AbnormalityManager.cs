@@ -20,7 +20,7 @@ namespace TCC
         public const double RAID_AB_LEFT_MARGIN = -9;
         public const double BOSS_AB_LEFT_MARGIN = 2;
 
-        public static void BeginAbnormality(uint id, ulong target, int duration, int stacks)
+        public static void BeginAbnormality(uint id, ulong target, uint duration, int stacks)
         {
             if (AbnormalityDatabase.Abnormalities.TryGetValue(id, out Abnormality ab))
             {
@@ -53,15 +53,13 @@ namespace TCC
             }
 
         }
-        static void BeginPlayerAbnormality(Abnormality ab, int stacks, int duration, ulong target)
+        static void BeginPlayerAbnormality(Abnormality ab, int stacks, uint duration, ulong target)
         {
             var newAb = new AbnormalityDuration(ab, duration, stacks, target, BuffBarWindowManager.Instance.Dispatcher, true, PLAYER_AB_SIZE * .9, PLAYER_AB_SIZE, new System.Windows.Thickness(PLAYER_AB_LEFT_MARGIN));
-
             if (ab.Type == AbnormalityType.Buff)
             {
                 if (ab.Infinity)
                 {
-                    newAb.Duration = -1;
                     //SessionManager.CurrentPlayer.AddOrRefreshInfBuff(newAb);
                     BuffBarWindowManager.Instance.Player.AddOrRefreshInfBuff(newAb);
 
@@ -102,7 +100,7 @@ namespace TCC
             }
         }
 
-        static void BeginNPCAbnormality(Abnormality ab, int stacks, int duration, ulong target)
+        static void BeginNPCAbnormality(Abnormality ab, int stacks, uint duration, ulong target)
         {
             if (EntitiesManager.TryGetBossById(target, out Boss b))
             {
@@ -116,7 +114,7 @@ namespace TCC
             return true;
         }
 
-        public static void BeginOrRefreshPartyMemberAbnormality(uint playerId, uint serverId, uint id, int duration, int stacks)
+        public static void BeginOrRefreshPartyMemberAbnormality(uint playerId, uint serverId, uint id, uint duration, int stacks)
         {
             if (AbnormalityDatabase.Abnormalities.TryGetValue(id, out Abnormality ab))
             {

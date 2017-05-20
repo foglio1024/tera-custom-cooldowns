@@ -15,14 +15,14 @@ namespace TCC.Parsing.Messages
             ServerId = reader.ReadUInt32();
             PlayerId = reader.ReadUInt32();
             Id = reader.ReadUInt32();
-            Duration = reader.ReadInt32();
+            Duration = reader.ReadUInt32();
             reader.Skip(4);
             Stacks = reader.ReadInt32();
         }
         public uint ServerId { get; private set; }
         public uint PlayerId { get; private set; }
         public uint Id { get; private set; }
-        public int Duration { get; private set; }
+        public uint Duration { get; private set; }
         public int Stacks { get; private set; }
 
     }

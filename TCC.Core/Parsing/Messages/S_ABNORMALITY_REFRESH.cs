@@ -12,18 +12,19 @@ namespace TCC.Parsing.Messages
     {
         ulong target;
         uint id;
-        int duration, stacks;
+        uint duration;
+        int stacks;
 
         public ulong TargetId { get => target; }
         public uint AbnormalityId { get => id; }
-        public int Duration { get => duration; }
+        public uint Duration { get => duration; }
         public int Stacks { get => stacks; }
 
         public S_ABNORMALITY_REFRESH(TeraMessageReader reader) : base(reader)
         {
             target = reader.ReadUInt64();
             id = reader.ReadUInt32();
-            duration = reader.ReadInt32();
+            duration = reader.ReadUInt32();
             reader.Skip(4);
             stacks = reader.ReadInt32();
         }

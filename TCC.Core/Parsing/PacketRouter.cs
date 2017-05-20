@@ -86,7 +86,7 @@ namespace TCC.Parsing
         }
         public static void HandleDecreaseSkillCooldown(S_DECREASE_COOLTIME_SKILL p)
         {
-            SkillManager.ChangeSkillCooldown(p.SkillId, (int)p.Cooldown);
+            SkillManager.ChangeSkillCooldown(p.SkillId, p.Cooldown);
         }
 
         public static void HandlePlayerStatUpdate(S_PLAYER_STAT_UPDATE p)

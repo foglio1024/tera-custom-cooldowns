@@ -15,7 +15,7 @@ namespace TCC.Parsing.Messages
         public ulong TargetId { get; private set; }
         public ulong CasterId { get; private set; }
         public uint Id { get; private set; }
-        public int Duration { get; private set; }
+        public uint Duration { get; private set; }
         public int Stacks { get; private set; }
 
         public S_ABNORMALITY_BEGIN(TeraMessageReader reader) : base(reader)
@@ -23,7 +23,7 @@ namespace TCC.Parsing.Messages
             TargetId = reader.ReadUInt64();
             CasterId = reader.ReadUInt64();
             Id = reader.ReadUInt32();
-            Duration = reader.ReadInt32();
+            Duration = reader.ReadUInt32();
             reader.Skip(4);
             Stacks = reader.ReadInt32();
         }
