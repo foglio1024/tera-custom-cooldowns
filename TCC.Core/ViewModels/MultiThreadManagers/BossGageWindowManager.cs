@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows;
 using TCC.Data;
 
@@ -30,17 +31,19 @@ namespace TCC.ViewModels
             }
         }
 
-        public void AddOrUpdateBoss(ulong entityId, float maxHp, float curHp)
+        public void AddOrUpdateBoss(ulong entityId, float maxHp, float curHp, uint templateId = 0, uint zoneId = 0, Visibility v = Visibility.Collapsed)
         {
+
             var boss = _bosses.FirstOrDefault(x => x.EntityId == entityId);
             if (boss == null)
             {
-                if (!EntitiesManager.TryGetBossById(entityId, out Boss b)) return;
-                boss = b;
-                _bosses.Add(b);
+                //if (!EntitiesManager.TryGetBossById(entityId, out Boss b)) return;
+                boss = new Boss(entityId, zoneId, templateId, v);
+                _bosses.Add(boss);
             }
             boss.MaxHP = maxHp;
             boss.CurrentHP = curHp;
+            boss.Visible = v;
         }
 
         public void RemoveBoss(ulong id)
@@ -48,6 +51,7 @@ namespace TCC.ViewModels
             var boss = _bosses.FirstOrDefault(x => x.EntityId == id);
             if (boss == null) return;
             _bosses.Remove(boss);
+            boss.Dispose();
         }
 
         public void ClearBosses()
@@ -61,6 +65,55 @@ namespace TCC.ViewModels
         public BossGageWindowManager()
         {
 
+        }
+
+        internal void EndNpcAbnormality(ulong target, Abnormality ab)
+        {
+            var boss = _bosses.FirstOrDefault(x => x.EntityId == target);
+            if(boss != null)
+            {
+                boss.EndBuff(ab);
+            }
+        }
+
+        internal void AddOrRefreshNpcAbnormality(Abnormality ab, int stacks, uint duration, ulong target, double size, double margin)
+        {
+            var boss = _bosses.FirstOrDefault(x => x.EntityId == target);
+            if (boss != null)
+            {
+                boss.AddorRefresh(ab, duration, stacks, size, margin);
+            }
+        }
+
+        internal void SetBossEnrage(ulong entityId, bool enraged)
+        {
+            var boss = _bosses.FirstOrDefault(x => x.EntityId == entityId);
+            if (boss == null)
+            {
+                return;
+            }
+            boss.Enraged = enraged;
+        }
+
+        internal void UnsetBossTarget(ulong entityId)
+        {
+            var boss = _bosses.FirstOrDefault(x => x.EntityId == entityId);
+            if (boss == null)
+            {
+                return;
+            }
+            boss.Target = 0;
+        }
+
+        internal void SetBossAggro(ulong entityId, AggroCircle circle, ulong user)
+        {
+            var boss = _bosses.FirstOrDefault(x => x.EntityId == entityId);
+            if (boss == null)
+            {
+                return;
+            }
+            boss.Target = user;
+            boss.CurrentAggroType = AggroCircle.Main;
         }
     }
 }

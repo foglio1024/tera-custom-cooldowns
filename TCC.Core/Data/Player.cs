@@ -277,48 +277,54 @@ namespace TCC.Data
         public uint PlayerId { get; internal set; }
         public uint ServerId { get; internal set; }
 
-        public void AddOrRefreshBuff(AbnormalityDuration ab)
+        public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks, double size, double margin)
         {
-            var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Abnormality.Id);
+            var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                Buffs.Add(ab);
+                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, true, size * .9, size, new System.Windows.Thickness(margin));
+
+                Buffs.Add(newAb);
                 return;
             }
-            existing.Duration = ab.Duration;
-            existing.DurationLeft = ab.DurationLeft;
-            existing.Stacks = ab.Stacks;
+            existing.Duration = duration;
+            existing.DurationLeft = duration;
+            existing.Stacks = stacks;
             existing.Refresh();
 
         }
-        public void AddOrRefreshDebuff(AbnormalityDuration ab)
+        public void AddOrRefreshDebuff(Abnormality ab, uint duration, int stacks, double size, double margin)
         {
-            var existing = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Abnormality.Id);
+            var existing = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                Debuffs.Add(ab);
-                if (!ab.Abnormality.IsBuff)
+                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, true, size * .9, size, new System.Windows.Thickness(margin));
+
+                Debuffs.Add(newAb);
+                if (!ab.IsBuff)
                 {
                     IsDebuffed = true;
                 }
                 return;
             }
-            existing.Duration = ab.Duration;
-            existing.DurationLeft = ab.DurationLeft;
-            existing.Stacks = ab.Stacks;
+            existing.Duration = duration;
+            existing.DurationLeft = duration;
+            existing.Stacks = stacks;
             existing.Refresh();
         }
-        public void AddOrRefreshInfBuff(AbnormalityDuration ab)
+        public void AddOrRefreshInfBuff(Abnormality ab, uint duration, int stacks, double size, double margin)
         {
-            var existing = InfBuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Abnormality.Id);
+            var existing = InfBuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                InfBuffs.Add(ab);
+                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, true, size * .9, size, new System.Windows.Thickness(margin));
+
+                InfBuffs.Add(newAb);
                 return;
             }
-            existing.Duration = ab.Duration;
-            existing.DurationLeft = ab.DurationLeft;
-            existing.Stacks = ab.Stacks;
+            existing.Duration = duration;
+            existing.DurationLeft = duration;
+            existing.Stacks = stacks;
             existing.Refresh();
 
         }

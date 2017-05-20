@@ -9,112 +9,120 @@ using TCC.ViewModels;
 namespace TCC
 {
     public class AbnormalityDuration : TSPropertyChanged, IDisposable
+    {
+        public ulong Target { get; set; }
+        private Abnormality _abnormality;
+        public Abnormality Abnormality
         {
-            public ulong Target { get; set; }
-            private Abnormality _abnormality;
-            public Abnormality Abnormality
+            get { return _abnormality; }
+            set
             {
-                get { return _abnormality; }
-                set
-                {
-                    if (_abnormality == value) return;
-                    _abnormality = value;
-                }
+                if (_abnormality == value) return;
+                _abnormality = value;
             }
-            private uint _duration;
-            public uint Duration
+        }
+        private uint _duration;
+        public uint Duration
+        {
+            get { return _duration; }
+            set
             {
-                get { return _duration; }
-                set
-                {
-                    if (value == _duration) return;
-                    _duration = value;
-                    NotifyPropertyChanged("Duration");
-                }
+                if (value == _duration) return;
+                _duration = value;
+                NotifyPropertyChanged("Duration");
             }
-            private int _stacks;
-            public int Stacks
+        }
+        private int _stacks;
+        public int Stacks
+        {
+            get { return _stacks; }
+            set
             {
-                get { return _stacks; }
-                set
-                {
-                    if (value == _stacks) return;
-                    _stacks = value;
-                    NotifyPropertyChanged("Stacks");
-                }
+                if (value == _stacks) return;
+                _stacks = value;
+                NotifyPropertyChanged("Stacks");
             }
-            private readonly System.Timers.Timer timer;
-            private uint _durationLeft;
-            public uint DurationLeft
+        }
+        private readonly System.Timers.Timer timer;
+        private uint _durationLeft;
+        public uint DurationLeft
+        {
+            get { return _durationLeft; }
+            set
             {
-                get { return _durationLeft; }
-                set
-                {
-                    if (value == _durationLeft) return;
-                    _durationLeft = value;
-                    NotifyPropertyChanged("DurationLeft");
-                }
-            }
-
-            private double _iconSize;
-            public double IconSize
-            {
-                get { return _iconSize; }
-                set
-                {
-                    if (_iconSize == value) return;
-                    _iconSize = value;
-                }
-            }
-            public double BackgroundEllipseSize { get; set; }
-            public Thickness IndicatorMargin { get; set; }
-
-            public bool Animated { get; private set; }
-            public AbnormalityDuration(Abnormality b, uint d, int s, ulong t, Dispatcher disp, bool animated, double iconSize, double bgEllSize, Thickness margin)
-            {
-                _dispatcher = disp;
-                Animated = animated;
-                Abnormality = b;
-                Duration = d;
-                Stacks = s;
-                Target = t;
-
-                IconSize = iconSize;
-                BackgroundEllipseSize = bgEllSize;
-                IndicatorMargin = margin;
-
-                DurationLeft = d;
-                timer = new System.Timers.Timer(1000);
-                timer.Elapsed += DecreaseDuration;
-                if (!Abnormality.Infinity)
-                {
-                    timer.Start();
-                }
-            }
-            public AbnormalityDuration()
-            {
-
-            }
-            private void DecreaseDuration(object sender, ElapsedEventArgs e)
-            {
-                DurationLeft = DurationLeft - 1000;
-                if (DurationLeft < 0) timer.Stop();
-            }
-
-            public void Refresh()
-            {
-                timer?.Stop();
-                if (Duration != 0) timer?.Start();
-                NotifyPropertyChanged("Refresh");
-            }
-
-            public void Dispose()
-            {
-                timer.Stop();
-                timer.Elapsed -= DecreaseDuration;
-                timer.Dispose();
+                if (value == _durationLeft) return;
+                _durationLeft = value;
+                NotifyPropertyChanged("DurationLeft");
             }
         }
 
-    
+        private double _iconSize;
+        public double IconSize
+        {
+            get { return _iconSize; }
+            set
+            {
+                if (_iconSize == value) return;
+                _iconSize = value;
+            }
+        }
+        public double BackgroundEllipseSize { get; set; }
+        public Thickness IndicatorMargin { get; set; }
+        static int _count = 0;
+        public bool Animated { get; private set; }
+        public AbnormalityDuration(Abnormality b, uint d, int s, ulong t, Dispatcher disp, bool animated, double iconSize, double bgEllSize, Thickness margin)
+        {
+            _count++;
+            _dispatcher = disp;
+            Animated = animated;
+            Abnormality = b;
+            Duration = d;
+            Stacks = s;
+            Target = t;
+
+            Console.WriteLine("[{0}] - {1}",_count, Abnormality.Name) ;
+
+            IconSize = iconSize;
+            BackgroundEllipseSize = bgEllSize;
+            IndicatorMargin = margin;
+
+            DurationLeft = d;
+            if (!Abnormality.Infinity)
+            {
+                timer = new System.Timers.Timer(1000);
+                timer.Elapsed += DecreaseDuration;
+                timer.Start();
+            }
+        }
+
+        private void DecreaseDuration(object sender, ElapsedEventArgs e)
+        {
+            DurationLeft = DurationLeft - 1000;
+            if (DurationLeft < 0) timer.Stop();
+        }
+
+        public void Refresh()
+        {
+            timer?.Stop();
+            if (Duration != 0) timer?.Start();
+            NotifyPropertyChanged("Refresh");
+        }
+
+        public void Dispose()
+        {
+            _count--;
+            Console.WriteLine("[{0}] - {1}", _count, Abnormality.Name);
+
+            if (timer == null) return;
+            timer.Stop();
+            timer.Elapsed -= DecreaseDuration;
+            timer.Dispose();
+
+        }
+        ~AbnormalityDuration()
+        {
+        }
+    }
+
+
 }

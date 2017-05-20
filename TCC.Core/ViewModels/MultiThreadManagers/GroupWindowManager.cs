@@ -34,8 +34,6 @@ namespace TCC.ViewModels
                 {
                     WindowManager.GroupWindow.SwitchTemplate(false);
                 }
-
-                Console.WriteLine("Group size: " + _groupSize);
             }
         }
 
@@ -53,12 +51,14 @@ namespace TCC.ViewModels
             {
                 if (ab.Type == AbnormalityType.Buff)
                 {
-                    u.AddOrRefreshBuff(new AbnormalityDuration(ab, duration, stacks, u.EntityId, this.Dispatcher, false, size*.9, size , new Thickness(margin,1,1,1)));
+                    u.AddOrRefreshBuff(ab, duration, stacks, size, margin);
+                    //u.AddOrRefreshBuff(new AbnormalityDuration(ab, duration, stacks, u.EntityId, this.Dispatcher, false, size*.9, size , new Thickness(margin,1,1,1)));
                     if (u.UserClass == Class.Warrior && ab.Id >= 100200 && ab.Id <= 100203) MoveUser(Dps, Tanks, u.ServerId, u.PlayerId);
                 }
                 else
                 {
-                    u.AddOrRefreshDebuff(new AbnormalityDuration(ab, duration, stacks, u.EntityId, this.Dispatcher, false, size * .9, size, new Thickness(margin, 1, 1, 1)));
+                    u.AddOrRefreshDebuff(ab, duration, stacks, size, margin);
+                    //u.AddOrRefreshDebuff(new AbnormalityDuration(ab, duration, stacks, u.EntityId, this.Dispatcher, false, size * .9, size, new Thickness(margin, 1, 1, 1)));
                 }
                 return;
             }
@@ -66,11 +66,14 @@ namespace TCC.ViewModels
             {
                 if (ab.Type == AbnormalityType.Buff)
                 {
-                    u.AddOrRefreshBuff(new AbnormalityDuration(ab, duration, stacks, u.EntityId, this.Dispatcher, false, size * .9, size, new Thickness(margin, 1, 1, 1)));
+                    u.AddOrRefreshBuff(ab, duration, stacks, size, margin);
+                    //u.AddOrRefreshBuff(new AbnormalityDuration(ab, duration, stacks, u.EntityId, this.Dispatcher, false, size * .9, size, new Thickness(margin, 1, 1, 1)));
                 }
                 else
                 {
-                    u.AddOrRefreshDebuff(new AbnormalityDuration(ab, duration, stacks, u.EntityId, this.Dispatcher, false, size * .9, size, new Thickness(margin, 1, 1, 1)));
+                    u.AddOrRefreshBuff(ab, duration, stacks, size, margin);
+
+                    //u.AddOrRefreshDebuff(new AbnormalityDuration(ab, duration, stacks, u.EntityId, this.Dispatcher, false, size * .9, size, new Thickness(margin, 1, 1, 1)));
                 }
                 return;
             }
@@ -78,11 +81,15 @@ namespace TCC.ViewModels
             {
                 if (ab.Type == AbnormalityType.Buff)
                 {
-                    u.AddOrRefreshBuff(new AbnormalityDuration(ab, duration, stacks, u.EntityId, this.Dispatcher, false, size*.9, size, new Thickness(margin, 1, 1, 1)));
+                    u.AddOrRefreshBuff(ab, duration, stacks, size, margin);
+
+                    //u.AddOrRefreshBuff(new AbnormalityDuration(ab, duration, stacks, u.EntityId, this.Dispatcher, false, size*.9, size, new Thickness(margin, 1, 1, 1)));
                 }
                 else
                 {
-                    u.AddOrRefreshDebuff(new AbnormalityDuration(ab, duration, stacks, u.EntityId, this.Dispatcher, false, size * .9, size, new Thickness(margin, 1, 1, 1)));
+                    u.AddOrRefreshBuff(ab, duration, stacks, size, margin);
+
+                    //u.AddOrRefreshDebuff(new AbnormalityDuration(ab, duration, stacks, u.EntityId, this.Dispatcher, false, size * .9, size, new Thickness(margin, 1, 1, 1)));
                 }
                 return;
             }
@@ -238,7 +245,6 @@ namespace TCC.ViewModels
                     AddOrUpdateTank(p);
                     break;
                 case Class.Warrior:
-                    // add def/assault stance logic
                     AddOrUpdateDps(p);
                     break;
                 default:

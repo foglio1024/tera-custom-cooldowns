@@ -129,18 +129,19 @@ namespace TCC.Data
 
 
 
-        public void AddorRefresh(AbnormalityDuration ab)
+        public void AddorRefresh(Abnormality ab, uint duration, int stacks, double size, double margin)
         {
-            var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Abnormality.Id);
+            var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                if (ab.Abnormality.Infinity) Buffs.Insert(0, ab);
-                else Buffs.Add(ab);
+                var newAb = new AbnormalityDuration(ab, duration, stacks, target, _dispatcher, true, size * .9, size, new System.Windows.Thickness(margin));
+                if (ab.Infinity) Buffs.Insert(0, newAb);
+                else Buffs.Add(newAb);
                 return;
             }
-            existing.Duration = ab.Duration;
-            existing.DurationLeft = ab.DurationLeft;
-            existing.Stacks = ab.Stacks;
+            existing.Duration = duration;
+            existing.DurationLeft = duration;
+            existing.Stacks = stacks;
             existing.Refresh();
 
         }

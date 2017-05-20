@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
+using System.Windows;
 using System.Windows.Threading;
 using TCC.ClassSpecific;
+using TCC.ViewModels;
 
 namespace TCC.Data
 {
@@ -328,7 +330,7 @@ namespace TCC.Data
             }
         }
 
-        public void AddOrRefreshBuff(AbnormalityDuration ab)
+        public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks, double size, double margin)
         {
             if (SettingsManager.IgnoreAllBuffsInGroupWindow) return; 
             switch (SessionManager.CurrentPlayer.Class)
@@ -342,44 +344,48 @@ namespace TCC.Data
                 default:
                     return;
             }
-            var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Abnormality.Id);
+            var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                Buffs.Add(ab);
+
+                var newAb = new AbnormalityDuration(ab, duration, stacks, this.EntityId, _dispatcher, false, size * .9, size, new Thickness(margin, 1, 1, 1));
+                Buffs.Add(newAb);
                 return;
             }
-            existing.Duration = ab.Duration;
-            existing.DurationLeft = ab.DurationLeft;
-            existing.Stacks = ab.Stacks;
+            existing.Duration = duration;
+            existing.DurationLeft = duration;
+            existing.Stacks = stacks;
             existing.Refresh();
 
         }
-
-        private bool FilterPriest(AbnormalityDuration ab)
+        public void AddOrRefreshDebuff(Abnormality ab, uint duration, int stacks, double size, double margin)
         {
-            if (!Priest.CommonBuffs.Any(x => x == ab.Abnormality.Id)) return true;
-            else return false;
-        }
-
-        private bool FilterMystic(AbnormalityDuration ab)
-        {
-            if (!Mystic.CommonBuffs.Any(x=> x == ab.Abnormality.Id)) return true;
-            else return false;
-        }
-
-        public void AddOrRefreshDebuff(AbnormalityDuration ab)
-        {
-            var existing = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Abnormality.Id);
+            var existing = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                Debuffs.Add(ab);
+                var newAb = new AbnormalityDuration(ab, duration, stacks, this.EntityId, _dispatcher, false, size * .9, size, new Thickness(margin, 1, 1, 1));
+
+                Debuffs.Add(newAb);
                 return;
             }
-            existing.Duration = ab.Duration;
-            existing.DurationLeft = ab.DurationLeft;
-            existing.Stacks = ab.Stacks;
+            existing.Duration = duration;
+            existing.DurationLeft = duration;
+            existing.Stacks = stacks;
             existing.Refresh();
         }
+
+        private bool FilterPriest(Abnormality ab)
+        {
+            if (!Priest.CommonBuffs.Any(x => x == ab.Id)) return true;
+            else return false;
+        }
+
+        private bool FilterMystic(Abnormality ab)
+        {
+            if (!Mystic.CommonBuffs.Any(x=> x == ab.Id)) return true;
+            else return false;
+        }
+
 
         public void RemoveBuff(Abnormality ab)
         {

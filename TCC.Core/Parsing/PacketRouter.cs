@@ -118,19 +118,20 @@ namespace TCC.Parsing
         public static void HandleCreatureChangeHP(S_CREATURE_CHANGE_HP p)
         {
             SessionManager.SetPlayerHP(p.Target, p.CurrentHP);
-            if (EntitiesManager.TryGetBossById(p.Target, out Boss b))
-            {
-                if (b.Visible == System.Windows.Visibility.Collapsed)
-                {
-                    b.Visible = System.Windows.Visibility.Visible;
-                }
-                if (b.MaxHP != p.MaxHP)
-                {
-                    b.MaxHP = p.MaxHP;
-                }
-                b.CurrentHP = p.CurrentHP;
+            BossGageWindowManager.Instance.AddOrUpdateBoss(p.Target, p.MaxHP, p.CurrentHP);
+            //if (EntitiesManager.TryGetBossById(p.Target, out Boss b))
+            //{
+            //    if (b.Visible == System.Windows.Visibility.Collapsed)
+            //    {
+            //        b.Visible = System.Windows.Visibility.Visible;
+            //    }
+            //    if (b.MaxHP != p.MaxHP)
+            //    {
+            //        b.MaxHP = p.MaxHP;
+            //    }
+            //    b.CurrentHP = p.CurrentHP;
 
-            }
+            //}
         }
         public static void HandlePlayerChangeMP(S_PLAYER_CHANGE_MP p)
         {
@@ -156,39 +157,30 @@ namespace TCC.Parsing
         public static void HandleNpcStatusChanged(S_NPC_STATUS p)
         {
             EntitiesManager.SetNPCStatus(p.EntityId, p.IsEnraged);
-            if (EntitiesManager.TryGetBossById(p.EntityId, out Boss b))
+            if(p.Target == 0)
             {
-                if (p.Target == 0)
-                {
-                    b.Target = 0;
-                    b.CurrentAggroType = AggroCircle.None;
-                }
+                BossGageWindowManager.Instance.UnsetBossTarget(p.EntityId);
             }
+            //if (EntitiesManager.TryGetBossById(p.EntityId, out Boss b))
+            //{
+            //    if (p.Target == 0)
+            //    {
+            //        b.Target = 0;
+            //        b.CurrentAggroType = AggroCircle.None;
+            //    }
+            //}
         }
         public static void HandleUserEffect(S_USER_EFFECT p)
         {
-            if (EntitiesManager.TryGetBossById(p.Source, out Boss b))
-            {
-                if (p.Action == AggroAction.Remove)
-                {
-                    b.Target = p.User;
-                    switch (p.Circle)
-                    {
-                        case AggroCircle.Main:
-                            break;
-                        case AggroCircle.Secondary:
-                            b.CurrentAggroType = AggroCircle.Main;
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                else
-                {
-                    b.Target = p.User;
-                    b.CurrentAggroType = p.Circle;
-                }
-            }
+            BossGageWindowManager.Instance.SetBossAggro(p.Source, p.Circle, p.User);
+            //if (EntitiesManager.TryGetBossById(p.Source, out Boss b))
+            //{
+            //    if (p.Circle == AggroCircle.Main && p.Action == AggroAction.Add)
+            //    {
+            //        b.Target = p.User;
+            //        b.CurrentAggroType = AggroCircle.Main;
+            //    }
+            //}
         }
 
         public static void HandleCharList(S_GET_USER_LIST p)
@@ -275,7 +267,7 @@ namespace TCC.Parsing
         }
         public static void HandleSpawnNpc(S_SPAWN_NPC p)
         {
-            EntitiesManager.SpawnNPC(p.HuntingZoneId, p.TemplateId, p.EntityId, System.Windows.Visibility.Hidden, false);
+            EntitiesManager.SpawnNPC(p.HuntingZoneId, p.TemplateId, p.EntityId, System.Windows.Visibility.Collapsed, false);
             EntitiesManager.CheckHarrowholdMode(p.HuntingZoneId, p.TemplateId);
         }
         public static void HandleSpawnUser(S_SPAWN_USER p)
