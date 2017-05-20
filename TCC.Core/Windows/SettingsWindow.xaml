@@ -141,7 +141,7 @@
                     </Grid.ColumnDefinitions>
                     <Border Background="#09ffffff" Grid.ColumnSpan="2" />
                     <Image Source="/TCC;component/resources/images/ic_data_usage_white_24dp_2x.png" Margin="7,5" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
-                    <TextBlock Text="Buffs window settings" Style="{StaticResource text1}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+                    <TextBlock Text="Other settings" Style="{StaticResource text1}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
                 </Grid>
                 <ui_elements:BoolSetting SettingName="Use new cooldown bar" Grid.Row="1" IsOn="{Binding ClassWindowOn, Mode=TwoWay}" />
             </Grid>
