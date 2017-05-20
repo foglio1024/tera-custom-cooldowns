@@ -46,34 +46,34 @@ namespace TCC
                     GroupWindowManager.Instance.EndUserAbnormality(ab, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
 
                 }
-                else if (EntitiesManager.TryGetBossById(target, out Boss b))
+                //else if (EntitiesManager.TryGetBossById(target, out Boss b))
+                //{
+                //    b.EndBuff(ab);
+                //}
+                else
                 {
-                    b.EndBuff(ab);
+                    BossGageWindowManager.Instance.EndNpcAbnormality(target, ab);
                 }
             }
 
         }
         static void BeginPlayerAbnormality(Abnormality ab, int stacks, uint duration, ulong target)
         {
-            var newAb = new AbnormalityDuration(ab, duration, stacks, target, BuffBarWindowManager.Instance.Dispatcher, true, PLAYER_AB_SIZE * .9, PLAYER_AB_SIZE, new System.Windows.Thickness(PLAYER_AB_LEFT_MARGIN));
             if (ab.Type == AbnormalityType.Buff)
             {
                 if (ab.Infinity)
                 {
-                    //SessionManager.CurrentPlayer.AddOrRefreshInfBuff(newAb);
-                    BuffBarWindowManager.Instance.Player.AddOrRefreshInfBuff(newAb);
+                    BuffBarWindowManager.Instance.Player.AddOrRefreshInfBuff(ab, duration, stacks, PLAYER_AB_SIZE, PLAYER_AB_LEFT_MARGIN);
 
                 }
                 else
                 {
-                    //SessionManager.CurrentPlayer.AddOrRefreshBuff(newAb);
-                    BuffBarWindowManager.Instance.Player.AddOrRefreshBuff(newAb);
+                    BuffBarWindowManager.Instance.Player.AddOrRefreshBuff(ab, duration, stacks, PLAYER_AB_SIZE, PLAYER_AB_LEFT_MARGIN);
                 }
             }
             else
             {
-                //SessionManager.CurrentPlayer.AddOrRefreshDebuff(newAb);
-                BuffBarWindowManager.Instance.Player.AddOrRefreshDebuff(newAb);
+                BuffBarWindowManager.Instance.Player.AddOrRefreshDebuff(ab, duration, stacks, PLAYER_AB_SIZE, PLAYER_AB_LEFT_MARGIN);
 
             }
         }
@@ -83,29 +83,27 @@ namespace TCC
             {
                 if (ab.Infinity)
                 {
-                    //SessionManager.CurrentPlayer.RemoveInfBuff(ab);
                     BuffBarWindowManager.Instance.Player.RemoveInfBuff(ab);
                 }
                 else
                 {
 
-                    //SessionManager.CurrentPlayer.RemoveBuff(ab);
                     BuffBarWindowManager.Instance.Player.RemoveBuff(ab);
                 }
             }
             else
             {
-                //SessionManager.CurrentPlayer.RemoveDebuff(ab);
                 BuffBarWindowManager.Instance.Player.RemoveDebuff(ab);
             }
         }
 
         static void BeginNPCAbnormality(Abnormality ab, int stacks, uint duration, ulong target)
         {
-            if (EntitiesManager.TryGetBossById(target, out Boss b))
-            {
-                b.AddorRefresh(new AbnormalityDuration(ab, duration, stacks, target, BossGageWindowManager.Instance.Dispatcher, true, BOSS_AB_SIZE * .9, BOSS_AB_SIZE, new System.Windows.Thickness(BOSS_AB_LEFT_MARGIN)));
-            }
+            //if (EntitiesManager.TryGetBossById(target, out Boss b))
+            //{
+            //    b.AddorRefresh(ab, duration, stacks, BOSS_AB_SIZE, BOSS_AB_LEFT_MARGIN);
+            //}
+            BossGageWindowManager.Instance.AddOrRefreshNpcAbnormality(ab, stacks, duration, target, BOSS_AB_SIZE, BOSS_AB_LEFT_MARGIN);
         }
         static bool Filter(Abnormality ab)
         {

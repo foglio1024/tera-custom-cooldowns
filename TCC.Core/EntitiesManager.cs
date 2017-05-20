@@ -10,22 +10,22 @@ namespace TCC
 {
     public static class EntitiesManager
     {
-        public static ObservableCollection<Boss> CurrentBosses = new ObservableCollection<Boss>();
+        //public static ObservableCollection<Boss> CurrentBosses = new ObservableCollection<Boss>();
         public static ObservableCollection<Player> CurrentUsers = new ObservableCollection<Player>();
         public static MonsterDatabase CurrentDatabase;
-        public static bool TryGetBossById(ulong id, out Boss b)
-        {
-            b = CurrentBosses.FirstOrDefault(x => x.EntityId == id);
-            if (b == null)
-            {
-                b = new Boss(0, 0, 0, Visibility.Collapsed);
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
+        //public static bool TryGetBossById(ulong id, out Boss b)
+        //{
+        //    b = CurrentBosses.FirstOrDefault(x => x.EntityId == id);
+        //    if (b == null)
+        //    {
+        //        b = new Boss(0, 0, 0, Visibility.Collapsed);
+        //        return false;
+        //    }
+        //    else
+        //    {
+        //        return true;
+        //    }
+        //}
 
         public static Dragon CurrentDragon = Dragon.None;
         public static ObservableCollection<ulong> chestList = new ObservableCollection<ulong>();
@@ -33,84 +33,77 @@ namespace TCC
         {
             if (CurrentDatabase.TryGetMonster(templateId, zoneId, out Monster m))
             {
-
                 if (m.IsBoss || force)
                 {
                     App.Current.Dispatcher.Invoke(() =>
                     {
-                        CurrentBosses.Add(new Boss(entityId, zoneId, templateId, v));
+                        //CurrentBosses.Add(new Boss(entityId, zoneId, templateId, v));
 
                     });
-                }
-                else
-                {
-                    App.Current.Dispatcher.Invoke(() =>
-                    {
-                        if (m.Name == "Treasure Chest")
-                        {
-                            chestList.Add(entityId);
-                        }
-                    });
-
+                    BossGageWindowManager.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, templateId, zoneId, v);
                 }
             }
             else
             {
-                BossGageWindowManager.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP);
+                //BossGageWindowManager.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP);
             }
         }
         public static void DespawnNPC(ulong target)
         {
-            if (TryGetBossById(target, out Boss b))
-            {
-                App.Current.Dispatcher.Invoke(() =>
-                {
-                    CurrentBosses.Remove(b);
-                    BossGageWindowManager.Instance.RemoveBoss(target);
-                });
-            }
-            if (SessionManager.HarrowholdMode)
-            {
-                UnsetDragonsContexts(target);
-            }
+                BossGageWindowManager.Instance.RemoveBoss(target);
+            //if (TryGetBossById(target, out Boss b))
+            //{
+            //    App.Current.Dispatcher.Invoke(() =>
+            //    {
+            //        CurrentBosses.Remove(b);
+            //        b.Dispose();
+            //    });
+            //}
+            //if (SessionManager.HarrowholdMode)
+            //{
+            //    UnsetDragonsContexts(target);
+            //}
 
 
         }
         public static void SetNPCStatus(ulong entityId, bool enraged)
         {
-            if (TryGetBossById(entityId, out Boss b))
-            {
-                if (b.Enraged != enraged)
-                {
-                    b.Enraged = enraged;
-                }
-            }
+            //if (TryGetBossById(entityId, out Boss b))
+            //{
+            //    if (b.Enraged != enraged)
+            //    {
+            //        b.Enraged = enraged;
+            //    }
+            //}
+            BossGageWindowManager.Instance.SetBossEnrage(entityId, enraged);
 
         }
         public static void UpdateNPCbyGauge(ulong target, float curHP, float maxHP, ushort zoneId, uint templateId)
         {
-            if (TryGetBossById(target, out Boss b))
-            {
-                b.MaxHP = maxHP;
-                b.Visible = System.Windows.Visibility.Visible;
+            BossGageWindowManager.Instance.AddOrUpdateBoss(target, maxHP, curHP, templateId, zoneId, Visibility.Visible);
 
-                if (b.CurrentHP != curHP)
-                {
-                    b.CurrentHP = curHP;
-                }
-                BossGageWindowManager.Instance.AddOrUpdateBoss(target, maxHP, curHP);
-            }
-            else
-            {
-                SpawnNPC(zoneId, templateId, target, Visibility.Visible, true);
-            }
+            //if (TryGetBossById(target, out Boss b))
+            //{
+            //    b.MaxHP = maxHP;
+            //    b.Visible = System.Windows.Visibility.Visible;
+
+            //    if (b.CurrentHP != curHP)
+            //    {
+            //        b.CurrentHP = curHP;
+            //    }
+            //    BossGageWindowManager.Instance.AddOrUpdateBoss(target, maxHP, curHP);
+            //}
+            //else
+            //{
+            //    SpawnNPC(zoneId, templateId, target, Visibility.Visible, true);
+            //}
         }
         public static void ClearNPC()
         {
-            App.Current.Dispatcher.Invoke(() =>
-            {
-                CurrentBosses.Clear();
-            });
+            //App.Current.Dispatcher.Invoke(() =>
+            //{
+            //    CurrentBosses.Clear();
+            //});
             BossGageWindowManager.Instance.ClearBosses();
         }
         public static void ClearUsers()
@@ -183,38 +176,38 @@ namespace TCC
         }
         static void SetDragonsContexts(uint templateId)
         {
-            if (templateId == 1100)
-            {
-                WindowManager.BossGauge.Dispatcher.Invoke(() =>
-                {
-                    WindowManager.BossGauge.HHBosses.ignidrax.Reset();
-                    WindowManager.BossGauge.HHBosses.ignidrax.DataContext = CurrentBosses.FirstOrDefault(x => x.Name == "Ignidrax");
-                });
-            }
-            if (templateId == 1101)
-            {
-                WindowManager.BossGauge.Dispatcher.Invoke(() =>
-                {
-                    WindowManager.BossGauge.HHBosses.terradrax.Reset();
-                    WindowManager.BossGauge.HHBosses.terradrax.DataContext = CurrentBosses.FirstOrDefault(x => x.Name == "Terradrax");
-                });
-            }
-            if (templateId == 1102)
-            {
-                WindowManager.BossGauge.Dispatcher.Invoke(() =>
-                {
-                    WindowManager.BossGauge.HHBosses.umbradrax.Reset();
-                    WindowManager.BossGauge.HHBosses.umbradrax.DataContext = CurrentBosses.FirstOrDefault(x => x.Name == "Umbradrax");
-                });
-            }
-            if (templateId == 1103)
-            {
-                WindowManager.BossGauge.Dispatcher.Invoke(() =>
-                {
-                    WindowManager.BossGauge.HHBosses.aquadrax.Reset();
-                    WindowManager.BossGauge.HHBosses.aquadrax.DataContext = CurrentBosses.FirstOrDefault(x => x.Name == "Aquadrax");
-                });
-            }
+            //if (templateId == 1100)
+            //{
+            //    WindowManager.BossGauge.Dispatcher.Invoke(() =>
+            //    {
+            //        WindowManager.BossGauge.HHBosses.ignidrax.Reset();
+            //        WindowManager.BossGauge.HHBosses.ignidrax.DataContext = CurrentBosses.FirstOrDefault(x => x.Name == "Ignidrax");
+            //    });
+            //}
+            //if (templateId == 1101)
+            //{
+            //    WindowManager.BossGauge.Dispatcher.Invoke(() =>
+            //    {
+            //        WindowManager.BossGauge.HHBosses.terradrax.Reset();
+            //        WindowManager.BossGauge.HHBosses.terradrax.DataContext = CurrentBosses.FirstOrDefault(x => x.Name == "Terradrax");
+            //    });
+            //}
+            //if (templateId == 1102)
+            //{
+            //    WindowManager.BossGauge.Dispatcher.Invoke(() =>
+            //    {
+            //        WindowManager.BossGauge.HHBosses.umbradrax.Reset();
+            //        WindowManager.BossGauge.HHBosses.umbradrax.DataContext = CurrentBosses.FirstOrDefault(x => x.Name == "Umbradrax");
+            //    });
+            //}
+            //if (templateId == 1103)
+            //{
+            //    WindowManager.BossGauge.Dispatcher.Invoke(() =>
+            //    {
+            //        WindowManager.BossGauge.HHBosses.aquadrax.Reset();
+            //        WindowManager.BossGauge.HHBosses.aquadrax.DataContext = CurrentBosses.FirstOrDefault(x => x.Name == "Aquadrax");
+            //    });
+            //}
 
         }
 
