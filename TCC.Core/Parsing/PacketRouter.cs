@@ -351,6 +351,10 @@ namespace TCC.Parsing
                 case Class.Glaiver:
                     Valkyrie.CheckRagnarok(p);
                     break;
+                case Class.Archer:
+                    Archer.CheckFocus(p);
+                    Archer.CheckFocusX(p);
+                    break;
                 default:
                     break;
             }
@@ -358,10 +362,22 @@ namespace TCC.Parsing
         public static void HandleAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
             AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.Duration, p.Stacks);
+            switch (SessionManager.CurrentPlayer.Class)
+            {
+                case Class.Archer:
+                    Archer.CheckFocus(p);
+                    break;
+            }
         }
         public static void HandleAbnormalityEnd(S_ABNORMALITY_END p)
         {
             AbnormalityManager.EndAbnormality(p.Target, p.Id);
+            switch (SessionManager.CurrentPlayer.Class)
+            {
+                case Class.Archer:
+                    Archer.CheckFocusEnd(p);
+                    break;
+            }
         }
 
         public static void HandlePlayerLocation(C_PLAYER_LOCATION p)

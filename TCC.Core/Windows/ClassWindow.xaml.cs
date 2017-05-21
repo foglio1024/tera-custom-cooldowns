@@ -66,6 +66,9 @@ namespace TCC.Windows
                     case Class.Glaiver:
                         root.ContentTemplate = FindResource("valkyrie") as DataTemplate;
                         break;
+                    case Class.Archer:
+                        root.ContentTemplate = FindResource("archer") as DataTemplate;
+                        break;
                     default:
                         root.ContentTemplate = FindResource("emptyTemplate") as DataTemplate;
                         break;

@@ -24,6 +24,9 @@
         <DataTemplate x:Key="valkyrie">
             <controls:ValkyrieBar />
         </DataTemplate>
+        <DataTemplate x:Key="archer">
+            <controls:ArcherBar />
+        </DataTemplate>
         <DataTemplate x:Key="emptyTemplate">
         </DataTemplate>
         <Style x:Key="opacityAnimatedContainer" TargetType="FrameworkElement">
