@@ -4,14 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCC.Windows"
-        xmlns:ui_elements="clr-namespace:TCC.Controls"
+        xmlns:controls="clr-namespace:TCC.Controls"
         xmlns:vm="clr-namespace:TCC.ViewModels" Topmost="True"
         mc:Ignorable="d" WindowStyle="None" AllowsTransparency="True" 
-        Title="TCC settings" Height="Auto" Width="Auto" ResizeMode="NoResize" SizeToContent="WidthAndHeight" Background="Transparent" UseLayoutRounding="True" >
+        Title="TCC settings" Height="Auto" Width="Auto" ResizeMode="NoResize" SizeToContent="WidthAndHeight" Background="Transparent" UseLayoutRounding="True">
+    <Window.Resources>
+        <Style x:Key="{x:Type ToolTip}" TargetType="{x:Type ToolTip}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+        </Style>
+    </Window.Resources>
     <Window.DataContext>
         <vm:SettingsWindowViewModel/>
     </Window.DataContext>
-    <Grid Margin="10" Width="600">
+    <Grid Margin="10" Width="600" >
         <Grid.RowDefinitions >
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -72,9 +78,9 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <ui_elements:BoolSetting SettingName="Visibility" Grid.Row="0" IsOn="{Binding IsCooldownWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
-                    <ui_elements:BoolSetting SettingName="Click through" Grid.Row="1" IsOn="{Binding IsCooldownWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_mouse_white_24dp_2x.png" />
-                    <ui_elements:ValueSetting SettingName="Scale" Grid.Row="2" Value="{Binding CooldownWindowScale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></ui_elements:ValueSetting>
+                    <controls:BoolSetting SettingName="Visibility" Grid.Row="0" IsOn="{Binding IsCooldownWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
+                    <controls:BoolSetting SettingName="Click through" Grid.Row="1" IsOn="{Binding IsCooldownWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_mouse_white_24dp_2x.png" />
+                    <controls:ValueSetting SettingName="Scale" Grid.Row="2" Value="{Binding CooldownWindowScale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></controls:ValueSetting>
                 </Grid>
             </Grid>
 
@@ -95,9 +101,9 @@
                     <Image Source="/TCC;component/resources/images/ic_person_white_24dp_2x.png" Margin="7,5" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
                     <TextBlock Text="Character window settings" Style="{StaticResource text1}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
                 </Grid>
-                <ui_elements:BoolSetting Margin="0,0,0,0" SettingName="Visibility" Grid.Row="1" IsOn="{Binding IsCharacterWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
-                <ui_elements:BoolSetting Margin="0,0,0,0" SettingName="Click through" Grid.Row="2" IsOn="{Binding IsCharacterWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_mouse_white_24dp_2x.png"/>
-                <ui_elements:ValueSetting SettingName="Scale" Grid.Row="3" Value="{Binding CharacterWindowScale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></ui_elements:ValueSetting>
+                <controls:BoolSetting Margin="0,0,0,0" SettingName="Visibility" Grid.Row="1" IsOn="{Binding IsCharacterWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
+                <controls:BoolSetting Margin="0,0,0,0" SettingName="Click through" Grid.Row="2" IsOn="{Binding IsCharacterWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_mouse_white_24dp_2x.png"/>
+                <controls:ValueSetting SettingName="Scale" Grid.Row="3" Value="{Binding CharacterWindowScale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></controls:ValueSetting>
 
             </Grid>
 
@@ -119,12 +125,13 @@
                     <Image Source="/TCC;component/resources/images/ic_data_usage_white_24dp_2x.png" Margin="7,5" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
                     <TextBlock Text="Buffs window settings" Style="{StaticResource text1}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
                 </Grid>
-                <ui_elements:BoolSetting SettingName="Visibility" Grid.Row="1" IsOn="{Binding IsBuffWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
-                <ui_elements:BoolSetting SettingName="Click through" Grid.Row="2" IsOn="{Binding IsBuffWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_mouse_white_24dp_2x.png"/>
-                <ui_elements:ValueSetting SettingName="Scale" Grid.Row="3" Value="{Binding BuffsWindowScale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></ui_elements:ValueSetting>
-                <ui_elements:BoolSetting SettingName="Show left to right" Grid.Row="4" IsOn="{Binding IsLeftToRightOn, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_swap_horiz_white_24dp_2x.png"/>
+                <controls:BoolSetting SettingName="Visibility" Grid.Row="1" IsOn="{Binding IsBuffWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
+                <controls:BoolSetting SettingName="Click through" Grid.Row="2" IsOn="{Binding IsBuffWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_mouse_white_24dp_2x.png"/>
+                <controls:ValueSetting SettingName="Scale" Grid.Row="3" Value="{Binding BuffsWindowScale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></controls:ValueSetting>
+                <controls:BoolSetting SettingName="Show left to right" Grid.Row="4" IsOn="{Binding IsLeftToRightOn, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_swap_horiz_white_24dp_2x.png"/>
 
             </Grid>
+            
             <!-- Other settings -->
             <Grid Grid.Row="3" Grid.Column="0">
                 <Grid.RowDefinitions>
@@ -143,7 +150,17 @@
                     <Image Source="/TCC;component/resources/images/ic_data_usage_white_24dp_2x.png" Margin="7,5" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
                     <TextBlock Text="Other settings" Style="{StaticResource text1}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
                 </Grid>
-                <ui_elements:BoolSetting SettingName="Use new cooldown bar" Grid.Row="1" IsOn="{Binding ClassWindowOn, Mode=TwoWay}" />
+                <controls:BoolSetting SettingName="Use new cooldown bar" Grid.Row="1" IsOn="{Binding ClassWindowOn, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" >
+                    <controls:BoolSetting.ToolTip>
+                        <Grid Margin="5">
+                            <Border Style="{StaticResource border}" Grid.RowSpan="2"/>
+                            <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                <Run Text="Warning:" Foreground="DarkOrange"/>
+                                <Run Text=" switching between normal cooldown window and class window will cause any running skill to not be showed in the new window until it is used again." />
+                            </TextBlock>
+                        </Grid>
+                    </controls:BoolSetting.ToolTip>
+                </controls:BoolSetting>
             </Grid>
 
         </Grid>
@@ -171,9 +188,9 @@
                     <Image Source="/TCC;component/resources/images/combat_white.png" Margin="7,5" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
                     <TextBlock Text="Boss window settings" Style="{StaticResource text1}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
                 </Grid>
-                <ui_elements:BoolSetting SettingName="Visibility" Grid.Row="1" IsOn="{Binding IsBossWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
-                <ui_elements:BoolSetting SettingName="Click through" Grid.Row="2" IsOn="{Binding IsBossWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_mouse_white_24dp_2x.png"/>
-                <ui_elements:ValueSetting SettingName="Scale" Grid.Row="3" Value="{Binding BossWindowScale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></ui_elements:ValueSetting>
+                <controls:BoolSetting SettingName="Visibility" Grid.Row="1" IsOn="{Binding IsBossWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
+                <controls:BoolSetting SettingName="Click through" Grid.Row="2" IsOn="{Binding IsBossWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_mouse_white_24dp_2x.png"/>
+                <controls:ValueSetting SettingName="Scale" Grid.Row="3" Value="{Binding BossWindowScale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></controls:ValueSetting>
 
             </Grid>
 
@@ -197,12 +214,51 @@
                     <Image Source="/TCC;component/resources/images/ic_people_white_24dp_2x.png" Margin="7,5" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
                     <TextBlock Text="Group window settings" Style="{StaticResource text1}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
                 </Grid>
-                <ui_elements:BoolSetting SettingName="Visibility" Grid.Row="1" IsOn="{Binding IsGroupWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
-                <ui_elements:BoolSetting SettingName="Click through" Grid.Row="2" IsOn="{Binding IsGroupWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_mouse_white_24dp_2x.png"/>
-                <ui_elements:ValueSetting SettingName="Scale" Grid.Row="3" Value="{Binding GroupWindowScale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></ui_elements:ValueSetting>
-                <ui_elements:BoolSetting SettingName="Hide me" Grid.Row="4" IsOn="{Binding HideMe, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_person_white_24dp_2x.png" ToolTip="Hides current player from group window. Note: if turned back on while in a party, player will not be visible until party composition changes."/>
-                <ui_elements:BoolSetting SettingName="Hide buffs" Grid.Row="5" IsOn="{Binding HideAllBuffs, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_data_usage_white_24dp_2x.png"  ToolTip="Hides all group members' buffs from group window. Debuffs will still be showed (only for healers' buffs). Note: if turned back on while in a party, pre-existing buffs will not be visible until refreshed."/>
-                <ui_elements:BoolSetting SettingName="Hide buffs and debuffs" Grid.Row="6" IsOn="{Binding HideRaidAbnormalities, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_data_usage_white_24dp_2x.png" ToolTip="Hides all buffs and debuffs for every group member. Note: if turned back on while in a party, pre-existing (de)buffs will not be visible until refreshed."/>
+                <controls:BoolSetting SettingName="Visibility" Grid.Row="1" IsOn="{Binding IsGroupWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
+                <controls:BoolSetting SettingName="Click through" Grid.Row="2" IsOn="{Binding IsGroupWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_mouse_white_24dp_2x.png"/>
+                <controls:ValueSetting SettingName="Scale" Grid.Row="3" Value="{Binding GroupWindowScale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></controls:ValueSetting>
+                <controls:BoolSetting SettingName="Hide me" Grid.Row="4" IsOn="{Binding HideMe, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_person_white_24dp_2x.png" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0">
+                    <controls:BoolSetting.ToolTip>
+                        <Grid Margin="5">
+                            <Border Style="{StaticResource border}" Grid.RowSpan="2"/>
+                            <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                <Run Text="Hides current player from group window."/>
+                                <LineBreak /> <LineBreak/>
+                                <Run Text="Note: " Foreground="#59f"/>
+                                <Run Text="if turned back on while in a party, player will not be visible until party composition changes." />
+                            </TextBlock>
+                        </Grid>
+                    </controls:BoolSetting.ToolTip>
+
+                </controls:BoolSetting>
+
+                <controls:BoolSetting SettingName="Hide buffs" Grid.Row="5" IsOn="{Binding HideAllBuffs, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_data_usage_white_24dp_2x.png" 
+                                      ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" >
+                    <controls:BoolSetting.ToolTip>
+                        <Grid Margin="5">
+                            <Border Style="{StaticResource border}" Grid.RowSpan="2"/>
+                            <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                <Run Text="Hides all group members' buffs from group window. Debuffs will still be showed (only for healers' buffs)."/>
+                                <LineBreak /> <LineBreak/>
+                                <Run Text="Note: " Foreground="#59f"/>
+                                <Run Text="if turned back on while in a party, pre-existing buffs will not be visible until refreshed." />
+                            </TextBlock>
+                        </Grid>
+                    </controls:BoolSetting.ToolTip>
+                </controls:BoolSetting>
+                <controls:BoolSetting SettingName="Hide buffs and debuffs" Grid.Row="6" IsOn="{Binding HideRaidAbnormalities, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_data_usage_white_24dp_2x.png" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0">
+                    <controls:BoolSetting.ToolTip>
+                        <Grid Margin="5">
+                            <Border Style="{StaticResource border}" Grid.RowSpan="2"/>
+                            <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                <Run Text="Hides all buffs and debuffs for every group member. "/>
+                                <LineBreak /> <LineBreak/>
+                                <Run Text="Note: " Foreground="#59f"/>
+                                <Run Text="if turned back on while in a party, pre-existing (de)buffs will not be visible until refreshed." />
+                            </TextBlock>
+                        </Grid>
+                    </controls:BoolSetting.ToolTip>
+                </controls:BoolSetting>
             </Grid>
 
             <!-- Class window settings -->
@@ -222,9 +278,9 @@
                     <Image Source="/TCC;component/resources/images/ic_person_white_24dp_2x.png" Margin="7,5" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
                     <TextBlock Text="Class window settings" Style="{StaticResource text1}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
                 </Grid>
-                <ui_elements:BoolSetting SettingName="Visibility" Grid.Row="1" IsOn="{Binding IsClassWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
-                <ui_elements:BoolSetting SettingName="Click through" Grid.Row="2" IsOn="{Binding IsClassWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_mouse_white_24dp_2x.png"/>
-                <ui_elements:ValueSetting SettingName="Scale" Grid.Row="3" Value="{Binding ClassWindowScale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"/>
+                <controls:BoolSetting SettingName="Visibility" Grid.Row="1" IsOn="{Binding IsClassWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
+                <controls:BoolSetting SettingName="Click through" Grid.Row="2" IsOn="{Binding IsClassWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_mouse_white_24dp_2x.png"/>
+                <controls:ValueSetting SettingName="Scale" Grid.Row="3" Value="{Binding ClassWindowScale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"/>
             </Grid>
 
         </Grid>
