@@ -52,7 +52,7 @@ namespace TCC.Windows
             Bosses.DataContext = BossGageWindowManager.Instance.CurrentNPCs;
             Bosses.ItemsSource = BossGageWindowManager.Instance.CurrentNPCs;
 
-            Left = SettingsManager.BuffBarWindowSettings.X;
+            Left = SettingsManager.BossGaugeWindowSettings.X;
             Top = SettingsManager.BossGaugeWindowSettings.Y;
             Visibility = SettingsManager.BossGaugeWindowSettings.Visibility;
             SetClickThru(SettingsManager.BossGaugeWindowSettings.ClickThru);
