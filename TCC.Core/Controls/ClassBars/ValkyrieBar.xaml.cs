@@ -17,23 +17,17 @@ using TCC.ViewModels;
 namespace TCC.Controls
 {
     /// <summary>
-    /// Logica di interazione per WarriorBar.xaml
+    /// Logica di interazione per ValkyrieBar.xaml
     /// </summary>
-    public partial class WarriorBar : UserControl
+    public partial class ValkyrieBar : UserControl
     {
-        public WarriorBar()
+        public ValkyrieBar()
         {
             InitializeComponent();
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            gambleCD.DataContext = ((WarriorBarManager)DataContext).DeadlyGamble;
-            gambleBuff.DataContext = ((WarriorBarManager)DataContext).DeadlyGambleBuff;
-            edgeBar.DataContext = ((WarriorBarManager)DataContext).EdgeCounter;
-            hpText.DataContext = ((WarriorBarManager)DataContext).HP;
-            mpText.DataContext = ((WarriorBarManager)DataContext).MP;
-            reText.DataContext = ((WarriorBarManager)DataContext).ST;
         }
     }
 }

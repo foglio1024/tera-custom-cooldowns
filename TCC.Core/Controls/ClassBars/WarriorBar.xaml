@@ -40,12 +40,12 @@
             </Grid.CacheMode>
             <Border Background="#f55" Grid.Column="0" Width="80" Height="16"  CornerRadius="8" Margin="0,0,-20,0" Style="{StaticResource border}" BorderThickness="0"/>
             <Border Background="#59f" Grid.Column="2" Width="80" Height="16" Margin="-20,0,0,0" CornerRadius="8" Style="{StaticResource border}" BorderThickness="0"/>
-            <Border Background="#5ff" Grid.Column="1" Width="80" Height="16" Margin="0,26,0,0" CornerRadius="0,0,16,16" Style="{StaticResource border}" BorderThickness="0"/>
-            <TextBlock Name="hpText" Style="{StaticResource text1}" FontSize="13" Margin="0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Val}"/>
-            <TextBlock Name="mpText" Style="{StaticResource text1}" Grid.Column="2" FontSize="13" Margin="0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Val}"/>
-            <TextBlock Name="reText" Style="{StaticResource text1}" FontWeight="DemiBold" Foreground="#f555" Grid.Column="1" FontSize="10" Margin="0,30,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Val}"/>
+            <Border Background="#5ff" Grid.Column="1" Width="80" Height="16" Margin="0,30,0,0" CornerRadius="0,0,16,16" Style="{StaticResource border}" BorderThickness="0"/>
+            <TextBlock Name="hpText" Style="{StaticResource text1}" FontSize="13" Margin="0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HP.Val}"/>
+            <TextBlock Name="mpText" Style="{StaticResource text1}" Grid.Column="2" FontSize="13" Margin="0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding MP.Val}"/>
+            <TextBlock Name="reText" Style="{StaticResource text1}" FontWeight="Normal" Foreground="#f222" Grid.Column="1" FontSize="12" Margin="0,0,0,-1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Text="{Binding ST.Val}"/>
             <!--Edge-->
-            <local:EdgeControl x:Name="edgeBar" Margin="0,0,0,0" Grid.Column="1"/>
+            <local:EdgeControl x:Name="edgeBar" DataContext="{Binding EdgeCounter}" Margin="0,0,0,0" Grid.Column="1"/>
 
         </Grid>
 
@@ -86,7 +86,7 @@
         </Grid>
 
         <!--Deadly gamble bars-->
-        <local:BarCooldown Grid.Row="1" Color="DimGray" Height="22" Margin="0,-10.5"  Grid.ColumnSpan="2" x:Name="gambleCD" HorizontalAlignment="Left" Width="{Binding ElementName=mainBorder, Path=ActualWidth}"/>
-        <local:BarCooldown Grid.Row="1" Color="Orange" Height="22" Margin="0,-10.5"  Grid.ColumnSpan="2" x:Name="gambleBuff" HorizontalAlignment="Left" Width="{Binding ElementName=mainBorder, Path=ActualWidth}"/>
+        <local:BarCooldown DataContext="{Binding DeadlyGamble}" Grid.Row="1" Color="DimGray" Height="22" Margin="0,-10.5"  Grid.ColumnSpan="2" x:Name="gambleCD" HorizontalAlignment="Left" Width="{Binding ElementName=mainBorder, Path=ActualWidth}"/>
+        <local:BarCooldown DataContext="{Binding DeadlyGambleBuff}" Grid.Row="1" Color="Orange" Height="22" Margin="0,-10.5"  Grid.ColumnSpan="2" x:Name="gambleBuff" HorizontalAlignment="Left" Width="{Binding ElementName=mainBorder, Path=ActualWidth}"/>
     </Grid>
 </UserControl>

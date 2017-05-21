@@ -42,11 +42,11 @@
             <Border Background="#f55" Grid.Column="0" Width="80" Height="16"  CornerRadius="8" Margin="0,0,-20,0" Style="{StaticResource border}" BorderThickness="0"/>
             <Border Background="#59f" Grid.Column="2" Width="80" Height="16" Margin="-20,0,0,0" CornerRadius="8" Style="{StaticResource border}" BorderThickness="0"/>
             <Border Background="#adf" Grid.Column="1" Width="80" Height="16" Margin="0,30,0,0" CornerRadius="0,0,16,16" Style="{StaticResource border}" BorderThickness="0"/>
-            <TextBlock Name="hpText" Style="{StaticResource text1}" FontSize="13" Margin="0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Val}"/>
-            <TextBlock Name="mpText" Style="{StaticResource text1}" Grid.Column="2" FontSize="13" Margin="0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Val}"/>
-            <TextBlock Name="reText" Style="{StaticResource text1}" FontWeight="DemiBold" Foreground="#c000" Grid.Column="1" FontSize="13" Margin="0,32,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Val}"/>
+            <TextBlock Name="hpText" Style="{StaticResource text1}" FontSize="13" Margin="0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HP.Val}"/>
+            <TextBlock Name="mpText" Style="{StaticResource text1}" Grid.Column="2" FontSize="13" Margin="0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding MP.Val}"/>
+            <TextBlock Name="reText" Style="{StaticResource text1}" FontWeight="DemiBold" Foreground="#c000" Grid.Column="1" FontSize="13" Margin="0,32,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding ST.Val}"/>
             <!--Runemarks-->
-            <local:RunemarksControl x:Name="runemarksBar" Margin="0,0,0,0" Grid.Column="1"/>
+            <local:RunemarksControl DataContext="{Binding RunemarksCounter}" x:Name="runemarksBar" Margin="0,0,0,0" Grid.Column="1"/>
 
         </Grid>
 
@@ -86,8 +86,8 @@
             </ItemsControl>
         </Grid>
 
-        <!--Deadly gamble bars-->
-        <local:BarCooldown Grid.Row="1" Color="#adf" Foreground="#e000" Height="22" Margin="0,-10.5"  Grid.ColumnSpan="2" x:Name="ragnarokDuration" HorizontalAlignment="Left" Width="{Binding ElementName=mainBorder, Path=ActualWidth}"/>
+        <!--Ragnarok bar-->
+        <local:BarCooldown DataContext="{Binding RagnarokBuff}" Grid.Row="1" Color="#adf" Foreground="#e000" Height="22" Margin="0,-10.5"  Grid.ColumnSpan="2" x:Name="ragnarokDuration" HorizontalAlignment="Left" Width="{Binding ElementName=mainBorder, Path=ActualWidth}"/>
     </Grid>
 
 </UserControl>
