@@ -67,25 +67,6 @@ namespace TCC.ViewModels
             RagnarokBuff = new FixedSkillCooldown(rag, CooldownType.Skill, Dispatcher);
         }
 
-        void AddOrRefreshSkill(SkillCooldown sk)
-        {
-            sk.SetDispatcher(this.Dispatcher);
-
-            try
-            {
-                var existing = OtherSkills.FirstOrDefault(x => x.Skill.Name == sk.Skill.Name);
-                if (existing == null)
-                {
-                    OtherSkills.Add(sk);
-                    return;
-                }
-                existing.Refresh(sk.Cooldown);
-            }
-            catch
-            {
-
-            }
-        }
         public override void StartCooldown(SkillCooldown sk)
         {
             var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);

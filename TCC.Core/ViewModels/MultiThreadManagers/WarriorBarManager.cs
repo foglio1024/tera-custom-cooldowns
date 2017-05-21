@@ -165,25 +165,6 @@ namespace TCC.ViewModels
         }
 
 
-        void AddOrRefreshSkill(SkillCooldown sk)
-        {
-            sk.SetDispatcher(this.Dispatcher);
-
-            try
-            {
-                var existing = OtherSkills.FirstOrDefault(x => x.Skill.Name == sk.Skill.Name);
-                if (existing == null)
-                {
-                    OtherSkills.Add(sk);
-                    return;
-                }
-                existing.Refresh(sk.Cooldown);
-            }
-            catch
-            {
-
-            }
-        }
 
     }
 }
