@@ -66,6 +66,7 @@ namespace TCC.Controls
 
         void Control_Loaded(object sender, RoutedEventArgs e)
         {
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
             _context = (FixedSkillCooldown)DataContext;
             _context.PropertyChanged += _context_PropertyChanged;
             _numberTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(1000) };
