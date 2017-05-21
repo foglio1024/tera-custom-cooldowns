@@ -75,15 +75,12 @@ namespace TCC
         {
             SessionManager.Logged = true;
             SessionManager.LoadingScreen = false;
-            SessionManager.CurrentPlayer.Class = Class.Warrior;
             WindowManager.ClassWindow.Dispatcher.Invoke(() =>
             {
                 ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).ClearSkills();
-                ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).CurrentClass = Class.Glaiver;
+                ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).CurrentClass = Class.Archer;
             });
 
-            ((ValkyrieBarManager)ClassManager.CurrentClassManager).RagnarokBuff.Start(25000);
-            ((ValkyrieBarManager)ClassManager.CurrentClassManager).RunemarksCounter.Val = 5;
 
             //for (int i = 0; i < 5; i++)
             //{
