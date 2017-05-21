@@ -369,6 +369,7 @@
     <Compile Include="Controls\ValueSetting.xaml.cs">
       <DependentUpon>ValueSetting.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\MultiThreadManagers\ClassManager.cs" />
     <Compile Include="ViewModels\MultiThreadManagers\ArcherBarManager.cs" />
     <Compile Include="ViewModels\BossGageWindowViewModel.cs" />
     <Compile Include="Converters\ClassToStaminaLabelConverter.cs" />
