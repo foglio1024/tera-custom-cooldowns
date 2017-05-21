@@ -16,7 +16,7 @@
         </Style>
     </UserControl.Resources>
     <Grid Grid.Row="0">
-        <Border Style="{StaticResource border}" Background="#202027" Width="184" Height="20" CornerRadius="10" BorderThickness="0" x:Name="baseBorder">
+        <Border Style="{StaticResource border}" Opacity="1" Width="184" Height="20" CornerRadius="10" BorderThickness="0" x:Name="baseBorder">
         </Border>
         <UniformGrid Width="180" Height="20" Rows="1" Columns="10" Opacity="1">
             <Ellipse Style="{StaticResource ell}" StrokeThickness="0" Fill="Gray" Opacity=".3"/>
