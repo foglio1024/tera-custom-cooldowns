@@ -112,8 +112,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AbnormalityManager.cs" />
+    <Compile Include="ClassSpecific\Archer.cs" />
     <Compile Include="ClassSpecific\Priest.cs" />
     <Compile Include="ClassSpecific\Valkyrie.cs" />
+    <Compile Include="Controls\ClassBars\ArcherBar.xaml.cs">
+      <DependentUpon>ArcherBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ArcherFocusControl.xaml.cs">
+      <DependentUpon>ArcherFocusControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\BarCooldown.xaml.cs">
       <DependentUpon>BarCooldown.xaml</DependentUpon>
     </Compile>
@@ -361,6 +368,7 @@
     <Compile Include="Controls\ValueSetting.xaml.cs">
       <DependentUpon>ValueSetting.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\MultiThreadManagers\ArcherBarManager.cs" />
     <Compile Include="ViewModels\BossGageWindowViewModel.cs" />
     <Compile Include="Converters\ClassToStaminaLabelConverter.cs" />
     <Compile Include="ViewModels\GroupWindowViewModel.cs" />
@@ -407,7 +415,7 @@
     <Compile Include="Controls\RunemarksControl.xaml.cs">
       <DependentUpon>RunemarksControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ValkyrieBar.xaml.cs">
+    <Compile Include="Controls\ClassBars\ValkyrieBar.xaml.cs">
       <DependentUpon>ValkyrieBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ClassWindowViewModel.cs" />
@@ -416,7 +424,7 @@
     </Compile>
     <Compile Include="Data\FixedSkillCooldown.cs" />
     <Compile Include="ViewModels\MultiThreadManagers\ValkyrieBarManager.cs" />
-    <Compile Include="Controls\WarriorBar.xaml.cs">
+    <Compile Include="Controls\ClassBars\WarriorBar.xaml.cs">
       <DependentUpon>WarriorBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\GroupWindow.xaml.cs">
@@ -454,6 +462,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\AbnormalityTooltip.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ClassBars\ArcherBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ArcherFocusControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -529,11 +545,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ValkyrieBar.xaml">
+    <Page Include="Controls\ClassBars\ValkyrieBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\WarriorBar.xaml">
+    <Page Include="Controls\ClassBars\WarriorBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
