@@ -325,7 +325,6 @@
     <Compile Include="Controls\AbnormalityTooltip.xaml.cs">
       <DependentUpon>AbnormalityTooltip.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Arc2.cs" />
     <Compile Include="Controls\BoolSetting.xaml.cs">
       <DependentUpon>BoolSetting.xaml</DependentUpon>
     </Compile>
@@ -346,9 +345,6 @@
     </Compile>
     <Compile Include="Controls\GenericGauge.xaml.cs">
       <DependentUpon>GenericGauge.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\HPGauge.xaml.cs">
-      <DependentUpon>HPGauge.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\HarrowholdBossesControl.xaml.cs">
       <DependentUpon>HarrowholdBossesControl.xaml</DependentUpon>
@@ -402,25 +398,25 @@
     <Compile Include="Converters\HPbarColorConverter.cs" />
     <Compile Include="Converters\HP_PercentageConverter.cs" />
     <Compile Include="Converters\LaurelImageConverter.cs" />
-    <Compile Include="Windows\ClassSpecificBars\EdgeControl.xaml.cs">
+    <Compile Include="Controls\EdgeControl.xaml.cs">
       <DependentUpon>EdgeControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\ClassSpecificBars\Managers\Counter.cs" />
-    <Compile Include="Windows\ClassSpecificBars\Managers\IntTracker.cs" />
-    <Compile Include="Windows\ClassSpecificBars\Managers\WarriorBarManager.cs" />
-    <Compile Include="Windows\ClassSpecificBars\RunemarksControl.xaml.cs">
+    <Compile Include="Data\Counter.cs" />
+    <Compile Include="Data\IntTracker.cs" />
+    <Compile Include="ViewModels\MultiThreadManagers\WarriorBarManager.cs" />
+    <Compile Include="Controls\RunemarksControl.xaml.cs">
       <DependentUpon>RunemarksControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\ClassSpecificBars\ValkyrieBar.xaml.cs">
+    <Compile Include="Controls\ValkyrieBar.xaml.cs">
       <DependentUpon>ValkyrieBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\ClassSpecificBars\ViewModels\ClassWindowViewModel.cs" />
-    <Compile Include="Windows\ClassSpecificBars\ClassWindow.xaml.cs">
+    <Compile Include="ViewModels\ClassWindowViewModel.cs" />
+    <Compile Include="Windows\ClassWindow.xaml.cs">
       <DependentUpon>ClassWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\FixedSkillCooldown.cs" />
-    <Compile Include="Windows\ClassSpecificBars\Managers\ValkyrieBarManager.cs" />
-    <Compile Include="Windows\ClassSpecificBars\WarriorBar.xaml.cs">
+    <Compile Include="ViewModels\MultiThreadManagers\ValkyrieBarManager.cs" />
+    <Compile Include="Controls\WarriorBar.xaml.cs">
       <DependentUpon>WarriorBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\GroupWindow.xaml.cs">
@@ -489,10 +485,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\HPGauge.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\HarrowholdBossesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -525,23 +517,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\ClassSpecificBars\ClassWindow.xaml">
+    <Page Include="Windows\ClassWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\ClassSpecificBars\EdgeControl.xaml">
+    <Page Include="Controls\EdgeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\ClassSpecificBars\RunemarksControl.xaml">
+    <Page Include="Controls\RunemarksControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\ClassSpecificBars\ValkyrieBar.xaml">
+    <Page Include="Controls\ValkyrieBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\ClassSpecificBars\WarriorBar.xaml">
+    <Page Include="Controls\WarriorBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
