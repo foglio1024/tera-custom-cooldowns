@@ -157,7 +157,7 @@ namespace TCC.Parsing
         public static void HandleNpcStatusChanged(S_NPC_STATUS p)
         {
             EntitiesManager.SetNPCStatus(p.EntityId, p.IsEnraged);
-            if(p.Target == 0)
+            if (p.Target == 0)
             {
                 BossGageWindowManager.Instance.UnsetBossTarget(p.EntityId);
             }
@@ -187,7 +187,7 @@ namespace TCC.Parsing
         {
             SessionManager.CurrentAccountCharacters = p.CharacterList;
         }
-        public static void HandleCharLogin(S_LOGIN p)
+        public static void HandleLogin(S_LOGIN p)
         {
             InitDB(p.ServerId);
             EntitiesManager.ClearNPC();
@@ -213,12 +213,28 @@ namespace TCC.Parsing
 
             WindowManager.ClassWindow.Dispatcher.Invoke(() =>
             {
-
                 WindowManager.ClassWindow.Context.ClearSkills();
                 WindowManager.ClassWindow.Context.CurrentClass = p.CharacterClass;
             });
 
 
+            /*  
+             *  hide standard cooldown window if current class 
+             *  is supported and class window is enabled
+             */
+            if (ClassWindowViewModel.ClassWindowExists() && SettingsManager.ClassWindowOn)
+            {
+                WindowManager.ClassWindow.SetVisibility(System.Windows.Visibility.Visible);
+                WindowManager.CooldownWindow.SetVisibility(System.Windows.Visibility.Hidden);
+            }
+            else
+            {
+                WindowManager.ClassWindow.SetVisibility(System.Windows.Visibility.Hidden);
+                if (SettingsManager.CooldownWindowSettings.Visibility == System.Windows.Visibility.Visible)
+                {
+                    WindowManager.CooldownWindow.SetVisibility(System.Windows.Visibility.Visible);
+                }
+            }
         }
         public static void HandleReturnToLobby(S_RETURN_TO_LOBBY p)
         {
