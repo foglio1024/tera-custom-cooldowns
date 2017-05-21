@@ -6,7 +6,7 @@
              Startup="OnStartup">
     <Application.Resources>
         <DropShadowEffect x:Key="dropShadow" BlurRadius="5" ShadowDepth="3" Opacity=".4" />
-        <SolidColorBrush x:Key="bgColor" Color="#202027" Opacity=".85"/>
+        <SolidColorBrush x:Key="bgColor" Color="#202027" Opacity="1"/>
         
         <Style x:Key="border" TargetType="Border">
             <Setter Property="Background" Value="{StaticResource bgColor}"/>
@@ -16,7 +16,7 @@
             <Setter Property="Height" Value="Auto" />
             <Setter Property="Width" Value="Auto"/>
             <Setter Property="Effect" Value="{StaticResource dropShadow}" />
-            <Setter Property="Opacity" Value="1"/>
+            <Setter Property="Opacity" Value=".85"/>
         </Style>
 
         <Style x:Key="text1" TargetType="TextBlock">
@@ -27,5 +27,6 @@
         <converters:BoolToOpacityConverter x:Key="boolToOpacity"/>
         <converters:RollToStringConverter x:Key="rollToString"/>
         <converters:WinningToColorConverter x:Key="winningToColor"/>
+        <converters:IconConverter x:Key="iconConv"/>
     </Application.Resources>
 </Application>
