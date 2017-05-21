@@ -129,6 +129,7 @@
     </Compile>
     <Compile Include="Converters\RollToStringConverter.cs" />
     <Compile Include="Converters\WinningToColorConverter.cs" />
+    <Compile Include="Data\ArcherFocusTracker.cs" />
     <Compile Include="Data\Boss.cs" />
     <Compile Include="Data\Abnormality.cs" />
     <Compile Include="Data\AbnormalityDatabase.cs" />
