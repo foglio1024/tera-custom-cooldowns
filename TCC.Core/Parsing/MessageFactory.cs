@@ -71,7 +71,7 @@ namespace TCC.Parsing
         private static Dictionary<Type, Delegate> MainProcessor = new Dictionary<Type, Delegate>();
         private static readonly Dictionary<Type, Delegate> MessageToProcessing = new Dictionary<Type, Delegate>
         {
-            {typeof(S_LOGIN), new Action<S_LOGIN>(x => PacketProcessor.HandleCharLogin(x)) },
+            {typeof(S_LOGIN), new Action<S_LOGIN>(x => PacketProcessor.HandleLogin(x)) },
             {typeof(S_START_COOLTIME_SKILL), new Action<S_START_COOLTIME_SKILL>(x => PacketProcessor.HandleNewSkillCooldown(x)) },
             {typeof(S_DECREASE_COOLTIME_SKILL), new Action<S_DECREASE_COOLTIME_SKILL>(x => PacketProcessor.HandleDecreaseSkillCooldown(x)) },
             {typeof(S_START_COOLTIME_ITEM), new Action<S_START_COOLTIME_ITEM>(x => PacketProcessor.HandleNewItemCooldown(x)) },
