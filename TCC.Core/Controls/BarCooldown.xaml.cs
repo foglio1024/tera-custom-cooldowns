@@ -79,9 +79,11 @@ namespace TCC.Controls
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            if (DesignerProperties.GetIsInDesignMode(this)) return;
-            _context = (FixedSkillCooldown)DataContext;
-            _context.PropertyChanged += _context_PropertyChanged;
+            if (!DesignerProperties.GetIsInDesignMode(this))
+            {
+                _context = (FixedSkillCooldown)DataContext;
+                _context.PropertyChanged += _context_PropertyChanged;
+            }
             cdBar.RenderTransform = new ScaleTransform(0, 1, 0, .5);
             circle.RenderTransform = new TranslateTransform(0, 0);
             _numberTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(1000) };
@@ -89,8 +91,6 @@ namespace TCC.Controls
             {
                 CurrentCD = CurrentCD - 1 > 0 ? CurrentCD - 1 : 0;
             };
-
-
         }
 
 
