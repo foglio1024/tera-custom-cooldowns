@@ -7,6 +7,8 @@
     <Application.Resources>
         <DropShadowEffect x:Key="dropShadow" BlurRadius="5" ShadowDepth="3" Opacity=".4" />
         <SolidColorBrush x:Key="bgColor" Color="#202027" Opacity="1"/>
+        <SolidColorBrush x:Key="hpColor" Color="#f55"/>
+        <SolidColorBrush x:Key="mpColor" Color="#59f"/>
         
         <Style x:Key="border" TargetType="Border">
             <Setter Property="Background" Value="{StaticResource bgColor}"/>
@@ -24,9 +26,18 @@
             <Setter Property="Foreground" Value="#bbffffff"/>
             <Setter Property="FontFamily" Value="/TCC;component/resources/#Open Sans"/>
         </Style>
+
+        
+        <Style x:Key="ClassWindowStatBorder" TargetType="Border" BasedOn="{StaticResource border}">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Width" Value="80"/>
+        </Style>
         <converters:BoolToOpacityConverter x:Key="boolToOpacity"/>
         <converters:RollToStringConverter x:Key="rollToString"/>
         <converters:WinningToColorConverter x:Key="winningToColor"/>
         <converters:IconConverter x:Key="iconConv"/>
+        
+        
     </Application.Resources>
 </Application>
