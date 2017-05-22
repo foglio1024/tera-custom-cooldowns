@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              >
     <Grid >
-        <local:Arc StrokeThickness="7" EndAngle="319.9" Stroke="#eee" Width="58" Height="58" x:Name="externalArc"/>
+        <local:Arc StrokeThickness="7" EndAngle="0" Stroke="#eee" Width="58" Height="58" x:Name="externalArc"/>
 
         <Ellipse Width="50" Height="{Binding Path=Width, RelativeSource={RelativeSource Self}}" Effect="{StaticResource dropShadow}" Margin="2" Stroke="#ccc" StrokeThickness="1">
             <Ellipse.Fill>
@@ -17,7 +17,7 @@
                 <BitmapCache RenderAtScale="2"/>
             </Ellipse.CacheMode>
         </Ellipse>
-        <Grid Width="26" Height="18"  HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,-5" Effect="{StaticResource dropShadow}">
+        <Grid Width="27" Height="18"  HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,-5" Effect="{StaticResource dropShadow}">
             <Border  BorderBrush="#eee" BorderThickness="0" Opacity="1" CornerRadius="9" Background="#feee"/>
             <TextBlock Text="{Binding Stacks}" Foreground="#555" FontSize="15" FontWeight="DemiBold" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" />
         </Grid>
