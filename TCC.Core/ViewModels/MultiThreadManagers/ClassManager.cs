@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using TCC.Data;
 
 namespace TCC.ViewModels
