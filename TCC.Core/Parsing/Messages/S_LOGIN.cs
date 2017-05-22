@@ -183,6 +183,7 @@ namespace TCC.Parsing.Messages
             unk36=reader.ReadInt32();
             unk37 = reader.ReadInt16();
             Name= reader.ReadTeraString();
+            return;
             details = new byte[detailsCount];
             details2 = new byte[details2Count];
             for (int i = 0; i < detailsCount; i++)
