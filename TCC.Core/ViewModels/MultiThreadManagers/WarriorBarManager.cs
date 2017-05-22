@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -30,6 +31,7 @@ namespace TCC.ViewModels
             CurrentClassManager = this;
             EdgeCounter = new Counter(10, true);
             LoadSkills("warrior-skills.xml", Class.Warrior);
+
         }
 
         protected override void LoadSkills(string filename, Class c)
@@ -163,8 +165,6 @@ namespace TCC.ViewModels
             }
 
         }
-
-
-
     }
+
 }
