@@ -15,6 +15,7 @@ using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using TCC.ViewModels;
 using TCC.Windows;
@@ -34,7 +35,10 @@ namespace TCC
 
         public static ContextMenu ContextMenu;
 
-        static System.Windows.Forms.NotifyIcon TrayIcon;
+        public static System.Windows.Forms.NotifyIcon TrayIcon;
+        public static Icon DefaultIcon;
+        public static Icon ConnectedIcon;
+
 
         private static bool clickThru;
         public static bool ClickThru
@@ -182,10 +186,11 @@ namespace TCC
             t.Start();
             Thread.Sleep(500);
             ContextMenu = new ContextMenu();
-
+            DefaultIcon = new Icon(Application.GetResourceStream(new Uri("resources/tcc-logo.ico", UriKind.Relative)).Stream);
+            ConnectedIcon = new Icon(Application.GetResourceStream(new Uri("resources/tcc-logo-on.ico", UriKind.Relative)).Stream);
             TrayIcon = new System.Windows.Forms.NotifyIcon()
             {
-                Icon = Icon.ExtractAssociatedIcon(Process.GetCurrentProcess().MainModule.FileName),
+                Icon = DefaultIcon,
                 Visible = true
             };
             TrayIcon.MouseDown += NI_MouseDown;
@@ -203,7 +208,6 @@ namespace TCC
 
             ClickThruChanged += (s, ev) => UpdateClickThru();
         }
-
         private static void TrayIcon_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if (Settings == null)

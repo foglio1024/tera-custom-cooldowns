@@ -54,8 +54,17 @@ namespace TCC
 
             PacketProcessor.Init();
 
-            TeraSniffer.Instance.NewConnection += (srv) => SkillManager.Clear();
-            TeraSniffer.Instance.EndConnection += () => SkillManager.Clear();
+            TeraSniffer.Instance.NewConnection += (srv) =>
+            {
+                SkillManager.Clear();
+                WindowManager.TrayIcon.Icon = WindowManager.ConnectedIcon;
+
+            };
+            TeraSniffer.Instance.EndConnection += () =>
+            {
+                SkillManager.Clear();
+                WindowManager.TrayIcon.Icon = WindowManager.DefaultIcon;
+            };
 
             //Debug();
 

@@ -94,10 +94,8 @@ namespace TCC
 
         public static void Clear()
         {
-
             CooldownBarWindowManager.Instance.ShortSkills.Clear();
             CooldownBarWindowManager.Instance.LongSkills.Clear();
-
 
             SessionManager.CurrentPlayer.Class = Class.None;
             SessionManager.CurrentPlayer.EntityId = 0;

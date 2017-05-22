@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>resources\tcc.ico</ApplicationIcon>
+    <ApplicationIcon>tcc-logo.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -611,6 +611,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="resources\tcc-logo.ico" />
+    <Resource Include="resources\tcc-logo-on.ico" />
+    <Resource Include="tcc-logo.ico" />
     <Resource Include="resources\images\ic_swap_horiz_white_24dp_2x.png" />
     <Resource Include="resources\images\ic_aspect_ratio_white_24dp_2x.png" />
     <Resource Include="resources\images\crown.png" />
@@ -681,7 +684,6 @@
     <Content Include="resources\data\skills.tsv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="resources\defaultIcon.ico" />
     <Resource Include="resources\images\enraged.png" />
     <Content Include="resources\data\opcodes\313623.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -695,9 +697,6 @@
     <Content Include="resources\data\servers.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Resource Include="resources\tcc.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
