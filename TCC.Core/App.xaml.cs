@@ -78,7 +78,7 @@ namespace TCC
             WindowManager.ClassWindow.Dispatcher.Invoke(() =>
             {
                 ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).ClearSkills();
-                ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).CurrentClass = Class.Archer;
+                ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).CurrentClass = Class.Warrior;
             });
 
 
