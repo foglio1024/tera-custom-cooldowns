@@ -35,7 +35,7 @@ namespace TCC.Controls
             var diff = newEdge - _currentEdge;
 
             if (diff == 0) return;
-            if(diff > 0)
+            if (diff > 0)
             {
                 for (int i = 0; i < diff; i++)
                 {
@@ -44,9 +44,9 @@ namespace TCC.Controls
             }
             else
             {
-                baseBorder.Background = new SolidColorBrush(Color.FromRgb(0x20,0x20,0x27));
+                baseBorder.Background = new SolidColorBrush(Color.FromRgb(0x20, 0x20, 0x27));
 
-                for (int i = edgeContainer.Children.Count - 1; i >= 0 ; i--)
+                for (int i = edgeContainer.Children.Count - 1; i >= 0; i--)
                 {
                     edgeContainer.Children[i].Opacity = 0;
                 }
@@ -65,14 +65,15 @@ namespace TCC.Controls
 
         private void _context_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if(e.PropertyName == "Val")
+            if (e.PropertyName == "Val")
             {
                 SetEdge(_context.Val);
             }
-            else if(e.PropertyName == "Maxed")
+            else if (e.PropertyName == "Maxed")
             {
                 baseBorder.Background = new SolidColorBrush(Colors.Red);
             }
         }
+
     }
 }
