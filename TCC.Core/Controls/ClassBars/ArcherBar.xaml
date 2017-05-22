@@ -24,9 +24,6 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!--Main border-->
-        <Border Style="{StaticResource border}" Grid.Row="1" Grid.RowSpan="2" CornerRadius="0,0,25,25" Grid.ColumnSpan="2" x:Name="mainBorder" Opacity="1" />
-
         <!--HP/MP-->
         <Grid HorizontalAlignment="Center" Margin="0,0,0,10">
             <Grid.ColumnDefinitions>
@@ -34,47 +31,40 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Border Background="#f55" Grid.Column="0" Width="75" Height="16"  CornerRadius="8" Margin="0,0,-20,0" Style="{StaticResource border}" BorderThickness="0"/>
-            <Border Background="#59f" Grid.Column="2" Width="75" Height="16" Margin="-20,0,0,0" CornerRadius="8" Style="{StaticResource border}" BorderThickness="0"/>
-            <TextBlock Name="hpText" Style="{StaticResource text1}" FontSize="13" Margin="0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HP.Val}"/>
-            <TextBlock Name="mpText" Style="{StaticResource text1}" Grid.Column="2" FontSize="13" Margin="0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding MP.Val}"/>
-            <local:ArcherFocusControl x:Name="focusControl" Grid.Column="1" Height="58" DataContext="{Binding Focus}"/>
+            <Border Background="{StaticResource hpColor}" 
+                    Grid.Column="0" 
+                    CornerRadius="10,0,0,10" 
+                    Style="{StaticResource ClassWindowStatBorder}" 
+                    BorderThickness="0" 
+                    Margin="0,0,-10,0">
+                <TextBlock Name="hpText" 
+                           Style="{StaticResource text1}" 
+                           FontSize="14" 
+                           TextAlignment="Right" 
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Center" 
+                           Text="{Binding HP.Val}"/>
+            </Border>
+            <Border Background="{StaticResource mpColor}" 
+                    Grid.Column="2" 
+                    CornerRadius="0,10,10,0" 
+                    Style="{StaticResource ClassWindowStatBorder}" 
+                    Margin="-10,0,0,0">
+                <TextBlock Name="mpText" 
+                           Style="{StaticResource text1}" 
+                           FontSize="14" 
+                           TextAlignment="Left"  
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Center" 
+                           Text="{Binding MP.Val}" 
+                           Grid.Column="2"/>
+            </Border>
+            
+            <local:ArcherFocusControl x:Name="focusControl" 
+                                      Grid.Column="1" 
+                                      Margin="0" 
+                                      DataContext="{Binding Focus}"/>
         </Grid>
-
-        <!--Main skills grid-->
-        <Grid Grid.Row="2" Grid.Column="1" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" UseLayoutRounding="True">
-            <ItemsControl Name="mainSkills" ItemTemplate="{StaticResource skill}" Width="Auto" Height="Auto" ItemsSource="{Binding MainSkills}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Columns="{Binding MainSkills.Count}" Rows="1" Margin="0,0,0,0" IsItemsHost="True" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-        </Grid>
-
-        <!--Secondary + other skills grid-->
-        <Grid Grid.Row="3" Grid.Column="1" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" UseLayoutRounding="True" Opacity=".9">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <!--Secondary skills-->
-            <ItemsControl Name="secSkills" ItemTemplate="{StaticResource skill}" Width="Auto" Height="Auto" ItemsSource="{Binding SecondarySkills}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Columns="{Binding SecondarySkills.Count}" Rows="1" Margin="0,0,0,0" IsItemsHost="True" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-
-            <!--Other skills-->
-            <ItemsControl Name="otherSkills" ItemTemplate="{StaticResource skill2}" Width="Auto"  Height="Auto" Grid.Column="1" HorizontalAlignment="Left" ItemsSource="{Binding OtherSkills}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Margin="0,0,0,0" IsItemsHost="True" Width="Auto" Height="Auto" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-        </Grid>
+        <local:FixedSkillContainers Grid.Row="2" HorizontalAlignment="Center" Grid.Column="1" Grid.RowSpan="2" />
     </Grid>
 </UserControl>

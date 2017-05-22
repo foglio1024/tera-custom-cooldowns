@@ -124,6 +124,9 @@
     <Compile Include="Controls\BarCooldown.xaml.cs">
       <DependentUpon>BarCooldown.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ClassBars\FixedSkillContainers.xaml.cs">
+      <DependentUpon>FixedSkillContainers.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\FixedSkillControl.xaml.cs">
       <DependentUpon>FixedSkillControl.xaml</DependentUpon>
     </Compile>
@@ -488,6 +491,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\CircularGauge.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ClassBars\FixedSkillContainers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
