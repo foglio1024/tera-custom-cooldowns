@@ -37,7 +37,7 @@ namespace TCC.Controls
             }
             else if (e.PropertyName == "Maxed")
             {
-                baseBorder.Background = new SolidColorBrush(Color.FromRgb(255,255,255));
+                baseBorder.Background = new SolidColorBrush(Color.FromRgb(0xff,0x98,0xbb));
             }
         }
         private int _currentRunes = 0;
@@ -73,7 +73,6 @@ namespace TCC.Controls
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             _context = (Counter)DataContext;
             _context.PropertyChanged += _context_PropertyChanged;
-
         }
     }
 }
