@@ -33,7 +33,7 @@
                 <ItemsControl Name="mainSkills" ItemTemplate="{StaticResource skill}" Width="Auto" Height="Auto" ItemsSource="{Binding MainSkills}" BorderThickness="0" BorderBrush="Red">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <UniformGrid Columns="{Binding MainSkills.Count}" Rows="1" Margin="0,0,0,0" IsItemsHost="True" Width="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <UniformGrid Columns="{Binding MainSkills.Count}" Rows="1" Margin="0,0,0,0" IsItemsHost="True" Width="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Center" />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
