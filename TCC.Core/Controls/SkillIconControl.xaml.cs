@@ -98,11 +98,11 @@ namespace TCC.Controls
                 {
                     EasingFunction = new QuadraticEase()
                 };
-                _context.Dispatcher.Invoke(() =>
-                {
-                    this.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, w);
-                    this.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, h);
-                });
+                //_context.Dispatcher.Invoke(() =>
+                //{
+                //    this.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, w);
+                //    this.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, h);
+                //});
                 CloseTimer.IsEnabled = true;
             }
         }
