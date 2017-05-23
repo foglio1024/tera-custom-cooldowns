@@ -59,7 +59,15 @@ namespace TCC.ViewModels
                     var existing = _longSkills.FirstOrDefault(x => x.Skill.Name == sk.Skill.Name);
                     if (existing == null)
                     {
-                        _longSkills.Add(sk);
+                        existing = _shortSkills.FirstOrDefault(x => x.Skill.Name == sk.Skill.Name);
+                        if(existing == null)
+                        {
+                            _longSkills.Add(sk);
+                        }
+                        else
+                        {
+                            existing.Refresh(sk.Cooldown);
+                        }
                         return;
                     }
                     existing.Refresh(sk.Cooldown);
@@ -75,18 +83,18 @@ namespace TCC.ViewModels
             try
             {
 
+                var longSkill = _longSkills.FirstOrDefault(x => x.Skill.Name == sk.Name);
+                if (longSkill != null)
+                {
+                    _longSkills.Remove(longSkill);
+                    longSkill.Dispose();
+                }
                 var shortSkill = _shortSkills.FirstOrDefault(x => x.Skill.Name == sk.Name);
                 if (shortSkill != null)
                 {
 
                     _shortSkills.Remove(shortSkill);
                     shortSkill.Dispose();
-                }
-                var longSkill = _longSkills.FirstOrDefault(x => x.Skill.Name == sk.Name);
-                if (longSkill != null)
-                {
-                    _longSkills.Remove(longSkill);
-                    longSkill.Dispose();
                 }
             }
             catch
