@@ -310,6 +310,7 @@ namespace TCC.Parsing
         public static void HandleRunemark(S_WEAK_POINT x)
         {
             if (SessionManager.CurrentPlayer.Class != Class.Glaiver) return;
+            if(ClassManager.CurrentClassManager.GetType() != typeof(ValkyrieBarManager)) return;
             ((ValkyrieBarManager)ClassManager.CurrentClassManager).RunemarksCounter.Val = (int)x.TotalRunemarks;
         }
 
