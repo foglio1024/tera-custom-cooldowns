@@ -33,20 +33,20 @@
                 <ItemsControl Name="mainSkills" ItemTemplate="{StaticResource skill}" Width="Auto" Height="Auto" ItemsSource="{Binding MainSkills}" BorderThickness="0" BorderBrush="Red">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <UniformGrid Columns="{Binding MainSkills.Count}" Rows="1" Margin="0,0,0,0" IsItemsHost="True" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <UniformGrid Columns="{Binding MainSkills.Count}" Rows="1" Margin="0,0,0,0" IsItemsHost="True" Width="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
             </Grid>
         </Border>
         <!--Secondary + other skills grid-->
-        <Grid Grid.Row="2" Grid.Column="1" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" UseLayoutRounding="True" Opacity=".9">
+        <Grid Grid.Row="2" Grid.Column="1" Width="Auto" Height="{Binding ElementName=mainSkills, Path=ActualHeight}" HorizontalAlignment="Left" VerticalAlignment="Center" UseLayoutRounding="True" Opacity=".9">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <!--Secondary skills-->
-            <ItemsControl Name="secSkills" ItemTemplate="{StaticResource skill}" Width="Auto" Height="Auto" ItemsSource="{Binding SecondarySkills}" BorderBrush="Orange" BorderThickness="0">
+            <ItemsControl Name="secSkills" ItemTemplate="{StaticResource skill}" Width="Auto" VerticalAlignment="Stretch" ItemsSource="{Binding SecondarySkills}" BorderBrush="Orange" BorderThickness="0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="{Binding SecondarySkills.Count}" Rows="1" Margin="0,0,0,0" IsItemsHost="True" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center"/>
@@ -55,7 +55,7 @@
             </ItemsControl>
 
             <!--Other skills-->
-            <ItemsControl Name="otherSkills" ItemTemplate="{StaticResource skill2}" Width="Auto"  Height="Auto" Grid.Column="1" HorizontalAlignment="Left" ItemsSource="{Binding OtherSkills}" BorderBrush="Green" BorderThickness="0">
+            <ItemsControl Name="otherSkills" ItemTemplate="{StaticResource skill2}" Width="Auto"  VerticalAlignment="Stretch" Grid.Column="1" HorizontalAlignment="Left" ItemsSource="{Binding OtherSkills}" BorderBrush="Green" BorderThickness="0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Margin="0,0,0,0" IsItemsHost="True" Width="Auto" Height="Auto" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center"/>
