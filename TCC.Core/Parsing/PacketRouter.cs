@@ -118,7 +118,7 @@ namespace TCC.Parsing
         public static void HandleCreatureChangeHP(S_CREATURE_CHANGE_HP p)
         {
             SessionManager.SetPlayerHP(p.Target, p.CurrentHP);
-            BossGageWindowManager.Instance.AddOrUpdateBoss(p.Target, p.MaxHP, p.CurrentHP);
+            //BossGageWindowManager.Instance.AddOrUpdateBoss(p.Target, p.MaxHP, p.CurrentHP, v:System.Windows.Visibility.Visible);
             //if (EntitiesManager.TryGetBossById(p.Target, out Boss b))
             //{
             //    if (b.Visible == System.Windows.Visibility.Collapsed)
