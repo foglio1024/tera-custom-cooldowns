@@ -31,7 +31,7 @@ namespace TCC.ViewModels
             }
         }
 
-        public void AddOrUpdateBoss(ulong entityId, float maxHp, float curHp, uint templateId = 0, uint zoneId = 0, Visibility v = Visibility.Collapsed)
+        public void AddOrUpdateBoss(ulong entityId, float maxHp, float curHp, uint templateId = 0, uint zoneId = 0, Visibility v = Visibility.Visible)
         {
 
             var boss = _bosses.FirstOrDefault(x => x.EntityId == entityId);
@@ -43,7 +43,7 @@ namespace TCC.ViewModels
             }
             boss.MaxHP = maxHp;
             boss.CurrentHP = curHp;
-            boss.Visible = v;
+            boss.Visible = v;         
         }
 
         public void RemoveBoss(ulong id)
