@@ -29,22 +29,22 @@ namespace TCC.Controls
             InitializeComponent();
         }
 
-        DispatcherTimer _numberTimer;
+        //DispatcherTimer _numberTimer;
         FixedSkillCooldown _context;
 
-        private double currentCD;
-        public double CurrentCD
-        {
-            get { return currentCD; }
-            set
-            {
-                if (currentCD != value)
-                {
-                    currentCD = value;
-                    NotifyPropertyChanged("CurrentCD");
-                }
-            }
-        }
+        //private double currentCD;
+        //public double CurrentCD
+        //{
+        //    get { return currentCD; }
+        //    set
+        //    {
+        //        if (currentCD != value)
+        //        {
+        //            currentCD = value;
+        //            NotifyPropertyChanged("CurrentCD");
+        //        }
+        //    }
+        //}
 
         private bool isRunning = false;
         public bool IsRunning
@@ -69,10 +69,10 @@ namespace TCC.Controls
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             _context = (FixedSkillCooldown)DataContext;
             _context.PropertyChanged += _context_PropertyChanged;
-            _numberTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(1000) };
-            _numberTimer.Tick += (s, o) => {
-                CurrentCD = CurrentCD - 1 > 0 ? CurrentCD - 1 : 0;
-            };
+            //_numberTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(1000) };
+            //_numberTimer.Tick += (s, o) => {
+            //    CurrentCD = CurrentCD - 1 > 0 ? CurrentCD - 1 : 0;
+            //};
         }
 
         void _context_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -80,8 +80,8 @@ namespace TCC.Controls
             if (e.PropertyName == "Refresh")
             {
                 if (_context.Cooldown == _context.OriginalCooldown) return;
-                _numberTimer.Stop();
-                CurrentCD = (double)_context.Cooldown / 1000;
+                //_numberTimer.Stop();
+                //CurrentCD = (double)_context.Cooldown / 1000;
                 double newAngle = (double)_context.Cooldown / (double)_context.OriginalCooldown;
                 if (_context.Cooldown == 0) newAngle = 0;
                 if (newAngle > 1) newAngle = 1;
@@ -91,8 +91,8 @@ namespace TCC.Controls
             else if (e.PropertyName == "Start")
             {
                 IsRunning = true;
-                CurrentCD = (double)_context.Cooldown / 1000;
-                _numberTimer.IsEnabled = false;
+                //CurrentCD = (double)_context.Cooldown / 1000;
+                //_numberTimer.IsEnabled = false;
                 AnimateCooldown();
 
             }
@@ -104,14 +104,14 @@ namespace TCC.Controls
             int fps = _context.Cooldown > 80000 ? 1 : 30;
             DoubleAnimation.SetDesiredFrameRate(an, fps);
             arc.BeginAnimation(Arc.EndAngleProperty, an);
-            _numberTimer.IsEnabled = true;
+            //_numberTimer.IsEnabled = true;
 
         }
 
         private void An_Completed(object sender, EventArgs e)
         {
             IsRunning = false;
-            _numberTimer.IsEnabled = false;
+            //_numberTimer.IsEnabled = false;
             var an = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200)) { EasingFunction = new QuadraticEase() };
             glow.BeginAnimation(OpacityProperty, an);
         }

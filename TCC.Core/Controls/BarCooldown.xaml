@@ -12,17 +12,46 @@
     </UserControl.Resources>
 
     <Grid  HorizontalAlignment="Stretch">
-        <Rectangle Fill="{Binding Color, RelativeSource={RelativeSource AncestorType=local:BarCooldown}}" Name="cdBar" Height="5"/>
-        <Grid x:Name="circle" HorizontalAlignment="Left" Margin="-12.5,0" Opacity="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=local:BarCooldown}, Converter={StaticResource boolToOpacity}}">
-            <Ellipse Width="22" Height="22"  Stroke="#5fff" StrokeThickness="1" Fill="{Binding Color, RelativeSource={RelativeSource AncestorType=local:BarCooldown}}" >
+        <!--Top border-->
+        <Border BorderBrush="#0555"  
+                Width="{Binding ElementName=cdBar, Path=ActualWidth}" 
+                Background="#303037" 
+                Height="5" 
+                BorderThickness="0,0,0,0" 
+                Grid.Column="0" 
+                Grid.Row="0" 
+                Opacity="0"
+                Grid.RowSpan="1" 
+                Grid.ColumnSpan="2"/>
+
+        <Rectangle Fill="{Binding Color, RelativeSource={RelativeSource AncestorType=local:BarCooldown}}" 
+                   Name="cdBar" 
+                   Height="5"/>
+        <Grid x:Name="circle" 
+              HorizontalAlignment="Left" 
+              Margin="-12.5,0" 
+              Opacity="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=local:BarCooldown}, Converter={StaticResource boolToOpacity}}">
+            <Ellipse Width="22" 
+                     Height="22"  
+                     Stroke="#5fff" 
+                     StrokeThickness="1" 
+                     Fill="{Binding Color, RelativeSource={RelativeSource AncestorType=local:BarCooldown}}"
+                     Opacity="1"
+                     >
                 <Ellipse.Effect>
                     <DropShadowEffect ShadowDepth="1" Opacity=".7"/>
                 </Ellipse.Effect>
             </Ellipse>
-            <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=local:BarCooldown}}" FontSize="12" FontWeight="SemiBold" Text="{Binding CurrentCD, RelativeSource={RelativeSource AncestorType=local:BarCooldown}, StringFormat={}{0:N0}}"></TextBlock>
-            <Grid.CacheMode>
-                <BitmapCache RenderAtScale="1"/>
-            </Grid.CacheMode>
+                      
+            <TextBlock HorizontalAlignment="Center" 
+                       Opacity="1" 
+                       TextAlignment="Center" 
+                       VerticalAlignment="Center" 
+                       Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=local:BarCooldown}}" 
+                       Text="{Binding CurrentCD, RelativeSource={RelativeSource AncestorType=local:BarCooldown}, StringFormat={}{0:N0}}"
+                       FontSize="12" 
+                       FontWeight="SemiBold" 
+                       />
         </Grid>
     </Grid>
 </UserControl>

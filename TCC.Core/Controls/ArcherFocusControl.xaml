@@ -6,10 +6,16 @@
              xmlns:local="clr-namespace:TCC.Controls" Loaded="UserControl_Loaded"
              mc:Ignorable="d" 
              >
-    <Grid >
-        <local:Arc StrokeThickness="7" EndAngle="0" Stroke="#eee" Width="58" Height="58" x:Name="externalArc"/>
-
-        <Ellipse Width="50" Height="{Binding Path=Width, RelativeSource={RelativeSource Self}}" Effect="{StaticResource dropShadow}" Margin="2" Stroke="#ccc" StrokeThickness="1">
+    <Grid Margin="0,0,0,0" Effect="{StaticResource dropShadow}" >
+        <local:Arc StrokeThickness="5" 
+                   EndAngle="0"
+                   Stroke="#eee" 
+                   Width="49" Height="49" x:Name="externalArc"/>
+        <Ellipse Width="43" 
+                 Height="{Binding Path=Width, RelativeSource={RelativeSource Self}}" 
+                 Margin="2" 
+                 Stroke="#ccc" 
+                 StrokeThickness="1">
             <Ellipse.Fill>
                 <ImageBrush ImageSource="{Binding Icon, Converter={StaticResource iconConv}}" />
             </Ellipse.Fill>
@@ -17,9 +23,24 @@
                 <BitmapCache RenderAtScale="2"/>
             </Ellipse.CacheMode>
         </Ellipse>
-        <Grid Width="27" Height="18"  HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,-5" Effect="{StaticResource dropShadow}">
-            <Border  BorderBrush="#eee" BorderThickness="0" Opacity="1" CornerRadius="9" Background="#feee"/>
-            <TextBlock Text="{Binding Stacks}" Foreground="#555" FontSize="15" FontWeight="DemiBold" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" />
+
+        <Grid Width="27" Height="18"  
+              HorizontalAlignment="Center" 
+              VerticalAlignment="Bottom" 
+              Margin="0,0,0,-0" 
+              Effect="{StaticResource dropShadow}">
+            <Border 
+                BorderBrush="#404045" 
+                BorderThickness="0" 
+                Opacity="1" 
+                CornerRadius="9" 
+                Background="#303035"/>
+            <TextBlock Text="{Binding Stacks}" 
+                       Foreground="#ccc" 
+                       FontSize="15" 
+                       HorizontalAlignment="Center" 
+                       TextAlignment="Center" 
+                       VerticalAlignment="Center" />
         </Grid>
     </Grid>
 </UserControl>

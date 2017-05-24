@@ -37,7 +37,8 @@ namespace TCC.Controls
             }
             else if (e.PropertyName == "Maxed")
             {
-                baseBorder.Background = new SolidColorBrush(Color.FromRgb(0xff,0x98,0xbb));
+                //baseBorder.Background = new SolidColorBrush(Color.FromRgb(0xff,0x98,0xbb));
+                maxBorder.Opacity = 1;
             }
         }
         private int _currentRunes = 0;
@@ -56,7 +57,8 @@ namespace TCC.Controls
             }
             else
             {
-                baseBorder.Background = new SolidColorBrush(Color.FromRgb(0x20, 0x20, 0x27));
+                //baseBorder.Background = new SolidColorBrush(Color.FromRgb(0x20, 0x20, 0x27));
+                maxBorder.Opacity = 0;
 
                 for (int i = dotsContainer.Children.Count - 1; i >= 0; i--)
                 {

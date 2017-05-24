@@ -4,8 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
-             mc:Ignorable="d"  Loaded="UserControl_Loaded"
-             d:DesignHeight="300" >
+             mc:Ignorable="d"  Loaded="UserControl_Loaded" >
     <UserControl.Resources>
         <Style x:Key="ell" TargetType="Ellipse">
             <Setter Property="Height" Value="16"></Setter>
@@ -20,27 +19,40 @@
         </Style>
 
     </UserControl.Resources>
-    <Grid Margin="5" x:Name="root" >
+    <Grid Margin="0" x:Name="root" >
         <Border Style="{StaticResource border}" 
                 Opacity="1" 
                 Height="26" 
                 CornerRadius="13" 
                 BorderThickness="0" 
-                x:Name="baseBorder">
+                x:Name="baseBorder"
+                Visibility="Hidden">
         </Border>
+        <Border Width="Auto"
+                Height="16"
+                CornerRadius="8"
+                x:Name="maxBorder"
+                Background="#ff98bb"
+                Margin="12,0"
+                Opacity="0">
+            <Border.Effect>
+                <DropShadowEffect Color="#ff98bb" ShadowDepth="0" BlurRadius="20" />
+            </Border.Effect>
+        </Border>
+
         <UniformGrid Width="Auto" 
                      Height="26" 
                      Rows="1" 
                      Columns="7" 
                      Opacity="1" 
                      Style="{StaticResource cont}">
-            <Ellipse Style="{StaticResource ell}" Fill="Gray" Opacity=".3"/>
-            <Ellipse Style="{StaticResource ell}" Fill="Gray" Opacity=".3"/>
-            <Ellipse Style="{StaticResource ell}" Fill="Gray" Opacity=".3"/>
-            <Ellipse Style="{StaticResource ell}" Fill="Gray" Opacity=".3"/>
-            <Ellipse Style="{StaticResource ell}" Fill="Gray" Opacity=".3"/>
-            <Ellipse Style="{StaticResource ell}" Fill="Gray" Opacity=".3"/>
-            <Ellipse Style="{StaticResource ell}" Fill="Gray" Opacity=".3"/>
+            <Ellipse Style="{StaticResource ell}" Fill="Gray" Opacity=".1"/>
+            <Ellipse Style="{StaticResource ell}" Fill="Gray" Opacity=".1"/>
+            <Ellipse Style="{StaticResource ell}" Fill="Gray" Opacity=".1"/>
+            <Ellipse Style="{StaticResource ell}" Fill="Gray" Opacity=".1"/>
+            <Ellipse Style="{StaticResource ell}" Fill="Gray" Opacity=".1"/>
+            <Ellipse Style="{StaticResource ell}" Fill="Gray" Opacity=".1"/>
+            <Ellipse Style="{StaticResource ell}" Fill="Gray" Opacity=".1"/>
         </UniformGrid>
         <UniformGrid Height="26" 
                      Rows="1" 
@@ -48,6 +60,7 @@
                      Opacity="1" 
                      x:Name="dotsContainer"
                      Style="{StaticResource cont}">
+            
             <Ellipse Style="{StaticResource ell}" />
             <Ellipse Style="{StaticResource ell}" />
             <Ellipse Style="{StaticResource ell}" />

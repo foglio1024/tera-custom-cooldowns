@@ -5,8 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:converters="clr-namespace:TCC.Converters"
-             mc:Ignorable="d" Loaded="Control_Loaded"
-             d:DesignHeight="300" d:DesignWidth="300">
+             mc:Ignorable="d" Loaded="Control_Loaded">
     <UserControl.Resources>
         <converters:IconConverter x:Key="iconConv"/>
     </UserControl.Resources>
@@ -53,7 +52,7 @@
                    FontStyle="Normal"
                    Opacity="1" 
                    Margin="3"
-                   Text="{Binding CurrentCD, StringFormat=0, RelativeSource={RelativeSource AncestorType=local:FixedSkillControl}}">
+                   Text="{Binding Seconds, StringFormat=0}">
                 </TextBlock>
                 <Viewbox.CacheMode>
                     <BitmapCache RenderAtScale="2" />
