@@ -6,7 +6,7 @@
              Startup="OnStartup">
     <Application.Resources>
         <DropShadowEffect x:Key="dropShadow" BlurRadius="5" ShadowDepth="3" Opacity=".4" />
-        <SolidColorBrush x:Key="bgColor" Color="#202027" Opacity="1"/>
+        <SolidColorBrush x:Key="bgColor" Color="#101017" Opacity="1"/>
         <SolidColorBrush x:Key="hpColor" Color="#f55"/>
         <SolidColorBrush x:Key="mpColor" Color="#59f"/>
         
@@ -14,7 +14,7 @@
             <Setter Property="Background" Value="{StaticResource bgColor}"/>
             <Setter Property="CornerRadius" Value="0"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="BorderBrush" Value="#303036"/>
+            <Setter Property="BorderBrush" Value="#202026"/>
             <Setter Property="Height" Value="Auto" />
             <Setter Property="Width" Value="Auto"/>
             <Setter Property="Effect" Value="{StaticResource dropShadow}" />
