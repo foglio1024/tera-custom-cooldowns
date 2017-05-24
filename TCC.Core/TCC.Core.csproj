@@ -726,6 +726,12 @@
     <Content Include="resources\data\abnormalities.tsv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="resources\data\opcodes\313523.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\opcodes\smt_313523.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="resources\data\skills.tsv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
