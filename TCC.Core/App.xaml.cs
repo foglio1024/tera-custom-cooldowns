@@ -35,7 +35,7 @@ namespace TCC
         {
             var cd = AppDomain.CurrentDomain;
             cd.UnhandledException += GlobalUnhandledExceptionHandler;
-            System.Diagnostics.Process.GetCurrentProcess().PriorityClass = System.Diagnostics.ProcessPriorityClass.High;
+            System.Diagnostics.Process.GetCurrentProcess().PriorityClass = System.Diagnostics.ProcessPriorityClass.Normal;
             if (File.Exists(Environment.CurrentDirectory + "/TCCupdater.exe"))
             {
                 File.Delete(Environment.CurrentDirectory + "/TCCupdater.exe");
@@ -67,8 +67,6 @@ namespace TCC
             };
 
             //Debug();
-
-
             SessionManager.CurrentPlayer.Class = Class.None;
         }
 
@@ -87,7 +85,7 @@ namespace TCC
             WindowManager.ClassWindow.Dispatcher.Invoke(() =>
             {
                 ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).ClearSkills();
-                ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).CurrentClass = Class.Warrior;
+                ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).CurrentClass = Class.Archer;
             });
 
 
