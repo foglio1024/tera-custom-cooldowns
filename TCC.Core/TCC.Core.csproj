@@ -113,6 +113,7 @@
     </ApplicationDefinition>
     <Compile Include="AbnormalityManager.cs" />
     <Compile Include="ClassSpecific\Archer.cs" />
+    <Compile Include="ClassSpecific\Lancer.cs" />
     <Compile Include="ClassSpecific\Priest.cs" />
     <Compile Include="ClassSpecific\Valkyrie.cs" />
     <Compile Include="Controls\ClassBars\ArcherBar.xaml.cs">
@@ -124,11 +125,30 @@
     <Compile Include="Controls\BarCooldown.xaml.cs">
       <DependentUpon>BarCooldown.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ClassBars\FixedSkillContainers.xaml.cs">
+    <Compile Include="Controls\ClassBars\ArcherStanceIndicator.xaml.cs">
+      <DependentUpon>ArcherStanceIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ClassBars\ArcherStanceTracker.cs" />
+    <Compile Include="Controls\ClassBars\RagnarokBuffControl.xaml.cs">
+      <DependentUpon>RagnarokBuffControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ClassBars\StanceIndicator.xaml.cs">
+      <DependentUpon>StanceIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FixedSkillContainers.xaml.cs">
       <DependentUpon>FixedSkillContainers.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\FixedSkillControl.xaml.cs">
       <DependentUpon>FixedSkillControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LancerBar.xaml.cs">
+      <DependentUpon>LancerBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BuffCooldownControl.xaml.cs">
+      <DependentUpon>BuffCooldownControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StatControl.xaml.cs">
+      <DependentUpon>StatControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\RollToStringConverter.cs" />
     <Compile Include="Converters\WinningToColorConverter.cs" />
@@ -372,6 +392,7 @@
     <Compile Include="Controls\ValueSetting.xaml.cs">
       <DependentUpon>ValueSetting.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\LancerBarManager.cs" />
     <Compile Include="ViewModels\MultiThreadManagers\ClassManager.cs" />
     <Compile Include="ViewModels\MultiThreadManagers\ArcherBarManager.cs" />
     <Compile Include="ViewModels\BossGageWindowViewModel.cs" />
@@ -415,7 +436,7 @@
       <DependentUpon>EdgeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\Counter.cs" />
-    <Compile Include="Data\IntTracker.cs" />
+    <Compile Include="Data\StatTracker.cs" />
     <Compile Include="ViewModels\MultiThreadManagers\WarriorBarManager.cs" />
     <Compile Include="Controls\RunemarksControl.xaml.cs">
       <DependentUpon>RunemarksControl.xaml</DependentUpon>
@@ -494,7 +515,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ClassBars\FixedSkillContainers.xaml">
+    <Page Include="Controls\ClassBars\ArcherStanceIndicator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ClassBars\RagnarokBuffControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ClassBars\StanceIndicator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\FixedSkillContainers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -514,6 +547,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\LancerBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BuffCooldownControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\MaterialSwitch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -523,6 +564,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\RaidMember.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\StatControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

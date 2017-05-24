@@ -69,6 +69,9 @@ namespace TCC.Windows
                     case Class.Archer:
                         root.ContentTemplate = FindResource("archer") as DataTemplate;
                         break;
+                    case Class.Lancer:
+                        root.ContentTemplate = FindResource("lancer") as DataTemplate;
+                        break;
                     default:
                         root.ContentTemplate = FindResource("emptyTemplate") as DataTemplate;
                         break;
