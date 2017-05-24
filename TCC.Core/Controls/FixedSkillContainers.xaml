@@ -23,11 +23,9 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <!--Top border-->
-        <Border BorderBrush="#555"  Width="{Binding ElementName=mainBorder, Path=ActualWidth}" Background="#303037" Height="5" BorderThickness="0,0,0,0" Grid.Column="0" Grid.Row="0" Grid.RowSpan="1" Grid.ColumnSpan="2" Margin="0,1,0,0"/>
 
         <!--Main border-->
-        <Border Style="{StaticResource border}" Width="Auto" Grid.Row="1"  CornerRadius="0,0,25,25" x:Name="mainBorder" Opacity="1" >
+        <Border Style="{StaticResource border}" Width="Auto" Grid.Row="1"  CornerRadius="25" x:Name="mainBorder" >
             <!--Main skills grid-->
             <Grid Grid.Row="0" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" UseLayoutRounding="True">
                 <ItemsControl Name="mainSkills" ItemTemplate="{StaticResource skill}" Width="Auto" Height="Auto" ItemsSource="{Binding MainSkills}" BorderThickness="0" BorderBrush="Red">
