@@ -128,7 +128,7 @@
     <Compile Include="Controls\ClassBars\ArcherStanceIndicator.xaml.cs">
       <DependentUpon>ArcherStanceIndicator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ClassBars\ArcherStanceTracker.cs" />
+    <Compile Include="Controls\ClassBars\StanceTracker.cs" />
     <Compile Include="Controls\ClassBars\RagnarokBuffControl.xaml.cs">
       <DependentUpon>RagnarokBuffControl.xaml</DependentUpon>
     </Compile>
