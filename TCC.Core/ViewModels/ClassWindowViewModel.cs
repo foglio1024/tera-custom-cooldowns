@@ -63,6 +63,9 @@ namespace TCC.ViewModels
                     case Class.Archer:
                         CurrentManager = ArcherBarManager.Instance;
                         break;
+                    case Class.Lancer:
+                        CurrentManager = LancerBarManager.Instance;
+                        break;
                     default:
                         CurrentManager = null;
                         break;
@@ -78,6 +81,7 @@ namespace TCC.ViewModels
             {
                 if (currentManager == value) return;
                 currentManager = value;
+                ClassManager.CurrentClassManager = currentManager;
                 RaisePropertyChanged("CurrentManager");
             }
         }
@@ -97,36 +101,13 @@ namespace TCC.ViewModels
         {
             CurrentManager.Dispatcher.Invoke(() =>
             {
-                //switch (SessionManager.CurrentPlayer.Class)
-                //{
-                //    case Class.Warrior:
-                //        (CurrentManager as WarriorBarManager).StartCooldown(skillCooldown);
-                //        break;
-                //    case Class.Glaiver:
-                //        (CurrentManager as ValkyrieBarManager).StartCooldown(skillCooldown);
-                //        break;
-                //    default:
-                //        break;
-                //}
                 CurrentManager.StartCooldown(skillCooldown);
             });
         }
-
         public void ResetCooldown(SkillCooldown skillCooldown)
         {
             CurrentManager.Dispatcher.Invoke(() =>
             {
-                //switch (SessionManager.CurrentPlayer.Class)
-                //{
-                //    case Class.Warrior:
-                //        (CurrentManager as WarriorBarManager).ResetCooldown(skillCooldown);
-                //        break;
-                //    case Class.Glaiver:
-                //        (CurrentManager as ValkyrieBarManager).ResetCooldown(skillCooldown);
-                //        break;
-                //    default:
-                //        break;
-                //}
                 CurrentManager.ResetCooldown(skillCooldown);
             });
 
@@ -136,17 +117,6 @@ namespace TCC.ViewModels
             CurrentManager.Dispatcher.Invoke(() =>
             {
                 CurrentManager.RemoveSkill(skill);
-                //switch (SessionManager.CurrentPlayer.Class)
-                //{
-                //    case Class.Warrior:
-                //        (CurrentManager as WarriorBarManager).RemoveSkill(skill);
-                //        break;
-                //    case Class.Glaiver:
-                //        (CurrentManager as ValkyrieBarManager).RemoveSkill(skill);
-                //        break;
-                //    default:
-                //        break;
-                //}
             });
         }
 
