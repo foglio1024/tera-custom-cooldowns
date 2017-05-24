@@ -90,19 +90,18 @@ namespace TCC.Parsing
 
         public static void HandlePlayerStatUpdate(S_PLAYER_STAT_UPDATE p)
         {
-            SessionManager.CurrentPlayer.MaxHP = p.MaxHP;
-            SessionManager.CurrentPlayer.MaxMP = p.MaxMP;
-            SessionManager.CurrentPlayer.MaxST = p.MaxST + p.BonusST;
             SessionManager.CurrentPlayer.ItemLevel = p.Ilvl;
 
-            CharacterWindowManager.Instance.Player.MaxHP = p.MaxHP;
-            CharacterWindowManager.Instance.Player.MaxMP = p.MaxMP;
-            CharacterWindowManager.Instance.Player.MaxST = p.MaxST + p.BonusST;
             CharacterWindowManager.Instance.Player.ItemLevel = p.Ilvl;
+
+            SessionManager.SetPlayerMaxHP(SessionManager.CurrentPlayer.EntityId, p.MaxHP);
+            SessionManager.SetPlayerMaxMP(SessionManager.CurrentPlayer.EntityId, p.MaxMP);
+            SessionManager.SetPlayerMaxST(SessionManager.CurrentPlayer.EntityId, p.MaxST + p.BonusST);
 
             SessionManager.SetPlayerHP(SessionManager.CurrentPlayer.EntityId, p.CurrentHP);
             SessionManager.SetPlayerMP(SessionManager.CurrentPlayer.EntityId, p.CurrentMP);
             SessionManager.SetPlayerST(SessionManager.CurrentPlayer.EntityId, p.CurrentST);
+
 
             switch (SessionManager.CurrentPlayer.Class)
             {
@@ -116,24 +115,12 @@ namespace TCC.Parsing
         }
         public static void HandleCreatureChangeHP(S_CREATURE_CHANGE_HP p)
         {
+            SessionManager.SetPlayerMaxHP(p.Target, p.MaxHP);
             SessionManager.SetPlayerHP(p.Target, p.CurrentHP);
-            //BossGageWindowManager.Instance.AddOrUpdateBoss(p.Target, p.MaxHP, p.CurrentHP, v:System.Windows.Visibility.Visible);
-            //if (EntitiesManager.TryGetBossById(p.Target, out Boss b))
-            //{
-            //    if (b.Visible == System.Windows.Visibility.Collapsed)
-            //    {
-            //        b.Visible = System.Windows.Visibility.Visible;
-            //    }
-            //    if (b.MaxHP != p.MaxHP)
-            //    {
-            //        b.MaxHP = p.MaxHP;
-            //    }
-            //    b.CurrentHP = p.CurrentHP;
-
-            //}
         }
         public static void HandlePlayerChangeMP(S_PLAYER_CHANGE_MP p)
         {
+            SessionManager.SetPlayerMaxMP(p.Target, p.MaxMP);
             SessionManager.SetPlayerMP(p.Target, p.CurrentMP);
         }
         public static void HandlePlayerChangeStamina(S_PLAYER_CHANGE_STAMINA p)
@@ -160,26 +147,10 @@ namespace TCC.Parsing
             {
                 BossGageWindowManager.Instance.UnsetBossTarget(p.EntityId);
             }
-            //if (EntitiesManager.TryGetBossById(p.EntityId, out Boss b))
-            //{
-            //    if (p.Target == 0)
-            //    {
-            //        b.Target = 0;
-            //        b.CurrentAggroType = AggroCircle.None;
-            //    }
-            //}
         }
         public static void HandleUserEffect(S_USER_EFFECT p)
         {
             BossGageWindowManager.Instance.SetBossAggro(p.Source, p.Circle, p.User);
-            //if (EntitiesManager.TryGetBossById(p.Source, out Boss b))
-            //{
-            //    if (p.Circle == AggroCircle.Main && p.Action == AggroAction.Add)
-            //    {
-            //        b.Target = p.User;
-            //        b.CurrentAggroType = AggroCircle.Main;
-            //    }
-            //}
         }
 
         public static void HandleCharList(S_GET_USER_LIST p)
@@ -188,13 +159,19 @@ namespace TCC.Parsing
         }
         public static void HandleLogin(S_LOGIN p)
         {
+            WindowManager.ClassWindow.Dispatcher.Invoke(() =>
+            {
+                WindowManager.ClassWindow.Context.ClearSkills();
+                WindowManager.ClassWindow.Context.CurrentClass = p.CharacterClass;
+            });
+
             InitDB(p.ServerId);
             EntitiesManager.ClearNPC();
             GroupWindowManager.Instance.ClearAll();
 
             BuffBarWindowManager.Instance.Player.ClearAbnormalities();
             SkillManager.Clear();
-
+            
             SessionManager.LoadingScreen = true;
             SessionManager.Logged = true;
             SessionManager.CurrentPlayer.Class = p.CharacterClass;
@@ -210,11 +187,7 @@ namespace TCC.Parsing
             CharacterWindowManager.Instance.Player.Level = p.Level;
             SessionManager.SetPlayerLaurel(CharacterWindowManager.Instance.Player);
 
-            WindowManager.ClassWindow.Dispatcher.Invoke(() =>
-            {
-                WindowManager.ClassWindow.Context.ClearSkills();
-                WindowManager.ClassWindow.Context.CurrentClass = p.CharacterClass;
-            });
+
 
 
             /*  
@@ -346,7 +319,7 @@ namespace TCC.Parsing
                     Mystic.CheckHurricane(p);
                     break;
                 case Class.Warrior:
-                    Warrior.CheckGambleBuff(p);
+                    Warrior.CheckBuff(p);
                     break;
                 case Class.Glaiver:
                     Valkyrie.CheckRagnarok(p);
@@ -354,8 +327,12 @@ namespace TCC.Parsing
                 case Class.Archer:
                     Archer.CheckFocus(p);
                     Archer.CheckFocusX(p);
+                    Archer.CheckSniperEye(p);
                     break;
-                default:
+                case Class.Lancer:
+                    Lancer.CheckArush(p);
+                    Lancer.CheckGshout(p);
+                    Lancer.CheckLineHeld(p);
                     break;
             }
         }
@@ -366,6 +343,10 @@ namespace TCC.Parsing
             {
                 case Class.Archer:
                     Archer.CheckFocus(p);
+                    Archer.CheckSniperEye(p);
+                    break;
+                case Class.Lancer:
+                    Lancer.CheckLineHeld(p);
                     break;
             }
         }
@@ -376,6 +357,13 @@ namespace TCC.Parsing
             {
                 case Class.Archer:
                     Archer.CheckFocusEnd(p);
+                    Archer.CheckSniperEyeEnd(p);
+                    break;
+                case Class.Warrior:
+                    Warrior.CheckBuffEnd(p);
+                    break;
+                case Class.Lancer:
+                    Lancer.CheckLineHeldEnd(p);
                     break;
             }
         }
