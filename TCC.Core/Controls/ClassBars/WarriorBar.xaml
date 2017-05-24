@@ -71,8 +71,6 @@
                                                Grid.RowSpan="10"/>
             </Grid>
         </Grid>
-        <Image Source="/TCC;component/resources/images/Icon_Classes/warrior.png" Width="35" Height="35" HorizontalAlignment="Left" VerticalAlignment="Top"
-               Margin="-15" RenderOptions.BitmapScalingMode="Fant"></Image>
         <!--Skills grids-->
             <local:FixedSkillContainers x:Name="sk" Grid.Row="2" Grid.RowSpan="2" HorizontalAlignment="Center" Margin="0,5,0,0"/>
 
