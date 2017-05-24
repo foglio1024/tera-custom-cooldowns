@@ -3,42 +3,48 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TCC.Data;
 using TCC.Parsing.Messages;
 using TCC.ViewModels;
 
 namespace TCC
 {
-    public delegate void Scythe(int time);
-    public delegate void Gamble(int time);
-
     public static class Warrior
     {
         static readonly uint[] GambleIDs = { 100800, 100801, 100802, 100803 };
-        public static int CurrentEdge { get; set; }
+        static readonly uint[] AstanceIDs = { 100100, 100101, 100102, 100103 };
+        static readonly uint[] DstanceIDs = { 100200, 100201, 100202, 100203 };
 
-        public static event Scythe Scythed;
-        public static event Gamble GambleBuff;
-        public static event Gamble GambleCooldown;
-
-        public static void CheckGambleBuff(S_ABNORMALITY_BEGIN sAbnormalityBegin)
+        public static void CheckBuff(S_ABNORMALITY_BEGIN sAbnormalityBegin)
         {
             if (GambleIDs.Contains(sAbnormalityBegin.Id) && sAbnormalityBegin.CasterId == SessionManager.CurrentPlayer.EntityId)
             {
-                ((WarriorBarManager)ClassManager.CurrentClassManager).DeadlyGambleBuff.Start(sAbnormalityBegin.Duration);
+                ((WarriorBarManager)ClassManager.CurrentClassManager).DeadlyGamble.Buff.Start(sAbnormalityBegin.Duration);
+                return;
+            }
+            if (AstanceIDs.Contains(sAbnormalityBegin.Id) && sAbnormalityBegin.CasterId == SessionManager.CurrentPlayer.EntityId)
+            {
+                ((WarriorBarManager)ClassManager.CurrentClassManager).Stance.CurrentStance = WarriorStance.Assault;
+                return;
+            }
+            if (DstanceIDs.Contains(sAbnormalityBegin.Id) && sAbnormalityBegin.CasterId == SessionManager.CurrentPlayer.EntityId)
+            {
+                ((WarriorBarManager)ClassManager.CurrentClassManager).Stance.CurrentStance=WarriorStance.Defensive;
+                return;
             }
         }
-
-        public static void CheckWarriorsSkillCooldown(S_START_COOLTIME_SKILL sk)
+        public static void CheckBuffEnd(S_ABNORMALITY_END p)
         {
-            if (SkillsDatabase.SkillIdToName(sk.SkillId, Class.Warrior).Contains("Scythe I"))
+            if (AstanceIDs.Contains(p.Id) && p.Target == SessionManager.CurrentPlayer.EntityId)
             {
-                Scythed?.Invoke((int)sk.Cooldown);
+                ((WarriorBarManager)ClassManager.CurrentClassManager).Stance.CurrentStance = WarriorStance.None;
+                return;
             }
-            else if(SkillsDatabase.SkillIdToName(sk.SkillId, Class.Warrior).Contains("Deadly Gamble"))
+            if (DstanceIDs.Contains(p.Id) && p.Target == SessionManager.CurrentPlayer.EntityId)
             {
-                GambleCooldown?.Invoke((int)sk.Cooldown);
+                ((WarriorBarManager)ClassManager.CurrentClassManager).Stance.CurrentStance = WarriorStance.None;
+                return;
             }
-
         }
     }
 }

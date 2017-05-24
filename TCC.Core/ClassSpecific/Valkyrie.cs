@@ -14,7 +14,7 @@ namespace TCC
         {
             if(p.CasterId == SessionManager.CurrentPlayer.EntityId && p.Id == 10155130)
             {
-                ((ValkyrieBarManager)ClassManager.CurrentClassManager).RagnarokBuff.Start(p.Duration);
+                ((ValkyrieBarManager)ClassManager.CurrentClassManager).Ragnarok.Buff.Start(p.Duration);
             }
         }
     }
