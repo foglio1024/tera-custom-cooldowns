@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows;
 using TCC.Data;
 
@@ -52,45 +53,29 @@ namespace TCC.ViewModels
             }
         }
 
-        public abstract void StartCooldown(SkillCooldown sk);
-        public abstract void ResetCooldown(SkillCooldown sk);
-        public abstract void RemoveSkill(Skill sk);
-
-        protected abstract void LoadSkills(string filename, Class c);
-
-        public IntTracker HP { get; set; }
-        public IntTracker MP { get; set; }
-        public IntTracker ST { get; set; }
-
-        public static void SetHP(int hp)
+        public void StartCooldown(SkillCooldown sk)
         {
-            if (CurrentClassManager == null) return;
-            WindowManager.ClassWindow.Dispatcher.Invoke(() => { CurrentClassManager.HP.Val = hp; });
+            var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
+            if (skill != null)
+            {
+                skill.Start(sk.Cooldown);
 
-        }
-        public static void SetMP(int mp)
-        {
-            if (CurrentClassManager == null) return;
-            WindowManager.ClassWindow.Dispatcher.Invoke(() => { CurrentClassManager.MP.Val = mp; });
-        }
-        public static void SetST(int currentStamina)
-        {
-            if (CurrentClassManager == null) return;
-            WindowManager.ClassWindow.Dispatcher.Invoke(() => { CurrentClassManager.ST.Val = currentStamina; });
-        }
+                return;
+            }
+            skill = SecondarySkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
+            if (skill != null)
+            {
+                skill.Start(sk.Cooldown);
+                return;
+            }
 
-        public ClassManager()
-        {
-            SecondarySkills = new SynchronizedObservableCollection<FixedSkillCooldown>(WindowManager.ClassWindow.Dispatcher);
-            MainSkills = new SynchronizedObservableCollection<FixedSkillCooldown>(WindowManager.ClassWindow.Dispatcher);
-            OtherSkills = new SynchronizedObservableCollection<SkillCooldown>(WindowManager.ClassWindow.Dispatcher);
-            HP = new IntTracker();
-            MP = new IntTracker();
-            ST = new IntTracker();
+            if (StartSpecialSkill(sk)) return;
+
+            AddOrRefreshSkill(sk);
         }
         protected void AddOrRefreshSkill(SkillCooldown sk)
         {
-            sk.SetDispatcher(this.Dispatcher);
+            sk.SetDispatcher(Dispatcher);
 
             try
             {
@@ -106,6 +91,105 @@ namespace TCC.ViewModels
             {
 
             }
+        }
+
+        public virtual void ResetCooldown(SkillCooldown sk)
+        {
+            sk.SetDispatcher(Dispatcher);
+            var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
+            if (skill != null)
+            {
+                skill.Refresh(0);
+                return;
+            }
+            skill = SecondarySkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
+            if (skill != null)
+            {
+                skill.Refresh(0);
+                return;
+            }
+            try
+            {
+                var otherSkill = OtherSkills.FirstOrDefault(x => x.Skill.Name == sk.Skill.Name);
+                if (otherSkill != null)
+                {
+
+                    OtherSkills.Remove(otherSkill);
+                    otherSkill.Dispose();
+                }
+            }
+            catch { }
+        }
+        public virtual void RemoveSkill(Skill sk)
+        {
+            try
+            {
+                var otherSkill = OtherSkills.FirstOrDefault(x => x.Skill.Name == sk.Name);
+                if (otherSkill != null)
+                {
+
+                    OtherSkills.Remove(otherSkill);
+                    otherSkill.Dispose();
+                }
+            }
+            catch
+            {
+
+            }
+        }
+        protected virtual bool StartSpecialSkill(SkillCooldown sk)
+        {
+            return false;
+        }
+
+        protected abstract void LoadSkills(string filename, Class c);
+
+        public StatTracker HP { get; set; }
+        public StatTracker MP { get; set; }
+        public StatTracker ST { get; set; }
+
+        public static void SetMaxHP(int v)
+        {
+            if (CurrentClassManager == null) return;
+           CurrentClassManager.Dispatcher.Invoke(() => { CurrentClassManager.HP.Max = v; });
+
+        }
+        public static void SetMaxMP(int v)
+        {
+            if (CurrentClassManager == null) return;
+            CurrentClassManager.Dispatcher.Invoke(() => { CurrentClassManager.MP.Max = v; });
+        }
+        public static void SetMaxST(int v)
+        {
+            if (CurrentClassManager == null) return;
+            CurrentClassManager.Dispatcher.Invoke(() => { CurrentClassManager.ST.Max = v; });
+        }
+
+        public static void SetHP(int hp)
+        {
+            if (CurrentClassManager == null) return;
+            CurrentClassManager.Dispatcher.Invoke(() => { CurrentClassManager.HP.Val = hp; });
+
+        }
+        public static void SetMP(int mp)
+        {
+            if (CurrentClassManager == null) return;
+            CurrentClassManager.Dispatcher.Invoke(() => { CurrentClassManager.MP.Val = mp; });
+        }
+        public static void SetST(int currentStamina)
+        {
+            if (CurrentClassManager == null) return;
+            CurrentClassManager.Dispatcher.Invoke(() => { CurrentClassManager.ST.Val = currentStamina; });
+        }
+
+        public ClassManager()
+        {
+            SecondarySkills = new SynchronizedObservableCollection<FixedSkillCooldown>(WindowManager.ClassWindow.Dispatcher);
+            MainSkills = new SynchronizedObservableCollection<FixedSkillCooldown>(WindowManager.ClassWindow.Dispatcher);
+            OtherSkills = new SynchronizedObservableCollection<SkillCooldown>(WindowManager.ClassWindow.Dispatcher);
+            HP = new StatTracker();
+            MP = new StatTracker();
+            ST = new StatTracker();
         }
 
     }

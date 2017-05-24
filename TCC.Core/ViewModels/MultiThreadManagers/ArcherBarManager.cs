@@ -15,69 +15,14 @@ namespace TCC.ViewModels
         public static ArcherBarManager Instance => _instance ?? (_instance = new ArcherBarManager());
 
         public ArcherFocusTracker Focus { get; set; }
+        public StanceTracker<ArcherStance> Stance { get; set; }
         public ArcherBarManager()
         {
             _instance = this;
             Focus = new ArcherFocusTracker();
+            Stance = new StanceTracker<ArcherStance>();
             CurrentClassManager = this;
             LoadSkills("archer-skills.xml", Class.Archer);
-        }
-        public override void RemoveSkill(Skill sk)
-        {
-            try
-            {
-                var otherSkill = OtherSkills.FirstOrDefault(x => x.Skill.Name == sk.Name);
-                if (otherSkill != null)
-                {
-                    OtherSkills.Remove(otherSkill);
-                    otherSkill.Dispose();
-                }
-            }
-            catch{}
-        }
-        public override void ResetCooldown(SkillCooldown sk)
-        {
-            sk.SetDispatcher(this.Dispatcher);
-            var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
-            if (skill != null)
-            {
-                skill.Refresh(0);
-                return;
-            }
-            skill = SecondarySkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
-            if (skill != null)
-            {
-                skill.Refresh(0);
-                return;
-            }
-            try
-            {
-                var otherSkill = OtherSkills.FirstOrDefault(x => x.Skill.Name == sk.Skill.Name);
-                if (otherSkill != null)
-                {
-
-                    OtherSkills.Remove(otherSkill);
-                    otherSkill.Dispose();
-                }
-            }
-            catch { }
-        }
-        public override void StartCooldown(SkillCooldown sk)
-        {
-            var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
-            if (skill != null)
-            {
-                skill.Start(sk.Cooldown);
-
-                return;
-            }
-            skill = SecondarySkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
-            if (skill != null)
-            {
-                skill.Start(sk.Cooldown);
-                return;
-            }
-            AddOrRefreshSkill(sk);
         }
 
         protected override void LoadSkills(string filename, Class c)

@@ -12,7 +12,7 @@ namespace TCC.ViewModels
         private static ValkyrieBarManager _instance;
         public static ValkyrieBarManager Instance => _instance ?? (_instance = new ValkyrieBarManager());
         public Counter RunemarksCounter { get; set; }
-        public FixedSkillCooldown RagnarokBuff { get; private set; }
+        public DurationCooldownIndicator Ragnarok { get; private set; }
 
         public ValkyrieBarManager()
         {
@@ -63,83 +63,20 @@ namespace TCC.ViewModels
 
 
             //Ragnarok
+            Ragnarok = new DurationCooldownIndicator();
             SkillsDatabase.TryGetSkill(120100, Class.Glaiver, out Skill rag);
-            RagnarokBuff = new FixedSkillCooldown(rag, CooldownType.Skill, Dispatcher);
+            Ragnarok.Cooldown = new FixedSkillCooldown(rag, CooldownType.Skill, Dispatcher);
+            Ragnarok.Buff = new FixedSkillCooldown(rag, CooldownType.Skill, Dispatcher);
         }
-
-        public override void StartCooldown(SkillCooldown sk)
+        protected override bool StartSpecialSkill(SkillCooldown sk)
         {
-            var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
-            if (skill != null)
+
+            if (sk.Skill.IconName == Ragnarok.Cooldown.Skill.IconName)
             {
-                skill.Start(sk.Cooldown);
-
-                return;
+                Ragnarok.Cooldown.Start(sk.Cooldown);
+                return true;
             }
-            skill = SecondarySkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
-            if (skill != null)
-            {
-                skill.Start(sk.Cooldown);
-                return;
-            }
-
-            if (sk.Skill.IconName == RagnarokBuff.Skill.IconName)
-            {
-                RagnarokBuff.Start(sk.Cooldown);
-                return;
-            }
-            AddOrRefreshSkill(sk);
-
-
-
+            return false;
         }
-        public override void ResetCooldown(SkillCooldown s)
-        {
-            s.SetDispatcher(this.Dispatcher);
-            var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == s.Skill.IconName);
-            if (skill != null)
-            {
-                skill.Refresh(0);
-                return;
-            }
-            skill = SecondarySkills.FirstOrDefault(x => x.Skill.IconName == s.Skill.IconName);
-            if (skill != null)
-            {
-                skill.Refresh(0);
-                return;
-            }
-            try
-            {
-                var otherSkill = OtherSkills.FirstOrDefault(x => x.Skill.Name == s.Skill.Name);
-                if (otherSkill != null)
-                {
-
-                    OtherSkills.Remove(otherSkill);
-                    otherSkill.Dispose();
-                }
-            }
-            catch { }
-        }
-        public override void RemoveSkill(Skill skill)
-        {
-            try
-            {
-
-                var otherSkill = OtherSkills.FirstOrDefault(x => x.Skill.Name == skill.Name);
-                if (otherSkill != null)
-                {
-
-                    OtherSkills.Remove(otherSkill);
-                    otherSkill.Dispose();
-                }
-            }
-            catch
-            {
-
-            }
-
-        }
-
-
     }
 }

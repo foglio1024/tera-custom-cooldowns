@@ -20,16 +20,17 @@ namespace TCC.ViewModels
         private static WarriorBarManager _instance;
         public static WarriorBarManager Instance => _instance ?? (_instance = new WarriorBarManager());
 
-        public FixedSkillCooldown DeadlyGamble { get; set; }
-        public FixedSkillCooldown DeadlyGambleBuff { get; set; }
+        public DurationCooldownIndicator DeadlyGamble { get; set; }
 
         public Counter EdgeCounter { get; set; }
+        public StanceTracker<WarriorStance> Stance { get; set; }
 
         public WarriorBarManager()
         {
             _instance = this;
             CurrentClassManager = this;
             EdgeCounter = new Counter(10, true);
+            Stance = new StanceTracker<WarriorStance>();
             LoadSkills("warrior-skills.xml", Class.Warrior);
 
         }
@@ -37,7 +38,7 @@ namespace TCC.ViewModels
         protected override void LoadSkills(string filename, Class c)
         {
             //User defined skills
-            if (!File.Exists("resources/config/"+ filename))
+            if (!File.Exists("resources/config/" + filename))
             {
                 //create default warrior file
                 XElement skills = new XElement("Skills",
@@ -68,103 +69,43 @@ namespace TCC.ViewModels
             }
 
             XDocument skillsDoc = XDocument.Load("resources/config/" + filename);
-                foreach (XElement skillElement in skillsDoc.Descendants("Skill"))
-                {
-                    uint skillId = Convert.ToUInt32(skillElement.Attribute("id").Value);
-                    int row = Convert.ToInt32(skillElement.Attribute("row").Value);
+            foreach (XElement skillElement in skillsDoc.Descendants("Skill"))
+            {
+                uint skillId = Convert.ToUInt32(skillElement.Attribute("id").Value);
+                int row = Convert.ToInt32(skillElement.Attribute("row").Value);
 
-                    if (SkillsDatabase.TryGetSkill(skillId, c, out Skill sk))
+                if (SkillsDatabase.TryGetSkill(skillId, c, out Skill sk))
+                {
+                    if (row == 1)
                     {
-                        if (row == 1)
-                        {
-                            MainSkills.Add(new FixedSkillCooldown(sk, CooldownType.Skill, Dispatcher));
-                        }
-                        else if (row == 2)
-                        {
-                            SecondarySkills.Add(new FixedSkillCooldown(sk, CooldownType.Skill, Dispatcher));
-                        }
+                        MainSkills.Add(new FixedSkillCooldown(sk, CooldownType.Skill, Dispatcher));
+                    }
+                    else if (row == 2)
+                    {
+                        SecondarySkills.Add(new FixedSkillCooldown(sk, CooldownType.Skill, Dispatcher));
                     }
                 }
+            }
 
 
             //Deadly gamble
+            DeadlyGamble = new DurationCooldownIndicator();
             SkillsDatabase.TryGetSkill(200200, c, out Skill dg);
-            DeadlyGamble = new FixedSkillCooldown(dg, CooldownType.Skill, Dispatcher);
-            DeadlyGambleBuff = new FixedSkillCooldown(dg, CooldownType.Skill, Dispatcher);
+            DeadlyGamble.Buff = new FixedSkillCooldown(dg, CooldownType.Skill, Dispatcher);
+            DeadlyGamble.Cooldown = new FixedSkillCooldown(dg, CooldownType.Skill, Dispatcher);
         }
 
-        public override void StartCooldown(SkillCooldown sk)
+        protected override bool StartSpecialSkill(SkillCooldown sk)
         {
-            var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
-            if (skill != null)
+
+            if (sk.Skill.IconName == DeadlyGamble.Cooldown.Skill.IconName)
             {
-                skill.Start(sk.Cooldown);
-
-                return;
+                DeadlyGamble.Cooldown.Start(sk.Cooldown);
+                return true;
             }
-            skill = SecondarySkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
-            if (skill != null)
-            {
-                skill.Start(sk.Cooldown);
-                return;
-            }
-
-            if (sk.Skill.IconName == DeadlyGamble.Skill.IconName)
-            {
-                DeadlyGamble.Start(sk.Cooldown);
-                return;
-            }
-            AddOrRefreshSkill(sk);
-
-
+            return false;
 
         }
-        public override void ResetCooldown(SkillCooldown s)
-        {
-            s.SetDispatcher(this.Dispatcher);
-            var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == s.Skill.IconName);
-            if (skill != null)
-            {
-                skill.Refresh(0);
-                return;
-            }
-            skill = SecondarySkills.FirstOrDefault(x => x.Skill.IconName == s.Skill.IconName);
-            if (skill != null)
-            {
-                skill.Refresh(0);
-                return;
-            }
-            try
-            {
-                var otherSkill = OtherSkills.FirstOrDefault(x => x.Skill.Name == s.Skill.Name);
-                if (otherSkill != null)
-                {
 
-                    OtherSkills.Remove(otherSkill);
-                    otherSkill.Dispose();
-                }
-            }
-            catch { }
-        }
-        public override void RemoveSkill(Skill skill)
-        {
-            try
-            {
-
-                var otherSkill = OtherSkills.FirstOrDefault(x => x.Skill.Name == skill.Name);
-                if (otherSkill != null)
-                {
-
-                    OtherSkills.Remove(otherSkill);
-                    otherSkill.Dispose();
-                }
-            }
-            catch
-            {
-
-            }
-
-        }
     }
-
 }
