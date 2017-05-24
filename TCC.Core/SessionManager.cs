@@ -120,6 +120,34 @@ namespace TCC
                 p.Laurel = Laurel.None;
             }
         }
+
+        public static void SetPlayerMaxHP(ulong target, int maxHP)
+        {
+            if (target == CurrentPlayer.EntityId)
+            {
+                CurrentPlayer.MaxHP = maxHP;
+                CharacterWindowManager.Instance.Player.MaxHP = maxHP;
+                ClassManager.SetMaxHP(Convert.ToInt32(maxHP));
+            }
+        }
+        public static void SetPlayerMaxMP(ulong target, int maxMP)
+        {
+            if (target == CurrentPlayer.EntityId)
+            {
+                CurrentPlayer.MaxMP = maxMP;
+                CharacterWindowManager.Instance.Player.MaxMP = maxMP;
+                ClassManager.SetMaxMP(Convert.ToInt32(maxMP));
+            }
+        }
+        public static void SetPlayerMaxST(ulong target, int maxST)
+        {
+            if (target == CurrentPlayer.EntityId)
+            {
+                CurrentPlayer.MaxST = maxST;
+                CharacterWindowManager.Instance.Player.MaxST = maxST;
+                ClassManager.SetMaxST(Convert.ToInt32(maxST));
+            }
+        }
     }
 
 }
