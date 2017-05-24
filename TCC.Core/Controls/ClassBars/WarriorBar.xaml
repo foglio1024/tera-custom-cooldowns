@@ -10,15 +10,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!--HP/MP-->
-        <Grid HorizontalAlignment="Center" Margin="0,0,0,10">
+        <Grid HorizontalAlignment="Center" Margin="0,0,0,-6">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
@@ -27,62 +22,58 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Grid UseLayoutRounding="True">
-                <Border Background="{StaticResource hpColor}" 
-                        Grid.Column="0"  
-                        CornerRadius="10,0,0,10" 
-                        Margin="4.5,0,-15,0" 
-                        Style="{StaticResource ClassWindowStatBorder}" >
-                    <TextBlock Name="hpText" 
-                               Style="{StaticResource text1}" 
-                               FontSize="14" 
-                               Margin="0,0" 
-                               VerticalAlignment="Center" 
-                               HorizontalAlignment="Center"
-                               Text="{Binding HP.Val}" />
-                </Border>
-            </Grid>
-            
-            <Border Background="{StaticResource mpColor}" 
-                    Grid.Column="2"  
-                    Margin="-15,0,4,0" 
-                    CornerRadius="0,10,10,0" 
-                    Style="{StaticResource ClassWindowStatBorder}" >
-                <TextBlock Name="mpText" 
-                           Style="{StaticResource text1}" 
-                           Grid.Column="2" 
-                           FontSize="14" 
-                           VerticalAlignment="Center" 
-                           HorizontalAlignment="Center" 
-                           Text="{Binding MP.Val}"/>
-            </Border>
+            <Border Style="{StaticResource border}"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    Grid.RowSpan="3"
+                    CornerRadius="0,0,0,0"
+                    Margin="0,0,0,0"
+                    VerticalAlignment="Stretch"/>
 
-            <Border Background="#5ff" 
-                    Grid.Column="1" 
-                    Margin="0,-10,0,0" 
-                    CornerRadius="0,0,40,40" 
-                    Grid.Row="1" 
-                    Style="{StaticResource ClassWindowStatBorder}" >
-                <TextBlock Name="reText" 
-                           Style="{StaticResource text1}" 
-                           Foreground="#f222" 
-                           Grid.Column="1" 
-                           Grid.Row="1" 
-                           FontSize="13" 
-                           VerticalAlignment="Bottom" 
-                           HorizontalAlignment="Center" 
-                           Text="{Binding ST.Val}"/>
-            </Border>
-            
+            <!--HP/MP-->
+            <UniformGrid Columns="3" 
+                         HorizontalAlignment="Stretch" 
+                         Margin="5,0,7,0"
+                         Grid.RowSpan="1"
+                         Grid.Column="1"
+                         Grid.Row="1"
+                         >
+                <local:StatControl DataContext="{Binding HP}" Color="{StaticResource hpColor}" Width="80" />
+                <local:StatControl DataContext="{Binding MP}" Color="{StaticResource mpColor}" Width="80"/>
+                <local:StatControl DataContext="{Binding ST}" Color="#5ff" Width="80"/>
+            </UniformGrid>
+
             <!--Edge-->
-            <local:EdgeControl x:Name="edgeBar" DataContext="{Binding EdgeCounter}" Grid.Column="1" Width="270" />
+            <local:EdgeControl x:Name="edgeBar" 
+                               DataContext="{Binding EdgeCounter}" 
+                               Grid.Column="1" 
+                               Grid.RowSpan="1"
+                               Width="270" 
+                               VerticalAlignment="Center"
+                               />
+
+            <Grid Grid.RowSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <local:WarriorStanceIndicator Grid.RowSpan="2"
+                                       Margin="1"
+                                       DataContext="{Binding Stance}"/>
+                <!--Gamble-->
+                <local:BuffCooldownControl DataContext="{Binding DeadlyGamble}" 
+                                               Grid.Column="1" 
+                                               Grid.RowSpan="10"/>
+            </Grid>
         </Grid>
-        
+
         <!--Skills grids-->
-        <local:FixedSkillContainers x:Name="sk" Grid.Row="2" Grid.RowSpan="2" HorizontalAlignment="Center" Margin="0,0,0,0"/>
-        
-        <!--Bar cooldowns-->
-        <local:BarCooldown VerticalAlignment="Top" HorizontalAlignment="Stretch" DataContext="{Binding DeadlyGamble}" Grid.Row="2" Color="DimGray" Height="22" Margin="5,-2,5,0"  Grid.RowSpan="2" x:Name="gambleCD" />
-        <local:BarCooldown VerticalAlignment="Top" HorizontalAlignment="Stretch" DataContext="{Binding DeadlyGambleBuff}" Grid.Row="2" Color="Orange" Height="22" Margin="5,-2,5,0"  Grid.RowSpan="2" x:Name="gambleBuff"/>
-    </Grid>
+            <local:FixedSkillContainers x:Name="sk" Grid.Row="2" Grid.RowSpan="2" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+
+        </Grid>
 </UserControl>

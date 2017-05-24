@@ -6,65 +6,56 @@
              xmlns:local="clr-namespace:TCC.Controls"
              mc:Ignorable="d"  Loaded="UserControl_Loaded"
              d:DesignHeight="300" d:DesignWidth="300">
-    <UserControl.Resources>
-        <DataTemplate x:Key="skill">
-            <local:FixedSkillControl/>
-        </DataTemplate>
-        <DataTemplate x:Key="skill2">
-            <local:SkillIconControl />
-        </DataTemplate>
-    </UserControl.Resources>
-
     <Grid Width="Auto" Margin="20" Name="root">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!--HP/MP-->
-        <Grid HorizontalAlignment="Center" Margin="0,0,0,10">
+        <Grid HorizontalAlignment="Center" Margin="0,0,0,6">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Border Background="{StaticResource hpColor}" 
-                    Grid.Column="0" 
-                    CornerRadius="10,0,0,10" 
-                    Style="{StaticResource ClassWindowStatBorder}" 
-                    BorderThickness="0" 
-                    Margin="0,0,-10,0">
-                <TextBlock Name="hpText" 
-                           Style="{StaticResource text1}" 
-                           FontSize="14" 
-                           TextAlignment="Right" 
-                           VerticalAlignment="Center" 
-                           HorizontalAlignment="Center" 
-                           Text="{Binding HP.Val}"/>
-            </Border>
-            <Border Background="{StaticResource mpColor}" 
-                    Grid.Column="2" 
-                    CornerRadius="0,10,10,0" 
-                    Style="{StaticResource ClassWindowStatBorder}" 
-                    Margin="-10,0,0,0">
-                <TextBlock Name="mpText" 
-                           Style="{StaticResource text1}" 
-                           FontSize="14" 
-                           TextAlignment="Left"  
-                           VerticalAlignment="Center" 
-                           HorizontalAlignment="Center" 
-                           Text="{Binding MP.Val}" 
-                           Grid.Column="2"/>
-            </Border>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Border Style="{StaticResource border}"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    Grid.RowSpan="3"
+                    CornerRadius="0,0,0,0"
+                    Margin="0"
+                    VerticalAlignment="Stretch"/>
+            <!--HP/MP-->
+            <UniformGrid Columns="1" 
+                         HorizontalAlignment="Stretch" 
+                         VerticalAlignment="Center"
+                         Margin="0,0"
+                         Grid.RowSpan="2"
+                         Grid.Column="2"
+                         Grid.Row="0"
+                         >
+                <local:StatControl DataContext="{Binding HP}" Color="{StaticResource hpColor}" Width="70" Margin="0,0,7,0"/>
+                <local:StatControl DataContext="{Binding MP}" Color="{StaticResource mpColor}" Width="70" Margin="0,0,7,0"/>
+            </UniformGrid>
+            
+            <local:ArcherStanceIndicator Grid.RowSpan="2"
+                                         Margin="1,0"
+                                         DataContext="{Binding Stance}">
+            </local:ArcherStanceIndicator>
             
             <local:ArcherFocusControl x:Name="focusControl" 
                                       Grid.Column="1" 
-                                      Margin="0" 
+                                      Margin="5,3" 
                                       DataContext="{Binding Focus}"/>
         </Grid>
+        
         <local:FixedSkillContainers Grid.Row="2" HorizontalAlignment="Center" Grid.Column="1" Grid.RowSpan="2" />
     </Grid>
 </UserControl>
