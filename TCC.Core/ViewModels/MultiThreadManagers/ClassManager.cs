@@ -165,6 +165,34 @@ namespace TCC.ViewModels
             CurrentClassManager.Dispatcher.Invoke(() => { CurrentClassManager.ST.Max = v; });
         }
 
+        public virtual void ChangeSkillCooldown(Skill sk, uint cd)
+        {
+            var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.IconName);
+            if (skill != null)
+            {
+                skill.Refresh(cd);
+                return;
+            }
+            skill = SecondarySkills.FirstOrDefault(x => x.Skill.IconName == sk.IconName);
+            if (skill != null)
+            {
+                skill.Refresh(cd);
+                return;
+            }
+            try
+            {
+                var otherSkill = OtherSkills.FirstOrDefault(x => x.Skill.Name == sk.Name);
+                if (otherSkill != null)
+                {
+
+                    //OtherSkills.Remove(otherSkill);
+                    otherSkill.Refresh(cd);
+                }
+            }
+            catch { }
+
+        }
+
         public static void SetHP(int hp)
         {
             if (CurrentClassManager == null) return;
