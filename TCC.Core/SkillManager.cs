@@ -87,7 +87,16 @@ namespace TCC
         {
             if (SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out Skill skill))
             {
-                CooldownBarWindowManager.Instance.AddOrRefreshSkill(new SkillCooldown(skill, cd, CooldownType.Skill, CooldownBarWindowManager.Instance.Dispatcher));
+                if (SettingsManager.ClassWindowOn && ClassWindowViewModel.ClassWindowExists())
+                {
+
+                    WindowManager.ClassWindow.Context.ChangeSkillCooldown(skill, cd);
+                }
+                else
+                {
+                    CooldownBarWindowManager.Instance.AddOrRefreshSkill(new SkillCooldown(skill, cd, CooldownType.Skill, CooldownBarWindowManager.Instance.Dispatcher));
+                }
+
             }
 
         }
