@@ -30,6 +30,33 @@
         <DataTemplate x:Key="lancer">
             <controls:LancerBar/>
         </DataTemplate>
+        <DataTemplate x:Key="priest">
+            <controls:PriestBar />
+        </DataTemplate>
+        <DataTemplate x:Key="mystic">
+            <controls:MysticBar/>
+        </DataTemplate>
+        <DataTemplate x:Key="ninja">
+            <controls:NinjaBar/>
+        </DataTemplate>
+        <DataTemplate x:Key="gunner">
+            <controls:GunnerBar/>
+        </DataTemplate>
+        <DataTemplate x:Key="brawler">
+            <controls:BrawlerBar/>
+        </DataTemplate>
+        <DataTemplate x:Key="reaper">
+            <controls:ReaperBar/>
+        </DataTemplate>
+        <DataTemplate x:Key="sorcerer">
+            <controls:SorcererBar/>
+        </DataTemplate>
+        <DataTemplate x:Key="berserker">
+            <controls:BerserkerBar/>
+        </DataTemplate>
+        <DataTemplate x:Key="slayer">
+            <controls:SlayerBar/>
+        </DataTemplate>
         <DataTemplate x:Key="emptyTemplate">
         </DataTemplate>
         <Style x:Key="opacityAnimatedContainer" TargetType="FrameworkElement">
