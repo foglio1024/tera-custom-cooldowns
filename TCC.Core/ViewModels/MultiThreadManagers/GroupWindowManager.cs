@@ -730,6 +730,7 @@ namespace TCC.ViewModels
         {
             if(TryGetUser(startList, serverId,playerId, out User u))
             {
+                if (TryGetUser(endList, serverId, playerId, out User x)) return;
                 endList.Add(u);
                 startList.Remove(u);
             }
