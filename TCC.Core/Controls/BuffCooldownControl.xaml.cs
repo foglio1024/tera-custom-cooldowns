@@ -46,7 +46,13 @@ namespace TCC.Controls
             if (e.PropertyName == "Start")
             {
                 externalArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(_context.Buff.Cooldown)));
+                return;
             }
+            if(e.PropertyName == "Refresh")
+            {
+                externalArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(_context.Buff.Cooldown)));
+            }
+
         }
     }
 }
