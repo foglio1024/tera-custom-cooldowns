@@ -34,16 +34,20 @@ namespace TCC.Controls
         {
             if (e.PropertyName == "Refresh")
             {
-                if (((AbnormalityDuration)sender).Duration == uint.MaxValue) return;
-                if (!((AbnormalityDuration)sender).Animated) return;
-                var an = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(((AbnormalityDuration)sender).Duration));
-                int fps = ((AbnormalityDuration)sender).Duration > 80000 ? 1 : 30;
-                DoubleAnimation.SetDesiredFrameRate(an, fps);
-                arc.BeginAnimation(Arc.EndAngleProperty, an);
+                if (_context.Duration == uint.MaxValue) return;
+                if (!_context.Animated) return;
+                AnimateCooldown();
             }
 
         }
+        void AnimateCooldown()
+        {
+            var an = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(_context.Duration));
+            int fps = _context.Duration > 20000 ? 1 : 10;
+            DoubleAnimation.SetDesiredFrameRate(an, fps);
+            arc.BeginAnimation(Arc.EndAngleProperty, an);
 
+        }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             _context = (AbnormalityDuration)DataContext;
@@ -54,10 +58,7 @@ namespace TCC.Controls
 
             if (_context.Duration != uint.MaxValue && _context.Animated)
             {
-                var an = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(((AbnormalityDuration)DataContext).Duration));
-                int fps = ((AbnormalityDuration)DataContext).Duration > 80000 ? 1 : 30;
-                DoubleAnimation.SetDesiredFrameRate(an, fps);
-                arc.BeginAnimation(Arc.EndAngleProperty, an);
+                AnimateCooldown();
             }
 
         }
