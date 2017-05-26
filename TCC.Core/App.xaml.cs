@@ -29,6 +29,11 @@ namespace TCC
             File.WriteAllText(Environment.CurrentDirectory + "/error.txt", "##### CRASH #####\r\n" + ex.Message + "\r\n" +
                      ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" + ex.InnerException +
                      "\r\n" + ex.TargetSite);
+            MessageBox.Show("An error occured and TCC will now close. Check error.txt for more info.", "TCC", MessageBoxButton.OK, MessageBoxImage.Error);
+            if(WindowManager.TrayIcon != null)
+            {
+                WindowManager.TrayIcon.Dispose();
+            }
         }
 
         private void OnStartup(object sender, StartupEventArgs ev)
