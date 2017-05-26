@@ -116,6 +116,15 @@
     <Compile Include="ClassSpecific\Lancer.cs" />
     <Compile Include="ClassSpecific\Priest.cs" />
     <Compile Include="ClassSpecific\Valkyrie.cs" />
+    <Compile Include="Controls\ArcControl.xaml.cs">
+      <DependentUpon>ArcControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BerserkerBar.xaml.cs">
+      <DependentUpon>BerserkerBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BrawlerBar.xaml.cs">
+      <DependentUpon>BrawlerBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ClassBars\ArcherBar.xaml.cs">
       <DependentUpon>ArcherBar.xaml</DependentUpon>
     </Compile>
@@ -127,6 +136,9 @@
     </Compile>
     <Compile Include="Controls\ClassBars\ArcherStanceIndicator.xaml.cs">
       <DependentUpon>ArcherStanceIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ClassBars\MysticAurasIndicator.xaml.cs">
+      <DependentUpon>MysticAurasIndicator.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ClassBars\StanceTracker.cs" />
     <Compile Include="Controls\ClassBars\RagnarokBuffControl.xaml.cs">
@@ -141,11 +153,29 @@
     <Compile Include="Controls\FixedSkillControl.xaml.cs">
       <DependentUpon>FixedSkillControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\GunnerBar.xaml.cs">
+      <DependentUpon>GunnerBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LancerBar.xaml.cs">
       <DependentUpon>LancerBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\BuffCooldownControl.xaml.cs">
       <DependentUpon>BuffCooldownControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NinjaBar.xaml.cs">
+      <DependentUpon>NinjaBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PriestBar.xaml.cs">
+      <DependentUpon>PriestBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ReaperBar.xaml.cs">
+      <DependentUpon>ReaperBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SlayerBar.xaml.cs">
+      <DependentUpon>SlayerBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SorcererBar.xaml.cs">
+      <DependentUpon>SorcererBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\StatControl.xaml.cs">
       <DependentUpon>StatControl.xaml</DependentUpon>
@@ -392,7 +422,10 @@
     <Compile Include="Controls\ValueSetting.xaml.cs">
       <DependentUpon>ValueSetting.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\LancerBarManager.cs" />
+    <Compile Include="ViewModels\BerserkerBarManager.cs" />
+    <Compile Include="ViewModels\BrawlerBarManager.cs" />
+    <Compile Include="ViewModels\GunnerBarManager.cs" />
+    <Compile Include="ViewModels\MultiThreadManagers\LancerBarManager.cs" />
     <Compile Include="ViewModels\MultiThreadManagers\ClassManager.cs" />
     <Compile Include="ViewModels\MultiThreadManagers\ArcherBarManager.cs" />
     <Compile Include="ViewModels\BossGageWindowViewModel.cs" />
@@ -403,6 +436,10 @@
     <Compile Include="ViewModels\MultiThreadManagers\CharacterWindowManager.cs" />
     <Compile Include="ViewModels\MultiThreadManagers\CooldownBarWindowManager.cs" />
     <Compile Include="ViewModels\MultiThreadManagers\GroupWindowManager.cs" />
+    <Compile Include="ViewModels\MultiThreadManagers\MysticBarManager.cs" />
+    <Compile Include="ViewModels\MultiThreadManagers\PriestBarManager.cs" />
+    <Compile Include="ViewModels\NinjaBarManager.cs" />
+    <Compile Include="ViewModels\ReaperBarManager.cs" />
     <Compile Include="ViewModels\SettingsWindowViewModel.cs" />
     <Compile Include="UpdateManager.cs" />
     <Compile Include="Utils.cs" />
@@ -413,6 +450,8 @@
     <Compile Include="Converters\StaminaBarColorConverter.cs" />
     <Compile Include="Converters\StaminaBarVisibilityConverter.cs" />
     <Compile Include="ViewModels\CooldownWindowViewModel.cs" />
+    <Compile Include="ViewModels\SlayerBarManager.cs" />
+    <Compile Include="ViewModels\SorcererBarManager.cs" />
     <Compile Include="Windows\AbnormalitiesWindow.xaml.cs">
       <DependentUpon>AbnormalitiesWindow.xaml</DependentUpon>
     </Compile>
@@ -456,6 +495,9 @@
     <Compile Include="Windows\GroupWindow.xaml.cs">
       <DependentUpon>GroupWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\MysticBar.xaml.cs">
+      <DependentUpon>MysticBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
@@ -491,6 +533,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\ArcControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BerserkerBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BrawlerBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\ClassBars\ArcherBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -519,6 +573,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\ClassBars\MysticAurasIndicator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\ClassBars\RagnarokBuffControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -543,6 +601,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\GunnerBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\HarrowholdBossesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -559,11 +621,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\NinjaBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\PartyMember.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\PriestBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\RaidMember.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ReaperBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SlayerBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SorcererBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -621,6 +703,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Windows\GroupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\MysticBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
