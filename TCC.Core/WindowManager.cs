@@ -119,6 +119,7 @@ namespace TCC
             charWindowThread.Name = "Character window thread";
             charWindowThread.SetApartmentState(ApartmentState.STA);
             charWindowThread.Start();
+            Thread.Sleep(200);
 
             var cooldownWindowThread = new Thread(new ThreadStart(() =>
             {
@@ -132,6 +133,7 @@ namespace TCC
             cooldownWindowThread.Name = "Cooldown bar thread";
             cooldownWindowThread.SetApartmentState(ApartmentState.STA);
             cooldownWindowThread.Start();
+            Thread.Sleep(200);
 
             var bossGaugeThread = new Thread(new ThreadStart(() =>
             {
@@ -144,6 +146,7 @@ namespace TCC
             bossGaugeThread.Name = "Boss gauge thread";
             bossGaugeThread.SetApartmentState(ApartmentState.STA);
             bossGaugeThread.Start();
+            Thread.Sleep(200);
 
             var buffBarThread = new Thread(new ThreadStart(() =>
             {
@@ -156,6 +159,7 @@ namespace TCC
             buffBarThread.Name = "Buff bar thread";
             buffBarThread.SetApartmentState(ApartmentState.STA);
             buffBarThread.Start();
+            Thread.Sleep(200);
 
             var groupWindowThread = new Thread(new ThreadStart(() =>
             {
@@ -170,6 +174,7 @@ namespace TCC
             groupWindowThread.Name = "Group window thread";
             groupWindowThread.SetApartmentState(ApartmentState.STA);
             groupWindowThread.Start();
+            Thread.Sleep(200);
 
             var t = new Thread(new ThreadStart(() =>
             {
