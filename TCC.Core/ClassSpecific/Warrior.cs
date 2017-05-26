@@ -15,21 +15,39 @@ namespace TCC
         static readonly uint[] AstanceIDs = { 100100, 100101, 100102, 100103 };
         static readonly uint[] DstanceIDs = { 100200, 100201, 100202, 100203 };
 
-        public static void CheckBuff(S_ABNORMALITY_BEGIN sAbnormalityBegin)
+        public static void CheckBuff(S_ABNORMALITY_BEGIN p)
         {
-            if (GambleIDs.Contains(sAbnormalityBegin.Id) && sAbnormalityBegin.CasterId == SessionManager.CurrentPlayer.EntityId)
+            if (GambleIDs.Contains(p.Id) && p.TargetId == SessionManager.CurrentPlayer.EntityId)
             {
-                ((WarriorBarManager)ClassManager.CurrentClassManager).DeadlyGamble.Buff.Start(sAbnormalityBegin.Duration);
+                ((WarriorBarManager)ClassManager.CurrentClassManager).DeadlyGamble.Buff.Start(p.Duration);
                 return;
             }
-            if (AstanceIDs.Contains(sAbnormalityBegin.Id) && sAbnormalityBegin.CasterId == SessionManager.CurrentPlayer.EntityId)
+            if (AstanceIDs.Contains(p.Id) && p.TargetId == SessionManager.CurrentPlayer.EntityId)
             {
                 ((WarriorBarManager)ClassManager.CurrentClassManager).Stance.CurrentStance = WarriorStance.Assault;
                 return;
             }
-            if (DstanceIDs.Contains(sAbnormalityBegin.Id) && sAbnormalityBegin.CasterId == SessionManager.CurrentPlayer.EntityId)
+            if (DstanceIDs.Contains(p.Id) && p.TargetId == SessionManager.CurrentPlayer.EntityId)
             {
                 ((WarriorBarManager)ClassManager.CurrentClassManager).Stance.CurrentStance=WarriorStance.Defensive;
+                return;
+            }
+        }
+        public static void CheckBuff(S_ABNORMALITY_REFRESH p)
+        {
+            if (GambleIDs.Contains(p.AbnormalityId) && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            {
+                ((WarriorBarManager)ClassManager.CurrentClassManager).DeadlyGamble.Buff.Refresh(p.Duration);
+                return;
+            }
+            if (AstanceIDs.Contains(p.AbnormalityId) && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            {
+                ((WarriorBarManager)ClassManager.CurrentClassManager).Stance.CurrentStance = WarriorStance.Assault;
+                return;
+            }
+            if (DstanceIDs.Contains(p.AbnormalityId) && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            {
+                ((WarriorBarManager)ClassManager.CurrentClassManager).Stance.CurrentStance = WarriorStance.Defensive;
                 return;
             }
         }
