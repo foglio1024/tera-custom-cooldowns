@@ -317,6 +317,7 @@ namespace TCC.Parsing
             {
                 case Class.Elementalist:
                     Mystic.CheckHurricane(p);
+                    Mystic.CheckAura(p);
                     break;
                 case Class.Warrior:
                     Warrior.CheckBuff(p);
@@ -334,6 +335,9 @@ namespace TCC.Parsing
                     Lancer.CheckGshout(p);
                     Lancer.CheckLineHeld(p);
                     break;
+                case Class.Priest:
+                    Priest.CheckBuff(p);
+                    break;
             }
         }
         public static void HandleAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
@@ -341,12 +345,21 @@ namespace TCC.Parsing
             AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.Duration, p.Stacks);
             switch (SessionManager.CurrentPlayer.Class)
             {
+                case Class.Warrior:
+                    Warrior.CheckBuff(p);
+                    break;
                 case Class.Archer:
                     Archer.CheckFocus(p);
                     Archer.CheckSniperEye(p);
                     break;
                 case Class.Lancer:
                     Lancer.CheckLineHeld(p);
+                    break;
+                case Class.Priest:
+                    Priest.CheckBuff(p);
+                    break;
+                case Class.Elementalist:
+                    Mystic.CheckAura(p);
                     break;
             }
         }
@@ -364,6 +377,9 @@ namespace TCC.Parsing
                     break;
                 case Class.Lancer:
                     Lancer.CheckLineHeldEnd(p);
+                    break;
+                case Class.Elementalist:
+                    Mystic.CheckAuraEnd(p);
                     break;
             }
         }
