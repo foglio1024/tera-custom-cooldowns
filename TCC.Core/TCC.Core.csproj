@@ -116,9 +116,6 @@
     <Compile Include="ClassSpecific\Lancer.cs" />
     <Compile Include="ClassSpecific\Priest.cs" />
     <Compile Include="ClassSpecific\Valkyrie.cs" />
-    <Compile Include="Controls\ArcControl.xaml.cs">
-      <DependentUpon>ArcControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\BerserkerBar.xaml.cs">
       <DependentUpon>BerserkerBar.xaml</DependentUpon>
     </Compile>
@@ -530,10 +527,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\AbnormalityTooltip.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\ArcControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
