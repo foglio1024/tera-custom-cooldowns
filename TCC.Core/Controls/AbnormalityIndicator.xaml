@@ -46,9 +46,6 @@
                     <ImageBrush ImageSource="{Binding Abnormality.IconName, Converter={StaticResource iconConv}}"/>
                 </Ellipse.Fill>
             </Ellipse>
-            <Grid.CacheMode>
-                <BitmapCache RenderAtScale="1" />
-            </Grid.CacheMode>
         </Grid>
         <controls:Arc x:Name="arc" Stroke="#8000" StrokeThickness="15" EndAngle="1" Width="{Binding IconSize}" Height="{Binding IconSize}"/>
 
