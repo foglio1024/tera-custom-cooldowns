@@ -6,13 +6,8 @@
              xmlns:local="clr-namespace:TCC.Controls"
              mc:Ignorable="d" Loaded="UserControl_Loaded" >
     <Grid Margin="2,2" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <local:FixedSkillControl HorizontalAlignment="Center"
-                                 VerticalAlignment="Center" 
-                                 DataContext="{Binding Cooldown}">
-
-        </local:FixedSkillControl>
-        <local:Arc Width="49" 
-                   Height="49" 
+        <local:Arc Width="51" 
+                   Height="51" 
                    StrokeThickness="5" 
                    Stroke="#ffbd3d" 
                    HorizontalAlignment="Center"
@@ -20,6 +15,12 @@
                    EndAngle="0"
                    x:Name="externalArc">
         </local:Arc>
+
+        <local:FixedSkillControl HorizontalAlignment="Center"
+                                 VerticalAlignment="Center" 
+                                 DataContext="{Binding Cooldown}" />
+
+
 
         <Border Style="{StaticResource border}" 
                 Opacity="{Binding Buff.Seconds}"
