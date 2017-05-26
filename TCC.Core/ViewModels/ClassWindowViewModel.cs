@@ -66,12 +66,40 @@ namespace TCC.ViewModels
                     case Class.Lancer:
                         CurrentManager = LancerBarManager.Instance;
                         break;
+                    case Class.Priest:
+                        CurrentManager = PriestBarManager.Instance;
+                        break;
+                    case Class.Elementalist:
+                        CurrentManager = MysticBarManager.Instance;
+                        break;
+                    case Class.Slayer:
+                        CurrentManager = SlayerBarManager.Instance;
+                        break;
+                    case Class.Berserker:
+                        CurrentManager = BerserkerBarManager.Instance;
+                        break;
+                    case Class.Sorcerer:
+                        CurrentManager = SorcererBarManager.Instance;
+                        break;
+                    case Class.Soulless:
+                        CurrentManager = ReaperBarManager.Instance;
+                        break;
+                    case Class.Engineer:
+                        CurrentManager = GunnerBarManager.Instance;
+                        break;
+                    case Class.Fighter:
+                        CurrentManager = BrawlerBarManager.Instance;
+                        break;
+                    case Class.Assassin:
+                        CurrentManager = NinjaBarManager.Instance;
+                        break;
                     default:
                         CurrentManager = null;
                         break;
                 }
             }
         }
+
 
         private ClassManager currentManager;
         public ClassManager CurrentManager
@@ -102,6 +130,13 @@ namespace TCC.ViewModels
             CurrentManager.Dispatcher.Invoke(() =>
             {
                 CurrentManager.StartCooldown(skillCooldown);
+            });
+        }
+        public void ChangeSkillCooldown(Skill skill, uint cd)
+        {
+            CurrentManager.Dispatcher.Invoke(() =>
+            {
+                CurrentManager.ChangeSkillCooldown(skill, cd);
             });
         }
         public void ResetCooldown(SkillCooldown skillCooldown)
