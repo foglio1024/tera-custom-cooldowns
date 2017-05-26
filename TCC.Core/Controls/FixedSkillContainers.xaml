@@ -25,9 +25,10 @@
 
 
         <!--Main border-->
-        <Border Style="{StaticResource border}" Width="Auto" Grid.Row="1"  CornerRadius="25" x:Name="mainBorder" >
+        <Border Style="{StaticResource border}" Width="Auto" Grid.Row="1" Margin="-1" CornerRadius="25" x:Name="mainBorder" >
+        </Border>
             <!--Main skills grid-->
-            <Grid Grid.Row="0" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" UseLayoutRounding="True">
+            <Grid Grid.Row="1" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <ItemsControl Name="mainSkills" ItemTemplate="{StaticResource skill}" Width="Auto" Height="Auto" ItemsSource="{Binding MainSkills}" BorderThickness="0" BorderBrush="Red">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -36,7 +37,6 @@
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
             </Grid>
-        </Border>
         <!--Secondary + other skills grid-->
         <Grid Grid.Row="2" Grid.Column="1" Width="Auto" Height="{Binding ElementName=mainSkills, Path=ActualHeight}" HorizontalAlignment="Left" VerticalAlignment="Center" UseLayoutRounding="True" Opacity=".9">
             <Grid.ColumnDefinitions>

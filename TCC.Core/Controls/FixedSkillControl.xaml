@@ -15,31 +15,49 @@
     <Grid Width="55" Height="55" Margin="2" HorizontalAlignment="Left" Name="MainGrid">
         <Grid>
             <Ellipse Width="51" Height="{Binding ElementName=icon, Path=ActualWidth}" x:Name="icon" Stroke="#afff" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Ellipse.Fill>
-                <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource iconConv}}"/>
-            </Ellipse.Fill>
-        </Ellipse>
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource iconConv}}"/>
+                </Ellipse.Fill>
+            </Ellipse>
             <Grid.CacheMode>
                 <BitmapCache RenderAtScale="2"/>
             </Grid.CacheMode>
         </Grid>
         <local:Arc x:Name="arc" 
                    Opacity="1" 
-                   UseLayoutRounding="True" 
+                   UseLayoutRounding="False" 
                    Width="Auto" 
                    Height="Auto" 
-                   StrokeThickness="25" Margin="3" 
+                   StrokeThickness="25" Margin="2" 
                    Stroke="#9000" 
-                   EndAngle=".01" 
+                   EndAngle="0.01" 
                    HorizontalAlignment="Stretch" 
                    VerticalAlignment="Stretch" />
+        <Ellipse x:Name="growEllipse" UseLayoutRounding="False"
+                 Fill="#9000"
+                 Width="48"
+                 Height="48"
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Center"
+                 Visibility="Hidden"
+                 >
+            <Ellipse.LayoutTransform>
+                <ScaleTransform ScaleX="0" 
+                                ScaleY="0"/>
+            </Ellipse.LayoutTransform>
+        </Ellipse>
         <Ellipse Fill="White" Name="glow" Opacity="0"/>
 
-        <Grid Width="22" Height="22" x:Name="g" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0" Opacity="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=local:FixedSkillControl}, Converter={StaticResource boolToOpacity}}">
-            <Grid.CacheMode>
-                <BitmapCache RenderAtScale="2"/>
-            </Grid.CacheMode>
+
+        <Grid Width="22" 
+              Height="22" 
+              x:Name="g" 
+              HorizontalAlignment="Right" 
+              VerticalAlignment="Bottom"
+              Opacity="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=local:FixedSkillControl}, Converter={StaticResource boolToOpacity}}">
+
             <Ellipse x:Name="fill" Fill="#dfff"  Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stroke="#40000000"/>
+            
             <Viewbox StretchDirection="DownOnly" Stretch="Uniform" UseLayoutRounding="True">
                 <TextBlock Foreground="#d9000000" 
                    HorizontalAlignment="Center" 
@@ -54,10 +72,10 @@
                    Margin="3"
                    Text="{Binding Seconds, StringFormat=0}">
                 </TextBlock>
-                <Viewbox.CacheMode>
-                    <BitmapCache RenderAtScale="2" />
-                </Viewbox.CacheMode>
             </Viewbox>
+            <Grid.CacheMode>
+                <BitmapCache RenderAtScale="2"/>
+            </Grid.CacheMode>
 
         </Grid>
     </Grid>
