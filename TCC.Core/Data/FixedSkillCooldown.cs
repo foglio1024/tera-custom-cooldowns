@@ -6,21 +6,41 @@ namespace TCC.Data
     {
         CooldownType _type;
         DispatcherTimer _secondsTimer;
+        DispatcherTimer _offsetTimer;
         public Skill Skill { get; set; }
-        public uint Cooldown { get; set; }
+        uint cooldown;
+        public uint Cooldown
+        {
+            get => cooldown; set
+            {
+                if (cooldown == value) return;
+                cooldown = value;
+            }
+        }
         public uint OriginalCooldown { get; set; }
-        public bool IsAvailable { get; private set; }
-        uint _secondsCooldown = 0;
+        bool isAvailable = true;
+        public bool IsAvailable
+        {
+            get => isAvailable;
+            private set
+            {
+                if (isAvailable == value) return;
+                isAvailable = value;
+                NotifyPropertyChanged("IsAvailable");
+            }
+        }
+
+        uint seconds = 0;
         public uint Seconds
         {
             get
             {
-                return _secondsCooldown;
+                return seconds;
             }
             set
             {
-                if (_secondsCooldown == value) return;
-                _secondsCooldown = value;
+                if (seconds == value) return;
+                seconds = value;
                 NotifyPropertyChanged("Seconds");
             }
         }
@@ -31,21 +51,31 @@ namespace TCC.Data
             _secondsTimer = new DispatcherTimer();
             _secondsTimer.Interval = TimeSpan.FromSeconds(1);
             _secondsTimer.Tick += _secondsTimer_Tick;
+
+            _offsetTimer = new DispatcherTimer();
+            _offsetTimer.Tick += _offsetTimer_Tick;
+
             _type = t;
             Skill = sk;
         }
+
+        private void _offsetTimer_Tick(object sender, EventArgs e)
+        {
+            _offsetTimer.Stop();
+            _secondsTimer.Start();
+
+        }
+
         public FixedSkillCooldown(Dispatcher d)
         {
             _dispatcher = d;
         }
         private void _secondsTimer_Tick(object sender, EventArgs e)
         {
-            if (Seconds == 0)
+            if(Seconds == 1)
             {
                 _secondsTimer.Stop();
                 IsAvailable = true;
-                NotifyPropertyChanged("IsAvailable");
-                return;
             }
             Seconds--;
         }
@@ -55,18 +85,37 @@ namespace TCC.Data
             Cooldown = _type == CooldownType.Skill ? cd : cd * 1000;
             OriginalCooldown = Cooldown;
             Seconds = Cooldown / 1000;
-            _secondsTimer.Start();
+            var offset = Cooldown % 1000;
+            _offsetTimer.Interval = TimeSpan.FromMilliseconds(offset);
+            //Console.WriteLine("Offset = {0}", offset);
+            _offsetTimer.Start();
+            //Console.WriteLine("Offset timer started");
             IsAvailable = false;
             NotifyPropertyChanged("Start");
-            NotifyPropertyChanged("IsAvailable");
 
         }
         public void Refresh(uint cd)
         {
+            Console.WriteLine("Refresh {1} to: {0}", cd, Skill.Name);
             _secondsTimer.Stop();
+            if (cd == 0)
+            {
+                IsAvailable = true;
+                Cooldown = 0;
+                Seconds = 0;
+                NotifyPropertyChanged("Refresh");
+                return;
+            }
             Cooldown = cd;
             Seconds = Cooldown / 1000;
-            _secondsTimer.Start();
+            if(Seconds == 0)
+            {
+                _secondsTimer.Stop();
+                IsAvailable = true;
+                return;
+            }
+            _offsetTimer.Interval = TimeSpan.FromMilliseconds(Cooldown % 1000);
+            _offsetTimer.Start();
             NotifyPropertyChanged("Refresh");
         }
     }

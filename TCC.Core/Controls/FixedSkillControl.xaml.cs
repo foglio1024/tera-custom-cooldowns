@@ -64,8 +64,13 @@ namespace TCC.Controls
             {
                 if (_context.Cooldown == _context.OriginalCooldown) return;
                 double newVal = (double)_context.Cooldown / (double)_context.OriginalCooldown;
-                if (_context.Cooldown == 0) newVal = 0;
                 if (newVal > 1) newVal = 1;
+                if (_context.Cooldown == 0)
+                {
+                    IsRunning = false;
+                    AnimateAvailableSkill();
+                    return;
+                }
 
                 AnimateArcAngle(newVal);
             }
@@ -74,12 +79,21 @@ namespace TCC.Controls
                 IsRunning = true;
                 AnimateArcAngle();
             }
+            else if(e.PropertyName == "IsAvailable")
+            {
+                if (_context.IsAvailable)
+                {
+                    IsRunning = false;
+                    AnimateAvailableSkill();
+                }
+
+            }
         }
 
         void AnimateArcAngle(double val = 1)
         {
             var an = new DoubleAnimation(val * 359.9, 0, TimeSpan.FromMilliseconds(_context.Cooldown));
-            an.Completed += An_Completed;
+            //an.Completed += An_Completed;
             int fps = _context.Cooldown > 80000 ? 1 : 30;
             DoubleAnimation.SetDesiredFrameRate(an, fps);
             arc.BeginAnimation(Arc.EndAngleProperty, an);
@@ -106,6 +120,13 @@ namespace TCC.Controls
         private void An_Completed(object sender, EventArgs e)
         {
             IsRunning = false;
+            AnimateAvailableSkill();
+
+        }
+
+        private void AnimateAvailableSkill()
+        {
+            arc.BeginAnimation(Arc.EndAngleProperty, null);
             var an = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200)) { EasingFunction = new QuadraticEase() };
             glow.BeginAnimation(OpacityProperty, an);
         }
