@@ -28,14 +28,13 @@ namespace TCC.ViewModels
                 //create default file
                 XElement skills = new XElement("Skills",
                     new XElement("Skill", new XAttribute("id", 270400), new XAttribute("row", 1)),
-                    new XElement("Skill", new XAttribute("id", 300100), new XAttribute("row", 1)),
-                    new XElement("Skill", new XAttribute("id", 60700), new XAttribute("row", 1)),
                     new XElement("Skill", new XAttribute("id", 40900), new XAttribute("row", 1)),
+                    new XElement("Skill", new XAttribute("id", 60700), new XAttribute("row", 1)),
                     new XElement("Skill", new XAttribute("id", 111140), new XAttribute("row", 1)),
-                    new XElement("Skill", new XAttribute("id", 21000), new XAttribute("row", 1)),
+                    new XElement("Skill", new XAttribute("id", 300100), new XAttribute("row", 1)),
                     new XElement("Skill", new XAttribute("id", 120600), new XAttribute("row", 1)),
-                    new XElement("Skill", new XAttribute("id", 200500), new XAttribute("row", 1)),
-                    new XElement("Skill", new XAttribute("id", 240100), new XAttribute("row", 1))
+                    new XElement("Skill", new XAttribute("id", 310100), new XAttribute("row", 1)),
+                    new XElement("Skill", new XAttribute("id", 340200), new XAttribute("row", 1))
                     );
                 skills.Save("resources/config/" + filename);
             }
