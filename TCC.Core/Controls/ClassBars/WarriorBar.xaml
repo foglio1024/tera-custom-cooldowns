@@ -34,7 +34,7 @@
             <!--HP/MP-->
             <UniformGrid Columns="3" 
                          HorizontalAlignment="Stretch" 
-                         Margin="5,0,7,0"
+                         Margin="5,3,7,7"
                          Grid.RowSpan="1"
                          Grid.Column="1"
                          Grid.Row="1"
