@@ -28,36 +28,36 @@ namespace TCC
         }
         public static void AddSkillDirectly(Skill sk, uint cd)
         {
-            RouteSkill(new SkillCooldown(sk, cd, CooldownType.Skill, CooldownBarWindowManager.Instance.Dispatcher));
+            RouteSkill(new SkillCooldown(sk, cd, CooldownType.Skill, CooldownWindowManager.Instance.Dispatcher));
         }
 
         static void RouteSkill(SkillCooldown skillCooldown)
         {
             if (skillCooldown.Cooldown == 0)
             {
-                if (SettingsManager.ClassWindowOn && ClassWindowViewModel.ClassWindowExists())
-                {
-
-                    WindowManager.ClassWindow.Context.ResetCooldown(skillCooldown);
-                }
-                else
-                {
-                    CooldownBarWindowManager.Instance.RemoveSkill(skillCooldown.Skill);
-                }
+                //if (SettingsManager.ClassWindowOn && ClassWindowViewModel.ClassWindowExists())
+                //{
+                //    ClassManager.CurrentClassManager.FixedCd_RemoveSkill(skillCooldown);
+                //    //WindowManager.ClassWindow.Context.ResetCooldown(skillCooldown);
+                //}
+                //else
+                //{
+                //    CooldownWindowManager.Instance.NormalCd_RemoveSkill(skillCooldown.Skill);
+                //}
+                CooldownWindowManager.Instance.RemoveSkill(skillCooldown.Skill);
             }
             else
             {
-                if (SettingsManager.ClassWindowOn && ClassWindowViewModel.ClassWindowExists())
-                {
-
-                    WindowManager.ClassWindow.Context.StartCooldown(skillCooldown);
-
-
-                }
-                else
-                {
-                    CooldownBarWindowManager.Instance.AddOrRefreshSkill(skillCooldown);
-                }
+                //if (SettingsManager.ClassWindowOn && ClassWindowViewModel.ClassWindowExists())
+                //{
+                //    ClassManager.CurrentClassManager.StartCooldown(skillCooldown);
+                //    //WindowManager.ClassWindow.Context.StartCooldown(skillCooldown);
+                //}
+                //else
+                //{
+                //    CooldownWindowManager.Instance.NormalCd_AddOrRefreshSkill(skillCooldown);
+                //}
+                CooldownWindowManager.Instance.AddOrRefreshSkill(skillCooldown);
             }
         }
 
@@ -71,14 +71,14 @@ namespace TCC
                 {
                     return;
                 }
-                RouteSkill(new SkillCooldown(skill, cd, CooldownType.Skill, CooldownBarWindowManager.Instance.Dispatcher));
+                RouteSkill(new SkillCooldown(skill, cd, CooldownType.Skill, CooldownWindowManager.Instance.Dispatcher));
             }
         }
         public static void AddBrooch(uint id, uint cd)
         {
             if (BroochesDatabase.TryGetBrooch(id, out Skill brooch))
             {
-                RouteSkill(new SkillCooldown(brooch, cd, CooldownType.Item, CooldownBarWindowManager.Instance.Dispatcher));
+                RouteSkill(new SkillCooldown(brooch, cd, CooldownType.Item, CooldownWindowManager.Instance.Dispatcher));
             }
 
         }
@@ -87,24 +87,24 @@ namespace TCC
         {
             if (SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out Skill skill))
             {
-                if (SettingsManager.ClassWindowOn && ClassWindowViewModel.ClassWindowExists())
-                {
+                //if (SettingsManager.ClassWindowOn && ClassWindowViewModel.ClassWindowExists())
+                //{
 
-                    WindowManager.ClassWindow.Context.ChangeSkillCooldown(skill, cd);
-                }
-                else
-                {
-                    CooldownBarWindowManager.Instance.AddOrRefreshSkill(new SkillCooldown(skill, cd, CooldownType.Skill, CooldownBarWindowManager.Instance.Dispatcher));
-                }
-
+                //    WindowManager.ClassWindow.Context.ChangeSkillCooldown(skill, cd);
+                //}
+                //else
+                //{
+                //    CooldownWindowManager.Instance.NormalCd_AddOrRefreshSkill(new SkillCooldown(skill, cd, CooldownType.Skill, CooldownWindowManager.Instance.Dispatcher));
+                //}
+                CooldownWindowManager.Instance.RefreshSkill(skill, cd);
             }
 
         }
 
         public static void Clear()
         {
-            CooldownBarWindowManager.Instance.ShortSkills.Clear();
-            CooldownBarWindowManager.Instance.LongSkills.Clear();
+            CooldownWindowManager.Instance.ShortSkills.Clear();
+            CooldownWindowManager.Instance.LongSkills.Clear();
 
             SessionManager.CurrentPlayer.Class = Class.None;
             SessionManager.CurrentPlayer.EntityId = 0;
