@@ -60,43 +60,50 @@ namespace TCC.Controls
 
         void _context_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Refresh")
+            Dispatcher.InvokeIfRequired(() =>
             {
-                if (_context.Cooldown == _context.OriginalCooldown) return;
-                double newVal = (double)_context.Cooldown / (double)_context.OriginalCooldown;
-                if (newVal > 1) newVal = 1;
-                if (_context.Cooldown == 0)
+                if (e.PropertyName == "Refresh")
                 {
-                    IsRunning = false;
-                    AnimateAvailableSkill();
-                    return;
-                }
+                    if (_context.Cooldown == _context.OriginalCooldown) return;
+                    double newVal = (double)_context.Cooldown / (double)_context.OriginalCooldown;
+                    if (newVal > 1) newVal = 1;
+                    if (_context.Cooldown == 0)
+                    {
+                        IsRunning = false;
+                        AnimateAvailableSkill();
+                        return;
+                    }
 
-                AnimateArcAngle(newVal);
-            }
-            else if (e.PropertyName == "Start")
-            {
-                IsRunning = true;
-                AnimateArcAngle();
-            }
-            else if(e.PropertyName == "IsAvailable")
-            {
-                if (_context.IsAvailable)
+                    AnimateArcAngle(newVal);
+                }
+                else if (e.PropertyName == "Start")
                 {
-                    IsRunning = false;
-                    AnimateAvailableSkill();
+                    IsRunning = true;
+                    AnimateArcAngle();
                 }
+                else if (e.PropertyName == "IsAvailable")
+                {
+                    if (_context.IsAvailable)
+                    {
+                        IsRunning = false;
+                        AnimateAvailableSkill();
+                    }
 
-            }
+                }
+            },
+            DispatcherPriority.DataBind);
+
         }
 
         void AnimateArcAngle(double val = 1)
         {
+
             var an = new DoubleAnimation(val * 359.9, 0, TimeSpan.FromMilliseconds(_context.Cooldown));
             //an.Completed += An_Completed;
             int fps = _context.Cooldown > 80000 ? 1 : 30;
             DoubleAnimation.SetDesiredFrameRate(an, fps);
             arc.BeginAnimation(Arc.EndAngleProperty, an);
+
         }
         void AnimateArcThickness(double val = 1)
         {
