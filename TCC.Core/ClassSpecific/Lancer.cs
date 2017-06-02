@@ -28,6 +28,20 @@ namespace TCC
                 ((LancerBarManager)ClassManager.CurrentClassManager).GuardianShout.Buff.Start(p.Duration);
             }
         }
+        public static void CheckArushEnd(S_ABNORMALITY_END p)
+        {
+            if (aRushIDs.Contains(p.Id) && p.Target == SessionManager.CurrentPlayer.EntityId)
+            {
+                ((LancerBarManager)ClassManager.CurrentClassManager).AdrenalineRush.Buff.Refresh(0);
+            }
+        }
+        public static void CheckGshoutEnd(S_ABNORMALITY_END p)
+        {
+            if (gShoutIDs.Contains(p.Id) && p.Target == SessionManager.CurrentPlayer.EntityId)
+            {
+                ((LancerBarManager)ClassManager.CurrentClassManager).GuardianShout.Buff.Start(0);
+            }
+        }
         public static void CheckLineHeld(S_ABNORMALITY_BEGIN p)
         {
             if(p.Id == lineHeldID && p.TargetId == SessionManager.CurrentPlayer.EntityId)
