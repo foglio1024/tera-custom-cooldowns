@@ -14,25 +14,26 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-        <Border Background="#40555555" 
-                CornerRadius="10" 
-                Height="20" 
-                Margin="1,0,0,0"
+        <Border Background="#c0252525" 
+                CornerRadius="13" 
+                Height="26" 
+                Margin="0,0,0,0"
                 Grid.ColumnSpan="2" 
                 HorizontalAlignment="Stretch">
         </Border>
-            <local:Arc Stroke="{Binding Color, RelativeSource={RelativeSource AncestorType=local:StatControl}}"
+        <local:Arc Stroke="{Binding Color, RelativeSource={RelativeSource AncestorType=local:StatControl}}"
                        StrokeThickness="4" 
-                       Width="20"
-                       Height="20"
+                       Width="22"
+                       Height="22"
                        Margin="2"
                        VerticalAlignment="Center"
                        EndAngle="{Binding Angle, RelativeSource={RelativeSource AncestorType=local:StatControl}}">
             <local:Arc.LayoutTransform>
                 <ScaleTransform ScaleX="-1"/>
             </local:Arc.LayoutTransform>
-            </local:Arc>
-            <Ellipse Width="12" Height="12" Fill="#5000"></Ellipse>
+        </local:Arc>
+
+        <Ellipse Width="14" Height="14" Fill="#5000"></Ellipse>
             <TextBlock Style="{StaticResource text1}" 
                        Text="{Binding Val, StringFormat={}{0:N0}}" 
                        Grid.Row="0" 
