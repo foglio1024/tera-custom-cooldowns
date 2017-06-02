@@ -51,6 +51,5 @@
             </UniformGrid>
         </Grid>
 
-        <local:FixedSkillContainers Grid.Row="2" HorizontalAlignment="Center" Grid.Column="1" Grid.RowSpan="2" />
     </Grid>
 </UserControl>

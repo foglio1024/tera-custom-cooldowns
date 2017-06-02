@@ -12,7 +12,7 @@
         </Grid.RowDefinitions>
 
         <!--HP/MP-->
-        <Grid HorizontalAlignment="Center" Margin="0,0,0,6">
+        <Grid HorizontalAlignment="Center" Margin="0,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -49,7 +49,5 @@
                 <!--<local:StatControl DataContext="{Binding ST}" Color="Orange" Width="85" Margin="0,0,0,0"/>-->
             </UniformGrid>
         </Grid>
-
-        <local:FixedSkillContainers Grid.Row="2" HorizontalAlignment="Center" Grid.Column="1" Grid.RowSpan="2" />
     </Grid>
 </UserControl>

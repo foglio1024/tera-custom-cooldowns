@@ -5,14 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
              mc:Ignorable="d" >
-    <Grid Width="Auto" Margin="20" Name="root">
+    <Grid Width="Auto" Margin="10" Name="root">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!--HP/MP-->
-        <Grid HorizontalAlignment="Center" Margin="0,0,0,6">
+        <Grid HorizontalAlignment="Center" Margin="0,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -43,7 +43,5 @@
                 <local:StatControl DataContext="{Binding MP}" Color="{StaticResource mpColor}" Width="85" Margin="0,0,0,0"/>
             </UniformGrid>
         </Grid>
-
-        <local:FixedSkillContainers Grid.Row="2" HorizontalAlignment="Center" Grid.Column="1" Grid.RowSpan="2" />
     </Grid>
 </UserControl>
