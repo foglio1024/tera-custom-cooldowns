@@ -13,7 +13,7 @@
         </Grid.RowDefinitions>
 
         <!--HP/MP-->
-        <Grid HorizontalAlignment="Center" Margin="0,0,0,6">
+        <Grid HorizontalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -35,13 +35,13 @@
             <UniformGrid Columns="1" 
                          HorizontalAlignment="Stretch" 
                          VerticalAlignment="Center"
-                         Margin="5,0"
+                         Margin="5,3"
                          Grid.RowSpan="2"
                          Grid.Column="2"
                          Grid.Row="0"
                          >
-                <local:StatControl DataContext="{Binding HP}" Color="{StaticResource hpColor}" Width="85" Margin="0,0,0,0"/>
-                <local:StatControl DataContext="{Binding MP}" Color="{StaticResource mpColor}" Width="85" Margin="0,0,0,0"/>
+                <local:StatControl DataContext="{Binding HP}" Color="{StaticResource hpColor}" Width="85" Margin="0,3,0,3"/>
+                <local:StatControl DataContext="{Binding MP}" Color="{StaticResource mpColor}" Width="85" Margin="0,3,0,3"/>
             </UniformGrid>
 
             <local:ArcherStanceIndicator Grid.RowSpan="2"
@@ -51,10 +51,8 @@
 
             <local:ArcherFocusControl x:Name="focusControl" 
                                       Grid.Column="1" 
-                                      Margin="5,3" 
+                                      Margin="5,-5,0,5" 
                                       DataContext="{Binding Focus}"/>
         </Grid>
-        
-        <local:FixedSkillContainers Grid.Row="2" HorizontalAlignment="Center" Grid.Column="1" Grid.RowSpan="2" />
     </Grid>
 </UserControl>
