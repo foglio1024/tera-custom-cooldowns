@@ -62,6 +62,7 @@ namespace TCC.Data
         private void _offsetTimer_Tick(object sender, EventArgs e)
         {
             _offsetTimer.Stop();
+            Seconds--;
             _secondsTimer.Start();
 
         }
@@ -84,7 +85,7 @@ namespace TCC.Data
         {
             Cooldown = _type == CooldownType.Skill ? cd : cd * 1000;
             OriginalCooldown = Cooldown;
-            Seconds = Cooldown / 1000;
+            Seconds = 1+(Cooldown / 1000);
             var offset = Cooldown % 1000;
             _offsetTimer.Interval = TimeSpan.FromMilliseconds(offset);
             //Console.WriteLine("Offset = {0}", offset);
