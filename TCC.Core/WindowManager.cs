@@ -93,6 +93,18 @@ namespace TCC
             }
         }
 
+        private static bool isTccDim;
+        public static bool IsTccDim
+        {
+            get => isTccDim;
+            set
+            {
+                if (isTccDim == value) return;
+                isTccDim = value;
+                TccDimChanged?.Invoke(null, new PropertyChangedEventArgs("IsTccDim"));
+            }
+        }
+
         public static void NotifyVisibilityChanged()
         {
             TccVisibilityChanged?.Invoke(null, new PropertyChangedEventArgs("IsTeraOnTop"));
@@ -100,6 +112,7 @@ namespace TCC
 
         public static event PropertyChangedEventHandler ClickThruChanged;
         public static event PropertyChangedEventHandler TccVisibilityChanged;
+        public static event PropertyChangedEventHandler TccDimChanged;
 
         public static Visibility StaminaGaugeVisibility;
         public static double StaminaGaugeTop;
