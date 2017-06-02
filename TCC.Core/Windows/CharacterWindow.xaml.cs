@@ -47,8 +47,8 @@ namespace TCC.Windows
         {
             DragMove();
 
-            SettingsManager.CharacterWindowSettings.X = this.Left;
-            SettingsManager.CharacterWindowSettings.Y = this.Top;
+            SettingsManager.CharacterWindowSettings.X = Left - Left % Left;
+            SettingsManager.CharacterWindowSettings.Y = Top - Top%Top;
             SettingsManager.SaveSettings();
         }
 

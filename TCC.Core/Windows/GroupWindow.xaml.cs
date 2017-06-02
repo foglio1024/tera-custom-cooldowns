@@ -83,8 +83,8 @@ namespace TCC.Windows
         {
             DragMove();
             //add settings
-            SettingsManager.GroupWindowSettings.X = Left;
-            SettingsManager.GroupWindowSettings.Y = Top;
+            SettingsManager.GroupWindowSettings.X = Left - Left % Left;
+            SettingsManager.GroupWindowSettings.Y = Top - Top%Top;
             SettingsManager.SaveSettings();
 
         }
