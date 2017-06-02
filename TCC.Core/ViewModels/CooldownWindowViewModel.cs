@@ -26,6 +26,8 @@ namespace TCC.ViewModels
             }
         }
 
+        public CooldownWindowManager Manager => CooldownWindowManager.Instance;
+
         public CooldownWindowViewModel()
         {
             WindowManager.TccVisibilityChanged += (s, ev) =>
