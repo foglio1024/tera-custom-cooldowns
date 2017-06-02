@@ -224,6 +224,7 @@
     <Compile Include="Parsing\Messages\S_WEAK_POINT.cs" />
     <Compile Include="Parsing\ThreadSafeManager.cs" />
     <Compile Include="SettingsManager.cs" />
+    <Compile Include="SkillUtils.cs" />
     <Compile Include="Sniffing\ConnectionId.cs" />
     <Compile Include="Sniffing\EndpointIpv4.cs" />
     <Compile Include="Sniffing\IpSniffer.cs" />
@@ -495,6 +496,9 @@
     <Compile Include="Windows\MysticBar.xaml.cs">
       <DependentUpon>MysticBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\NormalSkillContainer.xaml.cs">
+      <DependentUpon>NormalSkillContainer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
@@ -700,6 +704,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\MysticBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\NormalSkillContainer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
