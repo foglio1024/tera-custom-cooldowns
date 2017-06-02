@@ -159,11 +159,15 @@ namespace TCC.Parsing
         }
         public static void HandleLogin(S_LOGIN p)
         {
-            WindowManager.ClassWindow.Dispatcher.Invoke(() =>
-            {
-                WindowManager.ClassWindow.Context.ClearSkills();
-                WindowManager.ClassWindow.Context.CurrentClass = p.CharacterClass;
-            });
+            //WindowManager.ClassWindow.Dispatcher.Invoke(() =>
+            //{
+            //    WindowManager.ClassWindow.Context.ClearSkills();
+            //    WindowManager.ClassWindow.Context.CurrentClass = p.CharacterClass;
+            //});
+            CooldownWindowManager.Instance.ClearSkills();
+            CooldownWindowManager.Instance.LoadSkills(Utils.ClassEnumToString(p.CharacterClass).ToLower() + "-skills.xml", p.CharacterClass);
+            WindowManager.ClassWindow.Context.CurrentClass = p.CharacterClass;
+
 
             InitDB(p.ServerId);
             EntitiesManager.ClearNPC();
@@ -194,19 +198,19 @@ namespace TCC.Parsing
              *  hide standard cooldown window if current class 
              *  is supported and class window is enabled
              */
-            if (ClassWindowViewModel.ClassWindowExists() && SettingsManager.ClassWindowOn)
-            {
-                WindowManager.ClassWindow.SetVisibility(System.Windows.Visibility.Visible);
-                WindowManager.CooldownWindow.SetVisibility(System.Windows.Visibility.Hidden);
-            }
-            else
-            {
-                WindowManager.ClassWindow.SetVisibility(System.Windows.Visibility.Hidden);
-                if (SettingsManager.CooldownWindowSettings.Visibility == System.Windows.Visibility.Visible)
-                {
-                    WindowManager.CooldownWindow.SetVisibility(System.Windows.Visibility.Visible);
-                }
-            }
+            //if (ClassWindowViewModel.ClassWindowExists() && SettingsManager.ClassWindowOn)
+            //{
+            //    WindowManager.ClassWindow.SetVisibility(System.Windows.Visibility.Visible);
+            //    WindowManager.CooldownWindow.SetVisibility(System.Windows.Visibility.Hidden);
+            //}
+            //else
+            //{
+            //    WindowManager.ClassWindow.SetVisibility(System.Windows.Visibility.Hidden);
+            //    if (SettingsManager.CooldownWindowSettings.Visibility == System.Windows.Visibility.Visible)
+            //    {
+            //        WindowManager.CooldownWindow.SetVisibility(System.Windows.Visibility.Visible);
+            //    }
+            //}
         }
         public static void HandleReturnToLobby(S_RETURN_TO_LOBBY p)
         {
