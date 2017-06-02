@@ -377,6 +377,8 @@ namespace TCC.Parsing
                     break;
                 case Class.Lancer:
                     Lancer.CheckLineHeldEnd(p);
+                    Lancer.CheckArushEnd(p);
+                    Lancer.CheckGshoutEnd(p);
                     break;
                 case Class.Elementalist:
                     Mystic.CheckAuraEnd(p);
