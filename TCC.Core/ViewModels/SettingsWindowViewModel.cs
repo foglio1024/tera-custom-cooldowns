@@ -219,7 +219,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.CooldownWindowSettings.ClickThru == value) return;
                 SettingsManager.CooldownWindowSettings.ClickThru = value;
-                WindowManager.CooldownWindow.SetClickThru(SettingsManager.CooldownWindowSettings.ClickThru);
+                WindowManager.CooldownWindow.SetClickThru(value);
                 RaisePropertyChanged("IsCooldownWindowTransparent");
             }
         }
@@ -230,7 +230,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.CharacterWindowSettings.ClickThru == value) return;
                 SettingsManager.CharacterWindowSettings.ClickThru = value;
-                WindowManager.CharacterWindow.SetClickThru(SettingsManager.CharacterWindowSettings.ClickThru);
+                WindowManager.CharacterWindow.SetClickThru(value);
                 RaisePropertyChanged("IsCharacterWindowTransparent");
             }
         }
@@ -241,7 +241,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.BuffBarWindowSettings.ClickThru == value) return;
                 SettingsManager.BuffBarWindowSettings.ClickThru = value;
-                WindowManager.BuffBar.SetClickThru(SettingsManager.BuffBarWindowSettings.ClickThru);
+                WindowManager.BuffBar.SetClickThru(value);
                 RaisePropertyChanged("IsBuffWindowTransparent");
             }
         }
@@ -252,7 +252,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.BossGaugeWindowSettings.ClickThru == value) return;
                 SettingsManager.BossGaugeWindowSettings.ClickThru = value;
-                WindowManager.BossGauge.SetClickThru(SettingsManager.BossGaugeWindowSettings.ClickThru);
+                WindowManager.BossGauge.SetClickThru(value);
                 RaisePropertyChanged("IsBossWindowTransparent");
             }
         }
@@ -263,7 +263,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.GroupWindowSettings.ClickThru == value) return;
                 SettingsManager.GroupWindowSettings.ClickThru = value;
-                WindowManager.GroupWindow.SetClickThru(SettingsManager.GroupWindowSettings.ClickThru);
+                WindowManager.GroupWindow.SetClickThru(value);
                 RaisePropertyChanged("IsGroupWindowTransparent");
             }
         }
@@ -274,7 +274,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.ClassWindowSettings.ClickThru == value) return;
                 SettingsManager.ClassWindowSettings.ClickThru = value;
-                WindowManager.ClassWindow.SetClickThru(SettingsManager.ClassWindowSettings.ClickThru);
+                WindowManager.ClassWindow.SetClickThru(value);
                 RaisePropertyChanged("IsClassWindowTransparent");
             }
         }
