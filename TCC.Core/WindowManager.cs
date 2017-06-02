@@ -125,8 +125,8 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 CooldownWindow = new CooldownWindow();
-                CooldownBarWindowManager.Instance.ShortSkills = new SynchronizedObservableCollection<SkillCooldown>(CooldownWindow.Dispatcher);
-                CooldownBarWindowManager.Instance.LongSkills = new SynchronizedObservableCollection<SkillCooldown>(CooldownWindow.Dispatcher);
+                //CooldownWindowManager.Instance.ShortSkills = new SynchronizedObservableCollection<SkillCooldown>(CooldownWindow.Dispatcher);
+                //CooldownWindowManager.Instance.LongSkills = new SynchronizedObservableCollection<SkillCooldown>(CooldownWindow.Dispatcher);
                 CooldownWindow.Show();
                 Dispatcher.Run();
             }));
@@ -189,7 +189,9 @@ namespace TCC
             };
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
+
             Thread.Sleep(500);
+
             ContextMenu = new ContextMenu();
             DefaultIcon = new Icon(Application.GetResourceStream(new Uri("resources/tcc-logo.ico", UriKind.Relative)).Stream);
             ConnectedIcon = new Icon(Application.GetResourceStream(new Uri("resources/tcc-logo-on.ico", UriKind.Relative)).Stream);
