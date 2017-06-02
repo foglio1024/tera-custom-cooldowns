@@ -434,16 +434,17 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.ClassWindowOn == value) return;
                 SettingsManager.ClassWindowOn = value;
-                if(value == true)
-                {
-                    IsCooldownWindowVisible = false;
-                    IsClassWindowVisible = true;
-                }
-                else
-                {
-                    IsCooldownWindowVisible = true;
-                    IsClassWindowVisible = false;
-                }
+                WindowManager.CooldownWindow.SwitchMode();
+                //if(value == true)
+                //{
+                //    IsCooldownWindowVisible = false;
+                //    IsClassWindowVisible = true;
+                //}
+                //else
+                //{
+                //    IsCooldownWindowVisible = true;
+                //    IsClassWindowVisible = false;
+                //}
                 RaisePropertyChanged("ClassWindowOn");
             }
         }
