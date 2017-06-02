@@ -29,7 +29,7 @@
                    Width="Auto" 
                    Height="Auto" 
                    StrokeThickness="25" Margin="2" 
-                   Stroke="#9000" 
+                   Stroke="#a000" 
                    EndAngle="0.01" 
                    HorizontalAlignment="Stretch" 
                    VerticalAlignment="Stretch" />
