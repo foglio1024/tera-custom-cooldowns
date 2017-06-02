@@ -89,8 +89,8 @@ namespace TCC
             SessionManager.LoadingScreen = false;
             WindowManager.ClassWindow.Dispatcher.Invoke(() =>
             {
-                ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).ClearSkills();
-                ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).CurrentClass = Class.Warrior;
+                //((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).ClearSkills();
+                //((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).CurrentClass = Class.Warrior;
             });
 
 
