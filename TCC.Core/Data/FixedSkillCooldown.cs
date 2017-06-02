@@ -48,11 +48,11 @@ namespace TCC.Data
         {
             _dispatcher = d;
             Seconds = 0;
-            _secondsTimer = new DispatcherTimer();
+            _secondsTimer = new DispatcherTimer(DispatcherPriority.Background, _dispatcher);
             _secondsTimer.Interval = TimeSpan.FromSeconds(1);
             _secondsTimer.Tick += _secondsTimer_Tick;
 
-            _offsetTimer = new DispatcherTimer();
+            _offsetTimer = new DispatcherTimer(DispatcherPriority.Background, _dispatcher);
             _offsetTimer.Tick += _offsetTimer_Tick;
 
             _type = t;
