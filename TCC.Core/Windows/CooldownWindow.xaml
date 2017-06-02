@@ -25,9 +25,7 @@
         <vm:CooldownWindowViewModel />
     </w:TccWindow.DataContext>
     <w:TccWindow.Resources>
-        <DataTemplate x:Key="SkillDataTemplate">
-            <controls:SkillIconControl />
-        </DataTemplate>
+
         <Style x:Key="opacityAnimatedContainer" TargetType="FrameworkElement">
             <Setter Property="Opacity" Value="0"/>
             <Style.Triggers>
@@ -55,31 +53,7 @@
         </Style>
 
     </w:TccWindow.Resources>
-    
-    <Grid Width="800" Style="{StaticResource opacityAnimatedContainer}" Name="root">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="76"/>
-            <RowDefinition Height="76"/>
-        </Grid.RowDefinitions>
-        <Grid.LayoutTransform>
-            <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
-        </Grid.LayoutTransform>
-        <Ellipse Fill="Transparent" Opacity=".2" Width="26" Height="26" HorizontalAlignment="Left" Margin="16,0" x:Name="baseEll"/>
-        <ItemsControl x:Name="NormalSkillsPanel" Grid.Row="0" ItemTemplate="{StaticResource SkillDataTemplate}" Width="800" HorizontalAlignment="Stretch" >
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Width="800"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
-        <ItemsControl x:Name="LongSkillsPanel" Grid.Row="1" ItemTemplate="{StaticResource SkillDataTemplate}" Width="800">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Width="800"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-
-        </ItemsControl>
+    <ContentControl Margin="10" x:Name="controlContainer" Style="{StaticResource opacityAnimatedContainer}">
         
-    </Grid>
+    </ContentControl>
 </w:TccWindow>
