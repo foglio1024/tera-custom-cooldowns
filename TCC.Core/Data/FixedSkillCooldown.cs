@@ -48,11 +48,11 @@ namespace TCC.Data
         {
             _dispatcher = d;
             Seconds = 0;
-            _secondsTimer = new DispatcherTimer();
+            _secondsTimer = new DispatcherTimer(DispatcherPriority.Background, _dispatcher);
             _secondsTimer.Interval = TimeSpan.FromSeconds(1);
             _secondsTimer.Tick += _secondsTimer_Tick;
 
-            _offsetTimer = new DispatcherTimer();
+            _offsetTimer = new DispatcherTimer(DispatcherPriority.Background, _dispatcher);
             _offsetTimer.Tick += _offsetTimer_Tick;
 
             _type = t;
@@ -62,6 +62,7 @@ namespace TCC.Data
         private void _offsetTimer_Tick(object sender, EventArgs e)
         {
             _offsetTimer.Stop();
+            Seconds--;
             _secondsTimer.Start();
 
         }
@@ -84,7 +85,7 @@ namespace TCC.Data
         {
             Cooldown = _type == CooldownType.Skill ? cd : cd * 1000;
             OriginalCooldown = Cooldown;
-            Seconds = Cooldown / 1000;
+            Seconds = 1+(Cooldown / 1000);
             var offset = Cooldown % 1000;
             _offsetTimer.Interval = TimeSpan.FromMilliseconds(offset);
             //Console.WriteLine("Offset = {0}", offset);

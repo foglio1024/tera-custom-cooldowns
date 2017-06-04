@@ -11,10 +11,10 @@ namespace TCC.ViewModels
     public class AbnormalityWindowViewModel : BaseINPC
     {
 
-        public bool IsTeraOnTop
-        {
-            get => WindowManager.IsTccVisible;
-        }
+        //public bool IsTeraOnTop
+        //{
+        //    get => WindowManager.IsTccVisible;
+        //}
         private double scale = SettingsManager.BuffBarWindowSettings.Scale;
         public double Scale
         {
@@ -49,14 +49,10 @@ namespace TCC.ViewModels
         {
             WindowManager.TccVisibilityChanged += (s, ev) =>
             {
-                RaisePropertyChanged("IsTeraOnTop");
-                if (IsTeraOnTop)
+                //RaisePropertyChanged("IsTeraOnTop");
+                if (WindowManager.IsTccVisible)
                 {
-                    BuffBarWindowManager.Instance.Dispatcher.Invoke(() =>
-                    {
-                        WindowManager.BuffBar.Topmost = false;
-                        WindowManager.BuffBar.Topmost = true;
-                    });
+                    WindowManager.BuffBar.RefreshTopmost();
                 }
             };
         }

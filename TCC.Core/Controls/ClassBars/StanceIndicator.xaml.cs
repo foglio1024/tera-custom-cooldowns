@@ -36,21 +36,24 @@ namespace TCC.Controls
 
         private void _context_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "CurrentStance")
+            Dispatcher.InvokeIfRequired(() =>
             {
-                switch (_context.CurrentStance)
+                if (e.PropertyName == "CurrentStance")
                 {
-                    case WarriorStance.None:
-                        rect.Fill = new SolidColorBrush(Colors.Transparent);
-                        break;
-                    case WarriorStance.Assault:
-                        rect.Fill = TryFindResource("AssaultStanceColor") as SolidColorBrush;
-                        break;
-                    case WarriorStance.Defensive:
-                        rect.Fill = TryFindResource("DefensiveStanceColor") as SolidColorBrush;
-                        break;
+                    switch (_context.CurrentStance)
+                    {
+                        case WarriorStance.None:
+                            rect.Fill = new SolidColorBrush(Colors.Transparent);
+                            break;
+                        case WarriorStance.Assault:
+                            rect.Fill = TryFindResource("AssaultStanceColor") as SolidColorBrush;
+                            break;
+                        case WarriorStance.Defensive:
+                            rect.Fill = TryFindResource("DefensiveStanceColor") as SolidColorBrush;
+                            break;
+                    }
                 }
-            }
+            }, System.Windows.Threading.DispatcherPriority.DataBind);
         }
     }
 }

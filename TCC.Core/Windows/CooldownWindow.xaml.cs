@@ -11,6 +11,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using TCC.Controls;
 using TCC.ViewModels;
 using TCC.Windows;
 
@@ -25,26 +26,36 @@ namespace TCC
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            InitWindow();
+            InitWindow(SettingsManager.CooldownWindowSettings);
 
-            Left = SettingsManager.CooldownWindowSettings.X;
-            Top = SettingsManager.CooldownWindowSettings.Y;
-            Visibility = SettingsManager.CooldownWindowSettings.Visibility;
-            SetClickThru(SettingsManager.CooldownWindowSettings.ClickThru);
+            SwitchMode();
 
-
-            LongSkillsPanel.ItemsSource = CooldownBarWindowManager.Instance.LongSkills;
-            LongSkillsPanel.DataContext = CooldownBarWindowManager.Instance.LongSkills;
-            NormalSkillsPanel.ItemsSource = CooldownBarWindowManager.Instance.ShortSkills;
-            NormalSkillsPanel.DataContext = CooldownBarWindowManager.Instance.ShortSkills;
+            ((FrameworkElement)controlContainer.Content).DataContext = CooldownWindowManager.Instance;
         }
 
+        public void SwitchMode()
+        {
+            Dispatcher.InvokeIfRequired(() =>
+            {
+                if (SettingsManager.ClassWindowOn)
+                {
+                    controlContainer.Content = new FixedSkillContainers();
+                }
+                else
+                {
+                    controlContainer.Content = new NormalSkillContainer();
+                }
+
+                ((FrameworkElement)controlContainer.Content).DataContext = CooldownWindowManager.Instance;
+
+            }, DispatcherPriority.Normal);
+        }
 
         private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             this.DragMove();
-            SettingsManager.CooldownWindowSettings.X = this.Left;
-            SettingsManager.CooldownWindowSettings.Y = this.Top;
+            SettingsManager.CooldownWindowSettings.X = Left - Left % Left;
+            SettingsManager.CooldownWindowSettings.Y = Top - Top%Top;
             SettingsManager.SaveSettings();
 
         }

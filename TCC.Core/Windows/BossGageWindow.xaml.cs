@@ -47,23 +47,19 @@ namespace TCC.Windows
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            InitWindow();
+            InitWindow(SettingsManager.BossGaugeWindowSettings);
 
             Bosses.DataContext = BossGageWindowManager.Instance.CurrentNPCs;
             Bosses.ItemsSource = BossGageWindowManager.Instance.CurrentNPCs;
 
-            Left = SettingsManager.BossGaugeWindowSettings.X;
-            Top = SettingsManager.BossGaugeWindowSettings.Y;
-            Visibility = SettingsManager.BossGaugeWindowSettings.Visibility;
-            SetClickThru(SettingsManager.BossGaugeWindowSettings.ClickThru);
         }
 
 
         private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             this.DragMove();
-            SettingsManager.BossGaugeWindowSettings.X = this.Left;
-            SettingsManager.BossGaugeWindowSettings.Y = this.Top;
+            SettingsManager.BossGaugeWindowSettings.X = Left - Left % Left;
+            SettingsManager.BossGaugeWindowSettings.Y = Top - Top%Top;
             SettingsManager.SaveSettings();
 
         }

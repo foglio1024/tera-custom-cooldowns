@@ -110,17 +110,19 @@ namespace TCC.Controls
         private void CloseTimer_Tick(object sender, EventArgs e)
         {
             Dispose();
-            if (SettingsManager.ClassWindowOn && ViewModels.ClassWindowViewModel.ClassWindowExists())
-            {
-                WindowManager.ClassWindow.Dispatcher.Invoke(() =>
-                {
-                    ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).RemoveSkill(_context.Skill);
-                });
-            }
-            else
-            {
-                CooldownBarWindowManager.Instance.RemoveSkill(_context.Skill);
-            }
+            //if (SettingsManager.ClassWindowOn && ViewModels.ClassWindowViewModel.ClassWindowExists())
+            //{
+            //    WindowManager.ClassWindow.Dispatcher.Invoke(() =>
+            //    {
+            //        ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).RemoveSkill(_context.Skill);
+            //    });
+            //}
+            //else
+            //{
+            //    CooldownWindowManager.Instance.NormalCd_RemoveSkill(_context.Skill);
+            //}
+            CooldownWindowManager.Instance.RemoveSkill(_context.Skill);
+
         }
 
         void AnimateCooldown(double angle = 1)

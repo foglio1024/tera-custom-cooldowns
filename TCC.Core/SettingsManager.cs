@@ -83,6 +83,10 @@ namespace TCC
         public static bool IgnoreRaidAbnormalitiesInGroupWindow { get; set; }
         public static FlowDirection BuffsDirection { get; set; } = FlowDirection.RightToLeft;
         public static bool ClassWindowOn { get; set; } = false;
+        public static bool AutoDim { get; set; } = true;
+        public static bool ClickThruWhenDim { get; set; } = true;
+        public static double DimOpacity { get; set; } = .2;
+
         public static void LoadSettings()
         {
             if (File.Exists(Environment.CurrentDirectory + @"/tcc-config.xml"))
@@ -152,6 +156,21 @@ namespace TCC
                 try
                 {
                     ClassWindowOn = Boolean.Parse(b.Attribute("ClassWindowOn").Value);
+                }
+                catch (Exception) { }
+                try
+                {
+                    AutoDim = Boolean.Parse(b.Attribute("AutoDim").Value);
+                }
+                catch (Exception) { }
+                try
+                {
+                    ClickThruWhenDim = Boolean.Parse(b.Attribute("ClickThruWhenDim").Value);
+                }
+                catch (Exception) { }
+                try
+                {
+                    DimOpacity = Double.Parse(b.Attribute("DimOpacity").Value, CultureInfo.InvariantCulture);
                 }
                 catch (Exception) { }
                 //add settings here
@@ -253,7 +272,10 @@ namespace TCC
                 new XAttribute("IgnoreAllBuffsInGroupWindow", IgnoreAllBuffsInGroupWindow),
                 new XAttribute("IgnoreRaidAbnormalitiesInGroupWindow", IgnoreRaidAbnormalitiesInGroupWindow),
                 new XAttribute("BuffsDirection", BuffsDirection),
-                new XAttribute("ClassWindowOn", ClassWindowOn)
+                new XAttribute("ClassWindowOn", ClassWindowOn),
+                new XAttribute("AutoDim", AutoDim),
+                new XAttribute("ClickThruWhenDim", ClickThruWhenDim),
+                new XAttribute("DimOpacity", DimOpacity)
                 //add setting here
                 )
             );

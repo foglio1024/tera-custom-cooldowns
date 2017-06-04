@@ -37,6 +37,24 @@ namespace TCC.ViewModels
             }
         }
 
+        public bool UserExists(ulong id)
+        {
+            User u;
+            if(TryGetUser(Dps, id, out u))
+            {
+                return true;
+            }
+            else if(TryGetUser(Tanks, id, out u))
+            {
+                return true;
+            }
+            else if (TryGetUser(Healers, id, out u))
+            {
+                return true;
+            }
+            return false;
+        }
+
         public void BeginOrRefreshUserAbnormality(Abnormality ab, int stacks, uint duration, uint playerId, uint serverId)
         {
             if (SettingsManager.IgnoreRaidAbnormalitiesInGroupWindow) return;
@@ -300,7 +318,7 @@ namespace TCC.ViewModels
         public void RemoveMember(uint playerId, uint serverId)
         {
             User u;
-            if(TryGetUser(_dps, serverId, playerId, out u))
+            if (TryGetUser(_dps, serverId, playerId, out u))
             {
                 Dps.Remove(u);
                 GroupSize = GetCount();
@@ -462,24 +480,24 @@ namespace TCC.ViewModels
         {
             //Task.Delay(2000).ContinueWith(t =>
             //{
-                foreach (var user in _dps)
-                {
-                    user.IsRolling = false;
-                    user.IsWinning = false;
-                    user.RollResult = 0;
-                }
-                foreach (var user in _tanks)
-                {
-                    user.IsRolling = false;
-                    user.IsWinning = false;
-                    user.RollResult = 0;
-                }
-                foreach (var user in _healers)
-                {
-                    user.IsRolling = false;
-                    user.IsWinning = false;
-                    user.RollResult = 0;
-                }
+            foreach (var user in _dps)
+            {
+                user.IsRolling = false;
+                user.IsWinning = false;
+                user.RollResult = 0;
+            }
+            foreach (var user in _tanks)
+            {
+                user.IsRolling = false;
+                user.IsWinning = false;
+                user.RollResult = 0;
+            }
+            foreach (var user in _healers)
+            {
+                user.IsRolling = false;
+                user.IsWinning = false;
+                user.RollResult = 0;
+            }
             //});
         }
         public void SetRoll(ulong entityId, int rollResult)
@@ -726,9 +744,9 @@ namespace TCC.ViewModels
             return c;
         }
 
-        public void MoveUser(SynchronizedObservableCollection<User> startList, SynchronizedObservableCollection<User> endList,uint serverId, uint playerId)
+        public void MoveUser(SynchronizedObservableCollection<User> startList, SynchronizedObservableCollection<User> endList, uint serverId, uint playerId)
         {
-            if(TryGetUser(startList, serverId,playerId, out User u))
+            if (TryGetUser(startList, serverId, playerId, out User u))
             {
                 if (TryGetUser(endList, serverId, playerId, out User x)) return;
                 endList.Add(u);

@@ -7,10 +7,10 @@
              mc:Ignorable="d" Loaded="UserControl_Loaded">
 
     <Grid Width="Auto" Margin="20" Name="root">
-        <Grid.RowDefinitions>
+        <!--<Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+        </Grid.RowDefinitions>-->
 
         <Grid HorizontalAlignment="Center" Margin="0,0,0,0" UseLayoutRounding="True">
             <Grid.ColumnDefinitions>
@@ -59,6 +59,6 @@
 />
         </Grid>
         <!--Skills grids-->
-        <local:FixedSkillContainers Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" HorizontalAlignment="Center"/>
+        <!--<local:FixedSkillContainers Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" HorizontalAlignment="Center"/>-->
     </Grid>
 </UserControl>

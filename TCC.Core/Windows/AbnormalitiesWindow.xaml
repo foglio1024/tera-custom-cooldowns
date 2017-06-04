@@ -32,36 +32,11 @@
                 </controls:AbnormalityIndicator.Resources>
             </controls:AbnormalityIndicator>
         </DataTemplate>
-        <Style x:Key="opacityAnimatedContainer" TargetType="FrameworkElement">
-            <Setter Property="Opacity" Value="0"/>
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding IsTeraOnTop}" Value="True">
-                    <DataTrigger.EnterActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation From="0" To="1"
-                                     Duration="0:0:0.2"
-                                     Storyboard.TargetProperty="Opacity"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </DataTrigger.EnterActions>
-                    <DataTrigger.ExitActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation From="1" To="0"
-                                                 Duration="0:0:0.2"
-                                                 Storyboard.TargetProperty="Opacity"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </DataTrigger.ExitActions>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
         <Style x:Key="flowPanel" TargetType="StackPanel">
             <Setter Property="FlowDirection" Value="{Binding Direction}"/>
         </Style>
     </w:TccWindow.Resources>
-    <StackPanel Style="{StaticResource opacityAnimatedContainer}">
+    <StackPanel>
         <StackPanel.LayoutTransform>
             <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
         </StackPanel.LayoutTransform>

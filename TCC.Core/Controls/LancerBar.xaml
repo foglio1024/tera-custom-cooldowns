@@ -6,21 +6,13 @@
              xmlns:local="clr-namespace:TCC.Controls"
              mc:Ignorable="d" 
              >
-    <Grid Width="Auto" Margin="20" Name="root">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+    <Grid Width="Auto" Margin="10" Name="root">
         <!--HP/MP-->
         <Grid HorizontalAlignment="Center" Margin="0,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
             <Border Style="{StaticResource border}"
                     Grid.Row="0"
                     Grid.Column="0"
@@ -32,17 +24,18 @@
 
             <!--HP/MP-->
             <UniformGrid Columns="2" 
-                         VerticalAlignment="Center" 
-                         Margin="5,0"
+                         VerticalAlignment="Stretch" 
+                         Margin="5,2"
                          Grid.RowSpan="2"
                          Grid.Column="1"
                          Grid.Row="1"
                          Width="170"
+                         Height="60"
                          >
-                <local:StatControl DataContext="{Binding HP}" Color="{StaticResource hpColor}" Width="80" />
-                <local:StatControl DataContext="{Binding LH}" Color="DarkOrange" Width="80"/>
-                <local:StatControl DataContext="{Binding MP}" Color="{StaticResource mpColor}" Width="80"/>
-                <local:StatControl DataContext="{Binding ST}" Color="#5ff" Width="80"/>
+                <local:StatControl VerticalAlignment="Center" Margin="0,0,0,0" DataContext="{Binding HP}" Color="{StaticResource hpColor}" Width="80" />
+                <local:StatControl VerticalAlignment="Center" Margin="0,0,0,0" DataContext="{Binding LH}" Color="DarkOrange" Width="80"/>
+                <local:StatControl VerticalAlignment="Center" Margin="0,0,0,0" DataContext="{Binding MP}" Color="{StaticResource mpColor}" Width="80"/>
+                <local:StatControl VerticalAlignment="Center" Margin="0,0,0,0" DataContext="{Binding ST}" Color="#5ff" Width="80"/>
             </UniformGrid>
 
             <!--Arush + Gshout-->
@@ -50,15 +43,13 @@
                          Grid.Row="1"
                          Grid.ColumnSpan="1" 
                          Grid.RowSpan="1"
-                         Columns="3">
+                         Columns="3"
+                         Margin="5,0,0,0">
                 <local:BuffCooldownControl DataContext="{Binding AdrenalineRush}" Grid.Column="0" Margin="1,0,0,0"/>
                 <local:BuffCooldownControl DataContext="{Binding GuardianShout}" Grid.Column="1" Margin="0,0,0,0"/>
                 <local:BuffCooldownControl DataContext="{Binding Infuriate}" Grid.Column="2" Margin="0,0,1,0"/>
             </UniformGrid>
         </Grid>
-        
-        <!--Skills grids-->
-        <local:FixedSkillContainers x:Name="sk" Grid.Row="2" Grid.RowSpan="2" HorizontalAlignment="Center"/>
 
     </Grid>
 </UserControl>

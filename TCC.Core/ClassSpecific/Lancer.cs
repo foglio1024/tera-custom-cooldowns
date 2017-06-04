@@ -39,7 +39,7 @@ namespace TCC
         {
             if (gShoutIDs.Contains(p.Id) && p.Target == SessionManager.CurrentPlayer.EntityId)
             {
-                ((LancerBarManager)ClassManager.CurrentClassManager).GuardianShout.Buff.Start(0);
+                ((LancerBarManager)ClassManager.CurrentClassManager).GuardianShout.Buff.Refresh(0);
             }
         }
         public static void CheckLineHeld(S_ABNORMALITY_BEGIN p)

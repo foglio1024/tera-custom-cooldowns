@@ -29,8 +29,8 @@ namespace TCC.Windows
         private void TccWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
-            SettingsManager.ClassWindowSettings.X = Left;
-            SettingsManager.ClassWindowSettings.Y = Top;
+            SettingsManager.ClassWindowSettings.X = Left - Left%Left;
+            SettingsManager.ClassWindowSettings.Y = Top - Top%Top;
             SettingsManager.SaveSettings();
         }
 
@@ -41,11 +41,7 @@ namespace TCC.Windows
         }
         private void TccWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            InitWindow();
-            Left = SettingsManager.ClassWindowSettings.X;
-            Top = SettingsManager.ClassWindowSettings.Y;
-            SetClickThru(SettingsManager.ClassWindowSettings.ClickThru);
-            SetVisibility(SettingsManager.ClassWindowSettings.Visibility);
+            InitWindow(SettingsManager.ClassWindowSettings);
 
             _context = (ClassWindowViewModel)DataContext;
             _context.PropertyChanged += _context_PropertyChanged;
@@ -55,7 +51,6 @@ namespace TCC.Windows
 
         private void _context_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-
             if (e.PropertyName == "CurrentClass")
             {
                 switch (_context.CurrentClass)
@@ -104,7 +99,6 @@ namespace TCC.Windows
                         break;
                 }
             }
-
         }
     }
 }

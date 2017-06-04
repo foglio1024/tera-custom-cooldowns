@@ -93,13 +93,38 @@ namespace TCC
             }
         }
 
+        static System.Timers.Timer _undimTimer;
+
+        private static bool skillsEnded = true;
+        public static bool SkillsEnded
+        {
+            get => skillsEnded;
+            set
+            {
+                if (value == false)
+                {
+                    _undimTimer.Stop();
+                    _undimTimer.Start();
+                }
+                if (skillsEnded == value) return;
+                skillsEnded = value;
+                TccDimChanged?.Invoke(null, new PropertyChangedEventArgs("IsTccDim"));
+            }
+        }
+
+        public static bool IsTccDim
+        {
+            get => SkillsEnded && SettingsManager.AutoDim; // add more conditions here if needed
+        }
+
         public static void NotifyVisibilityChanged()
         {
-            TccVisibilityChanged?.Invoke(null, new PropertyChangedEventArgs("IsTeraOnTop"));
+            TccVisibilityChanged?.Invoke(null, new PropertyChangedEventArgs("IsTccVisible"));
         }
 
         public static event PropertyChangedEventHandler ClickThruChanged;
         public static event PropertyChangedEventHandler TccVisibilityChanged;
+        public static event PropertyChangedEventHandler TccDimChanged;
 
         public static Visibility StaminaGaugeVisibility;
         public static double StaminaGaugeTop;
@@ -125,8 +150,8 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 CooldownWindow = new CooldownWindow();
-                CooldownBarWindowManager.Instance.ShortSkills = new SynchronizedObservableCollection<SkillCooldown>(CooldownWindow.Dispatcher);
-                CooldownBarWindowManager.Instance.LongSkills = new SynchronizedObservableCollection<SkillCooldown>(CooldownWindow.Dispatcher);
+                //CooldownWindowManager.Instance.ShortSkills = new SynchronizedObservableCollection<SkillCooldown>(CooldownWindow.Dispatcher);
+                //CooldownWindowManager.Instance.LongSkills = new SynchronizedObservableCollection<SkillCooldown>(CooldownWindow.Dispatcher);
                 CooldownWindow.Show();
                 Dispatcher.Run();
             }));
@@ -189,7 +214,9 @@ namespace TCC
             };
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
+
             Thread.Sleep(500);
+
             ContextMenu = new ContextMenu();
             DefaultIcon = new Icon(Application.GetResourceStream(new Uri("resources/tcc-logo.ico", UriKind.Relative)).Stream);
             ConnectedIcon = new Icon(Application.GetResourceStream(new Uri("resources/tcc-logo-on.ico", UriKind.Relative)).Stream);
@@ -207,12 +234,21 @@ namespace TCC
             CloseButton.Click += (s, ev) => App.CloseApp();
             ContextMenu.Items.Add(CloseButton);
 
+            _undimTimer = new System.Timers.Timer(10000);
+            _undimTimer.Elapsed += _undimTimer_Elapsed;
 
-            FocusManager.FocusTimer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
-            FocusManager.FocusTimer.Tick += FocusManager.CheckForegroundWindow;
+            FocusManager.FocusTimer = new System.Timers.Timer(1000);
+            FocusManager.FocusTimer.Elapsed += FocusManager.CheckForegroundWindow;
 
             ClickThruChanged += (s, ev) => UpdateClickThru();
         }
+
+        private static void _undimTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            SkillsEnded = true;
+            _undimTimer.Stop();
+        }
+
         private static void TrayIcon_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if (Settings == null)

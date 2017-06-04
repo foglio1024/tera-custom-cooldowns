@@ -12,7 +12,7 @@
              AllowsTransparency="True" Loaded="TccWindow_Loaded"
              WindowStyle="None" Topmost="True" SizeToContent="WidthAndHeight"
              Background="#00000000" MouseLeftButtonDown="TccWindow_MouseLeftButtonDown"
-             mc:Ignorable="d" ShowInTaskbar="False"
+             mc:Ignorable="d" ShowInTaskbar="False" 
              Title="WarriorBar" Height="Auto" Width="Auto" UseLayoutRounding="True" x:Name="win">
     <w:TccWindow.DataContext>
         <wm:ClassWindowViewModel />
@@ -86,7 +86,7 @@
         </Style>
 
     </w:TccWindow.Resources>
-    <ContentControl x:Name="root" Style="{StaticResource opacityAnimatedContainer}" Content="{Binding CurrentManager}" Margin="10">
+    <ContentControl x:Name="root" Content="{Binding CurrentManager}" Margin="10">
         <ContentControl.LayoutTransform>
             <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
         </ContentControl.LayoutTransform>

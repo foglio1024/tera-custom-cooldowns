@@ -24,38 +24,13 @@
         <DataTemplate x:Key="BossGageDataTemplate">
             <local:BossGage/>
         </DataTemplate>
-        <Style x:Key="opacityAnimatedContainer" TargetType="FrameworkElement">
-            <Setter Property="Opacity" Value="0"/>
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding IsTeraOnTop}" Value="True">
-                    <DataTrigger.EnterActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation From="0" To="1"
-                                     Duration="0:0:0.2"
-                                     Storyboard.TargetProperty="Opacity"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </DataTrigger.EnterActions>
-                    <DataTrigger.ExitActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation From="1" To="0"
-                                                 Duration="0:0:0.2"
-                                                 Storyboard.TargetProperty="Opacity"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </DataTrigger.ExitActions>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
 
         <converters:HarrowholdBossesVisibilityConverter x:Key="hhBossesVisConv"/>
     </w:TccWindow.Resources>
     <w:TccWindow.DataContext>
         <vm:BossGageWindowViewModel/>
     </w:TccWindow.DataContext>
-    <Grid Style="{StaticResource opacityAnimatedContainer}">
+    <Grid >
         <Grid.LayoutTransform>
             <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
         </Grid.LayoutTransform>

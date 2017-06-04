@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Threading;
 
 namespace TCC
@@ -18,7 +19,7 @@ namespace TCC
         const uint WS_EX_TOOLWINDOW = 0x00000080; //don't show in alt-tab
         const int GWL_EXSTYLE = (-20);           //set new exStyle
 
-        public static DispatcherTimer FocusTimer;
+        public static Timer FocusTimer;
 
         [DllImport("user32.dll")]
         public static extern IntPtr GetForegroundWindow();
@@ -52,7 +53,7 @@ namespace TCC
             uint extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
             SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle & ~WS_EX_TRANSPARENT);
         }
-        public static void CheckForegroundWindow(object sender, EventArgs e)
+        public static void CheckForegroundWindow(object sender, ElapsedEventArgs e)
         {
             IntPtr hwnd = FocusManager.GetForegroundWindow();
             FocusManager.GetWindowThreadProcessId(hwnd, out uint procId);
