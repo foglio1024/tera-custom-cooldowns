@@ -161,6 +161,24 @@
                         </Grid>
                     </controls:BoolSetting.ToolTip>
                 </controls:BoolSetting>
+                <controls:BoolSetting SettingName="Auto dim" Grid.Row="2" IsOn="{Binding AutoDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" >
+                    <controls:BoolSetting.ToolTip>
+                        <Grid Margin="5">
+                            <Border Style="{StaticResource border}" Grid.RowSpan="2"/>
+                            <TextBlock Foreground="LightGray" Text="Automatically dim TCC when not in combat." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
+                        </Grid>
+                    </controls:BoolSetting.ToolTip>
+                </controls:BoolSetting>
+                <controls:BoolSetting SettingName="Click thru when dim" Grid.Row="3" IsOn="{Binding ClickThruWhenDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" >
+                    <controls:BoolSetting.ToolTip>
+                        <Grid Margin="5">
+                            <Border Style="{StaticResource border}" Grid.RowSpan="2"/>
+                            <TextBlock Foreground="LightGray" Text="Makes TCC clickthru when dim." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
+                        </Grid>
+                    </controls:BoolSetting.ToolTip>
+                </controls:BoolSetting>
+                <controls:ValueSetting SettingName="Dim opacity" Grid.Row="4" Value="{Binding DimOpacity, Mode=TwoWay}"></controls:ValueSetting>
+
             </Grid>
 
         </Grid>

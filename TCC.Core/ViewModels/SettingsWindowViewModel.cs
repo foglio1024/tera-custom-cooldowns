@@ -370,7 +370,9 @@ namespace TCC.ViewModels
         public bool HideMe
         {
             get { return SettingsManager.IgnoreMeInGroupWindow; }
-            set { if (SettingsManager.IgnoreMeInGroupWindow == value) return;
+            set
+            {
+                if (SettingsManager.IgnoreMeInGroupWindow == value) return;
                 SettingsManager.IgnoreMeInGroupWindow = value;
                 if (value == true) GroupWindowManager.Instance.RemoveMe();
                 RaisePropertyChanged("HideMe");
@@ -384,7 +386,7 @@ namespace TCC.ViewModels
                 if (SettingsManager.IgnoreMyBuffsInGroupWindow == value) return;
                 SettingsManager.IgnoreMyBuffsInGroupWindow = value;
                 RaisePropertyChanged("HideMyBuffs");
-                if(value == true) GroupWindowManager.Instance.ClearMyBuffs();
+                if (value == true) GroupWindowManager.Instance.ClearMyBuffs();
 
             }
         }
@@ -448,7 +450,57 @@ namespace TCC.ViewModels
                 RaisePropertyChanged("ClassWindowOn");
             }
         }
+        public bool AutoDim
+        {
+            get { return SettingsManager.AutoDim; }
+            set
+            {
+                if (SettingsManager.AutoDim == value) return;
+                SettingsManager.AutoDim = value;
 
+                WindowManager.SkillsEnded = false;
+                WindowManager.SkillsEnded = true;
+
+                WindowManager.SkillsEnded = false;
+                WindowManager.SkillsEnded = true;
+
+                RaisePropertyChanged("AutoDim");
+            }
+        }
+        public bool ClickThruWhenDim
+        {
+            get { return SettingsManager.ClickThruWhenDim; }
+            set
+            {
+                if (SettingsManager.ClickThruWhenDim == value) return;
+                SettingsManager.ClickThruWhenDim = value;
+                if (value && WindowManager.IsTccDim)
+                {
+                    WindowManager.SkillsEnded = false;
+                    WindowManager.SkillsEnded = true;
+                }
+                RaisePropertyChanged("ClickThruWhenDim");
+            }
+        }
+        public double DimOpacity
+        {
+            get { return SettingsManager.DimOpacity; }
+            set
+            {
+                if (SettingsManager.DimOpacity == value) return;
+                var val = value;
+                if (val < 0) val = 0;
+                if (val > 1) val = 1;
+
+                SettingsManager.DimOpacity = val;
+                if (WindowManager.IsTccDim)
+                {
+                    WindowManager.SkillsEnded = false;
+                    WindowManager.SkillsEnded = true;
+                }
+                RaisePropertyChanged("DimOpacity");
+            }
+        }
         public SettingsWindowViewModel()
         {
 
