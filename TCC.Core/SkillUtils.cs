@@ -160,8 +160,6 @@ namespace TCC
         private static void BuildDefaultMysticSkillConfig(string filename)
         {
             XElement skills = new XElement("Skills",
-                new XElement("Skill", new XAttribute("id", 50900), new XAttribute("row", 1)), //heal
-                new XElement("Skill", new XAttribute("id", 90100), new XAttribute("row", 1)), //cleanse
                 new XElement("Skill", new XAttribute("id", 420100), new XAttribute("row", 1)), //boomerang pulse
                 new XElement("Skill", new XAttribute("id", 370200), new XAttribute("row", 1)), //totem
                 new XElement("Skill", new XAttribute("id", 241010), new XAttribute("row", 1)), //voc
