@@ -28,7 +28,7 @@ namespace TCC.Windows
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            InitWindow();
+            InitWindow(SettingsManager.BuffBarWindowSettings);
 
             //buffs.DataContext = BuffBarWindowManager.Instance.Player.Buffs;
             buffs.ItemsSource = BuffBarWindowManager.Instance.Player.Buffs;
@@ -36,12 +36,6 @@ namespace TCC.Windows
             debuffs.ItemsSource = BuffBarWindowManager.Instance.Player.Debuffs;
             //infBuffs.DataContext = BuffBarWindowManager.Instance.Player.InfBuffs;
             infBuffs.ItemsSource = BuffBarWindowManager.Instance.Player.InfBuffs;
-
-            Left = SettingsManager.BuffBarWindowSettings.X;
-            Top = SettingsManager.BuffBarWindowSettings.Y;
-            Visibility = SettingsManager.BuffBarWindowSettings.Visibility;
-            SetClickThru(SettingsManager.BuffBarWindowSettings.ClickThru);
-
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

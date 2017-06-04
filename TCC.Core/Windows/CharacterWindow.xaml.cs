@@ -33,12 +33,7 @@ namespace TCC.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            InitWindow();
-
-            Left = SettingsManager.CharacterWindowSettings.X;
-            Top = SettingsManager.CharacterWindowSettings.Y;
-            Visibility = SettingsManager.CharacterWindowSettings.Visibility;
-            SetClickThru(SettingsManager.CharacterWindowSettings.ClickThru);
+            InitWindow(SettingsManager.CharacterWindowSettings);
 
             rootGrid.DataContext = CharacterWindowManager.Instance.Player;
         }

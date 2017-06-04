@@ -26,34 +26,9 @@
     </w:TccWindow.DataContext>
     <w:TccWindow.Resources>
 
-        <Style x:Key="opacityAnimatedContainer" TargetType="FrameworkElement">
-            <Setter Property="Opacity" Value="0"/>
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding IsTeraOnTop}" Value="True">
-                    <DataTrigger.EnterActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation From="0" To="1"
-                                     Duration="0:0:0.2"
-                                     Storyboard.TargetProperty="Opacity"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </DataTrigger.EnterActions>
-                    <DataTrigger.ExitActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation From="1" To="0"
-                                                 Duration="0:0:0.2"
-                                                 Storyboard.TargetProperty="Opacity"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </DataTrigger.ExitActions>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
 
     </w:TccWindow.Resources>
-    <ContentControl Margin="10" x:Name="controlContainer" Style="{StaticResource opacityAnimatedContainer}">
+    <ContentControl Margin="10" x:Name="controlContainer">
         
     </ContentControl>
 </w:TccWindow>

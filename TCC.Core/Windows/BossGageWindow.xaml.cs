@@ -47,15 +47,11 @@ namespace TCC.Windows
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            InitWindow();
+            InitWindow(SettingsManager.BossGaugeWindowSettings);
 
             Bosses.DataContext = BossGageWindowManager.Instance.CurrentNPCs;
             Bosses.ItemsSource = BossGageWindowManager.Instance.CurrentNPCs;
 
-            Left = SettingsManager.BossGaugeWindowSettings.X;
-            Top = SettingsManager.BossGaugeWindowSettings.Y;
-            Visibility = SettingsManager.BossGaugeWindowSettings.Visibility;
-            SetClickThru(SettingsManager.BossGaugeWindowSettings.ClickThru);
         }
 
 

@@ -62,21 +62,13 @@ namespace TCC.Windows
         }
         private void TccWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            InitWindow();
+            InitWindow(SettingsManager.GroupWindowSettings);
             dps.DataContext = GroupWindowManager.Instance.Dps;
             dps.ItemsSource = GroupWindowManager.Instance.Dps;
             tanks.DataContext = GroupWindowManager.Instance.Tanks;
             tanks.ItemsSource = GroupWindowManager.Instance.Tanks;
             healers.DataContext = GroupWindowManager.Instance.Healers;
             healers.ItemsSource = GroupWindowManager.Instance.Healers;
-
-            //add settings
-            Left = SettingsManager.GroupWindowSettings.X;
-            Top = SettingsManager.GroupWindowSettings.Y;
-            Visibility = SettingsManager.GroupWindowSettings.Visibility;
-            SetClickThru(SettingsManager.GroupWindowSettings.ClickThru);
-
-
         }
 
         private void TccWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

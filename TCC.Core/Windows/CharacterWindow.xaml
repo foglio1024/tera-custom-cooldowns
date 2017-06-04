@@ -68,7 +68,7 @@
     <w:TccWindow.DataContext>
         <vm:CharacterWindowViewModel/>
     </w:TccWindow.DataContext>
-    <Grid Style="{StaticResource opacityAnimatedContainer}" >
+    <Grid >
         <Grid.LayoutTransform>
             <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
         </Grid.LayoutTransform>

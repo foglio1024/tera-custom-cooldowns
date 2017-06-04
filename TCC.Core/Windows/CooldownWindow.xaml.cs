@@ -26,12 +26,7 @@ namespace TCC
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            InitWindow();
-
-            Left = SettingsManager.CooldownWindowSettings.X;
-            Top = SettingsManager.CooldownWindowSettings.Y;
-            Visibility = SettingsManager.CooldownWindowSettings.Visibility;
-            SetClickThru(SettingsManager.CooldownWindowSettings.ClickThru);
+            InitWindow(SettingsManager.CooldownWindowSettings);
 
             SwitchMode();
 
