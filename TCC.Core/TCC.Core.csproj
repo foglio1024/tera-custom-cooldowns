@@ -222,6 +222,7 @@
     <Compile Include="Parsing\Messages\S_PARTY_MEMBER_INFO.cs" />
     <Compile Include="Parsing\Messages\S_PARTY_MEMBER_STAT_UPDATE.cs" />
     <Compile Include="Parsing\Messages\S_WEAK_POINT.cs" />
+    <Compile Include="Parsing\S_EACH_SKILL_RESULT.cs" />
     <Compile Include="Parsing\ThreadSafeManager.cs" />
     <Compile Include="SettingsManager.cs" />
     <Compile Include="SkillUtils.cs" />

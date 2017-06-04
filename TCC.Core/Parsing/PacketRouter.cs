@@ -290,6 +290,17 @@ namespace TCC.Parsing
             ((ValkyrieBarManager)ClassManager.CurrentClassManager).RunemarksCounter.Val = (int)x.TotalRunemarks;
         }
 
+        public static void HandleSkillResult(S_EACH_SKILL_RESULT x)
+        {
+            bool sourceInParty = GroupWindowManager.Instance.UserExists(x.Source);
+            bool targetInParty = GroupWindowManager.Instance.UserExists(x.Target);
+            if (x.Target == x.Source) return;
+            if (sourceInParty && targetInParty) return;
+            if(sourceInParty || targetInParty) WindowManager.SkillsEnded = false;
+            if (x.Source == SessionManager.CurrentPlayer.EntityId || x.Target == SessionManager.CurrentPlayer.EntityId) WindowManager.SkillsEnded = false;
+
+        }
+
         public static void HandleChangeLeader(S_CHANGE_PARTY_MANAGER x)
         {
             GroupWindowManager.Instance.SetNewLeader(x.EntityId, x.Name);
