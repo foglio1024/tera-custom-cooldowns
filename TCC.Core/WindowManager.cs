@@ -93,21 +93,33 @@ namespace TCC
             }
         }
 
-        private static bool isTccDim;
-        public static bool IsTccDim
+        static System.Timers.Timer _undimTimer;
+
+        private static bool skillsEnded = true;
+        public static bool SkillsEnded
         {
-            get => isTccDim;
+            get => skillsEnded;
             set
             {
-                if (isTccDim == value) return;
-                isTccDim = value;
+                if (value == false)
+                {
+                    _undimTimer.Stop();
+                    _undimTimer.Start();
+                }
+                if (skillsEnded == value) return;
+                skillsEnded = value;
                 TccDimChanged?.Invoke(null, new PropertyChangedEventArgs("IsTccDim"));
             }
         }
 
+        public static bool IsTccDim
+        {
+            get => SkillsEnded && SettingsManager.AutoDim; // add more conditions here if needed
+        }
+
         public static void NotifyVisibilityChanged()
         {
-            TccVisibilityChanged?.Invoke(null, new PropertyChangedEventArgs("IsTeraOnTop"));
+            TccVisibilityChanged?.Invoke(null, new PropertyChangedEventArgs("IsTccVisible"));
         }
 
         public static event PropertyChangedEventHandler ClickThruChanged;
@@ -222,12 +234,21 @@ namespace TCC
             CloseButton.Click += (s, ev) => App.CloseApp();
             ContextMenu.Items.Add(CloseButton);
 
+            _undimTimer = new System.Timers.Timer(10000);
+            _undimTimer.Elapsed += _undimTimer_Elapsed;
 
-            FocusManager.FocusTimer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
-            FocusManager.FocusTimer.Tick += FocusManager.CheckForegroundWindow;
+            FocusManager.FocusTimer = new System.Timers.Timer(1000);
+            FocusManager.FocusTimer.Elapsed += FocusManager.CheckForegroundWindow;
 
             ClickThruChanged += (s, ev) => UpdateClickThru();
         }
+
+        private static void _undimTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            SkillsEnded = true;
+            _undimTimer.Stop();
+        }
+
         private static void TrayIcon_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if (Settings == null)
