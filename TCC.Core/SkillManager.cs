@@ -72,6 +72,7 @@ namespace TCC
                     return;
                 }
                 RouteSkill(new SkillCooldown(skill, cd, CooldownType.Skill, CooldownWindowManager.Instance.Dispatcher));
+                WindowManager.SkillsEnded = false;
             }
         }
         public static void AddBrooch(uint id, uint cd)
