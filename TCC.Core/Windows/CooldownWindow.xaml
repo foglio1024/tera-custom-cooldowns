@@ -29,6 +29,8 @@
 
     </w:TccWindow.Resources>
     <ContentControl Margin="10" x:Name="controlContainer">
-        
+        <ContentControl.LayoutTransform>
+            <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
+        </ContentControl.LayoutTransform>
     </ContentControl>
 </w:TccWindow>
