@@ -411,6 +411,10 @@
 4031	Buff	True	True	False	Everful Nostrum	- Increases Power by $H_W_GOOD27%$COLOR_END,<br>- Increases Endurance by $H_W_GOOD20%$COLOR_END,<br>- Replenishes $H_W_GOOD13%$COLOR_END of your MP every 5 seconds,<br>- Decreases cooldown of attack skills by $H_W_GOOD15%$COLOR_END,<br>- Increases Attack Speed by $H_W_GOOD10$COLOR_END.	icon_items.add_extract_potion_2_tex
 4032	Buff	False	True	False	Everful Nostrum (BTS if shown)	Abnormality Tooltip Not Supposed To Be Shown (isShow=False) If this Tooltip is Shown Register it as BTS	
 4033	Buff	False	True	False	Everful Nostrum (BTS if shown)	Abnormality Tooltip Not Supposed To Be Shown (isShow=False) If this Tooltip is Shown Register it as BTS	
+4034	Buff	True	True	False			icon_items.heartchocolate_tex
+4035	Buff	True	True	False			icon_items.drug_all_stats_up_tex
+4036	Buff	True	True	False			icon_items.candyapple_tex
+4037	Buff	False	True	False			icon_items.candyapple_tex
 4400	WeakeningEffect	True	True	False	Cheery Fireworks	Don't worry. Be happy! Blow something up!	icon_status.smile_firecracker_abnormality_tex
 4401	Buff	True	True	False	Pep in your Step	Increased Movement Speed from receiving a rather pleasant greeting.	icon_skills.greeting_tex
 4402	Buff	True	True	False	Wise Mentor	Increases hunting XP by $H_W_GOOD100%$COLOR_END. Effect stacks with other XP-related effects, but time runs even when you're offline.	icon_status.vitality_tex
@@ -1008,7 +1012,7 @@
 33150	Buff	True	True	False	Glyph of Powerlink	Increases damage of Leaping Slash by $H_W_GOOD25%$COLOR_END.	icon_crest.crestnextskillattackup_tex
 33170	Buff	True	True	False	Glyph of Restoration	Recovers $H_W_GOOD2%$COLOR_END of maximum HP every $H_W_GOOD1$COLOR_END second.	icon_crest.crestpassivehpheal_tex
 33200	Buff	True	True	False	Glyph of Powerlink	Increases skill damage of your next attack by 30%.	icon_crest.crestnextskillattackup_tex
-33210	Buff	True	True	False	Glyph of Powerlink	Increases skill damage of Runeburst by $H_W_GOOD25%$COLOR_END.	icon_crest.crestpassivehpheal_tex
+33210	Buff	True	True	False	Glyph of Powerlink	Increases skill damage of Runeburst by $H_W_GOOD25%$COLOR_END.	icon_crest.e_crestnextskillattackup_tex
 45301	WeakeningEffect	True	False	False	Great Shock	Massively shocked.	icon_status.minusdefence_tex
 45302	WeakeningEffect	True	False	False	Blown Over	Shocked and knocked over.	icon_status.minuscriticalresist_tex
 45303	DamageOverTime	False	False	False		The drill will disappear in 13 seconds.	
@@ -1372,6 +1376,7 @@
 400800	Stun	True	False	False	Inescapable Doom I	Decreases Movement Speed by $value.$BRPlayers cannot use evasive or movement skills.	icon_skills.murderousvent_tex
 400801	Stun	True	False	False	Inescapable Doom II	Decreases Movement Speed by $value.$BRPlayers cannot use evasive or movement skills.	icon_skills.murderousvent_tex
 400900	Buff	True	True	False	Evasive Smash	Use Evasive Smash again to activate the rib-crushing uppercut.	icon_skills.ribbreaker_tex
+400910	Buff	False	True	False	Cyclone acceleration Boost Removal (Not to be shown)		icon_skills.shockingshout_tex
 401000	Buff	True	True	False	Mocking Shout I	Immune to knockdown and stagger. Greatly increases resistance to weakening effects.	icon_skills.shockingshout_tex
 401001	Buff	True	True	False	Mocking Shout II	Immune to knockdown and stagger. Greatly increases resistance to weakening effects.	icon_skills.shockingshout_tex
 401002	Buff	True	True	False	Mocking Shout III	Immune to knockdown and stagger. Greatly increases resistance to weakening effects.	icon_skills.shockingshout_tex
@@ -1752,6 +1757,7 @@
 501606	Buff	False	True	False			
 501607	Buff	False	True	False			
 501608	Buff	False	True	False			
+501650	Buff	True	True	False	Warp Barrier	Cancels all damages for $time. Recovers 5% of max MP. Mana Boost II does not apply while Warp Barrier is active.	icon_skills.distortionfield_tex
 501700	Buff	False	True	False	Nova	Takes $H_W_GOOD50%$COLOR_END less damage from another player.	icon_skills.manaburst_tex
 600100	Buff	True	True	False	Feign Death I	Ignored by opponents. Duration: $H_W_GOOD$time$COLOR_END.	icon_skills.feigndeath_tex
 600101	Buff	True	True	False	Feign Death II	Ignored by opponents. Duration: $H_W_GOOD$time$COLOR_END.	icon_skills.feigndeath_tex
@@ -2164,7 +2170,7 @@
 781007	Buff	False	True	True			
 781008	Buff	False	True	True			
 781009	Buff	False	True	True			
-781010	WeakeningEffect	True	False	False	Dark Heart	Reduces HP by H_W_BAD3%$COLOR_END of maximum every $H_W_BAD1$COLOR_END second. Cannot use skills.	icon_status.fearstatus_tex
+781010	WeakeningEffect	True	False	False	Dark Heart	Reduces HP by $H_W_BAD3%$COLOR_END of maximum every $H_W_BAD1$COLOR_END second. Cannot use skills.	icon_status.fearstatus_tex
 781011	DamageOverTime	True	True	False	Searing Wound	Reduces HP by $H_W_BAD3%$COLOR_END of maximum every $H_W_BAD3$COLOR_END second1. While active, Dark Siphon cannot be removed.	icon_status.firedamage_tex
 781012	WeakeningEffect	False	False	False			
 781013	WeakeningEffect	False	False	False			
@@ -2838,6 +2844,10 @@
 950197	Buff	True	True	False	Celestial Power Absorption	Vergos is absorbing celestial power, increasing his Defense by 1.5 times.	icon_status.plusedefence_tex
 950198	Buff	False	True	False			
 950199	Buff	False	True	False			
+950200	WeakeningEffect	True	True	False	Aura Warning	You are about to receive Aura.	icon_items.question1a_tex
+950201	WeakeningEffect	True	True	False	Aura Warning	You are about to receive Aura.	icon_items.question1a_tex
+950202	WeakeningEffect	True	True	False			icon_skills.cleanup_tex
+950203	WeakeningEffect	False	True	False			
 950300	Buff	True	True	False	Earthly Power	Increases Terradrax's Attack Speed by 25% per stack.	icon_status.earthblessing_tex
 950301	Buff	False	True	False			
 950302	Buff	False	True	False			
@@ -2894,8 +2904,32 @@
 950404	Buff	False	True	False			
 950405	Buff	False	True	False			
 950410	Buff	False	True	True			
+950415	WeakeningEffect	True	True	False	Deep Cut	$H_W_BADDecreases$COLOR_END $H_W_BAD10%$COLOR_END of HP $H_W_GOODper second$COLOR_END.	icon_status.curse_tex
+950435	Buff	True	True	False	Relentless	Protected by a powerful barrier. $H_W_GOODCan$COLOR_END be $H_W_GOODremoved$COLOR_END.	icon_status.immunedebuff_tex
+950436	Stun	True	True	False	Earthen Rock	Trapped in the Earthen Rock. The rock will explode in few moments and deal damage to a wide area.	icon_status.rock_tex
 950440	DamageOverTime	False	False	False		BTS	
 950500	DamageOverTime	False	True	False			
+950501	Buff	False	True	True			
+950502	Buff	False	True	False			
+950503	WeakeningEffect	True	True	True			icon_status.cruel_slayer_4_tex
+950504	WeakeningEffect	True	True	True			icon_status.cruel_slayer_3_tex
+950505	WeakeningEffect	True	True	True			icon_status.cruel_slayer_2_tex
+950506	WeakeningEffect	True	True	True			icon_status.cruel_slayer_1_tex
+950507	Buff	False	True	False			
+950508	WeakeningEffect	True	False	False			icon_status.heat_tex
+950509	Buff	False	True	True			
+950510	Buff	False	True	False			
+950511	WeakeningEffect	True	False	False			icon_status.heat_tex
+950512	Buff	False	True	False			
+950513	Buff	True	True	False	Mana Scales	Vergos’s scales are infused with mana. Each stack increases Defense by 10% and Attack Speed by 20%.	icon_status.plusedefence_tex
+950514	WeakeningEffect	True	True	False	Mana Scales Generation	Vergos’s scales are infused with mana. Must be removed.	icon_status.plusedefence_tex
+950515	Buff	True	True	True	Last Resort	Vergos concentrates his power as a last resort. Attack Speed increases by 40% and Defense increases by 70%.	icon_status.vergosdust_tex
+950516	WeakeningEffect	True	True	False			icon_status.vergosflame_tex
+950517	WeakeningEffect	True	True	False			icon_status.vergosdust_tex
+950518	WeakeningEffect	True	True	False	Wounded Front Leg	Vergos’s front leg is wounded. Next hit will cause it to explode.	icon_status.damageup_tex
+950519	WeakeningEffect	True	True	False	Wounded Back Leg	Vergos’s back leg is wounded. Next hit will cause it to explode.	icon_status.damagedown_tex
+950520	WeakeningEffect	False	True	True			
+950521	Buff	False	True	False			
 975029	Buff	True	True	False	Velik's Power	Increases Power and the chance to crit.	icon_status.plusattack_tex
 975031	WeakeningEffect	True	False	False	Hot and Cold Pack	A mix of fire and ice drains your HP.	icon_status.poisonstatus_tex
 975032	Buff	False	True	False	Living Bomb Blast	Damages allies within 20m.	icon_skills.voidtrap_tex
@@ -2964,7 +2998,7 @@
 981007	Buff	False	True	True			
 981008	Buff	False	True	True			
 981009	Buff	False	True	True			
-981010	WeakeningEffect	True	False	False	Dark Heart	Reduces HP by H_W_BAD8%$COLOR_END of maximum every $H_W_BAD1$COLOR_END second. Cannot use skills.	icon_status.fearstatus_tex
+981010	WeakeningEffect	True	False	False	Dark Heart	Reduces HP by $H_W_BAD8%$COLOR_END of maximum every $H_W_BAD1$COLOR_END second. Cannot use skills.	icon_status.fearstatus_tex
 981011	DamageOverTime	True	True	False	Searing Wound	Reduces HP by $H_W_BAD10%$COLOR_END of maximum every $H_W_BAD3$COLOR_END second1. While active, Dark Siphon cannot be removed.	icon_status.firedamage_tex
 981012	WeakeningEffect	False	False	False			
 981013	WeakeningEffect	False	False	False			
@@ -4526,6 +4560,9 @@
 91240001	Buff	True	True	False	Power Boon	Increases skill damage by $H_W_GOOD20%$COLOR_END. Increases Crit Factor by $H_W_GOOD20%$COLOR_END. Stacks up to 20 times.	icon_status.plusattack_tex
 91240002	Buff	True	True	False	Recovery Boon	Recovers $H_W_GOOD4%$COLOR_END of maximum HP every $H_W_GOOD1$COLOR_END second.	icon_status.aura_of_regeneration_hp_tex
 91240003	WeakeningEffect	True	False	False	Exhaustion	Decreases Movement Speed by $H_W_BAD0,8$COLOR_END.	icon_status.minusattack_tex
+91260001	Stun	True	False	False	Energy Shock	Stunned by powerful energy. Cannot move.	icon_status.confuseup_tex
+91260002	WeakeningEffect	True	False	True	Protection	Petrax is shielded.	icon_skills.guildskills_def_tex
+91260003	WeakeningEffect	True	False	True	Protection	Petrax is shielded.	icon_skills.guildskills_def_tex
 91600001	WeakeningEffect	True	False	False	Dark Heart	Reduces HP by $H_W_BAD10%$COLOR_END of maximum every $H_W_BAD1$COLOR_END second. Cannot use skills.	icon_status.fearstatus_tex
 91600003	Stun	True	False	False	Gripped by Fear	Running around in terror!	icon_status.darkriftrage_tex
 91600004	DamageOverTime	True	False	False	Dark Siphon	Reduces HP by $H_W_BAD10%$COLOR_END of maximum every $H_W_BAD2$COLOR_END second1.	icon_status.firedamage_tex

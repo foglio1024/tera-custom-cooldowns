@@ -767,7 +767,9 @@
 280100	Sorcerer	Stone Skin		icon_skills.stoneshape_tex
 290100	Sorcerer	Vortex Prison I		icon_skills.tornadoprison_tex
 300100	Sorcerer	Nova		icon_skills.manaburst_tex
-310100	Sorcerer	Warp Barrier		icon_skills.distortionfield_tex
+310100	Sorcerer	Warp Barrier		icon_skills.distortionfield_tex	310120	310120
+310110	Sorcerer	Warp Barrier		icon_skills.distortionfield_tex
+310120	Sorcerer	Warp Barrier		icon_skills.distortionfield_tex
 340100	Sorcerer	Mana Boost I		icon_skills.c5_strengthenmana
 340200	Sorcerer	Mana Boost II		icon_skills.c5_strengthenmana
 340300	Sorcerer	Mana Boost III		icon_skills.c5_strengthenmana
