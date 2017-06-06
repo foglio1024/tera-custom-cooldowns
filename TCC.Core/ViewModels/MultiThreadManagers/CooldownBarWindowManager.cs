@@ -86,7 +86,7 @@ namespace TCC.ViewModels
         private void NormalCd_AddOrRefreshSkill(SkillCooldown sk)
         {
 
-            if (_classManager.StartSpecialSkill(sk)) return;
+            if (_classManager.StartSpecialSkill(sk) && SettingsManager.ClassWindowSettings.Visibility == Visibility.Visible) return;
 
             try
             {
@@ -206,7 +206,7 @@ namespace TCC.ViewModels
                 return;
             }
 
-            if (_classManager.StartSpecialSkill(sk)) return;
+            if (_classManager.StartSpecialSkill(sk) && SettingsManager.ClassWindowSettings.Visibility == Visibility.Visible) return;
 
             AddOrRefreshOtherSkill(sk);
         }
