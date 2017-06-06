@@ -4986,6 +4986,18 @@
 		<Monster name="Mystique caprin" id="304" isBoss="False" hp="150000" />
 		<Monster name="Guerrier naga" id="305" isBoss="False" hp="150000" />
 	</Zone>
+	<Zone id="126" name="Couveuse de Petre" >
+		<Monster name="Rhinilisque brutal" id="101" isBoss="True" hp="2279590" />
+		<Monster name="Déchireur vulcain" id="102" isBoss="True" hp="12220960" />
+		<Monster name="Déchireur vulcain" id="103" isBoss="True" hp="12220960" />
+		<Monster name="Déchireur vulcain" id="104" isBoss="True" hp="12220960" />
+		<Monster name="Déchireur vulcain" id="105" isBoss="True" hp="7511613" />
+		<Monster name="Déchireur vulcain" id="106" isBoss="True" hp="3666288" />
+		<Monster name="Petre" id="107" isBoss="True" hp="35364133" />
+		<Monster name="Gardien" id="108" isBoss="False" hp="250000" />
+		<Monster name="Instructeur de la couveuse." id="109" isBoss="False" hp="250000" />
+		<Monster name="Téléportail de sortie" id="1501" isBoss="False" hp="10000" />
+	</Zone>
 	<Zone id="152" name="Velika" >
 		<Monster name="Labatus" id="1001" isBoss="True" hp="44708232" />
 		<Monster name="Dastan" id="1002" isBoss="True" hp="44708232" />
@@ -5517,6 +5529,7 @@
 		<Monster name="Angk" id="7002" isBoss="False" hp="10000" />
 		<Monster name="Gadin" id="7003" isBoss="False" hp="10000" />
 		<Monster name="Murakan" id="7004" isBoss="False" hp="10000" />
+		<Monster name="Burak le nuage obscur" id="7006" isBoss="False" hp="10000" />
 		<Monster name="Ellonia" id="8000" isBoss="False" hp="10000" />
 		<Monster name="Téléportail" id="9000" isBoss="False" hp="10000" />
 		<Monster name="Golem d'entraînement" id="9996" isBoss="False" hp="100" />
@@ -13880,22 +13893,22 @@
 		<Monster name="Sabnach enflammé (clone)" id="901" isBoss="True" hp="1500000000" />
 		<Monster name="Clone de Vergos" id="902" isBoss="True" hp="1890000000" />
 		<Monster name="Vergos" id="1000" isBoss="True" hp="2100000000" />
-		<Monster name="Kadmoi" id="1002" isBoss="False" hp="30000000" />
+		<Monster name="Kadmoi" id="1002" isBoss="False" hp="100000000" />
 		<Monster name="Début de la phase 4" id="1003" isBoss="False" hp="0" />
 		<Monster name="Début de la phase 0" id="1005" isBoss="False" hp="0" />
 		<Monster name="Début de la phase 1" id="1006" isBoss="False" hp="0" />
 		<Monster name="Début de la phase 2" id="1007" isBoss="False" hp="0" />
 		<Monster name="Début de la phase 3" id="1008" isBoss="False" hp="0" />
-		<Monster name="Sabnach enflammé" id="1100" isBoss="True" hp="1500000000" />
-		<Monster name="Saleos terrestre" id="1101" isBoss="True" hp="1500000000" />
-		<Monster name="Guladorn sombre" id="1102" isBoss="True" hp="1500000000" />
-		<Monster name="Agares des tempêtes" id="1103" isBoss="True" hp="1350000000" />
+		<Monster name="Sabnach enflammé" id="1100" isBoss="True" hp="1014000000" />
+		<Monster name="Saleos terrestre" id="1101" isBoss="True" hp="1014000000" />
+		<Monster name="Guladorn sombre" id="1102" isBoss="True" hp="1014000000" />
+		<Monster name="Agares des tempêtes" id="1103" isBoss="True" hp="1014000000" />
 		<Monster name="Iagorn" id="1120" isBoss="False" hp="1000000" />
-		<Monster name="Vergos" id="2000" isBoss="False" hp="166600000" />
+		<Monster name="Vergos" id="2000" isBoss="False" hp="99960000" />
 		<Monster name="Catapulte du Passage détruit du royaume des dieux" id="2005" isBoss="False" hp="576000" />
 		<Monster name="Golem minéral" id="2500" isBoss="False" hp="0" />
-		<Monster name="Vergos" id="3000" isBoss="True" hp="2100000000" />
-		<Monster name="Vergos" id="4000" isBoss="True" hp="2100000000" />
+		<Monster name="Vergos" id="3000" isBoss="True" hp="2000000000" />
+		<Monster name="Vergos" id="4000" isBoss="True" hp="2000000000" />
 		<Monster name="Dembros du dîner" id="9001" isBoss="False" hp="945" />
 		<Monster name="Karyon azuré" id="9003" isBoss="False" hp="945" />
 		<Monster name="Karyon azuré" id="9004" isBoss="False" hp="945" />

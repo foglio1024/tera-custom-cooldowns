@@ -2740,10 +2740,10 @@
 		<Monster name="Banker" id="5105" isBoss="False" hp="10000" />
 		<Monster name="Bouncer" id="5106" isBoss="False" hp="10000" />
 		<Monster name="Teleportal" id="5107" isBoss="False" hp="53600" />
-		<Monster name="Sam Hawkins" id="5201" isBoss="False" hp="10000" />
-		<Monster name="Jack Baile" id="5202" isBoss="False" hp="10000" />
-		<Monster name="Julia Harris" id="5203" isBoss="False" hp="10000" />
-		<Monster name="Rick" id="5204" isBoss="False" hp="10000" />
+		<Monster name="Sharkas" id="5201" isBoss="False" hp="10000" />
+		<Monster name="Jackam" id="5202" isBoss="False" hp="10000" />
+		<Monster name="Harril" id="5203" isBoss="False" hp="10000" />
+		<Monster name="Ronka" id="5204" isBoss="False" hp="10000" />
 		<Monster name="Docan" id="5205" isBoss="False" hp="10000" />
 		<Monster name="Maraam" id="5206" isBoss="False" hp="10000" />
 		<Monster name="Anna" id="5207" isBoss="False" hp="10000" />
@@ -4986,6 +4986,18 @@
 		<Monster name="Caprin Mystic" id="304" isBoss="False" hp="150000" />
 		<Monster name="Naga Warrior" id="305" isBoss="False" hp="150000" />
 	</Zone>
+	<Zone id="126" name="Petre Nursery" >
+		<Monster name="Brutal Rhinilisk" id="101" isBoss="True" hp="2279590" />
+		<Monster name="Vulcan Render" id="102" isBoss="True" hp="12220960" />
+		<Monster name="Vulcan Render" id="103" isBoss="True" hp="12220960" />
+		<Monster name="Vulcan Render" id="104" isBoss="True" hp="12220960" />
+		<Monster name="Vulcan Render" id="105" isBoss="True" hp="7511613" />
+		<Monster name="Vulcan Render" id="106" isBoss="True" hp="3666288" />
+		<Monster name="Petrax" id="107" isBoss="True" hp="35364133" />
+		<Monster name="Petrax Minder" id="108" isBoss="False" hp="250000" />
+		<Monster name="Petrax Trainer" id="109" isBoss="False" hp="250000" />
+		<Monster name="Teleportal" id="1501" isBoss="False" hp="10000" />
+	</Zone>
 	<Zone id="152" name="Velika" >
 		<Monster name="Lavathus" id="1001" isBoss="True" hp="44708232" />
 		<Monster name="Drakhan" id="1002" isBoss="True" hp="44708232" />
@@ -5517,6 +5529,7 @@
 		<Monster name="Ramull" id="7002" isBoss="False" hp="10000" />
 		<Monster name="Gadin" id="7003" isBoss="False" hp="10000" />
 		<Monster name="Murakan" id="7004" isBoss="False" hp="10000" />
+		<Monster name="Karmok" id="7006" isBoss="False" hp="10000" />
 		<Monster name="Ellonia" id="8000" isBoss="False" hp="10000" />
 		<Monster name="Shadow Sanguinary Teleportal" id="9000" isBoss="False" hp="10000" />
 		<Monster name="Training Golem" id="9996" isBoss="False" hp="100" />
@@ -13910,22 +13923,22 @@
 		<Monster name="Ignidrax Copy" id="901" isBoss="True" hp="1500000000" />
 		<Monster name="Vergos Copy" id="902" isBoss="True" hp="1890000000" />
 		<Monster name="Vergos" id="1000" isBoss="True" hp="2100000000" />
-		<Monster name="Lament Warrior" id="1002" isBoss="False" hp="30000000" />
+		<Monster name="Lament Warrior" id="1002" isBoss="False" hp="100000000" />
 		<Monster name="Begin Phase 4" id="1003" isBoss="False" hp="0" />
 		<Monster name="Begin Phase 0" id="1005" isBoss="False" hp="0" />
 		<Monster name="Begin Phase 1" id="1006" isBoss="False" hp="0" />
 		<Monster name="Begin Phase" id="1007" isBoss="False" hp="0" />
 		<Monster name="Begin Phase 3" id="1008" isBoss="False" hp="0" />
-		<Monster name="Ignidrax" id="1100" isBoss="True" hp="1500000000" />
-		<Monster name="Terradrax" id="1101" isBoss="True" hp="1500000000" />
-		<Monster name="Umbradrax" id="1102" isBoss="True" hp="1500000000" />
-		<Monster name="Aquadrax" id="1103" isBoss="True" hp="1350000000" />
+		<Monster name="Ignidrax" id="1100" isBoss="True" hp="1014000000" />
+		<Monster name="Terradrax" id="1101" isBoss="True" hp="1014000000" />
+		<Monster name="Umbradrax" id="1102" isBoss="True" hp="1014000000" />
+		<Monster name="Aquadrax" id="1103" isBoss="True" hp="1014000000" />
 		<Monster name="Spirit of Agony" id="1120" isBoss="False" hp="1000000" />
-		<Monster name="Vergos" id="2000" isBoss="False" hp="166600000" />
+		<Monster name="Vergos" id="2000" isBoss="False" hp="99960000" />
 		<Monster name="Ballista" id="2005" isBoss="False" hp="576000" />
 		<Monster name="Stone Golem" id="2500" isBoss="False" hp="0" />
-		<Monster name="Vergos" id="3000" isBoss="True" hp="2100000000" />
-		<Monster name="Vergos" id="4000" isBoss="True" hp="2100000000" />
+		<Monster name="Vergos" id="3000" isBoss="True" hp="2000000000" />
+		<Monster name="Vergos" id="4000" isBoss="True" hp="2000000000" />
 		<Monster name="Dembrel" id="9001" isBoss="False" hp="945" />
 		<Monster name="Kanbrim" id="9003" isBoss="False" hp="945" />
 		<Monster name="Kanbrim" id="9004" isBoss="False" hp="945" />
