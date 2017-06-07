@@ -32,9 +32,20 @@ namespace TCC.Controls
         {
             get
             {
-                if(_context != null) return _context.Factor * 359.9;
+                if (_context != null) return _context.Factor * 359.9;
                 return 0;
 
+            }
+        }
+        private SolidColorBrush currentColor;
+        public SolidColorBrush CurrentColor
+        {
+            get => currentColor;
+            set
+            {
+                if (currentColor == value) return;
+                currentColor = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CurrentColor"));
             }
         }
         public SolidColorBrush Color
@@ -42,10 +53,15 @@ namespace TCC.Controls
             get { return (SolidColorBrush)GetValue(ColorProperty); }
             set { SetValue(ColorProperty, value); }
         }
+        public static readonly DependencyProperty ColorProperty = DependencyProperty.Register("Color", typeof(SolidColorBrush), typeof(StatControl));
 
-        // Using a DependencyProperty as the backing store for Color.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ColorProperty =
-            DependencyProperty.Register("Color", typeof(SolidColorBrush), typeof(StatControl));
+        public SolidColorBrush StatusColor
+        {
+            get { return (SolidColorBrush)GetValue(StatusColorProperty); }
+            set { SetValue(StatusColorProperty, value); }
+        }
+        public static readonly DependencyProperty StatusColorProperty = DependencyProperty.Register("StatusColor", typeof(SolidColorBrush), typeof(StatControl));
+
 
         StatTracker _context;
 
@@ -56,13 +72,27 @@ namespace TCC.Controls
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             _context = (StatTracker)DataContext;
             _context.PropertyChanged += _context_PropertyChanged;
+            if (StatusColor == null) StatusColor = Color;
+            CurrentColor = Color;
         }
 
         private void _context_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if(e.PropertyName == "Factor")
+            if (e.PropertyName == "Factor")
             {
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Angle"));
+            }
+            if (e.PropertyName == "Status")
+            {
+                if (_context.Status)
+                {
+                    CurrentColor = StatusColor;
+
+                }
+                else
+                {
+                    CurrentColor = Color;
+                }
             }
         }
     }
