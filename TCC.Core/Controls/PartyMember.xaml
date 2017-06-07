@@ -16,6 +16,7 @@
         <converters:ReadyToOpacityConverter x:Key="readyToOpacityConv"/>
         <converters:ReadyToIconConverter x:Key="readyToIconConv"/>
         <converters:ReadyToColorConverter x:Key="readyToColorConv"/>
+        <converters:HPbarColorConverter x:Key="hpDebuffColConv"/>
         <DataTemplate x:Key="abnorm">
             <controls:AbnormalityIndicator />
         </DataTemplate>
@@ -150,7 +151,7 @@
             </TextBlock>
             <!--HP-->
             <Rectangle Fill="#90000000" Height="6" Width="116" Grid.Row="1" HorizontalAlignment="Left" Margin="0,1" Grid.ColumnSpan="2"/>
-            <Rectangle Fill="#ef536d" Height="6" Width="116" Grid.Row="1" HorizontalAlignment="Left" Margin="0,1" Grid.ColumnSpan="2" >
+            <Rectangle Fill="{Binding IsDebuffed, Converter={StaticResource hpDebuffColConv}}" Height="6" Width="116" Grid.Row="1" HorizontalAlignment="Left" Margin="0,1" Grid.ColumnSpan="2" >
                 <Rectangle.RenderTransform>
                     <ScaleTransform ScaleX="{Binding HpFactor}"/>
                 </Rectangle.RenderTransform>
