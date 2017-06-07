@@ -95,7 +95,7 @@ namespace TCC.Data
 
         public void Start(uint cd)
         {
-            if (cd < 1000)
+            if (cd > 1000)
             {
                 Cooldown = _type == CooldownType.Skill ? cd : cd * 1000;
                 OriginalCooldown = Cooldown;
@@ -107,6 +107,7 @@ namespace TCC.Data
             }
             else
             {
+                Cooldown = cd;
                 _shortTimer.Interval = TimeSpan.FromMilliseconds(cd);
                 _shortTimer.Start();
                 Seconds = 0;
