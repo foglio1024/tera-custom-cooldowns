@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using TCC.Data;
@@ -7,9 +8,9 @@ namespace TCC.ViewModels
 {
     public abstract class ClassManager : DependencyObject
     {
-        
+
         public static ClassManager CurrentClassManager;
-        
+
         public virtual bool StartSpecialSkill(SkillCooldown sk)
         {
             return false;
@@ -26,7 +27,7 @@ namespace TCC.ViewModels
         public static void SetMaxHP(int v)
         {
             if (CurrentClassManager == null) return;
-           CurrentClassManager.Dispatcher.Invoke(() => { CurrentClassManager.HP.Max = v; });
+            CurrentClassManager.Dispatcher.Invoke(() => { CurrentClassManager.HP.Max = v; });
 
         }
         public static void SetMaxMP(int v)
@@ -39,7 +40,6 @@ namespace TCC.ViewModels
             if (CurrentClassManager == null) return;
             CurrentClassManager.Dispatcher.Invoke(() => { CurrentClassManager.ST.Max = v; });
         }
-
 
         public static void SetHP(int hp)
         {
@@ -58,11 +58,32 @@ namespace TCC.ViewModels
             CurrentClassManager.Dispatcher.Invoke(() => { CurrentClassManager.ST.Val = currentStamina; });
         }
 
+        private static List<uint> _debuffs;
+        public static void SetStatus(Abnormality ab, bool adding)
+        {
+            if (CurrentClassManager == null || ab.IsBuff) return;
+
+            if (adding)
+            {
+                if (!_debuffs.Contains(ab.Id))
+                {
+                    _debuffs.Add(ab.Id);
+                }
+            }
+            else
+            {
+                _debuffs.Remove(ab.Id);
+            }
+
+            bool status = _debuffs.Count == 0 ? false : true;
+            CurrentClassManager.Dispatcher.Invoke(() => { CurrentClassManager.HP.Status = status; });
+        }
         public ClassManager()
         {
             HP = new StatTracker();
             MP = new StatTracker();
             ST = new StatTracker();
+            _debuffs = new List<uint>();
         }
 
     }
