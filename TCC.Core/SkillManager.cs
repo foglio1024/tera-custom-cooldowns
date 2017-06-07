@@ -35,28 +35,10 @@ namespace TCC
         {
             if (skillCooldown.Cooldown == 0)
             {
-                //if (SettingsManager.ClassWindowOn && ClassWindowViewModel.ClassWindowExists())
-                //{
-                //    ClassManager.CurrentClassManager.FixedCd_RemoveSkill(skillCooldown);
-                //    //WindowManager.ClassWindow.Context.ResetCooldown(skillCooldown);
-                //}
-                //else
-                //{
-                //    CooldownWindowManager.Instance.NormalCd_RemoveSkill(skillCooldown.Skill);
-                //}
                 CooldownWindowManager.Instance.RemoveSkill(skillCooldown.Skill);
             }
             else
             {
-                //if (SettingsManager.ClassWindowOn && ClassWindowViewModel.ClassWindowExists())
-                //{
-                //    ClassManager.CurrentClassManager.StartCooldown(skillCooldown);
-                //    //WindowManager.ClassWindow.Context.StartCooldown(skillCooldown);
-                //}
-                //else
-                //{
-                //    CooldownWindowManager.Instance.NormalCd_AddOrRefreshSkill(skillCooldown);
-                //}
                 CooldownWindowManager.Instance.AddOrRefreshSkill(skillCooldown);
             }
         }
@@ -72,7 +54,7 @@ namespace TCC
                     return;
                 }
                 RouteSkill(new SkillCooldown(skill, cd, CooldownType.Skill, CooldownWindowManager.Instance.Dispatcher));
-                WindowManager.SkillsEnded = false;
+                //WindowManager.SkillsEnded = false;
             }
         }
         public static void AddBrooch(uint id, uint cd)
@@ -88,15 +70,6 @@ namespace TCC
         {
             if (SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out Skill skill))
             {
-                //if (SettingsManager.ClassWindowOn && ClassWindowViewModel.ClassWindowExists())
-                //{
-
-                //    WindowManager.ClassWindow.Context.ChangeSkillCooldown(skill, cd);
-                //}
-                //else
-                //{
-                //    CooldownWindowManager.Instance.NormalCd_AddOrRefreshSkill(new SkillCooldown(skill, cd, CooldownType.Skill, CooldownWindowManager.Instance.Dispatcher));
-                //}
                 CooldownWindowManager.Instance.RefreshSkill(skill, cd);
             }
 
