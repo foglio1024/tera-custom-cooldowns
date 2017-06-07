@@ -39,6 +39,19 @@ namespace TCC.ViewModels
                 return (double)val / max;
             }
         }
+
+        private bool status = false;
+        public bool Status
+        {
+            get => status;
+            set
+            {
+                if (status == value) return;
+                status = value;
+                NotifyPropertyChanged("Status");
+            }
+        }
+
         public StatTracker()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
