@@ -198,6 +198,7 @@
     <Compile Include="Parsing\Messages\S_CHECK_TO_READY_PARTY_FIN.cs" />
     <Compile Include="Parsing\Messages\S_DESPAWN_NPC.cs" />
     <Compile Include="Parsing\Messages\S_DESPAWN_USER.cs" />
+    <Compile Include="Parsing\Messages\S_EACH_SKILL_RESULT.cs" />
     <Compile Include="Parsing\Messages\S_LEAVE_PARTY_MEMBER.cs" />
     <Compile Include="Parsing\Messages\S_LOAD_TOPO.cs" />
     <Compile Include="Parsing\Messages\S_PARTY_MEMBER_ABNORMAL_ADD.cs" />
@@ -222,7 +223,6 @@
     <Compile Include="Parsing\Messages\S_PARTY_MEMBER_INFO.cs" />
     <Compile Include="Parsing\Messages\S_PARTY_MEMBER_STAT_UPDATE.cs" />
     <Compile Include="Parsing\Messages\S_WEAK_POINT.cs" />
-    <Compile Include="Parsing\S_EACH_SKILL_RESULT.cs" />
     <Compile Include="Parsing\ThreadSafeManager.cs" />
     <Compile Include="SettingsManager.cs" />
     <Compile Include="SkillUtils.cs" />
