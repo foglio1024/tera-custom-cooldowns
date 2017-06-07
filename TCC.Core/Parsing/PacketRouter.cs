@@ -159,11 +159,6 @@ namespace TCC.Parsing
         }
         public static void HandleLogin(S_LOGIN p)
         {
-            //WindowManager.ClassWindow.Dispatcher.Invoke(() =>
-            //{
-            //    WindowManager.ClassWindow.Context.ClearSkills();
-            //    WindowManager.ClassWindow.Context.CurrentClass = p.CharacterClass;
-            //});
             CooldownWindowManager.Instance.ClearSkills();
             CooldownWindowManager.Instance.LoadSkills(Utils.ClassEnumToString(p.CharacterClass).ToLower() + "-skills.xml", p.CharacterClass);
             WindowManager.ClassWindow.Context.CurrentClass = p.CharacterClass;
@@ -178,6 +173,7 @@ namespace TCC.Parsing
             
             SessionManager.LoadingScreen = true;
             SessionManager.Logged = true;
+            SessionManager.Encounter = false;
             SessionManager.CurrentPlayer.Class = p.CharacterClass;
             SessionManager.CurrentPlayer.EntityId = p.entityId;
             SessionManager.CurrentPlayer.PlayerId = p.PlayerId;
@@ -190,27 +186,6 @@ namespace TCC.Parsing
             CharacterWindowManager.Instance.Player.Name = p.Name;
             CharacterWindowManager.Instance.Player.Level = p.Level;
             SessionManager.SetPlayerLaurel(CharacterWindowManager.Instance.Player);
-
-
-
-
-            /*  
-             *  hide standard cooldown window if current class 
-             *  is supported and class window is enabled
-             */
-            //if (ClassWindowViewModel.ClassWindowExists() && SettingsManager.ClassWindowOn)
-            //{
-            //    WindowManager.ClassWindow.SetVisibility(System.Windows.Visibility.Visible);
-            //    WindowManager.CooldownWindow.SetVisibility(System.Windows.Visibility.Hidden);
-            //}
-            //else
-            //{
-            //    WindowManager.ClassWindow.SetVisibility(System.Windows.Visibility.Hidden);
-            //    if (SettingsManager.CooldownWindowSettings.Visibility == System.Windows.Visibility.Visible)
-            //    {
-            //        WindowManager.CooldownWindow.SetVisibility(System.Windows.Visibility.Visible);
-            //    }
-            //}
         }
         public static void HandleReturnToLobby(S_RETURN_TO_LOBBY p)
         {
@@ -225,6 +200,7 @@ namespace TCC.Parsing
         public static void HandleLoadTopo(S_LOAD_TOPO x)
         {
             SessionManager.LoadingScreen = true;
+            SessionManager.Encounter = false;
         }
         public static void HandleLoadTopoFin(C_LOAD_TOPO_FIN x)
         {
@@ -292,13 +268,13 @@ namespace TCC.Parsing
 
         public static void HandleSkillResult(S_EACH_SKILL_RESULT x)
         {
+
             bool sourceInParty = GroupWindowManager.Instance.UserExists(x.Source);
             bool targetInParty = GroupWindowManager.Instance.UserExists(x.Target);
             if (x.Target == x.Source) return;
             if (sourceInParty && targetInParty) return;
             if(sourceInParty || targetInParty) WindowManager.SkillsEnded = false;
-            if (x.Source == SessionManager.CurrentPlayer.EntityId || x.Target == SessionManager.CurrentPlayer.EntityId) WindowManager.SkillsEnded = false;
-
+            if (x.Source == SessionManager.CurrentPlayer.EntityId) WindowManager.SkillsEnded = false;
         }
 
         public static void HandleChangeLeader(S_CHANGE_PARTY_MANAGER x)
