@@ -53,6 +53,21 @@ namespace TCC
                 }
             }
         }
+
+        
+        private static bool encounter;
+        public static bool Encounter
+        {
+            get => encounter;
+            set
+            {
+                if (encounter == value) return;
+                encounter = value;
+                if (!encounter) WindowManager.SkillsEnded = true;
+                WindowManager.NotifyDimChanged();
+            }
+        }
+
         public static Player CurrentPlayer = new Player();
         public static List<Character> CurrentAccountCharacters;
 
