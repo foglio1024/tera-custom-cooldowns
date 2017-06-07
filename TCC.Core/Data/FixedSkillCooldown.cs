@@ -7,6 +7,7 @@ namespace TCC.Data
         CooldownType _type;
         DispatcherTimer _secondsTimer;
         DispatcherTimer _offsetTimer;
+        DispatcherTimer _shortTimer;
         public Skill Skill { get; set; }
         uint cooldown;
         public uint Cooldown
@@ -47,7 +48,12 @@ namespace TCC.Data
         public FixedSkillCooldown(Skill sk, CooldownType t, Dispatcher d)
         {
             _dispatcher = d;
+
+            _shortTimer = new DispatcherTimer(DispatcherPriority.Background, _dispatcher);
+            _shortTimer.Tick += _shortTimer_Tick;
+
             Seconds = 0;
+
             _secondsTimer = new DispatcherTimer(DispatcherPriority.Background, _dispatcher);
             _secondsTimer.Interval = TimeSpan.FromSeconds(1);
             _secondsTimer.Tick += _secondsTimer_Tick;
@@ -57,6 +63,12 @@ namespace TCC.Data
 
             _type = t;
             Skill = sk;
+        }
+
+        private void _shortTimer_Tick(object sender, EventArgs e)
+        {
+            _shortTimer.Stop();
+            IsAvailable = true;
         }
 
         private void _offsetTimer_Tick(object sender, EventArgs e)
@@ -83,15 +95,23 @@ namespace TCC.Data
 
         public void Start(uint cd)
         {
-            Cooldown = _type == CooldownType.Skill ? cd : cd * 1000;
-            OriginalCooldown = Cooldown;
-            Seconds = 1+(Cooldown / 1000);
-            var offset = Cooldown % 1000;
-            _offsetTimer.Interval = TimeSpan.FromMilliseconds(offset);
-            //Console.WriteLine("Offset = {0}", offset);
-            _offsetTimer.Start();
-            //Console.WriteLine("Offset timer started");
-            IsAvailable = false;
+            if (cd < 1000)
+            {
+                Cooldown = _type == CooldownType.Skill ? cd : cd * 1000;
+                OriginalCooldown = Cooldown;
+                Seconds = 1 + (Cooldown / 1000);
+                var offset = Cooldown % 1000;
+                _offsetTimer.Interval = TimeSpan.FromMilliseconds(offset);
+                _offsetTimer.Start();
+                IsAvailable = false;
+            }
+            else
+            {
+                _shortTimer.Interval = TimeSpan.FromMilliseconds(cd);
+                _shortTimer.Start();
+                Seconds = 0;
+                IsAvailable = false;
+            }
             NotifyPropertyChanged("Start");
 
         }
