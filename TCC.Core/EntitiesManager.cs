@@ -10,22 +10,8 @@ namespace TCC
 {
     public static class EntitiesManager
     {
-        //public static ObservableCollection<Boss> CurrentBosses = new ObservableCollection<Boss>();
         public static ObservableCollection<Player> CurrentUsers = new ObservableCollection<Player>();
         public static MonsterDatabase CurrentDatabase;
-        //public static bool TryGetBossById(ulong id, out Boss b)
-        //{
-        //    b = CurrentBosses.FirstOrDefault(x => x.EntityId == id);
-        //    if (b == null)
-        //    {
-        //        b = new Boss(0, 0, 0, Visibility.Collapsed);
-        //        return false;
-        //    }
-        //    else
-        //    {
-        //        return true;
-        //    }
-        //}
 
         public static Dragon CurrentDragon = Dragon.None;
         public static ObservableCollection<ulong> chestList = new ObservableCollection<ulong>();
@@ -35,75 +21,24 @@ namespace TCC
             {
                 if (m.IsBoss || force)
                 {
-                    App.Current.Dispatcher.Invoke(() =>
-                    {
-                        //CurrentBosses.Add(new Boss(entityId, zoneId, templateId, v));
-
-                    });
                     BossGageWindowManager.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, templateId, zoneId, v);
                 }
-            }
-            else
-            {
-                //BossGageWindowManager.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP);
             }
         }
         public static void DespawnNPC(ulong target)
         {
-                BossGageWindowManager.Instance.RemoveBoss(target);
-            //if (TryGetBossById(target, out Boss b))
-            //{
-            //    App.Current.Dispatcher.Invoke(() =>
-            //    {
-            //        CurrentBosses.Remove(b);
-            //        b.Dispose();
-            //    });
-            //}
-            //if (SessionManager.HarrowholdMode)
-            //{
-            //    UnsetDragonsContexts(target);
-            //}
-
-
+            BossGageWindowManager.Instance.RemoveBoss(target);
         }
         public static void SetNPCStatus(ulong entityId, bool enraged)
         {
-            //if (TryGetBossById(entityId, out Boss b))
-            //{
-            //    if (b.Enraged != enraged)
-            //    {
-            //        b.Enraged = enraged;
-            //    }
-            //}
             BossGageWindowManager.Instance.SetBossEnrage(entityId, enraged);
-
         }
         public static void UpdateNPCbyGauge(ulong target, float curHP, float maxHP, ushort zoneId, uint templateId)
         {
             BossGageWindowManager.Instance.AddOrUpdateBoss(target, maxHP, curHP, templateId, zoneId, Visibility.Visible);
-
-            //if (TryGetBossById(target, out Boss b))
-            //{
-            //    b.MaxHP = maxHP;
-            //    b.Visible = System.Windows.Visibility.Visible;
-
-            //    if (b.CurrentHP != curHP)
-            //    {
-            //        b.CurrentHP = curHP;
-            //    }
-            //    BossGageWindowManager.Instance.AddOrUpdateBoss(target, maxHP, curHP);
-            //}
-            //else
-            //{
-            //    SpawnNPC(zoneId, templateId, target, Visibility.Visible, true);
-            //}
         }
         public static void ClearNPC()
         {
-            //App.Current.Dispatcher.Invoke(() =>
-            //{
-            //    CurrentBosses.Clear();
-            //});
             BossGageWindowManager.Instance.ClearBosses();
         }
         public static void ClearUsers()
