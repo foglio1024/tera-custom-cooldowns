@@ -30,7 +30,10 @@ namespace TCC.ViewModels
                 _bosses = value;
             }
         }
-
+        public int VisibleBossesCount
+        {
+            get => CurrentNPCs.Where(x => x.Visible == Visibility.Visible).Count();
+        }
         public void AddOrUpdateBoss(ulong entityId, float maxHp, float curHp, uint templateId = 0, uint zoneId = 0, Visibility v = Visibility.Visible)
         {
 
