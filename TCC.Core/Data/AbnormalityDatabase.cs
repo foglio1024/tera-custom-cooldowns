@@ -31,6 +31,14 @@ namespace TCC.Data
                 var tooltip = s[6].Replace("&#xA;", "\n");
                 var iconName = s[7];
 
+                //---add fixes here---//
+
+                if(id == 78100006) //isBuff = true for lakan's souls world debuff (it's not supposed to make hp bar purple)
+                {
+                    isBuff = true;
+                }
+
+                //--------------------//
                 var ab = new Abnormality(id, isShow, isBuff, infinity, t);
                 ab.SetIcon(iconName);
                 ab.SetInfo(name, tooltip);
