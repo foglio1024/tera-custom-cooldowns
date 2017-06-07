@@ -36,171 +36,104 @@ namespace TCC.ViewModels
                 }
             }
         }
+        public bool GetUser(ulong id, out User user)
+        {
+            User u;
+            if (TryGetUserFromList(Dps, id, out u))
+            {
+                user = u;
+                return true;
+            }
+            else if (TryGetUserFromList(Tanks, id, out u))
+            {
+                user = u;
+                return true;
+            }
+            else if (TryGetUserFromList(Healers, id, out u))
+            {
+                user = u;
+                return true;
+            }
+            user = null;
+            return false;
+
+        }
+        public bool GetUser(uint playerId, uint serverId, out User user)
+        {
+            User u;
+            if (TryGetUserFromList(Dps, serverId, playerId, out u))
+            {
+                user = u;
+                return true;
+            }
+            else if (TryGetUserFromList(Tanks, serverId, playerId, out u))
+            {
+                user = u;
+                return true;
+            }
+            else if (TryGetUserFromList(Healers, serverId, playerId, out u))
+            {
+                user = u;
+                return true;
+            }
+            user = null;
+            return false;
+
+        }
 
         public bool UserExists(ulong id)
         {
-            User u;
-            if(TryGetUser(Dps, id, out u))
-            {
-                return true;
-            }
-            else if(TryGetUser(Tanks, id, out u))
-            {
-                return true;
-            }
-            else if (TryGetUser(Healers, id, out u))
-            {
-                return true;
-            }
-            return false;
+            return GetUser(id, out User u);
         }
 
         public void BeginOrRefreshUserAbnormality(Abnormality ab, int stacks, uint duration, uint playerId, uint serverId)
         {
-            if (SettingsManager.IgnoreRaidAbnormalitiesInGroupWindow) return;
-            if (SettingsManager.IgnoreAllBuffsInGroupWindow && ab.Type == AbnormalityType.Buff) return;
-
             var size = GroupSize > GROUP_SIZE_THRESHOLD ? AbnormalityManager.RAID_AB_SIZE : AbnormalityManager.PARTY_AB_SIZE;
             var margin = GroupSize > GROUP_SIZE_THRESHOLD ? AbnormalityManager.RAID_AB_LEFT_MARGIN : AbnormalityManager.PARTY_AB_LEFT_MARGIN;
 
             if (ab.Infinity) duration = uint.MaxValue;
             User u;
-            if (TryGetUser(_dps, serverId, playerId, out u))
+
+            if(GetUser(playerId, serverId, out u))
             {
                 if (ab.Type == AbnormalityType.Buff)
                 {
                     u.AddOrRefreshBuff(ab, duration, stacks, size, margin);
-                    //u.AddOrRefreshBuff(new AbnormalityDuration(ab, duration, stacks, u.EntityId, this.Dispatcher, false, size*.9, size , new Thickness(margin,1,1,1)));
                     if (u.UserClass == Class.Warrior && ab.Id >= 100200 && ab.Id <= 100203) MoveUser(Dps, Tanks, u.ServerId, u.PlayerId);
                 }
                 else
                 {
                     u.AddOrRefreshDebuff(ab, duration, stacks, size, margin);
-                    //u.AddOrRefreshDebuff(new AbnormalityDuration(ab, duration, stacks, u.EntityId, this.Dispatcher, false, size * .9, size, new Thickness(margin, 1, 1, 1)));
                 }
                 return;
             }
-            if (TryGetUser(_tanks, serverId, playerId, out u))
-            {
-                if (ab.Type == AbnormalityType.Buff)
-                {
-                    u.AddOrRefreshBuff(ab, duration, stacks, size, margin);
-                    //u.AddOrRefreshBuff(new AbnormalityDuration(ab, duration, stacks, u.EntityId, this.Dispatcher, false, size * .9, size, new Thickness(margin, 1, 1, 1)));
-                }
-                else
-                {
-                    u.AddOrRefreshBuff(ab, duration, stacks, size, margin);
-
-                    //u.AddOrRefreshDebuff(new AbnormalityDuration(ab, duration, stacks, u.EntityId, this.Dispatcher, false, size * .9, size, new Thickness(margin, 1, 1, 1)));
-                }
-                return;
-            }
-            if (TryGetUser(_healers, serverId, playerId, out u))
-            {
-                if (ab.Type == AbnormalityType.Buff)
-                {
-                    u.AddOrRefreshBuff(ab, duration, stacks, size, margin);
-
-                    //u.AddOrRefreshBuff(new AbnormalityDuration(ab, duration, stacks, u.EntityId, this.Dispatcher, false, size*.9, size, new Thickness(margin, 1, 1, 1)));
-                }
-                else
-                {
-                    u.AddOrRefreshBuff(ab, duration, stacks, size, margin);
-
-                    //u.AddOrRefreshDebuff(new AbnormalityDuration(ab, duration, stacks, u.EntityId, this.Dispatcher, false, size * .9, size, new Thickness(margin, 1, 1, 1)));
-                }
-                return;
-            }
-
         }
         public void EndUserAbnormality(Abnormality ab, uint playerId, uint serverId)
         {
             User u;
-            if (TryGetUser(_dps, serverId, playerId, out u))
-            {
-                if (ab.Type == AbnormalityType.Buff)
-                {
-                    u.RemoveBuff(ab);
-                }
-                else
-                {
-                    u.RemoveDebuff(ab);
-                }
-                return;
-            }
-            if (TryGetUser(_tanks, serverId, playerId, out u))
+
+            if(GetUser(playerId, serverId, out u))
             {
                 if (ab.Type == AbnormalityType.Buff)
                 {
                     u.RemoveBuff(ab);
                     if (u.UserClass == Class.Warrior && ab.Id >= 100200 && ab.Id <= 100203) MoveUser(Tanks, Dps, u.ServerId, u.PlayerId);
+                }
+                else
+                {
+                    u.RemoveDebuff(ab);
+                }
+                return;
 
-                }
-                else
-                {
-                    u.RemoveDebuff(ab);
-                }
-                return;
-            }
-            if (TryGetUser(_healers, serverId, playerId, out u))
-            {
-                if (ab.Type == AbnormalityType.Buff)
-                {
-                    u.RemoveBuff(ab);
-                }
-                else
-                {
-                    u.RemoveDebuff(ab);
-                }
-                return;
             }
         }
         public void ClearUserAbnormality(uint playerId, uint serverId)
         {
             User u;
-            if (TryGetUser(_dps, serverId, playerId, out u))
-            {
-                foreach (var b in u.Buffs)
-                {
-                    b.Dispose();
-                }
-                u.Buffs.Clear();
 
-                foreach (var b in u.Debuffs)
-                {
-                    b.Dispose();
-                }
-                u.Debuffs.Clear();
-                return;
-            }
-            if (TryGetUser(_tanks, serverId, playerId, out u))
+            if(GetUser(playerId, serverId, out u))
             {
-                foreach (var b in u.Buffs)
-                {
-                    b.Dispose();
-                }
-                u.Buffs.Clear();
-
-                foreach (var b in u.Debuffs)
-                {
-                    b.Dispose();
-                }
-                u.Debuffs.Clear();
-                return;
-            }
-            if (TryGetUser(_healers, serverId, playerId, out u))
-            {
-                foreach (var b in u.Buffs)
-                {
-                    b.Dispose();
-                }
-                u.Buffs.Clear();
-
-                foreach (var b in u.Debuffs)
-                {
-                    b.Dispose();
-                }
-                u.Debuffs.Clear();
+                u.ClearAbnormalities();
                 return;
             }
         }
@@ -318,18 +251,18 @@ namespace TCC.ViewModels
         public void RemoveMember(uint playerId, uint serverId)
         {
             User u;
-            if (TryGetUser(_dps, serverId, playerId, out u))
+            if (TryGetUserFromList(_dps, serverId, playerId, out u))
             {
                 Dps.Remove(u);
                 GroupSize = GetCount();
                 return;
             }
-            if (TryGetUser(_tanks, serverId, playerId, out u))
+            if (TryGetUserFromList(_tanks, serverId, playerId, out u))
             {
                 Tanks.Remove(u);
                 GroupSize = GetCount();
             }
-            if (TryGetUser(_healers, serverId, playerId, out u))
+            if (TryGetUserFromList(_healers, serverId, playerId, out u))
             {
                 Healers.Remove(u);
                 GroupSize = GetCount();
@@ -370,17 +303,17 @@ namespace TCC.ViewModels
         internal void RemoveMe()
         {
             User u;
-            if (TryGetUser(_dps, SessionManager.CurrentPlayer.EntityId, out u)) { _dps.Remove(u); return; }
-            if (TryGetUser(_tanks, SessionManager.CurrentPlayer.EntityId, out u)) { _tanks.Remove(u); return; }
-            if (TryGetUser(_healers, SessionManager.CurrentPlayer.EntityId, out u)) { _healers.Remove(u); return; }
+            if (TryGetUserFromList(_dps, SessionManager.CurrentPlayer.EntityId, out u)) { _dps.Remove(u); return; }
+            if (TryGetUserFromList(_tanks, SessionManager.CurrentPlayer.EntityId, out u)) { _tanks.Remove(u); return; }
+            if (TryGetUserFromList(_healers, SessionManager.CurrentPlayer.EntityId, out u)) { _healers.Remove(u); return; }
         }
 
         internal void ClearMyBuffs()
         {
             User u;
-            if (TryGetUser(_dps, SessionManager.CurrentPlayer.EntityId, out u)) { u.Buffs.Clear(); return; }
-            if (TryGetUser(_tanks, SessionManager.CurrentPlayer.EntityId, out u)) { u.Buffs.Clear(); return; }
-            if (TryGetUser(_healers, SessionManager.CurrentPlayer.EntityId, out u)) { u.Buffs.Clear(); return; }
+            if (TryGetUserFromList(_dps, SessionManager.CurrentPlayer.EntityId, out u)) { u.Buffs.Clear(); return; }
+            if (TryGetUserFromList(_tanks, SessionManager.CurrentPlayer.EntityId, out u)) { u.Buffs.Clear(); return; }
+            if (TryGetUserFromList(_healers, SessionManager.CurrentPlayer.EntityId, out u)) { u.Buffs.Clear(); return; }
         }
 
         internal void SetNewLeader(ulong entityId, string name)
@@ -504,20 +437,20 @@ namespace TCC.ViewModels
         {
             if (rollResult == Int32.MaxValue) rollResult = -1;
             User user;
-            if (TryGetUser(_dps, entityId, out user))
+            if (TryGetUserFromList(_dps, entityId, out user))
             {
                 user.RollResult = rollResult;
                 FindHighestRoll();
                 return;
             }
-            if (TryGetUser(_tanks, entityId, out user))
+            if (TryGetUserFromList(_tanks, entityId, out user))
             {
                 user.RollResult = rollResult;
                 FindHighestRoll();
 
                 return;
             }
-            if (TryGetUser(_healers, entityId, out user))
+            if (TryGetUserFromList(_healers, entityId, out user))
             {
                 user.RollResult = rollResult;
                 FindHighestRoll();
@@ -558,9 +491,9 @@ namespace TCC.ViewModels
                 if (user.RollResult > winningUser.RollResult) winningUser = user;
             }
             User u;
-            if (TryGetUser(_dps, winningUser.EntityId, out u)) u.IsWinning = true;
-            if (TryGetUser(_tanks, winningUser.EntityId, out u)) u.IsWinning = true;
-            if (TryGetUser(_healers, winningUser.EntityId, out u)) u.IsWinning = true;
+            if (TryGetUserFromList(_dps, winningUser.EntityId, out u)) u.IsWinning = true;
+            if (TryGetUserFromList(_tanks, winningUser.EntityId, out u)) u.IsWinning = true;
+            if (TryGetUserFromList(_healers, winningUser.EntityId, out u)) u.IsWinning = true;
             foreach (var user in _dps)
             {
                 if (user.EntityId != winningUser.EntityId) user.IsWinning = false;
@@ -576,7 +509,7 @@ namespace TCC.ViewModels
 
         }
 
-        private bool TryGetUser(SynchronizedObservableCollection<User> userList, ulong entityId, out User u)
+        private bool TryGetUserFromList(SynchronizedObservableCollection<User> userList, ulong entityId, out User u)
         {
             u = userList.FirstOrDefault(x => x.EntityId == entityId);
             if (u != null)
@@ -588,7 +521,7 @@ namespace TCC.ViewModels
                 return false;
             }
         }
-        private bool TryGetUser(SynchronizedObservableCollection<User> userList, uint serverId, uint playerId, out User u)
+        private bool TryGetUserFromList(SynchronizedObservableCollection<User> userList, uint serverId, uint playerId, out User u)
         {
             u = userList.FirstOrDefault(x => x.ServerId == serverId && x.PlayerId == playerId);
             if (u != null)
@@ -605,19 +538,19 @@ namespace TCC.ViewModels
         public void SetReadyStatus(ReadyPartyMembers p)
         {
             User user;
-            if (TryGetUser(_dps, p.ServerId, p.PlayerId, out user))
+            if (TryGetUserFromList(_dps, p.ServerId, p.PlayerId, out user))
             {
                 if (p.Status == 0) user.Ready = ReadyStatus.NotReady;
                 else if (p.Status == 1) user.Ready = ReadyStatus.Ready;
                 return;
             }
-            if (TryGetUser(_healers, p.ServerId, p.PlayerId, out user))
+            if (TryGetUserFromList(_healers, p.ServerId, p.PlayerId, out user))
             {
                 if (p.Status == 0) user.Ready = ReadyStatus.NotReady;
                 else if (p.Status == 1) user.Ready = ReadyStatus.Ready;
                 return;
             }
-            if (TryGetUser(_tanks, p.ServerId, p.PlayerId, out user))
+            if (TryGetUserFromList(_tanks, p.ServerId, p.PlayerId, out user))
             {
                 if (p.Status == 0) user.Ready = ReadyStatus.NotReady;
                 else if (p.Status == 1) user.Ready = ReadyStatus.Ready;
@@ -746,9 +679,9 @@ namespace TCC.ViewModels
 
         public void MoveUser(SynchronizedObservableCollection<User> startList, SynchronizedObservableCollection<User> endList, uint serverId, uint playerId)
         {
-            if (TryGetUser(startList, serverId, playerId, out User u))
+            if (TryGetUserFromList(startList, serverId, playerId, out User u))
             {
-                if (TryGetUser(endList, serverId, playerId, out User x)) return;
+                if (TryGetUserFromList(endList, serverId, playerId, out User x)) return;
                 endList.Add(u);
                 startList.Remove(u);
             }
