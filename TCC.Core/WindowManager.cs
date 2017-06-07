@@ -108,15 +108,19 @@ namespace TCC
                 }
                 if (skillsEnded == value) return;
                 skillsEnded = value;
-                TccDimChanged?.Invoke(null, new PropertyChangedEventArgs("IsTccDim"));
+                NotifyDimChanged();
             }
         }
 
         public static bool IsTccDim
         {
-            get => SkillsEnded && SettingsManager.AutoDim; // add more conditions here if needed
+            get => SkillsEnded && SettingsManager.AutoDim && !SessionManager.Encounter; // add more conditions here if needed
         }
 
+        public static void NotifyDimChanged()
+        {
+            TccDimChanged?.Invoke(null, new PropertyChangedEventArgs("IsTccDim"));
+        }
         public static void NotifyVisibilityChanged()
         {
             TccVisibilityChanged?.Invoke(null, new PropertyChangedEventArgs("IsTccVisible"));
@@ -234,7 +238,7 @@ namespace TCC
             CloseButton.Click += (s, ev) => App.CloseApp();
             ContextMenu.Items.Add(CloseButton);
 
-            _undimTimer = new System.Timers.Timer(10000);
+            _undimTimer = new System.Timers.Timer(5000);
             _undimTimer.Elapsed += _undimTimer_Elapsed;
 
             FocusManager.FocusTimer = new System.Timers.Timer(1000);
