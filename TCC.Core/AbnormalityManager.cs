@@ -74,6 +74,8 @@ namespace TCC
             else
             {
                 BuffBarWindowManager.Instance.Player.AddOrRefreshDebuff(ab, duration, stacks, PLAYER_AB_SIZE, PLAYER_AB_LEFT_MARGIN);
+                CharacterWindowManager.Instance.Player.AddToDebuffList(ab);
+                ClassManager.SetStatus(ab, true);
 
             }
         }
@@ -94,6 +96,8 @@ namespace TCC
             else
             {
                 BuffBarWindowManager.Instance.Player.RemoveDebuff(ab);
+                CharacterWindowManager.Instance.Player.RemoveFromDebuffList(ab);
+                ClassManager.SetStatus(ab, false);
             }
         }
 
