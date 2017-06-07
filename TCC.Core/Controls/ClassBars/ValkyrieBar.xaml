@@ -39,7 +39,7 @@
                          Grid.Column="1"
                          Grid.Row="1"
                          >
-                <local:StatControl DataContext="{Binding HP}" Color="{StaticResource hpColor}" Width="90" />
+                <local:StatControl DataContext="{Binding HP}" Color="{StaticResource hpColor}" StatusColor="{StaticResource hpDebuffColor}" Width="90" />
                 <local:StatControl DataContext="{Binding MP}" Color="{StaticResource mpColor}" Width="90" />
             </UniformGrid>
 
