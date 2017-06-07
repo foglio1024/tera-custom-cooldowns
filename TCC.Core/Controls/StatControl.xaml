@@ -21,7 +21,7 @@
                 Grid.ColumnSpan="2" 
                 HorizontalAlignment="Stretch">
         </Border>
-        <local:Arc Stroke="{Binding Color, RelativeSource={RelativeSource AncestorType=local:StatControl}}"
+        <local:Arc Stroke="{Binding CurrentColor, RelativeSource={RelativeSource AncestorType=local:StatControl}}"
                        StrokeThickness="4" 
                        Width="22"
                        Height="22"
