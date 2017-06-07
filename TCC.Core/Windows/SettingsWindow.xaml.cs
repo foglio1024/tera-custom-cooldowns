@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
@@ -36,6 +37,12 @@ namespace TCC.Windows
             var a = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200));
             a.Completed += (s, ev) => Hide();
             this.BeginAnimation(OpacityProperty, a);
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            FocusManager.settingsWindowHandle = new WindowInteropHelper(this).Handle;
+
         }
     }
 }

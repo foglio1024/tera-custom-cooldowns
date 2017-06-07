@@ -7,7 +7,7 @@
         xmlns:controls="clr-namespace:TCC.Controls"
         xmlns:vm="clr-namespace:TCC.ViewModels" Topmost="True"
         mc:Ignorable="d" WindowStyle="None" AllowsTransparency="True" 
-        Title="TCC settings" Height="Auto" Width="Auto" ResizeMode="NoResize" SizeToContent="WidthAndHeight" Background="Transparent" UseLayoutRounding="True">
+        Title="TCC settings" Height="Auto" Width="Auto" ResizeMode="NoResize" Loaded="Window_Loaded" SizeToContent="WidthAndHeight" Background="Transparent" UseLayoutRounding="True">
     <Window.Resources>
         <Style x:Key="{x:Type ToolTip}" TargetType="{x:Type ToolTip}">
             <Setter Property="Background" Value="Transparent"/>
