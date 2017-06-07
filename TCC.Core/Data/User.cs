@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
@@ -308,6 +309,13 @@ namespace TCC.Data
             }
         }
 
+        private List<uint> _debuffList = new List<uint>();
+        public bool IsDebuffed
+        {
+            get => _debuffList.Count == 0 ? false : true;
+        }
+
+
         private SynchronizedObservableCollection<AbnormalityDuration> _buffs;
         public SynchronizedObservableCollection<AbnormalityDuration> Buffs
         {
@@ -329,9 +337,14 @@ namespace TCC.Data
             }
         }
 
+
         public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks, double size, double margin)
         {
-            if (SettingsManager.IgnoreAllBuffsInGroupWindow) return; 
+            if (SettingsManager.IgnoreAllBuffsInGroupWindow) return;
+            if (SettingsManager.IgnoreRaidAbnormalitiesInGroupWindow) return;
+            if (SettingsManager.IgnoreAllBuffsInGroupWindow && ab.Type == AbnormalityType.Buff) return;
+
+
             switch (SessionManager.CurrentPlayer.Class)
             {
                 case Class.Priest:
@@ -359,6 +372,13 @@ namespace TCC.Data
         }
         public void AddOrRefreshDebuff(Abnormality ab, uint duration, int stacks, double size, double margin)
         {
+            if (!ab.IsBuff && !_debuffList.Contains(ab.Id))
+            {
+                _debuffList.Add(ab.Id);
+                NotifyPropertyChanged("IsDebuffed");
+            }
+
+            if (SettingsManager.IgnoreRaidAbnormalitiesInGroupWindow) return;
             var existing = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
@@ -378,13 +398,11 @@ namespace TCC.Data
             if (!Priest.CommonBuffs.Any(x => x == ab.Id)) return true;
             else return false;
         }
-
         private bool FilterMystic(Abnormality ab)
         {
-            if (!Mystic.CommonBuffs.Any(x=> x == ab.Id)) return true;
+            if (!Mystic.CommonBuffs.Any(x => x == ab.Id)) return true;
             else return false;
         }
-
 
         public void RemoveBuff(Abnormality ab)
         {
@@ -395,10 +413,29 @@ namespace TCC.Data
         }
         public void RemoveDebuff(Abnormality ab)
         {
+            if (!ab.IsBuff)
+            {
+                _debuffList.Remove(ab.Id);
+                NotifyPropertyChanged("IsDebuffed");
+            }
             var buff = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (buff == null) return;
             Debuffs.Remove(buff);
             buff.Dispose();
+        }
+        public void ClearAbnormalities()
+        {
+            foreach (var item in _buffs)
+            {
+                item.Dispose();
+            }
+            foreach (var item in _debuffs)
+            {
+                item.Dispose();
+            }
+            _buffs.Clear();
+            _debuffs.Clear();
+            _debuffList.Clear();
         }
 
         public User(Dispatcher d)

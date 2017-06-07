@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -42,6 +43,8 @@ namespace TCC.Data
                 }
             }
         }
+        public uint PlayerId { get; internal set; }
+        public uint ServerId { get; internal set; }
 
         Class playerclass;
         public Class Class
@@ -215,18 +218,26 @@ namespace TCC.Data
         }
         public float MaxFlightEnergy { get; } = 1000;
 
-        bool isDebuffed;
+        private List<uint> _debuffList;
+        internal void AddToDebuffList(Abnormality ab)
+        {
+            if (!ab.IsBuff && !_debuffList.Contains(ab.Id))
+            {
+                _debuffList.Add(ab.Id);
+                NotifyPropertyChanged("IsDebuffed");
+            }
+        }
+        internal void RemoveFromDebuffList(Abnormality ab)
+        {
+            if (ab.IsBuff == false)
+            {
+                _debuffList.Remove(ab.Id);
+                NotifyPropertyChanged("IsDebuffed");
+            }
+        }
         public bool IsDebuffed
         {
-            get => isDebuffed;
-            set
-            {
-                if (isDebuffed != value)
-                {
-                    isDebuffed = value;
-                    NotifyPropertyChanged("IsDebuffed");
-                }
-            }
+            get => _debuffList.Count == 0 ? false : true;
         }
 
         bool isInCombat;
@@ -274,8 +285,6 @@ namespace TCC.Data
             }
         }
 
-        public uint PlayerId { get; internal set; }
-        public uint ServerId { get; internal set; }
 
         public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks, double size, double margin)
         {
@@ -295,16 +304,13 @@ namespace TCC.Data
         }
         public void AddOrRefreshDebuff(Abnormality ab, uint duration, int stacks, double size, double margin)
         {
+
             var existing = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
                 var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, true, size * .9, size, new System.Windows.Thickness(margin));
 
                 Debuffs.Add(newAb);
-                if (!ab.IsBuff)
-                {
-                    IsDebuffed = true;
-                }
                 return;
             }
             existing.Duration = duration;
@@ -338,15 +344,12 @@ namespace TCC.Data
         }
         public void RemoveDebuff(Abnormality ab)
         {
+
             var buff = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (buff == null) return;
             Debuffs.Remove(buff);
             buff.Dispose();
 
-            if(ab.IsBuff == false)
-            {
-                IsDebuffed = false;
-            }
         }
         public void RemoveInfBuff(Abnormality ab)
         {
@@ -373,6 +376,7 @@ namespace TCC.Data
             _buffs.Clear();
             _debuffs.Clear();
             _infBuffs.Clear();
+            _debuffList.Clear();
         }
 
         public Player()
@@ -381,14 +385,15 @@ namespace TCC.Data
             _buffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
             _debuffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
             _infBuffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
+            _debuffList = new List<uint>();
         }
-
         public Player(ulong id, string name)
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
             _buffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
             _debuffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
             _infBuffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
+            _debuffList = new List<uint>();
             entityId = id;
             this.name = name;
         }
