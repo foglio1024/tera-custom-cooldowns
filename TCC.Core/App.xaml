@@ -9,7 +9,8 @@
         <SolidColorBrush x:Key="bgColor" Color="#101017" Opacity="1"/>
         <SolidColorBrush x:Key="hpColor" Color="#f55"/>
         <SolidColorBrush x:Key="mpColor" Color="#59f"/>
-        
+        <SolidColorBrush x:Key="hpDebuffColor" Color="#b74be5"/>
+
         <Style x:Key="border" TargetType="Border">
             <Setter Property="Background" Value="{StaticResource bgColor}"/>
             <Setter Property="CornerRadius" Value="0"/>
