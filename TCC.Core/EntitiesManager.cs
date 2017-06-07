@@ -12,7 +12,7 @@ namespace TCC
     {
         public static ObservableCollection<Player> CurrentUsers = new ObservableCollection<Player>();
         public static MonsterDatabase CurrentDatabase;
-
+        private static ulong currentEncounter;
         public static Dragon CurrentDragon = Dragon.None;
         public static ObservableCollection<ulong> chestList = new ObservableCollection<ulong>();
         public static void SpawnNPC(ushort zoneId, uint templateId, ulong entityId, Visibility v, bool force)
@@ -24,10 +24,13 @@ namespace TCC
                     BossGageWindowManager.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, templateId, zoneId, v);
                 }
             }
+            Console.WriteLine("+Bosses {0} - {1}",BossGageWindowManager.Instance.VisibleBossesCount, BossGageWindowManager.Instance.CurrentNPCs.Count);
         }
         public static void DespawnNPC(ulong target)
         {
             BossGageWindowManager.Instance.RemoveBoss(target);
+            Console.WriteLine("-Bosses {0} - {1}", BossGageWindowManager.Instance.VisibleBossesCount, BossGageWindowManager.Instance.CurrentNPCs.Count);
+            if (BossGageWindowManager.Instance.VisibleBossesCount == 0) SessionManager.Encounter = false;
         }
         public static void SetNPCStatus(ulong entityId, bool enraged)
         {
@@ -36,6 +39,19 @@ namespace TCC
         public static void UpdateNPCbyGauge(ulong target, float curHP, float maxHP, ushort zoneId, uint templateId)
         {
             BossGageWindowManager.Instance.AddOrUpdateBoss(target, maxHP, curHP, templateId, zoneId, Visibility.Visible);
+            Console.WriteLine("{0}/{1}", curHP, maxHP);
+            Console.WriteLine("++Bosses {0} - {1}", BossGageWindowManager.Instance.VisibleBossesCount, BossGageWindowManager.Instance.CurrentNPCs.Count);
+
+            if (maxHP > curHP)
+            {
+                currentEncounter = target;
+                SessionManager.Encounter = true;
+            }
+            else if(maxHP == curHP || curHP == 0)
+            {
+                currentEncounter = 0;
+                SessionManager.Encounter = false;
+            }
         }
         public static void ClearNPC()
         {
