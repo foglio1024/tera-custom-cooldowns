@@ -744,6 +744,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="resources\images\discord.png" />
+    <Resource Include="resources\images\ic_insert_link_white_24dp_2x.png" />
+    <Resource Include="resources\images\ic_timelapse_white_24dp_2x.png" />
+    <Resource Include="resources\images\ic_blur_on_white_24dp_2x.png" />
+    <Resource Include="resources\images\ic_opacity_white_24dp_2x.png" />
+    <Resource Include="resources\images\ic_touch_app_white_24dp_2x.png" />
+    <Resource Include="resources\images\ic_tune_white_24dp_2x.png" />
+    <Resource Include="resources\images\ic_videogame_asset_white_24dp_2x.png" />
     <Resource Include="resources\tcc-logo-on.ico" />
     <Resource Include="resources\tcc-logo.ico" />
     <Resource Include="tcc-logo.ico" />
