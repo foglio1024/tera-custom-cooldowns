@@ -17,7 +17,7 @@
                  Background="Transparent"
                  Title="GroupWindow" Height="Auto" Width="Auto"
                  Loaded="TccWindow_Loaded" 
-                 MouseLeftButtonDown="TccWindow_MouseLeftButtonDown" 
+                 MouseLeftButtonDown="Window_MouseLeftButtonDown" 
                  PreviewMouseRightButtonDown="TccWindow_PreviewMouseRightButtonDown"
                  ShowInTaskbar="False" UseLayoutRounding="True"
                  >

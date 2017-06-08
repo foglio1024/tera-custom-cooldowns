@@ -11,7 +11,7 @@
              xmlns:controls="clr-namespace:TCC.Controls"
              AllowsTransparency="True" Loaded="TccWindow_Loaded"
              WindowStyle="None" Topmost="True" SizeToContent="WidthAndHeight"
-             Background="#00000000" MouseLeftButtonDown="TccWindow_MouseLeftButtonDown"
+             Background="#00000000" MouseLeftButtonDown="Window_MouseLeftButtonDown"
              mc:Ignorable="d" ShowInTaskbar="False" 
              Title="WarriorBar" Height="Auto" Width="Auto" UseLayoutRounding="True" x:Name="win">
     <w:TccWindow.DataContext>
