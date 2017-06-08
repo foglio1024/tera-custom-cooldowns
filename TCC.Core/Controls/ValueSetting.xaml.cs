@@ -33,16 +33,40 @@ namespace TCC.Controls
             get { return (string)GetValue(SettingNameProperty); }
             set { SetValue(SettingNameProperty, value); }
         }
-        public static readonly DependencyProperty SettingNameProperty =
-            DependencyProperty.Register("SettingName", typeof(string), typeof(ValueSetting));
-
+        public static readonly DependencyProperty SettingNameProperty = DependencyProperty.Register("SettingName", typeof(string), typeof(ValueSetting));
         public ImageSource SettingImage
         {
             get { return (ImageSource)GetValue(SettingImageProperty); }
             set { SetValue(SettingImageProperty, value); }
         }
-        public static readonly DependencyProperty SettingImageProperty =
-            DependencyProperty.Register("SettingImage", typeof(ImageSource), typeof(ValueSetting));
+        public static readonly DependencyProperty SettingImageProperty = DependencyProperty.Register("SettingImage", typeof(ImageSource), typeof(ValueSetting));
+
+
+        public double Max
+        {
+            get { return (double)GetValue(MaxProperty); }
+            set { SetValue(MaxProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Max.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MaxProperty =
+            DependencyProperty.Register("Max", typeof(double), typeof(ValueSetting), new PropertyMetadata(1.0));
+
+
+
+        public double Min
+        {
+            get { return (double)GetValue(MinProperty); }
+            set { SetValue(MinProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Min.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MinProperty =
+            DependencyProperty.Register("Min", typeof(double), typeof(ValueSetting), new PropertyMetadata(0.0));
+
+
+
+
 
         ColorAnimation glow;
         ColorAnimation unglow;
@@ -75,6 +99,17 @@ namespace TCC.Controls
         {
             (sender as Grid).Background.BeginAnimation(SolidColorBrush.ColorProperty, unglow);
 
+        }
+
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            var s = sender as Slider;
+            Value = Math.Round(s.Value, 2);
+        }
+
+        private void Slider_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Value = 1;
         }
     }
 }
