@@ -183,12 +183,12 @@ namespace TCC
         {
             try
             {
-                w.X = Double.Parse(ws.Attribute("X").Value);
+                w.X = Double.Parse(ws.Attribute("X").Value, CultureInfo.InvariantCulture);
             }
             catch (Exception) { }
             try
             {
-                w.Y = Double.Parse(ws.Attribute("Y").Value);
+                w.Y = Double.Parse(ws.Attribute("Y").Value, CultureInfo.InvariantCulture);
             }
             catch (Exception) { }
 
