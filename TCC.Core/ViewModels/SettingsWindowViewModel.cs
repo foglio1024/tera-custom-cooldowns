@@ -686,20 +686,6 @@ namespace TCC.ViewModels
                 RaisePropertyChanged("ClassWindowOn");
             }
         }
-        public bool AutoDim
-        {
-            get { return SettingsManager.AutoDim; }
-            set
-            {
-                if (SettingsManager.AutoDim == value) return;
-                SettingsManager.AutoDim = value;
-
-                WindowManager.SkillsEnded = false;
-                WindowManager.SkillsEnded = true;
-
-                RaisePropertyChanged("AutoDim");
-            }
-        }
         public bool ClickThruWhenDim
         {
             get { return SettingsManager.ClickThruWhenDim; }
@@ -713,25 +699,6 @@ namespace TCC.ViewModels
                     WindowManager.SkillsEnded = true;
                 }
                 RaisePropertyChanged("ClickThruWhenDim");
-            }
-        }
-        public double DimOpacity
-        {
-            get { return SettingsManager.DimOpacity; }
-            set
-            {
-                if (SettingsManager.DimOpacity == value) return;
-                var val = value;
-                if (val < 0) val = 0;
-                if (val > 1) val = 1;
-
-                SettingsManager.DimOpacity = val;
-                if (WindowManager.IsTccDim)
-                {
-                    WindowManager.SkillsEnded = false;
-                    WindowManager.SkillsEnded = true;
-                }
-                RaisePropertyChanged("DimOpacity");
             }
         }
         public SettingsWindowViewModel()

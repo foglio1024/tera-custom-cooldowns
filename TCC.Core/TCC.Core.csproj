@@ -744,6 +744,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="resources\images\tera-logo-flat.png" />
     <Resource Include="resources\images\discord.png" />
     <Resource Include="resources\images\ic_insert_link_white_24dp_2x.png" />
     <Resource Include="resources\images\ic_timelapse_white_24dp_2x.png" />

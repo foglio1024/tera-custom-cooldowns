@@ -172,17 +172,7 @@ namespace TCC
                 catch (Exception) { }
                 try
                 {
-                    AutoDim = Boolean.Parse(b.Attribute("AutoDim").Value);
-                }
-                catch (Exception) { }
-                try
-                {
                     ClickThruWhenDim = Boolean.Parse(b.Attribute("ClickThruWhenDim").Value);
-                }
-                catch (Exception) { }
-                try
-                {
-                    DimOpacity = Double.Parse(b.Attribute("DimOpacity").Value, CultureInfo.InvariantCulture);
                 }
                 catch (Exception) { }
                 //add settings here
@@ -311,7 +301,7 @@ namespace TCC
                 new XAttribute("IgnoreRaidAbnormalitiesInGroupWindow", IgnoreRaidAbnormalitiesInGroupWindow),
                 new XAttribute("BuffsDirection", BuffsDirection),
                 new XAttribute("ClassWindowOn", ClassWindowOn),
-                new XAttribute("ClickThruWhenDim", ClickThruWhenDim),
+                new XAttribute("ClickThruWhenDim", ClickThruWhenDim)
                 //add setting here
                 )
             );
