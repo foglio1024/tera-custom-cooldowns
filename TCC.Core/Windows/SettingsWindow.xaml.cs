@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,6 +44,16 @@ namespace TCC.Windows
         {
             FocusManager.settingsWindowHandle = new WindowInteropHelper(this).Handle;
 
+        }
+
+        private void GitHubLink_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Process.Start("https://github.com/Foglio1024/Tera-custom-cooldowns/releases");
+        }
+
+        private void DiscordLink_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Process.Start("https://discord.gg/anUXQTp");
         }
     }
 }
