@@ -366,6 +366,242 @@ namespace TCC.ViewModels
             }
         }
 
+        //autodim settings
+        public bool IsCooldownWindowAutoDim
+        {
+            get { return SettingsManager.CooldownWindowSettings.AutoDim; }
+            set
+            {
+                if (SettingsManager.CooldownWindowSettings.AutoDim == value) return;
+                SettingsManager.CooldownWindowSettings.AutoDim = value;
+                WindowManager.SkillsEnded = false;
+                WindowManager.SkillsEnded = true;
+
+                //WindowManager.CooldownWindow.SetClickThru(value);
+                RaisePropertyChanged("IsCooldownWindowAutoDim");
+            }
+        }
+        public bool IsCharacterWindowAutoDim
+        {
+            get { return SettingsManager.CharacterWindowSettings.AutoDim; }
+            set
+            {
+                if (SettingsManager.CharacterWindowSettings.AutoDim == value) return;
+                SettingsManager.CharacterWindowSettings.AutoDim = value;
+                WindowManager.SkillsEnded = false;
+                WindowManager.SkillsEnded = true;
+
+                //WindowManager.CharacterWindow.SetClickThru(value);
+                RaisePropertyChanged("IsCharacterWindowAutoDim");
+            }
+        }
+        public bool IsBuffBarWindowAutoDim
+        {
+            get { return SettingsManager.BuffBarWindowSettings.AutoDim; }
+            set
+            {
+                if (SettingsManager.BuffBarWindowSettings.AutoDim == value) return;
+                SettingsManager.BuffBarWindowSettings.AutoDim = value;
+                WindowManager.SkillsEnded = false;
+                WindowManager.SkillsEnded = true;
+
+                //WindowManager.BuffBarWindow.SetClickThru(value);
+                RaisePropertyChanged("IsBuffBarWindowAutoDim");
+            }
+        }
+        public bool IsBossGaugeWindowAutoDim
+        {
+            get { return SettingsManager.BossGaugeWindowSettings.AutoDim; }
+            set
+            {
+                if (SettingsManager.BossGaugeWindowSettings.AutoDim == value) return;
+                SettingsManager.BossGaugeWindowSettings.AutoDim = value;
+                WindowManager.SkillsEnded = false;
+                WindowManager.SkillsEnded = true;
+
+                //WindowManager.BossGaugeWindow.SetClickThru(value);
+                RaisePropertyChanged("IsBossGaugeWindowAutoDim");
+            }
+        }
+        public bool IsGroupWindowAutoDim
+        {
+            get { return SettingsManager.GroupWindowSettings.AutoDim; }
+            set
+            {
+                if (SettingsManager.GroupWindowSettings.AutoDim == value) return;
+                SettingsManager.GroupWindowSettings.AutoDim = value;
+                WindowManager.SkillsEnded = false;
+                WindowManager.SkillsEnded = true;
+
+                //WindowManager.GroupWindow.SetClickThru(value);
+                RaisePropertyChanged("IsGroupWindowAutoDim");
+            }
+        }
+        public bool IsClassWindowAutoDim
+        {
+            get { return SettingsManager.ClassWindowSettings.AutoDim; }
+            set
+            {
+                if (SettingsManager.ClassWindowSettings.AutoDim == value) return;
+                SettingsManager.ClassWindowSettings.AutoDim = value;
+                WindowManager.SkillsEnded = false;
+                WindowManager.SkillsEnded = true;
+
+                //WindowManager.ClassWindow.SetClickThru(value);
+                RaisePropertyChanged("IsClassWindowAutoDim");
+            }
+        }
+
+        //dimOpacity settings
+        public double CooldownWindowDimOpacity
+        {
+            get { return SettingsManager.CooldownWindowSettings.DimOpacity; }
+            set
+            {
+                if (SettingsManager.CooldownWindowSettings.DimOpacity == value) return;
+                var val = value;
+                if (val < 0) val = 0;
+                if (val > 1) val = 1;
+
+
+                SettingsManager.CooldownWindowSettings.DimOpacity = val;
+                if (WindowManager.IsTccDim)
+                {
+                    WindowManager.SkillsEnded = false;
+                    WindowManager.SkillsEnded = true;
+                }
+
+                //WindowManager.CooldownWindow.Dispatcher.Invoke(() =>
+                //{
+                //    ((CooldownWindowViewModel)WindowManager.CooldownWindow.DataContext).Scale = value;
+                //});
+                RaisePropertyChanged("CooldownWindowDimOpacity");
+            }
+        }
+        public double CharacterWindowDimOpacity
+        {
+            get { return SettingsManager.CharacterWindowSettings.DimOpacity; }
+            set
+            {
+                if (SettingsManager.CharacterWindowSettings.DimOpacity == value) return;
+                var val = value;
+                if (val < 0) val = 0;
+                if (val > 1) val = 1;
+
+
+                SettingsManager.CharacterWindowSettings.DimOpacity = val;
+                if (WindowManager.IsTccDim)
+                {
+                    WindowManager.SkillsEnded = false;
+                    WindowManager.SkillsEnded = true;
+                }
+
+                //WindowManager.CharacterWindow.Dispatcher.Invoke(() =>
+                //{
+                //    ((CharacterWindowViewModel)WindowManager.CharacterWindow.DataContext).Scale = value;
+                //});
+                RaisePropertyChanged("CharacterWindowDimOpacity");
+            }
+        }
+        public double BuffBarWindowDimOpacity
+        {
+            get { return SettingsManager.BuffBarWindowSettings.DimOpacity; }
+            set
+            {
+                if (SettingsManager.BuffBarWindowSettings.DimOpacity == value) return;
+                var val = value;
+                if (val < 0) val = 0;
+                if (val > 1) val = 1;
+
+
+                SettingsManager.BuffBarWindowSettings.DimOpacity = val;
+                if (WindowManager.IsTccDim)
+                {
+                    WindowManager.SkillsEnded = false;
+                    WindowManager.SkillsEnded = true;
+                }
+
+                //WindowManager.BuffBarWindow.Dispatcher.Invoke(() =>
+                //{
+                //    ((BuffBarWindowViewModel)WindowManager.BuffBarWindow.DataContext).Scale = value;
+                //});
+                RaisePropertyChanged("BuffBarWindowDimOpacity");
+            }
+        }
+        public double BossGaugeWindowDimOpacity
+        {
+            get { return SettingsManager.BossGaugeWindowSettings.DimOpacity; }
+            set
+            {
+                if (SettingsManager.BossGaugeWindowSettings.DimOpacity == value) return;
+                var val = value;
+                if (val < 0) val = 0;
+                if (val > 1) val = 1;
+                SettingsManager.BossGaugeWindowSettings.DimOpacity = val;
+                if (WindowManager.IsTccDim)
+                {
+                    WindowManager.SkillsEnded = false;
+                    WindowManager.SkillsEnded = true;
+                }
+
+
+                //WindowManager.BossGaugeWindow.Dispatcher.Invoke(() =>
+                //{
+                //    ((BossGaugeWindowViewModel)WindowManager.BossGaugeWindow.DataContext).Scale = value;
+                //});
+                RaisePropertyChanged("BossGaugeWindowDimOpacity");
+            }
+        }
+        public double GroupWindowDimOpacity
+        {
+            get { return SettingsManager.GroupWindowSettings.DimOpacity; }
+            set
+            {
+                if (SettingsManager.GroupWindowSettings.DimOpacity == value) return;
+                var val = value;
+                if (val < 0) val = 0;
+                if (val > 1) val = 1;
+                SettingsManager.GroupWindowSettings.DimOpacity = val;
+                if (WindowManager.IsTccDim)
+                {
+                    WindowManager.SkillsEnded = false;
+                    WindowManager.SkillsEnded = true;
+                }
+
+
+                //WindowManager.GroupWindow.Dispatcher.Invoke(() =>
+                //{
+                //    ((GroupWindowViewModel)WindowManager.GroupWindow.DataContext).Scale = value;
+                //});
+                RaisePropertyChanged("GroupWindowDimOpacity");
+            }
+        }
+        public double ClassWindowDimOpacity
+        {
+            get { return SettingsManager.ClassWindowSettings.DimOpacity; }
+            set
+            {
+                if (SettingsManager.ClassWindowSettings.DimOpacity == value) return;
+                var val = value;
+                if (val < 0) val = 0;
+                if (val > 1) val = 1;
+
+                SettingsManager.ClassWindowSettings.DimOpacity = val;
+                if (WindowManager.IsTccDim)
+                {
+                    WindowManager.SkillsEnded = false;
+                    WindowManager.SkillsEnded = true;
+                }
+
+                //WindowManager.ClassWindow.Dispatcher.Invoke(() =>
+                //{
+                //    ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).Scale = value;
+                //});
+                RaisePropertyChanged("ClassWindowDimOpacity");
+            }
+        }
+
+
         //other settings
         public bool HideMe
         {
@@ -457,9 +693,6 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.AutoDim == value) return;
                 SettingsManager.AutoDim = value;
-
-                WindowManager.SkillsEnded = false;
-                WindowManager.SkillsEnded = true;
 
                 WindowManager.SkillsEnded = false;
                 WindowManager.SkillsEnded = true;

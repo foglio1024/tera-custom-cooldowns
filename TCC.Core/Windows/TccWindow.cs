@@ -15,7 +15,6 @@ namespace TCC.Windows
     {
         protected IntPtr _handle;
         protected bool clickThru;
-
         public bool ClickThru
         {
             get { return clickThru; }
@@ -31,7 +30,7 @@ namespace TCC.Windows
             }
         }
 
-        WindowSettings _settings;
+        protected WindowSettings _settings;
 
         protected void InitWindow(WindowSettings ws)
         {
@@ -61,12 +60,13 @@ namespace TCC.Windows
             Top = ws.Y;
             Visibility = ws.Visibility;
             SetClickThru(ws.ClickThru);
-            oldClickThru = ws.ClickThru;
             ((FrameworkElement)this.Content).Opacity = 0;
 
             WindowManager.TccVisibilityChanged += OpacityChange;
             WindowManager.TccDimChanged += OpacityChange;
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private void OpacityChange(object sender, PropertyChangedEventArgs e)
         {
@@ -74,9 +74,9 @@ namespace TCC.Windows
             {
                 if (WindowManager.IsTccVisible)
                 {
-                    if (WindowManager.IsTccDim)
+                    if (WindowManager.IsTccDim && _settings.AutoDim)
                     {
-                        AnimateContentOpacity(SettingsManager.DimOpacity);
+                        AnimateContentOpacity(_settings.DimOpacity);
                     }
                     else
                     {
@@ -92,10 +92,11 @@ namespace TCC.Windows
             if(e.PropertyName == "IsTccDim")
             {
                 if (!WindowManager.IsTccVisible) return;
+                if (!_settings.AutoDim) return;
 
                 if (WindowManager.IsTccDim)
                 {
-                    AnimateContentOpacity(SettingsManager.DimOpacity);
+                    AnimateContentOpacity(_settings.DimOpacity);
                     if (!SettingsManager.ClickThruWhenDim) return;
                     FocusManager.MakeTransparent(_handle);
                 }
@@ -108,12 +109,10 @@ namespace TCC.Windows
                 }
             }
         }
-        protected bool oldClickThru;
         public void SetClickThru(bool t)
         {
             ClickThru = t;
         }
-
         public void SetVisibility(Visibility v)
         {
             this.Dispatcher.Invoke(() =>
@@ -122,7 +121,6 @@ namespace TCC.Windows
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Visibility"));
             });
         }
-        public event PropertyChangedEventHandler PropertyChanged;
         public void AnimateContentOpacity(double opacity)
         {
             Dispatcher.InvokeIfRequired(() =>

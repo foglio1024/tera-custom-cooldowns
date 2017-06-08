@@ -114,7 +114,7 @@ namespace TCC
 
         public static bool IsTccDim
         {
-            get => SkillsEnded && SettingsManager.AutoDim && !SessionManager.Encounter; // add more conditions here if needed
+            get => SkillsEnded && !SessionManager.Encounter; // add more conditions here if needed
         }
 
         public static void NotifyDimChanged()

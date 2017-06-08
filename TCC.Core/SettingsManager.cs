@@ -18,6 +18,8 @@ namespace TCC
         public Visibility Visibility;
         public bool ClickThru;
         public double Scale;
+        public bool AutoDim;
+        public double DimOpacity;
     }
     public static class SettingsManager
     {
@@ -29,7 +31,9 @@ namespace TCC
             Y = 10,
             Visibility = Visibility.Visible,
             ClickThru = false,
-            Scale = 1
+            Scale = 1,
+            AutoDim = true,
+            DimOpacity = .2
         };
         public static WindowSettings CooldownWindowSettings = new WindowSettings()
         {
@@ -37,7 +41,9 @@ namespace TCC
             Y = _screen.Height / 1.5,
             Visibility = Visibility.Visible,
             ClickThru = false,
-            Scale = 1
+            Scale = 1,
+            AutoDim = true,
+            DimOpacity = .2
 
         };
         public static WindowSettings BossGaugeWindowSettings = new WindowSettings()
@@ -46,7 +52,9 @@ namespace TCC
             Y = 20,
             Visibility = Visibility.Visible,
             ClickThru = false,
-            Scale = 1
+            Scale = 1,
+            AutoDim = true,
+            DimOpacity = .2
 
         };
         public static WindowSettings BuffBarWindowSettings = new WindowSettings()
@@ -55,7 +63,9 @@ namespace TCC
             Y = _screen.Height / 1.5,
             Visibility = Visibility.Visible,
             ClickThru = false,
-            Scale = 1
+            Scale = 1,
+            AutoDim = true,
+            DimOpacity = .2
 
         };
         public static WindowSettings CharacterWindowSettings = new WindowSettings()
@@ -64,7 +74,9 @@ namespace TCC
             Y = _screen.Height - 120,
             Visibility = Visibility.Visible,
             ClickThru = false,
-            Scale = 1
+            Scale = 1,
+            AutoDim = true,
+            DimOpacity = .2
 
         };
         public static WindowSettings ClassWindowSettings = new WindowSettings()
@@ -73,7 +85,9 @@ namespace TCC
             Y = _screen.Height - 200,
             Visibility = Visibility.Visible,
             ClickThru = false,
-            Scale = 1
+            Scale = 1,
+            AutoDim = true,
+            DimOpacity = .2
         };
 
         public static bool IgnoreMeInGroupWindow { get; set; }
@@ -83,9 +97,7 @@ namespace TCC
         public static bool IgnoreRaidAbnormalitiesInGroupWindow { get; set; }
         public static FlowDirection BuffsDirection { get; set; } = FlowDirection.RightToLeft;
         public static bool ClassWindowOn { get; set; } = false;
-        public static bool AutoDim { get; set; } = true;
         public static bool ClickThruWhenDim { get; set; } = true;
-        public static double DimOpacity { get; set; } = .2;
 
         public static void LoadSettings()
         {
@@ -207,7 +219,16 @@ namespace TCC
                 w.Scale = Double.Parse(ws.Attribute("Scale").Value, CultureInfo.InvariantCulture);
             }
             catch (Exception) { }
-
+            try
+            {
+                w.AutoDim = Boolean.Parse(ws.Attribute("AutoDim").Value);
+            }
+            catch (Exception) { }
+            try
+            {
+                w.DimOpacity = Double.Parse(ws.Attribute("DimOpacity").Value, CultureInfo.InvariantCulture);
+            }
+            catch (Exception) { }
         }
 
         public static void SaveSettings()
@@ -220,7 +241,9 @@ namespace TCC
                         new XAttribute("Y", BossGaugeWindowSettings.Y),
                         new XAttribute("ClickThru", BossGaugeWindowSettings.ClickThru),
                         new XAttribute("Visibility", BossGaugeWindowSettings.Visibility),
-                        new XAttribute("Scale", BossGaugeWindowSettings.Scale)
+                        new XAttribute("Scale", BossGaugeWindowSettings.Scale),
+                        new XAttribute("AutoDim", BossGaugeWindowSettings.AutoDim),
+                        new XAttribute("DimOpacity", BossGaugeWindowSettings.DimOpacity)
                         ),
                     new XElement("WindowSetting",
                         new XAttribute("Name", "BuffWindow"),
@@ -228,7 +251,10 @@ namespace TCC
                         new XAttribute("Y", BuffBarWindowSettings.Y),
                         new XAttribute("ClickThru", BuffBarWindowSettings.ClickThru),
                         new XAttribute("Visibility", BuffBarWindowSettings.Visibility),
-                        new XAttribute("Scale", BuffBarWindowSettings.Scale)
+                        new XAttribute("Scale", BuffBarWindowSettings.Scale),
+                        new XAttribute("AutoDim", BuffBarWindowSettings.AutoDim),
+                        new XAttribute("DimOpacity", BuffBarWindowSettings.DimOpacity)
+
                         ),
                     new XElement("WindowSetting",
                         new XAttribute("Name", "CharacterWindow"),
@@ -236,7 +262,10 @@ namespace TCC
                         new XAttribute("Y", CharacterWindowSettings.Y),
                         new XAttribute("ClickThru", CharacterWindowSettings.ClickThru),
                         new XAttribute("Visibility", CharacterWindowSettings.Visibility),
-                        new XAttribute("Scale", CharacterWindowSettings.Scale)
+                        new XAttribute("Scale", CharacterWindowSettings.Scale),
+                        new XAttribute("AutoDim", CharacterWindowSettings.AutoDim),
+                        new XAttribute("DimOpacity", CharacterWindowSettings.DimOpacity)
+
                         ),
                     new XElement("WindowSetting",
                         new XAttribute("Name", "CooldownWindow"),
@@ -244,7 +273,10 @@ namespace TCC
                         new XAttribute("Y", CooldownWindowSettings.Y),
                         new XAttribute("ClickThru", CooldownWindowSettings.ClickThru),
                         new XAttribute("Visibility", CooldownWindowSettings.Visibility),
-                        new XAttribute("Scale", CooldownWindowSettings.Scale)
+                        new XAttribute("Scale", CooldownWindowSettings.Scale),
+                        new XAttribute("AutoDim", CooldownWindowSettings.AutoDim),
+                        new XAttribute("DimOpacity", CooldownWindowSettings.DimOpacity)
+
                         ),
                     new XElement("WindowSetting",
                         new XAttribute("Name", "GroupWindow"),
@@ -252,7 +284,10 @@ namespace TCC
                         new XAttribute("Y", GroupWindowSettings.Y),
                         new XAttribute("ClickThru", GroupWindowSettings.ClickThru),
                         new XAttribute("Visibility", GroupWindowSettings.Visibility),
-                        new XAttribute("Scale", GroupWindowSettings.Scale)
+                        new XAttribute("Scale", GroupWindowSettings.Scale),
+                        new XAttribute("AutoDim", GroupWindowSettings.AutoDim),
+                        new XAttribute("DimOpacity", GroupWindowSettings.DimOpacity)
+
                         ),
                     new XElement("WindowSetting",
                         new XAttribute("Name", "ClassWindow"),
@@ -260,7 +295,10 @@ namespace TCC
                         new XAttribute("Y", ClassWindowSettings.Y),
                         new XAttribute("ClickThru", ClassWindowSettings.ClickThru),
                         new XAttribute("Visibility", ClassWindowSettings.Visibility),
-                        new XAttribute("Scale", ClassWindowSettings.Scale)
+                        new XAttribute("Scale", ClassWindowSettings.Scale),
+                        new XAttribute("AutoDim", ClassWindowSettings.AutoDim),
+                        new XAttribute("DimOpacity", ClassWindowSettings.DimOpacity)
+
                         )
                     //add window here
                     ),
@@ -273,9 +311,7 @@ namespace TCC
                 new XAttribute("IgnoreRaidAbnormalitiesInGroupWindow", IgnoreRaidAbnormalitiesInGroupWindow),
                 new XAttribute("BuffsDirection", BuffsDirection),
                 new XAttribute("ClassWindowOn", ClassWindowOn),
-                new XAttribute("AutoDim", AutoDim),
                 new XAttribute("ClickThruWhenDim", ClickThruWhenDim),
-                new XAttribute("DimOpacity", DimOpacity)
                 //add setting here
                 )
             );
