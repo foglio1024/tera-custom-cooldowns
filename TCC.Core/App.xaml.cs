@@ -71,7 +71,6 @@ namespace TCC
                 WindowManager.TrayIcon.Icon = WindowManager.DefaultIcon;
             };
 
-            //Debug();
             SessionManager.CurrentPlayer.Class = Class.None;
         }
 
@@ -81,52 +80,6 @@ namespace TCC
             SettingsManager.SaveSettings();
             WindowManager.Dispose();
             Environment.Exit(0);
-        }
-        static bool x = true;
-        public static void Debug()
-        {
-            SessionManager.Logged = true;
-            SessionManager.LoadingScreen = false;
-            WindowManager.ClassWindow.Dispatcher.Invoke(() =>
-            {
-                //((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).ClearSkills();
-                //((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).CurrentClass = Class.Warrior;
-            });
-
-
-            //for (int i = 0; i < 5; i++)
-            //{
-            //    var u = new User(WindowManager.GroupWindow.Dispatcher);
-            //    u.Name = "Test D" + i;
-            //    u.UserClass = Class.Warrior;
-            //    u.Laurel = Laurel.Champion;
-            //    u.PlayerId = (uint)i;
-            //    u.Online = true;
-            //    u.Ready = ReadyStatus.Ready;
-            //    ViewModels.GroupWindowManager.Instance.AddOrUpdateMember(u);
-            //}
-            //for (int i = 0; i < 1; i++)
-            //{
-            //    var u = new User(WindowManager.GroupWindow.Dispatcher);
-            //    u.Name = "Test H" + i;
-            //    u.UserClass = Class.Elementalist;
-            //    u.Laurel = Laurel.Champion;
-            //    u.PlayerId = (uint)i*2;
-            //    u.Online = true;
-            //    u.Ready = ReadyStatus.NotReady;
-            //    ViewModels.GroupWindowManager.Instance.AddOrUpdateMember(u);
-            //}
-            //for (int i = 0; i < 5; i++)
-            //{
-            //    var u = new User(WindowManager.GroupWindow.Dispatcher);
-            //    u.Name = "Test T" + i;
-            //    u.UserClass = Class.Lancer;
-            //    u.Laurel = Laurel.Champion;
-            //    u.PlayerId = (uint)i*3;
-            //    u.Online = true;
-            //    ViewModels.GroupWindowManager.Instance.AddOrUpdateMember(u);
-            //}
-
         }
     }
 }
