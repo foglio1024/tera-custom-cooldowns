@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
+using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media.Animation;
 
@@ -38,16 +40,16 @@ namespace TCC.Windows
             FocusManager.MakeUnfocusable(_handle);
             FocusManager.HideFromToolBar(_handle);
             Topmost = true;
-            ContextMenu = new ContextMenu();
+            ContextMenu = new System.Windows.Controls.ContextMenu();
 
-            var HideButton = new MenuItem() { Header = "Hide" };
+            var HideButton = new System.Windows.Controls.MenuItem() { Header = "Hide" };
             HideButton.Click += (s, ev) =>
             {
                 SetVisibility(Visibility.Hidden);
             };
             ContextMenu.Items.Add(HideButton);
 
-            var ClickThruButton = new MenuItem() { Header = "Click through" };
+            var ClickThruButton = new System.Windows.Controls.MenuItem() { Header = "Click through" };
             ClickThruButton.Click += (s, ev) =>
             {
                 SetClickThru(true);
@@ -131,6 +133,23 @@ namespace TCC.Windows
         public void RefreshTopmost()
         {
             Dispatcher.InvokeIfRequired(() => { Topmost = false; Topmost = true; }, System.Windows.Threading.DispatcherPriority.DataBind);
+        }
+
+        protected void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+            var screen = Screen.FromHandle(new WindowInteropHelper(this).Handle);
+            var source = PresentationSource.FromVisual(this);
+            if (source?.CompositionTarget == null) return;
+            var m = source.CompositionTarget.TransformToDevice;
+            var dx = m.M11;
+            var dy = m.M22;
+            var newLeft = Left * dx;
+            var newTop = Top * dx;
+
+            _settings.X = newLeft/dx;
+            _settings.Y = newTop/dy;
+            SettingsManager.SaveSettings();
         }
     }
 }
