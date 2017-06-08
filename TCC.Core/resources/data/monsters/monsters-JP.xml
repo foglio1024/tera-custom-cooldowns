@@ -4831,7 +4831,7 @@
 		<Monster name="魔法使いの砦 入口" id="5021" isBoss="False" hp="0" />
 		<Monster name="古代の地下水路 入口" id="5022" isBoss="False" hp="0" />
 		<Monster name="巨人の森 入口" id="5023" isBoss="False" hp="0" />
-		<Monster name="闇の洞窟・暴悪のキルガルの洞窟 入口" id="5024" isBoss="False" hp="0" />
+		<Monster name="闇の洞窟 入口" id="5024" isBoss="False" hp="0" />
 		<Monster name="カシュバル峡谷 入口" id="5025" isBoss="False" hp="0" />
 		<Monster name="ラカンの祭壇 入口" id="5026" isBoss="False" hp="0" />
 		<Monster name="ギルリアンの森 入口" id="5027" isBoss="False" hp="0" />
@@ -4986,6 +4986,18 @@
 		<Monster name="ニンピ妖精戦士" id="303" isBoss="False" hp="150000" />
 		<Monster name="ニンピ妖精精霊士" id="304" isBoss="False" hp="150000" />
 		<Monster name="アガンティ戦士" id="305" isBoss="False" hp="150000" />
+	</Zone>
+	<Zone id="126" name="ペトレ養成所" >
+		<Monster name="調練されたバシリスク" id="101" isBoss="True" hp="2279590" />
+		<Monster name="調練されたブルカヌス" id="102" isBoss="True" hp="12220960" />
+		<Monster name="調練されたブルカヌス" id="103" isBoss="True" hp="12220960" />
+		<Monster name="調練されたブルカヌス" id="104" isBoss="True" hp="12220960" />
+		<Monster name="調練されたブルカヌス" id="105" isBoss="True" hp="7511613" />
+		<Monster name="調練されたブルカヌス" id="106" isBoss="True" hp="3666288" />
+		<Monster name="ペトレ" id="107" isBoss="True" hp="35364133" />
+		<Monster name="護衛兵士" id="108" isBoss="False" hp="250000" />
+		<Monster name="養成所教官" id="109" isBoss="False" hp="250000" />
+		<Monster name="次元の魔法石" id="1501" isBoss="False" hp="10000" />
 	</Zone>
 	<Zone id="152" name="ヴェリカ直轄領" >
 		<Monster name="ラバトゥス" id="1001" isBoss="True" hp="44708232" />
@@ -5519,6 +5531,7 @@
 		<Monster name="高い風・カディン" id="7003" isBoss="False" hp="10000" />
 		<Monster name="純粋な火花・ムラカン" id="7004" isBoss="False" hp="10000" />
 		<Monster name="5周年感謝イベントお助け人" id="7005" isBoss="False" hp="10000" />
+		<Monster name="暗い雲・ヴィーラック" id="7006" isBoss="False" hp="10000" />
 		<Monster name="ちび魔女エルロニア" id="8000" isBoss="False" hp="10000" />
 		<Monster name="次元の魔法石" id="9000" isBoss="False" hp="10000" />
 		<Monster name="攻撃木人" id="9996" isBoss="False" hp="100" />
@@ -13929,22 +13942,22 @@
 		<Monster name="硫黄のサブナク複製" id="901" isBoss="True" hp="1500000000" />
 		<Monster name="ベルゴス複製" id="902" isBoss="True" hp="1890000000" />
 		<Monster name="ベルゴス" id="1000" isBoss="True" hp="2100000000" />
-		<Monster name="竜の兵" id="1002" isBoss="False" hp="30000000" />
+		<Monster name="竜の兵" id="1002" isBoss="False" hp="100000000" />
 		<Monster name="4フェイズ開始" id="1003" isBoss="False" hp="0" />
 		<Monster name="0フェイズ開始" id="1005" isBoss="False" hp="0" />
 		<Monster name="1フェイズ開始" id="1006" isBoss="False" hp="0" />
 		<Monster name="2フェイズ開始" id="1007" isBoss="False" hp="0" />
 		<Monster name="3フェイズ開始" id="1008" isBoss="False" hp="0" />
-		<Monster name="爆熱のサブナク" id="1100" isBoss="True" hp="1500000000" />
-		<Monster name="大地のサレオス" id="1101" isBoss="True" hp="1500000000" />
-		<Monster name="暗黒のグラドリム" id="1102" isBoss="True" hp="1500000000" />
-		<Monster name="暴風のアガレス" id="1103" isBoss="True" hp="1350000000" />
+		<Monster name="爆熱のサブナク" id="1100" isBoss="True" hp="1014000000" />
+		<Monster name="大地のサレオス" id="1101" isBoss="True" hp="1014000000" />
+		<Monster name="暗黒のグラドリム" id="1102" isBoss="True" hp="1014000000" />
+		<Monster name="暴風のアガレス" id="1103" isBoss="True" hp="1014000000" />
 		<Monster name="暗黒思念体" id="1120" isBoss="False" hp="1000000" />
-		<Monster name="ベルゴス" id="2000" isBoss="False" hp="166600000" />
+		<Monster name="ベルゴス" id="2000" isBoss="False" hp="99960000" />
 		<Monster name="神界の巨大弓" id="2005" isBoss="False" hp="576000" />
 		<Monster name="ストーンゴーレム" id="2500" isBoss="False" hp="0" />
-		<Monster name="ベルゴス" id="3000" isBoss="True" hp="2100000000" />
-		<Monster name="ベルゴス" id="4000" isBoss="True" hp="2100000000" />
+		<Monster name="ベルゴス" id="3000" isBoss="True" hp="2000000000" />
+		<Monster name="ベルゴス" id="4000" isBoss="True" hp="2000000000" />
 		<Monster name="黄金の夕焼け・デムべ" id="9001" isBoss="False" hp="945" />
 		<Monster name="青色のカラン" id="9003" isBoss="False" hp="945" />
 		<Monster name="青色のカラン" id="9004" isBoss="False" hp="945" />

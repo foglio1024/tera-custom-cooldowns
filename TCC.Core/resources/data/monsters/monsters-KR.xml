@@ -10037,17 +10037,17 @@
 		<Monster name="차원의 마법석" id="1504" isBoss="False" hp="10000" />
 	</Zone>
 	<Zone id="459" name="번스타인의 악령섬" >
-		<Monster name="선원의 비석" id="109" isBoss="False" hp="2000000" />
+		<Monster name="선원의 비석" id="109" isBoss="False" hp="4200000" />
 		<Monster name="익사한 선원" id="333" isBoss="False" hp="1890675" />
-		<Monster name="망자의 비석" id="334" isBoss="False" hp="500000" />
+		<Monster name="망자의 비석" id="334" isBoss="False" hp="1050000" />
 		<Monster name="몬스터들을 처치하세요" id="911" isBoss="False" hp="0" />
 		<Monster name="락도스를 처치하세요" id="912" isBoss="False" hp="0" />
 		<Monster name="비오르를 처치하세요" id="913" isBoss="False" hp="0" />
 		<Monster name="(보스) 번스타인을 처치하세요" id="914" isBoss="False" hp="0" />
 		<Monster name="켈렌 카일룸" id="999" isBoss="False" hp="10000" />
-		<Monster name="락도스" id="1001" isBoss="True" hp="292951933" />
-		<Monster name="비오르" id="1002" isBoss="True" hp="292951933" />
-		<Monster name="번스타인" id="1003" isBoss="True" hp="318278538" />
+		<Monster name="락도스" id="1001" isBoss="True" hp="740000000" />
+		<Monster name="비오르" id="1002" isBoss="True" hp="790000000" />
+		<Monster name="번스타인" id="1003" isBoss="True" hp="880000000" />
 		<Monster name="차원의 마법석" id="1501" isBoss="False" hp="10000" />
 		<Monster name="차원의 마법석" id="1502" isBoss="False" hp="10000" />
 		<Monster name="선원의 일지" id="2001" isBoss="False" hp="366797" />
@@ -10067,7 +10067,7 @@
 		<Monster name="몬스터들을 처치하세요" id="917" isBoss="False" hp="0" />
 		<Monster name="(보스) 악인 켈리반을 처치하세요" id="918" isBoss="False" hp="0" />
 		<Monster name="바이런 헬칸" id="999" isBoss="False" hp="8500" />
-		<Monster name="악인 폴리페모스" id="1000" isBoss="True" hp="221000000" />
+		<Monster name="악인 폴리페모스" id="1000" isBoss="True" hp="750000000" />
 		<Monster name="악인 자폭병" id="1001" isBoss="False" hp="80000" />
 		<Monster name="악인 돌격병" id="1002" isBoss="False" hp="210000" />
 		<Monster name="악한 저주받은 인간" id="1003" isBoss="False" hp="11332897" />
@@ -10086,15 +10086,15 @@
 		<Monster name="차원의 마법석" id="1502" isBoss="False" hp="8500" />
 		<Monster name="차원의 마법석" id="1503" isBoss="False" hp="8500" />
 		<Monster name="차원의 마법석" id="1504" isBoss="False" hp="8500" />
-		<Monster name="악인 페페로" id="2000" isBoss="True" hp="195500000" />
+		<Monster name="악인 페페로" id="2000" isBoss="True" hp="710000000" />
 		<Monster name="악인 일등 항해사" id="2003" isBoss="False" hp="8714897" />
-		<Monster name="악인 선장" id="2004" isBoss="False" hp="21634897" />
+		<Monster name="악인 선장" id="2004" isBoss="False" hp="51000000" />
 		<Monster name="악인 갑판병" id="2005" isBoss="False" hp="4294897" />
-		<Monster name="악인 켈리반" id="3000" isBoss="True" hp="195500000" />
-		<Monster name="악인 부선장" id="3002" isBoss="False" hp="6971917" />
-		<Monster name="악인 선임 갑판병" id="3003" isBoss="False" hp="4294897" />
-		<Monster name="악인 타아난" id="3004" isBoss="False" hp="21634897" />
-		<Monster name="악인 켈리반 신봉자" id="3005" isBoss="False" hp="6971917" />
+		<Monster name="악인 켈리반" id="3000" isBoss="True" hp="820000000" />
+		<Monster name="악인 부선장" id="3002" isBoss="False" hp="15000000" />
+		<Monster name="악인 선임 갑판병" id="3003" isBoss="False" hp="9200000" />
+		<Monster name="악인 타아난" id="3004" isBoss="False" hp="35000000" />
+		<Monster name="악인 켈리반 신봉자" id="3005" isBoss="False" hp="13000000" />
 	</Zone>
 	<Zone id="461" name="거인의 유적지" >
 		<Monster name="차원의 마법석" id="1001" isBoss="False" hp="10000" />
@@ -12178,11 +12178,11 @@
 		<Monster name="락도스를 처치하세요" id="912" isBoss="False" hp="0" />
 		<Monster name="비오르를 처치하세요" id="913" isBoss="False" hp="0" />
 		<Monster name="(보스) 번스타인을 처치하세요" id="914" isBoss="False" hp="0" />
-		<Monster name="락도스" id="1001" isBoss="True" hp="539000000" />
-		<Monster name="비오르" id="1002" isBoss="True" hp="588000000" />
-		<Monster name="번스타인" id="1003" isBoss="False" hp="455000000" />
-		<Monster name="락도스의 망령" id="1004" isBoss="True" hp="231000000" />
-		<Monster name="비오르의 망령" id="1005" isBoss="True" hp="231000000" />
+		<Monster name="락도스" id="1001" isBoss="True" hp="840000000" />
+		<Monster name="비오르" id="1002" isBoss="True" hp="880000000" />
+		<Monster name="번스타인" id="1003" isBoss="False" hp="710000000" />
+		<Monster name="락도스의 망령" id="1004" isBoss="True" hp="251000000" />
+		<Monster name="비오르의 망령" id="1005" isBoss="True" hp="251000000" />
 		<Monster name="차원의 마법석" id="1501" isBoss="False" hp="10000" />
 		<Monster name="차원의 마법석" id="1502" isBoss="False" hp="10000" />
 		<Monster name="이름 없는 유령" id="2008" isBoss="False" hp="1890675" />
@@ -14567,7 +14567,7 @@
 		<Monster name="보물상자" id="88888888" isBoss="False" hp="100000000" />
 		<Monster name="보물상자" id="88888889" isBoss="False" hp="99999999" />
 		<Monster name="마녀의 이상한 상자" id="88888890" isBoss="False" hp="1" />
-		<Monster name="1주년 축제의 깜짝 상자" id="98888888" isBoss="False" hp="1" />
+		<Monster name="바라카 축제의 깜짝 상자" id="98888888" isBoss="False" hp="1" />
 		<Monster name="1주년 축제의 깜짝 상자" id="98888889" isBoss="False" hp="1" />
 		<Monster name="알 도둑 시누스" id="99999991" isBoss="False" hp="100000000" />
 		<Monster name="알 도둑 시누스" id="99999992" isBoss="False" hp="99999999" />
