@@ -71,15 +71,6 @@ namespace TCC.Windows
             healers.ItemsSource = GroupWindowManager.Instance.Healers;
         }
 
-        private void TccWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-            //add settings
-            SettingsManager.GroupWindowSettings.X = Left - Left % Left;
-            SettingsManager.GroupWindowSettings.Y = Top - Top%Top;
-            SettingsManager.SaveSettings();
-
-        }
 
         private void TccWindow_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {

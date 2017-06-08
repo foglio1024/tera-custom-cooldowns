@@ -30,22 +30,9 @@ namespace TCC.Windows
         {
             InitWindow(SettingsManager.BuffBarWindowSettings);
 
-            //buffs.DataContext = BuffBarWindowManager.Instance.Player.Buffs;
             buffs.ItemsSource = BuffBarWindowManager.Instance.Player.Buffs;
-            //debuffs.DataContext = BuffBarWindowManager.Instance.Player.Debuffs;
             debuffs.ItemsSource = BuffBarWindowManager.Instance.Player.Debuffs;
-            //infBuffs.DataContext = BuffBarWindowManager.Instance.Player.InfBuffs;
             infBuffs.ItemsSource = BuffBarWindowManager.Instance.Player.InfBuffs;
-        }
-
-        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-            SettingsManager.BuffBarWindowSettings.X = Left - Left % Left;
-            SettingsManager.BuffBarWindowSettings.Y = Top - Top%Top;
-            SettingsManager.SaveSettings();
-
-
         }
 
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)

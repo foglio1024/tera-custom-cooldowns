@@ -51,15 +51,6 @@ namespace TCC
             }, DispatcherPriority.Normal);
         }
 
-        private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            this.DragMove();
-            SettingsManager.CooldownWindowSettings.X = Left - Left % Left;
-            SettingsManager.CooldownWindowSettings.Y = Top - Top%Top;
-            SettingsManager.SaveSettings();
-
-        }
-
         private void Window_MouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             ContextMenu.IsOpen = true;

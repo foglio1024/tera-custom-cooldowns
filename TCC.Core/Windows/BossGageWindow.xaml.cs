@@ -54,16 +54,6 @@ namespace TCC.Windows
 
         }
 
-
-        private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            this.DragMove();
-            SettingsManager.BossGaugeWindowSettings.X = Left - Left % Left;
-            SettingsManager.BossGaugeWindowSettings.Y = Top - Top%Top;
-            SettingsManager.SaveSettings();
-
-        }
-
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             ContextMenu.IsOpen = true;

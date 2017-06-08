@@ -26,14 +26,6 @@ namespace TCC.Windows
 
         }
 
-        private void TccWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-            SettingsManager.ClassWindowSettings.X = Left - Left%Left;
-            SettingsManager.ClassWindowSettings.Y = Top - Top%Top;
-            SettingsManager.SaveSettings();
-        }
-
         ClassWindowViewModel _context;
         public ClassWindowViewModel Context
         {

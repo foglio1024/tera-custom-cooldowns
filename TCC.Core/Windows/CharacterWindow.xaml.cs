@@ -38,14 +38,7 @@ namespace TCC.Windows
             rootGrid.DataContext = CharacterWindowManager.Instance.Player;
         }
 
-        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
 
-            SettingsManager.CharacterWindowSettings.X = Left - Left % Left;
-            SettingsManager.CharacterWindowSettings.Y = Top - Top%Top;
-            SettingsManager.SaveSettings();
-        }
 
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
