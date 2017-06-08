@@ -497,7 +497,7 @@
     <Compile Include="Controls\ClassBars\MysticBar.xaml.cs">
       <DependentUpon>MysticBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\NormalSkillContainer.xaml.cs">
+    <Compile Include="Controls\NormalSkillContainer.xaml.cs">
       <DependentUpon>NormalSkillContainer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\SettingsWindow.xaml.cs">
@@ -708,7 +708,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\NormalSkillContainer.xaml">
+    <Page Include="Controls\NormalSkillContainer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
