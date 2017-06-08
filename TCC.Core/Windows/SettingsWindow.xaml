@@ -35,7 +35,7 @@
             </Grid.ColumnDefinitions>
 
             <Border Style="{StaticResource border}" Grid.ColumnSpan="10" Grid.RowSpan="10"  Opacity=".95"/>
-        <Image Opacity=".02" Margin="0" Width="128" Height="128" Grid.ColumnSpan="10" Grid.RowSpan="10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Source="/TCC;component/resources/images/tera-logo-flat.png" ClipToBounds="False"/>
+        <Image RenderOptions.BitmapScalingMode="HighQuality" Opacity=".02" Margin="0" Width="128" Height="128" Grid.ColumnSpan="10" Grid.RowSpan="10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Source="/TCC;component/resources/images/tera-logo-flat.png" ClipToBounds="False"/>
 
         <TabControl TabStripPlacement="Left" Grid.Row="1" Grid.ColumnSpan="2" Background="#1aaa" BorderThickness="0,0,0,0" Height="400">
                 <TabControl.Resources>
@@ -512,7 +512,7 @@
                     </Border.Effect>
                 </Border>
                 <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Height="Auto" Margin="0,0">
-                    <Image Source="/TCC;component/resources/tcc-logo.ico" Width="Auto" Height="32" Margin="0,0" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="/TCC;component/resources/tcc-logo.ico" Width="Auto" Height="32" Margin="0,0,0,0" RenderOptions.BitmapScalingMode="HighQuality"/>
                     <TextBlock Style="{StaticResource text1}" Text="{Binding Path=Title, RelativeSource={RelativeSource AncestorType=local:SettingsWindow}}" VerticalAlignment="Center" Margin="12,0" FontSize="16"></TextBlock>
                 </StackPanel>
                 <Image Source="/TCC;component/resources/images/ic_close_white_24dp_2x.png" Width="20" Grid.Column="1" HorizontalAlignment="Right" Margin="5" Opacity=".9" Cursor="Hand" MouseLeftButtonDown="Image_MouseLeftButtonDown"></Image>
