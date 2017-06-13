@@ -63,7 +63,10 @@ namespace TCC
             {
                 if (encounter == value) return;
                 encounter = value;
-                if (!encounter) WindowManager.SkillsEnded = true;
+                if (!encounter)
+                {
+                    WindowManager.SkillsEnded = true;
+                }
                 WindowManager.NotifyDimChanged();
             }
         }
