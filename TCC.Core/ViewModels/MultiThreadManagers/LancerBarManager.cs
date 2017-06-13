@@ -70,11 +70,11 @@ namespace TCC.ViewModels
             AdrenalineRush = new DurationCooldownIndicator(Dispatcher);
             Infuriate = new DurationCooldownIndicator(Dispatcher);
 
-            GuardianShout.Cooldown = new FixedSkillCooldown(gshout, CooldownType.Skill, Dispatcher);
-            GuardianShout.Buff = new FixedSkillCooldown(gshout, CooldownType.Skill, Dispatcher);
-            AdrenalineRush.Cooldown = new FixedSkillCooldown(arush, CooldownType.Skill, Dispatcher);
-            AdrenalineRush.Buff = new FixedSkillCooldown(arush, CooldownType.Skill, Dispatcher);
-            Infuriate.Cooldown = new FixedSkillCooldown(infu, CooldownType.Skill, Dispatcher);
+            GuardianShout.Cooldown = new FixedSkillCooldown(gshout, CooldownType.Skill, Dispatcher, true);
+            GuardianShout.Buff = new FixedSkillCooldown(gshout, CooldownType.Skill, Dispatcher, false);
+            AdrenalineRush.Cooldown = new FixedSkillCooldown(arush, CooldownType.Skill, Dispatcher, true);
+            AdrenalineRush.Buff = new FixedSkillCooldown(arush, CooldownType.Skill, Dispatcher, false);
+            Infuriate.Cooldown = new FixedSkillCooldown(infu, CooldownType.Skill, Dispatcher, true);
         }
     }
 }

@@ -23,8 +23,8 @@ namespace TCC.ViewModels
             //Energy Stars
             EnergyStars = new DurationCooldownIndicator(Dispatcher);
             SkillsDatabase.TryGetSkill(350410, Class.Priest, out Skill es);
-            EnergyStars.Cooldown = new FixedSkillCooldown(es, CooldownType.Skill, Dispatcher);
-            EnergyStars.Buff = new FixedSkillCooldown(es, CooldownType.Skill, Dispatcher);
+            EnergyStars.Cooldown = new FixedSkillCooldown(es, CooldownType.Skill, Dispatcher, true);
+            EnergyStars.Buff = new FixedSkillCooldown(es, CooldownType.Skill, Dispatcher, false);
         }
 
         public override bool StartSpecialSkill(SkillCooldown sk)
