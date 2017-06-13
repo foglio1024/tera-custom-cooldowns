@@ -36,12 +36,17 @@
                          Grid.Column="2"
                          Grid.Row="0"
                          >
-                <local:StatControl DataContext="{Binding HP}" Color="{StaticResource hpColor}" StatusColor="{StaticResource hpDebuffColor}" Width="85" Margin="0,0,0,0"/>
+                <local:StatControl DataContext="{Binding HP}" Color="{StaticResource hpColor}" StatusColor="{StaticResource hpDebuffColor}" Width="85" Margin="0,0,0,2"/>
                 <local:StatControl DataContext="{Binding MP}" Color="{StaticResource mpColor}" Width="85" Margin="0,0,0,0"/>
             </UniformGrid>
-            <local:MysticAurasIndicator Grid.Row="0" VerticalAlignment="Center" UseLayoutRounding="True"
-                                            HorizontalAlignment="Stretch"
-                                            Margin="5,0,0,0" DataContext="{Binding Auras}"></local:MysticAurasIndicator>
+            <UniformGrid Rows="1" Margin="5,0,0,0">
+
+                <local:MysticAurasIndicator Grid.Row="0" VerticalAlignment="Center" UseLayoutRounding="True"
+                                            HorizontalAlignment="Stretch" Padding="0,0"
+                                            Margin="0,0,0,0" DataContext="{Binding Auras}" />
+                <local:FixedSkillControl DataContext="{Binding Contagion}"></local:FixedSkillControl>
+                <local:FixedSkillControl DataContext="{Binding Vow}"></local:FixedSkillControl>
+            </UniformGrid>
         </Grid>
     </Grid>
 
