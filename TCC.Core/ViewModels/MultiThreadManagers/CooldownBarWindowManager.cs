@@ -192,6 +192,8 @@ namespace TCC.ViewModels
 
         private void FixedCd_AddOrRefreshSkill(SkillCooldown sk)
         {
+            if (_classManager.StartSpecialSkill(sk) && SettingsManager.ClassWindowSettings.Visibility == Visibility.Visible) return;
+
             var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
             if (skill != null)
             {
@@ -206,7 +208,6 @@ namespace TCC.ViewModels
                 return;
             }
 
-            if (_classManager.StartSpecialSkill(sk) && SettingsManager.ClassWindowSettings.Visibility == Visibility.Visible) return;
 
             AddOrRefreshOtherSkill(sk);
         }
