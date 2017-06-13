@@ -24,14 +24,12 @@ namespace TCC.Controls
     /// </summary>
     public partial class FixedSkillControl : UserControl, INotifyPropertyChanged
     {
-        public FixedSkillControl()
-        {
-            InitializeComponent();
-        }
-
         FixedSkillCooldown _context;
-
-
+        DispatcherTimer warnTimer;
+        DoubleAnimation ExpandWarn;
+        DoubleAnimation ExpandWarnInner;
+        DoubleAnimation ArcAnimation;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private bool isRunning = false;
         public bool IsRunning
@@ -41,14 +39,23 @@ namespace TCC.Controls
             {
                 if (isRunning == value) return;
                 isRunning = value;
+                if (!isRunning) warnTimer.Stop();
                 NotifyPropertyChanged("IsRunning");
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void NotifyPropertyChanged(string p)
+
+        public FixedSkillControl()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
+            InitializeComponent();
+            warnTimer = new DispatcherTimer();
+            warnTimer.Interval = TimeSpan.FromMilliseconds(1000);
+            warnTimer.Tick += WarnTimer_Tick;
+
+
+            ArcAnimation = new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(1));
+            ExpandWarn = new DoubleAnimation(0, 1.5, TimeSpan.FromMilliseconds(300)) { EasingFunction = new QuadraticEase() };
+            ExpandWarnInner = new DoubleAnimation(35, 0, TimeSpan.FromMilliseconds(400)) { EasingFunction = new QuadraticEase() };
         }
 
         void Control_Loaded(object sender, RoutedEventArgs e)
@@ -57,7 +64,6 @@ namespace TCC.Controls
             _context = (FixedSkillCooldown)DataContext;
             _context.PropertyChanged += _context_PropertyChanged;
         }
-
         void _context_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             Dispatcher.InvokeIfRequired(() =>
@@ -88,6 +94,10 @@ namespace TCC.Controls
                         IsRunning = false;
                         AnimateAvailableSkill();
                     }
+                    else
+                    {
+                        warnTimer.Stop();
+                    }
 
                 }
             },
@@ -95,47 +105,49 @@ namespace TCC.Controls
 
         }
 
+        public void NotifyPropertyChanged(string p)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
+        }
+        private void WarnTimer_Tick(object sender, EventArgs e)
+        {
+            WarnAvailableSkill();
+        }
+
+
+
         void AnimateArcAngle(double val = 1)
         {
-
-            var an = new DoubleAnimation(val * 359.9, 0, TimeSpan.FromMilliseconds(_context.Cooldown));
-            //an.Completed += An_Completed;
+            ArcAnimation.Duration = TimeSpan.FromMilliseconds(_context.Cooldown);
+            ArcAnimation.From = 359.9 * val;
             int fps = _context.Cooldown > 80000 ? 1 : 30;
-            DoubleAnimation.SetDesiredFrameRate(an, fps);
-            arc.BeginAnimation(Arc.EndAngleProperty, an);
-
-        }
-        void AnimateArcThickness(double val = 1)
-        {
-            var an = new DoubleAnimation(val * 25, 0, TimeSpan.FromMilliseconds(_context.Cooldown));
-            an.Completed += An_Completed;
-            int fps = _context.Cooldown > 80000 ? 1 : 30;
-            DoubleAnimation.SetDesiredFrameRate(an, fps);
-            arc.BeginAnimation(Arc.StrokeThicknessProperty, an);
-        }
-        void AnimateEllipseSize(double val = 0)
-        {
-            if (val == 0) val = 1;
-            var an = new DoubleAnimation(val, 0, TimeSpan.FromMilliseconds(_context.Cooldown));
-            an.Completed += An_Completed;
-            int fps = _context.Cooldown > 80000 ? 1 : 30;
-            DoubleAnimation.SetDesiredFrameRate(an, fps);
-            growEllipse.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, an);
-            growEllipse.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, an);
-        }
-
-        private void An_Completed(object sender, EventArgs e)
-        {
-            IsRunning = false;
-            AnimateAvailableSkill();
-
+            DoubleAnimation.SetDesiredFrameRate(ArcAnimation, fps);
+            arc.BeginAnimation(Arc.EndAngleProperty, ArcAnimation);
         }
 
         private void AnimateAvailableSkill()
         {
-            arc.BeginAnimation(Arc.EndAngleProperty, null);
-            var an = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200)) { EasingFunction = new QuadraticEase() };
-            glow.BeginAnimation(OpacityProperty, an);
+            arc.BeginAnimation(Arc.EndAngleProperty, null); //stop any arc animations
+            if (!_context.FlashOnAvailable)
+            {
+                var an = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200));
+                glow.BeginAnimation(OpacityProperty, an);
+            }
+            WarnAvailableSkill();
+            StartWarning();
         }
+        private void StartWarning()
+        {
+            warnTimer.Start();
+        }
+        private void WarnAvailableSkill()
+        {
+            if (!SessionManager.Encounter) return;
+            if (!_context.FlashOnAvailable) return;
+            warnArc.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, ExpandWarn);
+            warnArc.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, ExpandWarn);
+            warnArc.BeginAnimation(Arc.StrokeThicknessProperty, ExpandWarnInner);
+        }
+
     }
 }
