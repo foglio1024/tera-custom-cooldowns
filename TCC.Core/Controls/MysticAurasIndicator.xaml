@@ -10,8 +10,8 @@
         <Style TargetType="local:Arc">
             <Setter Property="StrokeThickness" Value="5"/>
             <Setter Property="Margin" Value="2"/>
-            <Setter Property="Width" Value="50"/>
-            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="47"/>
+            <Setter Property="Height" Value="47"/>
         </Style>
     </UserControl.Resources>
     <Grid  UseLayoutRounding="True" >
