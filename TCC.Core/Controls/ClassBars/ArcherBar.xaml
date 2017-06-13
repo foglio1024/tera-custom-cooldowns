@@ -17,9 +17,10 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
@@ -36,23 +37,30 @@
                          HorizontalAlignment="Stretch" 
                          VerticalAlignment="Center"
                          Margin="5,3"
-                         Grid.RowSpan="2"
-                         Grid.Column="2"
+                         Grid.ColumnSpan="1"
+                         Grid.Column="3"
                          Grid.Row="0"
                          >
-                <local:StatControl DataContext="{Binding HP}" Color="{StaticResource hpColor}" StatusColor="{StaticResource hpDebuffColor}" Width="85" Margin="0,3,0,3"/>
-                <local:StatControl DataContext="{Binding MP}" Color="{StaticResource mpColor}" Width="85" Margin="0,3,0,3"/>
+                <local:StatControl DataContext="{Binding HP}" Color="{StaticResource hpColor}" StatusColor="{StaticResource hpDebuffColor}" Width="85" Margin="3,3,3,3"/>
+                <local:StatControl DataContext="{Binding MP}" Color="{StaticResource mpColor}" Width="85" Margin="3,3,3,3"/>
             </UniformGrid>
-
             <local:ArcherStanceIndicator Grid.RowSpan="2"
-                                         Margin="1,0"
+                                         Margin="1,1"
                                          DataContext="{Binding Stance}" />
 
+            <UniformGrid Grid.Column="1" Rows="1" Margin="5,0,0,0">
+                
 
             <local:ArcherFocusControl x:Name="focusControl" 
-                                      Grid.Column="1" 
-                                      Margin="5,-5,0,5" 
-                                      DataContext="{Binding Focus}"/>
+                                      Margin="-5,-1,0,0" Padding="5,0"
+                                      DataContext="{Binding Focus}" 
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Center"/>
+
+            <local:FixedSkillControl x:Name="thunderbolt"
+                                     DataContext="{Binding Thunderbolt}"
+                                     HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-10,-10,-10,-10" Padding="10"/>
+            </UniformGrid>
         </Grid>
     </Grid>
 </UserControl>
