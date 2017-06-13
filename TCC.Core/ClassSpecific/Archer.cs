@@ -21,7 +21,7 @@ namespace TCC
         }
         public static void CheckFocus(S_ABNORMALITY_REFRESH p)
         {
-            if (p.AbnormalityId == FOCUS_ID) 
+            if (p.AbnormalityId == FOCUS_ID && p.TargetId == SessionManager.CurrentPlayer.EntityId) 
             ((ArcherBarManager)ClassManager.CurrentClassManager).Focus.SetFocusStacks(p.Stacks);
         }
         public static void CheckFocusX(S_ABNORMALITY_BEGIN p)
