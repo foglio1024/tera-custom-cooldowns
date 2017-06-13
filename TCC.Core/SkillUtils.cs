@@ -26,11 +26,11 @@ namespace TCC
                 {
                     if (row == 1)
                     {
-                        Main.Add(new FixedSkillCooldown(sk, CooldownType.Skill, CooldownWindowManager.Instance.Dispatcher));
+                        Main.Add(new FixedSkillCooldown(sk, CooldownType.Skill, CooldownWindowManager.Instance.Dispatcher, false));
                     }
                     else if (row == 2)
                     {
-                        Secondary.Add(new FixedSkillCooldown(sk, CooldownType.Skill, CooldownWindowManager.Instance.Dispatcher));
+                        Secondary.Add(new FixedSkillCooldown(sk, CooldownType.Skill, CooldownWindowManager.Instance.Dispatcher, false));
                     }
                 }
             }
@@ -162,9 +162,9 @@ namespace TCC
             XElement skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 420100), new XAttribute("row", 1)), //boomerang pulse
                 new XElement("Skill", new XAttribute("id", 370200), new XAttribute("row", 1)), //totem
-                new XElement("Skill", new XAttribute("id", 241010), new XAttribute("row", 1)), //voc
-                new XElement("Skill", new XAttribute("id", 410100), new XAttribute("row", 1)), //contagion
-                new XElement("Skill", new XAttribute("id", 120100), new XAttribute("row", 1)) //vow
+                new XElement("Skill", new XAttribute("id", 241010), new XAttribute("row", 1)) //voc
+                //new XElement("Skill", new XAttribute("id", 410100), new XAttribute("row", 1)), //contagion
+                //new XElement("Skill", new XAttribute("id", 120100), new XAttribute("row", 1)) //vow
                 );
             skills.Save("resources/config/" + filename);
         }
@@ -186,7 +186,7 @@ namespace TCC
                 new XElement("Skill", new XAttribute("id", 41200), new XAttribute("row", 1)),   //PA
                 new XElement("Skill", new XAttribute("id", 50200), new XAttribute("row", 1)),   //RoA
                 new XElement("Skill", new XAttribute("id", 80900), new XAttribute("row", 1)),   //RF
-                new XElement("Skill", new XAttribute("id", 290100), new XAttribute("row", 1)),  //TB
+                //new XElement("Skill", new XAttribute("id", 290100), new XAttribute("row", 1)),  //TB
                 new XElement("Skill", new XAttribute("id", 250200), new XAttribute("row", 1)),  //IT
                 new XElement("Skill", new XAttribute("id", 220800), new XAttribute("row", 1))   //SF
                 );
