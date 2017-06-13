@@ -45,7 +45,10 @@ namespace TCC.Data
                 NotifyPropertyChanged("Seconds");
             }
         }
-        public FixedSkillCooldown(Skill sk, CooldownType t, Dispatcher d)
+
+        public bool FlashOnAvailable { get; set; }
+
+        public FixedSkillCooldown(Skill sk, CooldownType t, Dispatcher d, bool flashOnAvailable)
         {
             _dispatcher = d;
 
@@ -63,6 +66,8 @@ namespace TCC.Data
 
             _type = t;
             Skill = sk;
+
+            FlashOnAvailable = flashOnAvailable;
         }
 
         private void _shortTimer_Tick(object sender, EventArgs e)
