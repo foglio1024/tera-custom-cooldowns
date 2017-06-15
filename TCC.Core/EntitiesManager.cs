@@ -24,12 +24,12 @@ namespace TCC
                     BossGageWindowManager.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, templateId, zoneId, v);
                 }
             }
-            Console.WriteLine("+Bosses {0} - {1}",BossGageWindowManager.Instance.VisibleBossesCount, BossGageWindowManager.Instance.CurrentNPCs.Count);
+            //Console.WriteLine("+Bosses {0} - {1}",BossGageWindowManager.Instance.VisibleBossesCount, BossGageWindowManager.Instance.CurrentNPCs.Count);
         }
         public static void DespawnNPC(ulong target)
         {
             BossGageWindowManager.Instance.RemoveBoss(target);
-            Console.WriteLine("-Bosses {0} - {1}", BossGageWindowManager.Instance.VisibleBossesCount, BossGageWindowManager.Instance.CurrentNPCs.Count);
+            //Console.WriteLine("-Bosses {0} - {1}", BossGageWindowManager.Instance.VisibleBossesCount, BossGageWindowManager.Instance.CurrentNPCs.Count);
             if (BossGageWindowManager.Instance.VisibleBossesCount == 0) SessionManager.Encounter = false;
         }
         public static void SetNPCStatus(ulong entityId, bool enraged)
@@ -39,8 +39,8 @@ namespace TCC
         public static void UpdateNPCbyGauge(ulong target, float curHP, float maxHP, ushort zoneId, uint templateId)
         {
             BossGageWindowManager.Instance.AddOrUpdateBoss(target, maxHP, curHP, templateId, zoneId, Visibility.Visible);
-            Console.WriteLine("{0}/{1}", curHP, maxHP);
-            Console.WriteLine("++Bosses {0} - {1}", BossGageWindowManager.Instance.VisibleBossesCount, BossGageWindowManager.Instance.CurrentNPCs.Count);
+            //Console.WriteLine("{0}/{1}", curHP, maxHP);
+            //Console.WriteLine("++Bosses {0} - {1}", BossGageWindowManager.Instance.VisibleBossesCount, BossGageWindowManager.Instance.CurrentNPCs.Count);
 
             if (maxHP > curHP)
             {
