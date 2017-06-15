@@ -51,6 +51,7 @@ namespace TCC.Parsing.Messages
             authorNameOffset = reader.ReadUInt16();
             messageOffset = reader.ReadUInt16();
             ch = reader.ReadUInt32();
+            authorId = reader.ReadUInt64();
             reader.Skip(3);
             authorName = reader.ReadTeraString();
             message = reader.ReadTeraString();
