@@ -291,6 +291,11 @@ namespace TCC.Parsing
             AbnormalityManager.BeginOrRefreshPartyMemberAbnormality(x.PlayerId, x.ServerId, x.Id, x.Duration, x.Stacks);
         }
 
+        public static void HandleChat(S_CHAT x)
+        {
+            Console.WriteLine("[{0}][{1}] : {2}",x.Channel, x.AuthorName, x.Message);
+        }
+
         public static void HandleDespawnNpc(S_DESPAWN_NPC p)
         {
             EntitiesManager.DespawnNPC(p.Target);
