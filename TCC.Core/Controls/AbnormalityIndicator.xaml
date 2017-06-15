@@ -34,7 +34,8 @@
             <ToolTip Background="Transparent" BorderBrush="Transparent" >
                 <Grid>
                     <controls:AbnormalityToolTipControl AbnormalityName="{Binding Abnormality.Name}" 
-                                                        AbnormalityToolTip="{Binding Abnormality.ToolTip}"/>
+                                                        AbnormalityToolTip="{Binding Abnormality.ToolTip}"
+                                                        Id="{Binding Abnormality.Id}"/>
                 </Grid>
             </ToolTip>
         </Grid.ToolTip>

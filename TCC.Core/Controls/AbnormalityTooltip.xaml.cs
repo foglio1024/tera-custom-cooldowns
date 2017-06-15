@@ -37,6 +37,15 @@ namespace TCC.Controls
         }
         public static readonly DependencyProperty AbnormalityToolTipProperty = DependencyProperty.Register("AbnormalityToolTip", typeof(string), typeof(AbnormalityToolTipControl));
 
+        public uint Id
+        {
+            get { return (uint)GetValue(IdProperty); }
+            set { SetValue(IdProperty, value); }
+        }
+        public static readonly DependencyProperty IdProperty = DependencyProperty.Register("Id", typeof(uint), typeof(AbnormalityToolTipControl));
+
+
+
         string goodStart = "$H_W_GOOD";
         string badStart = "$H_W_BAD";
         string end = "$COLOR_END";
@@ -84,12 +93,16 @@ namespace TCC.Controls
             try
             {
                 ParseToolTip(AbnormalityToolTip);
+                if(toolTipTB.Text == "")
+                {
+                    toolTipTB.Text = Id.ToString(); ;
+                    Console.WriteLine("Unknown abnoramlity: {0}", Id.ToString());
+                }
 
             }
             catch (Exception)
             {
 
-                
             }
             //toolTipTB.Text = ParseToolTip(AbnormalityToolTip);
         }
