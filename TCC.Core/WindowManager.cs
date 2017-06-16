@@ -30,7 +30,7 @@ namespace TCC
         public static AbnormalitiesWindow BuffBar;
         public static GroupWindow GroupWindow;
         public static ClassWindow ClassWindow;
-
+        public static ChatWindow ChatWindow;
         public static SettingsWindow Settings;
 
         public static ContextMenu ContextMenu;
@@ -203,6 +203,18 @@ namespace TCC
             groupWindowThread.Name = "Group window thread";
             groupWindowThread.SetApartmentState(ApartmentState.STA);
             groupWindowThread.Start();
+            Thread.Sleep(200);
+
+            var chatWindowThread = new Thread(new ThreadStart(() =>
+            {
+                SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                ChatWindow = new ChatWindow();
+                ChatWindow.Show();
+                Dispatcher.Run();
+            }));
+            chatWindowThread.Name = "Chat thread";
+            chatWindowThread.SetApartmentState(ApartmentState.STA);
+            chatWindowThread.Start();
             Thread.Sleep(200);
 
             var t = new Thread(new ThreadStart(() =>
