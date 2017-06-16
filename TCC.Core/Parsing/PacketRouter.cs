@@ -159,6 +159,8 @@ namespace TCC.Parsing
         }
         public static void HandleLogin(S_LOGIN p)
         {
+            ProxyInterop.ConnectToProxy();
+
             CooldownWindowManager.Instance.ClearSkills();
             CooldownWindowManager.Instance.LoadSkills(Utils.ClassEnumToString(p.CharacterClass).ToLower() + "-skills.xml", p.CharacterClass);
             WindowManager.ClassWindow.Context.CurrentClass = p.CharacterClass;
@@ -293,7 +295,23 @@ namespace TCC.Parsing
 
         public static void HandleChat(S_CHAT x)
         {
-            Console.WriteLine("[{0}][{1}] : {2}",x.Channel, x.AuthorName, x.Message);
+            ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(x.Channel, x.AuthorName, x.Message, false));
+        }
+
+        internal static void HandlePrivateChat(S_PRIVATE_CHAT x)
+        {
+            ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(0, x.AuthorName, x.Message, true, x.Channel));
+        }
+
+        internal static void HandleWhisper(S_WHISPER x)
+        {
+            throw new NotImplementedException();
+        }
+        internal static void HandleShowItemTooltipEx(C_SHOW_ITEM_TOOLTIP_EX x)
+        {
+        }
+        internal static void HandleRequestNondbItemInfo(C_REQUEST_NONDB_ITEM_INFO x)
+        {
         }
 
         public static void HandleDespawnNpc(S_DESPAWN_NPC p)
