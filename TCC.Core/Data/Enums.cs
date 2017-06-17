@@ -27,8 +27,23 @@ namespace TCC
         Emote = 26,
         Global = 27,
         Raid = 32,
+        System = 302, //arbitrary (missing in database)
+        Notify = 201, //enchant, broker msgs, Discovered:, etc..
+        Event = 202, //guild bam, civil unrest, 
+        Error = 203,
+        Group = 204,
+        GuildNotice = 205,
+        Deathmatch = 206,
+        ContractAlert = 207,
+        GroupAlerts = 208,
+        Loot = 209,
+        Exp = 210,
+        Money = 211,
         Megaphone = 213,
-        GuildAdvertising = 214
+        GuildAdvertising = 214,
+        SentWhisper = 300, //arbitrary
+        ReceivedWhisper = 301, //arbitrary
+
     }
 
     public enum Class
