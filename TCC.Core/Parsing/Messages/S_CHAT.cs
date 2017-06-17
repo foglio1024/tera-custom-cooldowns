@@ -31,6 +31,8 @@ namespace TCC.Parsing.Messages
             reader.Skip(3);
             authorName = reader.ReadTeraString();
             message = reader.ReadTeraString();
+
+            if (ch == 212) ch = 26;
         }
     }
 }
