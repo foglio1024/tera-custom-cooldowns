@@ -70,6 +70,9 @@ namespace TCC.Parsing
             {"C_REQUEST_NONDB_ITEM_INFO", Contructor<Func<TeraMessageReader, C_REQUEST_NONDB_ITEM_INFO>>() },
             {"S_WHISPER", Contructor<Func<TeraMessageReader, S_WHISPER>>() },
             {"S_PRIVATE_CHAT", Contructor<Func<TeraMessageReader, S_PRIVATE_CHAT>>() },
+            {"S_JOIN_PRIVATE_CHANNEL", Contructor<Func<TeraMessageReader, S_JOIN_PRIVATE_CHANNEL>>() },
+            {"S_LEAVE_PRIVATE_CHANNEL", Contructor<Func<TeraMessageReader, S_LEAVE_PRIVATE_CHANNEL>>() },
+            {"S_SYSTEM_MESSAGE", Contructor<Func<TeraMessageReader, S_SYSTEM_MESSAGE>>() },
 
         };
 
@@ -133,6 +136,9 @@ namespace TCC.Parsing
             {typeof(C_REQUEST_NONDB_ITEM_INFO), new Action<C_REQUEST_NONDB_ITEM_INFO>(x => PacketProcessor.HandleRequestNondbItemInfo(x)) },
             {typeof(S_PRIVATE_CHAT), new Action<S_PRIVATE_CHAT>(x => PacketProcessor.HandlePrivateChat(x)) },
             {typeof(S_WHISPER), new Action<S_WHISPER>(x => PacketProcessor.HandleWhisper(x)) },
+            {typeof(S_JOIN_PRIVATE_CHANNEL), new Action<S_JOIN_PRIVATE_CHANNEL>(x => PacketProcessor.HandleJoinPrivateChat(x)) },
+            {typeof(S_LEAVE_PRIVATE_CHANNEL), new Action<S_LEAVE_PRIVATE_CHANNEL>(x => PacketProcessor.HandleLeavePrivateChat(x)) },
+            {typeof(S_SYSTEM_MESSAGE), new Action<S_SYSTEM_MESSAGE>(x => PacketProcessor.HandleSystemMessage(x)) },
 
         };
 
