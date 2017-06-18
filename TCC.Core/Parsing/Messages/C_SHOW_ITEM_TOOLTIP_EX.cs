@@ -9,7 +9,7 @@ using Tera.Game.Messages;
 
 namespace TCC.Parsing.Messages
 {
-    class C_SHOW_ITEM_TOOLTIP_EX : ParsedMessage
+    public class C_SHOW_ITEM_TOOLTIP_EX : ParsedMessage
     {
         ushort nameOffset;
         int unk1;
