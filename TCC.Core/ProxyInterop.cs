@@ -65,7 +65,7 @@ namespace TCC
 
             SendData(sb.ToString());
         }
-        public static void SendNondbItemInfoMessage(int itemId)
+        public static void SendNondbItemInfoMessage(uint itemId)
         {
             var sb = new StringBuilder("nondb_info");
             sb.Append("&id=");
