@@ -8,7 +8,7 @@ using Tera.Game.Messages;
 
 namespace TCC.Parsing.Messages
 {
-    class C_REQUEST_NONDB_ITEM_INFO : ParsedMessage
+    public class C_REQUEST_NONDB_ITEM_INFO : ParsedMessage
     {
         int item, unk1, unk2;
         public C_REQUEST_NONDB_ITEM_INFO(TeraMessageReader reader) : base(reader)
