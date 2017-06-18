@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="TCC.Controls.MessagePieceControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls="clr-namespace:TCC.Controls"
+             xmlns:converters="clr-namespace:TCC.Converters"
+             xmlns:ts="clr-namespace:TCC.TemplateSelectors"
+             mc:Ignorable="d" 
+             Loaded="UserControl_Loaded" 
+             MouseEnter="UserControl_MouseEnter"
+             MouseLeave="UserControl_MouseLeave">
+    <UserControl.Resources>
+        <converters:TypeToCursorConverter x:Key="typeToCursorConv"/>
+        <DataTemplate x:Key="SimpleTemplate">
+            <controls:OutlinedTextBlock Fill="{Binding Color}"
+                                        Text="{Binding Text}" 
+                                        Cursor="{Binding Type, Converter={StaticResource typeToCursorConv}}"
+                                        FontSize="14"
+                                        StrokeThickness="3"
+                                        Stroke="#9000"
+                                        UseLayoutRounding="True"
+                                        FontFamily="Arial"
+                                        PreviewMouseLeftButtonDown="OutlinedTextBlock_PreviewMouseLeftButtonDown"
+                                        TextWrapping="Wrap"
+                                        FontWeight="Normal"
+                                        Opacity="1"
+                                        Margin="1"
+                                        />
+
+
+        </DataTemplate>
+        <DataTemplate x:Key="MoneyTemplate">
+            <controls:MoneyMessagePiece></controls:MoneyMessagePiece>
+        </DataTemplate>
+        <ts:MessagePieceDataTemplateSelector x:Key="PieceTemplateSelector"
+                                                   SimpleTemplate="{StaticResource SimpleTemplate}"
+                                                   MoneyTemplate="{StaticResource MoneyTemplate}"
+                                                   QuestTemplate="{StaticResource SimpleTemplate}"
+                                                   PointOfInterestTemplate="{StaticResource SimpleTemplate}"
+                                                   ItemTemplate="{StaticResource SimpleTemplate}"
+                                                   />
+    </UserControl.Resources>
+    <Grid>
+        <Border Name="bgBorder" 
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Stretch" 
+                CornerRadius="10" 
+                Opacity=".2">
+        </Border>
+    <ContentControl x:Name="root" Content="{Binding}" 
+                    ContentTemplateSelector="{StaticResource PieceTemplateSelector}"/>
+    </Grid>
+
+</UserControl>
