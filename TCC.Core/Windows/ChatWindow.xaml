@@ -4,149 +4,25 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCC.Windows" 
-                 xmlns:vm="clr-namespace:TCC.ViewModels"
-                 xmlns:data="clr-namespace:TCC.Data"
-                 xmlns:controls="clr-namespace:TCC.Controls"
-                 mc:Ignorable="d" SizeToContent="WidthAndHeight" 
+        xmlns:vm="clr-namespace:TCC.ViewModels"
+        xmlns:data="clr-namespace:TCC.Data"
+        xmlns:controls="clr-namespace:TCC.Controls"
+        xmlns:chatcontrols="clr-namespace:TCC.Controls.ChatControls"
+        mc:Ignorable="d" SizeToContent="WidthAndHeight" ShowInTaskbar="False" ShowActivated="False" 
         Title="ChatWindow" WindowStyle="None" AllowsTransparency="True" Background="Transparent" Topmost="True" Loaded="TccWindow_Loaded" ResizeMode="NoResize">
     <local:TccWindow.DataContext>
-        <vm:ChatWindowViewModel></vm:ChatWindowViewModel>
+        <vm:ChatWindowViewModel />
     </local:TccWindow.DataContext>
     <local:TccWindow.Resources>
         <DataTemplate x:Key="ChatMessageTemplate">
-            <StackPanel Orientation="Horizontal" Margin="2,1">
-                <StackPanel.Resources>
-                    <local:ChatColorConverter x:Key="colorConv"/>
-                    <local:ChatChannelNameConverter x:Key="nameConv"/>
-                    <local:MentionToColorConverter x:Key="mentionConv"/>
-                    <local:SentReceivedToAngleConverter x:Key="sentReceivedConv"/>
-                    <DataTemplate x:Key="MessageBodyTemplate">
-                        <controls:MessagePieceControl />
-
-                    </DataTemplate>
-                    <DataTemplate x:Key="WhisperChannelLabelTemplate">
-                        <Grid Height="12" Width="12" VerticalAlignment="Top" Margin="0,2,0,0" UseLayoutRounding="True">
-                            <Path Data="M12 8V4l8 8-8 8v-4H4V8z" Fill="{Binding Channel, Converter={StaticResource colorConv}}" Opacity=".7" Stretch="Uniform" VerticalAlignment="Center">
-                                <Path.LayoutTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform CenterX="1" ScaleX="{Binding Channel, Converter={StaticResource sentReceivedConv}}"/>
-                                    </TransformGroup>
-                                </Path.LayoutTransform>
-                            </Path>
-                        </Grid>
-                    </DataTemplate>
-                    <DataTemplate x:Key="MegaphoneChannelLabelTemplate">
-                        <Grid Height="12" Width="12" VerticalAlignment="Top" Margin="0,2,0,0" UseLayoutRounding="True">
-                            <Path Data="M81.114,30.146C73.196,11.725,60.456-2.306,54.009,0.316C43.062,4.765,60.53,26.133,6.774,47.984
-		                                c-4.643,1.887-5.82,9.441-3.877,13.957c1.939,4.515,8.291,9.01,12.936,7.123c0.803-0.326,3.754-1.275,3.754-1.275
-		                                c3.316,4.45,6.787,1.811,8.018,4.639c1.479,3.398,4.697,10.785,5.789,13.298c1.096,2.511,3.576,4.837,5.377,4.153
-		                                c1.795-0.684,7.91-3.011,10.25-3.901c2.338-0.89,2.896-2.974,2.182-4.619c-0.771-1.772-3.932-2.292-4.832-4.36
-		                                c-0.902-2.068-3.848-8.696-4.695-10.785c-1.152-2.841,1.295-5.152,4.85-5.522c24.467-2.55,29.041,12.561,37.371,9.173
-		                                C90.343,67.243,89.03,48.568,81.114,30.146z M78.358,60.03c-1.432,0.582-11.061-7.013-17.215-21.334
-		                                c-6.152-14.318-5.379-27.408-3.949-27.989c1.43-0.582,10.822,8.58,16.975,22.898C80.321,47.923,79.79,59.448,78.358,60.03z"
-                                  Fill="#ff2b2b" Opacity=".7" Stretch="Uniform" VerticalAlignment="Center">
-                            </Path>
-                        </Grid>
-                    </DataTemplate>
-                    <DataTemplate x:Key="ChannelLabelTemplate">
-                        <TextBlock   Foreground="{Binding Channel, Converter={StaticResource colorConv}}" 
-                                Opacity=".8" 
-                                FontWeight="Normal" 
-                                FontSize="11"
-                                HorizontalAlignment="Right" 
-                                VerticalAlignment="Top"
-                                TextAlignment="Center"
-                                Visibility="Visible"
-                                TextTrimming="CharacterEllipsis"
-                                MinWidth="33"
-                                Text="{Binding Channel, Converter={StaticResource nameConv}}"
-                                />
-                    </DataTemplate>
-                    
-                    <local:ChannelLabelDataTemplateSelector x:Key="ChannelLabelTemplateSelector"
-                                                            NormalChannelDataTemplate="{StaticResource ChannelLabelTemplate}"
-                                                            WhisperChannelDataTemplate="{StaticResource WhisperChannelLabelTemplate}" 
-                                                            MegaphoneChannelDataTemplate="{StaticResource MegaphoneChannelLabelTemplate}"/>
-                </StackPanel.Resources>
-
-                <Grid Width="Auto" MinWidth="0" Margin="0,1" VerticalAlignment="Top" Height="Auto">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto" MinWidth="80"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="5"/>
-                        <ColumnDefinition Width="0"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Border Background="{Binding ContainsPlayerName, Converter={StaticResource mentionConv}}" 
-                            Opacity=".4" 
-                            CornerRadius="3" 
-                            Visibility="Visible"
-                            Margin="0,0" 
-                            Grid.ColumnSpan="5"
-                            Grid.Column="0"
-                            VerticalAlignment="Stretch"/>
-                    <Border Width="4" Background="{Binding ContainsPlayerName,Converter={StaticResource mentionConv}}" Grid.Column="4" 
-                            CornerRadius="0,3,3,0" Margin="0,0"></Border>
-                    <!--Author-->
-                    <TextBlock  Margin="3,2,3,1" 
-                                Foreground="{Binding Channel, Converter={StaticResource colorConv}}" 
-                                Width="Auto"  
-                                FontSize="13"
-                                VerticalAlignment="Top"
-                                HorizontalAlignment="Right"
-                                Grid.Column="2"                                                
-                                FontWeight="Normal"
-                                FontFamily="Arial"
-                                Opacity=".9"
-                                Text="{Binding Author}"
-                                Cursor="Hand"
-                                TextTrimming="CharacterEllipsis"
-                                />
-                    <!--Channel-->
-                    <ContentControl ContentTemplateSelector="{StaticResource ChannelLabelTemplateSelector}" 
-                                    Content="{Binding}"
-                                    Margin="3,1,3,0"
-                                    Width="33"   
-                                    Grid.Column="1"
-                                    Visibility="Visible"/>
-                    <!--Timestamp-->
-                    <TextBlock  Margin="3,1,3,0" Foreground="{Binding Channel, Converter={StaticResource colorConv}}" 
-                                Width="Auto"   
-                                Opacity=".8" 
-                                FontWeight="Normal" 
-                                FontSize="11"
-                                HorizontalAlignment="Right" 
-                                VerticalAlignment="Top"
-                                Visibility="Visible"
-                                Text="{Binding Timestamp}"
-                                Grid.Column="0"
-                                />
-                    
-                    <!--Message-->
-                    <ItemsControl ItemsSource="{Binding Pieces}" ItemTemplate="{StaticResource MessageBodyTemplate}" Width="400"
-                                  Grid.Column="6" Margin="0,2,0,2" VerticalAlignment="Top" HorizontalAlignment="Left">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel></WrapPanel>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                </Grid>
-            </StackPanel>
+            <controls:ChatMessageControl />
         </DataTemplate>
         <Style TargetType="{x:Type ItemsControl}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ItemsControl}">
-                        
-                        <ScrollViewer FlowDirection="RightToLeft" PreviewMouseWheel="SWPreviewMouseWheel" Template="{DynamicResource ScrollViewerStyle}" Margin="0,-3">
-                            
-                            <ItemsPresenter FlowDirection="LeftToRight" Margin="0">
-
-                            </ItemsPresenter>
+                        <ScrollViewer FlowDirection="RightToLeft" PreviewMouseWheel="SWPreviewMouseWheel" Margin="0,-3">
+                            <ItemsPresenter FlowDirection="LeftToRight" Margin="0" />
                         </ScrollViewer>
                     </ControlTemplate>
                 </Setter.Value>
@@ -154,16 +30,74 @@
 
         </Style>
     </local:TccWindow.Resources>
-    <Grid Margin="5" Width="Auto">
+    <Grid Margin="5" Width="Auto" Name="root">
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition />
+            <RowDefinition Height="208"/>
         </Grid.RowDefinitions>
-        <Border Background="{StaticResource bgColor}" Opacity=".5" CornerRadius="3" Margin="0" Grid.Row="1" VerticalAlignment="Stretch" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Border Background="{StaticResource bgColor}" Opacity=".4" CornerRadius="1" Grid.ColumnSpan="2" Grid.RowSpan="2" BorderThickness="1" BorderBrush="Black" Margin="0,0,0,0" Grid.Row="0" VerticalAlignment="Stretch" />
+        <!--Message counter-->
+        <TextBlock VerticalAlignment="Top"
+                   HorizontalAlignment="Right"
+                   Foreground="Gray"
+                   Opacity=".5"
+                   Grid.Row="1"
+                   FontFamily="{DynamicResource Frutiger}"
+                   Text="{Binding Instance.MessageCount}" 
+                   Margin="3"/>
+        <TabControl Grid.Row="1" Background="Transparent"  BorderBrush="Transparent" Style="{DynamicResource ChatTabControlStyle}" Margin="0,0,0,0" x:Name="tabControl">
+            <TabControl.Resources>
+                <Style TargetType="{x:Type TabItem}">
+                    <Setter Property="Margin" Value="0,0,0,0"/>
+                    <Setter Property="Width" Value="Auto"/>
+                    <Setter Property="Height" Value="25"/>
+                    <Setter Property="Foreground" Value="#9fff"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type TabItem}">
+                                <Grid Name="Panel" Cursor="Hand" >
+                                    <ContentPresenter x:Name="ContentSite"
+                                                                  VerticalAlignment="Center"
+                                                                  HorizontalAlignment="Center"
+                                                                  ContentSource="Header"
+                                                                  Margin="10,0"
+                                                                  RecognizesAccessKey="True" >
+                                    </ContentPresenter>
+                                    <Grid.Style>
+                                        <Style>
+                                            <Setter Property="Grid.Background" Value="Transparent"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="Grid.IsMouseOver" Value="True">
+                                                    <Setter Property="Grid.Background" Value="#1fff"/>
+                                                </Trigger>
 
-        <ItemsControl Margin="0,3,0,3" BorderThickness="0" Name="itemsControl"
-                      ItemsSource="{Binding ChatMessages}"  ItemTemplate="{StaticResource ChatMessageTemplate}" 
-                      Width="Auto" Height="200" Grid.Row="1">
+                                            </Style.Triggers>
+                                        </Style>
+
+                                    </Grid.Style>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Panel.ZIndex" Value="100" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                    </Trigger>
+
+                                    <Trigger Property="IsEnabled" Value="False" />
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+            <TabItem Header="ALL" FontWeight="DemiBold" PreviewMouseLeftButtonDown="TabClicked" >
+                <ItemsControl Margin="0,0,0,3" BorderThickness="0" Name="itemsControl" 
+                      ItemsSource="{Binding Instance.AllMessages}"  ItemTemplate="{StaticResource ChatMessageTemplate}" 
+                      Width="Auto"  Grid.Row="1">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <VirtualizingStackPanel Margin="-2,4,0,4" IsItemsHost="True" Orientation="Vertical" 
@@ -172,16 +106,80 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <Grid Grid.Row="1">
+            </TabItem>
+            <TabItem Header="GUILD" FontWeight="DemiBold" PreviewMouseLeftButtonDown="TabClicked">
+                <ItemsControl Margin="0,0,0,3" BorderThickness="0" Name="guildControl" 
+                      ItemsSource="{Binding Instance.GuildMessages}"  ItemTemplate="{StaticResource ChatMessageTemplate}" 
+                      Width="Auto"  Grid.Row="1">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Margin="-2,4,0,4" IsItemsHost="True" Orientation="Vertical" 
+                                            PreviewMouseLeftButtonDown="TccWindow_MouseLeftButtonDown"
+                                            Background="#01000000" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+
+            </TabItem>
+            <TabItem Header="GROUP" FontWeight="DemiBold" PreviewMouseLeftButtonDown="TabClicked">
+                <ItemsControl Margin="0,0,0,3" BorderThickness="0" Name="partyControl" 
+                      ItemsSource="{Binding Instance.GroupMessages}"  ItemTemplate="{StaticResource ChatMessageTemplate}" 
+                      Width="Auto"  Grid.Row="1">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Margin="-2,4,0,4" IsItemsHost="True" Orientation="Vertical" 
+                                            PreviewMouseLeftButtonDown="TccWindow_MouseLeftButtonDown"
+                                            Background="#01000000" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+
+            </TabItem>
+            <TabItem Header="SYSTEM" FontWeight="DemiBold" PreviewMouseLeftButtonDown="TabClicked">
+                <ItemsControl Margin="0,0,0,3" BorderThickness="0" Name="systemControl" 
+                      ItemsSource="{Binding Instance.SystemMessages}"  ItemTemplate="{StaticResource ChatMessageTemplate}" 
+                      Width="Auto"  Grid.Row="1">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Margin="-2,4,0,4" IsItemsHost="True" Orientation="Vertical" 
+                                            PreviewMouseLeftButtonDown="TccWindow_MouseLeftButtonDown"
+                                            Background="#01000000" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+
+            </TabItem>
+        </TabControl>
+        <Rectangle Height="3" Fill="{StaticResource mpColor}" Width="0" x:Name="selectionRect" 
+                   IsHitTestVisible="False" HorizontalAlignment="Left" 
+                   Opacity="1" VerticalAlignment="Top" Margin="0,22,0,0" Grid.Row="1">
+            <Rectangle.RenderTransform>
+                <TranslateTransform X="0"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Grid Grid.Row="1" Opacity="0" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Border Background="{StaticResource bgColor}" CornerRadius="3,3,0,0" VerticalAlignment="Top" Height="3"></Border>
+            <Border Background="{StaticResource bgColor}" CornerRadius="3,3,0,0" VerticalAlignment="Top" Height="3" />
             <Border Background="{StaticResource bgColor}" CornerRadius="0,0,3,3" VerticalAlignment="Bottom" Height="3" Grid.Row="2"/>
         </Grid>
+        
+        <Border Background="{StaticResource bgColor}" Width="Auto" Grid.Column="0" Grid.Row="0"  />
+        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" Visibility="Collapsed">
+            <TextBlock Foreground="Gray" Margin="5,2">LFG: </TextBlock>
+            <Ellipse Fill="Wheat" Opacity=".5" Width="10" HorizontalAlignment="Stretch" Height="10" Margin="3"/>
+            <Ellipse Fill="Wheat" Opacity=".5" Width="10" HorizontalAlignment="Stretch" Height="10" Margin="3"/>
+        </StackPanel>
+        <Popup Name="playerInfo" StaysOpen="True" Placement="Mouse"
+               AllowsTransparency="True" Width="Auto" HorizontalOffset="95" UseLayoutRounding="True"
+               VerticalAlignment="Center"
+               VerticalOffset="0">
+            <chatcontrols:PlayerTooltip />
 
+        </Popup>
         <!--Add lfg here-->
     </Grid>
 </local:TccWindow>
