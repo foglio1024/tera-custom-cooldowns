@@ -17,6 +17,8 @@ namespace TCC.ViewModels
 
         const int GROUP_SIZE_THRESHOLD = 7;
 
+        public bool Raid { get; set; }
+
         private int _groupSize;
         public int GroupSize
         {
@@ -275,6 +277,7 @@ namespace TCC.ViewModels
             _dps.Clear();
             _tanks.Clear();
 
+            Raid = false;
             GroupSize = GetCount();
         }
 
@@ -627,6 +630,12 @@ namespace TCC.ViewModels
             }
 
         }
+
+        internal void SetRaid(bool raid)
+        {
+            Dispatcher.Invoke(() => Raid = raid);
+        }
+
         public void UpdateMember(S_PARTY_MEMBER_STAT_UPDATE p)
         {
             var dps = _dps.FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
