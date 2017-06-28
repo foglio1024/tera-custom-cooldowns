@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace TCC
+namespace TCC.Data.Databases
 {
     public static class BroochesDatabase
     {

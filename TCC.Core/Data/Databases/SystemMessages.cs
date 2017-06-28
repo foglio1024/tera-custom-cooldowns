@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TCC.Data
+namespace TCC.Data.Databases
 {
     public static class SystemMessages
     {

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace TCC.Data
+namespace TCC.Data.Databases
 {
     public static class AbnormalityDatabase
     {

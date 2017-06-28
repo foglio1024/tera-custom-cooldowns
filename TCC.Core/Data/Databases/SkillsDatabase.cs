@@ -9,7 +9,7 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Xml.Linq;
 
-namespace TCC
+namespace TCC.Data.Databases
 {
     public static class SkillsDatabase
     {

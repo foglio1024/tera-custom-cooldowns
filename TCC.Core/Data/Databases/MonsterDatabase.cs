@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace TCC.Data
+namespace TCC.Data.Databases
 {
     public class MonsterDatabase
     {
@@ -33,7 +33,8 @@ namespace TCC.Data
             foreach (var zone in MonstersDoc.Descendants().Where(x => x.Name == "Zone"))
             {
                 var zoneId = Convert.ToInt32(zone.Attribute("id").Value);
-                Zone z = new Zone(zoneId);
+                var zoneName = zone.Attribute("name").Value;
+                Zone z = new Zone(zoneId, zoneName);
 
                 foreach (var monster in zone.Descendants().Where(x => x.Name == "Monster"))
                 {
@@ -76,7 +77,10 @@ namespace TCC.Data
                 return false;
             }
         }
-
+        public string GetZoneName(uint zoneId)
+        {
+            return Zones.FirstOrDefault(x => x.Id == zoneId).Name;
+        }
         public string GetName(uint templateId, uint zoneId)
         {
             if (TryGetMonster(templateId, zoneId, out Monster m))
@@ -98,6 +102,7 @@ namespace TCC.Data
     class Zone
     {
         public int Id { get; private set; } //templateId / type
+        public string Name { get; private set; }
         public List<Monster> Monsters { get; private set; }
 
         public void AddMonster(Monster m)
@@ -105,10 +110,11 @@ namespace TCC.Data
             Monsters.Add(m);
         }
 
-        public Zone(int id)
+        public Zone(int id, string name)
         {
             Monsters = new List<Monster>();
             Id = id;
+            Name = name;
         }
     }
     public class Monster
