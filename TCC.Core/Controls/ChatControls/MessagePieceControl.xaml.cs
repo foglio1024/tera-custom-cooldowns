@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,22 +21,21 @@ namespace TCC.Controls
     /// </summary>
     public partial class MessagePieceControl : UserControl
     {
+        MessagePiece _context;
+
         public MessagePieceControl()
         {
             InitializeComponent();
         }
 
-        MessagePiece _context;
-
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             _context = (MessagePiece)DataContext;
         }
-
         private void OutlinedTextBlock_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (_context.Type != MessagePieceType.Item) return;
-            if (_context.ItemUid != 0)
+            if (_context.BoundType == BoundType.Equip || _context.ItemUid != 0)
             {
                 ProxyInterop.SendExTooltipMessage(_context.ItemUid, _context.OwnerName);
             }
@@ -44,16 +44,13 @@ namespace TCC.Controls
                 ProxyInterop.SendNondbItemInfoMessage(_context.ItemId);
             }
         }
-
         private void UserControl_MouseEnter(object sender, MouseEventArgs e)
         {
             if (_context.Type == MessagePieceType.Item)
             {
                 bgBorder.Background = _context.Color;
             }
-
         }
-
         private void UserControl_MouseLeave(object sender, MouseEventArgs e)
         {
             bgBorder.Background = Brushes.Transparent;
