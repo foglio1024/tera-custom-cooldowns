@@ -6,6 +6,19 @@ using System.Threading.Tasks;
 
 namespace TCC
 {
+    public enum RareGrade
+    {
+        Common,
+        Uncommon,
+        Rare,
+        Superior
+    }
+    public enum BoundType
+    {
+        None,
+        Equip,
+        Loot
+    }
     public enum ChatChannel
     {
         Say = 0,
@@ -43,6 +56,7 @@ namespace TCC
         GuildAdvertising = 214,
         SentWhisper = 300, //arbitrary
         ReceivedWhisper = 301, //arbitrary
+        TradeRedirect = 303 //arbitrary
 
     }
 
@@ -63,6 +77,20 @@ namespace TCC
         Glaiver = 12,
         Common = 255,
         None = 256
+    }
+    public enum Race
+    {
+        HumanMale = 1,
+        HumanFemale = 2,
+        ElfMale = 3,
+        ElfFemale = 4,
+        AmanMale = 5,
+        AmanFemale = 6,
+        CastanicMale = 7,
+        CastanicFemale = 8,
+        Popori = 9,
+        Elin = 10,
+        Baraka = 11
     }
     public enum Laurel
     {
