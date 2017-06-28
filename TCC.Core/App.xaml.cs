@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using TCC.Data;
+using TCC.Data.Databases;
 using TCC.Parsing;
 using TCC.Properties;
 using TCC.ViewModels;
@@ -69,9 +70,11 @@ namespace TCC
             {
                 SkillManager.Clear();
                 WindowManager.TrayIcon.Icon = WindowManager.DefaultIcon;
+                ProxyInterop.CloseConnection();
             };
 
             SessionManager.CurrentPlayer.Class = Class.None;
+            SessionManager.CurrentPlayer.Name = "player";
         }
 
         public static void CloseApp()
@@ -79,6 +82,7 @@ namespace TCC
             TeraSniffer.Instance.Enabled = false;
             SettingsManager.SaveSettings();
             WindowManager.Dispose();
+            ProxyInterop.CloseConnection();
             Environment.Exit(0);
         }
     }
