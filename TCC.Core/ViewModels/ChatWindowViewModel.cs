@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace TCC.ViewModels
     {
         static ChatWindowViewModel _instance;
         public static ChatWindowViewModel Instance => _instance ?? (_instance = new ChatWindowViewModel());
-        const int MESSAGE_CAP = 300;
+        const int MESSAGE_CAP = 100000;
         const int SPAM_THRESHOLD = 3;
 
         public bool IsTeraOnTop
@@ -161,7 +162,7 @@ namespace TCC.ViewModels
                     //    offset++;
                     //    continue;
                     //}
-                    if (m.RawMessage == chatMessage.RawMessage && m.Channel == chatMessage.Channel && m.Author == chatMessage.Author) return;
+                    if (m.RawMessage == chatMessage.RawMessage &&  m.Author == chatMessage.Author) return;
                 }
             }
 
