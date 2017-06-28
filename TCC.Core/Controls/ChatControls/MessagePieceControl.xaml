@@ -16,19 +16,18 @@
             <controls:OutlinedTextBlock Fill="{Binding Color}"
                                         Text="{Binding Text}" 
                                         Cursor="{Binding Type, Converter={StaticResource typeToCursorConv}}"
-                                        FontSize="14"
-                                        StrokeThickness="3"
-                                        Stroke="#9000"
-                                        UseLayoutRounding="True"
-                                        FontFamily="Arial"
                                         PreviewMouseLeftButtonDown="OutlinedTextBlock_PreviewMouseLeftButtonDown"
+                                        Stroke="#9000"
+                                        StrokeThickness="3"
+                                        FontSize="15"
+                                        FontFamily="{StaticResource Frutiger}"
                                         TextWrapping="Wrap"
                                         FontWeight="Normal"
                                         Opacity="1"
-                                        Margin="1"
-                                        />
-
-
+                                        TextTrimming="None"
+                                        Margin="{Binding Spaces}"
+                                        >
+            </controls:OutlinedTextBlock>
         </DataTemplate>
         <DataTemplate x:Key="MoneyTemplate">
             <controls:MoneyMessagePiece></controls:MoneyMessagePiece>
@@ -41,15 +40,20 @@
                                                    ItemTemplate="{StaticResource SimpleTemplate}"
                                                    />
     </UserControl.Resources>
-    <Grid>
+    <Grid HorizontalAlignment="Stretch">
         <Border Name="bgBorder" 
                 HorizontalAlignment="Stretch" 
                 VerticalAlignment="Stretch" 
                 CornerRadius="10" 
-                Opacity=".2">
-        </Border>
-    <ContentControl x:Name="root" Content="{Binding}" 
-                    ContentTemplateSelector="{StaticResource PieceTemplateSelector}"/>
+                Cursor="{Binding Type, Converter={StaticResource typeToCursorConv}}"
+                PreviewMouseLeftButtonDown="OutlinedTextBlock_PreviewMouseLeftButtonDown"
+                Opacity=".2"
+                />
+        <ContentControl x:Name="root" 
+                        Content="{Binding}" 
+                        Margin="0,0,0,0" 
+                        Visibility="Visible"
+                        ContentTemplateSelector="{StaticResource PieceTemplateSelector}"
+                        />
     </Grid>
-
 </UserControl>
