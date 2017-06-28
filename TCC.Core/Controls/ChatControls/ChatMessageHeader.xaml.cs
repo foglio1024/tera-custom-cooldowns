@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TCC.Data;
+using TCC.Parsing;
 
 namespace TCC.Controls
 {
@@ -23,6 +25,18 @@ namespace TCC.Controls
         public ChatMessageHeader()
         {
             InitializeComponent();
+        }
+
+        private void OutlinedTextBlock_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var context = (ChatMessage)DataContext;
+            WindowManager.ChatWindow.CurrentSender = sender;
+            ProxyInterop.SendAskInteractiveMessage(PacketProcessor.ServerId, context.Author);
+        }
+
+        private void UserControl_MouseEnter(object sender, MouseEventArgs e)
+        {
+            WindowManager.ChatWindow.CloseTooltip();
         }
     }
 }
