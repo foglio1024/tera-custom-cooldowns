@@ -6,37 +6,35 @@
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:ts="clr-namespace:TCC.TemplateSelectors"
              xmlns:c="clr-namespace:TCC.Converters"
-             mc:Ignorable="d" >
-    <Grid Margin="2,1">
+             xmlns:chatcontrols="clr-namespace:TCC.Controls.ChatControls"
+             mc:Ignorable="d">
+    <Grid Margin="2,1" HorizontalAlignment="Stretch" Width="650" Name="root" Height="Auto" Background="#0f00" VerticalAlignment="Top"
+          Visibility="{Binding IsVisible, Converter={StaticResource boolToVisibleCollapsed}}">
         <Grid.Resources>
             <DataTemplate x:Key="MessageHeaderTemplate">
                 <local:ChatMessageHeader />
             </DataTemplate>
             <DataTemplate x:Key="MessageBodyTemplate">
-                <local:MessagePieceControl />
+                <local:MessagePieceControl  />
             </DataTemplate>
         </Grid.Resources>
-
-        <Grid Width="Auto" MinWidth="0" Margin="0,0" VerticalAlignment="Top" Height="Auto">
+        <Grid Width="Auto" MinWidth="0" Margin="0,0" VerticalAlignment="Top" Height="Auto" Background="Transparent" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
             <!--Header-->
-            <ContentControl Content="{Binding}" 
+            <ContentControl Content="{Binding}" Name="header"
                             ContentTemplate="{StaticResource MessageHeaderTemplate}"/>
             <!--Message-->
             <ItemsControl ItemsSource="{Binding Pieces}"
                           ItemTemplate="{StaticResource MessageBodyTemplate}" 
-                          Width="500"
-                          Grid.Column="6" 
-                          Margin="0,4,0,4" 
-                          VerticalAlignment="Top" 
-                          HorizontalAlignment="Left">
+                          Grid.Column="1" Background="#0f00"  
+                          Margin="3,1,0,0" 
+                          VerticalAlignment="Top" >
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel></WrapPanel>
+                        <WrapPanel HorizontalAlignment="Stretch"  Width="Auto" Height="Auto" Background="#0f00" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
