@@ -75,6 +75,10 @@ namespace TCC.Parsing
             {"S_SYSTEM_MESSAGE", Contructor<Func<TeraMessageReader, S_SYSTEM_MESSAGE>>() },
             {"S_SYSTEM_MESSAGE_LOOT_ITEM", Contructor<Func<TeraMessageReader, S_SYSTEM_MESSAGE_LOOT_ITEM>>() },
             {"S_CREST_MESSAGE", Contructor<Func<TeraMessageReader, S_CREST_MESSAGE>>() },
+            {"S_ANSWER_INTERACTIVE", Contructor<Func<TeraMessageReader, S_ANSWER_INTERACTIVE>>() },
+            {"S_USER_BLOCK_LIST", Contructor<Func<TeraMessageReader, S_USER_BLOCK_LIST>>() },
+            {"S_FRIEND_LIST", Contructor<Func<TeraMessageReader, S_FRIEND_LIST>>() },
+            {"S_ACCOMPLISH_ACHIEVEMENT", Contructor<Func<TeraMessageReader, S_ACCOMPLISH_ACHIEVEMENT>>() },
 
         };
 
@@ -143,6 +147,10 @@ namespace TCC.Parsing
             {typeof(S_SYSTEM_MESSAGE), new Action<S_SYSTEM_MESSAGE>(x => PacketProcessor.HandleSystemMessage(x)) },
             {typeof(S_SYSTEM_MESSAGE_LOOT_ITEM), new Action<S_SYSTEM_MESSAGE_LOOT_ITEM>(x => PacketProcessor.HandleSystemMessageLoot(x)) },
             {typeof(S_CREST_MESSAGE), new Action<S_CREST_MESSAGE>(x => PacketProcessor.HandleCrestMessage(x)) },
+            {typeof(S_ANSWER_INTERACTIVE), new Action<S_ANSWER_INTERACTIVE>(x => PacketProcessor.HandleAnswerInteractive(x)) },
+            {typeof(S_USER_BLOCK_LIST), new Action<S_USER_BLOCK_LIST>(x => PacketProcessor.HandleBlockList(x)) },
+            {typeof(S_FRIEND_LIST), new Action<S_FRIEND_LIST>(x => PacketProcessor.HandleFriendList(x)) },
+            {typeof(S_ACCOMPLISH_ACHIEVEMENT), new Action<S_ACCOMPLISH_ACHIEVEMENT>(x => PacketProcessor.HandleAccomplishAchievement(x)) },
 
         };
 
