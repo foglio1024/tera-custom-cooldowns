@@ -89,6 +89,16 @@ namespace TCC
             AutoDim = true,
             DimOpacity = .2
         };
+        public static WindowSettings ChatWindowSettings = new WindowSettings()
+        {
+            X = 0,
+            Y = _screen.Height * (2 / 3),
+            Visibility = Visibility.Visible,
+            ClickThru = false,
+            Scale = 1,
+            AutoDim = false,
+            DimOpacity = .2
+        };
 
         public static bool IgnoreMeInGroupWindow { get; set; }
         public static bool IgnoreMyBuffsInGroupWindow { get; set; }

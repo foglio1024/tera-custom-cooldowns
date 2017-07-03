@@ -5,12 +5,14 @@ using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using TCC.Data;
+using TCC.Data.Databases;
 using TCC.Parsing;
 using TCC.Properties;
 using TCC.ViewModels;
@@ -69,9 +71,15 @@ namespace TCC
             {
                 SkillManager.Clear();
                 WindowManager.TrayIcon.Icon = WindowManager.DefaultIcon;
+                ProxyInterop.CloseConnection();
             };
 
             SessionManager.CurrentPlayer.Class = Class.None;
+            SessionManager.CurrentPlayer.Name = "player";
+            var v = Assembly.GetExecutingAssembly().GetName().Version;
+            var ver = String.Format("TCC v{0}.{1}.{2}", v.Major, v.Minor, v.Build);
+
+            ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.Notify, "System", "<FONT>"+ver+"</FONT>"));
         }
 
         public static void CloseApp()
@@ -79,6 +87,7 @@ namespace TCC
             TeraSniffer.Instance.Enabled = false;
             SettingsManager.SaveSettings();
             WindowManager.Dispose();
+            ProxyInterop.CloseConnection();
             Environment.Exit(0);
         }
     }

@@ -30,7 +30,7 @@ namespace TCC
         public static AbnormalitiesWindow BuffBar;
         public static GroupWindow GroupWindow;
         public static ClassWindow ClassWindow;
-
+        public static ChatWindow ChatWindow;
         public static SettingsWindow Settings;
 
         public static ContextMenu ContextMenu;
@@ -134,35 +134,51 @@ namespace TCC
         public static double StaminaGaugeTop;
         public static double StaminaGaugeLeft;
 
-        public static void Init()
+        static List<Delegate> WindowLoadingDelegates = new List<Delegate>
         {
-
+            new Action(LoadCooldownWindow),
+            new Action(LoadBossGaugeWindow),
+            new Action(LoadBuffBarWindow),
+            new Action(LoadGroupWindow),
+            new Action(LoadChatWindow),
+            new Action(LoadCharWindow),
+            new Action(LoadClassWindow)
+        };
+        static void LoadCharWindow()
+        {
             var charWindowThread = new Thread(new ThreadStart(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 CharacterWindow = new CharacterWindow();
                 CharacterWindowManager.Instance.Player = new Data.Player();
                 CharacterWindow.Show();
+                waiting = false;
                 Dispatcher.Run();
             }));
             charWindowThread.Name = "Character window thread";
             charWindowThread.SetApartmentState(ApartmentState.STA);
             charWindowThread.Start();
-            Thread.Sleep(200);
-
+            Console.WriteLine("Char window loaded");
+        }
+        static void LoadCooldownWindow()
+        {
             var cooldownWindowThread = new Thread(new ThreadStart(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 CooldownWindow = new CooldownWindow();
-                //CooldownWindowManager.Instance.ShortSkills = new SynchronizedObservableCollection<SkillCooldown>(CooldownWindow.Dispatcher);
-                //CooldownWindowManager.Instance.LongSkills = new SynchronizedObservableCollection<SkillCooldown>(CooldownWindow.Dispatcher);
                 CooldownWindow.Show();
+                waiting = false;
                 Dispatcher.Run();
             }));
             cooldownWindowThread.Name = "Cooldown bar thread";
             cooldownWindowThread.SetApartmentState(ApartmentState.STA);
             cooldownWindowThread.Start();
-            Thread.Sleep(200);
+            Console.WriteLine("Cd window loaded");
+
+
+        }
+        static void LoadBossGaugeWindow()
+        {
 
             var bossGaugeThread = new Thread(new ThreadStart(() =>
             {
@@ -170,26 +186,37 @@ namespace TCC
                 BossGauge = new BossGageWindow();
                 BossGageWindowManager.Instance.CurrentNPCs = new SynchronizedObservableCollection<Data.Boss>(BossGauge.Dispatcher);
                 BossGauge.Show();
+                waiting = false;
+
                 Dispatcher.Run();
             }));
             bossGaugeThread.Name = "Boss gauge thread";
             bossGaugeThread.SetApartmentState(ApartmentState.STA);
             bossGaugeThread.Start();
-            Thread.Sleep(200);
+            Console.WriteLine("Boss window loaded");
 
+        }
+        static void LoadBuffBarWindow()
+        {
             var buffBarThread = new Thread(new ThreadStart(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 BuffBar = new AbnormalitiesWindow();
                 BuffBarWindowManager.Instance.Player = new Data.Player();
                 BuffBar.Show();
+                waiting = false;
+
                 Dispatcher.Run();
             }));
             buffBarThread.Name = "Buff bar thread";
             buffBarThread.SetApartmentState(ApartmentState.STA);
             buffBarThread.Start();
-            Thread.Sleep(200);
+            Console.WriteLine("Buff window loaded");
 
+
+        }
+        static void LoadGroupWindow()
+        {
             var groupWindowThread = new Thread(new ThreadStart(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
@@ -198,29 +225,68 @@ namespace TCC
                 GroupWindowManager.Instance.Healers = new SynchronizedObservableCollection<Data.User>(GroupWindow.Dispatcher);
                 GroupWindowManager.Instance.Tanks = new SynchronizedObservableCollection<Data.User>(GroupWindow.Dispatcher);
                 GroupWindow.Show();
+                waiting = false;
+
                 Dispatcher.Run();
             }));
             groupWindowThread.Name = "Group window thread";
             groupWindowThread.SetApartmentState(ApartmentState.STA);
             groupWindowThread.Start();
-            Thread.Sleep(200);
+            Console.WriteLine("Group window loaded");
 
+        }
+        static void LoadChatWindow()
+        {
+            var chatWindowThread = new Thread(new ThreadStart(() =>
+            {
+                SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                ChatWindow = new ChatWindow();
+                ChatWindow.Show();
+                waiting = false;
+
+                Dispatcher.Run();
+            }));
+            chatWindowThread.Name = "Chat thread";
+            chatWindowThread.SetApartmentState(ApartmentState.STA);
+            chatWindowThread.Start();
+            Console.WriteLine("Chat window loaded");
+
+        }
+        static void LoadClassWindow()
+        {
             var t = new Thread(new ThreadStart(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 ClassWindow = new ClassWindow();
                 ClassWindow.Closed += (s, ev) => ClassWindow.Dispatcher.InvokeShutdown();
                 ClassWindow.Show();
+                waiting = false;
+
                 Dispatcher.Run();
-            }))
-            {
-                Name = "Class bar thread"
-            };
+            }));
+            t.Name = "Class bar thread";
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
+            Console.WriteLine("Class window loaded");
 
-            Thread.Sleep(500);
 
+        }
+        static bool waiting;
+        static void LoadWindows()
+        {
+            waiting = true;
+            foreach (var del in WindowLoadingDelegates)
+            {
+                waiting = true;
+                del.DynamicInvoke();
+                while (waiting) { }
+            }
+            Console.WriteLine("Windows loaded");
+
+        }
+        public static void Init()
+        {
+            LoadWindows();
             ContextMenu = new ContextMenu();
             DefaultIcon = new Icon(Application.GetResourceStream(new Uri("resources/tcc-logo.ico", UriKind.Relative)).Stream);
             ConnectedIcon = new Icon(Application.GetResourceStream(new Uri("resources/tcc-logo-on.ico", UriKind.Relative)).Stream);
@@ -267,62 +333,6 @@ namespace TCC
             Settings.BeginAnimation(Window.OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
         }
 
-
-        internal static void InitClassBar()
-        {
-            switch (SessionManager.CurrentPlayer.Class)
-            {
-                case Class.Warrior:
-                    break;
-                case Class.Lancer:
-                    break;
-                case Class.Slayer:
-                    break;
-                case Class.Berserker:
-                    break;
-                case Class.Sorcerer:
-                    break;
-                case Class.Archer:
-                    break;
-                case Class.Priest:
-                    break;
-                case Class.Elementalist:
-                    break;
-                case Class.Soulless:
-                    break;
-                case Class.Engineer:
-                    break;
-                case Class.Fighter:
-                    break;
-                case Class.Assassin:
-                    break;
-                case Class.Glaiver:
-                    break;
-                case Class.Common:
-                    break;
-                case Class.None:
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        public static void ChangeClickThru(bool v)
-        {
-            if (v)
-            {
-                ClickThru = true;
-                //ClickThruButton.IsChecked = true;
-                SetClickThru();
-            }
-            else
-            {
-                ClickThru = false;
-                //ClickThruButton.IsChecked = false;
-                UnsetClickThru();
-            }
-        }
-
         public static void Dispose()
         {
             FocusManager.FocusTimer.Stop();
@@ -334,57 +344,8 @@ namespace TCC
                 w.Close();
             }
         }
-        public static void ShowWindow(Window w)
-        {
-            if (w != null)
-            {
-                w.Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    w.BeginAnimation(Window.OpacityProperty, OpacityAnimation(1));
-                }));
-            }
-
-        }
-        public static void HideWindow(Window w)
-        {
-            if (w != null)
-            {
-                w.Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    var a = OpacityAnimation(0);
-                    w.BeginAnimation(Window.OpacityProperty, a);
-                }));
-            }
-        }
 
         static bool isForeground = false;
-        private static void FocusManager_ForegroundWindowChanged(bool visible)
-        {
-            if (visible && SessionManager.Logged && !SessionManager.LoadingScreen)
-            {
-                foreach (Window w in Application.Current.Windows)
-                {
-                    ShowWindow(w);
-                    if (!isForeground)
-                    {
-                        w.Topmost = false;
-                        w.Topmost = true;
-                    }
-                }
-                isForeground = true;
-
-            }
-            else
-            {
-                foreach (Window w in Application.Current.Windows)
-                {
-                    if (w.Name == "Settings") continue;
-                    HideWindow(w);
-                }
-                isForeground = false;
-            }
-
-        }
         private static void SetClickThru()
         {
             foreach (Window w in Application.Current.Windows)
@@ -401,21 +362,6 @@ namespace TCC
                 FocusManager.UndoTransparent(new WindowInteropHelper(w).Handle);
             }
 
-        }
-        private static void ToggleClickThru()
-        {
-            if (ClickThru)
-            {
-                UnsetClickThru();
-                //ClickThruButton.IsChecked = false;
-                ClickThru = false;
-            }
-            else
-            {
-                SetClickThru();
-                //ClickThruButton.IsChecked = true;
-                ClickThru = true;
-            }
         }
         private static void UpdateClickThru()
         {

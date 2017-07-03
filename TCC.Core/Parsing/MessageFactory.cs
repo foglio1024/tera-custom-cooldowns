@@ -44,7 +44,6 @@ namespace TCC.Parsing
             {"S_SPAWN_USER", Contructor<Func<TeraMessageReader, S_SPAWN_USER>>() },
             {"S_DESPAWN_USER", Contructor<Func<TeraMessageReader, S_DESPAWN_USER>>() },
             {"S_PARTY_MEMBER_LIST", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_LIST>>() },
-            //{"S_PARTY_MEMBER_INFO", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_INFO>>() },
             {"S_LOGOUT_PARTY_MEMBER", Contructor<Func<TeraMessageReader, S_LOGOUT_PARTY_MEMBER>>() },
             { "S_LEAVE_PARTY_MEMBER", Contructor<Func<TeraMessageReader, S_LEAVE_PARTY_MEMBER>>() },
             {"S_LEAVE_PARTY", Contructor<Func<TeraMessageReader, S_LEAVE_PARTY>>() },
@@ -66,6 +65,20 @@ namespace TCC.Parsing
             {"S_CHANGE_PARTY_MANAGER", Contructor<Func<TeraMessageReader, S_CHANGE_PARTY_MANAGER>>() },
             {"S_WEAK_POINT", Contructor<Func<TeraMessageReader, S_WEAK_POINT>>() },
             {"S_EACH_SKILL_RESULT", Contructor<Func<TeraMessageReader, S_EACH_SKILL_RESULT>>() },
+            {"S_CHAT", Contructor<Func<TeraMessageReader, S_CHAT>>() },
+            {"C_SHOW_ITEM_TOOLTIP_EX", Contructor<Func<TeraMessageReader, C_SHOW_ITEM_TOOLTIP_EX>>() },
+            {"C_REQUEST_NONDB_ITEM_INFO", Contructor<Func<TeraMessageReader, C_REQUEST_NONDB_ITEM_INFO>>() },
+            {"S_WHISPER", Contructor<Func<TeraMessageReader, S_WHISPER>>() },
+            {"S_PRIVATE_CHAT", Contructor<Func<TeraMessageReader, S_PRIVATE_CHAT>>() },
+            {"S_JOIN_PRIVATE_CHANNEL", Contructor<Func<TeraMessageReader, S_JOIN_PRIVATE_CHANNEL>>() },
+            {"S_LEAVE_PRIVATE_CHANNEL", Contructor<Func<TeraMessageReader, S_LEAVE_PRIVATE_CHANNEL>>() },
+            {"S_SYSTEM_MESSAGE", Contructor<Func<TeraMessageReader, S_SYSTEM_MESSAGE>>() },
+            {"S_SYSTEM_MESSAGE_LOOT_ITEM", Contructor<Func<TeraMessageReader, S_SYSTEM_MESSAGE_LOOT_ITEM>>() },
+            {"S_CREST_MESSAGE", Contructor<Func<TeraMessageReader, S_CREST_MESSAGE>>() },
+            {"S_ANSWER_INTERACTIVE", Contructor<Func<TeraMessageReader, S_ANSWER_INTERACTIVE>>() },
+            {"S_USER_BLOCK_LIST", Contructor<Func<TeraMessageReader, S_USER_BLOCK_LIST>>() },
+            {"S_FRIEND_LIST", Contructor<Func<TeraMessageReader, S_FRIEND_LIST>>() },
+            {"S_ACCOMPLISH_ACHIEVEMENT", Contructor<Func<TeraMessageReader, S_ACCOMPLISH_ACHIEVEMENT>>() },
 
         };
 
@@ -99,7 +112,6 @@ namespace TCC.Parsing
             {typeof(S_SPAWN_USER), new Action<S_SPAWN_USER>(x => PacketProcessor.HandleSpawnUser(x)) },
             {typeof(S_DESPAWN_USER), new Action<S_DESPAWN_USER>(x => PacketProcessor.HandleDespawnUser(x)) },
             {typeof(S_PARTY_MEMBER_LIST), new Action<S_PARTY_MEMBER_LIST>(x => PacketProcessor.HandlePartyMemberList(x)) },
-            //{typeof(S_PARTY_MEMBER_INFO), new Action<S_PARTY_MEMBER_INFO>(x => PacketProcessor.HandlePartyMemberInfo(x)) },
 
             {typeof(S_LOGOUT_PARTY_MEMBER), new Action<S_LOGOUT_PARTY_MEMBER>(x => PacketProcessor.HandlePartyMemberLogout(x)) },
             {typeof(S_LEAVE_PARTY_MEMBER), new Action<S_LEAVE_PARTY_MEMBER>(x => PacketProcessor.HandlePartyMemberLeave(x)) },
@@ -125,6 +137,20 @@ namespace TCC.Parsing
             {typeof(S_CHANGE_PARTY_MANAGER), new Action<S_CHANGE_PARTY_MANAGER>(x => PacketProcessor.HandleChangeLeader(x)) },
             {typeof(S_WEAK_POINT), new Action<S_WEAK_POINT>(x => PacketProcessor.HandleRunemark(x)) },
             {typeof(S_EACH_SKILL_RESULT), new Action<S_EACH_SKILL_RESULT>(x => PacketProcessor.HandleSkillResult(x)) },
+            {typeof(S_CHAT), new Action<S_CHAT>(x => PacketProcessor.HandleChat(x)) },
+            {typeof(C_SHOW_ITEM_TOOLTIP_EX), new Action<C_SHOW_ITEM_TOOLTIP_EX>(x => PacketProcessor.HandleShowItemTooltipEx(x)) },
+            {typeof(C_REQUEST_NONDB_ITEM_INFO), new Action<C_REQUEST_NONDB_ITEM_INFO>(x => PacketProcessor.HandleRequestNondbItemInfo(x)) },
+            {typeof(S_PRIVATE_CHAT), new Action<S_PRIVATE_CHAT>(x => PacketProcessor.HandlePrivateChat(x)) },
+            {typeof(S_WHISPER), new Action<S_WHISPER>(x => PacketProcessor.HandleWhisper(x)) },
+            {typeof(S_JOIN_PRIVATE_CHANNEL), new Action<S_JOIN_PRIVATE_CHANNEL>(x => PacketProcessor.HandleJoinPrivateChat(x)) },
+            {typeof(S_LEAVE_PRIVATE_CHANNEL), new Action<S_LEAVE_PRIVATE_CHANNEL>(x => PacketProcessor.HandleLeavePrivateChat(x)) },
+            {typeof(S_SYSTEM_MESSAGE), new Action<S_SYSTEM_MESSAGE>(x => PacketProcessor.HandleSystemMessage(x)) },
+            {typeof(S_SYSTEM_MESSAGE_LOOT_ITEM), new Action<S_SYSTEM_MESSAGE_LOOT_ITEM>(x => PacketProcessor.HandleSystemMessageLoot(x)) },
+            {typeof(S_CREST_MESSAGE), new Action<S_CREST_MESSAGE>(x => PacketProcessor.HandleCrestMessage(x)) },
+            {typeof(S_ANSWER_INTERACTIVE), new Action<S_ANSWER_INTERACTIVE>(x => PacketProcessor.HandleAnswerInteractive(x)) },
+            {typeof(S_USER_BLOCK_LIST), new Action<S_USER_BLOCK_LIST>(x => PacketProcessor.HandleBlockList(x)) },
+            {typeof(S_FRIEND_LIST), new Action<S_FRIEND_LIST>(x => PacketProcessor.HandleFriendList(x)) },
+            {typeof(S_ACCOMPLISH_ACHIEVEMENT), new Action<S_ACCOMPLISH_ACHIEVEMENT>(x => PacketProcessor.HandleAccomplishAchievement(x)) },
 
         };
 

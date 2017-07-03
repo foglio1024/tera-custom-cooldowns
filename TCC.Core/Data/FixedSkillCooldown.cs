@@ -123,7 +123,6 @@ namespace TCC.Data
         }
         public void Refresh(uint cd)
         {
-            Console.WriteLine("Refresh {1} to: {0}", cd, Skill.Name);
             _secondsTimer.Stop();
             if (cd == 0)
             {

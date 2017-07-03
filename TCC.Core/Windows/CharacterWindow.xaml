@@ -55,7 +55,6 @@
             </Style.Triggers>
         </Style>
 
-        <converters:ClassImageConverter x:Key="classConv"/>
         <converters:LaurelImageConverter x:Key="laurelConv"/>
         <converters:CombatToColorConverter x:Key="combatConv"/>
         <converters:HPbarColorConverter x:Key="hpDebuffColConv"/>

@@ -3,11 +3,13 @@ using Data;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using TCC.Data;
+using TCC.Data.Databases;
 using TCC.Parsing.Messages;
 using TCC.ViewModels;
 using Tera.Game;
@@ -20,6 +22,7 @@ namespace TCC.Parsing
     {
         public static uint Version;
         public static string Region;
+        public static uint ServerId;
         public static OpCodeNamer OpCodeNamer;
         public static OpCodeNamer SystemMessageNamer;
         static ConcurrentQueue<Tera.Message> Packets = new ConcurrentQueue<Tera.Message>();
@@ -38,6 +41,15 @@ namespace TCC.Parsing
             var td = new TeraData(Region);
             var lang = td.GetLanguage(Region);
             EntitiesManager.CurrentDatabase = new MonsterDatabase(lang);
+            SocialDatabase.Load();
+            SystemMessages.Load();
+            ItemsDatabase.Load();
+            GuildQuestDatabase.Load();
+            AccountBenefitDatabase.Load();
+            AchievementDatabase.Load();
+            AchievementGradeDatabase.Load();
+            DungeonDatabase.Load();
+            QuestDatabase.Load();
         }
 
         public static void MessageReceived(global::Tera.Message obj)
@@ -50,7 +62,6 @@ namespace TCC.Parsing
                 OpCodeNamer = TeraSniffer.Instance.opn;
                 SystemMessageNamer = new OpCodeNamer(System.IO.Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/smt_{Version}.txt"));
                 MessageFactory.Init();
-
             }
             Packets.Enqueue(obj);
         }
@@ -67,7 +78,11 @@ namespace TCC.Parsing
                 }
                 var message = MessageFactory.Create(msg);
                 //PacketInspector.InspectPacket(msg);
-                if (message.GetType() == typeof(Tera.Game.Messages.UnknownMessage)) continue;
+                if (message.GetType() == typeof(Tera.Game.Messages.UnknownMessage))
+                {
+
+                    continue;
+                }
 
                 if (!MessageFactory.Process(message))
                 {
@@ -159,18 +174,21 @@ namespace TCC.Parsing
         }
         public static void HandleLogin(S_LOGIN p)
         {
+            ProxyInterop.ConnectToProxy();
+
             CooldownWindowManager.Instance.ClearSkills();
             CooldownWindowManager.Instance.LoadSkills(Utils.ClassEnumToString(p.CharacterClass).ToLower() + "-skills.xml", p.CharacterClass);
             WindowManager.ClassWindow.Context.CurrentClass = p.CharacterClass;
 
-
+            ServerId = p.ServerId;
             InitDB(p.ServerId);
+
             EntitiesManager.ClearNPC();
             GroupWindowManager.Instance.ClearAll();
 
             BuffBarWindowManager.Instance.Player.ClearAbnormalities();
             SkillManager.Clear();
-            
+
             SessionManager.LoadingScreen = true;
             SessionManager.Logged = true;
             SessionManager.Encounter = false;
@@ -261,8 +279,8 @@ namespace TCC.Parsing
 
         public static void HandleRunemark(S_WEAK_POINT x)
         {
-            if (SessionManager.CurrentPlayer.Class != Class.Glaiver) return; 
-            if(ClassManager.CurrentClassManager.GetType() != typeof(ValkyrieBarManager)) return;
+            if (SessionManager.CurrentPlayer.Class != Class.Glaiver) return;
+            if (ClassManager.CurrentClassManager.GetType() != typeof(ValkyrieBarManager)) return;
             ((ValkyrieBarManager)ClassManager.CurrentClassManager).RunemarksCounter.Val = (int)x.TotalRunemarks;
         }
 
@@ -273,7 +291,7 @@ namespace TCC.Parsing
             bool targetInParty = GroupWindowManager.Instance.UserExists(x.Target);
             if (x.Target == x.Source) return;
             if (sourceInParty && targetInParty) return;
-            if(sourceInParty || targetInParty) WindowManager.SkillsEnded = false;
+            if (sourceInParty || targetInParty) WindowManager.SkillsEnded = false;
             if (x.Source == SessionManager.CurrentPlayer.EntityId) WindowManager.SkillsEnded = false;
         }
 
@@ -291,10 +309,124 @@ namespace TCC.Parsing
             AbnormalityManager.BeginOrRefreshPartyMemberAbnormality(x.PlayerId, x.ServerId, x.Id, x.Duration, x.Stacks);
         }
 
+        public static void HandleChat(S_CHAT x)
+        {
+            ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(x.Channel, x.AuthorName, x.Message));
+        }
+
+        public static void HandlePrivateChat(S_PRIVATE_CHAT x)
+        {
+            var i = ChatWindowViewModel.Instance.PrivateChannels.FirstOrDefault(y => y.Id == x.Channel).Index;
+            var ch = (ChatChannel)(ChatWindowViewModel.Instance.PrivateChannels[i].Index + 11);
+
+            ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ch, x.AuthorName, x.Message));
+        }
+        public static void HandleJoinPrivateChat(S_JOIN_PRIVATE_CHANNEL x)
+        {
+            ChatWindowViewModel.Instance.PrivateChannels[x.Index] = new PrivateChatChannel(x.Id, x.Name, x.Index);
+        }
+        public static void HandleLeavePrivateChat(S_LEAVE_PRIVATE_CHANNEL x)
+        {
+            var i = ChatWindowViewModel.Instance.PrivateChannels.FirstOrDefault(c => c.Id == x.Id).Index;
+            ChatWindowViewModel.Instance.PrivateChannels[i].Joined = false;
+        }
+        public static void HandleWhisper(S_WHISPER x)
+        {
+            if (x.Author == SessionManager.CurrentPlayer.Name)
+            {
+                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.SentWhisper, x.Recipient, x.Message));
+            }
+            else
+            {
+                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.ReceivedWhisper, x.Author, x.Message));
+            }
+        }
+        public static void HandleSystemMessage(S_SYSTEM_MESSAGE x)
+        {
+            var msg = x.Message.Split('\v');
+            var opcode = UInt16.Parse(msg[0].Substring(1));
+            var opcodeName = SystemMessageNamer.GetName(opcode);
+
+            if (SystemMessages.Messages.TryGetValue(opcodeName, out SystemMessage m))
+            {
+                SystemMessagesProcessor.AnalyzeMessage(x, m, opcodeName);
+            }
+        }
+
+        internal static void HandleAccomplishAchievement(S_ACCOMPLISH_ACHIEVEMENT x)
+        {
+            if(AchievementDatabase.Achievements.TryGetValue(x.AchievementId, out string name))
+            {
+                if (SystemMessages.Messages.TryGetValue("SMT_ACHIEVEMENT_GRADE0_CLEAR_MESSAGE", out SystemMessage m))
+                {
+                    var sysMsg = new ChatMessage("@0\vAchievementName\v@achievement:"+x.AchievementId, m, "SMT_ACHIEVEMENT_GRADE0_CLEAR_MESSAGE");
+                    ChatWindowViewModel.Instance.AddChatMessage(sysMsg);
+                }
+            }
+        }
+
+        public static void HandleBlockList(S_USER_BLOCK_LIST x)
+        {
+            ChatWindowViewModel.Instance.BlockedUsers = x.BlockedUsers;
+        }
+
+        internal static void HandleFriendList(S_FRIEND_LIST x)
+        {
+            ChatWindowViewModel.Instance.Friends = x.Friends;
+        }
+
+        internal static void HandleAnswerInteractive(S_ANSWER_INTERACTIVE x)
+        {
+            EntitiesManager.CurrentDatabase.TryGetMonster(x.Model, 0, out Monster m);
+            ChatWindowViewModel.Instance.TooltipInfo.Name = x.Name;
+            ChatWindowViewModel.Instance.TooltipInfo.Info = m.Name;
+            ChatWindowViewModel.Instance.TooltipInfo.Level = (int)x.Level;
+            ChatWindowViewModel.Instance.TooltipInfo.SetInfo(x.Model);
+            if (x.Name == SessionManager.CurrentPlayer.Name)
+            {
+                ChatWindowViewModel.Instance.TooltipInfo.ShowGuildInvite = false;
+                ChatWindowViewModel.Instance.TooltipInfo.ShowPartyInvite = false;
+            }
+            else
+            {
+                ChatWindowViewModel.Instance.TooltipInfo.ShowGuildInvite = !x.HasGuild;
+                ChatWindowViewModel.Instance.TooltipInfo.ShowPartyInvite = !x.HasParty;
+            }
+            WindowManager.ChatWindow.OpenTooltip();
+        }
+
+        internal static void HandleCrestMessage(S_CREST_MESSAGE x)
+        {
+
+        }
+
+        internal static void HandleSystemMessageLoot(S_SYSTEM_MESSAGE_LOOT_ITEM x)
+        {
+            var msg = x.SysMessage.Split('\v');
+            var opcode = UInt16.Parse(msg[0].Substring(1));
+            var opcodeName = SystemMessageNamer.GetName(opcode);
+
+            if (SystemMessages.Messages.TryGetValue(opcodeName, out SystemMessage m))
+            {
+                var sysMsg = new ChatMessage(x.SysMessage, m, opcodeName);
+                ChatWindowViewModel.Instance.AddChatMessage(sysMsg);
+            }
+        }
+
+        public static void HandleShowItemTooltipEx(C_SHOW_ITEM_TOOLTIP_EX x)
+        {
+        }
+        public static void HandleRequestNondbItemInfo(C_REQUEST_NONDB_ITEM_INFO x)
+        {
+        }
+
+
         public static void HandleDespawnNpc(S_DESPAWN_NPC p)
         {
             EntitiesManager.DespawnNPC(p.Target);
         }
+
+
         public static void HandleDespawnUser(S_DESPAWN_USER p)
         {
             EntitiesManager.DespawnUser(p.EntityId);
@@ -387,6 +519,7 @@ namespace TCC.Parsing
 
         public static void HandlePartyMemberList(S_PARTY_MEMBER_LIST p)
         {
+            GroupWindowManager.Instance.SetRaid(p.Raid);
             foreach (var user in p.Members)
             {
                 GroupWindowManager.Instance.AddOrUpdateMember(user);
@@ -422,6 +555,7 @@ namespace TCC.Parsing
         public static void HandleLeaveParty(S_LEAVE_PARTY x)
         {
             GroupWindowManager.Instance.ClearAll();
+
         }
 
         public static void HandleReadyCheck(S_CHECK_TO_READY_PARTY p)

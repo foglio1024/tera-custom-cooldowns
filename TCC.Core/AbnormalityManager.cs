@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows;
 using TCC.Data;
+using TCC.Data.Databases;
 using TCC.Parsing.Messages;
 using TCC.ViewModels;
 
@@ -78,6 +79,10 @@ namespace TCC
                 ClassManager.SetStatus(ab, true);
 
             }
+
+            //var sysMsg = new ChatMessage("@661\vAbnormalName\v" + ab.Name, SystemMessages.Messages["SMT_BATTLE_BUFF_DEBUFF"]);
+            //ChatWindowViewModel.Instance.AddChatMessage(sysMsg);
+
         }
         static void EndPlayerAbnormality(Abnormality ab)
         {

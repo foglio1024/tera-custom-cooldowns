@@ -116,6 +116,39 @@
     <Compile Include="ClassSpecific\Lancer.cs" />
     <Compile Include="ClassSpecific\Priest.cs" />
     <Compile Include="ClassSpecific\Valkyrie.cs" />
+    <Compile Include="Controls\ChatControls\ChatMessageControl.xaml.cs">
+      <DependentUpon>ChatMessageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ChatControls\ChatMessageHeader.xaml.cs">
+      <DependentUpon>ChatMessageHeader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ChatControls\CustomMessageBody.xaml.cs">
+      <DependentUpon>CustomMessageBody.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ChatControls\FriendMessageDialog.xaml.cs">
+      <DependentUpon>FriendMessageDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ChatControls\PlayerTooltip.xaml.cs">
+      <DependentUpon>PlayerTooltip.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NonReloadingTabControl.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\TypeToCursorConverter.cs" />
+    <Compile Include="Data\Databases\AccountBenefitDatabase.cs" />
+    <Compile Include="Data\Databases\AchievementDatabase.cs" />
+    <Compile Include="Data\Databases\AchievementGradeDatabase.cs" />
+    <Compile Include="Data\Databases\DungeonDatabase.cs" />
+    <Compile Include="Data\Databases\GuildQuestDatabase.cs" />
+    <Compile Include="Data\Databases\ItemsDatabase.cs" />
+    <Compile Include="Data\Databases\QuestDatabase.cs" />
+    <Compile Include="Parsing\Messages\S_ACCOMPLISH_ACHIEVEMENT.cs" />
+    <Compile Include="Parsing\Messages\S_ANSWER_INTERACTIVE.cs" />
+    <Compile Include="Parsing\Messages\S_FRIEND_LIST.cs" />
+    <Compile Include="Parsing\Messages\C_REQUEST_GAMESTAT_PING.cs" />
+    <Compile Include="Parsing\Messages\S_RESPONSE_GAMESTAT_PONG.cs" />
+    <Compile Include="Parsing\Messages\S_USER_BLOCK_LIST.cs" />
+    <Compile Include="Parsing\SystemMessagesProcessor.cs" />
+    <Compile Include="TemplateSelectors\MessagePieceDataTemplateSelector.cs" />
     <Compile Include="Controls\ClassBars\BerserkerBar.xaml.cs">
       <DependentUpon>BerserkerBar.xaml</DependentUpon>
     </Compile>
@@ -182,13 +215,23 @@
     <Compile Include="Data\ArcherFocusTracker.cs" />
     <Compile Include="Data\Boss.cs" />
     <Compile Include="Data\Abnormality.cs" />
-    <Compile Include="Data\AbnormalityDatabase.cs" />
+    <Compile Include="Data\Databases\AbnormalityDatabase.cs" />
+    <Compile Include="Data\ChatMessage.cs" />
+    <Compile Include="Data\MessagePiece.cs" />
+    <Compile Include="Data\MessagePieceType.cs" />
+    <Compile Include="Data\Money.cs" />
+    <Compile Include="Data\OutlineText.cs" />
+    <Compile Include="Data\PrivateChatChannel.cs" />
+    <Compile Include="Data\SocialDatabase.cs" />
+    <Compile Include="Data\Databases\SystemMessages.cs" />
     <Compile Include="Data\User.cs" />
     <Compile Include="EntitiesManager.cs" />
     <Compile Include="PacketInspector.cs" />
     <Compile Include="Parsing\MessageFactory.cs" />
     <Compile Include="Parsing\Messages\C_LOAD_TOPO_FIN.cs" />
     <Compile Include="Parsing\Messages\C_PLAYER_LOCATION.cs" />
+    <Compile Include="Parsing\Messages\C_REQUEST_NONDB_ITEM_INFO.cs" />
+    <Compile Include="Parsing\Messages\C_SHOW_ITEM_TOOLTIP_EX.cs" />
     <Compile Include="Parsing\Messages\S_ABNORMALITY_END.cs" />
     <Compile Include="Parsing\Messages\S_ABNORMALITY_REFRESH.cs" />
     <Compile Include="Parsing\Messages\S_ASK_BIDDING_RARE_ITEM.cs" />
@@ -196,10 +239,13 @@
     <Compile Include="Parsing\Messages\S_CHAT.cs" />
     <Compile Include="Parsing\Messages\S_CHECK_TO_READY_PARTY.cs" />
     <Compile Include="Parsing\Messages\S_CHECK_TO_READY_PARTY_FIN.cs" />
+    <Compile Include="Parsing\Messages\S_CREST_MESSAGE.cs" />
     <Compile Include="Parsing\Messages\S_DESPAWN_NPC.cs" />
     <Compile Include="Parsing\Messages\S_DESPAWN_USER.cs" />
     <Compile Include="Parsing\Messages\S_EACH_SKILL_RESULT.cs" />
+    <Compile Include="Parsing\Messages\S_JOIN_PRIVATE_CHANNEL.cs" />
     <Compile Include="Parsing\Messages\S_LEAVE_PARTY_MEMBER.cs" />
+    <Compile Include="Parsing\Messages\S_LEAVE_PRIVATE_CHANNEL.cs" />
     <Compile Include="Parsing\Messages\S_LOAD_TOPO.cs" />
     <Compile Include="Parsing\Messages\S_PARTY_MEMBER_ABNORMAL_ADD.cs" />
     <Compile Include="Parsing\Messages\S_PARTY_MEMBER_ABNORMAL_CLEAR.cs" />
@@ -207,6 +253,7 @@
     <Compile Include="Parsing\Messages\S_PARTY_MEMBER_ABNORMAL_REFRESH.cs" />
     <Compile Include="Parsing\Messages\S_PARTY_MEMBER_BUFF_UPDATE.cs" />
     <Compile Include="Parsing\Messages\S_PARTY_MEMBER_LIST.cs" />
+    <Compile Include="Parsing\Messages\S_PRIVATE_CHAT.cs" />
     <Compile Include="Parsing\Messages\S_RESULT_BIDDING_DICE_THROW.cs" />
     <Compile Include="Parsing\Messages\S_RESULT_ITEM_BIDDING.cs" />
     <Compile Include="Parsing\Messages\S_RETURN_TO_LOBBY.cs" />
@@ -214,6 +261,8 @@
     <Compile Include="Parsing\Messages\S_SPAWN_NPC.cs" />
     <Compile Include="Data\Player.cs" />
     <Compile Include="Parsing\Messages\S_SPAWN_USER.cs" />
+    <Compile Include="Parsing\Messages\S_SYSTEM_MESSAGE.cs" />
+    <Compile Include="Parsing\Messages\S_SYSTEM_MESSAGE_LOOT_ITEM.cs" />
     <Compile Include="Parsing\Messages\S_USER_EFFECT.cs" />
     <Compile Include="Parsing\Messages\S_LOGOUT_PARTY_MEMBER.cs" />
     <Compile Include="Parsing\Messages\S_BAN_PARTY_MEMBER.cs" />
@@ -223,7 +272,10 @@
     <Compile Include="Parsing\Messages\S_PARTY_MEMBER_INFO.cs" />
     <Compile Include="Parsing\Messages\S_PARTY_MEMBER_STAT_UPDATE.cs" />
     <Compile Include="Parsing\Messages\S_WEAK_POINT.cs" />
+    <Compile Include="Parsing\Messages\S_WHISPER.cs" />
+    <Compile Include="Parsing\SystemChatMessage.cs" />
     <Compile Include="Parsing\ThreadSafeManager.cs" />
+    <Compile Include="ProxyInterop.cs" />
     <Compile Include="SettingsManager.cs" />
     <Compile Include="SkillUtils.cs" />
     <Compile Include="Sniffing\ConnectionId.cs" />
@@ -239,6 +291,7 @@
     <Compile Include="Sniffing\TcpConnection.cs" />
     <Compile Include="Sniffing\TcpSniffer.cs" />
     <Compile Include="Sniffing\TeraSniffer.cs" />
+    <Compile Include="TemplateSelectors\AuthorLabelTemplateSelector.cs" />
     <Compile Include="Tera.Data\BasicTeraData.cs" />
     <Compile Include="Tera.Data\ClassIcons.cs" />
     <Compile Include="Tera.Data\CopyKey.cs" />
@@ -393,7 +446,7 @@
     </Compile>
     <Compile Include="ClassSpecific\Mystic.cs" />
     <Compile Include="ClassSpecific\Warrior.cs" />
-    <Compile Include="Data\MonsterDatabase.cs" />
+    <Compile Include="Data\Databases\MonsterDatabase.cs" />
     <Compile Include="Parsing\Messages\S_BOSS_GAGE_INFO.cs" />
     <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_FLIGHT_ENERGY.cs" />
     <Compile Include="Parsing\Messages\S_NPC_STATUS.cs" />
@@ -421,24 +474,26 @@
     <Compile Include="Controls\ValueSetting.xaml.cs">
       <DependentUpon>ValueSetting.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\BerserkerBarManager.cs" />
-    <Compile Include="ViewModels\BrawlerBarManager.cs" />
-    <Compile Include="ViewModels\GunnerBarManager.cs" />
-    <Compile Include="ViewModels\MultiThreadManagers\LancerBarManager.cs" />
-    <Compile Include="ViewModels\MultiThreadManagers\ClassManager.cs" />
-    <Compile Include="ViewModels\MultiThreadManagers\ArcherBarManager.cs" />
+    <Compile Include="ViewModels\ClassManagers\BerserkerBarManager.cs" />
+    <Compile Include="ViewModels\ClassManagers\BrawlerBarManager.cs" />
+    <Compile Include="ViewModels\ChatWindowViewModel.cs" />
+    <Compile Include="ViewModels\ClassManagers\GunnerBarManager.cs" />
+    <Compile Include="ViewModels\ClassManagers\LancerBarManager.cs" />
+    <Compile Include="ViewModels\ClassManagers\ClassManager.cs" />
+    <Compile Include="ViewModels\ClassManagers\ArcherBarManager.cs" />
     <Compile Include="ViewModels\BossGageWindowViewModel.cs" />
     <Compile Include="Converters\ClassToStaminaLabelConverter.cs" />
     <Compile Include="ViewModels\GroupWindowViewModel.cs" />
-    <Compile Include="ViewModels\MultiThreadManagers\BossGageWindowManager.cs" />
-    <Compile Include="ViewModels\MultiThreadManagers\BuffBarWindowManager.cs" />
-    <Compile Include="ViewModels\MultiThreadManagers\CharacterWindowManager.cs" />
-    <Compile Include="ViewModels\MultiThreadManagers\CooldownBarWindowManager.cs" />
-    <Compile Include="ViewModels\MultiThreadManagers\GroupWindowManager.cs" />
-    <Compile Include="ViewModels\MultiThreadManagers\MysticBarManager.cs" />
-    <Compile Include="ViewModels\MultiThreadManagers\PriestBarManager.cs" />
-    <Compile Include="ViewModels\NinjaBarManager.cs" />
-    <Compile Include="ViewModels\ReaperBarManager.cs" />
+    <Compile Include="ViewModels\TooltipInfo.cs" />
+    <Compile Include="ViewModels\WindowManagers\BossGageWindowManager.cs" />
+    <Compile Include="ViewModels\WindowManagers\BuffBarWindowManager.cs" />
+    <Compile Include="ViewModels\WindowManagers\CharacterWindowManager.cs" />
+    <Compile Include="ViewModels\WindowManagers\CooldownBarWindowManager.cs" />
+    <Compile Include="ViewModels\WindowManagers\GroupWindowManager.cs" />
+    <Compile Include="ViewModels\ClassManagers\MysticBarManager.cs" />
+    <Compile Include="ViewModels\ClassManagers\PriestBarManager.cs" />
+    <Compile Include="ViewModels\ClassManagers\NinjaBarManager.cs" />
+    <Compile Include="ViewModels\ClassManagers\ReaperBarManager.cs" />
     <Compile Include="ViewModels\SettingsWindowViewModel.cs" />
     <Compile Include="UpdateManager.cs" />
     <Compile Include="Utils.cs" />
@@ -449,14 +504,15 @@
     <Compile Include="Converters\StaminaBarColorConverter.cs" />
     <Compile Include="Converters\StaminaBarVisibilityConverter.cs" />
     <Compile Include="ViewModels\CooldownWindowViewModel.cs" />
-    <Compile Include="ViewModels\SlayerBarManager.cs" />
-    <Compile Include="ViewModels\SorcererBarManager.cs" />
+    <Compile Include="ViewModels\ClassManagers\SlayerBarManager.cs" />
+    <Compile Include="ViewModels\ClassManagers\SorcererBarManager.cs" />
     <Compile Include="Windows\AbnormalitiesWindow.xaml.cs">
       <DependentUpon>AbnormalitiesWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\BossGageWindow.xaml.cs">
       <DependentUpon>BossGageWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TemplateSelectors\ChannelLabelDataTemplateSelector.cs" />
     <Compile Include="Windows\CharacterWindow.xaml.cs">
       <DependentUpon>CharacterWindow.xaml</DependentUpon>
     </Compile>
@@ -475,7 +531,7 @@
     </Compile>
     <Compile Include="Data\Counter.cs" />
     <Compile Include="Data\StatTracker.cs" />
-    <Compile Include="ViewModels\MultiThreadManagers\WarriorBarManager.cs" />
+    <Compile Include="ViewModels\ClassManagers\WarriorBarManager.cs" />
     <Compile Include="Controls\RunemarksControl.xaml.cs">
       <DependentUpon>RunemarksControl.xaml</DependentUpon>
     </Compile>
@@ -483,11 +539,16 @@
       <DependentUpon>ValkyrieBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ClassWindowViewModel.cs" />
+    <Compile Include="Converters\ChatChannelNameConverter.cs" />
+    <Compile Include="Converters\ChatColorConverter.cs" />
+    <Compile Include="Windows\ChatWindow.xaml.cs">
+      <DependentUpon>ChatWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\ClassWindow.xaml.cs">
       <DependentUpon>ClassWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\FixedSkillCooldown.cs" />
-    <Compile Include="ViewModels\MultiThreadManagers\ValkyrieBarManager.cs" />
+    <Compile Include="ViewModels\ClassManagers\ValkyrieBarManager.cs" />
     <Compile Include="Controls\ClassBars\WarriorBar.xaml.cs">
       <DependentUpon>WarriorBar.xaml</DependentUpon>
     </Compile>
@@ -500,6 +561,11 @@
     <Compile Include="Controls\NormalSkillContainer.xaml.cs">
       <DependentUpon>NormalSkillContainer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ChatControls\MessagePieceControl.xaml.cs">
+      <DependentUpon>MessagePieceControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\MentionToColorConverter.cs" />
+    <Compile Include="Converters\SentReceivedToAngleConverter.cs" />
     <Compile Include="Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
@@ -508,7 +574,7 @@
     <Compile Include="Data\Character.cs" />
     <Compile Include="Parsing\CharLoginProcessor.cs" />
     <Compile Include="Data\Enums.cs" />
-    <Compile Include="Data\BroochesDatabase.cs" />
+    <Compile Include="Data\Databases\BroochesDatabase.cs" />
     <Compile Include="FocusManager.cs" />
     <Compile Include="Parsing\ListParser.cs" />
     <Compile Include="Parsing\Messages\S_ABNORMALITY_BEGIN.cs" />
@@ -522,16 +588,39 @@
       <DependentUpon>SkillIconControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="SkillManager.cs" />
-    <Compile Include="Data\SkillsDatabase.cs" />
+    <Compile Include="Data\Databases\SkillsDatabase.cs" />
     <Compile Include="Parsing\StringUtils.cs" />
     <Compile Include="Parsing\Messages\S_USER_STATUS.cs" />
     <Compile Include="WindowManager.cs" />
     <Compile Include="Windows\TccWindow.cs" />
+    <Compile Include="Controls\ChatControls\MoneyMessagePiece.xaml.cs">
+      <DependentUpon>MoneyMessagePiece.xaml</DependentUpon>
+    </Compile>
     <Page Include="Controls\AbnormalityIndicator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\AbnormalityTooltip.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ChatControls\ChatMessageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ChatControls\ChatMessageHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ChatControls\CustomMessageBody.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ChatControls\FriendMessageDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ChatControls\PlayerTooltip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -667,6 +756,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\ChatWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\ClassWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -712,11 +805,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\ChatControls\MessagePieceControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\SkillIconControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ChatControls\MoneyMessagePiece.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -739,6 +840,36 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="resources\data\social.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\items.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\sys-messages.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\guild-quests.tsv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\account-benefit.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\achievement-grade-info.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\achievements.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\dungeons.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\quests.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="resources\fonts\SourceSansPro-SemiBold.ttf" />
+    <Resource Include="resources\fonts\Frutiger.ttf" />
+    <Resource Include="resources\fonts\droidsans.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -816,8 +947,11 @@
     <Resource Include="resources\images\Icon_Laurels\diamond.png" />
     <Resource Include="resources\images\Icon_Laurels\gold.png" />
     <Resource Include="resources\images\Icon_Laurels\silver.png" />
-    <Resource Include="resources\OpenSans-Regular.ttf" />
+    <Resource Include="resources\fonts\OpenSans-Regular.ttf" />
     <Content Include="resources\data\abnormalities.tsv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\opcodes\313578.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\data\opcodes\313624.txt">
@@ -825,6 +959,9 @@
     </Content>
     <Content Include="resources\data\opcodes\314651.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\opcodes\smt_313578.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\data\opcodes\smt_313624.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

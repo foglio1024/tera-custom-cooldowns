@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Threading;
@@ -18,8 +20,12 @@ namespace TCC
         const uint WS_EX_NOACTIVATE = 0x08000000; //don't focus
         const uint WS_EX_TOOLWINDOW = 0x00000080; //don't show in alt-tab
         const int GWL_EXSTYLE = (-20);           //set new exStyle
+        public const int WM_CHAR = 0x0102;
+        private const int WM_KEYDOWN = 0x0100;
+        private const int WM_KEYUP = 0x0101;
+        private const int VK_RETURN = 0x0D;
 
-        public static Timer FocusTimer;
+        public static System.Timers.Timer FocusTimer;
 
         [DllImport("user32.dll")]
         public static extern IntPtr GetForegroundWindow();
@@ -36,7 +42,10 @@ namespace TCC
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         private static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
-        private static IntPtr FindTeraWindow()
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        public static extern bool PostMessage(IntPtr hWnd, uint msg, int wParam, int lParam);
+
+        public static IntPtr FindTeraWindow()
         {
             Marshal.GetLastWin32Error();
             var result = FindWindow("LaunchUnrealUWindowsClient", "TERA");
@@ -90,5 +99,18 @@ namespace TCC
 
             WindowManager.IsFocused = IsActive();
         }
+
+        public static void NewLine(IntPtr hWnd)
+        {
+            if (!PostMessage(hWnd, WM_KEYDOWN, VK_RETURN, 0)) { throw new Win32Exception(); }
+            Thread.Sleep(1);
+            if (!PostMessage(hWnd, WM_KEYUP, VK_RETURN, 0)) { throw new Win32Exception(); }
+            return;
+            Thread.Sleep(50);
+            if (!PostMessage(hWnd, WM_KEYDOWN, VK_RETURN, 0)) { throw new Win32Exception(); }
+            Thread.Sleep(1);
+            if (!PostMessage(hWnd, WM_KEYUP, VK_RETURN, 0)) { throw new Win32Exception(); }
+        }
+
     }
 }

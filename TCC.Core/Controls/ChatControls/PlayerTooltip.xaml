@@ -1,0 +1,150 @@
+﻿<UserControl x:Class="TCC.Controls.ChatControls.PlayerTooltip"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TCC.Controls.ChatControls"
+             mc:Ignorable="d" MouseLeave="UserControl_MouseLeave">
+    <Grid>
+        <Border CornerRadius="1" Background="#444" Grid.RowSpan="10" Margin="6" BorderBrush="#666" BorderThickness="0" Width="Auto" Name="rootBorder">
+            <Grid Margin="5" Height="Auto" Name="g">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Margin" Value="0,3"/>
+                    </Style>
+                </Grid.Resources>
+                <Border Grid.RowSpan="2" Grid.ColumnSpan="2" Background="#2000" Margin="-5"></Border>
+                <Image Grid.RowSpan="2" Width="44" Height="44" RenderOptions.BitmapScalingMode="HighQuality"
+                       Source="{Binding Instance.TooltipInfo.Class, Converter={StaticResource classConv}}" Margin="3" VerticalAlignment="Top"></Image>
+                <Border Background="{StaticResource hpColor}" Height="20" Width="20" CornerRadius="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.RowSpan="2" Margin="0,0">
+                    <TextBlock  Text="{Binding Instance.TooltipInfo.Level}" Margin="0,0,0,0" TextAlignment="Center" FontSize="12" VerticalAlignment="Center"></TextBlock>
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="1" BlurRadius="2" Opacity=".7"></DropShadowEffect>
+                    </Border.Effect>
+                </Border>
+                <TextBlock Text="{Binding Instance.TooltipInfo.Name}" FontWeight="DemiBold" FontSize="14"
+                           Grid.Column="1" Margin="5,0"></TextBlock>
+                <TextBlock Text="{Binding Instance.TooltipInfo.Info}" Grid.Row="1" Grid.Column="1" Margin="5,0" Foreground="#9fff" TextWrapping="Wrap" Width="100" 
+                           TextAlignment="Left" FontSize="11">
+                </TextBlock>
+                <StackPanel Grid.ColumnSpan="2" Grid.Row="2" Margin="-5,5,-5,-5">
+                    <StackPanel.Resources>
+                        <SolidColorBrush x:Key="Button.Static.Background" Color="#00DDDDDD"/>
+                        <SolidColorBrush x:Key="Button.Static.Border" Color="#00707070"/>
+                        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#1FFF"/>
+                        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#003C7FB1"/>
+                        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#2FFF"/>
+                        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#002C628B"/>
+                        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#00F4F4F4"/>
+                        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#00ADB2B5"/>
+                        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#00838383"/>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+                            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+                            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Height" Value="30"/>
+                            <Setter Property="FontSize" Value="14"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="8,0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsDefaulted" Value="true">
+                                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="true">
+                                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="true">
+                                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                                            </Trigger>
+                                            <Trigger Property="IsEnabled" Value="false">
+                                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                        <Style TargetType="{x:Type StackPanel}">
+                            <Setter Property="Margin" Value="10,0,0,0"/>
+                        </Style>
+                        <Style TargetType="{x:Type Path}">
+                            <Setter Property="Fill" Value="White"/>
+                            <Setter Property="Width" Value="15"/>
+                            <Setter Property="Height" Value="15"/>
+                            <Setter Property="Margin" Value="3"/>
+                            <Setter Property="Stretch" Value="Uniform"/>
+                            <Setter Property="Opacity" Value=".9"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <Button Click="InspectClick">
+                        <StackPanel Orientation="Horizontal" >
+                            <Path Data="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                            <TextBlock Text="Inspect" Margin="3"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Click="WhisperClick" Visibility="{Binding Instance.TooltipInfo.ShowWhisper, Converter={StaticResource boolToVisibleCollapsed}}">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/>
+                            <TextBlock Text="Whisper" Margin="3"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Click="PartyInviteClick" Visibility="{Binding Instance.TooltipInfo.ShowPartyInvite, Converter={StaticResource boolToVisibleCollapsed}}">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            <TextBlock Text="Party invite" Margin="3"></TextBlock>
+                        </StackPanel>
+
+                    </Button>
+                    <Button Click="GuildInviteClick" Visibility="{Binding Instance.TooltipInfo.ShowGuildInvite, Converter={StaticResource boolToVisibleCollapsed}}">
+                        <StackPanel Orientation="Horizontal">
+                            <Path  Data="M8 10H5V7H3v3H0v2h3v3h2v-3h3v-2zm10 1c1.66 0 2.99-1.34 2.99-3S19.66 5 18 5c-.32 0-.63.05-.91.14.57.81.9 1.79.9 2.86s-.34 2.04-.9 2.86c.28.09.59.14.91.14zm-5 0c1.66 0 2.99-1.34 2.99-3S14.66 5 13 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm6.62 2.16c.83.73 1.38 1.66 1.38 2.84v2h3v-2c0-1.54-2.37-2.49-4.38-2.84zM13 13c-2 0-6 1-6 3v2h12v-2c0-2-4-3-6-3z"/>
+                            <TextBlock Text="Guild invite" Margin="3"></TextBlock>
+                        </StackPanel>
+
+                    </Button>
+                    <Button Click="AddFriendClick" Visibility="{Binding Instance.TooltipInfo.ShowAddFriend, Converter={StaticResource boolToVisibleCollapsed}}">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                            <TextBlock Text="{Binding Instance.TooltipInfo.FriendLabelText}" Margin="3"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Click="BlockClick">
+                        <StackPanel Orientation="Horizontal">
+                            <Path  Fill="{StaticResource hpColor}" Data="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM4 12c0-4.42 3.58-8 8-8 1.85 0 3.55.63 4.9 1.69L5.69 16.9C4.63 15.55 4 13.85 4 12zm8 8c-1.85 0-3.55-.63-4.9-1.69L18.31 7.1C19.37 8.45 20 10.15 20 12c0 4.42-3.58 8-8 8z"/>
+                            <TextBlock Text="{Binding Instance.TooltipInfo.BlockLabelText}" Margin="3"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
+            <Border.Effect>
+                <DropShadowEffect Opacity=".4" ShadowDepth="2" BlurRadius="8"></DropShadowEffect>
+            </Border.Effect>
+            <Border.LayoutTransform>
+                <ScaleTransform ScaleY="1"/>
+            </Border.LayoutTransform>
+        </Border>
+    </Grid>
+</UserControl>

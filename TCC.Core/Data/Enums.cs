@@ -6,6 +6,62 @@ using System.Threading.Tasks;
 
 namespace TCC
 {
+    public enum RareGrade
+    {
+        Common,
+        Uncommon,
+        Rare,
+        Superior
+    }
+    public enum BoundType
+    {
+        None,
+        Equip,
+        Loot
+    }
+    public enum ChatChannel
+    {
+        Say = 0,
+        Party = 1,
+        Guild = 2,
+        Area = 3,
+        Trade = 4,
+        Greet = 9,
+        Private1 = 11,
+        Private2 = 12,
+        Private3 = 13,
+        Private4 = 14,
+        Private5 = 15,
+        Private6 = 16,
+        Private7 = 17,
+        Private8 = 18,
+        PartyNotice = 21,
+        RaidNotice = 25,
+        Emote = 26,
+        Global = 27,
+        Raid = 32,
+        Notify = 201, //enchant, broker msgs, Discovered:, etc..
+        Event = 202, //guild bam, civil unrest, 
+        Error = 203,
+        Group = 204,
+        GuildNotice = 205,
+        Deathmatch = 206,
+        ContractAlert = 207,
+        GroupAlerts = 208,
+        Loot = 209,
+        Exp = 210,
+        Money = 211,
+        Megaphone = 213,
+        GuildAdvertising = 214,
+        SentWhisper = 300, //arbitrary
+        ReceivedWhisper = 301, //arbitrary
+        System = 302, //arbitrary (missing in database)
+        TradeRedirect = 303, //arbitrary
+        Enchant12 = 304, //arbitrary
+        Enchant15 = 305, //arbitrary
+        RaidLeader = 306 //arbitrary
+    }
+
     public enum Class
     {
         Warrior = 0,
@@ -23,6 +79,20 @@ namespace TCC
         Glaiver = 12,
         Common = 255,
         None = 256
+    }
+    public enum Race
+    {
+        HumanMale = 1,
+        HumanFemale = 2,
+        ElfMale = 3,
+        ElfFemale = 4,
+        AmanMale = 5,
+        AmanFemale = 6,
+        CastanicMale = 7,
+        CastanicFemale = 8,
+        Popori = 9,
+        Elin = 10,
+        Baraka = 11
     }
     public enum Laurel
     {

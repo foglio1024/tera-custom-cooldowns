@@ -1284,7 +1284,7 @@
 200700	Buff	True	True	False	Adrenaline Rush I	Increases Attack Speed by $H_W_GOOD15%$COLOR_END and damage to monsters by 5%.	icon_skills.fightingwill_tex
 200701	Buff	True	True	False	Adrenaline Rush II	Increases Attack Speed by $H_W_GOOD20%$COLOR_END and damage to monsters by 5%.	icon_skills.fightingwill_tex
 200731	Buff	True	True	False	Adrenaline Rush II	Attacks draw $H_W_GOOD8%$COLOR_END more aggro. Reduces cooldown of melee attack skills by $H_W_GOOD50%$COLOR_END.	icon_skills.fightingwill_tex
-200732	Buff	False	True	False	Adrenaline Rush II_Additional Monster Damage	BTS	icon_skills.fightingwill_tex
+200732	Buff	False	True	False	Adrenaline Rush II_Additional Monster Damage	Invisible abnormality.	icon_skills.fightingwill_tex
 200800	Stun	True	False	False	Shield Barrage	Stunned. Cannot move.	icon_skills.shieldattack_tex
 200900	Buff	True	True	False	Pledge of Protection I	Protects party members within 20m.	icon_skills.vowofprotection_tex
 200901	Buff	True	True	False	Pledge of Protection II	Protects party members within 20m.	icon_skills.vowofprotection_tex
@@ -2363,7 +2363,7 @@
 801901	Buff	False	True	False	Zenobia's Vortex	Lifts the target into the air. (NotShown Abnormality)	
 801920	Stun	False	False	False	Zenobia's Vortex	Lifts the target into the air.	icon_skills.godbreath_tex
 802000	Buff	False	True	False	Divine Intervention	Summons an ally ahead of you to a spot right in front of you.	icon_skills.shocktrap_tex
-802001	Buff	False	True	False	Divine Intervention I	BTS	icon_skills.attackup_tex
+802001	Buff	False	True	False	Divine Intervention I	Summons an ally ahead of you to a spot right in front of you.	icon_skills.attackup_tex
 805100	Buff	True	True	False	Blessing of Shakan I	Increases non-combat Movement Speed by $H_W_GOOD10$COLOR_END.	icon_skills.attackup_tex
 805101	Buff	True	True	False	Blessing of Shakan II	Increases non-combat Movement Speed by $H_W_GOOD10$COLOR_END. Increases Power by $H_W_GOOD17$COLOR_END.	icon_skills.attackup_tex
 805102	Buff	True	True	False	Blessing of Shakan III	Increases non-combat Movement Speed by $H_W_GOOD10$COLOR_END. Increases Power by $H_W_GOOD25$COLOR_END.	icon_skills.attackup_tex
@@ -2496,9 +2496,9 @@
 905413	Buff	True	True	True	Divinity	Increases Fulminar's Power and Attack Speed to maximum. Decreases Fulminar's Defense by $H_W_BAD35%$COLOR_END.	icon_status.plusattack_tex
 905414	Stun	True	False	False	Superconductor	Fulminar's attacks are more effective.	icon_status.minushp_tex
 905415	Stun	False	False	False			
-905416	WeakeningEffect	True	False	False	Electric Nimbus	You emanate an electric nimbus. Continually reduces HP of nearby allies by $H_W_BAD30%$COLOR_END.	icon_status.electriccharge3_tex
-905417	WeakeningEffect	True	False	False	Electric Nimbus	You emanate an electric nimbus. Continually reduces HP of nearby allies by $H_W_BAD30%$COLOR_END.	icon_status.electriccharge3_tex
-905418	WeakeningEffect	True	False	False	Electric Nimbus	You emanate an electric nimbus. Continually reduces HP of nearby allies by $H_W_BAD30%$COLOR_END.	icon_status.electriccharge3_tex
+905416	Buff	True	True	False	Electric Nimbus	You emanate an electric nimbus. Continually reduces HP of nearby allies by $H_W_BAD30%$COLOR_END.	icon_status.electriccharge3_tex
+905417	Buff	True	True	False	Electric Nimbus	You emanate an electric nimbus. Continually reduces HP of nearby allies by $H_W_BAD30%$COLOR_END.	icon_status.electriccharge3_tex
+905418	Buff	True	True	False	Electric Nimbus	You emanate an electric nimbus. Continually reduces HP of nearby allies by $H_W_BAD30%$COLOR_END.	icon_status.electriccharge3_tex
 905419	Stun	True	False	False	Electric Nimbus	You emanate an electric nimbus. Continually reduces HP of nearby allies by $H_W_BAD30%$COLOR_END.	icon_status.electriccharge3_tex
 905420	Stun	True	False	False	Sparking Personality	Affected by an electric nimbus, you damage allies near you.	icon_status.electriccharge3_tex
 905421	Buff	False	True	True			
@@ -2809,7 +2809,7 @@
 950162	WeakeningEffect	False	True	False		BTS	
 950163	Buff	True	True	False	Morale Boost	Increases Attack Speed by 20%. Reduces skill cooldown by 50%.	icon_status.bloodmadness_tex
 950164	WeakeningEffect	True	True	False	Dust	Covered in Dust. Causes an explosion If hit by another Dust attack or leaping strike, or when the effect ends. If hit by Flame attack, the effect will be canceled after an explosion.	icon_status.vergosdust_tex
-950165	WeakeningEffect	True	True	False	Flame	Wrapped in Flame. Causes an explosion If hit by another Flame attack or leaping strike, or when the effect ends. If hit by Dust attack, the effect will be canceled after an explosion.	icon_status.vergosflame_tex
+950165	WeakeningEffect	True	True	False	Flame	Wrapped in Flame. Causes an explosion if hit by another Flame attack or leaping strike, or when the effect ends. If hit by Dust attack, the effect will be canceled after an explosion.	icon_status.vergosflame_tex
 950166	WeakeningEffect	False	True	False		BTS	
 950167	WeakeningEffect	False	True	False		BTS	
 950168	Buff	True	True	True	Enraged	Vergos's Power, Attack Speed, and Defense increase rapidly.	icon_status.summonvergos_tex
@@ -2848,6 +2848,8 @@
 950201	WeakeningEffect	True	True	False	Aura Warning	You are about to receive Aura.	icon_items.question1a_tex
 950202	WeakeningEffect	True	True	False			icon_skills.cleanup_tex
 950203	WeakeningEffect	False	True	False			
+950204	WeakeningEffect	False	True	False			
+950205	WeakeningEffect	False	True	False			
 950300	Buff	True	True	False	Earthly Power	Increases Terradrax's Attack Speed by 25% per stack.	icon_status.earthblessing_tex
 950301	Buff	False	True	False			
 950302	Buff	False	True	False			
@@ -2904,10 +2906,11 @@
 950404	Buff	False	True	False			
 950405	Buff	False	True	False			
 950410	Buff	False	True	True			
-950415	WeakeningEffect	True	True	False	Deep Cut	$H_W_BADDecreases$COLOR_END $H_W_BAD10%$COLOR_END of HP $H_W_GOODper second$COLOR_END.	icon_status.curse_tex
+950415	WeakeningEffect	True	False	False	Deep Cut	$H_W_BADDecreases$COLOR_END $H_W_BAD10%$COLOR_END of HP $H_W_GOODper second$COLOR_END.	icon_status.curse_tex
 950435	Buff	True	True	False	Relentless	Protected by a powerful barrier. $H_W_GOODCan$COLOR_END be $H_W_GOODremoved$COLOR_END.	icon_status.immunedebuff_tex
 950436	Stun	True	True	False	Earthen Rock	Trapped in the Earthen Rock. The rock will explode in few moments and deal damage to a wide area.	icon_status.rock_tex
 950440	DamageOverTime	False	False	False		BTS	
+950450	WeakeningEffect	False	True	False			
 950500	DamageOverTime	False	True	False			
 950501	Buff	False	True	True			
 950502	Buff	False	True	False			
@@ -2924,12 +2927,13 @@
 950513	Buff	True	True	False	Mana Scales	Vergos’s scales are infused with mana. Each stack increases Defense by 10% and Attack Speed by 20%.	icon_status.plusedefence_tex
 950514	WeakeningEffect	True	True	False	Mana Scales Generation	Vergos’s scales are infused with mana. Must be removed.	icon_status.plusedefence_tex
 950515	Buff	True	True	True	Last Resort	Vergos concentrates his power as a last resort. Attack Speed increases by 40% and Defense increases by 70%.	icon_status.vergosdust_tex
-950516	WeakeningEffect	True	True	False			icon_status.vergosflame_tex
-950517	WeakeningEffect	True	True	False			icon_status.vergosdust_tex
+950516	WeakeningEffect	True	True	False	Flame Warning	You are about to receive Flame.	icon_status.vergosflame_tex
+950517	WeakeningEffect	True	True	False	Dust Warning	You are about to receive Dust.	icon_status.vergosdust_tex
 950518	WeakeningEffect	True	True	False	Wounded Front Leg	Vergos’s front leg is wounded. Next hit will cause it to explode.	icon_status.damageup_tex
 950519	WeakeningEffect	True	True	False	Wounded Back Leg	Vergos’s back leg is wounded. Next hit will cause it to explode.	icon_status.damagedown_tex
 950520	WeakeningEffect	False	True	True			
 950521	Buff	False	True	False			
+950600	Buff	True	True	True	Goddess Blessing	Velik's blessing is upon you. Increases Power.	icon_skills.tranquility_tex
 975029	Buff	True	True	False	Velik's Power	Increases Power and the chance to crit.	icon_status.plusattack_tex
 975031	WeakeningEffect	True	False	False	Hot and Cold Pack	A mix of fire and ice drains your HP.	icon_status.poisonstatus_tex
 975032	Buff	False	True	False	Living Bomb Blast	Damages allies within 20m.	icon_skills.voidtrap_tex
@@ -3758,7 +3762,7 @@
 10153020	Stun	True	False	False	Off Balance	Disoriented in the air	icon_skills.lossofbalance_tex
 10153021	Stun	True	False	False			
 10153030	Stun	True	False	False	Concussed	Stunned from concussion.	icon_skills.concussion_tex
-10153040	Buff	True	True	True	Growing Fury	Decreases Attack Speed by 10. Increases Power and Crit Factor by 30. Draws 10% more aggro. Decreases skill cooldown by 30% and adds frontal defense effect to all attack skills.	icon_skills.rampage_tex
+10153040	Buff	True	True	True	Growing Fury	Decreases Attack Speed by 10. Increases Power by $value6 and Crit Factor by $value7. Draws 10% more aggro. Decreases skill cooldown by 30% and adds frontal defense effect to all attack skills.	icon_skills.rampage_tex
 10153041	Buff	False	True	True		No debuff display	
 10153042	Buff	False	True	True			
 10153043	Buff	False	True	True			
@@ -3783,6 +3787,7 @@
 10153130	Buff	False	True	True			
 10153131	Buff	False	True	True			
 10153140	WeakeningEffect	True	False	False	Hammered	Weakened by a flurry of rapid jabs. Decreases Endurance by $H_W_BAD1%$COLOR_END. Effect stacks up to 8 times.	icon_skills.rapidattack_tex
+10153150	Buff	True	True	False	Quick Dash	Can use Quick Dash again.	icon_skills.instancerush_tex
 10153503	Buff	True	True	False	Ready to Kick It	Can use High Kick.	icon_skills.kick2_tex
 10153504	Buff	False	True	False		No debuff display	
 10153505	Buff	False	True	False			
@@ -4563,6 +4568,7 @@
 91260001	Stun	True	False	False	Energy Shock	Stunned by powerful energy. Cannot move.	icon_status.confuseup_tex
 91260002	WeakeningEffect	True	False	True	Protection	Petrax is shielded.	icon_skills.guildskills_def_tex
 91260003	WeakeningEffect	True	False	True	Protection	Petrax is shielded.	icon_skills.guildskills_def_tex
+91260004	WeakeningEffect	False	True	False			
 91600001	WeakeningEffect	True	False	False	Dark Heart	Reduces HP by $H_W_BAD10%$COLOR_END of maximum every $H_W_BAD1$COLOR_END second. Cannot use skills.	icon_status.fearstatus_tex
 91600003	Stun	True	False	False	Gripped by Fear	Running around in terror!	icon_status.darkriftrage_tex
 91600004	DamageOverTime	True	False	False	Dark Siphon	Reduces HP by $H_W_BAD10%$COLOR_END of maximum every $H_W_BAD2$COLOR_END second1.	icon_status.firedamage_tex
@@ -4752,8 +4758,8 @@
 98000097	WeakeningEffect	False	True	False	2 sec invincible	Test	icon_skills.voidtrap_tex
 98000098	WeakeningEffect	False	True	False	10 sec invincible	Test	icon_skills.voidtrap_tex
 98000099	WeakeningEffect	False	False	False	Blown Over	Test	icon_status.minuscriticalresist_tex
-98000100	Buff	True	True	False	Potion of Blessing	Increases Power by 25, Endurance by 11, resistance by 5, attack speed by 8, and provides constant healing.	icon_skills.attackup_tex
-98000101	Buff	True	True	False	Potion of Verve	Doubles Crit Factor, replenishes 20 MP per second, and boosts the Thrall of Protection's Endurance by 10%.	icon_status.plusecritical_tex
+98000100	Buff	True	True	False	Potion of Blessing	You gained the following priest buffs: Blessing of Shakan III, Blessing of Balder V, and Energy Stars.	icon_skills.attackup_tex
+98000101	Buff	True	True	False	Potion of Verve	You gained the following mystic buffs: Aura of the Merciless II, Titanic Wrath III, Aura of the Unyielding IV, and Endurance buff from Thrall of Protection (Glyph of Grounding). Titanic Wrath III does not apply if priest's Energy Star is in effect.	icon_status.plusecritical_tex
 98000102	Buff	True	True	False	Perfect Attendance	Increases Power by 6%. Increases HP by 5%. Increased out-of-combat Movement Speed by 20.	
 98000103	Buff	True	True	True	Chain of Protection III	Attacks draw $H_W_GOOD20%$COLOR_END more aggro. Increases Attack Speed by $H_W_GOOD4%$COLOR_END. Reduces damage taken by $H_W_GOOD10%$COLOR_END. Decreases the chance of knockdown or stagger by $H_W_GOOD30%$COLOR_END.	
 98000104	Buff	True	True	True	Chain of Attack III	Increases skill damage by $H_W_GOOD10%$COLOR_END. Reduces damage taken by $H_W_GOOD10%$COLOR_END. Increases Attack Speed by $H_W_GOOD4%$COLOR_END.	
@@ -4761,6 +4767,8 @@
 98000106	WeakeningEffect	True	False	False	Glyph of Enfeeblement	Decreases Endurance by $H_W_BAD10%$COLOR_END.	icon_crest.crestactivedefencedown_tex
 98000107	Buff	True	True	False	Energy Stars IV	Increases Power by $H_W_GOOD40$COLOR_END; Attack Speed by $H_W_GOOD8$COLOR_END.	icon_skills.divinelightning_tex
 98000108	Buff	True	True	False	Glyph of Grounding	Increases Endurance by $H_W_GOOD10%$COLOR_END.	icon_crest.crestactivedefenceup_tex
+98000109	Buff	True	True	False	Blessing of Shakan III	Increases non-combat Movement Speed by $H_W_GOOD10$COLOR_END. Increases Power by $H_W_GOOD25$COLOR_END.	icon_skills.attackup_tex
+98000110	Buff	True	True	False	Blessing of Balder V	Increases Endurance by 11. Increases all resistances by 5. Recovers a small amount of HP every $H_W_GOOD2 seconds$COLOR_END.	icon_skills.agilitybless_tex
 98850001	Buff	False	True	False	Blessing of Abundance ?	Increases reward rate by 0%.	icon_items.tresurebox3_tex
 98850002	Buff	True	True	False	Blessing of Abundance I	Increases reward rate by 25%.	icon_items.tresurebox3_tex
 98850003	Buff	True	True	False	Blessing of Abundance II	Increases reward rate by 50%.	icon_items.tresurebox3_tex
@@ -6313,6 +6321,10 @@
 5010002	Buff	True	True	True			icon_items.parts_heavyarmorc5_tex
 5010003	Buff	True	True	False			icon_items.exp_buff_potion1_tex
 5010004	Buff	True	True	False			icon_items.f2p_xpbooster_tex
+5010005	Buff	True	True	False			icon_items.potion10_tex
+5010006	Buff	True	True	False			icon_items.potion10_tex
+5010007	Buff	True	True	False			icon_items.add_extract_potion_1_tex
+5010008	Buff	True	True	False			icon_items.parts_lightweaponc9_tex
 8000091	Buff	False	True	True	100% XP Boost (Premium)	While VIP Pack is in use, increases hunting XP reward by 100%.	icon_items.f2p_xpbooster_tex
 8000092	Buff	False	True	True	100% Reputation Boost (Premium)	While VIP Pack is in use, increases reputation and credits gained by 100%. Does not apply to battleground reputation or credits.	icon_items.f2p_reputationbooster_tex
 5020000	Buff	True	True	False	Substantial Enchantment Blessing	Your enchantment chance is substantially increased. Applies to items of all tiers, but only up to enchantment level +12.	icon_items.parts_heavyarmorc5_tex

@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -76,6 +77,17 @@ namespace TCC
                 default:
                     return "";
             }
+        }
+
+        public static string ReplaceCaseInsensitive(string input, string search, string replacement)
+        {
+            string result = Regex.Replace(
+                input,
+                Regex.Escape(search),
+                replacement.Replace("$", "$$"),
+                RegexOptions.IgnoreCase
+            );
+            return result;
         }
     }
 
@@ -255,5 +267,4 @@ namespace TCC
             }
         }
     }
-
 }
