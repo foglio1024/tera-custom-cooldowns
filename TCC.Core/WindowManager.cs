@@ -254,6 +254,16 @@ namespace TCC
         }
         static void LoadClassWindow()
         {
+            var chatWindowThread = new Thread(new ThreadStart(() =>
+            {
+                SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                ChatWindow = new ChatWindow();
+                ChatWindow.Show();
+                Dispatcher.Run();
+            }));
+            chatWindowThread.Name = "Chat thread";
+            chatWindowThread.SetApartmentState(ApartmentState.STA);
+            chatWindowThread.Start();        
             var t = new Thread(new ThreadStart(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));

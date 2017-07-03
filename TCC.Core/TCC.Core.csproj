@@ -135,6 +135,7 @@
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\TypeToCursorConverter.cs" />
     <Compile Include="Data\Databases\AccountBenefitDatabase.cs" />
+    <Compile Include="Data\AccountBenefitDatabase.cs" />
     <Compile Include="Data\Databases\AchievementDatabase.cs" />
     <Compile Include="Data\Databases\AchievementGradeDatabase.cs" />
     <Compile Include="Data\Databases\DungeonDatabase.cs" />
