@@ -768,8 +768,8 @@
 290100	Sorcerer	Vortex Prison I		icon_skills.tornadoprison_tex
 300100	Sorcerer	Nova		icon_skills.manaburst_tex
 310100	Sorcerer	Warp Barrier		icon_skills.distortionfield_tex	310120	310120
-310110	Sorcerer	Warp Barrier		icon_skills.distortionfield_tex
-310120	Sorcerer	Warp Barrier		icon_skills.distortionfield_tex
+310110	Sorcerer	Warp Barrier		
+310120	Sorcerer	Warp Barrier		
 340100	Sorcerer	Mana Boost I		icon_skills.c5_strengthenmana
 340200	Sorcerer	Mana Boost II		icon_skills.c5_strengthenmana
 340300	Sorcerer	Mana Boost III		icon_skills.c5_strengthenmana
@@ -1992,6 +1992,7 @@
 200700	Fighter	Meat Grinder VII		icon_skills.catchair_tex
 210100	Fighter	Mounting Rage		icon_skills.arouseangercancel_tex	210102	210102	210102	210102
 400100	Fighter	Quick Dash		icon_skills.instancerush_tex
+400130	Fighter	Quick Dash		icon_skills.instancerush_tex
 200800	Fighter	Meat Grinder VIII		icon_skills.catchair_tex
 200900	Fighter	Meat Grinder IX		icon_skills.catchair_tex
 201000	Fighter	Meat Grinder X		icon_skills.catchair_tex
