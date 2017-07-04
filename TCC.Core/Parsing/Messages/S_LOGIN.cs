@@ -19,25 +19,25 @@ namespace TCC.Parsing.Messages
         public ulong entityId { get; set; }
         public uint ServerId { get; set; }
         public uint PlayerId { get; set; }
-        int unk1 { get; set; } 
-        int unk3 { get; set; } 
-        int unk4 { get; set; } 
+        int unk1 { get; set; }
+        int unk3 { get; set; }
+        int unk4 { get; set; }
         int unk5 { get; set; }
-        byte unk2{ get; set; }
+        byte unk2 { get; set; }
         ulong appearance { get; set; }
         short unk6 { get; set; }
-        public short Level       { get; set; }
-        short gatherEn    { get; set; }
-        short gatherUnk   { get; set; }
-        short gatherPl    { get; set; }
-        short gatherMin   { get; set; }
+        public short Level { get; set; }
+        short gatherEn { get; set; }
+        short gatherUnk { get; set; }
+        short gatherPl { get; set; }
+        short gatherMin { get; set; }
         int unk7 { get; set; }
-        int unk8{ get; set; }
+        int unk8 { get; set; }
         short unk9 { get; set; }
         uint model { get; set; }
         long expTot { get; set; }
         long expShown { get; set; }
-        long expNeeded{ get; set; }
+        long expNeeded { get; set; }
         int unk10 { get; set; }
         int unk10b { get; set; }
         int unk10c { get; set; }
@@ -45,59 +45,61 @@ namespace TCC.Parsing.Messages
         int restCurr { get; set; }
         int restMax { get; set; }
         float unk11 { get; set; }
-        int unk12{ get; set; } 
-        int weap{ get; set; } 
-        int chest{ get; set; } 
+        int unk12 { get; set; }
+        int weap { get; set; }
+        int chest { get; set; }
         int gloves { get; set; }
-        int boots{ get; set; } 
-        int innerWear{ get; set; } 
-        int head{ get; set; } 
-        int face{ get; set; } 
-        int unk13{ get; set; } 
-        int unk14{ get; set; } 
-        int unk16{ get; set; } 
-        int unk17{ get; set; } 
-        int title{ get; set; } 
-        int weapMod{ get; set; } 
-        int chestMod{ get; set; }
-        int glovesMod{ get; set; }
-        int bootsMod{ get; set; } 
-        int unk19{ get; set; } 
-        int unk20{ get; set; } 
-        int unk21{ get; set; } 
-        int unk22{ get; set; } 
-        int unk23{ get; set; } 
-        int unk24{ get; set; } 
-        int unk25{ get; set; } 
-        int unk26{ get; set; } 
-        int weapEnch{ get; set; } 
+        int boots { get; set; }
+        int innerWear { get; set; }
+        int head { get; set; }
+        int face { get; set; }
+        int unk13 { get; set; }
+        int unk14 { get; set; }
+        int unk16 { get; set; }
+        int unk17 { get; set; }
+        int title { get; set; }
+        int weapMod { get; set; }
+        int chestMod { get; set; }
+        int glovesMod { get; set; }
+        int bootsMod { get; set; }
+        int unk19 { get; set; }
+        int unk20 { get; set; }
+        int unk21 { get; set; }
+        int unk22 { get; set; }
+        int unk23 { get; set; }
+        int unk24 { get; set; }
+        int unk25 { get; set; }
+        int unk26 { get; set; }
+        int weapEnch { get; set; }
         int unk27 { get; set; }
-        byte unk15{ get; set; } 
-        byte unk28{ get; set; } 
+        byte unk15 { get; set; }
+        byte unk28 { get; set; }
         byte unk29 { get; set; }
-        int hairAdorn{ get; set; } 
-        int mask{ get; set; } 
-        int back{ get; set; } 
-        int weapSkin{ get; set; } 
-        int costume{ get; set; } 
-        int unk30{ get; set; } 
-        int unk31{ get; set; } 
-        int unk32{ get; set; } 
-        int unk33{ get; set; } 
-        int unk35{ get; set; } 
-        int unk36{ get; set; } 
-        short unk37{ get; set; }
-        float unk38{ get; set; }
-        int unk39{ get; set; }
-        byte unk40{ get; set; }
-        int unk41{ get; set; }
-        public string Name{ get; set; }
-        byte[] details{ get; set; }
-        byte[] details2{ get; set; }
-        byte unk34{ get; set; }
+        int hairAdorn { get; set; }
+        int mask { get; set; }
+        int back { get; set; }
+        int weapSkin { get; set; }
+        int costume { get; set; }
+        int unk30 { get; set; }
+        int unk31 { get; set; }
+        int unk32 { get; set; }
+        int unk33 { get; set; }
+        int unk35 { get; set; }
+        int unk36 { get; set; }
+        short unk37 { get; set; }
+        float unk38 { get; set; }
+        int unk39 { get; set; }
+        byte unk40 { get; set; }
+        int unk41 { get; set; }
+        public string Name { get; set; }
+        byte[] details { get; set; }
+        byte[] details2 { get; set; }
+        byte unk34 { get; set; }
 
-        
-        public Class CharacterClass { get
+
+        public Class CharacterClass
+        {
+            get
             {
                 int classId = (int)(model - 10101) % 100;
                 return (Class)classId;
@@ -106,83 +108,93 @@ namespace TCC.Parsing.Messages
 
         public S_LOGIN(TeraMessageReader reader) : base(reader)
         {
+            reader.BaseStream.Position = 0;
             nameOffset = reader.ReadInt16();
-            detailsOffset = reader.ReadInt16();
-            detailsCount = reader.ReadInt16();
-            details2Offset = reader.ReadInt16();
-            details2Count = reader.ReadInt16();
+            //detailsOffset = reader.ReadInt16();
+            //detailsCount = reader.ReadInt16();
+            //details2Offset = reader.ReadInt16();
+            //details2Count = reader.ReadInt16();
+            reader.Skip(8);
             model = reader.ReadUInt32();
             entityId = reader.ReadUInt64();
             ServerId = reader.ReadUInt32();
             PlayerId = reader.ReadUInt32();
-            unk1 = reader.ReadInt32();
-            unk2=reader.ReadByte();
-            unk3=reader.ReadInt32();
-            unk4=reader.ReadInt32();
-            unk5=reader.ReadInt32();
+            //unk1 = reader.ReadInt32();
+            //unk2=reader.ReadByte();
+            //unk3=reader.ReadInt32();
+            //unk4=reader.ReadInt32();
+            //unk5=reader.ReadInt32();
+            reader.Skip(17);
             appearance = reader.ReadUInt64();
-            unk6=reader.ReadInt16();
-            Level=reader.ReadInt16();
-            gatherEn=reader.ReadInt16();
-            gatherUnk=reader.ReadInt16();
-            gatherPl=reader.ReadInt16();
-            gatherMin=reader.ReadInt16();
-            unk7=reader.ReadInt32();
-            unk8=reader.ReadInt32();
-            unk9=reader.ReadInt16();
-            expTot=reader.ReadInt64();
-            expShown=reader.ReadInt64();
-            expNeeded=reader.ReadInt64();
-            unk10=reader.ReadInt32(); 
-            unk10b=reader.ReadInt32();
-            unk10c=reader.ReadInt32();
-            unk10d=reader.ReadInt32();
+            //unk6=reader.ReadInt16();
+            reader.Skip(2);
+            Level = reader.ReadInt16();
+            //gatherEn=reader.ReadInt16();
+            //gatherUnk=reader.ReadInt16();
+            //gatherPl=reader.ReadInt16();
+            //gatherMin=reader.ReadInt16();
+            //unk7=reader.ReadInt32();
+            //unk8=reader.ReadInt32();
+            //unk9=reader.ReadInt16();
+            //expTot=reader.ReadInt64();
+            //expShown=reader.ReadInt64();
+            //expNeeded=reader.ReadInt64();
+            //unk10=reader.ReadInt32(); 
+            //unk10b=reader.ReadInt32();
+            //unk10c=reader.ReadInt32();
+            //unk10d=reader.ReadInt32();
+            reader.Skip(58);
             restCurr = reader.ReadInt32();
-            restMax  = reader.ReadInt32();
-            unk11=reader.ReadSingle();
-            unk12=reader.ReadInt32();
-            weap=reader.ReadInt32();
-            chest =reader.ReadInt32();
-            gloves=reader.ReadInt32();
-            boots =reader.ReadInt32();
-            innerWear=reader.ReadInt32();
+            restMax = reader.ReadInt32();
+            //unk11=reader.ReadSingle();
+            //unk12=reader.ReadInt32();
+            reader.Skip(8);
+            weap = reader.ReadInt32();
+            chest = reader.ReadInt32();
+            gloves = reader.ReadInt32();
+            boots = reader.ReadInt32();
+            innerWear = reader.ReadInt32();
             head = reader.ReadInt32();
-            face= reader.ReadInt32();
-            unk13=reader.ReadInt32();
-            unk14=reader.ReadInt32();
-            unk15=reader.ReadByte(); 
-            unk16=reader.ReadInt32();
-            unk17=reader.ReadInt32();
-            title=reader.ReadInt32();
-            weapMod=reader.ReadInt32();
-            chestMod=reader.ReadInt32();
-            glovesMod=reader.ReadInt32();
-            bootsMod=reader.ReadInt32();
-            unk19=reader.ReadInt32();
-            unk20=reader.ReadInt32();
-            unk21=reader.ReadInt32();
-            unk22=reader.ReadInt32();
-            unk23=reader.ReadInt32();
-            unk24=reader.ReadInt32();
-            unk25=reader.ReadInt32();
-            unk26=reader.ReadInt32();
-            weapEnch= reader.ReadInt32();
-            unk27= reader.ReadInt32();
-            unk28= reader.ReadByte(); 
-            unk29= reader.ReadByte(); 
-            hairAdorn= reader.ReadInt32();
-            mask=reader.ReadInt32();
-            back=reader.ReadInt32();
-            weapSkin=reader.ReadInt32();
+            face = reader.ReadInt32();
+            //unk13=reader.ReadInt32();
+            //unk14=reader.ReadInt32();
+            //unk15=reader.ReadByte(); 
+            //unk16=reader.ReadInt32();
+            //unk17=reader.ReadInt32();
+            reader.Skip(17);
+            title = reader.ReadInt32();
+            weapMod = reader.ReadInt32();
+            chestMod = reader.ReadInt32();
+            glovesMod = reader.ReadInt32();
+            bootsMod = reader.ReadInt32();
+            //unk19=reader.ReadInt32();
+            //unk20=reader.ReadInt32();
+            //unk21=reader.ReadInt32();
+            //unk22=reader.ReadInt32();
+            //unk23=reader.ReadInt32();
+            //unk24=reader.ReadInt32();
+            //unk25=reader.ReadInt32();
+            //unk26=reader.ReadInt32();
+            reader.Skip(32);
+            weapEnch = reader.ReadInt32();
+            //unk27= reader.ReadInt32();
+            //unk28= reader.ReadByte(); 
+            //unk29= reader.ReadByte(); 
+            reader.Skip(6);
+            hairAdorn = reader.ReadInt32();
+            mask = reader.ReadInt32();
+            back = reader.ReadInt32();
+            weapSkin = reader.ReadInt32();
             costume = reader.ReadInt32();
-            unk30=reader.ReadInt32(); 
-            unk31=reader.ReadInt32(); 
-            unk32=reader.ReadInt32(); 
-            unk33=reader.ReadInt32(); 
-            unk35=reader.ReadInt32(); 
-            unk36=reader.ReadInt32();
-            unk37 = reader.ReadInt16();
-            Name= reader.ReadTeraString();
+            //unk30=reader.ReadInt32(); 
+            //unk31=reader.ReadInt32(); 
+            //unk32=reader.ReadInt32(); 
+            //unk33=reader.ReadInt32(); 
+            //unk35=reader.ReadInt32(); 
+            //unk36=reader.ReadInt32();
+            //unk37 = reader.ReadInt16();
+            reader.BaseStream.Position = nameOffset - 4;
+            Name = reader.ReadTeraString();
             return;
             details = new byte[detailsCount];
             details2 = new byte[details2Count];

@@ -2550,6 +2550,7 @@
 		<Monster name="Ciebel" id="1167" isBoss="False" hp="10000" />
 		<Monster name="Elion" id="1168" isBoss="False" hp="10000" />
 		<Monster name="Elion" id="1169" isBoss="False" hp="10000" />
+		<Monster name="Bessy" id="1170" isBoss="False" hp="10000" />
 		<Monster name="Kaelin" id="1172" isBoss="False" hp="10000" />
 		<Monster name="Aban" id="1173" isBoss="False" hp="10000" />
 		<Monster name="Yustia" id="1174" isBoss="False" hp="10000" />
@@ -2772,8 +2773,8 @@
 		<Monster name="Ambrrr" id="9004" isBoss="False" hp="10000" />
 		<Monster name="Colbrrr" id="9005" isBoss="False" hp="10000" />
 		<Monster name="Teleportal" id="9501" isBoss="False" hp="10000" />
-		<Monster name="Teleportal" id="9780" isBoss="False" hp="10000" />
-		<Monster name="Teleportal" id="9981" isBoss="False" hp="10000" />
+		<Monster name="Teleportal zu Velika-Untergrundtor" id="9780" isBoss="False" hp="10000" />
+		<Monster name="Teleportal zu Velika-Untergrundtor" id="9981" isBoss="False" hp="10000" />
 		<Monster name="Verlorene" id="9999" isBoss="False" hp="10000" />
 		<Monster name="Therry" id="22002" isBoss="False" hp="10000" />
 		<Monster name="Chriar" id="22003" isBoss="False" hp="10000" />
@@ -9869,20 +9870,20 @@
 		<Monster name="Penrik" id="4521" isBoss="False" hp="945" />
 	</Zone>
 	<Zone id="454" name="Untiefen von Bathysmal (schwierig)" >
-		<Monster name="Irdenes Herz" id="93" isBoss="False" hp="11250000" />
-		<Monster name="Wässriges Herz" id="94" isBoss="False" hp="11250000" />
+		<Monster name="Irdenes Herz" id="93" isBoss="False" hp="16000000" />
+		<Monster name="Wässriges Herz" id="94" isBoss="False" hp="16000000" />
 		<Monster name="Dreifaltenherz" id="95" isBoss="False" hp="10000" />
-		<Monster name="Feuriges Herz" id="97" isBoss="False" hp="11250000" />
-		<Monster name="Fulmisphäre" id="100" isBoss="False" hp="800000" />
+		<Monster name="Feuriges Herz" id="97" isBoss="False" hp="16000000" />
+		<Monster name="Fulmisphäre" id="100" isBoss="False" hp="4000000" />
 		<Monster name="Steinhaufen" id="404" isBoss="False" hp="1" />
 		<Monster name="Steinhaufen" id="405" isBoss="False" hp="1" />
-		<Monster name="Elitebathysmalschildkröte" id="408" isBoss="False" hp="2184781" />
-		<Monster name="Elitebathysmalcnidaria" id="500" isBoss="False" hp="2184781" />
-		<Monster name="Elitebathysmalseestern" id="501" isBoss="False" hp="2184781" />
-		<Monster name="Elitecnidarianachtwache" id="502" isBoss="False" hp="2184781" />
-		<Monster name="Elitebathysmalnagaaufseher" id="503" isBoss="False" hp="11000000" />
-		<Monster name="Elitebathysmalnagaaufseher" id="504" isBoss="False" hp="11000000" />
-		<Monster name="Voltirex des Albtraums" id="600" isBoss="False" hp="15000000" />
+		<Monster name="Elitebathysmalschildkröte" id="408" isBoss="False" hp="13600000" />
+		<Monster name="Elitebathysmalcnidaria" id="500" isBoss="False" hp="13600000" />
+		<Monster name="Elitebathysmalseestern" id="501" isBoss="False" hp="13600000" />
+		<Monster name="Elitecnidarianachtwache" id="502" isBoss="False" hp="13600000" />
+		<Monster name="Elitebathysmalnagaaufseher" id="503" isBoss="False" hp="17600000" />
+		<Monster name="Elitebathysmalnagaaufseher" id="504" isBoss="False" hp="17600000" />
+		<Monster name="Voltirex des Albtraums" id="600" isBoss="False" hp="48000000" />
 		<Monster name="Elitebathysmaldschinn" id="601" isBoss="False" hp="2184781" />
 		<Monster name="Elitebathysmaldschinn" id="602" isBoss="False" hp="2184781" />
 		<Monster name="Elitebathysmaldschinn" id="603" isBoss="False" hp="2184781" />
@@ -9890,10 +9891,10 @@
 		<Monster name="Elitebathysmaldschinn" id="605" isBoss="False" hp="2184781" />
 		<Monster name="Elitebathysmaldschinn" id="606" isBoss="False" hp="2184781" />
 		<Monster name="Ruhender Dschinn" id="607" isBoss="False" hp="2184781" />
-		<Monster name="Elitesalzwindklingegolem" id="700" isBoss="False" hp="2184781" />
-		<Monster name="Pelagischer Elitefelsschnabel" id="701" isBoss="False" hp="2184781" />
-		<Monster name="Elitenarvuulteralith" id="702" isBoss="False" hp="15000000" />
-		<Monster name="Cyaneus des Albtraums" id="903" isBoss="False" hp="3500000" />
+		<Monster name="Elitesalzwindklingegolem" id="700" isBoss="False" hp="13600000" />
+		<Monster name="Pelagischer Elitefelsschnabel" id="701" isBoss="False" hp="13600000" />
+		<Monster name="Elitenarvuulteralith" id="702" isBoss="False" hp="56000000" />
+		<Monster name="Cyaneus des Albtraums" id="903" isBoss="False" hp="5000000" />
 		<Monster name="Schatztruhe" id="904" isBoss="False" hp="100" />
 		<Monster name="Silberne Schatztruhe" id="905" isBoss="False" hp="100" />
 		<Monster name="Goldene Schatztruhe" id="906" isBoss="False" hp="100" />
@@ -9908,9 +9909,9 @@
 		<Monster name="Besiegt Narvuulteralith" id="918" isBoss="False" hp="0" />
 		<Monster name="Nehmt den Fahrstuhl und besiegt Fulminar." id="919" isBoss="False" hp="0" />
 		<Monster name="Kashadan" id="999" isBoss="False" hp="10000" />
-		<Monster name="Mephisis des Albtraums" id="1000" isBoss="True" hp="147000000" />
-		<Monster name="Tantibus des Albtraums" id="1001" isBoss="True" hp="115500000" />
-		<Monster name="Fulminar des Albtraums" id="1002" isBoss="True" hp="136500000" />
+		<Monster name="Mephisis des Albtraums" id="1000" isBoss="True" hp="950400000" />
+		<Monster name="Tantibus des Albtraums" id="1001" isBoss="True" hp="902880000" />
+		<Monster name="Fulminar des Albtraums" id="1002" isBoss="True" hp="823680000" />
 		<Monster name="Ausgangsteleportal" id="4000" isBoss="False" hp="10000" />
 		<Monster name="Teleportal zum Teich der Angst" id="4001" isBoss="False" hp="10000" />
 		<Monster name="Teleportal zur Farideikrypta" id="4002" isBoss="False" hp="10000" />
@@ -9989,14 +9990,14 @@
 		<Monster name="Teleportal zum Zeitkern" id="1504" isBoss="False" hp="10000" />
 	</Zone>
 	<Zone id="457" name="Archerons Inferno (schwierig)" >
-		<Monster name="Gottesbändiger" id="202" isBoss="False" hp="150000000" />
-		<Monster name="Verzauberte Nachtwache" id="212" isBoss="False" hp="4500000" />
-		<Monster name="Verzauberte Priesterin" id="213" isBoss="False" hp="4500000" />
-		<Monster name="Elitepyrovore" id="404" isBoss="False" hp="1000000" />
-		<Monster name="Elitepyrovore" id="408" isBoss="False" hp="1000000" />
-		<Monster name="Elitepyrovore" id="409" isBoss="False" hp="1000000" />
-		<Monster name="Elitepyrovore" id="410" isBoss="False" hp="1000000" />
-		<Monster name="Fanatischer Elitemaligos" id="503" isBoss="False" hp="1000000" />
+		<Monster name="Gottesbändiger" id="202" isBoss="False" hp="250000000" />
+		<Monster name="Verzauberte Nachtwache" id="212" isBoss="False" hp="12187500" />
+		<Monster name="Verzauberte Priesterin" id="213" isBoss="False" hp="12187500" />
+		<Monster name="Elitepyrovore" id="404" isBoss="False" hp="4500000" />
+		<Monster name="Elitepyrovore" id="408" isBoss="False" hp="4500000" />
+		<Monster name="Elitepyrovore" id="409" isBoss="False" hp="4500000" />
+		<Monster name="Elitepyrovore" id="410" isBoss="False" hp="4500000" />
+		<Monster name="Fanatischer Elitemaligos" id="503" isBoss="False" hp="10000000" />
 		<Monster name="Gerissener Elitemaligos" id="504" isBoss="False" hp="9906750" />
 		<Monster name="Seir" id="607" isBoss="False" hp="10000" />
 		<Monster name="Liones" id="608" isBoss="False" hp="945" />
@@ -10005,11 +10006,11 @@
 		<Monster name="Besiegt Magnarox" id="912" isBoss="False" hp="0" />
 		<Monster name="Besiegt Sammar-Sarral" id="913" isBoss="False" hp="0" />
 		<Monster name="Besiegt Duras" id="914" isBoss="False" hp="0" />
-		<Monster name="Darumag des Albtraums" id="1001" isBoss="True" hp="204000000" />
-		<Monster name="Magnarox des Albtraums" id="1002" isBoss="True" hp="204000000" />
-		<Monster name="Sammar-Sarral des Albtraums" id="1003" isBoss="True" hp="284000000" />
-		<Monster name="Duras des Albtraums" id="1004" isBoss="True" hp="482000000" />
-		<Monster name="Fanatischer Elitedracoloth" id="1005" isBoss="False" hp="36000000" />
+		<Monster name="Darumag des Albtraums" id="1001" isBoss="True" hp="1555200000" />
+		<Monster name="Magnarox des Albtraums" id="1002" isBoss="True" hp="991440000" />
+		<Monster name="Sammar-Sarral des Albtraums" id="1003" isBoss="True" hp="1544400000" />
+		<Monster name="Duras des Albtraums" id="1004" isBoss="True" hp="1512000000" />
+		<Monster name="Fanatischer Elitedracoloth" id="1005" isBoss="False" hp="128000000" />
 		<Monster name="Ausgangsteleportal" id="1501" isBoss="False" hp="10000" />
 		<Monster name="Teleportal zu Archerons Hand" id="1502" isBoss="False" hp="10000" />
 		<Monster name="Teleportal zu Archerons Reich" id="1503" isBoss="False" hp="10000" />
@@ -13904,7 +13905,7 @@
 		<Monster name="Dunkler Guladorn" id="1102" isBoss="True" hp="1014000000" />
 		<Monster name="Sturm-Agares" id="1103" isBoss="True" hp="1014000000" />
 		<Monster name="Iagorn" id="1120" isBoss="False" hp="1000000" />
-		<Monster name="Vergos" id="2000" isBoss="False" hp="99960000" />
+		<Monster name="Vergos" id="2000" isBoss="False" hp="125960000" />
 		<Monster name="Katapult des Zugangs zum Himmelreich der Götter" id="2005" isBoss="False" hp="576000" />
 		<Monster name="Steingolem" id="2500" isBoss="False" hp="0" />
 		<Monster name="Vergos" id="3000" isBoss="True" hp="2000000000" />
@@ -14009,15 +14010,15 @@
 		<Monster name="Elite-Erzdevanerpriester" id="101" isBoss="False" hp="10400000" />
 		<Monster name="Elite-Erzdevanerzauberer" id="102" isBoss="False" hp="9750000" />
 		<Monster name="Elite-Erzdevanerkrieger" id="103" isBoss="False" hp="11050000" />
-		<Monster name="Besiegt Kabador." id="911" isBoss="False" hp="0" />
-		<Monster name="Besiegt Prokyon." id="912" isBoss="False" hp="0" />
-		<Monster name="Besiegt Zerstörer Veldeg." id="913" isBoss="False" hp="0" />
-		<Monster name="Kabador" id="1000" isBoss="True" hp="1234200000" />
+		<Monster name="Besiegt Kabador des Albtraums." id="911" isBoss="False" hp="0" />
+		<Monster name="Besiegt Prokyon des Albtraums." id="912" isBoss="False" hp="0" />
+		<Monster name="Besiegt Veldeg des Albtraums." id="913" isBoss="False" hp="0" />
+		<Monster name="Kabador des Albtraums" id="1000" isBoss="True" hp="1234200000" />
 		<Monster name="Teleportal" id="1501" isBoss="False" hp="10000" />
 		<Monster name="Teleportal" id="1502" isBoss="False" hp="10000" />
 		<Monster name="Teleportal" id="1503" isBoss="False" hp="10000" />
-		<Monster name="Prokyon" id="2000" isBoss="True" hp="1320000000" />
-		<Monster name="Zerstörer Veldeg" id="3000" isBoss="True" hp="1575000000" />
+		<Monster name="Prokyon des Albtraums" id="2000" isBoss="True" hp="1320000000" />
+		<Monster name="Veldeg des Albtraums" id="3000" isBoss="True" hp="1575000000" />
 	</Zone>
 	<Zone id="981" name="Eingestürzte Zuflucht" >
 		<Monster name="Erzdevanerleibgardist" id="820" isBoss="False" hp="963072" />
@@ -14028,22 +14029,22 @@
 		<Monster name="Wiederbelebter Diener" id="901" isBoss="False" hp="6000000" />
 		<Monster name="Magie-Generator (Stufe 2)" id="903" isBoss="False" hp="1900000" />
 		<Monster name="Magie-Generator (Stufe 3)" id="905" isBoss="False" hp="1900000" />
-		<Monster name="Besiegt den Wiederbelebten Darkan." id="911" isBoss="False" hp="1400000" />
-		<Monster name="Beseitigt den Wiederbelebten Durion." id="912" isBoss="False" hp="1400000" />
-		<Monster name="Beseitigt den Gierigen Höllenfürst Lakan." id="913" isBoss="False" hp="1400000" />
+		<Monster name="Besiegt Darkan des Albtraums." id="911" isBoss="False" hp="1400000" />
+		<Monster name="Besiegt Durion des Albtraums." id="912" isBoss="False" hp="1400000" />
+		<Monster name="Besiegt Lakan des Albtraums." id="913" isBoss="False" hp="1400000" />
 		<Monster name="Velik" id="950" isBoss="False" hp="250000000" />
 		<Monster name="Elite-Erzdevanerzauberer" id="970" isBoss="False" hp="13000000" />
 		<Monster name="Elite-Erzdevanerbogenschütze" id="971" isBoss="False" hp="13000000" />
 		<Monster name="Elite-Erzdevanerkrieger" id="972" isBoss="False" hp="13000000" />
-		<Monster name="Wiederbelebter Darkan" id="1000" isBoss="True" hp="1568072000" />
+		<Monster name="Darkan des Albtraums" id="1000" isBoss="True" hp="1568072000" />
 		<Monster name="Teleportal" id="1501" isBoss="False" hp="10000" />
 		<Monster name="Teleportal" id="1502" isBoss="False" hp="10000" />
 		<Monster name="Teleportal" id="1503" isBoss="False" hp="10000" />
 		<Monster name="Teleportal" id="1504" isBoss="False" hp="10000" />
 		<Monster name="Teleportal" id="1505" isBoss="False" hp="10000" />
-		<Monster name="Wiederbelebter Durion" id="2000" isBoss="True" hp="1522400000" />
-		<Monster name="Gieriger Höllenfürst Lakan" id="3000" isBoss="True" hp="1496000000" />
-		<Monster name="Umgebauter Perimos" id="4000" isBoss="True" hp="350000000" />
+		<Monster name="Durion des Albtraums" id="2000" isBoss="True" hp="1522400000" />
+		<Monster name="Lakan des Albtraums" id="3000" isBoss="True" hp="1496000000" />
+		<Monster name="Perimos des Albtraums" id="4000" isBoss="True" hp="350000000" />
 		<Monster name="Seir" id="5000" isBoss="False" hp="10000" />
 		<Monster name="Steintafeln der Titanen" id="5001" isBoss="False" hp="13038" />
 		<Monster name="Bekki" id="5002" isBoss="False" hp="945" />

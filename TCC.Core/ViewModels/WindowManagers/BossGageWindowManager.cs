@@ -17,7 +17,7 @@ namespace TCC.ViewModels
             {
                 if (SessionManager.HarrowholdMode)
                 {
-                    return _bosses;//null
+                    return _bosses;
                 }
                 else
                 {
