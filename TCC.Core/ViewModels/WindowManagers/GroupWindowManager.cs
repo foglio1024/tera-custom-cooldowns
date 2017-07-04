@@ -683,15 +683,15 @@ namespace TCC.ViewModels
         {
             foreach (var user in Dps)
             {
-                if (user.Name == name) return true;
+                if (user.Name == name && user.IsLeader) return true;
             }
             foreach (var user in Tanks)
             {
-                if (user.Name == name) return true;
+                if (user.Name == name && user.IsLeader) return true;
             }
             foreach (var user in Healers)
             {
-                if (user.Name == name) return true;
+                if (user.Name == name && user.IsLeader) return true;
             }
             return false;
         }
