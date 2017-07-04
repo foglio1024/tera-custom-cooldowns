@@ -2067,7 +2067,7 @@
 203	SMT_LEARN_GUILD_SKILL_FAIL_GUILD_PRE_SKILL	Your guild must learn the preceding skill first.
 205	SMT_LEARN_GUILD_SKILL_SUCCESS	Your guild has learned a new skill.
 201	SMT_FIELDNAMED_DIE	<font color = '#b967ff'>{npcName}</font> is defeated.
-201	SMT_FIELDNAMED_RANK	{userName}</font>'s raid party earned rank <font color='#1DDB16'>{rank}</font> rewards.
+201	SMT_FIELDNAMED_RANK	<font color='#1DDB16'>{userName}</font>'s raid party earned rank <font color='#1DDB16'>{rank}</font> rewards.
 203	SMT_GUILD_STORE_FAIL_AUTHORITY	You do not have authority to use guild funds.
 203	SMT_GUILD_STORE_FAIL_GUILD_MONEY	Your guild does not have enough guild funds for this.
 203	SMT_GUILD_STORE_FAIL_GUILD_LEVEL	Your guild level is not high enough.
