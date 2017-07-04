@@ -121,6 +121,8 @@ namespace TCC.Data
             Channel = ch;
             RawMessage = msg;
             Author = auth;
+            if (Channel == ChatChannel.Raid && GroupWindowManager.Instance.IsLeader(Author)) Channel = ChatChannel.RaidLeader;
+
             try
             {
                 switch (ch)
@@ -140,7 +142,6 @@ namespace TCC.Data
             {
                 return;
             }
-            if (Channel == ChatChannel.Raid && GroupWindowManager.Instance.IsLeader(Author)) Channel = ChatChannel.RaidLeader;
             File.AppendAllText("chat.log", "[CHAT] " + RawMessage + "\n");
         }
         public ChatMessage(string systemMessage, SystemMessage m, string opcodeName) : this()
@@ -635,11 +636,12 @@ namespace TCC.Data
             string result = "";
             foreach (var keyVal in pars)
             {
-                result  = txt.Replace(keyVal.Key, keyVal.Value);
+                result  = txt.Replace('{' + keyVal.Key, '{' + keyVal.Value);
                 if(txt == result)
                 {
-                    result = Utils.ReplaceCaseInsensitive(txt, keyVal.Key, keyVal.Value);
+                    result = Utils.ReplaceCaseInsensitive(txt, '{' + keyVal.Key, '{' + keyVal.Value);
                 }
+                txt = result;
             }
             return result;
         }
@@ -694,8 +696,10 @@ namespace TCC.Data
             var prm = SplitDirectives(systemMessage);
 
             msg.Author = prm["UserName"];
-            var txt = "ItemName";
+            var txt = "{ItemName}";
             txt = ReplaceParameters(txt, prm);
+            txt = txt.Replace("{", "");
+            txt = txt.Replace("}", "");
             var mp = ParseSysMsgItem(BuildParametersDictionary(txt));
 
             StringBuilder sb = new StringBuilder();
