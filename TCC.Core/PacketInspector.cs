@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -102,7 +103,7 @@ namespace TCC
             TeraMessageReader tmr = new TeraMessageReader(msg, PacketProcessor.OpCodeNamer, PacketProcessor.Version, PacketProcessor.SystemMessageNamer);
             if (exclusionList.Any(opName.Contains)) return;
 //            if(opName.Equals("S_LOAD_TOPO") || opName.Equals("C_LOAD_TOPO_FIN")|| opName.Equals("S_SPAWN_ME"))
-                Console.WriteLine(opName + " " + msg.OpCode);
+                Debug.WriteLine(opName + " " + msg.OpCode);
         }
     }
 }

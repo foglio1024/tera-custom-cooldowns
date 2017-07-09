@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +33,7 @@ namespace TCC
 
         public static void CheckHurricane(S_ABNORMALITY_BEGIN msg)
         {
-            if(msg.Id == HURRICANE_ID) Console.WriteLine("Checking hurricane; id={0} caster={1} player={2}", msg.Id, msg.CasterId, SessionManager.CurrentPlayer.EntityId);
+            if(msg.Id == HURRICANE_ID) Debug.WriteLine("Checking hurricane; id={0} caster={1} player={2}", msg.Id, msg.CasterId, SessionManager.CurrentPlayer.EntityId);
             if (msg.Id == HURRICANE_ID && msg.CasterId == SessionManager.CurrentPlayer.EntityId)
             {
                 SkillsDatabase.TryGetSkill(HURRICANE_ID, Class.Common, out Skill hurricane);

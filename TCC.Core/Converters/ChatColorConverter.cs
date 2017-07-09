@@ -90,6 +90,10 @@ namespace TCC.Converters
                     return Brushes.OrangeRed;
                 case ChatChannel.RaidLeader:
                     return (SolidColorBrush)App.Current.FindResource("ChatRaidNotice");
+                case ChatChannel.TCC:
+                    return (SolidColorBrush)App.Current.FindResource("mainTccColor");
+                case ChatChannel.Bargain:
+                    return (SolidColorBrush)App.Current.FindResource("ChatBargain");
                 default:
                     return (SolidColorBrush)App.Current.FindResource("ChatSysGeneric");
             }

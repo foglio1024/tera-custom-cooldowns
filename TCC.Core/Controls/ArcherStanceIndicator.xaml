@@ -6,10 +6,6 @@
              xmlns:local="clr-namespace:TCC.Controls"
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded">
-    <UserControl.Resources>
-        <SolidColorBrush x:Key="SniperEyeColor" Color="#38bde5" />
-    </UserControl.Resources>
-
     <Grid>
         <Rectangle 
             x:Name="rect"

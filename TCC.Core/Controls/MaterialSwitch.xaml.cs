@@ -56,7 +56,6 @@ namespace TCC.Controls
 
         private void StatusWatcher_PropertyChanged(object sender, EventArgs e)
         {
-            //Console.WriteLine("Status set to {0}", Status);
             if (Status)
             {
                 AnimateOn();

@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Threading;
 using TCC.Data;
 using TCC.Parsing;
+using TCC.Parsing.Messages;
 
 namespace TCC.ViewModels
 {
@@ -17,7 +18,7 @@ namespace TCC.ViewModels
         static ChatWindowViewModel _instance;
         public static ChatWindowViewModel Instance => _instance ?? (_instance = new ChatWindowViewModel());
         const int MESSAGE_CAP = 100000;
-        const int SPAM_THRESHOLD = 3;
+        const int SPAM_THRESHOLD = 1;
 
         public bool IsTeraOnTop
         {
@@ -51,36 +52,59 @@ namespace TCC.ViewModels
             }
         }
         private ICollectionView _allMessages;
-        private ICollectionView _guildMessages;
-        private ICollectionView _groupMessages;
-        private ICollectionView _systemMessages;
-
         public ICollectionView AllMessages
         {
             get => _allMessages;
         }
+        private ICollectionView _guildMessages;
         public ICollectionView GuildMessages
         {
             get => _guildMessages;
         }
+        private ICollectionView _groupMessages;
         public ICollectionView GroupMessages
         {
             get => _groupMessages;
         }
+        private ICollectionView _systemMessages;
         public ICollectionView SystemMessages
         {
             get => _systemMessages;
         }
 
+
         public List<ChatChannel> VisibleChannels;
         public List<string> BlockedUsers;
+
+        public LFG LastClickedLfg;
+
+        internal void RemoveDeadLfg()
+        {
+            if(LastClickedLfg != null)
+            {
+                RemoveLfg(LastClickedLfg);
+                LastClickedLfg = null;
+            }
+        }
+
         public List<string> Friends;
+        private SynchronizedObservableCollection<LFG> _lfgs;
+        public SynchronizedObservableCollection<LFG> LFGs
+        {
+            get => _lfgs;
+            set
+            {
+                if (_lfgs == value) return;
+                _lfgs = value;
+            }
+        }
         public PrivateChatChannel[] PrivateChannels = new PrivateChatChannel[8];
 
         public ChatWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
             _chatMessages = new SynchronizedObservableCollection<ChatMessage>(_dispatcher);
+            _lfgs = new SynchronizedObservableCollection<LFG>(_dispatcher);
             WindowManager.TccVisibilityChanged += (s, ev) =>
             {
                 NotifyPropertyChanged("IsTeraOnTop");
@@ -104,6 +128,8 @@ namespace TCC.ViewModels
                 ChatChannel.Loot,
                 ChatChannel.Raid,
                 ChatChannel.RaidNotice,
+                ChatChannel.RaidLeader,
+                ChatChannel.PartyNotice,
                 ChatChannel.Say
             };
             BlockedUsers = new List<string>();
@@ -120,9 +146,10 @@ namespace TCC.ViewModels
                                         ((ChatMessage)p).Channel == ChatChannel.GuildNotice;
             _groupMessages.Filter = p => ((ChatMessage)p).Channel == ChatChannel.Party ||
                                         ((ChatMessage)p).Channel == ChatChannel.PartyNotice ||
-                                        ((ChatMessage)p).Channel == ChatChannel.Group ||
-                                        ((ChatMessage)p).Channel == ChatChannel.GroupAlerts ||
+                                        //((ChatMessage)p).Channel == ChatChannel.Group ||
+                                        //((ChatMessage)p).Channel == ChatChannel.GroupAlerts ||
                                         ((ChatMessage)p).Channel == ChatChannel.Raid ||
+                                        ((ChatMessage)p).Channel == ChatChannel.RaidLeader ||
                                         ((ChatMessage)p).Channel == ChatChannel.RaidNotice;
             _systemMessages.Filter = p => ((ChatMessage)p).Author == "System";
         }
@@ -137,14 +164,16 @@ namespace TCC.ViewModels
 
         public void AddChatMessage(ChatMessage chatMessage)
         {
-            if (chatMessage.RawMessage.Contains("W W W.M M O O K.C 0 M")) return;
             if (BlockedUsers.Contains(chatMessage.Author)) return;
             if (ChatMessages.Count < SPAM_THRESHOLD)
             {
                 for (int i = 0; i < ChatMessages.Count - 1; i++)
                 {
                     var m = ChatMessages[i];
-                    if (m.RawMessage == chatMessage.RawMessage && m.Channel == chatMessage.Channel && m.Author == chatMessage.Author && !VisibleChannels.Contains(chatMessage.Channel)) return;
+                    if (m.RawMessage == chatMessage.RawMessage &&
+                        m.Channel == chatMessage.Channel &&
+                        m.Author == chatMessage.Author &&
+                        !VisibleChannels.Contains(chatMessage.Channel)) return;
                 }
             }
             else
@@ -162,10 +191,11 @@ namespace TCC.ViewModels
                     //    offset++;
                     //    continue;
                     //}
-                    if (m.RawMessage == chatMessage.RawMessage &&  m.Author == chatMessage.Author) return;
+                    if (m.RawMessage == chatMessage.RawMessage && m.Author == chatMessage.Author && m.Channel != ChatChannel.Money) return;
                 }
             }
 
+            ChatMessage.SplitSimplePieces(chatMessage);
             ChatMessages.Add(chatMessage);
 
             if (ChatMessages.Count >= MESSAGE_CAP)
@@ -173,6 +203,57 @@ namespace TCC.ViewModels
                 ChatMessages.RemoveAt(0);
             }
             NotifyPropertyChanged(nameof(MessageCount));
+        }
+
+        internal void AddOrRefreshLfg(S_PARTY_MATCH_LINK x)
+        {
+            LFG lfg;
+            if (TryGetLfg(x.Id, x.Message, x.Name, out lfg))
+            {
+                lfg.Message = x.Message;
+                lfg.Refresh();
+            }
+            else
+            {
+                _lfgs.Add(new LFG(x.Id, x.Name, x.Message, x.Raid));
+            }
+        }
+        internal void RemoveLfg(LFG lfg)
+        {
+            lfg.Dispose();
+            LFGs.Remove(lfg);
+        }
+
+        private bool TryGetLfg(int id, string msg, string name, out LFG lfg)
+        {
+            lfg = _lfgs.FirstOrDefault(x => x.Id == id);
+            if (lfg == null)
+            {
+                lfg = _lfgs.FirstOrDefault(x => x.Name == name);
+                if (lfg == null)
+                {
+                    lfg = _lfgs.FirstOrDefault(x => x.Message == msg);
+                    if(lfg == null)
+                    {
+                        return false;
+                    }
+                    return true;
+                }
+                return false; ;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        internal void UpdateLfgMembers(S_PARTY_MEMBER_INFO p)
+        {
+            LFG lfg;
+            if(TryGetLfg(p.Id, "", "", out lfg))
+            {
+                lfg.MembersCount = p.MembersCount;
+            }
         }
     }
 }

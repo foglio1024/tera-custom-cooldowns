@@ -24,13 +24,15 @@ namespace TCC
                 {
                     BossGageWindowManager.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, templateId, zoneId, v);
                 }
+                else
+                {
+                    BossGageWindowManager.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, templateId, zoneId, Visibility.Collapsed);
+                }
             }
-            //Console.WriteLine("+Bosses {0} - {1}",BossGageWindowManager.Instance.VisibleBossesCount, BossGageWindowManager.Instance.CurrentNPCs.Count);
         }
         public static void DespawnNPC(ulong target)
         {
             BossGageWindowManager.Instance.RemoveBoss(target);
-            //Console.WriteLine("-Bosses {0} - {1}", BossGageWindowManager.Instance.VisibleBossesCount, BossGageWindowManager.Instance.CurrentNPCs.Count);
             if (BossGageWindowManager.Instance.VisibleBossesCount == 0) SessionManager.Encounter = false;
         }
         public static void SetNPCStatus(ulong entityId, bool enraged)
@@ -40,8 +42,6 @@ namespace TCC
         public static void UpdateNPCbyGauge(ulong target, float curHP, float maxHP, ushort zoneId, uint templateId)
         {
             BossGageWindowManager.Instance.AddOrUpdateBoss(target, maxHP, curHP, templateId, zoneId, Visibility.Visible);
-            //Console.WriteLine("{0}/{1}", curHP, maxHP);
-            //Console.WriteLine("++Bosses {0} - {1}", BossGageWindowManager.Instance.VisibleBossesCount, BossGageWindowManager.Instance.CurrentNPCs.Count);
 
             if (maxHP > curHP)
             {
@@ -72,21 +72,18 @@ namespace TCC
             if (zoneId != 950)
             {
                 SessionManager.HarrowholdMode = false;
-                //System.Console.WriteLine("{0} {1} spawned, exiting hh mode", zoneId, templateId);
             }
             else
             {
                 if (templateId >= 1100 && templateId <= 1103)
                 {
                     SessionManager.HarrowholdMode = true;
-                    //System.Console.WriteLine("{0} {1} spawned, entering hh mode", zoneId, templateId);
 
                     SetDragonsContexts(templateId);
                 }
                 else if (templateId == 1000 || templateId == 2000 || templateId == 3000 || templateId == 4000)
                 {
                     SessionManager.HarrowholdMode = false;
-                    //System.Console.WriteLine("{0} {1} spawned, exiting hh mode", zoneId, templateId);
                 }
             }
 
@@ -161,6 +158,21 @@ namespace TCC
             //    });
             //}
 
+        }
+
+        internal static void UpdateNPCbyCreatureChangeHP(ulong target, int currentHP, int maxHP)
+        {
+            BossGageWindowManager.Instance.AddOrUpdateBoss(target, maxHP, currentHP,0,0, Visibility.Visible);
+            if (maxHP > currentHP)
+            {
+                currentEncounter = target;
+                SessionManager.Encounter = true;
+            }
+            else if (maxHP == currentHP || currentHP == 0)
+            {
+                currentEncounter = 0;
+                SessionManager.Encounter = false;
+            }
         }
 
         public static void SpawnUser(ulong entityId, string name)

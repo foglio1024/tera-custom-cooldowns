@@ -184,7 +184,6 @@ namespace TCC.Controls
                         SlideNextEnrage(CurrentPercentage);
                         //SetEnragePercTB(CurrentPercentage);
                     }
-                    //Console.WriteLine("{0} HP updated.", DragonName);
                 }
             });
         }
@@ -194,8 +193,6 @@ namespace TCC.Controls
             {
                 if (id == EntityId)
                 {
-                    //Console.WriteLine("{0} enraged updated.", DragonName);
-
                     Enraged = enraged;
                     if (enraged)
                     {

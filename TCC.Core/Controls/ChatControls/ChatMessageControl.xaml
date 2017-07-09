@@ -7,37 +7,27 @@
              xmlns:ts="clr-namespace:TCC.TemplateSelectors"
              xmlns:c="clr-namespace:TCC.Converters"
              xmlns:chatcontrols="clr-namespace:TCC.Controls.ChatControls"
-             mc:Ignorable="d">
+             mc:Ignorable="d"  Loaded="UserControl_Loaded">
     <Grid Margin="2,1" HorizontalAlignment="Stretch" Width="650" Name="root" Height="Auto" Background="#0f00" VerticalAlignment="Top"
           Visibility="{Binding IsVisible, Converter={StaticResource boolToVisibleCollapsed}}">
-        <Grid.Resources>
-            <DataTemplate x:Key="MessageHeaderTemplate">
-                <local:ChatMessageHeader />
-            </DataTemplate>
-            <DataTemplate x:Key="MessageBodyTemplate">
-                <local:MessagePieceControl  />
-            </DataTemplate>
-        </Grid.Resources>
-        <Grid Width="Auto" MinWidth="0" Margin="0,0" VerticalAlignment="Top" Height="Auto" Background="Transparent" >
+        <Grid Width="Auto" MinWidth="0" Margin="0,0" VerticalAlignment="Top" Height="{Binding Rows, Converter={StaticResource RowsToHeightConverter}}" Background="Transparent" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <!--Header-->
-            <ContentControl Content="{Binding}" Name="header"
+            <ContentControl Content="{Binding}" Name="header" MouseEnter="UserControl_MouseEnter"
                             ContentTemplate="{StaticResource MessageHeaderTemplate}"/>
             <!--Message-->
-            <ItemsControl ItemsSource="{Binding Pieces}"
-                          ItemTemplate="{StaticResource MessageBodyTemplate}" 
-                          Grid.Column="1" Background="#0f00"  
-                          Margin="3,1,0,0" 
-                          VerticalAlignment="Top" >
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel HorizontalAlignment="Stretch"  Width="Auto" Height="Auto" Background="#0f00" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
+            <ContentControl Content="{Binding}" Name="body" Grid.Column="1" 
+                            ContentTemplateSelector="{StaticResource BodyTemplateSelector}"/>
+
+            <Popup IsOpen="False" StaysOpen="True" Placement="Top" AllowsTransparency="True" x:Name="popup" MouseLeave="popup_MouseLeave">
+                <Border Style="{StaticResource border}" Width="Auto" Padding="5" >
+                    <ContentControl Content="{Binding}" Width="650"
+                            ContentTemplateSelector="{StaticResource BodyTemplateSelector}"/>
+                </Border>
+            </Popup>
         </Grid>
     </Grid>
 </UserControl>

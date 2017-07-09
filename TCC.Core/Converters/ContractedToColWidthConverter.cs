@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Data;
+
+namespace TCC.Converters
+{
+    class ContractedToColWidthConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var b = (bool)value;
+            if (!b)
+            {
+                return new GridLength(1, GridUnitType.Star);
+            }
+            else
+            {
+                return new GridLength(1, GridUnitType.Auto);
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

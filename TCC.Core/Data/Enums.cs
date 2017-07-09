@@ -59,7 +59,9 @@ namespace TCC
         TradeRedirect = 303, //arbitrary
         Enchant12 = 304, //arbitrary
         Enchant15 = 305, //arbitrary
-        RaidLeader = 306 //arbitrary
+        RaidLeader = 306, //arbitrary
+        Bargain = 307, //arbitrary
+        TCC = 1000
     }
 
     public enum Class

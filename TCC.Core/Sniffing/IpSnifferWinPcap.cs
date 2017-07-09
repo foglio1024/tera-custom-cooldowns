@@ -90,7 +90,7 @@ namespace NetworkSniffer
                     }
                 }
                 device.StartCapture();
-                Console.WriteLine("winpcap capture");
+                Debug.WriteLine("winpcap capture");
             }
         }
 

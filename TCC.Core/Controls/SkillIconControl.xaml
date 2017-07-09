@@ -8,9 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="100" Loaded="ControlLoaded" Unloaded="UserControl_Unloaded"
              UseLayoutRounding="True"  ToolTip="{Binding Skill.Name}">
-    <UserControl.Resources>
-        <converters:IconConverter x:Key="iconConv"/>
-    </UserControl.Resources>
+
     <UserControl.LayoutTransform>
         <ScaleTransform ScaleX=".9" ScaleY=".9"/>
     </UserControl.LayoutTransform>

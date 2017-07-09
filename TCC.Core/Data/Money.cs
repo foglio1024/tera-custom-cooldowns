@@ -8,6 +8,14 @@ namespace TCC.Data
         public int Silver { get; set; }
         public int Copper { get; set; }
 
+        public Money(long money)
+        {
+            _dispatcher = WindowManager.ChatWindow.Dispatcher;
+
+            Gold = Convert.ToInt32(money / 10000);
+            Silver = Convert.ToInt32(money / 100) - Gold * 100;
+            Copper = Convert.ToInt32(money / 1) - Silver * 100 - Gold * 10000;
+        }
         public Money(int g, int s, int c)
         {
             _dispatcher = WindowManager.ChatWindow.Dispatcher;

@@ -42,6 +42,8 @@ namespace TCC
 
             }
         }
+
+
         static void SendData(string data)
         {
             try
@@ -57,6 +59,15 @@ namespace TCC
                 retries = 2;
                 ConnectToProxy();
             }
+        }
+
+        internal static void SendRequestPartyInfo(int id)
+        {
+            var sb = new StringBuilder("lfg_party_req");
+            sb.Append("&id=");
+            sb.Append(id);
+
+            SendData(sb.ToString());
         }
 
         public static void SendExTooltipMessage(long itemUid, string ownerName)
@@ -148,6 +159,29 @@ namespace TCC
             sb.Append(name);
 
             SendData(sb.ToString());
+        }
+        public static void SendTradeBrokerDecline(uint playerId, uint listingId)
+        {
+            var sb = new StringBuilder("tb_decline");
+            sb.Append("&player=");
+            sb.Append(playerId);
+            sb.Append("&listing=");
+            sb.Append(listingId);
+
+            SendData(sb.ToString());
+
+        }
+
+        public static void SendTradeBrokerAccept(uint playerId, uint listingId)
+        {
+            var sb = new StringBuilder("tb_accept");
+            sb.Append("&player=");
+            sb.Append(playerId);
+            sb.Append("&listing=");
+            sb.Append(listingId);
+
+            SendData(sb.ToString());
+
         }
 
         public static void CloseConnection()

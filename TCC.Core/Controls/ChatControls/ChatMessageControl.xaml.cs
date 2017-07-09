@@ -1,4 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
+using System.Windows.Threading;
+using TCC.Data;
 
 namespace TCC.Controls
 {
@@ -10,6 +13,28 @@ namespace TCC.Controls
         public ChatMessageControl()
         {
             InitializeComponent();
+        }
+
+        private void UserControl_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (((ChatMessage)DataContext).IsContracted)
+            {
+                popup.IsOpen = true;
+            }
+        }
+
+        private void popup_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            popup.IsOpen = false;
+        }
+
+        private void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                ((ChatMessage)DataContext).Rows = WindowManager.ChatWindow.GetMessageRows(this.ActualHeight);
+                Console.WriteLine("Set rows to {0}", ((ChatMessage)DataContext).Rows);
+            }), DispatcherPriority.Loaded);
         }
     }
 }

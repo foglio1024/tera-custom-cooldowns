@@ -116,6 +116,9 @@
     <Compile Include="ClassSpecific\Lancer.cs" />
     <Compile Include="ClassSpecific\Priest.cs" />
     <Compile Include="ClassSpecific\Valkyrie.cs" />
+    <Compile Include="Controls\ChatControls\BrokerOfferBody.xaml.cs">
+      <DependentUpon>BrokerOfferBody.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ChatControls\ChatMessageControl.xaml.cs">
       <DependentUpon>ChatMessageControl.xaml</DependentUpon>
     </Compile>
@@ -128,26 +131,41 @@
     <Compile Include="Controls\ChatControls\FriendMessageDialog.xaml.cs">
       <DependentUpon>FriendMessageDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ChatControls\LFGcontrol.xaml.cs">
+      <DependentUpon>LFGcontrol.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ChatControls\PlayerTooltip.xaml.cs">
       <DependentUpon>PlayerTooltip.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\NonReloadingTabControl.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\ContractedToColWidthConverter.cs" />
+    <Compile Include="Converters\RowsToHeightConverter.cs" />
     <Compile Include="Converters\TypeToCursorConverter.cs" />
+    <Compile Include="Data\BrokerChatMessage.cs" />
     <Compile Include="Data\Databases\AccountBenefitDatabase.cs" />
     <Compile Include="Data\Databases\AchievementDatabase.cs" />
     <Compile Include="Data\Databases\AchievementGradeDatabase.cs" />
     <Compile Include="Data\Databases\DungeonDatabase.cs" />
     <Compile Include="Data\Databases\GuildQuestDatabase.cs" />
     <Compile Include="Data\Databases\ItemsDatabase.cs" />
+    <Compile Include="Data\Databases\MapDatabase.cs" />
     <Compile Include="Data\Databases\QuestDatabase.cs" />
+    <Compile Include="Data\Guard.cs" />
+    <Compile Include="Data\LFG.cs" />
+    <Compile Include="Data\Section.cs" />
+    <Compile Include="Data\World.cs" />
     <Compile Include="Parsing\Messages\S_ACCOMPLISH_ACHIEVEMENT.cs" />
     <Compile Include="Parsing\Messages\S_ANSWER_INTERACTIVE.cs" />
     <Compile Include="Parsing\Messages\S_FRIEND_LIST.cs" />
     <Compile Include="Parsing\Messages\C_REQUEST_GAMESTAT_PING.cs" />
+    <Compile Include="Parsing\Messages\S_PARTY_MATCH_LINK.cs" />
     <Compile Include="Parsing\Messages\S_RESPONSE_GAMESTAT_PONG.cs" />
+    <Compile Include="Parsing\Messages\S_TRADE_BROKER_DEAL_SUGGESTED.cs" />
+    <Compile Include="Parsing\Messages\S_UPDATE_FRIEND_INFO.cs" />
     <Compile Include="Parsing\Messages\S_USER_BLOCK_LIST.cs" />
     <Compile Include="Parsing\SystemMessagesProcessor.cs" />
+    <Compile Include="TemplateSelectors\MessageBodyDataTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\MessagePieceDataTemplateSelector.cs" />
     <Compile Include="Controls\ClassBars\BerserkerBar.xaml.cs">
       <DependentUpon>BerserkerBar.xaml</DependentUpon>
@@ -604,6 +622,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\ChatControls\BrokerOfferBody.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\ChatControls\ChatMessageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -617,6 +639,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ChatControls\FriendMessageDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ChatControls\LFGcontrol.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -840,6 +866,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="resources\data\NewWorldMapData.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="resources\data\social.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -866,6 +895,9 @@
     </Content>
     <Content Include="resources\data\quests.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\regions.tsv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="resources\fonts\SourceSansPro-SemiBold.ttf" />
     <Resource Include="resources\fonts\Frutiger.ttf" />

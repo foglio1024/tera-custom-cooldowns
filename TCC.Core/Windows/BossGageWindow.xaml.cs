@@ -58,6 +58,11 @@ namespace TCC.Windows
         {
             ContextMenu.IsOpen = true;
         }
+
+        private void TccWindow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            BossGageWindowManager.Instance.CopyToClipboard();
+        }
     }
 }
 

@@ -21,27 +21,42 @@ namespace TCC.Parsing
         {
             return !ExclusionList.Contains(opcodeName);
         }
-        internal static void AnalyzeMessage(S_SYSTEM_MESSAGE srvMsg, SystemMessage sysMsg, string opcodeName)
+        internal static void AnalyzeMessage(string srvMsg, SystemMessage sysMsg, string opcodeName)
         {
             if (!Filter(opcodeName)) return;
 
             if (!Process(srvMsg, sysMsg, opcodeName))
             {
-                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(srvMsg.Message, sysMsg, opcodeName));
+                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(srvMsg, sysMsg));
             }
         }
-        private static void HandleMaxEnchantSucceed(S_SYSTEM_MESSAGE x)
+        private static void HandleMaxEnchantSucceed(string x)
         {
-            ChatMessage sysMsg = ChatMessage.BuildEnchantSystemMessage(x.Message);
+            ChatMessage sysMsg = ChatMessage.BuildEnchantSystemMessage(x);
             ChatWindowViewModel.Instance.AddChatMessage(sysMsg);
+        }
+        private static void HandleFriendLogin(string friendName, SystemMessage sysMsg)
+        {
+            var sysmsg = "@0\vUserName\v" + friendName;
+            var msg = new ChatMessage(sysmsg, sysMsg);
+            ChatWindowViewModel.Instance.AddChatMessage(msg);
         }
 
         #region Factory
         static Dictionary<string, Delegate> Processor = new Dictionary<string, Delegate>
         {
-            { "SMT_MAX_ENCHANT_SUCCEED", new Action<S_SYSTEM_MESSAGE, SystemMessage>((srvMsg, sysMsg) => HandleMaxEnchantSucceed(srvMsg)) },
+            { "SMT_MAX_ENCHANT_SUCCEED", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleMaxEnchantSucceed(srvMsg)) },
+            { "SMT_FRIEND_IS_CONNECTED", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleFriendLogin(srvMsg, sysMsg)) },
+            { "SMT_CHAT_LINKTEXT_DISCONNECT", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleInvalidLink(srvMsg, sysMsg)) },
         };
-        public static bool Process(S_SYSTEM_MESSAGE serverMsg, SystemMessage sysMsg, string opcodeName)
+
+        private static void HandleInvalidLink(string srvMsg, SystemMessage sysMsg)
+        {
+            ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(srvMsg, sysMsg));
+            ChatWindowViewModel.Instance.RemoveDeadLfg();
+        }
+
+        public static bool Process(string serverMsg, SystemMessage sysMsg, string opcodeName)
         {
             Delegate type;
             Processor.TryGetValue(opcodeName, out type);

@@ -97,12 +97,11 @@ namespace TCC
         }
         public static void SetPlayerHP(ulong target, float hp)
         {
-            if (target == CurrentPlayer.EntityId)
-            {
-                CurrentPlayer.CurrentHP = hp;
-                CharacterWindowManager.Instance.Player.CurrentHP = hp;
-                ClassManager.SetHP(Convert.ToInt32(hp));
-            }
+            CurrentPlayer.CurrentHP = hp;
+            CharacterWindowManager.Instance.Player.CurrentHP = hp;
+            ClassManager.SetHP(Convert.ToInt32(hp));
+
+
         }
         public static void SetPlayerMP(ulong target, float mp)
         {

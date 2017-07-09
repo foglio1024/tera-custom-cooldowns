@@ -19,7 +19,8 @@
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         MouseRightButtonDown="Window_MouseRightButtonDown"
         Loaded="Window_Loaded"
-        ResizeMode="NoResize" >
+        ResizeMode="NoResize" 
+             MouseDoubleClick="TccWindow_MouseDoubleClick">
     <w:TccWindow.Resources>
         <DataTemplate x:Key="BossGageDataTemplate">
             <local:BossGage/>

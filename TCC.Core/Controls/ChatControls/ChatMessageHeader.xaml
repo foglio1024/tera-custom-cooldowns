@@ -8,126 +8,6 @@
              xmlns:ts="clr-namespace:TCC.TemplateSelectors"
              mc:Ignorable="d" 
              >
-    <UserControl.Resources>
-        <!--Converters--> 
-        <c:ChatColorConverter x:Key="colorConv"/>
-        <c:ChatChannelNameConverter x:Key="nameConv"/>
-        <c:MentionToColorConverter x:Key="mentionConv"/>
-        <c:SentReceivedToAngleConverter x:Key="sentReceivedConv"/>
-        <!--Channel label templates-->
-        <DataTemplate x:Key="WhisperChannelLabelTemplate">
-            <Grid Height="12" Width="12" VerticalAlignment="Top" UseLayoutRounding="True">
-                <Path Data="M12 8V4l8 8-8 8v-4H4V8z" Fill="{Binding Channel, Converter={StaticResource colorConv}}" Opacity=".7" 
-                      Stretch="Uniform" VerticalAlignment="Center">
-                    <Path.LayoutTransform>
-                        <TransformGroup>
-                            <ScaleTransform CenterX="1" ScaleX="{Binding Channel, Converter={StaticResource sentReceivedConv}}"/>
-                        </TransformGroup>
-                    </Path.LayoutTransform>
-                </Path>
-            </Grid>
-        </DataTemplate>
-        <DataTemplate x:Key="MegaphoneChannelLabelTemplate">
-            <Grid Height="12" Width="12" VerticalAlignment="Top" UseLayoutRounding="True">
-                <Path Data="M81.114,30.146C73.196,11.725,60.456-2.306,54.009,0.316C43.062,4.765,60.53,26.133,6.774,47.984
-		                                c-4.643,1.887-5.82,9.441-3.877,13.957c1.939,4.515,8.291,9.01,12.936,7.123c0.803-0.326,3.754-1.275,3.754-1.275
-		                                c3.316,4.45,6.787,1.811,8.018,4.639c1.479,3.398,4.697,10.785,5.789,13.298c1.096,2.511,3.576,4.837,5.377,4.153
-		                                c1.795-0.684,7.91-3.011,10.25-3.901c2.338-0.89,2.896-2.974,2.182-4.619c-0.771-1.772-3.932-2.292-4.832-4.36
-		                                c-0.902-2.068-3.848-8.696-4.695-10.785c-1.152-2.841,1.295-5.152,4.85-5.522c24.467-2.55,29.041,12.561,37.371,9.173
-		                                C90.343,67.243,89.03,48.568,81.114,30.146z M78.358,60.03c-1.432,0.582-11.061-7.013-17.215-21.334
-		                                c-6.152-14.318-5.379-27.408-3.949-27.989c1.43-0.582,10.822,8.58,16.975,22.898C80.321,47.923,79.79,59.448,78.358,60.03z"
-                                  Fill="#ff2b2b" Opacity=".7" Stretch="Uniform" VerticalAlignment="Center">
-                </Path>
-            </Grid>
-        </DataTemplate>
-        <DataTemplate x:Key="DefaultChannelLabelTemplate">
-            <TextBlock  Foreground="{Binding Channel, Converter={StaticResource colorConv}}" 
-                        Opacity=".5" 
-                        FontWeight="DemiBold" 
-                        FontSize="11"
-                        FontFamily="{StaticResource Frutiger}"
-                        HorizontalAlignment="Right" 
-                        VerticalAlignment="Top"
-                        TextAlignment="Center"
-                        Visibility="Visible"
-                        TextTrimming="CharacterEllipsis"
-                        MinWidth="33"
-                        Margin="0,-1,0,0"
-                        Text="{Binding Channel, Converter={StaticResource nameConv}}"
-                                />
-        </DataTemplate>
-        <DataTemplate x:Key="EnchantChannelLabelTemplate">
-            <Grid>
-                <TextBlock  Foreground="{Binding Channel, Converter={StaticResource colorConv}}" 
-                        Opacity=".8" 
-                        FontWeight="DemiBold" 
-                        FontSize="11"
-                        FontFamily="{StaticResource Frutiger}"
-                        HorizontalAlignment="Right" 
-                        VerticalAlignment="Top"
-                        TextAlignment="Center"
-                        Visibility="Visible"
-                        TextTrimming="CharacterEllipsis"
-                        MinWidth="33"
-                        Margin="0,-1,0,0"
-                        Text="{Binding Channel, Converter={StaticResource nameConv}}"
-                                />
-                <Border Width="Auto"
-                     Height="Auto"
-                        CornerRadius="5"
-                     Margin="4,-2,2,3"
-                     Opacity=".3"
-                     Background="{Binding Channel, Converter={StaticResource colorConv}}"
-
-                     />
-            </Grid>
-        </DataTemplate>
-
-        <ts:ChannelLabelDataTemplateSelector x:Key="ChannelLabelTemplateSelector"
-                                             NormalChannelDataTemplate="{StaticResource DefaultChannelLabelTemplate}"
-                                             WhisperChannelDataTemplate="{StaticResource WhisperChannelLabelTemplate}" 
-                                             MegaphoneChannelDataTemplate="{StaticResource MegaphoneChannelLabelTemplate}"
-                                             EnchantChannelDataTemplate="{StaticResource EnchantChannelLabelTemplate}"/>
-        <!--Author label templates-->
-        <DataTemplate x:Key="DefaultAuthorTemplate">
-            <local:OutlinedTextBlock  Margin="3,0,3,0" 
-                        Fill="{Binding Channel, Converter={StaticResource colorConv}}" 
-                        FontSize="14"
-                        HorizontalAlignment="Stretch"
-                        TextAlignment="Left"
-                        FontWeight="SemiBold"
-                        FontFamily="{StaticResource Frutiger}"
-                        Width="Auto"
-                        MinWidth="0"
-                        UseLayoutRounding="True"
-                        Opacity=".9"
-                        Text="{Binding Author}"
-                        Cursor="Hand"
-                        TextTrimming="CharacterEllipsis"
-                        Stroke="#9000"
-                        StrokeThickness="3"
-                        PreviewMouseLeftButtonDown="OutlinedTextBlock_PreviewMouseLeftButtonDown"
-                         
-                        >
-
-            </local:OutlinedTextBlock>
-
-        </DataTemplate>
-        <DataTemplate x:Key="SystemAuthorTemplate">
-            <Ellipse Width="10"
-                     Height="10"
-                     Margin="2,3,0,4"
-                     Opacity=".5"
-                     Fill="{Binding Channel, Converter={StaticResource colorConv}}"
-                     />
-        </DataTemplate>
-        <ts:AuthorLabelTemplateSelector x:Key="AuthorTemplateSelector"
-                                        DefaultAuthorTemplate="{StaticResource DefaultAuthorTemplate}"
-                                        SystemAuthorTemplate="{StaticResource SystemAuthorTemplate}"
-                                        >
-
-        </ts:AuthorLabelTemplateSelector>
-    </UserControl.Resources>
     <Grid Width="Auto" MinWidth="0" Margin="0,0,0,0" VerticalAlignment="Stretch" Height="Auto">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -148,25 +28,29 @@
         <!--Background tip-->
         <Border Width="4" Background="{Binding ContainsPlayerName,Converter={StaticResource mentionConv}}" Grid.Column="4" 
                             CornerRadius="0,3,3,0" Margin="0,0" />
+        <Border Width="4" Background="#999" Grid.Column="4" Opacity="{Binding IsContracted, Converter={StaticResource boolToOpacity}}"
+                            CornerRadius="0,3,3,0" Margin="0,0"/>
         <!--Author-->
         <ContentControl ContentTemplateSelector="{StaticResource AuthorTemplateSelector}" 
                         Content="{Binding}"
-                        Margin="3,2,3,1"
+                        Margin="3,1,3,1"
                         Grid.Column="2"
                         VerticalAlignment="Top"
                         HorizontalAlignment="Right"
-                        Width="Auto"  />
+                        Width="Auto"  
+                        PreviewMouseLeftButtonDown="OutlinedTextBlock_PreviewMouseLeftButtonDown"
+/>
         <!--Channel-->
         <ContentControl ContentTemplateSelector="{StaticResource ChannelLabelTemplateSelector}" 
                         Content="{Binding}"
                         Width="36"   
-                        Margin="2,5,0,0"
+                        Margin="2,4,0,0"
                         Grid.Column="1"
                         Visibility="Visible"
                         
                         />
         <!--Timestamp-->
-        <TextBlock  Margin="4,2,2,0" Foreground="{Binding Channel, Converter={StaticResource colorConv}}" 
+        <TextBlock  Margin="4,2,2,0" Foreground="{Binding Channel, Converter={StaticResource ChatColorConverter}}" 
                     Width="Auto"   
                     Opacity=".8" 
                     FontWeight="Normal" 

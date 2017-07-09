@@ -84,7 +84,6 @@ namespace TCC.Data
         }
 
         public float CurrentPercentage => _maxHP == 0 ? 0 : (_currentHP / _maxHP);
-
         private Visibility visible;
         public Visibility Visible
         {
@@ -127,8 +126,8 @@ namespace TCC.Data
             }
         }
 
-
-
+        public uint ZoneId { get; private set; }
+        public uint TemplateId { get; private set; }
         public void AddorRefresh(Abnormality ab, uint duration, int stacks, double size, double margin)
         {
             var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
@@ -156,7 +155,6 @@ namespace TCC.Data
             }
             catch (Exception)
             {
-                //Console.WriteLine("Cannot remove {0}", ab.Name);
             }
         }
 
@@ -165,28 +163,24 @@ namespace TCC.Data
             _dispatcher = BossGageWindowManager.Instance.Dispatcher;
             EntityId = eId;
             Name = EntitiesManager.CurrentDatabase.GetName(tId, zId);
+            ZoneId = zId;
+            TemplateId = tId;
             MaxHP = maxHP;
             CurrentHP = curHP;
             _buffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
             Visible = visible;
         }
-
         public Boss(ulong eId, uint zId, uint tId, Visibility visible)
         {
             _dispatcher = BossGageWindowManager.Instance.Dispatcher;
             EntityId = eId;
             Name = EntitiesManager.CurrentDatabase.GetName(tId, zId);
             MaxHP = EntitiesManager.CurrentDatabase.GetMaxHP(tId, zId);
+            ZoneId = zId;
+            TemplateId = tId;
             CurrentHP = MaxHP;
             _buffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
             Visible = visible;
-        }
-
-        public Boss()
-        {
-            _dispatcher = BossGageWindowManager.Instance.Dispatcher;
-            _buffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
-            Visible = Visibility.Visible;
         }
         public override string ToString()
         {

@@ -8,9 +8,6 @@
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded" >
     <UserControl.Resources>
-        <converters:HPbarColorConverter x:Key="hpDebuffColConv"/>
-        <converters:HP_PercentageConverter x:Key="hpPercConv"/>
-        <converters:PercentageVisibiltyConverter x:Key="percVisConv"/>
         <DropShadowEffect x:Key="textShadow" BlurRadius="2" ShadowDepth="1" Opacity="1" RenderingBias="Performance"/>
         <Style TargetType="TextBlock" x:Key="text" BasedOn="{StaticResource text1}">
             <Setter Property="FontSize" Value="11"/>

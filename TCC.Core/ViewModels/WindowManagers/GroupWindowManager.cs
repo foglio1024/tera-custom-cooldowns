@@ -82,10 +82,36 @@ namespace TCC.ViewModels
             return false;
 
         }
+        public bool GetUser(string name, out User user)
+        {
+            User u;
+            if (TryGetUserFromList(Dps, name, out u))
+            {
+                user = u;
+                return true;
+            }
+            else if (TryGetUserFromList(Tanks, name, out u))
+            {
+                user = u;
+                return true;
+            }
+            else if (TryGetUserFromList(Healers, name, out u))
+            {
+                user = u;
+                return true;
+            }
+            user = null;
+            return false;
+
+        }
 
         public bool UserExists(ulong id)
         {
             return GetUser(id, out User u);
+        }
+        public bool UserExists(string name)
+        {
+            return GetUser(name, out User u);
         }
 
         public void BeginOrRefreshUserAbnormality(Abnormality ab, int stacks, uint duration, uint playerId, uint serverId)
@@ -105,6 +131,12 @@ namespace TCC.ViewModels
                 }
                 else
                 {
+                    // -- show only aggro stacks if we are in HH -- //
+                    if(BossGageWindowManager.Instance.CurrentNPCs.Any(x => x.ZoneId == 950))
+                    {
+                        if (ab.Id != 950023) return;
+                    }
+                    // -------------------------------------------- //
                     u.AddOrRefreshDebuff(ab, duration, stacks, size, margin);
                 }
                 return;
@@ -198,7 +230,14 @@ namespace TCC.ViewModels
                     AddOrUpdateTank(p);
                     break;
                 case Class.Warrior:
-                    AddOrUpdateDps(p);
+                    if (Tanks.Contains(p))
+                    {
+                        AddOrUpdateTank(p);
+                    }
+                    else
+                    {
+                        AddOrUpdateDps(p);
+                    }
                     break;
                 default:
                     AddOrUpdateDps(p);
@@ -527,6 +566,19 @@ namespace TCC.ViewModels
                 return false;
             }
         }
+        private bool TryGetUserFromList(SynchronizedObservableCollection<User> userList, string name, out User u)
+        {
+            u = userList.FirstOrDefault(x => x.Name == name);
+            if (u != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public void SetReadyStatus(ReadyPartyMembers p)
         {
             User user;
@@ -681,17 +733,9 @@ namespace TCC.ViewModels
         }
         public bool IsLeader(string name)
         {
-            foreach (var user in Dps)
+            if(GetUser(name, out User u))
             {
-                if (user.Name == name && user.IsLeader) return true;
-            }
-            foreach (var user in Tanks)
-            {
-                if (user.Name == name && user.IsLeader) return true;
-            }
-            foreach (var user in Healers)
-            {
-                if (user.Name == name && user.IsLeader) return true;
+                if (u.IsLeader) return true;
             }
             return false;
         }

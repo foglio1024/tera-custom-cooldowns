@@ -94,11 +94,11 @@ namespace TCC.Data
             double right = -1;
             if (text.StartsWith(" "))
             {
-                left = 3;
+                left = 2;
             }
             if (text.EndsWith(" "))
             {
-                right = 3;
+                right = 2;
             }
 
             return new Thickness(left, 0, right, 0);

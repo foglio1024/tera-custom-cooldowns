@@ -80,7 +80,6 @@ namespace TCC
             Stacks = s;
             Target = t;
 
-            //Console.WriteLine("[{0}] - {1}",_count, Abnormality.Name) ;
 
             IconSize = iconSize;
             BackgroundEllipseSize = bgEllSize;
@@ -111,7 +110,6 @@ namespace TCC
         public void Dispose()
         {
             _count--;
-            //Console.WriteLine("[{0}] - {1}", _count, Abnormality.Name);
 
             if (timer == null) return;
             timer.Stop();

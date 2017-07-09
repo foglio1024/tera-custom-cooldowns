@@ -5,10 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
              mc:Ignorable="d" Loaded="UserControl_Loaded">
-    <UserControl.Resources>
-        <SolidColorBrush x:Key="DefensiveStanceColor" Color="#32b3e2" />
-        <SolidColorBrush x:Key="AssaultStanceColor" Color="#de2c4a" />
-    </UserControl.Resources>
     <Grid>
         <Rectangle 
             x:Name="rect"

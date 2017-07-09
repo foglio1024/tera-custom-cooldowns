@@ -4,14 +4,28 @@
              xmlns:local="clr-namespace:TCC"
              xmlns:controls="clr-namespace:TCC.Controls"
              xmlns:converters="clr-namespace:TCC.Converters"
+             xmlns:chatcontrols="clr-namespace:TCC.Controls.ChatControls"
+             xmlns:templateselectors="clr-namespace:TCC.TemplateSelectors"
              Startup="OnStartup">
     <Application.Resources>
         <DropShadowEffect x:Key="dropShadow" BlurRadius="4" ShadowDepth="2" Opacity=".4" />
+
+        <SolidColorBrush x:Key="mainTccColor" Color="#ff6822"/>
+
         <SolidColorBrush x:Key="bgColor" Color="#101017" Opacity="1"/>
         <SolidColorBrush x:Key="hpColor" Color="#f55"/>
         <SolidColorBrush x:Key="mpColor" Color="#59f"/>
         <SolidColorBrush x:Key="hpDebuffColor" Color="#b74be5"/>
-        
+
+        <SolidColorBrush x:Key="Gold" Color="#ffb033"/>
+        <SolidColorBrush x:Key="Silver" Color="Silver"/>
+        <SolidColorBrush x:Key="Copper" Color="#be6f4d"/>
+
+        <SolidColorBrush x:Key="DefensiveStanceColor" Color="#32b3e2" />
+        <SolidColorBrush x:Key="AssaultStanceColor" Color="#de2c4a" />
+        <SolidColorBrush x:Key="SniperEyeColor" Color="#38bde5" />
+
+
         <!--Chat colors-->
         <SolidColorBrush x:Key="ChatSay" Color="#fff"/>
         <SolidColorBrush x:Key="ChatParty" Color="#0071bb"/>
@@ -39,9 +53,10 @@
         <SolidColorBrush x:Key="ChatSysLoot" Color="#d9d9d9"/>
         <SolidColorBrush x:Key="ChatSysExp" Color="#d9d9d9"/>
         <SolidColorBrush x:Key="ChatSysMoney" Color="#d9d9d9"/>
-        
-        
-        
+        <SolidColorBrush x:Key="ChatBargain" Color="#ffbf8f"/>
+
+
+
         <FontFamily x:Key="DroidSans">pack://application:,,,/resources/fonts/#droidsans</FontFamily>
         <FontFamily x:Key="OpenSans">pack://application:,,,/resources/fonts/#OpenSans-Regular</FontFamily>
         <FontFamily x:Key="Frutiger">pack://application:,,,/resources/fonts/#Frutiger</FontFamily>
@@ -63,18 +78,59 @@
             <Setter Property="FontFamily" Value="/TCC;component/resources/#Open Sans"/>
         </Style>
 
-        
+
         <Style x:Key="ClassWindowStatBorder" TargetType="Border" BasedOn="{StaticResource border}">
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Height" Value="20"/>
             <Setter Property="Width" Value="80"/>
         </Style>
+
+        <!--Converters-->
         <converters:BoolToOpacityConverter x:Key="boolToOpacity"/>
         <converters:BoolToVisibilityConverter x:Key="boolToVisibleCollapsed" />
         <converters:RollToStringConverter x:Key="rollToString"/>
         <converters:WinningToColorConverter x:Key="winningToColor"/>
         <converters:IconConverter x:Key="iconConv"/>
         <converters:ClassImageConverter x:Key="classConv"/>
+        <converters:ChatColorConverter x:Key="ChatColorConverter"/>
+        <converters:TypeToCursorConverter x:Key="TypeToCursorConverter"/>
+        <converters:ChatChannelNameConverter x:Key="ChatChannelNameConverter"/>
+        <converters:MentionToColorConverter x:Key="mentionConv"/>
+        <converters:SentReceivedToAngleConverter x:Key="sentReceivedConv"/>
+        <converters:HPbarColorConverter x:Key="hpDebuffColConv"/>
+        <converters:HP_PercentageConverter x:Key="hpPercConv"/>
+        <converters:PercentageVisibiltyConverter x:Key="percVisConv"/>
+        <converters:ContractedToColWidthConverter x:Key="ContractedToColumnWidthConverter"/>
+        <converters:RowsToHeightConverter x:Key="RowsToHeightConverter"/>
+        <!--AbnormalityIndicator resources-->
+        <converters:AbnormalityStrokeConverter x:Key="strokeConv"/>
+        <converters:DurationLabelConverter x:Key="durationConv"/>
+        <converters:StacksToVisibilityConverter x:Key="stacksToVisibilityConv"/>
+        <converters:DurationToVisibilityConverter x:Key="durationToVisibilityConv"/>
+        <converters:SizeToStackLabelSizeConverter x:Key="sizeToStackLabelSizeConv"/>
+        <converters:SizeToDurationLabelSizeConverter x:Key="sizeToDurationLabelSizeConv"/>
+        <converters:SizeToDurationLabelMarginConverter x:Key="sizeToDurationLabelMarginConv"/>
+
+        <!--BossGage resources-->
+        <converters:EntityIdToNameConverter x:Key="userIdToName"/>
+        <converters:AggroTypeToFill x:Key="aggroTypeToFill"/>
+        <converters:BossHPbarColorConverter x:Key="barColorConv"/>
+        <DataTemplate x:Key="BossBuffDataTemplate">
+            <controls:AbnormalityIndicator/>
+        </DataTemplate>
+        
+        <!--Party/raid member resources-->
+        <converters:ClassImageConverter x:Key="classToImageConv"/>
+        <converters:LaurelImageConverter x:Key="laurelToImageConv"/>
+        <converters:ClassToFillConverter x:Key="classToFillConv"/>
+        <converters:AliveToOpacityConverter x:Key="aliveToOpacityConv"/>
+        <converters:ReadyToOpacityConverter x:Key="readyToOpacityConv"/>
+        <converters:ReadyToIconConverter x:Key="readyToIconConv"/>
+        <converters:ReadyToColorConverter x:Key="readyToColorConv"/>
+
+        <DataTemplate x:Key="abnorm">
+            <controls:AbnormalityIndicator/>
+        </DataTemplate>
 
         <!--Scrollbar Thumbs-->
         <Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">
@@ -156,7 +212,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -272,6 +328,176 @@
             </Setter>
         </Style>
 
+        <DataTemplate x:Key="SimpleTemplate">
+            <controls:OutlinedTextBlock Fill="{Binding Color}"
+                                        Text="{Binding Text}" 
+                                        Cursor="{Binding Type, Converter={StaticResource TypeToCursorConverter}}"
+                                        Stroke="#9000"
+                                        StrokeThickness="3"
+                                        FontSize="15"
+                                        FontFamily="{StaticResource Frutiger}"
+                                        TextWrapping="WrapWithOverflow"
+                                        FontWeight="Normal"
+                                        Opacity="1"
+                                        Width="Auto"
+                                        HorizontalAlignment="Stretch"
+                                        TextTrimming="None"
+                                        Margin="{Binding Spaces}"
+                                        >
+            </controls:OutlinedTextBlock>
+        </DataTemplate>
+        <DataTemplate x:Key="MoneyTemplate">
+            <controls:MoneyMessagePiece />
+        </DataTemplate>
+        <templateselectors:MessagePieceDataTemplateSelector x:Key="PieceTemplateSelector"
+                                                   SimpleTemplate="{StaticResource SimpleTemplate}"
+                                                   MoneyTemplate="{StaticResource MoneyTemplate}"
+                                                   QuestTemplate="{StaticResource SimpleTemplate}"
+                                                   PointOfInterestTemplate="{StaticResource SimpleTemplate}"
+                                                   ItemTemplate="{StaticResource SimpleTemplate}"
+                                                   />
 
+
+        <DataTemplate x:Key="MessageHeaderTemplate">
+            <controls:ChatMessageHeader />
+        </DataTemplate>
+        <DataTemplate x:Key="MessageBodyTemplate">
+            <controls:MessagePieceControl  />
+        </DataTemplate>
+        <DataTemplate x:Key="DefaultBody">
+            <ItemsControl ItemsSource="{Binding Pieces}"
+                          ItemTemplate="{StaticResource MessageBodyTemplate}" 
+                          Background="#0f00"  
+                          Margin="3,0,0,0" 
+                          VerticalAlignment="Top" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel HorizontalAlignment="Stretch"  Width="Auto" Height="Auto" Background="#0f00" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </DataTemplate>
+        <DataTemplate x:Key="BrokerOfferBody">
+            <chatcontrols:BrokerOfferBody />
+        </DataTemplate>
+
+        <templateselectors:MessageBodyDataTemplateSelector x:Key="BodyTemplateSelector"
+                                                           BrokerBody="{StaticResource BrokerOfferBody}"
+                                                           DefaultBody="{StaticResource DefaultBody}" />
+
+        <!--Channel label templates-->
+        <DataTemplate x:Key="WhisperChannelLabelTemplate">
+            <Grid Height="12" Width="12" VerticalAlignment="Top" UseLayoutRounding="True">
+                <Path Data="M12 8V4l8 8-8 8v-4H4V8z" Fill="{Binding Channel, Converter={StaticResource ChatColorConverter}}" Opacity=".7" 
+                      Stretch="Uniform" VerticalAlignment="Center">
+                    <Path.LayoutTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterX="1" ScaleX="{Binding Channel, Converter={StaticResource sentReceivedConv}}"/>
+                        </TransformGroup>
+                    </Path.LayoutTransform>
+                </Path>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="MegaphoneChannelLabelTemplate">
+            <Grid Height="12" Width="12" VerticalAlignment="Top" UseLayoutRounding="True">
+                <Path Data="M81.114,30.146C73.196,11.725,60.456-2.306,54.009,0.316C43.062,4.765,60.53,26.133,6.774,47.984
+		                                c-4.643,1.887-5.82,9.441-3.877,13.957c1.939,4.515,8.291,9.01,12.936,7.123c0.803-0.326,3.754-1.275,3.754-1.275
+		                                c3.316,4.45,6.787,1.811,8.018,4.639c1.479,3.398,4.697,10.785,5.789,13.298c1.096,2.511,3.576,4.837,5.377,4.153
+		                                c1.795-0.684,7.91-3.011,10.25-3.901c2.338-0.89,2.896-2.974,2.182-4.619c-0.771-1.772-3.932-2.292-4.832-4.36
+		                                c-0.902-2.068-3.848-8.696-4.695-10.785c-1.152-2.841,1.295-5.152,4.85-5.522c24.467-2.55,29.041,12.561,37.371,9.173
+		                                C90.343,67.243,89.03,48.568,81.114,30.146z M78.358,60.03c-1.432,0.582-11.061-7.013-17.215-21.334
+		                                c-6.152-14.318-5.379-27.408-3.949-27.989c1.43-0.582,10.822,8.58,16.975,22.898C80.321,47.923,79.79,59.448,78.358,60.03z"
+                                  Fill="#ff2b2b" Opacity=".7" Stretch="Uniform" VerticalAlignment="Center">
+                </Path>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="DefaultChannelLabelTemplate">
+            <TextBlock  Foreground="{Binding Channel, Converter={StaticResource ChatColorConverter}}" 
+                        Opacity=".5" 
+                        FontWeight="DemiBold" 
+                        FontSize="11"
+                        FontFamily="{StaticResource Frutiger}"
+                        HorizontalAlignment="Right" 
+                        VerticalAlignment="Top"
+                        TextAlignment="Center"
+                        Visibility="Visible"
+                        TextTrimming="CharacterEllipsis"
+                        MinWidth="33"
+                        Margin="0,-1,0,0"
+                        Text="{Binding Channel, Converter={StaticResource ChatChannelNameConverter}}"
+                                />
+        </DataTemplate>
+        <DataTemplate x:Key="EnchantChannelLabelTemplate">
+            <Grid>
+                <TextBlock  Foreground="{Binding Channel, Converter={StaticResource ChatColorConverter}}" 
+                        Opacity=".8" 
+                        FontWeight="DemiBold" 
+                        FontSize="11"
+                        FontFamily="{StaticResource Frutiger}"
+                        HorizontalAlignment="Right" 
+                        VerticalAlignment="Top"
+                        TextAlignment="Center"
+                        Visibility="Visible"
+                        TextTrimming="CharacterEllipsis"
+                        MinWidth="33"
+                        Margin="0,-1,0,0"
+                        Text="{Binding Channel, Converter={StaticResource ChatChannelNameConverter}}"
+                                />
+                <Border Width="Auto"
+                     Height="Auto"
+                        CornerRadius="5"
+                     Margin="4,-2,2,3"
+                     Opacity=".3"
+                     Background="{Binding Channel, Converter={StaticResource ChatColorConverter}}"
+
+                     />
+            </Grid>
+        </DataTemplate>
+
+        <templateselectors:ChannelLabelDataTemplateSelector x:Key="ChannelLabelTemplateSelector"
+                                             NormalChannelDataTemplate="{StaticResource DefaultChannelLabelTemplate}"
+                                             WhisperChannelDataTemplate="{StaticResource WhisperChannelLabelTemplate}" 
+                                             MegaphoneChannelDataTemplate="{StaticResource MegaphoneChannelLabelTemplate}"
+                                             EnchantChannelDataTemplate="{StaticResource EnchantChannelLabelTemplate}"/>
+        <!--Author label templates-->
+        <DataTemplate x:Key="DefaultAuthorTemplate">
+            <controls:OutlinedTextBlock  Margin="3,0,3,0" 
+                        Fill="{Binding Channel, Converter={StaticResource ChatColorConverter}}" 
+                        FontSize="14"
+                        HorizontalAlignment="Stretch"
+                        TextAlignment="Left"
+                        FontWeight="SemiBold"
+                        FontFamily="{StaticResource Frutiger}"
+                        Width="Auto"
+                        MinWidth="0"
+                        UseLayoutRounding="True"
+                        Opacity=".9"
+                        Text="{Binding Author}"
+                        Cursor="Hand"
+                        TextTrimming="CharacterEllipsis"
+                        Stroke="#9000"
+                        StrokeThickness="3"                       
+                        >
+
+            </controls:OutlinedTextBlock>
+
+        </DataTemplate>
+        <DataTemplate x:Key="SystemAuthorTemplate">
+            <Ellipse Width="10"
+                     Height="10"
+                     Margin="2,3,2,4"
+                     Opacity=".5"
+                     Fill="{Binding Channel, Converter={StaticResource ChatColorConverter}}"
+                     />
+        </DataTemplate>
+        <templateselectors:AuthorLabelTemplateSelector x:Key="AuthorTemplateSelector"
+                                        DefaultAuthorTemplate="{StaticResource DefaultAuthorTemplate}"
+                                        SystemAuthorTemplate="{StaticResource SystemAuthorTemplate}"
+                                        >
+
+        </templateselectors:AuthorLabelTemplateSelector>
+        <DataTemplate x:Key="LfgTemplate">
+            <chatcontrols:LFGcontrol Margin="1"></chatcontrols:LFGcontrol>
+        </DataTemplate>
     </Application.Resources>
 </Application>

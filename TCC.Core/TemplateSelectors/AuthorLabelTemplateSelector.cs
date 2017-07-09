@@ -47,6 +47,8 @@ namespace TCC.TemplateSelectors
                     return SystemAuthorTemplate;
                 case ChatChannel.Emote:
                     return SystemAuthorTemplate;
+                case ChatChannel.TCC:
+                    return SystemAuthorTemplate;
                 default:
                     return DefaultAuthorTemplate;
             }

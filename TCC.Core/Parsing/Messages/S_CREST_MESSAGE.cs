@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +20,9 @@ namespace TCC.Parsing.Messages
             Type = reader.ReadUInt32();
             SkillId = reader.ReadUInt32();
 
-            Console.WriteLine(nameof(S_CREST_MESSAGE));
-            Console.WriteLine("\t Type: {0}", Type);
-            Console.WriteLine("\t SkillId: {0}", SkillId);
+            //Debug.WriteLine(nameof(S_CREST_MESSAGE));
+            //Debug.WriteLine("\t Type: {0}", Type);
+            //Debug.WriteLine("\t SkillId: {0}", SkillId);
         }
     }
 }

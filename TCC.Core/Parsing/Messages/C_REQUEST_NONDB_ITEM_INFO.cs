@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace TCC.Parsing.Messages
             item = reader.ReadInt32();
             unk1 = reader.ReadInt32();
             unk2 = reader.ReadInt32();
-            Console.WriteLine("item:{0} unk1:{1} unk2:{2}", item, unk1, unk2);
+            //Debug.WriteLine("item:{0} unk1:{1} unk2:{2}", item, unk1, unk2);
         }
     }
 }

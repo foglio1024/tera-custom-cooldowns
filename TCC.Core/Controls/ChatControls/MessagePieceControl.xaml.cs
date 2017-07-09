@@ -30,12 +30,13 @@ namespace TCC.Controls
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            if (_context != null) return;
             _context = (MessagePiece)DataContext;
         }
-        private void OutlinedTextBlock_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (_context.Type != MessagePieceType.Item) return;
-            if (_context.BoundType == BoundType.Equip || _context.ItemUid != 0)
+            if (_context.BoundType == BoundType.Equip || _context.ItemUid > 0)
             {
                 ProxyInterop.SendExTooltipMessage(_context.ItemUid, _context.OwnerName);
             }

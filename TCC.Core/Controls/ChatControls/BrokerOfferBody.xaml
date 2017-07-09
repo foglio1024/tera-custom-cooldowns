@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="TCC.Controls.ChatControls.BrokerOfferBody"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TCC.Controls.ChatControls"
+             xmlns:controls="clr-namespace:TCC.Controls"
+             mc:Ignorable="d" >
+    <Grid HorizontalAlignment="Left" Margin="3,0" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition x:Name="r1" Height="Auto"/>
+            <RowDefinition x:Name="r2" Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <controls:OutlinedTextBlock VerticalAlignment="Center" Text="Starting price" Grid.Row="1" Fill="{Binding Channel, Converter={StaticResource ChatColorConverter}}" FontSize="14" StrokeThickness="3" Stroke="#9000" Margin="5,0,5,0" FontFamily="{StaticResource Frutiger}"/>
+        <controls:OutlinedTextBlock VerticalAlignment="Center" Text="Offered price " Grid.Row="2" Fill="{Binding Channel, Converter={StaticResource ChatColorConverter}}" FontSize="14" StrokeThickness="3" Stroke="#9000" Margin="5,0,5,0" FontFamily="{StaticResource Frutiger}"/>
+        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="10" Margin="0,0,0,2">
+            <ContentControl x:Name="itemAmount" Content="{Binding Amount}" ContentTemplate="{StaticResource SimpleTemplate}"/>
+            <ContentControl x:Name="itemName" Content="{Binding Listing}" ContentTemplate="{StaticResource MessageBodyTemplate}"/>
+            <Border Cursor="Hand" 
+                x:Name="acceptButton"
+                PreviewMouseLeftButtonDown="Accept"
+                Grid.Row="1" Background="#50f0"
+                Grid.RowSpan="2" 
+                Grid.Column="3" 
+                Margin="10,-1,3,0" 
+                CornerRadius="10" 
+                Padding="0,0,6,0" 
+                VerticalAlignment="Center">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="ACCEPT" Foreground="#fff" Margin="2,0" VerticalAlignment="Center" Grid.Column="1"></TextBlock>
+                    <Path Cursor="Hand" Grid.RowSpan="4" Grid.Row="1" 
+                      Margin="-2,-2,0,0" VerticalAlignment="Center" Fill="{StaticResource ChatGuild}" 
+                      HorizontalAlignment="Left"
+                      Data="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19
+                      8l-9 9z"></Path>
+
+                </Grid>
+            </Border>
+            <Border Cursor="Hand" 
+                x:Name="declineButton"
+                Background="#5f55" 
+                PreviewMouseLeftButtonDown="Decline"
+                Grid.Row="1" 
+                Grid.RowSpan="2"
+                Grid.Column="4" 
+                Margin="3,-1,3,0" 
+                VerticalAlignment="Center"
+                CornerRadius="10" 
+                Padding="0,0,6,0" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="DECLINE" Margin="2,0" Foreground="#fff" VerticalAlignment="Center" Grid.Column="1"></TextBlock>
+                    <Path Cursor="Hand" Margin="-2,-2,0,0" 
+                      VerticalAlignment="Center" HorizontalAlignment="Left"
+                      Fill="{StaticResource hpColor}" 
+                      Data="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 
+                      15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/>
+                </Grid>
+            </Border>
+
+        </StackPanel>
+        <ContentControl HorizontalAlignment="Left" x:Name="startPrice" Grid.Row="1" Grid.Column="1" Content="{Binding StartingPrice}" VerticalAlignment="Center" ContentTemplate="{StaticResource MoneyTemplate}"/>
+        <ContentControl HorizontalAlignment="Left" x:Name="offeredPrice" Grid.Row="2" Grid.Column="1" Content="{Binding OfferedPrice}" VerticalAlignment="Center" ContentTemplate="{StaticResource MoneyTemplate}"/>
+    </Grid>
+</UserControl>

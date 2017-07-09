@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -31,29 +32,6 @@ namespace TCC.Data.Databases
             public void AddConnectedSkill(int id)
             {
                 ConnectedSkills.Add(id);
-            }
-        }
-
-        public static void CheckIcons()
-        {
-            foreach (var classDict in Skills)
-            {
-                foreach (var skill in classDict.Value)
-                {
-
-                    string filePath = Environment.CurrentDirectory + "/resources/images/" + skill.Value.IconName.Replace('.', '/') + ".png";
-                    if (File.Exists(filePath))
-                    {
-                        Console.Write("\r[Icon Check] - Abnormality ID:{0} \t File name:{1} \t OK", skill.Value.Id, skill.Value.IconName);
-                    }
-                    else
-                    {
-                        if (skill.Value.IconName != "")
-                        {
-                            Console.WriteLine("[Icon Check] - File name:{1} \t Path:{0}", filePath, skill.Value.IconName);
-                        }
-                    }
-                }
             }
         }
 
@@ -115,12 +93,10 @@ namespace TCC.Data.Databases
                 {
                     if ((int)id == connectedSkill)
                     {
-                        //Console.WriteLine("GetSkillByConnectedId({0}, {1}) => {2}.", id, c, skillConnection.Id);
                         return skillConnection.Id;
                     }
                 }
             }
-            //Console.WriteLine("GetSkillByConnectedId({0}, {1}) => failed.", id, c);
             return -1;
         }
         public static string SkillIdToName(uint id, Class c)

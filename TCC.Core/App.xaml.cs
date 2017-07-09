@@ -65,10 +65,14 @@ namespace TCC
             {
                 SkillManager.Clear();
                 WindowManager.TrayIcon.Icon = WindowManager.ConnectedIcon;
+                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Connected</FONT>"));
+
 
             };
             TeraSniffer.Instance.EndConnection += () =>
             {
+                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Disconnected</FONT>"));
+
                 SkillManager.Clear();
                 WindowManager.TrayIcon.Icon = WindowManager.DefaultIcon;
                 ProxyInterop.CloseConnection();
@@ -79,7 +83,9 @@ namespace TCC
             var v = Assembly.GetExecutingAssembly().GetName().Version;
             var ver = String.Format("TCC v{0}.{1}.{2}", v.Major, v.Minor, v.Build);
 
-            ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.Notify, "System", "<FONT>"+ver+"</FONT>"));
+            ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>"+ver+"</FONT>"));
+
+
         }
 
         public static void CloseApp()
@@ -90,5 +96,8 @@ namespace TCC
             ProxyInterop.CloseConnection();
             Environment.Exit(0);
         }
+
+
+
     }
 }

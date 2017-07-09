@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ using System.Windows.Threading;
 using TCC.Controls;
 using TCC.Controls.ChatControls;
 using TCC.Data;
+using TCC.Parsing;
 using TCC.ViewModels;
 
 namespace TCC.Windows
@@ -37,16 +39,22 @@ namespace TCC.Windows
             //_scroller = (ScrollViewer)VisualTreeHelper.GetChild(itemsControl, 0);
             //_scroller.ScrollChanged += Scroller_ScrollChanged;
             testTimer = new DispatcherTimer();
-            testTimer.Interval = TimeSpan.FromMilliseconds(100);
+            testTimer.Interval = TimeSpan.FromMilliseconds(1000);
             testTimer.Tick += (s, ev) =>
             {
                 ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.Say, "Author", "<FONT>SayMessage " + _testCounter + "</FONT>"));
-                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.Party, "Author2", "<FONT>SayMessage " + _testCounter + "</FONT>"));
-                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.Guild, "Author3", "<FONT>SayMessage " + _testCounter + "</FONT>"));
+                if(_testCounter % 5 == 0) ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.Say, "Author", "<FONT>Testtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt Messageeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee </FONT>"));
+
                 _testCounter++;
             };
+            _currentContent = itemsControl;
+            //ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.Say, "Author", "<FONT>Test Message </FONT>"));
+            //ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.Say, "Author", "<FONT>Testtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt Messageeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee </FONT>"));
+            //ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.Say, "Author", "<FONT>Testtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt Messageeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee Testtttttttttttttttttttttttttttttttttttttttt  </FONT>"));
+            //ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.Say, "Author", "<FONT>Testtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt Messageeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee Testtttttttttttttttttttttttttttttttttttttttt Messageeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee </FONT>"));
+
             //testTimer.Start();
-            //for (int i = 0; i < 100; i++)
+            //for (int i = 0; i < 20; i++)
             //{
             //    ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.Guild, "Author" + i, "<FONT>GuildMessage " + i + "</FONT>"));
 
@@ -57,6 +65,8 @@ namespace TCC.Windows
             //    ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.System, "System", "<FONT>SysMessage " + i + "</FONT>"));
 
             //}
+
+            //ChatWindowViewModel.Instance.LFGs.Add(new LFG(1, "asd", "Aasdasd", false));
         }
 
 
@@ -82,7 +92,15 @@ namespace TCC.Windows
 
         private void TccWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            DragMove();
+            try
+            {
+                DragMove();
+
+            }
+            catch (Exception)
+            {
+
+            }
         }
         private void SWPreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
@@ -96,6 +114,7 @@ namespace TCC.Windows
                 _bottom = false;
 
             }
+
         }
         public void OpenTooltip()
         {
@@ -130,6 +149,15 @@ namespace TCC.Windows
         {
 
             var s = sender as FrameworkElement;
+            AnimateTabRect(s);
+            _currentContent = tabControl.SelectedContent as ItemsControl;
+            var b = (Border)VisualTreeHelper.GetChild(_currentContent, 0);
+            var sw = (ScrollViewer)VisualTreeHelper.GetChild(b, 0);
+
+            sw.ScrollToBottom();
+        }
+        private void AnimateTabRect(FrameworkElement s)
+        {
             var w = s.ActualWidth;
             Point r = s.TranslatePoint(new Point(0, 0), (UIElement)s.Parent);
             var sizeAn = new DoubleAnimation(w, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() };
@@ -138,41 +166,85 @@ namespace TCC.Windows
             selectionRect.BeginAnimation(WidthProperty, sizeAn);
             selectionRect.RenderTransform.BeginAnimation(TranslateTransform.XProperty, posAn);
 
-            var t = tabControl.SelectedContent as ItemsControl;
-            var b = (Border)VisualTreeHelper.GetChild(t, 0);
-            var sw = (ScrollViewer)VisualTreeHelper.GetChild(b, 0);
-
-            sw.ScrollToBottom();
-
-
         }
 
+
+        ItemsControl _currentContent;
+        VirtualizingStackPanel _currentPanel;
         private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            var t = tabControl.SelectedContent as ItemsControl;
-            var sp = GetInnerStackPanel(t);
-            if (sp.Children.Count > 2)
+            //if (!_bottom) return;
+            _currentContent = tabControl.SelectedContent as ItemsControl;
+            _currentPanel = GetInnerStackPanel(_currentContent);
+            var sw = (ScrollViewer)sender;
+            Rect svBounds = LayoutInformation.GetLayoutSlot(sw);
+            var testRect = new Rect(svBounds.Top-5, svBounds.Left, svBounds.Width, svBounds.Height+10);
+            List<FrameworkElement> visibleItems = GetVisibleItems(testRect);
+
+
+            foreach (var item in visibleItems)
             {
-                for (int i = 0; i < sp.Children.Count; i++)
+                var i = visibleItems.IndexOf(item);
+                if (i > 4)
                 {
-                    var el = (sp.Children[i] as FrameworkElement);
-                    if(i <= 2)
-                    {
-                        if (el != null && el.ActualHeight > 22)
-                        {
-                            // set some property in (ChatMessage)DataContext to indicate that the message is collapsed
-                            //el.Height = 22;
-                        }
-                    }
-                    else
-                    {
-                        el.Height = Double.NaN;
-                    }
+                    continue;
+                }
+                else
+                {
+
                 }
 
+                var dc = ((ChatMessage)item.DataContext);
+                if (dc.Channel == ChatChannel.Bargain) return;
+                if (GetMessageRows(item.ActualHeight) > 1)
+                {
+                    var lastItemRows = GetMessageRows(visibleItems.Last().ActualHeight);
+                    Debug.WriteLine("Rows = {0} - LastItemRows = {1}", dc.Rows, lastItemRows);
+                    if(dc.Rows - lastItemRows >= 1)
+                    {
+                        dc.Rows = dc.Rows - lastItemRows;
+                        dc.IsContracted = true;
+                    }
+                }
+                else
+                {
+
+                }
             }
         }
+        private List<FrameworkElement> GetVisibleItems(Rect svViewportBounds)
+        {
+            List<FrameworkElement> result = new List<FrameworkElement>();
+            if (_currentPanel.Children.Count > 2)
+            {
+                for (int i = 0; i < _currentPanel.Children.Count; i++)
+                {
+                    var container = (_currentPanel.Children[i] as FrameworkElement);
 
+                    if (container != null)
+                    {
+                        var offset = VisualTreeHelper.GetOffset(container);
+                        var bounds = new Rect(offset.X, offset.Y, container.ActualWidth, container.ActualHeight);
+
+                        if (svViewportBounds.Contains(bounds) || svViewportBounds.IntersectsWith(bounds))
+                        {
+                            result.Add(container);
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+        public int GetMessageRows(double height)
+        {
+            Debug.WriteLine("Checking rows:{0}", height);
+            if (height < 28) return 1;
+            else if (height < 46) return 2;
+            else if (height < 64) return 3;
+            else if (height < 82) return 4;
+            else if (height < 100) return 5;
+            else return 6;
+        }
         private VirtualizingStackPanel GetInnerStackPanel(FrameworkElement element)
         {
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(element); i++)
@@ -193,38 +265,11 @@ namespace TCC.Windows
             return null;
 
         }
+        private void TccWindow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            PacketProcessor.SendFakeBamMessage();
+            //ChatWindowViewModel.Instance.LFGs.Clear();
+        }
     }
 
 }
-//namespace TCC
-//{
-//    public static class ChatWindowBrushes
-//    {
-//        public static SolidColorBrush Say = new SolidColorBrush(Colors.White);
-//        public static SolidColorBrush Party = new SolidColorBrush(Color.FromRgb(0, 113, 187));
-//        public static SolidColorBrush Guild = new SolidColorBrush(Color.FromRgb(64, 251, 64));
-//        public static SolidColorBrush Area = new SolidColorBrush(Color.FromRgb(186, 130, 242));
-//        public static SolidColorBrush Trade = new SolidColorBrush(Color.FromRgb(192, 122, 129));
-//        public static SolidColorBrush Greet = new SolidColorBrush(Color.FromRgb(220, 220, 220));
-//        public static SolidColorBrush PartyNotice = new SolidColorBrush(Color.FromRgb(142, 255, 255));
-//        public static SolidColorBrush RaidNotice = new SolidColorBrush(Color.FromRgb(242, 135, 48));
-//        public static SolidColorBrush Emote = new SolidColorBrush(Color.FromRgb(255, 185, 185));
-//        public static SolidColorBrush Global = new SolidColorBrush(Color.FromRgb(240, 255, 137));
-//        public static SolidColorBrush Raid = new SolidColorBrush(Color.FromRgb(255, 255, 0));
-//        public static SolidColorBrush Megaphone = new SolidColorBrush(Color.FromRgb(0, 216, 255));
-//        public static SolidColorBrush GuildAd = new SolidColorBrush(Color.FromRgb(112, 196, 1));
-//        public static SolidColorBrush Private = new SolidColorBrush(Color.FromRgb(255, 95, 56));
-//        public static SolidColorBrush Whisper = new SolidColorBrush(Color.FromRgb(244, 121, 244));
-//        public static SolidColorBrush SystemGeneric = new SolidColorBrush(Color.FromRgb(0xc8, 0xc8, 0xb6));
-//        public static SolidColorBrush SystemNotify = new SolidColorBrush(Color.FromRgb(0xc8, 0xc8, 0xb6));
-//        public static SolidColorBrush SystemEvent = new SolidColorBrush(Color.FromRgb(0xc8, 0xc8, 0xb6));
-//        public static SolidColorBrush SystemError = new SolidColorBrush(Colors.Red);
-//        public static SolidColorBrush SystemGroup = new SolidColorBrush(Color.FromRgb(0xd9, 0xd9, 0xd9));
-//        public static SolidColorBrush Deathmatch = new SolidColorBrush(Color.FromRgb(0xd9, 0xd9, 0xd9));
-//        public static SolidColorBrush ContractAlert = new SolidColorBrush(Color.FromRgb(0xd9, 0xd9, 0xd9));
-//        public static SolidColorBrush GroupAlert = new SolidColorBrush(Color.FromRgb(0xd9, 0xd9, 0xd9));
-//        public static SolidColorBrush Loot = new SolidColorBrush(Color.FromRgb(0xd9, 0xd9, 0xd9));
-//        public static SolidColorBrush Exp = new SolidColorBrush(Color.FromRgb(0xd9, 0xd9, 0xd9));
-//        public static SolidColorBrush Money = new SolidColorBrush(Color.FromRgb(0xd9, 0xd9, 0xd9));
-//    }
-//}

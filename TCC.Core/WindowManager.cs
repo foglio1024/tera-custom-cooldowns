@@ -158,7 +158,7 @@ namespace TCC
             charWindowThread.Name = "Character window thread";
             charWindowThread.SetApartmentState(ApartmentState.STA);
             charWindowThread.Start();
-            Console.WriteLine("Char window loaded");
+            Debug.WriteLine("Char window loaded");
         }
         static void LoadCooldownWindow()
         {
@@ -173,7 +173,7 @@ namespace TCC
             cooldownWindowThread.Name = "Cooldown bar thread";
             cooldownWindowThread.SetApartmentState(ApartmentState.STA);
             cooldownWindowThread.Start();
-            Console.WriteLine("Cd window loaded");
+            Debug.WriteLine("Cd window loaded");
 
 
         }
@@ -193,7 +193,7 @@ namespace TCC
             bossGaugeThread.Name = "Boss gauge thread";
             bossGaugeThread.SetApartmentState(ApartmentState.STA);
             bossGaugeThread.Start();
-            Console.WriteLine("Boss window loaded");
+            Debug.WriteLine("Boss window loaded");
 
         }
         static void LoadBuffBarWindow()
@@ -211,7 +211,7 @@ namespace TCC
             buffBarThread.Name = "Buff bar thread";
             buffBarThread.SetApartmentState(ApartmentState.STA);
             buffBarThread.Start();
-            Console.WriteLine("Buff window loaded");
+            Debug.WriteLine("Buff window loaded");
 
 
         }
@@ -232,7 +232,7 @@ namespace TCC
             groupWindowThread.Name = "Group window thread";
             groupWindowThread.SetApartmentState(ApartmentState.STA);
             groupWindowThread.Start();
-            Console.WriteLine("Group window loaded");
+            Debug.WriteLine("Group window loaded");
 
         }
         static void LoadChatWindow()
@@ -249,7 +249,7 @@ namespace TCC
             chatWindowThread.Name = "Chat thread";
             chatWindowThread.SetApartmentState(ApartmentState.STA);
             chatWindowThread.Start();
-            Console.WriteLine("Chat window loaded");
+            Debug.WriteLine("Chat window loaded");
 
         }
         static void LoadClassWindow()
@@ -267,7 +267,7 @@ namespace TCC
             t.Name = "Class bar thread";
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
-            Console.WriteLine("Class window loaded");
+            Debug.WriteLine("Class window loaded");
 
 
         }
@@ -281,7 +281,7 @@ namespace TCC
                 del.DynamicInvoke();
                 while (waiting) { }
             }
-            Console.WriteLine("Windows loaded");
+            Debug.WriteLine("Windows loaded");
 
         }
         public static void Init()

@@ -7,8 +7,6 @@ namespace TCC.Converters
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            //Console.WriteLine("Converting stamina value.");
-
             var v = System.Convert.ToSingle(values[0]);
             var m = System.Convert.ToInt32(values[1]);
             if (m == 0)

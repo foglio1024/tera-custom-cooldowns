@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,15 +34,15 @@ namespace TCC.Parsing.Messages
 
             SysMessage = reader.ReadTeraString();
 
-            Console.WriteLine(nameof(S_SYSTEM_MESSAGE_LOOT_ITEM) + " " + SysMessage);
-            Console.WriteLine("\t {0} x{1}", ItemId ,Amount);
-            Console.WriteLine("\t u1:{0}", unk1);
-            Console.WriteLine("\t u2:{0}", unk2);
-            Console.WriteLine("\t u3:{0}", unk3);
-            Console.WriteLine("\t u4:{0}", unk4);
-            Console.WriteLine("\t u5:{0}", unk5);
-            Console.WriteLine("\t u6:{0}", unk6);
-            Console.WriteLine("\t u7:{0}", unk7);
+            Debug.WriteLine(nameof(S_SYSTEM_MESSAGE_LOOT_ITEM) + " " + SysMessage);
+            Debug.WriteLine("\t {0} x{1}", ItemId ,Amount);
+            Debug.WriteLine("\t u1:{0}", unk1);
+            Debug.WriteLine("\t u2:{0}", unk2);
+            Debug.WriteLine("\t u3:{0}", unk3);
+            Debug.WriteLine("\t u4:{0}", unk4);
+            Debug.WriteLine("\t u5:{0}", unk5);
+            Debug.WriteLine("\t u6:{0}", unk6);
+            Debug.WriteLine("\t u7:{0}", unk7);
         }
     }
 }

@@ -7,10 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <DataTemplate x:Key="skill">
+        <DataTemplate x:Key="FixedSkillIndicator">
             <local:FixedSkillControl/>
         </DataTemplate>
-        <DataTemplate x:Key="skill2">
+        <DataTemplate x:Key="DefaultSkillIndicator">
             <local:SkillIconControl />
         </DataTemplate>
     </UserControl.Resources>
@@ -29,7 +29,7 @@
         </Border>
             <!--Main skills grid-->
             <Grid Grid.Row="1" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center">
-                <ItemsControl Name="mainSkills" ItemTemplate="{StaticResource skill}" Width="Auto" Height="Auto" ItemsSource="{Binding MainSkills}" BorderThickness="0" BorderBrush="Red">
+            <ItemsControl Name="mainSkills" ItemTemplate="{StaticResource FixedSkillIndicator}" Width="Auto" Height="Auto" ItemsSource="{Binding MainSkills}" BorderThickness="0" BorderBrush="Red">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="{Binding MainSkills.Count}" Rows="1" Margin="0,0,0,0" IsItemsHost="True" Width="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Center" />
@@ -44,7 +44,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <!--Secondary skills-->
-            <ItemsControl Name="secSkills" ItemTemplate="{StaticResource skill}" Width="Auto" VerticalAlignment="Stretch" ItemsSource="{Binding SecondarySkills}" BorderBrush="Orange" BorderThickness="0">
+            <ItemsControl Name="secSkills" ItemTemplate="{StaticResource FixedSkillIndicator}" Width="Auto" VerticalAlignment="Stretch" ItemsSource="{Binding SecondarySkills}" BorderBrush="Orange" BorderThickness="0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="{Binding SecondarySkills.Count}" Rows="1" Margin="0,0,0,0" IsItemsHost="True" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center"/>
@@ -53,7 +53,7 @@
             </ItemsControl>
 
             <!--Other skills-->
-            <ItemsControl Name="otherSkills" ItemTemplate="{StaticResource skill2}" Width="Auto"  VerticalAlignment="Stretch" Grid.Column="1" HorizontalAlignment="Left" ItemsSource="{Binding OtherSkills}" BorderBrush="Green" BorderThickness="0">
+            <ItemsControl Name="otherSkills" ItemTemplate="{StaticResource DefaultSkillIndicator}" Width="Auto"  VerticalAlignment="Stretch" Grid.Column="1" HorizontalAlignment="Left" ItemsSource="{Binding OtherSkills}" BorderBrush="Green" BorderThickness="0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Margin="0,0,0,0" IsItemsHost="True" Width="Auto" Height="Auto" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center"/>

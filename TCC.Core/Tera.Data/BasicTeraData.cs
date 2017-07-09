@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -112,7 +113,7 @@ namespace Data
 
                         var response = client.PostAsync("http://diclah.com/~yukikoo/debug/debug.php", formContent);
                         var responseString = response.Result.Content.ReadAsStringAsync();
-                        Console.WriteLine(responseString.Result);
+                        Debug.WriteLine(responseString.Result);
                     }
                 }
                 catch

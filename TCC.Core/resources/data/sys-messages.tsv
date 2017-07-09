@@ -2088,7 +2088,7 @@
 201	SMT_GUILD_WAR_WITHDRAW	<font color = '#5efdff'>{GuildName1}</font> withdrew GvG battle declaration against <font color = '#5efdff'>{GuildName2}</font>.
 201	SMT_GUILD_WAR_WITHDRAW_DISMISS_1	The GvG battle declared against <font color = '#5efdff'>{GuildName2}</font> by <font color = '#5efdff'>{GuildName1}</font> has been canceled due to guild disband.
 201	SMT_GUILD_WAR_WITHDRAW_DISMISS_2	The GvG battle declared by <font color = '#5efdff'>{GuildName1}</font> has been canceled due to guild disband by <font color = '#5efdff'>{GuildName2}</font>.
-201	SMT_GUILD_WAR_WITHDRAW_GUILDMONEY	<font color = '#5efdff'>{GuildName1}</font></font> withdrew GvG battle declaration against <font color = '#5efdff'>{GuildName2}</font> due to lack of guild funds.
+201	SMT_GUILD_WAR_WITHDRAW_GUILDMONEY	<font color = '#5efdff'>{GuildName1}</font> withdrew GvG battle declaration against <font color = '#5efdff'>{GuildName2}</font> due to lack of guild funds.
 302	SMT_SKILL_LOCKON_NOT_ABLE_TARGET	Invalid target.
 302	SMT_CANNOT_FIX_VEHICLE	It is full.
 302	SMT_CANNOT_ENTER_DUNGEON_PHASE	You cannot enter the dungeon because your current phase is too high.

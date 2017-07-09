@@ -8,19 +8,6 @@
              mc:Ignorable="d"
              Loaded="UserControl_Loaded"
              Unloaded="UserControl_Unloaded" Margin="0">
-    <UserControl.Resources>
-        <converters:ClassImageConverter x:Key="classToImageConv"/>
-        <converters:LaurelImageConverter x:Key="laurelToImageConv"/>
-        <converters:ClassToFillConverter x:Key="classToFillConv"/>
-        <converters:AliveToOpacityConverter x:Key="aliveToOpacityConv"/>
-        <converters:ReadyToOpacityConverter x:Key="readyToOpacityConv"/>
-        <converters:ReadyToIconConverter x:Key="readyToIconConv"/>
-        <converters:ReadyToColorConverter x:Key="readyToColorConv"/>
-        <converters:HPbarColorConverter x:Key="hpDebuffColConv"/>
-        <DataTemplate x:Key="abnorm">
-            <controls:AbnormalityIndicator />
-        </DataTemplate>
-    </UserControl.Resources>
     <Grid Height="Auto" Margin="2" Width="173" Name="rootGrid" ToolTip="{Binding Name}" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>

@@ -6,9 +6,6 @@
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:converters="clr-namespace:TCC.Converters"
              mc:Ignorable="d" Loaded="Control_Loaded">
-    <UserControl.Resources>
-        <converters:IconConverter x:Key="iconConv"/>
-    </UserControl.Resources>
     <UserControl.LayoutTransform>
         <ScaleTransform ScaleX=".9" ScaleY=".9"/>
     </UserControl.LayoutTransform>

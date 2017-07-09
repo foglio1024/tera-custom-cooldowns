@@ -13,14 +13,6 @@
              UseLayoutRounding="True" 
              Visibility="{Binding Visible}"
              >
-    <UserControl.Resources>
-        <DataTemplate x:Key="BossBuffDataTemplate">
-            <controls:AbnormalityIndicator/>
-        </DataTemplate>
-        <converters:EntityIdToNameConverter x:Key="userIdToName"/>
-        <converters:AggroTypeToFill x:Key="aggroTypeToFill"/>
-        <converters:BossHPbarColorConverter x:Key="barColorConv"/>
-    </UserControl.Resources>
     <Grid Width="Auto" Name="rootGrid">
         <Grid.RowDefinitions>
             <RowDefinition />

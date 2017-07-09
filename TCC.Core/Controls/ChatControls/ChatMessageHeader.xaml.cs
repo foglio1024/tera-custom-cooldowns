@@ -30,6 +30,7 @@ namespace TCC.Controls
         private void OutlinedTextBlock_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var context = (ChatMessage)DataContext;
+            if (context.Author == "System") return;
             WindowManager.ChatWindow.CurrentSender = sender;
             ProxyInterop.SendAskInteractiveMessage(PacketProcessor.ServerId, context.Author);
         }

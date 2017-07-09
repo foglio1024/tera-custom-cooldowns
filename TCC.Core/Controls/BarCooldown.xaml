@@ -7,9 +7,6 @@
              xmlns:converters="clr-namespace:TCC.Converters"
              mc:Ignorable="d" Loaded="UserControl_Loaded" Width="Auto"
             >
-    <UserControl.Resources>
-        <converters:IconConverter x:Key="iconConv"/>
-    </UserControl.Resources>
 
     <Grid  HorizontalAlignment="Stretch">
         <!--Top border-->

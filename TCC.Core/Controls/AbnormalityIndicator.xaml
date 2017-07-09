@@ -11,17 +11,6 @@
              Loaded="UserControl_Loaded"
              FlowDirection="LeftToRight" Width="Auto" Height="Auto"
              Unloaded="UserControl_Unloaded" Margin="{Binding IndicatorMargin}">
-    <UserControl.Resources>
-        <converters:IconConverter x:Key ="iconConv"/>
-        <converters:AbnormalityStrokeConverter x:Key="strokeConv"/>
-        <converters:DurationLabelConverter x:Key="durationConv"/>
-        <converters:StacksToVisibilityConverter x:Key="stacksToVisibilityConv"/>
-        <converters:DurationToVisibilityConverter x:Key="durationToVisibilityConv"/>
-        <converters:SizeToStackLabelSizeConverter x:Key="sizeToStackLabelSizeConv"/>
-        <converters:SizeToDurationLabelSizeConverter x:Key="sizeToDurationLabelSizeConv"/>
-        <converters:SizeToDurationLabelMarginConverter x:Key="sizeToDurationLabelMarginConv"/>
-    </UserControl.Resources>
-
     <Grid Margin="0" Name="rootGrid"  ToolTipService.InitialShowDelay="0" ToolTipService.ShowDuration="50000" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

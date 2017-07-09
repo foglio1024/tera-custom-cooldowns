@@ -10,49 +10,21 @@
              Loaded="UserControl_Loaded" 
              MouseEnter="UserControl_MouseEnter"
              MouseLeave="UserControl_MouseLeave">
-    <UserControl.Resources>
-        <converters:TypeToCursorConverter x:Key="typeToCursorConv"/>
-        <DataTemplate x:Key="SimpleTemplate">
-            <controls:OutlinedTextBlock Fill="{Binding Color}"
-                                        Text="{Binding Text}" 
-                                        Cursor="{Binding Type, Converter={StaticResource typeToCursorConv}}"
-                                        PreviewMouseLeftButtonDown="OutlinedTextBlock_PreviewMouseLeftButtonDown"
-                                        Stroke="#9000"
-                                        StrokeThickness="3"
-                                        FontSize="15"
-                                        FontFamily="{StaticResource Frutiger}"
-                                        TextWrapping="Wrap"
-                                        FontWeight="Normal"
-                                        Opacity="1"
-                                        TextTrimming="None"
-                                        Margin="{Binding Spaces}"
-                                        >
-            </controls:OutlinedTextBlock>
-        </DataTemplate>
-        <DataTemplate x:Key="MoneyTemplate">
-            <controls:MoneyMessagePiece></controls:MoneyMessagePiece>
-        </DataTemplate>
-        <ts:MessagePieceDataTemplateSelector x:Key="PieceTemplateSelector"
-                                                   SimpleTemplate="{StaticResource SimpleTemplate}"
-                                                   MoneyTemplate="{StaticResource MoneyTemplate}"
-                                                   QuestTemplate="{StaticResource SimpleTemplate}"
-                                                   PointOfInterestTemplate="{StaticResource SimpleTemplate}"
-                                                   ItemTemplate="{StaticResource SimpleTemplate}"
-                                                   />
-    </UserControl.Resources>
     <Grid HorizontalAlignment="Stretch">
         <Border Name="bgBorder" 
                 HorizontalAlignment="Stretch" 
                 VerticalAlignment="Stretch" 
                 CornerRadius="10" 
-                Cursor="{Binding Type, Converter={StaticResource typeToCursorConv}}"
-                PreviewMouseLeftButtonDown="OutlinedTextBlock_PreviewMouseLeftButtonDown"
+                Cursor="{Binding Type, Converter={StaticResource TypeToCursorConverter}}"
+                PreviewMouseLeftButtonDown="OnMouseDown"
                 Opacity=".2"
                 />
         <ContentControl x:Name="root" 
                         Content="{Binding}" 
                         Margin="0,0,0,0" 
+                        HorizontalAlignment="Right"
                         Visibility="Visible"
+                        PreviewMouseLeftButtonDown="OnMouseDown"
                         ContentTemplateSelector="{StaticResource PieceTemplateSelector}"
                         />
     </Grid>

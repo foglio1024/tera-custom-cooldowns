@@ -8,7 +8,7 @@
         xmlns:data="clr-namespace:TCC.Data"
         xmlns:controls="clr-namespace:TCC.Controls"
         xmlns:chatcontrols="clr-namespace:TCC.Controls.ChatControls"
-        mc:Ignorable="d" SizeToContent="WidthAndHeight" ShowInTaskbar="False" ShowActivated="False" 
+        mc:Ignorable="d" SizeToContent="WidthAndHeight" ShowInTaskbar="False" ShowActivated="False" MouseDoubleClick="TccWindow_MouseDoubleClick"
         Title="ChatWindow" WindowStyle="None" AllowsTransparency="True" Background="Transparent" Topmost="True" Loaded="TccWindow_Loaded" ResizeMode="NoResize">
     <local:TccWindow.DataContext>
         <vm:ChatWindowViewModel />
@@ -19,7 +19,7 @@
         </DataTemplate>
 
     </local:TccWindow.Resources>
-    <Grid Margin="5" Width="Auto" Name="root">
+    <Grid Margin="5" Width="Auto" Name="root" MouseLeftButtonDown="TccWindow_MouseLeftButtonDown">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
@@ -28,7 +28,8 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <Border Background="{StaticResource bgColor}" Opacity=".4" CornerRadius="1" Grid.ColumnSpan="2" Grid.RowSpan="2" BorderThickness="1" BorderBrush="Black" Margin="0,0,0,0" Grid.Row="0" VerticalAlignment="Stretch" />
+        <Border Background="{StaticResource bgColor}" Opacity=".4" 
+ CornerRadius="1" Grid.ColumnSpan="2" Grid.RowSpan="2" BorderThickness="1" BorderBrush="Black" Margin="0,0,0,0" Grid.Row="0" VerticalAlignment="Stretch" />
         <!--Message counter-->
         <TextBlock VerticalAlignment="Top"
                    HorizontalAlignment="Right"
@@ -84,8 +85,8 @@
                 </Style>
                 <Style TargetType="ItemsControl" x:Key="ChatItemsControl">
                     <Setter Property="VirtualizingPanel.IsVirtualizing" Value="True"/>
-                    <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Standard"/>
-                    <Setter Property="Height" Value="200"/>
+                    <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling"/>
+                    <Setter Property="Height" Value="190"/>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate>
@@ -111,8 +112,7 @@
                 <ItemsControl Name="itemsControl" VerticalAlignment="Stretch"
                                VerticalContentAlignment="Top"
                               Style="{StaticResource ChatItemsControl}"
-                                                            ItemsSource="{Binding Instance.AllMessages}"  
-
+                              ItemsSource="{Binding Instance.AllMessages}"  
                               ItemTemplate="{StaticResource ChatMessageTemplate}" 
                               Width="Auto"
                               Grid.Row="1">
@@ -127,7 +127,6 @@
                 </ItemsControl>
 
             </TabItem>
-
             <TabItem Header="GUILD" FontWeight="DemiBold" 
                      VerticalAlignment="Stretch">
                 <ItemsControl Name="guildControl" 
@@ -198,11 +197,16 @@
             <Border Background="{StaticResource bgColor}" CornerRadius="0,0,3,3" VerticalAlignment="Bottom" Height="3" Grid.Row="2"/>
         </Grid>
 
-        <Border Background="{StaticResource bgColor}" Width="Auto" Grid.Column="0" Grid.Row="0"  />
-        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" Visibility="Collapsed">
-            <TextBlock Foreground="Gray" Margin="5,2">LFG:</TextBlock>
-            <Ellipse Fill="Wheat" Opacity=".5" Width="10" HorizontalAlignment="Stretch" Height="10" Margin="3"/>
-            <Ellipse Fill="Wheat" Opacity=".5" Width="10" HorizontalAlignment="Stretch" Height="10" Margin="3"/>
+        <Border Background="{StaticResource bgColor}" Width="Auto" Grid.Column="0" Grid.Row="0" Opacity=".7" />
+        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" Visibility="Visible" UseLayoutRounding="True">
+            <TextBlock Foreground="Gray" Margin="5,0" VerticalAlignment="Center">LFG</TextBlock>
+            <ItemsControl ItemsSource="{Binding Instance.LFGs}" ItemTemplate="{StaticResource LfgTemplate}" Margin="2">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" MaxWidth="650"></WrapPanel>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
         </StackPanel>
         <Popup Name="playerInfo" StaysOpen="True" Placement="Mouse"
                AllowsTransparency="True" Width="Auto" HorizontalOffset="95" UseLayoutRounding="True"
@@ -211,6 +215,7 @@
             <chatcontrols:PlayerTooltip />
 
         </Popup>
+
         <!--Add lfg here-->
     </Grid>
 </local:TccWindow>

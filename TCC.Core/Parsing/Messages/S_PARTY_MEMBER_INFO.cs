@@ -12,8 +12,9 @@ namespace TCC.Parsing.Messages
     public class S_PARTY_MEMBER_INFO : ParsedMessage
     {
         ushort membersCount, membersOffset;
-        string info;
 
+        public ushort MembersCount { get => membersCount; }
+        public int Id { get; private set; }
         private List<User> members;
         public List<User> Members
         {
@@ -23,11 +24,11 @@ namespace TCC.Parsing.Messages
         public S_PARTY_MEMBER_INFO(TeraMessageReader reader) : base(reader)
         {
             membersCount = reader.ReadUInt16();
-            membersOffset = reader.ReadUInt16();
-            info = reader.ReadTeraString();
+            reader.Skip(10);
+            Id = reader.ReadInt32();
+            return;
 
             members = new List<User>();
-
             for (int i = 0; i < membersCount; i++)
             {
                 var u = new User(WindowManager.GroupWindow.Dispatcher);

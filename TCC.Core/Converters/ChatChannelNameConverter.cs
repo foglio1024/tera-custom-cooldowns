@@ -91,6 +91,8 @@ namespace TCC.Converters
                     return "+15";
                 case ChatChannel.RaidLeader:
                     return "Leader";
+                case ChatChannel.Bargain:
+                    return "Offer";
                 default:
                     return ch.ToString();
             }

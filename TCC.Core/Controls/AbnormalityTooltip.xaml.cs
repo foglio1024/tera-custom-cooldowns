@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -96,7 +97,7 @@ namespace TCC.Controls
                 if(toolTipTB.Text == "")
                 {
                     toolTipTB.Text = Id.ToString(); ;
-                    Console.WriteLine("Unknown abnoramlity: {0}", Id.ToString());
+                    Debug.WriteLine("Unknown abnoramlity: {0}", Id.ToString());
                 }
 
             }

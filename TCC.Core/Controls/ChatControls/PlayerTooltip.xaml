@@ -26,7 +26,7 @@
                 <Border Grid.RowSpan="2" Grid.ColumnSpan="2" Background="#2000" Margin="-5"></Border>
                 <Image Grid.RowSpan="2" Width="44" Height="44" RenderOptions.BitmapScalingMode="HighQuality"
                        Source="{Binding Instance.TooltipInfo.Class, Converter={StaticResource classConv}}" Margin="3" VerticalAlignment="Top"></Image>
-                <Border Background="{StaticResource hpColor}" Height="20" Width="20" CornerRadius="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.RowSpan="2" Margin="0,0">
+                <Border Background="{StaticResource mpColor}" Height="20" Width="20" CornerRadius="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.RowSpan="2" Margin="0,0">
                     <TextBlock  Text="{Binding Instance.TooltipInfo.Level}" Margin="0,0,0,0" TextAlignment="Center" FontSize="12" VerticalAlignment="Center"></TextBlock>
                     <Border.Effect>
                         <DropShadowEffect ShadowDepth="1" BlurRadius="2" Opacity=".7"></DropShadowEffect>
