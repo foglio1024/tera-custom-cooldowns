@@ -62,8 +62,7 @@ namespace TCC.Parsing
             {
                 var msg = new C_CHECK_VERSION_CUSTOM(new CustomReader(obj));
                 Version = msg.Versions[0];
-                TeraSniffer.Instance.opn = new OpCodeNamer(System.IO.Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/{Version}.txt"));
-                OpCodeNamer = TeraSniffer.Instance.opn;
+                OpCodeNamer = new OpCodeNamer(System.IO.Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/{Version}.txt"));
                 SystemMessageNamer = new OpCodeNamer(System.IO.Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/smt_{Version}.txt"));
                 MessageFactory.Init();
             }
