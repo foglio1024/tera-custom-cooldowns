@@ -65,6 +65,7 @@ namespace TCC.Parsing
                 OpCodeNamer = new OpCodeNamer(System.IO.Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/{Version}.txt"));
                 SystemMessageNamer = new OpCodeNamer(System.IO.Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/smt_{Version}.txt"));
                 MessageFactory.Init();
+                TeraSniffer.Instance.Connected = true;
             }
             Packets.Enqueue(obj);
         }
