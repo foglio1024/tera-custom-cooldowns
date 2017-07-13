@@ -4,6 +4,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -412,13 +413,21 @@ namespace TCC.Parsing
 
         public static void HandleSystemMessage(S_SYSTEM_MESSAGE x)
         {
-            var msg = x.Message.Split('\v');
-            var opcode = UInt16.Parse(msg[0].Substring(1));
-            var opcodeName = SystemMessageNamer.GetName(opcode);
-
-            if (SystemMessages.Messages.TryGetValue(opcodeName, out SystemMessage m))
+            try
             {
-                SystemMessagesProcessor.AnalyzeMessage(x.Message, m, opcodeName);
+                var msg = x.Message.Split('\v');
+                var opcode = UInt16.Parse(msg[0].Substring(1));
+                var opcodeName = SystemMessageNamer.GetName(opcode);
+
+                if (SystemMessages.Messages.TryGetValue(opcodeName, out SystemMessage m))
+                {
+                    SystemMessagesProcessor.AnalyzeMessage(x.Message, m, opcodeName);
+                }
+
+            }
+            catch (Exception)
+            {
+                File.AppendAllText("chat-errors.log", x.Message + "\n");
             }
         }
 
@@ -472,14 +481,23 @@ namespace TCC.Parsing
 
         internal static void HandleSystemMessageLoot(S_SYSTEM_MESSAGE_LOOT_ITEM x)
         {
-            var msg = x.SysMessage.Split('\v');
-            var opcode = UInt16.Parse(msg[0].Substring(1));
-            var opcodeName = SystemMessageNamer.GetName(opcode);
-
-            if (SystemMessages.Messages.TryGetValue(opcodeName, out SystemMessage m))
+            try
             {
-                var sysMsg = new ChatMessage(x.SysMessage, m);
-                ChatWindowViewModel.Instance.AddChatMessage(sysMsg);
+                var msg = x.SysMessage.Split('\v');
+                var opcode = UInt16.Parse(msg[0].Substring(1));
+                var opcodeName = SystemMessageNamer.GetName(opcode);
+
+                if (SystemMessages.Messages.TryGetValue(opcodeName, out SystemMessage m))
+                {
+                    var sysMsg = new ChatMessage(x.SysMessage, m);
+                    ChatWindowViewModel.Instance.AddChatMessage(sysMsg);
+                }
+
+            }
+            catch (Exception)
+            {
+
+                File.AppendAllText("chat-errors.log", x.SysMessage + "\n");
             }
         }
 
