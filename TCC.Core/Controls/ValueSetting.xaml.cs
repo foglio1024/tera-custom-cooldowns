@@ -27,7 +27,7 @@ namespace TCC.Controls
             get { return (double)GetValue(ValueProperty); }
             set { SetValue(ValueProperty, value); }
         }
-        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(double), typeof(ValueSetting), new PropertyMetadata(1.0));
+        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(double), typeof(ValueSetting));
         public string SettingName
         {
             get { return (string)GetValue(SettingNameProperty); }
@@ -50,7 +50,7 @@ namespace TCC.Controls
 
         // Using a DependencyProperty as the backing store for Max.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MaxProperty =
-            DependencyProperty.Register("Max", typeof(double), typeof(ValueSetting), new PropertyMetadata(1.0));
+            DependencyProperty.Register("Max", typeof(double), typeof(ValueSetting));
 
 
 
@@ -62,7 +62,7 @@ namespace TCC.Controls
 
         // Using a DependencyProperty as the backing store for Min.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MinProperty =
-            DependencyProperty.Register("Min", typeof(double), typeof(ValueSetting), new PropertyMetadata(0.0));
+            DependencyProperty.Register("Min", typeof(double), typeof(ValueSetting));
 
 
 
@@ -110,6 +110,34 @@ namespace TCC.Controls
         private void Slider_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Value = 1;
+        }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            var tb = sender as TextBox;
+            if(Double.TryParse(tb.Text, out double result))
+            {
+                if (result > Max) Value = Max;
+                else if (result < Min) Value = Min;
+                else Value = result;
+            }
+            else
+            {
+                tb.Text = Value.ToString();
+            }
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var tb = sender as TextBox;
+            if (Double.TryParse(tb.Text, out double result))
+            {
+                 Value = result;
+            }
+            else
+            {
+                tb.Text = Value.ToString();
+            }
         }
     }
 }

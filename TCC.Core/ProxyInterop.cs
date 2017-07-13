@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
+using TCC.Data;
 using TCC.ViewModels;
 
 namespace TCC
@@ -21,9 +22,13 @@ namespace TCC
             {
                 if (client.Client != null && client.Connected) return;
                 Debug.WriteLine("Connecting...");
+                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Trying to connect to tera-proxy...</FONT>"));
+
                 client = new TcpClient();
                 client.Connect("127.0.0.50", 9550);
                 Debug.WriteLine("Connected");
+                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Connected to tera-proxy.</FONT>"));
+
             }
             catch (Exception e)
             {
@@ -34,6 +39,8 @@ namespace TCC
                     if (retries <= 0)
                     {
                         Debug.WriteLine("Maximum retries exceeded...");
+                        ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Maximum retries exceeded. tera-proxy functionalities won't be available.</FONT>"));
+
                         retries = 2;
                         return;
                     }
@@ -171,7 +178,6 @@ namespace TCC
             SendData(sb.ToString());
 
         }
-
         public static void SendTradeBrokerAccept(uint playerId, uint listingId)
         {
             var sb = new StringBuilder("tb_accept");
@@ -183,7 +189,14 @@ namespace TCC
             SendData(sb.ToString());
 
         }
+        public static void SendDeclineApply(uint playerId)
+        {
+            var sb = new StringBuilder("apply_decline");
+            sb.Append("&player=");
+            sb.Append(playerId);
 
+            SendData(sb.ToString());
+        }
         public static void CloseConnection()
         {
             client?.Client?.Close();

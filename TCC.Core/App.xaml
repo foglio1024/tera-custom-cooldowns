@@ -6,11 +6,13 @@
              xmlns:converters="clr-namespace:TCC.Converters"
              xmlns:chatcontrols="clr-namespace:TCC.Controls.ChatControls"
              xmlns:templateselectors="clr-namespace:TCC.TemplateSelectors"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              Startup="OnStartup">
     <Application.Resources>
         <DropShadowEffect x:Key="dropShadow" BlurRadius="4" ShadowDepth="2" Opacity=".4" />
 
         <SolidColorBrush x:Key="mainTccColor" Color="#ff6822"/>
+        <SolidColorBrush x:Key="greenTccColor" Color="#00A561"/>
 
         <SolidColorBrush x:Key="bgColor" Color="#101017" Opacity="1"/>
         <SolidColorBrush x:Key="hpColor" Color="#f55"/>
@@ -25,6 +27,8 @@
         <SolidColorBrush x:Key="AssaultStanceColor" Color="#de2c4a" />
         <SolidColorBrush x:Key="SniperEyeColor" Color="#38bde5" />
 
+        <system:Double x:Key="MapWidth">800</system:Double>
+        <system:Double x:Key="MapHeight">600</system:Double>
 
         <!--Chat colors-->
         <SolidColorBrush x:Key="ChatSay" Color="#fff"/>
@@ -132,6 +136,9 @@
             <controls:AbnormalityIndicator/>
         </DataTemplate>
 
+        <converters:LocationToMapConverter x:Key="LocationToMapConverter"/>
+        <converters:LocationToMarkerPositionConverter x:Key="LocationToMarkerPositionConverter"/>
+        <converters:LocationToStretchConverter x:Key="LocationToStretchConverter"/>
         <!--Scrollbar Thumbs-->
         <Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">
             <Setter Property="Template">
@@ -380,10 +387,14 @@
         <DataTemplate x:Key="BrokerOfferBody">
             <chatcontrols:BrokerOfferBody />
         </DataTemplate>
+        <DataTemplate x:Key="ApplyBody">
+            <chatcontrols:ApplyBody/>
+        </DataTemplate>
 
         <templateselectors:MessageBodyDataTemplateSelector x:Key="BodyTemplateSelector"
                                                            BrokerBody="{StaticResource BrokerOfferBody}"
-                                                           DefaultBody="{StaticResource DefaultBody}" />
+                                                           DefaultBody="{StaticResource DefaultBody}" 
+                                                           ApplyBody="{StaticResource ApplyBody}"/>
 
         <!--Channel label templates-->
         <DataTemplate x:Key="WhisperChannelLabelTemplate">
@@ -493,11 +504,10 @@
         <templateselectors:AuthorLabelTemplateSelector x:Key="AuthorTemplateSelector"
                                         DefaultAuthorTemplate="{StaticResource DefaultAuthorTemplate}"
                                         SystemAuthorTemplate="{StaticResource SystemAuthorTemplate}"
-                                        >
-
-        </templateselectors:AuthorLabelTemplateSelector>
+                                        />
         <DataTemplate x:Key="LfgTemplate">
             <chatcontrols:LFGcontrol Margin="1"></chatcontrols:LFGcontrol>
         </DataTemplate>
+
     </Application.Resources>
 </Application>

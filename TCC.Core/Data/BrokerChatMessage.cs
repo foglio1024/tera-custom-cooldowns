@@ -54,6 +54,7 @@ namespace TCC.Data
             }
         }
 
+        public bool Handled = false;
         public uint PlayerId, ListingId;
 
         public BrokerChatMessage(S_TRADE_BROKER_DEAL_SUGGESTED p) : base()

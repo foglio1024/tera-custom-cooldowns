@@ -97,7 +97,7 @@ namespace TCC
             ClickThru = false,
             Scale = 1,
             AutoDim = false,
-            DimOpacity = .2
+            DimOpacity = 1
         };
 
         public static bool IgnoreMeInGroupWindow { get; set; }
@@ -108,13 +108,17 @@ namespace TCC
         public static FlowDirection BuffsDirection { get; set; } = FlowDirection.RightToLeft;
         public static bool ClassWindowOn { get; set; } = false;
         public static bool ClickThruWhenDim { get; set; } = true;
-
-        public static void LoadSettings()
+        public static int MaxMessages { get; set; } = 500;
+        public static int SpamThreshold { get; set; } = 2;
+        public static bool ShowChannel { get; set; } = true;
+        public static bool ShowTimestamp { get; set; } = true;
+        public static void LoadWindowSettings()
         {
             if (File.Exists(Environment.CurrentDirectory + @"/tcc-config.xml"))
             {
-                var settingsDoc = XDocument.Load(Environment.CurrentDirectory + @"/tcc-config.xml");
-                foreach (var ws in settingsDoc.Descendants().Where(x => x.Name == "WindowSetting"))
+                SettingsDoc = XDocument.Load(Environment.CurrentDirectory + @"/tcc-config.xml");
+
+                foreach (var ws in SettingsDoc.Descendants().Where(x => x.Name == "WindowSetting"))
                 {
                     if (ws.Attribute("Name").Value == "BossWindow")
                     {
@@ -140,10 +144,22 @@ namespace TCC
                     {
                         ParseWindowSettings(ClassWindowSettings, ws);
                     }
+                    else if (ws.Attribute("Name").Value == "ChatWindow")
+                    {
+                        ParseWindowSettings(ChatWindowSettings, ws);
+                    }
                     //add window here
                 }
+            }
+        }
+        public static XDocument SettingsDoc;
+        public static void LoadSettings()
+        {
+            if (File.Exists(Environment.CurrentDirectory + @"/tcc-config.xml"))
+            {
+                SettingsDoc = XDocument.Load(Environment.CurrentDirectory + @"/tcc-config.xml");
 
-                var b = settingsDoc.Descendants("OtherSettings").FirstOrDefault();
+                var b = SettingsDoc.Descendants("OtherSettings").FirstOrDefault();
                 if (b == null) return;
                 try
                 {
@@ -183,6 +199,26 @@ namespace TCC
                 try
                 {
                     ClickThruWhenDim = Boolean.Parse(b.Attribute("ClickThruWhenDim").Value);
+                }
+                catch (Exception) { }
+                try
+                {
+                    MaxMessages = Int32.Parse(b.Attribute(nameof(MaxMessages)).Value);
+                }
+                catch (Exception) { }
+                try
+                {
+                    SpamThreshold = Int32.Parse(b.Attribute(nameof(SpamThreshold)).Value);
+                }
+                catch (Exception) { }
+                try
+                {
+                    ShowChannel = Boolean.Parse(b.Attribute(nameof(ShowChannel)).Value);
+                }
+                catch (Exception) { }
+                try
+                {
+                    ShowTimestamp = Boolean.Parse(b.Attribute(nameof(ShowTimestamp)).Value);
                 }
                 catch (Exception) { }
                 //add settings here
@@ -254,7 +290,6 @@ namespace TCC
                         new XAttribute("Scale", BuffBarWindowSettings.Scale),
                         new XAttribute("AutoDim", BuffBarWindowSettings.AutoDim),
                         new XAttribute("DimOpacity", BuffBarWindowSettings.DimOpacity)
-
                         ),
                     new XElement("WindowSetting",
                         new XAttribute("Name", "CharacterWindow"),
@@ -265,7 +300,6 @@ namespace TCC
                         new XAttribute("Scale", CharacterWindowSettings.Scale),
                         new XAttribute("AutoDim", CharacterWindowSettings.AutoDim),
                         new XAttribute("DimOpacity", CharacterWindowSettings.DimOpacity)
-
                         ),
                     new XElement("WindowSetting",
                         new XAttribute("Name", "CooldownWindow"),
@@ -276,7 +310,6 @@ namespace TCC
                         new XAttribute("Scale", CooldownWindowSettings.Scale),
                         new XAttribute("AutoDim", CooldownWindowSettings.AutoDim),
                         new XAttribute("DimOpacity", CooldownWindowSettings.DimOpacity)
-
                         ),
                     new XElement("WindowSetting",
                         new XAttribute("Name", "GroupWindow"),
@@ -287,7 +320,6 @@ namespace TCC
                         new XAttribute("Scale", GroupWindowSettings.Scale),
                         new XAttribute("AutoDim", GroupWindowSettings.AutoDim),
                         new XAttribute("DimOpacity", GroupWindowSettings.DimOpacity)
-
                         ),
                     new XElement("WindowSetting",
                         new XAttribute("Name", "ClassWindow"),
@@ -298,7 +330,16 @@ namespace TCC
                         new XAttribute("Scale", ClassWindowSettings.Scale),
                         new XAttribute("AutoDim", ClassWindowSettings.AutoDim),
                         new XAttribute("DimOpacity", ClassWindowSettings.DimOpacity)
-
+                        ),
+                        new XElement("WindowSetting",
+                        new XAttribute("Name", "ChatWindow"),
+                        new XAttribute("X", ChatWindowSettings.X),
+                        new XAttribute("Y", ChatWindowSettings.Y),
+                        new XAttribute("ClickThru", ChatWindowSettings.ClickThru),
+                        new XAttribute("Visibility", ChatWindowSettings.Visibility),
+                        new XAttribute("Scale", ChatWindowSettings.Scale),
+                        new XAttribute("AutoDim", ChatWindowSettings.AutoDim),
+                        new XAttribute("DimOpacity", ChatWindowSettings.DimOpacity)
                         )
                     //add window here
                     ),
@@ -311,7 +352,11 @@ namespace TCC
                 new XAttribute("IgnoreRaidAbnormalitiesInGroupWindow", IgnoreRaidAbnormalitiesInGroupWindow),
                 new XAttribute("BuffsDirection", BuffsDirection),
                 new XAttribute("ClassWindowOn", ClassWindowOn),
-                new XAttribute("ClickThruWhenDim", ClickThruWhenDim)
+                new XAttribute("ClickThruWhenDim", ClickThruWhenDim),
+                new XAttribute("MaxMessages", MaxMessages),
+                new XAttribute("SpamThreshold", SpamThreshold),
+                new XAttribute(nameof(ShowChannel), ShowChannel),
+                new XAttribute(nameof(ShowTimestamp), ShowTimestamp)
                 //add setting here
                 )
             );

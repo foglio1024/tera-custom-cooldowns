@@ -9,12 +9,14 @@
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded" 
              MouseEnter="UserControl_MouseEnter"
-             MouseLeave="UserControl_MouseLeave">
-    <Grid HorizontalAlignment="Stretch">
+             MouseLeave="UserControl_MouseLeave"
+             >
+    <Grid HorizontalAlignment="Stretch" Background="Transparent">
         <Border Name="bgBorder" 
+                Margin="0,2"
                 HorizontalAlignment="Stretch" 
                 VerticalAlignment="Stretch" 
-                CornerRadius="10" 
+                CornerRadius="2" 
                 Cursor="{Binding Type, Converter={StaticResource TypeToCursorConverter}}"
                 PreviewMouseLeftButtonDown="OnMouseDown"
                 Opacity=".2"

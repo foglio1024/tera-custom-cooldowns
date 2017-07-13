@@ -13,6 +13,7 @@ namespace TCC.TemplateSelectors
     {
         public DataTemplate DefaultBody { get; set; }
         public DataTemplate BrokerBody { get; set; }
+        public DataTemplate ApplyBody { get; set; }
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             ChatMessage m = item as ChatMessage;
@@ -22,6 +23,8 @@ namespace TCC.TemplateSelectors
             {
                 case ChatChannel.Bargain:
                     return BrokerBody;
+                case ChatChannel.Apply:
+                    return ApplyBody;
                 default:
                     return DefaultBody;
             }

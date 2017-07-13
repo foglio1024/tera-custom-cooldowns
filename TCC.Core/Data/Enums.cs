@@ -61,7 +61,10 @@ namespace TCC
         Enchant15 = 305, //arbitrary
         RaidLeader = 306, //arbitrary
         Bargain = 307, //arbitrary
-        TCC = 1000
+        Apply = 308, //arb
+        Death = 309, //arb
+        Ress = 310, //arb
+        TCC = 1000,
     }
 
     public enum Class

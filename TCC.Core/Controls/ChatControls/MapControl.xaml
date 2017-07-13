@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="TCC.Controls.ChatControls.MapControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TCC.Controls.ChatControls"
+             mc:Ignorable="d" >
+    <Border Style="{StaticResource border}" Margin="5">
+        <StackPanel>
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="Auto">
+                <TextBlock Text="{Binding PlainText}"
+                       FontWeight="Normal"
+                       Foreground="White"
+                       FontSize="18"
+                       Margin="2"
+                       TextAlignment="Center" 
+                       HorizontalAlignment="Center"/>
+            </Grid>
+                <Grid Width="{StaticResource MapWidth}" Height="Auto">
+                <!--Map-->
+                <Image Stretch="Uniform" x:Name="mapImg"
+                       Source="{Binding Location, Converter={StaticResource LocationToMapConverter}}"  
+                       VerticalAlignment="Top"
+                       />
+                <!--Marker-->
+                    <Grid Margin="{Binding Location, Converter={StaticResource LocationToMarkerPositionConverter}}"
+                      HorizontalAlignment="Left"            
+                      VerticalAlignment="Top" >
+                        <Path Margin="-11,-30,0,0"
+                              Stroke="#dfff"
+                              StrokeThickness="2"
+                              Stretch="Uniform" 
+                              Height="30"
+                              Fill="Orange" 
+                              Data="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                             />
+                    </Grid>
+                    <Grid Margin="{Binding Location, Converter={StaticResource LocationToMarkerPositionConverter}}"
+              HorizontalAlignment="Left"   
+                      Opacity="0"
+              x:Name="animatedPath"
+              VerticalAlignment="Top" >
+                        <Ellipse Fill="Transparent" 
+                             Height="10" Width="10"
+                             Stroke="White"
+                             StrokeThickness="1">
+
+                            <Ellipse.RenderTransform>
+                                <TranslateTransform  X="-5" Y="0"/>
+                            </Ellipse.RenderTransform>
+                        </Ellipse>
+
+                        <Grid.RenderTransform>
+                            <ScaleTransform ScaleX="1" ScaleY="1" CenterY="5" />
+                        </Grid.RenderTransform>
+
+                    </Grid>
+                </Grid>
+        </StackPanel>
+    </Border>
+</UserControl>

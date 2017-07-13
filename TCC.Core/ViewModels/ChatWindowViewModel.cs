@@ -19,10 +19,21 @@ namespace TCC.ViewModels
         public static ChatWindowViewModel Instance => _instance ?? (_instance = new ChatWindowViewModel());
         const int MESSAGE_CAP = 100000;
         const int SPAM_THRESHOLD = 1;
-
+        DispatcherTimer hideTimer;
         public bool IsTeraOnTop
         {
             get => WindowManager.IsTccVisible;
+        }
+        private bool isChatVisible;
+        public bool IsChatVisible
+        {
+            get => isChatVisible;
+            set
+            {
+                if (isChatVisible == value) return;
+                isChatVisible = value;
+                NotifyPropertyChanged(nameof(IsChatVisible));
+            }
         }
         private double scale = SettingsManager.ChatWindowSettings.Scale;
         public double Scale
@@ -39,9 +50,7 @@ namespace TCC.ViewModels
         {
             get => ChatMessages.Count;
         }
-
         public TooltipInfo TooltipInfo { get; set; }
-
         private SynchronizedObservableCollection<ChatMessage> _chatMessages;
         public SynchronizedObservableCollection<ChatMessage> ChatMessages
         {
@@ -70,6 +79,11 @@ namespace TCC.ViewModels
         public ICollectionView SystemMessages
         {
             get => _systemMessages;
+        }
+        private ICollectionView _whisperMessages;
+        public ICollectionView WhisperMessages
+        {
+            get => _whisperMessages;
         }
 
 
@@ -105,6 +119,9 @@ namespace TCC.ViewModels
             _dispatcher = Dispatcher.CurrentDispatcher;
             _chatMessages = new SynchronizedObservableCollection<ChatMessage>(_dispatcher);
             _lfgs = new SynchronizedObservableCollection<LFG>(_dispatcher);
+            hideTimer = new DispatcherTimer();
+            hideTimer.Interval = TimeSpan.FromSeconds(15);
+            hideTimer.Tick += HideTimer_Tick;
             WindowManager.TccVisibilityChanged += (s, ev) =>
             {
                 NotifyPropertyChanged("IsTeraOnTop");
@@ -118,6 +135,7 @@ namespace TCC.ViewModels
                 }
             };
             ChatMessages.CollectionChanged += ChatMessages_CollectionChanged;
+
             VisibleChannels = new List<ChatChannel>
             {
                 ChatChannel.Global,
@@ -140,32 +158,41 @@ namespace TCC.ViewModels
             _guildMessages = new CollectionViewSource { Source = _chatMessages }.View;
             _groupMessages = new CollectionViewSource { Source = _chatMessages }.View;
             _systemMessages = new CollectionViewSource { Source = _chatMessages }.View;
+            _whisperMessages = new CollectionViewSource { Source = _chatMessages }.View;
 
             _allMessages.Filter = null;
             _guildMessages.Filter = p => ((ChatMessage)p).Channel == ChatChannel.Guild ||
                                         ((ChatMessage)p).Channel == ChatChannel.GuildNotice;
             _groupMessages.Filter = p => ((ChatMessage)p).Channel == ChatChannel.Party ||
                                         ((ChatMessage)p).Channel == ChatChannel.PartyNotice ||
-                                        //((ChatMessage)p).Channel == ChatChannel.Group ||
-                                        //((ChatMessage)p).Channel == ChatChannel.GroupAlerts ||
                                         ((ChatMessage)p).Channel == ChatChannel.Raid ||
                                         ((ChatMessage)p).Channel == ChatChannel.RaidLeader ||
                                         ((ChatMessage)p).Channel == ChatChannel.RaidNotice;
-            _systemMessages.Filter = p => ((ChatMessage)p).Author == "System";
+            _systemMessages.Filter = p => ((ChatMessage)p).Author == "System" ||
+                                           ((ChatMessage)p).Channel == ChatChannel.TCC;
+            _whisperMessages.Filter = p => ((ChatMessage)p).Channel == ChatChannel.ReceivedWhisper ||
+                                            ((ChatMessage)p).Channel == ChatChannel.SentWhisper;
+        }
+
+
+
+        private void HideTimer_Tick(object sender, EventArgs e)
+        {
+            IsChatVisible = false;
+            hideTimer.Stop();
         }
 
         private void ChatMessages_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
+            RefreshHideTimer();
             NotifyPropertyChanged("NewItem");
-            //NotifyPropertyChanged(nameof(GuildMessages));
-            //NotifyPropertyChanged(nameof(GroupMessages));
-            //NotifyPropertyChanged(nameof(SystemMessages));
+            IsChatVisible = true;
         }
 
         public void AddChatMessage(ChatMessage chatMessage)
         {
             if (BlockedUsers.Contains(chatMessage.Author)) return;
-            if (ChatMessages.Count < SPAM_THRESHOLD)
+            if (ChatMessages.Count < SettingsManager.SpamThreshold)
             {
                 for (int i = 0; i < ChatMessages.Count - 1; i++)
                 {
@@ -180,7 +207,7 @@ namespace TCC.ViewModels
             {
 
                 int offset = 0;
-                for (int i = 0; i < SPAM_THRESHOLD; i++)
+                for (int i = 0; i < SettingsManager.SpamThreshold; i++)
                 {
                     if (1 + i + offset > ChatMessages.Count) continue;
 
@@ -198,7 +225,7 @@ namespace TCC.ViewModels
             ChatMessage.SplitSimplePieces(chatMessage);
             ChatMessages.Add(chatMessage);
 
-            if (ChatMessages.Count >= MESSAGE_CAP)
+            if (ChatMessages.Count > SettingsManager.MaxMessages)
             {
                 ChatMessages.RemoveAt(0);
             }
@@ -254,6 +281,18 @@ namespace TCC.ViewModels
             {
                 lfg.MembersCount = p.MembersCount;
             }
+        }
+
+        internal void RefreshHideTimer()
+        {
+            hideTimer.Stop();
+            hideTimer.Start();
+        }
+        internal void StopHideTimer()
+        {
+            hideTimer.Stop();
+            IsChatVisible = true;
+
         }
     }
 }

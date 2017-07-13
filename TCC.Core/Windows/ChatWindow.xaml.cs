@@ -26,6 +26,8 @@ namespace TCC.Windows
     public partial class ChatWindow : TccWindow
     {
         DispatcherTimer testTimer;
+        DoubleAnimation opacityUp;
+        DoubleAnimation opacityDown;
         bool _bottom = true;
         int _testCounter = 0;
 
@@ -33,42 +35,27 @@ namespace TCC.Windows
 
         private void TccWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            //InitWindow(SettingsManager.ChatWindowSettings);
-
+            InitWindow(SettingsManager.ChatWindowSettings, false, true);
+            opacityUp = new DoubleAnimation(0.01, 1, TimeSpan.FromMilliseconds(300));
+            opacityDown = new DoubleAnimation(1, 0.01, TimeSpan.FromMilliseconds(300));
             ChatWindowViewModel.Instance.PropertyChanged += Instance_PropertyChanged;
-            //_scroller = (ScrollViewer)VisualTreeHelper.GetChild(itemsControl, 0);
-            //_scroller.ScrollChanged += Scroller_ScrollChanged;
-            testTimer = new DispatcherTimer();
-            testTimer.Interval = TimeSpan.FromMilliseconds(1000);
-            testTimer.Tick += (s, ev) =>
-            {
-                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.Say, "Author", "<FONT>SayMessage " + _testCounter + "</FONT>"));
-                if(_testCounter % 5 == 0) ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.Say, "Author", "<FONT>Testtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt Messageeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee </FONT>"));
-
-                _testCounter++;
-            };
             _currentContent = itemsControl;
-            //ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.Say, "Author", "<FONT>Test Message </FONT>"));
-            //ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.Say, "Author", "<FONT>Testtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt Messageeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee </FONT>"));
-            //ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.Say, "Author", "<FONT>Testtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt Messageeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee Testtttttttttttttttttttttttttttttttttttttttt  </FONT>"));
-            //ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.Say, "Author", "<FONT>Testtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt Messageeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee Testtttttttttttttttttttttttttttttttttttttttt Messageeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee </FONT>"));
-
-            //testTimer.Start();
-            //for (int i = 0; i < 20; i++)
-            //{
-            //    ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.Guild, "Author" + i, "<FONT>GuildMessage " + i + "</FONT>"));
-
-            //}
-            //ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.Party, "Author", "<FONT>PartyMessage eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" + "</FONT>"));
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.System, "System", "<FONT>SysMessage " + i + "</FONT>"));
-
-            //}
-
-            //ChatWindowViewModel.Instance.LFGs.Add(new LFG(1, "asd", "Aasdasd", false));
         }
 
+        internal void CloseMap()
+        {
+            if (mapPopup.IsOpen) mapPopup.IsOpen = false;
+            map.StopAnimation();
+
+        }
+
+        internal void OpenMap(MessagePiece context)
+        {
+            map.DataContext = context;
+            map.OnDataChanged();
+            mapPopup.IsOpen = true;
+            map.StartAnimation();
+        }
 
         private void Instance_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
@@ -83,24 +70,31 @@ namespace TCC.Windows
                     s.ScrollToBottom();
                 }
             }
+            else if(e.PropertyName == nameof(ChatWindowViewModel.Instance.IsChatVisible))
+            {
+                AnimateChatVisibility(ChatWindowViewModel.Instance.IsChatVisible);
+            }
         }
+
+        private void AnimateChatVisibility(bool isChatVisible)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                if (isChatVisible)
+                {
+                    root.BeginAnimation(OpacityProperty, opacityUp);
+                }
+                else
+                {
+                    root.BeginAnimation(OpacityProperty, opacityDown);
+                }
+            });
+        }
+
         bool _locked;
         internal void LockTooltip(bool locked)
         {
             _locked = locked;
-        }
-
-        private void TccWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            try
-            {
-                DragMove();
-
-            }
-            catch (Exception)
-            {
-
-            }
         }
         private void SWPreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
@@ -199,7 +193,7 @@ namespace TCC.Windows
                 if (GetMessageRows(item.ActualHeight) > 1)
                 {
                     var lastItemRows = GetMessageRows(visibleItems.Last().ActualHeight);
-                    Debug.WriteLine("Rows = {0} - LastItemRows = {1}", dc.Rows, lastItemRows);
+                    //Debug.WriteLine("Rows = {0} - LastItemRows = {1}", dc.Rows, lastItemRows);
                     if(dc.Rows - lastItemRows >= 1)
                     {
                         dc.Rows = dc.Rows - lastItemRows;
@@ -237,7 +231,7 @@ namespace TCC.Windows
         }
         public int GetMessageRows(double height)
         {
-            Debug.WriteLine("Checking rows:{0}", height);
+            //Debug.WriteLine("Checking rows:{0}", height);
             if (height < 28) return 1;
             else if (height < 46) return 2;
             else if (height < 64) return 3;
@@ -267,8 +261,20 @@ namespace TCC.Windows
         }
         private void TccWindow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            PacketProcessor.SendFakeBamMessage();
+            //PacketProcessor.SendTestMessage();
             //ChatWindowViewModel.Instance.LFGs.Clear();
+        }
+
+        private void TccWindow_MouseLeave(object sender, MouseEventArgs e)
+        {
+            CloseMap();
+            ChatWindowViewModel.Instance.RefreshHideTimer();
+        }
+
+        private void TccWindow_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ChatWindowViewModel.Instance.StopHideTimer();
+
         }
     }
 

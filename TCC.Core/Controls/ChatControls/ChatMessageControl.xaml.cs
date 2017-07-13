@@ -30,10 +30,9 @@ namespace TCC.Controls
 
         private void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.Invoke(new Action(() =>
             {
                 ((ChatMessage)DataContext).Rows = WindowManager.ChatWindow.GetMessageRows(this.ActualHeight);
-                Console.WriteLine("Set rows to {0}", ((ChatMessage)DataContext).Rows);
             }), DispatcherPriority.Loaded);
         }
     }

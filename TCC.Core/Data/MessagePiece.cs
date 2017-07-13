@@ -7,7 +7,7 @@ namespace TCC.Data
 {
     public class MessagePiece : TSPropertyChanged
     {
-        private ChatChannel _channel;
+        public  ChatChannel Channel;
 
         long itemUid;
         public long ItemUid
@@ -30,6 +30,8 @@ namespace TCC.Data
                 itemId = value;
             }
         }
+
+        public Location Location { get; set; }
 
         public Money Money { get; set; }
 
@@ -70,6 +72,14 @@ namespace TCC.Data
             }
         }
 
+        public string PlainText
+        {
+            get
+            {
+                return Text.StartsWith("<")? Text.Substring(1, Text.Length - 2) : Text;
+            }
+        }
+
         SolidColorBrush color;
         public SolidColorBrush Color
         {
@@ -90,15 +100,17 @@ namespace TCC.Data
         }
         private Thickness SetThickness(string text)
         {
-            double left = 1;
-            double right = -1;
+            double left = 0;
+            double right = 0;
             if (text.StartsWith(" "))
             {
-                left = 2;
+                left = 0;
+                right = -1;
             }
             if (text.EndsWith(" "))
             {
-                right = 2;
+                right = 4;
+                left = -1;
             }
 
             return new Thickness(left, 0, right, 0);
@@ -111,7 +123,7 @@ namespace TCC.Data
                 if(color == "")
                 {
                     var conv = new Converters.ChatColorConverter();
-                    var col = ((SolidColorBrush)conv.Convert(_channel, null, null, null));
+                    var col = ((SolidColorBrush)conv.Convert(Channel, null, null, null));
                     Color = col;
                 }
                 else
@@ -122,7 +134,7 @@ namespace TCC.Data
         }
         public MessagePiece(string text, MessagePieceType type, ChatChannel ch, string customColor = "") : this(text)
         {
-            _channel = ch;
+            Channel = ch;
 
             SetColor(customColor);
 

@@ -6,7 +6,7 @@
         Item,
         Quest,
         Point_of_interest,
-        Money
-
+        Money,
+        Url
     }
 }

@@ -25,19 +25,18 @@ namespace TCC.Controls.ChatControls
         {
             InitializeComponent();
         }
-        bool handled = false;
         private void Accept(object sender, MouseButtonEventArgs e)
         {
-            if (handled) return;
             var dc = (BrokerChatMessage)DataContext;
+            if (dc.Handled) return;
             ProxyInterop.SendTradeBrokerAccept(dc.PlayerId, dc.ListingId);
             OnHandled();
         }
 
         private void Decline(object sender, MouseButtonEventArgs e)
         {
-            if (handled) return;
             var dc = (BrokerChatMessage)DataContext;
+            if (dc.Handled) return;
             ProxyInterop.SendTradeBrokerDecline(dc.PlayerId, dc.ListingId);
             OnHandled();
 
@@ -45,7 +44,8 @@ namespace TCC.Controls.ChatControls
 
         private void OnHandled()
         {
-            handled = true;
+            var dc = (BrokerChatMessage)DataContext;
+            dc.Handled = true;
             declineButton.Visibility = Visibility.Collapsed;
             acceptButton.Visibility = Visibility.Collapsed;
         }

@@ -94,6 +94,12 @@ namespace TCC.Converters
                     return (SolidColorBrush)App.Current.FindResource("mainTccColor");
                 case ChatChannel.Bargain:
                     return (SolidColorBrush)App.Current.FindResource("ChatBargain");
+                case ChatChannel.Apply:
+                    return (SolidColorBrush)App.Current.FindResource("ChatMegaphone");
+                case ChatChannel.Death:
+                    return Brushes.Red;
+                case ChatChannel.Ress:
+                    return (SolidColorBrush)App.Current.FindResource("greenTccColor");
                 default:
                     return (SolidColorBrush)App.Current.FindResource("ChatSysGeneric");
             }

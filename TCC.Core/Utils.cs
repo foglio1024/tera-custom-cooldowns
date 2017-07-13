@@ -79,6 +79,13 @@ namespace TCC
             }
         }
 
+        public static string ReplaceFirstOccurrenceCaseInsensitive(string input, string search, string replacement)
+        {
+            int pos = input.IndexOf(search, StringComparison.InvariantCultureIgnoreCase);
+            if (pos < 0) return input;
+            var result = input.Substring(0, pos) + replacement + input.Substring(pos + search.Length);
+            return result;
+        }
         public static string ReplaceCaseInsensitive(string input, string search, string replacement)
         {
             string result = Regex.Replace(

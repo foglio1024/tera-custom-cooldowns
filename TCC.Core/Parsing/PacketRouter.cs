@@ -218,10 +218,11 @@ namespace TCC.Parsing
             CharacterWindowManager.Instance.Player.Level = p.Level;
             SessionManager.SetPlayerLaurel(CharacterWindowManager.Instance.Player);
         }
-        public static void SendFakeBamMessage()
+        public static void SendTestMessage()
         {
             //var str = "@3947questNameDefeat HumedraszoneName@zoneName:181npcName@creature:181#2050";
-            var str = "@3789cityname@cityWar:20guildFated";
+            //var str = "@3789cityname@cityWar:20guildFated";
+            var str = "@1773ItemName@item:152141ItemName1@item:447ItemCount5";
             byte[] toBytes = Encoding.Unicode.GetBytes(str);
             byte[] arr = new byte[toBytes.Length + 2 + 4];
             for (int i = 0; i < toBytes.Length - 1; i++)
@@ -249,6 +250,8 @@ namespace TCC.Parsing
         {
             SessionManager.LoadingScreen = true;
             SessionManager.Encounter = false;
+            GroupWindowManager.Instance.ClearAllAbnormalities();
+            BuffBarWindowManager.Instance.Player.ClearAbnormalities();
         }
         public static void HandleLoadTopoFin(C_LOAD_TOPO_FIN x)
         {
@@ -316,13 +319,12 @@ namespace TCC.Parsing
 
         public static void HandleSkillResult(S_EACH_SKILL_RESULT x)
         {
-
-            bool sourceInParty = GroupWindowManager.Instance.UserExists(x.Source);
-            bool targetInParty = GroupWindowManager.Instance.UserExists(x.Target);
-            if (x.Target == x.Source) return;
-            if (sourceInParty && targetInParty) return;
-            if (sourceInParty || targetInParty) WindowManager.SkillsEnded = false;
-            if (x.Source == SessionManager.CurrentPlayer.EntityId) WindowManager.SkillsEnded = false;
+            //bool sourceInParty = GroupWindowManager.Instance.UserExists(x.Source);
+            //bool targetInParty = GroupWindowManager.Instance.UserExists(x.Target);
+            //if (x.Target == x.Source) return;
+            //if (sourceInParty && targetInParty) return;
+            //if (sourceInParty || targetInParty) WindowManager.SkillsEnded = false;
+            //if (x.Source == SessionManager.CurrentPlayer.EntityId) WindowManager.SkillsEnded = false;
         }
 
         public static void HandleChangeLeader(S_CHANGE_PARTY_MANAGER x)
@@ -375,6 +377,11 @@ namespace TCC.Parsing
         internal static void HandleBrokerOffer(S_TRADE_BROKER_DEAL_SUGGESTED x)
         {
             ChatWindowViewModel.Instance.AddChatMessage(new BrokerChatMessage(x));
+        }
+
+        internal static void HandleUserApplyToParty(S_OTHER_USER_APPLY_PARTY x)
+        {
+            ChatWindowViewModel.Instance.AddChatMessage(new ApplyMessage(x));
         }
 
         internal static void HandleFriendStatus(S_UPDATE_FRIEND_INFO x)
@@ -593,7 +600,7 @@ namespace TCC.Parsing
         }
         public static void HandlePartyMemberKick(S_BAN_PARTY_MEMBER p)
         {
-            GroupWindowManager.Instance.RemoveMember(p.PlayerId, p.ServerId);
+            GroupWindowManager.Instance.RemoveMember(p.PlayerId, p.ServerId, true);
         }
         public static void HandlePartyMemberHP(S_PARTY_MEMBER_CHANGE_HP p)
         {

@@ -21,8 +21,8 @@ namespace TCC.Data.Databases
                 var s = line.Split('\t');
                 var id = uint.Parse(s[0]);
                 var str = s[1];
-                var zId = uint.Parse(s[2]);
-                GuildQuests.Add(id, new GuildQuest(id, str,zId));
+                //var zId = uint.Parse(s[2]);
+                GuildQuests.Add(id, new GuildQuest(id, str));
             }
         }
     }
@@ -32,11 +32,11 @@ namespace TCC.Data.Databases
         public string Title { get; private set; }
         public uint ZoneId { get; private set; }
 
-        public GuildQuest(uint id, string s, uint zId)
+        public GuildQuest(uint id, string s)
         {
             Id = id;
             Title = s;
-            ZoneId = zId;
+            //ZoneId = zId;
         }
     }
 

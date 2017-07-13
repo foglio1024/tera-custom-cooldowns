@@ -1,9 +1,10 @@
 ﻿using System.Windows;
+using System.Windows.Threading;
 using TCC.Windows;
 
 namespace TCC.ViewModels
 {
-    public class SettingsWindowViewModel : BaseINPC
+    public class SettingsWindowViewModel : TSPropertyChanged
     {
         //visibility settings
         private bool isCooldownWindowVisible;
@@ -38,7 +39,7 @@ namespace TCC.ViewModels
                     SettingsManager.CooldownWindowSettings.Visibility = Visibility.Hidden; ;
                 }
 
-                RaisePropertyChanged("IsCooldownWindowVisible");
+                NotifyPropertyChanged("IsCooldownWindowVisible");
             }
         }
         private bool isBuffWindowVisible;
@@ -71,7 +72,7 @@ namespace TCC.ViewModels
                     WindowManager.BuffBar.SetVisibility(Visibility.Hidden);
                     SettingsManager.BuffBarWindowSettings.Visibility = Visibility.Hidden;
                 }
-                RaisePropertyChanged("IsBuffWindowVisible");
+                NotifyPropertyChanged("IsBuffWindowVisible");
 
 
             }
@@ -107,7 +108,7 @@ namespace TCC.ViewModels
                     SettingsManager.BossGaugeWindowSettings.Visibility = Visibility.Hidden;
                 }
 
-                RaisePropertyChanged("IsBossWindowVisible");
+                NotifyPropertyChanged("IsBossWindowVisible");
             }
         }
         private bool isCharacterWindowVisible;
@@ -141,7 +142,7 @@ namespace TCC.ViewModels
                     SettingsManager.CharacterWindowSettings.Visibility = Visibility.Hidden;
                 }
 
-                RaisePropertyChanged("IsCharacterWindowVisible");
+                NotifyPropertyChanged("IsCharacterWindowVisible");
             }
         }
         private bool isGroupWindowVisible;
@@ -174,7 +175,7 @@ namespace TCC.ViewModels
                     SettingsManager.GroupWindowSettings.Visibility = Visibility.Hidden;
                 }
 
-                RaisePropertyChanged("IsGroupWindowVisible");
+                NotifyPropertyChanged("IsGroupWindowVisible");
             }
         }
         private bool isClassWindowVisible;
@@ -207,7 +208,40 @@ namespace TCC.ViewModels
                     SettingsManager.ClassWindowSettings.Visibility = Visibility.Hidden;
                 }
 
-                RaisePropertyChanged("IsClassWindowVisible");
+                NotifyPropertyChanged("IsClassWindowVisible");
+            }
+        }
+        private bool isChatWindowVisible;
+        public bool IsChatWindowVisible
+        {
+            get
+            {
+                if (SettingsManager.ChatWindowSettings.Visibility == Visibility.Visible)
+                {
+                    isChatWindowVisible = true;
+                }
+                else
+                {
+                    isChatWindowVisible = false;
+                }
+                return isChatWindowVisible;
+            }
+            set
+            {
+                if (isChatWindowVisible == value) return;
+                isChatWindowVisible = value;
+                if (isChatWindowVisible)
+                {
+                    WindowManager.ChatWindow.SetVisibility(Visibility.Visible);
+                    SettingsManager.ChatWindowSettings.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    WindowManager.ChatWindow.SetVisibility(Visibility.Hidden);
+                    SettingsManager.ChatWindowSettings.Visibility = Visibility.Hidden;
+                }
+
+                NotifyPropertyChanged(nameof(IsChatWindowVisible));
             }
         }
 
@@ -220,7 +254,7 @@ namespace TCC.ViewModels
                 if (SettingsManager.CooldownWindowSettings.ClickThru == value) return;
                 SettingsManager.CooldownWindowSettings.ClickThru = value;
                 WindowManager.CooldownWindow.SetClickThru(value);
-                RaisePropertyChanged("IsCooldownWindowTransparent");
+                NotifyPropertyChanged("IsCooldownWindowTransparent");
             }
         }
         public bool IsCharacterWindowTransparent
@@ -231,7 +265,7 @@ namespace TCC.ViewModels
                 if (SettingsManager.CharacterWindowSettings.ClickThru == value) return;
                 SettingsManager.CharacterWindowSettings.ClickThru = value;
                 WindowManager.CharacterWindow.SetClickThru(value);
-                RaisePropertyChanged("IsCharacterWindowTransparent");
+                NotifyPropertyChanged("IsCharacterWindowTransparent");
             }
         }
         public bool IsBuffWindowTransparent
@@ -242,7 +276,7 @@ namespace TCC.ViewModels
                 if (SettingsManager.BuffBarWindowSettings.ClickThru == value) return;
                 SettingsManager.BuffBarWindowSettings.ClickThru = value;
                 WindowManager.BuffBar.SetClickThru(value);
-                RaisePropertyChanged("IsBuffWindowTransparent");
+                NotifyPropertyChanged("IsBuffWindowTransparent");
             }
         }
         public bool IsBossWindowTransparent
@@ -253,7 +287,7 @@ namespace TCC.ViewModels
                 if (SettingsManager.BossGaugeWindowSettings.ClickThru == value) return;
                 SettingsManager.BossGaugeWindowSettings.ClickThru = value;
                 WindowManager.BossGauge.SetClickThru(value);
-                RaisePropertyChanged("IsBossWindowTransparent");
+                NotifyPropertyChanged("IsBossWindowTransparent");
             }
         }
         public bool IsGroupWindowTransparent
@@ -264,7 +298,7 @@ namespace TCC.ViewModels
                 if (SettingsManager.GroupWindowSettings.ClickThru == value) return;
                 SettingsManager.GroupWindowSettings.ClickThru = value;
                 WindowManager.GroupWindow.SetClickThru(value);
-                RaisePropertyChanged("IsGroupWindowTransparent");
+                NotifyPropertyChanged("IsGroupWindowTransparent");
             }
         }
         public bool IsClassWindowTransparent
@@ -275,7 +309,7 @@ namespace TCC.ViewModels
                 if (SettingsManager.ClassWindowSettings.ClickThru == value) return;
                 SettingsManager.ClassWindowSettings.ClickThru = value;
                 WindowManager.ClassWindow.SetClickThru(value);
-                RaisePropertyChanged("IsClassWindowTransparent");
+                NotifyPropertyChanged("IsClassWindowTransparent");
             }
         }
 
@@ -292,7 +326,7 @@ namespace TCC.ViewModels
                 {
                     ((CooldownWindowViewModel)WindowManager.CooldownWindow.DataContext).Scale = value;
                 });
-                RaisePropertyChanged("CooldownWindowScale");
+                NotifyPropertyChanged("CooldownWindowScale");
             }
         }
         public double GroupWindowScale
@@ -306,7 +340,7 @@ namespace TCC.ViewModels
                 {
                     ((GroupWindowViewModel)WindowManager.GroupWindow.DataContext).Scale = value;
                 });
-                RaisePropertyChanged("GroupWindowScale");
+                NotifyPropertyChanged("GroupWindowScale");
             }
         }
         public double CharacterWindowScale
@@ -320,7 +354,7 @@ namespace TCC.ViewModels
                 {
                     ((CharacterWindowViewModel)WindowManager.CharacterWindow.DataContext).Scale = value;
                 });
-                RaisePropertyChanged("CharacterWindowScale");
+                NotifyPropertyChanged("CharacterWindowScale");
             }
         }
         public double BuffsWindowScale
@@ -334,7 +368,7 @@ namespace TCC.ViewModels
                 {
                     ((AbnormalityWindowViewModel)WindowManager.BuffBar.DataContext).Scale = value;
                 });
-                RaisePropertyChanged("BuffsWindowScale");
+                NotifyPropertyChanged("BuffsWindowScale");
             }
         }
         public double BossWindowScale
@@ -348,7 +382,7 @@ namespace TCC.ViewModels
                 {
                     ((BossGageWindowViewModel)WindowManager.BossGauge.DataContext).Scale = value;
                 });
-                RaisePropertyChanged("BossWindowScale");
+                NotifyPropertyChanged("BossWindowScale");
             }
         }
         public double ClassWindowScale
@@ -362,7 +396,21 @@ namespace TCC.ViewModels
                 {
                     ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).Scale = value;
                 });
-                RaisePropertyChanged("ClassWindowScale");
+                NotifyPropertyChanged("ClassWindowScale");
+            }
+        }
+        public double ChatWindowScale
+        {
+            get { return SettingsManager.ChatWindowSettings.Scale; }
+            set
+            {
+                if (SettingsManager.ChatWindowSettings.Scale == value) return;
+                SettingsManager.ChatWindowSettings.Scale = value;
+                WindowManager.ChatWindow.Dispatcher.Invoke(() =>
+                {
+                    ((ChatWindowViewModel)WindowManager.ChatWindow.DataContext).Scale = value;
+                });
+                NotifyPropertyChanged(nameof(ChatWindowScale));
             }
         }
 
@@ -378,7 +426,7 @@ namespace TCC.ViewModels
                 WindowManager.SkillsEnded = true;
 
                 //WindowManager.CooldownWindow.SetClickThru(value);
-                RaisePropertyChanged("IsCooldownWindowAutoDim");
+                NotifyPropertyChanged("IsCooldownWindowAutoDim");
             }
         }
         public bool IsCharacterWindowAutoDim
@@ -392,7 +440,7 @@ namespace TCC.ViewModels
                 WindowManager.SkillsEnded = true;
 
                 //WindowManager.CharacterWindow.SetClickThru(value);
-                RaisePropertyChanged("IsCharacterWindowAutoDim");
+                NotifyPropertyChanged("IsCharacterWindowAutoDim");
             }
         }
         public bool IsBuffBarWindowAutoDim
@@ -406,7 +454,7 @@ namespace TCC.ViewModels
                 WindowManager.SkillsEnded = true;
 
                 //WindowManager.BuffBarWindow.SetClickThru(value);
-                RaisePropertyChanged("IsBuffBarWindowAutoDim");
+                NotifyPropertyChanged("IsBuffBarWindowAutoDim");
             }
         }
         public bool IsBossGaugeWindowAutoDim
@@ -420,7 +468,7 @@ namespace TCC.ViewModels
                 WindowManager.SkillsEnded = true;
 
                 //WindowManager.BossGaugeWindow.SetClickThru(value);
-                RaisePropertyChanged("IsBossGaugeWindowAutoDim");
+                NotifyPropertyChanged("IsBossGaugeWindowAutoDim");
             }
         }
         public bool IsGroupWindowAutoDim
@@ -434,7 +482,7 @@ namespace TCC.ViewModels
                 WindowManager.SkillsEnded = true;
 
                 //WindowManager.GroupWindow.SetClickThru(value);
-                RaisePropertyChanged("IsGroupWindowAutoDim");
+                NotifyPropertyChanged("IsGroupWindowAutoDim");
             }
         }
         public bool IsClassWindowAutoDim
@@ -448,7 +496,7 @@ namespace TCC.ViewModels
                 WindowManager.SkillsEnded = true;
 
                 //WindowManager.ClassWindow.SetClickThru(value);
-                RaisePropertyChanged("IsClassWindowAutoDim");
+                NotifyPropertyChanged("IsClassWindowAutoDim");
             }
         }
 
@@ -475,7 +523,7 @@ namespace TCC.ViewModels
                 //{
                 //    ((CooldownWindowViewModel)WindowManager.CooldownWindow.DataContext).Scale = value;
                 //});
-                RaisePropertyChanged("CooldownWindowDimOpacity");
+                NotifyPropertyChanged("CooldownWindowDimOpacity");
             }
         }
         public double CharacterWindowDimOpacity
@@ -500,7 +548,7 @@ namespace TCC.ViewModels
                 //{
                 //    ((CharacterWindowViewModel)WindowManager.CharacterWindow.DataContext).Scale = value;
                 //});
-                RaisePropertyChanged("CharacterWindowDimOpacity");
+                NotifyPropertyChanged("CharacterWindowDimOpacity");
             }
         }
         public double BuffBarWindowDimOpacity
@@ -525,7 +573,7 @@ namespace TCC.ViewModels
                 //{
                 //    ((BuffBarWindowViewModel)WindowManager.BuffBarWindow.DataContext).Scale = value;
                 //});
-                RaisePropertyChanged("BuffBarWindowDimOpacity");
+                NotifyPropertyChanged("BuffBarWindowDimOpacity");
             }
         }
         public double BossGaugeWindowDimOpacity
@@ -549,7 +597,7 @@ namespace TCC.ViewModels
                 //{
                 //    ((BossGaugeWindowViewModel)WindowManager.BossGaugeWindow.DataContext).Scale = value;
                 //});
-                RaisePropertyChanged("BossGaugeWindowDimOpacity");
+                NotifyPropertyChanged("BossGaugeWindowDimOpacity");
             }
         }
         public double GroupWindowDimOpacity
@@ -573,7 +621,7 @@ namespace TCC.ViewModels
                 //{
                 //    ((GroupWindowViewModel)WindowManager.GroupWindow.DataContext).Scale = value;
                 //});
-                RaisePropertyChanged("GroupWindowDimOpacity");
+                NotifyPropertyChanged("GroupWindowDimOpacity");
             }
         }
         public double ClassWindowDimOpacity
@@ -597,7 +645,7 @@ namespace TCC.ViewModels
                 //{
                 //    ((ClassWindowViewModel)WindowManager.ClassWindow.DataContext).Scale = value;
                 //});
-                RaisePropertyChanged("ClassWindowDimOpacity");
+                NotifyPropertyChanged("ClassWindowDimOpacity");
             }
         }
 
@@ -611,7 +659,7 @@ namespace TCC.ViewModels
                 if (SettingsManager.IgnoreMeInGroupWindow == value) return;
                 SettingsManager.IgnoreMeInGroupWindow = value;
                 if (value == true) GroupWindowManager.Instance.RemoveMe();
-                RaisePropertyChanged("HideMe");
+                NotifyPropertyChanged("HideMe");
             }
         }
         public bool HideMyBuffs
@@ -621,7 +669,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.IgnoreMyBuffsInGroupWindow == value) return;
                 SettingsManager.IgnoreMyBuffsInGroupWindow = value;
-                RaisePropertyChanged("HideMyBuffs");
+                NotifyPropertyChanged("HideMyBuffs");
                 if (value == true) GroupWindowManager.Instance.ClearMyBuffs();
 
             }
@@ -633,7 +681,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.IgnoreAllBuffsInGroupWindow == value) return;
                 SettingsManager.IgnoreAllBuffsInGroupWindow = value;
-                RaisePropertyChanged("HideAllBuffs");
+                NotifyPropertyChanged("HideAllBuffs");
                 if (value == true) GroupWindowManager.Instance.ClearAllBuffs();
             }
         }
@@ -644,7 +692,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.IgnoreRaidAbnormalitiesInGroupWindow == value) return;
                 SettingsManager.IgnoreRaidAbnormalitiesInGroupWindow = value;
-                RaisePropertyChanged("HideRaidAbnormalities");
+                NotifyPropertyChanged("HideRaidAbnormalities");
                 if (value == true) GroupWindowManager.Instance.ClearAllAbnormalities();
             }
         }
@@ -662,7 +710,7 @@ namespace TCC.ViewModels
                 {
                     ((AbnormalityWindowViewModel)WindowManager.BuffBar.DataContext).Direction = s;
                 });
-                RaisePropertyChanged("IsLeftToRightOn");
+                NotifyPropertyChanged("IsLeftToRightOn");
             }
         }
         public bool ClassWindowOn
@@ -683,7 +731,7 @@ namespace TCC.ViewModels
                 //    IsCooldownWindowVisible = true;
                 //    IsClassWindowVisible = false;
                 //}
-                RaisePropertyChanged("ClassWindowOn");
+                NotifyPropertyChanged("ClassWindowOn");
             }
         }
         public bool ClickThruWhenDim
@@ -698,12 +746,59 @@ namespace TCC.ViewModels
                     WindowManager.SkillsEnded = false;
                     WindowManager.SkillsEnded = true;
                 }
-                RaisePropertyChanged("ClickThruWhenDim");
+                NotifyPropertyChanged("ClickThruWhenDim");
             }
+        }
+        public int MaxMessages
+        {
+            get { return SettingsManager.MaxMessages; }
+            set
+            {
+                if (SettingsManager.MaxMessages == value) return;
+                var val = value;
+                if (val < 20)
+                {
+                    val = 20;
+                }
+                SettingsManager.MaxMessages = val;
+                NotifyPropertyChanged("MaxMessages");
+            }
+        }
+        public int SpamThreshold
+        {
+            get { return SettingsManager.SpamThreshold; }
+            set
+            {
+                if (SettingsManager.SpamThreshold == value) return;
+                SettingsManager.SpamThreshold = value;
+                NotifyPropertyChanged("SpamThreshold");
+            }
+        }
+        public bool ShowTimestamp
+        {
+            get { return SettingsManager.ShowTimestamp; }
+            set
+            {
+                if (SettingsManager.ShowTimestamp == value) return;
+                SettingsManager.ShowTimestamp = value;
+                NotifyPropertyChanged(nameof(ShowTimestamp));
+            }
+
+        }
+        public bool ShowChannel
+        {
+            get { return SettingsManager.ShowChannel; }
+            set
+            {
+                if (SettingsManager.ShowChannel == value) return;
+                SettingsManager.ShowChannel = value;
+                NotifyPropertyChanged(nameof(ShowChannel));
+            }
+
         }
         public SettingsWindowViewModel()
         {
-
+            _dispatcher = Dispatcher.CurrentDispatcher;
             WindowManager.CooldownWindow.PropertyChanged += CooldownWindow_PropertyChanged;
             WindowManager.CharacterWindow.PropertyChanged += CharacterWindow_PropertyChanged;
             WindowManager.BossGauge.PropertyChanged += BossGauge_PropertyChanged;

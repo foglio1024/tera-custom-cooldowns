@@ -18,6 +18,7 @@ namespace TCC
         public static ObservableCollection<ulong> chestList = new ObservableCollection<ulong>();
         public static void SpawnNPC(ushort zoneId, uint templateId, ulong entityId, Visibility v, bool force)
         {
+            if (!Filter(zoneId, templateId)) return;
             if (CurrentDatabase.TryGetMonster(templateId, zoneId, out Monster m))
             {
                 if (m.IsBoss || force)
@@ -30,6 +31,14 @@ namespace TCC
                 }
             }
         }
+
+        static bool Filter(uint zoneId, uint templateId)
+        {
+            if (zoneId == 950 && templateId == 1002) return false; //skip HHP4 lament warriors
+
+            return true;
+        }
+
         public static void DespawnNPC(ulong target)
         {
             BossGageWindowManager.Instance.RemoveBoss(target);

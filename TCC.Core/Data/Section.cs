@@ -10,11 +10,27 @@ namespace TCC.Data
     {
         public uint Id { get; }
         public uint NameId { get; }
-
-        public Section(uint sId, uint sNameId)
+        public string MapId { get; }
+        public double Top { get; }
+        public double Left { get; }
+        double Width { get; }
+        public bool IsDungeon { get; }
+        public double Scale
+        {
+            get
+            {
+                return Width / (Double)App.Current.FindResource("MapWidth");
+            }
+        }
+        public Section(uint sId, uint sNameId, string mapId, double top, double left, double width, bool dg)
         {
             Id = sId;
             NameId = sNameId;
+            MapId = mapId;
+            Top = top;
+            Left = left;
+            Width = width;
+            IsDungeon = dg;
         }
     }
 }

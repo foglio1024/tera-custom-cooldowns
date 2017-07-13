@@ -29,6 +29,9 @@ namespace TCC.Converters
                 case MessagePieceType.Money:
                     c = Cursors.Arrow;
                     break;
+                case MessagePieceType.Url:
+                    c = Cursors.Hand;
+                    break;
             }
             return c;
         }

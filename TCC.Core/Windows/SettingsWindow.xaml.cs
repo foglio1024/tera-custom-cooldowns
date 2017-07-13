@@ -55,5 +55,10 @@ namespace TCC.Windows
         {
             Process.Start("https://discord.gg/anUXQTp");
         }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ((FrameworkElement)this.Content).Focus();
+        }
     }
 }

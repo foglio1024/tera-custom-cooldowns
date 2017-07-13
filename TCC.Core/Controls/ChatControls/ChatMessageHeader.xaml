@@ -6,6 +6,8 @@
              xmlns:c="clr-namespace:TCC.Converters"
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:ts="clr-namespace:TCC.TemplateSelectors"
+             xmlns:windows="clr-namespace:TCC.Windows"
+             xmlns:vm ="clr-namespace:TCC.ViewModels"
              mc:Ignorable="d" 
              >
     <Grid Width="Auto" MinWidth="0" Margin="0,0,0,0" VerticalAlignment="Stretch" Height="Auto">
@@ -46,20 +48,20 @@
                         Width="36"   
                         Margin="2,4,0,0"
                         Grid.Column="1"
-                        Visibility="Visible"
-                        
+                        Visibility="{Binding ShowChannel, Converter={StaticResource boolToVisibleCollapsed}}"
                         />
         <!--Timestamp-->
-        <TextBlock  Margin="4,2,2,0" Foreground="{Binding Channel, Converter={StaticResource ChatColorConverter}}" 
+        <TextBlock  Margin="4,1,2,0" Foreground="{Binding Channel, Converter={StaticResource ChatColorConverter}}" 
                     Width="Auto"   
                     Opacity=".8" 
                     FontWeight="Normal" 
                     FontSize="11"
                     HorizontalAlignment="Right" 
                     VerticalAlignment="Top"
-                    Visibility="Visible"
                     Text="{Binding Timestamp}"
                     Grid.Column="0"
+                        Visibility="{Binding ShowTimestamp, Converter={StaticResource boolToVisibleCollapsed}}"
+                    
                     />
     </Grid>
 </UserControl>

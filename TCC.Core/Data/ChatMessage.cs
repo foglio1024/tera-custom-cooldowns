@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -16,6 +17,7 @@ using System.Windows.Media;
 using TCC.Controls;
 using TCC.Data.Databases;
 using TCC.Parsing;
+using TCC.Parsing.Messages;
 using TCC.ViewModels;
 
 namespace TCC.Data
@@ -95,6 +97,7 @@ namespace TCC.Data
             }
         }
 
+
         protected bool isContracted;
         public bool IsContracted
         {
@@ -121,8 +124,14 @@ namespace TCC.Data
                 NotifyPropertyChanged(nameof(Rows));
             }
         }
-
-
+        public bool ShowTimestamp
+        {
+            get => SettingsManager.ShowTimestamp;
+        }
+        public bool ShowChannel
+        {
+            get => SettingsManager.ShowChannel;
+        }
         protected SynchronizedObservableCollection<MessagePiece> pieces;
         public SynchronizedObservableCollection<MessagePiece> Pieces
         {
@@ -142,6 +151,7 @@ namespace TCC.Data
             _dispatcher = WindowManager.ChatWindow.Dispatcher;
             Pieces = new SynchronizedObservableCollection<MessagePiece>(_dispatcher);
             Timestamp = DateTime.Now.ToShortTimeString();
+            WindowManager.Settings.Dispatcher.Invoke(() => ((SettingsWindowViewModel)WindowManager.Settings.DataContext).PropertyChanged += VM_PropChanged);
             RawMessage = "";
         }
         public ChatMessage(ChatChannel ch, string auth, string msg) : this()
@@ -149,10 +159,9 @@ namespace TCC.Data
             Channel = ch;
             RawMessage = msg;
             Author = auth;
-            if (Channel == ChatChannel.Raid && GroupWindowManager.Instance.IsLeader(Author)) Channel = ChatChannel.RaidLeader;
-
             try
             {
+                if (Channel == ChatChannel.Raid && GroupWindowManager.Instance.IsLeader(Author)) Channel = ChatChannel.RaidLeader;
                 switch (ch)
                 {
                     case ChatChannel.Greet:
@@ -166,210 +175,171 @@ namespace TCC.Data
                         break;
                 }
             }
-            catch (Exception)
-            {
-                return;
-            }
-            File.AppendAllText("chat.log", "[CHAT] " + RawMessage + "\n");
+            catch (Exception) { }
         }
         public ChatMessage(string systemMessage, SystemMessage m) : this()
         {
             Channel = (ChatChannel)m.ChatChannel;
-
             RawMessage = systemMessage;
             Author = "System";
-
-            var prm = SplitDirectives(systemMessage);
-            var txt = ReplaceGtLt(m.Message);
-            txt = txt.Replace("<BR>", " ");
-            if (prm == null)
+            try
             {
-                //only one parameter (opcode) so just add text
-                var textPieces = SplitByFontTags(txt);
-                foreach (var piece in textPieces)
+                var prm = SplitDirectives(systemMessage);
+                var txt = ReplaceGtLt(m.Message);
+                txt = txt.Replace("<BR>", " ");
+                if (prm == null)
                 {
-                    string content;
-                    string customColor;
-                    if (piece.StartsWith("<font"))
+                    //only one parameter (opcode) so just add text
+                    var textPieces = SplitByFontTags(txt);
+                    foreach (var piece in textPieces)
                     {
-                        //formatted piece: get color and content
-                        customColor = piece.Substring(piece.IndexOf('#') + 1, 6);
-                        var s = piece.IndexOf('>') + 1;
-                        var e = piece.IndexOf('<', s);
-                        content = piece.Substring(s, e - s);
-                    }
-                    else
-                    {
-                        //normal piece
-                        content = piece;
-                        customColor = "";
-                    }
-                    AddPiece(new MessagePiece(content, MessagePieceType.Simple, Channel, customColor));
-
-                }
-            }
-            else
-            {
-                //more parameters
-                txt = ReplaceParameters(txt, prm);
-                var textPieces = SplitByFontTags(txt);
-
-                foreach (var piece in textPieces)
-                {
-                    string content;
-                    string customColor;
-                    if (piece.StartsWith("<font"))
-                    {
-                        //formatted piece: get color and content
-                        customColor = piece.Substring(piece.IndexOf('#') + 1, 6);
-                        var s = piece.IndexOf('>') + 1;
-                        var e = piece.IndexOf('<', s);
-                        content = piece.Substring(s, e - s);
-                    }
-                    else
-                    {
-                        //normal piece
-                        content = piece;
-                        customColor = "";
-                    }
-                    var innerPieces = content.Split(new char[] { '{', '}' }, StringSplitOptions.RemoveEmptyEntries);
-                    bool plural = false;
-                    int selectionStep = 0;
-
-                    foreach (var inPiece in innerPieces)
-                    {
-                        if (selectionStep == 1)
+                        string content;
+                        string customColor;
+                        if (piece.StartsWith("<font"))
                         {
-                            var n = Int32.Parse(inPiece);
-                            if (n != 1) plural = true;
-
-                            selectionStep++;
-                            continue;
-                        }
-                        if (selectionStep == 2)
-                        {
-                            if (inPiece == "/s//s")
-                            {
-                                if (plural)
-                                {
-                                    Pieces.Last().Text = Pieces.Last().Text + "s";
-                                    plural = false;
-                                }
-                            }
-
-                            selectionStep = 0;
-                            continue;
-                        }
-
-                        if (inPiece.StartsWith("@item"))
-                        {
-                            AddPiece(ParseSysMsgItem(BuildParametersDictionary(inPiece)));
-                        }
-                        else if (inPiece.StartsWith("@achievement"))
-                        {
-                            var mp = ParseSysMsgAchi(BuildParametersDictionary(inPiece));
-                            mp.SetColor(customColor);
-                            AddPiece(mp);
-                        }
-                        else if (inPiece.StartsWith("@GuildQuest"))
-                        {
-                            var mp = ParseSysMsgGuildQuest(BuildParametersDictionary(inPiece));
-                            mp.SetColor(customColor);
-                            AddPiece(mp);
-                        }
-                        else if (inPiece.StartsWith("@dungeon"))
-                        {
-                            var mp = ParseSysMsgDungeon(BuildParametersDictionary(inPiece));
-                            mp.SetColor(customColor);
-                            AddPiece(mp);
-                        }
-                        else if (inPiece.StartsWith("@accountBenefit"))
-                        {
-                            var mp = ParseSysMsgAccBenefit(BuildParametersDictionary(inPiece));
-                            mp.SetColor(customColor);
-                            AddPiece(mp);
-                        }
-                        else if (inPiece.StartsWith("@AchievementGradeInfo"))
-                        {
-                            var mp = ParseSysMsgAchiGrade(BuildParametersDictionary(inPiece));
-                            mp.SetColor(customColor);
-                            AddPiece(mp);
-                        }
-                        else if (inPiece.StartsWith("@quest"))
-                        {
-                            var mp = ParseSysMsgQuest(BuildParametersDictionary(inPiece));
-                            mp.SetColor(customColor);
-                            AddPiece(mp);
-                        }
-                        else if (inPiece.StartsWith("@creature"))
-                        {
-                            var mp = ParseSysMsgCreature(BuildParametersDictionary(inPiece));
-                            mp.SetColor(customColor);
-                            AddPiece(mp);
-                        }
-                        else if (inPiece.StartsWith("@select"))
-                        {
-                            selectionStep++;
-                        }
-                        else if (inPiece.StartsWith("@zoneName"))
-                        {
-                            var mp = ParseSysMsgZone(BuildParametersDictionary(inPiece));
-                            mp.SetColor(customColor);
-                            AddPiece(mp);
-                        }
-                        else if (inPiece.Contains("@money"))
-                        {
-                            Channel = ChatChannel.Money;
-                            var t = inPiece.Replace("@money", "");
-                            AddPiece(new MessagePiece(new Money(t), ChatChannel.Money));
+                            //formatted piece: get color and content
+                            customColor = piece.Substring(piece.IndexOf('#') + 1, 6);
+                            var s = piece.IndexOf('>') + 1;
+                            var e = piece.IndexOf('<', s);
+                            content = piece.Substring(s, e - s);
                         }
                         else
                         {
-                            AddPiece(new MessagePiece(inPiece, MessagePieceType.Simple, Channel, customColor));
+                            //normal piece
+                            content = piece;
+                            customColor = "";
+                        }
+                        RawMessage = content;
+                        AddPiece(new MessagePiece(content, MessagePieceType.Simple, Channel, customColor));
+                    }
+                }
+                else
+                {
+                    //more parameters
+                    txt = ReplaceParameters(txt, prm, true);
+                    RawMessage = txt;
+                    var textPieces = SplitByFontTags(txt);
+
+                    foreach (var piece in textPieces)
+                    {
+                        string content;
+                        string customColor;
+                        if (piece.StartsWith("<font"))
+                        {
+                            //formatted piece: get color and content
+                            customColor = piece.Substring(piece.IndexOf('#') + 1, 6);
+                            var s = piece.IndexOf('>') + 1;
+                            var e = piece.IndexOf('<', s);
+                            content = piece.Substring(s, e - s);
+                        }
+                        else
+                        {
+                            //normal piece
+                            content = piece;
+                            customColor = "";
+                        }
+                        var innerPieces = content.Split(new char[] { '{', '}' }, StringSplitOptions.RemoveEmptyEntries);
+                        bool plural = false;
+                        int selectionStep = 0;
+
+                        foreach (var inPiece in innerPieces)
+                        {
+                            if (selectionStep == 1)
+                            {
+                                var n = Int32.Parse(inPiece);
+                                if (n != 1) plural = true;
+
+                                selectionStep++;
+                                continue;
+                            }
+                            if (selectionStep == 2)
+                            {
+                                if (inPiece == "/s//s")
+                                {
+                                    if (plural)
+                                    {
+                                        Pieces.Last().Text = Pieces.Last().Text + "s";
+                                        plural = false;
+                                    }
+                                }
+
+                                selectionStep = 0;
+                                continue;
+                            }
+
+                            if (inPiece.StartsWith("@item"))
+                            {
+                                AddPiece(ParseSysMsgItem(BuildParametersDictionary(inPiece)));
+                            }
+                            else if (inPiece.StartsWith("@achievement"))
+                            {
+                                var mp = ParseSysMsgAchi(BuildParametersDictionary(inPiece));
+                                mp.SetColor(customColor);
+                                AddPiece(mp);
+                            }
+                            else if (inPiece.StartsWith("@GuildQuest"))
+                            {
+                                var mp = ParseSysMsgGuildQuest(BuildParametersDictionary(inPiece));
+                                mp.SetColor(customColor);
+                                AddPiece(mp);
+                            }
+                            else if (inPiece.StartsWith("@dungeon"))
+                            {
+                                var mp = ParseSysMsgDungeon(BuildParametersDictionary(inPiece));
+                                mp.SetColor(customColor);
+                                AddPiece(mp);
+                            }
+                            else if (inPiece.StartsWith("@accountBenefit"))
+                            {
+                                var mp = ParseSysMsgAccBenefit(BuildParametersDictionary(inPiece));
+                                mp.SetColor(customColor);
+                                AddPiece(mp);
+                            }
+                            else if (inPiece.StartsWith("@AchievementGradeInfo"))
+                            {
+                                var mp = ParseSysMsgAchiGrade(BuildParametersDictionary(inPiece));
+                                mp.SetColor(customColor);
+                                AddPiece(mp);
+                            }
+                            else if (inPiece.StartsWith("@quest"))
+                            {
+                                var mp = ParseSysMsgQuest(BuildParametersDictionary(inPiece));
+                                mp.SetColor(customColor);
+                                AddPiece(mp);
+                            }
+                            else if (inPiece.StartsWith("@creature"))
+                            {
+                                var mp = ParseSysMsgCreature(BuildParametersDictionary(inPiece));
+                                mp.SetColor(customColor);
+                                AddPiece(mp);
+                            }
+                            else if (inPiece.StartsWith("@select"))
+                            {
+                                selectionStep++;
+                            }
+                            else if (inPiece.StartsWith("@zoneName"))
+                            {
+                                var mp = ParseSysMsgZone(BuildParametersDictionary(inPiece));
+                                mp.SetColor(customColor);
+                                AddPiece(mp);
+                            }
+                            else if (inPiece.Contains("@money"))
+                            {
+                                Channel = ChatChannel.Money;
+                                var t = inPiece.Replace("@money", "");
+                                AddPiece(new MessagePiece(new Money(t), ChatChannel.Money));
+                            }
+                            else
+                            {
+                                AddPiece(new MessagePiece(inPiece, MessagePieceType.Simple, Channel, customColor));
+                            }
                         }
                     }
                 }
             }
-
-            File.AppendAllText("chat.log", "[SYST] " + RawMessage + "\n");
+            catch (Exception) { }
         }
 
-        internal static void SplitSimplePieces(ChatMessage chatMessage)
-        {
-            var simplePieces = new List<MessagePiece>();
-            bool onlySimple = true;
-            foreach (var item in chatMessage.Pieces)
-            {
-                if(item.Type == MessagePieceType.Simple)
-                {
-                    simplePieces.Add(item);
-                }
-                else
-                {
-                    onlySimple = false;
-                }
-            }
-            if (onlySimple) return;
-
-            for (int i = 0; i < simplePieces.Count; i++)
-            {
-                simplePieces[i].Text = simplePieces[i].Text.Replace(" ", " [");
-                var split = simplePieces[i].Text.Split(new char[] { '[' }, StringSplitOptions.RemoveEmptyEntries);
-
-                int index = chatMessage.Pieces.IndexOf(simplePieces[i]);
-                for (int j = 0; j < split.Length; j++)
-                {
-                    var mp = new MessagePiece(split[j])
-                    {
-                        Color = simplePieces[i].Color,
-                        Type = MessagePieceType.Simple
-                    };
-                    chatMessage.InsertPiece(mp, index);
-                    index = chatMessage.Pieces.IndexOf(mp) + 1;
-                }
-                chatMessage.RemovePiece(simplePieces[i]);
-            }
-        }
         #endregion
 
         #region Generic Methods
@@ -379,7 +349,7 @@ namespace TCC.Data
         }
         protected void InsertPiece(MessagePiece mp, int index)
         {
-            _dispatcher.Invoke(() => Pieces.Insert(index,mp));
+            _dispatcher.Invoke(() => Pieces.Insert(index, mp));
         }
         protected void RemovePiece(MessagePiece mp)
         {
@@ -390,6 +360,66 @@ namespace TCC.Data
             msg = msg.Replace("&lt;", left);
             msg = msg.Replace("&gt;", right);
             return msg;
+        }
+        public static void SetChannel(ChatMessage msg, ChatChannel ch)
+        {
+            msg.Channel = ch;
+        }
+        internal static void SplitSimplePieces(ChatMessage chatMessage)
+        {
+            var simplePieces = new List<MessagePiece>();
+            bool onlySimple = true;
+            foreach (var item in chatMessage.Pieces)
+            {
+                if (item.Type == MessagePieceType.Simple)
+                {
+                    simplePieces.Add(item);
+                }
+                else if (item.Type == MessagePieceType.Item)
+                {
+                    simplePieces.Add(item);
+                    onlySimple = false;
+                }
+                else
+                {
+                    onlySimple = false;
+                }
+            }
+            if (onlySimple) return;
+
+            for (int i = 0; i < simplePieces.Count; i++)
+            {
+                simplePieces[i].Text = simplePieces[i].Text.Replace(" ", " [[");
+                var split = simplePieces[i].Text.Split(new string[] { "[[" }, StringSplitOptions.RemoveEmptyEntries);
+
+                int index = chatMessage.Pieces.IndexOf(simplePieces[i]);
+                for (int j = 0; j < split.Length; j++)
+                {
+                    var mp = new MessagePiece(split[j])
+                    {
+                        Color = simplePieces[i].Color,
+                        Type = simplePieces[i].Type,
+                        ItemId = simplePieces[i].ItemId,
+                        ItemUid = simplePieces[i].ItemUid,
+                        BoundType = simplePieces[i].BoundType,
+                        OwnerName = simplePieces[i].OwnerName,
+                    };
+                    chatMessage.InsertPiece(mp, index);
+                    index = chatMessage.Pieces.IndexOf(mp) + 1;
+                }
+                chatMessage.RemovePiece(simplePieces[i]);
+            }
+        }
+        private void VM_PropChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(ShowChannel))
+            {
+                NotifyPropertyChanged(nameof(ShowChannel));
+            }
+            else if (e.PropertyName == nameof(ShowTimestamp))
+            {
+                NotifyPropertyChanged(nameof(ShowTimestamp));
+            }
         }
         public override string ToString()
         {
@@ -407,6 +437,8 @@ namespace TCC.Data
         {
             AddPiece(new MessagePiece(msg, MessagePieceType.Simple, ch));
         }
+
+
         protected void ParseEmoteMessage(string msg)
         {
             string header = "@social:";
@@ -468,8 +500,31 @@ namespace TCC.Data
                 if (text.IndexOf("WTB", StringComparison.InvariantCultureIgnoreCase) >= 0 && Channel == ChatChannel.Global) Channel = ChatChannel.TradeRedirect;
                 if (text.IndexOf("WTT", StringComparison.InvariantCultureIgnoreCase) >= 0 && Channel == ChatChannel.Global) Channel = ChatChannel.TradeRedirect;
 
-                //add piece to list
-                AddPiece(new MessagePiece(ReplaceGtLt(text), MessagePieceType.Simple, Channel));
+                var t2 = text.Replace(" ", " [[");
+                var split = t2.Split(new string[] { "[[" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+
+                StringBuilder content = new StringBuilder("");
+                foreach (var item in split)
+                {
+                    Regex RgxUrl = new Regex(@"^http(s)?://([\w-]+.)+[\w-]+(/[\w- ./?%&=])?$");
+                    if (RgxUrl.IsMatch(item))
+                    {
+                        if (content.ToString() != "")
+                        {
+                            AddPiece(new MessagePiece(ReplaceGtLt(content.ToString()), MessagePieceType.Simple, Channel));
+                            content = new StringBuilder("");
+                        }
+                        AddPiece(new MessagePiece(ReplaceGtLt(item), MessagePieceType.Url, Channel, "7289da"));
+                    }
+                    else
+                    {
+                        content.Append(item);
+                    }
+                }
+                if (content.ToString() != "")
+                {
+                    AddPiece(new MessagePiece(ReplaceGtLt(content.ToString()), MessagePieceType.Simple, Channel));
+                }
 
                 //cut message
                 return msg = msg.Substring(end + C_TAG.Length);
@@ -531,7 +586,7 @@ namespace TCC.Data
         protected MessagePiece ParseItemLink(string a)
         {
             var pars = ParseLinkedParameters(a);
-            var id =  UInt32.Parse(pars[0]);
+            var id = UInt32.Parse(pars[0]);
             var uid = Int32.Parse(pars[1]);
             string owner = "";
             try { owner = pars[2]; }
@@ -581,6 +636,7 @@ namespace TCC.Data
             var worldId = UInt32.Parse(locTree[0]);
             var guardId = UInt32.Parse(locTree[1]);
             var sectionId = UInt32.Parse(locTree[2]);
+            if (worldId == 1 && guardId == 2 && sectionId == 9) sectionId = 7;
             var continent = UInt32.Parse(pars[1]);
             var coords = pars[2].Split(',');
             var x = Double.Parse(coords[0], CultureInfo.InvariantCulture);
@@ -615,6 +671,7 @@ namespace TCC.Data
             {
                 Type = MessagePieceType.Point_of_interest
             };
+            result.Location = new Location(worldId, guardId, sectionId, x, y);
             return result;
         }
         #endregion
@@ -730,7 +787,7 @@ namespace TCC.Data
             string questName = id.ToString();
             if (GuildQuestDatabase.GuildQuests.TryGetValue(id, out GuildQuest q))
             {
-                questName = q.Title.Replace("{HuntingZone1}", EntitiesManager.CurrentDatabase.GetZoneName(q.ZoneId));
+                questName = q.Title;
             }
             return new MessagePiece(questName, MessagePieceType.Simple, Channel);
         }
@@ -806,17 +863,45 @@ namespace TCC.Data
 
             return result.ToArray();
         }
-        protected static string ReplaceParameters(string txt, Dictionary<string, string> pars)
+        protected static string ReplaceParameters(string txt, Dictionary<string, string> pars, bool all)
         {
             string result = "";
-            foreach (var keyVal in pars)
+            if (!all)
             {
-                result = txt.Replace('{' + keyVal.Key, '{' + keyVal.Value);
-                if (txt == result)
+                foreach (var keyVal in pars)
                 {
-                    result = Utils.ReplaceCaseInsensitive(txt, '{' + keyVal.Key, '{' + keyVal.Value);
+                    var regex = new Regex(Regex.Escape('{' + keyVal.Key + '}'));
+
+                    result = regex.Replace(txt, '{' + keyVal.Value + '}', 1);
+                    if (txt == result)
+                    {
+                        result = Utils.ReplaceFirstOccurrenceCaseInsensitive(txt, '{' + keyVal.Key + '}', '{' + keyVal.Value + '}');
+                    }
+                    if (txt == result)
+                    {
+                        result = Utils.ReplaceFirstOccurrenceCaseInsensitive(txt, '{' + keyVal.Key, '{' + keyVal.Value);
+                    }
+                    txt = result;
                 }
-                txt = result;
+            }
+            else
+            {
+                foreach (var keyVal in pars)
+                {
+                    var regex = new Regex(Regex.Escape('{' + keyVal.Key + '}'));
+
+                    result = regex.Replace(txt, '{' + keyVal.Value + '}');
+                    if (txt == result)
+                    {
+                        result = Utils.ReplaceCaseInsensitive(txt, '{' + keyVal.Key + '}', '{' + keyVal.Value + '}');
+                    }
+                    if (txt == result)
+                    {
+                        result = Utils.ReplaceCaseInsensitive(txt, '{' + keyVal.Key, '{' + keyVal.Value);
+                    }
+                    txt = result;
+                }
+
             }
             return result;
         }
@@ -872,7 +957,7 @@ namespace TCC.Data
 
             msg.Author = prm["UserName"];
             var txt = "{ItemName}";
-            txt = ReplaceParameters(txt, prm);
+            txt = ReplaceParameters(txt, prm, true);
             txt = txt.Replace("{", "");
             txt = txt.Replace("}", "");
             var mp = ParseSysMsgItem(BuildParametersDictionary(txt));
@@ -887,6 +972,7 @@ namespace TCC.Data
 
             return msg;
         }
+
         #endregion
     }
 }

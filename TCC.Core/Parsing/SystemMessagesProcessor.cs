@@ -15,7 +15,11 @@ namespace TCC.Parsing
         {
             "SMT_ITEM_ROULETTE_VALUE",
             "SMT_BATTLE_START",
-            "SMT_BATTLE_END"
+            "SMT_BATTLE_END",
+            "SMT_DROPDMG_DAMAGE",
+            "SMT_BATTLE_PARTY_DIE",
+            "SMT_BATTLE_PARTY_RESURRECT"
+
         };
         public static bool Filter(string opcodeName)
         {
@@ -48,7 +52,24 @@ namespace TCC.Parsing
             { "SMT_MAX_ENCHANT_SUCCEED", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleMaxEnchantSucceed(srvMsg)) },
             { "SMT_FRIEND_IS_CONNECTED", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleFriendLogin(srvMsg, sysMsg)) },
             { "SMT_CHAT_LINKTEXT_DISCONNECT", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleInvalidLink(srvMsg, sysMsg)) },
+            { "SMT_BATTLE_PARTY_DIE", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandlePartyMemberDeath(srvMsg, sysMsg)) },
+            { "SMT_BATTLE_PARTY_RESURRECT", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandlePartyMemberRess(srvMsg, sysMsg)) },
         };
+
+        private static void HandlePartyMemberRess(string srvMsg, SystemMessage sysMsg)
+        {
+            var msg = new ChatMessage(srvMsg, sysMsg);
+            ChatMessage.SetChannel(msg, ChatChannel.Ress);
+            ChatWindowViewModel.Instance.AddChatMessage(msg);
+
+        }
+
+        private static void HandlePartyMemberDeath(string srvMsg, SystemMessage sysMsg)
+        {
+            var msg = new ChatMessage(srvMsg, sysMsg);
+            ChatMessage.SetChannel(msg, ChatChannel.Death);
+            ChatWindowViewModel.Instance.AddChatMessage(msg);
+        }
 
         private static void HandleInvalidLink(string srvMsg, SystemMessage sysMsg)
         {

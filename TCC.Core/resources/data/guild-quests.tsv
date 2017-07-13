@@ -1,96 +1,107 @@
-4001001	{Monster1}	152
-4002001	{Monster1}	152
-4003001	{Monster1}	152
-6001001	Defeat Anansha	29
-6002001	Defeat Frygaras	34
-6003001	Defeat Sabranak	34
-11001001	{HuntingZone1}	777
-11002001	{HuntingZone1}	777
-11003001	{HuntingZone1}	777
-11004001	{HuntingZone1}	860
-11005001	{HuntingZone1}	860
-11006001	{HuntingZone1}	860
-11007001	{HuntingZone1}	460
-11008001	{HuntingZone1}	460
-11009001	{HuntingZone1}	460
-11010001	{HuntingZone1}	767
-11011001	{HuntingZone1}	767
-11012001	{HuntingZone1}	767
-11013001	{HuntingZone1}	459
-11014001	{HuntingZone1}	459
-11015001	{HuntingZone1}	459
-11016001	{HuntingZone1}	611
-11017001	{HuntingZone1}	611
-11018001	{HuntingZone1}	611
-11019001	{HuntingZone1}	467
-11020001	{HuntingZone1}	467
-11021001	{HuntingZone1}	467
-11022001	{HuntingZone1}	768
-11023001	{HuntingZone1}	768
-11024001	{HuntingZone1}	768
-11025001	{HuntingZone1}	468
-11026001	{HuntingZone1}	468
-11027001	{HuntingZone1}	468
-21001001	{HuntingZone1}	767
-21002001	{HuntingZone1}	767
-21003001	{HuntingZone1}	767
-21004001	{HuntingZone1}	467
-21005001	{HuntingZone1}	467
-21006001	{HuntingZone1}	467
-21007001	{HuntingZone1}	429
-21008001	{HuntingZone1}	429
-21009001	{HuntingZone1}	429
-21010001	{HuntingZone1}	769
-21011001	{HuntingZone1}	769
-21012001	{HuntingZone1}	769
-21013001	{HuntingZone1}	768
-21014001	{HuntingZone1}	768
-21015001	{HuntingZone1}	768
-21016001	{HuntingZone1}	916
-21017001	{HuntingZone1}	916
-21018001	{HuntingZone1}	916
-21019001	{HuntingZone1}	468
-21020001	{HuntingZone1}	468
-21021001	{HuntingZone1}	468
-21022001	{HuntingZone1}	969
-21023001	{HuntingZone1}	969
-21024001	{HuntingZone1}	969
-21025001	{HuntingZone1}	770
-21026001	{HuntingZone1}	770
-21027001	{HuntingZone1}	770
-21028001	{HuntingZone1}	970
-21029001	{HuntingZone1}	970
-21030001	{HuntingZone1}	970
-21031001	{HuntingZone1}	710
-21032001	{HuntingZone1}	710
-21033001	{HuntingZone1}	710
-31001001	Clear {HuntingZone1}	511
-31002001	Clear {HuntingZone1}	511
-31003001	Clear {HuntingZone1}	511
-31004001	Clear {HuntingZone1}	780
-31005001	Clear {HuntingZone1}	780
-31006001	Clear {HuntingZone1}	780
-31007001	Clear {HuntingZone1}	760
-31008001	Clear {HuntingZone1}	760
-31009001	Clear {HuntingZone1}	760
-31010001	Clear {HuntingZone1}	754
-31011001	Clear {HuntingZone1}	754
-31012001	Clear {HuntingZone1}	754
-31013001	Clear {HuntingZone1}	781
-31014001	Clear {HuntingZone1}	781
-31015001	Clear {HuntingZone1}	781
-31016001	Clear {HuntingZone1}	980
-31017001	Clear {HuntingZone1}	980
-31018001	Clear {HuntingZone1}	980
-31019001	Clear {HuntingZone1}	756
-31020001	Clear {HuntingZone1}	756
-31021001	Clear {HuntingZone1}	756
-31022001	Clear {HuntingZone1}	981
-31023001	Clear {HuntingZone1}	981
-31024001	Clear {HuntingZone1}	981
-31025001	Clear {HuntingZone1}	454
-31026001	Clear {HuntingZone1}	454
-31027001	Clear {HuntingZone1}	454
-31028001	Clear {HuntingZone1}	457
-31029001	Clear {HuntingZone1}	457
-31030001	Clear {HuntingZone1}	457
+2001001	Fraywind Canyon
+2002001	Fraywind Canyon
+2003001	Fraywind Canyon
+2004001	Corsairs' Stronghold
+2005001	Corsairs' Stronghold
+2006001	Corsairs' Stronghold
+2007001	Gridiron
+2008001	Gridiron
+2009001	Gridiron
+3001001	Crafting Supplies
+3002001	Crafting Supplies
+3003001	Crafting Supplies
+3004001	Crafting Supplies
+3005001	Crafting Supplies
+6001001	Defeat Anansha
+6002001	Defeat Frygaras
+6003001	Defeat Sabranak
+11001001	Channelworks
+11002001	Channelworks
+11003001	Channelworks
+11004001	Kalivan's Challenge
+11005001	Kalivan's Challenge
+11006001	Kalivan's Challenge
+11007001	Kalivan's Dreadnaught (Hard)
+11008001	Kalivan's Dreadnaught (Hard)
+11009001	Kalivan's Dreadnaught (Hard)
+11010001	Demokron Factory
+11011001	Demokron Factory
+11012001	Demokron Factory
+11013001	Forsaken Island
+11014001	Forsaken Island
+11015001	Forsaken Island
+11016001	The Abscess (Hard)
+11017001	The Abscess (Hard)
+11018001	The Abscess (Hard)
+11019001	Demokron Factory (Hard)
+11020001	Demokron Factory (Hard)
+11021001	Demokron Factory (Hard)
+11022001	Shadow Sanguinary
+11023001	Shadow Sanguinary
+11024001	Shadow Sanguinary
+11025001	Shadow Sanguinary (Hard)
+11026001	Shadow Sanguinary (Hard)
+11027001	Shadow Sanguinary (Hard)
+21001001	Demokron Factory
+21002001	Demokron Factory
+21003001	Demokron Factory
+21004001	Demokron Factory (Hard)
+21005001	Demokron Factory (Hard)
+21006001	Demokron Factory (Hard)
+21007001	Vault of Kaprima
+21008001	Vault of Kaprima
+21009001	Vault of Kaprima
+21010001	Lilith's Keep
+21011001	Lilith's Keep
+21012001	Lilith's Keep
+21013001	Shadow Sanguinary
+21014001	Shadow Sanguinary
+21015001	Shadow Sanguinary
+21016001	Sky Cruiser Endeavor (Hard)
+21017001	Sky Cruiser Endeavor (Hard)
+21018001	Sky Cruiser Endeavor (Hard)
+21019001	Shadow Sanguinary (Hard)
+21020001	Shadow Sanguinary (Hard)
+21021001	Shadow Sanguinary (Hard)
+21022001	Nightmare Lilith's Keep
+21023001	Nightmare Lilith's Keep
+21024001	Nightmare Lilith's Keep
+21025001	Ruinous Manor
+21026001	Ruinous Manor
+21027001	Ruinous Manor
+21028001	Ruinous Manor (Hard)
+21029001	Ruinous Manor (Hard)
+21030001	Ruinous Manor (Hard)
+21031001	Broken Prison
+21032001	Broken Prison
+21033001	Broken Prison
+31001001	Clear The Abscess
+31002001	Clear The Abscess
+31003001	Clear The Abscess
+31004001	Clear Velik's Hold
+31005001	Clear Velik's Hold
+31006001	Clear Velik's Hold
+31007001	Clear Kalivan's Dreadnaught
+31008001	Clear Kalivan's Dreadnaught
+31009001	Clear Kalivan's Dreadnaught
+31010001	Clear Bathysmal Rise
+31011001	Clear Bathysmal Rise
+31012001	Clear Bathysmal Rise
+31013001	Clear Velik's Sanctuary
+31014001	Clear Velik's Sanctuary
+31015001	Clear Velik's Sanctuary
+31016001	Clear Velik's Hold (Hard)
+31017001	Clear Velik's Hold (Hard)
+31018001	Clear Velik's Hold (Hard)
+31019001	Clear Timescape
+31020001	Clear Timescape
+31021001	Clear Timescape
+31022001	Clear Velik's Sanctuary (Hard)
+31023001	Clear Velik's Sanctuary (Hard)
+31024001	Clear Velik's Sanctuary (Hard)
+31025001	Clear Bathysmal Rise (Hard)
+31026001	Clear Bathysmal Rise (Hard)
+31027001	Clear Bathysmal Rise (Hard)
+31028001	Clear Akeron's Inferno (Hard)
+31029001	Clear Akeron's Inferno (Hard)
+31030001	Clear Akeron's Inferno (Hard)

@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using TCC.Data;
+using TCC.Data.Databases;
+using TCC.Parsing;
 using TCC.Parsing.Messages;
 
 namespace TCC.ViewModels
@@ -122,7 +124,7 @@ namespace TCC.ViewModels
             if (ab.Infinity) duration = uint.MaxValue;
             User u;
 
-            if(GetUser(playerId, serverId, out u))
+            if (GetUser(playerId, serverId, out u))
             {
                 if (ab.Type == AbnormalityType.Buff)
                 {
@@ -132,7 +134,7 @@ namespace TCC.ViewModels
                 else
                 {
                     // -- show only aggro stacks if we are in HH -- //
-                    if(BossGageWindowManager.Instance.CurrentNPCs.Any(x => x.ZoneId == 950))
+                    if (BossGageWindowManager.Instance.CurrentNPCs.Any(x => x.ZoneId == 950))
                     {
                         if (ab.Id != 950023) return;
                     }
@@ -142,11 +144,12 @@ namespace TCC.ViewModels
                 return;
             }
         }
+
         public void EndUserAbnormality(Abnormality ab, uint playerId, uint serverId)
         {
             User u;
 
-            if(GetUser(playerId, serverId, out u))
+            if (GetUser(playerId, serverId, out u))
             {
                 if (ab.Type == AbnormalityType.Buff)
                 {
@@ -165,7 +168,7 @@ namespace TCC.ViewModels
         {
             User u;
 
-            if(GetUser(playerId, serverId, out u))
+            if (GetUser(playerId, serverId, out u))
             {
                 u.ClearAbnormalities();
                 return;
@@ -212,6 +215,10 @@ namespace TCC.ViewModels
             }
         }
 
+        private readonly object dpsLock = new object();
+        private readonly object tankLock = new object();
+        private readonly object healersLock = new object();
+
         public void AddOrUpdateMember(User p)
         {
             if (SettingsManager.IgnoreMeInGroupWindow && p.EntityId == SessionManager.CurrentPlayer.EntityId) return;
@@ -230,14 +237,7 @@ namespace TCC.ViewModels
                     AddOrUpdateTank(p);
                     break;
                 case Class.Warrior:
-                    if (Tanks.Contains(p))
-                    {
-                        AddOrUpdateTank(p);
-                    }
-                    else
-                    {
-                        AddOrUpdateDps(p);
-                    }
+                    AddOrUpdateWarrior(p);
                     break;
                 default:
                     AddOrUpdateDps(p);
@@ -246,66 +246,134 @@ namespace TCC.ViewModels
             GroupSize = GetCount();
 
         }
+        private void AddOrUpdateWarrior(User p)
+        {
+            if (TryGetUserFromList(Tanks, p.ServerId, p.PlayerId, out User wartank))
+            {
+                AddOrUpdateTank(p);
+                Console.WriteLine("Added(1) {0} to tanks", p.Name);
+            }
+            else if (TryGetUserFromList(Dps, p.ServerId, p.PlayerId, out User warrior))
+            {
+                AddOrUpdateDps(p);
+                Console.WriteLine("Added(2) {0} to dps", p.Name);
+            }
+            else
+            {
+                AddOrUpdateDps(p);
+                Console.WriteLine("Added(3) {0} to dps", p.Name);
+            }
+
+        }
+        private void SendAddMessage(string name)
+        {
+            string msg;
+            string opcode;
+            if (Raid)
+            {
+                msg = "@0\vPartyPlayerName\v" + name;
+                opcode = "SMT_JOIN_UNIONPARTY_PARTYPLAYER";
+            }
+            else
+            {
+                opcode = "SMT_JOIN_PARTY_PARTYPLAYER";
+                msg = "@0\vPartyPlayerName\v" + name + "\vparty\vparty";
+            }
+            SystemMessages.Messages.TryGetValue(opcode, out SystemMessage m);
+            SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
+        }
+        private void SendLeaveMessage(string name)
+        {
+            string msg;
+            string opcode;
+            if (Raid)
+            {
+                msg = "@0\vPartyPlayerName\v" + name;
+                opcode = "SMT_LEAVE_UNIONPARTY_PARTYPLAYER";
+            }
+            else
+            {
+                opcode = "SMT_LEAVE_PARTY_PARTYPLAYER";
+                msg = "@0\vPartyPlayerName\v" + name + "\vparty\vparty";
+            }
+            SystemMessages.Messages.TryGetValue(opcode, out SystemMessage m);
+            SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
+
+        }
         private void AddOrUpdateDps(User p)
         {
-            var dps = _dps.FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
-            if (dps == null)
+            lock (dpsLock)
             {
-                _dps.Add(p);
-                return;
+                var dps = _dps.FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
+                if (dps == null)
+                {
+                    _dps.Add(p);
+                    SendAddMessage(p.Name);
+                    return;
+                }
+                dps.Online = p.Online;
+                dps.EntityId = p.EntityId;
+                dps.IsLeader = p.IsLeader;
+                //update here
             }
-            dps.Online = p.Online;
-            dps.EntityId = p.EntityId;
-            dps.IsLeader = p.IsLeader;
-            //update here
         }
         private void AddOrUpdateTank(User p)
         {
-            var tank = _tanks.FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
-            if (tank == null)
+            lock (tankLock)
             {
-                _tanks.Add(p);
-                return;
-            }
-            tank.Online = p.Online;
-            tank.EntityId = p.EntityId;
-            tank.IsLeader = p.IsLeader;
+                var tank = _tanks.FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
+                if (tank == null)
+                {
+                    _tanks.Add(p);
+                    SendAddMessage(p.Name);
+                    return;
+                }
+                tank.Online = p.Online;
+                tank.EntityId = p.EntityId;
+                tank.IsLeader = p.IsLeader;
 
+            }
             //update here
         }
         private void AddOrUpdateHealer(User p)
         {
-            var healer = _healers.FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
-            if (healer == null)
+            lock (healersLock)
             {
-                _healers.Add(p);
-                return;
+                var healer = _healers.FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
+                if (healer == null)
+                {
+                    _healers.Add(p);
+                    SendAddMessage(p.Name);
+                    return;
+                }
+                healer.Online = p.Online;
+                healer.EntityId = p.EntityId;
+                healer.IsLeader = p.IsLeader;
+
+                //update here
             }
-            healer.Online = p.Online;
-            healer.EntityId = p.EntityId;
-            healer.IsLeader = p.IsLeader;
-
-
-            //update here
         }
-        public void RemoveMember(uint playerId, uint serverId)
+        public void RemoveMember(uint playerId, uint serverId, bool kick = false)
         {
             User u;
             if (TryGetUserFromList(_dps, serverId, playerId, out u))
             {
                 Dps.Remove(u);
                 GroupSize = GetCount();
-                return;
+                if (!kick) SendLeaveMessage(u.Name);
+                return; //needed?
             }
             if (TryGetUserFromList(_tanks, serverId, playerId, out u))
             {
                 Tanks.Remove(u);
                 GroupSize = GetCount();
+                if (!kick) SendLeaveMessage(u.Name);
             }
             if (TryGetUserFromList(_healers, serverId, playerId, out u))
             {
                 Healers.Remove(u);
                 GroupSize = GetCount();
+                if (!kick) SendLeaveMessage(u.Name);
             }
 
         }
@@ -733,7 +801,7 @@ namespace TCC.ViewModels
         }
         public bool IsLeader(string name)
         {
-            if(GetUser(name, out User u))
+            if (GetUser(name, out User u))
             {
                 if (u.IsLeader) return true;
             }

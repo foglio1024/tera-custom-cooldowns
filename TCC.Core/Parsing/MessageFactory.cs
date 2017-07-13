@@ -83,6 +83,7 @@ namespace TCC.Parsing
             {"S_UPDATE_FRIEND_INFO", Contructor<Func<TeraMessageReader, S_UPDATE_FRIEND_INFO>>() },
             {"S_PARTY_MATCH_LINK", Contructor<Func<TeraMessageReader, S_PARTY_MATCH_LINK>>() },
             {"S_PARTY_MEMBER_INFO", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_INFO>>() },
+            {"S_OTHER_USER_APPLY_PARTY", Contructor<Func<TeraMessageReader, S_OTHER_USER_APPLY_PARTY>>() },
 
         };
 
@@ -159,6 +160,7 @@ namespace TCC.Parsing
             {typeof(S_UPDATE_FRIEND_INFO), new Action<S_UPDATE_FRIEND_INFO>(x => PacketProcessor.HandleFriendStatus(x)) },
             {typeof(S_PARTY_MATCH_LINK), new Action<S_PARTY_MATCH_LINK>(x => PacketProcessor.HandleLfgSpam(x)) },
             {typeof(S_PARTY_MEMBER_INFO), new Action<S_PARTY_MEMBER_INFO>(x => PacketProcessor.HandlePartyMemberInfo(x)) },
+            {typeof(S_OTHER_USER_APPLY_PARTY), new Action<S_OTHER_USER_APPLY_PARTY>(x => PacketProcessor.HandleUserApplyToParty(x)) },
 
         };
 

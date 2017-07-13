@@ -34,7 +34,7 @@ namespace TCC.Windows
 
         protected WindowSettings _settings;
 
-        protected void InitWindow(WindowSettings ws)
+        protected void InitWindow(WindowSettings ws, bool canClickThru = true, bool canHide = true)
         {
             _handle = new WindowInteropHelper(this).Handle;
             FocusManager.MakeUnfocusable(_handle);
@@ -42,19 +42,25 @@ namespace TCC.Windows
             Topmost = true;
             ContextMenu = new System.Windows.Controls.ContextMenu();
 
-            var HideButton = new System.Windows.Controls.MenuItem() { Header = "Hide" };
-            HideButton.Click += (s, ev) =>
+            if (canHide)
             {
-                SetVisibility(Visibility.Hidden);
-            };
-            ContextMenu.Items.Add(HideButton);
+                var HideButton = new System.Windows.Controls.MenuItem() { Header = "Hide" };
+                HideButton.Click += (s, ev) =>
+                {
+                    SetVisibility(Visibility.Hidden);
+                };
+                ContextMenu.Items.Add(HideButton);
+            }
 
-            var ClickThruButton = new System.Windows.Controls.MenuItem() { Header = "Click through" };
-            ClickThruButton.Click += (s, ev) =>
+            if (canClickThru)
             {
-                SetClickThru(true);
-            };
-            ContextMenu.Items.Add(ClickThruButton);
+                var ClickThruButton = new System.Windows.Controls.MenuItem() { Header = "Click through" };
+                ClickThruButton.Click += (s, ev) =>
+                {
+                    SetClickThru(true);
+                };
+                ContextMenu.Items.Add(ClickThruButton);
+            }
 
             _settings = ws;
 
@@ -72,7 +78,7 @@ namespace TCC.Windows
 
         private void OpacityChange(object sender, PropertyChangedEventArgs e)
         {
-            if(e.PropertyName == "IsTccVisible")
+            if (e.PropertyName == "IsTccVisible")
             {
                 if (WindowManager.IsTccVisible)
                 {
@@ -91,7 +97,7 @@ namespace TCC.Windows
                 }
             }
 
-            if(e.PropertyName == "IsTccDim")
+            if (e.PropertyName == "IsTccDim")
             {
                 if (!WindowManager.IsTccVisible) return;
                 if (!_settings.AutoDim) return;
@@ -106,7 +112,7 @@ namespace TCC.Windows
                 {
                     AnimateContentOpacity(1);
                     if (!SettingsManager.ClickThruWhenDim) return;
-                    if(!clickThru) FocusManager.UndoTransparent(_handle);
+                    if (!clickThru) FocusManager.UndoTransparent(_handle);
 
                 }
             }
@@ -137,19 +143,26 @@ namespace TCC.Windows
 
         protected void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            DragMove();
-            var screen = Screen.FromHandle(new WindowInteropHelper(this).Handle);
-            var source = PresentationSource.FromVisual(this);
-            if (source?.CompositionTarget == null) return;
-            var m = source.CompositionTarget.TransformToDevice;
-            var dx = m.M11;
-            var dy = m.M22;
-            var newLeft = Left * dx;
-            var newTop = Top * dx;
+            try
+            {
+                DragMove();
+                var screen = Screen.FromHandle(new WindowInteropHelper(this).Handle);
+                var source = PresentationSource.FromVisual(this);
+                if (source?.CompositionTarget == null) return;
+                var m = source.CompositionTarget.TransformToDevice;
+                var dx = m.M11;
+                var dy = m.M22;
+                var newLeft = Left * dx;
+                var newTop = Top * dx;
 
-            _settings.X = newLeft/dx;
-            _settings.Y = newTop/dy;
-            SettingsManager.SaveSettings();
+                _settings.X = newLeft / dx;
+                _settings.Y = newTop / dy;
+                SettingsManager.SaveSettings();
+            }
+            catch (Exception)
+            {
+
+            }
         }
     }
 }

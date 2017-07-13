@@ -126,7 +126,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Width="30" TextAlignment="Right" Style="{StaticResource text1}" VerticalAlignment="Center" Margin="0,0,5,0" Text="{Binding Value, RelativeSource={RelativeSource AncestorType=local:ValueSetting}}"></TextBlock>
+            <TextBox Width="Auto" TextAlignment="Right" Background="Transparent" Foreground="White" BorderThickness="0" LostFocus="TextBox_LostFocus" VerticalAlignment="Center" Margin="0,0,5,0" Text="{Binding Value, RelativeSource={RelativeSource AncestorType=local:ValueSetting}}"></TextBox>
         <Slider Width="100" Grid.Column="1" Style="{StaticResource AppSliderStyle}" ValueChanged="Slider_ValueChanged"  HorizontalAlignment="Stretch" VerticalAlignment="Center" MouseDoubleClick="Slider_MouseDoubleClick"
                 Maximum="{Binding Max, RelativeSource={RelativeSource AncestorType=local:ValueSetting}}" 
                 Minimum="{Binding Min, RelativeSource={RelativeSource AncestorType=local:ValueSetting}}" 

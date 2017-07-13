@@ -53,10 +53,10 @@ namespace TCC
             SkillsDatabase.Load();
             BroochesDatabase.SetBroochesIcons();
             AbnormalityDatabase.Load();
-
-            TeraSniffer.Instance.Enabled = true;
-            SettingsManager.LoadSettings();
+            SettingsManager.LoadWindowSettings();
             WindowManager.Init();
+            SettingsManager.LoadSettings();
+            WindowManager.Settings = new SettingsWindow() { Name = "Settings" };
             FocusManager.FocusTimer.Start();
 
             PacketProcessor.Init();
@@ -65,13 +65,15 @@ namespace TCC
             {
                 SkillManager.Clear();
                 WindowManager.TrayIcon.Icon = WindowManager.ConnectedIcon;
-                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Connected</FONT>"));
+                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Connected to server.</FONT>"));
 
 
             };
             TeraSniffer.Instance.EndConnection += () =>
             {
-                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Disconnected</FONT>"));
+                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Disconnected from server.</FONT>"));
+                GroupWindowManager.Instance.ClearAllAbnormalities();
+                BuffBarWindowManager.Instance.Player.ClearAbnormalities();
 
                 SkillManager.Clear();
                 WindowManager.TrayIcon.Icon = WindowManager.DefaultIcon;
@@ -83,8 +85,10 @@ namespace TCC
             var v = Assembly.GetExecutingAssembly().GetName().Version;
             var ver = String.Format("TCC v{0}.{1}.{2}", v.Major, v.Minor, v.Build);
 
+
             ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>"+ver+"</FONT>"));
 
+            TeraSniffer.Instance.Enabled = true;
 
         }
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -35,22 +36,44 @@ namespace TCC.Controls
         }
         private void OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (_context.Type != MessagePieceType.Item) return;
-            if (_context.BoundType == BoundType.Equip || _context.ItemUid > 0)
+            switch (_context.Type)
             {
-                ProxyInterop.SendExTooltipMessage(_context.ItemUid, _context.OwnerName);
-            }
-            else
-            {
-                ProxyInterop.SendNondbItemInfoMessage(_context.ItemId);
+                case MessagePieceType.Item:
+                    if (_context.BoundType == BoundType.Equip || _context.ItemUid > 0)
+                    {
+                        ProxyInterop.SendExTooltipMessage(_context.ItemUid, _context.OwnerName);
+                    }
+                    else
+                    {
+                        ProxyInterop.SendNondbItemInfoMessage(_context.ItemId);
+                    }
+                    break;
+                case MessagePieceType.Url:
+                    Process.Start(_context.Text);
+                    break;
+                default:
+                    break;
             }
         }
         private void UserControl_MouseEnter(object sender, MouseEventArgs e)
         {
-            if (_context.Type == MessagePieceType.Item)
+            if (_context == null) return;
+            switch (_context.Type)
             {
-                bgBorder.Background = _context.Color;
+                case MessagePieceType.Item:
+                    bgBorder.Background = _context.Color;
+                    break;
+                case MessagePieceType.Url:
+                    bgBorder.Background = _context.Color;
+                    break;
+                case MessagePieceType.Point_of_interest:
+                    bgBorder.Background = _context.Color;
+                    WindowManager.ChatWindow.OpenMap(_context);
+                    break;
+                default:
+                    break;
             }
+
         }
         private void UserControl_MouseLeave(object sender, MouseEventArgs e)
         {
