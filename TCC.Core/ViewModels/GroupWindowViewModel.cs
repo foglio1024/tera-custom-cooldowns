@@ -252,6 +252,7 @@ namespace TCC.ViewModels
         private readonly object dpsLock = new object();
         private readonly object tankLock = new object();
         private readonly object healersLock = new object();
+        private readonly object genericLock = new object();
 
         public void AddOrUpdateMember(User p)
         {
@@ -646,38 +647,47 @@ namespace TCC.ViewModels
         }
         private bool TryGetUserFromList(SynchronizedObservableCollection<User> userList, ulong entityId, out User u)
         {
-            u = userList.FirstOrDefault(x => x.EntityId == entityId);
-            if (u != null)
+            lock (genericLock)
             {
-                return true;
-            }
-            else
-            {
-                return false;
+                u = userList.FirstOrDefault(x => x.EntityId == entityId);
+                if (u != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
         private bool TryGetUserFromList(SynchronizedObservableCollection<User> userList, uint serverId, uint playerId, out User u)
         {
-            u = userList.FirstOrDefault(x => x.ServerId == serverId && x.PlayerId == playerId);
-            if (u != null)
+            lock (genericLock)
             {
-                return true;
-            }
-            else
-            {
-                return false;
+                u = userList.FirstOrDefault(x => x.ServerId == serverId && x.PlayerId == playerId);
+                if (u != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
         private bool TryGetUserFromList(SynchronizedObservableCollection<User> userList, string name, out User u)
         {
-            u = userList.FirstOrDefault(x => x.Name == name);
-            if (u != null)
+            lock (genericLock)
             {
-                return true;
-            }
-            else
-            {
-                return false;
+                u = userList.FirstOrDefault(x => x.Name == name);
+                if (u != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
