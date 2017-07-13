@@ -18,8 +18,9 @@ namespace TCC.Parsing
             "SMT_BATTLE_END",
             "SMT_DROPDMG_DAMAGE",
             "SMT_BATTLE_PARTY_DIE",
-            "SMT_BATTLE_PARTY_RESURRECT"
-
+            "SMT_BATTLE_PARTY_RESURRECT",
+            "SMT_BATTLE_YOU_DIE",
+            "SMT_BATTLE_RESURRECT"
         };
         public static bool Filter(string opcodeName)
         {
