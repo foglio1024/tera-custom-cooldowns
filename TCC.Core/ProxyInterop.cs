@@ -16,6 +16,15 @@ namespace TCC
     {
         static TcpClient client = new TcpClient();
         static int retries = 2;
+
+        public static bool IsConnected
+        {
+            get
+            {
+                return client.Connected;
+            }
+        }
+
         public static void ConnectToProxy()
         {
             try
@@ -64,7 +73,7 @@ namespace TCC
             {
                 Debug.WriteLine(e.Message);
                 retries = 2;
-                ConnectToProxy();
+                //ConnectToProxy();
             }
         }
 
@@ -155,7 +164,7 @@ namespace TCC
             sb.Append("&name=");
             sb.Append(name);
             sb.Append("&raid=");
-            sb.Append(GroupWindowManager.Instance.Raid ? 1 : 0);
+            sb.Append(GroupWindowViewModel.Instance.Raid ? 1 : 0);
 
             SendData(sb.ToString());
         }
