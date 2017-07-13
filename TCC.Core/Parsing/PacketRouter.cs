@@ -113,7 +113,7 @@ namespace TCC.Parsing
         {
             SessionManager.CurrentPlayer.ItemLevel = p.Ilvl;
 
-            CharacterWindowManager.Instance.Player.ItemLevel = p.Ilvl;
+            CharacterWindowViewModel.Instance.Player.ItemLevel = p.Ilvl;
 
             SessionManager.SetPlayerMaxHP(SessionManager.CurrentPlayer.EntityId, p.MaxHP);
             SessionManager.SetPlayerMaxMP(SessionManager.CurrentPlayer.EntityId, p.MaxMP);
@@ -173,12 +173,12 @@ namespace TCC.Parsing
             EntitiesManager.SetNPCStatus(p.EntityId, p.IsEnraged);
             if (p.Target == 0)
             {
-                BossGageWindowManager.Instance.UnsetBossTarget(p.EntityId);
+                BossGageWindowViewModel.Instance.UnsetBossTarget(p.EntityId);
             }
         }
         public static void HandleUserEffect(S_USER_EFFECT p)
         {
-            BossGageWindowManager.Instance.SetBossAggro(p.Source, p.Circle, p.User);
+            BossGageWindowViewModel.Instance.SetBossAggro(p.Source, p.Circle, p.User);
         }
 
         public static void HandleCharList(S_GET_USER_LIST p)
@@ -189,17 +189,17 @@ namespace TCC.Parsing
         {
             ProxyInterop.ConnectToProxy();
 
-            CooldownWindowManager.Instance.ClearSkills();
-            CooldownWindowManager.Instance.LoadSkills(Utils.ClassEnumToString(p.CharacterClass).ToLower() + "-skills.xml", p.CharacterClass);
+            CooldownWindowViewModel.Instance.ClearSkills();
+            CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(p.CharacterClass).ToLower() + "-skills.xml", p.CharacterClass);
             WindowManager.ClassWindow.Context.CurrentClass = p.CharacterClass;
 
             ServerId = p.ServerId;
             InitDB(p.ServerId);
 
             EntitiesManager.ClearNPC();
-            GroupWindowManager.Instance.ClearAll();
+            GroupWindowViewModel.Instance.ClearAll();
 
-            BuffBarWindowManager.Instance.Player.ClearAbnormalities();
+            BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
             SkillManager.Clear();
 
             SessionManager.LoadingScreen = true;
@@ -213,10 +213,10 @@ namespace TCC.Parsing
             SessionManager.CurrentPlayer.Level = p.Level;
             SessionManager.SetPlayerLaurel(SessionManager.CurrentPlayer);
 
-            CharacterWindowManager.Instance.Player.Class = p.CharacterClass;
-            CharacterWindowManager.Instance.Player.Name = p.Name;
-            CharacterWindowManager.Instance.Player.Level = p.Level;
-            SessionManager.SetPlayerLaurel(CharacterWindowManager.Instance.Player);
+            CharacterWindowViewModel.Instance.Player.Class = p.CharacterClass;
+            CharacterWindowViewModel.Instance.Player.Name = p.Name;
+            CharacterWindowViewModel.Instance.Player.Level = p.Level;
+            SessionManager.SetPlayerLaurel(CharacterWindowViewModel.Instance.Player);
         }
         public static void SendTestMessage()
         {
@@ -240,18 +240,18 @@ namespace TCC.Parsing
         {
             SessionManager.Logged = false;
             SessionManager.CurrentPlayer.ClearAbnormalities();
-            BuffBarWindowManager.Instance.Player.ClearAbnormalities();
+            BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
             SkillManager.Clear();
             EntitiesManager.ClearNPC();
-            GroupWindowManager.Instance.ClearAll();
+            GroupWindowViewModel.Instance.ClearAll();
         }
 
         public static void HandleLoadTopo(S_LOAD_TOPO x)
         {
             SessionManager.LoadingScreen = true;
             SessionManager.Encounter = false;
-            GroupWindowManager.Instance.ClearAllAbnormalities();
-            BuffBarWindowManager.Instance.Player.ClearAbnormalities();
+            GroupWindowViewModel.Instance.ClearAllAbnormalities();
+            BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
         }
         public static void HandleLoadTopoFin(C_LOAD_TOPO_FIN x)
         {
@@ -260,15 +260,15 @@ namespace TCC.Parsing
 
         public static void HandleStartRoll(S_ASK_BIDDING_RARE_ITEM x)
         {
-            GroupWindowManager.Instance.StartRoll();
+            GroupWindowViewModel.Instance.StartRoll();
         }
         public static void HandleRollResult(S_RESULT_BIDDING_DICE_THROW x)
         {
-            GroupWindowManager.Instance.SetRoll(x.EntityId, x.RollResult);
+            GroupWindowViewModel.Instance.SetRoll(x.EntityId, x.RollResult);
         }
         public static void HandleEndRoll(S_RESULT_ITEM_BIDDING x)
         {
-            GroupWindowManager.Instance.EndRoll();
+            GroupWindowViewModel.Instance.EndRoll();
         }
 
         public static void HandleSpawnMe(S_SPAWN_ME p)
@@ -286,8 +286,16 @@ namespace TCC.Parsing
         }
         public static void HandleSpawnNpc(S_SPAWN_NPC p)
         {
-            EntitiesManager.SpawnNPC(p.HuntingZoneId, p.TemplateId, p.EntityId, System.Windows.Visibility.Collapsed, false);
+            if(p.HuntingZoneId == 950)
+            {
+                if (p.TemplateId == 1007) Debug.WriteLine("Begin phase");
+                if (p.TemplateId == 1005) Debug.WriteLine("Begin phase 0");
+                if (p.TemplateId == 1006) Debug.WriteLine("Begin phase 1");
+                if (p.TemplateId == 1008) Debug.WriteLine("Begin phase 3"); 
+                if (p.TemplateId == 1003) Debug.WriteLine("Begin phase 4"); 
+            }
             EntitiesManager.CheckHarrowholdMode(p.HuntingZoneId, p.TemplateId);
+            EntitiesManager.SpawnNPC(p.HuntingZoneId, p.TemplateId, p.EntityId, System.Windows.Visibility.Collapsed, false);
         }
         public static void HandleSpawnUser(S_SPAWN_USER p)
         {
@@ -319,8 +327,8 @@ namespace TCC.Parsing
 
         public static void HandleSkillResult(S_EACH_SKILL_RESULT x)
         {
-            //bool sourceInParty = GroupWindowManager.Instance.UserExists(x.Source);
-            //bool targetInParty = GroupWindowManager.Instance.UserExists(x.Target);
+            //bool sourceInParty = GroupWindowViewModel.Instance.UserExists(x.Source);
+            //bool targetInParty = GroupWindowViewModel.Instance.UserExists(x.Target);
             //if (x.Target == x.Source) return;
             //if (sourceInParty && targetInParty) return;
             //if (sourceInParty || targetInParty) WindowManager.SkillsEnded = false;
@@ -329,12 +337,12 @@ namespace TCC.Parsing
 
         public static void HandleChangeLeader(S_CHANGE_PARTY_MANAGER x)
         {
-            GroupWindowManager.Instance.SetNewLeader(x.EntityId, x.Name);
+            GroupWindowViewModel.Instance.SetNewLeader(x.EntityId, x.Name);
         }
 
         public static void HandlePartyMemberAbnormalClear(S_PARTY_MEMBER_ABNORMAL_CLEAR x)
         {
-            GroupWindowManager.Instance.ClearUserAbnormality(x.PlayerId, x.ServerId);
+            GroupWindowViewModel.Instance.ClearUserAbnormality(x.PlayerId, x.ServerId);
         }
         public static void HandlePartyMemberAbnormalRefresh(S_PARTY_MEMBER_ABNORMAL_REFRESH x)
         {
@@ -453,6 +461,7 @@ namespace TCC.Parsing
                 ChatWindowViewModel.Instance.TooltipInfo.ShowGuildInvite = !x.HasGuild;
                 ChatWindowViewModel.Instance.TooltipInfo.ShowPartyInvite = !x.HasParty;
             }
+            if (!ProxyInterop.IsConnected)  return; 
             WindowManager.ChatWindow.OpenTooltip();
         }
 
@@ -580,43 +589,43 @@ namespace TCC.Parsing
 
         public static void HandlePartyMemberList(S_PARTY_MEMBER_LIST p)
         {
-            GroupWindowManager.Instance.SetRaid(p.Raid);
+            GroupWindowViewModel.Instance.SetRaid(p.Raid);
             foreach (var user in p.Members)
             {
                 Task.Delay(200).ContinueWith(t => {
-                    GroupWindowManager.Instance.AddOrUpdateMember(user);
+                    GroupWindowViewModel.Instance.AddOrUpdateMember(user);
                 });
             }
         }
         public static void HandlePartyMemberLeave(S_LEAVE_PARTY_MEMBER p)
         {
-            GroupWindowManager.Instance.RemoveMember(p.PlayerId, p.ServerId);
+            GroupWindowViewModel.Instance.RemoveMember(p.PlayerId, p.ServerId);
         }
         public static void HandlePartyMemberLogout(S_LOGOUT_PARTY_MEMBER p)
         {
-            GroupWindowManager.Instance.LogoutMember(p.PlayerId, p.ServerId);
-            GroupWindowManager.Instance.ClearUserAbnormality(p.PlayerId, p.ServerId);
+            GroupWindowViewModel.Instance.LogoutMember(p.PlayerId, p.ServerId);
+            GroupWindowViewModel.Instance.ClearUserAbnormality(p.PlayerId, p.ServerId);
 
         }
         public static void HandlePartyMemberKick(S_BAN_PARTY_MEMBER p)
         {
-            GroupWindowManager.Instance.RemoveMember(p.PlayerId, p.ServerId, true);
+            GroupWindowViewModel.Instance.RemoveMember(p.PlayerId, p.ServerId, true);
         }
         public static void HandlePartyMemberHP(S_PARTY_MEMBER_CHANGE_HP p)
         {
-            GroupWindowManager.Instance.UpdateMemberHP(p.PlayerId, p.ServerId, p.CurrentHP, p.MaxHP);
+            GroupWindowViewModel.Instance.UpdateMemberHP(p.PlayerId, p.ServerId, p.CurrentHP, p.MaxHP);
         }
         public static void HandlePartyMemberMP(S_PARTY_MEMBER_CHANGE_MP p)
         {
-            GroupWindowManager.Instance.UpdateMemberMP(p.PlayerId, p.ServerId, p.CurrentMP, p.MaxMP);
+            GroupWindowViewModel.Instance.UpdateMemberMP(p.PlayerId, p.ServerId, p.CurrentMP, p.MaxMP);
         }
         public static void HandlePartyMemberStats(S_PARTY_MEMBER_STAT_UPDATE p)
         {
-            GroupWindowManager.Instance.UpdateMember(p);
+            GroupWindowViewModel.Instance.UpdateMember(p);
         }
         public static void HandleLeaveParty(S_LEAVE_PARTY x)
         {
-            GroupWindowManager.Instance.ClearAll();
+            GroupWindowViewModel.Instance.ClearAll();
 
         }
 
@@ -624,12 +633,12 @@ namespace TCC.Parsing
         {
             foreach (var item in p.Party)
             {
-                GroupWindowManager.Instance.SetReadyStatus(item);
+                GroupWindowViewModel.Instance.SetReadyStatus(item);
             }
         }
         public static void HandleReadyCheckFin(S_CHECK_TO_READY_PARTY_FIN x)
         {
-            GroupWindowManager.Instance.EndReadyCheck();
+            GroupWindowViewModel.Instance.EndReadyCheck();
         }
 
         //for lfg, not used
