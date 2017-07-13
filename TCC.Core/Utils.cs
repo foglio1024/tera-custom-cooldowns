@@ -153,6 +153,10 @@ namespace TCC
     public class TSPropertyChanged : INotifyPropertyChanged
     {
         protected Dispatcher _dispatcher;
+        public Dispatcher GetDispatcher()
+        {
+            return _dispatcher;
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void NotifyPropertyChanged(string v)
         {
