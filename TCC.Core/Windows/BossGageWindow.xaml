@@ -22,9 +22,7 @@
         ResizeMode="NoResize" 
              MouseDoubleClick="TccWindow_MouseDoubleClick">
     <w:TccWindow.Resources>
-        <DataTemplate x:Key="BossGageDataTemplate">
-            <local:BossGage/>
-        </DataTemplate>
+
 
         <converters:HarrowholdBossesVisibilityConverter x:Key="hhBossesVisConv"/>
     </w:TccWindow.Resources>
@@ -35,7 +33,7 @@
         <Grid.LayoutTransform>
             <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
         </Grid.LayoutTransform>
-        <ItemsControl Name="Bosses" ItemTemplate="{StaticResource BossGageDataTemplate}">
+        <ItemsControl Name="Bosses" ItemTemplateSelector="{StaticResource EnemyTemplateSelector}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Vertical" ItemHeight="Auto" Height="270"/>

@@ -72,7 +72,7 @@ namespace TCC.ViewModels
         {
             get => CurrentNPCs.Where(x => x.Visible == Visibility.Visible).Count();
         }
-        public void AddOrUpdateBoss(ulong entityId, float maxHp, float curHp, uint templateId = 0, uint zoneId = 0, Visibility v = Visibility.Visible)
+        public void AddOrUpdateBoss(ulong entityId, float maxHp, float curHp, bool isBoss, uint templateId = 0, uint zoneId = 0,Visibility v = Visibility.Visible)
         {
 
             var boss = _bosses.FirstOrDefault(x => x.EntityId == entityId);
@@ -80,7 +80,7 @@ namespace TCC.ViewModels
             {
                 //if (!EntitiesManager.TryGetBossById(entityId, out Boss b)) return;
                 if (templateId == 0 || zoneId == 0) return;
-                boss = new Boss(entityId, zoneId, templateId, v);
+                boss = new Boss(entityId, zoneId, templateId,isBoss,v);
                 _bosses.Add(boss);
             }
             boss.MaxHP = maxHp;

@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="TCC.Controls.SmallMobControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TCC.Controls"
+             mc:Ignorable="d" 
+             Visibility="{Binding Visible}">
+    <Grid Margin="2" Width="100">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <TextBlock Text="{Binding Name}" Style="{StaticResource text1}" TextTrimming="CharacterEllipsis"/>
+        <Border Style="{StaticResource border}" Margin="0"  Grid.Row="1">
+            <StackPanel>
+                <TextBlock Text="{Binding CurrentHP, StringFormat={}{0:N0}}" FontSize="11" Style="{StaticResource text1}"/>
+                <local:GenericGauge Height="4" 
+                                Width="Auto"
+                                BarColor="{Binding Enraged, Converter={StaticResource barColorConv}}"
+                                GaugeName=""
+                                ShowPercentage="False"
+                                ShowName="False"
+                                ShowValues="False"
+                                CurrentVal="{Binding CurrentHP}"
+                                MaxVal="{Binding MaxHP}"
+                                x:Name="HPgauge"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

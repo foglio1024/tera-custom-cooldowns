@@ -509,5 +509,17 @@
             <chatcontrols:LFGcontrol Margin="1"></chatcontrols:LFGcontrol>
         </DataTemplate>
 
+        <!--Boss template-->
+        <DataTemplate x:Key="BossDataTemplate">
+            <local:BossGage/>
+        </DataTemplate>       
+        <!--Mob template-->
+        <DataTemplate x:Key="MobDataTemplate">
+            <controls:SmallMobControl/>
+        </DataTemplate>
+        <templateselectors:EnemyTemplateSelector x:Key="EnemyTemplateSelector" 
+                                                 BossDataTemplate="{StaticResource BossDataTemplate}"
+                                                 MobDataTemplate="{StaticResource MobDataTemplate}"/>
+
     </Application.Resources>
 </Application>

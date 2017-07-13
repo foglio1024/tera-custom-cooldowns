@@ -30,6 +30,7 @@ namespace TCC.Data
             }
         }
 
+        public bool IsBoss { get; set; }
         private SynchronizedObservableCollection<AbnormalityDuration> _buffs;
         public SynchronizedObservableCollection<AbnormalityDuration> Buffs
         {
@@ -170,13 +171,14 @@ namespace TCC.Data
             _buffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
             Visible = visible;
         }
-        public Boss(ulong eId, uint zId, uint tId, Visibility visible)
+        public Boss(ulong eId, uint zId, uint tId, bool boss, Visibility visible)
         {
             _dispatcher = BossGageWindowViewModel.Instance.GetDispatcher();
             EntityId = eId;
             Name = EntitiesManager.CurrentDatabase.GetName(tId, zId);
             MaxHP = EntitiesManager.CurrentDatabase.GetMaxHP(tId, zId);
             ZoneId = zId;
+            IsBoss = boss;
             TemplateId = tId;
             CurrentHP = MaxHP;
             _buffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);

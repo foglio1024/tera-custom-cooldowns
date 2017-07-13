@@ -23,11 +23,11 @@ namespace TCC
             {
                 if (m.IsBoss || force)
                 {
-                    BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, templateId, zoneId, v);
+                    BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, m.IsBoss, templateId, zoneId, v);
                 }
                 else
                 {
-                    BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, templateId, zoneId, Visibility.Collapsed);
+                    BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, m.IsBoss, templateId, zoneId, Visibility.Collapsed);
                 }
             }
         }
@@ -50,7 +50,7 @@ namespace TCC
         }
         public static void UpdateNPCbyGauge(ulong target, float curHP, float maxHP, ushort zoneId, uint templateId)
         {
-            BossGageWindowViewModel.Instance.AddOrUpdateBoss(target, maxHP, curHP, templateId, zoneId, Visibility.Visible);
+            BossGageWindowViewModel.Instance.AddOrUpdateBoss(target, maxHP, curHP, true, templateId, zoneId, Visibility.Visible);
 
             if (maxHP > curHP)
             {
@@ -161,7 +161,7 @@ namespace TCC
 
         internal static void UpdateNPCbyCreatureChangeHP(ulong target, int currentHP, int maxHP)
         {
-            BossGageWindowViewModel.Instance.AddOrUpdateBoss(target, maxHP, currentHP, 0, 0, Visibility.Visible);
+            BossGageWindowViewModel.Instance.AddOrUpdateBoss(target, maxHP, currentHP, false, 0, 0, Visibility.Visible);
             if (maxHP > currentHP)
             {
                 currentEncounter = target;

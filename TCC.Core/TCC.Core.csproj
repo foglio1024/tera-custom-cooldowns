@@ -147,6 +147,12 @@
       <DependentUpon>testctrl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\NonReloadingTabControl.cs" />
+    <Compile Include="Controls\Phase1BossControl.xaml.cs">
+      <DependentUpon>Phase1BossControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SmallMobControl.xaml.cs">
+      <DependentUpon>SmallMobControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\ContractedToColWidthConverter.cs" />
     <Compile Include="Converters\LocationToMapConverter.cs" />
@@ -180,6 +186,7 @@
     <Compile Include="Parsing\Messages\S_UPDATE_FRIEND_INFO.cs" />
     <Compile Include="Parsing\Messages\S_USER_BLOCK_LIST.cs" />
     <Compile Include="Parsing\SystemMessagesProcessor.cs" />
+    <Compile Include="TemplateSelectors\EnemyTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\MessageBodyDataTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\MessagePieceDataTemplateSelector.cs" />
     <Compile Include="Controls\ClassBars\BerserkerBar.xaml.cs">
@@ -713,7 +720,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Phase1BossControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\RagnarokBuffControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SmallMobControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
