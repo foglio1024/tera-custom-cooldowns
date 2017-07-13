@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -105,6 +106,8 @@ namespace TCC.Controls
         {
             var s = sender as Slider;
             Value = Math.Round(s.Value, 2);
+            Console.WriteLine("Slider_ValueChanged set {1} value to {0}", Value, SettingName);
+
         }
 
         private void Slider_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -115,15 +118,20 @@ namespace TCC.Controls
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             var tb = sender as TextBox;
-            if(Double.TryParse(tb.Text, out double result))
+            double result;
+            try
             {
+                result = Double.Parse(tb.Text, CultureInfo.InvariantCulture);
                 if (result > Max) Value = Max;
                 else if (result < Min) Value = Min;
                 else Value = result;
+                Console.WriteLine("TextBox_LostFocus set {1} value to {0}", Value, SettingName);
+
             }
-            else
+            catch (Exception)
             {
                 tb.Text = Value.ToString();
+
             }
         }
 
