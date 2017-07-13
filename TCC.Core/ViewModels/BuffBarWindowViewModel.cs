@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Threading;
 using TCC.Data;
 
 namespace TCC.ViewModels
@@ -39,6 +40,7 @@ namespace TCC.ViewModels
 
         public BuffBarWindowViewModel()
         {
+            _dispatcher = Dispatcher.CurrentDispatcher;
             WindowManager.TccVisibilityChanged += (s, ev) =>
             {
                 //RaisePropertyChanged("IsTeraOnTop");
