@@ -143,7 +143,7 @@ namespace TCC.Controls
             Dispatcher.Invoke(() =>
             {
                 if (v < 0) v = 0;
-                NextEnrageTB.Text = String.Format("{0:0.#}", v);
+                //NextEnrage.Text = String.Format("{0:0.#}", v);
             });
         }
         void SlideNextEnrage(double val)
@@ -197,7 +197,7 @@ namespace TCC.Controls
                     if (enraged)
                     {
                         Enraged = enraged;
-                        NextEnrageTB.Text = CurrentEnrageTime.ToString();
+                        //NextEnrageTB.Text = CurrentEnrageTime.ToString();
 
                         SlideNextEnrage(CurrentPercentage);
                         //SetEnragePercTB(CurrentPercentage);
@@ -208,7 +208,7 @@ namespace TCC.Controls
                         {
                             Dispatcher.BeginInvoke(new Action(() =>
                             {
-                                NextEnrageTB.Text = CurrentEnrageTime.ToString() + "s";
+                                //NextEnrageTB.Text = CurrentEnrageTime.ToString() + "s";
                                 CurrentEnrageTime--;
                             }));
                         };

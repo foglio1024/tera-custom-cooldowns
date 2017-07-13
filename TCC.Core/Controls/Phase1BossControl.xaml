@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="TCC.Controls.Phase1BossControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TCC.Controls"
+             mc:Ignorable="d" >
+    <UserControl.Resources>
+        <DataTemplate x:Key="DragonIndicator">
+                <Grid Margin="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Margin="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Dragon" Foreground="White" Margin="0,-1,0,1"></TextBlock>
+                    <Rectangle Fill="Gray"
+                               Height="5"
+                               VerticalAlignment="Center"
+                               Width="100"
+                               Grid.Row="1"/>
+                    <Rectangle Fill="{StaticResource hpColor}"
+                               Height="2"
+                               VerticalAlignment="Center"
+                               Width="100"
+                               Grid.Row="1"
+                               Margin="0,-9,0,0"/>
+                </Grid>
+                    <TextBlock HorizontalAlignment="Center" 
+                           VerticalAlignment="Bottom" 
+                           Foreground="White" 
+                           FontSize="20"
+                           Grid.Column="1"
+                           Text="100"
+                           Margin="5,0,5,-1"/>
+                    <local:Arc Stroke="{StaticResource hpColor}" 
+                           Grid.Column="2" 
+                           Width="23" 
+                           Height="23"
+                           StrokeThickness="10"
+                           EndAngle="359"
+                           Margin="3"/>
+                    <Path  Fill="White" Width="13" Height="13" Grid.Column="2" Stretch="Uniform" Data="M237.263,60.498c-4.65,3.535-68.417,50.977-150.197,67.352C76.285,316.566,237.161,414.269,237.263,414.213
+			c0.102,0.056,160.979-97.646,150.198-286.368C305.676,111.475,237.263,60.498,237.263,60.498z"/>
+                </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid Width="Auto" Height="Auto">
+        <Border Style="{StaticResource border}"/>
+        <UniformGrid Rows="4" Margin="0">
+            <ContentControl ContentTemplate="{StaticResource DragonIndicator}"/>
+            <ContentControl ContentTemplate="{StaticResource DragonIndicator}"/>
+            <ContentControl ContentTemplate="{StaticResource DragonIndicator}"/>
+            <ContentControl ContentTemplate="{StaticResource DragonIndicator}"/>
+        </UniformGrid>
+
+    </Grid>
+</UserControl>

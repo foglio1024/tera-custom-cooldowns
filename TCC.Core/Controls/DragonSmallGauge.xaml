@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TCC.Controls"
+             xmlns:controls="clr-namespace:TCC.Controls"
+             xmlns:local="clr-namespace:TCC"
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded"
              Unloaded="UserControl_Unloaded">
@@ -25,19 +26,19 @@
         <Rectangle x:Name="BaseRect" Fill="#71000000" Margin="10,0" Height="5" Width="200" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
         <Rectangle x:Name="HPrect" Fill="#4a82bd" Margin="10,0" Height="5" Width="200" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
         <Rectangle x:Name="dragonCol" Height="Auto" Width="3" Fill="{Binding DragonColor}" HorizontalAlignment="Right" Grid.RowSpan="2" Opacity=".8"/>
-        <StackPanel Width="Auto" Height="Auto" Name="NextEnrage" Margin="-5,0,0,0" HorizontalAlignment="Left" Grid.Row="1" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top">
+        <StackPanel Width="28" Height="Auto" Orientation="Vertical" Opacity="1" Name="NextEnrage" Margin="-4,-6,0,0" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" Grid.Row="2">
             <StackPanel.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
                     <RotateTransform/>
-                    <TranslateTransform/>
+                    <TranslateTransform X="0"/>
                 </TransformGroup>
             </StackPanel.RenderTransform>
-            <Polygon Points="0,7 5,0 10,7"  Margin="0,0,0,0"  Fill="Orange" VerticalAlignment="Center" Height="Auto"  HorizontalAlignment="Center" Grid.Column="1" >
-            </Polygon>
-            <TextBlock Width="30" Text="100" Name="NextEnrageTB" FontSize="10" Foreground="White" TextAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,0" Padding="0">
-            </TextBlock>
+            <Ellipse Fill="#fa0" Width="7" Height="7" Name="enrageEll" Stroke="#fb0"/>
+            <TextBlock Width="Auto" FontSize="12" Style="{StaticResource text1}"
+                                   TextAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,0" Padding="0"
+                                   Text="{Binding EnrageTBtext, RelativeSource={RelativeSource AncestorType=controls:DragonSmallGauge}}"/>
         </StackPanel>
 
     </Grid>

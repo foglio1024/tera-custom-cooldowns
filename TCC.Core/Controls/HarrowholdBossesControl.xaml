@@ -9,8 +9,6 @@
              mc:Ignorable="d" 
              >
     <UserControl.Resources>
-        <DataTemplate x:Key="dragonSmallGauge">
-        </DataTemplate>
         <DataTemplate x:Key="BossBuffDataTemplate">
             <elements:AbnormalityIndicator/>
         </DataTemplate>
