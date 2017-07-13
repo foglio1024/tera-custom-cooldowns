@@ -167,6 +167,8 @@ namespace TCC.ViewModels
                                         ((ChatMessage)p).Channel == ChatChannel.PartyNotice ||
                                         ((ChatMessage)p).Channel == ChatChannel.Raid ||
                                         ((ChatMessage)p).Channel == ChatChannel.RaidLeader ||
+                                        ((ChatMessage)p).Channel == ChatChannel.Group ||
+                                        ((ChatMessage)p).Channel == ChatChannel.GroupAlerts ||
                                         ((ChatMessage)p).Channel == ChatChannel.RaidNotice;
             _systemMessages.Filter = p => ((ChatMessage)p).Author == "System" ||
                                            ((ChatMessage)p).Channel == ChatChannel.TCC;
@@ -218,7 +220,10 @@ namespace TCC.ViewModels
                     //    offset++;
                     //    continue;
                     //}
-                    if (m.RawMessage == chatMessage.RawMessage && m.Author == chatMessage.Author && m.Channel != ChatChannel.Money) return;
+                    if (m.RawMessage == chatMessage.RawMessage && 
+                        m.Author == chatMessage.Author && 
+                        m.Channel != ChatChannel.Money &&
+                        m.Channel != ChatChannel.Loot) return;
                 }
             }
 
