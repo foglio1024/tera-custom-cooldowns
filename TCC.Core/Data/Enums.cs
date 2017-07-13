@@ -149,4 +149,14 @@ namespace TCC
         Ready = 1,
         Undefined = 255 //arbitrary
     }
+
+    public enum HarrowholdPhase
+    {
+        None = 0,
+        Phase1 = 1,
+        Phase2 = 2,
+        Phase3 = 3,
+        Phase4 = 4,
+        Balistas = 5,
+    }
 }
