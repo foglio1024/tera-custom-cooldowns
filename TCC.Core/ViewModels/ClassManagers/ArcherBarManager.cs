@@ -18,7 +18,7 @@ namespace TCC.ViewModels
         public ArcherFocusTracker Focus { get; set; }
         public StanceTracker<ArcherStance> Stance { get; set; }
         public FixedSkillCooldown Thunderbolt { get; set; }
-        public ArcherBarManager()
+        public ArcherBarManager() : base()
         {
             _instance = this;
             Focus = new ArcherFocusTracker();
@@ -30,7 +30,7 @@ namespace TCC.ViewModels
         protected override void LoadSpecialSkills()
         {
             SkillsDatabase.TryGetSkill(290100, Class.Archer, out Skill tb);
-            Thunderbolt = new FixedSkillCooldown(tb, CooldownType.Skill, Dispatcher, true);
+            Thunderbolt = new FixedSkillCooldown(tb, CooldownType.Skill, _dispatcher, true);
 
         }
 

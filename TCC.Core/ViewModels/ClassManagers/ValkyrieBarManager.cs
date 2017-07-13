@@ -15,7 +15,7 @@ namespace TCC.ViewModels
         public Counter RunemarksCounter { get; set; }
         public DurationCooldownIndicator Ragnarok { get; private set; }
 
-        public ValkyrieBarManager()
+        public ValkyrieBarManager() : base()
         {
             _instance = this;
             CurrentClassManager = this;
@@ -26,10 +26,10 @@ namespace TCC.ViewModels
         protected override void LoadSpecialSkills()
         {
             //Ragnarok
-            Ragnarok = new DurationCooldownIndicator(Dispatcher);
+            Ragnarok = new DurationCooldownIndicator(_dispatcher);
             SkillsDatabase.TryGetSkill(120100, Class.Glaiver, out Skill rag);
-            Ragnarok.Cooldown = new FixedSkillCooldown(rag, CooldownType.Skill, Dispatcher, true);
-            Ragnarok.Buff = new FixedSkillCooldown(rag, CooldownType.Skill, Dispatcher, false);
+            Ragnarok.Cooldown = new FixedSkillCooldown(rag, CooldownType.Skill, _dispatcher, true);
+            Ragnarok.Buff = new FixedSkillCooldown(rag, CooldownType.Skill, _dispatcher, false);
         }
         public override bool StartSpecialSkill(SkillCooldown sk)
         {

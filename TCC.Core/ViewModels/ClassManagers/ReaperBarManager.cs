@@ -14,7 +14,7 @@ namespace TCC.ViewModels
         private static ReaperBarManager _instance;
         public static ReaperBarManager Instance => _instance ?? (_instance = new ReaperBarManager());
 
-        public ReaperBarManager()
+        public ReaperBarManager() : base()
         {
             _instance = this;
             CurrentClassManager = this;

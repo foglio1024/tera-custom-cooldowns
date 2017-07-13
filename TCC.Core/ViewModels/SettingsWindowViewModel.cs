@@ -366,7 +366,7 @@ namespace TCC.ViewModels
                 SettingsManager.BuffBarWindowSettings.Scale = value;
                 WindowManager.BuffBar.Dispatcher.Invoke(() =>
                 {
-                    ((AbnormalityWindowViewModel)WindowManager.BuffBar.DataContext).Scale = value;
+                    ((BuffBarWindowViewModel)WindowManager.BuffBar.DataContext).Scale = value;
                 });
                 NotifyPropertyChanged("BuffsWindowScale");
             }
@@ -658,7 +658,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.IgnoreMeInGroupWindow == value) return;
                 SettingsManager.IgnoreMeInGroupWindow = value;
-                if (value == true) GroupWindowManager.Instance.RemoveMe();
+                if (value == true) GroupWindowViewModel.Instance.RemoveMe();
                 NotifyPropertyChanged("HideMe");
             }
         }
@@ -670,7 +670,7 @@ namespace TCC.ViewModels
                 if (SettingsManager.IgnoreMyBuffsInGroupWindow == value) return;
                 SettingsManager.IgnoreMyBuffsInGroupWindow = value;
                 NotifyPropertyChanged("HideMyBuffs");
-                if (value == true) GroupWindowManager.Instance.ClearMyBuffs();
+                if (value == true) GroupWindowViewModel.Instance.ClearMyBuffs();
 
             }
         }
@@ -682,7 +682,7 @@ namespace TCC.ViewModels
                 if (SettingsManager.IgnoreAllBuffsInGroupWindow == value) return;
                 SettingsManager.IgnoreAllBuffsInGroupWindow = value;
                 NotifyPropertyChanged("HideAllBuffs");
-                if (value == true) GroupWindowManager.Instance.ClearAllBuffs();
+                if (value == true) GroupWindowViewModel.Instance.ClearAllBuffs();
             }
         }
         public bool HideRaidAbnormalities
@@ -693,7 +693,7 @@ namespace TCC.ViewModels
                 if (SettingsManager.IgnoreRaidAbnormalitiesInGroupWindow == value) return;
                 SettingsManager.IgnoreRaidAbnormalitiesInGroupWindow = value;
                 NotifyPropertyChanged("HideRaidAbnormalities");
-                if (value == true) GroupWindowManager.Instance.ClearAllAbnormalities();
+                if (value == true) GroupWindowViewModel.Instance.ClearAllAbnormalities();
             }
         }
         public bool IsLeftToRightOn
@@ -708,7 +708,7 @@ namespace TCC.ViewModels
                 SettingsManager.BuffsDirection = s;
                 WindowManager.BuffBar.Dispatcher.Invoke(() =>
                 {
-                    ((AbnormalityWindowViewModel)WindowManager.BuffBar.DataContext).Direction = s;
+                    ((BuffBarWindowViewModel)WindowManager.BuffBar.DataContext).Direction = s;
                 });
                 NotifyPropertyChanged("IsLeftToRightOn");
             }

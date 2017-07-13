@@ -30,9 +30,9 @@ namespace TCC.Windows
         {
             InitWindow(SettingsManager.BuffBarWindowSettings);
 
-            buffs.ItemsSource = BuffBarWindowManager.Instance.Player.Buffs;
-            debuffs.ItemsSource = BuffBarWindowManager.Instance.Player.Debuffs;
-            infBuffs.ItemsSource = BuffBarWindowManager.Instance.Player.InfBuffs;
+            buffs.ItemsSource = BuffBarWindowViewModel.Instance.Player.Buffs;
+            debuffs.ItemsSource = BuffBarWindowViewModel.Instance.Player.Debuffs;
+            infBuffs.ItemsSource = BuffBarWindowViewModel.Instance.Player.InfBuffs;
         }
 
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)

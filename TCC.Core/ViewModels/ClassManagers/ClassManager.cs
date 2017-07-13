@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Threading;
 using TCC.Data;
 
 namespace TCC.ViewModels
 {
-    public abstract class ClassManager : DependencyObject
+    public abstract class ClassManager : TSPropertyChanged
     {
 
         public static ClassManager CurrentClassManager;
@@ -27,35 +28,35 @@ namespace TCC.ViewModels
         public static void SetMaxHP(int v)
         {
             if (CurrentClassManager == null) return;
-            CurrentClassManager.Dispatcher.Invoke(() => { CurrentClassManager.HP.Max = v; });
+            CurrentClassManager.GetDispatcher().Invoke(() => { CurrentClassManager.HP.Max = v; });
 
         }
         public static void SetMaxMP(int v)
         {
             if (CurrentClassManager == null) return;
-            CurrentClassManager.Dispatcher.Invoke(() => { CurrentClassManager.MP.Max = v; });
+            CurrentClassManager.GetDispatcher().Invoke(() => { CurrentClassManager.MP.Max = v; });
         }
         public static void SetMaxST(int v)
         {
             if (CurrentClassManager == null) return;
-            CurrentClassManager.Dispatcher.Invoke(() => { CurrentClassManager.ST.Max = v; });
+            CurrentClassManager.GetDispatcher().Invoke(() => { CurrentClassManager.ST.Max = v; });
         }
 
         public static void SetHP(int hp)
         {
             if (CurrentClassManager == null) return;
-            CurrentClassManager.Dispatcher.Invoke(() => { CurrentClassManager.HP.Val = hp; });
+            CurrentClassManager.GetDispatcher().Invoke(() => { CurrentClassManager.HP.Val = hp; });
 
         }
         public static void SetMP(int mp)
         {
             if (CurrentClassManager == null) return;
-            CurrentClassManager.Dispatcher.Invoke(() => { CurrentClassManager.MP.Val = mp; });
+            CurrentClassManager.GetDispatcher().Invoke(() => { CurrentClassManager.MP.Val = mp; });
         }
         public static void SetST(int currentStamina)
         {
             if (CurrentClassManager == null) return;
-            CurrentClassManager.Dispatcher.Invoke(() => { CurrentClassManager.ST.Val = currentStamina; });
+            CurrentClassManager.GetDispatcher().Invoke(() => { CurrentClassManager.ST.Val = currentStamina; });
         }
 
         private static List<uint> _debuffs;
@@ -76,10 +77,11 @@ namespace TCC.ViewModels
             }
 
             bool status = _debuffs.Count == 0 ? false : true;
-            CurrentClassManager.Dispatcher.Invoke(() => { CurrentClassManager.HP.Status = status; });
+            CurrentClassManager.GetDispatcher().Invoke(() => { CurrentClassManager.HP.Status = status; });
         }
         public ClassManager()
         {
+            _dispatcher = Dispatcher.CurrentDispatcher;
             HP = new StatTracker();
             MP = new StatTracker();
             ST = new StatTracker();

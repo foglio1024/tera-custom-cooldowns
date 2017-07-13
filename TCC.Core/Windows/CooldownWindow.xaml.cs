@@ -30,7 +30,7 @@ namespace TCC
 
             SwitchMode();
 
-            ((FrameworkElement)controlContainer.Content).DataContext = CooldownWindowManager.Instance;
+            ((FrameworkElement)controlContainer.Content).DataContext = CooldownWindowViewModel.Instance;
         }
 
         public void SwitchMode()
@@ -46,7 +46,7 @@ namespace TCC
                     controlContainer.Content = new NormalSkillContainer();
                 }
 
-                ((FrameworkElement)controlContainer.Content).DataContext = CooldownWindowManager.Instance;
+                ((FrameworkElement)controlContainer.Content).DataContext = CooldownWindowViewModel.Instance;
 
             }, DispatcherPriority.Normal);
         }

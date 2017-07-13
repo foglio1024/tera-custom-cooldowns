@@ -49,8 +49,8 @@ namespace TCC.Windows
         {
             InitWindow(SettingsManager.BossGaugeWindowSettings);
 
-            Bosses.DataContext = BossGageWindowManager.Instance.CurrentNPCs;
-            Bosses.ItemsSource = BossGageWindowManager.Instance.CurrentNPCs;
+            Bosses.DataContext = BossGageWindowViewModel.Instance.CurrentNPCs;
+            Bosses.ItemsSource = BossGageWindowViewModel.Instance.CurrentNPCs;
 
         }
 
@@ -61,7 +61,7 @@ namespace TCC.Windows
 
         private void TccWindow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            BossGageWindowManager.Instance.CopyToClipboard();
+            BossGageWindowViewModel.Instance.CopyToClipboard();
         }
     }
 }

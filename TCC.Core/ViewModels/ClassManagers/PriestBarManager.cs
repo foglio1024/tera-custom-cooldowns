@@ -13,7 +13,7 @@ namespace TCC.ViewModels
 
         public DurationCooldownIndicator EnergyStars { get; private set; }
 
-        public PriestBarManager()
+        public PriestBarManager() : base()
         {
             _instance = this;
             CurrentClassManager = this;
@@ -22,10 +22,10 @@ namespace TCC.ViewModels
         protected override void LoadSpecialSkills()
         {
             //Energy Stars
-            EnergyStars = new DurationCooldownIndicator(Dispatcher);
+            EnergyStars = new DurationCooldownIndicator(_dispatcher);
             SkillsDatabase.TryGetSkill(350410, Class.Priest, out Skill es);
-            EnergyStars.Cooldown = new FixedSkillCooldown(es, CooldownType.Skill, Dispatcher, true);
-            EnergyStars.Buff = new FixedSkillCooldown(es, CooldownType.Skill, Dispatcher, false);
+            EnergyStars.Cooldown = new FixedSkillCooldown(es, CooldownType.Skill, _dispatcher, true);
+            EnergyStars.Buff = new FixedSkillCooldown(es, CooldownType.Skill, _dispatcher, false);
         }
 
         public override bool StartSpecialSkill(SkillCooldown sk)

@@ -14,7 +14,7 @@ namespace TCC.ViewModels
         private static SorcererBarManager _instance;
         public static SorcererBarManager Instance => _instance ?? (_instance = new SorcererBarManager());
 
-        public SorcererBarManager()
+        public SorcererBarManager() : base()
         {
             _instance = this;
             CurrentClassManager = this;

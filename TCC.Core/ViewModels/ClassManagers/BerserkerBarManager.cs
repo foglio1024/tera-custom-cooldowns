@@ -14,7 +14,7 @@ namespace TCC.ViewModels
         private static BerserkerBarManager _instance;
         public static BerserkerBarManager Instance => _instance ?? (_instance = new BerserkerBarManager());
 
-        public BerserkerBarManager()
+        public BerserkerBarManager() : base()
         {
             _instance = this;
             CurrentClassManager = this;

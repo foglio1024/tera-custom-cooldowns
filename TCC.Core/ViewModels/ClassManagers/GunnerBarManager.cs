@@ -14,7 +14,7 @@ namespace TCC.ViewModels
         private static GunnerBarManager _instance;
         public static GunnerBarManager Instance => _instance ?? (_instance = new GunnerBarManager());
 
-        public GunnerBarManager()
+        public GunnerBarManager() : base()
         {
             _instance = this;
             CurrentClassManager = this;

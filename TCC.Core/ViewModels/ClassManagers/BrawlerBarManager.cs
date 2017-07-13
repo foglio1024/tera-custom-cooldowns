@@ -13,7 +13,7 @@ namespace TCC.ViewModels
     {
         private static BrawlerBarManager _instance;
         public static BrawlerBarManager Instance => _instance ?? (_instance = new BrawlerBarManager());
-        public BrawlerBarManager()
+        public BrawlerBarManager() : base()
         {
             _instance = this;
             CurrentClassManager = this;

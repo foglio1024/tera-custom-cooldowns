@@ -508,6 +508,7 @@
     <Compile Include="Controls\ValueSetting.xaml.cs">
       <DependentUpon>ValueSetting.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\CharacterWindowViewModel.cs" />
     <Compile Include="ViewModels\ClassManagers\BerserkerBarManager.cs" />
     <Compile Include="ViewModels\ClassManagers\BrawlerBarManager.cs" />
     <Compile Include="ViewModels\ChatWindowViewModel.cs" />
@@ -515,15 +516,13 @@
     <Compile Include="ViewModels\ClassManagers\LancerBarManager.cs" />
     <Compile Include="ViewModels\ClassManagers\ClassManager.cs" />
     <Compile Include="ViewModels\ClassManagers\ArcherBarManager.cs" />
-    <Compile Include="ViewModels\BossGageWindowViewModel.cs" />
     <Compile Include="Converters\ClassToStaminaLabelConverter.cs" />
-    <Compile Include="ViewModels\GroupWindowViewModel.cs" />
+    <Compile Include="ViewModels\ClassWindowViewModel.cs" />
     <Compile Include="ViewModels\TooltipInfo.cs" />
-    <Compile Include="ViewModels\WindowManagers\BossGageWindowManager.cs" />
-    <Compile Include="ViewModels\WindowManagers\BuffBarWindowManager.cs" />
-    <Compile Include="ViewModels\WindowManagers\CharacterWindowManager.cs" />
-    <Compile Include="ViewModels\WindowManagers\CooldownBarWindowManager.cs" />
-    <Compile Include="ViewModels\WindowManagers\GroupWindowManager.cs" />
+    <Compile Include="ViewModels\BossGageWindowViewModel.cs" />
+    <Compile Include="ViewModels\BuffBarWindowViewModel.cs" />
+    <Compile Include="ViewModels\CooldownBarWindowViewModel.cs" />
+    <Compile Include="ViewModels\GroupWindowViewModel.cs" />
     <Compile Include="ViewModels\ClassManagers\MysticBarManager.cs" />
     <Compile Include="ViewModels\ClassManagers\PriestBarManager.cs" />
     <Compile Include="ViewModels\ClassManagers\NinjaBarManager.cs" />
@@ -531,13 +530,10 @@
     <Compile Include="ViewModels\SettingsWindowViewModel.cs" />
     <Compile Include="UpdateManager.cs" />
     <Compile Include="Utils.cs" />
-    <Compile Include="ViewModels\AbnormalityWindowViewModel.cs" />
     <Compile Include="ViewModels\Helpers\BaseINPC.cs" />
-    <Compile Include="ViewModels\CharacterWindowViewModel.cs" />
     <Compile Include="Converters\FactorFromValuesConverter.cs" />
     <Compile Include="Converters\StaminaBarColorConverter.cs" />
     <Compile Include="Converters\StaminaBarVisibilityConverter.cs" />
-    <Compile Include="ViewModels\CooldownWindowViewModel.cs" />
     <Compile Include="ViewModels\ClassManagers\SlayerBarManager.cs" />
     <Compile Include="ViewModels\ClassManagers\SorcererBarManager.cs" />
     <Compile Include="Windows\AbnormalitiesWindow.xaml.cs">
@@ -572,7 +568,6 @@
     <Compile Include="Controls\ClassBars\ValkyrieBar.xaml.cs">
       <DependentUpon>ValkyrieBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\ClassWindowViewModel.cs" />
     <Compile Include="Converters\ChatChannelNameConverter.cs" />
     <Compile Include="Converters\ChatColorConverter.cs" />
     <Compile Include="Windows\ChatWindow.xaml.cs">
@@ -1045,6 +1040,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewModels\WindowManagers\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

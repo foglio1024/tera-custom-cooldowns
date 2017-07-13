@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
+using TCC.Data;
 
 namespace TCC.ViewModels
 {
-    public class AbnormalityWindowViewModel : BaseINPC
+    public class BuffBarWindowViewModel : TSPropertyChanged
     {
-
-        //public bool IsTeraOnTop
-        //{
-        //    get => WindowManager.IsTccVisible;
-        //}
+        private static BuffBarWindowViewModel _instance;
+        public static BuffBarWindowViewModel Instance => _instance ?? (_instance = new BuffBarWindowViewModel());
         private double scale = SettingsManager.BuffBarWindowSettings.Scale;
         public double Scale
         {
@@ -26,7 +18,7 @@ namespace TCC.ViewModels
             {
                 if (scale == value) return;
                 scale = value;
-                RaisePropertyChanged("Scale");
+                NotifyPropertyChanged("Scale");
             }
         }
 
@@ -41,11 +33,11 @@ namespace TCC.ViewModels
             {
                 if (direction == value) return;
                 direction = value;
-                RaisePropertyChanged("Direction");
+                NotifyPropertyChanged("Direction");
             }
         }
 
-        public AbnormalityWindowViewModel()
+        public BuffBarWindowViewModel()
         {
             WindowManager.TccVisibilityChanged += (s, ev) =>
             {
@@ -55,6 +47,17 @@ namespace TCC.ViewModels
                     WindowManager.BuffBar.RefreshTopmost();
                 }
             };
+        }
+
+        private Player _player;
+        public Player Player
+        {
+            get { return _player; }
+            set
+            {
+                if (_player == value) return;
+                _player = value;
+            }
         }
     }
 }

@@ -14,7 +14,7 @@ namespace TCC.ViewModels
         private static SlayerBarManager _instance;
         public static SlayerBarManager Instance => _instance ?? (_instance = new SlayerBarManager());
 
-        public SlayerBarManager()
+        public SlayerBarManager() : base()
         {
             _instance = this;
             CurrentClassManager = this;

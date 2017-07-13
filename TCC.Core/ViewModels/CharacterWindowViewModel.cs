@@ -1,10 +1,24 @@
 ﻿using System;
+using System.Windows.Threading;
 using TCC.Data;
 
 namespace TCC.ViewModels
 {
-    public class CharacterWindowViewModel : BaseINPC
+    public class CharacterWindowViewModel : TSPropertyChanged
     {
+        private static CharacterWindowViewModel _instance;
+        public static CharacterWindowViewModel Instance => _instance ?? (_instance = new CharacterWindowViewModel());
+
+        private Player _player;
+        public Player Player
+        {
+            get { return _player; }
+            set
+            {
+                if (_player == value) return;
+                _player = value;
+            }
+        }
 
         public bool IsTeraOnTop
         {
@@ -14,7 +28,7 @@ namespace TCC.ViewModels
         {
             if(e.PropertyName == "Class")
             {
-                RaisePropertyChanged("STname");
+                NotifyPropertyChanged("STname");
             }
         }
 
@@ -27,21 +41,18 @@ namespace TCC.ViewModels
             {
                 if (scale == value) return;
                 scale = value;
-                RaisePropertyChanged("Scale");
+                NotifyPropertyChanged("Scale");
             }
         }
         public CharacterWindowViewModel()
         {
+            _dispatcher = Dispatcher.CurrentDispatcher;
             WindowManager.TccVisibilityChanged += (s, ev) =>
             {
-                RaisePropertyChanged("IsTeraOnTop");
+                NotifyPropertyChanged("IsTeraOnTop");
                 if (IsTeraOnTop)
                 {
-                    CharacterWindowManager.Instance.Dispatcher.Invoke(() =>
-                    {
-                        WindowManager.CharacterWindow.Topmost = false;
-                        WindowManager.CharacterWindow.Topmost = true;
-                    });
+                    WindowManager.CharacterWindow.RefreshTopmost();
                 }
             };
         }

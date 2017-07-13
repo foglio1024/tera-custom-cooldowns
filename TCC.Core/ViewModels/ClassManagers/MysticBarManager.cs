@@ -16,7 +16,7 @@ namespace TCC.ViewModels
         public FixedSkillCooldown Contagion { get; private set; }
         public FixedSkillCooldown Vow { get; private set; }
 
-        public MysticBarManager()
+        public MysticBarManager() : base()
         {
             _instance = this;
             CurrentClassManager = this;
@@ -27,8 +27,8 @@ namespace TCC.ViewModels
         {
             SkillsDatabase.TryGetSkill(410100, Class.Elementalist, out Skill cont);
             SkillsDatabase.TryGetSkill(120100, Class.Elementalist, out Skill vow);
-            Contagion = new FixedSkillCooldown(cont, CooldownType.Skill, Dispatcher, true);
-            Vow = new FixedSkillCooldown(vow, CooldownType.Skill, Dispatcher, true);
+            Contagion = new FixedSkillCooldown(cont, CooldownType.Skill, _dispatcher, true);
+            Vow = new FixedSkillCooldown(vow, CooldownType.Skill, _dispatcher, true);
         }
 
         public override bool StartSpecialSkill(SkillCooldown sk)

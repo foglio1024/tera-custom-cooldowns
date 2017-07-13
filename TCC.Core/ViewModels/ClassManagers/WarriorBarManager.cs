@@ -26,7 +26,7 @@ namespace TCC.ViewModels
         public Counter EdgeCounter { get; set; }
         public StanceTracker<WarriorStance> Stance { get; set; }
 
-        public WarriorBarManager()
+        public WarriorBarManager() : base()
         {
             _instance = this;
             CurrentClassManager = this;
@@ -39,10 +39,10 @@ namespace TCC.ViewModels
         protected override void LoadSpecialSkills()
         {
             //Deadly gamble
-            DeadlyGamble = new DurationCooldownIndicator(Dispatcher);
+            DeadlyGamble = new DurationCooldownIndicator(_dispatcher);
             SkillsDatabase.TryGetSkill(200200, Class.Warrior, out Skill dg);
-            DeadlyGamble.Buff = new FixedSkillCooldown(dg, CooldownType.Skill, Dispatcher, false);
-            DeadlyGamble.Cooldown = new FixedSkillCooldown(dg, CooldownType.Skill, Dispatcher, true);
+            DeadlyGamble.Buff = new FixedSkillCooldown(dg, CooldownType.Skill, _dispatcher, false);
+            DeadlyGamble.Cooldown = new FixedSkillCooldown(dg, CooldownType.Skill, _dispatcher, true);
         }
 
         public override bool StartSpecialSkill(SkillCooldown sk)

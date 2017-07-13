@@ -86,10 +86,11 @@
         </Style>
 
     </w:TccWindow.Resources>
-    <ContentControl x:Name="root" Content="{Binding CurrentManager}" Margin="25">
+    <ContentControl x:Name="root" Content="{Binding CurrentManager}" Margin="25" Background="Red">
         <ContentControl.LayoutTransform>
             <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
         </ContentControl.LayoutTransform>
     </ContentControl>
+
 
 </w:TccWindow>

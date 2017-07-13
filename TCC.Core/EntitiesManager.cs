@@ -23,11 +23,11 @@ namespace TCC
             {
                 if (m.IsBoss || force)
                 {
-                    BossGageWindowManager.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, templateId, zoneId, v);
+                    BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, templateId, zoneId, v);
                 }
                 else
                 {
-                    BossGageWindowManager.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, templateId, zoneId, Visibility.Collapsed);
+                    BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, templateId, zoneId, Visibility.Collapsed);
                 }
             }
         }
@@ -41,23 +41,23 @@ namespace TCC
 
         public static void DespawnNPC(ulong target)
         {
-            BossGageWindowManager.Instance.RemoveBoss(target);
-            if (BossGageWindowManager.Instance.VisibleBossesCount == 0) SessionManager.Encounter = false;
+            BossGageWindowViewModel.Instance.RemoveBoss(target);
+            if (BossGageWindowViewModel.Instance.VisibleBossesCount == 0) SessionManager.Encounter = false;
         }
         public static void SetNPCStatus(ulong entityId, bool enraged)
         {
-            BossGageWindowManager.Instance.SetBossEnrage(entityId, enraged);
+            BossGageWindowViewModel.Instance.SetBossEnrage(entityId, enraged);
         }
         public static void UpdateNPCbyGauge(ulong target, float curHP, float maxHP, ushort zoneId, uint templateId)
         {
-            BossGageWindowManager.Instance.AddOrUpdateBoss(target, maxHP, curHP, templateId, zoneId, Visibility.Visible);
+            BossGageWindowViewModel.Instance.AddOrUpdateBoss(target, maxHP, curHP, templateId, zoneId, Visibility.Visible);
 
             if (maxHP > curHP)
             {
                 currentEncounter = target;
                 SessionManager.Encounter = true;
             }
-            else if(maxHP == curHP || curHP == 0)
+            else if (maxHP == curHP || curHP == 0)
             {
                 currentEncounter = 0;
                 SessionManager.Encounter = false;
@@ -65,7 +65,7 @@ namespace TCC
         }
         public static void ClearNPC()
         {
-            BossGageWindowManager.Instance.ClearBosses();
+            BossGageWindowViewModel.Instance.ClearBosses();
         }
         public static void ClearUsers()
         {
@@ -76,26 +76,16 @@ namespace TCC
         }
         public static void CheckHarrowholdMode(ushort zoneId, uint templateId)
         {
-            if (zoneId == 1023) return;
-            if (zoneId == 63 && templateId >= 1960 && templateId <= 1963) return;
-            if (zoneId != 950)
+            if (zoneId != 950) return;
+            if (templateId >= 1100 && templateId <= 1103)
             {
-                SessionManager.HarrowholdMode = false;
+                BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.Phase1;
+                SetDragonsContexts(templateId);
             }
-            else
-            {
-                if (templateId >= 1100 && templateId <= 1103)
-                {
-                    SessionManager.HarrowholdMode = true;
-
-                    SetDragonsContexts(templateId);
-                }
-                else if (templateId == 1000 || templateId == 2000 || templateId == 3000 || templateId == 4000)
-                {
-                    SessionManager.HarrowholdMode = false;
-                }
-            }
-
+            else if (templateId == 1000) BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.Phase2;
+            else if (templateId == 2000) BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.Balistas;
+            else if (templateId == 3000) BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.Phase3;
+            else if (templateId == 4000) BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.Phase4;
         }
         public static void CheckCurrentDragon(Point p)
         {
@@ -171,7 +161,7 @@ namespace TCC
 
         internal static void UpdateNPCbyCreatureChangeHP(ulong target, int currentHP, int maxHP)
         {
-            BossGageWindowManager.Instance.AddOrUpdateBoss(target, maxHP, currentHP,0,0, Visibility.Visible);
+            BossGageWindowViewModel.Instance.AddOrUpdateBoss(target, maxHP, currentHP, 0, 0, Visibility.Visible);
             if (maxHP > currentHP)
             {
                 currentEncounter = target;

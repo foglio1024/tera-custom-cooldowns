@@ -14,7 +14,7 @@ namespace TCC.ViewModels
         private static NinjaBarManager _instance;
         public static NinjaBarManager Instance => _instance ?? (_instance = new NinjaBarManager());
 
-        public NinjaBarManager()
+        public NinjaBarManager() : base()
         {
             _instance = this;
             CurrentClassManager = this;

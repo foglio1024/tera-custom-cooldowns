@@ -63,12 +63,12 @@ namespace TCC.Windows
         private void TccWindow_Loaded(object sender, RoutedEventArgs e)
         {
             InitWindow(SettingsManager.GroupWindowSettings);
-            dps.DataContext = GroupWindowManager.Instance.Dps;
-            dps.ItemsSource = GroupWindowManager.Instance.Dps;
-            tanks.DataContext = GroupWindowManager.Instance.Tanks;
-            tanks.ItemsSource = GroupWindowManager.Instance.Tanks;
-            healers.DataContext = GroupWindowManager.Instance.Healers;
-            healers.ItemsSource = GroupWindowManager.Instance.Healers;
+            dps.DataContext = GroupWindowViewModel.Instance.Dps;
+            dps.ItemsSource = GroupWindowViewModel.Instance.Dps;
+            tanks.DataContext = GroupWindowViewModel.Instance.Tanks;
+            tanks.ItemsSource = GroupWindowViewModel.Instance.Tanks;
+            healers.DataContext = GroupWindowViewModel.Instance.Healers;
+            healers.ItemsSource = GroupWindowViewModel.Instance.Healers;
         }
 
 
@@ -83,7 +83,7 @@ namespace TCC.Windows
             {
                 if (bigGroup)
                 {
-                    foreach (var dps in GroupWindowManager.Instance.Dps)
+                    foreach (var dps in GroupWindowViewModel.Instance.Dps)
                     {
                         foreach (var buff in dps.Buffs)
                         {
@@ -92,7 +92,7 @@ namespace TCC.Windows
                             buff.IndicatorMargin = new Thickness(AbnormalityManager.RAID_AB_LEFT_MARGIN, 1, 1, 1);
                         }
                     }
-                    foreach (var tank in GroupWindowManager.Instance.Tanks)
+                    foreach (var tank in GroupWindowViewModel.Instance.Tanks)
                     {
                         foreach (var buff in tank.Buffs)
                         {
@@ -101,7 +101,7 @@ namespace TCC.Windows
                             buff.IndicatorMargin = new Thickness(AbnormalityManager.RAID_AB_LEFT_MARGIN, 1, 1, 1);
                         }
                     }
-                    foreach (var heal in GroupWindowManager.Instance.Healers)
+                    foreach (var heal in GroupWindowViewModel.Instance.Healers)
                     {
                         foreach (var buff in heal.Buffs)
                         {
@@ -116,7 +116,7 @@ namespace TCC.Windows
                 }
                 else
                 {
-                    foreach (var dps in GroupWindowManager.Instance.Dps)
+                    foreach (var dps in GroupWindowViewModel.Instance.Dps)
                     {
                         foreach (var buff in dps.Buffs)
                         {
@@ -125,7 +125,7 @@ namespace TCC.Windows
                             buff.IndicatorMargin = new Thickness(AbnormalityManager.PARTY_AB_LEFT_MARGIN, 1, 1, 1);
                         }
                     }
-                    foreach (var tank in GroupWindowManager.Instance.Tanks)
+                    foreach (var tank in GroupWindowViewModel.Instance.Tanks)
                     {
                         foreach (var buff in tank.Buffs)
                         {
@@ -134,7 +134,7 @@ namespace TCC.Windows
                             buff.IndicatorMargin = new Thickness(AbnormalityManager.PARTY_AB_LEFT_MARGIN, 1, 1, 1);
                         }
                     }
-                    foreach (var heal in GroupWindowManager.Instance.Healers)
+                    foreach (var heal in GroupWindowViewModel.Instance.Healers)
                     {
                         foreach (var buff in heal.Buffs)
                         {

@@ -36,14 +36,14 @@
             <Setter Property="ItemTemplate" Value="{StaticResource party}"/>
         </Style>
     </local:TccWindow.Resources>
-    <Grid  Background="#00000000" Margin="10" Width="Auto" >
+    <Grid  Margin="5" Width="Auto" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.LayoutTransform>
-            <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"></ScaleTransform>
+            <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}" />
         </Grid.LayoutTransform>
         <ItemsControl x:Name="dps"  Width="Auto" Style="{StaticResource itemTemplateSwap}">
             <ItemsControl.ItemsPanel>
@@ -66,6 +66,5 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-
     </Grid>
 </local:TccWindow>

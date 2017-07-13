@@ -53,7 +53,6 @@ namespace TCC
                 }
             }
         }
-
         
         private static bool encounter;
         public static bool Encounter
@@ -84,12 +83,12 @@ namespace TCC
                 if (combat)
                 {
                     CurrentPlayer.IsInCombat = true;
-                    CharacterWindowManager.Instance.Player.IsInCombat = true;
+                    CharacterWindowViewModel.Instance.Player.IsInCombat = true;
                 }
                 else
                 {
                     CurrentPlayer.IsInCombat = false;
-                    CharacterWindowManager.Instance.Player.IsInCombat = false;
+                    CharacterWindowViewModel.Instance.Player.IsInCombat = false;
                 }
             }
 
@@ -98,7 +97,7 @@ namespace TCC
         public static void SetPlayerHP(ulong target, float hp)
         {
             CurrentPlayer.CurrentHP = hp;
-            CharacterWindowManager.Instance.Player.CurrentHP = hp;
+            CharacterWindowViewModel.Instance.Player.CurrentHP = hp;
             ClassManager.SetHP(Convert.ToInt32(hp));
 
 
@@ -108,7 +107,7 @@ namespace TCC
             if (target == CurrentPlayer.EntityId)
             {
                 CurrentPlayer.CurrentMP = mp;
-                CharacterWindowManager.Instance.Player.CurrentMP = mp;
+                CharacterWindowViewModel.Instance.Player.CurrentMP = mp;
                 ClassManager.SetMP(Convert.ToInt32(mp));
             }
         }
@@ -117,14 +116,14 @@ namespace TCC
             if (target == CurrentPlayer.EntityId)
             {
                 CurrentPlayer.CurrentST = st;
-                CharacterWindowManager.Instance.Player.CurrentST = st;
+                CharacterWindowViewModel.Instance.Player.CurrentST = st;
                 ClassManager.SetST(Convert.ToInt32(st));
             }
         }
         public static void SetPlayerFE(float en)
         {
             CurrentPlayer.FlightEnergy = en;
-            CharacterWindowManager.Instance.Player.FlightEnergy = en;
+            CharacterWindowViewModel.Instance.Player.FlightEnergy = en;
         }
         public static void SetPlayerLaurel(Player p)
         {
@@ -143,7 +142,7 @@ namespace TCC
             if (target == CurrentPlayer.EntityId)
             {
                 CurrentPlayer.MaxHP = maxHP;
-                CharacterWindowManager.Instance.Player.MaxHP = maxHP;
+                CharacterWindowViewModel.Instance.Player.MaxHP = maxHP;
                 ClassManager.SetMaxHP(Convert.ToInt32(maxHP));
             }
         }
@@ -152,7 +151,7 @@ namespace TCC
             if (target == CurrentPlayer.EntityId)
             {
                 CurrentPlayer.MaxMP = maxMP;
-                CharacterWindowManager.Instance.Player.MaxMP = maxMP;
+                CharacterWindowViewModel.Instance.Player.MaxMP = maxMP;
                 ClassManager.SetMaxMP(Convert.ToInt32(maxMP));
             }
         }
@@ -161,7 +160,7 @@ namespace TCC
             if (target == CurrentPlayer.EntityId)
             {
                 CurrentPlayer.MaxST = maxST;
-                CharacterWindowManager.Instance.Player.MaxST = maxST;
+                CharacterWindowViewModel.Instance.Player.MaxST = maxST;
                 ClassManager.SetMaxST(Convert.ToInt32(maxST));
             }
         }

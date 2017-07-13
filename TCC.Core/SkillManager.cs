@@ -29,18 +29,18 @@ namespace TCC
         }
         public static void AddSkillDirectly(Skill sk, uint cd)
         {
-            RouteSkill(new SkillCooldown(sk, cd, CooldownType.Skill, CooldownWindowManager.Instance.Dispatcher));
+            RouteSkill(new SkillCooldown(sk, cd, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher()));
         }
 
         static void RouteSkill(SkillCooldown skillCooldown)
         {
             if (skillCooldown.Cooldown == 0)
             {
-                CooldownWindowManager.Instance.RemoveSkill(skillCooldown.Skill);
+                CooldownWindowViewModel.Instance.RemoveSkill(skillCooldown.Skill);
             }
             else
             {
-                CooldownWindowManager.Instance.AddOrRefreshSkill(skillCooldown);
+                CooldownWindowViewModel.Instance.AddOrRefreshSkill(skillCooldown);
             }
         }
 
@@ -54,7 +54,7 @@ namespace TCC
                 {
                     return;
                 }
-                RouteSkill(new SkillCooldown(skill, cd, CooldownType.Skill, CooldownWindowManager.Instance.Dispatcher));
+                RouteSkill(new SkillCooldown(skill, cd, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher()));
                 //WindowManager.SkillsEnded = false;
             }
         }
@@ -62,7 +62,7 @@ namespace TCC
         {
             if (BroochesDatabase.TryGetBrooch(id, out Skill brooch))
             {
-                RouteSkill(new SkillCooldown(brooch, cd, CooldownType.Item, CooldownWindowManager.Instance.Dispatcher));
+                RouteSkill(new SkillCooldown(brooch, cd, CooldownType.Item, CooldownWindowViewModel.Instance.GetDispatcher()));
             }
 
         }
@@ -71,15 +71,15 @@ namespace TCC
         {
             if (SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out Skill skill))
             {
-                CooldownWindowManager.Instance.RefreshSkill(skill, cd);
+                CooldownWindowViewModel.Instance.RefreshSkill(skill, cd);
             }
 
         }
 
         public static void Clear()
         {
-            CooldownWindowManager.Instance.ShortSkills.Clear();
-            CooldownWindowManager.Instance.LongSkills.Clear();
+            CooldownWindowViewModel.Instance.ShortSkills.Clear();
+            CooldownWindowViewModel.Instance.LongSkills.Clear();
 
             SessionManager.CurrentPlayer.Class = Class.None;
             SessionManager.CurrentPlayer.EntityId = 0;

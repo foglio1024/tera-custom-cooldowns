@@ -24,7 +24,7 @@ namespace TCC.ViewModels
     {
         private static LancerBarManager _instance;
         public static LancerBarManager Instance => _instance ?? (_instance = new LancerBarManager());
-        public LancerBarManager()
+        public LancerBarManager() : base()
         {
             _instance = this;
             CurrentClassManager = this;
@@ -67,15 +67,15 @@ namespace TCC.ViewModels
             SkillsDatabase.TryGetSkill(170200, Class.Lancer, out Skill arush);
             SkillsDatabase.TryGetSkill(120100, Class.Lancer, out Skill infu);
 
-            GuardianShout = new DurationCooldownIndicator(Dispatcher);
-            AdrenalineRush = new DurationCooldownIndicator(Dispatcher);
-            Infuriate = new DurationCooldownIndicator(Dispatcher);
+            GuardianShout = new DurationCooldownIndicator(_dispatcher);
+            AdrenalineRush = new DurationCooldownIndicator(_dispatcher);
+            Infuriate = new DurationCooldownIndicator(_dispatcher);
 
-            GuardianShout.Cooldown = new FixedSkillCooldown(gshout, CooldownType.Skill, Dispatcher, true);
-            GuardianShout.Buff = new FixedSkillCooldown(gshout, CooldownType.Skill, Dispatcher, false);
-            AdrenalineRush.Cooldown = new FixedSkillCooldown(arush, CooldownType.Skill, Dispatcher, true);
-            AdrenalineRush.Buff = new FixedSkillCooldown(arush, CooldownType.Skill, Dispatcher, false);
-            Infuriate.Cooldown = new FixedSkillCooldown(infu, CooldownType.Skill, Dispatcher, true);
+            GuardianShout.Cooldown = new FixedSkillCooldown(gshout, CooldownType.Skill, _dispatcher, true);
+            GuardianShout.Buff = new FixedSkillCooldown(gshout, CooldownType.Skill, _dispatcher, false);
+            AdrenalineRush.Cooldown = new FixedSkillCooldown(arush, CooldownType.Skill, _dispatcher, true);
+            AdrenalineRush.Buff = new FixedSkillCooldown(arush, CooldownType.Skill, _dispatcher, false);
+            Infuriate.Cooldown = new FixedSkillCooldown(infu, CooldownType.Skill, _dispatcher, true);
         }
     }
 }

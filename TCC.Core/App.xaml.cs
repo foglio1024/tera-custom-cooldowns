@@ -72,8 +72,8 @@ namespace TCC
             TeraSniffer.Instance.EndConnection += () =>
             {
                 ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Disconnected from server.</FONT>"));
-                GroupWindowManager.Instance.ClearAllAbnormalities();
-                BuffBarWindowManager.Instance.Player.ClearAbnormalities();
+                GroupWindowViewModel.Instance.ClearAllAbnormalities();
+                BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
 
                 SkillManager.Clear();
                 WindowManager.TrayIcon.Icon = WindowManager.DefaultIcon;

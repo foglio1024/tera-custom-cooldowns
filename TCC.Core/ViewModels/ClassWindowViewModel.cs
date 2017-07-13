@@ -11,18 +11,18 @@ namespace TCC.ViewModels
 {
     public class ClassWindowViewModel : TSPropertyChanged
     {
+        private static ClassWindowViewModel _instance;
+        public static ClassWindowViewModel Instance => _instance ?? (_instance = new ClassWindowViewModel());
+
         public ClassWindowViewModel()
         {
+            _dispatcher = Dispatcher.CurrentDispatcher;
             WindowManager.TccVisibilityChanged += (s, ev) =>
             {
                 NotifyPropertyChanged("IsTeraOnTop");
                 if (IsTeraOnTop)
                 {
-                    WindowManager.ClassWindow.Dispatcher.Invoke(() =>
-                    {
-                        WindowManager.ClassWindow.Topmost = false;
-                        WindowManager.ClassWindow.Topmost = true;
-                    });
+                    WindowManager.ClassWindow.RefreshTopmost();
                 }
             };
 

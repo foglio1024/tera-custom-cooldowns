@@ -16,10 +16,26 @@ using TCC.Parsing.Messages;
 namespace TCC.ViewModels
 {
 
-    public class CooldownWindowManager : DependencyObject
+    public class CooldownWindowViewModel : TSPropertyChanged
     {
-        private static CooldownWindowManager _instance;
-        public static CooldownWindowManager Instance => _instance ?? (_instance = new CooldownWindowManager());
+        private static CooldownWindowViewModel _instance;
+        public static CooldownWindowViewModel Instance => _instance ?? (_instance = new CooldownWindowViewModel());
+
+        public bool IsTeraOnTop
+        {
+            get => WindowManager.IsTccVisible;
+        }
+        private double scale = SettingsManager.CooldownWindowSettings.Scale;
+        public double Scale
+        {
+            get { return scale; }
+            set
+            {
+                if (scale == value) return;
+                scale = value;
+                NotifyPropertyChanged("Scale");
+            }
+        }
 
         private SynchronizedObservableCollection<SkillCooldown> _shortSkills;
         private SynchronizedObservableCollection<SkillCooldown> _longSkills;
@@ -135,7 +151,7 @@ namespace TCC.ViewModels
                     var existing = _shortSkills.FirstOrDefault(x => x.Skill.Name == skill.Name);
                     if (existing == null)
                     {
-                        sk = new SkillCooldown(skill, cd, CooldownType.Skill, Dispatcher);
+                        sk = new SkillCooldown(skill, cd, CooldownType.Skill, _dispatcher);
                         _shortSkills.Add(sk);
                         return;
                     }
@@ -149,7 +165,7 @@ namespace TCC.ViewModels
                         existing = _shortSkills.FirstOrDefault(x => x.Skill.Name == skill.Name);
                         if (existing == null)
                         {
-                            sk = new SkillCooldown(skill, cd, CooldownType.Skill, Dispatcher);
+                            sk = new SkillCooldown(skill, cd, CooldownType.Skill, _dispatcher);
                             _longSkills.Add(sk);
                         }
                         else
@@ -268,7 +284,7 @@ namespace TCC.ViewModels
 
         private void AddOrRefreshOtherSkill(SkillCooldown sk)
         {
-            sk.SetDispatcher(Dispatcher);
+            sk.SetDispatcher(_dispatcher);
 
             try
             {
@@ -346,14 +362,26 @@ namespace TCC.ViewModels
             }
         }
 
-        public CooldownWindowManager()
+        public CooldownWindowViewModel()
         {
-            ShortSkills = new SynchronizedObservableCollection<SkillCooldown>(Dispatcher);
-            LongSkills = new SynchronizedObservableCollection<SkillCooldown>(Dispatcher);
-            SecondarySkills = new SynchronizedObservableCollection<FixedSkillCooldown>(Dispatcher);
-            MainSkills = new SynchronizedObservableCollection<FixedSkillCooldown>(Dispatcher);
-            OtherSkills = new SynchronizedObservableCollection<SkillCooldown>(Dispatcher);
-
+            _dispatcher = Dispatcher.CurrentDispatcher;
+            ShortSkills = new SynchronizedObservableCollection<SkillCooldown>(_dispatcher);
+            LongSkills = new SynchronizedObservableCollection<SkillCooldown>(_dispatcher);
+            SecondarySkills = new SynchronizedObservableCollection<FixedSkillCooldown>(_dispatcher);
+            MainSkills = new SynchronizedObservableCollection<FixedSkillCooldown>(_dispatcher);
+            OtherSkills = new SynchronizedObservableCollection<SkillCooldown>(_dispatcher);
+            WindowManager.TccVisibilityChanged += (s, ev) =>
+            {
+                NotifyPropertyChanged("IsTeraOnTop");
+                if (IsTeraOnTop)
+                {
+                    WindowManager.CooldownWindow.Dispatcher.Invoke(() =>
+                    {
+                        WindowManager.CooldownWindow.Topmost = false;
+                        WindowManager.CooldownWindow.Topmost = true;
+                    });
+                }
+            };
         }
     }
 }

@@ -27,11 +27,11 @@ namespace TCC
                 {
                     if (row == 1)
                     {
-                        Main.Add(new FixedSkillCooldown(sk, CooldownType.Skill, CooldownWindowManager.Instance.Dispatcher, false));
+                        Main.Add(new FixedSkillCooldown(sk, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher(), false));
                     }
                     else if (row == 2)
                     {
-                        Secondary.Add(new FixedSkillCooldown(sk, CooldownType.Skill, CooldownWindowManager.Instance.Dispatcher, false));
+                        Secondary.Add(new FixedSkillCooldown(sk, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher(), false));
                     }
                 }
             }

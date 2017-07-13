@@ -150,7 +150,7 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 CharacterWindow = new CharacterWindow();
-                CharacterWindowManager.Instance.Player = new Data.Player();
+                CharacterWindowViewModel.Instance.Player = new Data.Player();
                 CharacterWindow.Show();
                 waiting = false;
                 Dispatcher.Run();
@@ -184,7 +184,7 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 BossGauge = new BossGageWindow();
-                BossGageWindowManager.Instance.CurrentNPCs = new SynchronizedObservableCollection<Data.Boss>(BossGauge.Dispatcher);
+                BossGageWindowViewModel.Instance.CurrentNPCs = new SynchronizedObservableCollection<Data.Boss>(BossGauge.Dispatcher);
                 BossGauge.Show();
                 waiting = false;
 
@@ -202,7 +202,7 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 BuffBar = new AbnormalitiesWindow();
-                BuffBarWindowManager.Instance.Player = new Data.Player();
+                BuffBarWindowViewModel.Instance.Player = new Data.Player();
                 BuffBar.Show();
                 waiting = false;
 
@@ -221,9 +221,9 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 GroupWindow = new GroupWindow();
-                GroupWindowManager.Instance.Dps = new SynchronizedObservableCollection<Data.User>(GroupWindow.Dispatcher);
-                GroupWindowManager.Instance.Healers = new SynchronizedObservableCollection<Data.User>(GroupWindow.Dispatcher);
-                GroupWindowManager.Instance.Tanks = new SynchronizedObservableCollection<Data.User>(GroupWindow.Dispatcher);
+                GroupWindowViewModel.Instance.Dps = new SynchronizedObservableCollection<Data.User>(GroupWindow.Dispatcher);
+                GroupWindowViewModel.Instance.Healers = new SynchronizedObservableCollection<Data.User>(GroupWindow.Dispatcher);
+                GroupWindowViewModel.Instance.Tanks = new SynchronizedObservableCollection<Data.User>(GroupWindow.Dispatcher);
                 GroupWindow.Show();
                 waiting = false;
 

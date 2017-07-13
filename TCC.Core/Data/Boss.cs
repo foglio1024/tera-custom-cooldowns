@@ -160,7 +160,7 @@ namespace TCC.Data
 
         public Boss(ulong eId, uint zId, uint tId, float curHP, float maxHP, Visibility visible)
         {
-            _dispatcher = BossGageWindowManager.Instance.Dispatcher;
+            _dispatcher = BossGageWindowViewModel.Instance.GetDispatcher();
             EntityId = eId;
             Name = EntitiesManager.CurrentDatabase.GetName(tId, zId);
             ZoneId = zId;
@@ -172,7 +172,7 @@ namespace TCC.Data
         }
         public Boss(ulong eId, uint zId, uint tId, Visibility visible)
         {
-            _dispatcher = BossGageWindowManager.Instance.Dispatcher;
+            _dispatcher = BossGageWindowViewModel.Instance.GetDispatcher();
             EntityId = eId;
             Name = EntitiesManager.CurrentDatabase.GetName(tId, zId);
             MaxHP = EntitiesManager.CurrentDatabase.GetMaxHP(tId, zId);

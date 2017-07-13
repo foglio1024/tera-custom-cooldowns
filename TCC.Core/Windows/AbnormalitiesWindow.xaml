@@ -20,7 +20,7 @@
         MouseRightButtonDown="Window_MouseRightButtonDown"
         >
     <w:TccWindow.DataContext>
-        <vm:AbnormalityWindowViewModel />
+        <vm:BuffBarWindowViewModel />
     </w:TccWindow.DataContext>
     <w:TccWindow.Resources>
         <DataTemplate x:Key="abTemplate">

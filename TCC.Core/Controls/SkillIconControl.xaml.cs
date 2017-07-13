@@ -121,7 +121,7 @@ namespace TCC.Controls
             //{
             //    CooldownWindowManager.Instance.NormalCd_RemoveSkill(_context.Skill);
             //}
-            CooldownWindowManager.Instance.RemoveSkill(_context.Skill);
+            CooldownWindowViewModel.Instance.RemoveSkill(_context.Skill);
 
         }
 

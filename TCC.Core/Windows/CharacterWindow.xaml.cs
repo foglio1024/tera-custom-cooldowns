@@ -35,7 +35,7 @@ namespace TCC.Windows
         {
             InitWindow(SettingsManager.CharacterWindowSettings);
 
-            rootGrid.DataContext = CharacterWindowManager.Instance.Player;
+            rootGrid.DataContext = CharacterWindowViewModel.Instance.Player;
         }
 
 

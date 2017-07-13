@@ -161,7 +161,7 @@ namespace TCC.Data
             Author = auth;
             try
             {
-                if (Channel == ChatChannel.Raid && GroupWindowManager.Instance.IsLeader(Author)) Channel = ChatChannel.RaidLeader;
+                if (Channel == ChatChannel.Raid && GroupWindowViewModel.Instance.IsLeader(Author)) Channel = ChatChannel.RaidLeader;
                 switch (ch)
                 {
                     case ChatChannel.Greet:
