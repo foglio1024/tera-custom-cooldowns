@@ -261,8 +261,7 @@ namespace TCC.Windows
         }
         private void TccWindow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //PacketProcessor.SendTestMessage();
-            //ChatWindowViewModel.Instance.LFGs.Clear();
+
         }
 
         private void TccWindow_MouseLeave(object sender, MouseEventArgs e)
