@@ -101,8 +101,8 @@ namespace TCC.Data
 
         public void Refresh()
         {
-            _removeTimer.Stop();
-            _removeTimer.Start();
+            _removeTimer?.Stop();
+            _removeTimer?.Start();
             NotifyPropertyChanged("Refresh");
         }
         private void UpdateDungeonName()
