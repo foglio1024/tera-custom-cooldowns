@@ -117,9 +117,6 @@ namespace TCC
             timer.Dispose();
 
         }
-        ~AbnormalityDuration()
-        {
-        }
     }
 
 
