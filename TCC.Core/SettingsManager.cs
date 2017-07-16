@@ -20,6 +20,7 @@ namespace TCC
         public double Scale;
         public bool AutoDim;
         public double DimOpacity;
+        public bool ShowAlways;
     }
     public static class SettingsManager
     {
@@ -33,7 +34,8 @@ namespace TCC
             ClickThru = false,
             Scale = 1,
             AutoDim = true,
-            DimOpacity = .2
+            DimOpacity = .2,
+            ShowAlways = false
         };
         public static WindowSettings CooldownWindowSettings = new WindowSettings()
         {
@@ -43,7 +45,8 @@ namespace TCC
             ClickThru = false,
             Scale = 1,
             AutoDim = true,
-            DimOpacity = .2
+            DimOpacity = .2,
+            ShowAlways = false
 
         };
         public static WindowSettings BossGaugeWindowSettings = new WindowSettings()
@@ -54,7 +57,8 @@ namespace TCC
             ClickThru = false,
             Scale = 1,
             AutoDim = true,
-            DimOpacity = .2
+            DimOpacity = .2,
+            ShowAlways = false
 
         };
         public static WindowSettings BuffBarWindowSettings = new WindowSettings()
@@ -65,7 +69,8 @@ namespace TCC
             ClickThru = false,
             Scale = 1,
             AutoDim = true,
-            DimOpacity = .2
+            DimOpacity = .2,
+            ShowAlways = false
 
         };
         public static WindowSettings CharacterWindowSettings = new WindowSettings()
@@ -76,7 +81,8 @@ namespace TCC
             ClickThru = false,
             Scale = 1,
             AutoDim = true,
-            DimOpacity = .2
+            DimOpacity = .2,
+            ShowAlways = false
 
         };
         public static WindowSettings ClassWindowSettings = new WindowSettings()
@@ -87,7 +93,9 @@ namespace TCC
             ClickThru = false,
             Scale = 1,
             AutoDim = true,
-            DimOpacity = .2
+            DimOpacity = .2,
+            ShowAlways = false
+
         };
         public static WindowSettings ChatWindowSettings = new WindowSettings()
         {
@@ -97,7 +105,9 @@ namespace TCC
             ClickThru = false,
             Scale = 1,
             AutoDim = false,
-            DimOpacity = 1
+            DimOpacity = 1,
+            ShowAlways = false
+
         };
 
         public static bool IgnoreMeInGroupWindow { get; set; }
@@ -263,6 +273,11 @@ namespace TCC
             try
             {
                 w.DimOpacity = Double.Parse(ws.Attribute("DimOpacity").Value, CultureInfo.InvariantCulture);
+            }
+            catch (Exception) { }
+            try
+            {
+                w.ShowAlways = Boolean.Parse(ws.Attribute("ShowAlways").Value);
             }
             catch (Exception) { }
         }

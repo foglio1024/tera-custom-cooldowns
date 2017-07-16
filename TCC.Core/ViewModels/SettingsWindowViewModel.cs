@@ -312,7 +312,16 @@ namespace TCC.ViewModels
                 NotifyPropertyChanged("IsClassWindowTransparent");
             }
         }
-
+        public bool ChatWindowShowAlways
+        {
+            get { return SettingsManager.ChatWindowSettings.ShowAlways; }
+            set
+            {
+                if (SettingsManager.ChatWindowSettings.ShowAlways == value) return;
+                SettingsManager.ChatWindowSettings.ShowAlways = value;
+                NotifyPropertyChanged(nameof(ChatWindowShowAlways));
+            }
+        }
 
         //scale settings
         public double CooldownWindowScale

@@ -408,6 +408,7 @@
                     <controls:ValueSetting Grid.Row="3" SettingName="Spam threshold" Min="0" Max="10" Value="{Binding SpamThreshold, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_tune_white_24dp_2x.png"></controls:ValueSetting>
                     <controls:BoolSetting Grid.Row="4" SettingName="Show timestamps" IsOn="{Binding ShowTimestamp, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_tune_white_24dp_2x.png"></controls:BoolSetting>
                     <controls:BoolSetting Grid.Row="5" SettingName="Show channel label" IsOn="{Binding ShowChannel, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_tune_white_24dp_2x.png"></controls:BoolSetting>
+                    <controls:BoolSetting Grid.Row="6" SettingName="Show always" IsOn="{Binding ChatWindowShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_tune_white_24dp_2x.png"></controls:BoolSetting>
                 </Grid>
 
             </TabItem>

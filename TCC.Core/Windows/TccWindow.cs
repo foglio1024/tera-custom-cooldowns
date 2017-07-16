@@ -93,6 +93,7 @@ namespace TCC.Windows
                 }
                 else
                 {
+                    if (_settings.ShowAlways) return;
                     AnimateContentOpacity(0);
                 }
             }
