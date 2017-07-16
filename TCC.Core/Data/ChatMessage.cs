@@ -403,6 +403,7 @@ namespace TCC.Data
                         ItemUid = simplePieces[i].ItemUid,
                         BoundType = simplePieces[i].BoundType,
                         OwnerName = simplePieces[i].OwnerName,
+                        RawLink = simplePieces[i].RawLink
                     };
                     chatMessage.InsertPiece(mp, index);
                     index = chatMessage.Pieces.IndexOf(mp) + 1;
@@ -585,6 +586,8 @@ namespace TCC.Data
         }
         protected MessagePiece ParseItemLink(string a)
         {
+            var linkData = a.Substring(a.IndexOf("#####") - 1);
+            linkData = linkData.Substring(0, linkData.IndexOf(">") - 1);
             var pars = ParseLinkedParameters(a);
             var id = UInt32.Parse(pars[0]);
             var uid = Int32.Parse(pars[1]);
@@ -611,10 +614,14 @@ namespace TCC.Data
             {
                 result.BoundType = i.BoundType;
             }
+            result.RawLink = linkData;
             return result;
         }
         protected MessagePiece ParseQuestLink(string a)
         {
+            var linkData = a.Substring(a.IndexOf("#####") - 1);
+            linkData = linkData.Substring(0, linkData.IndexOf(">") - 1);
+
             //parsing only name
             var textStart = a.IndexOf('>', a.IndexOf("#####")) + 1;
             var textEnd = a.IndexOf('<', textStart);
@@ -624,13 +631,17 @@ namespace TCC.Data
 
             var result = new MessagePiece(text)
             {
-                Type = MessagePieceType.Simple
+                Type = MessagePieceType.Quest
             };
+            result.RawLink = linkData;
 
             return result;
         }
         protected MessagePiece ParseLocationLink(string a)
         {
+            var linkData = a.Substring(a.IndexOf("#####") - 1);
+            linkData = linkData.Substring(0, linkData.IndexOf(">") - 1);
+
             var pars = ParseLinkedParameters(a);
             var locTree = pars[0].Split('_');
             var worldId = UInt32.Parse(locTree[0]);
@@ -638,6 +649,7 @@ namespace TCC.Data
             var sectionId = UInt32.Parse(locTree[2]);
             if (worldId == 1 && guardId == 2 && sectionId == 9) sectionId = 7;
             var continent = UInt32.Parse(pars[1]);
+            continent = continent == 0 && worldId == 1 && guardId == 24 && sectionId == 183001 ? 7031 : continent;
             var coords = pars[2].Split(',');
             var x = Double.Parse(coords[0], CultureInfo.InvariantCulture);
             var y = Double.Parse(coords[1], CultureInfo.InvariantCulture);
@@ -672,6 +684,7 @@ namespace TCC.Data
                 Type = MessagePieceType.Point_of_interest
             };
             result.Location = new Location(worldId, guardId, sectionId, x, y);
+            result.RawLink = linkData;// String.Format("{0}_{1}_{2}@{3}@{4},{5},{6}", worldId, guardId, sectionId, continent == 0 && worldId==1 && guardId ==24 && sectionId==183001? 7031 : continent, x.ToString(CultureInfo.InvariantCulture), y.ToString(CultureInfo.InvariantCulture), z.ToString(CultureInfo.InvariantCulture));
             return result;
         }
         #endregion
@@ -713,8 +726,20 @@ namespace TCC.Data
         {
             var id = GetId(info, "item");
             var uid = GetItemUid(info);
+
+            var rawLink = new StringBuilder("1#####");
+            rawLink.Append(id.ToString());
+            if (uid != 0)
+            {
+                rawLink.Append("@" + uid.ToString());
+            }
+
             string username = SessionManager.CurrentPlayer.Name;
-            if (info.ContainsKey("UserName")) username = info["UserName"];
+            if (info.ContainsKey("UserName"))
+            {
+                username = info["UserName"];
+                rawLink.Append("@" + username);
+            }
             MessagePiece mp = new MessagePiece(id.ToString());
             if (ItemsDatabase.Items.TryGetValue(id, out Item i))
             {
@@ -725,7 +750,8 @@ namespace TCC.Data
                     BoundType = i.BoundType,
                     ItemId = id,
                     ItemUid = uid,
-                    OwnerName = username
+                    OwnerName = username,
+                    RawLink = rawLink.ToString()
                 };
                 mp.SetColor(GetItemColor(i));
             }
