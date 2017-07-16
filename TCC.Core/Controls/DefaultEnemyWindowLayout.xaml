@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="TCC.Controls.DefaultEnemyWindowLayout"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TCC.Controls"
+             mc:Ignorable="d" >
+    <StackPanel Width="Auto" 
+                HorizontalAlignment="Left" 
+                Orientation="Horizontal"
+                >
+        <ItemsControl Name="Mobs" 
+                      ItemTemplate="{StaticResource MobDataTemplate}"
+                      ItemsSource="{Binding Instance.Mobs}"
+                      Grid.Column="0"
+                      Width="Auto"
+                      HorizontalAlignment="Left">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Vertical" 
+                               ItemHeight="Auto" 
+                               Height="270" 
+                               ItemWidth="Auto" 
+                               Background="Transparent"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+        <ItemsControl Name="Bosses" 
+                      ItemTemplate="{StaticResource BossDataTemplate}"
+                      ItemsSource="{Binding Bams}" 
+                      Width="Auto" 
+                      Grid.Column="1">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Vertical"
+                               ItemHeight="Auto" 
+                               ItemWidth="Auto" 
+                               Height="270" 
+                               Width="Auto" 
+                               Background="Transparent"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+    </StackPanel>
+
+</UserControl>
