@@ -125,10 +125,10 @@ namespace TCC
     public enum Dragon
     {
         None,
-        Aquadrax,
-        Ignidrax,
-        Umbradrax,
-        Terradrax
+        Ignidrax = 1100,
+        Terradrax = 1101,
+        Umbradrax = 1102,
+        Aquadrax = 1103,
     }
 
     public enum AggroCircle
@@ -158,5 +158,12 @@ namespace TCC
         Phase3 = 3,
         Phase4 = 4,
         Balistas = 5,
+    }
+    public enum ShieldStatus
+    {
+        Off,
+        On,
+        Broken,
+        Failed
     }
 }

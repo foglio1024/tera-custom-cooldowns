@@ -14,13 +14,13 @@ namespace TCC
         public static ObservableCollection<Player> CurrentUsers = new ObservableCollection<Player>();
         public static MonsterDatabase CurrentDatabase;
         private static ulong currentEncounter;
-        public static Dragon CurrentDragon = Dragon.None;
-        public static ObservableCollection<ulong> chestList = new ObservableCollection<ulong>();
         public static void SpawnNPC(ushort zoneId, uint templateId, ulong entityId, Visibility v, bool force)
         {
             if (!Filter(zoneId, templateId)) return;
+
             if (CurrentDatabase.TryGetMonster(templateId, zoneId, out Monster m))
             {
+
                 if (m.IsBoss || force)
                 {
                     BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, m.IsBoss, templateId, zoneId, v);
@@ -48,13 +48,12 @@ namespace TCC
         {
             BossGageWindowViewModel.Instance.SetBossEnrage(entityId, enraged);
         }
-        public static void UpdateNPCbyGauge(ulong target, float curHP, float maxHP, ushort zoneId, uint templateId)
+        public static void UpdateNPCbyGauge(ulong entityId, float curHP, float maxHP, ushort zoneId, uint templateId)
         {
-            BossGageWindowViewModel.Instance.AddOrUpdateBoss(target, maxHP, curHP, true, templateId, zoneId, Visibility.Visible);
-
+            BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, maxHP, curHP, true, templateId, zoneId, Visibility.Visible);
             if (maxHP > curHP)
             {
-                currentEncounter = target;
+                currentEncounter = entityId;
                 SessionManager.Encounter = true;
             }
             else if (maxHP == curHP || curHP == 0)
@@ -80,14 +79,25 @@ namespace TCC
             if (templateId >= 1100 && templateId <= 1103)
             {
                 BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.Phase1;
-                SetDragonsContexts(templateId);
             }
-            else if (templateId == 1000) BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.Phase2;
-            else if (templateId == 2000) BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.Balistas;
-            else if (templateId == 3000) BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.Phase3;
-            else if (templateId == 4000) BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.Phase4;
+            else if (templateId == 1000)
+            {
+                BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.Phase2;
+            }
+            else if (templateId == 2000)
+            {
+                BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.Balistas;
+            }
+            else if (templateId == 3000)
+            {
+                BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.Phase3;
+            }
+            else if (templateId == 4000)
+            {
+                BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.Phase4;
+            }
         }
-        public static void CheckCurrentDragon(Point p)
+        public static Dragon CheckCurrentDragon(Point p)
         {
             var rel = Utils.GetRelativePoint(p.X, p.Y, -7672, -84453);
 
@@ -115,12 +125,7 @@ namespace TCC
                     d = Dragon.Ignidrax;
                 }
             }
-            if (EntitiesManager.CurrentDragon != d)
-            {
-                EntitiesManager.CurrentDragon = d;
-                WindowManager.BossGauge.HHBosses.Select(EntitiesManager.CurrentDragon);
-            }
-
+            return d;
         }
         static void SetDragonsContexts(uint templateId)
         {
@@ -194,41 +199,41 @@ namespace TCC
 
         static void UnsetDragonsContexts(ulong target)
         {
-            WindowManager.BossGauge.Dispatcher.Invoke(() =>
-            {
-                if (WindowManager.BossGauge.HHBosses.ignidrax.EntityId == target)
-                {
-                    WindowManager.BossGauge.HHBosses.ignidrax.DataContext = null;
-                    WindowManager.BossGauge.HHBosses.ignidrax.ForceEnrageOff();
-                    WindowManager.BossGauge.HHBosses.abnormalities.DataContext = null;
-                    WindowManager.BossGauge.HHBosses.abnormalities.ItemsSource = null;
-                }
-                if (WindowManager.BossGauge.HHBosses.aquadrax.EntityId == target)
-                {
-                    WindowManager.BossGauge.HHBosses.aquadrax.DataContext = null;
-                    WindowManager.BossGauge.HHBosses.aquadrax.ForceEnrageOff();
-                    WindowManager.BossGauge.HHBosses.abnormalities.DataContext = null;
-                    WindowManager.BossGauge.HHBosses.abnormalities.ItemsSource = null;
+            //WindowManager.BossGauge.Dispatcher.Invoke(() =>
+            //{
+            //    if (WindowManager.BossGauge.HHBosses.ignidrax.EntityId == target)
+            //    {
+            //        WindowManager.BossGauge.HHBosses.ignidrax.DataContext = null;
+            //        WindowManager.BossGauge.HHBosses.ignidrax.ForceEnrageOff();
+            //        WindowManager.BossGauge.HHBosses.abnormalities.DataContext = null;
+            //        WindowManager.BossGauge.HHBosses.abnormalities.ItemsSource = null;
+            //    }
+            //    if (WindowManager.BossGauge.HHBosses.aquadrax.EntityId == target)
+            //    {
+            //        WindowManager.BossGauge.HHBosses.aquadrax.DataContext = null;
+            //        WindowManager.BossGauge.HHBosses.aquadrax.ForceEnrageOff();
+            //        WindowManager.BossGauge.HHBosses.abnormalities.DataContext = null;
+            //        WindowManager.BossGauge.HHBosses.abnormalities.ItemsSource = null;
 
-                }
-                if (WindowManager.BossGauge.HHBosses.terradrax.EntityId == target)
-                {
-                    WindowManager.BossGauge.HHBosses.terradrax.DataContext = null;
-                    WindowManager.BossGauge.HHBosses.terradrax.ForceEnrageOff();
-                    WindowManager.BossGauge.HHBosses.abnormalities.DataContext = null;
-                    WindowManager.BossGauge.HHBosses.abnormalities.ItemsSource = null;
+            //    }
+            //    if (WindowManager.BossGauge.HHBosses.terradrax.EntityId == target)
+            //    {
+            //        WindowManager.BossGauge.HHBosses.terradrax.DataContext = null;
+            //        WindowManager.BossGauge.HHBosses.terradrax.ForceEnrageOff();
+            //        WindowManager.BossGauge.HHBosses.abnormalities.DataContext = null;
+            //        WindowManager.BossGauge.HHBosses.abnormalities.ItemsSource = null;
 
-                }
-                if (WindowManager.BossGauge.HHBosses.umbradrax.EntityId == target)
-                {
-                    WindowManager.BossGauge.HHBosses.umbradrax.DataContext = null;
-                    WindowManager.BossGauge.HHBosses.umbradrax.ForceEnrageOff();
-                    WindowManager.BossGauge.HHBosses.abnormalities.DataContext = null;
-                    WindowManager.BossGauge.HHBosses.abnormalities.ItemsSource = null;
+            //    }
+            //    if (WindowManager.BossGauge.HHBosses.umbradrax.EntityId == target)
+            //    {
+            //        WindowManager.BossGauge.HHBosses.umbradrax.DataContext = null;
+            //        WindowManager.BossGauge.HHBosses.umbradrax.ForceEnrageOff();
+            //        WindowManager.BossGauge.HHBosses.abnormalities.DataContext = null;
+            //        WindowManager.BossGauge.HHBosses.abnormalities.ItemsSource = null;
 
 
-                }
-            });
+            //    }
+            //});
         }
 
         public static bool TryGetUserById(ulong id, out Player p)
