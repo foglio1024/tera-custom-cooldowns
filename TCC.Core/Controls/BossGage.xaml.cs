@@ -28,10 +28,10 @@ namespace TCC
         private float _maxHp;
         private float _currentHp;
         private bool _enraged;
-        public float CurrentPercentage => _maxHp == 0 ? 0 : (_currentHp / _maxHp) * 100;
+        public double CurrentPercentage => _maxHp == 0 ? 0 : (_currentHp / _maxHp) * 100;
 
-        float nextEnragePerc = 90;
-        public float NextEnragePercentage
+        double nextEnragePerc;
+        public double NextEnragePercentage
         {
             get => nextEnragePerc;
             set
@@ -53,7 +53,7 @@ namespace TCC
         public event PropertyChangedEventHandler PropertyChanged;
 
         int AnimationTime = 350;
-        int curEnrageTime = 36;
+        int curEnrageTime;
         public int CurrentEnrageTime
         {
             get => curEnrageTime;
@@ -136,10 +136,10 @@ namespace TCC
                 {
                     NumberTimer?.Stop();
 
-                    NextEnragePercentage = CurrentPercentage - 10;
+                    NextEnragePercentage = CurrentPercentage - _boss.EnragePattern.Percentage;
                     SlideEnrageIndicator(NextEnragePercentage);
 
-                    CurrentEnrageTime = 36;
+                    CurrentEnrageTime = _boss.EnragePattern.Duration;
                 }
             }
             if (e.PropertyName == "Visible")
@@ -153,11 +153,11 @@ namespace TCC
 
             _boss = (Boss)DataContext;
             _boss.PropertyChanged += boss_PropertyChanged;
-
+            curEnrageTime = _boss.EnragePattern.Duration;
             _currentHp = _boss.CurrentHP;
             _maxHp = _boss.MaxHP;
             _enraged = _boss.Enraged;
-            NextEnragePercentage = 90;
+            NextEnragePercentage = 100 - _boss.EnragePattern.Percentage;
             NextEnrage.RenderTransform = new TranslateTransform(HPgauge.Width, 0);
             SlideEnrageIndicator(NextEnragePercentage);
         }
