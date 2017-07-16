@@ -32,7 +32,11 @@ namespace TCC.Controls
         {
             Dispatcher.Invoke(new Action(() =>
             {
+                try
+                {
                 ((ChatMessage)DataContext).Rows = WindowManager.ChatWindow.GetMessageRows(this.ActualHeight);
+                }
+                catch (Exception) { }
             }), DispatcherPriority.Loaded);
         }
     }
