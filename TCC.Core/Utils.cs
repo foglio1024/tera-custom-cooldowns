@@ -96,6 +96,11 @@ namespace TCC
             );
             return result;
         }
+
+        public static bool IsPhase1Dragon(uint zoneId, uint templateId)
+        {
+            return zoneId == 950 && templateId >= 1100 && templateId <= 1103 ? true : false;
+        }
     }
 
     public class DependencyPropertyWatcher<T> : DependencyObject, IDisposable
