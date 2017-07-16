@@ -258,6 +258,7 @@ namespace TCC.Data
         }
         private void ShieldFailed(object sender, EventArgs e)
         {
+            ShieldDuration.Stop();
             Shield = ShieldStatus.Failed;
         }
         public void BreakShield()
