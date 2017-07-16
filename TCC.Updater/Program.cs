@@ -30,6 +30,7 @@ namespace TCC.Updater
             }
 
             Directory.Delete(SourcePath, true);
+            Process.Start("explorer.exe","https://github.com/Foglio1024/Tera-custom-cooldowns/releases");
             Process.Start(Environment.CurrentDirectory + "/TCC.exe");
             Environment.Exit(0);
         }
