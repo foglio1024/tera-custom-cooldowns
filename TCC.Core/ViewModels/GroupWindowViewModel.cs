@@ -118,6 +118,13 @@ namespace TCC.ViewModels
             return false;
 
         }
+
+        internal bool HasPowers(string name)
+        {
+            GetUser(name, out User u);
+            return u!=null ? u.CanInvite : false;
+        }
+
         public bool GetUser(string name, out User user)
         {
             User u;
@@ -149,7 +156,10 @@ namespace TCC.ViewModels
         {
             return GetUser(name, out User u);
         }
-
+        public bool AmILeader()
+        {
+            return IsLeader(SessionManager.CurrentPlayer.Name);
+        }
         public void BeginOrRefreshUserAbnormality(Abnormality ab, int stacks, uint duration, uint playerId, uint serverId)
         {
             var size = GroupSize > GROUP_SIZE_THRESHOLD ? AbnormalityManager.RAID_AB_SIZE : AbnormalityManager.PARTY_AB_SIZE;
