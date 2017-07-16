@@ -27,6 +27,11 @@
         <SolidColorBrush x:Key="AssaultStanceColor" Color="#de2c4a" />
         <SolidColorBrush x:Key="SniperEyeColor" Color="#38bde5" />
 
+        <SolidColorBrush x:Key="IgnidraxColor" Color="#ff894a"/>
+        <SolidColorBrush x:Key="TerradraxColor" Color="#ffcb76"/>
+        <SolidColorBrush x:Key="AquadraxColor" Color="#dff7ff"/>
+        <SolidColorBrush x:Key="UmbradraxColor" Color="#aa1e1e"/>
+
         <system:Double x:Key="MapWidth">800</system:Double>
         <system:Double x:Key="MapHeight">600</system:Double>
 
@@ -92,6 +97,7 @@
         <!--Converters-->
         <converters:BoolToOpacityConverter x:Key="boolToOpacity"/>
         <converters:BoolToVisibilityConverter x:Key="boolToVisibleCollapsed" />
+        <converters:BoolToVisibleHidden x:Key="boolToVisibleHidden" />
         <converters:RollToStringConverter x:Key="rollToString"/>
         <converters:WinningToColorConverter x:Key="winningToColor"/>
         <converters:IconConverter x:Key="iconConv"/>
@@ -131,7 +137,7 @@
         <converters:ReadyToOpacityConverter x:Key="readyToOpacityConv"/>
         <converters:ReadyToIconConverter x:Key="readyToIconConv"/>
         <converters:ReadyToColorConverter x:Key="readyToColorConv"/>
-
+        <converters:TemplateIdToColorConverter x:Key="TemplateIdToColorConverter"/>
         <DataTemplate x:Key="abnorm">
             <controls:AbnormalityIndicator/>
         </DataTemplate>
@@ -139,6 +145,9 @@
         <converters:LocationToMapConverter x:Key="LocationToMapConverter"/>
         <converters:LocationToMarkerPositionConverter x:Key="LocationToMarkerPositionConverter"/>
         <converters:LocationToStretchConverter x:Key="LocationToStretchConverter"/>
+        <converters:ShieldStatusColorConverter x:Key="ShieldStatusColorConverter"/>
+        <converters:ShieldStatusToVisibilityConverter x:Key="ShieldStatusToVisibilityConverter"/>
+        <converters:FactorToAngleConverter x:Key="FactorToAngleConverter"/>
         <!--Scrollbar Thumbs-->
         <Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">
             <Setter Property="Template">
@@ -521,5 +530,35 @@
                                                  BossDataTemplate="{StaticResource BossDataTemplate}"
                                                  MobDataTemplate="{StaticResource MobDataTemplate}"/>
 
+        <DataTemplate x:Key="DefaultEnemyWindowLayout">
+            <controls:DefaultEnemyWindowLayout/>
+        </DataTemplate>
+        <DataTemplate x:Key="Phase1EnemyWindowLayout">
+            <controls:Phase1BossControl />
+        </DataTemplate>
+        <DataTemplate x:Key="Phase2EnemyWindowLayout">
+            <controls:Phase2BossControl />
+        </DataTemplate>
+        <DataTemplate x:Key="Phase2BEnemyWindowLayout">
+            <controls:Phase2BallistaBossControl />
+        </DataTemplate>
+        <DataTemplate x:Key="Phase3EnemyWindowLayout">
+            <controls:Phase3BossControl />
+        </DataTemplate>
+        <DataTemplate x:Key="Phase4EnemyWindowLayout">
+            <controls:Phase4BossControl />
+        </DataTemplate>
+        <converters:HHphaseToEnemyWindowTemplate x:Key="PhaseToLayout"/>
+        <Style TargetType="Grid" x:Key="opGrid">
+            <Setter Property="Opacity" Value=".45"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                    <Setter Property="Opacity" Value="1" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <DataTemplate x:Key="DragonIndicator">
+            <controls:DragonControl />
+        </DataTemplate>
     </Application.Resources>
 </Application>
