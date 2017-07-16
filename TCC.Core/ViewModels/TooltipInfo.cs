@@ -93,7 +93,23 @@ namespace TCC.ViewModels
                 else return "Add friend";
             }
         }
+        public string PowersLabelText
+        {
+            get
+            {
+                if (!GroupWindowViewModel.Instance.HasPowers(Name)) return "Grant invite power";
+                else return "Revoke invite power";
+            }
+        }
 
+        public bool ShowGrantPowers
+        {
+            get => GroupWindowViewModel.Instance.AmILeader() && GroupWindowViewModel.Instance.Raid && GroupWindowViewModel.Instance.UserExists(Name) && Name != SessionManager.CurrentPlayer.Name;
+        }
+        public bool ShowDelegateLeader
+        {
+            get => GroupWindowViewModel.Instance.AmILeader() && GroupWindowViewModel.Instance.UserExists(Name) && Name != SessionManager.CurrentPlayer.Name;
+        }
         public bool IsBlocked
         {
             get => ChatWindowViewModel.Instance.BlockedUsers.Contains(name);
@@ -121,6 +137,9 @@ namespace TCC.ViewModels
             NotifyPropertyChanged(nameof(FriendLabelText));
             NotifyPropertyChanged(nameof(IsBlocked));
             NotifyPropertyChanged(nameof(IsFriend));
+            NotifyPropertyChanged(nameof(PowersLabelText));
+            NotifyPropertyChanged(nameof(ShowDelegateLeader));
+            NotifyPropertyChanged(nameof(ShowGrantPowers));
         }
 
         public void SetInfo(uint model)

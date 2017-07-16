@@ -116,7 +116,19 @@
                             <Path Data="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                             <TextBlock Text="Party invite" Margin="3"></TextBlock>
                         </StackPanel>
-
+                    </Button>
+                    <Button Click="GrantInviteClick" Visibility="{Binding Instance.TooltipInfo.ShowGrantPowers, Converter={StaticResource boolToVisibleCollapsed}}">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 
+                                  4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            <TextBlock Text="{Binding Instance.TooltipInfo.PowersLabelText}" Margin="3"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Click="DelegateLeaderClick" Visibility="{Binding Instance.TooltipInfo.ShowDelegateLeader, Converter={StaticResource boolToVisibleCollapsed}}">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Margin="4,3,2,3" Data="M908.3,255c-45.1,0-81.7,36.6-81.7,81.7c0,16.9,5.1,32.6,14,45.7L666.2,500L536.9,246.2c26.6-13.5,44.8-41,44.8-72.9c0-45.1-36.6-81.7-81.7-81.7c-45.1,0-81.7,36.6-81.7,81.7c0,32.1,18.5,59.8,45.4,73.2L339,500L159.8,381.7c8.5-12.9,13.5-28.4,13.5-45c0-45.1-36.6-81.7-81.7-81.7S10,291.6,10,336.7c0,45.1,36.6,81.7,81.7,81.7c9.8,0,19.2-1.7,27.9-4.9L255,785.8h490l135.4-372.4c8.7,3.2,18.1,4.9,27.9,4.9c45.1,0,81.7-36.6,81.7-81.7C990,291.6,953.4,255,908.3,255z M214.2,908.3h571.7v-81.7H214.2V908.3z"/>
+                            <TextBlock Text="Delegate leader" Margin="3"></TextBlock>
+                        </StackPanel>
                     </Button>
                     <Button Click="GuildInviteClick" Visibility="{Binding Instance.TooltipInfo.ShowGuildInvite, Converter={StaticResource boolToVisibleCollapsed}}">
                         <StackPanel Orientation="Horizontal">

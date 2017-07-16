@@ -15,6 +15,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TCC.Data;
 using TCC.ViewModels;
 
 namespace TCC.Controls.ChatControls
@@ -115,6 +116,21 @@ namespace TCC.Controls.ChatControls
         {
             WindowManager.ChatWindow.CloseTooltip();
             SendString("/w " + ChatWindowViewModel.Instance.TooltipInfo.Name + " ");
+        }
+
+        private void GrantInviteClick(object sender, RoutedEventArgs e)
+        {
+            
+            GroupWindowViewModel.Instance.GetUser(ChatWindowViewModel.Instance.TooltipInfo.Name, out User u);
+            if (u != null) { ProxyInterop.SendGrantRevokeInvite(u.ServerId, u.PlayerId, !u.CanInvite); u.CanInvite = !u.CanInvite; }
+            WindowManager.ChatWindow.CloseTooltip();
+        }
+
+        private void DelegateLeaderClick(object sender, RoutedEventArgs e)
+        {
+            GroupWindowViewModel.Instance.GetUser(ChatWindowViewModel.Instance.TooltipInfo.Name, out User u);
+            ProxyInterop.SendDelegateLeader(u.ServerId, u.PlayerId);
+            WindowManager.ChatWindow.CloseTooltip();
         }
     }
 }
