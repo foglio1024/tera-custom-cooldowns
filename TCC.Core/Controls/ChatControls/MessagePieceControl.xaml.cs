@@ -39,17 +39,25 @@ namespace TCC.Controls
             switch (_context.Type)
             {
                 case MessagePieceType.Item:
-                    if (_context.BoundType == BoundType.Equip || _context.ItemUid > 0)
-                    {
-                        ProxyInterop.SendExTooltipMessage(_context.ItemUid, _context.OwnerName);
-                    }
-                    else
-                    {
-                        ProxyInterop.SendNondbItemInfoMessage(_context.ItemId);
-                    }
+                    //if (_context.BoundType == BoundType.Equip || _context.ItemUid > 0)
+                    //{
+                    //    ProxyInterop.SendExTooltipMessage(_context.ItemUid, _context.OwnerName);
+                    //}
+                    //else
+                    //{
+                    //    ProxyInterop.SendNondbItemInfoMessage(_context.ItemId);
+                    //}
+                    ProxyInterop.SendLinkData(_context.RawLink);
+
                     break;
                 case MessagePieceType.Url:
                     Process.Start(_context.Text);
+                    break;
+                case MessagePieceType.Point_of_interest:
+                    ProxyInterop.SendLinkData(_context.RawLink);
+                    break;
+                case MessagePieceType.Quest:
+                    ProxyInterop.SendLinkData(_context.RawLink);
                     break;
                 default:
                     break;
@@ -68,7 +76,10 @@ namespace TCC.Controls
                     break;
                 case MessagePieceType.Point_of_interest:
                     bgBorder.Background = _context.Color;
-                    WindowManager.ChatWindow.OpenMap(_context);
+                    //WindowManager.ChatWindow.OpenMap(_context);
+                    break;
+                case MessagePieceType.Quest:
+                    bgBorder.Background = _context.Color;
                     break;
                 default:
                     break;

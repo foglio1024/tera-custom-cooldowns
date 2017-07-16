@@ -32,7 +32,7 @@ namespace TCC.Data
         }
 
         public Location Location { get; set; }
-
+        public string RawLink { get; set; }
         public Money Money { get; set; }
 
         public BoundType BoundType { get; set; }
