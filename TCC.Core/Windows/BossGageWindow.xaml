@@ -15,31 +15,24 @@
         AllowsTransparency="True"
         ShowInTaskbar="False"
         WindowStyle="None"
-        Background="#00ff0000"        
+             Background="Transparent"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         MouseRightButtonDown="Window_MouseRightButtonDown"
         Loaded="Window_Loaded"
         ResizeMode="NoResize" 
-             MouseDoubleClick="TccWindow_MouseDoubleClick">
-    <w:TccWindow.Resources>
-
-
-        <converters:HarrowholdBossesVisibilityConverter x:Key="hhBossesVisConv"/>
-    </w:TccWindow.Resources>
+        MouseDoubleClick="TccWindow_MouseDoubleClick">
     <w:TccWindow.DataContext>
         <vm:BossGageWindowViewModel/>
     </w:TccWindow.DataContext>
-    <Grid >
+    <Grid>
         <Grid.LayoutTransform>
-            <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
+            <ScaleTransform ScaleX="{Binding Scale}" 
+                            ScaleY="{Binding Scale}"/>
         </Grid.LayoutTransform>
-        <ItemsControl Name="Bosses" ItemTemplateSelector="{StaticResource EnemyTemplateSelector}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Vertical" ItemHeight="Auto" Height="270"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
-        <elements:HarrowholdBossesControl x:Name="HHBosses" Opacity="0" Visibility="{Binding HarrowholdMode, Converter={StaticResource hhBossesVisConv}}"/>
+        <ContentControl  Content="{Binding Instance}"
+                        ContentTemplate="{Binding Instance.CurrentHHphase, Converter={StaticResource PhaseToLayout}}"
+
+                       />
+
     </Grid>
 </w:TccWindow>
