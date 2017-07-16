@@ -74,6 +74,7 @@ namespace TCC
                 ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Disconnected from server.</FONT>"));
                 GroupWindowViewModel.Instance.ClearAllAbnormalities();
                 BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
+                EntitiesManager.ClearNPC();
 
                 SkillManager.Clear();
                 WindowManager.TrayIcon.Icon = WindowManager.DefaultIcon;
