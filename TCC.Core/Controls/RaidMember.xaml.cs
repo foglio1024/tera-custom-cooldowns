@@ -15,6 +15,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TCC.Data;
 using TCC.ViewModels;
 
 namespace TCC.Controls
@@ -45,6 +46,12 @@ namespace TCC.Controls
         {
             var an = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200));
             BeginAnimation(OpacityProperty, an);
+        }
+
+        private void UserControl_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var dc = (User)DataContext;
+            ProxyInterop.SendAskInteractiveMessage(dc.ServerId, dc.Name);
         }
     }
 }

@@ -7,7 +7,9 @@
              xmlns:controls="clr-namespace:TCC.Controls"
              mc:Ignorable="d"
              Loaded="UserControl_Loaded"
-             Unloaded="UserControl_Unloaded" Margin="0">
+             Unloaded="UserControl_Unloaded"
+             PreviewMouseLeftButtonDown="UserControl_PreviewMouseLeftButtonDown"
+             Margin="0">
     <Grid Height="Auto" Margin="2" Width="173" Name="rootGrid" ToolTip="{Binding Name}" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>

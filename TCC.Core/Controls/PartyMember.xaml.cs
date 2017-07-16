@@ -13,6 +13,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TCC.Data;
 
 namespace TCC.Controls
 {
@@ -44,6 +45,12 @@ namespace TCC.Controls
 
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
+        }
+
+        private void UserControl_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var dc = (User)DataContext;
+            ProxyInterop.SendAskInteractiveMessage(dc.ServerId, dc.Name);
         }
     }
 }
