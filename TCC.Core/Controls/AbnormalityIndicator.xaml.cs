@@ -42,8 +42,8 @@ namespace TCC.Controls
         }
         void AnimateCooldown()
         {
-            var an = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(_context.Duration));
-            int fps = _context.Duration > 20000 ? 1 : 10;
+            var an = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(_context.DurationLeft));
+            int fps = _context.DurationLeft > 20000 ? 1 : 10;
             DoubleAnimation.SetDesiredFrameRate(an, fps);
             arc.BeginAnimation(Arc.EndAngleProperty, an);
 
