@@ -59,6 +59,18 @@ namespace TCC
             }
         }
 
+        internal static void SendLinkData(string linkData)
+        {
+            // linkData = T#####DATA
+            if (linkData == null) return;
+            var sb = new StringBuilder("chat_link");
+            sb.Append("&");
+            sb.Append(":tcc:");
+            sb.Append(linkData.Replace("#####", ":tcc:"));
+            sb.Append(":tcc:");
+            System.IO.File.AppendAllText("link-test.txt",sb.ToString() + "\n");
+            SendData(sb.ToString());
+        }
 
         static void SendData(string data)
         {
