@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:TCC.Controls"
              mc:Ignorable="d" 
              Visibility="{Binding Visible}">
-    <Grid Margin="2" Width="Auto">
+    <Grid Margin="2" Width="Auto" MaxWidth="100">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
