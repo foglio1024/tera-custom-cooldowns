@@ -11,9 +11,12 @@
              Loaded="UserControl_Loaded"
              Unloaded="UserControl_Unloaded"
              UseLayoutRounding="True" 
-             Visibility="{Binding Visible}"
+             Width="Auto"
+             Height="Auto"
+             Visibility="{Binding Visible}"  
              >
-    <Grid Width="Auto" Name="rootGrid">
+    <Grid Width="Auto" Name="rootGrid"             
+>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
@@ -88,7 +91,7 @@
                                VerticalAlignment="Center" 
                                Margin="0" 
                                FontSize="14"
-                               Text="{Binding CurrentPercentage, StringFormat=##0.# %}"
+                               Text="{Binding CurrentFactor, StringFormat=##0.# %}"
                                Grid.Row="1"/>
                 </Grid>
                 <Grid Grid.Row="2" Margin="10,0.5,10,0.5" Name="hpBarGrid" >
@@ -106,8 +109,8 @@
                                            CurrentVal="{Binding CurrentHP}"
                                            MaxVal="{Binding MaxHP}"
                                            x:Name="HPgauge"
-                                           ></controls:GenericGauge>
-                    
+                                           />
+
                     <Grid Height="{Binding ElementName=HPgauge, Path=Height}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -130,7 +133,8 @@
                         <Border BorderThickness=".8,0,.8,0" BorderBrush="#90000000" Grid.Column="7"/>
                         <Border BorderThickness=".8,0,0,0"  BorderBrush="#90000000" Grid.Column="9"/>
                     </Grid>
-                    <StackPanel Width="28" Height="Auto" Orientation="Vertical" Opacity="1" Name="NextEnrage" Margin="-14,-5,0,0" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" Grid.Row="2">
+                    <StackPanel Width="28" Height="Auto" Orientation="Vertical" Opacity="1" Name="NextEnrage" 
+                                Margin="-14,-5,0,0" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" Grid.Row="2">
                         <StackPanel.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
