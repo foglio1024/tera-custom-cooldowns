@@ -84,6 +84,7 @@ namespace TCC.Parsing
             {"S_PARTY_MATCH_LINK", Contructor<Func<TeraMessageReader, S_PARTY_MATCH_LINK>>() },
             {"S_PARTY_MEMBER_INFO", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_INFO>>() },
             {"S_OTHER_USER_APPLY_PARTY", Contructor<Func<TeraMessageReader, S_OTHER_USER_APPLY_PARTY>>() },
+            {"S_DUNGEON_EVENT_MESSAGE", Contructor<Func<TeraMessageReader, S_DUNGEON_EVENT_MESSAGE>>() },
 
         };
 
@@ -161,6 +162,7 @@ namespace TCC.Parsing
             {typeof(S_PARTY_MATCH_LINK), new Action<S_PARTY_MATCH_LINK>(x => PacketProcessor.HandleLfgSpam(x)) },
             {typeof(S_PARTY_MEMBER_INFO), new Action<S_PARTY_MEMBER_INFO>(x => PacketProcessor.HandlePartyMemberInfo(x)) },
             {typeof(S_OTHER_USER_APPLY_PARTY), new Action<S_OTHER_USER_APPLY_PARTY>(x => PacketProcessor.HandleUserApplyToParty(x)) },
+            {typeof(S_DUNGEON_EVENT_MESSAGE), new Action<S_DUNGEON_EVENT_MESSAGE>(x => PacketProcessor.HandleDungeonMessage(x)) },
 
         };
 
