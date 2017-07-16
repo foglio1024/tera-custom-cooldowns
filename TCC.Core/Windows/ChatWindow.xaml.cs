@@ -261,7 +261,6 @@ namespace TCC.Windows
         }
         private void TccWindow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
         }
 
         private void TccWindow_MouseLeave(object sender, MouseEventArgs e)

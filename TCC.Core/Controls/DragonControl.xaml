@@ -10,7 +10,7 @@
                   HorizontalAlignment="Center" 
                   VerticalAlignment="Center"
                   Style="{StaticResource opGrid}"
-                Visibility="{Binding Visible}">
+                >
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -20,6 +20,8 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
+            <Ellipse Fill="#1fff" Width="54" Height="54" Grid.Row="1"></Ellipse>
+
             <TextBlock Text="{Binding Name}" 
                                    Foreground="White" 
                                    Grid.Row="0"
@@ -27,38 +29,13 @@
                                Width="60"
                                HorizontalAlignment="Center"
                                TextAlignment="Center"/>
-            <local:Arc Width="50" Height="50"
-                                Stroke="{Binding TemplateId, Converter={StaticResource TemplateIdToColorConverter}}"
-                               StrokeThickness="4"
-                               EndAngle="{Binding CurrentFactor, Converter={StaticResource FactorToAngleConverter}}"
-                                Grid.Row="1"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                               />
-            <Grid Grid.Row="1" VerticalAlignment="Center" x:Name="enrageLine">
-            <Path Data="M0,0 4,0 2,2 0,0" Stretch="Uniform" Width="8" Height="8" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Red" RenderTransformOrigin="0.5,0.5">
-                <Path.RenderTransform>
-                            <TranslateTransform X="0" Y="-32" />
-                </Path.RenderTransform>
-            </Path>
-            </Grid>
-
-            <local:Arc Width="58" Height="58"
-                       Stroke="Red"
-                       Visibility="{Binding Enraged, Converter={StaticResource boolToVisibleHidden}}"
-                       StrokeThickness="3"
-                       x:Name="enrageArc"
-                       EndAngle="359.9"
-                       Grid.Row="1"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"/>
             <Grid Grid.Row="1" Visibility="{Binding Shield, Converter={StaticResource ShieldStatusToVisibilityConverter}}">
                 <local:Arc Stroke="{Binding Shield, Converter={StaticResource ShieldStatusColorConverter}}" 
                            Grid.Column="2" 
                            x:Name="shieldArc"
-                           Width="38" 
-                           Height="38"
-                           StrokeThickness="20"
+                           Width="48" 
+                           Height="48"
+                           StrokeThickness="24"
                            VerticalAlignment="Center"
                            EndAngle="359.9"
                            Margin="3"/>
@@ -76,13 +53,39 @@
                            237.263,60.498,237.263,60.498z"/>
             </Grid>
 
+            <local:Arc Width="50" Height="50"
+                                Stroke="{Binding TemplateId, Converter={StaticResource TemplateIdToColorConverter}}"
+                               StrokeThickness="4"
+                               EndAngle="{Binding CurrentFactor, Converter={StaticResource FactorToAngleConverter}}"
+                                Grid.Row="1"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                               />
+            <Grid Grid.Row="1" VerticalAlignment="Center" x:Name="enrageLine">
+            <Path Data="M0,0 4,0 2,2 0,0" Stretch="Uniform" Width="8" Height="8" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Red" RenderTransformOrigin="0.5,0.5">
+                <Path.RenderTransform>
+                            <TranslateTransform X="0" Y="-28" />
+                </Path.RenderTransform>
+            </Path>
+            </Grid>
+
+            <local:Arc Width="58" Height="58"
+                       Stroke="Red"
+                       Visibility="{Binding Enraged, Converter={StaticResource boolToVisibleHidden}}"
+                       StrokeThickness="3"
+                       x:Name="enrageArc"
+                       EndAngle="359.9"
+                       Grid.Row="1"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
+
             <TextBlock HorizontalAlignment="Center" 
                                VerticalAlignment="Center" 
                                Foreground="White" 
                                 TextAlignment="Center"
                                FontSize="20"
                                Grid.Row="1"
-                               Text="{Binding CurrentPercentage, StringFormat=#.#}"
+                               Text="{Binding CurrentPercentage, StringFormat=0.#}"
                                Margin="0,0,2,1"/>
 
         </Grid>
