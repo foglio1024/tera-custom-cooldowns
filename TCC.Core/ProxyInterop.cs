@@ -144,6 +144,20 @@ namespace TCC
 
             SendData(sb.ToString());
         }
+
+        internal static void SendGrantRevokeInvite(uint serverId, uint playerId, bool v)
+        {
+            var sb = new StringBuilder("power_change");
+            sb.Append("&sId=");
+            sb.Append(serverId);
+            sb.Append("&pId=");
+            sb.Append(playerId);
+            sb.Append("&power=");
+            sb.Append(v ? 1 : 0);
+
+            SendData(sb.ToString());
+        }
+
         public static void SendUnblockUserMessage(string name)
         {
             var sb = new StringBuilder("unblock");
@@ -162,6 +176,18 @@ namespace TCC
 
             SendData(sb.ToString());
         }
+
+        internal static void SendDelegateLeader(uint serverId, uint playerId)
+        {
+            var sb = new StringBuilder("leader");
+            sb.Append("&sId=");
+            sb.Append(serverId);
+            sb.Append("&pId=");
+            sb.Append(playerId);
+
+            SendData(sb.ToString());
+        }
+
         public static void SendInspect(string name)
         {
             var sb = new StringBuilder("inspect");
