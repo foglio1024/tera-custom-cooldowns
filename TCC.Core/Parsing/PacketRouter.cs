@@ -119,7 +119,7 @@ namespace TCC.Parsing
             SessionManager.SetPlayerMaxHP(SessionManager.CurrentPlayer.EntityId, p.MaxHP);
             SessionManager.SetPlayerMaxMP(SessionManager.CurrentPlayer.EntityId, p.MaxMP);
             SessionManager.SetPlayerMaxST(SessionManager.CurrentPlayer.EntityId, p.MaxST + p.BonusST);
-            
+
             SessionManager.SetPlayerHP(SessionManager.CurrentPlayer.EntityId, p.CurrentHP);
             SessionManager.SetPlayerMP(SessionManager.CurrentPlayer.EntityId, p.CurrentMP);
             SessionManager.SetPlayerST(SessionManager.CurrentPlayer.EntityId, p.CurrentST);
@@ -228,11 +228,11 @@ namespace TCC.Parsing
             byte[] arr = new byte[toBytes.Length + 2 + 4];
             for (int i = 0; i < toBytes.Length - 1; i++)
             {
-                arr[i+4] = toBytes[i];
+                arr[i + 4] = toBytes[i];
             }
 
             var seg = new ArraySegment<byte>(arr);
-            
+
             var sysMsg = new S_SYSTEM_MESSAGE(new TeraMessageReader(new Tera.Message(DateTime.Now, Tera.MessageDirection.ServerToClient, seg), OpCodeNamer, Version, SystemMessageNamer));
             HandleSystemMessage(sysMsg);
 
@@ -253,6 +253,7 @@ namespace TCC.Parsing
             SessionManager.Encounter = false;
             GroupWindowViewModel.Instance.ClearAllAbnormalities();
             BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
+            BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.None;
         }
         public static void HandleLoadTopoFin(C_LOAD_TOPO_FIN x)
         {
@@ -287,14 +288,6 @@ namespace TCC.Parsing
         }
         public static void HandleSpawnNpc(S_SPAWN_NPC p)
         {
-            if(p.HuntingZoneId == 950)
-            {
-                if (p.TemplateId == 1007) Debug.WriteLine("Begin phase");
-                if (p.TemplateId == 1005) Debug.WriteLine("Begin phase 0");
-                if (p.TemplateId == 1006) Debug.WriteLine("Begin phase 1");
-                if (p.TemplateId == 1008) Debug.WriteLine("Begin phase 3"); 
-                if (p.TemplateId == 1003) Debug.WriteLine("Begin phase 4"); 
-            }
             EntitiesManager.CheckHarrowholdMode(p.HuntingZoneId, p.TemplateId);
             EntitiesManager.SpawnNPC(p.HuntingZoneId, p.TemplateId, p.EntityId, System.Windows.Visibility.Collapsed, false);
         }
@@ -383,6 +376,45 @@ namespace TCC.Parsing
             }
         }
 
+        internal static void HandleDungeonMessage(S_DUNGEON_EVENT_MESSAGE p)
+        {
+            if (p.MessageId == 9950045)
+            {
+                //shield start
+                foreach (Boss item in BossGageWindowViewModel.Instance.CurrentNPCs.Where(x => x.IsPhase1Dragon))
+                {
+                    item.StartShield();
+                }
+            }
+            else if (p.MessageId == 9950113)
+            {
+                //aquadrax interrupted
+                BossGageWindowViewModel.Instance.CurrentNPCs.First(x => x.ZoneId == 950 && x.TemplateId == 1103).BreakShield();
+            }
+            else if (p.MessageId == 9950114)
+            {
+                //umbradrax interrupted
+                BossGageWindowViewModel.Instance.CurrentNPCs.First(x => x.ZoneId == 950 && x.TemplateId == 1102).BreakShield();
+
+            }
+            else if (p.MessageId == 9950115)
+            {
+                //ignidrax interrupted
+                BossGageWindowViewModel.Instance.CurrentNPCs.First(x => x.ZoneId == 950 && x.TemplateId == 1100).BreakShield();
+
+            }
+            else if (p.MessageId == 9950116)
+            {
+                //terradrax interrupted
+                BossGageWindowViewModel.Instance.CurrentNPCs.First(x => x.ZoneId == 950 && x.TemplateId == 1101).BreakShield();
+
+            }
+            else if (p.MessageId == 9950044)
+            {
+                //shield fail
+            }
+        }
+
         internal static void HandleBrokerOffer(S_TRADE_BROKER_DEAL_SUGGESTED x)
         {
             ChatWindowViewModel.Instance.AddChatMessage(new BrokerChatMessage(x));
@@ -433,11 +465,11 @@ namespace TCC.Parsing
 
         internal static void HandleAccomplishAchievement(S_ACCOMPLISH_ACHIEVEMENT x)
         {
-            if(AchievementDatabase.Achievements.TryGetValue(x.AchievementId, out string name))
+            if (AchievementDatabase.Achievements.TryGetValue(x.AchievementId, out string name))
             {
                 if (SystemMessages.Messages.TryGetValue("SMT_ACHIEVEMENT_GRADE0_CLEAR_MESSAGE", out SystemMessage m))
                 {
-                    var sysMsg = new ChatMessage("@0\vAchievementName\v@achievement:"+x.AchievementId, m);
+                    var sysMsg = new ChatMessage("@0\vAchievementName\v@achievement:" + x.AchievementId, m);
                     ChatWindowViewModel.Instance.AddChatMessage(sysMsg);
                 }
             }
@@ -470,7 +502,7 @@ namespace TCC.Parsing
                 ChatWindowViewModel.Instance.TooltipInfo.ShowGuildInvite = !x.HasGuild;
                 ChatWindowViewModel.Instance.TooltipInfo.ShowPartyInvite = !x.HasParty;
             }
-            if (!ProxyInterop.IsConnected)  return; 
+            if (!ProxyInterop.IsConnected) return;
             WindowManager.ChatWindow.OpenTooltip();
         }
 
@@ -599,18 +631,19 @@ namespace TCC.Parsing
 
         public static void HandlePlayerLocation(C_PLAYER_LOCATION p)
         {
-            if (SessionManager.HarrowholdMode)
+            if (BossGageWindowViewModel.Instance.CurrentHHphase == HarrowholdPhase.Phase1)
             {
-                EntitiesManager.CheckCurrentDragon(new System.Windows.Point(p.X, p.Y));
+                BossGageWindowViewModel.Instance.SelectDragon(EntitiesManager.CheckCurrentDragon(new System.Windows.Point(p.X, p.Y)));
+
             }
         }
-
         public static void HandlePartyMemberList(S_PARTY_MEMBER_LIST p)
         {
             GroupWindowViewModel.Instance.SetRaid(p.Raid);
             foreach (var user in p.Members)
             {
-                Task.Delay(200).ContinueWith(t => {
+                Task.Delay(200).ContinueWith(t =>
+                {
                     GroupWindowViewModel.Instance.AddOrUpdateMember(user);
                 });
             }
