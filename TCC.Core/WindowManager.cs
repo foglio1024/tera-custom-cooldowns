@@ -184,7 +184,6 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 BossGauge = new BossGageWindow();
-                BossGageWindowViewModel.Instance.CurrentNPCs = new SynchronizedObservableCollection<Data.Boss>(BossGauge.Dispatcher);
                 BossGauge.Show();
                 waiting = false;
 
