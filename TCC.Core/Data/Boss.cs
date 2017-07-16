@@ -2,6 +2,8 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Threading;
 using TCC.ViewModels;
@@ -17,7 +19,7 @@ namespace TCC.Data
     public class Boss : TSPropertyChanged, IDisposable
     {
         public ulong EntityId { get; set; }
-        private string name;
+        protected string name;
         public string Name
         {
             get => name;
@@ -31,7 +33,7 @@ namespace TCC.Data
         }
 
         public bool IsBoss { get; set; }
-        private SynchronizedObservableCollection<AbnormalityDuration> _buffs;
+        protected SynchronizedObservableCollection<AbnormalityDuration> _buffs;
         public SynchronizedObservableCollection<AbnormalityDuration> Buffs
         {
             get { return _buffs; }
@@ -43,7 +45,7 @@ namespace TCC.Data
             }
         }
 
-        private bool enraged;
+        protected bool enraged;
         public bool Enraged
         {
             get => enraged;
@@ -56,7 +58,7 @@ namespace TCC.Data
                 }
             }
         }
-        private float _maxHP;
+        protected float _maxHP;
         public float MaxHP
         {
             get => _maxHP;
@@ -69,7 +71,7 @@ namespace TCC.Data
                 }
             }
         }
-        private float _currentHP;
+        protected float _currentHP;
         public float CurrentHP
         {
             get => _currentHP;
@@ -78,14 +80,16 @@ namespace TCC.Data
                 if (_currentHP != value)
                 {
                     _currentHP = value;
-                    NotifyPropertyChanged("CurrentHP");
-                    NotifyPropertyChanged("CurrentPercentage");
+                    NotifyPropertyChanged(nameof(CurrentHP));
+                    NotifyPropertyChanged(nameof(CurrentPercentage));
+                    NotifyPropertyChanged(nameof(CurrentFactor));
                 }
             }
         }
 
-        public float CurrentPercentage => _maxHP == 0 ? 0 : (_currentHP / _maxHP);
-        private Visibility visible;
+        public float CurrentFactor => _maxHP == 0 ? 0 : (_currentHP / _maxHP);
+        public float CurrentPercentage => CurrentFactor * 100;
+        protected Visibility visible;
         public Visibility Visible
         {
             get { return visible; }
@@ -99,7 +103,7 @@ namespace TCC.Data
             }
         }
 
-        private ulong target;
+        protected ulong target;
         public ulong Target
         {
             get { return target; }
@@ -113,7 +117,7 @@ namespace TCC.Data
             }
         }
 
-        private AggroCircle currentAggroType = AggroCircle.None;
+        protected AggroCircle currentAggroType = AggroCircle.None;
         public AggroCircle CurrentAggroType
         {
             get { return currentAggroType; }
@@ -127,8 +131,10 @@ namespace TCC.Data
             }
         }
 
-        public uint ZoneId { get; private set; }
-        public uint TemplateId { get; private set; }
+        public uint ZoneId { get; protected set; }
+        public uint TemplateId { get; protected set; }
+
+        public EnragePattern EnragePattern { get; set; }
         public void AddorRefresh(Abnormality ab, uint duration, int stacks, double size, double margin)
         {
             var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
@@ -151,6 +157,7 @@ namespace TCC.Data
             {
                 var buff = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
                 if (buff == null) return;
+
                 Buffs.Remove(buff);
                 buff.Dispose();
             }
@@ -159,18 +166,28 @@ namespace TCC.Data
             }
         }
 
-        public Boss(ulong eId, uint zId, uint tId, float curHP, float maxHP, Visibility visible)
-        {
-            _dispatcher = BossGageWindowViewModel.Instance.GetDispatcher();
-            EntityId = eId;
-            Name = EntitiesManager.CurrentDatabase.GetName(tId, zId);
-            ZoneId = zId;
-            TemplateId = tId;
-            MaxHP = maxHP;
-            CurrentHP = curHP;
-            _buffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
-            Visible = visible;
-        }
+        //public Boss(ulong eId, uint zId, uint tId, float curHP, float maxHP, Visibility visible)
+        //{
+        //    _dispatcher = BossGageWindowViewModel.Instance.GetDispatcher();
+        //    EntityId = eId;
+        //    Name = EntitiesManager.CurrentDatabase.GetName(tId, zId);
+        //    ZoneId = zId;
+        //    TemplateId = tId;
+        //    MaxHP = maxHP;
+        //    CurrentHP = curHP;
+        //    _buffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
+        //    Visible = visible;
+
+        //    IsShieldPhase = false;
+        //    IsSelected = false;
+        //    if (BossGageWindowViewModel.Instance.CurrentHHphase == HarrowholdPhase.Phase1)
+        //    {
+        //        ShieldDuration = new DispatcherTimer();
+        //        ShieldDuration.Interval = TimeSpan.FromSeconds(13);
+        //        ShieldDuration.Tick += ShieldFailed;
+        //    }
+
+        //}
         public Boss(ulong eId, uint zId, uint tId, bool boss, Visibility visible)
         {
             _dispatcher = BossGageWindowViewModel.Instance.GetDispatcher();
@@ -183,6 +200,18 @@ namespace TCC.Data
             CurrentHP = MaxHP;
             _buffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
             Visible = visible;
+            Shield = ShieldStatus.Off;
+            IsSelected = true;
+            EnragePattern = new EnragePattern(10, 36);
+            if (IsPhase1Dragon)
+            {
+                ShieldDuration = new Timer();
+                ShieldDuration.Interval = 15000;
+                ShieldDuration.Elapsed += ShieldFailed;
+
+                EnragePattern.Duration = 50;
+                EnragePattern.Percentage = 14;
+            }
         }
         public override string ToString()
         {
@@ -192,6 +221,61 @@ namespace TCC.Data
         public void Dispose()
         {
             foreach (var buff in _buffs) buff.Dispose();
+            ShieldDuration?.Dispose();
         }
+        public bool IsPhase1Dragon
+        {
+            get
+            {
+                return Utils.IsPhase1Dragon(ZoneId, TemplateId);
+            }
+        }
+        ///////////////////////////////////////////
+        Timer ShieldDuration;
+
+        private ShieldStatus _shield;
+        public ShieldStatus Shield
+        {
+            get => _shield;
+            set
+            {
+                if (_shield == value) return;
+                _shield = value;
+                NotifyPropertyChanged(nameof(Shield));
+            }
+        }
+
+        private bool isSelected;
+        public bool IsSelected
+        {
+            get => isSelected;
+            set
+            {
+                if (isSelected == value) return;
+                isSelected = value;
+                NotifyPropertyChanged(nameof(IsSelected));
+            }
+        }
+        private void ShieldFailed(object sender, EventArgs e)
+        {
+            Shield = ShieldStatus.Failed;
+        }
+        public void BreakShield()
+        {
+            ShieldDuration.Stop();
+            Shield = ShieldStatus.Broken;
+            Task.Delay(5000).ContinueWith(t =>
+            {
+                Shield = ShieldStatus.Off;
+            });
+        }
+        public void StartShield()
+        {
+            ShieldDuration.Start();
+            Shield = ShieldStatus.On;
+        }
+
+
+
     }
 }
