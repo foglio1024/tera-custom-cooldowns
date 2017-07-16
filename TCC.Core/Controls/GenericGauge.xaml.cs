@@ -27,7 +27,7 @@ namespace TCC.Controls
         public GenericGauge()
         {
             InitializeComponent();
-
+            
             curValwatcher = new DependencyPropertyWatcher<float>(this, "CurrentVal");
             curValwatcher.PropertyChanged += CurValWatcher_PropertyChanged;
             a = new DoubleAnimation(0, TimeSpan.FromMilliseconds(animTime)) { EasingFunction = new QuadraticEase() };

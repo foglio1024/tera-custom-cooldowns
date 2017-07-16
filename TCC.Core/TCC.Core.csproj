@@ -146,19 +146,44 @@
     <Compile Include="Controls\ChatControls\testctrl.xaml.cs">
       <DependentUpon>testctrl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DefaultEnemyWindowLayout.xaml.cs">
+      <DependentUpon>DefaultEnemyWindowLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DragonControl.xaml.cs">
+      <DependentUpon>DragonControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\NonReloadingTabControl.cs" />
     <Compile Include="Controls\Phase1BossControl.xaml.cs">
       <DependentUpon>Phase1BossControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Phase2BallistaBossControl.xaml.cs">
+      <DependentUpon>Phase2BallistaBossControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Phase2BossControl.xaml.cs">
+      <DependentUpon>Phase2BossControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Phase3BossControl.xaml.cs">
+      <DependentUpon>Phase3BossControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Phase4BossControl.xaml.cs">
+      <DependentUpon>Phase4BossControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\SmallMobControl.xaml.cs">
       <DependentUpon>SmallMobControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\BoolToVisibleHidden.cs" />
     <Compile Include="Converters\ContractedToColWidthConverter.cs" />
+    <Compile Include="Converters\DragonSelectedToOpacityConverter.cs" />
+    <Compile Include="Converters\FactorToAngleConverter.cs" />
+    <Compile Include="Converters\HHphaseToEnemyWindowTemplate.cs" />
     <Compile Include="Converters\LocationToMapConverter.cs" />
     <Compile Include="Converters\LocationToMarkerPositionConverter.cs" />
     <Compile Include="Converters\LocationToStretchConverter.cs" />
     <Compile Include="Converters\RowsToHeightConverter.cs" />
+    <Compile Include="Converters\ShieldBrokenColorConverter.cs" />
+    <Compile Include="Converters\ShieldStatusToVisibilityConverter.cs" />
+    <Compile Include="Converters\TemplateIdToColorConverter.cs" />
     <Compile Include="Converters\TypeToCursorConverter.cs" />
     <Compile Include="Data\ApplyMessage.cs" />
     <Compile Include="Data\BrokerChatMessage.cs" />
@@ -170,6 +195,7 @@
     <Compile Include="Data\Databases\ItemsDatabase.cs" />
     <Compile Include="Data\Databases\MapDatabase.cs" />
     <Compile Include="Data\Databases\QuestDatabase.cs" />
+    <Compile Include="Data\EnragePattern.cs" />
     <Compile Include="Data\Guard.cs" />
     <Compile Include="Data\LFG.cs" />
     <Compile Include="Data\Location.cs" />
@@ -177,6 +203,7 @@
     <Compile Include="Data\World.cs" />
     <Compile Include="Parsing\Messages\S_ACCOMPLISH_ACHIEVEMENT.cs" />
     <Compile Include="Parsing\Messages\S_ANSWER_INTERACTIVE.cs" />
+    <Compile Include="Parsing\Messages\S_DUNGEON_EVENT_MESSAGE.cs" />
     <Compile Include="Parsing\Messages\S_FRIEND_LIST.cs" />
     <Compile Include="Parsing\Messages\C_REQUEST_GAMESTAT_PING.cs" />
     <Compile Include="Parsing\Messages\S_OTHER_USER_APPLY_PARTY.cs" />
@@ -187,6 +214,7 @@
     <Compile Include="Parsing\Messages\S_USER_BLOCK_LIST.cs" />
     <Compile Include="Parsing\SystemMessagesProcessor.cs" />
     <Compile Include="TemplateSelectors\EnemyTemplateSelector.cs" />
+    <Compile Include="TemplateSelectors\EnemyWindowTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\MessageBodyDataTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\MessagePieceDataTemplateSelector.cs" />
     <Compile Include="Controls\ClassBars\BerserkerBar.xaml.cs">
@@ -716,11 +744,35 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\DefaultEnemyWindowLayout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\DragonControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\MysticAurasIndicator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Phase1BossControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Phase2BallistaBossControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Phase2BossControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Phase3BossControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Phase4BossControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
