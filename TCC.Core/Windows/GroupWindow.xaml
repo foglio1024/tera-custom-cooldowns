@@ -48,21 +48,21 @@
         <ItemsControl x:Name="dps"  Width="Auto" Style="{StaticResource itemTemplateSwap}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Vertical" Height="500" Width="Auto" Name="dpsPanel"/>
+                    <WrapPanel Orientation="Vertical" MaxHeight="500" Width="Auto" Name="dpsPanel"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
         <ItemsControl x:Name="healers"  Grid.Column="1" Style="{StaticResource itemTemplateSwap}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Vertical" Height="500" Width="Auto" />
+                    <WrapPanel Orientation="Vertical" MaxHeight="500" Width="Auto" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
         <ItemsControl x:Name="tanks"  Grid.Column="2" Style="{StaticResource itemTemplateSwap}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Vertical" Height="500" Width="Auto" />
+                    <WrapPanel Orientation="Vertical" MaxHeight="500" Width="Auto" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>

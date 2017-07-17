@@ -10,26 +10,25 @@
             <controls:SkillIconControl />
         </DataTemplate>
     </UserControl.Resources>
-    <Grid Width="800" Name="root" Height="Auto">
+    <Grid Width="Auto" Name="root" Height="Auto">
         <Grid.RowDefinitions>
-            <RowDefinition Height="76"/>
-            <RowDefinition Height="76"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.LayoutTransform>
             <ScaleTransform ScaleX="1" ScaleY="1"/>
         </Grid.LayoutTransform>
-        <Ellipse Fill="Transparent" Opacity=".2" Width="26" Height="26" HorizontalAlignment="Left" Margin="16,0" x:Name="baseEll"/>
-        <ItemsControl x:Name="NormalSkillsPanel" Grid.Row="0" ItemTemplate="{StaticResource SkillDataTemplate}" Width="800" HorizontalAlignment="Stretch" ItemsSource="{Binding ShortSkills}">
+        <ItemsControl x:Name="NormalSkillsPanel" Grid.Row="0" ItemTemplate="{StaticResource SkillDataTemplate}" Width="Auto" HorizontalAlignment="Stretch" ItemsSource="{Binding ShortSkills}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Width="800"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Width="Auto"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <ItemsControl x:Name="LongSkillsPanel" Grid.Row="1" ItemTemplate="{StaticResource SkillDataTemplate}" Width="800" ItemsSource="{Binding LongSkills}">
+        <ItemsControl x:Name="LongSkillsPanel" Grid.Row="1" ItemTemplate="{StaticResource SkillDataTemplate}" Width="Auto" ItemsSource="{Binding LongSkills}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Width="800"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Width="Auto"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
 
