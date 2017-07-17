@@ -15,7 +15,9 @@ namespace TCC.Parsing.Messages
         {
             var o = reader.ReadUInt16();
             reader.BaseStream.Position = o - 4;
-            MessageId = UInt32.Parse(reader.ReadTeraString().Substring("@dungeon:".Length));
+            if (UInt32.TryParse(reader.ReadTeraString().Substring("@dungeon:".Length), out uint msgId)) MessageId = msgId;
+            else MessageId = 0;
+            
         }
     }
 }
