@@ -10,11 +10,12 @@ namespace TCC.Data.Databases
     public class MonsterDatabase
     {
         XDocument MonstersDoc;
-        List<Zone> Zones;
+        XDocument OverrideDoc;
+        Dictionary<uint, Zone> Zones;
 
         public MonsterDatabase(string lang)
         {
-            Zones = new List<Zone>();
+            Zones = new Dictionary<uint, Zone>();
 
             LoadDoc(lang);
             ParseDoc();
@@ -26,60 +27,85 @@ namespace TCC.Data.Databases
         }
         void LoadDoc(string region)
         {
-            MonstersDoc = XDocument.Load(Environment.CurrentDirectory + @"/resources/data/monsters/monsters-"+region+".xml");
+            MonstersDoc = XDocument.Load(Environment.CurrentDirectory + @"/resources/data/monsters/monsters-" + region + ".xml");
+            OverrideDoc = XDocument.Load(Environment.CurrentDirectory + @"/resources/data/monsters/monsters-override.xml");
         }
         void ParseDoc()
         {
             foreach (var zone in MonstersDoc.Descendants().Where(x => x.Name == "Zone"))
             {
-                var zoneId = Convert.ToInt32(zone.Attribute("id").Value);
+                var zoneId = Convert.ToUInt32(zone.Attribute("id").Value);
                 var zoneName = zone.Attribute("name").Value;
                 Zone z = new Zone(zoneId, zoneName);
 
                 foreach (var monster in zone.Descendants().Where(x => x.Name == "Monster"))
                 {
-                    var id = Convert.ToInt32(monster.Attribute("id").Value);
+                    var id = Convert.ToUInt32(monster.Attribute("id").Value);
                     var name = monster.Attribute("name").Value;
                     bool isBoss = false;
-                    if(monster.Attribute("isBoss").Value == "True")
+                    if (monster.Attribute("isBoss").Value == "True")
                     {
                         isBoss = true;
                     }
-                    var maxHP = Convert.ToInt32(monster.Attribute("hp").Value);
+                    var maxHP = Convert.ToUInt32(monster.Attribute("hp").Value);
 
                     Monster m = new Monster(id, name, maxHP, isBoss);
                     z.AddMonster(m);
                 }
-                Zones.Add(z);
+                Zones.Add(zoneId, z);
+            }
+
+            foreach (var zone in OverrideDoc.Descendants().Where(x => x.Name == "Zone"))
+            {
+                var zoneId = Convert.ToUInt32(zone.Attribute("id").Value);
+
+                foreach (var monst in zone.Descendants().Where(x => x.Name == "Monster"))
+                {
+                    var mId = Convert.ToUInt32(monst.Attribute("id").Value);
+                    if (Zones.TryGetValue(zoneId, out Zone z))
+                    {
+                        if (z.Monsters.TryGetValue(mId, out Monster m))
+                        {
+                            if (monst.Attribute("isBoss") != null)
+                            {
+                                m.IsBoss = bool.Parse(monst.Attribute("isBoss").Value);
+                            }
+                            if (monst.Attribute("name") != null)
+                            {
+                                m.Name = monst.Attribute("name").Value;
+                            }
+                        }
+                        else
+                        {
+                            var name = monst.Attribute("name").Value;
+                            var isBoss = bool.Parse(monst.Attribute("isBoss").Value);
+                            var maxHp = UInt32.Parse(monst.Attribute("hp").Value);
+                            z.Monsters.Add(mId, new Monster(mId, name, maxHp, isBoss));
+                        }
+                    }
+                }
             }
         }
 
         public bool TryGetMonster(uint templateId, uint zoneId, out Monster m)
         {
-            if(Zones.Where(x => x.Id == zoneId).Count() > 0)
+            if (Zones.TryGetValue(zoneId, out Zone z))
             {
-                //found zone
-                if(Zones.Where(x => x.Id == zoneId).Single().Monsters.Where(x => x.Id == templateId).Count() > 0)
+                if (z.Monsters.TryGetValue(templateId, out m))
                 {
-                    //found monster
-                    m = Zones.Where(x => x.Id == zoneId).Single().Monsters.Where(x => x.Id == templateId).FirstOrDefault();
                     return true;
                 }
-                else
-                {
-                    m = new Monster(0, "Unknown", 0, false);
-                    return false;
-                }
             }
-            else
-            {
-                m = new Monster(0, "Unknown", 0, false);
-                return false;
-            }
+            m = new Monster(0, "Unknown", 0, false);
+            return false;
         }
         public string GetZoneName(uint zoneId)
         {
-            return Zones.FirstOrDefault(x => x.Id == zoneId).Name;
+            Zones.TryGetValue(zoneId, out Zone z);
+            if (z != null) return z.Name;
+
+            return "Unkown zone";
+
         }
         public string GetName(uint templateId, uint zoneId)
         {
@@ -89,7 +115,7 @@ namespace TCC.Data.Databases
             }
             else return "Unknown";
         }
-        public int GetMaxHP(uint templateId, uint zoneId)
+        public uint GetMaxHP(uint templateId, uint zoneId)
         {
             if (TryGetMonster(templateId, zoneId, out Monster m))
             {
@@ -101,30 +127,30 @@ namespace TCC.Data.Databases
 
     class Zone
     {
-        public int Id { get; private set; } //templateId / type
+        public uint Id { get; private set; } //templateId / type
         public string Name { get; private set; }
-        public List<Monster> Monsters { get; private set; }
+        public Dictionary<uint, Monster> Monsters { get; private set; }
 
         public void AddMonster(Monster m)
         {
-            Monsters.Add(m);
+            Monsters.Add(m.Id, m);
         }
 
-        public Zone(int id, string name)
+        public Zone(uint id, string name)
         {
-            Monsters = new List<Monster>();
+            Monsters = new Dictionary<uint, Monster>();
             Id = id;
             Name = name;
         }
     }
     public class Monster
     {
-        public int Id { get; private set; } //npc
-        public string Name { get; private set; }
-        public int MaxHP { get; private set; }
-        public bool IsBoss { get; private set; }
+        public uint Id { get; private set; } //npc
+        public string Name { get; set; }
+        public uint MaxHP { get; set; }
+        public bool IsBoss { get; set; }
 
-        public Monster(int npc, string name, int maxHp, bool isBoss)
+        public Monster(uint npc, string name, uint maxHp, bool isBoss)
         {
             Id = npc;
             Name = name;
