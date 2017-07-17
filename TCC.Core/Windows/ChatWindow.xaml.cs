@@ -261,6 +261,23 @@ namespace TCC.Windows
         }
         private void TccWindow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            //for (int i = 0; i < 20; i++)
+            //{
+            //    var name = "D" + i;
+            //    GroupWindowViewModel.Instance.AddOrUpdateMember(new User(GroupWindowViewModel.Instance.GetDispatcher()) { Name = name, UserClass = Class.Warrior, ServerId = (uint)i+100 });
+            //}
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    var name = "T" + i;
+
+            //    GroupWindowViewModel.Instance.AddOrUpdateMember(new User(GroupWindowViewModel.Instance.GetDispatcher()) { Name = name, UserClass = Class.Lancer, ServerId = (uint)i + 200 });
+            //}
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    var name = "H" + i;
+
+            //    GroupWindowViewModel.Instance.AddOrUpdateMember(new User(GroupWindowViewModel.Instance.GetDispatcher()) { Name = name, UserClass = Class.Elementalist, ServerId = (uint)i + 300 });
+            //}
         }
 
         private void TccWindow_MouseLeave(object sender, MouseEventArgs e)

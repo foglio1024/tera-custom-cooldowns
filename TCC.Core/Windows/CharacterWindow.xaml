@@ -11,7 +11,7 @@
         Title="HPbar" 
         Height="Auto" Width="Auto"
         Topmost="True" 
-        Background="#00000000" 
+        Background="Transparent" 
         ShowInTaskbar="False" 
         WindowStyle="None" 
         AllowsTransparency="True" 
@@ -71,7 +71,7 @@
         <Grid.LayoutTransform>
             <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
         </Grid.LayoutTransform>
-        <Grid Margin="20" UseLayoutRounding="True" Name="rootGrid" >
+        <Grid Margin="4" UseLayoutRounding="True" Name="rootGrid" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>

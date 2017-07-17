@@ -9,8 +9,11 @@
         xmlns:controls="clr-namespace:TCC.Controls"
         xmlns:chatcontrols="clr-namespace:TCC.Controls.ChatControls"
         mc:Ignorable="d" SizeToContent="WidthAndHeight" ShowInTaskbar="False" ShowActivated="False" 
-                 MouseDoubleClick="TccWindow_MouseDoubleClick" MouseLeave="TccWindow_MouseLeave" MouseEnter="TccWindow_MouseEnter"
-        Title="ChatWindow" WindowStyle="None" AllowsTransparency="True" Background="Transparent" Topmost="True" Loaded="TccWindow_Loaded" ResizeMode="NoResize">
+        MouseDoubleClick="TccWindow_MouseDoubleClick" 
+        MouseLeave="TccWindow_MouseLeave" 
+        MouseEnter="TccWindow_MouseEnter"
+        Title="ChatWindow" WindowStyle="None" AllowsTransparency="True" 
+        Background="Transparent" Topmost="True" Loaded="TccWindow_Loaded" ResizeMode="NoResize">
     <local:TccWindow.DataContext>
         <vm:ChatWindowViewModel />
     </local:TccWindow.DataContext>
@@ -21,7 +24,7 @@
 
     </local:TccWindow.Resources>
     <Grid>
-        <Grid Margin="5" Width="Auto" Name="root" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+        <Grid Margin="0" Width="Auto" Name="root" MouseLeftButtonDown="Window_MouseLeftButtonDown">
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />

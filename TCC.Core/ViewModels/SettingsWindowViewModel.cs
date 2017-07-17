@@ -658,6 +658,47 @@ namespace TCC.ViewModels
             }
         }
 
+        //transparency settings
+        public bool DoesChatWindowAllowTransparency
+        {
+            get => SettingsManager.ChatWindowSettings.AllowTransparency;
+            set
+            {
+                if (SettingsManager.ChatWindowSettings.AllowTransparency == value) return;
+                SettingsManager.ChatWindowSettings.AllowTransparency = value;
+                NotifyPropertyChanged(nameof(DoesChatWindowAllowTransparency));
+            }
+        }
+        public bool DoesCharacterWindowAllowTransparency
+        {
+            get => SettingsManager.CharacterWindowSettings.AllowTransparency;
+            set
+            {
+                if (SettingsManager.CharacterWindowSettings.AllowTransparency == value) return;
+                SettingsManager.CharacterWindowSettings.AllowTransparency = value;
+                NotifyPropertyChanged(nameof(DoesCharacterWindowAllowTransparency));
+            }
+        }
+        public bool DoesCooldownWindowAllowTransparency
+        {
+            get => SettingsManager.CooldownWindowSettings.AllowTransparency;
+            set
+            {
+                if (SettingsManager.CooldownWindowSettings.AllowTransparency == value) return;
+                SettingsManager.CooldownWindowSettings.AllowTransparency = value;
+                NotifyPropertyChanged(nameof(DoesCooldownWindowAllowTransparency));
+            }
+        }
+        public bool DoesBossWindowAllowTransparency
+        {
+            get => SettingsManager.BossGaugeWindowSettings.AllowTransparency;
+            set
+            {
+                if (SettingsManager.BossGaugeWindowSettings.AllowTransparency == value) return;
+                SettingsManager.BossGaugeWindowSettings.AllowTransparency = value;
+                NotifyPropertyChanged(nameof(DoesBossWindowAllowTransparency));
+            }
+        }
 
         //other settings
         public bool HideMe

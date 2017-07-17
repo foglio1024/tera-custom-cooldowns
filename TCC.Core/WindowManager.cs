@@ -150,6 +150,8 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 CharacterWindow = new CharacterWindow();
+                CharacterWindow.AllowsTransparency = SettingsManager.CharacterWindowSettings.AllowTransparency;
+
                 CharacterWindowViewModel.Instance.Player = new Data.Player();
                 CharacterWindow.Show();
                 waiting = false;
@@ -166,6 +168,8 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 CooldownWindow = new CooldownWindow();
+                CooldownWindow.AllowsTransparency = SettingsManager.CooldownWindowSettings.AllowTransparency;
+
                 CooldownWindow.Show();
                 waiting = false;
                 Dispatcher.Run();
@@ -184,6 +188,8 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 BossGauge = new BossGageWindow();
+
+                BossGauge.AllowsTransparency = SettingsManager.BossGaugeWindowSettings.AllowTransparency;
                 BossGauge.Show();
                 waiting = false;
 
@@ -240,6 +246,7 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 ChatWindow = new ChatWindow();
+                ChatWindow.AllowsTransparency = SettingsManager.ChatWindowSettings.AllowTransparency;
                 ChatWindow.Show();
                 waiting = false;
 

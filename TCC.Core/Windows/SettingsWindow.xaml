@@ -103,6 +103,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <controls:BoolSetting SettingName="Visibility" Grid.Row="0" IsOn="{Binding IsCooldownWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
@@ -117,9 +118,10 @@
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding CooldownWindowDimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"></controls:ValueSetting>
-                    <Separator Grid.Row="5"></Separator>
+                    <controls:BoolSetting SettingName="Transparency" Grid.Row="5" IsOn="{Binding DoesCooldownWindowAllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
 
-                    <controls:BoolSetting SettingName="Use static cooldown bar" Grid.Row="6" IsOn="{Binding ClassWindowOn, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_timelapse_white_24dp_2x.png" >
+                    <Separator Grid.Row="6"></Separator>
+                    <controls:BoolSetting SettingName="Use static cooldown bar" Grid.Row="7" IsOn="{Binding ClassWindowOn, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_timelapse_white_24dp_2x.png" >
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
                                 <Border Style="{StaticResource border}" Grid.RowSpan="2"/>
@@ -153,6 +155,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
 
                     </Grid.RowDefinitions>
@@ -168,6 +171,7 @@
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding BossGaugeWindowDimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"></controls:ValueSetting>
+                    <controls:BoolSetting SettingName="Transparency" Grid.Row="5" IsOn="{Binding DoesBossWindowAllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
 
                 </Grid>
 
@@ -192,6 +196,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
 
                     </Grid.RowDefinitions>
@@ -207,6 +212,8 @@
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding CharacterWindowDimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"></controls:ValueSetting>
+                    <controls:BoolSetting SettingName="Transparency" Grid.Row="5" IsOn="{Binding DoesCharacterWindowAllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
+
                 </Grid>
             </TabItem>
             <TabItem Margin="-1,0,0,0">
@@ -403,12 +410,14 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <controls:BoolSetting SettingName="Visibility" Grid.Row="0" IsOn="{Binding IsChatWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
-                    <Separator Grid.Row="1"></Separator>
-                    <controls:ValueSetting Grid.Row="2" SettingName="Max messages" Min="0" Max="10000" Value="{Binding MaxMessages, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_tune_white_24dp_2x.png"></controls:ValueSetting>
-                    <controls:ValueSetting Grid.Row="3" SettingName="Spam threshold" Min="0" Max="10" Value="{Binding SpamThreshold, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_tune_white_24dp_2x.png"></controls:ValueSetting>
-                    <controls:BoolSetting Grid.Row="4" SettingName="Show timestamps" IsOn="{Binding ShowTimestamp, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_tune_white_24dp_2x.png"></controls:BoolSetting>
-                    <controls:BoolSetting Grid.Row="5" SettingName="Show channel label" IsOn="{Binding ShowChannel, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_tune_white_24dp_2x.png"></controls:BoolSetting>
-                    <controls:BoolSetting Grid.Row="6" SettingName="Show always" IsOn="{Binding ChatWindowShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_tune_white_24dp_2x.png"></controls:BoolSetting>
+                    <controls:BoolSetting SettingName="Transparency" Grid.Row="1" IsOn="{Binding DoesChatWindowAllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
+
+                    <Separator Grid.Row="2"></Separator>
+                    <controls:ValueSetting Grid.Row="3" SettingName="Max messages" Min="0" Max="10000" Value="{Binding MaxMessages, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_tune_white_24dp_2x.png"></controls:ValueSetting>
+                    <controls:ValueSetting Grid.Row="4" SettingName="Spam threshold" Min="0" Max="10" Value="{Binding SpamThreshold, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_tune_white_24dp_2x.png"></controls:ValueSetting>
+                    <controls:BoolSetting Grid.Row="5" SettingName="Show timestamps" IsOn="{Binding ShowTimestamp, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_tune_white_24dp_2x.png"></controls:BoolSetting>
+                    <controls:BoolSetting Grid.Row="6" SettingName="Show channel label" IsOn="{Binding ShowChannel, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_tune_white_24dp_2x.png"></controls:BoolSetting>
+                    <controls:BoolSetting Grid.Row="7" SettingName="Show always" IsOn="{Binding ChatWindowShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_tune_white_24dp_2x.png"></controls:BoolSetting>
                 </Grid>
 
             </TabItem>

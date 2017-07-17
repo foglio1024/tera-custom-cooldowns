@@ -9,11 +9,21 @@
              xmlns:data="clr-namespace:TCC.Data"
              xmlns:tcc="clr-namespace:TCC"
              xmlns:controls="clr-namespace:TCC.Controls"
-             AllowsTransparency="True" Loaded="TccWindow_Loaded"
-             WindowStyle="None" Topmost="True" SizeToContent="WidthAndHeight"
-             Background="#00000000" MouseLeftButtonDown="Window_MouseLeftButtonDown"
-             mc:Ignorable="d" ShowInTaskbar="False" 
-             Title="WarriorBar" Height="Auto" Width="Auto" UseLayoutRounding="True" x:Name="win">
+             AllowsTransparency="True" 
+             Loaded="TccWindow_Loaded"
+             WindowStyle="None" 
+             ResizeMode="NoResize" 
+             Topmost="True" 
+             SizeToContent="WidthAndHeight"
+             Background="Transparent" 
+             MouseLeftButtonDown="Window_MouseLeftButtonDown"
+             mc:Ignorable="d" 
+             ShowInTaskbar="False" 
+             Title="WarriorBar" 
+             Height="Auto" 
+             Width="Auto" 
+             UseLayoutRounding="True"
+             x:Name="win">
     <w:TccWindow.DataContext>
         <wm:ClassWindowViewModel />
     </w:TccWindow.DataContext>
@@ -86,7 +96,7 @@
         </Style>
 
     </w:TccWindow.Resources>
-    <ContentControl x:Name="root" Content="{Binding CurrentManager}" Margin="25" Background="Red">
+    <ContentControl x:Name="root" Content="{Binding CurrentManager}" Margin="5" Background="Red">
         <ContentControl.LayoutTransform>
             <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
         </ContentControl.LayoutTransform>

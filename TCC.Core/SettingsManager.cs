@@ -21,6 +21,7 @@ namespace TCC
         public bool AutoDim;
         public double DimOpacity;
         public bool ShowAlways;
+        internal bool AllowTransparency;
     }
     public static class SettingsManager
     {
@@ -35,7 +36,8 @@ namespace TCC
             Scale = 1,
             AutoDim = true,
             DimOpacity = .2,
-            ShowAlways = false
+            ShowAlways = false,
+            AllowTransparency = true
         };
         public static WindowSettings CooldownWindowSettings = new WindowSettings()
         {
@@ -46,7 +48,8 @@ namespace TCC
             Scale = 1,
             AutoDim = true,
             DimOpacity = .2,
-            ShowAlways = false
+            ShowAlways = false,
+            AllowTransparency = true
 
         };
         public static WindowSettings BossGaugeWindowSettings = new WindowSettings()
@@ -58,7 +61,8 @@ namespace TCC
             Scale = 1,
             AutoDim = true,
             DimOpacity = .2,
-            ShowAlways = false
+            ShowAlways = false,
+            AllowTransparency = true
 
         };
         public static WindowSettings BuffBarWindowSettings = new WindowSettings()
@@ -70,7 +74,8 @@ namespace TCC
             Scale = 1,
             AutoDim = true,
             DimOpacity = .2,
-            ShowAlways = false
+            ShowAlways = false,
+            AllowTransparency = true
 
         };
         public static WindowSettings CharacterWindowSettings = new WindowSettings()
@@ -82,7 +87,8 @@ namespace TCC
             Scale = 1,
             AutoDim = true,
             DimOpacity = .2,
-            ShowAlways = false
+            ShowAlways = false,
+            AllowTransparency = true
 
         };
         public static WindowSettings ClassWindowSettings = new WindowSettings()
@@ -94,7 +100,8 @@ namespace TCC
             Scale = 1,
             AutoDim = true,
             DimOpacity = .2,
-            ShowAlways = false
+            ShowAlways = false,
+            AllowTransparency = true
 
         };
         public static WindowSettings ChatWindowSettings = new WindowSettings()
@@ -106,7 +113,8 @@ namespace TCC
             Scale = 1,
             AutoDim = false,
             DimOpacity = 1,
-            ShowAlways = false
+            ShowAlways = false,
+            AllowTransparency = true
 
         };
 
@@ -280,6 +288,11 @@ namespace TCC
                 w.ShowAlways = Boolean.Parse(ws.Attribute("ShowAlways").Value);
             }
             catch (Exception) { }
+            try
+            {
+                w.AllowTransparency = Boolean.Parse(ws.Attribute("AllowTransparency").Value);
+            }
+            catch (Exception) { }
         }
 
         public static void SaveSettings()
@@ -294,7 +307,8 @@ namespace TCC
                         new XAttribute("Visibility", BossGaugeWindowSettings.Visibility),
                         new XAttribute("Scale", BossGaugeWindowSettings.Scale),
                         new XAttribute("AutoDim", BossGaugeWindowSettings.AutoDim),
-                        new XAttribute("DimOpacity", BossGaugeWindowSettings.DimOpacity)
+                        new XAttribute("DimOpacity", BossGaugeWindowSettings.DimOpacity),
+                        new XAttribute("AllowTransparency", BossGaugeWindowSettings.AllowTransparency)
                         ),
                     new XElement("WindowSetting",
                         new XAttribute("Name", "BuffWindow"),
@@ -314,7 +328,8 @@ namespace TCC
                         new XAttribute("Visibility", CharacterWindowSettings.Visibility),
                         new XAttribute("Scale", CharacterWindowSettings.Scale),
                         new XAttribute("AutoDim", CharacterWindowSettings.AutoDim),
-                        new XAttribute("DimOpacity", CharacterWindowSettings.DimOpacity)
+                        new XAttribute("DimOpacity", CharacterWindowSettings.DimOpacity),
+                        new XAttribute("AllowTransparency", CharacterWindowSettings.AllowTransparency)
                         ),
                     new XElement("WindowSetting",
                         new XAttribute("Name", "CooldownWindow"),
@@ -324,7 +339,9 @@ namespace TCC
                         new XAttribute("Visibility", CooldownWindowSettings.Visibility),
                         new XAttribute("Scale", CooldownWindowSettings.Scale),
                         new XAttribute("AutoDim", CooldownWindowSettings.AutoDim),
-                        new XAttribute("DimOpacity", CooldownWindowSettings.DimOpacity)
+                        new XAttribute("DimOpacity", CooldownWindowSettings.DimOpacity),
+                        new XAttribute("AllowTransparency", CooldownWindowSettings.AllowTransparency)
+
                         ),
                     new XElement("WindowSetting",
                         new XAttribute("Name", "GroupWindow"),
@@ -354,7 +371,10 @@ namespace TCC
                         new XAttribute("Visibility", ChatWindowSettings.Visibility),
                         new XAttribute("Scale", ChatWindowSettings.Scale),
                         new XAttribute("AutoDim", ChatWindowSettings.AutoDim),
-                        new XAttribute("DimOpacity", ChatWindowSettings.DimOpacity)
+                        new XAttribute("DimOpacity", ChatWindowSettings.DimOpacity),
+                        new XAttribute("ShowAlways", ChatWindowSettings.ShowAlways),
+                        new XAttribute("AllowTransparency", ChatWindowSettings.AllowTransparency)
+
                         )
                     //add window here
                     ),
