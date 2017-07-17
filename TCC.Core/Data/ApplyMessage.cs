@@ -20,6 +20,7 @@ namespace TCC.Data
             Author = x.Name;
             PlayerId = x.PlayerId;
             PlayerLevel = x.Level;
+            UserClass = x.Class;
 
         }
     }
