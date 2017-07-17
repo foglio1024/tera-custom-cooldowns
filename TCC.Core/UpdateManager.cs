@@ -124,9 +124,12 @@ namespace TCC
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Error while checking updates.", "TCC", MessageBoxButton.OK, MessageBoxImage.Error);
+                    File.WriteAllText(Environment.CurrentDirectory + "/update-check-error.txt", "##### CRASH #####\r\n" + ex.Message + "\r\n" +
+                             ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" + ex.InnerException +
+                             "\r\n" + ex.TargetSite);
+                    MessageBox.Show("Error while checking updates. More info in update-check-error.txt", "TCC", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -144,8 +147,12 @@ namespace TCC
                     Process.Start(Environment.CurrentDirectory + "/TCCupdater.exe");
                     Environment.Exit(0);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    File.WriteAllText(Environment.CurrentDirectory + "/update-error.txt", "##### CRASH #####\r\n" + ex.Message + "\r\n" +
+         ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" + ex.InnerException +
+         "\r\n" + ex.TargetSite);
+                    MessageBox.Show("Error while checking updates. More info in update-error.txt", "TCC", MessageBoxButton.OK, MessageBoxImage.Error);
 
                     MessageBox.Show("Couldn't download update.", "TCC", MessageBoxButton.OK, MessageBoxImage.Error);
 
