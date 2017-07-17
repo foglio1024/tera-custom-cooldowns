@@ -203,7 +203,7 @@
             </TabControl>
             <Rectangle Height="3" Fill="{StaticResource mpColor}" Width="0" x:Name="selectionRect" 
                    IsHitTestVisible="False" HorizontalAlignment="Left" 
-                   Opacity="1" VerticalAlignment="Top" Margin="-5,22,0,0" Grid.Row="1">
+                   Opacity="1" VerticalAlignment="Top" Margin="0,22,0,0" Grid.Row="1">
                 <Rectangle.RenderTransform>
                     <TranslateTransform X="0"/>
                 </Rectangle.RenderTransform>
