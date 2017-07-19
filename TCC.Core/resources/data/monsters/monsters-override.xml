@@ -36,4 +36,8 @@
 	<Zone id="916">
 		<Monster id="1001" isBoss="False" name="Trash darkan" />
 	</Zone>
+		<!--Toy tank-->
+	<Zone id="210">
+			<Monster id="4000" isBoss="False" />
+	</Zone>
 </Zones>
