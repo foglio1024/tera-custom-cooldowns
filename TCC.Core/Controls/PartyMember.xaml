@@ -9,8 +9,8 @@
              Loaded="UserControl_Loaded"
              Unloaded="UserControl_Unloaded"
              PreviewMouseLeftButtonDown="UserControl_PreviewMouseLeftButtonDown"
-             Margin="0">
-    <Grid Height="Auto" Margin="2" Width="173" Name="rootGrid" ToolTip="{Binding Name}" >
+             Margin="0" >
+    <Grid Height="Auto" Margin="0,-5,0,0" Width="173" Name="rootGrid" ToolTip="{Binding Name}" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
@@ -80,10 +80,10 @@
         </ItemsControl>
 
         <!--Main border-->
-        <Border Style="{StaticResource border}" Grid.ColumnSpan="2" Margin="4,0" Height="35"/>
+        <Border Style="{StaticResource border}" Grid.ColumnSpan="2" Margin="2,0" Height="35"/>
 
         <!--Death red border-->
-        <Border Name="deathBorder" Height="37" Opacity="{Binding Alive, Converter={StaticResource aliveToOpacityConv}}" BorderBrush="Red" BorderThickness="2" Grid.ColumnSpan="2" Margin="4,0">
+        <Border Name="deathBorder" Height="37" Opacity="{Binding Alive, Converter={StaticResource aliveToOpacityConv}}" BorderBrush="Red" BorderThickness="2" Grid.ColumnSpan="2" Margin="2,0">
             <Border.Effect>
                 <DropShadowEffect Color="Red" ShadowDepth="0" BlurRadius="5" RenderingBias="Performance"></DropShadowEffect>
             </Border.Effect>
