@@ -9,10 +9,26 @@
                 HorizontalAlignment="Left" 
                 Orientation="Horizontal"
                 >
+        <ItemsControl Name="Bosses" 
+                      ItemTemplate="{StaticResource BossDataTemplate}"
+                      ItemsSource="{Binding Bams}" 
+                      Width="Auto" 
+                      >
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Vertical"
+                               ItemHeight="Auto" 
+                               ItemWidth="Auto" 
+                               MaxHeight="270" 
+                               Width="Auto" 
+                               Background="Transparent"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+
         <ItemsControl Name="Mobs" 
                       ItemTemplate="{StaticResource MobDataTemplate}"
                       ItemsSource="{Binding Instance.Mobs}"
-                      Grid.Column="0"
                       Width="Auto"
                       HorizontalAlignment="Left">
             <ItemsControl.ItemsPanel>
@@ -21,22 +37,6 @@
                                ItemHeight="Auto" 
                                MaxHeight="270" 
                                ItemWidth="Auto" 
-                               Background="Transparent"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
-        <ItemsControl Name="Bosses" 
-                      ItemTemplate="{StaticResource BossDataTemplate}"
-                      ItemsSource="{Binding Bams}" 
-                      Width="Auto" 
-                      Grid.Column="1">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Vertical"
-                               ItemHeight="Auto" 
-                               ItemWidth="Auto" 
-                               MaxHeight="270" 
-                               Width="Auto" 
                                Background="Transparent"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
