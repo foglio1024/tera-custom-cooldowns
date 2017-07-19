@@ -83,7 +83,7 @@
         
         <Rectangle Width="3" Height="33" Margin="-1,0,3,0" 
                    HorizontalAlignment="Right" Grid.Column="2" 
-                   Grid.RowSpan="3" 
+                   Grid.RowSpan="3" Opacity=".8"
                    Fill="{Binding UserClass, Converter={StaticResource classToFillConv}}"
                    />
 
