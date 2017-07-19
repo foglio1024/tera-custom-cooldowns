@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Media;
 using TCC.Data;
 using TCC.Data.Databases;
@@ -28,12 +29,20 @@ namespace TCC.Parsing
         public static OpCodeNamer OpCodeNamer;
         public static OpCodeNamer SystemMessageNamer;
         static ConcurrentQueue<Tera.Message> Packets = new ConcurrentQueue<Tera.Message>();
-
+        static System.Timers.Timer x;
         public static void Init()
         {
             TeraSniffer.Instance.MessageReceived += MessageReceived;
             var analysisThread = new Thread(PacketAnalysisLoop);
             analysisThread.Start();
+            x = new System.Timers.Timer();
+            x.Interval = 1000;
+            x.Elapsed += (s, ev) =>
+            {
+                Debug.WriteLine("Q:"+ Packets.Count + " P:" + processed + " D:" + discarded);
+                processed = 0; discarded = 0;
+            };
+            //x.Start();
         }
 
         private static void InitDB(uint serverId)
@@ -70,6 +79,8 @@ namespace TCC.Parsing
             }
             Packets.Enqueue(obj);
         }
+        static int processed;
+        static int discarded;
         private static void PacketAnalysisLoop()
         {
             while (true)
@@ -85,12 +96,13 @@ namespace TCC.Parsing
                 //PacketInspector.InspectPacket(msg);
                 if (message.GetType() == typeof(Tera.Game.Messages.UnknownMessage))
                 {
-
+                    //discarded++;
                     continue;
                 }
 
-                if (!MessageFactory.Process(message))
+                if (MessageFactory.Process(message))
                 {
+                    //processed++;
                 }
             }
         }
