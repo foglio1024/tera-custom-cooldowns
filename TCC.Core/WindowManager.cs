@@ -226,9 +226,6 @@ namespace TCC
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 GroupWindow = new GroupWindow();
-                GroupWindowViewModel.Instance.Dps = new SynchronizedObservableCollection<Data.User>(GroupWindow.Dispatcher);
-                GroupWindowViewModel.Instance.Healers = new SynchronizedObservableCollection<Data.User>(GroupWindow.Dispatcher);
-                GroupWindowViewModel.Instance.Tanks = new SynchronizedObservableCollection<Data.User>(GroupWindow.Dispatcher);
                 GroupWindow.Show();
                 waiting = false;
 
