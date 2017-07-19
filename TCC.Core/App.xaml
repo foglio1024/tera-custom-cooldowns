@@ -138,6 +138,7 @@
         <converters:ReadyToIconConverter x:Key="readyToIconConv"/>
         <converters:ReadyToColorConverter x:Key="readyToColorConv"/>
         <converters:TemplateIdToColorConverter x:Key="TemplateIdToColorConverter"/>
+        <converters:GroupSizeToTemplateConverter x:Key="GroupSizeToTemplateConverter"/>
         <DataTemplate x:Key="abnorm">
             <controls:AbnormalityIndicator/>
         </DataTemplate>
@@ -560,5 +561,20 @@
         <DataTemplate x:Key="DragonIndicator">
             <controls:DragonControl />
         </DataTemplate>
+
+        <DataTemplate x:Key="party">
+            <controls:PartyMember />
+        </DataTemplate>
+        <DataTemplate x:Key="raid" >
+            <controls:RaidMember/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="FixedCooldownTemplate">
+            <controls:FixedSkillContainers/>
+        </DataTemplate>
+        <DataTemplate x:Key="NormalCooldownTemplate">
+            <controls:NormalSkillContainer/>
+        </DataTemplate>
+        <converters:BoolToCooldownWindowTemplateConverter x:Key="BoolToCooldownWindowTemplateConverter"/>
     </Application.Resources>
 </Application>
