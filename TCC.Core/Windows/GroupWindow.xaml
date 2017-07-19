@@ -26,40 +26,60 @@
     </local:TccWindow.DataContext>
     <local:TccWindow.Resources>
 
-        <DataTemplate x:Key="party">
-            <controls:PartyMember />
-        </DataTemplate>
-        <DataTemplate x:Key="raid" >
-            <controls:RaidMember/>
-        </DataTemplate>
-        <Style x:Key="itemTemplateSwap" TargetType="ItemsControl">
-            <Setter Property="ItemTemplate" Value="{StaticResource party}"/>
-        </Style>
     </local:TccWindow.Resources>
     <Grid  Margin="5" Width="Auto" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
         <Grid.LayoutTransform>
             <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}" />
         </Grid.LayoutTransform>
-        <ItemsControl x:Name="dps"  Width="Auto" Style="{StaticResource itemTemplateSwap}">
+        <Border Style="{StaticResource border}" Grid.Row="1" 
+                Grid.ColumnSpan="1" Grid.Column="3"  Margin="4,2" 
+                Width="Auto" VerticalAlignment="Top" HorizontalAlignment="Left"
+                Padding="3,0,3,1" Visibility="{Binding Instance.Formed, Converter={StaticResource boolToVisibleCollapsed}}">
+            <TextBlock Foreground="White" FontSize="12">
+                <Run Text="Group size: "></Run>
+                <Run Text="{Binding Instance.GroupSize, Mode=OneWay}"/>
+                <Run Text=" (" />
+                <Run Text="{Binding Instance.DpsCount, Mode=OneWay}" Foreground="{StaticResource mainTccColor}"/>
+                <Run Text="⋅" />
+                <Run Text="{Binding Instance.HealersCount, Mode=OneWay}" Foreground="{StaticResource greenTccColor}"/>
+                <Run Text="⋅" />
+                <Run Text="{Binding Instance.TanksCount, Mode=OneWay}" Foreground="{StaticResource DefensiveStanceColor}"/>
+                <Run Text=")" />
+
+            </TextBlock>
+        </Border>
+        <ItemsControl x:Name="dps"  Width="Auto" 
+                      ItemsSource="{Binding Instance.Dps}" 
+                      ItemTemplate="{Binding Instance.GroupSize, Converter={StaticResource GroupSizeToTemplateConverter}}" 
+                      Grid.Row="1">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Vertical" MaxHeight="500" Width="Auto" Name="dpsPanel"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <ItemsControl x:Name="healers"  Grid.Column="1" Style="{StaticResource itemTemplateSwap}">
+        <ItemsControl x:Name="healers"  Grid.Column="1" 
+                      ItemTemplate="{Binding Instance.GroupSize, Converter={StaticResource GroupSizeToTemplateConverter}}" 
+                      ItemsSource="{Binding Instance.Healers}" Grid.Row="1">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Vertical" MaxHeight="500" Width="Auto" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <ItemsControl x:Name="tanks"  Grid.Column="2" Style="{StaticResource itemTemplateSwap}">
+        <ItemsControl x:Name="tanks"  Grid.Column="2" 
+                      ItemTemplate="{Binding Instance.GroupSize, Converter={StaticResource GroupSizeToTemplateConverter}}" 
+                      ItemsSource="{Binding Instance.Tanks}" Grid.Row="1">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Vertical" MaxHeight="500" Width="Auto" />

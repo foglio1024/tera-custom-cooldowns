@@ -63,12 +63,12 @@ namespace TCC.Windows
         private void TccWindow_Loaded(object sender, RoutedEventArgs e)
         {
             InitWindow(SettingsManager.GroupWindowSettings);
-            dps.DataContext = GroupWindowViewModel.Instance.Dps;
-            dps.ItemsSource = GroupWindowViewModel.Instance.Dps;
-            tanks.DataContext = GroupWindowViewModel.Instance.Tanks;
-            tanks.ItemsSource = GroupWindowViewModel.Instance.Tanks;
-            healers.DataContext = GroupWindowViewModel.Instance.Healers;
-            healers.ItemsSource = GroupWindowViewModel.Instance.Healers;
+            //dps.DataContext = GroupWindowViewModel.Instance.Dps;
+            //dps.ItemsSource = GroupWindowViewModel.Instance.Dps;
+            //tanks.DataContext = GroupWindowViewModel.Instance.Tanks;
+            //tanks.ItemsSource = GroupWindowViewModel.Instance.Tanks;
+            //healers.DataContext = GroupWindowViewModel.Instance.Healers;
+            //healers.ItemsSource = GroupWindowViewModel.Instance.Healers;
         }
 
 

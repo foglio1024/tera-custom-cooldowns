@@ -18,13 +18,11 @@ namespace TCC.ViewModels
         private static GroupWindowViewModel _instance;
         public static GroupWindowViewModel Instance => _instance ?? (_instance = new GroupWindowViewModel());
 
-
-
+        public const int GROUP_SIZE_THRESHOLD = 7;
         public bool IsTeraOnTop
         {
             get => WindowManager.IsTccVisible;
         }
-        private double scale = SettingsManager.GroupWindowSettings.Scale;
         public double Scale
         {
             get
@@ -38,6 +36,7 @@ namespace TCC.ViewModels
                 NotifyPropertyChanged("Scale");
             }
         }
+        private double scale = SettingsManager.GroupWindowSettings.Scale;
         public GroupWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
@@ -49,31 +48,55 @@ namespace TCC.ViewModels
                     WindowManager.GroupWindow.RefreshTopmost();
                 }
             };
+
+            Dps = new SynchronizedObservableCollection<Data.User>(_dispatcher);
+            Healers = new SynchronizedObservableCollection<Data.User>(_dispatcher);
+            Tanks = new SynchronizedObservableCollection<Data.User>(_dispatcher);
+
+            _dps.CollectionChanged += _dps_CollectionChanged;
+            _healers.CollectionChanged += _healers_CollectionChanged;
+            _tanks.CollectionChanged += _tanks_CollectionChanged;
         }
-
-        const int GROUP_SIZE_THRESHOLD = 7;
-
+        private void _tanks_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            NotifyPropertyChanged(nameof(TanksCount));
+            Task.Delay(100).ContinueWith(t => NotifyPropertyChanged(nameof(GroupSize)));
+            NotifyPropertyChanged(nameof(Formed));
+        }
+        private void _healers_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            NotifyPropertyChanged(nameof(HealersCount));
+            Task.Delay(100).ContinueWith(t => NotifyPropertyChanged(nameof(GroupSize)));
+            NotifyPropertyChanged(nameof(Formed));
+        }
+        private void _dps_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            NotifyPropertyChanged(nameof(DpsCount));
+            Task.Delay(100).ContinueWith(t => NotifyPropertyChanged(nameof(GroupSize)));
+            NotifyPropertyChanged(nameof(Formed));
+        }
         public bool Raid { get; set; }
-
-        private int _groupSize;
         public int GroupSize
         {
-            get { return _groupSize; }
-            set
-            {
-                if (_groupSize == value) return;
-                _groupSize = value;
-
-                if (_groupSize > GROUP_SIZE_THRESHOLD)
-                {
-                    WindowManager.GroupWindow.SwitchTemplate(true);
-                }
-                else
-                {
-                    WindowManager.GroupWindow.SwitchTemplate(false);
-                }
-            }
+            get { return GetCount(); }
         }
+        public int DpsCount
+        {
+            get { return _dps.Count; }
+        }
+        public int HealersCount
+        {
+            get { return _healers.Count; }
+        }
+        public int TanksCount
+        {
+            get { return _tanks.Count; }
+        }
+        public bool Formed
+        {
+            get => GroupSize > 0 ? true : false;
+        }
+
         public bool GetUser(ulong id, out User user)
         {
             User u;
@@ -119,10 +142,10 @@ namespace TCC.ViewModels
 
         }
 
-        internal bool HasPowers(string name)
+        public bool HasPowers(string name)
         {
             GetUser(name, out User u);
-            return u!=null ? u.CanInvite : false;
+            return u != null ? u.CanInvite : false;
         }
 
         public bool GetUser(string name, out User user)
@@ -219,7 +242,6 @@ namespace TCC.ViewModels
             }
         }
 
-        private SynchronizedObservableCollection<User> _healers;
         public SynchronizedObservableCollection<User> Healers
         {
             get
@@ -232,7 +254,7 @@ namespace TCC.ViewModels
                 _healers = value;
             }
         }
-        private SynchronizedObservableCollection<User> _tanks;
+        private SynchronizedObservableCollection<User> _healers;
         public SynchronizedObservableCollection<User> Tanks
         {
             get
@@ -245,7 +267,7 @@ namespace TCC.ViewModels
                 _tanks = value;
             }
         }
-        private SynchronizedObservableCollection<User> _dps;
+        private SynchronizedObservableCollection<User> _tanks;
         public SynchronizedObservableCollection<User> Dps
         {
             get
@@ -258,6 +280,7 @@ namespace TCC.ViewModels
                 _dps = value;
             }
         }
+        private SynchronizedObservableCollection<User> _dps;
 
         private readonly object dpsLock = new object();
         private readonly object tankLock = new object();
@@ -288,7 +311,6 @@ namespace TCC.ViewModels
                     AddOrUpdateDps(p);
                     break;
             }
-            GroupSize = GetCount();
 
         }
         private void AddOrUpdateWarrior(User p)
@@ -404,20 +426,17 @@ namespace TCC.ViewModels
             if (TryGetUserFromList(_dps, serverId, playerId, out u))
             {
                 Dps.Remove(u);
-                GroupSize = GetCount();
                 if (!kick) SendLeaveMessage(u.Name);
                 return; //needed?
             }
             if (TryGetUserFromList(_tanks, serverId, playerId, out u))
             {
                 Tanks.Remove(u);
-                GroupSize = GetCount();
                 if (!kick) SendLeaveMessage(u.Name);
             }
             if (TryGetUserFromList(_healers, serverId, playerId, out u))
             {
                 Healers.Remove(u);
-                GroupSize = GetCount();
                 if (!kick) SendLeaveMessage(u.Name);
             }
 
@@ -429,7 +448,6 @@ namespace TCC.ViewModels
             _tanks.Clear();
 
             Raid = false;
-            GroupSize = GetCount();
         }
         public void LogoutMember(uint playerId, uint serverId)
         {
