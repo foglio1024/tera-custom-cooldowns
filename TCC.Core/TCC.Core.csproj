@@ -171,11 +171,13 @@
     <Compile Include="Controls\SmallMobControl.xaml.cs">
       <DependentUpon>SmallMobControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BoolToCooldownWindowTemplateConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\BoolToVisibleHidden.cs" />
     <Compile Include="Converters\ContractedToColWidthConverter.cs" />
     <Compile Include="Converters\DragonSelectedToOpacityConverter.cs" />
     <Compile Include="Converters\FactorToAngleConverter.cs" />
+    <Compile Include="Converters\GroupSizeToTemplateConverter.cs" />
     <Compile Include="Converters\HHphaseToEnemyWindowTemplate.cs" />
     <Compile Include="Converters\LocationToMapConverter.cs" />
     <Compile Include="Converters\LocationToMarkerPositionConverter.cs" />
