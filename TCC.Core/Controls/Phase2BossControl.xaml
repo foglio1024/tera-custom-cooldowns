@@ -17,11 +17,11 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="0"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
 
-            <Grid Margin="6,2" Name="mainGrid">
+            <Grid Margin="2,2" Name="mainGrid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -59,7 +59,7 @@
 
                 </Grid>
 
-                <Grid Margin="9,2" Name="topInfoGrid" Grid.Row="1" UseLayoutRounding="True">
+                <Grid Margin="5,2" Name="topInfoGrid" Grid.Row="1" UseLayoutRounding="True">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -83,13 +83,13 @@
                                Text="{Binding CurrentFactor, StringFormat=##0.# %}"
                                Grid.Row="1"/>
                 </Grid>
-                <Grid Grid.Row="2" Margin="10,3,10,4" Name="hpBarGrid" >
+                <Grid Grid.Row="2" Margin="1,-1,1,1" Name="hpBarGrid" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <controls:GenericGauge Height="6" Width="400"
+                    <controls:GenericGauge Height="5" Width="400"
                                            BarColor="{Binding Enraged, Converter={StaticResource barColorConv}}"
                                            GaugeName=""
                                            ShowPercentage="False"

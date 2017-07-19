@@ -30,9 +30,10 @@
                             ScaleY="{Binding Scale}"/>
         </Grid.LayoutTransform>
         <ContentControl  Content="{Binding Instance}"
-                        ContentTemplate="{Binding Instance.CurrentHHphase, Converter={StaticResource PhaseToLayout}}"
 
+        ContentTemplate="{Binding Instance.CurrentHHphase, Converter={StaticResource PhaseToLayout}}"
                        />
+
 
     </Grid>
 </w:TccWindow>

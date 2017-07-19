@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:controls="clr-namespace:TCC.Controls"
-             mc:Ignorable="d" >
+             mc:Ignorable="d" Background="Transparent">
     <Grid Width="Auto" Name="rootGrid" DataContext="{Binding Vergos}">
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -17,7 +17,7 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="0"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
 
@@ -59,7 +59,7 @@
 
                 </Grid>
 
-                <Grid Margin="6,2" Name="topInfoGrid" Grid.Row="1" UseLayoutRounding="True">
+                <Grid Margin="5,2" Name="topInfoGrid" Grid.Row="1" UseLayoutRounding="True">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -83,13 +83,13 @@
                                Text="{Binding CurrentFactor, StringFormat=##0.# %}"
                                Grid.Row="1"/>
                 </Grid>
-                <Grid Grid.Row="2" Margin="6,3,6,4" Name="hpBarGrid" >
+                <Grid Grid.Row="2" Margin="1,-2,1,1" Name="hpBarGrid" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <controls:GenericGauge Height="6" Width="400"
+                    <controls:GenericGauge Height="5" Width="400"
                                            BarColor="{Binding Enraged, Converter={StaticResource barColorConv}}"
                                            GaugeName=""
                                            ShowPercentage="False"
@@ -121,9 +121,9 @@
                         <Border BorderThickness=".8,0,.8,0" BorderBrush="#90000000" Grid.Column="5"/>
                         <Border BorderThickness=".8,0,.8,0" BorderBrush="#90000000" Grid.Column="7"/>
                         <Border BorderThickness=".8,0,0,0"  BorderBrush="#90000000" Grid.Column="9"/>
-                        <Path Fill="#222" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" HorizontalAlignment="Right" Height="6" Width="10" Margin="0,-1,-5,0" Grid.Column="8"></Path>
-                        <Path Fill="#222" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" HorizontalAlignment="Right" Height="6" Width="10" Margin="0,-1,-5,0" Grid.Column="4"></Path>
-                        <Path Fill="#222" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" HorizontalAlignment="Right" Height="6" Width="10" Margin="0,-1,15,0" Grid.Column="1"></Path>
+                        <Path Fill="#222" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" HorizontalAlignment="Right" Height="6" Width="10" Margin="0,-2,-5,0" Grid.Column="8"></Path>
+                        <Path Fill="#222" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" HorizontalAlignment="Right" Height="6" Width="10" Margin="0,-2,-5,0" Grid.Column="4"></Path>
+                        <Path Fill="#222" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" HorizontalAlignment="Right" Height="6" Width="10" Margin="0,-2,15,0" Grid.Column="1"></Path>
                     </Grid>
                 </Grid>
             </Grid>
