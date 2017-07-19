@@ -28,7 +28,8 @@
 
 
     </w:TccWindow.Resources>
-    <ContentControl Margin="0" x:Name="controlContainer">
+    <ContentControl Margin="0" x:Name="controlContainer" Content="{Binding Instance}" 
+                    ContentTemplate="{Binding Instance.IsClassWindowOn, Converter={StaticResource BoolToCooldownWindowTemplateConverter}}">
         <ContentControl.LayoutTransform>
             <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
         </ContentControl.LayoutTransform>

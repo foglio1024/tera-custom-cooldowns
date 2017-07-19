@@ -28,9 +28,9 @@ namespace TCC
         {
             InitWindow(SettingsManager.CooldownWindowSettings);
 
-            SwitchMode();
+            //SwitchMode();
 
-            ((FrameworkElement)controlContainer.Content).DataContext = CooldownWindowViewModel.Instance;
+            //((FrameworkElement)controlContainer.Content).DataContext = CooldownWindowViewModel.Instance;
         }
 
         public void SwitchMode()

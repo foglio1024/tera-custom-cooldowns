@@ -96,7 +96,7 @@ namespace TCC.ViewModels
                 if (otherSkills == value) return;
                 otherSkills = value;
             }
-        }    
+        }
 
         private static ClassManager _classManager => ClassManager.CurrentClassManager;
 
@@ -362,6 +362,17 @@ namespace TCC.ViewModels
             }
         }
 
+        public bool IsClassWindowOn
+        {
+            get => isClassWindowOn;
+            set
+            {
+                if (isClassWindowOn == value) return;
+                isClassWindowOn = value;
+                NotifyPropertyChanged(nameof(IsClassWindowOn));
+            }
+        }
+        private bool isClassWindowOn;
         public CooldownWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
@@ -382,6 +393,7 @@ namespace TCC.ViewModels
                     });
                 }
             };
+            
         }
     }
 }
