@@ -27,6 +27,10 @@
         <SolidColorBrush x:Key="AssaultStanceColor" Color="#de2c4a" />
         <SolidColorBrush x:Key="SniperEyeColor" Color="#38bde5" />
 
+        <SolidColorBrush x:Key="HealerColor" Color="#7cffab" />
+        <SolidColorBrush x:Key="DpsColor" Color="#ffaf72" />
+        <SolidColorBrush x:Key="TankColor" Color="#7aceff" />
+
         <SolidColorBrush x:Key="IgnidraxColor" Color="#ff894a"/>
         <SolidColorBrush x:Key="TerradraxColor" Color="#ffcb76"/>
         <SolidColorBrush x:Key="AquadraxColor" Color="#dff7ff"/>

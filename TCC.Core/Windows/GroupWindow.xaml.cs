@@ -23,7 +23,7 @@ namespace TCC.Converters
     {
         SolidColorBrush healerColor = new SolidColorBrush(Color.FromRgb(79, 255, 142));
         SolidColorBrush tankColor = new SolidColorBrush(Color.FromRgb(79, 190, 255));
-        SolidColorBrush dpsColor = new SolidColorBrush(Color.FromRgb(255, 100, 70));
+        SolidColorBrush dpsColor = new SolidColorBrush(Color.FromRgb(255, 150, 70));
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -31,15 +31,15 @@ namespace TCC.Converters
             switch (c)
             {
                 case Class.Lancer:
-                    return tankColor;
+                    return App.Current.FindResource("TankColor");
                 case Class.Fighter:
-                    return tankColor;
+                    return App.Current.FindResource("TankColor");
                 case Class.Priest:
-                    return healerColor;
+                    return App.Current.FindResource("HealerColor");
                 case Class.Elementalist:
-                    return healerColor;
+                    return App.Current.FindResource("HealerColor");
                 default:
-                    return dpsColor;
+                    return App.Current.FindResource("DpsColor");
             }
         }
 
