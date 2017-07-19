@@ -193,7 +193,7 @@ namespace TCC.ViewModels
                 {
                     sb.Append(boss.Name);
                     sb.Append(": ");
-                    sb.Append(String.Format("{0:##0%}", boss.CurrentPercentage));
+                    sb.Append(String.Format("{0:##0%}", boss.CurrentFactor));
                     sb.Append("\\");
                 }
             }
