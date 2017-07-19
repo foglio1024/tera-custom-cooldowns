@@ -770,7 +770,8 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.ClassWindowOn == value) return;
                 SettingsManager.ClassWindowOn = value;
-                WindowManager.CooldownWindow.SwitchMode();
+                CooldownWindowViewModel.Instance.IsClassWindowOn = value;
+                //WindowManager.CooldownWindow.SwitchMode();
                 //if(value == true)
                 //{
                 //    IsCooldownWindowVisible = false;
