@@ -393,6 +393,7 @@ namespace TCC.ViewModels
                     });
                 }
             };
+            NotifyPropertyChanged(nameof(IsClassWindowOn));
             
         }
     }
