@@ -8,12 +8,13 @@
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded"
              Unloaded="UserControl_Unloaded"  
-             PreviewMouseLeftButtonDown="UserControl_PreviewMouseLeftButtonDown"
              >
-    <Grid Height="Auto" Margin="2" Width="102" ToolTip="{Binding Name}" >
+    <Grid Height="Auto" Margin="2" Width="108" ToolTip="{Binding Name}" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -80,7 +81,7 @@
         </ItemsControl>
 
         <!--Main border-->
-        <Border Style="{StaticResource border}" Grid.ColumnSpan="2" Margin="2,0"/>
+        <Border Style="{StaticResource border}" Grid.ColumnSpan="3" Margin="2,0"/>
         
         <!--Image grid-->
         <Grid Margin="-1,-2,-3,0" Width="32" Height="32">
@@ -108,7 +109,8 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <!--Name-->
-            <TextBlock TextTrimming="CharacterEllipsis" Foreground="White" 
+            <TextBlock TextTrimming="CharacterEllipsis" Foreground="White"              PreviewMouseLeftButtonDown="UserControl_PreviewMouseLeftButtonDown"
+
                        VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,1" FontSize="11" Grid.Row="0" Grid.Column="0">
                 <Run Text="{Binding Level, StringFormat={}L{0}}" FontSize="10" Foreground="#6fff"/>
                 <Run Text="{Binding Name}" />
@@ -130,7 +132,10 @@
                 </Rectangle.LayoutTransform>
             </Rectangle>
 
-            <Path Fill="#222" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" Grid.ColumnSpan="2" Grid.Row="1" Height="3" Margin="0,-1,0,0"></Path>
+            <Path Fill="#222" Data="M0,0 2,0 1,1 0,0" 
+                  Stretch="Uniform" Grid.ColumnSpan="2" Grid.Row="1" 
+                  Height="3" Margin="2,-1,0,0" 
+                  HorizontalAlignment="Center"/>
 
             <Rectangle Fill="#90000000" Height="2" Width="70" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="0,0"/>
             <Rectangle Fill="#66c6ff" Height="2" Width="70" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Left" >
@@ -140,9 +145,14 @@
             </Rectangle>
 
         </Grid>
-
+        
+        <Rectangle Width="3" Height="Auto" Margin="-1,1,3,1" 
+                   HorizontalAlignment="Right" Grid.Column="2" 
+                   Grid.RowSpan="3" 
+                   Fill="{Binding UserClass, Converter={StaticResource classToFillConv}}"
+                   />
         <!--Death red border-->
-        <Border Name="deathBorder" Opacity="{Binding Alive, Converter={StaticResource aliveToOpacityConv}}" BorderBrush="Red" BorderThickness="2" Grid.ColumnSpan="2" Margin="1,0">
+        <Border Name="deathBorder" Opacity="{Binding Alive, Converter={StaticResource aliveToOpacityConv}}" BorderBrush="Red" BorderThickness="0,0,4,0" Grid.ColumnSpan="3" Margin="-2,0,2,0">
             <Border.Effect>
                 <DropShadowEffect Color="Red" ShadowDepth="0" BlurRadius="5" RenderingBias="Performance"></DropShadowEffect>
             </Border.Effect>
