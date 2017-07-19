@@ -34,15 +34,15 @@ namespace TCC.Parsing.Messages
 
             SysMessage = reader.ReadTeraString();
 
-            Debug.WriteLine(nameof(S_SYSTEM_MESSAGE_LOOT_ITEM) + " " + SysMessage);
-            Debug.WriteLine("\t {0} x{1}", ItemId ,Amount);
-            Debug.WriteLine("\t u1:{0}", unk1);
-            Debug.WriteLine("\t u2:{0}", unk2);
-            Debug.WriteLine("\t u3:{0}", unk3);
-            Debug.WriteLine("\t u4:{0}", unk4);
-            Debug.WriteLine("\t u5:{0}", unk5);
-            Debug.WriteLine("\t u6:{0}", unk6);
-            Debug.WriteLine("\t u7:{0}", unk7);
+            //Debug.WriteLine(nameof(S_SYSTEM_MESSAGE_LOOT_ITEM) + " " + SysMessage);
+            //Debug.WriteLine("\t {0} x{1}", ItemId ,Amount);
+            //Debug.WriteLine("\t u1:{0}", unk1);
+            //Debug.WriteLine("\t u2:{0}", unk2);
+            //Debug.WriteLine("\t u3:{0}", unk3);
+            //Debug.WriteLine("\t u4:{0}", unk4);
+            //Debug.WriteLine("\t u5:{0}", unk5);
+            //Debug.WriteLine("\t u6:{0}", unk6);
+            //Debug.WriteLine("\t u7:{0}", unk7);
         }
     }
 }

@@ -32,7 +32,7 @@ namespace TCC.Parsing.Messages
             unk6 = reader.ReadInt32();
             name = reader.ReadTeraString();
 
-            Debug.WriteLine("uid:{0} unk1:{1} unk2:{2} unk3:{3} unk4:{4} unk5:{5} unk6:{6} name:{7}", uid, unk1, unk2, unk3, unk4, unk5, unk6, name);
+            //Debug.WriteLine("uid:{0} unk1:{1} unk2:{2} unk3:{3} unk4:{4} unk5:{5} unk6:{6} name:{7}", uid, unk1, unk2, unk3, unk4, unk5, unk6, name);
         }
     }
 }
