@@ -106,8 +106,6 @@ namespace TCC.Controls
         {
             var s = sender as Slider;
             Value = Math.Round(s.Value, 2);
-            Console.WriteLine("Slider_ValueChanged set {1} value to {0}", Value, SettingName);
-
         }
 
         private void Slider_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -125,8 +123,6 @@ namespace TCC.Controls
                 if (result > Max) Value = Max;
                 else if (result < Min) Value = Min;
                 else Value = result;
-                Console.WriteLine("TextBox_LostFocus set {1} value to {0}", Value, SettingName);
-
             }
             catch (Exception)
             {
