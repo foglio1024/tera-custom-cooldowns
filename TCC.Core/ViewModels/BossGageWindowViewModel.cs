@@ -103,7 +103,10 @@ namespace TCC.ViewModels
             var boss = _bosses.FirstOrDefault(x => x.EntityId == entityId);
             if (boss == null)
             {
+                if (SettingsManager.ShowOnlyBosses && !isBoss) return;
+
                 if (templateId == 0 || zoneId == 0) return;
+
                 boss = new Boss(entityId, zoneId, templateId, isBoss, v);
                 if (Utils.IsPhase1Dragon(zoneId, templateId))
                 {
