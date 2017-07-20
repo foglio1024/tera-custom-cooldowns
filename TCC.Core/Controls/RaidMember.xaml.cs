@@ -32,6 +32,7 @@ namespace TCC.Controls
         
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            AnimateIn();
         }
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
@@ -39,7 +40,7 @@ namespace TCC.Controls
 
         public void AnimateIn()
         {
-            var an = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));
+            var an = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(500));
             BeginAnimation(OpacityProperty, an);
         }
         internal void AnimateOut()

@@ -29,11 +29,12 @@ namespace TCC.Controls
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            AnimateIn();
         }
 
         public void AnimateIn()
         {
-            var an = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));
+            var an = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(500));
             BeginAnimation(OpacityProperty, an);
         }
 
