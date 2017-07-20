@@ -53,12 +53,12 @@ namespace TCC
                 }
             }
         }
-
         private static bool isTccVisible;
         public static bool IsTccVisible
         {
             get
             {
+                var debug = false;
                 if (SessionManager.Logged && !SessionManager.LoadingScreen && IsFocused)
                 {
                     isTccVisible = true;
@@ -66,7 +66,7 @@ namespace TCC
                 }
                 else
                 {
-                    isTccVisible = false;
+                    isTccVisible = false || debug;
                     return isTccVisible;
                 }
             }
