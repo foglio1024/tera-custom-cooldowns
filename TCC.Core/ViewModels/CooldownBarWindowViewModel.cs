@@ -364,15 +364,12 @@ namespace TCC.ViewModels
 
         public bool IsClassWindowOn
         {
-            get => isClassWindowOn;
+            get => SettingsManager.ClassWindowOn;
             set
             {
-                if (isClassWindowOn == value) return;
-                isClassWindowOn = value;
                 NotifyPropertyChanged(nameof(IsClassWindowOn));
             }
         }
-        private bool isClassWindowOn;
         public CooldownWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
@@ -393,7 +390,6 @@ namespace TCC.ViewModels
                     });
                 }
             };
-            NotifyPropertyChanged(nameof(IsClassWindowOn));
             
         }
     }
