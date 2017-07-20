@@ -156,6 +156,8 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
 
                     </Grid.RowDefinitions>
@@ -172,6 +174,8 @@
                     </controls:BoolSetting>
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding BossGaugeWindowDimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"></controls:ValueSetting>
                     <controls:BoolSetting SettingName="Transparency" Grid.Row="5" IsOn="{Binding DoesBossWindowAllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
+                    <Separator Grid.Row="6"></Separator>
+                    <controls:BoolSetting SettingName="Hide adds" Grid.Row="7" IsOn="{Binding ShowOnlyBosses, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_visibility_off_white_24dp_2x.png" />
 
                 </Grid>
 

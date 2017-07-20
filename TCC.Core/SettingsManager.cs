@@ -130,6 +130,8 @@ namespace TCC
         public static int SpamThreshold { get; set; } = 2;
         public static bool ShowChannel { get; set; } = true;
         public static bool ShowTimestamp { get; set; } = true;
+        public static bool ShowOnlyBosses { get; set; } = false;
+
         public static void LoadWindowSettings()
         {
             if (File.Exists(Environment.CurrentDirectory + @"/tcc-config.xml"))
@@ -237,6 +239,11 @@ namespace TCC
                 try
                 {
                     ShowTimestamp = Boolean.Parse(b.Attribute(nameof(ShowTimestamp)).Value);
+                }
+                catch (Exception) { }
+                try
+                {
+                    ShowOnlyBosses = Boolean.Parse(b.Attribute(nameof(ShowOnlyBosses)).Value);
                 }
                 catch (Exception) { }
                 //add settings here
@@ -391,7 +398,8 @@ namespace TCC
                 new XAttribute("MaxMessages", MaxMessages),
                 new XAttribute("SpamThreshold", SpamThreshold),
                 new XAttribute(nameof(ShowChannel), ShowChannel),
-                new XAttribute(nameof(ShowTimestamp), ShowTimestamp)
+                new XAttribute(nameof(ShowTimestamp), ShowTimestamp),
+                new XAttribute(nameof(ShowOnlyBosses), ShowOnlyBosses)
                 //add setting here
                 )
             );

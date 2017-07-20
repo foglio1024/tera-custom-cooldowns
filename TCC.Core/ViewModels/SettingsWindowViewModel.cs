@@ -847,6 +847,16 @@ namespace TCC.ViewModels
             }
 
         }
+        public bool ShowOnlyBosses
+        {
+            get => SettingsManager.ShowOnlyBosses;
+            set
+            {
+                if (SettingsManager.ShowOnlyBosses == value) return;
+                SettingsManager.ShowOnlyBosses = value;
+                NotifyPropertyChanged(nameof(ShowOnlyBosses));
+            }
+        }
         public SettingsWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;

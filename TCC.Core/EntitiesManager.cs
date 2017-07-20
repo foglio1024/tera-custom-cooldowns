@@ -14,19 +14,19 @@ namespace TCC
         public static ObservableCollection<Player> CurrentUsers = new ObservableCollection<Player>();
         public static MonsterDatabase CurrentDatabase;
         private static ulong currentEncounter;
-        public static void SpawnNPC(ushort zoneId, uint templateId, ulong entityId, Visibility v, bool force)
+        public static void SpawnNPC(ushort zoneId, uint templateId, ulong entityId, Visibility v)
         {
             if (!Filter(zoneId, templateId)) return;
 
             if (CurrentDatabase.TryGetMonster(templateId, zoneId, out Monster m))
             {
-
-                if (m.IsBoss || force)
+                if (m.IsBoss)
                 {
                     BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, m.IsBoss, templateId, zoneId, v);
                 }
                 else
                 {
+                    if (SettingsManager.ShowOnlyBosses) return;
                     BossGageWindowViewModel.Instance.AddOrUpdateBoss(entityId, m.MaxHP, m.MaxHP, m.IsBoss, templateId, zoneId, Visibility.Collapsed);
                 }
             }
@@ -57,6 +57,21 @@ namespace TCC
                 SessionManager.Encounter = true;
             }
             else if (maxHP == curHP || curHP == 0)
+            {
+                currentEncounter = 0;
+                SessionManager.Encounter = false;
+            }
+        }
+        public static void UpdateNPCbyCreatureChangeHP(ulong target, int currentHP, int maxHP)
+        {
+            if (SettingsManager.ShowOnlyBosses) return;
+            BossGageWindowViewModel.Instance.AddOrUpdateBoss(target, maxHP, currentHP, false, 0, 0, Visibility.Visible);
+            if (maxHP > currentHP)
+            {
+                currentEncounter = target;
+                SessionManager.Encounter = true;
+            }
+            else if (maxHP == currentHP || currentHP == 0)
             {
                 currentEncounter = 0;
                 SessionManager.Encounter = false;
@@ -164,20 +179,6 @@ namespace TCC
 
         }
 
-        internal static void UpdateNPCbyCreatureChangeHP(ulong target, int currentHP, int maxHP)
-        {
-            BossGageWindowViewModel.Instance.AddOrUpdateBoss(target, maxHP, currentHP, false, 0, 0, Visibility.Visible);
-            if (maxHP > currentHP)
-            {
-                currentEncounter = target;
-                SessionManager.Encounter = true;
-            }
-            else if (maxHP == currentHP || currentHP == 0)
-            {
-                currentEncounter = 0;
-                SessionManager.Encounter = false;
-            }
-        }
 
         public static void SpawnUser(ulong entityId, string name)
         {
