@@ -54,8 +54,8 @@ namespace TCC
             BroochesDatabase.SetBroochesIcons();
             AbnormalityDatabase.Load();
             SettingsManager.LoadWindowSettings();
-            WindowManager.Init();
             SettingsManager.LoadSettings();
+            WindowManager.Init();
             WindowManager.Settings = new SettingsWindow() { Name = "Settings" };
             FocusManager.FocusTimer.Start();
 
