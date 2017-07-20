@@ -91,7 +91,7 @@
                                VerticalAlignment="Center" 
                                Margin="0" 
                                FontSize="14"
-                               Text="{Binding CurrentFactor, StringFormat=##0.# %}"
+                               Text="{Binding CurrentFactor, StringFormat=##0.# %, Mode=OneWay}"
                                Grid.Row="1"/>
                 </Grid>
                 <Grid Grid.Row="2" Margin="10,0.5,10,0.5" Name="hpBarGrid" >

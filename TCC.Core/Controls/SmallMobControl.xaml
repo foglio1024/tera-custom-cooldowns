@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:TCC.Controls"
              mc:Ignorable="d" 
              Visibility="{Binding Visible}">
-    <Grid Margin="2" Width="Auto" MaxWidth="100">
+    <Grid Margin="2" Width="100" MaxWidth="150">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
@@ -14,7 +14,15 @@
         <TextBlock Text="{Binding Name}" Grid.Column="1" Style="{StaticResource text1}" TextTrimming="CharacterEllipsis"/>
         <Border Style="{StaticResource border}" Margin="0"  Grid.Row="1" Grid.Column="1">
             <StackPanel>
-                <TextBlock HorizontalAlignment="Center" Text="{Binding CurrentHP, StringFormat={}{0:N0}}" Margin="2" FontSize="11" Style="{StaticResource text1}"/>
+                <TextBlock HorizontalAlignment="Left"  
+                           Margin="6,2" FontSize="11" Style="{StaticResource text1}">
+                    <Run Text="{Binding CurrentFactor, StringFormat=##0 %, Mode=OneWay}" FontWeight="Bold"/>
+                    <Run Text=" "/>
+
+                    <Run Text="{Binding CurrentHP, StringFormat={}{0:N0}, Mode=OneWay}" Foreground="#5fff"/>
+
+                </TextBlock>
+                
                 <local:GenericGauge Height="4" 
                                 Width="Auto"
                                 BarColor="{Binding Enraged, Converter={StaticResource barColorConv}}"
