@@ -318,17 +318,14 @@ namespace TCC.ViewModels
             if (TryGetUserFromList(Tanks, p.ServerId, p.PlayerId, out User wartank))
             {
                 AddOrUpdateTank(p);
-                Console.WriteLine("Added(1) {0} to tanks", p.Name);
             }
             else if (TryGetUserFromList(Dps, p.ServerId, p.PlayerId, out User warrior))
             {
                 AddOrUpdateDps(p);
-                Console.WriteLine("Added(2) {0} to dps", p.Name);
             }
             else
             {
                 AddOrUpdateDps(p);
-                Console.WriteLine("Added(3) {0} to dps", p.Name);
             }
 
         }
