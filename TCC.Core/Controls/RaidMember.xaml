@@ -14,7 +14,6 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
-
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -109,8 +108,9 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <!--Name-->
-            <TextBlock TextTrimming="CharacterEllipsis" Foreground="White"              PreviewMouseLeftButtonDown="UserControl_PreviewMouseLeftButtonDown"
-
+            <TextBlock TextTrimming="CharacterEllipsis" Foreground="White"             
+                       PreviewMouseLeftButtonDown="UserControl_PreviewMouseLeftButtonDown"
+                        Cursor="Hand"
                        VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,1" FontSize="11" Grid.Row="0" Grid.Column="0">
                 <Run Text="{Binding Level, StringFormat={}L{0}}" FontSize="10" Foreground="#6fff"/>
                 <Run Text="{Binding Name}" />
@@ -148,7 +148,7 @@
         
         <Rectangle Width="3" Height="Auto" Margin="-1,1,3,1" 
                    HorizontalAlignment="Right" Grid.Column="2" 
-                   Grid.RowSpan="3" Opacity=".8"
+                   Grid.RowSpan="1" Opacity=".8"
                     VerticalAlignment="Stretch"
                    Fill="{Binding UserClass, Converter={StaticResource classToFillConv}}"
                    />
