@@ -71,14 +71,19 @@ namespace TCC.Controls
 
         ColorAnimation glow;
         ColorAnimation unglow;
+        DoubleAnimation fadeIn;
+        DoubleAnimation fadeOut;
 
 
 
         public ValueSetting()
         {
             InitializeComponent();
-            glow = new ColorAnimation(Colors.Transparent, Color.FromArgb(20, 255, 255, 255), TimeSpan.FromMilliseconds(50));
-            unglow = new ColorAnimation(Color.FromArgb(10, 255, 255, 255), Colors.Transparent, TimeSpan.FromMilliseconds(100));
+            glow = new ColorAnimation(Colors.Transparent, Color.FromArgb(8, 255, 255, 255), TimeSpan.FromMilliseconds(50));
+            unglow = new ColorAnimation(Color.FromArgb(8, 255, 255, 255), Colors.Transparent, TimeSpan.FromMilliseconds(100));
+            fadeIn = new DoubleAnimation(.3, .9, TimeSpan.FromMilliseconds(200));
+            fadeOut = new DoubleAnimation(.9, .3, TimeSpan.FromMilliseconds(200));
+
             mainGrid.Background = new SolidColorBrush(Colors.Transparent);
 
         }
@@ -94,11 +99,14 @@ namespace TCC.Controls
         private void Grid_MouseEnter(object sender, MouseEventArgs e)
         {
             (sender as Grid).Background.BeginAnimation(SolidColorBrush.ColorProperty, glow);
+            img.BeginAnimation(OpacityProperty, fadeIn);
+
         }
 
         private void Grid_MouseLeave(object sender, MouseEventArgs e)
         {
             (sender as Grid).Background.BeginAnimation(SolidColorBrush.ColorProperty, unglow);
+            img.BeginAnimation(OpacityProperty, fadeOut);
 
         }
 
@@ -136,7 +144,7 @@ namespace TCC.Controls
             var tb = sender as TextBox;
             if (Double.TryParse(tb.Text, out double result))
             {
-                 Value = result;
+                Value = result;
             }
             else
             {

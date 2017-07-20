@@ -22,7 +22,8 @@
                RenderOptions.BitmapScalingMode="Fant" 
                HorizontalAlignment="Left" 
                Margin="17,0,0,0" 
-               Opacity=".9"/>
+               Opacity=".3"
+               x:Name="img"/>
         <TextBlock Style="{StaticResource text1}" 
                    Grid.Column="1" 
                    Margin="10,0,14,0" 
