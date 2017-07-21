@@ -20,7 +20,7 @@
                  Stroke="#ccc" 
                  StrokeThickness="1">
             <Ellipse.Fill>
-                <ImageBrush ImageSource="{Binding Icon, Converter={StaticResource iconConv}}" />
+                <ImageBrush ImageSource="{Binding Icon, Converter={StaticResource Converters.IconNameToPath}}" />
             </Ellipse.Fill>
             <Ellipse.CacheMode>
                 <BitmapCache RenderAtScale="2"/>

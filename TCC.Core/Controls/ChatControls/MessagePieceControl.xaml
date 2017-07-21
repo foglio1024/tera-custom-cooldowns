@@ -17,7 +17,7 @@
                 HorizontalAlignment="Stretch" 
                 VerticalAlignment="Stretch" 
                 CornerRadius="2" 
-                Cursor="{Binding Type, Converter={StaticResource TypeToCursorConverter}}"
+                Cursor="{Binding Type, Converter={StaticResource Converters.MessageTypeToCursor}}"
                 PreviewMouseLeftButtonDown="OnMouseDown"
                 Opacity=".2"
                 />

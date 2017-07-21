@@ -33,7 +33,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Border Background="{StaticResource bgColor}" Opacity=".4"  CornerRadius="1" Grid.ColumnSpan="2" Grid.RowSpan="2" BorderThickness="1" BorderBrush="Black" Margin="0,0,0,0" Grid.Row="0" VerticalAlignment="Stretch" />
+            <Border Background="{StaticResource Colors.App.DefaultBackground}" Opacity=".4"  CornerRadius="1" Grid.ColumnSpan="2" Grid.RowSpan="2" BorderThickness="1" BorderBrush="Black" Margin="0,0,0,0" Grid.Row="0" VerticalAlignment="Stretch" />
             <!--Message counter-->
             <TextBlock VerticalAlignment="Top"
                    HorizontalAlignment="Right"
@@ -201,7 +201,7 @@
                     </ItemsControl>
                 </TabItem>
             </TabControl>
-            <Rectangle Height="3" Fill="{StaticResource mpColor}" Width="0" x:Name="selectionRect" 
+            <Rectangle Height="3" Fill="{StaticResource Colors.App.MP}" Width="0" x:Name="selectionRect" 
                    IsHitTestVisible="False" HorizontalAlignment="Left" 
                    Opacity="1" VerticalAlignment="Top" Margin="0,22,0,0" Grid.Row="1">
                 <Rectangle.RenderTransform>
@@ -214,11 +214,11 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Border Background="{StaticResource bgColor}" CornerRadius="3,3,0,0" VerticalAlignment="Top" Height="3" />
-                <Border Background="{StaticResource bgColor}" CornerRadius="0,0,3,3" VerticalAlignment="Bottom" Height="3" Grid.Row="2"/>
+                <Border Background="{StaticResource Colors.App.DefaultBackground}" CornerRadius="3,3,0,0" VerticalAlignment="Top" Height="3" />
+                <Border Background="{StaticResource Colors.App.DefaultBackground}" CornerRadius="0,0,3,3" VerticalAlignment="Bottom" Height="3" Grid.Row="2"/>
             </Grid>
 
-            <Border Background="{StaticResource bgColor}" Width="Auto" Grid.Column="0" Grid.Row="0" Opacity=".7" />
+            <Border Background="{StaticResource Colors.App.DefaultBackground}" Width="Auto" Grid.Column="0" Grid.Row="0" Opacity=".7" />
             <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" Visibility="Visible" UseLayoutRounding="True">
                 <TextBlock Foreground="Gray" Margin="5,0" VerticalAlignment="Center">LFG</TextBlock>
                 <ItemsControl ItemsSource="{Binding Instance.LFGs}" ItemTemplate="{StaticResource LfgTemplate}" Margin="2">

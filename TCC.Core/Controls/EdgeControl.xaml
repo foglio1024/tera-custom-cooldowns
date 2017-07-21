@@ -19,7 +19,7 @@
         </Style>
     </UserControl.Resources>
     <Grid Margin="0" x:Name="root" Width="Auto">
-        <Border Style="{StaticResource border}" 
+        <Border Style="{StaticResource Styles.DefaultBorder}" 
                 Width="Auto" 
                 Height="26" 
                 Visibility="Hidden"

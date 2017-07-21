@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -146,27 +144,4 @@ namespace TCC.Controls
         }
     }
 }
-namespace TCC.Converters
-{
-    public class IconConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            string iconName = "unknown";
-            if (value != null)
-            {
-                if (value.ToString() != "")
-                {
-                    iconName = value.ToString();
-                    iconName = iconName.Replace(".", "/");
-                }
-            }
-            return Environment.CurrentDirectory + "/resources/images/" + iconName + ".png";
-        }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-}

@@ -29,7 +29,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Border Margin="0,0,0,0" Style="{StaticResource border}" x:Name="mainBorder" Grid.RowSpan="2" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <Border Margin="0,0,0,0" Style="{StaticResource Styles.DefaultBorder}" x:Name="mainBorder" Grid.RowSpan="2" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -37,7 +37,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Name="BossNameTB" Style="{StaticResource text1}"
+                    <TextBlock Name="BossNameTB" Style="{StaticResource Styles.DefaultText}"
                                HorizontalAlignment="Left" 
                                VerticalAlignment="Center" 
                                FontSize="15" 
@@ -50,7 +50,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <TextBlock  Style="{StaticResource text1}"
+                    <TextBlock  Style="{StaticResource Styles.DefaultText}"
                                HorizontalAlignment="Left" 
                                VerticalAlignment="Center" 
                                FontSize="11"
@@ -60,7 +60,7 @@
                         <Run Text=" / " Foreground="#5fff"/>
                         <Run Text="{Binding MaxHP, StringFormat={}{0:N0}}" Foreground="#5fff"/>
                     </TextBlock>
-                    <TextBlock Style="{StaticResource text1}"
+                    <TextBlock Style="{StaticResource Styles.DefaultText}"
                                HorizontalAlignment="Center" 
                                FontWeight="DemiBold" 
                                VerticalAlignment="Center" 
@@ -76,7 +76,7 @@
                     </Grid.RowDefinitions>
 
                     <controls:GenericGauge Height="5" Width="400"
-                                           BarColor="{Binding Enraged, Converter={StaticResource barColorConv}}"
+                                           BarColor="{Binding Enraged, Converter={StaticResource Converters.EnrageToHpColor}}"
                                            GaugeName=""
                                            ShowPercentage="False"
                                            ShowName="False"

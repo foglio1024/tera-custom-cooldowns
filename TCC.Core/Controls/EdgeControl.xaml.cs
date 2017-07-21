@@ -26,7 +26,7 @@ namespace TCC.Controls
         public EdgeControl()
         {
             InitializeComponent();
-            //baseBorder.Background = (SolidColorBrush)App.Current.FindResource("bgColor");
+            //baseBorder.Background = (SolidColorBrush)App.Current.FindResource("Colors.App.DefaultBackground");
 
         }
         private int _currentEdge = 0;
@@ -44,7 +44,7 @@ namespace TCC.Controls
             }
             else
             {
-                //baseBorder.Background = (SolidColorBrush)App.Current.FindResource("bgColor");
+                //baseBorder.Background = (SolidColorBrush)App.Current.FindResource("Colors.App.DefaultBackground");
                 maxBorder.Opacity = 0;
 
                 for (int i = edgeContainer.Children.Count - 1; i >= 0; i--)

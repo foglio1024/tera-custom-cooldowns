@@ -34,7 +34,7 @@
         </local:Arc>
 
         <Ellipse Width="14" Height="14" Fill="#5000"></Ellipse>
-            <TextBlock Style="{StaticResource text1}" 
+            <TextBlock Style="{StaticResource Styles.DefaultText}" 
                        Text="{Binding Val, StringFormat={}{0:N0}}" 
                        Grid.Row="0" 
                        TextAlignment="Center"

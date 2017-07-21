@@ -16,9 +16,9 @@ namespace TCC.Converters
             switch ((ShieldStatus)value)
             {
                 case ShieldStatus.On:
-                    return App.Current.FindResource("mpColor");
+                    return App.Current.FindResource("Colors.App.MP");
                 case ShieldStatus.Broken:
-                    return App.Current.FindResource("greenTccColor");
+                    return App.Current.FindResource("Colors.App.Green");
                 case ShieldStatus.Failed:
                     return Brushes.Red;
                 default:

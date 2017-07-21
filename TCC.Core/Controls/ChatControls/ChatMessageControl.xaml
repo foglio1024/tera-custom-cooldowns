@@ -9,8 +9,8 @@
              xmlns:chatcontrols="clr-namespace:TCC.Controls.ChatControls"
              mc:Ignorable="d"  Loaded="UserControl_Loaded">
     <Grid Margin="2,1" HorizontalAlignment="Stretch" Width="650" Name="root" Height="Auto" Background="#0f00" VerticalAlignment="Top"
-          Visibility="{Binding IsVisible, Converter={StaticResource boolToVisibleCollapsed}}">
-        <Grid Width="Auto" MinWidth="0" Margin="0,0" VerticalAlignment="Top" Height="{Binding Rows, Converter={StaticResource RowsToHeightConverter}}" Background="Transparent" >
+          Visibility="{Binding IsVisible, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
+        <Grid Width="Auto" MinWidth="0" Margin="0,0" VerticalAlignment="Top" Height="{Binding Rows, Converter={StaticResource Converters.RowsToHeight}}" Background="Transparent" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*" />
@@ -23,7 +23,7 @@
                             ContentTemplateSelector="{StaticResource BodyTemplateSelector}"/>
 
             <Popup IsOpen="False" StaysOpen="True" Placement="Top" AllowsTransparency="True" x:Name="popup" MouseLeave="popup_MouseLeave">
-                <Border Style="{StaticResource border}" Width="Auto" Padding="5" >
+                <Border Style="{StaticResource Styles.DefaultBorder}" Width="Auto" Padding="5" >
                     <ContentControl Content="{Binding}" Width="650"
                             ContentTemplateSelector="{StaticResource BodyTemplateSelector}"/>
                 </Border>

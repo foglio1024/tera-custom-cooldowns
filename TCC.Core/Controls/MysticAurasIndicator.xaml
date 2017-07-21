@@ -16,8 +16,8 @@
     </UserControl.Resources>
     <Grid  UseLayoutRounding="True" >
         <local:Arc EndAngle="359.9" Stroke="Gray" Opacity=".2" />
-        <local:Arc StartAngle="271" EndAngle="359" x:Name="crit" Stroke="{StaticResource hpColor}" Visibility="Hidden"/>
-        <local:Arc StartAngle="1" EndAngle="88" x:Name="mp" Stroke="{StaticResource mpColor}" Visibility="Hidden"/>
+        <local:Arc StartAngle="271" EndAngle="359" x:Name="crit" Stroke="{StaticResource Colors.App.HP}" Visibility="Hidden"/>
+        <local:Arc StartAngle="1" EndAngle="88" x:Name="mp" Stroke="{StaticResource Colors.App.MP}" Visibility="Hidden"/>
         <local:Arc StartAngle="181" EndAngle="269" x:Name="critRes" Stroke="#f97" Visibility="Hidden"/>
         <local:Arc StartAngle="91" EndAngle="179" x:Name="swift" Stroke="#7f9" Visibility="Hidden"/>
 

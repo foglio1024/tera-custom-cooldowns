@@ -11,71 +11,70 @@
     <Application.Resources>
         <DropShadowEffect x:Key="dropShadow" BlurRadius="4" ShadowDepth="2" Opacity=".4" />
 
-        <SolidColorBrush x:Key="mainTccColor" Color="#ff6822"/>
-        <SolidColorBrush x:Key="greenTccColor" Color="#00A561"/>
+        <SolidColorBrush x:Key="Colors.App.Main" Color="#ff6822"/>
+        <SolidColorBrush x:Key="Colors.App.Green" Color="#00A561"/>
 
-        <SolidColorBrush x:Key="bgColor" Color="#101017" Opacity="1"/>
-        <SolidColorBrush x:Key="hpColor" Color="#f55"/>
-        <SolidColorBrush x:Key="mpColor" Color="#59f"/>
-        <SolidColorBrush x:Key="hpDebuffColor" Color="#b74be5"/>
+        <SolidColorBrush x:Key="Colors.App.DefaultBackground" Color="#101017" Opacity="1"/>
+        <SolidColorBrush x:Key="Colors.App.HP" Color="#f55"/>
+        <SolidColorBrush x:Key="Colors.App.MP" Color="#59f"/>
+        <SolidColorBrush x:Key="Colors.App.HP.Debuff" Color="#b74be5"/>
 
-        <SolidColorBrush x:Key="Gold" Color="#ffb033"/>
-        <SolidColorBrush x:Key="Silver" Color="Silver"/>
-        <SolidColorBrush x:Key="Copper" Color="#be6f4d"/>
+        <SolidColorBrush x:Key="Colors.App.Gold" Color="#ffb033"/>
+        <SolidColorBrush x:Key="Colors.App.Silver" Color="Silver"/>
+        <SolidColorBrush x:Key="Colors.App.Copper" Color="#be6f4d"/>
 
-        <SolidColorBrush x:Key="DefensiveStanceColor" Color="#32b3e2" />
-        <SolidColorBrush x:Key="AssaultStanceColor" Color="#de2c4a" />
-        <SolidColorBrush x:Key="SniperEyeColor" Color="#38bde5" />
+        <SolidColorBrush x:Key="Colors.ClassWindow.DefensiveStance" Color="#32b3e2" />
+        <SolidColorBrush x:Key="Colors.ClassWindow.AssaultStance" Color="#de2c4a" />
+        <SolidColorBrush x:Key="Colors.ClassWindow.SniperEye" Color="#38bde5" />
 
-        <SolidColorBrush x:Key="HealerColor" Color="#7cffab" />
-        <SolidColorBrush x:Key="DpsColor" Color="#ffaf72" />
-        <SolidColorBrush x:Key="TankColor" Color="#7aceff" />
+        <SolidColorBrush x:Key="Colors.GroupWindow.Healer" Color="#7cffab" />
+        <SolidColorBrush x:Key="Colors.GroupWindow.Dps" Color="#ffaf72" />
+        <SolidColorBrush x:Key="Colors.GroupWindow.Tank" Color="#7aceff" />
 
-        <SolidColorBrush x:Key="IgnidraxColor" Color="#ff894a"/>
-        <SolidColorBrush x:Key="TerradraxColor" Color="#ffcb76"/>
-        <SolidColorBrush x:Key="AquadraxColor" Color="#dff7ff"/>
-        <SolidColorBrush x:Key="UmbradraxColor" Color="#aa1e1e"/>
+        <SolidColorBrush x:Key="Colors.BossWindow.Ignidrax" Color="#ff894a"/>
+        <SolidColorBrush x:Key="Colors.BossWindow.Terradrax" Color="#ffcb76"/>
+        <SolidColorBrush x:Key="Colors.BossWindow.Aquadrax" Color="#dff7ff"/>
+        <SolidColorBrush x:Key="Colors.BossWindow.Umbradrax" Color="#aa1e1e"/>
 
         <system:Double x:Key="MapWidth">800</system:Double>
         <system:Double x:Key="MapHeight">600</system:Double>
 
         <!--Chat colors-->
-        <SolidColorBrush x:Key="ChatSay" Color="#fff"/>
-        <SolidColorBrush x:Key="ChatParty" Color="#0071bb"/>
-        <SolidColorBrush x:Key="ChatGuild" Color="#40fb40"/>
-        <SolidColorBrush x:Key="ChatArea" Color="#ba82f2"/>
-        <SolidColorBrush x:Key="ChatTrade" Color="#c07a81"/>
-        <SolidColorBrush x:Key="ChatGreet" Color="#999"/>
-        <SolidColorBrush x:Key="ChatPartyNotice" Color="#8effff"/>
-        <SolidColorBrush x:Key="ChatRaidNotice" Color="#f28730"/>
-        <SolidColorBrush x:Key="ChatEmote" Color="#ffb9b9"/>
-        <SolidColorBrush x:Key="ChatGlobal" Color="#f0ff89"/>
-        <SolidColorBrush x:Key="ChatRaid" Color="#fc0"/>
-        <SolidColorBrush x:Key="ChatMegaphone" Color="#00d8ff"/>
-        <SolidColorBrush x:Key="ChatGuildAd" Color="#70c401"/>
-        <SolidColorBrush x:Key="ChatPrivate" Color="#ff5f38"/>
-        <SolidColorBrush x:Key="ChatWhisper" Color="#f479f4"/>
-        <SolidColorBrush x:Key="ChatSysGeneric" Color="#c8c8b6"/>
-        <SolidColorBrush x:Key="ChatSysNotify" Color="#c8c8b6"/>
-        <SolidColorBrush x:Key="ChatSysEvent" Color="#c8c8b6"/>
-        <SolidColorBrush x:Key="ChatSysError" Color="#f00"/>
-        <SolidColorBrush x:Key="ChatSysGroup" Color="#d9d9d9"/>
-        <SolidColorBrush x:Key="ChatSysDeathmatch" Color="#d9d9d9"/>
-        <SolidColorBrush x:Key="ChatSysContractAlert" Color="#d9d9d9"/>
-        <SolidColorBrush x:Key="ChatSysGroupAlert" Color="#d9d9d9"/>
-        <SolidColorBrush x:Key="ChatSysLoot" Color="#d9d9d9"/>
-        <SolidColorBrush x:Key="ChatSysExp" Color="#d9d9d9"/>
-        <SolidColorBrush x:Key="ChatSysMoney" Color="#d9d9d9"/>
-        <SolidColorBrush x:Key="ChatBargain" Color="#ffbf8f"/>
-
-
-
+        <SolidColorBrush x:Key="Colors.Chat.Say" Color="#fff"/>
+        <SolidColorBrush x:Key="Colors.Chat.Party" Color="#0071bb"/>
+        <SolidColorBrush x:Key="Colors.Chat.Guild" Color="#40fb40"/>
+        <SolidColorBrush x:Key="Colors.Chat.Area" Color="#ba82f2"/>
+        <SolidColorBrush x:Key="Colors.Chat.Trade" Color="#c07a81"/>
+        <SolidColorBrush x:Key="Colors.Chat.Greet" Color="#999"/>
+        <SolidColorBrush x:Key="Colors.Chat.PartyNotice" Color="#8effff"/>
+        <SolidColorBrush x:Key="Colors.Chat.RaidNotice" Color="#f28730"/>
+        <SolidColorBrush x:Key="Colors.Chat.Emote" Color="#ffb9b9"/>
+        <SolidColorBrush x:Key="Colors.Chat.Global" Color="#f0ff89"/>
+        <SolidColorBrush x:Key="Colors.Chat.Raid" Color="#fc0"/>
+        <SolidColorBrush x:Key="Colors.Chat.Megaphone" Color="#00d8ff"/>
+        <SolidColorBrush x:Key="Colors.Chat.GuildAd" Color="#70c401"/>
+        <SolidColorBrush x:Key="Colors.Chat.Private" Color="#ff5f38"/>
+        <SolidColorBrush x:Key="Colors.Chat.Whisper" Color="#f479f4"/>
+        <SolidColorBrush x:Key="Colors.Chat.System.Generic" Color="#c8c8b6"/>
+        <SolidColorBrush x:Key="Colors.Chat.System.Notify" Color="#c8c8b6"/>
+        <SolidColorBrush x:Key="Colors.Chat.System.Event" Color="#c8c8b6"/>
+        <SolidColorBrush x:Key="Colors.Chat.System.Error" Color="#f00"/>
+        <SolidColorBrush x:Key="Colors.Chat.System.Group" Color="#d9d9d9"/>
+        <SolidColorBrush x:Key="Colors.Chat.System.Deathmatch" Color="#d9d9d9"/>
+        <SolidColorBrush x:Key="Colors.Chat.System.ContractAlert" Color="#d9d9d9"/>
+        <SolidColorBrush x:Key="Colors.Chat.System.GroupAlert" Color="#d9d9d9"/>
+        <SolidColorBrush x:Key="Colors.Chat.System.Loot" Color="#d9d9d9"/>
+        <SolidColorBrush x:Key="Colors.Chat.System.Exp" Color="#d9d9d9"/>
+        <SolidColorBrush x:Key="Colors.Chat.System.Money" Color="#d9d9d9"/>
+        <SolidColorBrush x:Key="Colors.Chat.System.Bargain" Color="#ffbf8f"/>
+        
         <FontFamily x:Key="DroidSans">pack://application:,,,/resources/fonts/#droidsans</FontFamily>
         <FontFamily x:Key="OpenSans">pack://application:,,,/resources/fonts/#OpenSans-Regular</FontFamily>
         <FontFamily x:Key="Frutiger">pack://application:,,,/resources/fonts/#Frutiger</FontFamily>
         <FontFamily x:Key="SourceSans">pack://application:,,,/resources/fonts/#SourceSans</FontFamily>
-        <Style x:Key="border" TargetType="Border">
-            <Setter Property="Background" Value="{StaticResource bgColor}"/>
+
+        <Style x:Key="Styles.DefaultBorder" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource Colors.App.DefaultBackground}"/>
             <Setter Property="CornerRadius" Value="0"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="BorderBrush" Value="#202026"/>
@@ -84,75 +83,66 @@
             <Setter Property="Effect" Value="{StaticResource dropShadow}" />
             <Setter Property="Opacity" Value=".85"/>
         </Style>
-
-        <Style x:Key="text1" TargetType="TextBlock">
+        <Style x:Key="Styles.DefaultText" TargetType="TextBlock">
             <Setter Property="UseLayoutRounding" Value="True"/>
             <Setter Property="Foreground" Value="#bbffffff"/>
             <Setter Property="FontFamily" Value="/TCC;component/resources/#Open Sans"/>
         </Style>
 
-
-        <Style x:Key="ClassWindowStatBorder" TargetType="Border" BasedOn="{StaticResource border}">
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Height" Value="20"/>
-            <Setter Property="Width" Value="80"/>
-        </Style>
-
         <!--Converters-->
-        <converters:BoolToOpacityConverter x:Key="boolToOpacity"/>
-        <converters:BoolToVisibilityConverter x:Key="boolToVisibleCollapsed" />
-        <converters:BoolToVisibleHidden x:Key="boolToVisibleHidden" />
-        <converters:RollToStringConverter x:Key="rollToString"/>
-        <converters:WinningToColorConverter x:Key="winningToColor"/>
-        <converters:IconConverter x:Key="iconConv"/>
-        <converters:ClassImageConverter x:Key="classConv"/>
-        <converters:ChatColorConverter x:Key="ChatColorConverter"/>
-        <converters:TypeToCursorConverter x:Key="TypeToCursorConverter"/>
-        <converters:ChatChannelNameConverter x:Key="ChatChannelNameConverter"/>
-        <converters:MentionToColorConverter x:Key="mentionConv"/>
-        <converters:SentReceivedToAngleConverter x:Key="sentReceivedConv"/>
-        <converters:HPbarColorConverter x:Key="hpDebuffColConv"/>
-        <converters:HP_PercentageConverter x:Key="hpPercConv"/>
-        <converters:PercentageVisibiltyConverter x:Key="percVisConv"/>
-        <converters:ContractedToColWidthConverter x:Key="ContractedToColumnWidthConverter"/>
-        <converters:RowsToHeightConverter x:Key="RowsToHeightConverter"/>
+        <converters:BoolToOpacityConverter x:Key="Converters.BoolToOpacity"/>
+        <converters:BoolToOpacityInverseConverter x:Key="Converters.BoolToOpacityInverse"/>
+        <converters:BoolToVisibilityConverter x:Key="Converters.BoolToVisibleCollapsed" />
+        <converters:BoolToVisibleHidden x:Key="Converters.BoolToVisibleHidden" />
+        <converters:RollToStringConverter x:Key="Converters.RollToString"/>
+        <converters:WinningToColorConverter x:Key="Converters.WinningToColor"/>
+        <converters:IconConverter x:Key="Converters.IconNameToPath"/>
+        <converters:ClassImageConverter x:Key="Converters.ClassToImage"/>
+        <converters:ChatChannelToColor x:Key="Converters.ChatChannelToColor"/>
+        <converters:ChatChannelToName x:Key="Converters.ChatChannelToName"/>
+        <converters:MessageTypeToCursor x:Key="Converters.MessageTypeToCursor"/>
+        <converters:MentionToColorConverter x:Key="Converters.MentionToColor"/>
+        <converters:SentReceivedToAngleConverter x:Key="Converters.WhisperDirectionToAngle"/>
+        <converters:HPbarColorConverter x:Key="Converters.DebuffStatusToHpColor"/>
+        <converters:ContractedToColWidthConverter x:Key="Converters.MessageContractedToColumnWidth"/>
+        <converters:RowsToHeightConverter x:Key="Converters.RowsToHeight"/>
+        <converters:BoolToCooldowWindowTemplateConverter x:Key="Converters.BoolToCooldowWindowTemplate"/>
+
         <!--AbnormalityIndicator resources-->
-        <converters:AbnormalityStrokeConverter x:Key="strokeConv"/>
-        <converters:DurationLabelConverter x:Key="durationConv"/>
-        <converters:StacksToVisibilityConverter x:Key="stacksToVisibilityConv"/>
-        <converters:DurationToVisibilityConverter x:Key="durationToVisibilityConv"/>
-        <converters:SizeToStackLabelSizeConverter x:Key="sizeToStackLabelSizeConv"/>
-        <converters:SizeToDurationLabelSizeConverter x:Key="sizeToDurationLabelSizeConv"/>
-        <converters:SizeToDurationLabelMarginConverter x:Key="sizeToDurationLabelMarginConv"/>
+        <converters:AbnormalityStrokeConverter x:Key="Converters.AbnormalityTypeToStrokeColor"/>
+        <converters:DurationLabelConverter x:Key="Converters.DurationToTimeFormat"/>
+        <converters:StacksToVisibilityConverter x:Key="Converters.StacksToLabelVisibility"/>
+        <converters:DurationToVisibilityConverter x:Key="Converters.DurationToLabelVisibility"/>
+        <converters:SizeToStackLabelSizeConverter x:Key="Converters.MainSizeToStackLabelSize"/>
+        <converters:SizeToDurationLabelSizeConverter x:Key="Converters.MainSizeToDurationLabelSize"/>
+        <converters:SizeToDurationLabelMarginConverter x:Key="Converters.MainSizeToDurationLabelMargin"/>
 
         <!--BossGage resources-->
-        <converters:EntityIdToNameConverter x:Key="userIdToName"/>
-        <converters:AggroTypeToFill x:Key="aggroTypeToFill"/>
-        <converters:BossHPbarColorConverter x:Key="barColorConv"/>
-        <DataTemplate x:Key="BossBuffDataTemplate">
-            <controls:AbnormalityIndicator/>
-        </DataTemplate>
-        
+        <converters:EntityIdToNameConverter x:Key="Converters.EntityIdToName"/>
+        <converters:AggroTypeToFillConverter x:Key="Converters.AggroTypeToFill"/>
+        <converters:BossHPbarColorConverter x:Key="Converters.EnrageToHpColor"/>
+        <converters:DragonIdToColorConverter x:Key="Converters.DragonIdToColor"/>
+        <converters:HHphaseToEnemyWindowTemplate x:Key="Converters.HarrowholdPhaseToLayout"/>
+
         <!--Party/raid member resources-->
-        <converters:ClassImageConverter x:Key="classToImageConv"/>
-        <converters:LaurelImageConverter x:Key="laurelToImageConv"/>
-        <converters:ClassToFillConverter x:Key="classToFillConv"/>
-        <converters:AliveToOpacityConverter x:Key="aliveToOpacityConv"/>
+        <converters:LaurelImageConverter x:Key="Converters.LaurelToImage"/>
+        <converters:ClassToFillConverter x:Key="Converters.ClassToFill"/>
         <converters:ReadyToOpacityConverter x:Key="readyToOpacityConv"/>
-        <converters:ReadyToIconConverter x:Key="readyToIconConv"/>
-        <converters:ReadyToColorConverter x:Key="readyToColorConv"/>
-        <converters:TemplateIdToColorConverter x:Key="TemplateIdToColorConverter"/>
-        <converters:GroupSizeToTemplateConverter x:Key="GroupSizeToTemplateConverter"/>
+        <converters:ReadyToIconConverter x:Key="Converters.ReadyToIcon"/>
+        <converters:ReadyToColorConverter x:Key="Converters.ReadyToColor"/>
+        <converters:GroupSizeToTemplateConverter x:Key="Converters.GroupSizeToTemplate"/>
+        
         <DataTemplate x:Key="abnorm">
             <controls:AbnormalityIndicator/>
         </DataTemplate>
 
-        <converters:LocationToMapConverter x:Key="LocationToMapConverter"/>
-        <converters:LocationToMarkerPositionConverter x:Key="LocationToMarkerPositionConverter"/>
-        <converters:LocationToStretchConverter x:Key="LocationToStretchConverter"/>
-        <converters:ShieldStatusColorConverter x:Key="ShieldStatusColorConverter"/>
-        <converters:ShieldStatusToVisibilityConverter x:Key="ShieldStatusToVisibilityConverter"/>
-        <converters:FactorToAngleConverter x:Key="FactorToAngleConverter"/>
+        <converters:LocationToMapConverter x:Key="Converters.LocationToMap"/>
+        <converters:LocationToMarkerPositionConverter x:Key="Converters.LocationToMarkerPosition"/>
+        <converters:LocationToStretchConverter x:Key="Converters.LocationToStretch"/>
+        <converters:ShieldStatusColorConverter x:Key="Converters.ShieldStatusColor"/>
+        <converters:ShieldStatusToVisibilityConverter x:Key="Converters.ShieldStatusToVisibility"/>
+        <converters:FactorToAngleConverter x:Key="Converters.FactorToAngle"/>
+        
         <!--Scrollbar Thumbs-->
         <Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">
             <Setter Property="Template">
@@ -352,7 +342,7 @@
         <DataTemplate x:Key="SimpleTemplate">
             <controls:OutlinedTextBlock Fill="{Binding Color}"
                                         Text="{Binding Text}" 
-                                        Cursor="{Binding Type, Converter={StaticResource TypeToCursorConverter}}"
+                                        Cursor="{Binding Type, Converter={StaticResource Converters.MessageTypeToCursor}}"
                                         Stroke="#9000"
                                         StrokeThickness="3"
                                         FontSize="15"
@@ -413,11 +403,11 @@
         <!--Channel label templates-->
         <DataTemplate x:Key="WhisperChannelLabelTemplate">
             <Grid Height="12" Width="12" VerticalAlignment="Top" UseLayoutRounding="True">
-                <Path Data="M12 8V4l8 8-8 8v-4H4V8z" Fill="{Binding Channel, Converter={StaticResource ChatColorConverter}}" Opacity=".7" 
+                <Path Data="M12 8V4l8 8-8 8v-4H4V8z" Fill="{Binding Channel, Converter={StaticResource Converters.ChatChannelToColor}}" Opacity=".7" 
                       Stretch="Uniform" VerticalAlignment="Center">
                     <Path.LayoutTransform>
                         <TransformGroup>
-                            <ScaleTransform CenterX="1" ScaleX="{Binding Channel, Converter={StaticResource sentReceivedConv}}"/>
+                            <ScaleTransform CenterX="1" ScaleX="{Binding Channel, Converter={StaticResource Converters.WhisperDirectionToAngle}}"/>
                         </TransformGroup>
                     </Path.LayoutTransform>
                 </Path>
@@ -437,7 +427,7 @@
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="DefaultChannelLabelTemplate">
-            <TextBlock  Foreground="{Binding Channel, Converter={StaticResource ChatColorConverter}}" 
+            <TextBlock  Foreground="{Binding Channel, Converter={StaticResource Converters.ChatChannelToColor}}" 
                         Opacity=".5" 
                         FontWeight="DemiBold" 
                         FontSize="11"
@@ -449,12 +439,12 @@
                         TextTrimming="CharacterEllipsis"
                         MinWidth="33"
                         Margin="0,-1,0,0"
-                        Text="{Binding Channel, Converter={StaticResource ChatChannelNameConverter}}"
+                        Text="{Binding Channel, Converter={StaticResource Converters.ChatChannelToName}}"
                                 />
         </DataTemplate>
         <DataTemplate x:Key="EnchantChannelLabelTemplate">
             <Grid>
-                <TextBlock  Foreground="{Binding Channel, Converter={StaticResource ChatColorConverter}}" 
+                <TextBlock  Foreground="{Binding Channel, Converter={StaticResource Converters.ChatChannelToColor}}" 
                         Opacity=".8" 
                         FontWeight="DemiBold" 
                         FontSize="11"
@@ -466,14 +456,14 @@
                         TextTrimming="CharacterEllipsis"
                         MinWidth="33"
                         Margin="0,-1,0,0"
-                        Text="{Binding Channel, Converter={StaticResource ChatChannelNameConverter}}"
+                        Text="{Binding Channel, Converter={StaticResource Converters.ChatChannelToName}}"
                                 />
                 <Border Width="Auto"
                      Height="Auto"
                         CornerRadius="5"
                      Margin="4,-2,2,3"
                      Opacity=".3"
-                     Background="{Binding Channel, Converter={StaticResource ChatColorConverter}}"
+                     Background="{Binding Channel, Converter={StaticResource Converters.ChatChannelToColor}}"
 
                      />
             </Grid>
@@ -487,7 +477,7 @@
         <!--Author label templates-->
         <DataTemplate x:Key="DefaultAuthorTemplate">
             <controls:OutlinedTextBlock  Margin="3,0,3,0" 
-                        Fill="{Binding Channel, Converter={StaticResource ChatColorConverter}}" 
+                        Fill="{Binding Channel, Converter={StaticResource Converters.ChatChannelToColor}}" 
                         FontSize="14"
                         HorizontalAlignment="Stretch"
                         TextAlignment="Left"
@@ -512,7 +502,7 @@
                      Height="10"
                      Margin="2,3,2,4"
                      Opacity=".5"
-                     Fill="{Binding Channel, Converter={StaticResource ChatColorConverter}}"
+                     Fill="{Binding Channel, Converter={StaticResource Converters.ChatChannelToColor}}"
                      />
         </DataTemplate>
         <templateselectors:AuthorLabelTemplateSelector x:Key="AuthorTemplateSelector"
@@ -553,8 +543,7 @@
         <DataTemplate x:Key="Phase4EnemyWindowLayout">
             <controls:Phase4BossControl />
         </DataTemplate>
-        <converters:HHphaseToEnemyWindowTemplate x:Key="PhaseToLayout"/>
-        <Style TargetType="Grid" x:Key="opGrid">
+        <Style TargetType="Grid" x:Key="Style.DragonSelectionGrid">
             <Setter Property="Opacity" Value=".45"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsSelected}" Value="True">
@@ -579,6 +568,5 @@
         <DataTemplate x:Key="NormalCooldownTemplate">
             <controls:NormalSkillContainer/>
         </DataTemplate>
-        <converters:BoolToCooldownWindowTemplateConverter x:Key="BoolToCooldownWindowTemplateConverter"/>
     </Application.Resources>
 </Application>

@@ -20,7 +20,7 @@
                      Placement="Top" >
                 
             <Grid Margin="0">
-                <Border Style="{StaticResource border}" Padding="5,3" Opacity="1">
+                <Border Style="{StaticResource Styles.DefaultBorder}" Padding="5,3" Opacity="1">
                     <TextBlock >
                         <Run Text="{Binding Name}" Foreground="#3fff"/>
                         <Run Text=" "/>

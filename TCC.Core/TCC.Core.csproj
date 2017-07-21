@@ -116,6 +116,9 @@
     <Compile Include="ClassSpecific\Lancer.cs" />
     <Compile Include="ClassSpecific\Priest.cs" />
     <Compile Include="ClassSpecific\Valkyrie.cs" />
+    <Compile Include="Converters\IconConverter.cs" />
+    <Compile Include="Converters\BoolToOpacityInverseConverter.cs" />
+    <Compile Include="Converters\BoolToOpacityConverter.cs" />
     <Compile Include="Controls\ChatControls\ApplyBody.xaml.cs">
       <DependentUpon>ApplyBody.xaml</DependentUpon>
     </Compile>
@@ -168,6 +171,9 @@
     <Compile Include="Controls\Phase4BossControl.xaml.cs">
       <DependentUpon>Phase4BossControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\ReadyToColorConverter.cs" />
+    <Compile Include="Converters\ReadyToIconConverter.cs" />
+    <Compile Include="Converters\ReadyToOpacityConverter.cs" />
     <Compile Include="Controls\SmallMobControl.xaml.cs">
       <DependentUpon>SmallMobControl.xaml</DependentUpon>
     </Compile>
@@ -591,7 +597,6 @@
     <Compile Include="Converters\ClassImageConverter.cs" />
     <Compile Include="Converters\CombatToColorConverter.cs" />
     <Compile Include="Converters\HPbarColorConverter.cs" />
-    <Compile Include="Converters\HP_PercentageConverter.cs" />
     <Compile Include="Converters\LaurelImageConverter.cs" />
     <Compile Include="Controls\EdgeControl.xaml.cs">
       <DependentUpon>EdgeControl.xaml</DependentUpon>
@@ -606,7 +611,7 @@
       <DependentUpon>ValkyrieBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ChatChannelNameConverter.cs" />
-    <Compile Include="Converters\ChatColorConverter.cs" />
+    <Compile Include="Converters\ChatChannelToColorConverter.cs" />
     <Compile Include="Windows\ChatWindow.xaml.cs">
       <DependentUpon>ChatWindow.xaml</DependentUpon>
     </Compile>

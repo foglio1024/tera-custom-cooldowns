@@ -29,7 +29,7 @@
 
     </w:TccWindow.Resources>
     <ContentControl Margin="0" x:Name="controlContainer" DataContext="{Binding Instance}" Content="{Binding}"
-                                        ContentTemplate="{Binding Instance.IsClassWindowOn, Converter={StaticResource BoolToCooldownWindowTemplateConverter}}"
+                                        ContentTemplate="{Binding Instance.IsClassWindowOn, Converter={StaticResource Converters.BoolToCooldowWindowTemplate}}"
 
         >
         <ContentControl.LayoutTransform>

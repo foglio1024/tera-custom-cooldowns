@@ -122,7 +122,7 @@ namespace TCC.Data
             {
                 if(color == "")
                 {
-                    var conv = new Converters.ChatColorConverter();
+                    var conv = new Converters.ChatChannelToColor();
                     var col = ((SolidColorBrush)conv.Convert(Channel, null, null, null));
                     Color = col;
                 }

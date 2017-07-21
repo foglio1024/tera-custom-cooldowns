@@ -22,7 +22,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Border Style="{StaticResource border}"
+            <Border Style="{StaticResource Styles.DefaultBorder}"
                     Grid.Row="0"
                     Grid.Column="0"
                     Grid.ColumnSpan="3"
@@ -39,8 +39,8 @@
                          Grid.Column="2"
                          Grid.Row="0"
                          >
-                <local:StatControl DataContext="{Binding HP}" Color="{StaticResource hpColor}" StatusColor="{StaticResource hpDebuffColor}" Width="85" Margin="0,0,3,0"/>
-                <local:StatControl DataContext="{Binding MP}" Color="{StaticResource mpColor}" Width="85" Margin="0,0,0,0"/>
+                <local:StatControl DataContext="{Binding HP}" Color="{StaticResource Colors.App.HP}" StatusColor="{StaticResource Colors.App.MP}" Width="85" Margin="0,0,3,0"/>
+                <local:StatControl DataContext="{Binding MP}" Color="{StaticResource Colors.App.MP}" Width="85" Margin="0,0,0,0"/>
             </UniformGrid>
         </Grid>
 

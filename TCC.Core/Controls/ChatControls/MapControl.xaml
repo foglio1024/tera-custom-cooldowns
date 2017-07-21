@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls.ChatControls"
              mc:Ignorable="d" >
-    <Border Style="{StaticResource border}" Margin="5">
+    <Border Style="{StaticResource Styles.DefaultBorder}" Margin="5">
         <StackPanel>
             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="Auto">
                 <TextBlock Text="{Binding PlainText}"
@@ -19,11 +19,11 @@
                 <Grid Width="{StaticResource MapWidth}" Height="Auto">
                 <!--Map-->
                 <Image Stretch="Uniform" x:Name="mapImg"
-                       Source="{Binding Location, Converter={StaticResource LocationToMapConverter}}"  
+                       Source="{Binding Location, Converter={StaticResource Converters.LocationToMap}}"  
                        VerticalAlignment="Top"
                        />
                 <!--Marker-->
-                    <Grid Margin="{Binding Location, Converter={StaticResource LocationToMarkerPositionConverter}}"
+                    <Grid Margin="{Binding Location, Converter={StaticResource Converters.LocationToMarkerPosition}}"
                       HorizontalAlignment="Left"            
                       VerticalAlignment="Top" >
                         <Path Margin="-11,-30,0,0"
@@ -35,7 +35,7 @@
                               Data="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
                              />
                     </Grid>
-                    <Grid Margin="{Binding Location, Converter={StaticResource LocationToMarkerPositionConverter}}"
+                    <Grid Margin="{Binding Location, Converter={StaticResource Converters.LocationToMarkerPosition}}"
               HorizontalAlignment="Left"   
                       Opacity="0"
               x:Name="animatedPath"

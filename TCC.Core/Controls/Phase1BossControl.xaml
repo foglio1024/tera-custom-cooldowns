@@ -14,7 +14,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Border Style="{StaticResource border}" 
+        <Border Style="{StaticResource Styles.DefaultBorder}" 
                 CornerRadius="3"
                 Grid.RowSpan="1"/>
         <ItemsControl ItemTemplate="{StaticResource DragonIndicator}" 

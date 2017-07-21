@@ -6,7 +6,7 @@ using TCC.ViewModels;
 
 namespace TCC.Converters
 {
-    public class ChatChannelNameConverter : IValueConverter
+    public class ChatChannelToName : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

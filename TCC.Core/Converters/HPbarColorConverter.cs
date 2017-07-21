@@ -10,11 +10,11 @@ namespace TCC.Converters
         {
             if ((bool)value)
             {
-                return ((SolidColorBrush)App.Current.FindResource("hpDebuffColor"));
+                return ((SolidColorBrush)App.Current.FindResource("Colors.App.MP"));
             }
             else
             {
-                return ((SolidColorBrush)App.Current.FindResource("hpColor"));
+                return ((SolidColorBrush)App.Current.FindResource("Colors.App.HP"));
             }
         }
 

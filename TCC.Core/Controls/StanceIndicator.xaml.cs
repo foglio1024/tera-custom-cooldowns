@@ -46,10 +46,10 @@ namespace TCC.Controls
                             rect.Fill = new SolidColorBrush(Colors.Transparent);
                             break;
                         case WarriorStance.Assault:
-                            rect.Fill = TryFindResource("AssaultStanceColor") as SolidColorBrush;
+                            rect.Fill = TryFindResource("Colors.ClassWindow.AssaultStance") as SolidColorBrush;
                             break;
                         case WarriorStance.Defensive:
-                            rect.Fill = TryFindResource("DefensiveStanceColor") as SolidColorBrush;
+                            rect.Fill = TryFindResource("Colors.ClassWindow.DefensiveStance") as SolidColorBrush;
                             break;
                     }
                 }

@@ -13,7 +13,7 @@
         <Grid>
             <Ellipse Width="51" Height="{Binding ElementName=icon, Path=ActualWidth}" x:Name="icon" Stroke="#afff" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Ellipse.Fill>
-                    <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource iconConv}}"/>
+                    <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource Converters.IconNameToPath}}"/>
                 </Ellipse.Fill>
             </Ellipse>
             <local:Arc Margin="-500" x:Name="warnArc" Opacity=".8" EndAngle="359.9" Stroke="White" StrokeThickness="30" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -56,7 +56,7 @@
               x:Name="g" 
               HorizontalAlignment="Right" 
               VerticalAlignment="Bottom"
-              Opacity="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=local:FixedSkillControl}, Converter={StaticResource boolToOpacity}}">
+              Opacity="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=local:FixedSkillControl}, Converter={StaticResource Converters.BoolToOpacity}}">
 
             <Ellipse x:Name="fill" Fill="#dfff"  Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stroke="#40000000"/>
             

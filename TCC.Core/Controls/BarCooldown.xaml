@@ -9,7 +9,7 @@
             >
 
     <Grid  HorizontalAlignment="Stretch">
-        <!--Top border-->
+        <!--Top Styles.DefaultBorder-->
         <Border BorderBrush="#0555"  
                 Width="{Binding ElementName=cdBar, Path=ActualWidth}" 
                 Background="#303037" 
@@ -27,7 +27,7 @@
         <Grid x:Name="circle" 
               HorizontalAlignment="Left" 
               Margin="-12.5,0" 
-              Opacity="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=local:BarCooldown}, Converter={StaticResource boolToOpacity}}">
+              Opacity="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=local:BarCooldown}, Converter={StaticResource Converters.BoolToOpacity}}">
             <Ellipse Width="22" 
                      Height="22"  
                      Stroke="#5fff" 

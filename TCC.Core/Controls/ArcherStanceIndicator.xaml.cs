@@ -47,7 +47,7 @@ namespace TCC.Controls
                         rect.Fill = new SolidColorBrush(Colors.Transparent);
                         break;
                     case ArcherStance.SniperEye:
-                        rect.Fill = TryFindResource("SniperEyeColor") as SolidColorBrush;
+                        rect.Fill = TryFindResource("Colors.ClassWindow.SniperEye") as SolidColorBrush;
                         break;
                 }
             }

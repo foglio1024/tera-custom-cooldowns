@@ -1,24 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
-
 namespace TCC.Converters
 {
-    public class BoolToCooldowWindowTemplateConverter : IValueConverter
+    public class ReadyToOpacityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((bool)value)
+            ReadyStatus v = (ReadyStatus)value;
+            switch (v)
             {
-                return App.Current.FindResource("FixedCooldownTemplate");
-            }
-            else
-            {
-                return App.Current.FindResource("NormalCooldownTemplate");
+                case ReadyStatus.NotReady:
+                    return .9;
+                case ReadyStatus.Ready:
+                    return .9;
+                default:
+                    return 0;
             }
         }
 
@@ -27,4 +24,5 @@ namespace TCC.Converters
             throw new NotImplementedException();
         }
     }
+
 }

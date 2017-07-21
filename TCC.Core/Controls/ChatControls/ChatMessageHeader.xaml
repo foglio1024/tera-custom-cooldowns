@@ -19,7 +19,7 @@
         </Grid.ColumnDefinitions>
 
         <!--Background -->
-        <Border Background="{Binding ContainsPlayerName, Converter={StaticResource mentionConv}}" 
+        <Border Background="{Binding ContainsPlayerName, Converter={StaticResource Converters.MentionToColor}}" 
                             Opacity=".4" 
                             CornerRadius="3" 
                             Visibility="Visible"
@@ -28,9 +28,9 @@
                             Grid.Column="0"
                             VerticalAlignment="Stretch"/>
         <!--Background tip-->
-        <Border Width="4" Background="{Binding ContainsPlayerName,Converter={StaticResource mentionConv}}" Grid.Column="4" 
+        <Border Width="4" Background="{Binding ContainsPlayerName,Converter={StaticResource Converters.MentionToColor}}" Grid.Column="4" 
                             CornerRadius="0,3,3,0" Margin="0,0" />
-        <Border Width="4" Background="#999" Grid.Column="4" Opacity="{Binding IsContracted, Converter={StaticResource boolToOpacity}}"
+        <Border Width="4" Background="#999" Grid.Column="4" Opacity="{Binding IsContracted, Converter={StaticResource Converters.BoolToOpacity}}"
                             CornerRadius="0,3,3,0" Margin="0,0"/>
         <!--Author-->
         <ContentControl ContentTemplateSelector="{StaticResource AuthorTemplateSelector}" 
@@ -48,10 +48,10 @@
                         Width="36"   
                         Margin="2,4,0,0"
                         Grid.Column="1"
-                        Visibility="{Binding ShowChannel, Converter={StaticResource boolToVisibleCollapsed}}"
+                        Visibility="{Binding ShowChannel, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"
                         />
         <!--Timestamp-->
-        <TextBlock  Margin="4,1,2,0" Foreground="{Binding Channel, Converter={StaticResource ChatColorConverter}}" 
+        <TextBlock  Margin="4,1,2,0" Foreground="{Binding Channel, Converter={StaticResource Converters.ChatChannelToColor}}" 
                     Width="Auto"   
                     Opacity=".8" 
                     FontWeight="Normal" 
@@ -60,7 +60,7 @@
                     VerticalAlignment="Top"
                     Text="{Binding Timestamp}"
                     Grid.Column="0"
-                        Visibility="{Binding ShowTimestamp, Converter={StaticResource boolToVisibleCollapsed}}"
+                        Visibility="{Binding ShowTimestamp, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"
                     
                     />
     </Grid>

@@ -9,7 +9,7 @@
     <Grid Margin="2" Height="Auto" 
                   HorizontalAlignment="Center" 
                   VerticalAlignment="Center"
-                  Style="{StaticResource opGrid}"
+                  Style="{StaticResource Style.DragonSelectionGrid}"
                 >
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -29,8 +29,8 @@
                                Width="60"
                                HorizontalAlignment="Center"
                                TextAlignment="Center"/>
-            <Grid Grid.Row="1" Visibility="{Binding Shield, Converter={StaticResource ShieldStatusToVisibilityConverter}}">
-                <local:Arc Stroke="{Binding Shield, Converter={StaticResource ShieldStatusColorConverter}}" 
+            <Grid Grid.Row="1" Visibility="{Binding Shield, Converter={StaticResource Converters.ShieldStatusToVisibility}}">
+                <local:Arc Stroke="{Binding Shield, Converter={StaticResource Converters.ShieldStatusColor}}" 
                            Grid.Column="2" 
                            x:Name="shieldArc"
                            Width="48" 
@@ -54,9 +54,9 @@
             </Grid>
 
             <local:Arc Width="50" Height="50"
-                                Stroke="{Binding TemplateId, Converter={StaticResource TemplateIdToColorConverter}}"
+                                Stroke="{Binding TemplateId, Converter={StaticResource Converters.DragonIdToColor}}"
                                StrokeThickness="4"
-                               EndAngle="{Binding CurrentFactor, Converter={StaticResource FactorToAngleConverter}}"
+                               EndAngle="{Binding CurrentFactor, Converter={StaticResource Converters.FactorToAngle}}"
                                 Grid.Row="1"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
@@ -71,7 +71,7 @@
 
             <local:Arc Width="58" Height="58"
                        Stroke="Red"
-                       Visibility="{Binding Enraged, Converter={StaticResource boolToVisibleHidden}}"
+                       Visibility="{Binding Enraged, Converter={StaticResource Converters.BoolToVisibleHidden}}"
                        StrokeThickness="3"
                        x:Name="enrageArc"
                        EndAngle="359.9"

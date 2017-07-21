@@ -27,7 +27,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Border Margin="0,0,0,0" Style="{StaticResource border}" x:Name="mainBorder" Grid.RowSpan="2" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <Border Margin="0,0,0,0" Style="{StaticResource Styles.DefaultBorder}" x:Name="mainBorder" Grid.RowSpan="2" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -35,26 +35,26 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Name="BossNameTB" Style="{StaticResource text1}"
+                    <TextBlock Name="BossNameTB" Style="{StaticResource Styles.DefaultText}"
                                HorizontalAlignment="Left" 
                                VerticalAlignment="Center" 
                                FontSize="15" 
                                Text="{Binding Name}" 
                                Grid.Row="0"/>
-                    <Polygon Points="0,10 5,0 10,10"  Margin="10,0"  Fill="{Binding CurrentAggroType, Converter={StaticResource aggroTypeToFill}}" Name="aggroArrow"
+                    <Polygon Points="0,10 5,0 10,10"  Margin="10,0"  Fill="{Binding CurrentAggroType, Converter={StaticResource Converters.AggroTypeToFill}}" Name="aggroArrow"
                                  VerticalAlignment="Center" Height="Auto"  HorizontalAlignment="Center"
                                  Grid.Column="1" RenderTransformOrigin=".5,.5">
                         <Polygon.RenderTransform>
                             <RotateTransform Angle="90"/>
                         </Polygon.RenderTransform>
                     </Polygon>
-                    <TextBlock Name="AggroHolderNameTB" Style="{StaticResource text1}"
+                    <TextBlock Name="AggroHolderNameTB" Style="{StaticResource Styles.DefaultText}"
                                HorizontalAlignment="Left" 
                                VerticalAlignment="Center" 
                                FontWeight="Normal" 
                                FontStretch="Condensed" 
                                FontSize="13" 
-                               Text="{Binding Target, Converter={StaticResource userIdToName}}" 
+                               Text="{Binding Target, Converter={StaticResource Converters.EntityIdToName}}" 
                                Grid.Row="0" Grid.Column="2" TextTrimming="WordEllipsis" MaxWidth="200"/>
 
                 </Grid>
@@ -64,7 +64,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <TextBlock  Style="{StaticResource text1}"
+                    <TextBlock  Style="{StaticResource Styles.DefaultText}"
                                HorizontalAlignment="Left" 
                                VerticalAlignment="Center" 
                                FontSize="11"
@@ -74,7 +74,7 @@
                         <Run Text=" / " Foreground="#5fff"/>
                         <Run Text="{Binding MaxHP, StringFormat={}{0:N0}}" Foreground="#5fff"/>
                     </TextBlock>
-                    <TextBlock Style="{StaticResource text1}"
+                    <TextBlock Style="{StaticResource Styles.DefaultText}"
                                HorizontalAlignment="Center" 
                                FontWeight="DemiBold" 
                                VerticalAlignment="Center" 
@@ -90,7 +90,7 @@
                     </Grid.RowDefinitions>
 
                     <controls:GenericGauge Height="5" Width="400"
-                                           BarColor="{Binding Enraged, Converter={StaticResource barColorConv}}"
+                                           BarColor="{Binding Enraged, Converter={StaticResource Converters.EnrageToHpColor}}"
                                            GaugeName=""
                                            ShowPercentage="False"
                                            ShowName="False"
@@ -128,7 +128,7 @@
             </Grid>
         </Grid>
         <Grid Grid.Row="1" Height="Auto" Margin="6,0,6,0" HorizontalAlignment="Left" Name="abnormalitiesGrid">
-            <ItemsControl Name="Abnormalities" ItemTemplate="{StaticResource BossBuffDataTemplate}" ItemsSource="{Binding Buffs}">
+            <ItemsControl Name="Abnormalities" ItemTemplate="{StaticResource abnorm}" ItemsSource="{Binding Buffs}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0" Width="{Binding ElementName=mainBorder, Path=ActualWidth}"/>

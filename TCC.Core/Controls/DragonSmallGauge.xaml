@@ -13,7 +13,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Border Style="{StaticResource border}" Grid.RowSpan="2"/>
+        <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
         <Grid Margin="0,2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -36,7 +36,7 @@
                 </TransformGroup>
             </StackPanel.RenderTransform>
             <Ellipse Fill="#fa0" Width="7" Height="7" Name="enrageEll" Stroke="#fb0"/>
-            <TextBlock Width="Auto" FontSize="12" Style="{StaticResource text1}"
+            <TextBlock Width="Auto" FontSize="12" Style="{StaticResource Styles.DefaultText}"
                                    TextAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,0" Padding="0"
                                    Text="{Binding EnrageTBtext, RelativeSource={RelativeSource AncestorType=controls:DragonSmallGauge}}"/>
         </StackPanel>

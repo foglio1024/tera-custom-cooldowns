@@ -3,19 +3,20 @@ using System.Globalization;
 using System.Windows.Data;
 namespace TCC.Converters
 {
-    public class HP_PercentageConverter : IValueConverter
+    public class IconConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            float hp = (float)value;
-            if(SessionManager.CurrentPlayer.MaxHP > 0)
+            string iconName = "unknown";
+            if (value != null)
             {
-                return hp / SessionManager.CurrentPlayer.MaxHP;
+                if (value.ToString() != "")
+                {
+                    iconName = value.ToString();
+                    iconName = iconName.Replace(".", "/");
+                }
             }
-            else
-            {
-                return 0;
-            }
+            return Environment.CurrentDirectory + "/resources/images/" + iconName + ".png";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

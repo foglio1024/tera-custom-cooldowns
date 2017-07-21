@@ -24,8 +24,8 @@
         </Grid.RowDefinitions>
 
 
-        <!--Main border-->
-        <Border Style="{StaticResource border}" Width="Auto" Grid.Row="1" Margin="-1" CornerRadius="25" x:Name="mainBorder" >
+        <!--Main Styles.DefaultBorder-->
+        <Border Style="{StaticResource Styles.DefaultBorder}" Width="Auto" Grid.Row="1" Margin="-1" CornerRadius="25" x:Name="mainBorder" >
         </Border>
             <!--Main skills grid-->
             <Grid Grid.Row="1" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center">

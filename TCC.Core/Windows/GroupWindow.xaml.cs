@@ -31,15 +31,15 @@ namespace TCC.Converters
             switch (c)
             {
                 case Class.Lancer:
-                    return App.Current.FindResource("TankColor");
+                    return App.Current.FindResource("Colors.GroupWindow.Tank");
                 case Class.Fighter:
-                    return App.Current.FindResource("TankColor");
+                    return App.Current.FindResource("Colors.GroupWindow.Tank");
                 case Class.Priest:
-                    return App.Current.FindResource("HealerColor");
+                    return App.Current.FindResource("Colors.GroupWindow.Healer");
                 case Class.Elementalist:
-                    return App.Current.FindResource("HealerColor");
+                    return App.Current.FindResource("Colors.GroupWindow.Healer");
                 default:
-                    return App.Current.FindResource("DpsColor");
+                    return App.Current.FindResource("Colors.GroupWindow.Dps");
             }
         }
 

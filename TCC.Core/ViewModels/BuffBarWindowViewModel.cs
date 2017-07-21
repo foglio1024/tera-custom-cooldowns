@@ -8,7 +8,7 @@ namespace TCC.ViewModels
     {
         private static BuffBarWindowViewModel _instance;
         public static BuffBarWindowViewModel Instance => _instance ?? (_instance = new BuffBarWindowViewModel());
-        private double scale = SettingsManager.BuffBarWindowSettings.Scale;
+        private double scale = SettingsManager.BuffWindowSettings.Scale;
         public double Scale
         {
             get
@@ -46,7 +46,7 @@ namespace TCC.ViewModels
                 //RaisePropertyChanged("IsTeraOnTop");
                 if (WindowManager.IsTccVisible)
                 {
-                    WindowManager.BuffBar.RefreshTopmost();
+                    WindowManager.BuffWindow.RefreshTopmost();
                 }
             };
         }

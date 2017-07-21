@@ -6,7 +6,7 @@ using TCC.Data;
 
 namespace TCC.Converters
 {
-    public class TypeToCursorConverter : IValueConverter
+    public class MessageTypeToCursor : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

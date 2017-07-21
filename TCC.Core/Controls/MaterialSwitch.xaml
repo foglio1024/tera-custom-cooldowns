@@ -9,7 +9,7 @@
     <Grid Grid.Column="1" VerticalAlignment="Center" Width="50" Height="50" Margin="0,0,0,0" Cursor="Hand">
         <Rectangle x:Name="switchBack" Width="40" Height="14" RadiusX="7" RadiusY="7" Fill="Black" Opacity=".35">
         </Rectangle>
-        <Ellipse x:Name="switchHead" Fill="{StaticResource bgColor}" HorizontalAlignment="Center" Width="20" Height="20" Margin="-20,0,0,0">
+        <Ellipse x:Name="switchHead" Fill="{StaticResource Colors.App.DefaultBackground}" HorizontalAlignment="Center" Width="20" Height="20" Margin="-20,0,0,0">
             <Ellipse.Effect>
                 <DropShadowEffect ShadowDepth="2" Opacity=".55" BlurRadius="6"/>
             </Ellipse.Effect>

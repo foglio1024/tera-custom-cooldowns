@@ -22,7 +22,7 @@
         ResizeMode="NoResize" 
         >
     <w:TccWindow.Resources>
-        <Style x:Key="hpBarNumber" TargetType="TextBlock" BasedOn="{StaticResource text1}">
+        <Style x:Key="hpBarNumber" TargetType="TextBlock" BasedOn="{StaticResource Styles.DefaultText}">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="TextAlignment" Value="Right"/>
@@ -57,11 +57,10 @@
 
         <converters:LaurelImageConverter x:Key="laurelConv"/>
         <converters:CombatToColorConverter x:Key="combatConv"/>
-        <converters:HPbarColorConverter x:Key="hpDebuffColConv"/>
+        <converters:HPbarColorConverter x:Key="Converters.DebuffStatusToHpColor"/>
         <converters:StaminaBarVisibilityConverter x:Key="staminaVisConv"/>
         <converters:StaminaBarColorConverter x:Key="staminaColConv"/>
         <converters:FactorFromValuesConverter x:Key="factorFromValConv"/>
-        <converters:HP_PercentageConverter x:Key="hpPercConv"/>
         <converters:ClassToStaminaLabelConverter x:Key="staminaLabelConv"/>
     </w:TccWindow.Resources>
     <w:TccWindow.DataContext>
@@ -82,7 +81,7 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Border Margin="0" Style="{StaticResource border}"  HorizontalAlignment="Stretch"  Grid.ColumnSpan="3"/>
+                <Border Margin="0" Style="{StaticResource Styles.DefaultBorder}"  HorizontalAlignment="Stretch"  Grid.ColumnSpan="3"/>
                 <Rectangle Width="21" Height="21" Margin="0,0,3,0" Grid.Column="2" 
                        Fill="{Binding IsInCombat, Converter={StaticResource combatConv}}" VerticalAlignment="Center"  HorizontalAlignment="Center">
                     <Rectangle.OpacityMask>
@@ -107,7 +106,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Border Style="{StaticResource border}" Grid.ColumnSpan="2" Width="Auto" Height="Auto" Margin="0,5"></Border>
+                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.ColumnSpan="2" Width="Auto" Height="Auto" Margin="0,5"></Border>
                 <Grid Name="imageGrid" Margin="0,0" Width="80" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0">
                     <Rectangle Name="laurel" Width="74" Height="80" Margin="0,-8,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Rectangle.Fill>
@@ -119,7 +118,7 @@
                     </Rectangle>
                     <Rectangle Name="classIcon" Fill="White" Width="50" Height="50" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Rectangle.OpacityMask>
-                            <ImageBrush ImageSource="{Binding Class, Converter={StaticResource classConv}}"/>
+                            <ImageBrush ImageSource="{Binding Class, Converter={StaticResource Converters.ClassToImage}}"/>
                         </Rectangle.OpacityMask>
                         <Rectangle.Effect>
                             <DropShadowEffect Color="#ff20f0ff" BlurRadius="7" ShadowDepth="0"/>
@@ -139,7 +138,7 @@
 
                     <controls:GenericGauge Height="14" 
                                        Margin="2" 
-                                       BarColor="{Binding IsDebuffed, Converter={StaticResource hpDebuffColConv}}"
+                                       BarColor="{Binding IsDebuffed, Converter={StaticResource Converters.DebuffStatusToHpColor}}"
                                        GaugeName="HP" 
                                        ShowPercentage="True" 
                                        ShowName="True" 

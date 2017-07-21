@@ -23,7 +23,7 @@
 
 
 
-        <Border Style="{StaticResource border}" 
+        <Border Style="{StaticResource Styles.DefaultBorder}" 
                 Opacity="{Binding Buff.Seconds}"
                 BorderThickness="0"
                 Background="#ffbd3d"
