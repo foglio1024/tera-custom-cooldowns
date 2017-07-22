@@ -67,7 +67,7 @@ namespace TCC.Converters
                 case ChatChannel.Error:
                     return (SolidColorBrush)App.Current.FindResource("Colors.Chat.System.Error");
                 case ChatChannel.Group:
-                    return (SolidColorBrush)App.Current.FindResource("Colors.Chat.System.Class");
+                    return (SolidColorBrush)App.Current.FindResource("Colors.Chat.System.Group");
                 case ChatChannel.GuildNotice:
                     return (SolidColorBrush)App.Current.FindResource("Colors.Chat.Guild");
                 case ChatChannel.Deathmatch:
@@ -75,7 +75,7 @@ namespace TCC.Converters
                 case ChatChannel.ContractAlert:
                     return (SolidColorBrush)App.Current.FindResource("Colors.Chat.System.ContractAlert");
                 case ChatChannel.GroupAlerts:
-                    return (SolidColorBrush)App.Current.FindResource("Colors.Chat.System.ClassAlert");
+                    return (SolidColorBrush)App.Current.FindResource("Colors.Chat.System.GroupAlert");
                 case ChatChannel.Loot:
                     return (SolidColorBrush)App.Current.FindResource("Colors.Chat.System.Loot");
                 case ChatChannel.Exp:
