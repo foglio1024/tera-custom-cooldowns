@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -36,6 +37,13 @@ namespace TCC
             {
                 WindowManager.TrayIcon.Dispose();
             }
+        }
+
+        internal static void Restart()
+        {
+            SettingsManager.SaveSettings();
+            Process.Start("TCC.exe");
+            CloseApp();
         }
 
         private void OnStartup(object sender, StartupEventArgs ev)
