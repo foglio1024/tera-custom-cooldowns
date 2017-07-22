@@ -37,17 +37,17 @@ namespace TCC.Converters
 namespace TCC.Windows
 {
 
-    public partial class BossGageWindow : TccWindow
+    public partial class BossWindow : TccWindow
     {
 
-        public BossGageWindow()
+        public BossWindow()
         {
             InitializeComponent();
 
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            InitWindow(SettingsManager.BossGaugeWindowSettings);
+            InitWindow(SettingsManager.BossWindowSettings);
         }
 
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
