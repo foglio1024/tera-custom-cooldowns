@@ -21,7 +21,26 @@ namespace TCC
         public bool AutoDim;
         public double DimOpacity;
         public bool ShowAlways;
-        internal bool AllowTransparency;
+        public bool AllowTransparency;
+        public bool Enabled;
+
+        public XElement ToXElement(string name)
+        {
+            var xe = new XElement("WindowSetting");
+            xe.Add(new XAttribute("Name", name));
+            xe.Add(new XAttribute(nameof(X), X));
+            xe.Add(new XAttribute(nameof(Y), Y));
+            xe.Add(new XAttribute(nameof(Visibility), Visibility));
+            xe.Add(new XAttribute(nameof(ClickThru), ClickThru));
+            xe.Add(new XAttribute(nameof(Scale), Scale));
+            xe.Add(new XAttribute(nameof(AutoDim), AutoDim));
+            xe.Add(new XAttribute(nameof(DimOpacity), DimOpacity));
+            xe.Add(new XAttribute(nameof(ShowAlways), ShowAlways));
+            xe.Add(new XAttribute(nameof(AllowTransparency), AllowTransparency));
+            xe.Add(new XAttribute(nameof(Enabled), Enabled));
+            return xe;
+        }
+
     }
     public static class SettingsManager
     {
@@ -37,7 +56,8 @@ namespace TCC
             AutoDim = true,
             DimOpacity = .2,
             ShowAlways = false,
-            AllowTransparency = true
+            AllowTransparency = true,
+            Enabled = true
         };
         public static WindowSettings CooldownWindowSettings = new WindowSettings()
         {
@@ -49,10 +69,11 @@ namespace TCC
             AutoDim = true,
             DimOpacity = .2,
             ShowAlways = false,
-            AllowTransparency = true
+            AllowTransparency = true,
+            Enabled = true
 
         };
-        public static WindowSettings BossGaugeWindowSettings = new WindowSettings()
+        public static WindowSettings BossWindowSettings = new WindowSettings()
         {
             X = _screen.Width / 2 - 200,
             Y = 20,
@@ -62,10 +83,11 @@ namespace TCC
             AutoDim = true,
             DimOpacity = .2,
             ShowAlways = false,
-            AllowTransparency = true
+            AllowTransparency = true,
+            Enabled = true
 
         };
-        public static WindowSettings BuffBarWindowSettings = new WindowSettings()
+        public static WindowSettings BuffWindowSettings = new WindowSettings()
         {
             X = _screen.Width - 1000,
             Y = _screen.Height / 1.5,
@@ -75,7 +97,8 @@ namespace TCC
             AutoDim = true,
             DimOpacity = .2,
             ShowAlways = false,
-            AllowTransparency = true
+            AllowTransparency = true,
+            Enabled = true
 
         };
         public static WindowSettings CharacterWindowSettings = new WindowSettings()
@@ -88,7 +111,8 @@ namespace TCC
             AutoDim = true,
             DimOpacity = .2,
             ShowAlways = false,
-            AllowTransparency = true
+            AllowTransparency = true,
+            Enabled = true
 
         };
         public static WindowSettings ClassWindowSettings = new WindowSettings()
@@ -101,7 +125,8 @@ namespace TCC
             AutoDim = true,
             DimOpacity = .2,
             ShowAlways = false,
-            AllowTransparency = true
+            AllowTransparency = true,
+            Enabled = true
 
         };
         public static WindowSettings ChatWindowSettings = new WindowSettings()
@@ -114,7 +139,8 @@ namespace TCC
             AutoDim = false,
             DimOpacity = 1,
             ShowAlways = false,
-            AllowTransparency = true
+            AllowTransparency = true,
+            Enabled = true
 
         };
 
@@ -142,7 +168,7 @@ namespace TCC
                 {
                     if (ws.Attribute("Name").Value == "BossWindow")
                     {
-                        ParseWindowSettings(BossGaugeWindowSettings, ws);
+                        ParseWindowSettings(BossWindowSettings, ws);
                     }
                     else if (ws.Attribute("Name").Value == "CharacterWindow")
                     {
@@ -154,7 +180,7 @@ namespace TCC
                     }
                     else if (ws.Attribute("Name").Value == "BuffWindow")
                     {
-                        ParseWindowSettings(BuffBarWindowSettings, ws);
+                        ParseWindowSettings(BuffWindowSettings, ws);
                     }
                     else if (ws.Attribute("Name").Value == "GroupWindow")
                     {
@@ -300,103 +326,36 @@ namespace TCC
                 w.AllowTransparency = Boolean.Parse(ws.Attribute("AllowTransparency").Value);
             }
             catch (Exception) { }
+            try
+            {
+                w.Enabled = Boolean.Parse(ws.Attribute("Enabled").Value);
+            }
+            catch (Exception) { }
         }
-
         public static void SaveSettings()
         {
             var xSettings = new XElement("Settings",
                 new XElement("WindowSettings",
-                    new XElement("WindowSetting",
-                        new XAttribute("Name", "BossWindow"),
-                        new XAttribute("X", BossGaugeWindowSettings.X),
-                        new XAttribute("Y", BossGaugeWindowSettings.Y),
-                        new XAttribute("ClickThru", BossGaugeWindowSettings.ClickThru),
-                        new XAttribute("Visibility", BossGaugeWindowSettings.Visibility),
-                        new XAttribute("Scale", BossGaugeWindowSettings.Scale),
-                        new XAttribute("AutoDim", BossGaugeWindowSettings.AutoDim),
-                        new XAttribute("DimOpacity", BossGaugeWindowSettings.DimOpacity),
-                        new XAttribute("AllowTransparency", BossGaugeWindowSettings.AllowTransparency)
-                        ),
-                    new XElement("WindowSetting",
-                        new XAttribute("Name", "BuffWindow"),
-                        new XAttribute("X", BuffBarWindowSettings.X),
-                        new XAttribute("Y", BuffBarWindowSettings.Y),
-                        new XAttribute("ClickThru", BuffBarWindowSettings.ClickThru),
-                        new XAttribute("Visibility", BuffBarWindowSettings.Visibility),
-                        new XAttribute("Scale", BuffBarWindowSettings.Scale),
-                        new XAttribute("AutoDim", BuffBarWindowSettings.AutoDim),
-                        new XAttribute("DimOpacity", BuffBarWindowSettings.DimOpacity)
-                        ),
-                    new XElement("WindowSetting",
-                        new XAttribute("Name", "CharacterWindow"),
-                        new XAttribute("X", CharacterWindowSettings.X),
-                        new XAttribute("Y", CharacterWindowSettings.Y),
-                        new XAttribute("ClickThru", CharacterWindowSettings.ClickThru),
-                        new XAttribute("Visibility", CharacterWindowSettings.Visibility),
-                        new XAttribute("Scale", CharacterWindowSettings.Scale),
-                        new XAttribute("AutoDim", CharacterWindowSettings.AutoDim),
-                        new XAttribute("DimOpacity", CharacterWindowSettings.DimOpacity),
-                        new XAttribute("AllowTransparency", CharacterWindowSettings.AllowTransparency)
-                        ),
-                    new XElement("WindowSetting",
-                        new XAttribute("Name", "CooldownWindow"),
-                        new XAttribute("X", CooldownWindowSettings.X),
-                        new XAttribute("Y", CooldownWindowSettings.Y),
-                        new XAttribute("ClickThru", CooldownWindowSettings.ClickThru),
-                        new XAttribute("Visibility", CooldownWindowSettings.Visibility),
-                        new XAttribute("Scale", CooldownWindowSettings.Scale),
-                        new XAttribute("AutoDim", CooldownWindowSettings.AutoDim),
-                        new XAttribute("DimOpacity", CooldownWindowSettings.DimOpacity),
-                        new XAttribute("AllowTransparency", CooldownWindowSettings.AllowTransparency)
-
-                        ),
-                    new XElement("WindowSetting",
-                        new XAttribute("Name", "GroupWindow"),
-                        new XAttribute("X", GroupWindowSettings.X),
-                        new XAttribute("Y", GroupWindowSettings.Y),
-                        new XAttribute("ClickThru", GroupWindowSettings.ClickThru),
-                        new XAttribute("Visibility", GroupWindowSettings.Visibility),
-                        new XAttribute("Scale", GroupWindowSettings.Scale),
-                        new XAttribute("AutoDim", GroupWindowSettings.AutoDim),
-                        new XAttribute("DimOpacity", GroupWindowSettings.DimOpacity)
-                        ),
-                    new XElement("WindowSetting",
-                        new XAttribute("Name", "ClassWindow"),
-                        new XAttribute("X", ClassWindowSettings.X),
-                        new XAttribute("Y", ClassWindowSettings.Y),
-                        new XAttribute("ClickThru", ClassWindowSettings.ClickThru),
-                        new XAttribute("Visibility", ClassWindowSettings.Visibility),
-                        new XAttribute("Scale", ClassWindowSettings.Scale),
-                        new XAttribute("AutoDim", ClassWindowSettings.AutoDim),
-                        new XAttribute("DimOpacity", ClassWindowSettings.DimOpacity)
-                        ),
-                        new XElement("WindowSetting",
-                        new XAttribute("Name", "ChatWindow"),
-                        new XAttribute("X", ChatWindowSettings.X),
-                        new XAttribute("Y", ChatWindowSettings.Y),
-                        new XAttribute("ClickThru", ChatWindowSettings.ClickThru),
-                        new XAttribute("Visibility", ChatWindowSettings.Visibility),
-                        new XAttribute("Scale", ChatWindowSettings.Scale),
-                        new XAttribute("AutoDim", ChatWindowSettings.AutoDim),
-                        new XAttribute("DimOpacity", ChatWindowSettings.DimOpacity),
-                        new XAttribute("ShowAlways", ChatWindowSettings.ShowAlways),
-                        new XAttribute("AllowTransparency", ChatWindowSettings.AllowTransparency)
-
-                        )
+                    BossWindowSettings.ToXElement("BossWindow"),
+                    BuffWindowSettings.ToXElement("BuffWindow"),
+                    CharacterWindowSettings.ToXElement("CharacterWindow"),
+                    CooldownWindowSettings.ToXElement("CooldownWindow"),
+                    GroupWindowSettings.ToXElement("GroupWindow"),
+                    ClassWindowSettings.ToXElement("ClassWindow"),
+                    ChatWindowSettings.ToXElement("ChatWindow")
                     //add window here
                     ),
-
                 new XElement("OtherSettings",
-                new XAttribute("IgnoreMeInGroupWindow", IgnoreMeInGroupWindow),
-                new XAttribute("IgnoreMyBuffsInGroupWindow", IgnoreMyBuffsInGroupWindow),
-                new XAttribute("IgnoreGroupBuffs", IgnoreGroupBuffs),
-                new XAttribute("IgnoreAllBuffsInGroupWindow", IgnoreAllBuffsInGroupWindow),
-                new XAttribute("IgnoreRaidAbnormalitiesInGroupWindow", IgnoreRaidAbnormalitiesInGroupWindow),
-                new XAttribute("BuffsDirection", BuffsDirection),
-                new XAttribute("ClassWindowOn", ClassWindowOn),
-                new XAttribute("ClickThruWhenDim", ClickThruWhenDim),
-                new XAttribute("MaxMessages", MaxMessages),
-                new XAttribute("SpamThreshold", SpamThreshold),
+                new XAttribute(nameof(IgnoreMeInGroupWindow), IgnoreMeInGroupWindow),
+                new XAttribute(nameof(IgnoreMyBuffsInGroupWindow), IgnoreMyBuffsInGroupWindow),
+                new XAttribute(nameof(IgnoreGroupBuffs), IgnoreGroupBuffs),
+                new XAttribute(nameof(IgnoreAllBuffsInGroupWindow), IgnoreAllBuffsInGroupWindow),
+                new XAttribute(nameof(IgnoreRaidAbnormalitiesInGroupWindow), IgnoreRaidAbnormalitiesInGroupWindow),
+                new XAttribute(nameof(BuffsDirection), BuffsDirection),
+                new XAttribute(nameof(ClassWindowOn), ClassWindowOn),
+                new XAttribute(nameof(ClickThruWhenDim), ClickThruWhenDim),
+                new XAttribute(nameof(MaxMessages), MaxMessages),
+                new XAttribute(nameof(SpamThreshold), SpamThreshold),
                 new XAttribute(nameof(ShowChannel), ShowChannel),
                 new XAttribute(nameof(ShowTimestamp), ShowTimestamp),
                 new XAttribute(nameof(ShowOnlyBosses), ShowOnlyBosses)
