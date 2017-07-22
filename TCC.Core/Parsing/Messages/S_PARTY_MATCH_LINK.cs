@@ -24,7 +24,7 @@ namespace TCC.Parsing.Messages
             Name = reader.ReadTeraString();
 
             reader.BaseStream.Position = msgOffset - 4;
-            Message = ChatMessage.ReplaceGtLt(reader.ReadTeraString());
+            Message = ChatMessage.ReplaceEscapes(reader.ReadTeraString());
         }
 
         public int Id { get; private set; }

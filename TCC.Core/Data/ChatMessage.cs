@@ -165,7 +165,7 @@ namespace TCC.Data
                 switch (ch)
                 {
                     case ChatChannel.Greet:
-                        ParseDirectMessage(ReplaceGtLt(RawMessage), ch);
+                        ParseDirectMessage(ReplaceEscapes(RawMessage), ch);
                         break;
                     case ChatChannel.Emote:
                         ParseEmoteMessage(msg);
@@ -185,7 +185,7 @@ namespace TCC.Data
             try
             {
                 var prm = SplitDirectives(systemMessage);
-                var txt = ReplaceGtLt(m.Message);
+                var txt = ReplaceEscapes(m.Message);
                 txt = txt.Replace("<BR>", " ");
                 if (prm == null)
                 {
@@ -355,10 +355,12 @@ namespace TCC.Data
         {
             _dispatcher.Invoke(() => Pieces.Remove(mp));
         }
-        public static string ReplaceGtLt(string msg, string left = "<", string right = ">")
+        public static string ReplaceEscapes(string msg, string left = "<", string right = ">")
         {
             msg = msg.Replace("&lt;", left);
             msg = msg.Replace("&gt;", right);
+            msg = msg.Replace("&#xA", "\n");
+            msg = msg.Replace("&quot;", "\"");
             return msg;
         }
         public static void SetChannel(ChatMessage msg, ChatChannel ch)
@@ -512,10 +514,10 @@ namespace TCC.Data
                     {
                         if (content.ToString() != "")
                         {
-                            AddPiece(new MessagePiece(ReplaceGtLt(content.ToString()), MessagePieceType.Simple, Channel));
+                            AddPiece(new MessagePiece(ReplaceEscapes(content.ToString()), MessagePieceType.Simple, Channel));
                             content = new StringBuilder("");
                         }
-                        AddPiece(new MessagePiece(ReplaceGtLt(item), MessagePieceType.Url, Channel, "7289da"));
+                        AddPiece(new MessagePiece(ReplaceEscapes(item), MessagePieceType.Url, Channel, "7289da"));
                     }
                     else
                     {
@@ -524,7 +526,7 @@ namespace TCC.Data
                 }
                 if (content.ToString() != "")
                 {
-                    AddPiece(new MessagePiece(ReplaceGtLt(content.ToString()), MessagePieceType.Simple, Channel));
+                    AddPiece(new MessagePiece(ReplaceEscapes(content.ToString()), MessagePieceType.Simple, Channel));
                 }
 
                 //cut message
@@ -602,18 +604,18 @@ namespace TCC.Data
 
             var text = a.Substring(textStart, textEnd - textStart);
 
-            var result = new MessagePiece(ReplaceGtLt(text))
+            var result = new MessagePiece(ReplaceEscapes(text))
             {
                 ItemId = id,
                 ItemUid = uid,
                 OwnerName = owner,
                 Type = MessagePieceType.Item
             };
-            ItemsDatabase.Items.TryGetValue(id, out Item i);
-            if (i != null)
-            {
-                result.BoundType = i.BoundType;
-            }
+            //ItemsDatabase.Items.TryGetValue(id, out Item i);
+            //if (i != null)
+            //{
+            //    result.BoundType = i.BoundType;
+            //}
             result.RawLink = linkData;
             return result;
         }
@@ -627,7 +629,7 @@ namespace TCC.Data
             var textEnd = a.IndexOf('<', textStart);
 
             var text = a.Substring(textStart, textEnd - textStart);
-            text = ReplaceGtLt(text);
+            text = ReplaceEscapes(text);
 
             var result = new MessagePiece(text)
             {
@@ -658,7 +660,7 @@ namespace TCC.Data
             var textStart = a.IndexOf('>', a.IndexOf("#####")) + 1;
             var textEnd = a.IndexOf('<', textStart);
             var text = a.Substring(textStart, textEnd - textStart); //get actual map name from database
-            text = ReplaceGtLt(text);
+            text = ReplaceEscapes(text);
 
             var world = MapDatabase.Worlds[worldId];
             var guard = world.Guards[guardId];
@@ -741,13 +743,13 @@ namespace TCC.Data
                 rawLink.Append("@" + username);
             }
             MessagePiece mp = new MessagePiece(id.ToString());
-            if (ItemsDatabase.Items.TryGetValue(id, out Item i))
+            if (SessionManager.ItemsDatabase.Items.TryGetValue(id, out Item i))
             {
                 var txt = String.Format("<{0}>", i.Name);
                 mp = new MessagePiece(txt)
                 {
                     Type = MessagePieceType.Item,
-                    BoundType = i.BoundType,
+                    //BoundType = i.BoundType,
                     ItemId = id,
                     ItemUid = uid,
                     OwnerName = username,
