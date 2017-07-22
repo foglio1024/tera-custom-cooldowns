@@ -21,10 +21,7 @@ namespace TCC.Data.Databases
             ParseDoc();
             MonstersDoc = null;
         }
-        public void Populate(string region)
-        {
 
-        }
         void LoadDoc(string region)
         {
             MonstersDoc = XDocument.Load(Environment.CurrentDirectory + @"/resources/data/monsters/monsters-" + region + ".xml");
