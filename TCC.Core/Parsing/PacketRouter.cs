@@ -188,10 +188,14 @@ namespace TCC.Parsing
             {
                 BossGageWindowViewModel.Instance.UnsetBossTarget(p.EntityId);
             }
+            var b = BossGageWindowViewModel.Instance.CurrentNPCs.FirstOrDefault(x => x.EntityId == p.EntityId);
+            if (b != null && b.IsBoss && b.Visible == System.Windows.Visibility.Visible) GroupWindowViewModel.Instance.SetAggro(p);
+
         }
         public static void HandleUserEffect(S_USER_EFFECT p)
         {
             BossGageWindowViewModel.Instance.SetBossAggro(p.Source, p.Circle, p.User);
+            GroupWindowViewModel.Instance.SetAggro(p);
         }
 
         public static void HandleCharList(S_GET_USER_LIST p)
@@ -219,6 +223,7 @@ namespace TCC.Parsing
             SessionManager.Logged = true;
             SessionManager.Encounter = false;
             SessionManager.CurrentPlayer.Class = p.CharacterClass;
+            MessageFactory.Update();
             SessionManager.CurrentPlayer.EntityId = p.entityId;
             SessionManager.CurrentPlayer.PlayerId = p.PlayerId;
             SessionManager.CurrentPlayer.ServerId = p.ServerId;
@@ -264,6 +269,7 @@ namespace TCC.Parsing
             SessionManager.LoadingScreen = true;
             SessionManager.Encounter = false;
             GroupWindowViewModel.Instance.ClearAllAbnormalities();
+            GroupWindowViewModel.Instance.ResetAggro();
             BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
             BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.None;
         }
@@ -287,9 +293,7 @@ namespace TCC.Parsing
 
         public static void HandleSpawnMe(S_SPAWN_ME p)
         {
-            //WindowManager.ShowWindow(WindowManager.CharacterWindow);
             EntitiesManager.ClearNPC();
-            EntitiesManager.ClearUsers();
             System.Timers.Timer t = new System.Timers.Timer(2000);
             t.Elapsed += (s, ev) =>
             {
@@ -305,7 +309,6 @@ namespace TCC.Parsing
         }
         public static void HandleSpawnUser(S_SPAWN_USER p)
         {
-            EntitiesManager.SpawnUser(p.EntityId, p.Name);
         }
 
         public static void HandlePartyMemberBuffUpdate(S_PARTY_MEMBER_BUFF_UPDATE x)
@@ -545,14 +548,6 @@ namespace TCC.Parsing
             }
         }
 
-        public static void HandleShowItemTooltipEx(C_SHOW_ITEM_TOOLTIP_EX x)
-        {
-        }
-        public static void HandleRequestNondbItemInfo(C_REQUEST_NONDB_ITEM_INFO x)
-        {
-        }
-
-
         public static void HandleDespawnNpc(S_DESPAWN_NPC p)
         {
             EntitiesManager.DespawnNPC(p.Target);
@@ -561,7 +556,6 @@ namespace TCC.Parsing
 
         public static void HandleDespawnUser(S_DESPAWN_USER p)
         {
-            EntitiesManager.DespawnUser(p.EntityId);
         }
 
         public static void HandleAbnormalityBegin(S_ABNORMALITY_BEGIN p)
