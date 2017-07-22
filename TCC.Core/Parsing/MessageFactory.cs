@@ -40,9 +40,9 @@ namespace TCC.Parsing
             { "C_PLAYER_LOCATION" , Contructor<Func<TeraMessageReader,C_PLAYER_LOCATION>>() },
             { "S_USER_EFFECT" , Contructor<Func<TeraMessageReader,S_USER_EFFECT>>() },
             { "S_LOAD_TOPO" , Contructor<Func<TeraMessageReader,S_LOAD_TOPO>>() },
-            { "C_LOAD_TOPO_FIN" , Contructor<Func<TeraMessageReader,C_LOAD_TOPO_FIN>>() },
-            {"S_SPAWN_USER", Contructor<Func<TeraMessageReader, S_SPAWN_USER>>() },
-            {"S_DESPAWN_USER", Contructor<Func<TeraMessageReader, S_DESPAWN_USER>>() },
+            //{ "C_LOAD_TOPO_FIN" , Contructor<Func<TeraMessageReader,C_LOAD_TOPO_FIN>>() },
+            //{"S_SPAWN_USER", Contructor<Func<TeraMessageReader, S_SPAWN_USER>>() },
+            //{"S_DESPAWN_USER", Contructor<Func<TeraMessageReader, S_DESPAWN_USER>>() },
             {"S_PARTY_MEMBER_LIST", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_LIST>>() },
             {"S_LOGOUT_PARTY_MEMBER", Contructor<Func<TeraMessageReader, S_LOGOUT_PARTY_MEMBER>>() },
             { "S_LEAVE_PARTY_MEMBER", Contructor<Func<TeraMessageReader, S_LEAVE_PARTY_MEMBER>>() },
@@ -64,10 +64,7 @@ namespace TCC.Parsing
             {"S_PARTY_MEMBER_ABNORMAL_CLEAR", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_ABNORMAL_CLEAR>>() },
             {"S_CHANGE_PARTY_MANAGER", Contructor<Func<TeraMessageReader, S_CHANGE_PARTY_MANAGER>>() },
             {"S_WEAK_POINT", Contructor<Func<TeraMessageReader, S_WEAK_POINT>>() },
-            //{"S_EACH_SKILL_RESULT", Contructor<Func<TeraMessageReader, S_EACH_SKILL_RESULT>>() },
             {"S_CHAT", Contructor<Func<TeraMessageReader, S_CHAT>>() },
-            {"C_SHOW_ITEM_TOOLTIP_EX", Contructor<Func<TeraMessageReader, C_SHOW_ITEM_TOOLTIP_EX>>() },
-            {"C_REQUEST_NONDB_ITEM_INFO", Contructor<Func<TeraMessageReader, C_REQUEST_NONDB_ITEM_INFO>>() },
             {"S_WHISPER", Contructor<Func<TeraMessageReader, S_WHISPER>>() },
             {"S_PRIVATE_CHAT", Contructor<Func<TeraMessageReader, S_PRIVATE_CHAT>>() },
             {"S_JOIN_PRIVATE_CHANNEL", Contructor<Func<TeraMessageReader, S_JOIN_PRIVATE_CHANNEL>>() },
@@ -89,36 +86,39 @@ namespace TCC.Parsing
         };
 
         private static Dictionary<Type, Delegate> MainProcessor = new Dictionary<Type, Delegate>();
-        private static readonly Dictionary<Type, Delegate> MessageToProcessing = new Dictionary<Type, Delegate>
+        private static readonly Dictionary<Type, Delegate> Base = new Dictionary<Type, Delegate>()
         {
             {typeof(S_LOGIN), new Action<S_LOGIN>(x => PacketProcessor.HandleLogin(x)) },
-            {typeof(S_START_COOLTIME_SKILL), new Action<S_START_COOLTIME_SKILL>(x => PacketProcessor.HandleNewSkillCooldown(x)) },
-            {typeof(S_DECREASE_COOLTIME_SKILL), new Action<S_DECREASE_COOLTIME_SKILL>(x => PacketProcessor.HandleDecreaseSkillCooldown(x)) },
-            {typeof(S_START_COOLTIME_ITEM), new Action<S_START_COOLTIME_ITEM>(x => PacketProcessor.HandleNewItemCooldown(x)) },
-            {typeof(S_PLAYER_CHANGE_MP), new Action<S_PLAYER_CHANGE_MP>(x => PacketProcessor.HandlePlayerChangeMP(x)) },
-            {typeof(S_CREATURE_CHANGE_HP), new Action<S_CREATURE_CHANGE_HP>(x => PacketProcessor.HandleCreatureChangeHP(x)) },
-            {typeof(S_PLAYER_CHANGE_STAMINA), new Action<S_PLAYER_CHANGE_STAMINA>(x => PacketProcessor.HandlePlayerChangeStamina(x)) },
-            {typeof(S_PLAYER_CHANGE_FLIGHT_ENERGY), new Action<S_PLAYER_CHANGE_FLIGHT_ENERGY>(x => PacketProcessor.HandlePlayerChangeFlightEnergy(x)) },
-            {typeof(S_PLAYER_STAT_UPDATE), new Action<S_PLAYER_STAT_UPDATE>(x => PacketProcessor.HandlePlayerStatUpdate(x)) },
-            {typeof(S_USER_STATUS), new Action<S_USER_STATUS>(x => PacketProcessor.HandleUserStatusChanged(x)) },
-            {typeof(S_SPAWN_NPC), new Action<S_SPAWN_NPC>(x => PacketProcessor.HandleSpawnNpc(x)) },
-            {typeof(S_DESPAWN_NPC), new Action<S_DESPAWN_NPC>(x => PacketProcessor.HandleDespawnNpc(x)) },
-            {typeof(S_NPC_STATUS), new Action<S_NPC_STATUS>(x => PacketProcessor.HandleNpcStatusChanged(x)) },
-            {typeof(S_ABNORMALITY_BEGIN), new Action<S_ABNORMALITY_BEGIN>(x => PacketProcessor.HandleAbnormalityBegin(x)) },
-            {typeof(S_ABNORMALITY_REFRESH), new Action<S_ABNORMALITY_REFRESH>(x => PacketProcessor.HandleAbnormalityRefresh(x)) },
-            {typeof(S_ABNORMALITY_END), new Action<S_ABNORMALITY_END>(x => PacketProcessor.HandleAbnormalityEnd(x)) },
+            {typeof(S_LOAD_TOPO), new Action<S_LOAD_TOPO>(x => PacketProcessor.HandleLoadTopo(x)) },
             {typeof(S_GET_USER_LIST), new Action<S_GET_USER_LIST>(x => PacketProcessor.HandleCharList(x)) },
             {typeof(S_SPAWN_ME), new Action<S_SPAWN_ME>(x => PacketProcessor.HandleSpawnMe(x)) },
             {typeof(S_RETURN_TO_LOBBY), new Action<S_RETURN_TO_LOBBY>(x => PacketProcessor.HandleReturnToLobby(x)) },
-            {typeof(S_BOSS_GAGE_INFO), new Action<S_BOSS_GAGE_INFO>(x => PacketProcessor.HandleGageReceived(x)) },
-            {typeof(C_PLAYER_LOCATION), new Action<C_PLAYER_LOCATION>(x => PacketProcessor.HandlePlayerLocation(x)) },
-            {typeof(S_USER_EFFECT), new Action<S_USER_EFFECT>(x => PacketProcessor.HandleUserEffect(x)) },
-            {typeof(S_LOAD_TOPO), new Action<S_LOAD_TOPO>(x => PacketProcessor.HandleLoadTopo(x)) },
-            {typeof(C_LOAD_TOPO_FIN), new Action<C_LOAD_TOPO_FIN>(x => PacketProcessor.HandleLoadTopoFin(x)) },
-            {typeof(S_SPAWN_USER), new Action<S_SPAWN_USER>(x => PacketProcessor.HandleSpawnUser(x)) },
-            {typeof(S_DESPAWN_USER), new Action<S_DESPAWN_USER>(x => PacketProcessor.HandleDespawnUser(x)) },
-            {typeof(S_PARTY_MEMBER_LIST), new Action<S_PARTY_MEMBER_LIST>(x => PacketProcessor.HandlePartyMemberList(x)) },
 
+            {typeof(S_SPAWN_NPC), new Action<S_SPAWN_NPC>(x => PacketProcessor.HandleSpawnNpc(x)) },
+            {typeof(S_PLAYER_CHANGE_MP), new Action<S_PLAYER_CHANGE_MP>(x => PacketProcessor.HandlePlayerChangeMP(x)) },
+            {typeof(S_CREATURE_CHANGE_HP), new Action<S_CREATURE_CHANGE_HP>(x => PacketProcessor.HandleCreatureChangeHP(x)) },
+            {typeof(S_PLAYER_CHANGE_STAMINA), new Action<S_PLAYER_CHANGE_STAMINA>(x => PacketProcessor.HandlePlayerChangeStamina(x)) },
+            {typeof(S_PLAYER_STAT_UPDATE), new Action<S_PLAYER_STAT_UPDATE>(x => PacketProcessor.HandlePlayerStatUpdate(x)) },
+            {typeof(S_USER_STATUS), new Action<S_USER_STATUS>(x => PacketProcessor.HandleUserStatusChanged(x)) },
+            {typeof(S_DESPAWN_NPC), new Action<S_DESPAWN_NPC>(x => PacketProcessor.HandleDespawnNpc(x)) },
+            {typeof(S_ABNORMALITY_BEGIN), new Action<S_ABNORMALITY_BEGIN>(x => PacketProcessor.HandleAbnormalityBegin(x)) },
+            {typeof(S_ABNORMALITY_REFRESH), new Action<S_ABNORMALITY_REFRESH>(x => PacketProcessor.HandleAbnormalityRefresh(x)) },
+            {typeof(S_ABNORMALITY_END), new Action<S_ABNORMALITY_END>(x => PacketProcessor.HandleAbnormalityEnd(x)) },
+            {typeof(S_USER_EFFECT), new Action<S_USER_EFFECT>(x => PacketProcessor.HandleUserEffect(x)) },
+
+            //{typeof(C_LOAD_TOPO_FIN), new Action<C_LOAD_TOPO_FIN>(x => PacketProcessor.HandleLoadTopoFin(x)) },
+
+        };
+        private static readonly Dictionary<Type, Delegate> CooldownWindow = new Dictionary<Type, Delegate>
+        {
+            {typeof(S_START_COOLTIME_SKILL), new Action<S_START_COOLTIME_SKILL>(x => PacketProcessor.HandleNewSkillCooldown(x)) },
+            {typeof(S_DECREASE_COOLTIME_SKILL), new Action<S_DECREASE_COOLTIME_SKILL>(x => PacketProcessor.HandleDecreaseSkillCooldown(x)) },
+            {typeof(S_START_COOLTIME_ITEM), new Action<S_START_COOLTIME_ITEM>(x => PacketProcessor.HandleNewItemCooldown(x)) },
+
+        };
+        private static readonly Dictionary<Type, Delegate> GroupWindow = new Dictionary<Type, Delegate>
+        {
+            {typeof(S_PARTY_MEMBER_LIST), new Action<S_PARTY_MEMBER_LIST>(x => PacketProcessor.HandlePartyMemberList(x)) },
             {typeof(S_LOGOUT_PARTY_MEMBER), new Action<S_LOGOUT_PARTY_MEMBER>(x => PacketProcessor.HandlePartyMemberLogout(x)) },
             {typeof(S_LEAVE_PARTY_MEMBER), new Action<S_LEAVE_PARTY_MEMBER>(x => PacketProcessor.HandlePartyMemberLeave(x)) },
             {typeof(S_LEAVE_PARTY), new Action<S_LEAVE_PARTY>(x => PacketProcessor.HandleLeaveParty(x)) },
@@ -141,11 +141,16 @@ namespace TCC.Parsing
             {typeof(S_PARTY_MEMBER_ABNORMAL_DEL), new Action<S_PARTY_MEMBER_ABNORMAL_DEL>(x => PacketProcessor.HandlePartyMemberAbnormalDel(x)) },
             {typeof(S_PARTY_MEMBER_ABNORMAL_CLEAR), new Action<S_PARTY_MEMBER_ABNORMAL_CLEAR>(x => PacketProcessor.HandlePartyMemberAbnormalClear(x)) },
             {typeof(S_CHANGE_PARTY_MANAGER), new Action<S_CHANGE_PARTY_MANAGER>(x => PacketProcessor.HandleChangeLeader(x)) },
-            {typeof(S_WEAK_POINT), new Action<S_WEAK_POINT>(x => PacketProcessor.HandleRunemark(x)) },
-            //{typeof(S_EACH_SKILL_RESULT), new Action<S_EACH_SKILL_RESULT>(x => PacketProcessor.HandleSkillResult(x)) },
+        };
+        private static readonly Dictionary<Type, Delegate> Phase1Only = new Dictionary<Type, Delegate>
+        {
+            {typeof(C_PLAYER_LOCATION), new Action<C_PLAYER_LOCATION>(x => PacketProcessor.HandlePlayerLocation(x)) },
+            {typeof(S_DUNGEON_EVENT_MESSAGE), new Action<S_DUNGEON_EVENT_MESSAGE>(x => PacketProcessor.HandleDungeonMessage(x)) },
+
+        };
+        private static readonly Dictionary<Type, Delegate> ChatWindow = new Dictionary<Type, Delegate>
+        {
             {typeof(S_CHAT), new Action<S_CHAT>(x => PacketProcessor.HandleChat(x)) },
-            {typeof(C_SHOW_ITEM_TOOLTIP_EX), new Action<C_SHOW_ITEM_TOOLTIP_EX>(x => PacketProcessor.HandleShowItemTooltipEx(x)) },
-            {typeof(C_REQUEST_NONDB_ITEM_INFO), new Action<C_REQUEST_NONDB_ITEM_INFO>(x => PacketProcessor.HandleRequestNondbItemInfo(x)) },
             {typeof(S_PRIVATE_CHAT), new Action<S_PRIVATE_CHAT>(x => PacketProcessor.HandlePrivateChat(x)) },
             {typeof(S_WHISPER), new Action<S_WHISPER>(x => PacketProcessor.HandleWhisper(x)) },
             {typeof(S_JOIN_PRIVATE_CHANNEL), new Action<S_JOIN_PRIVATE_CHANNEL>(x => PacketProcessor.HandleJoinPrivateChat(x)) },
@@ -162,15 +167,38 @@ namespace TCC.Parsing
             {typeof(S_PARTY_MATCH_LINK), new Action<S_PARTY_MATCH_LINK>(x => PacketProcessor.HandleLfgSpam(x)) },
             {typeof(S_PARTY_MEMBER_INFO), new Action<S_PARTY_MEMBER_INFO>(x => PacketProcessor.HandlePartyMemberInfo(x)) },
             {typeof(S_OTHER_USER_APPLY_PARTY), new Action<S_OTHER_USER_APPLY_PARTY>(x => PacketProcessor.HandleUserApplyToParty(x)) },
-            {typeof(S_DUNGEON_EVENT_MESSAGE), new Action<S_DUNGEON_EVENT_MESSAGE>(x => PacketProcessor.HandleDungeonMessage(x)) },
+        };
+        private static readonly Dictionary<Type, Delegate> ValkyrieOnly = new Dictionary<Type, Delegate>
+        {
+            {typeof(S_WEAK_POINT), new Action<S_WEAK_POINT>(x => PacketProcessor.HandleRunemark(x)) },
+        };
+        private static readonly Dictionary<Type, Delegate> CharacterWindow = new Dictionary<Type, Delegate>
+        {
+            {typeof(S_PLAYER_CHANGE_FLIGHT_ENERGY), new Action<S_PLAYER_CHANGE_FLIGHT_ENERGY>(x => PacketProcessor.HandlePlayerChangeFlightEnergy(x)) },
 
+        };
+        private static readonly Dictionary<Type, Delegate> BossWindow = new Dictionary<Type, Delegate>
+        {
+            {typeof(S_BOSS_GAGE_INFO), new Action<S_BOSS_GAGE_INFO>(x => PacketProcessor.HandleGageReceived(x)) },
+            {typeof(S_NPC_STATUS), new Action<S_NPC_STATUS>(x => PacketProcessor.HandleNpcStatusChanged(x)) },
         };
 
         public static void Init()
         {
             OpcodeNameToType.Clear();
             TeraMessages.ToList().ForEach(x => OpcodeNameToType[PacketProcessor.OpCodeNamer.GetCode(x.Key)] = x.Value);
-            MessageToProcessing.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            Update();
+        }
+        public static void Update()
+        {
+            MainProcessor.Clear();
+            Base.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            if (SettingsManager.ChatWindowSettings.Enabled) ChatWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            if (SettingsManager.CooldownWindowSettings.Enabled) CooldownWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            if (SettingsManager.BossWindowSettings.Enabled || SettingsManager.GroupWindowSettings.Enabled) BossWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            if (SettingsManager.GroupWindowSettings.Enabled) GroupWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            if(ViewModels.BossGageWindowViewModel.Instance.CurrentHHphase == HarrowholdPhase.Phase1) Phase1Only.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            if(SessionManager.CurrentPlayer.Class == Class.Glaiver) ValkyrieOnly.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
         }
         private static Tera.Game.Messages.ParsedMessage Instantiate(ushort opCode, TeraMessageReader reader)
         {
@@ -184,7 +212,6 @@ namespace TCC.Parsing
             var reader = new TeraMessageReader(message, PacketProcessor.OpCodeNamer, PacketProcessor.Version, PacketProcessor.SystemMessageNamer);
             return Instantiate(message.OpCode, reader);
         }
-
         public static TDelegate Contructor<TDelegate>() where TDelegate : class
         {
             var source = typeof(TDelegate).GetGenericArguments().Where(t => !t.IsGenericParameter).ToArray().Last();
@@ -199,7 +226,6 @@ namespace TCC.Parsing
             var parameters = ctrArgs.Select(Expression.Parameter).ToList();
             return Expression.Lambda(Expression.New(constructorInfo, parameters), parameters).Compile() as TDelegate;
         }
-
         public static bool Process(Tera.Game.Messages.ParsedMessage message)
         {
             Delegate type;
@@ -208,7 +234,5 @@ namespace TCC.Parsing
             type.DynamicInvoke(message);
             return true;
         }
-
-
     }
 }
