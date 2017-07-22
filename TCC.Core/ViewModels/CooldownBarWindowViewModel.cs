@@ -378,19 +378,17 @@ namespace TCC.ViewModels
             SecondarySkills = new SynchronizedObservableCollection<FixedSkillCooldown>(_dispatcher);
             MainSkills = new SynchronizedObservableCollection<FixedSkillCooldown>(_dispatcher);
             OtherSkills = new SynchronizedObservableCollection<SkillCooldown>(_dispatcher);
+
             WindowManager.TccVisibilityChanged += (s, ev) =>
             {
                 NotifyPropertyChanged("IsTeraOnTop");
                 if (IsTeraOnTop)
                 {
-                    WindowManager.CooldownWindow.Dispatcher.Invoke(() =>
-                    {
-                        WindowManager.CooldownWindow.Topmost = false;
-                        WindowManager.CooldownWindow.Topmost = true;
-                    });
+                    WindowManager.CooldownWindow.RefreshTopmost();
                 }
             };
-            
+
+
         }
     }
 }
