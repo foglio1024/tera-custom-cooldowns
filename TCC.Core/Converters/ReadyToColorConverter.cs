@@ -13,9 +13,9 @@ namespace TCC.Converters
                 case ReadyStatus.NotReady:
                     return App.Current.FindResource("Colors.App.HP");
                 case ReadyStatus.Ready:
-                    return App.Current.FindResource("Colors.Main.Green");
+                    return App.Current.FindResource("Colors.App.LightGreen");
                 case ReadyStatus.Undefined:
-                    return App.Current.FindResource("Colors.App.Silver");
+                    return App.Current.FindResource("Colors.App.Gold");
                 default:
                     return Brushes.Transparent;
             }
