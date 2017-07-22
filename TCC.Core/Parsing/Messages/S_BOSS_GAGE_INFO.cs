@@ -16,6 +16,7 @@ namespace TCC.Parsing.Messages
         public int HuntingZoneId { get => huntingZoneId; }
         public float CurrentHP { get => currHp; }
         public float MaxHP { get => maxHp; }
+        public ulong Target { get => targetId; }
 
         public S_BOSS_GAGE_INFO(TeraMessageReader reader) : base(reader)
         {
