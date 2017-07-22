@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using TCC.Data;
+using TCC.Data.Databases;
 using TCC.ViewModels;
 
 namespace TCC
@@ -39,20 +40,6 @@ namespace TCC
                 }
             }
         }
-
-        static bool harrowHoldMode = false;
-        public static bool HarrowholdMode
-        {
-            get => harrowHoldMode;
-            set
-            {
-                if (harrowHoldMode != value)
-                {
-                    harrowHoldMode = value;
-                    HhModeChanged?.Invoke(harrowHoldMode);
-                }
-            }
-        }
         
         private static bool encounter;
         public static bool Encounter
@@ -73,8 +60,7 @@ namespace TCC
         public static Player CurrentPlayer = new Player();
         public static List<Character> CurrentAccountCharacters;
 
-        public static event HarrowholdModeEventHandler HhModeChanged;
-
+        public static ItemsDatabase ItemsDatabase;
 
         public static void SetCombatStatus(ulong target, bool combat)
         {

@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace TCC.Data.Databases
 {
-    public static class ItemsDatabase
+    public class ItemsDatabase
     {
-        public static Dictionary<uint, Item> Items;
-        public static void Load()
+        public Dictionary<uint, Item> Items;
+        public ItemsDatabase(string lang)
         {
-            var f = File.OpenText(Environment.CurrentDirectory + "/resources/data/items.tsv");
+            var f = File.OpenText(Environment.CurrentDirectory + "/resources/data/items/items-"+ lang +".tsv");
             Items = new Dictionary<uint, Item>();
             while (true)
             {
@@ -24,20 +24,21 @@ namespace TCC.Data.Databases
 
                 var id = Convert.ToUInt32(s[0]);
                 var grad = Convert.ToUInt32(s[1]);
-                var bound = s[2];
-                var name = s[3];
+                //var bound = s[2];
+                var name = s[2];
 
                 //lazy raw overrides because BHS can't do stuff right .-.
 
-                if (bound == "EquipToItem") bound = "Equip";
-                if (bound == "none") bound = "None";
-                if (bound == "NONE") bound = "None";
-                if (bound == "EQUIP") bound = "Equip";
+                //if (bound == "EquipToItem") bound = "Equip";
+                //if (bound == "none") bound = "None";
+                //if (bound == "NONE") bound = "None";
+                //if (bound == "EQUIP") bound = "Equip";
 
-                var item = new Item(id, name, bound, grad);
+                var item = new Item(id, name, grad);
                 Items.Add(id, item);
             }
             Debug.WriteLine("Loaded {0} items.", Items.Count);
+
         }
     }
 
@@ -45,13 +46,11 @@ namespace TCC.Data.Databases
     {
         public uint Id { get; private set; }
         public string Name { get; private set; }
-        public BoundType BoundType { get; private set; }
         public RareGrade RareGrade { get; private set; }
-        public Item(uint id, string name, string b, uint g)
+        public Item(uint id, string name, uint g)
         {
             Id = id;
             Name = name;
-            BoundType = (BoundType)Enum.Parse(typeof(BoundType), b);
             RareGrade = (RareGrade)g;
         }
     }

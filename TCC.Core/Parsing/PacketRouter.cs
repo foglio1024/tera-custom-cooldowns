@@ -53,9 +53,9 @@ namespace TCC.Parsing
             var lang = td.GetLanguage(Region);
 
             EntitiesManager.CurrentDatabase = new MonsterDatabase(lang);
+            SessionManager.ItemsDatabase = new ItemsDatabase(lang);
             SocialDatabase.Load();
             SystemMessages.Load();
-            ItemsDatabase.Load();
             GuildQuestDatabase.Load();
             AccountBenefitDatabase.Load();
             AchievementDatabase.Load();
