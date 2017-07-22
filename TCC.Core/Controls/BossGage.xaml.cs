@@ -11,6 +11,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
 using TCC.Data;
 using TCC.Parsing;
+using TCC.ViewModels;
 
 namespace TCC
 {
@@ -216,7 +217,7 @@ namespace TCC.Converters
             }
             else
             {
-                if(EntitiesManager.TryGetUserById((ulong)value, out Player p))
+                if(GroupWindowViewModel.Instance.GetUser((ulong)value, out User p))
                 {
                     return p.Name;
                 }
@@ -233,7 +234,7 @@ namespace TCC.Converters
         }
     }
 
-    public class AggroTypeToFill : IValueConverter
+    public class AggroTypeToFillConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
