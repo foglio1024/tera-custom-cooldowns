@@ -62,23 +62,36 @@ namespace TCC.ViewModels
             NotifyPropertyChanged(nameof(TanksCount));
             Task.Delay(100).ContinueWith(t => NotifyPropertyChanged(nameof(GroupSize)));
             NotifyPropertyChanged(nameof(Formed));
+            NotifyPropertyChanged(nameof(AliveMembersCount));
         }
         private void _healers_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             NotifyPropertyChanged(nameof(HealersCount));
             Task.Delay(100).ContinueWith(t => NotifyPropertyChanged(nameof(GroupSize)));
             NotifyPropertyChanged(nameof(Formed));
+            NotifyPropertyChanged(nameof(AliveMembersCount));
+
         }
         private void _dps_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             NotifyPropertyChanged(nameof(DpsCount));
             Task.Delay(100).ContinueWith(t => NotifyPropertyChanged(nameof(GroupSize)));
             NotifyPropertyChanged(nameof(Formed));
+            NotifyPropertyChanged(nameof(AliveMembersCount));
+
         }
         public bool Raid { get; set; }
         public int GroupSize
         {
-            get { return GetCount(); }
+            get { return All.Count; }
+        }
+        public int ReadyMembersCount
+        {
+            get => All.Where(x => x.Ready == ReadyStatus.Ready).Count();
+        }
+        public int AliveMembersCount
+        {
+            get => All.Where(x => x.Alive).Count();
         }
         public int DpsCount
         {
@@ -96,50 +109,59 @@ namespace TCC.ViewModels
         {
             get => GroupSize > 0 ? true : false;
         }
-
+        public List<User> All
+        {
+            get
+            {
+                var l = new List<User>();
+                l.AddRange(_tanks.ToList());
+                l.AddRange(_healers.ToList());
+                l.AddRange(_dps.ToList());
+                return l;
+            }
+        }
         public bool GetUser(ulong id, out User user)
         {
             User u;
-            if (TryGetUserFromList(Dps, id, out u))
+            if (TryGetUserFromList(All, id, out u))
             {
                 user = u;
                 return true;
             }
-            else if (TryGetUserFromList(Tanks, id, out u))
+            else
             {
-                user = u;
-                return true;
+                user = null;
+                return false;
             }
-            else if (TryGetUserFromList(Healers, id, out u))
-            {
-                user = u;
-                return true;
-            }
-            user = null;
-            return false;
-
         }
         public bool GetUser(uint playerId, uint serverId, out User user)
         {
             User u;
-            if (TryGetUserFromList(Dps, serverId, playerId, out u))
+            if (TryGetUserFromList(All, serverId, playerId, out u))
             {
                 user = u;
                 return true;
             }
-            else if (TryGetUserFromList(Tanks, serverId, playerId, out u))
+            else
             {
-                user = u;
-                return true;
+                user = null;
+                return false;
             }
-            else if (TryGetUserFromList(Healers, serverId, playerId, out u))
-            {
-                user = u;
-                return true;
-            }
-            user = null;
-            return false;
 
+        }
+        public bool GetUser(string name, out User user)
+        {
+            User u;
+            if (TryGetUserFromList(All, name, out u))
+            {
+                user = u;
+                return true;
+            }
+            else
+            {
+                user = null;
+                return false;
+            }
         }
 
         public bool HasPowers(string name)
@@ -148,28 +170,6 @@ namespace TCC.ViewModels
             return u != null ? u.CanInvite : false;
         }
 
-        public bool GetUser(string name, out User user)
-        {
-            User u;
-            if (TryGetUserFromList(Dps, name, out u))
-            {
-                user = u;
-                return true;
-            }
-            else if (TryGetUserFromList(Tanks, name, out u))
-            {
-                user = u;
-                return true;
-            }
-            else if (TryGetUserFromList(Healers, name, out u))
-            {
-                user = u;
-                return true;
-            }
-            user = null;
-            return false;
-
-        }
 
         public bool UserExists(ulong id)
         {
@@ -182,6 +182,35 @@ namespace TCC.ViewModels
         public bool AmILeader()
         {
             return IsLeader(SessionManager.CurrentPlayer.Name);
+        }
+
+        public void SetAggro(S_NPC_STATUS p)
+        {
+            if (p.Target == 0) { ResetAggro(); return; }
+            if (aggroHolder == p.Target) return;
+            else
+            {
+                User u;
+                if (GetUser(p.Target, out u))
+                {
+                    foreach (var item in All)
+                    {
+                        if (item == u)
+                        {
+                            item.HasAggro = true;
+                            aggroHolder = item.EntityId;
+                        }
+                        else item.HasAggro = false;
+                    }
+                }
+            }
+        }
+        public void ResetAggro()
+        {
+            foreach (var item in All)
+            {
+                item.HasAggro = false;
+            }
         }
         public void BeginOrRefreshUserAbnormality(Abnormality ab, int stacks, uint duration, uint playerId, uint serverId)
         {
@@ -211,7 +240,6 @@ namespace TCC.ViewModels
                 return;
             }
         }
-
         public void EndUserAbnormality(Abnormality ab, uint playerId, uint serverId)
         {
             User u;
@@ -241,6 +269,29 @@ namespace TCC.ViewModels
                 return;
             }
         }
+
+        ulong aggroHolder;
+        public void SetAggro(S_USER_EFFECT p)
+        {
+            if (BossGageWindowViewModel.Instance.CurrentHHphase != HarrowholdPhase.None) return;
+            User u;
+            if (GetUser(p.User, out u))
+            {
+                if (p.Circle == AggroCircle.Main)
+                {
+                    if (p.Action == AggroAction.Add)
+                    {
+                        aggroHolder = p.User;
+                        u.HasAggro = true;
+                    }
+                    else
+                    {
+                        u.HasAggro = false;
+                    }
+                }
+            }
+        }
+
 
         public SynchronizedObservableCollection<User> Healers
         {
@@ -572,105 +623,46 @@ namespace TCC.ViewModels
 
             }
         }
-        public void EndRoll()
+        public void StartRoll()
         {
-            //Task.Delay(2000).ContinueWith(t =>
-            //{
-            foreach (var user in _dps)
+            foreach (var user in All)
             {
-                user.IsRolling = false;
-                user.IsWinning = false;
-                user.RollResult = 0;
+                user.IsRolling = true;
             }
-            foreach (var user in _tanks)
-            {
-                user.IsRolling = false;
-                user.IsWinning = false;
-                user.RollResult = 0;
-            }
-            foreach (var user in _healers)
-            {
-                user.IsRolling = false;
-                user.IsWinning = false;
-                user.RollResult = 0;
-            }
-            //});
         }
         public void SetRoll(ulong entityId, int rollResult)
         {
             if (rollResult == Int32.MaxValue) rollResult = -1;
-            User user;
-            if (TryGetUserFromList(_dps, entityId, out user))
+            if (TryGetUserFromList(All, entityId, out User user))
             {
                 user.RollResult = rollResult;
                 FindHighestRoll();
-                return;
             }
-            if (TryGetUserFromList(_tanks, entityId, out user))
-            {
-                user.RollResult = rollResult;
-                FindHighestRoll();
-
-                return;
-            }
-            if (TryGetUserFromList(_healers, entityId, out user))
-            {
-                user.RollResult = rollResult;
-                FindHighestRoll();
-
-                return;
-            }
-
         }
-        public void StartRoll()
+        public void EndRoll()
         {
-            foreach (var user in _dps)
+            foreach (var user in All)
             {
-                user.IsRolling = true;
-            }
-            foreach (var user in _tanks)
-            {
-                user.IsRolling = true;
-            }
-            foreach (var user in _healers)
-            {
-                user.IsRolling = true;
+                user.IsRolling = false;
+                user.IsWinning = false;
+                user.RollResult = 0;
             }
         }
         private void FindHighestRoll()
         {
             User winningUser = new User(_dispatcher) { RollResult = 0 };
-            foreach (var user in _dps)
-            {
-                if (user.RollResult > winningUser.RollResult) winningUser = user;
-            }
-            foreach (var user in _tanks)
-            {
-                if (user.RollResult > winningUser.RollResult) winningUser = user;
-            }
-            foreach (var user in _healers)
+            foreach (var user in All)
             {
                 if (user.RollResult > winningUser.RollResult) winningUser = user;
             }
             User u;
-            if (TryGetUserFromList(_dps, winningUser.EntityId, out u)) u.IsWinning = true;
-            if (TryGetUserFromList(_tanks, winningUser.EntityId, out u)) u.IsWinning = true;
-            if (TryGetUserFromList(_healers, winningUser.EntityId, out u)) u.IsWinning = true;
-            foreach (var user in _dps)
+            if (TryGetUserFromList(All, winningUser.EntityId, out u)) u.IsWinning = true;
+            foreach (var user in All)
             {
                 if (user.EntityId != winningUser.EntityId) user.IsWinning = false;
             }
-            foreach (var user in _tanks)
-            {
-                if (user.EntityId != winningUser.EntityId) user.IsWinning = false;
-            }
-            foreach (var user in _healers)
-            {
-                if (user.EntityId != winningUser.EntityId) user.IsWinning = false;
-            }
-
         }
-        private bool TryGetUserFromList(SynchronizedObservableCollection<User> userList, ulong entityId, out User u)
+        private bool TryGetUserFromList(IEnumerable<User> userList, ulong entityId, out User u)
         {
             lock (genericLock)
             {
@@ -685,7 +677,7 @@ namespace TCC.ViewModels
                 }
             }
         }
-        private bool TryGetUserFromList(SynchronizedObservableCollection<User> userList, uint serverId, uint playerId, out User u)
+        private bool TryGetUserFromList(IEnumerable<User> userList, uint serverId, uint playerId, out User u)
         {
             lock (genericLock)
             {
@@ -700,7 +692,7 @@ namespace TCC.ViewModels
                 }
             }
         }
-        private bool TryGetUserFromList(SynchronizedObservableCollection<User> userList, string name, out User u)
+        private bool TryGetUserFromList(IEnumerable<User> userList, string name, out User u)
         {
             lock (genericLock)
             {
@@ -716,95 +708,97 @@ namespace TCC.ViewModels
             }
         }
 
-        public void SetReadyStatus(ReadyPartyMembers p)
+        bool _firstCheck = true;
+        public void SetReadyStatus(ReadyPartyMember p)
         {
-            User user;
-            if (TryGetUserFromList(_dps, p.ServerId, p.PlayerId, out user))
+            if (_firstCheck)
+            {
+                foreach (var usr in All)
+                {
+                    usr.Ready = ReadyStatus.Undefined;
+                }
+            }
+            var user = All.FirstOrDefault(u => u.PlayerId == p.PlayerId && u.ServerId == p.ServerId);
+            if (user != null)
             {
                 if (p.Status == 0) user.Ready = ReadyStatus.NotReady;
                 else if (p.Status == 1) user.Ready = ReadyStatus.Ready;
-                return;
             }
-            if (TryGetUserFromList(_healers, p.ServerId, p.PlayerId, out user))
-            {
-                if (p.Status == 0) user.Ready = ReadyStatus.NotReady;
-                else if (p.Status == 1) user.Ready = ReadyStatus.Ready;
-                return;
-            }
-            if (TryGetUserFromList(_tanks, p.ServerId, p.PlayerId, out user))
-            {
-                if (p.Status == 0) user.Ready = ReadyStatus.NotReady;
-                else if (p.Status == 1) user.Ready = ReadyStatus.Ready;
-                return;
-            }
+            _firstCheck = false;
+            NotifyPropertyChanged(nameof(ReadyMembersCount));
         }
         public void EndReadyCheck()
         {
             Task.Delay(4000).ContinueWith(t =>
             {
-                foreach (var user in _dps)
+                foreach (var user in All)
                 {
-                    user.Ready = ReadyStatus.Undefined;
-                }
-                foreach (var user in _tanks)
-                {
-                    user.Ready = ReadyStatus.Undefined;
-                }
-                foreach (var user in _healers)
-                {
-                    user.Ready = ReadyStatus.Undefined;
+                    user.Ready = ReadyStatus.None;
                 }
             });
+            _firstCheck = true;
         }
         //use TryGetUser
         public void UpdateMemberHP(uint playerId, uint serverId, int curHP, int maxHP)
         {
-            var dps = _dps.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
-            if (dps != null)
+            var u = All.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
+            if (u != null)
             {
-                dps.CurrentHP = curHP;
-                dps.MaxHP = maxHP;
-                return;
+                u.CurrentHP = curHP;
+                u.MaxHP = maxHP;
             }
-            var tank = _tanks.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
-            if (tank != null)
-            {
-                tank.CurrentHP = curHP;
-                tank.MaxHP = maxHP;
-                return;
-            }
-            var healer = _healers.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
-            if (healer != null)
-            {
-                healer.CurrentHP = curHP;
-                healer.MaxHP = maxHP;
-                return;
-            }
+            //var dps = _dps.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
+            //if (dps != null)
+            //{
+            //    dps.CurrentHP = curHP;
+            //    dps.MaxHP = maxHP;
+            //    return;
+            //}
+            //var tank = _tanks.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
+            //if (tank != null)
+            //{
+            //    tank.CurrentHP = curHP;
+            //    tank.MaxHP = maxHP;
+            //    return;
+            //}
+            //var healer = _healers.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
+            //if (healer != null)
+            //{
+            //    healer.CurrentHP = curHP;
+            //    healer.MaxHP = maxHP;
+            //    return;
+            //}
 
         }
         public void UpdateMemberMP(uint playerId, uint serverId, int curMP, int maxMP)
         {
-            var dps = _dps.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
-            if (dps != null)
+            var u = All.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
+            if (u != null)
             {
-                dps.CurrentMP = curMP;
-                dps.MaxMP = maxMP;
-                return;
+                u.CurrentMP = curMP;
+                u.MaxMP = maxMP;
             }
-            var tank = _tanks.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
-            if (tank != null)
-            {
-                tank.CurrentMP = curMP;
-                tank.MaxMP = maxMP;
-                return;
-            }
-            var healer = _healers.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
-            if (healer != null)
-            {
-                healer.CurrentMP = curMP;
-                healer.MaxMP = maxMP;
-                return;
-            }
+            //var dps = _dps.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
+            //if (dps != null)
+            //{
+            //    dps.CurrentMP = curMP;
+            //    dps.MaxMP = maxMP;
+            //    return;
+            //}
+            //var tank = _tanks.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
+            //if (tank != null)
+            //{
+            //    tank.CurrentMP = curMP;
+            //    tank.MaxMP = maxMP;
+            //    return;
+            //}
+            //var healer = _healers.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
+            //if (healer != null)
+            //{
+            //    healer.CurrentMP = curMP;
+            //    healer.MaxMP = maxMP;
+            //    return;
+            //}
 
         }
         internal void SetRaid(bool raid)
@@ -813,51 +807,58 @@ namespace TCC.ViewModels
         }
         public void UpdateMember(S_PARTY_MEMBER_STAT_UPDATE p)
         {
-            var dps = _dps.FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
-            if (dps != null)
+            var u = All.FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
+            if (u != null)
             {
-                dps.CurrentHP = p.CurrentHP;
-                dps.CurrentMP = p.CurrentMP;
-                dps.MaxHP = p.MaxHP;
-                dps.MaxMP = p.MaxMP;
-                dps.Level = (uint)p.Level;
-                //dps.Combat = p.Combat;
-                dps.Alive = p.Alive;
-                //dps.Online = true;
-                return;
+                u.CurrentHP = p.CurrentHP;
+                u.CurrentMP = p.CurrentMP;
+                u.MaxHP = p.MaxHP;
+                u.MaxMP = p.MaxMP;
+                u.Level = (uint)p.Level;
+                if (u.Alive != p.Alive) NotifyPropertyChanged(nameof(AliveMembersCount));
+                u.Alive = p.Alive;
+                if (!p.Alive) u.HasAggro = false;
             }
-            var tank = _tanks.FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
-            if (tank != null)
-            {
-                tank.CurrentHP = p.CurrentHP;
-                tank.CurrentMP = p.CurrentMP;
-                tank.MaxHP = p.MaxHP;
-                tank.MaxMP = p.MaxMP;
-                tank.Level = (uint)p.Level;
-                //tank.Combat = p.Combat;
-                tank.Alive = p.Alive;
-                //tank.Online = true;
-                return;
-            }
-            var healer = _healers.FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
-            if (healer != null)
-            {
-                healer.CurrentHP = p.CurrentHP;
-                healer.CurrentMP = p.CurrentMP;
-                healer.MaxHP = p.MaxHP;
-                healer.MaxMP = p.MaxMP;
-                healer.Level = (uint)p.Level;
-                //healer.Combat = p.Combat;
-                healer.Alive = p.Alive;
-                //healer.Online = true;
-                return;
-            }
-        }
-        private int GetCount()
-        {
-            var c = _healers.Count + _dps.Count + _tanks.Count;
-            if (SettingsManager.IgnoreMeInGroupWindow) c++;
-            return c;
+
+            //var dps = _dps.FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
+            //if (dps != null)
+            //{
+            //    dps.CurrentHP = p.CurrentHP;
+            //    dps.CurrentMP = p.CurrentMP;
+            //    dps.MaxHP = p.MaxHP;
+            //    dps.MaxMP = p.MaxMP;
+            //    dps.Level = (uint)p.Level;
+            //    //dps.Combat = p.Combat;
+            //    dps.Alive = p.Alive;
+            //    //dps.Online = true;
+            //    return;
+            //}
+            //var tank = _tanks.FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
+            //if (tank != null)
+            //{
+            //    tank.CurrentHP = p.CurrentHP;
+            //    tank.CurrentMP = p.CurrentMP;
+            //    tank.MaxHP = p.MaxHP;
+            //    tank.MaxMP = p.MaxMP;
+            //    tank.Level = (uint)p.Level;
+            //    //tank.Combat = p.Combat;
+            //    tank.Alive = p.Alive;
+            //    //tank.Online = true;
+            //    return;
+            //}
+            //var healer = _healers.FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
+            //if (healer != null)
+            //{
+            //    healer.CurrentHP = p.CurrentHP;
+            //    healer.CurrentMP = p.CurrentMP;
+            //    healer.MaxHP = p.MaxHP;
+            //    healer.MaxMP = p.MaxMP;
+            //    healer.Level = (uint)p.Level;
+            //    //healer.Combat = p.Combat;
+            //    healer.Alive = p.Alive;
+            //    //healer.Online = true;
+            //    return;
+            //}
         }
         public void MoveUser(SynchronizedObservableCollection<User> startList, SynchronizedObservableCollection<User> endList, uint serverId, uint playerId)
         {
