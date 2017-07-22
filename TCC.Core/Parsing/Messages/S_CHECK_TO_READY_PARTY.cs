@@ -8,7 +8,7 @@ using Tera.Game.Messages;
 
 namespace TCC.Parsing.Messages
 {
-    public struct ReadyPartyMembers
+    public struct ReadyPartyMember
     {
         public uint ServerId;
         public uint PlayerId;
@@ -32,7 +32,7 @@ namespace TCC.Parsing.Messages
                 var serverId = reader.ReadUInt32();
                 var playerId = reader.ReadUInt32();
                 var status = reader.ReadByte();
-                Party.Add(new ReadyPartyMembers
+                Party.Add(new ReadyPartyMember
                 {
                     ServerId = serverId,
                     PlayerId = playerId,
@@ -44,6 +44,6 @@ namespace TCC.Parsing.Messages
 
         public UInt16 Count { get; set; }
 
-        public List<ReadyPartyMembers> Party { get; } = new List<ReadyPartyMembers>();
+        public List<ReadyPartyMember> Party { get; } = new List<ReadyPartyMember>();
     }
 }
