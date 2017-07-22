@@ -81,12 +81,25 @@
 
         <!--Main Styles.DefaultBorder-->
         <Border Style="{StaticResource Styles.DefaultBorder}" Grid.ColumnSpan="3" Margin="2,0"/>
-        <Border Grid.ColumnSpan="2" Margin="2,0" BorderBrush="Orange" BorderThickness="1"
-         Visibility="{Binding HasAggro, Converter={StaticResource Converters.BoolToVisibleHidden}}"       />
+        <Rectangle Width="3" Height="Auto" Margin="-1,1,3,1" 
+                   HorizontalAlignment="Right" Grid.Column="2" 
+                   Grid.RowSpan="1" Opacity=".8"
+                    VerticalAlignment="Stretch"
+                   Fill="{Binding UserClass, Converter={StaticResource Converters.ClassToFill}}"
+                   />
+
+        <Border Grid.ColumnSpan="3" Margin="2,0" BorderBrush="Orange" BorderThickness="0,0,4,0"
+                                         Visibility="{Binding HasAggro, Converter={StaticResource Converters.BoolToVisibleHidden}}"   
+
+                >
+            <Border.Effect>
+                <DropShadowEffect Color="Orange" ShadowDepth="0" BlurRadius="5" RenderingBias="Performance"/>
+            </Border.Effect>
+        </Border>
         <Border  Grid.ColumnSpan="3" Margin="2,0" />
         <!--Image grid-->
-        <Grid Margin="-1,-2,-3,0" Width="32" Height="32">
-            <Image Source="{Binding UserClass, Converter={StaticResource classToImageConv}}" Opacity="1"
+        <Grid Margin="2,-2,-3,0" Width="32" Height="32">
+            <Image Source="{Binding UserClass, Converter={StaticResource Converters.ClassToImage}}" Opacity="1"
                            Margin="1,2,0,0" RenderOptions.BitmapScalingMode="Fant" UseLayoutRounding="True" HorizontalAlignment="Center" VerticalAlignment="Center"
                            Width="22">
                 <Image.Effect>
@@ -147,14 +160,14 @@
             </Rectangle>
 
         </Grid>
-        
-        <Rectangle Width="3" Height="Auto" Margin="-1,1,3,1" 
-                   HorizontalAlignment="Right" Grid.Column="2" 
-                   Grid.RowSpan="1" Opacity=".8"
-                    VerticalAlignment="Stretch"
-                   Fill="{Binding UserClass, Converter={StaticResource Converters.ClassToFill}}"
-                   />
-        <!--Death red Styles.DefaultBorder-->
+
+        <!--Death red border-->
+        <Border Name="aggroBorder" Visibility="{Binding HasAggro, Converter={StaticResource Converters.BoolToVisibleHidden}}" BorderBrush="Orange" BorderThickness="0,0,4,0" Grid.ColumnSpan="3" Margin="-2,0,2,0">
+            <Border.Effect>
+                <DropShadowEffect Color="Orange" ShadowDepth="0" BlurRadius="5" RenderingBias="Performance"></DropShadowEffect>
+            </Border.Effect>
+        </Border>
+        <!--Death red border-->
         <Border Name="deathBorder" Opacity="{Binding Alive, Converter={StaticResource Converters.BoolToOpacityInverse}}" BorderBrush="Red" BorderThickness="0,0,4,0" Grid.ColumnSpan="3" Margin="-2,0,2,0">
             <Border.Effect>
                 <DropShadowEffect Color="Red" ShadowDepth="0" BlurRadius="5" RenderingBias="Performance"></DropShadowEffect>
