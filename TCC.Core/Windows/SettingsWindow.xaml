@@ -13,8 +13,8 @@
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
         </Style>
-        <Style x:Key="settingsGrid" TargetType="Grid">
-            <Setter Property="Margin" Value="-2,0,-1,0"/>
+        <Style x:Key="settingsGrid" TargetType="StackPanel">
+            <Setter Property="Margin" Value="-2,-2,-1,0"/>
         </Style>
         <Style TargetType="{x:Type Separator}">
             <Setter Property="Background" Value="#3999"/>
@@ -34,7 +34,7 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <Border Style="{StaticResource border}" Grid.ColumnSpan="10" Grid.RowSpan="10"  Opacity=".95"/>
+        <Border Style="{StaticResource Styles.DefaultBorder}" Grid.ColumnSpan="10" Grid.RowSpan="10"  Opacity=".95"/>
         <Image RenderOptions.BitmapScalingMode="HighQuality" Opacity=".02" Margin="0" Width="128" Height="128" Grid.ColumnSpan="10" Grid.RowSpan="10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Source="/TCC;component/resources/images/tera-logo-flat.png" ClipToBounds="False"/>
 
         <TabControl TabStripPlacement="Left" Grid.Row="1" Grid.ColumnSpan="2" Background="#1aaa" BorderThickness="0,0,0,0" Height="400">
@@ -88,31 +88,21 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Image Source="/TCC;component/resources/images/ic_access_time_white_24dp_2x.png" Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
-                        <TextBlock Text="Cooldown window settings" Style="{StaticResource text1}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Text="Cooldown window settings" Style="{StaticResource Styles.DefaultText}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
                     </Grid>
                 </TabItem.Header>
                 <!-- Cooldown window settings -->
 
                 <!--Settings-->
-                <Grid Grid.Row="1" Name="cooldownSettingsGrid" Style="{StaticResource settingsGrid}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+                <StackPanel Grid.Row="1" Name="cooldownSettingsGrid" Style="{StaticResource settingsGrid}">
+                    <controls:BoolSetting SettingName="Enabled" Grid.Row="0" IsOn="{Binding IsCooldownWindowEnabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" />
                     <controls:BoolSetting SettingName="Visibility" Grid.Row="0" IsOn="{Binding IsCooldownWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
                     <controls:BoolSetting SettingName="Click through" Grid.Row="1" IsOn="{Binding IsCooldownWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
                     <controls:ValueSetting SettingName="Scale" Grid.Row="2" Min="0" Max="3" Value="{Binding CooldownWindowScale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></controls:ValueSetting>
                     <controls:BoolSetting SettingName="Auto dim" Grid.Row="3" IsOn="{Binding IsCooldownWindowAutoDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" >
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource border}" Grid.RowSpan="2"/>
+                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
                                 <TextBlock Foreground="LightGray" Text="Automatically dim this window when not in combat." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
                             </Grid>
                         </controls:BoolSetting.ToolTip>
@@ -124,7 +114,7 @@
                     <controls:BoolSetting SettingName="Use static cooldown bar" Grid.Row="7" IsOn="{Binding ClassWindowOn, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_timelapse_white_24dp_2x.png" >
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource border}" Grid.RowSpan="2"/>
+                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                 <Run Text="Warning:" Foreground="DarkOrange"/>
                                 <Run Text=" switching between normal cooldown window and class window will cause any running skill to not be showed in the new window until it is used again." />
@@ -133,7 +123,7 @@
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
 
-                </Grid>
+                </StackPanel>
             </TabItem>
             <TabItem Margin="-1,0,0,0">
                 <TabItem.Header>
@@ -144,30 +134,20 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Image Source="/TCC;component/resources/images/combat_white.png" Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
-                        <TextBlock Text="Boss window settings" Style="{StaticResource text1}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Text="Boss window settings" Style="{StaticResource Styles.DefaultText}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
                     </Grid>
                 </TabItem.Header>
                 <!-- Boss window settings-->
-                <Grid Grid.Row="0" Grid.Column="0" Style="{StaticResource settingsGrid}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
+                <StackPanel Grid.Row="0" Grid.Column="0" Style="{StaticResource settingsGrid}">
+                    <controls:BoolSetting SettingName="Enabled" Grid.Row="0" IsOn="{Binding IsBossWindowEnabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" />
 
-                    </Grid.RowDefinitions>
                     <controls:BoolSetting SettingName="Visibility" Grid.Row="0" IsOn="{Binding IsBossWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
                     <controls:BoolSetting SettingName="Click through" Grid.Row="1" IsOn="{Binding IsBossWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png"/>
                     <controls:ValueSetting SettingName="Scale" Grid.Row="2" Min="0" Max="3" Value="{Binding BossWindowScale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></controls:ValueSetting>
                     <controls:BoolSetting SettingName="Auto dim" Grid.Row="3" IsOn="{Binding IsBossGaugeWindowAutoDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" >
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource border}" Grid.RowSpan="2"/>
+                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
                                 <TextBlock Foreground="LightGray" Text="Automatically dim this window when not in combat." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
                             </Grid>
                         </controls:BoolSetting.ToolTip>
@@ -177,7 +157,7 @@
                     <Separator Grid.Row="6"></Separator>
                     <controls:BoolSetting SettingName="Hide adds" Grid.Row="7" IsOn="{Binding ShowOnlyBosses, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_visibility_off_white_24dp_2x.png" />
 
-                </Grid>
+                </StackPanel>
 
             </TabItem>
             <TabItem Margin="-1,0,0,0">
@@ -189,28 +169,19 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Image Source="/TCC;component/resources/images/ic_person_white_24dp_2x.png" Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
-                        <TextBlock Text="Character window settings" Style="{StaticResource text1}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Text="Character window settings" Style="{StaticResource Styles.DefaultText}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
                     </Grid>
                 </TabItem.Header>
                 <!-- Character window settings -->
-                <Grid Grid.Row="1" Grid.Column="0" Name="characterSettingsGrid" Style="{StaticResource settingsGrid}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-
-                    </Grid.RowDefinitions>
+                <StackPanel Grid.Row="1" Grid.Column="0" Name="characterSettingsGrid" Style="{StaticResource settingsGrid}">
+                    <controls:BoolSetting SettingName="Enabled" Grid.Row="0" IsOn="{Binding IsCharacterWindowEnabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" />
                     <controls:BoolSetting Margin="0,0,0,0" SettingName="Visibility" Grid.Row="0" IsOn="{Binding IsCharacterWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
                     <controls:BoolSetting Margin="0,0,0,0" SettingName="Click through" Grid.Row="1" IsOn="{Binding IsCharacterWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png"/>
                     <controls:ValueSetting SettingName="Scale" Grid.Row="2" Min="0" Max="3" Value="{Binding CharacterWindowScale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></controls:ValueSetting>
                     <controls:BoolSetting SettingName="Auto dim" Grid.Row="3" IsOn="{Binding IsCharacterWindowAutoDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" >
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource border}" Grid.RowSpan="2"/>
+                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
                                 <TextBlock Foreground="LightGray" Text="Automatically dim this window when not in combat." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
                             </Grid>
                         </controls:BoolSetting.ToolTip>
@@ -218,7 +189,7 @@
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding CharacterWindowDimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"></controls:ValueSetting>
                     <controls:BoolSetting SettingName="Transparency" Grid.Row="5" IsOn="{Binding DoesCharacterWindowAllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
 
-                </Grid>
+                </StackPanel>
             </TabItem>
             <TabItem Margin="-1,0,0,0">
                 <TabItem.Header>
@@ -229,30 +200,20 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Image Source="/TCC;component/resources/images/ic_data_usage_white_24dp_2x.png" Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
-                        <TextBlock Text="Buffs window settings" Style="{StaticResource text1}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Text="Buffs window settings" Style="{StaticResource Styles.DefaultText}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
                     </Grid>
 
                 </TabItem.Header>
                 <!-- Buffs window settings -->
-                <Grid Grid.Row="2" Grid.Column="0" Name="buffsSettingsGrid" Style="{StaticResource settingsGrid}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-
-                    </Grid.RowDefinitions>
+                <StackPanel Grid.Row="2" Grid.Column="0" Name="buffsSettingsGrid" Style="{StaticResource settingsGrid}">
+                    <controls:BoolSetting SettingName="Enabled" Grid.Row="0" IsOn="{Binding IsBuffWindowEnabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" />
                     <controls:BoolSetting SettingName="Visibility" Grid.Row="0" IsOn="{Binding IsBuffWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
                     <controls:BoolSetting SettingName="Click through" Grid.Row="1" IsOn="{Binding IsBuffWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png"/>
                     <controls:ValueSetting SettingName="Scale" Grid.Row="2" Min="0" Max="3" Value="{Binding BuffsWindowScale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></controls:ValueSetting>
                     <controls:BoolSetting SettingName="Auto dim" Grid.Row="3" IsOn="{Binding IsBuffBarWindowAutoDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" >
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource border}" Grid.RowSpan="2"/>
+                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
                                 <TextBlock Foreground="LightGray" Text="Automatically dim this window when not in combat." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
                             </Grid>
                         </controls:BoolSetting.ToolTip>
@@ -262,7 +223,7 @@
 
                     <controls:BoolSetting SettingName="Show left to right" Grid.Row="6" IsOn="{Binding IsLeftToRightOn, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_swap_horiz_white_24dp_2x.png"/>
 
-                </Grid>
+                </StackPanel>
 
             </TabItem>
             <TabItem Margin="-1,0,0,0">
@@ -274,32 +235,25 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Image Source="/TCC;component/resources/images/ic_videogame_asset_white_24dp_2x.png" Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
-                        <TextBlock Text="Class window settings" Style="{StaticResource text1}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Text="Class window settings" Style="{StaticResource Styles.DefaultText}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
                     </Grid>
                 </TabItem.Header>
                 <!-- Class window settings -->
-                <Grid Grid.Row="2" Grid.Column="0" Style="{StaticResource settingsGrid}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+                <StackPanel Grid.Row="2" Grid.Column="0" Style="{StaticResource settingsGrid}">
+                    <controls:BoolSetting SettingName="Enabled" Grid.Row="0" IsOn="{Binding IsClassWindowEnabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" />
                     <controls:BoolSetting SettingName="Visibility" Grid.Row="0" IsOn="{Binding IsClassWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
                     <controls:BoolSetting SettingName="Click through" Grid.Row="1" IsOn="{Binding IsClassWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png"/>
                     <controls:ValueSetting SettingName="Scale" Grid.Row="2" Min="0" Max="3" Value="{Binding ClassWindowScale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"/>
                     <controls:BoolSetting SettingName="Auto dim" Grid.Row="3" IsOn="{Binding IsClassWindowAutoDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" >
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource border}" Grid.RowSpan="2"/>
+                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
                                 <TextBlock Foreground="LightGray" Text="Automatically dim this window when not in combat." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
                             </Grid>
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding ClassWindowDimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"></controls:ValueSetting>
-                </Grid>
+                </StackPanel>
             </TabItem>
             <TabItem Margin="-1,0,0,0">
                 <TabItem.Header>
@@ -310,32 +264,20 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Image Source="/TCC;component/resources/images/ic_people_white_24dp_2x.png" Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
-                        <TextBlock Text="Group window settings" Style="{StaticResource text1}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Text="Group window settings" Style="{StaticResource Styles.DefaultText}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
                     </Grid>
 
                 </TabItem.Header>
                 <!-- Group window settings -->
-                <Grid Grid.Row="1" Grid.Column="0"  Style="{StaticResource settingsGrid}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-
-                    </Grid.RowDefinitions>
+                <StackPanel Grid.Row="1" Grid.Column="0"  Style="{StaticResource settingsGrid}">
+                    <controls:BoolSetting SettingName="Enabled" Grid.Row="0" IsOn="{Binding IsGroupWindowEnabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" />
                     <controls:BoolSetting SettingName="Visibility" Grid.Row="0" IsOn="{Binding IsGroupWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
                     <controls:BoolSetting SettingName="Click through" Grid.Row="1" IsOn="{Binding IsGroupWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png"/>
                     <controls:ValueSetting SettingName="Scale" Grid.Row="2" Min="0" Max="3" Value="{Binding GroupWindowScale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></controls:ValueSetting>
                     <controls:BoolSetting SettingName="Auto dim" Grid.Row="3" IsOn="{Binding IsGroupWindowAutoDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" >
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource border}" Grid.RowSpan="2"/>
+                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
                                 <TextBlock Foreground="LightGray" Text="Automatically dim this window when not in combat." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
                             </Grid>
                         </controls:BoolSetting.ToolTip>
@@ -345,7 +287,7 @@
                     <controls:BoolSetting SettingName="Hide me" Grid.Row="6" IsOn="{Binding HideMe, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_person_white_24dp_2x.png" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource border}" Grid.RowSpan="2"/>
+                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                 <Run Text="Hides current player from group window."/>
                                 <LineBreak /> <LineBreak/>
@@ -360,7 +302,7 @@
                                       ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" >
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource border}" Grid.RowSpan="2"/>
+                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                 <Run Text="Hides all group members' buffs from group window. Debuffs will still be showed (only for healers' buffs)."/>
                                 <LineBreak /> <LineBreak/>
@@ -373,7 +315,7 @@
                     <controls:BoolSetting SettingName="Hide buffs and debuffs" Grid.Row="8" IsOn="{Binding HideRaidAbnormalities, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_data_usage_white_24dp_2x.png" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource border}" Grid.RowSpan="2"/>
+                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                 <Run Text="Hides all buffs and debuffs for every group member. "/>
                                 <LineBreak /> <LineBreak/>
@@ -383,7 +325,7 @@
                             </Grid>
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
-                </Grid>
+                </StackPanel>
 
             </TabItem>
             <TabItem Margin="-1,0,0,0">
@@ -395,24 +337,13 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Image Source="/TCC;component/resources/images/chat.png" Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
-                        <TextBlock Text="Chat window settings" Style="{StaticResource text1}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Text="Chat window settings" Style="{StaticResource Styles.DefaultText}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
                     </Grid>
 
                 </TabItem.Header>
                 <!-- Chat window settings -->
-                <Grid Grid.Row="1" Grid.Column="0"  Style="{StaticResource settingsGrid}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+                <StackPanel Grid.Row="1" Grid.Column="0"  Style="{StaticResource settingsGrid}">
+                    <controls:BoolSetting SettingName="Enabled" Grid.Row="0" IsOn="{Binding IsChatWindowEnabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" />
                     <controls:BoolSetting SettingName="Visibility" Grid.Row="0" IsOn="{Binding IsChatWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
                     <controls:BoolSetting SettingName="Transparency" Grid.Row="1" IsOn="{Binding DoesChatWindowAllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
 
@@ -422,7 +353,7 @@
                     <controls:BoolSetting Grid.Row="5" SettingName="Show timestamps" IsOn="{Binding ShowTimestamp, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_access_time_white_24dp_2x.png"></controls:BoolSetting>
                     <controls:BoolSetting Grid.Row="6" SettingName="Show channel label" IsOn="{Binding ShowChannel, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_label_white_24dp_2x.png"></controls:BoolSetting>
                     <controls:BoolSetting Grid.Row="7" SettingName="Show always" IsOn="{Binding ChatWindowShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"></controls:BoolSetting>
-                </Grid>
+                </StackPanel>
 
             </TabItem>
 
@@ -436,26 +367,22 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Image Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6" Source="/TCC;component/resources/images/ic_tune_white_24dp_2x.png"/>
-                        <TextBlock Text="Misc settings" Style="{StaticResource text1}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Text="Misc settings" Style="{StaticResource Styles.DefaultText}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
                     </Grid>
 
                 </TabItem.Header>
                 <!-- Other settings -->
-                <Grid Grid.Row="3" Grid.Column="0" Style="{StaticResource settingsGrid}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+                <StackPanel Grid.Row="3" Grid.Column="0" Style="{StaticResource settingsGrid}">
                     <controls:BoolSetting SettingName="Click thru when dim" Grid.Row="0" IsOn="{Binding ClickThruWhenDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" >
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource border}" Grid.RowSpan="2"/>
+                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
                                 <TextBlock Foreground="LightGray" Text="Makes TCC clickthru when dim." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
                             </Grid>
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
 
-                </Grid>
+                </StackPanel>
 
             </TabItem>
             <TabItem Margin="-1,0,0,0">
@@ -468,16 +395,12 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Image Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6" Source="/TCC;component/resources/images/ic_insert_link_white_24dp_2x.png"/>
-                        <TextBlock Text="Links" Style="{StaticResource text1}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Text="Links" Style="{StaticResource Styles.DefaultText}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
                     </Grid>
 
                 </TabItem.Header>
                 <!-- Other settings -->
-                <Grid Grid.Row="3" Grid.Column="0" Style="{StaticResource settingsGrid}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+                <StackPanel Grid.Row="3" Grid.Column="0" Style="{StaticResource settingsGrid}">
                     <!--GitHub link-->
                     <Grid Height="35" MouseDown="GitHubLink_MouseDown" Cursor="Hand" Grid.Row="0">
                         <Grid.ColumnDefinitions>
@@ -492,7 +415,7 @@
                                 </Path.LayoutTransform>
                             </Path>
                         </Grid>
-                        <TextBlock Style="{StaticResource text1}" 
+                        <TextBlock Style="{StaticResource Styles.DefaultText}" 
                                Grid.Column="1" 
                                Margin="10,0,14,0" 
                                Text="Releases" 
@@ -523,7 +446,7 @@
                         <Grid Width="22" Height="22" Margin="17,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" >
 
                         </Grid>
-                        <TextBlock Style="{StaticResource text1}" 
+                        <TextBlock Style="{StaticResource Styles.DefaultText}" 
                                Grid.Column="1" 
                                Margin="10,0,14,0" 
                                Text="Tera DPS" 
@@ -546,7 +469,7 @@
                         </Border>
                     </Grid>
 
-                </Grid>
+                </StackPanel>
 
             </TabItem>
         </TabControl>
@@ -563,7 +486,7 @@
             </Border>
             <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Height="Auto" Margin="0,0">
                 <Image Source="/TCC;component/resources/tcc-logo.ico" Width="Auto" Height="32" Margin="0,0,0,0" RenderOptions.BitmapScalingMode="HighQuality"/>
-                <TextBlock Style="{StaticResource text1}" Text="{Binding Path=Title, RelativeSource={RelativeSource AncestorType=local:SettingsWindow}}" VerticalAlignment="Center" Margin="12,0" FontSize="16"></TextBlock>
+                <TextBlock Style="{StaticResource Styles.DefaultText}" Text="{Binding Path=Title, RelativeSource={RelativeSource AncestorType=local:SettingsWindow}}" VerticalAlignment="Center" Margin="12,0" FontSize="16"></TextBlock>
             </StackPanel>
             <Image Source="/TCC;component/resources/images/ic_close_white_24dp_2x.png" Width="20" Grid.Column="1" HorizontalAlignment="Right" Margin="5" Opacity=".9" Cursor="Hand" MouseLeftButtonDown="Image_MouseLeftButtonDown"></Image>
         </Grid>

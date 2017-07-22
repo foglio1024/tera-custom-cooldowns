@@ -1,11 +1,182 @@
 ﻿using System.Windows;
 using System.Windows.Threading;
+using TCC.Parsing;
 using TCC.Windows;
 
 namespace TCC.ViewModels
 {
     public class SettingsWindowViewModel : TSPropertyChanged
     {
+        //enable settings
+        public bool IsCooldownWindowEnabled
+        {
+            get { return SettingsManager.CooldownWindowSettings.Enabled; }
+            set
+            {
+                if (SettingsManager.CooldownWindowSettings.Enabled == value) return;
+                if (value == false)
+                {
+                    if (MessageBox.Show("Re-enabling this later will require TCC restart.\nDo you want to continue?", "TCC", MessageBoxButton.OKCancel, MessageBoxImage.Question) ==
+                        MessageBoxResult.Cancel) return;
+                    SettingsManager.CooldownWindowSettings.Enabled = value;
+                    IsCooldownWindowVisible = value;
+                    WindowManager.CooldownWindow.CloseWindowSafe();
+                }
+                else
+                {
+                    MessageBox.Show("TCC will now be restarted.", "TCC", MessageBoxButton.OK, MessageBoxImage.Information);
+                    SettingsManager.CooldownWindowSettings.Enabled = value;
+                    App.Restart();
+                }
+                MessageFactory.Update();
+                NotifyPropertyChanged(nameof(IsCooldownWindowEnabled));
+            }
+        }
+        public bool IsBuffWindowEnabled
+        {
+            get { return SettingsManager.BuffWindowSettings.Enabled; }
+            set
+            {
+                if (SettingsManager.BuffWindowSettings.Enabled == value) return;
+                if (value == false)
+                {
+                    if (MessageBox.Show("Re-enabling this later will require TCC restart.\nDo you want to continue?", "TCC", MessageBoxButton.OKCancel, MessageBoxImage.Question) ==
+                        MessageBoxResult.Cancel) return;
+                    SettingsManager.BuffWindowSettings.Enabled = value;
+                    IsBuffWindowVisible = value;
+                    WindowManager.BuffWindow.CloseWindowSafe();
+                }
+                else
+                {
+                    MessageBox.Show("TCC will now be restarted.", "TCC", MessageBoxButton.OK, MessageBoxImage.Information);
+                    SettingsManager.BuffWindowSettings.Enabled = value;
+                    App.Restart();
+                }
+                MessageFactory.Update();
+                NotifyPropertyChanged(nameof(IsBuffWindowEnabled));
+            }
+        }
+        public bool IsBossWindowEnabled
+        {
+            get { return SettingsManager.BossWindowSettings.Enabled; }
+            set
+            {
+                if (SettingsManager.BossWindowSettings.Enabled == value) return;
+                if (value == false)
+                {
+                    if (MessageBox.Show("Re-enabling this later will require TCC restart.\nDo you want to continue?", "TCC", MessageBoxButton.OKCancel, MessageBoxImage.Question) ==
+                        MessageBoxResult.Cancel) return;
+                    SettingsManager.BossWindowSettings.Enabled = value;
+                    IsBossWindowVisible = value;
+                    WindowManager.BossWindow.CloseWindowSafe();
+                }
+                else
+                {
+                    MessageBox.Show("TCC will now be restarted.", "TCC", MessageBoxButton.OK, MessageBoxImage.Information);
+                    SettingsManager.BossWindowSettings.Enabled = value;
+                    App.Restart();
+                }
+                MessageFactory.Update();
+                NotifyPropertyChanged(nameof(IsBossWindowEnabled));
+            }
+        }
+        public bool IsCharacterWindowEnabled
+        {
+            get { return SettingsManager.CharacterWindowSettings.Enabled; }
+            set
+            {
+                if (SettingsManager.CharacterWindowSettings.Enabled == value) return;
+                if (value == false)
+                {
+                    if (MessageBox.Show("Re-enabling this later will require TCC restart.\nDo you want to continue?", "TCC", MessageBoxButton.OKCancel, MessageBoxImage.Question) ==
+                        MessageBoxResult.Cancel) return;
+                    SettingsManager.CharacterWindowSettings.Enabled = value;
+                    IsCharacterWindowVisible = value;
+                    WindowManager.CharacterWindow.CloseWindowSafe();
+                }
+                else
+                {
+                    MessageBox.Show("TCC will now be restarted.", "TCC", MessageBoxButton.OK, MessageBoxImage.Information);
+                    SettingsManager.CharacterWindowSettings.Enabled = value;
+                    App.Restart();
+                }
+                MessageFactory.Update();
+                NotifyPropertyChanged(nameof(IsCharacterWindowEnabled));
+            }
+        }
+        public bool IsGroupWindowEnabled
+        {
+            get { return SettingsManager.GroupWindowSettings.Enabled; }
+            set
+            {
+                if (SettingsManager.GroupWindowSettings.Enabled == value) return;
+                if (value == false)
+                {
+                    if (MessageBox.Show("Re-enabling this later will require TCC restart.\nDo you want to continue?", "TCC", MessageBoxButton.OKCancel, MessageBoxImage.Question) ==
+                        MessageBoxResult.Cancel) return;
+                    SettingsManager.GroupWindowSettings.Enabled = value;
+                    IsGroupWindowVisible = value;
+                    WindowManager.GroupWindow.CloseWindowSafe();
+                }
+                else
+                {
+                    MessageBox.Show("TCC will now be restarted.", "TCC", MessageBoxButton.OK, MessageBoxImage.Information);
+                    SettingsManager.GroupWindowSettings.Enabled = value;
+                    App.Restart();
+                }
+                MessageFactory.Update();
+                NotifyPropertyChanged(nameof(IsGroupWindowEnabled));
+            }
+        }
+        public bool IsClassWindowEnabled
+        {
+            get { return SettingsManager.ClassWindowSettings.Enabled; }
+            set
+            {
+                if (SettingsManager.ClassWindowSettings.Enabled == value) return;
+                if (value == false)
+                {
+                    if (MessageBox.Show("Re-enabling this later will require TCC restart.\nDo you want to continue?", "TCC", MessageBoxButton.OKCancel, MessageBoxImage.Question) ==
+                        MessageBoxResult.Cancel) return;
+                    SettingsManager.ClassWindowSettings.Enabled = value;
+                    IsClassWindowVisible = value;
+                    WindowManager.ClassWindow.CloseWindowSafe();
+                }
+                else
+                {
+                    MessageBox.Show("TCC will now be restarted.", "TCC", MessageBoxButton.OK, MessageBoxImage.Information);
+                    SettingsManager.ClassWindowSettings.Enabled = value;
+                    App.Restart();
+                }
+                MessageFactory.Update();
+                NotifyPropertyChanged(nameof(IsClassWindowEnabled));
+            }
+        }
+        public bool IsChatWindowEnabled
+        {
+            get { return SettingsManager.ChatWindowSettings.Enabled; }
+            set
+            {
+                if (SettingsManager.ChatWindowSettings.Enabled == value) return;
+                if (value == false)
+                {
+                    if (MessageBox.Show("Re-enabling this later will require TCC restart.\nDo you want to continue?", "TCC", MessageBoxButton.OKCancel, MessageBoxImage.Question) ==
+                        MessageBoxResult.Cancel) return;
+                    SettingsManager.ChatWindowSettings.Enabled = value;
+                    IsChatWindowVisible = value;
+                    WindowManager.ChatWindow.CloseWindowSafe();
+                }
+                else
+                {
+                    MessageBox.Show("TCC will now be restarted.", "TCC", MessageBoxButton.OK, MessageBoxImage.Information);
+                    SettingsManager.ChatWindowSettings.Enabled = value;
+                    App.Restart();
+                }
+                MessageFactory.Update();
+                NotifyPropertyChanged(nameof(IsChatWindowEnabled));
+            }
+        }
+
         //visibility settings
         private bool isCooldownWindowVisible;
         public bool IsCooldownWindowVisible
@@ -29,6 +200,8 @@ namespace TCC.ViewModels
                 isCooldownWindowVisible = value;
                 if (isCooldownWindowVisible)
                 {
+                    if (!IsCooldownWindowEnabled) return;
+
                     WindowManager.CooldownWindow.SetVisibility(Visibility.Visible);
                     SettingsManager.CooldownWindowSettings.Visibility = Visibility.Visible;
 
@@ -47,7 +220,7 @@ namespace TCC.ViewModels
         {
             get
             {
-                if (SettingsManager.BuffBarWindowSettings.Visibility == Visibility.Visible)
+                if (SettingsManager.BuffWindowSettings.Visibility == Visibility.Visible)
                 {
                     isBuffWindowVisible = true;
                 }
@@ -64,13 +237,13 @@ namespace TCC.ViewModels
                 isBuffWindowVisible = value;
                 if (isBuffWindowVisible)
                 {
-                    WindowManager.BuffBar.SetVisibility(Visibility.Visible);
-                    SettingsManager.BuffBarWindowSettings.Visibility = Visibility.Visible;
+                    WindowManager.BuffWindow.SetVisibility(Visibility.Visible);
+                    SettingsManager.BuffWindowSettings.Visibility = Visibility.Visible;
                 }
                 else
                 {
-                    WindowManager.BuffBar.SetVisibility(Visibility.Hidden);
-                    SettingsManager.BuffBarWindowSettings.Visibility = Visibility.Hidden;
+                    WindowManager.BuffWindow.SetVisibility(Visibility.Hidden);
+                    SettingsManager.BuffWindowSettings.Visibility = Visibility.Hidden;
                 }
                 NotifyPropertyChanged("IsBuffWindowVisible");
 
@@ -82,7 +255,7 @@ namespace TCC.ViewModels
         {
             get
             {
-                if (SettingsManager.BossGaugeWindowSettings.Visibility == Visibility.Visible)
+                if (SettingsManager.BossWindowSettings.Visibility == Visibility.Visible)
                 {
                     isBossWindowVisible = true;
                 }
@@ -99,13 +272,13 @@ namespace TCC.ViewModels
 
                 if (isBossWindowVisible)
                 {
-                    WindowManager.BossGauge.SetVisibility(Visibility.Visible);
-                    SettingsManager.BossGaugeWindowSettings.Visibility = Visibility.Visible;
+                    WindowManager.BossWindow.SetVisibility(Visibility.Visible);
+                    SettingsManager.BossWindowSettings.Visibility = Visibility.Visible;
                 }
                 else
                 {
-                    WindowManager.BossGauge.SetVisibility(Visibility.Hidden);
-                    SettingsManager.BossGaugeWindowSettings.Visibility = Visibility.Hidden;
+                    WindowManager.BossWindow.SetVisibility(Visibility.Hidden);
+                    SettingsManager.BossWindowSettings.Visibility = Visibility.Hidden;
                 }
 
                 NotifyPropertyChanged("IsBossWindowVisible");
@@ -270,23 +443,23 @@ namespace TCC.ViewModels
         }
         public bool IsBuffWindowTransparent
         {
-            get { return SettingsManager.BuffBarWindowSettings.ClickThru; }
+            get { return SettingsManager.BuffWindowSettings.ClickThru; }
             set
             {
-                if (SettingsManager.BuffBarWindowSettings.ClickThru == value) return;
-                SettingsManager.BuffBarWindowSettings.ClickThru = value;
-                WindowManager.BuffBar.SetClickThru(value);
+                if (SettingsManager.BuffWindowSettings.ClickThru == value) return;
+                SettingsManager.BuffWindowSettings.ClickThru = value;
+                WindowManager.BuffWindow.SetClickThru(value);
                 NotifyPropertyChanged("IsBuffWindowTransparent");
             }
         }
         public bool IsBossWindowTransparent
         {
-            get { return SettingsManager.BossGaugeWindowSettings.ClickThru; }
+            get { return SettingsManager.BossWindowSettings.ClickThru; }
             set
             {
-                if (SettingsManager.BossGaugeWindowSettings.ClickThru == value) return;
-                SettingsManager.BossGaugeWindowSettings.ClickThru = value;
-                WindowManager.BossGauge.SetClickThru(value);
+                if (SettingsManager.BossWindowSettings.ClickThru == value) return;
+                SettingsManager.BossWindowSettings.ClickThru = value;
+                WindowManager.BossWindow.SetClickThru(value);
                 NotifyPropertyChanged("IsBossWindowTransparent");
             }
         }
@@ -368,28 +541,28 @@ namespace TCC.ViewModels
         }
         public double BuffsWindowScale
         {
-            get { return SettingsManager.BuffBarWindowSettings.Scale; }
+            get { return SettingsManager.BuffWindowSettings.Scale; }
             set
             {
-                if (SettingsManager.BuffBarWindowSettings.Scale == value) return;
-                SettingsManager.BuffBarWindowSettings.Scale = value;
-                WindowManager.BuffBar.Dispatcher.Invoke(() =>
+                if (SettingsManager.BuffWindowSettings.Scale == value) return;
+                SettingsManager.BuffWindowSettings.Scale = value;
+                WindowManager.BuffWindow.Dispatcher.Invoke(() =>
                 {
-                    ((BuffBarWindowViewModel)WindowManager.BuffBar.DataContext).Scale = value;
+                    ((BuffBarWindowViewModel)WindowManager.BuffWindow.DataContext).Scale = value;
                 });
                 NotifyPropertyChanged("BuffsWindowScale");
             }
         }
         public double BossWindowScale
         {
-            get { return SettingsManager.BossGaugeWindowSettings.Scale; }
+            get { return SettingsManager.BossWindowSettings.Scale; }
             set
             {
-                if (SettingsManager.BossGaugeWindowSettings.Scale == value) return;
-                SettingsManager.BossGaugeWindowSettings.Scale = value;
-                WindowManager.BossGauge.Dispatcher.Invoke(() =>
+                if (SettingsManager.BossWindowSettings.Scale == value) return;
+                SettingsManager.BossWindowSettings.Scale = value;
+                WindowManager.BossWindow.Dispatcher.Invoke(() =>
                 {
-                    ((BossGageWindowViewModel)WindowManager.BossGauge.DataContext).Scale = value;
+                    ((BossGageWindowViewModel)WindowManager.BossWindow.DataContext).Scale = value;
                 });
                 NotifyPropertyChanged("BossWindowScale");
             }
@@ -454,11 +627,11 @@ namespace TCC.ViewModels
         }
         public bool IsBuffBarWindowAutoDim
         {
-            get { return SettingsManager.BuffBarWindowSettings.AutoDim; }
+            get { return SettingsManager.BuffWindowSettings.AutoDim; }
             set
             {
-                if (SettingsManager.BuffBarWindowSettings.AutoDim == value) return;
-                SettingsManager.BuffBarWindowSettings.AutoDim = value;
+                if (SettingsManager.BuffWindowSettings.AutoDim == value) return;
+                SettingsManager.BuffWindowSettings.AutoDim = value;
                 WindowManager.SkillsEnded = false;
                 WindowManager.SkillsEnded = true;
 
@@ -468,11 +641,11 @@ namespace TCC.ViewModels
         }
         public bool IsBossGaugeWindowAutoDim
         {
-            get { return SettingsManager.BossGaugeWindowSettings.AutoDim; }
+            get { return SettingsManager.BossWindowSettings.AutoDim; }
             set
             {
-                if (SettingsManager.BossGaugeWindowSettings.AutoDim == value) return;
-                SettingsManager.BossGaugeWindowSettings.AutoDim = value;
+                if (SettingsManager.BossWindowSettings.AutoDim == value) return;
+                SettingsManager.BossWindowSettings.AutoDim = value;
                 WindowManager.SkillsEnded = false;
                 WindowManager.SkillsEnded = true;
 
@@ -562,16 +735,16 @@ namespace TCC.ViewModels
         }
         public double BuffBarWindowDimOpacity
         {
-            get { return SettingsManager.BuffBarWindowSettings.DimOpacity; }
+            get { return SettingsManager.BuffWindowSettings.DimOpacity; }
             set
             {
-                if (SettingsManager.BuffBarWindowSettings.DimOpacity == value) return;
+                if (SettingsManager.BuffWindowSettings.DimOpacity == value) return;
                 var val = value;
                 if (val < 0) val = 0;
                 if (val > 1) val = 1;
 
 
-                SettingsManager.BuffBarWindowSettings.DimOpacity = val;
+                SettingsManager.BuffWindowSettings.DimOpacity = val;
                 if (WindowManager.IsTccDim)
                 {
                     WindowManager.SkillsEnded = false;
@@ -587,14 +760,14 @@ namespace TCC.ViewModels
         }
         public double BossGaugeWindowDimOpacity
         {
-            get { return SettingsManager.BossGaugeWindowSettings.DimOpacity; }
+            get { return SettingsManager.BossWindowSettings.DimOpacity; }
             set
             {
-                if (SettingsManager.BossGaugeWindowSettings.DimOpacity == value) return;
+                if (SettingsManager.BossWindowSettings.DimOpacity == value) return;
                 var val = value;
                 if (val < 0) val = 0;
                 if (val > 1) val = 1;
-                SettingsManager.BossGaugeWindowSettings.DimOpacity = val;
+                SettingsManager.BossWindowSettings.DimOpacity = val;
                 if (WindowManager.IsTccDim)
                 {
                     WindowManager.SkillsEnded = false;
@@ -691,11 +864,11 @@ namespace TCC.ViewModels
         }
         public bool DoesBossWindowAllowTransparency
         {
-            get => SettingsManager.BossGaugeWindowSettings.AllowTransparency;
+            get => SettingsManager.BossWindowSettings.AllowTransparency;
             set
             {
-                if (SettingsManager.BossGaugeWindowSettings.AllowTransparency == value) return;
-                SettingsManager.BossGaugeWindowSettings.AllowTransparency = value;
+                if (SettingsManager.BossWindowSettings.AllowTransparency == value) return;
+                SettingsManager.BossWindowSettings.AllowTransparency = value;
                 NotifyPropertyChanged(nameof(DoesBossWindowAllowTransparency));
             }
         }
@@ -756,9 +929,9 @@ namespace TCC.ViewModels
                 else s = FlowDirection.RightToLeft;
                 if (SettingsManager.BuffsDirection == s) return;
                 SettingsManager.BuffsDirection = s;
-                WindowManager.BuffBar.Dispatcher.Invoke(() =>
+                WindowManager.BuffWindow.Dispatcher.Invoke(() =>
                 {
-                    ((BuffBarWindowViewModel)WindowManager.BuffBar.DataContext).Direction = s;
+                    ((BuffBarWindowViewModel)WindowManager.BuffWindow.DataContext).Direction = s;
                 });
                 NotifyPropertyChanged("IsLeftToRightOn");
             }
@@ -862,8 +1035,8 @@ namespace TCC.ViewModels
             _dispatcher = Dispatcher.CurrentDispatcher;
             WindowManager.CooldownWindow.PropertyChanged += CooldownWindow_PropertyChanged;
             WindowManager.CharacterWindow.PropertyChanged += CharacterWindow_PropertyChanged;
-            WindowManager.BossGauge.PropertyChanged += BossGauge_PropertyChanged;
-            WindowManager.BuffBar.PropertyChanged += BuffBar_PropertyChanged;
+            WindowManager.BossWindow.PropertyChanged += BossGauge_PropertyChanged;
+            WindowManager.BuffWindow.PropertyChanged += BuffBar_PropertyChanged;
             WindowManager.GroupWindow.PropertyChanged += GroupWindow_PropertyChanged;
             WindowManager.ClassWindow.PropertyChanged += ClassWindow_PropertyChanged;
         }
