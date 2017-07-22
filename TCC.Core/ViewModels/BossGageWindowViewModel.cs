@@ -14,11 +14,6 @@ namespace TCC.ViewModels
     {
         private static BossGageWindowViewModel _instance;
         public static BossGageWindowViewModel Instance => _instance ?? (_instance = new BossGageWindowViewModel());
-        public bool HarrowholdMode
-        {
-            get => SessionManager.HarrowholdMode;
-        }
-        private HarrowholdPhase _currentHHphase;
         public HarrowholdPhase CurrentHHphase
         {
             get => _currentHHphase;
@@ -30,46 +25,42 @@ namespace TCC.ViewModels
                 NotifyPropertyChanged(nameof(CurrentHHphase));
             }
         }
-        private void SessionManager_HhModeChanged(bool val)
-        {
-            NotifyPropertyChanged("CurrentNPCs");
-            NotifyPropertyChanged("HarrowholdMode");
-        }
+        private HarrowholdPhase _currentHHphase;
         public bool IsTeraOnTop
         {
             get => WindowManager.IsTccVisible;
         }
-        private ICollectionView _bams;
         public ICollectionView Bams
         {
             get
             {
-                _bams = new CollectionViewSource { Source = _bosses }.View;
+                _bams = new CollectionViewSource { Source = _currentNPCs }.View;
                 _bams.Filter = p => ((Boss)p).IsBoss == true;
                 return _bams;
             }
         }
-        private ICollectionView _mobs;
+        private ICollectionView _bams;
         public ICollectionView Mobs
         {
             get
             {
-                _mobs = new CollectionViewSource { Source = _bosses }.View;
+                _mobs = new CollectionViewSource { Source = _currentNPCs }.View;
                 _mobs.Filter = p => ((Boss)p).IsBoss == false;
                 return _mobs;
             }
         }
-        private ICollectionView _dragons;
+        private ICollectionView _mobs;
         public ICollectionView Dragons
         {
             get
             {
-                _dragons = new CollectionViewSource { Source = _bosses }.View;
+                _dragons = new CollectionViewSource { Source = _currentNPCs }.View;
                 _dragons.Filter = p => ((Boss)p).TemplateId > 1099 && ((Boss)p).TemplateId < 1104;
                 return _dragons;
             }
         }
-        private double scale = SettingsManager.BossGaugeWindowSettings.Scale;
+        private ICollectionView _dragons;
+        private double scale = SettingsManager.BossWindowSettings.Scale;
         public double Scale
         {
             get { return scale; }
@@ -81,26 +72,26 @@ namespace TCC.ViewModels
             }
         }
 
-        private SynchronizedObservableCollection<Boss> _bosses;
         public SynchronizedObservableCollection<Boss> CurrentNPCs
         {
             get
             {
-                return _bosses;
+                return _currentNPCs;
             }
             set
             {
-                if (_bosses == value) return;
-                _bosses = value;
+                if (_currentNPCs == value) return;
+                _currentNPCs = value;
             }
         }
+        private SynchronizedObservableCollection<Boss> _currentNPCs;
         public int VisibleBossesCount
         {
-            get => CurrentNPCs.Where(x => x.Visible == Visibility.Visible).Count();
+            get => CurrentNPCs.Where(x => x.Visible == Visibility.Visible && x.IsBoss).Count();
         }
         public void AddOrUpdateBoss(ulong entityId, float maxHp, float curHp, bool isBoss, uint templateId = 0, uint zoneId = 0, Visibility v = Visibility.Visible)
         {
-            var boss = _bosses.FirstOrDefault(x => x.EntityId == entityId);
+            var boss = _currentNPCs.FirstOrDefault(x => x.EntityId == entityId);
             if (boss == null)
             {
                 if (SettingsManager.ShowOnlyBosses && !isBoss) return;
@@ -123,7 +114,7 @@ namespace TCC.ViewModels
                 else
                 {
                     if (boss.ZoneId == 950 && (boss.TemplateId == 1000 || boss.TemplateId == 2000 || boss.TemplateId == 3000 || boss.TemplateId == 4000)) Vergos = boss;
-                    _bosses.Add(boss);
+                    _currentNPCs.Add(boss);
                 }
 
             }
@@ -135,24 +126,23 @@ namespace TCC.ViewModels
         public BossGageWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
-            _bosses = new SynchronizedObservableCollection<Boss>(_dispatcher);
-            SessionManager.HhModeChanged += SessionManager_HhModeChanged;
+            _currentNPCs = new SynchronizedObservableCollection<Boss>(_dispatcher);
             WindowManager.TccVisibilityChanged += (s, ev) =>
             {
                 NotifyPropertyChanged("IsTeraOnTop");
                 if (IsTeraOnTop)
                 {
-                    WindowManager.BossGauge.RefreshTopmost();
+                    WindowManager.BossWindow.RefreshTopmost();
                 }
             };
 
         }
         private void AddSortedDragons()
         {
-            _bosses.Add(_holdedDragons.First(x => x.TemplateId == 1102));
-            _bosses.Add(_holdedDragons.First(x => x.TemplateId == 1100));
-            _bosses.Add(_holdedDragons.First(x => x.TemplateId == 1101));
-            _bosses.Add(_holdedDragons.First(x => x.TemplateId == 1103));
+            _currentNPCs.Add(_holdedDragons.First(x => x.TemplateId == 1102));
+            _currentNPCs.Add(_holdedDragons.First(x => x.TemplateId == 1100));
+            _currentNPCs.Add(_holdedDragons.First(x => x.TemplateId == 1101));
+            _currentNPCs.Add(_holdedDragons.First(x => x.TemplateId == 1103));
             _holdedDragons.Clear();
         }
         private Boss selectedDragon;
@@ -181,16 +171,16 @@ namespace TCC.ViewModels
         private List<Boss> _holdedDragons = new List<Boss>();
         public void RemoveBoss(ulong id)
         {
-            var boss = _bosses.FirstOrDefault(x => x.EntityId == id);
+            var boss = _currentNPCs.FirstOrDefault(x => x.EntityId == id);
             if (boss == null) return;
-            _bosses.Remove(boss);
+            _currentNPCs.Remove(boss);
             boss.Dispose();
             if (SelectedDragon != null && SelectedDragon.EntityId == id) SelectedDragon = null;
         }
         public void CopyToClipboard()
         {
             var sb = new StringBuilder();
-            foreach (var boss in _bosses)
+            foreach (var boss in _currentNPCs)
             {
                 if (boss.Visible == Visibility.Visible)
                 {
@@ -206,12 +196,12 @@ namespace TCC.ViewModels
         {
             _dispatcher.Invoke(() =>
             {
-                _bosses.Clear();
+                _currentNPCs.Clear();
             });
         }
         public void EndNpcAbnormality(ulong target, Abnormality ab)
         {
-            var boss = _bosses.FirstOrDefault(x => x.EntityId == target);
+            var boss = _currentNPCs.FirstOrDefault(x => x.EntityId == target);
             if (boss != null)
             {
                 boss.EndBuff(ab);
@@ -219,7 +209,7 @@ namespace TCC.ViewModels
         }
         public void AddOrRefreshNpcAbnormality(Abnormality ab, int stacks, uint duration, ulong target, double size, double margin)
         {
-            var boss = _bosses.FirstOrDefault(x => x.EntityId == target);
+            var boss = _currentNPCs.FirstOrDefault(x => x.EntityId == target);
             if (boss != null)
             {
                 boss.AddorRefresh(ab, duration, stacks, size, margin);
@@ -227,7 +217,7 @@ namespace TCC.ViewModels
         }
         public void SetBossEnrage(ulong entityId, bool enraged)
         {
-            var boss = _bosses.FirstOrDefault(x => x.EntityId == entityId);
+            var boss = _currentNPCs.FirstOrDefault(x => x.EntityId == entityId);
             if (boss == null)
             {
                 return;
@@ -236,7 +226,7 @@ namespace TCC.ViewModels
         }
         public void UnsetBossTarget(ulong entityId)
         {
-            var boss = _bosses.FirstOrDefault(x => x.EntityId == entityId);
+            var boss = _currentNPCs.FirstOrDefault(x => x.EntityId == entityId);
             if (boss == null)
             {
                 return;
@@ -245,7 +235,7 @@ namespace TCC.ViewModels
         }
         public void SetBossAggro(ulong entityId, AggroCircle circle, ulong user)
         {
-            var boss = _bosses.FirstOrDefault(x => x.EntityId == entityId);
+            var boss = _currentNPCs.FirstOrDefault(x => x.EntityId == entityId);
             if (boss == null)
             {
                 return;
@@ -255,7 +245,7 @@ namespace TCC.ViewModels
         }
         public void SelectDragon(Dragon dragon)
         {
-            foreach (var item in _bosses.Where(x => x.TemplateId > 1099 && x.TemplateId < 1104))
+            foreach (var item in _currentNPCs.Where(x => x.TemplateId > 1099 && x.TemplateId < 1104))
             {
                 if (item.TemplateId == (uint)dragon) { item.IsSelected = true; SelectedDragon = item; }
                 else item.IsSelected = false;
