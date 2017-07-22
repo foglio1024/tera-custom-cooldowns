@@ -127,11 +127,7 @@ namespace TCC.ViewModels
                 NotifyPropertyChanged("IsTeraOnTop");
                 if (IsTeraOnTop)
                 {
-                    _dispatcher.Invoke(() =>
-                    {
-                        WindowManager.ChatWindow.Topmost = false;
-                        WindowManager.ChatWindow.Topmost = true;
-                    });
+                    WindowManager.ChatWindow.RefreshTopmost();
                 }
             };
             ChatMessages.CollectionChanged += ChatMessages_CollectionChanged;
@@ -237,6 +233,8 @@ namespace TCC.ViewModels
             NotifyPropertyChanged(nameof(MessageCount));
         }
 
+
+
         internal void AddOrRefreshLfg(S_PARTY_MATCH_LINK x)
         {
             LFG lfg;
@@ -298,6 +296,12 @@ namespace TCC.ViewModels
             hideTimer.Stop();
             IsChatVisible = true;
 
+        }
+
+        public void ClearAll()
+        {
+            ChatMessages.Clear();
+            LFGs.Clear();
         }
     }
 }
