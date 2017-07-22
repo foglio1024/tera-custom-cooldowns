@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,6 +11,7 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media.Animation;
+using System.Windows.Threading;
 
 namespace TCC.Windows
 {
@@ -72,6 +74,13 @@ namespace TCC.Windows
 
             WindowManager.TccVisibilityChanged += OpacityChange;
             WindowManager.TccDimChanged += OpacityChange;
+
+            Closed += TccWindow_Closed;
+        }
+
+        private void TccWindow_Closed(object sender, EventArgs e)
+        {
+            Dispatcher.InvokeShutdown();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -165,5 +174,14 @@ namespace TCC.Windows
 
             }
         }
+
+        public void CloseWindowSafe()
+        {
+            if (Dispatcher.CheckAccess())
+                Close();
+            else
+                Dispatcher.Invoke(DispatcherPriority.Normal, new ThreadStart(Close));
+        }
+
     }
 }
