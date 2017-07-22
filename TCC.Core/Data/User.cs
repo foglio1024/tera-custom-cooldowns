@@ -233,7 +233,7 @@ namespace TCC.Data
             }
         }
 
-        private ReadyStatus ready = ReadyStatus.Undefined;
+        private ReadyStatus ready = ReadyStatus.None;
         public ReadyStatus Ready
         {
             get { return ready; }
@@ -314,6 +314,16 @@ namespace TCC.Data
         {
             get => _debuffList.Count == 0 ? false : true;
         }
+        public bool HasAggro
+        {
+            get => _hasAggro; set
+            {
+                if (_hasAggro == value) return;
+                _hasAggro = value;
+                NotifyPropertyChanged(nameof(HasAggro));
+            }
+        }
+        private bool _hasAggro = false;
 
 
         private SynchronizedObservableCollection<AbnormalityDuration> _buffs;
