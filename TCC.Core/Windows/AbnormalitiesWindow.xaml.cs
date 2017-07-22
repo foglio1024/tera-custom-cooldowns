@@ -20,15 +20,15 @@ namespace TCC.Windows
     /// <summary>
     /// Logica di interazione per AbnormalitiesWindow.xaml
     /// </summary>
-    public partial class AbnormalitiesWindow : TccWindow
+    public partial class BuffWindow : TccWindow
     {
-        public AbnormalitiesWindow()
+        public BuffWindow()
         {
             InitializeComponent();
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            InitWindow(SettingsManager.BuffBarWindowSettings);
+            InitWindow(SettingsManager.BuffWindowSettings);
 
             buffs.ItemsSource = BuffBarWindowViewModel.Instance.Player.Buffs;
             debuffs.ItemsSource = BuffBarWindowViewModel.Instance.Player.Debuffs;
