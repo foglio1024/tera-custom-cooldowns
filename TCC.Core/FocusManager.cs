@@ -84,18 +84,6 @@ namespace TCC
         }
         public static void CheckForegroundWindow(object sender, ElapsedEventArgs e)
         {
-            //IntPtr hwnd = FocusManager.GetForegroundWindow();
-            //FocusManager.GetWindowThreadProcessId(hwnd, out uint procId);
-            //Process proc = Process.GetProcessById((int)procId);
-
-            //if (proc.ProcessName == "TERA" || proc.ProcessName == "TCC" || proc.ProcessName == "devenv" || proc.ProcessName == "ShinraMeter")
-            //{
-            //    WindowManager.IsFocused = true;
-            //}
-            //else
-            //{
-            //    WindowManager.IsFocused = false;
-            //}
 
             WindowManager.IsFocused = IsActive();
         }
