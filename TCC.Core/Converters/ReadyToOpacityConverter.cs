@@ -14,6 +14,8 @@ namespace TCC.Converters
                     return .9;
                 case ReadyStatus.Ready:
                     return .9;
+                case ReadyStatus.Undefined:
+                    return .9;
                 default:
                     return 0;
             }
