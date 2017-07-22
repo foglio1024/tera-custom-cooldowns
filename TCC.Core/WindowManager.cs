@@ -26,8 +26,8 @@ namespace TCC
     {
         public static CooldownWindow CooldownWindow;
         public static CharacterWindow CharacterWindow;
-        public static BossGageWindow BossGauge;
-        public static AbnormalitiesWindow BuffBar;
+        public static BossWindow BossWindow;
+        public static BuffWindow BuffWindow;
         public static GroupWindow GroupWindow;
         public static ClassWindow ClassWindow;
         public static ChatWindow ChatWindow;
@@ -85,14 +85,27 @@ namespace TCC
             get => isFocused;
             set
             {
-                if (isFocused != value)
+
+                if (isFocused == value)
                 {
-                    isFocused = value;
-                    NotifyVisibilityChanged();
+                    if(focusCount > 2)
+                    {
+                        return;
+                    }
                 }
+                isFocused = value;
+                if (isFocused)
+                {
+                    focusCount++;
+                }
+                else
+                {
+                    focusCount = 0;
+                }
+                NotifyVisibilityChanged();             
             }
         }
-
+        static int focusCount;
         static System.Timers.Timer _undimTimer;
 
         private static bool skillsEnded = true;
@@ -119,11 +132,11 @@ namespace TCC
 
         public static void NotifyDimChanged()
         {
-            TccDimChanged?.Invoke(null, new PropertyChangedEventArgs("IsTccDim"));
+            TccDimChanged?.Invoke(null, new PropertyChangedEventArgs(nameof(IsTccDim)));
         }
         public static void NotifyVisibilityChanged()
         {
-            TccVisibilityChanged?.Invoke(null, new PropertyChangedEventArgs("IsTccVisible"));
+            TccVisibilityChanged?.Invoke(null, new PropertyChangedEventArgs(nameof(IsTccVisible)));
         }
 
         public static event PropertyChangedEventHandler ClickThruChanged;
@@ -144,7 +157,7 @@ namespace TCC
             new Action(LoadCharWindow),
             new Action(LoadClassWindow)
         };
-        static void LoadCharWindow()
+        public static void LoadCharWindow()
         {
             var charWindowThread = new Thread(new ThreadStart(() =>
             {
@@ -162,7 +175,7 @@ namespace TCC
             charWindowThread.Start();
             Debug.WriteLine("Char window loaded");
         }
-        static void LoadCooldownWindow()
+        public static void LoadCooldownWindow()
         {
             var cooldownWindowThread = new Thread(new ThreadStart(() =>
             {
@@ -181,16 +194,16 @@ namespace TCC
 
 
         }
-        static void LoadBossGaugeWindow()
+        public static void LoadBossGaugeWindow()
         {
 
             var bossGaugeThread = new Thread(new ThreadStart(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
-                BossGauge = new BossGageWindow();
+                BossWindow = new BossWindow();
 
-                BossGauge.AllowsTransparency = SettingsManager.BossGaugeWindowSettings.AllowTransparency;
-                BossGauge.Show();
+                BossWindow.AllowsTransparency = SettingsManager.BossWindowSettings.AllowTransparency;
+                BossWindow.Show();
                 waiting = false;
 
                 Dispatcher.Run();
@@ -201,14 +214,14 @@ namespace TCC
             Debug.WriteLine("Boss window loaded");
 
         }
-        static void LoadBuffBarWindow()
+        public static void LoadBuffBarWindow()
         {
             var buffBarThread = new Thread(new ThreadStart(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
-                BuffBar = new AbnormalitiesWindow();
+                BuffWindow = new BuffWindow();
                 BuffBarWindowViewModel.Instance.Player = new Data.Player();
-                BuffBar.Show();
+                BuffWindow.Show();
                 waiting = false;
 
                 Dispatcher.Run();
@@ -220,7 +233,7 @@ namespace TCC
 
 
         }
-        static void LoadGroupWindow()
+        public static void LoadGroupWindow()
         {
             var groupWindowThread = new Thread(new ThreadStart(() =>
             {
@@ -237,7 +250,7 @@ namespace TCC
             Debug.WriteLine("Group window loaded");
 
         }
-        static void LoadChatWindow()
+        public static void LoadChatWindow()
         {
             var chatWindowThread = new Thread(new ThreadStart(() =>
             {
@@ -255,7 +268,7 @@ namespace TCC
             Debug.WriteLine("Chat window loaded");
 
         }
-        static void LoadClassWindow()
+        public static void LoadClassWindow()
         {      
             var t = new Thread(new ThreadStart(() =>
             {
@@ -344,11 +357,17 @@ namespace TCC
 
             foreach (Window w in Application.Current.Windows)
             {
-                w.Close();
+                if(w.GetType() == typeof(TccWindow))
+                {
+                    ((TccWindow)w).CloseWindowSafe();
+                }
+                else
+                {
+                    w.Close();
+                }
             }
         }
 
-        static bool isForeground = false;
         private static void SetClickThru()
         {
             foreach (Window w in Application.Current.Windows)
@@ -377,10 +396,6 @@ namespace TCC
                 UnsetClickThru();
             }
 
-        }
-        private static DoubleAnimation OpacityAnimation(double to)
-        {
-            return new DoubleAnimation(to, TimeSpan.FromMilliseconds(300)) { EasingFunction = new QuadraticEase() };
         }
         private static void NI_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
