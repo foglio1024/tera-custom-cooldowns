@@ -147,6 +147,7 @@ namespace TCC
     {
         NotReady = 0,
         Ready = 1,
+        None = 254,
         Undefined = 255 //arbitrary
     }
 
