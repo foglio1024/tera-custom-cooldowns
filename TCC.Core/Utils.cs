@@ -162,6 +162,10 @@ namespace TCC
         {
             return _dispatcher;
         }
+        public void SetDispatcher(Dispatcher newDispatcher)
+        {
+            _dispatcher = newDispatcher;
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void NotifyPropertyChanged(string v)
         {
