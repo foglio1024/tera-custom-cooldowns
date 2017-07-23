@@ -63,6 +63,7 @@ namespace TCC.ViewModels
             Task.Delay(100).ContinueWith(t => NotifyPropertyChanged(nameof(GroupSize)));
             NotifyPropertyChanged(nameof(Formed));
             NotifyPropertyChanged(nameof(AliveMembersCount));
+            NotifyPropertyChanged(nameof(ReadyMembersCount));
         }
         private void _healers_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
@@ -70,6 +71,7 @@ namespace TCC.ViewModels
             Task.Delay(100).ContinueWith(t => NotifyPropertyChanged(nameof(GroupSize)));
             NotifyPropertyChanged(nameof(Formed));
             NotifyPropertyChanged(nameof(AliveMembersCount));
+            NotifyPropertyChanged(nameof(ReadyMembersCount));
 
         }
         private void _dps_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -78,9 +80,20 @@ namespace TCC.ViewModels
             Task.Delay(100).ContinueWith(t => NotifyPropertyChanged(nameof(GroupSize)));
             NotifyPropertyChanged(nameof(Formed));
             NotifyPropertyChanged(nameof(AliveMembersCount));
+            NotifyPropertyChanged(nameof(ReadyMembersCount));
 
         }
-        public bool Raid { get; set; }
+        public bool Raid
+        {
+            get => raid;
+            set
+            {
+                if (raid == value) return;
+                raid = value;
+                NotifyPropertyChanged(nameof(Raid));
+            }
+        }
+        private bool raid;
         public int GroupSize
         {
             get { return All.Count; }
@@ -109,6 +122,17 @@ namespace TCC.ViewModels
         {
             get => GroupSize > 0 ? true : false;
         }
+        public bool MPenabled
+        {
+            get => mpEnabled;
+            set
+            {
+                if (mpEnabled == value) return;
+                mpEnabled = value;
+                NotifyPropertyChanged(nameof(MPenabled));
+            }
+        }
+        private bool mpEnabled;
         public List<User> All
         {
             get

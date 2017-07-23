@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:converters="clr-namespace:TCC.Converters"
              xmlns:controls="clr-namespace:TCC.Controls"
+             xmlns:vm="clr-namespace:TCC.ViewModels"
              mc:Ignorable="d"
              Loaded="UserControl_Loaded"
              Unloaded="UserControl_Unloaded"
@@ -158,8 +159,8 @@
             </Rectangle>
             <Path Fill="#222" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" Grid.ColumnSpan="2" Grid.Row="1" Height="4" Margin="2,-1,0,0"></Path>
             <!--MP-->
-            <Rectangle Fill="#90000000" Height="2" Width="116" Grid.Row="2" HorizontalAlignment="Left" Margin="0,1" Grid.ColumnSpan="2"/>
-            <Rectangle Fill="#66c6ff" Height="2" Width="116" Grid.Row="2" HorizontalAlignment="Left" Margin="0,1" Grid.ColumnSpan="2">
+            <Rectangle Fill="#90000000" Height="2" Width="116" Grid.Row="2" HorizontalAlignment="Left" Margin="0,0" Grid.ColumnSpan="2" Name="mpBase" />
+            <Rectangle Fill="#66c6ff" Height="2" Width="116" Grid.Row="2" HorizontalAlignment="Left" Margin="0,0" Grid.ColumnSpan="2" Name="mpRect">
                 <Rectangle.RenderTransform>
                     <ScaleTransform ScaleX="{Binding MpFactor}"/>
                 </Rectangle.RenderTransform>

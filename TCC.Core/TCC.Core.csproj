@@ -978,6 +978,7 @@
     <Content Include="resources\data\items\items-TW.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="resources\images\ic_remove_white_24dp_2x.png" />
     <Resource Include="resources\images\ic_visibility_off_white_24dp_2x.png" />
     <Resource Include="resources\images\ic_filter_list_white_24dp_2x.png" />
     <Resource Include="resources\images\ic_label_white_24dp_2x.png" />

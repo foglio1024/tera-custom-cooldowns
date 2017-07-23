@@ -63,92 +63,10 @@ namespace TCC.Windows
         private void TccWindow_Loaded(object sender, RoutedEventArgs e)
         {
             InitWindow(SettingsManager.GroupWindowSettings);
-            //dps.DataContext = GroupWindowViewModel.Instance.Dps;
-            //dps.ItemsSource = GroupWindowViewModel.Instance.Dps;
-            //tanks.DataContext = GroupWindowViewModel.Instance.Tanks;
-            //tanks.ItemsSource = GroupWindowViewModel.Instance.Tanks;
-            //healers.DataContext = GroupWindowViewModel.Instance.Healers;
-            //healers.ItemsSource = GroupWindowViewModel.Instance.Healers;
         }
-
-
         private void TccWindow_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             ContextMenu.IsOpen = true;
-        }
-
-        public void SwitchTemplate(bool bigGroup)
-        {
-            Dispatcher.Invoke(() =>
-            {
-                if (bigGroup)
-                {
-                    foreach (var dps in GroupWindowViewModel.Instance.Dps)
-                    {
-                        foreach (var buff in dps.Buffs)
-                        {
-                            buff.IconSize = AbnormalityManager.RAID_AB_SIZE*.9;
-                            buff.BackgroundEllipseSize = AbnormalityManager.RAID_AB_SIZE;
-                            buff.IndicatorMargin = new Thickness(AbnormalityManager.RAID_AB_LEFT_MARGIN, 1, 1, 1);
-                        }
-                    }
-                    foreach (var tank in GroupWindowViewModel.Instance.Tanks)
-                    {
-                        foreach (var buff in tank.Buffs)
-                        {
-                            buff.IconSize = AbnormalityManager.RAID_AB_SIZE * .9;
-                            buff.BackgroundEllipseSize = AbnormalityManager.RAID_AB_SIZE;
-                            buff.IndicatorMargin = new Thickness(AbnormalityManager.RAID_AB_LEFT_MARGIN, 1, 1, 1);
-                        }
-                    }
-                    foreach (var heal in GroupWindowViewModel.Instance.Healers)
-                    {
-                        foreach (var buff in heal.Buffs)
-                        {
-                            buff.IconSize = AbnormalityManager.RAID_AB_SIZE * .9;
-                            buff.BackgroundEllipseSize = AbnormalityManager.RAID_AB_SIZE;
-                            buff.IndicatorMargin = new Thickness(AbnormalityManager.RAID_AB_LEFT_MARGIN, 1, 1, 1);
-                        }
-                    }
-                    dps.ItemTemplate = this.FindResource("raid") as DataTemplate;
-                    tanks.ItemTemplate = this.FindResource("raid") as DataTemplate;
-                    healers.ItemTemplate = this.FindResource("raid") as DataTemplate;
-                }
-                else
-                {
-                    foreach (var dps in GroupWindowViewModel.Instance.Dps)
-                    {
-                        foreach (var buff in dps.Buffs)
-                        {
-                            buff.IconSize = AbnormalityManager.PARTY_AB_SIZE * .9;
-                            buff.BackgroundEllipseSize = AbnormalityManager.PARTY_AB_SIZE;
-                            buff.IndicatorMargin = new Thickness(AbnormalityManager.PARTY_AB_LEFT_MARGIN, 1, 1, 1);
-                        }
-                    }
-                    foreach (var tank in GroupWindowViewModel.Instance.Tanks)
-                    {
-                        foreach (var buff in tank.Buffs)
-                        {
-                            buff.IconSize = AbnormalityManager.PARTY_AB_SIZE * .9;
-                            buff.BackgroundEllipseSize = AbnormalityManager.PARTY_AB_SIZE;
-                            buff.IndicatorMargin = new Thickness(AbnormalityManager.PARTY_AB_LEFT_MARGIN, 1, 1, 1);
-                        }
-                    }
-                    foreach (var heal in GroupWindowViewModel.Instance.Healers)
-                    {
-                        foreach (var buff in heal.Buffs)
-                        {
-                            buff.IconSize = AbnormalityManager.PARTY_AB_SIZE * .9;
-                            buff.BackgroundEllipseSize = AbnormalityManager.PARTY_AB_SIZE;
-                            buff.IndicatorMargin = new Thickness(AbnormalityManager.PARTY_AB_LEFT_MARGIN, 1, 1, 1);
-                        }
-                    }
-                    dps.ItemTemplate = this.FindResource("party") as DataTemplate;
-                    tanks.ItemTemplate = this.FindResource("party") as DataTemplate;
-                    healers.ItemTemplate = this.FindResource("party") as DataTemplate;
-
-                }
-            });
         }
     }
 }

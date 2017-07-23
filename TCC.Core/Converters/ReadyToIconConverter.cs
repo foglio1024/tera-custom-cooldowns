@@ -18,7 +18,7 @@ namespace TCC.Converters
                     img = "resources/images/ic_done_white_24dp_2x.png";
                     break;
                 case ReadyStatus.Undefined:
-                    img = "resources/images/ic_access_time_white_24dp_2x.png";
+                    img = "resources/images/ic_remove_white_24dp_2x.png";
                     break;
                 default:
                     break;
