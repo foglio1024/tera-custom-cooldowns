@@ -325,6 +325,7 @@
                             </Grid>
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
+                    <controls:BoolSetting SettingName="Disable MP" IsOn="{Binding DisableMP, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_tune_white_24dp_2x.png"></controls:BoolSetting>
                 </StackPanel>
 
             </TabItem>

@@ -157,6 +157,7 @@ namespace TCC
         public static bool ShowChannel { get; set; } = true;
         public static bool ShowTimestamp { get; set; } = true;
         public static bool ShowOnlyBosses { get; set; } = false;
+        public static bool DisablePartyMP { get; set; } = false;
 
         public static void LoadWindowSettings()
         {
@@ -272,6 +273,11 @@ namespace TCC
                     ShowOnlyBosses = Boolean.Parse(b.Attribute(nameof(ShowOnlyBosses)).Value);
                 }
                 catch (Exception) { }
+                try
+                {
+                    DisablePartyMP = Boolean.Parse(b.Attribute(nameof(DisablePartyMP)).Value);
+                }
+                catch (Exception) { }
                 //add settings here
             }
         }
@@ -358,7 +364,8 @@ namespace TCC
                 new XAttribute(nameof(SpamThreshold), SpamThreshold),
                 new XAttribute(nameof(ShowChannel), ShowChannel),
                 new XAttribute(nameof(ShowTimestamp), ShowTimestamp),
-                new XAttribute(nameof(ShowOnlyBosses), ShowOnlyBosses)
+                new XAttribute(nameof(ShowOnlyBosses), ShowOnlyBosses),
+                new XAttribute(nameof(DisablePartyMP), DisablePartyMP)
                 //add setting here
                 )
             );

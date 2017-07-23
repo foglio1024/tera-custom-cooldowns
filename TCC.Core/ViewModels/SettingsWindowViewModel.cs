@@ -1030,6 +1030,18 @@ namespace TCC.ViewModels
                 NotifyPropertyChanged(nameof(ShowOnlyBosses));
             }
         }
+        public bool DisableMP
+        {
+            get => SettingsManager.DisablePartyMP;
+            set
+            {
+                if (SettingsManager.DisablePartyMP == value) return;
+                SettingsManager.DisablePartyMP = value;
+                GroupWindowViewModel.Instance.MPenabled = !value;
+                MessageFactory.Update();
+                NotifyPropertyChanged(nameof(DisableMP));
+            }
+        }
         public SettingsWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;

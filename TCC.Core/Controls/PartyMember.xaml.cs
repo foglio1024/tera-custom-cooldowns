@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TCC.Data;
+using TCC.ViewModels;
 
 namespace TCC.Controls
 {
@@ -30,6 +31,31 @@ namespace TCC.Controls
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             AnimateIn();
+            GroupWindowViewModel.Instance.PropertyChanged += Instance_PropertyChanged;
+        }
+        private void Instance_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(GroupWindowViewModel.Instance.MPenabled))
+            {
+                SetMP(GroupWindowViewModel.Instance.MPenabled);
+            }
+        }
+
+        private void SetMP(bool mPenabled)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                if (mPenabled)
+                {
+                    mpRect.Visibility = Visibility.Visible;
+                    mpBase.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    mpRect.Visibility = Visibility.Collapsed;
+                    mpBase.Visibility = Visibility.Collapsed;
+                }
+            });
         }
 
         public void AnimateIn()
