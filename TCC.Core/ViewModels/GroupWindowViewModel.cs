@@ -124,26 +124,18 @@ namespace TCC.ViewModels
         }
         public bool MPenabled
         {
-            get => mpEnabled;
             set
             {
-                if (mpEnabled == value) return;
-                mpEnabled = value;
                 NotifyPropertyChanged(nameof(MPenabled));
             }
         }
-        private bool mpEnabled;
         public bool HPenabled
         {
-            get => hpEnabled;
             set
             {
-                if (hpEnabled == value) return;
-                hpEnabled = value;
                 NotifyPropertyChanged(nameof(HPenabled));
             }
         }
-        private bool hpEnabled;
 
         public List<User> All
         {
