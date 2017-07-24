@@ -10,7 +10,7 @@
              Loaded="UserControl_Loaded"
              Unloaded="UserControl_Unloaded"
              Margin="0" >
-    <Grid Height="Auto" Margin="0,-5,0,0" Width="175" Name="rootGrid" ToolTip="{Binding Name}" >
+    <Grid Height="Auto" Margin="2" Width="175" Name="rootGrid" ToolTip="{Binding Name}" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
@@ -66,7 +66,9 @@
             </ItemsControl.RenderTransform>
 
         </ItemsControl>
-        <ItemsControl Name="debuffs" ItemsSource="{Binding Debuffs}" Grid.Row="2" Grid.ColumnSpan="2" ItemTemplate="{StaticResource abnorm}" Margin="0,-2,0,0" ClipToBounds="False">
+        <ItemsControl Name="debuffs" ItemsSource="{Binding Debuffs}" Grid.Row="2" 
+                      Grid.ColumnSpan="2" ItemTemplate="{StaticResource abnorm}" Margin="0,-2,0,0" 
+                      ClipToBounds="False">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal"
@@ -80,29 +82,33 @@
         </ItemsControl>
 
         <!--Main Styles.DefaultBorder-->
-        <Border Style="{StaticResource Styles.DefaultBorder}" Grid.ColumnSpan="3" Margin="2,0" Height="35"/>
-        <Rectangle Width="3" Height="33" Margin="-1,0,3,0" 
+        <Border Style="{StaticResource Styles.DefaultBorder}" Grid.ColumnSpan="3" Margin="2,0" Height="Auto"/>
+        <Rectangle Width="3"  Margin="-1,1,3,1" 
                    HorizontalAlignment="Right" Grid.Column="2" 
                    Grid.RowSpan="1" Opacity=".8"
                    Fill="{Binding UserClass, Converter={StaticResource Converters.ClassToFill}}"
                    />
 
         <!--Aggro border-->
-        <Border Name="aggroBorder" Height="37" Visibility="{Binding HasAggro, Converter={StaticResource Converters.BoolToVisibleHidden}}" BorderBrush="Orange" BorderThickness="5,0,0,0" Grid.ColumnSpan="1" Margin="-2,0,2,0" Grid.Column="2">
+        <Border Name="aggroBorder" Height="37" 
+                Visibility="{Binding HasAggro, Converter={StaticResource Converters.BoolToVisibleHidden}}" 
+                BorderBrush="Orange" BorderThickness="5,0,0,0" Grid.ColumnSpan="1" Margin="-2,0,2,0" Grid.Column="2">
             <Border.Effect>
-                <DropShadowEffect Color="Orange" ShadowDepth="0" BlurRadius="5" RenderingBias="Performance"></DropShadowEffect>
+                <DropShadowEffect Color="Orange" ShadowDepth="0" BlurRadius="5" RenderingBias="Performance"/>
             </Border.Effect>
         </Border>
         <!--Death red border-->
-        <Border Name="deathBorder" Height="37" Opacity="{Binding Alive, Converter={StaticResource Converters.BoolToOpacityInverse}}" BorderBrush="Red" BorderThickness="5,0,0,0" Grid.ColumnSpan="1" Margin="-2,0,2,0" Grid.Column="2">
+        <Border Name="deathBorder"  Opacity="{Binding Alive, Converter={StaticResource Converters.BoolToOpacityInverse}}" 
+                BorderBrush="Red" BorderThickness="5,0,0,0" Grid.ColumnSpan="1" Margin="-2,0,2,0" Grid.Column="2">
             <Border.Effect>
-                <DropShadowEffect Color="Red" ShadowDepth="0" BlurRadius="5" RenderingBias="Performance"></DropShadowEffect>
+                <DropShadowEffect Color="Red" ShadowDepth="0" BlurRadius="5" RenderingBias="Performance"/>
             </Border.Effect>
         </Border>
 
         <!--Icon grid-->
-        <Grid Margin="0,-1,0,0" Width="50" Height="50">
-            <Image Width="Auto" Source="{Binding Laurel, Converter={StaticResource Converters.LaurelToImage}}" RenderOptions.BitmapScalingMode="Fant" 
+        <Grid Margin="0,-14" Width="50" Height="50">
+            <Image Width="Auto" Source="{Binding Laurel, Converter={StaticResource Converters.LaurelToImage}}" 
+                   RenderOptions.BitmapScalingMode="Fant" 
                            UseLayoutRounding="True" Opacity="1" HorizontalAlignment="Center">
                 <Image.RenderTransform>
                     <TransformGroup>
@@ -127,7 +133,7 @@
         </Grid>
 
         <!--Info grid-->
-        <Grid Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,4,0">
+        <Grid Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,0,4,0">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition />
@@ -138,7 +144,9 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <!--Leader icon-->
-            <Grid Grid.Column="1" Margin="2,-1,0,0" Width="15" Height="15" Opacity="{Binding IsLeader, Converter={StaticResource Converters.BoolToOpacity}}">
+            <Grid Grid.Column="1" Margin="2,-1,0,0" Width="15" Height="15" 
+                  Opacity="{Binding IsLeader, Converter={StaticResource Converters.BoolToOpacity}}"
+                  HorizontalAlignment="Left">
                 <Ellipse Fill="Orange"/>
                 <Image Source="/TCC;component/resources/images/crown.png" Margin="1.5"
                        UseLayoutRounding="False" RenderOptions.BitmapScalingMode="Fant" />
@@ -151,24 +159,31 @@
                 <Run Text="{Binding Name}" />
             </TextBlock>
             <!--HP-->
-            <Rectangle Fill="#90000000" Height="6" Width="116" Grid.Row="1" HorizontalAlignment="Left" Margin="0,1" Grid.ColumnSpan="2"/>
-            <Rectangle Fill="{Binding IsDebuffed, Converter={StaticResource Converters.DebuffStatusToHpColor}}" Height="6" Width="116" Grid.Row="1" HorizontalAlignment="Left" Margin="0,1" Grid.ColumnSpan="2" >
-                <Rectangle.RenderTransform>
-                    <ScaleTransform ScaleX="{Binding HpFactor}"/>
-                </Rectangle.RenderTransform>
-            </Rectangle>
-            <Path Fill="#222" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" Grid.ColumnSpan="2" Grid.Row="1" Height="4" Margin="2,-1,0,0"></Path>
+            <Grid  Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" Name="hpGrid">
+                <Rectangle Fill="#90000000" Height="6" Width="116" Margin="0,1" HorizontalAlignment="Left"/>
+                <Rectangle Fill="{Binding IsDebuffed, Converter={StaticResource Converters.DebuffStatusToHpColor}}" Height="4" Width="116" Margin="0,1" HorizontalAlignment="Left">
+                    <Rectangle.LayoutTransform>
+                        <ScaleTransform ScaleX="{Binding HpFactor}"/>
+                    </Rectangle.LayoutTransform>
+                </Rectangle>
+                <Path Fill="#222" Data="M0,0 2,0 1,1 0,0" 
+                  Stretch="Uniform" 
+                  Height="4" Margin="2,-1,0,0" 
+                  HorizontalAlignment="Center"/>
+            </Grid>
             <!--MP-->
-            <Rectangle Fill="#90000000" Height="2" Width="116" Grid.Row="2" HorizontalAlignment="Left" Margin="0,0" Grid.ColumnSpan="2" Name="mpBase" />
-            <Rectangle Fill="#66c6ff" Height="2" Width="116" Grid.Row="2" HorizontalAlignment="Left" Margin="0,0" Grid.ColumnSpan="2" Name="mpRect">
-                <Rectangle.RenderTransform>
-                    <ScaleTransform ScaleX="{Binding MpFactor}"/>
-                </Rectangle.RenderTransform>
-            </Rectangle>
+            <Grid Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Left" Name="mpGrid">
+                <Rectangle Fill="#90000000" Height="2" Width="116" HorizontalAlignment="Left"/>
+                <Rectangle Fill="#66c6ff" Height="2" Width="116" HorizontalAlignment="Left">
+                    <Rectangle.LayoutTransform>
+                        <ScaleTransform ScaleX="{Binding MpFactor}"/>
+                    </Rectangle.LayoutTransform>
+                </Rectangle>
+            </Grid>
         </Grid>
 
         <!--Ready check grid-->
-        <Grid Margin="-5,-5" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2" Opacity="{Binding Ready, Converter={StaticResource readyToOpacityConv}}">
+        <Grid Margin="-5,-5" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2"  Opacity="{Binding Ready, Converter={StaticResource readyToOpacityConv}}">
             <Grid.Effect>
                 <DropShadowEffect ShadowDepth="1" RenderingBias="Performance" BlurRadius="3"/>
             </Grid.Effect>

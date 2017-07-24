@@ -30,7 +30,8 @@ namespace TCC.Controls
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            SetMP(GroupWindowViewModel.Instance.MPenabled);
+            SetMP();
+            SetHP();
 
             AnimateIn();
             GroupWindowViewModel.Instance.PropertyChanged += Instance_PropertyChanged;
@@ -39,24 +40,26 @@ namespace TCC.Controls
         {
             if (e.PropertyName == nameof(GroupWindowViewModel.Instance.MPenabled))
             {
-                SetMP(GroupWindowViewModel.Instance.MPenabled);
+                SetMP();
+            }
+            else if (e.PropertyName == nameof(GroupWindowViewModel.Instance.HPenabled))
+            {
+                SetHP();
             }
         }
 
-        private void SetMP(bool mPenabled)
+        private void SetMP()
         {
             Dispatcher.Invoke(() =>
             {
-                if (mPenabled)
-                {
-                    mpRect.Visibility = Visibility.Visible;
-                    mpBase.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    mpRect.Visibility = Visibility.Collapsed;
-                    mpBase.Visibility = Visibility.Collapsed;
-                }
+                mpGrid.Visibility = !SettingsManager.DisablePartyMP ? Visibility.Visible : Visibility.Collapsed;
+            });
+        }
+        private void SetHP()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                hpGrid.Visibility = !SettingsManager.DisablePartyHP ? Visibility.Visible : Visibility.Collapsed;
             });
         }
 
