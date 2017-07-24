@@ -98,7 +98,8 @@ namespace TCC
             ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>"+ver+"</FONT>"));
 
             TeraSniffer.Instance.Enabled = true;
-
+            //var w = new DebugWindow();
+            //w.Show();
         }
 
         public static void CloseApp()
