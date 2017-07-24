@@ -60,7 +60,6 @@ namespace TCC
 
             SkillsDatabase.Load();
             BroochesDatabase.SetBroochesIcons();
-            AbnormalityDatabase.Load();
             SettingsManager.LoadWindowSettings();
             SettingsManager.LoadSettings();
             WindowManager.Init();

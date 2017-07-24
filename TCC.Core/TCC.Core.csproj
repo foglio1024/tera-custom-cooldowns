@@ -985,6 +985,27 @@
     <Content Include="resources\data\items\items-TW.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="resources\data\abnormalities\abnormals-EU-EN.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\abnormalities\abnormals-EU-FR.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\abnormalities\abnormals-EU-GER.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\abnormalities\abnormals-JP.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\abnormalities\abnormals-NA.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\abnormalities\abnormals-RU.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\abnormalities\abnormals-TW.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="resources\images\ic_remove_white_24dp_2x.png" />
     <Resource Include="resources\images\ic_visibility_off_white_24dp_2x.png" />
     <Resource Include="resources\images\ic_filter_list_white_24dp_2x.png" />

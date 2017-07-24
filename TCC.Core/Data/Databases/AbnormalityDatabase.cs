@@ -9,12 +9,12 @@ using System.Xml.Linq;
 
 namespace TCC.Data.Databases
 {
-    public static class AbnormalityDatabase
+    public class AbnormalityDatabase
     {
-        public static Dictionary<uint, Abnormality> Abnormalities;
-        public static void Load()
+        public Dictionary<uint, Abnormality> Abnormalities;
+        public AbnormalityDatabase(string lang)
         {
-            var f = File.OpenText(Environment.CurrentDirectory + "/resources/data/abnormalities.tsv");
+            var f = File.OpenText(Environment.CurrentDirectory + "/resources/data/abnormalities/abnormals-"+lang+".tsv");
             Abnormalities = new Dictionary<uint, Abnormality>();
             while (true)
             {
@@ -47,24 +47,6 @@ namespace TCC.Data.Databases
                 Abnormalities.Add(id, ab);
             }
 
-        }
-        public static void CheckIcons()
-        {
-            foreach (var abnorm in Abnormalities)
-            {
-                string filePath = Environment.CurrentDirectory + "/resources/images/" + abnorm.Value.IconName.Replace('.','/') + ".png";
-                if (File.Exists(filePath))
-                {
-                    //Debug.Write("\r[Icon Check] - Abnormality ID:{0} \t File name:{1} \t OK", abnorm.Value.Id, abnorm.Value.IconName);
-                }
-                else
-                {
-                    if(abnorm.Value.IconName != "" && !abnorm.Value.IconName.Contains("icon_ep"))
-                    {
-                        Debug.WriteLine("[Icon Check] - File name:{1} \t Path:{0}", filePath, abnorm.Value.IconName);
-                    }
-                }
-            }
         }
     }
 

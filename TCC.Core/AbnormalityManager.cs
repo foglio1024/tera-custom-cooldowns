@@ -21,9 +21,12 @@ namespace TCC
         public const double RAID_AB_LEFT_MARGIN = -9;
         public const double BOSS_AB_LEFT_MARGIN = 2;
 
+
+        public static AbnormalityDatabase CurrentDB;
+
         public static void BeginAbnormality(uint id, ulong target, uint duration, int stacks)
         {
-            if (AbnormalityDatabase.Abnormalities.TryGetValue(id, out Abnormality ab))
+            if (CurrentDB.Abnormalities.TryGetValue(id, out Abnormality ab))
             {
                 if (!Filter(ab)) return;
                 if (target == SessionManager.CurrentPlayer.EntityId)
@@ -39,7 +42,7 @@ namespace TCC
         }
         public static void EndAbnormality(ulong target, uint id)
         {
-            if (AbnormalityDatabase.Abnormalities.TryGetValue(id, out Abnormality ab))
+            if (CurrentDB.Abnormalities.TryGetValue(id, out Abnormality ab))
             {
                 if (target == SessionManager.CurrentPlayer.EntityId)
                 {
@@ -123,7 +126,7 @@ namespace TCC
 
         public static void BeginOrRefreshPartyMemberAbnormality(uint playerId, uint serverId, uint id, uint duration, int stacks)
         {
-            if (AbnormalityDatabase.Abnormalities.TryGetValue(id, out Abnormality ab))
+            if (CurrentDB.Abnormalities.TryGetValue(id, out Abnormality ab))
             {
                 if (!Filter(ab)) return;
                 GroupWindowViewModel.Instance.BeginOrRefreshUserAbnormality(ab, stacks, duration, playerId, serverId);
@@ -132,7 +135,7 @@ namespace TCC
 
         internal static void EndPartyMemberAbnormality(uint playerId, uint serverId, uint id)
         {
-            if (AbnormalityDatabase.Abnormalities.TryGetValue(id, out Abnormality ab))
+            if (CurrentDB.Abnormalities.TryGetValue(id, out Abnormality ab))
             {
                 if (!Filter(ab)) return;
                 GroupWindowViewModel.Instance.EndUserAbnormality(ab, playerId, serverId);

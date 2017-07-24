@@ -22,7 +22,7 @@ namespace TCC.Data
         public ArcherFocusTracker()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
-            if (AbnormalityDatabase.Abnormalities.TryGetValue(601400, out Abnormality ab))
+            if (AbnormalityManager.CurrentDB.Abnormalities.TryGetValue(601400, out Abnormality ab))
             {
                 Icon = ab.IconName;
             }

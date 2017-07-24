@@ -54,6 +54,7 @@ namespace TCC.Parsing
 
             EntitiesManager.CurrentDatabase = new MonsterDatabase(lang);
             SessionManager.ItemsDatabase = new ItemsDatabase(lang);
+            AbnormalityManager.CurrentDB = new AbnormalityDatabase(lang);
             SocialDatabase.Load();
             SystemMessages.Load();
             GuildQuestDatabase.Load();
