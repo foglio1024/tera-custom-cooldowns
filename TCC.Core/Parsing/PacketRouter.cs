@@ -93,7 +93,7 @@ namespace TCC.Parsing
                     continue;
                 }
                 var message = MessageFactory.Create(msg);
-                //PacketInspector.InspectPacket(msg);
+                //PacketInspector.AddToStats(msg);
                 if (message.GetType() == typeof(Tera.Game.Messages.UnknownMessage))
                 {
                     //discarded++;
@@ -561,6 +561,7 @@ namespace TCC.Parsing
         public static void HandleAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
             AbnormalityManager.BeginAbnormality(p.Id, p.TargetId, p.Duration, p.Stacks);
+            if (!SettingsManager.ClassWindowSettings.Enabled) return;
 
             switch (SessionManager.CurrentPlayer.Class)
             {
@@ -592,6 +593,7 @@ namespace TCC.Parsing
         public static void HandleAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
             AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.Duration, p.Stacks);
+            if (!SettingsManager.ClassWindowSettings.Enabled) return;
             switch (SessionManager.CurrentPlayer.Class)
             {
                 case Class.Warrior:
@@ -615,6 +617,8 @@ namespace TCC.Parsing
         public static void HandleAbnormalityEnd(S_ABNORMALITY_END p)
         {
             AbnormalityManager.EndAbnormality(p.Target, p.Id);
+            if (!SettingsManager.ClassWindowSettings.Enabled) return;
+
             switch (SessionManager.CurrentPlayer.Class)
             {
                 case Class.Archer:
