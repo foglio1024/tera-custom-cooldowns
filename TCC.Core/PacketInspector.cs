@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,10 +12,41 @@ using Tera.Game;
 
 namespace TCC
 {
-    public static class PacketInspector 
+    public static class PacketInspector
     {
+        static bool running;
+        static Dictionary<string, MessageStats> Stats;
+        public static void NewStat()
+        {
+            if (running) return;
+            Stats = new Dictionary<string, MessageStats>();
+            running = true;
+        }
+        public static void Stop()
+        {
+            running = false;
+            Dump();
+        }
+        public static void Dump()
+        {
+            List<string> lines = new List<string>();
+            foreach (var item in Stats)
+            {
+                var sb = new StringBuilder();
+                sb.Append(item.Key);
+                sb.Append("\t");
+                sb.Append(item.Value.Count);
+                sb.Append("\t");
+                sb.Append(item.Value.TotalSize);
 
-
+                lines.Add(sb.ToString());
+            }
+            var now = DateTime.Now.ToString();
+            now = now.Replace("/", "-");
+            now = now.Replace(":", "-");
+            var path = "packets-log_" + now + ".log";
+            File.WriteAllLines(path, lines);
+        }
         public static void InspectPacket(Message msg)
         {
             List<string> exclusionList = new List<string>()
@@ -102,8 +134,36 @@ namespace TCC
             var opName = PacketProcessor.OpCodeNamer.GetName(msg.OpCode);
             TeraMessageReader tmr = new TeraMessageReader(msg, PacketProcessor.OpCodeNamer, PacketProcessor.Version, PacketProcessor.SystemMessageNamer);
             if (exclusionList.Any(opName.Contains)) return;
-//            if(opName.Equals("S_LOAD_TOPO") || opName.Equals("C_LOAD_TOPO_FIN")|| opName.Equals("S_SPAWN_ME"))
-                Debug.WriteLine(opName + " " + msg.OpCode);
+            //            if(opName.Equals("S_LOAD_TOPO") || opName.Equals("C_LOAD_TOPO_FIN")|| opName.Equals("S_SPAWN_ME"))
+            Debug.WriteLine(opName + " " + msg.OpCode);
+        }
+        public static void AddToStats(Message msg)
+        {
+            if (!running) return;
+            var opName = PacketProcessor.OpCodeNamer.GetName(msg.OpCode);
+
+            if (Stats.ContainsKey(opName))
+            {
+                Stats[opName].TotalSize += msg.Data.Count;
+                Stats[opName].Count++;
+            }
+            else
+            {
+                Stats.Add(opName, new MessageStats(opName, msg.Data.Count));
+            }
+        }
+    }
+
+    public class MessageStats
+    {
+        public string Name;
+        public int TotalSize;
+        public int Count;
+        public MessageStats(string n, int t)
+        {
+            Name = n;
+            TotalSize = t;
+            Count = 1;
         }
     }
 }
