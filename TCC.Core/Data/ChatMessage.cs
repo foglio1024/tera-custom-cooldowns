@@ -534,7 +534,6 @@ namespace TCC.Data
             }
             else
             {
-                File.AppendAllText("chat2.log", "[CHAT] " + RawMessage + "\n");
                 //it's formatted: parse then add
 
                 //get custom color
