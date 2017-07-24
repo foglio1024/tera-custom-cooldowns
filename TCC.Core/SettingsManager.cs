@@ -158,6 +158,9 @@ namespace TCC
         public static bool ShowTimestamp { get; set; } = true;
         public static bool ShowOnlyBosses { get; set; } = false;
         public static bool DisablePartyMP { get; set; } = false;
+        public static bool DisablePartyHP { get; set; } = false;
+        public static bool ShowOnlyAggroStacks { get; set; } = true;
+        public static bool DisablePartyAbnormals { get; set; } = false;
 
         public static void LoadWindowSettings()
         {
@@ -278,6 +281,21 @@ namespace TCC
                     DisablePartyMP = Boolean.Parse(b.Attribute(nameof(DisablePartyMP)).Value);
                 }
                 catch (Exception) { }
+                try
+                {
+                    DisablePartyHP = Boolean.Parse(b.Attribute(nameof(DisablePartyHP)).Value);
+                }
+                catch (Exception) { }
+                try
+                {
+                    ShowOnlyAggroStacks = Boolean.Parse(b.Attribute(nameof(ShowOnlyAggroStacks)).Value);
+                }
+                catch (Exception) { }
+                try
+                {
+                    DisablePartyAbnormals = Boolean.Parse(b.Attribute(nameof(DisablePartyAbnormals)).Value);
+                }
+                catch (Exception) { }
                 //add settings here
             }
         }
@@ -365,7 +383,10 @@ namespace TCC
                 new XAttribute(nameof(ShowChannel), ShowChannel),
                 new XAttribute(nameof(ShowTimestamp), ShowTimestamp),
                 new XAttribute(nameof(ShowOnlyBosses), ShowOnlyBosses),
-                new XAttribute(nameof(DisablePartyMP), DisablePartyMP)
+                new XAttribute(nameof(DisablePartyMP), DisablePartyMP),
+                new XAttribute(nameof(DisablePartyHP), DisablePartyHP),
+                new XAttribute(nameof(DisablePartyAbnormals), DisablePartyAbnormals),
+                new XAttribute(nameof(ShowOnlyAggroStacks), ShowOnlyAggroStacks)
                 //add setting here
                 )
             );

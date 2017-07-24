@@ -919,6 +919,18 @@ namespace TCC.ViewModels
                 if (value == true) GroupWindowViewModel.Instance.ClearAllAbnormalities();
             }
         }
+        public bool DisableAllPartyAbnormals
+        {
+            get { return SettingsManager.DisablePartyAbnormals; }
+            set
+            {
+                if (SettingsManager.DisablePartyAbnormals == value) return;
+                SettingsManager.DisablePartyAbnormals = value;
+                NotifyPropertyChanged(nameof(DisableAllPartyAbnormals));
+                MessageFactory.Update();
+                if (value == true) GroupWindowViewModel.Instance.ClearAllAbnormalities();
+            }
+        }
         public bool IsLeftToRightOn
         {
             get { return SettingsManager.BuffsDirection == FlowDirection.LeftToRight ? true : false; }
@@ -1040,6 +1052,28 @@ namespace TCC.ViewModels
                 GroupWindowViewModel.Instance.MPenabled = !value;
                 MessageFactory.Update();
                 NotifyPropertyChanged(nameof(DisableMP));
+            }
+        }
+        public bool DisableHP
+        {
+            get => SettingsManager.DisablePartyHP;
+            set
+            {
+                if (SettingsManager.DisablePartyHP == value) return;
+                SettingsManager.DisablePartyHP = value;
+                GroupWindowViewModel.Instance.HPenabled = !value;
+                MessageFactory.Update();
+                NotifyPropertyChanged(nameof(DisableHP));
+            }
+        }
+        public bool HhOnlyAggro
+        {
+            get => SettingsManager.ShowOnlyAggroStacks;
+            set
+            {
+                if (SettingsManager.ShowOnlyAggroStacks == value) return;
+                SettingsManager.ShowOnlyAggroStacks = value;
+                NotifyPropertyChanged(nameof(HhOnlyAggro));
             }
         }
         public SettingsWindowViewModel()

@@ -133,6 +133,18 @@ namespace TCC.ViewModels
             }
         }
         private bool mpEnabled;
+        public bool HPenabled
+        {
+            get => hpEnabled;
+            set
+            {
+                if (hpEnabled == value) return;
+                hpEnabled = value;
+                NotifyPropertyChanged(nameof(HPenabled));
+            }
+        }
+        private bool hpEnabled;
+
         public List<User> All
         {
             get
@@ -254,9 +266,11 @@ namespace TCC.ViewModels
                 else
                 {
                     // -- show only aggro stacks if we are in HH -- //
-                    if (BossGageWindowViewModel.Instance.CurrentNPCs.Any(x => x.ZoneId == 950))
+                    if (BossGageWindowViewModel.Instance.CurrentHHphase == HarrowholdPhase.Phase2 ||
+                        BossGageWindowViewModel.Instance.CurrentHHphase == HarrowholdPhase.Phase3 ||
+                        BossGageWindowViewModel.Instance.CurrentHHphase == HarrowholdPhase.Phase4)
                     {
-                        if (ab.Id != 950023) return;
+                        if (ab.Id != 950023 && SettingsManager.ShowOnlyAggroStacks) return;
                     }
                     // -------------------------------------------- //
                     u.AddOrRefreshDebuff(ab, duration, stacks, size, margin);

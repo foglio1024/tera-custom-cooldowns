@@ -124,7 +124,6 @@ namespace TCC.Parsing
             {typeof(S_LEAVE_PARTY), new Action<S_LEAVE_PARTY>(x => PacketProcessor.HandleLeaveParty(x)) },
             {typeof(S_BAN_PARTY_MEMBER), new Action<S_BAN_PARTY_MEMBER>(x => PacketProcessor.HandlePartyMemberKick(x)) },
 
-            {typeof(S_PARTY_MEMBER_CHANGE_HP), new Action<S_PARTY_MEMBER_CHANGE_HP>(x => PacketProcessor.HandlePartyMemberHP(x)) },
 
             {typeof(S_PARTY_MEMBER_STAT_UPDATE), new Action<S_PARTY_MEMBER_STAT_UPDATE>(x => PacketProcessor.HandlePartyMemberStats(x)) },
             {typeof(S_CHECK_TO_READY_PARTY), new Action<S_CHECK_TO_READY_PARTY>(x => PacketProcessor.HandleReadyCheck(x)) },
@@ -134,16 +133,24 @@ namespace TCC.Parsing
             {typeof(S_RESULT_ITEM_BIDDING), new Action<S_RESULT_ITEM_BIDDING>(x => PacketProcessor.HandleEndRoll(x)) },
             {typeof(S_RESULT_BIDDING_DICE_THROW), new Action<S_RESULT_BIDDING_DICE_THROW>(x => PacketProcessor.HandleRollResult(x)) },
 
+            {typeof(S_CHANGE_PARTY_MANAGER), new Action<S_CHANGE_PARTY_MANAGER>(x => PacketProcessor.HandleChangeLeader(x)) },
+        };
+        private static readonly Dictionary<Type, Delegate> GroupWindow_Abnormals = new Dictionary<Type, Delegate>
+        {
             {typeof(S_PARTY_MEMBER_BUFF_UPDATE), new Action<S_PARTY_MEMBER_BUFF_UPDATE>(x => PacketProcessor.HandlePartyMemberBuffUpdate(x)) },
             {typeof(S_PARTY_MEMBER_ABNORMAL_ADD), new Action<S_PARTY_MEMBER_ABNORMAL_ADD>(x => PacketProcessor.HandlePartyMemberAbnormalAdd(x)) },
             {typeof(S_PARTY_MEMBER_ABNORMAL_REFRESH), new Action<S_PARTY_MEMBER_ABNORMAL_REFRESH>(x => PacketProcessor.HandlePartyMemberAbnormalRefresh(x)) },
             {typeof(S_PARTY_MEMBER_ABNORMAL_DEL), new Action<S_PARTY_MEMBER_ABNORMAL_DEL>(x => PacketProcessor.HandlePartyMemberAbnormalDel(x)) },
             {typeof(S_PARTY_MEMBER_ABNORMAL_CLEAR), new Action<S_PARTY_MEMBER_ABNORMAL_CLEAR>(x => PacketProcessor.HandlePartyMemberAbnormalClear(x)) },
-            {typeof(S_CHANGE_PARTY_MANAGER), new Action<S_CHANGE_PARTY_MANAGER>(x => PacketProcessor.HandleChangeLeader(x)) },
+
         };
         private static readonly Dictionary<Type, Delegate> GroupWindow_MP = new Dictionary<Type, Delegate>
         {
             {typeof(S_PARTY_MEMBER_CHANGE_MP), new Action<S_PARTY_MEMBER_CHANGE_MP>(x => PacketProcessor.HandlePartyMemberMP(x)) },
+        };
+        private static readonly Dictionary<Type, Delegate> GroupWindow_HP = new Dictionary<Type, Delegate>
+        {
+            {typeof(S_PARTY_MEMBER_CHANGE_HP), new Action<S_PARTY_MEMBER_CHANGE_HP>(x => PacketProcessor.HandlePartyMemberHP(x)) },
         };
         private static readonly Dictionary<Type, Delegate> Phase1Only = new Dictionary<Type, Delegate>
         {
@@ -200,7 +207,9 @@ namespace TCC.Parsing
             if (SettingsManager.CooldownWindowSettings.Enabled) CooldownWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             if (SettingsManager.BossWindowSettings.Enabled || SettingsManager.GroupWindowSettings.Enabled) BossWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             if (SettingsManager.GroupWindowSettings.Enabled) GroupWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-            if (!SettingsManager.DisablePartyMP) GroupWindow_MP.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            if (!SettingsManager.DisablePartyAbnormals && SettingsManager.GroupWindowSettings.Enabled) GroupWindow_Abnormals.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            if (!SettingsManager.DisablePartyMP && SettingsManager.GroupWindowSettings.Enabled) GroupWindow_MP.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            if (!SettingsManager.DisablePartyHP && SettingsManager.GroupWindowSettings.Enabled) GroupWindow_HP.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             if(ViewModels.BossGageWindowViewModel.Instance.CurrentHHphase == HarrowholdPhase.Phase1) Phase1Only.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             if(SessionManager.CurrentPlayer.Class == Class.Glaiver) ValkyrieOnly.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
         }

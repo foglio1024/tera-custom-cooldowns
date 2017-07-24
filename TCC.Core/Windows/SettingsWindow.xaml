@@ -37,7 +37,7 @@
         <Border Style="{StaticResource Styles.DefaultBorder}" Grid.ColumnSpan="10" Grid.RowSpan="10"  Opacity=".95"/>
         <Image RenderOptions.BitmapScalingMode="HighQuality" Opacity=".02" Margin="0" Width="128" Height="128" Grid.ColumnSpan="10" Grid.RowSpan="10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Source="/TCC;component/resources/images/tera-logo-flat.png" ClipToBounds="False"/>
 
-        <TabControl TabStripPlacement="Left" Grid.Row="1" Grid.ColumnSpan="2" Background="#1aaa" BorderThickness="0,0,0,0" Height="400">
+        <TabControl TabStripPlacement="Left" Grid.Row="1" Grid.ColumnSpan="2" Background="#1aaa" BorderThickness="0,0,0,0" Height="500">
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Template">
@@ -298,7 +298,7 @@
                         </controls:BoolSetting.ToolTip>
 
                     </controls:BoolSetting>
-                    <controls:BoolSetting SettingName="Hide buffs" Grid.Row="7" IsOn="{Binding HideAllBuffs, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_data_usage_white_24dp_2x.png" 
+                    <controls:BoolSetting SettingName="Hide buffs" Grid.Row="7" IsOn="{Binding HideAllBuffs, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_visibility_off_white_24dp_2x.png" 
                                       ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" >
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
@@ -312,7 +312,7 @@
                             </Grid>
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
-                    <controls:BoolSetting SettingName="Hide buffs and debuffs" Grid.Row="8" IsOn="{Binding HideRaidAbnormalities, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_data_usage_white_24dp_2x.png" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0">
+                    <controls:BoolSetting SettingName="Hide buffs and debuffs" Grid.Row="8" IsOn="{Binding HideRaidAbnormalities, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_visibility_off_white_24dp_2x.png" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
                                 <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
@@ -325,7 +325,57 @@
                             </Grid>
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
-                    <controls:BoolSetting SettingName="Disable MP" IsOn="{Binding DisableMP, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_tune_white_24dp_2x.png"></controls:BoolSetting>
+                    <controls:BoolSetting SettingName="Disable all buffs and debuffs" Grid.Row="8" IsOn="{Binding DisableAllPartyAbnormals, Mode=TwoWay}" 
+                                          ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" 
+SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png" >
+                        <controls:BoolSetting.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                <Run Text="Completely disables party members' abnormalities tracking to save performance."/>
+                                <LineBreak /> <LineBreak/>
+                                <Run Text="Warning: " Foreground="DarkOrange"/>
+                                <Run Text="party members' HP bar will not become purple when a player is debuffed." />
+                                <LineBreak /><LineBreak />
+                                <Run Text="Note: " Foreground="#59f"/>
+                                <Run Text="if turned back on while in a party, pre-existing (de)buffs will not be visible until refreshed." />
+                                </TextBlock>
+
+                            </Grid>
+                        </controls:BoolSetting.ToolTip>
+                    </controls:BoolSetting>
+                    <controls:BoolSetting SettingName="Show only aggro debuff in HH" IsOn="{Binding HhOnlyAggro, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" 
+                                          SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png">
+                        <controls:BoolSetting.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                                <TextBlock Foreground="LightGray"  Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Hide all buffs and debuffs except aggro stacks during HH phase 2, 3, and 4."/>
+                                    <LineBreak/>
+                                    <Run Text="Requires 'Hide buffs and debuffs' and 'Disable all buffs and debuffs' to be disabled." Foreground="DarkOrange"/>
+                                </TextBlock>
+                            </Grid>
+                        </controls:BoolSetting.ToolTip>
+
+                    </controls:BoolSetting>
+                    <controls:BoolSetting SettingName="Disable HP" IsOn="{Binding DisableHP, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png">
+                        <controls:BoolSetting.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                                <TextBlock Foreground="LightGray" Text="Disable party members' HP tracking to save performance. HP bars will still be visible but will not be updated." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
+                            </Grid>
+                        </controls:BoolSetting.ToolTip>
+
+                    </controls:BoolSetting>
+                    <controls:BoolSetting SettingName="Disable MP" IsOn="{Binding DisableMP, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png">
+                        <controls:BoolSetting.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                                <TextBlock Foreground="LightGray" Text="Disable party members' MP tracking to save performance. MP bars will be hidden." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
+                            </Grid>
+                        </controls:BoolSetting.ToolTip>
+
+                    </controls:BoolSetting>
                 </StackPanel>
 
             </TabItem>
