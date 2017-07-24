@@ -327,7 +327,7 @@
                     </controls:BoolSetting>
                     <controls:BoolSetting SettingName="Disable all buffs and debuffs" Grid.Row="8" IsOn="{Binding DisableAllPartyAbnormals, Mode=TwoWay}" 
                                           ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" 
-SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png" >
+                                        SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png" >
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
                                 <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
@@ -339,6 +339,9 @@ SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png" >
                                 <LineBreak /><LineBreak />
                                 <Run Text="Note: " Foreground="#59f"/>
                                 <Run Text="if turned back on while in a party, pre-existing (de)buffs will not be visible until refreshed." />
+                                <LineBreak /><LineBreak />
+                                <Run Text="Note: " Foreground="#59f"/>
+                                <Run Text="warrior will not be moved to tank or dps column when switching between stances." />
                                 </TextBlock>
 
                             </Grid>
@@ -362,7 +365,7 @@ SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png" >
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
                                 <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
-                                <TextBlock Foreground="LightGray" Text="Disable party members' HP tracking to save performance. HP bars will still be visible but will not be updated." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
+                                <TextBlock Foreground="LightGray" Text="Disable party members' HP tracking to save performance. HP bars will be hidden." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
                             </Grid>
                         </controls:BoolSetting.ToolTip>
 
