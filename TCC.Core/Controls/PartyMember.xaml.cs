@@ -30,6 +30,8 @@ namespace TCC.Controls
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            SetMP(GroupWindowViewModel.Instance.MPenabled);
+
             AnimateIn();
             GroupWindowViewModel.Instance.PropertyChanged += Instance_PropertyChanged;
         }
