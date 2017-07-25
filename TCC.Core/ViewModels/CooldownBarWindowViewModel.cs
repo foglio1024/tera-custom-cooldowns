@@ -103,7 +103,7 @@ namespace TCC.ViewModels
         private void NormalCd_AddOrRefreshSkill(SkillCooldown sk)
         {
 
-            if (_classManager.StartSpecialSkill(sk) && SettingsManager.ClassWindowSettings.Visibility == Visibility.Visible) return;
+            if (SettingsManager.ClassWindowSettings.Enabled && _classManager.StartSpecialSkill(sk)) return;
 
             try
             {
@@ -209,7 +209,7 @@ namespace TCC.ViewModels
 
         private void FixedCd_AddOrRefreshSkill(SkillCooldown sk)
         {
-            if (_classManager.StartSpecialSkill(sk) && SettingsManager.ClassWindowSettings.Visibility == Visibility.Visible) return;
+            if (SettingsManager.ClassWindowSettings.Enabled && _classManager.StartSpecialSkill(sk)) return;
 
             var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
             if (skill != null)

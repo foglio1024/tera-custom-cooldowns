@@ -137,11 +137,11 @@ namespace TCC.Parsing
             SessionManager.SetPlayerMP(SessionManager.CurrentPlayer.EntityId, p.CurrentMP);
             SessionManager.SetPlayerST(SessionManager.CurrentPlayer.EntityId, p.CurrentST);
 
-
+            if (!SettingsManager.ClassWindowSettings.Enabled) return;
             switch (SessionManager.CurrentPlayer.Class)
             {
                 case Class.Warrior:
-                    ((WarriorBarManager)ClassManager.CurrentClassManager).EdgeCounter.Val = p.Edge;
+                    ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).EdgeCounter.Val = p.Edge;
                     break;
                 default:
                     break;
@@ -209,7 +209,7 @@ namespace TCC.Parsing
 
             CooldownWindowViewModel.Instance.ClearSkills();
             CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(p.CharacterClass).ToLower() + "-skills.xml", p.CharacterClass);
-            WindowManager.ClassWindow.Context.CurrentClass = p.CharacterClass;
+            if(SettingsManager.ClassWindowSettings.Enabled) WindowManager.ClassWindow.Context.CurrentClass = p.CharacterClass;
 
             ServerId = p.ServerId;
             InitDB(p.ServerId);

@@ -27,42 +27,42 @@ namespace TCC.ViewModels
 
         public static void SetMaxHP(int v)
         {
-            if (CurrentClassManager == null) return;
+            if (CurrentClassManager == null || !SettingsManager.ClassWindowSettings.Enabled) return;
             CurrentClassManager.GetDispatcher().Invoke(() => { CurrentClassManager.HP.Max = v; });
 
         }
         public static void SetMaxMP(int v)
         {
-            if (CurrentClassManager == null) return;
+            if (CurrentClassManager == null || !SettingsManager.ClassWindowSettings.Enabled) return;
             CurrentClassManager.GetDispatcher().Invoke(() => { CurrentClassManager.MP.Max = v; });
         }
         public static void SetMaxST(int v)
         {
-            if (CurrentClassManager == null) return;
+            if (CurrentClassManager == null || !SettingsManager.ClassWindowSettings.Enabled) return;
             CurrentClassManager.GetDispatcher().Invoke(() => { CurrentClassManager.ST.Max = v; });
         }
 
         public static void SetHP(int hp)
         {
-            if (CurrentClassManager == null) return;
+            if (CurrentClassManager == null || !SettingsManager.ClassWindowSettings.Enabled) return;
             CurrentClassManager.GetDispatcher().Invoke(() => { CurrentClassManager.HP.Val = hp; });
 
         }
         public static void SetMP(int mp)
         {
-            if (CurrentClassManager == null) return;
+            if (CurrentClassManager == null || !SettingsManager.ClassWindowSettings.Enabled) return;
             CurrentClassManager.GetDispatcher().Invoke(() => { CurrentClassManager.MP.Val = mp; });
         }
         public static void SetST(int currentStamina)
         {
-            if (CurrentClassManager == null) return;
+            if (CurrentClassManager == null || !SettingsManager.ClassWindowSettings.Enabled) return;
             CurrentClassManager.GetDispatcher().Invoke(() => { CurrentClassManager.ST.Val = currentStamina; });
         }
 
         private static List<uint> _debuffs;
         public static void SetStatus(Abnormality ab, bool adding)
         {
-            if (CurrentClassManager == null || ab.IsBuff) return;
+            if (CurrentClassManager == null || ab.IsBuff || !SettingsManager.ClassWindowSettings.Enabled) return;
 
             if (adding)
             {
