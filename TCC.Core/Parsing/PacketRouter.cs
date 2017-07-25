@@ -141,7 +141,7 @@ namespace TCC.Parsing
             switch (SessionManager.CurrentPlayer.Class)
             {
                 case Class.Warrior:
-                    ((WarriorBarManager)ClassWindowViewModel.Instance.CurrentManager).EdgeCounter.Val = p.Edge;
+                    ((WarriorBarManager)ClassManager.CurrentClassManager).EdgeCounter.Val = p.Edge;
                     break;
                 default:
                     break;
