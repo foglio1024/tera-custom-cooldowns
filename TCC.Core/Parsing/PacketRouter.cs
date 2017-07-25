@@ -207,12 +207,12 @@ namespace TCC.Parsing
         {
             ProxyInterop.ConnectToProxy();
 
+            ServerId = p.ServerId;
+            InitDB(p.ServerId);
+
             CooldownWindowViewModel.Instance.ClearSkills();
             CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(p.CharacterClass).ToLower() + "-skills.xml", p.CharacterClass);
             if(SettingsManager.ClassWindowSettings.Enabled) WindowManager.ClassWindow.Context.CurrentClass = p.CharacterClass;
-
-            ServerId = p.ServerId;
-            InitDB(p.ServerId);
 
             EntitiesManager.ClearNPC();
             GroupWindowViewModel.Instance.ClearAll();
