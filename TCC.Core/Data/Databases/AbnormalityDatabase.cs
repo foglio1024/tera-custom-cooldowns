@@ -30,6 +30,7 @@ namespace TCC.Data.Databases
                 var infinity = bool.Parse(s[4]);
                 var name = s[5];
                 var tooltip = s[6].Replace("&#xA;", "\n");
+                tooltip = tooltip.Replace("&#xD;", "\r");
                 var iconName = s[7];
 
                 //---add fixes here---//

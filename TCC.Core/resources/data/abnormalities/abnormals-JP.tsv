@@ -63,7 +63,7 @@
 920	Buff	True	True	False	上級ノクタニウム効果【高級】	スキル效果を上昇させます。ノクタニウム強化弾の $H_W_GOOD1.5$COLOR_END倍の効果を持ち、全てのスキルの攻撃力が $H_W_GOOD4～12％$COLOR_END上昇します。(一部スキルのみ $H_W_GOOD6～20％$COLOR_END上昇します。)通常のノクタニウム強化弾の效果と重複して適用されません。	icon_items.noctan_tex
 921	Buff	True	True	False	上級ノクタニウム効果【貴重】	スキル效果を上昇させます。ノクタニウム強化弾の $H_W_GOOD1.5$COLOR_END倍の効果を持ち、全てのスキルの攻撃力が $H_W_GOOD4～12％$COLOR_END上昇します。(一部スキルのみ $H_W_GOOD6～20％$COLOR_END上昇します。)通常のノクタニウム強化弾の效果と重複して適用されません。	icon_items.noctan_tex
 922	Buff	True	True	False	上級ノクタニウム効果【伝説】	スキル效果を上昇させます。ノクタニウム強化弾の $H_W_GOOD1.5$COLOR_END倍の効果を持ち、全てのスキルの攻撃力が $H_W_GOOD4～12％$COLOR_END上昇します。(一部スキルのみ $H_W_GOOD6～20％$COLOR_END上昇します。)通常のノクタニウム強化弾の效果と重複して適用されません。	icon_items.noctan_tex
-929	Buff	True	True	False	上級ノクタニウム効果【テスト用】	スキルの效果を上昇させます。一般ノクタニウム強化弾の效果の150％で效果が上昇します。オーバーライディングがない状態で&#xA;上級ノクタニウム強化弾に中毒されている間、PVP攻撃力が$H_W_GOOD12$COLOR_END、PVP防御力が$H_W_GOOD12$COLOR_END上昇します。	icon_items.union_supplies5_tex
+929	Buff	True	True	False	上級ノクタニウム効果【テスト用】	スキルの效果を上昇させます。一般ノクタニウム強化弾の效果の150％で效果が上昇します。オーバーライディングがない状態で&#xD;&#xA;上級ノクタニウム強化弾に中毒されている間、PVP攻撃力が$H_W_GOOD12$COLOR_END、PVP防御力が$H_W_GOOD12$COLOR_END上昇します。	icon_items.union_supplies5_tex
 1100	Buff	True	True	False	アルボレアの恵水	狩りの獲得経験値が$H_W_GOOD5%$COLOR_END増加します。この効果は、死亡後も解除されません。	icon_items.potion12_tex
 1101	Buff	True	True	False	英雄の凱旋 I	狩りの獲得経験値が$H_W_GOOD20%$COLOR_END増加します。この効果は、死亡後も解除されません。	icon_items.exp_buff_potion1_tex
 1102	Buff	True	True	False	祝福の火花 I	狩りの獲得経験値が$H_W_GOOD10%$COLOR_END増加します。この効果は、死亡後も解除されません。	icon_items.exp_buff_potion2_tex
@@ -1242,7 +1242,7 @@
 100630	WeakeningEffect	True	False	False	足首負傷	移動速度と攻撃速度が$H_W_BAD0,85$COLOR_END減少します。	icon_skills.aimingankle_tex
 100700	Buff	False	True	False	カウンターストライク発動	「カウンターストライク」が使用できます。	icon_skills.reversalturningattack_tex
 100800	Buff	True	True	False	デッドリーウィル I	$time間クリティカル率が$H_W_GOOD35%$COLOR_END上昇します。	icon_skills.deadlywill_tex
-100801	Buff	True	True	False	デッドリーウィル II	$time間クリティカル率が$H_W_GOOD50%$COLOR_END上昇します。&#xA;效果持続時間中に使用した近接攻撃スキルのクールタイムが半分に減少し、持続時間中以下のスキルが強化されます。$BR - [ランブローXI]：ストックポイントが通常の2倍蓄積され、10％の追加ダメージ。$BR - [ワイルドレイジ - ディセクトVII]：ストックポイントが通常の2倍蓄積され、10％の追加ダメージ。$BR - [ゲイルレイザーII]：スキルの威力が10％、範囲が20％増加します。	icon_skills.deadlywill_tex
+100801	Buff	True	True	False	デッドリーウィル II	$time間クリティカル率が$H_W_GOOD50%$COLOR_END上昇します。&#xD;&#xA;效果持続時間中に使用した近接攻撃スキルのクールタイムが半分に減少し、持続時間中以下のスキルが強化されます。$BR - [ランブローXI]：ストックポイントが通常の2倍蓄積され、10％の追加ダメージ。$BR - [ワイルドレイジ - ディセクトVII]：ストックポイントが通常の2倍蓄積され、10％の追加ダメージ。$BR - [ゲイルレイザーII]：スキルの威力が10％、範囲が20％増加します。	icon_skills.deadlywill_tex
 100802	Buff	False	True	False	デッドリーウィル I_再利用減少	見えない異常状態	
 100803	Buff	False	True	False	デッドリーウィル I_再利用減少1	見えない異常状態	
 100900	Stun	True	False	False	ストロングスラッシュ I	気絶しているため動けません。	icon_skills.hardslash_tex
