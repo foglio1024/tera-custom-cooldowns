@@ -407,6 +407,7 @@
                     <controls:BoolSetting Grid.Row="5" SettingName="Show timestamps" IsOn="{Binding ShowTimestamp, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_access_time_white_24dp_2x.png"></controls:BoolSetting>
                     <controls:BoolSetting Grid.Row="6" SettingName="Show channel label" IsOn="{Binding ShowChannel, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_label_white_24dp_2x.png"></controls:BoolSetting>
                     <controls:BoolSetting Grid.Row="7" SettingName="Show always" IsOn="{Binding ChatWindowShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"></controls:BoolSetting>
+                    <controls:BoolSetting Grid.Row="7" SettingName="Enable LFG bar" IsOn="{Binding LfgOn, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png"></controls:BoolSetting>
                 </StackPanel>
 
             </TabItem>

@@ -33,7 +33,7 @@ namespace TCC.Windows
         }
         private void TccWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            InitWindow(SettingsManager.ClassWindowSettings);
+            InitWindow(SettingsManager.ClassWindowSettings, ignoreSize: true);
 
             _context = (ClassWindowViewModel)DataContext;
             _context.PropertyChanged += _context_PropertyChanged;

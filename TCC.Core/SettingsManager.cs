@@ -15,6 +15,8 @@ namespace TCC
     {
         public double X;
         public double Y;
+        public double W;
+        public double H;
         public Visibility Visibility;
         public bool ClickThru;
         public double Scale;
@@ -30,6 +32,8 @@ namespace TCC
             xe.Add(new XAttribute("Name", name));
             xe.Add(new XAttribute(nameof(X), X));
             xe.Add(new XAttribute(nameof(Y), Y));
+            xe.Add(new XAttribute(nameof(W), W));
+            xe.Add(new XAttribute(nameof(H), H));
             xe.Add(new XAttribute(nameof(Visibility), Visibility));
             xe.Add(new XAttribute(nameof(ClickThru), ClickThru));
             xe.Add(new XAttribute(nameof(Scale), Scale));
@@ -161,6 +165,7 @@ namespace TCC
         public static bool DisablePartyHP { get; set; } = false;
         public static bool ShowOnlyAggroStacks { get; set; } = true;
         public static bool DisablePartyAbnormals { get; set; } = false;
+        public static bool LfgOn { get; set; } = true;
 
         public static void LoadWindowSettings()
         {
@@ -296,6 +301,11 @@ namespace TCC
                     DisablePartyAbnormals = Boolean.Parse(b.Attribute(nameof(DisablePartyAbnormals)).Value);
                 }
                 catch (Exception) { }
+                try
+                {
+                    LfgOn = Boolean.Parse(b.Attribute(nameof(LfgOn)).Value);
+                }
+                catch (Exception) { }
                 //add settings here
             }
         }
@@ -310,6 +320,16 @@ namespace TCC
             try
             {
                 w.Y = Double.Parse(ws.Attribute("Y").Value, CultureInfo.InvariantCulture);
+            }
+            catch (Exception) { }
+            try
+            {
+                w.W = Double.Parse(ws.Attribute("W").Value, CultureInfo.InvariantCulture);
+            }
+            catch (Exception) { }
+            try
+            {
+                w.H = Double.Parse(ws.Attribute("H").Value, CultureInfo.InvariantCulture);
             }
             catch (Exception) { }
 
@@ -386,7 +406,8 @@ namespace TCC
                 new XAttribute(nameof(DisablePartyMP), DisablePartyMP),
                 new XAttribute(nameof(DisablePartyHP), DisablePartyHP),
                 new XAttribute(nameof(DisablePartyAbnormals), DisablePartyAbnormals),
-                new XAttribute(nameof(ShowOnlyAggroStacks), ShowOnlyAggroStacks)
+                new XAttribute(nameof(ShowOnlyAggroStacks), ShowOnlyAggroStacks),
+                new XAttribute(nameof(LfgOn), LfgOn)
                 //add setting here
                 )
             );

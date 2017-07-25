@@ -26,7 +26,7 @@ namespace TCC
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            InitWindow(SettingsManager.CooldownWindowSettings);
+            InitWindow(SettingsManager.CooldownWindowSettings, ignoreSize: true);
 
             //SwitchMode();
 

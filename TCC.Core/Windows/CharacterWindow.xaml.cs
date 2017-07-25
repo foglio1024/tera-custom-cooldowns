@@ -33,7 +33,7 @@ namespace TCC.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            InitWindow(SettingsManager.CharacterWindowSettings);
+            InitWindow(SettingsManager.CharacterWindowSettings, ignoreSize: true);
 
             rootGrid.DataContext = CharacterWindowViewModel.Instance.Player;
         }

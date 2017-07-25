@@ -47,7 +47,7 @@ namespace TCC.Windows
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            InitWindow(SettingsManager.BossWindowSettings);
+            InitWindow(SettingsManager.BossWindowSettings, ignoreSize: true);
         }
 
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)

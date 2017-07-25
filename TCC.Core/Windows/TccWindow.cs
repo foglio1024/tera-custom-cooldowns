@@ -18,6 +18,7 @@ namespace TCC.Windows
     public class TccWindow : Window
     {
         protected IntPtr _handle;
+        protected bool _ignoreSize;
         protected bool clickThru;
         public bool ClickThru
         {
@@ -36,7 +37,7 @@ namespace TCC.Windows
 
         protected WindowSettings _settings;
 
-        protected void InitWindow(WindowSettings ws, bool canClickThru = true, bool canHide = true)
+        protected void InitWindow(WindowSettings ws, bool canClickThru = true, bool canHide = true, bool ignoreSize = true)
         {
             _handle = new WindowInteropHelper(this).Handle;
             FocusManager.MakeUnfocusable(_handle);
@@ -65,17 +66,30 @@ namespace TCC.Windows
             }
 
             _settings = ws;
-
             Left = ws.X;
             Top = ws.Y;
+            if (!ignoreSize)
+            {
+                if (ws.H != 0) Height = ws.H;
+                if (ws.W != 0) Width = ws.W;
+            }
+            _ignoreSize = ignoreSize;
             Visibility = ws.Visibility;
             SetClickThru(ws.ClickThru);
             ((FrameworkElement)this.Content).Opacity = 0;
 
             WindowManager.TccVisibilityChanged += OpacityChange;
             WindowManager.TccDimChanged += OpacityChange;
-
+            SizeChanged += TccWindow_SizeChanged;
             Closed += TccWindow_Closed;
+        }
+
+        private void TccWindow_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (_ignoreSize) return;
+            _settings.W = ActualWidth;
+            _settings.H = ActualHeight;
+            SettingsManager.SaveSettings();
         }
 
         private void TccWindow_Closed(object sender, EventArgs e)

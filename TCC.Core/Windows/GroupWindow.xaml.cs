@@ -62,7 +62,7 @@ namespace TCC.Windows
         }
         private void TccWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            InitWindow(SettingsManager.GroupWindowSettings);
+            InitWindow(SettingsManager.GroupWindowSettings, ignoreSize: true);
         }
         private void TccWindow_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {

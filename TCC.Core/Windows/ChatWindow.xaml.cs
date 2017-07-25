@@ -35,7 +35,7 @@ namespace TCC.Windows
 
         private void TccWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            InitWindow(SettingsManager.ChatWindowSettings, false, true);
+            InitWindow(SettingsManager.ChatWindowSettings, false, true, false);
             opacityUp = new DoubleAnimation(0.01, 1, TimeSpan.FromMilliseconds(300));
             opacityDown = new DoubleAnimation(1, 0.01, TimeSpan.FromMilliseconds(300));
             ChatWindowViewModel.Instance.PropertyChanged += Instance_PropertyChanged;
@@ -167,6 +167,7 @@ namespace TCC.Windows
         VirtualizingStackPanel _currentPanel;
         private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
+            return;
             //if (!_bottom) return;
             _currentContent = tabControl.SelectedContent as ItemsControl;
             _currentPanel = GetInnerStackPanel(_currentContent);
@@ -174,7 +175,6 @@ namespace TCC.Windows
             Rect svBounds = LayoutInformation.GetLayoutSlot(sw);
             var testRect = new Rect(svBounds.Top-5, svBounds.Left, svBounds.Width, svBounds.Height+10);
             List<FrameworkElement> visibleItems = GetVisibleItems(testRect);
-
 
             foreach (var item in visibleItems)
             {
@@ -279,6 +279,7 @@ namespace TCC.Windows
 
             //    GroupWindowViewModel.Instance.AddOrUpdateMember(new User(GroupWindowViewModel.Instance.GetDispatcher()) { Name = name, UserClass = Class.Elementalist, ServerId = (uint)i + 300 });
             //}
+            
         }
 
         private void TccWindow_MouseLeave(object sender, MouseEventArgs e)
@@ -290,6 +291,11 @@ namespace TCC.Windows
         private void TccWindow_MouseEnter(object sender, MouseEventArgs e)
         {
             ChatWindowViewModel.Instance.StopHideTimer();
+
+        }
+
+        private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
 
         }
     }

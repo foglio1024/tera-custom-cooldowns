@@ -28,7 +28,7 @@ namespace TCC.Windows
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            InitWindow(SettingsManager.BuffWindowSettings);
+            InitWindow(SettingsManager.BuffWindowSettings, ignoreSize: true);
 
             buffs.ItemsSource = BuffBarWindowViewModel.Instance.Player.Buffs;
             debuffs.ItemsSource = BuffBarWindowViewModel.Instance.Player.Debuffs;
