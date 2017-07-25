@@ -174,9 +174,12 @@ namespace TCC.Parsing
             {typeof(S_ACCOMPLISH_ACHIEVEMENT), new Action<S_ACCOMPLISH_ACHIEVEMENT>(x => PacketProcessor.HandleAccomplishAchievement(x)) },
             {typeof(S_TRADE_BROKER_DEAL_SUGGESTED), new Action<S_TRADE_BROKER_DEAL_SUGGESTED>(x => PacketProcessor.HandleBrokerOffer(x)) },
             {typeof(S_UPDATE_FRIEND_INFO), new Action<S_UPDATE_FRIEND_INFO>(x => PacketProcessor.HandleFriendStatus(x)) },
-            {typeof(S_PARTY_MATCH_LINK), new Action<S_PARTY_MATCH_LINK>(x => PacketProcessor.HandleLfgSpam(x)) },
-            {typeof(S_PARTY_MEMBER_INFO), new Action<S_PARTY_MEMBER_INFO>(x => PacketProcessor.HandlePartyMemberInfo(x)) },
+            //{typeof(S_PARTY_MEMBER_INFO), new Action<S_PARTY_MEMBER_INFO>(x => PacketProcessor.HandlePartyMemberInfo(x)) },
             {typeof(S_OTHER_USER_APPLY_PARTY), new Action<S_OTHER_USER_APPLY_PARTY>(x => PacketProcessor.HandleUserApplyToParty(x)) },
+        };
+        private static readonly Dictionary<Type, Delegate> ChatWindow_LFG = new Dictionary<Type, Delegate>
+        {
+            {typeof(S_PARTY_MATCH_LINK), new Action<S_PARTY_MATCH_LINK>(x => PacketProcessor.HandleLfgSpam(x)) },
         };
         private static readonly Dictionary<Type, Delegate> ValkyrieOnly = new Dictionary<Type, Delegate>
         {
@@ -202,16 +205,28 @@ namespace TCC.Parsing
         public static void Update()
         {
             MainProcessor.Clear();
+
             Base.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-            if (SettingsManager.ChatWindowSettings.Enabled) ChatWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+
+            if (SettingsManager.ChatWindowSettings.Enabled)
+            {
+                ChatWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+                if (SettingsManager.LfgOn)
+                {
+                    ChatWindow_LFG.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+                }
+            }
             if (SettingsManager.CooldownWindowSettings.Enabled) CooldownWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             if (SettingsManager.BossWindowSettings.Enabled || SettingsManager.GroupWindowSettings.Enabled) BossWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-            if (SettingsManager.GroupWindowSettings.Enabled) GroupWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-            if (!SettingsManager.DisablePartyAbnormals && SettingsManager.GroupWindowSettings.Enabled) GroupWindow_Abnormals.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-            if (!SettingsManager.DisablePartyMP && SettingsManager.GroupWindowSettings.Enabled) GroupWindow_MP.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-            if (!SettingsManager.DisablePartyHP && SettingsManager.GroupWindowSettings.Enabled) GroupWindow_HP.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-            if(ViewModels.BossGageWindowViewModel.Instance.CurrentHHphase == HarrowholdPhase.Phase1) Phase1Only.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-            if(SessionManager.CurrentPlayer.Class == Class.Glaiver) ValkyrieOnly.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            if (SettingsManager.GroupWindowSettings.Enabled)
+            {
+                GroupWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+                if (!SettingsManager.DisablePartyAbnormals) GroupWindow_Abnormals.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+                if (!SettingsManager.DisablePartyMP) GroupWindow_MP.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+                if (!SettingsManager.DisablePartyHP) GroupWindow_HP.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            }
+            if (SessionManager.CurrentPlayer.Class == Class.Glaiver) ValkyrieOnly.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            if (ViewModels.BossGageWindowViewModel.Instance.CurrentHHphase == HarrowholdPhase.Phase1) Phase1Only.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
         }
         private static Tera.Game.Messages.ParsedMessage Instantiate(ushort opCode, TeraMessageReader reader)
         {

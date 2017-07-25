@@ -1076,6 +1076,20 @@ namespace TCC.ViewModels
                 NotifyPropertyChanged(nameof(HhOnlyAggro));
             }
         }
+
+        public bool LfgOn
+        {
+            get => SettingsManager.LfgOn;
+            set
+            {
+                if (SettingsManager.LfgOn == value) return;
+                SettingsManager.LfgOn = value;
+                ChatWindowViewModel.Instance.LfgOn = value;
+                MessageFactory.Update();
+                NotifyPropertyChanged(nameof(LfgOn));
+
+            }
+        }
         public SettingsWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;

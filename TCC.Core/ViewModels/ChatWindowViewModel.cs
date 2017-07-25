@@ -86,6 +86,12 @@ namespace TCC.ViewModels
             get => _whisperMessages;
         }
 
+        public bool LfgOn { get => SettingsManager.LfgOn;
+            set
+            {
+                NotifyPropertyChanged(nameof(LfgOn));
+            }
+        }
 
         public List<ChatChannel> VisibleChannels;
         public List<string> BlockedUsers;
