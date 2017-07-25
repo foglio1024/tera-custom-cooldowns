@@ -8,9 +8,9 @@
              xmlns:c="clr-namespace:TCC.Converters"
              xmlns:chatcontrols="clr-namespace:TCC.Controls.ChatControls"
              mc:Ignorable="d"  Loaded="UserControl_Loaded">
-    <Grid Margin="2,1" HorizontalAlignment="Stretch" Width="650" Name="root" Height="Auto" Background="#0f00" VerticalAlignment="Top"
+    <Grid Margin="2,1" HorizontalAlignment="Left" Width="Auto" Name="root" Height="Auto" Background="#0f00" VerticalAlignment="Top"
           Visibility="{Binding IsVisible, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
-        <Grid Width="Auto" MinWidth="0" Margin="0,0" VerticalAlignment="Top" Height="{Binding Rows, Converter={StaticResource Converters.RowsToHeight}}" Background="Transparent" >
+        <Grid Width="Auto" MinWidth="0" Margin="0,0" VerticalAlignment="Top" Background="Transparent" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*" />
