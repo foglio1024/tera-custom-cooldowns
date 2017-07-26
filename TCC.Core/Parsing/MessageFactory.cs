@@ -225,7 +225,7 @@ namespace TCC.Parsing
                 if (!SettingsManager.DisablePartyMP) GroupWindow_MP.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
                 if (!SettingsManager.DisablePartyHP) GroupWindow_HP.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             }
-            if (SessionManager.CurrentPlayer.Class == Class.Glaiver) ValkyrieOnly.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            if (SettingsManager.ClassWindowSettings.Enabled && SessionManager.CurrentPlayer.Class == Class.Glaiver) ValkyrieOnly.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             if (ViewModels.BossGageWindowViewModel.Instance.CurrentHHphase == HarrowholdPhase.Phase1) Phase1Only.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
         }
         private static Tera.Game.Messages.ParsedMessage Instantiate(ushort opCode, TeraMessageReader reader)
