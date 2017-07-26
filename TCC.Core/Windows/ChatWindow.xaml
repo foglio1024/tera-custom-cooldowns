@@ -15,7 +15,7 @@
         Title="ChatWindow" WindowStyle="None" AllowsTransparency="True" MinWidth="350"
         Background="Transparent" Topmost="True" Loaded="TccWindow_Loaded" ResizeMode="CanResize">
     <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="0" ResizeBorderThickness="0,0,10,10"/>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="0,0,10,10" GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
         <local:TccWindow.DataContext>
         <vm:ChatWindowViewModel />
