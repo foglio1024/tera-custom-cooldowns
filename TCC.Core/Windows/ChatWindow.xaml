@@ -13,8 +13,11 @@
         MouseLeave="TccWindow_MouseLeave" 
         MouseEnter="TccWindow_MouseEnter"
         Title="ChatWindow" WindowStyle="None" AllowsTransparency="True" MinWidth="350"
-        Background="Transparent" Topmost="True" Loaded="TccWindow_Loaded" ResizeMode="CanResizeWithGrip">
-    <local:TccWindow.DataContext>
+        Background="Transparent" Topmost="True" Loaded="TccWindow_Loaded" ResizeMode="CanResize">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="0,0,10,10"/>
+    </WindowChrome.WindowChrome>
+        <local:TccWindow.DataContext>
         <vm:ChatWindowViewModel />
     </local:TccWindow.DataContext>
     <local:TccWindow.Resources>
@@ -143,7 +146,6 @@
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <VirtualizingStackPanel Margin="0,0,0,0" 
-                                                    PreviewMouseLeftButtonDown="Window_MouseLeftButtonDown"
                                                     Background="#01000000" 
                                                     VerticalAlignment="Stretch"/>
                             </ItemsPanelTemplate>
@@ -162,7 +164,6 @@
                             <ItemsPanelTemplate>
                                 <VirtualizingStackPanel Margin="0" 
                                                     Orientation="Vertical" 
-                                                    PreviewMouseLeftButtonDown="Window_MouseLeftButtonDown"
                                                     Background="#01000000"  />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
@@ -179,7 +180,6 @@
                             <ItemsPanelTemplate>
                                 <VirtualizingStackPanel Margin="0" 
                                                     Orientation="Vertical" 
-                                                    PreviewMouseLeftButtonDown="Window_MouseLeftButtonDown"
                                                     Background="#01000000" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
@@ -196,7 +196,6 @@
                             <ItemsPanelTemplate>
                                 <VirtualizingStackPanel Margin="0"
                                                     Orientation="Vertical" 
-                                                    PreviewMouseLeftButtonDown="Window_MouseLeftButtonDown"
                                                     Background="#01000000" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
@@ -214,7 +213,6 @@
                             <ItemsPanelTemplate>
                                 <VirtualizingStackPanel Margin="0"
                                                     Orientation="Vertical" 
-                                                    PreviewMouseLeftButtonDown="Window_MouseLeftButtonDown"
                                                     Background="#01000000" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
