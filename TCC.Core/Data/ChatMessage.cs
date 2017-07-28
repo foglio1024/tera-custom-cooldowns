@@ -510,7 +510,7 @@ namespace TCC.Data
                 foreach (var item in split)
                 {
                     Regex RgxUrl = new Regex(@"^http(s)?://([\w-]+.)+[\w-]+(/[\w- ./?%&=])?$");
-                    if (RgxUrl.IsMatch(item))
+                    if (RgxUrl.IsMatch(item) || item.StartsWith("discord.gg"))
                     {
                         if (content.ToString() != "")
                         {
