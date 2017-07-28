@@ -124,20 +124,16 @@ namespace TCC.Windows
             if (e.PropertyName == "IsTccDim")
             {
                 if (!WindowManager.IsTccVisible) return;
-                if (!_settings.AutoDim) return;
 
-                if (WindowManager.IsTccDim)
+                if (WindowManager.IsTccDim && _settings.AutoDim)
                 {
                     AnimateContentOpacity(_settings.DimOpacity);
-                    if (!SettingsManager.ClickThruWhenDim) return;
-                    FocusManager.MakeTransparent(_handle);
+                    if (SettingsManager.ClickThruWhenDim) FocusManager.MakeTransparent(_handle);
                 }
                 else
                 {
                     AnimateContentOpacity(1);
-                    if (!SettingsManager.ClickThruWhenDim) return;
-                    if (!clickThru) FocusManager.UndoTransparent(_handle);
-
+                        if (!_settings.ClickThru) FocusManager.UndoTransparent(_handle);
                 }
             }
         }
@@ -164,7 +160,10 @@ namespace TCC.Windows
         {
             Dispatcher.InvokeIfRequired(() => { Topmost = false; Topmost = true; }, System.Windows.Threading.DispatcherPriority.DataBind);
         }
-
+        public void RefreshSettings(WindowSettings ws)
+        {
+            _settings = ws;
+        }
         protected void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             try

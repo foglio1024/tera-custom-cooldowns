@@ -604,8 +604,8 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.CooldownWindowSettings.AutoDim == value) return;
                 SettingsManager.CooldownWindowSettings.AutoDim = value;
-                WindowManager.SkillsEnded = false;
-                WindowManager.SkillsEnded = true;
+                WindowManager.CooldownWindow.RefreshSettings(SettingsManager.CooldownWindowSettings);
+                WindowManager.RefreshDim();
 
                 //WindowManager.CooldownWindow.SetClickThru(value);
                 NotifyPropertyChanged("IsCooldownWindowAutoDim");
@@ -618,9 +618,8 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.CharacterWindowSettings.AutoDim == value) return;
                 SettingsManager.CharacterWindowSettings.AutoDim = value;
-                WindowManager.SkillsEnded = false;
-                WindowManager.SkillsEnded = true;
-
+                WindowManager.CharacterWindow.RefreshSettings(SettingsManager.CharacterWindowSettings);
+                WindowManager.RefreshDim();
                 //WindowManager.CharacterWindow.SetClickThru(value);
                 NotifyPropertyChanged("IsCharacterWindowAutoDim");
             }
@@ -632,9 +631,9 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.BuffWindowSettings.AutoDim == value) return;
                 SettingsManager.BuffWindowSettings.AutoDim = value;
-                WindowManager.SkillsEnded = false;
-                WindowManager.SkillsEnded = true;
+                WindowManager.BuffWindow.RefreshSettings(SettingsManager.BuffWindowSettings);
 
+                WindowManager.RefreshDim();
                 //WindowManager.BuffBarWindow.SetClickThru(value);
                 NotifyPropertyChanged("IsBuffBarWindowAutoDim");
             }
@@ -646,9 +645,9 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.BossWindowSettings.AutoDim == value) return;
                 SettingsManager.BossWindowSettings.AutoDim = value;
-                WindowManager.SkillsEnded = false;
-                WindowManager.SkillsEnded = true;
+                WindowManager.BossWindow.RefreshSettings(SettingsManager.BossWindowSettings);
 
+                WindowManager.RefreshDim();
                 //WindowManager.BossGaugeWindow.SetClickThru(value);
                 NotifyPropertyChanged("IsBossGaugeWindowAutoDim");
             }
@@ -660,9 +659,9 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.GroupWindowSettings.AutoDim == value) return;
                 SettingsManager.GroupWindowSettings.AutoDim = value;
-                WindowManager.SkillsEnded = false;
-                WindowManager.SkillsEnded = true;
+                WindowManager.GroupWindow.RefreshSettings(SettingsManager.GroupWindowSettings);
 
+                WindowManager.RefreshDim();
                 //WindowManager.GroupWindow.SetClickThru(value);
                 NotifyPropertyChanged("IsGroupWindowAutoDim");
             }
@@ -674,9 +673,9 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.ClassWindowSettings.AutoDim == value) return;
                 SettingsManager.ClassWindowSettings.AutoDim = value;
-                WindowManager.SkillsEnded = false;
-                WindowManager.SkillsEnded = true;
+                WindowManager.ClassWindow.RefreshSettings(SettingsManager.ClassWindowSettings);
 
+                WindowManager.RefreshDim();
                 //WindowManager.ClassWindow.SetClickThru(value);
                 NotifyPropertyChanged("IsClassWindowAutoDim");
             }
@@ -977,11 +976,10 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.ClickThruWhenDim == value) return;
                 SettingsManager.ClickThruWhenDim = value;
-                if (value && WindowManager.IsTccDim)
-                {
-                    WindowManager.SkillsEnded = false;
-                    WindowManager.SkillsEnded = true;
-                }
+
+                WindowManager.SkillsEnded = false;
+                WindowManager.SkillsEnded = true;
+
                 NotifyPropertyChanged("ClickThruWhenDim");
             }
         }

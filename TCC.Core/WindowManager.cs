@@ -146,7 +146,11 @@ namespace TCC
         public static Visibility StaminaGaugeVisibility;
         public static double StaminaGaugeTop;
         public static double StaminaGaugeLeft;
-
+        public static void RefreshDim()
+        {
+            SkillsEnded = false;
+            Task.Delay(100).ContinueWith(t => SkillsEnded = true);
+        }
         static List<Delegate> WindowLoadingDelegates = new List<Delegate>
         {
             new Action(LoadCooldownWindow),
