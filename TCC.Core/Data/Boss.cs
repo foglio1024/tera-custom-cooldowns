@@ -206,7 +206,7 @@ namespace TCC.Data
             if (IsPhase1Dragon)
             {
                 ShieldDuration = new Timer();
-                ShieldDuration.Interval = 15000;
+                ShieldDuration.Interval = BossGageWindowViewModel.PH1SHIELD_DURATION*1000;
                 ShieldDuration.Elapsed += ShieldFailed;
 
                 EnragePattern.Duration = 50;

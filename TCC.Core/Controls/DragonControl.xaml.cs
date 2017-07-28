@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TCC.Data;
+using TCC.ViewModels;
 
 namespace TCC.Controls
 {
@@ -25,7 +26,7 @@ namespace TCC.Controls
         public DragonControl()
         {
             InitializeComponent();
-            shieldArcAn = new DoubleAnimation(0, 359.99, TimeSpan.FromSeconds(15));
+            shieldArcAn = new DoubleAnimation(0, 359.99, TimeSpan.FromSeconds(BossGageWindowViewModel.PH1SHIELD_DURATION));
 
         }
 
@@ -46,7 +47,7 @@ namespace TCC.Controls
             {
                 if (dc.Shield == ShieldStatus.On)
                 {
-                    shieldArcAn = new DoubleAnimation(0, 359.99, TimeSpan.FromSeconds(15));
+                    shieldArcAn = new DoubleAnimation(0, 359.99, TimeSpan.FromSeconds(BossGageWindowViewModel.PH1SHIELD_DURATION));
                     shieldArc.BeginAnimation(Arc.EndAngleProperty, shieldArcAn);
                 }
                 else

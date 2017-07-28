@@ -7,11 +7,13 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Threading;
 using TCC.Data;
+using TCC.Parsing;
 
 namespace TCC.ViewModels
 {
     public class BossGageWindowViewModel : TSPropertyChanged
     {
+        public const int PH1SHIELD_DURATION = 16;
         private static BossGageWindowViewModel _instance;
         public static BossGageWindowViewModel Instance => _instance ?? (_instance = new BossGageWindowViewModel());
         public HarrowholdPhase CurrentHHphase
@@ -21,7 +23,7 @@ namespace TCC.ViewModels
             {
                 if (_currentHHphase == value) return;
                 _currentHHphase = value;
-
+                MessageFactory.Update();
                 NotifyPropertyChanged(nameof(CurrentHHphase));
             }
         }
@@ -71,7 +73,6 @@ namespace TCC.ViewModels
                 NotifyPropertyChanged("Scale");
             }
         }
-
         public SynchronizedObservableCollection<Boss> CurrentNPCs
         {
             get
