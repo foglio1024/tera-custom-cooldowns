@@ -137,6 +137,8 @@ namespace TCC
         {
             X = 0,
             Y = _screen.Height * (2 / 3),
+            W = 600,
+            H = 200,
             Visibility = Visibility.Visible,
             ClickThru = false,
             Scale = 1,
