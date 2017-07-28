@@ -363,10 +363,7 @@ namespace TCC.ViewModels
         }
         private SynchronizedObservableCollection<User> _dps;
 
-        private readonly object dpsLock = new object();
-        private readonly object tankLock = new object();
-        private readonly object healersLock = new object();
-        private readonly object genericLock = new object();
+        private readonly object @lock = new object();
 
         public void AddOrUpdateMember(User p)
         {
@@ -447,7 +444,7 @@ namespace TCC.ViewModels
         }
         private void AddOrUpdateDps(User p)
         {
-            lock (dpsLock)
+            lock (@lock)
             {
                 var dps = _dps.FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
                 if (dps == null)
@@ -464,7 +461,7 @@ namespace TCC.ViewModels
         }
         private void AddOrUpdateTank(User p)
         {
-            lock (tankLock)
+            lock (@lock)
             {
                 var tank = _tanks.FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
                 if (tank == null)
@@ -482,7 +479,7 @@ namespace TCC.ViewModels
         }
         private void AddOrUpdateHealer(User p)
         {
-            lock (healersLock)
+            lock (@lock)
             {
                 var healer = _healers.FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
                 if (healer == null)
@@ -694,7 +691,7 @@ namespace TCC.ViewModels
         }
         private bool TryGetUserFromList(IEnumerable<User> userList, ulong entityId, out User u)
         {
-            lock (genericLock)
+            lock (@lock)
             {
                 u = userList.FirstOrDefault(x => x.EntityId == entityId);
                 if (u != null)
@@ -709,7 +706,7 @@ namespace TCC.ViewModels
         }
         private bool TryGetUserFromList(IEnumerable<User> userList, uint serverId, uint playerId, out User u)
         {
-            lock (genericLock)
+            lock (@lock)
             {
                 u = userList.FirstOrDefault(x => x.ServerId == serverId && x.PlayerId == playerId);
                 if (u != null)
@@ -724,7 +721,7 @@ namespace TCC.ViewModels
         }
         private bool TryGetUserFromList(IEnumerable<User> userList, string name, out User u)
         {
-            lock (genericLock)
+            lock (@lock)
             {
                 u = userList.FirstOrDefault(x => x.Name == name);
                 if (u != null)
