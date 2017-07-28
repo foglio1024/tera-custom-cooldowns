@@ -116,6 +116,9 @@
     <Compile Include="ClassSpecific\Lancer.cs" />
     <Compile Include="ClassSpecific\Priest.cs" />
     <Compile Include="ClassSpecific\Valkyrie.cs" />
+    <Compile Include="Controls\ChatControls\DefaultMessageBody.xaml.cs">
+      <DependentUpon>DefaultMessageBody.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\IconConverter.cs" />
     <Compile Include="Converters\BoolToOpacityInverseConverter.cs" />
     <Compile Include="Converters\BoolToOpacityConverter.cs" />
@@ -698,6 +701,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\ChatControls\DefaultMessageBody.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\ChatControls\FriendMessageDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1006,6 +1013,7 @@
     <Content Include="resources\data\abnormalities\abnormals-TW.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="resources\images\ic_pause_white_24dp_2x.png" />
     <Resource Include="resources\images\ic_remove_white_24dp_2x.png" />
     <Resource Include="resources\images\ic_visibility_off_white_24dp_2x.png" />
     <Resource Include="resources\images\ic_filter_list_white_24dp_2x.png" />
