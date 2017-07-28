@@ -22,7 +22,11 @@
     </local:TccWindow.DataContext>
     <local:TccWindow.Resources>
         <DataTemplate x:Key="ChatMessageTemplate">
-            <controls:ChatMessageControl VerticalAlignment="Top"/>
+            <controls:ChatMessageControl VerticalAlignment="Top">
+                <controls:ChatMessageControl.LayoutTransform>
+                    <RotateTransform Angle="180"></RotateTransform>
+                </controls:ChatMessageControl.LayoutTransform>
+            </controls:ChatMessageControl>
         </DataTemplate>
         <Style TargetType="ItemsControl" x:Key="LfgItemsControl">
             <Setter Property="Height" Value="Auto"/>
@@ -46,7 +50,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
     </local:TccWindow.Resources>
     <Grid>
         <Grid Margin="0" Width="Auto" Name="root" MouseLeftButtonDown="Window_MouseLeftButtonDown">
@@ -146,8 +149,13 @@
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <VirtualizingStackPanel Margin="0,0,0,0" 
+                                                    VerticalAlignment="Stretch"
                                                     Background="#01000000" 
-                                                    VerticalAlignment="Stretch"/>
+                                                        >
+                                    <VirtualizingStackPanel.LayoutTransform>
+                                        <RotateTransform Angle="180"></RotateTransform>
+                                    </VirtualizingStackPanel.LayoutTransform>
+                                </VirtualizingStackPanel>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
@@ -164,7 +172,12 @@
                             <ItemsPanelTemplate>
                                 <VirtualizingStackPanel Margin="0" 
                                                     Orientation="Vertical" 
-                                                    Background="#01000000"  />
+                                                    Background="#01000000" 
+                                                        >
+                                    <VirtualizingStackPanel.LayoutTransform>
+                                        <RotateTransform Angle="180"></RotateTransform>
+                                    </VirtualizingStackPanel.LayoutTransform>
+                                </VirtualizingStackPanel>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
@@ -180,7 +193,12 @@
                             <ItemsPanelTemplate>
                                 <VirtualizingStackPanel Margin="0" 
                                                     Orientation="Vertical" 
-                                                    Background="#01000000" />
+                                                    Background="#01000000" 
+                                                        >
+                                    <VirtualizingStackPanel.LayoutTransform>
+                                        <RotateTransform Angle="180"></RotateTransform>
+                                    </VirtualizingStackPanel.LayoutTransform>
+                                </VirtualizingStackPanel>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
@@ -196,7 +214,12 @@
                             <ItemsPanelTemplate>
                                 <VirtualizingStackPanel Margin="0"
                                                     Orientation="Vertical" 
-                                                    Background="#01000000" />
+                                                    Background="#01000000" 
+                                                        >
+                                    <VirtualizingStackPanel.LayoutTransform>
+                                        <RotateTransform Angle="180"></RotateTransform>
+                                    </VirtualizingStackPanel.LayoutTransform>
+                                </VirtualizingStackPanel>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
@@ -213,7 +236,12 @@
                             <ItemsPanelTemplate>
                                 <VirtualizingStackPanel Margin="0"
                                                     Orientation="Vertical" 
-                                                    Background="#01000000" />
+                                                    Background="#01000000" 
+                                                        >
+                                    <VirtualizingStackPanel.LayoutTransform>
+                                        <RotateTransform Angle="180"></RotateTransform>
+                                    </VirtualizingStackPanel.LayoutTransform>
+                                </VirtualizingStackPanel>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
@@ -226,7 +254,9 @@
                     <TranslateTransform X="0"/>
                 </Rectangle.RenderTransform>
             </Rectangle>
-
+            <Image Source="/TCC;component/resources/images/ic_pause_white_24dp_2x.png" VerticalAlignment="Bottom" 
+                   HorizontalAlignment="Right"  Height="40" Width="40" Grid.Row="1" Opacity=".2"
+                   Visibility="{Binding Instance.Paused, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"/>
             <Border Background="{StaticResource Colors.App.DefaultBackground}" Width="Auto" Grid.Column="0" Grid.Row="0" Opacity=".7" Visibility="{Binding Instance.LfgOn, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
                 <ItemsControl ItemsSource="{Binding Instance.LFGs}" 
                               ItemTemplate="{StaticResource LfgTemplate}" 
@@ -238,7 +268,7 @@
                               Visibility="{Binding Instance.LfgOn, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Horizontal"></WrapPanel>
+                            <WrapPanel Orientation="Horizontal" ></WrapPanel>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -17,8 +18,6 @@ namespace TCC.ViewModels
     {
         static ChatWindowViewModel _instance;
         public static ChatWindowViewModel Instance => _instance ?? (_instance = new ChatWindowViewModel());
-        const int MESSAGE_CAP = 100000;
-        const int SPAM_THRESHOLD = 1;
         DispatcherTimer hideTimer;
         public bool IsTeraOnTop
         {
@@ -60,6 +59,8 @@ namespace TCC.ViewModels
                 _chatMessages = value;
             }
         }
+        private ConcurrentQueue<ChatMessage> _queue;
+
         private ICollectionView _allMessages;
         public ICollectionView AllMessages
         {
@@ -86,7 +87,9 @@ namespace TCC.ViewModels
             get => _whisperMessages;
         }
 
-        public bool LfgOn { get => SettingsManager.LfgOn;
+        public bool LfgOn
+        {
+            get => SettingsManager.LfgOn;
             set
             {
                 NotifyPropertyChanged(nameof(LfgOn));
@@ -100,7 +103,7 @@ namespace TCC.ViewModels
 
         internal void RemoveDeadLfg()
         {
-            if(LastClickedLfg != null)
+            if (LastClickedLfg != null)
             {
                 RemoveLfg(LastClickedLfg);
                 LastClickedLfg = null;
@@ -124,6 +127,7 @@ namespace TCC.ViewModels
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
             _chatMessages = new SynchronizedObservableCollection<ChatMessage>(_dispatcher);
+            _queue = new ConcurrentQueue<ChatMessage>();
             _lfgs = new SynchronizedObservableCollection<LFG>(_dispatcher);
             hideTimer = new DispatcherTimer();
             hideTimer.Interval = TimeSpan.FromSeconds(15);
@@ -178,7 +182,42 @@ namespace TCC.ViewModels
                                             ((ChatMessage)p).Channel == ChatChannel.SentWhisper;
         }
 
+        internal void AddFromQueue(int itemsToAdd)
+        {
+                for (int i = 0; i < itemsToAdd; i++)
+                {
+                    ChatMessage msg;
+                    if (_queue.TryDequeue(out msg))
+                    {
+                        ChatMessages.Insert(0, msg);
+                        if (ChatMessages.Count > SettingsManager.MaxMessages)
+                        {
+                            ChatMessages.RemoveAt(ChatMessages.Count - 1);
+                        }
+                    }
+                }
+        }
 
+        private bool paused;
+
+        public bool Paused
+        {
+            get { return paused; }
+            set
+            {
+                if (paused == value) return;
+                paused = value;
+                NotifyPropertyChanged(nameof(Paused));
+            }
+        }
+
+        public bool IsQueueEmpty
+        {
+            get
+            {
+                return _queue.Count == 0 ? true : false;
+            }
+        }
 
         private void HideTimer_Tick(object sender, EventArgs e)
         {
@@ -210,31 +249,27 @@ namespace TCC.ViewModels
             else
             {
 
-                int offset = 0;
                 for (int i = 0; i < SettingsManager.SpamThreshold; i++)
                 {
-                    if (1 + i + offset > ChatMessages.Count) continue;
+                    if (i > ChatMessages.Count - 1) continue;
 
-                    var m = ChatMessages[ChatMessages.Count - 1 - i - offset];
-                    //if (!VisibleChannels.Contains(m.Channel))
-                    //{
-                    //    i--;
-                    //    offset++;
-                    //    continue;
-                    //}
-                    if (m.RawMessage == chatMessage.RawMessage && 
-                        m.Author == chatMessage.Author && 
+                    var m = ChatMessages[i];
+
+                    if (m.RawMessage == chatMessage.RawMessage &&
+                        m.Author == chatMessage.Author &&
                         m.Channel != ChatChannel.Money &&
                         m.Channel != ChatChannel.Loot) return;
                 }
             }
 
             ChatMessage.SplitSimplePieces(chatMessage);
-            ChatMessages.Add(chatMessage);
+
+            if (!Paused) ChatMessages.Insert(0, chatMessage);
+            else _queue.Enqueue(chatMessage);
 
             if (ChatMessages.Count > SettingsManager.MaxMessages)
             {
-                ChatMessages.RemoveAt(0);
+                ChatMessages.RemoveAt(ChatMessages.Count - 1);
             }
             NotifyPropertyChanged(nameof(MessageCount));
         }
@@ -269,7 +304,7 @@ namespace TCC.ViewModels
                 if (lfg == null)
                 {
                     lfg = _lfgs.FirstOrDefault(x => x.Message == msg);
-                    if(lfg == null)
+                    if (lfg == null)
                     {
                         return false;
                     }
@@ -286,7 +321,7 @@ namespace TCC.ViewModels
         internal void UpdateLfgMembers(S_PARTY_MEMBER_INFO p)
         {
             LFG lfg;
-            if(TryGetLfg(p.Id, "", "", out lfg))
+            if (TryGetLfg(p.Id, "", "", out lfg))
             {
                 lfg.MembersCount = p.MembersCount;
             }

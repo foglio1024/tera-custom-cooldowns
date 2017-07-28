@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
@@ -67,7 +68,7 @@ namespace TCC.Windows
                     var b = (Border)VisualTreeHelper.GetChild(t, 0);
                     var s = (ScrollViewer)VisualTreeHelper.GetChild(b, 0);
 
-                    s.ScrollToBottom();
+                    s.ScrollToTop();
                 }
             }
             else if(e.PropertyName == nameof(ChatWindowViewModel.Instance.IsChatVisible))
@@ -99,15 +100,23 @@ namespace TCC.Windows
         private void SWPreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
             ScrollViewer s = (ScrollViewer)sender;
-            if (s.VerticalOffset == s.ScrollableHeight)
+            var offset = e.Delta > 0 ? -2 : 2;
+            s.ScrollToVerticalOffset(s.VerticalOffset-offset);
+            e.Handled = true;
+            if (s.VerticalOffset == 0)
             {
                 _bottom = true;
+                ChatWindowViewModel.Instance.AddFromQueue(2);
+                if (ChatWindowViewModel.Instance.IsQueueEmpty) ChatWindowViewModel.Instance.Paused = false;
+
             }
             else
             {
-                _bottom = false;
 
+                _bottom = false;
             }
+
+                ChatWindowViewModel.Instance.Paused = !_bottom;
 
         }
         public void OpenTooltip()
@@ -148,7 +157,7 @@ namespace TCC.Windows
             var b = (Border)VisualTreeHelper.GetChild(_currentContent, 0);
             var sw = (ScrollViewer)VisualTreeHelper.GetChild(b, 0);
 
-            sw.ScrollToBottom();
+            sw.ScrollToTop();
         }
         private void AnimateTabRect(FrameworkElement s)
         {
