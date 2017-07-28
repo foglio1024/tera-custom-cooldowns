@@ -169,7 +169,9 @@ namespace TCC.Windows
         {
             try
             {
+                if (!_ignoreSize) ResizeMode = ResizeMode.NoResize;
                 DragMove();
+                if (!_ignoreSize) ResizeMode = ResizeMode.CanResize;
                 var screen = Screen.FromHandle(new WindowInteropHelper(this).Handle);
                 var source = PresentationSource.FromVisual(this);
                 if (source?.CompositionTarget == null) return;
@@ -178,15 +180,12 @@ namespace TCC.Windows
                 var dy = m.M22;
                 var newLeft = Left * dx;
                 var newTop = Top * dx;
-
                 _settings.X = newLeft / dx;
                 _settings.Y = newTop / dy;
+
                 SettingsManager.SaveSettings();
             }
-            catch (Exception)
-            {
-
-            }
+            catch (Exception) { }
         }
 
         public void CloseWindowSafe()
