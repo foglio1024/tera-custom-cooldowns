@@ -195,6 +195,9 @@
                                     <RepeatButton x:Name="PageDown" Command="ScrollBar.PageUpCommand" Opacity="0"
                                                   Focusable="false" />
                                 </Track.DecreaseRepeatButton>
+                                <Track.LayoutTransform>
+                                    <RotateTransform Angle="180"></RotateTransform>
+                                </Track.LayoutTransform>
                             </Track>
                         </Grid>
 
@@ -377,17 +380,7 @@
             <controls:MessagePieceControl  />
         </DataTemplate>
         <DataTemplate x:Key="DefaultBody">
-            <ItemsControl ItemsSource="{Binding Pieces}"
-                          ItemTemplate="{StaticResource MessageBodyTemplate}" 
-                          Background="#0f00"  
-                          Margin="3,0,0,0" 
-                          VerticalAlignment="Top" >
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel HorizontalAlignment="Stretch"  Width="Auto" Height="Auto" Background="#0f00" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
+            <chatcontrols:DefaultMessageBody />
         </DataTemplate>
         <DataTemplate x:Key="BrokerOfferBody">
             <chatcontrols:BrokerOfferBody />
