@@ -298,8 +298,10 @@ namespace TCC.Parsing
             System.Timers.Timer t = new System.Timers.Timer(2000);
             t.Elapsed += (s, ev) =>
             {
-                SessionManager.LoadingScreen = false;
                 t.Stop();
+                SessionManager.LoadingScreen = false;
+                WindowManager.RefreshDim();
+
             };
             t.Enabled = true;
         }
