@@ -52,8 +52,8 @@ namespace TCC
 
         public static WindowSettings GroupWindowSettings = new WindowSettings()
         {
-            X = 10,
-            Y = 10,
+            X = 0,
+            Y = 0,
             Visibility = Visibility.Visible,
             ClickThru = false,
             Scale = 1,
@@ -65,8 +65,8 @@ namespace TCC
         };
         public static WindowSettings CooldownWindowSettings = new WindowSettings()
         {
-            X = _screen.Width / 3,
-            Y = _screen.Height / 1.5,
+            X = 0,
+            Y = 0,
             Visibility = Visibility.Visible,
             ClickThru = false,
             Scale = 1,
@@ -79,8 +79,8 @@ namespace TCC
         };
         public static WindowSettings BossWindowSettings = new WindowSettings()
         {
-            X = _screen.Width / 2 - 200,
-            Y = 20,
+            X = 0,
+            Y = 0,
             Visibility = Visibility.Visible,
             ClickThru = false,
             Scale = 1,
@@ -93,8 +93,8 @@ namespace TCC
         };
         public static WindowSettings BuffWindowSettings = new WindowSettings()
         {
-            X = _screen.Width - 1000,
-            Y = _screen.Height / 1.5,
+            X = 0,
+            Y = 0,
             Visibility = Visibility.Visible,
             ClickThru = false,
             Scale = 1,
@@ -107,8 +107,8 @@ namespace TCC
         };
         public static WindowSettings CharacterWindowSettings = new WindowSettings()
         {
-            X = _screen.Width / 2 - 200,
-            Y = _screen.Height - 120,
+            X = 0,
+            Y = 0,
             Visibility = Visibility.Visible,
             ClickThru = false,
             Scale = 1,
@@ -121,8 +121,8 @@ namespace TCC
         };
         public static WindowSettings ClassWindowSettings = new WindowSettings()
         {
-            X = _screen.Width / 3,
-            Y = _screen.Height - 200,
+            X = 0,
+            Y = 0,
             Visibility = Visibility.Visible,
             ClickThru = false,
             Scale = 1,
@@ -136,7 +136,7 @@ namespace TCC
         public static WindowSettings ChatWindowSettings = new WindowSettings()
         {
             X = 0,
-            Y = _screen.Height * (2 / 3),
+            Y = 0,
             W = 600,
             H = 200,
             Visibility = Visibility.Visible,
