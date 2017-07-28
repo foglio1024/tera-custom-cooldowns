@@ -47,15 +47,12 @@ namespace TCC.ViewModels
 
         public override bool StartSpecialSkill(SkillCooldown sk)
         {
-
             if (sk.Skill.IconName == DeadlyGamble.Cooldown.Skill.IconName)
             {
                 DeadlyGamble.Cooldown.Start(sk.Cooldown);
                 return true;
             }
             return false;
-
         }
-
     }
 }

@@ -37,7 +37,7 @@ namespace TCC.ViewModels
             _dispatcher = Dispatcher.CurrentDispatcher;
             _max = max;
             _autoexpire = autoexpire;
-            _expire = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(8000) };
+            _expire = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(9000) };
             _expire.Tick += (s, ev) => Val = 0;
         }
     }
