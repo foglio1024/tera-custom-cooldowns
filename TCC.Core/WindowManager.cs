@@ -88,7 +88,7 @@ namespace TCC
 
                 if (isFocused == value)
                 {
-                    if(focusCount > 2)
+                    if(focusCount > 3)
                     {
                         return;
                     }
