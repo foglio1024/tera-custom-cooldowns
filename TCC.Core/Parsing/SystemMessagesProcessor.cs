@@ -22,7 +22,9 @@ namespace TCC.Parsing
             "SMT_BATTLE_YOU_DIE",
             "SMT_BATTLE_RESURRECT",
             "SMT_ABANDON_DIVIDE_DICE_PARTYPLAYER",
-            "SMT_JOIN_DIVIDE_DICE_PATYPLAYER"
+            "SMT_JOIN_DIVIDE_DICE_PATYPLAYER",
+            "SMT_ABANDON_DIVIDE_DICE",
+            "SMT_JOIN_DIVIDE_DICE"
         };
         public static bool Filter(string opcodeName)
         {
