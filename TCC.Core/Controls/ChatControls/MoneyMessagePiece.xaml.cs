@@ -31,7 +31,7 @@ namespace TCC.Controls
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var amount = (int)value;
+            var amount = (long)value;
             if(amount == 0)
             {
                 return Visibility.Collapsed;
