@@ -4,17 +4,17 @@ namespace TCC.Data
 {
     public class Money : TSPropertyChanged
     {
-        public int Gold { get; set; }
-        public int Silver { get; set; }
-        public int Copper { get; set; }
+        public long Gold { get; set; }
+        public long Silver { get; set; }
+        public long Copper { get; set; }
 
         public Money(long money)
         {
             _dispatcher = WindowManager.ChatWindow.Dispatcher;
 
-            Gold = Convert.ToInt32(money / 10000);
-            Silver = Convert.ToInt32(money / 100) - Gold * 100;
-            Copper = Convert.ToInt32(money / 1) - Silver * 100 - Gold * 10000;
+            Gold = Convert.ToInt64(money / 10000);
+            Silver = Convert.ToInt64(money / 100) - Gold * 100;
+            Copper = Convert.ToInt64(money / 1) - Silver * 100 - Gold * 10000;
         }
         public Money(int g, int s, int c)
         {
@@ -26,23 +26,23 @@ namespace TCC.Data
         }
         public Money(string money)
         {
-            int gold = 0;
-            int silver = 0;
-            int copper = 0;
+            long gold = 0;
+            long silver = 0;
+            long copper = 0;
             if (money.Length >= 5)
             {
-                copper = int.Parse(money.Substring(money.Length - 2));
-                silver = int.Parse(money.Substring(money.Length - 4, 2));
-                gold = int.Parse(money.Substring(0, money.Length - 4));
+                copper = long.Parse(money.Substring(money.Length - 2));
+                silver = long.Parse(money.Substring(money.Length - 4, 2));
+                gold = long.Parse(money.Substring(0, money.Length - 4));
             }
             else if (money.Length >= 3 && money.Length < 5)
             {
-                copper = int.Parse(money.Substring(money.Length - 2));
-                silver = int.Parse(money.Substring(0, money.Length - 2));
+                copper = long.Parse(money.Substring(money.Length - 2));
+                silver = long.Parse(money.Substring(0, money.Length - 2));
             }
             else
             {
-                copper = int.Parse(money);
+                copper = long.Parse(money);
             }
             Gold = gold;
             Silver = silver;
