@@ -10,7 +10,7 @@
              Loaded="UserControl_Loaded"
              Unloaded="UserControl_Unloaded"
              Margin="0" >
-    <Grid Height="Auto" Margin="2" Width="175" Name="rootGrid" ToolTip="{Binding Name}" >
+    <Grid Height="Auto" Margin="2" Width="175" Name="rootGrid" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
