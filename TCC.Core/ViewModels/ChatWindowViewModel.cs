@@ -45,6 +45,15 @@ namespace TCC.ViewModels
                 NotifyPropertyChanged("Scale");
             }
         }
+        public double ChatWindowOpacity
+        {
+            get { return SettingsManager.ChatWindowOpacity; }
+            set
+            {
+                NotifyPropertyChanged(nameof(ChatWindowOpacity));
+            }
+        }
+
         public int MessageCount
         {
             get => ChatMessages.Count;
@@ -140,6 +149,7 @@ namespace TCC.ViewModels
                     WindowManager.ChatWindow.RefreshTopmost();
                 }
             };
+            
             ChatMessages.CollectionChanged += ChatMessages_CollectionChanged;
 
             VisibleChannels = new List<ChatChannel>
@@ -184,18 +194,18 @@ namespace TCC.ViewModels
 
         internal void AddFromQueue(int itemsToAdd)
         {
-                for (int i = 0; i < itemsToAdd; i++)
+            for (int i = 0; i < itemsToAdd; i++)
+            {
+                ChatMessage msg;
+                if (_queue.TryDequeue(out msg))
                 {
-                    ChatMessage msg;
-                    if (_queue.TryDequeue(out msg))
+                    ChatMessages.Insert(0, msg);
+                    if (ChatMessages.Count > SettingsManager.MaxMessages)
                     {
-                        ChatMessages.Insert(0, msg);
-                        if (ChatMessages.Count > SettingsManager.MaxMessages)
-                        {
-                            ChatMessages.RemoveAt(ChatMessages.Count - 1);
-                        }
+                        ChatMessages.RemoveAt(ChatMessages.Count - 1);
                     }
                 }
+            }
         }
 
         private bool paused;

@@ -829,6 +829,21 @@ namespace TCC.ViewModels
                 NotifyPropertyChanged("ClassWindowDimOpacity");
             }
         }
+        public double ChatWindowOpacity
+        {
+            get { return SettingsManager.ChatWindowOpacity; }
+            set
+            {
+                if (SettingsManager.ChatWindowOpacity  == value) return;
+                var val = value;
+                if (val < 0) val = 0;
+                if (val > 1) val = 1;
+
+                SettingsManager.ChatWindowOpacity = val;
+                ChatWindowViewModel.Instance.ChatWindowOpacity = SettingsManager.ChatWindowOpacity;
+                NotifyPropertyChanged(nameof(ChatWindowOpacity));
+            }
+        }
 
         //transparency settings
         public bool DoesChatWindowAllowTransparency

@@ -168,6 +168,7 @@ namespace TCC
         public static bool ShowOnlyAggroStacks { get; set; } = true;
         public static bool DisablePartyAbnormals { get; set; } = false;
         public static bool LfgOn { get; set; } = true;
+        public static double ChatWindowOpacity { get; set; } = 0.4;
 
         public static void LoadWindowSettings()
         {
@@ -308,6 +309,11 @@ namespace TCC
                     LfgOn = Boolean.Parse(b.Attribute(nameof(LfgOn)).Value);
                 }
                 catch (Exception) { }
+                try
+                {
+                    ChatWindowOpacity = Double.Parse(b.Attribute(nameof(ChatWindowOpacity)).Value, CultureInfo.InvariantCulture);
+                }
+                catch (Exception) { }
                 //add settings here
             }
         }
@@ -409,7 +415,8 @@ namespace TCC
                 new XAttribute(nameof(DisablePartyHP), DisablePartyHP),
                 new XAttribute(nameof(DisablePartyAbnormals), DisablePartyAbnormals),
                 new XAttribute(nameof(ShowOnlyAggroStacks), ShowOnlyAggroStacks),
-                new XAttribute(nameof(LfgOn), LfgOn)
+                new XAttribute(nameof(LfgOn), LfgOn),
+                new XAttribute(nameof(ChatWindowOpacity), ChatWindowOpacity)
                 //add setting here
                 )
             );

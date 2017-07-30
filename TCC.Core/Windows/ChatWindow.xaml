@@ -57,7 +57,9 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Border Background="{StaticResource Colors.App.DefaultBackground}" Opacity=".4"  CornerRadius="1" Grid.ColumnSpan="2" Grid.RowSpan="2" BorderThickness="1" BorderBrush="Black" Margin="0,0,0,0" Grid.Row="0" VerticalAlignment="Stretch" />
+            <Border Background="{StaticResource Colors.App.DefaultBackground}" Opacity="{Binding Instance.ChatWindowOpacity}" 
+                    CornerRadius="1" Grid.ColumnSpan="2" Grid.RowSpan="2" BorderThickness="1" BorderBrush="Black" 
+                    Margin="0,0,0,0" Grid.Row="0" VerticalAlignment="Stretch" />
             <!--Message counter-->
             <TextBlock VerticalAlignment="Top"
                    HorizontalAlignment="Right"
@@ -68,7 +70,7 @@
                    Text="{Binding Instance.MessageCount}" 
                    Margin="3"/>
             <TabControl Grid.Row="1" Background="Transparent"  
-                        BorderBrush="Transparent" 
+                        BorderBrush="#0000" BorderThickness="0,0,0,0"
                         Style="{DynamicResource ChatTabControlStyle}" Margin="0,0,0,0" x:Name="tabControl" >
                 <TabControl.Resources>
                     <Style TargetType="{x:Type TabItem}">
@@ -257,8 +259,11 @@
             <Image Source="/TCC;component/resources/images/ic_pause_white_24dp_2x.png" VerticalAlignment="Bottom" 
                    HorizontalAlignment="Right"  Height="40" Width="40" Grid.Row="1" Opacity=".2"
                    Visibility="{Binding Instance.Paused, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"/>
-            <Border Background="{StaticResource Colors.App.DefaultBackground}" Width="Auto" Grid.Column="0" Grid.Row="0" Opacity=".7" Visibility="{Binding Instance.LfgOn, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
-                <ItemsControl ItemsSource="{Binding Instance.LFGs}" 
+            <Border Background="{StaticResource Colors.App.DefaultBackground}" Width="Auto"
+                    Grid.Column="0" Grid.Row="0" Opacity=".0" 
+                    Visibility="{Binding Instance.LfgOn, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"/>
+
+            <ItemsControl ItemsSource="{Binding Instance.LFGs}" 
                               ItemTemplate="{StaticResource LfgTemplate}" 
                               Margin="2" 
                               HorizontalAlignment="Left"
@@ -266,13 +271,13 @@
                               Height="18"
                               Style="{StaticResource LfgItemsControl}"
                               Visibility="{Binding Instance.LfgOn, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Horizontal" ></WrapPanel>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
-            </Border>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" ></WrapPanel>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+
             <Popup Name="playerInfo" StaysOpen="True" Placement="Mouse"
                AllowsTransparency="True" Width="Auto" HorizontalOffset="95" UseLayoutRounding="True"
                VerticalAlignment="Center"
