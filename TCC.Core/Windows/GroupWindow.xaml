@@ -24,20 +24,11 @@
     <local:TccWindow.DataContext>
         <wm:GroupWindowViewModel/>
     </local:TccWindow.DataContext>
-    <local:TccWindow.Resources>
-
-    </local:TccWindow.Resources>
     <Grid  Margin="10" Width="Auto" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
         <Grid.LayoutTransform>
             <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}" />
         </Grid.LayoutTransform>
