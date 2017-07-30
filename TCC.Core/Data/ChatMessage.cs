@@ -331,7 +331,7 @@ namespace TCC.Data
                             }
                             else
                             {
-                                AddPiece(new MessagePiece(inPiece, MessagePieceType.Simple, Channel, customColor));
+                                AddPiece(new MessagePiece(ReplaceEscapes(inPiece), MessagePieceType.Simple, Channel, customColor));
                             }
                         }
                     }
