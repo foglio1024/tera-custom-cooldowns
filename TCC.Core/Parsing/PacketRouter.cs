@@ -95,6 +95,7 @@ namespace TCC.Parsing
                 }
                 var message = MessageFactory.Create(msg);
                 //PacketInspector.AddToStats(msg);
+                //PacketInspector.InspectPacket(msg);
                 if (message.GetType() == typeof(Tera.Game.Messages.UnknownMessage))
                 {
                     //discarded++;
@@ -264,6 +265,7 @@ namespace TCC.Parsing
             EntitiesManager.ClearNPC();
             GroupWindowViewModel.Instance.ClearAll();
         }
+
 
         public static void HandleLoadTopo(S_LOAD_TOPO x)
         {
@@ -690,7 +692,10 @@ namespace TCC.Parsing
         public static void HandleLeaveParty(S_LEAVE_PARTY x)
         {
             GroupWindowViewModel.Instance.ClearAll();
-
+        }
+        internal static void HandleKicked(S_BAN_PARTY x)
+        {
+            GroupWindowViewModel.Instance.ClearAll();
         }
 
         public static void HandleReadyCheck(S_CHECK_TO_READY_PARTY p)

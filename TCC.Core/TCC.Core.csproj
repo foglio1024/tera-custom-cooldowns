@@ -214,6 +214,7 @@
     <Compile Include="Data\World.cs" />
     <Compile Include="Parsing\Messages\S_ACCOMPLISH_ACHIEVEMENT.cs" />
     <Compile Include="Parsing\Messages\S_ANSWER_INTERACTIVE.cs" />
+    <Compile Include="Parsing\Messages\S_BAN_PARTY.cs" />
     <Compile Include="Parsing\Messages\S_DUNGEON_EVENT_MESSAGE.cs" />
     <Compile Include="Parsing\Messages\S_FRIEND_LIST.cs" />
     <Compile Include="Parsing\Messages\C_REQUEST_GAMESTAT_PING.cs" />

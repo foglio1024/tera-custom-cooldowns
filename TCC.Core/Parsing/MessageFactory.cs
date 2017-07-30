@@ -48,6 +48,7 @@ namespace TCC.Parsing
             { "S_LEAVE_PARTY_MEMBER", Contructor<Func<TeraMessageReader, S_LEAVE_PARTY_MEMBER>>() },
             {"S_LEAVE_PARTY", Contructor<Func<TeraMessageReader, S_LEAVE_PARTY>>() },
             {"S_BAN_PARTY_MEMBER", Contructor<Func<TeraMessageReader, S_BAN_PARTY_MEMBER>>() },
+            {"S_BAN_PARTY", Contructor<Func<TeraMessageReader, S_BAN_PARTY>>() },
             {"S_PARTY_MEMBER_CHANGE_HP", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_CHANGE_HP>>() },
             {"S_PARTY_MEMBER_CHANGE_MP", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_CHANGE_MP>>() },
             {"S_PARTY_MEMBER_STAT_UPDATE", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_STAT_UPDATE>>() },
@@ -123,6 +124,7 @@ namespace TCC.Parsing
             {typeof(S_LEAVE_PARTY_MEMBER), new Action<S_LEAVE_PARTY_MEMBER>(x => PacketProcessor.HandlePartyMemberLeave(x)) },
             {typeof(S_LEAVE_PARTY), new Action<S_LEAVE_PARTY>(x => PacketProcessor.HandleLeaveParty(x)) },
             {typeof(S_BAN_PARTY_MEMBER), new Action<S_BAN_PARTY_MEMBER>(x => PacketProcessor.HandlePartyMemberKick(x)) },
+            {typeof(S_BAN_PARTY), new Action<S_BAN_PARTY>(x => PacketProcessor.HandleKicked(x)) },
 
 
             {typeof(S_PARTY_MEMBER_STAT_UPDATE), new Action<S_PARTY_MEMBER_STAT_UPDATE>(x => PacketProcessor.HandlePartyMemberStats(x)) },
