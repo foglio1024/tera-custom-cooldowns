@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Xml.Linq;
+using TCC.Data;
 
 namespace TCC
 {
@@ -49,6 +50,7 @@ namespace TCC
     public static class SettingsManager
     {
         static Rectangle _screen = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
+        public static XDocument SettingsDoc;
 
         public static WindowSettings GroupWindowSettings = new WindowSettings()
         {
@@ -169,6 +171,7 @@ namespace TCC
         public static bool DisablePartyAbnormals { get; set; } = false;
         public static bool LfgOn { get; set; } = true;
         public static double ChatWindowOpacity { get; set; } = 0.4;
+        public static List<ChatChannelOnOff> EnabledChatChannels { get; set; } = Utils.GetEnabledChannelsList();
 
         public static void LoadWindowSettings()
         {
@@ -210,7 +213,6 @@ namespace TCC
                 }
             }
         }
-        public static XDocument SettingsDoc;
         public static void LoadSettings()
         {
             if (File.Exists(Environment.CurrentDirectory + @"/tcc-config.xml"))
@@ -315,7 +317,54 @@ namespace TCC
                 }
                 catch (Exception) { }
                 //add settings here
+
+                try
+                {
+                    ParseChannelsSettings(SettingsDoc.Descendants().FirstOrDefault(x => x.Name == nameof(EnabledChatChannels)));
+                }
+                catch (Exception) { }
             }
+        }
+
+
+        public static void SaveSettings()
+        {
+            var xSettings = new XElement("Settings",
+                new XElement("WindowSettings",
+                    BossWindowSettings.ToXElement("BossWindow"),
+                    BuffWindowSettings.ToXElement("BuffWindow"),
+                    CharacterWindowSettings.ToXElement("CharacterWindow"),
+                    CooldownWindowSettings.ToXElement("CooldownWindow"),
+                    GroupWindowSettings.ToXElement("GroupWindow"),
+                    ClassWindowSettings.ToXElement("ClassWindow"),
+                    ChatWindowSettings.ToXElement("ChatWindow")
+                    //add window here
+                    ),
+                new XElement("OtherSettings",
+                new XAttribute(nameof(IgnoreMeInGroupWindow), IgnoreMeInGroupWindow),
+                new XAttribute(nameof(IgnoreMyBuffsInGroupWindow), IgnoreMyBuffsInGroupWindow),
+                new XAttribute(nameof(IgnoreGroupBuffs), IgnoreGroupBuffs),
+                new XAttribute(nameof(IgnoreAllBuffsInGroupWindow), IgnoreAllBuffsInGroupWindow),
+                new XAttribute(nameof(IgnoreRaidAbnormalitiesInGroupWindow), IgnoreRaidAbnormalitiesInGroupWindow),
+                new XAttribute(nameof(BuffsDirection), BuffsDirection),
+                new XAttribute(nameof(ClassWindowOn), ClassWindowOn),
+                new XAttribute(nameof(ClickThruWhenDim), ClickThruWhenDim),
+                new XAttribute(nameof(MaxMessages), MaxMessages),
+                new XAttribute(nameof(SpamThreshold), SpamThreshold),
+                new XAttribute(nameof(ShowChannel), ShowChannel),
+                new XAttribute(nameof(ShowTimestamp), ShowTimestamp),
+                new XAttribute(nameof(ShowOnlyBosses), ShowOnlyBosses),
+                new XAttribute(nameof(DisablePartyMP), DisablePartyMP),
+                new XAttribute(nameof(DisablePartyHP), DisablePartyHP),
+                new XAttribute(nameof(DisablePartyAbnormals), DisablePartyAbnormals),
+                new XAttribute(nameof(ShowOnlyAggroStacks), ShowOnlyAggroStacks),
+                new XAttribute(nameof(LfgOn), LfgOn),
+                new XAttribute(nameof(ChatWindowOpacity), ChatWindowOpacity)
+                //add setting here
+                ),
+                BuildChannelsXElement(EnabledChatChannels)
+            );
+            xSettings.Save(Environment.CurrentDirectory + @"/tcc-config.xml");
         }
 
         private static void ParseWindowSettings(WindowSettings w, XElement ws)
@@ -384,45 +433,25 @@ namespace TCC
             }
             catch (Exception) { }
         }
-        public static void SaveSettings()
+        private static void ParseChannelsSettings(XElement xElement)
         {
-            var xSettings = new XElement("Settings",
-                new XElement("WindowSettings",
-                    BossWindowSettings.ToXElement("BossWindow"),
-                    BuffWindowSettings.ToXElement("BuffWindow"),
-                    CharacterWindowSettings.ToXElement("CharacterWindow"),
-                    CooldownWindowSettings.ToXElement("CooldownWindow"),
-                    GroupWindowSettings.ToXElement("GroupWindow"),
-                    ClassWindowSettings.ToXElement("ClassWindow"),
-                    ChatWindowSettings.ToXElement("ChatWindow")
-                    //add window here
-                    ),
-                new XElement("OtherSettings",
-                new XAttribute(nameof(IgnoreMeInGroupWindow), IgnoreMeInGroupWindow),
-                new XAttribute(nameof(IgnoreMyBuffsInGroupWindow), IgnoreMyBuffsInGroupWindow),
-                new XAttribute(nameof(IgnoreGroupBuffs), IgnoreGroupBuffs),
-                new XAttribute(nameof(IgnoreAllBuffsInGroupWindow), IgnoreAllBuffsInGroupWindow),
-                new XAttribute(nameof(IgnoreRaidAbnormalitiesInGroupWindow), IgnoreRaidAbnormalitiesInGroupWindow),
-                new XAttribute(nameof(BuffsDirection), BuffsDirection),
-                new XAttribute(nameof(ClassWindowOn), ClassWindowOn),
-                new XAttribute(nameof(ClickThruWhenDim), ClickThruWhenDim),
-                new XAttribute(nameof(MaxMessages), MaxMessages),
-                new XAttribute(nameof(SpamThreshold), SpamThreshold),
-                new XAttribute(nameof(ShowChannel), ShowChannel),
-                new XAttribute(nameof(ShowTimestamp), ShowTimestamp),
-                new XAttribute(nameof(ShowOnlyBosses), ShowOnlyBosses),
-                new XAttribute(nameof(DisablePartyMP), DisablePartyMP),
-                new XAttribute(nameof(DisablePartyHP), DisablePartyHP),
-                new XAttribute(nameof(DisablePartyAbnormals), DisablePartyAbnormals),
-                new XAttribute(nameof(ShowOnlyAggroStacks), ShowOnlyAggroStacks),
-                new XAttribute(nameof(LfgOn), LfgOn),
-                new XAttribute(nameof(ChatWindowOpacity), ChatWindowOpacity)
-                //add setting here
-                )
-            );
-            xSettings.Save(Environment.CurrentDirectory + @"/tcc-config.xml");
+            foreach (var e in xElement.Descendants().Where(x => x.Name == "Channel"))
+            {
+                EnabledChatChannels.FirstOrDefault(x => x.Channel == (ChatChannel)Enum.Parse(typeof(ChatChannel), e.Attribute("name").Value)).Enabled = Boolean.Parse(e.Attribute("enabled").Value);
+            }
         }
-
+        private static XElement BuildChannelsXElement(List<ChatChannelOnOff> l)
+        {
+            XElement result = new XElement(nameof(EnabledChatChannels));
+            foreach (var c in l)
+            {
+                XAttribute name = new XAttribute("name", c.Channel.ToString());
+                XAttribute val = new XAttribute("enabled", c.Enabled.ToString());
+                XElement chElement = new XElement("Channel", name, val);
+                result.Add(chElement);
+            }
+            return result;
+        }
 
     }
 }

@@ -273,7 +273,7 @@ namespace TCC
 
         }
         public static void LoadClassWindow()
-        {      
+        {
             var t = new Thread(new ThreadStart(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));

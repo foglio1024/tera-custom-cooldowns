@@ -15,9 +15,9 @@
         Title="ChatWindow" WindowStyle="None" AllowsTransparency="True" MinWidth="350"
         Background="Transparent" Topmost="True" Loaded="TccWindow_Loaded" ResizeMode="CanResize">
     <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="0" ResizeBorderThickness="0,0,10,10" GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="0,3,5,5" GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
-        <local:TccWindow.DataContext>
+    <local:TccWindow.DataContext>
         <vm:ChatWindowViewModel />
     </local:TccWindow.DataContext>
     <local:TccWindow.Resources>
@@ -68,7 +68,7 @@
                    Grid.Row="1"
                    FontFamily="{DynamicResource Frutiger}"
                    Text="{Binding Instance.MessageCount}" 
-                   Margin="3"/>
+                   Margin="3,3,23,3"/>
             <TabControl Grid.Row="1" Background="Transparent"  
                         BorderBrush="#0000" BorderThickness="0,0,0,0"
                         Style="{DynamicResource ChatTabControlStyle}" Margin="0,0,0,0" x:Name="tabControl" >
@@ -259,6 +259,25 @@
             <Image Source="/TCC;component/resources/images/ic_pause_white_24dp_2x.png" VerticalAlignment="Bottom" 
                    HorizontalAlignment="Right"  Height="40" Width="40" Grid.Row="1" Opacity=".2"
                    Visibility="{Binding Instance.Paused, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"/>
+            <Ellipse HorizontalAlignment="Right"
+                     VerticalAlignment="Top" Width="18" Height="18"
+                     Fill="#1fff"
+                     Cursor="Hand"
+                     Grid.Row="1"
+                     Margin="2"
+                     PreviewMouseLeftButtonDown="OpenChannelSettings"
+></Ellipse>
+            <Path Data="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"
+                  HorizontalAlignment="Right"
+                  VerticalAlignment="Top"
+                  Fill="White"
+                  Grid.Row="1"
+                  IsHitTestVisible="False"
+                  Stretch="Uniform"
+                  Height="14" Width="14"
+                  Margin="4"
+                  Opacity=".4"
+                  ></Path>
             <Border Background="{StaticResource Colors.App.DefaultBackground}" Width="Auto"
                     Grid.Column="0" Grid.Row="0" Opacity=".0" 
                     Visibility="{Binding Instance.LfgOn, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"/>
@@ -283,14 +302,41 @@
                VerticalAlignment="Center"
                VerticalOffset="0">
                 <chatcontrols:PlayerTooltip />
-
             </Popup>
-            <Popup x:Name="mapPopup" 
-               StaysOpen="True" 
-               AllowsTransparency="True" 
-               Placement="Right" 
-               Opacity=".65">
-                <chatcontrols:MapControl x:Name="map"></chatcontrols:MapControl>
+            <Popup x:Name="enabledChannelsPopup" StaysOpen="True" Placement="Top" 
+                   AllowsTransparency="True" >
+                <Popup.Resources>
+                    <DataTemplate x:Key="channelSetting">
+                        <chatcontrols:ChannelSetting />
+
+                    </DataTemplate>
+                </Popup.Resources>
+                <Border Style="{StaticResource Styles.DefaultBorder}" Width="Auto" Height="Auto" Margin="5" CornerRadius="5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Border Background="#1fff" HorizontalAlignment="Stretch">
+                            <Grid>
+                                <TextBlock Foreground="#7fff" Text="Enabled channels" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"/>
+                                <Image Source="/TCC;component/resources/images/ic_close_white_24dp_2x.png" Width="20" 
+                                       HorizontalAlignment="Right" Margin="5" Opacity=".9" Cursor="Hand" 
+                                       MouseLeftButtonDown="CloseChannelSettings"/>
+                            </Grid>
+                        </Border>
+                        <ItemsControl ItemTemplate="{StaticResource channelSetting}"
+                                  ItemsSource="{Binding Instance.VisibleChannels}"
+                                      Grid.Row="1" Margin="3">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="4"></UniformGrid>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </Grid>
+                </Border>
+
             </Popup>
         </Grid>
     </Grid>

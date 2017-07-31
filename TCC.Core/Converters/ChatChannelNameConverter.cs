@@ -20,25 +20,23 @@ namespace TCC.Converters
                 case ChatChannel.GuildAdvertising:
                     return "G. Ad";
                 case ChatChannel.Megaphone:
-                    return "Shout";
+                    return "Megaphone";
                 case ChatChannel.Private1:
-                    return ChatWindowViewModel.Instance.PrivateChannels[0].Name;
+                    return ChatWindowViewModel.Instance.PrivateChannels[0].Name == null ? ch.ToString() : ChatWindowViewModel.Instance.PrivateChannels[0].Name;
                 case ChatChannel.Private2:
-                    return ChatWindowViewModel.Instance.PrivateChannels[1].Name;
+                    return ChatWindowViewModel.Instance.PrivateChannels[1].Name == null ? ch.ToString() : ChatWindowViewModel.Instance.PrivateChannels[1].Name;
                 case ChatChannel.Private3:
-                    return ChatWindowViewModel.Instance.PrivateChannels[2].Name;
+                    return ChatWindowViewModel.Instance.PrivateChannels[2].Name == null ? ch.ToString() : ChatWindowViewModel.Instance.PrivateChannels[2].Name;
                 case ChatChannel.Private4:
-                    return ChatWindowViewModel.Instance.PrivateChannels[3].Name;
+                    return ChatWindowViewModel.Instance.PrivateChannels[3].Name == null ? ch.ToString() : ChatWindowViewModel.Instance.PrivateChannels[3].Name;
                 case ChatChannel.Private5:
-                    return ChatWindowViewModel.Instance.PrivateChannels[4].Name;
+                    return ChatWindowViewModel.Instance.PrivateChannels[4].Name == null ? ch.ToString() : ChatWindowViewModel.Instance.PrivateChannels[4].Name;
                 case ChatChannel.Private6:
-                    return ChatWindowViewModel.Instance.PrivateChannels[5].Name;
+                    return ChatWindowViewModel.Instance.PrivateChannels[5].Name == null ? ch.ToString() : ChatWindowViewModel.Instance.PrivateChannels[5].Name;
                 case ChatChannel.Private7:
-                    return ChatWindowViewModel.Instance.PrivateChannels[6].Name;
+                    return ChatWindowViewModel.Instance.PrivateChannels[6].Name == null ? ch.ToString() : ChatWindowViewModel.Instance.PrivateChannels[6].Name;
                 case ChatChannel.Private8:
-                    return ChatWindowViewModel.Instance.PrivateChannels[7].Name;
-                case ChatChannel.Say:
-                    return ch.ToString();
+                    return ChatWindowViewModel.Instance.PrivateChannels[7].Name == null ? ch.ToString() : ChatWindowViewModel.Instance.PrivateChannels[7].Name;
                 case ChatChannel.Party:
                     return ch.ToString();
                 case ChatChannel.Guild:

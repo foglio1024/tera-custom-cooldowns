@@ -12,6 +12,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using TCC.Data;
 
 namespace TCC
 {
@@ -100,6 +101,17 @@ namespace TCC
         public static bool IsPhase1Dragon(uint zoneId, uint templateId)
         {
             return zoneId == 950 && templateId >= 1100 && templateId <= 1103 ? true : false;
+        }
+
+        public static List<ChatChannelOnOff> GetEnabledChannelsList()
+        {
+            var ch = Enum.GetValues(typeof(ChatChannel)).Cast<ChatChannel>().ToList();
+            var result = new List<ChatChannelOnOff>();
+            foreach (var c in ch)
+            {
+                result.Add(new ChatChannelOnOff(c));
+            }
+            return result;
         }
     }
 

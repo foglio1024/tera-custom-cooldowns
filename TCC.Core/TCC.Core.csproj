@@ -116,6 +116,9 @@
     <Compile Include="ClassSpecific\Lancer.cs" />
     <Compile Include="ClassSpecific\Priest.cs" />
     <Compile Include="ClassSpecific\Valkyrie.cs" />
+    <Compile Include="Controls\ChatControls\ChannelSetting.xaml.cs">
+      <DependentUpon>ChannelSetting.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ChatControls\DefaultMessageBody.xaml.cs">
       <DependentUpon>DefaultMessageBody.xaml</DependentUpon>
     </Compile>
@@ -198,6 +201,7 @@
     <Compile Include="Converters\TypeToCursorConverter.cs" />
     <Compile Include="Data\ApplyMessage.cs" />
     <Compile Include="Data\BrokerChatMessage.cs" />
+    <Compile Include="Data\ChatChannelOnOff.cs" />
     <Compile Include="Data\Databases\AccountBenefitDatabase.cs" />
     <Compile Include="Data\Databases\AchievementDatabase.cs" />
     <Compile Include="Data\Databases\AchievementGradeDatabase.cs" />
@@ -687,6 +691,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ChatControls\BrokerOfferBody.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ChatControls\ChannelSetting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -73,8 +73,6 @@ namespace TCC
                 SkillManager.Clear();
                 WindowManager.TrayIcon.Icon = WindowManager.ConnectedIcon;
                 ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Connected to server.</FONT>"));
-
-
             };
             TeraSniffer.Instance.EndConnection += () =>
             {

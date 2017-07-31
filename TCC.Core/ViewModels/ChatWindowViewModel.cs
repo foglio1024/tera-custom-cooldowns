@@ -16,14 +16,29 @@ namespace TCC.ViewModels
 {
     public class ChatWindowViewModel : TSPropertyChanged
     {
-        static ChatWindowViewModel _instance;
+        private DispatcherTimer hideTimer;
+        private static ChatWindowViewModel _instance;
+        private double scale = SettingsManager.ChatWindowSettings.Scale;
+        private bool isChatVisible;
+        private SynchronizedObservableCollection<ChatMessage> _chatMessages;
+        private ConcurrentQueue<ChatMessage> _queue;
+        private ICollectionView _allMessages;
+        private ICollectionView _guildMessages;
+        private ICollectionView _groupMessages;
+        private ICollectionView _systemMessages;
+        private ICollectionView _whisperMessages;
+        public List<string> Friends;
+        public List<string> BlockedUsers;
+        public LFG LastClickedLfg;
+        private SynchronizedObservableCollection<LFG> _lfgs;
+        public PrivateChatChannel[] PrivateChannels = new PrivateChatChannel[8];
+        private bool paused;
+
         public static ChatWindowViewModel Instance => _instance ?? (_instance = new ChatWindowViewModel());
-        DispatcherTimer hideTimer;
         public bool IsTeraOnTop
         {
             get => WindowManager.IsTccVisible;
         }
-        private bool isChatVisible;
         public bool IsChatVisible
         {
             get => isChatVisible;
@@ -34,7 +49,6 @@ namespace TCC.ViewModels
                 NotifyPropertyChanged(nameof(IsChatVisible));
             }
         }
-        private double scale = SettingsManager.ChatWindowSettings.Scale;
         public double Scale
         {
             get { return scale; }
@@ -53,49 +67,6 @@ namespace TCC.ViewModels
                 NotifyPropertyChanged(nameof(ChatWindowOpacity));
             }
         }
-
-        public int MessageCount
-        {
-            get => ChatMessages.Count;
-        }
-        public TooltipInfo TooltipInfo { get; set; }
-        private SynchronizedObservableCollection<ChatMessage> _chatMessages;
-        public SynchronizedObservableCollection<ChatMessage> ChatMessages
-        {
-            get => _chatMessages; set
-            {
-                if (_chatMessages == value) return;
-                _chatMessages = value;
-            }
-        }
-        private ConcurrentQueue<ChatMessage> _queue;
-
-        private ICollectionView _allMessages;
-        public ICollectionView AllMessages
-        {
-            get => _allMessages;
-        }
-        private ICollectionView _guildMessages;
-        public ICollectionView GuildMessages
-        {
-            get => _guildMessages;
-        }
-        private ICollectionView _groupMessages;
-        public ICollectionView GroupMessages
-        {
-            get => _groupMessages;
-        }
-        private ICollectionView _systemMessages;
-        public ICollectionView SystemMessages
-        {
-            get => _systemMessages;
-        }
-        private ICollectionView _whisperMessages;
-        public ICollectionView WhisperMessages
-        {
-            get => _whisperMessages;
-        }
-
         public bool LfgOn
         {
             get => SettingsManager.LfgOn;
@@ -104,23 +75,36 @@ namespace TCC.ViewModels
                 NotifyPropertyChanged(nameof(LfgOn));
             }
         }
-
-        public List<ChatChannel> VisibleChannels;
-        public List<string> BlockedUsers;
-
-        public LFG LastClickedLfg;
-
-        internal void RemoveDeadLfg()
+        public int MessageCount
         {
-            if (LastClickedLfg != null)
+            get => ChatMessages.Count;
+        }
+        public bool Paused
+        {
+            get { return paused; }
+            set
             {
-                RemoveLfg(LastClickedLfg);
-                LastClickedLfg = null;
+                if (paused == value) return;
+                paused = value;
+                NotifyPropertyChanged(nameof(Paused));
             }
         }
-
-        public List<string> Friends;
-        private SynchronizedObservableCollection<LFG> _lfgs;
+        public bool IsQueueEmpty
+        {
+            get
+            {
+                return _queue.Count == 0 ? true : false;
+            }
+        }
+        public TooltipInfo TooltipInfo { get; set; }
+        public SynchronizedObservableCollection<ChatMessage> ChatMessages
+        {
+            get => _chatMessages; set
+            {
+                if (_chatMessages == value) return;
+                _chatMessages = value;
+            }
+        }
         public SynchronizedObservableCollection<LFG> LFGs
         {
             get => _lfgs;
@@ -130,7 +114,27 @@ namespace TCC.ViewModels
                 _lfgs = value;
             }
         }
-        public PrivateChatChannel[] PrivateChannels = new PrivateChatChannel[8];
+        public ICollectionView AllMessages
+        {
+            get => _allMessages;
+        }
+        public ICollectionView GuildMessages
+        {
+            get => _guildMessages;
+        }
+        public ICollectionView GroupMessages
+        {
+            get => _groupMessages;
+        }
+        public ICollectionView SystemMessages
+        {
+            get => _systemMessages;
+        }
+        public ICollectionView WhisperMessages
+        {
+            get => _whisperMessages;
+        }
+        public List<ChatChannelOnOff> VisibleChannels { get => SettingsManager.EnabledChatChannels; }
 
         public ChatWindowViewModel()
         {
@@ -152,20 +156,10 @@ namespace TCC.ViewModels
             
             ChatMessages.CollectionChanged += ChatMessages_CollectionChanged;
 
-            VisibleChannels = new List<ChatChannel>
-            {
-                ChatChannel.Global,
-                ChatChannel.Guild,
-                ChatChannel.GuildNotice,
-                ChatChannel.Party,
-                ChatChannel.Trade,
-                ChatChannel.Loot,
-                ChatChannel.Raid,
-                ChatChannel.RaidNotice,
-                ChatChannel.RaidLeader,
-                ChatChannel.PartyNotice,
-                ChatChannel.Say
-            };
+
+            //get bool from settings
+            //
+            //
             BlockedUsers = new List<string>();
             Friends = new List<string>();
             TooltipInfo = new TooltipInfo("", "", 1);
@@ -192,7 +186,15 @@ namespace TCC.ViewModels
                                             ((ChatMessage)p).Channel == ChatChannel.SentWhisper;
         }
 
-        internal void AddFromQueue(int itemsToAdd)
+        public void RemoveDeadLfg()
+        {
+            if (LastClickedLfg != null)
+            {
+                RemoveLfg(LastClickedLfg);
+                LastClickedLfg = null;
+            }
+        }
+        public void AddFromQueue(int itemsToAdd)
         {
             for (int i = 0; i < itemsToAdd; i++)
             {
@@ -207,44 +209,22 @@ namespace TCC.ViewModels
                 }
             }
         }
-
-        private bool paused;
-
-        public bool Paused
-        {
-            get { return paused; }
-            set
-            {
-                if (paused == value) return;
-                paused = value;
-                NotifyPropertyChanged(nameof(Paused));
-            }
-        }
-
-        public bool IsQueueEmpty
-        {
-            get
-            {
-                return _queue.Count == 0 ? true : false;
-            }
-        }
-
         private void HideTimer_Tick(object sender, EventArgs e)
         {
             IsChatVisible = false;
             hideTimer.Stop();
         }
-
         private void ChatMessages_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             RefreshHideTimer();
             NotifyPropertyChanged("NewItem");
             IsChatVisible = true;
         }
-
         public void AddChatMessage(ChatMessage chatMessage)
         {
+            if (!SettingsManager.ChatWindowSettings.Enabled) return;
             if (BlockedUsers.Contains(chatMessage.Author)) return;
+            if (!VisibleChannels.FirstOrDefault(x => x.Channel == chatMessage.Channel).Enabled) return;
             if (ChatMessages.Count < SettingsManager.SpamThreshold)
             {
                 for (int i = 0; i < ChatMessages.Count - 1; i++)
@@ -252,8 +232,8 @@ namespace TCC.ViewModels
                     var m = ChatMessages[i];
                     if (m.RawMessage == chatMessage.RawMessage &&
                         m.Channel == chatMessage.Channel &&
-                        m.Author == chatMessage.Author &&
-                        !VisibleChannels.Contains(chatMessage.Channel)) return;
+                        m.Author == chatMessage.Author
+                        ) return;
                 }
             }
             else
@@ -283,10 +263,7 @@ namespace TCC.ViewModels
             }
             NotifyPropertyChanged(nameof(MessageCount));
         }
-
-
-
-        internal void AddOrRefreshLfg(S_PARTY_MATCH_LINK x)
+        public void AddOrRefreshLfg(S_PARTY_MATCH_LINK x)
         {
             LFG lfg;
             if (TryGetLfg(x.Id, x.Message, x.Name, out lfg))
@@ -299,12 +276,11 @@ namespace TCC.ViewModels
                 _lfgs.Add(new LFG(x.Id, x.Name, x.Message, x.Raid));
             }
         }
-        internal void RemoveLfg(LFG lfg)
+        public void RemoveLfg(LFG lfg)
         {
             lfg.Dispose();
             LFGs.Remove(lfg);
         }
-
         private bool TryGetLfg(int id, string msg, string name, out LFG lfg)
         {
             lfg = _lfgs.FirstOrDefault(x => x.Id == id);
@@ -327,8 +303,7 @@ namespace TCC.ViewModels
                 return true;
             }
         }
-
-        internal void UpdateLfgMembers(S_PARTY_MEMBER_INFO p)
+        public void UpdateLfgMembers(S_PARTY_MEMBER_INFO p)
         {
             LFG lfg;
             if (TryGetLfg(p.Id, "", "", out lfg))
@@ -336,19 +311,17 @@ namespace TCC.ViewModels
                 lfg.MembersCount = p.MembersCount;
             }
         }
-
-        internal void RefreshHideTimer()
+        public void RefreshHideTimer()
         {
             hideTimer.Stop();
             hideTimer.Start();
         }
-        internal void StopHideTimer()
+        public void StopHideTimer()
         {
             hideTimer.Stop();
             IsChatVisible = true;
 
         }
-
         public void ClearAll()
         {
             ChatMessages.Clear();

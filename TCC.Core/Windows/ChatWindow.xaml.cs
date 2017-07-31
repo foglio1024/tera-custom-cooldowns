@@ -43,21 +43,6 @@ namespace TCC.Windows
             _currentContent = itemsControl;
         }
 
-        internal void CloseMap()
-        {
-            if (mapPopup.IsOpen) mapPopup.IsOpen = false;
-            map.StopAnimation();
-
-        }
-
-        internal void OpenMap(MessagePiece context)
-        {
-            map.DataContext = context;
-            map.OnDataChanged();
-            mapPopup.IsOpen = true;
-            map.StartAnimation();
-        }
-
         private void Instance_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "NewItem")
@@ -293,7 +278,6 @@ namespace TCC.Windows
 
         private void TccWindow_MouseLeave(object sender, MouseEventArgs e)
         {
-            CloseMap();
             ChatWindowViewModel.Instance.RefreshHideTimer();
         }
 
@@ -305,6 +289,22 @@ namespace TCC.Windows
 
         private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
+
+        }
+
+        private void OpenChannelSettings(object sender, MouseButtonEventArgs e)
+        {
+            enabledChannelsPopup.IsOpen = true;
+            var an = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150));
+            enabledChannelsPopup.Child.BeginAnimation(OpacityProperty, an);
+
+        }
+
+        private void CloseChannelSettings(object sender, MouseButtonEventArgs e)
+        {
+            var an = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(150));
+            an.Completed += (s,ev) => enabledChannelsPopup.IsOpen = false;
+            enabledChannelsPopup.Child.BeginAnimation(OpacityProperty, an);
 
         }
     }

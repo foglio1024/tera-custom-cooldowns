@@ -544,7 +544,9 @@
                 <Image Source="/TCC;component/resources/tcc-logo.ico" Width="Auto" Height="32" Margin="0,0,0,0" RenderOptions.BitmapScalingMode="HighQuality"/>
                 <TextBlock Style="{StaticResource Styles.DefaultText}" Text="{Binding Path=Title, RelativeSource={RelativeSource AncestorType=local:SettingsWindow}}" VerticalAlignment="Center" Margin="12,0" FontSize="16"></TextBlock>
             </StackPanel>
-            <Image Source="/TCC;component/resources/images/ic_close_white_24dp_2x.png" Width="20" Grid.Column="1" HorizontalAlignment="Right" Margin="5" Opacity=".9" Cursor="Hand" MouseLeftButtonDown="Image_MouseLeftButtonDown"></Image>
+            <Image Source="/TCC;component/resources/images/ic_close_white_24dp_2x.png" Width="20" Grid.Column="1" 
+                   HorizontalAlignment="Right" Margin="5" Opacity=".9" Cursor="Hand" 
+                   MouseLeftButtonDown="Image_MouseLeftButtonDown"/>
         </Grid>
     </Grid>
 
