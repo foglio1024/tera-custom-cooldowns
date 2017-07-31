@@ -26,6 +26,7 @@ namespace TCC.ViewModels
                 {
                     MessageBox.Show("TCC will now be restarted.", "TCC", MessageBoxButton.OK, MessageBoxImage.Information);
                     SettingsManager.CooldownWindowSettings.Enabled = value;
+                    IsCooldownWindowVisible = value;
                     App.Restart();
                 }
                 MessageFactory.Update();
@@ -50,6 +51,8 @@ namespace TCC.ViewModels
                 {
                     MessageBox.Show("TCC will now be restarted.", "TCC", MessageBoxButton.OK, MessageBoxImage.Information);
                     SettingsManager.BuffWindowSettings.Enabled = value;
+                    IsBuffWindowVisible = value;
+
                     App.Restart();
                 }
                 MessageFactory.Update();
@@ -74,6 +77,8 @@ namespace TCC.ViewModels
                 {
                     MessageBox.Show("TCC will now be restarted.", "TCC", MessageBoxButton.OK, MessageBoxImage.Information);
                     SettingsManager.BossWindowSettings.Enabled = value;
+                    IsBossWindowVisible = value;
+
                     App.Restart();
                 }
                 MessageFactory.Update();
@@ -98,6 +103,8 @@ namespace TCC.ViewModels
                 {
                     MessageBox.Show("TCC will now be restarted.", "TCC", MessageBoxButton.OK, MessageBoxImage.Information);
                     SettingsManager.CharacterWindowSettings.Enabled = value;
+                    IsCharacterWindowVisible = value;
+
                     App.Restart();
                 }
                 MessageFactory.Update();
@@ -122,6 +129,8 @@ namespace TCC.ViewModels
                 {
                     MessageBox.Show("TCC will now be restarted.", "TCC", MessageBoxButton.OK, MessageBoxImage.Information);
                     SettingsManager.GroupWindowSettings.Enabled = value;
+                    IsGroupWindowVisible = value;
+
                     App.Restart();
                 }
                 MessageFactory.Update();
@@ -146,6 +155,8 @@ namespace TCC.ViewModels
                 {
                     MessageBox.Show("TCC will now be restarted.", "TCC", MessageBoxButton.OK, MessageBoxImage.Information);
                     SettingsManager.ClassWindowSettings.Enabled = value;
+                    IsClassWindowVisible = value;
+
                     App.Restart();
                 }
                 MessageFactory.Update();
@@ -170,6 +181,8 @@ namespace TCC.ViewModels
                 {
                     MessageBox.Show("TCC will now be restarted.", "TCC", MessageBoxButton.OK, MessageBoxImage.Information);
                     SettingsManager.ChatWindowSettings.Enabled = value;
+                    IsChatWindowVisible = value;
+
                     App.Restart();
                 }
                 MessageFactory.Update();
@@ -834,7 +847,7 @@ namespace TCC.ViewModels
             get { return SettingsManager.ChatWindowOpacity; }
             set
             {
-                if (SettingsManager.ChatWindowOpacity  == value) return;
+                if (SettingsManager.ChatWindowOpacity == value) return;
                 var val = value;
                 if (val < 0) val = 0;
                 if (val > 1) val = 1;
@@ -1106,12 +1119,12 @@ namespace TCC.ViewModels
         public SettingsWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
-            WindowManager.CooldownWindow.PropertyChanged += CooldownWindow_PropertyChanged;
-            WindowManager.CharacterWindow.PropertyChanged += CharacterWindow_PropertyChanged;
-            WindowManager.BossWindow.PropertyChanged += BossGauge_PropertyChanged;
-            WindowManager.BuffWindow.PropertyChanged += BuffBar_PropertyChanged;
-            WindowManager.GroupWindow.PropertyChanged += GroupWindow_PropertyChanged;
-            WindowManager.ClassWindow.PropertyChanged += ClassWindow_PropertyChanged;
+            if (SettingsManager.CooldownWindowSettings.Enabled) WindowManager.CooldownWindow.PropertyChanged += CooldownWindow_PropertyChanged;
+            if (SettingsManager.CharacterWindowSettings.Enabled) WindowManager.CharacterWindow.PropertyChanged += CharacterWindow_PropertyChanged;
+            if (SettingsManager.BossWindowSettings.Enabled) WindowManager.BossWindow.PropertyChanged += BossGauge_PropertyChanged;
+            if (SettingsManager.BuffWindowSettings.Enabled) WindowManager.BuffWindow.PropertyChanged += BuffBar_PropertyChanged;
+            if (SettingsManager.GroupWindowSettings.Enabled) WindowManager.GroupWindow.PropertyChanged += GroupWindow_PropertyChanged;
+            if (SettingsManager.ClassWindowSettings.Enabled) WindowManager.ClassWindow.PropertyChanged += ClassWindow_PropertyChanged;
         }
 
         private void ClassWindow_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
