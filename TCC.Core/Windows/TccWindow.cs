@@ -82,6 +82,12 @@ namespace TCC.Windows
             WindowManager.TccDimChanged += OpacityChange;
             SizeChanged += TccWindow_SizeChanged;
             Closed += TccWindow_Closed;
+            Loaded += TccWindow_Loaded;
+        }
+
+        private void TccWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!_settings.Enabled) CloseWindowSafe();
         }
 
         private void TccWindow_SizeChanged(object sender, SizeChangedEventArgs e)
