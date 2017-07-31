@@ -24,16 +24,13 @@
     <w:TccWindow.DataContext>
         <vm:CooldownWindowViewModel />
     </w:TccWindow.DataContext>
-    <w:TccWindow.Resources>
-
-
-    </w:TccWindow.Resources>
-    <ContentControl Margin="0" x:Name="controlContainer" DataContext="{Binding Instance}" Content="{Binding}"
+    <Grid>
+        <ContentControl Margin="0" x:Name="controlContainer" DataContext="{Binding Instance}" Content="{Binding}"
                                         ContentTemplate="{Binding Instance.IsClassWindowOn, Converter={StaticResource Converters.BoolToCooldowWindowTemplate}}"
-
         >
-        <ContentControl.LayoutTransform>
+        </ContentControl>
+        <Grid.LayoutTransform>
             <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
-        </ContentControl.LayoutTransform>
-    </ContentControl>
+        </Grid.LayoutTransform>
+    </Grid>
 </w:TccWindow>
