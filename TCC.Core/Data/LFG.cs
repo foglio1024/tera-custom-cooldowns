@@ -98,12 +98,15 @@ namespace TCC.Data
         {
             ChatWindowViewModel.Instance.RemoveLfg(this);
         }
-
         public void Refresh()
         {
-            _removeTimer?.Stop();
-            _removeTimer?.Start();
-            NotifyPropertyChanged("Refresh");
+            try
+            {
+                _removeTimer?.Stop();
+                _removeTimer?.Start();
+                NotifyPropertyChanged("Refresh");
+            }
+            catch (Exception) { }
         }
         private void UpdateDungeonName()
         {
