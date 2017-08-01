@@ -177,9 +177,9 @@ namespace TCC.Data
             }
             catch (Exception) { }
         }
-        public ChatMessage(string systemMessage, SystemMessage m) : this()
+        public ChatMessage(string systemMessage, SystemMessage m, ChatChannel ch) : this()
         {
-            Channel = (ChatChannel)m.ChatChannel;
+            Channel = ch;
             RawMessage = systemMessage;
             Author = "System";
             try

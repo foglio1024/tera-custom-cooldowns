@@ -83,6 +83,7 @@ namespace TCC.Parsing
             {"S_PARTY_MEMBER_INFO", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_INFO>>() },
             {"S_OTHER_USER_APPLY_PARTY", Contructor<Func<TeraMessageReader, S_OTHER_USER_APPLY_PARTY>>() },
             {"S_DUNGEON_EVENT_MESSAGE", Contructor<Func<TeraMessageReader, S_DUNGEON_EVENT_MESSAGE>>() },
+            {"S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA", Contructor<Func<TeraMessageReader, S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA>>() },
 
         };
 
@@ -178,6 +179,7 @@ namespace TCC.Parsing
             {typeof(S_UPDATE_FRIEND_INFO), new Action<S_UPDATE_FRIEND_INFO>(x => PacketProcessor.HandleFriendStatus(x)) },
             //{typeof(S_PARTY_MEMBER_INFO), new Action<S_PARTY_MEMBER_INFO>(x => PacketProcessor.HandlePartyMemberInfo(x)) },
             {typeof(S_OTHER_USER_APPLY_PARTY), new Action<S_OTHER_USER_APPLY_PARTY>(x => PacketProcessor.HandleUserApplyToParty(x)) },
+            {typeof(S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA), new Action<S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA>(x => PacketProcessor.HandleFriendIntoArea(x)) },
         };
         private static readonly Dictionary<Type, Delegate> ChatWindow_LFG = new Dictionary<Type, Delegate>
         {

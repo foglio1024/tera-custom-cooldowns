@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TCC.Data;
 using Tera.Game;
 using Tera.Game.Messages;
 
@@ -10,10 +11,10 @@ namespace TCC.Parsing.Messages
 {
     public class S_FRIEND_LIST : ParsedMessage
     {
-        public List<string> Friends;
+        public List<SimpleUser> Friends;
         public S_FRIEND_LIST(TeraMessageReader reader) : base(reader)
         {
-            Friends = new List<string>();
+            Friends = new List<SimpleUser>();
             var count = reader.ReadUInt16();
             reader.Skip(4);
             reader.ReadTeraString();
@@ -31,15 +32,17 @@ namespace TCC.Parsing.Messages
             }
         }
 
-        private string ParseFriend(TeraMessageReader reader)
+        private SimpleUser ParseFriend(TeraMessageReader reader)
         {
             reader.Skip(4);
             var nameOffset = reader.ReadUInt16();
+            reader.Skip(4);
+            var id = reader.ReadUInt32();
             reader.BaseStream.Position = nameOffset - 4;
             var name = reader.ReadTeraString();
             reader.ReadTeraString();
             reader.ReadTeraString();
-            return name;
+            return new SimpleUser(id, name);
         }
     }
 }

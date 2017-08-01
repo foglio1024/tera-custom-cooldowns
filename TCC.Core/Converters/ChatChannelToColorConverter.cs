@@ -53,7 +53,7 @@ namespace TCC.Converters
                 case ChatChannel.Private7:
                     return (SolidColorBrush)App.Current.FindResource("Colors.Chat.Private");
                 case ChatChannel.Private8:
-                    return (SolidColorBrush)App.Current.FindResource("Colors.Chat.Private");
+                    return (SolidColorBrush)App.Current.FindResource("Colors.Chat.Proxy");
                 case ChatChannel.SentWhisper:
                     return (SolidColorBrush)App.Current.FindResource("Colors.Chat.Whisper");
                 case ChatChannel.ReceivedWhisper:
@@ -97,9 +97,13 @@ namespace TCC.Converters
                 case ChatChannel.Apply:
                     return (SolidColorBrush)App.Current.FindResource("Colors.Chat.Megaphone");
                 case ChatChannel.Death:
-                    return Brushes.Red;
+                    return (SolidColorBrush)App.Current.FindResource("Colors.App.HP");
                 case ChatChannel.Ress:
-                    return (SolidColorBrush)App.Current.FindResource("Colors.App.Green");
+                    return (SolidColorBrush)App.Current.FindResource("Colors.App.LightGreen");
+                case ChatChannel.Quest:
+                    return (SolidColorBrush)App.Current.FindResource("Colors.Chat.System.Quest");
+                case ChatChannel.Friend:
+                    return (SolidColorBrush)App.Current.FindResource("Colors.Chat.System.Friend");
                 default:
                     return (SolidColorBrush)App.Current.FindResource("Colors.Chat.System.Generic");
             }

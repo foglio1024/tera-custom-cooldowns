@@ -211,6 +211,7 @@
     <Compile Include="Data\Databases\MapDatabase.cs" />
     <Compile Include="Data\Databases\QuestDatabase.cs" />
     <Compile Include="Data\EnragePattern.cs" />
+    <Compile Include="Data\Friend.cs" />
     <Compile Include="Data\Guard.cs" />
     <Compile Include="Data\LFG.cs" />
     <Compile Include="Data\Location.cs" />
@@ -222,6 +223,7 @@
     <Compile Include="Parsing\Messages\S_DUNGEON_EVENT_MESSAGE.cs" />
     <Compile Include="Parsing\Messages\S_FRIEND_LIST.cs" />
     <Compile Include="Parsing\Messages\C_REQUEST_GAMESTAT_PING.cs" />
+    <Compile Include="Parsing\Messages\S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA.cs" />
     <Compile Include="Parsing\Messages\S_OTHER_USER_APPLY_PARTY.cs" />
     <Compile Include="Parsing\Messages\S_PARTY_MATCH_LINK.cs" />
     <Compile Include="Parsing\Messages\S_RESPONSE_GAMESTAT_PONG.cs" />

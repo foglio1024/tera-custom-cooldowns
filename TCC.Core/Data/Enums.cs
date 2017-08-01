@@ -64,6 +64,8 @@ namespace TCC
         Apply = 308, //arb
         Death = 309, //arb
         Ress = 310, //arb
+        Quest = 311, //arb
+        Friend = 312,//arb
         TCC = 1000,
     }
 

@@ -56,7 +56,7 @@ namespace TCC.Windows
                     s.ScrollToTop();
                 }
             }
-            else if(e.PropertyName == nameof(ChatWindowViewModel.Instance.IsChatVisible))
+            else if (e.PropertyName == nameof(ChatWindowViewModel.Instance.IsChatVisible))
             {
                 AnimateChatVisibility(ChatWindowViewModel.Instance.IsChatVisible);
             }
@@ -86,7 +86,7 @@ namespace TCC.Windows
         {
             ScrollViewer s = (ScrollViewer)sender;
             var offset = e.Delta > 0 ? -2 : 2;
-            s.ScrollToVerticalOffset(s.VerticalOffset-offset);
+            s.ScrollToVerticalOffset(s.VerticalOffset - offset);
             e.Handled = true;
             if (s.VerticalOffset == 0)
             {
@@ -101,7 +101,7 @@ namespace TCC.Windows
                 _bottom = false;
             }
 
-                ChatWindowViewModel.Instance.Paused = !_bottom;
+            ChatWindowViewModel.Instance.Paused = !_bottom;
 
         }
         public void OpenTooltip()
@@ -167,7 +167,7 @@ namespace TCC.Windows
             _currentPanel = GetInnerStackPanel(_currentContent);
             var sw = (ScrollViewer)sender;
             Rect svBounds = LayoutInformation.GetLayoutSlot(sw);
-            var testRect = new Rect(svBounds.Top-5, svBounds.Left, svBounds.Width, svBounds.Height+10);
+            var testRect = new Rect(svBounds.Top - 5, svBounds.Left, svBounds.Width, svBounds.Height + 10);
             List<FrameworkElement> visibleItems = GetVisibleItems(testRect);
 
             foreach (var item in visibleItems)
@@ -188,7 +188,7 @@ namespace TCC.Windows
                 {
                     var lastItemRows = GetMessageRows(visibleItems.Last().ActualHeight);
                     //Debug.WriteLine("Rows = {0} - LastItemRows = {1}", dc.Rows, lastItemRows);
-                    if(dc.Rows - lastItemRows >= 1)
+                    if (dc.Rows - lastItemRows >= 1)
                     {
                         dc.Rows = dc.Rows - lastItemRows;
                         dc.IsContracted = true;
@@ -303,7 +303,11 @@ namespace TCC.Windows
         private void CloseChannelSettings(object sender, MouseButtonEventArgs e)
         {
             var an = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(150));
-            an.Completed += (s,ev) => enabledChannelsPopup.IsOpen = false;
+            an.Completed += (s, ev) =>
+            {
+                enabledChannelsPopup.IsOpen = false;
+                SettingsManager.SaveSettings();
+            };
             enabledChannelsPopup.Child.BeginAnimation(OpacityProperty, an);
 
         }

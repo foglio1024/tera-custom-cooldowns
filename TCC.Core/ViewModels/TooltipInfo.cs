@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Threading;
 
 namespace TCC.ViewModels
@@ -116,7 +117,11 @@ namespace TCC.ViewModels
         }
         public bool IsFriend
         {
-            get => ChatWindowViewModel.Instance.Friends.Contains(name);
+            get
+            {
+                var f = ChatWindowViewModel.Instance.Friends.FirstOrDefault(x => x.Name == name);
+                return f == null ? false : true;
+            }
         }
 
         public TooltipInfo(string n, string i, int l)

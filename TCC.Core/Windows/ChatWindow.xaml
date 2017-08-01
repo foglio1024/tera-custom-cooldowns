@@ -311,7 +311,7 @@
 
                     </DataTemplate>
                 </Popup.Resources>
-                <Border Style="{StaticResource Styles.DefaultBorder}" Width="Auto" Height="Auto" Margin="5" CornerRadius="5">
+                <Border Style="{StaticResource Styles.DefaultBorder}" Opacity=".85" Width="Auto" Height="Auto" Margin="5" CornerRadius="5">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>

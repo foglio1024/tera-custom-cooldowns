@@ -49,6 +49,16 @@ namespace TCC.TemplateSelectors
                     return SystemAuthorTemplate;
                 case ChatChannel.TCC:
                     return SystemAuthorTemplate;
+                case ChatChannel.Death:
+                    return SystemAuthorTemplate;
+                case ChatChannel.Ress:
+                    return SystemAuthorTemplate;
+                case ChatChannel.Private8:
+                    return SystemAuthorTemplate;
+                case ChatChannel.Quest:
+                    return SystemAuthorTemplate;
+                case ChatChannel.Friend:
+                    return SystemAuthorTemplate;
                 default:
                     return DefaultAuthorTemplate;
             }

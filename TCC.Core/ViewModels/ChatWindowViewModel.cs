@@ -27,7 +27,7 @@ namespace TCC.ViewModels
         private ICollectionView _groupMessages;
         private ICollectionView _systemMessages;
         private ICollectionView _whisperMessages;
-        public List<string> Friends;
+        public List<SimpleUser> Friends;
         public List<string> BlockedUsers;
         public LFG LastClickedLfg;
         private SynchronizedObservableCollection<LFG> _lfgs;
@@ -161,7 +161,7 @@ namespace TCC.ViewModels
             //
             //
             BlockedUsers = new List<string>();
-            Friends = new List<string>();
+            Friends = new List<SimpleUser>();
             TooltipInfo = new TooltipInfo("", "", 1);
 
             _allMessages = new CollectionViewSource { Source = _chatMessages }.View;
@@ -179,11 +179,15 @@ namespace TCC.ViewModels
                                         ((ChatMessage)p).Channel == ChatChannel.RaidLeader ||
                                         ((ChatMessage)p).Channel == ChatChannel.Group ||
                                         ((ChatMessage)p).Channel == ChatChannel.GroupAlerts ||
+                                        ((ChatMessage)p).Channel == ChatChannel.Death ||
+                                        ((ChatMessage)p).Channel == ChatChannel.Ress||
                                         ((ChatMessage)p).Channel == ChatChannel.RaidNotice;
             _systemMessages.Filter = p => ((ChatMessage)p).Author == "System" ||
                                            ((ChatMessage)p).Channel == ChatChannel.TCC;
             _whisperMessages.Filter = p => ((ChatMessage)p).Channel == ChatChannel.ReceivedWhisper ||
                                             ((ChatMessage)p).Channel == ChatChannel.SentWhisper;
+            PrivateChannels[7] = new PrivateChatChannel(uint.MaxValue - 1, "Proxy", 7);
+
         }
 
         public void RemoveDeadLfg()

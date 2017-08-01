@@ -81,7 +81,8 @@ namespace TCC.Controls.ChatControls
                 ChatWindowViewModel.Instance.BlockedUsers.Add(ChatWindowViewModel.Instance.TooltipInfo.Name);
                 try
                 {
-                    ChatWindowViewModel.Instance.Friends.Remove(ChatWindowViewModel.Instance.TooltipInfo.Name);
+                    var i = ChatWindowViewModel.Instance.Friends.IndexOf(ChatWindowViewModel.Instance.Friends.FirstOrDefault(x => x.Name == ChatWindowViewModel.Instance.TooltipInfo.Name));
+                    ChatWindowViewModel.Instance.Friends.RemoveAt(i);
                 } catch (Exception) { }
             }
             else

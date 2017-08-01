@@ -55,6 +55,7 @@
         <SolidColorBrush x:Key="Colors.Chat.Megaphone" Color="#00d8ff"/>
         <SolidColorBrush x:Key="Colors.Chat.GuildAd" Color="#70c401"/>
         <SolidColorBrush x:Key="Colors.Chat.Private" Color="#ff5f38"/>
+        <SolidColorBrush x:Key="Colors.Chat.Proxy" Color="#ffbaf2"/>
         <SolidColorBrush x:Key="Colors.Chat.Whisper" Color="#f479f4"/>
         <SolidColorBrush x:Key="Colors.Chat.System.Generic" Color="#c8c8b6"/>
         <SolidColorBrush x:Key="Colors.Chat.System.Notify" Color="#c8c8b6"/>
@@ -68,7 +69,9 @@
         <SolidColorBrush x:Key="Colors.Chat.System.Exp" Color="#d9d9d9"/>
         <SolidColorBrush x:Key="Colors.Chat.System.Money" Color="#d9d9d9"/>
         <SolidColorBrush x:Key="Colors.Chat.System.Bargain" Color="#ffbf8f"/>
-        
+        <SolidColorBrush x:Key="Colors.Chat.System.Quest" Color="#f7d6af"/>
+        <SolidColorBrush x:Key="Colors.Chat.System.Friend" Color="#afe7f7"/>
+
         <FontFamily x:Key="DroidSans">pack://application:,,,/resources/fonts/#droidsans</FontFamily>
         <FontFamily x:Key="OpenSans">pack://application:,,,/resources/fonts/#OpenSans-Regular</FontFamily>
         <FontFamily x:Key="Frutiger">pack://application:,,,/resources/fonts/#Frutiger</FontFamily>

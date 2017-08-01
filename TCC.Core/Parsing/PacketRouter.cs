@@ -28,7 +28,7 @@ namespace TCC.Parsing
         public static uint ServerId;
         public static OpCodeNamer OpCodeNamer;
         public static OpCodeNamer SystemMessageNamer;
-        static ConcurrentQueue<Tera.Message> Packets = new ConcurrentQueue<Tera.Message>();
+        public static ConcurrentQueue<Tera.Message> Packets = new ConcurrentQueue<Tera.Message>();
         static System.Timers.Timer x;
         public static void Init()
         {
@@ -375,6 +375,26 @@ namespace TCC.Parsing
 
             ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ch, x.AuthorName, x.Message));
         }
+        public static void HandleCommandOutput(string msg)
+        {
+
+            var ch = (ChatChannel)(ChatWindowViewModel.Instance.PrivateChannels[7].Index + 11);
+
+            ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ch, "System", msg));
+        }
+
+        internal static void HandleFriendIntoArea(S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA x)
+        {
+            var friend= ChatWindowViewModel.Instance.Friends.FirstOrDefault(f => f.PlayerId == x.PlayerId);
+            if (friend == null) return;
+            var opcode = "SMT_FRIEND_WALK_INTO_SAME_AREA";
+            var areaName = MapDatabase.Names[MapDatabase.Worlds[x.WorldId].Guards[x.GuardId].Sections[x.SectionId].NameId];
+            var srvMsg = "@0\vUserName\v" + friend.Name + "\vAreaName\v" + areaName;
+            SystemMessages.Messages.TryGetValue(opcode, out SystemMessage m);
+
+            SystemMessagesProcessor.AnalyzeMessage(srvMsg, m, opcode);
+        }
+
         public static void HandleJoinPrivateChat(S_JOIN_PRIVATE_CHANNEL x)
         {
             ChatWindowViewModel.Instance.PrivateChannels[x.Index] = new PrivateChatChannel(x.Id, x.Name, x.Index);
@@ -489,7 +509,7 @@ namespace TCC.Parsing
             {
                 if (SystemMessages.Messages.TryGetValue("SMT_ACHIEVEMENT_GRADE0_CLEAR_MESSAGE", out SystemMessage m))
                 {
-                    var sysMsg = new ChatMessage("@0\vAchievementName\v@achievement:" + x.AchievementId, m);
+                    var sysMsg = new ChatMessage("@0\vAchievementName\v@achievement:" + x.AchievementId, m, (ChatChannel)m.ChatChannel);
                     ChatWindowViewModel.Instance.AddChatMessage(sysMsg);
                 }
             }
@@ -541,7 +561,7 @@ namespace TCC.Parsing
 
                 if (SystemMessages.Messages.TryGetValue(opcodeName, out SystemMessage m))
                 {
-                    var sysMsg = new ChatMessage(x.SysMessage, m);
+                    var sysMsg = new ChatMessage(x.SysMessage, m, (ChatChannel)m.ChatChannel);
                     ChatWindowViewModel.Instance.AddChatMessage(sysMsg);
                 }
 

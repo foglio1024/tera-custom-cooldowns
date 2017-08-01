@@ -17,10 +17,6 @@ namespace TCC.Parsing
             "SMT_BATTLE_START",
             "SMT_BATTLE_END",
             "SMT_DROPDMG_DAMAGE",
-            "SMT_BATTLE_PARTY_DIE",
-            "SMT_BATTLE_PARTY_RESURRECT",
-            "SMT_BATTLE_YOU_DIE",
-            "SMT_BATTLE_RESURRECT",
             "SMT_ABANDON_DIVIDE_DICE_PARTYPLAYER",
             "SMT_JOIN_DIVIDE_DICE_PATYPLAYER",
             "SMT_ABANDON_DIVIDE_DICE",
@@ -36,7 +32,7 @@ namespace TCC.Parsing
 
             if (!Process(srvMsg, sysMsg, opcodeName))
             {
-                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(srvMsg, sysMsg));
+                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel));
             }
         }
         private static void HandleMaxEnchantSucceed(string x)
@@ -47,7 +43,7 @@ namespace TCC.Parsing
         private static void HandleFriendLogin(string friendName, SystemMessage sysMsg)
         {
             var sysmsg = "@0\vUserName\v" + friendName;
-            var msg = new ChatMessage(sysmsg, sysMsg);
+            var msg = new ChatMessage(sysmsg, sysMsg, ChatChannel.Friend);
             ChatWindowViewModel.Instance.AddChatMessage(msg);
         }
 
@@ -56,29 +52,56 @@ namespace TCC.Parsing
         {
             { "SMT_MAX_ENCHANT_SUCCEED", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleMaxEnchantSucceed(srvMsg)) },
             { "SMT_FRIEND_IS_CONNECTED", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleFriendLogin(srvMsg, sysMsg)) },
+            { "SMT_FRIEND_WALK_INTO_SAME_AREA", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleFriendMessage(srvMsg, sysMsg)) },
             { "SMT_CHAT_LINKTEXT_DISCONNECT", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleInvalidLink(srvMsg, sysMsg)) },
-            { "SMT_BATTLE_PARTY_DIE", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandlePartyMemberDeath(srvMsg, sysMsg)) },
-            { "SMT_BATTLE_PARTY_RESURRECT", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandlePartyMemberRess(srvMsg, sysMsg)) },
+
+            { "SMT_BATTLE_PARTY_DIE", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleDeathMessage(srvMsg, sysMsg)) },
+            { "SMT_BATTLE_PARTY_RESURRECT", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleRessMessage(srvMsg, sysMsg)) },
+            { "SMT_BATTLE_YOU_DIE", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleDeathMessage(srvMsg, sysMsg)) },
+            { "SMT_BATTLE_RESURRECT", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleRessMessage(srvMsg, sysMsg)) },
+
+            { "SMT_ACCEPT_QUEST", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleQuestMessage(srvMsg, sysMsg)) },
+            { "SMT_CANT_START_QUEST", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleQuestMessage(srvMsg, sysMsg)) },
+            { "SMT_COMPLATE_GUILD_QUEST", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleQuestMessage(srvMsg, sysMsg)) },
+            { "SMT_COMPLETE_MISSION", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleQuestMessage(srvMsg, sysMsg)) },
+            { "SMT_COMPLETE_QUEST", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleQuestMessage(srvMsg, sysMsg)) },
+            { "SMT_FAILED_QUEST_COMPENSATION", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleQuestMessage(srvMsg, sysMsg)) },
+            { "SMT_FAILED_QUEST", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleQuestMessage(srvMsg, sysMsg)) },
+            { "SMT_FAILED_QUEST_CANCLE", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleQuestMessage(srvMsg, sysMsg)) },
+            { "SMT_QUEST_FAILED_GET_FLAG_PARTY_LEVEL", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleQuestMessage(srvMsg, sysMsg)) },
+            { "SMT_QUEST_ITEM_DELETED", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleQuestMessage(srvMsg, sysMsg)) },
+            { "SMT_QUEST_RESET_MESSAGE", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleQuestMessage(srvMsg, sysMsg)) },
+            { "SMT_UPDATE_QUEST_TASK", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleQuestMessage(srvMsg, sysMsg)) },
+
         };
 
-        private static void HandlePartyMemberRess(string srvMsg, SystemMessage sysMsg)
+        private static void HandleFriendMessage(string srvMsg, SystemMessage sysMsg)
         {
-            var msg = new ChatMessage(srvMsg, sysMsg);
-            ChatMessage.SetChannel(msg, ChatChannel.Ress);
+            var msg = new ChatMessage(srvMsg, sysMsg, ChatChannel.Friend);
             ChatWindowViewModel.Instance.AddChatMessage(msg);
-
         }
 
-        private static void HandlePartyMemberDeath(string srvMsg, SystemMessage sysMsg)
+        private static void HandleQuestMessage(string srvMsg, SystemMessage sysMsg)
         {
-            var msg = new ChatMessage(srvMsg, sysMsg);
-            ChatMessage.SetChannel(msg, ChatChannel.Death);
+            var msg = new ChatMessage(srvMsg, sysMsg, ChatChannel.Quest);
+            ChatWindowViewModel.Instance.AddChatMessage(msg);
+        }
+
+        private static void HandleRessMessage(string srvMsg, SystemMessage sysMsg)
+        {
+            var msg = new ChatMessage(srvMsg, sysMsg, ChatChannel.Ress);
+            ChatWindowViewModel.Instance.AddChatMessage(msg);
+        }
+
+        private static void HandleDeathMessage(string srvMsg, SystemMessage sysMsg)
+        {
+            var msg = new ChatMessage(srvMsg, sysMsg, ChatChannel.Death);
             ChatWindowViewModel.Instance.AddChatMessage(msg);
         }
 
         private static void HandleInvalidLink(string srvMsg, SystemMessage sysMsg)
         {
-            ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(srvMsg, sysMsg));
+            ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel));
             ChatWindowViewModel.Instance.RemoveDeadLfg();
         }
 
