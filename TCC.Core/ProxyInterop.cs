@@ -5,9 +5,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using TCC.Data;
+using TCC.Parsing;
 using TCC.ViewModels;
 
 namespace TCC
@@ -16,12 +18,29 @@ namespace TCC
     {
         static TcpClient client = new TcpClient();
         static int retries = 2;
-
         public static bool IsConnected
         {
             get
             {
                 return client.Connected;
+            }
+        }
+
+        static void ReceiveData()
+        {
+            var buffer = new byte[2048];
+            try
+            {
+                while (client.Connected)
+                {
+                    var size = client.GetStream().Read(buffer, 0, buffer.Length);
+                    var msg = "<FONT>"+Encoding.UTF8.GetString(buffer.Take(size).ToArray())+"</FONT>";
+                    PacketProcessor.HandleCommandOutput(msg);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
             }
         }
 
@@ -37,7 +56,8 @@ namespace TCC
                 client.Connect("127.0.0.50", 9550);
                 Debug.WriteLine("Connected");
                 ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Connected to tera-proxy.</FONT>"));
-
+                var t = new Thread(new ThreadStart(ReceiveData));
+                t.Start();
             }
             catch (Exception e)
             {
@@ -68,7 +88,7 @@ namespace TCC
             sb.Append(":tcc:");
             sb.Append(linkData.Replace("#####", ":tcc:"));
             sb.Append(":tcc:");
-            System.IO.File.AppendAllText("link-test.txt",sb.ToString() + "\n");
+            System.IO.File.AppendAllText("link-test.txt", sb.ToString() + "\n");
             SendData(sb.ToString());
         }
 
@@ -246,8 +266,18 @@ namespace TCC
         }
         public static void CloseConnection()
         {
-            client?.Client?.Close();
-            client?.Close();
+            try
+            {
+                client?.GetStream().Close();
+                client?.Client?.Close();
+                client?.Close();
+
+            }
+            catch (Exception)
+            {
+
+
+            }
         }
     }
 }
