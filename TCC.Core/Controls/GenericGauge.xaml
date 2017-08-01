@@ -10,16 +10,16 @@
     <UserControl.Resources>
         <DropShadowEffect x:Key="textShadow" BlurRadius="2" ShadowDepth="1" Opacity="1" RenderingBias="Performance"/>
         <Style TargetType="TextBlock" x:Key="text" BasedOn="{StaticResource Styles.DefaultText}">
-            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="FontSize" Value="13"/>
             <Setter Property="Effect" Value="{StaticResource textShadow}"/>
-            <Setter Property="Margin" Value="0,-1,0,0"/>
+            <Setter Property="Margin" Value="0,0,0,0"/>
         </Style>
     </UserControl.Resources>
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="rootGrid" >
         <Rectangle Fill="#40000000" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stroke="#20ffffff" Margin="-1"/>
         <Rectangle Fill="{Binding BarColor, RelativeSource={RelativeSource AncestorType=local:GenericGauge}}" 
                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="bar" />
-        <TextBlock Style="{StaticResource text}" HorizontalAlignment="Center"
+        <TextBlock Style="{StaticResource text}" HorizontalAlignment="Center" VerticalAlignment="Center"
                    Visibility="{Binding ShowValues, Converter={StaticResource Converters.BoolToVisibleHidden},RelativeSource={RelativeSource AncestorType=local:GenericGauge}}"
 >
             <Run Text="{Binding CurrentVal, RelativeSource={RelativeSource AncestorType=local:GenericGauge}}" />
@@ -27,12 +27,12 @@
             <Run Text="{Binding MaxVal, RelativeSource={RelativeSource AncestorType=local:GenericGauge}}" />
 
         </TextBlock>
-        <TextBlock HorizontalAlignment="Left" Margin="3,-1,0,0" Style="{StaticResource text}" 
+        <TextBlock HorizontalAlignment="Left" Margin="3,-1,0,0" Style="{StaticResource text}" VerticalAlignment="Center"
                    Text="{Binding GaugeName, RelativeSource={RelativeSource AncestorType=local:GenericGauge}}"
                     Visibility="{Binding ShowName, Converter={StaticResource Converters.BoolToVisibleHidden},RelativeSource={RelativeSource AncestorType=local:GenericGauge}}"
 />
         <TextBlock HorizontalAlignment="Right" Margin="0,-1,3,0" 
-                   Style="{StaticResource text}" 
+                   Style="{StaticResource text}" VerticalAlignment="Center"
                    Visibility="{Binding ShowPercentage, Converter={StaticResource Converters.BoolToVisibleHidden},RelativeSource={RelativeSource AncestorType=local:GenericGauge}}"
                    Text="{Binding Factor, StringFormat=#.#%, RelativeSource={RelativeSource AncestorType=local:GenericGauge}}"/>
 
