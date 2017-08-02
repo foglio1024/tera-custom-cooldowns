@@ -195,10 +195,7 @@ namespace TCC.ViewModels
         }
         public void ClearBosses()
         {
-            _dispatcher.Invoke(() =>
-            {
-                _currentNPCs.Clear();
-            });
+            _currentNPCs.Clear();           
         }
         public void EndNpcAbnormality(ulong target, Abnormality ab)
         {
