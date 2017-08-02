@@ -77,6 +77,8 @@ namespace TCC.Parsing
                 SystemMessageNamer = new OpCodeNamer(System.IO.Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/smt_{Version}.txt"));
                 MessageFactory.Init();
                 TeraSniffer.Instance.Connected = true;
+                ProxyInterop.ConnectToProxy();
+
             }
             Packets.Enqueue(obj);
         }
@@ -206,7 +208,6 @@ namespace TCC.Parsing
         }
         public static void HandleLogin(S_LOGIN p)
         {
-            ProxyInterop.ConnectToProxy();
 
             ServerId = p.ServerId;
             InitDB(p.ServerId);
