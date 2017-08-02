@@ -172,7 +172,7 @@
 2098	Stun	False	False	True	Невиданная мощь (баг - если видно)		
 2099	Buff	True	True	False	Аура исцеления	Вы получили дух восстановления разрушенных каменных изваяний. Постепенно восстанавливает HP детенышей, находящихся рядом с кумасом. 	icon_status.aura_of_regeneration_hp_tex
 2100	WeakeningEffect	True	False	False	Медлительность	-$H_W_BAD0,5$COLOR_END к скорости перемещения.	icon_status.minusmove_tex
-2101	Buff	True	True	False	Дух восстановления	Аура исцеления восстанавливает$H_W_GOOD6000$COLOR_END HP раз в $H_W_GOOD1$COLOR_END second Увеличивает скорость перемещения на $H_W_GOOD80$COLOR_END.	icon_skills.refreshbless_tex
+2101	Buff	True	True	False	Дух восстановления	Аура исцеления восстанавливает $H_W_GOOD6000$COLOR_END HP раз в $H_W_GOOD1$COLOR_END second Увеличивает скорость перемещения на $H_W_GOOD80$COLOR_END.	icon_skills.refreshbless_tex
 2103	Buff	True	True	False	Храбрость	Сила атаки всех ваших союзников, находящихся рядом с главарем кумасов увеличивается на $H_W_GOOD20%$COLOR_END.	icon_status.buff_of_kaia_tex
 2104	Buff	True	True	False	Избыток сил	Увеличивает скорость перемещения детеныша кумаса $H_W_GOOD80$COLOR_END. Эффект исчезает, если нанесен урон умением.	icon_skills.toughspirit_tex
 2105	WeakeningEffect	False	True	True	BTS_для каменных изваяний	Если отображается - это ошибка.	icon_skills.summonspiritofheal_tex
@@ -837,6 +837,7 @@
 23190	Buff	True	True	False	Символ сцепления	На $H_W_GOOD25%$COLOR_END повышает урон умения "Нокаутирующий удар".	icon_crest.crestnextskillattackup_tex
 23200	Buff	True	True	False	Символ сцепления	На $H_W_GOOD25%$COLOR_END повышает урон умения "Удар в спину".	icon_crest.crestnextskillattackup_tex
 23210	Buff	True	True	False	Символ внушения	Восстанавливает $H_W_GOOD6%$COLOR_END от максимального уровня MP раз в $H_W_GOOD1$COLOR_END second	icon_crest.crestpassivemprecoveryup_tex
+23220	Buff	False	True	False	Эффект невидим		icon_crest.crestpassivemprecoveryup_tex
 24010	Buff	True	True	False	Символ нагнетания	Увеличивает силу на $H_W_GOOD20%$COLOR_END.	icon_crest.crestactiveattackup_tex
 24020	Buff	True	True	False	Символ влияния	Снижает на $H_W_GOOD-63$COLOR_END потребление MP для умения "Землетрясение".	icon_crest.crestnextskillmpdown_tex
 24030	Buff	True	True	False	Символ влияния	Снижает на $H_W_GOOD-75$COLOR_END потребление MP для умения "Рывок".	icon_crest.crestnextskillmpdown_tex
@@ -1595,15 +1596,15 @@
 470023	Buff	False	True	False		Не должно отображаться.	
 470024	Buff	False	True	False	Причуда - увеличение силы	Позволяет уличить Коварного Софиста во лжи, увеличивает силу.	
 470025	Buff	False	True	False	Причуда - мгновенная смерть	Вы попались в крепкие оковы лжи Коварного Софиста. Вы скоро умрете.	
-470026	Stun	True	False	False	Снеговик	Коварному Софисту удалось вас обмануть? Подпрыгните несколько раз, чтобы снять эффект. Снижает количество НР на 20% каждую секунду.	icon_status.icedamage_tex
-470027	Stun	True	False	False	Снеговик	Коварному Софисту удалось вас обмануть? Подпрыгните несколько раз, чтобы снять эффект. Снижает количество НР на 20% каждую секунду.	icon_status.icedamage_tex
-470028	Stun	True	False	False	Снеговик	Коварному Софисту удалось вас обмануть? Подпрыгните несколько раз, чтобы снять эффект. Снижает количество НР на 20% каждую секунду.	icon_status.icedamage_tex
+470026	Stun	True	False	False	Снеговик	Коварному Софисту удалось вас обмануть? Подпрыгните несколько раз, чтобы снять эффект. Снижает количество НР на 25% каждую секунду.	icon_status.icedamage_tex
+470027	Stun	True	False	False	Снеговик	Коварному Софисту удалось вас обмануть? Подпрыгните несколько раз, чтобы снять эффект. Снижает количество НР на 25% каждую секунду.	icon_status.icedamage_tex
+470028	Stun	True	False	False	Снеговик	Коварному Софисту удалось вас обмануть? Подпрыгните несколько раз, чтобы снять эффект. Снижает количество НР на 25% каждую секунду.	icon_status.icedamage_tex
 470029	WeakeningEffect	False	True	False			
 470030	Buff	True	True	False	Причуда - увеличение силы	Позволяет уличить Коварного Софиста во лжи, увеличивает силу.	icon_skills.handyslash_tex
 470031	Buff	False	True	False	Причуда	Говорят, у Коварного Софиста совсем нет совести. Он постоянно думает, через 5/4/3 раза соврать ему или нет.	icon_status.battlecommand03_tex
 470032	Buff	False	True	False			icon_status.battlecommand04_tex
 470033	Buff	False	True	False			icon_status.battlecommand01_tex
-470034	DamageOverTime	True	False	False	Кровотечение	-10% HP каждую секунду.	icon_status.injuredbtdarkness_tex
+470034	DamageOverTime	True	False	False	Кровотечение	-15% HP каждую секунду.	icon_status.injuredbtdarkness_tex
 470035	WeakeningEffect	False	True	False			icon_status.battlecommand02_tex
 470036	Buff	False	False	False			
 470037	WeakeningEffect	True	True	False	Безумие	Вас атаковал Коварный Софист, восстановление невозможно.	icon_status.battlefieldbuff02_tex
@@ -1827,6 +1828,7 @@
 601600	Buff	True	True	False	Ахиллесова пята	Вне зависимости от того, с какой стороны вы нанесете следующий удар, будет считаться, что вы нанесли удар сзади.	icon_skills.weak_point_observed
 601700	Buff	False	True	False	Подрыв опутывающей ловушки	(Этот эффект должен оставаться невидимым)	icon_skills.arcaneshockshot02_tex
 601800	Buff	False	True	False	Дождь стрел: Усиление I	Урон от дождя стрел не распространяется (Этот эффект должен оставаться невидимым)	icon_skills.arrowfall_tex
+601900	Buff	False	True	False			
 700100	Buff	True	True	False	Обет перерождения	Мгновенно воскрешает вас в случае смерти.	icon_skills.autoresurrect_tex
 700200	Buff	True	True	True	Аура непреклонности I	Ко всем членам группы в радиусе 30 метров от вас применяется эффект "Аура непреклонности". Пока умение активно, вы теряете $H_W_BAD-30$COLOR_END MP раз в $H_W_BAD2$COLOR_END second1	icon_skills.areahpgain_tex
 700201	Buff	True	True	True	Аура непреклонности II	Ко всем членам группы в радиусе 30 метров от вас применяется эффект "Аура непреклонности". Пока умение активно, вы теряете $H_W_BAD-30$COLOR_END MP раз в $H_W_BAD2$COLOR_END second1	icon_skills.areahpgain_tex
@@ -3088,9 +3090,9 @@
 981097	Buff	True	False	False			
 981098	Buff	False	True	False			
 981099	Stun	True	True	False	Оглушение	За секунду до атаки Лакана вас оглушило мощной волной энергии.	icon_status.confuseup_tex
-981100	Buff	False	True	True			
-981101	Buff	False	True	True			
-981102	Buff	False	True	True			
+981100	Buff	False	True	False			
+981101	Buff	False	True	False			
+981102	Buff	False	True	False			
 981103	Buff	True	True	False			
 981104	Buff	False	True	False			
 981105	Buff	False	True	False			
@@ -3897,6 +3899,7 @@
 10155300	WeakeningEffect	False	True	False			
 10155310	Buff	False	True	False			
 10155320	Buff	False	True	True			
+10230001	Stun	True	False	False			icon_status.sealskill_tex
 15200001	Buff	True	True	False	Панцирь Рабатуса	Панцирь Рабатуса на $time повышает защиту и силу на $H_W_GOOD20%$COLOR_END. Этот эффект не пропадает даже после смерти или применения к вам снимающего эффекты умения, но автоматически пропадает, если вы выходите из битвы за город.	icon_skills.emergencyshield_tex
 15200002	Buff	True	True	False	Пламя дракона	Пламя дракона повышает атаку на $H_W_GOOD20%$COLOR_END в течение $time Этот эффект не пропадает даже после смерти или применения к вам снимающего эффекты умения, но автоматически пропадает, если вы выходите из битвы за город.	icon_items.campfire_tex
 15200003	Buff	True	True	False	Ужас Кайтана	Ужас Кайтана повышает скорость атаки на $H_W_GOOD10%$COLOR_END и вероятность нанесения критического удара на $H_W_GOOD20$COLOR_END в течение $time Этот эффект не пропадает даже после смерти или применения к вам снимающего эффекты умения, но автоматически пропадает, если вы выходите из битвы за город.	icon_status.darkriftrage_tex
