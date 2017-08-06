@@ -1167,7 +1167,6 @@
     <Resource Include="resources\images\ic_filter_list_white_24dp_2x.png" />
     <Resource Include="resources\images\ic_label_white_24dp_2x.png" />
     <Resource Include="resources\images\chat.png" />
-    <Resource Include="resources\WMap_A_Island.jpg" />
     <None Include="app.manifest" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
