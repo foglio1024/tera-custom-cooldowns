@@ -60,5 +60,12 @@ namespace TCC.Windows
         {
             ((FrameworkElement)this.Content).Focus();
         }
+        public void ShowWindow()
+        {
+            Opacity = 0;
+            Show();
+            BeginAnimation(Window.OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
+
+        }
     }
 }

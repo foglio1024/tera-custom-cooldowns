@@ -192,7 +192,6 @@ namespace TCC.Windows
             }
             catch (Exception) { }
         }
-
         public void CloseWindowSafe()
         {
             if (Dispatcher.CheckAccess())
@@ -200,6 +199,5 @@ namespace TCC.Windows
             else
                 Dispatcher.Invoke(DispatcherPriority.Normal, new ThreadStart(Close));
         }
-
     }
 }
