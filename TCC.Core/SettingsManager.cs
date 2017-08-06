@@ -171,6 +171,7 @@ namespace TCC
         public static bool DisablePartyAbnormals { get; set; } = false;
         public static bool LfgOn { get; set; } = true;
         public static double ChatWindowOpacity { get; set; } = 0.4;
+        public static DateTime LastRun { get; set; } = DateTime.MinValue;
         public static List<ChatChannelOnOff> EnabledChatChannels { get; set; } = Utils.GetEnabledChannelsList();
 
         public static void LoadWindowSettings()
@@ -316,6 +317,11 @@ namespace TCC
                     ChatWindowOpacity = Double.Parse(b.Attribute(nameof(ChatWindowOpacity)).Value, CultureInfo.InvariantCulture);
                 }
                 catch (Exception) { }
+                try
+                {
+                    LastRun = DateTime.Parse(b.Attribute(nameof(LastRun)).Value);
+                }
+                catch (Exception) { }
                 //add settings here
 
                 try
@@ -325,8 +331,6 @@ namespace TCC
                 catch (Exception) { }
             }
         }
-
-
         public static void SaveSettings()
         {
             var xSettings = new XElement("Settings",
@@ -359,7 +363,8 @@ namespace TCC
                 new XAttribute(nameof(DisablePartyAbnormals), DisablePartyAbnormals),
                 new XAttribute(nameof(ShowOnlyAggroStacks), ShowOnlyAggroStacks),
                 new XAttribute(nameof(LfgOn), LfgOn),
-                new XAttribute(nameof(ChatWindowOpacity), ChatWindowOpacity)
+                new XAttribute(nameof(ChatWindowOpacity), ChatWindowOpacity),
+                new XAttribute(nameof(LastRun), DateTime.Now)
                 //add setting here
                 ),
                 BuildChannelsXElement(EnabledChatChannels)
