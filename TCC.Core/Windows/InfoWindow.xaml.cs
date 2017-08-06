@@ -117,13 +117,13 @@ namespace TCC.Windows
                 Topmost = false; Topmost = true;
                 Opacity = 0;
                 Show();
+                AnimateICitems();
                 BeginAnimation(Window.OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
             });
         }
 
         public void AnimateICitems()
         {
-            if (!IsLoaded) return;
             icIndex = 0;
             itemIndex = 0;
 
