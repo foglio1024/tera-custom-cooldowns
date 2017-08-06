@@ -14,6 +14,8 @@ namespace TCC
 
     public static class SessionManager
     {
+        public static readonly int MAX_WEEKLY = 15;
+        public static readonly int MAX_DAILY = 8;
         private static bool logged = false;
         public static bool Logged
         {
@@ -57,8 +59,9 @@ namespace TCC
             }
         }
 
+        public static bool IsElite { get; set; }
+
         public static Player CurrentPlayer = new Player();
-        public static List<Character> CurrentAccountCharacters;
 
         public static ItemsDatabase ItemsDatabase;
 
@@ -115,7 +118,7 @@ namespace TCC
         {
             try
             {
-                p.Laurel = CurrentAccountCharacters.First(x => x.Name == p.Name).Laurel;
+                p.Laurel = InfoWindowViewModel.Instance.Characters.First(x => x.Name == p.Name).Laurel;
             }
             catch
             {
