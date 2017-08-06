@@ -487,7 +487,7 @@ namespace TCC.Data
                 //check if player is mentioned
                 try
                 {
-                    foreach (var item in SessionManager.CurrentAccountCharacters)
+                    foreach (var item in InfoWindowViewModel.Instance.Characters)
                     {
                         if (text.IndexOf(item.Name, StringComparison.InvariantCultureIgnoreCase) >= 0)
                         {
@@ -792,7 +792,7 @@ namespace TCC.Data
         {
             var id = GetId(info, "dungeon");
             string txt = id.ToString();
-            if (DungeonDatabase.Dungeons.TryGetValue(id, out string dngName))
+            if (DungeonDatabase.Instance.DungeonNames.TryGetValue(id, out string dngName))
             {
                 txt = dngName;
             }
