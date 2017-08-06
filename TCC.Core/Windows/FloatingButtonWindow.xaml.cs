@@ -63,12 +63,12 @@ namespace TCC.Windows
 
         private void Window_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            rootBorder.RenderTransform.BeginAnimation(TranslateTransform.XProperty, new DoubleAnimation(-30, -1, TimeSpan.FromMilliseconds(150)) {EasingFunction = new QuadraticEase() });
+            rootBorder.RenderTransform.BeginAnimation(TranslateTransform.XProperty, new DoubleAnimation(-32, -1, TimeSpan.FromMilliseconds(150)) {EasingFunction = new QuadraticEase() });
         }
 
         private void Window_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            rootBorder.RenderTransform.BeginAnimation(TranslateTransform.XProperty, new DoubleAnimation(-1, -30, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
+            rootBorder.RenderTransform.BeginAnimation(TranslateTransform.XProperty, new DoubleAnimation(-1, -32, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
 
         }
 
