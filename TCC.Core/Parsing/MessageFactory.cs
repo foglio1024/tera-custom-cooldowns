@@ -84,6 +84,9 @@ namespace TCC.Parsing
             {"S_OTHER_USER_APPLY_PARTY", Contructor<Func<TeraMessageReader, S_OTHER_USER_APPLY_PARTY>>() },
             {"S_DUNGEON_EVENT_MESSAGE", Contructor<Func<TeraMessageReader, S_DUNGEON_EVENT_MESSAGE>>() },
             {"S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA", Contructor<Func<TeraMessageReader, S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA>>() },
+            {"S_AVAILABLE_EVENT_MATCHING_LIST", Contructor<Func<TeraMessageReader, S_AVAILABLE_EVENT_MATCHING_LIST>>() },
+            {"S_DUNGEON_COOL_TIME_LIST", Contructor<Func<TeraMessageReader, S_DUNGEON_COOL_TIME_LIST>>() },
+            {"S_ACCOUNT_PACKAGE_LIST", Contructor<Func<TeraMessageReader, S_ACCOUNT_PACKAGE_LIST>>() },
 
         };
 
@@ -199,7 +202,12 @@ namespace TCC.Parsing
             {typeof(S_BOSS_GAGE_INFO), new Action<S_BOSS_GAGE_INFO>(x => PacketProcessor.HandleGageReceived(x)) },
             {typeof(S_NPC_STATUS), new Action<S_NPC_STATUS>(x => PacketProcessor.HandleNpcStatusChanged(x)) },
         };
-
+        private static readonly Dictionary<Type, Delegate> InfoWindow = new Dictionary<Type, Delegate>
+        {
+            {typeof(S_AVAILABLE_EVENT_MATCHING_LIST), new Action<S_AVAILABLE_EVENT_MATCHING_LIST>(x => PacketProcessor.HandleVanguardReceived(x)) },
+            {typeof(S_DUNGEON_COOL_TIME_LIST), new Action<S_DUNGEON_COOL_TIME_LIST>(x => PacketProcessor.HandleDungeonCooltimeList(x)) },
+            {typeof(S_ACCOUNT_PACKAGE_LIST), new Action<S_ACCOUNT_PACKAGE_LIST>(x => PacketProcessor.HandleAccountPackageList(x)) },
+        };
         public static void Init()
         {
             OpcodeNameToType.Clear();
@@ -211,6 +219,8 @@ namespace TCC.Parsing
             MainProcessor.Clear();
 
             Base.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+
+            InfoWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
 
             if (SettingsManager.ChatWindowSettings.Enabled)
             {

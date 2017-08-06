@@ -72,8 +72,19 @@ namespace TCC.Parsing
             { "SMT_QUEST_ITEM_DELETED", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleQuestMessage(srvMsg, sysMsg)) },
             { "SMT_QUEST_RESET_MESSAGE", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleQuestMessage(srvMsg, sysMsg)) },
             { "SMT_UPDATE_QUEST_TASK", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleQuestMessage(srvMsg, sysMsg)) },
+            { "SMT_GRANT_DUNGEON_COOLTIME_AND_COUNT", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleDungeonEngagedMessage(srvMsg, sysMsg)) },
 
         };
+
+        private static void HandleDungeonEngagedMessage(string srvMsg, SystemMessage sysMsg)
+        {
+            string s = "dungeon:";
+            var dgId = Convert.ToUInt32(srvMsg.Substring(srvMsg.IndexOf(s) + s.Length));
+            InfoWindowViewModel.Instance.EngageDungeon(dgId);
+
+            var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
+            ChatWindowViewModel.Instance.AddChatMessage(msg);
+        }
 
         private static void HandleFriendMessage(string srvMsg, SystemMessage sysMsg)
         {

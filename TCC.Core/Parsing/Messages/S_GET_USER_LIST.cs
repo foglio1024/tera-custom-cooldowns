@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TCC.Data;
+using TCC.ViewModels;
 using Tera.Game;
 using Tera.Game.Messages;
 
@@ -53,7 +54,7 @@ namespace TCC.Parsing.Messages
                 c.details2offset = reader.ReadInt16();
                 c.details2count = reader.ReadInt16();
                 c.guildOffset = reader.ReadInt16();
-                c.id = reader.ReadInt32();
+                c.id = reader.ReadUInt32();
                 c.gender = reader.ReadInt32();
                 c.race = reader.ReadInt32();
                 c.charClass = reader.ReadInt32();
@@ -143,10 +144,11 @@ namespace TCC.Parsing.Messages
 
                 //c.guild = reader.ReadTeraString();
 
-                CharacterList.Add(new Character(c.name, (Class)c.charClass, (Laurel)c.laurel));
+                CharacterList.Add(new Character(c.name, (Class)c.charClass, c.id, c.pos, InfoWindowViewModel.Instance.GetDispatcher(), (Laurel)c.laurel));
                 RawCharacters.Add(c);
 
             }
+            CharacterList = CharacterList.OrderBy(ch => ch.Position).ToList();
         }
     }
 }
@@ -158,7 +160,8 @@ namespace TCC.Data
     {
         public int unk1;
         public short nameOffset, detailsOffset, detailsCount, details2offset, details2count, guildOffset;
-        public int id, gender, race, charClass, level, unk2, unk3;
+        public uint id;
+        public int  gender, race, charClass, level, unk2, unk3;
         public long lastOnline;
         public byte unk4;
         public int unk5, unk6, unk7, unk8;

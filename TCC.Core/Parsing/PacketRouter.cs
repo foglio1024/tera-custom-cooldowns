@@ -52,6 +52,8 @@ namespace TCC.Parsing
             var td = new TeraData(Region);
             var lang = td.GetLanguage(Region);
 
+            TimeManager.Instance.SetServerTimeZone(lang);
+
             EntitiesManager.CurrentDatabase = new MonsterDatabase(lang);
             SessionManager.ItemsDatabase = new ItemsDatabase(lang);
             AbnormalityManager.CurrentDB = new AbnormalityDatabase(lang);
@@ -61,9 +63,13 @@ namespace TCC.Parsing
             AccountBenefitDatabase.Load();
             AchievementDatabase.Load();
             AchievementGradeDatabase.Load();
-            DungeonDatabase.Load();
             MapDatabase.Load();
             QuestDatabase.Load();
+
+            if (TimeManager.Instance.CheckReset())
+            {
+                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Daily/weekly data has been reset.</FONT>"));
+            }
 
         }
 
@@ -204,7 +210,19 @@ namespace TCC.Parsing
 
         public static void HandleCharList(S_GET_USER_LIST p)
         {
-            SessionManager.CurrentAccountCharacters = p.CharacterList;
+            foreach (var item in p.CharacterList)
+            {
+                var ch = InfoWindowViewModel.Instance.Characters.FirstOrDefault(x => x.Id == item.Id);
+                if (ch != null)
+                {
+                    //update?
+                }
+                else
+                {
+                    InfoWindowViewModel.Instance.Characters.Add(item);
+                }
+            }
+            InfoWindowViewModel.Instance.SaveToFile();
         }
         public static void HandleLogin(S_LOGIN p)
         {
@@ -238,6 +256,7 @@ namespace TCC.Parsing
             CharacterWindowViewModel.Instance.Player.Name = p.Name;
             CharacterWindowViewModel.Instance.Player.Level = p.Level;
             SessionManager.SetPlayerLaurel(CharacterWindowViewModel.Instance.Player);
+            InfoWindowViewModel.Instance.SetLoggedIn(p.PlayerId);
         }
         public static void SendTestMessage()
         {
@@ -405,6 +424,17 @@ namespace TCC.Parsing
             var i = ChatWindowViewModel.Instance.PrivateChannels.FirstOrDefault(c => c.Id == x.Id).Index;
             ChatWindowViewModel.Instance.PrivateChannels[i].Joined = false;
         }
+
+        internal static void HandleDungeonCooltimeList(S_DUNGEON_COOL_TIME_LIST x)
+        {
+            InfoWindowViewModel.Instance.SetDungeons(x.DungeonCooldowns);
+        }
+
+        internal static void HandleAccountPackageList(S_ACCOUNT_PACKAGE_LIST x)
+        {
+            SessionManager.IsElite = x.IsElite;
+        }
+
         public static void HandleWhisper(S_WHISPER x)
         {
             if (x.Author == SessionManager.CurrentPlayer.Name)
@@ -414,6 +444,18 @@ namespace TCC.Parsing
             else
             {
                 ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.ReceivedWhisper, x.Author, x.Message));
+            }
+        }
+
+        internal static void HandleVanguardReceived(S_AVAILABLE_EVENT_MATCHING_LIST x)
+        {
+            var ch = InfoWindowViewModel.Instance.Characters.FirstOrDefault(c => c.Id == SessionManager.CurrentPlayer.PlayerId);
+            if (ch != null)
+            {
+                ch.WeekliesDone = x.WeeklyDone;
+                ch.DailiesDone= x.DailyDone;
+                ch.Credits = x.VanguardCredits;
+                InfoWindowViewModel.Instance.SaveToFile();
             }
         }
 
