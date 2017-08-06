@@ -27,8 +27,7 @@ namespace TCC.Data
 
         public void Reset()
         {
-            if (Id == 9950) Entries = 0;
-            else Entries = Convert.ToInt16(GetRuns());
+            Entries = Convert.ToInt16(GetRuns());
         }
 
         internal int GetMaxBaseRuns()
@@ -38,7 +37,15 @@ namespace TCC.Data
         public int GetRuns()
         {
             var bEntries = GetMaxBaseRuns();
-            return SessionManager.IsElite ? bEntries * 2 : bEntries;
+            var eliteMultiplier = SessionManager.IsElite ? 2 : 1;
+            if (Id == 9713)
+            {
+                return bEntries;
+            }
+            else
+            {
+                return bEntries * eliteMultiplier;
+            }
         }
     }
 }
