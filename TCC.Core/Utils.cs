@@ -102,6 +102,10 @@ namespace TCC
         {
             return zoneId == 950 && templateId >= 1100 && templateId <= 1103 ? true : false;
         }
+        public static bool IsGuildTower(uint zoneId, uint templateId)
+        {
+            return zoneId == 152 && templateId == 5001 ? true : false;
+        }
 
         public static List<ChatChannelOnOff> GetEnabledChannelsList()
         {
