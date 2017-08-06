@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:TCC.Controls"
              mc:Ignorable="d" Loaded="UserControl_Loaded">
 
-    <Grid Width="Auto" Margin="20" Name="root">
+    <Grid Width="Auto" Margin="0" Name="root">
         <!--<Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
