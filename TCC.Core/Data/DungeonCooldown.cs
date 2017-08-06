@@ -27,7 +27,8 @@ namespace TCC.Data
 
         public void Reset()
         {
-            Entries = Convert.ToInt16(GetRuns());
+            if (Id == 9950) Entries = 0;
+            else Entries = Convert.ToInt16(GetRuns());
         }
 
         internal int GetMaxBaseRuns()
