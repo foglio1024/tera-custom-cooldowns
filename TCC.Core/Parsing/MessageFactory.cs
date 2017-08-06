@@ -87,6 +87,7 @@ namespace TCC.Parsing
             {"S_AVAILABLE_EVENT_MATCHING_LIST", Contructor<Func<TeraMessageReader, S_AVAILABLE_EVENT_MATCHING_LIST>>() },
             {"S_DUNGEON_COOL_TIME_LIST", Contructor<Func<TeraMessageReader, S_DUNGEON_COOL_TIME_LIST>>() },
             {"S_ACCOUNT_PACKAGE_LIST", Contructor<Func<TeraMessageReader, S_ACCOUNT_PACKAGE_LIST>>() },
+            {"S_GUILD_TOWER_INFO", Contructor<Func<TeraMessageReader, S_GUILD_TOWER_INFO>>() },
 
         };
 
@@ -201,6 +202,7 @@ namespace TCC.Parsing
         {
             {typeof(S_BOSS_GAGE_INFO), new Action<S_BOSS_GAGE_INFO>(x => PacketProcessor.HandleGageReceived(x)) },
             {typeof(S_NPC_STATUS), new Action<S_NPC_STATUS>(x => PacketProcessor.HandleNpcStatusChanged(x)) },
+            {typeof(S_GUILD_TOWER_INFO), new Action<S_GUILD_TOWER_INFO>(x => PacketProcessor.HandleGuildTowerInfo(x)) },
         };
         private static readonly Dictionary<Type, Delegate> InfoWindow = new Dictionary<Type, Delegate>
         {

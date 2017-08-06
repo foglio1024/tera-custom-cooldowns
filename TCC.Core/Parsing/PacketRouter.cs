@@ -39,7 +39,7 @@ namespace TCC.Parsing
             x.Interval = 1000;
             x.Elapsed += (s, ev) =>
             {
-                Debug.WriteLine("Q:"+ Packets.Count + " P:" + processed + " D:" + discarded);
+                Debug.WriteLine("Q:" + Packets.Count + " P:" + processed + " D:" + discarded);
                 processed = 0; discarded = 0;
             };
             //x.Start();
@@ -232,7 +232,7 @@ namespace TCC.Parsing
 
             CooldownWindowViewModel.Instance.ClearSkills();
             CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(p.CharacterClass).ToLower() + "-skills.xml", p.CharacterClass);
-            if(SettingsManager.ClassWindowSettings.Enabled) WindowManager.ClassWindow.Context.CurrentClass = p.CharacterClass;
+            if (SettingsManager.ClassWindowSettings.Enabled) WindowManager.ClassWindow.Context.CurrentClass = p.CharacterClass;
 
             EntitiesManager.ClearNPC();
             GroupWindowViewModel.Instance.ClearAll();
@@ -295,6 +295,7 @@ namespace TCC.Parsing
             GroupWindowViewModel.Instance.ResetAggro();
             BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
             BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.None;
+            BossGageWindowViewModel.Instance.ClearGuildTowers();
         }
         public static void HandleLoadTopoFin(C_LOAD_TOPO_FIN x)
         {
@@ -405,7 +406,7 @@ namespace TCC.Parsing
 
         internal static void HandleFriendIntoArea(S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA x)
         {
-            var friend= ChatWindowViewModel.Instance.Friends.FirstOrDefault(f => f.PlayerId == x.PlayerId);
+            var friend = ChatWindowViewModel.Instance.Friends.FirstOrDefault(f => f.PlayerId == x.PlayerId);
             if (friend == null) return;
             var opcode = "SMT_FRIEND_WALK_INTO_SAME_AREA";
             var areaName = MapDatabase.Names[MapDatabase.Worlds[x.WorldId].Guards[x.GuardId].Sections[x.SectionId].NameId];
@@ -419,6 +420,12 @@ namespace TCC.Parsing
         {
             ChatWindowViewModel.Instance.PrivateChannels[x.Index] = new PrivateChatChannel(x.Id, x.Name, x.Index);
         }
+
+        internal static void HandleGuildTowerInfo(S_GUILD_TOWER_INFO x)
+        {
+            BossGageWindowViewModel.Instance.AddGuildTower(x.TowerId, x.GuildName);
+        }
+
         public static void HandleLeavePrivateChat(S_LEAVE_PRIVATE_CHANNEL x)
         {
             var i = ChatWindowViewModel.Instance.PrivateChannels.FirstOrDefault(c => c.Id == x.Id).Index;
@@ -453,7 +460,7 @@ namespace TCC.Parsing
             if (ch != null)
             {
                 ch.WeekliesDone = x.WeeklyDone;
-                ch.DailiesDone= x.DailyDone;
+                ch.DailiesDone = x.DailyDone;
                 ch.Credits = x.VanguardCredits;
                 InfoWindowViewModel.Instance.SaveToFile();
             }

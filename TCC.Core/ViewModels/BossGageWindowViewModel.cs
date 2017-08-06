@@ -15,7 +15,45 @@ namespace TCC.ViewModels
     {
         public const int PH1SHIELD_DURATION = 16;
         private static BossGageWindowViewModel _instance;
-        public static BossGageWindowViewModel Instance => _instance ?? (_instance = new BossGageWindowViewModel());
+        private HarrowholdPhase _currentHHphase;
+        private ICollectionView _bams;
+        private ICollectionView _mobs;
+        private ICollectionView _dragons;
+        private Boss selectedDragon;
+        private Boss _vergos;
+        private SynchronizedObservableCollection<Boss> _currentNPCs;
+        private double scale = SettingsManager.BossWindowSettings.Scale;
+
+        private List<Boss> _holdedDragons = new List<Boss>();
+        private Dictionary<ulong, string> GuildTowers = new Dictionary<ulong, string>();
+
+        private void AddSortedDragons()
+        {
+            _currentNPCs.Add(_holdedDragons.First(x => x.TemplateId == 1102));
+            _currentNPCs.Add(_holdedDragons.First(x => x.TemplateId == 1100));
+            _currentNPCs.Add(_holdedDragons.First(x => x.TemplateId == 1101));
+            _currentNPCs.Add(_holdedDragons.First(x => x.TemplateId == 1103));
+            _holdedDragons.Clear();
+        }
+
+        public bool IsTeraOnTop
+        {
+            get => WindowManager.IsTccVisible;
+        }
+        public double Scale
+        {
+            get { return scale; }
+            set
+            {
+                if (scale == value) return;
+                scale = value;
+                NotifyPropertyChanged("Scale");
+            }
+        }
+        public int VisibleBossesCount
+        {
+            get => CurrentNPCs.Where(x => x.Visible == Visibility.Visible && x.IsBoss).Count();
+        }
         public HarrowholdPhase CurrentHHphase
         {
             get => _currentHHphase;
@@ -27,11 +65,6 @@ namespace TCC.ViewModels
                 NotifyPropertyChanged(nameof(CurrentHHphase));
             }
         }
-        private HarrowholdPhase _currentHHphase;
-        public bool IsTeraOnTop
-        {
-            get => WindowManager.IsTccVisible;
-        }
         public ICollectionView Bams
         {
             get
@@ -41,7 +74,6 @@ namespace TCC.ViewModels
                 return _bams;
             }
         }
-        private ICollectionView _bams;
         public ICollectionView Mobs
         {
             get
@@ -51,7 +83,6 @@ namespace TCC.ViewModels
                 return _mobs;
             }
         }
-        private ICollectionView _mobs;
         public ICollectionView Dragons
         {
             get
@@ -61,16 +92,24 @@ namespace TCC.ViewModels
                 return _dragons;
             }
         }
-        private ICollectionView _dragons;
-        private double scale = SettingsManager.BossWindowSettings.Scale;
-        public double Scale
+        public Boss SelectedDragon
         {
-            get { return scale; }
+            get => selectedDragon;
             set
             {
-                if (scale == value) return;
-                scale = value;
-                NotifyPropertyChanged("Scale");
+                if (selectedDragon == value) return;
+                selectedDragon = value;
+                NotifyPropertyChanged(nameof(SelectedDragon));
+            }
+        }
+        public Boss Vergos
+        {
+            get => _vergos;
+            set
+            {
+                if (_vergos == value) return;
+                _vergos = value;
+                NotifyPropertyChanged(nameof(Vergos));
             }
         }
         public SynchronizedObservableCollection<Boss> CurrentNPCs
@@ -85,11 +124,24 @@ namespace TCC.ViewModels
                 _currentNPCs = value;
             }
         }
-        private SynchronizedObservableCollection<Boss> _currentNPCs;
-        public int VisibleBossesCount
+        public static BossGageWindowViewModel Instance => _instance ?? (_instance = new BossGageWindowViewModel());
+
+        public BossGageWindowViewModel()
         {
-            get => CurrentNPCs.Where(x => x.Visible == Visibility.Visible && x.IsBoss).Count();
+            _dispatcher = Dispatcher.CurrentDispatcher;
+            _currentNPCs = new SynchronizedObservableCollection<Boss>(_dispatcher);
+            WindowManager.TccVisibilityChanged += (s, ev) =>
+            {
+                NotifyPropertyChanged("IsTeraOnTop");
+                if (IsTeraOnTop)
+                {
+                    WindowManager.BossWindow.RefreshTopmost();
+                }
+            };
+
         }
+
+
         public void AddOrUpdateBoss(ulong entityId, float maxHp, float curHp, bool isBoss, uint templateId = 0, uint zoneId = 0, Visibility v = Visibility.Visible)
         {
             var boss = _currentNPCs.FirstOrDefault(x => x.EntityId == entityId);
@@ -100,6 +152,13 @@ namespace TCC.ViewModels
                 if (templateId == 0 || zoneId == 0) return;
 
                 boss = new Boss(entityId, zoneId, templateId, isBoss, v);
+                if (Utils.IsGuildTower(zoneId, templateId))
+                {
+                    if (GuildTowers.TryGetValue(entityId, out string towerName))
+                    {
+                        boss.Name = towerName;
+                    }
+                }
                 if (Utils.IsPhase1Dragon(zoneId, templateId))
                 {
                     var d = _holdedDragons.FirstOrDefault(x => x.EntityId == entityId);
@@ -123,53 +182,6 @@ namespace TCC.ViewModels
             boss.CurrentHP = curHp;
             boss.Visible = v;
         }
-
-        public BossGageWindowViewModel()
-        {
-            _dispatcher = Dispatcher.CurrentDispatcher;
-            _currentNPCs = new SynchronizedObservableCollection<Boss>(_dispatcher);
-            WindowManager.TccVisibilityChanged += (s, ev) =>
-            {
-                NotifyPropertyChanged("IsTeraOnTop");
-                if (IsTeraOnTop)
-                {
-                    WindowManager.BossWindow.RefreshTopmost();
-                }
-            };
-
-        }
-        private void AddSortedDragons()
-        {
-            _currentNPCs.Add(_holdedDragons.First(x => x.TemplateId == 1102));
-            _currentNPCs.Add(_holdedDragons.First(x => x.TemplateId == 1100));
-            _currentNPCs.Add(_holdedDragons.First(x => x.TemplateId == 1101));
-            _currentNPCs.Add(_holdedDragons.First(x => x.TemplateId == 1103));
-            _holdedDragons.Clear();
-        }
-        private Boss selectedDragon;
-        public Boss SelectedDragon
-        {
-            get => selectedDragon;
-            set
-            {
-                if (selectedDragon == value) return;
-                selectedDragon = value;
-                NotifyPropertyChanged(nameof(SelectedDragon));
-            }
-        }
-
-        private Boss _vergos;
-        public Boss Vergos
-        {
-            get => _vergos;
-            set
-            {
-                if (_vergos == value) return;
-                _vergos = value;
-                NotifyPropertyChanged(nameof(Vergos));
-            }
-        }
-        private List<Boss> _holdedDragons = new List<Boss>();
         public void RemoveBoss(ulong id)
         {
             var boss = _currentNPCs.FirstOrDefault(x => x.EntityId == id);
@@ -248,6 +260,18 @@ namespace TCC.ViewModels
                 if (item.TemplateId == (uint)dragon) { item.IsSelected = true; SelectedDragon = item; }
                 else item.IsSelected = false;
             }
+        }
+        public void ClearGuildTowers()
+        {
+            _dispatcher.Invoke(() =>
+            {
+                GuildTowers.Clear();
+            });
+        }
+        public void AddGuildTower(ulong towerId, string guildName)
+        {
+            if (GuildTowers.ContainsKey(towerId)) return;
+            GuildTowers.Add(towerId, guildName);
         }
     }
 }
