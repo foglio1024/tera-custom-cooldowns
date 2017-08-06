@@ -33,7 +33,7 @@ namespace TCC
                      ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" + ex.InnerException +
                      "\r\n" + ex.TargetSite);
             MessageBox.Show("An error occured and TCC will now close. Check error.txt for more info.", "TCC", MessageBoxButton.OK, MessageBoxImage.Error);
-            if(WindowManager.TrayIcon != null)
+            if (WindowManager.TrayIcon != null)
             {
                 WindowManager.TrayIcon.Dispose();
             }
@@ -92,11 +92,13 @@ namespace TCC
             var ver = String.Format("TCC v{0}.{1}.{2}", v.Major, v.Minor, v.Build);
 
 
-            ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>"+ver+"</FONT>"));
+            ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>" + ver + "</FONT>"));
 
             TeraSniffer.Instance.Enabled = true;
             //var w = new DebugWindow();
             //w.Show();
+            var W = new FloatingButtonWindow();
+            W.Show();
         }
 
         public static void CloseApp()
@@ -107,7 +109,6 @@ namespace TCC
             ProxyInterop.CloseConnection();
             Environment.Exit(0);
         }
-
 
     }
 }
