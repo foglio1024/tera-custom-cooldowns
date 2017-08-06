@@ -37,6 +37,14 @@
         <SolidColorBrush x:Key="Colors.BossWindow.Aquadrax" Color="#dff7ff"/>
         <SolidColorBrush x:Key="Colors.BossWindow.Umbradrax" Color="#aa1e1e"/>
 
+        <SolidColorBrush x:Key="Colors.App.VanguardBorder" Color="#69975200"/>
+
+        <SolidColorBrush x:Key="Colors.DungeonTier.Solo" Color="#d0d0d0"/>
+        <SolidColorBrush x:Key="Colors.DungeonTier.2" Color="#a5fc6f"/>
+        <SolidColorBrush x:Key="Colors.DungeonTier.3" Color="#fcb06f"/>
+        <SolidColorBrush x:Key="Colors.DungeonTier.4" Color="#fc946f"/>
+        <SolidColorBrush x:Key="Colors.DungeonTier.5" Color="#fc6f6f"/>
+
         <system:Double x:Key="MapWidth">800</system:Double>
         <system:Double x:Key="MapHeight">600</system:Double>
 
@@ -92,7 +100,36 @@
             <Setter Property="Foreground" Value="#bbffffff"/>
             <Setter Property="FontFamily" Value="/TCC;component/resources/#Open Sans"/>
         </Style>
+        <Style TargetType="{x:Type Button}" x:Key="ButtonMainStyle">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border"
+                                                BorderThickness="0"
+                                                Padding="0"
+                                                BorderBrush="Transparent"
+                                                CornerRadius="0"
+                                                Background="Transparent">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#2999" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
+        <PathGeometry x:Key="SVG.Close" >M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z</PathGeometry>
+        <PathGeometry x:Key="SVG.Star">M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z</PathGeometry>
+        <PathGeometry x:Key="SVG.Info">M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z</PathGeometry>
+        <PathGeometry x:Key="SVG.Settings">M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z</PathGeometry>
         <!--Converters-->
         <converters:BoolToOpacityConverter x:Key="Converters.BoolToOpacity"/>
         <converters:BoolToOpacityInverseConverter x:Key="Converters.BoolToOpacityInverse"/>
@@ -146,7 +183,12 @@
         <converters:ShieldStatusColorConverter x:Key="Converters.ShieldStatusColor"/>
         <converters:ShieldStatusToVisibilityConverter x:Key="Converters.ShieldStatusToVisibility"/>
         <converters:FactorToAngleConverter x:Key="Converters.FactorToAngle"/>
-        
+        <converters:ValueToFactorConverter x:Key="Converters.ValueToFactor"/>
+        <converters:BoolToBrushConverter x:Key="Converters.BoolToBrush"/>
+        <converters:DungeonIdToImageConverter x:Key="Converters.DungeonIdToImage"/>
+        <converters:DungeonIdToNameConverter x:Key="Converters.DungeonIdToName"/>
+        <converters:DungeonIdToStarsConverter x:Key="Converters.DungeonIdToStars"/>
+        <converters:DungeonIdToTierColorConverter x:Key="Converters.DungeonIdToTierColor"/>
         <!--Scrollbar Thumbs-->
         <Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">
             <Setter Property="Template">
