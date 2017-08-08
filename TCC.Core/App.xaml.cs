@@ -80,6 +80,7 @@ namespace TCC
                 GroupWindowViewModel.Instance.ClearAllAbnormalities();
                 BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
                 EntitiesManager.ClearNPC();
+                InfoWindowViewModel.Instance.ClearEvents();
 
                 SkillManager.Clear();
                 WindowManager.TrayIcon.Icon = WindowManager.DefaultIcon;
