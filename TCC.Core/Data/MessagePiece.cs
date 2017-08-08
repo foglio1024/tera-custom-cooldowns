@@ -91,13 +91,7 @@ namespace TCC.Data
             }
         }
 
-        private Color ParseColor(string col)
-        {
-            return System.Windows.Media.Color.FromRgb(
-                                Convert.ToByte(col.Substring(0, 2), 16),
-                                Convert.ToByte(col.Substring(2, 2), 16),
-                                Convert.ToByte(col.Substring(4, 2), 16));
-        }
+
         private Thickness SetThickness(string text)
         {
             double left = 0;
@@ -128,7 +122,7 @@ namespace TCC.Data
                 }
                 else
                 {
-                    Color = new SolidColorBrush(ParseColor(color));
+                    Color = new SolidColorBrush(Utils.ParseColor(color));
                 }
             });
         }
