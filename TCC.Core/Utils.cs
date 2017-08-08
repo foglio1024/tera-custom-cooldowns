@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using TCC.Data;
@@ -116,6 +117,50 @@ namespace TCC
                 result.Add(new ChatChannelOnOff(c));
             }
             return result;
+        }
+        public static T FindVisualParent<T>(DependencyObject sender) where T : DependencyObject
+        {
+            if (sender == null)
+            {
+                return (null);
+            }
+            else if (VisualTreeHelper.GetParent(sender) is T)
+            {
+                return (VisualTreeHelper.GetParent(sender) as T);
+            }
+            else
+            {
+                DependencyObject parent = VisualTreeHelper.GetParent(sender);
+                return (FindVisualParent<T>(parent));
+            }
+        }
+        public static T GetChild<T>(DependencyObject obj) where T : DependencyObject
+        {
+            DependencyObject child = null;
+            for (Int32 i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            {
+                child = VisualTreeHelper.GetChild(obj, i);
+                if (child != null && child.GetType() == typeof(T))
+                {
+                    break;
+                }
+                else if (child != null)
+                {
+                    child = GetChild<T>(child);
+                    if (child != null && child.GetType() == typeof(T))
+                    {
+                        break;
+                    }
+                }
+            }
+            return child as T;
+        }
+        public static Color ParseColor(string col)
+        {
+            return System.Windows.Media.Color.FromRgb(
+                                Convert.ToByte(col.Substring(0, 2), 16),
+                                Convert.ToByte(col.Substring(2, 2), 16),
+                                Convert.ToByte(col.Substring(4, 2), 16));
         }
     }
 
