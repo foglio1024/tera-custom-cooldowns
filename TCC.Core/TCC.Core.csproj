@@ -242,6 +242,15 @@
     <Compile Include="Controls\DungeonInfoControl.xaml.cs">
       <DependentUpon>DungeonInfoControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\EventControl.xaml.cs">
+      <DependentUpon>EventControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TimelineControl.xaml.cs">
+      <DependentUpon>TimelineControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TimeMarkerControl.xaml.cs">
+      <DependentUpon>TimeMarkerControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\VanguardInfoControl.xaml.cs">
       <DependentUpon>VanguardInfoControl.xaml</DependentUpon>
     </Compile>
@@ -325,6 +334,7 @@
     <Compile Include="Converters\RowsToHeightConverter.cs" />
     <Compile Include="Converters\ShieldBrokenColorConverter.cs" />
     <Compile Include="Converters\ShieldStatusToVisibilityConverter.cs" />
+    <Compile Include="Converters\StringToFillConverter.cs" />
     <Compile Include="Converters\TemplateIdToColorConverter.cs" />
     <Compile Include="Converters\TypeToCursorConverter.cs" />
     <Compile Include="Converters\ValueToFactorConverter.cs" />
@@ -707,6 +717,7 @@
     <Compile Include="ViewModels\ClassManagers\ArcherBarManager.cs" />
     <Compile Include="Converters\ClassToStaminaLabelConverter.cs" />
     <Compile Include="ViewModels\ClassWindowViewModel.cs" />
+    <Compile Include="Data\EventGroup.cs" />
     <Compile Include="ViewModels\InfoWindowViewModel.cs" />
     <Compile Include="ViewModels\TooltipInfo.cs" />
     <Compile Include="ViewModels\BossGageWindowViewModel.cs" />
@@ -927,6 +938,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\EventControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\MysticAurasIndicator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1028,6 +1043,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\StatControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TimelineControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TimeMarkerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
