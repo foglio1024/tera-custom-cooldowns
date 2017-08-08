@@ -39,7 +39,7 @@
 
         <SolidColorBrush x:Key="Colors.App.VanguardBorder" Color="#69975200"/>
 
-        <SolidColorBrush x:Key="Colors.DungeonTier.Solo" Color="#d0d0d0"/>
+        <SolidColorBrush x:Key="Colors.DungeonTier.Solo" Color="#cee5ff"/>
         <SolidColorBrush x:Key="Colors.DungeonTier.2" Color="#a5fc6f"/>
         <SolidColorBrush x:Key="Colors.DungeonTier.3" Color="#fcb06f"/>
         <SolidColorBrush x:Key="Colors.DungeonTier.4" Color="#fc946f"/>
@@ -189,6 +189,7 @@
         <converters:DungeonIdToNameConverter x:Key="Converters.DungeonIdToName"/>
         <converters:DungeonIdToStarsConverter x:Key="Converters.DungeonIdToStars"/>
         <converters:DungeonIdToTierColorConverter x:Key="Converters.DungeonIdToTierColor"/>
+        <converters:StringToFillConverter x:Key="Converters.StringToFill"/>
         <!--Scrollbar Thumbs-->
         <Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">
             <Setter Property="Template">
