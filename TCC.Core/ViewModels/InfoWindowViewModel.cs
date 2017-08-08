@@ -50,6 +50,7 @@ namespace TCC.ViewModels
 
         public void LoadEvents(DayOfWeek today, string region)
         {
+            ClearEvents();
             if (region.StartsWith("EU")) region = "EU";
             var path = $"resources/config/events/events-{region}.xml";
             if (!File.Exists(path))
@@ -133,7 +134,7 @@ namespace TCC.ViewModels
                     var ev = new DailyEvent(name, start, durationOrEnd, color, isDuration);
                     eg.AddEvent(ev);
                 }
-                EventGroups.Add(eg);
+                AddEventGroup(eg);
             }
         }
         public void ClearEvents()
@@ -265,6 +266,11 @@ namespace TCC.ViewModels
             }
         }
 
+        public void AddEventGroup(EventGroup eg)
+        {
+            if (EventGroups.FirstOrDefault(x => x.Name == eg.Name) != null) return;
+            EventGroups.Add(eg);
+        }
     }
 
     public class TimeMarker : TSPropertyChanged
