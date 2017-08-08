@@ -98,8 +98,8 @@ namespace TCC
             TeraSniffer.Instance.Enabled = true;
             //var w = new DebugWindow();
             //w.Show();
-            var W = new FloatingButtonWindow();
-            W.Show();
+            var floatingButton = new FloatingButtonWindow();
+            floatingButton.Show();
         }
 
         public static void CloseApp()
