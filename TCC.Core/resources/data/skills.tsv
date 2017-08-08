@@ -323,17 +323,17 @@
 11000	Slayer	Combo Attack X		icon_skills.comboattack_tex	11001	11002	11003
 11100	Slayer	Combo Attack XI		icon_skills.comboattack_tex	11101	11102	11103
 11200	Slayer	Combo Attack XII		icon_skills.comboattack_tex	11201	11202	11203
-20100	Slayer	Knockdown Strike I		icon_skills.handyslash_tex	20130
-20200	Slayer	Knockdown Strike II		icon_skills.handyslash_tex	20230
-20300	Slayer	Knockdown Strike III		icon_skills.handyslash_tex	20330
-20400	Slayer	Knockdown Strike IV		icon_skills.handyslash_tex	20430
-20500	Slayer	Knockdown Strike V		icon_skills.handyslash_tex	20530
-20600	Slayer	Knockdown Strike VI		icon_skills.handyslash_tex	20630
-20700	Slayer	Knockdown Strike VII		icon_skills.handyslash_tex	20730
-20800	Slayer	Knockdown Strike VIII		icon_skills.handyslash_tex	20830
-20900	Slayer	Knockdown Strike IX		icon_skills.handyslash_tex	20930
-21000	Slayer	Knockdown Strike X		icon_skills.handyslash_tex	21030
-21100	Slayer	Knockdown Strike XI		icon_skills.handyslash_tex	21130
+20100	Slayer	Knockdown Strike I		icon_skills.handyslash_tex	20102	20101	20130
+20200	Slayer	Knockdown Strike II		icon_skills.handyslash_tex	20202	20201	20230
+20300	Slayer	Knockdown Strike III		icon_skills.handyslash_tex	20302	20301	20330
+20400	Slayer	Knockdown Strike IV		icon_skills.handyslash_tex	20402	20401	20430
+20500	Slayer	Knockdown Strike V		icon_skills.handyslash_tex	20502	20501	20530
+20600	Slayer	Knockdown Strike VI		icon_skills.handyslash_tex	20602	20601	20630
+20700	Slayer	Knockdown Strike VII		icon_skills.handyslash_tex	20702	20701	20730
+20800	Slayer	Knockdown Strike VIII		icon_skills.handyslash_tex	20802	20801	20830
+20900	Slayer	Knockdown Strike IX		icon_skills.handyslash_tex	20902	20901	20930
+21000	Slayer	Knockdown Strike X		icon_skills.handyslash_tex	21002	21001	21030
+21100	Slayer	Knockdown Strike XI		icon_skills.handyslash_tex	21102	21101	21130
 30100	Slayer	Whirlwind I		icon_skills.sworddance_tex
 30200	Slayer	Whirlwind II		icon_skills.sworddance_tex
 30300	Slayer	Whirlwind III		icon_skills.sworddance_tex

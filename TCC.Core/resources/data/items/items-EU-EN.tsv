@@ -275,7 +275,7 @@
 331	0	Race Change Voucher
 332	0	Gender Change Voucher
 333	0	Appearance Change Voucher
-334	0	Bahaar's Spark of War
+334	0	Extreme Dungeon Ticket
 335	0	Kaia's Acquiescence
 336	0	Riding Skill: Fast Velikan Gray
 337	1	Firesnap
@@ -22982,10 +22982,10 @@
 98251	3	Mystel's Triple Charm
 98252	2	Chest of Bravery
 98260	3	Vergos's Head
-98261	3	Vergos's Fang
-98262	3	Vergos's Scale
-98263	3	Vergos's Horn
-98264	3	Vergos's Bone
+98261	3	Vergos's Withered Fang
+98262	3	Vergos's Withered Scale
+98263	3	Vergos's Withered Horn
+98264	3	Vergos's Withered Bone
 98265	3	Behemoth Essence
 98266	3	+12 Enchantment Scroll [Tier 11]
 98267	3	+15 Enchantment Scroll [Tier 11]
@@ -29721,7 +29721,7 @@
 155489	2	[Event] Cosmic Spark
 155490	2	[Event] Star Trace
 155491	2	[Event] Open Secret
-155492	2	[Event] Dark Secret
+155492	3	[Event] Dark Secret
 155493	2	Dragon Skill: Mighty Armored Dragon (4 Days)
 155494	3	TERA Club Astral Box
 155495	3	[Event] 2nd Astral Gift
@@ -29729,9 +29729,10 @@
 155497	3	[Event] 4th Astral Gift
 155498	3	[Event] 5th Astral Gift
 155499	3	[Event] 6th Astral Gift
-155500	3	[Fashion] Artfyll Mail
-155501	3	[Fashion] Devntyss Vest
-155502	3	[Fashion] Shrednee Robe
+155500	3	[Fashion] Guile Mail
+155501	3	[Fashion] Guile Vest
+155502	3	[Fashion] Guile Robe
+155503	3	TERA Club Membership (30 Days)
 160001	0	Riding Skill: Sleipnir
 160002	0	Riding Skill: Sleipnir
 160003	1	Riding Skill: Tawny Huntress
@@ -41735,7 +41736,7 @@
 186622	1	Emergency Gacha 0613-4
 186623	1	Emergency Gacha 0613-5
 186624	1	Emergency Gacha 0613-6
-186625	1	Emergency Gacha 0613-7
+186625	3	Emergency Gacha 0613-7
 186626	1	Emergency Gacha 0613-8
 186627	1	Emergency Gacha 0613-9
 186628	1	Emergency Gacha 0613-10
@@ -41808,7 +41809,7 @@
 186695	2	Emergency Item Conversion 0613-27
 186696	2	Emergency Item Conversion 0613-28
 186697	2	Emergency Item Conversion 0613-29
-186698	2	Emergency Item Conversion 0613-30
+186698	3	Emergency Item Conversion 0613-30
 186699	2	Emergency Item Conversion 0613-31
 186700	2	Emergency Item Conversion 0613-32
 186701	2	Emergency Item Conversion 0613-33
@@ -41933,9 +41934,9 @@
 244547	2	Dummy Smart Box23
 244548	2	Dummy Smart Box22
 244549	2	Dummy Smart Box21
-244550	0	Dummy Gacha30
-244551	0	Dummy Gacha29
-244552	0	Dummy Gacha28
+244550	3	Dummy Gacha30
+244551	3	Dummy Gacha29
+244552	3	Dummy Gacha28
 244553	3	Dummy Gacha27
 244554	3	Dummy Gacha26
 244555	0	Dummy Gacha25
@@ -41972,6 +41973,106 @@
 244586	2	Violet Birdcage
 244587	2	Steamer Wardrobe
 244588	2	Steampunked Loot Box
+244589	2	Dummy Smart Box1
+244590	2	Dummy Smart Box2
+244591	2	Dummy Smart Box3
+244592	2	Dummy Smart Box4
+244593	2	Dummy Smart Box5
+244594	2	Dummy Smart Box6
+244595	2	Dummy Smart Box7
+244596	2	Dummy Smart Box8
+244597	2	Dummy Smart Box9
+244598	2	Dummy Smart Box10
+244599	2	Dummy Smart Box11
+244600	2	Dummy Smart Box12
+244601	2	Dummy Smart Box13
+244602	2	Dummy Smart Box14
+244603	2	Dummy Smart Box15
+244604	2	Dummy Smart Box16
+244605	2	Dummy Smart Box17
+244606	2	Dummy Smart Box18
+244607	2	Dummy Smart Box19
+244608	2	Dummy Smart Box20
+244609	2	Dummy Smart Box21
+244610	2	Dummy Smart Box22
+244611	2	Dummy Smart Box23
+244612	2	Dummy Smart Box24
+244613	2	Dummy Smart Box25
+244614	2	Dummy Smart Box26
+244615	2	Dummy Smart Box27
+244616	2	Dummy Smart Box28
+244617	2	Dummy Smart Box29
+244618	2	Dummy Smart Box30
+244619	3	Dummy Gacha1
+244620	3	Dummy Gacha2
+244621	3	Dummy Gacha3
+244622	3	Dummy Gacha4
+244623	3	Dummy Gacha5
+244624	3	Dummy Gacha6
+244625	3	Dummy Gacha7
+244626	3	Dummy Gacha8
+244627	3	Dummy Gacha9
+244628	3	Dummy Gacha10
+244629	3	Dummy Gacha11
+244630	3	Dummy Gacha12
+244631	3	Dummy Gacha13
+244632	3	Dummy Gacha14
+244633	3	Dummy Gacha15
+244634	3	Dummy Gacha16
+244635	3	Dummy Gacha17
+244636	3	Dummy Gacha18
+244637	3	Dummy Gacha19
+244638	3	Dummy Gacha20
+244639	3	Dummy Gacha21
+244640	3	Dummy Gacha22
+244641	3	Dummy Gacha23
+244642	3	Dummy Gacha24
+244643	3	Dummy Gacha25
+244644	3	Dummy Gacha26
+244645	3	Dummy Gacha27
+244646	3	Dummy Gacha28
+244647	3	Dummy Gacha29
+244648	3	Dummy Gacha30
+244649	3	Dummy Gacha31
+244650	3	Dummy Gacha32
+244651	3	Dummy Gacha33
+244652	3	Dummy Gacha34
+244653	3	Dummy Gacha35
+244654	3	Dummy Gacha36
+244655	3	Dummy Gacha37
+244656	3	Dummy Gacha38
+244657	3	Dummy Gacha39
+244658	3	Dummy Gacha40
+244659	3	Dummy Gacha41
+244660	3	Dummy Gacha42
+244661	3	Dummy Gacha43
+244662	3	Dummy Gacha44
+244663	3	Dummy Gacha45
+244664	3	Dummy Gacha46
+244665	3	Dummy Gacha47
+244666	3	Dummy Gacha48
+244667	3	Dummy Gacha49
+244668	3	Dummy Gacha50
+244669	2	Dummy Smart Box31
+244670	2	Dummy Smart Box32
+244671	2	Dummy Smart Box33
+244672	2	Dummy Smart Box34
+244673	2	Dummy Smart Box35
+244674	2	Dummy Smart Box36
+244675	2	Dummy Smart Box37
+244676	2	Dummy Smart Box38
+244677	2	Dummy Smart Box39
+244678	2	Dummy Smart Box40
+244679	2	Dummy Smart Box41
+244680	2	Dummy Smart Box42
+244681	2	Dummy Smart Box43
+244682	2	Dummy Smart Box44
+244683	2	Dummy Smart Box45
+244684	2	Dummy Smart Box46
+244685	2	Dummy Smart Box47
+244686	2	Dummy Smart Box48
+244687	2	Dummy Smart Box49
+244688	2	Dummy Smart Box50
 213832	0	Russian Federation Bill
 215981	2	Recipe 1
 215982	2	Recipe 2
@@ -42050,6 +42151,24 @@
 216667	3	Руна Дракона (Dragon)
 216668	3	Руна Дракона (Returned)
 216669	2	Волшебный расщепитель (Letter)
+216671	3	Перо
+216672	3	Кость дракона
+216673	3	Жетон приручения
+216674	3	Билет поддержки
+216675	2	Лоскут ткани
+216676	3	Шелковый лоскут
+216677	3	Магическая сталь
+216678	3	Самоцвет
+216679	3	Жетон листопада
+216680	3	Жетон снегопада
+247623	2	Smart Box: Swimwear Male A + Female A
+247624	2	Smart Box: Swimwear Male B + Female D
+247625	2	Smart Box: Swimwear Female B
+247626	2	Smart Box: Swimwear Female C
+247627	2	Smart Box: Swimwear Male A + Female A (7 Days)
+247628	2	Smart Box: Swimwear Male B + Female D (7 Days)
+247629	2	Smart Box: Swimwear Female B (7 Days)
+247630	2	Smart Box: Swimwear Female C (7 Days)
 250000	3	SWAT Team Uniform (Human Male)
 250001	3	SWAT Team Uniform (Human Male)
 250002	3	SWAT Team Uniform (Human Male)
@@ -47798,6 +47917,402 @@
 256133	3	Rainbow Water Wings
 256134	3	Rainbow Water Wings
 256135	3	Rainbow Water Wings
+256448	3	Flying Skill: Obsidian Tail
+256449	3	Flying Skill: Mythical Obsidian Tail
+256450	3	Flying Skill: Fabled Obsidian Tail
+256451	3	Flying Skill: Legendary Obsidian Tail
+256452	3	Flying Skill: Almighty Obsidian Tail
+256453	3	Flying Skill: Legendary Obsidian Tail
+256454	3	Flying Skill: Chimeric Obsidian Tail
+256455	3	Flying Skill: Obsidian Tail (3 Days)
+256456	3	Flying Skill: Mythical Obsidian Tail (3 Days)
+256457	3	Flying Skill: Fabled Obsidian Tail (3 Days)
+256458	3	Flying Skill: Legendary Obsidian Tail (3 Days)
+256459	3	Flying Skill: Chimeric Obsidian Tail (3 Days)
+256460	3	Flying Skill: Obsidian Tail (7 Days)
+256461	3	Flying Skill: Mythical Obsidian Tail (7 Days)
+256462	3	Flying Skill: Fabled Obsidian Tail (7 Days)
+256463	3	Flying Skill: Legendary Obsidian Tail (7 Days)
+256464	3	Flying Skill: Chimeric Obsidian Tail (7 Days)
+256465	3	Flying Skill: Obsidian Tail (14 Days)
+256466	3	Flying Skill: Mythical Obsidian Tail (14 Days)
+256467	3	Flying Skill: Fabled Obsidian Tail (14 Days)
+256468	3	Flying Skill: Legendary Obsidian Tail (14 Days)
+256469	3	Flying Skill: Chimeric Obsidian Tail (14 Days)
+256470	3	Flying Skill: Obsidian Tail (30 Days)
+256471	3	Flying Skill: Mythical Obsidian Tail (30 Days)
+256472	3	Flying Skill: Fabled Obsidian Tail (30 Days)
+256473	3	Flying Skill: Legendary Obsidian Tail (30 Days)
+256474	3	Flying Skill: Chimeric Obsidian Tail (30 Days)
+256475	3	Flying Skill: Obsidian Tail
+256476	3	Flying Skill: Mythical Obsidian Tail
+256477	3	Flying Skill: Fabled Obsidian Tail
+256478	3	Flying Skill: Legendary Obsidian Tail
+256479	3	Flying Skill: Chimeric Obsidian Tail
+256480	3	Flying Skill: Obsidian Tail
+256481	3	Flying Skill: Mythical Obsidian Tail
+256482	3	Flying Skill: Fabled Obsidian Tail
+256483	3	Flying Skill: Legendary Obsidian Tail
+256484	3	Flying Skill: Chimeric Obsidian Tail
+256485	3	Flying Skill: Obsidian Tail
+256486	3	Flying Skill: Mythical Obsidian Tail
+256487	3	Flying Skill: Fabled Obsidian Tail
+256488	3	Flying Skill: Legendary Obsidian Tail
+256489	3	Flying Skill: Almighty Obsidian Tail
+256490	3	Flying Skill: Legendary Obsidian Tail
+256491	3	Flying Skill: Chimeric Obsidian Tail
+256492	3	Flying Skill: Spectral Tail
+256493	3	Flying Skill: Mythical Spectral Tail
+256494	3	Flying Skill: Fabled Spectral Tail
+256495	3	Flying Skill: Legendary Spectral Tail
+256496	3	Flying Skill: Almighty Spectral Tail
+256497	3	Flying Skill: Legendary Spectral Tail
+256498	3	Flying Skill: Chimeric Spectral Tail
+256499	3	Flying Skill: Spectral Tail (3 Days)
+256500	3	Flying Skill: Mythical Spectral Tail (3 Days)
+256501	3	Flying Skill: Fabled Spectral Tail (3 Days)
+256502	3	Flying Skill: Legendary Spectral Tail (3 Days)
+256503	3	Flying Skill: Chimeric Spectral Tail (3 Days)
+256504	3	Flying Skill: Spectral Tail (7 Days)
+256505	3	Flying Skill: Mythical Spectral Tail (7 Days)
+256506	3	Flying Skill: Fabled Spectral Tail (7 Days)
+256507	3	Flying Skill: Legendary Spectral Tail (7 Days)
+256508	3	Flying Skill: Chimeric Spectral Tail (7 Days)
+256509	3	Flying Skill: Spectral Tail (14 Days)
+256510	3	Flying Skill: Mythical Spectral Tail (14 Days)
+256511	3	Flying Skill: Fabled Spectral Tail (14 Days)
+256512	3	Flying Skill: Legendary Spectral Tail (14 Days)
+256513	3	Flying Skill: Chimeric Spectral Tail (14 Days)
+256514	3	Flying Skill: Spectral Tail (30 Days)
+256515	3	Flying Skill: Mythical Spectral Tail (30 Days)
+256516	3	Flying Skill: Fabled Spectral Tail (30 Days)
+256517	3	Flying Skill: Legendary Spectral Tail (30 Days)
+256518	3	Flying Skill: Chimeric Spectral Tail (30 Days)
+256519	3	Flying Skill: Spectral Tail
+256520	3	Flying Skill: Mythical Spectral Tail
+256521	3	Flying Skill: Fabled Spectral Tail
+256522	3	Flying Skill: Legendary Spectral Tail
+256523	3	Flying Skill: Chimeric Spectral Tail
+256524	3	Flying Skill: Spectral Tail
+256525	3	Flying Skill: Mythical Spectral Tail
+256526	3	Flying Skill: Fabled Spectral Tail
+256527	3	Flying Skill: Legendary Spectral Tail
+256528	3	Flying Skill: Chimeric Spectral Tail
+256529	3	Flying Skill: Spectral Tail
+256530	3	Flying Skill: Mythical Spectral Tail
+256531	3	Flying Skill: Fabled Spectral Tail
+256532	3	Flying Skill: Legendary Spectral Tail
+256533	3	Flying Skill: Almighty Spectral Tail
+256534	3	Flying Skill: Legendary Spectral Tail
+256535	3	Flying Skill: Chimeric Spectral Tail
+256536	3	Flying Skill: Bloom Tail
+256537	3	Flying Skill: Mythical Bloom Tail
+256538	3	Flying Skill: Fabled Bloom Tail
+256539	3	Flying Skill: Legendary Bloom Tail
+256540	3	Flying Skill: Almighty Bloom Tail
+256541	3	Flying Skill: Legendary Bloom Tail
+256542	3	Flying Skill: Chimeric Bloom Tail
+256543	3	Flying Skill: Bloom Tail (3 Days)
+256544	3	Flying Skill: Mythical Bloom Tail (3 Days)
+256545	3	Flying Skill: Fabled Bloom Tail (3 Days)
+256546	3	Flying Skill: Legendary Bloom Tail (3 Days)
+256547	3	Flying Skill: Chimeric Bloom Tail (3 Days)
+256548	3	Flying Skill: Bloom Tail (7 Days)
+256549	3	Flying Skill: Mythical Bloom Tail (7 Days)
+256550	3	Flying Skill: Fabled Bloom Tail (7 Days)
+256551	3	Flying Skill: Legendary Bloom Tail (7 Days)
+256552	3	Flying Skill: Chimeric Bloom Tail (7 Days)
+256553	3	Flying Skill: Bloom Tail (14 Days)
+256554	3	Flying Skill: Mythical Bloom Tail (14 Days)
+256555	3	Flying Skill: Fabled Bloom Tail (14 Days)
+256556	3	Flying Skill: Legendary Bloom Tail (14 Days)
+256557	3	Flying Skill: Chimeric Bloom Tail (14 Days)
+256558	3	Flying Skill: Bloom Tail (30 Days)
+256559	3	Flying Skill: Mythical Bloom Tail (30 Days)
+256560	3	Flying Skill: Fabled Bloom Tail (30 Days)
+256561	3	Flying Skill: Legendary Bloom Tail (30 Days)
+256562	3	Flying Skill: Chimeric Bloom Tail (30 Days)
+256563	3	Flying Skill: Bloom Tail
+256564	3	Flying Skill: Mythical Bloom Tail
+256565	3	Flying Skill: Fabled Bloom Tail
+256566	3	Flying Skill: Legendary Bloom Tail
+256567	3	Flying Skill: Chimeric Bloom Tail
+256568	3	Flying Skill: Bloom Tail
+256569	3	Flying Skill: Mythical Bloom Tail
+256570	3	Flying Skill: Fabled Bloom Tail
+256571	3	Flying Skill: Legendary Bloom Tail
+256572	3	Flying Skill: Chimeric Bloom Tail
+256573	3	Flying Skill: Bloom Tail
+256574	3	Flying Skill: Mythical Bloom Tail
+256575	3	Flying Skill: Fabled Bloom Tail
+256576	3	Flying Skill: Legendary Bloom Tail
+256577	3	Flying Skill: Almighty Bloom Tail
+256578	3	Flying Skill: Legendary Bloom Tail
+256579	3	Flying Skill: Chimeric Bloom Tail
+256904	3	Baraka Turquoise Short Jacket
+256905	3	Baraka Turquoise Short Jacket
+256906	3	Baraka Turquoise Short Jacket
+256907	3	Baraka Turquoise Short Jacket
+256908	3	Baraka Turquoise Short Jacket
+256909	3	Baraka Turquoise Short Jacket
+256910	3	Baraka Turquoise Short Jacket
+256911	3	Baraka Turquoise Short Jacket
+256912	3	Baraka Turquoise Short Jacket
+256913	3	Baraka Turquoise Short Jacket
+256914	3	Baraka Turquoise Short Jacket
+256915	3	Baraka Turquoise Short Jacket
+256916	3	Baraka Dyeable Short Jacket
+256917	3	Baraka Dyeable Short Jacket
+256918	3	Baraka Dyeable Short Jacket
+256919	3	Baraka Dyeable Short Jacket
+256920	3	Baraka Dyeable Short Jacket
+256921	3	Baraka Dyeable Short Jacket
+256922	3	Baraka Dyeable Short Jacket
+256923	3	Baraka Dyeable Short Jacket
+256924	3	Baraka Dyeable Short Jacket
+256925	3	Baraka Dyeable Short Jacket
+256926	3	Baraka Dyeable Short Jacket
+256927	3	Baraka Dyeable Short Jacket
+256928	3	Human Male Turquoise Short Jacket
+256929	3	Human Male Turquoise Short Jacket
+256930	3	Human Male Turquoise Short Jacket
+256931	3	Human Male Turquoise Short Jacket
+256932	3	Human Male Turquoise Short Jacket
+256933	3	Human Male Turquoise Short Jacket
+256934	3	Human Male Turquoise Short Jacket
+256935	3	Human Male Turquoise Short Jacket
+256936	3	Human Male Turquoise Short Jacket
+256937	3	Human Male Turquoise Short Jacket
+256938	3	Human Male Turquoise Short Jacket
+256939	3	Human Male Turquoise Short Jacket
+256940	3	Human Male Dyeable Short Jacket
+256941	3	Human Male Dyeable Short Jacket
+256942	3	Human Male Dyeable Short Jacket
+256943	3	Human Male Dyeable Short Jacket
+256944	3	Human Male Dyeable Short Jacket
+256945	3	Human Male Dyeable Short Jacket
+256946	3	Human Male Dyeable Short Jacket
+256947	3	Human Male Dyeable Short Jacket
+256948	3	Human Male Dyeable Short Jacket
+256949	3	Human Male Dyeable Short Jacket
+256950	3	Human Male Dyeable Short Jacket
+256951	3	Human Male Dyeable Short Jacket
+256952	3	Human Female Sanguine Cocktail Dress
+256953	3	Human Female Sanguine Cocktail Dress
+256954	3	Human Female Sanguine Cocktail Dress
+256955	3	Human Female Sanguine Cocktail Dress
+256956	3	Human Female Sanguine Cocktail Dress
+256957	3	Human Female Sanguine Cocktail Dress
+256958	3	Human Female Sanguine Cocktail Dress
+256959	3	Human Female Sanguine Cocktail Dress
+256960	3	Human Female Sanguine Cocktail Dress
+256961	3	Human Female Sanguine Cocktail Dress
+256962	3	Human Female Sanguine Cocktail Dress
+256963	3	Human Female Sanguine Cocktail Dress
+256964	3	Dyeable Swan Dress (Human Female)
+256965	3	Dyeable Swan Dress (Human Female)
+256966	3	Dyeable Swan Dress (Human Female)
+256967	3	Dyeable Swan Dress (Human Female)
+256968	3	Dyeable Swan Dress (Human Female)
+256969	3	Dyeable Swan Dress (Human Female)
+256970	3	Dyeable Swan Dress (Human Female)
+256971	3	Dyeable Swan Dress (Human Female)
+256972	3	Dyeable Swan Dress (Human Female)
+256973	3	Dyeable Swan Dress (Human Female)
+256974	3	Dyeable Swan Dress (Human Female)
+256975	3	Dyeable Swan Dress (Human Female)
+256976	3	High Elf Male Turquoise Short Jacket
+256977	3	High Elf Male Turquoise Short Jacket
+256978	3	High Elf Male Turquoise Short Jacket
+256979	3	High Elf Male Turquoise Short Jacket
+256980	3	High Elf Male Turquoise Short Jacket
+256981	3	High Elf Male Turquoise Short Jacket
+256982	3	High Elf Male Turquoise Short Jacket
+256983	3	High Elf Male Turquoise Short Jacket
+256984	3	High Elf Male Turquoise Short Jacket
+256985	3	High Elf Male Turquoise Short Jacket
+256986	3	High Elf Male Turquoise Short Jacket
+256987	3	High Elf Male Turquoise Short Jacket
+256988	3	High Elf Male Dyeable Short Jacket
+256989	3	High Elf Male Dyeable Short Jacket
+256990	3	High Elf Male Dyeable Short Jacket
+256991	3	High Elf Male Dyeable Short Jacket
+256992	3	High Elf Male Dyeable Short Jacket
+256993	3	High Elf Male Dyeable Short Jacket
+256994	3	High Elf Male Dyeable Short Jacket
+256995	3	High Elf Male Dyeable Short Jacket
+256996	3	High Elf Male Dyeable Short Jacket
+256997	3	High Elf Male Dyeable Short Jacket
+256998	3	High Elf Male Dyeable Short Jacket
+256999	3	High Elf Male Dyeable Short Jacket
+257000	3	High Elf Female Sanguine Cocktail Dress
+257001	3	High Elf Female Sanguine Cocktail Dress
+257002	3	High Elf Female Sanguine Cocktail Dress
+257003	3	High Elf Female Sanguine Cocktail Dress
+257004	3	High Elf Female Sanguine Cocktail Dress
+257005	3	High Elf Female Sanguine Cocktail Dress
+257006	3	High Elf Female Sanguine Cocktail Dress
+257007	3	High Elf Female Sanguine Cocktail Dress
+257008	3	High Elf Female Sanguine Cocktail Dress
+257009	3	High Elf Female Sanguine Cocktail Dress
+257010	3	High Elf Female Sanguine Cocktail Dress
+257011	3	High Elf Female Sanguine Cocktail Dress
+257012	3	Dyable Swan Dress (High Elf Female)
+257013	3	Dyable Swan Dress (High Elf Female)
+257014	3	Dyable Swan Dress (High Elf Female)
+257015	3	Dyable Swan Dress (High Elf Female)
+257016	3	Dyable Swan Dress (High Elf Female)
+257017	3	Dyable Swan Dress (High Elf Female)
+257018	3	Dyable Swan Dress (High Elf Female)
+257019	3	Dyable Swan Dress (High Elf Female)
+257020	3	Dyable Swan Dress (High Elf Female)
+257021	3	Dyable Swan Dress (High Elf Female)
+257022	3	Dyable Swan Dress (High Elf Female)
+257023	3	Dyable Swan Dress (High Elf Female)
+257024	3	Amani Male Turquoise Short Jacket
+257025	3	Amani Male Turquoise Short Jacket
+257026	3	Amani Male Turquoise Short Jacket
+257027	3	Amani Male Turquoise Short Jacket
+257028	3	Amani Male Turquoise Short Jacket
+257029	3	Amani Male Turquoise Short Jacket
+257030	3	Amani Male Turquoise Short Jacket
+257031	3	Amani Male Turquoise Short Jacket
+257032	3	Amani Male Turquoise Short Jacket
+257033	3	Amani Male Turquoise Short Jacket
+257034	3	Amani Male Turquoise Short Jacket
+257035	3	Amani Male Turquoise Short Jacket
+257036	3	Amani Male Dyeable Short Jacket
+257037	3	Amani Male Dyeable Short Jacket
+257038	3	Amani Male Dyeable Short Jacket
+257039	3	Amani Male Dyeable Short Jacket
+257040	3	Amani Male Dyeable Short Jacket
+257041	3	Amani Male Dyeable Short Jacket
+257042	3	Amani Male Dyeable Short Jacket
+257043	3	Amani Male Dyeable Short Jacket
+257044	3	Amani Male Dyeable Short Jacket
+257045	3	Amani Male Dyeable Short Jacket
+257046	3	Amani Male Dyeable Short Jacket
+257047	3	Amani Male Dyeable Short Jacket
+257048	3	Amani Female Sanguine Cocktail Dress
+257049	3	Amani Female Sanguine Cocktail Dress
+257050	3	Amani Female Sanguine Cocktail Dress
+257051	3	Amani Female Sanguine Cocktail Dress
+257052	3	Amani Female Sanguine Cocktail Dress
+257053	3	Amani Female Sanguine Cocktail Dress
+257054	3	Amani Female Sanguine Cocktail Dress
+257055	3	Amani Female Sanguine Cocktail Dress
+257056	3	Amani Female Sanguine Cocktail Dress
+257057	3	Amani Female Sanguine Cocktail Dress
+257058	3	Amani Female Sanguine Cocktail Dress
+257059	3	Amani Female Sanguine Cocktail Dress
+257060	3	Dyeable Swan Dress (Amani Female)
+257061	3	Dyeable Swan Dress (Amani Female)
+257062	3	Dyeable Swan Dress (Amani Female)
+257063	3	Dyeable Swan Dress (Amani Female)
+257064	3	Dyeable Swan Dress (Amani Female)
+257065	3	Dyeable Swan Dress (Amani Female)
+257066	3	Dyeable Swan Dress (Amani Female)
+257067	3	Dyeable Swan Dress (Amani Female)
+257068	3	Dyeable Swan Dress (Amani Female)
+257069	3	Dyeable Swan Dress (Amani Female)
+257070	3	Dyeable Swan Dress (Amani Female)
+257071	3	Dyeable Swan Dress (Amani Female)
+257072	3	Castanic Male Turquoise Short Jacket
+257073	3	Castanic Male Turquoise Short Jacket
+257074	3	Castanic Male Turquoise Short Jacket
+257075	3	Castanic Male Turquoise Short Jacket
+257076	3	Castanic Male Turquoise Short Jacket
+257077	3	Castanic Male Turquoise Short Jacket
+257078	3	Castanic Male Turquoise Short Jacket
+257079	3	Castanic Male Turquoise Short Jacket
+257080	3	Castanic Male Turquoise Short Jacket
+257081	3	Castanic Male Turquoise Short Jacket
+257082	3	Castanic Male Turquoise Short Jacket
+257083	3	Castanic Male Turquoise Short Jacket
+257084	3	Castanic Male Dyeable Short Jacket
+257085	3	Castanic Male Dyeable Short Jacket
+257086	3	Castanic Male Dyeable Short Jacket
+257087	3	Castanic Male Dyeable Short Jacket
+257088	3	Castanic Male Dyeable Short Jacket
+257089	3	Castanic Male Dyeable Short Jacket
+257090	3	Castanic Male Dyeable Short Jacket
+257091	3	Castanic Male Dyeable Short Jacket
+257092	3	Castanic Male Dyeable Short Jacket
+257093	3	Castanic Male Dyeable Short Jacket
+257094	3	Castanic Male Dyeable Short Jacket
+257095	3	Castanic Male Dyeable Short Jacket
+257096	3	Castanic Female Sanguine Cocktail Dress
+257097	3	Castanic Female Sanguine Cocktail Dress
+257098	3	Castanic Female Sanguine Cocktail Dress
+257099	3	Castanic Female Sanguine Cocktail Dress
+257100	3	Castanic Female Sanguine Cocktail Dress
+257101	3	Castanic Female Sanguine Cocktail Dress
+257102	3	Castanic Female Sanguine Cocktail Dress
+257103	3	Castanic Female Sanguine Cocktail Dress
+257104	3	Castanic Female Sanguine Cocktail Dress
+257105	3	Castanic Female Sanguine Cocktail Dress
+257106	3	Castanic Female Sanguine Cocktail Dress
+257107	3	Castanic Female Sanguine Cocktail Dress
+257108	3	Dyeable Swan Dress (Castanic Female)
+257109	3	Dyeable Swan Dress (Castanic Female)
+257110	3	Dyeable Swan Dress (Castanic Female)
+257111	3	Dyeable Swan Dress (Castanic Female)
+257112	3	Dyeable Swan Dress (Castanic Female)
+257113	3	Dyeable Swan Dress (Castanic Female)
+257114	3	Dyeable Swan Dress (Castanic Female)
+257115	3	Dyeable Swan Dress (Castanic Female)
+257116	3	Dyeable Swan Dress (Castanic Female)
+257117	3	Dyeable Swan Dress (Castanic Female)
+257118	3	Dyeable Swan Dress (Castanic Female)
+257119	3	Dyeable Swan Dress (Castanic Female)
+257120	3	Popori Turquoise Short Jacket
+257121	3	Popori Turquoise Short Jacket
+257122	3	Popori Turquoise Short Jacket
+257123	3	Popori Turquoise Short Jacket
+257124	3	Popori Turquoise Short Jacket
+257125	3	Popori Turquoise Short Jacket
+257126	3	Popori Turquoise Short Jacket
+257127	3	Popori Turquoise Short Jacket
+257128	3	Popori Turquoise Short Jacket
+257129	3	Popori Turquoise Short Jacket
+257130	3	Popori Turquoise Short Jacket
+257131	3	Popori Turquoise Short Jacket
+257132	3	Popori Dyeable Short Jacket
+257133	3	Popori Dyeable Short Jacket
+257134	3	Popori Dyeable Short Jacket
+257135	3	Popori Dyeable Short Jacket
+257136	3	Popori Dyeable Short Jacket
+257137	3	Popori Dyeable Short Jacket
+257138	3	Popori Dyeable Short Jacket
+257139	3	Popori Dyeable Short Jacket
+257140	3	Popori Dyeable Short Jacket
+257141	3	Popori Dyeable Short Jacket
+257142	3	Popori Dyeable Short Jacket
+257143	3	Popori Dyeable Short Jacket
+257144	3	Elin Sanguine Cocktail Dress
+257145	3	Elin Sanguine Cocktail Dress
+257146	3	Elin Sanguine Cocktail Dress
+257147	3	Elin Sanguine Cocktail Dress
+257148	3	Elin Sanguine Cocktail Dress
+257149	3	Elin Sanguine Cocktail Dress
+257150	3	Elin Sanguine Cocktail Dress
+257151	3	Elin Sanguine Cocktail Dress
+257152	3	Elin Sanguine Cocktail Dress
+257153	3	Elin Sanguine Cocktail Dress
+257154	3	Elin Sanguine Cocktail Dress
+257155	3	Elin Sanguine Cocktail Dress
+257156	3	Dyeable Swan Dress (Elin)
+257157	3	Dyeable Swan Dress (Elin)
+257158	3	Dyeable Swan Dress (Elin)
+257159	3	Dyeable Swan Dress (Elin)
+257160	3	Dyeable Swan Dress (Elin)
+257161	3	Dyeable Swan Dress (Elin)
+257162	3	Dyeable Swan Dress (Elin)
+257163	3	Dyeable Swan Dress (Elin)
+257164	3	Dyeable Swan Dress (Elin)
+257165	3	Dyeable Swan Dress (Elin)
+257166	3	Dyeable Swan Dress (Elin)
+257167	3	Dyeable Swan Dress (Elin)
 220353	3	T-cat 01
 220354	3	T-cat 02
 458	0	Riding Skill: Summon Fortuna

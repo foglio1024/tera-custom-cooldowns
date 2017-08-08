@@ -2116,19 +2116,23 @@
 302	SMT_DREVENT_MEET_CONDITION	Eligible for a reward from the Dungeon Mentor Event. {itemAmount}x{itemName} will be awarded after finishing the instance.
 302	SMT_DREVENT_MEET_CONDITION_PLURAL	Eligible for a reward from the Dungeon Mentor Event. {itemAmount}x{itemName} and {itemCount} will be awarded after finishing the instance.
 302	SMT_DREVENT_NOT_MEET_CONDITION	Not eligible for a reward from the Dungeon Mentor Event.
-203	SMT_DUALOPTION_OPEN_INFO	Consume items below to activate Dual Option:
+203	SMT_MEDIATE_REG_WARNING_UI_TITLE	Caution!
+203	SMT_MEDIATE_REG_WARNING_UI_MESSAGE	The price of the item is lower than the <font color = '#FF0000'>average price over the past 3 days.</font> Do you want to list the item anyway?<br><br>{ItemDesc}<br>Asking price: {HopeSellPrice@money}<br>Price per unit: {EachSellPrice@money}<br>Average price: {AvgPrice@money}<br>Earnest money: {fee@money}<br>
+203	SMT_DUALOPTION_OPEN_INFO	Activating a second set of enchantment effects has the following cost:
 203	SMT_DUALOPTION_OPEN_ITEM_INFO	{ItemName} {CurrentItemCount}/{ItemCount}
-203	SMT_DUALOPTION_CHANGE_INFO	Do you want to switch options to {OPTIONNUMBER}?
-201	SMT_DUALOPTION_OPEN_SUCCESS	Activated Dual Option for {ItemName}.
-201	SMT_DUALOPTION_CHANGE_SUCCESS	Successfully switched options of {ItemName}.
-201	SMT_DUALOPTION_OPEN_CANT	Dual Option is not available to {ItemName}.
-201	SMT_DUALOPTION_OPEN_CANT_ENCHANT	Dual Option activation is available to items with +{ItemEnchant} enchantment or higher.
-203	SMT_DUALOPTION_OPEN_FAIL	Cannot activate Dual Option due to lack of materials.
-203	SMT_DUALOPTION_OPEN_FAIL_FIGHT	Cannot activate Dual Option during combat.
-203	SMT_DUALOPTION_OPEN_FAIL_ANY	Failed to activate Dual Option.
+203	SMT_DUALOPTION_CHANGE_INFO	Do you want to switch enchantment effects to set {OPTIONNUMBER}?
+201	SMT_DUALOPTION_OPEN_SUCCESS	Activated Effect Set 2 for {ItemName}.
+201	SMT_DUALOPTION_CHANGE_SUCCESS	Successfully switched effect sets for {ItemName}.
+201	SMT_DUALOPTION_OPEN_CANT	A second effect set is not available for {ItemName}.
+201	SMT_DUALOPTION_OPEN_CANT_ENCHANT	A second set of enchantment effects is available to items with +{ItemEnchant} enchantment or higher.
+203	SMT_DUALOPTION_OPEN_FAIL	Cannot activate a second enchantment effects set due to lack of materials.
+203	SMT_DUALOPTION_OPEN_FAIL_FIGHT	Cannot activate a second enchantment effects set during combat.
+203	SMT_DUALOPTION_OPEN_FAIL_ANY	Failed to activate a second effect set.
 203	SMT_DUALOPTION_OPEN_FAIL_PROGRESS	Activation failed.
-203	SMT_DUALOPTION_CHANGE_FAIL_PROGRESS	Failed to switch options.
-203	SMT_DUALOPTION_CHANGE_FAIL	Failed to change option set.
-203	SMT_DUALOPTION_CHANGE_FAIL_FIGHT	Cannot switch options during combat.
-203	SMT_DUALOPTION_STRING_BEFORE	Dual Option Activation: Shift + R-Click on a +12 or higher equipment.
-203	SMT_DUALOPTION_STRING_AFTER	Switch Dual Options: [Shift + R-Click]&#xA;View other option: [Ctrl]
+203	SMT_DUALOPTION_CHANGE_FAIL_PROGRESS	Failed to switch effects sets.
+203	SMT_DUALOPTION_CHANGE_FAIL	Failed to change effects sets.
+203	SMT_DUALOPTION_CHANGE_FAIL_FIGHT	Cannot switch effects sets during combat.
+203	SMT_DUALOPTION_STRING_BEFORE	Effect Set Activation: Shift + R-Click on an item with +12 enchantment or higher.
+203	SMT_DUALOPTION_STRING_AFTER	Switch Effect Set: [Shift + R-Click]&#xA;View other set: [Ctrl]
+302	SMT_CATCHBACK_SYSMSG_TOOCLOSE	Target is too close. Cannot use skill.
+203	SMT_CAN_USE_IN_DUNGEON_ONLY	Can only be used in dungeons.

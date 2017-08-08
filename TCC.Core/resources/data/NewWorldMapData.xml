@@ -180,6 +180,7 @@
         <Npc type="MARKER_CAMP" pos="-35223.5781,43130.4883,1809.8038" continentId="7002" nameId="99,1033" />
         <Npc type="MARKER_CAMP" pos="-43681,42596,1419" continentId="7002" nameId="99,1034" />
         <Npc type="MARKER_CLIMB" pos="-26873.2012,20771.6953,1878.6559" continentId="7002" nameId="99,60" />
+        <Npc type="MARKER_enter_Dungeon" pos="-27451,22341,1743" continentId="7002" nameId="99,9070" />
       </Section>
       <Section id="28" desc="22 마녀의 성 1F" type="dungeon" nameId="22002" floor="1" mapId="WMap_DG_ENC_1F" height="15360.0" width="15360.0" top="-15360.0" left="15360.0" mode="5" />
       <Section id="29" desc="22 마녀의 성 2F" type="dungeon" nameId="22003" floor="2" mapId="WMap_DG_ENC_2F" height="15360.0" width="15360.0" top="-15360.0" left="15360.0" mode="5">
@@ -947,6 +948,7 @@
       <Section id="9091" desc="차원의 경계" nameId="9091001" floor="0" mapId="WMap_ASE_Empty_02" height="53620.37" width="71493.82" top="79591.0" left="11869.0" mode="5" />
       <Section id="9047" desc="마녀의 성 연회장" nameId="9047001" floor="0" mapId="WMap_EX_ASE_Halloween_T42" height="15360.0" width="15360.0" top="0.0" left="0.0" mode="5" />
       <Section id="9052" desc="피의 축제장" type="dungeon" nameId="9052001" floor="1" mapId="WMap_DG_FV_SUM_DG03" height="15360.0" width="15360.0" top="-19200.0" left="96000.0" mode="5" />
+      <Section id="9070" desc="거짓말쟁이 타르스키의 놀이터" type="dungeon" nameId="9070" floor="1" mapId="WMap_Lie_Empty" height="15360.0" width="15360.0" top="76800.0" left="15360.0" mode="5" />
     </Guard>
     <Guard id="5" desc="사교도의 은신처">
       <Section id="553" desc="사교도의 은신처" type="dungeon" nameId="9089001" floor="1" mapId="WMap_DG_SD_03" height="15360.0" width="15360.0" top="76800.0" left="30720.0" mode="5" />
@@ -1077,6 +1079,12 @@
       <Section id="98231" desc="엘카이아호(퀘)_갑판" nameId="9823003" floor="1" mapId="WMap_DG_Airship_Quest_Ext" height="15360.0" width="15360.0" top="-15360.0" left="-138240.0" mode="5" />
       <Section id="9822" desc="아크데바 비밀 아지트" nameId="9822001" floor="1" mapId="WMap_RNW_B_Empty_01" height="0.0" width="0.0" top="0.0" left="0.0" mode="5" />
       <Section id="9821" desc="라크난 요새 2층" type="dungeon" nameId="9821001" floor="1" mapId="WMap_DG_RNC_Durion" height="15360.0" width="15360.0" top="-15360.0" left="-153600.0" mode="5" />
+      <Section id="9916" desc="폭풍의 엘카라스호_지휘실" type="dungeon" nameId="9916001" floor="1" mapId="WMap_DG_Airship_1F2F" height="15360.0" width="15360.0" top="61440.0" left="122880.0" mode="5" />
+      <Section id="99161" desc="폭풍의 엘카라스호_동력실" type="dungeon" nameId="9916001" floor="2" mapId="WMap_DG_Airship_3F" height="15360.0" width="15360.0" top="61440.0" left="122880.0" mode="5" />
+      <Section id="99162" desc="폭풍의 엘카라스호_갑판" type="dungeon" nameId="9916001" floor="3" mapId="WMap_DG_Airship_Ext" height="15360.0" width="15360.0" top="61440.0" left="122880.0" mode="5" />
+      <Section id="9716" desc="엘카라스호_지휘실" type="dungeon" nameId="9716001" floor="1" mapId="WMap_LDG_Airship_1F2F" height="15360.0" width="15360.0" top="61440.0" left="122880.0" mode="5" />
+      <Section id="97161" desc="엘카라스호_동력실" type="dungeon" nameId="9716001" floor="2" mapId="WMap_LDG_Airship_3F" height="15360.0" width="15360.0" top="61440.0" left="122880.0" mode="5" />
+      <Section id="97162" desc="엘카라스호_갑판" type="dungeon" nameId="9716001" floor="3" mapId="WMap_LDG_Airship_Ext" height="15360.0" width="15360.0" top="61440.0" left="122880.0" mode="5" />
       <Section id="9826" desc="라크난 요새 지하 실험실" type="dungeon" nameId="826001" floor="1" mapId="WMap_DG_RNC_Durion_Room" height="7680.0" width="7680.0" top="-3840.0" left="-134400.0" mode="5" />
       <Section id="9830" desc="몰이사냥 솔로인던" nameId="9830" floor="1" mapId="WMap_DG_Roundup_Hunting" height="15360.0" width="15360.0" top="15360.0" left="138240.0" mode="1" />
       <Section id="90691" desc="시나리오던전_라크난성의기억_지하" nameId="906901" floor="1" mapId="WMap_DG_Laknan_Memory_B1F" height="15360.0" width="15360.0" top="-30720.0" left="-76800.0" mode="5" />

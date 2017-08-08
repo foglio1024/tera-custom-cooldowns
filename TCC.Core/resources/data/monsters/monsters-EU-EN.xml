@@ -10268,7 +10268,7 @@
 		<Monster name="Book of Lies: Shields" id="504" isBoss="False" hp="366797" />
 		<Monster name="Book of Lies: Targets" id="505" isBoss="False" hp="10000" />
 		<Monster name="Granny Goodie" id="800" isBoss="False" hp="10000" />
-		<Monster name="Manglemore" id="1000" isBoss="True" hp="1271815251" />
+		<Monster name="Manglemore" id="1000" isBoss="True" hp="1577724000" />
 		<Monster name="Exit Teleportal" id="1501" isBoss="False" hp="10000" />
 	</Zone>
 	<Zone id="471" name="Necromancer Tomb" >
@@ -13885,8 +13885,8 @@
 		<Monster name="Defeat Perimos" id="913" isBoss="False" hp="0" />
 		<Monster name="Use the Teleportal to Reach the Deck and Kill Darkan" id="914" isBoss="False" hp="0" />
 		<Monster name="Herkayla" id="999" isBoss="False" hp="10000" />
-		<Monster name="Nightmare Darkan" id="1000" isBoss="True" hp="750000000" />
-		<Monster name="Nightmare Darkan" id="1001" isBoss="True" hp="300000000" />
+		<Monster name="Nightmare Darkan" id="1000" isBoss="True" hp="1900000000" />
+		<Monster name="Nightmare Darkan" id="1001" isBoss="True" hp="500000000" />
 		<Monster name="Nightmare Thrulkalath" id="1002" isBoss="False" hp="0" />
 		<Monster name="Exit Teleportal" id="1501" isBoss="False" hp="10000" />
 		<Monster name="Deck Teleportal" id="1502" isBoss="False" hp="10000" />
@@ -13897,7 +13897,7 @@
 		<Monster name="Elite Bloodwrath Warrior" id="91602" isBoss="False" hp="0" />
 		<Monster name="Elite Bloodwrath Sorcerer" id="91603" isBoss="False" hp="0" />
 		<Monster name="Elite Bloodwrath Mystic" id="91604" isBoss="False" hp="0" />
-		<Monster name="Nightmare Perimos" id="91606" isBoss="True" hp="800000000" />
+		<Monster name="Nightmare Perimos" id="91606" isBoss="True" hp="1800000000" />
 		<Monster name="Aeonalis Pylon" id="91618" isBoss="False" hp="110000" />
 		<Monster name="Aeonalis Pylon" id="91621" isBoss="False" hp="110000" />
 		<Monster name="Aeonalis Pylon" id="91622" isBoss="False" hp="110000" />
@@ -13906,15 +13906,15 @@
 		<Monster name="Aeonalis Pylon" id="91625" isBoss="False" hp="110000" />
 		<Monster name="Aeonalis Pylon" id="91628" isBoss="False" hp="110000" />
 		<Monster name="Aeonalis Pylon" id="91629" isBoss="False" hp="110000" />
-		<Monster name="Darkan's Servant" id="91638" isBoss="False" hp="30000000" />
-		<Monster name="Nightmare Putrion" id="91650" isBoss="True" hp="220000000" />
+		<Monster name="Darkan's Servant" id="91638" isBoss="False" hp="150000000" />
+		<Monster name="Nightmare Putrion" id="91650" isBoss="True" hp="700000000" />
 		<Monster name="Nightmare Perimos" id="91660" isBoss="False" hp="90000000" />
-		<Monster name="Elite Quadriliar" id="91671" isBoss="False" hp="10000000" />
-		<Monster name="Elite Barbed Laceras" id="91672" isBoss="False" hp="10000000" />
-		<Monster name="Elite Hulking Salcata" id="91673" isBoss="False" hp="47000000" />
-		<Monster name="Elite Bloodwrath Archer" id="91674" isBoss="False" hp="9500000" />
-		<Monster name="Elite Bloodwrath Priest" id="91675" isBoss="False" hp="9500000" />
-		<Monster name="Elite Bloodwrath Bladedancer" id="91676" isBoss="False" hp="12000000" />
+		<Monster name="Elite Quadriliar" id="91671" isBoss="False" hp="40000000" />
+		<Monster name="Elite Barbed Laceras" id="91672" isBoss="False" hp="40000000" />
+		<Monster name="Elite Hulking Salcata" id="91673" isBoss="False" hp="100000000" />
+		<Monster name="Elite Bloodwrath Archer" id="91674" isBoss="False" hp="70000000" />
+		<Monster name="Elite Bloodwrath Priest" id="91675" isBoss="False" hp="40000000" />
+		<Monster name="Elite Bloodwrath Bladedancer" id="91676" isBoss="False" hp="45000000" />
 		<Monster name="Dougal" id="99901" isBoss="False" hp="366797" />
 		<Monster name="Dougal's Escort" id="99902" isBoss="False" hp="91545" />
 		<Monster name="Dougal's Escort" id="99903" isBoss="False" hp="91545" />
@@ -13953,10 +13953,6 @@
 		<Monster name="Vergos's Plunder" id="9501" isBoss="False" hp="500000" />
 		<Monster name="Vergos's Plunder" id="9502" isBoss="False" hp="500000" />
 		<Monster name="Vergos's Hoard" id="9503" isBoss="False" hp="500000" />
-		<Monster name="Big black ball" id="3017" isBoss="True" hp="86625000" />
-        <Monster name="Big red ball" id="3016" isBoss="True" hp="86625000" />
-        <Monster name="Red ball" id="3014" isBoss="True" hp="115500000" />
-        <Monster name="Black ball" id="3015" isBoss="True" hp="115500000" />
 	</Zone>
 	<Zone id="969" name="Lilith's Keep (Hard)" >
 		<Monster name="Kill Nightmare Pyrepelt" id="911" isBoss="False" hp="0" />
@@ -14479,6 +14475,7 @@
 		<Monster name="Thrall of Wrath" id="10238007" isBoss="False" hp="9918703" />
 		<Monster name="Thrall of Wrath" id="10238100" isBoss="False" hp="0" />
 		<Monster name="Dakuryon's Shade" id="20150805" isBoss="False" hp="999999999" />
+		<Monster name="ギガントクーマス" id="20170711" isBoss="False" hp="1496000000" />
 		<Monster name="ST-1" id="30301001" isBoss="False" hp="36532" />
 		<Monster name="ST-2" id="30301002" isBoss="False" hp="56414" />
 		<Monster name="ST-3" id="30301003" isBoss="False" hp="90553" />

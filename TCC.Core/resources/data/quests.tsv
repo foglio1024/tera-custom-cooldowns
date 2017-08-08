@@ -1205,24 +1205,26 @@
 700008001	Conquer the Demokron Factory
 700013001	Assault Akasha!
 700014001	Assault Baracos!
+700015001	Teach Manglemore a Lesson
 700027001	Defend Velik's Hold
 700028001	Defend Velik's Hold (Hard)
 700029001	Reclaim Velik's Sanctuary
 700030001	Reclaim Velik's Sanctuary (Hard)
-700031001	Clear Bathysmal Rise (Hard)
 871001	(Guild) Suppression Orders: Kazuur Syndicate
+700031001	Clear Bathysmal Rise (Hard)
 700032001	Conquer Akeron's Inferno (Hard)
 700106001	Burn Out the Abscess
 700108001	Conquer the Demokron Factory
 700113001	Assault Akasha!
 700114001	Assault Baracos!
+700115001	Teach Manglemore a Lesson
 700122001	Attack Sky Cruiser Endeavor (Hard)
 700127001	Defend Velik's Hold
 700128001	Defend Velik's Hold (Hard)
-700129001	Reclaim Velik's Sanctuary
-700130001	Reclaim Velik's Sanctuary (Hard)
 238001	Hunting the Big Cats
 872001	(Guild) Clearing the Catacombs
+700129001	Reclaim Velik's Sanctuary
+700130001	Reclaim Velik's Sanctuary (Hard)
 700131001	Clear Bathysmal Rise (Hard)
 700132001	Conquer Akeron's Inferno (Hard)
 800001001	Assault the Bastion of Lok!
@@ -1231,9 +1233,9 @@
 800004001	Assault the Cultists' Refuge!
 800005001	Assault the Necromancer Tomb!
 800006001	Assault the Golden Labyrinth!
+880001	(Vanarch) Depth Charge
 800007001	Assault Akasha's Hideout!
 800008001	Assault Saleron's Sky Garden!
-880001	(Vanarch) Depth Charge
 800009001	Assault the Labyrinth of Terror!
 800010001	Assault the Ebon Tower!
 800012001	Defeat Valona
@@ -1242,9 +1244,9 @@
 800016001	
 800017001	
 800018001	
+901001	Enemies in the Midst
 800030001	Eliminate Basilisks!
 800031001	Protect Godric's Farm!
-901001	Enemies in the Midst
 800033001	Eliminate Juggernaut Mercenaries
 800034001	Eliminate Fimbrilisks!
 800035001	Urgent :  Eliminate ovoliths!
@@ -1253,9 +1255,9 @@
 800038001	Eliminate Lurking Teraliths!
 800039001	Eliminate Giant Gladiators!
 800040001	Eliminate Desert Lightning Kumases!
+902001	Sic Semper Proditores
 800041001	Eliminate Patient Lithikumases!
 800042001	Eliminate Onyx Hydraths!
-902001	Sic Semper Proditores
 800043001	Eliminate Ravenous Basilisks!
 800044001	Eliminate Naga Battlemasters!
 800045001	Eliminate the Naga Leviathans!
@@ -1264,9 +1266,9 @@
 800050001	The Day Is Mine!
 800051001	The Day Is Mine!
 800052001	The Day Is Mine!
+903001	Relic of a Bygone Age
 800053001	The Day Is Mine!
 800054001	The Day Is Mine!
-903001	Relic of a Bygone Age
 800055001	The Day Is Mine!
 800056001	The Day Is Mine!
 800057001	The Day Is Mine!
@@ -1275,9 +1277,9 @@
 800060001	Sacrifice Plays
 800061001	Grizzly Hunt
 800062001	Eliminate the Argonomorphs!
+904001	The Fall of the Betrayer
 800063001	Clear the Twisted Plains
 800064001	Weaken the Lokian Force
-904001	The Fall of the Betrayer
 800065001	Eliminate the Brainwashed!
 800066001	Disband the Mercenary Company
 800067001	Eliminate the Kamaras
@@ -1286,9 +1288,9 @@
 800070001	Noruk Hunt
 800071001	A Rest For the Wendigos
 800101001	Save the Forest
+921001	Crocuta Blankets for the Night
 800104001	Save the Hills
 800105001	Save the Cliffs
-921001	Crocuta Blankets for the Night
 800106001	Defeat Vampirs
 800107001	Clean Out the Mines
 800108001	Protect the Outpost
@@ -1297,9 +1299,9 @@
 800111001	Quench the Desert Fire
 800112001	Clean up the Aurum Road
 800113001	Cleanse the Dark Cathedral
+922001	Eliminate the Raging Beasts
 800114001	Bring down the Brogars
 800115001	Purify the Blightwood
-922001	Eliminate the Raging Beasts
 800116001	Whittle the Woods
 800117001	Plunder the Pirates
 800118001	Defend the Mountain
@@ -1308,9 +1310,9 @@
 800121001	Crush the Caves
 800122001	Free the Feral Valley
 800123001	Thieves in the Temple
+923001	Missing Supplies from Velika
 800124001	Heroes versus the Volcano
 800125001	Reclaim the Caverns
-923001	Missing Supplies from Velika
 800126001	Protect the Darkquaver Woods
 800127001	Protect the Susurrus Woods
 800128001	Protect the Tor
@@ -1319,9 +1321,9 @@
 800131001	Clean up the Vale
 800132001	Purify Tirkai Forest
 800133001	Hold the Lines
+924001	The Dangerous Nest
 800134001	Clean out the Towers
 800135001	Defend the Front Lines
-924001	The Dangerous Nest
 800136001	Preserve the Peace
 800137001	Kill Stonebeaks
 800138001	Defeat Devan Brigands
@@ -1330,10 +1332,10 @@
 800141001	Defeat Fallen Defender
 800142001	Defeat Devan Brigands
 800143001	Defeat Lok Believers
-800144001	Kill Mossy Ghilliedhus
-810001001	Attack the Bastion of Lok!
 239001	The Storm Has Passed
 925001	Desperate Struggle for Survival
+800144001	Kill Mossy Ghilliedhus
+810001001	Attack the Bastion of Lok!
 810002001	Attack Sinestral Manor!
 810003001	Attack Saravash's Ascent!
 810004001	Attack the Cultists' Refuge!
@@ -1342,9 +1344,9 @@
 810007001	Assault Akasha's Hideout!
 810008001	Assault Saleron's Sky Garden!
 810009001	Assault the Labyrinth of Terror!
+926001	Beholder of Darkness
 810010001	Assault the Ebon Tower!
 810012001	Defeat Valona
-926001	Beholder of Darkness
 810030001	Eliminate Basilisks!
 810031001	Protect Godric's Farm!
 810033001	Eliminate Juggernaut Mercenaries
@@ -1353,9 +1355,9 @@
 810036001	Eliminate Dusky Basilisks!
 810037001	Eliminate Azarel's Juggernauts!
 810038001	Eliminate Lurking Teraliths!
+927001	Eyes in the Darkness
 810039001	Eliminate Giant Gladiators!
 810040001	Eliminate Desert Lightning Kumases!
-927001	Eyes in the Darkness
 810041001	Eliminate Patient Lithikumases!
 810042001	Eliminate Onyx Hydraths!
 810043001	Eliminate Ravenous Basilisks!
@@ -1364,9 +1366,9 @@
 810046001	Clean up the Hatchery!
 810047001	Eliminate the Sandlurker Lizards!
 810050001	The Day Is Mine!
+928001	Cook the Chefs
 810051001	The Day Is Mine!
 810052001	The Day Is Mine!
-928001	Cook the Chefs
 810053001	The Day Is Mine!
 810054001	The Day Is Mine!
 810055001	The Day Is Mine!
@@ -1375,9 +1377,9 @@
 810058001	The Day Is Mine!
 810059001	Avenge the Fallen
 810060001	Sacrifice Plays
+929001	Cure for Crazy
 810061001	Grizzly Hunt
 810062001	Eliminate the Argonomorphs!
-929001	Cure for Crazy
 810063001	Clear the Twisted Plains
 810064001	Weaken the Lokian Force
 810065001	Eliminate the Brainwashed!
@@ -1386,9 +1388,9 @@
 810068001	Eliminate Prion Njalvar!
 810069001	Clear Mags Tohopka
 810070001	Noruk Hunt
+930001	Don't Play with Knives
 810071001	A Rest For the Wendigos
 810101001	Save the Forest
-930001	Don't Play with Knives
 810104001	Save the Hills
 810105001	Save the Cliffs
 810106001	Defeat Vampirs
@@ -1397,9 +1399,9 @@
 810109001	Clean out the Labyrinth
 810110001	End the Rebellion
 810111001	Quench the Desert Fire
+931001	Gula Leftovers
 810112001	Clean up the Aurum Road
 810113001	Cleanse the Dark Cathedral
-931001	Gula Leftovers
 810114001	Bring down the Brogars
 810115001	Purify the Blightwood
 810116001	Whittle the Woods
@@ -1408,9 +1410,9 @@
 810119001	Clean out the Citadel
 810120001	Zero out the Zone
 810121001	Crush the Caves
+932001	Pride of the Protectors
 810122001	Free the Feral Valley
 810123001	Thieves in the Temple
-932001	Pride of the Protectors
 810124001	Heroes versus the Volcano
 810125001	Reclaim the Caverns
 810126001	Protect the Darkquaver Woods
@@ -1419,9 +1421,9 @@
 810129001	Clean out the Crypt
 810130001	Pacify The Plain
 810131001	Clean up the Vale
+933001	The Price of Hubris
 810132001	Purify Tirkai Forest
 810133001	Hold the Lines
-933001	The Price of Hubris
 810134001	Clean out the Towers
 810135001	Defend the Front Lines
 810136001	Preserve the Peace
@@ -1430,9 +1432,9 @@
 810139001	Get the Stolen Money Bags Back
 810140001	Defeat Agitated Sporewalker
 810141001	Defeat Fallen Defender
+934001	Mysterious Disappearance
 810142001	Defeat Devan Brigands
 810143001	Going on the Offensive
-934001	Mysterious Disappearance
 810144001	Kill Mossy Ghilliedhus
 980051001	Hear the Roar of Iron!
 980052001	Hear the Roar of Iron!
@@ -1441,10 +1443,10 @@
 980055001	Hear the Roar of Iron!
 980056001	Hear the Roar of Iron!
 980057001	Hear the Roar of Iron!
-980058001	Hear the Roar of Iron!
-980059001	Hear the Roar of Iron!
 240001	A Brutal Sort of Mercy
 935001	Remaining Proof
+980058001	Hear the Roar of Iron!
+980059001	Hear the Roar of Iron!
 981051001	Hear the Roar of Iron!
 981052001	Hear the Roar of Iron!
 981053001	Hear the Roar of Iron!
@@ -1453,9 +1455,9 @@
 981056001	Hear the Roar of Iron!
 981057001	Hear the Roar of Iron!
 981058001	Hear the Roar of Iron!
+936001	The Best Offense Is...Dentistry
 981059001	Hear the Roar of Iron!
 983001001	Win a match in Celestial Arena!
-936001	The Best Offense Is...Dentistry
 983002001	Win a match in Celestial Arena!
 983101001	Restore the Echoes of Aranea
 983102001	Restore the Echoes of Aranea
@@ -1464,9 +1466,9 @@
 999603001	Hunt Brutal Ovoliths
 999604001	Hunt Brutal Bloodbound Teraliths
 999605001	Hunt Brutal Fimbrilisks
+937001	Beheading a Nightmare
 999606001	Hunt Brutal Searing Fangspawns
 999607001	Hunt Brutal Naga Battlemasters
-937001	Beheading a Nightmare
 999608001	Hunt Brutal Iron Giants!
 999609001	Hunt Brutal Onyx Hydraths
 999701001	Hunt Brutal Basilisks
@@ -1475,9 +1477,9 @@
 999704001	Hunt Brutal Bloodbound Teraliths
 999705001	Hunt Brutal Fimbrilisks!
 999706001	Hunt Brutal Searing Fangspawns
+938001	The Circle Is Complete
 999707001	Hunt Brutal Naga Battlemasters
 999708001	Hunt Brutal Iron Giants
-938001	The Circle Is Complete
 999709001	Hunt Brutal Onyx Hydraths!
 999805001	Clear Manaya's Core
 999806001	Storm the Armory!
@@ -1486,9 +1488,9 @@
 999811001	Timmbbeeerrrr!
 999812001	Marauding Mandrills
 999813001	Death in the Valley
+970001	(Guild) Paws in Mid-Battle
 999814001	Contested Territory
 999815001	Preying on the Parthians
-970001	(Guild) Paws in Mid-Battle
 999816001	Intrepid Heart
 999817001	Operation Overkill
 999818001	Parthian Purification
@@ -1497,9 +1499,9 @@
 999821001	Lake Monsters
 999822001	Training Exorcise
 999823001	Checking IDs
+971001	(Guild) Lust and Deceit
 999824001	Lime Time
 999825001	Hot Springs Tonight
-971001	(Guild) Lust and Deceit
 999826001	Imperial Entanglements
 999827001	Bone Fragments
 999828001	Supply the Demand
@@ -1508,9 +1510,9 @@
 999831001	Harrier and Harrier
 999832001	Rockin' Ruins
 999833001	Rooted in Alchemy
+972001	(Guild) Chaos and Destruction
 999834001	Spare Change
 999835001	Requiem for Baraka
-972001	(Guild) Chaos and Destruction
 999836001	Terrible Turtle, Dove
 999837001	More Things Change
 999838001	Officer Material
@@ -1519,9 +1521,9 @@
 999841001	Cutting a Swath
 999842001	Grounded!
 999843001	Dark Predations
+973001	(Guild) Suppression Orders: Tabruk
 999844001	No Laughing Matter
 999845001	Badges of Honor
-973001	(Guild) Suppression Orders: Tabruk
 999846001	Demokron Demolition
 999847001	Vanquished Fury
 999848001	Slayer of the Pack
@@ -1530,9 +1532,9 @@
 999851001	Charge Through the Cannonballs!
 999853001	Take It or Seize It!
 999854001	I'll Show You the Meaning of Power!
+981001	(Vanarch) Suppression Orders: Tabruk
 999855001	A Purrfect Mission
 999856001	Essential Oils
-981001	(Vanarch) Suppression Orders: Tabruk
 999857001	Continue to Advance
 999861001	Demokraxus Must Die!
 999863001	Into the Deep End
@@ -1541,9 +1543,9 @@
 999875001	Guwangi Purge
 999876001	Punishing Parthians
 999877001	Officer Material
+1021001	Island Vacation
 999878001	Demokrons are the Disease
 999879001	Intrepid Heart
-1021001	Island Vacation
 999880001	Lime Time
 999881001	Rooted in Alchemy
 999882001	Requiem for Baraka
@@ -1552,10 +1554,10 @@
 999885001	Sandcastle on Summer Beach
 999886001	Sandcastle on Summer Beach
 999888001	Taproot Shortage
-999889001	Explore the Channelworks
-999891001	Meet the Challenge
 241001	An Errand to Aron
 1022001	Breaking the Shells
+999889001	Explore the Channelworks
+999891001	Meet the Challenge
 999892001	Step Right Up!
 999897001	That Ain't Right!
 999898001	Total Warfare
@@ -1564,9 +1566,9 @@
 999906001	Sabex Scrub!
 999907001	Macellarius Catacombs Ambush!
 999909001	Apply for Dungeon Raiders!
+1023001	A Little Long in the Tooth
 999911001	Timmbbeeerrrr!
 999912001	Marauding Mandrills
-1023001	A Little Long in the Tooth
 999913001	Death in the Valley
 999914001	Contested Territory
 999915001	Preying on the Parthians
@@ -1575,9 +1577,9 @@
 999918001	Parthian Purification
 999919001	Egg On
 999920001	Unbearable
+1024001	The Shell Game
 999921001	Lake Monsters
 999922001	Training Exorcise
-1024001	The Shell Game
 999923001	Checking IDs
 999924001	Lime Time
 999925001	Hot Springs Tonight
@@ -1586,9 +1588,9 @@
 999928001	Supply the Demand
 999929001	Creepy-crawlies
 999930001	Punishing Parthians
+1025001	Mycanar Trouble
 999931001	Harrier and Harrier
 999932001	Rockin' Ruins
-1025001	Mycanar Trouble
 999933001	Rooted in Alchemy
 999934001	Spare Change
 999935001	Requiem for Baraka
@@ -1597,9 +1599,9 @@
 999938001	Officer Material
 999939001	Don't Pay the Ferryman
 999940001	Waylaid!
+1026001	A Makeup Test
 999941001	Cutting a Swath
 999942001	Grounded!
-1026001	A Makeup Test
 999943001	Dark Predations
 999944001	No Laughing Matter
 999945001	Badges of Honor
@@ -1608,9 +1610,9 @@
 999948001	Slayer of the Pack
 999949001	Death to Demokrons!
 999950001	The Time of Purification
+1027001	It's Flotsam...or Is It Jetsam
 999951001	Charge Through the Cannonballs!
 999953001	Take It or Seize It!
-1027001	It's Flotsam...or Is It Jetsam
 999954001	I'll Show You the Meaning of Power!
 999955001	A Purrfect Mission
 999956001	Essential Oils
@@ -1619,9 +1621,9 @@
 999963001	Bathysmal Rise
 999965001	Taking Trophies
 999969001	Assault the Dreadnaught
+1028001	Reach the Beach
 999975001	Guwangi Purge
 999976001	Punishing Parthians
-1028001	Reach the Beach
 999977001	Officer Material
 999978001	Demokrons are the Disease
 999979001	Intrepid Heart
@@ -1630,9 +1632,9 @@
 999982001	Requiem for Baraka
 999983001	Gotta Grab 'em All
 999984001	Sarberry Deliciousness for Summer!
+1029001	Scales of Justice
 999985001	Sandcastle on Summer Beach
 999986001	Sandcastle on Summer Beach
-1029001	Scales of Justice
 999988001	Taproot Shortage
 999989001	Explore the Channelworks
 999990001	Let's Have A Snowball Fight!

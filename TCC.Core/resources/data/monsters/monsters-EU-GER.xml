@@ -10268,7 +10268,7 @@
 		<Monster name="Tagebuch eines Betrogenen" id="504" isBoss="False" hp="366797" />
 		<Monster name="Tagebuch eines Entflohenen" id="505" isBoss="False" hp="10000" />
 		<Monster name="Seltsame Oma" id="800" isBoss="False" hp="10000" />
-		<Monster name="Tarski" id="1000" isBoss="True" hp="1271815251" />
+		<Monster name="Tarski" id="1000" isBoss="True" hp="1577724000" />
 		<Monster name="Teleportal" id="1501" isBoss="False" hp="10000" />
 	</Zone>
 	<Zone id="471" name="Nekromantenkrypta" >
@@ -13855,8 +13855,8 @@
 		<Monster name="Besiegt Perimos" id="913" isBoss="False" hp="0" />
 		<Monster name="Benutzt das Teleportal, um das Schiff zu erreichen und Darkan zu töten." id="914" isBoss="False" hp="0" />
 		<Monster name="Herkayla" id="999" isBoss="False" hp="10000" />
-		<Monster name="Darkan des Albtraums" id="1000" isBoss="True" hp="750000000" />
-		<Monster name="Darkan des Albtraums" id="1001" isBoss="True" hp="300000000" />
+		<Monster name="Darkan des Albtraums" id="1000" isBoss="True" hp="1900000000" />
+		<Monster name="Darkan des Albtraums" id="1001" isBoss="True" hp="500000000" />
 		<Monster name="Thrulkalath des Albtraums" id="1002" isBoss="False" hp="0" />
 		<Monster name="Ausgangsteleportal" id="1501" isBoss="False" hp="10000" />
 		<Monster name="Ausgangsteleportal" id="1502" isBoss="False" hp="10000" />
@@ -13867,7 +13867,7 @@
 		<Monster name="Eliteblutzornkrieger" id="91602" isBoss="False" hp="0" />
 		<Monster name="Eliteblutzornzauberer" id="91603" isBoss="False" hp="0" />
 		<Monster name="Eliteblutzornmystiker" id="91604" isBoss="False" hp="0" />
-		<Monster name="Perimos des Albtraums" id="91606" isBoss="True" hp="800000000" />
+		<Monster name="Perimos des Albtraums" id="91606" isBoss="True" hp="1800000000" />
 		<Monster name="Aeonalispfeiler" id="91618" isBoss="False" hp="110000" />
 		<Monster name="Aeonalispfeiler" id="91621" isBoss="False" hp="110000" />
 		<Monster name="Aeonalispfeiler" id="91622" isBoss="False" hp="110000" />
@@ -13876,15 +13876,15 @@
 		<Monster name="Aeonalispfeiler" id="91625" isBoss="False" hp="110000" />
 		<Monster name="Aeonalispfeiler" id="91628" isBoss="False" hp="110000" />
 		<Monster name="Aeonalispfeiler" id="91629" isBoss="False" hp="110000" />
-		<Monster name="Darkans Diener" id="91638" isBoss="False" hp="30000000" />
-		<Monster name="Putrion des Albtraums" id="91650" isBoss="True" hp="220000000" />
+		<Monster name="Darkans Diener" id="91638" isBoss="False" hp="150000000" />
+		<Monster name="Putrion des Albtraums" id="91650" isBoss="True" hp="700000000" />
 		<Monster name="Perimos des Albtraums" id="91660" isBoss="False" hp="90000000" />
-		<Monster name="Elitequadriliar" id="91671" isBoss="False" hp="10000000" />
-		<Monster name="Boshafter Elitelaceras" id="91672" isBoss="False" hp="10000000" />
-		<Monster name="Bulliger Elitesulcata" id="91673" isBoss="False" hp="47000000" />
-		<Monster name="Eliteblutzornbogenschütze" id="91674" isBoss="False" hp="9500000" />
-		<Monster name="Eliteblutzornpriester" id="91675" isBoss="False" hp="9500000" />
-		<Monster name="Eliteblutzornklingenschwinger" id="91676" isBoss="False" hp="12000000" />
+		<Monster name="Elitequadriliar" id="91671" isBoss="False" hp="40000000" />
+		<Monster name="Boshafter Elitelaceras" id="91672" isBoss="False" hp="40000000" />
+		<Monster name="Bulliger Elitesulcata" id="91673" isBoss="False" hp="100000000" />
+		<Monster name="Eliteblutzornbogenschütze" id="91674" isBoss="False" hp="70000000" />
+		<Monster name="Eliteblutzornpriester" id="91675" isBoss="False" hp="40000000" />
+		<Monster name="Eliteblutzornklingenschwinger" id="91676" isBoss="False" hp="45000000" />
 		<Monster name="Dougal" id="99901" isBoss="False" hp="366797" />
 		<Monster name="Dougals Eskorte" id="99902" isBoss="False" hp="91545" />
 		<Monster name="Dougals Eskorte" id="99903" isBoss="False" hp="91545" />
@@ -14436,6 +14436,7 @@
 		<Monster name="Leibeigener des Zorns" id="10238007" isBoss="False" hp="9918703" />
 		<Monster name="Leibeigener des Zorns" id="10238100" isBoss="False" hp="0" />
 		<Monster name="Durions Phantom" id="20150805" isBoss="False" hp="999999999" />
+		<Monster name="ギガントクーマス" id="20170711" isBoss="False" hp="1496000000" />
 		<Monster name="Zwillingsgeschütz I" id="30301001" isBoss="False" hp="36532" />
 		<Monster name="Zwillingsgeschütz II" id="30301002" isBoss="False" hp="56414" />
 		<Monster name="Zwillingsgeschütz III" id="30301003" isBoss="False" hp="90553" />
