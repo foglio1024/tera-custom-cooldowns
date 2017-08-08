@@ -284,6 +284,8 @@ namespace TCC.Parsing
             SkillManager.Clear();
             EntitiesManager.ClearNPC();
             GroupWindowViewModel.Instance.ClearAll();
+            InfoWindowViewModel.Instance.ClearEvents();
+
         }
 
 
@@ -409,7 +411,12 @@ namespace TCC.Parsing
             var friend = ChatWindowViewModel.Instance.Friends.FirstOrDefault(f => f.PlayerId == x.PlayerId);
             if (friend == null) return;
             var opcode = "SMT_FRIEND_WALK_INTO_SAME_AREA";
-            var areaName = MapDatabase.Names[MapDatabase.Worlds[x.WorldId].Guards[x.GuardId].Sections[x.SectionId].NameId];
+            string areaName = x.SectionId.ToString();
+            try
+            {
+                areaName = MapDatabase.Names[MapDatabase.Worlds[x.WorldId].Guards[x.GuardId].Sections[x.SectionId].NameId];
+            }
+            catch (Exception){ }
             var srvMsg = "@0\vUserName\v" + friend.Name + "\vAreaName\v" + areaName;
             SystemMessages.Messages.TryGetValue(opcode, out SystemMessage m);
 
