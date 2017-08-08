@@ -38,14 +38,9 @@ namespace TCC.Data
         {
             var bEntries = GetMaxBaseRuns();
             var eliteMultiplier = SessionManager.IsElite ? 2 : 1;
-            if (Id == 9713)
-            {
-                return bEntries;
-            }
-            else
-            {
-                return bEntries * eliteMultiplier;
-            }
+
+            return bEntries * eliteMultiplier;
+
         }
     }
 }
