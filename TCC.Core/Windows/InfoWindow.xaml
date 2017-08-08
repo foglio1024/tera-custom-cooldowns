@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:TCC.Windows"
         xmlns:viewmodels="clr-namespace:TCC.ViewModels"
         xmlns:controls="clr-namespace:TCC.Controls" Loaded="Window_Loaded"
-        mc:Ignorable="d" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize" Width="Auto" Height="Auto"
-        Title="InfoWindow" SizeToContent="WidthAndHeight" Background="Transparent" Topmost="False" ShowInTaskbar="False">
+        mc:Ignorable="d" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize" Width="1100" Height="Auto"
+        Title="InfoWindow" SizeToContent="WidthAndHeight" Background="Transparent" Topmost="False" ShowInTaskbar="False" ShowActivated="True">
     <Window.DataContext>
         <viewmodels:InfoWindowViewModel/>
     </Window.DataContext>
@@ -19,7 +19,7 @@
             <controls:DungeonInfoControl/>
         </DataTemplate>
     </Window.Resources>
-    <Grid Margin="15" Height="Auto" Opacity=".97">
+    <Grid Margin="15" Height="Auto" Opacity="1"  UseLayoutRounding="True" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -36,7 +36,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Daily info" VerticalAlignment="Center" Margin="10,4" Foreground="#7000" FontSize="24" FontWeight="Thin" IsHitTestVisible="False"/>
+            <TextBlock Text="Daily info" VerticalAlignment="Center" Margin="10,4" Opacity=".4" FontSize="24" 
+                       FontWeight="Thin" IsHitTestVisible="False"/>
 
             <Button Style="{StaticResource ButtonMainStyle}" Grid.Column="2" 
                     VerticalAlignment="Stretch" Width="40" Margin="0" Click="CloseWindow" VerticalContentAlignment="Center">
@@ -49,7 +50,7 @@
         <Grid Grid.Row="1" Margin="0,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -61,11 +62,11 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <!--Title-->
-                <TextBlock FontSize="35" Opacity=".2" TextAlignment="Center" Margin="0,0,0,10"
+                <TextBlock FontSize="24" Opacity=".4" TextAlignment="Center" Margin="0,0,0,10"
                            HorizontalAlignment="Stretch" VerticalAlignment="Top" FontWeight="Thin" >Vanguard Initiative</TextBlock>
                 <!--Content-->
                 <ItemsControl Grid.Row="1" ItemsSource="{Binding Instance.Characters}" 
-                              ItemTemplate="{StaticResource vang}" VerticalAlignment="Top"  UseLayoutRounding="False">
+                              ItemTemplate="{StaticResource vang}" VerticalAlignment="Top"  >
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid  Columns="4" VerticalAlignment="Stretch"/>
@@ -74,13 +75,13 @@
                 </ItemsControl>
             </Grid>
             <!--Dungeons-->
-            <Grid Grid.Row="1" Grid.Column="2" UseLayoutRounding="True" Margin="10">
+            <Grid Grid.Row="1" Grid.Column="2" Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <!--Title-->
-                <TextBlock FontSize="35" Opacity=".2" HorizontalAlignment="Stretch" Margin="0,0,0,10" TextAlignment="Center"
+                <TextBlock FontSize="24" Opacity=".4" HorizontalAlignment="Center" Margin="0,0,0,10" TextAlignment="Center"
                        VerticalAlignment="Center" FontWeight="Thin" >Dungeon entries</TextBlock>
                 <!--Content-->
                 <StackPanel Grid.Row="1" x:Name="dngICs">
@@ -88,7 +89,7 @@
                                VerticalAlignment="Top" Margin="0,0,0,5" Height="Auto" >
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <UniformGrid Columns="2" />
+                                <UniformGrid Columns="3" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
@@ -96,7 +97,7 @@
                                VerticalAlignment="Top" Margin="0,0,0,5" Height="Auto" >
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <UniformGrid Columns="2"/>
+                                <UniformGrid Columns="3"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
@@ -104,7 +105,7 @@
                                VerticalAlignment="Top" Margin="0,0,0,5" Height="Auto" >
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <UniformGrid Columns="2"/>
+                                <UniformGrid Columns="3"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
@@ -112,71 +113,22 @@
                                VerticalAlignment="Top" Margin="0,0,0,5" Height="Auto" >
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <UniformGrid Columns="2"/>
+                                <UniformGrid Columns="3"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
                     <ItemsControl Grid.Row="1" ItemsSource="{Binding Instance.T5Dungs}" ItemTemplate="{StaticResource dngs}" Name="T5IC"
-                               VerticalAlignment="Top" Margin="0,5,0,0" Height="Auto" >
+                               VerticalAlignment="Top" Margin="0,0,0,0" Height="Auto" >
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <UniformGrid Columns="2"/>
+                                <UniformGrid Columns="3"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
                 </StackPanel>
             </Grid>
             <!--Timeline-->
-            <Grid Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="0,10,0,0" Visibility="Collapsed">
-                <Rectangle Height="4" 
-                           Width="1000" 
-                           HorizontalAlignment="Stretch" 
-                           Margin="20" 
-                           VerticalAlignment="Center"
-                           Fill="#ddd"
-                           x:Name="TimelineBase">
-                </Rectangle>
-                <Border Height="10" 
-                           MinWidth="10"
-                           CornerRadius="5"
-                           Background="#f56"
-                           BorderBrush="White"
-                           BorderThickness="2"
-                           HorizontalAlignment="Left"
-                           Margin="20">
-                    <FrameworkElement Width="{Binding ElementName=TimelineBase, Path=Width}" HorizontalAlignment="Center">
-                        <FrameworkElement.LayoutTransform>
-
-                            <ScaleTransform ScaleX="0"></ScaleTransform>
-                        </FrameworkElement.LayoutTransform>
-                    </FrameworkElement>
-                    <Border.Effect>
-                        <DropShadowEffect ShadowDepth="1" BlurRadius="3" Opacity=".3"></DropShadowEffect>
-                    </Border.Effect>
-                    <Border.RenderTransform>
-                        <TranslateTransform X="0"></TranslateTransform>
-                    </Border.RenderTransform>
-                </Border>
-
-                <!--Time marker-->
-                <Grid Margin="5,0,0,0" HorizontalAlignment="Left">
-                    <Path Data="M 0,0 1,1, 2,0" Fill="White" Stretch="Uniform" Height="10">
-                        <Path.RenderTransform>
-                            <TranslateTransform Y="12"></TranslateTransform>
-                        </Path.RenderTransform>
-                    </Path>
-                    <Border Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                        Padding="3,1" CornerRadius="3">
-                        <TextBlock Foreground="#9000" FontSize="15" FontWeight="Normal">12:22</TextBlock>
-                    </Border>
-                    <Grid.Effect>
-                        <DropShadowEffect Opacity=".4" ShadowDepth="1" BlurRadius="3"></DropShadowEffect>
-                    </Grid.Effect>
-                    <Grid.RenderTransform>
-                        <TranslateTransform Y="-20" X="750"></TranslateTransform>
-                    </Grid.RenderTransform>
-                </Grid>
-            </Grid>
+            <controls:TimelineControl Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="10,10,10,10"/>
         </Grid>
 
         <Grid.Effect>

@@ -52,7 +52,7 @@ namespace TCC.Windows
                     var container = ICs[icIndex].ItemContainerGenerator.ContainerFromIndex(itemIndex);
                     if (container != null)
                     {
-                        DungeonInfoControl dgc = GetChild<DungeonInfoControl>(container);
+                        DungeonInfoControl dgc = Utils.GetChild<DungeonInfoControl>(container);
                         if (dgc != null) dgc.AnimateIn();
                     }
 
@@ -65,27 +65,6 @@ namespace TCC.Windows
                 itemIndex = 0;
             }
 
-        }
-        public T GetChild<T>(DependencyObject obj) where T : DependencyObject
-        {
-            DependencyObject child = null;
-            for (Int32 i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
-            {
-                child = VisualTreeHelper.GetChild(obj, i);
-                if (child != null && child.GetType() == typeof(T))
-                {
-                    break;
-                }
-                else if (child != null)
-                {
-                    child = GetChild<T>(child);
-                    if (child != null && child.GetType() == typeof(T))
-                    {
-                        break;
-                    }
-                }
-            }
-            return child as T;
         }
         private void CloseWindow(object sender, RoutedEventArgs e)
         {
@@ -117,7 +96,7 @@ namespace TCC.Windows
                 Topmost = false; Topmost = true;
                 Opacity = 0;
                 Show();
-                AnimateICitems();
+                //AnimateICitems();
                 BeginAnimation(Window.OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
             });
         }
