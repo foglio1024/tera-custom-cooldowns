@@ -43,7 +43,7 @@ namespace TCC.Controls
         private TimeMarker dc;
         private void TimeMarkerControl_OnLoaded(object sender, RoutedEventArgs e)
         {
-            dc = (TimeMarker) DataContext;
+            dc = (TimeMarker)DataContext;
             dc.PropertyChanged += Dc_PropertyChanged;
         }
 
@@ -52,7 +52,7 @@ namespace TCC.Controls
             if (e.PropertyName == nameof(dc.TimeFactor))
             {
                 var w = TextBorder.ActualWidth;
-                TextBorder.LayoutTransform = new TranslateTransform( -w * dc.TimeFactor, 0);
+                Dispatcher.Invoke(() => TextBorder.LayoutTransform = new TranslateTransform(-w * dc.TimeFactor, 0));
             }
         }
     }
