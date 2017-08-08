@@ -11,7 +11,7 @@ namespace TCC
         private const string NaTimezone = "Central Standard Time";
         private const string RuTimezone = "Russian Standard Time";
         private const string TwTimezone = "China Standard Time";
-        private const string JpTimezone = "Japan Standard Time";
+        private const string JpTimezone = "Tokyo Standard Time";
         private const string KrTimezone = "Korea Standard Time";
 
         private const int EuResetHour = 6;
