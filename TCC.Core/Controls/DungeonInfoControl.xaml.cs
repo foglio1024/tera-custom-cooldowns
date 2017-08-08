@@ -57,16 +57,12 @@ namespace TCC.Controls
         }
         public void AnimateIn()
         {
-
             Dispatcher.Invoke(() =>
             {
                 entriesBubble.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, bubbleScale);
                 entriesBubble.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, bubbleScale);
                 entriesBubble.Child.BeginAnimation(OpacityProperty, fadeIn);
             });
-
         }
-
-
     }
 }

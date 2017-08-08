@@ -22,7 +22,7 @@ namespace TCC.Controls
     /// <summary>
     /// Interaction logic for VanguardInfoControl.xaml
     /// </summary>
-    public partial class VanguardInfoControl : UserControl , INotifyPropertyChanged
+    public partial class VanguardInfoControl : UserControl
     {
         TimeSpan growDuration;
         DoubleAnimation scaleUp;
@@ -32,7 +32,6 @@ namespace TCC.Controls
         DoubleAnimation scaleRipple;
         DoubleAnimation fadeRipple;
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public VanguardInfoControl()
         {
@@ -59,8 +58,8 @@ namespace TCC.Controls
             moveUp =  new DoubleAnimation(8, growDuration) { EasingFunction = new QuadraticEase() };
             scaleDown = new DoubleAnimation(0, growDuration) { EasingFunction = new QuadraticEase() };
             moveDown = new DoubleAnimation(3, growDuration) { EasingFunction = new QuadraticEase() };
-            scaleRipple = new DoubleAnimation(0, 7, TimeSpan.FromMilliseconds(800)) { EasingFunction = new QuadraticEase() };
-            fadeRipple = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(800));
+            scaleRipple = new DoubleAnimation(0, 7, TimeSpan.FromMilliseconds(650)) { EasingFunction = new QuadraticEase() };
+            fadeRipple = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(650));
         }
 
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

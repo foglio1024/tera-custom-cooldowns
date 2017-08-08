@@ -8,17 +8,20 @@
              mc:Ignorable="d" MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave" Loaded="UserControl_Loaded" MouseLeftButtonDown="UserControl_MouseLeftButtonDown">
     <Border Background="White" Margin="3" x:Name="rootBorder" RenderTransformOrigin=".5,.5" UseLayoutRounding="True"  CornerRadius="2">
         <Grid ClipToBounds="True">
-            <Ellipse VerticalAlignment="Top" HorizontalAlignment="Left" Width="50" Height="50" x:Name="ripple" Opacity="0" RenderTransformOrigin=".5,.5" Fill="#2000">
+            <Ellipse VerticalAlignment="Top" HorizontalAlignment="Left" Width="50" Height="50" x:Name="ripple" Opacity="0" RenderTransformOrigin=".5,.5" Fill="#1a000000" IsHitTestVisible="False">
                 <Ellipse.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="1" ScaleY="1"/>
                         <TranslateTransform X="0" Y="0" />
                     </TransformGroup>
-                    
                 </Ellipse.RenderTransform>
             </Ellipse>
-            <Border Background="{StaticResource Colors.App.MP}" CornerRadius="2,0,10,0" Opacity="1"  Width="10" Height="10" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0" Visibility="{Binding IsLoggedIn, Converter={StaticResource Converters.BoolToVisibleHidden}}"></Border>
-            <Border Background="{StaticResource Colors.App.HP}" CornerRadius="0,2,0,10" Opacity="1"  Width="10" Height="10" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,0,0" Visibility="{Binding IsSelected, Converter={StaticResource Converters.BoolToVisibleHidden}}"></Border>
+            <Border Background="{StaticResource Colors.App.MP}" CornerRadius="2,0,10,0" Opacity="1"  Width="10" 
+                    Height="10" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0" 
+                    Visibility="{Binding IsLoggedIn, Converter={StaticResource Converters.BoolToVisibleHidden}}"/>
+            <Border Background="{StaticResource Colors.App.HP}" CornerRadius="0,2,0,10" Opacity="1"  Width="10" 
+                    Height="10" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,0,0" 
+                    Visibility="{Binding IsSelected, Converter={StaticResource Converters.BoolToVisibleHidden}}"/>
 
             <StackPanel>
             <Grid Margin="0" HorizontalAlignment="Stretch">
@@ -31,13 +34,18 @@
                            TextTrimming="CharacterEllipsis"/>
             </Grid>
 
-            <Grid>
+            <Grid UseLayoutRounding="False">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition  />
                 </Grid.ColumnDefinitions>
-                <Rectangle Width="38" Height="38" Fill="Black" Opacity=".2" RenderOptions.BitmapScalingMode="Fant" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                <Rectangle Width="38" Height="38" 
+                           Fill="Black" Opacity=".2" RenderOptions.BitmapScalingMode="Fant" 
+                           HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Grid.Column="0" Grid.ColumnSpan="2">
                     <Rectangle.OpacityMask>
                         <ImageBrush ImageSource="{Binding Class, Converter={StaticResource Converters.ClassToImage}}" />
                     </Rectangle.OpacityMask>
@@ -48,51 +56,55 @@
                            Stroke="#1000" 
                            StrokeThickness="3" 
                            EndAngle="359.99" 
-                           Margin="5"
-                           Grid.Column="1"/>
+                           Margin="0"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="2"/>
                 <local:Arc x:Name="weeklyArc"
                            Width="60" 
                            Height="60" 
                            Stroke="#0d47a1 " 
                            StrokeThickness="3" 
-                           Margin="5" 
+                           Margin="0" 
                            Opacity=".7" 
                            EndAngle="{Binding VanguardWeeklyCompletion, Converter={StaticResource Converters.FactorToAngle}}"
                            ToolTip="Completed weekly Vanguard quests."
-                           Grid.Column="1"/>
+                           Grid.Column="0"
+                           Grid.ColumnSpan="2"/>
 
                 <local:Arc x:Name="dailyArc"
                            Width="50" 
                            Height="50" 
-                           Stroke="#2196f3 " 
+                           Stroke="#2196f3" 
                            StrokeThickness="3" 
-                           Margin="5" 
+                           Margin="0" 
                            Opacity=".6" 
                            EndAngle="{Binding VanguardDailyCompletion, Converter={StaticResource Converters.FactorToAngle}}"
                            ToolTip="Completed daily Vanguard quests."
-                           Grid.Column="1"/>
+                           Grid.Column="0"
+                           Grid.ColumnSpan="2"/>
 
 
                 <TextBlock FontSize="20" 
-                           Margin="3,0,0,0" 
+                           Margin="0,0,0,0" 
                            FontWeight="Thin" 
                            Foreground="#2196f3" 
                            Text="{Binding DailiesDone}" 
                            HorizontalAlignment="Center" 
                            VerticalAlignment="Bottom"
                            ToolTip="Completed daily Vanguard quests."
-                           Grid.Column="0"/>
+                           Grid.Column="0"
+                           Grid.Row="1"/>
 
                 <TextBlock FontSize="20" 
-                           Margin="0,0,3,0" 
+                           Margin="0,0,0,0" 
                            FontWeight="Thin" 
                            Foreground="#0d47a1" 
                            Text="{Binding WeekliesDone}" 
                            HorizontalAlignment="Center" 
                            VerticalAlignment="Bottom"
                            ToolTip="Completed weekly Vanguard quests."
-                           Grid.Column="2"/>
-
+                           Grid.Column="1"
+                           Grid.Row="1"/>
             </Grid>
 
             <Grid HorizontalAlignment="Stretch" Margin="0,2,0,2">
