@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Threading;
+using TCC.Data;
 using TCC.ViewModels;
 
 namespace TCC
@@ -22,7 +23,7 @@ namespace TCC
         private const int KrResetHour = 6;
 
         private const DayOfWeek EuResetDay = DayOfWeek.Wednesday;
-        private const DayOfWeek NaResetDay = DayOfWeek.Wednesday;
+        private const DayOfWeek NaResetDay = DayOfWeek.Tuesday;
         private const DayOfWeek RuResetDay = DayOfWeek.Wednesday;
         private const DayOfWeek TwResetDay = DayOfWeek.Wednesday;
         private const DayOfWeek JpResetDay = DayOfWeek.Wednesday;
@@ -34,107 +35,120 @@ namespace TCC
         private DayOfWeek _resetDay;
         public int ResetHour;
         public static TimeManager Instance => _instance ?? (_instance = new TimeManager());
-        private readonly DispatcherTimer _t;
-        private string _currentRegion;
-        public int ServerHourOffset { get; set; }
+        public string CurrentRegion;
+        private int _serverHourOffset;
 
-        public TimeManager()
+        public DateTime CurrentServerTime => DateTime.Now.AddHours(_serverHourOffset);
+
+        private TimeManager()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
-            _t = new DispatcherTimer();
-            _t.Interval = TimeSpan.FromMilliseconds(1000);
-            _t.Tick += CheckNewDay;
+            var s = new DispatcherTimer {Interval = TimeSpan.FromSeconds(1)};
+            s.Tick += CheckNewDay;
+            s.Start();
+        }
+
+        private void CheckCloseEvents()
+        {
+            var closeEventsCount = InfoWindowViewModel.Instance.EventGroups.Count(evGroup => evGroup.Events.Any(x => x.IsClose));
+            if (closeEventsCount == 0) return;
+            WindowManager.FloatingButton.StartNotifying(closeEventsCount);
+
         }
 
         private void CheckNewDay(object sender, EventArgs e)
         {
-            if(DateTime.Now.Hour == 0 && DateTime.Now.Minute == 0)
-            {
-                InfoWindowViewModel.Instance.LoadEvents(DateTime.Now.DayOfWeek, _currentRegion);
-            }
+            if (DateTime.Now.Hour == 0 && DateTime.Now.Minute == 0)
+                InfoWindowViewModel.Instance.LoadEvents(DateTime.Now.DayOfWeek, CurrentRegion);
+            if (DateTime.Now.Second == 0 && DateTime.Now.Minute % 2 == 0) CheckCloseEvents();
         }
 
         public void SetServerTimeZone(string region)
         {
-            _currentRegion = region;
-            TimeZoneInfo timezone = TimeZoneInfo.Local;
+            if (region == null) return;
+            CurrentRegion = region.StartsWith("EU") ? "EU" : region;
+            SettingsManager.LastRegion = CurrentRegion;
+            var timezone = TimeZoneInfo.Local;
             if (region.StartsWith("EU"))
             {
                 timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == EuTimezone);
                 ResetHour = EuResetHour;
                 _resetDay = EuResetDay;
             }
-            else switch (region)
+            else if (region == "NA")
             {
-                case "NA":
-                    timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == NaTimezone);
-                    ResetHour = NaResetHour;
-                    _resetDay = NaResetDay;
-                    break;
-                case "RU":
-                    timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == RuTimezone);
-                    ResetHour = RuResetHour;
-                    _resetDay = RuResetDay;
-                    break;
-                case "TW":
-                    timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == TwTimezone);
-                    ResetHour = TwResetHour;
-                    _resetDay = TwResetDay;
-                    break;
-                case "JP":
-                    timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == JpTimezone);
-                    ResetHour = JpResetHour;
-                    _resetDay = JpResetDay;
-                    break;
-                case "KR":
-                    timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == KrTimezone);
-                    ResetHour = KrResetHour;
-                    _resetDay = KrResetDay;
-                    break;
+                timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == NaTimezone);
+                ResetHour = NaResetHour;
+                _resetDay = NaResetDay;
             }
-            var serverUtcOffset = timezone.IsDaylightSavingTime(DateTime.UtcNow + timezone.BaseUtcOffset) ? 
-                timezone.BaseUtcOffset.Hours + 1 : 
-                timezone.BaseUtcOffset.Hours;
-            ServerHourOffset = TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours - serverUtcOffset;
-            if (ServerHourOffset != 0)
+            else if (region == "RU")
             {
-                if (InfoWindowViewModel.Instance.Markers.FirstOrDefault(x => x.Name.Equals(region + " server time")) != null) return;
-                InfoWindowViewModel.Instance.Markers.Add(new TimeMarker(DateTime.Now.AddHours(-ServerHourOffset), region + " server time", "fff5c6"));
+                timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == RuTimezone);
+                ResetHour = RuResetHour;
+                _resetDay = RuResetDay;
             }
-            var sg = new EventGroup("Special events");
-            sg.AddEvent(new DailyEvent("Reset", TimeManager.Instance.ResetHour, 0, "ff0000"));
-            InfoWindowViewModel.Instance.AddEventGroup(sg);
+            else if (region == "TW")
+            {
+                timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == TwTimezone);
+                ResetHour = TwResetHour;
+                _resetDay = TwResetDay;
+            }
+            else if (region == "JP")
+            {
+                timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == JpTimezone);
+                ResetHour = JpResetHour;
+                _resetDay = JpResetDay;
+            }
+            else if (region == "KR")
+            {
+                timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == KrTimezone);
+                ResetHour = KrResetHour;
+                _resetDay = KrResetDay;
+            }
+            var serverUtcOffset = timezone.IsDaylightSavingTime(DateTime.UtcNow + timezone.BaseUtcOffset)
+                ? timezone.BaseUtcOffset.Hours + 1
+                : timezone.BaseUtcOffset.Hours;
+            _serverHourOffset = -TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours + serverUtcOffset;
+
+            if (InfoWindowViewModel.Instance.Markers.FirstOrDefault(x => x.Name.Equals(region + " server time")) == null)
+            {
+                InfoWindowViewModel.Instance.Markers.Add(new TimeMarker(_serverHourOffset, region + " server time"));
+            }
+
+            CheckReset();
             InfoWindowViewModel.Instance.LoadEvents(DateTime.Now.DayOfWeek, region);
 
         }
-        public bool CheckReset()
-        {
-            if (SettingsManager.LastRun.Hour < ResetHour + ServerHourOffset && DateTime.Now.Hour > ResetHour + ServerHourOffset)
-            {
-                foreach (var ch in InfoWindowViewModel.Instance.Characters)
-                {
-                    foreach (var dg in ch.Dungeons)
-                    {
-                        if (dg.Id == 9950)
-                        {
-                            if (DateTime.Now.DayOfWeek == DayOfWeek.Thursday) dg.Reset();
-                            else continue;
-                        }
-                        dg.Reset();
-                    }
-                    ch.DailiesDone = 0;
 
-                    if(DateTime.Now.DayOfWeek == _resetDay)
+        private void CheckReset()
+        {
+            if (CurrentRegion == null) return;
+            if (SettingsManager.LastRun.Hour >= ResetHour + _serverHourOffset ||
+                DateTime.Now.Hour <= ResetHour + _serverHourOffset) return;
+            foreach (var ch in InfoWindowViewModel.Instance.Characters)
+            {
+                foreach (var dg in ch.Dungeons)
+                {
+                    if (dg.Id == 9950)
                     {
-                        ch.WeekliesDone = 0;
+                        if (DateTime.Now.DayOfWeek == DayOfWeek.Thursday) dg.Reset();
+                        else continue;
                     }
+                    dg.Reset();
                 }
-                SettingsManager.LastRun = DateTime.Now;
-                InfoWindowViewModel.Instance.SaveToFile();
-                SettingsManager.SaveSettings();
-                return true;
+                ch.DailiesDone = 0;
+
+                if (DateTime.Now.DayOfWeek == _resetDay)
+                {
+                    ch.WeekliesDone = 0;
+                }
             }
-            else return false;
+            SettingsManager.LastRun = DateTime.Now;
+            InfoWindowViewModel.Instance.SaveToFile();
+            SettingsManager.SaveSettings();
+
+            ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System",
+                "<FONT>Daily/weekly data has been reset.</FONT>"));
         }
 
     }
