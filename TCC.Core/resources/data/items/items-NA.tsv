@@ -22982,10 +22982,10 @@
 98251	3	Mystel's Triple Charm
 98252	2	Chest of Bravery
 98260	3	Vergos's Head
-98261	3	Vergos's Fang
-98262	3	Vergos's Scale
-98263	3	Vergos's Horn
-98264	3	Vergos's Bone
+98261	3	Vergos's Withered Fang
+98262	3	Vergos's Withered Scale
+98263	3	Vergos's Withered Horn
+98264	3	Vergos's Withered Bone
 98265	3	Behemoth Essence
 98266	3	+12 Enchantment Scroll [Tier 11]
 98267	3	+15 Enchantment Scroll [Tier 11]
@@ -24439,66 +24439,6 @@
 193026	0	Rapid XP
 193027	1	HP Potion
 193028	1	MP Potion
-244500	2	Cold War Bomber Box
-244501	2	Arctic Bomber Box
-244502	2	Personalized Gym Uniform Gift Box
-244503	2	Chromaplasm Weapon Skin Gift Box
-244504	2	Party Dress Smart Box
-244505	2	Cocktail Dress Smart Box
-244506	2	Disco Dress Smart Box
-244507	2	Glacial Dragon Armor Smart Box
-244508	2	Volcanic Dragon Armor Smart Box
-244509	2	Obsidian Dragon Armor Smart Box
-244510	0	Winter Coat Box
-244511	0	Personalized Gym Uniform Loot Box
-244512	0	Chromaplasm Weapon Skin Loot Box
-244513	0	Skycycle Loot Box
-244514	0	Jetcycle Loot Box
-244515	0	Ladies' Night Loot Box
-244516	3	Volcanic Armor Loot Box
-244517	3	Volcanic Weapon Loot Box
-244518	3	Angora Air Loot Box
-244519	3	Lilac Harelines Loot Box
-244520	2	Tailor Maid Smart Box
-244521	2	Maid to Order Smart Box
-244522	2	2017 Servant's Bow Smart Box
-244523	2	Ultraplasm Smart Box
-244524	2	Arctic Dragon Armor Smart Box
-244525	2	Arctic Dragon Weapon Skin Smart Box
-244526	2	Leopard Leotard Costume Box
-244527	2	Lady in Red Costume Box
-244528	2	Cat Suit Costume Box
-244529	2	Dummy Smart Box11
-244530	3	Ashfury Loot Box
-244531	3	Astrafury Loot Box
-244532	3	Ultrafury Loot Box
-244533	3	Nightfury Loot Box
-244534	3	Bonefury Loot Box
-244535	3	Maid to Work Loot Box
-244536	3	Maid's Bonnet Loot Box
-244537	3	Arctic Weapon Loot Box
-244538	3	Arctic Armor Loot Box
-244539	0	Dummy Gacha11
-244540	2	Lifeguard Smart Box
-244541	2	Diver Dude Smart Box
-244542	2	Tan-Tastic Smart Box
-244543	2	Beach Wrap Smart Box
-244544	2	Summer Wrap Smart Box
-244545	2	Bronze Bikini Smart Box
-244546	2	Modern Bride Smart Box
-244547	2	Gentleman Groom Smart Box
-244548	2	Bridal Gown Smart Box
-244549	2	Bridegroom Smart Box
-244550	0	Deep Dive Loot Box
-244551	0	All Wrapped Up Loot Box
-244552	0	Bronze Look Loot Box
-244553	3	Suitable Groom Loot Box
-244554	3	Hope Chest Loot Box
-244555	0	Performance Inner Armor Loot Box
-244556	0	Insulated Inner Armor Loot Box
-244557	0	Fortified Inner Armor Loot Box
-244558	0	Fitness Inner Armor Loot Box
-244559	0	Empowered Inner Armor Loot Box
 213832	0	Russian Federation Bill
 215981	2	Recipe 1
 215982	2	Recipe 2
@@ -29887,18 +29827,18 @@
 255749	3	Human Male Diver Costume
 255750	3	Human Male Diver Costume
 255751	3	Human Male Diver Costume
-255752	3	Human Female Tan-Tastic One-Piece
-255753	3	Human Female Tan-Tastic One-Piece
-255754	3	Human Female Tan-Tastic One-Piece
-255755	3	Human Female Tan-Tastic One-Piece
-255756	3	Human Female Tan-Tastic One-Piece
-255757	3	Human Female Tan-Tastic One-Piece
-255758	3	Human Female Tan-Tastic One-Piece
-255759	3	Human Female Tan-Tastic One-Piece
-255760	3	Human Female Tan-Tastic One-Piece
-255761	3	Human Female Tan-Tastic One-Piece
-255762	3	Human Female Tan-Tastic One-Piece
-255763	3	Human Female Tan-Tastic One-Piece
+255752	3	Human Female Tan-Tastic
+255753	3	Human Female Tan-Tastic
+255754	3	Human Female Tan-Tastic
+255755	3	Human Female Tan-Tastic
+255756	3	Human Female Tan-Tastic
+255757	3	Human Female Tan-Tastic
+255758	3	Human Female Tan-Tastic
+255759	3	Human Female Tan-Tastic
+255760	3	Human Female Tan-Tastic
+255761	3	Human Female Tan-Tastic
+255762	3	Human Female Tan-Tastic
+255763	3	Human Female Tan-Tastic
 255764	3	Human Female Beach Wrap
 255765	3	Human Female Beach Wrap
 255766	3	Human Female Beach Wrap
@@ -29959,18 +29899,18 @@
 255821	3	High Elf Male Diver Costume
 255822	3	High Elf Male Diver Costume
 255823	3	High Elf Male Diver Costume
-255824	3	High Elf Female Tan-Tastic One-Piece
-255825	3	High Elf Female Tan-Tastic One-Piece
-255826	3	High Elf Female Tan-Tastic One-Piece
-255827	3	High Elf Female Tan-Tastic One-Piece
-255828	3	High Elf Female Tan-Tastic One-Piece
-255829	3	High Elf Female Tan-Tastic One-Piece
-255830	3	High Elf Female Tan-Tastic One-Piece
-255831	3	High Elf Female Tan-Tastic One-Piece
-255832	3	High Elf Female Tan-Tastic One-Piece
-255833	3	High Elf Female Tan-Tastic One-Piece
-255834	3	High Elf Female Tan-Tastic One-Piece
-255835	3	High Elf Female Tan-Tastic One-Piece
+255824	3	High Elf Female Tan-Tastic
+255825	3	High Elf Female Tan-Tastic
+255826	3	High Elf Female Tan-Tastic
+255827	3	High Elf Female Tan-Tastic
+255828	3	High Elf Female Tan-Tastic
+255829	3	High Elf Female Tan-Tastic
+255830	3	High Elf Female Tan-Tastic
+255831	3	High Elf Female Tan-Tastic
+255832	3	High Elf Female Tan-Tastic
+255833	3	High Elf Female Tan-Tastic
+255834	3	High Elf Female Tan-Tastic
+255835	3	High Elf Female Tan-Tastic
 255836	3	High Elf Female Beach Wrap
 255837	3	High Elf Female Beach Wrap
 255838	3	High Elf Female Beach Wrap
@@ -30031,18 +29971,18 @@
 255893	3	Amani Male Diver Costume
 255894	3	Amani Male Diver Costume
 255895	3	Amani Male Diver Costume
-255896	3	Amani Female Tan-Tastic One-Piece
-255897	3	Amani Female Tan-Tastic One-Piece
-255898	3	Amani Female Tan-Tastic One-Piece
-255899	3	Amani Female Tan-Tastic One-Piece
-255900	3	Amani Female Tan-Tastic One-Piece
-255901	3	Amani Female Tan-Tastic One-Piece
-255902	3	Amani Female Tan-Tastic One-Piece
-255903	3	Amani Female Tan-Tastic One-Piece
-255904	3	Amani Female Tan-Tastic One-Piece
-255905	3	Amani Female Tan-Tastic One-Piece
-255906	3	Amani Female Tan-Tastic One-Piece
-255907	3	Amani Female Tan-Tastic One-Piece
+255896	3	Amani Female Tan-Tastic
+255897	3	Amani Female Tan-Tastic
+255898	3	Amani Female Tan-Tastic
+255899	3	Amani Female Tan-Tastic
+255900	3	Amani Female Tan-Tastic
+255901	3	Amani Female Tan-Tastic
+255902	3	Amani Female Tan-Tastic
+255903	3	Amani Female Tan-Tastic
+255904	3	Amani Female Tan-Tastic
+255905	3	Amani Female Tan-Tastic
+255906	3	Amani Female Tan-Tastic
+255907	3	Amani Female Tan-Tastic
 255908	3	Amani Female Beach Wrap
 255909	3	Amani Female Beach Wrap
 255910	3	Amani Female Beach Wrap
@@ -30103,18 +30043,18 @@
 255965	3	Castanic Male Diver Costume
 255966	3	Castanic Male Diver Costume
 255967	3	Castanic Male Diver Costume
-255968	3	Castanic Female Tan-Tastic One-Piece
-255969	3	Castanic Female Tan-Tastic One-Piece
-255970	3	Castanic Female Tan-Tastic One-Piece
-255971	3	Castanic Female Tan-Tastic One-Piece
-255972	3	Castanic Female Tan-Tastic One-Piece
-255973	3	Castanic Female Tan-Tastic One-Piece
-255974	3	Castanic Female Tan-Tastic One-Piece
-255975	3	Castanic Female Tan-Tastic One-Piece
-255976	3	Castanic Female Tan-Tastic One-Piece
-255977	3	Castanic Female Tan-Tastic One-Piece
-255978	3	Castanic Female Tan-Tastic One-Piece
-255979	3	Castanic Female Tan-Tastic One-Piece
+255968	3	Castanic Female Tan-Tastic
+255969	3	Castanic Female Tan-Tastic
+255970	3	Castanic Female Tan-Tastic
+255971	3	Castanic Female Tan-Tastic
+255972	3	Castanic Female Tan-Tastic
+255973	3	Castanic Female Tan-Tastic
+255974	3	Castanic Female Tan-Tastic
+255975	3	Castanic Female Tan-Tastic
+255976	3	Castanic Female Tan-Tastic
+255977	3	Castanic Female Tan-Tastic
+255978	3	Castanic Female Tan-Tastic
+255979	3	Castanic Female Tan-Tastic
 255980	3	Castanic Female Beach Wrap
 255981	3	Castanic Female Beach Wrap
 255982	3	Castanic Female Beach Wrap
@@ -30271,6 +30211,402 @@
 256133	3	Rainbow Wings
 256134	3	Rainbow Wings
 256135	3	Rainbow Wings
+256448	3	Flying Skill: Midnight
+256449	3	Flying Skill: Twilight
+256450	3	Flying Skill: Ebony
+256451	3	Flying Skill: Onyx
+256452	3	Flying Skill: Obsidian
+256453	3	Flying Skill: Onyx
+256454	3	Flying Skill: Noir
+256455	3	Flying Skill: Midnight
+256456	3	Flying Skill: Twilight
+256457	3	Flying Skill: Ebony
+256458	3	Flying Skill: Onyx
+256459	3	Flying Skill: Noir
+256460	3	Flying Skill: Midnight
+256461	3	Flying Skill: Twilight
+256462	3	Flying Skill: Ebony
+256463	3	Flying Skill: Onyx
+256464	3	Flying Skill: Noir
+256465	3	Flying Skill: Midnight
+256466	3	Flying Skill: Twilight
+256467	3	Flying Skill: Ebony
+256468	3	Flying Skill: Onyx
+256469	3	Flying Skill: Noir
+256470	3	Flying Skill: Midnight
+256471	3	Flying Skill: Twilight
+256472	3	Flying Skill: Ebony
+256473	3	Flying Skill: Onyx
+256474	3	Flying Skill: Noir
+256475	3	Flying Skill: Midnight
+256476	3	Flying Skill: Twilight
+256477	3	Flying Skill: Ebony
+256478	3	Flying Skill: Onyx
+256479	3	Flying Skill: Noir
+256480	3	Flying Skill: Midnight
+256481	3	Flying Skill: Twilight
+256482	3	Flying Skill: Ebony
+256483	3	Flying Skill: Onyx
+256484	3	Flying Skill: Noir
+256485	3	Flying Skill: Midnight
+256486	3	Flying Skill: Twilight
+256487	3	Flying Skill: Ebony
+256488	3	Flying Skill: Onyx
+256489	3	Flying Skill: Obsidian
+256490	3	Flying Skill: Onyx
+256491	3	Flying Skill: Noir
+256492	3	Flying Skill: Hertz
+256493	3	Flying Skill: Thunder
+256494	3	Flying Skill: Lightning
+256495	3	Flying Skill: Dynamo
+256496	3	Flying Skill: Thunderbolt
+256497	3	Flying Skill: Dynamo
+256498	3	Flying Skill: Tempest
+256499	3	Flying Skill: Hertz
+256500	3	Flying Skill: Thunder
+256501	3	Flying Skill: Lightning
+256502	3	Flying Skill: Dynamo
+256503	3	Flying Skill: Tempest
+256504	3	Flying Skill: Hertz
+256505	3	Flying Skill: Thunder
+256506	3	Flying Skill: Lightning
+256507	3	Flying Skill: Dynamo
+256508	3	Flying Skill: Tempest
+256509	3	Flying Skill: Hertz
+256510	3	Flying Skill: Thunder
+256511	3	Flying Skill: Lightning
+256512	3	Flying Skill: Dynamo
+256513	3	Flying Skill: Tempest
+256514	3	Flying Skill: Hertz
+256515	3	Flying Skill: Thunder
+256516	3	Flying Skill: Lightning
+256517	3	Flying Skill: Dynamo
+256518	3	Tempest
+256519	3	Flying Skill: Hertz
+256520	3	Flying Skill: Thunder
+256521	3	Flying Skill: Lightning
+256522	3	Flying Skill: Dynamo
+256523	3	Flying Skill: Tempest
+256524	3	Flying Skill: Hertz
+256525	3	Flying Skill: Thunder
+256526	3	Flying Skill: Lightning
+256527	3	Flying Skill: Dynamo
+256528	3	Flying Skill: Tempest
+256529	3	Flying Skill: Hertz
+256530	3	Flying Skill: Thunder
+256531	3	Flying Skill: Lightning
+256532	3	Flying Skill: Dynamo
+256533	3	Flying Skill: Thunderbolt
+256534	3	Flying Skill: Dynamo
+256535	3	Flying Skill: Tempest
+256536	3	Flying Skill: Pink
+256537	3	Flying Skill: Coral
+256538	3	Flying Skill: Rosie
+256539	3	Flying Skill: Dawn
+256540	3	Flying Skill: Cherry Blossom
+256541	3	Flying Skill: Dawn
+256542	3	Flying Skill: Aurora
+256543	3	Flying Skill: Pink
+256544	3	Flying Skill: Coral
+256545	3	Flying Skill: Rosie
+256546	3	Flying Skill: Dawn
+256547	3	Flying Skill: Aurora
+256548	3	Flying Skill: Pink
+256549	3	Flying Skill: Coral
+256550	3	Flying Skill: Rosie
+256551	3	Flying Skill: Dawn
+256552	3	Flying Skill: Aurora
+256553	3	Flying Skill: Pink)
+256554	3	Flying Skill: Coral
+256555	3	Flying Skill: Rosie
+256556	3	Flying Skill: Dawn
+256557	3	Flying Skill: Aurora
+256558	3	Flying Skill: Pink
+256559	3	Flying Skill: Coral
+256560	3	Flying Skill: Rosie
+256561	3	Flying Skill: Dawn
+256562	3	Flying Skill: Aurora
+256563	3	Flying Skill: Pink
+256564	3	Flying Skill: Coral
+256565	3	Flying Skill: Rosie
+256566	3	Flying Skill: Dawn
+256567	3	Flying Skill: Aurora
+256568	3	Flying Skill: Pink
+256569	3	Flying Skill: Coral
+256570	3	Flying Skill: Rosie
+256571	3	Flying Skill: Dawn
+256572	3	Flying Skill: Aurora
+256573	3	Flying Skill: Pink
+256574	3	Flying Skill: Coral
+256575	3	Flying Skill: Rosie
+256576	3	Flying Skill: Dawn
+256577	3	Flying Skill: Cherry Blossom
+256578	3	Flying Skill: Dawn
+256579	3	Flying Skill: Aurora
+256904	3	Baraka Embroidered Suit
+256905	3	Baraka Embroidered Suit
+256906	3	Baraka Embroidered Suit
+256907	3	Baraka Embroidered Suit
+256908	3	Baraka Embroidered Suit
+256909	3	Baraka Embroidered Suit
+256910	3	Baraka Embroidered Suit
+256911	3	Baraka Embroidered Suit
+256912	3	Baraka Embroidered Suit
+256913	3	Baraka Embroidered Suit
+256914	3	Baraka Embroidered Suit
+256915	3	Baraka Embroidered Suit
+256916	3	Baraka Dyeable Embroidered Suit
+256917	3	Baraka Dyeable Embroidered Suit
+256918	3	Baraka Dyeable Embroidered Suit
+256919	3	Baraka Dyeable Embroidered Suit
+256920	3	Baraka Dyeable Embroidered Suit
+256921	3	Baraka Dyeable Embroidered Suit
+256922	3	Baraka Dyeable Embroidered Suit
+256923	3	Baraka Dyeable Embroidered Suit
+256924	3	Baraka Dyeable Embroidered Suit
+256925	3	Baraka Dyeable Embroidered Suit
+256926	3	Baraka Dyeable Embroidered Suit
+256927	3	Baraka Dyeable Embroidered Suit
+256928	3	Human Male Embroidered Suit
+256929	3	Human Male Embroidered Suit
+256930	3	Human Male Embroidered Suit
+256931	3	Human Male Embroidered Suit
+256932	3	Human Male Embroidered Suit
+256933	3	Human Male Embroidered Suit
+256934	3	Human Male Embroidered Suit
+256935	3	Human Male Embroidered Suit
+256936	3	Human Male Embroidered Suit
+256937	3	Human Male Embroidered Suit
+256938	3	Human Male Embroidered Suit
+256939	3	Human Male Embroidered Suit
+256940	3	Human Male Dyeable Embroidered Suit
+256941	3	Human Male Dyeable Embroidered Suit
+256942	3	Human Male Dyeable Embroidered Suit
+256943	3	Human Male Dyeable Embroidered Suit
+256944	3	Human Male Dyeable Embroidered Suit
+256945	3	Human Male Dyeable Embroidered Suit
+256946	3	Human Male Dyeable Embroidered Suit
+256947	3	Human Male Dyeable Embroidered Suit
+256948	3	Human Male Dyeable Embroidered Suit
+256949	3	Human Male Dyeable Embroidered Suit
+256950	3	Human Male Dyeable Embroidered Suit
+256951	3	Human Male Dyeable Embroidered Suit
+256952	3	Human Female Red Chiffon Dress
+256953	3	Human Female Red Chiffon Dress
+256954	3	Human Female Red Chiffon Dress
+256955	3	Human Female Red Chiffon Dress
+256956	3	Human Female Red Chiffon Dress
+256957	3	Human Female Red Chiffon Dress
+256958	3	Human Female Red Chiffon Dress
+256959	3	Human Female Red Chiffon Dress
+256960	3	Human Female Red Chiffon Dress
+256961	3	Human Female Red Chiffon Dress
+256962	3	Human Female Red Chiffon Dress
+256963	3	Human Female Red Chiffon Dress
+256964	3	Human Female Dyeable Chiffon Dress
+256965	3	Human Female Dyeable Chiffon Dress
+256966	3	Human Female Dyeable Chiffon Dress
+256967	3	Human Female Dyeable Chiffon Dress
+256968	3	Human Female Dyeable Chiffon Dress
+256969	3	Human Female Dyeable Chiffon Dress
+256970	3	Human Female Dyeable Chiffon Dress
+256971	3	Human Female Dyeable Chiffon Dress
+256972	3	Human Female Dyeable Chiffon Dress
+256973	3	Human Female Dyeable Chiffon Dress
+256974	3	Human Female Dyeable Chiffon Dress
+256975	3	Human Female Dyeable Chiffon Dress
+256976	3	High Elf Male Embroidered Suit
+256977	3	High Elf Male Embroidered Suit
+256978	3	High Elf Male Embroidered Suit
+256979	3	High Elf Male Embroidered Suit
+256980	3	High Elf Male Embroidered Suit
+256981	3	High Elf Male Embroidered Suit
+256982	3	High Elf Male Embroidered Suit
+256983	3	NHigh Elf Male Embroidered Suit
+256984	3	High Elf Male Embroidered Suit
+256985	3	High Elf Male Embroidered Suit
+256986	3	High Elf Male Embroidered Suit
+256987	3	High Elf Male Embroidered Suit
+256988	3	High Elf Male Dyeable Embroidered Suit
+256989	3	High Elf Male Dyeable Embroidered Suit
+256990	3	High Elf Male Dyeable Embroidered Suit
+256991	3	High Elf Male Dyeable Embroidered Suit
+256992	3	High Elf Male Dyeable Embroidered Suit
+256993	3	High Elf Male Dyeable Embroidered Suit
+256994	3	High Elf Male Dyeable Embroidered Suit
+256995	3	High Elf Male Dyeable Embroidered Suit
+256996	3	High Elf Male Dyeable Embroidered Suit
+256997	3	High Elf Male Dyeable Embroidered Suit
+256998	3	High Elf Male Dyeable Embroidered Suit
+256999	3	High Elf Male Dyeable Embroidered Suit
+257000	3	High Elf Female Red Chiffon Dress
+257001	3	High Elf Female Red Chiffon Dress
+257002	3	High Elf Female Red Chiffon Dress
+257003	3	High Elf Female Red Chiffon Dress
+257004	3	High Elf Female Red Chiffon Dress
+257005	3	High Elf Female Red Chiffon Dress
+257006	3	High Elf Female Red Chiffon Dress
+257007	3	High Elf Female Red Chiffon Dress
+257008	3	High Elf Female Red Chiffon Dress
+257009	3	High Elf Female Red Chiffon Dress
+257010	3	High Elf Female Red Chiffon Dress
+257011	3	High Elf Female Red Chiffon Dress
+257012	3	High Elf Female Dyeable Chiffon Dress
+257013	3	High Elf Female Dyeable Chiffon Dress
+257014	3	High Elf Female Dyeable Chiffon Dress
+257015	3	High Elf Female Dyeable Chiffon Dress
+257016	3	High Elf Female Dyeable Chiffon Dress
+257017	3	High Elf Female Dyeable Chiffon Dress
+257018	3	High Elf Female Dyeable Chiffon Dress
+257019	3	High Elf Female Dyeable Chiffon Dress
+257020	3	High Elf Female Dyeable Chiffon Dress
+257021	3	High Elf Female Dyeable Chiffon Dress
+257022	3	High Elf Female Dyeable Chiffon Dress
+257023	3	High Elf Female Dyeable Chiffon Dress
+257024	3	Amani Male Embroidered Suit
+257025	3	Amani Male Embroidered Suit
+257026	3	Amani Male Embroidered Suit
+257027	3	Amani Male Embroidered Suit
+257028	3	Amani Male Embroidered Suit
+257029	3	Amani Male Embroidered Suit
+257030	3	Amani Male Embroidered Suit
+257031	3	Amani Male Embroidered Suit
+257032	3	Amani Male Embroidered Suit
+257033	3	Amani Male Embroidered Suit
+257034	3	Amani Male Embroidered Suit
+257035	3	Amani Male Embroidered Suit
+257036	3	Amani Male Dyeable Embroidered Suit
+257037	3	Amani Male Dyeable Embroidered Suit
+257038	3	Amani Male Dyeable Embroidered Suit
+257039	3	Amani Male Dyeable Embroidered Suit
+257040	3	Amani Male Dyeable Embroidered Suit
+257041	3	Amani Male Dyeable Embroidered Suit
+257042	3	Amani Male Dyeable Embroidered Suit
+257043	3	Amani Male Dyeable Embroidered Suit
+257044	3	Amani Male Dyeable Embroidered Suit
+257045	3	Amani Male Dyeable Embroidered Suit
+257046	3	Amani Male Dyeable Embroidered Suit
+257047	3	Amani Male Dyeable Embroidered Suit
+257048	3	Amani Female Red Chiffon Dress
+257049	3	Amani Female Red Chiffon Dress
+257050	3	Amani Female Red Chiffon Dress
+257051	3	Amani Female Red Chiffon Dress
+257052	3	Amani Female Red Chiffon Dress
+257053	3	Amani Female Red Chiffon Dress
+257054	3	Amani Female Red Chiffon Dress
+257055	3	Amani Female Red Chiffon Dress
+257056	3	Amani Female Red Chiffon Dress
+257057	3	Amani Female Red Chiffon Dress
+257058	3	Amani Female Red Chiffon Dress
+257059	3	Amani Female Red Chiffon Dress
+257060	3	Amani Female Dyeable Chiffon Dress
+257061	3	Amani Female Dyeable Chiffon Dress
+257062	3	Amani Female Dyeable Chiffon Dress
+257063	3	Amani Female Dyeable Chiffon Dress
+257064	3	Amani Female Dyeable Chiffon Dress
+257065	3	Amani Female Dyeable Chiffon Dress
+257066	3	Amani Female Dyeable Chiffon Dress
+257067	3	Amani Female Dyeable Chiffon Dress
+257068	3	Amani Female Dyeable Chiffon Dress
+257069	3	Amani Female Dyeable Chiffon Dress
+257070	3	Amani Female Dyeable Chiffon Dress
+257071	3	Amani Female Dyeable Chiffon Dress
+257072	3	Castanic Male Embroidered Suit
+257073	3	Castanic Male Embroidered Suit
+257074	3	Castanic Male Embroidered Suit
+257075	3	Castanic Male Embroidered Suit
+257076	3	Castanic Male Embroidered Suit
+257077	3	Castanic Male Embroidered Suit
+257078	3	Castanic Male Embroidered Suit
+257079	3	Castanic Male Embroidered Suit
+257080	3	Castanic Male Embroidered Suit
+257081	3	Castanic Male Embroidered Suit
+257082	3	Castanic Male Embroidered Suit
+257083	3	Castanic Male Embroidered Suit
+257084	3	Castanic Male Dyeable Embroidered Suit
+257085	3	Castanic Male Dyeable Embroidered Suit
+257086	3	Castanic Male Dyeable Embroidered Suit
+257087	3	Castanic Male Dyeable Embroidered Suit
+257088	3	Castanic Male Dyeable Embroidered Suit
+257089	3	Castanic Male Dyeable Embroidered Suit
+257090	3	Castanic Male Dyeable Embroidered Suit
+257091	3	Castanic Male Dyeable Embroidered Suit
+257092	3	Castanic Male Dyeable Embroidered Suit
+257093	3	Castanic Male Dyeable Embroidered Suit
+257094	3	Castanic Male Dyeable Embroidered Suit
+257095	3	Castanic Male Dyeable Embroidered Suit
+257096	3	Castanic Female Red Chiffon Dress
+257097	3	Castanic Female Red Chiffon Dress
+257098	3	Castanic Female Red Chiffon Dress
+257099	3	Castanic Female Red Chiffon Dress
+257100	3	Castanic Female Red Chiffon Dress
+257101	3	Castanic Female Red Chiffon Dress
+257102	3	Castanic Female Red Chiffon Dress
+257103	3	Castanic Female Red Chiffon Dress
+257104	3	Castanic Female Red Chiffon Dress
+257105	3	Castanic Female Red Chiffon Dress
+257106	3	Castanic Female Red Chiffon Dress
+257107	3	Castanic Female Red Chiffon Dress
+257108	3	Castanic Female Dyeable Chiffon Dress
+257109	3	Castanic Female Dyeable Chiffon Dress
+257110	3	Castanic Female Dyeable Chiffon Dress
+257111	3	Castanic Female Dyeable Chiffon Dress
+257112	3	Castanic Female Dyeable Chiffon Dress
+257113	3	Castanic Female Dyeable Chiffon Dress
+257114	3	Castanic Female Dyeable Chiffon Dress
+257115	3	Castanic Female Dyeable Chiffon Dress
+257116	3	Castanic Female Dyeable Chiffon Dress
+257117	3	Castanic Female Dyeable Chiffon Dress
+257118	3	Castanic Female Dyeable Chiffon Dress
+257119	3	Castanic Female Dyeable Chiffon Dress
+257120	3	Popori Embroidered Suit
+257121	3	Popori Embroidered Suit
+257122	3	Popori Embroidered Suit
+257123	3	Popori Embroidered Suit
+257124	3	Popori Embroidered Suit
+257125	3	Popori Embroidered Suit
+257126	3	Popori Embroidered Suit
+257127	3	Popori Embroidered Suit
+257128	3	Popori Embroidered Suit
+257129	3	Popori Embroidered Suit
+257130	3	Popori Embroidered Suit
+257131	3	Popori Embroidered Suit
+257132	3	Popori Dyeable Embroidered Suit
+257133	3	Popori Dyeable Embroidered Suit
+257134	3	Popori Dyeable Embroidered Suit
+257135	3	Popori Dyeable Embroidered Suit
+257136	3	Popori Dyeable Embroidered Suit
+257137	3	Popori Dyeable Embroidered Suit
+257138	3	Popori Dyeable Embroidered Suit
+257139	3	Popori Dyeable Embroidered Suit
+257140	3	Popori Dyeable Embroidered Suit
+257141	3	Popori Dyeable Embroidered Suit
+257142	3	Popori Dyeable Embroidered Suit
+257143	3	Popori Dyeable Embroidered Suit
+257144	3	Elin Red Chiffon Dress
+257145	3	Elin Red Chiffon Dress
+257146	3	Elin Red Chiffon Dress
+257147	3	Elin Red Chiffon Dress
+257148	3	Elin Red Chiffon Dress
+257149	3	Elin Red Chiffon Dress
+257150	3	Elin Red Chiffon Dress
+257151	3	Elin Red Chiffon Dress
+257152	3	Elin Red Chiffon Dress
+257153	3	Elin Red Chiffon Dress
+257154	3	Elin Red Chiffon Dress
+257155	3	Elin Red Chiffon Dress
+257156	3	Elin Dyeable Chiffon Dress
+257157	3	Elin Dyeable Chiffon Dress
+257158	3	Elin Dyeable Chiffon Dress
+257159	3	Elin Dyeable Chiffon Dress
+257160	3	Elin Dyeable Chiffon Dress
+257161	3	Elin Dyeable Chiffon Dress
+257162	3	Elin Dyeable Chiffon Dress
+257163	3	Elin Dyeable Chiffon Dress
+257164	3	Elin Dyeable Chiffon Dress
+257165	3	Elin Dyeable Chiffon Dress
+257166	3	Elin Dyeable Chiffon Dress
+257167	3	Elin Dyeable Chiffon Dress
 220353	3	T-cat 01
 220354	3	T-cat 02
 150001	3	Practicum Necklace
@@ -44915,7 +45251,7 @@
 186622	1	Dyeable Silver Bikini and Speeders Loot Box
 186623	1	Sandy Summer Festival Loot Box
 186624	1	Summer Festival Loot Box
-186625	1	Emergency Gacha 0613-7
+186625	1	Argon Assault Loot Box
 186626	1	Emergency Gacha 0613-8
 186627	1	Emergency Gacha 0613-9
 186628	1	Emergency Gacha 0613-10
@@ -44988,7 +45324,7 @@
 186695	2	Ironward Armor Smart Box
 186696	2	Dawn's Guard Armor Smart Box
 186697	2	Night Watch Armor Smart Box
-186698	2	Yellow Duckie Swimsuit Box
+186698	2	Argon Assault Supply Kit
 186699	2	Dyeable Duckie Swimsuit Box
 186700	2	Deep Blue Jammers Box
 186701	2	Dyeable Deep Jammers Box
@@ -45000,7 +45336,7 @@
 186707	2	Dyeable Bleachstringer and Fundoshi Smart Box
 186708	2	Bikini and Golden Speeders Smart Box
 186709	2	Dyeable Bikini and Speeders Smart Box
-186710	2	Emergency Item Conversion 0613-42
+186710	2	Yellow Duckie Swimsuit Box
 186711	2	Emergency Item Conversion 0613-43
 186712	2	Emergency Item Conversion 0613-44
 186713	2	Emergency Item Conversion 0613-45
@@ -45087,6 +45423,195 @@
 186794	2	Chooser of the Slain
 186795	2	+12 Meathanger Box
 186796	3	+12 Meathanger Box
+244500	2	Cold War Bomber Box
+244501	2	Arctic Bomber Box
+244502	2	Personalized Gym Uniform Gift Box
+244503	2	Chromaplasm Weapon Skin Gift Box
+244504	2	Party Dress Smart Box
+244505	2	Cocktail Dress Smart Box
+244506	2	Disco Dress Smart Box
+244507	2	Glacial Dragon Armor Smart Box
+244508	2	Volcanic Dragon Armor Smart Box
+244509	2	Obsidian Dragon Armor Smart Box
+244510	0	Winter Coat Box
+244511	0	Personalized Gym Uniform Loot Box
+244512	0	Chromaplasm Weapon Skin Loot Box
+244513	0	Skycycle Loot Box
+244514	0	Jetcycle Loot Box
+244515	0	Ladies' Night Loot Box
+244516	3	Volcanic Armor Loot Box
+244517	3	Volcanic Weapon Loot Box
+244518	3	Angora Air Loot Box
+244519	3	Lilac Harelines Loot Box
+244520	2	Tailor Maid Smart Box
+244521	2	Maid to Order Smart Box
+244522	2	2017 Servant's Bow Smart Box
+244523	2	Ultraplasm Smart Box
+244524	2	Arctic Dragon Armor Smart Box
+244525	2	Arctic Dragon Weapon Skin Smart Box
+244526	2	Leopard Leotard Costume Box
+244527	2	Lady in Red Costume Box
+244528	2	Cat Suit Costume Box
+244529	2	Dummy Smart Box11
+244530	3	Ashfury Loot Box
+244531	3	Astrafury Loot Box
+244532	3	Ultrafury Loot Box
+244533	3	Nightfury Loot Box
+244534	3	Bonefury Loot Box
+244535	3	Maid to Work Loot Box
+244536	3	Maid's Bonnet Loot Box
+244537	3	Arctic Weapon Loot Box
+244538	3	Arctic Armor Loot Box
+244539	0	Dummy Gacha11
+244540	2	Lifeguard Smart Box
+244541	2	Diver Dude Smart Box
+244542	2	Tan-Tastic Smart Box
+244543	2	Beach Wrap Smart Box
+244544	2	Summer Wrap Smart Box
+244545	2	Bronze Bikini Smart Box
+244546	2	Modern Bride Smart Box
+244547	2	Gentleman Groom Smart Box
+244548	2	Bridal Gown Smart Box
+244549	2	Bridegroom Smart Box
+244550	0	Deep Dive Loot Box
+244551	0	All Wrapped Up Loot Box
+244552	0	Bronze Look Loot Box
+244553	3	Suitable Groom Loot Box
+244554	3	Hope Chest Loot Box
+244555	0	Performance Inner Armor Loot Box
+244556	0	Insulated Inner Armor Loot Box
+244557	0	Fortified Inner Armor Loot Box
+244558	0	Fitness Inner Armor Loot Box
+244559	0	Empowered Inner Armor Loot Box
+244560	2	Wedding Dress Costume box
+244561	2	Dyeable Wedding Dress Costume box
+244562	2	Extensive Alkahest Box
+244563	2	Spellbind Box
+244564	2	Blessed Enigmatic Scroll Case
+244565	2	Pet Food Box
+244566	2	Celestial Spirit Box
+244567	2	Ice Box
+244568	2	Ice Drake Weapon Crate
+244569	2	Fire Drake Weapon Crate
+244570	2	Elleon's Nobility Box
+244571	2	Elleon's Bravery Box
+244572	2	Dress for Success Loot Box
+244573	2	Dress to Impress Loot Box
+244574	2	Hero's Cape Box
+244575	2	Rainy Day Loot Box
+244576	2	Avenging Angel Loot Box
+244577	2	Guardian Angel Loot Box
+244578	2	Technicolor Yawn Box
+244579	2	Red Wolf Box
+244580	2	Blue Wolf Box
+244581	2	Purple Wolf Box
+244582	2	Gold Wolf Box
+244583	2	Snarlheart Wolfrider Box
+244584	2	Gloryheart Wolfrider Box
+244585	2	Fiery Birdcage
+244586	2	Violet Birdcage
+244587	2	Steamer Wardrobe
+244588	2	Steampunked Loot Box
+244589	2	Party Hearty Smart Box
+244590	2	Life of the Party Smart Box
+244591	2	Dummy Smart Box3
+244592	2	Dummy Smart Box4
+244593	2	Dummy Smart Box5
+244594	2	Dummy Smart Box6
+244595	2	Dummy Smart Box7
+244596	2	Dummy Smart Box8
+244597	2	Dummy Smart Box9
+244598	2	Dummy Smart Box10
+244599	2	Dummy Smart Box11
+244600	2	Dummy Smart Box12
+244601	2	Dummy Smart Box13
+244602	2	Dummy Smart Box14
+244603	2	Dummy Smart Box15
+244604	2	Dummy Smart Box16
+244605	2	Dummy Smart Box17
+244606	2	Dummy Smart Box18
+244607	2	Dummy Smart Box19
+244608	2	Dummy Smart Box20
+244609	2	Dummy Smart Box21
+244610	2	Dummy Smart Box22
+244611	2	Dummy Smart Box23
+244612	2	Dummy Smart Box24
+244613	2	Dummy Smart Box25
+244614	2	Dummy Smart Box26
+244615	2	Dummy Smart Box27
+244616	2	Dummy Smart Box28
+244617	2	Dummy Smart Box29
+244618	2	Dummy Smart Box30
+244619	3	Obsidian Airwolf Loot Box
+244620	3	Thunderbolt Airwolf Loot Box
+244621	3	Cherry Airwolf Loot Box
+244622	3	Party Down Loot Box
+244623	3	Dummy Gacha5
+244624	3	Dummy Gacha6
+244625	3	Dummy Gacha7
+244626	3	Dummy Gacha8
+244627	3	Dummy Gacha9
+244628	3	Dummy Gacha10
+244629	3	Dummy Gacha11
+244630	3	Dummy Gacha12
+244631	3	Dummy Gacha13
+244632	3	Dummy Gacha14
+244633	3	Dummy Gacha15
+244634	3	Dummy Gacha16
+244635	3	Dummy Gacha17
+244636	3	Dummy Gacha18
+244637	3	Dummy Gacha19
+244638	3	Dummy Gacha20
+244639	3	Dummy Gacha21
+244640	3	Dummy Gacha22
+244641	3	Dummy Gacha23
+244642	3	Dummy Gacha24
+244643	3	Dummy Gacha25
+244644	3	Dummy Gacha26
+244645	3	Dummy Gacha27
+244646	3	Dummy Gacha28
+244647	3	Dummy Gacha29
+244648	3	Dummy Gacha30
+244649	3	Dummy Gacha31
+244650	3	Dummy Gacha32
+244651	3	Dummy Gacha33
+244652	3	Dummy Gacha34
+244653	3	Dummy Gacha35
+244654	3	Dummy Gacha36
+244655	3	Dummy Gacha37
+244656	3	Dummy Gacha38
+244657	3	Dummy Gacha39
+244658	3	Dummy Gacha40
+244659	3	Dummy Gacha41
+244660	3	Dummy Gacha42
+244661	3	Dummy Gacha43
+244662	3	Dummy Gacha44
+244663	3	Dummy Gacha45
+244664	3	Dummy Gacha46
+244665	3	Dummy Gacha47
+244666	3	Dummy Gacha48
+244667	3	Dummy Gacha49
+244668	3	Dummy Gacha50
+244669	2	Dummy Smart Box31
+244670	2	Dummy Smart Box32
+244671	2	Dummy Smart Box33
+244672	2	Dummy Smart Box34
+244673	2	Dummy Smart Box35
+244674	2	Dummy Smart Box36
+244675	2	Dummy Smart Box37
+244676	2	Dummy Smart Box38
+244677	2	Dummy Smart Box39
+244678	2	Dummy Smart Box40
+244679	2	Dummy Smart Box41
+244680	2	Dummy Smart Box42
+244681	2	Dummy Smart Box43
+244682	2	Dummy Smart Box44
+244683	2	Dummy Smart Box45
+244684	2	Dummy Smart Box46
+244685	2	Dummy Smart Box47
+244686	2	Dummy Smart Box48
+244687	2	Dummy Smart Box49
+244688	2	Dummy Smart Box50
 458	0	Riding Skill: Summon Fortuna
 459	0	Riding Skill: Summon Fides
 460	0	Riding Skill: Summon Virtus

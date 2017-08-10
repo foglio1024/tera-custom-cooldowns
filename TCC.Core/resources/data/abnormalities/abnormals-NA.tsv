@@ -837,6 +837,7 @@
 23190	Buff	True	True	False	Glyph of Powerlink	Increases damage of Knockdown Strike by $H_W_GOOD25%$COLOR_END.	icon_crest.crestnextskillattackup_tex
 23200	Buff	True	True	False	Glyph of Powerlink	Increases damage of Backstab by $H_W_GOOD25%$COLOR_END.	icon_crest.crestnextskillattackup_tex
 23210	Buff	True	True	False	Glyph of Infusion	Replenishes $H_W_GOOD6%$COLOR_END of maximum MP every $H_W_GOOD1$COLOR_END second.	icon_crest.crestpassivemprecoveryup_tex
+23220	Buff	False	True	False	BTS		icon_crest.crestpassivemprecoveryup_tex
 24010	Buff	True	True	False	Glyph of the Pump	Power increases by $H_W_GOOD20%$COLOR_END.	icon_crest.crestactiveattackup_tex
 24020	Buff	True	True	False	Glyph of Influence	Decreases MP consumption of Flatten by $H_W_GOOD-63$COLOR_END.	icon_crest.crestnextskillmpdown_tex
 24030	Buff	True	True	False	Glyph of Influence	Decreases MP consumption of Dash by $H_W_GOOD-75$COLOR_END.	icon_crest.crestnextskillmpdown_tex
@@ -1595,15 +1596,15 @@
 470023	Buff	False	True	False		Not supposed to be shown	
 470024	Buff	False	True	False	Change of Heart - Power Increase	You were not fooled by Manglemore. Your Power increases.	
 470025	Buff	False	True	False	Change of Heart - Sudden Death	Completely fooled by Manglemore. Your death is imminent.	
-470026	Stun	True	False	False	Snowed	You got fooled by Manglemore. HP decrease by 20% each second. Jump continuously to end effect.	icon_status.icedamage_tex
-470027	Stun	True	False	False	Snowed	You got fooled by Manglemore. HP decrease by 20% each second. Jump continuously to end effect.	icon_status.icedamage_tex
-470028	Stun	True	False	False	Snowed	You got fooled by Manglemore. HP decrease by 20% each second. Jump continuously to end effect.	icon_status.icedamage_tex
+470026	Stun	True	False	False	Snowed	You got fooled by Manglemore. HP decreases by 25% each second. Jump continuously to end effect.	icon_status.icedamage_tex
+470027	Stun	True	False	False	Snowed	You got fooled by Manglemore. HP decreases by 25% each second. Jump continuously to end effect.	icon_status.icedamage_tex
+470028	Stun	True	False	False	Snowed	You got fooled by Manglemore. HP decreases by 25% each second. Jump continuously to end effect.	icon_status.icedamage_tex
 470029	WeakeningEffect	False	True	False			
 470030	Buff	True	True	False	Change of Heart - Power Increase	You were not fooled by Manglemore. Your Power increases.	icon_skills.handyslash_tex
 470031	Buff	False	True	False	Change of Heart	Manglemore is quirky. He thinks lying is fair every 15 minutes or so.	icon_status.battlecommand03_tex
 470032	Buff	False	True	False			icon_status.battlecommand04_tex
 470033	Buff	False	True	False			icon_status.battlecommand01_tex
-470034	DamageOverTime	True	False	False	Bleeding	HP decreases by 10% every second.	icon_status.injuredbtdarkness_tex
+470034	DamageOverTime	True	False	False	Bleeding	HP decreases by 15% every second.	icon_status.injuredbtdarkness_tex
 470035	WeakeningEffect	False	True	False			icon_status.battlecommand02_tex
 470036	Buff	False	False	False			
 470037	WeakeningEffect	True	True	False	Queasy	Attacked by Manglemore. Unable to heal.	icon_status.battlefieldbuff02_tex
@@ -1827,6 +1828,7 @@
 601600	Buff	True	True	False	Find Weakness	Your next attack is considered to be an attack from the rear.	icon_skills.weak_point_observed
 601700	Buff	False	True	False	Snare Explosion	(Not Supposed to be Shown)	icon_skills.arcaneshockshot02_tex
 601800	Buff	False	True	False	Enhanced Rain of Arrows	Damage of Rain of Arrows is not diverted (Abnormality that should not be shown)	icon_skills.arrowfall_tex
+601900	Buff	False	True	False			
 700100	Buff	True	True	False	Vow of Rebirth	Resurrect instantly if you are killed.	icon_skills.autoresurrect_tex
 700200	Buff	True	True	True	Aura of the Unyielding I	Grants Aura of the Unyielding to party members within 30m. Costs $H_W_BAD-30$COLOR_END MP per $H_W_BAD2$COLOR_END second1 to maintain.	icon_skills.areahpgain_tex
 700201	Buff	True	True	True	Aura of the Unyielding II	Grants Aura of the Unyielding to party members within 30m. Costs $H_W_BAD-30$COLOR_END MP per $H_W_BAD2$COLOR_END second1 to maintain.	icon_skills.areahpgain_tex
@@ -3088,9 +3090,9 @@
 981097	Buff	True	False	False			
 981098	Buff	False	True	False			
 981099	Stun	True	True	False	Stunned	Stunned. Cannot move.	icon_status.confuseup_tex
-981100	Buff	False	True	True			
-981101	Buff	False	True	True			
-981102	Buff	False	True	True			
+981100	Buff	False	True	False			
+981101	Buff	False	True	False			
+981102	Buff	False	True	False			
 981103	Buff	True	True	False			
 981104	Buff	False	True	False			
 981105	Buff	False	True	False			
@@ -3897,6 +3899,7 @@
 10155300	WeakeningEffect	False	True	False			
 10155310	Buff	False	True	False			
 10155320	Buff	False	True	True			
+10230001	Stun	True	False	False			icon_status.sealskill_tex
 15200001	Buff	True	True	False	Lavathus' Shell	Increases Endurance and maximum HP by $H_W_GOOD20%$COLOR_END for $time. Effect persists after death, but ends when leaving the Civil Unrest zone.	icon_skills.emergencyshield_tex
 15200002	Buff	True	True	False	Drakhan's Flame	Increases Power by $H_W_GOOD20%$COLOR_END for $time. Effect persists after death, but ends when leaving the Civil Unrest zone.	icon_items.campfire_tex
 15200003	Buff	True	True	False	Kaithan's Fear	Increases Attack Speed and the chance to crit by $H_W_GOOD10%$COLOR_END. Increases Movement Speed by $H_W_GOOD20$COLOR_END for $time. Effect persists after death, but ends when leaving the Civil Unrest zone.	icon_status.darkriftrage_tex
@@ -5229,7 +5232,7 @@
 999009781	Buff	False	True	True			icon_status.minddomination_tex
 999009790	Buff	True	True	False	Stagger Immunity	Immune to stagger.	icon_status.balanceup_tex
 999009800	Buff	True	True	False	Awesome Might	Couldn't fully digest the awesome might and became big.	icon_status.vitality_tex
-999009810	Buff	True	True	False	Pollutant	You are contaminated with industrial waste, as is anyone who gets too close to you. 	icon_status.darkriftareawind_tex
+999009810	Buff	True	True	False	Pollutant	You are contaminated with industrial waste, as is anyone who gets too close to you.	icon_status.darkriftareawind_tex
 999009820	Buff	True	True	False	Shield	Protects you with a damage-absorbing barrier, and increases Power by $H_W_GOOD50%$COLOR_END. The only thing left to do is killing them all.	icon_status.plusfocus_tex
 999010000	Buff	True	True	True	Battleground Noctenium Infusion	Activates a skill's noctenium effects.	icon_items.union_supplies5_tex
 81000001	Buff	True	True	False	EP XP Revision Test	Testing	

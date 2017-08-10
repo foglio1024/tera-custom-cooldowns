@@ -837,6 +837,7 @@
 23190	Buff	True	True	False	技能威力增加 [連續 鬥志紋章]	以連續技能使用重擊斬時，技能威力增加$H_W_GOOD25%$COLOR_END。	icon_crest.crestnextskillattackup_tex
 23200	Buff	True	True	False	技能威力增加 [連續 鬥志紋章]	以連續技能使用後擒術時技能威力增加$H_W_GOOD25%$COLOR_END。	icon_crest.crestnextskillattackup_tex
 23210	Buff	True	True	False	MP 持續恢復 [精神紋章]	每$H_W_GOOD1$COLOR_END second恢復 $H_W_GOOD6%$COLOR_END的 MP。	icon_crest.crestpassivemprecoveryup_tex
+23220	Buff	False	True	False	看不見的異常狀態		icon_crest.crestpassivemprecoveryup_tex
 24010	Buff	True	True	False	力量增加 [體力紋章]	力量提升$H_W_GOOD20%$COLOR_END。	icon_crest.crestactiveattackup_tex
 24020	Buff	True	True	False	消耗MP減少 [連續 精神紋章]	以連續技使用打擊大地時，消耗MP減少$H_W_GOOD-63$COLOR_END。	icon_crest.crestnextskillmpdown_tex
 24030	Buff	True	True	False	消耗MP減少 [連續 精神紋章]	以連續技使用疾走時，消耗MP減少$H_W_GOOD-75$COLOR_END。	icon_crest.crestnextskillmpdown_tex
@@ -1595,15 +1596,15 @@
 470023	Buff	False	True	False		不該看到	
 470024	Buff	False	True	False	善變 - 力量增加	識破塔勒斯基的謊言而力量增加。	
 470025	Buff	False	True	False	善變 - 即死	完完全全被塔勒斯基給騙了呢。即將死亡。	
-470026	Stun	True	False	False	雪人	被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 20%。	icon_status.icedamage_tex
-470027	Stun	True	False	False	雪人	被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 20%。	icon_status.icedamage_tex
-470028	Stun	True	False	False	雪人	被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 20%。	icon_status.icedamage_tex
+470026	Stun	True	False	False	雪人	被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 25%。	icon_status.icedamage_tex
+470027	Stun	True	False	False	雪人	被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 25%。	icon_status.icedamage_tex
+470028	Stun	True	False	False	雪人	被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 25%。	icon_status.icedamage_tex
 470029	WeakeningEffect	False	True	False			
 470030	Buff	True	True	False	善變 - 力量增加	識破塔勒斯基的謊言而力量增加。	icon_skills.handyslash_tex
 470031	Buff	False	True	False	善變	據說塔勒斯基的心就像蘆葦一樣擺動不定。對於是否要以 5/4/3的單位來撒謊這件事一直感到困擾。	icon_status.battlecommand03_tex
 470032	Buff	False	True	False			icon_status.battlecommand04_tex
 470033	Buff	False	True	False			icon_status.battlecommand01_tex
-470034	DamageOverTime	True	False	False	出血	HP每秒會減少10%。	icon_status.injuredbtdarkness_tex
+470034	DamageOverTime	True	False	False	出血	HP每秒會減少15%。	icon_status.injuredbtdarkness_tex
 470035	WeakeningEffect	False	True	False			icon_status.battlecommand02_tex
 470036	Buff	False	False	False			
 470037	WeakeningEffect	True	True	False	混亂	受到塔勒斯基的攻擊，而成了無法恢復的狀態。	icon_status.battlefieldbuff02_tex
@@ -1827,6 +1828,7 @@
 601600	Buff	True	True	False	弱點觀察	下一次的攻擊不管是在哪個位置，都會受到跟後方攻擊一樣的傷害	icon_skills.weak_point_observed
 601700	Buff	False	True	False	蜘蛛陷阱箭矢爆發	(不該看到的異常狀態)	icon_skills.arcaneshockshot02_tex
 601800	Buff	False	True	False	箭雨強化 I	箭雨的傷害不會分散(不該看到的異常狀態)	icon_skills.arrowfall_tex
+601900	Buff	False	True	False			
 700100	Buff	True	True	False	轉生祝福 I	利用祝福力量，於持續時間內死亡時，可以立即在原地復活。	icon_skills.autoresurrect_tex
 700200	Buff	True	True	True	迷霧結界 I - 釋放	對周邊20m範圍內的組隊隊員和自己，賦予迷霧結界效果。在技能活性化期間，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-30$COLOR_END的MP。	icon_skills.areahpgain_tex
 700201	Buff	True	True	True	迷霧結界 II - 釋放	對周邊20m範圍內的組隊隊員和自己，賦予迷霧結界效果。在技能活性化期間，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-30$COLOR_END的MP。	icon_skills.areahpgain_tex
@@ -3088,9 +3090,9 @@
 981097	Buff	True	False	False			
 981098	Buff	False	True	False			
 981099	Stun	True	True	False	昏厥	受到拉坎的攻擊之前，因被強烈的氣息侵襲而昏厥。	icon_status.confuseup_tex
-981100	Buff	False	True	True			
-981101	Buff	False	True	True			
-981102	Buff	False	True	True			
+981100	Buff	False	True	False			
+981101	Buff	False	True	False			
+981102	Buff	False	True	False			
 981103	Buff	True	True	False			
 981104	Buff	False	True	False			
 981105	Buff	False	True	False			
@@ -3897,6 +3899,7 @@
 10155300	WeakeningEffect	False	True	False			
 10155310	Buff	False	True	False			
 10155320	Buff	False	True	True			
+10230001	Stun	True	False	False			icon_status.sealskill_tex
 15200001	Buff	True	True	False	拉巴圖斯的甲殼	由於拉巴圖斯的甲殼效果 $time內防禦力與體力增加$H_W_GOOD20%$COLOR_END 。該效果被祝福解除等技能攻擊或死亡時也不會消失，退出公會戰地區時才會自動解除。	icon_skills.emergencyshield_tex
 15200002	Buff	True	True	False	德拉坎之火	由於德拉坎的火效果 $time內攻擊力增加$H_W_GOOD20%$COLOR_END 。該效果被祝福解除等技能攻擊或死亡時也不會消失，退出公會戰地區時才會自動解除。	icon_items.campfire_tex
 15200003	Buff	True	True	False	卡伊坦的恐怖	由於卡伊坦的恐怖 $time內 功速, 爆擊率增加$H_W_GOOD10%$COLOR_END, 移動速度增加$H_W_GOOD20$COLOR_END。該效果被祝福解除等技能攻擊或死亡時也不會消失，退出公會戰地區時才會自動解除。	icon_status.darkriftrage_tex

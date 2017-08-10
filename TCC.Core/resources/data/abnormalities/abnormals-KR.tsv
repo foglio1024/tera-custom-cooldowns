@@ -113,7 +113,7 @@
 1491	Buff	True	True	False	지속성 회복 물약	$H_W_GOOD1$COLOR_END second마다 전체 HP 대비 $H_W_GOOD6%$COLOR_END에 달하는 HP가 지속적으로 회복됩니다.	icon_items.potion1_tex
 1495	WeakeningEffect	True	True	False	전장의 독기	전장의 독기에 취해, HP가 초당 20000씩 감소됩니다.	icon_status.poisonstatus_tex
 1510	Buff	False	True	False	급속 회복 물약	전체 HP 대비 $H_W_GOOD50%$COLOR_END에 달하는 HP가 즉시 회복됩니다.	icon_items.potion5_tex
-1511	Buff	False	True	False	엘릭서	전체 HP, MP 대비 $H_W_GOOD60%$COLOR_END에 달하는 HP, MP가 즉시 회복됩니다.	icon_items.potion5_tex
+1511	Buff	False	True	False	엘릭서	전체 HP, MP 대비 $H_W_GOOD60%$COLOR_END에 달하는 HP, MP가 즉시 회복됩니다.	icon_items.eagles_potion_level_47_tex
 1530	Buff	True	True	False	MP 회복 물약	$H_W_GOOD1$COLOR_END second마다 전체 MP 대비 $H_W_GOOD5%$COLOR_END에 달하는 MP가 지속적으로 회복됩니다.	icon_items.potion19_tex
 1610	Buff	True	True	False	회복 구슬	$H_W_GOOD1$COLOR_END second마다 전체 HP 대비 $H_W_GOOD2%$COLOR_END에 달하는 HP가 지속적으로 회복됩니다.	icon_items.potion1_tex
 1630	Buff	False	True	False	강력 회복 구슬	전체 HP 대비 $H_W_GOOD25%$COLOR_END에 달하는 HP가 즉시 회복됩니다.	icon_items.potion5_tex
@@ -1275,6 +1275,7 @@
 101210	WeakeningEffect	True	False	False	투지의 일격	맷집이 $H_W_BAD10%$COLOR_END 감소됩니다	icon_skills.aggravatingstrike_tex
 101220	WeakeningEffect	True	False	False	투지의 일격	맷집이 $H_W_BAD8%$COLOR_END 감소되며 HP 회복효과가 $H_W_BAD30%$COLOR_END 감소됩니다.	icon_skills.aggravatingstrike_tex
 101300	Buff	True	True	False	무쌍난무 : 찌르기	매 중첩 시마다 공격자의 공격속도가 0.9%씩 증가합니다. 이 효과는 최대 13번까지 중첩됩니다.	icon_skills.dualrapidpiercing_tex
+101301	Buff	True	True	False	무쌍난무 : 찌르기	매 중첩 시마다 공격자의 공격속도가 0.9%씩 증가합니다. 이 효과는 최대 13번까지 중첩됩니다.	icon_skills.dualrapidpiercing_tex
 101400	WeakeningEffect	True	False	False	물어 뜯기	이동 속도가 $H_W_BAD0,5$COLOR_END 감소됩니다.	icon_skills.heavybite_tex
 101500	WeakeningEffect	True	False	False	파열	질풍 가르기 피격 시 스킬 위력이 $H_W_BAD25%$COLOR_END 증가됩니다.	icon_skills.rupture_tex
 101501	Stun	True	False	False	파열	온몸이 파열되는 충격을 느끼며 $H_W_BAD$time$COLOR_END 동안 기절합니다.	icon_skills.rupture_tex
@@ -5122,6 +5123,7 @@
 93501017	Buff	False	True	False	보이면BTS	흡기/배기 시설 중복 피격을 방지합니다.	
 93501018	Buff	False	True	False	보이면BTS	시한 폭탄 100개 제거 업적 달성 이상상태입니다.	
 93501019	Buff	False	True	True	보이면BTS	어그로 투명 NPC를 조건으로 할당할 수 있습니다.	
+93501020	Buff	False	True	False	보이면BTS	이 PC는 흡기 시설을 이용하였습니다. BTS 159600 현상의 방지를 위해 1초 동안 낙하 피해를 받지 않습니다.	
 93502000	DamageOverTime	True	False	False	전기 충격	강한 전류에 노출되어 1중첩 당 매 $H_W_BAD2$COLOR_END second1마다 $H_W_BAD10%$COLOR_END의 HP가 감소합니다. 최대 12회까지 중첩됩니다.	icon_skills.electricshock_tex
 93502001	WeakeningEffect	False	True	True	보이면BTS	이 NPC는 모든 피해와 리액션, 이상상태에 저항하고 있습니다.	
 93502002	Buff	False	True	True	보이면BTS	이 NPC는 전류 폭발 패턴 사용 시 전자기 유도 공격을 먼저 실행합니다.	

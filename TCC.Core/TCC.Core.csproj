@@ -1243,10 +1243,16 @@
     <Content Include="resources\data\opcodes\317018.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="resources\data\opcodes\319256.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="resources\data\opcodes\smt_313577.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\data\opcodes\smt_317018.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\opcodes\smt_319256.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\data\social.tsv">
@@ -1357,9 +1363,6 @@
     <Resource Include="resources\images\Icon_Laurels\gold.png" />
     <Resource Include="resources\images\Icon_Laurels\silver.png" />
     <Resource Include="resources\fonts\OpenSans-Regular.ttf" />
-    <Content Include="resources\data\abnormalities.tsv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="resources\data\opcodes\313578.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
