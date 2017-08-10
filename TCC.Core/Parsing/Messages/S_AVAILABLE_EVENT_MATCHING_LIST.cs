@@ -9,7 +9,7 @@ using Tera.Game.Messages;
 
 namespace TCC.Parsing.Messages
 {
-    class S_AVAILABLE_EVENT_MATCHING_LIST : ParsedMessage
+    public class S_AVAILABLE_EVENT_MATCHING_LIST : ParsedMessage
     {
         public int VanguardCredits { get; set; }
         public int WeeklyDone { get; set; }
