@@ -13,6 +13,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TCC.ViewModels;
 
 namespace TCC.Controls
 {
@@ -26,8 +27,6 @@ namespace TCC.Controls
         public EventControl()
         {
             InitializeComponent();
-            scaleUp = new DoubleAnimation(1.5, TimeSpan.FromMilliseconds(800)) {EasingFunction = new ElasticEase() };
-            scaleDown = new DoubleAnimation(1, TimeSpan.FromMilliseconds(150)) {EasingFunction = new QuadraticEase() };
         }
 
         private void UserControl_MouseEnter(object sender, MouseEventArgs e)
@@ -40,6 +39,16 @@ namespace TCC.Controls
         {
             border.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, scaleDown);
             border.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, scaleDown);
+        }
+
+        private DailyEvent dc;
+        private void ControlLoaded(object sender, RoutedEventArgs e)
+        {
+            dc = (DailyEvent) DataContext;
+            var fac = 1 / ((1 / .45)*Math.Pow(Math.E,8*dc.DurationFactor) + 1 / (2 * .45));
+            scaleUp = new DoubleAnimation(1.05 + fac, TimeSpan.FromMilliseconds(800)) { EasingFunction = new ElasticEase() };
+            scaleDown = new DoubleAnimation(1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() };
+
         }
     }
 }

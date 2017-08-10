@@ -7,17 +7,18 @@
              mc:Ignorable="d" 
              MouseEnter="UserControl_MouseEnter"
              MouseLeave="UserControl_MouseLeave"
+             Loaded="ControlLoaded"
              >
-    <StackPanel Orientation="Horizontal">
+    <StackPanel Orientation="Horizontal" Margin="0,1,0,1" Opacity="1">
         <FrameworkElement Width="1000" >
             <FrameworkElement.LayoutTransform>
                 <ScaleTransform ScaleX="{Binding StartFactor}"></ScaleTransform>
             </FrameworkElement.LayoutTransform>
         </FrameworkElement>
 
-        <Border Height="10" 
-                MinWidth="10"
-                CornerRadius="4"
+        <Border Height="14" 
+                MinWidth="14"
+                CornerRadius="6"
                 Background="{Binding Color, Converter={StaticResource Converters.StringToFill}}"
                 BorderBrush="White"
                 BorderThickness="2"
@@ -27,7 +28,7 @@
                 RenderTransformOrigin=".5,.5"
                 ToolTipService.InitialShowDelay="0"
                 ToolTipService.ShowDuration="500000">
-            <FrameworkElement Width="1000" HorizontalAlignment="Center">
+            <FrameworkElement Width="1000" HorizontalAlignment="Center" Margin="3,0">
                 <FrameworkElement.LayoutTransform>
                     <ScaleTransform ScaleX="{Binding DurationFactor}"></ScaleTransform>
                 </FrameworkElement.LayoutTransform>
