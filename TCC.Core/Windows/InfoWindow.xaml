@@ -27,7 +27,7 @@
         <Grid.CacheMode>
             <BitmapCache RenderAtScale="2"/>
         </Grid.CacheMode>
-        <Border Width="Auto" Height="Auto" Background="#fff4f4f4" Grid.RowSpan="2"/>
+        <Border Width="Auto" Height="Auto" Background="#fff0f0f0" Grid.RowSpan="2"/>
 
         <!--Title bar-->
         <Grid Height="Auto" MouseLeftButtonDown="DragWindow" Background="#01000000">
@@ -128,7 +128,7 @@
                 </StackPanel>
             </Grid>
             <!--Timeline-->
-            <controls:TimelineControl Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="10,10,10,10"/>
+            <controls:TimelineControl x:Name="TimeLine" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="10,10,10,10"/>
         </Grid>
 
         <Grid.Effect>
