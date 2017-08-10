@@ -34,6 +34,5 @@
         ContentTemplate="{Binding Instance.CurrentHHphase, Converter={StaticResource Converters.HarrowholdPhaseToLayout}}"
                        />
 
-
     </Grid>
 </w:TccWindow>

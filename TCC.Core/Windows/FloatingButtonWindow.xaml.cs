@@ -28,7 +28,9 @@ namespace TCC.Windows
             InitializeComponent();
         }
 
-        private void TccWindow_Loaded(object sender, RoutedEventArgs e)
+        private Timer t;
+        private DoubleAnimation _an;
+        private void FloatinButtonLoaded(object sender, RoutedEventArgs e)
         {
             var _handle = new WindowInteropHelper(this).Handle;
             FocusManager.MakeUnfocusable(_handle);
@@ -41,11 +43,26 @@ namespace TCC.Windows
             var dx = m.M11;
             var dy = m.M22;
             Left = 0;
-            Top = screen.Bounds.Height * dx / 2 - this.ActualHeight/2;
+            Top = screen.Bounds.Height * dx / 2 - this.ActualHeight / 2;
 
             WindowManager.TccVisibilityChanged += WindowManager_TccVisibilityChanged;
-
+            t = new Timer();
+            t.Interval = 2000;
+            t.Tick += RepeatAnimation;
+            _an = new DoubleAnimation(.75, 1, TimeSpan.FromMilliseconds(800)) { EasingFunction = new ElasticEase() };
         }
+
+        private void RepeatAnimation(object sender, EventArgs e)
+        {
+            Animate();
+        }
+
+        private void Animate()
+        {
+            NotificationBubble.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _an);
+            NotificationBubble.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, _an);
+        }
+
         public void AnimateContentOpacity(double opacity)
         {
             Dispatcher.InvokeIfRequired(() =>
@@ -57,13 +74,13 @@ namespace TCC.Windows
         private void WindowManager_TccVisibilityChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             RefreshTopmost();
-            if (WindowManager.IsTccVisible) AnimateContentOpacity(1);
+            if (WindowManager.IsFocused) AnimateContentOpacity(1);
             else AnimateContentOpacity(0);
         }
 
         private void Window_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            rootBorder.RenderTransform.BeginAnimation(TranslateTransform.XProperty, new DoubleAnimation(-32, -1, TimeSpan.FromMilliseconds(150)) {EasingFunction = new QuadraticEase() });
+            rootBorder.RenderTransform.BeginAnimation(TranslateTransform.XProperty, new DoubleAnimation(-32, -1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
         }
 
         private void Window_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
@@ -74,6 +91,13 @@ namespace TCC.Windows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (NotificationBubble.Visibility != Visibility.Hidden)
+            {
+                NotificationBubble.Visibility = Visibility.Hidden;
+                NotificationBubble.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, null);
+                NotificationBubble.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, null);
+                t.Stop();
+            }
             InfoWindowViewModel.Instance.ShowWindow();
         }
 
@@ -86,5 +110,15 @@ namespace TCC.Windows
             Dispatcher.InvokeIfRequired(() => { Topmost = false; Topmost = true; }, System.Windows.Threading.DispatcherPriority.DataBind);
         }
 
+        public void StartNotifying(int closeEventsCount)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                EventAmountTB.Text = closeEventsCount.ToString();
+                NotificationBubble.Visibility = Visibility.Visible;
+                Animate();
+                t.Start();
+            });
+        }
     }
 }
