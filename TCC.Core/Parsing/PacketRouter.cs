@@ -52,7 +52,11 @@ namespace TCC.Parsing
             var td = new TeraData(Region);
             var lang = td.GetLanguage(Region);
 
-            TimeManager.Instance.SetServerTimeZone(lang);
+            if (TimeManager.Instance.CurrentRegion != Region)
+            {
+                TimeManager.Instance.SetServerTimeZone(lang);
+                SettingsManager.LastRegion = lang;
+            }
 
             EntitiesManager.CurrentDatabase = new MonsterDatabase(lang);
             SessionManager.ItemsDatabase = new ItemsDatabase(lang);
@@ -65,12 +69,6 @@ namespace TCC.Parsing
             AchievementGradeDatabase.Load();
             MapDatabase.Load();
             QuestDatabase.Load();
-
-            if (TimeManager.Instance.CheckReset())
-            {
-                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Daily/weekly data has been reset.</FONT>"));
-            }
-
         }
 
         public static void MessageReceived(global::Tera.Message obj)
@@ -284,7 +282,6 @@ namespace TCC.Parsing
             SkillManager.Clear();
             EntitiesManager.ClearNPC();
             GroupWindowViewModel.Instance.ClearAll();
-            InfoWindowViewModel.Instance.ClearEvents();
 
         }
 
@@ -463,14 +460,7 @@ namespace TCC.Parsing
 
         internal static void HandleVanguardReceived(S_AVAILABLE_EVENT_MATCHING_LIST x)
         {
-            var ch = InfoWindowViewModel.Instance.Characters.FirstOrDefault(c => c.Id == SessionManager.CurrentPlayer.PlayerId);
-            if (ch != null)
-            {
-                ch.WeekliesDone = x.WeeklyDone;
-                ch.DailiesDone = x.DailyDone;
-                ch.Credits = x.VanguardCredits;
-                InfoWindowViewModel.Instance.SaveToFile();
-            }
+            InfoWindowViewModel.Instance.SetVanguard(x);
         }
 
         internal static void HandleDungeonMessage(S_DUNGEON_EVENT_MESSAGE p)
