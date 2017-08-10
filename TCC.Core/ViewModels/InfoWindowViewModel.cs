@@ -5,11 +5,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media;
 using System.Windows.Threading;
 using System.Xml.Linq;
 using TCC.Data;
 using TCC.Data.Databases;
+using TCC.Parsing.Messages;
 using TCC.Windows;
 
 namespace TCC.ViewModels
@@ -18,10 +21,12 @@ namespace TCC.ViewModels
     {
         static InfoWindowViewModel _instance;
         uint _selectedCharacterId;
+        public bool DiscardFirstVanguardPacket = true;
         public static InfoWindowViewModel Instance => _instance ?? (_instance = new InfoWindowViewModel());
         public SynchronizedObservableCollection<Character> Characters { get; set; }
         public SynchronizedObservableCollection<EventGroup> EventGroups { get; set; }
         public SynchronizedObservableCollection<TimeMarker> Markers { get; set; }
+        public SynchronizedObservableCollection<DailyEvent> SpecialEvents{ get; set; }
         public ICollectionView SoloDungs { get; set; }
         public ICollectionView T2Dungs { get; set; }
         public ICollectionView T3Dungs { get; set; }
@@ -43,8 +48,9 @@ namespace TCC.ViewModels
             Characters = new SynchronizedObservableCollection<Character>(_dispatcher);
             EventGroups = new SynchronizedObservableCollection<EventGroup>(_dispatcher);
             Markers = new SynchronizedObservableCollection<TimeMarker>(_dispatcher);
+            SpecialEvents = new SynchronizedObservableCollection<DailyEvent>(_dispatcher);
 
-            Markers.Add(new TimeMarker(DateTime.Now, "Local time"));
+            //Markers.Add(new TimeMarker(DateTime.Now, "Local time"));
             LoadCharacters();
         }
 
@@ -136,10 +142,12 @@ namespace TCC.ViewModels
                 }
                 AddEventGroup(eg);
             }
+            SpecialEvents.Add(new DailyEvent("Reset", TimeManager.Instance.ResetHour,0,"ff0000"));
         }
         public void ClearEvents()
         {
             EventGroups.Clear();
+            SpecialEvents.Clear();
         }
         public void SelectCharacter(Character c)
         {
@@ -176,6 +184,24 @@ namespace TCC.ViewModels
             if (!_dispatcher.Thread.IsAlive) return;
             WindowManager.InfoWindow.ShowWindow();
         }
+
+        public void SetVanguard(S_AVAILABLE_EVENT_MATCHING_LIST x)
+        {
+            if (DiscardFirstVanguardPacket)
+            {
+                DiscardFirstVanguardPacket = false;
+                return;
+            }
+            var ch = Characters.FirstOrDefault(c => c.Id == SessionManager.CurrentPlayer.PlayerId);
+            if (ch != null)
+            {
+                ch.WeekliesDone = x.WeeklyDone;
+                ch.DailiesDone = x.DailyDone;
+                ch.Credits = x.VanguardCredits;
+                SaveToFile();
+            }
+
+        }
         public void SetLoggedIn(uint id)
         {
             foreach (var ch in Characters)
@@ -183,6 +209,7 @@ namespace TCC.ViewModels
                 if (ch.Id == id)
                 {
                     ch.IsLoggedIn = true;
+                    DiscardFirstVanguardPacket = true;
                     NotifyPropertyChanged(nameof(CurrentCharacter));
                     SelectCharacter(CurrentCharacter);
                 }
@@ -275,9 +302,9 @@ namespace TCC.ViewModels
 
     public class TimeMarker : TSPropertyChanged
     {
-        private readonly DispatcherTimer t = new DispatcherTimer();
+        private readonly DispatcherTimer _t = new DispatcherTimer();
         private DateTime _dateTime;
-
+        private readonly int _hourOffset;
         public string TimeString
         {
             get => _dateTime.ToShortTimeString();
@@ -288,20 +315,21 @@ namespace TCC.ViewModels
         }
         public string Name { get; }
         public string Color { get; }
-        public TimeMarker(DateTime time, string name, string color = "ffffff")
+        public TimeMarker(int hourOffset, string name, string color = "ffffff")
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
             Name = name;
             Color = color;
-            _dateTime = time;
-            t.Interval = TimeSpan.FromSeconds(1);
-            t.Tick += T_Tick;
-            t.Start();
+            _hourOffset = hourOffset;
+            _dateTime = DateTime.Now.AddHours(_hourOffset);
+            _t.Interval = TimeSpan.FromSeconds(1);
+            _t.Tick += T_Tick;
+            _t.Start();
         }
 
         private void T_Tick(object sender, EventArgs e)
         {
-            _dateTime = _dateTime.AddSeconds(1);
+            _dateTime = DateTime.Now.AddHours(_hourOffset);
             NotifyPropertyChanged(nameof(TimeString));
             NotifyPropertyChanged(nameof(TimeFactor));
         }
@@ -309,9 +337,9 @@ namespace TCC.ViewModels
 
     public class DailyEvent : TSPropertyChanged
     {
-        DateTime _start;
-        TimeSpan _duration;
-        TimeSpan _realDuration;
+        private DateTime _start;
+        private TimeSpan _duration;
+        private readonly TimeSpan _realDuration;
         public double StartFactor
         {
             get
@@ -325,6 +353,14 @@ namespace TCC.ViewModels
             {
                 return _duration.TotalSeconds / TimeManager.SecondsInDay;
 
+            }
+        }
+        public bool IsClose
+        {
+            get
+            {
+                var ts = _start - TimeManager.Instance.CurrentServerTime;
+                return ts.TotalMinutes > 0 && ts.TotalMinutes <= 5;
             }
         }
         public string Name { get; }
@@ -352,5 +388,6 @@ namespace TCC.ViewModels
             Name = name;
             Color = color;
         }
+
     }
 }
