@@ -49,6 +49,7 @@ namespace TCC
         public static ChatWindow ChatWindow;
         public static SettingsWindow Settings;
         public static InfoWindow InfoWindow;
+        public static FloatingButtonWindow FloatingButton;
         public static ContextMenu ContextMenu;
 
         public static NotifyIcon TrayIcon;
@@ -143,6 +144,8 @@ namespace TCC
         public static void Init()
         {
             LoadWindows();
+            FloatingButton = new FloatingButtonWindow();
+            FloatingButton.Show();
             ContextMenu = new ContextMenu();
             DefaultIcon = new Icon(Application.GetResourceStream(new Uri("resources/tcc-logo.ico", UriKind.Relative)).Stream);
             ConnectedIcon = new Icon(Application.GetResourceStream(new Uri("resources/tcc-logo-on.ico", UriKind.Relative)).Stream);
