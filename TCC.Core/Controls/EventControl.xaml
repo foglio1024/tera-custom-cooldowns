@@ -9,7 +9,7 @@
              MouseLeave="UserControl_MouseLeave"
              Loaded="ControlLoaded"
              >
-    <StackPanel Orientation="Horizontal" Margin="0,1,0,1" Opacity="1">
+    <StackPanel Orientation="Horizontal" Margin="1,1,0,1" Opacity="1">
         <FrameworkElement Width="1000" >
             <FrameworkElement.LayoutTransform>
                 <ScaleTransform ScaleX="{Binding StartFactor}"></ScaleTransform>
@@ -25,10 +25,11 @@
                 HorizontalAlignment="Left"
                 ToolTip="{Binding ToolTip}"
                 Name="border"
+                Padding="5,0,4,0"
                 RenderTransformOrigin=".5,.5"
                 ToolTipService.InitialShowDelay="0"
                 ToolTipService.ShowDuration="500000">
-            <FrameworkElement Width="1000" HorizontalAlignment="Center" Margin="3,0">
+            <FrameworkElement Width="1000" HorizontalAlignment="Center" Margin="0,0">
                 <FrameworkElement.LayoutTransform>
                     <ScaleTransform ScaleX="{Binding DurationFactor}"></ScaleTransform>
                 </FrameworkElement.LayoutTransform>
