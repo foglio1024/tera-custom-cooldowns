@@ -5,14 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
              mc:Ignorable="d" Background="#01000000"
-             MouseEnter="MouseEntered" 
-             MouseLeave="MouseLeft" Margin="0,15,-0,-4"
+             Margin="0,15,-0,-5"
              >
     <Border BorderBrush="#3222" BorderThickness="{Binding Borders, RelativeSource={RelativeSource AncestorType=local:TimeSeparator}}" 
             
            >
-        <TextBlock x:Name="TimeTB" Opacity="1" VerticalAlignment="Bottom" 
-                   IsHitTestVisible="False" Margin="3,0,0,-6" Foreground="#8000"
+        <TextBlock x:Name="TimeTB" Opacity="1" VerticalAlignment="Bottom"  FontSize="11"
+                   IsHitTestVisible="False" Margin="-4,0,0,-13" Foreground="#8000"
                    Text="{Binding TimeText, RelativeSource={RelativeSource AncestorType=local:TimeSeparator}}" />
     </Border>
 </UserControl>
