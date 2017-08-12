@@ -15,9 +15,11 @@ namespace TCC.ViewModels
 
                 NotifyPropertyChanged("Val");
                 NotifyPropertyChanged("Factor");
+                Maxed = Val == Max;
+                NotifyPropertyChanged(nameof(Maxed));
             }
         }
-
+        public bool Maxed { get; set; }
         private int max = 1;
         public int Max
         {
@@ -32,13 +34,7 @@ namespace TCC.ViewModels
             }
         }
 
-        public double Factor
-        {
-            get
-            {
-                return (double)val / max;
-            }
-        }
+        public double Factor => (double)val / max;
 
         private bool status = false;
         public bool Status
