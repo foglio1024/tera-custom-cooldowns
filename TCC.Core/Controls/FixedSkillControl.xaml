@@ -5,12 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:converters="clr-namespace:TCC.Converters"
-             mc:Ignorable="d" Loaded="Control_Loaded">
+             mc:Ignorable="d" Loaded="Control_Loaded"
+             ClipToBounds="False">
+    
     <UserControl.LayoutTransform>
         <ScaleTransform ScaleX=".9" ScaleY=".9"/>
     </UserControl.LayoutTransform>
     <Grid Width="55" Height="55" Margin="2" HorizontalAlignment="Left" Name="MainGrid" ClipToBounds="False">
-        <Grid>
+        <Grid ClipToBounds="False">
             <Ellipse Width="51" Height="{Binding ElementName=icon, Path=ActualWidth}" x:Name="icon" Stroke="#afff" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Ellipse.Fill>
                     <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource Converters.IconNameToPath}}"/>
@@ -56,6 +58,7 @@
               x:Name="g" 
               HorizontalAlignment="Right" 
               VerticalAlignment="Bottom"
+              ClipToBounds="False"
               Opacity="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=local:FixedSkillControl}, Converter={StaticResource Converters.BoolToOpacity}}">
 
             <Ellipse x:Name="fill" Fill="#dfff"  Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stroke="#40000000"/>

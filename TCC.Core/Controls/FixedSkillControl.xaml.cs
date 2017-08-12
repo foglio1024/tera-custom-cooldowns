@@ -60,7 +60,7 @@ namespace TCC.Controls
 
         void Control_Loaded(object sender, RoutedEventArgs e)
         {
-            if (DesignerProperties.GetIsInDesignMode(this)) return;
+            if (DesignerProperties.GetIsInDesignMode(this) || DataContext == null) return;
             _context = (FixedSkillCooldown)DataContext;
             _context.PropertyChanged += _context_PropertyChanged;
         }
