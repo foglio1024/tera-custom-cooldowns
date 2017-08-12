@@ -162,6 +162,12 @@ namespace TCC
                                 Convert.ToByte(col.Substring(2, 2), 16),
                                 Convert.ToByte(col.Substring(4, 2), 16));
         }
+
+        public static DateTime FromUnixTime(long unixTime)
+        {
+            DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            return epoch.AddSeconds(unixTime);
+        }
     }
 
     public class DependencyPropertyWatcher<T> : DependencyObject, IDisposable
