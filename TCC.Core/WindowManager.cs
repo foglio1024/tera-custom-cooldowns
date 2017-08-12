@@ -224,7 +224,6 @@ namespace TCC
                 CharacterWindow = new CharacterWindow();
                 CharacterWindow.AllowsTransparency = SettingsManager.CharacterWindowSettings.AllowTransparency;
 
-                CharacterWindowViewModel.Instance.Player = new Data.Player();
                 CharacterWindow.Show();
                 waiting = false;
                 Dispatcher.Run();
