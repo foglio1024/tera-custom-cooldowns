@@ -6,11 +6,13 @@ namespace TCC.ViewModels
     {
         public SynchronizedObservableCollection<DailyEvent> Events { get; }
         public string Name { get; }
+        public bool RemoteCheck { get; }
         public EventGroup(string name)
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
             Events = new SynchronizedObservableCollection<DailyEvent>(_dispatcher);
             Name = name;
+            RemoteCheck = Name == "gbam";
         }
         public void AddEvent(DailyEvent ev)
         {
