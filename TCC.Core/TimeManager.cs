@@ -1,35 +1,30 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Threading;
 using TCC.Data;
+using TCC.Parsing;
 using TCC.ViewModels;
 
 namespace TCC
 {
     public class TimeManager : TSPropertyChanged
     {
-        private const string EuTimezone = "Central Europe Standard Time";
-        private const string NaTimezone = "Central Standard Time";
-        private const string RuTimezone = "Russian Standard Time";
-        private const string TwTimezone = "China Standard Time";
-        private const string JpTimezone = "Tokyo Standard Time";
-        private const string KrTimezone = "Korea Standard Time";
-
-        private const int EuResetHour = 6;
-        private const int NaResetHour = 6;
-        private const int RuResetHour = 6;
-        private const int TwResetHour = 6;
-        private const int JpResetHour = 6;
-        private const int KrResetHour = 6;
-
-        private const DayOfWeek EuResetDay = DayOfWeek.Wednesday;
-        private const DayOfWeek NaResetDay = DayOfWeek.Tuesday;
-        private const DayOfWeek RuResetDay = DayOfWeek.Wednesday;
-        private const DayOfWeek TwResetDay = DayOfWeek.Wednesday;
-        private const DayOfWeek JpResetDay = DayOfWeek.Wednesday;
-        private const DayOfWeek KrResetDay = DayOfWeek.Wednesday;
+        private readonly Dictionary<string, TeraServerTimeInfo> _serverTimezones = new Dictionary<string, TeraServerTimeInfo>
+        {
+            {"EU", new TeraServerTimeInfo("Central Europe Standard Time", 6, DayOfWeek.Wednesday) },
+            {"NA", new TeraServerTimeInfo("Central Standard Time", 6, DayOfWeek.Tuesday) },
+            {"RU", new TeraServerTimeInfo("Russian Standard Time", 6, DayOfWeek.Wednesday) },
+            {"TW", new TeraServerTimeInfo("China Standard Time", 6, DayOfWeek.Wednesday) },
+            {"JP", new TeraServerTimeInfo("Tokyo Standard Time", 6, DayOfWeek.Wednesday) },
+            {"KR", new TeraServerTimeInfo("Korea Standard Time", 6, DayOfWeek.Wednesday) }
+        };
 
         public const double SecondsInDay = 60 * 60 * 24;
+        private const string BaseUrl = "https://tcc-web-99a64.firebaseapp.com/bam";
 
         private static TimeManager _instance;
         private DayOfWeek _resetDay;
@@ -43,7 +38,7 @@ namespace TCC
         private TimeManager()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
-            var s = new DispatcherTimer {Interval = TimeSpan.FromSeconds(1)};
+            var s = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             s.Tick += CheckNewDay;
             s.Start();
         }
@@ -65,50 +60,23 @@ namespace TCC
 
         public void SetServerTimeZone(string region)
         {
-            if (region == null) return;
+            if (string.IsNullOrEmpty(region)) return;
             CurrentRegion = region.StartsWith("EU") ? "EU" : region;
+
             SettingsManager.LastRegion = CurrentRegion;
-            var timezone = TimeZoneInfo.Local;
-            if (region.StartsWith("EU"))
+
+            var timezone = TimeZoneInfo.GetSystemTimeZones()
+                .FirstOrDefault(x => x.Id == _serverTimezones[CurrentRegion].Timezone);
+            ResetHour = _serverTimezones[CurrentRegion].ResetHour;
+            _resetDay = _serverTimezones[CurrentRegion].ResetDay;
+
+            if (timezone != null)
             {
-                timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == EuTimezone);
-                ResetHour = EuResetHour;
-                _resetDay = EuResetDay;
+                var serverUtcOffset = timezone.IsDaylightSavingTime(DateTime.UtcNow + timezone.BaseUtcOffset)
+                    ? timezone.BaseUtcOffset.Hours + 1
+                    : timezone.BaseUtcOffset.Hours;
+                _serverHourOffset = -TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours + serverUtcOffset;
             }
-            else if (region == "NA")
-            {
-                timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == NaTimezone);
-                ResetHour = NaResetHour;
-                _resetDay = NaResetDay;
-            }
-            else if (region == "RU")
-            {
-                timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == RuTimezone);
-                ResetHour = RuResetHour;
-                _resetDay = RuResetDay;
-            }
-            else if (region == "TW")
-            {
-                timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == TwTimezone);
-                ResetHour = TwResetHour;
-                _resetDay = TwResetDay;
-            }
-            else if (region == "JP")
-            {
-                timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == JpTimezone);
-                ResetHour = JpResetHour;
-                _resetDay = JpResetDay;
-            }
-            else if (region == "KR")
-            {
-                timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == KrTimezone);
-                ResetHour = KrResetHour;
-                _resetDay = KrResetDay;
-            }
-            var serverUtcOffset = timezone.IsDaylightSavingTime(DateTime.UtcNow + timezone.BaseUtcOffset)
-                ? timezone.BaseUtcOffset.Hours + 1
-                : timezone.BaseUtcOffset.Hours;
-            _serverHourOffset = -TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours + serverUtcOffset;
 
             if (InfoWindowViewModel.Instance.Markers.FirstOrDefault(x => x.Name.Equals(region + " server time")) == null)
             {
@@ -151,5 +119,67 @@ namespace TCC
                 "<FONT>Daily/weekly data has been reset.</FONT>"));
         }
 
+
+        private async Task<long> DownloadGuildBamTimestamp()
+        {
+            var sb = new StringBuilder(BaseUrl);
+            sb.Append("?srv=");
+            sb.Append(PacketProcessor.ServerId);
+            sb.Append("&reg=");
+            sb.Append(CurrentRegion);
+            var c = new WebClient();
+            try
+            {
+                var data = await c.DownloadStringTaskAsync(sb.ToString());
+                return long.Parse(data);
+
+            }
+            catch (Exception e)
+            {
+                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Failed to retrieve guild bam info.</FONT>"));
+                return 0;
+            }
+        }
+
+        public void UploadGuildBamTimestamp()
+        {
+            var ts = CurrentServerTime - new DateTime(1970, 1, 1);
+            var time = (long)ts.TotalSeconds;
+            var sb = new StringBuilder(BaseUrl);
+            sb.Append("?srv=");
+            sb.Append(PacketProcessor.ServerId);
+            sb.Append("&reg=");
+            sb.Append(CurrentRegion);
+            sb.Append("&set=");
+            sb.Append(time);
+            var c = new WebClient();
+            try
+            {
+                c.UploadDataAsync(new Uri(sb.ToString()), new byte[] { });
+            }
+            catch (Exception e)
+            {
+                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Failed to upload guild bam info.</FONT>"));   
+            }
+
+        }
+        public DateTime RetrieveGuildBamDateTime()
+        {
+            var t = DownloadGuildBamTimestamp();
+            t.Wait();
+            var ts = t.Result;
+            return Utils.FromUnixTime(ts);
+        }
+
+        public void SetGuildBamTime(bool force)
+        {
+            foreach (var eg in InfoWindowViewModel.Instance.EventGroups.Where(x => x.RemoteCheck))
+            {
+                foreach (var ev in eg.Events)
+                {
+                    ev.UpdateFromServer(force);
+                }
+            }
+        }
     }
 }
