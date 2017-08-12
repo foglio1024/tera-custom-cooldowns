@@ -16,10 +16,10 @@
                    x:Name="externalArc"
                    Margin="0,0,0,0">
         </local:Arc>
-
         <local:FixedSkillControl HorizontalAlignment="Center"
                                  VerticalAlignment="Center" Padding="25" Margin="-25"
                                  DataContext="{Binding Cooldown}" />
+
 
 
 
@@ -33,12 +33,16 @@
                 VerticalAlignment="Bottom"
                 CornerRadius="11"
                 Margin="0,0,2,2">
+            <Viewbox StretchDirection="DownOnly" Width="17" Stretch="Uniform">
+                
             <TextBlock Foreground="Black" 
                        Text="{Binding Buff.Seconds}"
                        TextAlignment="Center"
                        HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       FontSize="12"/>
+                       VerticalAlignment="Stretch"
+                       FontSize="14"
+                       FontWeight="DemiBold"/>
+            </Viewbox>
         </Border>
     </Grid>
 </UserControl>

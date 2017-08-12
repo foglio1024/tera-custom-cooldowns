@@ -36,7 +36,7 @@ namespace TCC.Controls
         {
             //externalArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(50000)));
 
-            if (DesignerProperties.GetIsInDesignMode(this)) return;
+            if (DesignerProperties.GetIsInDesignMode(this) || DataContext == null) return;
             _context = (DurationCooldownIndicator)DataContext;
             _context.Buff.PropertyChanged += Buff_PropertyChanged;
         }
