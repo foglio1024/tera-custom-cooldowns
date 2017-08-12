@@ -9,16 +9,7 @@ namespace TCC.ViewModels
         private static CharacterWindowViewModel _instance;
         public static CharacterWindowViewModel Instance => _instance ?? (_instance = new CharacterWindowViewModel());
 
-        private Player _player;
-        public Player Player
-        {
-            get { return _player; }
-            set
-            {
-                if (_player == value) return;
-                _player = value;
-            }
-        }
+        public Player Player => SessionManager.CurrentPlayer;
 
         public bool IsTeraOnTop
         {
@@ -47,6 +38,7 @@ namespace TCC.ViewModels
         public CharacterWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
+            SessionManager.CurrentPlayer.PropertyChanged += CurrentPlayer_PropertyChanged;
             WindowManager.TccVisibilityChanged += (s, ev) =>
             {
                 NotifyPropertyChanged("IsTeraOnTop");
@@ -55,6 +47,11 @@ namespace TCC.ViewModels
                     WindowManager.CharacterWindow.RefreshTopmost();
                 }
             };
+        }
+
+        private void CurrentPlayer_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            NotifyPropertyChanged(e.PropertyName);
         }
     }
 
