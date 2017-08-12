@@ -11,19 +11,19 @@ namespace TCC.Converters
             switch ((Class)value)
             {
                 case Class.Warrior:
-                    return GridLength.Auto;
+                    return Visibility.Visible;
                 case Class.Lancer:
-                    return GridLength.Auto;
-                case Class.Engineer:
-                    return GridLength.Auto;
-                case Class.Fighter:
-                    return GridLength.Auto;
-                case Class.Assassin:
-                    return GridLength.Auto;
-                case Class.Glaiver:
-                    return GridLength.Auto;
+                    return Visibility.Visible;
+                //case Class.Engineer:
+                //    return Visibility.Visible;
+                //case Class.Fighter:
+                //    return Visibility.Visible;
+                //case Class.Assassin:
+                //    return Visibility.Visible;
+                //case Class.Glaiver:
+                //    return Visibility.Visible;
                 default:
-                    return new GridLength(0);
+                    return Visibility.Collapsed;
             }
         }
 
