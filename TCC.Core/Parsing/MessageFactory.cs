@@ -101,8 +101,8 @@ namespace TCC.Parsing
             {typeof(S_RETURN_TO_LOBBY), new Action<S_RETURN_TO_LOBBY>(x => PacketProcessor.HandleReturnToLobby(x)) },
 
             {typeof(S_SPAWN_NPC), new Action<S_SPAWN_NPC>(x => PacketProcessor.HandleSpawnNpc(x)) },
-            {typeof(S_PLAYER_CHANGE_MP), new Action<S_PLAYER_CHANGE_MP>(x => PacketProcessor.HandlePlayerChangeMP(x)) },
-            {typeof(S_CREATURE_CHANGE_HP), new Action<S_CREATURE_CHANGE_HP>(x => PacketProcessor.HandleCreatureChangeHP(x)) },
+            {typeof(S_PLAYER_CHANGE_MP), new Action<S_PLAYER_CHANGE_MP>(x => PacketProcessor.HandlePlayerChangeMp(x)) },
+            {typeof(S_CREATURE_CHANGE_HP), new Action<S_CREATURE_CHANGE_HP>(x => PacketProcessor.HandleCreatureChangeHp(x)) },
             {typeof(S_PLAYER_CHANGE_STAMINA), new Action<S_PLAYER_CHANGE_STAMINA>(x => PacketProcessor.HandlePlayerChangeStamina(x)) },
             {typeof(S_PLAYER_STAT_UPDATE), new Action<S_PLAYER_STAT_UPDATE>(x => PacketProcessor.HandlePlayerStatUpdate(x)) },
             {typeof(S_USER_STATUS), new Action<S_USER_STATUS>(x => PacketProcessor.HandleUserStatusChanged(x)) },
@@ -153,11 +153,11 @@ namespace TCC.Parsing
         };
         private static readonly Dictionary<Type, Delegate> GroupWindow_MP = new Dictionary<Type, Delegate>
         {
-            {typeof(S_PARTY_MEMBER_CHANGE_MP), new Action<S_PARTY_MEMBER_CHANGE_MP>(x => PacketProcessor.HandlePartyMemberMP(x)) },
+            {typeof(S_PARTY_MEMBER_CHANGE_MP), new Action<S_PARTY_MEMBER_CHANGE_MP>(x => PacketProcessor.HandlePartyMemberMp(x)) },
         };
         private static readonly Dictionary<Type, Delegate> GroupWindow_HP = new Dictionary<Type, Delegate>
         {
-            {typeof(S_PARTY_MEMBER_CHANGE_HP), new Action<S_PARTY_MEMBER_CHANGE_HP>(x => PacketProcessor.HandlePartyMemberHP(x)) },
+            {typeof(S_PARTY_MEMBER_CHANGE_HP), new Action<S_PARTY_MEMBER_CHANGE_HP>(x => PacketProcessor.HandlePartyMemberHp(x)) },
         };
         private static readonly Dictionary<Type, Delegate> Phase1Only = new Dictionary<Type, Delegate>
         {
