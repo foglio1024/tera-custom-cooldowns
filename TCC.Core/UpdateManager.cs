@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.IO.Compression;
 using System.IO;
@@ -24,26 +20,29 @@ namespace TCC
                 try
                 {
                     var st = c.OpenRead(databaseVersion);
-                    StreamReader sr = new StreamReader(st);
-
-                    int newVersion = Convert.ToInt32(sr.ReadLine());
-                    int currentVersion = 0;
-                    if (File.Exists("resources/images/current_version"))
+                    if (st != null)
                     {
-                        using (var str = File.OpenText("resources/images/current_version"))
+                        StreamReader sr = new StreamReader(st);
+
+                        int newVersion = Convert.ToInt32(sr.ReadLine());
+                        int currentVersion = 0;
+                        if (File.Exists("resources/images/current_version"))
                         {
-                            currentVersion = Convert.ToInt32(str.ReadLine());
-                            str.Close();
-                        }
+                            using (var str = File.OpenText("resources/images/current_version"))
+                            {
+                                currentVersion = Convert.ToInt32(str.ReadLine());
+                                str.Close();
+                            }
                         
-                    }
+                        }
 
-                    if (newVersion > currentVersion)
-                    {
-                        if (MessageBox.Show(String.Format("Icons database v{0} available. Download now?", newVersion), "TCC", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                        if (newVersion > currentVersion)
                         {
-                            DownloadDatabase();
-                            ExtractDatabase();
+                            if (MessageBox.Show($"Icons database v{newVersion} available. Download now?", "TCC", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                            {
+                                DownloadDatabase();
+                                ExtractDatabase();
+                            }
                         }
                     }
                 }
@@ -98,7 +97,7 @@ namespace TCC
             }
             catch (Exception)
             {
-
+                // ignored
             }
         }
 
@@ -111,16 +110,22 @@ namespace TCC
                 try
                 {
                     var st = c.OpenRead(appVersion);
-                    StreamReader sr = new StreamReader(st);
-                    string newVersionInfo = sr.ReadLine();
-                    string newVersionUrl = sr.ReadLine();
-
-                    var v = Version.Parse(newVersionInfo);
-                    if (v > Assembly.GetExecutingAssembly().GetName().Version)
+                    if (st != null)
                     {
-                        if (MessageBox.Show(String.Format("TCC v{0} available. Download now?", newVersionInfo), "TCC", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                        StreamReader sr = new StreamReader(st);
+                        string newVersionInfo = sr.ReadLine();
+                        string newVersionUrl = sr.ReadLine();
+
+                        if (newVersionInfo != null)
                         {
-                            Update(newVersionUrl);
+                            var v = Version.Parse(newVersionInfo);
+                            if (v > Assembly.GetExecutingAssembly().GetName().Version)
+                            {
+                                if (MessageBox.Show($"TCC v{newVersionInfo} available. Download now?", "TCC", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                                {
+                                    Update(newVersionUrl);
+                                }
+                            }
                         }
                     }
                 }
