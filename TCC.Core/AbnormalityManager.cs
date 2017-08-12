@@ -1,9 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Windows;
-using TCC.Data;
+﻿using TCC.Data;
 using TCC.Data.Databases;
-using TCC.Parsing.Messages;
 using TCC.ViewModels;
 
 namespace TCC
@@ -12,37 +8,37 @@ namespace TCC
 
     public static class AbnormalityManager
     {
-        public const double PLAYER_AB_SIZE = 32;
-        public const double PARTY_AB_SIZE = 28;
-        public const double RAID_AB_SIZE = 24;
-        public const double BOSS_AB_SIZE = 30;
-        public const double PLAYER_AB_LEFT_MARGIN = 2;
-        public const double PARTY_AB_LEFT_MARGIN = 1;
-        public const double RAID_AB_LEFT_MARGIN = -9;
-        public const double BOSS_AB_LEFT_MARGIN = 2;
+        public const double PlayerAbSize = 32;
+        public const double PartyAbSize = 28;
+        public const double RaidAbSize = 24;
+        public const double BossAbSize = 30;
+        public const double PlayerAbLeftMargin = 2;
+        public const double PartyAbLeftMargin = 1;
+        public const double RaidAbLeftMargin = -9;
+        public const double BossAbLeftMargin = 2;
 
 
-        public static AbnormalityDatabase CurrentDB;
+        public static AbnormalityDatabase CurrentDb;
 
         public static void BeginAbnormality(uint id, ulong target, uint duration, int stacks)
         {
-            if (CurrentDB.Abnormalities.TryGetValue(id, out Abnormality ab))
+            if (CurrentDb.Abnormalities.TryGetValue(id, out Abnormality ab))
             {
                 if (!Filter(ab)) return;
                 if (target == SessionManager.CurrentPlayer.EntityId)
                 {
-                    BeginPlayerAbnormality(ab, stacks, duration, target);
+                    BeginPlayerAbnormality(ab, stacks, duration);
                     GroupWindowViewModel.Instance.BeginOrRefreshUserAbnormality(ab, stacks, duration, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
                 }
                 else
                 {
-                    BeginNPCAbnormality(ab, stacks, duration, target);
+                    BeginNpcAbnormality(ab, stacks, duration, target);
                 }
             }
         }
         public static void EndAbnormality(ulong target, uint id)
         {
-            if (CurrentDB.Abnormalities.TryGetValue(id, out Abnormality ab))
+            if (CurrentDb.Abnormalities.TryGetValue(id, out Abnormality ab))
             {
                 if (target == SessionManager.CurrentPlayer.EntityId)
                 {
@@ -61,23 +57,23 @@ namespace TCC
             }
 
         }
-        static void BeginPlayerAbnormality(Abnormality ab, int stacks, uint duration, ulong target)
+        static void BeginPlayerAbnormality(Abnormality ab, int stacks, uint duration)
         {
             if (ab.Type == AbnormalityType.Buff)
             {
                 if (ab.Infinity)
                 {
-                    BuffBarWindowViewModel.Instance.Player.AddOrRefreshInfBuff(ab, duration, stacks, PLAYER_AB_SIZE, PLAYER_AB_LEFT_MARGIN);
+                    BuffBarWindowViewModel.Instance.Player.AddOrRefreshInfBuff(ab, duration, stacks, PlayerAbSize, PlayerAbLeftMargin);
 
                 }
                 else
                 {
-                    BuffBarWindowViewModel.Instance.Player.AddOrRefreshBuff(ab, duration, stacks, PLAYER_AB_SIZE, PLAYER_AB_LEFT_MARGIN);
+                    BuffBarWindowViewModel.Instance.Player.AddOrRefreshBuff(ab, duration, stacks, PlayerAbSize, PlayerAbLeftMargin);
                 }
             }
             else
             {
-                BuffBarWindowViewModel.Instance.Player.AddOrRefreshDebuff(ab, duration, stacks, PLAYER_AB_SIZE, PLAYER_AB_LEFT_MARGIN);
+                BuffBarWindowViewModel.Instance.Player.AddOrRefreshDebuff(ab, duration, stacks, PlayerAbSize, PlayerAbLeftMargin);
                 CharacterWindowViewModel.Instance.Player.AddToDebuffList(ab);
                 ClassManager.SetStatus(ab, true);
 
@@ -109,13 +105,13 @@ namespace TCC
             }
         }
 
-        static void BeginNPCAbnormality(Abnormality ab, int stacks, uint duration, ulong target)
+        static void BeginNpcAbnormality(Abnormality ab, int stacks, uint duration, ulong target)
         {
             //if (EntitiesViewModel.TryGetBossById(target, out Boss b))
             //{
             //    b.AddorRefresh(ab, duration, stacks, BOSS_AB_SIZE, BOSS_AB_LEFT_MARGIN);
             //}
-            BossGageWindowViewModel.Instance.AddOrRefreshNpcAbnormality(ab, stacks, duration, target, BOSS_AB_SIZE, BOSS_AB_LEFT_MARGIN);
+            BossGageWindowViewModel.Instance.AddOrRefreshNpcAbnormality(ab, stacks, duration, target, BossAbSize, BossAbLeftMargin);
         }
         static bool Filter(Abnormality ab)
         {
@@ -126,7 +122,7 @@ namespace TCC
 
         public static void BeginOrRefreshPartyMemberAbnormality(uint playerId, uint serverId, uint id, uint duration, int stacks)
         {
-            if (CurrentDB.Abnormalities.TryGetValue(id, out Abnormality ab))
+            if (CurrentDb.Abnormalities.TryGetValue(id, out Abnormality ab))
             {
                 if (!Filter(ab)) return;
                 GroupWindowViewModel.Instance.BeginOrRefreshUserAbnormality(ab, stacks, duration, playerId, serverId);
@@ -135,7 +131,7 @@ namespace TCC
 
         internal static void EndPartyMemberAbnormality(uint playerId, uint serverId, uint id)
         {
-            if (CurrentDB.Abnormalities.TryGetValue(id, out Abnormality ab))
+            if (CurrentDb.Abnormalities.TryGetValue(id, out Abnormality ab))
             {
                 if (!Filter(ab)) return;
                 GroupWindowViewModel.Instance.EndUserAbnormality(ab, playerId, serverId);
