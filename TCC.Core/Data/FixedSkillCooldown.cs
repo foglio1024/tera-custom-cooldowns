@@ -144,5 +144,9 @@ namespace TCC.Data
             _offsetTimer.Start();
             NotifyPropertyChanged("Refresh");
         }
+        public void ForceAvailable(bool available)
+        {
+            IsAvailable = available;
+        }
     }
 }
