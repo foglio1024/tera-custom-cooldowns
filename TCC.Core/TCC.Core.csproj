@@ -229,9 +229,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AbnormalityManager.cs" />
+    <Compile Include="ClassSpecific\Berserker.cs" />
     <Compile Include="ClassSpecific\Archer.cs" />
+    <Compile Include="ClassSpecific\Brawler.cs" />
     <Compile Include="ClassSpecific\Lancer.cs" />
+    <Compile Include="ClassSpecific\Ninja.cs" />
     <Compile Include="ClassSpecific\Priest.cs" />
+    <Compile Include="ClassSpecific\Reaper.cs" />
+    <Compile Include="ClassSpecific\Slayer.cs" />
+    <Compile Include="ClassSpecific\Sorcerer.cs" />
     <Compile Include="ClassSpecific\Valkyrie.cs" />
     <Compile Include="Controls\ChatControls\ChannelSetting.xaml.cs">
       <DependentUpon>ChannelSetting.xaml</DependentUpon>
@@ -709,6 +715,7 @@
     <Compile Include="Controls\ValueSetting.xaml.cs">
       <DependentUpon>ValueSetting.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TeraServerTimeInfo.cs" />
     <Compile Include="TimeManager.cs" />
     <Compile Include="ViewModels\CharacterWindowViewModel.cs" />
     <Compile Include="ViewModels\ClassManagers\BerserkerBarManager.cs" />

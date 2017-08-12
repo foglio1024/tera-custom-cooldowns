@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace TCC
         public List<FixedSkillCooldown> Secondary;
         void ParseSkillConfig(string filename, Class c)
         {
-            XDocument skillsDoc = XDocument.Load("resources/config/" + filename);
+            XDocument skillsDoc = XDocument.Load("resources/config/skills/" + filename);
             foreach (XElement skillElement in skillsDoc.Descendants("Skill"))
             {
                 uint skillId = Convert.ToUInt32(skillElement.Attribute("id").Value);
@@ -46,6 +47,11 @@ namespace TCC
     }
     public static class SkillUtils
     {
+        private static void SaveSkillFile(XElement xe, string filename)
+        {
+            if (!Directory.Exists("resources/config/skills")) Directory.CreateDirectory("resources/config/skills");
+            xe.Save("resources/config/skills/" + filename);
+        }
         public static void BuildDefaultSkillConfig(string filename, Class c)
         {
             switch (c)
@@ -107,7 +113,7 @@ namespace TCC
                 new XElement("Skill", new XAttribute("id", 205800), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 115431), new XAttribute("row", 1))
                 );
-            skills.Save("resources/config/" + filename);
+            SaveSkillFile(skills, filename);
         }
         private static void BuildDefaultNinjaSkillConfig(string filename)
         {
@@ -119,7 +125,7 @@ namespace TCC
                 new XElement("Skill", new XAttribute("id", 41100), new XAttribute("row", 1)),  //JP
                 new XElement("Skill", new XAttribute("id", 61000), new XAttribute("row", 1))  //1kCuts
                 );
-            skills.Save("resources/config/" + filename);
+            SaveSkillFile(skills, filename);
         }
         private static void BuildDefaultBrawlerSkillConfig(string filename)
         {
@@ -130,7 +136,7 @@ namespace TCC
                 new XElement("Skill", new XAttribute("id", 61131), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 41000), new XAttribute("row", 1))
                 );
-            skills.Save("resources/config/" + filename);
+            SaveSkillFile(skills, filename);
         }
         private static void BuildDefaultGunnerSkillConfig(string filename)
         {
@@ -138,11 +144,11 @@ namespace TCC
                 new XElement("Skill", new XAttribute("id", 70800), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 31100), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 150900), new XAttribute("row", 1)),
-                new XElement("Skill", new XAttribute("id", 91000), new XAttribute("row", 1)),
-                new XElement("Skill", new XAttribute("id", 20700), new XAttribute("row", 1)),
-                new XElement("Skill", new XAttribute("id", 130200), new XAttribute("row", 1))
+                new XElement("Skill", new XAttribute("id", 91000), new XAttribute("row", 1))
+                //new XElement("Skill", new XAttribute("id", 20700), new XAttribute("row", 1)),
+                //new XElement("Skill", new XAttribute("id", 130200), new XAttribute("row", 1))
                 );
-            skills.Save("resources/config/" + filename);
+            SaveSkillFile(skills, filename);
         }
         private static void BuildDefaultReaperSkillConfig(string filename)
         {
@@ -156,7 +162,7 @@ namespace TCC
                 new XElement("Skill", new XAttribute("id", 100230), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 80230), new XAttribute("row", 1))
                 );
-            skills.Save("resources/config/" + filename);
+            SaveSkillFile(skills, filename);
         }
         private static void BuildDefaultMysticSkillConfig(string filename)
         {
@@ -167,18 +173,18 @@ namespace TCC
                 //new XElement("Skill", new XAttribute("id", 410100), new XAttribute("row", 1)), //contagion
                 //new XElement("Skill", new XAttribute("id", 120100), new XAttribute("row", 1)) //vow
                 );
-            skills.Save("resources/config/" + filename);
+            SaveSkillFile(skills, filename);
         }
         private static void BuildDefaultPriestSkillConfig(string filename)
         {
             XElement skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 280100), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 291100), new XAttribute("row", 1)),
-                new XElement("Skill", new XAttribute("id", 390100), new XAttribute("row", 1)),
+                //new XElement("Skill", new XAttribute("id", 390100), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 120100), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 181200), new XAttribute("row", 1))
                 );
-            skills.Save("resources/config/" + filename);
+            SaveSkillFile(skills, filename);
         }
         private static void BuildDefaultArcherSkillConfig(string filename)
         {
@@ -191,7 +197,7 @@ namespace TCC
                 new XElement("Skill", new XAttribute("id", 250200), new XAttribute("row", 1)),  //IT
                 new XElement("Skill", new XAttribute("id", 220800), new XAttribute("row", 1))   //SF
                 );
-            skills.Save("resources/config/" + filename);
+            SaveSkillFile(skills, filename);
         }
         private static void BuildDefaultSorcererSkillConfig(string filename)
         {
@@ -202,10 +208,10 @@ namespace TCC
                 new XElement("Skill", new XAttribute("id", 111140), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 300100), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 120600), new XAttribute("row", 1)),
-                new XElement("Skill", new XAttribute("id", 310100), new XAttribute("row", 1)),
-                new XElement("Skill", new XAttribute("id", 340200), new XAttribute("row", 1))
+                new XElement("Skill", new XAttribute("id", 310100), new XAttribute("row", 1))
+                //new XElement("Skill", new XAttribute("id", 340200), new XAttribute("row", 1))
                 );
-            skills.Save("resources/config/" + filename);
+            SaveSkillFile(skills, filename);
         }
         private static void BuildDefaultBerserkerSkillConfig(string filename)
         {
@@ -217,7 +223,7 @@ namespace TCC
                 new XElement("Skill", new XAttribute("id", 250100), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 260100), new XAttribute("row", 1))
                 );
-            skills.Save("resources/config/" + filename);
+            SaveSkillFile(skills, filename);
         }
         private static void BuildDefaultSlayerSkillConfig(string filename)
         {
@@ -228,7 +234,7 @@ namespace TCC
                 new XElement("Skill", new XAttribute("id", 230200), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 240100), new XAttribute("row", 1))
                 );
-            skills.Save("resources/config/" + filename);
+            SaveSkillFile(skills, filename);
         }
         private static void BuildDefaultWarriorSkillConfig(string filename)
         {
@@ -256,7 +262,7 @@ namespace TCC
                 new XElement("Skill", new XAttribute("id", 340100), new XAttribute("row", 0)),
                 new XElement("Skill", new XAttribute("id", 350100), new XAttribute("row", 0))
                 );
-            skills.Save("resources/config/" + filename);
+            SaveSkillFile(skills, filename);
         }
         private static void BuildDefaultLancerSkillConfig(string filename)
         {
@@ -268,7 +274,7 @@ namespace TCC
                 new XElement("Skill", new XAttribute("id", 100300), new XAttribute("row", 1)),  //debilitate
                 new XElement("Skill", new XAttribute("id", 250730), new XAttribute("row", 1))   //wallop
                 );
-            skills.Save("resources/config/" + filename);
+            SaveSkillFile(skills, filename);
         }
     }
 }
