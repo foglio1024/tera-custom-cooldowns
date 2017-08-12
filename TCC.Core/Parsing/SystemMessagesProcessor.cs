@@ -73,8 +73,17 @@ namespace TCC.Parsing
             { "SMT_QUEST_RESET_MESSAGE", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleQuestMessage(srvMsg, sysMsg)) },
             { "SMT_UPDATE_QUEST_TASK", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleQuestMessage(srvMsg, sysMsg)) },
             { "SMT_GRANT_DUNGEON_COOLTIME_AND_COUNT", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleDungeonEngagedMessage(srvMsg, sysMsg)) },
+            { "SMT_GQUEST_URGENT_NOTIFY", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleGuilBamSpawn(srvMsg, sysMsg)) },
 
         };
+
+        private static void HandleGuilBamSpawn(string srvMsg, SystemMessage sysMsg)
+        {
+            TimeManager.Instance.UploadGuildBamTimestamp();
+            TimeManager.Instance.SetGuildBamTime(true);
+            var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
+            ChatWindowViewModel.Instance.AddChatMessage(msg);
+        }
 
         private static void HandleDungeonEngagedMessage(string srvMsg, SystemMessage sysMsg)
         {
