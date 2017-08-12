@@ -347,7 +347,7 @@ namespace TCC.ViewModels
 
         public void LoadSkills(string filename, Class c)
         {
-            if (!File.Exists("resources/config/" + filename))
+            if (!File.Exists("resources/config/skills/" + filename))
             {
                 SkillUtils.BuildDefaultSkillConfig(filename, c);
             }
