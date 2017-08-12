@@ -1,18 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using TCC.ViewModels;
+using TCC.Data;
 
 namespace TCC.Controls
 {
@@ -30,5 +22,53 @@ namespace TCC.Controls
         }
 
 
+    }
+    public class WarriorStanceToColorConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value != null)
+            {
+                var s = (WarriorStance) value;
+                switch (s)
+                {
+                    default:
+                        return Brushes.DimGray;
+                    case WarriorStance.Assault:
+                        return Application.Current.FindResource("Colors.ClassWindow.AssaultStance");
+                    case WarriorStance.Defensive:
+                        return Application.Current.FindResource("Colors.ClassWindow.DefensiveStance");
+                }
+            }
+            else return Brushes.Transparent;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class ArcherStanceToColorConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value != null)
+            {
+                var s = (ArcherStance)value;
+                switch (s)
+                {
+                    default:
+                        return Brushes.DimGray;
+                    case ArcherStance.SniperEye:
+                        return Application.Current.FindResource("Colors.ClassWindow.SniperEye");
+                }
+            }
+            else return Brushes.Transparent;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

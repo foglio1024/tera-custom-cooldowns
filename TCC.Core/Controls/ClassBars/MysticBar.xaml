@@ -6,12 +6,12 @@
              xmlns:local="clr-namespace:TCC.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Margin="10" Name="root">
+    <Grid Margin="5" Name="root" ClipToBounds="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Column="1">
+        <Grid HorizontalAlignment="Center" Margin="0" Grid.Column="1" ClipToBounds="False">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -24,11 +24,15 @@
                     Grid.Column="0"
                     Grid.ColumnSpan="3"
                     Grid.RowSpan="3"
-                    CornerRadius="0,0,0,0"
-                    Margin="0"
+                    CornerRadius="25"
+                    Margin="-3"
                     VerticalAlignment="Stretch"/>
+
+            <local:MysticAurasIndicator Grid.Row="0" VerticalAlignment="Center" UseLayoutRounding="True"
+                                        HorizontalAlignment="Stretch" Padding="0,0"
+                                        Margin="0,0,0,0" DataContext="{Binding Auras}" />
             <!--HP/MP-->
-            <UniformGrid Columns="1" 
+            <!--<UniformGrid Columns="1" 
                          HorizontalAlignment="Stretch" 
                          VerticalAlignment="Center"
                          Margin="5,5,5,5"
@@ -38,15 +42,16 @@
                          >
                 <local:StatControl DataContext="{Binding HP}" Color="{StaticResource Colors.App.HP}" StatusColor="{StaticResource Colors.App.MP}" Width="85" Margin="0,0,0,2"/>
                 <local:StatControl DataContext="{Binding MP}" Color="{StaticResource Colors.App.MP}" Width="85" Margin="0,0,0,0"/>
-            </UniformGrid>
-            <UniformGrid Rows="1" Margin="5,0,0,0">
+            </UniformGrid>-->
+            <Grid Margin="0" ClipToBounds="False" Background="Transparent">
+<Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <local:FixedSkillControl Padding="25" DataContext="{Binding Contagion}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-25,-25,-15,-25"></local:FixedSkillControl>
+                <local:FixedSkillControl Padding="25"  Grid.Column="1" DataContext="{Binding Vow}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-15,-25,-25,-25"></local:FixedSkillControl>
+            </Grid>
 
-                <local:MysticAurasIndicator Grid.Row="0" VerticalAlignment="Center" UseLayoutRounding="True"
-                                            HorizontalAlignment="Stretch" Padding="0,0"
-                                            Margin="0,0,0,0" DataContext="{Binding Auras}" />
-                <local:FixedSkillControl DataContext="{Binding Contagion}"></local:FixedSkillControl>
-                <local:FixedSkillControl DataContext="{Binding Vow}"></local:FixedSkillControl>
-            </UniformGrid>
         </Grid>
     </Grid>
 

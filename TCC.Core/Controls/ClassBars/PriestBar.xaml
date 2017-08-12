@@ -4,32 +4,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Margin="20" Name="root">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid HorizontalAlignment="Center" Margin="0,0,0,6">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+             xmlns:viewModels="clr-namespace:TCC.ViewModels"
+             mc:Ignorable="d" >
+    <UserControl.DataContext>
+        <viewModels:PriestBarManager/>
+    </UserControl.DataContext>
+    <Grid Margin="5" Name="root">
+        <Grid HorizontalAlignment="Center" Margin="0">
             <Border Style="{StaticResource Styles.DefaultBorder}"
                     Grid.Row="0"
                     Grid.Column="0"
-                    Grid.ColumnSpan="3"
-                    Grid.RowSpan="3"
-                    CornerRadius="0,0,0,0"
-                    Margin="0"
+                    CornerRadius="25"
+                    Margin="1"
                     VerticalAlignment="Stretch"/>
             <!--HP/MP-->
-            <UniformGrid Columns="1" 
+            <!--<UniformGrid Columns="1" 
                          HorizontalAlignment="Stretch" 
                          VerticalAlignment="Center"
                          Margin="5,0"
@@ -39,8 +28,12 @@
                          >
                 <local:StatControl DataContext="{Binding HP}" Color="{StaticResource Colors.App.HP}" StatusColor="{StaticResource Colors.App.MP}" Width="85" Margin="0,0,0,3" VerticalAlignment="Center"/>
                 <local:StatControl DataContext="{Binding MP}" Color="{StaticResource Colors.App.MP}" Width="85" Margin="0,0,0,0" VerticalAlignment="Center"/>
+            </UniformGrid>-->
+            <UniformGrid Rows="1">
+                <local:BuffCooldownControl DataContext="{Binding Instance.EnergyStars}" Margin="-20" Padding="20"/>
+                <local:BuffCooldownControl DataContext="{Binding Instance.Grace}" Margin="-20" Padding="20"/>
+
             </UniformGrid>
-            <local:BuffCooldownControl DataContext="{Binding EnergyStars}" Margin="4" />
         </Grid>
     </Grid>
 </UserControl>

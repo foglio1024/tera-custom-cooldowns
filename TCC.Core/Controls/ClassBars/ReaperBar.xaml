@@ -4,34 +4,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
+             xmlns:viewModels="clr-namespace:TCC.ViewModels"
              mc:Ignorable="d" >
-    <Grid Width="Auto" Margin="10" Name="root">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+    <UserControl.DataContext>
+        <viewModels:ReaperBarManager />
+    </UserControl.DataContext>
+    <Grid Width="Auto" Margin="5" Name="root">
 
         <!--HP/MP-->
         <Grid HorizontalAlignment="Center" Margin="0,0,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-
             <Border Style="{StaticResource Styles.DefaultBorder}"
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="3"
-                    Grid.RowSpan="3"
-                    CornerRadius="0,0,0,0"
-                    Margin="0"
+                    CornerRadius="50"
+                    Margin="-5"
                     VerticalAlignment="Stretch"/>
+            <local:BuffCooldownControl DataContext="{Binding Instance.ShadowReaping}" Margin="-20" Padding="20"/>
+            
             <!--HP/MP-->
-            <UniformGrid Columns="2" 
+            <!--<UniformGrid Columns="2" 
                          HorizontalAlignment="Stretch" 
                          VerticalAlignment="Center"
                          Margin="5"
@@ -41,10 +30,9 @@
                          >
                 <local:StatControl DataContext="{Binding HP}" Color="{StaticResource Colors.App.HP}" StatusColor="{StaticResource Colors.App.MP}" Width="85" Margin="0,0,3,0"/>
                 <local:StatControl DataContext="{Binding MP}" Color="{StaticResource Colors.App.MP}" Width="85" Margin="0,0,0,0"/>
-            </UniformGrid>
+            </UniformGrid>-->
         </Grid>
 
-        <local:FixedSkillContainers Grid.Row="2" HorizontalAlignment="Center" Grid.Column="1" Grid.RowSpan="2" />
     </Grid>
 
 </UserControl>

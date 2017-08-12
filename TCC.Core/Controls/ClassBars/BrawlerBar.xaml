@@ -5,50 +5,52 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
              mc:Ignorable="d" >
-    <Grid Width="Auto" Margin="10" Name="root">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+    <Grid Width="Auto" Margin="10,10,20,20" Name="root">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Column="1" Margin="-35,0,0,0" BorderThickness="0" Height="42" CornerRadius="0,21,21,0"
+                Opacity="{Binding CounterProc, Converter={StaticResource Converters.BoolToOpacity}}" 
+                Background="Orange"
+                />
+        <Grid Grid.Column="1" Margin="-10"
+              Opacity="{Binding CounterProc, Converter={StaticResource Converters.BoolToOpacity}}"
+              >
 
+            <local:FixedSkillControl  HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" DataContext="{Binding Counter}" RenderTransformOrigin=".5,.5">
+                <local:FixedSkillControl.RenderTransform>
+                    <ScaleTransform ScaleY=".8" ScaleX=".8"></ScaleTransform>
+                </local:FixedSkillControl.RenderTransform>
+            </local:FixedSkillControl>
+            <local:Arc StrokeThickness="3" Stroke="Orange" EndAngle="359.9" Width="42" Height="42" Margin="0,0,0,0"></local:Arc>
+        </Grid>
         <!--HP/MP-->
-        <Grid HorizontalAlignment="Center" Margin="0,0,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-
+        <Grid ClipToBounds="False">
             <Border Style="{StaticResource Styles.DefaultBorder}"
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="3"
-                    Grid.RowSpan="3"
-                    CornerRadius="0,0,0,0"
+                    CornerRadius="70"
                     Margin="0"
-                    VerticalAlignment="Stretch"/>
-            <Rectangle Fill="OrangeRed" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="4" Margin="1,1,1,1">
-                <Rectangle.RenderTransform>
-                    <ScaleTransform ScaleX="{Binding ST.Factor}"/>
-                </Rectangle.RenderTransform>
-            </Rectangle>
-
-            <!--HP/MP-->
-            <UniformGrid Columns="2" 
-                         HorizontalAlignment="Stretch" 
-                         VerticalAlignment="Center"
-                         Margin="5"
-                         Grid.RowSpan="2"
-                         Grid.Column="2"
-                         Grid.Row="0"
-                         >
-                <local:StatControl DataContext="{Binding HP}" Color="{StaticResource Colors.App.HP}" StatusColor="{StaticResource Colors.App.MP}" Width="85" Margin="-5,0,0,0"/>
-                <local:StatControl DataContext="{Binding MP}" Color="{StaticResource Colors.App.MP}" Width="85" Margin="3,0,0,0"/>
-                <!--<local:StatControl DataContext="{Binding ST}" Color="OrangeRed" Width="85" Margin="0,0,0,0"/>-->
-            </UniformGrid>
+                    Opacity="1"
+                    Padding="9"
+                    VerticalAlignment="Stretch">
+                <Grid HorizontalAlignment="Center" Margin="0,0,0,0" ClipToBounds="False">
+                    <local:Arc EndAngle="{Binding ST.Factor, Converter={StaticResource Converters.FactorToAngle}}" Margin="-8" StrokeThickness="8" Stroke="Orange">
+                        <FrameworkElement.LayoutTransform>
+                            <ScaleTransform ScaleX="-1"></ScaleTransform>
+                        </FrameworkElement.LayoutTransform>
+                    </local:Arc>
+                    <Grid ClipToBounds="False" Opacity="{Binding IsGfOn, Converter={StaticResource Converters.BoolToOpacity}, ConverterParameter=0.5_1}">
+                        <local:Arc Opacity="{Binding IsGfOn, Converter={StaticResource Converters.BoolToOpacity}}"
+                               StrokeThickness="2" Stroke="Orange" EndAngle="359.9"></local:Arc>
+                        <local:Arc Opacity="{Binding IsGfOn, Converter={StaticResource Converters.BoolToOpacity}}"
+                               Margin="-10" StrokeThickness="2" Stroke="Orange" EndAngle="359.9"></local:Arc>
+                        <local:FixedSkillControl DataContext="{Binding GrowingFury}" Margin="-25" Padding="25"/>
+                    </Grid>
+                </Grid>
+            </Border>
+            <Grid.Effect>
+                <DropShadowEffect Opacity="{Binding IsGfOn, Converter={StaticResource Converters.BoolToOpacity}}" Color="Orange" ShadowDepth="0" BlurRadius="15"></DropShadowEffect>
+            </Grid.Effect>
         </Grid>
     </Grid>
 </UserControl>

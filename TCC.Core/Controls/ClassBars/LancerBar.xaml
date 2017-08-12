@@ -13,43 +13,70 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
+
             <Border Style="{StaticResource Styles.DefaultBorder}"
                     Grid.Row="0"
                     Grid.Column="0"
-                    Grid.ColumnSpan="3"
+                    Grid.ColumnSpan="1"
                     Grid.RowSpan="3"
-                    CornerRadius="0,0,0,0"
-                    Margin="0,0,0,0"
-                    VerticalAlignment="Stretch"/>
-
-            <!--HP/MP-->
-            <UniformGrid Columns="2" 
-                         VerticalAlignment="Stretch" 
-                         Margin="5,2"
-                         Grid.RowSpan="2"
-                         Grid.Column="1"
-                         Grid.Row="1"
-                         Width="170"
-                         Height="60"
-                         >
-                <local:StatControl VerticalAlignment="Center" Margin="0,0,0,0" DataContext="{Binding HP}" Color="{StaticResource Colors.App.HP}" StatusColor="{StaticResource Colors.App.MP}" Width="80" />
-                <local:StatControl VerticalAlignment="Center" Margin="0,0,0,0" DataContext="{Binding LH}" Color="DarkOrange" Width="80"/>
-                <local:StatControl VerticalAlignment="Center" Margin="0,0,0,0" DataContext="{Binding MP}" Color="{StaticResource Colors.App.MP}" Width="80"/>
-                <local:StatControl VerticalAlignment="Center" Margin="0,0,0,0" DataContext="{Binding ST}" Color="#5ff" Width="80"/>
-            </UniformGrid>
-
+                    CornerRadius="27,27,27,27"
+                    Margin="3,0,3,0"
+                    VerticalAlignment="Stretch"
+                    Height="54"/>
             <!--Arush + Gshout-->
             <UniformGrid Grid.Column="0" 
                          Grid.Row="1"
                          Grid.ColumnSpan="1" 
                          Grid.RowSpan="1"
-                         Columns="3"
-                         Margin="5,0,0,0">
-                <local:BuffCooldownControl DataContext="{Binding AdrenalineRush}" Grid.Column="0" Margin="1,0,0,0"/>
+                         Rows="1"
+                         Margin="2,0">
+                <local:BuffCooldownControl DataContext="{Binding AdrenalineRush}" Grid.Column="0" Margin="0,0,0,0"/>
                 <local:BuffCooldownControl DataContext="{Binding GuardianShout}" Grid.Column="1" Margin="0,0,0,0"/>
-                <local:BuffCooldownControl DataContext="{Binding Infuriate}" Grid.Column="2" Margin="0,0,1,0"/>
+                <local:BuffCooldownControl DataContext="{Binding Infuriate}" Grid.Column="2" Margin="0,0,0,0"/>
+                <Border  Style="{StaticResource Styles.DefaultBorder}"  Height="48" Effect="{x:Null}"
+                         HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Width="48" 
+                         CornerRadius="25" >
+                    
+                    <Grid>
+                        <local:Arc  EndAngle="359.9" 
+                                    Width="46" Height="46" Stroke="#2fff" StrokeThickness="5">
+                        </local:Arc>
+                        <local:Arc  EndAngle="{Binding LH.Factor, Converter={StaticResource Converters.FactorToAngle}}" 
+                                    Width="46" Height="46" Stroke="{StaticResource Colors.ClassWindow.AssaultStance}" StrokeThickness="5">
+                        </local:Arc>
+                        <Rectangle Height="48" Width="2" Fill="{StaticResource Colors.App.DefaultBackground}">
+                            <Rectangle.LayoutTransform>
+                                <RotateTransform Angle="0"></RotateTransform>
+                            </Rectangle.LayoutTransform>
+                        </Rectangle>
+                        <Rectangle Height="48" Width="2" Fill="{StaticResource Colors.App.DefaultBackground}">
+                            <Rectangle.LayoutTransform>
+                                <RotateTransform Angle="36"></RotateTransform>
+                            </Rectangle.LayoutTransform>
+                        </Rectangle>
+                        <Rectangle Height="48" Width="2" Fill="{StaticResource Colors.App.DefaultBackground}">
+                            <Rectangle.LayoutTransform>
+                                <RotateTransform Angle="72"></RotateTransform>
+                            </Rectangle.LayoutTransform>
+                        </Rectangle>
+                        <Rectangle Height="48" Width="2" Fill="{StaticResource Colors.App.DefaultBackground}">
+                            <Rectangle.LayoutTransform>
+                                <RotateTransform Angle="108"></RotateTransform>
+                            </Rectangle.LayoutTransform>
+                        </Rectangle>
+                        <Rectangle Height="48" Width="2" Fill="{StaticResource Colors.App.DefaultBackground}">
+                            <Rectangle.LayoutTransform>
+                                <RotateTransform Angle="144"></RotateTransform>
+                            </Rectangle.LayoutTransform>
+                        </Rectangle>
+                        <TextBlock Text="{Binding LH.Val}" Foreground="White" TextAlignment="Center" FontSize="22" Margin="-1,-1,0,0"
+                                   VerticalAlignment="Center"></TextBlock>
+                    </Grid>
+                </Border>
+
             </UniformGrid>
         </Grid>
 
     </Grid>
 </UserControl>
+

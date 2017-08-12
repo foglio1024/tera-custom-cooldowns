@@ -12,6 +12,7 @@ namespace TCC.ViewModels
         public static PriestBarManager Instance => _instance ?? (_instance = new PriestBarManager());
 
         public DurationCooldownIndicator EnergyStars { get; private set; }
+        public DurationCooldownIndicator Grace { get; private set; }
 
         public PriestBarManager() : base()
         {
@@ -26,6 +27,12 @@ namespace TCC.ViewModels
             SkillsDatabase.TryGetSkill(350410, Class.Priest, out Skill es);
             EnergyStars.Cooldown = new FixedSkillCooldown(es, CooldownType.Skill, _dispatcher, true);
             EnergyStars.Buff = new FixedSkillCooldown(es, CooldownType.Skill, _dispatcher, false);
+
+            Grace = new DurationCooldownIndicator(_dispatcher);
+            SkillsDatabase.TryGetSkill(390100, Class.Priest, out Skill gr);
+            Grace.Cooldown = new FixedSkillCooldown(gr, CooldownType.Skill, _dispatcher, true);
+            Grace.Buff = new FixedSkillCooldown(gr, CooldownType.Skill, _dispatcher, false);
+
         }
 
         public override bool StartSpecialSkill(SkillCooldown sk)
@@ -33,6 +40,11 @@ namespace TCC.ViewModels
             if(sk.Skill.IconName == EnergyStars.Cooldown.Skill.IconName)
             {
                 EnergyStars.Cooldown.Start(sk.Cooldown);
+                return true;
+            }
+            if (sk.Skill.IconName == Grace.Cooldown.Skill.IconName)
+            {
+                Grace.Cooldown.Start(sk.Cooldown);
                 return true;
             }
             return false;

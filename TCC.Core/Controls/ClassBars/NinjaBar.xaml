@@ -5,39 +5,70 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
              mc:Ignorable="d" >
-    <Grid Width="Auto" Margin="20" Name="root">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-
-        <!--HP/MP-->
-        <Grid HorizontalAlignment="Center" Margin="0,0,0,6">
+    <Grid Width="Auto" Margin="5" Name="root">
+        <Grid HorizontalAlignment="Center" Margin="0,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
 
             <Border Style="{StaticResource Styles.DefaultBorder}"
                     Grid.Row="0"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="3"
-                    Grid.RowSpan="3"
-                    CornerRadius="0,0,0,0"
-                    Margin="0"
-                    VerticalAlignment="Stretch"/>
-            <Rectangle Fill="#c387ff" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="4" Margin="1,1,1,1">
+                    Grid.Column="1"
+                    
+                    CornerRadius="0,25,25,0"
+                    Margin="-30,6,-2,6"                   
+                    VerticalAlignment="Stretch"
+            />
+            <Border Grid.ColumnSpan="2" 
+                        Background="#777"
+                        Height="30"
+                        ToolTip="Focus"
+                        CornerRadius="3"
+                        Margin="16,0,0,0"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Width="6"
+                        />
+            <Border Grid.ColumnSpan="2" 
+                    Background="#2a6"
+                    Height="30"
+                    ToolTip="Focus"
+                    CornerRadius="3"
+                    Margin="16,0,0,0"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Width="6"
+                    Visibility="{Binding FocusOn, Converter={StaticResource Converters.BoolToVisibleHidden}}">
+            </Border>
+
+            <UniformGrid Rows="1" ClipToBounds="False" Grid.Column="1" Margin="18,0,0,0">
+                <local:FixedSkillControl DataContext="{Binding FireAvalanche}" Padding="20" Margin="-20"/>
+            </UniformGrid>
+            <Border CornerRadius="32" Style="{StaticResource Styles.DefaultBorder}" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="1">
+                <Grid>
+                    <local:Arc EndAngle="{Binding ST.Factor, Converter={StaticResource Converters.FactorToAngle}}" 
+                               StrokeThickness="8" Stroke="#c387ff" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Margin="0,0,0,0"
+                               Width="63" Height="63">
+                        <local:Arc.LayoutTransform>
+                            <ScaleTransform ScaleX="-1"></ScaleTransform>
+                        </local:Arc.LayoutTransform>
+
+                    </local:Arc>
+                    <local:FixedSkillControl DataContext="{Binding BurningHeart}" Padding="20" Margin="-20"
+                                             HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                </Grid>
+            </Border>
+
+            <!--<Rectangle Fill="#c387ff" Grid.Row="0" Grid.Column="0" Margin="1,1,1,1">
                 <Rectangle.RenderTransform>
                     <ScaleTransform ScaleX="{Binding ST.Factor}"/>
                 </Rectangle.RenderTransform>
-            </Rectangle>
-
+            </Rectangle>-->
             <!--HP/MP-->
-            <UniformGrid Columns="2" 
+            <!--<UniformGrid Columns="2" 
                          HorizontalAlignment="Stretch" 
                          VerticalAlignment="Center"
                          Margin="5"
@@ -47,8 +78,8 @@
                          >
                 <local:StatControl DataContext="{Binding HP}" Color="{StaticResource Colors.App.HP}" StatusColor="{StaticResource Colors.App.MP}" Width="85" Margin="0,0,0,0"/>
                 <local:StatControl DataContext="{Binding MP}" Color="{StaticResource Colors.App.MP}" Width="85" Margin="3,0,3,0"/>
-                <!--<local:StatControl DataContext="{Binding ST}" Color="#c387ff" Width="85" Margin="0,0,0,0"/>-->
-            </UniformGrid>
+                --><!--<local:StatControl DataContext="{Binding ST}" Color="#c387ff" Width="85" Margin="0,0,0,0"/>--><!--
+            </UniformGrid>-->
         </Grid>
 
     </Grid>
