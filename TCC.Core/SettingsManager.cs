@@ -172,7 +172,7 @@ namespace TCC
         public static bool LfgOn { get; set; } = true;
         public static double ChatWindowOpacity { get; set; } = 0.4;
         public static DateTime LastRun { get; set; } = DateTime.MinValue;
-        public static string LastRegion { get; set; }
+        public static string LastRegion { get; set; } = "";
         public static List<ChatChannelOnOff> EnabledChatChannels { get; set; } = Utils.GetEnabledChannelsList();
 
         public static void LoadWindowSettings()
