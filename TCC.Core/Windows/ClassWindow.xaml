@@ -96,10 +96,13 @@
         </Style>
 
     </w:TccWindow.Resources>
-    <ContentControl x:Name="root" Content="{Binding CurrentManager}" Margin="5" Background="Red">
+    <ContentControl x:Name="root" Content="{Binding CurrentManager}" Margin="8" Background="Transparent">
         <ContentControl.LayoutTransform>
             <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
         </ContentControl.LayoutTransform>
+        <ContentControl.CacheMode>
+            <BitmapCache RenderAtScale="2"></BitmapCache>
+        </ContentControl.CacheMode>
     </ContentControl>
 
 
