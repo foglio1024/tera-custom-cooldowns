@@ -10,5 +10,6 @@
         <Button Width="70" Height="20" Click="Start">Start</Button>
         <Button Width="70" Height="20" Click="Stop">Stop</Button>
         <Button Width="70" Height="20" Click="Dump">Dump</Button>
+        <Button Width="70" Height="20" Click="Gbam">Gbam</Button>
     </StackPanel>
 </Window>

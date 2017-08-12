@@ -38,5 +38,10 @@ namespace TCC.Windows
         {
             PacketInspector.Dump();
         }
+
+        private void Gbam(object sender, RoutedEventArgs e)
+        {
+            TimeManager.Instance.UploadGuildBamTimestamp();
+        }
     }
 }
