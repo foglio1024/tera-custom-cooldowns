@@ -26,7 +26,7 @@ namespace TCC.ViewModels
         public SynchronizedObservableCollection<Character> Characters { get; set; }
         public SynchronizedObservableCollection<EventGroup> EventGroups { get; set; }
         public SynchronizedObservableCollection<TimeMarker> Markers { get; set; }
-        public SynchronizedObservableCollection<DailyEvent> SpecialEvents{ get; set; }
+        public SynchronizedObservableCollection<DailyEvent> SpecialEvents { get; set; }
         public ICollectionView SoloDungs { get; set; }
         public ICollectionView T2Dungs { get; set; }
         public ICollectionView T3Dungs { get; set; }
@@ -49,8 +49,6 @@ namespace TCC.ViewModels
             EventGroups = new SynchronizedObservableCollection<EventGroup>(_dispatcher);
             Markers = new SynchronizedObservableCollection<TimeMarker>(_dispatcher);
             SpecialEvents = new SynchronizedObservableCollection<DailyEvent>(_dispatcher);
-
-            //Markers.Add(new TimeMarker(DateTime.Now, "Local time"));
             LoadCharacters();
         }
 
@@ -140,9 +138,9 @@ namespace TCC.ViewModels
                     var ev = new DailyEvent(name, start, durationOrEnd, color, isDuration);
                     eg.AddEvent(ev);
                 }
-                AddEventGroup(eg);
+                if(eg.Events.Count != 0) AddEventGroup(eg);
             }
-            SpecialEvents.Add(new DailyEvent("Reset", TimeManager.Instance.ResetHour,0,"ff0000"));
+            SpecialEvents.Add(new DailyEvent("Reset", TimeManager.Instance.ResetHour, 0, "ff0000"));
         }
         public void ClearEvents()
         {
@@ -337,57 +335,61 @@ namespace TCC.ViewModels
 
     public class DailyEvent : TSPropertyChanged
     {
-        private DateTime _start;
-        private TimeSpan _duration;
+        private DateTime Start { get; set; }
+        private TimeSpan Duration { get; set; }
         private readonly TimeSpan _realDuration;
-        public double StartFactor
-        {
-            get
-            {
-                return 60 * (_start.Hour * 60 + _start.Minute) / TimeManager.SecondsInDay;
-            }
-        }
-        public double DurationFactor
-        {
-            get
-            {
-                return _duration.TotalSeconds / TimeManager.SecondsInDay;
-
-            }
-        }
+        public double StartFactor => 60 * (Start.Hour * 60 + Start.Minute) / TimeManager.SecondsInDay;
+        public double DurationFactor => Duration.TotalSeconds / TimeManager.SecondsInDay;
+        private bool _happened = false;
         public bool IsClose
         {
             get
             {
-                var ts = _start - TimeManager.Instance.CurrentServerTime;
+                var ts = Start - TimeManager.Instance.CurrentServerTime;
                 return ts.TotalMinutes > 0 && ts.TotalMinutes <= 5;
             }
         }
-        public string Name { get; }
+        public string Name { get; set; }
         public string ToolTip
         {
             get
             {
-                var d = _duration > TimeSpan.FromHours(0) ? " to " + _start.Add(_realDuration).ToShortTimeString() : "";
-                return Name + " " + _start.ToShortTimeString() + d;
+                var d = Duration > TimeSpan.FromHours(0) ? " to " + Start.Add(_realDuration).ToShortTimeString() : "";
+                return Name + " " + Start.ToShortTimeString() + d;
             }
         }
         public string Color { get; }
         public DailyEvent(string name, double startHour, double durationOrEndHour, string color = "30afff", bool isDuration = true)
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
-            _start = DateTime.Parse(startHour + ":00");
+            Start = DateTime.Parse(startHour + ":00");
             var d = isDuration ? durationOrEndHour : durationOrEndHour - startHour;
-            _duration = TimeSpan.FromHours(d);
-            _realDuration = _duration;
+            Duration = TimeSpan.FromHours(d);
+            _realDuration = Duration;
             var dayend = DateTime.Parse("00:00").AddDays(1);
-            if (_start.Add(_duration) > dayend)
+            if (Start.Add(Duration) > dayend)
             {
-                _duration = dayend - _start;
+                Duration = dayend - Start;
             }
             Name = name;
             Color = color;
         }
 
+        public void UpdateFromServer(bool force = false)
+        {
+            if (TimeManager.Instance.CurrentServerTime >= Start && !_happened)
+            {
+                var time = force ? TimeManager.Instance.CurrentServerTime : TimeManager.Instance.RetrieveGuildBamDateTime();
+
+                if (time >= Start)
+                {
+                    Start = time;
+                    Duration = TimeSpan.Zero;
+                    _happened = true;
+                    NotifyPropertyChanged(nameof(StartFactor));
+                    NotifyPropertyChanged(nameof(DurationFactor));
+                }
+            }
+        }
     }
 }
