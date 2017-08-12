@@ -16,8 +16,8 @@
         <SolidColorBrush x:Key="Colors.App.LightGreen" Color="#5f7"/>
 
         <SolidColorBrush x:Key="Colors.App.DefaultBackground" Color="#101017" Opacity="1"/>
-        <SolidColorBrush x:Key="Colors.App.HP" Color="#f55"/>
-        <SolidColorBrush x:Key="Colors.App.MP" Color="#59f"/>
+        <SolidColorBrush x:Key="Colors.App.HP" Color="#ff5555"/>
+        <SolidColorBrush x:Key="Colors.App.MP" Color="#4499ff"/>
         <SolidColorBrush x:Key="Colors.App.HP.Debuff" Color="#b74be5"/>
 
         <SolidColorBrush x:Key="Colors.App.Gold" Color="#ffb033"/>
@@ -25,7 +25,7 @@
         <SolidColorBrush x:Key="Colors.App.Copper" Color="#be6f4d"/>
 
         <SolidColorBrush x:Key="Colors.ClassWindow.DefensiveStance" Color="#32b3e2" />
-        <SolidColorBrush x:Key="Colors.ClassWindow.AssaultStance" Color="#de2c4a" />
+        <SolidColorBrush x:Key="Colors.ClassWindow.AssaultStance" Color="#ff264b" />
         <SolidColorBrush x:Key="Colors.ClassWindow.SniperEye" Color="#38bde5" />
 
         <SolidColorBrush x:Key="Colors.GroupWindow.Healer" Color="#7cffab" />
