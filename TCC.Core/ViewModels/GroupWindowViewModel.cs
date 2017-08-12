@@ -242,8 +242,8 @@ namespace TCC.ViewModels
         }
         public void BeginOrRefreshUserAbnormality(Abnormality ab, int stacks, uint duration, uint playerId, uint serverId)
         {
-            var size = GroupSize > GROUP_SIZE_THRESHOLD ? AbnormalityManager.RAID_AB_SIZE : AbnormalityManager.PARTY_AB_SIZE;
-            var margin = GroupSize > GROUP_SIZE_THRESHOLD ? AbnormalityManager.RAID_AB_LEFT_MARGIN : AbnormalityManager.PARTY_AB_LEFT_MARGIN;
+            var size = GroupSize > GROUP_SIZE_THRESHOLD ? AbnormalityManager.RaidAbSize : AbnormalityManager.PartyAbSize;
+            var margin = GroupSize > GROUP_SIZE_THRESHOLD ? AbnormalityManager.RaidAbLeftMargin : AbnormalityManager.PartyAbLeftMargin;
 
             if (ab.Infinity) duration = uint.MaxValue;
             User u;
