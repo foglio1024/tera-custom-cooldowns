@@ -1,28 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using TCC.Parsing;
 
 namespace TCC.Controls
 {
     /// <summary>
     /// Logica di interazione per AbnormalityIndicator.xaml
     /// </summary>
-    public partial class AbnormalityIndicator : UserControl
+    public partial class AbnormalityIndicator
     {
         public AbnormalityIndicator()
         {
@@ -52,8 +41,8 @@ namespace TCC.Controls
         {
             _context = (AbnormalityDuration)DataContext;
             _context.PropertyChanged += buff_PropertyChanged;
-            this.RenderTransform = new ScaleTransform(1, 1, .5, .5);
-            this.BeginAnimation(OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(85)));
+            RenderTransform = new ScaleTransform(1, 1, .5, .5);
+            BeginAnimation(OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(85)));
             if (_context.Abnormality.Infinity || _context.Duration == uint.MaxValue) durationLabel.Visibility = Visibility.Hidden;
 
             if (_context.Duration != uint.MaxValue && _context.Animated)
