@@ -29,7 +29,7 @@ namespace TCC.Data
             {
                 if (_currentStance.CompareTo(value) == 0) return;
                 _currentStance = value;
-                NotifyPropertyChanged("CurrentStance");
+                NotifyPropertyChanged(nameof(CurrentStance));
             }
         }
         public StanceTracker()
