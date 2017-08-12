@@ -121,6 +121,8 @@ namespace TCC.Data
                 {
                     maxHP = value;
                     NotifyPropertyChanged("MaxHP");
+                    NotifyPropertyChanged(nameof(HpFactor));
+
                 }
 
             }
@@ -135,6 +137,8 @@ namespace TCC.Data
                 {
                     maxMP = value;
                     NotifyPropertyChanged("MaxMP");
+                    NotifyPropertyChanged(nameof(MpFactor));
+
                 }
 
             }
@@ -149,8 +153,8 @@ namespace TCC.Data
                 {
                     maxST = value;
                     NotifyPropertyChanged("MaxST");
+                    NotifyPropertyChanged(nameof(StFactor));
                 }
-
             }
         }
 
@@ -167,9 +171,15 @@ namespace TCC.Data
                 {
                     currentHP = value;
                     NotifyPropertyChanged("CurrentHP");
+                    NotifyPropertyChanged(nameof(HpFactor));
                 }
             }
         }
+
+        public double HpFactor => MaxHP > 0 ? CurrentHP / MaxHP : 1;
+        public double MpFactor => MaxMP > 0 ? CurrentMP / MaxMP : 1;
+        public double StFactor => MaxST > 0 ? CurrentST / MaxST : 1;
+
         private float currentMP;
         public float CurrentMP
         {
@@ -183,6 +193,8 @@ namespace TCC.Data
                 {
                     currentMP = value;
                     NotifyPropertyChanged("CurrentMP");
+                    NotifyPropertyChanged(nameof(MpFactor));
+
                 }
             }
         }
@@ -199,6 +211,8 @@ namespace TCC.Data
                 {
                     currentST = value;
                     NotifyPropertyChanged("CurrentST");
+                    NotifyPropertyChanged(nameof(StFactor));
+
                 }
             }
         }
