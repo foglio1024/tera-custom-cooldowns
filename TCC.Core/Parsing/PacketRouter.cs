@@ -2,15 +2,13 @@
 using Data;
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Timers;
-using System.Windows.Media;
+using TCC.ClassSpecific;
 using TCC.Data;
 using TCC.Data.Databases;
 using TCC.Parsing.Messages;
@@ -28,24 +26,24 @@ namespace TCC.Parsing
         public static uint ServerId;
         public static OpCodeNamer OpCodeNamer;
         public static OpCodeNamer SystemMessageNamer;
-        public static ConcurrentQueue<Tera.Message> Packets = new ConcurrentQueue<Tera.Message>();
-        static System.Timers.Timer x;
+        private static readonly ConcurrentQueue<Tera.Message> Packets = new ConcurrentQueue<Tera.Message>();
+        private static System.Timers.Timer _x;
         public static void Init()
         {
             TeraSniffer.Instance.MessageReceived += MessageReceived;
             var analysisThread = new Thread(PacketAnalysisLoop);
             analysisThread.Start();
-            x = new System.Timers.Timer();
-            x.Interval = 1000;
-            x.Elapsed += (s, ev) =>
+            _x = new System.Timers.Timer();
+            _x.Interval = 1000;
+            _x.Elapsed += (s, ev) =>
             {
-                Debug.WriteLine("Q:" + Packets.Count + " P:" + processed + " D:" + discarded);
-                processed = 0; discarded = 0;
+                Debug.WriteLine("Q:" + Packets.Count + " P:" + _processed + " D:" + _discarded);
+                _processed = 0; _discarded = 0;
             };
             //x.Start();
         }
 
-        private static void InitDB(uint serverId)
+        private static void InitDb(uint serverId)
         {
             var server = BasicTeraData.Instance.Servers.GetServer(serverId);
             Region = server.Region;
@@ -57,10 +55,11 @@ namespace TCC.Parsing
                 TimeManager.Instance.SetServerTimeZone(lang);
                 SettingsManager.LastRegion = lang;
             }
+            TimeManager.Instance.SetGuildBamTime(false);
 
             EntitiesManager.CurrentDatabase = new MonsterDatabase(lang);
             SessionManager.ItemsDatabase = new ItemsDatabase(lang);
-            AbnormalityManager.CurrentDB = new AbnormalityDatabase(lang);
+            AbnormalityManager.CurrentDb = new AbnormalityDatabase(lang);
             SocialDatabase.Load();
             SystemMessages.Load();
             GuildQuestDatabase.Load();
@@ -71,14 +70,14 @@ namespace TCC.Parsing
             QuestDatabase.Load();
         }
 
-        public static void MessageReceived(global::Tera.Message obj)
+        private static void MessageReceived(Tera.Message obj)
         {
             if (obj.Direction == Tera.MessageDirection.ClientToServer && obj.OpCode == 19900)
             {
                 var msg = new C_CHECK_VERSION_CUSTOM(new CustomReader(obj));
                 Version = msg.Versions[0];
-                OpCodeNamer = new OpCodeNamer(System.IO.Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/{Version}.txt"));
-                SystemMessageNamer = new OpCodeNamer(System.IO.Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/smt_{Version}.txt"));
+                OpCodeNamer = new OpCodeNamer(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/{Version}.txt"));
+                SystemMessageNamer = new OpCodeNamer(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/smt_{Version}.txt"));
                 MessageFactory.Init();
                 TeraSniffer.Instance.Connected = true;
                 ProxyInterop.ConnectToProxy();
@@ -86,8 +85,9 @@ namespace TCC.Parsing
             }
             Packets.Enqueue(obj);
         }
-        static int processed;
-        static int discarded;
+
+        private static int _processed;
+        private static int _discarded;
         private static void PacketAnalysisLoop()
         {
             while (true)
@@ -150,12 +150,10 @@ namespace TCC.Parsing
                 case Class.Warrior:
                     ((WarriorBarManager)ClassManager.CurrentClassManager).EdgeCounter.Val = p.Edge;
                     break;
-                default:
-                    break;
             }
 
         }
-        public static void HandleCreatureChangeHP(S_CREATURE_CHANGE_HP p)
+        public static void HandleCreatureChangeHp(S_CREATURE_CHANGE_HP p)
         {
             SessionManager.SetPlayerMaxHP(p.Target, p.MaxHP);
             if (p.Target == SessionManager.CurrentPlayer.EntityId)
@@ -167,7 +165,7 @@ namespace TCC.Parsing
                 EntitiesManager.UpdateNPCbyCreatureChangeHP(p.Target, p.CurrentHP, p.MaxHP);
             }
         }
-        public static void HandlePlayerChangeMP(S_PLAYER_CHANGE_MP p)
+        public static void HandlePlayerChangeMp(S_PLAYER_CHANGE_MP p)
         {
             SessionManager.SetPlayerMaxMP(p.Target, p.MaxMP);
             SessionManager.SetPlayerMP(p.Target, p.CurrentMP);
@@ -224,9 +222,9 @@ namespace TCC.Parsing
         }
         public static void HandleLogin(S_LOGIN p)
         {
-
-            ServerId = p.ServerId;
-            InitDB(p.ServerId);
+            var srv = p.ServerId;
+            ServerId = srv;
+            InitDb(srv);
 
             CooldownWindowViewModel.Instance.ClearSkills();
             CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(p.CharacterClass).ToLower() + "-skills.xml", p.CharacterClass);
@@ -407,13 +405,16 @@ namespace TCC.Parsing
         {
             var friend = ChatWindowViewModel.Instance.Friends.FirstOrDefault(f => f.PlayerId == x.PlayerId);
             if (friend == null) return;
-            var opcode = "SMT_FRIEND_WALK_INTO_SAME_AREA";
-            string areaName = x.SectionId.ToString();
+            const string opcode = "SMT_FRIEND_WALK_INTO_SAME_AREA";
+            var areaName = x.SectionId.ToString();
             try
             {
                 areaName = MapDatabase.Names[MapDatabase.Worlds[x.WorldId].Guards[x.GuardId].Sections[x.SectionId].NameId];
             }
-            catch (Exception){ }
+            catch (Exception)
+            {
+                // ignored
+            }
             var srvMsg = "@0\vUserName\v" + friend.Name + "\vAreaName\v" + areaName;
             SystemMessages.Messages.TryGetValue(opcode, out SystemMessage m);
 
@@ -632,7 +633,7 @@ namespace TCC.Parsing
 
         public static void HandleAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
-            AbnormalityManager.BeginAbnormality(p.Id, p.TargetId, p.Duration, p.Stacks);
+            AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.Duration, p.Stacks);
             if (!SettingsManager.ClassWindowSettings.Enabled) return;
 
             switch (SessionManager.CurrentPlayer.Class)
@@ -660,6 +661,25 @@ namespace TCC.Parsing
                 case Class.Priest:
                     Priest.CheckBuff(p);
                     break;
+                case Class.Fighter:
+                    Brawler.CheckBrawlerAbnormal(p);
+                    break;
+                case Class.Assassin:
+                    Ninja.CheckFocus(p);
+                    break;
+                case Class.Sorcerer:
+                    Sorcerer.CheckBuff(p);
+                    break;
+                case Class.Soulless:
+                    Reaper.CheckBuff(p);
+                    break;
+                case Class.Slayer:
+                    Slayer.CheckBuff(p);
+                    break;
+                case Class.Berserker:
+                    Berserker.CheckBuff(p);
+                    break;
+
             }
         }
         public static void HandleAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
@@ -684,11 +704,25 @@ namespace TCC.Parsing
                 case Class.Elementalist:
                     Mystic.CheckAura(p);
                     break;
+                case Class.Sorcerer:
+                    Sorcerer.CheckBuff(p);
+                    break;
+                case Class.Soulless:
+                    Reaper.CheckBuff(p);
+                    break;
+                case Class.Slayer:
+                    Slayer.CheckBuff(p);
+                    break;
+                case Class.Berserker:
+                    Berserker.CheckBuff(p);
+                    break;
+
+
             }
         }
         public static void HandleAbnormalityEnd(S_ABNORMALITY_END p)
         {
-            AbnormalityManager.EndAbnormality(p.Target, p.Id);
+            AbnormalityManager.EndAbnormality(p.TargetId, p.AbnormalityId);
             if (!SettingsManager.ClassWindowSettings.Enabled) return;
 
             switch (SessionManager.CurrentPlayer.Class)
@@ -708,6 +742,30 @@ namespace TCC.Parsing
                 case Class.Elementalist:
                     Mystic.CheckAuraEnd(p);
                     break;
+                case Class.Fighter:
+                    Brawler.CheckBrawlerAbnormalEnd(p);
+                    break;
+                case Class.Assassin:
+                    Ninja.CheckFocusEnd(p);
+                    break;
+                case Class.Priest:
+                    Priest.CheckBuffEnd(p);
+                    break;
+                case Class.Sorcerer:
+                    Sorcerer.CheckBuffEnd(p);
+                    break;
+                case Class.Soulless:
+                    Reaper.CheckBuffEnd(p);
+                    break;
+                case Class.Slayer:
+                    Slayer.CheckBuffEnd(p);
+                    break;
+                case Class.Berserker:
+                    Berserker.CheckBuffEnd(p);
+                    break;
+
+
+
             }
         }
 
@@ -744,11 +802,11 @@ namespace TCC.Parsing
         {
             GroupWindowViewModel.Instance.RemoveMember(p.PlayerId, p.ServerId, true);
         }
-        public static void HandlePartyMemberHP(S_PARTY_MEMBER_CHANGE_HP p)
+        public static void HandlePartyMemberHp(S_PARTY_MEMBER_CHANGE_HP p)
         {
             GroupWindowViewModel.Instance.UpdateMemberHP(p.PlayerId, p.ServerId, p.CurrentHP, p.MaxHP);
         }
-        public static void HandlePartyMemberMP(S_PARTY_MEMBER_CHANGE_MP p)
+        public static void HandlePartyMemberMp(S_PARTY_MEMBER_CHANGE_MP p)
         {
             GroupWindowViewModel.Instance.UpdateMemberMP(p.PlayerId, p.ServerId, p.CurrentMP, p.MaxMP);
         }
