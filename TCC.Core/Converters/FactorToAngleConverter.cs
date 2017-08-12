@@ -13,8 +13,10 @@ namespace TCC.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var val = System.Convert.ToDouble(value);
+            double mult = 1;
+            if (parameter != null) mult = System.Convert.ToDouble(parameter);
 
-            return val * 359.99;
+            return val * (359.99/mult);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

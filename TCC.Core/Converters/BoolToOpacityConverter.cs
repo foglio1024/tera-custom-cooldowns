@@ -7,13 +7,21 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            double minOpacty = 0;
+            double maxOpacity = 1;
+            if (parameter != null)
+            {
+                var pars = ((string) parameter).Split('_');
+                minOpacty = Double.Parse(pars[0], CultureInfo.InvariantCulture);
+                maxOpacity = double.Parse(pars[1], CultureInfo.InvariantCulture);
+            }
             if ((bool)value)
             {
-                return 1;
+                return maxOpacity;
             }
             else
             {
-                return 0;
+                return minOpacty;
             }
         }
 
