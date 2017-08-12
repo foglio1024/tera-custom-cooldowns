@@ -1,21 +1,12 @@
 ﻿using DamageMeter.Sniffing;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Threading;
 using TCC.Data;
 using TCC.Data.Databases;
 using TCC.Parsing;
-using TCC.Properties;
 using TCC.ViewModels;
 using TCC.Windows;
 
@@ -24,7 +15,7 @@ namespace TCC
     /// <summary>
     /// Logica di interazione per App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App
     {
         private static void GlobalUnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
         {
@@ -52,8 +43,7 @@ namespace TCC
         {
             var cd = AppDomain.CurrentDomain;
             cd.UnhandledException += GlobalUnhandledExceptionHandler;
-            System.Diagnostics.Process.GetCurrentProcess().PriorityClass =
-                System.Diagnostics.ProcessPriorityClass.Normal;
+            Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.Normal;
             if (File.Exists(Environment.CurrentDirectory + "/TCCupdater.exe"))
             {
                 File.Delete(Environment.CurrentDirectory + "/TCCupdater.exe");
@@ -94,15 +84,13 @@ namespace TCC
             SessionManager.CurrentPlayer.Class = Class.None;
             SessionManager.CurrentPlayer.Name = "player";
             var v = Assembly.GetExecutingAssembly().GetName().Version;
-            var ver = String.Format("TCC v{0}.{1}.{2}", v.Major, v.Minor, v.Build);
+            var ver = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
 
 
             ChatWindowViewModel.Instance.AddChatMessage(
-                new ChatMessage(ChatChannel.TCC, "System", "<FONT>" + ver + "</FONT>"));
+                new ChatMessage(ChatChannel.TCC, "System", $"<FONT>{ver}</FONT>"));
 
             TeraSniffer.Instance.Enabled = true;
-            //var w = new DebugWindow();
-            //w.Show();
             TimeManager.Instance.SetServerTimeZone(SettingsManager.LastRegion);
         }
 
