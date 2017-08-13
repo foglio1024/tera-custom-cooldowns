@@ -4,7 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
+             xmlns:viewModels="clr-namespace:TCC.ViewModels"
              mc:Ignorable="d" >
+    <UserControl.DataContext>
+        <viewModels:BrawlerBarManager/>
+    </UserControl.DataContext>
     <Grid Width="Auto" Margin="10,10,20,20" Name="root">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>

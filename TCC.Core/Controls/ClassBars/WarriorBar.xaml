@@ -5,7 +5,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:sys="clr-namespace:System;assembly=System"
+             xmlns:viewModels="clr-namespace:TCC.ViewModels"
              mc:Ignorable="d" Loaded="UserControl_Loaded">
+    <UserControl.DataContext>
+        <viewModels:WarriorBarManager/>
+    </UserControl.DataContext>
 <UserControl.Resources>
     <local:WarriorStanceToColorConverter x:Key="StanceToColorConverter"></local:WarriorStanceToColorConverter>
 </UserControl.Resources>
