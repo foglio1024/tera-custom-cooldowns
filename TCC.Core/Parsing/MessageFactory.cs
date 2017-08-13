@@ -91,7 +91,7 @@ namespace TCC.Parsing
 
         };
 
-        private static Dictionary<Type, Delegate> MainProcessor = new Dictionary<Type, Delegate>();
+        private static readonly Dictionary<Type, Delegate> MainProcessor = new Dictionary<Type, Delegate>();
         private static readonly Dictionary<Type, Delegate> Base = new Dictionary<Type, Delegate>()
         {
             {typeof(S_LOGIN), new Action<S_LOGIN>(x => PacketProcessor.HandleLogin(x)) },
@@ -111,6 +111,7 @@ namespace TCC.Parsing
             {typeof(S_ABNORMALITY_REFRESH), new Action<S_ABNORMALITY_REFRESH>(x => PacketProcessor.HandleAbnormalityRefresh(x)) },
             {typeof(S_ABNORMALITY_END), new Action<S_ABNORMALITY_END>(x => PacketProcessor.HandleAbnormalityEnd(x)) },
             {typeof(S_USER_EFFECT), new Action<S_USER_EFFECT>(x => PacketProcessor.HandleUserEffect(x)) },
+            {typeof(S_SYSTEM_MESSAGE), new Action<S_SYSTEM_MESSAGE>(x => PacketProcessor.HandleSystemMessage(x)) },
 
             //{typeof(C_LOAD_TOPO_FIN), new Action<C_LOAD_TOPO_FIN>(x => PacketProcessor.HandleLoadTopoFin(x)) },
 
@@ -142,7 +143,7 @@ namespace TCC.Parsing
 
             {typeof(S_CHANGE_PARTY_MANAGER), new Action<S_CHANGE_PARTY_MANAGER>(x => PacketProcessor.HandleChangeLeader(x)) },
         };
-        private static readonly Dictionary<Type, Delegate> GroupWindow_Abnormals = new Dictionary<Type, Delegate>
+        private static readonly Dictionary<Type, Delegate> GroupWindowAbnormals = new Dictionary<Type, Delegate>
         {
             {typeof(S_PARTY_MEMBER_BUFF_UPDATE), new Action<S_PARTY_MEMBER_BUFF_UPDATE>(x => PacketProcessor.HandlePartyMemberBuffUpdate(x)) },
             {typeof(S_PARTY_MEMBER_ABNORMAL_ADD), new Action<S_PARTY_MEMBER_ABNORMAL_ADD>(x => PacketProcessor.HandlePartyMemberAbnormalAdd(x)) },
@@ -151,11 +152,11 @@ namespace TCC.Parsing
             {typeof(S_PARTY_MEMBER_ABNORMAL_CLEAR), new Action<S_PARTY_MEMBER_ABNORMAL_CLEAR>(x => PacketProcessor.HandlePartyMemberAbnormalClear(x)) },
 
         };
-        private static readonly Dictionary<Type, Delegate> GroupWindow_MP = new Dictionary<Type, Delegate>
+        private static readonly Dictionary<Type, Delegate> GroupWindowMp = new Dictionary<Type, Delegate>
         {
             {typeof(S_PARTY_MEMBER_CHANGE_MP), new Action<S_PARTY_MEMBER_CHANGE_MP>(x => PacketProcessor.HandlePartyMemberMp(x)) },
         };
-        private static readonly Dictionary<Type, Delegate> GroupWindow_HP = new Dictionary<Type, Delegate>
+        private static readonly Dictionary<Type, Delegate> GroupWindowHp = new Dictionary<Type, Delegate>
         {
             {typeof(S_PARTY_MEMBER_CHANGE_HP), new Action<S_PARTY_MEMBER_CHANGE_HP>(x => PacketProcessor.HandlePartyMemberHp(x)) },
         };
@@ -172,7 +173,6 @@ namespace TCC.Parsing
             {typeof(S_WHISPER), new Action<S_WHISPER>(x => PacketProcessor.HandleWhisper(x)) },
             {typeof(S_JOIN_PRIVATE_CHANNEL), new Action<S_JOIN_PRIVATE_CHANNEL>(x => PacketProcessor.HandleJoinPrivateChat(x)) },
             {typeof(S_LEAVE_PRIVATE_CHANNEL), new Action<S_LEAVE_PRIVATE_CHANNEL>(x => PacketProcessor.HandleLeavePrivateChat(x)) },
-            {typeof(S_SYSTEM_MESSAGE), new Action<S_SYSTEM_MESSAGE>(x => PacketProcessor.HandleSystemMessage(x)) },
             {typeof(S_SYSTEM_MESSAGE_LOOT_ITEM), new Action<S_SYSTEM_MESSAGE_LOOT_ITEM>(x => PacketProcessor.HandleSystemMessageLoot(x)) },
             {typeof(S_CREST_MESSAGE), new Action<S_CREST_MESSAGE>(x => PacketProcessor.HandleCrestMessage(x)) },
             {typeof(S_ANSWER_INTERACTIVE), new Action<S_ANSWER_INTERACTIVE>(x => PacketProcessor.HandleAnswerInteractive(x)) },
@@ -185,7 +185,7 @@ namespace TCC.Parsing
             {typeof(S_OTHER_USER_APPLY_PARTY), new Action<S_OTHER_USER_APPLY_PARTY>(x => PacketProcessor.HandleUserApplyToParty(x)) },
             {typeof(S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA), new Action<S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA>(x => PacketProcessor.HandleFriendIntoArea(x)) },
         };
-        private static readonly Dictionary<Type, Delegate> ChatWindow_LFG = new Dictionary<Type, Delegate>
+        private static readonly Dictionary<Type, Delegate> ChatWindowLfg = new Dictionary<Type, Delegate>
         {
             {typeof(S_PARTY_MATCH_LINK), new Action<S_PARTY_MATCH_LINK>(x => PacketProcessor.HandleLfgSpam(x)) },
         };
@@ -229,7 +229,7 @@ namespace TCC.Parsing
                 ChatWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
                 if (SettingsManager.LfgOn)
                 {
-                    ChatWindow_LFG.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+                    ChatWindowLfg.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
                 }
             }
             if (SettingsManager.CooldownWindowSettings.Enabled) CooldownWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
@@ -237,9 +237,9 @@ namespace TCC.Parsing
             if (SettingsManager.GroupWindowSettings.Enabled)
             {
                 GroupWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-                if (!SettingsManager.DisablePartyAbnormals) GroupWindow_Abnormals.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-                if (!SettingsManager.DisablePartyMP) GroupWindow_MP.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
-                if (!SettingsManager.DisablePartyHP) GroupWindow_HP.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+                if (!SettingsManager.DisablePartyAbnormals) GroupWindowAbnormals.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+                if (!SettingsManager.DisablePartyMP) GroupWindowMp.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+                if (!SettingsManager.DisablePartyHP) GroupWindowHp.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             }
             if (SettingsManager.ClassWindowSettings.Enabled && SessionManager.CurrentPlayer.Class == Class.Glaiver) ValkyrieOnly.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             if (ViewModels.BossGageWindowViewModel.Instance.CurrentHHphase == HarrowholdPhase.Phase1) Phase1Only.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
