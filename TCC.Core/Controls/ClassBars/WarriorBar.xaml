@@ -9,7 +9,7 @@
 <UserControl.Resources>
     <local:WarriorStanceToColorConverter x:Key="StanceToColorConverter"></local:WarriorStanceToColorConverter>
 </UserControl.Resources>
-    <Grid Width="Auto"  Name="root" ClipToBounds="False">
+    <Grid Width="Auto"  Name="root" ClipToBounds="False" Margin="5">
         <Grid HorizontalAlignment="Center" Margin="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>

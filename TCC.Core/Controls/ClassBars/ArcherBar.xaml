@@ -8,7 +8,7 @@
     <UserControl.Resources>
         <local:ArcherStanceToColorConverter x:Key="archerStanceToColor"></local:ArcherStanceToColorConverter>
     </UserControl.Resources>
-    <Grid Width="Auto" Margin="0" Name="root" ClipToBounds="False">
+    <Grid Width="Auto" Margin="5" Name="root" ClipToBounds="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>

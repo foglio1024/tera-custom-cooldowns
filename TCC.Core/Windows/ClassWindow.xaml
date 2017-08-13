@@ -96,7 +96,7 @@
         </Style>
 
     </w:TccWindow.Resources>
-    <ContentControl x:Name="root" Content="{Binding CurrentManager}" Margin="8" Background="Transparent">
+    <ContentControl x:Name="root" Content="{Binding CurrentManager}" Margin="5" Background="Transparent">
         <ContentControl.LayoutTransform>
             <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
         </ContentControl.LayoutTransform>

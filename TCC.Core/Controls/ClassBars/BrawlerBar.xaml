@@ -10,7 +10,7 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Column="1" Margin="-35,0,0,0" BorderThickness="0" Height="42" CornerRadius="0,21,21,0"
+        <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Column="1" Margin="-30,0,-6,0" BorderThickness="0" Height="44" CornerRadius="0,21,21,0"
                 Opacity="{Binding CounterProc, Converter={StaticResource Converters.BoolToOpacity}}" 
                 Background="Orange"
                 />
@@ -18,12 +18,12 @@
               Opacity="{Binding CounterProc, Converter={StaticResource Converters.BoolToOpacity}}"
               >
 
-            <local:FixedSkillControl  HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" DataContext="{Binding Counter}" RenderTransformOrigin=".5,.5">
+            <local:FixedSkillControl  HorizontalAlignment="Center" Margin="5,0,0,1" VerticalAlignment="Center" DataContext="{Binding Counter}" RenderTransformOrigin=".5,.5">
                 <local:FixedSkillControl.RenderTransform>
-                    <ScaleTransform ScaleY=".8" ScaleX=".8"></ScaleTransform>
+                    <ScaleTransform ScaleY=".9" ScaleX=".9"></ScaleTransform>
                 </local:FixedSkillControl.RenderTransform>
             </local:FixedSkillControl>
-            <local:Arc StrokeThickness="3" Stroke="Orange" EndAngle="359.9" Width="42" Height="42" Margin="0,0,0,0"></local:Arc>
+            <!--<local:Arc StrokeThickness="3" Stroke="Orange" EndAngle="359.9" Width="42" Height="42" Margin="0,0,0,0"></local:Arc>-->
         </Grid>
         <!--HP/MP-->
         <Grid ClipToBounds="False">
