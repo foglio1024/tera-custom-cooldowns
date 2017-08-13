@@ -21,12 +21,6 @@ namespace TCC.ViewModels
             _instance = this;
             CurrentClassManager = this;
             LoadSpecialSkills();
-            ST.PropertyChanged += ST_PropertyChanged;
-        }
-
-        private void ST_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            GrowingFury.ForceAvailable(ST.Maxed);
         }
 
         public FixedSkillCooldown GrowingFury { get; set; }

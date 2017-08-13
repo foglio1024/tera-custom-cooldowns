@@ -22,10 +22,26 @@ namespace TCC.ClassSpecific
             }
             if (p.AbnormalityId == CounterGlyphId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
             {
+                ((BrawlerBarManager)ClassManager.CurrentClassManager).Counter.Start(p.Duration);
                 ((BrawlerBarManager)ClassManager.CurrentClassManager).CounterProc = true;
+
                 return;
             }
+        }
+        public static void CheckBrawlerAbnormal(S_ABNORMALITY_REFRESH p)
+        {
+            if (p.AbnormalityId == GrowingFuryId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            {
+                ((BrawlerBarManager)ClassManager.CurrentClassManager).IsGfOn = true;
+                return;
+            }
+            if (p.AbnormalityId == CounterGlyphId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            {
+                ((BrawlerBarManager)ClassManager.CurrentClassManager).CounterProc = true;
+                ((BrawlerBarManager)ClassManager.CurrentClassManager).Counter.Start(p.Duration);
 
+                return;
+            }
         }
         public static void CheckBrawlerAbnormalEnd(S_ABNORMALITY_END p)
         {
@@ -37,6 +53,8 @@ namespace TCC.ClassSpecific
             if (p.AbnormalityId == CounterGlyphId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
             {
                 ((BrawlerBarManager)ClassManager.CurrentClassManager).CounterProc = false;
+                ((BrawlerBarManager)ClassManager.CurrentClassManager).Counter.Refresh(0);
+
             }
         }
     }

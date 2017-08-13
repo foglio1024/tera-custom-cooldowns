@@ -716,6 +716,9 @@ namespace TCC.Parsing
                 case Class.Berserker:
                     Berserker.CheckBuff(p);
                     break;
+                case Class.Fighter:
+                    Brawler.CheckBrawlerAbnormal(p);
+                    break;
 
 
             }
