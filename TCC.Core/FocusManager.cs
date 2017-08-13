@@ -26,6 +26,7 @@ namespace TCC
         private const int VK_RETURN = 0x0D;
 
         public static System.Timers.Timer FocusTimer;
+        public static bool Running { get; set; } = true;
 
         [DllImport("user32.dll")]
         public static extern IntPtr GetForegroundWindow();

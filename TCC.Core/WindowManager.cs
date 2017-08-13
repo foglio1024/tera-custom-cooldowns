@@ -83,7 +83,7 @@ namespace TCC
                 }
                 else
                 {
-                    isTccVisible = false || debug;
+                    isTccVisible = false;
                     return isTccVisible;
                 }
             }
@@ -101,23 +101,24 @@ namespace TCC
             get => isFocused;
             set
             {
-
+                if (!FocusManager.Running) return;
                 if (isFocused == value)
                 {
-                    if(focusCount > 3)
-                    {
-                        return;
-                    }
+                    //if(focusCount > 3)
+                    //{
+                    //    return;
+                    //}
+                    return;
                 }
                 isFocused = value;
-                if (isFocused)
-                {
-                    focusCount++;
-                }
-                else
-                {
-                    focusCount = 0;
-                }
+                //if (isFocused)
+                //{
+                //    focusCount++;
+                //}
+                //else
+                //{
+                //    focusCount = 0;
+                //}
                 NotifyVisibilityChanged();             
             }
         }

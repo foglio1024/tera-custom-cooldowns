@@ -108,6 +108,7 @@ namespace TCC.Windows
         {
             Dispatcher.Invoke(() =>
             {
+                FocusManager.Running = false;
                 if (playerInfo.IsOpen) CloseTooltip();
                 ChatWindowViewModel.Instance.TooltipInfo.Refresh();
                 playerInfo.IsOpen = true;
@@ -119,6 +120,8 @@ namespace TCC.Windows
             Dispatcher.Invoke(() =>
             {
                 if (_locked) return;
+                FocusManager.Running = true;
+
                 playerInfo.IsOpen = false;
             });
         }
