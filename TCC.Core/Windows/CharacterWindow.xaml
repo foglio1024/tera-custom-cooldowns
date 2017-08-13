@@ -75,11 +75,25 @@
         </Grid.CacheMode>
         <Grid Margin="25,5,5,5"  Name="rootGrid" ClipToBounds="False">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
+            <Border Grid.Row="0" Style="{StaticResource Styles.DefaultBorder}" HorizontalAlignment="Left" 
+                    VerticalAlignment="Top" Margin="0,0,0,2" CornerRadius="4" Height="Auto" Padding="5,0,5,2">
+                <Grid VerticalAlignment="Top">
+                    <TextBlock Foreground="White" FontSize="13" >
+                        <Run Text="L" Foreground="#4fff"></Run>
+                        <Run Text="{Binding Mode=OneWay, Path=Player.Level}" Foreground="#afff"></Run>
+                        <Run Text="" Foreground="#4fff"></Run>
+                        <Run Text="{Binding Mode=OneWay, Path=Player.Name}" FontWeight="DemiBold" FontSize="13"></Run>
+                        <Run Text=" ilvl:" Foreground="#4fff"></Run>
+                        <Run Text="{Binding Mode=OneWay, Path=Player.ItemLevel}" Foreground="#afff"></Run>
+                    </TextBlock>
+                </Grid>
+            </Border>
+
             <Border Grid.Row="1" Width="Auto" Height="Auto" Style="{StaticResource Styles.DefaultBorder}" 
-                    CornerRadius="8" VerticalAlignment="Center">
+                    CornerRadius="8,8,8,8" VerticalAlignment="Center" Opacity="1">
                 <Grid Margin="35,5,5,5" x:Name="BarsMainGrid" Width="350" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -189,6 +203,7 @@
 
                         </TextBlock>
                     </Grid>
+
                 </Grid>
             </Border>
             <Border Grid.Row="1" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Height="62" 
