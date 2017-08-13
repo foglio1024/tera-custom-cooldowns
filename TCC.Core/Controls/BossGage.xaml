@@ -15,6 +15,7 @@
              Height="Auto"
              Visibility="{Binding Visible}"  
              >
+
     <Grid Width="Auto" Name="rootGrid"             
 >
         <Grid.RowDefinitions>

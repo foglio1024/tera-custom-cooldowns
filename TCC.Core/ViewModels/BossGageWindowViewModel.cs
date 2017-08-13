@@ -151,6 +151,7 @@ namespace TCC.ViewModels
 
                 if (templateId == 0 || zoneId == 0) return;
 
+                v = Utils.IsGuildTower(zoneId, templateId) ? Visibility.Visible : v;
                 boss = new Boss(entityId, zoneId, templateId, isBoss, v);
                 if (Utils.IsGuildTower(zoneId, templateId))
                 {
@@ -158,6 +159,7 @@ namespace TCC.ViewModels
                     {
                         boss.Name = towerName;
                     }
+                    boss.IsBoss = true;
                 }
                 if (Utils.IsPhase1Dragon(zoneId, templateId))
                 {
@@ -270,6 +272,11 @@ namespace TCC.ViewModels
         }
         public void AddGuildTower(ulong towerId, string guildName)
         {
+            var t = CurrentNPCs.FirstOrDefault(x => x.EntityId == towerId);
+            if (t != null)
+            {
+                t.Name = guildName;
+            }
             if (GuildTowers.ContainsKey(towerId)) return;
             GuildTowers.Add(towerId, guildName);
         }

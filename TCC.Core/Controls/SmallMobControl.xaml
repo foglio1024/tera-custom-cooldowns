@@ -4,8 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
+             xmlns:data="clr-namespace:TCC.Data"
              mc:Ignorable="d" 
              Visibility="{Binding Visible}">
+
     <Grid Margin="2" Width="100" MaxWidth="150">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

@@ -28,6 +28,7 @@ namespace TCC.Data
                 if (name != value)
                 {
                     name = value;
+                    NotifyPropertyChanged(nameof(Name));
                 }
             }
         }
@@ -213,6 +214,7 @@ namespace TCC.Data
                 EnragePattern.Percentage = 14;
             }
         }
+        public Boss() { }
         public override string ToString()
         {
             return String.Format("{0} - {1}", EntityId, Name);
