@@ -104,7 +104,7 @@ namespace TCC.ViewModels
         {
 
             if (SettingsManager.ClassWindowSettings.Enabled && _classManager.StartSpecialSkill(sk)) return;
-
+            if (!SettingsManager.CooldownWindowSettings.Enabled) return;
             try
             {
                 if (sk.Cooldown < SkillManager.LongSkillTreshold)
@@ -143,6 +143,8 @@ namespace TCC.ViewModels
         }
         private void NormalCd_RefreshSkill(Skill skill, uint cd)
         {
+            if (!SettingsManager.CooldownWindowSettings.Enabled) return;
+
             SkillCooldown sk;
             try
             {
@@ -184,6 +186,8 @@ namespace TCC.ViewModels
         }
         private void NormalCd_RemoveSkill(Skill sk)
         {
+            if (!SettingsManager.CooldownWindowSettings.Enabled) return;
+
             try
             {
 
@@ -210,6 +214,7 @@ namespace TCC.ViewModels
         private void FixedCd_AddOrRefreshSkill(SkillCooldown sk)
         {
             if (SettingsManager.ClassWindowSettings.Enabled && _classManager.StartSpecialSkill(sk)) return;
+            if (!SettingsManager.CooldownWindowSettings.Enabled) return;
 
             var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
             if (skill != null)
@@ -230,6 +235,8 @@ namespace TCC.ViewModels
         }
         private void FixedCd_RefreshSkill(Skill sk, uint cd)
         {
+            if (!SettingsManager.CooldownWindowSettings.Enabled) return;
+
             var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (skill != null)
             {
@@ -257,6 +264,8 @@ namespace TCC.ViewModels
         private void FixedCd_RemoveSkill(Skill sk)
         {
             //sk.SetDispatcher(Dispatcher);
+            if (!SettingsManager.CooldownWindowSettings.Enabled) return;
+
             var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (skill != null)
             {
@@ -284,6 +293,8 @@ namespace TCC.ViewModels
 
         private void AddOrRefreshOtherSkill(SkillCooldown sk)
         {
+            if (!SettingsManager.CooldownWindowSettings.Enabled) return;
+
             sk.SetDispatcher(_dispatcher);
 
             try
