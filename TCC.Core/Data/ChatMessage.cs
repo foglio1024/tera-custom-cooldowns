@@ -542,36 +542,45 @@ namespace TCC.Data
 
                 //get link type
                 var linkIndex = msg.IndexOf("#####");
-                var t = msg.Substring(linkIndex - 1, 1);
-                int type = Int32.Parse(t);
-
-                var aStart = msg.IndexOf("<A");
-                var aEnd = msg.IndexOf("</A>");
-
-                var a = msg.Substring(aStart, aEnd - aStart + 1);
-
-                MessagePiece mp;
-
-                if (type == 1)
+                if (linkIndex > -1)
                 {
-                    mp = ParseItemLink(a);
-                }
-                else if (type == 2)
-                {
-                    mp = ParseQuestLink(a);
-                }
-                else if (type == 3)
-                {
-                    mp = ParseLocationLink(a);
+                    var t = msg.Substring(linkIndex - 1, 1);
+                    int type = Int32.Parse(t);
+
+                    var aStart = msg.IndexOf("<A");
+                    var aEnd = msg.IndexOf("</A>");
+
+                    var a = msg.Substring(aStart, aEnd - aStart + 1);
+
+                    MessagePiece mp;
+
+                    if (type == 1)
+                    {
+                        mp = ParseItemLink(a);
+                    }
+                    else if (type == 2)
+                    {
+                        mp = ParseQuestLink(a);
+                    }
+                    else if (type == 3)
+                    {
+                        mp = ParseLocationLink(a);
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+
+                    mp.SetColor(customColor);
+
+                    AddPiece(mp);
                 }
                 else
                 {
-                    throw new Exception();
+                    var s = msg.IndexOf(">");
+                    var e = msg.IndexOf(C_TAG);
+                    AddPiece(new MessagePiece(msg.Substring(s + 1, e-s), MessagePieceType.Simple, Channel));
                 }
-
-                mp.SetColor(customColor);
-
-                AddPiece(mp);
 
                 //cut message
                 return msg = msg.Substring(msg.IndexOf(C_TAG) + C_TAG.Length);
