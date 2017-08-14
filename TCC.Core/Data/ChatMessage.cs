@@ -579,7 +579,7 @@ namespace TCC.Data
                 {
                     var s = msg.IndexOf(">");
                     var e = msg.IndexOf(C_TAG);
-                    AddPiece(new MessagePiece(msg.Substring(s + 1, e-s), MessagePieceType.Simple, Channel));
+                    AddPiece(new MessagePiece(msg.Substring(s + 1, e-s - 1), MessagePieceType.Simple, Channel));
                 }
 
                 //cut message
