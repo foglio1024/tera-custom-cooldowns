@@ -232,7 +232,7 @@ namespace TCC.Parsing
                     ChatWindowLfg.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
                 }
             }
-            if (SettingsManager.CooldownWindowSettings.Enabled) CooldownWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
+            if (SettingsManager.CooldownWindowSettings.Enabled || SettingsManager.ClassWindowSettings.Enabled) CooldownWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             if (SettingsManager.BossWindowSettings.Enabled || SettingsManager.GroupWindowSettings.Enabled) BossWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
             if (SettingsManager.GroupWindowSettings.Enabled)
             {
