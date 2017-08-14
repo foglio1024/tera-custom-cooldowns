@@ -149,7 +149,12 @@ namespace TCC.Windows
         }
         public void SetVisibility(Visibility v)
         {
-            this.Dispatcher.Invoke(() =>
+            if (!Dispatcher.Thread.IsAlive)
+            {
+                Visibility = v;
+                return;
+            }
+            Dispatcher.Invoke(() =>
             {
                 Visibility = v;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Visibility"));
