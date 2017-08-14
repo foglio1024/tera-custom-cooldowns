@@ -173,6 +173,7 @@ namespace TCC
         public static double ChatWindowOpacity { get; set; } = 0.4;
         public static DateTime LastRun { get; set; } = DateTime.MinValue;
         public static string LastRegion { get; set; } = "";
+        public static string Webhook { get; set; } = "";
         public static List<ChatChannelOnOff> EnabledChatChannels { get; set; } = Utils.GetEnabledChannelsList();
 
         public static void LoadWindowSettings()
@@ -328,6 +329,11 @@ namespace TCC
                     LastRegion = b.Attribute(nameof(LastRegion)).Value;
                 }
                 catch (Exception) { }
+                try
+                {
+                    Webhook = b.Attribute(nameof(Webhook)).Value;
+                }
+                catch (Exception) { }
                 //add settings here
 
                 try
@@ -371,7 +377,8 @@ namespace TCC
                 new XAttribute(nameof(LfgOn), LfgOn),
                 new XAttribute(nameof(ChatWindowOpacity), ChatWindowOpacity),
                 new XAttribute(nameof(LastRun), DateTime.Now),
-                new XAttribute(nameof(LastRegion), LastRegion)
+                new XAttribute(nameof(LastRegion), LastRegion),
+                new XAttribute(nameof(Webhook), Webhook)
                 //add setting here
                 ),
                 BuildChannelsXElement(EnabledChatChannels)

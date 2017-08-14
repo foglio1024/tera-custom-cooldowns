@@ -437,6 +437,7 @@
                             </Grid>
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
+                    <controls:FieldSetting SettingImage="/TCC;component/resources/images/ic_insert_link_white_24dp_2x.png" SettingName="Webhook" Value="{Binding Webhook, Mode=TwoWay}"></controls:FieldSetting>
 
                 </StackPanel>
 

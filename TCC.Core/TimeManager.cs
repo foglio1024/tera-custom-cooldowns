@@ -181,5 +181,35 @@ namespace TCC
                 }
             }
         }
+
+        public void SendWebhookMessage()
+        {
+            if (!String.IsNullOrEmpty(SettingsManager.Webhook))
+            {
+                var msg = "@everyone Guild BAM will spawn soon!";
+                var sb = new StringBuilder("{");
+                sb.Append("\"");sb.Append("content");sb.Append("\"");
+                sb.Append(":");
+                sb.Append("\"");sb.Append(msg);sb.Append("\"");
+                sb.Append(",");
+                sb.Append("\""); sb.Append("username"); sb.Append("\"");
+                sb.Append(":");
+                sb.Append("\""); sb.Append("TCC"); sb.Append("\"");
+                sb.Append("}");
+
+                try
+                {
+                    using (WebClient client = new WebClient())
+                    {
+                        client.Headers.Add("Content-Type", "application/json");
+                        var resp = client.UploadString(SettingsManager.Webhook, "POST", sb.ToString());
+                    }
+                }
+                catch (Exception)
+                {
+                    ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Failed to send guild bam message to Discord.</FONT>"));
+                }
+            }
+        }
     }
 }

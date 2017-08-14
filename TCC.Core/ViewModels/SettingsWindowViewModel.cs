@@ -1102,7 +1102,6 @@ namespace TCC.ViewModels
                 NotifyPropertyChanged(nameof(HhOnlyAggro));
             }
         }
-
         public bool LfgOn
         {
             get => SettingsManager.LfgOn;
@@ -1114,6 +1113,17 @@ namespace TCC.ViewModels
                 MessageFactory.Update();
                 NotifyPropertyChanged(nameof(LfgOn));
 
+            }
+        }
+
+        public string Webhook
+        {
+            get => SettingsManager.Webhook;
+            set
+            {
+                if (value == SettingsManager.Webhook) return;
+                SettingsManager.Webhook = value;
+                NotifyPropertyChanged(nameof(Webhook));
             }
         }
         public SettingsWindowViewModel()

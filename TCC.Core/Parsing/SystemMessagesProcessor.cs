@@ -81,6 +81,7 @@ namespace TCC.Parsing
         {
             TimeManager.Instance.UploadGuildBamTimestamp();
             TimeManager.Instance.SetGuildBamTime(true);
+            TimeManager.Instance.SendWebhookMessage();
             var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
             ChatWindowViewModel.Instance.AddChatMessage(msg);
         }
