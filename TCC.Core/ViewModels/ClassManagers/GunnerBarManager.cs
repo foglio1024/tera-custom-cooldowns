@@ -32,6 +32,8 @@ namespace TCC.ViewModels
             if (e.PropertyName == nameof(ST.Maxed))
             {
                 BurstFire.Cooldown.ForceAvailable(ST.Maxed);
+                Balder.Cooldown.FlashOnAvailable = ST.Maxed;
+                Bombardment.Cooldown.FlashOnAvailable = ST.Maxed;
             }
         }
 
@@ -46,11 +48,11 @@ namespace TCC.ViewModels
             Bombardment = new DurationCooldownIndicator(_dispatcher);
 
             BurstFire.Buff = new FixedSkillCooldown(bfire, CooldownType.Skill, _dispatcher, false);
-            BurstFire.Cooldown = new FixedSkillCooldown(bfire, CooldownType.Skill, _dispatcher, true);
             Balder.Buff = new FixedSkillCooldown(balder, CooldownType.Skill, _dispatcher, false);
-            Balder.Cooldown = new FixedSkillCooldown(balder, CooldownType.Skill, _dispatcher, true);
             Bombardment.Buff = new FixedSkillCooldown(bombard, CooldownType.Skill, _dispatcher, false);
-            Bombardment.Cooldown = new FixedSkillCooldown(bombard, CooldownType.Skill, _dispatcher, true);
+            BurstFire.Cooldown = new FixedSkillCooldown(bfire, CooldownType.Skill, _dispatcher, true);
+            Balder.Cooldown = new FixedSkillCooldown(balder, CooldownType.Skill, _dispatcher, false);
+            Bombardment.Cooldown = new FixedSkillCooldown(bombard, CooldownType.Skill, _dispatcher, false);
 
         }
 

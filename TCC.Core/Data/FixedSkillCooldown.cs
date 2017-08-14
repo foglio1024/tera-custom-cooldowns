@@ -32,6 +32,8 @@ namespace TCC.Data
         }
 
         uint seconds = 0;
+        private bool _flashOnAvailable;
+
         public uint Seconds
         {
             get
@@ -46,7 +48,17 @@ namespace TCC.Data
             }
         }
 
-        public bool FlashOnAvailable { get; set; }
+        public bool FlashOnAvailable
+        {
+            get { return _flashOnAvailable; }
+            set
+            {
+                if (_flashOnAvailable == value) return;
+                _flashOnAvailable = value;
+                NotifyPropertyChanged(nameof(FlashOnAvailable));
+                NotifyPropertyChanged(nameof(IsAvailable));
+            }
+        }
 
         public FixedSkillCooldown(Skill sk, CooldownType t, Dispatcher d, bool flashOnAvailable)
         {

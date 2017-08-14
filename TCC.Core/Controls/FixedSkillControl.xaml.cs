@@ -98,7 +98,6 @@ namespace TCC.Controls
                     {
                         warnTimer.Stop();
                     }
-
                 }
             },
             DispatcherPriority.DataBind);
