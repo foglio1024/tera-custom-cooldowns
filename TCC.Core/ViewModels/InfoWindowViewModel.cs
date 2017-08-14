@@ -388,6 +388,7 @@ namespace TCC.ViewModels
                     _happened = true;
                     NotifyPropertyChanged(nameof(StartFactor));
                     NotifyPropertyChanged(nameof(DurationFactor));
+                    NotifyPropertyChanged(nameof(ToolTip));
                 }
             }
         }
