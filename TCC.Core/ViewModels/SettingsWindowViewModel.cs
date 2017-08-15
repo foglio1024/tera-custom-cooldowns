@@ -1126,6 +1126,16 @@ namespace TCC.ViewModels
                 NotifyPropertyChanged(nameof(Webhook));
             }
         }
+        public string WebhookMessage
+        {
+            get => SettingsManager.WebhookMessage;
+            set
+            {
+                if (value == SettingsManager.WebhookMessage) return;
+                SettingsManager.WebhookMessage = value;
+                NotifyPropertyChanged(nameof(WebhookMessage));
+            }
+        }
         public SettingsWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;

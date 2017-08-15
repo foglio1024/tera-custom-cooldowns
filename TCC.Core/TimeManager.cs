@@ -186,15 +186,18 @@ namespace TCC
         {
             if (!String.IsNullOrEmpty(SettingsManager.Webhook))
             {
-                var msg = "@everyone Guild BAM will spawn soon!";
                 var sb = new StringBuilder("{");
                 sb.Append("\"");sb.Append("content");sb.Append("\"");
                 sb.Append(":");
-                sb.Append("\"");sb.Append(msg);sb.Append("\"");
+                sb.Append("\"");sb.Append(SettingsManager.WebhookMessage);sb.Append("\"");
                 sb.Append(",");
                 sb.Append("\""); sb.Append("username"); sb.Append("\"");
                 sb.Append(":");
                 sb.Append("\""); sb.Append("TCC"); sb.Append("\"");
+                sb.Append(",");
+                sb.Append("\""); sb.Append("avatar_url"); sb.Append("\"");
+                sb.Append(":");
+                sb.Append("\""); sb.Append("http://i.imgur.com/8IltuVz.png"); sb.Append("\"");
                 sb.Append("}");
 
                 try

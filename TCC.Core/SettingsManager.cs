@@ -175,6 +175,7 @@ namespace TCC
         public static string LastRegion { get; set; } = "";
         public static string Webhook { get; set; } = "";
         public static List<ChatChannelOnOff> EnabledChatChannels { get; set; } = Utils.GetEnabledChannelsList();
+        public static string WebhookMessage { get; set; } = "@everyone Guild BAM will spawn soon!";
 
         public static void LoadWindowSettings()
         {
@@ -334,6 +335,11 @@ namespace TCC
                     Webhook = b.Attribute(nameof(Webhook)).Value;
                 }
                 catch (Exception) { }
+                try
+                {
+                    WebhookMessage = b.Attribute(nameof(WebhookMessage)).Value;
+                }
+                catch (Exception) { }
                 //add settings here
 
                 try
@@ -378,7 +384,8 @@ namespace TCC
                 new XAttribute(nameof(ChatWindowOpacity), ChatWindowOpacity),
                 new XAttribute(nameof(LastRun), DateTime.Now),
                 new XAttribute(nameof(LastRegion), LastRegion),
-                new XAttribute(nameof(Webhook), Webhook)
+                new XAttribute(nameof(Webhook), Webhook),
+                new XAttribute(nameof(WebhookMessage), WebhookMessage)
                 //add setting here
                 ),
                 BuildChannelsXElement(EnabledChatChannels)

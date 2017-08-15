@@ -67,5 +67,10 @@ namespace TCC.Windows
             BeginAnimation(Window.OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
 
         }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            TimeManager.Instance.SendWebhookMessage();
+        }
     }
 }

@@ -33,7 +33,9 @@
                    TextAlignment="Left" 
                    Opacity=".9"/>
 
-        <TextBox Grid.Column="2" Width="Auto" TextAlignment="Left" Background="#1fff" Foreground="White" BorderThickness="0" LostFocus="TextBox_LostFocus" TextChanged="TextBox_TextChanged"  VerticalAlignment="Center" Margin="0,0,15,0" Text="{Binding Value, RelativeSource={RelativeSource AncestorType=local:ValueSetting}}"></TextBox>
+        <TextBox Grid.Column="2" Width="Auto" TextAlignment="Left" Background="#1fff" Foreground="White" 
+                 BorderThickness="0" LostFocus="TextBox_LostFocus" TextChanged="TextBox_TextChanged"  VerticalAlignment="Center" 
+                 Margin="0,0,15,0" Text="{Binding Value, RelativeSource={RelativeSource AncestorType=local:FieldSetting}}"></TextBox>
     </Grid>
 
 </UserControl>
