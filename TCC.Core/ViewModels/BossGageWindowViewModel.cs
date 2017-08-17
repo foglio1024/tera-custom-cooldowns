@@ -265,10 +265,7 @@ namespace TCC.ViewModels
         }
         public void ClearGuildTowers()
         {
-            _dispatcher.Invoke(() =>
-            {
-                GuildTowers.Clear();
-            });
+            GuildTowers.Clear();
         }
         public void AddGuildTower(ulong towerId, string guildName)
         {
