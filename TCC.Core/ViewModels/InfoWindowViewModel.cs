@@ -109,17 +109,22 @@ namespace TCC.ViewModels
                             var days = evElement.Attribute("days").Value.Split(',');
                             foreach (var dayString in days)
                             {
-                                var day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), dayString);
+                                var day = (DayOfWeek) Enum.Parse(typeof(DayOfWeek), dayString);
                                 if (day == today) isToday = true;
                                 if (day == yesterday) isYesterday = true;
                             }
                         }
                         else
                         {
-                            var eventDay = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), evElement.Attribute("days").Value);
+                            var eventDay = (DayOfWeek) Enum.Parse(typeof(DayOfWeek), evElement.Attribute("days").Value);
                             isToday = eventDay == today;
                             isYesterday = eventDay == yesterday;
                         }
+                    }
+                    else
+                    {
+                        isToday = true;
+                        isYesterday = true;
                     }
 
                     if (!isToday && !isYesterday) continue;
