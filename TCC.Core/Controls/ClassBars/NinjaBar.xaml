@@ -5,11 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
-             mc:Ignorable="d" >
+             mc:Ignorable="d" Loaded="NinjaBar_OnLoaded">
     <UserControl.DataContext>
         <viewModels:NinjaBarManager/>
     </UserControl.DataContext>
-    <Grid Width="Auto" Margin="5" Name="root">
+    <Grid Width="Auto" Margin="5,5,5,15" Name="root">
         <Grid HorizontalAlignment="Center" Margin="0,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -19,21 +19,41 @@
             <Border Style="{StaticResource Styles.DefaultBorder}"
                     Grid.Row="0"
                     Grid.Column="1"
-                    
                     CornerRadius="0,25,25,0"
-                    Margin="-30,6,-2,6"                   
-                    VerticalAlignment="Stretch"
-            />
+                    Margin="-30,0,0,0"  
+                    Padding="30,1,1,1"
+                    VerticalAlignment="Center"
+            >
+                <UniformGrid Rows="1" ClipToBounds="False" Grid.Column="1" Margin="18,0,0,0">
+                    <local:FixedSkillControl DataContext="{Binding FireAvalanche}" Padding="20" Margin="-20"/>
+                </UniformGrid>
+            </Border>
+            <Border CornerRadius="32" Style="{StaticResource Styles.DefaultBorder}" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="1">
+                <Grid>
+                    <local:Arc EndAngle="0" 
+                               StrokeThickness="8" Stroke="#c387ff" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Margin="0,0,0,0" x:Name="MainReArc"
+                               Width="63" Height="63">
+                        <local:Arc.LayoutTransform>
+                            <ScaleTransform ScaleX="-1"></ScaleTransform>
+                        </local:Arc.LayoutTransform>
+
+                    </local:Arc>
+                    <local:FixedSkillControl DataContext="{Binding BurningHeart}" Padding="20" Margin="-20"
+                                             HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                </Grid>
+            </Border>
             <Border Grid.ColumnSpan="2" 
-                        Background="#777"
-                        Height="30"
-                        ToolTip="Focus"
-                        CornerRadius="3"
-                        Margin="16,0,0,0"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        Width="6"
-                        />
+                    Background="#777"
+                    Height="30"
+                    ToolTip="Focus"
+                    CornerRadius="3"
+                    Margin="16,0,0,0"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Width="6"
+            />
             <Border Grid.ColumnSpan="2" 
                     Background="#2a6"
                     Height="30"
@@ -46,44 +66,9 @@
                     Visibility="{Binding FocusOn, Converter={StaticResource Converters.BoolToVisibleHidden}}">
             </Border>
 
-            <UniformGrid Rows="1" ClipToBounds="False" Grid.Column="1" Margin="18,0,0,0">
-                <local:FixedSkillControl DataContext="{Binding FireAvalanche}" Padding="20" Margin="-20"/>
-            </UniformGrid>
-            <Border CornerRadius="32" Style="{StaticResource Styles.DefaultBorder}" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="1">
-                <Grid>
-                    <local:Arc EndAngle="{Binding ST.Factor, Converter={StaticResource Converters.FactorToAngle}}" 
-                               StrokeThickness="8" Stroke="#c387ff" HorizontalAlignment="Center" VerticalAlignment="Center"
-                               Margin="0,0,0,0"
-                               Width="63" Height="63">
-                        <local:Arc.LayoutTransform>
-                            <ScaleTransform ScaleX="-1"></ScaleTransform>
-                        </local:Arc.LayoutTransform>
-
-                    </local:Arc>
-                    <local:FixedSkillControl DataContext="{Binding BurningHeart}" Padding="20" Margin="-20"
-                                             HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-                </Grid>
+            <Border Grid.Column="0" Style="{StaticResource Styles.DefaultBorder}" VerticalAlignment="Center" Margin="-0,0,0,-75" Padding="1,1"  HorizontalAlignment="Center" CornerRadius="10" Opacity="1" Background="#222222">
+                <TextBlock Style="{StaticResource Styles.DefaultText}" TextAlignment="Center" Margin="0,-1,0,-2" FontSize="16" FontWeight="DemiBold" Foreground="#c387ff" Text="{Binding ST.Val}" Width="45"></TextBlock>
             </Border>
-
-            <!--<Rectangle Fill="#c387ff" Grid.Row="0" Grid.Column="0" Margin="1,1,1,1">
-                <Rectangle.RenderTransform>
-                    <ScaleTransform ScaleX="{Binding ST.Factor}"/>
-                </Rectangle.RenderTransform>
-            </Rectangle>-->
-            <!--HP/MP-->
-            <!--<UniformGrid Columns="2" 
-                         HorizontalAlignment="Stretch" 
-                         VerticalAlignment="Center"
-                         Margin="5"
-                         Grid.RowSpan="2"
-                         Grid.Column="2"
-                         Grid.Row="0"
-                         >
-                <local:StatControl DataContext="{Binding HP}" Color="{StaticResource Colors.App.HP}" StatusColor="{StaticResource Colors.App.MP}" Width="85" Margin="0,0,0,0"/>
-                <local:StatControl DataContext="{Binding MP}" Color="{StaticResource Colors.App.MP}" Width="85" Margin="3,0,3,0"/>
-                --><!--<local:StatControl DataContext="{Binding ST}" Color="#c387ff" Width="85" Margin="0,0,0,0"/>--><!--
-            </UniformGrid>-->
         </Grid>
 
     </Grid>

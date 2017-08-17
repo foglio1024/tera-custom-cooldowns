@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
-             mc:Ignorable="d" >
+             mc:Ignorable="d" Loaded="BrawlerBar_OnLoaded">
     <UserControl.DataContext>
         <viewModels:BrawlerBarManager/>
     </UserControl.DataContext>
@@ -18,6 +18,7 @@
                 Opacity="{Binding CounterProc, Converter={StaticResource Converters.BoolToOpacity}}" 
                 Background="Orange"
                 />
+
         <Grid Grid.Column="1" Margin="-10"
               Opacity="{Binding CounterProc, Converter={StaticResource Converters.BoolToOpacity}}"
               >
@@ -27,9 +28,7 @@
                     <ScaleTransform ScaleY=".9" ScaleX=".9"></ScaleTransform>
                 </local:FixedSkillControl.RenderTransform>
             </local:FixedSkillControl>
-            <!--<local:Arc StrokeThickness="3" Stroke="Orange" EndAngle="359.9" Width="42" Height="42" Margin="0,0,0,0"></local:Arc>-->
         </Grid>
-        <!--HP/MP-->
         <Grid ClipToBounds="False">
             <Border Style="{StaticResource Styles.DefaultBorder}"
                     CornerRadius="70"
@@ -38,7 +37,7 @@
                     Padding="9"
                     VerticalAlignment="Stretch">
                 <Grid HorizontalAlignment="Center" Margin="0,0,0,0" ClipToBounds="False">
-                    <local:Arc EndAngle="{Binding ST.Factor, Converter={StaticResource Converters.FactorToAngle}}" Margin="-8" StrokeThickness="8" Stroke="Orange">
+                    <local:Arc EndAngle="0" x:Name="MainReArc" Margin="-8" StrokeThickness="8" Stroke="Orange">
                         <FrameworkElement.LayoutTransform>
                             <ScaleTransform ScaleX="-1"></ScaleTransform>
                         </FrameworkElement.LayoutTransform>
@@ -56,5 +55,9 @@
                 <DropShadowEffect Opacity="{Binding IsGfOn, Converter={StaticResource Converters.BoolToOpacity}}" Color="Orange" ShadowDepth="0" BlurRadius="15"></DropShadowEffect>
             </Grid.Effect>
         </Grid>
+        <Border Grid.Column="0" Style="{StaticResource Styles.DefaultBorder}" VerticalAlignment="Center" Margin="-0,0,0,-75" Padding="1,1"  HorizontalAlignment="Center" CornerRadius="10" Opacity="1" Background="#222222">
+            <TextBlock Style="{StaticResource Styles.DefaultText}" TextAlignment="Center" Margin="0,-1,0,-2" FontSize="16" FontWeight="DemiBold" Foreground="Orange" Text="{Binding ST.Val}" Width="45"></TextBlock>
+        </Border>
+
     </Grid>
 </UserControl>
