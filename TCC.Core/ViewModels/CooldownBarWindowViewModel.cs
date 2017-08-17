@@ -21,14 +21,11 @@ namespace TCC.ViewModels
         private static CooldownWindowViewModel _instance;
         public static CooldownWindowViewModel Instance => _instance ?? (_instance = new CooldownWindowViewModel());
 
-        public bool IsTeraOnTop
-        {
-            get => WindowManager.IsTccVisible;
-        }
+        public bool IsTeraOnTop => WindowManager.IsTccVisible;
         private double scale = SettingsManager.CooldownWindowSettings.Scale;
         public double Scale
         {
-            get { return scale; }
+            get => scale;
             set
             {
                 if (scale == value) return;
@@ -45,7 +42,7 @@ namespace TCC.ViewModels
 
         public SynchronizedObservableCollection<SkillCooldown> ShortSkills
         {
-            get { return _shortSkills; }
+            get => _shortSkills;
             set
             {
                 if (_shortSkills == value) return;
@@ -54,7 +51,7 @@ namespace TCC.ViewModels
         }
         public SynchronizedObservableCollection<SkillCooldown> LongSkills
         {
-            get { return _longSkills; }
+            get => _longSkills;
             set
             {
                 if (_longSkills == value) return;
@@ -63,10 +60,7 @@ namespace TCC.ViewModels
         }
         public SynchronizedObservableCollection<FixedSkillCooldown> MainSkills
         {
-            get
-            {
-                return mainSkills; ;
-            }
+            get => mainSkills;
             set
             {
                 if (mainSkills == value) return;
@@ -75,10 +69,7 @@ namespace TCC.ViewModels
         }
         public SynchronizedObservableCollection<FixedSkillCooldown> SecondarySkills
         {
-            get
-            {
-                return secondarySkills; ;
-            }
+            get => secondarySkills;
             set
             {
                 if (secondarySkills == value) return;
@@ -87,16 +78,14 @@ namespace TCC.ViewModels
         }
         public SynchronizedObservableCollection<SkillCooldown> OtherSkills
         {
-            get
-            {
-                return otherSkills;
-            }
+            get => otherSkills;
             set
             {
                 if (otherSkills == value) return;
                 otherSkills = value;
             }
         }
+        public SynchronizedObservableCollection<FixedSkillCooldown> HiddenSkills { get; }
 
         private static ClassManager _classManager => ClassManager.CurrentClassManager;
 
@@ -216,7 +205,10 @@ namespace TCC.ViewModels
             if (SettingsManager.ClassWindowSettings.Enabled && _classManager.StartSpecialSkill(sk)) return;
             if (!SettingsManager.CooldownWindowSettings.Enabled) return;
 
-            var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
+            var skill = HiddenSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
+            if (skill != null) return;
+
+            skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
             if (skill != null)
             {
                 skill.Start(sk.Cooldown);
@@ -229,15 +221,19 @@ namespace TCC.ViewModels
                 skill.Start(sk.Cooldown);
                 return;
             }
-
-
             AddOrRefreshOtherSkill(sk);
         }
+
+
         private void FixedCd_RefreshSkill(Skill sk, uint cd)
         {
             if (!SettingsManager.CooldownWindowSettings.Enabled) return;
 
-            var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.IconName);
+            var skill = HiddenSkills.FirstOrDefault(x => x.Skill.IconName == sk.IconName);
+            if (skill != null) return;
+
+
+            skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (skill != null)
             {
                 skill.Refresh(cd);
@@ -371,15 +367,16 @@ namespace TCC.ViewModels
             {
                 SecondarySkills.Add(sk);
             }
+            foreach (var sk in sp.Hidden)
+            {
+                HiddenSkills.Add(sk);
+            }
         }
 
         public bool IsClassWindowOn
         {
             get => SettingsManager.ClassWindowOn;
-            set
-            {
-                NotifyPropertyChanged(nameof(IsClassWindowOn));
-            }
+            set => NotifyPropertyChanged(nameof(IsClassWindowOn));
         }
         public CooldownWindowViewModel()
         {
@@ -389,7 +386,7 @@ namespace TCC.ViewModels
             SecondarySkills = new SynchronizedObservableCollection<FixedSkillCooldown>(_dispatcher);
             MainSkills = new SynchronizedObservableCollection<FixedSkillCooldown>(_dispatcher);
             OtherSkills = new SynchronizedObservableCollection<SkillCooldown>(_dispatcher);
-
+            HiddenSkills = new SynchronizedObservableCollection<FixedSkillCooldown>(_dispatcher);
             WindowManager.TccVisibilityChanged += (s, ev) =>
             {
                 NotifyPropertyChanged("IsTeraOnTop");

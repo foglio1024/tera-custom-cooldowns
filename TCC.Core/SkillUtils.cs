@@ -16,6 +16,7 @@ namespace TCC
     {
         public List<FixedSkillCooldown> Main; 
         public List<FixedSkillCooldown> Secondary;
+        public List<FixedSkillCooldown> Hidden;
         void ParseSkillConfig(string filename, Class c)
         {
             XDocument skillsDoc = XDocument.Load("resources/config/skills/" + filename);
@@ -26,13 +27,17 @@ namespace TCC
 
                 if (SkillsDatabase.TryGetSkill(skillId, c, out Skill sk))
                 {
-                    if (row == 1)
+                    switch (row)
                     {
-                        Main.Add(new FixedSkillCooldown(sk, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher(), false));
-                    }
-                    else if (row == 2)
-                    {
-                        Secondary.Add(new FixedSkillCooldown(sk, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                        case 1:
+                            Main.Add(new FixedSkillCooldown(sk, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                            break;
+                        case 2:
+                            Secondary.Add(new FixedSkillCooldown(sk, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                            break;
+                        case 3:
+                            Hidden.Add(new FixedSkillCooldown(sk, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                            break;
                     }
                 }
             }
@@ -42,6 +47,7 @@ namespace TCC
         {
             Main = new List<FixedSkillCooldown>();
             Secondary = new List<FixedSkillCooldown>();
+            Hidden = new List<FixedSkillCooldown>();
             ParseSkillConfig(filename, c);
         }
     }
