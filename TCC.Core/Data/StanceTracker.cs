@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Threading;
 
 namespace TCC.Data
@@ -21,7 +17,7 @@ namespace TCC.Data
     }
     public class StanceTracker<T> : TSPropertyChanged where T : IComparable
     {
-        T _currentStance;
+        private T _currentStance;
         public T CurrentStance
         {
             get => _currentStance;

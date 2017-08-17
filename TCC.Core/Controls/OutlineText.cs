@@ -14,7 +14,7 @@ namespace TCC.Controls
     {
         private void UpdatePen()
         {
-            _Pen = new Pen(Stroke, StrokeThickness)
+            _pen = new Pen(Stroke, StrokeThickness)
             {
                 DashCap = PenLineCap.Round,
                 EndLineCap = PenLineCap.Round,
@@ -98,9 +98,9 @@ namespace TCC.Controls
           typeof(OutlinedTextBlock),
           new FrameworkPropertyMetadata(TextWrapping.NoWrap, OnFormattedTextUpdated));
 
-        private FormattedText _FormattedText;
-        private Geometry _TextGeometry;
-        private Pen _Pen;
+        private FormattedText _formattedText;
+        private Geometry _textGeometry;
+        private Pen _pen;
 
         public Brush Fill
         {
@@ -191,8 +191,8 @@ namespace TCC.Controls
         {
             EnsureGeometry();
 
-            drawingContext.DrawGeometry(null, _Pen, _TextGeometry);
-            drawingContext.DrawGeometry(Fill, null, _TextGeometry);
+            drawingContext.DrawGeometry(null, _pen, _textGeometry);
+            drawingContext.DrawGeometry(Fill, null, _textGeometry);
         }
 
         protected override Size MeasureOverride(Size availableSize)
@@ -206,11 +206,11 @@ namespace TCC.Controls
 
             // the Math.Min call is important - without this constraint (which seems arbitrary, but is the maximum allowable text width), things blow up when availableSize is infinite in both directions
             // the Math.Max call is to ensure we don't hit zero, which will cause MaxTextHeight to throw
-            _FormattedText.MaxTextWidth = Math.Min(3579139, w);
-            _FormattedText.MaxTextHeight = Math.Max(0.0001d, h);
+            _formattedText.MaxTextWidth = Math.Min(3579139, w);
+            _formattedText.MaxTextHeight = Math.Max(0.0001d, h);
 
             // return the desired size
-            return new Size(Math.Ceiling(_FormattedText.Width), Math.Ceiling(_FormattedText.Height));
+            return new Size(Math.Ceiling(_formattedText.Width), Math.Ceiling(_formattedText.Height));
         }
 
         protected override Size ArrangeOverride(Size finalSize)
@@ -218,11 +218,11 @@ namespace TCC.Controls
             EnsureFormattedText();
 
             // update the formatted text with the final size
-            _FormattedText.MaxTextWidth = finalSize.Width;
-            _FormattedText.MaxTextHeight = Math.Max(0.0001d, finalSize.Height);
+            _formattedText.MaxTextWidth = finalSize.Width;
+            _formattedText.MaxTextHeight = Math.Max(0.0001d, finalSize.Height);
 
             // need to re-generate the geometry now that the dimensions have changed
-            _TextGeometry = null;
+            _textGeometry = null;
 
             return finalSize;
         }
@@ -231,8 +231,8 @@ namespace TCC.Controls
           DependencyPropertyChangedEventArgs e)
         {
             var outlinedTextBlock = (OutlinedTextBlock)dependencyObject;
-            outlinedTextBlock._FormattedText = null;
-            outlinedTextBlock._TextGeometry = null;
+            outlinedTextBlock._formattedText = null;
+            outlinedTextBlock._textGeometry = null;
 
             outlinedTextBlock.InvalidateMeasure();
             outlinedTextBlock.InvalidateVisual();
@@ -242,7 +242,7 @@ namespace TCC.Controls
         {
             var outlinedTextBlock = (OutlinedTextBlock)dependencyObject;
             outlinedTextBlock.UpdateFormattedText();
-            outlinedTextBlock._TextGeometry = null;
+            outlinedTextBlock._textGeometry = null;
 
             outlinedTextBlock.InvalidateMeasure();
             outlinedTextBlock.InvalidateVisual();
@@ -250,12 +250,14 @@ namespace TCC.Controls
 
         private void EnsureFormattedText()
         {
-            if (_FormattedText != null)
+            if (_formattedText != null)
             {
                 return;
             }
 
-            _FormattedText = new FormattedText(
+#pragma warning disable 618
+            _formattedText = new FormattedText(
+#pragma warning restore 618
               Text ?? "",
               CultureInfo.CurrentUICulture,
               FlowDirection,
@@ -268,32 +270,32 @@ namespace TCC.Controls
 
         private void UpdateFormattedText()
         {
-            if (_FormattedText == null)
+            if (_formattedText == null)
             {
                 return;
             }
 
-            _FormattedText.MaxLineCount = TextWrapping == TextWrapping.NoWrap ? 1 : int.MaxValue;
-            _FormattedText.TextAlignment = TextAlignment;
-            _FormattedText.Trimming = TextTrimming;
+            _formattedText.MaxLineCount = TextWrapping == TextWrapping.NoWrap ? 1 : int.MaxValue;
+            _formattedText.TextAlignment = TextAlignment;
+            _formattedText.Trimming = TextTrimming;
 
-            _FormattedText.SetFontSize(FontSize);
-            _FormattedText.SetFontStyle(FontStyle);
-            _FormattedText.SetFontWeight(FontWeight);
-            _FormattedText.SetFontFamily(FontFamily);
-            _FormattedText.SetFontStretch(FontStretch);
-            _FormattedText.SetTextDecorations(TextDecorations);
+            _formattedText.SetFontSize(FontSize);
+            _formattedText.SetFontStyle(FontStyle);
+            _formattedText.SetFontWeight(FontWeight);
+            _formattedText.SetFontFamily(FontFamily);
+            _formattedText.SetFontStretch(FontStretch);
+            _formattedText.SetTextDecorations(TextDecorations);
         }
 
         private void EnsureGeometry()
         {
-            if (_TextGeometry != null)
+            if (_textGeometry != null)
             {
                 return;
             }
 
             EnsureFormattedText();
-            _TextGeometry = _FormattedText.BuildGeometry(new Point(0, 0));
+            _textGeometry = _formattedText.BuildGeometry(new Point(0, 0));
         }
     }
 }
