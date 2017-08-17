@@ -254,6 +254,7 @@
     <Compile Include="Controls\FieldSetting.xaml.cs">
       <DependentUpon>FieldSetting.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\OutlineText.cs" />
     <Compile Include="Controls\TimelineControl.xaml.cs">
       <DependentUpon>TimelineControl.xaml</DependentUpon>
     </Compile>
@@ -368,6 +369,7 @@
     <Compile Include="Data\LFG.cs" />
     <Compile Include="Data\Location.cs" />
     <Compile Include="Data\Section.cs" />
+    <Compile Include="Data\StanceTracker.cs" />
     <Compile Include="Data\World.cs" />
     <Compile Include="Data\DungeonCooldown.cs" />
     <Compile Include="Parsing\Messages\S_ACCOMPLISH_ACHIEVEMENT.cs" />
@@ -413,7 +415,6 @@
     <Compile Include="Controls\MysticAurasIndicator.xaml.cs">
       <DependentUpon>MysticAurasIndicator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\StanceTracker.cs" />
     <Compile Include="Controls\RagnarokBuffControl.xaml.cs">
       <DependentUpon>RagnarokBuffControl.xaml</DependentUpon>
     </Compile>
@@ -463,7 +464,6 @@
     <Compile Include="Data\MessagePiece.cs" />
     <Compile Include="Data\MessagePieceType.cs" />
     <Compile Include="Data\Money.cs" />
-    <Compile Include="Data\OutlineText.cs" />
     <Compile Include="Data\PrivateChatChannel.cs" />
     <Compile Include="Data\SocialDatabase.cs" />
     <Compile Include="Data\Databases\SystemMessages.cs" />

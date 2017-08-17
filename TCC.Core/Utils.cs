@@ -170,6 +170,14 @@ namespace TCC
         }
     }
 
+    public static class EventUtils
+    {
+        public static bool EndsToday(int start, int ed, bool d)
+        {
+            return d ? start + ed <= 24 : start <= ed;
+        }
+    }
+
     public class DependencyPropertyWatcher<T> : DependencyObject, IDisposable
     {
         public static readonly DependencyProperty ValueProperty =
