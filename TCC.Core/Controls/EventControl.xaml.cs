@@ -46,7 +46,7 @@ namespace TCC.Controls
         {
             dc = (DailyEvent) DataContext;
             var fac = 1 / ((1 / .45)*Math.Pow(Math.E,8*dc.DurationFactor) + 1 / (2 * .45));
-            scaleUp = new DoubleAnimation(1.05 + fac, TimeSpan.FromMilliseconds(800)) { EasingFunction = new ElasticEase() };
+            scaleUp = new DoubleAnimation(1.01, TimeSpan.FromMilliseconds(800)) { EasingFunction = new ElasticEase() };
             scaleDown = new DoubleAnimation(1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() };
 
         }
