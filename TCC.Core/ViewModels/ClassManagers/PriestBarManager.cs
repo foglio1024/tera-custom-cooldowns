@@ -19,7 +19,17 @@ namespace TCC.ViewModels
             _instance = this;
             CurrentClassManager = this;
             LoadSpecialSkills();
+            Grace.Buff.PropertyChanged += GracePropertyChanged;
         }
+
+        private void GracePropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Grace.Buff.IsAvailable))
+            {
+                Grace.Cooldown.FlashOnAvailable = Grace.Buff.IsAvailable;
+            }
+        }
+
         protected override void LoadSpecialSkills()
         {
             //Energy Stars
@@ -30,7 +40,7 @@ namespace TCC.ViewModels
 
             Grace = new DurationCooldownIndicator(_dispatcher);
             SkillsDatabase.TryGetSkill(390100, Class.Priest, out Skill gr);
-            Grace.Cooldown = new FixedSkillCooldown(gr, CooldownType.Skill, _dispatcher, true);
+            Grace.Cooldown = new FixedSkillCooldown(gr, CooldownType.Skill, _dispatcher, false);
             Grace.Buff = new FixedSkillCooldown(gr, CooldownType.Skill, _dispatcher, false);
 
         }
