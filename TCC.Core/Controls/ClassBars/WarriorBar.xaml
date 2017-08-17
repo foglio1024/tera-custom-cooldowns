@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="TCC.Controls.WarriorBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:TCC.Controls"
+             xmlns:sys="clr-namespace:System;assembly=System"
+             xmlns:viewModels="clr-namespace:TCC.ViewModels"
+             mc:Ignorable="d" Loaded="UserControl_Loaded">
+    <UserControl.DataContext>
+        <viewModels:WarriorBarManager/>
+    </UserControl.DataContext>
+<UserControl.Resources>
+    <local:WarriorStanceToColorConverter x:Key="StanceToColorConverter"></local:WarriorStanceToColorConverter>
+</UserControl.Resources>
+    <Grid Width="Auto"  Name="root" ClipToBounds="False" Margin="5">
+        <Grid HorizontalAlignment="Center" Margin="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+                <Border Grid.RowSpan="2" Grid.Column="1" Height="5" Width="50" BorderThickness="0" Opacity="1" Style="{StaticResource Styles.DefaultBorder}"
+                        CornerRadius="0,0,10,0" HorizontalAlignment="Left" Margin="-15,35,0,0" Background="{Binding Stance.CurrentStance, Converter={StaticResource StanceToColorConverter}}"></Border>
+<Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2" CornerRadius="50" Margin="-4"></Border>
+            <Border Style="{StaticResource Styles.DefaultBorder}"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    Grid.RowSpan="2"
+                    CornerRadius="15"
+                    Height="30"
+                    Margin="25,0,0,0"
+                    VerticalAlignment="Center"/>
+
+            <!--Edge-->
+            <local:EdgeControl x:Name="edgeBar" 
+                               DataContext="{Binding EdgeCounter}" 
+                               Grid.Column="1" 
+                               Grid.RowSpan="2"
+                               Width="270"
+                               Margin="-0,0,0,0"
+                               VerticalAlignment="Center"
+                               />
+
+            <Grid Grid.RowSpan="2" ClipToBounds="False">
+                <!--Gamble-->
+                <local:BuffCooldownControl DataContext="{Binding DeadlyGamble}" ClipToBounds="False"
+                                               Grid.Column="1" Margin="0" Padding="0"
+                                               Grid.RowSpan="10"/>
+            </Grid>
+        </Grid>
+        </Grid>
+</UserControl>

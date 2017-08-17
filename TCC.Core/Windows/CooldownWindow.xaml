@@ -1,0 +1,36 @@
+﻿<w:TccWindow x:Class="TCC.CooldownWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TCC"
+        xmlns:vm="clr-namespace:TCC.ViewModels"
+        xmlns:w="clr-namespace:TCC.Windows"
+             xmlns:controls="clr-namespace:TCC.Controls"
+        mc:Ignorable="d"
+        Title="Tera Custom Cooldowns"
+        Height="Auto" 
+        Width="Auto" 
+        SizeToContent="WidthAndHeight" 
+        Topmost="True" 
+        AllowsTransparency="True" 
+        ShowInTaskbar="False" 
+        WindowStyle="None" 
+        Background="Transparent" 
+        MouseLeftButtonDown="Window_MouseLeftButtonDown" 
+        MouseRightButtonDown="Window_MouseRightButtonDown"
+        Loaded="Window_Loaded"    
+        ResizeMode="NoResize">
+    <w:TccWindow.DataContext>
+        <vm:CooldownWindowViewModel />
+    </w:TccWindow.DataContext>
+    <Grid>
+        <ContentControl Margin="0" x:Name="controlContainer" DataContext="{Binding Instance}" Content="{Binding}"
+                                        ContentTemplate="{Binding Instance.IsClassWindowOn, Converter={StaticResource Converters.BoolToCooldowWindowTemplate}}"
+        >
+        </ContentControl>
+        <Grid.LayoutTransform>
+            <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
+        </Grid.LayoutTransform>
+    </Grid>
+</w:TccWindow>

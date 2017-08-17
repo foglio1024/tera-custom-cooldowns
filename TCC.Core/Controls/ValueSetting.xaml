@@ -1,0 +1,156 @@
+﻿<UserControl x:Class="TCC.Controls.ValueSetting"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TCC.Controls"
+             mc:Ignorable="d" 
+            d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style x:Key="SliderThumbStyle" TargetType="Thumb">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="false"/>
+            <Setter Property="Height" Value="16"/>
+            <Setter Property="Width" Value="16"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Ellipse  Name="Ellipse"
+                                 Cursor="Hand"
+                          Fill="#ff303037" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Ellipse.Effect>
+                                <DropShadowEffect ShadowDepth="1" Opacity=".55" BlurRadius="4"/>
+                            </Ellipse.Effect>
+                        </Ellipse>
+                        
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Ellipse" Property="Fill" Value="#ff3822"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="IsTabStop" Value="false" />
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border  BorderThickness="0" BorderBrush="Black" Opacity=".3" Background="#ff3822" Height="2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SliderRepeatButton1" TargetType="RepeatButton">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border SnapsToDevicePixels="True" Background="#f444" Opacity="1" BorderThickness="0" BorderBrush="YellowGreen" Height="2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Slider" x:Key="AppSliderStyle">
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Slider">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" Name="row" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" Name="column" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <Track Name="PART_Track"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Center"
+                              Grid.Row="1" Grid.Column="1"
+                              Width="{TemplateBinding Width}"
+                              Height="{TemplateBinding Height}">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Style="{StaticResource SliderRepeatButton}"  Command="Slider.DecreaseLarge" />
+                                </Track.DecreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb Style="{StaticResource SliderThumbStyle}" />
+                                </Track.Thumb>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Style="{StaticResource SliderRepeatButton1}" Command="Slider.IncreaseLarge" />
+                                </Track.IncreaseRepeatButton>
+
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid Height="35" 
+          MouseEnter="Grid_MouseEnter" 
+          MouseLeave="Grid_MouseLeave" 
+          Background="Transparent" 
+          Name="mainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Image Source="{Binding SettingImage, RelativeSource={RelativeSource AncestorType=local:ValueSetting}}" 
+               Width="22" 
+               Height="22" 
+               RenderOptions.BitmapScalingMode="Fant" 
+               HorizontalAlignment="Left" 
+               Margin="17,0,0,0" 
+               Opacity=".3"
+               x:Name="img"/>
+        <TextBlock Style="{StaticResource Styles.DefaultText}" 
+                   Grid.Column="1" 
+                   Margin="10,0,14,0" 
+                   Text="{Binding SettingName, RelativeSource={RelativeSource AncestorType=local:ValueSetting}}" 
+                   VerticalAlignment="Center" 
+                   Padding="0" 
+                   TextAlignment="Left" 
+                   Opacity=".9"/>
+        <Grid Grid.Column="3" Width="Auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBox Width="Auto" TextAlignment="Right" Background="Transparent" Foreground="White" BorderThickness="0" LostFocus="TextBox_LostFocus" VerticalAlignment="Center" Margin="0,0,5,0" Text="{Binding Value, RelativeSource={RelativeSource AncestorType=local:ValueSetting}}"></TextBox>
+        <Slider Width="100" Grid.Column="1" Style="{StaticResource AppSliderStyle}" ValueChanged="Slider_ValueChanged"  HorizontalAlignment="Stretch" VerticalAlignment="Center" MouseDoubleClick="Slider_MouseDoubleClick"
+                Maximum="{Binding Max, RelativeSource={RelativeSource AncestorType=local:ValueSetting}}" 
+                Minimum="{Binding Min, RelativeSource={RelativeSource AncestorType=local:ValueSetting}}" 
+                Value="{Binding Value, RelativeSource={RelativeSource AncestorType=local:ValueSetting}}" Margin="0,0,10,0">
+           
+        </Slider>
+        </Grid>
+        <Grid Visibility="Hidden" Grid.Column="2" Margin="10,0,20,0">
+            <Grid.RowDefinitions >
+                <RowDefinition />
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition  Width="12"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock TextAlignment="Right" Grid.RowSpan="2" Grid.Column="0" Margin="10,0" HorizontalAlignment="Right" Style="{StaticResource Styles.DefaultText}" VerticalAlignment="Center" Text="{Binding Value, RelativeSource={RelativeSource AncestorType=local:ValueSetting}}"></TextBlock>
+            <Border Grid.Row="0" Grid.Column="1" Width="11" Height="11" Margin="0" Background="#2fff" CornerRadius="2" Cursor="Hand" MouseLeftButtonDown="AddValue"></Border>
+            <Border Grid.Row="1" Grid.Column="1" Width="11" Height="11" Margin="0" Background="#2fff" CornerRadius="2" Cursor="Hand" MouseLeftButtonDown="SubtractValue"></Border>
+            <TextBlock IsHitTestVisible="False" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,-2,0,0" Width="9" Style="{StaticResource Styles.DefaultText}" Padding="0,0,0,0">+</TextBlock>
+            <TextBlock IsHitTestVisible="False" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,-3,0,0" Width="6" Style="{StaticResource Styles.DefaultText}" Padding="0,0,0,0">-</TextBlock>
+
+        </Grid>
+    </Grid>
+
+</UserControl>

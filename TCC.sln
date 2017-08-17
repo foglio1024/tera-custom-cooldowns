@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.10
+VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.Core", "TCC.UI\TCC.Core.csproj", "{B3F6E516-CD4B-404E-93C5-FFC729406FA9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.Core", "TCC.Core\TCC.Core.csproj", "{B3F6E516-CD4B-404E-93C5-FFC729406FA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.Updater", "TCC.Updater\TCC.Updater\TCC.Updater.csproj", "{2F29E45D-783C-4EA9-A52B-4CAA9129497B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.Updater", "TCC.Updater\TCC.Updater.csproj", "{2F29E45D-783C-4EA9-A52B-4CAA9129497B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

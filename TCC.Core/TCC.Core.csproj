@@ -1,0 +1,1407 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B3F6E516-CD4B-404E-93C5-FFC729406FA9}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>TCC</RootNamespace>
+    <AssemblyName>TCC</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>tcc-logo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.2.0.0-preview2-final\lib\netstandard1.1\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.0.0-preview2-final\lib\netstandard1.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PacketDotNet, Version=0.16.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PacketDotNet.0.16.0\lib\PacketDotNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SharpPcap, Version=4.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpPcap.4.4.0\lib\SharpPcap.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.AppContext.4.3.0\lib\net46\System.AppContext.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=1.2.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.4.0-preview2-25405-01\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Console, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Console.4.3.0\lib\net46\System.Console.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.Tracing, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.Tracing.4.3.0\lib\net462\System.Diagnostics.Tracing.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Globalization.Calendars, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Globalization.Calendars.4.3.0\lib\net46\System.Globalization.Calendars.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Interactive.Async, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Interactive.Async.3.1.1\lib\net46\System.Interactive.Async.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.4.3.0\lib\net46\System.IO.FileSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Net.Http, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.2\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Sockets, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Sockets.4.3.0\lib\net46\System.Net.Sockets.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Reflection, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.4.3.0\lib\net462\System.Reflection.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Extensions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.Extensions.4.3.0\lib\net462\System.Runtime.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.4.3.0\lib\net462\System.Runtime.InteropServices.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.ReaderWriter, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Xml.ReaderWriter.4.3.0\lib\net46\System.Xml.ReaderWriter.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="AbnormalityManager.cs" />
+    <Compile Include="ClassSpecific\Berserker.cs" />
+    <Compile Include="ClassSpecific\Archer.cs" />
+    <Compile Include="ClassSpecific\Brawler.cs" />
+    <Compile Include="ClassSpecific\Lancer.cs" />
+    <Compile Include="ClassSpecific\Ninja.cs" />
+    <Compile Include="ClassSpecific\Priest.cs" />
+    <Compile Include="ClassSpecific\Reaper.cs" />
+    <Compile Include="ClassSpecific\Slayer.cs" />
+    <Compile Include="ClassSpecific\Sorcerer.cs" />
+    <Compile Include="ClassSpecific\Valkyrie.cs" />
+    <Compile Include="Controls\ChatControls\ChannelSetting.xaml.cs">
+      <DependentUpon>ChannelSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ChatControls\DefaultMessageBody.xaml.cs">
+      <DependentUpon>DefaultMessageBody.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DungeonInfoControl.xaml.cs">
+      <DependentUpon>DungeonInfoControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EventControl.xaml.cs">
+      <DependentUpon>EventControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FieldSetting.xaml.cs">
+      <DependentUpon>FieldSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TimelineControl.xaml.cs">
+      <DependentUpon>TimelineControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TimeMarkerControl.xaml.cs">
+      <DependentUpon>TimeMarkerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TimeSeparator.xaml.cs">
+      <DependentUpon>TimeSeparator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\VanguardInfoControl.xaml.cs">
+      <DependentUpon>VanguardInfoControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\BoolToBrushConverter.cs" />
+    <Compile Include="Converters\DungeonIdToStarsConverter.cs" />
+    <Compile Include="Converters\DungeonIdToImageConverter.cs" />
+    <Compile Include="Converters\DungeonIdToNameConverter.cs" />
+    <Compile Include="Converters\DungeonIdToTierColorConverter.cs" />
+    <Compile Include="Converters\IconConverter.cs" />
+    <Compile Include="Converters\BoolToOpacityInverseConverter.cs" />
+    <Compile Include="Converters\BoolToOpacityConverter.cs" />
+    <Compile Include="Controls\ChatControls\ApplyBody.xaml.cs">
+      <DependentUpon>ApplyBody.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ChatControls\BrokerOfferBody.xaml.cs">
+      <DependentUpon>BrokerOfferBody.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ChatControls\ChatMessageControl.xaml.cs">
+      <DependentUpon>ChatMessageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ChatControls\ChatMessageHeader.xaml.cs">
+      <DependentUpon>ChatMessageHeader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ChatControls\CustomMessageBody.xaml.cs">
+      <DependentUpon>CustomMessageBody.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ChatControls\FriendMessageDialog.xaml.cs">
+      <DependentUpon>FriendMessageDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ChatControls\LFGcontrol.xaml.cs">
+      <DependentUpon>LFGcontrol.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ChatControls\MapControl.xaml.cs">
+      <DependentUpon>MapControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ChatControls\PlayerTooltip.xaml.cs">
+      <DependentUpon>PlayerTooltip.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ChatControls\testctrl.xaml.cs">
+      <DependentUpon>testctrl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DefaultEnemyWindowLayout.xaml.cs">
+      <DependentUpon>DefaultEnemyWindowLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DragonControl.xaml.cs">
+      <DependentUpon>DragonControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NonReloadingTabControl.cs" />
+    <Compile Include="Controls\Phase1BossControl.xaml.cs">
+      <DependentUpon>Phase1BossControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Phase2BallistaBossControl.xaml.cs">
+      <DependentUpon>Phase2BallistaBossControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Phase2BossControl.xaml.cs">
+      <DependentUpon>Phase2BossControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Phase3BossControl.xaml.cs">
+      <DependentUpon>Phase3BossControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Phase4BossControl.xaml.cs">
+      <DependentUpon>Phase4BossControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\ReadyToColorConverter.cs" />
+    <Compile Include="Converters\ReadyToIconConverter.cs" />
+    <Compile Include="Converters\ReadyToOpacityConverter.cs" />
+    <Compile Include="Controls\SmallMobControl.xaml.cs">
+      <DependentUpon>SmallMobControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\BoolToCooldownWindowTemplateConverter.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\BoolToVisibleHidden.cs" />
+    <Compile Include="Converters\ContractedToColWidthConverter.cs" />
+    <Compile Include="Converters\DragonSelectedToOpacityConverter.cs" />
+    <Compile Include="Converters\FactorToAngleConverter.cs" />
+    <Compile Include="Converters\GroupSizeToTemplateConverter.cs" />
+    <Compile Include="Converters\HHphaseToEnemyWindowTemplate.cs" />
+    <Compile Include="Converters\LocationToMapConverter.cs" />
+    <Compile Include="Converters\LocationToMarkerPositionConverter.cs" />
+    <Compile Include="Converters\LocationToStretchConverter.cs" />
+    <Compile Include="Converters\RowsToHeightConverter.cs" />
+    <Compile Include="Converters\ShieldBrokenColorConverter.cs" />
+    <Compile Include="Converters\ShieldStatusToVisibilityConverter.cs" />
+    <Compile Include="Converters\StringToFillConverter.cs" />
+    <Compile Include="Converters\TemplateIdToColorConverter.cs" />
+    <Compile Include="Converters\TypeToCursorConverter.cs" />
+    <Compile Include="Converters\ValueToFactorConverter.cs" />
+    <Compile Include="Data\ApplyMessage.cs" />
+    <Compile Include="Data\BrokerChatMessage.cs" />
+    <Compile Include="Data\ChatChannelOnOff.cs" />
+    <Compile Include="Data\Databases\AccountBenefitDatabase.cs" />
+    <Compile Include="Data\Databases\AchievementDatabase.cs" />
+    <Compile Include="Data\Databases\AchievementGradeDatabase.cs" />
+    <Compile Include="Data\Databases\DungeonDatabase.cs" />
+    <Compile Include="Data\Databases\GuildQuestDatabase.cs" />
+    <Compile Include="Data\Databases\ItemsDatabase.cs" />
+    <Compile Include="Data\Databases\MapDatabase.cs" />
+    <Compile Include="Data\Databases\QuestDatabase.cs" />
+    <Compile Include="Data\Dungeon.cs" />
+    <Compile Include="Data\EnragePattern.cs" />
+    <Compile Include="Data\Friend.cs" />
+    <Compile Include="Data\Guard.cs" />
+    <Compile Include="Data\LFG.cs" />
+    <Compile Include="Data\Location.cs" />
+    <Compile Include="Data\Section.cs" />
+    <Compile Include="Data\World.cs" />
+    <Compile Include="Data\DungeonCooldown.cs" />
+    <Compile Include="Parsing\Messages\S_ACCOMPLISH_ACHIEVEMENT.cs" />
+    <Compile Include="Parsing\Messages\S_ACCOUNT_PACKAGE_LIST.cs" />
+    <Compile Include="Parsing\Messages\S_ANSWER_INTERACTIVE.cs" />
+    <Compile Include="Parsing\Messages\S_AVAILABLE_EVENT_MATCHING_LIST.cs" />
+    <Compile Include="Parsing\Messages\S_BAN_PARTY.cs" />
+    <Compile Include="Parsing\Messages\S_DUNGEON_COOL_TIME_LIST.cs" />
+    <Compile Include="Parsing\Messages\S_DUNGEON_EVENT_MESSAGE.cs" />
+    <Compile Include="Parsing\Messages\S_FRIEND_LIST.cs" />
+    <Compile Include="Parsing\Messages\C_REQUEST_GAMESTAT_PING.cs" />
+    <Compile Include="Parsing\Messages\S_GUILD_TOWER_INFO.cs" />
+    <Compile Include="Parsing\Messages\S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA.cs" />
+    <Compile Include="Parsing\Messages\S_OTHER_USER_APPLY_PARTY.cs" />
+    <Compile Include="Parsing\Messages\S_PARTY_MATCH_LINK.cs" />
+    <Compile Include="Parsing\Messages\S_RESPONSE_GAMESTAT_PONG.cs" />
+    <Compile Include="Parsing\Messages\S_TRADE_BROKER_DEAL_SUGGESTED.cs" />
+    <Compile Include="Parsing\Messages\S_UPDATE_FRIEND_INFO.cs" />
+    <Compile Include="Parsing\Messages\S_USER_BLOCK_LIST.cs" />
+    <Compile Include="Parsing\SystemMessagesProcessor.cs" />
+    <Compile Include="TemplateSelectors\EnemyTemplateSelector.cs" />
+    <Compile Include="TemplateSelectors\EnemyWindowTemplateSelector.cs" />
+    <Compile Include="TemplateSelectors\MessageBodyDataTemplateSelector.cs" />
+    <Compile Include="TemplateSelectors\MessagePieceDataTemplateSelector.cs" />
+    <Compile Include="Controls\ClassBars\BerserkerBar.xaml.cs">
+      <DependentUpon>BerserkerBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ClassBars\BrawlerBar.xaml.cs">
+      <DependentUpon>BrawlerBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ClassBars\ArcherBar.xaml.cs">
+      <DependentUpon>ArcherBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ArcherFocusControl.xaml.cs">
+      <DependentUpon>ArcherFocusControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BarCooldown.xaml.cs">
+      <DependentUpon>BarCooldown.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ArcherStanceIndicator.xaml.cs">
+      <DependentUpon>ArcherStanceIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MysticAurasIndicator.xaml.cs">
+      <DependentUpon>MysticAurasIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StanceTracker.cs" />
+    <Compile Include="Controls\RagnarokBuffControl.xaml.cs">
+      <DependentUpon>RagnarokBuffControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StanceIndicator.xaml.cs">
+      <DependentUpon>StanceIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FixedSkillContainers.xaml.cs">
+      <DependentUpon>FixedSkillContainers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FixedSkillControl.xaml.cs">
+      <DependentUpon>FixedSkillControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ClassBars\GunnerBar.xaml.cs">
+      <DependentUpon>GunnerBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ClassBars\LancerBar.xaml.cs">
+      <DependentUpon>LancerBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BuffCooldownControl.xaml.cs">
+      <DependentUpon>BuffCooldownControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ClassBars\NinjaBar.xaml.cs">
+      <DependentUpon>NinjaBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ClassBars\PriestBar.xaml.cs">
+      <DependentUpon>PriestBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ClassBars\ReaperBar.xaml.cs">
+      <DependentUpon>ReaperBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ClassBars\SlayerBar.xaml.cs">
+      <DependentUpon>SlayerBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ClassBars\SorcererBar.xaml.cs">
+      <DependentUpon>SorcererBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StatControl.xaml.cs">
+      <DependentUpon>StatControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\RollToStringConverter.cs" />
+    <Compile Include="Converters\WinningToColorConverter.cs" />
+    <Compile Include="Data\ArcherFocusTracker.cs" />
+    <Compile Include="Data\Boss.cs" />
+    <Compile Include="Data\Abnormality.cs" />
+    <Compile Include="Data\Databases\AbnormalityDatabase.cs" />
+    <Compile Include="Data\ChatMessage.cs" />
+    <Compile Include="Data\MessagePiece.cs" />
+    <Compile Include="Data\MessagePieceType.cs" />
+    <Compile Include="Data\Money.cs" />
+    <Compile Include="Data\OutlineText.cs" />
+    <Compile Include="Data\PrivateChatChannel.cs" />
+    <Compile Include="Data\SocialDatabase.cs" />
+    <Compile Include="Data\Databases\SystemMessages.cs" />
+    <Compile Include="Data\User.cs" />
+    <Compile Include="EntitiesManager.cs" />
+    <Compile Include="PacketInspector.cs" />
+    <Compile Include="Parsing\MessageFactory.cs" />
+    <Compile Include="Parsing\Messages\C_LOAD_TOPO_FIN.cs" />
+    <Compile Include="Parsing\Messages\C_PLAYER_LOCATION.cs" />
+    <Compile Include="Parsing\Messages\C_REQUEST_NONDB_ITEM_INFO.cs" />
+    <Compile Include="Parsing\Messages\C_SHOW_ITEM_TOOLTIP_EX.cs" />
+    <Compile Include="Parsing\Messages\S_ABNORMALITY_END.cs" />
+    <Compile Include="Parsing\Messages\S_ABNORMALITY_REFRESH.cs" />
+    <Compile Include="Parsing\Messages\S_ASK_BIDDING_RARE_ITEM.cs" />
+    <Compile Include="Parsing\Messages\S_CHANGE_PARTY_MANAGER.cs" />
+    <Compile Include="Parsing\Messages\S_CHAT.cs" />
+    <Compile Include="Parsing\Messages\S_CHECK_TO_READY_PARTY.cs" />
+    <Compile Include="Parsing\Messages\S_CHECK_TO_READY_PARTY_FIN.cs" />
+    <Compile Include="Parsing\Messages\S_CREST_MESSAGE.cs" />
+    <Compile Include="Parsing\Messages\S_DESPAWN_NPC.cs" />
+    <Compile Include="Parsing\Messages\S_DESPAWN_USER.cs" />
+    <Compile Include="Parsing\Messages\S_EACH_SKILL_RESULT.cs" />
+    <Compile Include="Parsing\Messages\S_JOIN_PRIVATE_CHANNEL.cs" />
+    <Compile Include="Parsing\Messages\S_LEAVE_PARTY_MEMBER.cs" />
+    <Compile Include="Parsing\Messages\S_LEAVE_PRIVATE_CHANNEL.cs" />
+    <Compile Include="Parsing\Messages\S_LOAD_TOPO.cs" />
+    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_ABNORMAL_ADD.cs" />
+    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_ABNORMAL_CLEAR.cs" />
+    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_ABNORMAL_DEL.cs" />
+    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_ABNORMAL_REFRESH.cs" />
+    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_BUFF_UPDATE.cs" />
+    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_LIST.cs" />
+    <Compile Include="Parsing\Messages\S_PRIVATE_CHAT.cs" />
+    <Compile Include="Parsing\Messages\S_RESULT_BIDDING_DICE_THROW.cs" />
+    <Compile Include="Parsing\Messages\S_RESULT_ITEM_BIDDING.cs" />
+    <Compile Include="Parsing\Messages\S_RETURN_TO_LOBBY.cs" />
+    <Compile Include="Parsing\Messages\S_SPAWN_ME.cs" />
+    <Compile Include="Parsing\Messages\S_SPAWN_NPC.cs" />
+    <Compile Include="Data\Player.cs" />
+    <Compile Include="Parsing\Messages\S_SPAWN_USER.cs" />
+    <Compile Include="Parsing\Messages\S_SYSTEM_MESSAGE.cs" />
+    <Compile Include="Parsing\Messages\S_SYSTEM_MESSAGE_LOOT_ITEM.cs" />
+    <Compile Include="Parsing\Messages\S_USER_EFFECT.cs" />
+    <Compile Include="Parsing\Messages\S_LOGOUT_PARTY_MEMBER.cs" />
+    <Compile Include="Parsing\Messages\S_BAN_PARTY_MEMBER.cs" />
+    <Compile Include="Parsing\Messages\S_LEAVE_PARTY.cs" />
+    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_CHANGE_HP.cs" />
+    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_CHANGE_MP.cs" />
+    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_INFO.cs" />
+    <Compile Include="Parsing\Messages\S_PARTY_MEMBER_STAT_UPDATE.cs" />
+    <Compile Include="Parsing\Messages\S_WEAK_POINT.cs" />
+    <Compile Include="Parsing\Messages\S_WHISPER.cs" />
+    <Compile Include="Parsing\SystemChatMessage.cs" />
+    <Compile Include="Parsing\ThreadSafeManager.cs" />
+    <Compile Include="ProxyInterop.cs" />
+    <Compile Include="SettingsManager.cs" />
+    <Compile Include="SkillUtils.cs" />
+    <Compile Include="Sniffing\ConnectionId.cs" />
+    <Compile Include="Sniffing\EndpointIpv4.cs" />
+    <Compile Include="Sniffing\IpSniffer.cs" />
+    <Compile Include="Sniffing\IpSnifferRawSocketMultipleInterfaces.cs" />
+    <Compile Include="Sniffing\IpSnifferRawSocketSingleInterface.cs" />
+    <Compile Include="Sniffing\IpSnifferWinPcap.cs" />
+    <Compile Include="Sniffing\Packets\IpPacket.cs" />
+    <Compile Include="Sniffing\Packets\ParserHelpers.cs" />
+    <Compile Include="Sniffing\Packets\TcpFlags.cs" />
+    <Compile Include="Sniffing\Packets\TcpPacket.cs" />
+    <Compile Include="Sniffing\TcpConnection.cs" />
+    <Compile Include="Sniffing\TcpSniffer.cs" />
+    <Compile Include="Sniffing\TeraSniffer.cs" />
+    <Compile Include="TemplateSelectors\AuthorLabelTemplateSelector.cs" />
+    <Compile Include="TemplateSelectors\PiecePopupSelector.cs" />
+    <Compile Include="Tera.Data\BasicTeraData.cs" />
+    <Compile Include="Tera.Data\ClassIcons.cs" />
+    <Compile Include="Tera.Data\CopyKey.cs" />
+    <Compile Include="Tera.Data\DiscordInfoByGuild.cs" />
+    <Compile Include="Tera.Data\HotkeysData.cs" />
+    <Compile Include="Tera.Data\ImageDatabase.cs" />
+    <Compile Include="Tera.Data\InvalidConfigFileException.cs" />
+    <Compile Include="Tera.Data\TeraData.cs" />
+    <Compile Include="Tera.Data\WindowData.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Client\C_PLAYER_LOCATION.cs" />
+    <Compile Include="TeraCommon\Game\Messages\ParsedMessage.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\EachSkillResultServerMessage.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\LoginServerMessage.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\SBanPartyMember.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\SNpcOccupierInfo.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\SNpcTargetUser.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\SpawnMeServerMessage.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\SpawnNpcServerMessage.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\SpawnProjectileServerMessage.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\SpawnUserServerMessage.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\STargetInfo.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\StartUserProjectileServerMessage.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_ABNORMALITY_BEGIN.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_ABNORMALITY_END.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_ABNORMALITY_REFRESH.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_ACTION_END.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_ACTION_STAGE.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_AVAILABLE_EVENT_MATCHING_LIST.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_BAN_PARTY.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_BATTLE_FIELD_ENTRANCE_INFO.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_BEGIN_THROUGH_ARBITER_CONTRACT.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_BOSS_GAGE_INFO.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_CHANGE_DESTPOS_PROJECTILE.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_CHAT.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_CHECK_TO_READY_PARTY.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_CREATURE_CHANGE_HP.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_CREATURE_LIFE.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_CREATURE_ROTATE.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_CREST_INFO.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_CREST_MESSAGE.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_DESPAWN_NPC.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_DESPAWN_USER.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_FIN_INTER_PARTY_MATCH.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_GET_USER_GUILD_LOGO.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_GET_USER_LIST.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_GUILD_QUEST_LIST.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_INSTANT_MOVE.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_LEAVE_PARTY.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_LEAVE_PARTY_MEMBER.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_LOAD_TOPO.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_MOUNT_VEHICLE_EX.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_NPC_LOCATION.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_NPC_STATUS.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_OTHER_USER_APPLY_PARTY.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_PARTY_MEMBER_ABNORMAL_ADD.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_PARTY_MEMBER_ABNORMAL_CLEAR.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_PARTY_MEMBER_ABNORMAL_DEL.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_PARTY_MEMBER_ABNORMAL_REFRESH.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_PARTY_MEMBER_CHANGE_HP.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_PARTY_MEMBER_CHANGE_MP.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_PARTY_MEMBER_LIST.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_PARTY_MEMBER_STAT_UPDATE.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_PLAYER_CHANGE_MP.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_PLAYER_STAT_UPDATE.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_PRIVATE_CHAT.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_REQUEST_CONTRACT.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_START_COOLTIME_SKILL.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_START_GUILD_QUEST.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_SYSTEM_MESSAGE.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_TRADE_BROKER_DEAL_SUGGESTED.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_UPDATE_NPCGUILD.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_USER_LOCATION.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_USER_STATUS.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Server\S_WHISPER.cs" />
+    <Compile Include="TeraCommon\Game\Messages\UnknownMessage.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Client\C_CHECK_VERSION.cs" />
+    <Compile Include="TeraCommon\Game\Services\AbnormalityTracker.cs" />
+    <Compile Include="TeraCommon\Game\Services\EntityTracker.cs" />
+    <Compile Include="TeraCommon\Game\Services\Helpers.cs" />
+    <Compile Include="TeraCommon\Game\Services\HotDotDatabase.cs" />
+    <Compile Include="TeraCommon\Game\Services\IconsDatabase.cs" />
+    <Compile Include="TeraCommon\Game\Services\MessageFactory.cs" />
+    <Compile Include="TeraCommon\Game\Services\NpcDatabase.cs" />
+    <Compile Include="TeraCommon\Game\Services\OpCodeNamer.cs" />
+    <Compile Include="TeraCommon\Game\Services\PetSkillDatabase.cs" />
+    <Compile Include="TeraCommon\Game\Services\PlayerTracker.cs" />
+    <Compile Include="TeraCommon\Game\Services\QuestInfoDatabase.cs" />
+    <Compile Include="TeraCommon\Game\Services\ServerDatabase.cs" />
+    <Compile Include="TeraCommon\Game\Services\SkillDatabase.cs" />
+    <Compile Include="TeraCommon\Game\Services\TeraMessageReader.cs" />
+    <Compile Include="TeraCommon\Game\Services\UserLogoTracker.cs" />
+    <Compile Include="TeraCommon\Message.cs" />
+    <Compile Include="TeraCommon\MessageDirection.cs" />
+    <Compile Include="TeraCommon\Game\Angle.cs" />
+    <Compile Include="TeraCommon\Game\Entity.cs" />
+    <Compile Include="TeraCommon\Game\EntityId.cs" />
+    <Compile Include="TeraCommon\Game\Gender.cs" />
+    <Compile Include="TeraCommon\Game\GuildQuest.cs" />
+    <Compile Include="TeraCommon\Game\GuildQuestItem.cs" />
+    <Compile Include="TeraCommon\Game\GuildQuestTarget.cs" />
+    <Compile Include="TeraCommon\Game\HotDot.cs" />
+    <Compile Include="TeraCommon\Game\IHasOwner.cs" />
+    <Compile Include="TeraCommon\Game\Abnormality\Abnormality.cs" />
+    <Compile Include="TeraCommon\Game\Abnormality\AbnormalityDuration.cs" />
+    <Compile Include="TeraCommon\Game\Abnormality\AbnormalityStorage.cs" />
+    <Compile Include="TeraCommon\Game\Abnormality\Death.cs" />
+    <Compile Include="TeraCommon\Game\Abnormality\Duration.cs" />
+    <Compile Include="TeraCommon\Game\Abnormality\PlayerAbnormals.cs" />
+    <Compile Include="TeraCommon\Game\NpcEntity.cs" />
+    <Compile Include="TeraCommon\Game\NpcInfo.cs" />
+    <Compile Include="TeraCommon\Game\PlaceHolderEntity.cs" />
+    <Compile Include="TeraCommon\Game\Player.cs" />
+    <Compile Include="TeraCommon\Game\PlayerClass.cs" />
+    <Compile Include="TeraCommon\Game\ProjectileEntity.cs" />
+    <Compile Include="TeraCommon\Game\Race.cs" />
+    <Compile Include="TeraCommon\Game\RaceGenderClass.cs" />
+    <Compile Include="TeraCommon\Game\Region.cs" />
+    <Compile Include="TeraCommon\Game\Server.cs" />
+    <Compile Include="TeraCommon\Game\Skill.cs" />
+    <Compile Include="TeraCommon\Game\SkillResult.cs" />
+    <Compile Include="TeraCommon\Game\UserEntity.cs" />
+    <Compile Include="TeraCommon\Game\Vector3f.cs" />
+    <Compile Include="TeraCommon\PacketLog\LogHeader.cs" />
+    <Compile Include="TeraCommon\PacketLog\PacketLogFile.cs" />
+    <Compile Include="TeraCommon\PacketLog\PacketLogReader.cs" />
+    <Compile Include="TeraCommon\PacketLog\PacketLogWriter.cs" />
+    <Compile Include="TeraCommon\PacketLog\Parsing\BlockHelper.cs" />
+    <Compile Include="TeraCommon\PacketLog\Parsing\BlockSplitter.cs" />
+    <Compile Include="TeraCommon\PacketLog\Parsing\BlockType.cs" />
+    <Compile Include="TeraCommon\PacketLog\Parsing\LogHelper.cs" />
+    <Compile Include="TeraCommon\PacketLog\Parsing\StreamHelper.cs" />
+    <Compile Include="TeraCommon\Sniffing\ConnectionDecrypter.cs" />
+    <Compile Include="TeraCommon\Sniffing\Crypt\Cryptor.cs" />
+    <Compile Include="TeraCommon\Sniffing\Crypt\CryptorKey.cs" />
+    <Compile Include="TeraCommon\Sniffing\Crypt\Session.cs" />
+    <Compile Include="TeraCommon\Sniffing\Crypt\Sha.cs" />
+    <Compile Include="TeraCommon\Sniffing\Crypt\Utils.cs" />
+    <Compile Include="TeraCommon\Sniffing\ITeraSniffer.cs" />
+    <Compile Include="TeraCommon\Sniffing\MessageSplitter.cs" />
+    <Compile Include="Data\AbnormalityDuration.cs" />
+    <Compile Include="Controls\AbnormalityIndicator.xaml.cs">
+      <DependentUpon>AbnormalityIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AbnormalityTooltip.xaml.cs">
+      <DependentUpon>AbnormalityTooltip.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BoolSetting.xaml.cs">
+      <DependentUpon>BoolSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BossGage.xaml.cs">
+      <DependentUpon>BossGage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ClassSpecific\Mystic.cs" />
+    <Compile Include="ClassSpecific\Warrior.cs" />
+    <Compile Include="Data\Databases\MonsterDatabase.cs" />
+    <Compile Include="Parsing\Messages\S_BOSS_GAGE_INFO.cs" />
+    <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_FLIGHT_ENERGY.cs" />
+    <Compile Include="Parsing\Messages\S_NPC_STATUS.cs" />
+    <Compile Include="Controls\CircularGauge.xaml.cs">
+      <DependentUpon>CircularGauge.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DragonSmallGauge.xaml.cs">
+      <DependentUpon>DragonSmallGauge.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GenericGauge.xaml.cs">
+      <DependentUpon>GenericGauge.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\HarrowholdBossesControl.xaml.cs">
+      <DependentUpon>HarrowholdBossesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MaterialSwitch.xaml.cs">
+      <DependentUpon>MaterialSwitch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PartyMember.xaml.cs">
+      <DependentUpon>PartyMember.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RaidMember.xaml.cs">
+      <DependentUpon>RaidMember.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ValueSetting.xaml.cs">
+      <DependentUpon>ValueSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TeraServerTimeInfo.cs" />
+    <Compile Include="TimeManager.cs" />
+    <Compile Include="ViewModels\CharacterWindowViewModel.cs" />
+    <Compile Include="ViewModels\ClassManagers\BerserkerBarManager.cs" />
+    <Compile Include="ViewModels\ClassManagers\BrawlerBarManager.cs" />
+    <Compile Include="ViewModels\ChatWindowViewModel.cs" />
+    <Compile Include="ViewModels\ClassManagers\GunnerBarManager.cs" />
+    <Compile Include="ViewModels\ClassManagers\LancerBarManager.cs" />
+    <Compile Include="ViewModels\ClassManagers\ClassManager.cs" />
+    <Compile Include="ViewModels\ClassManagers\ArcherBarManager.cs" />
+    <Compile Include="Converters\ClassToStaminaLabelConverter.cs" />
+    <Compile Include="ViewModels\ClassWindowViewModel.cs" />
+    <Compile Include="Data\EventGroup.cs" />
+    <Compile Include="ViewModels\InfoWindowViewModel.cs" />
+    <Compile Include="ViewModels\TooltipInfo.cs" />
+    <Compile Include="ViewModels\BossGageWindowViewModel.cs" />
+    <Compile Include="ViewModels\BuffBarWindowViewModel.cs" />
+    <Compile Include="ViewModels\CooldownBarWindowViewModel.cs" />
+    <Compile Include="ViewModels\GroupWindowViewModel.cs" />
+    <Compile Include="ViewModels\ClassManagers\MysticBarManager.cs" />
+    <Compile Include="ViewModels\ClassManagers\PriestBarManager.cs" />
+    <Compile Include="ViewModels\ClassManagers\NinjaBarManager.cs" />
+    <Compile Include="ViewModels\ClassManagers\ReaperBarManager.cs" />
+    <Compile Include="ViewModels\SettingsWindowViewModel.cs" />
+    <Compile Include="UpdateManager.cs" />
+    <Compile Include="Utils.cs" />
+    <Compile Include="ViewModels\Helpers\BaseINPC.cs" />
+    <Compile Include="Converters\FactorFromValuesConverter.cs" />
+    <Compile Include="Converters\StaminaBarColorConverter.cs" />
+    <Compile Include="Converters\StaminaBarVisibilityConverter.cs" />
+    <Compile Include="ViewModels\ClassManagers\SlayerBarManager.cs" />
+    <Compile Include="ViewModels\ClassManagers\SorcererBarManager.cs" />
+    <Compile Include="Windows\AbnormalitiesWindow.xaml.cs">
+      <DependentUpon>AbnormalitiesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\BossGageWindow.xaml.cs">
+      <DependentUpon>BossGageWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateSelectors\ChannelLabelDataTemplateSelector.cs" />
+    <Compile Include="Windows\CharacterWindow.xaml.cs">
+      <DependentUpon>CharacterWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Parsing\Messages\S_CREATURE_CHANGE_HP.cs" />
+    <Compile Include="Parsing\Messages\S_LOAD_ACHIEVEMENT_LIST.cs" />
+    <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_MP.cs" />
+    <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_STAMINA.cs" />
+    <Compile Include="Parsing\PacketRouter.cs" />
+    <Compile Include="Converters\ClassImageConverter.cs" />
+    <Compile Include="Converters\CombatToColorConverter.cs" />
+    <Compile Include="Converters\HPbarColorConverter.cs" />
+    <Compile Include="Converters\LaurelImageConverter.cs" />
+    <Compile Include="Controls\EdgeControl.xaml.cs">
+      <DependentUpon>EdgeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Counter.cs" />
+    <Compile Include="Data\StatTracker.cs" />
+    <Compile Include="ViewModels\ClassManagers\WarriorBarManager.cs" />
+    <Compile Include="Controls\RunemarksControl.xaml.cs">
+      <DependentUpon>RunemarksControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ClassBars\ValkyrieBar.xaml.cs">
+      <DependentUpon>ValkyrieBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\ChatChannelNameConverter.cs" />
+    <Compile Include="Converters\ChatChannelToColorConverter.cs" />
+    <Compile Include="Windows\ChatWindow.xaml.cs">
+      <DependentUpon>ChatWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ClassWindow.xaml.cs">
+      <DependentUpon>ClassWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\FixedSkillCooldown.cs" />
+    <Compile Include="ViewModels\ClassManagers\ValkyrieBarManager.cs" />
+    <Compile Include="Controls\ClassBars\WarriorBar.xaml.cs">
+      <DependentUpon>WarriorBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\DebugWindow.xaml.cs">
+      <DependentUpon>DebugWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\FloatingButtonWindow.xaml.cs">
+      <DependentUpon>FloatingButtonWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\GroupWindow.xaml.cs">
+      <DependentUpon>GroupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ClassBars\MysticBar.xaml.cs">
+      <DependentUpon>MysticBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NormalSkillContainer.xaml.cs">
+      <DependentUpon>NormalSkillContainer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ChatControls\MessagePieceControl.xaml.cs">
+      <DependentUpon>MessagePieceControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\MentionToColorConverter.cs" />
+    <Compile Include="Converters\SentReceivedToAngleConverter.cs" />
+    <Compile Include="Windows\InfoWindow.xaml.cs">
+      <DependentUpon>InfoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SkillCooldown.cs" />
+    <Compile Include="Controls\Arc.cs" />
+    <Compile Include="Data\Character.cs" />
+    <Compile Include="Parsing\CharLoginProcessor.cs" />
+    <Compile Include="Data\Enums.cs" />
+    <Compile Include="Data\Databases\BroochesDatabase.cs" />
+    <Compile Include="FocusManager.cs" />
+    <Compile Include="Parsing\ListParser.cs" />
+    <Compile Include="Parsing\Messages\S_ABNORMALITY_BEGIN.cs" />
+    <Compile Include="Parsing\Messages\S_DECREASE_COOLTIME_SKILL.cs" />
+    <Compile Include="Parsing\Messages\S_GET_USER_LIST.cs" />
+    <Compile Include="Parsing\Messages\S_LOGIN.cs" />
+    <Compile Include="Parsing\Messages\S_PLAYER_STAT_UPDATE.cs" />
+    <Compile Include="Parsing\Messages\S_START_COOLTIME_ITEM.cs" />
+    <Compile Include="Data\Skill.cs" />
+    <Compile Include="Controls\SkillIconControl.xaml.cs">
+      <DependentUpon>SkillIconControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SkillManager.cs" />
+    <Compile Include="Data\Databases\SkillsDatabase.cs" />
+    <Compile Include="Parsing\StringUtils.cs" />
+    <Compile Include="Parsing\Messages\S_USER_STATUS.cs" />
+    <Compile Include="WindowManager.cs" />
+    <Compile Include="Windows\TccWindow.cs" />
+    <Compile Include="Controls\ChatControls\MoneyMessagePiece.xaml.cs">
+      <DependentUpon>MoneyMessagePiece.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Controls\AbnormalityIndicator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AbnormalityTooltip.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ChatControls\ApplyBody.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ChatControls\BrokerOfferBody.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ChatControls\ChannelSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ChatControls\ChatMessageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ChatControls\ChatMessageHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ChatControls\CustomMessageBody.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ChatControls\DefaultMessageBody.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ChatControls\FriendMessageDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ChatControls\LFGcontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ChatControls\MapControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ChatControls\PlayerTooltip.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ChatControls\testctrl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ClassBars\BerserkerBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ClassBars\BrawlerBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ClassBars\ArcherBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ArcherFocusControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BarCooldown.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BoolSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BossGage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CircularGauge.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ArcherStanceIndicator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\DefaultEnemyWindowLayout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\DragonControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\DungeonInfoControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\EventControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\FieldSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MysticAurasIndicator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Phase1BossControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Phase2BallistaBossControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Phase2BossControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Phase3BossControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Phase4BossControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\RagnarokBuffControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SmallMobControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\StanceIndicator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\FixedSkillContainers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\DragonSmallGauge.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\FixedSkillControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\GenericGauge.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ClassBars\GunnerBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\HarrowholdBossesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ClassBars\LancerBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BuffCooldownControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MaterialSwitch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ClassBars\NinjaBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PartyMember.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ClassBars\PriestBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\RaidMember.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ClassBars\ReaperBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ClassBars\SlayerBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ClassBars\SorcererBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\StatControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TimelineControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TimeMarkerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TimeSeparator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ValueSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\VanguardInfoControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\AbnormalitiesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\BossGageWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\CharacterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ChatWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ClassWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\EdgeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\RunemarksControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ClassBars\ValkyrieBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ClassBars\WarriorBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\CooldownWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parsing\CustomReader.cs" />
+    <Compile Include="Windows\CooldownWindow.xaml.cs">
+      <DependentUpon>CooldownWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Windows\DebugWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\FloatingButtonWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\GroupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ClassBars\MysticBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\NormalSkillContainer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ChatControls\MessagePieceControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\InfoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\SettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SkillIconControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ChatControls\MoneyMessagePiece.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Parsing\Messages\C_CHECK_VERSION_CUSTOM.cs" />
+    <Compile Include="Parsing\Messages\S_START_COOLTIME_SKILL.cs" />
+    <Compile Include="SessionManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Content Include="resources\data\dungeons-def.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\items\items-EU-EN.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\items\items-EU-FR.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\items\items-EU-GER.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\items\items-JP.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\items\items-NA.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\items\items-RU.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\items\items-TW.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\abnormalities\abnormals-EU-EN.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\abnormalities\abnormals-EU-FR.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\abnormalities\abnormals-EU-GER.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\abnormalities\abnormals-JP.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\abnormalities\abnormals-NA.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\abnormalities\abnormals-RU.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\abnormalities\abnormals-TW.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\abnormalities\abnormals-KR.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\items\items-KR.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="resources\images\ic_pause_white_24dp_2x.png" />
+    <Resource Include="resources\images\ic_remove_white_24dp_2x.png" />
+    <Resource Include="resources\images\ic_visibility_off_white_24dp_2x.png" />
+    <Resource Include="resources\images\ic_filter_list_white_24dp_2x.png" />
+    <Resource Include="resources\images\ic_label_white_24dp_2x.png" />
+    <Resource Include="resources\images\chat.png" />
+    <None Include="app.manifest" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="resources\data\NewWorldMapData.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\opcodes\313577.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\opcodes\317018.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\opcodes\319256.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\opcodes\smt_313577.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\opcodes\smt_317018.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\opcodes\smt_319256.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\social.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\sys-messages.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\guild-quests.tsv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\account-benefit.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\achievement-grade-info.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\achievements.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\dungeons.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\quests.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\regions.tsv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="resources\fonts\SourceSansPro-SemiBold.ttf" />
+    <Resource Include="resources\fonts\Frutiger.ttf" />
+    <Resource Include="resources\fonts\droidsans.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\images\tera-logo-flat.png" />
+    <Resource Include="resources\images\discord.png" />
+    <Resource Include="resources\images\ic_insert_link_white_24dp_2x.png" />
+    <Resource Include="resources\images\ic_timelapse_white_24dp_2x.png" />
+    <Resource Include="resources\images\ic_blur_on_white_24dp_2x.png" />
+    <Resource Include="resources\images\ic_opacity_white_24dp_2x.png" />
+    <Resource Include="resources\images\ic_touch_app_white_24dp_2x.png" />
+    <Resource Include="resources\images\ic_tune_white_24dp_2x.png" />
+    <Resource Include="resources\images\ic_videogame_asset_white_24dp_2x.png" />
+    <Resource Include="resources\tcc-logo-on.ico" />
+    <Resource Include="resources\tcc-logo.ico" />
+    <Resource Include="tcc-logo.ico" />
+    <Resource Include="resources\images\ic_swap_horiz_white_24dp_2x.png" />
+    <Resource Include="resources\images\ic_aspect_ratio_white_24dp_2x.png" />
+    <Resource Include="resources\images\crown.png" />
+    <Resource Include="resources\images\ic_done_white_24dp_2x.png" />
+    <Resource Include="resources\images\ic_people_white_24dp_2x.png" />
+    <Resource Include="resources\images\ic_remove_red_eye_white_24dp_2x.png" />
+    <Resource Include="resources\images\combat_white.png" />
+    <Resource Include="resources\images\ic_person_white_24dp_2x.png" />
+    <Resource Include="resources\images\ic_mouse_white_24dp_2x.png" />
+    <Resource Include="resources\images\ic_access_time_white_24dp_2x.png" />
+    <Resource Include="resources\images\ic_data_usage_white_24dp_2x.png" />
+    <Resource Include="resources\images\ic_close_white_24dp_2x.png" />
+    <Resource Include="resources\images\Icon_Laurels\blank.png" />
+    <Resource Include="resources\images\combat.png" />
+    <Content Include="resources\data\monsters\monsters-EU-EN.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\monsters\monsters-EU-FR.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\monsters\monsters-EU-GER.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\monsters\monsters-JP.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\monsters\monsters-KR.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\monsters\monsters-NA.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\monsters\monsters-override.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\monsters\monsters-RU.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\monsters\monsters-TW.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="resources\images\Icon_Classes\archer.png" />
+    <Resource Include="resources\images\Icon_Classes\berserker.png" />
+    <Resource Include="resources\images\Icon_Classes\brawler.png" />
+    <Resource Include="resources\images\Icon_Classes\common.png" />
+    <Resource Include="resources\images\Icon_Classes\glaiver.png" />
+    <Resource Include="resources\images\Icon_Classes\gunner.png" />
+    <Resource Include="resources\images\Icon_Classes\lancer.png" />
+    <Resource Include="resources\images\Icon_Classes\mystic.png" />
+    <Resource Include="resources\images\Icon_Classes\ninja.png" />
+    <Resource Include="resources\images\Icon_Classes\priest.png" />
+    <Resource Include="resources\images\Icon_Classes\reaper.png" />
+    <Resource Include="resources\images\Icon_Classes\slayer.png" />
+    <Resource Include="resources\images\Icon_Classes\sorcerer.png" />
+    <Resource Include="resources\images\Icon_Classes\warrior.png" />
+    <Resource Include="resources\images\Icon_Laurels\bronze.png" />
+    <Resource Include="resources\images\Icon_Laurels\champion.png" />
+    <Resource Include="resources\images\Icon_Laurels\diamond.png" />
+    <Resource Include="resources\images\Icon_Laurels\gold.png" />
+    <Resource Include="resources\images\Icon_Laurels\silver.png" />
+    <Resource Include="resources\fonts\OpenSans-Regular.ttf" />
+    <Content Include="resources\data\opcodes\313578.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\opcodes\smt_313578.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\skills.tsv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="resources\images\enraged.png" />
+    <Content Include="resources\data\servers.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\WindowManagers\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Packaging.Tools.1.0.0-preview2-25401-01\build\Microsoft.Packaging.Tools.targets" Condition="Exists('..\packages\Microsoft.Packaging.Tools.1.0.0-preview2-25401-01\build\Microsoft.Packaging.Tools.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Packaging.Tools.1.0.0-preview2-25401-01\build\Microsoft.Packaging.Tools.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Packaging.Tools.1.0.0-preview2-25401-01\build\Microsoft.Packaging.Tools.targets'))" />
+    <Error Condition="!Exists('..\packages\NETStandard.Library.2.0.0-preview2-25401-01\build\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NETStandard.Library.2.0.0-preview2-25401-01\build\NETStandard.Library.targets'))" />
+  </Target>
+  <Import Project="..\packages\NETStandard.Library.2.0.0-preview2-25401-01\build\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.0-preview2-25401-01\build\NETStandard.Library.targets')" />
+</Project>

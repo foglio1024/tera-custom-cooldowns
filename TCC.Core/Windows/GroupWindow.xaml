@@ -1,0 +1,93 @@
+﻿<local:TccWindow x:Class="TCC.Windows.GroupWindow"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:local="clr-namespace:TCC.Windows"
+                 xmlns:wm="clr-namespace:TCC.ViewModels"
+                 xmlns:controls="clr-namespace:TCC.Controls"
+                 xmlns:converters="clr-namespace:TCC.Converters"
+                 xmlns:data="clr-namespace:TCC.Data"
+                 mc:Ignorable="d"
+                 WindowStyle="None"
+                 AllowsTransparency="True"
+                 ResizeMode="NoResize"
+                 Topmost="True"
+                 SizeToContent="WidthAndHeight"
+                 Background="Transparent"
+                 Title="GroupWindow" Height="Auto" Width="Auto"
+                 Loaded="TccWindow_Loaded" 
+                 MouseLeftButtonDown="Window_MouseLeftButtonDown" 
+                 PreviewMouseRightButtonDown="TccWindow_PreviewMouseRightButtonDown"
+                 ShowInTaskbar="False" UseLayoutRounding="True"
+                 >
+    <local:TccWindow.DataContext>
+        <wm:GroupWindowViewModel/>
+    </local:TccWindow.DataContext>
+    <Grid  Margin="10" Width="Auto" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid.LayoutTransform>
+            <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}" />
+        </Grid.LayoutTransform>
+        <!--Info border-->
+        <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Row="1" 
+                Grid.ColumnSpan="1" Grid.Column="3"  Margin="4,2" 
+                Width="Auto" VerticalAlignment="Top" HorizontalAlignment="Left"
+                Padding="5,1" Visibility="{Binding Instance.Formed, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,2" ToolTip="Total members">
+                    <Path Data="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"
+                          Fill="{StaticResource Colors.App.Silver}" Stretch="Uniform" Width="15" Margin="0"></Path>
+                    <TextBlock Text="{Binding Instance.GroupSize, Mode=OneWay}" FontWeight="DemiBold" Margin="6,0,0,0" Foreground="#afff"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,2" ToolTip="Alive members">
+                        <Path Data="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                          Fill="{StaticResource Colors.App.HP}" Stretch="Uniform" Width="15" Margin="0"></Path>
+
+                    <TextBlock Text="{Binding Instance.AliveMembersCount, Mode=OneWay}" FontWeight="DemiBold" Margin="6,0,0,0" Foreground="#afff"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,2" ToolTip="Ready members" Visibility="{Binding Instance.Raid,Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
+                    <Path Data="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                          Fill="{StaticResource Colors.App.LightGreen}" Stretch="Uniform" Width="15" Margin="0"></Path>
+                    <TextBlock Text="{Binding Instance.ReadyMembersCount, Mode=OneWay}" FontWeight="DemiBold" Margin="6,0,0,0" Foreground="#afff"/>
+                </StackPanel>
+
+            </StackPanel>
+        </Border>
+        <!--Member lists-->
+        <ItemsControl x:Name="dps"  Width="Auto" 
+                      ItemsSource="{Binding Instance.Dps}" 
+                      ItemTemplate="{Binding Instance.GroupSize, Converter={StaticResource Converters.GroupSizeToTemplate}}" 
+                      Grid.Row="1">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Vertical" MaxHeight="500" Width="Auto" Name="dpsPanel"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+        <ItemsControl x:Name="healers"  Grid.Column="1" 
+                      ItemTemplate="{Binding Instance.GroupSize, Converter={StaticResource Converters.GroupSizeToTemplate}}" 
+                      ItemsSource="{Binding Instance.Healers}" Grid.Row="1">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Vertical" MaxHeight="500" Width="Auto" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+        <ItemsControl x:Name="tanks"  Grid.Column="2" 
+                      ItemTemplate="{Binding Instance.GroupSize, Converter={StaticResource Converters.GroupSizeToTemplate}}" 
+                      ItemsSource="{Binding Instance.Tanks}" Grid.Row="1">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Vertical" MaxHeight="500" Width="Auto" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+    </Grid>
+</local:TccWindow>

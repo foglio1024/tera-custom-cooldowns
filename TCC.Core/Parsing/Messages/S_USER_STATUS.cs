@@ -1,0 +1,30 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Tera.Game;
+using Tera.Game.Messages;
+
+namespace TCC.Parsing.Messages
+
+{
+    public class S_USER_STATUS : ParsedMessage
+    {
+        public bool IsInCombat { get; private set; }
+        public ulong EntityId { get; private set; }
+
+        public S_USER_STATUS(TeraMessageReader reader) : base(reader)
+        {
+            EntityId = reader.ReadUInt64();
+            if(reader.ReadInt32() == 1)
+            {
+                IsInCombat = true;
+            }
+            else
+            {
+                IsInCombat = false;
+            }
+        }
+    }
+}

@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="TCC.Controls.BrawlerBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TCC.Controls"
+             xmlns:viewModels="clr-namespace:TCC.ViewModels"
+             mc:Ignorable="d" >
+    <UserControl.DataContext>
+        <viewModels:BrawlerBarManager/>
+    </UserControl.DataContext>
+    <Grid Width="Auto" Margin="10,10,20,20" Name="root">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Column="1" Margin="-30,0,-6,0" BorderThickness="0" Height="44" CornerRadius="0,21,21,0"
+                Opacity="{Binding CounterProc, Converter={StaticResource Converters.BoolToOpacity}}" 
+                Background="Orange"
+                />
+        <Grid Grid.Column="1" Margin="-10"
+              Opacity="{Binding CounterProc, Converter={StaticResource Converters.BoolToOpacity}}"
+              >
+
+            <local:FixedSkillControl  HorizontalAlignment="Center" Margin="5,0,0,1" VerticalAlignment="Center" DataContext="{Binding Counter}" RenderTransformOrigin=".5,.5">
+                <local:FixedSkillControl.RenderTransform>
+                    <ScaleTransform ScaleY=".9" ScaleX=".9"></ScaleTransform>
+                </local:FixedSkillControl.RenderTransform>
+            </local:FixedSkillControl>
+            <!--<local:Arc StrokeThickness="3" Stroke="Orange" EndAngle="359.9" Width="42" Height="42" Margin="0,0,0,0"></local:Arc>-->
+        </Grid>
+        <!--HP/MP-->
+        <Grid ClipToBounds="False">
+            <Border Style="{StaticResource Styles.DefaultBorder}"
+                    CornerRadius="70"
+                    Margin="0"
+                    Opacity="1"
+                    Padding="9"
+                    VerticalAlignment="Stretch">
+                <Grid HorizontalAlignment="Center" Margin="0,0,0,0" ClipToBounds="False">
+                    <local:Arc EndAngle="{Binding ST.Factor, Converter={StaticResource Converters.FactorToAngle}}" Margin="-8" StrokeThickness="8" Stroke="Orange">
+                        <FrameworkElement.LayoutTransform>
+                            <ScaleTransform ScaleX="-1"></ScaleTransform>
+                        </FrameworkElement.LayoutTransform>
+                    </local:Arc>
+                    <Grid ClipToBounds="False" Opacity="{Binding IsGfOn, Converter={StaticResource Converters.BoolToOpacity}, ConverterParameter=0.5_1}">
+                        <local:Arc Opacity="{Binding IsGfOn, Converter={StaticResource Converters.BoolToOpacity}}"
+                               StrokeThickness="2" Stroke="Orange" EndAngle="359.9"></local:Arc>
+                        <local:Arc Opacity="{Binding IsGfOn, Converter={StaticResource Converters.BoolToOpacity}}"
+                               Margin="-10" StrokeThickness="2" Stroke="Orange" EndAngle="359.9"></local:Arc>
+                        <local:FixedSkillControl DataContext="{Binding GrowingFury}" Margin="-25" Padding="25"/>
+                    </Grid>
+                </Grid>
+            </Border>
+            <Grid.Effect>
+                <DropShadowEffect Opacity="{Binding IsGfOn, Converter={StaticResource Converters.BoolToOpacity}}" Color="Orange" ShadowDepth="0" BlurRadius="15"></DropShadowEffect>
+            </Grid.Effect>
+        </Grid>
+    </Grid>
+</UserControl>

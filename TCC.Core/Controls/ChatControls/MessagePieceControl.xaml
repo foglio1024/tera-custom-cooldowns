@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="TCC.Controls.MessagePieceControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls="clr-namespace:TCC.Controls"
+             xmlns:converters="clr-namespace:TCC.Converters"
+             xmlns:ts="clr-namespace:TCC.TemplateSelectors"
+             mc:Ignorable="d" 
+             Loaded="UserControl_Loaded" 
+             MouseEnter="UserControl_MouseEnter"
+             MouseLeave="UserControl_MouseLeave"
+             >
+    <Grid HorizontalAlignment="Stretch" Background="Transparent">
+        <Border Name="bgBorder" 
+                Margin="0,2"
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Stretch" 
+                CornerRadius="2" 
+                Cursor="{Binding Type, Converter={StaticResource Converters.MessageTypeToCursor}}"
+                PreviewMouseLeftButtonDown="OnMouseDown"
+                Opacity=".2"
+                />
+        <ContentControl x:Name="root" 
+                        Content="{Binding}" 
+                        Margin="0,0,0,0" 
+                        HorizontalAlignment="Right"
+                        Visibility="Visible"
+                        PreviewMouseLeftButtonDown="OnMouseDown"
+                        ContentTemplateSelector="{StaticResource PieceTemplateSelector}"
+                        />
+    </Grid>
+</UserControl>
