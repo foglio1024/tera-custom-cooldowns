@@ -55,6 +55,7 @@ namespace TCC.ViewModels
         public void LoadEvents(DayOfWeek today, string region)
         {
             ClearEvents();
+            var yesterday = today - 1;
             if (region.StartsWith("EU")) region = "EU";
             var path = $"resources/config/events/events-{region}.xml";
             if (!File.Exists(path))
@@ -83,32 +84,45 @@ namespace TCC.ViewModels
             XDocument d = XDocument.Load(path);
             foreach (var egElement in d.Descendants().Where(x => x.Name == "EventGroup"))
             {
-                var eg = new EventGroup(egElement.Attribute("name").Value);
+                var egName = egElement.Attribute("name").Value;
+                var egRc = egElement.Attribute("remote") != null && bool.Parse(egElement.Attribute("remote").Value);
+                var egStart = egElement.Attribute("start") != null
+                    ? DateTime.Parse(egElement.Attribute("start").Value)
+                    : DateTime.MinValue;
+                var egEnd = egElement.Attribute("end") != null
+                    ? DateTime.Parse(egElement.Attribute("end").Value)
+                    : DateTime.MaxValue;
+
+                if (TimeManager.Instance.CurrentServerTime < egStart ||
+                    TimeManager.Instance.CurrentServerTime > egEnd) continue;
+                
+                var eg = new EventGroup(egName, egStart, egEnd, egRc);
                 foreach (var evElement in egElement.Descendants().Where(x => x.Name == "Event"))
                 {
+                    var isYesterday = false;
+                    var isToday = false;
+
                     if (evElement.Attribute("days").Value != "*")
                     {
                         if (evElement.Attribute("days").Value.Contains(','))
                         {
                             var days = evElement.Attribute("days").Value.Split(',');
-                            bool isToday = false;
                             foreach (var dayString in days)
                             {
                                 var day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), dayString);
                                 if (day == today) isToday = true;
+                                if (day == yesterday) isYesterday = true;
                             }
-                            if (!isToday) continue;
                         }
                         else
                         {
                             var eventDay = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), evElement.Attribute("days").Value);
-                            if (eventDay != today)
-                            {
-                                continue;
-                            }
+                            isToday = eventDay == today;
+                            isYesterday = eventDay == yesterday;
                         }
                     }
 
+                    if (!isToday && !isYesterday) continue;
 
                     var name = evElement.Attribute("name").Value;
                     int start = int.Parse(evElement.Attribute("start").Value);
@@ -135,10 +149,30 @@ namespace TCC.ViewModels
                     {
                         color = evElement.Attribute("color").Value;
                     }
-                    var ev = new DailyEvent(name, start, durationOrEnd, color, isDuration);
-                    eg.AddEvent(ev);
+                    if (isYesterday)
+                    {
+                        if (!EventUtils.EndsToday(start, durationOrEnd, isDuration))
+                        {
+                            var e1 = new DailyEvent(name, start, 24, color, false);
+                            durationOrEnd = start + durationOrEnd - 24;
+                            start = 0;
+                            var e2 = new DailyEvent(name, start, durationOrEnd, color, isDuration);
+                            if(isToday) eg.AddEvent(e1);
+                            eg.AddEvent(e2);
+                        }
+                        else if (isToday)
+                        {
+                            var ev = new DailyEvent(name, start, durationOrEnd, color, isDuration);
+                            eg.AddEvent(ev);
+                        }
+                    }
+                    else
+                    {
+                        var ev = new DailyEvent(name, start, durationOrEnd, color, isDuration);
+                        eg.AddEvent(ev);
+                    }
                 }
-                if(eg.Events.Count != 0) AddEventGroup(eg);
+                if (eg.Events.Count != 0) AddEventGroup(eg);
             }
             SpecialEvents.Add(new DailyEvent("Reset", TimeManager.Instance.ResetHour, 0, "ff0000"));
         }
