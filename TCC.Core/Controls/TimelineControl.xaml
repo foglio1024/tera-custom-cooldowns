@@ -14,15 +14,19 @@
             <local:EventControl />
         </DataTemplate>
         <DataTemplate x:Key="EventGroupTemplate">
-            <Grid>
-                <Rectangle Height="4" 
+            <Grid Margin="0">
+                <Rectangle Height="6" 
                    Width="1000" 
                     Opacity=".8"
                    HorizontalAlignment="Left" 
                    Margin="0,0,0,0" 
                    VerticalAlignment="Center"
                    Fill="#5aaa"
-                           IsHitTestVisible="False"
+                   IsHitTestVisible="True"
+                   ToolTip="{Binding TimeSpanTooltip}"
+                           ToolTipService.InitialShowDelay="0"
+                           ToolTipService.ShowDuration="500000"
+                           ToolTipService.HasDropShadow="True"
                    x:Name="TimelineBase">
                 </Rectangle>
                 <ItemsControl ItemsSource="{Binding Events}" 
@@ -118,10 +122,10 @@
         <ItemsControl ItemsSource="{Binding Instance.EventGroups}"
                       ItemTemplate="{StaticResource EventGroupTemplate}"
                       VerticalAlignment="Top"
-                      Margin="0,18,0,0">
+                      Margin="-10,18,-10,0">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel />
+                    <StackPanel Margin="10,0,0,0"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
