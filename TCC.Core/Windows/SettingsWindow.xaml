@@ -549,9 +549,23 @@
                 <Image Source="/TCC;component/resources/tcc-logo.ico" Width="Auto" Height="32" Margin="0,0,0,0" RenderOptions.BitmapScalingMode="HighQuality"/>
                 <TextBlock Style="{StaticResource Styles.DefaultText}" Text="{Binding Path=Title, RelativeSource={RelativeSource AncestorType=local:SettingsWindow}}" VerticalAlignment="Center" Margin="12,0" FontSize="16"></TextBlock>
             </StackPanel>
-            <Image Source="/TCC;component/resources/images/ic_close_white_24dp_2x.png" Width="20" Grid.Column="1" 
-                   HorizontalAlignment="Right" Margin="5" Opacity=".9" Cursor="Hand" 
-                   MouseLeftButtonDown="Image_MouseLeftButtonDown"/>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Style="{StaticResource ButtonMainStyle}" VerticalAlignment="Stretch" Margin="0" Click="OpenSettingsFolder" 
+                        HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" Width="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}">
+                    <Path Data="{StaticResource SVG.Folder}" Fill="White" Stretch="Uniform" Opacity=".9"></Path>
+                    <Button.ToolTip>
+                        <Grid Margin="5">
+                            <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                            <TextBlock Foreground="LightGray" Text="Open config folder" Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
+                        </Grid>
+                    </Button.ToolTip>
+                </Button>
+                <Button Grid.Column="1" Style="{StaticResource ButtonMainStyle}" VerticalAlignment="Stretch"
+                   HorizontalContentAlignment="Center" Opacity=".9" Width="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}"
+                        Click="Image_MouseLeftButtonDown" VerticalContentAlignment="Center">
+                    <Path Data="{StaticResource SVG.Close}" Fill="White" Stretch="Uniform" Margin="5" Opacity=".9" ></Path>
+                </Button>
+            </StackPanel>
         </Grid>
     </Grid>
 

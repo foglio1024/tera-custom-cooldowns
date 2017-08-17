@@ -32,7 +32,7 @@ namespace TCC.Windows
             DragMove();
         }
 
-        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Image_MouseLeftButtonDown(object sender, RoutedEventArgs routedEventArgs)
         {
             SettingsManager.SaveSettings();
             var a = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200));
@@ -71,6 +71,11 @@ namespace TCC.Windows
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             TimeManager.Instance.SendWebhookMessage();
+        }
+
+        private void OpenSettingsFolder(object sender, RoutedEventArgs e)
+        {
+            Process.Start(Environment.CurrentDirectory + "/resources/config");
         }
     }
 }
