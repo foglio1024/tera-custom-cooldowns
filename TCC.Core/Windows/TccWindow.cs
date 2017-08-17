@@ -151,7 +151,6 @@ namespace TCC.Windows
         {
             if (!Dispatcher.Thread.IsAlive)
             {
-                Visibility = v;
                 return;
             }
             Dispatcher.Invoke(() =>
