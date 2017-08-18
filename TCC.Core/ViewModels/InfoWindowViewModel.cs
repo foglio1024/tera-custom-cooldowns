@@ -293,7 +293,15 @@ namespace TCC.ViewModels
                 root.Add(ce);
             }
 
-            root.Save("resources/config/characters.xml");
+            XDocument doc = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), root);
+            var fs = new FileStream(Environment.CurrentDirectory + "/resources/config/characters.xml", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+            fs.SetLength(0);
+            using (var sr = new StreamWriter(fs, new UTF8Encoding(true)))
+            {
+                sr.Write(doc.Declaration + Environment.NewLine + doc);
+            }
+            fs.Close();
+            //root.Save("resources/config/characters.xml");
         }
 
 
