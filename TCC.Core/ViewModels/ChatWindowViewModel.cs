@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Threading;
 using TCC.Data;
@@ -22,16 +24,11 @@ namespace TCC.ViewModels
         private bool isChatVisible;
         private SynchronizedObservableCollection<ChatMessage> _chatMessages;
         private ConcurrentQueue<ChatMessage> _queue;
-        private ICollectionView _allMessages;
-        private ICollectionView _guildMessages;
-        private ICollectionView _groupMessages;
-        private ICollectionView _systemMessages;
-        private ICollectionView _whisperMessages;
         public List<SimpleUser> Friends;
         public List<string> BlockedUsers;
         public LFG LastClickedLfg;
         private SynchronizedObservableCollection<LFG> _lfgs;
-        public PrivateChatChannel[] PrivateChannels = new PrivateChatChannel[8];
+        public readonly PrivateChatChannel[] PrivateChannels = new PrivateChatChannel[8];
         private bool paused;
 
         public static ChatWindowViewModel Instance => _instance ?? (_instance = new ChatWindowViewModel());
@@ -114,27 +111,21 @@ namespace TCC.ViewModels
                 _lfgs = value;
             }
         }
-        public ICollectionView AllMessages
+
+        public SynchronizedObservableCollection<Tab> Tabs
         {
-            get => _allMessages;
+            get => _tabs;
+            set
+            {
+                if (_tabs == value) return;
+                _tabs = value;
+                NotifyPropertyChanged(nameof(Tabs));
+            }
         }
-        public ICollectionView GuildMessages
-        {
-            get => _guildMessages;
-        }
-        public ICollectionView GroupMessages
-        {
-            get => _groupMessages;
-        }
-        public ICollectionView SystemMessages
-        {
-            get => _systemMessages;
-        }
-        public ICollectionView WhisperMessages
-        {
-            get => _whisperMessages;
-        }
+
         public List<ChatChannelOnOff> VisibleChannels { get => SettingsManager.EnabledChatChannels; }
+        private readonly object _lock = new object();
+        private SynchronizedObservableCollection<Tab> _tabs;
 
         public ChatWindowViewModel()
         {
@@ -153,9 +144,9 @@ namespace TCC.ViewModels
                     WindowManager.ChatWindow.RefreshTopmost();
                 }
             };
-            
-            ChatMessages.CollectionChanged += ChatMessages_CollectionChanged;
 
+            ChatMessages.CollectionChanged += ChatMessages_CollectionChanged;
+            BindingOperations.EnableCollectionSynchronization(ChatMessages, _lock);
 
             //get bool from settings
             //
@@ -163,29 +154,6 @@ namespace TCC.ViewModels
             BlockedUsers = new List<string>();
             Friends = new List<SimpleUser>();
             TooltipInfo = new TooltipInfo("", "", 1);
-
-            _allMessages = new CollectionViewSource { Source = _chatMessages }.View;
-            _guildMessages = new CollectionViewSource { Source = _chatMessages }.View;
-            _groupMessages = new CollectionViewSource { Source = _chatMessages }.View;
-            _systemMessages = new CollectionViewSource { Source = _chatMessages }.View;
-            _whisperMessages = new CollectionViewSource { Source = _chatMessages }.View;
-
-            _allMessages.Filter = null;
-            _guildMessages.Filter = p => ((ChatMessage)p).Channel == ChatChannel.Guild ||
-                                        ((ChatMessage)p).Channel == ChatChannel.GuildNotice;
-            _groupMessages.Filter = p => ((ChatMessage)p).Channel == ChatChannel.Party ||
-                                        ((ChatMessage)p).Channel == ChatChannel.PartyNotice ||
-                                        ((ChatMessage)p).Channel == ChatChannel.Raid ||
-                                        ((ChatMessage)p).Channel == ChatChannel.RaidLeader ||
-                                        ((ChatMessage)p).Channel == ChatChannel.Group ||
-                                        ((ChatMessage)p).Channel == ChatChannel.GroupAlerts ||
-                                        ((ChatMessage)p).Channel == ChatChannel.Death ||
-                                        ((ChatMessage)p).Channel == ChatChannel.Ress||
-                                        ((ChatMessage)p).Channel == ChatChannel.RaidNotice;
-            _systemMessages.Filter = p => ((ChatMessage)p).Author == "System" ||
-                                           ((ChatMessage)p).Channel == ChatChannel.TCC;
-            _whisperMessages.Filter = p => ((ChatMessage)p).Channel == ChatChannel.ReceivedWhisper ||
-                                            ((ChatMessage)p).Channel == ChatChannel.SentWhisper;
             PrivateChannels[7] = new PrivateChatChannel(uint.MaxValue - 1, "Proxy", 7);
 
         }
@@ -330,6 +298,103 @@ namespace TCC.ViewModels
         {
             ChatMessages.Clear();
             LFGs.Clear();
+        }
+
+        public void LoadTabs(IEnumerable<Tab> tabs)
+        {
+
+            Tabs = new SynchronizedObservableCollection<Tab>();
+            foreach (var chatTabsSetting in tabs)
+            {
+                Tabs.Add(chatTabsSetting);
+            }
+            if (Tabs.Count != 0) return;
+            Tabs.Add(new Tab("ALL", new ChatChannel[] { }, new string[] { }));
+            Tabs.Add(new Tab("GUILD", new ChatChannel[] { ChatChannel.Guild, ChatChannel.GuildNotice, }, new string[] { }));
+            Tabs.Add(new Tab("GROUP", new ChatChannel[]{ChatChannel.Party, ChatChannel.PartyNotice,
+                ChatChannel.RaidLeader, ChatChannel.RaidNotice,
+                ChatChannel.Raid, ChatChannel.Ress,ChatChannel.Death,
+                ChatChannel.Group, ChatChannel.GroupAlerts  }, new string[] { }));
+            Tabs.Add(new Tab("WHISPERS", new ChatChannel[] { ChatChannel.ReceivedWhisper, ChatChannel.SentWhisper, }, new string[] { }));
+            Tabs.Add(new Tab("SYSTEM", new ChatChannel[] { }, new string[] { "System" }));
+        }
+    }
+
+    public class Tab : TSPropertyChanged
+    {
+        public List<ChatChannelOnOff> AllChannels => Utils.GetEnabledChannelsList();
+        private ICollectionView _messages;
+        private string _tabName;
+
+        public string TabName
+        {
+            get => _tabName;
+            set
+            {
+                if (_tabName == value) return;
+                _tabName = value;
+                NotifyPropertyChanged(nameof(TabName));
+            }
+        }
+
+        public SynchronizedObservableCollection<string> Authors { get; set; }
+        public SynchronizedObservableCollection<ChatChannel> Channels { get; set; }
+        public ICollectionView Messages
+        {
+            get => _messages;
+            set
+            {
+                if (_messages == value) return;
+                _messages = value;
+                NotifyPropertyChanged(nameof(Messages));
+            }
+        }
+
+        public void Refresh()
+        {
+            Messages.Refresh();
+        }
+
+        public Tab(string n, ChatChannel[] ch, string[] a)
+        {
+            _dispatcher = Dispatcher.CurrentDispatcher;
+            TabName = n;
+            Messages = new ListCollectionView(ChatWindowViewModel.Instance.ChatMessages);
+            Authors = new SynchronizedObservableCollection<string>(_dispatcher);
+            Channels = new SynchronizedObservableCollection<ChatChannel>(_dispatcher);
+            foreach (var auth in a)
+            {
+                Authors.Add(auth);
+            }
+            foreach (var chan in ch)
+            {
+                Channels.Add(chan);
+            }
+            if (Channels.Count == 0 && Authors.Count == 0)
+            {
+                Messages.Filter = null;
+                return;
+            }
+            ApplyFilter();
+
+
+        }
+
+        public void ApplyFilter()
+        {
+            Messages.Filter = f =>
+            {
+                var m = f as ChatMessage;
+                if (Authors.Count == 0 && Channels.Count != 0)
+                {
+                    return Channels.Contains(m.Channel);
+                }
+                if (Channels.Count == 0 && Authors.Count != 0)
+                {
+                    return Authors.Contains(m.Author);
+                }
+                return Authors.Contains(m.Author) && Channels.Contains(m.Channel);
+            };
         }
     }
 }

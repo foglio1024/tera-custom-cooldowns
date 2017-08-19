@@ -68,6 +68,11 @@ namespace TCC
             uint extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
             SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_NOACTIVATE);
         }
+        public static void UndoUnfocusable(IntPtr hwnd)
+        {
+            uint extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
+            SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle & ~WS_EX_NOACTIVATE);
+        }
         public static void HideFromToolBar(IntPtr hwnd)
         {
             uint extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);

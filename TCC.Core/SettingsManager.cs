@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Xml.Linq;
 using TCC.Data;
+using TCC.ViewModels;
+using Tera.Game.Messages;
 
 namespace TCC
 {
@@ -175,7 +177,7 @@ namespace TCC
         public static string LastRegion { get; set; } = "";
         public static string Webhook { get; set; } = "";
         public static List<ChatChannelOnOff> EnabledChatChannels { get; set; } = Utils.GetEnabledChannelsList();
-        public static string WebhookMessage { get; set; } = "@everyone Guild BAM will spawn soon!";
+        public static string WebhookMessage { get; set; } = "@here Guild BAM will spawn soon!";
 
         public static void LoadWindowSettings()
         {
@@ -349,6 +351,33 @@ namespace TCC
                 catch (Exception) { }
             }
         }
+
+        public static List<Tab> ParseTabsSettings()
+        {
+            var result = new List<Tab>();
+            if (SettingsDoc != null)
+            {
+                var el = SettingsDoc.Descendants().Where(x => x.Name == "ChatTabsSettings");
+                foreach (var t in el.Descendants().Where(x => x.Name == "Tab"))
+                {
+                    var tabName = t.Attribute("name").Value;
+                    var channels = new List<ChatChannel>();
+                    var authors = new List<string>();
+                    foreach (var chElement in t.Descendants().Where(x => x.Name == "Channel"))
+                    {
+                        channels.Add((ChatChannel)Enum.Parse(typeof(ChatChannel), chElement.Attribute("value").Value));
+                    }
+                    foreach (var authElement in t.Descendants().Where(x => x.Name == "Author"))
+                    {
+                        authors.Add(authElement.Attribute("value").Value);
+                    }
+
+                    result.Add(new Tab(tabName, channels.ToArray(), authors.ToArray()));
+                }
+            }
+            return result;
+        }
+
         public static void SaveSettings()
         {
             var xSettings = new XElement("Settings",
@@ -388,9 +417,31 @@ namespace TCC
                 new XAttribute(nameof(WebhookMessage), WebhookMessage)
                 //add setting here
                 ),
-                BuildChannelsXElement(EnabledChatChannels)
+                BuildChannelsXElement(EnabledChatChannels),
+                BuildChatTabsXElement()
             );
             xSettings.Save(Environment.CurrentDirectory + @"/tcc-config.xml");
+        }
+
+        private static XElement BuildChatTabsXElement()
+        {
+            XElement result = new XElement("ChatTabsSettings");
+            foreach (var tab in ChatWindowViewModel.Instance.Tabs)
+            {
+                XAttribute tabName = new XAttribute("name", tab.TabName);
+                XElement tabElement = new XElement("Tab", tabName);
+                foreach (var ch in tab.Channels)
+                {
+                    tabElement.Add(new XElement("Channel", new XAttribute("value", ch)));
+                }
+                foreach (var ch in tab.Authors)
+                {
+                    tabElement.Add(new XElement("Author", new XAttribute("value", ch)));
+                }
+                result.Add(tabElement);
+
+            }
+            return result;
         }
 
         private static void ParseWindowSettings(WindowSettings w, XElement ws)

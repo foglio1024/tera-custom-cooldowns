@@ -40,7 +40,9 @@ namespace TCC.Windows
             opacityUp = new DoubleAnimation(0.01, 1, TimeSpan.FromMilliseconds(300));
             opacityDown = new DoubleAnimation(1, 0.01, TimeSpan.FromMilliseconds(300));
             ChatWindowViewModel.Instance.PropertyChanged += Instance_PropertyChanged;
-            _currentContent = itemsControl;
+            //_currentContent = itemsControl;
+            ChatWindowViewModel.Instance.LoadTabs(SettingsManager.ParseTabsSettings());
+
         }
 
         private void Instance_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -50,6 +52,7 @@ namespace TCC.Windows
                 if (_bottom)
                 {
                     var t = tabControl.SelectedContent as ItemsControl;
+                    if (t == null) return;
                     var b = (Border)VisualTreeHelper.GetChild(t, 0);
                     var s = (ScrollViewer)VisualTreeHelper.GetChild(b, 0);
 
@@ -141,11 +144,11 @@ namespace TCC.Windows
 
             var s = sender as FrameworkElement;
             AnimateTabRect(s);
-            _currentContent = tabControl.SelectedContent as ItemsControl;
-            var b = (Border)VisualTreeHelper.GetChild(_currentContent, 0);
-            var sw = (ScrollViewer)VisualTreeHelper.GetChild(b, 0);
+            //_currentContent = tabControl.SelectedContent as ItemsControl;
+            //var b = (Border)VisualTreeHelper.GetChild(_currentContent, 0);
+            //var sw = (ScrollViewer)VisualTreeHelper.GetChild(b, 0);
 
-            sw.ScrollToTop();
+            //sw.ScrollToTop();
         }
         private void AnimateTabRect(FrameworkElement s)
         {
@@ -160,12 +163,13 @@ namespace TCC.Windows
         }
 
 
-        ItemsControl _currentContent;
+        //ItemsControl _currentContent;
         VirtualizingStackPanel _currentPanel;
         private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             return;
             //if (!_bottom) return;
+/*
             _currentContent = tabControl.SelectedContent as ItemsControl;
             _currentPanel = GetInnerStackPanel(_currentContent);
             var sw = (ScrollViewer)sender;
@@ -202,6 +206,7 @@ namespace TCC.Windows
 
                 }
             }
+*/
         }
         private List<FrameworkElement> GetVisibleItems(Rect svViewportBounds)
         {
@@ -282,6 +287,7 @@ namespace TCC.Windows
         private void TccWindow_MouseLeave(object sender, MouseEventArgs e)
         {
             ChatWindowViewModel.Instance.RefreshHideTimer();
+
         }
 
         private void TccWindow_MouseEnter(object sender, MouseEventArgs e)
@@ -297,22 +303,36 @@ namespace TCC.Windows
 
         private void OpenChannelSettings(object sender, MouseButtonEventArgs e)
         {
-            enabledChannelsPopup.IsOpen = true;
+            ChatSettingsPopup.IsOpen = true;
             var an = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150));
-            enabledChannelsPopup.Child.BeginAnimation(OpacityProperty, an);
+            ChatSettingsPopup.Child.BeginAnimation(OpacityProperty, an);
+            FocusManager.UndoUnfocusable(_handle);
+            Activate();
+            ChatSettingsPopup.Focus();
 
         }
 
         private void CloseChannelSettings(object sender, MouseButtonEventArgs e)
         {
+            FocusManager.MakeUnfocusable(_handle);
             var an = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(150));
             an.Completed += (s, ev) =>
             {
-                enabledChannelsPopup.IsOpen = false;
+                ChatSettingsPopup.IsOpen = false;
                 SettingsManager.SaveSettings();
+                
             };
-            enabledChannelsPopup.Child.BeginAnimation(OpacityProperty, an);
+            ChatSettingsPopup.Child.BeginAnimation(OpacityProperty, an);
 
+        }
+
+        private void SettingsButtonEnter(object sender, MouseEventArgs e)
+        {
+        }
+
+        private void AddChatTab(object sender, RoutedEventArgs e)
+        {
+            ChatWindowViewModel.Instance.Tabs.Add(new Tab("NEW TAB", new ChatChannel[]{}, new string[]{}));
         }
     }
 

@@ -103,6 +103,7 @@
       <HintPath>..\packages\PacketDotNet.0.16.0\lib\PacketDotNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="SharpPcap, Version=4.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpPcap.4.4.0\lib\SharpPcap.dll</HintPath>
       <Private>True</Private>
@@ -244,6 +245,9 @@
     </Compile>
     <Compile Include="Controls\ChatControls\DefaultMessageBody.xaml.cs">
       <DependentUpon>DefaultMessageBody.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ChatControls\TabSettingControl.xaml.cs">
+      <DependentUpon>TabSettingControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\DungeonInfoControl.xaml.cs">
       <DependentUpon>DungeonInfoControl.xaml</DependentUpon>
@@ -896,6 +900,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ChatControls\PlayerTooltip.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ChatControls\TabSettingControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
