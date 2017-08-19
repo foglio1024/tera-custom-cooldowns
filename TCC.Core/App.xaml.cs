@@ -83,15 +83,14 @@ namespace TCC
 
             SessionManager.CurrentPlayer.Class = Class.None;
             SessionManager.CurrentPlayer.Name = "player";
-            var v = Assembly.GetExecutingAssembly().GetName().Version;
-            var ver = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
-
-
-            ChatWindowViewModel.Instance.AddChatMessage(
-                new ChatMessage(ChatChannel.TCC, "System", $"<FONT>{ver}</FONT>"));
 
             TeraSniffer.Instance.Enabled = true;
             TimeManager.Instance.SetServerTimeZone(SettingsManager.LastRegion);
+
+            var v = Assembly.GetExecutingAssembly().GetName().Version;
+            var ver = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
+            ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", $"<FONT>{ver}</FONT>"));
+
         }
 
         public static void CloseApp()

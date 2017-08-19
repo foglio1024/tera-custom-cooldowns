@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Threading;
+using TCC.Data;
 using TCC.ViewModels;
 using TCC.Windows;
 using NotifyIcon = System.Windows.Forms.NotifyIcon;
@@ -30,14 +31,14 @@ namespace TCC
         private static Timer _undimTimer;
         private static List<Delegate> WindowLoadingDelegates = new List<Delegate>
         {
+            new Action(LoadGroupWindow),
+            new Action(LoadChatWindow),
             new Action(LoadCooldownWindow),
             new Action(LoadBossGaugeWindow),
             new Action(LoadBuffBarWindow),
-            new Action(LoadGroupWindow),
-            new Action(LoadChatWindow),
             new Action(LoadCharWindow),
             new Action(LoadClassWindow),
-            new Action(LoadInfoWindow)
+            new Action(LoadInfoWindow),
         };
 
         public static CooldownWindow CooldownWindow;
@@ -83,7 +84,7 @@ namespace TCC
                 }
                 else
                 {
-                    isTccVisible = false;
+                    isTccVisible = false || true;
                     return isTccVisible;
                 }
             }

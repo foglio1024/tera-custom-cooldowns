@@ -49,13 +49,13 @@ namespace TCC.ViewModels
                 }
             };
 
-            Dps = new SynchronizedObservableCollection<Data.User>(_dispatcher);
-            Healers = new SynchronizedObservableCollection<Data.User>(_dispatcher);
-            Tanks = new SynchronizedObservableCollection<Data.User>(_dispatcher);
+            Dps = new SynchronizedObservableCollection<User>(_dispatcher);
+            Healers = new SynchronizedObservableCollection<User>(_dispatcher);
+            Tanks = new SynchronizedObservableCollection<User>(_dispatcher);
 
-            _dps.CollectionChanged += _dps_CollectionChanged;
-            _healers.CollectionChanged += _healers_CollectionChanged;
-            _tanks.CollectionChanged += _tanks_CollectionChanged;
+            Dps.CollectionChanged += _dps_CollectionChanged;
+            Healers.CollectionChanged += _healers_CollectionChanged;
+            Tanks.CollectionChanged += _tanks_CollectionChanged;
         }
         private void _tanks_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
@@ -333,6 +333,7 @@ namespace TCC.ViewModels
             {
                 if (_healers == value) return;
                 _healers = value;
+                NotifyPropertyChanged(nameof(Healers));
             }
         }
         private SynchronizedObservableCollection<User> _healers;
@@ -346,6 +347,7 @@ namespace TCC.ViewModels
             {
                 if (_tanks == value) return;
                 _tanks = value;
+                NotifyPropertyChanged(nameof(Tanks));
             }
         }
         private SynchronizedObservableCollection<User> _tanks;
@@ -359,6 +361,7 @@ namespace TCC.ViewModels
             {
                 if (_dps == value) return;
                 _dps = value;
+                NotifyPropertyChanged(nameof(Dps));
             }
         }
         private SynchronizedObservableCollection<User> _dps;
@@ -518,11 +521,16 @@ namespace TCC.ViewModels
         }
         public void ClearAll()
         {
-            _healers.Clear();
-            _dps.Clear();
-            _tanks.Clear();
+            if (SettingsManager.GroupWindowSettings.Enabled && _dispatcher.Thread.IsAlive)
+            {
 
-            Raid = false;
+                Healers.Clear();
+                Dps.Clear();
+                Tanks.Clear();
+
+                Raid = false;
+
+            }
         }
         public void LogoutMember(uint playerId, uint serverId)
         {
