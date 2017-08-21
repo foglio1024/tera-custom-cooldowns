@@ -11,7 +11,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Threading;
-using TCC.Data;
 using TCC.ViewModels;
 using TCC.Windows;
 using NotifyIcon = System.Windows.Forms.NotifyIcon;
@@ -84,7 +83,7 @@ namespace TCC
                 }
                 else
                 {
-                    isTccVisible = false;
+                    isTccVisible = false || true;
                     return isTccVisible;
                 }
             }

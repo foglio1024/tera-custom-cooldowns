@@ -396,7 +396,7 @@
 
                 </TabItem.Header>
                 <!-- Chat window settings -->
-                <StackPanel Grid.Row="1" Grid.Column="0"  Style="{StaticResource settingsGrid}">
+                <StackPanel Style="{StaticResource settingsGrid}">
                     <controls:BoolSetting SettingName="Enabled" Grid.Row="0" IsOn="{Binding IsChatWindowEnabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" />
                     <controls:BoolSetting SettingName="Visibility" Grid.Row="0" IsOn="{Binding IsChatWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
                     <controls:BoolSetting SettingName="Transparency" Grid.Row="1" IsOn="{Binding DoesChatWindowAllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
@@ -405,6 +405,7 @@
                     <controls:ValueSetting Grid.Row="3" SettingName="Max messages" Min="0" Max="10000" Value="{Binding MaxMessages, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/chat.png"></controls:ValueSetting>
                     <controls:ValueSetting Grid.Row="4" SettingName="Spam threshold" Min="0" Max="10" Value="{Binding SpamThreshold, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_filter_list_white_24dp_2x.png"></controls:ValueSetting>
                     <controls:ValueSetting Grid.Row="4" SettingName="Chat background opacity" Min="0" Max="1" Value="{Binding ChatWindowOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"></controls:ValueSetting>
+                    <controls:ValueSetting Grid.Row="4" SettingName="Font size" Value="{Binding FontSize, Mode=TwoWay}" Min="10" Max="50" SettingImage="/TCC;component/resources/images/ic_format_size_white_24dp_2x.png"></controls:ValueSetting>
                     <controls:BoolSetting Grid.Row="5" SettingName="Show timestamps" IsOn="{Binding ShowTimestamp, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_access_time_white_24dp_2x.png"></controls:BoolSetting>
                     <controls:BoolSetting Grid.Row="6" SettingName="Show channel label" IsOn="{Binding ShowChannel, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_label_white_24dp_2x.png"></controls:BoolSetting>
                     <controls:BoolSetting Grid.Row="7" SettingName="Show always" IsOn="{Binding ChatWindowShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"></controls:BoolSetting>

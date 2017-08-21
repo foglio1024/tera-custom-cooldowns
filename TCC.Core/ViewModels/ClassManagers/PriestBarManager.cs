@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Xml.Linq;
-using TCC.Data;
+﻿using TCC.Data;
 using TCC.Data.Databases;
 
 namespace TCC.ViewModels

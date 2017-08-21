@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Timers;
 using System.Windows.Threading;
-using TCC.ViewModels;
 
 namespace TCC
 {

@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace Tera.Game.Messages
+﻿namespace Tera.Game.Messages
 {
     public class S_START_COOLTIME_SKILL : ParsedMessage
     {

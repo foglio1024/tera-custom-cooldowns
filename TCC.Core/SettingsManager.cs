@@ -4,13 +4,10 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Xml.Linq;
 using TCC.Data;
 using TCC.ViewModels;
-using Tera.Game.Messages;
 
 namespace TCC
 {
@@ -178,6 +175,7 @@ namespace TCC
         public static string Webhook { get; set; } = "";
         public static List<ChatChannelOnOff> EnabledChatChannels { get; set; } = Utils.GetEnabledChannelsList();
         public static string WebhookMessage { get; set; } = "@here Guild BAM will spawn soon!";
+        public static int FontSize { get; set; } = 15;
 
         public static void LoadWindowSettings()
         {
@@ -277,6 +275,12 @@ namespace TCC
                     SpamThreshold = Int32.Parse(b.Attribute(nameof(SpamThreshold)).Value);
                 }
                 catch (Exception) { }
+                try
+                {
+                    FontSize = Int32.Parse(b.Attribute(nameof(FontSize)).Value);
+                }
+                catch (Exception) { }
+
                 try
                 {
                     ShowChannel = Boolean.Parse(b.Attribute(nameof(ShowChannel)).Value);
@@ -402,6 +406,7 @@ namespace TCC
                 new XAttribute(nameof(ClickThruWhenDim), ClickThruWhenDim),
                 new XAttribute(nameof(MaxMessages), MaxMessages),
                 new XAttribute(nameof(SpamThreshold), SpamThreshold),
+                new XAttribute(nameof(FontSize), FontSize),
                 new XAttribute(nameof(ShowChannel), ShowChannel),
                 new XAttribute(nameof(ShowTimestamp), ShowTimestamp),
                 new XAttribute(nameof(ShowOnlyBosses), ShowOnlyBosses),

@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Threading;
-using TCC.Data.Databases;
-using TCC.Parsing.Messages;
+﻿using TCC.Data.Databases;
 using TCC.ViewModels;
 
 namespace TCC

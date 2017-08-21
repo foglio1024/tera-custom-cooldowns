@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Tera.Game;
+﻿using Tera.Game;
 using Tera.Game.Messages;
 
 namespace TCC.Parsing.Messages

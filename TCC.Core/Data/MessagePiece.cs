@@ -1,7 +1,6 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media;
-using TCC.Windows;
+using TCC.ViewModels;
 
 namespace TCC.Data
 {
@@ -91,6 +90,17 @@ namespace TCC.Data
             }
         }
 
+        private int _size = 18;
+        public int Size
+        {
+            get => SettingsManager.FontSize;
+            set
+            {
+                if (_size == value) return;
+                _size = value;
+                NotifyPropertyChanged(nameof(Size));
+            }
+        }
 
         private Thickness SetThickness(string text)
         {
@@ -126,20 +136,32 @@ namespace TCC.Data
                 }
             });
         }
-        public MessagePiece(string text, MessagePieceType type, ChatChannel ch, string customColor = "") : this(text)
+        public MessagePiece(string text, MessagePieceType type, ChatChannel ch, string customColor = "", int size = 18) : this(text)
         {
             Channel = ch;
-
             SetColor(customColor);
-
             Type = type;
+
+            Size = size == 18? SettingsManager.FontSize : size;
+
         }
         public MessagePiece(string text)
         {
             _dispatcher = WindowManager.ChatWindow.Dispatcher;
+            WindowManager.Settings.Dispatcher.Invoke(() => ((SettingsWindowViewModel)WindowManager.Settings.DataContext).PropertyChanged += MessagePiece_PropertyChanged);
+
             Text = text;
             Spaces = SetThickness(text);
         }
+
+        private void MessagePiece_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "FontSize")
+            {
+                NotifyPropertyChanged(nameof(Size));
+            }
+        }
+
         public MessagePiece(Money money, ChatChannel ch) : this(text:"")
         {
             SetColor("");

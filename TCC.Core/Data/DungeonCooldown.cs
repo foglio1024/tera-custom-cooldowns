@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Threading;
 using TCC.Data.Databases;
-using TCC.ViewModels;
 
 namespace TCC.Data
 {

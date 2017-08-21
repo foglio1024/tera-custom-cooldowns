@@ -395,13 +395,13 @@
             </Setter>
         </Style>
 
-        <DataTemplate x:Key="SimpleTemplate">
+        <DataTemplate x:Key="SimpleTemplate" DataType="data:MessagePiece">
             <controls:OutlinedTextBlock Fill="{Binding Color}"
                                         Text="{Binding Text}" 
                                         Cursor="{Binding Type, Converter={StaticResource Converters.MessageTypeToCursor}}"
                                         Stroke="#9000"
                                         StrokeThickness="3"
-                                        FontSize="15"
+                                        FontSize="{Binding Size}"
                                         FontFamily="{StaticResource Frutiger}"
                                         TextWrapping="WrapWithOverflow"
                                         FontWeight="Normal"

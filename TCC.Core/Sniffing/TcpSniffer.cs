@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
-using System.Threading.Tasks;
-using Data;
-using NetworkSniffer.Packets;
 using PacketDotNet;
-using TcpPacket = NetworkSniffer.Packets.TcpPacket;
 
 namespace NetworkSniffer
 {

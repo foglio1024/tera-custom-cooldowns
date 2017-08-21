@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
-using System.Windows.Threading;
 using TCC.ViewModels;
 
 namespace TCC

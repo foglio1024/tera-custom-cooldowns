@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Windows;
 using TCC.Data;
 using TCC.Data.Databases;
 using TCC.ViewModels;

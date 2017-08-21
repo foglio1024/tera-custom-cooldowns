@@ -1,23 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Media;
-using TCC.Controls;
 using TCC.Data.Databases;
-using TCC.Parsing;
-using TCC.Parsing.Messages;
 using TCC.ViewModels;
 
 namespace TCC.Data
@@ -224,10 +212,14 @@ namespace TCC.Data
                     {
                         string content;
                         string customColor;
+                        int fontSize = 18;
                         if (piece.StartsWith("<font"))
                         {
                             //formatted piece: get color and content
                             customColor = piece.Substring(piece.IndexOf('#') + 1, 6);
+                            var fStart = piece.IndexOf("size=", StringComparison.InvariantCultureIgnoreCase) + 6;
+                            var fEnd = piece.IndexOf("\"", fStart,piece.Length , StringComparison.InvariantCultureIgnoreCase);
+                            fontSize = int.Parse(piece.Substring(fStart, fEnd - fStart));
                             var s = piece.IndexOf('>') + 1;
                             var e = piece.IndexOf('<', s);
                             content = piece.Substring(s, e - s);
@@ -331,7 +323,7 @@ namespace TCC.Data
                             }
                             else
                             {
-                                AddPiece(new MessagePiece(ReplaceEscapes(inPiece), MessagePieceType.Simple, Channel, customColor));
+                                AddPiece(new MessagePiece(ReplaceEscapes(inPiece), MessagePieceType.Simple, Channel, customColor, fontSize));
                             }
                         }
                     }
@@ -405,7 +397,8 @@ namespace TCC.Data
                         ItemUid = simplePieces[i].ItemUid,
                         BoundType = simplePieces[i].BoundType,
                         OwnerName = simplePieces[i].OwnerName,
-                        RawLink = simplePieces[i].RawLink
+                        RawLink = simplePieces[i].RawLink,
+                        Size = simplePieces[i].Size
                     };
                     chatMessage.InsertPiece(mp, index);
                     index = chatMessage.Pieces.IndexOf(mp) + 1;
@@ -459,7 +452,7 @@ namespace TCC.Data
         }
         protected void ParseFormattedMessage(string msg)
         {
-            var piecesCount = Regex.Matches(msg, C_TAG).Count;
+            var piecesCount = Regex.Matches(msg, C_TAG, RegexOptions.IgnoreCase).Count;
             for (int i = 0; i < piecesCount; i++)
             {
                 try
@@ -474,12 +467,12 @@ namespace TCC.Data
         }
         protected string ParsePiece(string msg)
         {
-            var start = msg.IndexOf(O_TAG) + O_TAG.Length;
+            var start = msg.IndexOf(O_TAG, StringComparison.InvariantCultureIgnoreCase) + O_TAG.Length;
             if (msg[start] == '>')
             {
                 //it's not formatted: just take the value and add it to pieces
                 start++;
-                var end = msg.IndexOf(C_TAG, start);
+                var end = msg.IndexOf(C_TAG, start, StringComparison.InvariantCultureIgnoreCase);
 
                 //get the message text
                 var text = msg.Substring(start, end - start);
@@ -537,8 +530,13 @@ namespace TCC.Data
                 //it's formatted: parse then add
 
                 //get custom color
-                var colorIndex = msg.IndexOf("COLOR=");
+                var colorIndex = msg.IndexOf("COLOR=", StringComparison.InvariantCultureIgnoreCase);
                 var customColor = colorIndex == -1 ? "" : msg.Substring(colorIndex + 8, 6);
+
+                var sizeIndex = msg.IndexOf("SIZE=", StringComparison.InvariantCultureIgnoreCase) + 6;
+                var sizeEnd = sizeIndex > -1 ? msg.IndexOf("\"", sizeIndex, StringComparison.Ordinal) : 0;
+                var fontSize = sizeIndex > -1? int.Parse(msg.Substring(sizeIndex, sizeEnd - sizeIndex)) : 18;
+
 
                 //get link type
                 var linkIndex = msg.IndexOf("#####");
@@ -572,18 +570,18 @@ namespace TCC.Data
                     }
 
                     mp.SetColor(customColor);
-
+                    mp.Size = fontSize;
                     AddPiece(mp);
                 }
                 else
                 {
                     var s = msg.IndexOf(">");
-                    var e = msg.IndexOf(C_TAG);
-                    AddPiece(new MessagePiece(msg.Substring(s + 1, e-s - 1), MessagePieceType.Simple, Channel));
+                    var e = msg.IndexOf(C_TAG, StringComparison.InvariantCultureIgnoreCase);
+                    AddPiece(new MessagePiece(msg.Substring(s + 1, e-s - 1), MessagePieceType.Simple, Channel,customColor, fontSize));
                 }
 
                 //cut message
-                return msg = msg.Substring(msg.IndexOf(C_TAG) + C_TAG.Length);
+                return msg = msg.Substring(msg.IndexOf(C_TAG, StringComparison.InvariantCultureIgnoreCase) + C_TAG.Length);
             }
         }
         protected string[] ParseLinkedParameters(string a)

@@ -13,7 +13,7 @@
              >
     <Grid HorizontalAlignment="Stretch" Background="Transparent">
         <Border Name="bgBorder" 
-                Margin="0,2"
+                Margin="0"
                 HorizontalAlignment="Stretch" 
                 VerticalAlignment="Stretch" 
                 CornerRadius="2" 

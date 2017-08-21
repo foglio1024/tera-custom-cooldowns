@@ -1,24 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Threading;
-using TCC.Controls;
 using TCC.Controls.ChatControls;
 using TCC.Data;
-using TCC.Parsing;
 using TCC.ViewModels;
 
 namespace TCC.Windows
@@ -263,6 +252,7 @@ namespace TCC.Windows
         }
         private void TccWindow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            //ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.Global, "PODEM CONFIAR", "<font size =\"50\" color=\"#e87d7d\"> M</font>"+"<font size=\"70\" color=\"#e8b07d\">E</font>"+"<font size=\"70\" color=\"#e8d77d\">M</font>"+"<font size=\"70\" color=\"#c6e87d\">E</font>"+"<font size=\"50\" color=\"#92e87d\">S</font>"+"<font size=\"50\" color=\"#7de89b\">L</font>"+"<font size=\"50\" color=\"#7de8ce\">A</font>"+"<font size=\"50\" color=\"#7dcee8\">S</font>"+"<font size=\"50\" color=\"#7d8ee8\">H</font>"));
             //GroupWindowViewModel.Instance.ClearAll();
             //for (int i = 0; i < 23; i++)
             //{

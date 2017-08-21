@@ -1,8 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Windows.Threading;
-using System.Xml.Linq;
+﻿using System.Windows.Threading;
 using TCC.Data;
 using TCC.Data.Databases;
 

@@ -1115,7 +1115,6 @@ namespace TCC.ViewModels
 
             }
         }
-
         public string Webhook
         {
             get => SettingsManager.Webhook;
@@ -1134,6 +1133,19 @@ namespace TCC.ViewModels
                 if (value == SettingsManager.WebhookMessage) return;
                 SettingsManager.WebhookMessage = value;
                 NotifyPropertyChanged(nameof(WebhookMessage));
+            }
+        }
+
+        public int FontSize
+        {
+            get => SettingsManager.FontSize;
+            set
+            {
+                if(SettingsManager.FontSize == value) return;
+                var val = value;
+                if (val < 10) val = 10;
+                SettingsManager.FontSize = val;
+                NotifyPropertyChanged(nameof(FontSize));
             }
         }
         public SettingsWindowViewModel()

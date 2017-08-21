@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using Tera.Game.Messages;
 
 namespace Tera.Game
