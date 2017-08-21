@@ -235,7 +235,7 @@ namespace TCC
         {
             XElement skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 21100), new XAttribute("row", 1)),
-                new XElement("Skill", new XAttribute("id", 80930), new XAttribute("row", 1)),
+                //new XElement("Skill", new XAttribute("id", 80930), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 120500), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 230200), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 240100), new XAttribute("row", 1))

@@ -14,6 +14,22 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Column="1" Margin="-10,0,0,0" BorderThickness="0" CornerRadius="0,22,22,0"
+                VerticalAlignment="Center"
+                Background="#d21"
+        >
+            <Grid Grid.Column="1" Margin="10,-4,-3,-4">
+                <local:FixedSkillControl  HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" DataContext="{Binding OverhandStrike}" RenderTransformOrigin=".5,.5">
+                    <local:FixedSkillControl.RenderTransform>
+                        <ScaleTransform ScaleY=".9" ScaleX=".9"></ScaleTransform>
+                    </local:FixedSkillControl.RenderTransform>
+                </local:FixedSkillControl>
+            </Grid>
+        </Border>
 
         <Grid HorizontalAlignment="Center" Margin="0,0,0,0">
 
