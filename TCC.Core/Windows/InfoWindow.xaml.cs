@@ -16,6 +16,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TCC.Controls;
+using TCC.ViewModels;
 
 namespace TCC.Windows
 {
@@ -69,7 +70,7 @@ namespace TCC.Windows
         private void CloseWindow(object sender, RoutedEventArgs e)
         {
             var a = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(150));
-            a.Completed += (s, ev) => Hide();
+            a.Completed += (s, ev) => { Hide(); InfoWindowViewModel.Instance.SaveToFile(); };
             this.BeginAnimation(OpacityProperty, a);
         }
         private void DragWindow(object sender, MouseButtonEventArgs e)
