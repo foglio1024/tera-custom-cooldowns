@@ -48,7 +48,7 @@ namespace TCC.Parsing.Messages
                 reader.Skip(2);
                 nextAddr = reader.ReadInt16();
                 c.unk1 = reader.ReadInt32();
-                c.nameOffset = reader.ReadInt16();
+                var nameOffset = reader.ReadInt16();
                 c.detailsOffset = reader.ReadInt16();
                 c.detailsCount = reader.ReadInt16();
                 c.details2offset = reader.ReadInt16();
@@ -82,6 +82,7 @@ namespace TCC.Parsing.Messages
                 c.head = reader.ReadInt32();
                 c.face = reader.ReadInt32();
                 c.appearance = reader.ReadInt64();
+                if(reader.Version > 319000) reader.Skip(8); //for KR
                 c.unk10 = reader.ReadInt32();
                 c.unk11 = reader.ReadInt32();
                 c.unk12 = reader.ReadInt32();
@@ -128,6 +129,8 @@ namespace TCC.Parsing.Messages
                 c.laurel = reader.ReadInt32();
                 c.pos = reader.ReadInt32();
                 c.guildId = reader.ReadInt32();
+
+                reader.BaseStream.Position = nameOffset - 4;
                 c.name = reader.ReadTeraString();
 
                 //c.details = new byte[c.detailsCount];
