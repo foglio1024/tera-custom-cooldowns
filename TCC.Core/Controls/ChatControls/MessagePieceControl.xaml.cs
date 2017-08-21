@@ -39,16 +39,7 @@ namespace TCC.Controls
             switch (_context.Type)
             {
                 case MessagePieceType.Item:
-                    //if (_context.BoundType == BoundType.Equip || _context.ItemUid > 0)
-                    //{
-                    //    ProxyInterop.SendExTooltipMessage(_context.ItemUid, _context.OwnerName);
-                    //}
-                    //else
-                    //{
-                    //    ProxyInterop.SendNondbItemInfoMessage(_context.ItemId);
-                    //}
                     ProxyInterop.SendLinkData(_context.RawLink);
-
                     break;
                 case MessagePieceType.Url:
                     Process.Start(_context.Text);
@@ -58,8 +49,6 @@ namespace TCC.Controls
                     break;
                 case MessagePieceType.Quest:
                     ProxyInterop.SendLinkData(_context.RawLink);
-                    break;
-                default:
                     break;
             }
         }
