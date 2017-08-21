@@ -303,6 +303,20 @@ namespace TCC.Windows
 
         private void OpenChannelSettings(object sender, MouseButtonEventArgs e)
         {
+            if (ChatSettingsPopup.IsOpen)
+            {
+                FocusManager.MakeUnfocusable(_handle);
+                var anc = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(150));
+                anc.Completed += (s, ev) =>
+                {
+                    ChatSettingsPopup.IsOpen = false;
+                    SettingsManager.SaveSettings();
+
+                };
+                ChatSettingsPopup.Child.BeginAnimation(OpacityProperty, anc);
+                return;
+
+            }
             ChatSettingsPopup.IsOpen = true;
             var an = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150));
             ChatSettingsPopup.Child.BeginAnimation(OpacityProperty, an);
