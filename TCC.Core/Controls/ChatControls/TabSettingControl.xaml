@@ -26,7 +26,7 @@
 
                 <Button Grid.Column="0" VerticalAlignment="Stretch" FontSize="16" Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Stretch"
                          HorizontalAlignment="Stretch" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="RemoveChannel" VerticalContentAlignment="Center">
-                <Path Fill="#a000" Data="{StaticResource SVG.Close}" Stretch="Uniform" Margin="7"></Path>
+                    <Path Fill="#a000" Data="{StaticResource SVG.Close}" Stretch="Uniform" Margin="7"></Path>
                 </Button>
 
             </Grid>
@@ -54,8 +54,10 @@
             </Grid>
         </DataTemplate>
     </UserControl.Resources>
+    <Border Margin="4" Style="{StaticResource Styles.DefaultBorder}" UseLayoutRounding="True" 
+            ClipToBounds="False" CornerRadius="4" Background="#222227" BorderThickness="0">
         <StackPanel>
-            <Border Background="#2fff" >
+            <Border Background="#09ffffff" CornerRadius="4,4,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -70,51 +72,74 @@
                 </Grid>
 
             </Border>
-            <Grid Background="#1ccc">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="150"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
+            <Border Background="#1ccc" Margin="0,0,0,5">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
-                <TextBlock Style="{StaticResource Styles.DefaultText}" FontSize="13"  Text="Channels" Padding="10,5" VerticalAlignment="Center" Foreground="#9fff" />
-            <ComboBox Name="NewChannelComboBox" Grid.Column="1" ItemsSource="{Binding AllChannels}"
-                      ItemTemplate="{StaticResource SimpleChatChannelTemplate}" VerticalContentAlignment="Center"
-                          Background="#1fff" BorderThickness="0" VerticalAlignment="Stretch">
-                <ComboBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel RequestBringIntoView="OnRequestBringIntoView"/>
-                    </ItemsPanelTemplate>
-                </ComboBox.ItemsPanel>
-            </ComboBox>
-                <Button Grid.Column="2" ToolTip="Add selected channel" FontSize="16" Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                     HorizontalAlignment="Right" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="AddChannel">
-                    <TextBlock Style="{StaticResource Styles.DefaultText}" TextAlignment="Center" VerticalAlignment="Center" >+</TextBlock>
-                </Button>
+                    <TextBlock Style="{StaticResource Styles.DefaultText}" FontSize="13" Text="Channels" Padding="10,5"
+                               VerticalAlignment="Center" Foreground="#9fff" />
+                    <ComboBox Name="NewChannelComboBox" Grid.Column="1" ItemsSource="{Binding AllChannels}"
+                              ItemTemplate="{StaticResource SimpleChatChannelTemplate}"
+                              VerticalContentAlignment="Center"
+                              Background="#1fff" BorderThickness="0" VerticalAlignment="Stretch">
+                        <ComboBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel RequestBringIntoView="OnRequestBringIntoView" />
+                            </ItemsPanelTemplate>
+                        </ComboBox.ItemsPanel>
+                    </ComboBox>
+                    <Button Grid.Column="2" ToolTip="Add selected channel" FontSize="16"
+                            Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Stretch"
+                            VerticalContentAlignment="Stretch"
+                            HorizontalAlignment="Right"
+                            Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="AddChannel">
+                        <TextBlock Style="{StaticResource Styles.DefaultText}" TextAlignment="Center"
+                                   VerticalAlignment="Center">
+                            +
+                        </TextBlock>
+                    </Button>
 
-            </Grid>
-            <ItemsControl ItemTemplate="{StaticResource ChannelSettingTemplate}" ItemsSource="{Binding Channels}" Margin="0">
+                </Grid>
+            </Border>
+            <ItemsControl ItemTemplate="{StaticResource ChannelSettingTemplate}" ItemsSource="{Binding Channels}" 
+                          Margin="0,-5,0,0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="2"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
-            <Grid Background="#1ccc">
-                <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-                <TextBlock Style="{StaticResource Styles.DefaultText}" FontSize="13" Text="Authors" Padding="10,5" VerticalAlignment="Center" Foreground="#9fff" />
-                <TextBox Padding="0" Name="NewAuthorTextBox" VerticalAlignment="Stretch" Grid.Column="1" VerticalContentAlignment="Center" Background="#1fff" BorderThickness="0" Foreground="#3fff" Margin="0" CaretBrush="White" Text="New author..." ></TextBox>
-                <Button Grid.Column="2" FontSize="16" Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                     HorizontalAlignment="Right" VerticalAlignment="Stretch"  Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="AddAuthor">
-                    <TextBlock ToolTip="Add author" Style="{StaticResource Styles.DefaultText}" TextAlignment="Center" VerticalAlignment="Center">+</TextBlock>
-                </Button>
+            <Border Background="#1ccc" CornerRadius="0,0,0,0" Margin="0,0,0,5">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource Styles.DefaultText}" FontSize="13" Text="Authors" Padding="10,5"
+                               VerticalAlignment="Center" Foreground="#9fff" />
+                    <TextBox Padding="0" Name="NewAuthorTextBox" VerticalAlignment="Stretch" Grid.Column="1"
+                             VerticalContentAlignment="Center" Background="#1fff" BorderThickness="0"
+                             Foreground="#3fff" Margin="0" CaretBrush="White" Text="New author...">
+                    </TextBox>
+                    <Button Grid.Column="2" FontSize="16" Style="{StaticResource ButtonMainStyle}"
+                            HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                            HorizontalAlignment="Right" VerticalAlignment="Stretch"
+                            Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="AddAuthor">
+                        <TextBlock ToolTip="Add author" Style="{StaticResource Styles.DefaultText}"
+                                   TextAlignment="Center" VerticalAlignment="Center">
+                            +
+                        </TextBlock>
+                    </Button>
 
-            </Grid>
-            <ItemsControl ItemTemplate="{StaticResource AuthorSettingTemplate}" ItemsSource="{Binding Authors}" Margin="0">
+                </Grid>
+            </Border>
+            <ItemsControl ItemTemplate="{StaticResource AuthorSettingTemplate}" ItemsSource="{Binding Authors}" 
+                          Margin="0,-5,0,0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="2"/>
@@ -122,4 +147,6 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
         </StackPanel>
+
+    </Border>
 </UserControl>
