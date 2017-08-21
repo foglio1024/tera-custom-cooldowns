@@ -46,10 +46,20 @@ namespace TCC
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         public static extern bool PostMessage(IntPtr hWnd, uint msg, int wParam, int lParam);
 
+        [DllImport("user32.dll", EntryPoint = "FindWindow", SetLastError = true)]
+        static extern IntPtr FindWindowByCaption(IntPtr ZeroOnly, string lpWindowName);
+
         public static IntPtr FindTeraWindow()
         {
             Marshal.GetLastWin32Error();
             var result = FindWindow("LaunchUnrealUWindowsClient", "TERA");
+            Marshal.GetLastWin32Error();
+            return result;
+        }
+        public static IntPtr FindMeterWindow()
+        {
+            Marshal.GetLastWin32Error();
+            var result = FindWindow("Shinra Meter", null);
             Marshal.GetLastWin32Error();
             return result;
         }
@@ -59,8 +69,10 @@ namespace TCC
         public static bool IsActive()
         {
             var teraWindow = FindTeraWindow();
+            var meterWindow = FindMeterWindow();
             var activeWindow = GetForegroundWindow();
-            return teraWindow != IntPtr.Zero && (teraWindow == activeWindow || settingsWindowHandle == activeWindow);
+            return teraWindow != IntPtr.Zero && (teraWindow == activeWindow || settingsWindowHandle == activeWindow ) ||
+                   meterWindow != IntPtr.Zero && (meterWindow == activeWindow || settingsWindowHandle == activeWindow);
         }
 
         public static void MakeUnfocusable(IntPtr hwnd)
