@@ -14,21 +14,18 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Column="1" Margin="-30,0,-6,0" BorderThickness="0" Height="44" CornerRadius="0,21,21,0"
-                Opacity="{Binding CounterProc, Converter={StaticResource Converters.BoolToOpacity}}" 
+        <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Column="1" Margin="-14,0,0,0" BorderThickness="0" CornerRadius="0,22,22,0"
+                Opacity="{Binding CounterProc, Converter={StaticResource Converters.BoolToOpacity}}" VerticalAlignment="Center"
                 Background="Orange"
-                />
-
-        <Grid Grid.Column="1" Margin="-10"
-              Opacity="{Binding CounterProc, Converter={StaticResource Converters.BoolToOpacity}}"
-              >
-
-            <local:FixedSkillControl  HorizontalAlignment="Center" Margin="5,0,0,1" VerticalAlignment="Center" DataContext="{Binding Counter}" RenderTransformOrigin=".5,.5">
+                >
+            <Grid Grid.Column="1" Margin="10,-4,-3,-4">
+                <local:FixedSkillControl  HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" DataContext="{Binding Counter}" RenderTransformOrigin=".5,.5">
                 <local:FixedSkillControl.RenderTransform>
                     <ScaleTransform ScaleY=".9" ScaleX=".9"></ScaleTransform>
                 </local:FixedSkillControl.RenderTransform>
             </local:FixedSkillControl>
         </Grid>
+        </Border>
         <Grid ClipToBounds="False">
             <Border Style="{StaticResource Styles.DefaultBorder}"
                     CornerRadius="70"
