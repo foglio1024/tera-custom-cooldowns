@@ -31,9 +31,10 @@ namespace TCC
         public int ResetHour;
         public static TimeManager Instance => _instance ?? (_instance = new TimeManager());
         public string CurrentRegion;
-        private int _serverHourOffset;
+        public int ServerHourOffsetFromLocal;
+        public int ServerHourOffsetFromUtc;
 
-        public DateTime CurrentServerTime => DateTime.Now.AddHours(_serverHourOffset);
+        public DateTime CurrentServerTime => DateTime.Now.AddHours(ServerHourOffsetFromLocal);
 
         private TimeManager()
         {
@@ -53,9 +54,9 @@ namespace TCC
 
         private void CheckNewDay(object sender, EventArgs e)
         {
-            if (DateTime.Now.Hour == 0 && DateTime.Now.Minute == 0)
-                InfoWindowViewModel.Instance.LoadEvents(DateTime.Now.DayOfWeek, CurrentRegion);
-            if (DateTime.Now.Second == 0 && DateTime.Now.Minute % 2 == 0) CheckCloseEvents();
+            if (CurrentServerTime.Hour == 0 && CurrentServerTime.Minute== 0)
+                InfoWindowViewModel.Instance.LoadEvents(CurrentServerTime.DayOfWeek, CurrentRegion);
+            if (CurrentServerTime.Second == 0 && CurrentServerTime.Minute % 3 == 0) CheckCloseEvents();
         }
 
         public void SetServerTimeZone(string region)
@@ -72,15 +73,15 @@ namespace TCC
 
             if (timezone != null)
             {
-                var serverUtcOffset = timezone.IsDaylightSavingTime(DateTime.UtcNow + timezone.BaseUtcOffset)
+                ServerHourOffsetFromUtc = timezone.IsDaylightSavingTime(DateTime.UtcNow + timezone.BaseUtcOffset)
                     ? timezone.BaseUtcOffset.Hours + 1
                     : timezone.BaseUtcOffset.Hours;
-                _serverHourOffset = -TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours + serverUtcOffset;
+                ServerHourOffsetFromLocal = -TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours + ServerHourOffsetFromUtc;
             }
 
             if (InfoWindowViewModel.Instance.Markers.FirstOrDefault(x => x.Name.Equals(region + " server time")) == null)
             {
-                InfoWindowViewModel.Instance.Markers.Add(new TimeMarker(_serverHourOffset, region + " server time"));
+                InfoWindowViewModel.Instance.Markers.Add(new TimeMarker(ServerHourOffsetFromLocal, region + " server time"));
             }
 
             CheckReset();
@@ -91,8 +92,8 @@ namespace TCC
         private void CheckReset()
         {
             if (CurrentRegion == null) return;
-            if (SettingsManager.LastRun.Hour >= ResetHour + _serverHourOffset ||
-                DateTime.Now.Hour <= ResetHour + _serverHourOffset) return;
+            if (SettingsManager.LastRun.Hour >= ResetHour + ServerHourOffsetFromLocal ||
+                DateTime.Now.Hour <= ResetHour + ServerHourOffsetFromLocal) return;
             foreach (var ch in InfoWindowViewModel.Instance.Characters)
             {
                 foreach (var dg in ch.Dungeons)
@@ -150,8 +151,7 @@ namespace TCC
             sb.Append(PacketProcessor.ServerId);
             sb.Append("&reg=");
             sb.Append(CurrentRegion);
-            sb.Append("&set=");
-            sb.Append(time);
+            sb.Append("&post");
             var c = new WebClient();
             try
             {
