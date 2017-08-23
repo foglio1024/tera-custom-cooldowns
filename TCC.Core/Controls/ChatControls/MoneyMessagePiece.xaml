@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Windows"
              xmlns:controls="clr-namespace:TCC.Controls"
-             mc:Ignorable="d" >
+             xmlns:data="clr-namespace:TCC.Data"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance data:MessagePiece }">
     <Grid VerticalAlignment="Top" Margin="0,0,0,0" UseLayoutRounding="True" Background="Transparent">
         <Grid.Resources>
             <Style TargetType="{x:Type Ellipse}">
@@ -19,7 +20,6 @@
             <Style TargetType="{x:Type controls:OutlinedTextBlock}">
                 <Setter Property="StrokeThickness" Value="3"/>
                 <Setter Property="Stroke" Value="#9000"/>
-                <Setter Property="FontSize" Value="14"/>
                 <Setter Property="FontFamily" Value="Roboto"/>
             </Style>
             <controls:MoneyAmountToVisibilityConverter x:Key="amountToVisibilityConv" />
@@ -30,15 +30,15 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" Margin="2,0" Visibility="{Binding Money.Gold, Converter={StaticResource amountToVisibilityConv}}">
-            <controls:OutlinedTextBlock Text="{Binding Money.Gold, StringFormat={}{0:N0}}" Fill="{StaticResource Colors.App.Gold}" />
+            <controls:OutlinedTextBlock Text="{Binding Money.Gold, StringFormat={}{0:N0}}" Fill="{StaticResource Colors.App.Gold}" FontSize="{Binding Size}"/>
             <Ellipse Fill="{StaticResource Colors.App.Gold}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="2,0" Grid.Column="1" Visibility="{Binding Money.Silver, Converter={StaticResource amountToVisibilityConv}}">
-            <controls:OutlinedTextBlock Text="{Binding Money.Silver}" Fill="{StaticResource Colors.App.Silver}" />
+            <controls:OutlinedTextBlock Text="{Binding Money.Silver}" Fill="{StaticResource Colors.App.Silver}" FontSize="{Binding Size}"/>
             <Ellipse Fill="{StaticResource Colors.App.Silver}" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="2,0" Grid.Column="2" Visibility="{Binding Money.Copper, Converter={StaticResource amountToVisibilityConv}}">
-            <controls:OutlinedTextBlock Text="{Binding Money.Copper}" Fill="{StaticResource Colors.App.Copper}" />
+            <controls:OutlinedTextBlock Text="{Binding Money.Copper}" Fill="{StaticResource Colors.App.Copper}" FontSize="{Binding Size}" />
             <Ellipse Fill="{StaticResource Colors.App.Copper}" />
         </StackPanel>
     </Grid>

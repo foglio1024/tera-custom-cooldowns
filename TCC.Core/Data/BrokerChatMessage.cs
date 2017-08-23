@@ -60,7 +60,7 @@ namespace TCC.Data
             ListingId = p.Listing;
             PlayerId = p.PlayerId;
 
-            Amount = new MessagePiece("Offer for " + p.Amount.ToString(), MessagePieceType.Simple, Channel);
+            Amount = new MessagePiece("Offer for " + p.Amount.ToString(), MessagePieceType.Simple, Channel, SettingsManager.FontSize, false);
             OfferedPrice = new MessagePiece(new Money(p.OfferedPrice), Channel);
             StartingPrice = new MessagePiece(new Money(p.SellerPrice), Channel);
             Listing = new MessagePiece("");
