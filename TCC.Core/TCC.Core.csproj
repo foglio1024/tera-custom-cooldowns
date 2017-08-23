@@ -394,6 +394,7 @@
     <Compile Include="Parsing\Messages\S_UPDATE_FRIEND_INFO.cs" />
     <Compile Include="Parsing\Messages\S_USER_BLOCK_LIST.cs" />
     <Compile Include="Parsing\SystemMessagesProcessor.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="TemplateSelectors\EnemyTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\EnemyWindowTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\MessageBodyDataTemplateSelector.cs" />
