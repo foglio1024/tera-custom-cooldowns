@@ -49,13 +49,12 @@ namespace TCC.Data
             get => enraged;
             set
             {
-                if (enraged != value)
-                {
-                    enraged = value;
-                    NotifyPropertyChanged("Enraged");
-                }
+                if (enraged == value) return;
+                enraged = value;
+                NotifyPropertyChanged(nameof(Enraged));
             }
         }
+
         protected float _maxHP;
         public float MaxHP
         {
