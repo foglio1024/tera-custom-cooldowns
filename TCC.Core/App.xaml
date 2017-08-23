@@ -52,17 +52,17 @@
         <system:Double x:Key="MapHeight">600</system:Double>
 
         <!--Chat colors-->
-        <SolidColorBrush x:Key="Colors.Chat.Say" Color="#fff"/>
+        <SolidColorBrush x:Key="Colors.Chat.Say" Color="#ffffff"/>
         <SolidColorBrush x:Key="Colors.Chat.Party" Color="#0071bb"/>
         <SolidColorBrush x:Key="Colors.Chat.Guild" Color="#40fb40"/>
         <SolidColorBrush x:Key="Colors.Chat.Area" Color="#ba82f2"/>
         <SolidColorBrush x:Key="Colors.Chat.Trade" Color="#c07a81"/>
-        <SolidColorBrush x:Key="Colors.Chat.Greet" Color="#999"/>
+        <SolidColorBrush x:Key="Colors.Chat.Greet" Color="#999999"/>
         <SolidColorBrush x:Key="Colors.Chat.PartyNotice" Color="#8effff"/>
         <SolidColorBrush x:Key="Colors.Chat.RaidNotice" Color="#f28730"/>
         <SolidColorBrush x:Key="Colors.Chat.Emote" Color="#ffb9b9"/>
         <SolidColorBrush x:Key="Colors.Chat.Global" Color="#f0ff89"/>
-        <SolidColorBrush x:Key="Colors.Chat.Raid" Color="#fc0"/>
+        <SolidColorBrush x:Key="Colors.Chat.Raid" Color="#ffcc00"/>
         <SolidColorBrush x:Key="Colors.Chat.Megaphone" Color="#00d8ff"/>
         <SolidColorBrush x:Key="Colors.Chat.GuildAd" Color="#70c401"/>
         <SolidColorBrush x:Key="Colors.Chat.Private" Color="#ff5f38"/>
@@ -71,17 +71,17 @@
         <SolidColorBrush x:Key="Colors.Chat.System.Generic" Color="#c8c8b6"/>
         <SolidColorBrush x:Key="Colors.Chat.System.Notify" Color="#c8c8b6"/>
         <SolidColorBrush x:Key="Colors.Chat.System.Event" Color="#c8c8b6"/>
-        <SolidColorBrush x:Key="Colors.Chat.System.Error" Color="#f00"/>
+        <SolidColorBrush x:Key="Colors.Chat.System.Error" Color="#ff0000"/>
         <SolidColorBrush x:Key="Colors.Chat.System.Group" Color="#d9d9d9"/>
         <SolidColorBrush x:Key="Colors.Chat.System.Deathmatch" Color="#d9d9d9"/>
         <SolidColorBrush x:Key="Colors.Chat.System.ContractAlert" Color="#d9d9d9"/>
         <SolidColorBrush x:Key="Colors.Chat.System.GroupAlert" Color="#d9d9d9"/>
-        <SolidColorBrush x:Key="Colors.Chat.System.Loot" Color="#d9d9d9"/>
-        <SolidColorBrush x:Key="Colors.Chat.System.Exp" Color="#d9d9d9"/>
-        <SolidColorBrush x:Key="Colors.Chat.System.Money" Color="#d9d9d9"/>
+        <SolidColorBrush x:Key="Colors.Chat.System.Loot" Color="#FFC5FBD4"/>
+        <SolidColorBrush x:Key="Colors.Chat.System.Exp" Color="#FFA0E5FF"/>
+        <SolidColorBrush x:Key="Colors.Chat.System.Money" Color="#FFFFFACC"/>
         <SolidColorBrush x:Key="Colors.Chat.System.Bargain" Color="#ffbf8f"/>
-        <SolidColorBrush x:Key="Colors.Chat.System.Quest" Color="#f7d6af"/>
-        <SolidColorBrush x:Key="Colors.Chat.System.Friend" Color="#afe7f7"/>
+        <SolidColorBrush x:Key="Colors.Chat.System.Quest" Color="#FFFFDDB6"/>
+        <SolidColorBrush x:Key="Colors.Chat.System.Friend" Color="#FF84E1FB"/>
 
         <FontFamily x:Key="DroidSans">pack://application:,,,/resources/fonts/#droidsans</FontFamily>
         <FontFamily x:Key="OpenSans">pack://application:,,,/resources/fonts/#OpenSans-Regular</FontFamily>
