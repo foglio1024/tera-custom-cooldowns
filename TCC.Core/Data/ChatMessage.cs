@@ -198,7 +198,7 @@ namespace TCC.Data
                             customColor = "";
                         }
                         RawMessage = content;
-                        AddPiece(new MessagePiece(content, MessagePieceType.Simple, Channel, customColor));
+                        AddPiece(new MessagePiece(content, MessagePieceType.Simple, Channel, SettingsManager.FontSize, false, customColor));
                     }
                 }
                 else
@@ -217,9 +217,12 @@ namespace TCC.Data
                         {
                             //formatted piece: get color and content
                             customColor = piece.Substring(piece.IndexOf('#') + 1, 6);
-                            var fStart = piece.IndexOf("size=", StringComparison.InvariantCultureIgnoreCase) + 6;
-                            var fEnd = piece.IndexOf("\"", fStart,piece.Length , StringComparison.InvariantCultureIgnoreCase);
-                            fontSize = int.Parse(piece.Substring(fStart, fEnd - fStart));
+                            var fStart = piece.IndexOf("size=", StringComparison.InvariantCultureIgnoreCase) == -1 ?
+                                piece.IndexOf("size=", StringComparison.InvariantCultureIgnoreCase) :
+                                piece.IndexOf("size=", StringComparison.InvariantCultureIgnoreCase) + 6;
+
+                            var fEnd = fStart == -1 ? 0 : piece.IndexOf("\"", fStart, piece.Length, StringComparison.InvariantCultureIgnoreCase);
+                            fontSize = fStart == -1 ? fontSize : int.Parse(piece.Substring(fStart, fEnd - fStart));
                             var s = piece.IndexOf('>') + 1;
                             var e = piece.IndexOf('<', s);
                             content = piece.Substring(s, e - s);
@@ -323,7 +326,7 @@ namespace TCC.Data
                             }
                             else
                             {
-                                AddPiece(new MessagePiece(ReplaceEscapes(inPiece), MessagePieceType.Simple, Channel, customColor, fontSize));
+                                AddPiece(new MessagePiece(ReplaceEscapes(inPiece), MessagePieceType.Simple, Channel, fontSize, fontSize != 18, customColor));
                             }
                         }
                     }
@@ -431,7 +434,7 @@ namespace TCC.Data
         #region Chat Methods
         protected void ParseDirectMessage(string msg, ChatChannel ch)
         {
-            AddPiece(new MessagePiece(msg, MessagePieceType.Simple, ch));
+            AddPiece(new MessagePiece(msg, MessagePieceType.Simple, ch, SettingsManager.FontSize, false));
         }
 
 
@@ -441,13 +444,13 @@ namespace TCC.Data
             var start = msg.IndexOf(header);
             if (start == -1)
             {
-                AddPiece(new MessagePiece(Author + " " + msg, MessagePieceType.Simple, Channel));
+                AddPiece(new MessagePiece(Author + " " + msg, MessagePieceType.Simple, Channel, SettingsManager.FontSize, false));
                 return;
             }
             start += header.Length;
             var id = UInt32.Parse(msg.Substring(start));
             var text = SocialDatabase.Social[id].Replace("{Name}", Author);
-            AddPiece(new MessagePiece(text, MessagePieceType.Simple, Channel));
+            AddPiece(new MessagePiece(text, MessagePieceType.Simple, Channel, SettingsManager.FontSize, false));
 
         }
         protected void ParseFormattedMessage(string msg)
@@ -507,10 +510,10 @@ namespace TCC.Data
                     {
                         if (content.ToString() != "")
                         {
-                            AddPiece(new MessagePiece(ReplaceEscapes(content.ToString()), MessagePieceType.Simple, Channel));
+                            AddPiece(new MessagePiece(ReplaceEscapes(content.ToString()), MessagePieceType.Simple, Channel, SettingsManager.FontSize, false));
                             content = new StringBuilder("");
                         }
-                        AddPiece(new MessagePiece(ReplaceEscapes(item), MessagePieceType.Url, Channel, "7289da"));
+                        AddPiece(new MessagePiece(ReplaceEscapes(item), MessagePieceType.Url, Channel, SettingsManager.FontSize, false, "7289da"));
                     }
                     else
                     {
@@ -519,7 +522,7 @@ namespace TCC.Data
                 }
                 if (content.ToString() != "")
                 {
-                    AddPiece(new MessagePiece(ReplaceEscapes(content.ToString()), MessagePieceType.Simple, Channel));
+                    AddPiece(new MessagePiece(ReplaceEscapes(content.ToString().Replace("<a href=\"asfunction:chatLinkAction\">", "").Replace("</a>", "")), MessagePieceType.Simple, Channel, SettingsManager.FontSize, false));
                 }
 
                 //cut message
@@ -530,13 +533,22 @@ namespace TCC.Data
                 //it's formatted: parse then add
 
                 //get custom color
+                bool hasSpace = false;
                 var colorIndex = msg.IndexOf("COLOR=", StringComparison.InvariantCultureIgnoreCase);
-                var customColor = colorIndex == -1 ? "" : msg.Substring(colorIndex + 8, 6);
+                if (colorIndex == -1)
+                {
+                    colorIndex = msg.IndexOf("COLOR =", StringComparison.InvariantCultureIgnoreCase);
+                    if (colorIndex != -1) hasSpace = true;
+                }
+                var offset = hasSpace ? 10 : 8;
+                var customColor = colorIndex == -1 ? "" : msg.Substring(colorIndex + offset, 6);
 
-                var sizeIndex = msg.IndexOf("SIZE=", StringComparison.InvariantCultureIgnoreCase) + 6;
+                var sizeIndex = msg.IndexOf("SIZE=", StringComparison.InvariantCultureIgnoreCase) > -1 ?
+                    msg.IndexOf("SIZE=", StringComparison.InvariantCultureIgnoreCase) + 6 :
+                    -1;
                 var sizeEnd = sizeIndex > -1 ? msg.IndexOf("\"", sizeIndex, StringComparison.Ordinal) : 0;
-                var fontSize = sizeIndex > -1? int.Parse(msg.Substring(sizeIndex, sizeEnd - sizeIndex)) : 18;
-
+                sizeEnd = sizeEnd > -1 ? sizeEnd : msg.IndexOf('\'', sizeIndex);
+                var fontSize = sizeIndex > -1 ? int.Parse(msg.Substring(sizeIndex, sizeEnd - sizeIndex)) : 18;
 
                 //get link type
                 var linkIndex = msg.IndexOf("#####");
@@ -577,7 +589,7 @@ namespace TCC.Data
                 {
                     var s = msg.IndexOf(">");
                     var e = msg.IndexOf(C_TAG, StringComparison.InvariantCultureIgnoreCase);
-                    AddPiece(new MessagePiece(msg.Substring(s + 1, e-s - 1), MessagePieceType.Simple, Channel,customColor, fontSize));
+                    AddPiece(new MessagePiece(msg.Substring(s + 1, e - s - 1).Replace("<a href=\"asfunction:chatLinkAction\">", "").Replace("</a>", ""), MessagePieceType.Simple, Channel, fontSize, true, customColor));
                 }
 
                 //cut message
@@ -773,7 +785,7 @@ namespace TCC.Data
             {
                 achiName = String.Format("[{0}]", g);
             }
-            return new MessagePiece(achiName, MessagePieceType.Simple, Channel);
+            return new MessagePiece(achiName, MessagePieceType.Simple, Channel, SettingsManager.FontSize, false);
         }
         protected MessagePiece ParseSysMsgQuest(Dictionary<string, string> info)
         {
@@ -783,7 +795,7 @@ namespace TCC.Data
             {
                 txt = q;
             }
-            return new MessagePiece(txt, MessagePieceType.Simple, Channel);
+            return new MessagePiece(txt, MessagePieceType.Simple, Channel, SettingsManager.FontSize, false);
         }
         protected MessagePiece ParseSysMsgAchiGrade(Dictionary<string, string> info)
         {
@@ -793,7 +805,7 @@ namespace TCC.Data
             {
                 txt = g;
             }
-            return new MessagePiece(txt, MessagePieceType.Simple, Channel);
+            return new MessagePiece(txt, MessagePieceType.Simple, Channel, SettingsManager.FontSize, false);
         }
         protected MessagePiece ParseSysMsgDungeon(Dictionary<string, string> info)
         {
@@ -803,7 +815,7 @@ namespace TCC.Data
             {
                 txt = dngName;
             }
-            return new MessagePiece(txt, MessagePieceType.Simple, Channel);
+            return new MessagePiece(txt, MessagePieceType.Simple, Channel, SettingsManager.FontSize, false);
         }
         protected MessagePiece ParseSysMsgAccBenefit(Dictionary<string, string> info)
         {
@@ -813,7 +825,7 @@ namespace TCC.Data
             {
                 txt = ab;
             }
-            return new MessagePiece(txt, MessagePieceType.Simple, Channel);
+            return new MessagePiece(txt, MessagePieceType.Simple, Channel, SettingsManager.FontSize, false);
         }
         protected MessagePiece ParseSysMsgGuildQuest(Dictionary<string, string> info)
         {
@@ -823,7 +835,7 @@ namespace TCC.Data
             {
                 questName = q.Title;
             }
-            return new MessagePiece(questName, MessagePieceType.Simple, Channel);
+            return new MessagePiece(questName, MessagePieceType.Simple, Channel, SettingsManager.FontSize, false);
         }
         protected static Dictionary<string, string> SplitDirectives(string m)
         {
