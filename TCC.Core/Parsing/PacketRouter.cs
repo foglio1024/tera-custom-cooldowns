@@ -258,7 +258,8 @@ namespace TCC.Parsing
         {
             //var str = "@3947questNameDefeat HumedraszoneName@zoneName:181npcName@creature:181#2050";
             //var str = "@3789cityname@cityWar:20guildFated";
-            var str = "@1773ItemName@item:152141ItemName1@item:447ItemCount5";
+            //var str = "@1773ItemName@item:152141ItemName1@item:447ItemCount5";
+            var str = "@3821userNametestNameguildQuestName@GuildQuest:31007001value1targetValue3";
             byte[] toBytes = Encoding.Unicode.GetBytes(str);
             byte[] arr = new byte[toBytes.Length + 2 + 4];
             for (int i = 0; i < toBytes.Length - 1; i++)
