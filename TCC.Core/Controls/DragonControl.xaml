@@ -62,11 +62,11 @@
                                 HorizontalAlignment="Center"
                                />
             <Grid Grid.Row="1" VerticalAlignment="Center" x:Name="enrageLine">
-            <Path Data="M0,0 4,0 2,2 0,0" Stretch="Uniform" Width="8" Height="8" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Red" RenderTransformOrigin="0.5,0.5">
-                <Path.RenderTransform>
-                            <TranslateTransform X="0" Y="-28" />
-                </Path.RenderTransform>
-            </Path>
+                <Path Data="M0,0 4,0 2,2 0,0" Stretch="Uniform" Width="8" Height="8" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Red" RenderTransformOrigin="0.5,0.5">
+                    <Path.RenderTransform>
+                        <TranslateTransform X="0" Y="-28" />
+                    </Path.RenderTransform>
+                </Path>
             </Grid>
 
             <local:Arc Width="58" Height="58"
@@ -87,8 +87,8 @@
                                Grid.Row="1"
                                Text="{Binding CurrentPercentage, StringFormat=0.#}"
                                Margin="0,0,2,1"/>
-
+            
         </Grid>
-        </Grid>
+    </Grid>
 
 </UserControl>

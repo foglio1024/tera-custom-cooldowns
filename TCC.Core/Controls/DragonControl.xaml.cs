@@ -1,8 +1,11 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using TCC.Annotations;
 using TCC.Data;
 using TCC.ViewModels;
 
@@ -11,7 +14,7 @@ namespace TCC.Controls
     /// <summary>
     /// Interaction logic for DragonControl.xaml
     /// </summary>
-    public partial class DragonControl : UserControl
+    public partial class DragonControl : UserControl, INotifyPropertyChanged
     {
         public DragonControl()
         {
@@ -21,6 +24,17 @@ namespace TCC.Controls
         }
 
         Boss dc;
+        private string _enrageLabel;
+        public string EnrageLabel
+        {
+            get => _enrageLabel;
+            set
+            {
+                if (_enrageLabel == value) return;
+                _enrageLabel = value;
+                NotifyPropertyChanged(nameof(EnrageLabel));
+            }
+        }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             dc = (Boss)DataContext;
@@ -66,5 +80,12 @@ namespace TCC.Controls
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
