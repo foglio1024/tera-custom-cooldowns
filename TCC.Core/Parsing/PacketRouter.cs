@@ -200,6 +200,15 @@ namespace TCC.Parsing
 
         public static void HandleCharList(S_GET_USER_LIST p)
         {
+            /*- Moved from HandleReturnToLobby -*/
+            SessionManager.Logged = false;
+            SessionManager.CurrentPlayer.ClearAbnormalities();
+            BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
+            SkillManager.Clear();
+            EntitiesManager.ClearNPC();
+            GroupWindowViewModel.Instance.ClearAll();
+            /*---------------------------------*/
+
             foreach (var item in p.CharacterList)
             {
                 var ch = InfoWindowViewModel.Instance.Characters.FirstOrDefault(x => x.Id == item.Id);
