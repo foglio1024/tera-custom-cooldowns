@@ -50,10 +50,8 @@ namespace TCC.ViewModels
                 NotifyPropertyChanged("Scale");
             }
         }
-        public int VisibleBossesCount
-        {
-            get => CurrentNPCs.Where(x => x.Visible == Visibility.Visible && x.IsBoss).Count();
-        }
+        public int VisibleBossesCount => CurrentNPCs.Count(x => x.Visible == Visibility.Visible);
+
         public HarrowholdPhase CurrentHHphase
         {
             get => _currentHHphase;
