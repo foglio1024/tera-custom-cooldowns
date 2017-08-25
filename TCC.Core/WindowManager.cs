@@ -83,7 +83,7 @@ namespace TCC
                 }
                 else
                 {
-                    isTccVisible = false || true;
+                    isTccVisible = false;
                     return isTccVisible;
                 }
             }
