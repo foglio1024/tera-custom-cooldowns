@@ -100,17 +100,11 @@ namespace TCC.Parsing
                     continue;
                 }
                 var message = MessageFactory.Create(msg);
-                //PacketInspector.AddToStats(msg);
-                //PacketInspector.InspectPacket(msg);
-                if (message.GetType() == typeof(Tera.Game.Messages.UnknownMessage))
-                {
-                    //discarded++;
-                    continue;
-                }
 
+                //PacketInspector.Analyze(msg); continue;
                 if (MessageFactory.Process(message))
                 {
-                    //processed++;
+
                 }
             }
         }
