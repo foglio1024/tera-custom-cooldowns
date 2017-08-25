@@ -150,6 +150,24 @@ namespace TCC
                 Stats.Add(opName, new MessageStats(opName, msg.Data.Count));
             }
         }
+
+        public static void Analyze(Message msg)
+        {
+
+        }
+        private static Dictionary<string, int> FixedSizePackets = new Dictionary<string, int>
+        {
+            { "S_RETURN_TO_LOBBY", 4 },
+            { "S_USER_EFFECT",4+8+8+4+4 },
+            { "S_PARTY_MEMBER_ABNORMAL_ADD", 4+4+4+4+4+4+4 },
+            { "S_PARTY_MEMBER_ABNORMAL_CLEAR", 4+4+4 },
+            { "S_PARTY_MEMBER_ABNORMAL_DEL",4+4+4+4 },
+            { "S_PARTY_MEMBER_ABNORMAL_REFRESH",4+4+4+4+4+4+4},
+            { "S_PARTY_MEMBER_CHANGE_HP",4+4+4+4+4 },
+            { "S_PARTY_MEMBER_CHANGE_MP",4+4+4+4+4 },
+            { "S_PARTY_MEMBER_STAT_UPDATE",4+4+4+4+4+4+4+2+2+2+1+4+4+4+4 },
+            { "S_DUNGEON_EVENT_MESSAGE",4+2+4+1+4 },
+        };
     }
 
     public class MessageStats
