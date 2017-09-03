@@ -100,12 +100,12 @@ namespace TCC.Parsing
                     continue;
                 }
                 var message = MessageFactory.Create(msg);
-
+                MessageFactory.Process(message);
                 //PacketInspector.Analyze(msg); continue;
-                if (MessageFactory.Process(message))
-                {
-
-                }
+                //if (!MessageFactory.Process(message))
+                //{
+                //    PacketInspector.Analyze(message);
+                //}
             }
         }
 
@@ -309,6 +309,7 @@ namespace TCC.Parsing
         }
         public static void HandleRollResult(S_RESULT_BIDDING_DICE_THROW x)
         {
+            if(!GroupWindowViewModel.Instance.Rolling) GroupWindowViewModel.Instance.StartRoll();
             GroupWindowViewModel.Instance.SetRoll(x.EntityId, x.RollResult);
         }
         public static void HandleEndRoll(S_RESULT_ITEM_BIDDING x)
