@@ -133,7 +133,7 @@ namespace TCC.ViewModels
                 NotifyPropertyChanged(nameof(HPenabled));
             }
         }
-
+        public bool Rolling { get; set; }
         public List<User> All
         {
             get
@@ -657,6 +657,7 @@ namespace TCC.ViewModels
         }
         public void StartRoll()
         {
+            Rolling = true;
             foreach (var user in All)
             {
                 user.IsRolling = true;
@@ -673,6 +674,7 @@ namespace TCC.ViewModels
         }
         public void EndRoll()
         {
+            Rolling = false;
             foreach (var user in All)
             {
                 user.IsRolling = false;
