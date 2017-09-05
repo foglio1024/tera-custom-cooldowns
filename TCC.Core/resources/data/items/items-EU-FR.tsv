@@ -12167,10 +12167,21 @@
 21329	2	Sacoche de combat de Vergos (ordinaire)
 21330	2	Sacoche de combat de Vergos (supérieure)
 21331	2	Sacoche de combat de Vergos (hors pair)
+21332	3	Fragment de serre-tête de Demoroth.
+21333	3	Composant du moteur de Demoroth
+21334	3	Moteur de Demoroth
+21335	3	Pierre magique d'artisanat (colliers)
+21336	3	Pierre magique d'artisanat (boucles d'oreilles)
+21337	3	Pierre magique d'artisanat (anneaux)
+21338	3	Plan : serre-tête lumineux de Demoroth
 21339	2	Coffre de commémoration pour la participation à la guerre de guildes (Rang 1)
 21340	2	Coffre de commémoration pour la participation à la guerre de guildes (Rang 1)
 21341	2	Coffre de commémoration pour la participation à la guerre de guildes (Rang 2)
 21342	2	Coffre de commémoration pour la participation à la guerre de guildes (Rang 3)
+21343	3	Pierre magique d'artisanat (colliers)
+21344	3	Pierre magique d'artisanat (boucles d'oreilles)
+21345	3	Pierre magique d'artisanat (anneaux)
+21346	3	Vieille caisse de cartes dorées
 22001	0	Leçon obsolète : Extraction de tissu
 22002	0	Leçon obsolète : Extraction de métal
 22004	0	Leçon obsolète : Extraction d'alchimie
@@ -15625,6 +15636,8 @@
 45480	0	Livre de légendes de la Danselune
 45481	1	Parchemin d'invocation de dragon jauni
 45482	2	Extrait d'un parchemin d'invocation de dragon
+46600	0	Missive de Seir
+46601	0	Parchemin de téléportation : San Allema
 46701	0	Liquide expérimental
 47001	3	Épave & Ruine
 47002	3	Éperon fulgurant
@@ -18843,6 +18856,20 @@
 72344	3	Collier puissant du matador
 72345	3	Boucle d'oreille puissante du matador
 72346	3	Anneau puissant du matador
+72347	2	Serre-tête de Demoroth
+72348	3	Serre-tête lumineux de Demoroth
+72349	3	[Artisanat] Collier meurtrier de Lakan
+72350	3	[Artisanat] Boucle d'oreille meurtrière de Lakan cauchemardesque
+72351	3	[Artisanat] Anneau meurtrier de Lakan cauchemardesque
+72352	3	[Artisanat] Collier puissant de Lakan
+72353	3	[Artisanat] Boucle d'oreille puissante de Lakan cauchemardesque
+72354	3	[Artisanat] Anneau puissant de Lakan cauchemardesque
+72355	3	[Artisanat] Collier meurtrier du matador
+72356	3	[Artisanat] Boucle d'oreille meurtrière du matador
+72357	3	[Artisanat] Anneau meurtrier du matador
+72358	3	[Artisanat] Collier puissant du matador
+72359	3	[Artisanat] Boucle d'oreille puissante du matador
+72360	3	[Artisanat] Anneau puissant du matador
 80000	0	Baril explosif
 80001	1	Parchemin de téléportation de la Flotte en Morceaux
 80002	1	Parchemin de téléportation des Canaux
@@ -20089,6 +20116,7 @@
 83401	1	Parchemin de téléportation : Ruines de Lachelitas
 83402	1	Parchemin de téléportation : Prison défigurée de Lakan
 83403	1	Parchemin de téléportation : Souterrain de Velika, entrée du Sanctuaire de Velik
+83404	1	[Artisanat] Parchemin de téléportation : Roulette de Demoroth
 84301	2	Nivéot courroucé immobile
 84302	2	Nivéot courroucé persistant
 84303	2	Nivéot courroucé éploré
@@ -23357,6 +23385,9 @@
 99431	2	Émote spéciale : révérence de femme de chambre (Élin)
 99432	2	Émote spéciale : révérence de femme de chambre (Élin)
 99433	2	[Évènement] Fauchard lunaire d'ombre-de-lune
+99434	1	Alkahest de maître de rang 10
+99435	1	Alkahest de maître de rang 11
+99436	1	Alkahest de maître de rang 12
 99437	3	Sous-vêtements supérieurs propres de fitness
 99438	3	Sous-vêtements supérieurs confortables de fitness
 99439	3	Sous-vêtements supérieurs de sport de fitness
@@ -29276,9 +29307,9 @@
 155058	0	Expédition d'Acria
 155059	0	Expédition de Roybond
 155060	0	Boîte surprise : bolide d'Élin
-155061	0	Expédition de Lunarea
+155061	0	Boîte surprise : vouivres puissantes
 155062	0	Expédition de Zapir
-155063	0	Expédition de Parvana
+155063	0	Boîte surprise : anciens dragons puissants
 155064	0	Expédition de Ribina
 155065	2	Boîte à malice : Maillot de bain rayé
 155066	2	Boîte à malice : maillot de bain rayé (7 jours)
@@ -29689,6 +29720,29 @@
 155501	3	[Mode] Cuirasse preste de Lilitas
 155502	3	[Mode] Toge sanglante de Lilitas
 155503	3	Adhésion au club TERA (30 jours)
+155504	3	Nœud terrifiant lumineux
+155505	3	Tête de mort lumineuse
+155506	2	Chapeau "hache dans la tête"
+155507	3	Habit de la mort lumineux (Humain, homme)
+155508	3	Habit de la mort lumineux (Humain, femme)
+155509	3	Habit de la mort lumineux (Haut-elfe, homme)
+155510	3	Habit de la mort lumineux (Haut-elfe, femme)
+155511	3	Habit de la mort lumineux (Aman, homme)
+155512	3	Habit de la mort lumineux (Aman, femme)
+155513	3	Habit de la mort lumineux (Castanic, homme)
+155514	3	Habit de la mort lumineux (Castanic, femme)
+155515	3	Habit de la mort lumineux (Popori)
+155516	3	Habit de la mort lumineux (Élin)
+155517	3	Habit de la mort lumineux (Baraka)
+155518	3	Boîte butin DÉMENTE
+155519	3	Coffre triomphal DÉMENT
+155520	3	Clé DÉMENTE
+155521	3	Butin DÉMENT : équipement de Kaia
+155522	3	Butin DÉMENT : caisse de potions
+155523	3	Butin DÉMENT : fragments de Demoroth
+155524	3	Triomphe DÉMENT : équipement de Darkan
+155525	3	Triomphe DÉMENT : caisse de potions
+155526	3	Triomphe DÉMENT : fragments de Demoroth
 160001	0	Compétence d'équitation : Sleipnir
 160002	0	Compétence d'équitation : Sleipnir
 160003	1	Compétence d'équitation : Chasseresse fauve
@@ -39822,6 +39876,60 @@
 216678	3	Самоцвет
 216679	3	Жетон листопада
 216680	3	Жетон снегопада
+216681	3	Valkyon Federation Medal
+216682	3	Demonic Amulet
+216683	3	Heart of the Beast
+216684	2	Mystical letters
+216685	2	Crystal of Ether
+216686	3	Blood of Demon
+216687	2	Dendrite Shard
+216688	2	Uncommon Faridei's Cube
+216689	2	Rare Faridei's Cube
+216690	3	Superior Faridei's Cube
+216691	3	Golden Faridei's Cube
+216692	3	Legendary Faridei's Cube
+216693	0	Element Essence
+216694	1	Unstable Water crystal
+216695	1	Unstable Fire crystal
+216696	1	Unstable Earth crystal
+216697	2	Unstable Water energy
+216698	2	Unstable Fire energy
+216699	2	Unstable Earth energy
+216700	2	Unstable Water essence
+216701	2	Unstable Fire essence
+216702	2	Unstable Earth essence
+216703	2	Unstable Water element
+216704	2	Unstable Fire element
+216705	2	Unstable Earth element
+216706	3	Relic of the Water
+216707	3	Relic of the Fire
+216708	3	Relic of the Earth
+216709	1	Water fragment
+216710	1	Fire fragment
+216711	1	Earth fragment
+216712	2	Water crystal
+216713	2	Fire crystal
+216714	2	Earth crystal
+216715	2	Water energy
+216716	2	Fire energy
+216717	2	Earth energy
+216718	3	Prime Water essence
+216719	3	Prime Fire essence
+216720	3	Prime Earth essence
+216721	0	Quintessence
+216722	3	Obsidian Shard
+216723	3	Obsidian Crystal
+216724	3	Obsidian Sphere
+216725	3	Prime Darkness
+216726	1	Stone of the Light
+216727	3	Elements Secrets
+216728	3	Massive Loot Box 
+216729	3	Extreme Loot Box
+216730	3	Extreme Key
+216731	3	Box 1
+216733	3	Box 3
+216734	3	Box 4
+216736	3	Box 6
 247623	2	Smart Box: Swimwear Male A + Female A
 247624	2	Smart Box: Swimwear Male B + Female D
 247625	2	Smart Box: Swimwear Female B
@@ -39830,6 +39938,12 @@
 247628	2	Smart Box: Swimwear Male B + Female D (7 Days)
 247629	2	Smart Box: Swimwear Female B (7 Days)
 247630	2	Smart Box: Swimwear Female C (7 Days)
+247631	2	Smartbox: Elemental weapon (non-tradable)
+247632	2	Smartbox: Elemental weapon
+247633	2	Smartbox: Rare elemental weapon (non-tradable)
+247634	2	Smartbox: Rare elemental weapon
+247635	2	Smartbox: Rare elemental weapon (3 days)
+247636	2	Wheel of Fortune box
 250000	3	Commando spécial de TERA (Humain, homme)
 250001	3	Commando spécial de TERA (Humain, homme)
 250002	3	Commando spécial de TERA (Humain, homme)
@@ -45578,6 +45692,318 @@
 256133	3	Brassards ailés arc-en-ciel
 256134	3	Brassards ailés arc-en-ciel
 256135	3	Brassards ailés arc-en-ciel
+256136	3	Lames doubles de la garde glaciale
+256137	3	Lames doubles de la garde glaciale
+256138	3	Lames doubles de la garde glaciale
+256139	3	Lames doubles de la garde glaciale
+256140	3	Lames doubles de la garde glaciale
+256141	3	Lames doubles de la garde glaciale
+256142	3	Lames doubles de la garde glaciale
+256143	3	Lames doubles de la garde glaciale
+256144	3	Lames doubles de la garde glaciale
+256145	3	Lames doubles de la garde glaciale
+256146	3	Lames doubles de la garde glaciale
+256147	3	Lames doubles de la garde glaciale
+256148	3	Lance de la garde glaciale
+256149	3	Lance de la garde glaciale
+256150	3	Lance de la garde glaciale
+256151	3	Lance de la garde glaciale
+256152	3	Lance de la garde glaciale
+256153	3	Lance de la garde glaciale
+256154	3	Lance de la garde glaciale
+256155	3	Lance de la garde glaciale
+256156	3	Lance de la garde glaciale
+256157	3	Lance de la garde glaciale
+256158	3	Lance de la garde glaciale
+256159	3	Lance de la garde glaciale
+256160	3	Espadon de la garde glaciale
+256161	3	Espadon de la garde glaciale
+256162	3	Espadon de la garde glaciale
+256163	3	Espadon de la garde glaciale
+256164	3	Espadon de la garde glaciale
+256165	3	Espadon de la garde glaciale
+256166	3	Espadon de la garde glaciale
+256167	3	Espadon de la garde glaciale
+256168	3	Espadon de la garde glaciale
+256169	3	Espadon de la garde glaciale
+256170	3	Espadon de la garde glaciale
+256171	3	Espadon de la garde glaciale
+256172	3	Hache de la garde glaciale
+256173	3	Hache de la garde glaciale
+256174	3	Hache de la garde glaciale
+256175	3	Hache de la garde glaciale
+256176	3	Hache de la garde glaciale
+256177	3	Hache de la garde glaciale
+256178	3	Hache de la garde glaciale
+256179	3	Hache de la garde glaciale
+256180	3	Hache de la garde glaciale
+256181	3	Hache de la garde glaciale
+256182	3	Hache de la garde glaciale
+256183	3	Hache de la garde glaciale
+256184	3	Disque de la garde glaciale
+256185	3	Disque de la garde glaciale
+256186	3	Disque de la garde glaciale
+256187	3	Disque de la garde glaciale
+256188	3	Disque de la garde glaciale
+256189	3	Disque de la garde glaciale
+256190	3	Disque de la garde glaciale
+256191	3	Disque de la garde glaciale
+256192	3	Disque de la garde glaciale
+256193	3	Disque de la garde glaciale
+256194	3	Disque de la garde glaciale
+256195	3	Disque de la garde glaciale
+256196	3	Arc de la garde glaciale
+256197	3	Arc de la garde glaciale
+256198	3	Arc de la garde glaciale
+256199	3	Arc de la garde glaciale
+256200	3	Arc de la garde glaciale
+256201	3	Arc de la garde glaciale
+256202	3	Arc de la garde glaciale
+256203	3	Arc de la garde glaciale
+256204	3	Arc de la garde glaciale
+256205	3	Arc de la garde glaciale
+256206	3	Arc de la garde glaciale
+256207	3	Arc de la garde glaciale
+256208	3	Bâton de la garde glaciale
+256209	3	Bâton de la garde glaciale
+256210	3	Bâton de la garde glaciale
+256211	3	Bâton de la garde glaciale
+256212	3	Bâton de la garde glaciale
+256213	3	Bâton de la garde glaciale
+256214	3	Bâton de la garde glaciale
+256215	3	Bâton de la garde glaciale
+256216	3	Bâton de la garde glaciale
+256217	3	Bâton de la garde glaciale
+256218	3	Bâton de la garde glaciale
+256219	3	Bâton de la garde glaciale
+256220	3	Sceptre de la garde glaciale
+256221	3	Sceptre de la garde glaciale
+256222	3	Sceptre de la garde glaciale
+256223	3	Sceptre de la garde glaciale
+256224	3	Sceptre de la garde glaciale
+256225	3	Sceptre de la garde glaciale
+256226	3	Sceptre de la garde glaciale
+256227	3	Sceptre de la garde glaciale
+256228	3	Sceptre de la garde glaciale
+256229	3	Sceptre de la garde glaciale
+256230	3	Sceptre de la garde glaciale
+256231	3	Sceptre de la garde glaciale
+256232	3	Cestes de la garde glaciale
+256233	3	Cestes de la garde glaciale
+256234	3	Cestes de la garde glaciale
+256235	3	Cestes de la garde glaciale
+256236	3	Cestes de la garde glaciale
+256237	3	Cestes de la garde glaciale
+256238	3	Cestes de la garde glaciale
+256239	3	Cestes de la garde glaciale
+256240	3	Cestes de la garde glaciale
+256241	3	Cestes de la garde glaciale
+256242	3	Cestes de la garde glaciale
+256243	3	Cestes de la garde glaciale
+256244	3	Arcanon de la garde glaciale
+256245	3	Arcanon de la garde glaciale
+256246	3	Arcanon de la garde glaciale
+256247	3	Arcanon de la garde glaciale
+256248	3	Arcanon de la garde glaciale
+256249	3	Arcanon de la garde glaciale
+256250	3	Arcanon de la garde glaciale
+256251	3	Arcanon de la garde glaciale
+256252	3	Arcanon de la garde glaciale
+256253	3	Arcanon de la garde glaciale
+256254	3	Arcanon de la garde glaciale
+256255	3	Arcanon de la garde glaciale
+256256	3	Fauchard lunaire de la garde glaciale
+256257	3	Fauchard lunaire de la garde glaciale
+256258	3	Fauchard lunaire de la garde glaciale
+256259	3	Fauchard lunaire de la garde glaciale
+256260	3	Fauchard lunaire de la garde glaciale
+256261	3	Fauchard lunaire de la garde glaciale
+256262	3	Fauchard lunaire de la garde glaciale
+256263	3	Fauchard lunaire de la garde glaciale
+256264	3	Fauchard lunaire de la garde glaciale
+256265	3	Fauchard lunaire de la garde glaciale
+256266	3	Fauchard lunaire de la garde glaciale
+256267	3	Fauchard lunaire de la garde glaciale
+256268	3	Faux de la garde glaciale
+256269	3	Faux de la garde glaciale
+256270	3	Faux de la garde glaciale
+256271	3	Faux de la garde glaciale
+256272	3	Faux de la garde glaciale
+256273	3	Faux de la garde glaciale
+256274	3	Faux de la garde glaciale
+256275	3	Faux de la garde glaciale
+256276	3	Faux de la garde glaciale
+256277	3	Faux de la garde glaciale
+256278	3	Faux de la garde glaciale
+256279	3	Faux de la garde glaciale
+256280	3	Shuriken de la garde glaciale
+256281	3	Shuriken de la garde glaciale
+256282	3	Shuriken de la garde glaciale
+256283	3	Shuriken de la garde glaciale
+256284	3	Shuriken de la garde glaciale
+256285	3	Shuriken de la garde glaciale
+256286	3	Shuriken de la garde glaciale
+256287	3	Shuriken de la garde glaciale
+256288	3	Shuriken de la garde glaciale
+256289	3	Shuriken de la garde glaciale
+256290	3	Shuriken de la garde glaciale
+256291	3	Shuriken de la garde glaciale
+256292	3	Lames doubles royales de la magie glaciale
+256293	3	Lames doubles royales de la magie glaciale
+256294	3	Lames doubles royales de la magie glaciale
+256295	3	Lames doubles royales de la magie glaciale
+256296	3	Lames doubles royales de la magie glaciale
+256297	3	Lames doubles royales de la magie glaciale
+256298	3	Lames doubles royales de la magie glaciale
+256299	3	Lames doubles royales de la magie glaciale
+256300	3	Lames doubles royales de la magie glaciale
+256301	3	Lames doubles royales de la magie glaciale
+256302	3	Lames doubles royales de la magie glaciale
+256303	3	Lames doubles royales de la magie glaciale
+256304	3	Lance royale de la magie glaciale
+256305	3	Lance royale de la magie glaciale
+256306	3	Lance royale de la magie glaciale
+256307	3	Lance royale de la magie glaciale
+256308	3	Lance royale de la magie glaciale
+256309	3	Lance royale de la magie glaciale
+256310	3	Lance royale de la magie glaciale
+256311	3	Lance royale de la magie glaciale
+256312	3	Lance royale de la magie glaciale
+256313	3	Lance royale de la magie glaciale
+256314	3	Lance royale de la magie glaciale
+256315	3	Lance royale de la magie glaciale
+256316	3	Espadon royal de la magie glaciale
+256317	3	Espadon royal de la magie glaciale
+256318	3	Espadon royal de la magie glaciale
+256319	3	Espadon royal de la magie glaciale
+256320	3	Espadon royal de la magie glaciale
+256321	3	Espadon royal de la magie glaciale
+256322	3	Espadon royal de la magie glaciale
+256323	3	Espadon royal de la magie glaciale
+256324	3	Espadon royal de la magie glaciale
+256325	3	Espadon royal de la magie glaciale
+256326	3	Espadon royal de la magie glaciale
+256327	3	Espadon royal de la magie glaciale
+256328	3	Hache royale de la magie glaciale
+256329	3	Hache royale de la magie glaciale
+256330	3	Hache royale de la magie glaciale
+256331	3	Hache royale de la magie glaciale
+256332	3	Hache royale de la magie glaciale
+256333	3	Hache royale de la magie glaciale
+256334	3	Hache royale de la magie glaciale
+256335	3	Hache royale de la magie glaciale
+256336	3	Hache royale de la magie glaciale
+256337	3	Hache royale de la magie glaciale
+256338	3	Hache royale de la magie glaciale
+256339	3	Hache royale de la magie glaciale
+256340	3	Disque royal de la magie glaciale
+256341	3	Disque royal de la magie glaciale
+256342	3	Disque royal de la magie glaciale
+256343	3	Disque royal de la magie glaciale
+256344	3	Disque royal de la magie glaciale
+256345	3	Disque royal de la magie glaciale
+256346	3	Disque royal de la magie glaciale
+256347	3	Disque royal de la magie glaciale
+256348	3	Disque royal de la magie glaciale
+256349	3	Disque royal de la magie glaciale
+256350	3	Disque royal de la magie glaciale
+256351	3	Disque royal de la magie glaciale
+256352	3	Arc royal de la magie glaciale
+256353	3	Arc royal de la magie glaciale
+256354	3	Arc royal de la magie glaciale
+256355	3	Arc royal de la magie glaciale
+256356	3	Arc royal de la magie glaciale
+256357	3	Arc royal de la magie glaciale
+256358	3	Arc royal de la magie glaciale
+256359	3	Arc royal de la magie glaciale
+256360	3	Arc royal de la magie glaciale
+256361	3	Arc royal de la magie glaciale
+256362	3	Arc royal de la magie glaciale
+256363	3	Arc royal de la magie glaciale
+256364	3	Bâton royal de la magie glaciale
+256365	3	Bâton royal de la magie glaciale
+256366	3	Bâton royal de la magie glaciale
+256367	3	Bâton royal de la magie glaciale
+256368	3	Bâton royal de la magie glaciale
+256369	3	Bâton royal de la magie glaciale
+256370	3	Bâton royal de la magie glaciale
+256371	3	Bâton royal de la magie glaciale
+256372	3	Bâton royal de la magie glaciale
+256373	3	Bâton royal de la magie glaciale
+256374	3	Bâton royal de la magie glaciale
+256375	3	Bâton royal de la magie glaciale
+256376	3	Sceptre royal de la magie glaciale
+256377	3	Sceptre royal de la magie glaciale
+256378	3	Sceptre royal de la magie glaciale
+256379	3	Sceptre royal de la magie glaciale
+256380	3	Sceptre royal de la magie glaciale
+256381	3	Sceptre royal de la magie glaciale
+256382	3	Sceptre royal de la magie glaciale
+256383	3	Sceptre royal de la magie glaciale
+256384	3	Sceptre royal de la magie glaciale
+256385	3	Sceptre royal de la magie glaciale
+256386	3	Sceptre royal de la magie glaciale
+256387	3	Sceptre royal de la magie glaciale
+256388	3	Cestes royales de la magie glaciale
+256389	3	Cestes royales de la magie glaciale
+256390	3	Cestes royales de la magie glaciale
+256391	3	Cestes royales de la magie glaciale
+256392	3	Cestes royales de la magie glaciale
+256393	3	Cestes royales de la magie glaciale
+256394	3	Cestes royales de la magie glaciale
+256395	3	Cestes royales de la magie glaciale
+256396	3	Cestes royales de la magie glaciale
+256397	3	Cestes royales de la magie glaciale
+256398	3	Cestes royales de la magie glaciale
+256399	3	Cestes royales de la magie glaciale
+256400	3	Arcanon royal de la magie glaciale
+256401	3	Arcanon royal de la magie glaciale
+256402	3	Arcanon royal de la magie glaciale
+256403	3	Arcanon royal de la magie glaciale
+256404	3	Arcanon royal de la magie glaciale
+256405	3	Arcanon royal de la magie glaciale
+256406	3	Arcanon royal de la magie glaciale
+256407	3	Arcanon royal de la magie glaciale
+256408	3	Arcanon royal de la magie glaciale
+256409	3	Arcanon royal de la magie glaciale
+256410	3	Arcanon royal de la magie glaciale
+256411	3	Arcanon royal de la magie glaciale
+256412	3	Fauchard lunaire royal de la magie glaciale
+256413	3	Fauchard lunaire royal de la magie glaciale
+256414	3	Fauchard lunaire royal de la magie glaciale
+256415	3	Fauchard lunaire royal de la magie glaciale
+256416	3	Fauchard lunaire royal de la magie glaciale
+256417	3	Fauchard lunaire royal de la magie glaciale
+256418	3	Fauchard lunaire royal de la magie glaciale
+256419	3	Fauchard lunaire royal de la magie glaciale
+256420	3	Fauchard lunaire royal de la magie glaciale
+256421	3	Fauchard lunaire royal de la magie glaciale
+256422	3	Fauchard lunaire royal de la magie glaciale
+256423	3	Fauchard lunaire royal de la magie glaciale
+256424	3	Faux royale de la magie glaciale
+256425	3	Faux royale de la magie glaciale
+256426	3	Faux royale de la magie glaciale
+256427	3	Faux royale de la magie glaciale
+256428	3	Faux royale de la magie glaciale
+256429	3	Faux royale de la magie glaciale
+256430	3	Faux royale de la magie glaciale
+256431	3	Faux royale de la magie glaciale
+256432	3	Faux royale de la magie glaciale
+256433	3	Faux royale de la magie glaciale
+256434	3	Faux royale de la magie glaciale
+256435	3	Faux royale de la magie glaciale
+256436	3	Shuriken royal de la magie glaciale
+256437	3	Shuriken royal de la magie glaciale
+256438	3	Shuriken royal de la magie glaciale
+256439	3	Shuriken royal de la magie glaciale
+256440	3	Shuriken royal de la magie glaciale
+256441	3	Shuriken royal de la magie glaciale
+256442	3	Shuriken royal de la magie glaciale
+256443	3	Shuriken royal de la magie glaciale
+256444	3	Shuriken royal de la magie glaciale
+256445	3	Shuriken royal de la magie glaciale
+256446	3	Shuriken royal de la magie glaciale
+256447	3	Shuriken royal de la magie glaciale
 256448	3	Compétence de vol : queue d'obsidienne
 256449	3	Compétence de vol : queue d'obsidienne mythique
 256450	3	Compétence de vol : queue d'obsidienne fabuleuse
@@ -45710,6 +46136,330 @@
 256577	3	Compétence de vol : loufloral tout-puissant
 256578	3	Compétence de vol : loufloral légendaire
 256579	3	Compétence de vol : loufloral merveilleux
+256580	3	Gardien de la garde glaciale (Humain, homme)
+256581	3	Gardien de la garde glaciale (Humain, homme)
+256582	3	Gardien de la garde glaciale (Humain, homme)
+256583	3	Gardien de la garde glaciale (Humain, homme)
+256584	3	Gardien de la garde glaciale (Humain, homme)
+256585	3	Gardien de la garde glaciale (Humain, homme)
+256586	3	Gardien de la garde glaciale (Humain, homme)
+256587	3	Gardien de la garde glaciale (Humain, homme)
+256588	3	Gardien de la garde glaciale (Humain, homme)
+256589	3	Gardien de la garde glaciale (Humain, homme)
+256590	3	Gardien de la garde glaciale (Humain, homme)
+256591	3	Gardien de la garde glaciale (Humain, homme)
+256592	3	Officier de la garde glaciale (Humain, homme)
+256593	3	Officier de la garde glaciale (Humain, homme)
+256594	3	Officier de la garde glaciale (Humain, homme)
+256595	3	Officier de la garde glaciale (Humain, homme)
+256596	3	Officier de la garde glaciale (Humain, homme)
+256597	3	Officier de la garde glaciale (Humain, homme)
+256598	3	Officier de la garde glaciale (Humain, homme)
+256599	3	Officier de la garde glaciale (Humain, homme)
+256600	3	Officier de la garde glaciale (Humain, homme)
+256601	3	Officier de la garde glaciale (Humain, homme)
+256602	3	Officier de la garde glaciale (Humain, homme)
+256603	3	Officier de la garde glaciale (Humain, homme)
+256604	3	Princesse de la garde glaciale (Humain, femme)
+256605	3	Princesse de la garde glaciale (Humain, femme)
+256606	3	Princesse de la garde glaciale (Humain, femme)
+256607	3	Princesse de la garde glaciale (Humain, femme)
+256608	3	Princesse de la garde glaciale (Humain, femme)
+256609	3	Princesse de la garde glaciale (Humain, femme)
+256610	3	Princesse de la garde glaciale (Humain, femme)
+256611	3	Princesse de la garde glaciale (Humain, femme)
+256612	3	Princesse de la garde glaciale (Humain, femme)
+256613	3	Princesse de la garde glaciale (Humain, femme)
+256614	3	Princesse de la garde glaciale (Humain, femme)
+256615	3	Princesse de la garde glaciale (Humain, femme)
+256616	3	Reine de la garde glaciale (Humain, femme)
+256617	3	Reine de la garde glaciale (Humain, femme)
+256618	3	Reine de la garde glaciale (Humain, femme)
+256619	3	Reine de la garde glaciale (Humain, femme)
+256620	3	Reine de la garde glaciale (Humain, femme)
+256621	3	Reine de la garde glaciale (Humain, femme)
+256622	3	Reine de la garde glaciale (Humain, femme)
+256623	3	Reine de la garde glaciale (Humain, femme)
+256624	3	Reine de la garde glaciale (Humain, femme)
+256625	3	Reine de la garde glaciale (Humain, femme)
+256626	3	Reine de la garde glaciale (Humain, femme)
+256627	3	Reine de la garde glaciale (Humain, femme)
+256628	3	Gardien de la garde glaciale (Haut-elfe, homme)
+256629	3	Gardien de la garde glaciale (Haut-elfe, homme)
+256630	3	Gardien de la garde glaciale (Haut-elfe, homme)
+256631	3	Gardien de la garde glaciale (Haut-elfe, homme)
+256632	3	Gardien de la garde glaciale (Haut-elfe, homme)
+256633	3	Gardien de la garde glaciale (Haut-elfe, homme)
+256634	3	Gardien de la garde glaciale (Haut-elfe, homme)
+256635	3	Gardien de la garde glaciale (Haut-elfe, homme)
+256636	3	Gardien de la garde glaciale (Haut-elfe, homme)
+256637	3	Gardien de la garde glaciale (Haut-elfe, homme)
+256638	3	Gardien de la garde glaciale (Haut-elfe, homme)
+256639	3	Gardien de la garde glaciale (Haut-elfe, homme)
+256640	3	Officier de la garde glaciale (Haut-elfe, homme)
+256641	3	Officier de la garde glaciale (Haut-elfe, homme)
+256642	3	Officier de la garde glaciale (Haut-elfe, homme)
+256643	3	Officier de la garde glaciale (Haut-elfe, homme)
+256644	3	Officier de la garde glaciale (Haut-elfe, homme)
+256645	3	Officier de la garde glaciale (Haut-elfe, homme)
+256646	3	Officier de la garde glaciale (Haut-elfe, homme)
+256647	3	Officier de la garde glaciale (Haut-elfe, homme)
+256648	3	Officier de la garde glaciale (Haut-elfe, homme)
+256649	3	Officier de la garde glaciale (Haut-elfe, homme)
+256650	3	Officier de la garde glaciale (Haut-elfe, homme)
+256651	3	Officier de la garde glaciale (Haut-elfe, homme)
+256652	3	Princesse de la garde glaciale (Haut-elfe, femme)
+256653	3	Princesse de la garde glaciale (Haut-elfe, femme)
+256654	3	Princesse de la garde glaciale (Haut-elfe, femme)
+256655	3	Princesse de la garde glaciale (Haut-elfe, femme)
+256656	3	Princesse de la garde glaciale (Haut-elfe, femme)
+256657	3	Princesse de la garde glaciale (Haut-elfe, femme)
+256658	3	Princesse de la garde glaciale (Haut-elfe, femme)
+256659	3	Princesse de la garde glaciale (Haut-elfe, femme)
+256660	3	Princesse de la garde glaciale (Haut-elfe, femme)
+256661	3	Princesse de la garde glaciale (Haut-elfe, femme)
+256662	3	Princesse de la garde glaciale (Haut-elfe, femme)
+256663	3	Princesse de la garde glaciale (Haut-elfe, femme)
+256664	3	Reine de la garde glaciale (Haut-elfe, femme)
+256665	3	Reine de la garde glaciale (Haut-elfe, femme)
+256666	3	Reine de la garde glaciale (Haut-elfe, femme)
+256667	3	Reine de la garde glaciale (Haut-elfe, femme)
+256668	3	Reine de la garde glaciale (Haut-elfe, femme)
+256669	3	Reine de la garde glaciale (Haut-elfe, femme)
+256670	3	Reine de la garde glaciale (Haut-elfe, femme)
+256671	3	Reine de la garde glaciale (Haut-elfe, femme)
+256672	3	Reine de la garde glaciale (Haut-elfe, femme)
+256673	3	Reine de la garde glaciale (Haut-elfe, femme)
+256674	3	Reine de la garde glaciale (Haut-elfe, femme)
+256675	3	Reine de la garde glaciale (Haut-elfe, femme)
+256676	3	Gardien de la garde glaciale (Aman, homme)
+256677	3	Gardien de la garde glaciale (Aman, homme)
+256678	3	Gardien de la garde glaciale (Aman, homme)
+256679	3	Gardien de la garde glaciale (Aman, homme)
+256680	3	Gardien de la garde glaciale (Aman, homme)
+256681	3	Gardien de la garde glaciale (Aman, homme)
+256682	3	Gardien de la garde glaciale (Aman, homme)
+256683	3	Gardien de la garde glaciale (Aman, homme)
+256684	3	Gardien de la garde glaciale (Aman, homme)
+256685	3	Gardien de la garde glaciale (Aman, homme)
+256686	3	Gardien de la garde glaciale (Aman, homme)
+256687	3	Gardien de la garde glaciale (Aman, homme)
+256688	3	Officier de la garde glaciale (Aman, homme)
+256689	3	Officier de la garde glaciale (Aman, homme)
+256690	3	Officier de la garde glaciale (Aman, homme)
+256691	3	Officier de la garde glaciale (Aman, homme)
+256692	3	Officier de la garde glaciale (Aman, homme)
+256693	3	Officier de la garde glaciale (Aman, homme)
+256694	3	Officier de la garde glaciale (Aman, homme)
+256695	3	Officier de la garde glaciale (Aman, homme)
+256696	3	Officier de la garde glaciale (Aman, homme)
+256697	3	Officier de la garde glaciale (Aman, homme)
+256698	3	Officier de la garde glaciale (Aman, homme)
+256699	3	Officier de la garde glaciale (Aman, homme)
+256700	3	Princesse de la garde glaciale (Aman, femme)
+256701	3	Princesse de la garde glaciale (Aman, femme)
+256702	3	Princesse de la garde glaciale (Aman, femme)
+256703	3	Princesse de la garde glaciale (Aman, femme)
+256704	3	Princesse de la garde glaciale (Aman, femme)
+256705	3	Princesse de la garde glaciale (Aman, femme)
+256706	3	Princesse de la garde glaciale (Aman, femme)
+256707	3	Princesse de la garde glaciale (Aman, femme)
+256708	3	Princesse de la garde glaciale (Aman, femme)
+256709	3	Princesse de la garde glaciale (Aman, femme)
+256710	3	Princesse de la garde glaciale (Aman, femme)
+256711	3	Princesse de la garde glaciale (Aman, femme)
+256712	3	Reine de la garde glaciale (Aman, femme)
+256713	3	Reine de la garde glaciale (Aman, femme)
+256714	3	Reine de la garde glaciale (Aman, femme)
+256715	3	Reine de la garde glaciale (Aman, femme)
+256716	3	Reine de la garde glaciale (Aman, femme)
+256717	3	Reine de la garde glaciale (Aman, femme)
+256718	3	Reine de la garde glaciale (Aman, femme)
+256719	3	Reine de la garde glaciale (Aman, femme)
+256720	3	Reine de la garde glaciale (Aman, femme)
+256721	3	Reine de la garde glaciale (Aman, femme)
+256722	3	Reine de la garde glaciale (Aman, femme)
+256723	3	Reine de la garde glaciale (Aman, femme)
+256724	3	Gardien de la garde glaciale (Castanic, homme)
+256725	3	Gardien de la garde glaciale (Castanic, homme)
+256726	3	Gardien de la garde glaciale (Castanic, homme)
+256727	3	Gardien de la garde glaciale (Castanic, homme)
+256728	3	Gardien de la garde glaciale (Castanic, homme)
+256729	3	Gardien de la garde glaciale (Castanic, homme)
+256730	3	Gardien de la garde glaciale (Castanic, homme)
+256731	3	Gardien de la garde glaciale (Castanic, homme)
+256732	3	Gardien de la garde glaciale (Castanic, homme)
+256733	3	Gardien de la garde glaciale (Castanic, homme)
+256734	3	Gardien de la garde glaciale (Castanic, homme)
+256735	3	Gardien de la garde glaciale (Castanic, homme)
+256736	3	Officier de la garde glaciale (Castanic, homme)
+256737	3	Officier de la garde glaciale (Castanic, homme)
+256738	3	Officier de la garde glaciale (Castanic, homme)
+256739	3	Officier de la garde glaciale (Castanic, homme)
+256740	3	Officier de la garde glaciale (Castanic, homme)
+256741	3	Officier de la garde glaciale (Castanic, homme)
+256742	3	Officier de la garde glaciale (Castanic, homme)
+256743	3	Officier de la garde glaciale (Castanic, homme)
+256744	3	Officier de la garde glaciale (Castanic, homme)
+256745	3	Officier de la garde glaciale (Castanic, homme)
+256746	3	Officier de la garde glaciale (Castanic, homme)
+256747	3	Officier de la garde glaciale (Castanic, homme)
+256748	3	Princesse de la garde glaciale (Castanic, femme)
+256749	3	Princesse de la garde glaciale (Castanic, femme)
+256750	3	Princesse de la garde glaciale (Castanic, femme)
+256751	3	Princesse de la garde glaciale (Castanic, femme)
+256752	3	Princesse de la garde glaciale (Castanic, femme)
+256753	3	Princesse de la garde glaciale (Castanic, femme)
+256754	3	Princesse de la garde glaciale (Castanic, femme)
+256755	3	Princesse de la garde glaciale (Castanic, femme)
+256756	3	Princesse de la garde glaciale (Castanic, femme)
+256757	3	Princesse de la garde glaciale (Castanic, femme)
+256758	3	Princesse de la garde glaciale (Castanic, femme)
+256759	3	Princesse de la garde glaciale (Castanic, femme)
+256760	3	Reine de la garde glaciale (Castanic, femme)
+256761	3	Reine de la garde glaciale (Castanic, femme)
+256762	3	Reine de la garde glaciale (Castanic, femme)
+256763	3	Reine de la garde glaciale (Castanic, femme)
+256764	3	Reine de la garde glaciale (Castanic, femme)
+256765	3	Reine de la garde glaciale (Castanic, femme)
+256766	3	Reine de la garde glaciale (Castanic, femme)
+256767	3	Reine de la garde glaciale (Castanic, femme)
+256768	3	Reine de la garde glaciale (Castanic, femme)
+256769	3	Reine de la garde glaciale (Castanic, femme)
+256770	3	Reine de la garde glaciale (Castanic, femme)
+256771	3	Reine de la garde glaciale (Castanic, femme)
+256772	3	Gardien de la garde glaciale (Popori)
+256773	3	Gardien de la garde glaciale (Popori)
+256774	3	Gardien de la garde glaciale (Popori)
+256775	3	Gardien de la garde glaciale (Popori)
+256776	3	Gardien de la garde glaciale (Popori)
+256777	3	Gardien de la garde glaciale (Popori)
+256778	3	Gardien de la garde glaciale (Popori)
+256779	3	Gardien de la garde glaciale (Popori)
+256780	3	Gardien de la garde glaciale (Popori)
+256781	3	Gardien de la garde glaciale (Popori)
+256782	3	Gardien de la garde glaciale (Popori)
+256783	3	Gardien de la garde glaciale (Popori)
+256784	3	Officier de la garde glaciale (Popori)
+256785	3	Officier de la garde glaciale (Popori)
+256786	3	Officier de la garde glaciale (Popori)
+256787	3	Officier de la garde glaciale (Popori)
+256788	3	Officier de la garde glaciale (Popori)
+256789	3	Officier de la garde glaciale (Popori)
+256790	3	Officier de la garde glaciale (Popori)
+256791	3	Officier de la garde glaciale (Popori)
+256792	3	Officier de la garde glaciale (Popori)
+256793	3	Officier de la garde glaciale (Popori)
+256794	3	Officier de la garde glaciale (Popori)
+256795	3	Officier de la garde glaciale (Popori)
+256796	3	Princesse de la garde glaciale (Élin)
+256797	3	Princesse de la garde glaciale (Élin)
+256798	3	Princesse de la garde glaciale (Élin)
+256799	3	Princesse de la garde glaciale (Élin)
+256800	3	Princesse de la garde glaciale (Élin)
+256801	3	Princesse de la garde glaciale (Élin)
+256802	3	Princesse de la garde glaciale (Élin)
+256803	3	Princesse de la garde glaciale (Élin)
+256804	3	Princesse de la garde glaciale (Élin)
+256805	3	Princesse de la garde glaciale (Élin)
+256806	3	Princesse de la garde glaciale (Élin)
+256807	3	Princesse de la garde glaciale (Élin)
+256808	3	Reine de la garde glaciale (Élin)
+256809	3	Reine de la garde glaciale (Élin)
+256810	3	Reine de la garde glaciale (Élin)
+256811	3	Reine de la garde glaciale (Élin)
+256812	3	Reine de la garde glaciale (Élin)
+256813	3	Reine de la garde glaciale (Élin)
+256814	3	Reine de la garde glaciale (Élin)
+256815	3	Reine de la garde glaciale (Élin)
+256816	3	Reine de la garde glaciale (Élin)
+256817	3	Reine de la garde glaciale (Élin)
+256818	3	Reine de la garde glaciale (Élin)
+256819	3	Reine de la garde glaciale (Élin)
+256820	3	Gardien de la garde glaciale (Baraka)
+256821	3	Gardien de la garde glaciale (Baraka)
+256822	3	Gardien de la garde glaciale (Baraka)
+256823	3	Gardien de la garde glaciale (Baraka)
+256824	3	Gardien de la garde glaciale (Baraka)
+256825	3	Gardien de la garde glaciale (Baraka)
+256826	3	Gardien de la garde glaciale (Baraka)
+256827	3	Gardien de la garde glaciale (Baraka)
+256828	3	Gardien de la garde glaciale (Baraka)
+256829	3	Gardien de la garde glaciale (Baraka)
+256830	3	Gardien de la garde glaciale (Baraka)
+256831	3	Gardien de la garde glaciale (Baraka)
+256832	3	Officier de la garde glaciale (Baraka)
+256833	3	Officier de la garde glaciale (Baraka)
+256834	3	Officier de la garde glaciale (Baraka)
+256835	3	Officier de la garde glaciale (Baraka)
+256836	3	Officier de la garde glaciale (Baraka)
+256837	3	Officier de la garde glaciale (Baraka)
+256838	3	Officier de la garde glaciale (Baraka)
+256839	3	Officier de la garde glaciale (Baraka)
+256840	3	Officier de la garde glaciale (Baraka)
+256841	3	Officier de la garde glaciale (Baraka)
+256842	3	Officier de la garde glaciale (Baraka)
+256843	3	Officier de la garde glaciale (Baraka)
+256844	3	Visière du gel
+256845	3	Visière du gel
+256846	3	Visière du gel
+256847	3	Visière du gel
+256848	3	Visière du gel
+256849	3	Visière du gel
+256850	3	Visière du gel
+256851	3	Visière du gel
+256852	3	Visière du gel
+256853	3	Visière du gel
+256854	3	Visière du gel
+256855	3	Visière du gel
+256856	3	Visière argentée
+256857	3	Visière argentée
+256858	3	Visière argentée
+256859	3	Visière argentée
+256860	3	Visière argentée
+256861	3	Visière argentée
+256862	3	Visière argentée
+256863	3	Visière argentée
+256864	3	Visière argentée
+256865	3	Visière argentée
+256866	3	Visière argentée
+256867	3	Visière argentée
+256868	3	Visière de la reine des glaces
+256869	3	Visière de la reine des glaces
+256870	3	Visière de la reine des glaces
+256871	3	Visière de la reine des glaces
+256872	3	Visière de la reine des glaces
+256873	3	Visière de la reine des glaces
+256874	3	Visière de la reine des glaces
+256875	3	Visière de la reine des glaces
+256876	3	Visière de la reine des glaces
+256877	3	Visière de la reine des glaces
+256878	3	Visière de la reine des glaces
+256879	3	Visière de la reine des glaces
+256880	3	Visière de la princesse des glaces
+256881	3	Visière de la princesse des glaces
+256882	3	Visière de la princesse des glaces
+256883	3	Visière de la princesse des glaces
+256884	3	Visière de la princesse des glaces
+256885	3	Visière de la princesse des glaces
+256886	3	Visière de la princesse des glaces
+256887	3	Visière de la princesse des glaces
+256888	3	Visière de la princesse des glaces
+256889	3	Visière de la princesse des glaces
+256890	3	Visière de la princesse des glaces
+256891	3	Visière de la princesse des glaces
+256892	3	Masque de repos chaton
+256893	3	Masque de repos chaton
+256894	3	Masque de repos chaton
+256895	3	Masque de repos chaton
+256896	3	Masque de repos chaton
+256897	3	Masque de repos chaton
+256898	3	Masque de repos chaton
+256899	3	Masque de repos chaton
+256900	3	Masque de repos chaton
+256901	3	Masque de repos chaton
+256902	3	Masque de repos chaton
+256903	3	Masque de repos chaton
 256904	3	Costume de fête turquoise (Baraka)
 256905	3	Costume de fête turquoise (Baraka)
 256906	3	Costume de fête turquoise (Baraka)
@@ -45974,8 +46724,39 @@
 257165	3	Robe de cygne colorable (Élin)
 257166	3	Robe de cygne colorable (Élin)
 257167	3	Robe de cygne colorable (Élin)
+257168	3	Casque de mineur
+257169	3	Casque de mineur
+257170	3	Casque de mineur
+257171	3	Casque de mineur
+257172	3	Casque de mineur
+257173	3	Casque de mineur
+257174	3	Casque de mineur
+257175	3	Casque de mineur
+257176	3	Casque de mineur
+257177	3	Casque de mineur
+257178	3	Casque de mineur
+257179	3	Casque de mineur
+257180	3	Chapeau jiangshi
+257181	3	Chapeau jiangshi
+257182	3	Chapeau jiangshi
+257183	3	Chapeau jiangshi
+257184	3	Chapeau jiangshi
+257185	3	Chapeau jiangshi
+257186	3	Chapeau jiangshi
+257187	3	Chapeau jiangshi
+257188	3	Chapeau jiangshi
+257189	3	Chapeau jiangshi
+257190	3	Chapeau jiangshi
+257191	3	Chapeau jiangshi
 220353	3	T-cat 01
 220354	3	T-cat 02
+222678	3	Massive Loot Box 
+222679	3	Extreme Loot Box
+222680	3	Extreme Key
+222681	3	Box 1
+222683	3	Box 3
+222684	3	Box 4
+222686	3	Box 6
 458	0	Compétence d'équitation : Fortuna
 459	0	Compétence d'équitation : Fides
 460	0	Compétence d'équitation : Virtus
@@ -48282,6 +49063,29 @@
 246118	2	Boîte à malice : cuirasse de la flamme argentée
 246119	2	Boîte à malice : cuirasse de la flamme argentée (7 jours)
 246120	2	Boîte à malice : cuirasse de la flamme argentée (30 jours)
+246121	2	Boîte à malice : tenues de fête distinguées
+246122	2	Boîte à malice : tenues de fête distinguées (30 jours)
+246123	2	Boîte à malice : tenues de fête distinguées (7 jours)
+246124	2	Boîte à malice : tenues de fête colorables
+246125	2	Boîte à malice : tenues de fête colorables (30 jours)
+246126	2	Boîte à malice : tenues de fête colorables (7 jours)
+246127	2	Boîte à malice : apparence d'arme de la garde glaciale
+246128	2	Boîte à malice : apparence d'arme de la garde glaciale (30 jours)
+246129	2	Boîte à malice : apparence d'arme de la garde glaciale (7 jours)
+246130	2	Boîte à malice : apparence d'arme de la garde glaciale (3 jours)
+246131	2	Boîte à malice : apparence d'arme royale de la magie glaciale
+246132	2	Boîte à malice : apparence d'arme royale de la magie glaciale (30 jours)
+246133	2	Boîte à malice : apparence d'arme royale de la magie glaciale (7 jours)
+246134	2	Boîte à malice : apparence d'arme royale de la magie glaciale (3 jours)
+246135	2	Boîte à malice : gardien de la garde glaciale
+246136	2	Boîte à malice : gardien de la garde glaciale (30 jours)
+246137	2	Boîte à malice : gardien de la garde glaciale (7 jours)
+246138	2	Boîte à malice : gardien de la garde glaciale (3 jours)
+246139	2	Boîte à malice : seigneur de la garde glaciale
+246140	2	Boîte à malice : seigneur de la garde glaciale (30 jours)
+246141	2	Boîte à malice : seigneur de la garde glaciale (7 jours)
+246142	2	Boîte à malice : seigneur de la garde glaciale (3 jours)
+246143	2	Boîte à malice : Habit de la mort lumineux (permanent)
 117375	2	Lauréat TERADEMY
 456	1	Compétence d'équitation : EX-TRM
 481	1	Compétence d'équitation : Arc-en-ciel

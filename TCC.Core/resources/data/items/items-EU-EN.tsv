@@ -12167,10 +12167,21 @@
 21329	2	Battle Pack II
 21330	2	Battle Pack III
 21331	2	Battle Pack IV
+21332	3	Dice Fragment
+21333	3	Chance Engine
+21334	3	Risk Amplifier
+21335	3	Necklace Resizer
+21336	3	Earring Resizer
+21337	3	Ring Resizer
+21338	3	Design: Polished Diadem
 21339	2	Civil Unrest Tanner Reward
 21340	2	Civil Unrest Reward 1
 21341	2	Civil Unrest Reward 2
 21342	2	Civil Unrest Reward 3
+21343	3	Necklace Resizer
+21344	3	Earring Resizer
+21345	3	Ring Resizer
+21346	3	10K Ticket Box
 22001	0	Discontinued Lesson: Cloth Extraction
 22002	0	Discontinued Lesson: Metal Extraction
 22004	0	Discontinued Lesson: Alchemy Extraction
@@ -15014,7 +15025,7 @@
 35001	1	Glyph of Energy
 35002	1	Glyph of Restoration
 35003	1	Glyph of Affirmation
-35004	1	Glyph of Grounding
+35004	1	Glyph of Rigidity
 35005	1	Glyph of the Sanative
 35006	1	Glyph of Spirit
 35007	1	Glyph of Energy
@@ -15040,7 +15051,7 @@
 35027	1	Glyph of Numbing
 35028	1	Glyph of Energy
 35029	2	Glyph of Affirmation
-35030	2	Glyph of Will
+35030	2	Glyph of Rigidity
 35031	2	Glyph of Powerlink
 35032	1	Glyph of Carving
 35033	2	Glyph of Power
@@ -15625,6 +15636,8 @@
 45480	0	Legends of the Valkyries
 45481	1	Dragon Scroll
 45482	2	Piece of Dragon Scroll
+46600	0	Urgent Letter from Seir
+46601	0	San Allema Teleportal Scroll
 46701	0	Inversion Mote
 47001	3	Wrack & Ruin
 47002	3	Ramming Speed
@@ -18843,6 +18856,20 @@
 72344	3	Keylock Necklace
 72345	3	Keylock Earring
 72346	3	Keylock Ring
+72347	2	Polished Circlet
+72348	3	Polished Diadem
+72349	3	Resized Godsboon Necklace
+72350	3	Resized Godsbane Earring
+72351	3	Resized Godsbane Ring
+72352	3	Resized Heavensboon Necklace
+72353	3	Resized Heavensbane Earring
+72354	3	Resized Heavensbane Ring 
+72355	3	Resized Keytrap Necklace
+72356	3	Resized Keytrap Earring
+72357	3	Resized Keytrap Ring
+72358	3	Resized Keylock Necklace
+72359	3	Resized Keylock Earring
+72360	3	Resized Keylock Ring
 80000	0	Barrel Bomb
 80001	1	Shattered Fleet Teleport Scroll
 80002	1	Channelworks Teleport Scroll
@@ -20089,6 +20116,7 @@
 83401	1	Ruinous Manor Teleport Scroll
 83402	1	Broken Prison Teleport Scroll
 83403	1	Velik's Sanctuary Teleport Scroll
+83404	1	Demon's Wheel Teleport Scroll
 84301	2	Poisedly Wrathful Niveot
 84302	2	Resolutely Wrathful Niveot
 84303	2	Grievingly Wrathful Niveot
@@ -23357,6 +23385,9 @@
 99431	2	Special Emote: Chambermaid's Curtsy (Elin)
 99432	2	Special Emote: Chambermaid's Curtsy (Elin)
 99433	2	[Fashion] Blackfang Glaive
+99434	1	Tier 10 Masterwork Alkahest
+99435	1	Tier 11 Masterwork Alkahest
+99436	1	Tier 12 Masterwork Alkahest
 99437	3	Quality Fresh Active Underwear
 99438	3	Quality Comfy Active Underwear
 99439	3	Quality Sporty Active Underwear
@@ -24375,11 +24406,11 @@
 201181	1	+12 Enchantment Scroll
 201182	1	+12 Enchantment Scroll
 201183	1	+13 Enchantment Scroll
-201184	3	Golden Dragon Helm
-201185	3	Feral Dragon Helm
+201184	3	Golden Dragon Helmet
+201185	3	Silver Dragon Helmet
 201186	3	Winged Laurel Wreath
-201187	3	Golden Feathered Visor
-201188	3	Feral Feathered Visor
+201187	3	Golden Winged Visor
+201188	3	Silver Winged Visor
 201189	3	TERA Rewards Cache 1 (20%)
 201190	3	TERA Rewards Cache 1 (40%)
 201191	3	TERA Rewards Cache 1 (60%)
@@ -29320,9 +29351,9 @@
 155058	0	Acria's Consignment
 155059	0	Roybond's Consignment
 155060	0	Surprise Box: Elin Spyder
-155061	0	Lunarea's Consignment
+155061	0	Surprise Box: Wicked Wyverns
 155062	0	Zapir's Consignment
-155063	0	Parvana's Consignment
+155063	0	Surprise Box: Ancient Mighty Dragons
 155064	0	Ribina's Consignment
 155065	2	Smart Box: Striped Swimwear
 155066	2	Smart Box: Striped Swimwear (7 Days)
@@ -29733,6 +29764,29 @@
 155501	3	[Fashion] Guile Vest
 155502	3	[Fashion] Guile Robe
 155503	3	TERA Club Membership (30 Days)
+155504	3	Luminous Abhorribbon
+155505	3	Luminous Skull
+155506	2	Mr. Cleaver
+155507	3	Luminous Raiments of the Dead (Human Male)
+155508	3	Luminous Raiments of the Dead (Human Female)
+155509	3	Luminous Raiments of the Dead (High Elf Male)
+155510	3	Luminous Raiments of the Dead (High Elf Female)
+155511	3	Luminous Raiments of the Dead (Amani Male)
+155512	3	Luminous Raiments of the Dead (Amani Female)
+155513	3	Luminous Raiments of the Dead (Castanic Male)
+155514	3	Luminous Raiments of the Dead (Castanic Female)
+155515	3	Luminous Raiments of the Dead (Popori)
+155516	3	Luminous Raiments of the Dead (Elin)
+155517	3	Luminous Raiments of the Dead (Baraka)
+155518	3	EXTREME Loot Box
+155519	3	EXTREME Victory Chest
+155520	3	EXTREME Key
+155521	3	EXTREME Loot: Kaia's Gear
+155522	3	EXTREME Loot: Potion Chest
+155523	3	EXTREME Loot: Demoros' Fragments
+155524	3	EXTREME Victory: Darkan's Gear
+155525	3	EXTREME Victory: Potion Chest
+155526	3	EXTREME Victory: Demoros' Fragments
 160001	0	Riding Skill: Sleipnir
 160002	0	Riding Skill: Sleipnir
 160003	1	Riding Skill: Tawny Huntress
@@ -42161,6 +42215,60 @@
 216678	3	Самоцвет
 216679	3	Жетон листопада
 216680	3	Жетон снегопада
+216681	3	Valkyon Federation Medal
+216682	3	Demonic Amulet
+216683	3	Heart of the Beast
+216684	2	Mystical letters
+216685	2	Crystal of Ether
+216686	3	Blood of Demon
+216687	2	Dendrite Shard
+216688	2	Uncommon Faridei's Cube
+216689	2	Rare Faridei's Cube
+216690	3	Superior Faridei's Cube
+216691	3	Golden Faridei's Cube
+216692	3	Legendary Faridei's Cube
+216693	0	Element Essence
+216694	1	Unstable Water crystal
+216695	1	Unstable Fire crystal
+216696	1	Unstable Earth crystal
+216697	2	Unstable Water energy
+216698	2	Unstable Fire energy
+216699	2	Unstable Earth energy
+216700	2	Unstable Water essence
+216701	2	Unstable Fire essence
+216702	2	Unstable Earth essence
+216703	2	Unstable Water element
+216704	2	Unstable Fire element
+216705	2	Unstable Earth element
+216706	3	Relic of the Water
+216707	3	Relic of the Fire
+216708	3	Relic of the Earth
+216709	1	Water fragment
+216710	1	Fire fragment
+216711	1	Earth fragment
+216712	2	Water crystal
+216713	2	Fire crystal
+216714	2	Earth crystal
+216715	2	Water energy
+216716	2	Fire energy
+216717	2	Earth energy
+216718	3	Prime Water essence
+216719	3	Prime Fire essence
+216720	3	Prime Earth essence
+216721	0	Quintessence
+216722	3	Obsidian Shard
+216723	3	Obsidian Crystal
+216724	3	Obsidian Sphere
+216725	3	Prime Darkness
+216726	1	Stone of the Light
+216727	3	Elements Secrets
+216728	3	Massive Loot Box 
+216729	3	Extreme Loot Box
+216730	3	Extreme Key
+216731	3	Box 1
+216733	3	Box 3
+216734	3	Box 4
+216736	3	Box 6
 247623	2	Smart Box: Swimwear Male A + Female A
 247624	2	Smart Box: Swimwear Male B + Female D
 247625	2	Smart Box: Swimwear Female B
@@ -42169,6 +42277,12 @@
 247628	2	Smart Box: Swimwear Male B + Female D (7 Days)
 247629	2	Smart Box: Swimwear Female B (7 Days)
 247630	2	Smart Box: Swimwear Female C (7 Days)
+247631	2	Smartbox: Elemental weapon (non-tradable)
+247632	2	Smartbox: Elemental weapon
+247633	2	Smartbox: Rare elemental weapon (non-tradable)
+247634	2	Smartbox: Rare elemental weapon
+247635	2	Smartbox: Rare elemental weapon (3 days)
+247636	2	Wheel of Fortune box
 250000	3	SWAT Team Uniform (Human Male)
 250001	3	SWAT Team Uniform (Human Male)
 250002	3	SWAT Team Uniform (Human Male)
@@ -47917,6 +48031,318 @@
 256133	3	Rainbow Water Wings
 256134	3	Rainbow Water Wings
 256135	3	Rainbow Water Wings
+256136	3	Frost Guards Twin Swords
+256137	3	Frost Guards Twin Swords
+256138	3	Frost Guards Twin Swords
+256139	3	Frost Guards Twin Swords
+256140	3	Frost Guards Twin Swords
+256141	3	Frost Guards Twin Swords
+256142	3	Frost Guards Twin Swords
+256143	3	Frost Guards Twin Swords
+256144	3	Frost Guards Twin Swords
+256145	3	Frost Guards Twin Swords
+256146	3	Frost Guards Twin Swords
+256147	3	Frost Guards Twin Swords
+256148	3	Frost Guards Lance
+256149	3	Frost Guards Lance
+256150	3	Frost Guards Lance
+256151	3	Frost Guards Lance
+256152	3	Frost Guards Lance
+256153	3	Frost Guards Lance
+256154	3	Frost Guards Lance
+256155	3	Frost Guards Lance
+256156	3	Frost Guards Lance
+256157	3	Frost Guards Lance
+256158	3	Frost Guards Lance
+256159	3	Frost Guards Lance
+256160	3	Frost Guards Greatsword
+256161	3	Frost Guards Greatsword
+256162	3	Frost Guards Greatsword
+256163	3	Frost Guards Greatsword
+256164	3	Frost Guards Greatsword
+256165	3	Frost Guards Greatsword
+256166	3	Frost Guards Greatsword
+256167	3	Frost Guards Greatsword
+256168	3	Frost Guards Greatsword
+256169	3	Frost Guards Greatsword
+256170	3	Frost Guards Greatsword
+256171	3	Frost Guards Greatsword
+256172	3	Frost Guards Axe
+256173	3	Frost Guards Axe
+256174	3	Frost Guards Axe
+256175	3	Frost Guards Axe
+256176	3	Frost Guards Axe
+256177	3	Frost Guards Axe
+256178	3	Frost Guards Axe
+256179	3	Frost Guards Axe
+256180	3	Frost Guards Axe
+256181	3	Frost Guards Axe
+256182	3	Frost Guards Axe
+256183	3	Frost Guards Axe
+256184	3	Frost Guards Disc
+256185	3	Frost Guards Disc
+256186	3	Frost Guards Disc
+256187	3	Frost Guards Disc
+256188	3	Frost Guards Disc
+256189	3	Frost Guards Disc
+256190	3	Frost Guards Disc
+256191	3	Frost Guards Disc
+256192	3	Frost Guards Disc
+256193	3	Frost Guards Disc
+256194	3	Frost Guards Disc
+256195	3	Frost Guards Disc
+256196	3	Frost Guards Bow
+256197	3	Frost Guards Bow
+256198	3	Frost Guards Bow
+256199	3	Frost Guards Bow
+256200	3	Frost Guards Bow
+256201	3	Frost Guards Bow
+256202	3	Frost Guards Bow
+256203	3	Frost Guards Bow
+256204	3	Frost Guards Bow
+256205	3	Frost Guards Bow
+256206	3	Frost Guards Bow
+256207	3	Frost Guards Bow
+256208	3	Frost Guards Staff
+256209	3	Frost Guards Staff
+256210	3	Frost Guards Staff
+256211	3	Frost Guards Staff
+256212	3	Frost Guards Staff
+256213	3	Frost Guards Staff
+256214	3	Frost Guards Staff
+256215	3	Frost Guards Staff
+256216	3	Frost Guards Staff
+256217	3	Frost Guards Staff
+256218	3	Frost Guards Staff
+256219	3	Frost Guards Staff
+256220	3	Frost Guards Scepter
+256221	3	Frost Guards Scepter
+256222	3	Frost Guards Scepter
+256223	3	Frost Guards Scepter
+256224	3	Frost Guards Scepter
+256225	3	Frost Guards Scepter
+256226	3	Frost Guards Scepter
+256227	3	Frost Guards Scepter
+256228	3	Frost Guards Scepter
+256229	3	Frost Guards Scepter
+256230	3	Frost Guards Scepter
+256231	3	Frost Guards Scepter
+256232	3	Frost Guards Powerfists
+256233	3	Frost Guards Powerfists
+256234	3	Frost Guards Powerfists
+256235	3	Frost Guards Powerfists
+256236	3	Frost Guards Powerfists
+256237	3	Frost Guards Powerfists
+256238	3	Frost Guards Powerfists
+256239	3	Frost Guards Powerfists
+256240	3	Frost Guards Powerfists
+256241	3	Frost Guards Powerfists
+256242	3	Frost Guards Powerfists
+256243	3	Frost Guards Powerfists
+256244	3	Frost Guards Arcannon
+256245	3	Frost Guards Arcannon
+256246	3	Frost Guards Arcannon
+256247	3	Frost Guards Arcannon
+256248	3	Frost Guards Arcannon
+256249	3	Frost Guards Arcannon
+256250	3	Frost Guards Arcannon
+256251	3	Frost Guards Arcannon
+256252	3	Frost Guards Arcannon
+256253	3	Frost Guards Arcannon
+256254	3	Frost Guards Arcannon
+256255	3	Frost Guards Arcannon
+256256	3	Frost Guards Runeglaive
+256257	3	Frost Guards Runeglaive
+256258	3	Frost Guards Runeglaive
+256259	3	Frost Guards Runeglaive
+256260	3	Frost Guards Runeglaive
+256261	3	Frost Guards Runeglaive
+256262	3	Frost Guards Runeglaive
+256263	3	Frost Guards Runeglaive
+256264	3	Frost Guards Runeglaive
+256265	3	Frost Guards Runeglaive
+256266	3	Frost Guards Runeglaive
+256267	3	Frost Guards Runeglaive
+256268	3	Frost Guards Scythe
+256269	3	Frost Guards Scythe
+256270	3	Frost Guards Scythe
+256271	3	Frost Guards Scythe
+256272	3	Frost Guards Scythe
+256273	3	Frost Guards Scythe
+256274	3	Frost Guards Scythe
+256275	3	Frost Guards Scythe
+256276	3	Frost Guards Scythe
+256277	3	Frost Guards Scythe
+256278	3	Frost Guards Scythe
+256279	3	Frost Guards Scythe
+256280	3	Frost Guards Shuriken
+256281	3	Frost Guards Shuriken
+256282	3	Frost Guards Shuriken
+256283	3	Frost Guards Shuriken
+256284	3	Frost Guards Shuriken
+256285	3	Frost Guards Shuriken
+256286	3	Frost Guards Shuriken
+256287	3	Frost Guards Shuriken
+256288	3	Frost Guards Shuriken
+256289	3	Frost Guards Shuriken
+256290	3	Frost Guards Shuriken
+256291	3	Frost Guards Shuriken
+256292	3	Royal Frostrune Twin Swords
+256293	3	Royal Frostrune Twin Swords
+256294	3	Royal Frostrune Twin Swords
+256295	3	Royal Frostrune Twin Swords
+256296	3	Royal Frostrune Twin Swords
+256297	3	Royal Frostrune Twin Swords
+256298	3	Royal Frostrune Twin Swords
+256299	3	Royal Frostrune Twin Swords
+256300	3	Royal Frostrune Twin Swords
+256301	3	Royal Frostrune Twin Swords
+256302	3	Royal Frostrune Twin Swords
+256303	3	Royal Frostrune Twin Swords
+256304	3	Royal Frostrune Lance
+256305	3	Royal Frostrune Lance
+256306	3	Royal Frostrune Lance
+256307	3	Royal Frostrune Lance
+256308	3	Royal Frostrune Lance
+256309	3	Royal Frostrune Lance
+256310	3	Royal Frostrune Lance
+256311	3	Royal Frostrune Lance
+256312	3	Royal Frostrune Lance
+256313	3	Royal Frostrune Lance
+256314	3	Royal Frostrune Lance
+256315	3	Royal Frostrune Lance
+256316	3	Royal Frostrune Greatsword
+256317	3	Royal Frostrune Greatsword
+256318	3	Royal Frostrune Greatsword
+256319	3	Royal Frostrune Greatsword
+256320	3	Royal Frostrune Greatsword
+256321	3	Royal Frostrune Greatsword
+256322	3	Royal Frostrune Greatsword
+256323	3	Royal Frostrune Greatsword
+256324	3	Royal Frostrune Greatsword
+256325	3	Royal Frostrune Greatsword
+256326	3	Royal Frostrune Greatsword
+256327	3	Royal Frostrune Greatsword
+256328	3	Royal Frostrune Axe
+256329	3	Royal Frostrune Axe
+256330	3	Royal Frostrune Axe
+256331	3	Royal Frostrune Axe
+256332	3	Royal Frostrune Axe
+256333	3	Royal Frostrune Axe
+256334	3	Royal Frostrune Axe
+256335	3	Royal Frostrune Axe
+256336	3	Royal Frostrune Axe
+256337	3	Royal Frostrune Axe
+256338	3	Royal Frostrune Axe
+256339	3	Royal Frostrune Axe
+256340	3	Royal Frostrune Disc
+256341	3	Royal Frostrune Disc
+256342	3	Royal Frostrune Disc
+256343	3	Royal Frostrune Disc
+256344	3	Royal Frostrune Disc
+256345	3	Royal Frostrune Disc
+256346	3	Royal Frostrune Disc
+256347	3	Royal Frostrune Disc
+256348	3	Royal Frostrune Disc
+256349	3	Royal Frostrune Disc
+256350	3	Royal Frostrune Disc
+256351	3	Royal Frostrune Disc
+256352	3	Royal Frostrune Bow
+256353	3	Royal Frostrune Bow
+256354	3	Royal Frostrune Bow
+256355	3	Royal Frostrune Bow
+256356	3	Royal Frostrune Bow
+256357	3	Royal Frostrune Bow
+256358	3	Royal Frostrune Bow
+256359	3	Royal Frostrune Bow
+256360	3	Royal Frostrune Bow
+256361	3	Royal Frostrune Bow
+256362	3	Royal Frostrune Bow
+256363	3	Royal Frostrune Bow
+256364	3	Royal Frostrune Staff
+256365	3	Royal Frostrune Staff
+256366	3	Royal Frostrune Staff
+256367	3	Royal Frostrune Staff
+256368	3	Royal Frostrune Staff
+256369	3	Royal Frostrune Staff
+256370	3	Royal Frostrune Staff
+256371	3	Royal Frostrune Staff
+256372	3	Royal Frostrune Staff
+256373	3	Royal Frostrune Staff
+256374	3	Royal Frostrune Staff
+256375	3	Royal Frostrune Staff
+256376	3	Royal Frostrune Scepter
+256377	3	Royal Frostrune Scepter
+256378	3	Royal Frostrune Scepter
+256379	3	Royal Frostrune Scepter
+256380	3	Royal Frostrune Scepter
+256381	3	Royal Frostrune Scepter
+256382	3	Royal Frostrune Scepter
+256383	3	Royal Frostrune Scepter
+256384	3	Royal Frostrune Scepter
+256385	3	Royal Frostrune Scepter
+256386	3	Royal Frostrune Scepter
+256387	3	Royal Frostrune Scepter
+256388	3	Royal Frostrune Powerfists
+256389	3	Royal Frostrune Powerfists
+256390	3	Royal Frostrune Powerfists
+256391	3	Royal Frostrune Powerfists
+256392	3	Royal Frostrune Powerfists
+256393	3	Royal Frostrune Powerfists
+256394	3	Royal Frostrune Powerfists
+256395	3	Royal Frostrune Powerfists
+256396	3	Royal Frostrune Powerfists
+256397	3	Royal Frostrune Powerfists
+256398	3	Royal Frostrune Powerfists
+256399	3	Royal Frostrune Powerfists
+256400	3	Royal Frostrune Arcannon
+256401	3	Royal Frostrune Arcannon
+256402	3	Royal Frostrune Arcannon
+256403	3	Royal Frostrune Arcannon
+256404	3	Royal Frostrune Arcannon
+256405	3	Royal Frostrune Arcannon
+256406	3	Royal Frostrune Arcannon
+256407	3	Royal Frostrune Arcannon
+256408	3	Royal Frostrune Arcannon
+256409	3	Royal Frostrune Arcannon
+256410	3	Royal Frostrune Arcannon
+256411	3	Royal Frostrune Arcannon
+256412	3	Royal Frostrune Runeglaive
+256413	3	Royal Frostrune Runeglaive
+256414	3	Royal Frostrune Runeglaive
+256415	3	Royal Frostrune Runeglaive
+256416	3	Royal Frostrune Runeglaive
+256417	3	Royal Frostrune Runeglaive
+256418	3	Royal Frostrune Runeglaive
+256419	3	Royal Frostrune Runeglaive
+256420	3	Royal Frostrune Runeglaive
+256421	3	Royal Frostrune Runeglaive
+256422	3	Royal Frostrune Runeglaive
+256423	3	Royal Frostrune Runeglaive
+256424	3	Royal Frostrune Scythe
+256425	3	Royal Frostrune Scythe
+256426	3	Royal Frostrune Scythe
+256427	3	Royal Frostrune Scythe
+256428	3	Royal Frostrune Scythe
+256429	3	Royal Frostrune Scythe
+256430	3	Royal Frostrune Scythe
+256431	3	Royal Frostrune Scythe
+256432	3	Royal Frostrune Scythe
+256433	3	Royal Frostrune Scythe
+256434	3	Royal Frostrune Scythe
+256435	3	Royal Frostrune Scythe
+256436	3	Royal Frostrune Shuriken
+256437	3	Royal Frostrune Shuriken
+256438	3	Royal Frostrune Shuriken
+256439	3	Royal Frostrune Shuriken
+256440	3	Royal Frostrune Shuriken
+256441	3	Royal Frostrune Shuriken
+256442	3	Royal Frostrune Shuriken
+256443	3	Royal Frostrune Shuriken
+256444	3	Royal Frostrune Shuriken
+256445	3	Royal Frostrune Shuriken
+256446	3	Royal Frostrune Shuriken
+256447	3	Royal Frostrune Shuriken
 256448	3	Flying Skill: Obsidian Tail
 256449	3	Flying Skill: Mythical Obsidian Tail
 256450	3	Flying Skill: Fabled Obsidian Tail
@@ -48049,6 +48475,330 @@
 256577	3	Flying Skill: Almighty Bloom Tail
 256578	3	Flying Skill: Legendary Bloom Tail
 256579	3	Flying Skill: Chimeric Bloom Tail
+256580	3	Frost Guardsman (Human Male)
+256581	3	Frost Guardsman (Human Male)
+256582	3	Frost Guardsman (Human Male)
+256583	3	Frost Guardsman (Human Male)
+256584	3	Frost Guardsman (Human Male)
+256585	3	Frost Guardsman (Human Male)
+256586	3	Frost Guardsman (Human Male)
+256587	3	Frost Guardsman (Human Male)
+256588	3	Frost Guardsman (Human Male)
+256589	3	Frost Guardsman (Human Male)
+256590	3	Frost Guardsman (Human Male)
+256591	3	Frost Guardsman (Human Male)
+256592	3	Frost Guards Officer (Human Male)
+256593	3	Frost Guards Officer (Human Male)
+256594	3	Frost Guards Officer (Human Male)
+256595	3	Frost Guards Officer (Human Male)
+256596	3	Frost Guards Officer (Human Male)
+256597	3	Frost Guards Officer (Human Male)
+256598	3	Frost Guards Officer (Human Male)
+256599	3	Frost Guards Officer (Human Male)
+256600	3	Frost Guards Officer (Human Male)
+256601	3	Frost Guards Officer (Human Male)
+256602	3	Frost Guards Officer (Human Male)
+256603	3	Frost Guards Officer (Human Male)
+256604	3	Princess of the Frost Guards (Human Female)
+256605	3	Princess of the Frost Guards (Human Female)
+256606	3	Princess of the Frost Guards (Human Female)
+256607	3	Princess of the Frost Guards (Human Female)
+256608	3	Princess of the Frost Guards (Human Female)
+256609	3	Princess of the Frost Guards (Human Female)
+256610	3	Princess of the Frost Guards (Human Female)
+256611	3	Princess of the Frost Guards (Human Female)
+256612	3	Princess of the Frost Guards (Human Female)
+256613	3	Princess of the Frost Guards (Human Female)
+256614	3	Princess of the Frost Guards (Human Female)
+256615	3	Princess of the Frost Guards (Human Female)
+256616	3	Queen of the Frost Guards (Human Female)
+256617	3	Queen of the Frost Guards (Human Female)
+256618	3	Queen of the Frost Guards (Human Female)
+256619	3	Queen of the Frost Guards (Human Female)
+256620	3	Queen of the Frost Guards (Human Female)
+256621	3	Queen of the Frost Guards (Human Female)
+256622	3	Queen of the Frost Guards (Human Female)
+256623	3	Queen of the Frost Guards (Human Female)
+256624	3	Queen of the Frost Guards (Human Female)
+256625	3	Queen of the Frost Guards (Human Female)
+256626	3	Queen of the Frost Guards (Human Female)
+256627	3	Queen of the Frost Guards (Human Female)
+256628	3	Frost Guardsman (High Elf Male)
+256629	3	Frost Guardsman (High Elf Male)
+256630	3	Frost Guardsman (High Elf Male)
+256631	3	Frost Guardsman (High Elf Male)
+256632	3	Frost Guardsman (High Elf Male)
+256633	3	Frost Guardsman (High Elf Male)
+256634	3	Frost Guardsman (High Elf Male)
+256635	3	Frost Guardsman (High Elf Male)
+256636	3	Frost Guardsman (High Elf Male)
+256637	3	Frost Guardsman (High Elf Male)
+256638	3	Frost Guardsman (High Elf Male)
+256639	3	Frost Guardsman (High Elf Male)
+256640	3	Frost Guards Officer (High Elf Male)
+256641	3	Frost Guards Officer (High Elf Male)
+256642	3	Frost Guards Officer (High Elf Male)
+256643	3	Frost Guards Officer (High Elf Male)
+256644	3	Frost Guards Officer (High Elf Male)
+256645	3	Frost Guards Officer (High Elf Male)
+256646	3	Frost Guards Officer (High Elf Male)
+256647	3	Frost Guards Officer (High Elf Male)
+256648	3	Frost Guards Officer (High Elf Male)
+256649	3	Frost Guards Officer (High Elf Male)
+256650	3	Frost Guards Officer (High Elf Male)
+256651	3	Frost Guards Officer (High Elf Male)
+256652	3	Princess of the Frost Guards (High Elf Female)
+256653	3	Princess of the Frost Guards (High Elf Female)
+256654	3	Princess of the Frost Guards (High Elf Female)
+256655	3	Princess of the Frost Guards (High Elf Female)
+256656	3	Princess of the Frost Guards (High Elf Female)
+256657	3	Princess of the Frost Guards (High Elf Female)
+256658	3	Princess of the Frost Guards (High Elf Female)
+256659	3	Princess of the Frost Guards (High Elf Female)
+256660	3	Princess of the Frost Guards (High Elf Female)
+256661	3	Princess of the Frost Guards (High Elf Female)
+256662	3	Princess of the Frost Guards (High Elf Female)
+256663	3	Princess of the Frost Guards (High Elf Female)
+256664	3	Queen of the Frost Guards (High Elf Female)
+256665	3	Queen of the Frost Guards (High Elf Female)
+256666	3	Queen of the Frost Guards (High Elf Female)
+256667	3	Queen of the Frost Guards (High Elf Female)
+256668	3	Queen of the Frost Guards (High Elf Female)
+256669	3	Queen of the Frost Guards (High Elf Female)
+256670	3	Queen of the Frost Guards (High Elf Female)
+256671	3	Queen of the Frost Guards (High Elf Female)
+256672	3	Queen of the Frost Guards (High Elf Female)
+256673	3	Queen of the Frost Guards (High Elf Female)
+256674	3	Queen of the Frost Guards (High Elf Female)
+256675	3	Queen of the Frost Guards (High Elf Female)
+256676	3	Frost Guardsman (Amani Male)
+256677	3	Frost Guardsman (Amani Male)
+256678	3	Frost Guardsman (Amani Male)
+256679	3	Frost Guardsman (Amani Male)
+256680	3	Frost Guardsman (Amani Male)
+256681	3	Frost Guardsman (Amani Male)
+256682	3	Frost Guardsman (Amani Male)
+256683	3	Frost Guardsman (Amani Male)
+256684	3	Frost Guardsman (Amani Male)
+256685	3	Frost Guardsman (Amani Male)
+256686	3	Frost Guardsman (Amani Male)
+256687	3	Frost Guardsman (Amani Male)
+256688	3	Frost Guards Officer (Amani Male)
+256689	3	Frost Guards Officer (Amani Male)
+256690	3	Frost Guards Officer (Amani Male)
+256691	3	Frost Guards Officer (Amani Male)
+256692	3	Frost Guards Officer (Amani Male)
+256693	3	Frost Guards Officer (Amani Male)
+256694	3	Frost Guards Officer (Amani Male)
+256695	3	Frost Guards Officer (Amani Male)
+256696	3	Frost Guards Officer (Amani Male)
+256697	3	Frost Guards Officer (Amani Male)
+256698	3	Frost Guards Officer (Amani Male)
+256699	3	Frost Guards Officer (Amani Male)
+256700	3	Princess of the Frost Guards (Amani Female)
+256701	3	Princess of the Frost Guards (Amani Female)
+256702	3	Princess of the Frost Guards (Amani Female)
+256703	3	Princess of the Frost Guards (Amani Female)
+256704	3	Princess of the Frost Guards (Amani Female)
+256705	3	Princess of the Frost Guards (Amani Female)
+256706	3	Princess of the Frost Guards (Amani Female)
+256707	3	Princess of the Frost Guards (Amani Female)
+256708	3	Princess of the Frost Guards (Amani Female)
+256709	3	Princess of the Frost Guards (Amani Female)
+256710	3	Princess of the Frost Guards (Amani Female)
+256711	3	Princess of the Frost Guards (Amani Female)
+256712	3	Queen of the Frost Guards (Amani Female)
+256713	3	Queen of the Frost Guards (Amani Female)
+256714	3	Queen of the Frost Guards (Amani Female)
+256715	3	Queen of the Frost Guards (Amani Female)
+256716	3	Queen of the Frost Guards (Amani Female)
+256717	3	Queen of the Frost Guards (Amani Female)
+256718	3	Queen of the Frost Guards (Amani Female)
+256719	3	Queen of the Frost Guards (Amani Female)
+256720	3	Queen of the Frost Guards (Amani Female)
+256721	3	Queen of the Frost Guards (Amani Female)
+256722	3	Queen of the Frost Guards (Amani Female)
+256723	3	Queen of the Frost Guards (Amani Female)
+256724	3	Frost Guardsman (Castanic Male)
+256725	3	Frost Guardsman (Castanic Male)
+256726	3	Frost Guardsman (Castanic Male)
+256727	3	Frost Guardsman (Castanic Male)
+256728	3	Frost Guardsman (Castanic Male)
+256729	3	Frost Guardsman (Castanic Male)
+256730	3	Frost Guardsman (Castanic Male)
+256731	3	Frost Guardsman (Castanic Male)
+256732	3	Frost Guardsman (Castanic Male)
+256733	3	Frost Guardsman (Castanic Male)
+256734	3	Frost Guardsman (Castanic Male)
+256735	3	Frost Guardsman (Castanic Male)
+256736	3	Frost Guards Officer (Castanic Male)
+256737	3	Frost Guards Officer (Castanic Male)
+256738	3	Frost Guards Officer (Castanic Male)
+256739	3	Frost Guards Officer (Castanic Male)
+256740	3	Frost Guards Officer (Castanic Male)
+256741	3	Frost Guards Officer (Castanic Male)
+256742	3	Frost Guards Officer (Castanic Male)
+256743	3	Frost Guards Officer (Castanic Male)
+256744	3	Frost Guards Officer (Castanic Male)
+256745	3	Frost Guards Officer (Castanic Male)
+256746	3	Frost Guards Officer (Castanic Male)
+256747	3	Frost Guards Officer (Castanic Male)
+256748	3	Princess of the Frost Guards (Castanic Female)
+256749	3	Princess of the Frost Guards (Castanic Female)
+256750	3	Princess of the Frost Guards (Castanic Female)
+256751	3	Princess of the Frost Guards (Castanic Female)
+256752	3	Princess of the Frost Guards (Castanic Female)
+256753	3	Princess of the Frost Guards (Castanic Female)
+256754	3	Princess of the Frost Guards (Castanic Female)
+256755	3	Princess of the Frost Guards (Castanic Female)
+256756	3	Princess of the Frost Guards (Castanic Female)
+256757	3	Princess of the Frost Guards (Castanic Female)
+256758	3	Princess of the Frost Guards (Castanic Female)
+256759	3	Princess of the Frost Guards (Castanic Female)
+256760	3	Queen of the Frost Guards (Castanic Female)
+256761	3	Queen of the Frost Guards (Castanic Female)
+256762	3	Queen of the Frost Guards (Castanic Female)
+256763	3	Queen of the Frost Guards (Castanic Female)
+256764	3	Queen of the Frost Guards (Castanic Female)
+256765	3	Queen of the Frost Guards (Castanic Female)
+256766	3	Queen of the Frost Guards (Castanic Female)
+256767	3	Queen of the Frost Guards (Castanic Female)
+256768	3	Queen of the Frost Guards (Castanic Female)
+256769	3	Queen of the Frost Guards (Castanic Female)
+256770	3	Queen of the Frost Guards (Castanic Female)
+256771	3	Queen of the Frost Guards (Castanic Female)
+256772	3	Frost Guardsman (Popori)
+256773	3	Frost Guardsman (Popori)
+256774	3	Frost Guardsman (Popori)
+256775	3	Frost Guardsman (Popori)
+256776	3	Frost Guardsman (Popori)
+256777	3	Frost Guardsman (Popori)
+256778	3	Frost Guardsman (Popori)
+256779	3	Frost Guardsman (Popori)
+256780	3	Frost Guardsman (Popori)
+256781	3	Frost Guardsman (Popori)
+256782	3	Frost Guardsman (Popori)
+256783	3	Frost Guardsman (Popori)
+256784	3	Frost Guards Officer (Popori)
+256785	3	Frost Guards Officer (Popori)
+256786	3	Frost Guards Officer (Popori)
+256787	3	Frost Guards Officer (Popori)
+256788	3	Frost Guards Officer (Popori)
+256789	3	Frost Guards Officer (Popori)
+256790	3	Frost Guards Officer (Popori)
+256791	3	Frost Guards Officer (Popori)
+256792	3	Frost Guards Officer (Popori)
+256793	3	Frost Guards Officer (Popori)
+256794	3	Frost Guards Officer (Popori)
+256795	3	Frost Guards Officer (Popori)
+256796	3	Princess of the Frost Guards (Elin)
+256797	3	Princess of the Frost Guards (Elin)
+256798	3	Princess of the Frost Guards (Elin)
+256799	3	Princess of the Frost Guards (Elin)
+256800	3	Princess of the Frost Guards (Elin)
+256801	3	Princess of the Frost Guards (Elin)
+256802	3	Princess of the Frost Guards (Elin)
+256803	3	Princess of the Frost Guards (Elin)
+256804	3	Princess of the Frost Guards (Elin)
+256805	3	Princess of the Frost Guards (Elin)
+256806	3	Princess of the Frost Guards (Elin)
+256807	3	Princess of the Frost Guards (Elin)
+256808	3	Queen of the Frost Guards (Elin)
+256809	3	Queen of the Frost Guards (Elin)
+256810	3	Queen of the Frost Guards (Elin)
+256811	3	Queen of the Frost Guards (Elin)
+256812	3	Queen of the Frost Guards (Elin)
+256813	3	Queen of the Frost Guards (Elin)
+256814	3	Queen of the Frost Guards (Elin)
+256815	3	Queen of the Frost Guards (Elin)
+256816	3	Queen of the Frost Guards (Elin)
+256817	3	Queen of the Frost Guards (Elin)
+256818	3	Queen of the Frost Guards (Elin)
+256819	3	Queen of the Frost Guards (Elin)
+256820	3	Frost Guardsman (Baraka)
+256821	3	Frost Guardsman (Baraka)
+256822	3	Frost Guardsman (Baraka)
+256823	3	Frost Guardsman (Baraka)
+256824	3	Frost Guardsman (Baraka)
+256825	3	Frost Guardsman (Baraka)
+256826	3	Frost Guardsman (Baraka)
+256827	3	Frost Guardsman (Baraka)
+256828	3	Frost Guardsman (Baraka)
+256829	3	Frost Guardsman (Baraka)
+256830	3	Frost Guardsman (Baraka)
+256831	3	Frost Guardsman (Baraka)
+256832	3	Frost Guards Officer (Baraka)
+256833	3	Frost Guards Officer (Baraka)
+256834	3	Frost Guards Officer (Baraka)
+256835	3	Frost Guards Officer (Baraka)
+256836	3	Frost Guards Officer (Baraka)
+256837	3	Frost Guards Officer (Baraka)
+256838	3	Frost Guards Officer (Baraka)
+256839	3	Frost Guards Officer (Baraka)
+256840	3	Frost Guards Officer (Baraka)
+256841	3	Frost Guards Officer (Baraka)
+256842	3	Frost Guards Officer (Baraka)
+256843	3	Frost Guards Officer (Baraka)
+256844	3	Frost Visor
+256845	3	Frost Visor
+256846	3	Frost Visor
+256847	3	Frost Visor
+256848	3	Frost Visor
+256849	3	Frost Visor
+256850	3	Frost Visor
+256851	3	Frost Visor
+256852	3	Frost Visor
+256853	3	Frost Visor
+256854	3	Frost Visor
+256855	3	Frost Visor
+256856	3	Ice Visor
+256857	3	Ice Visor
+256858	3	Ice Visor
+256859	3	Ice Visor
+256860	3	Ice Visor
+256861	3	Ice Visor
+256862	3	Ice Visor
+256863	3	Ice Visor
+256864	3	Ice Visor
+256865	3	Ice Visor
+256866	3	Ice Visor
+256867	3	Ice Visor
+256868	3	Frost Queen Visor
+256869	3	Frost Queen Visor
+256870	3	Frost Queen Visor
+256871	3	Frost Queen Visor
+256872	3	Frost Queen Visor
+256873	3	Frost Queen Visor
+256874	3	Frost Queen Visor
+256875	3	Frost Queen Visor
+256876	3	Frost Queen Visor
+256877	3	Frost Queen Visor
+256878	3	Frost Queen Visor
+256879	3	Frost Queen Visor
+256880	3	Frost Princess Visor
+256881	3	Frost Princess Visor
+256882	3	Frost Princess Visor
+256883	3	Frost Princess Visor
+256884	3	Frost Princess Visor
+256885	3	Frost Princess Visor
+256886	3	Frost Princess Visor
+256887	3	Frost Princess Visor
+256888	3	Frost Princess Visor
+256889	3	Frost Princess Visor
+256890	3	Frost Princess Visor
+256891	3	Frost Princess Visor
+256892	3	Kitty Sleep Mask
+256893	3	Kitty Sleep Mask
+256894	3	Kitty Sleep Mask
+256895	3	Kitty Sleep Mask
+256896	3	Kitty Sleep Mask
+256897	3	Kitty Sleep Mask
+256898	3	Kitty Sleep Mask
+256899	3	Kitty Sleep Mask
+256900	3	Kitty Sleep Mask
+256901	3	Kitty Sleep Mask
+256902	3	Kitty Sleep Mask
+256903	3	Kitty Sleep Mask
 256904	3	Baraka Turquoise Short Jacket
 256905	3	Baraka Turquoise Short Jacket
 256906	3	Baraka Turquoise Short Jacket
@@ -48313,8 +49063,39 @@
 257165	3	Dyeable Swan Dress (Elin)
 257166	3	Dyeable Swan Dress (Elin)
 257167	3	Dyeable Swan Dress (Elin)
+257168	3	Miner's Helmet
+257169	3	Miner's Helmet
+257170	3	Miner's Helmet
+257171	3	Miner's Helmet
+257172	3	Miner's Helmet
+257173	3	Miner's Helmet
+257174	3	Miner's Helmet
+257175	3	Miner's Helmet
+257176	3	Miner's Helmet
+257177	3	Miner's Helmet
+257178	3	Miner's Helmet
+257179	3	Miner's Helmet
+257180	3	Jiangshi Hat
+257181	3	Jiangshi Hat
+257182	3	Jiangshi Hat
+257183	3	Jiangshi Hat
+257184	3	Jiangshi Hat
+257185	3	Jiangshi Hat
+257186	3	Jiangshi Hat
+257187	3	Jiangshi Hat
+257188	3	Jiangshi Hat
+257189	3	Jiangshi Hat
+257190	3	Jiangshi Hat
+257191	3	Jiangshi Hat
 220353	3	T-cat 01
 220354	3	T-cat 02
+222678	3	Massive Loot Box 
+222679	3	Extreme Loot Box
+222680	3	Extreme Key
+222681	3	Box 1
+222683	3	Box 3
+222684	3	Box 4
+222686	3	Box 6
 458	0	Riding Skill: Summon Fortuna
 459	0	Riding Skill: Summon Fides
 460	0	Riding Skill: Summon Virtus
@@ -51028,6 +51809,29 @@
 246118	2	Smart Box: Silverflame Armor
 246119	2	Smart Box: Silverflame Armor (7 Days)
 246120	2	Smart Box: Silverflame Armor (30 Days)
+246121	2	Smart Box: Deluxe Party Costumes
+246122	2	Smart Box: Deluxe Party Costumes (30 Days)
+246123	2	Smart Box: Deluxe Party Costumes (7 Days)
+246124	2	Smart Box: Dyeable Party Costumes
+246125	2	Smart Box: Dyeable Party Costumes (30 Days)
+246126	2	Smart Box: Dyeable Party Costumes (7 Days)
+246127	2	Smart Box: Frost Guards Weapon Skin
+246128	2	Smart Box: Frost Guards Weapon Skin (30 Days)
+246129	2	Smart Box: Frost Guards Weapon Skin (7 Days)
+246130	2	Smart Box: Frost Guards Weapon Skin (3 Days)
+246131	2	Smart Box: Royal Frostrune Weapon Skin
+246132	2	Smart Box: Royal Frostrune Weapon Skin (30 Days)
+246133	2	Smart Box: Royal Frostrune Weapon Skin (7 Days)
+246134	2	Smart Box: Royal Frostrune Weapon Skin (3 Days)
+246135	2	Smart Box: Frost Guardian
+246136	2	Smart Box: Frost Guardian (30 Days)
+246137	2	Smart Box: Frost Guardian (7 Days)
+246138	2	Smart Box: Frost Guardian (3 Days)
+246139	2	Smart Box: Frost Sovereign
+246140	2	Smart Box: Frost Sovereign (30 Days)
+246141	2	Smart Box: Frost Sovereign (7 Days)
+246142	2	Smart Box: Frost Sovereign (3 Days)
+246143	2	Smart Box: Luminous Raiments of the Dead (Permanent)
 100507	0	T
 100508	0	E
 100509	0	R

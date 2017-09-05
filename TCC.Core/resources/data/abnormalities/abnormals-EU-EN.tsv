@@ -41,12 +41,10 @@
 201	Buff	False	True	False	Blessing of Shakan I	Increases Power by $H_W_GOOD17$COLOR_END.	icon_skills.attackup_tex
 202	Buff	False	True	False	Blessing of Shakan II	Increases Power by $H_W_GOOD25$COLOR_END.	icon_skills.attackup_tex
 301	Stun	True	False	False	Lightning Trap	Stunned. Cannot move.	icon_skills.shocktrap_tex
-302	Stun	True	False	False	Lightning Trap	Stunned. Cannot move.	icon_skills.shocktrap_tex
-303	Stun	True	False	False	Lightning Trap	Stunned. Cannot move.	icon_skills.shocktrap_tex
 501	Buff	True	True	False	Movement Speed Increases	Increases Movement Speed immensely.	icon_status.aura_of_wind_tex
 601	Buff	True	True	True	Titanic Wrath I	Increases Power by $H_W_GOOD20$COLOR_END. Increases Attack Speed by $H_W_GOOD6$COLOR_END.	icon_skills.rage_tex
 602	Buff	True	True	True	Titanic Wrath II	Increases Power by $H_W_GOOD25$COLOR_END. Increases Attack Speed by $H_W_GOOD6$COLOR_END.	icon_skills.rage_tex
-603	Buff	True	True	True	Titanic Wrath III	Increases Power by $H_W_GOOD40$COLOR_END. Increases Attack Speed by $H_W_GOOD6$COLOR_END.	icon_skills.rage_tex
+603	Buff	True	True	True	Titanic Wrath III	Increases Power by $H_W_GOOD48$COLOR_END. Increases Attack Speed by $H_W_GOOD9.6$COLOR_END.	icon_skills.rage_tex
 901	Stun	True	False	False	Shara's Lash	Stunned. Cannot move.	icon_skills.flashball_tex
 902	Buff	True	True	True	Noctenium Infusion	Activates a skill's noctenium effects.	icon_items.union_supplies5_tex
 903	Buff	True	True	False	Murderous Intent	Increases Power by $H_W_GOOD15$COLOR_END, Attack Speed by $H_W_GOOD8%$COLOR_END, Crit Factor by $H_W_GOOD4%$COLOR_END, and Movement Speed by $H_W_GOOD4%$COLOR_END.	icon_skills.battlefield_high_ranking_tex
@@ -932,7 +930,7 @@
 27130	Buff	True	True	False	Glyph of Balance	Increases Balance Factor by $H_W_GOOD400%$COLOR_END.	icon_crest.crestactivereactionresist_tex
 27140	Buff	True	True	False	Glyph of Restoration	Recovers $H_W_GOOD20%$COLOR_END of maximum HP.	icon_crest.crestpassivehpheal_tex
 27150	Buff	True	True	False	Glyph of Restoration	Warding Totem recovers $H_W_GOOD20%$COLOR_END more HP.	icon_crest.crestactivehprecoveryup_tex
-27160	WeakeningEffect	True	False	False	Glyph of Enfeeblement	Decreases Endurance by $H_W_BAD9%$COLOR_END.	icon_crest.crestactivedefencedown_tex
+27160	WeakeningEffect	True	False	False	Glyph of Enfeeblement	Decreases Endurance by $H_W_BAD10%$COLOR_END.	icon_crest.crestactivedefencedown_tex
 27161	Buff	True	True	False	Glyph of Major Restoration	Increases HP recovery by $H_W_GOOD25%$COLOR_END	icon_crest.crestactivehprecoveryup_tex
 27170	Buff	False	True	False	Hearty Resurrection	Abnormality Tooltip Not Supposed To Be Shown (isShow=False) If this Tooltip is Shown Register it as BTS	icon_crest.crestpassivehpwhileheal_tex
 28010	Buff	True	True	False	Glyph of Power	Increases skill damage by $H_W_GOOD25%$COLOR_END for Final Reprisal.	icon_crest.crestnextskillattackup_tex
@@ -1013,7 +1011,7 @@
 33150	Buff	True	True	False	Glyph of Powerlink	Increases damage of Leaping Slash by $H_W_GOOD25%$COLOR_END.	icon_crest.crestnextskillattackup_tex
 33170	Buff	True	True	False	Glyph of Restoration	Recovers $H_W_GOOD2%$COLOR_END of maximum HP every $H_W_GOOD1$COLOR_END second.	icon_crest.crestpassivehpheal_tex
 33200	Buff	True	True	False	Glyph of Powerlink	Increases skill damage of your next attack by 30%.	icon_crest.crestnextskillattackup_tex
-33210	Buff	True	True	False	Glyph of Powerlink	Increases skill damage of Runeburst by $H_W_GOOD25%$COLOR_END.	icon_crest.e_crestnextskillattackup_tex
+33210	Buff	True	True	False	Glyph of Powerlink	Increases skill damage of Runeburst by $H_W_GOOD25%$COLOR_END.	icon_crest.crestpassivehpheal_tex
 45301	WeakeningEffect	True	False	False	Great Shock	Massively shocked.	icon_status.minusdefence_tex
 45302	WeakeningEffect	True	False	False	Blown Over	Shocked and knocked over.	icon_status.minuscriticalresist_tex
 45303	DamageOverTime	False	False	False		The drill will disappear in 13 seconds.	
@@ -1208,9 +1206,9 @@
 100102	Buff	True	True	True	Assault Stance III	Increases Power by $H_W_GOOD15$COLOR_END, Crit Factor by $H_W_GOOD50$COLOR_END, and skill damage by $H_W_GOOD10%$COLOR_END when attacking monsters. However, decreases Endurance by $H_W_BAD10%$COLOR_END.	icon_skills.ironwilla_tex
 100103	Buff	True	True	True	Assault Stance IV	Increases Power by $H_W_GOOD18$COLOR_END, Crit Factor by $H_W_GOOD55$COLOR_END, and skill damage by $H_W_GOOD10%$COLOR_END when attacking monsters. However, decreases Endurance by $H_W_BAD10%$COLOR_END.	icon_skills.ironwilla_tex
 100150	Buff	False	True	True	Invisible abnormality (If shown BTS)	Increases damage by 10% when attacking monsters.	
-100200	Buff	True	True	True	Defensive Stance I	Increases Endurance by $H_W_GOOD15%$COLOR_END and Balance Factor by $H_W_GOOD20$COLOR_END. Increases the chance to crit by $H_W_GOOD15%$COLOR_END when attacking monsters. Attacks draw $H_W_GOOD65%$COLOR_END more aggro. Immune to push-back from monsters, save for certain special attacks.	icon_skills.ironwillb_tex
-100201	Buff	True	True	True	Defensive Stance II	Increases Endurance by $H_W_GOOD20%$COLOR_END and Balance Factor by $H_W_GOOD20$COLOR_END. Increases the chance to crit by $H_W_GOOD15%$COLOR_END when attacking monsters. Attacks draw $H_W_GOOD80%$COLOR_END more aggro. Immune to push-back from monsters, save for certain special attacks.	icon_skills.ironwillb_tex
-100202	Buff	True	True	True	Defensive Stance III	Increases Endurance by $H_W_GOOD25%$COLOR_END and Balance Factor by $H_W_GOOD20$COLOR_END. Increases the chance to crit by $H_W_GOOD15%$COLOR_END when attacking monsters. Attacks draw $H_W_GOOD100%$COLOR_END more aggro. Immune to push-back from monsters, save for certain special attacks.	icon_skills.ironwillb_tex
+100200	Buff	True	True	True	Defensive Stance I	Increases Endurance by $H_W_GOOD20%$COLOR_END and Balance Factor by $H_W_GOOD20$COLOR_END. Increases the chance to crit by $H_W_GOOD15%$COLOR_END when attacking monsters. Attacks draw $H_W_GOOD100%$COLOR_END more aggro. Immune to push-back from monsters, save for certain special attacks.	icon_skills.ironwillb_tex
+100201	Buff	True	True	True	Defensive Stance II	Increases Endurance by $H_W_GOOD25%$COLOR_END and Balance Factor by $H_W_GOOD30$COLOR_END. Increases the chance to crit by $H_W_GOOD15%$COLOR_END when attacking monsters. Attacks draw $H_W_GOOD120%$COLOR_END more aggro. Immune to push-back from monsters, save for certain special attacks.	icon_skills.ironwillb_tex
+100202	Buff	True	True	True	Defensive Stance III	Increases Endurance by $H_W_GOOD10029500%$COLOR_END and Balance Factor by $H_W_GOOD20$COLOR_END. Increases the chance to crit by $H_W_GOOD15%$COLOR_END when attacking monsters. Attacks draw $H_W_GOOD100%$COLOR_END more aggro. Immune to push-back from monsters, save for certain special attacks.	icon_skills.ironwillb_tex
 100203	Buff	True	True	True	Defensive Stance IV	Increases Endurance by $H_W_GOOD25%$COLOR_END and Balance Factor by $H_W_GOOD30$COLOR_END. Increases the chance to crit by $H_W_GOOD15%$COLOR_END when attacking monsters. Attacks draw $H_W_GOOD120%$COLOR_END more aggro. Immune to push-back from monsters, save for certain special attacks.	icon_skills.ironwillb_tex
 100293	Buff	False	True	False	Twinsword Parry_Basic Abnormality	Abnormality Tooltip Not Supposed To Be Shown (isShow=False) If this Tooltip is Shown Register it as BTS	icon_skills.twinswordsdefence_tex
 100294	Buff	True	True	False	Perseverance	Replenishes 5% MP.	icon_skills.twinswordsdefence_tex
@@ -1221,37 +1219,48 @@
 100300	Stun	True	False	False	Battle Cry	Stunned. Cannot move.	icon_skills.thunderingroar_tex
 100301	Stun	True	False	False	Delete_Battle Cry	Stunned. Cannot move.	icon_skills.thunderingroar_tex
 100400	Buff	True	True	False	Vortex Slash Active	You may now use Vortex Slash.	icon_skills.allroundslash_tex
-100500	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-116$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100501	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-175$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100502	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-292$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100503	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-438$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100504	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-612$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100505	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-845$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100506	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-1428$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100507	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-1892$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100508	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-6068$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100520	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-92$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100521	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-127$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100522	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-175$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100523	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-242$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100524	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-334$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100525	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-461$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100526	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-720$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100527	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-954$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100528	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-1420$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100500	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-40$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100501	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-60$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100502	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-90$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100503	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-136$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100504	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-214$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100505	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-341$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100506	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-496$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100507	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-690$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100508	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-1039$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100509	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-1582$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100510	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-1892$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100520	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-36$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100521	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-55$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100522	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-75$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100523	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-104$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100524	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-143$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100525	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-197$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100526	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-273$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100527	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-376$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100528	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-547$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100529	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-798$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100530	DamageOverTime	True	False	False	Poison Blade	Reduces HP by $H_W_BAD-954$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
 100600	Buff	True	True	True	Mangle	Your fourth consecutive use of the Combo Attack skill cuts your foe's Attack Speed and movement by $H_W_GOOD15%$COLOR_END. You spend $H_W_BAD-10$COLOR_END MP every $H_W_BAD2$COLOR_END second1 while this effect is active.	icon_skills.aimingankle_tex
 100630	WeakeningEffect	True	False	False	Mangle	Speed decreases by $H_W_BAD0,85$COLOR_END.	icon_skills.aimingankle_tex
 100700	Buff	False	True	False	Staggering Counter Active	You may now use Staggering Counter.	icon_skills.reversalturningattack_tex
 100800	Buff	True	True	False	Deadly Gamble I	Increases the chance to crit by $H_W_GOOD35%$COLOR_END for $time. 	icon_skills.deadlywill_tex
-100801	Buff	True	True	False	Deadly Gamble II	Increases the chance to crit by $H_W_GOOD50%$COLOR_END. Decreases Melee attack skill cooldown by $H_W_GOOD50%$COLOR_END.$BRThe following skills are enhanced while Deadly Gamble II is active:$BR- [Rain of Blows XI]: Increases damage by 10% and doubles Edge generation.$BR- [Blade Draw VII]: Increases damage by 10% and doubles the Edge generation.$BR- [Scythe II]: Increases damage by 10% and range by 20%.	icon_skills.deadlywill_tex
+100801	Buff	True	True	False	Deadly Gamble II	Increases the chance to crit by $H_W_GOOD50%$COLOR_END for $time. Decreases Melee attack skill cooldown by 50%.$BRThe following skills are enhanced while Deadly Gamble II is active:$BR- [Rain of Blows IX]: Increases damage by 10% and doubles Edge generation.$BR- [Blade Draw IX]: Increases damage by 10% and doubles the Edge generation.$BR- [Scythe IX]: Increases damage by 10% and range by 20%.	icon_skills.deadlywill_tex
 100802	Buff	False	True	False	Deadly Gamble II_reduced cooldown	Invisible abnormality.	
 100803	Buff	False	True	False	Deadly Gamble II_reduced cooldown	Invisible abnormality.	
 100900	Stun	True	False	False	Cascade of Stuns	Stunned. Cannot move.	icon_skills.hardslash_tex
 100901	Stun	True	False	False	Cascade of Stuns	Stunned. Cannot move.	icon_skills.hardslash_tex
+100902	Stun	True	False	False	Cascade of Stuns	Stunned. Cannot move.	icon_skills.hardslash_tex
+100903	Stun	True	False	False	Cascade of Stuns	Stunned. Cannot move.	icon_skills.hardslash_tex
+100904	Stun	True	False	False	Cascade of Stuns	Stunned. Cannot move.	icon_skills.hardslash_tex
 101000	Stun	True	False	False	Backstab	Stunned. Cannot move.	icon_skills.backattack_tex
 101001	Stun	True	False	False	Backstab	Stunned. Cannot move.	icon_skills.backattack_tex
 101100	Stun	True	False	False	Staggering Counter	Stunned. Cannot move.	icon_skills.reversalturningattack_tex
 101101	Stun	True	False	False	Staggering Counter	Stunned. Cannot move.	icon_skills.reversalturningattack_tex
+101102	Stun	True	False	False	Staggering Counter	Stunned. Cannot move.	icon_skills.reversalturningattack_tex
+101103	Stun	True	False	False	Staggering Counter	Stunned. Cannot move.	icon_skills.reversalturningattack_tex
+101104	Stun	True	False	False	Staggering Counter	Stunned. Cannot move.	icon_skills.reversalturningattack_tex
+101105	Stun	True	False	False	Staggering Counter	Stunned. Cannot move.	icon_skills.reversalturningattack_tex
 101200	WeakeningEffect	True	False	False	Combative Strike	Reduces Endurance by $H_W_BAD8%$COLOR_END.	icon_skills.aggravatingstrike_tex
 101220	WeakeningEffect	True	False	False	Combative Strike	Reduces Endurance by $H_W_BAD8%$COLOR_END and the effect of healing skills on you by $H_W_BAD30%$COLOR_END.	icon_skills.aggravatingstrike_tex
 101300	Buff	True	True	False	Traverse Cut	Increases Attack Speed by 0.9% with every stack. The effect stacks up to 13 times.	icon_skills.dualrapidpiercing_tex
@@ -1319,9 +1328,9 @@
 300300	Buff	True	True	False	Overpower I	Your next attack does $H_W_GOOD30%$COLOR_END more damage.	icon_skills.gatheringstrength_tex
 300301	Buff	True	True	False	Overpower II	Your next attack does $H_W_GOOD33%$COLOR_END more damage.	icon_skills.gatheringstrength_tex
 300400	Stun	True	False	False	Startling Kick	Stunned. Cannot move.	icon_skills.retreatingkick_tex
-300500	Buff	True	True	False	Headlong Rush I	Your next attack is $H_W_GOOD30%$COLOR_END faster.	icon_skills.advancingleap_tex
-300501	Buff	True	True	False	Headlong Rush II	Your next attack is $H_W_GOOD40%$COLOR_END faster.	icon_skills.advancingleap_tex
-300502	Buff	True	True	False	Headlong Rush III	Your next attack is $H_W_GOOD50%$COLOR_END faster.	icon_skills.advancingleap_tex
+300500	Buff	True	True	False	Headlong Rush I	Your next attack is $H_W_GOOD40%$COLOR_END faster.	icon_skills.advancingleap_tex
+300501	Buff	True	True	False	Headlong Rush II	Your next attack is $H_W_GOOD50%$COLOR_END faster.	icon_skills.advancingleap_tex
+300502	Buff	True	True	False	Headlong Rush III	Your next attack is $H_W_GOOD60%$COLOR_END faster.	icon_skills.advancingleap_tex
 300503	Buff	True	True	False	Headlong Rush IV	Your next attack is $H_W_GOOD60%$COLOR_END faster.	icon_skills.advancingleap_tex
 300600	Buff	True	True	False	Dash I	Increases Movement Speed by $H_W_GOOD50%$COLOR_END.	icon_skills.dash_tex
 300601	Buff	True	True	False	Dash II	Increases Movement Speed by $H_W_GOOD50%$COLOR_END.	icon_skills.dash_tex
@@ -1700,36 +1709,40 @@
 500600	Buff	True	True	False	Mana Barrier I	Absorbs up to $H_W_GOOD7063$COLOR_END damage. Costs 1 MP per 14 points of damage. Ends when maximum damage is reached or you run out of MP.	icon_skills.manashield_tex
 500601	Buff	True	True	False	Mana Barrier II	Absorbs up to $H_W_GOOD13529$COLOR_END damage. Costs 1 MP per 33 points of damage. Ends when maximum damage is reached or you run out of MP.	icon_skills.manashield_tex
 500602	Buff	True	True	False	Mana Barrier III	Absorbs up to $H_W_GOOD17346$COLOR_END damage. Costs 1 MP per 50 points of damage. Ends when maximum damage is reached or you run out of MP.	icon_skills.manashield_tex
-500700	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-26$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500701	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-40$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500702	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-58$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500703	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-85$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500704	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-121$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500705	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-174$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500706	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-241$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500707	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-341$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500708	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-516$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500720	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-27$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500721	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-37$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500722	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-51$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500723	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-71$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500724	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-97$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500725	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-134$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500726	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-186$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500727	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-258$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500728	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-382$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500700	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-40$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500701	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-58$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500702	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-85$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500703	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-121$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500704	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-174$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500705	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-241$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500706	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-341$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500707	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-516$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500720	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-37$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500721	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-51$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500722	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-71$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500723	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-97$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500724	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-134$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500725	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-186$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500726	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-258$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500727	DamageOverTime	True	False	False	Painblast	Reduces HP by $H_W_BAD-382$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
 500800	Stun	True	False	False	Mindblast	Stunned. Cannot move.	icon_skills.sleepwind_tex
 500801	Stun	True	False	False	Mindblast	Stunned. Cannot move.	icon_skills.sleepwind_tex
 500802	Stun	True	False	False	Mindblast	Stunned. Cannot move.	icon_skills.sleepwind_tex
 500900	Stun	True	False	False	Nerve Exhaustion	Unable to use skills. This effect ends when attacked or knocked down.	icon_skills.neurasthenia_tex
-501000	DamageOverTime	True	False	False	Burning Breath	Reduces HP by $H_W_BAD-1175$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
-501001	DamageOverTime	True	False	False	Burning Breath	Reduces HP by $H_W_BAD-1631$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
-501002	DamageOverTime	True	False	False	Burning Breath	Reduces HP by $H_W_BAD-2305$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
-501003	DamageOverTime	True	False	False	Burning Breath	Reduces HP by $H_W_BAD-3120$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
-501020	DamageOverTime	True	False	False	Burning Breath	Reduces HP by $H_W_BAD-890$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
-501021	DamageOverTime	True	False	False	Burning Breath	Reduces HP by $H_W_BAD-1228$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
-501022	DamageOverTime	True	False	False	Burning Breath	Reduces HP by $H_W_BAD-1704$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
-501023	DamageOverTime	True	False	False	Burning Breath	Reduces HP by $H_W_BAD-2259$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
+501000	DamageOverTime	True	False	False	Burning Breath	Reduces HP by $H_W_BAD-443$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
+501001	DamageOverTime	True	False	False	Burning Breath	Reduces HP by $H_W_BAD-613$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
+501002	DamageOverTime	True	False	False	Burning Breath	Reduces HP by $H_W_BAD-849$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
+501003	DamageOverTime	True	False	False	Burning Breath	Reduces HP by $H_W_BAD-1175$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
+501004	DamageOverTime	True	False	False	Burning Breath	Reduces HP by $H_W_BAD-1631$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
+501005	DamageOverTime	True	False	False	Burning Breath	Reduces HP by $H_W_BAD-2305$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
+501006	DamageOverTime	True	False	False	Burning Breath	Reduces HP by $H_W_BAD-3120$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
+501020	DamageOverTime	True	False	False	Burning Breath	Reduces HP by $H_W_BAD-338$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
+501021	DamageOverTime	True	False	False	Burning Breath	Reduces HP by $H_W_BAD-467$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
+501022	DamageOverTime	True	False	False	Burning Breath	Reduces HP by $H_W_BAD-645$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
+501023	DamageOverTime	True	False	False	Burning Breath	Reduces HP by $H_W_BAD-890$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
+501024	DamageOverTime	True	False	False	Burning Breath	Reduces HP by $H_W_BAD-1228$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
+501025	DamageOverTime	True	False	False	Burning Breath	Reduces HP by $H_W_BAD-1704$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
+501026	DamageOverTime	True	False	False	Burning Breath	Reduces HP by $H_W_BAD-2259$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
 501100	DamageOverTime	True	False	False	Mana Volley I	Reduces MP by $H_W_BAD-172$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.mpsink_tex
 501101	DamageOverTime	True	False	False	Mana Volley II	Reduces MP by $H_W_BAD-206$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.mpsink_tex
 501150	DamageOverTime	False	False	False	Mana Volley I	[Test]	icon_skills.mpsink_tex
@@ -1786,23 +1799,23 @@
 600701	WeakeningEffect	True	False	False	Web Arrow	Decreases Movement Speed by $H_W_BAD0,7$COLOR_END.	icon_skills.spiderarrow_tex
 600702	WeakeningEffect	True	False	False	Web Arrow	Decreases Movement Speed by $H_W_BAD0,67$COLOR_END.	icon_skills.spiderarrow_tex
 600800	Stun	True	False	False	Close Quarters	Stunned. Cannot move.	icon_skills.turningkick_tex
-600900	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-270$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
-600901	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-389$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
-600902	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-589$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
-600903	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-849$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
-600904	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-1179$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
-600905	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-1626$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
-600906	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-2360$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
+600900	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-215$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
+600901	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-310$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
+600902	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-456$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
+600903	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-676$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
+600904	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-959$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
+600905	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-1328$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
+600906	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-1871$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
 600907	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-3128$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
 600908	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-3780$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
-600920	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-232$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
-600921	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-160$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
-600922	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-221$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
-600923	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-306$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
-600924	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-422$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
-600925	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-583$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
-600926	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-813$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
-600927	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-1078$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
+600920	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-95$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
+600921	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-131$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
+600922	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-249$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
+600923	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-345$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
+600924	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-476$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
+600925	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-660$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
+600926	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-1078$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
+600927	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-1427$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
 600928	DamageOverTime	True	False	False	Poison Arrow	Reduces HP by $H_W_BAD-1427$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect can be stacked up to 3 times.	icon_skills.venomarrow_tex
 601000	WeakeningEffect	True	False	False	Restraining Arrow	Decreases Movement Speed by $value2 and Attack Speed by $value.	icon_skills.contaningshot_tex
 601001	WeakeningEffect	True	False	False	Restraining Arrow	Decreases Movement Speed by $value2 and Attack Speed by $value.	icon_skills.contaningshot_tex
@@ -1849,6 +1862,7 @@
 700406	Buff	False	True	False	Titanic Favor VII	Recovers HP every $H_W_GOOD1$COLOR_END second.	icon_skills.healshot_tex
 700407	Buff	False	True	False	Titanic Favor VIII	Recovers HP every $H_W_GOOD1$COLOR_END second.	icon_skills.healshot_tex
 700408	Buff	False	True	False	Titanic Favor IX	Recovers HP every $H_W_GOOD1$COLOR_END second.	icon_skills.healshot_tex
+700409	Buff	False	True	False	Titanic Favor X	Recovers HP every $H_W_GOOD1$COLOR_END second.	icon_skills.healshot_tex
 700500	WeakeningEffect	True	False	False	Ancient Binding	Decreases Movement Speed by $H_W_BAD0,5$COLOR_END.	icon_skills.slowball_tex
 700501	WeakeningEffect	True	False	False	Ancient Binding	Decreases Movement Speed by $H_W_BAD0,4$COLOR_END.	icon_skills.slowball_tex
 700600	Buff	True	True	True	Aura of the Merciless I	Grants Titanic Wrath I to you and your allies within 30m. Costs $H_W_BAD30$COLOR_END MP every $H_W_BAD2$COLOR_END seconds to maintain.	icon_skills.criticalupaura_tex
@@ -1861,26 +1875,8 @@
 700701	Buff	True	True	True	Aura of the Swift II - Release	Grants Aura of the Swift to party members within 30m. Costs $H_W_BAD30$COLOR_END MP every $H_W_BAD2$COLOR_END seconds to maintain.	icon_skills.speedupaura_tex
 700730	Buff	True	True	True	Aura of the Swift I	Increases Movement Speed by $H_W_GOOD10%$COLOR_END.	icon_status.plusmove_tex
 700731	Buff	True	True	True	Aura of the Swift II	Increases Movement Speed by $H_W_GOOD30%$COLOR_END.	icon_status.plusmove_tex
-700800	DamageOverTime	True	False	False	Volley of Curses	Reduces HP by $H_W_BAD-40$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700801	DamageOverTime	True	False	False	Volley of Curses	Reduces HP by $H_W_BAD-62$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700802	DamageOverTime	True	False	False	Volley of Curses	Reduces HP by $H_W_BAD-96$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700803	DamageOverTime	True	False	False	Volley of Curses	Reduces HP by $H_W_BAD-138$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700804	DamageOverTime	True	False	False	Volley of Curses	Reduces HP by $H_W_BAD-205$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700805	DamageOverTime	True	False	False	Volley of Curses	Reduces HP by $H_W_BAD-289$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700806	DamageOverTime	True	False	False	Volley of Curses	Reduces HP by $H_W_BAD-417$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700807	DamageOverTime	True	False	False	Volley of Curses	Reduces HP by $H_W_BAD-578$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700808	DamageOverTime	True	False	False	Volley of Curses	Reduces HP by $H_W_BAD-817$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700809	DamageOverTime	True	False	False	Volley of Curses IX	Reduces HP by $H_W_BAD-1238$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700820	DamageOverTime	True	False	False	Volley of Curses	Reduces HP by $H_W_BAD-41$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700821	DamageOverTime	True	False	False	Volley of Curses	Reduces HP by $H_W_BAD-63$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700822	DamageOverTime	True	False	False	Volley of Curses	Reduces HP by $H_W_BAD-86$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700823	DamageOverTime	True	False	False	Volley of Curses	Reduces HP by $H_W_BAD-133$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700824	DamageOverTime	True	False	False	Volley of Curses	Reduces HP by $H_W_BAD-191$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700825	DamageOverTime	True	False	False	Volley of Curses	Reduces HP by $H_W_BAD-283$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700826	DamageOverTime	True	False	False	Volley of Curses	Reduces HP by $H_W_BAD-399$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700827	DamageOverTime	True	False	False	Volley of Curses	Reduces HP by $H_W_BAD-576$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700828	DamageOverTime	True	False	False	Volley of Curses	Reduces HP by $H_W_BAD-802$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700829	DamageOverTime	True	False	False	Volley of Curses IX	Reduces HP by $H_W_BAD-1212$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
+700800	DamageOverTime	True	False	False	Volley of Curses	Reduces HP by $H_W_BAD-1238$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
+700820	DamageOverTime	True	False	False	Volley of Curses	Reduces HP by $H_W_BAD-1212$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
 700900	Buff	True	True	False	Mana Infusion	Replenishes $H_W_GOOD100$COLOR_END MP every $H_W_GOOD1$COLOR_END second, or until you take damage or use another combat skill or item.	icon_skills.mpcharge_tex
 701000	Buff	True	True	False	Grace of the Spirit I	Recovers $H_W_GOOD70$COLOR_END HP every $H_W_GOOD2$COLOR_END second1.	icon_skills.summonspiritofheal_tex
 701001	Buff	True	True	False	Grace of the Spirit II	Recovers $H_W_GOOD88$COLOR_END HP every $H_W_GOOD2$COLOR_END second1.	icon_skills.summonspiritofheal_tex
@@ -1966,10 +1962,42 @@
 701605	Buff	True	True	False	Warding Totem I	Summoned energy recovers HP by $H_W_GOOD529$COLOR_END every $H_W_GOOD2$COLOR_END second1.	icon_skills.energiesofprotection_tex
 701606	Buff	True	True	False	Warding Totem II	Summoned energy absorbs up to $H_W_GOOD7149$COLOR_END. Effect ends when totem absorbs its maximum damage, redardless of duration.	icon_skills.energiesofprotection_tex
 701607	Buff	True	True	False	Warding Totem II	Summoned energy restores HP by $H_W_GOOD700$COLOR_END every $H_W_GOOD2$COLOR_END second1.	icon_skills.energiesofprotection_tex
-701700	WeakeningEffect	True	False	False	Infection	You are diseased for $time. Decreases Endurance by $H_W_BAD5%$COLOR_END. Cannot be cleared with purifying skill. Infects creatures within 7m of you.	icon_skills.plague_tex
-701701	WeakeningEffect	True	False	False	Infection	You are diseased for $time. Decreases Endurance by $H_W_BAD5%$COLOR_END. Cannot be cleared with purifying skill. Infects creatures within 7m of you.	icon_skills.plague_tex
-701800	DamageOverTime	True	False	False	Affliction	Diseased. Deals $H_W_BAD-15086$COLOR_END damage every second.	icon_skills.plague_tex
-701801	DamageOverTime	True	False	False	Affliction	Diseased. Reduces HP recovery by $H_W_BAD10%$COLOR_END. Deals $H_W_BAD-1953$COLOR_END damage every second.	icon_skills.plague_tex
+701700	WeakeningEffect	True	False	False	Infection I	You are diseased for $time. Decreases Endurance by $H_W_BAD5%$COLOR_END. Cannot be cleared with purifying skill. Infects allies within 7m of you.	icon_skills.plague_tex
+701701	WeakeningEffect	True	False	False	Infection II	You are diseased for $time. Decreases Endurance by $H_W_BAD5%$COLOR_END. Cannot be cleared with purifying skill. Infects allies within 7m of you.	icon_skills.plague_tex
+701702	WeakeningEffect	True	False	False	Infection III	You are diseased for $time. Decreases Endurance by $H_W_BAD5%$COLOR_END. Cannot be cleared with purifying skill. Infects allies within 7m of you. 	icon_skills.plague_tex
+701703	WeakeningEffect	True	False	False	Infection IV	You are diseased for $time. Decreases Endurance by $H_W_BAD5%$COLOR_END. Cannot be cleared with purifying skill. Infects allies within 7m of you. 	icon_skills.plague_tex
+701704	WeakeningEffect	True	False	False	Infection V	You are diseased for $time. Decreases Endurance by $H_W_BAD5%$COLOR_END. Cannot be cleared with purifying skill. Infects allies within 7m of you. 	icon_skills.plague_tex
+701705	WeakeningEffect	True	False	False	Infection VI	You are diseased for $time. Decreases Endurance by $H_W_BAD5%$COLOR_END. Cannot be cleared with purifying skill. Infects allies within 7m of you. 	icon_skills.plague_tex
+701706	WeakeningEffect	True	False	False	Infection VII	You are diseased for $time. Decreases Endurance by $H_W_BAD5%$COLOR_END. Cannot be cleared with purifying skill. Infects allies within 7m of you. 	icon_skills.plague_tex
+701707	WeakeningEffect	True	False	False	Infection VIII	You are diseased for $time. Decreases Endurance by $H_W_BAD5%$COLOR_END. Cannot be cleared with purifying skill. Infects allies within 7m of you. 	icon_skills.plague_tex
+701708	WeakeningEffect	True	False	False	Infection IX	You are diseased for $time. Decreases Endurance by $H_W_BAD5%$COLOR_END. Cannot be cleared with purifying skill. Infects allies within 7m of you. 	icon_skills.plague_tex
+701720	WeakeningEffect	True	False	False	Infection I	You are diseased for $time. Decreases Endurance by $H_W_BAD5%$COLOR_END. Cannot be cleared with purifying skill. Infects allies within 7m of you. 	icon_skills.plague_tex
+701721	WeakeningEffect	True	False	False	Infection II	You are diseased for $time. Decreases Endurance by $H_W_BAD5%$COLOR_END. Cannot be cleared with purifying skill. Infects allies within 7m of you. 	icon_skills.plague_tex
+701722	WeakeningEffect	True	False	False	Infection III	You are diseased for $time. Decreases Endurance by $H_W_BAD5%$COLOR_END. Cannot be cleared with purifying skill. Infects allies within 7m of you. 	icon_skills.plague_tex
+701723	WeakeningEffect	True	False	False	Infection IV	You are diseased for $time. Decreases Endurance by $H_W_BAD5%$COLOR_END. Cannot be cleared with purifying skill. Infects allies within 7m of you. 	icon_skills.plague_tex
+701724	WeakeningEffect	True	False	False	Infection V	You are diseased for $time. Decreases Endurance by $H_W_BAD5%$COLOR_END. Cannot be cleared with purifying skill. Infects allies within 7m of you. 	icon_skills.plague_tex
+701725	WeakeningEffect	True	False	False	Infection VI	You are diseased for $time. Decreases Endurance by $H_W_BAD5%$COLOR_END. Cannot be cleared with purifying skill. Infects allies within 7m of you. 	icon_skills.plague_tex
+701726	WeakeningEffect	True	False	False	Infection VII	You are diseased for $time. Decreases Endurance by $H_W_BAD5%$COLOR_END. Cannot be cleared with purifying skill. Infects allies within 7m of you. 	icon_skills.plague_tex
+701727	WeakeningEffect	True	False	False	Infection VIII	You are diseased for $time. Decreases Endurance by $H_W_BAD5%$COLOR_END. Cannot be cleared with purifying skill. Infects allies within 7m of you. 	icon_skills.plague_tex
+701728	WeakeningEffect	True	False	False	Infection IX	You are diseased for $time. Decreases Endurance by $H_W_BAD5%$COLOR_END. Cannot be cleared with purifying skill. Infects allies within 7m of you. 	icon_skills.plague_tex
+701800	DamageOverTime	True	False	False	Affliction I	Diseased. You take $H_W_BAD-1141$COLOR_END damage every second.	icon_skills.plague_tex
+701801	DamageOverTime	True	False	False	Affliction II	Diseased. You take $H_W_BAD-1585$COLOR_END damage every second.	icon_skills.plague_tex
+701802	DamageOverTime	True	False	False	Affliction III	Diseased. You take $H_W_BAD-2202$COLOR_END damage every second.	icon_skills.plague_tex
+701803	DamageOverTime	True	False	False	Affliction IV	Diseased. You take $H_W_BAD-3059$COLOR_END damage every second.	icon_skills.plague_tex
+701804	DamageOverTime	True	False	False	Affliction V	Diseased. You take $H_W_BAD-4248$COLOR_END damage every second.	icon_skills.plague_tex
+701805	DamageOverTime	True	False	False	Affliction VI	Diseased. You take $H_W_BAD-5900$COLOR_END damage every second.	icon_skills.plague_tex
+701806	DamageOverTime	True	False	False	Affliction VII	Diseased. You take $H_W_BAD-8194$COLOR_END damage every second.	icon_skills.plague_tex
+701807	DamageOverTime	True	False	False	Affliction VIII	Diseased. You take $H_W_BAD-11380$COLOR_END damage every second.	icon_skills.plague_tex
+701808	DamageOverTime	True	False	False	Affliction IX	Diseased. You take $H_W_BAD-15086$COLOR_END damage every second.	icon_skills.plague_tex
+701820	DamageOverTime	True	False	False	Affliction I	Diseased. Reduces HP recovery by $H_W_BAD10%$COLOR_END. You take $H_W_BAD-141$COLOR_END damage every second. 	icon_skills.plague_tex
+701821	DamageOverTime	True	False	False	Affliction II	Diseased. Reduces HP recovery by $H_W_BAD10%$COLOR_END. You take $H_W_BAD-196$COLOR_END damage every second. 	icon_skills.plague_tex
+701822	DamageOverTime	True	False	False	Affliction III	Diseased. Reduces HP recovery by $H_W_BAD10%$COLOR_END. You take $H_W_BAD-272$COLOR_END damage every second. 	icon_skills.plague_tex
+701823	DamageOverTime	True	False	False	Affliction IV	Diseased. Reduces HP recovery by $H_W_BAD10%$COLOR_END. You take $H_W_BAD-378$COLOR_END damage every second. 	icon_skills.plague_tex
+701824	DamageOverTime	True	False	False	Affliction V	Diseased. Reduces HP recovery by $H_W_BAD10%$COLOR_END. You take $H_W_BAD-525$COLOR_END damage every second. 	icon_skills.plague_tex
+701825	DamageOverTime	True	False	False	Affliction VI	Diseased. Reduces HP recovery by $H_W_BAD10%$COLOR_END. You take $H_W_BAD-729$COLOR_END damage every second. 	icon_skills.plague_tex
+701826	DamageOverTime	True	False	False	Affliction VII	Diseased. Reduces HP recovery by $H_W_BAD10%$COLOR_END. You take $H_W_BAD-1012$COLOR_END damage every second. 	icon_skills.plague_tex
+701827	DamageOverTime	True	False	False	Affliction VIII	Diseased. Reduces HP recovery by $H_W_BAD10%$COLOR_END. You take $H_W_BAD-1406$COLOR_END damage every second. 	icon_skills.plague_tex
+701828	DamageOverTime	True	False	False	Affliction IX	Diseased. Reduces HP recovery by $H_W_BAD10%$COLOR_END. You take $H_W_BAD-1953$COLOR_END damage every second. 	icon_skills.plague_tex
 701900	Buff	True	True	False	Teleport Invincible	BTS	icon_skills.voidtrap_tex
 757001	Buff	False	False	False	Not Supposed To Be Shown	Not Supposed To Be Shown	icon_status.firedamage_tex
 757002	Buff	True	False	True	Firestone	The stone giant is on fire. Targets within 21m gain "Heat."	icon_status.firedamage_tex
@@ -2340,15 +2368,6 @@
 801301	Buff	True	True	False	Arise II	Increases balance by $H_W_GOOD100%$COLOR_END.	icon_skills.recovery_tex
 801400	Buff	True	True	False	Restorative Burst I	Recovers HP every $H_W_GOOD1$COLOR_END second.	icon_skills.sanctuaryofregeneration_tex
 801401	Buff	True	True	False	Restorative Burst II	Recovers HP every $H_W_GOOD1$COLOR_END second.	icon_skills.sanctuaryofregeneration_tex
-801402	Buff	True	True	False	Restorative Burst III	Recovers HP every $H_W_GOOD1$COLOR_END second.	icon_skills.sanctuaryofregeneration_tex
-801403	Buff	True	True	False	Restorative Burst IV	Recovers HP every $H_W_GOOD1$COLOR_END second.	icon_skills.sanctuaryofregeneration_tex
-801404	Buff	True	True	False	Restorative Burst V	Recovers HP every $H_W_GOOD1$COLOR_END second.	icon_skills.sanctuaryofregeneration_tex
-801405	Buff	True	True	False	Restorative Burst VI	Recovers HP every $H_W_GOOD1$COLOR_END second.	icon_skills.sanctuaryofregeneration_tex
-801406	Buff	True	True	False	Restorative Burst VII	Recovers HP every $H_W_GOOD1$COLOR_END second.	icon_skills.sanctuaryofregeneration_tex
-801407	Buff	True	True	False	Restorative Burst VIII	Recovers HP every $H_W_GOOD1$COLOR_END second.	icon_skills.sanctuaryofregeneration_tex
-801408	Buff	True	True	False	Restorative Burst IX	Recovers HP every $H_W_GOOD1$COLOR_END second.	icon_skills.sanctuaryofregeneration_tex
-801409	Buff	True	True	False	Restorative Burst X	Recovers HP every $H_W_GOOD1$COLOR_END second.	icon_skills.sanctuaryofregeneration_tex
-801410	Buff	True	True	False	Restorative Burst XI	Recovers HP every $H_W_GOOD1$COLOR_END second.	icon_skills.sanctuaryofregeneration_tex
 801500	Buff	True	True	False	Energy Stars I	Increases Power by $H_W_GOOD20$COLOR_END; Attack Speed by $H_W_GOOD8$COLOR_END.	icon_skills.divinelightning_tex
 801501	Buff	True	True	False	Energy Stars II	Increases Power by $H_W_GOOD28$COLOR_END; Attack Speed by $H_W_GOOD8$COLOR_END.	icon_skills.divinelightning_tex
 801502	Buff	True	True	False	Energy Stars III	Increases Power by $H_W_GOOD36$COLOR_END; Attack Speed by $H_W_GOOD8$COLOR_END.	icon_skills.divinelightning_tex
@@ -3090,9 +3109,9 @@
 981097	Buff	True	False	False			
 981098	Buff	False	True	False			
 981099	Stun	True	True	False	Stunned	Stunned. Cannot move.	icon_status.confuseup_tex
-981100	Buff	False	True	False			
-981101	Buff	False	True	False			
-981102	Buff	False	True	False			
+981100	Buff	False	True	True			
+981101	Buff	False	True	True			
+981102	Buff	False	True	True			
 981103	Buff	True	True	False			
 981104	Buff	False	True	False			
 981105	Buff	False	True	False			
@@ -3727,6 +3746,7 @@
 10152093	Buff	False	True	False			
 10152094	Buff	False	True	False			
 10152095	Buff	False	True	False			
+10152096	Buff	False	True	False	Invisible Abnormality	This abnormality is not supposed to be shown	
 10152100	Buff	True	True	False	One with the Gun	Willpower can be stored for up to 60 seconds, after which it decays rapidly. Damaging an enemy restarts this countdown.	icon_skills.energycharging_tex
 10152110	Buff	True	True	False	Emergency Barrier	An emergency barrier absorbs up to $H_W_GOOD27858$COLOR_END damage.	icon_skills.emergencyshield_tex
 10152111	Buff	True	True	False	Emergency Barrier	An emergency barrier absorbs up to $H_W_GOOD34900$COLOR_END damage.	icon_skills.emergencyshield_tex
@@ -3808,7 +3828,7 @@
 10154021	Stun	True	False	False	Chakra Thrust	Stunned. Cannot move.	icon_skills.c12_evadestingshot
 10154030	Buff	True	True	True	Focus	Skill damage increased.	icon_skills.c12_atkupbuff
 10154031	Buff	False	True	False		BTS	
-10154032	Buff	True	True	False	Intense Focus	Skill damage increased.	icon_skills.c12_atkupbuff
+10154032	Buff	True	True	False	Intense Focus	Skill damage increases over time.	icon_skills.c12_atkupbuff
 10154033	Buff	False	True	False		BTS	
 10154034	Buff	False	True	False		BTS	
 10154035	Buff	False	True	False		BTS	
@@ -3816,6 +3836,7 @@
 10154050	Buff	True	True	False	Smoke Cloud	Can evade enemy attacks.	icon_skills.c12_smokebombevade
 10154051	Buff	False	True	False		BTS	
 10154052	Buff	False	True	False			
+10154054	Buff	False	True	False	Invisible Abnormality	This abnormality is not supposed to be shown	
 10154060	Buff	False	True	False			
 10154061	Buff	False	True	False			
 10154062	Buff	False	True	False			
@@ -4114,6 +4135,112 @@
 45000120	Buff	True	True	False	Acrophobia	Scared of heights, temporarily unable to use skills.	icon_status.fearstatus_tex
 45000121	Buff	True	True	False	Strengthen Skin	Koleogg's Skin becomes strong. Immune to all damage.	icon_status.plusedefence_tex
 45000122	Buff	True	True	False	Velik's Protection	5-second shield activated due to Velik's Protection.	icon_status.bless_of_velic_tex
+46600001	Stun	False	False	False	2nd boss capture skill_2 sec stun		
+46600002	Buff	True	True	True	Demon's Dominance	Demoros is not affected. Demoros's defense increases 1,000 times.	icon_status.plusedefence_tex
+46600003	Buff	False	True	False			
+46600004	Stun	False	False	False			
+46600005	DamageOverTime	False	False	False			
+46600006	WeakeningEffect	False	True	True			
+46600007	Buff	False	True	True		Rolls after large die	
+46600008	Buff	False	True	True		PC die despawn condition	
+46600009	Buff	False	True	True			
+46600010	WeakeningEffect	False	True	False			
+46600011	Buff	False	False	True		For blue die effect	
+46600012	Buff	False	False	True		For red die effect	
+46600013	Buff	False	True	True		For white die effect	
+46600014	Buff	False	True	False			
+46600015	Buff	False	True	False			
+46600016	Buff	False	True	False		Die Cooldown 90 sec	
+46600017	Buff	False	True	True			
+46600018	DamageOverTime	True	False	False	Demon's Curse	Reduces HP by $H_W_BAD10%$COLOR_END of maximum every $H_W_BAD2$COLOR_END second1 seconds.	icon_status.injuredbtdarkness_tex
+46600019	WeakeningEffect	False	True	False		2nd boss - Groggy when entering FeverTime	
+46600020	WeakeningEffect	False	True	False		Abnormality_Cancel action	
+46600021	Buff	False	True	False		To check Win, Lose	
+46600022	Buff	False	True	True			
+46600023	Buff	False	True	True			
+46600024	Buff	False	True	True			
+46600025	Buff	False	True	True			
+46600026	Buff	False	True	True			
+46600027	Buff	False	True	True		After Phase 2 of 2nd boss_Can roll 3 dice that are carried by an invisible NPC and spawned	
+46600028	Buff	False	True	False		Safe Zone for PC	
+46600029	Buff	False	True	False	Abnormality_Achievement	Abnormality_Achievement	
+46600030	Buff	False	True	False	Abnormality_Achievement	Abnormality_Achievement	
+46600031	Buff	False	True	True			
+46600032	Buff	False	True	True			
+46600033	Buff	False	True	True			
+46600034	Buff	False	True	True			
+46600035	Buff	False	True	True			
+46600036	Buff	False	True	True			
+46600037	Buff	False	True	True			
+46600038	Buff	False	True	False			
+46600039	Buff	False	True	False			
+46600040	Stun	True	False	False	Stunned	Cannot move for 5 seconds.	icon_status.positionswap_tex
+46600041	Buff	False	True	False		1st boss nuking effect (red)	
+46600042	DamageOverTime	False	True	False		1st boss nuking effect (blue)	
+46600043	DamageOverTime	False	True	False		1st boss nuking effect (green)	
+46600053	Buff	False	True	True	Shiny Die	Summons a shiny die.	
+46600054	WeakeningEffect	False	True	True			
+46600055	Buff	False	True	True			
+46600056	Buff	False	True	True			
+46600057	Buff	False	True	True			
+46600059	Buff	False	True	True		Send roulette counter-rotation information to invisible NPC	
+46600060	Buff	False	True	True		Send roulette regular rotation information to invisible NPC	
+46600061	Buff	False	True	True		Send roulette result (red) to invisible NPC	
+46600062	Buff	False	True	True		Send roulette result (white) to invisible NPC	
+46600063	Buff	False	True	True		Send roulette result (blue) to invisible NPC	
+46600064	Buff	False	True	True		Abnormality_Rolls PC die	
+46600065	Buff	False	True	True		Abnormality_Explodes PC die	
+46600066	WeakeningEffect	False	True	True		Shield for exploding PC die	
+46600067	WeakeningEffect	False	True	True		Shield for one rolling die	
+46600068	WeakeningEffect	False	True	True		Shield for two rolling dice	
+46600069	DamageOverTime	False	False	False		Make roulette invisible before despawn	
+46600070	Buff	False	True	False		Roulette NPC spawn abnormality	
+46600071	DamageOverTime	False	False	False		46600070_Abnormality when effect ends	icon_status.icedamage_tex
+46600072	Buff	False	True	False		Send to 2nd boss_roulette rolling state, to prevent die spawn	icon_status.firedamage_tex
+46600073	Buff	False	True	True		Abnormality_Summon counter-rotating roulette	
+46600074	Buff	False	True	True		Abnormality_Summon regular rotating roulette	
+46600075	Buff	False	True	False		Abnormality_Roulette cooldown	
+46600076	WeakeningEffect	False	True	True		Abnormality_Phase 2 , can roll all 3 dice	
+46600077	Buff	False	True	False		Send to 2nd boss_Roulette finished rolling	
+46600078	Buff	False	True	True		Abnormality_2nd boss casts on oneself before Phase 2	
+46600079	Buff	True	True	False	Demon's Wrath	Demoros prepares to move to the otherworld. Defense increased 1,000 times.	icon_status.plusedefence_tex
+46600080	Buff	False	True	True		In tenth section	
+46600081	Buff	False	True	True		In first section	
+46600082	Buff	False	True	True		In second section	
+46600083	Buff	False	True	True		In third section	
+46600084	Buff	False	True	True		In fourth section	
+46600085	Buff	False	True	True		In fifth section	
+46600086	Buff	False	True	True		In sixth section	
+46600088	Buff	False	True	False		Gage 1 increase when coin is hit (Display Only)	
+46600089	DamageOverTime	False	False	False		Gage 3 increase when coin is hit (Display Only)	
+46600090	DamageOverTime	False	False	False		2nd Boss_Rolls roulette	
+46600091	Buff	False	True	False			
+46600092	Buff	False	True	False			
+46600093	Buff	False	True	False			
+46600094	Buff	False	True	False		2nd Boss_Bonus die pattern	
+46600095	Buff	False	True	False			
+46600096	Buff	False	True	False			
+46600097	Buff	False	True	False			
+46600098	DamageOverTime	False	False	False		2nd Boss_FeverTime Recovery	icon_skills.refreshbless_tex
+46600099	Buff	True	True	False	Otherworldly Recovery	Recovers $H_W_GOOD0.35%$COLOR_END of maximum HP every $H_W_GOOD1$COLOR_END second.	icon_skills.refreshbless_tex
+46600100	Buff	False	True	True		Abnormaliity_2nd Boss Invincible	
+46600101	Buff	False	True	False			
+46600102	Buff	False	True	False			
+46600103	Buff	False	True	True		At Start_Red Long Range -> Phase 2_Green Long Range	
+46600104	Buff	False	True	True		At Start_Green Long Range -> Phase 2_Red Long Range	
+46600105	Buff	False	True	False		1st Boss_Odd Check Abnormality (Odd when present)	
+46600106	Buff	False	True	False		When Odd stacked twice, changes to Even abnormality -> disappears in 1 second	
+46600107	Buff	False	False	False			
+46600108	Buff	False	False	False			
+46600109	Buff	False	True	False		1st boss odd/even pattern cooldown	
+46600110	Buff	False	True	False		1st boss nuking pattern cooldown	
+46600111	Buff	False	True	True			
+46600112	Buff	False	True	False		1st boss nuking range	
+46600113	DamageOverTime	True	False	False	Claw Wound	Reduces HP by $H_W_BAD10%$COLOR_END of maximum every $H_W_BAD1$COLOR_END second seconds.	icon_status.injuredbtdarkness_tex
+46600114	Buff	False	True	True		Odd-Short range damage	
+46600115	Buff	False	True	True		Odd-Long range damage	
+46600116	Buff	False	True	True		Even-Short range damage	
+46600117	Buff	False	True	True		Even-Long range damage	
 47300100	DamageOverTime	True	False	False	Venom Resin	Reduces HP by $H_W_BAD50%$COLOR_END of maximum every $H_W_BAD60$COLOR_END second1.$BRVenom Resin cannot be purified or cleansed.	icon_status.poisonstatus_tex
 47300200	DamageOverTime	True	False	False	Thulsa's Venom	Reduces HP by $H_W_BAD5%$COLOR_END of maximum every $H_W_BAD3$COLOR_END second1.$BRThulsa's Venom cannot be purified or cleansed.	icon_status.poisonstatus_tex
 47300300	DamageOverTime	True	False	False	Thulsa's Poison	Reduces HP by $H_W_BAD30%$COLOR_END of maximum after $H_W_BAD4$COLOR_END second1.$BRThulsa's Poison cannot be purified or cleansed.	icon_status.poisonstatus_tex

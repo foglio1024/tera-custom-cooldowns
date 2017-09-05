@@ -12167,10 +12167,21 @@
 21329	2	Vergos-Kampfbeutel (Mittelwertig)
 21330	2	Vergos-Kampfbeutel (Herausragend)
 21331	2	Vergos-Kampfbeutel (Exzellent)
+21332	3	Fragment von Demoroths Kopfreif
+21333	3	Demoroths Triebwerksteil
+21334	3	Demoroths Antrieb
+21335	3	Kunsthandwerk-Zauberstein (Halsketten)
+21336	3	Kunsthandwerk-Zauberstein (Ohrringe)
+21337	3	Kunsthandwerk-Zauberstein (Ringe)
+21338	3	Entwurf: Demoroths leuchtender Kopfreif
 21339	2	Andenkentruhe für die Teilnahme am Gildenkrieg (1. Rang)
 21340	2	Andenkentruhe für die Teilnahme am Gildenkrieg (1. Rang)
 21341	2	Andenkentruhe für die Teilnahme am Gildenkrieg (2. Rang)
 21342	2	Andenkentruhe für die Teilnahme am Gildenkrieg (3. Rang)
+21343	3	Kunsthandwerk-Zauberstein (Halsketten)
+21344	3	Kunsthandwerk-Zauberstein (Ohrringe)
+21345	3	Kunsthandwerk-Zauberstein (Ringe)
+21346	3	Alte Kiste mit Goldkarten
 22001	0	Unvollständige Lektion: Stoffextraktion
 22002	0	Unvollständige Lektion: Metallextraktion
 22004	0	Unvollständige Lektion: Alchemieextraktion
@@ -15625,6 +15636,8 @@
 45480	0	Mondtänzerinnensagenbuch
 45481	1	Vergilbte Drachenbeschwörungsschriftrolle
 45482	2	Segment einer Drachenbeschwörungsschriftrolle
+46600	0	Seirs Eilbrief
+46601	0	Teleportschriftrolle: San Allema
 46701	0	Experimentelle Flüssigkeit
 47001	3	Zersetzung & Ruin
 47002	3	Turborammer
@@ -18843,6 +18856,20 @@
 72344	3	Mächtige Halskette des Matadors
 72345	3	Mächtiger Ohrring des Matadors
 72346	3	Mächtiger Ring des Matadors
+72347	2	Demoroths Kopfreif
+72348	3	Demoroths leuchtender Kopfreif
+72349	3	[Kunsthandwerk] Lakans tödliche Halskette
+72350	3	[Kunsthandwerk] Tödlicher Ohrring von Lakan des Albtraums
+72351	3	[Kunsthandwerk] Tödlicher Ring von Lakan des Albtraums
+72352	3	[Kunsthandwerk] Lakans mächtige Halskette
+72353	3	[Kunsthandwerk] Mächtiger Ohrring von Lakan des Albtraums
+72354	3	[Kunsthandwerk] Mächtiger Ring von Lakan des Albtraums
+72355	3	[Kunsthandwerk] Tödliche Halskette des Matadors
+72356	3	[Kunsthandwerk] Tödlicher Ohrring des Matadors
+72357	3	[Kunsthandwerk] Tödlicher Ring des Matadors
+72358	3	[Kunsthandwerk] Mächtige Halskette des Matadors
+72359	3	[Kunsthandwerk] Mächtiger Ohrring des Matadors
+72360	3	[Kunsthandwerk] Mächtiger Ring des Matadors
 80000	0	Fassbombe
 80001	1	Teleportschriftrolle: Zerschlagene Flotte
 80002	1	Teleportschriftrolle: Die Kanäle
@@ -20089,6 +20116,7 @@
 83401	1	Teleportschriftrolle: Lachelitas-Ruine
 83402	1	Teleportschriftrolle: Lakans verzerrtes Gefängnis
 83403	1	Teleportschriftrolle: Velika-Untergrundtor, Eingang zu Veliks Zuflucht
+83404	1	Teleportschriftrolle: Demoroths Roulette
 84301	2	Souveräner ergrimmter Niveot
 84302	2	Resoluter ergrimmter Niveot
 84303	2	Trauernder ergrimmter Niveot
@@ -20320,7 +20348,7 @@
 88250	3	Kettenklingen des Erzdrachen
 88251	3	Arkanone des Erzdrachen
 88252	3	Stahlfäuste des Erzdrachen
-88253	3	Wurfstein des Erzdrachen
+88253	3	Wurfstern des Erzdrachen
 88254	3	Robuster Kettenpanzer des Erzdrachen
 88255	3	Rasender Kettenpanzer des Erzdrachen
 88256	3	Prunkvoller Kettenpanzer des Erzdrachen
@@ -23357,6 +23385,9 @@
 99431	2	Sonderemote: Verbeugung der Kammerzofe (Elin)
 99432	2	Sonderemote: Verbeugung der Kammerzofe (Elin)
 99433	2	[Event] Mondschattenmondgleve
+99434	1	Meisterwerkalkahest der 10. Ordnung
+99435	1	Meisterwerkalkahest der 11. Ordnung
+99436	1	Meisterwerkalkahest der 12. Ordnung
 99437	3	Hochwertige frische Fitnessunterwäsche
 99438	3	Hochwertige bequeme Fitnessunterwäsche
 99439	3	Hochwertige sportliche Fitnessunterwäsche
@@ -29276,9 +29307,9 @@
 155058	0	Acrias Warensendung
 155059	0	Roybonds Warensendung
 155060	0	Überraschungsbox: Elin-Flitzer
-155061	0	Lunareas Warensendung
+155061	0	Überraschungsbox: Mächtige Wyvern
 155062	0	Zapirs Warensendung
-155063	0	Parvanas Warensendung
+155063	0	Überraschungsbox: Uralte mächtige Drachen
 155064	0	Ribinas Warensendung
 155065	2	Trickkiste: Gestreifte Bademode
 155066	2	Trickkiste: Gestreifte Bademode (7 Tage)
@@ -29689,6 +29720,29 @@
 155501	3	[Mode] Lilitas' flinker Harnisch
 155502	3	[Mode] Lilitas' Blutrobe
 155503	3	TERA-Clubmitgliedschaft (30 Tage)
+155504	3	Leuchtende Gruselschleife
+155505	3	Leuchtender Totenschädel
+155506	2	Gruselhut "Beil im Kopf"
+155507	3	Leuchtende Kluft des Todes (Menschenherren)
+155508	3	Leuchtende Kluft des Todes (Menschendamen)
+155509	3	Leuchtende Kluft des Todes (Hochelfenherren)
+155510	3	Leuchtende Kluft des Todes (Hochelfendamen)
+155511	3	Leuchtende Kluft des Todes (Amaniherren)
+155512	3	Leuchtende Kluft des Todes (Amanidamen)
+155513	3	Leuchtende Kluft des Todes (Castanicherren)
+155514	3	Leuchtende Kluft des Todes (Castanicdamen)
+155515	3	Leuchtende Kluft des Todes (Popori)
+155516	3	Leuchtende Kluft des Todes (Elin)
+155517	3	Leuchtende Kluft des Todes (Baraka)
+155518	3	EXTREM-Beutekiste
+155519	3	EXTREM-Triumphtruhe
+155520	3	EXTREM-Schlüssel 
+155521	3	EXTREM-Beute: Kaias Rüstzeug
+155522	3	EXTREM-Beute: Trankkiste
+155523	3	EXTREM-Beute: Demoroths Fragmente
+155524	3	EXTREM-Triumph: Darkans Rüstzeug
+155525	3	EXTREM-Triumph: Trankkiste
+155526	3	EXTREM-Triumph: Demoroths Fragmente
 160001	0	Reitfertigkeit: Sleipner
 160002	0	Reitfertigkeit: Sleipner
 160003	1	Reitfertigkeit: Sandpfote
@@ -42571,6 +42625,60 @@
 216678	3	Самоцвет
 216679	3	Жетон листопада
 216680	3	Жетон снегопада
+216681	3	Valkyon Federation Medal
+216682	3	Demonic Amulet
+216683	3	Heart of the Beast
+216684	2	Mystical letters
+216685	2	Crystal of Ether
+216686	3	Blood of Demon
+216687	2	Dendrite Shard
+216688	2	Uncommon Faridei's Cube
+216689	2	Rare Faridei's Cube
+216690	3	Superior Faridei's Cube
+216691	3	Golden Faridei's Cube
+216692	3	Legendary Faridei's Cube
+216693	0	Element Essence
+216694	1	Unstable Water crystal
+216695	1	Unstable Fire crystal
+216696	1	Unstable Earth crystal
+216697	2	Unstable Water energy
+216698	2	Unstable Fire energy
+216699	2	Unstable Earth energy
+216700	2	Unstable Water essence
+216701	2	Unstable Fire essence
+216702	2	Unstable Earth essence
+216703	2	Unstable Water element
+216704	2	Unstable Fire element
+216705	2	Unstable Earth element
+216706	3	Relic of the Water
+216707	3	Relic of the Fire
+216708	3	Relic of the Earth
+216709	1	Water fragment
+216710	1	Fire fragment
+216711	1	Earth fragment
+216712	2	Water crystal
+216713	2	Fire crystal
+216714	2	Earth crystal
+216715	2	Water energy
+216716	2	Fire energy
+216717	2	Earth energy
+216718	3	Prime Water essence
+216719	3	Prime Fire essence
+216720	3	Prime Earth essence
+216721	0	Quintessence
+216722	3	Obsidian Shard
+216723	3	Obsidian Crystal
+216724	3	Obsidian Sphere
+216725	3	Prime Darkness
+216726	1	Stone of the Light
+216727	3	Elements Secrets
+216728	3	Massive Loot Box 
+216729	3	Extreme Loot Box
+216730	3	Extreme Key
+216731	3	Box 1
+216733	3	Box 3
+216734	3	Box 4
+216736	3	Box 6
 219000	0	Manual: Outlaw Declaration
 247623	2	Smart Box: Swimwear Male A + Female A
 247624	2	Smart Box: Swimwear Male B + Female D
@@ -42580,6 +42688,12 @@
 247628	2	Smart Box: Swimwear Male B + Female D (7 Days)
 247629	2	Smart Box: Swimwear Female B (7 Days)
 247630	2	Smart Box: Swimwear Female C (7 Days)
+247631	2	Smartbox: Elemental weapon (non-tradable)
+247632	2	Smartbox: Elemental weapon
+247633	2	Smartbox: Rare elemental weapon (non-tradable)
+247634	2	Smartbox: Rare elemental weapon
+247635	2	Smartbox: Rare elemental weapon (3 days)
+247636	2	Wheel of Fortune box
 250000	3	TERA-Sonderkommando (Menschenherren)
 250001	3	TERA-Sonderkommando (Menschenherren)
 250002	3	TERA-Sonderkommando (Menschenherren)
@@ -48328,6 +48442,318 @@
 256133	3	Regenbogenschwimmflügel
 256134	3	Regenbogenschwimmflügel
 256135	3	Regenbogenschwimmflügel
+256136	3	Zwillingsschwerter der Eisgarde
+256137	3	Zwillingsschwerter der Eisgarde
+256138	3	Zwillingsschwerter der Eisgarde
+256139	3	Zwillingsschwerter der Eisgarde
+256140	3	Zwillingsschwerter der Eisgarde
+256141	3	Zwillingsschwerter der Eisgarde
+256142	3	Zwillingsschwerter der Eisgarde
+256143	3	Zwillingsschwerter der Eisgarde
+256144	3	Zwillingsschwerter der Eisgarde
+256145	3	Zwillingsschwerter der Eisgarde
+256146	3	Zwillingsschwerter der Eisgarde
+256147	3	Zwillingsschwerter der Eisgarde
+256148	3	Lanze der Eisgarde
+256149	3	Lanze der Eisgarde
+256150	3	Lanze der Eisgarde
+256151	3	Lanze der Eisgarde
+256152	3	Lanze der Eisgarde
+256153	3	Lanze der Eisgarde
+256154	3	Lanze der Eisgarde
+256155	3	Lanze der Eisgarde
+256156	3	Lanze der Eisgarde
+256157	3	Lanze der Eisgarde
+256158	3	Lanze der Eisgarde
+256159	3	Lanze der Eisgarde
+256160	3	Großschwert der Eisgarde
+256161	3	Großschwert der Eisgarde
+256162	3	Großschwert der Eisgarde
+256163	3	Großschwert der Eisgarde
+256164	3	Großschwert der Eisgarde
+256165	3	Großschwert der Eisgarde
+256166	3	Großschwert der Eisgarde
+256167	3	Großschwert der Eisgarde
+256168	3	Großschwert der Eisgarde
+256169	3	Großschwert der Eisgarde
+256170	3	Großschwert der Eisgarde
+256171	3	Großschwert der Eisgarde
+256172	3	Axt der Eisgarde
+256173	3	Axt der Eisgarde
+256174	3	Axt der Eisgarde
+256175	3	Axt der Eisgarde
+256176	3	Axt der Eisgarde
+256177	3	Axt der Eisgarde
+256178	3	Axt der Eisgarde
+256179	3	Axt der Eisgarde
+256180	3	Axt der Eisgarde
+256181	3	Axt der Eisgarde
+256182	3	Axt der Eisgarde
+256183	3	Axt der Eisgarde
+256184	3	Scheibe der Eisgarde
+256185	3	Scheibe der Eisgarde
+256186	3	Scheibe der Eisgarde
+256187	3	Scheibe der Eisgarde
+256188	3	Scheibe der Eisgarde
+256189	3	Scheibe der Eisgarde
+256190	3	Scheibe der Eisgarde
+256191	3	Scheibe der Eisgarde
+256192	3	Scheibe der Eisgarde
+256193	3	Scheibe der Eisgarde
+256194	3	Scheibe der Eisgarde
+256195	3	Scheibe der Eisgarde
+256196	3	Bogen der Eisgarde
+256197	3	Bogen der Eisgarde
+256198	3	Bogen der Eisgarde
+256199	3	Bogen der Eisgarde
+256200	3	Bogen der Eisgarde
+256201	3	Bogen der Eisgarde
+256202	3	Bogen der Eisgarde
+256203	3	Bogen der Eisgarde
+256204	3	Bogen der Eisgarde
+256205	3	Bogen der Eisgarde
+256206	3	Bogen der Eisgarde
+256207	3	Bogen der Eisgarde
+256208	3	Stab der Eisgarde
+256209	3	Stab der Eisgarde
+256210	3	Stab der Eisgarde
+256211	3	Stab der Eisgarde
+256212	3	Stab der Eisgarde
+256213	3	Stab der Eisgarde
+256214	3	Stab der Eisgarde
+256215	3	Stab der Eisgarde
+256216	3	Stab der Eisgarde
+256217	3	Stab der Eisgarde
+256218	3	Stab der Eisgarde
+256219	3	Stab der Eisgarde
+256220	3	Zepter der Eisgarde
+256221	3	Zepter der Eisgarde
+256222	3	Zepter der Eisgarde
+256223	3	Zepter der Eisgarde
+256224	3	Zepter der Eisgarde
+256225	3	Zepter der Eisgarde
+256226	3	Zepter der Eisgarde
+256227	3	Zepter der Eisgarde
+256228	3	Zepter der Eisgarde
+256229	3	Zepter der Eisgarde
+256230	3	Zepter der Eisgarde
+256231	3	Zepter der Eisgarde
+256232	3	Stahlfäuste der Eisgarde
+256233	3	Stahlfäuste der Eisgarde
+256234	3	Stahlfäuste der Eisgarde
+256235	3	Stahlfäuste der Eisgarde
+256236	3	Stahlfäuste der Eisgarde
+256237	3	Stahlfäuste der Eisgarde
+256238	3	Stahlfäuste der Eisgarde
+256239	3	Stahlfäuste der Eisgarde
+256240	3	Stahlfäuste der Eisgarde
+256241	3	Stahlfäuste der Eisgarde
+256242	3	Stahlfäuste der Eisgarde
+256243	3	Stahlfäuste der Eisgarde
+256244	3	Arkanone der Eisgarde
+256245	3	Arkanone der Eisgarde
+256246	3	Arkanone der Eisgarde
+256247	3	Arkanone der Eisgarde
+256248	3	Arkanone der Eisgarde
+256249	3	Arkanone der Eisgarde
+256250	3	Arkanone der Eisgarde
+256251	3	Arkanone der Eisgarde
+256252	3	Arkanone der Eisgarde
+256253	3	Arkanone der Eisgarde
+256254	3	Arkanone der Eisgarde
+256255	3	Arkanone der Eisgarde
+256256	3	Mondgleve der Eisgarde
+256257	3	Mondgleve der Eisgarde
+256258	3	Mondgleve der Eisgarde
+256259	3	Mondgleve der Eisgarde
+256260	3	Mondgleve der Eisgarde
+256261	3	Mondgleve der Eisgarde
+256262	3	Mondgleve der Eisgarde
+256263	3	Mondgleve der Eisgarde
+256264	3	Mondgleve der Eisgarde
+256265	3	Mondgleve der Eisgarde
+256266	3	Mondgleve der Eisgarde
+256267	3	Mondgleve der Eisgarde
+256268	3	Kettenklingen der Eisgarde
+256269	3	Kettenklingen der Eisgarde
+256270	3	Kettenklingen der Eisgarde
+256271	3	Kettenklingen der Eisgarde
+256272	3	Kettenklingen der Eisgarde
+256273	3	Kettenklingen der Eisgarde
+256274	3	Kettenklingen der Eisgarde
+256275	3	Kettenklingen der Eisgarde
+256276	3	Kettenklingen der Eisgarde
+256277	3	Kettenklingen der Eisgarde
+256278	3	Kettenklingen der Eisgarde
+256279	3	Kettenklingen der Eisgarde
+256280	3	Wurfsterne der Eisgarde
+256281	3	Wurfsterne der Eisgarde
+256282	3	Wurfsterne der Eisgarde
+256283	3	Wurfsterne der Eisgarde
+256284	3	Wurfsterne der Eisgarde
+256285	3	Wurfsterne der Eisgarde
+256286	3	Wurfsterne der Eisgarde
+256287	3	Wurfsterne der Eisgarde
+256288	3	Wurfsterne der Eisgarde
+256289	3	Wurfsterne der Eisgarde
+256290	3	Wurfsterne der Eisgarde
+256291	3	Wurfsterne der Eisgarde
+256292	3	Royale Zwillingsschwerter der Eismagie
+256293	3	Royale Zwillingsschwerter der Eismagie
+256294	3	Royale Zwillingsschwerter der Eismagie
+256295	3	Royale Zwillingsschwerter der Eismagie
+256296	3	Royale Zwillingsschwerter der Eismagie
+256297	3	Royale Zwillingsschwerter der Eismagie
+256298	3	Royale Zwillingsschwerter der Eismagie
+256299	3	Royale Zwillingsschwerter der Eismagie
+256300	3	Royale Zwillingsschwerter der Eismagie
+256301	3	Royale Zwillingsschwerter der Eismagie
+256302	3	Royale Zwillingsschwerter der Eismagie
+256303	3	Royale Zwillingsschwerter der Eismagie
+256304	3	Royale Lanze der Eismagie
+256305	3	Royale Lanze der Eismagie
+256306	3	Royale Lanze der Eismagie
+256307	3	Royale Lanze der Eismagie
+256308	3	Royale Lanze der Eismagie
+256309	3	Royale Lanze der Eismagie
+256310	3	Royale Lanze der Eismagie
+256311	3	Royale Lanze der Eismagie
+256312	3	Royale Lanze der Eismagie
+256313	3	Royale Lanze der Eismagie
+256314	3	Royale Lanze der Eismagie
+256315	3	Royale Lanze der Eismagie
+256316	3	Royales Großschwert der Eismagie
+256317	3	Royales Großschwert der Eismagie
+256318	3	Royales Großschwert der Eismagie
+256319	3	Royales Großschwert der Eismagie
+256320	3	Royales Großschwert der Eismagie
+256321	3	Royales Großschwert der Eismagie
+256322	3	Royales Großschwert der Eismagie
+256323	3	Royales Großschwert der Eismagie
+256324	3	Royales Großschwert der Eismagie
+256325	3	Royales Großschwert der Eismagie
+256326	3	Royales Großschwert der Eismagie
+256327	3	Royales Großschwert der Eismagie
+256328	3	Royale Axt der Eismagie
+256329	3	Royale Axt der Eismagie
+256330	3	Royale Axt der Eismagie
+256331	3	Royale Axt der Eismagie
+256332	3	Royale Axt der Eismagie
+256333	3	Royale Axt der Eismagie
+256334	3	Royale Axt der Eismagie
+256335	3	Royale Axt der Eismagie
+256336	3	Royale Axt der Eismagie
+256337	3	Royale Axt der Eismagie
+256338	3	Royale Axt der Eismagie
+256339	3	Royale Axt der Eismagie
+256340	3	Royale Scheibe der Eismagie
+256341	3	Royale Scheibe der Eismagie
+256342	3	Royale Scheibe der Eismagie
+256343	3	Royale Scheibe der Eismagie
+256344	3	Royale Scheibe der Eismagie
+256345	3	Royale Scheibe der Eismagie
+256346	3	Royale Scheibe der Eismagie
+256347	3	Royale Scheibe der Eismagie
+256348	3	Royale Scheibe der Eismagie
+256349	3	Royale Scheibe der Eismagie
+256350	3	Royale Scheibe der Eismagie
+256351	3	Royale Scheibe der Eismagie
+256352	3	Royaler Bogen der Eismagie
+256353	3	Royaler Bogen der Eismagie
+256354	3	Royaler Bogen der Eismagie
+256355	3	Royaler Bogen der Eismagie
+256356	3	Royaler Bogen der Eismagie
+256357	3	Royaler Bogen der Eismagie
+256358	3	Royaler Bogen der Eismagie
+256359	3	Royaler Bogen der Eismagie
+256360	3	Royaler Bogen der Eismagie
+256361	3	Royaler Bogen der Eismagie
+256362	3	Royaler Bogen der Eismagie
+256363	3	Royaler Bogen der Eismagie
+256364	3	Royaler Stab der Eismagie
+256365	3	Royaler Stab der Eismagie
+256366	3	Royaler Stab der Eismagie
+256367	3	Royaler Stab der Eismagie
+256368	3	Royaler Stab der Eismagie
+256369	3	Royaler Stab der Eismagie
+256370	3	Royaler Stab der Eismagie
+256371	3	Royaler Stab der Eismagie
+256372	3	Royaler Stab der Eismagie
+256373	3	Royaler Stab der Eismagie
+256374	3	Royaler Stab der Eismagie
+256375	3	Royaler Stab der Eismagie
+256376	3	Royales Zepter der Eismagie
+256377	3	Royales Zepter der Eismagie
+256378	3	Royales Zepter der Eismagie
+256379	3	Royales Zepter der Eismagie
+256380	3	Royales Zepter der Eismagie
+256381	3	Royales Zepter der Eismagie
+256382	3	Royales Zepter der Eismagie
+256383	3	Royales Zepter der Eismagie
+256384	3	Royales Zepter der Eismagie
+256385	3	Royales Zepter der Eismagie
+256386	3	Royales Zepter der Eismagie
+256387	3	Royales Zepter der Eismagie
+256388	3	Royale Stahlfäuste der Eismagie
+256389	3	Royale Stahlfäuste der Eismagie
+256390	3	Royale Stahlfäuste der Eismagie
+256391	3	Royale Stahlfäuste der Eismagie
+256392	3	Royale Stahlfäuste der Eismagie
+256393	3	Royale Stahlfäuste der Eismagie
+256394	3	Royale Stahlfäuste der Eismagie
+256395	3	Royale Stahlfäuste der Eismagie
+256396	3	Royale Stahlfäuste der Eismagie
+256397	3	Royale Stahlfäuste der Eismagie
+256398	3	Royale Stahlfäuste der Eismagie
+256399	3	Royale Stahlfäuste der Eismagie
+256400	3	Royale Arkanone der Eismagie
+256401	3	Royale Arkanone der Eismagie
+256402	3	Royale Arkanone der Eismagie
+256403	3	Royale Arkanone der Eismagie
+256404	3	Royale Arkanone der Eismagie
+256405	3	Royale Arkanone der Eismagie
+256406	3	Royale Arkanone der Eismagie
+256407	3	Royale Arkanone der Eismagie
+256408	3	Royale Arkanone der Eismagie
+256409	3	Royale Arkanone der Eismagie
+256410	3	Royale Arkanone der Eismagie
+256411	3	Royale Arkanone der Eismagie
+256412	3	Royale Mondgleve der Eismagie
+256413	3	Royale Mondgleve der Eismagie
+256414	3	Royale Mondgleve der Eismagie
+256415	3	Royale Mondgleve der Eismagie
+256416	3	Royale Mondgleve der Eismagie
+256417	3	Royale Mondgleve der Eismagie
+256418	3	Royale Mondgleve der Eismagie
+256419	3	Royale Mondgleve der Eismagie
+256420	3	Royale Mondgleve der Eismagie
+256421	3	Royale Mondgleve der Eismagie
+256422	3	Royale Mondgleve der Eismagie
+256423	3	Royale Mondgleve der Eismagie
+256424	3	Royale Kettenklingen der Eismagie
+256425	3	Royale Kettenklingen der Eismagie
+256426	3	Royale Kettenklingen der Eismagie
+256427	3	Royale Kettenklingen der Eismagie
+256428	3	Royale Kettenklingen der Eismagie
+256429	3	Royale Kettenklingen der Eismagie
+256430	3	Royale Kettenklingen der Eismagie
+256431	3	Royale Kettenklingen der Eismagie
+256432	3	Royale Kettenklingen der Eismagie
+256433	3	Royale Kettenklingen der Eismagie
+256434	3	Royale Kettenklingen der Eismagie
+256435	3	Royale Kettenklingen der Eismagie
+256436	3	Royale Wurfsterne der Eismagie
+256437	3	Royale Wurfsterne der Eismagie
+256438	3	Royale Wurfsterne der Eismagie
+256439	3	Royale Wurfsterne der Eismagie
+256440	3	Royale Wurfsterne der Eismagie
+256441	3	Royale Wurfsterne der Eismagie
+256442	3	Royale Wurfsterne der Eismagie
+256443	3	Royale Wurfsterne der Eismagie
+256444	3	Royale Wurfsterne der Eismagie
+256445	3	Royale Wurfsterne der Eismagie
+256446	3	Royale Wurfsterne der Eismagie
+256447	3	Royale Wurfsterne der Eismagie
 256448	3	Flugfertigkeit: Obsidianschweif
 256449	3	Flugfertigkeit: Mythischer Obsidianschweif
 256450	3	Flugfertigkeit: Sagenhafter Obsidianschweif
@@ -48460,6 +48886,330 @@
 256577	3	Flugfertigkeit: Allmächtiger Blütenschweif
 256578	3	Flugfertigkeit: Legendärer Blütenschweif
 256579	3	Flugfertigkeit: Fabelhafter Blütenschweif
+256580	3	Wächter der Eisgarde (Menschenherren)
+256581	3	Wächter der Eisgarde (Menschenherren)
+256582	3	Wächter der Eisgarde (Menschenherren)
+256583	3	Wächter der Eisgarde (Menschenherren)
+256584	3	Wächter der Eisgarde (Menschenherren)
+256585	3	Wächter der Eisgarde (Menschenherren)
+256586	3	Wächter der Eisgarde (Menschenherren)
+256587	3	Wächter der Eisgarde (Menschenherren)
+256588	3	Wächter der Eisgarde (Menschenherren)
+256589	3	Wächter der Eisgarde (Menschenherren)
+256590	3	Wächter der Eisgarde (Menschenherren)
+256591	3	Wächter der Eisgarde (Menschenherren)
+256592	3	Offizier der Eisgarde (Menschenherren)
+256593	3	Offizier der Eisgarde (Menschenherren)
+256594	3	Offizier der Eisgarde (Menschenherren)
+256595	3	Offizier der Eisgarde (Menschenherren)
+256596	3	Offizier der Eisgarde (Menschenherren)
+256597	3	Offizier der Eisgarde (Menschenherren)
+256598	3	Offizier der Eisgarde (Menschenherren)
+256599	3	Offizier der Eisgarde (Menschenherren)
+256600	3	Offizier der Eisgarde (Menschenherren)
+256601	3	Offizier der Eisgarde (Menschenherren)
+256602	3	Offizier der Eisgarde (Menschenherren)
+256603	3	Offizier der Eisgarde (Menschenherren)
+256604	3	Prinzessin der Eisgarde (Menschendamen)
+256605	3	Prinzessin der Eisgarde (Menschendamen)
+256606	3	Prinzessin der Eisgarde (Menschendamen)
+256607	3	Prinzessin der Eisgarde (Menschendamen)
+256608	3	Prinzessin der Eisgarde (Menschendamen)
+256609	3	Prinzessin der Eisgarde (Menschendamen)
+256610	3	Prinzessin der Eisgarde (Menschendamen)
+256611	3	Prinzessin der Eisgarde (Menschendamen)
+256612	3	Prinzessin der Eisgarde (Menschendamen)
+256613	3	Prinzessin der Eisgarde (Menschendamen)
+256614	3	Prinzessin der Eisgarde (Menschendamen)
+256615	3	Prinzessin der Eisgarde (Menschendamen)
+256616	3	Königin der Eisgarde (Menschendamen)
+256617	3	Königin der Eisgarde (Menschendamen)
+256618	3	Königin der Eisgarde (Menschendamen)
+256619	3	Königin der Eisgarde (Menschendamen)
+256620	3	Königin der Eisgarde (Menschendamen)
+256621	3	Königin der Eisgarde (Menschendamen)
+256622	3	Königin der Eisgarde (Menschendamen)
+256623	3	Königin der Eisgarde (Menschendamen)
+256624	3	Königin der Eisgarde (Menschendamen)
+256625	3	Königin der Eisgarde (Menschendamen)
+256626	3	Königin der Eisgarde (Menschendamen)
+256627	3	Königin der Eisgarde (Menschendamen)
+256628	3	Wächter der Eisgarde (Hochelfenherren)
+256629	3	Wächter der Eisgarde (Hochelfenherren)
+256630	3	Wächter der Eisgarde (Hochelfenherren)
+256631	3	Wächter der Eisgarde (Hochelfenherren)
+256632	3	Wächter der Eisgarde (Hochelfenherren)
+256633	3	Wächter der Eisgarde (Hochelfenherren)
+256634	3	Wächter der Eisgarde (Hochelfenherren)
+256635	3	Wächter der Eisgarde (Hochelfenherren)
+256636	3	Wächter der Eisgarde (Hochelfenherren)
+256637	3	Wächter der Eisgarde (Hochelfenherren)
+256638	3	Wächter der Eisgarde (Hochelfenherren)
+256639	3	Wächter der Eisgarde (Hochelfenherren)
+256640	3	Offizier der Eisgarde (Hochelfenherren)
+256641	3	Offizier der Eisgarde (Hochelfenherren)
+256642	3	Offizier der Eisgarde (Hochelfenherren)
+256643	3	Offizier der Eisgarde (Hochelfenherren)
+256644	3	Offizier der Eisgarde (Hochelfenherren)
+256645	3	Offizier der Eisgarde (Hochelfenherren)
+256646	3	Offizier der Eisgarde (Hochelfenherren)
+256647	3	Offizier der Eisgarde (Hochelfenherren)
+256648	3	Offizier der Eisgarde (Hochelfenherren)
+256649	3	Offizier der Eisgarde (Hochelfenherren)
+256650	3	Offizier der Eisgarde (Hochelfenherren)
+256651	3	Offizier der Eisgarde (Hochelfenherren)
+256652	3	Prinzessin der Eisgarde (Hochelfendamen)
+256653	3	Prinzessin der Eisgarde (Hochelfendamen)
+256654	3	Prinzessin der Eisgarde (Hochelfendamen)
+256655	3	Prinzessin der Eisgarde (Hochelfendamen)
+256656	3	Prinzessin der Eisgarde (Hochelfendamen)
+256657	3	Prinzessin der Eisgarde (Hochelfendamen)
+256658	3	Prinzessin der Eisgarde (Hochelfendamen)
+256659	3	Prinzessin der Eisgarde (Hochelfendamen)
+256660	3	Prinzessin der Eisgarde (Hochelfendamen)
+256661	3	Prinzessin der Eisgarde (Hochelfendamen)
+256662	3	Prinzessin der Eisgarde (Hochelfendamen)
+256663	3	Prinzessin der Eisgarde (Hochelfendamen)
+256664	3	Königin der Eisgarde (Hochelfendamen)
+256665	3	Königin der Eisgarde (Hochelfendamen)
+256666	3	Königin der Eisgarde (Hochelfendamen)
+256667	3	Königin der Eisgarde (Hochelfendamen)
+256668	3	Königin der Eisgarde (Hochelfendamen)
+256669	3	Königin der Eisgarde (Hochelfendamen)
+256670	3	Königin der Eisgarde (Hochelfendamen)
+256671	3	Königin der Eisgarde (Hochelfendamen)
+256672	3	Königin der Eisgarde (Hochelfendamen)
+256673	3	Königin der Eisgarde (Hochelfendamen)
+256674	3	Königin der Eisgarde (Hochelfendamen)
+256675	3	Königin der Eisgarde (Hochelfendamen)
+256676	3	Wächter der Eisgarde (Amaniherren)
+256677	3	Wächter der Eisgarde (Amaniherren)
+256678	3	Wächter der Eisgarde (Amaniherren)
+256679	3	Wächter der Eisgarde (Amaniherren)
+256680	3	Wächter der Eisgarde (Amaniherren)
+256681	3	Wächter der Eisgarde (Amaniherren)
+256682	3	Wächter der Eisgarde (Amaniherren)
+256683	3	Wächter der Eisgarde (Amaniherren)
+256684	3	Wächter der Eisgarde (Amaniherren)
+256685	3	Wächter der Eisgarde (Amaniherren)
+256686	3	Wächter der Eisgarde (Amaniherren)
+256687	3	Wächter der Eisgarde (Amaniherren)
+256688	3	Offizier der Eisgarde (Amaniherren)
+256689	3	Offizier der Eisgarde (Amaniherren)
+256690	3	Offizier der Eisgarde (Amaniherren)
+256691	3	Offizier der Eisgarde (Amaniherren)
+256692	3	Offizier der Eisgarde (Amaniherren)
+256693	3	Offizier der Eisgarde (Amaniherren)
+256694	3	Offizier der Eisgarde (Amaniherren)
+256695	3	Offizier der Eisgarde (Amaniherren)
+256696	3	Offizier der Eisgarde (Amaniherren)
+256697	3	Offizier der Eisgarde (Amaniherren)
+256698	3	Offizier der Eisgarde (Amaniherren)
+256699	3	Offizier der Eisgarde (Amaniherren)
+256700	3	Prinzessin der Eisgarde (Amanidamen)
+256701	3	Prinzessin der Eisgarde (Amanidamen)
+256702	3	Prinzessin der Eisgarde (Amanidamen)
+256703	3	Prinzessin der Eisgarde (Amanidamen)
+256704	3	Prinzessin der Eisgarde (Amanidamen)
+256705	3	Prinzessin der Eisgarde (Amanidamen)
+256706	3	Prinzessin der Eisgarde (Amanidamen)
+256707	3	Prinzessin der Eisgarde (Amanidamen)
+256708	3	Prinzessin der Eisgarde (Amanidamen)
+256709	3	Prinzessin der Eisgarde (Amanidamen)
+256710	3	Prinzessin der Eisgarde (Amanidamen)
+256711	3	Prinzessin der Eisgarde (Amanidamen)
+256712	3	Königin der Eisgarde (Amanidamen)
+256713	3	Königin der Eisgarde (Amanidamen)
+256714	3	Königin der Eisgarde (Amanidamen)
+256715	3	Königin der Eisgarde (Amanidamen)
+256716	3	Königin der Eisgarde (Amanidamen)
+256717	3	Königin der Eisgarde (Amanidamen)
+256718	3	Königin der Eisgarde (Amanidamen)
+256719	3	Königin der Eisgarde (Amanidamen)
+256720	3	Königin der Eisgarde (Amanidamen)
+256721	3	Königin der Eisgarde (Amanidamen)
+256722	3	Königin der Eisgarde (Amanidamen)
+256723	3	Königin der Eisgarde (Amanidamen)
+256724	3	Wächter der Eisgarde (Castanicherren)
+256725	3	Wächter der Eisgarde (Castanicherren)
+256726	3	Wächter der Eisgarde (Castanicherren)
+256727	3	Wächter der Eisgarde (Castanicherren)
+256728	3	Wächter der Eisgarde (Castanicherren)
+256729	3	Wächter der Eisgarde (Castanicherren)
+256730	3	Wächter der Eisgarde (Castanicherren)
+256731	3	Wächter der Eisgarde (Castanicherren)
+256732	3	Wächter der Eisgarde (Castanicherren)
+256733	3	Wächter der Eisgarde (Castanicherren)
+256734	3	Wächter der Eisgarde (Castanicherren)
+256735	3	Wächter der Eisgarde (Castanicherren)
+256736	3	Offizier der Eisgarde (Castanicherren)
+256737	3	Offizier der Eisgarde (Castanicherren)
+256738	3	Offizier der Eisgarde (Castanicherren)
+256739	3	Offizier der Eisgarde (Castanicherren)
+256740	3	Offizier der Eisgarde (Castanicherren)
+256741	3	Offizier der Eisgarde (Castanicherren)
+256742	3	Offizier der Eisgarde (Castanicherren)
+256743	3	Offizier der Eisgarde (Castanicherren)
+256744	3	Offizier der Eisgarde (Castanicherren)
+256745	3	Offizier der Eisgarde (Castanicherren)
+256746	3	Offizier der Eisgarde (Castanicherren)
+256747	3	Offizier der Eisgarde (Castanicherren)
+256748	3	Prinzessin der Eisgarde (Castanicdamen)
+256749	3	Prinzessin der Eisgarde (Castanicdamen)
+256750	3	Prinzessin der Eisgarde (Castanicdamen)
+256751	3	Prinzessin der Eisgarde (Castanicdamen)
+256752	3	Prinzessin der Eisgarde (Castanicdamen)
+256753	3	Prinzessin der Eisgarde (Castanicdamen)
+256754	3	Prinzessin der Eisgarde (Castanicdamen)
+256755	3	Prinzessin der Eisgarde (Castanicdamen)
+256756	3	Prinzessin der Eisgarde (Castanicdamen)
+256757	3	Prinzessin der Eisgarde (Castanicdamen)
+256758	3	Prinzessin der Eisgarde (Castanicdamen)
+256759	3	Prinzessin der Eisgarde (Castanicdamen)
+256760	3	Königin der Eisgarde (Castanicdamen)
+256761	3	Königin der Eisgarde (Castanicdamen)
+256762	3	Königin der Eisgarde (Castanicdamen)
+256763	3	Königin der Eisgarde (Castanicdamen)
+256764	3	Königin der Eisgarde (Castanicdamen)
+256765	3	Königin der Eisgarde (Castanicdamen)
+256766	3	Königin der Eisgarde (Castanicdamen)
+256767	3	Königin der Eisgarde (Castanicdamen)
+256768	3	Königin der Eisgarde (Castanicdamen)
+256769	3	Königin der Eisgarde (Castanicdamen)
+256770	3	Königin der Eisgarde (Castanicdamen)
+256771	3	Königin der Eisgarde (Castanicdamen)
+256772	3	Wächter der Eisgarde (Popori)
+256773	3	Wächter der Eisgarde (Popori)
+256774	3	Wächter der Eisgarde (Popori)
+256775	3	Wächter der Eisgarde (Popori)
+256776	3	Wächter der Eisgarde (Popori)
+256777	3	Wächter der Eisgarde (Popori)
+256778	3	Wächter der Eisgarde (Popori)
+256779	3	Wächter der Eisgarde (Popori)
+256780	3	Wächter der Eisgarde (Popori)
+256781	3	Wächter der Eisgarde (Popori)
+256782	3	Wächter der Eisgarde (Popori)
+256783	3	Wächter der Eisgarde (Popori)
+256784	3	Offizier der Eisgarde (Popori)
+256785	3	Offizier der Eisgarde (Popori)
+256786	3	Offizier der Eisgarde (Popori)
+256787	3	Offizier der Eisgarde (Popori)
+256788	3	Offizier der Eisgarde (Popori)
+256789	3	Offizier der Eisgarde (Popori)
+256790	3	Offizier der Eisgarde (Popori)
+256791	3	Offizier der Eisgarde (Popori)
+256792	3	Offizier der Eisgarde (Popori)
+256793	3	Offizier der Eisgarde (Popori)
+256794	3	Offizier der Eisgarde (Popori)
+256795	3	Offizier der Eisgarde (Popori)
+256796	3	Prinzessin der Eisgarde (Elin)
+256797	3	Prinzessin der Eisgarde (Elin)
+256798	3	Prinzessin der Eisgarde (Elin)
+256799	3	Prinzessin der Eisgarde (Elin)
+256800	3	Prinzessin der Eisgarde (Elin)
+256801	3	Prinzessin der Eisgarde (Elin)
+256802	3	Prinzessin der Eisgarde (Elin)
+256803	3	Prinzessin der Eisgarde (Elin)
+256804	3	Prinzessin der Eisgarde (Elin)
+256805	3	Prinzessin der Eisgarde (Elin)
+256806	3	Prinzessin der Eisgarde (Elin)
+256807	3	Prinzessin der Eisgarde (Elin)
+256808	3	Königin der Eisgarde (Elin)
+256809	3	Königin der Eisgarde (Elin)
+256810	3	Königin der Eisgarde (Elin)
+256811	3	Königin der Eisgarde (Elin)
+256812	3	Königin der Eisgarde (Elin)
+256813	3	Königin der Eisgarde (Elin)
+256814	3	Königin der Eisgarde (Elin)
+256815	3	Königin der Eisgarde (Elin)
+256816	3	Königin der Eisgarde (Elin)
+256817	3	Königin der Eisgarde (Elin)
+256818	3	Königin der Eisgarde (Elin)
+256819	3	Königin der Eisgarde (Elin)
+256820	3	Wächter der Eisgarde (Baraka)
+256821	3	Wächter der Eisgarde (Baraka)
+256822	3	Wächter der Eisgarde (Baraka)
+256823	3	Wächter der Eisgarde (Baraka)
+256824	3	Wächter der Eisgarde (Baraka)
+256825	3	Wächter der Eisgarde (Baraka)
+256826	3	Wächter der Eisgarde (Baraka)
+256827	3	Wächter der Eisgarde (Baraka)
+256828	3	Wächter der Eisgarde (Baraka)
+256829	3	Wächter der Eisgarde (Baraka)
+256830	3	Wächter der Eisgarde (Baraka)
+256831	3	Wächter der Eisgarde (Baraka)
+256832	3	Offizier der Eisgarde (Baraka)
+256833	3	Offizier der Eisgarde (Baraka)
+256834	3	Offizier der Eisgarde (Baraka)
+256835	3	Offizier der Eisgarde (Baraka)
+256836	3	Offizier der Eisgarde (Baraka)
+256837	3	Offizier der Eisgarde (Baraka)
+256838	3	Offizier der Eisgarde (Baraka)
+256839	3	Offizier der Eisgarde (Baraka)
+256840	3	Offizier der Eisgarde (Baraka)
+256841	3	Offizier der Eisgarde (Baraka)
+256842	3	Offizier der Eisgarde (Baraka)
+256843	3	Offizier der Eisgarde (Baraka)
+256844	3	Frostfokus
+256845	3	Frostfokus
+256846	3	Frostfokus
+256847	3	Frostfokus
+256848	3	Frostfokus
+256849	3	Frostfokus
+256850	3	Frostfokus
+256851	3	Frostfokus
+256852	3	Frostfokus
+256853	3	Frostfokus
+256854	3	Frostfokus
+256855	3	Frostfokus
+256856	3	Silberfokus
+256857	3	Silberfokus
+256858	3	Silberfokus
+256859	3	Silberfokus
+256860	3	Silberfokus
+256861	3	Silberfokus
+256862	3	Silberfokus
+256863	3	Silberfokus
+256864	3	Silberfokus
+256865	3	Silberfokus
+256866	3	Silberfokus
+256867	3	Silberfokus
+256868	3	Fokus der Eiskönigin
+256869	3	Fokus der Eiskönigin
+256870	3	Fokus der Eiskönigin
+256871	3	Fokus der Eiskönigin
+256872	3	Fokus der Eiskönigin
+256873	3	Fokus der Eiskönigin
+256874	3	Fokus der Eiskönigin
+256875	3	Fokus der Eiskönigin
+256876	3	Fokus der Eiskönigin
+256877	3	Fokus der Eiskönigin
+256878	3	Fokus der Eiskönigin
+256879	3	Fokus der Eiskönigin
+256880	3	Fokus der Eisprinzessin
+256881	3	Fokus der Eisprinzessin
+256882	3	Fokus der Eisprinzessin
+256883	3	Fokus der Eisprinzessin
+256884	3	Fokus der Eisprinzessin
+256885	3	Fokus der Eisprinzessin
+256886	3	Fokus der Eisprinzessin
+256887	3	Fokus der Eisprinzessin
+256888	3	Fokus der Eisprinzessin
+256889	3	Fokus der Eisprinzessin
+256890	3	Fokus der Eisprinzessin
+256891	3	Fokus der Eisprinzessin
+256892	3	Kätzchenschlafmaske
+256893	3	Kätzchenschlafmaske
+256894	3	Kätzchenschlafmaske
+256895	3	Kätzchenschlafmaske
+256896	3	Kätzchenschlafmaske
+256897	3	Kätzchenschlafmaske
+256898	3	Kätzchenschlafmaske
+256899	3	Kätzchenschlafmaske
+256900	3	Kätzchenschlafmaske
+256901	3	Kätzchenschlafmaske
+256902	3	Kätzchenschlafmaske
+256903	3	Kätzchenschlafmaske
 256904	3	Türkisfarbener Partylöwenanzug (Baraka)
 256905	3	Türkisfarbener Partylöwenanzug (Baraka)
 256906	3	Türkisfarbener Partylöwenanzug (Baraka)
@@ -48724,8 +49474,39 @@
 257165	3	Färbbares Schwanenkleid (Elin)
 257166	3	Färbbares Schwanenkleid (Elin)
 257167	3	Färbbares Schwanenkleid (Elin)
+257168	3	Bergmannshelm
+257169	3	Bergmannshelm
+257170	3	Bergmannshelm
+257171	3	Bergmannshelm
+257172	3	Bergmannshelm
+257173	3	Bergmannshelm
+257174	3	Bergmannshelm
+257175	3	Bergmannshelm
+257176	3	Bergmannshelm
+257177	3	Bergmannshelm
+257178	3	Bergmannshelm
+257179	3	Bergmannshelm
+257180	3	Jiang Shi-Hut
+257181	3	Jiang Shi-Hut
+257182	3	Jiang Shi-Hut
+257183	3	Jiang Shi-Hut
+257184	3	Jiang Shi-Hut
+257185	3	Jiang Shi-Hut
+257186	3	Jiang Shi-Hut
+257187	3	Jiang Shi-Hut
+257188	3	Jiang Shi-Hut
+257189	3	Jiang Shi-Hut
+257190	3	Jiang Shi-Hut
+257191	3	Jiang Shi-Hut
 220353	3	T-cat 01
 220354	3	T-cat 02
+222678	3	Massive Loot Box 
+222679	3	Extreme Loot Box
+222680	3	Extreme Key
+222681	3	Box 1
+222683	3	Box 3
+222684	3	Box 4
+222686	3	Box 6
 458	0	Reitfertigkeit: Fortuna
 459	0	Reitfertigkeit: Fides
 460	0	Reitfertigkeit: Virtus
@@ -51032,6 +51813,29 @@
 246118	2	Trickkiste: Panzer der Silberflamme
 246119	2	Trickkiste: Panzer der Silberflamme (7 Tage)
 246120	2	Trickkiste: Panzer der Silberflamme (30 Tage)
+246121	2	Trickkiste: Edle Partykostüme
+246122	2	Trickkiste: Edle Partykostüme (30 Tage)
+246123	2	Trickkiste: Edle Partykostüme (7 Tage)
+246124	2	Trickkiste: Färbbare Partykostüme
+246125	2	Trickkiste: Färbbare Partykostüme (30 Tage)
+246126	2	Trickkiste: Färbbare Partykostüme (7 Tage)
+246127	2	Trickkiste: Waffendesign der Eisgarde
+246128	2	Trickkiste: Waffendesign der Eisgarde (30 Tage)
+246129	2	Trickkiste: Waffendesign der Eisgarde (7 Tage)
+246130	2	Trickkiste: Waffendesign der Eisgarde (3 Tage)
+246131	2	Trickkiste: Royales Waffendesign der Eismagie
+246132	2	Trickkiste: Royales Waffendesign der Eismagie (30 Tage)
+246133	2	Trickkiste: Royales Waffendesign der Eismagie (7 Tage)
+246134	2	Trickkiste: Royales Waffendesign der Eismagie (3 Tage)
+246135	2	Trickkiste: Hüter der Eisgarde
+246136	2	Trickkiste: Hüter der Eisgarde (30 Tage)
+246137	2	Trickkiste: Hüter der Eisgarde (7 Tage)
+246138	2	Trickkiste: Hüter der Eisgarde (3 Tage)
+246139	2	Trickkiste: Herrscher der Eisgarde
+246140	2	Trickkiste: Herrscher der Eisgarde (30 Tage)
+246141	2	Trickkiste: Herrscher der Eisgarde (7 Tage)
+246142	2	Trickkiste: Herrscher der Eisgarde (3 Tage)
+246143	2	Trickkiste: Leuchtende Kluft des Todes (permanent)
 100507	0	T
 100508	0	E
 100509	0	R

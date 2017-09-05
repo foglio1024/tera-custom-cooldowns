@@ -41,12 +41,10 @@
 201	Buff	False	True	False	Bénédiction de Shakan I	Augmente la puissance de $H_W_GOOD17$COLOR_END.	icon_skills.attackup_tex
 202	Buff	False	True	False	Bénédiction de Shakan II	Augmente la puissance de $H_W_GOOD25$COLOR_END.	icon_skills.attackup_tex
 301	Stun	True	False	False	Piège de foudre	Étourdi. Impossible de bouger.	icon_skills.shocktrap_tex
-302	Stun	True	False	False	Piège de foudre	Étourdi. Impossible de bouger.	icon_skills.shocktrap_tex
-303	Stun	True	False	False	Piège de foudre	Etourdi[{@g:/e}. Ne peut pas bouger.	icon_skills.shocktrap_tex
 501	Buff	True	True	False	Augmentation de la vitesse de déplacement	Augmente fortement la vitesse de déplacement.	icon_status.aura_of_wind_tex
 601	Buff	True	True	True	Puissance frénétique I	Augmente la puissance de $H_W_GOOD20$COLOR_END et la vitesse d'attaque de $H_W_GOOD$6$COLOR_END. Seuls les alliés situés dans un rayon de 30&nbsp;m autour de l'invocateur bénéficient de l'effet de l'aura.	icon_skills.rage_tex
 602	Buff	True	True	True	Puissance frénétique II	Augmente la puissance de $H_W_GOOD25$COLOR_END et la vitesse d'attaque de $H_W_GOOD$6$COLOR_END. Seuls les alliés situés dans un rayon de 30&nbsp;m autour de l'invocateur bénéficient de l'effet de l'aura.	icon_skills.rage_tex
-603	Buff	True	True	True	Puissance frénétique III	Augmente la puissance de $H_W_GOOD40$COLOR_END et la vitesse d'attaque de $H_W_GOOD$6$COLOR_END. Seuls les joueurs situés dans un rayon de 30&nbsp;m autour de l'invocateur bénéficient de l'effet de l'aura.	icon_skills.rage_tex
+603	Buff	True	True	True	Puissance frénétique III	La puissance augmente de $H_W_GOOD48$COLOR_END et la vitesse d'attaque de $H_W_GOOD9,6$COLOR_END. Cet effet n'affecte que les personnes situées dans un rayon de 30 m autour de l'invocateur.	icon_skills.rage_tex
 901	Stun	True	False	False	Fouet de Shara	Étourdi. Impossible de bouger.	icon_skills.flashball_tex
 902	Buff	True	True	True	Infusion au noctenium	L'infusion au noctenium est appliquée pour augmenter l'effet de cette compétence.	icon_items.union_supplies5_tex
 903	Buff	True	True	False	Intention meurtrière	Augmente la puissance de $H_W_GOOD15$COLOR_END, la vitesse d'attaque de $H_W_GOOD8%$COLOR_END, le facteur de coups critiques de $H_W_GOOD4%$COLOR_END et la vitesse de déplacement de $H_W_GOOD4%$COLOR_END.	icon_skills.battlefield_high_ranking_tex
@@ -932,7 +930,7 @@
 27130	Buff	True	True	False	Glyphe d'équilibre	Augmente le facteur d'équilibre de $H_W_GOOD400 %$COLOR_END.	icon_crest.crestactivereactionresist_tex
 27140	Buff	True	True	False	Glyphe de récupération	Restaure $H_W_GOOD20 %$COLOR_END des PV maximum.	icon_crest.crestpassivehpheal_tex
 27150	Buff	True	True	False	Glyphe de récupération	Totem de protection régénère $H_W_GOOD20%$COLOR_END PV supplémentaires.	icon_crest.crestactivehprecoveryup_tex
-27160	WeakeningEffect	True	False	False	Glyphe d'affaiblissement	Réduit la constitution de $H_W_BAD9%$COLOR_END.	icon_crest.crestactivedefencedown_tex
+27160	WeakeningEffect	True	False	False	Glyphe d'affaiblissement	Réduit la constitution de $H_W_BAD10%$COLOR_END.	icon_crest.crestactivedefencedown_tex
 27161	Buff	True	True	False	Glyphe de récupération majeure	Augmente la régénération de PV de $H_W_GOOD25%$COLOR_END	icon_crest.crestactivehprecoveryup_tex
 27170	Buff	False	True	False	Restauration du total de PV [Glyphe d'encouragement]	Aucune infobulle d'affaiblissement affichée (isShow=False). Si l'infobulle s'affiche, BTS requis !	icon_crest.crestpassivehpwhileheal_tex
 28010	Buff	True	True	False	Glyphe de pouvoir	Augmente les dégâts de compétence de $H_W_GOOD25%$COLOR_END pour Contre-attaque finale.	icon_crest.crestnextskillattackup_tex
@@ -1013,7 +1011,7 @@
 33150	Buff	True	True	False	Dégâts de compétence accrus (Glyphe de puissance)	Les dégâts de la Frappe éthérée augmentent de $H_W_GOOD25%$COLOR_END.	icon_crest.crestnextskillattackup_tex
 33170	Buff	True	True	False	Restauration continue de PV (Glyphe de récupération)	Restauration de $H_W_GOOD2 %$COLOR_END des PV maximums toutes les $H_W_GOOD1$COLOR_END second.	icon_crest.crestpassivehpheal_tex
 33200	Buff	True	True	False	Dégâts de compétence accrus (Glyphe de puissance)	Les dégâts de compétence de la prochaine attaque augmentent de 30 %.	icon_crest.crestnextskillattackup_tex
-33210	Buff	True	True	False	Dégâts de compétence accrus (Glyphe de puissance)	Les dégâts d'Écho de lune augmentent de $H_W_GOOD25%$COLOR_END.	icon_crest.e_crestnextskillattackup_tex
+33210	Buff	True	True	False	Dégâts de compétence accrus (Glyphe de puissance)	Les dégâts d'Écho de lune augmentent de $H_W_GOOD25%$COLOR_END.	icon_crest.crestpassivehpheal_tex
 45301	WeakeningEffect	True	False	False	Grand choc	Profondément choqué	icon_status.minusdefence_tex
 45302	WeakeningEffect	True	False	False	Soufflé	Choqué et renversé.	icon_status.minuscriticalresist_tex
 45303	DamageOverTime	False	False	False		La perceuse disparaîtra dans 13 secondes.	
@@ -1208,9 +1206,9 @@
 100102	Buff	True	True	True	Position offensive III	La puissance augmente de $H_W_GOOD15$COLOR_END et le facteur de coups critiques de $H_W_GOOD50$COLOR_END. La puissance des compétences face aux monstres augmente de $H_W_GOOD10 %$COLOR_END, mais la constitution est réduite de $H_W_BAD10%$COLOR_END.	icon_skills.ironwilla_tex
 100103	Buff	True	True	True	Position offensive IV	La puissance augmente de $H_W_GOOD18$COLOR_END et le facteur de coups critiques de $H_W_GOOD55$COLOR_END. La puissance des compétences face aux monstres augmente de $H_W_GOOD10 %$COLOR_END, mais la constitution est réduite de $H_W_BAD10%$COLOR_END.	icon_skills.ironwilla_tex
 100150	Buff	False	True	True	Affaiblissement invisible (BTS, si visible)	Si vous attaquez des monstres, vous recevez +10 % de dégâts supplémentaires	
-100200	Buff	True	True	True	Position défensive I	La constitution augmente de $H_W_GOOD15%$COLOR_END, l'équilibre de $H_W_GOOD20$COLOR_END et le taux de coups critiques de $H_W_GOOD15 %$COLOR_END quand vous attaquez des monstres. Vos attaques génèrent $H_W_GOOD65%$COLOR_END d'agressivité supplémentaire. Au combat, les attaques adverses ne peuvent pas vous repousser, hormis quelques attaques spéciales de certains monstres donnés.	icon_skills.ironwillb_tex
-100201	Buff	True	True	True	Position défensive II	La constitution augmente de $H_W_GOOD20%$COLOR_END, l'équilibre de $H_W_GOOD20$COLOR_END et le taux de coups critiques de $H_W_GOOD15 %$COLOR_END quand vous attaquez des monstres. Vos attaques génèrent $H_W_GOOD80%$COLOR_END d'agressivité supplémentaire. Au combat, les attaques adverses ne peuvent pas vous repousser, hormis quelques attaques spéciales de certains monstres donnés.	icon_skills.ironwillb_tex
-100202	Buff	True	True	True	Position défensive III	La constitution augmente de $H_W_GOOD25%$COLOR_END, l'équilibre de $H_W_GOOD20$COLOR_END et le taux de coups critiques de $H_W_GOOD15 %$COLOR_END quand vous attaquez des monstres. Vos attaques génèrent $H_W_GOOD100%$COLOR_END d'agressivité supplémentaire. Au combat, les attaques adverses ne peuvent pas vous repousser, hormis quelques attaques spéciales de certains monstres donnés.	icon_skills.ironwillb_tex
+100200	Buff	True	True	True	Position défensive I	La constitution augmente de $H_W_GOOD20%$COLOR_END, l'équilibre de $H_W_GOOD20$COLOR_END et le taux de coups critiques de $H_W_GOOD15 %$COLOR_END quand vous attaquez des monstres. Vos attaques génèrent $H_W_GOOD100%$COLOR_END d'agressivité supplémentaire. Au combat, les attaques adverses ne peuvent pas vous repousser, hormis quelques attaques spéciales de certains monstres donnés.	icon_skills.ironwillb_tex
+100201	Buff	True	True	True	Position défensive II	La constitution augmente de $H_W_GOOD25%$COLOR_END, l'équilibre de $H_W_GOOD30$COLOR_END et le taux de coups critiques de $H_W_GOOD15 %$COLOR_END quand vous attaquez des monstres. Vos attaques génèrent $H_W_GOOD120%$COLOR_END d'agressivité supplémentaire. Au combat, les attaques adverses ne peuvent pas vous repousser, hormis quelques attaques spéciales de certains monstres donnés.	icon_skills.ironwillb_tex
+100202	Buff	True	True	True	Position défensive III	La constitution augmente de $H_W_GOOD10029500%$COLOR_END, l'équilibre de $H_W_GOOD20$COLOR_END et le taux de coups critiques de $H_W_GOOD15 %$COLOR_END quand vous attaquez des monstres. Vos attaques génèrent $H_W_GOOD100%$COLOR_END d'agressivité supplémentaire. Au combat, les attaques adverses ne peuvent pas vous repousser, hormis quelques attaques spéciales de certains monstres donnés.	icon_skills.ironwillb_tex
 100203	Buff	True	True	True	Position défensive IV	La constitution augmente de $H_W_GOOD25%$COLOR_END, l'équilibre de $H_W_GOOD30$COLOR_END et le taux de coups critiques de $H_W_GOOD15 %$COLOR_END quand vous attaquez des monstres. Vos attaques génèrent $H_W_GOOD120%$COLOR_END d'agressivité supplémentaire. Au combat, les attaques adverses ne peuvent pas vous repousser, hormis quelques attaques spéciales de certains monstres donnés.	icon_skills.ironwillb_tex
 100293	Buff	False	True	False	Lames doubles défensives (effet standard)	Aucune infobulle d'affaiblissement affichée (isShow=False). Si cette infobulle s'affiche, BTS requis !	icon_skills.twinswordsdefence_tex
 100294	Buff	True	True	False	Ténacité I	La ténacité vous permet de régénérer 5 % de vos PM.	icon_skills.twinswordsdefence_tex
@@ -1221,37 +1219,48 @@
 100300	Stun	True	False	False	Cri de bataille	Étourdi. Impossible de bouger.	icon_skills.thunderingroar_tex
 100301	Stun	True	False	False	Delete_Battle Cry	Étourdi. Impossible de bouger.	icon_skills.thunderingroar_tex
 100400	Buff	True	True	False	Entaille Vortex active	Vous pouvez maintenant utiliser la compétence Entaille Vortex.	icon_skills.allroundslash_tex
-100500	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-116$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100501	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-175$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100502	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-292$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100503	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-438$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100504	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-612$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100505	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-845$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100506	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-1428$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100507	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-1892$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100508	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-6068$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100520	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-92$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100521	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-127$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100522	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-175$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100523	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-242$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100524	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-334$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100525	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-461$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100526	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-720$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100527	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-954$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
-100528	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-1420$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100500	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-40$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100501	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-60$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100502	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-90$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100503	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-136$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100504	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-214$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100505	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-341$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100506	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-496$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100507	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-690$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100508	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-1039$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100509	DamageOverTime	True	False	False	Lame empoisonnée X	Les PV sont réduits de $H_W_BAD-1582$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100510	DamageOverTime	True	False	False	Lame empoisonnée XI	Les PV sont réduits de $H_W_BAD-1892$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100520	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-36$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100521	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-55$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100522	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-75$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100523	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-104$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100524	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-143$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100525	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-197$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100526	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-273$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100527	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-376$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100528	DamageOverTime	True	False	False	Lame empoisonnée	Réduit les PV de $H_W_BAD-547$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100529	DamageOverTime	True	False	False	Lame empoisonnée X	Les PV sont réduits de $H_W_BAD-798$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
+100530	DamageOverTime	True	False	False	Lame empoisonnée XI	Les PV sont réduits de $H_W_BAD-954$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.poisonblowattack_tex
 100600	Buff	True	True	True	Mutilation	Votre quatrième utilisation consécutive de l'Attaque combinée réduit la vitesse d'attaque et de déplacement de votre adversaire de $H_W_GOOD15 %$COLOR_END. Vous perdez $H_W_BAD-10$COLOR_END PM toutes les $H_W_BAD2$COLOR_END second1 tant que l'effet reste actif.	icon_skills.aimingankle_tex
 100630	WeakeningEffect	True	False	False	Mutilation	Réduit la vitesse de $H_W_BAD0,85$COLOR_END.	icon_skills.aimingankle_tex
 100700	Buff	False	True	False	Contre-attaque étourdissante active	Vous pouvez maintenant utiliser la compétence Contre-attaque étourdissante.	icon_skills.reversalturningattack_tex
 100800	Buff	True	True	False	Pari mortel I	Augmente les chances d'infliger un coup critique de $H_W_GOOD35%$COLOR_END pendant $time sec.	icon_skills.deadlywill_tex
-100801	Buff	True	True	False	Pari mortel II	Les chances du facteur de coups critiques augmentent de $H_W_GOOD50%$COLOR_END pendant $time sec.. Pendant la durée de l'effet, le temps de rechargement des compétences de mêlée du lanceur est réduit de moitié et les compétences suivantes sont renforcées :$BR- [Pluie de coups XI] : +10 % de dégâts supplémentaires et 2 cumuls de fureur.$BR- [Pluie de coups VII] : +10 % de dégâts supplémentaires et 2 cumuls de fureur.$BR- [Faux II] : +10 % de dégâts de compétence, +20 % de rayon d'effet.	icon_skills.deadlywill_tex
+100801	Buff	True	True	False	Pari mortel II	Les chances de coups critiques augmentent de $H_W_GOOD50%$COLOR_END pendant $time secondes. Pendant la durée de l'effet, le temps de rechargement des compétences de mêlée du lanceur est réduit de moitié et les compétences suivantes sont renforcées :$BR- [Pluie de coups IX] : +10 % de dégâts supplémentaires et 2 cumuls de fureur.$BR- [En garde IX] : +10 % de dégâts supplémentaires et 2 cumuls de fureur.$BR- [Faux IX] : +10 % de dégâts de compétence, +20 % de rayon d'effet.	icon_skills.deadlywill_tex
 100802	Buff	False	True	False	Pari mortel II_temps de recharge réduit	Anomalie invisible.	
 100803	Buff	False	True	False	Pari mortel II_temps de recharge réduit	Anomalie invisible.	
 100900	Stun	True	False	False	Étourdissements en cascade	Étourdi. Impossible de bouger.	icon_skills.hardslash_tex
 100901	Stun	True	False	False	Étourdissements en cascade	Etourdi{@g:/e}. Impossible de bouger.	icon_skills.hardslash_tex
+100902	Stun	True	False	False	Étourdissements en cascade III	Vous êtes étourdi et ne pouvez plus bouger.	icon_skills.hardslash_tex
+100903	Stun	True	False	False	Étourdissements en cascade IX	Vous êtes étourdi et ne pouvez plus bouger.	icon_skills.hardslash_tex
+100904	Stun	True	False	False	Étourdissements en cascade X	Vous êtes étourdi et ne pouvez plus bouger.	icon_skills.hardslash_tex
 101000	Stun	True	False	False	Attaque sournoise	Etourdi{@g:/e}. Impossible de bouger.	icon_skills.backattack_tex
 101001	Stun	True	False	False	Attaque sournoise	Etourdi{@g:/e}. Impossible de bouger.	icon_skills.backattack_tex
 101100	Stun	True	False	False	Contre-attaque étourdissante	Étourdi. Impossible de bouger.	icon_skills.reversalturningattack_tex
 101101	Stun	True	False	False	Contre-attaque étourdissante	Etourdi{@g:/e}. Impossible de bouger.	icon_skills.reversalturningattack_tex
+101102	Stun	True	False	False	Contre-attaque étourdissante III	Vous êtes étourdi et ne pouvez plus bouger.	icon_skills.reversalturningattack_tex
+101103	Stun	True	False	False	Contre-attaque étourdissante IX	Vous êtes étourdi et ne pouvez plus bouger.	icon_skills.reversalturningattack_tex
+101104	Stun	True	False	False	Contre-attaque étourdissante X	Vous êtes étourdi et ne pouvez plus bouger.	icon_skills.reversalturningattack_tex
+101105	Stun	True	False	False	Contre-attaque étourdissante XI	Vous êtes étourdi et ne pouvez plus bouger.	icon_skills.reversalturningattack_tex
 101200	WeakeningEffect	True	False	False	Frappe combattive	Réduit la constitution de $H_W_BAD8%$COLOR_END.	icon_skills.aggravatingstrike_tex
 101220	WeakeningEffect	True	False	False	Frappe combattive	Réduit l'endurance de $H_W_BAD8%$COLOR_END et la régénération de PV de $H_W_BAD30%$COLOR_END.	icon_skills.aggravatingstrike_tex
 101300	Buff	True	True	False	Coupe latérale	À chaque cumul, la vitesse d'attaque augmente de 0,9 %. L'effet peut être cumulé jusqu'à 13 fois.	icon_skills.dualrapidpiercing_tex
@@ -1319,9 +1328,9 @@
 300300	Buff	True	True	False	Surpuissance I	Votre prochaine attaque inflige $H_W_GOOD30%$COLOR_END points de dégâts en plus.	icon_skills.gatheringstrength_tex
 300301	Buff	True	True	False	Surpuissance II	Votre prochaine attaque inflige $H_W_GOOD33%$COLOR_END points de dégâts en plus.	icon_skills.gatheringstrength_tex
 300400	Stun	True	False	False	Coup de pied surprenant	Étourdi. Impossible de bouger.	icon_skills.retreatingkick_tex
-300500	Buff	True	True	False	Tête baissée I	Augmente la vitesse de votre prochaine attaque de $H_W_GOOD30%$COLOR_END.	icon_skills.advancingleap_tex
-300501	Buff	True	True	False	Tête baissée II	Augmente la vitesse de votre prochaine attaque de $H_W_GOOD40%$COLOR_END.	icon_skills.advancingleap_tex
-300502	Buff	True	True	False	Tête baissée III	Augmente la vitesse de votre prochaine attaque de $H_W_GOOD50%$COLOR_END.	icon_skills.advancingleap_tex
+300500	Buff	True	True	False	Tête baissée I	Augmente la vitesse de votre prochaine attaque de $H_W_GOOD40%$COLOR_END.	icon_skills.advancingleap_tex
+300501	Buff	True	True	False	Tête baissée II	Augmente la vitesse de votre prochaine attaque de $H_W_GOOD50%$COLOR_END.	icon_skills.advancingleap_tex
+300502	Buff	True	True	False	Tête baissée III	Augmente la vitesse de votre prochaine attaque de $H_W_GOOD60%$COLOR_END.	icon_skills.advancingleap_tex
 300503	Buff	True	True	False	Tête baissée IV	Augmente la vitesse de votre prochaine attaque de $H_W_GOOD60%$COLOR_END.	icon_skills.advancingleap_tex
 300600	Buff	True	True	False	Célérité I	Augmente la vitesse de déplacement de $H_W_GOOD50%$COLOR_END.	icon_skills.dash_tex
 300601	Buff	True	True	False	Célérité II	Augmente la vitesse de déplacement de $H_W_GOOD50%$COLOR_END.	icon_skills.dash_tex
@@ -1700,36 +1709,40 @@
 500600	Buff	True	True	False	Barrière de mana I	Absorbe jusqu'à $H_W_GOOD7063$COLOR_END points de dégâts. Coûte 1 PM par tranche de 14 points de dégâts. L'effet prend fin une fois la limite de dégâts atteinte ou lorsque vous êtes à court de PM.	icon_skills.manashield_tex
 500601	Buff	True	True	False	Barrière de mana II	Absorbe jusqu'à $H_W_GOOD13529$COLOR_END points de dégâts. Coûte 1 PM par tranche de 33 points de dégâts. L'effet prend fin une fois la limite de dégâts atteinte ou lorsque vous êtes à court de PM.	icon_skills.manashield_tex
 500602	Buff	True	True	False	Barrière de mana III	Absorbe jusqu'à $H_W_GOOD17346$COLOR_END points de dégâts. Coûte 1 PM par tranche de 50 points de dégâts. L'effet prend fin une fois la limite de dégâts atteinte ou lorsque vous êtes à court de PM.	icon_skills.manashield_tex
-500700	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-26$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500701	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-40$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500702	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-58$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500703	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-85$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500704	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-121$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500705	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-174$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500706	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-241$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500707	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-341$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500708	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-516$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500720	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-27$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500721	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-37$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500722	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-51$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500723	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-71$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500724	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-97$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500725	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-134$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500726	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-186$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500727	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-258$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
-500728	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-382$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500700	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-40$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500701	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-58$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500702	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-85$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500703	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-121$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500704	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-174$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500705	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-241$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500706	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-341$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500707	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-516$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500720	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-37$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500721	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-51$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500722	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-71$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500723	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-97$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500724	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-134$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500725	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-186$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500726	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-258$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
+500727	DamageOverTime	True	False	False	Explosion de douleur	Réduit les PV de $H_W_BAD-382$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.disease_tex
 500800	Stun	True	False	False	Explosion spirituelle	Étourdi. Impossible de bouger.	icon_skills.sleepwind_tex
 500801	Stun	True	False	False	Explosion spirituelle	Étourdi. Impossible de bouger.	icon_skills.sleepwind_tex
 500802	Stun	True	False	False	Explosion spirituelle	Etourdi{@g:/e}. Impossible de bouger.	icon_skills.sleepwind_tex
 500900	Stun	True	False	False	Epuisement nerveux	Les compétences ne peuvent pas être utilisées. L'effet n'agit que sur les personnages joueurs et disparaît lorsque vous subissez des dégâts ou si vous êtes {@gender:renversé/renversée}.	icon_skills.neurasthenia_tex
-501000	DamageOverTime	True	False	False	Souffle embrasé	Réduit les PV de $H_W_BAD-1175$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
-501001	DamageOverTime	True	False	False	Souffle embrasé	Réduit les PV de $H_W_BAD-1631$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
-501002	DamageOverTime	True	False	False	Souffle embrasé	Réduit les PV de $H_W_BAD-2305$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
-501003	DamageOverTime	True	False	False	Souffle embrasé	Réduit les PV de $H_W_BAD-3120$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
-501020	DamageOverTime	True	False	False	Souffle embrasé	Réduit les PV de $H_W_BAD-890$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
-501021	DamageOverTime	True	False	False	Souffle embrasé	Réduit les PV de $H_W_BAD-1228$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
-501022	DamageOverTime	True	False	False	Souffle embrasé	Réduit les PV de $H_W_BAD-1704$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
-501023	DamageOverTime	True	False	False	Souffle embrasé	Réduit les PV de $H_W_BAD-2259$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
+501000	DamageOverTime	True	False	False	Souffle embrasé	Réduit les PV de $H_W_BAD-443$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
+501001	DamageOverTime	True	False	False	Souffle embrasé	Réduit les PV de $H_W_BAD-613$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
+501002	DamageOverTime	True	False	False	Souffle embrasé	Réduit les PV de $H_W_BAD-849$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
+501003	DamageOverTime	True	False	False	Souffle embrasé	Réduit les PV de $H_W_BAD-1175$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
+501004	DamageOverTime	True	False	False	Souffle embrasé V	Les PV sont réduits de $H_W_BAD-1631$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
+501005	DamageOverTime	True	False	False	Souffle embrasé VI	Les PV sont réduits de $H_W_BAD-2305$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
+501006	DamageOverTime	True	False	False	Souffle embrasé VII	Les PV sont réduits de $H_W_BAD-3120$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
+501020	DamageOverTime	True	False	False	Souffle embrasé	Réduit les PV de $H_W_BAD-338$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
+501021	DamageOverTime	True	False	False	Souffle embrasé	Réduit les PV de $H_W_BAD-467$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
+501022	DamageOverTime	True	False	False	Souffle embrasé	Réduit les PV de $H_W_BAD-645$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
+501023	DamageOverTime	True	False	False	Souffle embrasé	Réduit les PV de $H_W_BAD-890$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
+501024	DamageOverTime	True	False	False	Souffle embrasé V	Les PV sont réduits de $H_W_BAD-1228$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
+501025	DamageOverTime	True	False	False	Souffle embrasé VI	Les PV sont réduits de $H_W_BAD-1704$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
+501026	DamageOverTime	True	False	False	Souffle embrasé VII	Les PV sont réduits de $H_W_BAD-2259$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.burningbreath_tex
 501100	DamageOverTime	True	False	False	Volée de mana I	Réduit les PM de $H_W_BAD-172$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.mpsink_tex
 501101	DamageOverTime	True	False	False	Volée de mana II	Réduit les PM de $H_W_BAD-206$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.mpsink_tex
 501150	DamageOverTime	False	False	False	Volée de mana I	[Test]	icon_skills.mpsink_tex
@@ -1786,23 +1799,23 @@
 600701	WeakeningEffect	True	False	False	Flèche de toile	Réduit la vitesse de déplacement de $H_W_BAD0,7$COLOR_END.	icon_skills.spiderarrow_tex
 600702	WeakeningEffect	True	False	False	Flèche de toile	Réduit la vitesse de déplacement de $H_W_BAD0,67$COLOR_END.	icon_skills.spiderarrow_tex
 600800	Stun	True	False	False	Combat rapproché	Étourdi. Impossible de bouger.	icon_skills.turningkick_tex
-600900	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-270$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
-600901	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-389$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
-600902	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-589$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
-600903	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-849$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
-600904	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-1179$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
-600905	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-1626$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
-600906	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-2360$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
+600900	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-215$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
+600901	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-310$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
+600902	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-456$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
+600903	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-676$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
+600904	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-959$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
+600905	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-1328$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
+600906	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-1871$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
 600907	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-3128$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
 600908	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-3780$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
-600920	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-232$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
-600921	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-160$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
-600922	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-221$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
-600923	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-306$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
-600924	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-422$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
-600925	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-583$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
-600926	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-813$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
-600927	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-1078$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
+600920	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-95$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
+600921	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-131$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
+600922	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-249$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
+600923	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-345$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
+600924	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-476$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
+600925	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-660$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
+600926	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-1078$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
+600927	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-1427$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
 600928	DamageOverTime	True	False	False	Flèche empoisonnée	Réduit les PV de $H_W_BAD-1427$COLOR_END toutes les $H_W_BAD2$COLOR_END second1. Cet effet peut être cumulé trois fois.	icon_skills.venomarrow_tex
 601000	WeakeningEffect	True	False	False	Flèche d'entrave	Réduit la vitesse de déplacement de $value2 et la vitesse d'attaque de $value.	icon_skills.contaningshot_tex
 601001	WeakeningEffect	True	False	False	Flèche d'entrave	Réduit la vitesse de déplacement de $value2 et la vitesse d'attaque de $value.	icon_skills.contaningshot_tex
@@ -1849,6 +1862,7 @@
 700406	Buff	False	True	False	Faveur du titan VII	Rend des PV toutes les $H_W_GOOD1$COLOR_END second.	icon_skills.healshot_tex
 700407	Buff	False	True	False	Faveur du titan VIII	Rend des PV toutes les $H_W_GOOD1$COLOR_END second.	icon_skills.healshot_tex
 700408	Buff	False	True	False	Faveur du titan IX	Restaure des PV toutes les $H_W_GOOD1$COLOR_END second.	icon_skills.healshot_tex
+700409	Buff	False	True	False	Faveur du titan X	Ceci restaure des PV toutes les $H_W_GOOD1$COLOR_END second.	icon_skills.healshot_tex
 700500	WeakeningEffect	True	False	False	Lien antique	Réduit la vitesse de déplacement de $H_W_BAD0,5$COLOR_END.	icon_skills.slowball_tex
 700501	WeakeningEffect	True	False	False	Lien antique	Réduit la vitesse de déplacement de $H_W_BAD0,4$COLOR_END.	icon_skills.slowball_tex
 700600	Buff	True	True	True	Aura d'inclémence I	Étend la Puissance frénétique sur les membres du groupe dans un rayon de 30&nbsp;m. Son maintien consomme $H_W_BAD-30$COLOR_END PM toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.criticalupaura_tex
@@ -1861,26 +1875,8 @@
 700701	Buff	True	True	True	Aura de vivacité II - Libération	Etend l'Aura de vivacité sur les membres du groupe situés dans un rayon de 30 m. Son maintien coûte $H_W_BAD-30$COLOR_END PM toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.speedupaura_tex
 700730	Buff	True	True	True	Aura de vivacité I	AUgmente la vitesse de déplacement de $H_W_GOOD10%$COLOR_END.	icon_status.plusmove_tex
 700731	Buff	True	True	True	Aura de vivacité II	Augmente la vitesse de déplacement de $H_W_GOOD30%$COLOR_END.	icon_status.plusmove_tex
-700800	DamageOverTime	True	False	False	Volée de malédictions	Réduit les PV de $H_W_BAD-40$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700801	DamageOverTime	True	False	False	Volée de malédictions	Réduit les PV de $H_W_BAD-62$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700802	DamageOverTime	True	False	False	Volée de malédictions	Réduit les PV de $H_W_BAD-96$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700803	DamageOverTime	True	False	False	Volée de malédictions	Réduit les PV de $H_W_BAD-138$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700804	DamageOverTime	True	False	False	Volée de malédictions	Réduit les PV de $H_W_BAD-205$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700805	DamageOverTime	True	False	False	Volée de malédictions	Réduit les PV de $H_W_BAD-289$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700806	DamageOverTime	True	False	False	Volée de malédictions	Réduit les PV de $H_W_BAD-417$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700807	DamageOverTime	True	False	False	Volée de malédictions	Réduit les PV de $H_W_BAD-578$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700808	DamageOverTime	True	False	False	Volée de malédictions	Réduit les PV de $H_W_BAD-817$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700809	DamageOverTime	True	False	False	Volée de malédictions	Réduit les PV de $H_W_BAD-1238$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700820	DamageOverTime	True	False	False	Volée de malédictions	Réduit les PV de $H_W_BAD-41$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700821	DamageOverTime	True	False	False	Volée de malédictions	Réduit les PV de $H_W_BAD-63$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700822	DamageOverTime	True	False	False	Volée de malédictions	Réduit les PV de $H_W_BAD-86$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700823	DamageOverTime	True	False	False	Volée de malédictions	Réduit les PV de $H_W_BAD-133$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700824	DamageOverTime	True	False	False	Volée de malédictions	Réduit les PV de $H_W_BAD-191$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700825	DamageOverTime	True	False	False	Volée de malédictions	Réduit les PV de $H_W_BAD-283$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700826	DamageOverTime	True	False	False	Volée de malédictions	Réduit les PV de $H_W_BAD-399$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700827	DamageOverTime	True	False	False	Volée de malédictions	Réduit les PV de $H_W_BAD-576$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700828	DamageOverTime	True	False	False	Volée de malédictions	Réduit les PV de $H_W_BAD-802$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
-700829	DamageOverTime	True	False	False	Volée de malédictions	Réduit les PV de $H_W_BAD-1212$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
+700800	DamageOverTime	True	False	False	Volée de malédictions	Réduit les PV de $H_W_BAD-1238$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
+700820	DamageOverTime	True	False	False	Volée de malédictions	Réduit les PV de $H_W_BAD-1212$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_skills.painfulshackle_tex
 700900	Buff	True	True	False	Infusion de mana	Restaure $H_W_GOOD100$COLOR_END PM toutes les $H_W_GOOD1$COLOR_END second, jusqu'à ce que vous subissiez des dégâts ou que vous utilisiez un objet ou une autre compétence de combat.	icon_skills.mpcharge_tex
 701000	Buff	True	True	False	Grâce de l'esprit I	Restaure $H_W_GOOD70$COLOR_END PV toutes les $H_W_GOOD2$COLOR_END second1.	icon_skills.summonspiritofheal_tex
 701001	Buff	True	True	False	Grâce de l'esprit II	Restaure $H_W_GOOD88$COLOR_END PV toutes les $H_W_GOOD2$COLOR_END second1.	icon_skills.summonspiritofheal_tex
@@ -1967,9 +1963,41 @@
 701606	Buff	True	True	False	Totem de protection	L'énergie invoquée absorbe jusqu'à $H_W_GOOD7149$COLOR_END points de dégâts. L'effet disparaît quand le totem a franchi la limite des dégâts absorbés, quelle que soit sa durée.	icon_skills.energiesofprotection_tex
 701607	Buff	True	True	False	Totem de protection II	L'énergie invoquée restaure $H_W_GOOD700$COLOR_END PV toutes les $H_W_GOOD2$COLOR_END second1.	icon_skills.energiesofprotection_tex
 701700	WeakeningEffect	True	False	False	Infection	Vous êtes malade pendant $time. Réduit la constitution de $H_W_BAD5%$COLOR_END. Les compétences de purification ne permettent pas d'éliminer cet effet. Il infecte les créatures dans un rayon de 7 m autour de vous.	icon_skills.plague_tex
-701701	WeakeningEffect	True	False	False	Infection	Vous êtes malade pendant $time. Réduit la constitution de $H_W_BAD5%$COLOR_END. Les compétences de purification ne permettent pas d'éliminer cet effet. Il infecte les créatures dans un rayon de 7 m autour de vous.	icon_skills.plague_tex
-701800	DamageOverTime	True	False	False	Affliction	Malade. Inflige $H_W_BAD-15086$COLOR_END points de dégâts par seconde.	icon_skills.plague_tex
-701801	DamageOverTime	True	False	False	Affliction	Malade. Réduit la régénération de PV de $H_W_BAD10%$COLOR_END. Inflige $H_W_BAD-1953$COLOR_END points de dégâts par seconde.	icon_skills.plague_tex
+701701	WeakeningEffect	True	False	False	Contagion II	Vous êtes malade pendant $time. Réduit la constitution de $H_W_BAD5%$COLOR_END. Les compétences de purification ne permettent pas d'éliminer cet effet. Il infecte les créatures dans un rayon de 7 m autour de vous.	icon_skills.plague_tex
+701702	WeakeningEffect	True	False	False	Contagion III	Vous êtes malade pendant $time. Votre constitution est réduite de $H_W_BAD5%$COLOR_END et les compétences de purification ne permettent pas d'éliminer cet effet. Il infecte les créatures dans un rayon de 7 m autour de vous.	icon_skills.plague_tex
+701703	WeakeningEffect	True	False	False	Contagion IV	Vous êtes malade pendant $time. Votre constitution est réduite de $H_W_BAD5%$COLOR_END et les compétences de purification ne permettent pas d'éliminer cet effet. Il infecte les créatures dans un rayon de 7 m autour de vous.	icon_skills.plague_tex
+701704	WeakeningEffect	True	False	False	Contagion V	Vous êtes malade pendant $time. Votre constitution est réduite de $H_W_BAD5%$COLOR_END et les compétences de purification ne permettent pas d'éliminer cet effet. Il infecte les créatures dans un rayon de 7 m autour de vous.	icon_skills.plague_tex
+701705	WeakeningEffect	True	False	False	Contagion VI	Vous êtes malade pendant $time. Votre constitution est réduite de $H_W_BAD5%$COLOR_END et les compétences de purification ne permettent pas d'éliminer cet effet. Il infecte les créatures dans un rayon de 7 m autour de vous.	icon_skills.plague_tex
+701706	WeakeningEffect	True	False	False	Contagion VII	Vous êtes malade pendant $time. Votre constitution est réduite de $H_W_BAD5%$COLOR_END et les compétences de purification ne permettent pas d'éliminer cet effet. Il infecte les créatures dans un rayon de 7 m autour de vous.	icon_skills.plague_tex
+701707	WeakeningEffect	True	False	False	Contagion VIII	Vous êtes malade pendant $time. Votre constitution est réduite de $H_W_BAD5%$COLOR_END et les compétences de purification ne permettent pas d'éliminer cet effet. Il infecte les créatures dans un rayon de 7 m autour de vous.	icon_skills.plague_tex
+701708	WeakeningEffect	True	False	False	Contagion IX	Vous êtes malade pendant $time. Votre constitution est réduite de $H_W_BAD5%$COLOR_END et les compétences de purification ne permettent pas d'éliminer cet effet. Il infecte les créatures dans un rayon de 7 m autour de vous.	icon_skills.plague_tex
+701720	WeakeningEffect	True	False	False	Contagion	Vous êtes malade pendant $time. Votre constitution est réduite de $H_W_BAD5%$COLOR_END et les compétences de purification ne permettent pas d'éliminer cet effet. Il infecte les créatures dans un rayon de 7 m autour de vous.	icon_skills.plague_tex
+701721	WeakeningEffect	True	False	False	Contagion II	Vous êtes malade pendant $time. Votre constitution est réduite de $H_W_BAD5%$COLOR_END et les compétences de purification ne permettent pas d'éliminer cet effet. Il infecte les créatures dans un rayon de 7 m autour de vous.	icon_skills.plague_tex
+701722	WeakeningEffect	True	False	False	Contagion III	Vous êtes malade pendant $time. Votre constitution est réduite de $H_W_BAD5%$COLOR_END et les compétences de purification ne permettent pas d'éliminer cet effet. Il infecte les créatures dans un rayon de 7 m autour de vous.	icon_skills.plague_tex
+701723	WeakeningEffect	True	False	False	Contagion IV	Vous êtes malade pendant $time. Votre constitution est réduite de $H_W_BAD5%$COLOR_END et les compétences de purification ne permettent pas d'éliminer cet effet. Il infecte les créatures dans un rayon de 7 m autour de vous.	icon_skills.plague_tex
+701724	WeakeningEffect	True	False	False	Contagion V	Vous êtes malade pendant $time. Votre constitution est réduite de $H_W_BAD5%$COLOR_END et les compétences de purification ne permettent pas d'éliminer cet effet. Il infecte les créatures dans un rayon de 7 m autour de vous.	icon_skills.plague_tex
+701725	WeakeningEffect	True	False	False	Contagion VI	Vous êtes malade pendant $time. Votre constitution est réduite de $H_W_BAD5%$COLOR_END et les compétences de purification ne permettent pas d'éliminer cet effet. Il infecte les créatures dans un rayon de 7 m autour de vous.	icon_skills.plague_tex
+701726	WeakeningEffect	True	False	False	Contagion VII	Vous êtes malade pendant $time. Votre constitution est réduite de $H_W_BAD5%$COLOR_END et les compétences de purification ne permettent pas d'éliminer cet effet. Il infecte les créatures dans un rayon de 7 m autour de vous.	icon_skills.plague_tex
+701727	WeakeningEffect	True	False	False	Contagion VIII	Vous êtes malade pendant $time. Votre constitution est réduite de $H_W_BAD5%$COLOR_END et les compétences de purification ne permettent pas d'éliminer cet effet. Il infecte les créatures dans un rayon de 7 m autour de vous.	icon_skills.plague_tex
+701728	WeakeningEffect	True	False	False	Contagion IX	Vous êtes malade pendant $time. Votre constitution est réduite de $H_W_BAD5%$COLOR_END et les compétences de purification ne permettent pas d'éliminer cet effet. Il infecte les créatures dans un rayon de 7 m autour de vous.	icon_skills.plague_tex
+701800	DamageOverTime	True	False	False	Affliction	Malade. Inflige $H_W_BAD-1141$COLOR_END points de dégâts par seconde.	icon_skills.plague_tex
+701801	DamageOverTime	True	False	False	Contagion II	Malade. Ceci inflige $H_W_BAD-1585$COLOR_END points de dégâts par seconde.	icon_skills.plague_tex
+701802	DamageOverTime	True	False	False	Contagion III	Malade. Ceci inflige $H_W_BAD-2202$COLOR_END points de dégâts par seconde.	icon_skills.plague_tex
+701803	DamageOverTime	True	False	False	Contagion IV	Malade. Ceci inflige $H_W_BAD-3059$COLOR_END points de dégâts par seconde.	icon_skills.plague_tex
+701804	DamageOverTime	True	False	False	Contagion V	Malade. Ceci inflige $H_W_BAD-4248$COLOR_END points de dégâts par seconde.	icon_skills.plague_tex
+701805	DamageOverTime	True	False	False	Contagion VI	Malade. Ceci inflige $H_W_BAD-5900$COLOR_END points de dégâts par seconde.	icon_skills.plague_tex
+701806	DamageOverTime	True	False	False	Contagion VII	Malade. Ceci inflige $H_W_BAD-8194$COLOR_END points de dégâts par seconde.	icon_skills.plague_tex
+701807	DamageOverTime	True	False	False	Contagion VIII	Malade. Ceci inflige $H_W_BAD-11380$COLOR_END points de dégâts par seconde.	icon_skills.plague_tex
+701808	DamageOverTime	True	False	False	Contagion IX	Malade. Ceci inflige $H_W_BAD-15086$COLOR_END points de dégâts par seconde.	icon_skills.plague_tex
+701820	DamageOverTime	True	False	False	Contagion	Malade. Ceci réduit la régénération de PV de $H_W_BAD10%$COLOR_END et inflige $H_W_BAD-141$COLOR_END points de dégâts par seconde.	icon_skills.plague_tex
+701821	DamageOverTime	True	False	False	Contagion II	Malade. Ceci réduit la régénération de PV de $H_W_BAD10%$COLOR_END et inflige $H_W_BAD-196$COLOR_END points de dégâts par seconde.	icon_skills.plague_tex
+701822	DamageOverTime	True	False	False	Contagion III	Malade. Ceci réduit la régénération de PV de $H_W_BAD10%$COLOR_END et inflige $H_W_BAD-272$COLOR_END points de dégâts par seconde.	icon_skills.plague_tex
+701823	DamageOverTime	True	False	False	Contagion IV	Malade. Ceci réduit la régénération de PV de $H_W_BAD10%$COLOR_END et inflige $H_W_BAD-378$COLOR_END points de dégâts par seconde.	icon_skills.plague_tex
+701824	DamageOverTime	True	False	False	Contagion V	Malade. Ceci réduit la régénération de PV de $H_W_BAD10%$COLOR_END et inflige $H_W_BAD-525$COLOR_END points de dégâts par seconde.	icon_skills.plague_tex
+701825	DamageOverTime	True	False	False	Contagion VI	Malade. Ceci réduit la régénération de PV de $H_W_BAD10%$COLOR_END et inflige $H_W_BAD-729$COLOR_END points de dégâts par seconde.	icon_skills.plague_tex
+701826	DamageOverTime	True	False	False	Contagion VII	Malade. Ceci réduit la régénération de PV de $H_W_BAD10%$COLOR_END et inflige $H_W_BAD-1012$COLOR_END points de dégâts par seconde.	icon_skills.plague_tex
+701827	DamageOverTime	True	False	False	Contagion VIII	Malade. Ceci réduit la régénération de PV de $H_W_BAD10%$COLOR_END et inflige $H_W_BAD-1406$COLOR_END points de dégâts par seconde.	icon_skills.plague_tex
+701828	DamageOverTime	True	False	False	Contagion IX	Malade. Ceci réduit la régénération de PV de $H_W_BAD10%$COLOR_END et inflige $H_W_BAD-1953$COLOR_END points de dégâts par seconde.	icon_skills.plague_tex
 701900	Buff	True	True	False	Invincibilité du téléportail	Ne doit pas s'afficher	icon_skills.voidtrap_tex
 757001	Buff	False	False	False	Ceci n'est pas censé s'afficher	Ceci n'est pas censé s'afficher	icon_status.firedamage_tex
 757002	Buff	True	False	True	Pierre de feu	Le géant de pierre est en feu. Les cibles dans un rayon de 21 m obtiennent "Chaleur".	icon_status.firedamage_tex
@@ -2268,14 +2296,14 @@
 781107	Buff	False	True	False			
 781108	Buff	False	True	False			
 781109	DamageOverTime	False	False	False			
-781110	Buff	False	True	False			
+781110	Buff	False	False	False			
 781111	WeakeningEffect	True	False	False	Graine de Lakan	Une graine magique de Lakan vous affecte. Passé un certain délai, elle explose.	icon_status.heat_tex
-781112	Buff	False	True	False			
+781112	Buff	False	False	False			
 781113	Buff	False	True	False			
 781114	DamageOverTime	False	False	False			
-781115	Buff	False	True	False			
+781115	Buff	False	False	False			
 781116	WeakeningEffect	True	False	False	Graine de Lakan	Une graine magique de Lakan vous affecte. Passé un certain délai, elle explose.	icon_status.heat_tex
-781117	Buff	False	True	False			
+781117	Buff	False	False	False			
 781118	Buff	False	True	False			
 781119	Buff	True	True	False	Compression de mana	Lakan rassemble sa magie pour déclencher une compétence de destruction. Attaquez Lakan avec une compétence de sommeil afin de l'endormir !	icon_status.windtyrant_tex
 781120	Buff	False	True	False			
@@ -2340,15 +2368,6 @@
 801301	Buff	True	True	False	Renaissance II	Augmente l'équilibre de $H_W_GOOD100%$COLOR_END.	icon_skills.recovery_tex
 801400	Buff	True	True	False	Poussée restauratrice I	Rend des PV toutes les $H_W_GOOD1$COLOR_END second.	icon_skills.sanctuaryofregeneration_tex
 801401	Buff	True	True	False	Poussée restauratrice II	Rend des PV toutes les $H_W_GOOD1$COLOR_END second.	icon_skills.sanctuaryofregeneration_tex
-801402	Buff	True	True	False	Poussée restauratrice III	Rend des PV toutes les $H_W_GOOD1$COLOR_END second.	icon_skills.sanctuaryofregeneration_tex
-801403	Buff	True	True	False	Poussée restauratrice IV	Rend des PV toutes les $H_W_GOOD1$COLOR_END second.	icon_skills.sanctuaryofregeneration_tex
-801404	Buff	True	True	False	Poussée restauratrice V	Rend des PV toutes les $H_W_GOOD1$COLOR_END second.	icon_skills.sanctuaryofregeneration_tex
-801405	Buff	True	True	False	Poussée restauratrice VI	Rend des PV toutes les $H_W_GOOD1$COLOR_END second.	icon_skills.sanctuaryofregeneration_tex
-801406	Buff	True	True	False	Poussée restauratrice VII	Rend des PV toutes les $H_W_GOOD1$COLOR_END second.	icon_skills.sanctuaryofregeneration_tex
-801407	Buff	True	True	False	Poussée restauratrice VIII	Rend des PV toutes les $H_W_GOOD1$COLOR_END second.	icon_skills.sanctuaryofregeneration_tex
-801408	Buff	True	True	False	Poussée restauratrice IX	Rend des PV toutes les $H_W_GOOD1$COLOR_END second.	icon_skills.sanctuaryofregeneration_tex
-801409	Buff	True	True	False	Poussée restauratrice X	Rend des PV toutes les $H_W_GOOD1$COLOR_END second.	icon_skills.sanctuaryofregeneration_tex
-801410	Buff	True	True	False	Poussée restauratrice XI	Restaure des PV toutes les $H_W_GOOD1$COLOR_END second.	icon_skills.sanctuaryofregeneration_tex
 801500	Buff	True	True	False	Étoiles énergétiques I	Augmente la puissance de $H_W_GOOD20$COLOR_END et la vitesse d'attaque de $H_W_GOOD8$COLOR_END.	icon_skills.divinelightning_tex
 801501	Buff	True	True	False	Étoiles énergétiques II	Augmente la puissance de $H_W_GOOD28$COLOR_END et la vitesse d'attaque de $H_W_GOOD8$COLOR_END.	icon_skills.divinelightning_tex
 801502	Buff	True	True	False	Étoiles énergétiques III	Augmente la puissance de $H_W_GOOD36$COLOR_END et la vitesse d'attaque de $H_W_GOOD8$COLOR_END.	icon_skills.divinelightning_tex
@@ -2931,8 +2950,8 @@
 950515	Buff	True	True	True	Dernier sursaut	Vergos fait le dos rond et déploie toutes les forces qui lui restent. Sa vitesse d'attaque augmente de 40 % et sa défense de 70 %.	icon_status.vergosdust_tex
 950516	WeakeningEffect	True	True	False	Densification des flammes	Les flammes vont bientôt vous recouvrir.	icon_status.vergosflame_tex
 950517	WeakeningEffect	True	True	False	Densification de la poussière	La poussière va bientôt vous recouvrir.	icon_status.vergosdust_tex
-950518	WeakeningEffect	True	True	False	Blessures de patte avant	Une patte arrière de Vergos vous a touché et infligé une blessure ouverte. Si cette attaque vous touche encore une fois, vous explosez.	icon_status.damageup_tex
-950519	WeakeningEffect	True	True	False	Blessures de patte arrière	Une patte arrière de Vergos vous a touché et infligé une blessure ouverte. Si cette attaque vous touche encore une fois, vous explosez.	icon_status.damagedown_tex
+950518	WeakeningEffect	True	True	False	Vous avez été touché par une patte avant.	Une patte arrière de Vergos vous a touché et infligé une blessure ouverte. Si cette attaque vous touche encore une fois, vous explosez.	icon_status.damageup_tex
+950519	WeakeningEffect	True	True	False	Vous avez été touché par une patte arrière.	Une patte arrière de Vergos vous a touché et infligé une blessure ouverte. Si cette attaque vous touche encore une fois, vous explosez.	icon_status.damagedown_tex
 950520	WeakeningEffect	False	True	True			
 950521	Buff	False	True	False			
 950600	Buff	True	True	True	Faveur de la déesse	La protection radieuse de la déesse vous enveloppe et vous vous sentez plus fort.	icon_skills.tranquility_tex
@@ -3090,9 +3109,9 @@
 981097	Buff	True	False	False			
 981098	Buff	False	True	False			
 981099	Stun	True	True	False	Étourdissement	Juste avant que l'attaque de Lakan ne vous frappe, une aura puissante vous a submergé pour vous étourdir.	icon_status.confuseup_tex
-981100	Buff	False	True	False			
-981101	Buff	False	True	False			
-981102	Buff	False	True	False			
+981100	Buff	False	True	True			
+981101	Buff	False	True	True			
+981102	Buff	False	True	True			
 981103	Buff	True	True	False			
 981104	Buff	False	True	False			
 981105	Buff	False	True	False			
@@ -3100,14 +3119,14 @@
 981107	Buff	False	True	False			
 981108	Buff	False	True	False			
 981109	DamageOverTime	False	False	False			
-981110	Buff	False	True	False			
+981110	Buff	False	False	False			
 981111	WeakeningEffect	True	False	False	Graine de Lakan	Une graine magique de Lakan vous affecte. Passé un certain délai, elle explose.	icon_status.heat_tex
-981112	Buff	False	True	False			
+981112	Buff	False	False	False			
 981113	Buff	False	True	False			
 981114	DamageOverTime	False	False	False			
-981115	Buff	False	True	False			
+981115	Buff	False	False	False			
 981116	WeakeningEffect	True	False	False	Graine de Lakan	Une graine magique de Lakan vous affecte. Passé un certain délai, elle explose.	icon_status.heat_tex
-981117	Buff	False	True	False			
+981117	Buff	False	False	False			
 981118	Buff	False	True	False			
 981119	Buff	True	True	False	Compression de mana	Lakan rassemble sa magie pour déclencher une compétence de destruction. Attaquez Lakan avec une compétence de sommeil afin de l'endormir !	icon_status.windtyrant_tex
 981120	Buff	False	True	True			
@@ -3727,6 +3746,7 @@
 10152093	Buff	False	True	False			
 10152094	Buff	False	True	False			
 10152095	Buff	False	True	False			
+10152096	Buff	False	True	False	La Colère divine nécessite de réinitialiser le temps de rechargement.	Utiliser le Bombardement et réinitialiser le temps de rechargement.	
 10152100	Buff	True	True	False	Volonté focalisée	La volonté peut être stockée pendant 60 secondes, après quoi elle chute rapidement. Infliger des dégâts à un ennemi relance ce compte à rebours.	icon_skills.energycharging_tex
 10152110	Buff	True	True	False	Barrière de secours	Une barrière de secours absorbe jusqu'à $H_W_GOOD27858$COLOR_END dégâts.	icon_skills.emergencyshield_tex
 10152111	Buff	True	True	False	Barrière de secours	Une barrière de secours absorbe jusqu'à $H_W_GOOD34900$COLOR_END dégâts.	icon_skills.emergencyshield_tex
@@ -3816,6 +3836,7 @@
 10154050	Buff	True	True	False	Rideau de brume	Enveloppé{@g:/e} dans le Rideau de brume, vous pouvez esquiver les attaques ennemies.	icon_skills.c12_smokebombevade
 10154051	Buff	False	True	False		Cette anomalie n'est pas censée s'afficher.	
 10154052	Buff	False	True	False			
+10154054	Buff	False	True	False	La Colère divine nécessite de réinitialiser le temps de rechargement.	Utiliser la Colère divine et réinitialiser le temps de rechargement.	
 10154060	Buff	False	True	False			
 10154061	Buff	False	True	False			
 10154062	Buff	False	True	False			
@@ -4114,6 +4135,112 @@
 45000120	Buff	True	True	False	Acrophobie	Vous avez peur des hauteurs et êtes momentanément incapable d'utiliser des compétences.	icon_status.fearstatus_tex
 45000121	Buff	True	True	False	Renforcement d'épiderme	La peau de Koleogg se renforce et l'immunise contre tous les dégâts.	icon_status.plusedefence_tex
 45000122	Buff	True	True	False	Protection de Velik	La Protection de Velik active un bouclier pendant 5 secondes.	icon_status.bless_of_velic_tex
+46600001	Stun	False	False	False	2 secondes d'étourdissement pour la capture du 2e boss		
+46600002	Buff	True	True	True	Bourrade de Demoroth	Demoroth est imperturbable pendant qu'il lance les dés. La défense de Demoroth a été multipliée par 1 000.	icon_status.plusedefence_tex
+46600003	Buff	False	True	False			
+46600004	Stun	False	False	False			
+46600005	DamageOverTime	False	False	False			
+46600006	WeakeningEffect	False	True	True			
+46600007	Buff	False	True	True		La personne qui a le dé royal peut lancer les dés.	
+46600008	Buff	False	True	True		Conditions de révocation du dé de PJ	
+46600009	Buff	False	True	True			
+46600010	WeakeningEffect	False	True	False			
+46600011	Buff	False	False	True		Pour l'effet de dé (bleu)	
+46600012	Buff	False	False	True		Pour l'effet de dé (rouge)	
+46600013	Buff	False	True	True		Pour l'effet de dé (blanc)	
+46600014	Buff	False	True	False			
+46600015	Buff	False	True	False			
+46600016	Buff	False	True	False		Temps de rechargement de l'apparition de dé : 90 secondes	
+46600017	Buff	False	True	True			
+46600018	DamageOverTime	True	False	False	Malédiction de Demoroth	Réduction de $H_W_BAD10 %$COLOR_END des PV maximums toutes les $H_W_BAD2$COLOR_END second1.	icon_status.injuredbtdarkness_tex
+46600019	WeakeningEffect	False	True	False		Au déclenchement de la minute fiévreuse chez le 2e boss, représentation de l'effet groggy.	
+46600020	WeakeningEffect	False	True	False		Effet du retrait d'action	
+46600021	Buff	False	True	False		Pour vérification de défaite ou victoire à chaque tour.	
+46600022	Buff	False	True	True			
+46600023	Buff	False	True	True			
+46600024	Buff	False	True	True			
+46600025	Buff	False	True	True			
+46600026	Buff	False	True	True			
+46600027	Buff	False	True	True		Suite à la 2e phase du 2e boss, un PNJ invisible possède 3 dés invoqués différents qu'il est possible de lancer.	
+46600028	Buff	False	True	False		Zone sûre pour PJ	
+46600029	Buff	False	True	False	Effet d'exploit	Effet d'exploit	
+46600030	Buff	False	True	False	Effet d'exploit	Effet d'exploit	
+46600031	Buff	False	True	True			
+46600032	Buff	False	True	True			
+46600033	Buff	False	True	True			
+46600034	Buff	False	True	True			
+46600035	Buff	False	True	True			
+46600036	Buff	False	True	True			
+46600037	Buff	False	True	True			
+46600038	Buff	False	True	False			
+46600039	Buff	False	True	False			
+46600040	Stun	True	False	False	Étourdissement	Votre corps tout entier est perclus de douleurs qui vous immobilisent pendant 5 secondes.	icon_status.positionswap_tex
+46600041	Buff	False	True	False		Pour la représentation de l'effet d'atomisation chez le 1er boss (rouge).	
+46600042	DamageOverTime	False	True	False		Pour la représentation de l'effet d'atomisation chez le 1er boss (bleu).	
+46600043	DamageOverTime	False	True	False		Pour la représentation de l'effet d'atomisation chez le 1er boss (vert).	
+46600053	Buff	False	True	True	Cubes lumineux	Les dés lumineux sont invoqués.	
+46600054	WeakeningEffect	False	True	True			
+46600055	Buff	False	True	True			
+46600056	Buff	False	True	True			
+46600057	Buff	False	True	True			
+46600059	Buff	False	True	True		Indiquer au PNJ invisible que la roulette tourne en sens inverse.	
+46600060	Buff	False	True	True		Indiquer au PNJ invisible que la roulette tourne dans la bonne direction.	
+46600061	Buff	False	True	True		Communiquer le résultat de la roulette (rouge) au PNJ invisible.	
+46600062	Buff	False	True	True		Communiquer le résultat de la roulette (blanc) au PNJ invisible.	
+46600063	Buff	False	True	True		Communiquer le résultat de la roulette (bleu) au PNJ invisible.	
+46600064	Buff	False	True	True		Un effet qui fait que le PJ peut lancer le dé.	
+46600065	Buff	False	True	True		Un effet qui entraîne l'explosion du dé de PJ.	
+46600066	WeakeningEffect	False	True	True		Un bouclier pour les dés de PJ qui explosent.	
+46600067	WeakeningEffect	False	True	True		Un bouclier pour 1 dé.	
+46600068	WeakeningEffect	False	True	True		Un bouclier pour 2 dés.	
+46600069	DamageOverTime	False	False	False		Invisibilité de révocation de roulette	
+46600070	Buff	False	True	False		Effet d'invocation pour les PNJ de roulette	
+46600071	DamageOverTime	False	False	False		Un effet qui intervient après écoulement d'une durée de 46 600 070.	icon_status.icedamage_tex
+46600072	Buff	False	True	False		Indiquer au 2e boss que le cylindre de la roulette tourne, afin d'empêcher l'invocation de dés.	icon_status.firedamage_tex
+46600073	Buff	False	True	True		Effet d'invocation de la roulette en sens inverse	
+46600074	Buff	False	True	True		Effet d'invocation de la roulette dans le bon sens	
+46600075	Buff	False	True	False		Effet de temps de rechargement de la roulette	
+46600076	WeakeningEffect	False	True	True		Effet de la compétence permettant de lancer 3 dés différents pendant la 2e phase	
+46600077	Buff	False	True	False		Indiquer au 2e boss que le cylindre de la roulette est arrêté.	
+46600078	Buff	False	True	True		Un effet que le 2e monstre s'administre en entrant dans la 2e phase.	
+46600079	Buff	True	True	False	Frénésie de Demoroth	Demoroth se prépare à fuir dans l'autre dimension. La défense de Demoroth est multipliée par 1 000.	icon_status.plusedefence_tex
+46600080	Buff	False	True	True		Dans la case 10	
+46600081	Buff	False	True	True		Dans la case 1	
+46600082	Buff	False	True	True		Dans la case 2	
+46600083	Buff	False	True	True		Dans la case 3	
+46600084	Buff	False	True	True		Dans la case 4	
+46600085	Buff	False	True	True		Dans la case 5	
+46600086	Buff	False	True	True		Dans la case 6	
+46600088	Buff	False	True	False		Un coup gagnant avec un écu TERA augmente la jauge de 1 (pour représentation).	
+46600089	DamageOverTime	False	False	False		Un coup gagnant avec un écu TERA augmente la jauge de 3 (pour représentation).	
+46600090	DamageOverTime	False	False	False		Le 2e boss joue à la roulette.	
+46600091	Buff	False	True	False			
+46600092	Buff	False	True	False			
+46600093	Buff	False	True	False			
+46600094	Buff	False	True	False		2e boss_Pour modèle de dé bonus	
+46600095	Buff	False	True	False			
+46600096	Buff	False	True	False			
+46600097	Buff	False	True	False			
+46600098	DamageOverTime	False	False	False		2e boss_Régénération de minute fiévreuse	icon_skills.refreshbless_tex
+46600099	Buff	True	True	False	Absorption dimensionnelle	Les PV maximums sont restaurés de $H_W_GOOD0,35 %$COLOR_END toutes les $H_W_GOOD1$COLOR_END second.	icon_skills.refreshbless_tex
+46600100	Buff	False	True	True		Le 2e boss est en état "Invincible".	
+46600101	Buff	False	True	False			
+46600102	Buff	False	True	False			
+46600103	Buff	False	True	True		Motif de cercle proche rouge -> Cercle proche vert pendant la 2e phase	
+46600104	Buff	False	True	True		Motif de cercle proche vert -> Cercle proche rouge pendant la 2e phase	
+46600105	Buff	False	True	False		Effet de vérification de chiffre impair chez le 1er boss (quand il a un chiffre impair)	
+46600106	Buff	False	True	False		Le cumul de 2 chiffres impairs entraîne la transformation en un chiffre pair -> disparition après 1 seconde	
+46600107	Buff	False	False	False			
+46600108	Buff	False	False	False			
+46600109	Buff	False	True	False		Temps de rechargement du modèle de chiffres pairs et impairs chez le 1er boss	
+46600110	Buff	False	True	False		Temps de rechargement du modèle d'atomisation du 1er boss	
+46600111	Buff	False	True	True			
+46600112	Buff	False	True	False		Vignette de portée d'atomisation du 1er boss	
+46600113	DamageOverTime	True	False	False	Blessure infligée par Turga	Réduction de $H_W_BAD10 %$COLOR_END des PV maximums toutes les $H_W_BAD1$COLOR_END second.	icon_status.injuredbtdarkness_tex
+46600114	Buff	False	True	True		Impair : vaste explosion	
+46600115	Buff	False	True	True		Impair : explosion lointaine	
+46600116	Buff	False	True	True		Pair : vaste explosion	
+46600117	Buff	False	True	True		Pair : explosion lointaine	
 47300100	DamageOverTime	True	False	False	Résine venimeuse	Réduit les PV de $H_W_BAD50 %$COLOR_END du maximum toutes les $H_W_BAD60$COLOR_END second1.$BRRésine venimeuse ne peut être purifiée ou nettoyée.	icon_status.poisonstatus_tex
 47300200	DamageOverTime	True	False	False	Venin de Thulsa	Réduit les PV de $H_W_BAD5 %$COLOR_END du maximum toutes les $H_W_BAD3$COLOR_END second1.$BRVenin de Thulsa ne peut être purifié ou nettoyé.	icon_status.poisonstatus_tex
 47300300	DamageOverTime	True	False	False	Poison de Thulsa	Réduit les PV de $H_W_BAD30 %$COLOR_END du maximum toutes les $H_W_BAD4$COLOR_END second1.$BRPoison de Thulsa ne peut être purifié ou nettoyé.	icon_status.poisonstatus_tex

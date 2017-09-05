@@ -2551,6 +2551,7 @@
 		<Monster name="席貝爾" id="1167" isBoss="False" hp="10000" />
 		<Monster name="艾利恩庫貝爾" id="1168" isBoss="False" hp="10000" />
 		<Monster name="艾利恩庫貝爾" id="1169" isBoss="False" hp="10000" />
+		<Monster name="蓓絲" id="1170" isBoss="False" hp="10000" />
 		<Monster name="羅坎佩比斯" id="1172" isBoss="False" hp="10000" />
 		<Monster name="爾利安納克頓" id="1173" isBoss="False" hp="10000" />
 		<Monster name="尤斯提亞雷奎恩" id="1174" isBoss="False" hp="10000" />
@@ -9871,20 +9872,20 @@
 		<Monster name="潘里克" id="4521" isBoss="False" hp="945" />
 	</Zone>
 	<Zone id="454" name="邪惡的奧露卡神殿" >
-		<Monster name="地之心臟" id="93" isBoss="False" hp="11250000" />
-		<Monster name="水之心臟" id="94" isBoss="False" hp="11250000" />
+		<Monster name="地之心臟" id="93" isBoss="False" hp="16000000" />
+		<Monster name="水之心臟" id="94" isBoss="False" hp="16000000" />
 		<Monster name="心臟本體" id="95" isBoss="False" hp="10000" />
-		<Monster name="火花的心臟" id="97" isBoss="False" hp="11250000" />
-		<Monster name="閃電球體" id="100" isBoss="False" hp="800000" />
+		<Monster name="火花的心臟" id="97" isBoss="False" hp="16000000" />
+		<Monster name="閃電球體" id="100" isBoss="False" hp="4000000" />
 		<Monster name="海底岩石" id="404" isBoss="False" hp="1" />
 		<Monster name="海底岩石" id="405" isBoss="False" hp="1" />
-		<Monster name="深海烏龜" id="408" isBoss="False" hp="2184781" />
-		<Monster name="深海水母" id="500" isBoss="False" hp="2184781" />
-		<Monster name="深海海星" id="501" isBoss="False" hp="2184781" />
-		<Monster name="神殿偵察兵" id="502" isBoss="False" hp="2184781" />
-		<Monster name="深海怪物" id="503" isBoss="False" hp="11000000" />
-		<Monster name="深海怪物" id="504" isBoss="False" hp="11000000" />
-		<Monster name="遺物機器" id="600" isBoss="False" hp="15000000" />
+		<Monster name="深海烏龜" id="408" isBoss="False" hp="13600000" />
+		<Monster name="深海水母" id="500" isBoss="False" hp="13600000" />
+		<Monster name="深海海星" id="501" isBoss="False" hp="13600000" />
+		<Monster name="神殿偵察兵" id="502" isBoss="False" hp="13600000" />
+		<Monster name="深海怪物" id="503" isBoss="False" hp="17600000" />
+		<Monster name="深海怪物" id="504" isBoss="False" hp="17600000" />
+		<Monster name="遺物機器" id="600" isBoss="False" hp="48000000" />
 		<Monster name="奧露卡精靈" id="601" isBoss="False" hp="2184781" />
 		<Monster name="奧露卡精靈" id="602" isBoss="False" hp="2184781" />
 		<Monster name="奧露卡精靈" id="603" isBoss="False" hp="2184781" />
@@ -9892,10 +9893,10 @@
 		<Monster name="奧露卡精靈" id="605" isBoss="False" hp="2184781" />
 		<Monster name="奧露卡精靈" id="606" isBoss="False" hp="2184781" />
 		<Monster name="奧露卡精靈" id="607" isBoss="False" hp="2184781" />
-		<Monster name="奧露卡小型泥人怪" id="700" isBoss="False" hp="2184781" />
-		<Monster name="奧露卡盜魄坎" id="701" isBoss="False" hp="2184781" />
-		<Monster name="奧露卡泥人怪" id="702" isBoss="False" hp="15000000" />
-		<Monster name="神殿心臟體" id="903" isBoss="False" hp="3500000" />
+		<Monster name="奧露卡小型泥人怪" id="700" isBoss="False" hp="13600000" />
+		<Monster name="奧露卡盜魄坎" id="701" isBoss="False" hp="13600000" />
+		<Monster name="奧露卡泥人怪" id="702" isBoss="False" hp="56000000" />
+		<Monster name="神殿心臟體" id="903" isBoss="False" hp="5000000" />
 		<Monster name="寶物箱" id="904" isBoss="False" hp="100" />
 		<Monster name="老舊寶物箱" id="905" isBoss="False" hp="100" />
 		<Monster name="金色寶箱" id="906" isBoss="False" hp="100" />
@@ -9910,9 +9911,9 @@
 		<Monster name="請消滅奧露卡泥人怪" id="918" isBoss="False" hp="0" />
 		<Monster name="(BOSS) 請透過移動石移動後消滅奧露卡" id="919" isBoss="False" hp="0" />
 		<Monster name="卡莎庫勒丹" id="999" isBoss="False" hp="10000" />
-		<Monster name="劇毒烏龜" id="1000" isBoss="True" hp="147000000" />
-		<Monster name="深海餓鬼" id="1001" isBoss="True" hp="115500000" />
-		<Monster name="邪惡的奧露卡" id="1002" isBoss="True" hp="136500000" />
+		<Monster name="劇毒烏龜" id="1000" isBoss="True" hp="950400000" />
+		<Monster name="深海餓鬼" id="1001" isBoss="True" hp="902880000" />
+		<Monster name="邪惡的奧露卡" id="1002" isBoss="True" hp="823680000" />
 		<Monster name="次元魔法石" id="4000" isBoss="False" hp="10000" />
 		<Monster name="次元魔法石" id="4001" isBoss="False" hp="10000" />
 		<Monster name="次元魔法石" id="4002" isBoss="False" hp="10000" />
@@ -9991,14 +9992,14 @@
 		<Monster name="次元魔法石" id="1504" isBoss="False" hp="10000" />
 	</Zone>
 	<Zone id="457" name="傲慢的阿凱倫炎獄" >
-		<Monster name="克雷因" id="202" isBoss="False" hp="150000000" />
-		<Monster name="被洗腦的神之使者" id="212" isBoss="False" hp="4500000" />
-		<Monster name="被洗腦的神之巫女" id="213" isBoss="False" hp="4500000" />
-		<Monster name="熔岩怪物" id="404" isBoss="False" hp="1000000" />
-		<Monster name="熔岩怪物" id="408" isBoss="False" hp="1000000" />
-		<Monster name="熔岩怪物" id="409" isBoss="False" hp="1000000" />
-		<Monster name="熔岩怪物" id="410" isBoss="False" hp="1000000" />
-		<Monster name="狂暴瑪利古斯" id="503" isBoss="False" hp="1000000" />
+		<Monster name="克雷因" id="202" isBoss="False" hp="250000000" />
+		<Monster name="被洗腦的神之使者" id="212" isBoss="False" hp="12187500" />
+		<Monster name="被洗腦的神之巫女" id="213" isBoss="False" hp="12187500" />
+		<Monster name="熔岩怪物" id="404" isBoss="False" hp="4500000" />
+		<Monster name="熔岩怪物" id="408" isBoss="False" hp="4500000" />
+		<Monster name="熔岩怪物" id="409" isBoss="False" hp="4500000" />
+		<Monster name="熔岩怪物" id="410" isBoss="False" hp="4500000" />
+		<Monster name="狂暴瑪利古斯" id="503" isBoss="False" hp="10000000" />
 		<Monster name="卑鄙瑪利古斯" id="504" isBoss="False" hp="9906750" />
 		<Monster name="格雷恩海因茲" id="607" isBoss="False" hp="10000" />
 		<Monster name="里歐內" id="608" isBoss="False" hp="945" />
@@ -10007,11 +10008,11 @@
 		<Monster name="請消滅瑪格泰諾" id="912" isBoss="False" hp="0" />
 		<Monster name="請消滅多勒突瑪" id="913" isBoss="False" hp="0" />
 		<Monster name="(BOSS) 請消滅凱勒拉斯" id="914" isBoss="False" hp="0" />
-		<Monster name="達勒突瑪" id="1001" isBoss="True" hp="204000000" />
-		<Monster name="瑪葛泰嫩" id="1002" isBoss="True" hp="204000000" />
-		<Monster name="多勒突瑪" id="1003" isBoss="True" hp="284000000" />
-		<Monster name="凱勒拉斯" id="1004" isBoss="True" hp="482000000" />
-		<Monster name="狂暴的潘圖勒斯" id="1005" isBoss="False" hp="36000000" />
+		<Monster name="達勒突瑪" id="1001" isBoss="True" hp="1555200000" />
+		<Monster name="瑪葛泰嫩" id="1002" isBoss="True" hp="991440000" />
+		<Monster name="多勒突瑪" id="1003" isBoss="True" hp="1544400000" />
+		<Monster name="凱勒拉斯" id="1004" isBoss="True" hp="1512000000" />
+		<Monster name="狂暴的潘圖勒斯" id="1005" isBoss="False" hp="128000000" />
 		<Monster name="次元魔法石" id="1501" isBoss="False" hp="10000" />
 		<Monster name="次元魔法石" id="1502" isBoss="False" hp="10000" />
 		<Monster name="次元魔法石" id="1503" isBoss="False" hp="10000" />
@@ -10269,7 +10270,7 @@
 		<Monster name="受騙者的日誌" id="504" isBoss="False" hp="366797" />
 		<Monster name="逃脫者的日誌" id="505" isBoss="False" hp="10000" />
 		<Monster name="健康硬朗的奶奶" id="800" isBoss="False" hp="10000" />
-		<Monster name="塔勒斯基" id="1000" isBoss="True" hp="1271815251" />
+		<Monster name="塔勒斯基" id="1000" isBoss="True" hp="1577724000" />
 		<Monster name="次元魔法石" id="1501" isBoss="False" hp="10000" />
 	</Zone>
 	<Zone id="471" name="邪靈術研究所" >
@@ -13904,8 +13905,8 @@
 		<Monster name="請消滅沛里摩斯" id="913" isBoss="False" hp="0" />
 		<Monster name="(BOSS) 請透過次元魔法石移動到艾爾凱拉斯號-移動到甲板後，消滅達魯坎" id="914" isBoss="False" hp="0" />
 		<Monster name="海拉卡依倫" id="999" isBoss="False" hp="10000" />
-		<Monster name="達魯坎" id="1000" isBoss="True" hp="750000000" />
-		<Monster name="達魯坎" id="1001" isBoss="True" hp="300000000" />
+		<Monster name="達魯坎" id="1000" isBoss="True" hp="1900000000" />
+		<Monster name="達魯坎" id="1001" isBoss="True" hp="500000000" />
 		<Monster name="亞爾庫斯" id="1002" isBoss="False" hp="0" />
 		<Monster name="次元魔法石" id="1501" isBoss="False" hp="10000" />
 		<Monster name="次元魔法石" id="1502" isBoss="False" hp="10000" />
@@ -13916,7 +13917,7 @@
 		<Monster name="阿克德法劍鬥士" id="91602" isBoss="False" hp="0" />
 		<Monster name="阿克德法魔導士" id="91603" isBoss="False" hp="0" />
 		<Monster name="阿克德法元素使" id="91604" isBoss="False" hp="0" />
-		<Monster name="沛里摩斯" id="91606" isBoss="True" hp="800000000" />
+		<Monster name="沛里摩斯" id="91606" isBoss="True" hp="1800000000" />
 		<Monster name="浮游石" id="91618" isBoss="False" hp="110000" />
 		<Monster name="浮游石" id="91621" isBoss="False" hp="110000" />
 		<Monster name="浮游石" id="91622" isBoss="False" hp="110000" />
@@ -13925,15 +13926,15 @@
 		<Monster name="浮游石" id="91625" isBoss="False" hp="110000" />
 		<Monster name="浮游石" id="91628" isBoss="False" hp="110000" />
 		<Monster name="浮游石" id="91629" isBoss="False" hp="110000" />
-		<Monster name="達魯坎的傀儡" id="91638" isBoss="False" hp="30000000" />
-		<Monster name="普特理溫" id="91650" isBoss="True" hp="220000000" />
+		<Monster name="達魯坎的傀儡" id="91638" isBoss="False" hp="150000000" />
+		<Monster name="普特理溫" id="91650" isBoss="True" hp="700000000" />
 		<Monster name="沛里摩斯" id="91660" isBoss="False" hp="90000000" />
-		<Monster name="SH-35" id="91671" isBoss="False" hp="10000000" />
-		<Monster name="SM-31" id="91672" isBoss="False" hp="10000000" />
-		<Monster name="BB-29" id="91673" isBoss="False" hp="47000000" />
-		<Monster name="阿克德法精銳弓箭手" id="91674" isBoss="False" hp="9500000" />
-		<Monster name="阿克德法精銳祭司" id="91675" isBoss="False" hp="9500000" />
-		<Monster name="阿克德法精銳劍鬥士" id="91676" isBoss="False" hp="12000000" />
+		<Monster name="SH-35" id="91671" isBoss="False" hp="40000000" />
+		<Monster name="SM-31" id="91672" isBoss="False" hp="40000000" />
+		<Monster name="BB-29" id="91673" isBoss="False" hp="100000000" />
+		<Monster name="阿克德法精銳弓箭手" id="91674" isBoss="False" hp="70000000" />
+		<Monster name="阿克德法精銳祭司" id="91675" isBoss="False" hp="40000000" />
+		<Monster name="阿克德法精銳劍鬥士" id="91676" isBoss="False" hp="45000000" />
 		<Monster name="吉伯特格雷斯" id="99901" isBoss="False" hp="366797" />
 		<Monster name="中階士兵" id="99902" isBoss="False" hp="91545" />
 		<Monster name="中階士兵" id="99903" isBoss="False" hp="91545" />
@@ -13954,7 +13955,7 @@
 		<Monster name="暗黑的窟拉德林" id="1102" isBoss="True" hp="1014000000" />
 		<Monster name="暴風的阿加雷斯" id="1103" isBoss="True" hp="1014000000" />
 		<Monster name="暗黑邪念體" id="1120" isBoss="False" hp="1000000" />
-		<Monster name="貝勒古斯" id="2000" isBoss="False" hp="99960000" />
+		<Monster name="貝勒古斯" id="2000" isBoss="False" hp="125960000" />
 		<Monster name="神界關口床弩" id="2005" isBoss="False" hp="576000" />
 		<Monster name="石泥人怪" id="2500" isBoss="False" hp="0" />
 		<Monster name="貝勒古斯" id="3000" isBoss="True" hp="2000000000" />
@@ -14499,6 +14500,7 @@
 		<Monster name="破壞精靈" id="10238100" isBoss="False" hp="0" />
 		<Monster name="杜利溫的幻影" id="20150805" isBoss="False" hp="999999999" />
 		<Monster name="櫻花 吉利嘟" id="20160322" isBoss="False" hp="999999999" />
+		<Monster name="ギガントクーマス" id="20170711" isBoss="False" hp="1496000000" />
 		<Monster name="設置哨兵塔" id="30301001" isBoss="False" hp="36532" />
 		<Monster name="設置哨兵塔" id="30301002" isBoss="False" hp="56414" />
 		<Monster name="設置哨兵塔" id="30301003" isBoss="False" hp="90553" />

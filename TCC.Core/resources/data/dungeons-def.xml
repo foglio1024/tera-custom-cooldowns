@@ -18,5 +18,5 @@
   <Dungeon ShortName="EA"  MaxBaseRuns="2" Tier="Solo"  Id="9069" />
   <Dungeon ShortName="GG"  MaxBaseRuns="2" Tier="Solo"  Id="9713" />
   <Dungeon ShortName="HH"  MaxBaseRuns="0" Tier="Tier5" Id="9950" />
-  <Dungeon ShortName="MM"  MaxBaseRuns="1" Tier="Tier4" Id="9070" />
+  <Dungeon ShortName="DW"  MaxBaseRuns="1" Tier="Tier4" Id="9066" />
 </ArrayOfDungeon>

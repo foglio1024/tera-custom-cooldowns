@@ -3317,6 +3317,23 @@
 		<Monster name="Velda" id="1067" isBoss="False" hp="10000" />
 		<Monster name="Rose" id="1068" isBoss="False" hp="10000" />
 		<Monster name="Rynelluna" id="1069" isBoss="False" hp="10000" />
+		<Monster name="Shakira Ludmilla" id="1070" isBoss="False" hp="10000" />
+		<Monster name="Diana Ludmilla" id="1071" isBoss="False" hp="10000" />
+		<Monster name="Diana Ludmilla" id="1072" isBoss="False" hp="10000" />
+		<Monster name="Silvia Barnet" id="1073" isBoss="False" hp="10000" />
+		<Monster name="Fernando Castro" id="1074" isBoss="False" hp="10000" />
+		<Monster name="Veyer" id="1075" isBoss="False" hp="10000" />
+		<Monster name="Nimresk" id="1076" isBoss="False" hp="10000" />
+		<Monster name="Nimue" id="1077" isBoss="False" hp="10000" />
+		<Monster name="Rhaja Rhone" id="1078" isBoss="False" hp="10000" />
+		<Monster name="Closhar Punhan" id="1079" isBoss="False" hp="10000" />
+		<Monster name="Chevvy Tramp" id="1080" isBoss="False" hp="10000" />
+		<Monster name="Kneer Bentslip" id="1081" isBoss="False" hp="10000" />
+		<Monster name="Drek Waist" id="1082" isBoss="False" hp="10000" />
+		<Monster name="Bir Mook" id="1083" isBoss="False" hp="10000" />
+		<Monster name="Madi Nina" id="1084" isBoss="False" hp="10000" />
+		<Monster name="Diana Ludmilla" id="1085" isBoss="False" hp="10000" />
+		<Monster name="Diana Ludmilla" id="1086" isBoss="False" hp="10000" />
 		<Monster name="Fraya" id="1100" isBoss="False" hp="10000" />
 		<Monster name="Loana" id="1101" isBoss="False" hp="10000" />
 		<Monster name="Eyhian" id="1102" isBoss="False" hp="10000" />
@@ -3512,6 +3529,7 @@
 		<Monster name="Angk" id="7002" isBoss="False" hp="10000" />
 		<Monster name="Ellonia" id="8000" isBoss="False" hp="10000" />
 		<Monster name="Tikat" id="9000" isBoss="False" hp="10000" />
+		<Monster name="Téléportail dimensionnel" id="9066" isBoss="False" hp="10000" />
 		<Monster name="Derene" id="22001" isBoss="False" hp="10000" />
 		<Monster name="Shuna" id="22002" isBoss="False" hp="10000" />
 		<Monster name="Naulu" id="22003" isBoss="False" hp="10000" />
@@ -4860,6 +4878,7 @@
 		<Monster name="Instructeur de tactiques et de magie" id="8272" isBoss="False" hp="0" />
 		<Monster name="Maître de vol" id="8273" isBoss="False" hp="0" />
 		<Monster name="Instructeur de tactiques et de magie" id="8281" isBoss="False" hp="0" />
+		<Monster name="Entrée de la Roulette de Demoroth" id="9066" isBoss="False" hp="0" />
 		<Monster name="Entrée du Laboratoire de Verno" id="9067" isBoss="False" hp="0" />
 		<Monster name="Entrée du Plateau trompeur" id="9070" isBoss="False" hp="0" />
 		<Monster name="Entrée détruite du royaume des dieux" id="9501" isBoss="False" hp="0" />
@@ -10133,6 +10152,32 @@
 		<Monster name="Zélote kelba" id="5007" isBoss="False" hp="8955" />
 		<Monster name="Colonne Jurnagg" id="6000" isBoss="False" hp="25747" />
 	</Zone>
+	<Zone id="466" name="Roulette de Demoroth" >
+		<Monster name="Éliminez Turgas." id="911" isBoss="False" hp="0" />
+		<Monster name="Éliminez Demoroth." id="912" isBoss="False" hp="0" />
+		<Monster name="Shoju Punhan" id="1078" isBoss="False" hp="10000" />
+		<Monster name="Jenny Song" id="1079" isBoss="False" hp="10000" />
+		<Monster name="Boudelair Henrik" id="1080" isBoss="False" hp="10000" />
+		<Monster name="Fatima Mello" id="1081" isBoss="False" hp="10000" />
+		<Monster name="Max Andrew" id="1082" isBoss="False" hp="10000" />
+		<Monster name="Jenny Song" id="1083" isBoss="False" hp="10000" />
+		<Monster name="Fatima Mello" id="1084" isBoss="False" hp="10000" />
+		<Monster name="Max Andrew" id="1085" isBoss="False" hp="10000" />
+		<Monster name="Téléportail dimensionnel" id="1501" isBoss="False" hp="10000" />
+		<Monster name="Turgas" id="46601" isBoss="True" hp="900000000" />
+		<Monster name="Demoroth" id="46602" isBoss="True" hp="1040000000" />
+		<Monster name="Coffre au trésor de Demoroth" id="46613" isBoss="False" hp="100" />
+		<Monster name="Dé de Demoroth" id="46677" isBoss="False" hp="10000000" />
+		<Monster name="Dé de Demoroth" id="46678" isBoss="False" hp="10000000" />
+		<Monster name="Dé de Demoroth" id="46679" isBoss="False" hp="10000000" />
+		<Monster name="Dé rouge" id="46688" isBoss="False" hp="1400000000" />
+		<Monster name="Dé blanc" id="46689" isBoss="False" hp="1400000000" />
+		<Monster name="Dé bleu" id="46690" isBoss="False" hp="1400000000" />
+		<Monster name="Dé de Demoroth" id="46692" isBoss="False" hp="1400000000" />
+		<Monster name="Dé de Demoroth" id="46697" isBoss="False" hp="10000000" />
+		<Monster name="Dé de Demoroth" id="46698" isBoss="False" hp="10000000" />
+		<Monster name="Dé de Demoroth" id="46699" isBoss="False" hp="10000000" />
+	</Zone>
 	<Zone id="467" name="Laboratoire de Verno (difficile)" >
 		<Monster name="Éliminez Vera cauchemardesque et Prima cauchemardesque." id="911" isBoss="False" hp="0" />
 		<Monster name="Éliminez Odon cauchemardesque." id="912" isBoss="False" hp="0" />
@@ -13855,8 +13900,8 @@
 		<Monster name="Éliminez Perimos" id="913" isBoss="False" hp="0" />
 		<Monster name="Utilisez le téléportail pour rejoindre le Pont, puis tuez Darkan" id="914" isBoss="False" hp="0" />
 		<Monster name="Herkayla" id="999" isBoss="False" hp="10000" />
-		<Monster name="Darkan cauchemardesque" id="1000" isBoss="True" hp="1900000000" />
-		<Monster name="Darkan cauchemardesque" id="1001" isBoss="True" hp="500000000" />
+		<Monster name="Darkan cauchemardesque" id="1000" isBoss="True" hp="750000000" />
+		<Monster name="Darkan cauchemardesque" id="1001" isBoss="True" hp="300000000" />
 		<Monster name="Thrulkalath cauchemardesque" id="1002" isBoss="False" hp="0" />
 		<Monster name="Téléportail de sortie" id="1501" isBoss="False" hp="10000" />
 		<Monster name="Téléportail vers le pont" id="1502" isBoss="False" hp="10000" />
@@ -13867,7 +13912,7 @@
 		<Monster name="Guerrier d'élite de la colère sanglante" id="91602" isBoss="False" hp="0" />
 		<Monster name="Sorcier d'élite de la colère sanglante" id="91603" isBoss="False" hp="0" />
 		<Monster name="Mystique d'élite de la colère sanglante" id="91604" isBoss="False" hp="0" />
-		<Monster name="Perimos cauchemardesque" id="91606" isBoss="True" hp="1800000000" />
+		<Monster name="Perimos cauchemardesque" id="91606" isBoss="True" hp="800000000" />
 		<Monster name="Pylône d'Aeonalis" id="91618" isBoss="False" hp="110000" />
 		<Monster name="Pylône d'Aeonalis" id="91621" isBoss="False" hp="110000" />
 		<Monster name="Pylône d'Aeonalis" id="91622" isBoss="False" hp="110000" />
@@ -13876,15 +13921,15 @@
 		<Monster name="Pylône d'Aeonalis" id="91625" isBoss="False" hp="110000" />
 		<Monster name="Pylône d'Aeonalis" id="91628" isBoss="False" hp="110000" />
 		<Monster name="Pylône d'Aeonalis" id="91629" isBoss="False" hp="110000" />
-		<Monster name="Serviteur de Darkan" id="91638" isBoss="False" hp="150000000" />
-		<Monster name="Putrion cauchemardesque" id="91650" isBoss="True" hp="700000000" />
+		<Monster name="Serviteur de Darkan" id="91638" isBoss="False" hp="30000000" />
+		<Monster name="Putrion cauchemardesque" id="91650" isBoss="True" hp="220000000" />
 		<Monster name="Perimos cauchemardesque" id="91660" isBoss="False" hp="90000000" />
-		<Monster name="Quadriliar d'élite" id="91671" isBoss="False" hp="40000000" />
-		<Monster name="Laceras acéré d'élite" id="91672" isBoss="False" hp="40000000" />
-		<Monster name="Sulcata colossale d'élite" id="91673" isBoss="False" hp="100000000" />
-		<Monster name="Archer d'élite de la colère sanglante" id="91674" isBoss="False" hp="70000000" />
-		<Monster name="Prêtre d'élite de la colère sanglante" id="91675" isBoss="False" hp="40000000" />
-		<Monster name="Danse-lame d'élite de la colère sanglante" id="91676" isBoss="False" hp="45000000" />
+		<Monster name="Quadriliar d'élite" id="91671" isBoss="False" hp="10000000" />
+		<Monster name="Laceras acéré d'élite" id="91672" isBoss="False" hp="10000000" />
+		<Monster name="Sulcata colossale d'élite" id="91673" isBoss="False" hp="47000000" />
+		<Monster name="Archer d'élite de la colère sanglante" id="91674" isBoss="False" hp="9500000" />
+		<Monster name="Prêtre d'élite de la colère sanglante" id="91675" isBoss="False" hp="9500000" />
+		<Monster name="Danse-lame d'élite de la colère sanglante" id="91676" isBoss="False" hp="12000000" />
 		<Monster name="Dougal" id="99901" isBoss="False" hp="366797" />
 		<Monster name="Escorte de Dougal" id="99902" isBoss="False" hp="91545" />
 		<Monster name="Escorte de Dougal" id="99903" isBoss="False" hp="91545" />
@@ -14460,7 +14505,7 @@
 		<Monster name="Belle boîte bleue" id="88888888" isBoss="False" hp="100000000" />
 		<Monster name="Coffre au trésor" id="88888889" isBoss="False" hp="99999999" />
 		<Monster name="Boîte étrange de la sorcière" id="88888890" isBoss="False" hp="1" />
-		<Monster name="Coffre d'anniversaire" id="98888888" isBoss="False" hp="1" />
+		<Monster name="Coffre surprise de la fête des Baraka" id="98888888" isBoss="False" hp="1" />
 		<Monster name="Coffre d'anniversaire" id="98888889" isBoss="False" hp="1" />
 		<Monster name="Voleur d'œufs caïman" id="99999991" isBoss="False" hp="100000000" />
 		<Monster name="Voleur d'œufs caïman" id="99999992" isBoss="False" hp="99999999" />

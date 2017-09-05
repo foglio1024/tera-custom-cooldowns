@@ -151,8 +151,10 @@
 9013	Saravash's Ascent Entrance
 9054	Bathysmal Rise Entrance
 9056	Timescape (Hard)
+9057	Akeron's Inferno (Hard)
 9059	Forsaken Island
 9060	Kalivan's Dreadnaught (Hard)
+9066	Demon's Wheel
 9067	Demokron Factory (Hard)
 9068	Shadow Sanguinary (Hard)
 9069	Castle Aranea
@@ -1443,6 +1445,9 @@
 9060006	Sentry Ship Deck
 9061001	Ruin of the Giants
 9065001	Twilight Valley
+9066001	Grand Plaza
+9066002	Demon's Wheel
+9066003	Demon's Wheel - Entrance
 9068001	Shadow Sanguinary (Hard)
 9068002	Guardian's Chamber
 9068003	Bloodshard Repository

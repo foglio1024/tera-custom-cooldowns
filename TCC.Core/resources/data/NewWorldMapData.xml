@@ -180,7 +180,6 @@
         <Npc type="MARKER_CAMP" pos="-35223.5781,43130.4883,1809.8038" continentId="7002" nameId="99,1033" />
         <Npc type="MARKER_CAMP" pos="-43681,42596,1419" continentId="7002" nameId="99,1034" />
         <Npc type="MARKER_CLIMB" pos="-26873.2012,20771.6953,1878.6559" continentId="7002" nameId="99,60" />
-        <Npc type="MARKER_enter_Dungeon" pos="-27451,22341,1743" continentId="7002" nameId="99,9070" />
       </Section>
       <Section id="28" desc="22 마녀의 성 1F" type="dungeon" nameId="22002" floor="1" mapId="WMap_DG_ENC_1F" height="15360.0" width="15360.0" top="-15360.0" left="15360.0" mode="5" />
       <Section id="29" desc="22 마녀의 성 2F" type="dungeon" nameId="22003" floor="2" mapId="WMap_DG_ENC_2F" height="15360.0" width="15360.0" top="-15360.0" left="15360.0" mode="5">
@@ -364,7 +363,9 @@
         <Npc type="MARKER_DUNGEON_ARENA" pos="372,-1010,6832" continentId="2" nameId="99,7001" />
         <Npc type="MARKER_DUNGEON_SOLO" pos="168,-819,6832" continentId="2" nameId="99,7002" />
       </Section>
-      <Section id="102" desc="알레만시아 인근" nameId="72002" floor="1" mapId="WMap_AL_Field_01" height="53620.37" width="71493.82" top="21923.0" left="-34211.0" />
+      <Section id="102" desc="알레만시아 인근" nameId="72002" floor="1" mapId="WMap_AL_Field_01" height="53620.37" width="71493.82" top="21923.0" left="-34211.0">
+        <Npc type="MARKER_enter_Dungeon" pos="-19030.44921875,16671.32617188,2370.46142578" continentId="2" nameId="99,9066" />
+      </Section>
       <Section id="103" desc="알레만시아 서부" nameId="72003" floor="1" mapId="WMap_AL_Field_03" height="53620.37" width="71493.82" top="26531.0" left="-64931.0" />
     </Guard>
     <Guard id="11" desc="11 비아 엘레니움 가드" nameId="211" mapId="WMap_HSC_Guard" height="117964.8" width="157286.4" top="-7680.0" left="-84480.0">
@@ -948,7 +949,6 @@
       <Section id="9091" desc="차원의 경계" nameId="9091001" floor="0" mapId="WMap_ASE_Empty_02" height="53620.37" width="71493.82" top="79591.0" left="11869.0" mode="5" />
       <Section id="9047" desc="마녀의 성 연회장" nameId="9047001" floor="0" mapId="WMap_EX_ASE_Halloween_T42" height="15360.0" width="15360.0" top="0.0" left="0.0" mode="5" />
       <Section id="9052" desc="피의 축제장" type="dungeon" nameId="9052001" floor="1" mapId="WMap_DG_FV_SUM_DG03" height="15360.0" width="15360.0" top="-19200.0" left="96000.0" mode="5" />
-      <Section id="9070" desc="거짓말쟁이 타르스키의 놀이터" type="dungeon" nameId="9070" floor="1" mapId="WMap_Lie_Empty" height="15360.0" width="15360.0" top="76800.0" left="15360.0" mode="5" />
     </Guard>
     <Guard id="5" desc="사교도의 은신처">
       <Section id="553" desc="사교도의 은신처" type="dungeon" nameId="9089001" floor="1" mapId="WMap_DG_SD_03" height="15360.0" width="15360.0" top="76800.0" left="30720.0" mode="5" />
@@ -994,6 +994,7 @@
       <Section id="202" desc="알레만시아 사령부 " nameId="72099" floor="0" mapId="WMap_AL_Empty_02" height="53620.37" width="71493.82" top="76800.0" left="27229.0" mode="5" />
       <Section id="203" desc="알레만시아 집정관실 " nameId="72099" floor="0" mapId="WMap_AL_Empty_03" height="53620.37" width="71493.82" top="76800.0" left="27229.0" mode="5" />
       <Section id="9045" desc="T4.2 소인던 릴리파트" nameId="9045001" floor="1" mapId="WMap_EX_HNC_B_T42_02_P" height="19664.64" width="26219.52" top="-13824.0" left="101376.0" mode="5" />
+      <Section id="9066" desc="데모로스의 룰렛('17상반기비수기던전)" type="dungeon" nameId="9066" floor="1" mapId="WMap_DG_Nightmare" height="15360.0" width="15360.0" top="-15360.0" left="30720.0" mode="5" />
     </Guard>
     <Guard id="11" desc="광대의별장 공중정원">
       <Section id="9062" desc="광대의 별장 " type="dungeon" nameId="8000052" floor="1" mapId="WMap_SJ_04" height="7680.0" width="7680.0" top="72960.0" left="-149760.0" mode="5" />

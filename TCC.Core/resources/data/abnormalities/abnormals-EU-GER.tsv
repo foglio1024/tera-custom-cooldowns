@@ -41,12 +41,10 @@
 201	Buff	False	True	False	Segen von Shakan I	Erhöht die Kraft um $H_W_GOOD17$COLOR_END.	icon_skills.attackup_tex
 202	Buff	False	True	False	Segen von Shakan II	Erhöht die Kraft um $H_W_GOOD25$COLOR_END.	icon_skills.attackup_tex
 301	Stun	True	False	False	Blitzringfalle	Betäubt. Bewegungsunfähig.	icon_skills.shocktrap_tex
-302	Stun	True	False	False	Blitzringfalle	Betäubt. Bewegungsunfähig.	icon_skills.shocktrap_tex
-303	Stun	True	False	False	Blitzringfalle	Betäubt. Bewegungsunfähig.	icon_skills.shocktrap_tex
 501	Buff	True	True	False	Erhöht die Bewegungsgeschwindigkeit.	Erhöht die Bewegungsgeschwindigkeit erheblich.	icon_status.aura_of_wind_tex
 601	Buff	True	True	True	Kraft der Raserei I	Erhöht die Kraft um $H_W_GOOD20$COLOR_END und die Angriffsgeschwindigkeit um $H_W_GOOD6$COLOR_END. Nur wer sich innerhalb eines Radius von 30m um den Anwender befindet, erhält den Effekt der Aura.	icon_skills.rage_tex
 602	Buff	True	True	True	Kraft der Raserei II	Erhöht die Kraft um $H_W_GOOD25$COLOR_END und die Angriffsgeschwindigkeit um $H_W_GOOD6$COLOR_END. Nur wer sich innerhalb eines Radius von 30m um den Anwender befindet, erhält den Effekt der Aura.	icon_skills.rage_tex
-603	Buff	True	True	True	Kraft der Raserei III	Erhöht die Kraft um $H_W_GOOD40$COLOR_END und die Angriffsgeschwindigkeit um $H_W_GOOD6$COLOR_END. Nur wer sich innerhalb eines Radius von 30m um den Anwender befindet, erhält den Effekt der Aura.	icon_skills.rage_tex
+603	Buff	True	True	True	Kraft der Raserei III	Erhöht die Kraft um $H_W_GOOD48$COLOR_END und die Angriffsgeschwindigkeit um $H_W_GOOD9,6$COLOR_END. Dieser Effekt betrifft nur Personen, die sich in einem Umkreis von 30m um den Ausführenden befinden.	icon_skills.rage_tex
 901	Stun	True	False	False	Sharas Peitsche	Betäubt. Bewegungsunfähig.	icon_skills.flashball_tex
 902	Buff	True	True	True	Nokteniuminfusion	Die Nokteniuminfusion wird verwendet, um den Fertigkeitseffekt zu erhöhen.	icon_items.union_supplies5_tex
 903	Buff	True	True	False	Tötungsabsicht	Erhöht die Kraft um $H_W_GOOD15$COLOR_END, die Angriffsgeschwindigkeit um $H_W_GOOD8%$COLOR_END, den kritischen Trefferwert um $H_W_GOOD4%$COLOR_END und die Bewegungsgeschwindigkeit um $H_W_GOOD4%$COLOR_END.	icon_skills.battlefield_high_ranking_tex
@@ -932,7 +930,7 @@
 27130	Buff	True	True	False	Glyphe der Balance	Erhöht den Gleichgewichtsfaktor um $H_W_GOOD400%$COLOR_END.	icon_crest.crestactivereactionresist_tex
 27140	Buff	True	True	False	Glyphe der Erneuerung	Stellt $H_W_GOOD20%$COLOR_END der maximalen LP wieder her.	icon_crest.crestpassivehpheal_tex
 27150	Buff	True	True	False	Glyphe der Erneuerung	Das Schutztotem stellt $H_W_GOOD20%$COLOR_END mehr LP wieder her.	icon_crest.crestactivehprecoveryup_tex
-27160	WeakeningEffect	True	False	False	Glyphe der Schwächung	Verringert die Konstitution um $H_W_BAD9%$COLOR_END.	icon_crest.crestactivedefencedown_tex
+27160	WeakeningEffect	True	False	False	Glyphe der Schwächung	Verringert die Konstitution um $H_W_BAD10%$COLOR_END.	icon_crest.crestactivedefencedown_tex
 27161	Buff	True	True	False	Glyphe der Bedeutenden Erneuerung	Erhöht die LP-Wiederherstellung um $H_W_GOOD25%$COLOR_END.	icon_crest.crestactivehprecoveryup_tex
 27170	Buff	False	True	False	Wiederherstellung der Gesamt-LP [Glyphe der Beherztheit]	Keine Anzeige für Schwächungstooltip (isShow=False). Wenn dieser Tooltip angezeigt wird, BTS erforderlich.	icon_crest.crestpassivehpwhileheal_tex
 28010	Buff	True	True	False	Glyphe der Kraft	Erhöht den Fertigkeitsschaden für Endgültige Vergeltung um $H_W_GOOD25%$COLOR_END.	icon_crest.crestnextskillattackup_tex
@@ -1013,7 +1011,7 @@
 33150	Buff	True	True	False	Erhöhter Fertigkeitsschaden [Glyphe der Kraft]	Erhöht den Schaden von Ätherhieb um $H_W_GOOD25%$COLOR_END.	icon_crest.crestnextskillattackup_tex
 33170	Buff	True	True	False	Kontinuierliche LP-Wiederherstellung [Glyphe der Erneuerung]	Heilt immer nach $H_W_GOOD1$COLOR_END second $H_W_GOOD2%$COLOR_END der Gesamt-LP.	icon_crest.crestpassivehpheal_tex
 33200	Buff	True	True	False	Erhöhter Fertigkeitsschaden [Glyphe der Kraft]	Erhöht den Fertigkeitsschaden des nächsten Angriffes um 30%.	icon_crest.crestnextskillattackup_tex
-33210	Buff	True	True	False	Erhöhter Fertigkeitsschaden [Glyphe der Kraft]	Erhöht den Schaden von Lunasonus um $H_W_GOOD25%$COLOR_END.	icon_crest.e_crestnextskillattackup_tex
+33210	Buff	True	True	False	Erhöhter Fertigkeitsschaden [Glyphe der Kraft]	Erhöht den Schaden von Lunasonus um $H_W_GOOD25%$COLOR_END.	icon_crest.crestpassivehpheal_tex
 45301	WeakeningEffect	True	False	False	Großer Schock	Unter massivem Schock stehend.	icon_status.minusdefence_tex
 45302	WeakeningEffect	True	False	False	Umgeblasen	Unter Schock stehend und niedergeschlagen.	icon_status.minuscriticalresist_tex
 45303	DamageOverTime	False	False	False		Der Bohrer verschwindet in 13 Sek.	
@@ -1208,9 +1206,9 @@
 100102	Buff	True	True	True	Kampfstellung III	Erhöht die Kraft um $H_W_GOOD15$COLOR_END und den kritischen Trefferwert um $H_W_GOOD50$COLOR_END. Bei Angriffen gegen Monster erhöht sich die Kraft der Fertigkeiten um $H_W_GOOD10%$COLOR_END, jedoch wird die Konstitution um $H_W_BAD10%$COLOR_END verringert.	icon_skills.ironwilla_tex
 100103	Buff	True	True	True	Kampfstellung IV	Erhöht die Kraft um $H_W_GOOD18$COLOR_END und den kritischen Trefferwert um $H_W_GOOD55$COLOR_END. Bei Angriffen gegen Monster erhöht sich die Kraft der Fertigkeiten um $H_W_GOOD10%$COLOR_END, jedoch wird die Konstitution um $H_W_BAD10%$COLOR_END verringert.	icon_skills.ironwilla_tex
 100150	Buff	False	True	True	Unsichtbare Schwächung (BTS, falls sichtbar)	Bei Angriff auf Monster +10% Zusatzschaden	
-100200	Buff	True	True	True	Defensivstellung I	Erhöht die Konstitution um $H_W_GOOD15%$COLOR_END, das Gleichgewicht um $H_W_GOOD20$COLOR_END und den kritischen Trefferwert um $H_W_GOOD15%$COLOR_END, wenn Ihr Monster angreift. Angriffe ziehen $H_W_GOOD65%$COLOR_END mehr Aggro an. Im Kampf werdet Ihr mit Ausnahme einiger spezieller Angriffe bestimmter Monster nicht nach hinten geworfen.	icon_skills.ironwillb_tex
-100201	Buff	True	True	True	Defensivstellung II	Erhöht die Konstitution um $H_W_GOOD20%$COLOR_END, das Gleichgewicht um $H_W_GOOD20$COLOR_END und den kritischen Trefferwert um $H_W_GOOD15%$COLOR_END, wenn Ihr Monster angreift. Angriffe ziehen $H_W_GOOD80%$COLOR_END mehr Aggro an. Im Kampf werdet Ihr mit Ausnahme einiger spezieller Angriffe bestimmter Monster nicht nach hinten geworfen.	icon_skills.ironwillb_tex
-100202	Buff	True	True	True	Defensivstellung III	Erhöht die Konstitution um $H_W_GOOD25%$COLOR_END, das Gleichgewicht um $H_W_GOOD20$COLOR_END und den kritischen Trefferwert um $H_W_GOOD15%$COLOR_END, wenn Ihr Monster angreift. Angriffe ziehen $H_W_GOOD100%$COLOR_END mehr Aggro an. Im Kampf werdet Ihr mit Ausnahme einiger spezieller Angriffe bestimmter Monster nicht nach hinten geworfen.	icon_skills.ironwillb_tex
+100200	Buff	True	True	True	Defensivstellung I	Erhöht die Konstitution um $H_W_GOOD20%$COLOR_END, das Gleichgewicht um $H_W_GOOD20$COLOR_END und den kritischen Trefferwert um $H_W_GOOD15%$COLOR_END, wenn Ihr Monster angreift. Angriffe ziehen $H_W_GOOD100%$COLOR_END mehr Aggro an. Im Kampf werdet Ihr mit Ausnahme einiger spezieller Angriffe bestimmter Monster nicht nach hinten geworfen.	icon_skills.ironwillb_tex
+100201	Buff	True	True	True	Defensivstellung II	Erhöht die Konstitution um $H_W_GOOD25%$COLOR_END, das Gleichgewicht um $H_W_GOOD30$COLOR_END und den kritischen Trefferwert um $H_W_GOOD15%$COLOR_END, wenn Ihr Monster angreift. Angriffe ziehen $H_W_GOOD120%$COLOR_END mehr Aggro an. Im Kampf werdet Ihr mit Ausnahme einiger spezieller Angriffe bestimmter Monster nicht nach hinten geworfen.	icon_skills.ironwillb_tex
+100202	Buff	True	True	True	Defensivstellung III	Erhöht die Konstitution um $H_W_GOOD10029500%$COLOR_END, das Gleichgewicht um $H_W_GOOD20$COLOR_END und den kritischen Trefferwert um $H_W_GOOD15%$COLOR_END, wenn Ihr Monster angreift. Angriffe ziehen $H_W_GOOD100%$COLOR_END mehr Aggro an. Im Kampf werdet Ihr mit Ausnahme einiger spezieller Angriffe bestimmter Monster nicht nach hinten geworfen.	icon_skills.ironwillb_tex
 100203	Buff	True	True	True	Defensivstellung IV	Erhöht die Konstitution um $H_W_GOOD25%$COLOR_END, das Gleichgewicht um $H_W_GOOD30$COLOR_END und den kritischen Trefferwert um $H_W_GOOD15%$COLOR_END, wenn Ihr Monster angreift. Angriffe ziehen $H_W_GOOD120%$COLOR_END mehr Aggro an. Im Kampf werdet Ihr mit Ausnahme einiger spezieller Angriffe bestimmter Monster nicht nach hinten geworfen.	icon_skills.ironwillb_tex
 100293	Buff	False	True	False	Zwillingsschwerter-Abwehr (Standardeffekt)	Keine Anzeige für Schwächungstooltip (isShow=False). Wenn dieser Tooltip angezeigt wird, BTS erforderlich.	icon_skills.twinswordsdefence_tex
 100294	Buff	True	True	False	Beharrlichkeit I	Durch Beharrlichkeit I regeneriert Ihr 5% Eurer MP.	icon_skills.twinswordsdefence_tex
@@ -1221,37 +1219,48 @@
 100300	Stun	True	False	False	Schlachtruf	Betäubt. Bewegungsunfähig.	icon_skills.thunderingroar_tex
 100301	Stun	True	False	False	Delete_Battle Cry	Betäubt. Bewegungsunfähig.	icon_skills.thunderingroar_tex
 100400	Buff	True	True	False	Wirbelhieb aktiviert	Ihr könnt jetzt Wirbelhieb einsetzen.	icon_skills.allroundslash_tex
-100500	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-116$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
-100501	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-175$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
-100502	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-292$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
-100503	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-438$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
-100504	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-612$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
-100505	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-845$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
-100506	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-1428$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
-100507	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-1892$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
-100508	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-6068$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
-100520	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-92$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
-100521	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-127$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
-100522	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-175$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
-100523	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-242$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
-100524	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-334$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
-100525	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-461$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
-100526	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-720$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
-100527	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-954$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
-100528	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-1420$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
+100500	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-40$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
+100501	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-60$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
+100502	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-90$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
+100503	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-136$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
+100504	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-214$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
+100505	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-341$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
+100506	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-496$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
+100507	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-690$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
+100508	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-1039$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
+100509	DamageOverTime	True	False	False	Giftklinge X	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-1582$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
+100510	DamageOverTime	True	False	False	Giftklinge XI	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-1892$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
+100520	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-36$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
+100521	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-55$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
+100522	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-75$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
+100523	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-104$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
+100524	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-143$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
+100525	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-197$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
+100526	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-273$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
+100527	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-376$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
+100528	DamageOverTime	True	False	False	Giftklinge	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-547$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
+100529	DamageOverTime	True	False	False	Giftklinge X	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-798$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
+100530	DamageOverTime	True	False	False	Giftklinge XI	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-954$COLOR_END LP ab.	icon_skills.poisonblowattack_tex
 100600	Buff	True	True	True	Verstümmeln	Eure vierte Komboattacke in Folge verringert die Angriffsgeschwindigkeit und Bewegung Eures Gegners um $H_W_GOOD15%$COLOR_END. Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-10$COLOR_END MP ab, solange die Wirkung anhält.	icon_skills.aimingankle_tex
 100630	WeakeningEffect	True	False	False	Verstümmeln	Verringert die Geschwindigkeit um $H_W_BAD0,85$COLOR_END.	icon_skills.aimingankle_tex
 100700	Buff	False	True	False	Taumelgegenschlag aktiviert	Ihr könnt jetzt Taumelgegenschlag einsetzen.	icon_skills.reversalturningattack_tex
 100800	Buff	True	True	False	Tödliches Spiel I	Erhöht die Chance auf kritische Treffer um $H_W_GOOD35%$COLOR_END für $time Sek.	icon_skills.deadlywill_tex
-100801	Buff	True	True	False	Tödliches Spiel II	Die Wahrscheinlichkeit für den kritischen Trefferwert wird für $time Sek. um $H_W_GOOD50%$COLOR_END erhöht. Während der Wirkungsdauer ist die Abklingzeit für Nahkampffertigkeiten des Zauberwirkenden halbiert und folgende Fertigkeiten werden während der Wirkungsdauer verstärkt:$BR- [Schlagregen XI]: +10% Zusatzschaden und 2-fache Furor-Akkumulierung.$BR- [Klingenreißer VII]: +10% Zusatzschaden und 2-fache Furor-Akkumulierung.$BR- [Sense II]: +10% Fertigkeitsschaden, +20% Wirkradius	icon_skills.deadlywill_tex
+100801	Buff	True	True	False	Tödliches Spiel II	Erhöht die Chance auf kritische Treffer für $time Sek. um $H_W_GOOD50%$COLOR_END. Während der Wirkungsdauer ist die Abklingzeit für Nahkampffertigkeiten des Zauberwirkenden halbiert und folgende Fertigkeiten werden verstärkt:$BR- [Schlagregen IX]: +10% Zusatzschaden und 2-fache Furor-Akkumulierung.$BR- [Klingenreißer IX]: +10% Zusatzschaden und 2-fache Furor-Akkumulierung.$BR- [Sense IX]: +10% Fertigkeitsschaden, +20% Wirkradius	icon_skills.deadlywill_tex
 100802	Buff	False	True	False	Tödliches Spiel II (reduzierte Abklingzeit)	Unsichtbare Anomalie	
 100803	Buff	False	True	False	Tödliches Spiel II (reduzierte Abklingzeit)	Unsichtbare Anomalie	
 100900	Stun	True	False	False	Betäubungskaskade	Betäubt. Bewegungsunfähig.	icon_skills.hardslash_tex
 100901	Stun	True	False	False	Betäubungskaskade	Betäubt. Bewegungsunfähig.	icon_skills.hardslash_tex
+100902	Stun	True	False	False	Betäubungskaskade III	Ihr seid betäubt und bewegungsunfähig.	icon_skills.hardslash_tex
+100903	Stun	True	False	False	Betäubungskaskade IX	Ihr seid betäubt und bewegungsunfähig.	icon_skills.hardslash_tex
+100904	Stun	True	False	False	Betäubungskaskade X	Ihr seid betäubt und bewegungsunfähig.	icon_skills.hardslash_tex
 101000	Stun	True	False	False	Meucheln	Betäubt. Bewegungsunfähig.	icon_skills.backattack_tex
 101001	Stun	True	False	False	Meucheln	Betäubt. Bewegungsunfähig.	icon_skills.backattack_tex
 101100	Stun	True	False	False	Taumelgegenschlag	Betäubt. Bewegungsunfähig.	icon_skills.reversalturningattack_tex
 101101	Stun	True	False	False	Taumelgegenschlag	Betäubt. Bewegungsunfähig.	icon_skills.reversalturningattack_tex
+101102	Stun	True	False	False	Taumelgegenschlag III	Ihr seid betäubt und bewegungsunfähig.	icon_skills.reversalturningattack_tex
+101103	Stun	True	False	False	Taumelgegenschlag IX	Ihr seid betäubt und bewegungsunfähig.	icon_skills.reversalturningattack_tex
+101104	Stun	True	False	False	Taumelgegenschlag X	Ihr seid betäubt und bewegungsunfähig.	icon_skills.reversalturningattack_tex
+101105	Stun	True	False	False	Taumelgegenschlag XI	Ihr seid betäubt und bewegungsunfähig.	icon_skills.reversalturningattack_tex
 101200	WeakeningEffect	True	False	False	Kämpferischer Schlag	Verringert die Konstitution um $H_W_BAD8%$COLOR_END.	icon_skills.aggravatingstrike_tex
 101220	WeakeningEffect	True	False	False	Kämpferischer Schlag	Verringert die Konstitution um $H_W_BAD8%$COLOR_END und die LP-Wiederherstellung um $H_W_BAD30%$COLOR_END.	icon_skills.aggravatingstrike_tex
 101300	Buff	True	True	False	Traversenschnitt	Je nach Akkumulierung erhöht sich die Angriffsgeschwindigkeit um 0,9%. Dieser Effekt kann bis zu 13-mal akkumuliert werden.	icon_skills.dualrapidpiercing_tex
@@ -1319,9 +1328,9 @@
 300300	Buff	True	True	False	Kraftschub I	Euer nächster Angriff fügt $H_W_GOOD30%$COLOR_END mehr Schaden zu.	icon_skills.gatheringstrength_tex
 300301	Buff	True	True	False	Kraftschub II	Euer nächster Angriff fügt $H_W_GOOD33%$COLOR_END mehr Schaden zu.	icon_skills.gatheringstrength_tex
 300400	Stun	True	False	False	Schreckenstritt	Betäubt. Bewegungsunfähig.	icon_skills.retreatingkick_tex
-300500	Buff	True	True	False	Vorpreschen I	Erhöht die Angriffsgeschwindigkeit des nächsten Angriffs um $H_W_GOOD30%$COLOR_END.	icon_skills.advancingleap_tex
-300501	Buff	True	True	False	Vorpreschen II	Erhöht die Angriffsgeschwindigkeit des nächsten Angriffs um $H_W_GOOD40%$COLOR_END.	icon_skills.advancingleap_tex
-300502	Buff	True	True	False	Vorpreschen III	Erhöht die Angriffsgeschwindigkeit des nächsten Angriffs um $H_W_GOOD50%$COLOR_END.	icon_skills.advancingleap_tex
+300500	Buff	True	True	False	Vorpreschen I	Erhöht die Angriffsgeschwindigkeit des nächsten Angriffs um $H_W_GOOD40%$COLOR_END.	icon_skills.advancingleap_tex
+300501	Buff	True	True	False	Vorpreschen II	Erhöht die Angriffsgeschwindigkeit des nächsten Angriffs um $H_W_GOOD50%$COLOR_END.	icon_skills.advancingleap_tex
+300502	Buff	True	True	False	Vorpreschen III	Erhöht die Angriffsgeschwindigkeit des nächsten Angriffs um $H_W_GOOD60%$COLOR_END.	icon_skills.advancingleap_tex
 300503	Buff	True	True	False	Vorpreschen IV	Erhöht die Angriffsgeschwindigkeit des nächsten Angriffs um $H_W_GOOD60%$COLOR_END.	icon_skills.advancingleap_tex
 300600	Buff	True	True	False	Eile I	Erhöht die Geschwindigkeit um $H_W_GOOD50%$COLOR_END.	icon_skills.dash_tex
 300601	Buff	True	True	False	Eile II	Erhöht die Geschwindigkeit um $H_W_GOOD50%$COLOR_END.	icon_skills.dash_tex
@@ -1700,36 +1709,40 @@
 500600	Buff	True	True	False	Manabarriere I	Absorbiert bis zu $H_W_GOOD7063$COLOR_END Schaden. Zieht 1 MP für je 14 Punkte absorbierten Schaden ab. Der Effekt endet, wenn der maximale Schaden erreicht ist oder Euch die MP ausgehen.	icon_skills.manashield_tex
 500601	Buff	True	True	False	Manabarriere II	Absorbiert bis zu $H_W_GOOD13529$COLOR_END Schaden. Zieht 1 MP für je 33 Punkte absorbierten Schaden ab. Der Effekt endet, wenn der maximale Schaden erreicht ist oder Euch die MP ausgehen.	icon_skills.manashield_tex
 500602	Buff	True	True	False	Manabarriere III	Absorbiert bis zu $H_W_GOOD17346$COLOR_END Schaden. Zieht 1 MP für je 50 Punkte absorbierten Schaden ab. Der Effekt endet, wenn der maximale Schaden erreicht ist oder Euch die MP ausgehen.	icon_skills.manashield_tex
-500700	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-26$COLOR_END LP ab.	icon_skills.disease_tex
-500701	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-40$COLOR_END LP ab.	icon_skills.disease_tex
-500702	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-58$COLOR_END LP ab.	icon_skills.disease_tex
-500703	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-85$COLOR_END LP ab.	icon_skills.disease_tex
-500704	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-121$COLOR_END LP ab.	icon_skills.disease_tex
-500705	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-174$COLOR_END LP ab.	icon_skills.disease_tex
-500706	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-241$COLOR_END LP ab.	icon_skills.disease_tex
-500707	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-341$COLOR_END LP ab.	icon_skills.disease_tex
-500708	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-516$COLOR_END LP ab.	icon_skills.disease_tex
-500720	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-27$COLOR_END LP ab.	icon_skills.disease_tex
-500721	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-37$COLOR_END LP ab.	icon_skills.disease_tex
-500722	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-51$COLOR_END LP ab.	icon_skills.disease_tex
-500723	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-71$COLOR_END LP ab.	icon_skills.disease_tex
-500724	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-97$COLOR_END LP ab.	icon_skills.disease_tex
-500725	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-134$COLOR_END LP ab.	icon_skills.disease_tex
-500726	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-186$COLOR_END LP ab.	icon_skills.disease_tex
-500727	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-258$COLOR_END LP ab.	icon_skills.disease_tex
-500728	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-382$COLOR_END LP ab.	icon_skills.disease_tex
+500700	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-40$COLOR_END LP ab.	icon_skills.disease_tex
+500701	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-58$COLOR_END LP ab.	icon_skills.disease_tex
+500702	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-85$COLOR_END LP ab.	icon_skills.disease_tex
+500703	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-121$COLOR_END LP ab.	icon_skills.disease_tex
+500704	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-174$COLOR_END LP ab.	icon_skills.disease_tex
+500705	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-241$COLOR_END LP ab.	icon_skills.disease_tex
+500706	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-341$COLOR_END LP ab.	icon_skills.disease_tex
+500707	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-516$COLOR_END LP ab.	icon_skills.disease_tex
+500720	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-37$COLOR_END LP ab.	icon_skills.disease_tex
+500721	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-51$COLOR_END LP ab.	icon_skills.disease_tex
+500722	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-71$COLOR_END LP ab.	icon_skills.disease_tex
+500723	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-97$COLOR_END LP ab.	icon_skills.disease_tex
+500724	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-134$COLOR_END LP ab.	icon_skills.disease_tex
+500725	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-186$COLOR_END LP ab.	icon_skills.disease_tex
+500726	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-258$COLOR_END LP ab.	icon_skills.disease_tex
+500727	DamageOverTime	True	False	False	Schmerzexplosion	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-382$COLOR_END LP ab.	icon_skills.disease_tex
 500800	Stun	True	False	False	Geistesexplosion	Betäubt. Bewegungsunfähig.	icon_skills.sleepwind_tex
 500801	Stun	True	False	False	Geistesexplosion	Betäubt. Bewegungsunfähig.	icon_skills.sleepwind_tex
 500802	Stun	True	False	False	Geistesexplosion	Betäubt. Bewegungsunfähig.	icon_skills.sleepwind_tex
 500900	Stun	True	False	False	Nervöse Erschöpfung	Fertigkeiten können nicht benutzt werden. Der Effekt wirkt nur auf Spielercharaktere und wird aufgehoben, wenn Ihr Schaden erleidet oder niedergeschlagen werdet.	icon_skills.neurasthenia_tex
-501000	DamageOverTime	True	False	False	Feueratem	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-1175$COLOR_END LP ab.	icon_skills.burningbreath_tex
-501001	DamageOverTime	True	False	False	Feueratem	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-1631$COLOR_END LP ab.	icon_skills.burningbreath_tex
-501002	DamageOverTime	True	False	False	Feueratem	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-2305$COLOR_END LP ab.	icon_skills.burningbreath_tex
-501003	DamageOverTime	True	False	False	Feueratem	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-3120$COLOR_END LP ab.	icon_skills.burningbreath_tex
-501020	DamageOverTime	True	False	False	Feueratem	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-890$COLOR_END LP ab.	icon_skills.burningbreath_tex
-501021	DamageOverTime	True	False	False	Feueratem	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-1228$COLOR_END LP ab.	icon_skills.burningbreath_tex
-501022	DamageOverTime	True	False	False	Feueratem	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-1704$COLOR_END LP ab.	icon_skills.burningbreath_tex
-501023	DamageOverTime	True	False	False	Feueratem	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-2259$COLOR_END LP ab.	icon_skills.burningbreath_tex
+501000	DamageOverTime	True	False	False	Feueratem	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-443$COLOR_END LP ab.	icon_skills.burningbreath_tex
+501001	DamageOverTime	True	False	False	Feueratem	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-613$COLOR_END LP ab.	icon_skills.burningbreath_tex
+501002	DamageOverTime	True	False	False	Feueratem	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-849$COLOR_END LP ab.	icon_skills.burningbreath_tex
+501003	DamageOverTime	True	False	False	Feueratem	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-1175$COLOR_END LP ab.	icon_skills.burningbreath_tex
+501004	DamageOverTime	True	False	False	Feueratem V	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-1631$COLOR_END LP ab.	icon_skills.burningbreath_tex
+501005	DamageOverTime	True	False	False	Feueratem VI	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-2305$COLOR_END LP ab.	icon_skills.burningbreath_tex
+501006	DamageOverTime	True	False	False	Feueratem VII	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-3120$COLOR_END LP ab.	icon_skills.burningbreath_tex
+501020	DamageOverTime	True	False	False	Feueratem	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-338$COLOR_END LP ab.	icon_skills.burningbreath_tex
+501021	DamageOverTime	True	False	False	Feueratem	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-467$COLOR_END LP ab.	icon_skills.burningbreath_tex
+501022	DamageOverTime	True	False	False	Feueratem	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-645$COLOR_END LP ab.	icon_skills.burningbreath_tex
+501023	DamageOverTime	True	False	False	Feueratem	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-890$COLOR_END LP ab.	icon_skills.burningbreath_tex
+501024	DamageOverTime	True	False	False	Feueratem V	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-1228$COLOR_END LP ab.	icon_skills.burningbreath_tex
+501025	DamageOverTime	True	False	False	Feueratem VI	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-1704$COLOR_END LP ab.	icon_skills.burningbreath_tex
+501026	DamageOverTime	True	False	False	Feueratem VII	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-2259$COLOR_END LP ab.	icon_skills.burningbreath_tex
 501100	DamageOverTime	True	False	False	Manasalve I	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-172$COLOR_END MP ab.	icon_skills.mpsink_tex
 501101	DamageOverTime	True	False	False	Manasalve II	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-206$COLOR_END MP ab.	icon_skills.mpsink_tex
 501150	DamageOverTime	False	False	False	Manasalve I	[Test]	icon_skills.mpsink_tex
@@ -1786,23 +1799,23 @@
 600701	WeakeningEffect	True	False	False	Netzpfeil	Verringert die Geschwindigkeit um $H_W_BAD0,7$COLOR_END.	icon_skills.spiderarrow_tex
 600702	WeakeningEffect	True	False	False	Netzpfeil	Verringert die Geschwindigkeit um $H_W_BAD0,67$COLOR_END.	icon_skills.spiderarrow_tex
 600800	Stun	True	False	False	Nahkampf	Betäubt. Bewegungsunfähig.	icon_skills.turningkick_tex
-600900	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-270$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
-600901	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-389$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
-600902	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-589$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
-600903	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-849$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
-600904	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-1179$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
-600905	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-1626$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
-600906	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-2360$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
+600900	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-215$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
+600901	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-310$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
+600902	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-456$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
+600903	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-676$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
+600904	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-959$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
+600905	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-1328$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
+600906	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-1871$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
 600907	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-3128$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
 600908	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-3780$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
-600920	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-232$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
-600921	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-160$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
-600922	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-221$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
-600923	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-306$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
-600924	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-422$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
-600925	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-583$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
-600926	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-813$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
-600927	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-1078$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
+600920	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-95$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
+600921	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-131$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
+600922	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-249$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
+600923	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-345$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
+600924	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-476$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
+600925	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-660$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
+600926	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-1078$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
+600927	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-1427$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
 600928	DamageOverTime	True	False	False	Giftpfeil	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-1427$COLOR_END LP ab. Kann bis zu 3-mal akkumuliert werden.	icon_skills.venomarrow_tex
 601000	WeakeningEffect	True	False	False	Fesselnder Pfeil	Verringert die Bewegungsgeschwindigkeit um $value2 und die Angriffsgeschwindigkeit um $value.	icon_skills.contaningshot_tex
 601001	WeakeningEffect	True	False	False	Fesselnder Pfeil	Verringert die Bewegungsgeschwindigkeit um $value2 und die Angriffsgeschwindigkeit um $value.	icon_skills.contaningshot_tex
@@ -1849,6 +1862,7 @@
 700406	Buff	False	True	False	Gefallen der Titanen VII	Heilt immer nach $H_W_GOOD1$COLOR_END second LP.	icon_skills.healshot_tex
 700407	Buff	False	True	False	Gefallen der Titanen VIII	Heilt immer nach $H_W_GOOD1$COLOR_END second LP.	icon_skills.healshot_tex
 700408	Buff	False	True	False	Gefallen der Titanen IX	Heilt immer nach $H_W_GOOD1$COLOR_END second LP.	icon_skills.healshot_tex
+700409	Buff	False	True	False	Gefallen der Titanen X	Heilt immer nach $H_W_GOOD1$COLOR_END second LP.	icon_skills.healshot_tex
 700500	WeakeningEffect	True	False	False	Mystische Fesseln	Verringert die Geschwindigkeit um $H_W_BAD0,5$COLOR_END.	icon_skills.slowball_tex
 700501	WeakeningEffect	True	False	False	Mystische Fesseln	Verringert die Geschwindigkeit um $H_W_BAD0,4$COLOR_END.	icon_skills.slowball_tex
 700600	Buff	True	True	True	Aura der Gnadenlosen I	Verleiht Gruppenmitgliedern innerhalb von 30m die Kraft der Raserei. Für die Aufrechterhaltung werden immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-30$COLOR_END MP abgezogen.	icon_skills.criticalupaura_tex
@@ -1861,26 +1875,8 @@
 700701	Buff	True	True	True	Aura der Flinken (Freisetzung)	Verleiht Gruppenmitgliedern innerhalb von 30m die Aura der Flinken. Für die Aufrechterhaltung werden immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-30$COLOR_END MP abgezogen.	icon_skills.speedupaura_tex
 700730	Buff	True	True	True	Aura der Flinken I	Erhöht die Bewegungsgeschwindigkeit um $H_W_GOOD10%$COLOR_END.	icon_status.plusmove_tex
 700731	Buff	True	True	True	Aura der Flinken II	Erhöht die Bewegungsgeschwindigkeit um $H_W_GOOD30%$COLOR_END.	icon_status.plusmove_tex
-700800	DamageOverTime	True	False	False	Flut von Verwünschungen	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-40$COLOR_END LP ab.	icon_skills.painfulshackle_tex
-700801	DamageOverTime	True	False	False	Flut von Verwünschungen	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-62$COLOR_END LP ab.	icon_skills.painfulshackle_tex
-700802	DamageOverTime	True	False	False	Flut von Verwünschungen	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-96$COLOR_END LP ab.	icon_skills.painfulshackle_tex
-700803	DamageOverTime	True	False	False	Flut von Verwünschungen	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-138$COLOR_END LP ab.	icon_skills.painfulshackle_tex
-700804	DamageOverTime	True	False	False	Flut von Verwünschungen	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-205$COLOR_END LP ab.	icon_skills.painfulshackle_tex
-700805	DamageOverTime	True	False	False	Flut von Verwünschungen	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-289$COLOR_END LP ab.	icon_skills.painfulshackle_tex
-700806	DamageOverTime	True	False	False	Flut von Verwünschungen	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-417$COLOR_END LP ab.	icon_skills.painfulshackle_tex
-700807	DamageOverTime	True	False	False	Flut von Verwünschungen	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-578$COLOR_END LP ab.	icon_skills.painfulshackle_tex
-700808	DamageOverTime	True	False	False	Flut von Verwünschungen	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-817$COLOR_END LP ab.	icon_skills.painfulshackle_tex
-700809	DamageOverTime	True	False	False	Flut von Verwünschungen	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-1238$COLOR_END LP ab.	icon_skills.painfulshackle_tex
-700820	DamageOverTime	True	False	False	Flut von Verwünschungen	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-41$COLOR_END LP ab.	icon_skills.painfulshackle_tex
-700821	DamageOverTime	True	False	False	Flut von Verwünschungen	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-63$COLOR_END LP ab.	icon_skills.painfulshackle_tex
-700822	DamageOverTime	True	False	False	Flut von Verwünschungen	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-86$COLOR_END LP ab.	icon_skills.painfulshackle_tex
-700823	DamageOverTime	True	False	False	Flut von Verwünschungen	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-133$COLOR_END LP ab.	icon_skills.painfulshackle_tex
-700824	DamageOverTime	True	False	False	Flut von Verwünschungen	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-191$COLOR_END LP ab.	icon_skills.painfulshackle_tex
-700825	DamageOverTime	True	False	False	Flut von Verwünschungen	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-283$COLOR_END LP ab.	icon_skills.painfulshackle_tex
-700826	DamageOverTime	True	False	False	Flut von Verwünschungen	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-399$COLOR_END LP ab.	icon_skills.painfulshackle_tex
-700827	DamageOverTime	True	False	False	Flut von Verwünschungen	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-576$COLOR_END LP ab.	icon_skills.painfulshackle_tex
-700828	DamageOverTime	True	False	False	Flut von Verwünschungen	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-802$COLOR_END LP ab.	icon_skills.painfulshackle_tex
-700829	DamageOverTime	True	False	False	Flut von Verwünschungen	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-1212$COLOR_END LP ab.	icon_skills.painfulshackle_tex
+700800	DamageOverTime	True	False	False	Flut von Verwünschungen	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-1238$COLOR_END LP ab.	icon_skills.painfulshackle_tex
+700820	DamageOverTime	True	False	False	Flut von Verwünschungen	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-1212$COLOR_END LP ab.	icon_skills.painfulshackle_tex
 700900	Buff	True	True	False	Manainfusion	Stellt immer nach $H_W_GOOD1$COLOR_END second $H_W_GOOD100$COLOR_END MP wieder her, bis Ihr Schaden erleidet oder eine andere Kampffertigkeit bzw. einen anderen Gegenstand benutzt.	icon_skills.mpcharge_tex
 701000	Buff	True	True	False	Anmut des Geistes I	Heilt immer nach $H_W_GOOD2$COLOR_END second1 $H_W_GOOD70$COLOR_END LP.	icon_skills.summonspiritofheal_tex
 701001	Buff	True	True	False	Anmut des Geistes II	Heilt immer nach $H_W_GOOD2$COLOR_END second1 $H_W_GOOD88$COLOR_END LP.	icon_skills.summonspiritofheal_tex
@@ -1967,9 +1963,41 @@
 701606	Buff	True	True	False	Schutztotem II	Die beschworene Energie absorbiert bis zu $H_W_GOOD7149$COLOR_END Schaden. Der Effekt endet, sobald der maximale Schaden absorbiert wurde, unabhängig von der Wirkdauer.	icon_skills.energiesofprotection_tex
 701607	Buff	True	True	False	Schutztotem II	Die beschworene Energie heilt immer nach $H_W_GOOD2$COLOR_END second1 $H_W_GOOD700$COLOR_END LP.	icon_skills.energiesofprotection_tex
 701700	WeakeningEffect	True	False	False	Verseuchung	Ihr leidet $time lang an einer Krankheit. Sie verringert die Konstitution um $H_W_BAD5%$COLOR_END und kann nicht durch eine reinigende Fertigkeit entfernt werden. Außerdem werden Kreaturen in einem Radius von 7m um Euch herum infiziert.	icon_skills.plague_tex
-701701	WeakeningEffect	True	False	False	Verseuchung	Ihr leidet $time lang an einer Krankheit. Sie verringert die Konstitution um $H_W_BAD5%$COLOR_END und kann nicht durch eine reinigende Fertigkeit entfernt werden. Außerdem werden Kreaturen in einem Radius von 7m um Euch herum infiziert.	icon_skills.plague_tex
-701800	DamageOverTime	True	False	False	Befall	Erkrankt. Fügt pro Sekunde $H_W_BAD-15086$COLOR_END Schaden zu.	icon_skills.plague_tex
-701801	DamageOverTime	True	False	False	Befall	Erkrankt. Verringert die LP-Wiederherstellung um $H_W_BAD10%$COLOR_END und fügt pro Sekunde $H_W_BAD-1953$COLOR_END Schaden zu.	icon_skills.plague_tex
+701701	WeakeningEffect	True	False	False	Verseuchung II	Ihr leidet $time lang an einer Krankheit. Sie verringert die Konstitution um $H_W_BAD5%$COLOR_END und kann nicht durch eine reinigende Fertigkeit entfernt werden. Außerdem werden Kreaturen in einem Radius von 7m um Euch herum infiziert.	icon_skills.plague_tex
+701702	WeakeningEffect	True	False	False	Verseuchung III	Ihr leidet $time lang an einer Krankheit. Sie verringert die Konstitution um $H_W_BAD5%$COLOR_END und kann nicht durch eine reinigende Fertigkeit entfernt werden. Außerdem werden Kreaturen in einem Radius von 7m um Euch herum infiziert.	icon_skills.plague_tex
+701703	WeakeningEffect	True	False	False	Verseuchung IV	Ihr leidet $time lang an einer Krankheit. Sie verringert die Konstitution um $H_W_BAD5%$COLOR_END und kann nicht durch eine reinigende Fertigkeit entfernt werden. Außerdem werden Kreaturen in einem Radius von 7m um Euch herum infiziert.	icon_skills.plague_tex
+701704	WeakeningEffect	True	False	False	Verseuchung V	Ihr leidet $time lang an einer Krankheit. Sie verringert die Konstitution um $H_W_BAD5%$COLOR_END und kann nicht durch eine reinigende Fertigkeit entfernt werden. Außerdem werden Kreaturen in einem Radius von 7m um Euch herum infiziert.	icon_skills.plague_tex
+701705	WeakeningEffect	True	False	False	Verseuchung VI	Ihr leidet $time lang an einer Krankheit. Sie verringert die Konstitution um $H_W_BAD5%$COLOR_END und kann nicht durch eine reinigende Fertigkeit entfernt werden. Außerdem werden Kreaturen in einem Radius von 7m um Euch herum infiziert.	icon_skills.plague_tex
+701706	WeakeningEffect	True	False	False	Verseuchung VII	Ihr leidet $time lang an einer Krankheit. Sie verringert die Konstitution um $H_W_BAD5%$COLOR_END und kann nicht durch eine reinigende Fertigkeit entfernt werden. Außerdem werden Kreaturen in einem Radius von 7m um Euch herum infiziert.	icon_skills.plague_tex
+701707	WeakeningEffect	True	False	False	Verseuchung VIII	Ihr leidet $time lang an einer Krankheit. Sie verringert die Konstitution um $H_W_BAD5%$COLOR_END und kann nicht durch eine reinigende Fertigkeit entfernt werden. Außerdem werden Kreaturen in einem Radius von 7m um Euch herum infiziert.	icon_skills.plague_tex
+701708	WeakeningEffect	True	False	False	Verseuchung IX	Ihr leidet $time lang an einer Krankheit. Sie verringert die Konstitution um $H_W_BAD5%$COLOR_END und kann nicht durch eine reinigende Fertigkeit entfernt werden. Außerdem werden Kreaturen in einem Radius von 7m um Euch herum infiziert.	icon_skills.plague_tex
+701720	WeakeningEffect	True	False	False	Verseuchung	Ihr leidet $time lang an einer Krankheit. Sie verringert die Konstitution um $H_W_BAD5%$COLOR_END und kann nicht durch eine reinigende Fertigkeit entfernt werden. Außerdem werden Kreaturen in einem Radius von 7m um Euch herum infiziert.	icon_skills.plague_tex
+701721	WeakeningEffect	True	False	False	Verseuchung II	Ihr leidet $time lang an einer Krankheit. Sie verringert die Konstitution um $H_W_BAD5%$COLOR_END und kann nicht durch eine reinigende Fertigkeit entfernt werden. Außerdem werden Kreaturen in einem Radius von 7m um Euch herum infiziert.	icon_skills.plague_tex
+701722	WeakeningEffect	True	False	False	Verseuchung III	Ihr leidet $time lang an einer Krankheit. Sie verringert die Konstitution um $H_W_BAD5%$COLOR_END und kann nicht durch eine reinigende Fertigkeit entfernt werden. Außerdem werden Kreaturen in einem Radius von 7m um Euch herum infiziert.	icon_skills.plague_tex
+701723	WeakeningEffect	True	False	False	Verseuchung IV	Ihr leidet $time lang an einer Krankheit. Sie verringert die Konstitution um $H_W_BAD5%$COLOR_END und kann nicht durch eine reinigende Fertigkeit entfernt werden. Außerdem werden Kreaturen in einem Radius von 7m um Euch herum infiziert.	icon_skills.plague_tex
+701724	WeakeningEffect	True	False	False	Verseuchung V	Ihr leidet $time lang an einer Krankheit. Sie verringert die Konstitution um $H_W_BAD5%$COLOR_END und kann nicht durch eine reinigende Fertigkeit entfernt werden. Außerdem werden Kreaturen in einem Radius von 7m um Euch herum infiziert.	icon_skills.plague_tex
+701725	WeakeningEffect	True	False	False	Verseuchung VI	Ihr leidet $time lang an einer Krankheit. Sie verringert die Konstitution um $H_W_BAD5%$COLOR_END und kann nicht durch eine reinigende Fertigkeit entfernt werden. Außerdem werden Kreaturen in einem Radius von 7m um Euch herum infiziert.	icon_skills.plague_tex
+701726	WeakeningEffect	True	False	False	Verseuchung VII	Ihr leidet $time lang an einer Krankheit. Sie verringert die Konstitution um $H_W_BAD5%$COLOR_END und kann nicht durch eine reinigende Fertigkeit entfernt werden. Außerdem werden Kreaturen in einem Radius von 7m um Euch herum infiziert.	icon_skills.plague_tex
+701727	WeakeningEffect	True	False	False	Verseuchung VIII	Ihr leidet $time lang an einer Krankheit. Sie verringert die Konstitution um $H_W_BAD5%$COLOR_END und kann nicht durch eine reinigende Fertigkeit entfernt werden. Außerdem werden Kreaturen in einem Radius von 7m um Euch herum infiziert.	icon_skills.plague_tex
+701728	WeakeningEffect	True	False	False	Verseuchung IX	Ihr leidet $time lang an einer Krankheit. Sie verringert die Konstitution um $H_W_BAD5%$COLOR_END und kann nicht durch eine reinigende Fertigkeit entfernt werden. Außerdem werden Kreaturen in einem Radius von 7m um Euch herum infiziert.	icon_skills.plague_tex
+701800	DamageOverTime	True	False	False	Befall	Erkrankt. Fügt pro Sekunde $H_W_BAD-1141$COLOR_END Schaden zu.	icon_skills.plague_tex
+701801	DamageOverTime	True	False	False	Verseuchung II	Erkrankt. Fügt pro Sekunde $H_W_BAD-1585$COLOR_END Schaden zu.	icon_skills.plague_tex
+701802	DamageOverTime	True	False	False	Verseuchung III	Erkrankt. Fügt pro Sekunde $H_W_BAD-2202$COLOR_END Schaden zu.	icon_skills.plague_tex
+701803	DamageOverTime	True	False	False	Verseuchung IV	Erkrankt. Fügt pro Sekunde $H_W_BAD-3059$COLOR_END Schaden zu.	icon_skills.plague_tex
+701804	DamageOverTime	True	False	False	Verseuchung V	Erkrankt. Fügt pro Sekunde $H_W_BAD-4248$COLOR_END Schaden zu.	icon_skills.plague_tex
+701805	DamageOverTime	True	False	False	Verseuchung VI	Erkrankt. Fügt pro Sekunde $H_W_BAD-5900$COLOR_END Schaden zu.	icon_skills.plague_tex
+701806	DamageOverTime	True	False	False	Verseuchung VII	Erkrankt. Fügt pro Sekunde $H_W_BAD-8194$COLOR_END Schaden zu.	icon_skills.plague_tex
+701807	DamageOverTime	True	False	False	Verseuchung VIII	Erkrankt. Fügt pro Sekunde $H_W_BAD-11380$COLOR_END Schaden zu.	icon_skills.plague_tex
+701808	DamageOverTime	True	False	False	Verseuchung IX	Erkrankt. Fügt pro Sekunde $H_W_BAD-15086$COLOR_END Schaden zu.	icon_skills.plague_tex
+701820	DamageOverTime	True	False	False	Verseuchung	Erkrankt. Verringert die LP-Wiederherstellung um $H_W_BAD10%$COLOR_END und fügt pro Sekunde $H_W_BAD-141$COLOR_END Schaden zu.	icon_skills.plague_tex
+701821	DamageOverTime	True	False	False	Verseuchung II	Erkrankt. Verringert die LP-Wiederherstellung um $H_W_BAD10%$COLOR_END und fügt pro Sekunde $H_W_BAD-196$COLOR_END Schaden zu.	icon_skills.plague_tex
+701822	DamageOverTime	True	False	False	Verseuchung III	Erkrankt. Verringert die LP-Wiederherstellung um $H_W_BAD10%$COLOR_END und fügt pro Sekunde $H_W_BAD-272$COLOR_END Schaden zu.	icon_skills.plague_tex
+701823	DamageOverTime	True	False	False	Verseuchung IV	Erkrankt. Verringert die LP-Wiederherstellung um $H_W_BAD10%$COLOR_END und fügt pro Sekunde $H_W_BAD-378$COLOR_END Schaden zu.	icon_skills.plague_tex
+701824	DamageOverTime	True	False	False	Verseuchung V	Erkrankt. Verringert die LP-Wiederherstellung um $H_W_BAD10%$COLOR_END und fügt pro Sekunde $H_W_BAD-525$COLOR_END Schaden zu.	icon_skills.plague_tex
+701825	DamageOverTime	True	False	False	Verseuchung VI	Erkrankt. Verringert die LP-Wiederherstellung um $H_W_BAD10%$COLOR_END und fügt pro Sekunde $H_W_BAD-729$COLOR_END Schaden zu.	icon_skills.plague_tex
+701826	DamageOverTime	True	False	False	Verseuchung VII	Erkrankt. Verringert die LP-Wiederherstellung um $H_W_BAD10%$COLOR_END und fügt pro Sekunde $H_W_BAD-1012$COLOR_END Schaden zu.	icon_skills.plague_tex
+701827	DamageOverTime	True	False	False	Verseuchung VIII	Erkrankt. Verringert die LP-Wiederherstellung um $H_W_BAD10%$COLOR_END und fügt pro Sekunde $H_W_BAD-1406$COLOR_END Schaden zu.	icon_skills.plague_tex
+701828	DamageOverTime	True	False	False	Verseuchung IX	Erkrankt. Verringert die LP-Wiederherstellung um $H_W_BAD10%$COLOR_END und fügt pro Sekunde $H_W_BAD-1953$COLOR_END Schaden zu.	icon_skills.plague_tex
 701900	Buff	True	True	False	Teleportal-Unverwundbarkeit	Darf nicht angezeigt werden	icon_skills.voidtrap_tex
 757001	Buff	False	False	False	Soll nicht angezeigt werden.	Soll nicht angezeigt werden.	icon_status.firedamage_tex
 757002	Buff	True	False	True	Feuerstein	Der Steinriese brennt.  Ziele innerhalb von 21m erhalten "Hitze".	icon_status.firedamage_tex
@@ -2268,14 +2296,14 @@
 781107	Buff	False	True	False			
 781108	Buff	False	True	False			
 781109	DamageOverTime	False	False	False			
-781110	Buff	False	True	False			
+781110	Buff	False	False	False			
 781111	WeakeningEffect	True	False	False	Lakans Samen	Lakan hat Euch mit einem magischen Samen versehen. Er explodiert nach einer bestimmten Zeit.	icon_status.heat_tex
-781112	Buff	False	True	False			
+781112	Buff	False	False	False			
 781113	Buff	False	True	False			
 781114	DamageOverTime	False	False	False			
-781115	Buff	False	True	False			
+781115	Buff	False	False	False			
 781116	WeakeningEffect	True	False	False	Lakans Samen	Lakan hat Euch mit einem magischen Samen versehen. Er explodiert nach einer bestimmten Zeit.	icon_status.heat_tex
-781117	Buff	False	True	False			
+781117	Buff	False	False	False			
 781118	Buff	False	True	False			
 781119	Buff	True	True	False	Manakomprimierung	Lakan sammelt seine Magie, um die Vernichtungsfertigkeit auszuführen. Greift Lakan mit einer Schlaf-Fertigkeit an, um ihn einzuschläfern!	icon_status.windtyrant_tex
 781120	Buff	False	True	False			
@@ -2340,15 +2368,6 @@
 801301	Buff	True	True	False	Hochhelfen II	Erhöht das Gleichgewicht um $H_W_GOOD100%$COLOR_END.	icon_skills.recovery_tex
 801400	Buff	True	True	False	Heilender Schub I	Heilt immer nach $H_W_GOOD1$COLOR_END second LP.	icon_skills.sanctuaryofregeneration_tex
 801401	Buff	True	True	False	Heilender Schub II	Heilt immer nach $H_W_GOOD1$COLOR_END second LP.	icon_skills.sanctuaryofregeneration_tex
-801402	Buff	True	True	False	Heilender Schub III	Heilt immer nach $H_W_GOOD1$COLOR_END second LP.	icon_skills.sanctuaryofregeneration_tex
-801403	Buff	True	True	False	Heilender Schub IV	Heilt immer nach $H_W_GOOD1$COLOR_END second LP.	icon_skills.sanctuaryofregeneration_tex
-801404	Buff	True	True	False	Heilender Schub V	Heilt immer nach $H_W_GOOD1$COLOR_END second LP.	icon_skills.sanctuaryofregeneration_tex
-801405	Buff	True	True	False	Heilender Schub VI	Heilt immer nach $H_W_GOOD1$COLOR_END second LP.	icon_skills.sanctuaryofregeneration_tex
-801406	Buff	True	True	False	Heilender Schub VII	Heilt immer nach $H_W_GOOD1$COLOR_END second LP.	icon_skills.sanctuaryofregeneration_tex
-801407	Buff	True	True	False	Heilender Schub VIII	Heilt immer nach $H_W_GOOD1$COLOR_END second LP.	icon_skills.sanctuaryofregeneration_tex
-801408	Buff	True	True	False	Heilender Schub IX	Heilt immer nach $H_W_GOOD1$COLOR_END second LP.	icon_skills.sanctuaryofregeneration_tex
-801409	Buff	True	True	False	Heilender Schub X	Heilt immer nach $H_W_GOOD1$COLOR_END second LP.	icon_skills.sanctuaryofregeneration_tex
-801410	Buff	True	True	False	Heilender Schub XI	Heilt immer nach $H_W_GOOD1$COLOR_END second LP.	icon_skills.sanctuaryofregeneration_tex
 801500	Buff	True	True	False	Energiesterne I	Erhöht die Kraft um $H_W_GOOD20$COLOR_END und die Angriffsgeschwindigkeit um $H_W_GOOD8$COLOR_END.	icon_skills.divinelightning_tex
 801501	Buff	True	True	False	Energiesterne II	Erhöht die Kraft um $H_W_GOOD28$COLOR_END und die Angriffsgeschwindigkeit um $H_W_GOOD8$COLOR_END.	icon_skills.divinelightning_tex
 801502	Buff	True	True	False	Energiesterne III	Erhöht die Kraft um $H_W_GOOD36$COLOR_END und die Angriffsgeschwindigkeit um $H_W_GOOD8$COLOR_END.	icon_skills.divinelightning_tex
@@ -2931,8 +2950,8 @@
 950515	Buff	True	True	True	Ein letztes Aufbäumen	Vergos bietet all seine verbleibende Kraft auf, um sich zu widersetzen. Die Angriffsgeschwindigkeit steigt um 40% und die Abwehr um 70%.	icon_status.vergosdust_tex
 950516	WeakeningEffect	True	True	False	Flammen-Verdichtung	Ihr werdet bald von Flammen bedeckt sein.	icon_status.vergosflame_tex
 950517	WeakeningEffect	True	True	False	Staub-Verdichtung	Ihr werdet bald von Staub bedeckt sein.	icon_status.vergosdust_tex
-950518	WeakeningEffect	True	True	False	Wunde durch Vorderfuß	Ihr wurdet von einem Hinterfuß von Vergos getroffen und habt eine klaffende Wunde erlitten. Wenn Ihr noch einmal von diesem Angriff getroffen werdet, explodiert Ihr.	icon_status.damageup_tex
-950519	WeakeningEffect	True	True	False	Wunde durch Hinterfuß	Ihr wurdet von einem Hinterfuß von Vergos getroffen und habt eine klaffende Wunde erlitten. Wenn Ihr noch einmal von diesem Angriff getroffen werdet, explodiert Ihr.	icon_status.damagedown_tex
+950518	WeakeningEffect	True	True	False	Ihr wurdet von einem Vorderfuß getroffen	Ihr wurdet von einem Hinterfuß von Vergos getroffen und habt eine klaffende Wunde erlitten. Wenn Ihr noch einmal von diesem Angriff getroffen werdet, explodiert Ihr.	icon_status.damageup_tex
+950519	WeakeningEffect	True	True	False	Ihr wurdet von einem Hinterfuß getroffen	Ihr wurdet von einem Hinterfuß von Vergos getroffen und habt eine klaffende Wunde erlitten. Wenn Ihr noch einmal von diesem Angriff getroffen werdet, explodiert Ihr.	icon_status.damagedown_tex
 950520	WeakeningEffect	False	True	True			
 950521	Buff	False	True	False			
 950600	Buff	True	True	True	Gunst der Göttin	Der strahlende Schutz der Göttin umgibt Euch. Ihr fühlt Euch stärker.	icon_skills.tranquility_tex
@@ -3090,9 +3109,9 @@
 981097	Buff	True	False	False			
 981098	Buff	False	True	False			
 981099	Stun	True	True	False	Betäubung	Kurz bevor Ihr von Lakans Angriff getroffen wurdet, wurdet Ihr von einer starken Aura überwältigt und betäubt.	icon_status.confuseup_tex
-981100	Buff	False	True	False			
-981101	Buff	False	True	False			
-981102	Buff	False	True	False			
+981100	Buff	False	True	True			
+981101	Buff	False	True	True			
+981102	Buff	False	True	True			
 981103	Buff	True	True	False			
 981104	Buff	False	True	False			
 981105	Buff	False	True	False			
@@ -3100,14 +3119,14 @@
 981107	Buff	False	True	False			
 981108	Buff	False	True	False			
 981109	DamageOverTime	False	False	False			
-981110	Buff	False	True	False			
+981110	Buff	False	False	False			
 981111	WeakeningEffect	True	False	False	Lakans Samen	Lakan hat Euch mit einem magischen Samen versehen. Er explodiert nach einer bestimmten Zeit.	icon_status.heat_tex
-981112	Buff	False	True	False			
+981112	Buff	False	False	False			
 981113	Buff	False	True	False			
 981114	DamageOverTime	False	False	False			
-981115	Buff	False	True	False			
+981115	Buff	False	False	False			
 981116	WeakeningEffect	True	False	False	Lakans Samen	Lakan hat Euch mit einem magischen Samen versehen. Er explodiert nach einer bestimmten Zeit.	icon_status.heat_tex
-981117	Buff	False	True	False			
+981117	Buff	False	False	False			
 981118	Buff	False	True	False			
 981119	Buff	True	True	False	Manakomprimierung	Lakan sammelt seine Magie, um die Vernichtungsfertigkeit auszuführen. Greift Lakan mit einer Schlaf-Fertigkeit an, um ihn einzuschläfern!	icon_status.windtyrant_tex
 981120	Buff	False	True	True			
@@ -3727,6 +3746,7 @@
 10152093	Buff	False	True	False			
 10152094	Buff	False	True	False			
 10152095	Buff	False	True	False			
+10152096	Buff	False	True	False	Bei Göttlicher Zorn muss die Abklingzeit zurückgesetzt werden.	Bombardement verwenden und Abklingzeit zurücksetzen.	
 10152100	Buff	True	True	False	Fokussierte Willenskraft	Die Willenskraft bleibt bis zu 60 Sekunden gespeichert und klingt danach schnell ab. Dieser Countdown startet erneut, wenn einem Gegner Schaden zugefügt wird.	icon_skills.energycharging_tex
 10152110	Buff	True	True	False	Notfallbarriere	Notfallbarriere absorbiert bis zu $H_W_GOOD27858$COLOR_END Schaden.	icon_skills.emergencyshield_tex
 10152111	Buff	True	True	False	Notfallbarriere	Notfallbarriere absorbiert bis zu $H_W_GOOD34900$COLOR_END Schaden.	icon_skills.emergencyshield_tex
@@ -3816,6 +3836,7 @@
 10154050	Buff	True	True	False	Nebelschleier	Im Nebelschleier könnt Ihr feindlichen Angriffen ausweichen.	icon_skills.c12_smokebombevade
 10154051	Buff	False	True	False		Diese Abnormality soll nicht angezeigt werden.	
 10154052	Buff	False	True	False			
+10154054	Buff	False	True	False	Bei Göttlicher Zorn muss die Abklingzeit zurückgesetzt werden.	Göttlicher Zorn verwenden und Abklingzeit zurücksetzen.	
 10154060	Buff	False	True	False			
 10154061	Buff	False	True	False			
 10154062	Buff	False	True	False			
@@ -4114,6 +4135,112 @@
 45000120	Buff	True	True	False	Akrophobie	Ihr leidet unter Höhenangst und könnt vorübergehend keine Fertigkeiten benutzen.	icon_status.fearstatus_tex
 45000121	Buff	True	True	False	Haut verstärken	Koleoggs Haut verstärkt sich und macht ihn immun gegen jeglichen Schaden.	icon_status.plusedefence_tex
 45000122	Buff	True	True	False	Veliks Schutz	Veliks Schutz gewährt einen Schild für 5 Sekunden.	icon_status.bless_of_velic_tex
+46600001	Stun	False	False	False	2 Sek. Betäubung für die Gefangennahme des 2. Bossmonsters		
+46600002	Buff	True	True	True	Demoroths Rammbock	Während Demoroth würfelt, lässt er sich nicht stören. Demoroths Abwehr hat sich um das 1000-fache erhöht.	icon_status.plusedefence_tex
+46600003	Buff	False	True	False			
+46600004	Stun	False	False	False			
+46600005	DamageOverTime	False	False	False			
+46600006	WeakeningEffect	False	True	True			
+46600007	Buff	False	True	True		Wer den Königswürfel hat, darf würfeln.	
+46600008	Buff	False	True	True		Despawn-Bedingungen für PC-Würfel	
+46600009	Buff	False	True	True			
+46600010	WeakeningEffect	False	True	False			
+46600011	Buff	False	False	True		Für Würfel-Effekt (blau)	
+46600012	Buff	False	False	True		Für Würfel-Effekt (rot)	
+46600013	Buff	False	True	True		Für Würfel-Effekt (weiß)	
+46600014	Buff	False	True	False			
+46600015	Buff	False	True	False			
+46600016	Buff	False	True	False		Würfel-Spawn-Abklingzeit: 90 Sek.	
+46600017	Buff	False	True	True			
+46600018	DamageOverTime	True	False	False	Demoroths Fluch	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD10%$COLOR_END der Gesamt-LP ab.	icon_status.injuredbtdarkness_tex
+46600019	WeakeningEffect	False	True	False		Bei Eintritt von FeverTime beim 2. Bossmonster, groggy inszenieren.	
+46600020	WeakeningEffect	False	True	False		Effekt der Handlungs-Rücknahme	
+46600021	Buff	False	True	False		Zur Überprüfung von Sieg oder Niederlage pro Runde.	
+46600022	Buff	False	True	True			
+46600023	Buff	False	True	True			
+46600024	Buff	False	True	True			
+46600025	Buff	False	True	True			
+46600026	Buff	False	True	True			
+46600027	Buff	False	True	True		Nach der 2. Phase des 2. Bossmonsters besitzt ein unsichtbarer NPC 3 verschiedene gespawnte Würfeln, die geworfen werden können.	
+46600028	Buff	False	True	False		Sichere Zone für PC	
+46600029	Buff	False	True	False	Fortschritts-Effekt	Fortschritts-Effekt	
+46600030	Buff	False	True	False	Fortschritts-Effekt	Fortschritts-Effekt	
+46600031	Buff	False	True	True			
+46600032	Buff	False	True	True			
+46600033	Buff	False	True	True			
+46600034	Buff	False	True	True			
+46600035	Buff	False	True	True			
+46600036	Buff	False	True	True			
+46600037	Buff	False	True	True			
+46600038	Buff	False	True	False			
+46600039	Buff	False	True	False			
+46600040	Stun	True	False	False	Betäubung	Euer ganzer Körper schmerzt und Ihr seid für 5 Sek. bewegungsunfähig.	icon_status.positionswap_tex
+46600041	Buff	False	True	False		Für die Inszenierung des Nuking-Effekts beim 1. Bossmonster (rot).	
+46600042	DamageOverTime	False	True	False		Für die Inszenierung des Nuking-Effekts beim 1. Bossmonster (blau).	
+46600043	DamageOverTime	False	True	False		Für die Inszenierung des Nuking-Effekts beim 1. Bossmonster (grün).	
+46600053	Buff	False	True	True	Leuchtende Würfel	Leuchtende Würfel werden beschworen.	
+46600054	WeakeningEffect	False	True	True			
+46600055	Buff	False	True	True			
+46600056	Buff	False	True	True			
+46600057	Buff	False	True	True			
+46600059	Buff	False	True	True		Dem unsichtbaren NPC mitteilen, dass das Roulette in entgegengesetzter Richtung läuft.	
+46600060	Buff	False	True	True		Dem unsichtbaren NPC mitteilen, dass das Roulette in der richtigen Richtung läuft.	
+46600061	Buff	False	True	True		Dem unsichtbaren NPC das Roulette-Ergebnis (rot) mitteilen.	
+46600062	Buff	False	True	True		Dem unsichtbaren NPC das Roulette-Ergebnis (weiß) mitteilen.	
+46600063	Buff	False	True	True		Dem unsichtbaren NPC das Roulette-Ergebnis (blau) mitteilen.	
+46600064	Buff	False	True	True		Effekt, der beim PC dazu führt, dass er würfeln kann.	
+46600065	Buff	False	True	True		Effekt, der dazu führt, dass der PC Würfel explodieren lässt.	
+46600066	WeakeningEffect	False	True	True		Schutzschild für explodierende PC-Würfel.	
+46600067	WeakeningEffect	False	True	True		Schutzschild für 1 Würfel.	
+46600068	WeakeningEffect	False	True	True		Schutzschild für 2 Würfel.	
+46600069	DamageOverTime	False	False	False		Unsichtbarkeit vor Roulette-Despawn	
+46600070	Buff	False	True	False		Spawn-Effekt für Roulette-NPC	
+46600071	DamageOverTime	False	False	False		Effekt, der nach Ablauf der Dauer von 46600070 eintritt.	icon_status.icedamage_tex
+46600072	Buff	False	True	False		Dem 2. Bossmonster mitteilen, dass das Rouletterad rotiert, damit keine Würfel gespawnt werden können.	icon_status.firedamage_tex
+46600073	Buff	False	True	True		Effekt der Beschwörung von gegenläufigem Roulette	
+46600074	Buff	False	True	True		Effekt der Beschwörung von Roulette in richtiger Drehrichtung	
+46600075	Buff	False	True	False		Effekt der Roulette-Abklingzeit	
+46600076	WeakeningEffect	False	True	True		Effekt der Fähigkeit, die 3 verschiedenen Würfel in der 2. Phase werfen zu können	
+46600077	Buff	False	True	False		Dem 2. Bossmonster mitteilen, dass das Rouletterad stillsteht.	
+46600078	Buff	False	True	True		Effekt, den sich das 2. Bossmonster beim Eintritt in Phase 2 selbst verleiht.	
+46600079	Buff	True	True	False	Demoroths Raserei	Demoroth bereitet sich darauf vor, in die andere Dimension zu fliehen. Die Abwehr erhöht sich um das 1000-fache.	icon_status.plusedefence_tex
+46600080	Buff	False	True	True		Befindet sich in Feld 10.	
+46600081	Buff	False	True	True		Befindet sich in Feld 1.	
+46600082	Buff	False	True	True		Befindet sich in Feld 2.	
+46600083	Buff	False	True	True		Befindet sich in Feld 3.	
+46600084	Buff	False	True	True		Befindet sich in Feld 4.	
+46600085	Buff	False	True	True		Befindet sich in Feld 5.	
+46600086	Buff	False	True	True		Befindet sich in Feld 6.	
+46600088	Buff	False	True	False		Bei einem Treffer durch TERA-Taler erhöht sich der Balken um 1 (für Inszenierung).	
+46600089	DamageOverTime	False	False	False		Bei einem Treffer durch TERA-Taler erhöht sich der Balken um 3 (für Inszenierung).	
+46600090	DamageOverTime	False	False	False		Das 2. Bossmonster spielt Roulette.	
+46600091	Buff	False	True	False			
+46600092	Buff	False	True	False			
+46600093	Buff	False	True	False			
+46600094	Buff	False	True	False		2. Bossmonster_Für Bonuswürfel-Muster	
+46600095	Buff	False	True	False			
+46600096	Buff	False	True	False			
+46600097	Buff	False	True	False			
+46600098	DamageOverTime	False	False	False		2. Bossmonster_Regeneration für FeverTime	icon_skills.refreshbless_tex
+46600099	Buff	True	True	False	Dimensions-Absorption	Heilt immer nach $H_W_GOOD1$COLOR_END second $H_W_GOOD0,35%$COLOR_END der Gesamt-LP.	icon_skills.refreshbless_tex
+46600100	Buff	False	True	True		Das 2. Bossmonster ist im Zustand "Unbesiegbar".	
+46600101	Buff	False	True	False			
+46600102	Buff	False	True	False			
+46600103	Buff	False	True	True		Zum Beginn Muster mit rotem Nahkreis -> In der 2. Phase grüner Nahkreis.	
+46600104	Buff	False	True	True		Zu Beginn Muster mit grünem Nahkreis -> In der 2. Phase roter Nahkreis.	
+46600105	Buff	False	True	False		Effekt der Überprüfung einer ungeraden Zahl beim 1. Bossmonster (wenn er eine ungerade Zahl hat)	
+46600106	Buff	False	True	False		Bei 2 Akkumulierungen von ungeraden Zahlen erfolgt die Umwandlung in eine gerade Zahl -> verschwindet nach 1 Sek.	
+46600107	Buff	False	False	False			
+46600108	Buff	False	False	False			
+46600109	Buff	False	True	False		Abklingzeit des Musters für ungerade und gerade Zahlen beim 1. Bossmonster	
+46600110	Buff	False	True	False		Nuking-Muster-Abklingzeit des 1. Bossmonsters	
+46600111	Buff	False	True	True			
+46600112	Buff	False	True	False		Für Nuking-Reichweite-Decal des 1. Bossmonsters	
+46600113	DamageOverTime	True	False	False	Von Turgas zugefügte Wunde	Zieht immer nach $H_W_BAD1$COLOR_END second $H_W_BAD10%$COLOR_END der Gesamt-LP ab.	icon_status.injuredbtdarkness_tex
+46600114	Buff	False	True	True		Ungerade - Großraum-Explosion	
+46600115	Buff	False	True	True		Ungerade - Fernexplosion	
+46600116	Buff	False	True	True		Gerade - Großraum-Explosion	
+46600117	Buff	False	True	True		Gerade - Fernexplosion	
 47300100	DamageOverTime	True	False	False	Giftharz	Zieht immer nach $H_W_BAD60$COLOR_END second1 $H_W_BAD50%$COLOR_END der maximalen LP ab.$BRGiftharz kann nicht gereinigt oder gesäubert werden.	icon_status.poisonstatus_tex
 47300200	DamageOverTime	True	False	False	Thulsas Gift	Zieht immer nach $H_W_BAD3$COLOR_END second1 $H_W_BAD5%$COLOR_END der maximalen LP ab.$BRThulsas Gift kann nicht gereinigt oder gesäubert werden.	icon_status.poisonstatus_tex
 47300300	DamageOverTime	True	False	False	Thulsas Vergiftung	Zieht immer nach $H_W_BAD4$COLOR_END second1 $H_W_BAD30%$COLOR_END der maximalen LP ab.$BRThulsas Vergiftung kann nicht gereinigt oder gesäubert werden.	icon_status.poisonstatus_tex

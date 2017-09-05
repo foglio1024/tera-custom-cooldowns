@@ -3317,6 +3317,23 @@
 		<Monster name="Turpster" id="1067" isBoss="False" hp="10000" />
 		<Monster name="Lowine" id="1068" isBoss="False" hp="10000" />
 		<Monster name="Lynel" id="1069" isBoss="False" hp="10000" />
+		<Monster name="Sharna" id="1070" isBoss="False" hp="10000" />
+		<Monster name="Dian" id="1071" isBoss="False" hp="10000" />
+		<Monster name="Dian" id="1072" isBoss="False" hp="10000" />
+		<Monster name="Sylvat" id="1073" isBoss="False" hp="10000" />
+		<Monster name="Fernan" id="1074" isBoss="False" hp="10000" />
+		<Monster name="Veyer" id="1075" isBoss="False" hp="10000" />
+		<Monster name="Nimresk" id="1076" isBoss="False" hp="10000" />
+		<Monster name="Nimue" id="1077" isBoss="False" hp="10000" />
+		<Monster name="Larren" id="1078" isBoss="False" hp="10000" />
+		<Monster name="Salv A. Tion" id="1079" isBoss="False" hp="10000" />
+		<Monster name="Shady Tramp" id="1080" isBoss="False" hp="10000" />
+		<Monster name="Neir" id="1081" isBoss="False" hp="10000" />
+		<Monster name="Dreist" id="1082" isBoss="False" hp="10000" />
+		<Monster name="Bier" id="1083" isBoss="False" hp="10000" />
+		<Monster name="Ninh" id="1084" isBoss="False" hp="10000" />
+		<Monster name="Dian" id="1085" isBoss="False" hp="10000" />
+		<Monster name="Dian" id="1086" isBoss="False" hp="10000" />
 		<Monster name="Fraya" id="1100" isBoss="False" hp="10000" />
 		<Monster name="Loana" id="1101" isBoss="False" hp="10000" />
 		<Monster name="Eyhian" id="1102" isBoss="False" hp="10000" />
@@ -3512,6 +3529,7 @@
 		<Monster name="Hallik" id="7002" isBoss="False" hp="10000" />
 		<Monster name="Ellonia" id="8000" isBoss="False" hp="10000" />
 		<Monster name="Tikat" id="9000" isBoss="False" hp="10000" />
+		<Monster name="Demon's Wheel Entrance" id="9066" isBoss="False" hp="10000" />
 		<Monster name="Derene" id="22001" isBoss="False" hp="10000" />
 		<Monster name="Shuna" id="22002" isBoss="False" hp="10000" />
 		<Monster name="Naulu" id="22003" isBoss="False" hp="10000" />
@@ -4860,6 +4878,7 @@
 		<Monster name="Tactics/Magic Instructor" id="8272" isBoss="False" hp="0" />
 		<Monster name="Flight Manager" id="8273" isBoss="False" hp="0" />
 		<Monster name="Tactics/Magic Instructor" id="8281" isBoss="False" hp="0" />
+		<Monster name="Demon's Wheel Entrance" id="9066" isBoss="False" hp="0" />
 		<Monster name="Demokron Factory Entrance" id="9067" isBoss="False" hp="0" />
 		<Monster name="Manglemire Entrance" id="9070" isBoss="False" hp="0" />
 		<Monster name="Harrowhold Entrance" id="9501" isBoss="False" hp="0" />
@@ -10133,6 +10152,32 @@
 		<Monster name="Kelba Zealot" id="5007" isBoss="False" hp="8955" />
 		<Monster name="Jurnagg Column" id="6000" isBoss="False" hp="25747" />
 	</Zone>
+	<Zone id="466" name="Demon's Wheel" >
+		<Monster name="Defeat Bandersnatch" id="911" isBoss="False" hp="0" />
+		<Monster name="Defeat Demoros" id="912" isBoss="False" hp="0" />
+		<Monster name="Don A. Tion" id="1078" isBoss="False" hp="10000" />
+		<Monster name="Sunni" id="1079" isBoss="False" hp="10000" />
+		<Monster name="Daumer" id="1080" isBoss="False" hp="10000" />
+		<Monster name="Patima" id="1081" isBoss="False" hp="10000" />
+		<Monster name="Andel" id="1082" isBoss="False" hp="10000" />
+		<Monster name="Sunni" id="1083" isBoss="False" hp="10000" />
+		<Monster name="Patima" id="1084" isBoss="False" hp="10000" />
+		<Monster name="Andel" id="1085" isBoss="False" hp="10000" />
+		<Monster name="Exit Portal" id="1501" isBoss="False" hp="10000" />
+		<Monster name="Bandersnatch" id="46601" isBoss="True" hp="900000000" />
+		<Monster name="Demoros" id="46602" isBoss="True" hp="1040000000" />
+		<Monster name="Demoros's Treasure Chest" id="46613" isBoss="False" hp="100" />
+		<Monster name="Demoros's Die" id="46677" isBoss="False" hp="10000000" />
+		<Monster name="Demoros's Die" id="46678" isBoss="False" hp="10000000" />
+		<Monster name="Demoros's Die" id="46679" isBoss="False" hp="10000000" />
+		<Monster name="Red Die" id="46688" isBoss="False" hp="1400000000" />
+		<Monster name="White Die" id="46689" isBoss="False" hp="1400000000" />
+		<Monster name="Blue Die" id="46690" isBoss="False" hp="1400000000" />
+		<Monster name="Demoros's Die" id="46692" isBoss="False" hp="1400000000" />
+		<Monster name="Demoros's Die" id="46697" isBoss="False" hp="10000000" />
+		<Monster name="Demoros's Die" id="46698" isBoss="False" hp="10000000" />
+		<Monster name="Demoros's Die" id="46699" isBoss="False" hp="10000000" />
+	</Zone>
 	<Zone id="467" name="Demokron Factory (Hard)" >
 		<Monster name="Defeat Nightmare Vera and Nightmare Prima" id="911" isBoss="False" hp="0" />
 		<Monster name="Defeat Nightmare Odon" id="912" isBoss="False" hp="0" />
@@ -13911,8 +13956,8 @@
 		<Monster name="Nightmare Perimos" id="91660" isBoss="False" hp="90000000" />
 		<Monster name="Elite Quadriliar" id="91671" isBoss="False" hp="40000000" />
 		<Monster name="Elite Barbed Laceras" id="91672" isBoss="False" hp="40000000" />
-		<Monster name="Elite Hulking Salcata" id="91673" isBoss="False" hp="100000000" />
-		<Monster name="Elite Bloodwrath Archer" id="91674" isBoss="False" hp="70000000" />
+		<Monster name="Elite Hulking Salcata" id="91673" isBoss="False" hp="90000000" />
+		<Monster name="Elite Bloodwrath Archer" id="91674" isBoss="False" hp="60000000" />
 		<Monster name="Elite Bloodwrath Priest" id="91675" isBoss="False" hp="40000000" />
 		<Monster name="Elite Bloodwrath Bladedancer" id="91676" isBoss="False" hp="45000000" />
 		<Monster name="Dougal" id="99901" isBoss="False" hp="366797" />
@@ -14499,7 +14544,7 @@
 		<Monster name="Big Blue Box" id="88888888" isBoss="False" hp="100000000" />
 		<Monster name="Treasure Chest" id="88888889" isBoss="False" hp="99999999" />
 		<Monster name="The Witch's Bizarre Box" id="88888890" isBoss="False" hp="1" />
-		<Monster name="First Anniversary Chest" id="98888888" isBoss="False" hp="1" />
+		<Monster name="Baraka Festival Special Chest" id="98888888" isBoss="False" hp="1" />
 		<Monster name="First Anniversary Chest" id="98888889" isBoss="False" hp="1" />
 		<Monster name="Caiman Egg Thief" id="99999991" isBoss="False" hp="100000000" />
 		<Monster name="Caiman Egg Thief" id="99999992" isBoss="False" hp="99999999" />

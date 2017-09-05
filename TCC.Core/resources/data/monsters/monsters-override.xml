@@ -32,12 +32,15 @@
 		<Monster id="76611" isBoss="False" />
 	</Zone>
 	
+	<Zone id="950">
+		<Monster name="Big black ball" id="3017" isBoss="True" hp="86625000" />
+		<Monster name="Big red ball" id="3016" isBoss="True" hp="86625000" />
+		<Monster name="Red ball" id="3014" isBoss="True" hp="115500000" />
+		<Monster name="Black ball" id="3015" isBoss="True" hp="115500000" />
+	</Zone>
+	
 	<!-- SCHM -->
 	<Zone id="916">
 		<Monster id="1001" isBoss="False" name="Trash darkan" />
-	</Zone>
-		<!--Toy tank-->
-	<Zone id="210">
-			<Monster id="4000" isBoss="False" />
 	</Zone>
 </Zones>
