@@ -3318,6 +3318,23 @@
 		<Monster name="卡琳喬伊" id="1067" isBoss="False" hp="10000" />
 		<Monster name="蘿烏茲艾琳" id="1068" isBoss="False" hp="10000" />
 		<Monster name="里內魯那" id="1069" isBoss="False" hp="10000" />
+		<Monster name="夏奇拉路德米菈" id="1070" isBoss="False" hp="10000" />
+		<Monster name="戴安娜路德米菈" id="1071" isBoss="False" hp="10000" />
+		<Monster name="戴安娜路德米菈" id="1072" isBoss="False" hp="10000" />
+		<Monster name="希菲亞巴奈" id="1073" isBoss="False" hp="10000" />
+		<Monster name="費蘭度卡斯特洛" id="1074" isBoss="False" hp="10000" />
+		<Monster name="培里溫史波萊恩" id="1075" isBoss="False" hp="10000" />
+		<Monster name="泰勒敏拉裴爾雷特" id="1076" isBoss="False" hp="10000" />
+		<Monster name="尼穆艾洛漢" id="1077" isBoss="False" hp="10000" />
+		<Monster name="拉夏羅芮" id="1078" isBoss="False" hp="10000" />
+		<Monster name="克羅夏爾本邯" id="1079" isBoss="False" hp="10000" />
+		<Monster name="雪薇特朗普" id="1080" isBoss="False" hp="10000" />
+		<Monster name="尼爾班特塞立" id="1081" isBoss="False" hp="10000" />
+		<Monster name="德雷克維斯特" id="1082" isBoss="False" hp="10000" />
+		<Monster name="比爾莫克" id="1083" isBoss="False" hp="10000" />
+		<Monster name="瑪蒂妮娜" id="1084" isBoss="False" hp="10000" />
+		<Monster name="戴安娜路德米菈" id="1085" isBoss="False" hp="10000" />
+		<Monster name="戴安娜路德米菈" id="1086" isBoss="False" hp="10000" />
 		<Monster name="佛雷伊亞洛漢" id="1100" isBoss="False" hp="10000" />
 		<Monster name="羅亞那懷特利波" id="1101" isBoss="False" hp="10000" />
 		<Monster name="亞伊克海因茲" id="1102" isBoss="False" hp="10000" />
@@ -3513,6 +3530,7 @@
 		<Monster name="闇克" id="7002" isBoss="False" hp="10000" />
 		<Monster name="小魔女艾洛尼亞" id="8000" isBoss="False" hp="10000" />
 		<Monster name="珍奇異寶兌換商" id="9000" isBoss="False" hp="10000" />
+		<Monster name="次元移動傳點" id="9066" isBoss="False" hp="10000" />
 		<Monster name="德米勒巴塔魯" id="22001" isBoss="False" hp="10000" />
 		<Monster name="修納" id="22002" isBoss="False" hp="10000" />
 		<Monster name="因納巴塔魯" id="22003" isBoss="False" hp="10000" />
@@ -4861,6 +4879,7 @@
 		<Monster name="戰鬥/魔法技能教官" id="8272" isBoss="False" hp="0" />
 		<Monster name="佩格薩斯管理員" id="8273" isBoss="False" hp="0" />
 		<Monster name="戰鬥/魔法技能教官" id="8281" isBoss="False" hp="0" />
+		<Monster name="岱魔魯斯的輪盤 入口" id="9066" isBoss="False" hp="0" />
 		<Monster name="費勒諾的實驗室入口" id="9067" isBoss="False" hp="0" />
 		<Monster name="吹牛王塔勒斯基的遊樂場入口" id="9070" isBoss="False" hp="0" />
 		<Monster name="破壞的神界關口入口" id="9501" isBoss="False" hp="0" />
@@ -10135,6 +10154,32 @@
 		<Monster name="凱巴狂信徒" id="5007" isBoss="False" hp="8955" />
 		<Monster name="阿勒坤裝置" id="6000" isBoss="False" hp="25747" />
 	</Zone>
+	<Zone id="466" name="岱魔魯斯的輪盤" >
+		<Monster name="請消滅吐爾卡斯" id="911" isBoss="False" hp="0" />
+		<Monster name="請消滅岱魔魯斯" id="912" isBoss="False" hp="0" />
+		<Monster name="宿洙本邯" id="1078" isBoss="False" hp="10000" />
+		<Monster name="杰尼宋" id="1079" isBoss="False" hp="10000" />
+		<Monster name="波特雷勒漢力克" id="1080" isBoss="False" hp="10000" />
+		<Monster name="法蒂瑪麥羅" id="1081" isBoss="False" hp="10000" />
+		<Monster name="麥克斯安德魯" id="1082" isBoss="False" hp="10000" />
+		<Monster name="杰尼宋" id="1083" isBoss="False" hp="10000" />
+		<Monster name="法蒂瑪麥羅" id="1084" isBoss="False" hp="10000" />
+		<Monster name="麥克斯安德魯" id="1085" isBoss="False" hp="10000" />
+		<Monster name="次元移動傳點" id="1501" isBoss="False" hp="10000" />
+		<Monster name="吐爾卡斯" id="46601" isBoss="True" hp="900000000" />
+		<Monster name="岱魔魯斯" id="46602" isBoss="True" hp="1040000000" />
+		<Monster name="岱魔魯斯的寶箱" id="46613" isBoss="False" hp="100" />
+		<Monster name="岱魔魯斯的骰子" id="46677" isBoss="False" hp="10000000" />
+		<Monster name="岱魔魯斯的骰子" id="46678" isBoss="False" hp="10000000" />
+		<Monster name="岱魔魯斯的骰子" id="46679" isBoss="False" hp="10000000" />
+		<Monster name="紅色骰子" id="46688" isBoss="False" hp="1400000000" />
+		<Monster name="白色骰子" id="46689" isBoss="False" hp="1400000000" />
+		<Monster name="藍色骰子" id="46690" isBoss="False" hp="1400000000" />
+		<Monster name="岱魔魯斯的骰子" id="46692" isBoss="False" hp="1400000000" />
+		<Monster name="岱魔魯斯的骰子" id="46697" isBoss="False" hp="10000000" />
+		<Monster name="岱魔魯斯的骰子" id="46698" isBoss="False" hp="10000000" />
+		<Monster name="岱魔魯斯的骰子" id="46699" isBoss="False" hp="10000000" />
+	</Zone>
 	<Zone id="467" name="殘暴費勒諾的實驗室" >
 		<Monster name="請消滅兇暴培拉與兇暴費利瑪" id="911" isBoss="False" hp="0" />
 		<Monster name="請消滅兇暴汙頓" id="912" isBoss="False" hp="0" />
@@ -13931,8 +13976,8 @@
 		<Monster name="沛里摩斯" id="91660" isBoss="False" hp="90000000" />
 		<Monster name="SH-35" id="91671" isBoss="False" hp="40000000" />
 		<Monster name="SM-31" id="91672" isBoss="False" hp="40000000" />
-		<Monster name="BB-29" id="91673" isBoss="False" hp="100000000" />
-		<Monster name="阿克德法精銳弓箭手" id="91674" isBoss="False" hp="70000000" />
+		<Monster name="BB-29" id="91673" isBoss="False" hp="90000000" />
+		<Monster name="阿克德法精銳弓箭手" id="91674" isBoss="False" hp="60000000" />
 		<Monster name="阿克德法精銳祭司" id="91675" isBoss="False" hp="40000000" />
 		<Monster name="阿克德法精銳劍鬥士" id="91676" isBoss="False" hp="45000000" />
 		<Monster name="吉伯特格雷斯" id="99901" isBoss="False" hp="366797" />
@@ -14524,7 +14569,7 @@
 		<Monster name="寶物箱" id="88888888" isBoss="False" hp="100000000" />
 		<Monster name="寶物箱" id="88888889" isBoss="False" hp="99999999" />
 		<Monster name="魔女的可疑箱子" id="88888890" isBoss="False" hp="1" />
-		<Monster name="1周年慶典驚喜箱" id="98888888" isBoss="False" hp="1" />
+		<Monster name="巴拉卡慶典驚喜箱" id="98888888" isBoss="False" hp="1" />
 		<Monster name="1周年慶典驚喜箱" id="98888889" isBoss="False" hp="1" />
 		<Monster name="偷蛋賊西奴斯" id="99999991" isBoss="False" hp="100000000" />
 		<Monster name="偷蛋賊西奴斯" id="99999992" isBoss="False" hp="99999999" />

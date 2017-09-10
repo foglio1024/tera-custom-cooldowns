@@ -41,12 +41,10 @@
 201	Buff	False	True	False	力量祝福 I	獲得堅強的力量祝福，力量提升$H_W_GOOD17$COLOR_END。	icon_skills.attackup_tex
 202	Buff	False	True	False	力量祝福 II	獲得堅強的力量祝福，力量提升$H_W_GOOD25$COLOR_END。	icon_skills.attackup_tex
 301	Stun	True	False	False	雷電刻印 I	因為強大的電氣衝擊而昏厥了。	icon_skills.shocktrap_tex
-302	Stun	True	False	False	雷電刻印 II	因為強大的電氣衝擊而昏厥了。	icon_skills.shocktrap_tex
-303	Stun	True	False	False	雷電刻印 III	因為強大的電氣衝擊而昏厥了。	icon_skills.shocktrap_tex
 501	Buff	True	True	False	移動速度增加	移動速度大幅增加。	icon_status.aura_of_wind_tex
 601	Buff	True	True	True	狂氣之力 I	獲得狂氣彌漫的精靈氣息力量增加 $H_W_GOOD20$COLOR_END，攻擊速度則上升 $H_W_GOOD6$COLOR_END。只有在施展者周邊 30m範圍內才能得到結界效果。	icon_skills.rage_tex
 602	Buff	True	True	True	狂氣之力 II	獲得狂氣彌漫的精靈氣息力量增加 $H_W_GOOD25$COLOR_END，攻擊速度則上升 $H_W_GOOD6$COLOR_END。只有在施展者周邊 30m範圍內才能得到結界效果。	icon_skills.rage_tex
-603	Buff	True	True	True	狂氣之力 III	獲得狂氣彌漫的精靈氣息力量增加 $H_W_GOOD40$COLOR_END，攻擊速度則上升 $H_W_GOOD6$COLOR_END。只有在施展者周邊 30m範圍內才能得到結界效果。	icon_skills.rage_tex
+603	Buff	True	True	True	狂氣之力 III	獲得狂氣彌漫的精靈氣息力量增加 $H_W_GOOD48$COLOR_END，攻擊速度則上升 $H_W_GOOD9.6$COLOR_END。只有在施展者周邊 30m範圍內才能得到結界效果。	icon_skills.rage_tex
 901	Stun	True	False	False	閃光彈 I	因為瞬間強光而昏厥了。	icon_skills.flashball_tex
 902	Buff	True	True	True	綠鈦強化彈	使用綠鈦強化彈，讓技能效果增大化。	icon_items.union_supplies5_tex
 903	Buff	True	True	False	殺意	透過殺意使力量提升$H_W_GOOD15$COLOR_END攻擊速度增加$H_W_GOOD8%$COLOR_END，暴擊機率增加$H_W_GOOD4%$COLOR_END，移動速度增加$H_W_GOOD4%$COLOR_END增加。	icon_skills.battlefield_high_ranking_tex
@@ -932,7 +930,7 @@
 27130	Buff	True	True	False	被攻擊時平衡增加 [平衡紋章]	平衡提升$H_W_GOOD5倍$COLOR_END。	icon_crest.crestactivereactionresist_tex
 27140	Buff	True	True	False	HP恢復 [特質紋章]	恢復$H_W_GOOD10%$COLOR_END的HP。	icon_crest.crestpassivehpheal_tex
 27150	Buff	True	True	False	HP恢復效果強化 [救援紋章]	靈氣召喚 - 復活效果HP恢復量增加$H_W_GOOD20%$COLOR_END。	icon_crest.crestactivehprecoveryup_tex
-27160	WeakeningEffect	True	False	False	抗打減少 [弱化紋章]	抗打 $H_W_BAD9%$COLOR_END 減少。	icon_crest.crestactivedefencedown_tex
+27160	WeakeningEffect	True	False	False	抗打減少 [弱化紋章]	抗打 $H_W_BAD10%$COLOR_END 減少。	icon_crest.crestactivedefencedown_tex
 27161	Buff	True	True	False	HP恢復效果強化 (救援紋章)	HP恢復量增加$H_W_GOOD25%$COLOR_END。	icon_crest.crestactivehprecoveryup_tex
 27170	Buff	False	True	False	恢復到最大HP狀態[靈魂紋章]	不能顯示異常狀態之提示說明 (isShow=False) 若看見提示說明則必須回報BTS!	icon_crest.crestpassivehpwhileheal_tex
 28010	Buff	True	True	False	技能威力增加 [連續 鬥志紋章]	以連續技使用懲罰之手時，技能威力增加$H_W_GOOD25%$COLOR_END。	icon_crest.crestnextskillattackup_tex
@@ -1013,7 +1011,7 @@
 33150	Buff	True	True	False	技能威力增加 [連續鬥志紋章]	以連續技能使用[昇擊斬]時，技能威力增加力量$H_W_GOOD25%$COLOR_END。	icon_crest.crestnextskillattackup_tex
 33170	Buff	True	True	False	HP持續恢復 [特質紋章]	每$H_W_GOOD1$COLOR_END second，持續恢復相當於整體HP的$H_W_GOOD 2%$COLOR_END之HP。	icon_crest.crestpassivehpheal_tex
 33200	Buff	True	True	False	技能威力增加 [連續鬥志紋章]	下一次攻擊時技能威力增加 30%	icon_crest.crestnextskillattackup_tex
-33210	Buff	True	True	False	技能威力增加 [連續鬥志紋章]	以連續技能使用[月光的共鳴]時，技能威力增加力量$H_W_GOOD25%$COLOR_END。	icon_crest.e_crestnextskillattackup_tex
+33210	Buff	True	True	False	技能威力增加 [連續鬥志紋章]	以連續技能使用[月光的共鳴]時，技能威力增加力量$H_W_GOOD25%$COLOR_END。	icon_crest.crestpassivehpheal_tex
 45301	WeakeningEffect	True	False	False	強力衝擊	被砲彈打到受到強大衝擊。	icon_status.minusdefence_tex
 45302	WeakeningEffect	True	False	False	均衡喪失	受到強大衝擊失去平衡而跌倒。	icon_status.minuscriticalresist_tex
 45303	DamageOverTime	False	False	False		13秒後鑽子消失。 	
@@ -1208,9 +1206,9 @@
 100102	Buff	True	True	True	刀刃決心 III	力量 $H_W_GOOD15$COLOR_END與爆擊誘發增加 $H_W_GOOD50$COLOR_END，攻擊怪物時技能威力雖然增加 $H_W_GOOD10%$COLOR_END，抗打會減少 $H_W_BAD10%$COLOR_END。	icon_skills.ironwilla_tex
 100103	Buff	True	True	True	刀刃決心 IV	力量 $H_W_GOOD18$COLOR_END與爆擊誘發增加$H_W_GOOD55$COLOR_END，攻擊怪物時技能威力雖然增加 $H_W_GOOD10%$COLOR_END，抗打會減少 $H_W_BAD10%$COLOR_END。	icon_skills.ironwilla_tex
 100150	Buff	False	True	True	看不見的異常狀態(看見的話則為BTS)	攻擊怪物時傷害 10%增傷	
-100200	Buff	True	True	True	鋼鐵決心 I	抗打增加$H_W_GOOD15%$COLOR_END，平衡增加$H_W_GOOD20$COLOR_END，攻擊怪物時爆擊率增加$H_W_GOOD15%$COLOR_END。所有技能的仇恨值增加$H_W_GOOD65%$COLOR_END，戰鬥時除了怪物的部份特殊攻擊外，不可驅趕。	icon_skills.ironwillb_tex
-100201	Buff	True	True	True	鋼鐵決心 II	抗打增加$H_W_GOOD20%$COLOR_END，平衡增加$H_W_GOOD20$COLOR_END，攻擊怪物時爆擊率增加$H_W_GOOD15%$COLOR_END。所有技能的仇恨值增加$H_W_GOOD80%$COLOR_END，戰鬥時除了部分怪物的特殊攻擊外，不可驅趕。	icon_skills.ironwillb_tex
-100202	Buff	True	True	True	鋼鐵決心 III	抗打增加$H_W_GOOD25%$COLOR_END，平衡增加$H_W_GOOD20$COLOR_END，攻擊怪物時爆擊率增加$H_W_GOOD15%$COLOR_END。所有技能的仇恨值增加$H_W_GOOD100%$COLOR_END，戰鬥時除了部分怪物的特殊攻擊外，不可驅趕。	icon_skills.ironwillb_tex
+100200	Buff	True	True	True	鋼鐵決心 I	抗打增加$H_W_GOOD20%$COLOR_END，平衡增加$H_W_GOOD20$COLOR_END，攻擊怪物時爆擊率增加$H_W_GOOD15%$COLOR_END。所有技能的仇恨值增加$H_W_GOOD100%$COLOR_END，戰鬥時除了怪物的部份特殊攻擊外，不可驅趕。	icon_skills.ironwillb_tex
+100201	Buff	True	True	True	鋼鐵決心 II	抗打增加$H_W_GOOD25%$COLOR_END，平衡增加$H_W_GOOD30$COLOR_END，攻擊怪物時爆擊率增加$H_W_GOOD15%$COLOR_END。所有技能的仇恨值增加$H_W_GOOD120%$COLOR_END，戰鬥時除了部分怪物的特殊攻擊外，不可驅趕。	icon_skills.ironwillb_tex
+100202	Buff	True	True	True	鋼鐵決心 III	抗打增加$H_W_GOOD10029500%$COLOR_END，平衡增加$H_W_GOOD20$COLOR_END，攻擊怪物時爆擊率增加$H_W_GOOD15%$COLOR_END。所有技能的仇恨值增加$H_W_GOOD100%$COLOR_END，戰鬥時除了部分怪物的特殊攻擊外，不可驅趕。	icon_skills.ironwillb_tex
 100203	Buff	True	True	True	鋼鐵決心 IV	抗打增加$H_W_GOOD25%$COLOR_END，平衡增加$H_W_GOOD30$COLOR_END，攻擊怪物時爆擊率增加$H_W_GOOD15%$COLOR_END。所有技能的仇恨值增加$H_W_GOOD120%$COLOR_END，戰鬥時除了部分怪物的特殊攻擊外，不可驅趕。	icon_skills.ironwillb_tex
 100293	Buff	False	True	False	阻擋雙劍基本異常狀態	不能顯示異常狀態之提示說明 (isShow=False) 若看見提示說明則必須回報BTS!	icon_skills.twinswordsdefence_tex
 100294	Buff	True	True	False	克己Ⅰ	因克己Ⅰ的效果而恢復5%的Mp。	icon_skills.twinswordsdefence_tex
@@ -1221,37 +1219,48 @@
 100300	Stun	True	False	False	衝擊吶喊	因為震耳欲聾的宏亮聲音而昏厥了。	icon_skills.thunderingroar_tex
 100301	Stun	True	False	False	刪除_衝擊吶喊 II	因為震耳欲聾的宏亮聲音而昏厥了。	icon_skills.thunderingroar_tex
 100400	Buff	True	True	False	旋風砍擊 活性化	可以使用旋風砍擊技能。	icon_skills.allroundslash_tex
-100500	DamageOverTime	True	False	False	猛毒一擊 I	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-116$COLOR_END的HP。	icon_skills.poisonblowattack_tex
-100501	DamageOverTime	True	False	False	猛毒一擊 II	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-175$COLOR_END的HP。	icon_skills.poisonblowattack_tex
-100502	DamageOverTime	True	False	False	猛毒一擊 III	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-292$COLOR_END的HP。	icon_skills.poisonblowattack_tex
-100503	DamageOverTime	True	False	False	猛毒一擊 IV	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-438$COLOR_END的HP。	icon_skills.poisonblowattack_tex
-100504	DamageOverTime	True	False	False	猛毒一擊 V	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-612$COLOR_END的HP。	icon_skills.poisonblowattack_tex
-100505	DamageOverTime	True	False	False	猛毒一擊 VI	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-845$COLOR_END的HP。	icon_skills.poisonblowattack_tex
-100506	DamageOverTime	True	False	False	猛毒一擊 VII	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-1428$COLOR_END的HP。	icon_skills.poisonblowattack_tex
-100507	DamageOverTime	True	False	False	猛毒一擊 VIII	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-1892$COLOR_END的HP。	icon_skills.poisonblowattack_tex
-100508	DamageOverTime	True	False	False	猛毒一擊 IX	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-6068$COLOR_END的HP。	icon_skills.poisonblowattack_tex
-100520	DamageOverTime	True	False	False	猛毒一擊 I	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-92$COLOR_END的HP。	icon_skills.poisonblowattack_tex
-100521	DamageOverTime	True	False	False	猛毒一擊 II	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-127$COLOR_END的HP。	icon_skills.poisonblowattack_tex
-100522	DamageOverTime	True	False	False	猛毒一擊 III	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-175$COLOR_END的HP。	icon_skills.poisonblowattack_tex
-100523	DamageOverTime	True	False	False	猛毒一擊 IV	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-242$COLOR_END的HP。	icon_skills.poisonblowattack_tex
-100524	DamageOverTime	True	False	False	猛毒一擊 V	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-334$COLOR_END的HP。	icon_skills.poisonblowattack_tex
-100525	DamageOverTime	True	False	False	猛毒一擊 VI	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-461$COLOR_END的HP。	icon_skills.poisonblowattack_tex
-100526	DamageOverTime	True	False	False	猛毒一擊 VII	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-720$COLOR_END的HP。	icon_skills.poisonblowattack_tex
-100527	DamageOverTime	True	False	False	猛毒一擊 VIII	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-954$COLOR_END的HP。	icon_skills.poisonblowattack_tex
-100528	DamageOverTime	True	False	False	猛毒一擊 IX	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-1420$COLOR_END的HP。	icon_skills.poisonblowattack_tex
+100500	DamageOverTime	True	False	False	猛毒一擊 I	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-40$COLOR_END的HP。	icon_skills.poisonblowattack_tex
+100501	DamageOverTime	True	False	False	猛毒一擊 II	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-60$COLOR_END的HP。	icon_skills.poisonblowattack_tex
+100502	DamageOverTime	True	False	False	猛毒一擊 III	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-90$COLOR_END的HP。	icon_skills.poisonblowattack_tex
+100503	DamageOverTime	True	False	False	猛毒一擊 IV	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-136$COLOR_END的HP。	icon_skills.poisonblowattack_tex
+100504	DamageOverTime	True	False	False	猛毒一擊 V	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-214$COLOR_END的HP。	icon_skills.poisonblowattack_tex
+100505	DamageOverTime	True	False	False	猛毒一擊 VI	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-341$COLOR_END的HP。	icon_skills.poisonblowattack_tex
+100506	DamageOverTime	True	False	False	猛毒一擊 VII	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-496$COLOR_END的HP。	icon_skills.poisonblowattack_tex
+100507	DamageOverTime	True	False	False	猛毒一擊 VIII	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-690$COLOR_END的HP。	icon_skills.poisonblowattack_tex
+100508	DamageOverTime	True	False	False	猛毒一擊 IX	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-1039$COLOR_END的HP。	icon_skills.poisonblowattack_tex
+100509	DamageOverTime	True	False	False	猛毒一擊 X	感染致命猛毒，每$H_W_BAD2$COLOR_END second1，HP會持續減少$H_W_BAD-1582$COLOR_END。	icon_skills.poisonblowattack_tex
+100510	DamageOverTime	True	False	False	猛毒一擊 XI	感染致命猛毒，每$H_W_BAD2$COLOR_END second1，HP會持續減少$H_W_BAD-1892$COLOR_END。	icon_skills.poisonblowattack_tex
+100520	DamageOverTime	True	False	False	猛毒一擊 I	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-36$COLOR_END的HP。	icon_skills.poisonblowattack_tex
+100521	DamageOverTime	True	False	False	猛毒一擊 II	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-55$COLOR_END的HP。	icon_skills.poisonblowattack_tex
+100522	DamageOverTime	True	False	False	猛毒一擊 III	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-75$COLOR_END的HP。	icon_skills.poisonblowattack_tex
+100523	DamageOverTime	True	False	False	猛毒一擊 IV	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-104$COLOR_END的HP。	icon_skills.poisonblowattack_tex
+100524	DamageOverTime	True	False	False	猛毒一擊 V	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-143$COLOR_END的HP。	icon_skills.poisonblowattack_tex
+100525	DamageOverTime	True	False	False	猛毒一擊 VI	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-197$COLOR_END的HP。	icon_skills.poisonblowattack_tex
+100526	DamageOverTime	True	False	False	猛毒一擊 VII	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-273$COLOR_END的HP。	icon_skills.poisonblowattack_tex
+100527	DamageOverTime	True	False	False	猛毒一擊 VIII	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-376$COLOR_END的HP。	icon_skills.poisonblowattack_tex
+100528	DamageOverTime	True	False	False	猛毒一擊 IX	感染致命的劇毒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-547$COLOR_END的HP。	icon_skills.poisonblowattack_tex
+100529	DamageOverTime	True	False	False	猛毒一擊 X	感染致命猛毒，每$H_W_BAD2$COLOR_END second1，HP會持續減少$H_W_BAD-798$COLOR_END。	icon_skills.poisonblowattack_tex
+100530	DamageOverTime	True	False	False	猛毒一擊 XI	感染致命猛毒，每$H_W_BAD2$COLOR_END second1，HP會持續減少$H_W_BAD-954$COLOR_END。	icon_skills.poisonblowattack_tex
 100600	Buff	True	True	True	腳踝狙擊 I	暗算對手的腳踝，以一定機率令移動速度和攻擊速度減少$H_W_GOOD15%$COLOR_END。在技能活性化的期間，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-10$COLOR_END的MP，只有在連續攻擊最後的打擊時啟動效果。	icon_skills.aimingankle_tex
 100630	WeakeningEffect	True	False	False	腳踝負傷	因為腳踝負傷，移動速度和攻擊速度減少$H_W_BAD0,85$COLOR_END。	icon_skills.aimingankle_tex
 100700	Buff	False	True	False	反擊震懾 活性化	可以使用反擊震懾技能。	icon_skills.reversalturningattack_tex
 100800	Buff	True	True	False	必殺意志 I	$time內，爆擊率增加 $H_W_GOOD35%$COLOR_END。	icon_skills.deadlywill_tex
-100801	Buff	True	True	False	必殺意志 II	$time內，爆擊機率增加 $H_W_GOOD50%$COLOR_END。效果持續時間期間使用的近距離攻擊技能之冷卻時間減半，持續時間中下列技能會強化。$BR - [旋風擊 XI]: 有 10%的追加傷害，能量條累積 2倍。$BR - [無雙亂舞：劈擊 VII]: 有 10%的追加傷害，能量條累積 2倍。$BR - [疾風劈擊 II]: 技能威力增加 10%，範圍增加 20%。	icon_skills.deadlywill_tex
+100801	Buff	True	True	False	必殺意志 II	$time內，爆擊機率增加 $H_W_GOOD50%$COLOR_END。效果持續時間期間使用的近距離攻擊技能之冷卻時間減半，持續時間中下列技能會強化。$BR - [旋風擊 IX]: 有 10%的追加傷害，能量條累積 2倍。$BR - [無雙亂舞：劈擊 IX]: 有 10%的追加傷害，能量條累積 2倍。$BR - [疾風劈擊 IX]: 技能威力增加 10%，範圍增加 20%。	icon_skills.deadlywill_tex
 100802	Buff	False	True	False	必殺意志 II_冷卻時間減少	看不見的異常狀態	
 100803	Buff	False	True	False	必殺意志 II_冷卻時間減少	看不見的異常狀態	
 100900	Stun	True	False	False	強襲砍擊 I	昏厥狀態無法行動。	icon_skills.hardslash_tex
 100901	Stun	True	False	False	強襲砍擊 II	昏厥狀態無法行動。	icon_skills.hardslash_tex
+100902	Stun	True	False	False	強襲砍擊 III	昏厥狀態無法做任何動作。	icon_skills.hardslash_tex
+100903	Stun	True	False	False	強襲砍擊 IX	昏厥狀態無法做任何動作。	icon_skills.hardslash_tex
+100904	Stun	True	False	False	強襲砍擊 X	昏厥狀態無法做任何動作。	icon_skills.hardslash_tex
 101000	Stun	True	False	False	後擒術 I	昏厥狀態無法行動。	icon_skills.backattack_tex
 101001	Stun	True	False	False	後擒術 II	昏厥狀態無法行動。	icon_skills.backattack_tex
 101100	Stun	True	False	False	反擊震懾 I	昏厥狀態無法行動。	icon_skills.reversalturningattack_tex
 101101	Stun	True	False	False	反擊震懾 II	昏厥狀態無法行動。	icon_skills.reversalturningattack_tex
+101102	Stun	True	False	False	反擊震懾 III	昏厥狀態無法做任何動作。	icon_skills.reversalturningattack_tex
+101103	Stun	True	False	False	反擊震懾 IX	昏厥狀態無法做任何動作。	icon_skills.reversalturningattack_tex
+101104	Stun	True	False	False	反擊震懾 X	昏厥狀態無法做任何動作。	icon_skills.reversalturningattack_tex
+101105	Stun	True	False	False	反擊震懾 XI	昏厥狀態無法做任何動作。	icon_skills.reversalturningattack_tex
 101200	WeakeningEffect	True	False	False	鬥志一擊	抗打減少$H_W_GOOD8%$COLOR_END。	icon_skills.aggravatingstrike_tex
 101220	WeakeningEffect	True	False	False	鬥志一擊	抗打減少$H_W_BAD8%$COLOR_END、HP恢復效果減少$H_W_BAD30%$COLOR_END。	icon_skills.aggravatingstrike_tex
 101300	Buff	True	True	False	無雙亂舞：刺擊	每次重疊時，攻擊者的攻擊速度增加 0.9%。此效果最多可重疊 13次。	icon_skills.dualrapidpiercing_tex
@@ -1319,9 +1328,9 @@
 300300	Buff	True	True	False	凝聚力量 I	下1回的攻擊會使傷害提升$H_W_GOOD30%$COLOR_END。	icon_skills.gatheringstrength_tex
 300301	Buff	True	True	False	凝聚力量 II	下1回的攻擊會使傷害提升$H_W_GOOD33%$COLOR_END。	icon_skills.gatheringstrength_tex
 300400	Stun	True	False	False	後退踢擊	昏厥狀態無法行動。	icon_skills.retreatingkick_tex
-300500	Buff	True	True	False	跳躍奮進 I	下1回的攻擊增加$H_W_GOOD30%$COLOR_END的攻擊速度。	icon_skills.advancingleap_tex
-300501	Buff	True	True	False	跳躍奮進 II	下1回的攻擊增加$H_W_GOOD40%$COLOR_END的攻擊速度。	icon_skills.advancingleap_tex
-300502	Buff	True	True	False	跳躍奮進 III	下1回的攻擊增加$H_W_GOOD50%$COLOR_END的攻擊速度。	icon_skills.advancingleap_tex
+300500	Buff	True	True	False	跳躍奮進 I	下1回的攻擊增加$H_W_GOOD40%$COLOR_END的攻擊速度。	icon_skills.advancingleap_tex
+300501	Buff	True	True	False	跳躍奮進 II	下1回的攻擊增加$H_W_GOOD50%$COLOR_END的攻擊速度。	icon_skills.advancingleap_tex
+300502	Buff	True	True	False	跳躍奮進 III	下1回的攻擊增加$H_W_GOOD60%$COLOR_END的攻擊速度。	icon_skills.advancingleap_tex
 300503	Buff	True	True	False	跳躍奮進 IV	下1回的攻擊增加$H_W_GOOD60%$COLOR_END的攻擊速度。	icon_skills.advancingleap_tex
 300600	Buff	True	True	False	疾走 I	移動速度提升$H_W_GOOD50%$COLOR_END。	icon_skills.dash_tex
 300601	Buff	True	True	False	疾走 II	移動速度提升$H_W_GOOD50%$COLOR_END。	icon_skills.dash_tex
@@ -1700,36 +1709,40 @@
 500600	Buff	True	True	False	魔力盾牌 I	使用魔力盾牌最多吸收$H_W_GOOD7063$COLOR_END的傷害。每1MP最多可吸收14的傷害，若超過最大吸收量或是所有MP耗盡時，效果立即解除。	icon_skills.manashield_tex
 500601	Buff	True	True	False	魔力盾牌 II	使用魔力盾牌最多吸收$H_W_GOOD13529$COLOR_END的傷害。每1MP最多可吸收33的傷害，若超過最大吸收量或是所有MP耗盡時，效果立即解除。	icon_skills.manashield_tex
 500602	Buff	True	True	False	魔力盾牌 III	使用魔力盾牌最多吸收$H_W_GOOD17346$COLOR_END的傷害。每1MP最多可吸收34的傷害，若超過最大吸收量或是所有MP耗盡時，效果立即解除。	icon_skills.manashield_tex
-500700	DamageOverTime	True	False	False	污染詛咒 I	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-26$COLOR_END的HP。	icon_skills.disease_tex
-500701	DamageOverTime	True	False	False	污染詛咒 II	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-40$COLOR_END的HP。	icon_skills.disease_tex
-500702	DamageOverTime	True	False	False	污染詛咒 III	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-58$COLOR_END的HP。	icon_skills.disease_tex
-500703	DamageOverTime	True	False	False	污染詛咒 IV	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-85$COLOR_END的HP。	icon_skills.disease_tex
-500704	DamageOverTime	True	False	False	污染詛咒 V	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-121$COLOR_END的HP。	icon_skills.disease_tex
-500705	DamageOverTime	True	False	False	污染詛咒 VI	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-174$COLOR_END的HP。	icon_skills.disease_tex
-500706	DamageOverTime	True	False	False	污染詛咒 VII	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-241$COLOR_END的HP。	icon_skills.disease_tex
-500707	DamageOverTime	True	False	False	污染詛咒 VIII	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-341$COLOR_END的HP。	icon_skills.disease_tex
-500708	DamageOverTime	True	False	False	污染詛咒 IX	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-516$COLOR_END的HP。	icon_skills.disease_tex
-500720	DamageOverTime	True	False	False	污染詛咒 I	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-27$COLOR_END的HP。	icon_skills.disease_tex
-500721	DamageOverTime	True	False	False	污染詛咒 II	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-37$COLOR_END的HP。	icon_skills.disease_tex
-500722	DamageOverTime	True	False	False	污染詛咒 III	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-51$COLOR_END的HP。	icon_skills.disease_tex
-500723	DamageOverTime	True	False	False	污染詛咒 IV	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-71$COLOR_END的HP。	icon_skills.disease_tex
-500724	DamageOverTime	True	False	False	污染詛咒 V	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-97$COLOR_END的HP。	icon_skills.disease_tex
-500725	DamageOverTime	True	False	False	污染詛咒 VI	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-134$COLOR_END的HP。	icon_skills.disease_tex
-500726	DamageOverTime	True	False	False	污染詛咒 VII	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-186$COLOR_END的HP。	icon_skills.disease_tex
-500727	DamageOverTime	True	False	False	污染詛咒 VIII	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-258$COLOR_END的HP。	icon_skills.disease_tex
-500728	DamageOverTime	True	False	False	污染詛咒 IX	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-382$COLOR_END的HP。	icon_skills.disease_tex
+500700	DamageOverTime	True	False	False	污染詛咒 I	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-40$COLOR_END的HP。	icon_skills.disease_tex
+500701	DamageOverTime	True	False	False	污染詛咒 II	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-58$COLOR_END的HP。	icon_skills.disease_tex
+500702	DamageOverTime	True	False	False	污染詛咒 III	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-85$COLOR_END的HP。	icon_skills.disease_tex
+500703	DamageOverTime	True	False	False	污染詛咒 IV	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-121$COLOR_END的HP。	icon_skills.disease_tex
+500704	DamageOverTime	True	False	False	污染詛咒 V	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-174$COLOR_END的HP。	icon_skills.disease_tex
+500705	DamageOverTime	True	False	False	污染詛咒 VI	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-241$COLOR_END的HP。	icon_skills.disease_tex
+500706	DamageOverTime	True	False	False	污染詛咒 VII	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-341$COLOR_END的HP。	icon_skills.disease_tex
+500707	DamageOverTime	True	False	False	污染詛咒 VIII	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-516$COLOR_END的HP。	icon_skills.disease_tex
+500720	DamageOverTime	True	False	False	污染詛咒 I	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-37$COLOR_END的HP。	icon_skills.disease_tex
+500721	DamageOverTime	True	False	False	污染詛咒 II	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-51$COLOR_END的HP。	icon_skills.disease_tex
+500722	DamageOverTime	True	False	False	污染詛咒 III	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-71$COLOR_END的HP。	icon_skills.disease_tex
+500723	DamageOverTime	True	False	False	污染詛咒 IV	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-97$COLOR_END的HP。	icon_skills.disease_tex
+500724	DamageOverTime	True	False	False	污染詛咒 V	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-134$COLOR_END的HP。	icon_skills.disease_tex
+500725	DamageOverTime	True	False	False	污染詛咒 VI	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-186$COLOR_END的HP。	icon_skills.disease_tex
+500726	DamageOverTime	True	False	False	污染詛咒 VII	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-258$COLOR_END的HP。	icon_skills.disease_tex
+500727	DamageOverTime	True	False	False	污染詛咒 VIII	因為污染詛咒，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-382$COLOR_END的HP。	icon_skills.disease_tex
 500800	Stun	True	False	False	睡眠之風 I	安靜中沈睡了。若受到傷害立即醒來。	icon_skills.sleepwind_tex
 500801	Stun	True	False	False	睡眠之風 II	安靜中沈睡了。若受到傷害立即醒來。	icon_skills.sleepwind_tex
 500802	Stun	True	False	False	睡眠之風 III	安靜中沈睡了。若受到傷害立即醒來。	icon_skills.sleepwind_tex
 500900	Stun	True	False	False	神經衰弱 I	因神經衰弱導致所有的技能皆無法使用。此效果僅對玩家有效，被擊中或擊倒時將解除。	icon_skills.neurasthenia_tex
-501000	DamageOverTime	True	False	False	燃燒氣息 I	因為燃燒氣息，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-1175$COLOR_END的HP。	icon_skills.burningbreath_tex
-501001	DamageOverTime	True	False	False	燃燒氣息 II	因為燃燒氣息，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-1631$COLOR_END的HP。	icon_skills.burningbreath_tex
-501002	DamageOverTime	True	False	False	燃燒氣息 III	因為燃燒氣息，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-2305$COLOR_END的HP。	icon_skills.burningbreath_tex
-501003	DamageOverTime	True	False	False	燃燒氣息 IV	因為燃燒氣息，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-3120$COLOR_END的HP。	icon_skills.burningbreath_tex
-501020	DamageOverTime	True	False	False	燃燒氣息 I	因為燃燒氣息，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-890$COLOR_END的HP。	icon_skills.burningbreath_tex
-501021	DamageOverTime	True	False	False	燃燒氣息 II	因為燃燒氣息，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-1228$COLOR_END的HP。	icon_skills.burningbreath_tex
-501022	DamageOverTime	True	False	False	燃燒氣息 III	因為燃燒氣息，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-1704$COLOR_END的HP。	icon_skills.burningbreath_tex
-501023	DamageOverTime	True	False	False	燃燒氣息 IV	因為燃燒氣息，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-2259$COLOR_END的HP。	icon_skills.burningbreath_tex
+501000	DamageOverTime	True	False	False	燃燒氣息 I	因為燃燒氣息，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-443$COLOR_END的HP。	icon_skills.burningbreath_tex
+501001	DamageOverTime	True	False	False	燃燒氣息 II	因為燃燒氣息，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-613$COLOR_END的HP。	icon_skills.burningbreath_tex
+501002	DamageOverTime	True	False	False	燃燒氣息 III	因為燃燒氣息，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-849$COLOR_END的HP。	icon_skills.burningbreath_tex
+501003	DamageOverTime	True	False	False	燃燒氣息 IV	因為燃燒氣息，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-1175$COLOR_END的HP。	icon_skills.burningbreath_tex
+501004	DamageOverTime	True	False	False	燃燒氣息 V	因為燃燒氣息，每$H_W_BAD2$COLOR_END second1，HP會持續減少$H_W_BAD-1631$COLOR_END。	icon_skills.burningbreath_tex
+501005	DamageOverTime	True	False	False	燃燒氣息 VI	因為燃燒氣息，每$H_W_BAD2$COLOR_END second1，HP會持續減少$H_W_BAD-2305$COLOR_END。	icon_skills.burningbreath_tex
+501006	DamageOverTime	True	False	False	燃燒氣息 VII	因為燃燒氣息，每$H_W_BAD2$COLOR_END second1，HP會持續減少$H_W_BAD-3120$COLOR_END。	icon_skills.burningbreath_tex
+501020	DamageOverTime	True	False	False	燃燒氣息 I	因為燃燒氣息，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-338$COLOR_END的HP。	icon_skills.burningbreath_tex
+501021	DamageOverTime	True	False	False	燃燒氣息 II	因為燃燒氣息，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-467$COLOR_END的HP。	icon_skills.burningbreath_tex
+501022	DamageOverTime	True	False	False	燃燒氣息 III	因為燃燒氣息，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-645$COLOR_END的HP。	icon_skills.burningbreath_tex
+501023	DamageOverTime	True	False	False	燃燒氣息 IV	因為燃燒氣息，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-890$COLOR_END的HP。	icon_skills.burningbreath_tex
+501024	DamageOverTime	True	False	False	燃燒氣息 V	因為燃燒氣息，每$H_W_BAD2$COLOR_END second1，HP會持續減少$H_W_BAD-1228$COLOR_END。	icon_skills.burningbreath_tex
+501025	DamageOverTime	True	False	False	燃燒氣息 VI	因為燃燒氣息，每$H_W_BAD2$COLOR_END second1，HP會持續減少$H_W_BAD-1704$COLOR_END。	icon_skills.burningbreath_tex
+501026	DamageOverTime	True	False	False	燃燒氣息 VII	因為燃燒氣息，每$H_W_BAD2$COLOR_END second1，HP會持續減少$H_W_BAD-2259$COLOR_END。	icon_skills.burningbreath_tex
 501100	DamageOverTime	True	False	False	精神耗竭 I	精神漸漸耗竭!每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-172$COLOR_END的MP。	icon_skills.mpsink_tex
 501101	DamageOverTime	True	False	False	精神耗竭 II	精神漸漸耗竭!每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-206$COLOR_END的MP。	icon_skills.mpsink_tex
 501150	DamageOverTime	False	False	False	精神耗竭 I	異常狀態的提示說明不會顯示 (isShow=False)，若顯示此提示說明就需要BTS處理!	icon_skills.mpsink_tex
@@ -1786,23 +1799,23 @@
 600701	WeakeningEffect	True	False	False	蜘蛛網箭矢 II	被巧妙的蜘蛛網纏住，移動速度減少 $H_W_BAD0,7$COLOR_END。	icon_skills.spiderarrow_tex
 600702	WeakeningEffect	True	False	False	蜘蛛網箭矢 III	被巧妙的蜘蛛網纏住，移動速度減少 $H_W_BAD0,67$COLOR_END。	icon_skills.spiderarrow_tex
 600800	Stun	True	False	False	迴旋踢	因為迴旋踢踢中下巴而昏厥了。	icon_skills.turningkick_tex
-600900	DamageOverTime	True	False	False	劇毒之箭 I	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-270$COLOR_END的HP。此效果最多可堆疊3次。	icon_skills.venomarrow_tex
-600901	DamageOverTime	True	False	False	劇毒之箭 II	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-389$COLOR_END的HP。此效果最多可堆疊3次。	icon_skills.venomarrow_tex
-600902	DamageOverTime	True	False	False	劇毒之箭 III	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-589$COLOR_END的HP。此效果最多可堆疊3次。	icon_skills.venomarrow_tex
-600903	DamageOverTime	True	False	False	劇毒之箭 IV	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-849$COLOR_END的HP。此效果最多可堆疊3次。	icon_skills.venomarrow_tex
-600904	DamageOverTime	True	False	False	劇毒之箭 V	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-1179$COLOR_END的HP。此效果最多可堆疊3次。	icon_skills.venomarrow_tex
-600905	DamageOverTime	True	False	False	劇毒之箭 VI	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-1626$COLOR_END的HP。此效果最多可堆疊3次。	icon_skills.venomarrow_tex
-600906	DamageOverTime	True	False	False	劇毒之箭 VII	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-2360$COLOR_END的HP。此效果最多可堆疊3次。	icon_skills.venomarrow_tex
+600900	DamageOverTime	True	False	False	劇毒之箭 I	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-215$COLOR_END的HP。此效果最多可堆疊3次。	icon_skills.venomarrow_tex
+600901	DamageOverTime	True	False	False	劇毒之箭 II	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-310$COLOR_END的HP。此效果最多可堆疊3次。	icon_skills.venomarrow_tex
+600902	DamageOverTime	True	False	False	劇毒之箭 III	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-456$COLOR_END的HP。此效果最多可堆疊3次。	icon_skills.venomarrow_tex
+600903	DamageOverTime	True	False	False	劇毒之箭 IV	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-676$COLOR_END的HP。此效果最多可堆疊3次。	icon_skills.venomarrow_tex
+600904	DamageOverTime	True	False	False	劇毒之箭 V	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-959$COLOR_END的HP。此效果最多可堆疊3次。	icon_skills.venomarrow_tex
+600905	DamageOverTime	True	False	False	劇毒之箭 VI	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-1328$COLOR_END的HP。此效果最多可堆疊3次。	icon_skills.venomarrow_tex
+600906	DamageOverTime	True	False	False	劇毒之箭 VII	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-1871$COLOR_END的HP。此效果最多可堆疊3次。	icon_skills.venomarrow_tex
 600907	DamageOverTime	True	False	False	劇毒之箭 VIII	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-3128$COLOR_END的HP。此效果最多可堆疊4次。	icon_skills.venomarrow_tex
 600908	DamageOverTime	True	False	False	劇毒之箭 IX	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-3780$COLOR_END的HP。此效果最多可堆疊5次。	icon_skills.venomarrow_tex
-600920	DamageOverTime	True	False	False	劇毒之箭 I	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-232$COLOR_END的HP。此效果最多可堆疊3次。	icon_skills.venomarrow_tex
-600921	DamageOverTime	True	False	False	劇毒之箭 II	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-160$COLOR_END的HP。此效果最多可堆疊3次。	icon_skills.venomarrow_tex
-600922	DamageOverTime	True	False	False	劇毒之箭 III	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-221$COLOR_END的HP。此效果最多可堆疊3次。	icon_skills.venomarrow_tex
-600923	DamageOverTime	True	False	False	劇毒之箭 IV	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-306$COLOR_END的HP。此效果最多可堆疊3次。	icon_skills.venomarrow_tex
-600924	DamageOverTime	True	False	False	劇毒之箭 V	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-422$COLOR_END的HP。此效果最多可堆疊3次。	icon_skills.venomarrow_tex
-600925	DamageOverTime	True	False	False	劇毒之箭 VI	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-583$COLOR_END的HP。此效果最多可堆疊3次。	icon_skills.venomarrow_tex
-600926	DamageOverTime	True	False	False	劇毒之箭 VII	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-813$COLOR_END的HP。此效果最多可堆疊3次。	icon_skills.venomarrow_tex
-600927	DamageOverTime	True	False	False	劇毒之箭 VIII	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-1078$COLOR_END的HP。此效果最多可堆疊4次。	icon_skills.venomarrow_tex
+600920	DamageOverTime	True	False	False	劇毒之箭 I	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-95$COLOR_END的HP。此效果最多可堆疊3次。	icon_skills.venomarrow_tex
+600921	DamageOverTime	True	False	False	劇毒之箭 II	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-131$COLOR_END的HP。此效果最多可堆疊3次。	icon_skills.venomarrow_tex
+600922	DamageOverTime	True	False	False	劇毒之箭 III	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-249$COLOR_END的HP。此效果最多可堆疊3次。	icon_skills.venomarrow_tex
+600923	DamageOverTime	True	False	False	劇毒之箭 IV	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-345$COLOR_END的HP。此效果最多可堆疊3次。	icon_skills.venomarrow_tex
+600924	DamageOverTime	True	False	False	劇毒之箭 V	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-476$COLOR_END的HP。此效果最多可堆疊3次。	icon_skills.venomarrow_tex
+600925	DamageOverTime	True	False	False	劇毒之箭 VI	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-660$COLOR_END的HP。此效果最多可堆疊3次。	icon_skills.venomarrow_tex
+600926	DamageOverTime	True	False	False	劇毒之箭 VII	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-1078$COLOR_END的HP。此效果最多可堆疊3次。	icon_skills.venomarrow_tex
+600927	DamageOverTime	True	False	False	劇毒之箭 VIII	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-1427$COLOR_END的HP。此效果最多可堆疊4次。	icon_skills.venomarrow_tex
 600928	DamageOverTime	True	False	False	劇毒之箭 IX	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-1427$COLOR_END的HP。此效果最多可堆疊5次。	icon_skills.venomarrow_tex
 601000	WeakeningEffect	True	False	False	牽制射擊 I	移動速度減少$value2，攻擊速度減少$value。	icon_skills.contaningshot_tex
 601001	WeakeningEffect	True	False	False	牽制射擊 II	移動速度減少$value2，攻擊速度減少$value。	icon_skills.contaningshot_tex
@@ -1849,6 +1862,7 @@
 700406	Buff	False	True	False	恢復彈 VII	每$H_W_GOOD1$COLOR_END second持續恢復HP。	icon_skills.healshot_tex
 700407	Buff	False	True	False	恢復彈 VIII	每$H_W_GOOD1$COLOR_END second持續恢復HP。	icon_skills.healshot_tex
 700408	Buff	False	True	False	恢復彈 IX	每$H_W_GOOD1$COLOR_END second持續恢復HP。	icon_skills.healshot_tex
+700409	Buff	False	True	False	恢復彈 X	每$H_W_GOOD1$COLOR_END second，HP將持續恢復。	icon_skills.healshot_tex
 700500	WeakeningEffect	True	False	False	束縛彈 I	因為未知力量身體變重移動速度減少$H_W_GOOD0,5$COLOR_END。	icon_skills.slowball_tex
 700501	WeakeningEffect	True	False	False	束縛彈 II	因為未知力量身體變重移動速度減少$H_W_GOOD0,4$COLOR_END。	icon_skills.slowball_tex
 700600	Buff	True	True	True	憤怒結界 I - 釋放	對周邊30m範圍內的組隊隊員和自己，賦予憤怒結界效果。在技能活性化期間，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-30$COLOR_END的MP。	icon_skills.criticalupaura_tex
@@ -1861,26 +1875,8 @@
 700701	Buff	True	True	True	迅速結界 II - 釋放	對周邊30m範圍內的組隊隊員和自己賦予迅速結界效果。在技能活性化期間，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-30$COLOR_END的MP。	icon_skills.speedupaura_tex
 700730	Buff	True	True	True	迅速結界 I	移動速度提升$H_W_GOOD10%$COLOR_END。只有在施展者周邊30m範圍內時可以獲得結界效果。	icon_status.plusmove_tex
 700731	Buff	True	True	True	迅速結界 II	移動速度提升$H_W_GOOD30%$COLOR_END。只有在施展者周邊30m範圍內時可以獲得結界效果。	icon_status.plusmove_tex
-700800	DamageOverTime	True	False	False	痛苦咒縛 I	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-40$COLOR_END的HP。	icon_skills.painfulshackle_tex
-700801	DamageOverTime	True	False	False	痛苦咒縛 II	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-62$COLOR_END的HP。	icon_skills.painfulshackle_tex
-700802	DamageOverTime	True	False	False	痛苦咒縛 III	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-96$COLOR_END的HP。	icon_skills.painfulshackle_tex
-700803	DamageOverTime	True	False	False	痛苦咒縛 IV	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-138$COLOR_END的HP。	icon_skills.painfulshackle_tex
-700804	DamageOverTime	True	False	False	痛苦咒縛 V	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-205$COLOR_END的HP。	icon_skills.painfulshackle_tex
-700805	DamageOverTime	True	False	False	痛苦咒縛 VI	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-289$COLOR_END的HP。	icon_skills.painfulshackle_tex
-700806	DamageOverTime	True	False	False	痛苦咒縛 VII	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-417$COLOR_END的HP。	icon_skills.painfulshackle_tex
-700807	DamageOverTime	True	False	False	痛苦咒縛 VIII	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-578$COLOR_END的HP。	icon_skills.painfulshackle_tex
-700808	DamageOverTime	True	False	False	痛苦咒縛 IX	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-817$COLOR_END的HP。	icon_skills.painfulshackle_tex
-700809	DamageOverTime	True	False	False	痛苦咒縛 IX	每 $H_W_BAD2$COLOR_END second1會持續消耗HP $H_W_BAD-1238$COLOR_END。	icon_skills.painfulshackle_tex
-700820	DamageOverTime	True	False	False	痛苦咒縛 I	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-41$COLOR_END的HP。	icon_skills.painfulshackle_tex
-700821	DamageOverTime	True	False	False	痛苦咒縛 II	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-63$COLOR_END的HP。	icon_skills.painfulshackle_tex
-700822	DamageOverTime	True	False	False	痛苦咒縛 III	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-86$COLOR_END的HP。	icon_skills.painfulshackle_tex
-700823	DamageOverTime	True	False	False	痛苦咒縛 IV	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-133$COLOR_END的HP。	icon_skills.painfulshackle_tex
-700824	DamageOverTime	True	False	False	痛苦咒縛 V	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-191$COLOR_END的HP。	icon_skills.painfulshackle_tex
-700825	DamageOverTime	True	False	False	痛苦咒縛 VI	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-283$COLOR_END的HP。	icon_skills.painfulshackle_tex
-700826	DamageOverTime	True	False	False	痛苦咒縛 VII	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-399$COLOR_END的HP。	icon_skills.painfulshackle_tex
-700827	DamageOverTime	True	False	False	痛苦咒縛 VIII	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-576$COLOR_END的HP。	icon_skills.painfulshackle_tex
-700828	DamageOverTime	True	False	False	痛苦咒縛 IX	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-802$COLOR_END的HP。	icon_skills.painfulshackle_tex
-700829	DamageOverTime	True	False	False	痛苦咒縛 IX	每 $H_W_BAD2$COLOR_END second1會持續消耗HP $H_W_BAD-1212$COLOR_END。	icon_skills.painfulshackle_tex
+700800	DamageOverTime	True	False	False	痛苦咒縛 I	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-1238$COLOR_END的HP。	icon_skills.painfulshackle_tex
+700820	DamageOverTime	True	False	False	痛苦咒縛 I	每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-1212$COLOR_END的HP。	icon_skills.painfulshackle_tex
 700900	Buff	True	True	False	魔力恢復 I	每$H_W_GOOD1$COLOR_END second逐漸恢復$H_W_GOOD100$COLOR_END的MP。若效果時間中受到攻擊或是使用戰鬥用技能及戰鬥用道具時，效果立即解除。	icon_skills.mpcharge_tex
 701000	Buff	True	True	False	精靈庇護 I	每$H_W_GOOD2$COLOR_END second1逐漸恢復$H_W_GOOD70$COLOR_END的HP。	icon_skills.summonspiritofheal_tex
 701001	Buff	True	True	False	精靈庇護 II	每$H_W_GOOD2$COLOR_END second1逐漸恢復$H_W_GOOD88$COLOR_END的HP。	icon_skills.summonspiritofheal_tex
@@ -1967,9 +1963,41 @@
 701606	Buff	True	True	False	靈氣召喚 - 庇護 II	被召喚的靈氣最多可吸收$H_W_GOOD7149$COLOR_END的損害，過了最大損害吸收量之後，無關持續時間，效果立即解除。	icon_skills.energiesofprotection_tex
 701607	Buff	True	True	False	靈氣召喚 - 庇護 II	藉由被召喚的靈氣，每$H_W_GOOD2$COLOR_END second1時，HP會慢慢恢復$H_W_GOOD700$COLOR_END。	icon_skills.energiesofprotection_tex
 701700	WeakeningEffect	True	False	False	疫病長槍	在$time內成為疫病的宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法使用淨化技能解除，會將疫病傳播給周圍 7m 內的我軍。	icon_skills.plague_tex
-701701	WeakeningEffect	True	False	False	疫病長槍	在$time內成為疫病的宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法使用淨化技能解除，會將疫病傳播給周圍 7m 內的我軍。	icon_skills.plague_tex
-701800	DamageOverTime	True	False	False	疫病長槍	被疫病感染。持續受到$H_W_BAD-15086$COLOR_END的傷害。	icon_skills.plague_tex
-701801	DamageOverTime	True	False	False	疫病長槍	被疫病感染。持續受到$H_W_BAD-1953$COLOR_END的傷害。HP恢復量減少$H_W_BAD10%$COLOR_END。	icon_skills.plague_tex
+701701	WeakeningEffect	True	False	False	疫病長槍 II	在$time內成為疫病的宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法使用淨化技能解除，會將疫病傳播給周圍 7m 內的我軍。	icon_skills.plague_tex
+701702	WeakeningEffect	True	False	False	疫病長槍 III	$time內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex
+701703	WeakeningEffect	True	False	False	疫病長槍 IV	$time內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex
+701704	WeakeningEffect	True	False	False	疫病長槍 V	$time內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex
+701705	WeakeningEffect	True	False	False	疫病長槍 VI	$time內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex
+701706	WeakeningEffect	True	False	False	疫病長槍 VII	$time內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex
+701707	WeakeningEffect	True	False	False	疫病長槍 VIII	$time內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex
+701708	WeakeningEffect	True	False	False	疫病長槍 IX	$time內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex
+701720	WeakeningEffect	True	False	False	疫病長槍 I	$time內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex
+701721	WeakeningEffect	True	False	False	疫病長槍 II	$time內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex
+701722	WeakeningEffect	True	False	False	疫病長槍 III	$time內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex
+701723	WeakeningEffect	True	False	False	疫病長槍 IV	$time內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex
+701724	WeakeningEffect	True	False	False	疫病長槍 V	$time內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex
+701725	WeakeningEffect	True	False	False	疫病長槍 VI	$time內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex
+701726	WeakeningEffect	True	False	False	疫病長槍 VII	$time內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex
+701727	WeakeningEffect	True	False	False	疫病長槍 VIII	$time內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex
+701728	WeakeningEffect	True	False	False	疫病長槍 IX	$time內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex
+701800	DamageOverTime	True	False	False	疫病長槍	被疫病感染。持續受到$H_W_BAD-1141$COLOR_END的傷害。	icon_skills.plague_tex
+701801	DamageOverTime	True	False	False	疫病長槍 II	被疫病感染。持續受到$H_W_BAD-1585$COLOR_END的傷害。	icon_skills.plague_tex
+701802	DamageOverTime	True	False	False	疫病長槍 III	被疫病感染。持續受到$H_W_BAD-2202$COLOR_END的傷害。	icon_skills.plague_tex
+701803	DamageOverTime	True	False	False	疫病長槍 IV	被疫病感染。持續受到$H_W_BAD-3059$COLOR_END的傷害。	icon_skills.plague_tex
+701804	DamageOverTime	True	False	False	疫病長槍 V	被疫病感染。持續受到$H_W_BAD-4248$COLOR_END的傷害。	icon_skills.plague_tex
+701805	DamageOverTime	True	False	False	疫病長槍 VI	被疫病感染。持續受到$H_W_BAD-5900$COLOR_END的傷害。	icon_skills.plague_tex
+701806	DamageOverTime	True	False	False	疫病長槍 VII	被疫病感染。持續受到$H_W_BAD-8194$COLOR_END的傷害。	icon_skills.plague_tex
+701807	DamageOverTime	True	False	False	疫病長槍 VIII	被疫病感染。持續受到$H_W_BAD-11380$COLOR_END的傷害。	icon_skills.plague_tex
+701808	DamageOverTime	True	False	False	疫病長槍 IX	被疫病感染。持續受到$H_W_BAD-15086$COLOR_END的傷害。	icon_skills.plague_tex
+701820	DamageOverTime	True	False	False	疫病長槍 I	被疫病感染。持續受到$H_W_BAD-141$COLOR_END的傷害。HP恢復量減少$H_W_BAD10%$COLOR_END。	icon_skills.plague_tex
+701821	DamageOverTime	True	False	False	疫病長槍 II	被疫病感染。持續受到$H_W_BAD-196$COLOR_END的傷害。HP恢復量減少$H_W_BAD10%$COLOR_END。	icon_skills.plague_tex
+701822	DamageOverTime	True	False	False	疫病長槍 III	被疫病感染。持續受到$H_W_BAD-272$COLOR_END的傷害。HP恢復量減少$H_W_BAD10%$COLOR_END。	icon_skills.plague_tex
+701823	DamageOverTime	True	False	False	疫病長槍 IV	被疫病感染。持續受到$H_W_BAD-378$COLOR_END的傷害。HP恢復量減少$H_W_BAD10%$COLOR_END。	icon_skills.plague_tex
+701824	DamageOverTime	True	False	False	疫病長槍 V	被疫病感染。持續受到$H_W_BAD-525$COLOR_END的傷害。HP恢復量減少$H_W_BAD10%$COLOR_END。	icon_skills.plague_tex
+701825	DamageOverTime	True	False	False	疫病長槍 VI	被疫病感染。持續受到$H_W_BAD-729$COLOR_END的傷害。HP恢復量減少$H_W_BAD10%$COLOR_END。	icon_skills.plague_tex
+701826	DamageOverTime	True	False	False	疫病長槍 VII	被疫病感染。持續受到$H_W_BAD-1012$COLOR_END的傷害。HP恢復量減少$H_W_BAD10%$COLOR_END。	icon_skills.plague_tex
+701827	DamageOverTime	True	False	False	疫病長槍 VIII	被疫病感染。持續受到$H_W_BAD-1406$COLOR_END的傷害。HP恢復量減少$H_W_BAD10%$COLOR_END。	icon_skills.plague_tex
+701828	DamageOverTime	True	False	False	疫病長槍 IX	被疫病感染。持續受到$H_W_BAD-1953$COLOR_END的傷害。HP恢復量減少$H_W_BAD10%$COLOR_END。	icon_skills.plague_tex
 701900	Buff	True	True	False	瞬間移動無敵	不可看到	icon_skills.voidtrap_tex
 757001	Buff	False	False	False	不要顯示出來的內容	不要顯示出來的內容	icon_status.firedamage_tex
 757002	Buff	True	False	True	燃燒吧	石巨人感到憤怒而全身都著火了。在半徑 21m裡的對象都會獲得 '熱氣' 異常狀態。	icon_status.firedamage_tex
@@ -2340,15 +2368,6 @@
 801301	Buff	True	True	False	覺醒 II	平衡增加$H_W_GOOD100%$COLOR_END。	icon_skills.recovery_tex
 801400	Buff	True	True	False	再生聖域 I	每$H_W_GOOD1$COLOR_END second持續恢復HP。	icon_skills.sanctuaryofregeneration_tex
 801401	Buff	True	True	False	再生聖域 II	每$H_W_GOOD1$COLOR_END second持續恢復HP。	icon_skills.sanctuaryofregeneration_tex
-801402	Buff	True	True	False	再生聖域 III	每$H_W_GOOD1$COLOR_END second持續恢復HP。	icon_skills.sanctuaryofregeneration_tex
-801403	Buff	True	True	False	再生聖域 IV	每$H_W_GOOD1$COLOR_END second持續恢復HP。	icon_skills.sanctuaryofregeneration_tex
-801404	Buff	True	True	False	再生聖域 V	每$H_W_GOOD1$COLOR_END second持續恢復HP。	icon_skills.sanctuaryofregeneration_tex
-801405	Buff	True	True	False	再生聖域 VI	每$H_W_GOOD1$COLOR_END second持續恢復HP。	icon_skills.sanctuaryofregeneration_tex
-801406	Buff	True	True	False	再生聖域 VII	每$H_W_GOOD1$COLOR_END second持續恢復HP。	icon_skills.sanctuaryofregeneration_tex
-801407	Buff	True	True	False	再生聖域 VIII	每$H_W_GOOD1$COLOR_END second持續恢復HP。	icon_skills.sanctuaryofregeneration_tex
-801408	Buff	True	True	False	再生聖域 IX	每$H_W_GOOD1$COLOR_END second持續恢復HP。	icon_skills.sanctuaryofregeneration_tex
-801409	Buff	True	True	False	再生聖域 X	每$H_W_GOOD1$COLOR_END second持續恢復HP。	icon_skills.sanctuaryofregeneration_tex
-801410	Buff	True	True	False	再生聖域 XI	每$H_W_GOOD1$COLOR_END second持續恢復HP。	icon_skills.sanctuaryofregeneration_tex
 801500	Buff	True	True	False	神聖閃電 I	力量增加$H_W_GOOD20$COLOR_END，攻擊速度也提升$H_W_GOOD8$COLOR_END。	icon_skills.divinelightning_tex
 801501	Buff	True	True	False	神聖閃電 II	力量增加$H_W_GOOD28$COLOR_END，攻擊速度也提升$H_W_GOOD8$COLOR_END。	icon_skills.divinelightning_tex
 801502	Buff	True	True	False	神聖閃電 III	力量增加$H_W_GOOD36$COLOR_END，攻擊速度也提升$H_W_GOOD8$COLOR_END。	icon_skills.divinelightning_tex
@@ -3090,9 +3109,9 @@
 981097	Buff	True	False	False			
 981098	Buff	False	True	False			
 981099	Stun	True	True	False	昏厥	受到拉坎的攻擊之前，因被強烈的氣息侵襲而昏厥。	icon_status.confuseup_tex
-981100	Buff	False	True	False			
-981101	Buff	False	True	False			
-981102	Buff	False	True	False			
+981100	Buff	False	True	True			
+981101	Buff	False	True	True			
+981102	Buff	False	True	True			
 981103	Buff	True	True	False			
 981104	Buff	False	True	False			
 981105	Buff	False	True	False			
@@ -3727,6 +3746,7 @@
 10152093	Buff	False	True	False			
 10152094	Buff	False	True	False			
 10152095	Buff	False	True	False			
+10152096	Buff	False	True	False	飛凰怒天冷卻時間必須初始化	使用爆擊彈後初始化冷卻時間吧	
 10152100	Buff	True	True	False	能量補充	魔工師消滅敵人同時，可對武器補充祕傳能源。持續時間內，能源不會消耗。	icon_skills.energycharging_tex
 10152110	Buff	True	True	False	緊急保護膜啟動	為扺消達到死亡的傷害而啟動緊急保護膜了。緊急保護膜最大可吸收$H_W_GOOD27858$COLOR_END的傷害量。	icon_skills.emergencyshield_tex
 10152111	Buff	True	True	False	緊急保護膜啟動	為扺消達到死亡的傷害而啟動緊急保護膜了。緊急保護膜最大可吸收$H_W_GOOD34900$COLOR_END的傷害量。	icon_skills.emergencyshield_tex
@@ -3816,6 +3836,7 @@
 10154050	Buff	True	True	False	煙幕	因於煙幕內而能夠迴避敵人的攻擊。	icon_skills.c12_smokebombevade
 10154051	Buff	False	True	False		不應該看到此異常狀態。	
 10154052	Buff	False	True	False			
+10154054	Buff	False	True	False	飛凰怒天冷卻時間必須初始化	使用飛凰怒天後初始化冷卻時間吧	
 10154060	Buff	False	True	False			
 10154061	Buff	False	True	False			
 10154062	Buff	False	True	False			
@@ -4114,6 +4135,112 @@
 45000120	Buff	True	True	False	懼高症	因為懼高症的症狀，技能使用暫時受到限制。	icon_status.fearstatus_tex
 45000121	Buff	True	True	False	表皮強化	卡舒帕露的表皮變得堅硬。不管是任何種類傷害都無法傷害。	icon_status.plusedefence_tex
 45000122	Buff	True	True	False	貝里克的保護	受到貝里克的保護效果，發動10秒讓傷害無效化的保護膜。	icon_status.bless_of_velic_tex
+46600001	Stun	False	False	False	2BOSS級怪物點數獲得技能用2秒模式		
+46600002	Buff	True	True	True	岱魔魯斯的壓倒	不受擲骰子的岱魔魯斯妨礙。岱魔魯斯的防禦力增加1000倍。	icon_status.plusedefence_tex
+46600003	Buff	False	True	False			
+46600004	Stun	False	False	False			
+46600005	DamageOverTime	False	False	False			
+46600006	WeakeningEffect	False	True	True			
+46600007	Buff	False	True	True		持有大骰子的話擲出	
+46600008	Buff	False	True	True		PC骰子消失條件	
+46600009	Buff	False	True	True			
+46600010	WeakeningEffect	False	True	False			
+46600011	Buff	False	False	True		骰子(藍) effect用	
+46600012	Buff	False	False	True		骰子(紅) effect用	
+46600013	Buff	False	True	True		骰子(白) effect用	
+46600014	Buff	False	True	False			
+46600015	Buff	False	True	False			
+46600016	Buff	False	True	False		骰子出現冷卻時間90秒	
+46600017	Buff	False	True	True			
+46600018	DamageOverTime	True	False	False	岱魔魯斯的詛咒	每$H_W_BAD2$COLOR_END second1，持續減少整體HP的 $H_W_BAD10%$COLOR_END。	icon_status.injuredbtdarkness_tex
+46600019	WeakeningEffect	False	True	False		2BOSS級怪物進入fevertime時踉蹌演出	
+46600020	WeakeningEffect	False	True	False		行動取消用abnormality	
+46600021	Buff	False	True	False		回合勝、敗確認用	
+46600022	Buff	False	True	True			
+46600023	Buff	False	True	True			
+46600024	Buff	False	True	True			
+46600025	Buff	False	True	True			
+46600026	Buff	False	True	True			
+46600027	Buff	False	True	True		2BOSS級怪物 2phase後可投擲透明npc持有且出現的3種骰子	
+46600028	Buff	False	True	False		PC用安全地帶	
+46600029	Buff	False	True	False	成就用異常狀態	成就用異常狀態	
+46600030	Buff	False	True	False	成就用異常狀態	成就用異常狀態	
+46600031	Buff	False	True	True			
+46600032	Buff	False	True	True			
+46600033	Buff	False	True	True			
+46600034	Buff	False	True	True			
+46600035	Buff	False	True	True			
+46600036	Buff	False	True	True			
+46600037	Buff	False	True	True			
+46600038	Buff	False	True	False			
+46600039	Buff	False	True	False			
+46600040	Stun	True	False	False	麻痺	全身麻痺5秒無法行動。	icon_status.positionswap_tex
+46600041	Buff	False	True	False		1BOSS級怪物瞬傷特效演出用(紅)	
+46600042	DamageOverTime	False	True	False		1BOSS級怪物瞬傷特效演出用(藍)	
+46600043	DamageOverTime	False	True	False		1BOSS級怪物瞬傷特效演出用(綠)	
+46600053	Buff	False	True	True	閃亮的骰子	召喚閃亮的骰子	
+46600054	WeakeningEffect	False	True	True			
+46600055	Buff	False	True	True			
+46600056	Buff	False	True	True			
+46600057	Buff	False	True	True			
+46600059	Buff	False	True	True		向透明npc傳達逆向迴轉情報	
+46600060	Buff	False	True	True		向透明npc傳達順向迴轉情報	
+46600061	Buff	False	True	True		向透明npc傳達輪盤結果(紅)	
+46600062	Buff	False	True	True		向透明npc傳達輪盤結果(白)	
+46600063	Buff	False	True	True		向透明npc傳達輪盤結果(藍)	
+46600064	Buff	False	True	True		可投擲PC骰子的異常狀態	
+46600065	Buff	False	True	True		PC骰子爆發的異常狀態	
+46600066	WeakeningEffect	False	True	True		爆發的PC骰子用保護膜	
+46600067	WeakeningEffect	False	True	True		1個投擲的骰子用保護膜	
+46600068	WeakeningEffect	False	True	True		2個投擲的骰子用保護膜	
+46600069	DamageOverTime	False	False	False		輪盤消失前透明化	
+46600070	Buff	False	True	False		輪盤npc出現abnormality	
+46600071	DamageOverTime	False	False	False		46600070持續時間結束前受到的異常狀態	icon_status.icedamage_tex
+46600072	Buff	False	True	False		向2BOSS級怪物傳達輪盤轉動的狀態，讓骰子無法出現	icon_status.firedamage_tex
+46600073	Buff	False	True	True		逆轉輪盤召喚用異常狀態	
+46600074	Buff	False	True	True		順轉輪盤召喚用異常狀態	
+46600075	Buff	False	True	False		輪盤冷卻時間異常狀態	
+46600076	WeakeningEffect	False	True	True		2phase 可投擲全部3個骰子的異常狀態	
+46600077	Buff	False	True	False		向2BOSS級怪物傳達輪盤傳轉完成	
+46600078	Buff	False	True	True		2BOSS級怪物進入2phase時讓自己受到的異常狀態	
+46600079	Buff	True	True	False	岱魔魯斯的狂氣	岱魔魯斯正準備移動至異空間。防禦力增加1000倍。	icon_status.plusedefence_tex
+46600080	Buff	False	True	True		位於第10格。	
+46600081	Buff	False	True	True		位於第1格。	
+46600082	Buff	False	True	True		位於第2格。	
+46600083	Buff	False	True	True		位於第3格。	
+46600084	Buff	False	True	True		位於第4格。	
+46600085	Buff	False	True	True		位於第5格。	
+46600086	Buff	False	True	True		位於第6格。	
+46600088	Buff	False	True	False		硬幣被擊時計量條提升1(演出用)	
+46600089	DamageOverTime	False	False	False		硬幣被擊時計量條提升3(演出用)	
+46600090	DamageOverTime	False	False	False		2BOSS級怪物轉動輪盤	
+46600091	Buff	False	True	False			
+46600092	Buff	False	True	False			
+46600093	Buff	False	True	False			
+46600094	Buff	False	True	False		2BOSS級怪物_紅利骰子模式用	
+46600095	Buff	False	True	False			
+46600096	Buff	False	True	False			
+46600097	Buff	False	True	False			
+46600098	DamageOverTime	False	False	False		2BOSS級怪物_fevertime用恢復	icon_skills.refreshbless_tex
+46600099	Buff	True	True	False	異空間吸收	每$H_W_GOOD1$COLOR_END second，持續恢復相當於整體HP的$H_W_GOOD0.35%$COLOR_END之HP。	icon_skills.refreshbless_tex
+46600100	Buff	False	True	True		2BOSS級怪物無敵異常狀態	
+46600101	Buff	False	True	False			
+46600102	Buff	False	True	False			
+46600103	Buff	False	True	True		起初以紅遠近開始模式 -> 2phase開始綠遠近	
+46600104	Buff	False	True	True		起初以綠遠近開始模式 -> 2phase開始紅遠近	
+46600105	Buff	False	True	False		1BOSS級怪物奇數確認用異常狀態(持有時奇數)	
+46600106	Buff	False	True	False		偶數2重疊時變化為偶數異常狀態 -> 1秒後消失	
+46600107	Buff	False	False	False			
+46600108	Buff	False	False	False			
+46600109	Buff	False	True	False		1BOSS級怪物奇偶模式冷卻時間	
+46600110	Buff	False	True	False		1BOSS級怪物瞬傷模式冷卻時間	
+46600111	Buff	False	True	True			
+46600112	Buff	False	True	False		1BOSS級怪物瞬傷範圍傷害字型用	
+46600113	DamageOverTime	True	False	False	吐爾卡斯抓傷的傷口	每$H_W_BAD1$COLOR_END second，持續減少整體HP的 $H_W_BAD10%$COLOR_END。	icon_status.injuredbtdarkness_tex
+46600114	Buff	False	True	True		奇-近爆	
+46600115	Buff	False	True	True		奇-遠爆	
+46600116	Buff	False	True	True		偶-近爆	
+46600117	Buff	False	True	True		偶-遠爆	
 47300100	DamageOverTime	True	False	False	劇毒津液	中了致命性的毒，每$H_W_BAD60$COLOR_END second1持續減少$H_W_BAD50%$COLOR_END的HP。$BR劇毒津液無法解除。	icon_status.poisonstatus_tex
 47300200	DamageOverTime	True	False	False	突沙劇毒	中了致命性的毒，每 $H_W_BAD3$COLOR_END second1持續減少$H_W_BAD5%$COLOR_END的HP。$BR突沙劇毒無法解除。	icon_status.poisonstatus_tex
 47300300	DamageOverTime	True	False	False	突沙之毒	突沙之毒正蔓延全身!$H_W_BAD4$COLOR_END second1之後受到$H_W_BAD30%$COLOR_END的傷害。$BR突沙之毒無法解除。	icon_status.poisonstatus_tex
