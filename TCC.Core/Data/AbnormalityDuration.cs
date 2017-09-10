@@ -100,6 +100,7 @@ namespace TCC
 
         public void Refresh()
         {
+            if(timer == null) return;
             timer?.Stop();
             if (Duration != 0) timer?.Start();
             NotifyPropertyChanged("Refresh");
