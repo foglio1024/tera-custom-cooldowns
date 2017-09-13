@@ -12167,10 +12167,21 @@
 21329	2	Battle Pack II
 21330	2	Battle Pack III
 21331	2	Battle Pack IV
+21332	3	Dice Fragment
+21333	3	Chance Engine
+21334	3	Risk Amplifier
+21335	3	Necklace Resizer
+21336	3	Earring Resizer
+21337	3	Ring Resizer
+21338	3	Design: Polished Diadem
 21339	2	Civil Unrest Tanner Reward
 21340	2	Civil Unrest Reward 1
 21341	2	Civil Unrest Reward 2
 21342	2	Civil Unrest Reward 3
+21343	3	Necklace Resizer
+21344	3	Earring Resizer
+21345	3	Ring Resizer
+21346	3	10K Ticket Box
 22001	0	Discontinued Lesson: Cloth Extraction
 22002	0	Discontinued Lesson: Metal Extraction
 22004	0	Discontinued Lesson: Alchemy Extraction
@@ -15014,7 +15025,7 @@
 35001	1	Glyph of Energy
 35002	1	Glyph of Restoration
 35003	1	Glyph of Affirmation
-35004	1	Glyph of Grounding
+35004	1	Glyph of Rigidity
 35005	1	Glyph of the Sanative
 35006	1	Glyph of Spirit
 35007	1	Glyph of Energy
@@ -15040,7 +15051,7 @@
 35027	1	Glyph of Numbing
 35028	1	Glyph of Energy
 35029	2	Glyph of Affirmation
-35030	2	Glyph of Will
+35030	2	Glyph of Rigidity
 35031	2	Glyph of Powerlink
 35032	1	Glyph of Carving
 35033	2	Glyph of Power
@@ -15625,6 +15636,8 @@
 45480	0	Legends of the Valkyries
 45481	1	Draconis Missive
 45482	2	Draconis Ferris Fragment
+46600	0	Urgent Letter from Seir
+46601	0	San Allema Teleportal Scroll
 46701	0	Inversion Mote
 47001	3	Wrack & Ruin
 47002	3	Ramming Speed
@@ -18843,6 +18856,20 @@
 72344	3	Keylock Necklace
 72345	3	Keylock Earring
 72346	3	Keylock Ring
+72347	2	Polished Circlet
+72348	3	Polished Diadem
+72349	3	Resized Godsboon Necklace
+72350	3	Resized Godsbane Earring
+72351	3	Resized Godsbane Ring
+72352	3	Resized Heavensboon Necklace
+72353	3	Resized Heavensbane Earring
+72354	3	Resized Heavensbane Ring 
+72355	3	Resized Keytrap Necklace
+72356	3	Resized Keytrap Earring
+72357	3	Resized Keytrap Ring
+72358	3	Resized Keylock Necklace
+72359	3	Resized Keylock Earring
+72360	3	Resized Keylock Ring
 80000	0	Barrel Bomb
 80001	1	Shattered Fleet Teleport Scroll
 80002	1	Channelworks Teleport Scroll
@@ -20089,6 +20116,7 @@
 83401	1	Ruinous Manor Teleport Scroll
 83402	1	Broken Prison Teleport Scroll
 83403	1	Velik's Sanctuary Teleport Scroll
+83404	1	Demon's Wheel Teleport Scroll
 84301	2	Poisedly Wrathful Niveot
 84302	2	Resolutely Wrathful Niveot
 84303	2	Grievingly Wrathful Niveot
@@ -23357,6 +23385,9 @@
 99431	2	Special Emote: 2017 Servant's Bow
 99432	2	Special Emote: 2017 Servant's Bow
 99433	2	Blackened Deathchooser
+99434	1	Tier 10 Masterwork Alkahest
+99435	1	Tier 11 Masterwork Alkahest
+99436	1	Tier 12 Masterwork Alkahest
 99437	3	Empowered Basic Innerwear
 99438	3	Fitness Basic Innerwear
 99439	3	Fortified Basic Innerwear
@@ -24463,6 +24494,78 @@
 216611	1	Жетон события
 216612	1	Жетон события
 216613	1	Жетон события
+216616	2	Зелье Канефоры
+216617	2	Зелье Канефоры
+216618	2	Сильное зелье Канефоры
+216619	2	Сильное зелье Канефоры
+216620	2	Книга питомца: Драконетта
+216621	2	Книга питомца: Драконетта
+216622	2	Книга питомца: Конфетка
+216623	2	Книга питомца: Конфетка
+216624	2	Книга питомца: Адамс
+216625	2	Книга питомца: Адамс
+216626	2	Книга питомца: Банзай
+216627	2	Книга питомца: Банзай
+216628	2	Книга питомца: Рейни
+216629	2	Книга питомца: Рейни
+216630	2	Книга питомца: Расти
+216631	2	Книга питомца: Расти
+216632	2	Книга питомца: Пинки
+216633	2	Книга питомца: Пинки
+216634	2	Книга питомца: Зеро
+216635	2	Книга питомца: Зеро
+216636	2	Книга питомца: Мисс Катоник
+216637	2	Книга питомца: Мисс Катоник
+216638	2	Книга питомца: Драконетта
+216639	2	Книга питомца: Конфетка
+216640	2	Книга питомца: Адамс
+216641	2	Книга питомца: Банзай
+216642	2	Книга питомца: Рейни
+216643	2	Книга питомца: Расти
+216644	2	Книга питомца: Пинки
+216645	2	Книга питомца: Зеро
+216646	2	Книга питомца: Мисс Катоник
+216647	2	Книга питомца: Драконетта
+216648	2	Книга питомца: Конфетка
+216649	2	Книга питомца: Адамс
+216650	2	Книга питомца: Банзай
+216651	2	Книга питомца: Рейни
+216652	2	Книга питомца: Расти
+216653	2	Книга питомца: Пинки
+216654	2	Книга питомца: Зеро
+216655	2	Книга питомца: Мисс Катоник
+216656	2	G
+216657	2	M
+216658	2	P
+216659	2	Часть буквы
+216660	2	Эссенция Дракона
+216661	2	Волшебный расщепитель
+216662	2	Магический мешок
+216663	3	Руна Дракона (TERA)
+216664	3	Руна Дракона (Summer)
+216665	3	Руна Дракона (Update)
+216666	3	Руна Дракона (Evil)
+216667	3	Руна Дракона (Dragon)
+216668	3	Руна Дракона (Returned)
+216669	2	Волшебный расщепитель (Letter)
+216671	3	Перо
+216672	3	Кость дракона
+216673	3	Жетон приручения
+216674	3	Билет поддержки
+216675	2	Лоскут ткани
+216676	3	Шелковый лоскут
+216677	3	Магическая сталь
+216678	3	Самоцвет
+216679	3	Жетон листопада
+216680	3	Жетон снегопада
+247623	2	Smart Box: Swimwear Male A + Female A
+247624	2	Smart Box: Swimwear Male B + Female D
+247625	2	Smart Box: Swimwear Female B
+247626	2	Smart Box: Swimwear Female C
+247627	2	Smart Box: Swimwear Male A + Female A (7 Days)
+247628	2	Smart Box: Swimwear Male B + Female D (7 Days)
+247629	2	Smart Box: Swimwear Female B (7 Days)
+247630	2	Smart Box: Swimwear Female C (7 Days)
 250000	3	Human Male SWAT Uniform
 250001	3	Human Male SWAT Uniform
 250002	3	Human Male SWAT Uniform
@@ -29827,18 +29930,18 @@
 255749	3	Human Male Diver Costume
 255750	3	Human Male Diver Costume
 255751	3	Human Male Diver Costume
-255752	3	Human Female Tan-Tastic
-255753	3	Human Female Tan-Tastic
-255754	3	Human Female Tan-Tastic
-255755	3	Human Female Tan-Tastic
-255756	3	Human Female Tan-Tastic
-255757	3	Human Female Tan-Tastic
-255758	3	Human Female Tan-Tastic
-255759	3	Human Female Tan-Tastic
-255760	3	Human Female Tan-Tastic
-255761	3	Human Female Tan-Tastic
-255762	3	Human Female Tan-Tastic
-255763	3	Human Female Tan-Tastic
+255752	3	Human Female Tan-Tastic One-Piece
+255753	3	Human Female Tan-Tastic One-Piece
+255754	3	Human Female Tan-Tastic One-Piece
+255755	3	Human Female Tan-Tastic One-Piece
+255756	3	Human Female Tan-Tastic One-Piece
+255757	3	Human Female Tan-Tastic One-Piece
+255758	3	Human Female Tan-Tastic One-Piece
+255759	3	Human Female Tan-Tastic One-Piece
+255760	3	Human Female Tan-Tastic One-Piece
+255761	3	Human Female Tan-Tastic One-Piece
+255762	3	Human Female Tan-Tastic One-Piece
+255763	3	Human Female Tan-Tastic One-Piece
 255764	3	Human Female Beach Wrap
 255765	3	Human Female Beach Wrap
 255766	3	Human Female Beach Wrap
@@ -29899,18 +30002,18 @@
 255821	3	High Elf Male Diver Costume
 255822	3	High Elf Male Diver Costume
 255823	3	High Elf Male Diver Costume
-255824	3	High Elf Female Tan-Tastic
-255825	3	High Elf Female Tan-Tastic
-255826	3	High Elf Female Tan-Tastic
-255827	3	High Elf Female Tan-Tastic
-255828	3	High Elf Female Tan-Tastic
-255829	3	High Elf Female Tan-Tastic
-255830	3	High Elf Female Tan-Tastic
-255831	3	High Elf Female Tan-Tastic
-255832	3	High Elf Female Tan-Tastic
-255833	3	High Elf Female Tan-Tastic
-255834	3	High Elf Female Tan-Tastic
-255835	3	High Elf Female Tan-Tastic
+255824	3	High Elf Female Tan-Tastic One-Piece
+255825	3	High Elf Female Tan-Tastic One-Piece
+255826	3	High Elf Female Tan-Tastic One-Piece
+255827	3	High Elf Female Tan-Tastic One-Piece
+255828	3	High Elf Female Tan-Tastic One-Piece
+255829	3	High Elf Female Tan-Tastic One-Piece
+255830	3	High Elf Female Tan-Tastic One-Piece
+255831	3	High Elf Female Tan-Tastic One-Piece
+255832	3	High Elf Female Tan-Tastic One-Piece
+255833	3	High Elf Female Tan-Tastic One-Piece
+255834	3	High Elf Female Tan-Tastic One-Piece
+255835	3	High Elf Female Tan-Tastic One-Piece
 255836	3	High Elf Female Beach Wrap
 255837	3	High Elf Female Beach Wrap
 255838	3	High Elf Female Beach Wrap
@@ -29971,18 +30074,18 @@
 255893	3	Amani Male Diver Costume
 255894	3	Amani Male Diver Costume
 255895	3	Amani Male Diver Costume
-255896	3	Amani Female Tan-Tastic
-255897	3	Amani Female Tan-Tastic
-255898	3	Amani Female Tan-Tastic
-255899	3	Amani Female Tan-Tastic
-255900	3	Amani Female Tan-Tastic
-255901	3	Amani Female Tan-Tastic
-255902	3	Amani Female Tan-Tastic
-255903	3	Amani Female Tan-Tastic
-255904	3	Amani Female Tan-Tastic
-255905	3	Amani Female Tan-Tastic
-255906	3	Amani Female Tan-Tastic
-255907	3	Amani Female Tan-Tastic
+255896	3	Amani Female Tan-Tastic One-Piece
+255897	3	Amani Female Tan-Tastic One-Piece
+255898	3	Amani Female Tan-Tastic One-Piece
+255899	3	Amani Female Tan-Tastic One-Piece
+255900	3	Amani Female Tan-Tastic One-Piece
+255901	3	Amani Female Tan-Tastic One-Piece
+255902	3	Amani Female Tan-Tastic One-Piece
+255903	3	Amani Female Tan-Tastic One-Piece
+255904	3	Amani Female Tan-Tastic One-Piece
+255905	3	Amani Female Tan-Tastic One-Piece
+255906	3	Amani Female Tan-Tastic One-Piece
+255907	3	Amani Female Tan-Tastic One-Piece
 255908	3	Amani Female Beach Wrap
 255909	3	Amani Female Beach Wrap
 255910	3	Amani Female Beach Wrap
@@ -30043,18 +30146,18 @@
 255965	3	Castanic Male Diver Costume
 255966	3	Castanic Male Diver Costume
 255967	3	Castanic Male Diver Costume
-255968	3	Castanic Female Tan-Tastic
-255969	3	Castanic Female Tan-Tastic
-255970	3	Castanic Female Tan-Tastic
-255971	3	Castanic Female Tan-Tastic
-255972	3	Castanic Female Tan-Tastic
-255973	3	Castanic Female Tan-Tastic
-255974	3	Castanic Female Tan-Tastic
-255975	3	Castanic Female Tan-Tastic
-255976	3	Castanic Female Tan-Tastic
-255977	3	Castanic Female Tan-Tastic
-255978	3	Castanic Female Tan-Tastic
-255979	3	Castanic Female Tan-Tastic
+255968	3	Castanic Female Tan-Tastic One-Piece
+255969	3	Castanic Female Tan-Tastic One-Piece
+255970	3	Castanic Female Tan-Tastic One-Piece
+255971	3	Castanic Female Tan-Tastic One-Piece
+255972	3	Castanic Female Tan-Tastic One-Piece
+255973	3	Castanic Female Tan-Tastic One-Piece
+255974	3	Castanic Female Tan-Tastic One-Piece
+255975	3	Castanic Female Tan-Tastic One-Piece
+255976	3	Castanic Female Tan-Tastic One-Piece
+255977	3	Castanic Female Tan-Tastic One-Piece
+255978	3	Castanic Female Tan-Tastic One-Piece
+255979	3	Castanic Female Tan-Tastic One-Piece
 255980	3	Castanic Female Beach Wrap
 255981	3	Castanic Female Beach Wrap
 255982	3	Castanic Female Beach Wrap
@@ -30211,6 +30314,318 @@
 256133	3	Rainbow Wings
 256134	3	Rainbow Wings
 256135	3	Rainbow Wings
+256136	3	Crystal Blue Twin Swords
+256137	3	Crystal Blue Twin Swords
+256138	3	Crystal Blue Twin Swords
+256139	3	Crystal Blue Twin Swords
+256140	3	Crystal Blue Twin Swords
+256141	3	Crystal Blue Twin Swords
+256142	3	Crystal Blue Twin Swords
+256143	3	Crystal Blue Twin Swords
+256144	3	Crystal Blue Twin Swords
+256145	3	Crystal Blue Twin Swords
+256146	3	Crystal Blue Twin Swords
+256147	3	Crystal Blue Twin Swords
+256148	3	Crystal Blue Lance
+256149	3	Crystal Blue Lance
+256150	3	Crystal Blue Lance
+256151	3	Crystal Blue Lance
+256152	3	Crystal Blue Lance
+256153	3	Crystal Blue Lance
+256154	3	Crystal Blue Lance
+256155	3	Crystal Blue Lance
+256156	3	Crystal Blue Lance
+256157	3	Crystal Blue Lance
+256158	3	Crystal Blue Lance
+256159	3	Crystal Blue Lance
+256160	3	Crystal Blue Greatsword
+256161	3	Crystal Blue Greatsword
+256162	3	Crystal Blue Greatsword
+256163	3	Crystal Blue Greatsword
+256164	3	Crystal Blue Greatsword
+256165	3	Crystal Blue Greatsword
+256166	3	Crystal Blue Greatsword
+256167	3	Crystal Blue Greatsword
+256168	3	Crystal Blue Greatsword
+256169	3	Crystal Blue Greatsword
+256170	3	Crystal Blue Greatsword
+256171	3	Crystal Blue Greatsword
+256172	3	Crystal Blue Axe
+256173	3	Crystal Blue Axe
+256174	3	Crystal Blue Axe
+256175	3	Crystal Blue Axe
+256176	3	Crystal Blue Axe
+256177	3	Crystal Blue Axe
+256178	3	Crystal Blue Axe
+256179	3	Crystal Blue Axe
+256180	3	Crystal Blue Axe
+256181	3	Crystal Blue Axe
+256182	3	Crystal Blue Axe
+256183	3	Crystal Blue Axe
+256184	3	Crystal Blue Disc
+256185	3	Crystal Blue Disc
+256186	3	Crystal Blue Disc
+256187	3	Crystal Blue Disc
+256188	3	Crystal Blue Disc
+256189	3	Crystal Blue Disc
+256190	3	Crystal Blue Disc
+256191	3	Crystal Blue Disc
+256192	3	Crystal Blue Disc
+256193	3	Crystal Blue Disc
+256194	3	Crystal Blue Disc
+256195	3	Crystal Blue Disc
+256196	3	Crystal Blue Bow
+256197	3	Crystal Blue Bow
+256198	3	Crystal Blue Bow
+256199	3	Crystal Blue Bow
+256200	3	Crystal Blue Bow
+256201	3	Crystal Blue Bow
+256202	3	Crystal Blue Bow
+256203	3	Crystal Blue Bow
+256204	3	Crystal Blue Bow
+256205	3	Crystal Blue Bow
+256206	3	Crystal Blue Bow
+256207	3	Crystal Blue Bow
+256208	3	Crystal Blue Staff
+256209	3	Crystal Blue Staff
+256210	3	Crystal Blue Staff
+256211	3	Crystal Blue Staff
+256212	3	Crystal Blue Staff
+256213	3	Crystal Blue Staff
+256214	3	Crystal Blue Staff
+256215	3	Crystal Blue Staff
+256216	3	Crystal Blue Staff
+256217	3	Crystal Blue Staff
+256218	3	Crystal Blue Staff
+256219	3	Crystal Blue Staff
+256220	3	Crystal Blue Scepter
+256221	3	Crystal Blue Scepter
+256222	3	Crystal Blue Scepter
+256223	3	Crystal Blue Scepter
+256224	3	Crystal Blue Scepter
+256225	3	Crystal Blue Scepter
+256226	3	Crystal Blue Scepter
+256227	3	Crystal Blue Scepter
+256228	3	Crystal Blue Scepter
+256229	3	Crystal Blue Scepter
+256230	3	Crystal Blue Scepter
+256231	3	Crystal Blue Scepter
+256232	3	Crystal Blue Powerfists
+256233	3	Crystal Blue Powerfists
+256234	3	Crystal Blue Powerfists
+256235	3	Crystal Blue Powerfists
+256236	3	Crystal Blue Powerfists
+256237	3	Crystal Blue Powerfists
+256238	3	Crystal Blue Powerfists
+256239	3	Crystal Blue Powerfists
+256240	3	Crystal Blue Powerfists
+256241	3	Crystal Blue Powerfists
+256242	3	Crystal Blue Powerfists
+256243	3	Crystal Blue Powerfists
+256244	3	Crystal Blue Arcannon
+256245	3	Crystal Blue Arcannon
+256246	3	Crystal Blue Arcannon
+256247	3	Crystal Blue Arcannon
+256248	3	Crystal Blue Arcannon
+256249	3	Crystal Blue Arcannon
+256250	3	Crystal Blue Arcannon
+256251	3	Crystal Blue Arcannon
+256252	3	Crystal Blue Arcannon
+256253	3	Crystal Blue Arcannon
+256254	3	Crystal Blue Arcannon
+256255	3	Crystal Blue Arcannon
+256256	3	Crystal Blue Glaive
+256257	3	Crystal Blue Glaive
+256258	3	Crystal Blue Glaive
+256259	3	Crystal Blue Glaive
+256260	3	Crystal Blue Glaive
+256261	3	Crystal Blue Glaive
+256262	3	Crystal Blue Glaive
+256263	3	Crystal Blue Glaive
+256264	3	Crystal Blue Glaive
+256265	3	Crystal Blue Glaive
+256266	3	Crystal Blue Glaive
+256267	3	Crystal Blue Glaive
+256268	3	Crystal Blue Scythes
+256269	3	Crystal Blue Scythes
+256270	3	Crystal Blue Scythes
+256271	3	Crystal Blue Scythes
+256272	3	Crystal Blue Scythes
+256273	3	Crystal Blue Scythes
+256274	3	Crystal Blue Scythes
+256275	3	Crystal Blue Scythes
+256276	3	Crystal Blue Scythes
+256277	3	Crystal Blue Scythes
+256278	3	Crystal Blue Scythes
+256279	3	Crystal Blue Scythes
+256280	3	Crystal Blue Shuriken
+256281	3	Crystal Blue Shuriken
+256282	3	Crystal Blue Shuriken
+256283	3	Crystal Blue Shuriken
+256284	3	Crystal Blue Shuriken
+256285	3	Crystal Blue Shuriken
+256286	3	Crystal Blue Shuriken
+256287	3	Crystal Blue Shuriken
+256288	3	Crystal Blue Shuriken
+256289	3	Crystal Blue Shuriken
+256290	3	Crystal Blue Shuriken
+256291	3	Crystal Blue Shuriken
+256292	3	Starglow Twin Swords
+256293	3	Starglow Twin Swords
+256294	3	Starglow Twin Swords
+256295	3	Starglow Twin Swords
+256296	3	Starglow Twin Swords
+256297	3	Starglow Twin Swords
+256298	3	Starglow Twin Swords
+256299	3	Starglow Twin Swords
+256300	3	Starglow Twin Swords
+256301	3	Starglow Twin Swords
+256302	3	Starglow Twin Swords
+256303	3	Starglow Twin Swords
+256304	3	Starglow Lance
+256305	3	Starglow Lance
+256306	3	Starglow Lance
+256307	3	Starglow Lance
+256308	3	Starglow Lance
+256309	3	Starglow Lance
+256310	3	Starglow Lance
+256311	3	Starglow Lance
+256312	3	Starglow Lance
+256313	3	Starglow Lance
+256314	3	Starglow Lance
+256315	3	Starglow Lance
+256316	3	Starglow Greatsword
+256317	3	Starglow Greatsword
+256318	3	Starglow Greatsword
+256319	3	Starglow Greatsword
+256320	3	Starglow Greatsword
+256321	3	Starglow Greatsword
+256322	3	Starglow Greatsword
+256323	3	Starglow Greatsword
+256324	3	Starglow Greatsword
+256325	3	Starglow Greatsword
+256326	3	Starglow Greatsword
+256327	3	Starglow Greatsword
+256328	3	Starglow Axe
+256329	3	Starglow Axe
+256330	3	Starglow Axe
+256331	3	Starglow Axe
+256332	3	Starglow Axe
+256333	3	Starglow Axe
+256334	3	Starglow Axe
+256335	3	Starglow Axe
+256336	3	Starglow Axe
+256337	3	Starglow Axe
+256338	3	Starglow Axe
+256339	3	Starglow Axe
+256340	3	Starglow Disc
+256341	3	Starglow Disc
+256342	3	Starglow Disc
+256343	3	Starglow Disc
+256344	3	Starglow Disc
+256345	3	Starglow Disc
+256346	3	Starglow Disc
+256347	3	Starglow Disc
+256348	3	Starglow Disc
+256349	3	Starglow Disc
+256350	3	Starglow Disc
+256351	3	Starglow Disc
+256352	3	Starglow Bow
+256353	3	Starglow Bow
+256354	3	Starglow Bow
+256355	3	Starglow Bow
+256356	3	Starglow Bow
+256357	3	Starglow Bow
+256358	3	Starglow Bow
+256359	3	Starglow Bow
+256360	3	Starglow Bow
+256361	3	Starglow Bow
+256362	3	Starglow Bow
+256363	3	Starglow Bow
+256364	3	Starglow Staff
+256365	3	Starglow Staff
+256366	3	Starglow Staff
+256367	3	Starglow Staff
+256368	3	Starglow Staff
+256369	3	Starglow Staff
+256370	3	Starglow Staff
+256371	3	Starglow Staff
+256372	3	Starglow Staff
+256373	3	Starglow Staff
+256374	3	Starglow Staff
+256375	3	Starglow Staff
+256376	3	Starglow Scepter
+256377	3	Starglow Scepter
+256378	3	Starglow Scepter
+256379	3	Starglow Scepter
+256380	3	Starglow Scepter
+256381	3	Starglow Scepter
+256382	3	Starglow Scepter
+256383	3	Starglow Scepter
+256384	3	Starglow Scepter
+256385	3	Starglow Scepter
+256386	3	Starglow Scepter
+256387	3	Starglow Scepter
+256388	3	Starglow Powerfists
+256389	3	Starglow Powerfists
+256390	3	Starglow Powerfists
+256391	3	Starglow Powerfists
+256392	3	Starglow Powerfists
+256393	3	Starglow Powerfists
+256394	3	Starglow Powerfists
+256395	3	Starglow Powerfists
+256396	3	Starglow Powerfists
+256397	3	Starglow Powerfists
+256398	3	Starglow Powerfists
+256399	3	Starglow Powerfists
+256400	3	Starglow Arcannon
+256401	3	Starglow Arcannon
+256402	3	Starglow Arcannon
+256403	3	Starglow Arcannon
+256404	3	Starglow Arcannon
+256405	3	Starglow Arcannon
+256406	3	Starglow Arcannon
+256407	3	Starglow Arcannon
+256408	3	Starglow Arcannon
+256409	3	Starglow Arcannon
+256410	3	Starglow Arcannon
+256411	3	Starglow Arcannon
+256412	3	Starglow Glaive
+256413	3	Starglow Glaive
+256414	3	Starglow Glaive
+256415	3	Starglow Glaive
+256416	3	Starglow Glaive
+256417	3	Starglow Glaive
+256418	3	Starglow Glaive
+256419	3	Starglow Glaive
+256420	3	Starglow Glaive
+256421	3	Starglow Glaive
+256422	3	Starglow Glaive
+256423	3	Starglow Glaive
+256424	3	Starglow Scythes
+256425	3	Starglow Scythes
+256426	3	Starglow Scythes
+256427	3	Starglow Scythes
+256428	3	Starglow Scythes
+256429	3	Starglow Scythes
+256430	3	Starglow Scythes
+256431	3	Starglow Scythes
+256432	3	Starglow Scythes
+256433	3	Starglow Scythes
+256434	3	Starglow Scythes
+256435	3	Starglow Scythes
+256436	3	Starglow Shuriken
+256437	3	Starglow Shuriken
+256438	3	Starglow Shuriken
+256439	3	Starglow Shuriken
+256440	3	Starglow Shuriken
+256441	3	Starglow Shuriken
+256442	3	Starglow Shuriken
+256443	3	Starglow Shuriken
+256444	3	Starglow Shuriken
+256445	3	Starglow Shuriken
+256446	3	Starglow Shuriken
+256447	3	Starglow Shuriken
 256448	3	Flying Skill: Midnight
 256449	3	Flying Skill: Twilight
 256450	3	Flying Skill: Ebony
@@ -30281,7 +30696,7 @@
 256515	3	Flying Skill: Thunder
 256516	3	Flying Skill: Lightning
 256517	3	Flying Skill: Dynamo
-256518	3	Tempest
+256518	3	Flying Skill: Tempest
 256519	3	Flying Skill: Hertz
 256520	3	Flying Skill: Thunder
 256521	3	Flying Skill: Lightning
@@ -30343,6 +30758,330 @@
 256577	3	Flying Skill: Cherry Blossom
 256578	3	Flying Skill: Dawn
 256579	3	Flying Skill: Aurora
+256580	3	Human Male Blue Sky Costume
+256581	3	Human Male Blue Sky Costume
+256582	3	Human Male Blue Sky Costume
+256583	3	Human Male Blue Sky Costume
+256584	3	Human Male Blue Sky Costume
+256585	3	Human Male Blue Sky Costume
+256586	3	Human Male Blue Sky Costume
+256587	3	Human Male Blue Sky Costume
+256588	3	Human Male Blue Sky Costume
+256589	3	Human Male Blue Sky Costume
+256590	3	Human Male Sky Blue Costume
+256591	3	Human Male Sky Blue Costume
+256592	3	Human Male Starglow Costume
+256593	3	Human Male Starglow Costume
+256594	3	Human Male Starglow Costume
+256595	3	Human Male Starglow Costume
+256596	3	Human Male Starglow Costume
+256597	3	Human Male Starglow Costume
+256598	3	Human Male Starglow Costume
+256599	3	Human Male Starglow Costume
+256600	3	Human Male Starglow Costume
+256601	3	Human Male Starglow Costume
+256602	3	Human Male Starglow Costume
+256603	3	Human Male Starglow Costume
+256604	3	Human Female Blue Sky Costume
+256605	3	Human Female Blue Sky Costume
+256606	3	Human Female Blue Sky Costume
+256607	3	Human Female Blue Sky Costume
+256608	3	Human Female Blue Sky Costume
+256609	3	Human Female Blue Sky Costume
+256610	3	Human Female Blue Sky Costume
+256611	3	Human Female Blue Sky Costume
+256612	3	Human Female Blue Sky Costume
+256613	3	Human Female Blue Sky Costume
+256614	3	Human Female Blue Sky Costume
+256615	3	Human Female Blue Sky Costume
+256616	3	Human Female Starglow Costume
+256617	3	Human Female Starglow Costume
+256618	3	Human Female Starglow Costume
+256619	3	Human Female Starglow Costume
+256620	3	Human Female Starglow Costume
+256621	3	Human Female Starglow Costume
+256622	3	Human Female Starglow Costume
+256623	3	Human Female Starglow Costume
+256624	3	Human Female Starglow Costume
+256625	3	Human Female Starglow Costume
+256626	3	Human Female Starglow Costume
+256627	3	Human Female Starglow Costume
+256628	3	High Elf Male Blue Sky Costume
+256629	3	High Elf Male Blue Sky Costume
+256630	3	High Elf Male Blue Sky Costume
+256631	3	High Elf Male Blue Sky Costume
+256632	3	High Elf Male Blue Sky Costume
+256633	3	High Elf Male Blue Sky Costume
+256634	3	High Elf Male Blue Sky Costume
+256635	3	High Elf Male Blue Sky Costume
+256636	3	High Elf Male Blue Sky Costume
+256637	3	High Elf Male Blue Sky Costume
+256638	3	High Elf Male Blue Sky Costume
+256639	3	High Elf Male Blue Sky Costume
+256640	3	High Elf Male Starglow Costume
+256641	3	High Elf Male Starglow Costume
+256642	3	High Elf Male Starglow Costume
+256643	3	High Elf Male Starglow Costume
+256644	3	High Elf Male Starglow Costume
+256645	3	High Elf Male Starglow Costume
+256646	3	High Elf Male Starglow Costume
+256647	3	High Elf Male Starglow Costume
+256648	3	High Elf Male Starglow Costume
+256649	3	High Elf Male Starglow Costume
+256650	3	High Elf Male Starglow Costume
+256651	3	High Elf Male Starglow Costume
+256652	3	High Elf Female Blue Sky Costume
+256653	3	High Elf Female Blue Sky Costume
+256654	3	High Elf Female Blue Sky Costume
+256655	3	High Elf Female Blue Sky Costume
+256656	3	High Elf Female Blue Sky Costume
+256657	3	High Elf Female Blue Sky Costume
+256658	3	High Elf Female Blue Sky Costume
+256659	3	High Elf Female Blue Sky Costume
+256660	3	High Elf Female Blue Sky Costume
+256661	3	High Elf Female Blue Sky Costume
+256662	3	High Elf Female Blue Sky Costume
+256663	3	High Elf Female Blue Sky Costume
+256664	3	High Elf Female Starglow Costume
+256665	3	High Elf Female Starglow Costume
+256666	3	High Elf Female Starglow Costume
+256667	3	High Elf Female Starglow Costume
+256668	3	High Elf Female Starglow Costume
+256669	3	High Elf Female Starglow Costume
+256670	3	High Elf Female Starglow Costume
+256671	3	High Elf Female Starglow Costume
+256672	3	High Elf Female Starglow Costume
+256673	3	High Elf Female Starglow Costume
+256674	3	High Elf Female Starglow Costume
+256675	3	High Elf Female Starglow Costume
+256676	3	Amani Male Blue Sky Costume
+256677	3	Amani Male Blue Sky Costume
+256678	3	Amani Male Blue Sky Costume
+256679	3	Amani Male Blue Sky Costume
+256680	3	Amani Male Blue Sky Costume
+256681	3	Amani Male Blue Sky Costume
+256682	3	Amani Male Blue Sky Costume
+256683	3	Amani Male Blue Sky Costume
+256684	3	Amani Male Blue Sky Costume
+256685	3	Amani Male Blue Sky Costume
+256686	3	Amani Male Blue Sky Costume
+256687	3	Amani Male Blue Sky Costume
+256688	3	Amani Male Starglow Costume
+256689	3	Amani Male Starglow Costume
+256690	3	Amani Male Starglow Costume
+256691	3	Amani Male Starglow Costume
+256692	3	Amani Male Starglow Costume
+256693	3	Amani Male Starglow Costume
+256694	3	Amani Male Starglow Costume
+256695	3	Amani Male Starglow Costume
+256696	3	Amani Male Starglow Costume
+256697	3	Amani Male Starglow Costume
+256698	3	Amani Male Starglow Costume
+256699	3	Amani Male Starglow Costume
+256700	3	Amani Female Blue Sky Costume
+256701	3	Amani Female Blue Sky Costume
+256702	3	Amani Female Blue Sky Costume
+256703	3	Amani Female Blue Sky Costume
+256704	3	Amani Female Blue Sky Costume
+256705	3	Amani Female Blue Sky Costume
+256706	3	Amani Female Blue Sky Costume
+256707	3	Amani Female Blue Sky Costume
+256708	3	Amani Female Blue Sky Costume
+256709	3	Amani Female Blue Sky Costume
+256710	3	Amani Female Blue Sky Costume
+256711	3	Amani Female Blue Sky Costume
+256712	3	Amani Female Starglow Costume
+256713	3	Amani Female Starglow Costume
+256714	3	Amani Female Starglow Costume
+256715	3	Amani Female Starglow Costume
+256716	3	Amani Female Starglow Costume
+256717	3	Amani Female Starglow Costume
+256718	3	Amani Female Starglow Costume
+256719	3	Amani Female Starglow Costume
+256720	3	Amani Female Starglow Costume
+256721	3	Amani Female Starglow Costume
+256722	3	Amani Female Starglow Costume
+256723	3	Amani Female Starglow Costume
+256724	3	Castanic Male Blue Sky Costume
+256725	3	Castanic Male Blue Sky Costume
+256726	3	Castanic Male Blue Sky Costume
+256727	3	Castanic Male Blue Sky Costume
+256728	3	Castanic Male Blue Sky Costume
+256729	3	Castanic Male Blue Sky Costume
+256730	3	Castanic Male Blue Sky Costume
+256731	3	Castanic Male Blue Sky Costume
+256732	3	Castanic Male Blue Sky Costume
+256733	3	Castanic Male Blue Sky Costume
+256734	3	Castanic Male Blue Sky Costume
+256735	3	Castanic Male Blue Sky Costume
+256736	3	Castanic Male Starglow Costume
+256737	3	Castanic Male Starglow Costume
+256738	3	Castanic Male Starglow Costume
+256739	3	Castanic Male Starglow Costume
+256740	3	Castanic Male Starglow Costume
+256741	3	Castanic Male Starglow Costume
+256742	3	Castanic Male Starglow Costume
+256743	3	Castanic Male Starglow Costume
+256744	3	Castanic Male Starglow Costume
+256745	3	Castanic Male Starglow Costume
+256746	3	Castanic Male Starglow Costume
+256747	3	Castanic Male Starglow Costume
+256748	3	Castanic Female Blue Sky Costume
+256749	3	Castanic Female Blue Sky Costume
+256750	3	Castanic Female Blue Sky Costume
+256751	3	Castanic Female Blue Sky Costume
+256752	3	Castanic Female Blue Sky Costume
+256753	3	Castanic Female Blue Sky Costume
+256754	3	Castanic Female Blue Sky Costume
+256755	3	Castanic Female Blue Sky Costume
+256756	3	Castanic Female Blue Sky Costume
+256757	3	Castanic Female Blue Sky Costume
+256758	3	Castanic Female Blue Sky Costume
+256759	3	Castanic Female Blue Sky Costume
+256760	3	Castanic Female Starglow Costume
+256761	3	Castanic Female Starglow Costume
+256762	3	Castanic Female Starglow Costume
+256763	3	Castanic Female Starglow Costume
+256764	3	Castanic Female Starglow Costume
+256765	3	Castanic Female Starglow Costume
+256766	3	Castanic Female Starglow Costume
+256767	3	Castanic Female Starglow Costume
+256768	3	Castanic Female Starglow Costume
+256769	3	Castanic Female Starglow Costume
+256770	3	Castanic Female Starglow Costume
+256771	3	Castanic Female Starglow Costume
+256772	3	Popori Blue Sky Costume
+256773	3	Popori Blue Sky Costume
+256774	3	Popori Blue Sky Costume
+256775	3	Popori Blue Sky Costume
+256776	3	Popori Blue Sky Costume
+256777	3	Popori Blue Sky Costume
+256778	3	Popori Blue Sky Costume
+256779	3	Popori Blue Sky Costume
+256780	3	Popori Blue Sky Costume
+256781	3	Popori Blue Sky Costume
+256782	3	Popori Blue Sky Costume
+256783	3	Popori Blue Sky Costume
+256784	3	Popori Starglow Costume
+256785	3	Popori Starglow Costume
+256786	3	Popori Starglow Costume
+256787	3	Popori Starglow Costume
+256788	3	Popori Starglow Costume
+256789	3	Popori Starglow Costume
+256790	3	Popori Starglow Costume
+256791	3	Popori Starglow Costume
+256792	3	Popori Starglow Costume
+256793	3	Popori Starglow Costume
+256794	3	Popori Starglow Costume
+256795	3	Popori Starglow Costume
+256796	3	Elin Blue Sky Costume
+256797	3	Elin Blue Sky Costume
+256798	3	Elin Blue Sky Costume
+256799	3	Elin Blue Sky Costume
+256800	3	Elin Blue Sky Costume
+256801	3	Elin Blue Sky Costume
+256802	3	Elin Blue Sky Costume
+256803	3	Elin Blue Sky Costume
+256804	3	Elin Blue Sky Costume
+256805	3	Elin Blue Sky Costume
+256806	3	Elin Blue Sky Costume
+256807	3	Elin Blue Sky Costume
+256808	3	Elin Starglow Costume
+256809	3	Elin Starglow Costume
+256810	3	Elin Starglow Costume
+256811	3	Elin Starglow Costume
+256812	3	Elin Starglow Costume
+256813	3	Elin Starglow Costume
+256814	3	Elin Starglow Costume
+256815	3	Elin Starglow Costume
+256816	3	Elin Starglow Costume
+256817	3	Elin Starglow Costume
+256818	3	Elin Starglow Costume
+256819	3	Elin Starglow Costume
+256820	3	Baraka Blue Sky Costume
+256821	3	Baraka Blue Sky Costume
+256822	3	Baraka Blue Sky Costume
+256823	3	Baraka Blue Sky Costume
+256824	3	Baraka Blue Sky Costume
+256825	3	Baraka Blue Sky Costume
+256826	3	Baraka Blue Sky Costume
+256827	3	Baraka Blue Sky Costume
+256828	3	Baraka Blue Sky Costume
+256829	3	Baraka Blue Sky Costume
+256830	3	Baraka Blue Sky Costume
+256831	3	Baraka Blue Sky Costume
+256832	3	Baraka Starglow Costume
+256833	3	Baraka Starglow Costume
+256834	3	Baraka Starglow Costume
+256835	3	Baraka Starglow Costume
+256836	3	Baraka Starglow Costume
+256837	3	Baraka Starglow Costume
+256838	3	Baraka Starglow Costume
+256839	3	Baraka Starglow Costume
+256840	3	Baraka Starglow Costume
+256841	3	Baraka Starglow Costume
+256842	3	Baraka Starglow Costume
+256843	3	Baraka Starglow Costume
+256844	3	Blue Sky Visor
+256845	3	Blue Sky Visor
+256846	3	Blue Sky Visor
+256847	3	Blue Sky Visor
+256848	3	Blue Sky Visor
+256849	3	Blue Sky Visor
+256850	3	Blue Sky Visor
+256851	3	Blue Sky Visor
+256852	3	Blue Sky Visor
+256853	3	Blue Sky Visor
+256854	3	Blue Sky Visor
+256855	3	Blue Sky Visor
+256856	3	Bright Skies Visor
+256857	3	Bright Skies Visor
+256858	3	Bright Skies Visor
+256859	3	Bright Skies Visor
+256860	3	Bright Skies Visor
+256861	3	Bright Skies Visor
+256862	3	Bright Skies Visor
+256863	3	Bright Skies Visor
+256864	3	Bright Skies Visor
+256865	3	Bright Skies Visor
+256866	3	Bright Skies Visor
+256867	3	Bright Skies Visor
+256868	3	Clear Blue Sky Visor
+256869	3	Clear Blue Sky Visor
+256870	3	Clear Blue Sky Visor
+256871	3	Clear Blue Sky Visor
+256872	3	Clear Blue Sky Visor
+256873	3	Clear Blue Sky Visor
+256874	3	Clear Blue Sky Visor
+256875	3	Clear Blue Sky Visor
+256876	3	Clear Blue Sky Visor
+256877	3	Clear Blue Sky Visor
+256878	3	Clear Blue Sky Visor
+256879	3	Clear Blue Sky Visor
+256880	3	Rosy Outlook Visor
+256881	3	Rosy Outlook Visor
+256882	3	Rosy Outlook Visor
+256883	3	Rosy Outlook Visor
+256884	3	Rosy Outlook Visor
+256885	3	Rosy Outlook Visor
+256886	3	Rosy Outlook Visor
+256887	3	Rosy Outlook Visor
+256888	3	Rosy Outlook Visor
+256889	3	Rosy Outlook Visor
+256890	3	Rosy Outlook Visor
+256891	3	Rosy Outlook Visor
+256892	3	Sleepy Kitty Sleep Mask
+256893	3	Sleepy Kitty Sleep Mask
+256894	3	Sleepy Kitty Sleep Mask
+256895	3	Sleepy Kitty Sleep Mask
+256896	3	Sleepy Kitty Sleep Mask
+256897	3	Sleepy Kitty Sleep Mask
+256898	3	Sleepy Kitty Sleep Mask
+256899	3	Sleepy Kitty Sleep Mask
+256900	3	Sleepy Kitty Sleep Mask
+256901	3	Sleepy Kitty Sleep Mask
+256902	3	Sleepy Kitty Sleep Mask
+256903	3	Sleepy Kitty Sleep Mask
 256904	3	Baraka Embroidered Suit
 256905	3	Baraka Embroidered Suit
 256906	3	Baraka Embroidered Suit
@@ -30422,7 +31161,7 @@
 256980	3	High Elf Male Embroidered Suit
 256981	3	High Elf Male Embroidered Suit
 256982	3	High Elf Male Embroidered Suit
-256983	3	NHigh Elf Male Embroidered Suit
+256983	3	High Elf Male Embroidered Suit
 256984	3	High Elf Male Embroidered Suit
 256985	3	High Elf Male Embroidered Suit
 256986	3	High Elf Male Embroidered Suit
@@ -30607,6 +31346,30 @@
 257165	3	Elin Dyeable Chiffon Dress
 257166	3	Elin Dyeable Chiffon Dress
 257167	3	Elin Dyeable Chiffon Dress
+257168	3	Miner Hat
+257169	3	Miner Hat
+257170	3	Miner Hat
+257171	3	Miner Hat
+257172	3	Miner Hat
+257173	3	Miner Hat
+257174	3	Miner Hat
+257175	3	Miner Hat
+257176	3	Miner Hat
+257177	3	Miner Hat
+257178	3	Miner Hat
+257179	3	Miner Hat
+257180	3	Jiangshi Hat
+257181	3	Jiangshi Hat
+257182	3	Jiangshi Hat
+257183	3	Jiangshi Hat
+257184	3	Jiangshi Hat
+257185	3	Jiangshi Hat
+257186	3	Jiangshi Hat
+257187	3	Jiangshi Hat
+257188	3	Jiangshi Hat
+257189	3	Jiangshi Hat
+257190	3	Jiangshi Hat
+257191	3	Jiangshi Hat
 220353	3	T-cat 01
 220354	3	T-cat 02
 150001	3	Practicum Necklace
@@ -33249,6 +34012,68 @@
 155435	3	Scarlet Slaughterpike
 155436	2	Valkyrie Ensemble
 155437	2	Valkyrie Ensemble
+155442	1	Riding Skill: Noble Specter
+155443	1	Riding Skill: Noble Aether
+155444	1	Riding Skill: Noble Ghost
+155445	3	Golden Dragon Helmet
+155446	3	Silver Dragon Helmet
+155447	3	Winged Laurel
+155448	3	Golden Winged Visor
+155449	3	Silver Winged Visor
+155450	1	Riding Skill: Noble Specter (7 Days)
+155451	1	Riding Skill: Noble Aether (7 Days)
+155452	1	Riding Skill: Noble Ghost (7 Days)
+155453	3	Golden Dragon Helmet (7 Days)
+155454	3	Silver Dragon Helmet (7 Days)
+155455	3	Winged Laurel (7 Days)
+155456	3	Golden Winged Visor (7 Days)
+155457	3	Silver Winged Visor (7 Days)
+155458	2	Unique Fantastic Crystal [Tier 1]
+155459	2	Fantastic Crystal [Tier 1]
+155460	2	Fantastic Crystal [Tier 2]
+155461	2	Fantastic Crystal [Tier 3]
+155462	2	Fantastic Crystal [Tier 4]
+155463	2	Fantastic Crystal [Tier 5]
+155464	3	Fantastic Crystal [Tier 6]
+155465	3	Fantastic Crystal [Tier 7]
+155466	3	Fantastic Crystal [Tier 8]
+155467	1	Dream Shards
+155468	3	Crystal of Daydreams [1]
+155469	3	Crystal of Daydreams [2]
+155470	3	Crystal of Daydreams [3]
+155471	3	Crystal of Daydreams [4]
+155472	1	Sweet Candy
+155473	3	Sweet Dream Machine
+155474	3	+15 Enchantment Scroll [Tier 12]
+155475	3	+15 Weapon Enchantment Scroll [Tier 12]
+155476	3	+15 Body Armor Enchantment Scroll [Tier 12]
+155477	3	+15 Handwear Enchantment Scroll [Tier 12]
+155478	3	+15 Footwear Enchantment Scroll [Tier 12]
+155479	2	Dreamy Desires
+155480	2	Smart Box: Dyeable SWAT Team Uniform
+155481	3	Parthian Scarf
+155482	3	[Event] Gift of the Stars #1
+155483	3	[Event] Reward Box #2
+155484	3	[Event] Reward Box #3
+155485	3	[Event] Reward Box #4
+155486	3	[Event] Reward Box #5
+155487	3	[Event] Reward Box #6
+155488	2	[Event] Lasting Memory
+155489	2	[Event] Twinkle of a Star
+155490	2	[Event] Elemental Clue
+155491	2	[Event] Dark Secrets #1
+155492	3	[Event] Dark Secrets #2
+155493	2	Dragon Skill: Mighty Armored Dragon (4 days)
+155494	3	Club Reward Box
+155495	3	[Event] Gift of the Stars #2
+155496	3	[Event] Gift of the Stars #3
+155497	3	[Event] Gift of the Stars #4
+155498	3	[Event] Gift of the Stars #5
+155499	3	[Event] Gift of the Stars #6
+155500	3	[Fashion] Guile Mail
+155501	3	[Fashion] Guile Vest
+155502	3	[Fashion] Guile Robe
+155503	3	Club Membership Voucher (30-day)
 160001	0	Riding Skill: Sleipnir
 160002	0	Riding Skill: Sleipnir
 160003	1	Riding Skill: Tawny Huntress
@@ -45354,7 +46179,7 @@
 186725	0	Spacecats Super Token
 186726	0	Elite Status Token
 186727	0	Anniversary Token
-186728	0	Emergency Token 0613-10
+186728	0	Hit Parade Token
 186729	0	Chronoscroll 0628-1
 186730	0	Chronoscroll 0628-2
 186731	0	Chronoscroll 0628-3
@@ -45452,7 +46277,7 @@
 244526	2	Leopard Leotard Costume Box
 244527	2	Lady in Red Costume Box
 244528	2	Cat Suit Costume Box
-244529	2	Dummy Smart Box11
+244529	2	Blue Sky Costume Box
 244530	3	Ashfury Loot Box
 244531	3	Astrafury Loot Box
 244532	3	Ultrafury Loot Box
@@ -45462,7 +46287,7 @@
 244536	3	Maid's Bonnet Loot Box
 244537	3	Arctic Weapon Loot Box
 244538	3	Arctic Armor Loot Box
-244539	0	Dummy Gacha11
+244539	0	Starglow Costume Loot Box
 244540	2	Lifeguard Smart Box
 244541	2	Diver Dude Smart Box
 244542	2	Tan-Tastic Smart Box
@@ -45483,8 +46308,8 @@
 244557	0	Fortified Inner Armor Loot Box
 244558	0	Fitness Inner Armor Loot Box
 244559	0	Empowered Inner Armor Loot Box
-244560	2	Wedding Dress Costume box
-244561	2	Dyeable Wedding Dress Costume box
+244560	2	Wedding Costume Box
+244561	2	Dyeable Wedding Costume Box
 244562	2	Extensive Alkahest Box
 244563	2	Spellbind Box
 244564	2	Blessed Enigmatic Scroll Case
@@ -45497,11 +46322,11 @@
 244571	2	Elleon's Bravery Box
 244572	2	Dress for Success Loot Box
 244573	2	Dress to Impress Loot Box
-244574	2	Hero's Cape Box
+244574	2	Hero's Cape Loot Box
 244575	2	Rainy Day Loot Box
 244576	2	Avenging Angel Loot Box
 244577	2	Guardian Angel Loot Box
-244578	2	Technicolor Yawn Box
+244578	2	Technicolor Yawn Loot Box
 244579	2	Red Wolf Box
 244580	2	Blue Wolf Box
 244581	2	Purple Wolf Box
@@ -45514,10 +46339,10 @@
 244588	2	Steampunked Loot Box
 244589	2	Party Hearty Smart Box
 244590	2	Life of the Party Smart Box
-244591	2	Dummy Smart Box3
-244592	2	Dummy Smart Box4
-244593	2	Dummy Smart Box5
-244594	2	Dummy Smart Box6
+244591	2	Hit Parade Loot Box
+244592	2	Starglow Costume Box
+244593	2	Crystal Blue Weapon Skin Box
+244594	2	Starglow Weapon Skin Box
 244595	2	Dummy Smart Box7
 244596	2	Dummy Smart Box8
 244597	2	Dummy Smart Box9
@@ -45545,10 +46370,10 @@
 244619	3	Obsidian Airwolf Loot Box
 244620	3	Thunderbolt Airwolf Loot Box
 244621	3	Cherry Airwolf Loot Box
-244622	3	Party Down Loot Box
-244623	3	Dummy Gacha5
-244624	3	Dummy Gacha6
-244625	3	Dummy Gacha7
+244622	3	Party Down Loot Box (Hit Parade Edition)
+244623	3	Party Down Loot Box
+244624	3	Starglow Weapon Skin Loot Box
+244625	3	Sky Visor Loot Box
 244626	3	Dummy Gacha8
 244627	3	Dummy Gacha9
 244628	3	Dummy Gacha10
@@ -48089,6 +48914,18 @@
 246057	2	Smart Box: Festive Santa Costume
 246058	2	Smart Box: Snowsuit
 246059	2	Smart Box: Purple Spectral Weapon Skin
+246103	2	Smart Box: Swimwear Male A + Female A
+246104	2	Smart Box: Swimwear Male A + Female A (30 Days)
+246105	2	Smart Box: Swimwear Male A + Female A (7 Days)
+246106	2	Smart Box: Swimwear Male B + Female D
+246107	2	Smart Box: Swimwear Male B + Female D (30 Days)
+246108	2	Smart Box: Swimwear Male B + Female D (7 Days)
+246109	2	Smart Box: Swimwear Female B
+246110	2	Smart Box: Swimwear Female B (30 Days)
+246111	2	Smart Box: Swimwear Female B (7 Days)
+246112	2	Smart Box: Swimwear Female C
+246113	2	Smart Box: Swimwear Female C (30 Days)
+246114	2	Smart Box: Swimwear Female C (7 Days)
 100507	0	T
 100508	0	E
 100509	0	R
