@@ -31,9 +31,9 @@
         <SolidColorBrush x:Key="Colors.ClassWindow.AssaultStance" Color="#ff264b" />
         <SolidColorBrush x:Key="Colors.ClassWindow.SniperEye" Color="#38bde5" />
 
-        <SolidColorBrush x:Key="Colors.GroupWindow.Healer" Color="#7cffab" />
-        <SolidColorBrush x:Key="Colors.GroupWindow.Dps" Color="#ffaf72" />
-        <SolidColorBrush x:Key="Colors.GroupWindow.Tank" Color="#7aceff" />
+        <SolidColorBrush x:Key="Colors.GroupWindow.Healer" Color="#55D955" />
+        <SolidColorBrush x:Key="Colors.GroupWindow.Dps" Color="#FF6464" />
+        <SolidColorBrush x:Key="Colors.GroupWindow.Tank" Color="#567BBF" />
 
         <SolidColorBrush x:Key="Colors.BossWindow.Ignidrax" Color="#ff894a"/>
         <SolidColorBrush x:Key="Colors.BossWindow.Terradrax" Color="#ffcb76"/>
