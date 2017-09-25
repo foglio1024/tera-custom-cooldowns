@@ -214,7 +214,8 @@ namespace TCC.ViewModels
                     if (m.RawMessage == chatMessage.RawMessage &&
                         m.Author == chatMessage.Author &&
                         m.Channel != ChatChannel.Money &&
-                        m.Channel != ChatChannel.Loot) return;
+                        m.Channel != ChatChannel.Loot &&
+                        m.Channel != ChatChannel.Bargain) return;
                 }
             }
 
