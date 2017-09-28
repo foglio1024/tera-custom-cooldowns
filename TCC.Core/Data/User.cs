@@ -132,7 +132,7 @@ namespace TCC.Data
             }
         }
 
-        private int currentHP;
+        private int currentHP = 1;
         public int CurrentHP
         {
             get { return currentHP; }
@@ -145,7 +145,7 @@ namespace TCC.Data
             }
         }
 
-        private int maxHP;
+        private int maxHP = 1;
         public int MaxHP
         {
             get { return maxHP; }
@@ -158,7 +158,7 @@ namespace TCC.Data
             }
         }
 
-        private int currentMP;
+        private int currentMP = 1;
         public int CurrentMP
         {
             get { return currentMP; }
@@ -171,7 +171,7 @@ namespace TCC.Data
             }
         }
 
-        private int maxMP;
+        private int maxMP = 1;
         public int MaxMP
         {
             get { return maxMP; }
@@ -184,53 +184,56 @@ namespace TCC.Data
             }
         }
 
-        private double hpFactor;
-        public double HpFactor
-        {
-            get
-            {
-                if (maxHP > 0)
-                {
-                    hpFactor = (double)currentHP / (double)maxHP > 1 ? 1 : (double)currentHP / (double)maxHP;
-                    return hpFactor;
-                }
-                else
-                {
-                    hpFactor = 1;
-                    return hpFactor;
-                }
-            }
-            set
-            {
-                if (hpFactor == value) return;
-                hpFactor = value;
-                NotifyPropertyChanged("HpFactor");
-            }
-        }
+        public double HpFactor => MaxHP > 0 ? CurrentHP / (double)MaxHP : 1;
+        public double MpFactor => MaxMP > 0 ? CurrentMP / (double)MaxMP : 1;
 
-        private double mpFactor;
-        public double MpFactor
-        {
-            get
-            {
-                if (maxMP > 0)
-                {
-                    mpFactor = (double)currentMP / (double)maxMP > 1 ? 1 : (double)currentMP / (double)maxMP;
-                    return mpFactor;
-                }
-                else
-                {
-                    mpFactor = 1;
-                    return mpFactor;
-                }
-            }
-            set
-            {
-                if (mpFactor == value) return;
-                mpFactor = value;
-                NotifyPropertyChanged("MpFactor");
-            }
-        }
+        //private double hpFactor;
+        //public double HpFactor
+        //{
+        //    get
+        //    {
+        //        if (maxHP > 0)
+        //        {
+        //            hpFactor = (double)currentHP / (double)maxHP > 1 ? 1 : (double)currentHP / (double)maxHP;
+        //            return hpFactor;
+        //        }
+        //        else
+        //        {
+        //            hpFactor = 1;
+        //            return hpFactor;
+        //        }
+        //    }
+        //    set
+        //    {
+        //        if (hpFactor == value) return;
+        //        hpFactor = value;
+        //        NotifyPropertyChanged("HpFactor");
+        //    }
+        //}
+
+        //private double mpFactor;
+        //public double MpFactor
+        //{
+        //    get
+        //    {
+        //        if (maxMP > 0)
+        //        {
+        //            mpFactor = (double)currentMP / (double)maxMP > 1 ? 1 : (double)currentMP / (double)maxMP;
+        //            return mpFactor;
+        //        }
+        //        else
+        //        {
+        //            mpFactor = 1;
+        //            return mpFactor;
+        //        }
+        //    }
+        //    set
+        //    {
+        //        if (mpFactor == value) return;
+        //        mpFactor = value;
+        //        NotifyPropertyChanged("MpFactor");
+        //    }
+        //}
 
         private ReadyStatus ready = ReadyStatus.None;
         public ReadyStatus Ready
@@ -353,24 +356,21 @@ namespace TCC.Data
             if (SettingsManager.IgnoreRaidAbnormalitiesInGroupWindow) return;
             if (SettingsManager.IgnoreAllBuffsInGroupWindow && ab.Type == AbnormalityType.Buff) return;
 
-
-            switch (SessionManager.CurrentPlayer.Class)
+            if (!SettingsManager.GroupAbnormals[Class.Common].Contains(ab.Id))
             {
-                case Class.Priest:
-                    if (FilterPriest(ab)) return;
-                    break;
-                case Class.Elementalist:
-                    if (FilterMystic(ab)) return;
-                    break;
-                default:
-                    return;
+                if (SettingsManager.GroupAbnormals.ContainsKey(SessionManager.CurrentPlayer.Class))
+                {
+                    if (!SettingsManager.GroupAbnormals[SessionManager.CurrentPlayer.Class].Contains(ab.Id)) return;
+                }
+                else return;
             }
+
             var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
 
                 var newAb = new AbnormalityDuration(ab, duration, stacks, this.EntityId, _dispatcher, false, size * .9, size, new Thickness(margin, 1, 1, 1));
-                Buffs.Add(newAb);
+                if(ab.Infinity) Buffs.Insert(0, newAb); else Buffs.Add(newAb);
                 return;
             }
             existing.Duration = duration;
