@@ -6,10 +6,10 @@
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:converters="clr-namespace:TCC.Converters"
              xmlns:vm="clr-namespace:TCC.ViewModels"
+             xmlns:data="clr-namespace:TCC.Data"
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded"
-             Unloaded="UserControl_Unloaded"  
-             >
+             d:DataContext="{d:DesignInstance data:User}">
     <Grid Height="Auto" Margin="2" Width="108" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -21,9 +21,9 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid.CacheMode>
+        <!--<Grid.CacheMode>
             <BitmapCache RenderAtScale="1"/>
-        </Grid.CacheMode>
+        </Grid.CacheMode>-->
         <Grid.Style>
             <Style>
                 <Style.Triggers>
@@ -53,54 +53,70 @@
         <!--Abnormalities grids-->
         <ItemsControl Name="buffs" HorizontalAlignment="Left"
                       ItemsSource="{Binding Buffs}" Grid.Row="1" Grid.ColumnSpan="2" 
-                      ItemTemplate="{StaticResource abnorm}" Margin="0,-2,0,0" ClipToBounds="False">
+                      ItemTemplate="{StaticResource abnorm}" Margin="0,-2,0,0" ClipToBounds="False" >
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal" Height="Auto"
                                HorizontalAlignment="Left"
-                               Width="94"/>
+                               Width="Auto" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.RenderTransform>
-                <TranslateTransform X="12"></TranslateTransform>
+                <TranslateTransform X="10"></TranslateTransform>
             </ItemsControl.RenderTransform>
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Value="1,3,0,-3" Property="ContentControl.Margin"></Setter>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
         </ItemsControl>
         <ItemsControl Name="debuffs" ItemsSource="{Binding Debuffs}" Grid.Row="2" Grid.ColumnSpan="2" 
-                      ItemTemplate="{StaticResource abnorm}" Margin="0,-2,0,0" ClipToBounds="False">
+                      ItemTemplate="{StaticResource abnorm}" Margin="0,-6,0,0" ClipToBounds="False">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal"
                                HorizontalAlignment="Left"
-                               Width="94"/>
+                               Width="Auto"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.RenderTransform>
-                <TranslateTransform X="12"></TranslateTransform>
+                <TranslateTransform X="10"></TranslateTransform>
             </ItemsControl.RenderTransform>
-
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Value="1,3,0,-3" Property="ContentControl.Margin"></Setter>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
         </ItemsControl>
 
         <!--Main Styles.DefaultBorder-->
-        <Border Style="{StaticResource Styles.DefaultBorder}" Grid.ColumnSpan="3" Margin="2,0"/>
+        <Border Style="{StaticResource Styles.DefaultBorder}" Grid.ColumnSpan="3" Margin="2,0,0,0" Background="#70101017" BorderBrush="#70202026"/>
         <!--Class rectangle-->
-        <Rectangle Width="3" Height="Auto" Margin="-1,1,3,1" 
+        <Border Width="6" Height="6" Margin="0" 
                    HorizontalAlignment="Right" Grid.Column="2" 
                    Grid.RowSpan="1" Opacity=".8"
-                   VerticalAlignment="Stretch"
-                   Fill="{Binding UserClass, Converter={StaticResource Converters.ClassToFill}}"
+                   VerticalAlignment="Top" CornerRadius="0,0,0,6"
+                   Background="{Binding UserClass, Converter={StaticResource Converters.ClassToFill}}"
                    />
 
-        <Border Grid.ColumnSpan="3" Margin="2,0" BorderBrush="Orange" BorderThickness="0,0,4,0"
-                                         Visibility="{Binding HasAggro, Converter={StaticResource Converters.BoolToVisibleHidden}}"   
-
-                >
+        <!--Aggro border-->
+        <Border Grid.ColumnSpan="3" Margin="0" Background="Orange" Height="13" CornerRadius="0,0,0,6" VerticalAlignment="Top" HorizontalAlignment="Right" Width="6"
+                Visibility="{Binding HasAggro, Converter={StaticResource Converters.BoolToVisibleHidden}}" >
             <Border.Effect>
                 <DropShadowEffect Color="Orange" ShadowDepth="0" BlurRadius="5" RenderingBias="Performance"/>
             </Border.Effect>
         </Border>
-        <Border  Grid.ColumnSpan="3" Margin="2,0" />
+
+        <!--Death red border-->
+        <Border Name="deathBorder" Opacity="{Binding Alive, Converter={StaticResource Converters.BoolToOpacityInverse}}" 
+                Background="Red"  Grid.ColumnSpan="3" Margin="0" Width="6" Height="13" CornerRadius="0,0,0,6" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <Border.Effect>
+                <DropShadowEffect Color="Red" ShadowDepth="0" BlurRadius="5" RenderingBias="Performance"></DropShadowEffect>
+            </Border.Effect>
+        </Border>
+
         <!--Image grid-->
-        <Grid Margin="0,-2,0,0" 
+        <Grid Margin="0,-22,0,-20" 
               Width="32" 
               Height="32">
             <Image Source="{Binding UserClass, Converter={StaticResource Converters.ClassToImage}}" 
@@ -122,11 +138,10 @@
         </Grid>
 
         <!--Info grid-->
-        <Grid Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,0,5,3">
+        <Grid Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0">
             <Grid.RowDefinitions>
-                <RowDefinition/>
                 <RowDefinition />
-                <RowDefinition />
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -138,57 +153,51 @@
                         Cursor="Hand"
                        VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,1" 
                        FontSize="11" Grid.Row="0" Grid.Column="0">
-                <Run Text="{Binding Level, StringFormat={}L{0}}" FontSize="10" Foreground="#6fff"/>
+                <Run Text="{Binding Level}" FontSize="10" Foreground="#6fff"/>
                 <Run Text="{Binding Name}" />
             </TextBlock>
-            <!--Leader icon-->
-            <Grid Grid.Column="1" Margin="1,-1,0,0" Width="11" Height="11">
-                <Ellipse Fill="Orange"/>
-                <Image Source="/TCC;component/resources/images/crown.png" Margin="2"
-                       UseLayoutRounding="False" RenderOptions.BitmapScalingMode="Fant" />
-                <Grid.LayoutTransform>
-                    <ScaleTransform ScaleX="{Binding IsLeader, Converter={StaticResource Converters.BoolToOpacity}}"/>
-                </Grid.LayoutTransform>
-            </Grid>
             
+            <!--MP-->
+            <Grid Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Right" Name="mpGrid" >
+                <Rectangle Fill="#90000000" Height="2" Width="50" HorizontalAlignment="Left"/>
+                <Rectangle Fill="#66c6ff" Height="2" Width="50" HorizontalAlignment="Left">
+                    <Rectangle.LayoutTransform>
+                        <ScaleTransform ScaleX="{Binding MpFactor}"/>
+                    </Rectangle.LayoutTransform>
+
+                </Rectangle>
+                    <Grid.RenderTransform>
+                        <TranslateTransform Y="3"></TranslateTransform>
+                    </Grid.RenderTransform>
+            </Grid>
             <!--HP-->
-            <Grid  Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" Name="hpGrid">
-                <Rectangle Fill="#90000000" Height="4" Width="70" Margin="0,1" HorizontalAlignment="Left"/>
-                <Rectangle Fill="{Binding IsDebuffed, Converter={StaticResource Converters.DebuffStatusToHpColor}}" Height="4" Width="70" Margin="0,1" HorizontalAlignment="Left">
+            <Grid  Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" Name="hpGrid" Margin="0,0,0,-1">
+                <Rectangle Fill="#90000000" Height="4" Width="76" Margin="0,1" HorizontalAlignment="Left"/>
+                <Rectangle Fill="{Binding IsDebuffed, Converter={StaticResource Converters.DebuffStatusToHpColor}}" Height="4" Width="76" Margin="0,1" HorizontalAlignment="Left">
                     <Rectangle.LayoutTransform>
                         <ScaleTransform ScaleX="{Binding HpFactor}"/>
                     </Rectangle.LayoutTransform>
                 </Rectangle>
-                <Path Fill="#222" Data="M0,0 2,0 1,1 0,0" 
+                <Path Fill="#223" Data="M0,0 2,0 1,1 0,0" 
                   Stretch="Uniform" 
                   Height="3" Margin="2,-1,0,0" 
                   HorizontalAlignment="Center"/>
             </Grid>
-            <!--MP-->
-            <Grid Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Left" Name="mpGrid" >
-                <Rectangle Fill="#90000000" Height="2" Width="70" HorizontalAlignment="Left"/>
-                <Rectangle Fill="#66c6ff" Height="2" Width="70" HorizontalAlignment="Left">
-                    <Rectangle.LayoutTransform>
-                        <ScaleTransform ScaleX="{Binding MpFactor}"/>
-                    </Rectangle.LayoutTransform>
-                </Rectangle>
-            </Grid>
         </Grid>
+        
+        <!--Leader icon-->
+        <Grid Grid.Column="0" Margin="-1,-1,0,0" Width="11" Height="11" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Ellipse Fill="Orange"/>
+            <Image Source="/TCC;component/resources/images/crown.png" Margin="2"
+                   UseLayoutRounding="False" RenderOptions.BitmapScalingMode="Fant" />
+            <Grid.LayoutTransform>
+                <ScaleTransform ScaleX="{Binding IsLeader, Converter={StaticResource Converters.BoolToOpacity}}"/>
+            </Grid.LayoutTransform>
+            <Grid.Effect>
+                <DropShadowEffect ShadowDepth="2" Opacity=".7"></DropShadowEffect>
+            </Grid.Effect>
 
-        <!--Death red border-->
-        <Border Name="aggroBorder" Visibility="{Binding HasAggro, Converter={StaticResource Converters.BoolToVisibleHidden}}"
-                BorderBrush="Orange" BorderThickness="0,0,4,0" Grid.ColumnSpan="3" Margin="-2,0,2,0">
-            <Border.Effect>
-                <DropShadowEffect Color="Orange" ShadowDepth="0" BlurRadius="5" RenderingBias="Performance"></DropShadowEffect>
-            </Border.Effect>
-        </Border>
-        <!--Death red border-->
-        <Border Name="deathBorder" Opacity="{Binding Alive, Converter={StaticResource Converters.BoolToOpacityInverse}}" 
-                BorderBrush="Red" BorderThickness="0,0,4,0" Grid.ColumnSpan="3" Margin="-2,0,2,0">
-            <Border.Effect>
-                <DropShadowEffect Color="Red" ShadowDepth="0" BlurRadius="5" RenderingBias="Performance"></DropShadowEffect>
-            </Border.Effect>
-        </Border>
+        </Grid>
 
         <!--Ready check grid-->
         <Grid Margin="-3,-3" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2" Opacity="{Binding Ready, Converter={StaticResource readyToOpacityConv}}">
