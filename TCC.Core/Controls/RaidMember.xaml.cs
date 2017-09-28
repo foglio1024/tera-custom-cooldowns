@@ -38,10 +38,6 @@ namespace TCC.Controls
                 SetHP();
             }
         }
-        private void UserControl_Unloaded(object sender, RoutedEventArgs e)
-        {
-        }
-
         public void AnimateIn()
         {
             var an = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(500));
