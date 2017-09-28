@@ -39,6 +39,7 @@ namespace TCC.Controls
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            if(DesignerProperties.GetIsInDesignMode(this))return;
             _context = (AbnormalityDuration)DataContext;
             _context.PropertyChanged += buff_PropertyChanged;
             RenderTransform = new ScaleTransform(1, 1, .5, .5);
