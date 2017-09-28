@@ -24,7 +24,6 @@ namespace TCC
         private static bool isTccVisible;
         private static bool isFocused;
         private static bool skillsEnded = true;
-        private static bool debug = false;
         private static int focusCount;
         private static bool waiting;
         private static Timer _undimTimer;
