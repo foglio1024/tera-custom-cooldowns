@@ -28,6 +28,8 @@ namespace TCC.Windows
             var a = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200));
             a.Completed += (s, ev) => Hide();
             this.BeginAnimation(OpacityProperty, a);
+            WindowManager.IsTccVisible = true;
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
