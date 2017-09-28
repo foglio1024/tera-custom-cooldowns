@@ -94,7 +94,7 @@
         </ItemsControl>
 
         <!--Main Styles.DefaultBorder-->
-        <Border Style="{StaticResource Styles.DefaultBorder}" Grid.ColumnSpan="3" Margin="2,0,0,0" Height="Auto" Opacity=".6"/>
+        <Border Style="{StaticResource Styles.DefaultBorder}" Grid.ColumnSpan="3" Margin="2,0,0,0" Height="Auto" Background="#70101017" BorderBrush="#70202026"/>
         <Border Width="6" Height="6"  Margin="0,0,0,0" 
                    HorizontalAlignment="Right"  VerticalAlignment="Top"
                 Grid.Column="2" CornerRadius="0,0,0,6"
