@@ -849,8 +849,8 @@ namespace TCC.ViewModels
                 u.MaxHP = p.MaxHP;
                 u.MaxMP = p.MaxMP;
                 u.Level = (uint)p.Level;
-                if (u.Alive != p.Alive) NotifyPropertyChanged(nameof(AliveMembersCount));
                 u.Alive = p.Alive;
+                NotifyPropertyChanged(nameof(AliveMembersCount));
                 if (!p.Alive) u.HasAggro = false;
             }
 
