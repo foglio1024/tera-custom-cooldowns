@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Xml.Linq;
 using TCC.Data;
@@ -46,6 +47,7 @@ namespace TCC
         }
 
     }
+
     public static class SettingsManager
     {
         static Rectangle _screen = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
@@ -176,6 +178,7 @@ namespace TCC
         public static List<ChatChannelOnOff> EnabledChatChannels { get; set; } = Utils.GetEnabledChannelsList();
         public static string WebhookMessage { get; set; } = "@here Guild BAM will spawn soon!";
         public static int FontSize { get; set; } = 15;
+        public static Dictionary<Class, List<uint>> GroupAbnormals = new Dictionary<Class, List<uint>>();
 
         public static void LoadWindowSettings()
         {
@@ -229,88 +232,88 @@ namespace TCC
                 {
                     IgnoreMeInGroupWindow = Boolean.Parse(b.Attribute("IgnoreMeInGroupWindow").Value);
                 }
-                catch (Exception) { }
+                catch { }
                 try
                 {
                     IgnoreMyBuffsInGroupWindow = Boolean.Parse(b.Attribute("IgnoreMyBuffsInGroupWindow").Value);
                 }
-                catch (Exception) { }
+                catch { }
                 try
                 {
                     IgnoreGroupBuffs = Boolean.Parse(b.Attribute("IgnoreGroupBuffs").Value);
                 }
-                catch (Exception) { }
+                catch { }
                 try
                 {
                     IgnoreAllBuffsInGroupWindow = Boolean.Parse(b.Attribute("IgnoreAllBuffsInGroupWindow").Value);
                 }
-                catch (Exception) { }
+                catch { }
                 try
                 {
                     IgnoreRaidAbnormalitiesInGroupWindow = Boolean.Parse(b.Attribute("IgnoreRaidAbnormalitiesInGroupWindow").Value);
                 }
-                catch (Exception) { }
+                catch { }
                 try
                 {
                     BuffsDirection = (FlowDirection)Enum.Parse(typeof(FlowDirection), b.Attribute("BuffsDirection").Value);
                 }
-                catch (Exception) { }
+                catch { }
                 try
                 {
                     ClassWindowOn = Boolean.Parse(b.Attribute("ClassWindowOn").Value);
                 }
-                catch (Exception) { }
+                catch { }
                 try
                 {
                     ClickThruWhenDim = Boolean.Parse(b.Attribute("ClickThruWhenDim").Value);
                 }
-                catch (Exception) { }
+                catch { }
                 try
                 {
                     MaxMessages = Int32.Parse(b.Attribute(nameof(MaxMessages)).Value);
                 }
-                catch (Exception) { }
+                catch { }
                 try
                 {
                     SpamThreshold = Int32.Parse(b.Attribute(nameof(SpamThreshold)).Value);
                 }
-                catch (Exception) { }
+                catch { }
                 try
                 {
                     FontSize = Int32.Parse(b.Attribute(nameof(FontSize)).Value);
                 }
-                catch (Exception) { }
+                catch { }
 
                 try
                 {
                     ShowChannel = Boolean.Parse(b.Attribute(nameof(ShowChannel)).Value);
                 }
-                catch (Exception) { }
+                catch { }
                 try
                 {
                     ShowTimestamp = Boolean.Parse(b.Attribute(nameof(ShowTimestamp)).Value);
                 }
-                catch (Exception) { }
+                catch { }
                 try
                 {
                     ShowOnlyBosses = Boolean.Parse(b.Attribute(nameof(ShowOnlyBosses)).Value);
                 }
-                catch (Exception) { }
+                catch { }
                 try
                 {
                     DisablePartyMP = Boolean.Parse(b.Attribute(nameof(DisablePartyMP)).Value);
                 }
-                catch (Exception) { }
+                catch { }
                 try
                 {
                     DisablePartyHP = Boolean.Parse(b.Attribute(nameof(DisablePartyHP)).Value);
                 }
-                catch (Exception) { }
+                catch { }
                 try
                 {
                     ShowOnlyAggroStacks = Boolean.Parse(b.Attribute(nameof(ShowOnlyAggroStacks)).Value);
                 }
-                catch (Exception) { }
+                catch { }
                 try
                 {
                     DisablePartyAbnormals = Boolean.Parse(b.Attribute(nameof(DisablePartyAbnormals)).Value);
@@ -353,8 +356,24 @@ namespace TCC
                     ParseChannelsSettings(SettingsDoc.Descendants().FirstOrDefault(x => x.Name == nameof(EnabledChatChannels)));
                 }
                 catch (Exception) { }
+
+                try
+                {
+                    ParseGroupAbnormalSettings(SettingsDoc.Descendants()
+                        .FirstOrDefault(x => x.Name == nameof(GroupAbnormals)));
+                }
+                catch
+                {
+                    GroupAbnormals = new Dictionary<Class, List<uint>>
+                    {
+                        { Class.Common, new List<uint>{ 4000,4001,4010,4011,4020,4021,4030,4031,4600,4610,4611,4613,5000003, 4830, 4831, 4833, 4841, 4886, 4861, 4953, 4955, 7777015,910,911,912,913,916,920,921,922, 999010000 } },
+                        { Class.Priest, new List<uint>{ 201,202,805100,805101,805102,98000109,805600,805601,805602,805603,805604,98000110,800300,800301,800302,800303,800304,801500,801501,801502,801503,98000107} },
+                        { Class.Elementalist, new List<uint>{ 27120,700630,700631, 601,602,603, 700330, 700230,700231,800132,700233,700730,700731, 700100 } }
+                    };
+                }
             }
         }
+
 
         public static List<Tab> ParseTabsSettings()
         {
@@ -422,31 +441,11 @@ namespace TCC
                 new XAttribute(nameof(WebhookMessage), WebhookMessage)
                 //add setting here
                 ),
-                BuildChannelsXElement(EnabledChatChannels),
-                BuildChatTabsXElement()
+                BuildChannelsXElement(),
+                BuildChatTabsXElement(),
+                BuildGroupAbnormalsXElement()
             );
             xSettings.Save(Environment.CurrentDirectory + @"/tcc-config.xml");
-        }
-
-        private static XElement BuildChatTabsXElement()
-        {
-            XElement result = new XElement("ChatTabsSettings");
-            foreach (var tab in ChatWindowViewModel.Instance.Tabs)
-            {
-                XAttribute tabName = new XAttribute("name", tab.TabName);
-                XElement tabElement = new XElement("Tab", tabName);
-                foreach (var ch in tab.Channels)
-                {
-                    tabElement.Add(new XElement("Channel", new XAttribute("value", ch)));
-                }
-                foreach (var ch in tab.Authors)
-                {
-                    tabElement.Add(new XElement("Author", new XAttribute("value", ch)));
-                }
-                result.Add(tabElement);
-
-            }
-            return result;
         }
 
         private static void ParseWindowSettings(WindowSettings w, XElement ws)
@@ -522,15 +521,66 @@ namespace TCC
                 EnabledChatChannels.FirstOrDefault(x => x.Channel == (ChatChannel)Enum.Parse(typeof(ChatChannel), e.Attribute("name").Value)).Enabled = Boolean.Parse(e.Attribute("enabled").Value);
             }
         }
-        private static XElement BuildChannelsXElement(List<ChatChannelOnOff> l)
+        private static void ParseGroupAbnormalSettings(XElement el)
+        {
+            GroupAbnormals = new Dictionary<Class, List<uint>>();
+            foreach (var abEl in el.Descendants().Where(x => x.Name == "Abnormals"))
+            {
+                var c = abEl.Attribute("class").Value;
+                var cl = (Class)Enum.Parse(typeof(Class), c);
+                var abs = abEl.Value.Split(',');
+                var l = abs.Select(uint.Parse).ToList();
+                GroupAbnormals.Add(cl, l);
+            }
+        }
+
+        private static XElement BuildChatTabsXElement()
+        {
+            XElement result = new XElement("ChatTabsSettings");
+            foreach (var tab in ChatWindowViewModel.Instance.Tabs)
+            {
+                XAttribute tabName = new XAttribute("name", tab.TabName);
+                XElement tabElement = new XElement("Tab", tabName);
+                foreach (var ch in tab.Channels)
+                {
+                    tabElement.Add(new XElement("Channel", new XAttribute("value", ch)));
+                }
+                foreach (var ch in tab.Authors)
+                {
+                    tabElement.Add(new XElement("Author", new XAttribute("value", ch)));
+                }
+                result.Add(tabElement);
+
+            }
+            return result;
+        }
+        private static XElement BuildChannelsXElement()
         {
             XElement result = new XElement(nameof(EnabledChatChannels));
-            foreach (var c in l)
+            foreach (var c in EnabledChatChannels)
             {
                 XAttribute name = new XAttribute("name", c.Channel.ToString());
                 XAttribute val = new XAttribute("enabled", c.Enabled.ToString());
                 XElement chElement = new XElement("Channel", name, val);
                 result.Add(chElement);
+            }
+            return result;
+        }
+        private static XElement BuildGroupAbnormalsXElement()
+        {
+            var result = new XElement(nameof(GroupAbnormals));
+            foreach (KeyValuePair<Class, List<uint>> pair in GroupAbnormals)
+            {
+                var c = pair.Key;
+                var sb = new StringBuilder();
+                foreach (var u in pair.Value)
+                {
+                    sb.Append(u);
+                    if (pair.Value.Count != pair.Value.IndexOf(u) + 1) sb.Append(',');
+                }
+                var cl = new XAttribute("class", c);
+                var xel = new XElement("Abnormals", cl, sb.ToString());
+                result.Add(xel);
             }
             return result;
         }
