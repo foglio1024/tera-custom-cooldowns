@@ -94,7 +94,7 @@
 
             <Border Grid.Row="1" Width="Auto" Height="Auto" Style="{StaticResource Styles.DefaultBorder}" 
                     CornerRadius="8,8,8,8" VerticalAlignment="Center" Opacity="1">
-                <Grid Margin="35,5,5,5" x:Name="BarsMainGrid" Width="350" >
+                <Grid Margin="35,2,1,1" x:Name="BarsMainGrid" Width="350" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -212,7 +212,13 @@
 
                 <Grid >
                     <controls:Arc StrokeThickness="3" Stroke="Crimson" Margin="-8" EndAngle="359.9" Visibility="{Binding Instance.Player.IsInCombat, Converter={StaticResource Converters.BoolToVisibleHidden}}"></controls:Arc>
-                    <Rectangle Name="classIcon" Fill="White" Width="Auto" Height="Auto" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Image Name="laurelIcon" Source="{Binding Instance.Player.Laurel, Converter={StaticResource Converters.LaurelToImage}}" Width="Auto" Height="Auto"
+                           Margin="-6,-12,-6,-6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="Uniform">
+                        <Image.Effect>
+                            <DropShadowEffect Color="Black" BlurRadius="7" ShadowDepth="0" Opacity=".6"/>
+                        </Image.Effect>
+                    </Image>
+                    <Rectangle Name="classIcon" Fill="White" Stretch="Uniform" Width="Auto" Height="Auto" Margin="2,3,2,-4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <Rectangle.OpacityMask>
                             <ImageBrush ImageSource="{Binding Instance.Player.Class, Converter={StaticResource Converters.ClassToImage}}"/>
                         </Rectangle.OpacityMask>
