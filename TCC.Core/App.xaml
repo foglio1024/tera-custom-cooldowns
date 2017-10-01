@@ -19,6 +19,8 @@
         <SolidColorBrush x:Key="Colors.App.LightGreen" Color="#5f7"/>
 
         <SolidColorBrush x:Key="Colors.App.DefaultBackground" Color="#101017" Opacity="1"/>
+        <SolidColorBrush x:Key="Colors.App.FadedBorderBrush" Color="#aa303035" Opacity="1"/>
+        <SolidColorBrush x:Key="Colors.App.FadedBackground" Color="#a0101017" Opacity="1"/>
         <SolidColorBrush x:Key="Colors.App.HP" Color="#ff5555"/>
         <SolidColorBrush x:Key="Colors.App.MP" Color="#4499ff"/>
         <SolidColorBrush x:Key="Colors.App.HP.Debuff" Color="#b74be5"/>
@@ -31,9 +33,9 @@
         <SolidColorBrush x:Key="Colors.ClassWindow.AssaultStance" Color="#ff264b" />
         <SolidColorBrush x:Key="Colors.ClassWindow.SniperEye" Color="#38bde5" />
 
-        <SolidColorBrush x:Key="Colors.GroupWindow.Healer" Color="#55D955" />
-        <SolidColorBrush x:Key="Colors.GroupWindow.Dps" Color="#FF6464" />
-        <SolidColorBrush x:Key="Colors.GroupWindow.Tank" Color="#567BBF" />
+        <SolidColorBrush x:Key="Colors.GroupWindow.Healer" Color="#3bdb83" />
+        <SolidColorBrush x:Key="Colors.GroupWindow.Dps" Color="#ff894a" />
+        <SolidColorBrush x:Key="Colors.GroupWindow.Tank" Color="#32b3e2" />
 
         <SolidColorBrush x:Key="Colors.BossWindow.Ignidrax" Color="#ff894a"/>
         <SolidColorBrush x:Key="Colors.BossWindow.Terradrax" Color="#ffcb76"/>
@@ -42,8 +44,8 @@
 
         <SolidColorBrush x:Key="Colors.App.VanguardBorder" Color="#69975200"/>
 
-        <SolidColorBrush x:Key="Colors.DungeonTier.Solo" Color="#cee5ff"/>
-        <SolidColorBrush x:Key="Colors.DungeonTier.2" Color="#a5fc6f"/>
+        <SolidColorBrush x:Key="Colors.DungeonTier.Solo" Color="#88d9f7"/>
+        <SolidColorBrush x:Key="Colors.DungeonTier.2" Color="#3bdb83"/>
         <SolidColorBrush x:Key="Colors.DungeonTier.3" Color="#fcb06f"/>
         <SolidColorBrush x:Key="Colors.DungeonTier.4" Color="#fc946f"/>
         <SolidColorBrush x:Key="Colors.DungeonTier.5" Color="#fc6f6f"/>
@@ -137,7 +139,7 @@
         <!--Converters-->
         <converters:BoolToOpacityConverter x:Key="Converters.BoolToOpacity"/>
         <converters:BoolToOpacityInverseConverter x:Key="Converters.BoolToOpacityInverse"/>
-        <converters:BoolToVisibilityConverter x:Key="Converters.BoolToVisibleCollapsed" />
+        <converters:BoolToVisibleCollapsedConverter x:Key="Converters.BoolToVisibleCollapsed" />
         <converters:BoolToVisibleHidden x:Key="Converters.BoolToVisibleHidden" />
         <converters:RollToStringConverter x:Key="Converters.RollToString"/>
         <converters:WinningToColorConverter x:Key="Converters.WinningToColor"/>
@@ -177,10 +179,15 @@
         <converters:ReadyToColorConverter x:Key="Converters.ReadyToColor"/>
         <converters:GroupSizeToTemplateConverter x:Key="Converters.GroupSizeToTemplate"/>
 
-        <DataTemplate x:Key="abnorm">
-            <controls:AbnormalityIndicator/>
+        <DataTemplate x:Key="PartyAbnormality">
+            <controls:AbnormalityIndicator Size="28"/>
         </DataTemplate>
-
+        <DataTemplate x:Key="RaidAbnormality">
+            <controls:AbnormalityIndicator Size="24"/>
+        </DataTemplate>
+        <DataTemplate x:Key="BossAbnormality">
+            <controls:AbnormalityIndicator Size="30"/>
+        </DataTemplate>
         <converters:LocationToMapConverter x:Key="Converters.LocationToMap"/>
         <converters:LocationToMarkerPositionConverter x:Key="Converters.LocationToMarkerPosition"/>
         <converters:LocationToStretchConverter x:Key="Converters.LocationToStretch"/>
