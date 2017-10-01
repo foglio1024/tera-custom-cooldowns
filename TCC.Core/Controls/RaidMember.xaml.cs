@@ -23,6 +23,8 @@ namespace TCC.Controls
             dc = (User)DataContext;
             SetMP();
             SetHP();
+            SetBuffs();
+            SetDebuffs();
 
             AnimateIn();
             GroupWindowViewModel.Instance.PropertyChanged += Instance_PropertyChanged;
@@ -33,11 +35,57 @@ namespace TCC.Controls
             {
                 SetMP();
             }
-            else if(e.PropertyName == nameof(GroupWindowViewModel.Instance.HPenabled))
+            else if (e.PropertyName == nameof(GroupWindowViewModel.Instance.HPenabled))
             {
                 SetHP();
             }
+            else if (e.PropertyName == nameof(GroupWindowViewModel.Instance.BuffsEnabled))
+            {
+                SetBuffs();
+            }
+            else if (e.PropertyName == nameof(GroupWindowViewModel.Instance.DebuffsEnabled))
+            {
+                SetDebuffs();
+            }
         }
+        private void SetBuffs()
+        {
+            try
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    buffs.ItemsSource = SettingsManager.IgnoreGroupBuffs ? null : dc.Buffs;
+                    BuffGrid.Visibility = SettingsManager.IgnoreGroupBuffs
+                        ? Visibility.Collapsed
+                        : Visibility.Visible;
+
+                });
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+        private void SetDebuffs()
+        {
+            try
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    debuffs.ItemsSource = SettingsManager.IgnoreGroupDebuffs ? null : dc.Debuffs;
+                    DebuffGrid.Visibility = SettingsManager.IgnoreGroupDebuffs
+                        ? Visibility.Collapsed
+                        : Visibility.Visible;
+                });
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
         public void AnimateIn()
         {
             var an = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(500));

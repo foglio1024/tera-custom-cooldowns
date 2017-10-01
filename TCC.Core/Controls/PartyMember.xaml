@@ -25,7 +25,7 @@
         <!--<Grid.CacheMode>
             <BitmapCache RenderAtScale="3"/>
         </Grid.CacheMode>-->
-        <Grid.Style>
+        <!--<Grid.Style>
             <Style>
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding Online}" Value="False">
@@ -51,103 +51,125 @@
 
                 </Style.Triggers>
             </Style>
-        </Grid.Style>
+        </Grid.Style>-->
         <!--Abnormalities grids-->
-        <ItemsControl Name="buffs" ItemsSource="{Binding Buffs}" Grid.Row="1" 
-                      Grid.ColumnSpan="2" ItemTemplate="{StaticResource abnorm}" Margin="0,0,0,0" ClipToBounds="False">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal" Height="Auto"
+        <Grid Name="BuffGrid" Grid.Row="1" Grid.ColumnSpan="2">
+            <ItemsControl Name="buffs" ItemsSource="{Binding Buffs}" Grid.Row="1" 
+                      Grid.ColumnSpan="2" ItemTemplate="{StaticResource PartyAbnormality}" Margin="0,0,0,0" ClipToBounds="False">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" Height="Auto"
                                HorizontalAlignment="Left"
                                Width="Auto"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.RenderTransform>
-                <TranslateTransform X="13" Y="0"></TranslateTransform>
-            </ItemsControl.RenderTransform>
-            <ItemsControl.ItemContainerStyle>
-                <Style>
-                    <Setter Value="-6,6,0,-6" Property="ContentControl.Margin"></Setter>
-                </Style>
-            </ItemsControl.ItemContainerStyle>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.RenderTransform>
+                    <TranslateTransform X="7" Y="0"></TranslateTransform>
+                </ItemsControl.RenderTransform>
+                <ItemsControl.ItemContainerStyle>
+                    <Style>
+                        <Setter Value="-6,6,0,-6" Property="ContentControl.Margin"></Setter>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
 
-        </ItemsControl>
-        <ItemsControl Name="debuffs" ItemsSource="{Binding Debuffs}" Grid.Row="2" 
-                      Grid.ColumnSpan="2" ItemTemplate="{StaticResource abnorm}" Margin="0,-2,0,0" 
+            </ItemsControl>
+        </Grid>
+        <Grid Name="DebuffGrid" Grid.Row="2" Grid.ColumnSpan="2">
+            <ItemsControl Name="debuffs" ItemsSource="{Binding Debuffs}" Grid.Row="2" 
+                      Grid.ColumnSpan="2" ItemTemplate="{StaticResource PartyAbnormality}" Margin="0,0,0,0" 
                       ClipToBounds="False">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal"
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"
                                HorizontalAlignment="Left"
                                Width="Auto"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.RenderTransform>
-                <TranslateTransform X="10"></TranslateTransform>
-            </ItemsControl.RenderTransform>
-            <ItemsControl.ItemContainerStyle>
-                <Style>
-                    <Setter Value="0,6,0,0" Property="ContentControl.Margin"></Setter>
-                </Style>
-            </ItemsControl.ItemContainerStyle>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.RenderTransform>
+                    <TranslateTransform X="7"></TranslateTransform>
+                </ItemsControl.RenderTransform>
+                <ItemsControl.ItemContainerStyle>
+                    <Style>
+                        <Setter Value="-6,6,0,-6" Property="ContentControl.Margin"></Setter>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
 
-        </ItemsControl>
+            </ItemsControl>
+        </Grid>
 
         <!--Main Styles.DefaultBorder-->
-        <Border Style="{StaticResource Styles.DefaultBorder}" Grid.ColumnSpan="3" Margin="2,0,0,0" Height="Auto" Background="#70101017" BorderBrush="#70202026"/>
-        <Border Width="6" Height="6"  Margin="0,0,0,0" 
-                   HorizontalAlignment="Right"  VerticalAlignment="Top"
-                Grid.Column="2" CornerRadius="0,0,0,6"
-                   Background="{Binding UserClass, Converter={StaticResource Converters.ClassToFill}}"
-                   />
-        <!--Aggro border-->
+        <Border Style="{StaticResource Styles.DefaultBorder}" Grid.ColumnSpan="3" Margin="0" Opacity="1" 
+                BorderBrush="{StaticResource Colors.App.FadedBorderBrush}"
+                Background="{StaticResource Colors.App.FadedBackground}" BorderThickness="1" CornerRadius="5,5,0,5"/>
+
+        <Border BorderBrush="{Binding UserClass, Converter={StaticResource Converters.ClassToFill}}" BorderThickness="1" Height="Auto" 
+                Width="Auto" Grid.ColumnSpan="1" Margin="0" CornerRadius="5,5,0,5" Grid.Column="0" Opacity=".7"
+                VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  d:IsHidden="True">
+        </Border>
+
+
+        <!--Aggro border
+        -->
         <Border Name="aggroBorder" 
-                Visibility="{Binding HasAggro, Converter={StaticResource Converters.BoolToVisibleHidden}}" 
-                Background="Orange" Height="18" Width="6" Grid.ColumnSpan="1" Margin="0,0,0,0" CornerRadius="0,0,0,6" 
-                Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right"  d:IsHidden="True">
+                Visibility="{Binding HasAggro, Converter={StaticResource Converters.BoolToVisibleCollapsed}}" 
+                BorderBrush="Orange" Background="#40ffa500" BorderThickness="2" Height="Auto" Width="Auto" Grid.ColumnSpan="1" Margin="0" CornerRadius="6,6,0,6" 
+                VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  d:IsHidden="True" Grid.Column="0">
             <Border.Effect>
                 <DropShadowEffect Color="Orange" ShadowDepth="0" BlurRadius="5" RenderingBias="Performance"/>
             </Border.Effect>
         </Border>
-        <!--Death red border-->
+        <!--Death red border
+        -->
         <Border Name="deathBorder" 
-                Opacity="{Binding Alive, Converter={StaticResource Converters.BoolToOpacityInverse} }" 
-                Background="Red" Height="18" Width="6" Grid.ColumnSpan="1" Margin="0,0,0,0" CornerRadius="0,0,0,6" 
-                Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right"  d:IsHidden="True">
+                Visibility="{Binding Alive, Converter={StaticResource Converters.BoolToVisibleCollapsed}, ConverterParameter=True}" 
+                BorderBrush="Red" Background="#600" BorderThickness="2" Height="Auto" Width="Auto" Grid.ColumnSpan="1" Margin="0,0" CornerRadius="5,5,0,5" Grid.Column="0"
+                VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  d:IsHidden="True">
             <Border.Effect>
                 <DropShadowEffect Color="Red" ShadowDepth="0" BlurRadius="5" RenderingBias="Performance"/>
             </Border.Effect>
         </Border>
 
-        <!--Icon grid-->
-        <Grid Margin="0,-14" Width="50" Height="50">
-            <Image Width="Auto" Source="{Binding Laurel, Converter={StaticResource Converters.LaurelToImage}}" 
-                   RenderOptions.BitmapScalingMode="Fant" 
-                           UseLayoutRounding="True" Opacity="1" HorizontalAlignment="Center">
-                <Image.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleX=".92"/>
-                        <TranslateTransform Y="-1" X="2"/>
-                    </TransformGroup>
-                </Image.RenderTransform>
-            </Image>
-            <Image Source="{Binding UserClass, Converter={StaticResource Converters.ClassToImage}}" Opacity="1"
-                           Margin="1,3,0,0" RenderOptions.BitmapScalingMode="Fant" UseLayoutRounding="True" HorizontalAlignment="Center" VerticalAlignment="Center"
-                           Width="30">
-                <Image.Effect>
-                    <DropShadowEffect Color="#ff20f0ff" BlurRadius="3" ShadowDepth="0"/>
-                </Image.Effect>
-                <Image.CacheMode>
-                    <BitmapCache RenderAtScale="2"/>
-                </Image.CacheMode>
-            </Image>
-            <Grid.RenderTransform>
-                <TranslateTransform Y="-1"/>
-            </Grid.RenderTransform>
+        <Grid Margin="0">
+            <Rectangle Fill="#fff" Opacity="1"
+                       Margin="2" RenderOptions.BitmapScalingMode="Fant" UseLayoutRounding="True" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Width="30" Height="30"  Stretch="Uniform">
+                
+                <Rectangle.OpacityMask>
+                    <ImageBrush ImageSource="{Binding UserClass, Converter={StaticResource Converters.ClassToImage}}" />
+                </Rectangle.OpacityMask>
+                <Rectangle.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Online}" Value="False">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation From="1" To=".3"
+                                                             Duration="0:0:0.2"
+                                                             Storyboard.TargetProperty="Opacity"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation From=".3" To="1"
+                                                             Duration="0:0:0.2"
+                                                             Storyboard.TargetProperty="Opacity"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Rectangle.Style>
+            </Rectangle>
         </Grid>
-        
-        <!--Leader icon-->
-        <Grid Margin="-3" Width="18" Height="18"
+
+
+        <!--Leader icon
+        -->
+        <Grid Margin="-3" Width="15" Height="15"
               Opacity="{Binding IsLeader, Converter={StaticResource Converters.BoolToOpacity}}"
               HorizontalAlignment="Left" VerticalAlignment="Top">
             <Ellipse Fill="Orange"/>
@@ -162,9 +184,10 @@
         </Grid>
 
         <!--Info grid-->
-        <Grid Grid.Column="1" VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" Margin="0" Grid.ColumnSpan="2">
+        <Grid Grid.Column="1" VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" Margin="0" Grid.ColumnSpan="1" UseLayoutRounding="True">
             <Grid.RowDefinitions>
-                <RowDefinition/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -172,41 +195,93 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <!--Name-->
-            <TextBlock TextTrimming="CharacterEllipsis" Foreground="White" Cursor="Hand"        
+            <TextBlock TextTrimming="CharacterEllipsis" Foreground="#cfff" Cursor="Hand"        
                        PreviewMouseLeftButtonDown="UserControl_PreviewMouseLeftButtonDown"
-                       VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,3" FontSize="12" Grid.Row="0" Grid.Column="0">
+                       VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3,0,0,0" FontSize="12" Grid.Row="0" Grid.Column="0">
                 <Run Text="{Binding Level}" FontSize="11" Foreground="#6fff"/>
-                <Run Text="{Binding Name}" />
+                <Run Text="{Binding Name}" >
+                </Run>
             </TextBlock>
             <!--MP-->
-            <Grid Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Right" Name="mpGrid">
-                <Rectangle Fill="#90000000" Height="3" Width="100" HorizontalAlignment="Left"/>
-                <Rectangle Fill="#66c6ff" Height="3" Width="100" HorizontalAlignment="Left">
-                    <Rectangle.LayoutTransform>
+            <Grid Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Name="mpGrid" Margin="1,0,1,1">
+                <Rectangle Fill="#90000000" Height="3" Width="Auto" HorizontalAlignment="Stretch"/>
+                <Rectangle Fill="#66c6ff" Height="3" Width="Auto" HorizontalAlignment="Stretch" >
+                    <Rectangle.RenderTransform>
                         <ScaleTransform ScaleX="{Binding MpFactor}"/>
-                    </Rectangle.LayoutTransform>
+                    </Rectangle.RenderTransform>
                 </Rectangle>
                 <Grid.RenderTransform>
-                    <TranslateTransform Y="5"></TranslateTransform>
+                    <TranslateTransform Y="0"/>
                 </Grid.RenderTransform>
+                <Grid.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Online}" Value="False">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation From="1" To="0"
+                                                             Duration="0:0:0.2"
+                                                             Storyboard.TargetProperty="Opacity"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation From="0" To="1"
+                                                             Duration="0:0:0.2"
+                                                             Storyboard.TargetProperty="Opacity"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+
+                        </Style.Triggers>
+                    </Style>
+
+                </Grid.Style>
             </Grid>
 
             <!--HP-->
-            <Grid  Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" Name="hpGrid" Margin="0,0,0,-1" >
-                <Rectangle Fill="#90000000" Height="6" Width="125" Margin="0,1" HorizontalAlignment="Left"/>
-                <Rectangle Fill="{Binding IsDebuffed, Converter={StaticResource Converters.DebuffStatusToHpColor}}" Height="6" Width="125" 
-                           Margin="0,1" HorizontalAlignment="Left">
-                    <Rectangle.LayoutTransform>
-                        <ScaleTransform ScaleX="{Binding HpFactor}"/>
-                    </Rectangle.LayoutTransform>
-                </Rectangle>
-                <Path Fill="#223" Data="M0,0 2,0 1,1 0,0" 
-                  Stretch="Uniform" Opacity=".8"
-                      VerticalAlignment="Top"
-                  Height="4" Margin="0,1,0,0" 
-                  HorizontalAlignment="Center"/>
+            <Grid  Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Name="hpGrid" Margin="1,0,1,0" >
+                <Grid>
+                    <Rectangle Fill="#90000000" Height="6" Width="Auto" Margin="0,1" HorizontalAlignment="Stretch"/>
+                    <Rectangle Fill="{Binding IsDebuffed, Converter={StaticResource Converters.DebuffStatusToHpColor}}" Height="6" Width="Auto" 
+                               Margin="0,1" HorizontalAlignment="Stretch">
+                        <Rectangle.RenderTransform>
+                            <ScaleTransform ScaleX="{Binding HpFactor}"/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Path  Fill="{StaticResource Colors.App.DefaultBackground}" Data="M0,0 2,0 1,1 0,0" 
+                          Stretch="Uniform" Opacity="1"
+                          VerticalAlignment="Top"
+                          Height="4" Margin="0,1,0,0" 
+                          HorizontalAlignment="Center"/>
+                    <Grid.Style>
+                        <Style>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Online}" Value="False">
+                                    <DataTrigger.Setters>
+                                        <Setter Property="Grid.Visibility" Value="Collapsed"></Setter>
+                                    </DataTrigger.Setters>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Online}" Value="True">
+                                    <DataTrigger.Setters>
+                                        <Setter Property="Grid.Visibility" Value="Visible"></Setter>
+                                    </DataTrigger.Setters>
+                                </DataTrigger>
+
+                            </Style.Triggers>
+                        </Style>
+
+                    </Grid.Style>
+
+                </Grid>
+
             </Grid>
         </Grid>
+
 
         <!--Ready check grid-->
         <Grid Margin="-5,-5" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2"  Opacity="{Binding Ready, Converter={StaticResource readyToOpacityConv}}">
@@ -223,7 +298,7 @@
         </Grid>
 
         <!--Roll result grid-->
-        <Grid Margin="0,-1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.ColumnSpan="2" Opacity="1" Width="30">
+        <Grid Margin="0,-1" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.ColumnSpan="2" Opacity="1" Width="30">
             <Grid.Effect>
                 <DropShadowEffect ShadowDepth="1" RenderingBias="Performance" BlurRadius="3"/>
             </Grid.Effect>

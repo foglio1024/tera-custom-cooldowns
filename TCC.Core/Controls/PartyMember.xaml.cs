@@ -22,7 +22,8 @@ namespace TCC.Controls
         {
             SetMP();
             SetHP();
-
+            SetBuffs();
+            SetDebuffs();
             AnimateIn();
             GroupWindowViewModel.Instance.PropertyChanged += Instance_PropertyChanged;
         }
@@ -36,8 +37,48 @@ namespace TCC.Controls
             {
                 SetHP();
             }
+            else if (e.PropertyName == nameof(GroupWindowViewModel.Instance.BuffsEnabled))
+            {
+                SetBuffs();
+            }
+            else if (e.PropertyName == nameof(GroupWindowViewModel.Instance.DebuffsEnabled))
+            {
+                SetDebuffs();
+            }
         }
+        private void SetBuffs()
+        {
+            try
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    buffs.ItemsSource = SettingsManager.IgnoreGroupBuffs ? null : ((User)DataContext).Buffs;
+                    BuffGrid.Visibility = SettingsManager.IgnoreGroupBuffs
+                        ? Visibility.Collapsed
+                        : Visibility.Visible;
+                });
+            }
+            catch (Exception)
+            {
+            }
+        }
+        private void SetDebuffs()
+        {
+            try
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    debuffs.ItemsSource = SettingsManager.IgnoreGroupDebuffs ? null : ((User)DataContext).Debuffs;
+                    DebuffGrid.Visibility = SettingsManager.IgnoreGroupDebuffs
+                        ? Visibility.Collapsed
+                        : Visibility.Visible;
+                });
+            }
+            catch (Exception)
+            {
 
+            }
+        }
         private void SetMP()
         {
             Dispatcher.Invoke(() =>
