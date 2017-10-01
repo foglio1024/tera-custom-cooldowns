@@ -82,7 +82,7 @@ namespace TCC
                 }
                 else
                 {
-                    isTccVisible = false;
+                    isTccVisible = false || App.Debug;
                     return isTccVisible;
                 }
             }
@@ -97,7 +97,7 @@ namespace TCC
         }
         public static bool IsFocused
         {
-            get => isFocused;
+            get => isFocused || App.Debug;
             set
             {
                 if (!FocusManager.Running) return;
