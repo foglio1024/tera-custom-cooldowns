@@ -338,7 +338,7 @@
       <DependentUpon>SmallMobControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolToCooldownWindowTemplateConverter.cs" />
-    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\BoolToVisibleCollapsedConverter.cs" />
     <Compile Include="Converters\BoolToVisibleHidden.cs" />
     <Compile Include="Converters\ContractedToColWidthConverter.cs" />
     <Compile Include="Converters\DragonSelectedToOpacityConverter.cs" />
@@ -824,6 +824,9 @@
     <Compile Include="Windows\InfoWindow.xaml.cs">
       <DependentUpon>InfoWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\NewDungeonInfoControl.xaml.cs">
+      <DependentUpon>NewDungeonInfoControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
@@ -832,7 +835,7 @@
     <Compile Include="Data\Character.cs" />
     <Compile Include="Parsing\CharLoginProcessor.cs" />
     <Compile Include="Data\Enums.cs" />
-    <Compile Include="Data\Databases\BroochesDatabase.cs" />
+    <Compile Include="Data\Databases\ItemSkillsDatabase.cs" />
     <Compile Include="FocusManager.cs" />
     <Compile Include="Parsing\ListParser.cs" />
     <Compile Include="Parsing\Messages\S_ABNORMALITY_BEGIN.cs" />
@@ -1168,6 +1171,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\InfoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\NewDungeonInfoControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
