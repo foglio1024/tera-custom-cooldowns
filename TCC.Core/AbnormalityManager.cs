@@ -28,7 +28,7 @@ namespace TCC
                 if (target == SessionManager.CurrentPlayer.EntityId)
                 {
                     BeginPlayerAbnormality(ab, stacks, duration);
-                    if(SettingsManager.DisablePartyAbnormals) return;
+                    if (SettingsManager.DisablePartyAbnormals) return;
                     GroupWindowViewModel.Instance.BeginOrRefreshUserAbnormality(ab, stacks, duration, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
                 }
                 else
@@ -77,13 +77,21 @@ namespace TCC
                 BuffBarWindowViewModel.Instance.Player.AddOrRefreshDebuff(ab, duration, stacks, PlayerAbSize, PlayerAbLeftMargin);
                 CharacterWindowViewModel.Instance.Player.AddToDebuffList(ab);
                 ClassManager.SetStatus(ab, true);
-
             }
-
+            CheckDragonProc(ab);
             //var sysMsg = new ChatMessage("@661\vAbnormalName\v" + ab.Name, SystemMessages.Messages["SMT_BATTLE_BUFF_DEBUFF"]);
             //ChatWindowViewModel.Instance.AddChatMessage(sysMsg);
 
         }
+
+        private static void CheckDragonProc(Abnormality ab)
+        {
+            if (ab.Id >= 6001 && ab.Id <= 6002)
+            {
+                SkillManager.AddItemSkill(ab.Id, 60);
+            }
+        }
+
         static void EndPlayerAbnormality(Abnormality ab)
         {
             if (ab.Type == AbnormalityType.Buff)
