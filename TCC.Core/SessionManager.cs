@@ -12,7 +12,7 @@ namespace TCC
     {
         public static readonly int MAX_WEEKLY = 15;
         public static readonly int MAX_DAILY = 8;
-        private static bool logged = false;
+        private static bool logged = false || !App.Debug;
         public static bool Logged
         {
             get => logged;
@@ -25,7 +25,7 @@ namespace TCC
                 }
             }
         }
-        private static bool loadingScreen = true;
+        private static bool loadingScreen = true || !App.Debug;
         public static bool LoadingScreen
         {
             get => loadingScreen;
