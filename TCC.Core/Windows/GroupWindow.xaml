@@ -19,12 +19,12 @@
                  Loaded="TccWindow_Loaded" 
                  MouseLeftButtonDown="Window_MouseLeftButtonDown" 
                  PreviewMouseRightButtonDown="TccWindow_PreviewMouseRightButtonDown"
-                 ShowInTaskbar="False" UseLayoutRounding="True"
+                 ShowInTaskbar="False" UseLayoutRounding="False"
                  >
     <local:TccWindow.DataContext>
         <wm:GroupWindowViewModel/>
     </local:TccWindow.DataContext>
-    <Grid  Margin="10" Width="Auto" >
+    <Grid  Margin="4,15,0,0" Width="Auto" ClipToBounds="False" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -36,8 +36,9 @@
             <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}" />
         </Grid.LayoutTransform>
         <!--Info border-->
-        <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Row="1" Background="#70101017" BorderBrush="#70202027"
-                Grid.ColumnSpan="1" Grid.Column="3"  Margin="4,-1" 
+        <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Row="1" Background="{StaticResource Colors.App.FadedBackground}" 
+                BorderBrush="{StaticResource Colors.App.FadedBorderBrush}"
+                Grid.ColumnSpan="1" Grid.Column="3"  Margin="4,0" CornerRadius="6"
                 Width="Auto" VerticalAlignment="Top" HorizontalAlignment="Left"
                 Padding="5,1" Visibility="{Binding Instance.Formed, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
             <StackPanel>
@@ -61,7 +62,7 @@
             </StackPanel>
         </Border>
         <!--Member lists-->
-        <ItemsControl x:Name="dps"  Width="Auto" 
+        <ItemsControl x:Name="dps"  Width="Auto" ClipToBounds="False"
                       ItemsSource="{Binding Instance.Dps}" 
                       ItemTemplate="{Binding Instance.GroupSize, Converter={StaticResource Converters.GroupSizeToTemplate}}" 
                       Grid.Row="1">

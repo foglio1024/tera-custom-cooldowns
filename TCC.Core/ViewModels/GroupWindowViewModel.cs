@@ -15,7 +15,6 @@ namespace TCC.ViewModels
         private static GroupWindowViewModel _instance;
         public static GroupWindowViewModel Instance => _instance ?? (_instance = new GroupWindowViewModel());
 
-        public const int GROUP_SIZE_THRESHOLD = 7;
         public bool IsTeraOnTop
         {
             get => WindowManager.IsTccVisible;
@@ -133,6 +132,14 @@ namespace TCC.ViewModels
                 NotifyPropertyChanged(nameof(HPenabled));
             }
         }
+        public bool BuffsEnabled
+        {
+            set => NotifyPropertyChanged(nameof(BuffsEnabled));
+        }
+        public bool DebuffsEnabled
+        {
+            set => NotifyPropertyChanged(nameof(DebuffsEnabled));
+        }
         public bool Rolling { get; set; }
         public List<User> All
         {
@@ -239,8 +246,8 @@ namespace TCC.ViewModels
         }
         public void BeginOrRefreshUserAbnormality(Abnormality ab, int stacks, uint duration, uint playerId, uint serverId)
         {
-            var size = GroupSize > GROUP_SIZE_THRESHOLD ? AbnormalityManager.RaidAbSize : AbnormalityManager.PartyAbSize;
-            var margin = GroupSize > GROUP_SIZE_THRESHOLD ? AbnormalityManager.RaidAbLeftMargin : AbnormalityManager.PartyAbLeftMargin;
+            //var size = GroupSize > SettingsManager.GroupSizeThreshold ? AbnormalityManager.RaidAbSize : AbnormalityManager.PartyAbSize;     //TODO: do this in another way, probably the most messed up thing in TCC atm
+            //var margin = GroupSize > SettingsManager.GroupSizeThreshold? AbnormalityManager.RaidAbLeftMargin : AbnormalityManager.PartyAbLeftMargin;
 
             if (ab.Infinity) duration = uint.MaxValue;
             User u;
@@ -249,7 +256,7 @@ namespace TCC.ViewModels
             {
                 if (ab.Type == AbnormalityType.Buff)
                 {
-                    u.AddOrRefreshBuff(ab, duration, stacks, size, margin);
+                    u.AddOrRefreshBuff(ab, duration, stacks/*, size, margin*/);
                     if (u.UserClass == Class.Warrior && ab.Id >= 100200 && ab.Id <= 100203) MoveUser(Dps, Tanks, u.ServerId, u.PlayerId);
                 }
                 else
@@ -262,7 +269,7 @@ namespace TCC.ViewModels
                         if (ab.Id != 950023 && SettingsManager.ShowOnlyAggroStacks) return;
                     }
                     // -------------------------------------------- //
-                    u.AddOrRefreshDebuff(ab, duration, stacks, size, margin);
+                    u.AddOrRefreshDebuff(ab, duration, stacks/*, size, margin*/);
                 }
                 return;
             }
@@ -409,6 +416,7 @@ namespace TCC.ViewModels
         }
         private void SendAddMessage(string name)
         {
+            //return;
             string msg;
             string opcode;
             if (Raid)
@@ -910,6 +918,11 @@ namespace TCC.ViewModels
                 if (u.IsLeader) return true;
             }
             return false;
+        }
+
+        public void NotifyThresholdChanged()
+        {
+            NotifyPropertyChanged(nameof(GroupSize));
         }
     }
 }
