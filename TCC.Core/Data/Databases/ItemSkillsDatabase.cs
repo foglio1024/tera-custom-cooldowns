@@ -3,9 +3,9 @@ using System.Linq;
 
 namespace TCC.Data.Databases
 {
-    public static class BroochesDatabase
+    public static class ItemSkillsDatabase
     {
-        static List<Skill> BroochSkills = new List<Skill>
+        static List<Skill> ItemSkills = new List<Skill>
         {
             new Skill(51028, Class.Common, "Marrow brooch",""),//marrow
             new Skill(51011, Class.Common, "Quatrefoil brooch",""),//quatrefoil
@@ -22,6 +22,8 @@ namespace TCC.Data.Databases
             new Skill(6472,  Class.Common, "Iridescent keen brooch",""), //iridescent quickcarve
             new Skill(80280, Class.Common, "Simple purifying brooch",""),//simple purifying
             new Skill(80281, Class.Common, "Purifying brooch",""),//purifying
+            new Skill(6001, Class.Common, "Dragon Power", ""),
+            new Skill(6002, Class.Common, "Ancient Dragon Power", "")
         };
         static List<string> IconsList = new List<string>
         {
@@ -39,34 +41,36 @@ namespace TCC.Data.Databases
             "Icon_Skills.Beautiful_Wings_brooch_Cachebar_Tex",
             "Icon_Skills.Beautiful_Wings_brooch_Cachebar_Tex",
             "Icon_Skills.F2P_VIPCustomer_Tex",
-            "Icon_Skills.F2P_VIPCustomer_Tex"
+            "Icon_Skills.F2P_VIPCustomer_Tex",
+            "icon_status.passive_dragonblood",
+            "icon_status.passive_dragonblood2"
         };
 
         public static void SetBroochesIcons()
         {
-            for (int i = 0; i < BroochSkills.Count(); i++)
+            for (int i = 0; i < ItemSkills.Count(); i++)
             {
-                BroochSkills[i].SetSkillIcon(IconsList[i]);
+                ItemSkills[i].SetSkillIcon(IconsList[i]);
             }
         }
         public static Skill GetBrooch(uint id)
         {
-            if (BroochSkills.Where(x => x.Id == id).Count() > 0)
+            if (ItemSkills.Where(x => x.Id == id).Count() > 0)
             {
-                return BroochSkills.Where(x => x.Id == id).Single();
+                return ItemSkills.Where(x => x.Id == id).Single();
             }
             else return null;
 
         }
 
-        internal static bool TryGetBrooch(uint itemId, out Skill brooch)
+        internal static bool TryGetItemSkill(uint itemId, out Skill brooch)
         {
             bool result = false;
             brooch = new Skill(0, Class.None, string.Empty, string.Empty);
-            if (BroochSkills.Any(x => x.Id == itemId))
+            if (ItemSkills.Any(x => x.Id == itemId))
             {
                 result = true;
-                brooch = BroochSkills.FirstOrDefault(x => x.Id == itemId);
+                brooch = ItemSkills.FirstOrDefault(x => x.Id == itemId);
             }
             return result;
 

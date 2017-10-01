@@ -50,9 +50,9 @@ namespace TCC
                 //WindowManager.SkillsEnded = false;
             }
         }
-        public static void AddBrooch(uint id, uint cd)
+        public static void AddItemSkill(uint id, uint cd)
         {
-            if (BroochesDatabase.TryGetBrooch(id, out Skill brooch))
+            if (ItemSkillsDatabase.TryGetItemSkill(id, out Skill brooch))
             {
                 RouteSkill(new SkillCooldown(brooch, cd, CooldownType.Item, CooldownWindowViewModel.Instance.GetDispatcher()));
             }
