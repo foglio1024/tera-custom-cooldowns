@@ -11,7 +11,7 @@ namespace TCC.Converters
         {
             var val = (int)value;
 
-            if(val > GroupWindowViewModel.GROUP_SIZE_THRESHOLD)
+            if(val > SettingsManager.GroupSizeThreshold)
             {
                 return App.Current.FindResource("raid");
             }
