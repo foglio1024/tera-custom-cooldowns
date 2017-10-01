@@ -912,38 +912,26 @@ namespace TCC.ViewModels
                 NotifyPropertyChanged("HideMe");
             }
         }
-        public bool HideMyBuffs
+        public bool HideBuffs
         {
-            get { return SettingsManager.IgnoreMyBuffsInGroupWindow; }
+            get { return SettingsManager.IgnoreGroupBuffs; }
             set
             {
-                if (SettingsManager.IgnoreMyBuffsInGroupWindow == value) return;
-                SettingsManager.IgnoreMyBuffsInGroupWindow = value;
-                NotifyPropertyChanged("HideMyBuffs");
-                if (value == true) GroupWindowViewModel.Instance.ClearMyBuffs();
-
+                if (SettingsManager.IgnoreGroupBuffs == value) return;
+                SettingsManager.IgnoreGroupBuffs = value;
+                NotifyPropertyChanged(nameof(HideBuffs));
+                GroupWindowViewModel.Instance.BuffsEnabled = !value;
             }
         }
-        public bool HideAllBuffs
+        public bool HideDebuffs
         {
-            get { return SettingsManager.IgnoreAllBuffsInGroupWindow; }
+            get { return SettingsManager.IgnoreGroupDebuffs; }
             set
             {
-                if (SettingsManager.IgnoreAllBuffsInGroupWindow == value) return;
-                SettingsManager.IgnoreAllBuffsInGroupWindow = value;
-                NotifyPropertyChanged("HideAllBuffs");
-                if (value == true) GroupWindowViewModel.Instance.ClearAllBuffs();
-            }
-        }
-        public bool HideRaidAbnormalities
-        {
-            get { return SettingsManager.IgnoreRaidAbnormalitiesInGroupWindow; }
-            set
-            {
-                if (SettingsManager.IgnoreRaidAbnormalitiesInGroupWindow == value) return;
-                SettingsManager.IgnoreRaidAbnormalitiesInGroupWindow = value;
-                NotifyPropertyChanged("HideRaidAbnormalities");
-                if (value == true) GroupWindowViewModel.Instance.ClearAllAbnormalities();
+                if (SettingsManager.IgnoreGroupDebuffs == value) return;
+                SettingsManager.IgnoreGroupDebuffs = value;
+                NotifyPropertyChanged(nameof(HideDebuffs));
+                GroupWindowViewModel.Instance.DebuffsEnabled = !value;
             }
         }
         public bool DisableAllPartyAbnormals
@@ -1133,6 +1121,17 @@ namespace TCC.ViewModels
                 if (value == SettingsManager.WebhookMessage) return;
                 SettingsManager.WebhookMessage = value;
                 NotifyPropertyChanged(nameof(WebhookMessage));
+            }
+        }
+        public uint GroupSizeThreshold
+        {
+            get { return SettingsManager.GroupSizeThreshold; }
+            set
+            {
+                if (SettingsManager.GroupSizeThreshold == value) return;
+                SettingsManager.GroupSizeThreshold = value;
+                GroupWindowViewModel.Instance.NotifyThresholdChanged();
+                NotifyPropertyChanged(nameof(GroupSizeThreshold));
             }
         }
 

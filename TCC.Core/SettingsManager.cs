@@ -154,9 +154,8 @@ namespace TCC
         };
 
         public static bool IgnoreMeInGroupWindow { get; set; }
-        public static bool IgnoreMyBuffsInGroupWindow { get; set; }
         public static bool IgnoreGroupBuffs { get; set; }
-        public static bool IgnoreAllBuffsInGroupWindow { get; set; }
+        public static bool IgnoreGroupDebuffs { get; set; }
         public static bool IgnoreRaidAbnormalitiesInGroupWindow { get; set; }
         public static FlowDirection BuffsDirection { get; set; } = FlowDirection.RightToLeft;
         public static bool ClassWindowOn { get; set; } = false;
@@ -179,7 +178,7 @@ namespace TCC
         public static string WebhookMessage { get; set; } = "@here Guild BAM will spawn soon!";
         public static int FontSize { get; set; } = 15;
         public static Dictionary<Class, List<uint>> GroupAbnormals = new Dictionary<Class, List<uint>>();
-
+        public static uint GroupSizeThreshold = 7;
         public static void LoadWindowSettings()
         {
             if (File.Exists(Environment.CurrentDirectory + @"/tcc-config.xml"))
@@ -235,17 +234,12 @@ namespace TCC
                 catch { }
                 try
                 {
-                    IgnoreMyBuffsInGroupWindow = Boolean.Parse(b.Attribute("IgnoreMyBuffsInGroupWindow").Value);
+                    IgnoreGroupBuffs = Boolean.Parse(b.Attribute(nameof(IgnoreGroupBuffs)).Value);
                 }
                 catch { }
                 try
                 {
-                    IgnoreGroupBuffs = Boolean.Parse(b.Attribute("IgnoreGroupBuffs").Value);
-                }
-                catch { }
-                try
-                {
-                    IgnoreAllBuffsInGroupWindow = Boolean.Parse(b.Attribute("IgnoreAllBuffsInGroupWindow").Value);
+                    IgnoreGroupDebuffs = Boolean.Parse(b.Attribute(nameof(IgnoreGroupDebuffs)).Value);
                 }
                 catch { }
                 try
@@ -283,7 +277,6 @@ namespace TCC
                     FontSize = Int32.Parse(b.Attribute(nameof(FontSize)).Value);
                 }
                 catch { }
-
                 try
                 {
                     ShowChannel = Boolean.Parse(b.Attribute(nameof(ShowChannel)).Value);
@@ -349,6 +342,11 @@ namespace TCC
                     WebhookMessage = b.Attribute(nameof(WebhookMessage)).Value;
                 }
                 catch (Exception) { }
+                try
+                {
+                    GroupSizeThreshold = UInt32.Parse(b.Attribute(nameof(GroupSizeThreshold)).Value);
+                }
+                catch { }
                 //add settings here
 
                 try
@@ -385,17 +383,27 @@ namespace TCC
                 {
                     var tabName = t.Attribute("name").Value;
                     var channels = new List<ChatChannel>();
+                    var exChannels = new List<ChatChannel>();
                     var authors = new List<string>();
+                    var exAuthors = new List<string>();
                     foreach (var chElement in t.Descendants().Where(x => x.Name == "Channel"))
                     {
                         channels.Add((ChatChannel)Enum.Parse(typeof(ChatChannel), chElement.Attribute("value").Value));
+                    }
+                    foreach (var chElement in t.Descendants().Where(x => x.Name == "ExcludedChannel"))
+                    {
+                        exChannels.Add((ChatChannel)Enum.Parse(typeof(ChatChannel), chElement.Attribute("value").Value));
                     }
                     foreach (var authElement in t.Descendants().Where(x => x.Name == "Author"))
                     {
                         authors.Add(authElement.Attribute("value").Value);
                     }
+                    foreach (var authElement in t.Descendants().Where(x => x.Name == "ExcludedAuthor"))
+                    {
+                        exAuthors.Add(authElement.Attribute("value").Value);
+                    }
 
-                    result.Add(new Tab(tabName, channels.ToArray(), authors.ToArray()));
+                    result.Add(new Tab(tabName, channels.ToArray(), exChannels.ToArray(), authors.ToArray(), exAuthors.ToArray()));
                 }
             }
             return result;
@@ -416,9 +424,8 @@ namespace TCC
                     ),
                 new XElement("OtherSettings",
                 new XAttribute(nameof(IgnoreMeInGroupWindow), IgnoreMeInGroupWindow),
-                new XAttribute(nameof(IgnoreMyBuffsInGroupWindow), IgnoreMyBuffsInGroupWindow),
                 new XAttribute(nameof(IgnoreGroupBuffs), IgnoreGroupBuffs),
-                new XAttribute(nameof(IgnoreAllBuffsInGroupWindow), IgnoreAllBuffsInGroupWindow),
+                new XAttribute(nameof(IgnoreGroupDebuffs), IgnoreGroupDebuffs),
                 new XAttribute(nameof(IgnoreRaidAbnormalitiesInGroupWindow), IgnoreRaidAbnormalitiesInGroupWindow),
                 new XAttribute(nameof(BuffsDirection), BuffsDirection),
                 new XAttribute(nameof(ClassWindowOn), ClassWindowOn),
@@ -438,7 +445,8 @@ namespace TCC
                 new XAttribute(nameof(LastRun), DateTime.Now),
                 new XAttribute(nameof(LastRegion), LastRegion),
                 new XAttribute(nameof(Webhook), Webhook),
-                new XAttribute(nameof(WebhookMessage), WebhookMessage)
+                new XAttribute(nameof(WebhookMessage), WebhookMessage),
+                new XAttribute(nameof(GroupSizeThreshold), GroupSizeThreshold)
                 //add setting here
                 ),
                 BuildChannelsXElement(),
@@ -548,6 +556,14 @@ namespace TCC
                 foreach (var ch in tab.Authors)
                 {
                     tabElement.Add(new XElement("Author", new XAttribute("value", ch)));
+                }
+                foreach (var ch in tab.ExcludedChannels)
+                {
+                    tabElement.Add(new XElement("ExcludedChannel", new XAttribute("value", ch)));
+                }
+                foreach (var ch in tab.ExcludedAuthors)
+                {
+                    tabElement.Add(new XElement("ExcludedAuthor", new XAttribute("value", ch)));
                 }
                 result.Add(tabElement);
 
