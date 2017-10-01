@@ -41,12 +41,7 @@ namespace TCC.Windows
             {
                 if (_bottom)
                 {
-                    var t = tabControl.SelectedContent as ItemsControl;
-                    if (t == null) return;
-                    var b = (Border)VisualTreeHelper.GetChild(t, 0);
-                    var s = (ScrollViewer)VisualTreeHelper.GetChild(b, 0);
-
-                    s.ScrollToTop();
+                    ScrollToBottom();
                 }
             }
             else if (e.PropertyName == nameof(ChatWindowViewModel.Instance.IsChatVisible))
@@ -55,6 +50,17 @@ namespace TCC.Windows
             }
         }
 
+        public void ScrollToBottom()
+        {
+            return; //TODO: find a way to reference the itemscontrol
+            var t = VisualTreeHelper.GetChild(tabControl.ItemContainerGenerator.ContainerFromIndex(tabControl.SelectedIndex), 0);
+            var g = (Grid)VisualTreeHelper.GetChild(t, 0);
+            var b = (Border)VisualTreeHelper.GetChild(g, 0);
+            var s = (ScrollViewer)VisualTreeHelper.GetChild(b, 0);
+
+            s.ScrollToTop();
+
+        }
         private void AnimateChatVisibility(bool isChatVisible)
         {
             Dispatcher.Invoke(() =>
@@ -159,44 +165,44 @@ namespace TCC.Windows
         {
             return;
             //if (!_bottom) return;
-/*
-            _currentContent = tabControl.SelectedContent as ItemsControl;
-            _currentPanel = GetInnerStackPanel(_currentContent);
-            var sw = (ScrollViewer)sender;
-            Rect svBounds = LayoutInformation.GetLayoutSlot(sw);
-            var testRect = new Rect(svBounds.Top - 5, svBounds.Left, svBounds.Width, svBounds.Height + 10);
-            List<FrameworkElement> visibleItems = GetVisibleItems(testRect);
+            /*
+                        _currentContent = tabControl.SelectedContent as ItemsControl;
+                        _currentPanel = GetInnerStackPanel(_currentContent);
+                        var sw = (ScrollViewer)sender;
+                        Rect svBounds = LayoutInformation.GetLayoutSlot(sw);
+                        var testRect = new Rect(svBounds.Top - 5, svBounds.Left, svBounds.Width, svBounds.Height + 10);
+                        List<FrameworkElement> visibleItems = GetVisibleItems(testRect);
 
-            foreach (var item in visibleItems)
-            {
-                var i = visibleItems.IndexOf(item);
-                if (i > 4)
-                {
-                    continue;
-                }
-                else
-                {
+                        foreach (var item in visibleItems)
+                        {
+                            var i = visibleItems.IndexOf(item);
+                            if (i > 4)
+                            {
+                                continue;
+                            }
+                            else
+                            {
 
-                }
+                            }
 
-                var dc = ((ChatMessage)item.DataContext);
-                if (dc.Channel == ChatChannel.Bargain) return;
-                if (GetMessageRows(item.ActualHeight) > 1)
-                {
-                    var lastItemRows = GetMessageRows(visibleItems.Last().ActualHeight);
-                    //Debug.WriteLine("Rows = {0} - LastItemRows = {1}", dc.Rows, lastItemRows);
-                    if (dc.Rows - lastItemRows >= 1)
-                    {
-                        dc.Rows = dc.Rows - lastItemRows;
-                        dc.IsContracted = true;
-                    }
-                }
-                else
-                {
+                            var dc = ((ChatMessage)item.DataContext);
+                            if (dc.Channel == ChatChannel.Bargain) return;
+                            if (GetMessageRows(item.ActualHeight) > 1)
+                            {
+                                var lastItemRows = GetMessageRows(visibleItems.Last().ActualHeight);
+                                //Debug.WriteLine("Rows = {0} - LastItemRows = {1}", dc.Rows, lastItemRows);
+                                if (dc.Rows - lastItemRows >= 1)
+                                {
+                                    dc.Rows = dc.Rows - lastItemRows;
+                                    dc.IsContracted = true;
+                                }
+                            }
+                            else
+                            {
 
-                }
-            }
-*/
+                            }
+                        }
+            */
         }
         private List<FrameworkElement> GetVisibleItems(Rect svViewportBounds)
         {
@@ -329,7 +335,7 @@ namespace TCC.Windows
             {
                 ChatSettingsPopup.IsOpen = false;
                 SettingsManager.SaveSettings();
-                
+
             };
             ChatSettingsPopup.Child.BeginAnimation(OpacityProperty, an);
 
@@ -341,7 +347,7 @@ namespace TCC.Windows
 
         private void AddChatTab(object sender, RoutedEventArgs e)
         {
-            ChatWindowViewModel.Instance.Tabs.Add(new Tab("NEW TAB", new ChatChannel[]{}, new string[]{}));
+            ChatWindowViewModel.Instance.Tabs.Add(new Tab("NEW TAB", new ChatChannel[] { }, new ChatChannel[] { }, new string[] { }, new string[] { }));
         }
     }
 
