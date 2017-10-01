@@ -1,6 +1,7 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
 using TCC.Data;
+using TCC.ViewModels;
 
 namespace TCC.Controls.ChatControls
 {
@@ -33,6 +34,16 @@ namespace TCC.Controls.ChatControls
             dc.Handled = true;
             //declineButton.Visibility = Visibility.Collapsed;
             //acceptButton.Visibility = Visibility.Collapsed;
+        }
+
+        private void UIElement_OnMouseEnter(object sender, MouseEventArgs e)
+        {
+            ChatWindowViewModel.Instance.Paused = true;
+        }
+
+        private void UIElement_OnMouseLeave(object sender, MouseEventArgs e)
+        {
+            ChatWindowViewModel.Instance.Paused = false;
         }
     }
 }
