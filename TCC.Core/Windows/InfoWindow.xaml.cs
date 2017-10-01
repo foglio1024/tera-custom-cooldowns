@@ -62,6 +62,7 @@ namespace TCC.Windows
         }
         private void CloseWindow(object sender, RoutedEventArgs e)
         {
+            InfoWindowViewModel.Instance.SaveToFile();
             var a = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(150));
             a.Completed += (s, ev) => { Hide(); InfoWindowViewModel.Instance.SaveToFile(); };
             this.BeginAnimation(OpacityProperty, a);
@@ -97,15 +98,15 @@ namespace TCC.Windows
 
         public void AnimateICitems()
         {
-            icIndex = 0;
-            itemIndex = 0;
+            //icIndex = 0;
+            //itemIndex = 0;
 
-            ICs = new List<ItemsControl>();
-            foreach (ItemsControl ic in dngICs.Children)
-            {
-                if(ic.Visibility == Visibility.Visible) ICs.Add(ic);
-            }
-            Task.Delay(50).ContinueWith(task => t.Start());
+            //ICs = new List<ItemsControl>();
+            //foreach (ItemsControl ic in dngICs.Children)
+            //{
+            //    if(ic.Visibility == Visibility.Visible) ICs.Add(ic);
+            //}
+            //Task.Delay(50).ContinueWith(task => t.Start());
         }
         private UniformGrid GetInnerUniformGrid(FrameworkElement element)
         {

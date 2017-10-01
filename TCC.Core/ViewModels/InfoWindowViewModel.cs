@@ -28,6 +28,7 @@ namespace TCC.ViewModels
         public ICollectionView T3Dungs { get; set; }
         public ICollectionView T4Dungs { get; set; }
         public ICollectionView T5Dungs { get; set; }
+        public ICollectionView AllDungeons { get; set; }
         public Character CurrentCharacter
         {
             get => Characters.FirstOrDefault(x => x.Id == SessionManager.CurrentPlayer.PlayerId);
@@ -192,24 +193,27 @@ namespace TCC.ViewModels
             }
             NotifyPropertyChanged(nameof(SelectedCharacter));
 
+            AllDungeons = new CollectionViewSource {Source = SelectedCharacter.Dungeons}.View;
             SoloDungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
             T2Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
             T3Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
             T4Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
             T5Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
 
+            AllDungeons.Filter = null;
             SoloDungs.Filter = d => DungeonDatabase.Instance.DungeonDefinitions[((DungeonCooldown)d).Id].Tier == DungeonTier.Solo;
             T2Dungs.Filter = d => DungeonDatabase.Instance.DungeonDefinitions[((DungeonCooldown)d).Id].Tier == DungeonTier.Tier2;
             T3Dungs.Filter = d => DungeonDatabase.Instance.DungeonDefinitions[((DungeonCooldown)d).Id].Tier == DungeonTier.Tier3;
             T4Dungs.Filter = d => DungeonDatabase.Instance.DungeonDefinitions[((DungeonCooldown)d).Id].Tier == DungeonTier.Tier4;
             T5Dungs.Filter = d => DungeonDatabase.Instance.DungeonDefinitions[((DungeonCooldown)d).Id].Tier == DungeonTier.Tier5;
 
+            AllDungeons.SortDescriptions.Add(new SortDescription("Tier", ListSortDirection.Ascending));
+            NotifyPropertyChanged(nameof(AllDungeons));
             NotifyPropertyChanged(nameof(SoloDungs));
             NotifyPropertyChanged(nameof(T2Dungs));
             NotifyPropertyChanged(nameof(T3Dungs));
             NotifyPropertyChanged(nameof(T4Dungs));
             NotifyPropertyChanged(nameof(T5Dungs));
-
             //_dispatcher.Invoke(() => WindowManager.InfoWindow.AnimateICitems());
         }
         public void ShowWindow()

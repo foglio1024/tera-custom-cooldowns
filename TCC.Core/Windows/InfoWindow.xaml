@@ -16,7 +16,7 @@
             <controls:VanguardInfoControl/>
         </DataTemplate>
         <DataTemplate x:Key="dngs">
-            <controls:DungeonInfoControl/>
+            <local:NewDungeonInfoControl/>
         </DataTemplate>
     </Window.Resources>
     <Grid Margin="15" Height="Auto" Opacity="1"  UseLayoutRounding="True" >
@@ -84,12 +84,12 @@
                 <TextBlock FontSize="24" Opacity=".4" HorizontalAlignment="Center" Margin="0,0,0,10" TextAlignment="Center"
                        VerticalAlignment="Center" FontWeight="Thin" >Dungeon entries</TextBlock>
                 <!--Content-->
-                <StackPanel Grid.Row="1" x:Name="dngICs">
+                <!--<StackPanel Grid.Row="1" x:Name="dngICs">
                     <ItemsControl Grid.Row="1" ItemsSource="{Binding Instance.SoloDungs}" ItemTemplate="{StaticResource dngs}" Name="soloIC"
                                VerticalAlignment="Top" Margin="0,0,0,5" Height="Auto" >
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <UniformGrid Columns="3" />
+                                <UniformGrid Columns="5" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
@@ -105,7 +105,7 @@
                                VerticalAlignment="Top" Margin="0,0,0,5" Height="Auto" >
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <UniformGrid Columns="3"/>
+                                <UniformGrid Columns="4"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
@@ -113,7 +113,7 @@
                                VerticalAlignment="Top" Margin="0,0,0,5" Height="Auto" >
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <UniformGrid Columns="3"/>
+                                <UniformGrid Columns="5"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
@@ -121,11 +121,18 @@
                                VerticalAlignment="Top" Margin="0,0,0,0" Height="Auto" >
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <UniformGrid Columns="3"/>
+                                <UniformGrid Columns="2"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
-                </StackPanel>
+                </StackPanel>-->
+                <ItemsControl ItemsSource="{Binding Instance.AllDungeons}" ItemTemplate="{StaticResource dngs}" Grid.Row="1">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel></StackPanel>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
             </Grid>
             <!--Timeline-->
             <controls:TimelineControl x:Name="TimeLine" Grid.ColumnSpan="2" 

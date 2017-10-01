@@ -17,6 +17,10 @@ namespace TCC.Data
                 NotifyPropertyChanged(nameof(Entries));
             }
         }
+
+        public DungeonTier Tier => DungeonDatabase.Instance.DungeonDefinitions[Id].Tier;
+
+
         public DungeonCooldown(uint id, Dispatcher d)
         {
             _dispatcher = d;
