@@ -117,7 +117,7 @@ namespace TCC.Parsing
         public static void HandleNewItemCooldown(S_START_COOLTIME_ITEM p)
         {
             WindowManager.SkillsEnded = false;
-            SkillManager.AddBrooch(p.ItemId, p.Cooldown);
+            SkillManager.AddItemSkill(p.ItemId, p.Cooldown);
         }
         public static void HandleDecreaseSkillCooldown(S_DECREASE_COOLTIME_SKILL p)
         {
@@ -214,7 +214,9 @@ namespace TCC.Parsing
                 var ch = InfoWindowViewModel.Instance.Characters.FirstOrDefault(x => x.Id == item.Id);
                 if (ch != null)
                 {
-                    //update?
+                    ch.Name = item.Name;
+                    ch.Laurel = item.Laurel;
+                    ch.Position = item.Position;
                 }
                 else
                 {
