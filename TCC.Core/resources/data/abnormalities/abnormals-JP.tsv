@@ -40,13 +40,11 @@
 101	Buff	True	True	False	反撃	効果持続中、ダウン/硬直状態になりません。	icon_skills.risingattack_tex
 201	Buff	False	True	False	パワーブレシング I	強靭な力の祝福により、力が$H_W_GOOD17$COLOR_END上昇します。	icon_skills.attackup_tex
 202	Buff	False	True	False	パワーブレシング II	強靭な力の祝福により、力が$H_W_GOOD25$COLOR_END上昇します。	icon_skills.attackup_tex
-301	Stun	True	False	False	サンダーオーブ I	強力な電気ショックにより気絶しました。	icon_skills.shocktrap_tex
-302	Stun	True	False	False	サンダーオーブ II	強力な電気ショックにより気絶しました。	icon_skills.shocktrap_tex
-303	Stun	True	False	False	サンダーオーブ III	強力な電気ショックにより気絶しました。	icon_skills.shocktrap_tex
+301	Stun	True	False	False	サンダーオーブ	強力な電気ショックにより気絶しました。	icon_skills.shocktrap_tex
 501	Buff	True	True	False	移動速度上昇	移動速度が大幅に上昇します。	icon_status.aura_of_wind_tex
 601	Buff	True	True	True	インサニティーオーラ I	狂気の精霊の気により、力が $H_W_GOOD20$COLOR_END 増加し、攻撃速度も $H_W_GOOD6$COLOR_END 上昇します。 使用者が周囲30m範囲内にいる場合のみ効果を受けることができます。	icon_skills.rage_tex
 602	Buff	True	True	True	インサニティーオーラ II	狂気の精霊の気により、力が $H_W_GOOD25$COLOR_END 増加し、攻撃速度も $H_W_GOOD6$COLOR_END 上昇します。 使用者が周囲30m範囲内にいる場合のみ効果を受けることができます。	icon_skills.rage_tex
-603	Buff	True	True	True	インサニティーオーラ III	狂気の精霊の気により、力が $H_W_GOOD40$COLOR_END 増加し、攻撃速度も $H_W_GOOD6$COLOR_END 上昇します。 使用者が周囲30m範囲内にいる場合のみ効果を受けることができます。	icon_skills.rage_tex
+603	Buff	True	True	True	インサニティーオーラ III	狂気の精霊の気により、力が $H_W_GOOD48$COLOR_END 増加し、攻撃速度も $H_W_GOOD9.6$COLOR_END上昇します。 使用者が周囲30m範囲内にいる場合のみ効果を受けることができます。	icon_skills.rage_tex
 901	Stun	True	False	False	フラッシュバレット I	閃光により気絶しました。	icon_skills.flashball_tex
 902	Buff	True	True	True	ノクタニウム強化弾	ノクタニウム強化弾を使用して、スキル効果を増大させます。	icon_items.union_supplies5_tex
 903	Buff	True	True	False	殺意	殺意により、力が$H_W_GOOD15$COLOR_END、攻撃速度が$H_W_GOOD8%$COLOR_END、クリティカル率が$H_W_GOOD4%$COLOR_END、移動速度が$H_W_GOOD4%$COLOR_END上昇します。	icon_skills.battlefield_high_ranking_tex
@@ -837,6 +835,7 @@
 23190	Buff	True	True	False	スキル威力増加［連闘の紋章］	連係して「ノックダウンストライク」使用時、スキル威力が$H_W_GOOD25%$COLOR_END増加します。	icon_crest.crestnextskillattackup_tex
 23200	Buff	True	True	False	スキル威力増加［連闘の紋章］	連係して「回り込み」使用時、スキル威力が$H_W_GOOD25%$COLOR_END増加します。	icon_crest.crestnextskillattackup_tex
 23210	Buff	True	True	False	MP持続回復［精神の紋章］	$H_W_GOOD1$COLOR_END second毎に全MPの$H_W_GOOD6％$COLOR_ENDが回復します。	icon_crest.crestpassivemprecoveryup_tex
+23220	Buff	False	True	False	見えない異常状態		icon_crest.crestpassivemprecoveryup_tex
 24010	Buff	True	True	False	力上昇［力の紋章］	力が$H_W_GOOD20%$COLOR_END上昇します。	icon_crest.crestactiveattackup_tex
 24020	Buff	True	True	False	消費MP減少［連精の紋章］	連係して「アースストライク」使用時、消費MPが$H_W_GOOD-63$COLOR_END減少します。	icon_crest.crestnextskillmpdown_tex
 24030	Buff	True	True	False	消費MP減少［連精の紋章］	連係して「疾駆」使用時、消費MPが$H_W_GOOD-75$COLOR_END減少します。	icon_crest.crestnextskillmpdown_tex
@@ -931,7 +930,7 @@
 27130	Buff	True	True	False	被撃時均衡上昇［均衡の紋章］	均衡が$H_W_GOOD5倍$COLOR_END上昇します。	icon_crest.crestactivereactionresist_tex
 27140	Buff	True	True	False	HP回復［忍耐の紋章］	全HPの$H_W_GOOD20％$COLOR_ENDが回復します。	icon_crest.crestpassivehpheal_tex
 27150	Buff	True	True	False	HP回復効果強化［救済の紋章］	HP回復量が$H_W_GOOD20%$COLOR_END増加します。	icon_crest.crestactivehprecoveryup_tex
-27160	WeakeningEffect	True	False	False	耐久力減少［弱化の紋章］	耐久力が$H_W_BAD9%$COLOR_END減少します。	icon_crest.crestactivedefencedown_tex
+27160	WeakeningEffect	True	False	False	耐久力減少［弱化の紋章］	耐久力が$H_W_BAD10%$COLOR_END減少します。	icon_crest.crestactivedefencedown_tex
 27161	Buff	True	True	False	HP回復効果強化［救済の紋章］	HP回復量が$H_W_GOOD25%$COLOR_END増加します。	icon_crest.crestactivehprecoveryup_tex
 27170	Buff	False	True	False	最大HP状態で回復「霊魂の紋章」	異常状態ツールチップ表示なし(isShow=False)このツールチップが見えたらBTS処理が必要！	icon_crest.crestpassivehpwhileheal_tex
 28010	Buff	True	True	False	スキル威力増加［連闘の紋章］	連係して「パニシュメントハンド」使用時、スキル威力が$H_W_GOOD25%$COLOR_END増加します。	icon_crest.crestnextskillattackup_tex
@@ -1012,7 +1011,7 @@
 33150	Buff	True	True	False	スキル威力増加 [連闘の紋章]	連係して「エクステンドスラッシュ」使用時、スキル威力が$H_W_GOOD25%$COLOR_END増加します。	icon_crest.crestnextskillattackup_tex
 33170	Buff	True	True	False	HP持続回復［忍耐の紋章］	$H_W_GOOD1$COLOR_END second毎に全HPの$H_W_GOOD2％$COLOR_ENDが回復します。	icon_crest.crestpassivehpheal_tex
 33200	Buff	True	True	False	スキル威力増加［連闘の紋章］	次に使用するスキルの威力が30％増加します。	icon_crest.crestnextskillattackup_tex
-33210	Buff	True	True	False	スキル威力増加 [連闘の紋章]	連係して「月鳴り」使用時、スキル威力が$H_W_GOOD25%$COLOR_END上昇します。	icon_crest.e_crestnextskillattackup_tex
+33210	Buff	True	True	False	スキル威力増加 [連闘の紋章]	連係して「月鳴り」使用時、スキル威力が$H_W_GOOD25%$COLOR_END上昇します。	icon_crest.crestpassivehpheal_tex
 45301	WeakeningEffect	True	False	False	強い衝撃	砲弾による強い衝撃を受けました。	icon_status.minusdefence_tex
 45302	WeakeningEffect	True	False	False	均衡喪失	強い衝撃でバランスを崩し、倒れます。	icon_status.minuscriticalresist_tex
 45303	DamageOverTime	False	False	False		13秒後にドリルが消えます。	
@@ -1207,9 +1206,9 @@
 100102	Buff	True	True	True	ブレードスタンス III	力$H_W_GOOD15$COLOR_ENDとクリティカル発生$H_W_GOOD50$COLOR_END、モンスター攻撃時、スキル威力が$H_W_GOOD10％$COLOR_END上昇するが、耐久力は$H_W_BAD10%$COLOR_END減少します。	icon_skills.ironwilla_tex
 100103	Buff	True	True	True	ブレードスタンス IV	力$H_W_GOOD18$COLOR_ENDとクリティカル発生$H_W_GOOD55$COLOR_END、モンスター攻撃時、スキル威力が$H_W_GOOD10％$COLOR_END上昇するが、耐久力は$H_W_BAD10%$COLOR_END減少します。	icon_skills.ironwilla_tex
 100150	Buff	False	True	True	見えない異常状態（出たらBTS）	モンスター攻撃時ダメージ10％追加ダメージ	
-100200	Buff	True	True	True	ディフェンススタンス I	耐久力が$H_W_GOOD15%$COLOR_END、均衡が$H_W_GOOD20$COLOR_END、モンスター攻撃時クリティカル発生率が$H_W_GOOD15％$COLOR_END増加します。追加ですべての攻撃スキルによる敵対値が$H_W_GOOD65%$COLOR_END上昇し、戦闘時、一部の特殊攻撃を除きモンスターの攻撃で後退しません。	icon_skills.ironwillb_tex
-100201	Buff	True	True	True	ディフェンススタンス II	耐久力が$H_W_GOOD20%$COLOR_END、均衡が$H_W_GOOD20$COLOR_END、モンスター攻撃時クリティカル発生率が$H_W_GOOD15％$COLOR_END増加します。追加ですべての攻撃スキルによる敵対値が$H_W_GOOD80%$COLOR_END上昇し、戦闘時、一部の特殊攻撃を除きモンスターの攻撃で後退しません。	icon_skills.ironwillb_tex
-100202	Buff	True	True	True	ディフェンススタンス III	耐久力が$H_W_GOOD25%$COLOR_END、均衡が$H_W_GOOD20$COLOR_END、モンスター攻撃時クリティカル発生率が$H_W_GOOD15％$COLOR_END増加します。追加ですべての攻撃スキルによる敵対値が$H_W_GOOD100%$COLOR_END上昇し、戦闘時、一部の特殊攻撃を除きモンスターの攻撃で後退しません。	icon_skills.ironwillb_tex
+100200	Buff	True	True	True	ディフェンススタンス I	耐久力が$H_W_GOOD20%$COLOR_END、均衡が$H_W_GOOD20$COLOR_END、モンスター攻撃時クリティカル発生率が$H_W_GOOD15％$COLOR_END増加します。追加ですべての攻撃スキルによる敵対値が$H_W_GOOD100%$COLOR_END上昇し、戦闘時、一部の特殊攻撃を除きモンスターの攻撃で後退しません。	icon_skills.ironwillb_tex
+100201	Buff	True	True	True	ディフェンススタンス II	耐久力が$H_W_GOOD25%$COLOR_END、均衡が$H_W_GOOD30$COLOR_END、モンスター攻撃時クリティカル発生率が$H_W_GOOD15％$COLOR_END増加します。追加ですべての攻撃スキルによる敵対値が$H_W_GOOD120%$COLOR_END上昇し、戦闘時、一部の特殊攻撃を除きモンスターの攻撃で後退しません。	icon_skills.ironwillb_tex
+100202	Buff	True	True	True	ディフェンススタンス III	耐久力が$H_W_GOOD10029500%$COLOR_END、均衡が$H_W_GOOD20$COLOR_END、モンスター攻撃時クリティカル発生率が$H_W_GOOD15％$COLOR_END増加します。追加ですべての攻撃スキルによる敵対値が$H_W_GOOD100%$COLOR_END上昇し、戦闘時、一部の特殊攻撃を除きモンスターの攻撃で後退しません。	icon_skills.ironwillb_tex
 100203	Buff	True	True	True	ディフェンススタンス IV	耐久力が$H_W_GOOD25%$COLOR_END、均衡が$H_W_GOOD30$COLOR_END、モンスター攻撃時クリティカル発生率が$H_W_GOOD15％$COLOR_END増加します。追加ですべての攻撃スキルによる敵対値が$H_W_GOOD120%$COLOR_END上昇し、戦闘時、一部の特殊攻撃を除きモンスターの攻撃で後退しません。	icon_skills.ironwillb_tex
 100293	Buff	False	True	False	双剣ブロック基本異常状態	異常状態ツールチップ表示なし(isShow=False)このツールチップが見えたらBTS処理が必要！	icon_skills.twinswordsdefence_tex
 100294	Buff	True	True	False	闘争心Ⅰ	闘争心Ⅰの効果でMPが5％回復します。	icon_skills.twinswordsdefence_tex
@@ -1220,37 +1219,48 @@
 100300	Stun	True	False	False	バトルクライ	鼓膜を引き裂かんばかりの雄叫びにより、気絶しました。	icon_skills.thunderingroar_tex
 100301	Stun	True	False	False	削除_バトルクライ II	鼓膜を引き裂かんばかりの雄叫びにより、気絶しました。	icon_skills.thunderingroar_tex
 100400	Buff	True	True	False	ウィンドスラッシュ発動	「ウィンドスラッシュ」を使用できます。	icon_skills.allroundslash_tex
-100500	DamageOverTime	True	False	False	ポイズンストライク I	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-116$COLOR_END減少します。	icon_skills.poisonblowattack_tex
-100501	DamageOverTime	True	False	False	ポイズンストライク II	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-175$COLOR_END減少します。	icon_skills.poisonblowattack_tex
-100502	DamageOverTime	True	False	False	ポイズンストライク III	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-292$COLOR_END減少します。	icon_skills.poisonblowattack_tex
-100503	DamageOverTime	True	False	False	ポイズンストライク IV	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-438$COLOR_END減少します。	icon_skills.poisonblowattack_tex
-100504	DamageOverTime	True	False	False	ポイズンストライク V	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-612$COLOR_END減少します。	icon_skills.poisonblowattack_tex
-100505	DamageOverTime	True	False	False	ポイズンストライク VI	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-845$COLOR_END減少します。	icon_skills.poisonblowattack_tex
-100506	DamageOverTime	True	False	False	ポイズンストライク VII	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-1428$COLOR_END減少します。	icon_skills.poisonblowattack_tex
-100507	DamageOverTime	True	False	False	ポイズンストライク VIII	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-1892$COLOR_END減少します。	icon_skills.poisonblowattack_tex
-100508	DamageOverTime	True	False	False	ポイズンストライク IX	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-6068$COLOR_END減少します。	icon_skills.poisonblowattack_tex
-100520	DamageOverTime	True	False	False	ポイズンストライク I	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-92$COLOR_END減少します。	icon_skills.poisonblowattack_tex
-100521	DamageOverTime	True	False	False	ポイズンストライク II	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-127$COLOR_END減少します。	icon_skills.poisonblowattack_tex
-100522	DamageOverTime	True	False	False	ポイズンストライク III	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-175$COLOR_END減少します。	icon_skills.poisonblowattack_tex
-100523	DamageOverTime	True	False	False	ポイズンストライク IV	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-242$COLOR_END減少します。	icon_skills.poisonblowattack_tex
-100524	DamageOverTime	True	False	False	ポイズンストライク V	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-334$COLOR_END減少します。	icon_skills.poisonblowattack_tex
-100525	DamageOverTime	True	False	False	ポイズンストライク VI	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-461$COLOR_END減少します。	icon_skills.poisonblowattack_tex
-100526	DamageOverTime	True	False	False	ポイズンストライク VII	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-720$COLOR_END減少します。	icon_skills.poisonblowattack_tex
-100527	DamageOverTime	True	False	False	ポイズンストライク VIII	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-954$COLOR_END減少します。	icon_skills.poisonblowattack_tex
-100528	DamageOverTime	True	False	False	ポイズンストライク IX	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-1420$COLOR_END減少します。	icon_skills.poisonblowattack_tex
+100500	DamageOverTime	True	False	False	ポイズンストライク I	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-40$COLOR_END減少します。	icon_skills.poisonblowattack_tex
+100501	DamageOverTime	True	False	False	ポイズンストライク II	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-60$COLOR_END減少します。	icon_skills.poisonblowattack_tex
+100502	DamageOverTime	True	False	False	ポイズンストライク III	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-90$COLOR_END減少します。	icon_skills.poisonblowattack_tex
+100503	DamageOverTime	True	False	False	ポイズンストライク IV	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-136$COLOR_END減少します。	icon_skills.poisonblowattack_tex
+100504	DamageOverTime	True	False	False	ポイズンストライク V	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-214$COLOR_END減少します。	icon_skills.poisonblowattack_tex
+100505	DamageOverTime	True	False	False	ポイズンストライク VI	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-341$COLOR_END減少します。	icon_skills.poisonblowattack_tex
+100506	DamageOverTime	True	False	False	ポイズンストライク VII	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-496$COLOR_END減少します。	icon_skills.poisonblowattack_tex
+100507	DamageOverTime	True	False	False	ポイズンストライク VIII	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-690$COLOR_END減少します。	icon_skills.poisonblowattack_tex
+100508	DamageOverTime	True	False	False	ポイズンストライク IX	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-1039$COLOR_END減少します。	icon_skills.poisonblowattack_tex
+100509	DamageOverTime	True	False	False	ポイズンストライク X	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-1582$COLOR_ENDずつ減少します。	icon_skills.poisonblowattack_tex
+100510	DamageOverTime	True	False	False	ポイズンストライク XI	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-1892$COLOR_ENDずつ減少します。	icon_skills.poisonblowattack_tex
+100520	DamageOverTime	True	False	False	ポイズンストライク I	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-36$COLOR_END減少します。	icon_skills.poisonblowattack_tex
+100521	DamageOverTime	True	False	False	ポイズンストライク II	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-55$COLOR_END減少します。	icon_skills.poisonblowattack_tex
+100522	DamageOverTime	True	False	False	ポイズンストライク III	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-75$COLOR_END減少します。	icon_skills.poisonblowattack_tex
+100523	DamageOverTime	True	False	False	ポイズンストライク IV	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-104$COLOR_END減少します。	icon_skills.poisonblowattack_tex
+100524	DamageOverTime	True	False	False	ポイズンストライク V	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-143$COLOR_END減少します。	icon_skills.poisonblowattack_tex
+100525	DamageOverTime	True	False	False	ポイズンストライク VI	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-197$COLOR_END減少します。	icon_skills.poisonblowattack_tex
+100526	DamageOverTime	True	False	False	ポイズンストライク VII	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-273$COLOR_END減少します。	icon_skills.poisonblowattack_tex
+100527	DamageOverTime	True	False	False	ポイズンストライク VIII	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-376$COLOR_END減少します。	icon_skills.poisonblowattack_tex
+100528	DamageOverTime	True	False	False	ポイズンストライク IX	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-547$COLOR_END減少します。	icon_skills.poisonblowattack_tex
+100529	DamageOverTime	True	False	False	ポイズンストライク X	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-798$COLOR_ENDずつ減少します。	icon_skills.poisonblowattack_tex
+100530	DamageOverTime	True	False	False	ポイズンストライク XI	致命的な猛毒により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-954$COLOR_ENDずつ減少します。	icon_skills.poisonblowattack_tex
 100600	Buff	True	True	True	アンクルスラッシュ I	一定の確率で対象の移動速度と攻撃速度を$H_W_GOOD15％$COLOR_END減少させます。$H_W_BAD2$COLOR_END second1毎にMPが$H_W_BAD-10$COLOR_END減少します。「連撃」使用時にのみ効果が発生します。	icon_skills.aimingankle_tex
 100630	WeakeningEffect	True	False	False	足首負傷	移動速度と攻撃速度が$H_W_BAD0,85$COLOR_END減少します。	icon_skills.aimingankle_tex
 100700	Buff	False	True	False	カウンターストライク発動	「カウンターストライク」が使用できます。	icon_skills.reversalturningattack_tex
 100800	Buff	True	True	False	デッドリーウィル I	$time間クリティカル率が$H_W_GOOD35%$COLOR_END上昇します。	icon_skills.deadlywill_tex
-100801	Buff	True	True	False	デッドリーウィル II	$time間クリティカル率が$H_W_GOOD50%$COLOR_END上昇します。&#xD;&#xA;效果持続時間中に使用した近接攻撃スキルのクールタイムが半分に減少し、持続時間中以下のスキルが強化されます。$BR - [ランブローXI]：ストックポイントが通常の2倍蓄積され、10％の追加ダメージ。$BR - [ワイルドレイジ - ディセクトVII]：ストックポイントが通常の2倍蓄積され、10％の追加ダメージ。$BR - [ゲイルレイザーII]：スキルの威力が10％、範囲が20％増加します。	icon_skills.deadlywill_tex
+100801	Buff	True	True	False	デッドリーウィル II	$time間クリティカル率が$H_W_GOOD50%$COLOR_END上昇します。&#xA;効果持続時間中に使用した近接攻撃スキルのクールタイムが半分に減少し、持続時間中以下のスキルが強化されます。$BR - [ランブローIX]：ストックポイントが通常の2倍蓄積され、10％の追加ダメージ。$BR - [ワイルドレイジ - ディセクト IX]： ストックポイントが通常の2倍蓄積され、10％の追加ダメージ。$BR - [ゲイルレイザー IX]： スキルの威力が10%、範囲が20%増加します。	icon_skills.deadlywill_tex
 100802	Buff	False	True	False	デッドリーウィル I_再利用減少	見えない異常状態	
 100803	Buff	False	True	False	デッドリーウィル I_再利用減少1	見えない異常状態	
 100900	Stun	True	False	False	ストロングスラッシュ I	気絶しているため動けません。	icon_skills.hardslash_tex
 100901	Stun	True	False	False	ストロングスラッシュ II	気絶しているため動けません。	icon_skills.hardslash_tex
+100902	Stun	True	False	False	ストロングスラッシュ III	気絶した状態で動けません。	icon_skills.hardslash_tex
+100903	Stun	True	False	False	ストロングスラッシュ IX	気絶した状態で動けません。	icon_skills.hardslash_tex
+100904	Stun	True	False	False	ストロングスラッシュ X	気絶した状態で動けません。	icon_skills.hardslash_tex
 101000	Stun	True	False	False	回り込み I	気絶しているため動けません。	icon_skills.backattack_tex
 101001	Stun	True	False	False	回り込み II	気絶しているため動けません。	icon_skills.backattack_tex
 101100	Stun	True	False	False	カウンターストライク I	気絶しているため動けません。	icon_skills.reversalturningattack_tex
 101101	Stun	True	False	False	カウンターストライク II	気絶しているため動けません。	icon_skills.reversalturningattack_tex
+101102	Stun	True	False	False	カウンターストライク III	気絶した状態で動けません。	icon_skills.reversalturningattack_tex
+101103	Stun	True	False	False	カウンターストライク IX	気絶した状態で動けません。	icon_skills.reversalturningattack_tex
+101104	Stun	True	False	False	カウンターストライク X	気絶した状態で動けません。	icon_skills.reversalturningattack_tex
+101105	Stun	True	False	False	カウンターストライク XI	気絶した状態で動けません。	icon_skills.reversalturningattack_tex
 101200	WeakeningEffect	True	False	False	コンバットストライク	耐久力が$H_W_BAD8%$COLOR_END減少します。	icon_skills.aggravatingstrike_tex
 101220	WeakeningEffect	True	False	False	コンバットストライク	耐久力が$H_W_BAD8%$COLOR_END、HP回復効果が$H_W_BAD30%$COLOR_END減少します。	icon_skills.aggravatingstrike_tex
 101300	Buff	True	True	False	ワイルドレイジ - スラスト	重複する度に、攻撃者の攻撃速度が0.9％ずつ上昇します。この効果は、最大13回まで重複します。	icon_skills.dualrapidpiercing_tex
@@ -1318,9 +1328,9 @@
 300300	Buff	True	True	False	パワーセーブ I	次の一撃のダメージが$H_W_GOOD30%$COLOR_END増加します。	icon_skills.gatheringstrength_tex
 300301	Buff	True	True	False	パワーセーブ II	次の一撃のダメージが$H_W_GOOD33%$COLOR_END増加します。	icon_skills.gatheringstrength_tex
 300400	Stun	True	False	False	レトリートキック	気絶しているため動けません。	icon_skills.retreatingkick_tex
-300500	Buff	True	True	False	アドバンスジャンプ I	次の一撃の攻撃速度が$H_W_GOOD30%$COLOR_END上昇します。	icon_skills.advancingleap_tex
-300501	Buff	True	True	False	アドバンスジャンプ II	次の一撃の攻撃速度が$H_W_GOOD40%$COLOR_END上昇します。	icon_skills.advancingleap_tex
-300502	Buff	True	True	False	アドバンスジャンプ III	次の一撃の攻撃速度が$H_W_GOOD50%$COLOR_END上昇します。	icon_skills.advancingleap_tex
+300500	Buff	True	True	False	アドバンスジャンプ I	次の一撃の攻撃速度が$H_W_GOOD40%$COLOR_END上昇します。	icon_skills.advancingleap_tex
+300501	Buff	True	True	False	アドバンスジャンプ II	次の一撃の攻撃速度が$H_W_GOOD50%$COLOR_END上昇します。	icon_skills.advancingleap_tex
+300502	Buff	True	True	False	アドバンスジャンプ III	次の一撃の攻撃速度が$H_W_GOOD60%$COLOR_END上昇します。	icon_skills.advancingleap_tex
 300503	Buff	True	True	False	アドバンスジャンプ IV	次の一撃の攻撃速度が$H_W_GOOD60%$COLOR_END上昇します。	icon_skills.advancingleap_tex
 300600	Buff	True	True	False	疾駆 I	移動速度が$H_W_GOOD50%$COLOR_END上昇します。	icon_skills.dash_tex
 300601	Buff	True	True	False	疾駆 II	移動速度が$H_W_GOOD50%$COLOR_END上昇します。	icon_skills.dash_tex
@@ -1595,15 +1605,15 @@
 470023	Buff	False	True	False		見えてはいけない	
 470024	Buff	False	True	False	気まぐれ：力増加	タルスキの嘘を見破りました。力が増加します。	
 470025	Buff	False	True	False	気まぐれ：即死	タルスキに騙されましたね。間もなく死亡します。	
-470026	Stun	True	False	False	スノーマン	タルスキに騙されましたね？1秒当たりHPが20%ずつ減少し、連続でジャンプをすれば解除されます。	icon_status.icedamage_tex
-470027	Stun	True	False	False	スノーマン	タルスキに騙されましたね？1秒当たりHPが20%ずつ減少し、連続でジャンプをすれば解除されます。	icon_status.icedamage_tex
-470028	Stun	True	False	False	スノーマン	タルスキに騙されましたね？1秒当たりHPが20%ずつ減少し、連続でジャンプをすれば解除されます。	icon_status.icedamage_tex
+470026	Stun	True	False	False	スノーマン	タルスキに騙されましたね？1秒当たりHPが25％ずつ減少し、連続でジャンプをすれば解除されます。	icon_status.icedamage_tex
+470027	Stun	True	False	False	スノーマン	タルスキに騙されましたね？1秒当たりHPが25％ずつ減少し、連続でジャンプをすれば解除されます。	icon_status.icedamage_tex
+470028	Stun	True	False	False	スノーマン	タルスキに騙されましたね？1秒当たりHPが25％ずつ減少し、連続でジャンプをすれば解除されます。	icon_status.icedamage_tex
 470029	WeakeningEffect	False	True	False			
 470030	Buff	True	True	False	気まぐれ：力増加	タルスキの嘘を見破りました。力が増加します。	icon_skills.handyslash_tex
 470031	Buff	False	True	False	気まぐれ	タルスキは気まぐれです。5/4/3単位で嘘をつくかつかないか迷っています。	icon_status.battlecommand03_tex
 470032	Buff	False	True	False			icon_status.battlecommand04_tex
 470033	Buff	False	True	False			icon_status.battlecommand01_tex
-470034	DamageOverTime	True	False	False	出血	1秒当たりHPが10%ずつ減少。	icon_status.injuredbtdarkness_tex
+470034	DamageOverTime	True	False	False	出血	1秒当たりHPが15％ずつ減少。	icon_status.injuredbtdarkness_tex
 470035	WeakeningEffect	False	True	False			icon_status.battlecommand02_tex
 470036	Buff	False	False	False			
 470037	WeakeningEffect	True	True	False	混乱	タルスキに攻撃されたので、回復が不可能な状態です。	icon_status.battlefieldbuff02_tex
@@ -1699,36 +1709,40 @@
 500600	Buff	True	True	False	マナシールド I	MP1あたり14まで、最大$H_W_GOOD7063$COLOR_ENDのダメージを無効化します。最大値を超えたり、MPが0になると、効果は即解除されます。	icon_skills.manashield_tex
 500601	Buff	True	True	False	マナシールド II	MP1あたり33まで、最大$H_W_GOOD13529$COLOR_ENDのダメージを無効化します。最大値を超えたり、MPが0になると、効果は即解除されます。	icon_skills.manashield_tex
 500602	Buff	True	True	False	マナシールド III	MP1あたり33まで、最大$H_W_GOOD17346$COLOR_ENDのダメージを無効化します。最大値を超えたり、MPが0になると、効果は即解除されます。	icon_skills.manashield_tex
-500700	DamageOverTime	True	False	False	パンブラスト I	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-26$COLOR_END減少します。	icon_skills.disease_tex
-500701	DamageOverTime	True	False	False	パンブラスト II	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-40$COLOR_END減少します。	icon_skills.disease_tex
-500702	DamageOverTime	True	False	False	パンブラスト III	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-58$COLOR_END減少します。	icon_skills.disease_tex
-500703	DamageOverTime	True	False	False	パンブラスト IV	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-85$COLOR_END減少します。	icon_skills.disease_tex
-500704	DamageOverTime	True	False	False	パンブラスト V	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-121$COLOR_END減少します。	icon_skills.disease_tex
-500705	DamageOverTime	True	False	False	パンブラスト VI	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-174$COLOR_END減少します。	icon_skills.disease_tex
-500706	DamageOverTime	True	False	False	パンブラスト VII	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-241$COLOR_END減少します。	icon_skills.disease_tex
-500707	DamageOverTime	True	False	False	パンブラスト VIII	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-341$COLOR_END減少します。	icon_skills.disease_tex
-500708	DamageOverTime	True	False	False	パンブラスト IX	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-516$COLOR_END減少します。	icon_skills.disease_tex
-500720	DamageOverTime	True	False	False	パンブラスト I	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-27$COLOR_END減少します。	icon_skills.disease_tex
-500721	DamageOverTime	True	False	False	パンブラスト II	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-37$COLOR_END減少します。	icon_skills.disease_tex
-500722	DamageOverTime	True	False	False	パンブラスト III	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-51$COLOR_END減少します。	icon_skills.disease_tex
-500723	DamageOverTime	True	False	False	パンブラスト IV	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-71$COLOR_END減少します。	icon_skills.disease_tex
-500724	DamageOverTime	True	False	False	パンブラスト V	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-97$COLOR_END減少します。	icon_skills.disease_tex
-500725	DamageOverTime	True	False	False	パンブラスト VI	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-134$COLOR_END減少します。	icon_skills.disease_tex
-500726	DamageOverTime	True	False	False	パンブラスト VII	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-186$COLOR_END減少します。	icon_skills.disease_tex
-500727	DamageOverTime	True	False	False	パンブラスト VIII	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-258$COLOR_END減少します。	icon_skills.disease_tex
-500728	DamageOverTime	True	False	False	パンブラスト IX	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-382$COLOR_END減少します。	icon_skills.disease_tex
+500700	DamageOverTime	True	False	False	パンブラスト I	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-40$COLOR_END減少します。	icon_skills.disease_tex
+500701	DamageOverTime	True	False	False	パンブラスト II	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-58$COLOR_END減少します。	icon_skills.disease_tex
+500702	DamageOverTime	True	False	False	パンブラスト III	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-85$COLOR_END減少します。	icon_skills.disease_tex
+500703	DamageOverTime	True	False	False	パンブラスト IV	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-121$COLOR_END減少します。	icon_skills.disease_tex
+500704	DamageOverTime	True	False	False	パンブラスト V	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-174$COLOR_END減少します。	icon_skills.disease_tex
+500705	DamageOverTime	True	False	False	パンブラスト VI	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-241$COLOR_END減少します。	icon_skills.disease_tex
+500706	DamageOverTime	True	False	False	パンブラスト VII	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-341$COLOR_END減少します。	icon_skills.disease_tex
+500707	DamageOverTime	True	False	False	パンブラスト VIII	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-516$COLOR_END減少します。	icon_skills.disease_tex
+500720	DamageOverTime	True	False	False	パンブラスト I	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-37$COLOR_END減少します。	icon_skills.disease_tex
+500721	DamageOverTime	True	False	False	パンブラスト II	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-51$COLOR_END減少します。	icon_skills.disease_tex
+500722	DamageOverTime	True	False	False	パンブラスト III	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-71$COLOR_END減少します。	icon_skills.disease_tex
+500723	DamageOverTime	True	False	False	パンブラスト IV	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-97$COLOR_END減少します。	icon_skills.disease_tex
+500724	DamageOverTime	True	False	False	パンブラスト V	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-134$COLOR_END減少します。	icon_skills.disease_tex
+500725	DamageOverTime	True	False	False	パンブラスト VI	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-186$COLOR_END減少します。	icon_skills.disease_tex
+500726	DamageOverTime	True	False	False	パンブラスト VII	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-258$COLOR_END減少します。	icon_skills.disease_tex
+500727	DamageOverTime	True	False	False	パンブラスト VIII	怨念により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-382$COLOR_END減少します。	icon_skills.disease_tex
 500800	Stun	True	False	False	スリープウィンド I	深い眠りにつきました。ダメージを受けるとすぐに目覚めます。	icon_skills.sleepwind_tex
 500801	Stun	True	False	False	スリープウィンド II	深い眠りにつきました。ダメージを受けるとすぐに目覚めます。	icon_skills.sleepwind_tex
 500802	Stun	True	False	False	スリープウィンド III	深い眠りにつきました。ダメージを受けるとすぐに目覚めます。	icon_skills.sleepwind_tex
 500900	Stun	True	False	False	ネーブウィーク I	衰弱により、全てのスキルを使用できません。この効果は、プレイヤーにのみ適用され、攻撃を受けたりダウンすると解除されます。	icon_skills.neurasthenia_tex
-501000	DamageOverTime	True	False	False	ブレイジングブレス I	灼熱の息吹により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-1175$COLOR_END減少します。	icon_skills.burningbreath_tex
-501001	DamageOverTime	True	False	False	ブレイジングブレス II	灼熱の息吹により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-1631$COLOR_END減少します。	icon_skills.burningbreath_tex
-501002	DamageOverTime	True	False	False	ブレイジングブレス III	灼熱の息吹により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-2305$COLOR_END減少します。	icon_skills.burningbreath_tex
-501003	DamageOverTime	True	False	False	ブレイジングブレス IV	灼熱の息吹により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-3120$COLOR_END減少します。	icon_skills.burningbreath_tex
-501020	DamageOverTime	True	False	False	ブレイジングブレス I	灼熱の息吹により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-890$COLOR_END減少します。	icon_skills.burningbreath_tex
-501021	DamageOverTime	True	False	False	ブレイジングブレス II	灼熱の息吹により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-1228$COLOR_END減少します。	icon_skills.burningbreath_tex
-501022	DamageOverTime	True	False	False	ブレイジングブレス III	灼熱の息吹により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-1704$COLOR_END減少します。	icon_skills.burningbreath_tex
-501023	DamageOverTime	True	False	False	ブレイジングブレス IV	灼熱の息吹により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-2259$COLOR_END減少します。	icon_skills.burningbreath_tex
+501000	DamageOverTime	True	False	False	ブレイジングブレス I	灼熱の息吹により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-443$COLOR_END減少します。	icon_skills.burningbreath_tex
+501001	DamageOverTime	True	False	False	ブレイジングブレス II	灼熱の息吹により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-613$COLOR_END減少します。	icon_skills.burningbreath_tex
+501002	DamageOverTime	True	False	False	ブレイジングブレス III	灼熱の息吹により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-849$COLOR_END減少します。	icon_skills.burningbreath_tex
+501003	DamageOverTime	True	False	False	ブレイジングブレス IV	灼熱の息吹により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-1175$COLOR_END減少します。	icon_skills.burningbreath_tex
+501004	DamageOverTime	True	False	False	ブレイジングブレス V	灼熱の息吹により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-1631$COLOR_END減少します。	icon_skills.burningbreath_tex
+501005	DamageOverTime	True	False	False	ブレイジングブレス VI	灼熱の息吹により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-2305$COLOR_END減少します。	icon_skills.burningbreath_tex
+501006	DamageOverTime	True	False	False	ブレイジングブレス VII	灼熱の息吹により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-3120$COLOR_END減少します。	icon_skills.burningbreath_tex
+501020	DamageOverTime	True	False	False	ブレイジングブレス I	灼熱の息吹により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-338$COLOR_END減少します。	icon_skills.burningbreath_tex
+501021	DamageOverTime	True	False	False	ブレイジングブレス II	灼熱の息吹により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-467$COLOR_END減少します。	icon_skills.burningbreath_tex
+501022	DamageOverTime	True	False	False	ブレイジングブレス III	灼熱の息吹により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-645$COLOR_END減少します。	icon_skills.burningbreath_tex
+501023	DamageOverTime	True	False	False	ブレイジングブレス IV	灼熱の息吹により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-890$COLOR_END減少します。	icon_skills.burningbreath_tex
+501024	DamageOverTime	True	False	False	ブレイジングブレス V	灼熱の息吹により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-1228$COLOR_END減少します。	icon_skills.burningbreath_tex
+501025	DamageOverTime	True	False	False	ブレイジングブレス VI	灼熱の息吹により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-1704$COLOR_END減少します。	icon_skills.burningbreath_tex
+501026	DamageOverTime	True	False	False	ブレイジングブレス VII	灼熱の息吹により、$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-2259$COLOR_END減少します。	icon_skills.burningbreath_tex
 501100	DamageOverTime	True	False	False	マインドドライ I	精も根も尽き果てています！　$H_W_BAD2$COLOR_END second1毎にMPが$H_W_BAD-172$COLOR_END減少します。	icon_skills.mpsink_tex
 501101	DamageOverTime	True	False	False	マインドドライ II	精も根も尽き果てています！　$H_W_BAD2$COLOR_END second1毎にMPが$H_W_BAD-206$COLOR_END減少します。	icon_skills.mpsink_tex
 501150	DamageOverTime	False	False	False	マインドドライ I	異常状態ツールチップ非表示（isShow=False）このツールチップが出たらBTS処理が必要です。	icon_skills.mpsink_tex
@@ -1785,23 +1799,23 @@
 600701	WeakeningEffect	True	False	False	スパイダーラインアロー II	移動速度が$H_W_BAD0,7$COLOR_END減少します。	icon_skills.spiderarrow_tex
 600702	WeakeningEffect	True	False	False	スパイダーラインアロー III	移動速度が$H_W_BAD0,67$COLOR_END減少します。	icon_skills.spiderarrow_tex
 600800	Stun	True	False	False	ターニングキック	顎を蹴られて気絶しました。	icon_skills.turningkick_tex
-600900	DamageOverTime	True	False	False	ポイズンアロー I	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-270$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
-600901	DamageOverTime	True	False	False	ポイズンアロー II	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-389$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
-600902	DamageOverTime	True	False	False	ポイズンアロー III	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-589$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
-600903	DamageOverTime	True	False	False	ポイズンアロー IV	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-849$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
-600904	DamageOverTime	True	False	False	ポイズンアロー V	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-1179$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
-600905	DamageOverTime	True	False	False	ポイズンアロー VI	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-1626$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
-600906	DamageOverTime	True	False	False	ポイズンアロー VII	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-2360$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
+600900	DamageOverTime	True	False	False	ポイズンアロー I	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-215$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
+600901	DamageOverTime	True	False	False	ポイズンアロー II	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-310$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
+600902	DamageOverTime	True	False	False	ポイズンアロー III	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-456$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
+600903	DamageOverTime	True	False	False	ポイズンアロー IV	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-676$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
+600904	DamageOverTime	True	False	False	ポイズンアロー V	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-959$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
+600905	DamageOverTime	True	False	False	ポイズンアロー VI	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-1328$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
+600906	DamageOverTime	True	False	False	ポイズンアロー VII	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-1871$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
 600907	DamageOverTime	True	False	False	ポイズンアロー VIII	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-3128$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
 600908	DamageOverTime	True	False	False	ポイズンアロー IX	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-3780$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
-600920	DamageOverTime	True	False	False	ポイズンアロー I	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-232$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
-600921	DamageOverTime	True	False	False	ポイズンアロー II	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-160$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
-600922	DamageOverTime	True	False	False	ポイズンアロー III	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-221$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
-600923	DamageOverTime	True	False	False	ポイズンアロー IV	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-306$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
-600924	DamageOverTime	True	False	False	ポイズンアロー V	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-422$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
-600925	DamageOverTime	True	False	False	ポイズンアロー VI	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-583$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
-600926	DamageOverTime	True	False	False	ポイズンアロー VII	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-813$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
-600927	DamageOverTime	True	False	False	ポイズンアロー VIII	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-1078$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
+600920	DamageOverTime	True	False	False	ポイズンアロー I	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-95$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
+600921	DamageOverTime	True	False	False	ポイズンアロー II	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-131$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
+600922	DamageOverTime	True	False	False	ポイズンアロー III	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-249$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
+600923	DamageOverTime	True	False	False	ポイズンアロー IV	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-345$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
+600924	DamageOverTime	True	False	False	ポイズンアロー V	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-476$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
+600925	DamageOverTime	True	False	False	ポイズンアロー VI	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-660$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
+600926	DamageOverTime	True	False	False	ポイズンアロー VII	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-1078$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
+600927	DamageOverTime	True	False	False	ポイズンアロー VIII	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-1427$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
 600928	DamageOverTime	True	False	False	ポイズンアロー IX	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-1427$COLOR_END減少します。効果は最大3回まで重複します。	icon_skills.venomarrow_tex
 601000	WeakeningEffect	True	False	False	レストレントアロー I	移動速度が$value2、攻撃速度が$value減少します。	icon_skills.contaningshot_tex
 601001	WeakeningEffect	True	False	False	レストレントアロー II	移動速度が$value2、攻撃速度が$value減少します。	icon_skills.contaningshot_tex
@@ -1827,6 +1841,7 @@
 601600	Buff	True	True	False	フェイタルヴィジョン	次の1回目の攻撃のみ、どの位置からでも後方攻撃と等しいダメージを与えます。	icon_skills.weak_point_observed
 601700	Buff	False	True	False	アラクノイドアロー爆発	（見えてはいけない異常状態）	icon_skills.arcaneshockshot02_tex
 601800	Buff	False	True	False	アローレイン強化 I	アローレインのダメージが分散されません。（見えてはいけない異常状態）	icon_skills.arrowfall_tex
+601900	Buff	False	True	False			
 700100	Buff	True	True	False	リバースブレシング I	効果持続中に死亡した場合、祝福の力により、その場で即時に復活します。	icon_skills.autoresurrect_tex
 700200	Buff	True	True	True	フォグオーラ I - 放出	使用者とパーティーメンバーに「フォグオーラ」の効果を与えます。$H_W_BAD2$COLOR_END second1毎にMPが$H_W_BAD-30$COLOR_END減少します。有効範囲は周囲約30mです。	icon_skills.areahpgain_tex
 700201	Buff	True	True	True	フォグオーラ II - 放出	使用者とパーティーメンバーに「フォグオーラ」の効果を与えます。$H_W_BAD2$COLOR_END second1毎にMPが$H_W_BAD-30$COLOR_END減少します。有効範囲は周囲約30mです。	icon_skills.areahpgain_tex
@@ -1847,6 +1862,7 @@
 700406	Buff	False	True	False	リカバリーバレット VII	$H_W_GOOD1$COLOR_END second毎にHPが回復します。	icon_skills.healshot_tex
 700407	Buff	False	True	False	リカバリーバレット VIII	$H_W_GOOD1$COLOR_END second毎にHPが回復します。	icon_skills.healshot_tex
 700408	Buff	False	True	False	リカバリーバレット IX	$H_W_GOOD1$COLOR_END second毎にHPが回復します。	icon_skills.healshot_tex
+700409	Buff	False	True	False	リカバリーバレット X	$H_W_GOOD1$COLOR_END second毎にHPが回復します。	icon_skills.healshot_tex
 700500	WeakeningEffect	True	False	False	クランプバレット I	身体が拘束され、移動速度が$H_W_BAD0,5$COLOR_END減少します。	icon_skills.slowball_tex
 700501	WeakeningEffect	True	False	False	クランプバレット II	身体が拘束され、移動速度が$H_W_BAD0,4$COLOR_END減少します。	icon_skills.slowball_tex
 700600	Buff	True	True	True	レイジオーラ I - 放出	使用者とパーティーメンバーに「インサニティーオーラ」の効果を与えます。$H_W_BAD2$COLOR_END second1毎にMPが$H_W_BAD-30$COLOR_END減少します。有効範囲は周囲約30mです。	icon_skills.criticalupaura_tex
@@ -1859,26 +1875,8 @@
 700701	Buff	True	True	True	ヘイストオーラ II - 放出	使用者とパーティーメンバーに「ヘイストオーラ」の効果を与えます。$H_W_BAD2$COLOR_END second1毎にMPが$H_W_BAD-30$COLOR_END減少します。有効範囲は周囲約30mです。	icon_skills.speedupaura_tex
 700730	Buff	True	True	True	ヘイストオーラ I	移動速度が$H_W_GOOD10%$COLOR_END上昇します。有効範囲は周囲約30mです。	icon_status.plusmove_tex
 700731	Buff	True	True	True	ヘイストオーラ II	移動速度が$H_W_GOOD30%$COLOR_END上昇します。有効範囲は周囲約30mです。	icon_status.plusmove_tex
-700800	DamageOverTime	True	False	False	ペインカーズ I	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-40$COLOR_END減少します。	icon_skills.painfulshackle_tex
-700801	DamageOverTime	True	False	False	ペインカーズ II	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-62$COLOR_END減少します。	icon_skills.painfulshackle_tex
-700802	DamageOverTime	True	False	False	ペインカーズ III	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-96$COLOR_END減少します。	icon_skills.painfulshackle_tex
-700803	DamageOverTime	True	False	False	ペインカーズ IV	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-138$COLOR_END減少します。	icon_skills.painfulshackle_tex
-700804	DamageOverTime	True	False	False	ペインカーズ V	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-205$COLOR_END減少します。	icon_skills.painfulshackle_tex
-700805	DamageOverTime	True	False	False	ペインカーズ VI	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-289$COLOR_END減少します。	icon_skills.painfulshackle_tex
-700806	DamageOverTime	True	False	False	ペインカーズ VII	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-417$COLOR_END減少します。	icon_skills.painfulshackle_tex
-700807	DamageOverTime	True	False	False	ペインカーズ VIII	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-578$COLOR_END減少します。	icon_skills.painfulshackle_tex
-700808	DamageOverTime	True	False	False	ペインカーズ IX	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-817$COLOR_END減少します。	icon_skills.painfulshackle_tex
-700809	DamageOverTime	True	False	False	ペインカーズ IX	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-1238$COLOR_END減少します。	icon_skills.painfulshackle_tex
-700820	DamageOverTime	True	False	False	ペインカーズ I	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-41$COLOR_END減少します。	icon_skills.painfulshackle_tex
-700821	DamageOverTime	True	False	False	ペインカーズ II	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-63$COLOR_END減少します。	icon_skills.painfulshackle_tex
-700822	DamageOverTime	True	False	False	ペインカーズ III	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-86$COLOR_END減少します。	icon_skills.painfulshackle_tex
-700823	DamageOverTime	True	False	False	ペインカーズ IV	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-133$COLOR_END減少します。	icon_skills.painfulshackle_tex
-700824	DamageOverTime	True	False	False	ペインカーズ V	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-191$COLOR_END減少します。	icon_skills.painfulshackle_tex
-700825	DamageOverTime	True	False	False	ペインカーズ VI	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-283$COLOR_END減少します。	icon_skills.painfulshackle_tex
-700826	DamageOverTime	True	False	False	ペインカーズ VII	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-399$COLOR_END減少します。	icon_skills.painfulshackle_tex
-700827	DamageOverTime	True	False	False	ペインカーズ VIII	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-576$COLOR_END減少します。	icon_skills.painfulshackle_tex
-700828	DamageOverTime	True	False	False	ペインカーズ IX	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-802$COLOR_END減少します。	icon_skills.painfulshackle_tex
-700829	DamageOverTime	True	False	False	ペインカーズ IX	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-1212$COLOR_END減少します。	icon_skills.painfulshackle_tex
+700800	DamageOverTime	True	False	False	ペインカーズ I	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-1238$COLOR_END減少します。	icon_skills.painfulshackle_tex
+700820	DamageOverTime	True	False	False	ペインカーズ I	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-1212$COLOR_END減少します。	icon_skills.painfulshackle_tex
 700900	Buff	True	True	False	魔力回復 I	$H_W_GOOD1$COLOR_END second毎にMPが$H_W_GOOD100$COLOR_END回復します。攻撃を受けたり、戦闘用スキルまたは戦闘用アイテムを使用すると、効果は即解除されます。	icon_skills.mpcharge_tex
 701000	Buff	True	True	False	精霊の加護 I	$H_W_GOOD2$COLOR_END second1毎にHPが$H_W_GOOD70$COLOR_END回復します。	icon_skills.summonspiritofheal_tex
 701001	Buff	True	True	False	精霊の加護 II	$H_W_GOOD2$COLOR_END second1毎にHPが$H_W_GOOD88$COLOR_END回復します。	icon_skills.summonspiritofheal_tex
@@ -1965,9 +1963,41 @@
 701606	Buff	True	True	False	ガードスピリット II	召喚された霊気が最大$H_W_GOOD7149$COLOR_ENDのダメージを無効化します。最大値を超えると持続時間に関わらず即解除されます。	icon_skills.energiesofprotection_tex
 701607	Buff	True	True	False	ガードスピリット II	召喚された霊気により$H_W_GOOD2$COLOR_END second1毎にHPが$H_W_GOOD700$COLOR_END回復します。	icon_skills.energiesofprotection_tex
 701700	WeakeningEffect	True	False	False	デッドインフェクション I	$time間、解除不可のウィルス感染源になります。耐久力が $H_W_BAD5%$COLOR_END減少し、周囲7ｍ内の味方に疫病を伝染します。	icon_skills.plague_tex
-701701	WeakeningEffect	True	False	False	デッドインフェクション I	$time間、解除不可のウィルス感染源になります。周辺に持続ダメージを与える疾病を伝染し、耐性力が$H_W_GOOD5%$COLOR_END減少します。	icon_skills.plague_tex
-701800	DamageOverTime	True	False	False	デッドインフェクション I	持続ダメージ$H_W_GOOD-15086$COLOR_ENDを受けます。	icon_skills.plague_tex
-701801	DamageOverTime	True	False	False	デッドインフェクション I	持続ダメージ$H_W_GOOD-1953$COLOR_ENDを受け、HP回復量が$H_W_GOOD10%$COLOR_END減少します。	icon_skills.plague_tex
+701701	WeakeningEffect	True	False	False	デッドインフェクション II	$time間、解除不可のウィルス感染源になります。周辺に持続ダメージを与える疾病を伝染し、耐性力が$H_W_GOOD5%$COLOR_END減少します。	icon_skills.plague_tex
+701702	WeakeningEffect	True	False	False	デッドインフェクション III	$time間、解除不可のウィルス感染源になります。耐久力が $H_W_BAD5%$COLOR_END減少し、周囲7ｍ内の味方に疫病を伝染します。	icon_skills.plague_tex
+701703	WeakeningEffect	True	False	False	デッドインフェクション IV	$time間、解除不可のウィルス感染源になります。耐久力が $H_W_BAD5%$COLOR_END減少し、周囲7ｍ内の味方に疫病を伝染します。	icon_skills.plague_tex
+701704	WeakeningEffect	True	False	False	デッドインフェクション V	$time間、解除不可のウィルス感染源になります。耐久力が $H_W_BAD5%$COLOR_END減少し、周囲7ｍ内の味方に疫病を伝染します。	icon_skills.plague_tex
+701705	WeakeningEffect	True	False	False	デッドインフェクション VI	$time間、解除不可のウィルス感染源になります。耐久力が $H_W_BAD5%$COLOR_END減少し、周囲7ｍ内の味方に疫病を伝染します。	icon_skills.plague_tex
+701706	WeakeningEffect	True	False	False	デッドインフェクション VII	$time間、解除不可のウィルス感染源になります。耐久力が $H_W_BAD5%$COLOR_END減少し、周囲7ｍ内の味方に疫病を伝染します。	icon_skills.plague_tex
+701707	WeakeningEffect	True	False	False	デッドインフェクション VIII	$time間、解除不可のウィルス感染源になります。耐久力が $H_W_BAD5%$COLOR_END減少し、周囲7ｍ内の味方に疫病を伝染します。	icon_skills.plague_tex
+701708	WeakeningEffect	True	False	False	デッドインフェクション IX	$time間、解除不可のウィルス感染源になります。耐久力が $H_W_BAD5%$COLOR_END減少し、周囲7ｍ内の味方に疫病を伝染します。	icon_skills.plague_tex
+701720	WeakeningEffect	True	False	False	デッドインフェクション I	$time間、解除不可のウィルス感染源になります。耐久力が $H_W_BAD5%$COLOR_END減少し、周囲7ｍ内の味方に疫病を伝染します。	icon_skills.plague_tex
+701721	WeakeningEffect	True	False	False	デッドインフェクション II	$time間、解除不可のウィルス感染源になります。耐久力が $H_W_BAD5%$COLOR_END減少し、周囲7ｍ内の味方に疫病を伝染します。	icon_skills.plague_tex
+701722	WeakeningEffect	True	False	False	デッドインフェクション III	$time間、解除不可のウィルス感染源になります。耐久力が $H_W_BAD5%$COLOR_END減少し、周囲7ｍ内の味方に疫病を伝染します。	icon_skills.plague_tex
+701723	WeakeningEffect	True	False	False	デッドインフェクション IV	$time間、解除不可のウィルス感染源になります。耐久力が $H_W_BAD5%$COLOR_END減少し、周囲7ｍ内の味方に疫病を伝染します。	icon_skills.plague_tex
+701724	WeakeningEffect	True	False	False	デッドインフェクション V	$time間、解除不可のウィルス感染源になります。耐久力が $H_W_BAD5%$COLOR_END減少し、周囲7ｍ内の味方に疫病を伝染します。	icon_skills.plague_tex
+701725	WeakeningEffect	True	False	False	デッドインフェクション VI	$time間、解除不可のウィルス感染源になります。耐久力が $H_W_BAD5%$COLOR_END減少し、周囲7ｍ内の味方に疫病を伝染します。	icon_skills.plague_tex
+701726	WeakeningEffect	True	False	False	デッドインフェクション VII	$time間、解除不可のウィルス感染源になります。耐久力が $H_W_BAD5%$COLOR_END減少し、周囲7ｍ内の味方に疫病を伝染します。	icon_skills.plague_tex
+701727	WeakeningEffect	True	False	False	デッドインフェクション VIII	$time間、解除不可のウィルス感染源になります。耐久力が $H_W_BAD5%$COLOR_END減少し、周囲7ｍ内の味方に疫病を伝染します。	icon_skills.plague_tex
+701728	WeakeningEffect	True	False	False	デッドインフェクション IX	$time間、解除不可のウィルス感染源になります。耐久力が $H_W_BAD5%$COLOR_END減少し、周囲7ｍ内の味方に疫病を伝染します。	icon_skills.plague_tex
+701800	DamageOverTime	True	False	False	デッドインフェクション I	持続ダメージ$H_W_GOOD-1141$COLOR_ENDを受けます。	icon_skills.plague_tex
+701801	DamageOverTime	True	False	False	デッドインフェクション II	持続ダメージ$H_W_BAD-1585$COLOR_ENDを受けます。	icon_skills.plague_tex
+701802	DamageOverTime	True	False	False	デッドインフェクション III	持続ダメージ$H_W_BAD-2202$COLOR_ENDを受けます。	icon_skills.plague_tex
+701803	DamageOverTime	True	False	False	デッドインフェクション IV	持続ダメージ$H_W_BAD-3059$COLOR_ENDを受けます。	icon_skills.plague_tex
+701804	DamageOverTime	True	False	False	デッドインフェクション V	持続ダメージ$H_W_BAD-4248$COLOR_ENDを受けます。	icon_skills.plague_tex
+701805	DamageOverTime	True	False	False	デッドインフェクション VI	持続ダメージ$H_W_BAD-5900$COLOR_ENDを受けます。	icon_skills.plague_tex
+701806	DamageOverTime	True	False	False	デッドインフェクション VII	持続ダメージ$H_W_BAD-8194$COLOR_ENDを受けます。	icon_skills.plague_tex
+701807	DamageOverTime	True	False	False	デッドインフェクション VIII	持続ダメージ$H_W_BAD-11380$COLOR_ENDを受けます。	icon_skills.plague_tex
+701808	DamageOverTime	True	False	False	デッドインフェクション IX	持続ダメージ$H_W_BAD-15086$COLOR_ENDを受けます。	icon_skills.plague_tex
+701820	DamageOverTime	True	False	False	デッドインフェクション I	持続ダメージ$H_W_BAD-141$COLOR_ENDを受け、HP回復量が$H_W_BAD10%$COLOR_END減少します。 	icon_skills.plague_tex
+701821	DamageOverTime	True	False	False	デッドインフェクション II	持続ダメージ$H_W_BAD-196$COLOR_ENDを受け、HP回復量が$H_W_BAD10%$COLOR_END減少します。 	icon_skills.plague_tex
+701822	DamageOverTime	True	False	False	デッドインフェクション III	持続ダメージ$H_W_BAD-272$COLOR_ENDを受け、HP回復量が$H_W_BAD10%$COLOR_END減少します。 	icon_skills.plague_tex
+701823	DamageOverTime	True	False	False	デッドインフェクション IV	持続ダメージ$H_W_BAD-378$COLOR_ENDを受け、HP回復量が$H_W_BAD10%$COLOR_END減少します。 	icon_skills.plague_tex
+701824	DamageOverTime	True	False	False	デッドインフェクション V	持続ダメージ$H_W_BAD-525$COLOR_ENDを受け、HP回復量が$H_W_BAD10%$COLOR_END減少します。 	icon_skills.plague_tex
+701825	DamageOverTime	True	False	False	デッドインフェクション VI	持続ダメージ$H_W_BAD-729$COLOR_ENDを受け、HP回復量が$H_W_BAD10%$COLOR_END減少します。 	icon_skills.plague_tex
+701826	DamageOverTime	True	False	False	デッドインフェクション VII	持続ダメージ$H_W_BAD-1012$COLOR_ENDを受け、HP回復量が$H_W_BAD10%$COLOR_END減少します。 	icon_skills.plague_tex
+701827	DamageOverTime	True	False	False	デッドインフェクション VIII	持続ダメージ$H_W_BAD-1406$COLOR_ENDを受け、HP回復量が$H_W_BAD10%$COLOR_END減少します。 	icon_skills.plague_tex
+701828	DamageOverTime	True	False	False	デッドインフェクション IX	持続ダメージ$H_W_BAD-1953$COLOR_ENDを受け、HP回復量が$H_W_BAD10%$COLOR_END減少します。 	icon_skills.plague_tex
 701900	Buff	True	True	False	瞬間移動無敵	見えちゃだめ	icon_skills.voidtrap_tex
 757001	Buff	False	False	False	見えてはいけない	見えてはいけない	icon_status.firedamage_tex
 757002	Buff	True	False	True	燃え上がれ	ゴーレムの怒りによって、周囲が熱気に包まれます。半径21m以内にいる対象は「熱気」状態になります。	icon_status.firedamage_tex
@@ -2266,14 +2296,14 @@
 781107	Buff	False	True	False			
 781108	Buff	False	True	False			
 781109	DamageOverTime	False	False	False			
-781110	Buff	False	True	False			
+781110	Buff	False	False	False			
 781111	WeakeningEffect	True	False	False	ラカンの種	ラカンがあなたに魔力の種を蒔きました。一定時間後、爆発します。	icon_status.heat_tex
-781112	Buff	False	True	False			
+781112	Buff	False	False	False			
 781113	Buff	False	True	False			
 781114	DamageOverTime	False	False	False			
-781115	Buff	False	True	False			
+781115	Buff	False	False	False			
 781116	WeakeningEffect	True	False	False	ラカンの種	ラカンがあなたに魔力の種を蒔きました。一定時間後、爆発します。	icon_status.heat_tex
-781117	Buff	False	True	False			
+781117	Buff	False	False	False			
 781118	Buff	False	True	False			
 781119	Buff	True	True	False	魔力凝縮	ラカンが全滅スキルを発動させるために魔力を集めています。ラカンに睡眠系の攻撃を使用して、眠らせてください！	icon_status.windtyrant_tex
 781120	Buff	False	True	False			
@@ -2338,15 +2368,6 @@
 801301	Buff	True	True	False	アルス II	均衡が$H_W_GOOD100%$COLOR_END上昇します。	icon_skills.recovery_tex
 801400	Buff	True	True	False	リプロダクションサンクチュアリ I	$H_W_GOOD1$COLOR_END second毎にHPが回復します。	icon_skills.sanctuaryofregeneration_tex
 801401	Buff	True	True	False	リプロダクションサンクチュアリ II	$H_W_GOOD1$COLOR_END second毎にHPが回復します。	icon_skills.sanctuaryofregeneration_tex
-801402	Buff	True	True	False	リプロダクションサンクチュアリ III	$H_W_GOOD1$COLOR_END second毎にHPが回復します。	icon_skills.sanctuaryofregeneration_tex
-801403	Buff	True	True	False	リプロダクションサンクチュアリ IV	$H_W_GOOD1$COLOR_END second毎にHPが回復します。	icon_skills.sanctuaryofregeneration_tex
-801404	Buff	True	True	False	リプロダクションサンクチュアリ V	$H_W_GOOD1$COLOR_END second毎にHPが回復します。	icon_skills.sanctuaryofregeneration_tex
-801405	Buff	True	True	False	リプロダクションサンクチュアリ VI	$H_W_GOOD1$COLOR_END second毎にHPが回復します。	icon_skills.sanctuaryofregeneration_tex
-801406	Buff	True	True	False	リプロダクションサンクチュアリ VII	$H_W_GOOD1$COLOR_END second毎にHPが回復します。	icon_skills.sanctuaryofregeneration_tex
-801407	Buff	True	True	False	リプロダクションサンクチュアリ VIII	$H_W_GOOD1$COLOR_END second毎にHPが回復します。	icon_skills.sanctuaryofregeneration_tex
-801408	Buff	True	True	False	リプロダクションサンクチュアリ IX	$H_W_GOOD1$COLOR_END second毎にHPが回復します。	icon_skills.sanctuaryofregeneration_tex
-801409	Buff	True	True	False	リプロダクションサンクチュアリ X	$H_W_GOOD1$COLOR_END second毎にHPが回復します。	icon_skills.sanctuaryofregeneration_tex
-801410	Buff	True	True	False	リプロダクションサンクチュアリ XI 	$H_W_GOOD1$COLOR_END second毎にHPが回復します。	icon_skills.sanctuaryofregeneration_tex
 801500	Buff	True	True	False	シークレッドサンダー I	力が$H_W_GOOD20$COLOR_END、攻撃速度が$H_W_GOOD8$COLOR_END上昇します。	icon_skills.divinelightning_tex
 801501	Buff	True	True	False	シークレッドサンダー II	力が$H_W_GOOD28$COLOR_END、攻撃速度が$H_W_GOOD8$COLOR_END上昇します。	icon_skills.divinelightning_tex
 801502	Buff	True	True	False	シークレッドサンダー III	力が$H_W_GOOD36$COLOR_END、攻撃速度が$H_W_GOOD8$COLOR_END上昇します。	icon_skills.divinelightning_tex
@@ -3098,14 +3119,14 @@
 981107	Buff	False	True	False			
 981108	Buff	False	True	False			
 981109	DamageOverTime	False	False	False			
-981110	Buff	False	True	False			
+981110	Buff	False	False	False			
 981111	WeakeningEffect	True	False	False	ラカンの種	ラカンがあなたに魔力の種を蒔きました。一定時間後、爆発します。	icon_status.heat_tex
-981112	Buff	False	True	False			
+981112	Buff	False	False	False			
 981113	Buff	False	True	False			
 981114	DamageOverTime	False	False	False			
-981115	Buff	False	True	False			
+981115	Buff	False	False	False			
 981116	WeakeningEffect	True	False	False	ラカンの種	ラカンがあなたに魔力の種を蒔きました。一定時間後、爆発します。	icon_status.heat_tex
-981117	Buff	False	True	False			
+981117	Buff	False	False	False			
 981118	Buff	False	True	False			
 981119	Buff	True	True	False	魔力凝縮	ラカンが全滅スキルを発動させるために魔力を集めています。ラカンに睡眠系の攻撃を使用して、眠らせてください！	icon_status.windtyrant_tex
 981120	Buff	False	True	True			
@@ -3725,6 +3746,7 @@
 10152093	Buff	False	True	False			
 10152094	Buff	False	True	False			
 10152095	Buff	False	True	False			
+10152096	Buff	False	True	False	レイジングバーストクール回らなかったら回そう	クラスターボムショット使ってクールタイムを回そう	
 10152100	Buff	True	True	False	エネルギー充電	効果中はアルケインゲージを消費しません。	icon_skills.energycharging_tex
 10152110	Buff	True	True	False	緊急シールド展開	緊急シールドを展開しています。最大$H_W_GOOD27858$COLOR_ENDのダメージを無効化します。	icon_skills.emergencyshield_tex
 10152111	Buff	True	True	False	緊急シールド展開	緊急シールドを展開しています。最大$H_W_GOOD34900$COLOR_ENDのダメージを無効化します。	icon_skills.emergencyshield_tex
@@ -3814,6 +3836,7 @@
 10154050	Buff	True	True	False	煙幕	煙幕により、敵の攻撃を回避しています。	icon_skills.c12_smokebombevade
 10154051	Buff	False	True	False		この異常状態は見えてはいけません。	
 10154052	Buff	False	True	False			
+10154054	Buff	False	True	False	レイジングバーストクール回らなかったら回そう	レイジングバースト使ってクール回そう	
 10154060	Buff	False	True	False			
 10154061	Buff	False	True	False			
 10154062	Buff	False	True	False			
@@ -3897,6 +3920,7 @@
 10155300	WeakeningEffect	False	True	False			
 10155310	Buff	False	True	False			
 10155320	Buff	False	True	True			
+10230001	Stun	True	False	False	超音波の衝撃	全てのスキルが使用不能となります！　$BRこの効果は解除できません。	icon_status.sealskill_tex
 15200001	Buff	True	True	False	ラバトゥスの甲殻	ラバトゥスの甲殻効果によって$timeの間、防御力と体力が $H_W_GOOD20%$COLOR_END増加します。該当効果はスキル等の効果、死亡時に解除されません。また、ギルド対戦地域を離脱した場合のみ、自動的に解除されます。	icon_skills.emergencyshield_tex
 15200002	Buff	True	True	False	ドゥラカンの火	ドゥラカンの火効果によって$timeの間、防御力と体力が $H_W_GOOD20%$COLOR_END増加します。該当効果はスキル等の効果、死亡時に解除されません。また、ギルド対戦地域を離脱した場合のみ、自動的に解除されます。	icon_items.campfire_tex
 15200003	Buff	True	True	False	カイタンの恐怖	カイタンの恐怖効果によって$timeの間、防御力と体力が $H_W_GOOD10%$COLOR_END増加します。該当効果はスキル等の効果、死亡時に解除されません。また、ギルド対戦地域を離脱した場合のみ、自動的に解除されます。	icon_status.darkriftrage_tex
@@ -4111,6 +4135,112 @@
 45000120	Buff	True	True	False	高所恐怖症	高所恐怖症により一時的にスキルが使用できなくなります。	icon_status.fearstatus_tex
 45000121	Buff	True	True	False	表皮強化	カシュバルの殻が硬化し、あらゆるダメージを無効化します。	icon_status.plusedefence_tex
 45000122	Buff	True	True	False	ヴェリックの保護	ヴェリックの保護を受けます。10秒間、ダメージを無効化するバリアが発動します。	icon_status.bless_of_velic_tex
+46600001	Stun	False	False	False	2ネームド捕獲スキル用2秒スタン		
+46600002	Buff	True	True	True	デモロスの圧倒	ダイスを回すデモロスは妨害を受けません。デモロスの防御力が1000倍増加します。	icon_status.plusedefence_tex
+46600003	Buff	False	True	False			
+46600004	Stun	False	False	False			
+46600005	DamageOverTime	False	False	False			
+46600006	WeakeningEffect	False	True	True			
+46600007	Buff	False	True	True		大ダイスが持つと転がっていく	
+46600008	Buff	False	True	True		PCダイスデスポーン条件	
+46600009	Buff	False	True	True			
+46600010	WeakeningEffect	False	True	False			
+46600011	Buff	False	False	True		ダイス（青）エフェクト用	
+46600012	Buff	False	False	True		ダイス（赤）エフェクト用	
+46600013	Buff	False	True	True		ダイス（白）エフェクト用	
+46600014	Buff	False	True	False			
+46600015	Buff	False	True	False			
+46600016	Buff	False	True	False		ダイススポーンクールタイム90秒	
+46600017	Buff	False	True	True			
+46600018	DamageOverTime	True	False	False	デモロスの呪い	$H_W_BAD2$COLOR_END second1ごとに全HPの$H_W_BAD10％$COLOR_ENDが持続的に減少します。	icon_status.injuredbtdarkness_tex
+46600019	WeakeningEffect	False	True	False		2ネームドFevertime進入時、グロッキー演出	
+46600020	WeakeningEffect	False	True	False		行動キャンセル用abnormality	
+46600021	Buff	False	True	False		ラウンド勝・敗チェック用	
+46600022	Buff	False	True	True			
+46600023	Buff	False	True	True			
+46600024	Buff	False	True	True			
+46600025	Buff	False	True	True			
+46600026	Buff	False	True	True			
+46600027	Buff	False	True	True		2ネームド２Phase以後、透明NPCが持って、スポーンされるダイス3種を全て転がせるようにする	
+46600028	Buff	False	True	False		PC用安全地帯	
+46600029	Buff	False	True	False	レコード用異常状態	レコード用異常状態	
+46600030	Buff	False	True	False	レコード用異常状態	レコード用異常状態	
+46600031	Buff	False	True	True			
+46600032	Buff	False	True	True			
+46600033	Buff	False	True	True			
+46600034	Buff	False	True	True			
+46600035	Buff	False	True	True			
+46600036	Buff	False	True	True			
+46600037	Buff	False	True	True			
+46600038	Buff	False	True	False			
+46600039	Buff	False	True	False			
+46600040	Stun	True	False	False	麻痺	全身が痺れて5秒間動けません。	icon_status.positionswap_tex
+46600041	Buff	False	True	False		1ネームド集中攻撃エフェクト演出用（赤）	
+46600042	DamageOverTime	False	True	False		1ネームド集中攻撃エフェクト演出用（青）	
+46600043	DamageOverTime	False	True	False		1ネームド集中攻撃エフェクト演出用（緑）	
+46600053	Buff	False	True	True	輝くダイス	輝くダイスが召喚されます。	
+46600054	WeakeningEffect	False	True	True			
+46600055	Buff	False	True	True			
+46600056	Buff	False	True	True			
+46600057	Buff	False	True	True			
+46600059	Buff	False	True	True		透明NPCにルーレット逆方向回転情報伝達	
+46600060	Buff	False	True	True		透明NPCにルーレット正方向回転情報伝達	
+46600061	Buff	False	True	True		透明NPCにルーレットの結果（赤）伝達	
+46600062	Buff	False	True	True		透明NPCにルーレットの結果（白）伝達	
+46600063	Buff	False	True	True		透明NPCにルーレットの結果（青）伝達	
+46600064	Buff	False	True	True		PCダイス転がせるようにする異常状態	
+46600065	Buff	False	True	True		PCダイスが爆発するようにする異常状態	
+46600066	WeakeningEffect	False	True	True		爆発するPCダイス用バリア	
+46600067	WeakeningEffect	False	True	True		転ぶダイス1個用バリア	
+46600068	WeakeningEffect	False	True	True		転ぶダイス2個用バリア	
+46600069	DamageOverTime	False	False	False		ルーレットデスポーン全透明化	
+46600070	Buff	False	True	False		ルーレットNPCスポーンabnormality	
+46600071	DamageOverTime	False	False	False		46600070持続時間が終わる時にかかる異常状態	icon_status.icedamage_tex
+46600072	Buff	False	True	False		ルーレットが回っている状態を2ネームドに伝達、ダイススポーンできないよう	icon_status.firedamage_tex
+46600073	Buff	False	True	True		逆回転ルーレット召喚用異常状態	
+46600074	Buff	False	True	True		正回転ルーレット召喚用異常状態	
+46600075	Buff	False	True	False		ルーレットクールタイム異常状態	
+46600076	WeakeningEffect	False	True	True		2PHASEダイスを3個全て転がせることができる異常状態	
+46600077	Buff	False	True	False		ルーレットが全部回ったことを2ネームドに伝達	
+46600078	Buff	False	True	True		2ネームドが2PHASE突入時、自分自身にかける異常状態	
+46600079	Buff	True	True	False	デモロスの狂気	デモロスが異空間に移動する準備をします。防御力が1000倍増加します。	icon_status.plusedefence_tex
+46600080	Buff	False	True	True		10番マスにいます。	
+46600081	Buff	False	True	True		1番マスにいます。	
+46600082	Buff	False	True	True		2番マスにいます。	
+46600083	Buff	False	True	True		3番マスにいます。	
+46600084	Buff	False	True	True		4番マスにいます。	
+46600085	Buff	False	True	True		5番マスにいます。	
+46600086	Buff	False	True	True		6番マスにいます。	
+46600088	Buff	False	True	False		コイン被撃時、ゲージ1上昇（演出用）	
+46600089	DamageOverTime	False	False	False		コイン被撃時、ゲージ3上昇（演出用）	
+46600090	DamageOverTime	False	False	False		2ネームドルーレットを回します。	
+46600091	Buff	False	True	False			
+46600092	Buff	False	True	False			
+46600093	Buff	False	True	False			
+46600094	Buff	False	True	False		2ネームド_ボーナスダイスパターン用	
+46600095	Buff	False	True	False			
+46600096	Buff	False	True	False			
+46600097	Buff	False	True	False			
+46600098	DamageOverTime	False	False	False		2ネームド_fevertime用回復	icon_skills.refreshbless_tex
+46600099	Buff	True	True	False	異空間吸収	$H_W_GOOD1$COLOR_END second毎に全HPの$H_W_GOOD0.35％$COLOR_ENDが持続的に回復します。	icon_skills.refreshbless_tex
+46600100	Buff	False	True	True		2ネームド無敵異常状態	
+46600101	Buff	False	True	False			
+46600102	Buff	False	True	False			
+46600103	Buff	False	True	True		開始時、赤・遠距離攻撃でパターン開始→2Phaseで緑・遠距離攻撃	
+46600104	Buff	False	True	True		開始時、緑・遠距離攻撃でパターン開始→2Phaseで赤・遠距離攻撃	
+46600105	Buff	False	True	False		1ネームド奇数チェック用の異常状態（持っている場合奇数）	
+46600106	Buff	False	True	False		奇数2重複時、偶数異常状態に変化→1秒後消える	
+46600107	Buff	False	False	False			
+46600108	Buff	False	False	False			
+46600109	Buff	False	True	False		1ネームド奇数・偶数パターンクールタイム	
+46600110	Buff	False	True	False		1ネームド集中攻撃パターンクールタイム	
+46600111	Buff	False	True	True			
+46600112	Buff	False	True	False		1ネームド集中攻撃範囲デカル用	
+46600113	DamageOverTime	True	False	False	トゥルガスが引っ掻いた傷	$H_W_BAD1$COLOR_END second毎に全HPの $H_W_BAD10％$COLOR_ENDが持続的に減少します。	icon_status.injuredbtdarkness_tex
+46600114	Buff	False	True	True		奇数-近距離爆発	
+46600115	Buff	False	True	True		奇数-遠距離爆発	
+46600116	Buff	False	True	True		偶数-近距離爆発	
+46600117	Buff	False	True	True		偶数-遠距離爆発	
 47300100	DamageOverTime	True	False	False	猛毒のエキス	致命的な毒により、$H_W_BAD60$COLOR_END second1毎に全HPの$H_W_BAD50％$COLOR_ENDが減少します。$BRこの効果は解除できません。	icon_status.poisonstatus_tex
 47300200	DamageOverTime	True	False	False	トゥルサの猛毒	致命的な毒により、$H_W_BAD3$COLOR_END second1毎に全HPの$H_W_BAD5％$COLOR_ENDが減少します。$BRこの効果は解除できません。	icon_status.poisonstatus_tex
 47300300	DamageOverTime	True	False	False	トゥルサの毒	トゥルサの毒が全身に回りました！　$H_W_BAD4$COLOR_END second1後に全HPの$H_W_BAD30％$COLOR_ENDが減少します。$BRトゥルサの毒は解除することができません。	icon_status.poisonstatus_tex
@@ -6188,7 +6318,7 @@
 89020208	Buff	True	True	False	連迅「ダークエクスプロージョン」	「ダークエクスプロージョン」使用時、攻撃速度が増加	icon_ep.ep_attack_speed_tex
 89020209	Buff	True	True	False	連迅「ダークエクスプロージョン」	「ダークエクスプロージョン」使用時、攻撃速度が増加	icon_ep.ep_attack_speed_tex
 89020210	Buff	True	True	False	連迅「ダークエクスプロージョン」	「ダークエクスプロージョン」使用時、攻撃速度が増加	icon_ep.ep_attack_speed_tex
-89103100	Buff	True	True	False	「ショットガン」再使用	ツールチップが見えたらいけない異常状態	icon_ep.ep_cooltime_restart_tex
+89103100	Buff	True	True	False	「アルケインリロード」再使用	ツールチップが見えたらいけない異常状態	icon_ep.ep_cooltime_restart_tex
 89105101	Buff	True	True	False	「クイックフィリング」怪力	打撃時に重複。攻撃を受けると解除。	icon_ep.ep_attack_strong_tex
 89105102	Buff	True	True	False	「クイックフィリング」怪力	打撃時に重複。攻撃を受けると解除。	icon_ep.ep_attack_strong_tex
 89105103	Buff	True	True	False	「クイックフィリング」怪力	打撃時に重複。攻撃を受けると解除。	icon_ep.ep_attack_strong_tex

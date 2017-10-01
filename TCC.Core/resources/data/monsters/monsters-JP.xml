@@ -3318,6 +3318,23 @@
 		<Monster name="カリン・セコンド" id="1067" isBoss="False" hp="10000" />
 		<Monster name="ローズ・エリーン" id="1068" isBoss="False" hp="10000" />
 		<Monster name="リネル・ルーナ" id="1069" isBoss="False" hp="10000" />
+		<Monster name="シャキラ・ルッドミラー" id="1070" isBoss="False" hp="10000" />
+		<Monster name="ダイアナ・ルッドミラー" id="1071" isBoss="False" hp="10000" />
+		<Monster name="ダイアナ・ルッドミラー" id="1072" isBoss="False" hp="10000" />
+		<Monster name="シルビア・バーネット" id="1073" isBoss="False" hp="10000" />
+		<Monster name="ペルナンド・カストロ" id="1074" isBoss="False" hp="10000" />
+		<Monster name="べリオン・シルバーレイン" id="1075" isBoss="False" hp="10000" />
+		<Monster name="テルミン・ラフェレイト" id="1076" isBoss="False" hp="10000" />
+		<Monster name="ニムエ・ローヘン" id="1077" isBoss="False" hp="10000" />
+		<Monster name="ラザ・ローネ" id="1078" isBoss="False" hp="10000" />
+		<Monster name="クロシャル・プンハン" id="1079" isBoss="False" hp="10000" />
+		<Monster name="シェビ・トランプ" id="1080" isBoss="False" hp="10000" />
+		<Monster name="ニア・ベントスリープ" id="1081" isBoss="False" hp="10000" />
+		<Monster name="ドレック・ウェイスト" id="1082" isBoss="False" hp="10000" />
+		<Monster name="ビア・ムーク" id="1083" isBoss="False" hp="10000" />
+		<Monster name="マディー・ニナ" id="1084" isBoss="False" hp="10000" />
+		<Monster name="ダイアナ・ルッドミラー" id="1085" isBoss="False" hp="10000" />
+		<Monster name="ダイアナ・ルッドミラー" id="1086" isBoss="False" hp="10000" />
 		<Monster name="フレイア・ローヘン" id="1100" isBoss="False" hp="10000" />
 		<Monster name="ロアナ・ホワイトリバー" id="1101" isBoss="False" hp="10000" />
 		<Monster name="アイク・ヘインズ" id="1102" isBoss="False" hp="10000" />
@@ -3513,6 +3530,7 @@
 		<Monster name="アンク" id="7002" isBoss="False" hp="10000" />
 		<Monster name="ちび魔女エルロニア" id="8000" isBoss="False" hp="10000" />
 		<Monster name="ポポリメダル交換員" id="9000" isBoss="False" hp="10000" />
+		<Monster name="次元移動ポータル" id="9066" isBoss="False" hp="10000" />
 		<Monster name="ドミル・バタル" id="22001" isBoss="False" hp="10000" />
 		<Monster name="シューナ" id="22002" isBoss="False" hp="10000" />
 		<Monster name="インナ・バタル" id="22003" isBoss="False" hp="10000" />
@@ -4861,6 +4879,7 @@
 		<Monster name="戦闘/魔法技術教官" id="8272" isBoss="False" hp="0" />
 		<Monster name="ペガサス管理人" id="8273" isBoss="False" hp="0" />
 		<Monster name="戦闘/魔法技術教官" id="8281" isBoss="False" hp="0" />
+		<Monster name="デモロスのルーレット入口" id="9066" isBoss="False" hp="0" />
 		<Monster name="ベルノの実験室 入口" id="9067" isBoss="False" hp="0" />
 		<Monster name="嘘つきタルスキの遊び場　入口" id="9070" isBoss="False" hp="0" />
 		<Monster name="破壊された神界の門入り口" id="9501" isBoss="False" hp="0" />
@@ -10134,6 +10153,32 @@
 		<Monster name="ケルバー狂信徒" id="5007" isBoss="False" hp="8955" />
 		<Monster name="アルゴン装置" id="6000" isBoss="False" hp="25747" />
 	</Zone>
+	<Zone id="466" name="デモロスのルーレット" >
+		<Monster name="トゥルガスを退治せよ" id="911" isBoss="False" hp="0" />
+		<Monster name="デモロスを退治せよ" id="912" isBoss="False" hp="0" />
+		<Monster name="ショウズ・プンハン" id="1078" isBoss="False" hp="10000" />
+		<Monster name="ゼニ・ソン" id="1079" isBoss="False" hp="10000" />
+		<Monster name="ボードレール・ヘンリック" id="1080" isBoss="False" hp="10000" />
+		<Monster name="パティーマ・メロー" id="1081" isBoss="False" hp="10000" />
+		<Monster name="マックス・アンドゥルー" id="1082" isBoss="False" hp="10000" />
+		<Monster name="ゼニ・ソン" id="1083" isBoss="False" hp="10000" />
+		<Monster name="パティーマ・メロー" id="1084" isBoss="False" hp="10000" />
+		<Monster name="マックス・アンドゥルー" id="1085" isBoss="False" hp="10000" />
+		<Monster name="次元移動ポータル" id="1501" isBoss="False" hp="10000" />
+		<Monster name="トゥルガス" id="46601" isBoss="True" hp="900000000" />
+		<Monster name="デモロス" id="46602" isBoss="True" hp="1040000000" />
+		<Monster name="デモロスの宝箱" id="46613" isBoss="False" hp="100" />
+		<Monster name="デモロスのダイス" id="46677" isBoss="False" hp="10000000" />
+		<Monster name="デモロスのダイス" id="46678" isBoss="False" hp="10000000" />
+		<Monster name="デモロスのダイス" id="46679" isBoss="False" hp="10000000" />
+		<Monster name="赤いダイス" id="46688" isBoss="False" hp="1400000000" />
+		<Monster name="白いダイス" id="46689" isBoss="False" hp="1400000000" />
+		<Monster name="青いダイス" id="46690" isBoss="False" hp="1400000000" />
+		<Monster name="デモロスのダイス" id="46692" isBoss="False" hp="1400000000" />
+		<Monster name="デモロスのダイス" id="46697" isBoss="False" hp="10000000" />
+		<Monster name="デモロスのダイス" id="46698" isBoss="False" hp="10000000" />
+		<Monster name="デモロスのダイス" id="46699" isBoss="False" hp="10000000" />
+	</Zone>
 	<Zone id="467" name="非道なベルノの実験室" >
 		<Monster name="非道なベラと非道なプリマを討伐せよ" id="911" isBoss="False" hp="0" />
 		<Monster name="非道なオードンを討伐せよ" id="912" isBoss="False" hp="0" />
@@ -13904,8 +13949,8 @@
 		<Monster name="フェリーモスを討伐せよ" id="913" isBoss="False" hp="0" />
 		<Monster name="【ボス】次元の魔法石を通じてエルカラス号 甲板に移動後、ダルカンを討伐せよ" id="914" isBoss="False" hp="0" />
 		<Monster name="ヘラ・カイルム" id="999" isBoss="False" hp="10000" />
-		<Monster name="ダルカン" id="1000" isBoss="True" hp="1900000000" />
-		<Monster name="ダルカン" id="1001" isBoss="True" hp="500000000" />
+		<Monster name="ダルカン" id="1000" isBoss="True" hp="750000000" />
+		<Monster name="ダルカン" id="1001" isBoss="True" hp="300000000" />
 		<Monster name="アルクス" id="1002" isBoss="False" hp="0" />
 		<Monster name="次元の魔法石" id="1501" isBoss="False" hp="10000" />
 		<Monster name="次元の魔法石" id="1502" isBoss="False" hp="10000" />
@@ -13916,7 +13961,7 @@
 		<Monster name="アークデヴァ剣闘士" id="91602" isBoss="False" hp="0" />
 		<Monster name="アークデヴァ魔術師" id="91603" isBoss="False" hp="0" />
 		<Monster name="アークデヴァ精霊士" id="91604" isBoss="False" hp="0" />
-		<Monster name="フェリーモス" id="91606" isBoss="True" hp="1800000000" />
+		<Monster name="フェリーモス" id="91606" isBoss="True" hp="800000000" />
 		<Monster name="浮遊石" id="91618" isBoss="False" hp="110000" />
 		<Monster name="浮遊石" id="91621" isBoss="False" hp="110000" />
 		<Monster name="浮遊石" id="91622" isBoss="False" hp="110000" />
@@ -13925,15 +13970,15 @@
 		<Monster name="浮遊石" id="91625" isBoss="False" hp="110000" />
 		<Monster name="浮遊石" id="91628" isBoss="False" hp="110000" />
 		<Monster name="浮遊石" id="91629" isBoss="False" hp="110000" />
-		<Monster name="ダルカンの下手人" id="91638" isBoss="False" hp="150000000" />
-		<Monster name="ピュトリオン" id="91650" isBoss="True" hp="700000000" />
+		<Monster name="ダルカンの下手人" id="91638" isBoss="False" hp="30000000" />
+		<Monster name="ピュトリオン" id="91650" isBoss="True" hp="220000000" />
 		<Monster name="フェリーモス" id="91660" isBoss="False" hp="90000000" />
-		<Monster name="SH-35" id="91671" isBoss="False" hp="40000000" />
-		<Monster name="SM-31" id="91672" isBoss="False" hp="40000000" />
-		<Monster name="BB-29" id="91673" isBoss="False" hp="100000000" />
-		<Monster name="アークデヴァ精鋭射手" id="91674" isBoss="False" hp="70000000" />
-		<Monster name="アークデヴァ精鋭僧兵" id="91675" isBoss="False" hp="40000000" />
-		<Monster name="アークデヴァ精鋭剣闘士" id="91676" isBoss="False" hp="45000000" />
+		<Monster name="SH-35" id="91671" isBoss="False" hp="10000000" />
+		<Monster name="SM-31" id="91672" isBoss="False" hp="10000000" />
+		<Monster name="BB-29" id="91673" isBoss="False" hp="47000000" />
+		<Monster name="アークデヴァ精鋭射手" id="91674" isBoss="False" hp="9500000" />
+		<Monster name="アークデヴァ精鋭僧兵" id="91675" isBoss="False" hp="9500000" />
+		<Monster name="アークデヴァ精鋭剣闘士" id="91676" isBoss="False" hp="12000000" />
 		<Monster name="ギルバート・グレイス" id="99901" isBoss="False" hp="366797" />
 		<Monster name="中級兵士" id="99902" isBoss="False" hp="91545" />
 		<Monster name="中級兵士" id="99903" isBoss="False" hp="91545" />
@@ -14526,7 +14571,7 @@
 		<Monster name="宝箱" id="88888888" isBoss="False" hp="100000000" />
 		<Monster name="宝箱" id="88888889" isBoss="False" hp="99999999" />
 		<Monster name="魔女の不思議な宝箱" id="88888890" isBoss="False" hp="1" />
-		<Monster name="1周年祝祭のびっくり箱" id="98888888" isBoss="False" hp="1" />
+		<Monster name="バラカ祝祭のビックリボックス" id="98888888" isBoss="False" hp="1" />
 		<Monster name="1周年祝祭のびっくり箱" id="98888889" isBoss="False" hp="1" />
 		<Monster name="ガブガブくん" id="99999991" isBoss="False" hp="100000000" />
 		<Monster name="ガブガブくん" id="99999992" isBoss="False" hp="99999999" />

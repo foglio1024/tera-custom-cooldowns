@@ -3317,6 +3317,23 @@
 		<Monster name="Карин Чой" id="1067" isBoss="False" hp="10000" />
 		<Monster name="Элин Роуз" id="1068" isBoss="False" hp="10000" />
 		<Monster name="Руна Ринэль" id="1069" isBoss="False" hp="10000" />
+		<Monster name="Шакра Рудмилла" id="1070" isBoss="False" hp="10000" />
+		<Monster name="Диана Рудмилла" id="1071" isBoss="False" hp="10000" />
+		<Monster name="Диана Рудмилла" id="1072" isBoss="False" hp="10000" />
+		<Monster name="Сильвия Боннет" id="1073" isBoss="False" hp="10000" />
+		<Monster name="Фернандо Кастро" id="1074" isBoss="False" hp="10000" />
+		<Monster name="Вейер" id="1075" isBoss="False" hp="10000" />
+		<Monster name="Нимреск" id="1076" isBoss="False" hp="10000" />
+		<Monster name="Нимуэ" id="1077" isBoss="False" hp="10000" />
+		<Monster name="Роза Роне" id="1078" isBoss="False" hp="10000" />
+		<Monster name="Хлоэ Пухан" id="1079" isBoss="False" hp="10000" />
+		<Monster name="Себи Трамп" id="1080" isBoss="False" hp="10000" />
+		<Monster name="Нио Бентслип" id="1081" isBoss="False" hp="10000" />
+		<Monster name="Дрек Уейст" id="1082" isBoss="False" hp="10000" />
+		<Monster name="Вио Мук" id="1083" isBoss="False" hp="10000" />
+		<Monster name="Мади Нина" id="1084" isBoss="False" hp="10000" />
+		<Monster name="Диана Рудмилла" id="1085" isBoss="False" hp="10000" />
+		<Monster name="Диана Рудмилла" id="1086" isBoss="False" hp="10000" />
 		<Monster name="Фрая" id="1100" isBoss="False" hp="10000" />
 		<Monster name="Лоана" id="1101" isBoss="False" hp="10000" />
 		<Monster name="Эйхиан" id="1102" isBoss="False" hp="10000" />
@@ -3512,6 +3529,7 @@
 		<Monster name="Анкх" id="7002" isBoss="False" hp="10000" />
 		<Monster name="Эллония" id="8000" isBoss="False" hp="10000" />
 		<Monster name="Тикат" id="9000" isBoss="False" hp="10000" />
+		<Monster name="Телепорт" id="9066" isBoss="False" hp="10000" />
 		<Monster name="Дерена" id="22001" isBoss="False" hp="10000" />
 		<Monster name="Шуна" id="22002" isBoss="False" hp="10000" />
 		<Monster name="Наулу" id="22003" isBoss="False" hp="10000" />
@@ -4569,7 +4587,7 @@
 		<Monster name="Городской портал летной платформы" id="80" isBoss="False" hp="0" />
 		<Monster name="Городской портал Симпозиума магов" id="81" isBoss="False" hp="0" />
 		<Monster name="Городской портал связующей улицы" id="82" isBoss="False" hp="0" />
-		<Monster name="Городской портал сердца кузни" id="83" isBoss="False" hp="0" />
+		<Monster name="Городской портал склада Федерации" id="83" isBoss="False" hp="0" />
 		<Monster name="Городской портал зала силы" id="84" isBoss="False" hp="0" />
 		<Monster name="Городской портал Мастерской" id="85" isBoss="False" hp="0" />
 		<Monster name="Городской портал зала Союза Просвещенных" id="86" isBoss="False" hp="0" />
@@ -4579,7 +4597,7 @@
 		<Monster name="Городской портал Мастерской" id="92" isBoss="False" hp="0" />
 		<Monster name="Городской портал Верхней улицы" id="93" isBoss="False" hp="0" />
 		<Monster name="Городской портал связующей улицы" id="94" isBoss="False" hp="0" />
-		<Monster name="Городской портал склада Федерации" id="95" isBoss="False" hp="0" />
+		<Monster name="Городской портал сердца кузни" id="95" isBoss="False" hp="0" />
 		<Monster name="Городской портал зала Железного Ордена" id="96" isBoss="False" hp="0" />
 		<Monster name="Казначей Торговцев" id="101" isBoss="False" hp="0" />
 		<Monster name="Казначей Союза Просвещенных" id="102" isBoss="False" hp="0" />
@@ -4860,6 +4878,7 @@
 		<Monster name="Инструктор по умениям" id="8272" isBoss="False" hp="0" />
 		<Monster name="Распорядитель полетов" id="8273" isBoss="False" hp="0" />
 		<Monster name="Инструктор по умениям" id="8281" isBoss="False" hp="0" />
+		<Monster name="Зал с рулеткой Демороса - вход" id="9066" isBoss="False" hp="0" />
 		<Monster name="Лаборатория Берна" id="9067" isBoss="False" hp="0" />
 		<Monster name="Вход в Замок Парадоксов" id="9070" isBoss="False" hp="0" />
 		<Monster name="Вход в Разрушенные врата в Новый мир" id="9501" isBoss="False" hp="0" />
@@ -5027,7 +5046,7 @@
 		<Monster name="Джейд - голубое сердце" id="6016" isBoss="False" hp="945" />
 		<Monster name="Фердинанд" id="6017" isBoss="False" hp="945" />
 		<Monster name="Золин" id="6018" isBoss="False" hp="10000" />
-		<Monster name="Зеона" id="6019" isBoss="False" hp="10000" />
+		<Monster name="Сиона" id="6019" isBoss="False" hp="10000" />
 		<Monster name="Рибина" id="6020" isBoss="False" hp="10000" />
 		<Monster name="Моряк попори" id="6021" isBoss="False" hp="10000" />
 		<Monster name="Моряк попори" id="6022" isBoss="False" hp="10000" />
@@ -10133,6 +10152,32 @@
 		<Monster name="Келба-фанатик" id="5007" isBoss="False" hp="8955" />
 		<Monster name="Колонна Джурнагга" id="6000" isBoss="False" hp="25747" />
 	</Zone>
+	<Zone id="466" name="Рулетка Демороса" >
+		<Monster name="Убейте Туркаса." id="911" isBoss="False" hp="0" />
+		<Monster name="Убейте Демороса." id="912" isBoss="False" hp="0" />
+		<Monster name="Шуз Пухан" id="1078" isBoss="False" hp="10000" />
+		<Monster name="Дженни Сон" id="1079" isBoss="False" hp="10000" />
+		<Monster name="Батлер Хенрик" id="1080" isBoss="False" hp="10000" />
+		<Monster name="Фатима Мелло" id="1081" isBoss="False" hp="10000" />
+		<Monster name="Макс Эндрю" id="1082" isBoss="False" hp="10000" />
+		<Monster name="Дженни Сон" id="1083" isBoss="False" hp="10000" />
+		<Monster name="Фатима Мелло" id="1084" isBoss="False" hp="10000" />
+		<Monster name="Макс Эндрю" id="1085" isBoss="False" hp="10000" />
+		<Monster name="Телепорт" id="1501" isBoss="False" hp="10000" />
+		<Monster name="Туркас" id="46601" isBoss="True" hp="900000000" />
+		<Monster name="Деморос" id="46602" isBoss="True" hp="1040000000" />
+		<Monster name="Сундук с сокровищами Демороса" id="46613" isBoss="False" hp="100" />
+		<Monster name="Игральные кости Демороса" id="46677" isBoss="False" hp="10000000" />
+		<Monster name="Игральные кости Демороса" id="46678" isBoss="False" hp="10000000" />
+		<Monster name="Игральные кости Демороса" id="46679" isBoss="False" hp="10000000" />
+		<Monster name="Красная игральная кость (кубик)" id="46688" isBoss="False" hp="1400000000" />
+		<Monster name="Белая игральная кость (кубик)" id="46689" isBoss="False" hp="1400000000" />
+		<Monster name="Синяя игральная кость (кубик)" id="46690" isBoss="False" hp="1400000000" />
+		<Monster name="Игральные кости Демороса" id="46692" isBoss="False" hp="1400000000" />
+		<Monster name="Игральные кости Демороса" id="46697" isBoss="False" hp="10000000" />
+		<Monster name="Игральные кости Демороса" id="46698" isBoss="False" hp="10000000" />
+		<Monster name="Игральные кости Демороса" id="46699" isBoss="False" hp="10000000" />
+	</Zone>
 	<Zone id="467" name="Лаборатория Берна (сложно)" >
 		<Monster name="Убейте Кошмарного Веру и Кошмарную Приму" id="911" isBoss="False" hp="0" />
 		<Monster name="Убейте Кошмарного Одона" id="912" isBoss="False" hp="0" />
@@ -10195,11 +10240,11 @@
 	<Zone id="469" name="Память о Треллум-Консурго" >
 		<Monster name="Страдающий деванец" id="3" isBoss="False" hp="200" />
 		<Monster name="Каменная скрижаль воспоминаний" id="50" isBoss="False" hp="13038" />
-		<Monster name="Зеона" id="100" isBoss="False" hp="10000" />
-		<Monster name="Зеона" id="101" isBoss="False" hp="10000" />
-		<Monster name="Зеона" id="102" isBoss="False" hp="10000" />
-		<Monster name="Зеона" id="103" isBoss="False" hp="10000" />
-		<Monster name="Зеона" id="104" isBoss="False" hp="10000" />
+		<Monster name="Сиона" id="100" isBoss="False" hp="10000" />
+		<Monster name="Сиона" id="101" isBoss="False" hp="10000" />
+		<Monster name="Сиона" id="102" isBoss="False" hp="10000" />
+		<Monster name="Сиона" id="103" isBoss="False" hp="10000" />
+		<Monster name="Сиона" id="104" isBoss="False" hp="10000" />
 		<Monster name="Рандон" id="200" isBoss="False" hp="945" />
 		<Monster name="Рандон" id="201" isBoss="False" hp="945" />
 		<Monster name="Рандон" id="202" isBoss="False" hp="945" />
@@ -10225,10 +10270,10 @@
 		<Monster name="Разлагающийся труп" id="1001" isBoss="False" hp="10000" />
 		<Monster name="Гадунг" id="1002" isBoss="False" hp="366797" />
 		<Monster name="Бидунг" id="1003" isBoss="False" hp="366797" />
-		<Monster name="Зеона" id="1100" isBoss="False" hp="10000" />
-		<Monster name="Зеона" id="1101" isBoss="False" hp="10000" />
-		<Monster name="Зеона" id="1102" isBoss="False" hp="10000" />
-		<Monster name="Зеона" id="1103" isBoss="False" hp="10000" />
+		<Monster name="Сиона" id="1100" isBoss="False" hp="10000" />
+		<Monster name="Сиона" id="1101" isBoss="False" hp="10000" />
+		<Monster name="Сиона" id="1102" isBoss="False" hp="10000" />
+		<Monster name="Сиона" id="1103" isBoss="False" hp="10000" />
 		<Monster name="Ронид" id="1300" isBoss="False" hp="200" />
 		<Monster name="Ронид" id="1301" isBoss="False" hp="200" />
 		<Monster name="Ронид" id="1302" isBoss="False" hp="200" />
@@ -10240,10 +10285,10 @@
 		<Monster name="Рандон" id="2213" isBoss="False" hp="945" />
 		<Monster name="Рандон" id="2214" isBoss="False" hp="945" />
 		<Monster name="Ронид" id="2400" isBoss="False" hp="200" />
-		<Monster name="Зеона" id="3100" isBoss="False" hp="10000" />
-		<Monster name="Зеона" id="3101" isBoss="False" hp="10000" />
-		<Monster name="Зеона" id="3102" isBoss="False" hp="10000" />
-		<Monster name="Зеона" id="3103" isBoss="False" hp="10000" />
+		<Monster name="Сиона" id="3100" isBoss="False" hp="10000" />
+		<Monster name="Сиона" id="3101" isBoss="False" hp="10000" />
+		<Monster name="Сиона" id="3102" isBoss="False" hp="10000" />
+		<Monster name="Сиона" id="3103" isBoss="False" hp="10000" />
 		<Monster name="Рандон" id="3201" isBoss="False" hp="945" />
 		<Monster name="Рандон" id="3202" isBoss="False" hp="945" />
 		<Monster name="Рандон" id="3203" isBoss="False" hp="945" />
@@ -13881,8 +13926,8 @@
 		<Monster name="Кошмарный Перимос" id="91660" isBoss="False" hp="90000000" />
 		<Monster name="Элитный Квадриллар" id="91671" isBoss="False" hp="40000000" />
 		<Monster name="Элитный колючий лацерас" id="91672" isBoss="False" hp="40000000" />
-		<Monster name="Элитный сальката-крушитель" id="91673" isBoss="False" hp="100000000" />
-		<Monster name="Элитный лучник кровавого гнева" id="91674" isBoss="False" hp="70000000" />
+		<Monster name="Элитный сальката-крушитель" id="91673" isBoss="False" hp="90000000" />
+		<Monster name="Элитный лучник кровавого гнева" id="91674" isBoss="False" hp="60000000" />
 		<Monster name="Элитный жрец кровавого гнева" id="91675" isBoss="False" hp="40000000" />
 		<Monster name="Элитный танцор кровавого гнева" id="91676" isBoss="False" hp="45000000" />
 		<Monster name="Дугал" id="99901" isBoss="False" hp="366797" />
@@ -14460,7 +14505,7 @@
 		<Monster name="Сундук с сокровищами" id="88888888" isBoss="False" hp="100000000" />
 		<Monster name="Сундук с сокровищами" id="88888889" isBoss="False" hp="99999999" />
 		<Monster name="Причудливый ящик ведьмы" id="88888890" isBoss="False" hp="1" />
-		<Monster name="Сундук первого юбилея" id="98888888" isBoss="False" hp="1" />
+		<Monster name="Сундук с сюрпризом в честь фестиваля Федерации" id="98888888" isBoss="False" hp="1" />
 		<Monster name="Сундук первого юбилея" id="98888889" isBoss="False" hp="1" />
 		<Monster name="Вор каймановых яиц" id="99999991" isBoss="False" hp="100000000" />
 		<Monster name="Вор каймановых яиц" id="99999992" isBoss="False" hp="99999999" />

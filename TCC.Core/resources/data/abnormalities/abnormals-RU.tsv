@@ -41,12 +41,10 @@
 201	Buff	False	True	False	Благословение Шакана I	+$H_W_GOOD17$COLOR_END к силе.	icon_skills.attackup_tex
 202	Buff	False	True	False	Благословение Шакана II	+$H_W_GOOD25$COLOR_END к силе.	icon_skills.attackup_tex
 301	Stun	True	False	False	Печать молний	Оглушение. Движение невозможно.	icon_skills.shocktrap_tex
-302	Stun	True	False	False	Печать молний	Оглушение. Движение невозможно.	icon_skills.shocktrap_tex
-303	Stun	True	False	False	Печать молний	Оглушение. Движение невозможно.	icon_skills.shocktrap_tex
 501	Buff	True	True	False	Ускорение перемещения	Значительно увеличивает скорость перемещения.	icon_status.aura_of_wind_tex
 601	Buff	True	True	True	Сила безумия I	Энергия безумного духа повышает силу на $H_W_GOOD20$COLOR_END, а скорость атаки на $H_W_GOOD6$COLOR_END. Эффект барьера можно получить в радиусе 30 метров от заклинателя.	icon_skills.rage_tex
 602	Buff	True	True	True	Сила безумия II	Энергия безумного духа повышает силу на $H_W_GOOD25$COLOR_END, а скорость атаки на $H_W_GOOD6$COLOR_END. Эффект барьера можно получить в радиусе 30 метров от заклинателя.	icon_skills.rage_tex
-603	Buff	True	True	True	Сила безумия III	Энергия безумного духа повышает силу на $H_W_GOOD40$COLOR_END, а скорость атаки на $H_W_GOOD6$COLOR_END. Эффект барьера можно получить в радиусе 30 метров от заклинателя.	icon_skills.rage_tex
+603	Buff	True	True	True	Сила безумия III	Энергия безумного духа повышает силу на $H_W_GOOD48$COLOR_END, а скорость атаки на $H_W_GOOD9,6$COLOR_END. Эффект барьера можно получить в радиусе 30 метров от заклинателя.	icon_skills.rage_tex
 901	Stun	True	False	False	Плеть Шары	Оглушение. Движение невозможно.	icon_skills.flashball_tex
 902	Buff	True	True	True	Настой ноктиния	Повышает эффективность умений при использовании Настоя ноктиния.	icon_items.union_supplies5_tex
 903	Buff	True	True	False	Смертоносный замысел	Увеличивает силу на $H_W_GOOD15$COLOR_END, скорость атаки на $H_W_GOOD8%$COLOR_END, вероятность критического удара на $H_W_GOOD4%$COLOR_END, а скорость перемещения на $H_W_GOOD4%$COLOR_END.	icon_skills.battlefield_high_ranking_tex
@@ -932,7 +930,7 @@
 27130	Buff	True	True	False	Символ равновесия	+$H_W_GOOD400%$COLOR_END к равновесию.	icon_crest.crestactivereactionresist_tex
 27140	Buff	True	True	False	Символ восстановления	Восстанавливает $H_W_GOOD20%$COLOR_END от максимального уровня HP.	icon_crest.crestpassivehpheal_tex
 27150	Buff	True	True	False	Символ восстановления	Оберегающий тотем восстанавливает на $H_W_GOOD20%$COLOR_END больше HP.	icon_crest.crestactivehprecoveryup_tex
-27160	WeakeningEffect	True	False	False	Символ одряхления	-$H_W_BAD9%$COLOR_END к выносливости.	icon_crest.crestactivedefencedown_tex
+27160	WeakeningEffect	True	False	False	Символ одряхления	-$H_W_BAD10%$COLOR_END к выносливости.	icon_crest.crestactivedefencedown_tex
 27161	Buff	True	True	False	Символ восстановления [восстановление]	Восстановление HP повышается на $H_W_GOOD25%$COLOR_END.	icon_crest.crestactivehprecoveryup_tex
 27170	Buff	False	True	False	Восстановление максимального уровня HP [Символ души]	Нет справки по данному эффекту (isShow=False). Если он отображается, необходимо сообщить в BTS!	icon_crest.crestpassivehpwhileheal_tex
 28010	Buff	True	True	False	Символ величия	+$H_W_GOOD25%$COLOR_END к урону умения "Крайняя мера".	icon_crest.crestnextskillattackup_tex
@@ -1013,7 +1011,7 @@
 33150	Buff	True	True	False	Символ сцепления	При использовании умения "Импульс" в цепочке, повышает урон умений на $H_W_GOOD25%$COLOR_END.	icon_crest.crestnextskillattackup_tex
 33170	Buff	True	True	False	Символ восстановления	Восстанавливает $H_W_GOOD2%$COLOR_END от максимального уровня HP раз в $H_W_GOOD1$COLOR_END second	icon_crest.crestpassivehpheal_tex
 33200	Buff	True	True	False	Символ сцепления	Следующая атака умением наносит на 30% больше урона.	icon_crest.crestnextskillattackup_tex
-33210	Buff	True	True	False	Символ сцепления	При использовании умения "Отблеск лунного света" в цепочке, повышает урон умений на $H_W_GOOD25%$COLOR_END.	icon_crest.e_crestnextskillattackup_tex
+33210	Buff	True	True	False	Символ сцепления	При использовании умения "Отблеск лунного света" в цепочке, повышает урон умений на $H_W_GOOD25%$COLOR_END.	icon_crest.crestpassivehpheal_tex
 45301	WeakeningEffect	True	False	False	Великий удар	Тяжелое оглушение.	icon_status.minusdefence_tex
 45302	WeakeningEffect	True	False	False	Забытье	Оглушение и опрокидывание.	icon_status.minuscriticalresist_tex
 45303	DamageOverTime	False	False	False		Сверло пропадет через 13 секунд.	
@@ -1208,10 +1206,10 @@
 100102	Buff	True	True	True	Штурмовая стойка III	Повышает силу на $H_W_GOOD15$COLOR_END, вероятность нанесения критического удара на $H_W_GOOD50$COLOR_END и силу атаки в PvE на $H_W_GOOD10%$COLOR_END. Одновременно снижает выносливость на $H_W_BAD10%$COLOR_END.	icon_skills.ironwilla_tex
 100103	Buff	True	True	True	Штурмовая стойка IV	Повышает силу на $H_W_GOOD18$COLOR_END, вероятность критического удара на $H_W_GOOD55$COLOR_END и силу атаки в PvE на $H_W_GOOD10%$COLOR_END. Одновременно снижает выносливость на $H_W_BAD10%$COLOR_END.	icon_skills.ironwilla_tex
 100150	Buff	False	True	True	Сообщите в BTS, если отображается	Дополнительный урон по монстрам 10%	
-100200	Buff	True	True	True	Защитная стойка I	$H_W_GOOD+15%$COLOR_END к выносливости, $H_W_GOOD+20$COLOR_END к равновесию, $H_W_GOOD15%$COLOR_END к вероятности нанесения критического удара против монстров. +$H_W_GOOD65%$COLOR_END к урону всех атакующих умений, опрокинуть вас могут только особые атаки некоторых монстров.	icon_skills.ironwillb_tex
-100201	Buff	True	True	True	Защитная стойка II	$H_W_GOOD+20%$COLOR_END к выносливости, $H_W_GOOD+20$COLOR_END к равновесию, $H_W_GOOD15%$COLOR_END к вероятности нанесения критического удара против монстров. +$H_W_GOOD80%$COLOR_END к урону всех атакующих умений, опрокинуть вас могут только особые атаки некоторых монстров.	icon_skills.ironwillb_tex
-100202	Buff	True	True	True	Защитная стойка III	$H_W_GOOD+25%$COLOR_END к выносливости, $H_W_GOOD+20$COLOR_END к равновесию, $H_W_GOOD15%$COLOR_END к вероятности нанесения критического удара против монстров. +$H_W_GOOD100%$COLOR_END к урону всех атакующих умений, опрокинуть вас могут только особые атаки некоторых монстров.	icon_skills.ironwillb_tex
-100203	Buff	True	True	True	Защитная стойка IV	$H_W_GOOD+25%$COLOR_END к выносливости, $H_W_GOOD+30$COLOR_END к равновесию, $H_W_GOOD15%$COLOR_END к вероятности нанесения критического удара против монстров. +$H_W_GOOD120%$COLOR_END к урону всех атакующих умений, опрокинуть вас могут только особые атаки некоторых монстров.	icon_skills.ironwillb_tex
+100200	Buff	True	True	True	Защитная стойка I	$H_W_GOOD+20%$COLOR_END к выносливости, $H_W_GOOD+20$COLOR_END к равновесию, $H_W_GOOD15%$COLOR_END к вероятности нанесения критического удара против монстров. +$H_W_GOOD100%$COLOR_END к агрессии при использовании всех атакующих умений, опрокинуть вас могут только особые атаки некоторых монстров.	icon_skills.ironwillb_tex
+100201	Buff	True	True	True	Защитная стойка II	$H_W_GOOD+25%$COLOR_END к выносливости, $H_W_GOOD+30$COLOR_END к равновесию, $H_W_GOOD15%$COLOR_END к вероятности нанесения критического удара против монстров. +$H_W_GOOD120%$COLOR_END к агрессии при использовании всех атакующих умений, опрокинуть вас могут только особые атаки некоторых монстров.	icon_skills.ironwillb_tex
+100202	Buff	True	True	True	Защитная стойка III	$H_W_GOOD+10029500%$COLOR_END к выносливости, $H_W_GOOD+20$COLOR_END к равновесию, $H_W_GOOD15%$COLOR_END к вероятности нанесения критического удара против монстров. +$H_W_GOOD100%$COLOR_END к агрессии при использовании всех атакующих умений, опрокинуть вас могут только особые атаки некоторых монстров.	icon_skills.ironwillb_tex
+100203	Buff	True	True	True	Защитная стойка IV	$H_W_GOOD+25%$COLOR_END к выносливости, $H_W_GOOD+30$COLOR_END к равновесию, $H_W_GOOD15%$COLOR_END к вероятности нанесения критического удара против монстров. +$H_W_GOOD120%$COLOR_END к агрессии при использовании всех атакующих умений, опрокинуть вас могут только особые атаки некоторых монстров.	icon_skills.ironwillb_tex
 100293	Buff	False	True	False	Базовый эффект блокирования парными клинками	Нет справки по данному эффекту (isShow=False). Если он отображается, необходимо сообщить в BTS!	icon_skills.twinswordsdefence_tex
 100294	Buff	True	True	False	Ключ мужества I	Ключ мужества I восстанавливает 5% MP.	icon_skills.twinswordsdefence_tex
 100296	Buff	False	True	True	Защитная стойка (увеличивает шанс критического удара против монстров)	Увеличивает вероятность нанесения критического удара на 15% в бою с монстрами (невидимый эффект).	icon_skills.ironwillb_tex
@@ -1230,6 +1228,8 @@
 100506	DamageOverTime	True	False	False	Отравленный клинок	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.poisonblowattack_tex
 100507	DamageOverTime	True	False	False	Отравленный клинок	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.poisonblowattack_tex
 100508	DamageOverTime	True	False	False	Отравленный клинок	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.poisonblowattack_tex
+100509	DamageOverTime	True	False	False	Отравленный клинок X	Уменьшает HP на $H_W_BAD-1582$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.poisonblowattack_tex
+100510	DamageOverTime	True	False	False	Отравленный клинок XI	Уменьшает HP на $H_W_BAD-1892$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.poisonblowattack_tex
 100520	DamageOverTime	True	False	False	Отравленный клинок	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.poisonblowattack_tex
 100521	DamageOverTime	True	False	False	Отравленный клинок	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.poisonblowattack_tex
 100522	DamageOverTime	True	False	False	Отравленный клинок	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.poisonblowattack_tex
@@ -1239,19 +1239,28 @@
 100526	DamageOverTime	True	False	False	Отравленный клинок	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.poisonblowattack_tex
 100527	DamageOverTime	True	False	False	Отравленный клинок	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.poisonblowattack_tex
 100528	DamageOverTime	True	False	False	Отравленный клинок	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.poisonblowattack_tex
+100529	DamageOverTime	True	False	False	Отравленный клинок X	Уменьшает HP на $H_W_BAD-798$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.poisonblowattack_tex
+100530	DamageOverTime	True	False	False	Отравленный клинок XI	Уменьшает HP на $H_W_BAD-954$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.poisonblowattack_tex
 100600	Buff	True	True	True	Инстинкт охотника	Ваше четвертое последовательное использование умения "Комбо-атака" снижает скорость атаки и скорость перемещения противника на $H_W_GOOD15%$COLOR_END. Вы тратите $H_W_BAD-10$COLOR_END MP раз в $H_W_BAD2$COLOR_END second1 во время действия эффекта.	icon_skills.aimingankle_tex
 100630	WeakeningEffect	True	False	False	Инстинкт охотника	Скорость снижается на $H_W_BAD0,85$COLOR_END.	icon_skills.aimingankle_tex
 100700	Buff	False	True	False	Активное Ошеломление	Теперь вы можете использовать "Ошеломление".	icon_skills.reversalturningattack_tex
 100800	Buff	True	True	False	Смертельная игра I	Повышает вероятность нанесения критического удара на $H_W_GOOD35%$COLOR_END в течение $time	icon_skills.deadlywill_tex
-100801	Buff	True	True	False	Смертельная игра II	Увеличивает вероятность критического удара на $H_W_GOOD50%$COLOR_END в течение $time Время перезарядки умений для атак в ближнем бою уменьшается в два раза. При этом повышает эффекты следующих умений: $BR- "Град ударов XI": наносит дополнительно 10% урона, удваивает количество накапливаемого преимущества.$BR- "Рваная рана VII": наносит дополнительно 10% урона, удваивает количество накапливаемого преимущества.$BR- "Коса II": увеличивает на 10% урон и на 20% радиус действия.	icon_skills.deadlywill_tex
+100801	Buff	True	True	False	Смертельная игра II	Увеличивает вероятность критического удара на $H_W_GOOD50%$COLOR_END в течение $time Время перезарядки умений для атак в ближнем бою уменьшается в два раза. При этом повышает эффекты следующих умений: $BR- "Град ударов IX": наносит дополнительно 10% урона, удваивает количество накапливаемого преимущества.$BR- "Рваная рана IX": наносит дополнительно 10% урона, удваивает количество накапливаемого преимущества.$BR- "Коса IX": увеличивает на 10% урон и на 20% радиус действия.	icon_skills.deadlywill_tex
 100802	Buff	False	True	False	Смертельная игра II: сниженное время перезарядки	Незаметное отклонение.	
 100803	Buff	False	True	False	Смертельная игра II: сниженное время перезарядки	Незаметное отклонение.	
 100900	Stun	True	False	False	Каскад оглушений	Оглушение. Движение невозможно.	icon_skills.hardslash_tex
 100901	Stun	True	False	False	Каскад оглушений	Оглушение. Движение невозможно.	icon_skills.hardslash_tex
+100902	Stun	True	False	False	Каскад оглушений III	Вы оглушены и обездвижены.	icon_skills.hardslash_tex
+100903	Stun	True	False	False	Каскад оглушений IX	Вы оглушены и обездвижены.	icon_skills.hardslash_tex
+100904	Stun	True	False	False	Каскад оглушений X	Вы оглушены и обездвижены.	icon_skills.hardslash_tex
 101000	Stun	True	False	False	Удар в спину	Оглушение. Движение невозможно.	icon_skills.backattack_tex
 101001	Stun	True	False	False	Удар в спину	Оглушение. Движение невозможно.	icon_skills.backattack_tex
 101100	Stun	True	False	False	Ошеломление	Оглушение. Движение невозможно.	icon_skills.reversalturningattack_tex
 101101	Stun	True	False	False	Ошеломление	Оглушение. Движение невозможно.	icon_skills.reversalturningattack_tex
+101102	Stun	True	False	False	Ошеломление III	Вы оглушены и обездвижены.	icon_skills.reversalturningattack_tex
+101103	Stun	True	False	False	Ошеломление IX	Вы оглушены и обездвижены.	icon_skills.reversalturningattack_tex
+101104	Stun	True	False	False	Ошеломление X	Вы оглушены и обездвижены.	icon_skills.reversalturningattack_tex
+101105	Stun	True	False	False	Ошеломление XI	Вы оглушены и обездвижены.	icon_skills.reversalturningattack_tex
 101200	WeakeningEffect	True	False	False	Удар воина	Снижает выносливость на $H_W_BAD8%$COLOR_END.	icon_skills.aggravatingstrike_tex
 101220	WeakeningEffect	True	False	False	Удар воина	Снижает выносливость на $H_W_BAD8%$COLOR_END, а восстановление HP на $H_W_BAD30%$COLOR_END.	icon_skills.aggravatingstrike_tex
 101300	Buff	True	True	False	Прорезающий выпад	Каждый экземпляр увеличивает скорость атаки на 0,9%. Эффект может суммироваться до 13 раз.	icon_skills.dualrapidpiercing_tex
@@ -1319,9 +1328,9 @@
 300300	Buff	True	True	False	Концентрация силы I	Ваша следующая атака нанесет на $H_W_GOOD30%$COLOR_END больше урона.	icon_skills.gatheringstrength_tex
 300301	Buff	True	True	False	Концентрация силы II	Ваша следующая атака нанесет на $H_W_GOOD33%$COLOR_END больше урона.	icon_skills.gatheringstrength_tex
 300400	Stun	True	False	False	Сотрясающий удар	Оглушение. Движение невозможно.	icon_skills.retreatingkick_tex
-300500	Buff	True	True	False	Безрассудный рывок I	Ваша следующая атака будет быстрее на $H_W_GOOD30%$COLOR_END.	icon_skills.advancingleap_tex
-300501	Buff	True	True	False	Безрассудный рывок II	Ваша следующая атака будет быстрее на $H_W_GOOD40%$COLOR_END.	icon_skills.advancingleap_tex
-300502	Buff	True	True	False	Безрассудный рывок III	Ваша следующая атака будет быстрее на $H_W_GOOD50%$COLOR_END.	icon_skills.advancingleap_tex
+300500	Buff	True	True	False	Безрассудный рывок I	Ваша следующая атака будет быстрее на $H_W_GOOD40%$COLOR_END.	icon_skills.advancingleap_tex
+300501	Buff	True	True	False	Безрассудный рывок II	Ваша следующая атака будет быстрее на $H_W_GOOD50%$COLOR_END.	icon_skills.advancingleap_tex
+300502	Buff	True	True	False	Безрассудный рывок III	Ваша следующая атака будет быстрее на $H_W_GOOD60%$COLOR_END.	icon_skills.advancingleap_tex
 300503	Buff	True	True	False	Безрассудный рывок IV	Ваша следующая атака будет быстрее на $H_W_GOOD60%$COLOR_END.	icon_skills.advancingleap_tex
 300600	Buff	True	True	False	Рывок I	+$H_W_GOOD50%$COLOR_END к скорости перемещения.	icon_skills.dash_tex
 300601	Buff	True	True	False	Рывок II	+$H_W_GOOD50%$COLOR_END к скорости перемещения.	icon_skills.dash_tex
@@ -1708,7 +1717,6 @@
 500705	DamageOverTime	True	False	False	Проклятие разложения	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.disease_tex
 500706	DamageOverTime	True	False	False	Проклятие разложения	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.disease_tex
 500707	DamageOverTime	True	False	False	Проклятие разложения	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.disease_tex
-500708	DamageOverTime	True	False	False	Проклятие разложения	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.disease_tex
 500720	DamageOverTime	True	False	False	Проклятие разложения	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.disease_tex
 500721	DamageOverTime	True	False	False	Проклятие разложения	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.disease_tex
 500722	DamageOverTime	True	False	False	Проклятие разложения	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.disease_tex
@@ -1717,19 +1725,24 @@
 500725	DamageOverTime	True	False	False	Проклятие разложения	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.disease_tex
 500726	DamageOverTime	True	False	False	Проклятие разложения	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.disease_tex
 500727	DamageOverTime	True	False	False	Проклятие разложения	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.disease_tex
-500728	DamageOverTime	True	False	False	Проклятие разложения	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.disease_tex
 500800	Stun	True	False	False	Сон разума	Оглушение. Движение невозможно.	icon_skills.sleepwind_tex
 500801	Stun	True	False	False	Сон разума	Оглушение. Движение невозможно.	icon_skills.sleepwind_tex
 500802	Stun	True	False	False	Сон разума	Оглушение. Движение невозможно.	icon_skills.sleepwind_tex
 500900	Stun	True	False	False	Нервное истощение	Невозможно использовать умения. Данный эффект действует только на персонажей, отменяется в случае получения урона или падения.	icon_skills.neurasthenia_tex
-501000	DamageOverTime	True	False	False	Огненное дыхание	HP уменьшаются на $H_W_BAD-1175$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.burningbreath_tex
-501001	DamageOverTime	True	False	False	Огненное дыхание	HP уменьшаются на $H_W_BAD-1631$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.burningbreath_tex
-501002	DamageOverTime	True	False	False	Огненное дыхание	HP уменьшаются на $H_W_BAD-2305$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.burningbreath_tex
-501003	DamageOverTime	True	False	False	Огненное дыхание	HP уменьшаются на $H_W_BAD-3120$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.burningbreath_tex
-501020	DamageOverTime	True	False	False	Огненное дыхание	HP уменьшаются на $H_W_BAD-890$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.burningbreath_tex
-501021	DamageOverTime	True	False	False	Огненное дыхание	HP уменьшаются на $H_W_BAD-1228$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.burningbreath_tex
-501022	DamageOverTime	True	False	False	Огненное дыхание	HP уменьшаются на $H_W_BAD-1704$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.burningbreath_tex
-501023	DamageOverTime	True	False	False	Огненное дыхание	HP уменьшаются на $H_W_BAD-2259$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.burningbreath_tex
+501000	DamageOverTime	True	False	False	Огненное дыхание	HP уменьшаются на $H_W_BAD-443$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.burningbreath_tex
+501001	DamageOverTime	True	False	False	Огненное дыхание	HP уменьшаются на $H_W_BAD-613$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.burningbreath_tex
+501002	DamageOverTime	True	False	False	Огненное дыхание	HP уменьшаются на $H_W_BAD-849$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.burningbreath_tex
+501003	DamageOverTime	True	False	False	Огненное дыхание	HP уменьшаются на $H_W_BAD-1175$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.burningbreath_tex
+501004	DamageOverTime	True	False	False	Огненное дыхание V	HP уменьшаются на $H_W_BAD-1631$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.burningbreath_tex
+501005	DamageOverTime	True	False	False	Огненное дыхание VI	HP уменьшаются на $H_W_BAD-2305$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.burningbreath_tex
+501006	DamageOverTime	True	False	False	Огненное дыхание VII	HP уменьшаются на $H_W_BAD-3120$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.burningbreath_tex
+501020	DamageOverTime	True	False	False	Огненное дыхание	HP уменьшаются на $H_W_BAD-338$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.burningbreath_tex
+501021	DamageOverTime	True	False	False	Огненное дыхание	HP уменьшаются на $H_W_BAD-467$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.burningbreath_tex
+501022	DamageOverTime	True	False	False	Огненное дыхание	HP уменьшаются на $H_W_BAD-645$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.burningbreath_tex
+501023	DamageOverTime	True	False	False	Огненное дыхание	HP уменьшаются на $H_W_BAD-890$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.burningbreath_tex
+501024	DamageOverTime	True	False	False	Огненное дыхание V	HP уменьшаются на $H_W_BAD-1228$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.burningbreath_tex
+501025	DamageOverTime	True	False	False	Огненное дыхание VI	HP уменьшаются на $H_W_BAD-1704$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.burningbreath_tex
+501026	DamageOverTime	True	False	False	Огненное дыхание VII	HP уменьшаются на $H_W_BAD-2259$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.burningbreath_tex
 501100	DamageOverTime	True	False	False	Истощение разума I	Уменьшает запас MP на $H_W_BAD-172$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.mpsink_tex
 501101	DamageOverTime	True	False	False	Истощение разума II	Уменьшает запас MP на $H_W_BAD-206$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.mpsink_tex
 501150	DamageOverTime	False	False	False	Истощение разума I	[Тест]	icon_skills.mpsink_tex
@@ -1786,23 +1799,23 @@
 600701	WeakeningEffect	True	False	False	Замедляющая стрела	-$H_W_BAD0,7$COLOR_END к скорости перемещения.	icon_skills.spiderarrow_tex
 600702	WeakeningEffect	True	False	False	Замедляющая стрела III	-$H_W_BAD0,67$COLOR_END к скорости перемещения.	icon_skills.spiderarrow_tex
 600800	Stun	True	False	False	Удар ногой	Оглушение. Движение невозможно.	icon_skills.turningkick_tex
-600900	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-270$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
-600901	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-389$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
-600902	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-589$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
-600903	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-849$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
-600904	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-1179$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
-600905	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-1626$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
-600906	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-2360$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
+600900	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-215$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
+600901	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-310$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
+600902	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-456$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
+600903	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-676$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
+600904	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-959$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
+600905	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-1328$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
+600906	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-1871$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
 600907	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-3128$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
 600908	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-3780$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
-600920	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-232$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
-600921	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-160$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
-600922	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-221$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
-600923	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-306$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
-600924	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-422$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
-600925	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-583$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
-600926	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-813$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
-600927	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-1078$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
+600920	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-95$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
+600921	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-131$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
+600922	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-249$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
+600923	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-345$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
+600924	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-476$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
+600925	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-660$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
+600926	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-1078$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
+600927	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-1427$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
 600928	DamageOverTime	True	False	False	Ядовитая стрела	Уменьшает запас HP на $H_W_BAD-1427$COLOR_END раз в $H_W_BAD2$COLOR_END second1 Эффект может суммироваться до 3 раз.	icon_skills.venomarrow_tex
 601000	WeakeningEffect	True	False	False	Опутывающая стрела	-$value2 к скорости перемещения, -$value к скорости атаки.	icon_skills.contaningshot_tex
 601001	WeakeningEffect	True	False	False	Опутывающая стрела	-$value2 к скорости перемещения, -$value к скорости атаки.	icon_skills.contaningshot_tex
@@ -1849,6 +1862,7 @@
 700406	Buff	False	True	False	Милость титанов VII	Восстанавливает HP раз в $H_W_GOOD1$COLOR_END second	icon_skills.healshot_tex
 700407	Buff	False	True	False	Милость титанов VIII	Восстанавливает HP раз в $H_W_GOOD1$COLOR_END second	icon_skills.healshot_tex
 700408	Buff	False	True	False	Милость титанов IX	Восстанавливает HP раз в $H_W_GOOD1$COLOR_END second	icon_skills.healshot_tex
+700409	Buff	False	True	False	Милость титанов X	Восстанавливает HP раз в $H_W_GOOD1$COLOR_END second	icon_skills.healshot_tex
 700500	WeakeningEffect	True	False	False	Оковы древних	-$H_W_BAD0,5$COLOR_END к скорости перемещения.	icon_skills.slowball_tex
 700501	WeakeningEffect	True	False	False	Оковы древних	-$H_W_BAD0,4$COLOR_END к скорости перемещения.	icon_skills.slowball_tex
 700600	Buff	True	True	True	Аура безжалостности I	Сила безумия накладывается на всех членов группы в радиусе 30 метров. Пока действует умение, каждые $H_W_BAD2$COLOR_END second1, MP уменьшается на $H_W_BAD-30$COLOR_END.	icon_skills.criticalupaura_tex
@@ -1862,25 +1876,7 @@
 700730	Buff	True	True	True	Аура скорости	+$H_W_GOOD10%$COLOR_END к скорости перемещения.	icon_status.plusmove_tex
 700731	Buff	True	True	True	Аура скорости II	+$H_W_GOOD30%$COLOR_END к скорости перемещения.	icon_status.plusmove_tex
 700800	DamageOverTime	True	False	False	Град проклятий	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.painfulshackle_tex
-700801	DamageOverTime	True	False	False	Град проклятий	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.painfulshackle_tex
-700802	DamageOverTime	True	False	False	Град проклятий III	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.painfulshackle_tex
-700803	DamageOverTime	True	False	False	Град проклятий	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.painfulshackle_tex
-700804	DamageOverTime	True	False	False	Град проклятий	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.painfulshackle_tex
-700805	DamageOverTime	True	False	False	Град проклятий	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.painfulshackle_tex
-700806	DamageOverTime	True	False	False	Град проклятий	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.painfulshackle_tex
-700807	DamageOverTime	True	False	False	Град проклятий VIII	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.painfulshackle_tex
-700808	DamageOverTime	True	False	False	Град проклятий	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.painfulshackle_tex
-700809	DamageOverTime	True	False	False	Град проклятий IX	Каждые $H_W_BAD2$COLOR_END second1 уровень HP снижается на $H_W_BAD-1238$COLOR_END.	icon_skills.painfulshackle_tex
 700820	DamageOverTime	True	False	False	Град проклятий	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.painfulshackle_tex
-700821	DamageOverTime	True	False	False	Град проклятий	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.painfulshackle_tex
-700822	DamageOverTime	True	False	False	Град проклятий III	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.painfulshackle_tex
-700823	DamageOverTime	True	False	False	Град проклятий	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.painfulshackle_tex
-700824	DamageOverTime	True	False	False	Град проклятий	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.painfulshackle_tex
-700825	DamageOverTime	True	False	False	Град проклятий	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.painfulshackle_tex
-700826	DamageOverTime	True	False	False	Град проклятий	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.painfulshackle_tex
-700827	DamageOverTime	True	False	False	Град проклятий VIII	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.painfulshackle_tex
-700828	DamageOverTime	True	False	False	Град проклятий	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_skills.painfulshackle_tex
-700829	DamageOverTime	True	False	False	Град проклятий IX	Каждые $H_W_BAD2$COLOR_END second1 уровень HP снижается на $H_W_BAD-1212$COLOR_END.	icon_skills.painfulshackle_tex
 700900	Buff	True	True	False	Восстановление маны	Восстанавливает $H_W_GOOD100$COLOR_END MP раз в $H_W_GOOD1$COLOR_END second Прекращает действие в случае нанесения урона или использования другого боевого умения/предмета.	icon_skills.mpcharge_tex
 701000	Buff	True	True	False	Дар духов I	Восстанавливает $H_W_GOOD70$COLOR_END HP раз в $H_W_GOOD2$COLOR_END second1	icon_skills.summonspiritofheal_tex
 701001	Buff	True	True	False	Дар духов II	Восстанавливает $H_W_GOOD88$COLOR_END HP раз в $H_W_GOOD2$COLOR_END second1	icon_skills.summonspiritofheal_tex
@@ -1967,9 +1963,41 @@
 701606	Buff	True	True	False	Оберегающий тотем II	Призванная энергия поглощает до $H_W_GOOD7149$COLOR_END урона. Эффект прекратится после поглощения максимального урона, вне зависимости от времени.	icon_skills.energiesofprotection_tex
 701607	Buff	True	True	False	Оберегающий тотем II	Призванная энергия восстанавливает $H_W_GOOD700$COLOR_END HP раз в $H_W_GOOD2$COLOR_END second1	icon_skills.energiesofprotection_tex
 701700	WeakeningEffect	True	False	False	Заражение	Вы заболеваете на $time Выносливость снижается на $H_W_BAD5%$COLOR_END. Невозможно снять эффект при помощи очищающего умения. Происходит заражение существ в радиусе 7 м от вас.	icon_skills.plague_tex
-701701	WeakeningEffect	True	False	False	Заражение	Вы заболеваете на $time Выносливость снижается на $H_W_BAD5%$COLOR_END. Невозможно снять эффект при помощи очищающего умения. Происходит заражение существ в радиусе 7 м от вас.	icon_skills.plague_tex
-701800	DamageOverTime	True	False	False	Недуг	Вы заболеваете. Каждую секунду вам наносится $H_W_BAD-15086$COLOR_END урона.	icon_skills.plague_tex
-701801	DamageOverTime	True	False	False	Недуг	Вы заболеваете. Количество восстанавливаемых HP снижается на $H_W_BAD10%$COLOR_END. Каждую секунду вам наносится $H_W_BAD-1953$COLOR_END урона.	icon_skills.plague_tex
+701701	WeakeningEffect	True	False	False	Зараза II	Вы заболеваете на $time Выносливость снижается на $H_W_BAD5%$COLOR_END. Невозможно снять эффект при помощи очищающего умения. Происходит заражение существ в радиусе 7 м от вас.	icon_skills.plague_tex
+701702	WeakeningEffect	True	False	False	Зараза III	Вы заболеваете на $time Выносливость снижается на $H_W_BAD5%$COLOR_END. Невозможно снять эффект при помощи очищающего умения. Происходит заражение существ в радиусе 7 м от вас. 	icon_skills.plague_tex
+701703	WeakeningEffect	True	False	False	Зараза IV	Вы заболеваете на $time Выносливость снижается на $H_W_BAD5%$COLOR_END. Невозможно снять эффект при помощи очищающего умения. Происходит заражение существ в радиусе 7 м от вас. 	icon_skills.plague_tex
+701704	WeakeningEffect	True	False	False	Зараза V	Вы заболеваете на $time Выносливость снижается на $H_W_BAD5%$COLOR_END. Невозможно снять эффект при помощи очищающего умения. Происходит заражение существ в радиусе 7 м от вас. 	icon_skills.plague_tex
+701705	WeakeningEffect	True	False	False	Зараза VI	Вы заболеваете на $time Выносливость снижается на $H_W_BAD5%$COLOR_END. Невозможно снять эффект при помощи очищающего умения. Происходит заражение существ в радиусе 7 м от вас. 	icon_skills.plague_tex
+701706	WeakeningEffect	True	False	False	Зараза VII	Вы заболеваете на $time Выносливость снижается на $H_W_BAD5%$COLOR_END. Невозможно снять эффект при помощи очищающего умения. Происходит заражение существ в радиусе 7 м от вас. 	icon_skills.plague_tex
+701707	WeakeningEffect	True	False	False	Зараза VIII	Вы заболеваете на $time Выносливость снижается на $H_W_BAD5%$COLOR_END. Невозможно снять эффект при помощи очищающего умения. Происходит заражение существ в радиусе 7 м от вас. 	icon_skills.plague_tex
+701708	WeakeningEffect	True	False	False	Зараза IX	Вы заболеваете на $time Выносливость снижается на $H_W_BAD5%$COLOR_END. Невозможно снять эффект при помощи очищающего умения. Происходит заражение существ в радиусе 7 м от вас. 	icon_skills.plague_tex
+701720	WeakeningEffect	True	False	False	Зараза I	Вы заболеваете на $time Выносливость снижается на $H_W_BAD5%$COLOR_END. Невозможно снять эффект при помощи очищающего умения. Происходит заражение существ в радиусе 7 м от вас. 	icon_skills.plague_tex
+701721	WeakeningEffect	True	False	False	Зараза II	Вы заболеваете на $time Выносливость снижается на $H_W_BAD5%$COLOR_END. Невозможно снять эффект при помощи очищающего умения. Происходит заражение существ в радиусе 7 м от вас. 	icon_skills.plague_tex
+701722	WeakeningEffect	True	False	False	Зараза III	Вы заболеваете на $time Выносливость снижается на $H_W_BAD5%$COLOR_END. Невозможно снять эффект при помощи очищающего умения. Происходит заражение существ в радиусе 7 м от вас. 	icon_skills.plague_tex
+701723	WeakeningEffect	True	False	False	Зараза IV	Вы заболеваете на $time Выносливость снижается на $H_W_BAD5%$COLOR_END. Невозможно снять эффект при помощи очищающего умения. Происходит заражение существ в радиусе 7 м от вас. 	icon_skills.plague_tex
+701724	WeakeningEffect	True	False	False	Зараза V	Вы заболеваете на $time Выносливость снижается на $H_W_BAD5%$COLOR_END. Невозможно снять эффект при помощи очищающего умения. Происходит заражение существ в радиусе 7 м от вас. 	icon_skills.plague_tex
+701725	WeakeningEffect	True	False	False	Зараза VI	Вы заболеваете на $time Выносливость снижается на $H_W_BAD5%$COLOR_END. Невозможно снять эффект при помощи очищающего умения. Происходит заражение существ в радиусе 7 м от вас. 	icon_skills.plague_tex
+701726	WeakeningEffect	True	False	False	Зараза VII	Вы заболеваете на $time Выносливость снижается на $H_W_BAD5%$COLOR_END. Невозможно снять эффект при помощи очищающего умения. Происходит заражение существ в радиусе 7 м от вас. 	icon_skills.plague_tex
+701727	WeakeningEffect	True	False	False	Зараза VIII	Вы заболеваете на $time Выносливость снижается на $H_W_BAD5%$COLOR_END. Невозможно снять эффект при помощи очищающего умения. Происходит заражение существ в радиусе 7 м от вас. 	icon_skills.plague_tex
+701728	WeakeningEffect	True	False	False	Зараза IX	Вы заболеваете на $time Выносливость снижается на $H_W_BAD5%$COLOR_END. Невозможно снять эффект при помощи очищающего умения. Происходит заражение существ в радиусе 7 м от вас. 	icon_skills.plague_tex
+701800	DamageOverTime	True	False	False	Недуг	Вы заболеваете. Каждую секунду вам наносится $H_W_BAD-1141$COLOR_END урона.	icon_skills.plague_tex
+701801	DamageOverTime	True	False	False	Зараза II	Вы заболеваете. Каждую секунду вам наносится $H_W_BAD-1585$COLOR_END урона.	icon_skills.plague_tex
+701802	DamageOverTime	True	False	False	Зараза III	Вы заболеваете. Каждую секунду вам наносится $H_W_BAD-2202$COLOR_END урона.	icon_skills.plague_tex
+701803	DamageOverTime	True	False	False	Зараза IV	Вы заболеваете. Каждую секунду вам наносится $H_W_BAD-3059$COLOR_END урона.	icon_skills.plague_tex
+701804	DamageOverTime	True	False	False	Зараза V	Вы заболеваете. Каждую секунду вам наносится $H_W_BAD-4248$COLOR_END урона.	icon_skills.plague_tex
+701805	DamageOverTime	True	False	False	Зараза VI	Вы заболеваете. Каждую секунду вам наносится $H_W_BAD-5900$COLOR_END урона.	icon_skills.plague_tex
+701806	DamageOverTime	True	False	False	Зараза VII	Вы заболеваете. Каждую секунду вам наносится $H_W_BAD-8194$COLOR_END урона.	icon_skills.plague_tex
+701807	DamageOverTime	True	False	False	Зараза VIII	Вы заболеваете. Каждую секунду вам наносится $H_W_BAD-11380$COLOR_END урона.	icon_skills.plague_tex
+701808	DamageOverTime	True	False	False	Зараза IX	Вы заболеваете. Каждую секунду вам наносится $H_W_BAD-15086$COLOR_END урона.	icon_skills.plague_tex
+701820	DamageOverTime	True	False	False	Зараза I	Вы заболеваете. Количество восстанавливаемых HP снижается на $H_W_BAD10%$COLOR_END. Каждую секунду вам наносится $H_W_BAD-141$COLOR_END урона. 	icon_skills.plague_tex
+701821	DamageOverTime	True	False	False	Зараза II	Вы заболеваете. Количество восстанавливаемых HP снижается на $H_W_BAD10%$COLOR_END. Каждую секунду вам наносится $H_W_BAD-196$COLOR_END урона. 	icon_skills.plague_tex
+701822	DamageOverTime	True	False	False	Зараза III	Вы заболеваете. Количество восстанавливаемых HP снижается на $H_W_BAD10%$COLOR_END. Каждую секунду вам наносится $H_W_BAD-272$COLOR_END урона. 	icon_skills.plague_tex
+701823	DamageOverTime	True	False	False	Зараза IV	Вы заболеваете. Количество восстанавливаемых HP снижается на $H_W_BAD10%$COLOR_END. Каждую секунду вам наносится $H_W_BAD-378$COLOR_END урона. 	icon_skills.plague_tex
+701824	DamageOverTime	True	False	False	Зараза V	Вы заболеваете. Количество восстанавливаемых HP снижается на $H_W_BAD10%$COLOR_END. Каждую секунду вам наносится $H_W_BAD-525$COLOR_END урона. 	icon_skills.plague_tex
+701825	DamageOverTime	True	False	False	Зараза VI	Вы заболеваете. Количество восстанавливаемых HP снижается на $H_W_BAD10%$COLOR_END. Каждую секунду вам наносится $H_W_BAD-729$COLOR_END урона. 	icon_skills.plague_tex
+701826	DamageOverTime	True	False	False	Зараза VII	Вы заболеваете. Количество восстанавливаемых HP снижается на $H_W_BAD10%$COLOR_END. Каждую секунду вам наносится $H_W_BAD-1012$COLOR_END урона. 	icon_skills.plague_tex
+701827	DamageOverTime	True	False	False	Зараза VIII	Вы заболеваете. Количество восстанавливаемых HP снижается на $H_W_BAD10%$COLOR_END. Каждую секунду вам наносится $H_W_BAD-1406$COLOR_END урона. 	icon_skills.plague_tex
+701828	DamageOverTime	True	False	False	Зараза IX	Вы заболеваете. Количество восстанавливаемых HP снижается на $H_W_BAD10%$COLOR_END. Каждую секунду вам наносится $H_W_BAD-1953$COLOR_END урона. 	icon_skills.plague_tex
 701900	Buff	True	True	False	Неуязвимость телепорта	Не должно показываться.	icon_skills.voidtrap_tex
 757001	Buff	False	False	False	Не должно отображаться.	Не должно отображаться.	icon_status.firedamage_tex
 757002	Buff	True	False	True	Кремень	Каменный великан охвачен огнем. На цели в радиусе 21 м. накладывается эффект "Жар".	icon_status.firedamage_tex
@@ -2268,14 +2296,14 @@
 781107	Buff	False	True	False			
 781108	Buff	False	True	False			
 781109	DamageOverTime	False	False	False			
-781110	Buff	False	True	False			
+781110	Buff	False	False	False			
 781111	WeakeningEffect	True	False	False	Семя Лакана	Лакан посадил в вас заколдованное семя, которое скоро взорвется.	icon_status.heat_tex
-781112	Buff	False	True	False			
+781112	Buff	False	False	False			
 781113	Buff	False	True	False			
 781114	DamageOverTime	False	False	False			
-781115	Buff	False	True	False			
+781115	Buff	False	False	False			
 781116	WeakeningEffect	True	False	False	Семя Лакана	Лакан посадил в вас заколдованное семя, которое скоро взорвется.	icon_status.heat_tex
-781117	Buff	False	True	False			
+781117	Buff	False	False	False			
 781118	Buff	False	True	False			
 781119	Buff	True	True	False	Концентрация магии	Лакан накапливает силы для уничтожения. Постарайтесь его усыпить.	icon_status.windtyrant_tex
 781120	Buff	False	True	False			
@@ -2340,15 +2368,6 @@
 801301	Buff	True	True	False	Возведение II	Повышает равновесие на $H_W_GOOD100%$COLOR_END.	icon_skills.recovery_tex
 801400	Buff	True	True	False	Лечебный колодец I	Восстанавливает HP раз в $H_W_GOOD1$COLOR_END second	icon_skills.sanctuaryofregeneration_tex
 801401	Buff	True	True	False	Лечебный колодец II	Восстанавливает HP раз в $H_W_GOOD1$COLOR_END second	icon_skills.sanctuaryofregeneration_tex
-801402	Buff	True	True	False	Лечебный колодец III	Восстанавливает HP раз в $H_W_GOOD1$COLOR_END second	icon_skills.sanctuaryofregeneration_tex
-801403	Buff	True	True	False	Лечебный колодец IV	Восстанавливает HP раз в $H_W_GOOD1$COLOR_END second	icon_skills.sanctuaryofregeneration_tex
-801404	Buff	True	True	False	Лечебный колодец V	Восстанавливает HP раз в $H_W_GOOD1$COLOR_END second	icon_skills.sanctuaryofregeneration_tex
-801405	Buff	True	True	False	Лечебный колодец VI	Восстанавливает HP раз в $H_W_GOOD1$COLOR_END second	icon_skills.sanctuaryofregeneration_tex
-801406	Buff	True	True	False	Лечебный колодец VII	Восстанавливает HP раз в $H_W_GOOD1$COLOR_END second	icon_skills.sanctuaryofregeneration_tex
-801407	Buff	True	True	False	Лечебный колодец VIII	Восстанавливает HP раз в $H_W_GOOD1$COLOR_END second	icon_skills.sanctuaryofregeneration_tex
-801408	Buff	True	True	False	Лечебный колодец IX	Восстанавливает HP раз в $H_W_GOOD1$COLOR_END second	icon_skills.sanctuaryofregeneration_tex
-801409	Buff	True	True	False	Лечебный колодец X	Восстанавливает HP раз в $H_W_GOOD1$COLOR_END second	icon_skills.sanctuaryofregeneration_tex
-801410	Buff	True	True	False	Лечебный колодец XI	Восстанавливает HP раз в $H_W_GOOD1$COLOR_END second	icon_skills.sanctuaryofregeneration_tex
 801500	Buff	True	True	False	Энергия звезд I	+$H_W_GOOD20$COLOR_END к силе, +$H_W_GOOD8$COLOR_END к скорости атаки.	icon_skills.divinelightning_tex
 801501	Buff	True	True	False	Энергия звезд II	+$H_W_GOOD28$COLOR_END к силе, +$H_W_GOOD8$COLOR_END к скорости атаки.	icon_skills.divinelightning_tex
 801502	Buff	True	True	False	Энергия звезд III	+$H_W_GOOD36$COLOR_END к силе, +$H_W_GOOD8$COLOR_END к скорости атаки.	icon_skills.divinelightning_tex
@@ -3090,9 +3109,9 @@
 981097	Buff	True	False	False			
 981098	Buff	False	True	False			
 981099	Stun	True	True	False	Оглушение	За секунду до атаки Лакана вас оглушило мощной волной энергии.	icon_status.confuseup_tex
-981100	Buff	False	True	False			
-981101	Buff	False	True	False			
-981102	Buff	False	True	False			
+981100	Buff	False	True	True			
+981101	Buff	False	True	True			
+981102	Buff	False	True	True			
 981103	Buff	True	True	False			
 981104	Buff	False	True	False			
 981105	Buff	False	True	False			
@@ -3100,14 +3119,14 @@
 981107	Buff	False	True	False			
 981108	Buff	False	True	False			
 981109	DamageOverTime	False	False	False			
-981110	Buff	False	True	False			
+981110	Buff	False	False	False			
 981111	WeakeningEffect	True	False	False	Семя Лакана	Лакан посадил в вас заколдованное семя, которое скоро взорвется.	icon_status.heat_tex
-981112	Buff	False	True	False			
+981112	Buff	False	False	False			
 981113	Buff	False	True	False			
 981114	DamageOverTime	False	False	False			
-981115	Buff	False	True	False			
+981115	Buff	False	False	False			
 981116	WeakeningEffect	True	False	False	Семя Лакана	Лакан посадил в вас заколдованное семя, которое скоро взорвется.	icon_status.heat_tex
-981117	Buff	False	True	False			
+981117	Buff	False	False	False			
 981118	Buff	False	True	False			
 981119	Buff	True	True	False	Концентрация магии	Лакан накапливает силы для уничтожения. Постарайтесь его усыпить.	icon_status.windtyrant_tex
 981120	Buff	False	True	True			
@@ -3727,6 +3746,7 @@
 10152093	Buff	False	True	False			
 10152094	Buff	False	True	False			
 10152095	Buff	False	True	False			
+10152096	Buff	False	True	False	Если время перезарядки яростного броска не запущено, его надо активировать.	Брось бомбу и активируй время перезарядки.	
 10152100	Buff	True	True	False	Воля в кулаке	Силу воли можно сохранять на срок до 60 секунд, после чего она начинает ослабевать. При нанесении врагу урона отсчет начинается заново.	icon_skills.energycharging_tex
 10152110	Buff	True	True	False	Временный барьер	Временный барьер поглощает до $H_W_GOOD27858$COLOR_END урона.	icon_skills.emergencyshield_tex
 10152111	Buff	True	True	False	Временный барьер	Временный барьер поглощает до $H_W_GOOD34900$COLOR_END урона.	icon_skills.emergencyshield_tex
@@ -3816,6 +3836,7 @@
 10154050	Buff	True	True	False	Дымовая завеса	Дымовая завеса позволяет уклониться от атак противника.	icon_skills.c12_smokebombevade
 10154051	Buff	False	True	False		Данный эффект не должен отображаться.	
 10154052	Buff	False	True	False			
+10154054	Buff	False	True	False	Если время перезарядки яростного броска не запущено, его надо активировать.	Нанеси яростный бросок и активируй время перезарядки.	
 10154060	Buff	False	True	False			
 10154061	Buff	False	True	False			
 10154062	Buff	False	True	False			
@@ -3887,7 +3908,7 @@
 10155253	Buff	False	True	False			
 10155254	Buff	False	True	False			
 10155255	Buff	False	True	False			
-10155270	Buff	True	True	False	Сопротивление лунного света	Пока действует эффект, гравитация луны не позволяет отбросить вас с места.	icon_skills.moongravity_tex
+10155270	Buff	True	True	False	Сопротивление лунного света	Эффект контроля от умения "Притяжение луны" не действует на вас.	icon_skills.moongravity_tex
 10155280	Buff	False	True	True			
 10155281	Buff	False	True	True			
 10155282	Buff	False	True	True			
@@ -4114,6 +4135,112 @@
 45000120	Buff	True	True	False	Боязнь высоты	Испугавшись высоты, вы не можете использовать умения.	icon_status.fearstatus_tex
 45000121	Buff	True	True	False	Укрепленная кожа	Шкура Колеогга стала толще. Невосприимчивость ко всем видам урона.	icon_status.plusedefence_tex
 45000122	Buff	True	True	False	Защита Велики	Защита Велики создает барьер, который 10 секунд принимает на себя весь урон.	icon_status.bless_of_velic_tex
+46600001	Stun	False	False	False	2-х секундное оглушение для умения 2-го босса "Гарпун".		
+46600002	Buff	True	True	True	Превосходство Демороса	Ничто не может помешать бросающему игральные кости Деморосу. Его защита возрастает в 1000 раз.	icon_status.plusedefence_tex
+46600003	Buff	False	True	False			
+46600004	Stun	False	False	False			
+46600005	DamageOverTime	False	False	False			
+46600006	WeakeningEffect	False	True	True			
+46600007	Buff	False	True	True		Бросает игральные кости, если у него есть самый главный (большой) кубик	
+46600008	Buff	False	True	True		Условия повторного появления игральных костей игрока	
+46600009	Buff	False	True	True			
+46600010	WeakeningEffect	False	True	False			
+46600011	Buff	False	False	True		Для синего цвета игральных костей	
+46600012	Buff	False	False	True		Для красного цвета игральных костей	
+46600013	Buff	False	True	True		Эффект кубика (белого)	
+46600014	Buff	False	True	False			
+46600015	Buff	False	True	False			
+46600016	Buff	False	True	False		Время перезарядки бросания кубиков - 90 сек.	
+46600017	Buff	False	True	True			
+46600018	DamageOverTime	True	False	False	Проклятие Демороса	Каждый $H_W_BAD2$COLOR_END second1 вы постоянно теряете по $H_W_BAD10%$COLOR_END от максимального уровня HP.	icon_status.injuredbtdarkness_tex
+46600019	WeakeningEffect	False	True	False		Гроги при попадании в fevertime 2-го босса	
+46600020	WeakeningEffect	False	True	False		Эффект для отмены действия (движения)	
+46600021	Buff	False	True	False		Для проверки победы/поражения в раунде	
+46600022	Buff	False	True	True			
+46600023	Buff	False	True	True			
+46600024	Buff	False	True	True			
+46600025	Buff	False	True	True			
+46600026	Buff	False	True	True			
+46600027	Buff	False	True	True		После 2 этапа 2-го босса появляются прозрачные НПС и выпадают кубики всех трех цветов	
+46600028	Buff	False	True	False		Безопасная зона для игроков	
+46600029	Buff	False	True	False	Эффект для достижений	Эффект для достижений	
+46600030	Buff	False	True	False	Эффект для достижений	Эффект для достижений	
+46600031	Buff	False	True	True			
+46600032	Buff	False	True	True			
+46600033	Buff	False	True	True			
+46600034	Buff	False	True	True			
+46600035	Buff	False	True	True			
+46600036	Buff	False	True	True			
+46600037	Buff	False	True	True			
+46600038	Buff	False	True	False			
+46600039	Buff	False	True	False			
+46600040	Stun	True	False	False	Паралич	Вас парализует на 5 секунд.	icon_status.positionswap_tex
+46600041	Buff	False	True	False		Для проигрывания визуального эффекта удара 1 босса (красный)	
+46600042	DamageOverTime	False	True	False		Для проигрывания визуального эффекта удара 1 босса (синий)	
+46600043	DamageOverTime	False	True	False		Для проигрывания визуального эффекта удара 1 босса (зеленый)	
+46600053	Buff	False	True	True	Сияющий кубик	Появляется сияющий кубик	
+46600054	WeakeningEffect	False	True	True			
+46600055	Buff	False	True	True			
+46600056	Buff	False	True	True			
+46600057	Buff	False	True	True			
+46600059	Buff	False	True	True		Сообщает прозрачному НПС о развороте рулетки против часовой стрелки	
+46600060	Buff	False	True	True		Сообщает прозрачному НПС о развороте рулетки по часовой стрелке	
+46600061	Buff	False	True	True		Сообщает прозрачному НПС о результате рулетки: красный	
+46600062	Buff	False	True	True		Сообщает прозрачному НПС о результате рулетки: белый	
+46600063	Buff	False	True	True		Сообщает прозрачному НПС о результате рулетки: синий	
+46600064	Buff	False	True	True		Позволяет бросить кубики игроков	
+46600065	Buff	False	True	True		Позволяет взорвать кубики игроков	
+46600066	WeakeningEffect	False	True	True		Щит от взрывающихся кубиков игроков	
+46600067	WeakeningEffect	False	True	True		Щит против одного кубика	
+46600068	WeakeningEffect	False	True	True		Щит против двух кубиков	
+46600069	DamageOverTime	False	False	False		Становится невидимой перед повторным появлением рулетки	
+46600070	Buff	False	True	False		эффект появления НПС рулетки	
+46600071	DamageOverTime	False	False	False		Эффект, действующий до окончания 46600070	icon_status.icedamage_tex
+46600072	Buff	False	True	False		Сообщает 2 боссу о вращении рулетки. Препятствует появлению кубиков	icon_status.firedamage_tex
+46600073	Buff	False	True	True		Призывает рулетку, крутящуюся против часовой стрелки	
+46600074	Buff	False	True	True		Призывает рулетку, крутящуюся по часовой стрелке	
+46600075	Buff	False	True	False		Перезарядка рулетки	
+46600076	WeakeningEffect	False	True	True		Позволяет бросить все три кубика на 2-м этапе	
+46600077	Buff	False	True	False		Сообщает 2 боссу об остановке рулетки	
+46600078	Buff	False	True	True		Эффект, который накладывает на себя 2-й босс при переходе на 2-й этап.	
+46600079	Buff	True	True	False	Безумие Демороса	Защита Демороса возрастает в 1000 раз.	icon_status.plusedefence_tex
+46600080	Buff	False	True	True		Находится на клетке 10.	
+46600081	Buff	False	True	True		Находится на клетке 1.	
+46600082	Buff	False	True	True		Находится на клетке 2.	
+46600083	Buff	False	True	True		Находится на клетке 3.	
+46600084	Buff	False	True	True		Находится на клетке 4.	
+46600085	Buff	False	True	True		Находится на клетке 5.	
+46600086	Buff	False	True	True		Находится на клетке 6.	
+46600088	Buff	False	True	False		При попадании под монету +1 к шкале (отображается на экране)	
+46600089	DamageOverTime	False	False	False		При попадании под монету +3 к шкале (отображается на экране)	
+46600090	DamageOverTime	False	False	False		Второй босс крутит рулетку.	
+46600091	Buff	False	True	False			
+46600092	Buff	False	True	False			
+46600093	Buff	False	True	False			
+46600094	Buff	False	True	False		Для запуска сценария 2 босса "бонусный бросок"	
+46600095	Buff	False	True	False			
+46600096	Buff	False	True	False			
+46600097	Buff	False	True	False			
+46600098	DamageOverTime	False	False	False		Для восстановления fevertime 2-го босса	icon_skills.refreshbless_tex
+46600099	Buff	True	True	False	Поглощение пространства	Восстанавливает $H_W_GOOD0,35%$COLOR_END от максимального уровня HP раз в $H_W_GOOD1$COLOR_END second	icon_skills.refreshbless_tex
+46600100	Buff	False	True	True		Эффект неуязвимости 2-го босса	
+46600101	Buff	False	True	False			
+46600102	Buff	False	True	False			
+46600103	Buff	False	True	True		Начинает с красного цвета -> на второй фазе переходит к зеленому	
+46600104	Buff	False	True	True		Начинает с зеленого цвета -> на второй фазе переходит к красному	
+46600105	Buff	False	True	False		1 босс - нечетное число (в наличии)	
+46600106	Buff	False	True	False		В случае суммирования 2-х нечетных превращается в четный эффект - исчезает через 1 сек.	
+46600107	Buff	False	False	False			
+46600108	Buff	False	False	False			
+46600109	Buff	False	True	False		Перезарядка нечетного сценария 1-го босса	
+46600110	Buff	False	True	False		Перезарядка сценария "Нукинг" (удар) 1-го босса	
+46600111	Buff	False	True	True			
+46600112	Buff	False	True	False		Для подсвечивания поля удара 1-го босса	
+46600113	DamageOverTime	True	False	False	Царапина Туркаса	Каждый $H_W_BAD1$COLOR_END second вы постоянно теряете по $H_W_BAD10%$COLOR_END от максимального уровня HP.	icon_status.injuredbtdarkness_tex
+46600114	Buff	False	True	True		Нечетное - удар на короткой дистанции	
+46600115	Buff	False	True	True		Нечетное - удар на длинной дистанции	
+46600116	Buff	False	True	True		Четное - удар на короткой дистанции	
+46600117	Buff	False	True	True		Четное - удар на длинной дистанции	
 47300100	DamageOverTime	True	False	False	Ядовитая смола	Заставляет терять $H_W_BAD50%$COLOR_END от максимального уровня HP раз в $H_W_BAD60$COLOR_END second1$BRЭффект "Ядовитой смолы" невозможно снять.	icon_status.poisonstatus_tex
 47300200	DamageOverTime	True	False	False	Яд Тулсы	Заставляет терять $H_W_BAD5%$COLOR_END от максимального уровня HP раз в $H_W_BAD3$COLOR_END second1$BRЭффект "Яда Тулсы" невозможно снять.	icon_status.poisonstatus_tex
 47300300	DamageOverTime	True	False	False	Отрава Тулсы	Заставляет терять $H_W_BAD30%$COLOR_END от максимального уровня HP раз в $H_W_BAD4$COLOR_END second1$BRЭффект "Отравы Тулсы" невозможно снять.	icon_status.poisonstatus_tex
@@ -5120,9 +5247,9 @@
 99010110	Buff	True	True	True	Аура упорного командира	Дает союзникам невосприимчивость к опрокидыванию, ошеломлению и оглушению вблизи командира штурма.	icon_skills.armor_passivity_tex
 99010210	Buff	True	True	True	Аура выносливого командира	Повышает выносливость и защиту союзников вблизи командира обороны.	icon_skills.defenceup_tex
 99010310	Buff	True	True	True	Аура беззаветного командира	Постоянно повышает бодрость союзников вблизи помощника командира.	icon_skills.adventgoddess_tex
-99020000	Buff	True	True	True	Доблесть Авангарда I	При подключении в течении 3-4 дней в течении последней недели вы получаете следующие эффекты:$BR$BRСкорость перемещения вне боя увеличивается на $H_W_GOOD7$COLOR_END, максимальный уровень HP увеличивается на $H_W_GOOD1%$COLOR_END, а сила на $H_W_GOOD1$COLOR_END$BR$BRЭти эффекты получают все персонажи учетной записи.	icon_status.archerspirit_tex
-99020010	Buff	True	True	True	Доблесть Авангарда II	При подключении в течении 5-6 дней в течении последней недели вы получаете следующие эффекты:$BR$BRСкорость перемещения вне боя увеличивается на $H_W_GOOD14$COLOR_END, максимальный уровень HP увеличивается на $H_W_GOOD3%$COLOR_END, а сила на $H_W_GOOD3$COLOR_END$BR$BRЭти эффекты получают все персонажи учетной записи.	icon_status.plusattack_tex
-99020020	Buff	True	True	True	Доблесть Авангарда III	При подключении в течении 7 дней в течении последней недели вы получаете следующие эффекты:$BR$BRСкорость перемещения вне боя увеличивается на $H_W_GOOD20$COLOR_END, максимальный уровень HP увеличивается на $H_W_GOOD5%$COLOR_END, а сила на $H_W_GOOD6$COLOR_END$BR$BRЭти эффекты получают все персонажи учетной записи.	icon_status.buff_of_kaia_tex
+99020000	Buff	True	True	True	Доблесть Авангарда I	Заходите в игру 3-4 дня в течение 7 последних дней и получите следующие эффекты:$BR$BRСкорость перемещения вне боя увеличивается на $H_W_GOOD7$COLOR_END, максимальный уровень HP увеличивается на $H_W_GOOD1%$COLOR_END, а сила на $H_W_GOOD1$COLOR_END$BR$BRЭти эффекты получают все персонажи учетной записи.	icon_status.archerspirit_tex
+99020010	Buff	True	True	True	Доблесть Авангарда II	Заходите в игру 5-6 дней в течение 7 последних дней и получите следующие эффекты:$BR$BRСкорость перемещения вне боя увеличивается на $H_W_GOOD14$COLOR_END, максимальный уровень HP увеличивается на $H_W_GOOD3%$COLOR_END, а сила на $H_W_GOOD3$COLOR_END$BR$BRЭти эффекты получают все персонажи учетной записи.	icon_status.plusattack_tex
+99020020	Buff	True	True	True	Доблесть Авангарда III	Заходите в игру 7 дней в течение последней недели и получите следующие эффекты:$BR$BRСкорость перемещения вне боя увеличивается на $H_W_GOOD20$COLOR_END, максимальный уровень HP увеличивается на $H_W_GOOD5%$COLOR_END, а сила на $H_W_GOOD6$COLOR_END$BR$BRЭти эффекты получают все персонажи учетной записи.	icon_status.buff_of_kaia_tex
 99070000	DamageOverTime	True	False	False	Кровотечение	Снижает скорость перемещения на $H_W_BAD30%$COLOR_END, а также HP на $H_W_BAD3%$COLOR_END от максимального уровня раз в $H_W_BAD3$COLOR_END second1	icon_status.minuscriticalresist_tex
 99070001	Buff	True	True	False	Голубое небо	Вы получаете неуязвимость ко всем видам урона и восстанавливаете $H_W_GOOD5%$COLOR_END от максимального уровня HP.	icon_status.delayheal_tex
 99070002	DamageOverTime	True	False	False	Неумолимый огонь	Отнимает $H_W_BAD2,8%$COLOR_END от максимального уровня HP раз в $H_W_BAD3$COLOR_END second1	icon_status.firedamage_tex

@@ -440,6 +440,8 @@
 4600	Buff	True	True	False	크리스탈 보호 주문서	사망 시 크리스탈이 깨지는 것을 방지하며 1만큼 중첩이 삭제됩니다. 이 효과는 최대 99번까지 중첩됩니다. 완전한 크리스탈 보호 주문서가 적용된 상태에선 효과가 적용되지 않습니다.	icon_items.q_closedspace_stone_05_tex
 4610	Buff	True	True	False	완전한 크리스탈 보호 주문서	사망 시 크리스탈이 깨지는 것을 방지합니다.	icon_items.q_closedspace_stone_05_tex
 4612	Buff	True	True	False	완전한 크리스탈 보호 주문서	사망 시 크리스탈이 깨지는 것을 방지합니다.	icon_items.q_closedspace_stone_05_tex
+4615	Buff	True	True	False	완전한 크리스탈 보호 주문서	사망 시 크리스탈이 깨지는 것을 방지합니다.	icon_items.q_closedspace_stone_05_tex
+4616	Buff	True	True	False	완전한 크리스탈 보호 주문서	사망 시 크리스탈이 깨지는 것을 방지합니다.	icon_items.q_closedspace_stone_05_tex
 4620	Buff	True	True	False	제작 속도 증가 주문서	모든 아이템의 제작 속도가 $H_W_GOOD50%$COLOR_END 향상됩니다.	icon_items.scroll_produce_speedup_tex
 4621	Buff	True	True	False	강력한 제작 속도 증가 주문서	모든 아이템의 제작 속도가 $H_W_GOOD50%$COLOR_END 향상됩니다.	icon_items.scroll_produce_speedup_tex
 4630	Buff	True	True	False	채집 숙련도 증가 주문서	$time 동안 채집 숙련도가 $H_W_GOOD410$COLOR_END 증가합니다.	icon_items.scroll_collection_expup_tex
@@ -514,6 +516,15 @@
 5060	Buff	False	True	False	정기 흡수 리액션 저항	정기 흡수 리액션 저항	icon_skills.voidtrap_tex
 6001	Buff	True	True	False	용의 혈맥	몬스터 공격 시 치명타 위력이 $H_W_GOOD+1.5$COLOR_END배 증가됩니다.	icon_status.passive_dragonblood
 6002	Buff	True	True	False	진룡의 혈맥	몬스터 공격 시 치명타 위력이 $H_W_GOOD+2$COLOR_END배 증가됩니다.	icon_status.passive_dragonblood2
+6003	Buff	True	True	False	화염의 기운	몬스터 공격 시 치명타 위력이 $H_W_GOOD+1.5$COLOR_END배 증가됩니다.	icon_skills.heataura_tex
+6004	Buff	True	True	False	폭염의 기운	몬스터 공격 시 치명타 위력이 $H_W_GOOD+2$COLOR_END배 증가됩니다.	icon_skills.flameaura_tex
+6005	Buff	False	True	False		이 이상상태는 보이지 않아야 합니다.	
+6006	Buff	True	True	False	피닉스의 기운	지속 시간 동안 무적 상태가 됩니다. 스킬 사용 시 해제됩니다.	icon_status.revivenow_status_tex
+6007	Buff	True	True	False	피닉스의 회복	전체 HP, MP 대비 $H_W_GOOD100%$COLOR_END에 달하는 HP, MP가 즉시 회복됩니다.	icon_items.eagles_potion_level_47_tex
+6008	WeakeningEffect	True	True	False	피닉스의 화신 [패시브] 대기시간	화신의 기운이 모여들고 있습니다. 화신의 기운이 모두 모여들기 전까지 $H_W_GOOD피닉스의 화신$COLOR_END의 효과가 발동되지 않습니다.	icon_skills.flameaura_tex
+6009	Buff	True	True	False	피닉스의 보호	사망 시 크리스탈이 깨지는 것을 방지합니다.	icon_items.q_closedspace_stone_05_tex
+6010	Buff	False	True	False		이 이상상태는 보이지 않아야 합니다.	
+6011	WeakeningEffect	True	True	False	피닉스의 화신 [패시브] 대기시간	화신의 기운이 모여들고 있습니다. 화신의 기운이 모두 모여들기 전까지 $H_W_GOOD피닉스의 화신$COLOR_END의 효과가 발동되지 않습니다.	icon_skills.heataura_tex
 10100	DamageOverTime	True	False	False	맹독 I [크리스탈]	$H_W_BAD1$COLOR_END second마다 $H_W_BAD-11$COLOR_END씩 HP가 지속적으로 감소됩니다.	icon_items.customize9ar_tex
 10101	DamageOverTime	True	False	False	맹독 II [크리스탈]	$H_W_BAD1$COLOR_END second마다 $H_W_BAD-23$COLOR_END씩 HP가 지속적으로 감소됩니다.	icon_items.customize9br_tex
 10102	DamageOverTime	True	False	False	맹독 III [크리스탈]	$H_W_BAD1$COLOR_END second마다 $H_W_BAD-58$COLOR_END씩 HP가 지속적으로 감소됩니다.	icon_items.customize9cr_tex
@@ -983,7 +994,7 @@
 30100	Buff	True	True	False	스킬 위력 증가 [연계 투지의 문장]	연계 스킬로 산탄 발사 사용 시 스킬 위력이 $H_W_GOOD20%$COLOR_END 증가됩니다.	icon_crest.crestnextskillattackup_tex
 30200	Buff	True	True	False	치명타 유발 증가 [필살의 문장]	치명타 유발이 $H_W_GOOD2배$COLOR_END 증가됩니다.	icon_crest.crestpassivecriticalup_tex
 31010	Buff	True	True	False	공격 속도 증가 [신속의 문장]	공격 속도가 $H_W_GOOD15%$COLOR_END 증가됩니다.	icon_crest.e_crestactiveattackspeedup_tex
-31020	Buff	True	True	False	스킬 위력 증가 [연계 투지의 문장]	스킬 위력이 $H_W_GOOD50%$COLOR_END 증가됩니다.	icon_crest.crestnextskillattackup_tex
+31020	Buff	True	True	False	스킬 위력 증가 [연계 투지의 문장]	스킬 위력이 $H_W_GOOD25%$COLOR_END 증가됩니다.	icon_crest.crestnextskillattackup_tex
 31030	Buff	True	True	False	스킬 위력 증가 [연계 투지의 문장]	스킬 위력이 $H_W_GOOD10%$COLOR_END 증가됩니다.	icon_crest.crestnextskillattackup_tex
 31040	Buff	False	True	False	분노 추가 회복 [정신의 문장]	이 이상상태가 보이면 버그	
 31050	Buff	False	True	False	분노 추가 회복 [정신의 문장]	이 이상상태가 보이면 버그	
@@ -1854,6 +1865,23 @@
 601700	Buff	False	True	False	거미 덫 화살 폭발	(보이면 안되는 이상상태)	icon_skills.arcaneshockshot02_tex
 601800	Buff	False	True	False	화살의 비 강화 I	화살의 비 데미지가 분산되지 않습니다(보이면 안되는 이상상태)	icon_skills.arrowfall_tex
 601900	Buff	False	True	False			
+620000	Buff	True	True	False	부웅~~I	강한 충격파에 몸이 공중으로 떠 올라서 움직일 수 없습니다.	icon_status.whirl_tex
+620001	Buff	True	True	False	부웅~~~II	강한 충격파에 몸이 공중으로 떠 올라서 움직일 수 없습니다.	icon_status.whirl_tex
+621000	WeakeningEffect	True	True	False	미끈한 비눗방울	미끈미끈한 비눗방울에 갇혀 이동속도가 감소합니다. 다른 비눗방울과 부딪히면 해제됩니다.	icon_items.orb_of_spirit_tex
+621004	WeakeningEffect	False	True	False			
+622000	WeakeningEffect	False	True	False			
+622001	WeakeningEffect	False	True	False			
+622002	Stun	True	False	False	혼돈의 저주	혼돈의 저주에 의해 공포에 떨며 도망치고 있습니다!	icon_status.fearstatus_tex
+622003	Stun	True	True	False	기절	기절한 상태로 움직일 수 없습니다.	icon_status.confuseup_tex
+623000	Buff	False	True	True			
+623001	Buff	False	True	True			
+623002	Buff	False	True	True			
+623003	Buff	False	True	True			
+623004	Buff	False	True	False			
+623005	Stun	False	True	False			
+623006	Buff	False	True	False			
+623007	Stun	False	False	False			
+626004	Buff	False	True	False			
 700100	Buff	True	True	False	환생의 축복 I	축복의 힘으로 지속 시간 내에 사망 시 그 자리에서 즉시 부활할 수 있습니다.	icon_skills.autoresurrect_tex
 700200	Buff	True	True	True	안개의 결계 I - 방출	자신을 포함한 주변 30m 범위 내 파티원들에게 안개의 결계 효과를 부여합니다. 스킬을 활성화하고 있는 동안 $H_W_BAD2$COLOR_END second1 마다 $H_W_BAD-30$COLOR_END씩 지속적으로 MP가 감소 합니다.	icon_skills.areahpgain_tex
 700201	Buff	True	True	True	안개의 결계 II - 방출	자신을 포함한 주변 30m 범위 내 파티원들에게 안개의 결계 효과를 부여합니다. 스킬을 활성화하고 있는 동안 $H_W_BAD2$COLOR_END second1 마다 $H_W_BAD-30$COLOR_END씩 지속적으로 MP가 감소 합니다.	icon_skills.areahpgain_tex
@@ -2308,14 +2336,14 @@
 781107	Buff	False	True	False			
 781108	Buff	False	True	False			
 781109	DamageOverTime	False	False	False			
-781110	Buff	False	True	False			
+781110	Buff	False	False	False			
 781111	WeakeningEffect	True	False	False	라칸의 씨앗	라칸이 당신에게 마력의 씨앗을 심었습니다. 일정 시간 후 폭발합니다	icon_status.heat_tex
-781112	Buff	False	True	False			
+781112	Buff	False	False	False			
 781113	Buff	False	True	False			
 781114	DamageOverTime	False	False	False			
-781115	Buff	False	True	False			
+781115	Buff	False	False	False			
 781116	WeakeningEffect	True	False	False	라칸의 씨앗	라칸이 당신에게 마력의 씨앗을 심었습니다. 일정 시간 후 폭발합니다	icon_status.heat_tex
-781117	Buff	False	True	False			
+781117	Buff	False	False	False			
 781118	Buff	False	True	False			
 781119	Buff	True	True	False	마력 응축	라칸이 전멸기를 시전하기 위해 마력을 모으고 있습니다. 라칸에게 수면류 공격을 사용하여, 잠재워야 됩니다!	icon_status.windtyrant_tex
 781120	Buff	False	True	False			
@@ -2380,10 +2408,11 @@
 801301	Buff	True	True	False	각성 II	균형이 $H_W_GOOD100%$COLOR_END 증가됩니다.	icon_skills.recovery_tex
 801400	Buff	True	True	False	재생의 성역 I	$H_W_GOOD1$COLOR_END second마다 HP가 지속적으로 회복됩니다.	icon_skills.sanctuaryofregeneration_tex
 801401	Buff	True	True	False	재생의 성역 II	$H_W_GOOD1$COLOR_END second마다 HP가 지속적으로 회복됩니다.	icon_skills.sanctuaryofregeneration_tex
-801500	Buff	True	True	False	신성의 번개 I	힘이 $H_W_GOOD20$COLOR_END 증가하고, 공격 속도도 $H_W_GOOD8$COLOR_END 향상됩니다.	icon_skills.divinelightning_tex
-801501	Buff	True	True	False	신성의 번개 II	힘이 $H_W_GOOD28$COLOR_END 증가하고, 공격 속도도 $H_W_GOOD8$COLOR_END 향상됩니다.	icon_skills.divinelightning_tex
-801502	Buff	True	True	False	신성의 번개 III	힘이 $H_W_GOOD36$COLOR_END 증가하고, 공격 속도도 $H_W_GOOD8$COLOR_END 향상됩니다.	icon_skills.divinelightning_tex
-801503	Buff	True	True	False	신성의 번개 IV	힘이 $H_W_GOOD40$COLOR_END 증가하고, 공격 속도도 $H_W_GOOD8$COLOR_END 향상됩니다.	icon_skills.divinelightning_tex
+801500	Buff	True	True	False	신성의 번개 I	힘이 $H_W_GOOD20$COLOR_END, 공격 속도 $H_W_GOOD8$COLOR_END 증가하며, 재사용 대기 시간이 $H_W_GOOD5%$COLOR_END 감소합니다.	icon_skills.divinelightning_tex
+801501	Buff	True	True	False	신성의 번개 II	힘이 $H_W_GOOD28$COLOR_END, 공격 속도 $H_W_GOOD8$COLOR_END 증가하며, 재사용 대기 시간이 $H_W_GOOD5%$COLOR_END 감소합니다.	icon_skills.divinelightning_tex
+801502	Buff	True	True	False	신성의 번개 III	힘이 $H_W_GOOD36$COLOR_END, 공격 속도 $H_W_GOOD8$COLOR_END 증가하며, 재사용 대기 시간이 $H_W_GOOD5%$COLOR_END 감소합니다.	icon_skills.divinelightning_tex
+801503	Buff	True	True	False	신성의 번개 IV	힘이 $H_W_GOOD40$COLOR_END, 공격 속도 $H_W_GOOD8$COLOR_END 증가하며, 재사용 대기 시간이 $H_W_GOOD5%$COLOR_END 감소합니다.	icon_skills.divinelightning_tex
+801510	Buff	False	True	True	신성의 번개 시 재사용 대기시간 감소	보이지 않는 이상상태(보이면 BTS)	icon_skills.divinelightning_tex
 801550	Buff	False	True	False	신성의 번개_이펙트_표시전용	이상상태 툴팁 표시 안됨 (isShow=False) 이 툴팁이 보이면 BTS 처리 필요!	icon_skills.divinelightning_tex
 801600	Buff	True	True	False	치유의 날개 I	$H_W_GOOD1$COLOR_END second마다 전체 HP 대비 $H_W_GOOD625$COLOR_END에 달하는 HP가 지속적으로 회복됩니다.	icon_skills.curewing_tex
 801601	Buff	True	True	False	치유의 날개 I	$H_W_GOOD1$COLOR_END second마다 전체 HP 대비 $H_W_GOOD625$COLOR_END에 달하는 HP가 지속적으로 회복됩니다.	icon_skills.curewing_tex
@@ -3131,14 +3160,14 @@
 981107	Buff	False	True	False			
 981108	Buff	False	True	False			
 981109	DamageOverTime	False	False	False			
-981110	Buff	False	True	False			
+981110	Buff	False	False	False			
 981111	WeakeningEffect	True	False	False	라칸의 씨앗	라칸이 당신에게 마력의 씨앗을 심었습니다. 일정 시간 후 폭발합니다	icon_status.heat_tex
-981112	Buff	False	True	False			
+981112	Buff	False	False	False			
 981113	Buff	False	True	False			
 981114	DamageOverTime	False	False	False			
-981115	Buff	False	True	False			
+981115	Buff	False	False	False			
 981116	WeakeningEffect	True	False	False	라칸의 씨앗	라칸이 당신에게 마력의 씨앗을 심었습니다. 일정 시간 후 폭발합니다	icon_status.heat_tex
-981117	Buff	False	True	False			
+981117	Buff	False	False	False			
 981118	Buff	False	True	False			
 981119	Buff	True	True	False	마력 응축	라칸이 전멸기를 시전하기 위해 마력을 모으고 있습니다. 라칸에게 수면류 공격을 사용하여, 잠재워야 됩니다!	icon_status.windtyrant_tex
 981120	Buff	False	True	True			
@@ -3256,6 +3285,9 @@
 3000019	Buff	True	True	True	비행 탑승 (HP, MP 회복)	비행 가능 지역에서 비행할 수 있습니다.<BR>탑승 중 매 초마다 HP와 MP가 2%씩 회복되며, 주위 30m 내 파티원들에게 용의 바람 효과를 전달합니다.	icon_items.wings_of_fairy_tex
 3000020	Buff	False	True	True	용의 바람	보이면 BTS	icon_skills.criticalupaura_tex
 3000021	Buff	True	True	True	용의 바람	용의 바람에 의해 탈 것 탑승 시 이동 속도가 탈 것 종류에 상관 없이 $H_W_GOOD10$COLOR_END으로 상향 고정됩니다.	icon_status.plusmove_tex
+3000022	Buff	True	True	True	피닉스 탑승 (HP, MP 회복)	비행 가능 지역에서 비행할 수 있습니다.<BR>탑승 중 매 초마다 HP와 MP가 1%씩 회복됩니다. 피닉스의 열기 효과가 적용됩니다.	icon_items.wings_of_fairy_tex
+3000023	Buff	True	True	True	피닉스 탑승 (HP, MP 회복)	비행 가능 지역에서 비행할 수 있습니다.<BR>탑승 중 매 초마다 HP와 MP가 2%씩 회복됩니다. 피닉스의 열기 효과가 적용됩니다.	icon_items.wings_of_fairy_tex
+3000024	Buff	True	True	True	피닉스의 열기	피닉스의 뜨거운 기운으로 인해 용의 바람 효과 (탑승 이동 속도 +10)를 받을 수 없습니다.	icon_status.heat_tex
 4510001	Buff	False	False	False			
 4510002	WeakeningEffect	False	True	False			
 4510003	DamageOverTime	False	False	False			
@@ -3270,7 +3302,7 @@
 4510012	Buff	True	True	False	태양의 구슬	태양의 구슬이 따라다닙니다. 평화 상태에서의 이동 속도가 $H_W_GOOD15$COLOR_END 향상됩니다.	icon_items.orb_of_luck_tex
 4510013	Buff	True	True	False	태양의 구슬	태양의 구슬이 따라다닙니다. 평화 상태에서의 이동 속도가 $H_W_GOOD15$COLOR_END 향상됩니다.	icon_items.orb_of_luck_tex
 4510014	Buff	True	True	False	태양의 구슬	태양의 구슬이 따라다닙니다. 평화 상태에서의 이동 속도가 $H_W_GOOD15$COLOR_END 향상됩니다.	icon_items.orb_of_luck_tex
-4510015	Buff	True	True	False	용기의 멜로디	후카 피리의 소리를 들으니 용기가 샘솟는것 같습니다. 스킬 데미지가 $H_W_GOOD3%$COLOR_END 향상됩니다.	icon_items.fallfestival_whistle_tex
+4510015	Buff	True	True	False	용기의 멜로디	후카 피리의 소리를 들으니 용기가 샘솟는것 같습니다. 스킬 데미지가 $H_W_GOOD1%$COLOR_END 향상됩니다.	icon_items.fallfestival_whistle_tex
 4510016	Buff	False	True	False	뿔피리 이팩트용 스킬	아무런 효과가 없음 (이팩트 표시용)	icon_items.fallfestival_whistle_tex
 5000000	Buff	True	True	True	오늘부터 우리는 강해진다!!	힘/맷집/충격/균형/치명타 유발/이동속도가 $H_W_GOOD3$COLOR_END만큼 증가합니다.	icon_items.wings_of_fairy_tex
 5000001	Buff	True	True	True	평판 포인트 상승	획득하게 되는 평판 수치 및 평판 포인트가 100% 증가합니다. 단, 전장 평판 수치와 전장 평판 포인트 획득시에는 적용되지 않습니다.	icon_items.f2p_reputationbooster_tex
@@ -3301,6 +3333,16 @@
 5694002	Buff	False	True	False	보이면 BTS	(보이면 BTS) 추가 임무 완료 체크용	icon_skills.arouseanger_tex
 5694003	Buff	False	True	False	보이면 BTS	(보이면 BTS) 추가 임무 완료 체크용	icon_skills.arouseanger_tex
 5694004	Buff	False	True	False	보이면 BTS	(보이면 BTS) 추가 임무 완료 체크용	icon_skills.arouseanger_tex
+6270001	Buff	True	True	True			
+6270003	DamageOverTime	True	True	False			
+6270004	DamageOverTime	True	True	False			
+6270005	WeakeningEffect	False	True	False			
+6270006	WeakeningEffect	False	True	False			
+6270007	WeakeningEffect	False	True	False			
+6270008	WeakeningEffect	False	True	False			
+6280001	Stun	False	False	False			
+6280002	Stun	False	False	False			
+6280003	WeakeningEffect	True	True	False			
 7000001	Buff	True	True	False	신체 변화: 황금 비율	귀여움으로 먹고 산다는 싸리싸리 요정족의 황금 신체 비율로 변화되었습니다. $BR일정 시간이 지나면 원래 비율로 돌아옵니다.	icon_status.icon_deadoo_ab_tex
 7000002	Buff	True	True	False	신체 변화: 가슴 크기	풍유환, 빈유환의 효과로 가슴 크기가 변화되었습니다.$BR $BR가슴부분이 신축성있는 재질로 되어 있는, '가슴크기 변형 가능'으로 표시된 몸통 방어구를 입었을 때에만 효과가 보입니다. $BR $BR 일정 시간이 지나면 상태가 해제되며, 원래 가슴 크기로 돌아옵니다. 아이템을 사용한 횟수에 따라 효과가 중첩 됩니다. (최소 -3단계 ~ 최대 +3 단계)	icon_status.icon_poongu_ab_tex
 7000003	Buff	True	True	False	신체 변화: 키	장신환, 단신환의 효과로 키가 변화되었습니다. $BR $BR일정 시간이 지나면 상태가 해제되며 원래 키로 돌아옵니다. 아이템을 사용한 횟수에 따라 효과가 중첩됩니다. (최소 -3단계 ~ 최대 +3 단계)	icon_status.icon_jangshin_ab_tex
@@ -3346,6 +3388,35 @@
 7101016	Buff	False	True	False			
 7101017	Buff	False	True	False			
 7101018	Buff	False	True	False			
+7101019	WeakeningEffect	False	True	False			
+7101020	WeakeningEffect	False	True	False			
+7101021	WeakeningEffect	False	True	False			
+7101022	WeakeningEffect	False	True	False			
+7101023	WeakeningEffect	False	True	False			
+7101024	WeakeningEffect	False	True	False			
+7101025	WeakeningEffect	False	True	False			
+7101026	WeakeningEffect	False	True	False			
+7101027	WeakeningEffect	False	True	False			
+7101028	WeakeningEffect	False	True	False			
+7101029	WeakeningEffect	False	True	False			
+7101030	DamageOverTime	True	True	False	불 중독	불의 기운에 중독되었습니다. 다른 사람으로부터 불을 전이 받으면 즉사합니다.	icon_status.orangeaura_tex
+7101031	WeakeningEffect	False	False	False			
+7101032	DamageOverTime	True	True	False	번개 중독	번개의 기운에 중독되었습니다. 다른 사람으로부터 번개를 전이 받으면 즉사합니다.	icon_status.paralyzestatus_tex
+7101033	WeakeningEffect	False	False	False			
+7101034	WeakeningEffect	False	True	False			
+7101035	WeakeningEffect	False	True	False			
+7101036	Stun	False	False	False			
+7101037	WeakeningEffect	False	False	False			
+7101038	WeakeningEffect	False	True	False			
+7101039	WeakeningEffect	False	True	False			
+7101040	WeakeningEffect	False	True	False			
+7101041	WeakeningEffect	False	True	False			
+7101042	WeakeningEffect	False	True	False			
+7101043	WeakeningEffect	False	True	False			
+7101044	WeakeningEffect	False	True	False			
+7101045	WeakeningEffect	False	True	False			
+7101046	WeakeningEffect	False	True	False			
+7101047	WeakeningEffect	False	True	False			
 7102000	WeakeningEffect	True	True	False	이 곳은 위험해 !!	불길한 마력의 기운이 몸을 감쌉니다. 어서 이 구역을 빠져나가야 합니다. 치유량이 $H_W_BAD30%$COLOR_END감소하며, $H_W_BAD5$COLOR_END중첩 시 안좋은 일이 생길 것 같습니다.	
 7102001	DamageOverTime	True	True	False	마력 분출	강력한 마력에 오랫동안 노출되어 몸이 감당할 수 없습니다. 1초당 $H_W_BAD50%$COLOR_END의 HP가 감소합니다.	
 7102002	DamageOverTime	True	False	False	불길한 기운	불길한 기운에 의해 이동 속도가 $H_W_BAD0,2$COLOR_END 감소되고, $H_W_BAD3$COLOR_END second1 마다 전체 HP 대비 $H_W_BAD10%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_skills.painfulshackle_tex
@@ -3406,6 +3477,7 @@
 7102057	Buff	False	True	True			
 7102058	Buff	False	True	True			
 7102059	Stun	True	False	False	침묵	몰레크에 압도당해 그 어떠한 스킬도 사용할 수 없습니다.	icon_status.sealskill_tex
+7102060	WeakeningEffect	False	True	True			
 7103000	WeakeningEffect	False	True	False			
 7103001	Buff	True	True	False			
 7103002	WeakeningEffect	True	True	False			
@@ -3443,6 +3515,10 @@
 7103035	Buff	False	True	False			
 7103036	WeakeningEffect	False	True	False			
 7103037	WeakeningEffect	False	True	True			
+7103038	Buff	False	True	True			
+7103039	Buff	False	True	False			
+7103040	DamageOverTime	True	True	False	이공간의 마력	발바토스가 당신의 스킬을 봉인한 뒤 당신을 죽이려고 합니다.	icon_status.omniousspell_tex
+7103041	DamageOverTime	False	True	False			
 7104001	WeakeningEffect	False	True	False			
 7104002	WeakeningEffect	False	True	False			
 7104003	WeakeningEffect	False	True	False			
@@ -3756,6 +3832,7 @@
 8900001	Buff	False	True	True	사냥 경험치 100% (PC방)	사냥 시 획득 경험치가 100% 증가합니다. 가맹 PC방에서 접속 시에만 적용됩니다.$BR다른 경험치 증가 버프와 중복 적용 가능합니다.	icon_items.f2p_xpbooster_tex
 8900002	Buff	False	True	True	몬스터 골드 드랍 100% (PC방)	사냥 시 획득 골드가 100% 증가합니다. 가맹 PC방에서 접속 시에만 적용됩니다.$BR다른 골드 증가 버프와 중복 적용 가능합니다.	icon_items.f2p_dropgoldbooster_tex
 8900003	Buff	False	True	True	둔칸의 축복 (PC방)	대륙 최고의 철기장, 둔칸 가문의 축복입니다.$BR제작 진행 시 대성공 확률이 10% 증가합니다.	icon_items.artisanmaster_up_tex
+8900004	Buff	False	True	True	제작 소요 시간 대폭 감소 (PC방)	제작 진행 시 소요 시간이 대폭 감소합니다.	icon_items.artisanall_up_tex
 9009751	Buff	False	True	False			icon_status.minddomination_tex
 9100020	Buff	True	True	True	기드의 가호	기드의 가호 아래, 평판 수치와 평판 포인트의 획득량이 증가합니다. (전장에서 획득한 평판 수치와 포인트에는 적용되지 않습니다)	icon_items.argon_plants_tex
 9100080	Buff	True	True	True	발더의 가호	발더의 가호 아래, 수행 가능한 일일 퀘스트의 수가 증가하고 던전에서 강화 아이템 드랍 확률이 증가합니다. 또한 MP가 지속 회복됩니다.	icon_items.argon_plants_tex
@@ -4102,7 +4179,7 @@
 10153121	Buff	False	True	False			
 10153130	Buff	False	True	True			
 10153131	Buff	False	True	True			
-10153140	WeakeningEffect	True	False	False	점혈	급소를 가격 당하여 맷집이 $H_W_BAD1%$COLOR_END씩 감소됩니다. 이 효과는 최대 8번까지 중첩됩니다.	icon_skills.rapidattack_tex
+10153140	WeakeningEffect	True	False	False	점혈	급소를 가격 당하여 맷집이 $H_W_BAD1,5%$COLOR_END씩 감소됩니다. 이 효과는 최대 8번까지 중첩됩니다.	icon_skills.rapidattack_tex
 10153150	Buff	True	True	False	순간 돌진 연계	순간 돌진을 한 번 더 사용할 수 있습니다.	icon_skills.instancerush_tex
 10153503	Buff	True	True	False	[걷어 차기] 사용 가능	[걷어 차기] 스킬을 사용 가능합니다.	icon_skills.kick2_tex
 10153504	Buff	False	True	False		이 이상상태는 보이지 않아야 합니다.	
@@ -4866,6 +4943,7 @@
 73503400	Buff	False	True	False	보이면BTS	이 NPC는 이상상태가 유지되는 동안 보호 프로토콜 패턴을 실행할 수 없습니다.	
 73503401	Buff	True	True	True	프로토콜 실행됨: 보호	RK-9의 시스템이 위험을 감지하고 보호 프로토콜을 실행하였습니다. 보호 프로토콜이 실행되면 침입자들을 모두 제거합니다.	icon_skills.emergencyshield_tex
 73503402	Buff	False	True	False	보이면BTS	이 NPC는 보호 프로토콜 실행 중에 과도한 충격으로 시스템이 일시 다운되었습니다. 5000ms 동안 행동할 수 없습니다.	
+73503403	WeakeningEffect	False	True	False	보이면BTS	이 NPC는 모든 피해, 이상상태, 리액션에 면역 상태입니다.	
 73504000	WeakeningEffect	True	True	True	강력한 자기장	강력한 자기장의 영향으로 스킬을 사용할 수 없습니다.	icon_status.sealskill_tex
 73504001	WeakeningEffect	True	True	False	감전 상태	자기장 회전 장치에 닿아 일시적인 감전 상태로 이동할 수 없습니다.	icon_skills.excesselectron_tex
 74300002	DamageOverTime	True	True	False	검은 안개	주변이 온통 검은 안개로 가득합니다. 안개안에서는 이동 속도가 대폭 상향됩니다.	icon_status.darkeffect_tex
@@ -4993,6 +5071,37 @@
 77703445	WeakeningEffect	False	True	False			
 77703446	DamageOverTime	False	False	True	어보미네이션촉수감옥_기본 이상상태	이상상태 툴팁 표시 안됨 (isShow=False) 이 툴팁이 보이면 BTS 처리 필요!	
 77703447	DamageOverTime	False	False	True	어보미네이션보호막 촉수_기본 이상상태	이상상태 툴팁 표시 안됨 (isShow=False) 이 툴팁이 보이면 BTS 처리 필요!	
+77770000	Buff	True	True	False			
+77770001	Buff	True	True	False			
+77770002	Buff	True	True	False			
+77770003	Buff	True	True	False			
+77770004	Buff	True	True	False			
+77770005	Buff	True	True	False			
+77770006	Buff	True	True	False			
+77770007	Buff	True	True	False			
+77770008	Buff	True	True	False			
+77770009	Buff	True	True	False			
+77770010	Buff	True	True	False			
+77770011	Buff	True	True	False			
+77770012	Buff	True	True	False			
+77770013	Buff	True	True	False			
+77770014	Buff	True	True	False			
+77770015	Buff	True	True	False			
+77770016	Buff	True	True	False			
+77770017	Buff	True	True	False			
+77770018	Buff	True	True	False			
+77770019	Buff	True	True	False			
+77770020	Buff	True	True	False			
+77770021	Buff	True	True	False			
+77770022	Buff	True	True	False			
+77770023	Buff	True	True	False			
+77770024	Buff	True	True	False			
+77770025	Buff	True	True	False			
+77770026	Buff	True	True	False			
+77770027	Buff	True	True	False			
+77770028	Buff	True	True	False			
+77770029	Buff	True	True	False			
+77770030	Buff	True	True	False			
 78100001	Buff	False	True	False	라칸 영혼 모드	라칸의 영혼	icon_status.immunedebuff_tex
 78100002	WeakeningEffect	False	True	False	라칸 일반 모드	라칸 일반 모드	icon_status.curse_tex
 78100003	WeakeningEffect	False	True	False	라칸 일반 모드_시작	라칸 일반 모드_시작	icon_status.curse_tex
@@ -5103,6 +5212,7 @@
 93500004	Buff	False	True	False	보이면BTS	이 PC는 탱커 클래스로 판정되고 있습니다.	
 93500005	Buff	False	True	True	보이면BTS	이 PC는 비탱커 클래스로 판정되고 있습니다.	
 93500006	WeakeningEffect	False	True	True	보이면BTS	이 NPC는 모든 피해, 이상상태, 리액션에 면역 상태입니다.	
+93500007	Buff	False	True	True	보이면BTS	이 NPC는 투명 상태로 소환수에게 공격받지 않습니다.	
 93501000	Buff	True	True	False	보호된 에너지	에너지가 벤타론에게 안전하게 전달되도록 에어홀이 모든 것을 보호합니다. 에어홀을 통과하는 동안 낙하 피해를 받지 않습니다.	icon_skills.rage_tex
 93501001	DamageOverTime	True	True	False	플라즈마 노출	시한 폭탄이 폭발했습니다! 매 $H_W_BAD1$COLOR_END second마다 $H_W_BAD8%$COLOR_END의 HP가 감소합니다. 이 효과는 정화되지 않습니다.	icon_status.paralyzestatus_tex
 93501002	Buff	False	True	False	보이면BTS	이 PC는 날아가는 중입니다! 다른 충격파 스킬 또는 공간 이동 스킬에 피격되지 않습니다.	
@@ -5166,6 +5276,7 @@
 93503400	Buff	False	True	False	보이면BTS	이 NPC는 이상상태가 유지되는 동안 보호 프로토콜 패턴을 실행할 수 없습니다.	
 93503401	Buff	True	True	True	프로토콜 실행됨: 보호	RK-9의 시스템이 위험을 감지하고 보호 프로토콜을 실행하였습니다. 보호 프로토콜이 실행되면 침입자들을 모두 제거합니다.	icon_skills.emergencyshield_tex
 93503402	Buff	False	True	False	보이면BTS	이 NPC는 보호 프로토콜 실행 중에 과도한 충격으로 시스템이 일시 다운되었습니다. 5000ms 동안 행동할 수 없습니다.	
+93503403	WeakeningEffect	False	True	False	보이면BTS	이 NPC는 모든 피해, 이상상태, 리액션에 면역 상태입니다.	
 93503500	Buff	False	True	False	보이면BTS	레이더시스템 패턴에서 근거리 폭발을 사용하지 않았습니다.	
 93503501	Buff	False	True	False	보이면BTS	노멀모드 1회 처치	
 93503502	Buff	False	True	False	보이면BTS	하드모드 1회 처치	
@@ -5684,9 +5795,9 @@
 99010110	Buff	True	True	True	돌격 앞으로!	돌격 사령관이 가지고 있는 샘솟는 용기 효과를 주변 연맹원들에게 전파한다.	icon_skills.armor_passivity_tex
 99010210	Buff	True	True	True	금강 불괴	방어 사령관이 가지고 있는 강철 같은 피부 효과를 주변 연맹원들에게 전파한다.	icon_skills.defenceup_tex
 99010310	Buff	True	True	True	승리의 함성	지원 사령관이 가지고 있는 끊임 없는 지원 효과를 주변 연맹원들에게 전파한다.	icon_skills.adventgoddess_tex
-99020000	Buff	True	True	True	발키온의 용맹 I	최근 7일 중 3~4일 접속하여 아래 효과를 얻었습니다.$BR$BR평화 상태에서 이동 속도 $H_W_GOOD7$COLOR_END 증가$BR최대 HP $H_W_GOOD1%$COLOR_END 증가$BR힘 $H_W_GOOD1$COLOR_END 증가$BR$BR본 효과는 계정 내 모든 캐릭터에게 적용됩니다.	icon_status.archerspirit_tex
-99020010	Buff	True	True	True	발키온의 용맹 II	최근 7일 중 5~6일 접속하여 아래 효과를 얻었습니다.$BR$BR평화 상태에서 이동 속도 $H_W_GOOD14$COLOR_END 증가$BR최대 HP $H_W_GOOD3%$COLOR_END 증가$BR힘 $H_W_GOOD3$COLOR_END 증가$BR$BR본 효과는 계정 내 모든 캐릭터에게 적용됩니다.	icon_status.plusattack_tex
-99020020	Buff	True	True	True	발키온의 용맹 III	최근 7일 중 7일 모두 접속하여 아래 효과를 얻었습니다.$BR$BR평화 상태에서 이동 속도 $H_W_GOOD20$COLOR_END 증가$BR최대 HP $H_W_GOOD5%$COLOR_END 증가$BR힘 $H_W_GOOD6$COLOR_END 증가$BR$BR본 효과는 계정 내 모든 캐릭터에게 적용됩니다.	icon_status.buff_of_kaia_tex
+99020000	Buff	True	True	True	발키온의 용맹 I	최근 7일 중 2~3일 접속하여 아래 효과를 얻었습니다.$BR$BR평화 상태에서 이동 속도 $H_W_GOOD7$COLOR_END 증가$BR최대 HP $H_W_GOOD1%$COLOR_END 증가$BR힘 $H_W_GOOD1$COLOR_END 증가$BR$BR본 효과는 계정 내 모든 캐릭터에게 적용됩니다.	icon_status.archerspirit_tex
+99020010	Buff	True	True	True	발키온의 용맹 II	최근 7일 중 4~5일 접속하여 아래 효과를 얻었습니다.$BR$BR평화 상태에서 이동 속도 $H_W_GOOD14$COLOR_END 증가$BR최대 HP $H_W_GOOD3%$COLOR_END 증가$BR힘 $H_W_GOOD3$COLOR_END 증가$BR$BR본 효과는 계정 내 모든 캐릭터에게 적용됩니다.	icon_status.plusattack_tex
+99020020	Buff	True	True	True	발키온의 용맹 III	최근 7일 중 6일 이상 접속하여 아래 효과를 얻었습니다.$BR$BR평화 상태에서 이동 속도 $H_W_GOOD20$COLOR_END 증가$BR최대 HP $H_W_GOOD5%$COLOR_END 증가$BR힘 $H_W_GOOD6$COLOR_END 증가$BR$BR본 효과는 계정 내 모든 캐릭터에게 적용됩니다.	icon_status.buff_of_kaia_tex
 99070000	DamageOverTime	True	False	False	출혈	강력한 일격에 의해 출혈이 발생해 이동 속도가 $H_W_BAD30%$COLOR_END 감소되고, $H_W_BAD3$COLOR_END second1 마다 전체 HP 대비 $H_W_BAD3%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.minuscriticalresist_tex
 99070001	Buff	True	True	False	창공의 가호	창공의 기운이 느껴집니다. 모든 데미지에 면역 상태가 되고 전체 HP 대비 $H_W_GOOD5%$COLOR_END에 달하는 HP가 지속적으로 회복됩니다.	icon_status.delayheal_tex
 99070002	DamageOverTime	True	False	False	불태우기	타오르는 불꽃으로 인해 $H_W_BAD3$COLOR_END second1마다 전체 HP 대비 $H_W_BAD2.8%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.firedamage_tex
@@ -6238,6 +6349,23 @@
 88312308	Buff	True	True	False	급소치기 공속증가	급소치기 시전시 공격 속도 $H_W_GOOD29%$COLOR_END 증가. 다운 / 경직 시 해제	icon_ep.ep_cooltime_hit_tex
 88312309	Buff	True	True	False	급소치기 공속증가	급소치기 시전시 공격 속도 $H_W_GOOD31%$COLOR_END 증가. 다운 / 경직 시 해제	icon_ep.ep_cooltime_hit_tex
 88312310	Buff	True	True	False	급소치기 공속증가	급소치기 시전시 공격 속도 $H_W_GOOD33%$COLOR_END 증가. 다운 / 경직 시 해제	icon_ep.ep_cooltime_hit_tex
+88313301	Buff	True	True	False	작렬 맹타	치명타 유발 $H_W_GOOD6$COLOR_END 증가	icon_ep.ep_fatal_hitfinish_tex
+88313302	Buff	True	True	False	작렬 맹타	치명타 유발 $H_W_GOOD7$COLOR_END 증가	icon_ep.ep_fatal_hitfinish_tex
+88313303	Buff	True	True	False	작렬 맹타	치명타 유발 $H_W_GOOD8$COLOR_END 증가	icon_ep.ep_fatal_hitfinish_tex
+88313304	Buff	True	True	False	작렬 맹타	치명타 유발 $H_W_GOOD9$COLOR_END 증가	icon_ep.ep_fatal_hitfinish_tex
+88313305	Buff	True	True	False	작렬 맹타	치명타 유발 $H_W_GOOD10$COLOR_END 증가	icon_ep.ep_fatal_hitfinish_tex
+88313306	Buff	True	True	False	작렬 맹타	치명타 유발 $H_W_GOOD11$COLOR_END 증가	icon_ep.ep_fatal_hitfinish_tex
+88313307	Buff	True	True	False	작렬 맹타	치명타 유발 $H_W_GOOD12$COLOR_END 증가	icon_ep.ep_fatal_hitfinish_tex
+88313308	Buff	True	True	False	작렬 맹타	치명타 유발 $H_W_GOOD13$COLOR_END 증가	icon_ep.ep_fatal_hitfinish_tex
+88313309	Buff	True	True	False	작렬 맹타	치명타 유발 $H_W_GOOD14$COLOR_END 증가	icon_ep.ep_fatal_hitfinish_tex
+88313310	Buff	True	True	False	작렬 맹타	치명타 유발 $H_W_GOOD15$COLOR_END 증가	icon_ep.ep_fatal_hitfinish_tex
+88313311	Buff	True	True	False	작렬 맹타	치명타 유발 $H_W_GOOD16$COLOR_END 증가	icon_ep.ep_fatal_hitfinish_tex
+88313312	Buff	True	True	False	작렬 맹타	치명타 유발 $H_W_GOOD17$COLOR_END 증가	icon_ep.ep_fatal_hitfinish_tex
+88313313	Buff	True	True	False	작렬 맹타	치명타 유발 $H_W_GOOD18$COLOR_END 증가	icon_ep.ep_fatal_hitfinish_tex
+88313314	Buff	True	True	False	작렬 맹타	치명타 유발 $H_W_GOOD19$COLOR_END 증가	icon_ep.ep_fatal_hitfinish_tex
+88313315	Buff	True	True	False	작렬 맹타	치명타 유발 $H_W_GOOD20$COLOR_END 증가	icon_ep.ep_fatal_hitfinish_tex
+88313401	WeakeningEffect	False	False	False	(숨김) 회베 1타	보이면 안되는 이상상태입니다.	icon_ep.ep_fatal_hitfinish_tex
+88313402	WeakeningEffect	False	False	False	(숨김) 회베 2타	보이면 안되는 이상상태입니다.	icon_ep.ep_fatal_hitfinish_tex
 88316101	Buff	True	True	False	위기의 맹타	치명타 유발 $H_W_GOOD5$COLOR_END 증가. 다운 시 해제.	icon_ep.ep_fatal_hitfinish_tex
 88316102	Buff	True	True	False	위기의 맹타	치명타 유발 $H_W_GOOD7$COLOR_END 증가. 다운 시 해제.	icon_ep.ep_fatal_hitfinish_tex
 88316103	Buff	True	True	False	위기의 맹타	치명타 유발 $H_W_GOOD9$COLOR_END 증가. 다운 시 해제.	icon_ep.ep_fatal_hitfinish_tex
