@@ -4,9 +4,11 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Threading;
 using TCC.Data;
 using TCC.Data.Databases;
 using TCC.Parsing;
+using TCC.Parsing.Messages;
 using TCC.ViewModels;
 using TCC.Windows;
 
@@ -17,6 +19,7 @@ namespace TCC
     /// </summary>
     public partial class App
     {
+        public static bool Debug = true;
         private static void GlobalUnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
         {
             var ex = (Exception)e.ExceptionObject;
@@ -52,7 +55,7 @@ namespace TCC
             UpdateManager.CheckDatabaseVersion();
 
             SkillsDatabase.Load();
-            BroochesDatabase.SetBroochesIcons();
+            ItemSkillsDatabase.SetBroochesIcons();
             SettingsManager.LoadWindowSettings();
             SettingsManager.LoadSettings();
             WindowManager.Init();
@@ -91,6 +94,52 @@ namespace TCC
             var ver = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
             ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", $"<FONT>{ver}</FONT>"));
 
+            return;
+
+            SessionManager.CurrentPlayer = new Player(1, "Foglio");
+            for (uint i = 0; i < 1; i++)
+            {
+                var u = new User(GroupWindowViewModel.Instance.GetDispatcher());
+                u.Name = "Test_Dps" + i;
+                u.PlayerId = i;
+                u.Online = true;
+                u.UserClass = Class.Warrior;
+                if (i == 1) u.HasAggro = true;
+                if (i == 0) u.IsLeader = true;
+
+                GroupWindowViewModel.Instance.AddOrUpdateMember(u);
+            }
+            for (uint i = 0; i < 2; i++)
+            {
+                var u = new User(GroupWindowViewModel.Instance.GetDispatcher());
+                u.Name = "Test_Healer" + i;
+                u.PlayerId = i +10;
+                u.Online = true;
+                u.UserClass = Class.Elementalist;
+                if (i == 1) u.Alive = false;
+                if (i == 0) u.Name = "Foglio";
+
+                GroupWindowViewModel.Instance.AddOrUpdateMember(u);
+            }
+            for (uint i = 0; i < 4; i++)
+            {
+                var u = new User(GroupWindowViewModel.Instance.GetDispatcher());
+                u.Name = "Test_Tank" + i;
+                u.PlayerId = i + 100;
+                u.Online = true;
+                u.UserClass = Class.Lancer;
+                GroupWindowViewModel.Instance.AddOrUpdateMember(u);
+            }
+            foreach (var user in GroupWindowViewModel.Instance.All)
+            {
+                user.AddOrRefreshBuff(new Abnormality(4611, true, true, false, AbnormalityType.Buff),60*100*60,1);
+                user.AddOrRefreshBuff(new Abnormality(46126, true, true, false, AbnormalityType.Buff),60*100*60,1);
+                user.AddOrRefreshDebuff(new Abnormality(89308100, true, false, false, AbnormalityType.DamageOverTime),60*100*60,5);
+                user.AddOrRefreshDebuff(new Abnormality(89308101, true, false, false, AbnormalityType.DamageOverTime),60*100*60,5);
+
+            }
+            //GroupWindowViewModel.Instance.StartRoll();
+            //GroupWindowViewModel.Instance.SetReadyStatus(new ReadyPartyMember());
         }
 
         public static void CloseApp()
