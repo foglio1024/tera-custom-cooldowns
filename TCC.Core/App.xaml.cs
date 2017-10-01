@@ -19,7 +19,7 @@ namespace TCC
     /// </summary>
     public partial class App
     {
-        public static bool Debug = true;
+        public static bool Debug = false;
         private static void GlobalUnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
         {
             var ex = (Exception)e.ExceptionObject;
