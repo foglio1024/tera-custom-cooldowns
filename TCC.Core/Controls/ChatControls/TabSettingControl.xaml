@@ -53,6 +53,52 @@
 
             </Grid>
         </DataTemplate>
+        <DataTemplate x:Key="ExcludedChannelSettingTemplate">
+            <Grid HorizontalAlignment="Stretch" Margin="10,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Ellipse ToolTip="{Binding}" Fill="{Binding Converter={StaticResource Converters.ChatChannelToColor}}" 
+                         Height="15" Width="15"/>
+                <TextBlock Grid.Column="1" Style="{StaticResource Styles.DefaultText}" ToolTip="{Binding}"
+                           Text="{Binding Converter={StaticResource Converters.ChatChannelToName}}" FontWeight="Normal"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Margin="4,5,0,4"/>
+
+                <Button Grid.Column="0" VerticalAlignment="Stretch" FontSize="16" Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Stretch"
+                        HorizontalAlignment="Stretch" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="RemoveExChannel" VerticalContentAlignment="Center">
+                    <Path Fill="#a000" Data="{StaticResource SVG.Close}" Stretch="Uniform" Margin="7"></Path>
+                </Button>
+
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="ExcludedAuthorSettingTemplate">
+            <Grid HorizontalAlignment="Stretch" Margin="10,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Ellipse ToolTip="{Binding}" Fill="#6fff" 
+                         Height="15" Width="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="1" Style="{StaticResource Styles.DefaultText}" 
+                           Text="{Binding}" FontWeight="Normal"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Margin="4,5,0,4"/>
+                <Button Grid.Column="0" VerticalAlignment="Stretch" FontSize="16" Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" 
+                        HorizontalAlignment="Stretch" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="RemoveExAuthor">
+                    <Path Fill="#a000" Data="{StaticResource SVG.Close}" Stretch="Uniform" Margin="7"></Path>
+                </Button>
+
+            </Grid>
+        </DataTemplate>
+
     </UserControl.Resources>
     <Border Margin="4" Style="{StaticResource Styles.DefaultBorder}" UseLayoutRounding="True" 
             ClipToBounds="False" CornerRadius="4" Background="#222227" BorderThickness="0">
@@ -139,6 +185,80 @@
                 </Grid>
             </Border>
             <ItemsControl ItemTemplate="{StaticResource AuthorSettingTemplate}" ItemsSource="{Binding Authors}" 
+                          Margin="0,-5,0,0">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="2"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+            <Border Background="#1ccc" Margin="0,0,0,5">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Style="{StaticResource Styles.DefaultText}" FontSize="13" Text="Ex. Channels" Padding="10,5" ToolTip="Excluded channels"
+                               VerticalAlignment="Center" Foreground="#9faa" />
+                    <ComboBox Name="NewExChannelComboBox" Grid.Column="1" ItemsSource="{Binding AllChannels}"
+                              ItemTemplate="{StaticResource SimpleChatChannelTemplate}"
+                              VerticalContentAlignment="Center"
+                              Background="#1fff" BorderThickness="0" VerticalAlignment="Stretch">
+                        <ComboBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel RequestBringIntoView="OnRequestBringIntoView" />
+                            </ItemsPanelTemplate>
+                        </ComboBox.ItemsPanel>
+                    </ComboBox>
+                    <Button Grid.Column="2" ToolTip="Add selected channel" FontSize="16"
+                            Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Stretch"
+                            VerticalContentAlignment="Stretch"
+                            HorizontalAlignment="Right"
+                            Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="AddExChannel">
+                        <TextBlock Style="{StaticResource Styles.DefaultText}" TextAlignment="Center"
+                                   VerticalAlignment="Center">
+                            +
+                        </TextBlock>
+                    </Button>
+
+                </Grid>
+            </Border>
+            <ItemsControl ItemTemplate="{StaticResource ExcludedChannelSettingTemplate}" ItemsSource="{Binding ExcludedChannels}" 
+                          Margin="0,-5,0,0">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="2"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+            <Border Background="#1ccc" CornerRadius="0,0,0,0" Margin="0,0,0,5">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource Styles.DefaultText}" FontSize="13" Text="Ex. Authors" Padding="10,5" ToolTip="Excluded authors"
+                               VerticalAlignment="Center" Foreground="#9faa" />
+                    <TextBox Padding="0" Name="NewExAuthorTextBox" VerticalAlignment="Stretch" Grid.Column="1"
+                             VerticalContentAlignment="Center" Background="#1fff" BorderThickness="0"
+                             Foreground="#3fff" Margin="0" CaretBrush="White" Text="New author...">
+                    </TextBox>
+                    <Button Grid.Column="2" FontSize="16" Style="{StaticResource ButtonMainStyle}"
+                            HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                            HorizontalAlignment="Right" VerticalAlignment="Stretch"
+                            Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="AddExAuthor">
+                        <TextBlock ToolTip="Add author" Style="{StaticResource Styles.DefaultText}"
+                                   TextAlignment="Center" VerticalAlignment="Center">
+                            +
+                        </TextBlock>
+                    </Button>
+
+                </Grid>
+            </Border>
+            <ItemsControl ItemTemplate="{StaticResource ExcludedAuthorSettingTemplate}" ItemsSource="{Binding ExcludedAuthors}" 
                           Margin="0,-5,0,0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>

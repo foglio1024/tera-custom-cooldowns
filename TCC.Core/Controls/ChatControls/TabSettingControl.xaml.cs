@@ -75,5 +75,41 @@ namespace TCC.Controls.ChatControls
 
             e.Handled = true;
         }
+
+        private void RemoveExAuthor(object sender, RoutedEventArgs e)
+        {
+            _dc.ExcludedAuthors.Remove(((FrameworkElement)sender).DataContext as string);
+        }
+
+        private void RemoveExChannel(object sender, RoutedEventArgs e)
+        {
+            _dc.ExcludedChannels.Remove((ChatChannel)((FrameworkElement)sender).DataContext);
+        }
+
+        private void AddExAuthor(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(NewExAuthorTextBox.Text) && !string.Equals(NewExAuthorTextBox.Text, "New author..."))
+            {
+                _dc.ExcludedAuthors.Add(NewExAuthorTextBox.Text);
+                _dc.ApplyFilter();
+            }
+        }
+
+        private void AddExChannel(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var ch = ((ChatChannelOnOff)NewExChannelComboBox.SelectionBoxItem).Channel;
+                if (!_dc.ExcludedChannels.Contains(ch))
+                {
+                    _dc.ExcludedChannels.Add(ch);
+                    _dc.ApplyFilter();
+                }
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
+        }
     }
 }
