@@ -311,6 +311,8 @@ namespace TCC.Data
             }
         }
 
+        public bool IsPlayer => Name == SessionManager.CurrentPlayer.Name;
+
         private List<uint> _debuffList = new List<uint>();
         public bool IsDebuffed
         {
@@ -350,12 +352,8 @@ namespace TCC.Data
         }
 
 
-        public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks, double size, double margin)
+        public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks/*, double size, double margin*/)
         {
-            if (SettingsManager.IgnoreAllBuffsInGroupWindow) return;
-            if (SettingsManager.IgnoreRaidAbnormalitiesInGroupWindow) return;
-            if (SettingsManager.IgnoreAllBuffsInGroupWindow && ab.Type == AbnormalityType.Buff) return;
-
             if (!SettingsManager.GroupAbnormals[Class.Common].Contains(ab.Id))
             {
                 if (SettingsManager.GroupAbnormals.ContainsKey(SessionManager.CurrentPlayer.Class))
@@ -369,7 +367,7 @@ namespace TCC.Data
             if (existing == null)
             {
 
-                var newAb = new AbnormalityDuration(ab, duration, stacks, this.EntityId, _dispatcher, false, size * .9, size, new Thickness(margin, 1, 1, 1));
+                var newAb = new AbnormalityDuration(ab, duration, stacks, this.EntityId, _dispatcher, false/*, size * .9, size, new Thickness(margin, 1, 1, 1)*/);
                 if(ab.Infinity) Buffs.Insert(0, newAb); else Buffs.Add(newAb);
                 return;
             }
@@ -379,7 +377,7 @@ namespace TCC.Data
             existing.Refresh();
 
         }
-        public void AddOrRefreshDebuff(Abnormality ab, uint duration, int stacks, double size, double margin)
+        public void AddOrRefreshDebuff(Abnormality ab, uint duration, int stacks/*, double size, double margin*/)
         {
             if (!ab.IsBuff && !_debuffList.Contains(ab.Id))
             {
@@ -387,11 +385,10 @@ namespace TCC.Data
                 NotifyPropertyChanged("IsDebuffed");
             }
 
-            if (SettingsManager.IgnoreRaidAbnormalitiesInGroupWindow) return;
             var existing = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, this.EntityId, _dispatcher, false, size * .9, size, new Thickness(margin, 1, 1, 1));
+                var newAb = new AbnormalityDuration(ab, duration, stacks, this.EntityId, _dispatcher, false/*, size * .9, size, new Thickness(margin, 1, 1, 1)*/);
 
                 Debuffs.Add(newAb);
                 return;
