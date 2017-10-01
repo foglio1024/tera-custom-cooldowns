@@ -7,6 +7,7 @@ using System.Windows.Data;
 using System.Windows.Threading;
 using TCC.Data;
 using TCC.Parsing.Messages;
+using TCC.Windows;
 
 namespace TCC.ViewModels
 {
@@ -304,14 +305,19 @@ namespace TCC.ViewModels
                 Tabs.Add(chatTabsSetting);
             }
             if (Tabs.Count != 0) return;
-            Tabs.Add(new Tab("ALL", new ChatChannel[] { }, new string[] { }));
-            Tabs.Add(new Tab("GUILD", new ChatChannel[] { ChatChannel.Guild, ChatChannel.GuildNotice, }, new string[] { }));
+            Tabs.Add(new Tab("ALL", new ChatChannel[] { },new ChatChannel[]{},  new string[] { }, new string[] { "System" }));
+            Tabs.Add(new Tab("GUILD", new ChatChannel[] { ChatChannel.Guild, ChatChannel.GuildNotice, }, new ChatChannel[] { }, new string[] { }, new string[] { }));
             Tabs.Add(new Tab("GROUP", new ChatChannel[]{ChatChannel.Party, ChatChannel.PartyNotice,
                 ChatChannel.RaidLeader, ChatChannel.RaidNotice,
                 ChatChannel.Raid, ChatChannel.Ress,ChatChannel.Death,
-                ChatChannel.Group, ChatChannel.GroupAlerts  }, new string[] { }));
-            Tabs.Add(new Tab("WHISPERS", new ChatChannel[] { ChatChannel.ReceivedWhisper, ChatChannel.SentWhisper, }, new string[] { }));
-            Tabs.Add(new Tab("SYSTEM", new ChatChannel[] { }, new string[] { "System" }));
+                ChatChannel.Group, ChatChannel.GroupAlerts  }, new ChatChannel[] { }, new string[] { }, new string[] { }));
+            Tabs.Add(new Tab("WHISPERS", new ChatChannel[] { ChatChannel.ReceivedWhisper, ChatChannel.SentWhisper, }, new ChatChannel[] { }, new string[] { }, new string[] { }));
+            Tabs.Add(new Tab("SYSTEM", new ChatChannel[] { }, new ChatChannel[] { }, new string[] { "System" }, new string[] { }));
+        }
+
+        public void ScrollToBottom()
+        {
+            WindowManager.ChatWindow.ScrollToBottom();
         }
     }
 
@@ -333,7 +339,9 @@ namespace TCC.ViewModels
         }
 
         public SynchronizedObservableCollection<string> Authors { get; set; }
+        public SynchronizedObservableCollection<string> ExcludedAuthors { get; set; }
         public SynchronizedObservableCollection<ChatChannel> Channels { get; set; }
+        public SynchronizedObservableCollection<ChatChannel> ExcludedChannels { get; set; }
         public ICollectionView Messages
         {
             get => _messages;
@@ -350,29 +358,37 @@ namespace TCC.ViewModels
             Messages.Refresh();
         }
 
-        public Tab(string n, ChatChannel[] ch, string[] a)
+        public Tab(string n, ChatChannel[] ch, ChatChannel[] ex, string[] a, string[] exa)
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
             TabName = n;
             Messages = new ListCollectionView(ChatWindowViewModel.Instance.ChatMessages);
             Authors = new SynchronizedObservableCollection<string>(_dispatcher);
+            ExcludedAuthors = new SynchronizedObservableCollection<string>(_dispatcher);
             Channels = new SynchronizedObservableCollection<ChatChannel>(_dispatcher);
+            ExcludedChannels = new SynchronizedObservableCollection<ChatChannel>(_dispatcher);
             foreach (var auth in a)
             {
                 Authors.Add(auth);
+            }
+            foreach (var auth in exa)
+            {
+                ExcludedAuthors.Add(auth);
             }
             foreach (var chan in ch)
             {
                 Channels.Add(chan);
             }
-            if (Channels.Count == 0 && Authors.Count == 0)
+            foreach (var chan in ex)
+            {
+                ExcludedChannels.Add(chan);
+            }
+            if (Channels.Count == 0 && Authors.Count == 0 && ExcludedChannels.Count == 0 && ExcludedAuthors.Count == 0)
             {
                 Messages.Filter = null;
                 return;
             }
             ApplyFilter();
-
-
         }
 
         public void ApplyFilter()
@@ -380,15 +396,27 @@ namespace TCC.ViewModels
             Messages.Filter = f =>
             {
                 var m = f as ChatMessage;
-                if (Authors.Count == 0 && Channels.Count != 0)
-                {
-                    return Channels.Contains(m.Channel);
-                }
-                if (Channels.Count == 0 && Authors.Count != 0)
-                {
-                    return Authors.Contains(m.Author);
-                }
-                return Authors.Contains(m.Author) && Channels.Contains(m.Channel);
+                //if (Authors.Count == 0 && Channels.Count != 0)
+                //{
+                //    if (ExcludedChannels.Count != 0)
+                //    {
+                //        return Channels.Contains(m.Channel) && !ExcludedChannels.Contains(m.Channel);
+                //    }
+                //    return Channels.Contains(m.Channel);
+                //}
+                //if (Channels.Count == 0 && Authors.Count != 0)
+                //{
+                //    if (ExcludedChannels.Count != 0)
+                //    {
+                //        return Authors.Contains(m.Author) && !ExcludedChannels.Contains(m.Channel);
+                //    }
+                //    return Authors.Contains(m.Author);
+                //}
+
+                return (Authors.Count == 0 || Authors.Any(x => x == m.Author) )&& 
+                       (Channels.Count == 0 || Channels.Any(x => x == m.Channel)) && 
+                       (ExcludedChannels.Count == 0 || ExcludedChannels.All(x => x != m.Channel) )&&
+                       (ExcludedAuthors.Count == 0 || ExcludedAuthors.All(x => x != m.Author));
             };
         }
     }
