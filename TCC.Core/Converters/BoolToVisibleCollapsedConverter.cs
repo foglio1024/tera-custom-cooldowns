@@ -5,18 +5,21 @@ using System.Windows.Data;
 
 namespace TCC.Converters
 {
-    public class BoolToVisibilityConverter : IValueConverter
+    public class BoolToVisibleCollapsedConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((bool)value)
+            var inv = false;
+            if (parameter != null)
             {
-                return Visibility.Visible;
+                if (Boolean.Parse(parameter.ToString()))
+                {
+                    inv = true;
+                }
             }
-            else
-            {
-                return Visibility.Collapsed;
-            }
+            var val = (bool) value;
+            if (inv) val = !val;
+            return val ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
