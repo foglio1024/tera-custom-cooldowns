@@ -4,21 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC"
-             xmlns:data="clr-namespace:TCC.Data"
-             xmlns:converters="clr-namespace:TCC.Converters"
              xmlns:controls="clr-namespace:TCC.Controls"
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded"
-             FlowDirection="LeftToRight" Width="Auto" Height="Auto"
-             Unloaded="UserControl_Unloaded" Margin="{Binding IndicatorMargin}">
-    <Grid Margin="0" Name="rootGrid"  ToolTipService.InitialShowDelay="0" ToolTipService.ShowDuration="50000" >
+             FlowDirection="LeftToRight" Width="Auto" Height="Auto" 
+             Unloaded="UserControl_Unloaded" d:DataContext="{d:DesignInstance local:AbnormalityDuration}">
+    <Grid Margin="0" Name="RootGrid"  ToolTipService.InitialShowDelay="0" ToolTipService.ShowDuration="50000" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
         <Grid.ToolTip>
             <ToolTip Background="Transparent" BorderBrush="Transparent" >
                 <Grid>
@@ -29,48 +24,64 @@
             </ToolTip>
         </Grid.ToolTip>
         <Grid>
-            <Ellipse Name="bgEll" Fill="{Binding Abnormality.Type, Converter={StaticResource Converters.AbnormalityTypeToStrokeColor}}"  
-                 Width="{Binding BackgroundEllipseSize}" Height="{Binding BackgroundEllipseSize}"/>
-            <Ellipse Name="abnormalityIcon" Margin="0,0" Width="{Binding IconSize}" Height="{Binding IconSize}"  UseLayoutRounding="False">
+            <Ellipse Name="BgEll" Fill="{Binding Abnormality.Type, Converter={StaticResource Converters.AbnormalityTypeToStrokeColor}}"  
+                     Width="{Binding Size, RelativeSource={RelativeSource AncestorType=controls:AbnormalityIndicator}}" 
+                     Height="{Binding Size, RelativeSource={RelativeSource AncestorType=controls:AbnormalityIndicator}}"
+                     MinWidth="20" MinHeight="20"/>
+
+            <Ellipse Name="AbnormalityIcon" Margin="0,0" UseLayoutRounding="False"
+                     Width="{Binding Size, RelativeSource={RelativeSource AncestorType=controls:AbnormalityIndicator}}" 
+                     Height="{Binding Size, RelativeSource={RelativeSource AncestorType=controls:AbnormalityIndicator}}" 
+                     MinWidth="18" MinHeight="18">
                 <Ellipse.Fill>
                     <ImageBrush ImageSource="{Binding Abnormality.IconName, Converter={StaticResource Converters.IconNameToPath}}"/>
                 </Ellipse.Fill>
+                <Ellipse.LayoutTransform>
+                    <ScaleTransform ScaleX=".9" ScaleY=".9"/>
+                </Ellipse.LayoutTransform>
             </Ellipse>
         </Grid>
-        <controls:Arc x:Name="arc" Stroke="#8000" StrokeThickness="15" EndAngle="1" Width="{Binding IconSize}" Height="{Binding IconSize}"/>
+        <controls:Arc Grid.Row="0" x:Name="Arc" Stroke="#8000" StrokeThickness="15" EndAngle="1" 
+                      Width="{Binding ElementName=AbnormalityIcon, Path=ActualWidth}" 
+                      Height="{Binding ElementName=AbnormalityIcon, Path=ActualHeight}"/>
 
-        <Grid x:Name="durationLabel"  Width="Auto" MaxWidth="{Binding IconSize}" Height="{Binding BackgroundEllipseSize, Converter={StaticResource Converters.MainSizeToDurationLabelSize}}"
+        <Grid x:Name="DurationLabel"  Width="Auto" 
+              MaxWidth="{Binding ElementName=AbnormalityIcon, Path=ActualWidth}" 
+              Height="{Binding ElementName=BgEll, Path=ActualHeight, Converter={StaticResource Converters.MainSizeToDurationLabelSize}}"
               HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1"
               Margin="0,-4,0,0">
-            <Border x:Name="fill" Background="White" 
-                    Height="Auto" Width="Auto" 
+            <Border x:Name="Fill" Background="White"  Width="Auto" 
                     Opacity=".9" CornerRadius="4" 
                     VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
-                    BorderBrush="{Binding Abnormality.Type, Converter={StaticResource Converters.AbnormalityTypeToStrokeColor}}" BorderThickness="1.5"/>
+                    BorderBrush="{Binding Abnormality.Type, Converter={StaticResource Converters.AbnormalityTypeToStrokeColor}}" 
+                    BorderThickness="1.5"/>
 
-            <Viewbox StretchDirection="DownOnly" Stretch="Uniform" Margin="0">
+            <Viewbox StretchDirection="DownOnly" Stretch="Uniform" Margin="0" >
                 <TextBlock Foreground="#d9000000" 
-                   HorizontalAlignment="Center" 
+                   HorizontalAlignment="Stretch" 
                    VerticalAlignment="Center" 
                    TextAlignment="Center"
                    FontWeight="SemiBold" 
                    FontSize="16" 
-                   x:Name="number" 
+                   x:Name="Number" 
                    FontFamily="Roboto Mono" 
                    FontStyle="Normal"
                    Opacity="1" 
                    Margin="6,3"
                    Text="{Binding DurationLeft, Converter={StaticResource Converters.DurationToTimeFormat}}"/>
             </Viewbox>
-
+            <Grid.LayoutTransform>
+                <ScaleTransform ScaleY="1" ScaleX="1"/>
+            </Grid.LayoutTransform>
         </Grid>
-        <Grid Width="{Binding IconSize, Converter={StaticResource Converters.MainSizeToStackLabelSize}}"  
-              Height="{Binding IconSize, Converter={StaticResource Converters.MainSizeToStackLabelSize}}" 
-              x:Name="stacksLabel" 
+        <Grid Grid.Row="0" Width="{Binding ElementName=AbnormalityIcon, Path=ActualWidth, Converter={StaticResource Converters.MainSizeToStackLabelSize}}" 
+              Height="{Binding ElementName=AbnormalityIcon, Path=ActualHeight, Converter={StaticResource Converters.MainSizeToStackLabelSize}}" 
+              x:Name="StacksLabel" 
               HorizontalAlignment="Right" 
               VerticalAlignment="Top" 
               Margin="0,0,0,0" 
               Visibility="{Binding Stacks, Converter={StaticResource Converters.StacksToLabelVisibility}}">
+
             <Ellipse Fill="#202020"  Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stroke="#40ffffff" StrokeThickness="1.5"/>
             <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
                 <TextBlock Foreground="#d9ffffff" 
@@ -79,7 +90,7 @@
                    TextAlignment="Center"
                    FontWeight="Normal" 
                    FontSize="14" 
-                   x:Name="stacksnumber" 
+                   x:Name="Stacksnumber" 
                    FontFamily="Roboto Mono" 
                    FontStyle="Normal"
                    Opacity="1" 

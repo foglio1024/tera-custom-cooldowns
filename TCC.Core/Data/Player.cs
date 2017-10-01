@@ -301,7 +301,7 @@ namespace TCC.Data
             var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, true, size * .9, size, new System.Windows.Thickness(margin));
+                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
 
                 Buffs.Add(newAb);
                 return;
@@ -318,7 +318,7 @@ namespace TCC.Data
             var existing = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, true, size * .9, size, new System.Windows.Thickness(margin));
+                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
 
                 Debuffs.Add(newAb);
                 return;
@@ -333,7 +333,7 @@ namespace TCC.Data
             var existing = InfBuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, true, size * .9, size, new System.Windows.Thickness(margin));
+                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
 
                 InfBuffs.Add(newAb);
                 return;

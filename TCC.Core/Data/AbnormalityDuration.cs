@@ -54,21 +54,21 @@ namespace TCC
             }
         }
 
-        private double _iconSize;
-        public double IconSize
-        {
-            get { return _iconSize; }
-            set
-            {
-                if (_iconSize == value) return;
-                _iconSize = value;
-            }
-        }
-        public double BackgroundEllipseSize { get; set; }
-        public Thickness IndicatorMargin { get; set; }
+        //private double _iconSize;
+        //public double IconSize
+        //{
+        //    get { return _iconSize; }
+        //    set
+        //    {
+        //        if (_iconSize == value) return;
+        //        _iconSize = value;
+        //    }
+        //}
+        //public double BackgroundEllipseSize { get; set; }
+        //public Thickness IndicatorMargin { get; set; }
         static int _count = 0;
         public bool Animated { get; private set; }
-        public AbnormalityDuration(Abnormality b, uint d, int s, ulong t, Dispatcher disp, bool animated, double iconSize, double bgEllSize, Thickness margin)
+        public AbnormalityDuration(Abnormality b, uint d, int s, ulong t, Dispatcher disp, bool animated/*,double iconSize, double bgEllSize, Thickness margin*/)
         {
             _count++;
             _dispatcher = disp;
@@ -79,9 +79,9 @@ namespace TCC
             Target = t;
 
 
-            IconSize = iconSize;
-            BackgroundEllipseSize = bgEllSize;
-            IndicatorMargin = margin;
+            //IconSize = iconSize;
+            //BackgroundEllipseSize = bgEllSize;
+            //IndicatorMargin = margin;
 
             DurationLeft = d;
             if (!Abnormality.Infinity)

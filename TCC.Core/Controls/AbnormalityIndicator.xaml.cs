@@ -21,6 +21,8 @@ namespace TCC.Controls
         private AbnormalityDuration _context;
         private void buff_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            if (_context == null) return;
+
             if (e.PropertyName == "Refresh")
             {
                 if (_context.Duration == uint.MaxValue) return;
@@ -31,20 +33,30 @@ namespace TCC.Controls
         }
         void AnimateCooldown()
         {
+            if (_context == null) return;
+
             var an = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(_context.DurationLeft));
             int fps = _context.DurationLeft > 20000 ? 1 : 10;
             DoubleAnimation.SetDesiredFrameRate(an, fps);
-            arc.BeginAnimation(Arc.EndAngleProperty, an);
+            Arc.BeginAnimation(Arc.EndAngleProperty, an);
 
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            if(DesignerProperties.GetIsInDesignMode(this))return;
-            _context = (AbnormalityDuration)DataContext;
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
+            try
+            {
+                _context = (AbnormalityDuration)DataContext;
+            }
+            catch
+            {
+                return;
+            }
+
             _context.PropertyChanged += buff_PropertyChanged;
             RenderTransform = new ScaleTransform(1, 1, .5, .5);
             BeginAnimation(OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(85)));
-            if (_context.Abnormality.Infinity || _context.Duration == uint.MaxValue) durationLabel.Visibility = Visibility.Hidden;
+            if (_context.Abnormality.Infinity || _context.Duration == uint.MaxValue) DurationLabel.Visibility = Visibility.Hidden;
 
             if (_context.Duration != uint.MaxValue && _context.Animated)
             {
@@ -54,9 +66,22 @@ namespace TCC.Controls
         }
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
+            if (_context == null) return;
             _context.PropertyChanged -= buff_PropertyChanged;
             _context = null;
         }
+
+
+
+        public double Size
+        {
+            get { return (double)GetValue(SizeProperty); }
+            set { SetValue(SizeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Size.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SizeProperty =
+            DependencyProperty.Register("Size", typeof(double), typeof(AbnormalityIndicator));
     }
 }
 namespace TCC.Converters
@@ -65,20 +90,20 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            uint seconds = (uint)value/1000;
+            uint seconds = (uint)value / 1000;
             uint minutes = seconds / 60;
             uint hours = minutes / 60;
             uint days = hours / 24;
 
-            if(minutes < 3)
+            if (minutes < 3)
             {
                 return seconds.ToString();
             }
-            else if(hours < 3)
+            else if (hours < 3)
             {
                 return minutes + "m";
             }
-            else if(days < 1)
+            else if (days < 1)
             {
                 return hours + "h";
             }
@@ -124,9 +149,9 @@ namespace TCC.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             int stacks = (int)value;
-            if(stacks > 1)
+            if (stacks > 1)
             {
-                return Visibility.Visible; 
+                return Visibility.Visible;
             }
             else
             {

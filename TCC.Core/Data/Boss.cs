@@ -137,7 +137,7 @@ namespace TCC.Data
             var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, target, _dispatcher, true, size * .9, size, new System.Windows.Thickness(margin));
+                var newAb = new AbnormalityDuration(ab, duration, stacks, target, _dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
                 if (ab.Infinity) Buffs.Insert(0, newAb);
                 else Buffs.Add(newAb);
                 return;
