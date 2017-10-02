@@ -46,6 +46,12 @@
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" FlowDirection="{Binding Direction}"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Value="2" Property="ContentControl.Margin"></Setter>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+
         </ItemsControl>
         <ItemsControl Name="buffs" ItemTemplate="{StaticResource abTemplate}">
             <ItemsControl.ItemsPanel>
@@ -53,6 +59,12 @@
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" FlowDirection="{Binding Direction}"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Value="2" Property="ContentControl.Margin"></Setter>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+
         </ItemsControl>
         <ItemsControl Name="debuffs" ItemTemplate="{StaticResource abTemplate}" Background="#00000000">
             <ItemsControl.ItemsPanel>
@@ -60,6 +72,12 @@
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" FlowDirection="{Binding Direction}"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Value="2" Property="ContentControl.Margin"></Setter>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+
         </ItemsControl>
 
     </StackPanel>

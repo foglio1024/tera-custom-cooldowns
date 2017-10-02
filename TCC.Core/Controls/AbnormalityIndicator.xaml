@@ -41,10 +41,13 @@
                 </Ellipse.LayoutTransform>
             </Ellipse>
         </Grid>
-        <controls:Arc Grid.Row="0" x:Name="Arc" Stroke="#8000" StrokeThickness="15" EndAngle="1" 
-                      Width="{Binding ElementName=AbnormalityIcon, Path=ActualWidth}" 
-                      Height="{Binding ElementName=AbnormalityIcon, Path=ActualHeight}"/>
-
+        <controls:Arc Grid.Row="0" x:Name="Arc" Stroke="#8000" StrokeThickness="15" EndAngle="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                      Width="{Binding Size, RelativeSource={RelativeSource AncestorType=controls:AbnormalityIndicator}}" 
+                      Height="{Binding Size, RelativeSource={RelativeSource AncestorType=controls:AbnormalityIndicator}}">
+            <controls:Arc.LayoutTransform>
+                <ScaleTransform ScaleX=".9" ScaleY=".9"/>
+            </controls:Arc.LayoutTransform>
+        </controls:Arc>
         <Grid x:Name="DurationLabel"  Width="Auto" 
               MaxWidth="{Binding ElementName=AbnormalityIcon, Path=ActualWidth}" 
               Height="{Binding ElementName=BgEll, Path=ActualHeight, Converter={StaticResource Converters.MainSizeToDurationLabelSize}}"

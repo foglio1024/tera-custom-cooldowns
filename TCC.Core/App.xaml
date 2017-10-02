@@ -186,7 +186,7 @@
             <controls:AbnormalityIndicator Size="24"/>
         </DataTemplate>
         <DataTemplate x:Key="BossAbnormality">
-            <controls:AbnormalityIndicator Size="30"/>
+            <controls:AbnormalityIndicator Size="30" Margin="2"/>
         </DataTemplate>
         <converters:LocationToMapConverter x:Key="Converters.LocationToMap"/>
         <converters:LocationToMarkerPositionConverter x:Key="Converters.LocationToMarkerPosition"/>
