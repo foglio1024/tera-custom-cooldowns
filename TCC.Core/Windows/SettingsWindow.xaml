@@ -452,7 +452,7 @@
                     </Button>
                     <Separator />
 
-                    <controls:FieldSetting SettingName="Twitch username" Value="{Binding TwitchUsername, Mode=TwoWay}"></controls:FieldSetting>
+                    <controls:FieldSetting SettingName="Twitch username" Value="{Binding TwitchUsername, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_person_white_24dp_2x.png"></controls:FieldSetting>
                     <controls:FieldSetting SettingName="Twitch token" Value="{Binding TwitchToken, Mode=TwoWay}">
                         <controls:FieldSetting.ToolTip>
                             <Grid Margin="5">
@@ -466,7 +466,7 @@
                         </controls:FieldSetting.ToolTip>
 
                     </controls:FieldSetting>
-                    <controls:FieldSetting SettingName="Twitch channel name" Value="{Binding TwitchChannelName, Mode=TwoWay}"></controls:FieldSetting>
+                    <controls:FieldSetting SettingName="Twitch channel name" Value="{Binding TwitchChannelName, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_label_white_24dp_2x.png"></controls:FieldSetting>
                     <Button Style="{StaticResource ButtonMainStyle}" Click="ConnectToTwitch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
                             VerticalContentAlignment="Center" HorizontalContentAlignment="Center" >
                         <TextBlock Margin="0,5" Foreground="{StaticResource Colors.App.Twitch}" Text="Connect"></TextBlock>
