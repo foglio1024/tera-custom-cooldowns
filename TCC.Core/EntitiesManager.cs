@@ -60,7 +60,7 @@ namespace TCC
                 SessionManager.Encounter = false;
             }
         }
-        public static void UpdateNPCbyCreatureChangeHP(ulong target, long currentHP, long maxHP)
+        public static void UpdateNPCbyCreatureChangeHP(ulong target, int currentHP, int maxHP)
         {
             BossGageWindowViewModel.Instance.AddOrUpdateBoss(target, maxHP, currentHP, false, 0, 0, Visibility.Visible);
             if (maxHP > currentHP)

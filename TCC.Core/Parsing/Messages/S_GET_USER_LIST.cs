@@ -81,7 +81,7 @@ namespace TCC.Parsing.Messages
                 c.head = reader.ReadInt32();
                 c.face = reader.ReadInt32();
                 c.appearance = reader.ReadInt64();
-                if(reader.Version < 321150 || reader.Version == 321554) reader.Skip(8); //for KR
+                if(reader.Version < 321150) reader.Skip(8); //for KR
                 c.unk10 = reader.ReadInt32();
                 c.unk11 = reader.ReadInt32();
                 c.unk12 = reader.ReadInt32();

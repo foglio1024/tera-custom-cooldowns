@@ -107,8 +107,8 @@ namespace TCC.Data
             }
         }
 
-        private long maxHP;
-        public long MaxHP
+        private int maxHP;
+        public int MaxHP
         {
             get { return maxHP; }
             set

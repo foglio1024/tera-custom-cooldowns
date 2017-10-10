@@ -10,7 +10,7 @@ namespace TCC.Parsing.Messages
         float hpDiff, currHp, maxHp;
         byte enrage, unk3;
 
-        public ulong EntityId { get => id; }
+        public ulong EntityId { get => id; } 
         public int TemplateId { get => templateId; }
         public int HuntingZoneId { get => huntingZoneId; }
         public float CurrentHP { get => currHp; }
@@ -24,19 +24,10 @@ namespace TCC.Parsing.Messages
             templateId = reader.ReadInt32();
             targetId = reader.ReadUInt64();
             reader.Skip(4); //unk1 = reader.ReadInt32();
-            if (reader.Version < 321150 || reader.Version == 321554)
-            {
-                enrage = reader.ReadByte();
-                currHp = reader.ReadUInt64();
-                maxHp = reader.ReadUInt64();
-            }
-            else
-            {
-                hpDiff = reader.ReadSingle();
-                enrage = reader.ReadByte();
-                currHp = reader.ReadSingle();
-                maxHp = reader.ReadSingle();
-            }
+            hpDiff = reader.ReadSingle();
+            enrage = reader.ReadByte();
+            currHp = reader.ReadSingle();
+            maxHp = reader.ReadSingle();
 
             //System.Console.WriteLine("[S_BOSS_GAGE_INFO] id:{0} name:{1}", EntityId, MonsterDatabase.GetName((uint)npc, (uint)type));
             //unk3 = reader.ReadByte();

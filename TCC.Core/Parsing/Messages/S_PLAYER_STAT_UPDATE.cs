@@ -36,19 +36,13 @@ namespace TCC.Parsing.Messages
         public S_PLAYER_STAT_UPDATE(TeraMessageReader reader) : base(reader)
         {
             currHp = reader.ReadInt32();
-            if (reader.Version < 321150 || reader.Version == 321554) reader.Skip(4);
             currMp = reader.ReadInt32();
-            if (reader.Version < 321150 || reader.Version == 321554) reader.Skip(4);
 
             //unk1 = reader.ReadInt32();
             reader.Skip(4);
 
             maxHp = reader.ReadInt32();
-            if (reader.Version < 321150 || reader.Version == 321554) reader.Skip(4);
-
             maxMp = reader.ReadInt32();
-            if (reader.Version < 321150 || reader.Version == 321554) reader.Skip(4);
-
 
             //basePower = reader.ReadInt32();4
             //baseEndu = reader.ReadInt32();8
