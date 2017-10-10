@@ -71,7 +71,7 @@
                            Grid.Column="0"
                            Grid.ColumnSpan="2"/>
 
-                <local:Arc x:Name="dailyArc"
+                <local:Arc x:Name="dailyArc" Visibility="Collapsed"
                            Width="50" 
                            Height="50" 
                            Stroke="#2196f3" 
@@ -85,6 +85,7 @@
 
 
                 <TextBlock FontSize="20" 
+                           Visibility="Collapsed"
                            Margin="0,0,0,0" 
                            FontWeight="Thin" 
                            Foreground="#2196f3" 
