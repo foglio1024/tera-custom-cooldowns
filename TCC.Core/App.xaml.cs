@@ -61,7 +61,7 @@ namespace TCC
             WindowManager.Init();
             WindowManager.Settings = new SettingsWindow() { Name = "Settings" };
             FocusManager.FocusTimer.Start();
-
+            TwitchConnector.Instance.Init();
             PacketProcessor.Init();
 
             TeraSniffer.Instance.NewConnection += (srv) =>

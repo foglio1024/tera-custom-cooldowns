@@ -220,6 +220,12 @@
       <HintPath>..\packages\System.Xml.ReaderWriter.4.3.0\lib\net46\System.Xml.ReaderWriter.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="TwitchLib, Version=1.5.7.36364, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwitchLib.1.5.7\lib\net45\TwitchLib.dll</HintPath>
+    </Reference>
+    <Reference Include="websocket-sharp, Version=1.0.2.32519, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebSocketSharp-NonPreRelease.1.0.0\lib\net35\websocket-sharp.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -725,6 +731,7 @@
     </Compile>
     <Compile Include="TeraServerTimeInfo.cs" />
     <Compile Include="TimeManager.cs" />
+    <Compile Include="TwitchConnector.cs" />
     <Compile Include="ViewModels\CharacterWindowViewModel.cs" />
     <Compile Include="ViewModels\ClassManagers\BerserkerBarManager.cs" />
     <Compile Include="ViewModels\ClassManagers\BrawlerBarManager.cs" />

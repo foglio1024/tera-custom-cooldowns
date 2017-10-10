@@ -177,6 +177,10 @@ namespace TCC
         public static List<ChatChannelOnOff> EnabledChatChannels { get; set; } = Utils.GetEnabledChannelsList();
         public static string WebhookMessage { get; set; } = "@here Guild BAM will spawn soon!";
         public static int FontSize { get; set; } = 15;
+        public static string TwitchName { get; set; } = "";
+        public static string TwitchToken { get; set; } = "";
+        public static string TwitchChannelName { get; set; } = "";
+
         public static Dictionary<Class, List<uint>> GroupAbnormals = new Dictionary<Class, List<uint>>();
         public static uint GroupSizeThreshold = 7;
         public static void LoadWindowSettings()
@@ -344,6 +348,21 @@ namespace TCC
                 catch (Exception) { }
                 try
                 {
+                    TwitchName = b.Attribute(nameof(TwitchName)).Value;
+                }
+                catch (Exception) { }
+                try
+                {
+                    TwitchToken = b.Attribute(nameof(TwitchToken)).Value;
+                }
+                catch (Exception) { }
+                try
+                {
+                    TwitchChannelName = b.Attribute(nameof(TwitchChannelName)).Value;
+                }
+                catch (Exception) { }
+                try
+                {
                     GroupSizeThreshold = UInt32.Parse(b.Attribute(nameof(GroupSizeThreshold)).Value);
                 }
                 catch { }
@@ -446,6 +465,9 @@ namespace TCC
                 new XAttribute(nameof(LastRegion), LastRegion),
                 new XAttribute(nameof(Webhook), Webhook),
                 new XAttribute(nameof(WebhookMessage), WebhookMessage),
+                new XAttribute(nameof(TwitchName), TwitchName),
+                new XAttribute(nameof(TwitchToken), TwitchToken),
+                new XAttribute(nameof(TwitchChannelName), TwitchChannelName),
                 new XAttribute(nameof(GroupSizeThreshold), GroupSizeThreshold)
                 //add setting here
                 ),

@@ -60,7 +60,7 @@ namespace TCC.Windows
 
         }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        private void SendWebhookTest(object sender, RoutedEventArgs e)
         {
             TimeManager.Instance.SendWebhookMessage();
         }
@@ -68,6 +68,11 @@ namespace TCC.Windows
         private void OpenSettingsFolder(object sender, RoutedEventArgs e)
         {
             Process.Start(Environment.CurrentDirectory + "/resources/config");
+        }
+
+        private void ConnectToTwitch(object sender, RoutedEventArgs e)
+        {
+            TwitchConnector.Instance.Init();
         }
     }
 }

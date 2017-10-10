@@ -1123,6 +1123,36 @@ namespace TCC.ViewModels
                 NotifyPropertyChanged(nameof(WebhookMessage));
             }
         }
+        public string TwitchUsername
+        {
+            get => SettingsManager.TwitchName;
+            set
+            {
+                if (value == SettingsManager.TwitchName) return;
+                SettingsManager.TwitchName = value;
+                NotifyPropertyChanged(nameof(TwitchUsername));
+            }
+        }
+        public string TwitchToken
+        {
+            get => SettingsManager.TwitchToken;
+            set
+            {
+                if (value == SettingsManager.TwitchToken) return;
+                SettingsManager.TwitchToken = value;
+                NotifyPropertyChanged(nameof(TwitchToken));
+            }
+        }
+        public string TwitchChannelName
+        {
+            get => SettingsManager.TwitchChannelName;
+            set
+            {
+                if (value == SettingsManager.TwitchChannelName) return;
+                SettingsManager.TwitchChannelName = value;
+                NotifyPropertyChanged(nameof(TwitchChannelName));
+            }
+        }
         public uint GroupSizeThreshold
         {
             get { return SettingsManager.GroupSizeThreshold; }
