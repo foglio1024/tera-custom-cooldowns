@@ -1261,6 +1261,7 @@
     <Content Include="resources\data\items\items-KR.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="resources\images\twitch.png" />
     <Resource Include="resources\images\ic_format_size_white_24dp_2x.png" />
     <Resource Include="resources\images\ic_pause_white_24dp_2x.png" />
     <Resource Include="resources\images\ic_remove_white_24dp_2x.png" />
