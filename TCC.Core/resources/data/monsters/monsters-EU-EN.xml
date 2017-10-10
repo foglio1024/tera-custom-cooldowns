@@ -256,7 +256,7 @@
 		<Monster name="Oga-Garagg" id="5007" isBoss="False" hp="19390" />
 		<Monster name="Lupak" id="5008" isBoss="False" hp="19390" />
 		<Monster name="Sissirus" id="5009" isBoss="False" hp="19390" />
-		<Monster name="Tempest Kanash" id="5011" isBoss="True" hp="1064795" />
+		<Monster name="Tempest Kanash" id="5011" isBoss="True" hp="400000000" />
 		<Monster name="Goat" id="6011" isBoss="False" hp="14979" />
 		<Monster name="Marakadi" id="7011" isBoss="True" hp="755397" />
 		<Monster name="Jirakar" id="7012" isBoss="True" hp="413713" />
@@ -469,7 +469,7 @@
 		<Monster name="Fitty Poinz" id="36" isBoss="False" hp="169" />
 		<Monster name="Twennyfife Poinz" id="37" isBoss="False" hp="169" />
 		<Monster name="Thri Poinz" id="38" isBoss="False" hp="169" />
-		<Monster name="Divine Reaver" id="99" isBoss="True" hp="819073" />
+		<Monster name="Divine Reaver" id="99" isBoss="True" hp="400000000" />
 		<Monster name="Gruber" id="104" isBoss="False" hp="476837" />
 		<Monster name="Bandit" id="105" isBoss="False" hp="366797" />
 		<Monster name="Malagash" id="5002" isBoss="False" hp="0" />
@@ -645,15 +645,15 @@
 		<Monster name="Valkyon Federation Investigator" id="6050" isBoss="False" hp="945" />
 		<Monster name="Valkyon Federation Investigator" id="6051" isBoss="False" hp="945" />
 		<Monster name="Valkyon Federation Investigator" id="6052" isBoss="False" hp="945" />
-		<Monster name="Brutal Basilisk" id="7001" isBoss="True" hp="5858302" />
-		<Monster name="Brutal Orisk" id="7002" isBoss="True" hp="5858302" />
-		<Monster name="Brutal Ovolith" id="7003" isBoss="True" hp="5858302" />
-		<Monster name="Brutal Bloodbound Teralith" id="7004" isBoss="True" hp="15800546" />
-		<Monster name="Brutal Fimbrilisk" id="7005" isBoss="True" hp="15800546" />
-		<Monster name="Brutal Searing Fangspawn" id="7006" isBoss="True" hp="15800546" />
-		<Monster name="Brutal Naga Battlemaster" id="7007" isBoss="True" hp="19876958" />
-		<Monster name="Brutal Iron Giant" id="7008" isBoss="True" hp="19876958" />
-		<Monster name="Brutal Onyx Hydrath" id="7009" isBoss="True" hp="19876958" />
+		<Monster name="Brutal Basilisk" id="7001" isBoss="True" hp="11716605" />
+		<Monster name="Brutal Orisk" id="7002" isBoss="True" hp="11716605" />
+		<Monster name="Brutal Ovolith" id="7003" isBoss="True" hp="11716605" />
+		<Monster name="Brutal Bloodbound Teralith" id="7004" isBoss="True" hp="18960655" />
+		<Monster name="Brutal Fimbrilisk" id="7005" isBoss="True" hp="18960655" />
+		<Monster name="Brutal Searing Fangspawn" id="7006" isBoss="True" hp="18960655" />
+		<Monster name="Brutal Naga Battlemaster" id="7007" isBoss="True" hp="23852350" />
+		<Monster name="Brutal Iron Giant" id="7008" isBoss="True" hp="23852350" />
+		<Monster name="Brutal Onyx Hydrath" id="7009" isBoss="True" hp="23852350" />
 		<Monster name="Adria" id="8001" isBoss="False" hp="10000" />
 		<Monster name="Adria" id="8002" isBoss="False" hp="10000" />
 		<Monster name="Lam" id="8003" isBoss="False" hp="10000" />
@@ -1191,7 +1191,7 @@
 		<Monster name="Wall of Wordcraft" id="1049" isBoss="False" hp="10000" />
 		<Monster name="Hellmouth Fangspawn" id="1051" isBoss="True" hp="296719" />
 		<Monster name="Rift's Edge Teleportal" id="1501" isBoss="False" hp="10000" />
-		<Monster name="Anansha" id="2001" isBoss="True" hp="670623480" />
+		<Monster name="Anansha" id="2001" isBoss="True" hp="737685828" />
 		<Monster name="Vicious Shoat" id="2011" isBoss="False" hp="35625" />
 		<Monster name="Leafcutter Arachnen" id="2021" isBoss="False" hp="22443" />
 		<Monster name="Vinesplicer Arachnen" id="2031" isBoss="False" hp="22443" />
@@ -1377,8 +1377,8 @@
 		<Monster name="Icereaver Giant" id="1010" isBoss="True" hp="457574" />
 		<Monster name="Icewalker Barsicore" id="1100" isBoss="True" hp="457574" />
 		<Monster name="Frosthunter Barsicore" id="1110" isBoss="True" hp="418086" />
-		<Monster name="Frygaras" id="2002" isBoss="True" hp="670623480" />
-		<Monster name="Sabranak" id="2003" isBoss="True" hp="670623480" />
+		<Monster name="Frygaras" id="2002" isBoss="True" hp="737685828" />
+		<Monster name="Sabranak" id="2003" isBoss="True" hp="737685828" />
 		<Monster name="Talcas" id="5000" isBoss="False" hp="66851" />
 		<Monster name="Kaijas" id="5001" isBoss="False" hp="66851" />
 		<Monster name="Barabok" id="5002" isBoss="True" hp="497557" />
@@ -1511,7 +1511,7 @@
 		<Monster name="Hungry Ruins Hyena" id="31" isBoss="False" hp="105149" />
 		<Monster name="Trihorn Dracoloth" id="32" isBoss="True" hp="963074" />
 		<Monster name="Lavender Struthio" id="33" isBoss="False" hp="21390" />
-		<Monster name="Nyxarras" id="35" isBoss="True" hp="3332775" />
+		<Monster name="Nyxarras" id="35" isBoss="True" hp="400000000" />
 		<Monster name="Prion Explorer" id="36" isBoss="False" hp="98204" />
 		<Monster name="Prion Bonecrusher" id="37" isBoss="False" hp="66244" />
 		<Monster name="Prion Destroyer" id="38" isBoss="False" hp="66244" />
@@ -1930,7 +1930,7 @@
 		<Monster name="Ram" id="6011" isBoss="False" hp="27674" />
 		<Monster name="Ram" id="6021" isBoss="False" hp="29764" />
 		<Monster name="Ram" id="6031" isBoss="False" hp="32007" />
-		<Monster name="Linyphi" id="7011" isBoss="True" hp="3332775" />
+		<Monster name="Linyphi" id="7011" isBoss="True" hp="400000000" />
 		<Monster name="Kalmatcha" id="8011" isBoss="False" hp="65032" />
 		<Monster name="Wendigo Frostrager" id="8012" isBoss="False" hp="86003" />
 		<Monster name="Wendigo Hunter" id="8013" isBoss="False" hp="0" />
@@ -1987,7 +1987,7 @@
 		<Monster name="Ksharan Vanguard" id="9019" isBoss="False" hp="86003" />
 		<Monster name="Prisoner Transport" id="9020" isBoss="False" hp="31496" />
 		<Monster name="Popori Technician" id="9021" isBoss="False" hp="108659" />
-		<Monster name="Yunaras Snaggletooth" id="9050" isBoss="True" hp="3332775" />
+		<Monster name="Yunaras Snaggletooth" id="9050" isBoss="True" hp="400000000" />
 	</Zone>
 	<Zone id="53" name="Lorcada" >
 		<Monster name="Murderous Zuulhound" id="100" isBoss="False" hp="172637" />
@@ -2134,7 +2134,7 @@
 		<Monster name="Lokian Bloodspiller" id="26" isBoss="False" hp="53659" />
 		<Monster name="Ctholak" id="27" isBoss="False" hp="74859" />
 		<Monster name="Pothika" id="28" isBoss="False" hp="74859" />
-		<Monster name="Betsael" id="33" isBoss="True" hp="3332775" />
+		<Monster name="Betsael" id="33" isBoss="True" hp="400000000" />
 		<Monster name="Kezelran" id="38" isBoss="False" hp="127665" />
 		<Monster name="Consecrated Teralith" id="39" isBoss="True" hp="887752" />
 		<Monster name="Puzzling Monument" id="5007" isBoss="False" hp="10000" />
@@ -2709,6 +2709,7 @@
 		<Monster name="Dimon" id="1961" isBoss="False" hp="10000" />
 		<Monster name="Phargo" id="1962" isBoss="False" hp="10000" />
 		<Monster name="Schwab" id="1963" isBoss="False" hp="10000" />
+		<Monster name="Sionne" id="1965" isBoss="False" hp="10000" />
 		<Monster name="Tecolt" id="1999" isBoss="False" hp="10000" />
 		<Monster name="Samael" id="2000" isBoss="False" hp="10000" />
 		<Monster name="Velika Guard" id="2001" isBoss="False" hp="10000" />
@@ -4883,8 +4884,10 @@
 		<Monster name="Manglemire Entrance" id="9070" isBoss="False" hp="0" />
 		<Monster name="Harrowhold Entrance" id="9501" isBoss="False" hp="0" />
 		<Monster name="Entrance to the Broken Prison" id="9710" isBoss="False" hp="0" />
+		<Monster name="Entrance to RK-9 Kennel" id="9735" isBoss="False" hp="0" />
 		<Monster name="Entrance to Lilith's Keep" id="9769" isBoss="False" hp="0" />
 		<Monster name="Velik's Hold and Velik's Sanctuary Entrance" id="9780" isBoss="False" hp="0" />
+		<Monster name="Entrance to Thaumetal Refinery" id="9794" isBoss="False" hp="0" />
 		<Monster name="Qeldar Station" id="18101" isBoss="False" hp="0" />
 		<Monster name="Hulran Watch" id="18102" isBoss="False" hp="0" />
 		<Monster name="Ruins Lookout" id="18103" isBoss="False" hp="0" />
@@ -4950,14 +4953,14 @@
 		<Monster name="Ultimate Tank" id="7000" isBoss="False" hp="360000" />
 	</Zone>
 	<Zone id="112" name="Fraywind Canyon" >
-		<Monster name="Naga Reaver" id="1000" isBoss="False" hp="17871700" />
-		<Monster name="Potent Teralith" id="2000" isBoss="False" hp="17871700" />
-		<Monster name="Bloodlust Gutrend Seer" id="3000" isBoss="False" hp="151921" />
-		<Monster name="Bloodlust Gutrend Fighter" id="3001" isBoss="False" hp="36811" />
-		<Monster name="Vindictive Orcan Mauler" id="4000" isBoss="False" hp="151921" />
-		<Monster name="Vindictive Dwarf Orcan" id="4001" isBoss="False" hp="36811" />
-		<Monster name="Zenobic Crystal" id="5000" isBoss="False" hp="16643" />
-		<Monster name="Canyon Arcanalith" id="5001" isBoss="False" hp="16643" />
+		<Monster name="Naga Reaver" id="1000" isBoss="False" hp="19658870" />
+		<Monster name="Potent Teralith" id="2000" isBoss="False" hp="19658870" />
+		<Monster name="Bloodlust Gutrend Seer" id="3000" isBoss="False" hp="167113" />
+		<Monster name="Bloodlust Gutrend Fighter" id="3001" isBoss="False" hp="40492" />
+		<Monster name="Vindictive Orcan Mauler" id="4000" isBoss="False" hp="167113" />
+		<Monster name="Vindictive Dwarf Orcan" id="4001" isBoss="False" hp="40492" />
+		<Monster name="Zenobic Crystal" id="5000" isBoss="False" hp="18308" />
+		<Monster name="Canyon Arcanalith" id="5001" isBoss="False" hp="18308" />
 	</Zone>
 	<Zone id="116" name="Corsairs' Stronghold" >
 		<Monster name="Airship" id="1001" isBoss="False" hp="50000" />
@@ -5013,21 +5016,21 @@
 		<Monster name="Vulcan Render" id="104" isBoss="True" hp="12220960" />
 		<Monster name="Vulcan Render" id="105" isBoss="True" hp="7511613" />
 		<Monster name="Vulcan Render" id="106" isBoss="True" hp="3666288" />
-		<Monster name="Petrax" id="107" isBoss="True" hp="35364133" />
-		<Monster name="Petrax Minder" id="108" isBoss="False" hp="250000" />
-		<Monster name="Petrax Trainer" id="109" isBoss="False" hp="250000" />
+		<Monster name="Petrax" id="107" isBoss="True" hp="43710068" />
+		<Monster name="Petrax Minder" id="108" isBoss="False" hp="300000" />
+		<Monster name="Petrax Trainer" id="109" isBoss="False" hp="300000" />
 		<Monster name="Exit Teleportal" id="1501" isBoss="False" hp="10000" />
 	</Zone>
 	<Zone id="152" name="Velika" >
-		<Monster name="Lavathus" id="1001" isBoss="True" hp="44708232" />
-		<Monster name="Drakhan" id="1002" isBoss="True" hp="44708232" />
-		<Monster name="Kaithan" id="1003" isBoss="True" hp="44708232" />
+		<Monster name="Lavathus" id="1001" isBoss="True" hp="49179055" />
+		<Monster name="Drakhan" id="1002" isBoss="True" hp="49179055" />
+		<Monster name="Kaithan" id="1003" isBoss="True" hp="49179055" />
 		<Monster name="Anansha" id="2001" isBoss="True" hp="670623480" />
 		<Monster name="Frygaras" id="2002" isBoss="True" hp="670623480" />
 		<Monster name="Sabranak" id="2003" isBoss="True" hp="670623480" />
 		<Monster name="Sheep" id="3001" isBoss="False" hp="100000000" />
 		<Monster name="Sergeorius" id="4001" isBoss="False" hp="10000" />
-		<Monster name="Guild Tower" id="5001" isBoss="False" hp="62094780" />
+		<Monster name="Guild Tower" id="5001" isBoss="False" hp="68304258" />
 		<Monster name="Ankhrias" id="6001" isBoss="False" hp="13038" />
 		<Monster name="Ghadern" id="6002" isBoss="False" hp="945" />
 		<Monster name="Jarmia" id="6003" isBoss="False" hp="945" />
@@ -5062,6 +5065,7 @@
 		<Monster name="Guard" id="6046" isBoss="False" hp="10000" />
 		<Monster name="Danam" id="6047" isBoss="False" hp="10000" />
 		<Monster name="Albi" id="6048" isBoss="False" hp="10000" />
+		<Monster name="Anansha" id="7001" isBoss="True" hp="737685828" />
 	</Zone>
 	<Zone id="172" name="Savage Reach" >
 		<Monster name="Paesyn" id="1000" isBoss="False" hp="366797" />
@@ -5099,6 +5103,15 @@
 		<Monster name="Rahvene" id="1064" isBoss="False" hp="366797" />
 		<Monster name="Ribahdan" id="1065" isBoss="False" hp="10000" />
 		<Monster name="Khatubadhu" id="1066" isBoss="False" hp="1333810" />
+		<Monster name="Joakim" id="1067" isBoss="False" hp="366797" />
+		<Monster name="Corurung" id="1068" isBoss="False" hp="1000000000" />
+		<Monster name="Joakim" id="1069" isBoss="False" hp="366797" />
+		<Monster name="Archdevan Camp Commander" id="1070" isBoss="False" hp="100" />
+		<Monster name="Angry Goblin" id="1071" isBoss="False" hp="1000000000" />
+		<Monster name="Teleportal" id="1072" isBoss="False" hp="10000" />
+		<Monster name="Rhodos" id="1073" isBoss="False" hp="366797" />
+		<Monster name="Angry Goblin" id="1075" isBoss="False" hp="1000000000" />
+		<Monster name="Rhodos" id="1076" isBoss="False" hp="366797" />
 		<Monster name="Paesyn" id="1100" isBoss="False" hp="366797" />
 		<Monster name="Dougal" id="1101" isBoss="False" hp="366797" />
 		<Monster name="Zolyn" id="1102" isBoss="False" hp="366797" />
@@ -5349,6 +5362,10 @@
 		<Monster name="Arachnen" id="1116" isBoss="False" hp="302468" />
 		<Monster name="Morick" id="1500" isBoss="False" hp="10000" />
 		<Monster name="Garta's Frog" id="1501" isBoss="False" hp="169" />
+		<Monster name="Donakim" id="1502" isBoss="False" hp="366797" />
+		<Monster name="Rhodos" id="1503" isBoss="False" hp="366797" />
+		<Monster name="Joakim" id="1504" isBoss="False" hp="366797" />
+		<Monster name="Donakim" id="1505" isBoss="False" hp="366797" />
 		<Monster name="Camp Sentry" id="2001" isBoss="False" hp="366797" />
 		<Monster name="Garta" id="2002" isBoss="False" hp="366797" />
 		<Monster name="Goblin Porter" id="2003" isBoss="False" hp="366797" />
@@ -5437,6 +5454,7 @@
 		<Monster name="Training Dummy" id="3018" isBoss="False" hp="4881919" />
 		<Monster name="Sabex Armory Teleportal" id="3022" isBoss="False" hp="10000" />
 		<Monster name="Firro" id="4001" isBoss="False" hp="366797" />
+		<Monster name="Teleportal" id="9735" isBoss="False" hp="10000" />
 	</Zone>
 	<Zone id="183" name="Highwatch Outskirts" >
 		<Monster name="Dougal" id="1001" isBoss="False" hp="945" />
@@ -9936,7 +9954,7 @@
 		<Monster name="Faridei Vault Teleportal" id="4002" isBoss="False" hp="10000" />
 	</Zone>
 	<Zone id="455" name="Ravenous Gorge (3-Person)" >
-		<Monster name="Ardentmaw" id="100" isBoss="True" hp="50000000" />
+		<Monster name="Ardentmaw" id="100" isBoss="True" hp="222398500" />
 		<Monster name="Mizaru" id="101" isBoss="False" hp="100000" />
 		<Monster name="Kikazaru" id="102" isBoss="False" hp="100000" />
 		<Monster name="Iwazaru" id="103" isBoss="False" hp="100000" />
@@ -9944,20 +9962,20 @@
 		<Monster name="Ardentmaw's Avatar" id="105" isBoss="False" hp="10" />
 		<Monster name="Ardentmaw's Avatar" id="106" isBoss="False" hp="10" />
 		<Monster name="Ardentmaw's Avatar" id="107" isBoss="False" hp="10" />
-		<Monster name="Sweet Banana Tree" id="110" isBoss="False" hp="125000" />
-		<Monster name="Verveblossom" id="120" isBoss="False" hp="100000" />
-		<Monster name="Savaged Lamb" id="130" isBoss="False" hp="250000" />
+		<Monster name="Sweet Banana Tree" id="110" isBoss="False" hp="334937" />
+		<Monster name="Verveblossom" id="120" isBoss="False" hp="267950" />
+		<Monster name="Savaged Lamb" id="130" isBoss="False" hp="669875" />
 		<Monster name="Nimistrix's Avatar" id="150" isBoss="False" hp="500000" />
-		<Monster name="Forengula" id="200" isBoss="True" hp="50000000" />
+		<Monster name="Forengula" id="200" isBoss="True" hp="348102000" />
 		<Monster name="Shielding Rock" id="211" isBoss="False" hp="30000000" />
 		<Monster name="Nimistrix's Avatar" id="230" isBoss="False" hp="500000" />
-		<Monster name="Push Pod" id="240" isBoss="False" hp="500000" />
-		<Monster name="Nimistrix" id="300" isBoss="True" hp="70000000" />
+		<Monster name="Push Pod" id="240" isBoss="False" hp="2097000" />
+		<Monster name="Nimistrix" id="300" isBoss="True" hp="357771500" />
 		<Monster name="Growing Egg" id="310" isBoss="False" hp="90000000" />
-		<Monster name="Hatchling's Egg" id="311" isBoss="False" hp="1500000" />
-		<Monster name="Starved Moa" id="320" isBoss="False" hp="1000000" />
-		<Monster name="Famished Moa" id="321" isBoss="False" hp="1000000" />
-		<Monster name="Rapacious Moa" id="322" isBoss="False" hp="1000000" />
+		<Monster name="Hatchling's Egg" id="311" isBoss="False" hp="4618392" />
+		<Monster name="Starved Moa" id="320" isBoss="False" hp="3078928" />
+		<Monster name="Famished Moa" id="321" isBoss="False" hp="3078928" />
+		<Monster name="Rapacious Moa" id="322" isBoss="False" hp="3078928" />
 		<Monster name="Vitalia Flower" id="401" isBoss="False" hp="10" />
 		<Monster name="Ardent Azuria" id="402" isBoss="False" hp="10" />
 		<Monster name="Alliane" id="410" isBoss="False" hp="10000000" />
@@ -10036,17 +10054,17 @@
 		<Monster name="Theater of Terror Teleportal" id="1504" isBoss="False" hp="10000" />
 	</Zone>
 	<Zone id="459" name="Forsaken Island" >
-		<Monster name="Sailor's Tombstone" id="109" isBoss="False" hp="2000000" />
+		<Monster name="Sailor's Tombstone" id="109" isBoss="False" hp="4200000" />
 		<Monster name="Drowned Sailor" id="333" isBoss="False" hp="1890675" />
-		<Monster name="Deadman's Tombstone" id="334" isBoss="False" hp="500000" />
+		<Monster name="Deadman's Tombstone" id="334" isBoss="False" hp="1050000" />
 		<Monster name="Kill the monsters." id="911" isBoss="False" hp="0" />
 		<Monster name="Defeat Rokdos" id="912" isBoss="False" hp="0" />
 		<Monster name="Defeat Viyor" id="913" isBoss="False" hp="0" />
 		<Monster name="Defeat Desolarus" id="914" isBoss="False" hp="0" />
 		<Monster name="Kelen" id="999" isBoss="False" hp="10000" />
-		<Monster name="Rokdos" id="1001" isBoss="True" hp="292951933" />
-		<Monster name="Viyor" id="1002" isBoss="True" hp="292951933" />
-		<Monster name="Desolarus" id="1003" isBoss="True" hp="318278538" />
+		<Monster name="Rokdos" id="1001" isBoss="True" hp="740000000" />
+		<Monster name="Viyor" id="1002" isBoss="True" hp="790000000" />
+		<Monster name="Desolarus" id="1003" isBoss="True" hp="880000000" />
 		<Monster name="Exit Teleportal" id="1501" isBoss="False" hp="10000" />
 		<Monster name="Execution Square Teleportal" id="1502" isBoss="False" hp="10000" />
 		<Monster name="Youth's Journal" id="2001" isBoss="False" hp="366797" />
@@ -10066,7 +10084,7 @@
 		<Monster name="Kill the monsters" id="917" isBoss="False" hp="0" />
 		<Monster name="Defeat Nightmare Kalivan" id="918" isBoss="False" hp="0" />
 		<Monster name="Vyrun" id="999" isBoss="False" hp="8500" />
-		<Monster name="Nightmare Polyphemus" id="1000" isBoss="True" hp="221000000" />
+		<Monster name="Nightmare Polyphemus" id="1000" isBoss="True" hp="750000000" />
 		<Monster name="Elite Suicide Soldier" id="1001" isBoss="False" hp="80000" />
 		<Monster name="Elite Caiman Bomber" id="1002" isBoss="False" hp="210000" />
 		<Monster name="Elite Cursed Mate" id="1003" isBoss="False" hp="11332897" />
@@ -10085,15 +10103,15 @@
 		<Monster name="Boarding Ramp Teleportal" id="1502" isBoss="False" hp="8500" />
 		<Monster name="Cargo Hold Teleportal" id="1503" isBoss="False" hp="8500" />
 		<Monster name="Kalivan's Dreadnaught Teleportal" id="1504" isBoss="False" hp="8500" />
-		<Monster name="Nightmare Pepero" id="2000" isBoss="True" hp="195500000" />
+		<Monster name="Nightmare Pepero" id="2000" isBoss="True" hp="710000000" />
 		<Monster name="Elite Naga Scalawag" id="2003" isBoss="False" hp="8714897" />
-		<Monster name="Nightmare Captain Quall" id="2004" isBoss="False" hp="21634897" />
+		<Monster name="Nightmare Captain Quall" id="2004" isBoss="False" hp="51000000" />
 		<Monster name="Elite Deck Soldier" id="2005" isBoss="False" hp="4294897" />
-		<Monster name="Nightmare Kalivan" id="3000" isBoss="True" hp="195500000" />
-		<Monster name="Elite Naga Officer" id="3002" isBoss="False" hp="6971917" />
-		<Monster name="Elite Boatswain" id="3003" isBoss="False" hp="4294897" />
-		<Monster name="Elite Tanan" id="3004" isBoss="False" hp="21634897" />
-		<Monster name="Elite Devan Pirate" id="3005" isBoss="False" hp="6971917" />
+		<Monster name="Nightmare Kalivan" id="3000" isBoss="True" hp="820000000" />
+		<Monster name="Elite Naga Officer" id="3002" isBoss="False" hp="15000000" />
+		<Monster name="Elite Boatswain" id="3003" isBoss="False" hp="9200000" />
+		<Monster name="Elite Tanan" id="3004" isBoss="False" hp="35000000" />
+		<Monster name="Elite Devan Pirate" id="3005" isBoss="False" hp="13000000" />
 	</Zone>
 	<Zone id="461" name="Ruin of the Giants" >
 		<Monster name="Exit Teleportal" id="1001" isBoss="False" hp="10000" />
@@ -11380,11 +11398,11 @@
 		<Monster name="Glazia" id="1009" isBoss="False" hp="10000" />
 	</Zone>
 	<Zone id="569" name="Echoes of Aranea" >
-		<Monster name="Greandale" id="1000" isBoss="True" hp="4881919" />
-		<Monster name="War Crawler" id="2000" isBoss="True" hp="4881919" />
-		<Monster name="War Crawler" id="2100" isBoss="True" hp="4881919" />
-		<Monster name="Anea" id="3000" isBoss="True" hp="4201502" />
-		<Monster name="Aranea" id="3001" isBoss="True" hp="5858303" />
+		<Monster name="Greandale" id="1000" isBoss="True" hp="9763838" />
+		<Monster name="War Crawler" id="2000" isBoss="True" hp="9763838" />
+		<Monster name="War Crawler" id="2100" isBoss="True" hp="9763838" />
+		<Monster name="Anea" id="3000" isBoss="True" hp="8403004" />
+		<Monster name="Aranea" id="3001" isBoss="True" hp="11716607" />
 		<Monster name="Masuki" id="4000" isBoss="False" hp="1500000" />
 		<Monster name="Archdevan Archer" id="5100" isBoss="False" hp="366797" />
 		<Monster name="Archdevan Mystic" id="5200" isBoss="False" hp="366797" />
@@ -11396,7 +11414,7 @@
 		<Monster name="Devan Tyrant Hunter" id="6500" isBoss="False" hp="231082" />
 		<Monster name="Devan Arcanist" id="6600" isBoss="False" hp="190734" />
 		<Monster name="War-Hyena" id="6800" isBoss="False" hp="231082" />
-		<Monster name="Sereken" id="6900" isBoss="False" hp="3361919" />
+		<Monster name="Sereken" id="6900" isBoss="False" hp="6723838" />
 		<Monster name="Heskia" id="7000" isBoss="False" hp="606797" />
 		<Monster name="Archdevan Archer" id="9100" isBoss="False" hp="366797" />
 	</Zone>
@@ -11628,7 +11646,7 @@
 	<Zone id="713" name="Ghillieglade" >
 		<Monster name="Teleportal" id="1000" isBoss="False" hp="10000" />
 		<Monster name="Teleportal" id="1001" isBoss="False" hp="10000" />
-		<Monster name="Banyakas" id="81301" isBoss="False" hp="33242400" />
+		<Monster name="Banyakas" id="81301" isBoss="False" hp="38228760" />
 		<Monster name="Dark Gatekeeper" id="81303" isBoss="False" hp="10000000" />
 		<Monster name="Banyakas's Spawn" id="81305" isBoss="False" hp="450000" />
 		<Monster name="Dark Guardian" id="81306" isBoss="False" hp="10000000" />
@@ -11654,7 +11672,7 @@
 		<Monster name="Coercive Shard" id="81393" isBoss="False" hp="364734" />
 		<Monster name="Coercive Shard" id="81394" isBoss="False" hp="364734" />
 		<Monster name="Dominolith" id="81398" isBoss="False" hp="22230000" />
-		<Monster name="Dominolith" id="81399" isBoss="False" hp="19699200" />
+		<Monster name="Dominolith" id="81399" isBoss="False" hp="22654080" />
 	</Zone>
 	<Zone id="714" name="Velik's Sanctuary" >
 		<Monster name="Velik" id="1001" isBoss="False" hp="10000" />
@@ -11665,8 +11683,8 @@
 		<Monster name="Kill the Monsters" id="912" isBoss="False" hp="0" />
 		<Monster name="Defeat Perimos" id="913" isBoss="False" hp="0" />
 		<Monster name="Use the Teleportal to Reach the Deck and Kill Darkan" id="914" isBoss="False" hp="0" />
-		<Monster name="Darkan" id="1000" isBoss="True" hp="128000000" />
-		<Monster name="Darkan" id="1001" isBoss="True" hp="200000000" />
+		<Monster name="Darkan" id="1000" isBoss="True" hp="1828698168" />
+		<Monster name="Darkan" id="1001" isBoss="True" hp="959745024" />
 		<Monster name="Thrulkalath" id="1002" isBoss="False" hp="0" />
 		<Monster name="Exit Teleportal" id="1501" isBoss="False" hp="10000" />
 		<Monster name="Deck Teleportal" id="1502" isBoss="False" hp="10000" />
@@ -11676,7 +11694,7 @@
 		<Monster name="Bloodwrath Warrior" id="91602" isBoss="False" hp="0" />
 		<Monster name="Bloodwrath Sorcerer" id="91603" isBoss="False" hp="0" />
 		<Monster name="Bloodwrath Mystic" id="91604" isBoss="False" hp="0" />
-		<Monster name="Perimos" id="91606" isBoss="True" hp="153600000" />
+		<Monster name="Perimos" id="91606" isBoss="True" hp="1713105567" />
 		<Monster name="Aeonalis Pylon" id="91618" isBoss="False" hp="110000" />
 		<Monster name="Aeonalis Pylon" id="91621" isBoss="False" hp="110000" />
 		<Monster name="Aeonalis Pylon" id="91622" isBoss="False" hp="110000" />
@@ -11685,15 +11703,15 @@
 		<Monster name="Aeonalis Pylon" id="91625" isBoss="False" hp="110000" />
 		<Monster name="Aeonalis Pylon" id="91628" isBoss="False" hp="110000" />
 		<Monster name="Aeonalis Pylon" id="91629" isBoss="False" hp="110000" />
-		<Monster name="Darkan's Servant" id="91638" isBoss="False" hp="10000000" />
-		<Monster name="Putrion" id="91650" isBoss="True" hp="70000000" />
+		<Monster name="Darkan's Servant" id="91638" isBoss="False" hp="76170240" />
+		<Monster name="Putrion" id="91650" isBoss="True" hp="550118400" />
 		<Monster name="Perimos" id="91660" isBoss="False" hp="90000000" />
-		<Monster name="Quadriliar" id="91671" isBoss="False" hp="3500000" />
-		<Monster name="Barbed Laceras" id="91672" isBoss="False" hp="3500000" />
-		<Monster name="Hulking Salcata" id="91673" isBoss="False" hp="12000000" />
-		<Monster name="Bloodwrath Archer" id="91674" isBoss="False" hp="3500000" />
-		<Monster name="Bloodwrath Priest" id="91675" isBoss="False" hp="5000000" />
-		<Monster name="Bloodwrath Bladedancer" id="91676" isBoss="False" hp="5000000" />
+		<Monster name="Quadriliar" id="91671" isBoss="False" hp="33659640" />
+		<Monster name="Barbed Laceras" id="91672" isBoss="False" hp="33659640" />
+		<Monster name="Hulking Salcata" id="91673" isBoss="False" hp="115404480" />
+		<Monster name="Bloodwrath Archer" id="91674" isBoss="False" hp="33659640" />
+		<Monster name="Bloodwrath Priest" id="91675" isBoss="False" hp="47796688" />
+		<Monster name="Bloodwrath Bladedancer" id="91676" isBoss="False" hp="47796688" />
 		<Monster name="Dougal" id="99901" isBoss="False" hp="366797" />
 		<Monster name="Dougal's Escort" id="99902" isBoss="False" hp="91545" />
 		<Monster name="Dougal's Escort" id="99903" isBoss="False" hp="91545" />
@@ -11923,6 +11941,30 @@
 		<Monster name="Kalash Defender" id="42758" isBoss="False" hp="1048611" />
 		<Monster name="Empowered Shurian Crusher" id="42759" isBoss="True" hp="1048611" />
 		<Monster name="Empowered Kalash Defender" id="42760" isBoss="False" hp="915" />
+	</Zone>
+	<Zone id="735" name="RK-9 Kennel" >
+		<Monster name="Portal" id="100" isBoss="False" hp="10000" />
+		<Monster name="Portal" id="101" isBoss="False" hp="10000" />
+		<Monster name="Portal" id="102" isBoss="False" hp="10000" />
+		<Monster name="Portal" id="103" isBoss="False" hp="10000" />
+		<Monster name="Portal" id="104" isBoss="False" hp="10000" />
+		<Monster name="Chase the hooded figure through the teleportal." id="911" isBoss="False" hp="0" />
+		<Monster name="Use the Portal Room teleportal." id="912" isBoss="False" hp="0" />
+		<Monster name="Defeat Ventarun" id="913" isBoss="False" hp="0" />
+		<Monster name="Deactivate All Control Panels" id="914" isBoss="False" hp="0" />
+		<Monster name="Defeat Hexapleon" id="915" isBoss="False" hp="0" />
+		<Monster name="Defeat RK-9" id="916" isBoss="False" hp="0" />
+		<Monster name="Ventarun" id="1000" isBoss="True" hp="1680000000" />
+		<Monster name="Time Bomb" id="1009" isBoss="False" hp="6000000" />
+		<Monster name="Teleportal" id="1501" isBoss="False" hp="10000" />
+		<Monster name="Hexapleon" id="2000" isBoss="True" hp="1750000000" />
+		<Monster name="RK-9" id="3000" isBoss="True" hp="2056250000" />
+		<Monster name="Hooded Figure" id="6002" isBoss="False" hp="1" />
+		<Monster name="Randun" id="6003" isBoss="False" hp="1" />
+		<Monster name="Randun" id="6004" isBoss="False" hp="1" />
+		<Monster name="Randun's Journal #14" id="6005" isBoss="False" hp="10000" />
+		<Monster name="Randun's Journal #7" id="6006" isBoss="False" hp="10000" />
+		<Monster name="Teleportal" id="6007" isBoss="False" hp="10000" />
 	</Zone>
 	<Zone id="743" name="Wonderholme (10-Person)" >
 		<Monster name="Morgak" id="1001" isBoss="True" hp="11233822" />
@@ -12177,11 +12219,11 @@
 		<Monster name="Defeat Nightmare Rokdos" id="912" isBoss="False" hp="0" />
 		<Monster name="Defeat Nightmare Viyor" id="913" isBoss="False" hp="0" />
 		<Monster name="(Boss) Defeat Nightmare Desolarus" id="914" isBoss="False" hp="0" />
-		<Monster name="Nightmare Rokdos" id="1001" isBoss="True" hp="539000000" />
-		<Monster name="Nightmare Viyor" id="1002" isBoss="True" hp="588000000" />
-		<Monster name="Nightmare Desolarus" id="1003" isBoss="False" hp="455000000" />
-		<Monster name="Nightmare Rokdos Spectre" id="1004" isBoss="True" hp="231000000" />
-		<Monster name="Nightmare Viyor Spectre" id="1005" isBoss="True" hp="231000000" />
+		<Monster name="Nightmare Rokdos" id="1001" isBoss="True" hp="840000000" />
+		<Monster name="Nightmare Viyor" id="1002" isBoss="True" hp="880000000" />
+		<Monster name="Nightmare Desolarus" id="1003" isBoss="False" hp="710000000" />
+		<Monster name="Nightmare Rokdos Spectre" id="1004" isBoss="True" hp="251000000" />
+		<Monster name="Nightmare Viyor Spectre" id="1005" isBoss="True" hp="251000000" />
 		<Monster name="Exit Teleportal" id="1501" isBoss="False" hp="10000" />
 		<Monster name="Teleportal" id="1502" isBoss="False" hp="10000" />
 		<Monster name="Elite Nameless Ghost" id="2008" isBoss="False" hp="1890675" />
@@ -12220,7 +12262,7 @@
 		<Monster name="Kill the monsters" id="917" isBoss="False" hp="0" />
 		<Monster name="Defeat Kalivan" id="918" isBoss="False" hp="0" />
 		<Monster name="Vyrun" id="999" isBoss="False" hp="10000" />
-		<Monster name="Polyphemus" id="1000" isBoss="True" hp="891000000" />
+		<Monster name="Polyphemus" id="1000" isBoss="True" hp="1496880000" />
 		<Monster name="Suicide Soldier" id="1001" isBoss="False" hp="80000" />
 		<Monster name="Caiman Bomber" id="1002" isBoss="False" hp="50000" />
 		<Monster name="Cursed Mate" id="1003" isBoss="False" hp="9480912" />
@@ -12239,11 +12281,11 @@
 		<Monster name="Boarding Ramp Teleportal" id="1502" isBoss="False" hp="10000" />
 		<Monster name="Cargo Hold Teleportal" id="1503" isBoss="False" hp="10000" />
 		<Monster name="Kalivan's Dreadnaught Teleportal" id="1504" isBoss="False" hp="10000" />
-		<Monster name="Pepero" id="2000" isBoss="True" hp="791000000" />
+		<Monster name="Pepero" id="2000" isBoss="True" hp="1328880000" />
 		<Monster name="Naga Scalawag" id="2003" isBoss="False" hp="20000000" />
 		<Monster name="Captain Quall" id="2004" isBoss="False" hp="80000000" />
 		<Monster name="Deck Soldier" id="2005" isBoss="False" hp="10000000" />
-		<Monster name="Kalivan" id="3000" isBoss="True" hp="866000000" />
+		<Monster name="Kalivan" id="3000" isBoss="True" hp="1454880000" />
 		<Monster name="Naga Officer" id="3002" isBoss="False" hp="15000000" />
 		<Monster name="Boatswain" id="3003" isBoss="False" hp="10000000" />
 		<Monster name="Tanan" id="3004" isBoss="False" hp="100000000" />
@@ -12255,19 +12297,19 @@
 		<Monster name="Defeat Fina" id="913" isBoss="False" hp="0" />
 		<Monster name="Defeat Barbosa" id="914" isBoss="False" hp="0" />
 		<Monster name="Exit Teleportal" id="1501" isBoss="False" hp="500000" />
-		<Monster name="Sailor" id="76601" isBoss="False" hp="2000000" />
-		<Monster name="Sailor" id="76602" isBoss="False" hp="2000000" />
-		<Monster name="Sailor" id="76603" isBoss="False" hp="2000000" />
-		<Monster name="Sailor" id="76604" isBoss="False" hp="2000000" />
-		<Monster name="Mulmok" id="76609" isBoss="True" hp="80000000" />
+		<Monster name="Sailor" id="76601" isBoss="False" hp="3780000" />
+		<Monster name="Sailor" id="76602" isBoss="False" hp="3780000" />
+		<Monster name="Sailor" id="76603" isBoss="False" hp="3780000" />
+		<Monster name="Sailor" id="76604" isBoss="False" hp="3780000" />
+		<Monster name="Mulmok" id="76609" isBoss="True" hp="472500000" />
 		<Monster name="Unstable Archer" id="76610" isBoss="False" hp="2000000" />
-		<Monster name="Unstable Sorcerer" id="76611" isBoss="True" hp="2000000" />
+		<Monster name="Unstable Sorcerer" id="76611" isBoss="True" hp="8820000" />
 		<Monster name="Demolition Charge" id="76615" isBoss="False" hp="500000" />
-		<Monster name="Powder Monkey" id="76618" isBoss="False" hp="30000000" />
-		<Monster name="Barbosa" id="76619" isBoss="True" hp="100000000" />
+		<Monster name="Powder Monkey" id="76618" isBoss="False" hp="132300000" />
+		<Monster name="Barbosa" id="76619" isBoss="True" hp="551250000" />
 		<Monster name="Mulmok" id="76620" isBoss="True" hp="1000000" />
-		<Monster name="Fina" id="76626" isBoss="True" hp="130000000" />
-		<Monster name="Mini Jack" id="76635" isBoss="False" hp="1000000" />
+		<Monster name="Fina" id="76626" isBoss="True" hp="472500000" />
+		<Monster name="Mini Jack" id="76635" isBoss="False" hp="2872800" />
 		<Monster name="Taylor" id="76637" isBoss="False" hp="500000" />
 		<Monster name="Innocent Device" id="76638" isBoss="False" hp="100000" />
 		<Monster name="Innocent Device" id="76639" isBoss="False" hp="100000" />
@@ -12352,10 +12394,10 @@
 		<Monster name="Bloodwrath Seer" id="2027" isBoss="False" hp="3500000" />
 		<Monster name="Bloodwrath Lookout" id="2028" isBoss="False" hp="3500000" />
 		<Monster name="Bloodwrath Bodyguard" id="2032" isBoss="False" hp="6000000" />
-		<Monster name="Pyrepelt" id="76901" isBoss="True" hp="440000000" />
-		<Monster name="Arachandlebra" id="76902" isBoss="True" hp="490000000" />
-		<Monster name="Lilith" id="76903" isBoss="True" hp="590000000" />
-		<Monster name="Spirit of Fire" id="769015" isBoss="False" hp="5000000" />
+		<Monster name="Pyrepelt" id="76901" isBoss="True" hp="1153845000" />
+		<Monster name="Arachandlebra" id="76902" isBoss="True" hp="1309770000" />
+		<Monster name="Lilith" id="76903" isBoss="True" hp="1450102500" />
+		<Monster name="Spirit of Fire" id="769015" isBoss="False" hp="13111875" />
 	</Zone>
 	<Zone id="770" name="Ruinous Manor" >
 		<Monster name="Kill Resurrected Atrocitas" id="911" isBoss="False" hp="0" />
@@ -12652,6 +12694,31 @@
 		<Monster name="Elite Contagious Ambusher" id="6007" isBoss="False" hp="369706" />
 		<Monster name="Nightmare Nadaim" id="6008" isBoss="False" hp="369706" />
 		<Monster name="Elite Blight Imp" id="9001" isBoss="False" hp="0" />
+	</Zone>
+	<Zone id="794" name="Thaumetal Refinery" >
+		<Monster name="Defeat Birchback" id="911" isBoss="False" hp="0" />
+		<Monster name="Defeat Lehnym" id="912" isBoss="False" hp="0" />
+		<Monster name="Defeat Gaaruksalk" id="913" isBoss="False" hp="0" />
+		<Monster name="Trolley" id="999" isBoss="False" hp="945" />
+		<Monster name="Birchback" id="1000" isBoss="True" hp="1400000000" />
+		<Monster name="Teleportal" id="1501" isBoss="False" hp="10000" />
+		<Monster name="Teleportal" id="1502" isBoss="False" hp="10000" />
+		<Monster name="Teleportal" id="1503" isBoss="False" hp="10000" />
+		<Monster name="Lehnym" id="2000" isBoss="True" hp="1350000000" />
+		<Monster name="Gaaruksalk" id="3000" isBoss="True" hp="1600000000" />
+		<Monster name="Baidun" id="5001" isBoss="False" hp="366797" />
+		<Monster name="Archdevan Sorcerer" id="5002" isBoss="False" hp="20000000" />
+		<Monster name="Archdevan Archer" id="5003" isBoss="False" hp="15000000" />
+		<Monster name="Archdevan Warrior" id="5004" isBoss="False" hp="25000000" />
+		<Monster name="Archdevan Archer" id="6001" isBoss="False" hp="4000000" />
+		<Monster name="Archdevan Archer" id="6002" isBoss="False" hp="4000000" />
+		<Monster name="Archdevan Archer" id="6003" isBoss="False" hp="4000000" />
+		<Monster name="Archdevan Camp Commander" id="6004" isBoss="False" hp="100" />
+		<Monster name="Goblin" id="6005" isBoss="False" hp="1000000000" />
+		<Monster name="Goblin" id="6006" isBoss="False" hp="1000000000" />
+		<Monster name="Goblin" id="6007" isBoss="False" hp="1000000000" />
+		<Monster name="Hooded Figure" id="6008" isBoss="False" hp="100" />
+		<Monster name="Archdevan Camp Commander" id="6009" isBoss="False" hp="100" />
 	</Zone>
 	<Zone id="795" name="Crucible of Fame" >
 		<Monster name="Treasure Carrier" id="101" isBoss="False" hp="13038" />
@@ -13236,38 +13303,38 @@
 		<Monster name="!!!" id="4002" isBoss="False" hp="240000" />
 		<Monster name="Charging Mandrake" id="5001" isBoss="False" hp="240000" />
 		<Monster name="Bohemian Mandrake" id="5004" isBoss="False" hp="240000" />
-		<Monster name="Mandrake" id="1000100" isBoss="False" hp="66000" />
-		<Monster name="Sickened Bear" id="1000200" isBoss="False" hp="118800" />
-		<Monster name="Violent Bear" id="1000201" isBoss="False" hp="316800" />
-		<Monster name="Overbearing Bear" id="1000202" isBoss="False" hp="316800" />
-		<Monster name="Zombie" id="1000300" isBoss="False" hp="316800" />
-		<Monster name="Poison Zombie" id="1000301" isBoss="False" hp="316800" />
-		<Monster name="Candy Cat" id="1000400" isBoss="False" hp="66000" />
-		<Monster name="Furious Faerie" id="1000500" isBoss="False" hp="66000" />
-		<Monster name="Zompori Miner" id="1000700" isBoss="False" hp="316800" />
-		<Monster name="Zompori Laborer" id="1000701" isBoss="False" hp="316800" />
-		<Monster name="Rockcrawler Cleaver" id="1000800" isBoss="False" hp="66000" />
-		<Monster name="Caiman" id="1001100" isBoss="False" hp="316800" />
-		<Monster name="Caiman Pirate" id="1001101" isBoss="False" hp="316800" />
-		<Monster name="Popori Exile" id="1001200" isBoss="False" hp="475200" />
-		<Monster name="Zuulhound" id="1001401" isBoss="False" hp="316800" />
-		<Monster name="Inky Sabertooth" id="1001500" isBoss="False" hp="316800" />
-		<Monster name="Sneaky Sabertooth" id="1001501" isBoss="False" hp="316800" />
-		<Monster name="Crimson Imp" id="1001600" isBoss="False" hp="316800" />
-		<Monster name="Chaotic Imp" id="1001601" isBoss="False" hp="316800" />
-		<Monster name="Sickened Boar" id="1001700" isBoss="False" hp="118800" />
-		<Monster name="Sickened Wolf" id="1001900" isBoss="False" hp="118800" />
-		<Monster name="Kamara" id="1002000" isBoss="False" hp="316800" />
-		<Monster name="Slavemaster" id="1002100" isBoss="False" hp="316800" />
-		<Monster name="Prion Njalvar" id="1002300" isBoss="False" hp="316800" />
-		<Monster name="Prion Helgevar" id="1002400" isBoss="False" hp="316800" />
-		<Monster name="Jungle Mugato" id="1002500" isBoss="False" hp="316800" />
-		<Monster name="Karaigon" id="1002600" isBoss="False" hp="442200" />
-		<Monster name="Tuwangi Chieftain" id="1002702" isBoss="False" hp="316800" />
-		<Monster name="Tuwangi Elder" id="1002703" isBoss="False" hp="264000" />
-		<Monster name="Tuwangi Scout" id="1002704" isBoss="False" hp="132000" />
-		<Monster name="Tuwangi" id="1002705" isBoss="False" hp="66000" />
-		<Monster name="Shadow Hyena" id="1002800" isBoss="False" hp="316800" />
+		<Monster name="Mandrake" id="1000100" isBoss="False" hp="76560" />
+		<Monster name="Sickened Bear" id="1000200" isBoss="False" hp="137808" />
+		<Monster name="Violent Bear" id="1000201" isBoss="False" hp="367488" />
+		<Monster name="Overbearing Bear" id="1000202" isBoss="False" hp="367488" />
+		<Monster name="Zombie" id="1000300" isBoss="False" hp="367488" />
+		<Monster name="Poison Zombie" id="1000301" isBoss="False" hp="367488" />
+		<Monster name="Candy Cat" id="1000400" isBoss="False" hp="76560" />
+		<Monster name="Furious Faerie" id="1000500" isBoss="False" hp="76560" />
+		<Monster name="Zompori Miner" id="1000700" isBoss="False" hp="367488" />
+		<Monster name="Zompori Laborer" id="1000701" isBoss="False" hp="367488" />
+		<Monster name="Rockcrawler Cleaver" id="1000800" isBoss="False" hp="76560" />
+		<Monster name="Caiman" id="1001100" isBoss="False" hp="367488" />
+		<Monster name="Caiman Pirate" id="1001101" isBoss="False" hp="367488" />
+		<Monster name="Popori Exile" id="1001200" isBoss="False" hp="551232" />
+		<Monster name="Zuulhound" id="1001401" isBoss="False" hp="367488" />
+		<Monster name="Inky Sabertooth" id="1001500" isBoss="False" hp="367488" />
+		<Monster name="Sneaky Sabertooth" id="1001501" isBoss="False" hp="367488" />
+		<Monster name="Crimson Imp" id="1001600" isBoss="False" hp="367488" />
+		<Monster name="Chaotic Imp" id="1001601" isBoss="False" hp="367488" />
+		<Monster name="Sickened Boar" id="1001700" isBoss="False" hp="137808" />
+		<Monster name="Sickened Wolf" id="1001900" isBoss="False" hp="137808" />
+		<Monster name="Kamara" id="1002000" isBoss="False" hp="367488" />
+		<Monster name="Slavemaster" id="1002100" isBoss="False" hp="367488" />
+		<Monster name="Prion Njalvar" id="1002300" isBoss="False" hp="367488" />
+		<Monster name="Prion Helgevar" id="1002400" isBoss="False" hp="367488" />
+		<Monster name="Jungle Mugato" id="1002500" isBoss="False" hp="367488" />
+		<Monster name="Karaigon" id="1002600" isBoss="False" hp="512952" />
+		<Monster name="Tuwangi Chieftain" id="1002702" isBoss="False" hp="367488" />
+		<Monster name="Tuwangi Elder" id="1002703" isBoss="False" hp="306240" />
+		<Monster name="Tuwangi Scout" id="1002704" isBoss="False" hp="153120" />
+		<Monster name="Tuwangi" id="1002705" isBoss="False" hp="76560" />
+		<Monster name="Shadow Hyena" id="1002800" isBoss="False" hp="367488" />
 		<Monster name="Arcanist" id="1003000" isBoss="False" hp="288000" />
 		<Monster name="Arena Champion" id="2000104" isBoss="False" hp="100" />
 		<Monster name="Kumas Statue" id="2000200" isBoss="False" hp="240000" />
@@ -13302,7 +13369,7 @@
 		<Monster name="Kill the monsters" id="917" isBoss="False" hp="0" />
 		<Monster name="Defeat Wretched Kalivan" id="918" isBoss="False" hp="0" />
 		<Monster name="Vyrun" id="999" isBoss="False" hp="10000" />
-		<Monster name="Wretched Polyphemus" id="1000" isBoss="True" hp="159200000" />
+		<Monster name="Wretched Polyphemus" id="1000" isBoss="True" hp="452128000" />
 		<Monster name="Suicide Soldier" id="1001" isBoss="False" hp="56000" />
 		<Monster name="Caiman Bomber" id="1002" isBoss="False" hp="35000" />
 		<Monster name="Cursed Mate" id="1003" isBoss="False" hp="6636638" />
@@ -13322,11 +13389,11 @@
 		<Monster name="Boarding Ramp Teleportal" id="1502" isBoss="False" hp="10000" />
 		<Monster name="Cargo Hold Teleportal" id="1503" isBoss="False" hp="10000" />
 		<Monster name="Kalivan's Dreadnaught Teleportal" id="1504" isBoss="False" hp="10000" />
-		<Monster name="Wretched Pepero" id="2000" isBoss="True" hp="128000000" />
+		<Monster name="Wretched Pepero" id="2000" isBoss="True" hp="363520000" />
 		<Monster name="Naga Scalawag" id="2003" isBoss="False" hp="1920000" />
 		<Monster name="Captain Quall" id="2004" isBoss="False" hp="8596638" />
 		<Monster name="Deck Soldier" id="2005" isBoss="False" hp="1920000" />
-		<Monster name="Wretched Kalivan" id="3000" isBoss="True" hp="159200000" />
+		<Monster name="Wretched Kalivan" id="3000" isBoss="True" hp="452128000" />
 		<Monster name="Naga Officer" id="3002" isBoss="False" hp="1920000" />
 		<Monster name="Boatswain" id="3003" isBoss="False" hp="1920000" />
 		<Monster name="Tanan" id="3004" isBoss="False" hp="8596638" />
@@ -13930,8 +13997,8 @@
 		<Monster name="Defeat Perimos" id="913" isBoss="False" hp="0" />
 		<Monster name="Use the Teleportal to Reach the Deck and Kill Darkan" id="914" isBoss="False" hp="0" />
 		<Monster name="Herkayla" id="999" isBoss="False" hp="10000" />
-		<Monster name="Nightmare Darkan" id="1000" isBoss="True" hp="1900000000" />
-		<Monster name="Nightmare Darkan" id="1001" isBoss="True" hp="500000000" />
+		<Monster name="Nightmare Darkan" id="1000" isBoss="True" hp="750000000" />
+		<Monster name="Nightmare Darkan" id="1001" isBoss="True" hp="300000000" />
 		<Monster name="Nightmare Thrulkalath" id="1002" isBoss="False" hp="0" />
 		<Monster name="Exit Teleportal" id="1501" isBoss="False" hp="10000" />
 		<Monster name="Deck Teleportal" id="1502" isBoss="False" hp="10000" />
@@ -13942,7 +14009,7 @@
 		<Monster name="Elite Bloodwrath Warrior" id="91602" isBoss="False" hp="0" />
 		<Monster name="Elite Bloodwrath Sorcerer" id="91603" isBoss="False" hp="0" />
 		<Monster name="Elite Bloodwrath Mystic" id="91604" isBoss="False" hp="0" />
-		<Monster name="Nightmare Perimos" id="91606" isBoss="True" hp="1800000000" />
+		<Monster name="Nightmare Perimos" id="91606" isBoss="True" hp="800000000" />
 		<Monster name="Aeonalis Pylon" id="91618" isBoss="False" hp="110000" />
 		<Monster name="Aeonalis Pylon" id="91621" isBoss="False" hp="110000" />
 		<Monster name="Aeonalis Pylon" id="91622" isBoss="False" hp="110000" />
@@ -13951,19 +14018,45 @@
 		<Monster name="Aeonalis Pylon" id="91625" isBoss="False" hp="110000" />
 		<Monster name="Aeonalis Pylon" id="91628" isBoss="False" hp="110000" />
 		<Monster name="Aeonalis Pylon" id="91629" isBoss="False" hp="110000" />
-		<Monster name="Darkan's Servant" id="91638" isBoss="False" hp="150000000" />
-		<Monster name="Nightmare Putrion" id="91650" isBoss="True" hp="700000000" />
+		<Monster name="Darkan's Servant" id="91638" isBoss="False" hp="30000000" />
+		<Monster name="Nightmare Putrion" id="91650" isBoss="True" hp="220000000" />
 		<Monster name="Nightmare Perimos" id="91660" isBoss="False" hp="90000000" />
-		<Monster name="Elite Quadriliar" id="91671" isBoss="False" hp="40000000" />
-		<Monster name="Elite Barbed Laceras" id="91672" isBoss="False" hp="40000000" />
-		<Monster name="Elite Hulking Salcata" id="91673" isBoss="False" hp="90000000" />
-		<Monster name="Elite Bloodwrath Archer" id="91674" isBoss="False" hp="60000000" />
-		<Monster name="Elite Bloodwrath Priest" id="91675" isBoss="False" hp="40000000" />
-		<Monster name="Elite Bloodwrath Bladedancer" id="91676" isBoss="False" hp="45000000" />
+		<Monster name="Elite Quadriliar" id="91671" isBoss="False" hp="10000000" />
+		<Monster name="Elite Barbed Laceras" id="91672" isBoss="False" hp="10000000" />
+		<Monster name="Elite Hulking Salcata" id="91673" isBoss="False" hp="47000000" />
+		<Monster name="Elite Bloodwrath Archer" id="91674" isBoss="False" hp="9500000" />
+		<Monster name="Elite Bloodwrath Priest" id="91675" isBoss="False" hp="9500000" />
+		<Monster name="Elite Bloodwrath Bladedancer" id="91676" isBoss="False" hp="12000000" />
 		<Monster name="Dougal" id="99901" isBoss="False" hp="366797" />
 		<Monster name="Dougal's Escort" id="99902" isBoss="False" hp="91545" />
 		<Monster name="Dougal's Escort" id="99903" isBoss="False" hp="91545" />
 		<Monster name="Soldier" id="99904" isBoss="False" hp="91545" />
+	</Zone>
+	<Zone id="935" name="RK-9 Kennel (Hard)" >
+		<Monster name="Portal" id="100" isBoss="False" hp="10000" />
+		<Monster name="Portal" id="101" isBoss="False" hp="10000" />
+		<Monster name="Portal" id="102" isBoss="False" hp="10000" />
+		<Monster name="Portal" id="103" isBoss="False" hp="10000" />
+		<Monster name="Portal" id="104" isBoss="False" hp="10000" />
+		<Monster name="Chase the hooded figure through the teleportal." id="911" isBoss="False" hp="0" />
+		<Monster name="Use the Portal Room teleportal." id="912" isBoss="False" hp="0" />
+		<Monster name="Defeat Ventarun" id="913" isBoss="False" hp="0" />
+		<Monster name="Deactivate All Control Panels" id="914" isBoss="False" hp="0" />
+		<Monster name="Defeat Hexapleon" id="915" isBoss="False" hp="0" />
+		<Monster name="Defeat Nightmare RK-9" id="916" isBoss="False" hp="0" />
+		<Monster name="Ventarun" id="1000" isBoss="True" hp="2147483647" />
+		<Monster name="Time Bomb" id="1009" isBoss="False" hp="6750000" />
+		<Monster name="Teleportal" id="1501" isBoss="False" hp="10000" />
+		<Monster name="Hexapleon" id="2000" isBoss="True" hp="2147483647" />
+		<Monster name="RK-9 Kennel (Hard)" id="3000" isBoss="True" hp="2147483647" />
+		<Monster name="Box of Parts" id="5000" isBoss="False" hp="500000" />
+		<Monster name="Randun's Belongings" id="5001" isBoss="False" hp="500000" />
+		<Monster name="Hooded Figure" id="6002" isBoss="False" hp="1" />
+		<Monster name="Randun" id="6003" isBoss="False" hp="1" />
+		<Monster name="Randun" id="6004" isBoss="False" hp="1" />
+		<Monster name="Randun's Journal #14" id="6005" isBoss="False" hp="10000" />
+		<Monster name="Randun's Journal #7" id="6006" isBoss="False" hp="10000" />
+		<Monster name="Teleportal" id="6007" isBoss="False" hp="10000" />
 	</Zone>
 	<Zone id="950" name="Harrowhold" >
 		<Monster name="Ignidrax Copy" id="901" isBoss="True" hp="1500000000" />
@@ -14009,10 +14102,10 @@
 		<Monster name="Elite Bloodwrath Seer" id="2027" isBoss="False" hp="4000000" />
 		<Monster name="Elite Bloodwrath Lookout" id="2028" isBoss="False" hp="4000000" />
 		<Monster name="Elite Bloodwrath Bodyguard" id="2032" isBoss="False" hp="7000000" />
-		<Monster name="Nightmare Pyrepelt" id="76901" isBoss="True" hp="800000000" />
-		<Monster name="Nightmare Arachandlebra" id="76902" isBoss="True" hp="800000000" />
-		<Monster name="Nightmare Lilith" id="76903" isBoss="True" hp="1100000000" />
-		<Monster name="Spirit of Fire" id="769015" isBoss="False" hp="9000000" />
+		<Monster name="Nightmare Pyrepelt" id="76901" isBoss="True" hp="1263071846" />
+		<Monster name="Nightmare Arachandlebra" id="76902" isBoss="True" hp="1443510681" />
+		<Monster name="Nightmare Lilith" id="76903" isBoss="True" hp="1623949516" />
+		<Monster name="Spirit of Fire" id="769015" isBoss="False" hp="22660646" />
 	</Zone>
 	<Zone id="970" name="Ruinous Manor (Hard)" >
 		<Monster name="Kill Nightmare Resurrected Atrocitas" id="911" isBoss="False" hp="0" />
@@ -14131,6 +14224,22 @@
 		<Monster name="Hatred" id="78102" isBoss="False" hp="2071815251" />
 		<Monster name="Shadow" id="78103" isBoss="False" hp="2071815251" />
 	</Zone>
+	<Zone id="994" name="Thaumetal Refinery (Hard)" >
+		<Monster name="Defeat Nightmare Birchback" id="911" isBoss="False" hp="0" />
+		<Monster name="Defeat Nightmare Lehnym" id="912" isBoss="False" hp="0" />
+		<Monster name="Defeat Nightmare Gaaruksalk" id="913" isBoss="False" hp="0" />
+		<Monster name="Trolley" id="999" isBoss="False" hp="945" />
+		<Monster name="Nightmare Birchback" id="1000" isBoss="True" hp="1740000000" />
+		<Monster name="Teleportal" id="1501" isBoss="False" hp="10000" />
+		<Monster name="Teleportal" id="1502" isBoss="False" hp="10000" />
+		<Monster name="Teleportal" id="1503" isBoss="False" hp="10000" />
+		<Monster name="Nightmare Lehnym" id="2000" isBoss="True" hp="1690000000" />
+		<Monster name="Nightmare Gaaruksalk" id="3000" isBoss="True" hp="1870000000" />
+		<Monster name="Baidun" id="5001" isBoss="False" hp="366797" />
+		<Monster name="Archdevan Sorcerer" id="5002" isBoss="False" hp="25000000" />
+		<Monster name="Archdevan Archer" id="5003" isBoss="False" hp="20000000" />
+		<Monster name="Archdevan Warrior" id="5004" isBoss="False" hp="30000000" />
+	</Zone>
 	<Zone id="1022" name="Arx Umbra" >
 		<Monster name="Nexus Teralith Vanquisher" id="101" isBoss="True" hp="9118362" />
 		<Monster name="Nexus Infernal Fangspawn" id="102" isBoss="True" hp="9118362" />
@@ -14185,6 +14294,7 @@
 		<Monster name="Hollow Gourdo" id="110" isBoss="False" hp="100000000" />
 		<Monster name="Hollow Gourdo" id="111" isBoss="False" hp="100000000" />
 		<Monster name="Hollow Gourdo" id="112" isBoss="False" hp="100000000" />
+		<Monster name="Gourdo" id="400" isBoss="False" hp="66578" />
 		<Monster name="Kumas" id="1000" isBoss="False" hp="147000000" />
 		<Monster name="Aleph" id="160309" isBoss="False" hp="10000" />
 		<Monster name="Betis" id="160310" isBoss="False" hp="10000" />

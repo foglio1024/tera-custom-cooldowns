@@ -30,13 +30,14 @@
 38	Buff	False	True	False			
 39	Buff	True	True	True	L'appelle de la guerre (Cybercafé)	Augmente la puissance d'attaque, la vitesse d'attaque et les capacités de récupération de 2 %. Anomalie activée en jouant depuis un cybercafé.	icon_status.plusecritical_tex
 40	Buff	True	True	True	Bénédiction de Balder	Augmente le rendement de la collecte de 30 et réduit le temps nécessaire pour la collecte et l'artisanat.	icon_items.artisanall_up_tex
-41	Buff	True	True	False	Bénédiction de Baharr	Augmente légèrement le taux de réussite final des enchantements. (Ne s'applique pas aux enchantements d'apogée ni à l'enchantement d'équipement identique)	icon_items.parts_heavyarmorc5_tex
-42	Buff	True	True	False	Bénédiction bénie de Baharr	Augmente légèrement le taux de réussite final des enchantements. (Ne s'applique pas aux enchantements d'apogée ni à l'enchantement d'équipement identique)	icon_items.parts_heavyarmorc5_tex
-43	Buff	True	True	False	Bénédiction vénérée de Baharr	Augmente légèrement le taux de réussite final des enchantements. (Ne s'applique pas aux enchantements d'apogée ni à l'enchantement d'équipement identique)	icon_items.parts_heavyarmorc5_tex
-44	Buff	True	True	False	Bénédiction de Baharr	Augmente légèrement le taux de réussite final des enchantements. (Ne s'applique pas aux enchantements d'apogée ni à l'enchantement d'équipement identique)	icon_items.parts_heavyarmorc5_tex
-45	Buff	True	True	False	Bénédiction bénie de Baharr	Augmente légèrement le taux de réussite final des enchantements. (Ne s'applique pas aux enchantements d'apogée ni à l'enchantement d'équipement identique)	icon_items.parts_heavyarmorc5_tex
-46	Buff	True	True	False	Bénédiction vénérée de Baharr	Augmente légèrement le taux de réussite final des enchantements. (Ne s'applique pas aux enchantements d'apogée ni à l'enchantement d'équipement identique)	icon_items.parts_heavyarmorc5_tex
+41	Buff	True	True	False	Bénédiction de Baharr	Ceci augmente légèrement le taux de réussite final des enchantements.	icon_items.parts_heavyarmorc5_tex
+42	Buff	True	True	False	Bénédiction bénie de Baharr	Ceci augmente le taux de réussite final des enchantements.	icon_items.parts_heavyarmorc5_tex
+43	Buff	True	True	False	Bénédiction vénérée de Baharr	Ceci augmente fortement le taux de réussite final des enchantements.	icon_items.parts_heavyarmorc5_tex
+44	Buff	True	True	False	Bénédiction de Baharr	Ceci augmente légèrement le taux de réussite final des enchantements.	icon_items.parts_heavyarmorc5_tex
+45	Buff	True	True	False	Bénédiction bénie de Baharr	Ceci augmente le taux de réussite final des enchantements.	icon_items.parts_heavyarmorc5_tex
+46	Buff	True	True	False	Bénédiction vénérée de Baharr	Ceci augmente fortement le taux de réussite final des enchantements.	icon_items.parts_heavyarmorc5_tex
 47	Buff	True	True	False	Test_Augmentation des dégâts par compétence/réduction du taux d'agression	Pour le test uniquement&nbsp;! Les dégâts de toutes les compétences augmentent de 50&nbsp;%/le taux d'agression baisse de 50&nbsp;%	icon_skills.voidtrap_tex
+51	Buff	True	True	False	Étourdissement de test des dégâts	Étourdissement pour le test des dégâts. Effets supplémentaires :&#xA;La constitution est réduite de $H_W_BAD12%$COLOR_END (affaiblissement cumulé 3 fois)&#xA;La constitution est réduite de $H_W_BAD10%$COLOR_END (Volée de malédictions)&#xA;La résistance aux coups critiques est réduite de $H_W_BAD-12$COLOR_END (Volée de malédictions)	icon_items.q_bones_tex
 101	Buff	True	True	False	Réaction	Immunité contre le renversement, la stupeur et l'étourdissement.	icon_skills.risingattack_tex
 201	Buff	False	True	False	Bénédiction de Shakan I	Augmente la puissance de $H_W_GOOD17$COLOR_END.	icon_skills.attackup_tex
 202	Buff	False	True	False	Bénédiction de Shakan II	Augmente la puissance de $H_W_GOOD25$COLOR_END.	icon_skills.attackup_tex
@@ -58,6 +59,7 @@
 912	Buff	True	True	True	Infusion au noctenium	L'infusion au noctenium est appliquée pour augmenter l'effet de cette compétence.	icon_items.union_supplies5_tex
 913	Buff	True	True	True	Infusion au noctenium	L'infusion au noctenium est appliquée pour augmenter l'effet de cette compétence.	icon_items.union_supplies5_tex
 916	Buff	True	True	True	Infusion au noctenium	L'infusion au noctenium est appliquée pour augmenter l'effet de cette compétence.	icon_items.union_supplies5_tex
+917	Buff	True	True	True	Infusion au noctenium	L'infusion au noctenium est appliquée pour augmenter l'effet de cette compétence.	icon_items.union_supplies5_tex
 920	Buff	True	True	False	Effet de noctenium raffiné [inhabituel]	Il augmente l'effet de compétence. L'effet de l'infusion au noctenium augmente de $H_W_GOOD50 %$COLOR_END et toutes les compétences bénéficient d'une puissance d'attaque augmentée de $H_W_GOOD4 à 12 %$COLOR_END. (Certaines compétences sont limitées de $H_W_GOOD6 à 20 %$COLOR_END.) Cet effet ne peut être combiné à celui de l'infusion au noctenium ordinaire.	icon_items.noctan_tex
 921	Buff	True	True	False	Effet de noctenium raffiné [rare]	Il augmente l'effet de compétence. L'effet de l'infusion au noctenium augmente de $H_W_GOOD50 %$COLOR_END et toutes les compétences bénéficient d'une puissance d'attaque augmentée de $H_W_GOOD4 à 12 %$COLOR_END. (Certaines compétences sont limitées de $H_W_GOOD6 à 20 %$COLOR_END.) Cet effet ne peut être combiné à celui de l'infusion au noctenium ordinaire.	icon_items.noctan_tex
 922	Buff	True	True	False	Effet de noctenium raffiné [légendaire]	Il augmente l'effet de compétence. L'effet de l'infusion au noctenium augmente de $H_W_GOOD50 %$COLOR_END et toutes les compétences bénéficient d'une puissance d'attaque augmentée de $H_W_GOOD4 à 12 %$COLOR_END. (Certaines compétences sont limitées de $H_W_GOOD6 à 20 %$COLOR_END.) Cet effet ne peut être combiné à celui de l'infusion au noctenium ordinaire.	icon_items.noctan_tex
@@ -111,6 +113,7 @@
 1491	Buff	True	True	False	Potion de vaillance	Soigne $H_W_GOOD6 %$COLOR_END des PV maximum toutes les $H_W_GOOD1$COLOR_END second.	icon_items.potion1_tex
 1495	WeakeningEffect	True	True	False	Poison des champs de bataille	Réduit les PV de 20 000 par seconde.	icon_status.poisonstatus_tex
 1510	Buff	False	True	False	Potion de soins	Restaure instantanément $H_W_GOOD50 %$COLOR_END des PV maximum.	icon_items.potion5_tex
+1511	Buff	False	True	False	Fiole	Les PV et PM maximums sont instantanément restaurés de $H_W_GOOD60 %$COLOR_END.	icon_items.potion5_tex
 1530	Buff	True	True	False	Infusion divine	Restaure $H_W_GOOD5 %$COLOR_END des PM maximum toutes les $H_W_GOOD1$COLOR_END second.	icon_items.potion19_tex
 1610	Buff	True	True	False	Graine de régénération	Régénère $H_W_GOOD2 %$COLOR_END des PV maximum PV toutes les $H_W_GOOD1$COLOR_END second.	icon_items.potion1_tex
 1630	Buff	False	True	False	Graine de soins	Restaure $H_W_GOOD25 %$COLOR_END des PV maximum.	icon_items.potion5_tex
@@ -418,6 +421,7 @@
 4402	Buff	True	True	False	Mentor avisé	Augmente les PEX de combat $H_W_GOOD100 %$COLOR_END. L'effet se cumule avec d'autres effets de PEX mais le temps s'écoule même quand vous n'êtes pas connecté{@g:/e}.	icon_status.vitality_tex
 4403	Buff	False	True	False	Salutations chaleureuses_Si vous voyez cela, BTS.	Si vous voyez cela, BTS.	icon_skills.greeting_tex
 4404	Buff	True	True	False	Fiole sauvage puissante d'amitié	Augmente la puissance de $H_W_GOOD10 %$COLOR_END.	icon_status.buff_of_kaia_tex
+4405	Buff	True	True	False	Joies de la fabrication	Quand les points de compétence des armes, armures, consommables ou eaux-fortes sont inférieurs à 500, vous pouvez obtenir le double de points de compétence au moment de la fabrication.	icon_items.small_insecta8_tex
 4500	Buff	True	True	True	PEX rapide	Augmente les PEX de combat de $H_W_GOOD10 %$COLOR_END.	icon_status.plusfocus_tex
 4501	Buff	True	True	True	PEX rapide	Augmente les PEX de combat de $H_W_GOOD20 %$COLOR_END.	icon_status.plusfocus_tex
 4502	Buff	True	True	True	PEX rapide	Augmente les PEX de combat de $H_W_GOOD30 %$COLOR_END.	icon_status.plusfocus_tex
@@ -435,6 +439,7 @@
 4514	Buff	True	True	True	PEX rapide	Multiplie les PEX de combat $H_W_GOODpar 10$COLOR_END.	icon_status.plusfocus_tex
 4600	Buff	True	True	False	Lien de cristal	Empêche tout cristal de se briser en cas de mort, en utilisant un effet. Cumulable jusqu'à 99 fois.	icon_items.q_closedspace_stone_05_tex
 4610	Buff	True	True	False	Lien de cristal total	Empêche le cristal de se briser lors de la mort.	icon_items.q_closedspace_stone_05_tex
+4612	Buff	True	True	False	Lien de cristal total	Ceci empêche le cristal de se briser au moment de la mort.	icon_items.q_closedspace_stone_05_tex
 4620	Buff	True	True	False	Parchemin d'artisan de Valsekyr	Augmente la vitesse de fabrication de tous les objets de $H_W_GOOD50%$COLOR_END.	icon_items.scroll_produce_speedup_tex
 4621	Buff	True	True	False	Parchemin du fabricant dévoué	Augmente la vitesse de fabrication de tous les objets de $H_W_GOOD50%$COLOR_END.	icon_items.scroll_produce_speedup_tex
 4630	Buff	True	True	False	Parchemin de cueilleur de Valsekyr	Améliore toutes les compétences de collecte de $H_W_GOOD410$COLOR_END.	icon_items.scroll_collection_expup_tex
@@ -509,6 +514,15 @@
 5060	Buff	False	True	False	Anneau de corruption résistance aux réactions	Anneau de corruption résistance aux réactions	icon_skills.voidtrap_tex
 6001	Buff	True	True	False	Veine du dragon	Augmente la puissance critique de $H_W_GOOD+1,5$COLOR_END fois en cas d'attaque sur un monstre.	icon_status.passive_dragonblood
 6002	Buff	True	True	False	Véritable veine du dragon	Multiplie la puissance critique de $H_W_GOOD+2$COLOR_END fois en cas d'attaque sur un monstre.	icon_status.passive_dragonblood2
+6003	Buff	True	True	False	Aura enflammée	La puissance critique est multipliée par $H_W_GOOD1,5$COLOR_END en cas d'attaque sur un monstre.	icon_skills.heataura_tex
+6004	Buff	True	True	False	Aura flamboyante	La puissance critique est multipliée par $H_W_GOOD2$COLOR_END en cas d'attaque sur un monstre.	icon_skills.flameaura_tex
+6005	Buff	False	True	False		Si visible, BTS	
+6006	Buff	True	True	False	Phénix immortel	Vous êtes temporairement invincible. L'effet s'achève quand vous utilisez une compétence.	icon_status.revivenow_status_tex
+6007	Buff	True	True	False	Rajeunissement du phénix	Il régénère $H_W_GOOD100 %$COLOR_END de vos PV et PM maximums immédiatement.	icon_items.eagles_potion_level_47_tex
+6008	WeakeningEffect	True	True	False	Repos du phénix	Le phénix vient de renaître de ses cendres. Vous ne pouvez profiter de l'$H_W_GOODAvatar du phénix$COLOR_END.	icon_skills.flameaura_tex
+6009	Buff	True	True	False	Protection du phénix	Protégez vos cristaux de la destruction.	icon_items.q_closedspace_stone_05_tex
+6010	Buff	False	True	False		Si visible, BTS	
+6011	WeakeningEffect	True	True	False	Repos du phénix	Le phénix vient de renaître de ses cendres. Vous ne pouvez profiter de l'$H_W_GOODAvatar du phénix$COLOR_END.	icon_skills.heataura_tex
 10100	DamageOverTime	True	False	False	Virulence	Réduit les PV de $H_W_BAD-11$COLOR_END toutes les $H_W_BAD1$COLOR_END second.	icon_items.customize9ar_tex
 10101	DamageOverTime	True	False	False	Virulence	Réduit les PV de $H_W_BAD-23$COLOR_END toutes les $H_W_BAD1$COLOR_END second.	icon_items.customize9br_tex
 10102	DamageOverTime	True	False	False	Virulence	Réduit les PV de $H_W_BAD-58$COLOR_END toutes les $H_W_BAD1$COLOR_END second.	icon_items.customize9cr_tex
@@ -758,6 +772,7 @@
 15150	Buff	True	True	False	Assimilation naturelle	Réduit le gain d'agressivité à néant.	icon_status.boundmovedown_tex
 15160	Stun	True	False	False	Martelage du Forgeron	Étourdi{@g:/e}. Impossible de bouger.	icon_status.confuseup_tex
 15161	WeakeningEffect	True	False	False	Clémence finale du Forgeron	Réduit la résistance aux coups critiques de $H_W_BAD-10$COLOR_END.	icon_status.plusciriticalresist_tex
+15162	WeakeningEffect	True	False	False	Marque du justicier	Ceci réduit la résistance aux coups critiques de $H_W_BAD-20$COLOR_END.	icon_status.plusciriticalresist_tex
 15170	DamageOverTime	True	False	False	Fouet de tonnerre	Réduit les PV de $H_W_BAD-3710$COLOR_END toutes les $H_W_BAD2$COLOR_END second1.	icon_status.paralyzestatus_tex
 15500	Buff	False	True	False			
 15600	Buff	False	True	False			
@@ -959,7 +974,7 @@
 29050	WeakeningEffect	True	False	False	Glyphe d'hébétude	Réduit la vitesse d'attaque de $H_W_BAD10%$COLOR_END par coup superposé.	icon_crest.crestactiveattackspeeddown_tex
 29060	Buff	True	True	False	Glyphe d'alimentation	Augmente les chances de coups critiques de Torrent de lames de $H_W_GOOD30 %$COLOR_END.	icon_crest.crestnextskillattackup_tex
 29070	WeakeningEffect	True	False	False	Glyphe de lien	Vous ne pouvez pas bouger pendant la durée de la compétence. Les effets de la compétence sont annulés si vous êtes assommé{@g:/e} par une attaque.	icon_crest.crestactivespeeddown_tex
-29090	Buff	True	True	False	Glyphe du rapide	Une Etreinte fulgurante réussie augmente de 50 % la vitesse d'incantation de la compétence suivante.	icon_crest.e_crestpassiveskillspeedup_tex
+29090	Buff	True	True	False	Glyphe du rapide	Une Étreinte fulgurante réussie augmente la vitesse de rechargement des compétences de 50 % pendant 2,5 secondes.	icon_crest.e_crestpassiveskillspeedup_tex
 29100	Buff	True	True	False	Glyphe d'alimentation	Augmente les dégâts de Déferlement macabre de $H_W_GOOD20%$COLOR_END.	icon_crest.crestnextskillattackup_tex
 29110	Buff	True	True	False	Glyphe de prestesse	Augmente la vitesse de déplacement de $H_W_GOOD50$COLOR_END durant les combats.	icon_crest.e_crestactivespeedup_tex
 29111	Buff	True	True	True	Glyphe du tranchant	$H_W_GOODDouble$COLOR_END le facteur de coups critiques pour la prochaine attaque.	icon_crest.crestpassivecriticalup_tex
@@ -1009,9 +1024,9 @@
 33130	Buff	True	True	False	Dégâts de compétence accrus (Glyphe de puissance)	Les dégâts de la Frappe éthérée augmentent de $H_W_GOOD25%$COLOR_END.	icon_crest.crestnextskillattackup_tex
 33140	Buff	False	True	False			icon_crest.crestpassivecriticalup_tex
 33150	Buff	True	True	False	Dégâts de compétence accrus (Glyphe de puissance)	Les dégâts de la Frappe éthérée augmentent de $H_W_GOOD25%$COLOR_END.	icon_crest.crestnextskillattackup_tex
-33170	Buff	True	True	False	Restauration continue de PV (Glyphe de récupération)	Restauration de $H_W_GOOD2 %$COLOR_END des PV maximums toutes les $H_W_GOOD1$COLOR_END second.	icon_crest.crestpassivehpheal_tex
+33170	Buff	True	True	False	Restauration continue de PV (Glyphe de récupération)	Les PV maximums sont restaurés de $H_W_GOOD3 %$COLOR_END toutes les $H_W_GOOD1$COLOR_END second.	icon_crest.crestpassivehpheal_tex
 33200	Buff	True	True	False	Dégâts de compétence accrus (Glyphe de puissance)	Les dégâts de compétence de la prochaine attaque augmentent de 30 %.	icon_crest.crestnextskillattackup_tex
-33210	Buff	True	True	False	Dégâts de compétence accrus (Glyphe de puissance)	Les dégâts d'Écho de lune augmentent de $H_W_GOOD25%$COLOR_END.	icon_crest.crestpassivehpheal_tex
+33210	Buff	True	True	False	Dégâts de compétence accrus (Glyphe de puissance)	Les dégâts d'Écho de lune augmentent de $H_W_GOOD25%$COLOR_END.	icon_crest.e_crestnextskillattackup_tex
 45301	WeakeningEffect	True	False	False	Grand choc	Profondément choqué	icon_status.minusdefence_tex
 45302	WeakeningEffect	True	False	False	Soufflé	Choqué et renversé.	icon_status.minuscriticalresist_tex
 45303	DamageOverTime	False	False	False		La perceuse disparaîtra dans 13 secondes.	
@@ -1089,6 +1104,7 @@
 60027	Buff	True	True	False	Récupération IV	Restaure $H_W_GOOD1405$COLOR_END PV et $H_W_GOOD145$COLOR_END PM toutes les $H_W_GOOD1$COLOR_END second.	icon_items.body_enchant_scroll_3_tex
 60029	Buff	True	True	False	Concentration de l'esprit II	Restaure $H_W_GOOD5 %$COLOR_END des PM maximums toutes les $H_W_GOOD1$COLOR_END second.	icon_skills.neutralizepoison_tex
 60030	Buff	True	True	False	Concentration de l'esprit I	Les PM maximums sont restaurés de $H_W_GOOD3 %$COLOR_END toutes les $H_W_GOOD1$COLOR_END second.	icon_skills.neutralizepoison_tex
+60031	Buff	True	True	False	Concentration de l'esprit III	Les PM maximums sont régénérés de $H_W_GOOD7 %$COLOR_END toutes les $H_W_GOOD1$COLOR_END second.	icon_skills.neutralizepoison_tex
 70201	Buff	True	True	False	Epigrain soufflé	Augmente les PV maximum de $H_W_GOOD5%$COLOR_END.	icon_items.fallfestival_popcorn_tex
 70202	Buff	True	True	False	Salade de rutabagas des marais	Restaure $H_W_GOOD1 %$COLOR_END des PV maximum toutes les $H_W_GOOD5$COLOR_END second1.	icon_items.fallfestival_potatosalad_tex
 70203	Buff	True	True	False	Porcidé grillé	Restaure $H_W_GOOD1 %$COLOR_END des PV maximum toutes les $H_W_GOOD5$COLOR_END second1.	icon_items.q_roastmeat_tex
@@ -1112,6 +1128,8 @@
 70242	Buff	False	True	False	Menu composé de 3 plats de Melsa	Confère les effets Ailes lugubres, Salade de flammèches des Terres libres et Barbecue traditionnel des Champs lugubres.	icon_items.pigling_ribs_tex
 70243	Buff	False	True	False	Barbecue traditionnel des Champs lugubres	Les compétences de soins dont vous faites l'objet restaurent $H_W_GOOD70233$COLOR_END de PV supplémentaires.	icon_items.pigling_ribs_tex
 70244	Buff	False	True	False	Ailes lugubres	L'endurance ne faiblit pas.	icon_items.pigling_ribs_tex
+70245	Buff	True	True	False	Salade inhabituelle enflammée des Terres libres	Vos PV maximums augmentent de $H_W_GOOD5 %$COLOR_END et vos PM maximums de $H_W_GOOD10 %$COLOR_END. Vous régénérez $H_W_GOOD1 %$COLOR_END de vos PM maximums toutes les $H_W_GOOD5$COLOR_END second1.	icon_items.fallfestival_rikanosalad_tex
+70246	Buff	False	True	False	Festin	Ceci confère les effets de l'agneau Bulgogi, de la salade inhabituelle de flammèches des Terres libres, des ailes lugubres et du barbecue traditionnel des Champs lugubres.	icon_items.pigling_ribs_tex
 70301	Buff	True	True	False	Célérité paisible	Augmente la vitesse de déplacement en combat de $H_W_GOOD2$COLOR_END. Cumulable jusqu'à trois fois.	icon_status.aura_of_wind_tex
 70302	Buff	True	True	False	Focalisation paisible	Augmente les dégâts infligés par les compétences de $H_W_GOOD20$COLOR_END.	icon_status.aura_of_damage_tex
 70303	Buff	True	True	False	Vigueur paisible	Augmente l'endurance maximum de $H_W_GOOD5$COLOR_END. Cumulable jusqu'à trois fois.	icon_status.aura_of_condition_tex
@@ -1212,6 +1230,7 @@
 100203	Buff	True	True	True	Position défensive IV	La constitution augmente de $H_W_GOOD25%$COLOR_END, l'équilibre de $H_W_GOOD30$COLOR_END et le taux de coups critiques de $H_W_GOOD15 %$COLOR_END quand vous attaquez des monstres. Vos attaques génèrent $H_W_GOOD120%$COLOR_END d'agressivité supplémentaire. Au combat, les attaques adverses ne peuvent pas vous repousser, hormis quelques attaques spéciales de certains monstres donnés.	icon_skills.ironwillb_tex
 100293	Buff	False	True	False	Lames doubles défensives (effet standard)	Aucune infobulle d'affaiblissement affichée (isShow=False). Si cette infobulle s'affiche, BTS requis !	icon_skills.twinswordsdefence_tex
 100294	Buff	True	True	False	Ténacité I	La ténacité vous permet de régénérer 5 % de vos PM.	icon_skills.twinswordsdefence_tex
+100295	Buff	False	True	False	Vent de tempêteⅠ	L'effet de Vent de tempêteⅠ réduit le temps de rechargement de Faux de 0,5 secondes.	icon_skills.twinswordsdefence_tex
 100296	Buff	False	True	True	Position défensive (chances de coups critiques accrues)	Les chances de coups critiques augmentent de 15 % face aux monstres (effet invisible)	icon_skills.ironwillb_tex
 100297	Buff	False	True	True			
 100298	Buff	False	True	True	Position défensive IV-2	Infobulle d'anomalie censée être invisible (isShow=False) Si cette infobulle s'affiche merci de signaler BTS	icon_skills.ironwillb_tex
@@ -1262,6 +1281,7 @@
 101104	Stun	True	False	False	Contre-attaque étourdissante X	Vous êtes étourdi et ne pouvez plus bouger.	icon_skills.reversalturningattack_tex
 101105	Stun	True	False	False	Contre-attaque étourdissante XI	Vous êtes étourdi et ne pouvez plus bouger.	icon_skills.reversalturningattack_tex
 101200	WeakeningEffect	True	False	False	Frappe combattive	Réduit la constitution de $H_W_BAD8%$COLOR_END.	icon_skills.aggravatingstrike_tex
+101210	WeakeningEffect	True	False	False	Frappe combattive	La constitution est réduite de $H_W_BAD10%$COLOR_END.	icon_skills.aggravatingstrike_tex
 101220	WeakeningEffect	True	False	False	Frappe combattive	Réduit l'endurance de $H_W_BAD8%$COLOR_END et la régénération de PV de $H_W_BAD30%$COLOR_END.	icon_skills.aggravatingstrike_tex
 101300	Buff	True	True	False	Coupe latérale	À chaque cumul, la vitesse d'attaque augmente de 0,9 %. L'effet peut être cumulé jusqu'à 13 fois.	icon_skills.dualrapidpiercing_tex
 101400	WeakeningEffect	True	False	False	Bond	Réduit la vitesse de déplacement de $H_W_BAD0,5$COLOR_END.	icon_skills.heavybite_tex
@@ -3244,6 +3264,9 @@
 3000019	Buff	True	True	True	Voyage aérien (Restauration de PV et PM)	Vous pouvez voler dans les zones où le vol est possible.<BR>Vos PV et PM maximums sont régénérés de 2 % par seconde. Les membres de votre groupe situés dans un rayon de 30 mètres bénéficient de l'effet Bourrasque du dragon.	icon_items.wings_of_fairy_tex
 3000020	Buff	False	True	True	Bourrasque du dragon	BTS	icon_skills.criticalupaura_tex
 3000021	Buff	True	True	True	Bourrasque du dragon	La Bourrasque du dragon augmente la vitesse de déplacement de tous types de montures de $H_W_GOOD10$COLOR_END.	icon_status.plusmove_tex
+3000022	Buff	True	True	True	Vol enflammé	Vous pouvez voler dans les zones où le vol est possible.<BR>1 % de vos PV et PM maximums sont régénérés par seconde. Vous êtes sous l'emprise de la $H_W_GOODReprise ardente$COLOR_END.	icon_items.wings_of_fairy_tex
+3000023	Buff	True	True	True	Vol flamboyant	Vous pouvez voler dans les zones où le vol est possible.<BR>2 % de vos PV et PM maximums sont régénérés par seconde. Vous êtes sous l'emprise de la $H_W_GOODReprise ardente$COLOR_END.	icon_items.wings_of_fairy_tex
+3000024	Buff	True	True	True	Reprise ardente	Vous ne pouvez pas profité de la $H_W_GOODBourrasque du dragon$COLOR_END.	icon_status.heat_tex
 4510001	Buff	False	False	False			
 4510002	WeakeningEffect	False	True	False			
 4510003	DamageOverTime	False	False	False			
@@ -3481,6 +3504,144 @@
 7777013	Buff	True	True	False	Fausse modestie	Vos sous-vêtements ne sont visibles que par vous.$BR $BRIls redeviennent invisibles après un délai prédéterminé.	icon_status.icon_yookduk00_ab_tex
 7777014	Buff	True	True	False	Fausse modestie	Vos sous-vêtements ne sont visibles que par vous.$BR $BRIls redeviennent invisibles après un délai prédéterminé.	icon_status.icon_yookduk00_ab_tex
 7777015	Buff	True	True	False	T.E.R.A TIME	La fièvre vous saisit ! Réduit temps de recharge de toutes les compétences de 20 %, excepté pour les compétences d'alliance. Augmente considérablement la régénération de PM.	icon_status.pluswill_tex
+7940000	Stun	False	True	True			
+7941001	Stun	True	False	False	Violente migraine	Le gardien des cavernes est confus après s'être cogné la tête contre un arbre.	icon_status.confuseup_tex
+7941002	WeakeningEffect	True	True	False	Intérêts du gardien des cavernes	Le gardien des cavernes vous dévisage. Il semble se préparer à lancer une attaque puissante.	icon_skills.througharrow_tex
+7941003	WeakeningEffect	False	True	False			
+7941004	Stun	False	False	False			
+7941005	Stun	False	False	False			
+7941006	WeakeningEffect	False	True	True			
+7941007	WeakeningEffect	False	True	True			
+7941008	WeakeningEffect	False	True	True			
+7941009	WeakeningEffect	False	True	True			
+7941010	WeakeningEffect	False	True	True			
+7941011	Buff	True	False	True	Peau robuste	Le gardien des cavernes s'enveloppe de sa peau blindée. Une fois qu'elle est détruite, même le gars le plus puissant ne se remet pas de peaux de bananes glissantes.	icon_status.balanceup_tex
+7941012	WeakeningEffect	False	True	False			
+7941013	Stun	False	False	False			
+7941014	Stun	True	False	False	Saignement	La chute vous a blessé. Vos PV chutent en continu.	icon_status.injuredbtdarkness_tex
+7941015	Stun	True	False	False	Facteur d'impact	Vous êtes sous le choc et ne pouvez plus bouger.	icon_status.confuseup_tex
+7941016	WeakeningEffect	False	True	False			
+7941017	WeakeningEffect	False	True	False			
+7941018	WeakeningEffect	False	True	True			
+7941019	WeakeningEffect	False	True	True			
+7941020	WeakeningEffect	False	True	True			
+7941021	Buff	True	True	True			
+7941022	DamageOverTime	True	False	False	Mucus collant	Votre corps est recouvert de mucus collant. Vous êtes incapable de vous déplacer.	icon_skills.curseofshackle_tex
+7941023	WeakeningEffect	False	True	True			
+7941024	WeakeningEffect	False	True	True			
+7941025	WeakeningEffect	False	True	True			
+7941026	Buff	True	True	True	Encouragements du singe : phase 1	Le petit singe encourage le gardien des cavernes. La puissance d'attaque et la vitesse d'attaque du gardien des cavernes augmentent.	icon_status.plusciriticalresist_tex
+7941027	Buff	True	True	True	Encouragements du singe : phase 2	Le petit singe encourage le gardien des cavernes. La puissance d'attaque et la vitesse d'attaque du gardien des cavernes augmentent.	icon_status.plusciriticalresist_tex
+7941028	Buff	True	True	True	Encouragements du singe : phase 3	Le petit singe encourage le gardien des cavernes. La puissance d'attaque et la vitesse d'attaque du gardien des cavernes augmentent.	icon_status.plusciriticalresist_tex
+7941029	WeakeningEffect	False	True	False			
+7941030	WeakeningEffect	True	True	False	Intérêts du singe	Le petit singe accroché à l'arbre vous dévisage. Il semble vouloir jeter les tranches de bananes.	icon_items.banana_tex
+7941031	WeakeningEffect	False	True	True			
+7941032	Stun	False	False	False			
+7941033	WeakeningEffect	False	True	False			
+7941034	WeakeningEffect	False	True	False			
+7941035	WeakeningEffect	False	True	False			
+7942001	WeakeningEffect	False	True	False			
+7942002	WeakeningEffect	True	True	True			
+7942003	WeakeningEffect	True	True	True			
+7942004	DamageOverTime	False	False	False			
+7942005	DamageOverTime	False	True	False			
+7942006	WeakeningEffect	True	True	False	Percée de mana	Lenim essaye de vous imprégner de mana pour invoquer quelque chose.	icon_status.minusfocus_tex
+7942007	WeakeningEffect	True	True	False	Percée de mana	Lenim essaye de vous imprégner de mana pour invoquer quelque chose.	icon_status.minusfocus_tex
+7942008	Stun	True	False	False			
+7942009	Stun	True	False	False			
+7942010	WeakeningEffect	False	True	False			
+7942011	WeakeningEffect	False	True	True			
+7942012	WeakeningEffect	False	True	True			
+7942013	WeakeningEffect	True	True	False			icon_items.cancel_lockon_potion_level_51_tex
+7942014	WeakeningEffect	False	True	False			
+7942015	Buff	True	True	False			
+7942016	WeakeningEffect	False	True	False			
+7942017	WeakeningEffect	False	True	True			
+7942018	WeakeningEffect	False	True	False			
+7942019	WeakeningEffect	False	True	False			
+7942020	WeakeningEffect	False	True	False			
+7942021	Stun	False	False	False			
+7942022	WeakeningEffect	False	True	False			
+7942023	WeakeningEffect	True	True	False			
+7942024	WeakeningEffect	True	True	False			
+7942025	WeakeningEffect	False	True	False			
+7942026	WeakeningEffect	False	True	False			
+7942027	WeakeningEffect	True	True	False			
+7942028	DamageOverTime	False	True	False			
+7942029	DamageOverTime	False	True	False			
+7942030	DamageOverTime	False	True	False			
+7942031	DamageOverTime	False	True	False			
+7942032	DamageOverTime	False	True	False			
+7942033	DamageOverTime	False	False	False			
+7942034	WeakeningEffect	False	True	True			
+7942035	WeakeningEffect	False	True	True			
+7942036	Stun	False	False	False			
+7942037	WeakeningEffect	True	True	True	Énergie rouge du minerai	L'énergie rouge du minerai vous enveloppe. Le rayon rouge ne peut pas vous blesser.	icon_status.immunedebuff_tex
+7942038	WeakeningEffect	True	True	True	Énergie bleue du minerai	L'énergie bleue du minerai vous enveloppe. Le rayon bleu ne peut pas vous blesser.	icon_status.immunedebuff_tex
+7942039	WeakeningEffect	True	True	True	Énergie blanche du minerai	L'énergie blanche du minerai vous enveloppe. Le rayon blanc ne peut pas vous blesser.	icon_status.immunedebuff_tex
+7942040	DamageOverTime	False	True	False			
+7942041	DamageOverTime	False	True	False			
+7942042	WeakeningEffect	False	True	False			
+7942043	WeakeningEffect	False	True	True			
+7942044	WeakeningEffect	False	True	True			
+7942045	WeakeningEffect	False	True	True			
+7942046	WeakeningEffect	False	True	True			
+7942047	WeakeningEffect	False	True	True			
+7942048	WeakeningEffect	False	True	True			
+7942049	WeakeningEffect	False	True	False			
+7942050	WeakeningEffect	False	True	True			
+7943001	WeakeningEffect	False	True	True			
+7943002	WeakeningEffect	False	True	True			
+7943003	WeakeningEffect	False	True	False			
+7943004	WeakeningEffect	False	True	False			
+7943005	WeakeningEffect	False	True	False			
+7943006	WeakeningEffect	False	True	False			
+7943007	WeakeningEffect	False	True	True			
+7943008	WeakeningEffect	False	True	True			
+7943009	WeakeningEffect	False	True	True			
+7943010	WeakeningEffect	False	True	True			
+7943011	WeakeningEffect	False	True	True			
+7943012	WeakeningEffect	False	True	False			
+7943013	WeakeningEffect	False	True	False			
+7943014	WeakeningEffect	False	True	True			
+7943015	WeakeningEffect	False	True	True			
+7943016	Buff	True	True	False			
+7943017	WeakeningEffect	False	True	False			
+7943018	DamageOverTime	False	True	True			
+7943019	DamageOverTime	False	True	False			
+7943020	DamageOverTime	False	True	True			
+7943021	WeakeningEffect	False	True	False			
+7943022	WeakeningEffect	False	True	True			
+7943023	WeakeningEffect	False	True	False			
+7943024	WeakeningEffect	False	True	False			
+7943025	WeakeningEffect	False	True	False			
+7943026	WeakeningEffect	False	True	False			
+7943027	WeakeningEffect	True	False	False			
+7943028	Buff	True	True	False	Marche hâtive : préparation	Manifestement, la vitesse de déplacement du gobelin va bientôt augmenter.	icon_status.plusmove_tex
+7943029	WeakeningEffect	False	True	False			
+7943030	WeakeningEffect	False	True	False			
+7943031	WeakeningEffect	False	True	True			
+7943032	WeakeningEffect	False	True	True			
+7943033	WeakeningEffect	False	True	True			
+7943034	Buff	True	True	True	Marche hâtive	Manifestement, la vitesse de déplacement du gobelin a fortement augmenté.	icon_status.plusmove_tex
+7943035	WeakeningEffect	False	True	True			
+7943036	WeakeningEffect	False	True	False			
+7943037	WeakeningEffect	False	True	True			
+7943038	WeakeningEffect	True	True	True			
+7943039	WeakeningEffect	True	True	False			
+7943040	WeakeningEffect	True	True	False	Infection : guérison impossible	Le gobelin vous a contaminé et vous ne pouvez pas vous soigner.	icon_status.poisondown_tex
+7943041	Stun	True	False	False			
+7943042	Stun	True	False	False	Infection : étourdissement	Le gobelin vous a contaminé et vous ne pouvez pas vous déplacer.	icon_status.confuseup_tex
+7943043	Stun	True	False	False			
+7943044	Stun	True	False	False			
+7943045	WeakeningEffect	True	True	True	Énergie froide	Une énergie froide vous enveloppe. Si l'énergie accumulée n'est pas réchauffée, vous risquez de subir des dégâts.	icon_status.icedamage_tex
+7943046	WeakeningEffect	True	True	True	Énergie chaude	Une énergie chaude vous enveloppe. Si l'énergie accumulée n'est pas refroidie, vous risquez de subir des dégâts.	icon_status.firedamage_tex
+7943047	WeakeningEffect	False	True	False			
+7943048	WeakeningEffect	False	True	False			
+7943049	WeakeningEffect	False	True	False			
+7943050	WeakeningEffect	False	True	False			
+7943051	WeakeningEffect	False	True	True			
+7943052	WeakeningEffect	False	True	True			
 8000000	Buff	True	True	False	Potion de chasse (5 heures)	Augmente la récompense en PEX pour les monstres tués de 30 % pendant 5 heures de jeu.	icon_items.f2p_xpbooster_tex
 8000001	Buff	True	True	False	Potion de chasse (10 heures)	Augmente la récompense en PEX pour les monstres tués de 30 % pendant 10 heures de jeu.	icon_items.f2p_xpbooster_tex
 8000002	Buff	True	True	False	Potion de chasse (30 heures)	Augmente la récompense en PEX pour les monstres tués de 30 % pendant 30 heures de jeu.	icon_items.f2p_xpbooster_tex
@@ -3649,6 +3810,147 @@
 9810017	WeakeningEffect	False	True	True	Vaisseau de Lakan	Abandon de leur corps à Lakan.	icon_status.cruel_slayer_3_tex
 9810018	Stun	False	False	False			
 9810019	WeakeningEffect	False	True	True			
+9940000	Stun	False	True	True			
+9940001	WeakeningEffect	True	False	False	Brûlure	Vous subissez des brûlures et perdez des PV en continu.	icon_status.minushp_tex
+9940002	WeakeningEffect	True	False	False	Givre	Vous subissez le givre. Votre vitesse de déplacement est ralentie.	icon_skills.freezingtheearth_tex
+9941001	Stun	True	False	False	Violente migraine	Le gardien des cavernes est confus après s'être cogné la tête contre un arbre.	icon_status.confuseup_tex
+9941002	WeakeningEffect	True	True	False	Intérêts du gardien des cavernes	Le gardien des cavernes vous dévisage. Il semble se préparer à lancer une attaque puissante.	icon_skills.througharrow_tex
+9941003	WeakeningEffect	False	True	False			
+9941004	Stun	False	False	False			
+9941005	Stun	False	False	False			
+9941006	WeakeningEffect	False	True	True			
+9941007	WeakeningEffect	False	True	True			
+9941008	WeakeningEffect	False	True	True			
+9941009	WeakeningEffect	False	True	True			
+9941010	WeakeningEffect	False	True	True			
+9941011	Buff	False	False	True	Peau robuste	Le gardien des cavernes s'enveloppe de sa peau blindée. Une fois qu'elle est détruite, même le gars le plus puissant ne se remet pas de peaux de bananes glissantes.	icon_status.balanceup_tex
+9941012	WeakeningEffect	False	True	False			
+9941013	Stun	False	False	False			
+9941014	Stun	True	False	False	Saignement	La chute vous a blessé. Vos PV chutent en continu.	icon_status.injuredbtdarkness_tex
+9941015	Stun	True	False	False	Facteur d'impact	Vous êtes sous le choc et ne pouvez plus bouger.	icon_status.confuseup_tex
+9941016	WeakeningEffect	False	True	False			
+9941017	WeakeningEffect	False	True	False			
+9941018	WeakeningEffect	False	True	True			
+9941019	WeakeningEffect	False	True	True			
+9941020	WeakeningEffect	False	True	True			
+9941021	Buff	True	True	True			
+9941022	DamageOverTime	True	False	False	Mucus collant	Votre corps est recouvert de mucus collant. Vous êtes incapable de vous déplacer.	icon_skills.curseofshackle_tex
+9941023	WeakeningEffect	False	True	True			
+9941024	WeakeningEffect	False	True	True			
+9941025	WeakeningEffect	False	True	True			
+9941026	Buff	True	True	True	Encouragements du singe : phase 1	Le petit singe encourage le gardien des cavernes. La puissance d'attaque et la vitesse d'attaque du gardien des cavernes augmentent.	icon_status.plusciriticalresist_tex
+9941027	Buff	True	True	True	Encouragements du singe : phase 2	Le petit singe encourage le gardien des cavernes. La puissance d'attaque et la vitesse d'attaque du gardien des cavernes augmentent.	icon_status.plusciriticalresist_tex
+9941028	Buff	True	True	True	Encouragements du singe : phase 3	Le petit singe encourage le gardien des cavernes. La puissance d'attaque et la vitesse d'attaque du gardien des cavernes augmentent.	icon_status.plusciriticalresist_tex
+9941029	WeakeningEffect	False	True	False			
+9941030	WeakeningEffect	True	True	False	Intérêts du singe	Le petit singe accroché à l'arbre vous dévisage. Il semble vouloir jeter les tranches de bananes.	icon_items.banana_tex
+9941031	WeakeningEffect	False	True	True			
+9941032	Stun	False	False	False			
+9941034	WeakeningEffect	False	True	False			
+9941035	WeakeningEffect	False	True	False			
+9942001	WeakeningEffect	False	True	False			
+9942002	WeakeningEffect	True	True	True			
+9942003	WeakeningEffect	True	True	True			
+9942004	DamageOverTime	False	False	False			
+9942005	DamageOverTime	False	True	False			
+9942006	WeakeningEffect	True	True	False	Percée de mana	Lenim essaye de vous imprégner de mana pour invoquer quelque chose.	icon_status.minusfocus_tex
+9942007	WeakeningEffect	True	True	False	Percée de mana	Lenim essaye de vous imprégner de mana pour invoquer quelque chose.	icon_status.minusfocus_tex
+9942008	Stun	True	False	False			
+9942009	Stun	True	False	False			
+9942010	WeakeningEffect	False	True	False			
+9942011	WeakeningEffect	False	True	True			
+9942012	WeakeningEffect	False	True	True			
+9942013	WeakeningEffect	True	True	False			icon_items.cancel_lockon_potion_level_51_tex
+9942014	WeakeningEffect	False	True	False			
+9942015	Buff	True	True	False			
+9942016	WeakeningEffect	False	True	False			
+9942017	WeakeningEffect	False	True	True			
+9942018	WeakeningEffect	False	True	False			
+9942019	WeakeningEffect	False	True	False			
+9942020	WeakeningEffect	False	True	False			
+9942021	Stun	False	False	False			
+9942022	WeakeningEffect	False	True	False			
+9942023	WeakeningEffect	True	True	False			
+9942024	WeakeningEffect	True	True	False			
+9942025	WeakeningEffect	False	True	False			
+9942026	WeakeningEffect	False	True	False			
+9942027	WeakeningEffect	True	True	False			
+9942028	DamageOverTime	False	True	False			
+9942029	DamageOverTime	False	True	False			
+9942030	DamageOverTime	False	True	False			
+9942031	DamageOverTime	False	True	False			
+9942032	DamageOverTime	False	True	False			
+9942033	DamageOverTime	False	False	False			
+9942034	WeakeningEffect	False	True	True			
+9942035	WeakeningEffect	False	True	True			
+9942036	Stun	False	False	False			
+9942037	WeakeningEffect	True	True	True	Énergie rouge du minerai	L'énergie rouge du minerai vous enveloppe. Le rayon rouge ne peut pas vous blesser.	icon_status.immunedebuff_tex
+9942038	WeakeningEffect	True	True	True	Énergie bleue du minerai	L'énergie bleue du minerai vous enveloppe. Le rayon bleu ne peut pas vous blesser.	icon_status.immunedebuff_tex
+9942039	WeakeningEffect	True	True	True	Énergie blanche du minerai	L'énergie blanche du minerai vous enveloppe. Le rayon blanc ne peut pas vous blesser.	icon_status.immunedebuff_tex
+9942040	DamageOverTime	False	True	False			
+9942041	DamageOverTime	False	True	False			
+9942042	WeakeningEffect	False	True	False			
+9942043	WeakeningEffect	False	True	True			
+9942044	WeakeningEffect	False	True	True			
+9942045	WeakeningEffect	False	True	True			
+9942046	WeakeningEffect	False	True	True			
+9942047	WeakeningEffect	False	True	True			
+9942048	WeakeningEffect	False	True	True			
+9942049	WeakeningEffect	False	True	False			
+9942050	WeakeningEffect	False	True	True			
+9942051	DamageOverTime	True	False	False	Électrocution	Vous avez subi une électrocution émanant de la tour de garde. Vous ne pouvez pas utiliser de compétence, votre vitesse de déplacement est réduite et vous perdez une faible quantité de PV en continu.	icon_status.paralyzestatus_tex
+9943001	WeakeningEffect	False	True	True			
+9943002	WeakeningEffect	False	True	True			
+9943003	WeakeningEffect	False	True	False			
+9943004	WeakeningEffect	False	True	False			
+9943005	WeakeningEffect	False	True	False			
+9943006	WeakeningEffect	False	True	False			
+9943007	WeakeningEffect	False	True	True			
+9943008	WeakeningEffect	False	True	True			
+9943009	WeakeningEffect	False	True	True			
+9943010	WeakeningEffect	False	True	True			
+9943011	WeakeningEffect	False	True	True			
+9943012	WeakeningEffect	False	True	False			
+9943013	WeakeningEffect	False	True	False			
+9943014	WeakeningEffect	False	True	True			
+9943015	WeakeningEffect	False	True	True			
+9943016	Buff	True	True	False			
+9943017	WeakeningEffect	False	True	False			
+9943018	DamageOverTime	False	True	True			
+9943019	DamageOverTime	False	True	False			
+9943020	DamageOverTime	False	True	True			
+9943021	WeakeningEffect	False	True	False			
+9943022	WeakeningEffect	False	True	True			
+9943023	WeakeningEffect	False	True	False			
+9943024	WeakeningEffect	False	True	False			
+9943025	WeakeningEffect	False	True	False			
+9943026	WeakeningEffect	False	True	False			
+9943027	WeakeningEffect	True	False	False			
+9943028	Buff	True	True	False	Marche hâtive : préparation	Manifestement, la vitesse de déplacement du gobelin va bientôt augmenter.	icon_status.plusmove_tex
+9943029	WeakeningEffect	False	True	False			
+9943030	WeakeningEffect	False	True	False			
+9943031	WeakeningEffect	False	True	True			
+9943032	WeakeningEffect	False	True	True			
+9943033	WeakeningEffect	False	True	True			
+9943034	Buff	True	True	True	Marche hâtive	Manifestement, la vitesse de déplacement du gobelin a fortement augmenté.	icon_status.plusmove_tex
+9943035	WeakeningEffect	False	True	True			
+9943036	WeakeningEffect	False	True	False			
+9943037	WeakeningEffect	False	True	True			
+9943038	WeakeningEffect	True	True	True			
+9943039	WeakeningEffect	False	True	False			
+9943040	WeakeningEffect	True	True	False	Infection : guérison impossible	Le gobelin vous a contaminé et vous ne pouvez pas vous soigner.	icon_status.poisondown_tex
+9943041	Stun	True	False	False			
+9943042	Stun	True	False	False	Infection : étourdissement	Le gobelin vous a contaminé et vous ne pouvez pas vous déplacer.	icon_status.confuseup_tex
+9943043	Stun	True	False	False			
+9943044	Stun	True	False	False			
+9943045	WeakeningEffect	True	True	True	Énergie froide	Une énergie froide vous enveloppe. Si l'énergie accumulée n'est pas réchauffée, vous risquez de subir des dégâts.	icon_status.icedamage_tex
+9943046	WeakeningEffect	True	True	True	Énergie chaude	Une énergie chaude vous enveloppe. Si l'énergie accumulée n'est pas refroidie, vous risquez de subir des dégâts.	icon_status.firedamage_tex
+9943047	WeakeningEffect	False	True	False			
+9943048	WeakeningEffect	False	True	False			
+9943049	WeakeningEffect	False	True	False			
+9943051	WeakeningEffect	False	True	True			
+9943052	WeakeningEffect	False	True	True			
+9943053	WeakeningEffect	False	True	True			
+9943054	WeakeningEffect	True	True	True	Charge magique menaçante	Syruk est sans défense et accumule du mana menaçant.	icon_status.heat_tex
 9999001	DamageOverTime	False	False	True			
 9999002	DamageOverTime	False	False	True			
 9999003	DamageOverTime	False	False	True			
@@ -3671,6 +3973,8 @@
 10151000	Buff	True	True	False	Enchaînement de danse des ombres	Vous pouvez utiliser Danse des ombres une seconde fois.	icon_status.instantleap_continuous_tex
 10151010	Buff	True	True	False	Aura ténébreuse	Vous récoltez les ombres autour de vous. Pendant la récolte, le temps de chargement de Double cisaille, Coup sinistre, Frappe pendulaire, Torrent de lames, Frappe déchirante, Etreinte fulgurante, Spirale funeste et Assommoir est réduit de 70 %.	icon_status.descentofdarkness_tex
 10151011	Buff	False	True	False	Aura ténébreuse	Le temps de rechargement de Double cisaille, Coup sinistre, Frappe pendulaire, Torrent de lames, Frappe déchirante, Étreinte fulgurante, Spirale funeste et Assommoir est réinitialisé.	icon_status.descentofdarkness_tex
+10151012	Buff	True	True	True	Renforcement d'aura ténébreuse	La vitesse d'attaque augmente de 5 % par coup porté sur des monstres. L'effet peut être cumulé jusqu'à 5 fois.	icon_skills.descentofdarkness_tex
+10151013	Buff	False	True	False			
 10151020	Buff	False	True	False	Enchaînez avec deux attaques normales	Bonus invisible. Si vous voyez ce bonus, merci de signaler ce bug.	icon_skills.comboattack2_tex
 10151021	Buff	False	True	False	Enchaînez avec trois attaques normales	Bonus invisible. Si vous voyez ce bonus, merci de signaler ce bug.	icon_skills.comboattack2_tex
 10151022	Buff	False	True	False	Enchaînez avec quatre attaques normales	Bonus invisible. Si vous voyez ce bonus, merci de signaler ce bug.	icon_skills.comboattack2_tex
@@ -3747,6 +4051,7 @@
 10152094	Buff	False	True	False			
 10152095	Buff	False	True	False			
 10152096	Buff	False	True	False	La Colère divine nécessite de réinitialiser le temps de rechargement.	Utiliser le Bombardement et réinitialiser le temps de rechargement.	
+10152097	Buff	False	True	False	Vengeance de Balder I	Vous êtes invulnérable pendant la durée de la Vengeance de Balder.	
 10152100	Buff	True	True	False	Volonté focalisée	La volonté peut être stockée pendant 60 secondes, après quoi elle chute rapidement. Infliger des dégâts à un ennemi relance ce compte à rebours.	icon_skills.energycharging_tex
 10152110	Buff	True	True	False	Barrière de secours	Une barrière de secours absorbe jusqu'à $H_W_GOOD27858$COLOR_END dégâts.	icon_skills.emergencyshield_tex
 10152111	Buff	True	True	False	Barrière de secours	Une barrière de secours absorbe jusqu'à $H_W_GOOD34900$COLOR_END dégâts.	icon_skills.emergencyshield_tex
@@ -3920,7 +4225,8 @@
 10155300	WeakeningEffect	False	True	False			
 10155310	Buff	False	True	False			
 10155320	Buff	False	True	True			
-10230001	Stun	True	False	False			icon_status.sealskill_tex
+10155400	Stun	True	False	False	Éclipse de lune	Impossible de bouger. L'effet prend fin en cas de renversement.	icon_skills.mooncatch_tex
+10230001	Stun	True	False	False	Impact ultrasonique	Vous ne pouvez pas utiliser de compétences tant que l'effet dure.$BRL'effet ne peut être levé.	icon_status.sealskill_tex
 15200001	Buff	True	True	False	Chemise de maille de Labatus	La chemise de maille de Labatus augmente votre défense et votre force de $H_W_GOOD20%$COLOR_END pendant $time. Cet effet ne prend pas fin quand vous mourez ou êtes touché par un effet de purification. Cet effet est automatiquement levé si vous quittez les lieux de la guerre de guilde.	icon_skills.emergencyshield_tex
 15200002	Buff	True	True	False	Feu de Dastan	Le Feu de Dastan augmente votre puissance d'attaque de $H_W_GOOD20%$COLOR_END pendant$time. Cet effet ne prend pas fin quand vous mourez ou êtes touché par un effet de purification. Cet effet est automatiquement levé si vous quittez les lieux de la guerre de guilde.	icon_items.campfire_tex
 15200003	Buff	True	True	False	Terreur de Kaitan	La Terreur de Kaitan augmente votre vitesse d'attaque et la probabilité de coups critiques de $H_W_GOOD10%$COLOR_END pendant $time. Votres vitesse de déplacement augmente de $H_W_GOOD20$COLOR_END. Cet effet ne prend pas fin quand vous mourez ou êtes touché par un effet de purification. Cet effet est automatiquement levé si vous quittez les lieux de la guerre de guilde.	icon_status.darkriftrage_tex
@@ -4507,6 +4813,73 @@
 71600004	DamageOverTime	True	False	False	Flamme de Darkan	Réduit les PV de $H_W_BAD5 %$COLOR_END du maximum toutes les $H_W_BAD2$COLOR_END second1.	icon_status.firedamage_tex
 71600010	DamageOverTime	True	False	False	Stigmates brûlants	Réduit les PV de $H_W_BAD5 %$COLOR_END du maximum toutes les $H_W_BAD1$COLOR_END second.	icon_status.firedamage_tex
 71600020	WeakeningEffect	False	False	False			
+73500000	Buff	False	True	False	BTS, si visible	Les dégâts ne sont pas divisés en cas d'attaque sur ce personnage joueur.	
+73500001	Buff	True	True	True	Air du ventilateur	L'air du ventilateur de la centrale d'aération du hangar vous empêche de subir des dégâts de chute.	icon_skills.rage_tex
+73500002	WeakeningEffect	False	True	True	BTS, si visible	Ce PNJ résiste aux dégâts et ripostes.	
+73500003	Buff	False	True	False	BTS, si visible	Ce personnage joueur est reconnu comme soigneur.	
+73500004	Buff	False	True	False	BTS, si visible	Ce personnage joueur est reconnu comme tank.	
+73500005	Buff	False	True	True	BTS, si visible	Ce personnage joueur est reconnu comme non-tank.	
+73500006	WeakeningEffect	False	True	True	BTS, si visible	Ce PNJ résiste aux dégâts, effets et ripostes.	
+73501000	Buff	True	True	False	Énergie protégée	Air-Hall protège tout afin de sécuriser la transmission de l'énergie à Ventaron. Vous ne subissez aucun dégât de chute pendant le passage d'Air-Hall.	icon_skills.rage_tex
+73501001	DamageOverTime	True	False	False	Interruption plasma	La bombe a retardement a explosé ! Vous perdez $H_W_BAD1$COLOR_END second$H_W_BAD4 %$COLOR_END de vos PV toutes les secondes.	icon_status.paralyzestatus_tex
+73501002	Buff	False	True	False	BTS, si visible	Ce personnage joueur vole ! Les compétences d'ondes de choc et de téléportation ne peuvent pas l'atteindre.	
+73501003	Buff	False	True	False	BTS, si visible	Ce PNJ ne peut utiliser aucune compétence d'explosion.	
+73501004	Stun	True	False	False	Abasourdi	L'attaque puissante de Ventaron vous a étourdi. Vous êtes incapable de vous déplacer.	icon_status.confuseup_tex
+73501005	WeakeningEffect	True	False	False	Choc plasma	La bombe a retardement a explosé ! L'onde de choc vous a touché. Votre vitesse de déplacement est réduite de $H_W_BAD50 %$COLOR_END et la distance de déplacement des compétences de $H_W_BAD30 %$COLOR_END. Cet effet ne peut pas être purifié.	icon_status.minusmove_tex
+73501006	Buff	False	True	False	BTS, si visible	Ce PNJ ne peut pas invoquer de bombe à retardement.	
+73501007	Buff	False	True	False	BTS, si visible	Les compétences d'extermination ne peuvent pas toucher le personnage joueur pendant la durée de l'effet.	
+73501008	WeakeningEffect	True	False	False	Dégâts nerveux	Vous ne pouvez pas utiliser de compétences suite à l'interruption plasma de Ventaron.	icon_status.vergoscurse_tex
+73501009	Buff	False	True	False	BTS, si visible	Ce PNJ peut actionner le ventilateur.	
+73501010	Buff	False	True	False	BTS, si visible	Ce PNJ ne peut pas déclencher d'explosions en série pendant la durée de l'effet.	
+73501011	Buff	False	True	False	BTS, si visible	Ce PNJ ne peut pas actionner le ventilateur pendant la durée de l'effet.	
+73501012	WeakeningEffect	True	True	False	Rappel	Votre corps est violemment déplacé suite à la puissante attaque magnétique de Ventaron.	icon_status.electriceffect3_tex
+73501013	Buff	False	True	False	BTS, si visible	La bombe à retardement est mise en place. Les schémas suivants ne sont pas déclenchés consécutivement : explosions en série, compétence d'extermination, ventilateur	
+73501014	Buff	False	True	False	BTS, si visible	Le ventilateur est activé. Les schémas suivants ne sont pas déclenchés consécutivement : compétence d'extermination	
+73501015	Buff	False	True	False	BTS, si visible	Le ventilateur est activé. Les schémas suivants ne sont pas déclenchés consécutivement : bombe à retardement	
+73501016	Buff	False	True	False	BTS, si visible	Effet pour l'obtention de l'exploit "Hangar du RK-9 : utiliser la centrale d'aspiration des gaz résiduels"	
+73501017	Buff	False	True	False	BTS, si visible	Ceci empêche les dégâts répétés de la centrale d'aspiration des gaz résiduels.	
+73501018	Buff	False	True	False	BTS, si visible	Un effet obtenu via l'exploit "supprimer 100 bombes à retardement".	
+73501019	Buff	False	True	True	BTS, si visible	Un PNJ d'agressivité invisible peut être attribué pour condition.	
+73502000	DamageOverTime	True	False	False	Choc électrique	Un courant électrique puissant vous affecte et chaque accumulation vous fait perdre $H_W_BAD6 %$COLOR_END de vos PV toutes les $H_W_BAD2$COLOR_END second1. L'effet est cumulable jusqu'à 12 fois.	icon_skills.electricshock_tex
+73502001	WeakeningEffect	False	True	True	BTS, si visible	Ce PNJ résiste aux dégâts, ripostes et effets.	
+73502002	Buff	False	True	True	BTS, si visible	Au moment de l'explosion électrique, ce PNJ commence par lancer une attaque électromagnétique dirigée.	
+73502003	Buff	False	True	True	BTS, si visible	Au moment de l'explosion électrique, ce PNJ commence par lancer une explosion de mêlée.	
+73502004	Buff	False	True	False	BTS, si visible	La circulation des lames de scie a touché ce personnage joueur. Hexapleion peut déclencher une attaque enchaînée.	
+73502005	WeakeningEffect	True	False	False	Choc électrique	Le puissant courant d'Hexapleion vous a mis en état de choc. Vous ne pouvez pas utiliser de compétence.	icon_skills.electricshock2_tex
+73502006	Buff	False	True	False	BTS, si visible	Ce PNJ est assuré d'attaque une fois le temps de rechargement écoulé.	
+73502007	WeakeningEffect	False	True	True	BTS, si visible	Un effet qui affiche l'effet de ce PNJ.	
+73503000	Buff	False	True	False	BTS, si visible	Ce PNJ ne peut pas utiliser d'onde de choc du clair de lune pendant la durée de l'effet.	
+73503001	Stun	True	False	False	Abasourdi	L'attaque de RK-9 vous a étourdi et immobilisé.	icon_status.confuseup_tex
+73503002	Buff	False	True	False	BTS, si visible	Ce PNJ ne peut actuellement pas utiliser d'onde de choc du clair de lune.	
+73503003	Buff	False	True	False	BTS, si visible	Ce PNJ ne peut pas invoquer la reconnaissance d'organismes pendant la durée de l'effet.	
+73503004	Buff	False	True	False	BTS, si visible	Ce PNJ ne peut actuellement pas invoquer la reconnaissance d'organismes.	
+73503005	Buff	False	True	True	BTS, si visible	Ce PNJ peut actuellement attribuer la condition d'utilisation du "protocole d'analyse thermique avancé" au boss.	
+73503006	Buff	False	True	True	BTS, si visible	Ce PNJ peut actuellement attribuer la condition d'utilisation du "protocole d'analyse thermique avancé" au boss dans l'ordre habituel.	
+73503007	Buff	False	True	True	BTS, si visible	Ce PNJ peut actuellement attribuer la condition d'utilisation du "protocole d'analyse thermique avancé" au boss dans l'ordre inversé.	
+73503008	Buff	False	True	True	BTS, si visible	Le plastron de ce PNJ est actuellement détruit. Ceci entraîne des dysfonctionnements répétés.	
+73503009	DamageOverTime	True	True	False	Impact laser	Le laser ultra-performant vous inflige des dégâts répétés. Vous perdez $H_W_BAD2$COLOR_END second1$H_W_BAD6 %$COLOR_END de vos PV toutes les secondes. Cet effet ne peut pas être purifié.	icon_status.fullelectriceffect_tex
+73503100	Buff	False	True	False	BTS, si visible	Ce PNJ ne peut actuellement pas utiliser le protocole d'analyse thermique.	
+73503101	Buff	False	True	True	BTS, si visible	Ce PNJ rejoint la zone de combat de mêlée en premier, conformément au protocole d'analyse thermique.	
+73503102	Buff	False	True	True	BTS, si visible	Ce PNJ rejoint la zone de combat à distance en premier, conformément au protocole d'analyse thermique.	
+73503103	Buff	False	True	True	BTS, si visible	Ce PNJ rejoint la zone complète en premier, conformément au protocole d'analyse thermique.	
+73503104	Buff	False	True	True	BTS, si visible	Ce PNJ rejoint la zone de combat de mêlée en deuxième, conformément au protocole d'analyse thermique.	
+73503105	Buff	False	True	True	BTS, si visible	Ce PNJ rejoint la zone de combat à distance en deuxième, conformément au protocole d'analyse thermique.	
+73503106	Buff	False	True	True	BTS, si visible	Ce PNJ rejoint la zone complète en deuxième, conformément au protocole d'analyse thermique.	
+73503107	Buff	False	True	True	BTS, si visible	Le plastron de ce PNJ n'a pas été détruit. Il va neutraliser les intrus à l'aide du système normal.	
+73503108	Buff	True	True	True	BTS, si visible	Ce PNJ déclenche le protocole d'analyse thermique.	
+73503109	Buff	True	True	True	BTS, si visible	Ce PNJ déclenche le protocole d'analyse thermique dans l'ordre inversé.	
+73503200	Buff	False	True	False	BTS, si visible	Ce PNJ ne peut actuellement pas utiliser la compétence "petite grenade" sur les cibles distantes.	
+73503201	Buff	False	True	False	BTS, si visible	Ce PNJ ne peut actuellement pas utiliser la compétence "petite grenade" sur les cibles de résurrection.	
+73503300	Buff	False	True	True	BTS, si visible	Ce PNJ peut déclencher le protocole de protection.	
+73503301	Buff	True	True	True	Protocole déclenché : protection	Le système de RK-9 a reconnu le danger et activé le protocole de protection. Une fois déclenché, le protocole de protection élimine tous les intrus.	icon_skills.emergencyshield_tex
+73503302	Buff	False	True	False	BTS, si visible	Le système de ce PNJ est momentanément désactivé en raison de dégâts excessifs pendant l'exécution du protocole de protection. Il est incapable d'agir pendant 5 000 ms.	
+73503303	Buff	False	True	False	BTS, si visible	Une erreur système est survenue chez ce PNJ pendant l'exécution du protocole de protection. La plaque de protection de l'éclat de sang est affaiblie pendant 20 000 ms. Des dégâts excessifs peuvent même la briser.	
+73503400	Buff	False	True	False	BTS, si visible	Ce PNJ ne peut pas déclencher le protocole de protection pendant la durée de l'effet.	
+73503401	Buff	True	True	True	Protocole déclenché : protection	Le système de RK-9 a reconnu le danger et activé le protocole de protection. Une fois déclenché, le protocole de protection élimine tous les intrus.	icon_skills.emergencyshield_tex
+73503402	Buff	False	True	False	BTS, si visible	Le système de ce PNJ est momentanément désactivé en raison de dégâts excessifs pendant l'exécution du protocole de protection. Il est incapable d'agir pendant 5 000 ms.	
+73503403	WeakeningEffect	False	True	False	BTS, si visible	Ce PNJ résiste aux dégâts, effets et ripostes.	
+73504000	WeakeningEffect	True	True	True	Champ magnétique puissant	L'influence du champ magnétique puissant empêche l'utilisation des compétences.	icon_status.sealskill_tex
+73504001	WeakeningEffect	True	True	False	Choc électrique	Vous êtes en état de choc et ne pouvez pas bouger car l'appareil rotatif du champ magnétique a été touché.	icon_skills.excesselectron_tex
 74300002	DamageOverTime	True	True	False	Brouillard tullegeais	Augmente fortement la vitesse de déplacement dans le brouillard.	icon_status.darkeffect_tex
 74300003	Buff	True	True	True	Appétit aiguisé	Augmente la puissance de $H_W_GOOD50%$COLOR_END.	icon_status.minushp_tex
 74300012	WeakeningEffect	True	True	False	Assemblage du puzzle : rouge	Activez la pièce rouge du puzzle dans l'ordre indiqué par les chiffres de l'icône ou vous subissez une mort imminente.	icon_status.battlecommand03_tex
@@ -4735,6 +5108,82 @@
 91600036	DamageOverTime	False	False	False			
 91600037	DamageOverTime	False	False	False			icon_status.cruel_slayer_3_tex
 91600038	Buff	False	True	False	Pylône d'Aeonalis régénéré	Anomalie de restitution de PV des Pylônes d'Aeonalis	icon_status.aura_of_regeneration_hp_tex
+93500000	Buff	False	True	False	BTS, si visible	Les dégâts ne sont pas divisés en cas d'attaque sur ce personnage joueur.	
+93500001	Buff	False	True	False	BTS, si visible	L'air du ventilateur de la centrale d'aération du hangar vous fait subir des dégâts de chute supplémentaires.	
+93500002	WeakeningEffect	False	True	True	BTS, si visible	Ce PNJ résiste aux dégâts et ripostes.	
+93500003	Buff	False	True	False	BTS, si visible	Ce personnage joueur est reconnu comme soigneur.	
+93500004	Buff	False	True	False	BTS, si visible	Ce personnage joueur est reconnu comme tank.	
+93500005	Buff	False	True	True	BTS, si visible	Ce personnage joueur est reconnu comme non-tank.	
+93500006	WeakeningEffect	False	True	True	BTS, si visible	Ce PNJ résiste aux dégâts, effets et ripostes.	
+93501000	Buff	True	True	False	Énergie protégée	Air-Hall protège tout afin de sécuriser la transmission de l'énergie à Ventaron. Vous ne subissez aucun dégât de chute pendant le passage d'Air-Hall.	icon_skills.rage_tex
+93501001	DamageOverTime	True	True	False	Interruption plasma	La bombe a retardement a explosé ! Vous perdez $H_W_BAD8 %$COLOR_END de vos PV toutes les $H_W_BAD1$COLOR_END second. Cet effet ne peut pas être purifié.	icon_status.paralyzestatus_tex
+93501002	Buff	False	True	False	BTS, si visible	Ce personnage joueur vole ! Les compétences d'ondes de choc et de téléportation ne peuvent pas l'atteindre.	
+93501003	Buff	False	True	False	BTS, si visible	Ce PNJ ne peut utiliser aucune compétence d'explosion.	
+93501004	Stun	True	False	False	Abasourdi	L'attaque puissante de Ventaron vous a étourdi. Vous êtes incapable de vous déplacer.	icon_status.confuseup_tex
+93501005	WeakeningEffect	True	True	False	Choc plasma	La bombe a retardement a explosé ! L'onde de choc vous a touché. Votre vitesse de déplacement est réduite de $H_W_BAD50 %$COLOR_END et la distance de déplacement des compétences de $H_W_BAD30 %$COLOR_END. Cet effet ne peut pas être purifié.	icon_status.minusmove_tex
+93501006	Buff	False	True	False	BTS, si visible	Ce PNJ ne peut pas invoquer de bombe à retardement.	
+93501007	Buff	False	True	False	BTS, si visible	Les compétences d'extermination ne peuvent pas toucher le personnage joueur pendant la durée de l'effet.	
+93501008	WeakeningEffect	True	True	False	Dégâts nerveux	Vous ne pouvez pas utiliser de compétences suite à l'interruption plasma de Ventaron.	icon_status.vergoscurse_tex
+93501009	Buff	False	True	False	BTS, si visible	Ce PNJ peut actionner le ventilateur.	
+93501010	Buff	False	True	False	BTS, si visible	Ce PNJ ne peut pas déclencher d'explosions en série pendant la durée de l'effet.	
+93501011	Buff	False	True	False	BTS, si visible	Ce PNJ ne peut pas actionner le ventilateur pendant la durée de l'effet.	
+93501012	WeakeningEffect	True	True	False	Rappel	Votre corps est violemment déplacé suite à la puissante attaque magnétique de Ventaron.	icon_status.electriceffect3_tex
+93501013	Buff	False	True	False	BTS, si visible	La bombe à retardement est mise en place. Les schémas suivants ne sont pas déclenchés consécutivement : explosions en série, compétence d'extermination, ventilateur	
+93501014	Buff	False	True	False	BTS, si visible	Le ventilateur est activé. Les schémas suivants ne sont pas déclenchés consécutivement : compétence d'extermination	
+93501015	Buff	False	True	False	BTS, si visible	Le ventilateur est activé. Les schémas suivants ne sont pas déclenchés consécutivement : bombe à retardement	
+93501016	Buff	False	True	False	BTS, si visible	Ce personnage joueur est immunisé contre tous les types de dégâts.	
+93501017	Buff	False	True	False	BTS, si visible	Ceci empêche les dégâts répétés de la centrale d'aspiration des gaz résiduels.	
+93501018	Buff	False	True	False	BTS, si visible	Un effet obtenu via l'exploit "supprimer 100 bombes à retardement".	
+93501019	Buff	False	True	True	BTS, si visible	Un PNJ d'agressivité invisible peut être attribué pour condition.	
+93501020	Buff	False	True	False	BTS, si visible	Ce personnage joueur a utilisé la centrale d'aspiration. Vous ne subissez aucun dégât de chute pendant 1 seconde pour parer au BTS 159600.	
+93502000	DamageOverTime	True	False	False	Choc électrique	Un courant électrique puissant vous affecte et chaque accumulation vous fait perdre $H_W_BAD10 %$COLOR_END de vos PV toutes les $H_W_BAD2$COLOR_END second1. L'effet est cumulable jusqu'à 12 fois.	icon_skills.electricshock_tex
+93502001	WeakeningEffect	False	True	True	BTS, si visible	Ce PNJ résiste aux dégâts, ripostes et effets.	
+93502002	Buff	False	True	True	BTS, si visible	Au moment de l'explosion électrique, ce PNJ commence par lancer une attaque électromagnétique dirigée.	
+93502003	Buff	False	True	True	BTS, si visible	Au moment de l'explosion électrique, ce PNJ commence par lancer une explosion de mêlée.	
+93502004	Buff	False	True	False	BTS, si visible	La circulation des lames de scie a touché ce personnage joueur. Hexapleion peut déclencher une attaque enchaînée.	
+93502005	WeakeningEffect	True	False	False	Choc électrique	Le puissant courant d'Hexapleion vous a mis en état de choc. Vous ne pouvez pas utiliser de compétence.	icon_skills.electricshock2_tex
+93502006	Buff	False	True	False	BTS, si visible	Ce PNJ est assuré d'attaque une fois le temps de rechargement écoulé.	
+93502007	WeakeningEffect	False	True	True	BTS, si visible	Un effet qui affiche l'effet de ce PNJ.	
+93502008	Buff	False	True	False	BTS, si visible	Un effet que vous obtenez pour n'avoir pas subi de choc électrique.	
+93502009	Buff	False	True	True	BTS, si visible	Un effet qui empêche l'obtention de 93502008 suite au choc électrique que vous avez subi.	
+93503000	Buff	False	True	False	BTS, si visible	Ce PNJ ne peut pas utiliser d'onde de choc du clair de lune pendant la durée de l'effet.	
+93503001	Stun	True	False	False	Abasourdi	L'attaque de RK-9 vous a étourdi et immobilisé.	icon_status.confuseup_tex
+93503002	Buff	False	True	False	BTS, si visible	Ce PNJ ne peut actuellement pas utiliser d'onde de choc du clair de lune.	
+93503003	Buff	False	True	False	BTS, si visible	Ce PNJ ne peut pas invoquer la reconnaissance d'organismes pendant la durée de l'effet.	
+93503004	Buff	False	True	False	BTS, si visible	Ce PNJ ne peut actuellement pas invoquer la reconnaissance d'organismes.	
+93503005	Buff	False	True	True	BTS, si visible	Ce PNJ peut actuellement attribuer la condition d'utilisation du "protocole d'analyse thermique avancé" au boss.	
+93503006	Buff	False	True	True	BTS, si visible	Ce PNJ peut actuellement attribuer la condition d'utilisation du "protocole d'analyse thermique avancé" au boss dans l'ordre habituel.	
+93503007	Buff	False	True	True	BTS, si visible	Ce PNJ peut actuellement attribuer la condition d'utilisation du "protocole d'analyse thermique avancé" au boss dans l'ordre inversé.	
+93503008	Buff	False	True	True	BTS, si visible	Le plastron de ce PNJ est actuellement détruit. Ceci entraîne des dysfonctionnements répétés.	
+93503009	DamageOverTime	True	True	False	Impact laser	Le laser ultra-performant vous inflige des dégâts répétés. Vous perdez $H_W_BAD10 %$COLOR_END de vos PV toutes les $H_W_BAD2$COLOR_END second1. Cet effet ne peut pas être purifié.	icon_status.fullelectriceffect_tex
+93503010	Buff	False	True	False	BTS, si visible	Ce PNJ ne peut pas utiliser le protocole d'analyse thermique pendant la durée de l'effet.	
+93503011	Buff	False	True	False	BTS, si visible	Ce PNJ ne peut pas modifier les paramètres système de RK-9.	
+93503100	Buff	False	True	False	BTS, si visible	Ce PNJ ne peut actuellement pas utiliser le protocole d'analyse thermique.	
+93503101	Buff	False	True	True	BTS, si visible	Ce PNJ rejoint la zone de combat de mêlée en premier, conformément au protocole d'analyse thermique.	
+93503102	Buff	False	True	True	BTS, si visible	Ce PNJ rejoint la zone de combat à distance en premier, conformément au protocole d'analyse thermique.	
+93503103	Buff	False	True	True	BTS, si visible	Ce PNJ rejoint la zone complète en premier, conformément au protocole d'analyse thermique.	
+93503104	Buff	False	True	True	BTS, si visible	Ce PNJ rejoint la zone de combat de mêlée en deuxième, conformément au protocole d'analyse thermique.	
+93503105	Buff	False	True	True	BTS, si visible	Ce PNJ rejoint la zone de combat à distance en deuxième, conformément au protocole d'analyse thermique.	
+93503106	Buff	False	True	True	BTS, si visible	Ce PNJ rejoint la zone complète en deuxième, conformément au protocole d'analyse thermique.	
+93503107	Buff	False	True	True	BTS, si visible	Le plastron de ce PNJ n'a pas été détruit. Il va neutraliser les intrus à l'aide du système normal.	
+93503108	Buff	False	True	True	BTS, si visible	Ce PNJ déclenche le protocole d'analyse thermique.	icon_status.cruel_slayer_2_tex
+93503109	Buff	False	True	True	BTS, si visible	Ce PNJ déclenche le protocole d'analyse thermique dans l'ordre inversé.	icon_status.cruel_slayer_3_tex
+93503200	Buff	False	True	False	BTS, si visible	Ce PNJ ne peut actuellement pas utiliser la compétence "petite grenade" sur les cibles distantes.	
+93503201	Buff	False	True	False	BTS, si visible	Ce PNJ ne peut actuellement pas utiliser la compétence "petite grenade" sur les cibles de résurrection.	
+93503300	Buff	False	True	True	BTS, si visible	Ce PNJ peut déclencher le protocole de protection.	
+93503301	Buff	True	True	True	Protocole déclenché : protection	Le système de RK-9 a reconnu le danger et activé le protocole de protection. Une fois déclenché, le protocole de protection élimine tous les intrus.	icon_skills.emergencyshield_tex
+93503302	Buff	False	True	False	BTS, si visible	Le système de ce PNJ est momentanément désactivé en raison de dégâts excessifs pendant l'exécution du protocole de protection. Il est incapable d'agir pendant 5 000 ms.	
+93503303	Buff	False	True	False	BTS, si visible	Une erreur système est survenue chez ce PNJ pendant l'exécution du protocole de protection. La plaque de protection de l'éclat de sang est affaiblie pendant 20 000 ms. Des dégâts excessifs peuvent même la briser.	
+93503304	Buff	True	True	True	Système de protection d'urgence	Le système de RK-9 a détecté d'importants dégâts et activé le système de protection d'urgence. La défense et la puissance d'attaque de RK-9 augmentent.	icon_status.dimensionguard_tex
+93503400	Buff	False	True	False	BTS, si visible	Ce PNJ ne peut pas déclencher le protocole de protection pendant la durée de l'effet.	
+93503401	Buff	True	True	True	Protocole déclenché : protection	Le système de RK-9 a reconnu le danger et activé le protocole de protection. Une fois déclenché, le protocole de protection élimine tous les intrus.	icon_skills.emergencyshield_tex
+93503402	Buff	False	True	False	BTS, si visible	Le système de ce PNJ est momentanément désactivé en raison de dégâts excessifs pendant l'exécution du protocole de protection. Il est incapable d'agir pendant 5 000 ms.	
+93503500	Buff	False	True	False	BTS, si visible	L'explosion de mêlée n'a pas été utilisée sur le système de radar.	
+93503501	Buff	False	True	False	BTS, si visible	Éliminer 1 fois en mode normal	
+93503502	Buff	False	True	False	BTS, si visible	Éliminer 1 fois en mode difficile	
+93503503	Buff	False	True	False	BTS, si visible	Éliminer 77 fois en mode difficile	
+93504000	WeakeningEffect	True	True	True	Champ magnétique puissant	L'influence du champ magnétique puissant empêche l'utilisation des compétences.	icon_status.sealskill_tex
+93504001	WeakeningEffect	True	True	False	Choc électrique	Vous êtes en état de choc et ne pouvez pas bouger car l'appareil rotatif du champ magnétique a été touché.	icon_skills.excesselectron_tex
 97000001	WeakeningEffect	True	False	True	Bâfrer	Des Bébés araignées affamées sont à vos trousses.	icon_status.curse_tex
 97000002	WeakeningEffect	True	True	True	Satiété	Le ventre est repu, il est donc temps de prendre une pause.	icon_status.sleepstatus_tex
 97000003	WeakeningEffect	True	True	False	Le venin puissant du Bébé araignée	Un Bébé araignée vous a empoisonné et vous perdez donc $H_W_BAD10 %$COLOR_END de votre total de PV toutes les $H_W_BAD0$COLOR_END second1.	icon_status.diseasedown_tex
@@ -4895,7 +5344,7 @@
 98000104	Buff	True	True	True	Chaîne d'attaque III	Augmente les dégâts de compétence de $H_W_GOOD10%$COLOR_END. Réduit les dégâts subis de $H_W_GOOD10%$COLOR_END. Augmente la vitesse d'attaque de $H_W_GOOD4%$COLOR_END.	
 98000105	Buff	True	True	True	Chaîne de récupération III	Augmente les dégâts de compétence de $H_W_GOOD10%$COLOR_END. Réduit les dégâts subis de $H_W_GOOD10%$COLOR_END. Augmente la vitesse d'attaque de $H_W_GOOD4%$COLOR_END.	
 98000106	WeakeningEffect	True	False	False	Glyphe d'affaiblissement	La constitution est réduite de $H_W_BAD10%$COLOR_END.	icon_crest.crestactivedefencedown_tex
-98000107	Buff	True	True	False	Étoiles énergétiques IV	La puissance augmente de $H_W_GOOD40$COLOR_END et la vitesse d'attaque de $H_W_GOOD8$COLOR_END.	icon_skills.divinelightning_tex
+98000107	Buff	True	True	False	Étoiles énergétiques IV	La puissance augmente de $H_W_GOOD48$COLOR_END et la vitesse d'attaque de $H_W_GOOD9,6$COLOR_END.	icon_skills.divinelightning_tex
 98000108	Buff	True	True	False	Glyphe d'interdiction	La constitution augmente de $H_W_GOOD10%$COLOR_END.	icon_crest.crestactivedefenceup_tex
 98000109	Buff	True	True	False	Bénédiction d'Arun III	La vitesse de déplacement augmente de $H_W_GOOD10$COLOR_END et la puissance de $H_W_GOOD25$COLOR_END.	icon_skills.attackup_tex
 98000110	Buff	True	True	False	Bénédiction de Shara V	La bénédiction de Shara régénère des PV toutes les $H_W_GOOD2 secondes$COLOR_END et augmente la constitution de 11 et la résistance de 5.	icon_skills.agilitybless_tex
@@ -5366,6 +5815,7 @@
 81000002	Buff	True	True	False	+30 PE-PEX	Augmente la quantité de PE-PEX de $H_W_GOOD30%$COLOR_END.	icon_items.ep_grow30_tex
 81000003	Buff	True	True	False	+50 PE-PEX	Augmente la quantité de PE-PEX de $H_W_GOOD50%$COLOR_END.	icon_items.ep_grow50_tex
 81000004	Buff	True	True	False	+100 PE-PEX	Augmente la quantité de PE-PEX de $H_W_GOOD100%$COLOR_END.	icon_items.ep_grow100_tex
+81000005	Buff	False	True	True			icon_items.ep_grow30_tex
 81010101	Buff	True	True	False	Réduction des dégâts	Dégâts réduits. L'effet prend fin quand un combat commence.	icon_ep.ep_defense_wellup_tex
 81010102	Buff	True	True	False	Réduction des dégâts	Dégâts réduits. L'effet prend fin quand un combat commence.	icon_ep.ep_defense_wellup_tex
 81010103	Buff	True	True	False	Réduction des dégâts	Dégâts réduits. L'effet prend fin quand un combat commence.	icon_ep.ep_defense_wellup_tex
@@ -6460,6 +6910,8 @@
 5020000	Buff	True	True	False	Bénédiction d'enchantement majeure	Vos probabilités d'enchantement sont considérablement accrues. S'applique sur les objets de tout ordre, jusqu'au niveau d'enchantement +12.	icon_items.parts_heavyarmorc5_tex
 5020001	Buff	True	True	False	Bénédiction d'enchantement puissante	Vos probabilités d'enchantement sont considérablement accrues. S'applique sur les objets de tout ordre, jusqu'au niveau d'enchantement +12.	icon_items.parts_heavyarmorc5_tex
 5020002	Buff	True	True	False	Bénédiction d'enchantement considérable	Vos probabilités d'enchantement sont considérablement accrues. S'applique sur les objets de tout ordre, jusqu'au niveau d'enchantement +12.	icon_items.parts_heavyarmorc5_tex
+5020003	Buff	True	True	True	Lien de cristal total (club TERA)	Un sort protecteur qui empêche la destruction de tous les cristaux tant que vous êtes membre du club TERA.	icon_items.q_closedspace_stone_05_tex
+5020004	Buff	True	True	True	Expert en fabrication (club TERA)	La vitesse de fabrication de tous les équipements augmente de $H_W_GOOD50%$COLOR_END tant que vous êtes membre du club TERA.	icon_items.artisan_lamp_tex
 14400001	Buff	True	True	False	Emblème du succès	Accorde les effets suivants : $BR $BR Restaure $H_W_GOOD1 %$COLOR_END du total de PV toutes les secondes$BRAugmente le taux de butin durant la chasse aux monstres de $H_W_GOOD100 %$COLOR_END	icon_items.parts_magicweaponc15_tex
 14400002	Buff	True	True	False	Souvenir glorieux	Octroie les effets suivants.$BR $BR Augmente le total de PV de $H_W_GOOD7&nbsp;&nbsp;%$COLOR_END $BR Augmente la constitution de $H_W_GOOD20&nbsp;%$COLOR_END$BR Augmente la vitesse d'attaque de $H_W_GOOD15&nbsp;%$COLOR_END$BR Augmente les dégâts de compétence de $H_W_GOOD20&nbsp;%$COLOR_END$BR Empêche les cristaux de se briser $H_W_GOOD1$COLOR_END fois$BRAugmente la vitesse de déplacement de $H_W_GOOD7%$COLOR_END.	icon_items.parts_lightweaponc9_tex
 14400003	Buff	True	True	False	Sceau de la flamme inextinguible	Accorde les effets suivants :$BR $BR Augmente le total de PV de $H_W_GOOD7 %$COLOR_END$BR Augmente la constitution de $H_W_GOOD20 %$COLOR_END$BR Augmente la vitesse de déplacement au combat de $H_W_GOOD10$COLOR_END$BR Augmente la vitesse d'attaque de $H_W_GOOD15 %$COLOR_END$BRRestaure $H_W_GOOD1 %$COLOR_END du total de PV toutes les secondes$BR Augmente les dégâts de compétence de $H_W_GOOD20 %$COLOR_END$BR Empêche les cristaux de se briser $H_W_GOOD1$COLOR_ENDfois$BR Augmente le taux de butin durant la chasse aux monstres de $H_W_GOOD100 %$COLOR_END$BRAugmente la vitesse de déplacement de $H_W_GOOD7%$COLOR_END.	icon_items.parts_magicweaponc6_tex

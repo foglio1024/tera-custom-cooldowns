@@ -30,13 +30,14 @@
 38	Buff	False	True	False			
 39	Buff	True	True	True	Der Ruf des Krieges (Internetcafé)	Increases Attack Power, Attack Speed and Recovery ability by 2%. The abnormality while playing from PC cafes.	icon_status.plusecritical_tex
 40	Buff	True	True	True	Balders Segen	Erhöht Eure Sammelfähigkeiten um 30 und verkürzt Eure Sammel- und Herstellungszeit.	icon_items.artisanall_up_tex
-41	Buff	True	True	False	Baharrs Segen	Erhöht die endgültige Erfolgsrate beim Verzaubern um einen geringen Wert. (Wirkt nicht auf Apexverzauberung und Verzauberung der gleichen Ausrüstung)	icon_items.parts_heavyarmorc5_tex
-42	Buff	True	True	False	Gesegneter Baharrs Segen	Erhöht die endgültige Erfolgsrate beim Verzaubern um einen geringen Wert. (Wirkt nicht auf Apexverzauberung und Verzauberung der gleichen Ausrüstung)	icon_items.parts_heavyarmorc5_tex
-43	Buff	True	True	False	Verehrter Baharrs Segen	Erhöht die endgültige Erfolgsrate beim Verzaubern um einen geringen Wert. (Wirkt nicht auf Apexverzauberung und Verzauberung der gleichen Ausrüstung)	icon_items.parts_heavyarmorc5_tex
-44	Buff	True	True	False	Baharrs Segen	Erhöht die endgültige Erfolgsrate beim Verzaubern um einen geringen Wert. (Wirkt nicht auf Apexverzauberung und Verzauberung der gleichen Ausrüstung)	icon_items.parts_heavyarmorc5_tex
-45	Buff	True	True	False	Gesegneter Baharrs Segen	Erhöht die endgültige Erfolgsrate beim Verzaubern um einen geringen Wert. (Wirkt nicht auf Apexverzauberung und Verzauberung der gleichen Ausrüstung)	icon_items.parts_heavyarmorc5_tex
-46	Buff	True	True	False	Verehrter Baharrs Segen	Erhöht die endgültige Erfolgsrate beim Verzaubern um einen geringen Wert. (Wirkt nicht auf Apexverzauberung und Verzauberung der gleichen Ausrüstung)	icon_items.parts_heavyarmorc5_tex
+41	Buff	True	True	False	Baharrs Segen	Erhöht die endgültige Erfolgsrate beim Verzaubern um einen geringen Wert.	icon_items.parts_heavyarmorc5_tex
+42	Buff	True	True	False	Gesegneter Baharrs Segen	Erhöht die endgültige Erfolgsrate beim Verzaubern.	icon_items.parts_heavyarmorc5_tex
+43	Buff	True	True	False	Verehrter Baharrs Segen	Erhöht die endgültige Erfolgsrate beim Verzaubern um einen erheblichen Wert.	icon_items.parts_heavyarmorc5_tex
+44	Buff	True	True	False	Baharrs Segen	Erhöht die endgültige Erfolgsrate beim Verzaubern um einen geringen Wert.	icon_items.parts_heavyarmorc5_tex
+45	Buff	True	True	False	Gesegneter Baharrs Segen	Erhöht die endgültige Erfolgsrate beim Verzaubern.	icon_items.parts_heavyarmorc5_tex
+46	Buff	True	True	False	Verehrter Baharrs Segen	Erhöht die endgültige Erfolgsrate beim Verzaubern um einen erheblichen Wert.	icon_items.parts_heavyarmorc5_tex
 47	Buff	True	True	False	Test_Erhöhung von Fertigkeitsschaden/Verringerung von Aggro	Nur für den Test! Schaden aller Fertigkeiten wird um 50% erhöht/Aggro wird um 50% verringert	icon_skills.voidtrap_tex
+51	Buff	True	True	False	DPS-Test-Betäubung	Betäubt für den DPS-Test. Zusätzliche Effekte:&#xA;Verringerung der Konstitution um $H_W_BAD12%$COLOR_END (Schwächen 3-mal akkumuliert)&#xA;Verringerung der Konstitution um $H_W_BAD10%$COLOR_END (Flut von Verwünschungen)&#xA;Verringerung der Krit. Trefferresistenz um $H_W_BAD-12$COLOR_END (Flut von Verwünschungen)	icon_items.q_bones_tex
 101	Buff	True	True	False	Vergeltung	Ihr seid immun gegen Niederschlagen, Taumeln und Betäuben.	icon_skills.risingattack_tex
 201	Buff	False	True	False	Segen von Shakan I	Erhöht die Kraft um $H_W_GOOD17$COLOR_END.	icon_skills.attackup_tex
 202	Buff	False	True	False	Segen von Shakan II	Erhöht die Kraft um $H_W_GOOD25$COLOR_END.	icon_skills.attackup_tex
@@ -58,6 +59,7 @@
 912	Buff	True	True	True	Nokteniuminfusion	Die Nokteniuminfusion wird verwendet, um den Fertigkeitseffekt zu erhöhen.	icon_items.union_supplies5_tex
 913	Buff	True	True	True	Nokteniuminfusion	Die Nokteniuminfusion wird verwendet, um den Fertigkeitseffekt zu erhöhen.	icon_items.union_supplies5_tex
 916	Buff	True	True	True	Nokteniuminfusion	Die Nokteniuminfusion wird verwendet, um den Fertigkeitseffekt zu erhöhen.	icon_items.union_supplies5_tex
+917	Buff	True	True	True	Nokteniuminfusion	Die Nokteniuminfusion wird verwendet, um den Fertigkeitseffekt zu erhöhen.	icon_items.union_supplies5_tex
 920	Buff	True	True	False	Veredelter Noktenium-Effekt [ungewöhnlich]	Erhöht den Fertigkeitseffekt. Der Nokteniuminfusionseffekt erhöht sich um das $H_W_GOOD1,5$COLOR_END-fache und alle Fertigkeiten erhalten eine um$H_W_GOOD4-12%$COLOR_END erhöhte Angriffsstärke. (Einige Fertigkeiten auf $H_W_GOOD6-20%$COLOR_END begrenzt) Kann nicht mit herkömmlichen Nokteniuminfusionen doppelt verwendet werden.	icon_items.noctan_tex
 921	Buff	True	True	False	Veredelter Noktenium-Effekt [selten]	Erhöht den Fertigkeitseffekt. Der Nokteniuminfusionseffekt erhöht sich um das $H_W_GOOD1,5$COLOR_END-fache und alle Fertigkeiten erhalten eine um$H_W_GOOD4-12%$COLOR_END erhöhte Angriffsstärke. (Einige Fertigkeiten auf $H_W_GOOD6-20%$COLOR_END begrenzt) Kann nicht mit herkömmlichen Nokteniuminfusionen doppelt verwendet werden.	icon_items.noctan_tex
 922	Buff	True	True	False	Veredelter Noktenium-Effekt [legendär]	Erhöht den Fertigkeitseffekt. Der Nokteniuminfusionseffekt erhöht sich um das $H_W_GOOD1,5$COLOR_END-fache und alle Fertigkeiten erhalten eine um$H_W_GOOD4-12%$COLOR_END erhöhte Angriffsstärke. (Einige Fertigkeiten auf $H_W_GOOD6-20%$COLOR_END begrenzt) Kann nicht mit herkömmlichen Nokteniuminfusionen doppelt verwendet werden.	icon_items.noctan_tex
@@ -111,6 +113,7 @@
 1491	Buff	True	True	False	Heldentrank	Heilt immer nach $H_W_GOOD1$COLOR_END second $H_W_GOOD6%$COLOR_END der maximalen LP.	icon_items.potion1_tex
 1495	WeakeningEffect	True	True	False	Schlachtfeldgift	Verringert die LP um 20.000 pro Sekunde.	icon_status.poisonstatus_tex
 1510	Buff	False	True	False	Heiltrank	Heilt sofort $H_W_GOOD50%$COLOR_END der maximalen LP.	icon_items.potion5_tex
+1511	Buff	False	True	False	Elixier	Stellt sofort $H_W_GOOD60%$COLOR_END der Gesamt-LP und -MP wieder her.	icon_items.potion5_tex
 1530	Buff	True	True	False	Göttliche Infusion	Stellt immer nach $H_W_GOOD1$COLOR_END second $H_W_GOOD5%$COLOR_END der maximalen MP wieder her.	icon_items.potion19_tex
 1610	Buff	True	True	False	Verjüngungssphäre	Heilt immer nach $H_W_GOOD1$COLOR_END second $H_W_GOOD2%$COLOR_END der maximalen LP.	icon_items.potion1_tex
 1630	Buff	False	True	False	Heilsphäre	Heilt $H_W_GOOD25%$COLOR_END der maximalen LP.	icon_items.potion5_tex
@@ -418,6 +421,7 @@
 4402	Buff	True	True	False	Weiser Mentor	Erhöht die Kampf-EP um $H_W_GOOD100%$COLOR_END. Der Effekt akkumuliert mit anderen EP-bezogenen Effekten, aber die Zeit läuft, auch wenn Ihr offline seid.	icon_status.vitality_tex
 4403	Buff	False	True	False	Freundliche Begrüßung_Wenn Ihr das seht: BTS-Bericht	Wenn Ihr das seht: BTS-Bericht	icon_skills.greeting_tex
 4404	Buff	True	True	False	Freundliches Elixier des starken Wilden	Erhöht die Kraft um $H_W_GOOD10%$COLOR_END.	icon_status.buff_of_kaia_tex
+4405	Buff	True	True	False	Herstellungsfreude	Wenn die Fähigkeitspunkte von Waffen, Rüstungen, Verbrauchsgütern oder Gravierungen unter 500 liegen, können bei der Herstellung doppelte Fähigkeitspunkte erhalten werden.	icon_items.small_insecta8_tex
 4500	Buff	True	True	True	Schnelle EP	Erhöht die Kampf-EP um $H_W_GOOD10%$COLOR_END.	icon_status.plusfocus_tex
 4501	Buff	True	True	True	Schnelle EP	Erhöht die Kampf-EP um $H_W_GOOD20%$COLOR_END.	icon_status.plusfocus_tex
 4502	Buff	True	True	True	Schnelle EP	Erhöht die Kampf-EP um $H_W_GOOD30%$COLOR_END.	icon_status.plusfocus_tex
@@ -435,6 +439,7 @@
 4514	Buff	True	True	True	Schnelle EP	Erhöht die Kampf-EP um das $H_W_GOOD10-fache$COLOR_END.	icon_status.plusfocus_tex
 4600	Buff	True	True	False	Kristallbindung	Verhindert, dass Kristalle brechen, wenn Ihr sterbt, und ein Effekt wird verbraucht. Kann bis zu 99-mal akkumuliert werden.	icon_items.q_closedspace_stone_05_tex
 4610	Buff	True	True	False	Komplette Kristallbindung	Verhindert das Zerbrechen des Kristalls beim Tod.	icon_items.q_closedspace_stone_05_tex
+4612	Buff	True	True	False	Komplette Kristallbindung	Verhindert das Zerbrechen des Kristalls beim Tod.	icon_items.q_closedspace_stone_05_tex
 4620	Buff	True	True	False	Schriftrolle des Valsekyrhandwerkers	Beschleunigt die Herstellung aller Gegenstände um $H_W_GOOD50%$COLOR_END.	icon_items.scroll_produce_speedup_tex
 4621	Buff	True	True	False	Schriftrolle des fleißigen Handwerkers	Beschleunigt die Herstellung aller Gegenstände um $H_W_GOOD50%$COLOR_END.	icon_items.scroll_produce_speedup_tex
 4630	Buff	True	True	False	Schriftrolle des Valsekyrsammlers	Erhöht alle Sammelfertigkeiten um $H_W_GOOD410$COLOR_END.	icon_items.scroll_collection_expup_tex
@@ -509,6 +514,15 @@
 5060	Buff	False	True	False	Ring der Verderbnis Reaktionsresistenz	Ring der Verderbnis Reaktionsresistenz	icon_skills.voidtrap_tex
 6001	Buff	True	True	False	Blutader des Drachen	Bei einem Angriff auf ein Monster wird die Stärke der kritischen Treffer um das $H_W_GOOD+1,5$COLOR_END-fache erhöht.	icon_status.passive_dragonblood
 6002	Buff	True	True	False	Blutader des wahren Drachen	Bei einem Angriff auf ein Monster wird die Stärke der kritischen Treffer um das $H_W_GOOD+2$COLOR_END-fache erhöht.	icon_status.passive_dragonblood2
+6003	Buff	True	True	False	Flammende Aura	Bei einem Angriff auf ein Monster wird die Stärke der kritischen Treffer um das $H_W_GOOD1,5$COLOR_END-fache erhöht.	icon_skills.heataura_tex
+6004	Buff	True	True	False	Lodernde Aura	Bei einem Angriff auf ein Monster wird die Stärke der kritischen Treffer um das $H_W_GOOD2$COLOR_END-fache erhöht.	icon_skills.flameaura_tex
+6005	Buff	False	True	False		Wenn sichtbar, BTS	
+6006	Buff	True	True	False	Unsterblicher Phönix	Ihr seid für kurze Zeit unverwundbar. Wenn Ihr eine Fertigkeit benutzt, endet der Effekt.	icon_status.revivenow_status_tex
+6007	Buff	True	True	False	Verjüngung des Phönix	Stellt sofort $H_W_GOOD100%$COLOR_END Eurer maximalen MP und LP wieder her.	icon_items.eagles_potion_level_47_tex
+6008	WeakeningEffect	True	True	False	Ruhe des Phönix	Vor Kurzem aus der Asche auferstanden. Ihr könnt nicht von $H_W_GOODAvatar des Phönix$COLOR_END profitieren. 	icon_skills.flameaura_tex
+6009	Buff	True	True	False	Schutz des Phönix	Schützt Eure Kristalle vor dem Zerbrechen.	icon_items.q_closedspace_stone_05_tex
+6010	Buff	False	True	False		Wenn sichtbar, BTS	
+6011	WeakeningEffect	True	True	False	Ruhe des Phönix	Vor Kurzem aus der Asche auferstanden. Ihr könnt nicht von $H_W_GOODAvatar des Phönix$COLOR_END profitieren. 	icon_skills.heataura_tex
 10100	DamageOverTime	True	False	False	Ansteckung	Zieht immer nach $H_W_BAD1$COLOR_END second $H_W_BAD-11$COLOR_END LP ab.	icon_items.customize9ar_tex
 10101	DamageOverTime	True	False	False	Ansteckung	Zieht immer nach $H_W_BAD1$COLOR_END second $H_W_BAD-23$COLOR_END LP ab.	icon_items.customize9br_tex
 10102	DamageOverTime	True	False	False	Ansteckung	Zieht immer nach $H_W_BAD1$COLOR_END second $H_W_BAD-58$COLOR_END LP ab.	icon_items.customize9cr_tex
@@ -758,6 +772,7 @@
 15150	Buff	True	True	False	Eins mit der Natur	Ihr zieht keine Aggro auf Euch.	icon_status.boundmovedown_tex
 15160	Stun	True	False	False	Hammerschlag des Schmieds	Betäubt. Bewegungsunfähig.	icon_status.confuseup_tex
 15161	WeakeningEffect	True	False	False	Letzte Gnade des Schmieds	Verringert die kritische Trefferresistenz um $H_W_BAD-10$COLOR_END.	icon_status.plusciriticalresist_tex
+15162	WeakeningEffect	True	False	False	Markierung des Strafenden	Verringert die kritische Trefferresistenz um $H_W_BAD-20$COLOR_END.	icon_status.plusciriticalresist_tex
 15170	DamageOverTime	True	False	False	Donnerpeitsche	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD-3710$COLOR_END LP ab.	icon_status.paralyzestatus_tex
 15500	Buff	False	True	False			
 15600	Buff	False	True	False			
@@ -959,7 +974,7 @@
 29050	WeakeningEffect	True	False	False	Glyphe der Benebelung	Verringert die Angriffsgeschwindigkeit pro überlappendem Treffer um $H_W_BAD10%$COLOR_END.	icon_crest.crestactiveattackspeeddown_tex
 29060	Buff	True	True	False	Glyphe der Kraftbindung	Erhöht die Chance auf kritische Treffer mit Hassklinge um $H_W_GOOD30%$COLOR_END.	icon_crest.crestnextskillattackup_tex
 29070	WeakeningEffect	True	False	False	Glyphe der Bindung	Ihr könnt Euch für die Dauer der Fertigkeit nicht bewegen. Fertigkeitseffekte werden aufgehoben, wenn Ihr bei Angriffen niedergeschlagen werdet.	icon_crest.crestactivespeeddown_tex
-29090	Buff	True	True	False	Glyphe der Flinkheit	Erfolgreiche Anziehung erhöht die Aufladegeschwindigkeit der nächsten Fertigkeit um 50%.	icon_crest.e_crestpassiveskillspeedup_tex
+29090	Buff	True	True	False	Glyphe der Flinkheit	Erfolgreiche Anziehung erhöht für 2,5 Sek. die Aufladegeschwindigkeit der Fertigkeiten um 50%.	icon_crest.e_crestpassiveskillspeedup_tex
 29100	Buff	True	True	False	Glyphe der Kraftbindung	Erhöht den Schaden von Finsterwoge um $H_W_GOOD20%$COLOR_END.	icon_crest.crestnextskillattackup_tex
 29110	Buff	True	True	False	Glyphe der Leichtfüßigkeit	Erhöht die Bewegungsgeschwindigkeit während des Kampfes um $H_W_GOOD50$COLOR_END.	icon_crest.e_crestactivespeedup_tex
 29111	Buff	True	True	True	Glyphe der Schärfe	$H_W_GOODVerdoppelt$COLOR_END den kritischen Trefferwert für den folgenden Angriff.	icon_crest.crestpassivecriticalup_tex
@@ -1009,9 +1024,9 @@
 33130	Buff	True	True	False	Erhöhter Fertigkeitsschaden [Glyphe der Kraft]	Erhöht den Schaden von Ätherhieb um $H_W_GOOD25%$COLOR_END.	icon_crest.crestnextskillattackup_tex
 33140	Buff	False	True	False			icon_crest.crestpassivecriticalup_tex
 33150	Buff	True	True	False	Erhöhter Fertigkeitsschaden [Glyphe der Kraft]	Erhöht den Schaden von Ätherhieb um $H_W_GOOD25%$COLOR_END.	icon_crest.crestnextskillattackup_tex
-33170	Buff	True	True	False	Kontinuierliche LP-Wiederherstellung [Glyphe der Erneuerung]	Heilt immer nach $H_W_GOOD1$COLOR_END second $H_W_GOOD2%$COLOR_END der Gesamt-LP.	icon_crest.crestpassivehpheal_tex
+33170	Buff	True	True	False	Kontinuierliche LP-Wiederherstellung [Glyphe der Erneuerung]	Heilt immer nach $H_W_GOOD1$COLOR_END second $H_W_GOOD3%$COLOR_END der Gesamt-LP.	icon_crest.crestpassivehpheal_tex
 33200	Buff	True	True	False	Erhöhter Fertigkeitsschaden [Glyphe der Kraft]	Erhöht den Fertigkeitsschaden des nächsten Angriffes um 30%.	icon_crest.crestnextskillattackup_tex
-33210	Buff	True	True	False	Erhöhter Fertigkeitsschaden [Glyphe der Kraft]	Erhöht den Schaden von Lunasonus um $H_W_GOOD25%$COLOR_END.	icon_crest.crestpassivehpheal_tex
+33210	Buff	True	True	False	Erhöhter Fertigkeitsschaden [Glyphe der Kraft]	Erhöht den Schaden von Lunasonus um $H_W_GOOD25%$COLOR_END.	icon_crest.e_crestnextskillattackup_tex
 45301	WeakeningEffect	True	False	False	Großer Schock	Unter massivem Schock stehend.	icon_status.minusdefence_tex
 45302	WeakeningEffect	True	False	False	Umgeblasen	Unter Schock stehend und niedergeschlagen.	icon_status.minuscriticalresist_tex
 45303	DamageOverTime	False	False	False		Der Bohrer verschwindet in 13 Sek.	
@@ -1089,6 +1104,7 @@
 60027	Buff	True	True	False	Wiederherstellend IV	Stellt immer nach $H_W_GOOD1$COLOR_END second $H_W_GOOD1405$COLOR_END LP und $H_W_GOOD145$COLOR_END MP wieder her.	icon_items.body_enchant_scroll_3_tex
 60029	Buff	True	True	False	Konzentration des Geistes II	Stellt immer nach $H_W_GOOD1$COLOR_END second $H_W_GOOD5%$COLOR_END der maximalen MP wieder her.	icon_skills.neutralizepoison_tex
 60030	Buff	True	True	False	Konzentration des Geistes I	Stellt immer nach $H_W_GOOD1$COLOR_END second $H_W_GOOD3%$COLOR_END der maximalen MP wieder her.	icon_skills.neutralizepoison_tex
+60031	Buff	True	True	False	Konzentration des Geistes III	Stellt immer nach $H_W_GOOD1$COLOR_END second $H_W_GOOD7%$COLOR_END der max. MP wieder her.	icon_skills.neutralizepoison_tex
 70201	Buff	True	True	False	Röstmais	Erhöht die maximalen LP um $H_W_GOOD5%$COLOR_END.	icon_items.fallfestival_popcorn_tex
 70202	Buff	True	True	False	Kartoffelsalat	Stellt immer nach $H_W_GOOD5$COLOR_END second1 $H_W_GOOD1%$COLOR_END Eurer maximalen LP wieder her.	icon_items.fallfestival_potatosalad_tex
 70203	Buff	True	True	False	Gegrilltes Ferkel	Stellt immer nach $H_W_GOOD5$COLOR_END second1 $H_W_GOOD1%$COLOR_END Eurer maximalen MP wieder her.	icon_items.q_roastmeat_tex
@@ -1112,6 +1128,8 @@
 70242	Buff	False	True	False	Melsas Drei-Gänge-Menü	Gewährt die Effekte von Düsterflügel, Flammensalat der Freilande und Traditionelles Schwarzfeldgrillfleisch.	icon_items.pigling_ribs_tex
 70243	Buff	False	True	False	Traditionelles Schwarzfeldgrillfleisch	Heilt LP zusätzlich um $H_W_GOOD70233$COLOR_END, sobald Ihr einen Heilungseffekt erhaltet.	icon_items.pigling_ribs_tex
 70244	Buff	False	True	False	Düsterflügel	Die Ausdauer verringert sich nicht.	icon_items.pigling_ribs_tex
+70245	Buff	True	True	False	Ungewöhnlicher Flammensalat der Freilande	Erhöht die max. LP um $H_W_GOOD5%$COLOR_END und die max. MP um $H_W_GOOD10%$COLOR_END. Stellt immer nach $H_W_GOOD5$COLOR_END second1 $H_W_GOOD1%$COLOR_END Eurer maximalen MP wieder her.	icon_items.fallfestival_rikanosalad_tex
+70246	Buff	False	True	False	Festmahl	Gewährt die Effekte von Lammbulgogi, ungewöhnlichem Flammensalat der Freilande, Düsterflügel und traditionellem Schwarzfeldgrillfleisch.	icon_items.pigling_ribs_tex
 70301	Buff	True	True	False	Ruhige Flinkheit	Erhöht die Bewegungsgeschwindigkeit während des Kampfes um $H_W_GOOD2$COLOR_END. Kann bis zu 3-mal akkumuliert werden.	icon_status.aura_of_wind_tex
 70302	Buff	True	True	False	Ruhige Konzentration	Erhöht den Fertigkeitsschaden um $H_W_GOOD20$COLOR_END.	icon_status.aura_of_damage_tex
 70303	Buff	True	True	False	Ruhiger Elan	Erhöht die maximale Ausdauer um $H_W_GOOD5$COLOR_END. Kann bis zu 3-mal akkumuliert werden.	icon_status.aura_of_condition_tex
@@ -1212,6 +1230,7 @@
 100203	Buff	True	True	True	Defensivstellung IV	Erhöht die Konstitution um $H_W_GOOD25%$COLOR_END, das Gleichgewicht um $H_W_GOOD30$COLOR_END und den kritischen Trefferwert um $H_W_GOOD15%$COLOR_END, wenn Ihr Monster angreift. Angriffe ziehen $H_W_GOOD120%$COLOR_END mehr Aggro an. Im Kampf werdet Ihr mit Ausnahme einiger spezieller Angriffe bestimmter Monster nicht nach hinten geworfen.	icon_skills.ironwillb_tex
 100293	Buff	False	True	False	Zwillingsschwerter-Abwehr (Standardeffekt)	Keine Anzeige für Schwächungstooltip (isShow=False). Wenn dieser Tooltip angezeigt wird, BTS erforderlich.	icon_skills.twinswordsdefence_tex
 100294	Buff	True	True	False	Beharrlichkeit I	Durch Beharrlichkeit I regeneriert Ihr 5% Eurer MP.	icon_skills.twinswordsdefence_tex
+100295	Buff	False	True	False	WindsturmⅠ	Durch den Effekt von WindsturmⅠ verringert sich die Abklingzeit von Sense um 0,5 Sek.	icon_skills.twinswordsdefence_tex
 100296	Buff	False	True	True	Defensivstellung (Erhöhte Chance auf kritische Treffer)	Erhöht die Chance auf kritische Treffer gegen Monster um 15% (Unsichtbarer Effekt)	icon_skills.ironwillb_tex
 100297	Buff	False	True	True			
 100298	Buff	False	True	True	Defensivstellung IV-2	Abnormality-Tooltip. Soll nicht angezeigt werden (isShow=False). Wenn dieser Tooltip angezeigt wird: BTS-Bericht.	icon_skills.ironwillb_tex
@@ -1262,6 +1281,7 @@
 101104	Stun	True	False	False	Taumelgegenschlag X	Ihr seid betäubt und bewegungsunfähig.	icon_skills.reversalturningattack_tex
 101105	Stun	True	False	False	Taumelgegenschlag XI	Ihr seid betäubt und bewegungsunfähig.	icon_skills.reversalturningattack_tex
 101200	WeakeningEffect	True	False	False	Kämpferischer Schlag	Verringert die Konstitution um $H_W_BAD8%$COLOR_END.	icon_skills.aggravatingstrike_tex
+101210	WeakeningEffect	True	False	False	Kämpferischer Schlag	Verringert die Konstitution um $H_W_BAD10%$COLOR_END.	icon_skills.aggravatingstrike_tex
 101220	WeakeningEffect	True	False	False	Kämpferischer Schlag	Verringert die Konstitution um $H_W_BAD8%$COLOR_END und die LP-Wiederherstellung um $H_W_BAD30%$COLOR_END.	icon_skills.aggravatingstrike_tex
 101300	Buff	True	True	False	Traversenschnitt	Je nach Akkumulierung erhöht sich die Angriffsgeschwindigkeit um 0,9%. Dieser Effekt kann bis zu 13-mal akkumuliert werden.	icon_skills.dualrapidpiercing_tex
 101400	WeakeningEffect	True	False	False	Satz	Verringert die Bewegungsgeschwindigkeit um $H_W_BAD0,5$COLOR_END.	icon_skills.heavybite_tex
@@ -3244,6 +3264,9 @@
 3000019	Buff	True	True	True	Luftiges Reiten (Wiederherstellung von LP, MP)	Ihr könnt in Gebiete fliegen, in denen Fliegen möglich ist.<BR>Stellt pro Sekunde 2% Eurer maximalen LP und MP wieder her und verleiht Verbündeten in einem Umkreis von 30m den Effekt Drachenwind.	icon_items.wings_of_fairy_tex
 3000020	Buff	False	True	True	Drachenwind	BTS	icon_skills.criticalupaura_tex
 3000021	Buff	True	True	True	Drachenwind	Drachenwind erhöht die Bewegungsgeschwindigkeit von Reittieren jeglicher Art um $H_W_GOOD10$COLOR_END.	icon_status.plusmove_tex
+3000022	Buff	True	True	True	Flammender Flug	Ihr könnt in Gebieten fliegen, in denen das Fliegen möglich ist.<BR>Stellt pro Sekunde 1% Eurer Gesamt-LP und MP wieder her. Ihr seid von $H_W_GOODBrennender Aufwind$COLOR_END betroffen.	icon_items.wings_of_fairy_tex
+3000023	Buff	True	True	True	Lodernder Flug	Ihr könnt in Gebieten fliegen, in denen das Fliegen möglich ist.<BR>Stellt pro Sekunde 2% Eurer Gesamt-LP und MP wieder her. Ihr seid von $H_W_GOODBrennender Aufwind$COLOR_END betroffen.	icon_items.wings_of_fairy_tex
+3000024	Buff	True	True	True	Brennender Aufwind	Ihr könnt nicht von $H_W_GOODDrachenwind$COLOR_END profitieren.	icon_status.heat_tex
 4510001	Buff	False	False	False			
 4510002	WeakeningEffect	False	True	False			
 4510003	DamageOverTime	False	False	False			
@@ -3481,6 +3504,144 @@
 7777013	Buff	True	True	False	Unterwäsche zeigen: nur mir	Eure Unterwäsche ist nur für Euch sichtbar.$BR $BRSie wird wieder unsichtbar nach einem bestimmten Zeitraum.	icon_status.icon_yookduk00_ab_tex
 7777014	Buff	True	True	False	Unterwäsche zeigen: nur mir	Eure Unterwäsche ist nur für Euch sichtbar.$BR $BRSie wird wieder unsichtbar nach einem bestimmten Zeitraum.	icon_status.icon_yookduk00_ab_tex
 7777015	Buff	True	True	False	T.E.R.A. TIME	Spürt das Fieber! Die Abklingzeiten sämtlicher Fertigkeiten außer den Allianzfertigkeiten werden um 20% reduziert und die gesamte MP-Regeneration wird erheblich erhöht.	icon_status.pluswill_tex
+7940000	Stun	False	True	True			
+7941001	Stun	True	False	False	Starke Kopfschmerzen	Der Höhlenwächter hat sich den Kopf an einem Baum gestoßen und ist verwirrt.	icon_status.confuseup_tex
+7941002	WeakeningEffect	True	True	False	Interesse des Höhlenwächters	Der Höhlenwächter starrt Euch an. Er scheint sich auf einen mächtigen Angriff vorzubereiten.	icon_skills.througharrow_tex
+7941003	WeakeningEffect	False	True	False			
+7941004	Stun	False	False	False			
+7941005	Stun	False	False	False			
+7941006	WeakeningEffect	False	True	True			
+7941007	WeakeningEffect	False	True	True			
+7941008	WeakeningEffect	False	True	True			
+7941009	WeakeningEffect	False	True	True			
+7941010	WeakeningEffect	False	True	True			
+7941011	Buff	True	False	True	Robuste Haut	Der Höhlenwächter umhüllt sich mit seiner Panzerhaut. Ist diese einmal kaputt, erholt sich auch der stärkste Kerl nicht von rutschigen Bananenschalen.	icon_status.balanceup_tex
+7941012	WeakeningEffect	False	True	False			
+7941013	Stun	False	False	False			
+7941014	Stun	True	False	False	Blutung	Ihr habt Euch beim Sturz verletzt. Eure LP verringern sich kontinuierlich.	icon_status.injuredbtdarkness_tex
+7941015	Stun	True	False	False	Aufprallfaktor	Ihr steht unter Schock und könnt Euch nicht rühren.	icon_status.confuseup_tex
+7941016	WeakeningEffect	False	True	False			
+7941017	WeakeningEffect	False	True	False			
+7941018	WeakeningEffect	False	True	True			
+7941019	WeakeningEffect	False	True	True			
+7941020	WeakeningEffect	False	True	True			
+7941021	Buff	True	True	True			
+7941022	DamageOverTime	True	False	False	Klebriger Schleim	Euer Körper ist von klebrigem Schleim bedeckt. Ihr seid bewegungsunfähig.	icon_skills.curseofshackle_tex
+7941023	WeakeningEffect	False	True	True			
+7941024	WeakeningEffect	False	True	True			
+7941025	WeakeningEffect	False	True	True			
+7941026	Buff	True	True	True	Ermutigung des Äffchen - Phase 1	Das Äffchen feuert den Höhlenwächter an. Die Angriffsstärke und -geschwindigkeit des Höhlenwächters wird erhöht.	icon_status.plusciriticalresist_tex
+7941027	Buff	True	True	True	Ermutigung des Äffchens - Phase 2	Das Äffchen feuert den Höhlenwächter an. Die Angriffsstärke und -geschwindigkeit des Höhlenwächters wird erhöht.	icon_status.plusciriticalresist_tex
+7941028	Buff	True	True	True	Ermutigung des Äffchens - Phase 3	Das Äffchen feuert den Höhlenwächter an. Die Angriffsstärke und -geschwindigkeit des Höhlenwächters wird erhöht.	icon_status.plusciriticalresist_tex
+7941029	WeakeningEffect	False	True	False			
+7941030	WeakeningEffect	True	True	False	Interesse des Äffchen	Das Äffchen, das am Baum hängt, starrt Euch an. Es sieht aus, als wolle er die Bananenscheibe werfen.	icon_items.banana_tex
+7941031	WeakeningEffect	False	True	True			
+7941032	Stun	False	False	False			
+7941033	WeakeningEffect	False	True	False			
+7941034	WeakeningEffect	False	True	False			
+7941035	WeakeningEffect	False	True	False			
+7942001	WeakeningEffect	False	True	False			
+7942002	WeakeningEffect	True	True	True			
+7942003	WeakeningEffect	True	True	True			
+7942004	DamageOverTime	False	False	False			
+7942005	DamageOverTime	False	True	False			
+7942006	WeakeningEffect	True	True	False	Manadurchdringung	Lenim versucht, Euch mit Mana zu durchdringen, um etwas zu beschwören.	icon_status.minusfocus_tex
+7942007	WeakeningEffect	True	True	False	Manadurchdringung	Lenim versucht, Euch mit Mana zu durchdringen, um etwas zu beschwören.	icon_status.minusfocus_tex
+7942008	Stun	True	False	False			
+7942009	Stun	True	False	False			
+7942010	WeakeningEffect	False	True	False			
+7942011	WeakeningEffect	False	True	True			
+7942012	WeakeningEffect	False	True	True			
+7942013	WeakeningEffect	True	True	False			icon_items.cancel_lockon_potion_level_51_tex
+7942014	WeakeningEffect	False	True	False			
+7942015	Buff	True	True	False			
+7942016	WeakeningEffect	False	True	False			
+7942017	WeakeningEffect	False	True	True			
+7942018	WeakeningEffect	False	True	False			
+7942019	WeakeningEffect	False	True	False			
+7942020	WeakeningEffect	False	True	False			
+7942021	Stun	False	False	False			
+7942022	WeakeningEffect	False	True	False			
+7942023	WeakeningEffect	True	True	False			
+7942024	WeakeningEffect	True	True	False			
+7942025	WeakeningEffect	False	True	False			
+7942026	WeakeningEffect	False	True	False			
+7942027	WeakeningEffect	True	True	False			
+7942028	DamageOverTime	False	True	False			
+7942029	DamageOverTime	False	True	False			
+7942030	DamageOverTime	False	True	False			
+7942031	DamageOverTime	False	True	False			
+7942032	DamageOverTime	False	True	False			
+7942033	DamageOverTime	False	False	False			
+7942034	WeakeningEffect	False	True	True			
+7942035	WeakeningEffect	False	True	True			
+7942036	Stun	False	False	False			
+7942037	WeakeningEffect	True	True	True	Rote Energie des Erzes	Die rote Energie des Erzes umgibt Euch. Der rote Strahl kann Euch nicht verletzen.	icon_status.immunedebuff_tex
+7942038	WeakeningEffect	True	True	True	Blaue Energie des Erzes	Die blaue Energie des Erzes umgibt Euch. Der blaue Strahl kann Euch nicht verletzen.	icon_status.immunedebuff_tex
+7942039	WeakeningEffect	True	True	True	Weiße Energie des Erzes	Die weiße Energie des Erzes umgibt Euch. Der weiße Strahl kann Euch nicht verletzen.	icon_status.immunedebuff_tex
+7942040	DamageOverTime	False	True	False			
+7942041	DamageOverTime	False	True	False			
+7942042	WeakeningEffect	False	True	False			
+7942043	WeakeningEffect	False	True	True			
+7942044	WeakeningEffect	False	True	True			
+7942045	WeakeningEffect	False	True	True			
+7942046	WeakeningEffect	False	True	True			
+7942047	WeakeningEffect	False	True	True			
+7942048	WeakeningEffect	False	True	True			
+7942049	WeakeningEffect	False	True	False			
+7942050	WeakeningEffect	False	True	True			
+7943001	WeakeningEffect	False	True	True			
+7943002	WeakeningEffect	False	True	True			
+7943003	WeakeningEffect	False	True	False			
+7943004	WeakeningEffect	False	True	False			
+7943005	WeakeningEffect	False	True	False			
+7943006	WeakeningEffect	False	True	False			
+7943007	WeakeningEffect	False	True	True			
+7943008	WeakeningEffect	False	True	True			
+7943009	WeakeningEffect	False	True	True			
+7943010	WeakeningEffect	False	True	True			
+7943011	WeakeningEffect	False	True	True			
+7943012	WeakeningEffect	False	True	False			
+7943013	WeakeningEffect	False	True	False			
+7943014	WeakeningEffect	False	True	True			
+7943015	WeakeningEffect	False	True	True			
+7943016	Buff	True	True	False			
+7943017	WeakeningEffect	False	True	False			
+7943018	DamageOverTime	False	True	True			
+7943019	DamageOverTime	False	True	False			
+7943020	DamageOverTime	False	True	True			
+7943021	WeakeningEffect	False	True	False			
+7943022	WeakeningEffect	False	True	True			
+7943023	WeakeningEffect	False	True	False			
+7943024	WeakeningEffect	False	True	False			
+7943025	WeakeningEffect	False	True	False			
+7943026	WeakeningEffect	False	True	False			
+7943027	WeakeningEffect	True	False	False			
+7943028	Buff	True	True	False	Eilgang: Vorbereitung	Die Bewegungsgeschwindigkeit des Goblins wird offenbar bald erhöht.	icon_status.plusmove_tex
+7943029	WeakeningEffect	False	True	False			
+7943030	WeakeningEffect	False	True	False			
+7943031	WeakeningEffect	False	True	True			
+7943032	WeakeningEffect	False	True	True			
+7943033	WeakeningEffect	False	True	True			
+7943034	Buff	True	True	True	Eilgang	Die Bewegungsgeschwindigkeit des Goblins wurde enorm erhöht.	icon_status.plusmove_tex
+7943035	WeakeningEffect	False	True	True			
+7943036	WeakeningEffect	False	True	False			
+7943037	WeakeningEffect	False	True	True			
+7943038	WeakeningEffect	True	True	True			
+7943039	WeakeningEffect	True	True	False			
+7943040	WeakeningEffect	True	True	False	Infektion - Heilung nicht möglich	Ihr wurdet vom Goblin infiziert und könnt Euch nicht heilen.	icon_status.poisondown_tex
+7943041	Stun	True	False	False			
+7943042	Stun	True	False	False	Infektion - Betäubung	Ihr wurdet vom Goblin infiziert und könnt Euch nicht bewegen.	icon_status.confuseup_tex
+7943043	Stun	True	False	False			
+7943044	Stun	True	False	False			
+7943045	WeakeningEffect	True	True	True	Kalte Energie	Eine kalte Energie umgibt Euch. Wenn die zusammengefügte Energie nicht geheizt wird, könntet Ihr Schaden erleiden.	icon_status.icedamage_tex
+7943046	WeakeningEffect	True	True	True	Heiße Energie	Eine heiße Energie umgibt Euch. Wenn die zusammengefügte Energie nicht gekühlt wird, könntet Ihr Schaden erleiden.	icon_status.firedamage_tex
+7943047	WeakeningEffect	False	True	False			
+7943048	WeakeningEffect	False	True	False			
+7943049	WeakeningEffect	False	True	False			
+7943050	WeakeningEffect	False	True	False			
+7943051	WeakeningEffect	False	True	True			
+7943052	WeakeningEffect	False	True	True			
 8000000	Buff	True	True	False	Trank der Jagd (5 Std.)	Erhöht 5 Std. lang (Spielzeit) die durch die Jagd erzielten EP um 30%.	icon_items.f2p_xpbooster_tex
 8000001	Buff	True	True	False	Trank der Jagd (10 Std.)	Erhöht 10 Std. lang (Spielzeit) die durch die Jagd erzielten EP um 30%.	icon_items.f2p_xpbooster_tex
 8000002	Buff	True	True	False	Trank der Jagd (30 Std.)	Erhöht 30 Std. lang (Spielzeit) die durch die Jagd erzielten EP um 30%.	icon_items.f2p_xpbooster_tex
@@ -3649,6 +3810,147 @@
 9810017	WeakeningEffect	False	True	True	Lakans Gefäß	Haben ihre Körper an Lakan übergeben.	icon_status.cruel_slayer_3_tex
 9810018	Stun	False	False	False			
 9810019	WeakeningEffect	False	True	True			
+9940000	Stun	False	True	True			
+9940001	WeakeningEffect	True	False	False	Verbrennung	Ihr erleidet Verbrennung und verliert kontinuierlich LP.	icon_status.minushp_tex
+9940002	WeakeningEffect	True	False	False	Frost	Ihr erleidet Frost. Eure Bewegungsgeschwindigkeit ist verlangsamt.	icon_skills.freezingtheearth_tex
+9941001	Stun	True	False	False	Starke Kopfschmerzen	Der Höhlenwächter hat sich den Kopf an einem Baum gestoßen und ist verwirrt.	icon_status.confuseup_tex
+9941002	WeakeningEffect	True	True	False	Interesse des Höhlenwächters	Der Höhlenwächter starrt Euch an. Er scheint sich auf einen mächtigen Angriff vorzubereiten.	icon_skills.througharrow_tex
+9941003	WeakeningEffect	False	True	False			
+9941004	Stun	False	False	False			
+9941005	Stun	False	False	False			
+9941006	WeakeningEffect	False	True	True			
+9941007	WeakeningEffect	False	True	True			
+9941008	WeakeningEffect	False	True	True			
+9941009	WeakeningEffect	False	True	True			
+9941010	WeakeningEffect	False	True	True			
+9941011	Buff	False	False	True	Robuste Haut	Der Höhlenwächter umhüllt sich mit seiner Panzerhaut. Ist diese einmal kaputt, erholt sich auch der stärkste Kerl nicht von rutschigen Bananenschalen.	icon_status.balanceup_tex
+9941012	WeakeningEffect	False	True	False			
+9941013	Stun	False	False	False			
+9941014	Stun	True	False	False	Blutung	Ihr habt Euch beim Sturz verletzt. Eure LP verringern sich kontinuierlich.	icon_status.injuredbtdarkness_tex
+9941015	Stun	True	False	False	Aufprallfaktor	Ihr steht unter Schock und könnt Euch nicht rühren.	icon_status.confuseup_tex
+9941016	WeakeningEffect	False	True	False			
+9941017	WeakeningEffect	False	True	False			
+9941018	WeakeningEffect	False	True	True			
+9941019	WeakeningEffect	False	True	True			
+9941020	WeakeningEffect	False	True	True			
+9941021	Buff	True	True	True			
+9941022	DamageOverTime	True	False	False	Klebriger Schleim	Euer Körper ist von klebrigem Schleim bedeckt. Ihr seid bewegungsunfähig.	icon_skills.curseofshackle_tex
+9941023	WeakeningEffect	False	True	True			
+9941024	WeakeningEffect	False	True	True			
+9941025	WeakeningEffect	False	True	True			
+9941026	Buff	True	True	True	Ermutigung des Äffchen - Phase 1	Das Äffchen feuert den Höhlenwächter an. Die Angriffsstärke und -geschwindigkeit des Höhlenwächters wird erhöht.	icon_status.plusciriticalresist_tex
+9941027	Buff	True	True	True	Ermutigung des Äffchens - Phase 2	Das Äffchen feuert den Höhlenwächter an. Die Angriffsstärke und -geschwindigkeit des Höhlenwächters wird erhöht.	icon_status.plusciriticalresist_tex
+9941028	Buff	True	True	True	Ermutigung des Äffchens - Phase 3	Das Äffchen feuert den Höhlenwächter an. Die Angriffsstärke und -geschwindigkeit des Höhlenwächters wird erhöht.	icon_status.plusciriticalresist_tex
+9941029	WeakeningEffect	False	True	False			
+9941030	WeakeningEffect	True	True	False	Interesse des Äffchen	Das Äffchen, das am Baum hängt, starrt Euch an. Es sieht aus, als wolle er die Bananenscheibe werfen.	icon_items.banana_tex
+9941031	WeakeningEffect	False	True	True			
+9941032	Stun	False	False	False			
+9941034	WeakeningEffect	False	True	False			
+9941035	WeakeningEffect	False	True	False			
+9942001	WeakeningEffect	False	True	False			
+9942002	WeakeningEffect	True	True	True			
+9942003	WeakeningEffect	True	True	True			
+9942004	DamageOverTime	False	False	False			
+9942005	DamageOverTime	False	True	False			
+9942006	WeakeningEffect	True	True	False	Manadurchdringung	Lenim versucht, Euch mit Mana zu durchdringen, um etwas zu beschwören.	icon_status.minusfocus_tex
+9942007	WeakeningEffect	True	True	False	Manadurchdringung	Lenim versucht, Euch mit Mana zu durchdringen, um etwas zu beschwören.	icon_status.minusfocus_tex
+9942008	Stun	True	False	False			
+9942009	Stun	True	False	False			
+9942010	WeakeningEffect	False	True	False			
+9942011	WeakeningEffect	False	True	True			
+9942012	WeakeningEffect	False	True	True			
+9942013	WeakeningEffect	True	True	False			icon_items.cancel_lockon_potion_level_51_tex
+9942014	WeakeningEffect	False	True	False			
+9942015	Buff	True	True	False			
+9942016	WeakeningEffect	False	True	False			
+9942017	WeakeningEffect	False	True	True			
+9942018	WeakeningEffect	False	True	False			
+9942019	WeakeningEffect	False	True	False			
+9942020	WeakeningEffect	False	True	False			
+9942021	Stun	False	False	False			
+9942022	WeakeningEffect	False	True	False			
+9942023	WeakeningEffect	True	True	False			
+9942024	WeakeningEffect	True	True	False			
+9942025	WeakeningEffect	False	True	False			
+9942026	WeakeningEffect	False	True	False			
+9942027	WeakeningEffect	True	True	False			
+9942028	DamageOverTime	False	True	False			
+9942029	DamageOverTime	False	True	False			
+9942030	DamageOverTime	False	True	False			
+9942031	DamageOverTime	False	True	False			
+9942032	DamageOverTime	False	True	False			
+9942033	DamageOverTime	False	False	False			
+9942034	WeakeningEffect	False	True	True			
+9942035	WeakeningEffect	False	True	True			
+9942036	Stun	False	False	False			
+9942037	WeakeningEffect	True	True	True	Rote Energie des Erzes	Die rote Energie des Erzes umgibt Euch. Der rote Strahl kann Euch nicht verletzen.	icon_status.immunedebuff_tex
+9942038	WeakeningEffect	True	True	True	Blaue Energie des Erzes	Die blaue Energie des Erzes umgibt Euch. Der blaue Strahl kann Euch nicht verletzen.	icon_status.immunedebuff_tex
+9942039	WeakeningEffect	True	True	True	Weiße Energie des Erzes	Die weiße Energie des Erzes umgibt Euch. Der weiße Strahl kann Euch nicht verletzen.	icon_status.immunedebuff_tex
+9942040	DamageOverTime	False	True	False			
+9942041	DamageOverTime	False	True	False			
+9942042	WeakeningEffect	False	True	False			
+9942043	WeakeningEffect	False	True	True			
+9942044	WeakeningEffect	False	True	True			
+9942045	WeakeningEffect	False	True	True			
+9942046	WeakeningEffect	False	True	True			
+9942047	WeakeningEffect	False	True	True			
+9942048	WeakeningEffect	False	True	True			
+9942049	WeakeningEffect	False	True	False			
+9942050	WeakeningEffect	False	True	True			
+9942051	DamageOverTime	True	False	False	Strom	Ihr habt einen elektrischen Schlag vom Wachturm erlitten. Ihr könnt keine Fertigkeiten verwenden, Eure Bewegungsgeschwindigkeit ist verringert und Ihr verliert kontinuerlich eine geringe Menge an LP.	icon_status.paralyzestatus_tex
+9943001	WeakeningEffect	False	True	True			
+9943002	WeakeningEffect	False	True	True			
+9943003	WeakeningEffect	False	True	False			
+9943004	WeakeningEffect	False	True	False			
+9943005	WeakeningEffect	False	True	False			
+9943006	WeakeningEffect	False	True	False			
+9943007	WeakeningEffect	False	True	True			
+9943008	WeakeningEffect	False	True	True			
+9943009	WeakeningEffect	False	True	True			
+9943010	WeakeningEffect	False	True	True			
+9943011	WeakeningEffect	False	True	True			
+9943012	WeakeningEffect	False	True	False			
+9943013	WeakeningEffect	False	True	False			
+9943014	WeakeningEffect	False	True	True			
+9943015	WeakeningEffect	False	True	True			
+9943016	Buff	True	True	False			
+9943017	WeakeningEffect	False	True	False			
+9943018	DamageOverTime	False	True	True			
+9943019	DamageOverTime	False	True	False			
+9943020	DamageOverTime	False	True	True			
+9943021	WeakeningEffect	False	True	False			
+9943022	WeakeningEffect	False	True	True			
+9943023	WeakeningEffect	False	True	False			
+9943024	WeakeningEffect	False	True	False			
+9943025	WeakeningEffect	False	True	False			
+9943026	WeakeningEffect	False	True	False			
+9943027	WeakeningEffect	True	False	False			
+9943028	Buff	True	True	False	Eilgang: Vorbereitung	Die Bewegungsgeschwindigkeit des Goblins wird offenbar bald erhöht.	icon_status.plusmove_tex
+9943029	WeakeningEffect	False	True	False			
+9943030	WeakeningEffect	False	True	False			
+9943031	WeakeningEffect	False	True	True			
+9943032	WeakeningEffect	False	True	True			
+9943033	WeakeningEffect	False	True	True			
+9943034	Buff	True	True	True	Eilgang	Die Bewegungsgeschwindigkeit des Goblins wurde enorm erhöht.	icon_status.plusmove_tex
+9943035	WeakeningEffect	False	True	True			
+9943036	WeakeningEffect	False	True	False			
+9943037	WeakeningEffect	False	True	True			
+9943038	WeakeningEffect	True	True	True			
+9943039	WeakeningEffect	False	True	False			
+9943040	WeakeningEffect	True	True	False	Infektion - Heilung nicht möglich	Ihr wurdet vom Goblin infiziert und könnt Euch nicht heilen.	icon_status.poisondown_tex
+9943041	Stun	True	False	False			
+9943042	Stun	True	False	False	Infektion - Betäubung	Ihr wurdet vom Goblin infiziert und könnt Euch nicht bewegen.	icon_status.confuseup_tex
+9943043	Stun	True	False	False			
+9943044	Stun	True	False	False			
+9943045	WeakeningEffect	True	True	True	Kalte Energie	Eine kalte Energie umgibt Euch. Wenn die zusammengefügte Energie nicht geheizt wird, könntet Ihr Schaden erleiden.	icon_status.icedamage_tex
+9943046	WeakeningEffect	True	True	True	Heiße Energie	Eine heiße Energie umgibt Euch. Wenn die zusammengefügte Energie nicht gekühlt wird, könntet Ihr Schaden erleiden.	icon_status.firedamage_tex
+9943047	WeakeningEffect	False	True	False			
+9943048	WeakeningEffect	False	True	False			
+9943049	WeakeningEffect	False	True	False			
+9943051	WeakeningEffect	False	True	True			
+9943052	WeakeningEffect	False	True	True			
+9943053	WeakeningEffect	False	True	True			
+9943054	WeakeningEffect	True	True	True	Ominöse magische Aufladung	Syruk ist schutzlos und sammelt bedrohliches Mana.	icon_status.heat_tex
 9999001	DamageOverTime	False	False	True			
 9999002	DamageOverTime	False	False	True			
 9999003	DamageOverTime	False	False	True			
@@ -3671,6 +3973,8 @@
 10151000	Buff	True	True	False	Kettenfertigkeit: Seelenwandeln	Seelenwandeln kann erneut verwendet werden.	icon_status.instantleap_continuous_tex
 10151010	Buff	True	True	False	Schattenaura	Umgebt Euch mit dunkler Schattenmagie. Die Abklingzeit von Klingenduett, Bluthunger, Pendelstoß, Hassklinge, Schattenexplosion, Anziehung, Todesspirale, Zerschmettern und Vergeltung ist um 70% verringert.	icon_status.descentofdarkness_tex
 10151011	Buff	False	True	False	Schattenaura	Die Abklingzeiten von Klingenduett, Bluthunger, Pendelstoß, Hassklinge, Schattenexplosion, Anziehung, Todesspirale, Zerschmettern werden zurückgesetzt.	icon_status.descentofdarkness_tex
+10151012	Buff	True	True	True	Schattenaura verstärken	Pro Treffer auf Monster erhöht sich die Angriffsgeschwindigkeit um 5%. Dieser Effekt kann bis zu 5-mal akkumuliert werden.	icon_skills.descentofdarkness_tex
+10151013	Buff	False	True	False			
 10151020	Buff	False	True	False	Mit zwei normalen Angriffsfertigkeiten verketten	Unsichtbare Stärkung. Wenn Ihr diese Stärkung seht, bitte als Fehler melden!	icon_skills.comboattack2_tex
 10151021	Buff	False	True	False	Mit drei normalen Angriffsfertigkeiten verketten	Unsichtbare Stärkung. Wenn Ihr diese Stärkung seht, bitte als Fehler melden!	icon_skills.comboattack2_tex
 10151022	Buff	False	True	False	Mit vier normalen Angriffsfertigkeiten verketten	Unsichtbare Stärkung. Wenn Ihr diese Stärkung seht, bitte als Fehler melden!	icon_skills.comboattack2_tex
@@ -3747,6 +4051,7 @@
 10152094	Buff	False	True	False			
 10152095	Buff	False	True	False			
 10152096	Buff	False	True	False	Bei Göttlicher Zorn muss die Abklingzeit zurückgesetzt werden.	Bombardement verwenden und Abklingzeit zurücksetzen.	
+10152097	Buff	False	True	False	Balders Rache I	Während der Dauer von Balders Rache seid Ihr unbesiegbar.	
 10152100	Buff	True	True	False	Fokussierte Willenskraft	Die Willenskraft bleibt bis zu 60 Sekunden gespeichert und klingt danach schnell ab. Dieser Countdown startet erneut, wenn einem Gegner Schaden zugefügt wird.	icon_skills.energycharging_tex
 10152110	Buff	True	True	False	Notfallbarriere	Notfallbarriere absorbiert bis zu $H_W_GOOD27858$COLOR_END Schaden.	icon_skills.emergencyshield_tex
 10152111	Buff	True	True	False	Notfallbarriere	Notfallbarriere absorbiert bis zu $H_W_GOOD34900$COLOR_END Schaden.	icon_skills.emergencyshield_tex
@@ -3920,7 +4225,8 @@
 10155300	WeakeningEffect	False	True	False			
 10155310	Buff	False	True	False			
 10155320	Buff	False	True	True			
-10230001	Stun	True	False	False			icon_status.sealskill_tex
+10155400	Stun	True	False	False	Mondumbra	Bewegungsunfähig. Der Effekt endet, wenn Ihr niedergeschlagen werdet.	icon_skills.mooncatch_tex
+10230001	Stun	True	False	False	Ultraschallaufprall	Ihr könnt keine Fertigkeiten benutzen, solange der Effekt wirkt.$BRDieser Effekt kann nicht entfernt werden.	icon_status.sealskill_tex
 15200001	Buff	True	True	False	Panzer des Labatus	Durch den Panzer des Labatus erhöhen sich Eure Abwehr und Stärke $time lang um $H_W_GOOD20%$COLOR_END. Dieser Effekt endet auch dann nicht, wenn Ihr von einem Reinigungseffekt getroffen werdet oder sterbt. Wenn Ihr den Schauplatz des Gildenkriegs verlasst, wird der Effekt automatisch aufgehoben.	icon_skills.emergencyshield_tex
 15200002	Buff	True	True	False	Dastans Feuer	Durch Dastans Feuer erhöht sich Eure Angriffsstärke $time lang um $H_W_GOOD20%$COLOR_END. Dieser Effekt endet auch dann nicht, wenn Ihr von einem Reinigungseffekt getroffen werdet oder sterbt. Wenn Ihr den Schauplatz des Gildenkriegs verlasst, wird der Effekt automatisch aufgehoben.	icon_items.campfire_tex
 15200003	Buff	True	True	False	Kaitans Terror	Durch Kaitans Terror erhöhen sich Eure Angriffsgeschwindigkeit und Wahrscheinlichkeit für kritischen Treffer $time lang um $H_W_GOOD10%$COLOR_END. Eure Bewegungsgeschwindigkeit erhöht sich um $H_W_GOOD20$COLOR_END. Dieser Effekt endet auch dann nicht, wenn Ihr von einem Reinigungseffekt getroffen werdet oder sterbt. Wenn Ihr den Schauplatz des Gildenkriegs verlasst, wird der Effekt automatisch aufgehoben.	icon_status.darkriftrage_tex
@@ -4507,6 +4813,73 @@
 71600004	DamageOverTime	True	False	False	Darkans Flamme	Zieht immer nach $H_W_BAD2$COLOR_END second1 $H_W_BAD5%$COLOR_END der maximalen LP ab.	icon_status.firedamage_tex
 71600010	DamageOverTime	True	False	False	Brandnarbe	Immer nach $H_W_BAD1$COLOR_END second verringern sich die maximalen LP um $H_W_BAD5%$COLOR_END.	icon_status.firedamage_tex
 71600020	WeakeningEffect	False	False	False			
+73500000	Buff	False	True	False	BTS, falls sichtbar	Bei einem Angriff dieses Spielercharakters wird der Schaden nicht geteilt.	
+73500001	Buff	True	True	True	Ventilatorwind	Durch den Wind vom Ventilator der Hangar-Belüftungseinrichtung erleidet Ihr keinen Fallschaden.	icon_skills.rage_tex
+73500002	WeakeningEffect	False	True	True	BTS, falls sichtbar	Dieser NPC ist resistent gegen Schaden und Reaktionen.	
+73500003	Buff	False	True	False	BTS, falls sichtbar	Dieser Spielercharakter wird als Heiler anerkannt.	
+73500004	Buff	False	True	False	BTS, falls sichtbar	Dieser Spielercharakter wird als Tank anerkannt.	
+73500005	Buff	False	True	True	BTS, falls sichtbar	Dieser Spielercharakter wird als Non-Tank anerkannt.	
+73500006	WeakeningEffect	False	True	True	BTS, falls sichtbar	Dieser NPC ist resistent gegen alle Schäden, Effekte und Reaktionen.	
+73501000	Buff	True	True	False	Geschütze Energie	Damit die Energie sicher an Ventaron übermittelt wird, beschützt Air-Hall alles. Während der Durchfahrt von Air-Hall erleidet Ihr keine Sturzschäden.	icon_skills.rage_tex
+73501001	DamageOverTime	True	False	False	Plasmaaussetzung	Die Zeitbombe ist explodiert! Ihr verliert alle $H_W_BAD1$COLOR_END second $H_W_BAD4%$COLOR_END Eurer LP.	icon_status.paralyzestatus_tex
+73501002	Buff	False	True	False	BTS, falls sichtbar	Dieser Spielercharakter fliegt! Er kann von anderen Schockwellen- oder Teleportationsfertigkeiten nicht getroffen werden.	
+73501003	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC kann keine Explosionsfertigkeiten verwenden.	
+73501004	Stun	True	False	False	Benebelt	Ventarons mächtiger Angriff hat Euch betäubt. Ihr seid bewegungsunfähig.	icon_status.confuseup_tex
+73501005	WeakeningEffect	True	False	False	Plasmaschock	Die Zeitbombe ist explodiert! Ihr wurdet von der Schockwelle getroffen. Eure Bewegungsgeschwindigkeit ist um $H_W_BAD50%$COLOR_END und die Bewegungsdistanz von Fertigkeiten um $H_W_BAD30%$COLOR_END verringert. Dieser Effekt kann nicht gereinigt werden.	icon_status.minusmove_tex
+73501006	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC kann Zeitbomben beschwören.	
+73501007	Buff	False	True	False	BTS, falls sichtbar	Dieser Spielercharakter kann nicht von Vernichtungsfertigkeiten getroffen werden, während der Effekt anhält.	
+73501008	WeakeningEffect	True	False	False	Nervenschäden	Durch Ventarons Plasmaaussetzung könnt Ihr keine Fertigkeit verwenden.	icon_status.vergoscurse_tex
+73501009	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC kann den Ventilator betätigen.	
+73501010	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC kann keine Serienexplosionen einsetzen, während der Effekt anhält.	
+73501011	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC kann den Ventilator nicht betätigen, während der Effekt anhält.	
+73501012	WeakeningEffect	True	True	False	Zurückrufen	Durch Ventarons starken Magnetfeldangriff wird Euer Körper gewaltsam bewegt.	icon_status.electriceffect3_tex
+73501013	Buff	False	True	False	BTS, falls sichtbar	Die Zeitbombe ist platziert. Folgende Muster werden nicht in Folge ausgeführt: Serienexplosion, Vernichtungsfertigkeit, Ventilator	
+73501014	Buff	False	True	False	BTS, falls sichtbar	Der Ventilator wurde aktiviert. Folgende Muster werden nicht in Folge ausgeführt: Vernichtungsfertigkeit	
+73501015	Buff	False	True	False	BTS, falls sichtbar	Der Ventilator wurde aktiviert. Folgende Muster werden nicht in Folge ausgeführt: Zeitbombe	
+73501016	Buff	False	True	False	BTS, falls sichtbar	Effekt des errungenen Fortschritts "RK-9 Hangar - Ansaug-Abgas-Anlage anwenden"	
+73501017	Buff	False	True	False	BTS, falls sichtbar	Verhindert wiederholte Schäden von der Ansaug-Abgas-Anlage.	
+73501018	Buff	False	True	False	BTS, falls sichtbar	Ein Effekt durch den errungenen Fortschritt "100 Zeitbomben entfernen".	
+73501019	Buff	False	True	True	BTS, falls sichtbar	Unsichtbarer Aggro-NPC kann als Bedingung zugeteilt werden.	
+73502000	DamageOverTime	True	False	False	Elektrischer Schock	Ihr seid einem starken Strom ausgesetzt und verliert je pro Akkumulierung alle $H_W_BAD2$COLOR_END second1 $H_W_BAD6%$COLOR_END Eurer LP. Kann bis zu 12-mal akkumuliert werden.	icon_skills.electricshock_tex
+73502001	WeakeningEffect	False	True	True	BTS, falls sichtbar	Dieser NPC ist resistent gegen alle Schäden, Reaktionen und Effekte.	
+73502002	Buff	False	True	True	BTS, falls sichtbar	Dieser NPC führt bei der Stromexplosion zuerst einen elektromagnetischen Lenkangriff aus.	
+73502003	Buff	False	True	True	BTS, falls sichtbar	Dieser NPC greift bei der Stromexplosion zuerst mit einer Nahkampfexplosion an.	
+73502004	Buff	False	True	False	BTS, falls sichtbar	Dieser Spielercharakter wurde von Sägeblattzirkulation getroffen. Hexapleion kann einen Kettenangriff ausführen.	
+73502005	WeakeningEffect	True	False	False	Elektroschock	Durch den starken Strom von Hexapleion steht Ihr unter Schock. Ihr könnt die Fertigkeit nicht verwenden.	icon_skills.electricshock2_tex
+73502006	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC greift garantiert an, wenn die Abklingzeit abgelaufen ist.	
+73502007	WeakeningEffect	False	True	True	BTS, falls sichtbar	Ein Effekt, der die Wirkung dieses NPCs anzeigt.	
+73503000	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC kann Mondlicht-Schockwelle nicht verwenden, während der Effekt anhält.	
+73503001	Stun	True	False	False	Benebelt	Ihr seid durch den Angriff von RK-9 betäubt und bewegungsunfähig.	icon_status.confuseup_tex
+73503002	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC kann Mondlicht-Schockwelle aktuell nicht verwenden.	
+73503003	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC kann die Lebewesenerkennung nicht ausführen, während der Effekt anhält.	
+73503004	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC kann die Lebewesenerkennung aktuell nicht ausführen.	
+73503005	Buff	False	True	True	BTS, falls sichtbar	Dieser NPC kann die Nutzungsbedingung des "Fortgeschrittenen Thermoanalyse-Protokolls" aktuell dem Boss zuteilen.	
+73503006	Buff	False	True	True	BTS, falls sichtbar	Dieser NPC kann die Nutzungsbedingung des "Fortgeschrittenen Thermoanalyse-Protokolls" aktuell in üblicher Reihenfolge dem Boss zuteilen.	
+73503007	Buff	False	True	True	BTS, falls sichtbar	Dieser NPC kann die Nutzungsbedingung des "Fortgeschrittenen Thermoanalyse-Protokolls" aktuell in umgekehrter Reihenfolge dem Boss zuteilen.	
+73503008	Buff	False	True	True	BTS, falls sichtbar	Bei diesem NPC ist der Brustschutz aktuell zerstört. Erzeugt kontinuierlich Fehlfunktionen.	
+73503009	DamageOverTime	True	True	False	Laseraufprall	Durch den Hochleistungslaser erleidet Ihr kontiuierlich Schaden. Ihr verliert alle $H_W_BAD2$COLOR_END second1 $H_W_BAD6%$COLOR_END Eurer LP. Dieser Effekt kann nicht gereinigt werden.	icon_status.fullelectriceffect_tex
+73503100	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC kann das Thermoanalyse-Protokoll aktuell nicht verwenden.	
+73503101	Buff	False	True	True	BTS, falls sichtbar	Dieser NPC trifft gemäß Thermoanalyse-Protokoll als Erstes den Nahkampfbereich.	
+73503102	Buff	False	True	True	BTS, falls sichtbar	Dieser NPC trifft gemäß Thermoanalyse-Protokoll als Erstes den Fernkampfbereich.	
+73503103	Buff	False	True	True	BTS, falls sichtbar	Dieser NPC trifft gemäß Thermoanalyse-Protokoll als Erstes den ganzen Bereich.	
+73503104	Buff	False	True	True	BTS, falls sichtbar	Dieser NPC trifft gemäß Thermoanalyse-Protokoll als Zweites den Nahkampfbereich.	
+73503105	Buff	False	True	True	BTS, falls sichtbar	Dieser NPC trifft gemäß Thermoanalyse-Protokoll als Zweites den Fernkampfbereich.	
+73503106	Buff	False	True	True	BTS, falls sichtbar	Dieser NPC trifft gemäß Thermoanalyse-Protokoll als Zweites den ganzen Bereich.	
+73503107	Buff	False	True	True	BTS, falls sichtbar	Bei diesem NPC wurde der Brustschutz nicht zerstört. Er wird mit normalem System Eindringlinge ausschalten.	
+73503108	Buff	True	True	True	BTS, falls sichtbar	Dieser NPC führt das Thermoanalyse-Protokoll aus.	
+73503109	Buff	True	True	True	BTS, falls sichtbar	Dieser NPC führt das Thermoanalyse-Protokoll in umgekehrter Reihenfolge aus.	
+73503200	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC kann bei Fernzielen die Fertigkeit "Kleine Granate" ktuell nicht verwenden.	
+73503201	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC kann bei Wiederbelebungszielen die Fertigkeit "Kleine Granate" aktuell nicht verwenden.	
+73503300	Buff	False	True	True	BTS, falls sichtbar	Dieser NPC kann das Schutzprotokoll ausführen.	
+73503301	Buff	True	True	True	Protokoll ausgeführt: Schutz	Das System von RK-9 hat Gefahr erkannt und das Schutzprotokoll aktiviert. Wenn das Schutzprotokoll ausgeführt wird, beseitigt es alle Eindringlinge.	icon_skills.emergencyshield_tex
+73503302	Buff	False	True	False	BTS, falls sichtbar	Bei diesem NPC wurde während der Schutzprotokollausführung durch übermäßigen Schaden das System vorübergehend ausgeschaltet. Handlungsunfähig für 5.000ms.	
+73503303	Buff	False	True	False	BTS, falls sichtbar	Bei diesem NPC ist während der Ausführung des Schutzprotokolls ein Systemfehler eingetreten. Für 20.000ms wird die Schutzplatte der Blutscherbe geschwächt. Bei übermäßigem Schaden kann sie sogar zerbrochen werden.	
+73503400	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC kann das Schutzprotokoll nicht ausführen, während der Effekt anhält.	
+73503401	Buff	True	True	True	Protokoll ausgeführt: Schutz	Das System von RK-9 hat Gefahr erkannt und das Schutzprotokoll aktiviert. Wenn das Schutzprotokoll ausgeführt wird, beseitigt es alle Eindringlinge.	icon_skills.emergencyshield_tex
+73503402	Buff	False	True	False	BTS, falls sichtbar	Bei diesem NPC wurde während der Schutzprotokollausführung durch übermäßigen Schaden das System vorübergehend ausgeschaltet. Handlungsunfähig für 5.000ms.	
+73503403	WeakeningEffect	False	True	False	BTS, falls sichtbar	Dieser NPC ist resistent gegen alle Schäden, Effekte und Reaktionen.	
+73504000	WeakeningEffect	True	True	True	Starkes Magnetfeld	Durch den Einfluss des starken Magnetfelds können keine Fertigkeit verwendet werden.	icon_status.sealskill_tex
+73504001	WeakeningEffect	True	True	False	Elektroschock	Ihr steht unter Schock und seid bewegungsunfähig, weil der Magnetfeld-Rotationsapparat berührt wurde.	icon_skills.excesselectron_tex
 74300002	DamageOverTime	True	True	False	Schwarzer Nebel	Im Nebel erhöht sich die Bewegungsgeschwindigkeit erheblich.	icon_status.darkeffect_tex
 74300003	Buff	True	True	True	Abgewetzt	Erhöht die Kraft um $H_W_GOOD50%$COLOR_END.	icon_status.minushp_tex
 74300012	WeakeningEffect	True	True	False	Puzzlereihenfolge: rot	Berührt die Puzzlestücke in der richtigen Reihenfolge, die Euch die Nummern auf dem Symbol verraten. Andernfalls droht Euch das Todesurteil.	icon_status.battlecommand03_tex
@@ -4735,6 +5108,82 @@
 91600036	DamageOverTime	False	False	False			
 91600037	DamageOverTime	False	False	False			icon_status.cruel_slayer_3_tex
 91600038	Buff	False	True	False	Aeonalispfeiler wiederhergestellt	Anomalie für LP-Regeneration des Aeonalispfeilers	icon_status.aura_of_regeneration_hp_tex
+93500000	Buff	False	True	False	BTS, falls sichtbar	Bei einem Angriff dieses Spielercharakters wird der Schaden nicht geteilt.	
+93500001	Buff	False	True	False	BTS, falls sichtbar	Durch den Wind vom Ventilator der Hangar-Belüftungseinrichtung erleidet Ihr zusätzlichen Fallschaden.	
+93500002	WeakeningEffect	False	True	True	BTS, falls sichtbar	Dieser NPC ist resistent gegen Schaden und Reaktionen.	
+93500003	Buff	False	True	False	BTS, falls sichtbar	Dieser Spielercharakter wird als Heiler anerkannt.	
+93500004	Buff	False	True	False	BTS, falls sichtbar	Dieser Spielercharakter wird als Tank anerkannt.	
+93500005	Buff	False	True	True	BTS, falls sichtbar	Dieser Spielercharakter wird als Non-Tank anerkannt.	
+93500006	WeakeningEffect	False	True	True	BTS, falls sichtbar	Dieser NPC ist resistent gegen alle Schäden, Effekte und Reaktionen.	
+93501000	Buff	True	True	False	Geschütze Energie	Damit die Energie sicher an Ventaron übermittelt wird, beschützt Air-Hall alles. Während der Durchfahrt von Air-Hall erleidet Ihr keine Sturzschäden.	icon_skills.rage_tex
+93501001	DamageOverTime	True	True	False	Plasmaaussetzung	Die Zeitbombe ist explodiert! Ihr verliert alle $H_W_BAD1$COLOR_END second $H_W_BAD8%$COLOR_END Eurer LP. Dieser Effekt kann nicht gereinigt werden.	icon_status.paralyzestatus_tex
+93501002	Buff	False	True	False	BTS, falls sichtbar	Dieser Spielercharakter fliegt! Er kann von anderen Schockwellen- oder Teleportationsfertigkeiten nicht getroffen werden.	
+93501003	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC kann keine Explosionsfertigkeiten verwenden.	
+93501004	Stun	True	False	False	Benebelt	Ventarons mächtiger Angriff hat Euch betäubt. Ihr seid bewegungsunfähig.	icon_status.confuseup_tex
+93501005	WeakeningEffect	True	True	False	Plasmaschock	Die Zeitbombe ist explodiert! Ihr wurdet von der Schockwelle getroffen. Eure Bewegungsgeschwindigkeit ist um $H_W_BAD50%$COLOR_END und die Bewegungsdistanz von Fertigkeiten um $H_W_BAD30%$COLOR_END verringert. Dieser Effekt kann nicht gereinigt werden.	icon_status.minusmove_tex
+93501006	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC kann Zeitbomben beschwören.	
+93501007	Buff	False	True	False	BTS, falls sichtbar	Dieser Spielercharakter kann nicht von Vernichtungsfertigkeiten getroffen werden, während der Effekt anhält.	
+93501008	WeakeningEffect	True	True	False	Nervenschäden	Durch Ventarons Plasmaaussetzung könnt Ihr keine Fertigkeit verwenden.	icon_status.vergoscurse_tex
+93501009	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC kann den Ventilator betätigen.	
+93501010	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC kann keine Serienexplosionen einsetzen, während der Effekt anhält.	
+93501011	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC kann den Ventilator nicht betätigen, während der Effekt anhält.	
+93501012	WeakeningEffect	True	True	False	Zurückrufen	Durch Ventarons starken Magnetfeldangriff wird Euer Körper gewaltsam bewegt.	icon_status.electriceffect3_tex
+93501013	Buff	False	True	False	BTS, falls sichtbar	Die Zeitbombe ist platziert. Folgende Muster werden nicht in Folge ausgeführt: Serienexplosion, Vernichtungsfertigkeit, Ventilator	
+93501014	Buff	False	True	False	BTS, falls sichtbar	Der Ventilator wurde aktiviert. Folgende Muster werden nicht in Folge ausgeführt: Vernichtungsfertigkeit	
+93501015	Buff	False	True	False	BTS, falls sichtbar	Der Ventilator wurde aktiviert. Folgende Muster werden nicht in Folge ausgeführt: Zeitbombe	
+93501016	Buff	False	True	False	BTS, falls sichtbar	Dieser Spielercharakter ist gegenüber jeglichem Schaden immun.	
+93501017	Buff	False	True	False	BTS, falls sichtbar	Verhindert wiederholte Schäden von der Ansaug-Abgas-Anlage.	
+93501018	Buff	False	True	False	BTS, falls sichtbar	Ein Effekt durch den errungenen Fortschritt "100 Zeitbomben entfernen".	
+93501019	Buff	False	True	True	BTS, falls sichtbar	Unsichtbarer Aggro-NPC kann als Bedingung zugeteilt werden.	
+93501020	Buff	False	True	False	BTS, falls sichtbar	Dieser Spielercharakter hat die Ansaug-Anlage benutzt. Zur Verhinderung von BTS 159600 erleidet Ihr 1 Sekunde lang keine Sturzschäden.	
+93502000	DamageOverTime	True	False	False	Elektrischer Schock	Ihr seid einem starken Strom ausgesetzt und verliert pro Akkumulierung alle $H_W_BAD2$COLOR_END second1 $H_W_BAD10%$COLOR_END Eurer LP. Kann bis zu 12-mal akkumuliert werden.	icon_skills.electricshock_tex
+93502001	WeakeningEffect	False	True	True	BTS, falls sichtbar	Dieser NPC ist resistent gegen alle Schäden, Reaktionen und Effekte.	
+93502002	Buff	False	True	True	BTS, falls sichtbar	Dieser NPC führt bei der Stromexplosion zuerst einen elektromagnetischen Lenkangriff aus.	
+93502003	Buff	False	True	True	BTS, falls sichtbar	Dieser NPC greift bei der Stromexplosion zuerst mit einer Nahkampfexplosion an.	
+93502004	Buff	False	True	False	BTS, falls sichtbar	Dieser Spielercharakter wurde von Sägeblattzirkulation getroffen. Hexapleion kann einen Kettenangriff ausführen.	
+93502005	WeakeningEffect	True	False	False	Elektroschock	Durch den starken Strom von Hexapleion steht Ihr unter Schock. Ihr könnt die Fertigkeit nicht verwenden.	icon_skills.electricshock2_tex
+93502006	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC greift garantiert an, wenn die Abklingzeit abgelaufen ist.	
+93502007	WeakeningEffect	False	True	True	BTS, falls sichtbar	Ein Effekt, der die Wirkung dieses NPCs anzeigt.	
+93502008	Buff	False	True	False	BTS, falls sichtbar	Ein Effekt, den Ihr erhaltet, wenn Ihr keinen elektrischen Schock erlitten habt.	
+93502009	Buff	False	True	True	BTS, falls sichtbar	Ein Effekt, der verhindert, 93502008 zu gewähren, wenn Ihr einen elektrischen Schock erleidet.	
+93503000	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC kann Mondlicht-Schockwelle nicht verwenden, während der Effekt anhält.	
+93503001	Stun	True	False	False	Benebelt	Ihr seid durch den Angriff von RK-9 betäubt und bewegungsunfähig.	icon_status.confuseup_tex
+93503002	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC kann Mondlicht-Schockwelle aktuell nicht verwenden.	
+93503003	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC kann die Lebewesenerkennung nicht ausführen, während der Effekt anhält.	
+93503004	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC kann die Lebewesenerkennung aktuell nicht ausführen.	
+93503005	Buff	False	True	True	BTS, falls sichtbar	Dieser NPC kann die Nutzungsbedingung des "Fortgeschrittenen Thermoanalyse-Protokolls" aktuell dem Boss zuteilen.	
+93503006	Buff	False	True	True	BTS, falls sichtbar	Dieser NPC kann die Nutzungsbedingung des "Fortgeschrittenen Thermoanalyse-Protokolls" aktuell in üblicher Reihenfolge dem Boss zuteilen.	
+93503007	Buff	False	True	True	BTS, falls sichtbar	Dieser NPC kann die Nutzungsbedingung des "Fortgeschrittenen Thermoanalyse-Protokolls" aktuell in umgekehrter Reihenfolge dem Boss zuteilen.	
+93503008	Buff	False	True	True	BTS, falls sichtbar	Bei diesem NPC ist der Brustschutz aktuell zerstört. Erzeugt kontinuierlich Fehlfunktionen.	
+93503009	DamageOverTime	True	True	False	Laseraufprall	Durch den Hochleistungslaser erleidet Ihr kontiuierlich Schaden. Ihr verliert alle $H_W_BAD2$COLOR_END second1 $H_W_BAD10%$COLOR_END Eurer LP. Dieser Effekt kann nicht gereinigt werden.	icon_status.fullelectriceffect_tex
+93503010	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC kann das Thermoanalyse-Protokoll nicht verwenden, während der Effekt anhält.	
+93503011	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC kann die Systemparameter von RK-9 nicht ändern.	
+93503100	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC kann das Thermoanalyse-Protokoll aktuell nicht verwenden.	
+93503101	Buff	False	True	True	BTS, falls sichtbar	Dieser NPC trifft gemäß Thermoanalyse-Protokoll als Erstes den Nahkampfbereich.	
+93503102	Buff	False	True	True	BTS, falls sichtbar	Dieser NPC trifft gemäß Thermoanalyse-Protokoll als Erstes den Fernkampfbereich.	
+93503103	Buff	False	True	True	BTS, falls sichtbar	Dieser NPC trifft gemäß Thermoanalyse-Protokoll als Erstes den ganzen Bereich.	
+93503104	Buff	False	True	True	BTS, falls sichtbar	Dieser NPC trifft gemäß Thermoanalyse-Protokoll als Zweites den Nahkampfbereich.	
+93503105	Buff	False	True	True	BTS, falls sichtbar	Dieser NPC trifft gemäß Thermoanalyse-Protokoll als Zweites den Fernkampfbereich.	
+93503106	Buff	False	True	True	BTS, falls sichtbar	Dieser NPC trifft gemäß Thermoanalyse-Protokoll als Zweites den ganzen Bereich.	
+93503107	Buff	False	True	True	BTS, falls sichtbar	Bei diesem NPC wurde der Brustschutz nicht zerstört. Er wird mit normalem System Eindringlinge ausschalten.	
+93503108	Buff	False	True	True	BTS, falls sichtbar	Dieser NPC führt das Thermoanalyse-Protokoll aus.	icon_status.cruel_slayer_2_tex
+93503109	Buff	False	True	True	BTS, falls sichtbar	Dieser NPC führt das Thermoanalyse-Protokoll in umgekehrter Reihenfolge aus.	icon_status.cruel_slayer_3_tex
+93503200	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC kann bei Fernzielen die Fertigkeit "Kleine Granate" ktuell nicht verwenden.	
+93503201	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC kann bei Wiederbelebungszielen die Fertigkeit "Kleine Granate" aktuell nicht verwenden.	
+93503300	Buff	False	True	True	BTS, falls sichtbar	Dieser NPC kann das Schutzprotokoll ausführen.	
+93503301	Buff	True	True	True	Protokoll ausgeführt: Schutz	Das System von RK-9 hat Gefahr erkannt und das Schutzprotokoll aktiviert. Wenn das Schutzprotokoll ausgeführt wird, beseitigt es alle Eindringlinge.	icon_skills.emergencyshield_tex
+93503302	Buff	False	True	False	BTS, falls sichtbar	Bei diesem NPC wurde während der Schutzprotokollausführung durch übermäßigen Schaden das System vorübergehend ausgeschaltet. Handlungsunfähig für 5.000ms.	
+93503303	Buff	False	True	False	BTS, falls sichtbar	Bei diesem NPC ist während der Ausführung des Schutzprotokolls ein Systemfehler eingetreten. Für 20.000ms wird die Schutzplatte der Blutscherbe geschwächt. Bei übermäßigem Schaden kann sie sogar zerbrochen werden.	
+93503304	Buff	True	True	True	Notschutzsystem	Das System von RK-9 hat starken Schaden erkannt und das Notschutzsystem aktiviert. Die Abwehr und Angriffsstärke von RK-9 werden erhöht.	icon_status.dimensionguard_tex
+93503400	Buff	False	True	False	BTS, falls sichtbar	Dieser NPC kann das Schutzprotokoll nicht ausführen, während der Effekt anhält.	
+93503401	Buff	True	True	True	Protokoll ausgeführt: Schutz	Das System von RK-9 hat Gefahr erkannt und das Schutzprotokoll aktiviert. Wenn das Schutzprotokoll ausgeführt wird, beseitigt es alle Eindringlinge.	icon_skills.emergencyshield_tex
+93503402	Buff	False	True	False	BTS, falls sichtbar	Bei diesem NPC wurde während der Schutzprotokollausführung durch übermäßigen Schaden das System vorübergehend ausgeschaltet. Handlungsunfähig für 5.000ms.	
+93503500	Buff	False	True	False	BTS, falls sichtbar	Beim Radarsystem wurde die Nahkampfexplosion nicht verwendet.	
+93503501	Buff	False	True	False	BTS, falls sichtbar	Im normalen Modus 1-mal beseitigen	
+93503502	Buff	False	True	False	BTS, falls sichtbar	Im schwierigen Modus 1-mal beseitigen	
+93503503	Buff	False	True	False	BTS, falls sichtbar	Im schwierigen Modus 77-mal beseitigen	
+93504000	WeakeningEffect	True	True	True	Starkes Magnetfeld	Durch den Einfluss des starken Magnetfelds können keine Fertigkeit verwendet werden.	icon_status.sealskill_tex
+93504001	WeakeningEffect	True	True	False	Elektroschock	Ihr steht unter Schock und seid bewegungsunfähig, weil der Magnetfeld-Rotationsapparat berührt wurde.	icon_skills.excesselectron_tex
 97000001	WeakeningEffect	True	False	True	Fressen	Hungrige Babyspinnen sind auf der Jagd nach Euch.	icon_status.curse_tex
 97000002	WeakeningEffect	True	True	True	Sättigungsgefühl	Der Bauch ist gesättigt, daher wird eine Pause eingelegt.	icon_status.sleepstatus_tex
 97000003	WeakeningEffect	True	True	False	Das starke Gift der Babyspinne	Ihr wurdet von der Babyspinne vergiftet, weshalb immer nach $H_W_BAD0$COLOR_END second1 $H_W_BAD10%$COLOR_END der Gesamt-LP abgezogen werden.	icon_status.diseasedown_tex
@@ -4895,7 +5344,7 @@
 98000104	Buff	True	True	True	Kette der Offensive III	Erhöht den Fertigkeitsschaden um $H_W_GOOD10%$COLOR_END und verringert den erlittenen Schaden um $H_W_GOOD10%$COLOR_END. Zusätzlich erhöht sich die Angriffsgeschwindigkeit um $H_W_GOOD4%$COLOR_END.	
 98000105	Buff	True	True	True	Kette der Wiederherstellung III	Erhöht den Fertigkeitsschaden um $H_W_GOOD10%$COLOR_END und verringert den erlittenen Schaden um $H_W_GOOD10%$COLOR_END. Zusätzlich erhöht sich die Angriffsgeschwindigkeit um $H_W_GOOD4%$COLOR_END.	
 98000106	WeakeningEffect	True	False	False	Glyphe der Schwächung	Verringert die Konstitution um $H_W_BAD10%$COLOR_END.	icon_crest.crestactivedefencedown_tex
-98000107	Buff	True	True	False	Energiesterne IV	Erhöht die Kraft um $H_W_GOOD40$COLOR_END und die Angriffsgeschwindigkeit um $H_W_GOOD8$COLOR_END.	icon_skills.divinelightning_tex
+98000107	Buff	True	True	False	Energiesterne IV	Erhöht die Kraft um $H_W_GOOD48$COLOR_END und die Angriffsgeschwindigkeit um $H_W_GOOD9,6$COLOR_END.	icon_skills.divinelightning_tex
 98000108	Buff	True	True	False	Glyphe der Erdung	Erhöht die Konstitution um $H_W_GOOD10%$COLOR_END.	icon_crest.crestactivedefenceup_tex
 98000109	Buff	True	True	False	Segen von Arun III	Erhöht die Bewegungsgeschwindigkeit um $H_W_GOOD10$COLOR_END und die Kraft um $H_W_GOOD25$COLOR_END.	icon_skills.attackup_tex
 98000110	Buff	True	True	False	Segen von Shara V	Alle $H_W_GOOD2 Sek.$COLOR_END regeneriert Segen von Shara LP und erhöht Konstitution um 11 und Resistenz um 5.	icon_skills.agilitybless_tex
@@ -5366,6 +5815,7 @@
 81000002	Buff	True	True	False	+30 EL-EP	Erhöht die Menge von EL-EP um $H_W_GOOD30%$COLOR_END.	icon_items.ep_grow30_tex
 81000003	Buff	True	True	False	+50 EL-EP	Erhöht die Menge von EL-EP um $H_W_GOOD50%$COLOR_END.	icon_items.ep_grow50_tex
 81000004	Buff	True	True	False	+100 EL-EP	Erhöht die Menge von EL-EP um $H_W_GOOD100%$COLOR_END.	icon_items.ep_grow100_tex
+81000005	Buff	False	True	True			icon_items.ep_grow30_tex
 81010101	Buff	True	True	False	Schadensverringerung	Verringerter Schaden. Der Effekt endet, wenn ein Kampf beginnt.	icon_ep.ep_defense_wellup_tex
 81010102	Buff	True	True	False	Schadensverringerung	Verringerter Schaden. Der Effekt endet, wenn ein Kampf beginnt.	icon_ep.ep_defense_wellup_tex
 81010103	Buff	True	True	False	Schadensverringerung	Verringerter Schaden. Der Effekt endet, wenn ein Kampf beginnt.	icon_ep.ep_defense_wellup_tex
@@ -6460,6 +6910,8 @@
 5020000	Buff	True	True	False	Bedeutender Segen der Verzauberung	Eure Verzauberungschance ist bedeutend erhöht. Wirkt auf Gegenstände jeglicher Ordnung, jedoch nur bis zu Verzauberungsstufe +12.	icon_items.parts_heavyarmorc5_tex
 5020001	Buff	True	True	False	Starker Segen der Verzauberung	Eure Verzauberungschance ist stark erhöht. Wirkt auf Gegenstände jeglicher Ordnung, jedoch nur bis zu Verzauberungsstufe +12.	icon_items.parts_heavyarmorc5_tex
 5020002	Buff	True	True	False	Erheblicher Segen der Verzauberung	Eure Verzauberungschance ist erheblich erhöht. Wirkt auf Gegenstände jeglicher Ordnung, jedoch nur bis zu Verzauberungsstufe +12.	icon_items.parts_heavyarmorc5_tex
+5020003	Buff	True	True	True	Komplette Kristallbindung (TERA-Club)	Ein Schutzzauber, der alle Kristalle vor der Zerstörung schützt, solange Ihr TERA-Clubmitglied seid.	icon_items.q_closedspace_stone_05_tex
+5020004	Buff	True	True	True	Herstellungsexperte (TERA-Club)	Beschleunigt die Herstellung jeglicher Ausrüstung um $H_W_GOOD50%$COLOR_END, solange Ihr TERA-Clubmitglied seid.	icon_items.artisan_lamp_tex
 14400001	Buff	True	True	False	Emblem des Erfolgs	Gewährt folgende Effekte:$BR $BRStellt immer nach 1 Sekunde $H_W_GOOD1%$COLOR_END der Gesamt-LP wieder her$BRErhöht die Abwurfrate bei der Jagd auf Monster um $H_W_GOOD100%$COLOR_END	icon_items.parts_magicweaponc15_tex
 14400002	Buff	True	True	False	Ruhmreiches Andenken	Gewährt folgende Effekte.$BR $BR Erhöht die Gesamt-LP um $H_W_GOOD7%$COLOR_END$BR Erhöht die Konstitution um $H_W_GOOD20%$COLOR_END$BR Erhöht die Angriffsgeschwindigkeit um $H_W_GOOD15%$COLOR_END$BR Erhöht den Fertigkeitsschaden um $H_W_GOOD20%$COLOR_END$BR Verhindert das Zerbrechen von Kristallen $H_W_GOOD1$COLOR_END-mal$BR Erhöht die Bewegungsgeschwindigkeit um $H_W_GOOD7%$COLOR_END.	icon_items.parts_lightweaponc9_tex
 14400003	Buff	True	True	False	Siegel der unauslöschlichen Flamme	Gewährt folgende Effekte:$BR $BRErhöht die Gesamt-LP um $H_W_GOOD7%$COLOR_END$BR Erhöht die Konstitution um $H_W_GOOD20%$COLOR_END$BR Erhöht die Bewegungsgeschwindigkeit im Kampf um $H_W_GOOD10$COLOR_END$BR Erhöht die Angriffsgeschwindigkeit um $H_W_GOOD15%$COLOR_END$BRStellt immer nach 1 Sekunde $H_W_GOOD1%$COLOR_END der Gesamt-LP wieder her$BRErhöht den Fertigkeitsschaden um $H_W_GOOD20%$COLOR_END$BRVerhindert das Zerbrechen von Kristallen $H_W_GOOD1$COLOR_END-mal$BRErhöht die Abwurfrate bei der Jagd auf Monster um $H_W_GOOD100%$COLOR_END$BRErhöht die Bewegungsgeschwindigkeit um $H_W_GOOD7%$COLOR_END.	icon_items.parts_magicweaponc6_tex

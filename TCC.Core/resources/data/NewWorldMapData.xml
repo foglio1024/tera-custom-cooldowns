@@ -52,7 +52,6 @@
         <Npc type="MARKER_DUNGEON_ARENA" pos="-1382,8771,2173" continentId="1" nameId="99,7001" />
         <Npc type="MARKER_DUNGEON_SOLO" pos="-1511,8975,2173" continentId="1" nameId="99,7002" />
         <Npc type="MARKER_CITYBATTLE" pos="-1664,8506,2762" continentId="1" nameId="99,8001" />
-        <Npc type="MARKER_ENTER_DUNGEON" pos="-1341,7610,2173" continentId="1" nameId="99,9780" />
       </Section>
       <Section id="2" desc="벨리카 인근" nameId="63023" floor="1" mapId="WMap_VK_Field_01" height="53620.37" width="71493.82" top="34211.0" left="-34211.0">
         <Npc type="MARKER_RECOVERY" pos="12737.1436,7665.0762,1057.3972" continentId="1" nameId="99,10" />
@@ -153,6 +152,7 @@
       <Section id="22" desc="15 광기의 언덕" nameId="15001" floor="1" mapId="WMap_ASE_Field_01" height="53620.37" width="71493.82" top="11170.9092" left="4189.091">
         <Npc type="MARKER_CAMP" pos="-23852.4063,45048.5117,2472.8872" continentId="7002" nameId="99,1010" />
         <Npc type="MARKER_CAMP" pos="-19456.1504,37560.1484,3009.3848" continentId="7002" nameId="99,1022" />
+        <Npc type="MARKER_enter_Dungeon" pos="-7124,37166,4693" continentId="7002" nameId="99,9769" />
       </Section>
       <Section id="23" desc="17 파라논 협곡" nameId="17001" floor="1" mapId="WMap_ASE_Field_03" height="53620.37" width="71493.82" top="3490.90918" left="27229.0918">
         <Npc type="MARKER_CAMP" pos="-20818.0215,55267.2383,2434.7798" continentId="7002" nameId="99,1009" />
@@ -258,7 +258,6 @@
         <Npc type="MARKER_CAMP" pos="102838.9297,65722.1953,2808.7485" continentId="7004" nameId="99,1073" />
         <Npc type="MARKER_CAMP" pos="116372.1875,73936.9219,4770.5029" continentId="7004" nameId="99,1074" />
         <Npc type="MARKER_enter_Dungeon" pos="109961.5313,78145.4844,6028.5498" continentId="7004" nameId="99,5006" />
-        <Npc type="MARKER_enter_Dungeon" pos="102182,73377,2638" continentId="7004" nameId="99,5024" />
       </Section>
       <Section id="57" desc="캐스타니카" type="town" nameId="61001" floor="1" mapId="WMap_AEN_Vill_01" height="9830.4" width="13107.2" top="93696.0" left="69120.0">
         <Npc type="MARKER_MERCHANT" pos="87994.4609,76791.0938,2151.1257" continentId="7004" nameId="99,11" />
@@ -324,6 +323,7 @@
       </Section>
       <Section id="70" desc="거친 파도만" nameId="11001" floor="1" mapId="WMap_AEN_Field_02" height="53620.37" width="71493.82" top="80291.0" left="27229.0">
         <Npc type="MARKER_CAMP" pos="48767,62846,267" continentId="7004" nameId="99,1041" />
+        <Npc type="MARKER_enter_Dungeon" pos="43264,67969,62" continentId="7004" nameId="99,5020" />
       </Section>
       <Section id="71" desc="해적 소굴 1층" type="dungeon" nameId="11005" floor="1" mapId="WMap_DG_PIC_1F" height="15360.0" width="30720.0" top="46080.0" left="46080.0" mode="5">
         <Npc type="MARKER_CAMP" pos="38522,59113,70" continentId="7004" nameId="99,1042" />
@@ -363,9 +363,7 @@
         <Npc type="MARKER_DUNGEON_ARENA" pos="372,-1010,6832" continentId="2" nameId="99,7001" />
         <Npc type="MARKER_DUNGEON_SOLO" pos="168,-819,6832" continentId="2" nameId="99,7002" />
       </Section>
-      <Section id="102" desc="알레만시아 인근" nameId="72002" floor="1" mapId="WMap_AL_Field_01" height="53620.37" width="71493.82" top="21923.0" left="-34211.0">
-        <Npc type="MARKER_enter_Dungeon" pos="-19030.44921875,16671.32617188,2370.46142578" continentId="2" nameId="99,9066" />
-      </Section>
+      <Section id="102" desc="알레만시아 인근" nameId="72002" floor="1" mapId="WMap_AL_Field_01" height="53620.37" width="71493.82" top="21923.0" left="-34211.0" />
       <Section id="103" desc="알레만시아 서부" nameId="72003" floor="1" mapId="WMap_AL_Field_03" height="53620.37" width="71493.82" top="26531.0" left="-64931.0" />
     </Guard>
     <Guard id="11" desc="11 비아 엘레니움 가드" nameId="211" mapId="WMap_HSC_Guard" height="117964.8" width="157286.4" top="-7680.0" left="-84480.0">
@@ -385,7 +383,6 @@
         <Npc type="MARKER_CAMP" pos="-48339.6953,-15238.4668,2419.7029" continentId="7014" nameId="99,1094" />
         <Npc type="MARKER_CAMP" pos="-53886.3242,-33140.3008,3727.1519" continentId="7014" nameId="99,1115" />
         <Npc type="MARKER_CLIMB" pos="-41807.7813,-24725.5449,4119.8726" continentId="7014" nameId="99,60" />
-        <Npc type="MARKER_enter_Dungeon" pos="-54569,-40729,4355" continentId="7014" nameId="99,5034" />
       </Section>
       <Section id="108" desc="추방자의 계곡" nameId="36001" floor="1" mapId="WMap_HSC_Field_02" height="53620.37" width="71493.82" top="-25693.0" left="-34211.0">
         <Npc type="MARKER_CAMP" pos="-54967.6602,4739.8237,533.6615" continentId="7014" nameId="99,1037" />
@@ -586,7 +583,6 @@
         <Npc type="MARKER_CLIMB" pos="-13864.9492,59788.0977,700.7233" continentId="7015" nameId="99,60" />
         <Npc type="MARKER_CLIMB" pos="-9935.4219,73671.4219,-1264.7358" continentId="7015" nameId="99,61" />
         <Npc type="MARKER_enter_Dungeon" pos="-18975.2480,90624.6016,-552.8145" continentId="7015" nameId="99,5015" />
-        <Npc type="MARKER_enter_Dungeon" pos="-11838,88067,-462" continentId="7015" nameId="99,5022" />
       </Section>
     </Guard>
     <Guard id="18" desc="18 카이아도르 지구" nameId="218" mapId="WMap_KA_Guard" height="117964.8" width="157286.4" top="46080.0" left="-76800.0">
@@ -783,10 +779,13 @@
       <Section id="172001" desc="원시의 땅" nameId="172001" floor="1" mapId="WMap_RWS_Field" height="53620.37" width="71493.82" top="18851.0" left="-49571.0">
         <Npc type="MARKER_CAMP" pos="-11544,-19077,-754" continentId="7031" nameId="99,1721" />
         <Npc type="MARKER_CAMP" pos="-4053,-22370,603" continentId="7031" nameId="99,1722" />
+        <Npc type="MARKER_enter_Dungeon" pos="-15506.4453,-23019.2031,-659.7902" continentId="7031" nameId="99,5028" />
+        <Npc type="MARKER_enter_Dungeon" pos="-2913,-12288,1197" continentId="7031" nameId="99,9794" />
       </Section>
       <Section id="172002" desc="원시의 땅" nameId="172001" floor="1" mapId="WMap_RWS_Empty" height="53620.37" width="71493.82" top="18851.0" left="-49571.0" visibleInMap="False">
         <Npc type="MARKER_CAMP" pos="-11544,-19077,-754" continentId="7031" nameId="99,1721" />
         <Npc type="MARKER_CAMP" pos="-4053,-22370,603" continentId="7031" nameId="99,1722" />
+        <Npc type="MARKER_enter_Dungeon" pos="-15506.4453,-23019.2031,-659.7902" continentId="7031" nameId="99,5028" />
       </Section>
       <Section id="181001" desc="바라카 유적터" nameId="181001" floor="1" mapId="WMap_RNW_B_Field" height="53620.37" width="71493.82" top="57179.0" left="-57179.0">
         <Npc type="MARKER_CLIMB" pos="34774,-9206,4354" continentId="7031" nameId="99,60" />
@@ -794,7 +793,6 @@
         <Npc type="MARKER_CAMP" pos="21890.3340,-6224.5234,3537.1563" continentId="7031" nameId="99,18101" />
         <Npc type="MARKER_CAMP" pos="27640.7441,-10444.6055,3630.8301" continentId="7031" nameId="99,18102" />
         <Npc type="MARKER_CAMP" pos="30147.6797,-4575.0313,4300.9980" continentId="7031" nameId="99,18103" />
-        <Npc type="MARKER_enter_Dungeon" pos="27418.7910,-31882.3379,1599.8848" continentId="7031" nameId="99,5030" />
       </Section>
       <Section id="181002" desc="바라카 유적터" nameId="181001" floor="1" mapId="WMap_RNW_B_Empty" height="53620.37" width="71493.82" top="57179.0" left="-57179.0" visibleInMap="False">
         <Npc type="MARKER_CLIMB" pos="34774,-9206,4354" continentId="7031" nameId="99,60" />
@@ -802,15 +800,16 @@
         <Npc type="MARKER_CAMP" pos="21890.3340,-6224.5234,3537.1563" continentId="7031" nameId="99,18101" />
         <Npc type="MARKER_CAMP" pos="27640.7441,-10444.6055,3630.8301" continentId="7031" nameId="99,18102" />
         <Npc type="MARKER_CAMP" pos="30147.6797,-4575.0313,4300.9980" continentId="7031" nameId="99,18103" />
-        <Npc type="MARKER_enter_Dungeon" pos="27418.7910,-31882.3379,1599.8848" continentId="7031" nameId="99,5030" />
       </Section>
       <Section id="182001" desc="바라카니아 구릉지" nameId="182001" floor="1" mapId="WMap_RNW_A_Field" height="53620.37" width="71493.82" top="34211.0" left="-49571.0">
         <Npc type="MARKER_CAMP" pos="6779.0649,-14225.6729,1424.9395" continentId="7031" nameId="99,1820" />
         <Npc type="MARKER_enter_Dungeon" pos="9289.3672,-26822.8496,935.7480" continentId="7031" nameId="99,3022" />
+        <Npc type="MARKER_enter_Dungeon" pos="3395,-20322,802" continentId="7031" nameId="99,9735" />
       </Section>
       <Section id="182002" desc="바라카니아 구릉지" nameId="182001" floor="1" mapId="WMap_RNW_A_Empty" height="53620.37" width="71493.82" top="34211.0" left="-49571.0" visibleInMap="False">
         <Npc type="MARKER_CAMP" pos="6779.0649,-14225.6729,1424.9395" continentId="7031" nameId="99,1820" />
         <Npc type="MARKER_enter_Dungeon" pos="9289.3672,-26822.8496,935.7480" continentId="7031" nameId="99,3022" />
+        <Npc type="MARKER_enter_Dungeon" pos="3395,-20322,802" continentId="7031" nameId="99,9735" />
       </Section>
       <Section id="182003" desc="바라카니아 경제인 연합 캠프" nameId="182002" floor="1" mapId="WMap_RNW_A_Vill" height="9830.4" width="13107.2" top="11520.0" left="-21504.0">
         <Npc type="MARKER_MERCHANT" pos="5661,-14007,1528" continentId="7031" nameId="99,1821" />
@@ -827,18 +826,18 @@
         <Npc type="MARKER_CAMP" pos="32739.9824,16460.3184,8317.7461" continentId="7031" nameId="99,1910" />
         <Npc type="MARKER_CAMP" pos="44094.4336,28843.9609,7566.7500" continentId="7031" nameId="99,1911" />
         <Npc type="MARKER_enter_Dungeon" pos="40543.9844,37342.0781,9350.9688" continentId="7031" nameId="99,5029" />
-        <Npc type="MARKER_enter_Dungeon" pos="39522,33711,7986" continentId="7031" nameId="99,9067" />
+        <Npc type="MARKER_enter_Dungeon" pos="34404,38241,9376" continentId="7031" nameId="99,5031" />
       </Section>
       <Section id="191002" desc="제국군 요새" nameId="19109" floor="1" mapId="WMap_RNC_Vill" height="19660.8" width="26124.4" top="47616.0" left="26112.0">
         <Npc type="MARKER_CLIMB" pos="41073,35380,9431" continentId="7031" nameId="99,1912" />
         <Npc type="MARKER_enter_Dungeon" pos="40543.9844,37342.0781,9350.9688" continentId="7031" nameId="99,5029" />
-        <Npc type="MARKER_enter_Dungeon" pos="39522,33711,7986" continentId="7031" nameId="99,9067" />
+        <Npc type="MARKER_enter_Dungeon" pos="34404,38241,9376" continentId="7031" nameId="99,5031" />
       </Section>
       <Section id="191003" desc="제국의 땅" nameId="19101" floor="1" mapId="WMap_RNC_Empty" height="53620.37" width="71493.82" top="64931.0" left="-3491.0" visibleInMap="False">
         <Npc type="MARKER_CAMP" pos="32739.9824,16460.3184,8317.7461" continentId="7031" nameId="99,1910" />
         <Npc type="MARKER_CAMP" pos="44094.4336,28843.9609,7566.7500" continentId="7031" nameId="99,1911" />
         <Npc type="MARKER_enter_Dungeon" pos="40543.9844,37342.0781,9350.9688" continentId="7031" nameId="99,5029" />
-        <Npc type="MARKER_enter_Dungeon" pos="39522,33711,7986" continentId="7031" nameId="99,9067" />
+        <Npc type="MARKER_enter_Dungeon" pos="34404,38241,9376" continentId="7031" nameId="99,5031" />
       </Section>
       <Section id="183001" desc="이르카" nameId="183002" floor="1" mapId="WMap_RNW_Vill" height="19660.8" width="26214.4" top="27648.0" left="-6144.0">
         <Npc type="MARKER_CAMP" pos="21230,5911,6216" continentId="7031" nameId="99,1830" />
@@ -949,6 +948,8 @@
       <Section id="9091" desc="차원의 경계" nameId="9091001" floor="0" mapId="WMap_ASE_Empty_02" height="53620.37" width="71493.82" top="79591.0" left="11869.0" mode="5" />
       <Section id="9047" desc="마녀의 성 연회장" nameId="9047001" floor="0" mapId="WMap_EX_ASE_Halloween_T42" height="15360.0" width="15360.0" top="0.0" left="0.0" mode="5" />
       <Section id="9052" desc="피의 축제장" type="dungeon" nameId="9052001" floor="1" mapId="WMap_DG_FV_SUM_DG03" height="15360.0" width="15360.0" top="-19200.0" left="96000.0" mode="5" />
+      <Section id="9769" desc="릴리스의 성" type="dungeon" nameId="9769" floor="1" mapId="WMap_DG_Lilith_Castle" height="15360.0" width="30720.0" top="-92160.0" left="30720.0" mode="5" />
+      <Section id="9969" desc="릴리스의 성" type="dungeon" nameId="9969" floor="1" mapId="WMap_DG_Lilith_Castle_01" height="15360.0" width="30720.0" top="-92160.0" left="30720.0" mode="5" />
     </Guard>
     <Guard id="5" desc="사교도의 은신처">
       <Section id="553" desc="사교도의 은신처" type="dungeon" nameId="9089001" floor="1" mapId="WMap_DG_SD_03" height="15360.0" width="15360.0" top="76800.0" left="30720.0" mode="5" />
@@ -967,6 +968,7 @@
       <Section id="9031" desc="아카샤의 은신처(솔로)" type="dungeon" nameId="9031001" floor="1" mapId="WMap_HDG_SD_07" height="15360.0" width="15360.0" top="76800.0" left="122880.0" mode="5" />
       <Section id="9032" desc="황금의 미궁(솔로)" type="dungeon" nameId="9032001" floor="1" mapId="WMap_DG_SD_GOLDMAZE_P" height="15360.0" width="15360.0" top="30720.0" left="168960.0" mode="5" />
       <Section id="9033" desc="포악한 퀴르갈의 동굴(솔로)" type="dungeon" nameId="9033001" floor="1" mapId="WMap_DG_DarkCave_h_sd" height="15360.0" width="30720.0" top="-92160.0" left="169060.0" mode="5" />
+      <Section id="9766" desc="붉은 해적단의 함정" type="dungeon" nameId="9766001" floor="1" mapId="WMap_DG_SD_PirateShip" height="15360.0" width="15360.0" top="-61440.0" left="-61440.0" mode="5" />
       <Section id="9511" desc="어둠의 동굴" type="dungeon" nameId="9811001" floor="1" mapId="WMap_DG_DarkCave" height="15360.0" width="30720.0" top="-92160.0" left="169060.0" mode="5" />
       <Section id="9057" desc="오만한 아케론의 염옥" type="dungeon" nameId="9057001" floor="1" mapId="WMap_DG_BurningCave_h" height="15360.0" width="15360.0" top="-76800.0" left="92160.0" mode="5" />
       <Section id="9054" desc="사악한 오르카의 신전_영역" type="dungeon" nameId="9054001" floor="1" mapId="WMap_DG_Orca_Temple_01" height="15360.0" width="30720.0" top="-76800.0" left="138240.0" mode="5" />
@@ -1072,6 +1074,7 @@
       <Section id="9803" desc="T4.1 차원의 아공간 검은틈 특수공간3 " nameId="9803001" floor="1" mapId="WMap_EX_SWN_DL_01_T41C" height="15360.0" width="15360.0" top="15360.0" left="-153600.0" mode="5" />
     </Guard>
     <Guard id="24" desc="바라카니아 : 하르키아의 안식처,아크데바 무기고,아르카나 그나이아,비밀 실험실,엘카이아호(퀘),아크데바 비밀 아지트,폭풍의 엘카라스 호,엘카라스 호">
+      <Section id="9055" desc="하르키아의 안식처" type="dungeon" nameId="9055002" floor="1" mapId="WMap_DG_AncientForest" height="15360.0" width="15360.0" top="-107520.0" left="168960.0" mode="5" />
       <Section id="9808" desc="아크데바 무기고" type="dungeon" nameId="9808001" floor="1" mapId="RNW_ArcDevaArmory_SD" height="15360.0" width="30720.0" top="46080.0" left="122880.0" mode="5" />
       <Section id="9809" desc="데모크론 실험실" type="dungeon" nameId="9809001" floor="1" mapId="EX_RNC_Laboratory" height="15360.0" width="15360.0" top="46080.0" left="153600.0" mode="5" />
       <Section id="9814" desc="아르카나 그나이아" nameId="9814001" floor="1" mapId="WMap_DG_Arcana" height="15360.0" width="15360.0" top="0.0" left="-15360.0" mode="5" />
@@ -1090,6 +1093,20 @@
       <Section id="9830" desc="몰이사냥 솔로인던" nameId="9830" floor="1" mapId="WMap_DG_Roundup_Hunting" height="15360.0" width="15360.0" top="15360.0" left="138240.0" mode="1" />
       <Section id="90691" desc="시나리오던전_라크난성의기억_지하" nameId="906901" floor="1" mapId="WMap_DG_Laknan_Memory_B1F" height="15360.0" width="15360.0" top="-30720.0" left="-76800.0" mode="5" />
       <Section id="90690" desc="시나리오던전_라크난성의기억_지상" nameId="906900" floor="2" mapId="WMap_DG_Laknan_Memory_1F" height="15360.0" width="15360.0" top="-30720.0" left="-76800.0" mode="5" />
+      <Section id="9794" desc="사이럭스 연구 기지" nameId="9794" floor="1" mapId="WMap_DG_ArcDeva_Laboratory" height="15360.0" width="30720.0" top="-46080.0" left="30720.0" mode="5" />
+      <Section id="9994" desc="알파 사이럭스 연구 기지" nameId="9994" floor="1" mapId="WMap_DG_ArcDeva_Laboratory_01" height="15360.0" width="30720.0" top="-46080.0" left="30720.0" mode="5" />
+      <Section id="9735" desc="RK-9 격납고" nameId="9735" floor="1" mapId="WMap_LDG_RobotFactory_all" height="15360.0" width="15360.0" top="-30720.0" left="30720.0" mode="5" />
+      <Section id="973501" desc="RK-9 격납고_로비" nameId="9735" floor="2" mapId="WMap_LDG_RobotFactory_Lobby" height="15360.0" width="15360.0" top="-30720.0" left="30720.0" mode="5" />
+      <Section id="973502" desc="RK-9 격납고_1네임드" nameId="9735" floor="3" mapId="WMap_LDG_RobotFactory_A" height="15360.0" width="15360.0" top="-30720.0" left="46080.0" mode="5" />
+      <Section id="973503" desc="RK-9 격납고_미니게임" nameId="9735" floor="6" mapId="WMap_LDG_RobotFactory_B" height="15360.0" width="15360.0" top="-30720.0" left="46080.0" mode="5" />
+      <Section id="973504" desc="RK-9 격납고_2네임드" nameId="9735" floor="4" mapId="WMap_LDG_RobotFactory_D" height="15360.0" width="15360.0" top="-30720.0" left="46080.0" mode="5" />
+      <Section id="973507" desc="RK-9 격납고_3네임드" nameId="9735" floor="5" mapId="WMap_LDG_RobotFactory_Boss" height="15360.0" width="15360.0" top="-30720.0" left="30720.0" mode="5" />
+      <Section id="9935" desc="궁극의 RK-9 격납고" nameId="9935" floor="1" mapId="WMap_DG_RobotFactory_all" height="15360.0" width="15360.0" top="-30720.0" left="30720.0" mode="5" />
+      <Section id="993501" desc="궁극의 RK-9 격납고_로비" nameId="9935" floor="2" mapId="WMap_DG_RobotFactory_Lobby" height="15360.0" width="15360.0" top="-30720.0" left="30720.0" mode="5" />
+      <Section id="993502" desc="궁극의 RK-9 격납고_1네임드" nameId="9935" floor="3" mapId="WMap_DG_RobotFactory_A" height="15360.0" width="15360.0" top="-30720.0" left="46080.0" mode="5" />
+      <Section id="993503" desc="궁극의 RK-9 격납고_미니게임" nameId="9935" floor="6" mapId="WMap_DG_RobotFactory_B" height="15360.0" width="15360.0" top="-30720.0" left="46080.0" mode="5" />
+      <Section id="993504" desc="궁극의 RK-9 격납고_2네임드" nameId="9935" floor="4" mapId="WMap_DG_RobotFactory_D" height="15360.0" width="15360.0" top="-30720.0" left="46080.0" mode="5" />
+      <Section id="993507" desc="궁극의 RK-9 격납고_3네임드" nameId="9935" floor="5" mapId="WMap_DG_RobotFactory_Boss" height="15360.0" width="15360.0" top="-30720.0" left="30720.0" mode="5" />
     </Guard>
     <Guard id="25" desc="티아라니아: 평화로운 초반 구간, 아르곤 침공 중인 마을, 티아란 나무 내부">
       <Section id="9827" desc="평화로운 태고의섬" type="dungeon" nameId="599001" floor="1" mapId="WMap_A_Island_02" height="29491.2" width="39321.6" top="10752.0" left="-44544.0" mode="5">

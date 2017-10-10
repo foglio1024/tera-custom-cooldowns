@@ -1,7 +1,10 @@
-79.110.94.211 EU 26 Killian
+﻿79.110.94.211 EU 26 Killian
 79.110.94.212 EU 27 Mystel
 79.110.94.213 EU 28 Yurian
 79.110.94.214 EU 29 Seren
+79.110.94.215 EU 30 Sikander
+79.110.94.218 EU 31 Saleron
+79.110.94.219 EU 32 Amarun
 
 208.67.49.28 NA 4004 Tempest Reach
 208.67.49.68 NA 4009 Celestial Hills

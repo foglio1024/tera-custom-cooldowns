@@ -113,7 +113,7 @@
 180800	Warrior	Combative Strike VIII		icon_skills.aggravatingstrike_tex
 180900	Warrior	Combative Strike IX		icon_skills.aggravatingstrike_tex
 181000	Warrior	Combative Strike X		icon_skills.aggravatingstrike_tex
-181100	Warrior	Combative Strike XI		icon_skills.aggravatingstrike_tex
+181100	Warrior	Combative Strike XI		icon_skills.aggravatingstrike_tex	181102	181101
 190100	Warrior	Rising Fury I		icon_skills.tenaciousattack_tex	190101
 190200	Warrior	Rising Fury II		icon_skills.tenaciousattack_tex	190201
 190300	Warrior	Rising Fury III		icon_skills.tenaciousattack_tex	190301
@@ -134,12 +134,12 @@
 210500	Warrior	Cascade of Stuns V		icon_skills.hardslash_tex
 220100	Warrior	Backstab I		icon_skills.backattack_tex
 220200	Warrior	Backstab II		icon_skills.backattack_tex
-230100	Warrior	Staggering Counter I		icon_skills.reversalturningattack_tex
-230200	Warrior	Staggering Counter II		icon_skills.reversalturningattack_tex
-230300	Warrior	Staggering Counter III		icon_skills.reversalturningattack_tex
-230400	Warrior	Staggering Counter IV		icon_skills.reversalturningattack_tex
-230500	Warrior	Staggering Counter V		icon_skills.reversalturningattack_tex
-230600	Warrior	Staggering Counter VI		icon_skills.reversalturningattack_tex
+230100	Warrior	Spinning Counter I		icon_skills.reversalturningattack_tex
+230200	Warrior	Spinning Counter II		icon_skills.reversalturningattack_tex
+230300	Warrior	Spinning Counter III		icon_skills.reversalturningattack_tex
+230400	Warrior	Spinning Counter IV		icon_skills.reversalturningattack_tex
+230500	Warrior	Spinning Counter V		icon_skills.reversalturningattack_tex
+230600	Warrior	Spinning Counter VI		icon_skills.reversalturningattack_tex
 240100	Warrior	Smoke Aggressor I		icon_skills.decoy_tex
 240200	Warrior	Smoke Aggressor II		icon_skills.decoy_tex
 240300	Warrior	Smoke Aggressor III		icon_skills.decoy_tex
@@ -168,7 +168,7 @@
 280700	Warrior	Traverse Cut VII		icon_skills.dualrapidpiercing_tex	280730
 280800	Warrior	Traverse Cut VIII		icon_skills.dualrapidpiercing_tex	280830
 280900	Warrior	Traverse Cut IX		icon_skills.dualrapidpiercing_tex	280930
-281000	Warrior	Traverse Cut X		icon_skills.dualrapidpiercing_tex	281030
+281000	Warrior	Traverse Cut X		icon_skills.dualrapidpiercing_tex	390100	281030
 290100	Warrior	Blade Draw I		icon_skills.dualslash_tex	290130
 290200	Warrior	Blade Draw II		icon_skills.dualslash_tex	290230
 290300	Warrior	Blade Draw III		icon_skills.dualslash_tex	290330
@@ -518,17 +518,17 @@
 40900	Berserker	Flatten IX		icon_skills.bash_tex	40901	40930	40931
 50100	Berserker	Dash I		icon_skills.dash_tex
 50200	Berserker	Dash II		icon_skills.dash_tex
-60100	Berserker	Staggering Strike I		icon_skills.turnback_tex	60130
-60200	Berserker	Staggering Strike II		icon_skills.turnback_tex	60230
-60300	Berserker	Staggering Strike III		icon_skills.turnback_tex	60330
-60400	Berserker	Staggering Strike IV		icon_skills.turnback_tex	60430
-60500	Berserker	Staggering Strike V		icon_skills.turnback_tex	60530
-60600	Berserker	Staggering Strike VI		icon_skills.turnback_tex	60630
-60700	Berserker	Staggering Strike VII		icon_skills.turnback_tex	60730
-60800	Berserker	Staggering Strike VIII		icon_skills.turnback_tex	60830
-60900	Berserker	Staggering Strike IX		icon_skills.turnback_tex	60930
-61000	Berserker	Staggering Strike X		icon_skills.turnback_tex	61030
-61100	Berserker	Staggering Strike XI		icon_skills.turnback_tex	61130
+60100	Berserker	Sweeping Strike I		icon_skills.turnback_tex	60130
+60200	Berserker	Sweeping Strike II		icon_skills.turnback_tex	60230
+60300	Berserker	Sweeping Strike III		icon_skills.turnback_tex	60330
+60400	Berserker	Sweeping Strike IV		icon_skills.turnback_tex	60430
+60500	Berserker	Sweeping Strike V		icon_skills.turnback_tex	60530
+60600	Berserker	Sweeping Strike VI		icon_skills.turnback_tex	60630
+60700	Berserker	Sweeping Strike VII		icon_skills.turnback_tex	60730
+60800	Berserker	Sweeping Strike VIII		icon_skills.turnback_tex	60830
+60900	Berserker	Sweeping Strike IX		icon_skills.turnback_tex	60930
+61000	Berserker	Sweeping Strike X		icon_skills.turnback_tex	61030
+61100	Berserker	Sweeping Strike XI		icon_skills.turnback_tex	61130
 70100	Berserker	Mocking Shout		icon_skills.shockingshout_tex
 80100	Berserker	Fiery Rage I		icon_skills.berserk_tex	80130	80101
 80200	Berserker	Fiery Rage II		icon_skills.berserk_tex	80230	80201
@@ -582,7 +582,7 @@
 150700	Berserker	Vampiric Blow VII		icon_skills.vampiricstrike_tex	150714	150710	150711	150712	150713
 150800	Berserker	Vampiric Blow VIII		icon_skills.vampiricstrike_tex	150814	150810	150811	150812	150813
 150900	Berserker	Vampiric Blow IX		icon_skills.vampiricstrike_tex	150914	150910	150911	150912	150913
-151000	Berserker	Vampiric Blow X		icon_skills.vampiricstrike_tex	150814	151010	151011	151012	151013	151014
+151000	Berserker	Vampiric Blow X		icon_skills.vampiricstrike_tex	151014	151010	151011	151012	151013
 160100	Berserker	Fearsome Shout I		icon_skills.piercingshout_tex
 160200	Berserker	Fearsome Shout II		icon_skills.piercingshout_tex
 160300	Berserker	Fearsome Shout III		icon_skills.piercingshout_tex
@@ -1040,7 +1040,6 @@
 111100	Priest	Metamorphic Blast XI		icon_skills.punishingshield_tex
 120100	Priest	Resurrect		icon_skills.resurrect_tex
 130100	Priest	Homeward Bound		icon_skills.teleportall_tex
-140100	Priest	Summon: Party		icon_skills.recallfriend_tex
 160100	Priest	Shocking Implosion I		icon_skills.damagedeal_tex
 160200	Priest	Shocking Implosion II		icon_skills.damagedeal_tex
 160300	Priest	Shocking Implosion III		icon_skills.damagedeal_tex
@@ -1223,7 +1222,6 @@
 81100	Elementalist	Metamorphic Blast XI		icon_skills.punishingshield_tex	81130
 90100	Elementalist	Arun's Cleansing Touch		icon_skills.purifyshot_tex	90110
 100100	Elementalist	Resurrect		icon_skills.resurrect_tex
-110100	Elementalist	Summon: Party		icon_skills.recallfriend_tex
 120100	Elementalist	Vow of Rebirth		icon_skills.autoresurrect_tex	120110
 130100	Elementalist	Aura of the Merciless I		icon_skills.criticalupaura_tex	130150
 130200	Elementalist	Aura of the Merciless II		icon_skills.criticalupaura_tex	130250
@@ -1370,6 +1368,7 @@
 420800	Elementalist	Boomerang Pulse VIII		icon_skills.mysticorb_tex	420820
 420900	Elementalist	Boomerang Pulse IX		icon_skills.mysticorb_tex	420920
 421000	Elementalist	Boomerang Pulse X		icon_skills.mysticorb_tex	421020
+430100	Elementalist	Unsummon Thrall		icon_skills.petskill_buff_tex
 30100	Elementalist	Titanic Wrath I		icon_skills.rage_tex
 30200	Elementalist	Titanic Wrath II		icon_skills.rage_tex
 30300	Elementalist	Titanic Wrath III		icon_skills.rage_tex
