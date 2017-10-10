@@ -69,6 +69,7 @@
         Quest = 311, //arb
         Friend = 312,//arb
         TCC = 1000,
+        Twitch = 1001
     }
 
     public enum Class

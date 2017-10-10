@@ -17,6 +17,7 @@
         <SolidColorBrush x:Key="Colors.App.Main" Color="#ff6822"/>
         <SolidColorBrush x:Key="Colors.App.Green" Color="#00A561"/>
         <SolidColorBrush x:Key="Colors.App.LightGreen" Color="#5f7"/>
+        <SolidColorBrush x:Key="Colors.App.Twitch" Color="#975eff "/>
 
         <SolidColorBrush x:Key="Colors.App.DefaultBackground" Color="#101017" Opacity="1"/>
         <SolidColorBrush x:Key="Colors.App.FadedBorderBrush" Color="#aa303035" Opacity="1"/>

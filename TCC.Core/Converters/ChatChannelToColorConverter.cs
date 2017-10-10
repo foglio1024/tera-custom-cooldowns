@@ -104,6 +104,8 @@ namespace TCC.Converters
                     return (SolidColorBrush)App.Current.FindResource("Colors.Chat.System.Quest");
                 case ChatChannel.Friend:
                     return (SolidColorBrush)App.Current.FindResource("Colors.Chat.System.Friend");
+                case ChatChannel.Twitch:
+                    return (SolidColorBrush)App.Current.FindResource("Colors.App.Twitch");
                 default:
                     return (SolidColorBrush)App.Current.FindResource("Colors.Chat.System.Generic");
             }
