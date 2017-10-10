@@ -127,8 +127,9 @@ namespace TCC.Parsing
         public static void HandlePlayerStatUpdate(S_PLAYER_STAT_UPDATE p)
         {
             SessionManager.CurrentPlayer.ItemLevel = p.Ilvl;
-
+            SessionManager.CurrentPlayer.Level = p.Level;
             CharacterWindowViewModel.Instance.Player.ItemLevel = p.Ilvl;
+            CharacterWindowViewModel.Instance.Player.Level = p.Level;
 
             SessionManager.SetPlayerMaxHP(SessionManager.CurrentPlayer.EntityId, p.MaxHP);
             SessionManager.SetPlayerMaxMP(SessionManager.CurrentPlayer.EntityId, p.MaxMP);
