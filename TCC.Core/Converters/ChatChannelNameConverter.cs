@@ -86,6 +86,10 @@ namespace TCC.Converters
                     return "+12";
                 case ChatChannel.Enchant15:
                     return "+15";
+                case ChatChannel.Enchant8:
+                    return "+8";
+                case ChatChannel.Enchant9:
+                    return "+9";
                 case ChatChannel.RaidLeader:
                     return "Leader";
                 case ChatChannel.Bargain:

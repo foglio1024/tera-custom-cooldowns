@@ -61,6 +61,8 @@
         TradeRedirect = 303, //arbitrary
         Enchant12 = 304, //arbitrary
         Enchant15 = 305, //arbitrary
+        Enchant8 = 313, //arbitrary
+        Enchant9 = 314, //arbitrary
         RaidLeader = 306, //arbitrary
         Bargain = 307, //arbitrary
         Apply = 308, //arb

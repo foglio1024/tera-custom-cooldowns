@@ -999,6 +999,18 @@ namespace TCC.Data
                 mw = " Awakened ";
                 e = "+15";
             }
+            else if (systemMessage.Contains("Added 8"))
+            {
+                msg.Channel = ChatChannel.Enchant8;
+                mw = "";
+                e = "+8";
+            }
+            else if (systemMessage.Contains("Added 9"))
+            {
+                msg.Channel = ChatChannel.Enchant9;
+                mw = "";
+                e = "+9";
+            }
             var prm = SplitDirectives(systemMessage);
 
             msg.Author = prm["UserName"];

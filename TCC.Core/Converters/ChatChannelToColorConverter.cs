@@ -88,6 +88,10 @@ namespace TCC.Converters
                     return Brushes.Orange;
                 case ChatChannel.Enchant15:
                     return Brushes.OrangeRed;
+                case ChatChannel.Enchant8:
+                    return Brushes.Orange;
+                case ChatChannel.Enchant9:
+                    return Brushes.OrangeRed;
                 case ChatChannel.RaidLeader:
                     return (SolidColorBrush)App.Current.FindResource("Colors.Chat.RaidNotice");
                 case ChatChannel.TCC:
