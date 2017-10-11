@@ -305,12 +305,12 @@
 361	1	Castanica Midnight Oil
 362	1	Federation Supply: Scroll of Rapid Resurrection
 363	3	Amarun's Bloodstone Necklace
-364	0	Amethyst
-365	0	Pearl
-366	0	Ruby
-367	0	Sapphire
-368	0	Emerald
-369	0	Diamond
+364	2	Amethyst
+365	2	Pearl
+366	2	Ruby
+367	2	Sapphire
+368	2	Emerald
+369	2	Diamond
 370	1	Kaia's Gift Box
 371	0	Phota's Trinket
 372	0	Chronoscroll
@@ -388,7 +388,7 @@
 444	2	Bravery Potion
 445	1	Spellbind
 446	1	Refined Alkahest
-447	1	Masterwork Alkahest
+447	1	Depleted Masterwork Alkahest
 448	1	Bound Refined Alkahest
 449	1	Sirjuka Gallery Teleport Scroll
 450	1	Riding Skill: Sleipnir
@@ -454,8 +454,8 @@
 551	3	Shattered Monster Fragment
 552	3	Complete Monster Fragment
 553	1	Bounty of the Fray
-554	3	Silver Talent
-555	3	Gold Talent
+554	3	Silver Galleon
+555	3	Gold Galleon
 556	0	Medal of the Fray
 557	1	Halloween Trick Box
 558	0	Sweet Pumpkin Pie
@@ -798,6 +798,7 @@
 1714	1	Pure Goblusilex
 1715	1	Fine Zawaleather
 1771	1	Pilka Medicated Bandage
+1772	2	100% Crafting Skill XP Boost (1 Hour)
 2200	1	Crescentia Crystals
 2201	1	Crescentia Destroyer's Crystals
 2202	1	Crescentia Defender's Crystals
@@ -1810,15 +1811,15 @@
 6336	1	Titan's Peace
 6338	2	Pure Titan's Fire
 6339	2	Pure Titan's Peace
-6341	1	Ephemeral Armor Etching: Grounded I
-6343	1	Ephemeral Armor Etching: Relentless I
-6344	1	Ephemeral Armor Etching: Unyielding I
-6345	1	Ephemeral Armor Etching: Grounded II
-6347	1	Ephemeral Armor Etching: Relentless II
-6348	1	Ephemeral Armor Etching: Unyielding II
-6349	1	Ephemeral Armor Etching: Grounded III
-6351	1	Ephemeral Armor Etching: Relentless III
-6352	1	Ephemeral Armor Etching: Unyielding III
+6341	1	Ephemeral Body Armor Etching: Grounded I
+6343	1	Ephemeral Body Armor Etching: Relentless I
+6344	1	Ephemeral Body Armor Etching: Unyielding I
+6345	1	Ephemeral Body Armor Etching: Grounded II
+6347	1	Ephemeral Body Armor Etching: Relentless II
+6348	1	Ephemeral Body Armor Etching: Unyielding II
+6349	1	Ephemeral Body Armor Etching: Grounded III
+6351	1	Ephemeral Body Armor Etching: Relentless III
+6352	1	Ephemeral Body Armor Etching: Unyielding III
 6353	1	Ephemeral Weapon Etching: Pumped I
 6354	1	Ephemeral Weapon Etching: Keen I
 6355	1	Ephemeral Weapon Etching: Healing I
@@ -1840,22 +1841,22 @@
 6372	1	Ephemeral Footwear Etching: Grounded III
 6374	1	Ephemeral Footwear Etching: Relentless III
 6375	1	Ephemeral Footwear Etching: Unyielding III
-6376	1	Ephemeral Glove Etching: Pumped II
-6377	1	Ephemeral Glove Etching: Keen II
-6378	1	Ephemeral Glove Etching: Healing II
-6379	1	Ephemeral Glove Etching: Threatening II
-6380	1	Ephemeral Glove Etching: Energetic II
-6381	1	Ephemeral Glove Etching: Pumped III
-6382	1	Ephemeral Glove Etching: Keen III
-6383	1	Ephemeral Glove Etching: Healing III
-6384	1	Ephemeral Glove Etching: Threatening III
-6385	1	Ephemeral Glove Etching: Energetic III
+6376	1	Ephemeral Handwear Etching: Pumped II
+6377	1	Ephemeral Handwear Etching: Keen II
+6378	1	Ephemeral Handwear Etching: Healing II
+6379	1	Ephemeral Handwear Etching: Threatening II
+6380	1	Ephemeral Handwear Etching: Energetic II
+6381	1	Ephemeral Handwear Etching: Pumped III
+6382	1	Ephemeral Handwear Etching: Keen III
+6383	1	Ephemeral Handwear Etching: Healing III
+6384	1	Ephemeral Handwear Etching: Threatening III
+6385	1	Ephemeral Handwear Etching: Energetic III
 6386	1	Ephemeral Weapon Etching: Robust
 6387	1	Ephemeral Weapon Etching: Quickcarve III
 6388	1	Ephemeral Weapon Etching: Infused III
-6389	1	Ephemeral Armor Etching: Lacerating
-6390	1	Ephemeral Armor Etching: Bulwark III
-6391	1	Ephemeral Armor Etching: Recovery III
+6389	1	Ephemeral Body Armor Etching: Lacerating
+6390	1	Ephemeral Body Armor Etching: Bulwark III
+6391	1	Ephemeral Body Armor Etching: Recovery III
 6392	1	Titan's Ember
 6393	1	Titan's Ease
 6396	1	Contaminated Heart's Tear
@@ -1866,12 +1867,12 @@
 6401	1	Broken Unsteel Armor Plates
 6402	2	Unsteel Weapon Metal
 6403	2	Unsteel Armor Plates
-6404	2	Armor Etching: Grounded II
-6406	2	Armor Etching: Relentless II
-6407	2	Armor Etching: Unyielding II
-6408	2	Armor Etching: Grounded III
-6410	2	Armor Etching: Relentless III
-6411	2	Armor Etching: Unyielding III
+6404	2	Body Armor Etching: Grounded II
+6406	2	Body Armor Etching: Relentless II
+6407	2	Body Armor Etching: Unyielding II
+6408	2	Body Armor Etching: Grounded III
+6410	2	Body Armor Etching: Relentless III
+6411	2	Body Armor Etching: Unyielding III
 6412	2	Weapon Etching: Pumped II
 6413	2	Weapon Etching: Keen II
 6414	2	Weapon Etching: Healing II
@@ -1888,31 +1889,31 @@
 6426	2	Footwear Etching: Grounded III
 6428	2	Footwear Etching: Relentless III
 6429	2	Footwear Etching: Unyielding III
-6430	2	Glove Etching: Pumped II
-6431	2	Glove Etching: Keen II
-6432	2	Glove Etching: Healing II
-6433	2	Glove Etching: Threatening II
-6434	2	Glove Etching: Energetic II
-6435	2	Glove Etching: Pumped III
-6436	2	Glove Etching: Keen III
-6437	2	Glove Etching: Healing III
-6438	2	Glove Etching: Threatening III
-6439	2	Glove Etching: Energetic III
+6430	2	Handwear Etching: Pumped II
+6431	2	Handwear Etching: Keen II
+6432	2	Handwear Etching: Healing II
+6433	2	Handwear Etching: Threatening II
+6434	2	Handwear Etching: Energetic II
+6435	2	Handwear Etching: Pumped III
+6436	2	Handwear Etching: Keen III
+6437	2	Handwear Etching: Healing III
+6438	2	Handwear Etching: Threatening III
+6439	2	Handwear Etching: Energetic III
 6440	2	Weapon Etching: Robust
 6441	2	Weapon Etching: Quickcarve III
 6442	2	Weapon Etching: Infused III
-6443	2	Armor Etching: Lacerating
-6444	2	Armor Etching: Bulwark III
-6445	2	Armor Etching: Recovery III
+6443	2	Body Armor Etching: Lacerating
+6444	2	Body Armor Etching: Bulwark III
+6445	2	Body Armor Etching: Recovery III
 6446	1	Revival Fruit
 6447	2	Practice Straw Scarab Powder
 6448	2	Practice Elemental Scarab Powder
 6449	2	Practice Aurora Scarab Powder
 6450	1	Unstable Weapon Etching
-6451	1	Unstable Armor Etching
-6452	1	Federation Supply: Ephemeral Armor Etching: Grounded I
-6453	1	Federation Supply: Ephemeral Armor Etching: Relentless I
-6454	1	Federation Supply: Ephemeral Armor Etching: Unyielding I
+6451	1	Unstable Body Armor Etching
+6452	1	Federation Supply: Ephemeral Body Armor Etching: Grounded I
+6453	1	Federation Supply: Ephemeral Body Armor Etching: Relentless I
+6454	1	Federation Supply: Ephemeral Body Armor Etching: Unyielding I
 6455	1	Kitbash Crate
 6456	1	Collaboration Crate
 6457	3	Sharp Unsteel Weapon Metal
@@ -1947,6 +1948,8 @@
 6487	0	Onslaught Scroll: Crit Power VII
 6488	0	Onslaught Scroll: Attack Speed VII
 6489	0	Warding Scroll VII
+6498	1	Fermented Moonlight Fruit
+6499	1	Raw Moonlight Fruit
 6500	2	Aged Elinu's Tear
 6501	2	Elinu's Tear
 6502	1	Fermented Moonlight Fruit
@@ -1973,9 +1976,9 @@
 6528	1	Weapon Etching: Healing I
 6529	1	Weapon Etching: Threatening I
 6530	1	Weapon Etching: Energetic I
-6531	1	Armor Etching: Grounded I
-6532	1	Armor Etching: Relentless I
-6533	1	Armor Etching: Unyielding I
+6531	1	Body Armor Etching: Grounded I
+6532	1	Body Armor Etching: Relentless I
+6533	1	Body Armor Etching: Unyielding I
 6534	0	Battle Nostrum I
 6535	0	Battle Nostrum II
 6536	0	Battle Nostrum III
@@ -1989,6 +1992,122 @@
 6560	1	Minor Replenishment Potable
 6561	2	Major Replenishment Potable
 6562	3	Prime Replenishment Potable
+6600	2	Federation Supply: Body Armor Etching: Grounded II
+6601	2	Federation Supply: Body Armor Etching: Relentless II
+6602	2	Federation Supply: Body Armor Etching: Unyielding II
+6603	2	Federation Supply: Body Armor Etching: Grounded III
+6604	2	Federation Supply: Body Armor Etching: Relentless III
+6605	2	Federation Supply: Body Armor Etching: Unyielding III
+6606	2	Federation Supply: Weapon Etching: Pumped II
+6607	2	Federation Supply: Weapon Etching: Keen II
+6608	2	Federation Supply: Weapon Etching: Healing II
+6609	2	Federation Supply: Weapon Etching: Threatening II
+6610	2	Federation Supply: Weapon Etching: Energetic II
+6611	2	Federation Supply: Weapon Etching: Pumped III
+6612	2	Federation Supply: Weapon Etching: Keen III
+6613	2	Federation Supply: Weapon Etching: Healing III
+6614	2	Federation Supply: Weapon Etching: Threatening III
+6615	2	Federation Supply: Weapon Etching: Energetic III
+6616	2	Federation Supply: Footwear Etching: Grounded II
+6617	2	Federation Supply: Footwear Etching: Relentless II
+6618	2	Federation Supply: Footwear Etching: Unyielding II
+6619	2	Federation Supply: Footwear Etching: Grounded III
+6620	2	Federation Supply: Footwear Etching: Relentless III
+6621	2	Federation Supply: Footwear Etching: Unyielding III
+6622	2	Federation Supply: Handwear Etching: Pumped II
+6623	2	Federation Supply: Handwear Etching: Keen II
+6624	2	Federation Supply: Handwear Etching: Healing II
+6625	2	Federation Supply: Handwear Etching: Threatening II
+6626	2	Federation Supply: Handwear Etching: Energetic II
+6627	2	Federation Supply: Handwear Etching: Pumped III
+6628	2	Federation Supply: Handwear Etching: Keen III
+6629	2	Federation Supply: Handwear Etching: Healing III
+6630	2	Federation Supply: Handwear Etching: Threatening III
+6631	2	Federation Supply: Handwear Etching: Energetic III
+6680	1	Necklace Etching: Pumped I
+6681	1	Necklace Etching: Keen I
+6682	1	Necklace Etching: Swift I
+6690	1	Necklace Etching: Pumped II
+6691	1	Necklace Etching: Keen II
+6692	1	Necklace Etching: Swift II
+6695	2	Necklace Etching: Relentless Pumped II
+6696	2	Necklace Etching: Relentless Keen II
+6697	2	Necklace Etching: Relentless Swift II
+6700	1	Necklace Etching: Pumped III
+6701	1	Necklace Etching: Keen III
+6702	1	Necklace Etching: Swift III
+6705	2	Necklace Etching: Relentless Pumped III
+6706	2	Necklace Etching: Relentless Keen III
+6707	2	Necklace Etching: Relentless Swift III
+6710	3	Necklace Etching: Pumped IV
+6711	3	Necklace Etching: Keen IV
+6712	3	Necklace Etching: Swift IV
+6715	3	Necklace Etching: Relentless Pumped IV
+6716	3	Necklace Etching: Relentless Keen IV
+6717	3	Necklace Etching: Relentless Swift IV
+6760	1	Earring Etching: Pumped I
+6761	1	Earring Etching: Keen I
+6762	1	Earring Etching: Swift I
+6770	1	Earring Etching: Pumped II
+6771	1	Earring Etching: Keen II
+6772	1	Earring Etching: Swift II
+6775	2	Earring Etching: Relentless Pumped II
+6776	2	Earring Etching: Relentless Keen II
+6777	2	Earring Etching: Relentless Swift II
+6780	1	Earring Etching: Pumped III
+6781	1	Earring Etching: Keen III
+6782	1	Earring Etching: Swift III
+6785	2	Earring Etching: Relentless Pumped III
+6786	2	Earring Etching: Relentless Keen III
+6787	2	Earring Etching: Relentless Swift III
+6790	3	Earring Etching: Pumped IV
+6791	3	Earring Etching: Keen IV
+6792	3	Earring Etching: Swift IV
+6795	3	Earring Etching: Relentless Pumped IV
+6796	3	Earring Etching: Relentless Keen IV
+6797	3	Earring Etching: Relentless Swift IV
+6840	1	Ring Etching: Pumped I
+6841	1	Ring Etching: Keen I
+6842	1	Ring Etching: Swift I
+6850	1	Ring Etching: Pumped II
+6851	1	Ring Etching: Keen II
+6852	1	Ring Etching: Swift II
+6855	2	Ring Etching: Relentless Pumped II
+6856	2	Ring Etching: Relentless Keen II
+6857	2	Ring Etching: Relentless Swift II
+6860	1	Ring Etching: Pumped III
+6861	1	Ring Etching: Keen III
+6862	1	Ring Etching: Swift III
+6865	2	Ring Etching: Relentless Pumped III
+6866	2	Ring Etching: Relentless Keen III
+6867	2	Ring Etching: Relentless Swift III
+6870	3	Ring Etching: Pumped IV
+6871	3	Ring Etching: Keen IV
+6872	3	Ring Etching: Swift IV
+6875	3	Ring Etching: Relentless Pumped IV
+6876	3	Ring Etching: Relentless Keen IV
+6877	3	Ring Etching: Relentless Swift IV
+6920	1	Belt Etching: Pumped I
+6921	1	Belt Etching: Keen I
+6922	1	Belt Etching: Swift I
+6930	1	Belt Etching: Pumped II
+6931	1	Belt Etching: Keen II
+6932	1	Belt Etching: Swift II
+6935	2	Belt Etching: Relentless Pumped II
+6936	2	Belt Etching: Relentless Keen II
+6937	2	Belt Etching: Relentless Swift II
+6940	1	Belt Etching: Pumped III
+6941	1	Belt Etching: Keen III
+6942	1	Belt Etching: Swift III
+6945	2	Belt Etching: Relentless Pumped III
+6946	2	Belt Etching: Relentless Keen III
+6947	2	Belt Etching: Relentless Swift III
+6950	3	Belt Etching: Pumped IV
+6951	3	Belt Etching: Keen IV
+6952	3	Belt Etching: Swift IV
+6955	3	Belt Etching: Relentless Pumped IV
+6956	3	Belt Etching: Relentless Keen IV
+6957	3	Belt Etching: Relentless Swift IV
 7000	0	Useless Glyph Toggle
 7100	0	Onslaught Charm I
 7101	0	Onslaught Charm II
@@ -2020,6 +2139,10 @@
 7213	0	Bomb XIV
 7214	0	Scroll of Resurrection
 7215	0	Stun Bomb
+7216	0	Bomb for DPS testing
+7217	0	Bomb for testing
+7218	3	Feast
+7219	2	Elixir
 7400	0	Past Glyph Shard
 7401	0	Past Glyph Shard
 7402	0	Past Glyph Shard
@@ -11924,12 +12047,12 @@
 20753	2	Sturdy Lightkeepers Brooch
 20754	2	Ferocious Lightkeepers Brooch
 20755	2	Fancy Lightkeepers Brooch
-20800	3	Armor Etching: Grounded IV
-20801	3	Armor Etching: Relentless IV
-20802	3	Armor Etching: Unyielding IV
-20803	3	Armor Etching: Lacerating IV
-20804	3	Armor Etching: Bulwark IV
-20805	3	Armor Etching: Recovery IV
+20800	3	Body Armor Etching: Grounded IV
+20801	3	Body Armor Etching: Relentless IV
+20802	3	Body Armor Etching: Unyielding IV
+20803	3	Body Armor Etching: Lacerating IV
+20804	3	Body Armor Etching: Bulwark IV
+20805	3	Body Armor Etching: Recovery IV
 20806	3	Weapon Etching: Pumped IV
 20807	3	Weapon Etching: Keen IV
 20808	3	Weapon Etching: Healing IV
@@ -11941,11 +12064,51 @@
 20814	3	Footwear Etching: Grounded IV
 20815	3	Footwear Etching: Relentless IV
 20816	3	Footwear Etching: Unyielding IV
-20817	3	Glove Etching: Pumped IV
-20818	3	Glove Etching: Keen IV
-20819	3	Glove Etching: Healing IV
-20820	3	Glove Etching: Threatening IV
-20821	3	Glove Etching: Energetic IV
+20817	3	Handwear Etching: Pumped IV
+20818	3	Handwear Etching: Keen IV
+20819	3	Handwear Etching: Healing IV
+20820	3	Handwear Etching: Threatening IV
+20821	3	Handwear Etching: Energetic IV
+20830	3	Body Armor Etching: Grounded IV
+20831	3	Body Armor Etching: Relentless IV
+20832	3	Body Armor Etching: Unyielding IV
+20833	3	Body Armor Etching: Pumped IV
+20834	3	Body Armor Etching: Keen IV
+20835	3	Weapon Etching: Pumped IV
+20836	3	Weapon Etching: Keen IV
+20837	3	Weapon Etching: Healing IV
+20838	3	Weapon Etching: Threatening IV
+20839	3	Weapon Etching: Energetic IV
+20840	3	Footwear Etching: Grounded IV
+20841	3	Footwear Etching: Relentless IV
+20842	3	Footwear Etching: Unyielding IV
+20843	3	Footwear Etching: Pumped IV
+20844	3	Footwear Etching: Keen IV
+20845	3	Handwear Etching: Pumped IV
+20846	3	Handwear Etching: Keen IV
+20847	3	Handwear Etching: Healing IV
+20848	3	Handwear Etching: Threatening IV
+20849	3	Handwear Etching: Energetic IV
+20850	3	Body Armor Etching: Grounded IV
+20851	3	Body Armor Etching: Relentless IV
+20852	3	Body Armor Etching: Unyielding IV
+20853	3	Body Armor Etching: Pumped IV
+20854	3	Body Armor Etching: Keen IV
+20855	3	Weapon Etching: Pumped IV
+20856	3	Weapon Etching: Keen IV
+20857	3	Weapon Etching: Healing IV
+20858	3	Weapon Etching: Threatening IV
+20859	3	Weapon Etching: Energetic IV
+20860	3	Footwear Etching: Grounded IV
+20861	3	Footwear Etching: Relentless II
+20862	3	Footwear Etching: Unyielding IV
+20863	3	Footwear Etching: Pumped IV
+20864	3	Footwear Etching: Keen IV
+20865	3	Handwear Etching: Pumped IV
+20866	3	Handwear Etching: Keen IV
+20867	3	Handwear Etching: Healing IV
+20868	3	Handwear Etching: Threatening IV
+20869	3	Handwear Etching: Energetic IV
 20900	2	Manor Dust
 20901	2	Bloodmetal Ore
 20902	3	Manor Collection
@@ -12039,10 +12202,10 @@
 21201	2	Crocement Powder
 21202	3	Repaired Herpstone
 21203	3	Crocement Adhesive
-21204	1	Ominous Ore
-21205	3	Herpvein Powder
+21204	1	Depleted Ominous Ore
+21205	3	Depleted Herpvein Powder
 21206	3	Talisman of Lakan
-21207	3	Lakan's Scale
+21207	3	Depleted Lakan's Scale
 21208	3	Badge of Loyalty
 21209	3	Lakan's Banner
 21210	3	Lakan's Treasure Chest
@@ -12125,8 +12288,8 @@
 21287	1	Design: Crocement Adhesive
 21288	1	Weaponcrafting Design: Herpvein Powder
 21289	1	Armorcrafting Design: Herpvein Powder
-21290	3	War Keybadge
-21291	3	Triumph Keybadge
+21290	3	Depleted War Keybadge
+21291	3	Depleted Triumph Keybadge
 21292	3	Kumas Royale Victory Chest
 21293	3	Iron Battlefield Victory Chest
 21294	3	Gridiron Victory Chest
@@ -12159,8 +12322,8 @@
 21321	3	Vergos's Horn
 21322	3	Vergos's Bone
 21323	3	Oblit Essence
-21324	3	+12 Enchantment Scroll [Tier 12]
-21325	3	+15 Enchantment Scroll [Tier 12]
+21324	3	+12 Enchantment Scroll [Special]
+21325	3	+15 Enchantment Scroll [Special]
 21326	3	Vergos's Silver Chest
 21327	3	Vergos's Gold Chest
 21328	2	Battle Pack I
@@ -12182,6 +12345,14 @@
 21344	3	Earring Resizer
 21345	3	Ring Resizer
 21346	3	10K Ticket Box
+21347	1	Ominous Ore
+21348	3	Lakan's Scale
+21349	3	War Keybadge
+21350	3	Triumph Keybadge
+21351	1	Masterwork Alkahest (Enchanting)
+21352	0	Tier 11 Feedstock (Enchanting)
+21353	0	Tier 12 Feedstock (Enchanting)
+21354	3	Herpvein Powder
 22001	0	Discontinued Lesson: Cloth Extraction
 22002	0	Discontinued Lesson: Metal Extraction
 22004	0	Discontinued Lesson: Alchemy Extraction
@@ -14482,18 +14653,18 @@
 27370	3	Retool Opportune: Titanflare Robe
 27371	3	Retool Opportune: Deathkist Cuirass
 27372	3	Design: Battlereap Vest
-28000	0	Armor Etching Design: Grounded I
+28000	0	Body Armor Etching Design: Grounded I
 28001	0	Faded Design
-28002	0	Armor Etching Design: Relentless I
-28003	0	Armor Etching Design: Unyielding I
-28004	1	Armor Etching Design: Grounded II
+28002	0	Body Armor Etching Design: Relentless I
+28003	0	Body Armor Etching Design: Unyielding I
+28004	1	Body Armor Etching Design: Grounded II
 28005	1	Faded Design
-28006	1	Armor Etching Design: Relentless II
-28007	1	Armor Etching Design: Unyielding II
-28008	1	Armor Etching Design: Grounded III
+28006	1	Body Armor Etching Design: Relentless II
+28007	1	Body Armor Etching Design: Unyielding II
+28008	1	Body Armor Etching Design: Grounded III
 28009	1	Faded Design
-28010	1	Armor Etching Design: Relentless III
-28011	1	Armor Etching Design: Unyielding III
+28010	1	Body Armor Etching Design: Relentless III
+28011	1	Body Armor Etching Design: Unyielding III
 28012	0	Weapon Etching Design: Pumped I
 28013	0	Weapon Etching Design: Keen I
 28014	0	Weapon Etching Design: Healing I
@@ -14517,22 +14688,22 @@
 28032	1	Faded Design
 28033	1	Footwear Etching Design: Relentless III
 28034	1	Footwear Etching Design: Unyielding III
-28035	1	Glove Etching Design: Pumped II
-28036	1	Glove Etching Design: Keen II
-28037	1	Glove Etching Design: Healing II
-28038	1	Glove Etching Design: Threatening II
-28039	1	Glove Etching Design: Energetic II
-28040	1	Glove Etching Design: Pumped III
-28041	1	Glove Etching Design: Keen III
-28042	1	Glove Etching Design: Healing III
-28043	1	Glove Etching Design: Threatening III
-28044	1	Glove Etching Design: Energetic III
+28035	1	Handwear Etching Design: Pumped II
+28036	1	Handwear Etching Design: Keen II
+28037	1	Handwear Etching Design: Healing II
+28038	1	Handwear Etching Design: Threatening II
+28039	1	Handwear Etching Design: Energetic II
+28040	1	Handwear Etching Design: Pumped III
+28041	1	Handwear Etching Design: Keen III
+28042	1	Handwear Etching Design: Healing III
+28043	1	Handwear Etching Design: Threatening III
+28044	1	Handwear Etching Design: Energetic III
 28045	3	Weapon Etching Design: Robust
 28046	3	Weapon Etching Design: Sharp III
 28047	3	Weapon Etching Design: Infused III
-28048	3	Armor Etching Design: Lacerating
-28049	3	Armor Etching Design: Bulwark III
-28050	3	Armor Etching Design: Recovery III
+28048	3	Body Armor Etching Design: Lacerating
+28049	3	Body Armor Etching Design: Bulwark III
+28050	3	Body Armor Etching Design: Recovery III
 28051	0	Worn Recipe: Mana Potion IX
 28052	0	Worn Recipe: Healing Potion IX
 28053	0	Worn Recipe: Healing Elixir IX
@@ -14635,7 +14806,7 @@
 28151	1	Design: Flawless Doomwalkers
 28152	1	Design: Flawless Icetrippers
 28153	0	Design: Practice Weapon Etching
-28154	0	Design: Practice Armor Etching
+28154	0	Design: Practice Body Armor Etching
 28155	1	Weaponcrafting Design: Pure Xersteel Ingot
 28156	1	Design: Pure Luriacloth
 28157	1	Armorcrafting Design: Pure Xersteel Ingot
@@ -14991,6 +15162,93 @@
 28524	3	Retool Defiance: Mana Flings
 28525	3	Retool Defiance: Dogma Clings
 28526	3	Retool Defiance: Aposteps
+28600	2	Design: Golden Daric
+28601	3	Design: Golden Plate
+28602	2	Design: Silver Siglo
+28603	3	Design: Silver Plate
+28604	1	Design: Ruby
+28605	2	Design: Sapphire
+28606	2	Design: Emerald
+28607	3	Design: Diamond
+28610	2	Design: Vivid Titan's Fire
+28611	2	Design: Vivid Titan's Peace
+28612	3	Design: Lucid Titan's Fire
+28613	3	Design: Lucid Titan's Peace
+28614	1	Design: Pure Titan's Earth
+28615	1	Design: Pure Titan's Storm
+28616	2	Design: Vivid Titan's Earth
+28617	2	Design: Vivid Titan's Storm
+28618	3	Design: Lucid Titan's Earth
+28619	3	Design: Lucid Titan's Storm
+28620	3	Design: Harmonious Imbalance
+28700	0	Necklace Etching Design: Pumped I
+28701	0	Necklace Etching Design: Keen I
+28702	0	Necklace Etching Design: Swift I
+28710	1	Necklace Etching Design: Pumped II
+28711	1	Necklace Etching Design: Keen II
+28712	1	Necklace Etching Design: Swift II
+28720	1	Necklace Etching Design: Pumped III
+28721	1	Necklace Etching Design: Keen III
+28722	1	Necklace Etching Design: Swift III
+28730	1	Necklace Etching Design: Pumped IV
+28731	1	Necklace Etching Design: Keen IV
+28732	1	Necklace Etching Design: Swift IV
+28740	0	Earring Etching Design: Pumped I
+28741	0	Earring Etching Design: Keen I
+28742	0	Earring Etching Design: Swift I
+28750	1	Earring Etching Design: Pumped II
+28751	1	Earring Etching Design: Keen II
+28752	1	Earring Etching Design: Swift II
+28760	1	Earring Etching Design: Pumped III
+28761	1	Earring Etching Design: Keen III
+28762	1	Earring Etching Design: Swift III
+28770	1	Earring Etching Design: Pumped IV
+28771	1	Earring Etching Design: Keen IV
+28772	1	Earring Etching Design: Swift IV
+28780	0	Ring Etching Design: Pumped I
+28781	0	Ring Etching Design: Keen I
+28782	0	Ring Etching Design: Swift I
+28790	1	Ring Etching Design: Pumped II
+28791	1	Ring Etching Design: Keen II
+28792	1	Ring Etching Design: Swift II
+28800	1	Ring Etching Design: Pumped III
+28801	1	Ring Etching Design: Keen III
+28802	1	Ring Etching Design: Swift III
+28810	1	Ring Etching Design: Pumped IV
+28811	1	Ring Etching Design: Keen IV
+28812	1	Ring Etching Design: Swift IV
+28820	0	Belt Etching Design: Pumped I
+28821	0	Belt Etching Design: Keen I
+28822	0	Belt Etching Design: Swift I
+28830	1	Belt Etching Design: Pumped II
+28831	1	Belt Etching Design: Keen II
+28832	1	Belt Etching Design: Swift II
+28840	1	Belt Etching Design: Pumped III
+28841	1	Belt Etching Design: Keen III
+28842	1	Belt Etching Design: Swift III
+28850	1	Belt Etching Design: Pumped IV
+28851	1	Belt Etching Design: Keen IV
+28852	1	Belt Etching Design: Swift IV
+28860	1	Body Armor Etching Design: Grounded IV
+28861	1	Body Armor Etching Design: Relentless IV
+28862	1	Body Armor Etching Design: Unyielding IV
+28863	1	Body Armor Etching Design: Pumped IV
+28864	1	Body Armor Etching Design: Keen IV
+28865	1	Weapon Etching Design: Pumped IV
+28866	1	Weapon Etching Design: Keen IV
+28867	1	Weapon Etching Design: Healing IV
+28868	1	Weapon Etching Design: Threatening IV
+28869	1	Weapon Etching Design: Energetic IV
+28870	1	Handwear Etching Design: Pumped IV
+28871	1	Handwear Etching Design: Keen IV
+28872	1	Handwear Etching Design: Healing IV
+28873	1	Handwear Etching Design: Threatening IV
+28874	1	Handwear Etching Design: Energetic IV
+28875	1	Footwear Etching Design: Grounded IV
+28876	1	Footwear Etching Design: Relentless IV
+28877	1	Footwear Etching Design: Unyielding IV
+28878	1	Footwear Etching Design: Pumped IV
+28879	1	Footwear Etching Design: Keen IV
 32099	3	Ere & Ire
 32100	3	Titan's Countenance
 32101	3	Abyss Army Knife
@@ -18870,6 +19128,7 @@
 72358	3	Resized Keylock Necklace
 72359	3	Resized Keylock Earring
 72360	3	Resized Keylock Ring
+79401	0	Map from Joakim
 80000	0	Barrel Bomb
 80001	1	Shattered Fleet Teleport Scroll
 80002	1	Channelworks Teleport Scroll
@@ -19229,11 +19488,11 @@
 81178	3	Token of Friendship: Level 65
 81179	2	Philter of Bravery
 81180	2	Care and Use of Your Pet Candyspinner
-81181	0	Amethyst
-81182	0	Pearl
-81183	0	Ruby
-81184	0	Sapphire
-81185	0	Emerald
+81181	0	Amethyst Chest
+81182	0	Pearl Chest
+81183	0	Ruby Chest
+81184	0	Sapphire Chest
+81185	0	Emerald Chest
 81186	2	Village Atlas
 81187	2	Experience Mark I
 81188	2	Experience Mark II
@@ -19254,7 +19513,7 @@
 81203	3	Token of Friendship: Level 65 Friend
 81204	1	Riding Skill: Jade
 81205	2	Care and Use of Your Pet Candyspinner
-81206	1	+12 Enchantment Scroll
+81206	1	+12 Enchantment Scroll [Legacy]
 81207	0	Federation Bill
 81208	2	Friendly Master Enigmatic Scroll
 81209	3	Friendly Feast
@@ -20112,11 +20371,13 @@
 83305	1	Teleport Scroll: Manglemire
 83306	3	Dreadspire Top Challenges Ticket
 83307	1	Harrowhold Teleport Scroll
-83400	1	Keep and Manor Teleport Scroll
+83400	1	Lilith's Keep Teleport Scroll
 83401	1	Ruinous Manor Teleport Scroll
 83402	1	Broken Prison Teleport Scroll
 83403	1	Velik's Sanctuary Teleport Scroll
 83404	1	Demon's Wheel Teleport Scroll
+83405	1	Thaumetal Refinery Teleport Scroll
+83406	1	RK-9 Kennel Teleport Scroll
 84301	2	Poisedly Wrathful Niveot
 84302	2	Resolutely Wrathful Niveot
 84303	2	Grievingly Wrathful Niveot
@@ -20368,6 +20629,364 @@
 88270	3	Smiteboots
 88271	3	Clawclippers
 88272	3	Behemoth Belt
+88273	3	Guardian Twin Swords
+88274	3	Guardian Lance
+88275	3	Guardian Greatsword
+88276	3	Guardian Axe
+88277	3	Guardian Disc
+88278	3	Guardian Bow
+88279	3	Guardian Staff
+88280	3	Guardian Scepter
+88281	3	Guardian Scythes
+88282	3	Guardian Arcannon
+88283	3	Guardian Powerfists
+88284	3	Guardian Shuriken
+88285	3	Guardian Runeglaive
+88286	3	Guardian Lancer Hauberk
+88287	3	Guardian Berserker Hauberk
+88288	3	Guardian Gunner Hauberk
+88289	3	Guardian Brawler Hauberk
+88290	3	Guardian Warrior Cuirass
+88291	3	Guardian Slayer Cuirass
+88292	3	Guardian Archer Cuirass
+88293	3	Guardian Reaper Cuirass
+88294	3	Guardian Valkyrie Cuirass
+88295	3	Guardian Sorcerer Robe
+88296	3	Guardian Mystic Robe
+88297	3	Guardian Priest Robe
+88298	3	Guardian Ninja Robe
+88299	3	Guardian Gauntlets
+88300	3	Guardian Gloves
+88301	3	Guardian Sleeves
+88302	3	Guardian Greaves
+88303	3	Guardian Boots
+88304	3	Guardian Shoes
+88305	3	Guardian Belt
+88306	3	Twistshard Twin Swords
+88307	3	Twistshard Lance
+88308	3	Twistshard Greatsword
+88309	3	Twistshard Axe
+88310	3	Twistshard Disc
+88311	3	Twistshard Bow
+88312	3	Twistshard Staff
+88313	3	Twistshard Scepter
+88314	3	Twistshard Scythes
+88315	3	Twistshard Arcannon
+88316	3	Twistshard Powerfists
+88317	3	Twistshard Shuriken
+88318	3	Twistshard Runeglaive
+88319	3	Twistshard Lancer Hauberk
+88320	3	Twistshard Berserker Hauberk
+88321	3	Twistshard Gunner Hauberk
+88322	3	Twistshard Brawler Hauberk
+88323	3	Twistshard Warrior Cuirass
+88324	3	Twistshard Slayer Cuirass
+88325	3	Twistshard Archer Cuirass
+88326	3	Twistshard Reaper Cuirass
+88327	3	Twistshard Valkyrie Cuirass
+88328	3	Twistshard Sorcerer Robe
+88329	3	Twistshard Mystic Robe
+88330	3	Twistshard Priest Robe
+88331	3	Twistshard Ninja Robe
+88332	3	Twistshard Gauntlets
+88333	3	Twistshard Gloves
+88334	3	Twistshard Sleeves
+88335	3	Twistshard Greaves
+88336	3	Twistshard Boots
+88337	3	Twistshard Shoes
+88338	3	Twistshard Belt
+88339	3	Frostmetal Twin Swords
+88340	3	Frostmetal Lance
+88341	3	Frostmetal Greatsword
+88342	3	Frostmetal Axe
+88343	3	Frostmetal Disc
+88344	3	Frostmetal Bow
+88345	3	Frostmetal Staff
+88346	3	Frostmetal Scepter
+88347	3	Frostmetal Scythes
+88348	3	Frostmetal Arcannon
+88349	3	Frostmetal Powerfists
+88350	3	Frostmetal Shuriken
+88351	3	Frostmetal Runeglaive
+88352	3	Frostmetal Lancer Hauberk
+88353	3	Frostmetal Berserker Hauberk
+88354	3	Frostmetal Gunner Hauberk
+88355	3	Frostmetal Brawler Hauberk
+88356	3	Frostmetal Warrior Cuirass
+88357	3	Frostmetal Slayer Cuirass
+88358	3	Frostmetal Archer Cuirass
+88359	3	Frostmetal Reaper Cuirass
+88360	3	Frostmetal Valkyrie Cuirass
+88361	3	Frostmetal Sorcerer Robe
+88362	3	Frostmetal Mystic Robe
+88363	3	Frostmetal Priest Robe
+88364	3	Frostmetal Ninja Robe
+88365	3	Frostmetal Gauntlets
+88366	3	Frostmetal Gloves
+88367	3	Frostmetal Sleeves
+88368	3	Frostmetal Greaves
+88369	3	Frostmetal Boots
+88370	3	Frostmetal Shoes
+88371	3	Frostmetal Belt
+88372	3	Stormcry Twin Swords
+88373	3	Stormcry Lance
+88374	3	Stormcry Greatsword
+88375	3	Stormcry Axe
+88376	3	Stormcry Disc
+88377	3	Stormcry Bow
+88378	3	Stormcry Staff
+88379	3	Stormcry Scepter
+88380	3	Stormcry Scythes
+88381	3	Stormcry Arcannon
+88382	3	Stormcry Powerfists
+88383	3	Stormcry Shuriken
+88384	3	Stormcry Runeglaive
+88385	3	Stormcry Lancer Hauberk
+88386	3	Stormcry Berserker Hauberk
+88387	3	Stormcry Gunner Hauberk
+88388	3	Stormcry Brawler Hauberk
+88389	3	Stormcry Warrior Cuirass
+88390	3	Stormcry Slayer Cuirass
+88391	3	Stormcry Archer Cuirass
+88392	3	Stormcry Reaper Cuirass
+88393	3	Stormcry Valkyrie Cuirass
+88394	3	Stormcry Sorcerer Robe
+88395	3	Stormcry Mystic Robe
+88396	3	Stormcry Priest Robe
+88397	3	Stormcry Ninja Robe
+88398	3	Stormcry Gauntlets
+88399	3	Stormcry Gloves
+88400	3	Stormcry Sleeves
+88401	3	Stormcry Greaves
+88402	3	Stormcry Boots
+88403	3	Stormcry Shoes
+88404	3	Stormcry Belt
+88405	3	Carving Prospect Necklace
+88406	3	Carving Prospect Earring
+88407	3	Carving Prospect Ring
+88408	3	Pumped Prospect Necklace
+88409	3	Pumped Prospect Earring
+88410	3	Pumped Prospect Ring
+88411	3	Prospect Circlet
+88412	3	Carving Bellum Necklace
+88413	3	Carving Bellum Earring
+88414	3	Carving Bellum Ring
+88415	3	Pumped Bellum Necklace
+88416	3	Pumped Bellum Earring
+88417	3	Pumped Bellum Ring
+88418	3	Bellum Circlet
+88419	3	Carving Daylight Necklace
+88420	3	Carving Daylight Earring
+88421	3	Carving Daylight Ring
+88422	3	Pumped Daylight Necklace
+88423	3	Pumped Daylight Earring
+88424	3	Pumped Daylight Ring
+88425	3	Daylight Circlet
+88426	3	Carving Entropy Necklace
+88427	3	Carving Entropy Earring
+88428	3	Carving Entropy Ring
+88429	3	Pumped Entropy Necklace
+88430	3	Pumped Entropy Earring
+88431	3	Pumped Entropy Ring
+88432	3	Entropy Circlet
+88433	3	Ravine Twin Swords
+88434	3	Ravine Lance
+88435	3	Ravine Greatsword
+88436	3	Ravine Axe
+88437	3	Ravine Disc
+88438	3	Ravine Bow
+88439	3	Ravine Staff
+88440	3	Ravine Scepter
+88441	3	Ravine Scythes
+88442	3	Ravine Arcannon
+88443	3	Ravine Powerfists
+88444	3	Ravine Shuriken
+88445	3	Ravine Runeglaive
+88446	3	Ravine Lancer Hauberk
+88447	3	Ravine Berserker Hauberk
+88448	3	Ravine Gunner Hauberk
+88449	3	Ravine Brawler Hauberk
+88450	3	Ravine Warrior Cuirass
+88451	3	Ravine Slayer Cuirass
+88452	3	Ravine Archer Cuirass
+88453	3	Ravine Reaper Cuirass
+88454	3	Ravine Valkyrie Cuirass
+88455	3	Ravine Sorcerer Robe
+88456	3	Ravine Mystic Robe
+88457	3	Ravine Priest Robe
+88458	3	Ravine Ninja Robe
+88459	3	Ravine Gauntlets
+88460	3	Ravine Gloves
+88461	3	Ravine Sleeves
+88462	3	Ravine Greaves
+88463	3	Ravine Boots
+88464	3	Ravine Shoes
+88465	3	Ravine Belt
+88466	3	Ravine Necklace
+88467	3	Ravine Earrings
+88468	3	Ravine Ring
+88469	3	Ravine Circlet
+88470	3	Ravine Brooch
+88471	3	Guardian Twin Swords
+88472	3	Guardian Lance
+88473	3	Guardian Greatsword
+88474	3	Guardian Axe
+88475	3	Guardian Disc
+88476	3	Guardian Bow
+88477	3	Guardian Staff
+88478	3	Guardian Scepter
+88479	3	Guardian Scythes
+88480	3	Guardian Arcannon
+88481	3	Guardian Powerfists
+88482	3	Guardian Shuriken
+88483	3	Guardian Runeglaive
+88484	3	Guardian Lancer Hauberk
+88485	3	Guardian Berserker Hauberk
+88486	3	Guardian Gunner Hauberk
+88487	3	Guardian Brawler Hauberk
+88488	3	Guardian Warrior Cuirass
+88489	3	Guardian Slayer Cuirass
+88490	3	Guardian Archer Cuirass
+88491	3	Guardian Reaper Cuirass
+88492	3	Guardian Valkyrie Cuirass
+88493	3	Guardian Sorcerer Robe
+88494	3	Guardian Mystic Robe
+88495	3	Guardian Priest Robe
+88496	3	Guardian Ninja Robe
+88497	3	Guardian Gauntlets
+88498	3	Guardian Gloves
+88499	3	Guardian Sleeves
+88500	3	Guardian Greaves
+88501	3	Guardian Boots
+88502	3	Guardian Shoes
+88503	3	Guardian Belt
+88504	3	Twistshard Twin Swords
+88505	3	Twistshard Lance
+88506	3	Twistshard Greatsword
+88507	3	Twistshard Axe
+88508	3	Twistshard Disc
+88509	3	Twistshard Bow
+88510	3	Twistshard Staff
+88511	3	Twistshard Scepter
+88512	3	Twistshard Scythes
+88513	3	Twistshard Arcannon
+88514	3	Twistshard Powerfists
+88515	3	Twistshard Shuriken
+88516	3	Twistshard Runeglaive
+88517	3	Twistshard Lancer Hauberk
+88518	3	Twistshard Berserker Hauberk
+88519	3	Twistshard Gunner Hauberk
+88520	3	Twistshard Brawler Hauberk
+88521	3	Twistshard Warrior Cuirass
+88522	3	Twistshard Slayer Cuirass
+88523	3	Twistshard Archer Cuirass
+88524	3	Twistshard Reaper Cuirass
+88525	3	Twistshard Valkyrie Cuirass
+88526	3	Twistshard Sorcerer Robe
+88527	3	Twistshard Mystic Robe
+88528	3	Twistshard Priest Robe
+88529	3	Twistshard Ninja Robe
+88530	3	Twistshard Gauntlets
+88531	3	Twistshard Gloves
+88532	3	Twistshard Sleeves
+88533	3	Twistshard Greaves
+88534	3	Twistshard Boots
+88535	3	Twistshard Shoes
+88536	3	Twistshard Belt
+88537	3	Frostmetal Twin Swords
+88538	3	Frostmetal Lance
+88539	3	Frostmetal Greatsword
+88540	3	Frostmetal Axe
+88541	3	Frostmetal Disc
+88542	3	Frostmetal Bow
+88543	3	Frostmetal Staff
+88544	3	Frostmetal Scepter
+88545	3	Frostmetal Scythes
+88546	3	Frostmetal Arcannon
+88547	3	Frostmetal Powerfists
+88548	3	Frostmetal Shuriken
+88549	3	Frostmetal Runeglaive
+88550	3	Frostmetal Lancer Hauberk
+88551	3	Frostmetal Berserker Hauberk
+88552	3	Frostmetal Gunner Hauberk
+88553	3	Frostmetal Brawler Hauberk
+88554	3	Frostmetal Warrior Cuirass
+88555	3	Frostmetal Slayer Cuirass
+88556	3	Frostmetal Archer Cuirass
+88557	3	Frostmetal Reaper Cuirass
+88558	3	Frostmetal Valkyrie Cuirass
+88559	3	Frostmetal Sorcerer Robe
+88560	3	Frostmetal Mystic Robe
+88561	3	Frostmetal Priest Robe
+88562	3	Frostmetal Ninja Robe
+88563	3	Frostmetal Gauntlets
+88564	3	Frostmetal Gloves
+88565	3	Frostmetal Sleeves
+88566	3	Frostmetal Greaves
+88567	3	Frostmetal Boots
+88568	3	Frostmetal Shoes
+88569	3	Frostmetal Belt
+88570	3	Stormcry Twin Swords
+88571	3	Stormcry Lance
+88572	3	Stormcry Greatsword
+88573	3	Stormcry Axe
+88574	3	Stormcry Disc
+88575	3	Stormcry Bow
+88576	3	Stormcry Staff
+88577	3	Stormcry Scepter
+88578	3	Stormcry Scythes
+88579	3	Stormcry Arcannon
+88580	3	Stormcry Powerfists
+88581	3	Stormcry Shuriken
+88582	3	Stormcry Runeglaive
+88583	3	Stormcry Lancer Hauberk
+88584	3	Stormcry Berserker Hauberk
+88585	3	Stormcry Gunner Hauberk
+88586	3	Stormcry Brawler Hauberk
+88587	3	Stormcry Warrior Cuirass
+88588	3	Stormcry Slayer Cuirass
+88589	3	Stormcry Archer Cuirass
+88590	3	Stormcry Reaper Cuirass
+88591	3	Stormcry Valkyrie Cuirass
+88592	3	Stormcry Sorcerer Robe
+88593	3	Stormcry Mystic Robe
+88594	3	Stormcry Priest Robe
+88595	3	Stormcry Ninja Robe
+88596	3	Stormcry Gauntlets
+88597	3	Stormcry Cuirass
+88598	3	Stormcry Sleeves
+88599	3	Stormcry Greaves
+88600	3	Stormcry Cuirass
+88601	3	Stormcry Shoes
+88602	3	Stormcry Belt
+88603	3	Carving Prospect Necklace
+88604	3	Carving Prospect Earring
+88605	3	Carving Prospect Ring
+88606	3	Pumped Prospect Necklace
+88607	3	Pumped Prospect Earring
+88608	3	Pumped Prospect Ring
+88609	3	Verdant Circlet
+88610	3	Carving Bellum Necklace
+88611	3	Carving Bellum Earring
+88612	3	Carving Bellum Ring
+88613	3	Pumped Bellum Necklace
+88614	3	Pumped Bellum Earring
+88615	3	Pumped Bellum Ring
+88616	3	Bellum Circlet
+88617	3	Carving Daylight Necklace
+88618	3	Carving Daylight Earring
+88619	3	Carving Daylight Ring
+88620	3	Pumped Daylight Necklace
+88621	3	Pumped Daylight Earring
+88622	3	Pumped Daylight Ring
+88623	3	Daylight Circlet
+88624	3	Carving Entropy Necklace
+88625	3	Carving Entropy Earring
+88626	3	Carving Entropy Ring
+88627	3	Pumped Entropy Necklace
+88628	3	Pumped Entropy Earring
+88629	3	Pumped Entropy Ring
+88630	3	Entropy Circlet
 90086	1	Care and Feeding of Your Pet Miss Kitty
 90087	1	Care and Feeding of Your Pet Willoe
 90088	1	Care and Feeding of Your Pet Dundee
@@ -23015,8 +23634,8 @@
 98263	3	Vergos's Withered Horn
 98264	3	Vergos's Withered Bone
 98265	3	Behemoth Essence
-98266	3	+12 Enchantment Scroll [Tier 11]
-98267	3	+15 Enchantment Scroll [Tier 11]
+98266	3	+12 Enchantment Scroll [Awakening]
+98267	3	+15 Enchantment Scroll [Awakened]
 98268	3	Vergos's Copper Chest
 98269	3	Vergos's Silver Chest
 98270	3	Vergos's Gold Chest
@@ -23043,6 +23662,91 @@
 98400	3	Dragonslayer's Garb
 98401	3	Dragonslayer's Helm
 98402	3	Dragonslayer's Cloak
+98403	3	Grounding Brooch
+98404	3	Empowered Brooch
+98405	3	Quickcarve Brooch
+98406	3	Quatrefoil Brooch
+98407	2	Reinforced Champion's Inner Armor
+98408	2	Steadfast Champion's Inner Armor
+98409	2	Vigorous Champion's Inner Armor
+98410	2	Persistent Champion's Inner Armor
+98411	3	Guardian Weapon Box
+98412	3	Guardian Armor Box
+98413	3	Simple Accessory Set Box
+98500	0	Golden Talent
+98501	1	Golden Daric
+98502	2	Golden Plate
+98503	1	Wood Scrap
+98504	1	Archdevan Catalyst
+98505	1	Polished Arunic Ore
+98506	1	Archdevan Oil
+98507	2	Liquid Metal
+98508	2	Hypnotic Device
+98509	2	Archdevan Surfactant
+98510	2	Artisan's Tools
+98511	2	Copper Clasp
+98512	2	Pansophic Ash
+98513	2	Elemental Essence
+98514	0	Silver Talent
+98515	1	Silver Siglo
+98516	2	Silver Plate
+98517	1	Metal Fragment
+98518	1	Refined Elixir
+98519	2	Archdevan Formula
+98520	2	Carved Ornament
+98521	2	Otherworldly Shard
+98522	0	Entropic Emblem
+98523	0	Metamorphic Emblem
+98524	1	Noctenium Infusion x1,000 Crate
+98525	0	100 Vanguard Initiative Credits
+98526	0	Complete Veteran Crystalbind (1 hour)
+98527	0	Enchanting Box
+98528	1	Enchanting Chest
+98529	2	Enchanting Crate
+98530	3	Twistshard Equipment Chest
+98531	3	Frostmetal Equipment Chest
+98532	3	Stormcry Equipment Chest
+98533	0	Brilliant Enchanting Box
+98534	1	Brilliant Enchanting Crate
+98535	2	Brilliant Enchanting Chest
+98536	3	Champion's Enchanting Chest
+98537	3	Prideful Guild Reward Chest
+98538	2	Audacious Guild Reward Chest
+98539	1	Guild Reward Chest
+98540	0	Small Guild Reward Chest
+98541	1	Vergos Enchanting Bag
+98542	0	Vergos Enchanting Pouch
+98543	2	Vergos Enchanting Satchel
+98544	3	Vergos Enchanting Sack
+98545	1	Vergos Consumables Pouch
+98546	2	Vergos Consumables Satchel
+98547	3	Vergos Treasure Box
+98548	3	Vergos Treasure Chest
+98549	2	Dawnfall Token
+98550	3	Dawnstorm Token
+98551	1	Titan's Earth
+98552	1	Titan's Storm
+98553	2	Pure Titan's Earth
+98554	2	Pure Titan's Storm
+98555	3	Vivid Titan's Earth
+98556	3	Vivid Titan's Storm
+98557	3	Lucid Titan's Earth
+98558	3	Lucid Titan's Storm
+98559	2	Red Dendrite
+98560	3	Harmonious Imbalance
+98561	3	Vivid Titan's Fire
+98562	3	Vivid Titan's Peace
+98563	3	Lucid Titan's Fire
+98564	3	Lucid Titan's Peace
+98565	1	Uncommon Etching Crystal
+98566	2	Rare Etching Crystal
+98567	3	Superior Etching Crystal
+98568	3	Metamorphic Emblem Chest
+98574	3	Regal Guild Supplies
+98575	2	Princely Guild Supplies
+98576	1	Baronial Guild Supplies
+98577	0	Ducal Guild Supplies
+98578	2	Guild Supplies
 99000	0	Battleground Inner Armor
 99001	0	Battleground Circlet
 99011	0	Expiring Anthrozombie Elixir (1 hour)
@@ -23133,7 +23837,7 @@
 99173	3	Token of Friendship: Level 65
 99174	3	Token of Friendship: Level 65 Friend
 99175	2	Enchantment Boon Box
-99176	1	+12 Enchantment Scroll
+99176	1	+12 Masterwork Enchantment Scroll
 99177	1	Instance Reset Scroll
 99178	1	Instance Reset Scroll: Lilith's Keep
 99179	1	Instance Reset Scroll: Lilith's Keep
@@ -23458,6 +24162,69 @@
 99504	3	Fortified Pinkalicious Innerwear
 99505	3	Insulated Pinkalicious Innerwear
 99506	3	Performance Pinkalicious Innerwear
+99531	2	Flying Skill: Azure Phoenix
+99532	3	Flying Skill: Urvog
+99533	2	Flying Skill: Blue Phoenix
+99534	3	Flying Skill: Sapphire Phoenix
+99535	2	Flying Skill: Azure Phoenix
+99536	3	Flying Skill: Urvog
+99537	2	Flying Skill: Blue Phoenix
+99538	3	Flying Skill: Sapphire Phoenix
+99539	2	Flying Skill: Azure Phoenix (3 Days)
+99540	3	Flying Skill: Urvog (3 Days)
+99541	2	Flying Skill: Azure Phoenix (7 Days)
+99542	3	Flying Skill: Urvog (7 Days)
+99543	2	Flying Skill: Azure Phoenix (14 Days)
+99544	3	Flying Skill: Urvog (14 Days)
+99545	2	Flying Skill: Azure Phoenix (30 Days)
+99546	3	Flying Skill: Urvog (30 Days)
+99547	2	Flying Skill: Blue Phoenix (3 Days)
+99548	2	Flying Skill: Blue Phoenix (7 Days)
+99549	2	Flying Skill: Blue Phoenix (14 Days)
+99550	2	Flying Skill: Blue Phoenix (30 Days)
+99551	3	Flying Skill: Sapphire Phoenix (3 Days)
+99552	3	Flying Skill: Sapphire Phoenix (7 Days)
+99553	3	Flying Skill: Sapphire Phoenix (14 Days)
+99554	3	Flying Skill: Sapphire Phoenix (30 Days)
+99555	2	Flying Skill: Blazing Phoenix
+99556	3	Flying Skill: Pteryx
+99557	2	Flying Skill: Red Phoenix
+99558	3	Flying Skill: Fiery Phoenix
+99559	2	Flying Skill: Blazing Phoenix
+99560	3	Flying Skill: Pteryx
+99561	2	Flying Skill: Red Phoenix
+99562	3	Flying Skill: Fiery Phoenix
+99563	2	Flying Skill: Blazing Phoenix (3 Days)
+99564	3	Flying Skill: Pteryx (3 Days)
+99565	2	Flying Skill: Blazing Phoenix (7 Days)
+99566	3	Flying Skill: Pteryx (7 Days)
+99567	2	Flying Skill: Blazing Phoenix (14 Days)
+99568	3	Flying Skill: Pteryx (14 Days)
+99569	2	Flying Skill: Blazing Phoenix (30 Days)
+99570	3	Flying Skill: Pteryx (30 Days)
+99571	2	Flying Skill: Red Phoenix (3 Days)
+99572	2	Flying Skill: Red Phoenix (7 Days)
+99573	2	Flying Skill: Red Phoenix (14 Days)
+99574	2	Flying Skill: Red Phoenix (30 Days)
+99575	3	Flying Skill: Fiery Phoenix (3 Days)
+99576	3	Flying Skill: Fiery Phoenix (7 Days)
+99577	3	Flying Skill: Fiery Phoenix (14 Days)
+99578	3	Flying Skill: Fiery Phoenix (30 Days)
+99615	1	Reinforced Gym Skivvies
+99616	1	Fitness Woolens
+99617	1	Fortified Woolens
+99618	1	Insulated Shorts
+99619	1	Performance Shorts
+99620	2	Reinforced Drawers
+99621	2	Fitness Briefs
+99622	2	Fortified Briefs
+99623	2	Insulated Bodywear
+99624	2	Performance Bodywear
+99625	3	[Event] Superior Fresh Linen Underwear
+99626	3	[Event] Superior Comfy Linen Underwear
+99627	3	[Event] Superior Sporty Linen Underwear
+99628	3	[Event] Superior Warm Linen Underwear
+99629	3	[Event] Superior Glowing Linen Underwear
 200001	0	Featherlight Potion
 200002	3	Shake & Bake
 200003	3	Nail in the Coffin
@@ -24402,7 +25169,7 @@
 201177	1	Riding Skill: Noble Specter
 201178	1	Riding Skill: Noble Aether
 201179	1	Riding Skill: Noble Ghost
-201180	1	+9 Enchantment Scroll
+201180	1	+9 Enchantment Scroll [Legacy]
 201181	1	Emporium +12 Enchantment Scroll
 201182	1	Emporium +12 Awakened Scroll
 201183	1	Emporium +13 Awakened Scroll
@@ -24442,6 +25209,18 @@
 201217	2	Disco Ball
 201218	2	Disco Ball
 201219	2	Disco Ball
+201220	3	[Event] Everful Nostrum
+201221	2	[Event] Bravery Potion
+201222	2	[Event] Health Potion
+201223	2	[Event] Lamb Bulgogi
+201224	3	[Event] Melsa's Triple Feast
+201225	0	[Event] Noctenium Infusion
+201227	2	[Event] Strongbox Key
+201230	3	[Event] Unstable Treasure Shard
+201234	1	[Event] Artifact Shard
+201300	3	Vanguard Ornamental Hauberk
+201301	3	Vanguard Ornamental Cuirass
+201302	3	Vanguard Ornamental Robe
 20000000	0	Money
 20000001	0	XP
 20000002	0	Unspecified Reward
@@ -24463,6 +25242,7 @@
 20000019	0	EP XP+
 20000020	0	EP XP++
 20000021	0	Reward Points
+20000022	0	Item XP
 191861	0	Anti-Tank Mine
 191862	0	Anti-Tank Slush Mine
 191863	0	Anti-Tank Ice Mine
@@ -24558,6 +25338,60 @@
 216678	3	Самоцвет
 216679	3	Жетон листопада
 216680	3	Жетон снегопада
+216681	3	Valkyon Federation Medal
+216682	3	Demonic Amulet
+216683	3	Heart of the Beast
+216684	2	Mystical letters
+216685	2	Crystal of Ether
+216686	3	Blood of Demon
+216687	2	Dendrite Shard
+216688	2	Uncommon Faridei's Cube
+216689	2	Rare Faridei's Cube
+216690	3	Superior Faridei's Cube
+216691	3	Golden Faridei's Cube
+216692	3	Legendary Faridei's Cube
+216693	0	Element Essence
+216694	1	Unstable Water crystal
+216695	1	Unstable Fire crystal
+216696	1	Unstable Earth crystal
+216697	2	Unstable Water energy
+216698	2	Unstable Fire energy
+216699	2	Unstable Earth energy
+216700	2	Unstable Water essence
+216701	2	Unstable Fire essence
+216702	2	Unstable Earth essence
+216703	2	Unstable Water element
+216704	2	Unstable Fire element
+216705	2	Unstable Earth element
+216706	3	Relic of the Water
+216707	3	Relic of the Fire
+216708	3	Relic of the Earth
+216709	1	Water fragment
+216710	1	Fire fragment
+216711	1	Earth fragment
+216712	2	Water crystal
+216713	2	Fire crystal
+216714	2	Earth crystal
+216715	2	Water energy
+216716	2	Fire energy
+216717	2	Earth energy
+216718	3	Prime Water essence
+216719	3	Prime Fire essence
+216720	3	Prime Earth essence
+216721	0	Quintessence
+216722	3	Obsidian Shard
+216723	3	Obsidian Crystal
+216724	3	Obsidian Sphere
+216725	3	Prime Darkness
+216726	1	Stone of the Light
+216727	3	Elements Secrets
+216728	3	Massive Loot Box 
+216729	3	Extreme Loot Box
+216730	3	Extreme Key
+216731	3	Box 1
+216733	3	Box 3
+216734	3	Box 4
+216736	3	Box 6
 247623	2	Smart Box: Swimwear Male A + Female A
 247624	2	Smart Box: Swimwear Male B + Female D
 247625	2	Smart Box: Swimwear Female B
@@ -24566,6 +25400,12 @@
 247628	2	Smart Box: Swimwear Male B + Female D (7 Days)
 247629	2	Smart Box: Swimwear Female B (7 Days)
 247630	2	Smart Box: Swimwear Female C (7 Days)
+247631	2	Smartbox: Elemental weapon (non-tradable)
+247632	2	Smartbox: Elemental weapon
+247633	2	Smartbox: Rare elemental weapon (non-tradable)
+247634	2	Smartbox: Rare elemental weapon
+247635	2	Smartbox: Rare elemental weapon (3 days)
+247636	2	Wheel of Fortune box
 250000	3	Human Male SWAT Uniform
 250001	3	Human Male SWAT Uniform
 250002	3	Human Male SWAT Uniform
@@ -26846,30 +27686,30 @@
 252445	3	Flying Skill: Jetcycle MHZ
 252446	3	Flying Skill: Jetcycle MH
 252447	3	Flying Skill: Jetcycle MHx
-252448	3	Taipei 101 (Navy-Pink)
-252449	3	Taipei 101 (Navy-Pink)
-252450	3	Taipei 101 (Navy-Pink)
-252451	3	Taipei 101 (Navy-Pink)
-252452	3	Taipei 101 (Navy-Pink)
-252453	3	Taipei 101 (Navy-Pink)
-252454	3	Taipei 101 (Navy-Pink)
-252455	3	Taipei 101 (Navy-Pink)
-252456	3	Taipei 101 (Navy-Pink)
-252457	3	Taipei 101 (Navy-Pink)
-252458	3	Taipei 101 (Navy-Pink)
-252459	3	Taipei 101 (Navy-Pink)
-252460	3	Taipei 101 (Pink-Yellow)
-252461	3	Taipei 101 (Pink-Yellow)
-252462	3	Taipei 101 (Pink-Yellow)
-252463	3	Taipei 101 (Pink-Yellow)
-252464	3	Taipei 101 (Pink-Yellow)
-252465	3	Taipei 101 (Pink-Yellow)
-252466	3	Taipei 101 (Pink-Yellow)
-252467	3	Taipei 101 (Pink-Yellow)
-252468	3	Taipei 101 (Pink-Yellow)
-252469	3	Taipei 101 (Pink-Yellow)
-252470	3	Taipei 101 (Pink-Yellow)
-252471	3	Taipei 101 (Pink-Yellow)
+252448	3	ALL YOUR TOWER ARE BELONG TO US
+252449	3	ALL YOUR TOWER ARE BELONG TO US
+252450	3	ALL YOUR TOWER ARE BELONG TO US
+252451	3	ALL YOUR TOWER ARE BELONG TO US
+252452	3	ALL YOUR TOWER ARE BELONG TO US
+252453	3	ALL YOUR TOWER ARE BELONG TO US
+252454	3	ALL YOUR TOWER ARE BELONG TO US
+252455	3	ALL YOUR TOWER ARE BELONG TO US
+252456	3	ALL YOUR TOWER ARE BELONG TO US
+252457	3	ALL YOUR TOWER ARE BELONG TO US
+252458	3	ALL YOUR TOWER ARE BELONG TO US
+252459	3	ALL YOUR TOWER ARE BELONG TO US
+252460	3	Towery McTowerhead
+252461	3	Towery McTowerhead
+252462	3	Towery McTowerhead
+252463	3	Towery McTowerhead
+252464	3	Towery McTowerhead
+252465	3	Towery McTowerhead
+252466	3	Towery McTowerhead
+252467	3	Towery McTowerhead
+252468	3	Towery McTowerhead
+252469	3	Towery McTowerhead
+252470	3	Towery McTowerhead
+252471	3	Towery McTowerhead
 252472	3	Human Male Bomber Jacket
 252473	3	Human Male Bomber Jacket
 252474	3	Human Male Bomber Jacket
@@ -31370,8 +32210,351 @@
 257189	3	Jiangshi Hat
 257190	3	Jiangshi Hat
 257191	3	Jiangshi Hat
+257192	3	Human Male Homemade Costume
+257193	3	Human Male Homemade Costume
+257194	3	Human Male Homemade Costume (3 Days)
+257195	3	Human Male Homemade Costume (7 Days)
+257196	3	Human Male Homemade Costume (7 Days)
+257197	3	Human Male Homemade Costume (14 Days)
+257198	3	Human Male Homemade Costume (30 Days)
+257199	3	Human Male Homemade Costume (30 Days)
+257200	3	Human Male Homemade Costume
+257201	3	Human Male Homemade Costume
+257202	3	Human Male Homemade Costume
+257203	3	Human Male Homemade Costume
+257204	3	Dyeable Human Male Homemade Costume
+257205	3	Dyeable Human Male Homemade Costume
+257206	3	Dyeable Human Male Homemade Costume (3 Days)
+257207	3	Dyeable Human Male Homemade Costume (7 Days)
+257208	3	Dyeable Human Male Homemade Costume (7 Days)
+257209	3	Dyeable Human Male Homemade Costume (14 Days)
+257210	3	Dyeable Human Male Homemade Costume (30 Days)
+257211	3	Dyeable Human Male Homemade Costume (30 Days)
+257212	3	Dyeable Human Male Homemade Costume
+257213	3	Dyeable Human Male Homemade Costume
+257214	3	Dyeable Human Male Homemade Costume
+257215	3	Dyeable Human Male Homemade Costume
+257216	3	Human Female Homemade Costume
+257217	3	Human Female Homemade Costume
+257218	3	Human Female Homemade Costume (3 Days)
+257219	3	Human Female Homemade Costume (7 Days)
+257220	3	Human Female Homemade Costume (7 Days)
+257221	3	Human Female Homemade Costume (14 Days)
+257222	3	Human Female Homemade Costume (30 Days)
+257223	3	Human Female Homemade Costume (30 Days)
+257224	3	Human Female Homemade Costume
+257225	3	Human Female Homemade Costume
+257226	3	Human Female Homemade Costume
+257227	3	Human Female Homemade Costume
+257228	3	Dyeable Human Female Homemade Costume
+257229	3	Dyeable Human Female Homemade Costume
+257230	3	Dyeable Human Female Homemade Costume (3 Days)
+257231	3	Dyeable Human Female Homemade Costume (7 Days)
+257232	3	Dyeable Human Female Homemade Costume (7 Days)
+257233	3	Dyeable Human Female Homemade Costume (14 Days)
+257234	3	Dyeable Human Female Homemade Costume (30 Days)
+257235	3	Dyeable Human Female Homemade Costume (30 Days)
+257236	3	Dyeable Human Female Homemade Costume
+257237	3	Dyeable Human Female Homemade Costume
+257238	3	Dyeable Human Female Homemade Costume
+257239	3	Dyeable Human Female Homemade Costume
+257240	3	High Elf Male Homemade Costume
+257241	3	High Elf Male Homemade Costume
+257242	3	High Elf Male Homemade Costume (3 Days)
+257243	3	High Elf Male Homemade Costume (7 Days)
+257244	3	High Elf Male Homemade Costume (14 Days)
+257245	3	High Elf Male Homemade Costume (14 Days)
+257246	3	High Elf Male Homemade Costume (30 Days)
+257247	3	High Elf Male Homemade Costume (30 Days)
+257248	3	High Elf Male Homemade Costume
+257249	3	High Elf Male Homemade Costume
+257250	3	High Elf Male Homemade Costume
+257251	3	High Elf Male Homemade Costume
+257252	3	Dyeable High Elf Male Homemade Costume
+257253	3	Dyeable High Elf Male Homemade Costume
+257254	3	Dyeable High Elf Male Homemade Costume (3 Days)
+257255	3	Dyeable High Elf Male Homemade Costume (7 Days)
+257256	3	Dyeable High Elf Male Homemade Costume (7 Days)
+257257	3	Dyeable High Elf Male Homemade Costume (14 Days)
+257258	3	Dyeable High Elf Male Homemade Costume (30 Days)
+257259	3	Dyeable High Elf Male Homemade Costume (30 Days)
+257260	3	Dyeable High Elf Male Homemade Costume
+257261	3	Dyeable High Elf Male Homemade Costume
+257262	3	Dyeable High Elf Male Homemade Costume
+257263	3	Dyeable High Elf Male Homemade Costume
+257264	3	High Elf Female Homemade Costume 
+257265	3	High Elf Female Homemade Costume 
+257266	3	High Elf Female Homemade Costume (3 Days)
+257267	3	High Elf Female Homemade Costume (7 Days)
+257268	3	High Elf Female Homemade Costume (7 Days)
+257269	3	High Elf Female Homemade Costume (14 Days)
+257270	3	High Elf Female Homemade Costume (30 Days)
+257271	3	High Elf Female Homemade Costume (30 Days)
+257272	3	High Elf Female Homemade Costume 
+257273	3	High Elf Female Homemade Costume 
+257274	3	High Elf Female Homemade Costume 
+257275	3	High Elf Female Homemade Costume 
+257276	3	Dyeable High Elf Female Homemade Costume 
+257277	3	Dyeable High Elf Female Homemade Costume 
+257278	3	Dyeable High Elf Female Homemade Costume (3 Days)
+257279	3	Dyeable High Elf Female Homemade Costume (7 Days)
+257280	3	Dyeable High Elf Female Homemade Costume (7 Days)
+257281	3	Dyeable High Elf Female Homemade Costume (14 Days)
+257282	3	Dyeable High Elf Female Homemade Costume (30 Days)
+257283	3	Dyeable High Elf Female Homemade Costume (30 Days)
+257284	3	Dyeable High Elf Female Homemade Costume 
+257285	3	Dyeable High Elf Female Homemade Costume 
+257286	3	Dyeable High Elf Female Homemade Costume 
+257287	3	Dyeable High Elf Female Homemade Costume 
+257288	3	Amani Male Homemade Costume
+257289	3	Amani Male Homemade Costume
+257290	3	Amani Male Homemade Costume (3 Days)
+257291	3	Amani Male Homemade Costume (7 Days)
+257292	3	Amani Male Homemade Costume (7 Days)
+257293	3	Amani Male Homemade Costume (14 Days)
+257294	3	Amani Male Homemade Costume (30 Days)
+257295	3	Amani Male Homemade Costume (30 Days)
+257296	3	Amani Male Homemade Costume
+257297	3	Amani Male Homemade Costume
+257298	3	Amani Male Homemade Costume
+257299	3	Amani Male Homemade Costume
+257300	3	Dyeable Amani Male Homemade Costume
+257301	3	Dyeable Amani Male Homemade Costume
+257302	3	Dyeable Amani Male Homemade Costume (3 Days)
+257303	3	Dyeable Amani Male Homemade Costume (7 Days)
+257304	3	Dyeable Amani Male Homemade Costume (7 Days)
+257305	3	Dyeable Amani Male Homemade Costume (14 Days)
+257306	3	Dyeable Amani Male Homemade Costume (30 Days)
+257307	3	Dyeable Amani Male Homemade Costume (30 Days)
+257308	3	Dyeable Amani Male Homemade Costume
+257309	3	Dyeable Amani Male Homemade Costume
+257310	3	Dyeable Amani Male Homemade Costume
+257311	3	Dyeable Amani Male Homemade Costume
+257312	3	Amani Female Homemade Costume
+257313	3	Amani Female Homemade Costume
+257314	3	Amani Female Homemade Costume (3 Days)
+257315	3	Amani Female Homemade Costume (7 Days)
+257316	3	Amani Female Homemade Costume (7 Days)
+257317	3	Amani Female Homemade Costume (14 Days)
+257318	3	Amani Female Homemade Costume (30 Days)
+257319	3	Amani Female Homemade Costume (30 Days)
+257320	3	Amani Female Homemade Costume
+257321	3	Amani Female Homemade Costume
+257322	3	Amani Female Homemade Costume
+257323	3	Amani Female Homemade Costume
+257324	3	Dyeable Amani Female Homemade Costume
+257325	3	Dyeable Amani Female Homemade Costume
+257326	3	Dyeable Amani Female Homemade Costume (3 Days)
+257327	3	Dyeable Amani Female Homemade Costume (7 Days)
+257328	3	Dyeable Amani Female Homemade Costume (7 Days)
+257329	3	Dyeable Amani Female Homemade Costume (14 Days)
+257330	3	Dyeable Amani Female Homemade Costume (30 Days)
+257331	3	Dyeable Amani Female Homemade Costume (30 Days)
+257332	3	Dyeable Amani Female Homemade Costume
+257333	3	Dyeable Amani Female Homemade Costume
+257334	3	Dyeable Amani Female Homemade Costume
+257335	3	Dyeable Amani Female Homemade Costume
+257336	3	Castanic Male Homemade Costume
+257337	3	Castanic Male Homemade Costume
+257338	3	Castanic Male Homemade Costume (3 Days)
+257339	3	Castanic Male Homemade Costume (7 Days)
+257340	3	Castanic Male Homemade Costume (7 Days)
+257341	3	Castanic Male Homemade Costume (14 Days)
+257342	3	Castanic Male Homemade Costume (30 Days)
+257343	3	Castanic Male Homemade Costume (30 Days)
+257344	3	Castanic Male Homemade Costume
+257345	3	Castanic Male Homemade Costume
+257346	3	Castanic Male Homemade Costume
+257347	3	Castanic Male Homemade Costume
+257348	3	Dyeable Castanic Male Homemade Costume
+257349	3	Dyeable Castanic Male Homemade Costume
+257350	3	Dyeable Castanic Male Homemade Costume (3 Days)
+257351	3	Dyeable Castanic Male Homemade Costume( 7 Days)
+257352	3	Dyeable Castanic Male Homemade Costume (7 Days)
+257353	3	Dyeable Castanic Male Homemade Costume (14 Days)
+257354	3	Dyeable Castanic Male Homemade Costume (30 Days)
+257355	3	Dyeable Castanic Male Homemade Costume (30 Days)
+257356	3	Dyeable Castanic Male Homemade Costume
+257357	3	Dyeable Castanic Male Homemade Costume
+257358	3	Dyeable Castanic Male Homemade Costume
+257359	3	Dyeable Castanic Male Homemade Costume
+257360	3	Castanic Female Homemade Costume
+257361	3	Castanic Female Homemade Costume
+257362	3	Castanic Female Homemade Costume (3 Days)
+257363	3	Castanic Female Homemade Costume (7 Days)
+257364	3	Castanic Female Homemade Costume (7 Days)
+257365	3	Castanic Female Homemade Costume (14 Days)
+257366	3	Castanic Female Homemade Costume (30 Days)
+257367	3	Castanic Female Homemade Costume (30 Days)
+257368	3	Castanic Female Homemade Costume
+257369	3	Castanic Female Homemade Costume
+257370	3	Castanic Female Homemade Costume
+257371	3	Castanic Female Homemade Costume
+257372	3	Dyeable Castanic Female Homemade Costume
+257373	3	Dyeable Castanic Female Homemade Costume
+257374	3	Dyeable Castanic Female Homemade Costume (3 Days)
+257375	3	Dyeable Castanic Female Homemade Costume (7 Days)
+257376	3	Dyeable Castanic Female Homemade Costume (7 Days)
+257377	3	Dyeable Castanic Female Homemade Costume (14 Days)
+257378	3	Dyeable Castanic Female Homemade Costume (30 Days)
+257379	3	Dyeable Castanic Female Homemade Costume (30 Days)
+257380	3	Dyeable Castanic Female Homemade Costume
+257381	3	Dyeable Castanic Female Homemade Costume
+257382	3	Dyeable Castanic Female Homemade Costume
+257383	3	Dyeable Castanic Female Homemade Costume
+257384	3	Popori Homemade Costume 
+257385	3	Popori Homemade Costume 
+257386	3	Popori Homemade Costume (3 Days)
+257387	3	Popori Homemade Costume (7 Days)
+257388	3	Popori Homemade Costume (7 Days)
+257389	3	Popori Homemade Costume (14 Days)
+257390	3	Popori Homemade Costume (30 Days)
+257391	3	Popori Homemade Costume (30 Days)
+257392	3	Popori Homemade Costume 
+257393	3	Popori Homemade Costume 
+257394	3	Popori Homemade Costume 
+257395	3	Popori Homemade Costume 
+257396	3	Dyeable Popori Homemade Costume 
+257397	3	Dyeable Popori Homemade Costume 
+257398	3	Dyeable Popori Homemade Costume (3 Days)
+257399	3	Dyeable Popori Homemade Costume (7 Days)
+257400	3	Dyeable Popori Homemade Costume (7 Days)
+257401	3	Dyeable Popori Homemade Costume (14 Days)
+257402	3	Dyeable Popori Homemade Costume (30 Days)
+257403	3	Dyeable Popori Homemade Costume (30 Days)
+257404	3	Dyeable Popori Homemade Costume 
+257405	3	Dyeable Popori Homemade Costume 
+257406	3	Dyeable Popori Homemade Costume 
+257407	3	Dyeable Popori Homemade Costume 
+257408	3	Elin Homemade Costume 
+257409	3	Elin Homemade Costume 
+257410	3	Elin Homemade Costume (3 Days)
+257411	3	Elin Homemade Costume (7 Days)
+257412	3	Elin Homemade Costume (7 Days)
+257413	3	Elin Homemade Costume (14 Days)
+257414	3	Elin Homemade Costume (30 Days)
+257415	3	Elin Homemade Costume (30 Days)
+257416	3	Elin Homemade Costume 
+257417	3	Elin Homemade Costume 
+257418	3	Elin Homemade Costume 
+257419	3	Elin Homemade Costume 
+257420	3	Dyeable Elin Homemade Costume 
+257421	3	Dyeable Elin Homemade Costume 
+257422	3	Dyeable Elin Homemade Costume (3 Days)
+257423	3	Dyeable Elin Homemade Costume (7 Days)
+257424	3	Dyeable Elin Homemade Costume (7 Days)
+257425	3	Dyeable Elin Homemade Costume (14 Days)
+257426	3	Dyeable Elin Homemade Costume (30 Days)
+257427	3	Dyeable Elin Homemade Costume (30 Days)
+257428	3	Dyeable Elin Homemade Costume 
+257429	3	Dyeable Elin Homemade Costume 
+257430	3	Dyeable Elin Homemade Costume 
+257431	3	Dyeable Elin Homemade Costume 
+257432	3	Baraka Homemade Costume 
+257433	3	Baraka Homemade Costume 
+257434	3	Baraka Homemade Costume (3 Days)
+257435	3	Baraka Homemade Costume (7 Days)
+257436	3	Baraka Homemade Costume (7 Days)
+257437	3	Baraka Homemade Costume (14 Days)
+257438	3	Baraka Homemade Costume (30 Days)
+257439	3	Baraka Homemade Costume (30 Days)
+257440	3	Baraka Homemade Costume 
+257441	3	Baraka Homemade Costume 
+257442	3	Baraka Homemade Costume 
+257443	3	Baraka Homemade Costume 
+257444	3	Dyeable Baraka Homemade Costume 
+257445	3	Dyeable Baraka Homemade Costume 
+257446	3	Dyeable Baraka Homemade Costume (3 Days)
+257447	3	Dyeable Baraka Homemade Costume (7 Days)
+257448	3	Dyeable Baraka Homemade Costume (7 Days)
+257449	3	Dyeable Baraka Homemade Costume (14 Days)
+257450	3	Dyeable Baraka Homemade Costume (30 Days)
+257451	3	Dyeable Baraka Homemade Costume (30 Days)
+257452	3	Dyeable Baraka Homemade Costume 
+257453	3	Dyeable Baraka Homemade Costume 
+257454	3	Dyeable Baraka Homemade Costume 
+257455	3	Dyeable Baraka Homemade Costume 
+257456	3	Bare Skull Mask
+257457	3	Bare Skull Mask
+257458	3	Bare Skull Mask (3 Days)
+257459	3	Bare Skull Mask (7 Days)
+257460	3	Bare Skull Mask (7 Days)
+257461	3	Bare Skull Mask (14 Days)
+257462	3	Bare Skull Mask (30 Days)
+257463	3	Bare Skull Mask (30 Days)
+257464	3	Bare Skull Mask
+257465	3	Bare Skull Mask
+257466	3	Bare Skull Mask
+257467	3	Bare Skull Mask
+257468	3	Pumpkin Skull Mask
+257469	3	Pumpkin Skull Mask
+257470	3	Pumpkin Skull Mask (3 Days)
+257471	3	Pumpkin Skull Mask (7 Days)
+257472	3	Pumpkin Skull Mask (7 Days)
+257473	3	Pumpkin Skull Mask (14 Days)
+257474	3	Pumpkin Skull Mask (30 Days)
+257475	3	Pumpkin Skull Mask (30 Days)
+257476	3	Pumpkin Skull Mask
+257477	3	Pumpkin Skull Mask
+257478	3	Pumpkin Skull Mask
+257479	3	Pumpkin Skull Mask
+257480	3	Blazing Skull Mask
+257481	3	Blazing Skull Mask
+257482	3	Blazing Skull Mask (3 Days)
+257483	3	Blazing Skull Mask (7 Days)
+257484	3	Blazing Skull Mask (7 Days)
+257485	3	Blazing Skull Mask (14 Days)
+257486	3	Blazing Skull Mask (30 Days)
+257487	3	Blazing Skull Mask (30 Days)
+257488	3	Blazing Skull Mask
+257489	3	Blazing Skull Mask
+257490	3	Blazing Skull Mask
+257491	3	Blazing Skull Mask
+257492	3	Blue Scream Skull
+257493	3	Blue Scream Skull
+257494	3	Blue Scream Skull (3 Days)
+257495	3	Blue Scream Skull (7 Days)
+257496	3	Blue Scream Skull (7 Days)
+257497	3	Blue Scream Skull (14 Days)
+257498	3	Blue Scream Skull (30 Days)
+257499	3	Blue Scream Skull (30 Days)
+257500	3	Blue Scream Skull
+257501	3	Blue Scream Skull
+257502	3	Blue Scream Skull
+257503	3	Blue Scream Skull
+257504	3	Burning Bones Mask
+257505	3	Burning Bones Mask
+257506	3	Burning Bones Mask (3 Days)
+257507	3	Burning Bones Mask (7 Days)
+257508	3	Burning Bones Mask (7 Days)
+257509	3	Burning Bones Mask (14 Days)
+257510	3	Burning Bones Mask (30 Days)
+257511	3	Burning Bones Mask (30 Days)
+257512	3	Burning Bones Mask
+257513	3	Burning Bones Mask
+257514	3	Burning Bones Mask
+257515	3	Burning Bones Mask
+257516	3	Icy Hot Skull Mask
+257517	3	Icy Hot Skull Mask
+257518	3	Icy Hot Skull Mask (3 Days)
+257519	3	Icy Hot Skull Mask (7 Days)
+257520	3	Icy Hot Skull Mask (7 Days)
+257521	3	Icy Hot Skull Mask (14 Days)
+257522	3	Icy Hot Skull Mask (30 Days)
+257523	3	Icy Hot Skull Mask (30 Days)
+257524	3	Icy Hot Skull Mask
+257525	3	Icy Hot Skull Mask
+257526	3	Icy Hot Skull Mask
+257527	3	Icy Hot Skull Mask
 220353	3	T-cat 01
 220354	3	T-cat 02
+222678	3	Massive Loot Box 
+222679	3	Extreme Loot Box
+222680	3	Extreme Key
+222681	3	Box 1
+222683	3	Box 3
+222684	3	Box 4
+222686	3	Box 6
 150001	3	Practicum Necklace
 150002	3	Dire Necklace
 150003	0	Kelsaik Mask
@@ -34044,14 +35227,14 @@
 155471	3	Crystal of Daydreams [4]
 155472	1	Sweet Candy
 155473	3	Sweet Dream Machine
-155474	3	+15 Enchantment Scroll [Tier 12]
-155475	3	+15 Weapon Enchantment Scroll [Tier 12]
-155476	3	+15 Body Armor Enchantment Scroll [Tier 12]
-155477	3	+15 Handwear Enchantment Scroll [Tier 12]
-155478	3	+15 Footwear Enchantment Scroll [Tier 12]
+155474	3	Tier 12 +15 Enchantment Scroll [All]
+155475	3	Tier 12 +15 Enchantment Scroll [Weapon]
+155476	3	Tier 12 +15 Enchantment Scroll [Chest armor]
+155477	3	Tier 12 +15 Enchantment Scroll [Hand armor]
+155478	3	Tier 12 +15 Enchantment Scroll [Footwear]
 155479	2	Dreamy Desires
 155480	2	Smart Box: Dyeable SWAT Team Uniform
-155481	3	Parthian Scarf
+155481	3	Parthian-Scarf
 155482	3	[Event] Gift of the Stars #1
 155483	3	[Event] Reward Box #2
 155484	3	[Event] Reward Box #3
@@ -34074,6 +35257,29 @@
 155501	3	[Fashion] Guile Vest
 155502	3	[Fashion] Guile Robe
 155503	3	Club Membership Voucher (30-day)
+155504	3	Luminous Abhorribbon
+155505	3	Luminous Skull
+155506	2	Mr.Cleaver
+155507	3	Luminous Raiments of the Dead (Human Male)
+155508	3	Luminous Raiments of the Dead (Human Female)
+155509	3	Luminous Raiments of the Dead (High Elf Male)
+155510	3	Luminous Raiments of the Dead (High Elf Female)
+155511	3	Luminous Raiments of the Dead (Amani Male)
+155512	3	Luminous Raiments of the Dead (Amani Female)
+155513	3	Luminous Raiments of the Dead (Castanic Male)
+155514	3	Luminous Raiments of the Dead (Castanic Female)
+155515	3	Luminous Raiments of the Dead (Popori)
+155516	3	Luminous Raiments of the Dead (Elin)
+155517	3	Luminous Raiments of the Dead (Baraka)
+155518	3	Massive Loot Box 
+155519	3	Extreme Loot Box
+155520	3	Extreme Key
+155521	3	Box 1
+155522	3	Box 2
+155523	3	Box 3
+155524	3	Box 4
+155525	3	Box 5
+155526	3	Box 6
 160001	0	Riding Skill: Sleipnir
 160002	0	Riding Skill: Sleipnir
 160003	1	Riding Skill: Tawny Huntress
@@ -35120,8 +36326,8 @@
 166829	1	Riding Skill: Snowdrift
 166830	1	Riding Skill: Snowdrift
 166900	1	Spellbind Box
-166901	1	Masterwork Alkahest Box
-166902	1	Extensive Alkahest Box
+166901	1	Entropic Emblem Box
+166902	1	Entropic Emblem Box
 166903	1	Big Lugs Box
 166904	1	Not Quite Empty Box
 166905	1	New Age Loot Box
@@ -46343,30 +47549,30 @@
 244592	2	Starglow Costume Box
 244593	2	Crystal Blue Weapon Skin Box
 244594	2	Starglow Weapon Skin Box
-244595	2	Dummy Smart Box7
-244596	2	Dummy Smart Box8
-244597	2	Dummy Smart Box9
-244598	2	Dummy Smart Box10
-244599	2	Dummy Smart Box11
-244600	2	Dummy Smart Box12
+244595	2	(No Trade) Homemade Costume Smart Box
+244596	2	(No Trade) Dyeable Homemade Costume Smart Box
+244597	2	No Trade Dummy Smart Box9
+244598	2	No Trade Dummy Smart Box10
+244599	2	Homemade Costume Smart Box
+244600	2	Dyeable Homemade Costume Smart Box
 244601	2	Dummy Smart Box13
 244602	2	Dummy Smart Box14
 244603	2	Dummy Smart Box15
 244604	2	Dummy Smart Box16
-244605	2	Dummy Smart Box17
-244606	2	Dummy Smart Box18
-244607	2	Dummy Smart Box19
-244608	2	Dummy Smart Box20
+244605	2	No Trade Dummy Smart Box17
+244606	2	No Trade Dummy Smart Box18
+244607	2	No Trade Dummy Smart Box19
+244608	2	No Trade Dummy Smart Box20
 244609	2	Dummy Smart Box21
 244610	2	Dummy Smart Box22
 244611	2	Dummy Smart Box23
 244612	2	Dummy Smart Box24
 244613	2	Dummy Smart Box25
 244614	2	Dummy Smart Box26
-244615	2	Dummy Smart Box27
-244616	2	Dummy Smart Box28
-244617	2	Dummy Smart Box29
-244618	2	Dummy Smart Box30
+244615	2	No Trade Dummy Smart Box27
+244616	2	No Trade Dummy Smart Box28
+244617	2	No Trade Dummy Smart Box29
+244618	2	No Trade Dummy Smart Box30
 244619	3	Obsidian Airwolf Loot Box
 244620	3	Thunderbolt Airwolf Loot Box
 244621	3	Cherry Airwolf Loot Box
@@ -46374,8 +47580,8 @@
 244623	3	Party Down Loot Box
 244624	3	Starglow Weapon Skin Loot Box
 244625	3	Sky Visor Loot Box
-244626	3	Dummy Gacha8
-244627	3	Dummy Gacha9
+244626	3	Phoenix Loot Box
+244627	3	Barely Bandaged Loot Box
 244628	3	Dummy Gacha10
 244629	3	Dummy Gacha11
 244630	3	Dummy Gacha12
@@ -46423,20 +47629,20 @@
 244672	2	Dummy Smart Box34
 244673	2	Dummy Smart Box35
 244674	2	Dummy Smart Box36
-244675	2	Dummy Smart Box37
-244676	2	Dummy Smart Box38
-244677	2	Dummy Smart Box39
-244678	2	Dummy Smart Box40
+244675	2	No Trade Dummy Smart Box37
+244676	2	No Trade Dummy Smart Box38
+244677	2	No Trade Dummy Smart Box39
+244678	2	No Trade Dummy Smart Box40
 244679	2	Dummy Smart Box41
 244680	2	Dummy Smart Box42
 244681	2	Dummy Smart Box43
 244682	2	Dummy Smart Box44
 244683	2	Dummy Smart Box45
 244684	2	Dummy Smart Box46
-244685	2	Dummy Smart Box47
-244686	2	Dummy Smart Box48
-244687	2	Dummy Smart Box49
-244688	2	Dummy Smart Box50
+244685	2	No Trade Dummy Smart Box47
+244686	2	No Trade Dummy Smart Box48
+244687	2	No Trade Dummy Smart Box49
+244688	2	No Trade Dummy Smart Box50
 458	0	Riding Skill: Summon Fortuna
 459	0	Riding Skill: Summon Fides
 460	0	Riding Skill: Summon Virtus
@@ -48926,6 +50132,29 @@
 246112	2	Smart Box: Swimwear Female C
 246113	2	Smart Box: Swimwear Female C (30 Days)
 246114	2	Smart Box: Swimwear Female C (7 Days)
+246121	2	Smart Box: Red Party Dress
+246122	2	Smart Box: Red Party Dress (30 Days)
+246123	2	Smart Box: Red Party Dress (7 Days)
+246124	2	Smart Box: Dyeable Party Dress
+246125	2	Smart Box: Dyeable Party Dress (30 Days)
+246126	2	Smart Box: Dyeable Party Dress (7 Days)
+246127	2	Smart Box: 2017 Elemental Weapons
+246128	2	Smart Box: 2017 Elemental Weapons (30 Days)
+246129	2	Smart Box: 2017 Elemental Weapons (7 Days)
+246130	2	Smart Box: 2017 Elemental Weapons (3 Days)
+246131	2	Smart Box: 2017 Elemental Weapons (Rare)
+246132	2	Smart Box: 2017 Elemental Weapons (Rare) (30 Days)
+246133	2	Smart Box: 2017 Elemental Weapons (Rare) (7 Days)
+246134	2	Smart Box: 2017 Elemental Weapons (Rare) (3 Days)
+246135	2	Smart Box: Elemental Costume
+246136	2	Smart Box: Elemental Costume (30 Days)
+246137	2	Smart Box: Elemental Costume (7 Days)
+246138	2	Smart Box: Elemental Costume (3 Days)
+246139	2	Smart Box: Elemental Costume (rare)
+246140	2	Smart Box: Elemental Costume (rare) (30 Days)
+246141	2	Smart Box: Elemental Costume (rare) (7 Days)
+246142	2	Smart Box: Elemental Costume (rare) (3 Days)
+246143	2	Smart Box: Luminous Raiments of the Dead (Permanent)
 100507	0	T
 100508	0	E
 100509	0	R
@@ -49707,8 +50936,8 @@
 99989	1	Style Box [High Elf Female]
 99990	1	Style Box [Elin]
 99991	1	Style Box [Castanic Female]
-99992	3	Gold Box of Preservation (Hauberk)
-99993	3	Gold Box of Preservation (Cuirass)
+99992	3	Entropic Essence Gold Box I
+99993	3	Entropic Essence Gold Box I
 99994	3	Gold Box of Preservation (Robe)
 99995	2	Cold Treasure Box
 99996	0	Superior Enchantment Box

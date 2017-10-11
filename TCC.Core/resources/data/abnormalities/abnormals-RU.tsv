@@ -30,13 +30,14 @@
 38	Buff	False	True	False			
 39	Buff	True	True	True	Зов войны (интернет-кафе)	Повышает силу атаки, скорость атаки и восстановление на 2%. Бонус при игре из интернет-кафе.	icon_status.plusecritical_tex
 40	Buff	True	True	True	Оберег Вальдеры (PC-клуб)	Под действием оберега Вальдеры мастерство собирателя повышается на 30, на занятие ремеслом и сбор требуется меньше времени. Бонус при игре из интернет-кафе.	icon_items.artisanall_up_tex
-41	Buff	True	True	False	Оберег зачаровывателя	Повышает вероятность успеха при попытке зачаровать предмет. (Не увеличивает вероятность успешного пробуждения.)	icon_items.parts_heavyarmorc5_tex
-42	Buff	True	True	False	Благословенный оберег зачаровывателя	Повышает вероятность успеха при попытке зачаровать предмет. (Не увеличивает вероятность успешного пробуждения.)	icon_items.parts_heavyarmorc5_tex
-43	Buff	True	True	False	Сверкающий оберег зачаровывателя	Повышает вероятность успеха при попытке зачаровать предмет. (Не увеличивает вероятность успешного пробуждения.)	icon_items.parts_heavyarmorc5_tex
-44	Buff	True	True	False	Оберег зачаровывателя	Повышает вероятность успеха при попытке зачаровать предмет. (Не увеличивает вероятность успешного пробуждения.)	icon_items.parts_heavyarmorc5_tex
-45	Buff	True	True	False	Благословенный оберег зачаровывателя	Повышает вероятность успеха при попытке зачаровать предмет. (Не увеличивает вероятность успешного пробуждения.)	icon_items.parts_heavyarmorc5_tex
-46	Buff	True	True	False	Сверкающий оберег зачаровывателя	Повышает вероятность успеха при попытке зачаровать предмет. (Не увеличивает вероятность успешного пробуждения.)	icon_items.parts_heavyarmorc5_tex
+41	Buff	True	True	False	Оберег зачаровывателя	Незначительно повышает вероятность успеха при попытке зачаровать предмет.	icon_items.parts_heavyarmorc5_tex
+42	Buff	True	True	False	Благословенный оберег зачаровывателя	Повышает вероятность успеха при попытке зачаровать предмет.	icon_items.parts_heavyarmorc5_tex
+43	Buff	True	True	False	Сверкающий оберег зачаровывателя	Значительно повышает вероятность успеха при попытке зачаровать предмет.	icon_items.parts_heavyarmorc5_tex
+44	Buff	True	True	False	Оберег зачаровывателя	Незначительно повышает вероятность успеха при попытке зачаровать предмет.	icon_items.parts_heavyarmorc5_tex
+45	Buff	True	True	False	Благословенный оберег зачаровывателя	Повышает вероятность успеха при попытке зачаровать предмет.	icon_items.parts_heavyarmorc5_tex
+46	Buff	True	True	False	Сверкающий оберег зачаровывателя	Значительно повышает вероятность успеха при попытке зачаровать предмет.	icon_items.parts_heavyarmorc5_tex
 47	Buff	True	True	False	Тест_Увеличение урона от умений/Снижение агрессии	Для теста! Увеличение урона от всех умений на 50%/Снижение агрессии на 50%	icon_skills.voidtrap_tex
+51	Buff	True	True	False	Оглушение (для проверки DPS)	Для проверки DPS . Одновременно уменьшает выносливость на $H_W_BAD12%$COLOR_END (Изнурение - 3 экземпляра), уменьшает выносливость на $H_W_BAD10%$COLOR_END (символ "Град проклятий"), уменьшает сопротивление критическим ударам на $H_W_BAD-12$COLOR_END (особенность "Град проклятий")	icon_items.q_bones_tex
 101	Buff	True	True	False	Ответный удар	Невосприимчивость к оглушению и опрокидыванию.	icon_skills.risingattack_tex
 201	Buff	False	True	False	Благословение Шакана I	+$H_W_GOOD17$COLOR_END к силе.	icon_skills.attackup_tex
 202	Buff	False	True	False	Благословение Шакана II	+$H_W_GOOD25$COLOR_END к силе.	icon_skills.attackup_tex
@@ -58,6 +59,7 @@
 912	Buff	True	True	True	Настой ноктиния	Повышает эффективность умений при использовании Настоя ноктиния.	icon_items.union_supplies5_tex
 913	Buff	True	True	True	Настой ноктиния	Повышает эффективность умений при использовании Настоя ноктиния.	icon_items.union_supplies5_tex
 916	Buff	True	True	True	Настой ноктиния	Повышает эффективность умений при использовании Настоя ноктиния.	icon_items.union_supplies5_tex
+917	Buff	True	True	True	Настой ноктиния	Повышает эффективность умений при использовании Настоя ноктиния.	icon_items.union_supplies5_tex
 920	Buff	True	True	False	Эффект чистого ноктиния (элитный)	Повышает эффективность умений. На $H_W_GOOD4-12%$COLOR_END увеличивает силу атаки всех умений (у отдельных умений - на $H_W_GOOD6-20%$COLOR_END), в $H_W_GOOD1,5$COLOR_END раза эффективнее настоя ноктиния. Не суммируется с эффектом обычного ноктиния.	icon_items.noctan_tex
 921	Buff	True	True	False	Эффект чистого ноктиния (редкий)	Повышает эффективность умений. На $H_W_GOOD4-12%$COLOR_END увеличивает силу атаки всех умений (у отдельных умений - на $H_W_GOOD6-20%$COLOR_END), в $H_W_GOOD1,5$COLOR_END раза эффективнее настоя ноктиния. Не суммируется с эффектом обычного ноктиния.	icon_items.noctan_tex
 922	Buff	True	True	False	Эффект чистого ноктиния (легендарный)	Повышает эффективность умений. На $H_W_GOOD4-12%$COLOR_END увеличивает силу атаки всех умений (у отдельных умений - на $H_W_GOOD6-20%$COLOR_END), в $H_W_GOOD1,5$COLOR_END раза эффективнее настоя ноктиния. Не суммируется с эффектом обычного ноктиния.	icon_items.noctan_tex
@@ -111,6 +113,7 @@
 1491	Buff	True	True	False	Зелье обновления	Восстанавливает $H_W_GOOD6%$COLOR_END от максимального уровня HP раз в $H_W_GOOD1$COLOR_END second	icon_items.potion1_tex
 1495	WeakeningEffect	True	True	False	Яд c поля битвы	-20 000 HP в секунду.	icon_status.poisonstatus_tex
 1510	Buff	False	True	False	Зелье здоровья	Мгновенно восстанавливает $H_W_GOOD50%$COLOR_END от максимального уровня HP.	icon_items.potion5_tex
+1511	Buff	False	True	False	Эликсир	Мгновенно восстанавливает $H_W_GOOD60%$COLOR_END от общего количества HP, MP.	icon_items.potion5_tex
 1530	Buff	True	True	False	Настой святости	Восстанавливает $H_W_GOOD5%$COLOR_END от максимального уровня MP раз в $H_W_GOOD1$COLOR_END second	icon_items.potion19_tex
 1610	Buff	True	True	False	Сфера обновления	Восстанавливает $H_W_GOOD2%$COLOR_END от максимального уровня HP раз в $H_W_GOOD1$COLOR_END second	icon_items.potion1_tex
 1630	Buff	False	True	False	Сфера излечения	Восстанавливает $H_W_GOOD25%$COLOR_END от максимального уровня HP.	icon_items.potion5_tex
@@ -418,6 +421,7 @@
 4402	Buff	True	True	False	[Бонус за приглашенного друга] Дополнительно 100% опыта	В качестве поощрения за приглашение друга в течение 30 дней выдается дополнительно $H_W_GOOD100%$COLOR_END опыта во время охоты. Суммируется с эффектами других свитков повышения опыта, время идет, даже когда вы не играете.	icon_status.vitality_tex
 4403	Buff	False	True	False	Вежливое приветствие_Баг, если отображается	BTS	icon_skills.greeting_tex
 4404	Buff	True	True	False	[Бонус за приглашенного друга] Атака повышается на 10%	Почувствуйте вкус битвы! В течение 7 дней сила атаки повышается на $H_W_GOOD10%$COLOR_END. Эффект суммируется с другими предметами повышения уровня атаки, время идет, даже когда вы не играете.	icon_status.buff_of_kaia_tex
+4405	Buff	True	True	False	Радость от ремесла	При попытке изготовления оружия, доспехов, припасов и гравировок при уровне мастерства ниже 500, можно получить двойное количество очков мастерства.	icon_items.small_insecta8_tex
 4500	Buff	True	True	True	Ускорение опыта	+$H_W_GOOD10%$COLOR_END к получаемому в бою опыту.	icon_status.plusfocus_tex
 4501	Buff	True	True	True	Ускорение опыта	+$H_W_GOOD20%$COLOR_END к получаемому в бою опыту.	icon_status.plusfocus_tex
 4502	Buff	True	True	True	Ускорение опыта	+$H_W_GOOD30%$COLOR_END к получаемому в бою опыту.	icon_status.plusfocus_tex
@@ -435,6 +439,7 @@
 4514	Buff	True	True	True	Ускорение опыта	+$H_W_GOOD900%$COLOR_END к получаемому в бою опыту.	icon_status.plusfocus_tex
 4600	Buff	True	True	False	Хранитель кристалла	Предотвращает разрушение кристаллов при смерти, расходуя один эффект хранителя. Эффекты суммируются до 99 раз.	icon_items.q_closedspace_stone_05_tex
 4610	Buff	True	True	False	Неприступный хранитель кристалла	Предотвращает разрушение кристаллов в случае смерти.	icon_items.q_closedspace_stone_05_tex
+4612	Buff	True	True	False	Неприступный хранитель кристалла	Предотвращает разрушение кристаллов в случае смерти.	icon_items.q_closedspace_stone_05_tex
 4620	Buff	True	True	False	Валсекирский свиток ремесел	Скорость создания всех предметов увеличивается на $H_W_GOOD50%$COLOR_END.	icon_items.scroll_produce_speedup_tex
 4621	Buff	True	True	False	Особый свиток ремесел	Скорость создания всех предметов увеличивается на $H_W_GOOD50%$COLOR_END.	icon_items.scroll_produce_speedup_tex
 4630	Buff	True	True	False	Валсекирский свиток собирателя	Повышает навыки сбора на $H_W_GOOD410$COLOR_END.	icon_items.scroll_collection_expup_tex
@@ -509,6 +514,15 @@
 5060	Buff	False	True	False	Сопротивление умению "Кольцо разрушения"	Сопротивление умению "Кольцо разрушения"	icon_skills.voidtrap_tex
 6001	Buff	True	True	False	Кровь дракона	+$H_W_GOOD1,5$COLOR_END к множителю критического удара при атаке монстров.	icon_status.passive_dragonblood
 6002	Buff	True	True	False	Кровь ящера	+$H_W_GOOD2$COLOR_END к множителю критического удара при атаке монстров.	icon_status.passive_dragonblood2
+6003	Buff	True	True	False	Пылающая аура	+$H_W_GOOD1,5$COLOR_END к множителю критического удара при атаке монстров.	icon_skills.heataura_tex
+6004	Buff	True	True	False	Обжигающая аура	$H_W_GOODУдваивает$COLOR_END множитель критического удара при атаке монстров.	icon_skills.flameaura_tex
+6005	Buff	False	True	False		Данный эффект не должен отображаться.	
+6006	Buff	True	True	False	Аура феникса	Неуязвимость на определенное время. Завершается в случае использования любого умения.	icon_status.revivenow_status_tex
+6007	Buff	True	True	False	Восстановление феникса	Мгновенно восстанавливает $H_W_GOOD100%$COLOR_END от общего количества НР и MP.	icon_items.eagles_potion_level_47_tex
+6008	WeakeningEffect	True	True	False	Перезарядка Аватара феникса (пассивный)	Накапливается энергия Аватара. Эффект $H_W_GOODАватар феникса$COLOR_END недоступен.	icon_skills.flameaura_tex
+6009	Buff	True	True	False	Защита феникса	Предотвращает разрушение кристаллов в случае смерти.	icon_items.q_closedspace_stone_05_tex
+6010	Buff	False	True	False		Данный эффект не должен отображаться.	
+6011	WeakeningEffect	True	True	False	Перезарядка Аватара феникса (пассивный)	Накапливается энергия Аватара. Эффект $H_W_GOODАватар феникса$COLOR_END недоступен.	icon_skills.heataura_tex
 10100	DamageOverTime	True	False	False	Болезнетворность I [кристалл]	HP уменьшаются на $H_W_BAD-11$COLOR_END раз в $H_W_BAD1$COLOR_END second	icon_items.customize9ar_tex
 10101	DamageOverTime	True	False	False	Болезнетворность II [кристалл]	HP уменьшаются на $H_W_BAD-23$COLOR_END раз в $H_W_BAD1$COLOR_END second	icon_items.customize9br_tex
 10102	DamageOverTime	True	False	False	Болезнетворность III [кристалл]	HP уменьшаются на $H_W_BAD-58$COLOR_END раз в $H_W_BAD1$COLOR_END second	icon_items.customize9cr_tex
@@ -758,6 +772,7 @@
 15150	Buff	True	True	False	Единение с природой	Не дает набирать агрессию.	icon_status.boundmovedown_tex
 15160	Stun	True	False	False	Взмах молота кузнеца	Оглушение. Движение невозможно.	icon_status.confuseup_tex
 15161	WeakeningEffect	True	False	False	Милосердие кузнеца	Снижает сопротивляемость критическому урону на $H_W_BAD-10$COLOR_END.	icon_status.plusciriticalresist_tex
+15162	WeakeningEffect	True	False	False	Метка карателя	Снижает сопротивляемость критическому урону на $H_W_BAD-20$COLOR_END.	icon_status.plusciriticalresist_tex
 15170	DamageOverTime	True	False	False	Громовой разрез	Уменьшает HP на $H_W_BAD2%$COLOR_END раз в $H_W_BAD2$COLOR_END second1	icon_status.paralyzestatus_tex
 15500	Buff	False	True	False			
 15600	Buff	False	True	False			
@@ -959,7 +974,7 @@
 29050	WeakeningEffect	True	False	False	Символ оцепенения	-$H_W_BAD10%$COLOR_END к скорости атаки за один экземпляр эффекта.	icon_crest.crestactiveattackspeeddown_tex
 29060	Buff	True	True	False	Символ сцепления	+$H_W_GOOD30%$COLOR_END к вероятности нанесения критического удара умением "Пила".	icon_crest.crestnextskillattackup_tex
 29070	WeakeningEffect	True	False	False	Символ пригвождения	Во время действия эффекта вы не можете перемещаться. Действие эффекта прекращается, если противник опрокинет вас атакой.	icon_crest.crestactivespeeddown_tex
-29090	Buff	True	True	False	Символ резвости	Успешный Бросок косы ускоряет следующее умение на 50%.	icon_crest.e_crestpassiveskillspeedup_tex
+29090	Buff	True	True	False	Символ резвости	Успешный Бросок косы в течение 2,5 сек. ускоряет использование умений на 50%.	icon_crest.e_crestpassiveskillspeedup_tex
 29100	Buff	True	True	False	Символ сцепления	На $H_W_GOOD20%$COLOR_END повышает урон умения "Призрачный шквал".	icon_crest.crestnextskillattackup_tex
 29110	Buff	True	True	False	Символ легконогости	+$H_W_GOOD50$COLOR_END к скорости перемещения в бою.	icon_crest.e_crestactivespeedup_tex
 29111	Buff	True	True	True	Символ остроты	$H_W_GOODУдваивает$COLOR_END вероятность критического удара при следующей атаке.	icon_crest.crestpassivecriticalup_tex
@@ -1009,9 +1024,9 @@
 33130	Buff	True	True	False	Символ сцепления	При использовании умения "Импульс" в цепочке, повышает урон умений на $H_W_GOOD25%$COLOR_END.	icon_crest.crestnextskillattackup_tex
 33140	Buff	False	True	False			icon_crest.crestpassivecriticalup_tex
 33150	Buff	True	True	False	Символ сцепления	При использовании умения "Импульс" в цепочке, повышает урон умений на $H_W_GOOD25%$COLOR_END.	icon_crest.crestnextskillattackup_tex
-33170	Buff	True	True	False	Символ восстановления	Восстанавливает $H_W_GOOD2%$COLOR_END от максимального уровня HP раз в $H_W_GOOD1$COLOR_END second	icon_crest.crestpassivehpheal_tex
+33170	Buff	True	True	False	Символ восстановления	Восстанавливает $H_W_GOOD3%$COLOR_END от максимального уровня HP раз в $H_W_GOOD1$COLOR_END second	icon_crest.crestpassivehpheal_tex
 33200	Buff	True	True	False	Символ сцепления	Следующая атака умением наносит на 30% больше урона.	icon_crest.crestnextskillattackup_tex
-33210	Buff	True	True	False	Символ сцепления	При использовании умения "Отблеск лунного света" в цепочке, повышает урон умений на $H_W_GOOD25%$COLOR_END.	icon_crest.crestpassivehpheal_tex
+33210	Buff	True	True	False	Символ сцепления	При использовании умения "Отблеск лунного света" в цепочке, повышает урон умений на $H_W_GOOD25%$COLOR_END.	icon_crest.e_crestnextskillattackup_tex
 45301	WeakeningEffect	True	False	False	Великий удар	Тяжелое оглушение.	icon_status.minusdefence_tex
 45302	WeakeningEffect	True	False	False	Забытье	Оглушение и опрокидывание.	icon_status.minuscriticalresist_tex
 45303	DamageOverTime	False	False	False		Сверло пропадет через 13 секунд.	
@@ -1089,6 +1104,7 @@
 60027	Buff	True	True	False	Благословение богини IV	Непрерывно восстанавливает $H_W_GOOD1405$COLOR_END HP. Также восстанавливает $H_W_GOOD145$COLOR_END MP раз в $H_W_GOOD1$COLOR_END second	icon_items.body_enchant_scroll_3_tex
 60029	Buff	True	True	False	Сосредоточение II	Восстанавливает $H_W_GOOD5%$COLOR_END от максимального уровня MP раз в $H_W_GOOD1$COLOR_END second	icon_skills.neutralizepoison_tex
 60030	Buff	True	True	False	Сосредоточение I	Восстанавливает $H_W_GOOD3%$COLOR_END от максимального уровня MP раз в $H_W_GOOD1$COLOR_END second	icon_skills.neutralizepoison_tex
+60031	Buff	True	True	False	Сосредоточение III	Восстанавливает $H_W_GOOD7%$COLOR_END от максимального уровня MP раз в $H_W_GOOD1$COLOR_END second	icon_skills.neutralizepoison_tex
 70201	Buff	True	True	False	Воздушная кукуруза	+$H_W_GOOD5%$COLOR_END к максимальному уровню HP.	icon_items.fallfestival_popcorn_tex
 70202	Buff	True	True	False	Салат из грязекорня	Восстанавливает $H_W_GOOD1%$COLOR_END от максимального уровня HP раз в $H_W_GOOD5$COLOR_END second1	icon_items.fallfestival_potatosalad_tex
 70203	Buff	True	True	False	Жареный поросенок	Восстанавливает $H_W_GOOD1%$COLOR_END от максимального уровня MP раз в $H_W_GOOD5$COLOR_END second1	icon_items.q_roastmeat_tex
@@ -1112,6 +1128,8 @@
 70242	Buff	False	True	False	Тройное угощение Мелсы	Эффект вольноземного салата, холодных крыльев, традиционного шашлыка Унылых полей.	icon_items.pigling_ribs_tex
 70243	Buff	False	True	False	Традиционный шашлык Унылых полей	Восстанавливает дополнительно $H_W_GOOD70233$COLOR_END HP при использовании умений исцеления.	icon_items.pigling_ribs_tex
 70244	Buff	False	True	False	Холодные крылья	Уровень бодрости не снижается.	icon_items.pigling_ribs_tex
+70245	Buff	True	True	False	Необычный вольноземский пламенеющий салат	Повышает максимальный уровень HP на $H_W_GOOD5%$COLOR_END, MP - на $H_W_GOOD10%$COLOR_END. Восстанавливает $H_W_GOOD1%$COLOR_END от максимального уровня MP раз в $H_W_GOOD5$COLOR_END second1	icon_items.fallfestival_rikanosalad_tex
+70246	Buff	False	True	False	Праздничный стол	Эффект жареной баранины, необычного вольноземского пламенеющего салата, холодных крыльев, традиционного шашлыка Унылых полей.	icon_items.pigling_ribs_tex
 70301	Buff	True	True	False	Спокойное проворство	Увеличивает скорость перемещения в бою на $H_W_GOOD2$COLOR_END. Эффект может суммироваться до 3 раз.	icon_status.aura_of_wind_tex
 70302	Buff	True	True	False	Спокойная сосредоточенность	Повышает урон от умений на $H_W_GOOD20$COLOR_END.	icon_status.aura_of_damage_tex
 70303	Buff	True	True	False	Спокойная энергичность	Увеличивает максимальный уровень бодрости на $H_W_GOOD5$COLOR_END. Эффект может суммироваться до 3 раз.	icon_status.aura_of_condition_tex
@@ -1212,6 +1230,7 @@
 100203	Buff	True	True	True	Защитная стойка IV	$H_W_GOOD+25%$COLOR_END к выносливости, $H_W_GOOD+30$COLOR_END к равновесию, $H_W_GOOD15%$COLOR_END к вероятности нанесения критического удара против монстров. +$H_W_GOOD120%$COLOR_END к агрессии при использовании всех атакующих умений, опрокинуть вас могут только особые атаки некоторых монстров.	icon_skills.ironwillb_tex
 100293	Buff	False	True	False	Базовый эффект блокирования парными клинками	Нет справки по данному эффекту (isShow=False). Если он отображается, необходимо сообщить в BTS!	icon_skills.twinswordsdefence_tex
 100294	Buff	True	True	False	Ключ мужества I	Ключ мужества I восстанавливает 5% MP.	icon_skills.twinswordsdefence_tex
+100295	Buff	False	True	False	Шторм I	Шторм I уменьшает время перезарядки умения "Коса" на 0,5 сек.	icon_skills.twinswordsdefence_tex
 100296	Buff	False	True	True	Защитная стойка (увеличивает шанс критического удара против монстров)	Увеличивает вероятность нанесения критического удара на 15% в бою с монстрами (невидимый эффект).	icon_skills.ironwillb_tex
 100297	Buff	False	True	True			
 100298	Buff	False	True	True	Защитная стойка IV-2	Эта подсказка не должна быть показана. (isShow=False) Если она показывается, произошла ошибка.	icon_skills.ironwillb_tex
@@ -1262,6 +1281,7 @@
 101104	Stun	True	False	False	Ошеломление X	Вы оглушены и обездвижены.	icon_skills.reversalturningattack_tex
 101105	Stun	True	False	False	Ошеломление XI	Вы оглушены и обездвижены.	icon_skills.reversalturningattack_tex
 101200	WeakeningEffect	True	False	False	Удар воина	Снижает выносливость на $H_W_BAD8%$COLOR_END.	icon_skills.aggravatingstrike_tex
+101210	WeakeningEffect	True	False	False	Удар воина	Снижает выносливость на $H_W_BAD10%$COLOR_END.	icon_skills.aggravatingstrike_tex
 101220	WeakeningEffect	True	False	False	Удар воина	Снижает выносливость на $H_W_BAD8%$COLOR_END, а восстановление HP на $H_W_BAD30%$COLOR_END.	icon_skills.aggravatingstrike_tex
 101300	Buff	True	True	False	Прорезающий выпад	Каждый экземпляр увеличивает скорость атаки на 0,9%. Эффект может суммироваться до 13 раз.	icon_skills.dualrapidpiercing_tex
 101400	WeakeningEffect	True	False	False	Наскок	-$H_W_BAD0,5$COLOR_END к скорости перемещения.	icon_skills.heavybite_tex
@@ -3244,6 +3264,9 @@
 3000019	Buff	True	True	True	Летающее ездовое животное (восстановление HP и MP)	Позволяет летать в зоне полетов. <BR>Восстанавливает 2% HP и МР каждую секунду, создает попутный ветер для членов группы в радиусе 30 метров. 	icon_items.wings_of_fairy_tex
 3000020	Buff	False	True	True	Попутный ветер	BTS Если показывается	icon_skills.criticalupaura_tex
 3000021	Buff	True	True	True	Попутный ветер	Попутный ветер увеличивает скорость независимо от типа ездового животного $H_W_GOOD10$COLOR_END.	icon_status.plusmove_tex
+3000022	Buff	True	True	True	Седло феникса (восстановление HP и MP)	Позволяет летать в зоне полетов. <br>Каждую секунду полета восстанавливает 1% от максимального уровня HP и МP. Вы чувствуете Жар феникса.	icon_items.wings_of_fairy_tex
+3000023	Buff	True	True	True	Седло феникса (восстановление HP и MP)	Позволяет летать в зоне полетов. <br>Каждую секунду полета восстанавливает 2% от максимального уровня HP и МP. Вы чувствуете Жар феникса.	icon_items.wings_of_fairy_tex
+3000024	Buff	True	True	True	Жар феникса	Из-за высокой температуры феникса вы не можете получить эффект попутного ветра (+10 к скорости передвижения).	icon_status.heat_tex
 4510001	Buff	False	False	False			
 4510002	WeakeningEffect	False	True	False			
 4510003	DamageOverTime	False	False	False			
@@ -3481,6 +3504,144 @@
 7777013	Buff	True	True	False			icon_status.icon_yookduk00_ab_tex
 7777014	Buff	True	True	False			icon_status.icon_yookduk00_ab_tex
 7777015	Buff	True	True	False	ВРЕМЯ T.E.R.A	Время пришло! Время перезарядки всех умений, за исключением умений альянса, снижено на 20%. Количество восстанавливаемых MP многократно увеличено.	icon_status.pluswill_tex
+7940000	Stun	False	True	True			
+7941001	Stun	True	False	False	Сильная головная боль	Хранитель пещеры ударился головой о дерево и не может прийти в себя.	icon_status.confuseup_tex
+7941002	WeakeningEffect	True	True	False	Настороженность хранителя пещеры	Хранитель пещеры следит за вами. Он собирается напасть.	icon_skills.througharrow_tex
+7941003	WeakeningEffect	False	True	False			
+7941004	Stun	False	False	False			
+7941005	Stun	False	False	False			
+7941006	WeakeningEffect	False	True	True			
+7941007	WeakeningEffect	False	True	True			
+7941008	WeakeningEffect	False	True	True			
+7941009	WeakeningEffect	False	True	True			
+7941010	WeakeningEffect	False	True	True			
+7941011	Buff	True	False	True	Прочная кожа	Хранителя пещеры защищает прочная кожа. Если получится ее пробить, он поскользнется на банановой кожуре.	icon_status.balanceup_tex
+7941012	WeakeningEffect	False	True	False			
+7941013	Stun	False	False	False			
+7941014	Stun	True	False	False	Кровотечение	Падение на землю привело к ранению. Уровень HP постепенно уменьшается.	icon_status.injuredbtdarkness_tex
+7941015	Stun	True	False	False	Базовое воздействие	Сильный шок не позволяет ничего сделать.	icon_status.confuseup_tex
+7941016	WeakeningEffect	False	True	False			
+7941017	WeakeningEffect	False	True	False			
+7941018	WeakeningEffect	False	True	True			
+7941019	WeakeningEffect	False	True	True			
+7941020	WeakeningEffect	False	True	True			
+7941021	Buff	True	True	True			
+7941022	DamageOverTime	True	False	False	Липкая жидкость	Липкая жидкость полностью покрыла тело и не дает двигаться.	icon_skills.curseofshackle_tex
+7941023	WeakeningEffect	False	True	True			
+7941024	WeakeningEffect	False	True	True			
+7941025	WeakeningEffect	False	True	True			
+7941026	Buff	True	True	True	Поддержка обезьянки - 1 уровень	Обезьянка поддерживает хранителя пещеры, повышая уровень и скорость атаки.	icon_status.plusciriticalresist_tex
+7941027	Buff	True	True	True	Поддержка обезьянки - 2 уровень	Обезьянка поддерживает хранителя пещеры, повышая уровень и скорость атаки.	icon_status.plusciriticalresist_tex
+7941028	Buff	True	True	True	Поддержка обезьянки - 3 уровень	Обезьянка поддерживает хранителя пещеры, повышая уровень и скорость атаки.	icon_status.plusciriticalresist_tex
+7941029	WeakeningEffect	False	True	False			
+7941030	WeakeningEffect	True	True	False	Настороженность обезьянки	Обезьянка висит на дереве и пристально наблюдает за вами. По всей видимости, она собирается бросить банановую кожуру.	icon_items.banana_tex
+7941031	WeakeningEffect	False	True	True			
+7941032	Stun	False	False	False			
+7941033	WeakeningEffect	False	True	False			
+7941034	WeakeningEffect	False	True	False			
+7941035	WeakeningEffect	False	True	False			
+7942001	WeakeningEffect	False	True	False			
+7942002	WeakeningEffect	True	True	True			
+7942003	WeakeningEffect	True	True	True			
+7942004	DamageOverTime	False	False	False			
+7942005	DamageOverTime	False	True	False			
+7942006	WeakeningEffect	True	True	False	Проникновение магии	Реним внедряет в вас магическую энергию и пытается что-то призвать.	icon_status.minusfocus_tex
+7942007	WeakeningEffect	True	True	False	Проникновение магии	Реним внедряет в вас магическую энергию и пытается что-то призвать.	icon_status.minusfocus_tex
+7942008	Stun	True	False	False			
+7942009	Stun	True	False	False			
+7942010	WeakeningEffect	False	True	False			
+7942011	WeakeningEffect	False	True	True			
+7942012	WeakeningEffect	False	True	True			
+7942013	WeakeningEffect	True	True	False			icon_items.cancel_lockon_potion_level_51_tex
+7942014	WeakeningEffect	False	True	False			
+7942015	Buff	True	True	False			
+7942016	WeakeningEffect	False	True	False			
+7942017	WeakeningEffect	False	True	True			
+7942018	WeakeningEffect	False	True	False			
+7942019	WeakeningEffect	False	True	False			
+7942020	WeakeningEffect	False	True	False			
+7942021	Stun	False	False	False			
+7942022	WeakeningEffect	False	True	False			
+7942023	WeakeningEffect	True	True	False			
+7942024	WeakeningEffect	True	True	False			
+7942025	WeakeningEffect	False	True	False			
+7942026	WeakeningEffect	False	True	False			
+7942027	WeakeningEffect	True	True	False			
+7942028	DamageOverTime	False	True	False			
+7942029	DamageOverTime	False	True	False			
+7942030	DamageOverTime	False	True	False			
+7942031	DamageOverTime	False	True	False			
+7942032	DamageOverTime	False	True	False			
+7942033	DamageOverTime	False	False	False			
+7942034	WeakeningEffect	False	True	True			
+7942035	WeakeningEffect	False	True	True			
+7942036	Stun	False	False	False			
+7942037	WeakeningEffect	True	True	True	Красная энергия минерала	Красная энергия минерала окружает вас и не дает помешать красным лучам.	icon_status.immunedebuff_tex
+7942038	WeakeningEffect	True	True	True	Синяя энергия минерала	Синяя энергия минерала окружает вас и не дает помешать синим лучам.	icon_status.immunedebuff_tex
+7942039	WeakeningEffect	True	True	True	Белая энергия минерала	Белая энергия минерала окружает вас и не дает помешать белым лучам.	icon_status.immunedebuff_tex
+7942040	DamageOverTime	False	True	False			
+7942041	DamageOverTime	False	True	False			
+7942042	WeakeningEffect	False	True	False			
+7942043	WeakeningEffect	False	True	True			
+7942044	WeakeningEffect	False	True	True			
+7942045	WeakeningEffect	False	True	True			
+7942046	WeakeningEffect	False	True	True			
+7942047	WeakeningEffect	False	True	True			
+7942048	WeakeningEffect	False	True	True			
+7942049	WeakeningEffect	False	True	False			
+7942050	WeakeningEffect	False	True	True			
+7943001	WeakeningEffect	False	True	True			
+7943002	WeakeningEffect	False	True	True			
+7943003	WeakeningEffect	False	True	False			
+7943004	WeakeningEffect	False	True	False			
+7943005	WeakeningEffect	False	True	False			
+7943006	WeakeningEffect	False	True	False			
+7943007	WeakeningEffect	False	True	True			
+7943008	WeakeningEffect	False	True	True			
+7943009	WeakeningEffect	False	True	True			
+7943010	WeakeningEffect	False	True	True			
+7943011	WeakeningEffect	False	True	True			
+7943012	WeakeningEffect	False	True	False			
+7943013	WeakeningEffect	False	True	False			
+7943014	WeakeningEffect	False	True	True			
+7943015	WeakeningEffect	False	True	True			
+7943016	Buff	True	True	False			
+7943017	WeakeningEffect	False	True	False			
+7943018	DamageOverTime	False	True	True			
+7943019	DamageOverTime	False	True	False			
+7943020	DamageOverTime	False	True	True			
+7943021	WeakeningEffect	False	True	False			
+7943022	WeakeningEffect	False	True	True			
+7943023	WeakeningEffect	False	True	False			
+7943024	WeakeningEffect	False	True	False			
+7943025	WeakeningEffect	False	True	False			
+7943026	WeakeningEffect	False	True	False			
+7943027	WeakeningEffect	True	False	False			
+7943028	Buff	True	True	False	Быстрое перемещение: подготовка	Скорость перемещения гоблинов вот-вот ускорится.	icon_status.plusmove_tex
+7943029	WeakeningEffect	False	True	False			
+7943030	WeakeningEffect	False	True	False			
+7943031	WeakeningEffect	False	True	True			
+7943032	WeakeningEffect	False	True	True			
+7943033	WeakeningEffect	False	True	True			
+7943034	Buff	True	True	True	Быстрое перемещение	Скорость перемещения гоблинов сильно повысилась.	icon_status.plusmove_tex
+7943035	WeakeningEffect	False	True	True			
+7943036	WeakeningEffect	False	True	False			
+7943037	WeakeningEffect	False	True	True			
+7943038	WeakeningEffect	True	True	True			
+7943039	WeakeningEffect	True	True	False			
+7943040	WeakeningEffect	True	True	False	Чума - излечение невозможно	Гоблин заразил чумой, излечиться от которой нельзя.	icon_status.poisondown_tex
+7943041	Stun	True	False	False			
+7943042	Stun	True	False	False	Чума-оглушение	Гоблин заразил чумой, полностью обездвижив.	icon_status.confuseup_tex
+7943043	Stun	True	False	False			
+7943044	Stun	True	False	False			
+7943045	WeakeningEffect	True	True	True	Ледяная энергия	Ледяная энергия вселяется в вас. Если не найти способ согреться, будет получен урон.	icon_status.icedamage_tex
+7943046	WeakeningEffect	True	True	True	Пламенная энергия	Пламенная энергия вселяется в вас. Если не найти способ остыть, будет получен урон.	icon_status.firedamage_tex
+7943047	WeakeningEffect	False	True	False			
+7943048	WeakeningEffect	False	True	False			
+7943049	WeakeningEffect	False	True	False			
+7943050	WeakeningEffect	False	True	False			
+7943051	WeakeningEffect	False	True	True			
+7943052	WeakeningEffect	False	True	True			
 8000000	Buff	True	True	False	Свиток опыта: 30% (5 часов)	На 5 игровых часов увеличивает на 30% получаемый при убийстве монстров опыт.	icon_items.f2p_xpbooster_tex
 8000001	Buff	True	True	False	Свиток опыта: 30% (10 часов)	На 10 игровых часов увеличивает на 30% получаемый при убийстве монстров опыт.	icon_items.f2p_xpbooster_tex
 8000002	Buff	True	True	False	Свиток опыта: 30% (30 часов)	На 30 игровых часов увеличивает на 30% получаемый при убийстве монстров опыт.	icon_items.f2p_xpbooster_tex
@@ -3649,6 +3810,147 @@
 9810017	WeakeningEffect	False	True	True	Сосуд Лакана	Предайте свои тела на милость Лакана.	icon_status.cruel_slayer_3_tex
 9810018	Stun	False	False	False			
 9810019	WeakeningEffect	False	True	True			
+9940000	Stun	False	True	True			
+9940001	WeakeningEffect	True	False	False	Ожог	Ожог постепенно снижает уровень здоровья.	icon_status.minushp_tex
+9940002	WeakeningEffect	True	False	False	Обморожение	Обморожение снижает скорость перемещения.	icon_skills.freezingtheearth_tex
+9941001	Stun	True	False	False	Сильная головная боль	Хранитель пещеры ударился головой о дерево и не может прийти в себя.	icon_status.confuseup_tex
+9941002	WeakeningEffect	True	True	False	Настороженность хранителя пещеры	Хранитель пещеры следит за вами. Он собирается напасть.	icon_skills.througharrow_tex
+9941003	WeakeningEffect	False	True	False			
+9941004	Stun	False	False	False			
+9941005	Stun	False	False	False			
+9941006	WeakeningEffect	False	True	True			
+9941007	WeakeningEffect	False	True	True			
+9941008	WeakeningEffect	False	True	True			
+9941009	WeakeningEffect	False	True	True			
+9941010	WeakeningEffect	False	True	True			
+9941011	Buff	False	False	True	Прочная кожа	Хранителя пещеры защищает прочная кожа. Если получится ее пробить, он поскользнется на банановой кожуре.	icon_status.balanceup_tex
+9941012	WeakeningEffect	False	True	False			
+9941013	Stun	False	False	False			
+9941014	Stun	True	False	False	Кровотечение	Падение на землю привело к ранению. Уровень HP постепенно уменьшается.	icon_status.injuredbtdarkness_tex
+9941015	Stun	True	False	False	Базовое воздействие	Сильный шок не позволяет ничего сделать.	icon_status.confuseup_tex
+9941016	WeakeningEffect	False	True	False			
+9941017	WeakeningEffect	False	True	False			
+9941018	WeakeningEffect	False	True	True			
+9941019	WeakeningEffect	False	True	True			
+9941020	WeakeningEffect	False	True	True			
+9941021	Buff	True	True	True			
+9941022	DamageOverTime	True	False	False	Липкая жидкость	Липкая жидкость полностью покрыла тело и не дает двигаться.	icon_skills.curseofshackle_tex
+9941023	WeakeningEffect	False	True	True			
+9941024	WeakeningEffect	False	True	True			
+9941025	WeakeningEffect	False	True	True			
+9941026	Buff	True	True	True	Поддержка обезьянки - 1 уровень	Обезьянка поддерживает хранителя пещеры, повышая уровень и скорость атаки.	icon_status.plusciriticalresist_tex
+9941027	Buff	True	True	True	Поддержка обезьянки - 2 уровень	Обезьянка поддерживает хранителя пещеры, повышая уровень и скорость атаки.	icon_status.plusciriticalresist_tex
+9941028	Buff	True	True	True	Поддержка обезьянки - 3 уровень	Обезьянка поддерживает хранителя пещеры, повышая уровень и скорость атаки.	icon_status.plusciriticalresist_tex
+9941029	WeakeningEffect	False	True	False			
+9941030	WeakeningEffect	True	True	False	Настороженность обезьянки	Обезьянка висит на дереве и пристально наблюдает за вами. По всей видимости, она собирается бросить банановую кожуру.	icon_items.banana_tex
+9941031	WeakeningEffect	False	True	True			
+9941032	Stun	False	False	False			
+9941034	WeakeningEffect	False	True	False			
+9941035	WeakeningEffect	False	True	False			
+9942001	WeakeningEffect	False	True	False			
+9942002	WeakeningEffect	True	True	True			
+9942003	WeakeningEffect	True	True	True			
+9942004	DamageOverTime	False	False	False			
+9942005	DamageOverTime	False	True	False			
+9942006	WeakeningEffect	True	True	False	Проникновение магии	Реним внедряет в вас магическую энергию и пытается что-то призвать.	icon_status.minusfocus_tex
+9942007	WeakeningEffect	True	True	False	Проникновение магии	Реним внедряет в вас магическую энергию и пытается что-то призвать.	icon_status.minusfocus_tex
+9942008	Stun	True	False	False			
+9942009	Stun	True	False	False			
+9942010	WeakeningEffect	False	True	False			
+9942011	WeakeningEffect	False	True	True			
+9942012	WeakeningEffect	False	True	True			
+9942013	WeakeningEffect	True	True	False			icon_items.cancel_lockon_potion_level_51_tex
+9942014	WeakeningEffect	False	True	False			
+9942015	Buff	True	True	False			
+9942016	WeakeningEffect	False	True	False			
+9942017	WeakeningEffect	False	True	True			
+9942018	WeakeningEffect	False	True	False			
+9942019	WeakeningEffect	False	True	False			
+9942020	WeakeningEffect	False	True	False			
+9942021	Stun	False	False	False			
+9942022	WeakeningEffect	False	True	False			
+9942023	WeakeningEffect	True	True	False			
+9942024	WeakeningEffect	True	True	False			
+9942025	WeakeningEffect	False	True	False			
+9942026	WeakeningEffect	False	True	False			
+9942027	WeakeningEffect	True	True	False			
+9942028	DamageOverTime	False	True	False			
+9942029	DamageOverTime	False	True	False			
+9942030	DamageOverTime	False	True	False			
+9942031	DamageOverTime	False	True	False			
+9942032	DamageOverTime	False	True	False			
+9942033	DamageOverTime	False	False	False			
+9942034	WeakeningEffect	False	True	True			
+9942035	WeakeningEffect	False	True	True			
+9942036	Stun	False	False	False			
+9942037	WeakeningEffect	True	True	True	Красная энергия минерала	Красная энергия минерала окружает вас и не дает помешать красным лучам.	icon_status.immunedebuff_tex
+9942038	WeakeningEffect	True	True	True	Синяя энергия минерала	Синяя энергия минерала окружает вас и не дает помешать синим лучам.	icon_status.immunedebuff_tex
+9942039	WeakeningEffect	True	True	True	Белая энергия минерала	Белая энергия минерала окружает вас и не дает помешать белым лучам.	icon_status.immunedebuff_tex
+9942040	DamageOverTime	False	True	False			
+9942041	DamageOverTime	False	True	False			
+9942042	WeakeningEffect	False	True	False			
+9942043	WeakeningEffect	False	True	True			
+9942044	WeakeningEffect	False	True	True			
+9942045	WeakeningEffect	False	True	True			
+9942046	WeakeningEffect	False	True	True			
+9942047	WeakeningEffect	False	True	True			
+9942048	WeakeningEffect	False	True	True			
+9942049	WeakeningEffect	False	True	False			
+9942050	WeakeningEffect	False	True	True			
+9942051	DamageOverTime	True	False	False	Сильный удар током	Вас ударило электрическим током. Использовать умения нельзя, скорость перемещения снижена, постепенно уменьшается здоровье.	icon_status.paralyzestatus_tex
+9943001	WeakeningEffect	False	True	True			
+9943002	WeakeningEffect	False	True	True			
+9943003	WeakeningEffect	False	True	False			
+9943004	WeakeningEffect	False	True	False			
+9943005	WeakeningEffect	False	True	False			
+9943006	WeakeningEffect	False	True	False			
+9943007	WeakeningEffect	False	True	True			
+9943008	WeakeningEffect	False	True	True			
+9943009	WeakeningEffect	False	True	True			
+9943010	WeakeningEffect	False	True	True			
+9943011	WeakeningEffect	False	True	True			
+9943012	WeakeningEffect	False	True	False			
+9943013	WeakeningEffect	False	True	False			
+9943014	WeakeningEffect	False	True	True			
+9943015	WeakeningEffect	False	True	True			
+9943016	Buff	True	True	False			
+9943017	WeakeningEffect	False	True	False			
+9943018	DamageOverTime	False	True	True			
+9943019	DamageOverTime	False	True	False			
+9943020	DamageOverTime	False	True	True			
+9943021	WeakeningEffect	False	True	False			
+9943022	WeakeningEffect	False	True	True			
+9943023	WeakeningEffect	False	True	False			
+9943024	WeakeningEffect	False	True	False			
+9943025	WeakeningEffect	False	True	False			
+9943026	WeakeningEffect	False	True	False			
+9943027	WeakeningEffect	True	False	False			
+9943028	Buff	True	True	False	Быстрое перемещение: подготовка	Скорость перемещения гоблинов вот-вот ускорится.	icon_status.plusmove_tex
+9943029	WeakeningEffect	False	True	False			
+9943030	WeakeningEffect	False	True	False			
+9943031	WeakeningEffect	False	True	True			
+9943032	WeakeningEffect	False	True	True			
+9943033	WeakeningEffect	False	True	True			
+9943034	Buff	True	True	True	Быстрое перемещение	Скорость перемещения гоблинов сильно повысилась.	icon_status.plusmove_tex
+9943035	WeakeningEffect	False	True	True			
+9943036	WeakeningEffect	False	True	False			
+9943037	WeakeningEffect	False	True	True			
+9943038	WeakeningEffect	True	True	True			
+9943039	WeakeningEffect	False	True	False			
+9943040	WeakeningEffect	True	True	False	Чума - излечение невозможно	Гоблин заразил чумой, излечиться от которой нельзя.	icon_status.poisondown_tex
+9943041	Stun	True	False	False			
+9943042	Stun	True	False	False	Чума-оглушение	Гоблин заразил чумой, полностью обездвижив.	icon_status.confuseup_tex
+9943043	Stun	True	False	False			
+9943044	Stun	True	False	False			
+9943045	WeakeningEffect	True	True	True	Ледяная энергия	Ледяная энергия вселяется в вас. Если не найти способ согреться, будет получен урон.	icon_status.icedamage_tex
+9943046	WeakeningEffect	True	True	True	Пламенная энергия	Пламенная энергия вселяется в вас. Если не найти способ остыть, будет получен урон.	icon_status.firedamage_tex
+9943047	WeakeningEffect	False	True	False			
+9943048	WeakeningEffect	False	True	False			
+9943049	WeakeningEffect	False	True	False			
+9943051	WeakeningEffect	False	True	True			
+9943052	WeakeningEffect	False	True	True			
+9943053	WeakeningEffect	False	True	True			
+9943054	WeakeningEffect	True	True	True	Заряд черной магии	Сайрекс накапливает черную магию и делает окружающих уязвимыми.	icon_status.heat_tex
 9999001	DamageOverTime	False	False	True			
 9999002	DamageOverTime	False	False	True			
 9999003	DamageOverTime	False	False	True			
@@ -3671,6 +3973,8 @@
 10151000	Buff	True	True	False	Череда призрачных шагов	Призрачный шаг не может использоваться более одного раза.	icon_status.instantleap_continuous_tex
 10151010	Buff	True	True	False	Темная жатва	Сбрасывает время перезарядки умений и дополнительно уменьшает время перезарядки умений "Двойной разрез", "Свирепый удар", "Удар маятника", "Пила", "Разделяющий удар", "Бросок косы", "Спираль смерти" и "Безжалостный удар". Время действия умения 15 сек.	icon_status.descentofdarkness_tex
 10151011	Buff	False	True	False	Темная жатва	Умения "Двойной разрез", "Свирепый удар", "Удар маятника", "Пила", "Разделяющий удар", "Бросок косы", "Спираль смерти", "Безжалостный удар" восстанавливаются.	icon_status.descentofdarkness_tex
+10151012	Buff	True	True	True	Усиление темной жатвы	При нанесении урона монстру, скорость атаки повышается на 5%. Эффект суммируется до 5 раз.	icon_skills.descentofdarkness_tex
+10151013	Buff	False	True	False			
 10151020	Buff	False	True	False	Связка из 2 обычных атак	Невидимый эффект. Если вы его увидели - сообщите об ошибке.	icon_skills.comboattack2_tex
 10151021	Buff	False	True	False	Связка из 3 обычных атак	Невидимый эффект. Если вы его увидели - сообщите об ошибке.	icon_skills.comboattack2_tex
 10151022	Buff	False	True	False	Связка из 4 обычных атак	Невидимый эффект. Если вы его увидели - сообщите об ошибке.	icon_skills.comboattack2_tex
@@ -3747,6 +4051,7 @@
 10152094	Buff	False	True	False			
 10152095	Buff	False	True	False			
 10152096	Buff	False	True	False	Если время перезарядки яростного броска не запущено, его надо активировать.	Брось бомбу и активируй время перезарядки.	
+10152097	Buff	False	True	False	Месть Балдера I	Во время использования мести Балдера действует неуязвимость.	
 10152100	Buff	True	True	False	Воля в кулаке	Силу воли можно сохранять на срок до 60 секунд, после чего она начинает ослабевать. При нанесении врагу урона отсчет начинается заново.	icon_skills.energycharging_tex
 10152110	Buff	True	True	False	Временный барьер	Временный барьер поглощает до $H_W_GOOD27858$COLOR_END урона.	icon_skills.emergencyshield_tex
 10152111	Buff	True	True	False	Временный барьер	Временный барьер поглощает до $H_W_GOOD34900$COLOR_END урона.	icon_skills.emergencyshield_tex
@@ -3920,6 +4225,7 @@
 10155300	WeakeningEffect	False	True	False			
 10155310	Buff	False	True	False			
 10155320	Buff	False	True	True			
+10155400	Stun	True	False	False	Связка лунного света	Движение невозможно. Эффект заканчивается в случае опрокидывания.	icon_skills.mooncatch_tex
 10230001	Stun	True	False	False			icon_status.sealskill_tex
 15200001	Buff	True	True	False	Панцирь Рабатуса	Панцирь Рабатуса на $time повышает защиту и силу на $H_W_GOOD20%$COLOR_END. Этот эффект не пропадает даже после смерти или применения к вам снимающего эффекты умения, но автоматически пропадает, если вы выходите из битвы за город.	icon_skills.emergencyshield_tex
 15200002	Buff	True	True	False	Пламя дракона	Пламя дракона повышает атаку на $H_W_GOOD20%$COLOR_END в течение $time Этот эффект не пропадает даже после смерти или применения к вам снимающего эффекты умения, но автоматически пропадает, если вы выходите из битвы за город.	icon_items.campfire_tex
@@ -4507,6 +4813,73 @@
 71600004	DamageOverTime	True	False	False	Пламя Даркана	Отнимает $H_W_BAD5%$COLOR_END от максимального уровня HP раз в $H_W_BAD2$COLOR_END second1	icon_status.firedamage_tex
 71600010	DamageOverTime	True	False	False	Обожженный шрам	Отнимает $H_W_BAD5%$COLOR_END от максимального уровня HP раз в $H_W_BAD1$COLOR_END second	icon_status.firedamage_tex
 71600020	WeakeningEffect	False	False	False			
+73500000	Buff	False	True	False	Если показывается - сообщить BTS!	Урон от данной атаки игрока не рассеивается.	
+73500001	Buff	True	True	True	Слабая вентиляция	Поток воздуха из вентиляции здания замедляет падение и не дает получить урон от падения.	icon_skills.rage_tex
+73500002	WeakeningEffect	False	True	True	Если показывается - сообщить BTS!	Данный NPC обладает сопротивлением к урону/воздействиям.	
+73500003	Buff	False	True	False	Если показывается - сообщить BTS!	Данный игрок относится к классу целителей.	
+73500004	Buff	False	True	False	Если показывается - сообщить BTS!	Данный игрок относится к классу танков.	
+73500005	Buff	False	True	True	Если показывается - сообщить BTS!	Данный игрок относится к классу не танков.	
+73500006	WeakeningEffect	False	True	True	Если показывается - сообщить BTS!	Данный NPC обладает сопротивлением ко всем видам урона, негативным эффектам и воздействиям.	
+73501000	Buff	True	True	False	Защищенная энергия	Воздушная яма защищает от любого воздействия, чтобы энергия дошла до Вентарона в полном объеме. Во время преодоления воздушной ямы, урон от падения получен не будет.	icon_skills.rage_tex
+73501001	DamageOverTime	True	False	False	Выброс плазмы	Произошел взрыв бомбы с часовым механизмом! Каждые $H_W_BAD1$COLOR_END second HP уменьшается на $H_W_BAD4%$COLOR_END.	icon_status.paralyzestatus_tex
+73501002	Buff	False	True	False	Если показывается - сообщить BTS!	Данный игрок в воздухе! Нанести урон другими умениями ударной волны и телепорта нельзя.	
+73501003	Buff	False	True	False	Если показывается - сообщить BTS!	Данный NPC не может использовать взрывные атаки.	
+73501004	Stun	True	False	False	Потрясение	Оглушение от сильной атаки Вентарона не позволяет двигаться.	icon_status.confuseup_tex
+73501005	WeakeningEffect	True	False	False	Удар плазмы	Произошел взрыв бомбы с часовым механизмом! Урон от взрывной волны уменьшает скорость перемещения на $H_W_BAD50%$COLOR_END, дистанцию перемещения с помощью умения - на $H_W_BAD30%$COLOR_END. Эффект снять нельзя.	icon_status.minusmove_tex
+73501006	Buff	False	True	False	Если показывается - сообщить BTS!	Данный NPC может призвать бомбу с часовым механизмом.	
+73501007	Buff	False	True	False	Если показывается - сообщить BTS!	Во время действия эффекта данный игрок не получает урон от аннигиляции.	
+73501008	WeakeningEffect	True	False	False	Повреждение нерва	Выброс плазмы Вентарона не позволяет использовать умения.	icon_status.vergoscurse_tex
+73501009	Buff	False	True	False	Если показывается - сообщить BTS!	Данный NPC может запустить вентиляцию.	
+73501010	Buff	False	True	False	Если показывается - сообщить BTS!	Во время действия эффекта данный NPC не может продолжать запускать взрывы.	
+73501011	Buff	False	True	False	Если показывается - сообщить BTS!	Во время действия эффекта данный NPC не может запустить вентиляцию.	
+73501012	WeakeningEffect	True	True	False	Возвращение	Тело начинает двигаться самостоятельно под воздействием сильного магнитного поля Вентарона.	icon_status.electriceffect3_tex
+73501013	Buff	False	True	False	Если показывается - сообщить BTS!	Установлена бомба с часовым механизмом. Следующие действия недоступны: серия взрывов, аннигиляция, вентиляция	
+73501014	Buff	False	True	False	Если показывается - сообщить BTS!	Активирована вентиляция. Следующие действия недоступны: аннигиляция	
+73501015	Buff	False	True	False	Если показывается - сообщить BTS!	Активирована вентиляция. Следующие действия недоступны: установка бомбы с часовым механизмом	
+73501016	Buff	False	True	False	Если показывается - сообщить BTS!	Эффект достижения Ангар RK-9 - использование системы вентиляции	
+73501017	Buff	False	True	False	Если показывается - сообщить BTS!	Предохраняет от одновременного урона по средствам подачи воздуха/вентиляции.	
+73501018	Buff	False	True	False	Если показывается - сообщить BTS!	Эффект достижения по ликвидации 100 бомб с часовым механизмом.	
+73501019	Buff	False	True	True	Если показывается - сообщить BTS!	Действует при наличии агрессивного прозрачного NPC.	
+73502000	DamageOverTime	True	False	False	Электрический удар	Сильный электрический ток уменьшает HP на $H_W_BAD6%$COLOR_END каждые $H_W_BAD2$COLOR_END second1 Эффект суммируется до 12 раз.	icon_skills.electricshock_tex
+73502001	WeakeningEffect	False	True	True	Если показывается - сообщить BTS!	Данный NPC обладает сопротивлением ко всем видам урона, воздействия и эффектов.	
+73502002	Buff	False	True	True	Если показывается - сообщить BTS!	При попытке электрического взрыва данный NPC начинает атаковать электронное устройство.	
+73502003	Buff	False	True	True	Если показывается - сообщить BTS!	При попытке электрического взрыва данный NPC начинает производить взрывы на малой дистанции.	
+73502004	Buff	False	True	False	Если показывается - сообщить BTS!	Игрок попал под удар вращающимся лезвием. Гексапреон может начать серию атак.	
+73502005	WeakeningEffect	True	False	False	Удар молнии	Сильный электрический удар Гексапреона ввел вас в состояние шока. Использовать умения нельзя.	icon_skills.electricshock2_tex
+73502006	Buff	False	True	False	Если показывается - сообщить BTS!	По завершении перезарядки данный NPC атакует со 100% вероятностью.	
+73502007	WeakeningEffect	False	True	True	Если показывается - сообщить BTS!	Состояние, отображающее эффекты данного NPC.	
+73503000	Buff	False	True	False	Если показывается - сообщить BTS!	Во время действия эффекта данный NPC не может использовать умение "Ударная волна лунного света".	
+73503001	Stun	True	False	False	Потрясение	Оглушение от сильной атаки RK-9 не позволяет двигаться.	icon_status.confuseup_tex
+73503002	Buff	False	True	False	Если показывается - сообщить BTS!	Данный NPC не может использовать умения "Ударная волна лунного света".	
+73503003	Buff	False	True	False	Если показывается - сообщить BTS!	Во время действия эффекта данный NPC не может использовать обнаружение живых существ.	
+73503004	Buff	False	True	False	Если показывается - сообщить BTS!	Данный NPC не может использовать обнаружение живых существ.	
+73503005	Buff	False	True	True	Если показывается - сообщить BTS!	Данный NPC может передать боссу возможность использовать протокол обнаружения тепла.	
+73503006	Buff	False	True	True	Если показывается - сообщить BTS!	Данный NPC может передать боссу порядок применения протокола обнаружения тепла.	
+73503007	Buff	False	True	True	Если показывается - сообщить BTS!	Данный NPC может передать боссу обратный порядок применения протокола обнаружения тепла.	
+73503008	Buff	False	True	True	Если показывается - сообщить BTS!	У данного NPC повреждена нагрудная защита. Это приведет к постоянным ложным срабатываниям.	
+73503009	DamageOverTime	True	True	False	Лазерный удар	Мощный лазерный луч наносит продолжительный урон. Каждые $H_W_BAD2$COLOR_END second1 HP уменьшается на $H_W_BAD6%$COLOR_END. Эффект нельзя отменить.	icon_status.fullelectriceffect_tex
+73503100	Buff	False	True	False	Если показывается - сообщить BTS!	На данный момент NPC не может использовать протокол обнаружения тепла.	
+73503101	Buff	False	True	True	Если показывается - сообщить BTS!	Данный NPC наносит удар по первой зоне ближнего боя в протоколе обнаружения тепла.	
+73503102	Buff	False	True	True	Если показывается - сообщить BTS!	Данный NPC наносит удар по первой зоне дальнего боя в протоколе обнаружения тепла.	
+73503103	Buff	False	True	True	Если показывается - сообщить BTS!	Данный NPC наносит удар по первой зоне в протоколе обнаружения тепла.	
+73503104	Buff	False	True	True	Если показывается - сообщить BTS!	Данный NPC наносит удар по второй зоне ближнего боя в протоколе обнаружения тепла.	
+73503105	Buff	False	True	True	Если показывается - сообщить BTS!	Данный NPC наносит удар по второй зоне дальнего боя в протоколе обнаружения тепла.	
+73503106	Buff	False	True	True	Если показывается - сообщить BTS!	Данный NPC наносит удар по второй зоне в протоколе обнаружения тепла.	
+73503107	Buff	False	True	True	Если показывается - сообщить BTS!	Нагрудные доспехи данного NPC невредимы, поэтому он приступит к истреблению посторонних в соответствии с протоколом.	
+73503108	Buff	True	True	True	Если показывается - сообщить BTS!	Данный NPC атакует противников в соответствии с протоколом обнаружения тепла.	
+73503109	Buff	True	True	True	Если показывается - сообщить BTS!	Данный NPC атакует противников в противоположном протоколу обнаружения тепла порядке.	
+73503200	Buff	False	True	False	Если показывается - сообщить BTS!	Данный NPC не может использовать умение маленькой гранаты к дальней цели.	
+73503201	Buff	False	True	False	Если показывается - сообщить BTS!	Данный NPC не может использовать умение маленькой гранаты к цели, использующей умение Воскрешения.	
+73503300	Buff	False	True	True	Если показывается - сообщить BTS!	Данный NPC может активировать протокол защиты.	
+73503301	Buff	True	True	True	Активирован протокол: защита	Система RK-9 обнаружила опасность и запустила протокол защиты. В соответствии с протоколом все посторонние будут уничтожены.	icon_skills.emergencyshield_tex
+73503302	Buff	False	True	False	Если показывается - сообщить BTS!	Данный NPC получил мощный удар во время исполнения протокола защиты, система временно зависла. Обездвижен на 5000мс.	
+73503303	Buff	False	True	False	Если показывается - сообщить BTS!	Произошла ошибка во время активации протокола защиты данного NPC. На 20 000 мс снижается уровень защиты платы из кровавых осколков, ее можно разрушить сильным ударом.	
+73503400	Buff	False	True	False	Если показывается - сообщить BTS!	Данный NPC не может активировать протокол защиты в течение действия эффекта.	
+73503401	Buff	True	True	True	Активирован протокол: защита	Система RK-9 обнаружила опасность и запустила протокол защиты. В соответствии с протоколом все посторонние будут уничтожены.	icon_skills.emergencyshield_tex
+73503402	Buff	False	True	False	Если показывается - сообщить BTS!	Данный NPC получил мощный удар во время исполнения протокола защиты, система временно зависла. Обездвижен на 5000мс.	
+73503403	WeakeningEffect	False	True	False	Если показывается - сообщить BTS!	Данный NPC обладает сопротивлением ко всем видам урона, негативным эффектам и воздействиям.	
+73504000	WeakeningEffect	True	True	True	Мощное магнитное поле	Мощное магнитное поле не позволяет использовать умения.	icon_status.sealskill_tex
+73504001	WeakeningEffect	True	True	False	Электрошок	Сильный электрический удар от прикосновения к устройству магнитного поля временно обездвиживает.	icon_skills.excesselectron_tex
 74300002	DamageOverTime	True	True	False	Густой туман	Туман сильно снижает скорость перемещения.	icon_status.darkeffect_tex
 74300003	Buff	True	True	True	Хороший аппетит	+$H_W_GOOD50%$COLOR_END к силе.	icon_status.minushp_tex
 74300012	WeakeningEffect	True	True	False	Деталь головоломки: красная	Попадите в красные детали головоломки в указанном на значках порядке, или готовьтесь к смерти.	icon_status.battlecommand03_tex
@@ -4735,6 +5108,82 @@
 91600036	DamageOverTime	False	False	False			
 91600037	DamageOverTime	False	False	False			icon_status.cruel_slayer_3_tex
 91600038	Buff	False	True	False	Восстановленный столп эоналиса	Эффект: восстановление HP столпа эоналиса.	icon_status.aura_of_regeneration_hp_tex
+93500000	Buff	False	True	False	Если показывается - сообщить BTS!	Урон от данной атаки игрока не рассеивается.	
+93500001	Buff	False	True	False	Если показывается - сообщить BTS!	Поток воздуха из вентиляции ангара повышает урон от падения.	
+93500002	WeakeningEffect	False	True	True	Если показывается - сообщить BTS!	Данный NPC обладает сопротивлением к урону/воздействиям.	
+93500003	Buff	False	True	False	Если показывается - сообщить BTS!	Данный игрок относится к классу целителей.	
+93500004	Buff	False	True	False	Если показывается - сообщить BTS!	Данный игрок относится к классу танков.	
+93500005	Buff	False	True	True	Если показывается - сообщить BTS!	Данный игрок относится к классу не танков.	
+93500006	WeakeningEffect	False	True	True	Если показывается - сообщить BTS!	Данный NPC обладает сопротивлением ко всем видам урона, негативным эффектам и воздействиям.	
+93501000	Buff	True	True	False	Защищенная энергия	Воздушная яма защищает от любого воздействия, чтобы энергия дошла до Вентарона в полном объеме. Во время преодоления воздушной ямы, урон от падения получен не будет.	icon_skills.rage_tex
+93501001	DamageOverTime	True	True	False	Выброс плазмы	Произошел взрыв бомбы с часовым механизмом! Каждые $H_W_BAD1$COLOR_END second HP уменьшается на $H_W_BAD8%$COLOR_END. Данный эффект нельзя отменить.	icon_status.paralyzestatus_tex
+93501002	Buff	False	True	False	Если показывается - сообщить BTS!	Данный игрок в воздухе! Нанести урон другими умениями ударной волны и телепорта нельзя.	
+93501003	Buff	False	True	False	Если показывается - сообщить BTS!	Данный NPC не может использовать взрывные атаки.	
+93501004	Stun	True	False	False	Потрясение	Оглушение от сильной атаки Вентарона не позволяет двигаться.	icon_status.confuseup_tex
+93501005	WeakeningEffect	True	True	False	Удар плазмы	Произошел взрыв бомбы с часовым механизмом! Урон от взрывной волны уменьшает скорость перемещения на $H_W_BAD50%$COLOR_END, дистанцию перемещения с помощью умения - на $H_W_BAD30%$COLOR_END. Эффект снять нельзя.	icon_status.minusmove_tex
+93501006	Buff	False	True	False	Если показывается - сообщить BTS!	Данный NPC может призвать бомбу с часовым механизмом.	
+93501007	Buff	False	True	False	Если показывается - сообщить BTS!	Во время действия эффекта данный игрок не получает урон от аннигиляции.	
+93501008	WeakeningEffect	True	True	False	Повреждение нерва	Выброс плазмы Вентарона не позволяет использовать умения.	icon_status.vergoscurse_tex
+93501009	Buff	False	True	False	Если показывается - сообщить BTS!	Данный NPC может запустить вентиляцию.	
+93501010	Buff	False	True	False	Если показывается - сообщить BTS!	Во время действия эффекта данный NPC не может продолжать запускать взрывы.	
+93501011	Buff	False	True	False	Если показывается - сообщить BTS!	Во время действия эффекта данный NPC не может запустить вентиляцию.	
+93501012	WeakeningEffect	True	True	False	Возвращение	Тело начинает двигаться самостоятельно под воздействием сильного магнитного поля Вентарона.	icon_status.electriceffect3_tex
+93501013	Buff	False	True	False	Если показывается - сообщить BTS!	Установлена бомба с часовым механизмом. Следующие действия недоступны: серия взрывов, аннигиляция, вентиляция	
+93501014	Buff	False	True	False	Если показывается - сообщить BTS!	Активирована вентиляция. Следующие действия недоступны: аннигиляция	
+93501015	Buff	False	True	False	Если показывается - сообщить BTS!	Активирована вентиляция. Следующие действия недоступны: установка бомбы с часовым механизмом	
+93501016	Buff	False	True	False	Если показывается - сообщить BTS!	Данный игрок обладает неуязвимостью ко всем видам урона.	
+93501017	Buff	False	True	False	Если показывается - сообщить BTS!	Предохраняет от одновременного урона по средствам подачи воздуха/вентиляции.	
+93501018	Buff	False	True	False	Если показывается - сообщить BTS!	Эффект достижения по ликвидации 100 бомб с часовым механизмом.	
+93501019	Buff	False	True	True	Если показывается - сообщить BTS!	Действует при наличии агрессивного прозрачного NPC.	
+93501020	Buff	False	True	False	Если показывается - сообщить BTS!	Данный игрок воспользовался системой подачи воздуха. Чтобы предотвратить BTS 159600 в течение 1 сек. действует иммунитет к урону от падения.	
+93502000	DamageOverTime	True	False	False	Электрический удар	Сильный электрический ток с каждым ударом уменьшает HP на $H_W_BAD10%$COLOR_END каждые $H_W_BAD2$COLOR_END second1 Эффект суммируется до 12 раз.	icon_skills.electricshock_tex
+93502001	WeakeningEffect	False	True	True	Если показывается - сообщить BTS!	Данный NPC обладает сопротивлением ко всем видам урона, воздействия и эффектов.	
+93502002	Buff	False	True	True	Если показывается - сообщить BTS!	При попытке электрического взрыва данный NPC начинает атаковать электронное устройство.	
+93502003	Buff	False	True	True	Если показывается - сообщить BTS!	При попытке электрического взрыва данный NPC начинает производить взрывы на малой дистанции.	
+93502004	Buff	False	True	False	Если показывается - сообщить BTS!	Игрок попал под удар вращающимся лезвием. Гексапреон может начать серию атак.	
+93502005	WeakeningEffect	True	False	False	Удар молнии	Сильный электрический удар Гексапреона ввел вас в состояние шока. Использовать умения нельзя.	icon_skills.electricshock2_tex
+93502006	Buff	False	True	False	Если показывается - сообщить BTS!	По завершении перезарядки данный NPC атакует со 100% вероятностью.	
+93502007	WeakeningEffect	False	True	True	Если показывается - сообщить BTS!	Состояние, отображающее эффекты данного NPC.	
+93502008	Buff	False	True	False	Если показывается - сообщить BTS!	Если эффект электрического удара получен не был, будет действовать эффект достижения.	
+93502009	Buff	False	True	True	Если показывается - сообщить BTS!	Эффект, не позволяющий получить 93502008 во время действия эффекта электрического удара.	
+93503000	Buff	False	True	False	Если показывается - сообщить BTS!	Во время действия эффекта данный NPC не может использовать умение "Ударная волна лунного света".	
+93503001	Stun	True	False	False	Потрясение	Оглушение от сильной атаки RK-9 не позволяет двигаться.	icon_status.confuseup_tex
+93503002	Buff	False	True	False	Если показывается - сообщить BTS!	Данный NPC не может использовать умения "Ударная волна лунного света".	
+93503003	Buff	False	True	False	Если показывается - сообщить BTS!	Во время действия эффекта данный NPC не может использовать обнаружение живых существ.	
+93503004	Buff	False	True	False	Если показывается - сообщить BTS!	Данный NPC не может использовать обнаружение живых существ.	
+93503005	Buff	False	True	True	Если показывается - сообщить BTS!	Данный NPC может передать боссу возможность использовать протокол обнаружения тепла.	
+93503006	Buff	False	True	True	Если показывается - сообщить BTS!	Данный NPC может передать боссу порядок применения протокола обнаружения тепла.	
+93503007	Buff	False	True	True	Если показывается - сообщить BTS!	Данный NPC может передать боссу обратный порядок применения протокола обнаружения тепла.	
+93503008	Buff	False	True	True	Если показывается - сообщить BTS!	У данного NPC повреждена нагрудная защита. Это приведет к постоянным ложным срабатываниям.	
+93503009	DamageOverTime	True	True	False	Лазерный удар	Мощный лазерный луч наносит продолжительный урон. Каждые $H_W_BAD2$COLOR_END second1 HP уменьшается на $H_W_BAD10%$COLOR_END. Эффект нельзя отменить.	icon_status.fullelectriceffect_tex
+93503010	Buff	False	True	False	Если показывается - сообщить BTS!	Во время действия данный NPC не может использовать протокол обнаружения тепла.	
+93503011	Buff	False	True	False	Если показывается - сообщить BTS!	Данный NPC не может менять параметры системы RK-9.	
+93503100	Buff	False	True	False	Если показывается - сообщить BTS!	На данный момент NPC не может использовать протокол обнаружения тепла.	
+93503101	Buff	False	True	True	Если показывается - сообщить BTS!	Данный NPC наносит удар по первой зоне ближнего боя в протоколе обнаружения тепла.	
+93503102	Buff	False	True	True	Если показывается - сообщить BTS!	Данный NPC наносит удар по первой зоне дальнего боя в протоколе обнаружения тепла.	
+93503103	Buff	False	True	True	Если показывается - сообщить BTS!	Данный NPC наносит удар по первой зоне в протоколе обнаружения тепла.	
+93503104	Buff	False	True	True	Если показывается - сообщить BTS!	Данный NPC наносит удар по второй зоне ближнего боя в протоколе обнаружения тепла.	
+93503105	Buff	False	True	True	Если показывается - сообщить BTS!	Данный NPC наносит удар по второй зоне дальнего боя в протоколе обнаружения тепла.	
+93503106	Buff	False	True	True	Если показывается - сообщить BTS!	Данный NPC наносит удар по второй зоне в протоколе обнаружения тепла.	
+93503107	Buff	False	True	True	Если показывается - сообщить BTS!	Нагрудные доспехи данного NPC невредимы, поэтому он приступит к истреблению посторонних в соответствии с протоколом.	
+93503108	Buff	False	True	True	Если показывается - сообщить BTS!	Данный NPC атакует противников в соответствии с протоколом обнаружения тепла.	icon_status.cruel_slayer_2_tex
+93503109	Buff	False	True	True	Если показывается - сообщить BTS!	Данный NPC атакует противников в противоположном протоколу обнаружения тепла порядке.	icon_status.cruel_slayer_3_tex
+93503200	Buff	False	True	False	Если показывается - сообщить BTS!	Данный NPC не может использовать умение маленькой гранаты к дальней цели.	
+93503201	Buff	False	True	False	Если показывается - сообщить BTS!	Данный NPC не может использовать умение маленькой гранаты к цели, использующей умение Воскрешения.	
+93503300	Buff	False	True	True	Если показывается - сообщить BTS!	Данный NPC может активировать протокол защиты.	
+93503301	Buff	True	True	True	Активирован протокол: защита	Система RK-9 обнаружила опасность и запустила протокол защиты. В соответствии с протоколом все посторонние будут уничтожены.	icon_skills.emergencyshield_tex
+93503302	Buff	False	True	False	Если показывается - сообщить BTS!	Данный NPC получил мощный удар во время исполнения протокола защиты, система временно зависла. Обездвижен на 5000мс.	
+93503303	Buff	False	True	False	Если показывается - сообщить BTS!	Произошла ошибка во время активации протокола защиты данного NPC. На 20 000 мс снижается уровень защиты платы из кровавых осколков, ее можно разрушить сильным ударом.	
+93503304	Buff	True	True	True	Система аварийной защиты	В критическом состоянии у RK-9 запускается система аварийной защиты. Повышается уровень защиты и атаки RK-9.	icon_status.dimensionguard_tex
+93503400	Buff	False	True	False	Если показывается - сообщить BTS!	Данный NPC не может активировать протокол защиты в течение действия эффекта.	
+93503401	Buff	True	True	True	Активирован протокол: защита	Система RK-9 обнаружила опасность и запустила протокол защиты. В соответствии с протоколом все посторонние будут уничтожены.	icon_skills.emergencyshield_tex
+93503402	Buff	False	True	False	Если показывается - сообщить BTS!	Данный NPC получил мощный удар во время исполнения протокола защиты, система временно зависла. Обездвижен на 5000мс.	
+93503500	Buff	False	True	False	Если показывается - сообщить BTS!	При использовании системы радаров взрыв на малой дистанции не был использован.	
+93503501	Buff	False	True	False	Если показывается - сообщить BTS!	1 убийство в обычном режиме	
+93503502	Buff	False	True	False	Если показывается - сообщить BTS!	1 убийство в сложном режиме	
+93503503	Buff	False	True	False	Если показывается - сообщить BTS!	77 убийств в сложном режиме	
+93504000	WeakeningEffect	True	True	True	Мощное магнитное поле	Мощное магнитное поле не позволяет использовать умения.	icon_status.sealskill_tex
+93504001	WeakeningEffect	True	True	False	Электрошок	Сильный электрический удар от прикосновения к устройству магнитного поля временно обездвиживает.	icon_skills.excesselectron_tex
 97000001	WeakeningEffect	True	False	True	Хищность	Вас преследует голодный паучок.	icon_status.curse_tex
 97000002	WeakeningEffect	True	True	True	Лень	Паучок наелся и отдыхает.	icon_status.sleepstatus_tex
 97000003	WeakeningEffect	True	True	False	Усиливающий паучат яд	Отравление ядовитыми парами паучат. Каждые $H_W_BAD0$COLOR_END second1 вы теряете по $H_W_BAD10%$COLOR_END от максимального уровня HP.	icon_status.diseasedown_tex
@@ -4895,7 +5344,7 @@
 98000104	Buff	True	True	True	Цепь атаки III	+$H_W_GOOD10%$COLOR_END к урону от умений. -$H_W_GOOD10%$COLOR_END к получаемому урону. +$H_W_GOOD4%$COLOR_END к скорости атаки.	
 98000105	Buff	True	True	True	Цепь восстановления III	+$H_W_GOOD10%$COLOR_END к урону от умений, -$H_W_GOOD10%$COLOR_END к получаемому урону. +$H_W_GOOD4%$COLOR_END к скорости атаки.	
 98000106	WeakeningEffect	True	False	False	Символ одряхления	-$H_W_BAD10%$COLOR_END к выносливости.	icon_crest.crestactivedefencedown_tex
-98000107	Buff	True	True	False	Энергия звезд IV	+$H_W_GOOD40$COLOR_END к силе, +$H_W_GOOD8$COLOR_END к скорости атаки.	icon_skills.divinelightning_tex
+98000107	Buff	True	True	False	Энергия звезд IV	+$H_W_GOOD48$COLOR_END к силе, +$H_W_GOOD9,6$COLOR_END к скорости атаки.	icon_skills.divinelightning_tex
 98000108	Buff	True	True	False	Символ приземленности	+$H_W_GOOD10%$COLOR_END к выносливости.	icon_crest.crestactivedefenceup_tex
 98000109	Buff	True	True	False	Благословение Аруна III	Под действием благословения Аруна, скорость перемещения вне боя повышается на $H_W_GOOD10$COLOR_END, а сила - на $H_W_GOOD25$COLOR_END.	icon_skills.attackup_tex
 98000110	Buff	True	True	False	Благословение Шары V	Благословение Шары каждые $H_W_GOOD2 сек.$COLOR_END восстанавливает HP, повышает выносливость на 11 и увеличивает сопротивление ко всем негативным эффектам на 5.	icon_skills.agilitybless_tex
@@ -5366,6 +5815,7 @@
 81000002	Buff	True	True	False	Опыт особенностей повышается на 30 (1 час)	Опыт особенностей повышается на $H_W_GOOD30%$COLOR_END.	icon_items.ep_grow30_tex
 81000003	Buff	True	True	False	Опыт особенностей повышается на 50 (1 час)	Опыт особенностей повышается на $H_W_GOOD50%$COLOR_END.	icon_items.ep_grow50_tex
 81000004	Buff	True	True	False	Опыт особенностей повышается на 100 (1 час)	Опыт особенностей повышается на $H_W_GOOD100%$COLOR_END.	icon_items.ep_grow100_tex
+81000005	Buff	False	True	True			icon_items.ep_grow30_tex
 81010101	Buff	True	True	False	Уменьшение урона	Снижается количество получаемого урона. Эффект снимается после перехода в режим боя.	icon_ep.ep_defense_wellup_tex
 81010102	Buff	True	True	False	Уменьшение урона	Снижается количество получаемого урона. Эффект снимается после перехода в режим боя.	icon_ep.ep_defense_wellup_tex
 81010103	Buff	True	True	False	Уменьшение урона	Снижается количество получаемого урона. Эффект снимается после перехода в режим боя.	icon_ep.ep_defense_wellup_tex
@@ -6460,6 +6910,8 @@
 5020000	Buff	True	True	False	ЕС - свиток зачарования 1 (5 мин.)	1%	icon_items.parts_heavyarmorc5_tex
 5020001	Buff	True	True	False	ЕС - свиток зачарования 2 (5 мин.)	5%	icon_items.parts_heavyarmorc5_tex
 5020002	Buff	True	True	False	ЕС - свиток зачарования 3 (5 мин.)	15%	icon_items.parts_heavyarmorc5_tex
+5020003	Buff	True	True	True			icon_items.q_closedspace_stone_05_tex
+5020004	Buff	True	True	True			icon_items.artisan_lamp_tex
 14400001	Buff	True	True	False	Символ успеха	Дает следующие эффекты:$BR$BRКаждую секунду восстанавливается $H_W_GOOD1%$COLOR_END от общего HP, $BRвероятность выпадения предметов при уничтожении монстров увеличивается на $H_W_GOOD100%$COLOR_END.	icon_items.parts_magicweaponc15_tex
 14400002	Buff	True	True	False	Символ славы	Дает следующие эффекты:$BR$BR +$H_W_GOOD7%$COLOR_ENDк макс. HP, $BR+$H_W_GOOD20%$COLOR_ENDк выносливости$BR+$H_W_GOOD15%$COLOR_ENDк скорости атаки$BR+ $H_W_GOOD20%$COLOR_END к силе атаки умения $BRпредотвращает разрушение кристалла - $H_W_GOOD1 раз$COLOR_END$BR+ $H_W_GOOD7%$COLOR_END к скорости перемещения.	icon_items.parts_lightweaponc9_tex
 14400003	Buff	True	True	False	Символ несокрушимой воли	Дает следующие эффекты:$BR$BR$H_W_GOOD+7%$COLOR_END к максимальному уровню HP $BR$H_W_GOOD+20%$COLOR_END к выносливости $BR$H_W_GOOD+10$COLOR_END к скорости перемещения и $BR$H_W_GOOD+15%$COLOR_END к скорости атаки.$BRКаждую секунду восстанавливает $H_W_GOOD20%$COLOR_END НР$BR, $H_W_GOOD+100%$COLOR_END к силе атаки умений.$BR$H_W_GOODПредотвращает разрушение кристалла - $COLOR_END1 раз$BR, увеличивает вероятность выпадения предметов из монстров на 100%, +$H_W_GOOD7%$COLOR_END к скорости перемещения.	icon_items.parts_magicweaponc6_tex

@@ -30,13 +30,14 @@
 38	Buff	False	True	False			
 39	Buff	True	True	True	The Call of War	Increases skill damage, Attack Speed and HP recovery by 2%.	icon_status.plusecritical_tex
 40	Buff	True	True	True	Balder's Blessing	Increases your gathering proficiencies by 30 and shortens your gathering and crafting times.	icon_items.artisanall_up_tex
-41	Buff	True	True	False	Baharr's Blessing I	Slightly increases enchantment success rate. (Does not apply to Awakened enchanting, or enchanting using a bind-on-pickup item with the same name.)	icon_items.parts_heavyarmorc5_tex
-42	Buff	True	True	False	Baharr's Blessing II	Increases enchantment success rate. (Does not apply to Awakened enchanting, or enchanting using a bind-on-pickup item with the same name.)	icon_items.parts_heavyarmorc5_tex
-43	Buff	True	True	False	Baharr's Blessing III	Significantly increases enchantment success rate. (Does not apply to Awakened enchanting, or enchanting using a bind-on-pickup item with the same name.)	icon_items.parts_heavyarmorc5_tex
-44	Buff	True	True	False	Baharr's Blessing I	Slightly increases enchantment success rate. (Does not apply to Awakened enchanting, or enchanting using a bind-on-pickup item with the same name.)	icon_items.parts_heavyarmorc5_tex
-45	Buff	True	True	False	Baharr's Blessing II	Increases enchantment success rate. (Does not apply to Awakened enchanting, or enchanting using a bind-on-pickup item with the same name.)	icon_items.parts_heavyarmorc5_tex
-46	Buff	True	True	False	Baharr's Blessing III	Significantly increases enchantment success rate. (Does not apply to Awakened enchanting, or enchanting using a bind-on-pickup item with the same name.)	icon_items.parts_heavyarmorc5_tex
+41	Buff	True	True	False	Baharr's Blessing I	Slightly increases enchantment success rate.	icon_items.parts_heavyarmorc5_tex
+42	Buff	True	True	False	Baharr's Blessing II	Increases enchantment success rate.	icon_items.parts_heavyarmorc5_tex
+43	Buff	True	True	False	Baharr's Blessing III	Significantly increases enchantment success rate.	icon_items.parts_heavyarmorc5_tex
+44	Buff	True	True	False	Baharr's Blessing I	Slightly increases enchantment success rate.	icon_items.parts_heavyarmorc5_tex
+45	Buff	True	True	False	Baharr's Blessing II	Increases enchantment success rate.	icon_items.parts_heavyarmorc5_tex
+46	Buff	True	True	False	Baharr's Blessing III	Significantly increases enchantment success rate.	icon_items.parts_heavyarmorc5_tex
 47	Buff	True	True	False	Test_Skill Damage Increase/Aggro Reduction	Test Only! Increases all skill damage by 50%. Decreases Aggro  by 50%	icon_skills.voidtrap_tex
+51	Buff	True	True	False	Stun for DPS testing	Stunned for DPS testing. The following abnormalities are added:&#xA;Decreases Endurance by $H_W_BAD12%$COLOR_END (3 stacks of Debilitate)&#xA;Decreases Endurance $H_W_BAD10%$COLOR_END (Volley of Curses Glyphs)&#xA;Decreases Crit Resist Factor $H_W_BAD-12$COLOR_END (Volley of Curses EP)	icon_items.q_bones_tex
 101	Buff	True	True	False	Retaliate	Immune to knockdown, stagger, and stuns.	icon_skills.risingattack_tex
 201	Buff	False	True	False	Blessing of Shakan I	Increases Power by $H_W_GOOD17$COLOR_END.	icon_skills.attackup_tex
 202	Buff	False	True	False	Blessing of Shakan II	Increases Power by $H_W_GOOD25$COLOR_END.	icon_skills.attackup_tex
@@ -58,6 +59,7 @@
 912	Buff	True	True	True	Noctenium Infusion	Activates a skill's noctenium effects.	icon_items.union_supplies5_tex
 913	Buff	True	True	True	Noctenium Infusion	Activates a skill's noctenium effects.	icon_items.union_supplies5_tex
 916	Buff	True	True	True	Noctenium Infusion	Activates a skill's noctenium effects.	icon_items.union_supplies5_tex
+917	Buff	True	True	True	Noctenium Infusion	Activates a skill's noctenium effects.	icon_items.union_supplies5_tex
 920	Buff	True	True	False	Uncommon Noctenium Elixir	Increases all skill damage, and activates a skill's noctenium effects at $H_W_GOOD150%$COLOR_END. Does not stack with Noctenium Infusion.	icon_items.noctan_tex
 921	Buff	True	True	False	Rare Noctenium Elixir	Increases all skill damage, and activates a skill's noctenium effects at $H_W_GOOD150%$COLOR_END. Does not stack with Noctenium Infusion.	icon_items.noctan_tex
 922	Buff	True	True	False	Superior Noctenium Elixir	Increases all skill damage, and activates a skill's noctenium effects at $H_W_GOOD150%$COLOR_END. Does not stack with Noctenium Infusion.	icon_items.noctan_tex
@@ -111,6 +113,7 @@
 1491	Buff	True	True	False	Valiant Potion	Recovers $H_W_GOOD6%$COLOR_END of maximum HP every $H_W_GOOD1$COLOR_END second.	icon_items.potion1_tex
 1495	WeakeningEffect	True	True	False	Battlefield Poison	Decreases HP by 20,000 per second.	icon_status.poisonstatus_tex
 1510	Buff	False	True	False	Healing Potion	Instantly Recovers $H_W_GOOD50%$COLOR_END of maximum HP.	icon_items.potion5_tex
+1511	Buff	False	True	False	Elixir	Recovers $H_W_GOOD60%$COLOR_END of your maximum HP and MP.	icon_items.potion5_tex
 1530	Buff	True	True	False	Divine Infusion	Replenishes $H_W_GOOD5%$COLOR_END of maximum MP every $H_W_GOOD1$COLOR_END second.	icon_items.potion19_tex
 1610	Buff	True	True	False	Rejuvenation Mote	Recovers $H_W_GOOD2%$COLOR_END of maximum HP every $H_W_GOOD1$COLOR_END second.	icon_items.potion1_tex
 1630	Buff	False	True	False	Healing Mote	Recovers $H_W_GOOD25%$COLOR_END of maximum HP.	icon_items.potion5_tex
@@ -418,6 +421,7 @@
 4402	Buff	True	True	False	Wise Mentor	Increases hunting XP by $H_W_GOOD100%$COLOR_END. Effect stacks with other XP-related effects, but time runs even when you're offline.	icon_status.vitality_tex
 4403	Buff	False	True	False	Pleasant Greeting_If seen, BTS	If seen, BTS	icon_skills.greeting_tex
 4404	Buff	True	True	False	Friendly Powerful Savage Draught	Increases Power by $H_W_GOOD10%$COLOR_END.	icon_status.buff_of_kaia_tex
+4405	Buff	True	True	False	Joy of Crafting	Doubles your crafting skill when your weaponcrafting, armorcrafting, alchemy, and etching skills are 500 or less.	icon_items.small_insecta8_tex
 4500	Buff	True	True	True	Rapid XP	Increases hunting XP by $H_W_GOOD10%$COLOR_END.	icon_status.plusfocus_tex
 4501	Buff	True	True	True	Rapid XP	Increases hunting XP by $H_W_GOOD20%$COLOR_END.	icon_status.plusfocus_tex
 4502	Buff	True	True	True	Rapid XP	Increases hunting XP by $H_W_GOOD30%$COLOR_END.	icon_status.plusfocus_tex
@@ -435,6 +439,7 @@
 4514	Buff	True	True	True	Rapid XP	Increases hunting XP by $H_W_GOOD10 times$COLOR_END.	icon_status.plusfocus_tex
 4600	Buff	True	True	False	Crystalbind	Circumvents crystal breakage upon death, consuming one effect. The effect stacks up to 99 times.	icon_items.q_closedspace_stone_05_tex
 4610	Buff	True	True	False	Complete Crystalbind	Circumvents crystal breakage upon death.	icon_items.q_closedspace_stone_05_tex
+4612	Buff	True	True	False	Complete Crystalbind	Circumvents crystal breakage upon death.	icon_items.q_closedspace_stone_05_tex
 4620	Buff	True	True	False	Valsekyr Crafter's Scroll	Increases crafting speed of all items by $H_W_GOOD50%$COLOR_END.	icon_items.scroll_produce_speedup_tex
 4621	Buff	True	True	False	Dedicated Crafter's Scroll	Increases crafting speed of all items by $H_W_GOOD50%$COLOR_END.	icon_items.scroll_produce_speedup_tex
 4630	Buff	True	True	False	Valsekyr Gatherer's Scroll	Increases all gathering skills to $H_W_GOOD410$COLOR_END.	icon_items.scroll_collection_expup_tex
@@ -509,6 +514,15 @@
 5060	Buff	False	True	False	Pure Heart	Immune to knockdown, stun, and stagger.	icon_skills.voidtrap_tex
 6001	Buff	True	True	False	Dragon Master	Increases Crit Power against monsters by $H_W_GOOD1.5$COLOR_END.	icon_status.passive_dragonblood
 6002	Buff	True	True	False	Draconis Rex	$H_W_GOODDoubles$COLOR_END Crit Power against monsters.	icon_status.passive_dragonblood2
+6003	Buff	True	True	False	Blazing Aura I	Increases Crit Power against monsters by $H_W_GOOD1.5$COLOR_END.	icon_skills.heataura_tex
+6004	Buff	True	True	False	Blazing Aura II	$H_W_GOODDoubles$COLOR_END Crit Power against monsters.	icon_skills.flameaura_tex
+6005	Buff	False	True	False		This abnormality is not supposed to be shown.	
+6006	Buff	True	True	False	Phoenix Armor	Invincible for a short period. Effect ends upon using any skills.	icon_status.revivenow_status_tex
+6007	Buff	True	True	False	Phoenix Recovery	Instantly recovers $H_W_GOOD100%$COLOR_END of maximum HP and MP.	icon_items.eagles_potion_level_47_tex
+6008	WeakeningEffect	True	True	False	Phoenix Aura I	The phoenix is rekindling its fires. $H_W_GOODPhoenix Aura I$COLOR_END cannot be used until the effect is at full power.	icon_skills.flameaura_tex
+6009	Buff	True	True	False	Phoenix Crystalbind	Circumvents crystal breakage upon death.	icon_items.q_closedspace_stone_05_tex
+6010	Buff	False	True	False	BTS	This abnormality is not supposed to be shown.	
+6011	WeakeningEffect	True	True	False	Phoenix Aura II	The phoenix is rekindling its fires. $H_W_GOODPhoenix Aura II$COLOR_END cannot be used until the effect is at full power.	icon_skills.heataura_tex
 10100	DamageOverTime	True	False	False	Virulence	Reduces HP by $H_W_BAD-11$COLOR_END every $H_W_BAD1$COLOR_END second.	icon_items.customize9ar_tex
 10101	DamageOverTime	True	False	False	Virulence	Reduces HP by $H_W_BAD-23$COLOR_END every $H_W_BAD1$COLOR_END second.	icon_items.customize9br_tex
 10102	DamageOverTime	True	False	False	Virulence	Reduces HP by $H_W_BAD-58$COLOR_END every $H_W_BAD1$COLOR_END second.	icon_items.customize9cr_tex
@@ -758,6 +772,7 @@
 15150	Buff	True	True	False	Assimilate with Nature	Reduces aggro gains to nothing.	icon_status.boundmovedown_tex
 15160	Stun	True	False	False	Blacksmith's Hammerstrike	Stunned. Cannot move.	icon_status.confuseup_tex
 15161	WeakeningEffect	True	False	False	Cold Mercy	Decreases Crit Resist Factor by $H_W_BAD-10$COLOR_END.	icon_status.plusciriticalresist_tex
+15162	WeakeningEffect	True	False	False	Insignia of the Punisher	Decreases Crit Resist Factor by $H_W_BAD-20$COLOR_END.	icon_status.plusciriticalresist_tex
 15170	DamageOverTime	True	False	False	Thunderlash	Reduces HP by $H_W_BAD-3710$COLOR_END every $H_W_BAD2$COLOR_END second1.	icon_status.paralyzestatus_tex
 15500	Buff	False	True	False			
 15600	Buff	False	True	False			
@@ -959,7 +974,7 @@
 29050	WeakeningEffect	True	False	False	Glyph of Numbing	Decreases Attack Speed by  $H_W_BAD10%$COLOR_END per overlapping hit.	icon_crest.crestactiveattackspeeddown_tex
 29060	Buff	True	True	False	Glyph of Powerlink	Increases the chance to crit of Whipsaw by $H_W_GOOD30%$COLOR_END.	icon_crest.crestnextskillattackup_tex
 29070	WeakeningEffect	True	False	False	Glyph of Binding	You cannot move for the duration of the skill. Skill effects are canceled if you're knocked out from being attacked.	icon_crest.crestactivespeeddown_tex
-29090	Buff	True	True	False	Glyph of Blaze	Successful Cable Step strike speeds next skill's casting by 50%.	icon_crest.e_crestpassiveskillspeedup_tex
+29090	Buff	True	True	False	Glyph of Blaze	Successful Cable Step strike speeds next skill's casting by 50% for 2.5 seconds.	icon_crest.e_crestpassiveskillspeedup_tex
 29100	Buff	True	True	False	Glyph of Powerlink	Increases damage of Shadow Burst by $H_W_GOOD20%$COLOR_END.	icon_crest.crestnextskillattackup_tex
 29110	Buff	True	True	False	Glyph of Fleetfoot	Increases combat Movement Speed by $H_W_GOOD50$COLOR_END.	icon_crest.e_crestactivespeedup_tex
 29111	Buff	True	True	True	Glyph of Keenness	$H_W_GOODDoubles$COLOR_END Crit Factor for the next attack.	icon_crest.crestpassivecriticalup_tex
@@ -1009,9 +1024,9 @@
 33130	Buff	True	True	False	Glyph of Powerlink	Increases damage of Leaping Slash by $H_W_GOOD25%$COLOR_END.	icon_crest.crestnextskillattackup_tex
 33140	Buff	False	True	False			icon_crest.crestpassivecriticalup_tex
 33150	Buff	True	True	False	Glyph of Powerlink	Increases damage of Leaping Slash by $H_W_GOOD25%$COLOR_END.	icon_crest.crestnextskillattackup_tex
-33170	Buff	True	True	False	Glyph of Restoration	Recovers $H_W_GOOD2%$COLOR_END of maximum HP every $H_W_GOOD1$COLOR_END second.	icon_crest.crestpassivehpheal_tex
+33170	Buff	True	True	False	Glyph of Restoration	Recovers $H_W_GOOD3%$COLOR_END of maximum HP every $H_W_GOOD1$COLOR_END second.	icon_crest.crestpassivehpheal_tex
 33200	Buff	True	True	False	Glyph of Powerlink	Increases skill damage of your next attack by 30%.	icon_crest.crestnextskillattackup_tex
-33210	Buff	True	True	False	Glyph of Powerlink	Increases skill damage of Runeburst by $H_W_GOOD25%$COLOR_END.	icon_crest.crestpassivehpheal_tex
+33210	Buff	True	True	False	Glyph of Powerlink	Increases skill damage of Runeburst by $H_W_GOOD25%$COLOR_END.	icon_crest.e_crestnextskillattackup_tex
 45301	WeakeningEffect	True	False	False	Great Shock	Massively shocked.	icon_status.minusdefence_tex
 45302	WeakeningEffect	True	False	False	Blown Over	Shocked and knocked over.	icon_status.minuscriticalresist_tex
 45303	DamageOverTime	False	False	False		The drill will disappear in 13 seconds.	
@@ -1089,6 +1104,7 @@
 60027	Buff	True	True	False	Recovery Etching IV	Continuously recovers HP by $H_W_GOOD1405$COLOR_END and replenishes MP by $H_W_GOOD145$COLOR_END every $H_W_GOOD1$COLOR_END second.	icon_items.body_enchant_scroll_3_tex
 60029	Buff	True	True	False	Concentration II	Replenishes $H_W_GOOD5%$COLOR_END of maximum MP every $H_W_GOOD1$COLOR_END second.	icon_skills.neutralizepoison_tex
 60030	Buff	True	True	False	Concentration I	Replenishes $H_W_GOOD3%$COLOR_END of maximum MP every $H_W_GOOD1$COLOR_END second.	icon_skills.neutralizepoison_tex
+60031	Buff	True	True	False	Concentration III	Replenishes $H_W_GOOD7%$COLOR_END of your maximum MP every $H_W_GOOD1$COLOR_END second.	icon_skills.neutralizepoison_tex
 70201	Buff	True	True	False	Popped Cobseed	Increases maximum HP by $H_W_GOOD5%$COLOR_END.	icon_items.fallfestival_popcorn_tex
 70202	Buff	True	True	False	Mudroot Salad	Recovers $H_W_GOOD1%$COLOR_END of your maximum HP every $H_W_GOOD5$COLOR_END second1.	icon_items.fallfestival_potatosalad_tex
 70203	Buff	True	True	False	Grilled Pigling	Replenishes $H_W_GOOD1%$COLOR_END of your maximum MP every $H_W_GOOD5$COLOR_END second1.	icon_items.q_roastmeat_tex
@@ -1100,7 +1116,7 @@
 70223	Buff	True	True	False	Half-Moon Croquette	Replenishes $H_W_GOOD1%$COLOR_END MP every $H_W_GOOD5$COLOR_END second1 while raising power by $H_W_GOOD2$COLOR_END and Attack Speed by $H_W_GOOD3$COLOR_END.	icon_items.fallfestival_croquette_tex
 70231	Buff	True	True	False	Freeholds Flame Salad	Increases max HP and MP by $H_W_GOOD5%$COLOR_END.	icon_items.fallfestival_rikanosalad_tex
 70232	Buff	True	True	False	Bleak Wings	Increases Crit Resist Factor by $H_W_GOOD20$COLOR_END.	icon_items.fallfestival_wing_tex
-70233	Buff	True	True	False	Traditional Bleakfields BBQ	Increases healing effects by $H_W_GOOD9,00000000000001%$COLOR_END for you and up to 20 people within a 20m radius.	icon_items.pigling_ribs_tex
+70233	Buff	True	True	False	Traditional Bleakfields BBQ	Increases healing effects by $H_W_GOOD9,00000000000001%$COLOR_END.	icon_items.pigling_ribs_tex
 70234	Buff	True	True	False	Freeholds Root Beer	Lightens your mood for $time, but the kick might make you feel very woozy.	icon_items.solventd15_tex
 70235	Buff	True	True	False	Shevranberry Wine	Lightens your mood for $time, but you might feel very woozy.	icon_items.solventa12_tex
 70236	Buff	True	True	False	Sky Lotus Drink	Makes you $H_W_GOOD100%$COLOR_END resistant to knockdown and stagger for $time, but you might feel very woozy.	icon_items.solventf16_tex
@@ -1112,6 +1128,8 @@
 70242	Buff	False	True	False	Melsa's Luxurious Buffet	Applies Bleak Wings, Freeholds Flame Salad, and Traditional Bleakfields BBQ.	icon_items.pigling_ribs_tex
 70243	Buff	False	True	False	Traditional Bleakfields BBQ	Increases healing effects by $H_W_GOOD70233$COLOR_END for you and up to 20 people within a 20m radius.	icon_items.pigling_ribs_tex
 70244	Buff	False	True	False	Bleak Wings	Prevents Stamina from decreasing for you and up to 20 people within a 20m radius.	icon_items.pigling_ribs_tex
+70245	Buff	True	True	False	Lavish Freeholds Flame Salad	Increases Max HP by $H_W_GOOD5%$COLOR_END and Max MP by $H_W_GOOD10%$COLOR_END. Replenishes $H_W_GOOD1%$COLOR_END of your maximum MP every $H_W_GOOD5$COLOR_END second1.	icon_items.fallfestival_rikanosalad_tex
+70246	Buff	False	True	False	Feast	Applies Lamb Bulgogi, Lavish Freeholds Flame Salad, Bleak Wings, and Traditional Bleakfields BBQ.	icon_items.pigling_ribs_tex
 70301	Buff	True	True	False	Tranquil Celerity	Increases Movement Speed in combat by $H_W_GOOD2$COLOR_END. Effect stacks up to three times.	icon_status.aura_of_wind_tex
 70302	Buff	True	True	False	Tranquil Focus	Increases skill damage by $H_W_GOOD20$COLOR_END.	icon_status.aura_of_damage_tex
 70303	Buff	True	True	False	Tranquil Vigor	Increases maximum Stamina by $H_W_GOOD5$COLOR_END. Effect stacks up to three times.	icon_status.aura_of_condition_tex
@@ -1212,6 +1230,7 @@
 100203	Buff	True	True	True	Defensive Stance IV	Increases Endurance by $H_W_GOOD25%$COLOR_END and Balance Factor by $H_W_GOOD30$COLOR_END. Increases the chance to crit by $H_W_GOOD15%$COLOR_END when attacking monsters. Attacks draw $H_W_GOOD120%$COLOR_END more aggro. Immune to push-back from monsters, save for certain special attacks.	icon_skills.ironwillb_tex
 100293	Buff	False	True	False	Twinsword Parry_Basic Abnormality	Abnormality Tooltip Not Supposed To Be Shown (isShow=False) If this Tooltip is Shown Register it as BTS	icon_skills.twinswordsdefence_tex
 100294	Buff	True	True	False	Perseverance	Replenishes 5% MP.	icon_skills.twinswordsdefence_tex
+100295	Buff	False	True	False	Gale I	Cooldown of Scythe is reduced by 0.5 seconds.	icon_skills.twinswordsdefence_tex
 100296	Buff	False	True	True	Defensive Stance (additional chance to crit on monsters)	Increases the chance to crit on monsters by 15% (Invisible abnormality).	icon_skills.ironwillb_tex
 100297	Buff	False	True	True			
 100298	Buff	False	True	True	Defensive Stance IV-2	Abnormality Tooltip Not Supposed To Be Shown (isShow=False) If this Tooltip is Shown Register it as BTS	icon_skills.ironwillb_tex
@@ -1262,6 +1281,7 @@
 101104	Stun	True	False	False	Spinning Counter	Stunned. Cannot move.	icon_skills.reversalturningattack_tex
 101105	Stun	True	False	False	Spinning Counter	Stunned. Cannot move.	icon_skills.reversalturningattack_tex
 101200	WeakeningEffect	True	False	False	Combative Strike	Reduces Endurance by $H_W_BAD8%$COLOR_END.	icon_skills.aggravatingstrike_tex
+101210	WeakeningEffect	True	False	False	Combative Strike	Reduces Endurance by $H_W_BAD10%$COLOR_END.	icon_skills.aggravatingstrike_tex
 101220	WeakeningEffect	True	False	False	Combative Strike	Reduces Endurance by $H_W_BAD8%$COLOR_END and the effect of healing skills on you by $H_W_BAD30%$COLOR_END.	icon_skills.aggravatingstrike_tex
 101300	Buff	True	True	False	Traverse Cut	Increases Attack Speed by 0.9% with every stack. The effect stacks up to 13 times.	icon_skills.dualrapidpiercing_tex
 101400	WeakeningEffect	True	False	False	Pounce	Decreases Movement Speed by $H_W_BAD0,5$COLOR_END.	icon_skills.heavybite_tex
@@ -1771,7 +1791,7 @@
 501606	Buff	False	True	False			
 501607	Buff	False	True	False			
 501608	Buff	False	True	False			
-501650	Buff	True	True	False	Skill cannot be used.	Not Supposed to be Shown	icon_skills.distortionfield_tex
+501650	Buff	True	True	False	Warp Barrier	Cancels all damages for $time. Recovers 5% of max MP. Mana Boost II does not apply while Warp Barrier is active.	icon_skills.distortionfield_tex
 501700	Buff	False	True	False	Nova	Takes $H_W_GOOD50%$COLOR_END less damage from another player.	icon_skills.manaburst_tex
 600100	Buff	True	True	False	Feign Death I	Ignored by opponents. Duration: $H_W_GOOD$time$COLOR_END.	icon_skills.feigndeath_tex
 600101	Buff	True	True	False	Feign Death II	Ignored by opponents. Duration: $H_W_GOOD$time$COLOR_END.	icon_skills.feigndeath_tex
@@ -3244,6 +3264,9 @@
 3000019	Buff	True	True	True	Dragon's Reach	Can fly in 'free to fly' regions.<br>Restores 2% of your max HP and MP every second. Applies Dragonwing effect to party members within 30m.	icon_items.wings_of_fairy_tex
 3000020	Buff	False	True	True	Dragonwing	BTS	icon_skills.criticalupaura_tex
 3000021	Buff	True	True	True	Dragonwing	Increases the mount's ground Movement Speed by $H_W_GOOD10$COLOR_END.	icon_status.plusmove_tex
+3000022	Buff	True	True	True	Phoenix Flight I (HP, MP Recovery)	Can fly in 'free to fly' regions.<br>Recovers 1% of your maximum HP and MP every second. You receive Phoenix Fever.	icon_items.wings_of_fairy_tex
+3000023	Buff	True	True	True	Phoenix Flight II (HP, MP Recovery)	Can fly in 'free to fly' regions.<br>Recovers 2% of your maximum HP and MP every second. You receive Phoenix Fever.	icon_items.wings_of_fairy_tex
+3000024	Buff	True	True	True	Phoenix Fever	The power of the phoenix cancels out the effects of Dragonwing (Movement speed increase +10).	icon_status.heat_tex
 4510001	Buff	False	False	False			
 4510002	WeakeningEffect	False	True	False			
 4510003	DamageOverTime	False	False	False			
@@ -3481,6 +3504,144 @@
 7777013	Buff	True	True	False	False Modesty	Your inner armor is visible only to you.$BR $BR It becomes invisible again after a set period.	icon_status.icon_yookduk00_ab_tex
 7777014	Buff	True	True	False	False Modesty	Your inner armor is visible only to you.$BR $BR It becomes invisible again after a set period.	icon_status.icon_yookduk00_ab_tex
 7777015	Buff	True	True	False	T.E.R.A TIME	Feel the fever! Decreases all skill cooldowns except for alliance skills by 20%. Greatly increases MP replenishment.	icon_status.pluswill_tex
+7940000	Stun	False	True	True			
+7941001	Stun	True	False	False	Head Trauma	Birchback is disoriented.	icon_status.confuseup_tex
+7941002	WeakeningEffect	True	True	False	Birchback's Interest	Birchback has noticed you. Prepare for an attack.	icon_skills.througharrow_tex
+7941003	WeakeningEffect	False	True	False			
+7941004	Stun	False	False	False			
+7941005	Stun	False	False	False			
+7941006	WeakeningEffect	False	True	True			
+7941007	WeakeningEffect	False	True	True			
+7941008	WeakeningEffect	False	True	True			
+7941009	WeakeningEffect	False	True	True			
+7941010	WeakeningEffect	False	True	True			
+7941011	Buff	True	False	True	Steady	While Birchback is steady, he can't slip.	icon_status.balanceup_tex
+7941012	WeakeningEffect	False	True	False			
+7941013	Stun	False	False	False			
+7941014	Stun	True	False	False	Bleeding	HP decreases steadily due to falling.	icon_status.injuredbtdarkness_tex
+7941015	Stun	True	False	False	Impact	You are helpless due to the impact.	icon_status.confuseup_tex
+7941016	WeakeningEffect	False	True	False			
+7941017	WeakeningEffect	False	True	False			
+7941018	WeakeningEffect	False	True	True			
+7941019	WeakeningEffect	False	True	True			
+7941020	WeakeningEffect	False	True	True			
+7941021	Buff	True	True	True			
+7941022	DamageOverTime	True	False	False	Sticky Liquid	You cannot move due to the sticky liquid.	icon_skills.curseofshackle_tex
+7941023	WeakeningEffect	False	True	True			
+7941024	WeakeningEffect	False	True	True			
+7941025	WeakeningEffect	False	True	True			
+7941026	Buff	True	True	True	First Cheer	The baby monkey cheers for Birchback, granting increased attack power and attack speed.	icon_status.plusciriticalresist_tex
+7941027	Buff	True	True	True	Second Cheer	The baby monkey cheers for Birchback, granting increased attack power and attack speed.	icon_status.plusciriticalresist_tex
+7941028	Buff	True	True	True	Third Cheer	The baby monkey cheers for Birchback, granting increased attack power and attack speed.	icon_status.plusciriticalresist_tex
+7941029	WeakeningEffect	False	True	False			
+7941030	WeakeningEffect	True	True	False	Tree Monkey's Interest	The tree monkey has noticed you and is about to throw a banana peel.	icon_items.banana_tex
+7941031	WeakeningEffect	False	True	True			
+7941032	Stun	False	False	False			
+7941033	WeakeningEffect	False	True	False			
+7941034	WeakeningEffect	False	True	False			
+7941035	WeakeningEffect	False	True	False			
+7942001	WeakeningEffect	False	True	False			
+7942002	WeakeningEffect	True	True	True			
+7942003	WeakeningEffect	True	True	True			
+7942004	DamageOverTime	False	False	False			
+7942005	DamageOverTime	False	True	False			
+7942006	WeakeningEffect	True	True	False	Noticed	Lehnym noticed you. Better keep moving.	icon_status.minusfocus_tex
+7942007	WeakeningEffect	True	True	False	Noticed	Lehnym noticed you. Better keep moving.	icon_status.minusfocus_tex
+7942008	Stun	True	False	False			
+7942009	Stun	True	False	False			
+7942010	WeakeningEffect	False	True	False			
+7942011	WeakeningEffect	False	True	True			
+7942012	WeakeningEffect	False	True	True			
+7942013	WeakeningEffect	True	True	False			icon_items.cancel_lockon_potion_level_51_tex
+7942014	WeakeningEffect	False	True	False			
+7942015	Buff	True	True	False			
+7942016	WeakeningEffect	False	True	False			
+7942017	WeakeningEffect	False	True	True			
+7942018	WeakeningEffect	False	True	False			
+7942019	WeakeningEffect	False	True	False			
+7942020	WeakeningEffect	False	True	False			
+7942021	Stun	False	False	False			
+7942022	WeakeningEffect	False	True	False			
+7942023	WeakeningEffect	True	True	False			
+7942024	WeakeningEffect	True	True	False			
+7942025	WeakeningEffect	False	True	False			
+7942026	WeakeningEffect	False	True	False			
+7942027	WeakeningEffect	True	True	False			
+7942028	DamageOverTime	False	True	False			
+7942029	DamageOverTime	False	True	False			
+7942030	DamageOverTime	False	True	False			
+7942031	DamageOverTime	False	True	False			
+7942032	DamageOverTime	False	True	False			
+7942033	DamageOverTime	False	False	False			
+7942034	WeakeningEffect	False	True	True			
+7942035	WeakeningEffect	False	True	True			
+7942036	Stun	False	False	False			
+7942037	WeakeningEffect	True	True	True	Red Ore Energy	You are wreathed in red ore energy. The red light cannot harm you.	icon_status.immunedebuff_tex
+7942038	WeakeningEffect	True	True	True	Blue Ore Energy	You are wreathed in blue ore energy. The blue light cannot harm you..	icon_status.immunedebuff_tex
+7942039	WeakeningEffect	True	True	True	White Ore Energy	You are wreathed in white ore energy. The white light cannot harm you.	icon_status.immunedebuff_tex
+7942040	DamageOverTime	False	True	False			
+7942041	DamageOverTime	False	True	False			
+7942042	WeakeningEffect	False	True	False			
+7942043	WeakeningEffect	False	True	True			
+7942044	WeakeningEffect	False	True	True			
+7942045	WeakeningEffect	False	True	True			
+7942046	WeakeningEffect	False	True	True			
+7942047	WeakeningEffect	False	True	True			
+7942048	WeakeningEffect	False	True	True			
+7942049	WeakeningEffect	False	True	False			
+7942050	WeakeningEffect	False	True	True			
+7943001	WeakeningEffect	False	True	True			
+7943002	WeakeningEffect	False	True	True			
+7943003	WeakeningEffect	False	True	False			
+7943004	WeakeningEffect	False	True	False			
+7943005	WeakeningEffect	False	True	False			
+7943006	WeakeningEffect	False	True	False			
+7943007	WeakeningEffect	False	True	True			
+7943008	WeakeningEffect	False	True	True			
+7943009	WeakeningEffect	False	True	True			
+7943010	WeakeningEffect	False	True	True			
+7943011	WeakeningEffect	False	True	True			
+7943012	WeakeningEffect	False	True	False			
+7943013	WeakeningEffect	False	True	False			
+7943014	WeakeningEffect	False	True	True			
+7943015	WeakeningEffect	False	True	True			
+7943016	Buff	True	True	False			
+7943017	WeakeningEffect	False	True	False			
+7943018	DamageOverTime	False	True	True			
+7943019	DamageOverTime	False	True	False			
+7943020	DamageOverTime	False	True	True			
+7943021	WeakeningEffect	False	True	False			
+7943022	WeakeningEffect	False	True	True			
+7943023	WeakeningEffect	False	True	False			
+7943024	WeakeningEffect	False	True	False			
+7943025	WeakeningEffect	False	True	False			
+7943026	WeakeningEffect	False	True	False			
+7943027	WeakeningEffect	True	False	False			
+7943028	Buff	True	True	False	Swift Movement: Preparation	Goblin movement speed is about to be enhanced.	icon_status.plusmove_tex
+7943029	WeakeningEffect	False	True	False			
+7943030	WeakeningEffect	False	True	False			
+7943031	WeakeningEffect	False	True	True			
+7943032	WeakeningEffect	False	True	True			
+7943033	WeakeningEffect	False	True	True			
+7943034	Buff	True	True	True	Swift Movement	Goblin movement speed has been enhanced significantly.	icon_status.plusmove_tex
+7943035	WeakeningEffect	False	True	True			
+7943036	WeakeningEffect	False	True	False			
+7943037	WeakeningEffect	False	True	True			
+7943038	WeakeningEffect	True	True	True			
+7943039	WeakeningEffect	True	True	False			
+7943040	WeakeningEffect	True	True	False	Infection: Healing Resistant	You're unaffected by healing.	icon_status.poisondown_tex
+7943041	Stun	True	False	False			
+7943042	Stun	True	False	False	Infection: Stun	You're unable to move	icon_status.confuseup_tex
+7943043	Stun	True	False	False			
+7943044	Stun	True	False	False			
+7943045	WeakeningEffect	True	True	True	Frost Aura	You will take damage unless you warm up.	icon_status.icedamage_tex
+7943046	WeakeningEffect	True	True	True	Steam Aura	You will take damage unless you cool down.	icon_status.firedamage_tex
+7943047	WeakeningEffect	False	True	False			
+7943048	WeakeningEffect	False	True	False			
+7943049	WeakeningEffect	False	True	False			
+7943050	WeakeningEffect	False	True	False			
+7943051	WeakeningEffect	False	True	True			
+7943052	WeakeningEffect	False	True	True			
 8000000	Buff	True	True	False	30% XP Boost (5 hours)	Increases XP rewards from killing mobs by 30% for 5 game hours.	icon_items.f2p_xpbooster_tex
 8000001	Buff	True	True	False	30% XP Boost (10 hours)	Increases XP rewards from killing mobs by 30% for 10 game hours.	icon_items.f2p_xpbooster_tex
 8000002	Buff	True	True	False	30% XP Boost (30 hours)	Increases XP rewards from killing mobs by 30% for 30 game hours.	icon_items.f2p_xpbooster_tex
@@ -3649,6 +3810,147 @@
 9810017	WeakeningEffect	False	True	True	Lakan's Vessel	Surrendered their bodies to Lakan.	icon_status.cruel_slayer_3_tex
 9810018	Stun	False	False	False			
 9810019	WeakeningEffect	False	True	True			
+9940000	Stun	False	True	True			
+9940001	WeakeningEffect	True	False	False	Searing Wound	You are losing health due to the Searing Wound.	icon_status.minushp_tex
+9940002	WeakeningEffect	True	False	False	Frostbite	Your speed is decreased.	icon_skills.freezingtheearth_tex
+9941001	Stun	True	False	False	Head Trauma	Birchback is disoriented.	icon_status.confuseup_tex
+9941002	WeakeningEffect	True	True	False	Birchback's Interest	Birchback has noticed you. Prepare for an attack.	icon_skills.througharrow_tex
+9941003	WeakeningEffect	False	True	False			
+9941004	Stun	False	False	False			
+9941005	Stun	False	False	False			
+9941006	WeakeningEffect	False	True	True			
+9941007	WeakeningEffect	False	True	True			
+9941008	WeakeningEffect	False	True	True			
+9941009	WeakeningEffect	False	True	True			
+9941010	WeakeningEffect	False	True	True			
+9941011	Buff	False	False	True	Steady	While Birchback is steady, he can't slip.	icon_status.balanceup_tex
+9941012	WeakeningEffect	False	True	False			
+9941013	Stun	False	False	False			
+9941014	Stun	True	False	False	Bleeding	HP decreases steadily due to falling.	icon_status.injuredbtdarkness_tex
+9941015	Stun	True	False	False	Impact	You are helpless due to the impact.	icon_status.confuseup_tex
+9941016	WeakeningEffect	False	True	False			
+9941017	WeakeningEffect	False	True	False			
+9941018	WeakeningEffect	False	True	True			
+9941019	WeakeningEffect	False	True	True			
+9941020	WeakeningEffect	False	True	True			
+9941021	Buff	True	True	True			
+9941022	DamageOverTime	True	False	False	Sticky Liquid	You cannot move due to the sticky liquid.	icon_skills.curseofshackle_tex
+9941023	WeakeningEffect	False	True	True			
+9941024	WeakeningEffect	False	True	True			
+9941025	WeakeningEffect	False	True	True			
+9941026	Buff	True	True	True	First Cheer	The baby monkey cheers for Birchback, granting increased attack power and attack speed	icon_status.plusciriticalresist_tex
+9941027	Buff	True	True	True	Second Cheer	The baby monkey cheers for Birchback, granting increased attack power and attack speed	icon_status.plusciriticalresist_tex
+9941028	Buff	True	True	True	Third Cheer	The baby monkey cheers for Birchback, granting increased attack power and attack speed	icon_status.plusciriticalresist_tex
+9941029	WeakeningEffect	False	True	False			
+9941030	WeakeningEffect	True	True	False	Tree Monkey's Interest	The tree monkey has noticed you and is about to throw a banana peel.	icon_items.banana_tex
+9941031	WeakeningEffect	False	True	True			
+9941032	Stun	False	False	False			
+9941034	WeakeningEffect	False	True	False			
+9941035	WeakeningEffect	False	True	False			
+9942001	WeakeningEffect	False	True	False			
+9942002	WeakeningEffect	True	True	True			
+9942003	WeakeningEffect	True	True	True			
+9942004	DamageOverTime	False	False	False			
+9942005	DamageOverTime	False	True	False			
+9942006	WeakeningEffect	True	True	False	Noticed	Lehnym noticed you. Better keep moving.	icon_status.minusfocus_tex
+9942007	WeakeningEffect	True	True	False	Noticed	Lehnym noticed you. Better keep moving.	icon_status.minusfocus_tex
+9942008	Stun	True	False	False			
+9942009	Stun	True	False	False			
+9942010	WeakeningEffect	False	True	False			
+9942011	WeakeningEffect	False	True	True			
+9942012	WeakeningEffect	False	True	True			
+9942013	WeakeningEffect	True	True	False			icon_items.cancel_lockon_potion_level_51_tex
+9942014	WeakeningEffect	False	True	False			
+9942015	Buff	True	True	False			
+9942016	WeakeningEffect	False	True	False			
+9942017	WeakeningEffect	False	True	True			
+9942018	WeakeningEffect	False	True	False			
+9942019	WeakeningEffect	False	True	False			
+9942020	WeakeningEffect	False	True	False			
+9942021	Stun	False	False	False			
+9942022	WeakeningEffect	False	True	False			
+9942023	WeakeningEffect	True	True	False			
+9942024	WeakeningEffect	True	True	False			
+9942025	WeakeningEffect	False	True	False			
+9942026	WeakeningEffect	False	True	False			
+9942027	WeakeningEffect	True	True	False			
+9942028	DamageOverTime	False	True	False			
+9942029	DamageOverTime	False	True	False			
+9942030	DamageOverTime	False	True	False			
+9942031	DamageOverTime	False	True	False			
+9942032	DamageOverTime	False	True	False			
+9942033	DamageOverTime	False	False	False			
+9942034	WeakeningEffect	False	True	True			
+9942035	WeakeningEffect	False	True	True			
+9942036	Stun	False	False	False			
+9942037	WeakeningEffect	True	True	True	Red Ore Energy	You are wreathed in red ore energy. The red light cannot harm you.	icon_status.immunedebuff_tex
+9942038	WeakeningEffect	True	True	True	Blue Ore Energy	You are wreathed in blue ore energy. The blue light cannot harm you.	icon_status.immunedebuff_tex
+9942039	WeakeningEffect	True	True	True	White Ore Energy	You are wreathed in white ore energy. The white light cannot harm you.	icon_status.immunedebuff_tex
+9942040	DamageOverTime	False	True	False			
+9942041	DamageOverTime	False	True	False			
+9942042	WeakeningEffect	False	True	False			
+9942043	WeakeningEffect	False	True	True			
+9942044	WeakeningEffect	False	True	True			
+9942045	WeakeningEffect	False	True	True			
+9942046	WeakeningEffect	False	True	True			
+9942047	WeakeningEffect	False	True	True			
+9942048	WeakeningEffect	False	True	True			
+9942049	WeakeningEffect	False	True	False			
+9942050	WeakeningEffect	False	True	True			
+9942051	DamageOverTime	True	False	False	Electric Shock	Your speed is reduced, you cannot use skills, and your health is decreasing.	icon_status.paralyzestatus_tex
+9943001	WeakeningEffect	False	True	True			
+9943002	WeakeningEffect	False	True	True			
+9943003	WeakeningEffect	False	True	False			
+9943004	WeakeningEffect	False	True	False			
+9943005	WeakeningEffect	False	True	False			
+9943006	WeakeningEffect	False	True	False			
+9943007	WeakeningEffect	False	True	True			
+9943008	WeakeningEffect	False	True	True			
+9943009	WeakeningEffect	False	True	True			
+9943010	WeakeningEffect	False	True	True			
+9943011	WeakeningEffect	False	True	True			
+9943012	WeakeningEffect	False	True	False			
+9943013	WeakeningEffect	False	True	False			
+9943014	WeakeningEffect	False	True	True			
+9943015	WeakeningEffect	False	True	True			
+9943016	Buff	True	True	False			
+9943017	WeakeningEffect	False	True	False			
+9943018	DamageOverTime	False	True	True			
+9943019	DamageOverTime	False	True	False			
+9943020	DamageOverTime	False	True	True			
+9943021	WeakeningEffect	False	True	False			
+9943022	WeakeningEffect	False	True	True			
+9943023	WeakeningEffect	False	True	False			
+9943024	WeakeningEffect	False	True	False			
+9943025	WeakeningEffect	False	True	False			
+9943026	WeakeningEffect	False	True	False			
+9943027	WeakeningEffect	True	False	False			
+9943028	Buff	True	True	False	Swift Movement: Preparation	Goblin movement speed is about to be enhanced.	icon_status.plusmove_tex
+9943029	WeakeningEffect	False	True	False			
+9943030	WeakeningEffect	False	True	False			
+9943031	WeakeningEffect	False	True	True			
+9943032	WeakeningEffect	False	True	True			
+9943033	WeakeningEffect	False	True	True			
+9943034	Buff	True	True	True	Swift Movement	Goblin movement speed has been enhanced significantly.	icon_status.plusmove_tex
+9943035	WeakeningEffect	False	True	True			
+9943036	WeakeningEffect	False	True	False			
+9943037	WeakeningEffect	False	True	True			
+9943038	WeakeningEffect	True	True	True			
+9943039	WeakeningEffect	False	True	False			
+9943040	WeakeningEffect	True	True	False	Infection: Healing Resistant	You're unaffected by healing.	icon_status.poisondown_tex
+9943041	Stun	True	False	False			
+9943042	Stun	True	False	False	Infection: Stun	You're unable to move.	icon_status.confuseup_tex
+9943043	Stun	True	False	False			
+9943044	Stun	True	False	False			
+9943045	WeakeningEffect	True	True	True	Frost Aura	You will take damage unless you warm up.	icon_status.icedamage_tex
+9943046	WeakeningEffect	True	True	True	Steam Aura	You will take damage unless you cool down.	icon_status.firedamage_tex
+9943047	WeakeningEffect	False	True	False			
+9943048	WeakeningEffect	False	True	False			
+9943049	WeakeningEffect	False	True	False			
+9943051	WeakeningEffect	False	True	True			
+9943052	WeakeningEffect	False	True	True			
+9943053	WeakeningEffect	False	True	True			
+9943054	WeakeningEffect	True	True	True	Ominous Power	Gaaruksalk is now vulnerable.	icon_status.heat_tex
 9999001	DamageOverTime	False	False	True			
 9999002	DamageOverTime	False	False	True			
 9999003	DamageOverTime	False	False	True			
@@ -3671,6 +3973,8 @@
 10151000	Buff	True	True	False	Shadow Step	Using Shadow Jump again will trigger a cooldown.	icon_status.instantleap_continuous_tex
 10151010	Buff	True	True	False	Shadow Reaping	Reap the shadows around you. While reaping, the cooldown time of Double Shear, Grim Strike, Pendulum Strike, Whipsaw, Sundering Strike, Cable Step, Death Spiral, and Smite are reduced by 70%.	icon_status.descentofdarkness_tex
 10151011	Buff	False	True	False	Shadow Reaping	Resets the cooldowns of Double Shear, Grim Strike, Pendulum Strike, Whipsaw, Sundering Strike, Cable Step, Death Spiral, and Smite.	icon_status.descentofdarkness_tex
+10151012	Buff	True	True	True	Quick Shadow Reaping	Hitting a monster increases Attack Speed by 5%. The effect stacks up to 5 times.	icon_skills.descentofdarkness_tex
+10151013	Buff	False	True	False			
 10151020	Buff	False	True	False	Chain with 2 normal attacks	Invisible buff. If you see this buff, report it as a bug!	icon_skills.comboattack2_tex
 10151021	Buff	False	True	False	Chain with 3 normal attacks	Invisible buff. If you see this buff, report it as a bug!	icon_skills.comboattack2_tex
 10151022	Buff	False	True	False	Chain with 4 normal attacks	Invisible buff. If you see this buff, report it as a bug!	icon_skills.comboattack2_tex
@@ -3747,6 +4051,7 @@
 10152094	Buff	False	True	False			
 10152095	Buff	False	True	False			
 10152096	Buff	False	True	False	Invisible Abnormality	This abnormality is not supposed to be shown	
+10152097	Buff	False	True	False	Balder's Vengeance I	You are Invincible while casting Balder's Vengeance.	
 10152100	Buff	True	True	False	One with the Gun	Willpower can be stored for up to 60 seconds, after which it decays rapidly. Damaging an enemy restarts this countdown.	icon_skills.energycharging_tex
 10152110	Buff	True	True	False	Emergency Barrier	An emergency barrier absorbs up to $H_W_GOOD27858$COLOR_END damage.	icon_skills.emergencyshield_tex
 10152111	Buff	True	True	False	Emergency Barrier	An emergency barrier absorbs up to $H_W_GOOD34900$COLOR_END damage.	icon_skills.emergencyshield_tex
@@ -3920,6 +4225,7 @@
 10155300	WeakeningEffect	False	True	False			
 10155310	Buff	False	True	False			
 10155320	Buff	False	True	True			
+10155400	Stun	True	False	False	Backstab	Cannot move. Knockdown cancels the effect.	icon_skills.mooncatch_tex
 10230001	Stun	True	False	False			icon_status.sealskill_tex
 15200001	Buff	True	True	False	Lavathus' Shell	Increases Endurance and maximum HP by $H_W_GOOD20%$COLOR_END for $time. Effect persists after death, but ends when leaving the Civil Unrest zone.	icon_skills.emergencyshield_tex
 15200002	Buff	True	True	False	Drakhan's Flame	Increases Power by $H_W_GOOD20%$COLOR_END for $time. Effect persists after death, but ends when leaving the Civil Unrest zone.	icon_items.campfire_tex
@@ -4507,6 +4813,73 @@
 71600004	DamageOverTime	True	False	False	Dark Siphon	Reduces HP by $H_W_BAD5%$COLOR_END of maximum every $H_W_BAD2$COLOR_END second1.	icon_status.firedamage_tex
 71600010	DamageOverTime	True	False	False	Scorched Scar	Reduces HP by $H_W_BAD5%$COLOR_END of maximum every $H_W_BAD1$COLOR_END second.	icon_status.firedamage_tex
 71600020	WeakeningEffect	False	False	False			
+73500000	Buff	False	True	False	BTS	Damage of this character is not diverted.	
+73500001	Buff	True	True	True	Ventilator On	You do not take damage from falling due to the ventilator wind.	icon_skills.rage_tex
+73500002	WeakeningEffect	False	True	True	BTS	This NPC is resisting all damage and reactions.	
+73500003	Buff	False	True	False	BTS	This character is identified as a healer.	
+73500004	Buff	False	True	False	BTS	This character is identified as a tank.	
+73500005	Buff	False	True	True	BTS	This character is not identified as a tank.	
+73500006	WeakeningEffect	False	True	True	BTS	This NPC is immune to all damage, debuffs, and reactions.	
+73501000	Buff	True	True	False	Protected Energy	The vent safely transfers energy to Ventarun. You do not take falling damage while passing through the vent.	icon_skills.rage_tex
+73501001	DamageOverTime	True	False	False	Plasma Exposure	The time bomb has exploded! Reduces HP by $H_W_BAD4%$COLOR_END every $H_W_BAD1$COLOR_END second.	icon_status.paralyzestatus_tex
+73501002	Buff	False	True	False	BTS	This character is flying! Character will not be affected by shock or teleport skills.	
+73501003	Buff	False	True	False	BTS	This NPC cannot use explosive attacks.	
+73501004	Stun	True	False	False	Dazed	You are stunned by Ventarun's attack and cannot move.	icon_status.confuseup_tex
+73501005	WeakeningEffect	True	False	False	Plasma Impact	The time bomb has exploded! Movement Speed has been reduced by $H_W_BAD50%$COLOR_END, Skill's Movement Distance has been reduced by $H_W_BAD30%$COLOR_END. This effect cannot be removed.	icon_status.minusmove_tex
+73501006	Buff	False	True	False	BTS	This NPC can summon a time bomb.	
+73501007	Buff	False	True	False	BTS	This character will not be affected by the wipe out skills while the effect is active.	
+73501008	WeakeningEffect	True	False	False	Nerve Damage	You cannot use skills due to Ventarun's plasma.	icon_status.vergoscurse_tex
+73501009	Buff	False	True	False	BTS	This NPC can activate the ventilator.	
+73501010	Buff	False	True	False	BTS	This NPC cannot use the continuous explosion pattern while the effect is active.	
+73501011	Buff	False	True	False	BTS	This NPC cannot use the activate ventilator pattern while the effect is active.	
+73501012	WeakeningEffect	True	True	False	Recall	Ventarun's magnetic field pulls you in.	icon_status.electriceffect3_tex
+73501013	Buff	False	True	False	BTS	A time bomb has been set. The continuous explosion pattern, wipe out pattern, and ventilator pattern will not be used sequentially.	
+73501014	Buff	False	True	False	BTS	The ventilator has been activated. The wipe out pattern will not be used sequentially.	
+73501015	Buff	False	True	False	BTS	The ventilator has been activated. The Time Bomb pattern will not be used sequentially.	
+73501016	Buff	False	True	False	BTS	RK-9 Kennel Achievement Effect - Intake and Exhaust Facility Access	
+73501017	Buff	False	True	False	BTS	Prevents taking double damage from the intake and exhaust facility.	
+73501018	Buff	False	True	False	BTS	This is an achievement effect earned when you disposed 100 time bombs.	
+73501019	Buff	False	True	True	BTS	You can set an invisible aggro NPC as a requirement.	
+73502000	DamageOverTime	True	False	False	Electric Shock	Reduces HP by $H_W_BAD6%$COLOR_END every $H_W_BAD2$COLOR_END second1. Stacks up to 12 times.	icon_skills.electricshock_tex
+73502001	WeakeningEffect	False	True	True	BTS	This NPC resists to all damage, reaction and effects.	
+73502002	Buff	False	True	True	BTS	This NPC will first initiate an electromagnetic guided attack before the Electric Explosion pattern.	
+73502003	Buff	False	True	True	BTS	This NPC will first initiate a melee explosive attack before the Electic Explosion pattern.	
+73502004	Buff	False	True	False	BTS	This character is hit by the Saw Blade attack. Hexapleon can now form a chain attack.	
+73502005	WeakeningEffect	True	False	False	Electric Shock	You are electrified and unable to use skills.	icon_skills.electricshock2_tex
+73502006	Buff	False	True	False	BTS	This NPC attacks by 100% on cooldown.	
+73502007	WeakeningEffect	False	True	True	BTS	This abnormality outputs the NPC's effect.	
+73503000	Buff	False	True	False	BTS	This NPC cannot use Moonlight Shockwave during the effect.	
+73503001	Stun	True	False	False	Dazed	You are stunned by RK-9's attack, and cannot move.	icon_status.confuseup_tex
+73503002	Buff	False	True	False	BTS	This NPC cannot use Moonlight Shockwave right now.	
+73503003	Buff	False	True	False	BTS	This NPC cannot use the creature detection pattern during the effect.	
+73503004	Buff	False	True	False	BTS	This NPC cannot use the creature detection pattern right now.	
+73503005	Buff	False	True	True	BTS	This NPC can now empower the boss to activate the enhanced heat detection protocal.	
+73503006	Buff	False	True	True	BTS	This NPC can empower the boss to activate the enhanced heat detection protocal in ortho-order.	
+73503007	Buff	False	True	True	BTS	This NPC can now empower the boss to activate the enhanced heat detection protocal in reverse order.	
+73503008	Buff	False	True	True	BTS	This NPC's chest armor has been destroyed during the current part destruction pattern, and will now continuosly malfunction.	
+73503009	DamageOverTime	True	True	False	Laser Shock	You will receive continuous damage from the high-energy laser. Reduces HP by $H_W_BAD6%$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect cannot be removed.	icon_status.fullelectriceffect_tex
+73503100	Buff	False	True	False	BTS	This NPC cannot use the heat detection protocal pattern right now.	
+73503101	Buff	False	True	True	BTS	This NPC will first initiate a melee attack during the heat detection protocal pattern.	
+73503102	Buff	False	True	True	BTS	This NPC will first initiate a ranged attack during the heat detection protocal pattern.	
+73503103	Buff	False	True	True	BTS	This NPC will first initiate a full-ranged attack during the heat detection protocal pattern.	
+73503104	Buff	False	True	True	BTS	This NPC will initiate a melee attack during the heat detection protocal pattern after the first attack.	
+73503105	Buff	False	True	True	BTS	This NPC will initiate a ranged attack during the heat detection protocal pattern after the first attack.	
+73503106	Buff	False	True	True	BTS	This NPC will initiate a full-ranged attack during the heat detection protocal pattern after the first attack.	
+73503107	Buff	False	True	True	BTS	The chest armor has not been destroyed. The NPC will eliminate intruders according to normal behavior.	
+73503108	Buff	True	True	True	BTS	This NPC will attack in ortho-order during the heat detection protocal.	
+73503109	Buff	True	True	True	BTS	This NPC will attack in reverse order during the heat detection protocal.	
+73503200	Buff	False	True	False	BTS	This NPC cannot use the mini bomb skill to ranged targets.	
+73503201	Buff	False	True	False	BTS	This NPC cannot use the mini bomb skill to targets being resurrected.	
+73503300	Buff	False	True	True	BTS	This NPC can activate the protection protocal.	
+73503301	Buff	True	True	True	Protocal: Protection	The RK-9 system has activated protection protocal. All intruders will be eliminated.	icon_skills.emergencyshield_tex
+73503302	Buff	False	True	False	BTS	This NPC has shut down temporarily, and cannot move or use skills for 5,000 ms.	
+73503303	Buff	False	True	False	BTS	This NPC has malfunctioned. The Bloodshard becomes vulnurable for 20,000 ms, and can be destroyed.	
+73503400	Buff	False	True	False	BTS	This NPC cannot use the protection protocal pattern during the effect.	
+73503401	Buff	True	True	True	Protocal: Protection	The RK-9 system has activated protection protocal. All intruders will be eliminated.	icon_skills.emergencyshield_tex
+73503402	Buff	False	True	False	BTS	This NPC has shut down temporarily, and cannot move or use skills for 5,000 ms.	
+73503403	WeakeningEffect	False	True	False	BTS	This NPC is immune to all damage, debuffs, and reactions.	
+73504000	WeakeningEffect	True	True	True	Magnetic Field	The magnetic field keeps you from using skills.	icon_status.sealskill_tex
+73504001	WeakeningEffect	True	True	False	Electrocuted	You are shocked and cannot move.	icon_skills.excesselectron_tex
 74300002	DamageOverTime	True	True	False	Tulgey Fog	Greatly increase Movement Speed in the fog.	icon_status.darkeffect_tex
 74300003	Buff	True	True	True	Whet Appetite	Increases Power by $H_W_GOOD50%$COLOR_END.	icon_status.minushp_tex
 74300012	WeakeningEffect	True	True	False	Puzzle Order: Red	Hit the red puzzle piece in the order indicated by the numbers on the icon or suffer impending death.	icon_status.battlecommand03_tex
@@ -4735,6 +5108,82 @@
 91600036	DamageOverTime	False	False	False			
 91600037	DamageOverTime	False	False	False			icon_status.cruel_slayer_3_tex
 91600038	Buff	False	True	False	Aeonalis Pylon recovered	Abnormality for HP replenishment of Aeonalis Pylon	icon_status.aura_of_regeneration_hp_tex
+93500000	Buff	False	True	False	BTS	Damage of this character is not diverted.	
+93500001	Buff	False	True	False	BTS	The ventilator wind is causing more damage from falling.	
+93500002	WeakeningEffect	False	True	True	BTS	This NPC is resisting all damage and reactions.	
+93500003	Buff	False	True	False	BTS	This character is identified as a healer.	
+93500004	Buff	False	True	False	BTS	This character is identified as a tank.	
+93500005	Buff	False	True	True	BTS	This character is not identified as a tank.	
+93500006	WeakeningEffect	False	True	True	BTS	This NPC is immune to all damage, debuffs, and reactions.	
+93501000	Buff	True	True	False	Protected Energy	The vent safely transfers energy to Ventarun. You do not take falling damage while passing through the vent.	icon_skills.rage_tex
+93501001	DamageOverTime	True	True	False	Plasma Exposure	The time bomb has exploded! Reduces HP by $H_W_BAD8%$COLOR_END every $H_W_BAD1$COLOR_END second. This effect cannot be removed.	icon_status.paralyzestatus_tex
+93501002	Buff	False	True	False	BTS	This character is flying! Character will not be affected by shock or teleport skills.	
+93501003	Buff	False	True	False	BTS	This NPC cannot use explosive attacks.	
+93501004	Stun	True	False	False	Dazed	You are stunned by Ventarun's attack and cannot move.	icon_status.confuseup_tex
+93501005	WeakeningEffect	True	True	False	Plasma Impact	The time bomb has exploded! Movement Speed has been reduced by $H_W_BAD50%$COLOR_END, Skill's Movement Distance has been reduced by $H_W_BAD30%$COLOR_END. This effect cannot be removed.	icon_status.minusmove_tex
+93501006	Buff	False	True	False	BTS	This NPC can summon a time bomb.	
+93501007	Buff	False	True	False	BTS	This character will not be affected by the wipe out skills while the effect is active.	
+93501008	WeakeningEffect	True	True	False	Nerve Damage	You cannot use skills due to Ventarun's plasma.	icon_status.vergoscurse_tex
+93501009	Buff	False	True	False	BTS	This NPC can activate the ventilator.	
+93501010	Buff	False	True	False	BTS	This NPC cannot use the continuous explosion pattern while the effect is active.	
+93501011	Buff	False	True	False	BTS	This NPC cannot use the activate ventilator pattern while the effect is active.	
+93501012	WeakeningEffect	True	True	False	Recall	Ventarun's magnetic field pulls you in.	icon_status.electriceffect3_tex
+93501013	Buff	False	True	False	BTS	A time bomb has been set. The continuous explosion pattern, wipe out pattern, and ventilator pattern will not be used sequentially.	
+93501014	Buff	False	True	False	BTS	The ventilator has been activated. The wipe out pattern will not be used sequentially.	
+93501015	Buff	False	True	False	BTS	The ventilator has been activated. The Time Bomb pattern will not be used sequentially.	
+93501016	Buff	False	True	False	BTS	This character is immune to all damage.	
+93501017	Buff	False	True	False	BTS	Prevents taking double damage from the intake and exhaust facility.	
+93501018	Buff	False	True	False	BTS	This is an achievement effect earned when you disposed 100 time bombs.	
+93501019	Buff	False	True	True	BTS	You can set an invisible aggro NPC as a requirement.	
+93501020	Buff	False	True	False	BTS	This character has used the intake facility. To prevent BTS 159600, you will not take fall damage for 1 second.	
+93502000	DamageOverTime	True	False	False	Electric Shock	Reduces HP by $H_W_BAD10%$COLOR_END every $H_W_BAD2$COLOR_END second1. Stacks up to 12 times.	icon_skills.electricshock_tex
+93502001	WeakeningEffect	False	True	True	BTS	This NPC resists to all damage, reaction and effects.	
+93502002	Buff	False	True	True	BTS	This NPC will first initiate an electromagnetic guided attack before the Electric Explosion pattern.	
+93502003	Buff	False	True	True	BTS	This NPC will first initiate a melee explosive attack before the Electic Explosion pattern.	
+93502004	Buff	False	True	False	BTS	This character is hit by the Saw Blade attack. Hexapleon can now form a chain attack.	
+93502005	WeakeningEffect	True	False	False	Electric Shock	You are electrified and unable to use skills.	icon_skills.electricshock2_tex
+93502006	Buff	False	True	False	BTS	This NPC attacks by 100% on cooldown.	
+93502007	WeakeningEffect	False	True	True	BTS	This abnormality outputs the NPC's effect.	
+93502008	Buff	False	True	False	BTS	This is an achievement effect earned when you have not earned the Electric Shock effect.	
+93502009	Buff	False	True	True	BTS	This is an effect which prevents you from receiving Abnormality 93502008, when you earn the Electric Shock effect.	
+93503000	Buff	False	True	False	BTS	This NPC cannot use Moonlight Shockwave during the effect.	
+93503001	Stun	True	False	False	Dazed	You are stunned by RK-9's attack, and cannot move.	icon_status.confuseup_tex
+93503002	Buff	False	True	False	BTS	This NPC cannot use Moonlight Shockwave right now.	
+93503003	Buff	False	True	False	BTS	This NPC cannot use the creature detection pattern during the effect.	
+93503004	Buff	False	True	False	BTS	This NPC cannot use the creature detection pattern right now.	
+93503005	Buff	False	True	True	BTS	This NPC can now empower the boss to activate the enhanced heat detection protocal.	
+93503006	Buff	False	True	True	BTS	This NPC can empower the boss to activate the enhanced heat detection protocal in ortho-order.	
+93503007	Buff	False	True	True	BTS	This NPC can now empower the boss to activate the enhanced heat detection protocal in reverse order.	
+93503008	Buff	False	True	True	BTS	This NPC's chest armor has been destroyed during the current part destruction pattern, and will now continuosly malfunction.	
+93503009	DamageOverTime	True	True	False	Laser Shock	You will receive continuous damage from the high-energy laser. Reduces HP by $H_W_BAD10%$COLOR_END every $H_W_BAD2$COLOR_END second1. This effect cannot be removed.	icon_status.fullelectriceffect_tex
+93503010	Buff	False	True	False	BTS	This NPC cannot use the heat detection protocal pattern for the duration.	
+93503011	Buff	False	True	False	BTS	This NPC cannot adjust the RK-9's system parameters.	
+93503100	Buff	False	True	False	BTS	This NPC cannot use the heat detection protocal pattern right now.	
+93503101	Buff	False	True	True	BTS	This NPC will first initiate a melee attack during the heat detection protocal pattern.	
+93503102	Buff	False	True	True	BTS	This NPC will first initiate a ranged attack during the heat detection protocal pattern.	
+93503103	Buff	False	True	True	BTS	This NPC will first initiate a full-ranged attack during the heat detection protocal pattern.	
+93503104	Buff	False	True	True	BTS	This NPC will initiate a melee attack during the heat detection protocal pattern after the first attack.	
+93503105	Buff	False	True	True	BTS	This NPC will initiate a ranged attack during the heat detection protocal pattern after the first attack.	
+93503106	Buff	False	True	True	BTS	This NPC will initiate a full-ranged attack during the heat detection protocal pattern after the first attack.	
+93503107	Buff	False	True	True	BTS	The chest armor has not been destroyed. The NPC will eliminate intruders according to normal behavior.	
+93503108	Buff	False	True	True	BTS	This NPC will attack in ortho-order during the heat detection protocal.	icon_status.cruel_slayer_2_tex
+93503109	Buff	False	True	True	BTS	This NPC will attack in reverse order during the heat detection protocal.	icon_status.cruel_slayer_3_tex
+93503200	Buff	False	True	False	BTS	This NPC cannot use the mini bomb skill to ranged targets.	
+93503201	Buff	False	True	False	BTS	This NPC cannot use the mini bomb skill to targets being resurrected.	
+93503300	Buff	False	True	True	BTS	This NPC can activate the protection protocal.	
+93503301	Buff	True	True	True	Protocal: Protection	The RK-9 system has activated protection protocal. All intruders will be eliminated.	icon_skills.emergencyshield_tex
+93503302	Buff	False	True	False	BTS	This NPC has shut down temporarily, and cannot move or use skills for 5,000 ms.	
+93503303	Buff	False	True	False	BTS	This NPC has malfunctioned. The Bloodshard becomes vulnurable for 20,000 ms, and can be destroyed.	
+93503304	Buff	True	True	True	Emergency Defense System	RK-9 has increased defense and attack.	icon_status.dimensionguard_tex
+93503400	Buff	False	True	False	BTS	This NPC cannot use the protection protocal pattern during the effect.	
+93503401	Buff	True	True	True	Protocal: Protection	The RK-9 system has activated protection protocal. All intruders will be eliminated.	icon_skills.emergencyshield_tex
+93503402	Buff	False	True	False	BTS	This NPC has shut down temporarily, and cannot move or use skills for 5,000 ms.	
+93503500	Buff	False	True	False	BTS	The melee explosive attack was not used during the Radar System pattern.	
+93503501	Buff	False	True	False	BTS	Clear normal mode 1 time	
+93503502	Buff	False	True	False	BTS	Clear hard mode 1 time	
+93503503	Buff	False	True	False	BTS	Clear hard mode 77 times	
+93504000	WeakeningEffect	True	True	True	Magnetic Field	The magnetic field keeps you from using skills.	icon_status.sealskill_tex
+93504001	WeakeningEffect	True	True	False	Electrocuted	You are shocked and cannot move.	icon_skills.excesselectron_tex
 97000001	WeakeningEffect	True	False	True	Prey	A hungry arachnen is hunting you.	icon_status.curse_tex
 97000002	WeakeningEffect	True	True	True	Satiety	Full and taking a rest.	icon_status.sleepstatus_tex
 97000003	WeakeningEffect	True	True	False	Baby Venom	Decreases Movement Speed by half. Reduces HP by $H_W_BAD10%$COLOR_END of maximum every $H_W_BAD0$COLOR_END second1.	icon_status.diseasedown_tex
@@ -4895,7 +5344,7 @@
 98000104	Buff	True	True	True	Chain of Attack III	Increases skill damage by $H_W_GOOD10%$COLOR_END. Reduces damage taken by $H_W_GOOD10%$COLOR_END. Increases Attack Speed by $H_W_GOOD4%$COLOR_END.	
 98000105	Buff	True	True	True	Chain of Recovery III	Increases skill damage by $H_W_GOOD10%$COLOR_END.Reduces damage taken by $H_W_GOOD10%$COLOR_END. Increases Attack Speed by $H_W_GOOD4%$COLOR_END.	
 98000106	WeakeningEffect	True	False	False	Glyph of Enfeeblement	Decreases Endurance by $H_W_BAD10%$COLOR_END.	icon_crest.crestactivedefencedown_tex
-98000107	Buff	True	True	False	Energy Stars IV	Increases Power by $H_W_GOOD40$COLOR_END; Attack Speed by $H_W_GOOD8$COLOR_END.	icon_skills.divinelightning_tex
+98000107	Buff	True	True	False	Energy Stars IV	Increases Power by $H_W_GOOD48$COLOR_END; Attack Speed by $H_W_GOOD9,6$COLOR_END.	icon_skills.divinelightning_tex
 98000108	Buff	True	True	False	Glyph of Grounding	Increases Endurance by $H_W_GOOD10%$COLOR_END.	icon_crest.crestactivedefenceup_tex
 98000109	Buff	True	True	False	Blessing of Shakan III	Increases non-combat Movement Speed by $H_W_GOOD10$COLOR_END. Increases Power by $H_W_GOOD25$COLOR_END.	icon_skills.attackup_tex
 98000110	Buff	True	True	False	Blessing of Balder V	Increases Endurance by 11. Increases all resistances by 5. Recovers a small amount of HP every $H_W_GOOD2 seconds$COLOR_END.	icon_skills.agilitybless_tex
@@ -5366,6 +5815,7 @@
 81000002	Buff	True	True	False	EP XP increases by 30	EP XP increases by $H_W_GOOD30%$COLOR_END.	icon_items.ep_grow30_tex
 81000003	Buff	True	True	False	EP XP increases by 50	EP XP increases by $H_W_GOOD50%$COLOR_END.	icon_items.ep_grow50_tex
 81000004	Buff	True	True	False	EP XP increases by 100	EP XP increases by $H_W_GOOD100%$COLOR_END.	icon_items.ep_grow100_tex
+81000005	Buff	False	True	True	PC Café EP XP increases by 10	EP XP increases by $H_W_GOOD10%$COLOR_END.	icon_items.ep_grow30_tex
 81010101	Buff	True	True	False	Damage Decreased	Damage is decreased. Effect ends in combat mode	icon_ep.ep_defense_wellup_tex
 81010102	Buff	True	True	False	Damage Decreased	Damage is decreased. Effect ends in combat mode	icon_ep.ep_defense_wellup_tex
 81010103	Buff	True	True	False	Damage Decreased	Damage is decreased. Effect ends in combat mode	icon_ep.ep_defense_wellup_tex
@@ -6460,6 +6910,8 @@
 5020000	Buff	True	True	False	Substantial Enchantment Blessing	Your enchantment chance is substantially increased. Applies to items of all tiers, but only up to enchantment level +12.	icon_items.parts_heavyarmorc5_tex
 5020001	Buff	True	True	False	Greater Enchantment Blessing	Your enchantment chance is greatly increased. Applies to items of all tiers, but only up to enchantment level +12.	icon_items.parts_heavyarmorc5_tex
 5020002	Buff	True	True	False	Massive Enchantment Blessing	Your enchantment chance is massively increased. Applies to items of all tiers, but only up to enchantment level +12.	icon_items.parts_heavyarmorc5_tex
+5020003	Buff	True	True	True			icon_items.q_closedspace_stone_05_tex
+5020004	Buff	True	True	True			icon_items.artisan_lamp_tex
 14400001	Buff	True	True	False	Emblem of Eminence	Provides the following effects.$BR $BRIncreases total HP by $H_W_GOOD1%$COLOR_END every second$BRIncreases the drop rate when hunting monsters by $H_W_GOOD100%$COLOR_END	icon_items.parts_magicweaponc15_tex
 14400002	Buff	True	True	False	Glorious Memento	Provides the following effects.$BR $BR Increases total HP by $H_W_GOOD7%$COLOR_END$BR Increases endurance by $H_W_GOOD20%$COLOR_END$BR Increases attack speed by $H_W_GOOD15%$COLOR_END$BR Increases skill damage by $H_W_GOOD20%$COLOR_END$BR Prevents crystals from breaking $H_W_GOOD1$COLOR_END time	icon_items.parts_lightweaponc9_tex
 14400003	Buff	True	True	False	Seal of the Undying Flame	Provides the following effects:$BR $BRIncreases maximum HP by $H_W_GOOD7%$COLOR_END$BRIncreases Endurance by $H_W_GOOD20%$COLOR_END$BRIncreases Movement Speed by $H_W_GOOD10$COLOR_END$BRIncreases Attack Speed by $H_W_GOOD15%$COLOR_END$BRRecovers $H_W_GOOD1%$COLOR_END of total HP every second$BRIncreases Skill Damage by $H_W_GOOD20%$COLOR_END$BRPrevents crystals from breaking $H_W_GOOD1$COLOR_END time$BRIncreases the drop rate when hunting monsters by $H_W_GOOD100%$COLOR_END$BRIncreases Movement Speed by $H_W_GOOD7%$COLOR_END	icon_items.parts_magicweaponc6_tex
