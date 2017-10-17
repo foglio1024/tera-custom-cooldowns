@@ -264,7 +264,13 @@
     <Compile Include="Controls\FieldSetting.xaml.cs">
       <DependentUpon>FieldSetting.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\GearItemControl.xaml.cs">
+      <DependentUpon>GearItemControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\OutlineText.cs" />
+    <Compile Include="Controls\SelectionSetting.xaml.cs">
+      <DependentUpon>SelectionSetting.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TimelineControl.xaml.cs">
       <DependentUpon>TimelineControl.xaml</DependentUpon>
     </Compile>
@@ -282,6 +288,8 @@
     <Compile Include="Converters\DungeonIdToImageConverter.cs" />
     <Compile Include="Converters\DungeonIdToNameConverter.cs" />
     <Compile Include="Converters\DungeonIdToTierColorConverter.cs" />
+    <Compile Include="Converters\GearLevelToColorConverter.cs" />
+    <Compile Include="Converters\GearLevelToFactorConverter.cs" />
     <Compile Include="Converters\IconConverter.cs" />
     <Compile Include="Converters\BoolToOpacityInverseConverter.cs" />
     <Compile Include="Converters\BoolToOpacityConverter.cs" />
@@ -337,6 +345,7 @@
     <Compile Include="Controls\Phase4BossControl.xaml.cs">
       <DependentUpon>Phase4BossControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\PieceToPathConverter.cs" />
     <Compile Include="Converters\ReadyToColorConverter.cs" />
     <Compile Include="Converters\ReadyToIconConverter.cs" />
     <Compile Include="Converters\ReadyToOpacityConverter.cs" />
@@ -375,7 +384,9 @@
     <Compile Include="Data\Dungeon.cs" />
     <Compile Include="Data\EnragePattern.cs" />
     <Compile Include="Data\Friend.cs" />
+    <Compile Include="Data\GearItem.cs" />
     <Compile Include="Data\Guard.cs" />
+    <Compile Include="Data\InventoryManager.cs" />
     <Compile Include="Data\LFG.cs" />
     <Compile Include="Data\Location.cs" />
     <Compile Include="Data\Section.cs" />
@@ -392,6 +403,7 @@
     <Compile Include="Parsing\Messages\S_FRIEND_LIST.cs" />
     <Compile Include="Parsing\Messages\C_REQUEST_GAMESTAT_PING.cs" />
     <Compile Include="Parsing\Messages\S_GUILD_TOWER_INFO.cs" />
+    <Compile Include="Parsing\Messages\S_INVEN.cs" />
     <Compile Include="Parsing\Messages\S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA.cs" />
     <Compile Include="Parsing\Messages\S_OTHER_USER_APPLY_PARTY.cs" />
     <Compile Include="Parsing\Messages\S_PARTY_MATCH_LINK.cs" />
@@ -745,6 +757,7 @@
     <Compile Include="Data\EventGroup.cs" />
     <Compile Include="ViewModels\DailyEvent.cs" />
     <Compile Include="ViewModels\InfoWindowViewModel.cs" />
+    <Compile Include="ViewModels\TccWindowViewModel.cs" />
     <Compile Include="ViewModels\TimeMarker.cs" />
     <Compile Include="ViewModels\TooltipInfo.cs" />
     <Compile Include="ViewModels\BossGageWindowViewModel.cs" />
@@ -980,6 +993,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\GearItemControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\MysticAurasIndicator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1005,6 +1022,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\RagnarokBuffControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SelectionSetting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1212,6 +1233,9 @@
     </Compile>
     <Content Include="resources\data\dungeons-def.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\EquipmentExpData.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\data\items\items-EU-EN.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
