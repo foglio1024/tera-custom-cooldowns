@@ -58,7 +58,7 @@ namespace TCC.Parsing
             TimeManager.Instance.SetGuildBamTime(false);
 
             EntitiesManager.CurrentDatabase = new MonsterDatabase(lang);
-            SessionManager.ItemsDatabase = new ItemsDatabase(lang);
+            ItemsDatabase.Reload(lang);
             AbnormalityManager.CurrentDb = new AbnormalityDatabase(lang);
             SocialDatabase.Load();
             SystemMessages.Load();
@@ -340,6 +340,9 @@ namespace TCC.Parsing
         }
         public static void HandleSpawnUser(S_SPAWN_USER p)
         {
+            if(!GroupWindowViewModel.Instance.UserExists(p.EntityId)) return;
+
+            GroupWindowViewModel.Instance.UpdateMemberGear(p);
         }
 
         public static void HandlePartyMemberBuffUpdate(S_PARTY_MEMBER_BUFF_UPDATE x)
@@ -874,6 +877,65 @@ namespace TCC.Parsing
 
         //}
 
+        public static void HandleInventory(S_INVEN x)
+        {
+            if (BuffBarWindowViewModel.Instance.Player.InfBuffs.Any(b => AbnormalityDatabase.NoctIds.Contains(b.Abnormality.Id))) return;
+            if (BuffBarWindowViewModel.Instance.Player.Buffs.Any(b => AbnormalityDatabase.BlueNoctIds.Contains(b.Abnormality.Id))) return;
+
+            if (x.First && x.More) return;
+            InfoWindowViewModel.Instance.CurrentCharacter.ClearGear();
+
+            foreach (Tuple<uint, int, uint> tuple in S_INVEN.Items)
+            {
+                if (InventoryManager.TryParseGear(tuple.Item1, out Tuple<GearTier, GearPiece> parsedPiece))
+                {
+                    var i = new GearItem(tuple.Item1, parsedPiece.Item1, parsedPiece.Item2, tuple.Item2, tuple.Item3);
+                    Console.WriteLine($"Item: {i}");
+                    InfoWindowViewModel.Instance.CurrentCharacter.Gear.Add(i);
+                }
+            }
+            InfoWindowViewModel.Instance.SelectCharacter(InfoWindowViewModel.Instance.SelectedCharacter);
+            //88273 - 88285 L weapons
+            //88286 - 88298 L armors
+            //88299 - 88301 L gloves
+            //88302 - 88304 L boots
+            //88305 L belt
+
+            //88306 - 88318 M weapons
+            //88319 - 88331 M armors
+            //88332 - 88334 M gloves
+            //88335 - 88337 M boots
+            //88338 M belt
+
+            //88339 - 88351 H weapons
+            //88352 - 88364 H armors
+            //88365 - 88367 H gloves
+            //88368 - 88370 H boots
+            //88371 H belt
+
+            //88372 - 88384 T weapons
+            //88385 - 88397 T armors
+            //88398 - 88400 T gloves
+            //88401 - 88403 T boots
+            //88404 T belt
+
+            //88405 - 88407 L crit  set (neck/earr/ring)
+            //88408 - 88410 L power set
+            //88411 L circlet
+
+            //88412 - 88414 M crit  set (neck/earr/ring)
+            //88415 - 88417 M power set
+            //88418 M circlet
+
+            //88419 - 88421 H crit  set (neck/earr/ring)
+            //88422 - 88424 H power set
+            //88425 H circlet
+
+            //88426 - 88428 T crit  set (neck/earr/ring)
+            //88429 - 88431 T power set
+            //88432 T circlet
+
+        }
     }
 
 }
