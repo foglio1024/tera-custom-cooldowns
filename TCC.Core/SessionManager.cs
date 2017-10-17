@@ -59,8 +59,6 @@ namespace TCC
 
         public static Player CurrentPlayer = new Player();
 
-        public static ItemsDatabase ItemsDatabase;
-
         public static void SetCombatStatus(ulong target, bool combat)
         {
             if (target == CurrentPlayer.EntityId)
