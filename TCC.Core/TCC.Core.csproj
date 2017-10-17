@@ -777,6 +777,7 @@
     <Compile Include="Converters\StaminaBarVisibilityConverter.cs" />
     <Compile Include="ViewModels\ClassManagers\SlayerBarManager.cs" />
     <Compile Include="ViewModels\ClassManagers\SorcererBarManager.cs" />
+    <Compile Include="WindowSettings.cs" />
     <Compile Include="Windows\AbnormalitiesWindow.xaml.cs">
       <DependentUpon>AbnormalitiesWindow.xaml</DependentUpon>
     </Compile>
