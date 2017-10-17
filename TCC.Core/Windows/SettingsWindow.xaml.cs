@@ -28,6 +28,7 @@ namespace TCC.Windows
             var a = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200));
             a.Completed += (s, ev) => Hide();
             this.BeginAnimation(OpacityProperty, a);
+            WindowManager.IsTccVisible = false;
             WindowManager.IsTccVisible = true;
 
         }
@@ -55,6 +56,7 @@ namespace TCC.Windows
         public void ShowWindow()
         {
             Opacity = 0;
+            Activate();
             Show();
             BeginAnimation(Window.OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
 
