@@ -19,7 +19,7 @@
                  Loaded="TccWindow_Loaded" 
                  MouseLeftButtonDown="Window_MouseLeftButtonDown" 
                  PreviewMouseRightButtonDown="TccWindow_PreviewMouseRightButtonDown"
-                 ShowInTaskbar="False" UseLayoutRounding="False"
+                 ShowInTaskbar="False" UseLayoutRounding="True"
                  >
     <local:TccWindow.DataContext>
         <wm:GroupWindowViewModel/>
