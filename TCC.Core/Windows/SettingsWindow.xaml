@@ -5,9 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCC.Windows"
         xmlns:controls="clr-namespace:TCC.Controls"
-        xmlns:vm="clr-namespace:TCC.ViewModels" Topmost="True"
-        mc:Ignorable="d" WindowStyle="None" AllowsTransparency="True" PreviewMouseDown="Window_MouseDown"
-        Title="Settings" Height="Auto" Width="Auto" ResizeMode="NoResize" Loaded="Window_Loaded" SizeToContent="WidthAndHeight" Background="Transparent" UseLayoutRounding="True">
+        xmlns:vm="clr-namespace:TCC.ViewModels"
+        xmlns:tcc="clr-namespace:TCC"
+        Topmost="True"
+        mc:Ignorable="d" WindowStyle="None" AllowsTransparency="True" 
+        Title="Settings" Height="Auto" Width="Auto" ResizeMode="NoResize" Loaded="Window_Loaded" SizeToContent="WidthAndHeight" 
+        Background="Transparent" UseLayoutRounding="True">
     <Window.Resources>
         <Style x:Key="{x:Type ToolTip}" TargetType="{x:Type ToolTip}">
             <Setter Property="Background" Value="Transparent"/>
@@ -24,7 +27,7 @@
     <Window.DataContext>
         <vm:SettingsWindowViewModel/>
     </Window.DataContext>
-    <Grid Margin="10" Width="550" Height="Auto" Focusable="True">
+    <Grid Margin="10" Width="550" Height="Auto" Focusable="True" MouseDown="Window_MouseDown">
         <Grid.RowDefinitions >
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -35,9 +38,9 @@
         </Grid.ColumnDefinitions>
 
         <Border Style="{StaticResource Styles.DefaultBorder}" Grid.ColumnSpan="10" Grid.RowSpan="10"  Opacity=".95"/>
-        <Image RenderOptions.BitmapScalingMode="HighQuality" Opacity=".02" Margin="0" Width="128" Height="128" Grid.ColumnSpan="10" Grid.RowSpan="10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Source="/TCC;component/resources/images/tera-logo-flat.png" ClipToBounds="False"/>
+        <Image RenderOptions.BitmapScalingMode="HighQuality"  Opacity=".02" Margin="0" Width="128" Height="128" Grid.ColumnSpan="10" Grid.RowSpan="10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Source="/TCC;component/resources/images/tera-logo-flat.png" ClipToBounds="False"/>
 
-        <TabControl TabStripPlacement="Left" Grid.Row="1" Grid.ColumnSpan="2" Background="#1aaa" BorderThickness="0,0,0,0" Height="500">
+        <TabControl TabStripPlacement="Left" Grid.Row="1" Grid.ColumnSpan="2" Background="#1aaa" BorderThickness="0,0,0,0" Height="500"  >
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Template">
@@ -95,11 +98,13 @@
 
                 <!--Settings-->
                 <StackPanel Grid.Row="1" Name="cooldownSettingsGrid" Style="{StaticResource settingsGrid}">
-                    <controls:BoolSetting SettingName="Enabled" Grid.Row="0" IsOn="{Binding IsCooldownWindowEnabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" />
-                    <controls:BoolSetting SettingName="Visibility" Grid.Row="0" IsOn="{Binding IsCooldownWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
-                    <controls:BoolSetting SettingName="Click through" Grid.Row="1" IsOn="{Binding IsCooldownWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
-                    <controls:ValueSetting SettingName="Scale" Grid.Row="2" Min="0" Max="3" Value="{Binding CooldownWindowScale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></controls:ValueSetting>
-                    <controls:BoolSetting SettingName="Auto dim" Grid.Row="3" IsOn="{Binding IsCooldownWindowAutoDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" >
+                    <controls:BoolSetting SettingName="Enabled" Grid.Row="0" IsOn="{Binding CooldownWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" />
+                    <controls:BoolSetting SettingName="Visibility" Grid.Row="0" IsOn="{Binding CooldownWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
+                    <controls:BoolSetting SettingName="Show always" IsOn="{Binding CooldownWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
+
+                    <controls:SelectionSetting SettingName="Click through Mode" Grid.Row="1" SelectedItem="{Binding CooldownWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type tcc:ClickThruMode}"  Choices="{Binding ClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
+                    <controls:ValueSetting SettingName="Scale" Grid.Row="2" Min="0" Max="3" Value="{Binding CooldownWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></controls:ValueSetting>
+                    <controls:BoolSetting SettingName="Auto dim" Grid.Row="3" IsOn="{Binding CooldownWindowSettings.AutoDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" >
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
                                 <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
@@ -107,8 +112,8 @@
                             </Grid>
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
-                    <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding CooldownWindowDimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"></controls:ValueSetting>
-                    <controls:BoolSetting SettingName="Transparency" Grid.Row="5" IsOn="{Binding DoesCooldownWindowAllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
+                    <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding CooldownWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"></controls:ValueSetting>
+                    <controls:BoolSetting SettingName="Transparency" Grid.Row="5" IsOn="{Binding CooldownWindowSettings.AllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
 
                     <Separator Grid.Row="6"></Separator>
                     <controls:BoolSetting SettingName="Use static cooldown bar" Grid.Row="7" IsOn="{Binding ClassWindowOn, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_timelapse_white_24dp_2x.png" >
@@ -139,12 +144,13 @@
                 </TabItem.Header>
                 <!-- Boss window settings-->
                 <StackPanel Grid.Row="0" Grid.Column="0" Style="{StaticResource settingsGrid}">
-                    <controls:BoolSetting SettingName="Enabled" Grid.Row="0" IsOn="{Binding IsBossWindowEnabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" />
+                    <controls:BoolSetting SettingName="Enabled" Grid.Row="0" IsOn="{Binding BossWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" />
+                    <controls:BoolSetting SettingName="Visibility" Grid.Row="0" IsOn="{Binding BossWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
+                    <controls:BoolSetting SettingName="Show always" IsOn="{Binding BossWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
 
-                    <controls:BoolSetting SettingName="Visibility" Grid.Row="0" IsOn="{Binding IsBossWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
-                    <controls:BoolSetting SettingName="Click through" Grid.Row="1" IsOn="{Binding IsBossWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png"/>
-                    <controls:ValueSetting SettingName="Scale" Grid.Row="2" Min="0" Max="3" Value="{Binding BossWindowScale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></controls:ValueSetting>
-                    <controls:BoolSetting SettingName="Auto dim" Grid.Row="3" IsOn="{Binding IsBossGaugeWindowAutoDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" >
+                    <controls:SelectionSetting SettingName="Click through Mode" Grid.Row="1" SelectedItem="{Binding BossWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type tcc:ClickThruMode}"  Choices="{Binding ClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
+                    <controls:ValueSetting SettingName="Scale" Grid.Row="2" Min="0" Max="3" Value="{Binding BossWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></controls:ValueSetting>
+                    <controls:BoolSetting SettingName="Auto dim" Grid.Row="3" IsOn="{Binding BossWindowSettings.AutoDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" >
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
                                 <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
@@ -152,8 +158,8 @@
                             </Grid>
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
-                    <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding BossGaugeWindowDimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"></controls:ValueSetting>
-                    <controls:BoolSetting SettingName="Transparency" Grid.Row="5" IsOn="{Binding DoesBossWindowAllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
+                    <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding BossWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"></controls:ValueSetting>
+                    <controls:BoolSetting SettingName="Transparency" Grid.Row="5" IsOn="{Binding BossWindowSettings.AllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
                     <Separator Grid.Row="6"></Separator>
                     <controls:BoolSetting SettingName="Hide adds" Grid.Row="7" IsOn="{Binding ShowOnlyBosses, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_visibility_off_white_24dp_2x.png" />
 
@@ -174,11 +180,13 @@
                 </TabItem.Header>
                 <!-- Character window settings -->
                 <StackPanel Grid.Row="1" Grid.Column="0" Name="characterSettingsGrid" Style="{StaticResource settingsGrid}">
-                    <controls:BoolSetting SettingName="Enabled" Grid.Row="0" IsOn="{Binding IsCharacterWindowEnabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" />
-                    <controls:BoolSetting Margin="0,0,0,0" SettingName="Visibility" Grid.Row="0" IsOn="{Binding IsCharacterWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
-                    <controls:BoolSetting Margin="0,0,0,0" SettingName="Click through" Grid.Row="1" IsOn="{Binding IsCharacterWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png"/>
-                    <controls:ValueSetting SettingName="Scale" Grid.Row="2" Min="0" Max="3" Value="{Binding CharacterWindowScale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></controls:ValueSetting>
-                    <controls:BoolSetting SettingName="Auto dim" Grid.Row="3" IsOn="{Binding IsCharacterWindowAutoDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" >
+                    <controls:BoolSetting SettingName="Enabled" Grid.Row="0" IsOn="{Binding CharacterWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" />
+                    <controls:BoolSetting Margin="0,0,0,0" SettingName="Visibility" Grid.Row="0" IsOn="{Binding CharacterWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
+                    <controls:BoolSetting SettingName="Show always" IsOn="{Binding CharacterWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
+
+                    <controls:SelectionSetting SettingName="Click through Mode" Grid.Row="1" SelectedItem="{Binding CharacterWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type tcc:ClickThruMode}"  Choices="{Binding ClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
+                    <controls:ValueSetting SettingName="Scale" Grid.Row="2" Min="0" Max="3" Value="{Binding CharacterWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></controls:ValueSetting>
+                    <controls:BoolSetting SettingName="Auto dim" Grid.Row="3" IsOn="{Binding CharacterWindowSettings.AutoDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" >
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
                                 <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
@@ -186,8 +194,8 @@
                             </Grid>
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
-                    <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding CharacterWindowDimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"></controls:ValueSetting>
-                    <controls:BoolSetting SettingName="Transparency" Grid.Row="5" IsOn="{Binding DoesCharacterWindowAllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
+                    <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding CharacterWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"></controls:ValueSetting>
+                    <controls:BoolSetting SettingName="Transparency" Grid.Row="5" IsOn="{Binding CharacterWindowSettings.AllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
 
                 </StackPanel>
             </TabItem>
@@ -206,11 +214,13 @@
                 </TabItem.Header>
                 <!-- Buffs window settings -->
                 <StackPanel Grid.Row="2" Grid.Column="0" Name="buffsSettingsGrid" Style="{StaticResource settingsGrid}">
-                    <controls:BoolSetting SettingName="Enabled" Grid.Row="0" IsOn="{Binding IsBuffWindowEnabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" />
-                    <controls:BoolSetting SettingName="Visibility" Grid.Row="0" IsOn="{Binding IsBuffWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
-                    <controls:BoolSetting SettingName="Click through" Grid.Row="1" IsOn="{Binding IsBuffWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png"/>
-                    <controls:ValueSetting SettingName="Scale" Grid.Row="2" Min="0" Max="3" Value="{Binding BuffsWindowScale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></controls:ValueSetting>
-                    <controls:BoolSetting SettingName="Auto dim" Grid.Row="3" IsOn="{Binding IsBuffBarWindowAutoDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" >
+                    <controls:BoolSetting SettingName="Enabled" Grid.Row="0" IsOn="{Binding BuffWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" />
+                    <controls:BoolSetting SettingName="Visibility" Grid.Row="0" IsOn="{Binding BuffWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
+                    <controls:BoolSetting SettingName="Show always" IsOn="{Binding BuffWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
+
+                    <controls:SelectionSetting SettingName="Click through Mode" Grid.Row="1" SelectedItem="{Binding BuffWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type tcc:ClickThruMode}"  Choices="{Binding ClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
+                    <controls:ValueSetting SettingName="Scale" Grid.Row="2" Min="0" Max="3" Value="{Binding BuffWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></controls:ValueSetting>
+                    <controls:BoolSetting SettingName="Auto dim" Grid.Row="3" IsOn="{Binding BuffWindowSettings.AutoDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" >
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
                                 <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
@@ -218,7 +228,7 @@
                             </Grid>
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
-                    <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding BuffBarWindowDimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"></controls:ValueSetting>
+                    <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding BuffWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"></controls:ValueSetting>
                     <Separator Grid.Row="5" ></Separator>
 
                     <controls:BoolSetting SettingName="Show left to right" Grid.Row="6" IsOn="{Binding IsLeftToRightOn, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_swap_horiz_white_24dp_2x.png"/>
@@ -240,11 +250,13 @@
                 </TabItem.Header>
                 <!-- Class window settings -->
                 <StackPanel Grid.Row="2" Grid.Column="0" Style="{StaticResource settingsGrid}">
-                    <controls:BoolSetting SettingName="Enabled" Grid.Row="0" IsOn="{Binding IsClassWindowEnabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" />
-                    <controls:BoolSetting SettingName="Visibility" Grid.Row="0" IsOn="{Binding IsClassWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
-                    <controls:BoolSetting SettingName="Click through" Grid.Row="1" IsOn="{Binding IsClassWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png"/>
-                    <controls:ValueSetting SettingName="Scale" Grid.Row="2" Min="0" Max="3" Value="{Binding ClassWindowScale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"/>
-                    <controls:BoolSetting SettingName="Auto dim" Grid.Row="3" IsOn="{Binding IsClassWindowAutoDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" >
+                    <controls:BoolSetting SettingName="Enabled" Grid.Row="0" IsOn="{Binding ClassWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" />
+                    <controls:BoolSetting SettingName="Visibility" Grid.Row="0" IsOn="{Binding ClassWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
+                    <controls:BoolSetting SettingName="Show always" IsOn="{Binding ClassWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
+
+                    <controls:SelectionSetting SettingName="Click through Mode" Grid.Row="1" SelectedItem="{Binding ClassWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type tcc:ClickThruMode}"  Choices="{Binding ClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
+                    <controls:ValueSetting SettingName="Scale" Grid.Row="2" Min="0" Max="3" Value="{Binding ClassWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"/>
+                    <controls:BoolSetting SettingName="Auto dim" Grid.Row="3" IsOn="{Binding ClassWindowSettings.AutoDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" >
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
                                 <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
@@ -252,7 +264,7 @@
                             </Grid>
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
-                    <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding ClassWindowDimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"></controls:ValueSetting>
+                    <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding ClassWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"></controls:ValueSetting>
                 </StackPanel>
             </TabItem>
             <TabItem Margin="-1,0,0,0">
@@ -270,11 +282,13 @@
                 </TabItem.Header>
                 <!-- Group window settings -->
                 <StackPanel Grid.Row="1" Grid.Column="0"  Style="{StaticResource settingsGrid}">
-                    <controls:BoolSetting SettingName="Enabled" Grid.Row="0" IsOn="{Binding IsGroupWindowEnabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" />
-                    <controls:BoolSetting SettingName="Visibility" Grid.Row="0" IsOn="{Binding IsGroupWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
-                    <controls:BoolSetting SettingName="Click through" Grid.Row="1" IsOn="{Binding IsGroupWindowTransparent, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png"/>
-                    <controls:ValueSetting SettingName="Scale" Grid.Row="2" Min="0" Max="3" Value="{Binding GroupWindowScale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></controls:ValueSetting>
-                    <controls:BoolSetting SettingName="Auto dim" Grid.Row="3" IsOn="{Binding IsGroupWindowAutoDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" >
+                    <controls:BoolSetting SettingName="Enabled" Grid.Row="0" IsOn="{Binding GroupWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" />
+                    <controls:BoolSetting SettingName="Visibility" Grid.Row="0" IsOn="{Binding GroupWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
+                    <controls:BoolSetting SettingName="Show always" IsOn="{Binding GroupWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
+
+                    <controls:SelectionSetting SettingName="Click through Mode" Grid.Row="1" SelectedItem="{Binding GroupWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type tcc:ClickThruMode}"  Choices="{Binding ClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
+                    <controls:ValueSetting SettingName="Scale" Grid.Row="2" Min="0" Max="3" Value="{Binding GroupWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></controls:ValueSetting>
+                    <controls:BoolSetting SettingName="Auto dim" Grid.Row="3" IsOn="{Binding GroupWindowSettings.AutoDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" >
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
                                 <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
@@ -282,7 +296,8 @@
                             </Grid>
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
-                    <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding GroupWindowDimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"></controls:ValueSetting>
+                    <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding GroupWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"></controls:ValueSetting>
+
                     <Separator Grid.Row="5"></Separator>
                     <controls:BoolSetting SettingName="Hide me" Grid.Row="6" IsOn="{Binding HideMe, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_person_white_24dp_2x.png" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0">
                         <controls:BoolSetting.ToolTip>
@@ -401,19 +416,19 @@
                 </TabItem.Header>
                 <!-- Chat window settings -->
                 <StackPanel Style="{StaticResource settingsGrid}">
-                    <controls:BoolSetting SettingName="Enabled" Grid.Row="0" IsOn="{Binding IsChatWindowEnabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" />
-                    <controls:BoolSetting SettingName="Visibility" Grid.Row="0" IsOn="{Binding IsChatWindowVisible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
-                    <controls:BoolSetting SettingName="Transparency" Grid.Row="1" IsOn="{Binding DoesChatWindowAllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
+                    <controls:BoolSetting SettingName="Enabled" Grid.Row="0" IsOn="{Binding ChatWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" />
+                    <controls:BoolSetting SettingName="Visibility" Grid.Row="0" IsOn="{Binding ChatWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
+                    <controls:BoolSetting SettingName="Transparency" Grid.Row="1" IsOn="{Binding ChatWindowSettings.AllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
+                    <controls:BoolSetting SettingName="Show always" IsOn="{Binding ChatWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
 
                     <Separator Grid.Row="2"></Separator>
-                    <controls:ValueSetting Grid.Row="3" SettingName="Max messages" Min="0" Max="10000" Value="{Binding MaxMessages, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/chat.png"></controls:ValueSetting>
-                    <controls:ValueSetting Grid.Row="4" SettingName="Spam threshold" Min="0" Max="10" Value="{Binding SpamThreshold, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_filter_list_white_24dp_2x.png"></controls:ValueSetting>
-                    <controls:ValueSetting Grid.Row="4" SettingName="Chat background opacity" Min="0" Max="1" Value="{Binding ChatWindowOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"></controls:ValueSetting>
-                    <controls:ValueSetting Grid.Row="4" SettingName="Font size" Value="{Binding FontSize, Mode=TwoWay}" Min="10" Max="50" SettingImage="/TCC;component/resources/images/ic_format_size_white_24dp_2x.png"></controls:ValueSetting>
-                    <controls:BoolSetting Grid.Row="5" SettingName="Show timestamps" IsOn="{Binding ShowTimestamp, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_access_time_white_24dp_2x.png"></controls:BoolSetting>
-                    <controls:BoolSetting Grid.Row="6" SettingName="Show channel label" IsOn="{Binding ShowChannel, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_label_white_24dp_2x.png"></controls:BoolSetting>
-                    <controls:BoolSetting Grid.Row="7" SettingName="Show always" IsOn="{Binding ChatWindowShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"></controls:BoolSetting>
-                    <controls:BoolSetting Grid.Row="7" SettingName="Enable LFG bar" IsOn="{Binding LfgOn, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png"></controls:BoolSetting>
+                    <controls:ValueSetting SettingName="Max messages" Min="0" Max="10000" Value="{Binding MaxMessages, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/chat.png"></controls:ValueSetting>
+                    <controls:ValueSetting SettingName="Spam threshold" Min="0" Max="10" Value="{Binding SpamThreshold, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_filter_list_white_24dp_2x.png"></controls:ValueSetting>
+                    <controls:ValueSetting SettingName="Chat background opacity" Min="0" Max="1" Value="{Binding ChatWindowOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"></controls:ValueSetting>
+                    <controls:ValueSetting SettingName="Font size" Value="{Binding FontSize, Mode=TwoWay}" Min="10" Max="50" SettingImage="/TCC;component/resources/images/ic_format_size_white_24dp_2x.png"></controls:ValueSetting>
+                    <controls:BoolSetting SettingName="Show timestamps" IsOn="{Binding ShowTimestamp, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_access_time_white_24dp_2x.png"></controls:BoolSetting>
+                    <controls:BoolSetting SettingName="Show channel label" IsOn="{Binding ShowChannel, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_label_white_24dp_2x.png"></controls:BoolSetting>
+                    <controls:BoolSetting SettingName="Enable LFG bar" IsOn="{Binding LfgOn, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png"></controls:BoolSetting>
                 </StackPanel>
 
             </TabItem>
@@ -434,16 +449,6 @@
                 </TabItem.Header>
                 <!-- Other settings -->
                 <StackPanel Grid.Row="3" Grid.Column="0" Style="{StaticResource settingsGrid}">
-                    <controls:BoolSetting SettingName="Click thru when dim" Grid.Row="0" IsOn="{Binding ClickThruWhenDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" >
-                        <controls:BoolSetting.ToolTip>
-                            <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
-                                <TextBlock Foreground="LightGray" Text="Makes TCC clickthru when dim." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
-                            </Grid>
-                        </controls:BoolSetting.ToolTip>
-                    </controls:BoolSetting>
-                    <Separator />
-
                     <controls:FieldSetting SettingImage="/TCC;component/resources/images/ic_insert_link_white_24dp_2x.png" SettingName="Webhook" Value="{Binding Webhook, Mode=TwoWay}"></controls:FieldSetting>
                     <controls:FieldSetting SettingName="Message" Value="{Binding WebhookMessage, Mode=TwoWay}"></controls:FieldSetting>
                     <Button Style="{StaticResource ButtonMainStyle}" Click="SendWebhookTest" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
@@ -564,7 +569,7 @@
             </TabItem>
         </TabControl>
 
-        <Grid Grid.ColumnSpan="2" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+        <Grid Grid.ColumnSpan="2"  MouseLeftButtonDown="Window_MouseLeftButtonDown">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*"/>
