@@ -12,146 +12,18 @@ using TCC.ViewModels;
 
 namespace TCC
 {
-    public class WindowSettings
-    {
-        public double X;
-        public double Y;
-        public double W;
-        public double H;
-        public Visibility Visibility;
-        public bool ClickThru;
-        public double Scale;
-        public bool AutoDim;
-        public double DimOpacity;
-        public bool ShowAlways;
-        public bool AllowTransparency;
-        public bool Enabled;
-
-        public XElement ToXElement(string name)
-        {
-            var xe = new XElement("WindowSetting");
-            xe.Add(new XAttribute("Name", name));
-            xe.Add(new XAttribute(nameof(X), X));
-            xe.Add(new XAttribute(nameof(Y), Y));
-            xe.Add(new XAttribute(nameof(W), W));
-            xe.Add(new XAttribute(nameof(H), H));
-            xe.Add(new XAttribute(nameof(Visibility), Visibility));
-            xe.Add(new XAttribute(nameof(ClickThru), ClickThru));
-            xe.Add(new XAttribute(nameof(Scale), Scale));
-            xe.Add(new XAttribute(nameof(AutoDim), AutoDim));
-            xe.Add(new XAttribute(nameof(DimOpacity), DimOpacity));
-            xe.Add(new XAttribute(nameof(ShowAlways), ShowAlways));
-            xe.Add(new XAttribute(nameof(AllowTransparency), AllowTransparency));
-            xe.Add(new XAttribute(nameof(Enabled), Enabled));
-            return xe;
-        }
-
-    }
-
     public static class SettingsManager
     {
         static Rectangle _screen = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
         public static XDocument SettingsDoc;
 
-        public static WindowSettings GroupWindowSettings = new WindowSettings()
-        {
-            X = 0,
-            Y = 0,
-            Visibility = Visibility.Visible,
-            ClickThru = false,
-            Scale = 1,
-            AutoDim = true,
-            DimOpacity = .2,
-            ShowAlways = false,
-            AllowTransparency = true,
-            Enabled = true
-        };
-        public static WindowSettings CooldownWindowSettings = new WindowSettings()
-        {
-            X = 0,
-            Y = 0,
-            Visibility = Visibility.Visible,
-            ClickThru = false,
-            Scale = 1,
-            AutoDim = true,
-            DimOpacity = .2,
-            ShowAlways = false,
-            AllowTransparency = true,
-            Enabled = true
-
-        };
-        public static WindowSettings BossWindowSettings = new WindowSettings()
-        {
-            X = 0,
-            Y = 0,
-            Visibility = Visibility.Visible,
-            ClickThru = false,
-            Scale = 1,
-            AutoDim = true,
-            DimOpacity = .2,
-            ShowAlways = false,
-            AllowTransparency = true,
-            Enabled = true
-
-        };
-        public static WindowSettings BuffWindowSettings = new WindowSettings()
-        {
-            X = 0,
-            Y = 0,
-            Visibility = Visibility.Visible,
-            ClickThru = false,
-            Scale = 1,
-            AutoDim = true,
-            DimOpacity = .2,
-            ShowAlways = false,
-            AllowTransparency = true,
-            Enabled = true
-
-        };
-        public static WindowSettings CharacterWindowSettings = new WindowSettings()
-        {
-            X = 0,
-            Y = 0,
-            Visibility = Visibility.Visible,
-            ClickThru = false,
-            Scale = 1,
-            AutoDim = true,
-            DimOpacity = .2,
-            ShowAlways = false,
-            AllowTransparency = true,
-            Enabled = true
-
-        };
-        public static WindowSettings ClassWindowSettings = new WindowSettings()
-        {
-            X = 0,
-            Y = 0,
-            Visibility = Visibility.Visible,
-            ClickThru = false,
-            Scale = 1,
-            AutoDim = true,
-            DimOpacity = .2,
-            ShowAlways = false,
-            AllowTransparency = true,
-            Enabled = true
-
-        };
-        public static WindowSettings ChatWindowSettings = new WindowSettings()
-        {
-            X = 0,
-            Y = 0,
-            W = 600,
-            H = 200,
-            Visibility = Visibility.Visible,
-            ClickThru = false,
-            Scale = 1,
-            AutoDim = false,
-            DimOpacity = 1,
-            ShowAlways = false,
-            AllowTransparency = true,
-            Enabled = true
-
-        };
+        public static WindowSettings GroupWindowSettings;
+        public static WindowSettings CooldownWindowSettings;
+        public static WindowSettings BossWindowSettings;
+        public static WindowSettings BuffWindowSettings;
+        public static WindowSettings CharacterWindowSettings;
+        public static WindowSettings ClassWindowSettings;
+        public static WindowSettings ChatWindowSettings;
 
         public static bool IgnoreMeInGroupWindow { get; set; }
         public static bool IgnoreGroupBuffs { get; set; }
@@ -160,6 +32,7 @@ namespace TCC
         public static FlowDirection BuffsDirection { get; set; } = FlowDirection.RightToLeft;
         public static bool ClassWindowOn { get; set; } = false;
         public static bool ClickThruWhenDim { get; set; } = true;
+        public static bool ClickThruInCombat { get; set; } = false;
         public static int MaxMessages { get; set; } = 500;
         public static int SpamThreshold { get; set; } = 2;
         public static bool ShowChannel { get; set; } = true;
@@ -193,34 +66,44 @@ namespace TCC
                 {
                     if (ws.Attribute("Name").Value == "BossWindow")
                     {
-                        ParseWindowSettings(BossWindowSettings, ws);
+                        BossWindowSettings = ParseWindowSettings(ws);
                     }
                     else if (ws.Attribute("Name").Value == "CharacterWindow")
                     {
-                        ParseWindowSettings(CharacterWindowSettings, ws);
+                        CharacterWindowSettings = ParseWindowSettings(ws);
                     }
                     else if (ws.Attribute("Name").Value == "CooldownWindow")
                     {
-                        ParseWindowSettings(CooldownWindowSettings, ws);
+                        CooldownWindowSettings = ParseWindowSettings(ws);
                     }
                     else if (ws.Attribute("Name").Value == "BuffWindow")
                     {
-                        ParseWindowSettings(BuffWindowSettings, ws);
+                        BuffWindowSettings = ParseWindowSettings(ws);
                     }
                     else if (ws.Attribute("Name").Value == "GroupWindow")
                     {
-                        ParseWindowSettings(GroupWindowSettings, ws);
+                        GroupWindowSettings = ParseWindowSettings(ws);
                     }
                     else if (ws.Attribute("Name").Value == "ClassWindow")
                     {
-                        ParseWindowSettings(ClassWindowSettings, ws);
+                        ClassWindowSettings = ParseWindowSettings(ws);
                     }
                     else if (ws.Attribute("Name").Value == "ChatWindow")
                     {
-                        ParseWindowSettings(ChatWindowSettings, ws);
+                        ChatWindowSettings = ParseWindowSettings(ws);
                     }
                     //add window here
                 }
+            }
+            else
+            {
+                GroupWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Never, 1, true, .2, false, true, true);
+                CooldownWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.WhenDim, 1, true, .2, false, true, true);
+                BossWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Never, 1, true, .2, false, true, true);
+                BuffWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.WhenDim, 1, true, .2, false, true, true);
+                CharacterWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Always, 1, true, .2, false, true, true);
+                ClassWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Always, 1, true, .2, false, true, true);
+                ChatWindowSettings = new WindowSettings(0, 0, 200, 600, true, ClickThruMode.Never, 1, false, 1, false, true, true);
             }
         }
         public static void LoadSettings()
@@ -264,6 +147,11 @@ namespace TCC
                 try
                 {
                     ClickThruWhenDim = Boolean.Parse(b.Attribute("ClickThruWhenDim").Value);
+                }
+                catch { }
+                try
+                {
+                    ClickThruInCombat = Boolean.Parse(b.Attribute(nameof(ClickThruInCombat)).Value);
                 }
                 catch { }
                 try
@@ -449,6 +337,7 @@ namespace TCC
                 new XAttribute(nameof(BuffsDirection), BuffsDirection),
                 new XAttribute(nameof(ClassWindowOn), ClassWindowOn),
                 new XAttribute(nameof(ClickThruWhenDim), ClickThruWhenDim),
+                new XAttribute(nameof(ClickThruInCombat), ClickThruInCombat),
                 new XAttribute(nameof(MaxMessages), MaxMessages),
                 new XAttribute(nameof(SpamThreshold), SpamThreshold),
                 new XAttribute(nameof(FontSize), FontSize),
@@ -478,71 +367,75 @@ namespace TCC
             xSettings.Save(Environment.CurrentDirectory + @"/tcc-config.xml");
         }
 
-        private static void ParseWindowSettings(WindowSettings w, XElement ws)
+        private static WindowSettings ParseWindowSettings(XElement ws)
         {
+            double x = 0, y = 0, w = 0, h = 0, scale = 1, dimOp = .3;
+            ClickThruMode ctm = ClickThruMode.Never;
+            bool vis = true, enabled = true, autoDim = true, allowTrans = true, alwaysVis = false;
+
             try
             {
-                w.X = Double.Parse(ws.Attribute("X").Value, CultureInfo.InvariantCulture);
+                x = Double.Parse(ws.Attribute("X").Value, CultureInfo.InvariantCulture);
             }
             catch (Exception) { }
             try
             {
-                w.Y = Double.Parse(ws.Attribute("Y").Value, CultureInfo.InvariantCulture);
+                y = Double.Parse(ws.Attribute("Y").Value, CultureInfo.InvariantCulture);
             }
             catch (Exception) { }
             try
             {
-                w.W = Double.Parse(ws.Attribute("W").Value, CultureInfo.InvariantCulture);
+                w = Double.Parse(ws.Attribute("W").Value, CultureInfo.InvariantCulture);
             }
             catch (Exception) { }
             try
             {
-                w.H = Double.Parse(ws.Attribute("H").Value, CultureInfo.InvariantCulture);
+                h = Double.Parse(ws.Attribute("H").Value, CultureInfo.InvariantCulture);
+            }
+            catch (Exception) { }
+            try
+            {
+                ctm = (ClickThruMode)Enum.Parse(typeof(ClickThruMode), ws.Attribute(nameof(ClickThruMode)).Value);
+            }
+            catch (Exception) { }
+            try
+            {
+                //w.Visibility = (Visibility)Enum.Parse(typeof(Visibility), ws.Attribute("Visibility").Value);
+                vis = Boolean.Parse(ws.Attribute("Visible").Value);
             }
             catch (Exception) { }
 
             try
             {
-                w.ClickThru = Boolean.Parse(ws.Attribute("ClickThru").Value);
-            }
-            catch (Exception) { }
-
-            try
-            {
-                w.Visibility = (Visibility)Enum.Parse(typeof(Visibility), ws.Attribute("Visibility").Value);
-            }
-            catch (Exception) { }
-
-            try
-            {
-                w.Scale = Double.Parse(ws.Attribute("Scale").Value, CultureInfo.InvariantCulture);
+                scale = Double.Parse(ws.Attribute("Scale").Value, CultureInfo.InvariantCulture);
             }
             catch (Exception) { }
             try
             {
-                w.AutoDim = Boolean.Parse(ws.Attribute("AutoDim").Value);
+                autoDim = Boolean.Parse(ws.Attribute("AutoDim").Value);
             }
             catch (Exception) { }
             try
             {
-                w.DimOpacity = Double.Parse(ws.Attribute("DimOpacity").Value, CultureInfo.InvariantCulture);
+                dimOp = Double.Parse(ws.Attribute("DimOpacity").Value, CultureInfo.InvariantCulture);
             }
             catch (Exception) { }
             try
             {
-                w.ShowAlways = Boolean.Parse(ws.Attribute("ShowAlways").Value);
+                alwaysVis = Boolean.Parse(ws.Attribute("ShowAlways").Value);
             }
             catch (Exception) { }
             try
             {
-                w.AllowTransparency = Boolean.Parse(ws.Attribute("AllowTransparency").Value);
+                allowTrans = Boolean.Parse(ws.Attribute("AllowTransparency").Value);
             }
             catch (Exception) { }
             try
             {
-                w.Enabled = Boolean.Parse(ws.Attribute("Enabled").Value);
+                enabled = Boolean.Parse(ws.Attribute("Enabled").Value);
             }
             catch (Exception) { }
+            return new WindowSettings(x, y, h, w, vis, ctm, scale, autoDim, dimOp, alwaysVis, allowTrans, enabled);
         }
         private static void ParseChannelsSettings(XElement xElement)
         {
