@@ -122,16 +122,13 @@ namespace TCC
         {
             get => (double)DailiesDone / (double)SessionManager.MAX_DAILY;
         }
-        public SynchronizedObservableCollection<DungeonCooldown> Dungeons
-        {
-            get;
-            set;
-        }
-
+        public SynchronizedObservableCollection<DungeonCooldown> Dungeons { get; set; }
+        public SynchronizedObservableCollection<GearItem> Gear { get; set; }
         public Character(string name, Class c, uint id, int pos, Dispatcher d, Laurel l = Laurel.None)
         {
             _dispatcher = d;
             Dungeons = new SynchronizedObservableCollection<DungeonCooldown>(_dispatcher);
+            Gear = new SynchronizedObservableCollection<GearItem>(_dispatcher);
             Name = name;
             Class = c;
             Laurel = l;
@@ -157,6 +154,22 @@ namespace TCC
             if (dg != null)
             {
                 dg.Entries = dg.Entries == 0 ? Convert.ToInt16(dg.GetRuns() - 1) : Convert.ToInt16(dg.Entries - 1);
+            }
+        }
+
+        public void ClearGear()
+        {
+            Gear = new SynchronizedObservableCollection<GearItem>(_dispatcher);
+        }
+
+        public void UpdateGear(List<GearItem> gear)
+        {
+            foreach (var gearItem in gear)
+            {
+                if (!Gear.Contains(gearItem))
+                {
+                    Gear.Add(gearItem);
+                }
             }
         }
     }

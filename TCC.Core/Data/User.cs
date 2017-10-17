@@ -311,6 +311,52 @@ namespace TCC.Data
             }
         }
 
+        private GearItem weapon;
+        private GearItem armor;
+        private GearItem gloves;
+        private GearItem boots;
+
+        public GearItem Weapon
+        {
+            get => weapon;
+            set
+            {
+                if (weapon == value) return;
+                weapon = value;
+                NotifyPropertyChanged(nameof(Weapon));
+            }
+        }
+
+        public GearItem Armor
+        {
+            get => armor;
+            set
+            {
+                if (armor == value) return;
+                armor = value;
+                NotifyPropertyChanged(nameof(Armor));
+            }
+        }
+
+        public GearItem Gloves
+        {
+            get => gloves;
+            set
+            {
+                if(gloves == value)return;
+                gloves = value;
+                NotifyPropertyChanged(nameof(Gloves));
+            }
+        }
+
+        public GearItem Boots { get => boots;
+            set
+            {
+                if(boots == value)return;
+                boots = value;
+                NotifyPropertyChanged(nameof(Boots));
+            }
+        }
         public bool IsPlayer => Name == SessionManager.CurrentPlayer.Name;
 
         private List<uint> _debuffList = new List<uint>();
