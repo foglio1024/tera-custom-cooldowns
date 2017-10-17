@@ -65,7 +65,7 @@ namespace TCC.Data
             StartingPrice = new MessagePiece(new Money(p.SellerPrice), Channel);
             Listing = new MessagePiece("");
             
-            SessionManager.ItemsDatabase.Items.TryGetValue((uint)p.Item, out Item i);
+            ItemsDatabase.Instance.Items.TryGetValue((uint)p.Item, out Item i);
             if(i != null)
             {
                 Listing.Text = "<"+ i.Name + ">";
