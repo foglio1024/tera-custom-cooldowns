@@ -108,13 +108,18 @@ namespace TCC
 
         public static List<ChatChannelOnOff> GetEnabledChannelsList()
         {
-            var ch = Enum.GetValues(typeof(ChatChannel)).Cast<ChatChannel>().ToList();
+            var ch = ListFromEnum<ChatChannel>();
             var result = new List<ChatChannelOnOff>();
             foreach (var c in ch)
             {
                 result.Add(new ChatChannelOnOff(c));
             }
             return result;
+        }
+
+        public static List<T> ListFromEnum<T>()
+        {
+            return Enum.GetValues(typeof(T)).Cast<T>().ToList();
         }
         public static T FindVisualParent<T>(DependencyObject sender) where T : DependencyObject
         {
