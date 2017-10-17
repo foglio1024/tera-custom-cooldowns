@@ -7,12 +7,14 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using TCC.ViewModels;
 
 namespace TCC.Windows
 {
     public class TccWindow : Window
     {
         protected IntPtr _handle;
+        protected WindowSettings _settings;
         protected bool _ignoreSize;
         protected bool clickThru;
         public bool ClickThru
@@ -26,11 +28,10 @@ namespace TCC.Windows
                 if (clickThru) FocusManager.MakeTransparent(_handle);
                 else FocusManager.UndoTransparent(_handle);
 
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ClickThru"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ClickThru)));
             }
         }
 
-        protected WindowSettings _settings;
 
         protected void InitWindow(WindowSettings ws, bool canClickThru = true, bool canHide = true, bool ignoreSize = true)
         {
@@ -61,6 +62,8 @@ namespace TCC.Windows
             }
 
             _settings = ws;
+            _settings.NotifyWindowSafeClose += CloseWindowSafe;
+            _settings.PropertyChanged += _settings_PropertyChanged;
             Left = ws.X;
             Top = ws.Y;
             if (!ignoreSize)
@@ -69,15 +72,53 @@ namespace TCC.Windows
                 if (ws.W != 0) Width = ws.W;
             }
             _ignoreSize = ignoreSize;
-            Visibility = ws.Visibility;
-            SetClickThru(ws.ClickThru);
-            ((FrameworkElement)this.Content).Opacity = 0;
-
+            Visibility = ws.Visible ? Visibility.Visible : Visibility.Hidden;
+            SetClickThru(ws.ClickThruMode == ClickThruMode.Always);
+            if(_settings.AutoDim) AnimateContentOpacity(_settings.DimOpacity);
+            if(!WindowManager.IsTccVisible) AnimateContentOpacity(0);
             WindowManager.TccVisibilityChanged += OpacityChange;
             WindowManager.TccDimChanged += OpacityChange;
             SizeChanged += TccWindow_SizeChanged;
             Closed += TccWindow_Closed;
             Loaded += TccWindow_Loaded;
+        }
+
+        private void _settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(_settings.ClickThruMode))
+            {
+                switch (_settings.ClickThruMode)
+                {
+                    case ClickThruMode.Never:
+                        FocusManager.UndoTransparent(_handle);
+                        break;
+                    case ClickThruMode.Always:
+                        FocusManager.MakeTransparent(_handle);
+                        break;
+                    case ClickThruMode.WhenDim:
+                        if(WindowManager.IsTccDim) FocusManager.MakeTransparent(_handle);
+                        else FocusManager.UndoTransparent(_handle);
+                        break;
+                    case ClickThruMode.WhenUndim:
+                        if(WindowManager.IsTccDim) FocusManager.UndoTransparent(_handle);
+                        else FocusManager.MakeTransparent(_handle);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+            else if (e.PropertyName == nameof(_settings.Scale))
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    var vm = (TccWindowViewModel) DataContext;
+                    vm.GetDispatcher().Invoke(() => vm.Scale = _settings.Scale);
+                });
+            }
+            else if (e.PropertyName == nameof(_settings.Visible))
+            {
+                SetVisibility(_settings.Visible);
+            }
         }
 
         private void TccWindow_Loaded(object sender, RoutedEventArgs e)
@@ -122,19 +163,20 @@ namespace TCC.Windows
                 }
             }
 
+            //TODO: rework dim/undim and clickthru logic
             if (e.PropertyName == "IsTccDim")
             {
                 if (!WindowManager.IsTccVisible) return;
+                if (!_settings.AutoDim) return;
 
-                if (WindowManager.IsTccDim && _settings.AutoDim)
+                AnimateContentOpacity(WindowManager.IsTccDim ? _settings.DimOpacity : 1);
+                if (_settings.ClickThruMode == ClickThruMode.WhenUndim)
                 {
-                    AnimateContentOpacity(_settings.DimOpacity);
-                    if (SettingsManager.ClickThruWhenDim) FocusManager.MakeTransparent(_handle);
+                    SetClickThru(!WindowManager.IsTccDim);
                 }
-                else
+                else if (_settings.ClickThruMode == ClickThruMode.WhenDim)
                 {
-                    AnimateContentOpacity(1);
-                        if (!_settings.ClickThru) FocusManager.UndoTransparent(_handle);
+                    SetClickThru(WindowManager.IsTccDim);
                 }
             }
         }
@@ -154,6 +196,19 @@ namespace TCC.Windows
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Visibility"));
             });
         }
+        public void SetVisibility(bool v)
+        {
+            if (!Dispatcher.Thread.IsAlive)
+            {
+                return;
+            }
+            Dispatcher.Invoke(() =>
+            {
+                Visibility = v? Visibility.Visible : Visibility.Hidden;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Visibility"));
+            });
+        }
+
         public void AnimateContentOpacity(double opacity)
         {
             Dispatcher.InvokeIfRequired(() =>
