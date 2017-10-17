@@ -7,6 +7,9 @@ namespace TCC.Data.Databases
     public class AbnormalityDatabase
     {
         public Dictionary<uint, Abnormality> Abnormalities;
+        public static List<uint> NoctIds = new List<uint> { 902, 910, 911, 912, 913, 916, 917, 999010000 };
+        public static List<uint> BlueNoctIds = new List<uint> { 920, 921, 922};
+
         public AbnormalityDatabase(string lang)
         {
             var f = File.OpenText(Environment.CurrentDirectory + "/resources/data/abnormalities/abnormals-"+lang+".tsv");
