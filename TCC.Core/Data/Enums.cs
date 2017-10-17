@@ -61,8 +61,9 @@
         TradeRedirect = 303, //arbitrary
         Enchant12 = 304, //arbitrary
         Enchant15 = 305, //arbitrary
-        Enchant8 = 313, //arbitrary
-        Enchant9 = 314, //arbitrary
+        Enchant7 = 313, //arbitrary
+        Enchant8 = 314, //arbitrary
+        Enchant9 = 315, //arbitrary
         RaidLeader = 306, //arbitrary
         Bargain = 307, //arbitrary
         Apply = 308, //arb
@@ -173,5 +174,37 @@
         On,
         Broken,
         Failed
+    }
+
+    public enum GearPiece
+    {
+        Weapon = 1,
+        Armor = 2,
+        Hands = 3,
+        Feet = 4,
+        CritNecklace = 5,
+        CritEarring = 6,
+        CritRing = 7,
+        PowerNecklace = 8,
+        PowerEarring = 9,
+        PowerRing = 10,
+        Circlet = 11,
+        Belt = 12,
+    }
+
+    public enum GearTier
+    {
+        Low = 0,
+        Mid = 1,
+        High = 2,
+        Top = 3
+    }
+
+    public enum ClickThruMode
+    {
+        Never = 0,
+        Always = 1,
+        WhenDim = 2,
+        WhenUndim = 3
     }
 }

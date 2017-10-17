@@ -88,6 +88,8 @@ namespace TCC.Converters
                     return Brushes.Orange;
                 case ChatChannel.Enchant15:
                     return Brushes.OrangeRed;
+                case ChatChannel.Enchant7:
+                    return Brushes.Orange;
                 case ChatChannel.Enchant8:
                     return Brushes.Orange;
                 case ChatChannel.Enchant9:
