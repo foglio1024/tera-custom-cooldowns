@@ -86,6 +86,8 @@ namespace TCC.Parsing
             {"S_DUNGEON_COOL_TIME_LIST", Contructor<Func<TeraMessageReader, S_DUNGEON_COOL_TIME_LIST>>() },
             {"S_ACCOUNT_PACKAGE_LIST", Contructor<Func<TeraMessageReader, S_ACCOUNT_PACKAGE_LIST>>() },
             {"S_GUILD_TOWER_INFO", Contructor<Func<TeraMessageReader, S_GUILD_TOWER_INFO>>() },
+            {"S_INVEN", Contructor<Func<TeraMessageReader, S_INVEN>>() },
+            {"S_SPAWN_USER", Contructor<Func<TeraMessageReader, S_SPAWN_USER>>() },
 
         };
 
@@ -110,6 +112,8 @@ namespace TCC.Parsing
             {typeof(S_ABNORMALITY_END), new Action<S_ABNORMALITY_END>(x => PacketProcessor.HandleAbnormalityEnd(x)) },
             {typeof(S_USER_EFFECT), new Action<S_USER_EFFECT>(x => PacketProcessor.HandleUserEffect(x)) },
             {typeof(S_SYSTEM_MESSAGE), new Action<S_SYSTEM_MESSAGE>(x => PacketProcessor.HandleSystemMessage(x)) },
+            {typeof(S_INVEN), new Action<S_INVEN>(x => PacketProcessor.HandleInventory(x)) },
+            {typeof(S_SPAWN_USER), new Action<S_SPAWN_USER>(x => PacketProcessor.HandleSpawnUser(x)) },
 
             //{typeof(C_LOAD_TOPO_FIN), new Action<C_LOAD_TOPO_FIN>(x => PacketProcessor.HandleLoadTopoFin(x)) },
 
