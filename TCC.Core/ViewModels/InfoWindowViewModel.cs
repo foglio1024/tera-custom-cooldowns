@@ -29,6 +29,7 @@ namespace TCC.ViewModels
         public ICollectionView T4Dungs { get; set; }
         public ICollectionView T5Dungs { get; set; }
         public ICollectionView AllDungeons { get; set; }
+        public ICollectionView Items { get; set; }
         public Character CurrentCharacter
         {
             get => Characters.FirstOrDefault(x => x.Id == SessionManager.CurrentPlayer.PlayerId);
@@ -199,8 +200,10 @@ namespace TCC.ViewModels
             T3Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
             T4Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
             T5Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
+            Items = new CollectionViewSource {Source = SelectedCharacter.Gear}.View;
 
             AllDungeons.Filter = null;
+            Items.Filter = null;
             SoloDungs.Filter = d => DungeonDatabase.Instance.DungeonDefinitions[((DungeonCooldown)d).Id].Tier == DungeonTier.Solo;
             T2Dungs.Filter = d => DungeonDatabase.Instance.DungeonDefinitions[((DungeonCooldown)d).Id].Tier == DungeonTier.Tier2;
             T3Dungs.Filter = d => DungeonDatabase.Instance.DungeonDefinitions[((DungeonCooldown)d).Id].Tier == DungeonTier.Tier3;
@@ -208,12 +211,15 @@ namespace TCC.ViewModels
             T5Dungs.Filter = d => DungeonDatabase.Instance.DungeonDefinitions[((DungeonCooldown)d).Id].Tier == DungeonTier.Tier5;
 
             AllDungeons.SortDescriptions.Add(new SortDescription("Tier", ListSortDirection.Ascending));
+            Items.SortDescriptions.Add(new SortDescription("Piece", ListSortDirection.Ascending));
+
             NotifyPropertyChanged(nameof(AllDungeons));
             NotifyPropertyChanged(nameof(SoloDungs));
             NotifyPropertyChanged(nameof(T2Dungs));
             NotifyPropertyChanged(nameof(T3Dungs));
             NotifyPropertyChanged(nameof(T4Dungs));
             NotifyPropertyChanged(nameof(T5Dungs));
+            NotifyPropertyChanged(nameof(Items));
             //_dispatcher.Invoke(() => WindowManager.InfoWindow.AnimateICitems());
         }
         public void ShowWindow()
@@ -289,6 +295,19 @@ namespace TCC.ViewModels
                     dungs.Add(dg);
                 }
 
+                XElement gear = new XElement("GearPieces");
+
+                foreach (var gearItem in c.Gear)
+                {
+                    XElement g = new XElement("Gear",
+                        new XAttribute("id", gearItem.Id),
+                        new XAttribute("piece", gearItem.Piece),
+                        new XAttribute("tier", gearItem.Tier),
+                        new XAttribute("exp", gearItem.Experience),
+                        new XAttribute("enchant", gearItem.Enchant));
+                    gear.Add(g);
+                }
+                ce.Add(gear);
                 ce.Add(dungs);
                 root.Add(ce);
             }
@@ -334,6 +353,17 @@ namespace TCC.ViewModels
                     dgDict.Add(dgId, dgEntries);
                 }
                 ch.UpdateDungeons(dgDict);
+                var gear = new List<GearItem>();
+                foreach (var gearEl in c.Descendants().Where(x => x.Name == "Gear"))
+                {
+                    var pieceId = Convert.ToUInt32(gearEl.Attribute("id").Value);
+                    var pieceType = (GearPiece)Enum.Parse(typeof(GearPiece), gearEl.Attribute("piece").Value);
+                    var pieceTier = (GearTier)Enum.Parse(typeof(GearTier), gearEl.Attribute("tier").Value);
+                    var pieceEnchant = Convert.ToInt32(gearEl.Attribute("enchant").Value);
+                    var exp = Convert.ToUInt32(gearEl.Attribute("exp").Value);
+                    gear.Add(new GearItem(pieceId, pieceTier, pieceType, pieceEnchant, exp));
+                }
+                ch.UpdateGear(gear);
                 Characters.Add(ch);
             }
         }
