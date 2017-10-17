@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -761,7 +762,7 @@ namespace TCC.Data
                 rawLink.Append("@" + username);
             }
             MessagePiece mp = new MessagePiece(id.ToString());
-            if (SessionManager.ItemsDatabase.Items.TryGetValue(id, out Item i))
+            if (ItemsDatabase.Instance.Items.TryGetValue(id, out Item i))
             {
                 var txt = String.Format("<{0}>", i.Name);
                 mp = new MessagePiece(txt)
@@ -999,17 +1000,23 @@ namespace TCC.Data
                 mw = " Awakened ";
                 e = "+15";
             }
-            else if (systemMessage.Contains("Added 8"))
+            else if (systemMessage.Contains("enchantCount:7"))
+            {
+                msg.Channel = ChatChannel.Enchant7;
+                mw = "";
+                e = "+7 ";
+            }
+            else if (systemMessage.Contains("enchantCount:8"))
             {
                 msg.Channel = ChatChannel.Enchant8;
                 mw = "";
-                e = "+8";
+                e = "+8 ";
             }
-            else if (systemMessage.Contains("Added 9"))
+            else if (systemMessage.Contains("enchantCount:9"))
             {
                 msg.Channel = ChatChannel.Enchant9;
                 mw = "";
-                e = "+9";
+                e = "+9 ";
             }
             var prm = SplitDirectives(systemMessage);
 
