@@ -11,11 +11,11 @@ using TCC.Windows;
 
 namespace TCC.ViewModels
 {
-    public class ChatWindowViewModel : TSPropertyChanged
+    public class ChatWindowViewModel : TccWindowViewModel
     {
         private DispatcherTimer hideTimer;
         private static ChatWindowViewModel _instance;
-        private double scale = SettingsManager.ChatWindowSettings.Scale;
+        
         private bool isChatVisible;
         private SynchronizedObservableCollection<ChatMessage> _chatMessages;
         private ConcurrentQueue<ChatMessage> _queue;
@@ -41,24 +41,8 @@ namespace TCC.ViewModels
                 NotifyPropertyChanged(nameof(IsChatVisible));
             }
         }
-        public double Scale
-        {
-            get { return scale; }
-            set
-            {
-                if (scale == value) return;
-                scale = value;
-                NotifyPropertyChanged("Scale");
-            }
-        }
-        public double ChatWindowOpacity
-        {
-            get { return SettingsManager.ChatWindowOpacity; }
-            set
-            {
-                NotifyPropertyChanged(nameof(ChatWindowOpacity));
-            }
-        }
+        public double ChatWindowOpacity => SettingsManager.ChatWindowOpacity;
+
         public bool LfgOn
         {
             get => SettingsManager.LfgOn;
@@ -118,13 +102,14 @@ namespace TCC.ViewModels
             }
         }
 
-        public List<ChatChannelOnOff> VisibleChannels { get => SettingsManager.EnabledChatChannels; }
+        public List<ChatChannelOnOff> VisibleChannels => SettingsManager.EnabledChatChannels;
         private readonly object _lock = new object();
         private SynchronizedObservableCollection<Tab> _tabs;
 
         public ChatWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
+            _scale = SettingsManager.ChatWindowSettings.Scale;
             _chatMessages = new SynchronizedObservableCollection<ChatMessage>(_dispatcher);
             _queue = new ConcurrentQueue<ChatMessage>();
             _lfgs = new SynchronizedObservableCollection<LFG>(_dispatcher);
@@ -139,7 +124,7 @@ namespace TCC.ViewModels
                     WindowManager.ChatWindow.RefreshTopmost();
                 }
             };
-
+            
             ChatMessages.CollectionChanged += ChatMessages_CollectionChanged;
             BindingOperations.EnableCollectionSynchronization(ChatMessages, _lock);
 
@@ -318,6 +303,11 @@ namespace TCC.ViewModels
         public void ScrollToBottom()
         {
             WindowManager.ChatWindow.ScrollToBottom();
+        }
+
+        public void NotifyOpacityChange()
+        {
+            NotifyPropertyChanged(nameof(ChatWindowOpacity));
         }
     }
 

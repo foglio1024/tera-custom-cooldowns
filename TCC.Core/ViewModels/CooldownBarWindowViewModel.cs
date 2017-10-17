@@ -7,23 +7,13 @@ using TCC.Data;
 namespace TCC.ViewModels
 {
 
-    public class CooldownWindowViewModel : TSPropertyChanged
+    public class CooldownWindowViewModel : TccWindowViewModel
     {
         private static CooldownWindowViewModel _instance;
         public static CooldownWindowViewModel Instance => _instance ?? (_instance = new CooldownWindowViewModel());
 
         public bool IsTeraOnTop => WindowManager.IsTccVisible;
-        private double scale = SettingsManager.CooldownWindowSettings.Scale;
-        public double Scale
-        {
-            get => scale;
-            set
-            {
-                if (scale == value) return;
-                scale = value;
-                NotifyPropertyChanged("Scale");
-            }
-        }
+
 
         private SynchronizedObservableCollection<SkillCooldown> _shortSkills;
         private SynchronizedObservableCollection<SkillCooldown> _longSkills;
@@ -372,6 +362,7 @@ namespace TCC.ViewModels
         public CooldownWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
+            _scale = SettingsManager.CooldownWindowSettings.Scale;
             ShortSkills = new SynchronizedObservableCollection<SkillCooldown>(_dispatcher);
             LongSkills = new SynchronizedObservableCollection<SkillCooldown>(_dispatcher);
             SecondarySkills = new SynchronizedObservableCollection<FixedSkillCooldown>(_dispatcher);

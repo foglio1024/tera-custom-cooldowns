@@ -11,7 +11,7 @@ using TCC.Parsing;
 
 namespace TCC.ViewModels
 {
-    public class BossGageWindowViewModel : TSPropertyChanged
+    public class BossGageWindowViewModel : TccWindowViewModel
     {
         public const int PH1SHIELD_DURATION = 16;
         private static BossGageWindowViewModel _instance;
@@ -22,7 +22,7 @@ namespace TCC.ViewModels
         private Boss selectedDragon;
         private Boss _vergos;
         private SynchronizedObservableCollection<Boss> _currentNPCs;
-        private double scale = SettingsManager.BossWindowSettings.Scale;
+        
 
         private List<Boss> _holdedDragons = new List<Boss>();
         private Dictionary<ulong, string> GuildTowers = new Dictionary<ulong, string>();
@@ -42,11 +42,11 @@ namespace TCC.ViewModels
         }
         public double Scale
         {
-            get { return scale; }
+            get { return _scale; }
             set
             {
-                if (scale == value) return;
-                scale = value;
+                if (_scale == value) return;
+                _scale = value;
                 NotifyPropertyChanged("Scale");
             }
         }
@@ -127,6 +127,7 @@ namespace TCC.ViewModels
         public BossGageWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
+            _scale = SettingsManager.BossWindowSettings.Scale;
             _currentNPCs = new SynchronizedObservableCollection<Boss>(_dispatcher);
             WindowManager.TccVisibilityChanged += (s, ev) =>
             {

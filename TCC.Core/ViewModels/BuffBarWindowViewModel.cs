@@ -4,24 +4,10 @@ using TCC.Data;
 
 namespace TCC.ViewModels
 {
-    public class BuffBarWindowViewModel : TSPropertyChanged
+    public class BuffBarWindowViewModel : TccWindowViewModel
     {
         private static BuffBarWindowViewModel _instance;
         public static BuffBarWindowViewModel Instance => _instance ?? (_instance = new BuffBarWindowViewModel());
-        private double scale = SettingsManager.BuffWindowSettings.Scale;
-        public double Scale
-        {
-            get
-            {
-                return scale;
-            }
-            set
-            {
-                if (scale == value) return;
-                scale = value;
-                NotifyPropertyChanged("Scale");
-            }
-        }
 
         private FlowDirection direction = SettingsManager.BuffsDirection;
         public FlowDirection Direction
@@ -41,6 +27,7 @@ namespace TCC.ViewModels
         public BuffBarWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
+            _scale = SettingsManager.BuffWindowSettings.Scale;
             WindowManager.TccVisibilityChanged += (s, ev) =>
             {
                 //RaisePropertyChanged("IsTeraOnTop");

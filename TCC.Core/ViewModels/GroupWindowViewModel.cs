@@ -10,7 +10,7 @@ using TCC.Parsing.Messages;
 
 namespace TCC.ViewModels
 {
-    public class GroupWindowViewModel : TSPropertyChanged
+    public class GroupWindowViewModel : TccWindowViewModel
     {
         private static GroupWindowViewModel _instance;
         public static GroupWindowViewModel Instance => _instance ?? (_instance = new GroupWindowViewModel());
@@ -19,23 +19,11 @@ namespace TCC.ViewModels
         {
             get => WindowManager.IsTccVisible;
         }
-        public double Scale
-        {
-            get
-            {
-                return scale;
-            }
-            set
-            {
-                if (scale == value) return;
-                scale = value;
-                NotifyPropertyChanged("Scale");
-            }
-        }
-        private double scale = SettingsManager.GroupWindowSettings.Scale;
         public GroupWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
+            _scale = SettingsManager.GroupWindowSettings.Scale;
+
             WindowManager.TccVisibilityChanged += (s, ev) =>
             {
                 NotifyPropertyChanged("IsTeraOnTop");
@@ -923,6 +911,19 @@ namespace TCC.ViewModels
         public void NotifyThresholdChanged()
         {
             NotifyPropertyChanged(nameof(GroupSize));
+        }
+
+        public void UpdateMemberGear(S_SPAWN_USER sSpawnUser)
+        {
+            var u = All.FirstOrDefault(x => x.PlayerId == sSpawnUser.PlayerId && x.ServerId == sSpawnUser.ServerId);
+            if (u != null)
+            {
+                u.Weapon = sSpawnUser.Weapon;
+                u.Armor = sSpawnUser.Armor;
+                u.Gloves = sSpawnUser.Gloves;
+                u.Boots = sSpawnUser.Boots;
+            }
+
         }
     }
 }
