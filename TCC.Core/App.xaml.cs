@@ -95,8 +95,9 @@ namespace TCC
             ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", $"<FONT>{ver}</FONT>"));
 
             return;
-
             SessionManager.CurrentPlayer = new Player(1, "Foglio");
+            CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(Class.Warrior).ToLower() + "-skills.xml", Class.Warrior);
+
             for (uint i = 0; i < 1; i++)
             {
                 var u = new User(GroupWindowViewModel.Instance.GetDispatcher());
@@ -104,8 +105,7 @@ namespace TCC
                 u.PlayerId = i;
                 u.Online = true;
                 u.UserClass = Class.Warrior;
-                if (i == 1) u.HasAggro = true;
-                if (i == 0) u.IsLeader = true;
+                
 
                 GroupWindowViewModel.Instance.AddOrUpdateMember(u);
             }
