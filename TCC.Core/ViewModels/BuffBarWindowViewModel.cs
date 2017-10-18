@@ -9,21 +9,8 @@ namespace TCC.ViewModels
         private static BuffBarWindowViewModel _instance;
         public static BuffBarWindowViewModel Instance => _instance ?? (_instance = new BuffBarWindowViewModel());
 
-        private FlowDirection direction = SettingsManager.BuffsDirection;
-        public FlowDirection Direction
-        {
-            get
-            {
-                return direction;
-            }
-            set
-            {
-                if (direction == value) return;
-                direction = value;
-                NotifyPropertyChanged("Direction");
-            }
-        }
-
+        public FlowDirection Direction => SettingsManager.BuffsDirection;
+        
         public BuffBarWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
@@ -38,6 +25,10 @@ namespace TCC.ViewModels
             };
         }
 
+        public void NotifyDirectionChanged()
+        {
+            NotifyPropertyChanged(nameof(Direction));
+        }
         private Player _player;
         public Player Player
         {

@@ -14,8 +14,8 @@ namespace TCC.ViewModels
         public WindowSettings ClassWindowSettings => SettingsManager.ClassWindowSettings;
         public WindowSettings GroupWindowSettings => SettingsManager.GroupWindowSettings;
         public WindowSettings BuffWindowSettings => SettingsManager.BuffWindowSettings;
-        public WindowSettings CharacterWindowSettings=> SettingsManager.CharacterWindowSettings;
-        public WindowSettings ChatWindowSettings=> SettingsManager.ChatWindowSettings;
+        public WindowSettings CharacterWindowSettings => SettingsManager.CharacterWindowSettings;
+        public WindowSettings ChatWindowSettings => SettingsManager.ChatWindowSettings;
         public WindowSettings BossWindowSettings => SettingsManager.BossWindowSettings;
 
         //enable settings
@@ -509,7 +509,7 @@ namespace TCC.ViewModels
         //        NotifyPropertyChanged("IsClassWindowTransparent");
         //    }
         //}
-       
+
         ////scale settings
         //public double CooldownWindowScale
         //{
@@ -947,43 +947,66 @@ namespace TCC.ViewModels
                 if (value == true) GroupWindowViewModel.Instance.ClearAllAbnormalities();
             }
         }
-        public bool IsLeftToRightOn
+        //public bool IsLeftToRightOn
+        //{
+        //    get { return SettingsManager.BuffsDirection == FlowDirection.LeftToRight ? true : false; }
+        //    set
+        //    {
+        //        FlowDirection s;
+        //        if (value == true) s = FlowDirection.LeftToRight;
+        //        else s = FlowDirection.RightToLeft;
+        //        if (SettingsManager.BuffsDirection == s) return;
+        //        SettingsManager.BuffsDirection = s;
+        //        WindowManager.BuffWindow.Dispatcher.Invoke(() =>
+        //        {
+        //            ((BuffBarWindowViewModel)WindowManager.BuffWindow.DataContext).Direction = s;
+        //        });
+        //        NotifyPropertyChanged("IsLeftToRightOn");
+        //    }
+        //}
+
+        public FlowDirection BuffsDirection
         {
-            get { return SettingsManager.BuffsDirection == FlowDirection.LeftToRight ? true : false; }
+            get => SettingsManager.BuffsDirection;
             set
             {
-                FlowDirection s;
-                if (value == true) s = FlowDirection.LeftToRight;
-                else s = FlowDirection.RightToLeft;
-                if (SettingsManager.BuffsDirection == s) return;
-                SettingsManager.BuffsDirection = s;
-                WindowManager.BuffWindow.Dispatcher.Invoke(() =>
-                {
-                    ((BuffBarWindowViewModel)WindowManager.BuffWindow.DataContext).Direction = s;
-                });
-                NotifyPropertyChanged("IsLeftToRightOn");
+                if (SettingsManager.BuffsDirection == value) return;
+                SettingsManager.BuffsDirection = value;
+                BuffBarWindowViewModel.Instance.NotifyDirectionChanged();
+                NotifyPropertyChanged(nameof(BuffsDirection));
             }
         }
-        public bool ClassWindowOn
+        //public bool ClassWindowOn
+        //{
+        //    get { return SettingsManager.ClassWindowOn; }
+        //    set
+        //    {
+        //        if (SettingsManager.ClassWindowOn == value) return;
+        //        SettingsManager.ClassWindowOn = value;
+        //        CooldownWindowViewModel.Instance.IsClassWindowOn = value;
+        //        //WindowManager.CooldownWindow.SwitchMode();
+        //        //if(value == true)
+        //        //{
+        //        //    IsCooldownWindowVisible = false;
+        //        //    IsClassWindowVisible = true;
+        //        //}
+        //        //else
+        //        //{
+        //        //    IsCooldownWindowVisible = true;
+        //        //    IsClassWindowVisible = false;
+        //        //}
+        //        NotifyPropertyChanged("ClassWindowOn");
+        //    }
+        //}
+        public CooldownBarMode CooldownBarMode
         {
-            get { return SettingsManager.ClassWindowOn; }
+            get => SettingsManager.CooldownBarMode;
             set
             {
-                if (SettingsManager.ClassWindowOn == value) return;
-                SettingsManager.ClassWindowOn = value;
-                CooldownWindowViewModel.Instance.IsClassWindowOn = value;
-                //WindowManager.CooldownWindow.SwitchMode();
-                //if(value == true)
-                //{
-                //    IsCooldownWindowVisible = false;
-                //    IsClassWindowVisible = true;
-                //}
-                //else
-                //{
-                //    IsCooldownWindowVisible = true;
-                //    IsClassWindowVisible = false;
-                //}
-                NotifyPropertyChanged("ClassWindowOn");
+                if (SettingsManager.CooldownBarMode == value) return;
+                SettingsManager.CooldownBarMode = value;
+                CooldownWindowViewModel.Instance.NotifyModeChanged();
+                NotifyPropertyChanged(nameof(CooldownBarMode));
             }
         }
         public bool ClickThruWhenDim
@@ -1185,7 +1208,7 @@ namespace TCC.ViewModels
             get => SettingsManager.ChatWindowOpacity;
             set
             {
-                if(SettingsManager.ChatWindowOpacity == value) return;
+                if (SettingsManager.ChatWindowOpacity == value) return;
                 SettingsManager.ChatWindowOpacity = value;
                 ChatWindowViewModel.Instance.NotifyOpacityChange();
                 NotifyPropertyChanged(nameof(ChatWindowOpacity));
@@ -1196,7 +1219,7 @@ namespace TCC.ViewModels
             get => SettingsManager.FontSize;
             set
             {
-                if(SettingsManager.FontSize == value) return;
+                if (SettingsManager.FontSize == value) return;
                 var val = value;
                 if (val < 10) val = 10;
                 SettingsManager.FontSize = val;
@@ -1283,5 +1306,7 @@ namespace TCC.ViewModels
         //}
 
         public List<ClickThruMode> ClickThruModes => Utils.ListFromEnum<ClickThruMode>();
+        public List<CooldownBarMode> CooldownBarModes => Utils.ListFromEnum<CooldownBarMode>();
+        public List<FlowDirection> FlowDirections => Utils.ListFromEnum<FlowDirection>();
     }
 }
