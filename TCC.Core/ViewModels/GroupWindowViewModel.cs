@@ -916,13 +916,22 @@ namespace TCC.ViewModels
         public void UpdateMemberGear(S_SPAWN_USER sSpawnUser)
         {
             var u = All.FirstOrDefault(x => x.PlayerId == sSpawnUser.PlayerId && x.ServerId == sSpawnUser.ServerId);
-            if (u != null)
-            {
-                u.Weapon = sSpawnUser.Weapon;
-                u.Armor = sSpawnUser.Armor;
-                u.Gloves = sSpawnUser.Gloves;
-                u.Boots = sSpawnUser.Boots;
-            }
+            if (u == null) return;
+            u.Weapon = sSpawnUser.Weapon;
+            u.Armor = sSpawnUser.Armor;
+            u.Gloves = sSpawnUser.Gloves;
+            u.Boots = sSpawnUser.Boots;
+        }
+
+        public void UpdateMyGear()
+        {
+            var u = All.FirstOrDefault(x => x.PlayerId == SessionManager.CurrentPlayer.PlayerId && x.ServerId == SessionManager.CurrentPlayer.ServerId);
+            if (u == null) return;
+
+            u.Weapon = InfoWindowViewModel.Instance.CurrentCharacter.Gear.FirstOrDefault(x => x.Piece == GearPiece.Weapon);
+            u.Armor = InfoWindowViewModel.Instance.CurrentCharacter.Gear.FirstOrDefault(x => x.Piece == GearPiece.Armor);
+            u.Gloves = InfoWindowViewModel.Instance.CurrentCharacter.Gear.FirstOrDefault(x => x.Piece == GearPiece.Hands);
+            u.Boots = InfoWindowViewModel.Instance.CurrentCharacter.Gear.FirstOrDefault(x => x.Piece == GearPiece.Feet);
 
         }
     }
