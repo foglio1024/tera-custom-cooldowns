@@ -15,7 +15,7 @@
 21	Buff	True	True	False	狩り_リアクション_抵抗テスト	リアクション抵抗確率10倍上昇	icon_skills.voidtrap_tex
 22	Buff	True	True	False	テスト_スキルダメージ増加	テスト専用！　全スキルダメージ40％増加！　	icon_skills.voidtrap_tex
 23	Buff	True	True	False	自分のクリティカル 100%	自身の攻撃が100％クリティカルになります。$BRテスト専用	
-24	Buff	True	True	False	相手へのクリティカル100％障害ステータス付与	相手に100％クリティカルを発生させる障害ステータス付与。$BRテスト専用	
+24	Buff	True	True	False	相手へのクリティカル100％デバフ付与	相手に100％クリティカルを発生させるデバフ付与。$BRテスト専用	
 25	Buff	True	True	True	TERA タイム	スキルのクールタイムが80％減少し、毎秒のマナ回復量が大きく増加します。	icon_status.pluswill_tex
 26	Buff	True	True	True	T.E.R.A TIME	全てのスキルのクールタイムが80％減少し、1秒あたりのマナ回復量が大幅に増加します。	icon_status.pluswill_tex
 27	Buff	True	True	True	T.E.R.A TIME	全てのスキルのクールタイムが80％減少し、1秒あたりのマナ回復量が大幅に増加します。	icon_status.pluswill_tex
@@ -30,13 +30,14 @@
 38	Buff	False	True	False			
 39	Buff	True	True	True	戦闘の気概（ネットカフェ）	攻撃力、攻撃速度、回復力が2%上昇します。この効果はネットカフェでのみ有効となります。	icon_status.plusecritical_tex
 40	Buff	True	True	True	バルデラの加護（公認ネットカフェ）	バルデラの加護の元、採集熟練度が30増加し、採集及び製作時間が短縮されます。この効果は公認ネットカフェのみで利用できます。	icon_items.artisanall_up_tex
-41	Buff	True	True	False	強化職人の加護	強化の際、成功確率が少し増加します。(覚醒強化、同一装備強化には適用されません)	icon_items.parts_heavyarmorc5_tex
-42	Buff	True	True	False	祝福された強化職人の加護	強化の際、成功確率が増加します。(覚醒強化、同一装備強化には適用されません)	icon_items.parts_heavyarmorc5_tex
-43	Buff	True	True	False	輝く強化職人の加護	強化の際、成功確率が大幅に増加します。 (覚醒強化、同一装備強化には適用されません)	icon_items.parts_heavyarmorc5_tex
-44	Buff	True	True	False	強化職人の加護	強化の際、成功確率が少し増加します。(覚醒強化、同一装備強化には適用されません)	icon_items.parts_heavyarmorc5_tex
-45	Buff	True	True	False	祝福された強化職人の加護	強化の際、成功確率が増加します。 (覚醒強化、同一装備強化には適用されません)	icon_items.parts_heavyarmorc5_tex
-46	Buff	True	True	False	輝く強化職人の加護	強化の際、成功確率が大幅に増加します。 (覚醒強化、同一装備強化には適用されません)	icon_items.parts_heavyarmorc5_tex
+41	Buff	True	True	False	強化職人の加護	強化の際、成功確率が少し増加します。	icon_items.parts_heavyarmorc5_tex
+42	Buff	True	True	False	祝福された強化職人の加護	強化の際、成功確率が増加します。	icon_items.parts_heavyarmorc5_tex
+43	Buff	True	True	False	輝く強化職人の加護	強化の際、成功確率が大幅に増加します。 	icon_items.parts_heavyarmorc5_tex
+44	Buff	True	True	False	強化職人の加護	強化の際、成功確率が少し増加します。	icon_items.parts_heavyarmorc5_tex
+45	Buff	True	True	False	祝福された強化職人の加護	強化の際、成功確率が増加します。	icon_items.parts_heavyarmorc5_tex
+46	Buff	True	True	False	輝く強化職人の加護	強化の際、成功確率が大幅に増加します。	icon_items.parts_heavyarmorc5_tex
 47	Buff	True	True	False	テスト_スキルダメージ増加/敵対値減少	テスト専用！すべてのスキルダメージ50％上昇/敵対値50％減少	icon_skills.voidtrap_tex
+51	Buff	True	True	False	DPSテスト用気絶	DPSテストの為に気絶した状態。以下の異常状態が追加適用される。&#xA;耐久力$H_W_BAD12%$COLOR_END減少(アーマーブレイク3重複)&#xA;耐久力$H_W_BAD10%$COLOR_END減少 (ペインカーズ紋章)&#xA;クリティカル抵抗$H_W_BAD-12$COLOR_END減少 (ペインカーズ特性)	icon_items.q_bones_tex
 101	Buff	True	True	False	反撃	効果持続中、ダウン/硬直状態になりません。	icon_skills.risingattack_tex
 201	Buff	False	True	False	パワーブレシング I	強靭な力の祝福により、力が$H_W_GOOD17$COLOR_END上昇します。	icon_skills.attackup_tex
 202	Buff	False	True	False	パワーブレシング II	強靭な力の祝福により、力が$H_W_GOOD25$COLOR_END上昇します。	icon_skills.attackup_tex
@@ -58,6 +59,7 @@
 912	Buff	True	True	True	ノクタニウム強化弾	ノクタニウム強化弾を使用して、スキル効果を増大させます。	icon_items.union_supplies5_tex
 913	Buff	True	True	True	ノクタニウム強化弾	ノクタニウム強化弾を使用して、スキル効果を増大させます。	icon_items.union_supplies5_tex
 916	Buff	True	True	True	ノクタニウム強化弾	ノクタニウム強化弾を使用して、スキル効果を増大させます。	icon_items.union_supplies5_tex
+917	Buff	True	True	True	ノクタニウム強化弾	ノクタニウム強化弾を使用して、スキル効果を増大させます。	icon_items.union_supplies5_tex
 920	Buff	True	True	False	上級ノクタニウム効果【高級】	スキル效果を上昇させます。ノクタニウム強化弾の $H_W_GOOD1.5$COLOR_END倍の効果を持ち、全てのスキルの攻撃力が $H_W_GOOD4～12％$COLOR_END上昇します。(一部スキルのみ $H_W_GOOD6～20％$COLOR_END上昇します。)通常のノクタニウム強化弾の效果と重複して適用されません。	icon_items.noctan_tex
 921	Buff	True	True	False	上級ノクタニウム効果【貴重】	スキル效果を上昇させます。ノクタニウム強化弾の $H_W_GOOD1.5$COLOR_END倍の効果を持ち、全てのスキルの攻撃力が $H_W_GOOD4～12％$COLOR_END上昇します。(一部スキルのみ $H_W_GOOD6～20％$COLOR_END上昇します。)通常のノクタニウム強化弾の效果と重複して適用されません。	icon_items.noctan_tex
 922	Buff	True	True	False	上級ノクタニウム効果【伝説】	スキル效果を上昇させます。ノクタニウム強化弾の $H_W_GOOD1.5$COLOR_END倍の効果を持ち、全てのスキルの攻撃力が $H_W_GOOD4～12％$COLOR_END上昇します。(一部スキルのみ $H_W_GOOD6～20％$COLOR_END上昇します。)通常のノクタニウム強化弾の效果と重複して適用されません。	icon_items.noctan_tex
@@ -111,6 +113,7 @@
 1491	Buff	True	True	False	ポーション	$H_W_GOOD1$COLOR_END second毎に全HPの$H_W_GOOD6％$COLOR_ENDが回復します。	icon_items.potion1_tex
 1495	WeakeningEffect	True	True	False	戦場の毒気	戦場の毒気により、HPが一秒当たり20000ずつ減少します。	icon_status.poisonstatus_tex
 1510	Buff	False	True	False	ラピッドポーション	全HPの$H_W_GOOD50％$COLOR_ENDが即時に回復します。	icon_items.potion5_tex
+1511	Buff	False	True	False	エリクサー	全HP、MPの$H_W_GOOD60％$COLOR_ENDを即時回復します。	icon_items.potion5_tex
 1530	Buff	True	True	False	マナポーション	$H_W_GOOD1$COLOR_END second毎に全MPの$H_W_GOOD5％$COLOR_ENDが回復します。	icon_items.potion19_tex
 1610	Buff	True	True	False	治癒の玉	$H_W_GOOD1$COLOR_END second毎に全HPの$H_W_GOOD2％$COLOR_ENDが回復します。	icon_items.potion1_tex
 1630	Buff	False	True	False	快癒の玉	全HPの$H_W_GOOD25％$COLOR_ENDが即時に回復します。	icon_items.potion5_tex
@@ -125,10 +128,10 @@
 2000	Buff	True	True	False	MP持続回復 II	$H_W_GOOD2$COLOR_END second1毎に全MPの$H_W_GOOD5％$COLOR_ENDが回復します。	icon_status.delaympgain_tex
 2010	Buff	True	True	False	MP持続回復 I	$H_W_GOOD2$COLOR_END second1毎に全MPの$H_W_GOOD2％$COLOR_ENDが回復します。	icon_status.delaympgain_tex
 2020	Buff	False	True	False	HP即時回復	全HPの$H_W_GOOD35％$COLOR_ENDが即時に回復します。	icon_status.delayheal_tex
-2030	Buff	True	True	False	障害ステータス抵抗増加	全障害ステータス抵抗が$H_W_GOOD20$COLOR_END上昇します。	icon_status.pluseconfuseresist_tex
-2040	Buff	True	True	False	不屈の意志 I	耐久力、均衡、全障害ステータス抵抗が各$H_W_GOOD70%$COLOR_ENDずつ上昇します。	icon_status.pluswill_tex
-2041	Buff	True	True	False	不屈の意志 II	耐久力、均衡、全障害ステータス抵抗が各$H_W_GOOD70%$COLOR_ENDずつ上昇します。	icon_status.pluswill_tex
-2042	Buff	True	True	False	不屈の意志 III	耐久力、均衡、全障害ステータス抵抗が各$H_W_GOOD70%$COLOR_ENDずつ上昇します。	icon_status.pluswill_tex
+2030	Buff	True	True	False	デバフ抵抗増加	全てのデバフ抵抗が$H_W_GOOD20$COLOR_END上昇します。	icon_status.pluseconfuseresist_tex
+2040	Buff	True	True	False	不屈の意志 I	耐久力、均衡、全てのデバフ抵抗が各$H_W_GOOD70%$COLOR_ENDずつ上昇します。	icon_status.pluswill_tex
+2041	Buff	True	True	False	不屈の意志 II	耐久力、均衡、全てのデバフ抵抗が各$H_W_GOOD70%$COLOR_ENDずつ上昇します。	icon_status.pluswill_tex
+2042	Buff	True	True	False	不屈の意志 III	耐久力、均衡、全てのデバフ抵抗が各$H_W_GOOD70%$COLOR_ENDずつ上昇します。	icon_status.pluswill_tex
 2050	Buff	True	True	False	血の渇望	全てのスキルのダメージが$H_W_GOOD30%$COLOR_END増加し、攻撃速度が$H_W_GOOD30%$COLOR_END上昇します。	icon_status.battlefieldbuff02_tex
 2051	Buff	True	True	True	血の渇望	このモンスターを討伐すると、全てのスキルのダメージと攻撃速度が上昇する$H_W_GOOD血の渇望$COLOR_ENDの効果を受けることができます！　	icon_status.battlefieldbuff02_tex
 2052	Stun	True	False	False	秘宝の呪い	クーマスの宝物を持っている間、移動以外の行動ができなくなります。	icon_status.diseaseup_tex
@@ -150,13 +153,13 @@
 2069	WeakeningEffect	True	False	False	宝物の重さ	宝物を持っている間、基本移動速度が$H_W_BAD60%$COLOR_END減少します。	icon_status.f2p_rewardbox_tex
 2070	Buff	True	True	False	無限の祝福	力が$H_W_GOOD20$COLOR_END、耐久力が$H_W_GOOD10$COLOR_END、攻撃速度が$H_W_GOOD20%$COLOR_END上昇します。追加で移動速度も$H_W_GOOD10$COLOR_END上昇します。	icon_status.battlefieldbuff03_tex
 2071	Buff	True	True	True	無限の祝福	このモンスターを討伐すると、自軍全員の力、耐久力、攻撃速度、移動速度が上昇する$H_W_GOOD無限の祝福$COLOR_ENDの効果を受けることができます！　	icon_status.battlefieldbuff03_tex
-2072	Buff	True	True	False	天上の加護	効果持続中、プレイヤーからのダメージは無効化され、ダウン/硬直も発生しません。また、全障害ステータスを防ぎます。この効果はダメージを受けても乗り物が解除されず、戦闘に関するスキルを使用すると即解除されます。	icon_status.mpsuckup_tex
+2072	Buff	True	True	False	天上の加護	効果持続中、プレイヤーからのダメージは無効化され、ダウン/硬直も発生しません。また、全てのデバフを防ぎます。この効果はダメージを受けても乗り物が解除されず、戦闘に関するスキルを使用すると即解除されます。	icon_status.mpsuckup_tex
 2073	WeakeningEffect	True	False	False	ネバネバ	移動速度が$H_W_BAD0,5$COLOR_END減少します。	icon_status.minusmove_tex
 2074	Stun	True	False	False	ヘロヘロ	衝撃により気絶しました。	icon_skills.paralysistrap_tex
-2075	Buff	True	True	False	天上の加護（赤ちゃんクーマス）	効果持続中、プレイヤーからのダメージは無効化され、ダウン/硬直も発生しません。また、全障害ステータスを防ぎます。この効果はダメージを受けても乗り物が解除されず、戦闘に関するスキルを使用すると即解除されます。	icon_status.mpsuckup_tex
+2075	Buff	True	True	False	天上の加護（赤ちゃんクーマス）	効果持続中、プレイヤーからのダメージは無効化され、ダウン/硬直も発生しません。また、全てのデバフを防ぎます。この効果はダメージを受けても乗り物が解除されず、戦闘に関するスキルを使用すると即解除されます。	icon_status.mpsuckup_tex
 2080	Buff	True	True	True	反攻の狼煙	最大HPが$H_W_GOOD50%$COLOR_END増加し、力と耐久力が$H_W_GOOD40$COLOR_END上昇します。追加で移動速度も$H_W_GOOD50$COLOR_END上昇します。$BRこの効果は敵軍との点数差が縮まると消滅します。	icon_status.battlefieldbuff04_tex
 2081	Buff	True	True	False	【雪合戦】保護呪文書	バリアが最大$H_W_GOOD100000$COLOR_ENDのダメージを無効化します。効果発動中はダウン/硬直が発生しません。最大値を超えると持続時間に関係なく効果が解除されます。	icon_items.scroll_def_protect_level_59_tex
-2082	Buff	True	True	False	【雪合戦】保護呪文書	効果持続中、プレイヤーからのダメージは無効化され、ダウン/硬直も発生しません。また、全障害ステータスを防ぎます。	icon_status.mpsuckup_tex
+2082	Buff	True	True	False	【雪合戦】保護呪文書	効果持続中、プレイヤーからのダメージは無効化され、ダウン/硬直も発生しません。また、全てのデバフを防ぎます。	icon_status.mpsuckup_tex
 2083	Buff	True	True	True	反攻の狼煙 I	最大HPが$H_W_GOOD10%$COLOR_END増加し、力と耐久力が$H_W_GOOD10$COLOR_END上昇します。追加で移動速度も$H_W_GOOD10$COLOR_END上昇します。	icon_status.battlefieldbuff04_tex
 2084	Buff	True	True	True	反攻の狼煙 II	最大HPが$H_W_GOOD30%$COLOR_END増加し、力と耐久力が$H_W_GOOD15$COLOR_END上昇します。追加で移動速度も$H_W_GOOD20$COLOR_END上昇します。	icon_status.battlefieldbuff04_tex
 2085	Buff	True	True	True	反攻の狼煙 III	最大HPが$H_W_GOOD50%$COLOR_END増加し、力と耐久力が$H_W_GOOD20$COLOR_END上昇します。追加で移動速度も$H_W_GOOD30$COLOR_END上昇します。	icon_status.battlefieldbuff04_tex
@@ -320,36 +323,36 @@
 2759	Buff	True	True	False	瞬間呪文書：保護 V	バリアが最大$H_W_GOOD3595$COLOR_ENDのダメージを無効化します。効果持続中、ダウン/硬直状態になりません。最大値を超えると持続時間に関わらず即解除されます。	icon_items.scroll_def_protect_level_59_tex
 2760	Buff	True	True	False	瞬間呪文書：保護 VI	バリアが最大$H_W_GOOD13200$COLOR_ENDのダメージを無効化します。効果発動中はダウン/硬直が発生しません。最大値を超えると持続時間に関係なく効果が解除されます。	icon_items.scroll_def_protect_level_59_tex
 2761	Buff	True	True	False	瞬間呪文書：保護 VII	バリアが最大$H_W_GOOD16000$COLOR_ENDのダメージを無効化します。効果発動中はダウン/硬直が発生しません。最大値を超えると持続時間に関係なく効果が解除されます。	icon_items.scroll_def_protect_level_59_tex
-2770	Buff	True	True	False	抵抗呪文書：弱化 I	障害ステータス【状態弱化】抵抗が$H_W_GOOD2$COLOR_END上昇します。	icon_items.scroll_debuff_protect_level_1_tex
-2771	Buff	True	True	False	抵抗呪文書：弱化 II	障害ステータス【状態弱化】抵抗が$H_W_GOOD4$COLOR_END上昇します。	icon_items.scroll_debuff_protect_level_23_tex
-2772	Buff	True	True	False	抵抗呪文書：弱化 III	障害ステータス【状態弱化】抵抗が$H_W_GOOD6$COLOR_END上昇します。	icon_items.scroll_debuff_protect_level_35_tex
-2773	Buff	True	True	False	抵抗呪文書：弱化 IV	障害ステータス【状態弱化】抵抗が$H_W_GOOD8$COLOR_END上昇します。	icon_items.scroll_debuff_protect_level_47_tex
-2774	Buff	True	True	False	抵抗呪文書：弱化 V	障害ステータス【状態弱化】抵抗が$H_W_GOOD10$COLOR_END上昇します。	icon_items.scroll_debuff_protect_level_59_tex
-2785	Buff	True	True	False	抵抗呪文書：持続ダメージ I	障害ステータス【持続ダメージ】抵抗が$H_W_GOOD2$COLOR_END上昇します。	icon_items.scroll_dot_protect_level_1_tex
-2786	Buff	True	True	False	抵抗呪文書：持続ダメージ II	障害ステータス【持続ダメージ】抵抗が$H_W_GOOD4$COLOR_END上昇します。	icon_items.scroll_dot_protect_level_23_tex
-2787	Buff	True	True	False	抵抗呪文書：持続ダメージ III	障害ステータス【持続ダメージ】抵抗が$H_W_GOOD6$COLOR_END上昇します。	icon_items.scroll_dot_protect_level_35_tex
-2788	Buff	True	True	False	抵抗呪文書：持続ダメージ IV	障害ステータス【持続ダメージ】抵抗が$H_W_GOOD8$COLOR_END上昇します。	icon_items.scroll_dot_protect_level_47_tex
-2789	Buff	True	True	False	抵抗呪文書：持続ダメージ V	障害ステータス【持続ダメージ】抵抗が$H_W_GOOD10$COLOR_END上昇します。	icon_items.scroll_dot_protect_level_59_tex
-2800	Buff	True	True	False	抵抗呪文書：行動不能 I	障害ステータス【行動不能】抵抗が$H_W_GOOD2$COLOR_END上昇します。	icon_items.scroll_sleep_protect_level_1_tex
-2801	Buff	True	True	False	抵抗呪文書：行動不能 II	障害ステータス【行動不能】抵抗が$H_W_GOOD4$COLOR_END上昇します。	icon_items.scroll_sleep_protect_level_23_tex
-2802	Buff	True	True	False	抵抗呪文書：行動不能 III	障害ステータス【行動不能】抵抗が$H_W_GOOD6$COLOR_END上昇します。	icon_items.scroll_sleep_protect_level_35_tex
-2803	Buff	True	True	False	抵抗呪文書：行動不能 IV	障害ステータス【行動不能】抵抗が$H_W_GOOD8$COLOR_END上昇します。	icon_items.scroll_sleep_protect_level_47_tex
-2804	Buff	True	True	False	抵抗呪文書：行動不能 V	障害ステータス【行動不能】抵抗が$H_W_GOOD10$COLOR_END上昇します。	icon_items.scroll_sleep_protect_level_59_tex
-2815	Buff	True	True	False	抵抗秘伝書：弱化 I	障害ステータス【状態弱化】抵抗が$H_W_GOOD20$COLOR_END上昇します。	icon_items.scroll_debuff_protect_level_1_tex
-2816	Buff	True	True	False	抵抗秘伝書：弱化 II	障害ステータス【状態弱化】抵抗が$H_W_GOOD30$COLOR_END上昇します。	icon_items.scroll_debuff_protect_level_23_tex
-2817	Buff	True	True	False	抵抗秘伝書：弱化 III	障害ステータス【状態弱化】抵抗が$H_W_GOOD40$COLOR_END上昇します。	icon_items.scroll_debuff_protect_level_35_tex
-2818	Buff	True	True	False	抵抗秘伝書：弱化 IV	障害ステータス【状態弱化】抵抗が$H_W_GOOD50$COLOR_END上昇します。	icon_items.scroll_debuff_protect_level_47_tex
-2819	Buff	True	True	False	抵抗秘伝書：弱化 V	障害ステータス【状態弱化】抵抗が$H_W_GOOD60$COLOR_END上昇します。	icon_items.scroll_debuff_protect_level_59_tex
-2830	Buff	True	True	False	抵抗秘伝書：持続ダメージ I	障害ステータス【持続ダメージ】抵抗が$H_W_GOOD20$COLOR_END上昇します。	icon_items.scroll_dot_protect_level_1_tex
-2831	Buff	True	True	False	抵抗秘伝書：持続ダメージ II	障害ステータス【持続ダメージ】抵抗が$H_W_GOOD30$COLOR_END上昇します。	icon_items.scroll_dot_protect_level_23_tex
-2832	Buff	True	True	False	抵抗秘伝書：持続ダメージ III	障害ステータス【持続ダメージ】抵抗が$H_W_GOOD40$COLOR_END上昇します。	icon_items.scroll_dot_protect_level_35_tex
-2833	Buff	True	True	False	抵抗秘伝書：持続ダメージ IV	障害ステータス【持続ダメージ】抵抗が$H_W_GOOD50$COLOR_END上昇します。	icon_items.scroll_dot_protect_level_47_tex
-2834	Buff	True	True	False	抵抗秘伝書：持続ダメージ V	障害ステータス【持続ダメージ】抵抗が$H_W_GOOD60$COLOR_END上昇します。	icon_items.scroll_dot_protect_level_59_tex
-2845	Buff	True	True	False	抵抗秘伝書：行動不能 I	障害ステータス【行動不能】抵抗が$H_W_GOOD20$COLOR_END上昇します。	icon_items.scroll_sleep_protect_level_1_tex
-2846	Buff	True	True	False	抵抗秘伝書：行動不能 II	障害ステータス【行動不能】抵抗が$H_W_GOOD30$COLOR_END上昇します。	icon_items.scroll_sleep_protect_level_23_tex
-2847	Buff	True	True	False	抵抗秘伝書：行動不能 III	障害ステータス【行動不能】抵抗が$H_W_GOOD40$COLOR_END上昇します。	icon_items.scroll_sleep_protect_level_35_tex
-2848	Buff	True	True	False	抵抗秘伝書：行動不能 IV	障害ステータス【行動不能】抵抗が$H_W_GOOD50$COLOR_END上昇します。	icon_items.scroll_sleep_protect_level_47_tex
-2849	Buff	True	True	False	抵抗秘伝書：行動不能 V	障害ステータス【行動不能】抵抗が$H_W_GOOD60$COLOR_END上昇します。	icon_items.scroll_sleep_protect_level_59_tex
+2770	Buff	True	True	False	抵抗呪文書：弱化 I	デバフ【状態弱化】抵抗が$H_W_GOOD2$COLOR_END上昇します。	icon_items.scroll_debuff_protect_level_1_tex
+2771	Buff	True	True	False	抵抗呪文書：弱化 II	デバフ【状態弱化】抵抗が$H_W_GOOD4$COLOR_END上昇します。	icon_items.scroll_debuff_protect_level_23_tex
+2772	Buff	True	True	False	抵抗呪文書：弱化 III	デバフ【状態弱化】抵抗が$H_W_GOOD6$COLOR_END上昇します。	icon_items.scroll_debuff_protect_level_35_tex
+2773	Buff	True	True	False	抵抗呪文書：弱化 IV	デバフ【状態弱化】抵抗が$H_W_GOOD8$COLOR_END上昇します。	icon_items.scroll_debuff_protect_level_47_tex
+2774	Buff	True	True	False	抵抗呪文書：弱化 V	デバフ【状態弱化】抵抗が$H_W_GOOD10$COLOR_END上昇します。	icon_items.scroll_debuff_protect_level_59_tex
+2785	Buff	True	True	False	抵抗呪文書：持続ダメージ I	デバフ【持続ダメージ】抵抗が$H_W_GOOD2$COLOR_END上昇します。	icon_items.scroll_dot_protect_level_1_tex
+2786	Buff	True	True	False	抵抗呪文書：持続ダメージ II	デバフ【持続ダメージ】抵抗が$H_W_GOOD4$COLOR_END上昇します。	icon_items.scroll_dot_protect_level_23_tex
+2787	Buff	True	True	False	抵抗呪文書：持続ダメージ III	デバフ【持続ダメージ】抵抗が$H_W_GOOD6$COLOR_END上昇します。	icon_items.scroll_dot_protect_level_35_tex
+2788	Buff	True	True	False	抵抗呪文書：持続ダメージ IV	デバフ【持続ダメージ】抵抗が$H_W_GOOD8$COLOR_END上昇します。	icon_items.scroll_dot_protect_level_47_tex
+2789	Buff	True	True	False	抵抗呪文書：持続ダメージ V	デバフ【持続ダメージ】抵抗が$H_W_GOOD10$COLOR_END上昇します。	icon_items.scroll_dot_protect_level_59_tex
+2800	Buff	True	True	False	抵抗呪文書：行動不能 I	デバフ【行動不能】抵抗が$H_W_GOOD2$COLOR_END上昇します。	icon_items.scroll_sleep_protect_level_1_tex
+2801	Buff	True	True	False	抵抗呪文書：行動不能 II	デバフ【行動不能】抵抗が$H_W_GOOD4$COLOR_END上昇します。	icon_items.scroll_sleep_protect_level_23_tex
+2802	Buff	True	True	False	抵抗呪文書：行動不能 III	デバフ【行動不能】抵抗が$H_W_GOOD6$COLOR_END上昇します。	icon_items.scroll_sleep_protect_level_35_tex
+2803	Buff	True	True	False	抵抗呪文書：行動不能 IV	デバフ【行動不能】抵抗が$H_W_GOOD8$COLOR_END上昇します。	icon_items.scroll_sleep_protect_level_47_tex
+2804	Buff	True	True	False	抵抗呪文書：行動不能 V	デバフ【行動不能】抵抗が$H_W_GOOD10$COLOR_END上昇します。	icon_items.scroll_sleep_protect_level_59_tex
+2815	Buff	True	True	False	抵抗秘伝書：弱化 I	デバフ【状態弱化】抵抗が$H_W_GOOD20$COLOR_END上昇します。	icon_items.scroll_debuff_protect_level_1_tex
+2816	Buff	True	True	False	抵抗秘伝書：弱化 II	デバフ【状態弱化】抵抗が$H_W_GOOD30$COLOR_END上昇します。	icon_items.scroll_debuff_protect_level_23_tex
+2817	Buff	True	True	False	抵抗秘伝書：弱化 III	デバフ【状態弱化】抵抗が$H_W_GOOD40$COLOR_END上昇します。	icon_items.scroll_debuff_protect_level_35_tex
+2818	Buff	True	True	False	抵抗秘伝書：弱化 IV	デバフ【状態弱化】抵抗が$H_W_GOOD50$COLOR_END上昇します。	icon_items.scroll_debuff_protect_level_47_tex
+2819	Buff	True	True	False	抵抗秘伝書：弱化 V	デバフ【状態弱化】抵抗が$H_W_GOOD60$COLOR_END上昇します。	icon_items.scroll_debuff_protect_level_59_tex
+2830	Buff	True	True	False	抵抗秘伝書：持続ダメージ I	デバフ【持続ダメージ】抵抗が$H_W_GOOD20$COLOR_END上昇します。	icon_items.scroll_dot_protect_level_1_tex
+2831	Buff	True	True	False	抵抗秘伝書：持続ダメージ II	デバフ【持続ダメージ】抵抗が$H_W_GOOD30$COLOR_END上昇します。	icon_items.scroll_dot_protect_level_23_tex
+2832	Buff	True	True	False	抵抗秘伝書：持続ダメージ III	デバフ【持続ダメージ】抵抗が$H_W_GOOD40$COLOR_END上昇します。	icon_items.scroll_dot_protect_level_35_tex
+2833	Buff	True	True	False	抵抗秘伝書：持続ダメージ IV	デバフ【持続ダメージ】抵抗が$H_W_GOOD50$COLOR_END上昇します。	icon_items.scroll_dot_protect_level_47_tex
+2834	Buff	True	True	False	抵抗秘伝書：持続ダメージ V	デバフ【持続ダメージ】抵抗が$H_W_GOOD60$COLOR_END上昇します。	icon_items.scroll_dot_protect_level_59_tex
+2845	Buff	True	True	False	抵抗秘伝書：行動不能 I	デバフ【行動不能】抵抗が$H_W_GOOD20$COLOR_END上昇します。	icon_items.scroll_sleep_protect_level_1_tex
+2846	Buff	True	True	False	抵抗秘伝書：行動不能 II	デバフ【行動不能】抵抗が$H_W_GOOD30$COLOR_END上昇します。	icon_items.scroll_sleep_protect_level_23_tex
+2847	Buff	True	True	False	抵抗秘伝書：行動不能 III	デバフ【行動不能】抵抗が$H_W_GOOD40$COLOR_END上昇します。	icon_items.scroll_sleep_protect_level_35_tex
+2848	Buff	True	True	False	抵抗秘伝書：行動不能 IV	デバフ【行動不能】抵抗が$H_W_GOOD50$COLOR_END上昇します。	icon_items.scroll_sleep_protect_level_47_tex
+2849	Buff	True	True	False	抵抗秘伝書：行動不能 V	デバフ【行動不能】抵抗が$H_W_GOOD60$COLOR_END上昇します。	icon_items.scroll_sleep_protect_level_59_tex
 2860	Buff	True	True	False	瞬間呪文書：疾駆 I	移動速度が$H_W_GOOD50$COLOR_END上昇します。	icon_items.scroll_run_speed_level_1_tex
 2861	Buff	True	True	False	瞬間呪文書：疾駆 II	移動速度が$H_W_GOOD50$COLOR_END上昇します。	icon_items.scroll_run_speed_level_31_tex
 2862	Buff	True	True	False	瞬間呪文書：疾駆 III	移動速度が$H_W_GOOD50$COLOR_END上昇します。	icon_items.scroll_run_speed_level_51_tex
@@ -418,6 +421,7 @@
 4402	Buff	True	True	False	【友達招待特典】経験値100％上昇	【友達招待特典】30日間、狩りの獲得経験値が$H_W_GOOD100%$COLOR_END増加します。他の経験値が上昇するアイテムの効果と重複して適用されます。接続を終了しても残り時間は減少します。	icon_status.vitality_tex
 4403	Buff	False	True	False	気持ち良い挨拶_見えたらバグ	見えたらバグ	icon_skills.greeting_tex
 4404	Buff	True	True	False	【友達招待特典】攻撃力10％増加	7日間、攻撃時に攻撃力が$H_W_GOOD10%$COLOR_END上昇します。他の攻撃力が上昇するアイテムの効果と重複して適用されます。接続を終了しても残り時間は減少します。	icon_status.buff_of_kaia_tex
+4405	Buff	True	True	False	製作の楽しさ	武器、防具、消費アイテム、魔法刻印書の熟練度が500以下なら、製作で2倍の熟練度を獲得できます。	icon_items.small_insecta8_tex
 4500	Buff	True	True	True	高速成長	狩りの獲得経験値が$H_W_GOOD10％$COLOR_END増加します。	icon_status.plusfocus_tex
 4501	Buff	True	True	True	高速成長	狩りの獲得経験値が$H_W_GOOD20％$COLOR_END増加します。	icon_status.plusfocus_tex
 4502	Buff	True	True	True	高速成長	狩りの獲得経験値が$H_W_GOOD30％$COLOR_END増加します。	icon_status.plusfocus_tex
@@ -435,6 +439,7 @@
 4514	Buff	True	True	True	高速成長	狩りの獲得経験値が$H_W_GOOD10倍$COLOR_END増加します。	icon_status.plusfocus_tex
 4600	Buff	True	True	False	光輝の書：クリスタル保護	死亡時にクリスタルが壊れるのを防止します。効果は最大99回まで重複します。「完全な光輝の書：クリスタル保護」適用中は、効果が発動されません。	icon_items.q_closedspace_stone_05_tex
 4610	Buff	True	True	False	完全な光輝の書：クリスタル保護	効果持続中、死亡時にクリスタルが壊れるのを防止します。	icon_items.q_closedspace_stone_05_tex
+4612	Buff	True	True	False	完全な光輝の書：クリスタル保護	死亡時、クリスタルが砕けるのを防止します。	icon_items.q_closedspace_stone_05_tex
 4620	Buff	True	True	False	製作速度上昇の書	全アイテムの製作速度が$H_W_GOOD50%$COLOR_END上昇します。	icon_items.scroll_produce_speedup_tex
 4621	Buff	True	True	False	製作速度上昇の秘伝書	全アイテムの製作速度が$H_W_GOOD50%$COLOR_END上昇します。	icon_items.scroll_produce_speedup_tex
 4630	Buff	True	True	False	採集熟練度上昇の書	$timeの間採集熟練度が$H_W_GOOD410$COLOR_END上昇します。	icon_items.scroll_collection_expup_tex
@@ -490,7 +495,7 @@
 4876	Buff	False	False	False			
 4877	Buff	False	True	False			
 4878	Buff	False	False	False			
-4879	WeakeningEffect	True	True	False	スノーマンの祝福	全ての障害ステータス、ダメージを受け付けません。	icon_status.plusedefence_tex
+4879	WeakeningEffect	True	True	False	スノーマンの祝福	全てのデバフ、ダメージを受け付けません。	icon_status.plusedefence_tex
 4880	Buff	False	True	False			
 4881	Buff	False	True	False			
 4882	WeakeningEffect	True	True	False	強烈なカイロ	効果持続中は、スノーマンになりません。	icon_status.plusedefence_tex
@@ -509,6 +514,15 @@
 5060	Buff	False	True	False	ウィガー_ダウン/硬直/スタン抵抗	ウィガー_ダウン/硬直/スタン抵抗	icon_skills.voidtrap_tex
 6001	Buff	True	True	False	竜の血脈	モンスター攻撃時クリティカル威力が$H_W_GOOD1.5$COLOR_END倍上昇します。	icon_status.passive_dragonblood
 6002	Buff	True	True	False	真竜の血脈	モンスター攻撃時クリティカル威力が$H_W_GOOD2$COLOR_END倍上昇します。	icon_status.passive_dragonblood2
+6003	Buff	True	True	False	火炎の力	モンスター攻撃時クリティカル威力が$H_W_GOOD1.5$COLOR_END倍上昇します。	icon_skills.heataura_tex
+6004	Buff	True	True	False	爆炎の力	モンスター攻撃時クリティカル威力が$H_W_GOOD2$COLOR_END倍上昇します。	icon_skills.flameaura_tex
+6005	Buff	False	True	False		この異常状態は見えてはいけません。	
+6006	Buff	True	True	False	不死鳥の力	持続時間中、無敵状態となります。スキルを使用すると解除されます。	icon_status.revivenow_status_tex
+6007	Buff	True	True	False	不死鳥の回復	全HP、MPの$H_W_GOOD100%$COLOR_ENDを即時回復します。	icon_items.eagles_potion_level_47_tex
+6008	WeakeningEffect	True	True	False	不死鳥の化身待機時間	化身の力が集まっています。化身の力が完全に集まるまでは$H_W_GOOD不死鳥の化身$COLOR_ENDの効果が発動しません。	icon_skills.flameaura_tex
+6009	Buff	True	True	False	不死鳥の保護	死亡時にクリスタルが壊れるのを防止します。	icon_items.q_closedspace_stone_05_tex
+6010	Buff	False	True	False		この異常状態は見えてはいけません。	
+6011	WeakeningEffect	True	True	False	不死鳥の化身待機時間	化身の力が集まっています。化身の力が完全に集まるまでは$H_W_GOOD不死鳥の化身$COLOR_ENDの効果が発動しません。	icon_skills.heataura_tex
 10100	DamageOverTime	True	False	False	猛毒 I［クリスタル］	$H_W_BAD1$COLOR_END second毎にHPが$H_W_BAD-11$COLOR_END減少します。	icon_items.customize9ar_tex
 10101	DamageOverTime	True	False	False	猛毒 II［クリスタル］	$H_W_BAD1$COLOR_END second毎にHPが$H_W_BAD-23$COLOR_END減少します。	icon_items.customize9br_tex
 10102	DamageOverTime	True	False	False	猛毒 III［クリスタル］	$H_W_BAD1$COLOR_END second毎にHPが$H_W_BAD-58$COLOR_END減少します。	icon_items.customize9cr_tex
@@ -738,7 +752,7 @@
 12250	Buff	True	True	False	救いの手 VII[アーティファクト]	$H_W_GOOD2$COLOR_END second1毎にHPが$H_W_GOOD755$COLOR_END回復します。	icon_items.customize15gb_tex
 12290	Buff	False	True	False	懲戒の闘士 VII[アーティファクト]	異常状態ツールチップ非表示（isShow=False）このツールチップが出たらBTS処理が必要です。	icon_items.customize10gb_tex
 15000	WeakeningEffect	True	False	False	アカシャの沈黙	効果持続中、全スキルが使用不可になります。	icon_status.sealskill_tex
-15010	WeakeningEffect	True	False	False	悪神の呪い：弱化	全障害ステータス抵抗が$H_W_BAD15%$COLOR_END減少します。	icon_status.delayheal_tex
+15010	WeakeningEffect	True	False	False	悪神の呪い：弱化	全てのデバフ抵抗が$H_W_BAD15%$COLOR_END減少します。	icon_status.delayheal_tex
 15011	WeakeningEffect	False	True	False			
 15020	Buff	True	True	False	アンデッドの力	耐久力が$H_W_GOOD10$COLOR_END上昇します。	icon_status.plusedefence_tex
 15030	Stun	True	False	False	魔獣の呪い：氷の監獄	氷の監獄の吹き荒れる冷気で気絶しました！	icon_status.exhaustion_tex
@@ -754,10 +768,11 @@
 15110	Buff	True	True	False	異界の雷	スキル威力が$H_W_GOOD20%$COLOR_END増加します。	icon_status.plusattack_tex
 15120	Stun	True	False	False	樹縛	効果持続中、非戦闘状態での移動速度が減少し、戦闘状態ではその場から動けません。	icon_status.paralyzestatus_tex
 15130	WeakeningEffect	True	False	False	野獣の呪い：束縛	移動速度が$H_W_BAD0,2$COLOR_END減少します。	icon_status.minusmove_tex
-15140	Buff	True	True	False	マジックアーマー	効果持続中、全障害ステータスを防ぎます。	icon_status.immunedebuff_tex
+15140	Buff	True	True	False	マジックアーマー	効果持続中、全てのデバフを防ぎます。	icon_status.immunedebuff_tex
 15150	Buff	True	True	False	自然の同化	効果持続中は、敵対値が上昇しません。	icon_status.boundmovedown_tex
 15160	Stun	True	False	False	匠人の打ち締め	気絶しているため動けません。	icon_status.confuseup_tex
 15161	WeakeningEffect	True	False	False	匠人の慈悲	クリティカル抵抗が$H_W_BAD-10$COLOR_END減少します。	icon_status.plusciriticalresist_tex
+15162	WeakeningEffect	True	False	False	懲罰者の標識	クリティカル抵抗が$H_W_BAD-20$COLOR_END減少します。	icon_status.plusciriticalresist_tex
 15170	DamageOverTime	True	False	False	女王の雷陣	$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD-3710$COLOR_END減少します。	icon_status.paralyzestatus_tex
 15500	Buff	False	True	False			
 15600	Buff	False	True	False			
@@ -959,7 +974,7 @@
 29050	WeakeningEffect	True	False	False	攻撃速度減少［減速の紋章］	重複する度に、攻撃速度が$H_W_BAD10%$COLOR_END％ずつ減少します。	icon_crest.crestactiveattackspeeddown_tex
 29060	Buff	True	True	False	スキル威力増加［連闘の紋章］	連係スキルでスピニングエッジ使用時、クリティカル発生率が$H_W_GOOD30％$COLOR_END上昇します。	icon_crest.crestnextskillattackup_tex
 29070	WeakeningEffect	True	False	False	移動不可［怠惰の紋章］	効果持続中は、その場から動けません。ダウンすると効果は即解除されます。	icon_crest.crestactivespeeddown_tex
-29090	Buff	True	True	False	攻撃速度上昇［迅速の紋章］	デッドリーリープ命中時、次に使用するスキルの発動速度が50％上昇します。	icon_crest.e_crestpassiveskillspeedup_tex
+29090	Buff	True	True	False	攻撃速度上昇［迅速の紋章］	デッドリーリープ命中時、2.5秒間スキルの発動速度が50％上昇します。	icon_crest.e_crestpassiveskillspeedup_tex
 29100	Buff	True	True	False	スキル威力増加［連闘の紋章］	連係スキルでダークエクスプロージョン使用時、スキル威力が$H_W_GOOD20%$COLOR_END増加します。	icon_crest.crestnextskillattackup_tex
 29110	Buff	True	True	False	移動速度上昇［活力の紋章］	戦闘中の移動速度が$H_W_GOOD50$COLOR_END上昇します。	icon_crest.e_crestactivespeedup_tex
 29111	Buff	True	True	True	クリティカル発生率上昇［必殺の紋章］	クリティカル発生が$H_W_GOOD2倍$COLOR_ENDに上昇します。	icon_crest.crestpassivecriticalup_tex
@@ -1009,9 +1024,9 @@
 33130	Buff	True	True	False	スキル威力増加 [連闘の紋章]	連係して「エクステンドスラッシュ」使用時、スキル威力が$H_W_GOOD25%$COLOR_END増加します。	icon_crest.crestnextskillattackup_tex
 33140	Buff	False	True	False			icon_crest.crestpassivecriticalup_tex
 33150	Buff	True	True	False	スキル威力増加 [連闘の紋章]	連係して「エクステンドスラッシュ」使用時、スキル威力が$H_W_GOOD25%$COLOR_END増加します。	icon_crest.crestnextskillattackup_tex
-33170	Buff	True	True	False	HP持続回復［忍耐の紋章］	$H_W_GOOD1$COLOR_END second毎に全HPの$H_W_GOOD2％$COLOR_ENDが回復します。	icon_crest.crestpassivehpheal_tex
+33170	Buff	True	True	False	HP持続回復［忍耐の紋章］	$H_W_GOOD1$COLOR_END second毎に全HPの$H_W_GOOD3％$COLOR_ENDが回復します。	icon_crest.crestpassivehpheal_tex
 33200	Buff	True	True	False	スキル威力増加［連闘の紋章］	次に使用するスキルの威力が30％増加します。	icon_crest.crestnextskillattackup_tex
-33210	Buff	True	True	False	スキル威力増加 [連闘の紋章]	連係して「月鳴り」使用時、スキル威力が$H_W_GOOD25%$COLOR_END上昇します。	icon_crest.crestpassivehpheal_tex
+33210	Buff	True	True	False	スキル威力増加 [連闘の紋章]	連係して「月鳴り」使用時、スキル威力が$H_W_GOOD25%$COLOR_END上昇します。	icon_crest.e_crestnextskillattackup_tex
 45301	WeakeningEffect	True	False	False	強い衝撃	砲弾による強い衝撃を受けました。	icon_status.minusdefence_tex
 45302	WeakeningEffect	True	False	False	均衡喪失	強い衝撃でバランスを崩し、倒れます。	icon_status.minuscriticalresist_tex
 45303	DamageOverTime	False	False	False		13秒後にドリルが消えます。	
@@ -1031,15 +1046,15 @@
 46752	Buff	True	True	False	金剛鎧	防御力が大幅に上昇し、ダメージを受けません。	icon_status.plusedefence_tex
 46753	Buff	True	True	False	咆哮	持続時間の間、咆哮が更に重複すると、「堅硬な鎧｣の効果が適用されます｡	icon_status.angerwarrior_tex
 46754	Buff	False	True	False	金剛鎧	防御力が大幅に上昇し、ダメージを受けません。	icon_status.plusedefence_tex
-46755	Buff	True	True	False	執着	お互いの切ない思いが増幅し、障害ステータス、ダウン、硬直、スタン状態になりません。	icon_skills.recallfriend_tex
+46755	Buff	True	True	False	執着	お互いの切ない思いが増幅し、デバフ、ダウン、硬直、スタン状態になりません。	icon_skills.recallfriend_tex
 46756	DamageOverTime	True	True	False	排水	汚水により、2秒毎にHPが15,000減少します。	icon_status.purifydagon_tex
 46757	WeakeningEffect	False	False	False	ターゲッティング確認用プリマ		icon_skills.markingofarcher_tex
 46758	Buff	True	True	False	燃える狂気	攻撃されると攻撃者に一定数値のダメージを反射します。	icon_skills.overhelm_tex
 46759	Stun	True	False	False	ムカムカ	持続時間内に解除しないと、気分が悪くなり、しばらく気絶します。	icon_status.poisonstatus_tex
 46760	Stun	True	False	False	嘔吐	気持ち悪くなって嘔吐します。この効果中は動けません。「ウェ～！」 	icon_status.poisonup_tex
 46761	Stun	True	False	False	汚染された排水	体に漂う不思議な気により力が入りません。力が$H_W_BAD50%$COLOR_END、攻撃速度が$H_W_BAD70%$COLOR_END減少します。	icon_items.q_greenmucus_tex
-46762	Buff	True	True	False	正体不明	全ての障害ステータスを無視し、移動速度が上昇しますが、攻撃力は大幅に減少します。	icon_status.confusestatusnpc_tex
-46763	Buff	False	True	True	正体不明の効果エフェクト	全ての障害ステータスを無視し、移動速度が上昇しますが、攻撃力は大幅に減少します。	icon_status.confusestatusnpc_tex
+46762	Buff	True	True	False	正体不明	全てのデバフを無視し、移動速度が上昇しますが、攻撃力は大幅に減少します。	icon_status.confusestatusnpc_tex
+46763	Buff	False	True	True	正体不明の効果エフェクト	全てのデバフを無視し、移動速度が上昇しますが、攻撃力は大幅に減少します。	icon_status.confusestatusnpc_tex
 48730	Buff	True	True	False	冷たっ	冷たいものを食べたため、涼しくなります。	icon_status.icedamage_tex
 48731	Buff	True	True	False	かき氷	$H_W_GOOD1$COLOR_END second毎に全MPの$H_W_GOOD5％$COLOR_ENDが回復します。	icon_items.bluesmoothie_tex
 48732	Stun	True	False	False	キーン	冷たいものを急いで食べたため、頭がキーンと痛くなります。体が冷えて、移動速度が$H_W_BAD10%$COLOR_END減少します。	icon_status.confusedown_tex
@@ -1089,6 +1104,7 @@
 60027	Buff	True	True	False	女神の免罪IV	$H_W_GOOD1$COLOR_END second毎にHPが$H_W_GOOD1405$COLOR_ENDずつ、MPが$H_W_GOOD145$COLOR_ENDずつ回復します。	icon_items.body_enchant_scroll_3_tex
 60029	Buff	True	True	False	精神集中 II	$H_W_GOOD1$COLOR_END second毎に全MPの$H_W_GOOD5％$COLOR_ENDが回復します。	icon_skills.neutralizepoison_tex
 60030	Buff	True	True	False	精神集中 I	$H_W_GOOD1$COLOR_END second毎に全MPの$H_W_GOOD3％$COLOR_ENDが回復します。	icon_skills.neutralizepoison_tex
+60031	Buff	True	True	False	精神集中 III	$H_W_GOOD1$COLOR_END second毎に全MPの$H_W_GOOD7％$COLOR_ENDが回復します。	icon_skills.neutralizepoison_tex
 70201	Buff	True	True	False	ポップコーン	最大HPが$H_W_GOOD5%$COLOR_END増加します。	icon_items.fallfestival_popcorn_tex
 70202	Buff	True	True	False	ポテトサラダ	$H_W_GOOD5$COLOR_END second1毎に全HPの$H_W_GOOD1％$COLOR_ENDが回復します。	icon_items.fallfestival_potatosalad_tex
 70203	Buff	True	True	False	ピグリンソテー	$H_W_GOOD5$COLOR_END second1毎に$H_W_GOOD$1％$COLOR_ENDずつMPが持続回復します。	icon_items.q_roastmeat_tex
@@ -1112,6 +1128,8 @@
 70242	Buff	False	True	False	メリサの高級宴会セット	リカノールサラダ、ヴェリックウィング、カイアトール伝統BBQ効果を持ちます。	icon_items.pigling_ribs_tex
 70243	Buff	False	True	False	カイアトール伝統BBQ	HP回復効果適用時、HP回復量が$H_W_GOOD70233$COLOR_END増加します。	icon_items.pigling_ribs_tex
 70244	Buff	False	True	False	ヴェリックウィング	効果持続時間中、コンディションが減少しません。	icon_items.pigling_ribs_tex
+70245	Buff	True	True	False	高級リカノールファイヤーサラダ	最大HPが$H_W_GOOD5％$COLOR_END、最大MPが$H_W_GOOD10％$COLOR_END増加し、$H_W_GOOD5$COLOR_END second1毎に全MPの$H_W_GOOD1％$COLOR_ENDが回復します。	icon_items.fallfestival_rikanosalad_tex
+70246	Buff	False	True	False	パーティーテーブル	ジンギスカン、高級リカノールファイヤーサラダ、ヴェリックウィング、カイアトール伝統BBQの効果を持ちます。	icon_items.pigling_ribs_tex
 70301	Buff	True	True	False	聖域_精霊の波紋(臨時)	戦闘中の移動速度が$H_W_GOOD2$COLOR_END上昇します。効果は最大3回まで重複します。	icon_status.aura_of_wind_tex
 70302	Buff	True	True	False	聖域_集中の気運(臨時)	スキル命中時、ダメージが$H_W_GOOD20$COLOR_END増加します。	icon_status.aura_of_damage_tex
 70303	Buff	True	True	False	聖域_活力の波紋(臨時)	最大コンディションが$H_W_GOOD5$COLOR_END上昇します。効果は最大3回まで重複します。	icon_status.aura_of_condition_tex
@@ -1212,6 +1230,7 @@
 100203	Buff	True	True	True	ディフェンススタンス IV	耐久力が$H_W_GOOD25%$COLOR_END、均衡が$H_W_GOOD30$COLOR_END、モンスター攻撃時クリティカル発生率が$H_W_GOOD15％$COLOR_END増加します。追加ですべての攻撃スキルによる敵対値が$H_W_GOOD120%$COLOR_END上昇し、戦闘時、一部の特殊攻撃を除きモンスターの攻撃で後退しません。	icon_skills.ironwillb_tex
 100293	Buff	False	True	False	双剣ブロック基本異常状態	異常状態ツールチップ表示なし(isShow=False)このツールチップが見えたらBTS処理が必要！	icon_skills.twinswordsdefence_tex
 100294	Buff	True	True	False	闘争心Ⅰ	闘争心Ⅰの効果でMPが5％回復します。	icon_skills.twinswordsdefence_tex
+100295	Buff	False	True	False	疾風 I	疾風 I 効果でゲイルレイザーのクールタイムが0.5秒減少します。	icon_skills.twinswordsdefence_tex
 100296	Buff	False	True	True	ディフェンススタンス(モンスター相手にクリティカル発生率追加)	モンスター相手にクリティカル発生率15％追加(見えない異常状態)	icon_skills.ironwillb_tex
 100297	Buff	False	True	True			
 100298	Buff	False	True	True	ディフェンススタンス IV-2	異常状態ツールチップ表示不可(isShow=False)このツールチップが見えるとBTS処理必要！	icon_skills.ironwillb_tex
@@ -1262,6 +1281,7 @@
 101104	Stun	True	False	False	カウンターストライク X	気絶した状態で動けません。	icon_skills.reversalturningattack_tex
 101105	Stun	True	False	False	カウンターストライク XI	気絶した状態で動けません。	icon_skills.reversalturningattack_tex
 101200	WeakeningEffect	True	False	False	コンバットストライク	耐久力が$H_W_BAD8%$COLOR_END減少します。	icon_skills.aggravatingstrike_tex
+101210	WeakeningEffect	True	False	False	コンバットストライク	耐久力が$H_W_BAD10%$COLOR_END減少します。	icon_skills.aggravatingstrike_tex
 101220	WeakeningEffect	True	False	False	コンバットストライク	耐久力が$H_W_BAD8%$COLOR_END、HP回復効果が$H_W_BAD30%$COLOR_END減少します。	icon_skills.aggravatingstrike_tex
 101300	Buff	True	True	False	ワイルドレイジ - スラスト	重複する度に、攻撃者の攻撃速度が0.9％ずつ上昇します。この効果は、最大13回まで重複します。	icon_skills.dualrapidpiercing_tex
 101400	WeakeningEffect	True	False	False	バイトスプリット	移動速度が$H_W_BAD0,5$COLOR_END減少します。	icon_skills.heavybite_tex
@@ -1342,12 +1362,12 @@
 300900	WeakeningEffect	True	False	False	ネーブスラッシュ I	効果持続中は、全てのスキルのクールタイムが$H_W_BAD1,5$COLOR_END延長されます。	icon_skills.veinslash_tex
 300901	WeakeningEffect	True	False	False	ネーブスラッシュ II	効果持続中は、全てのスキルのクールタイムが$H_W_BAD1,53$COLOR_END延長されます。	icon_skills.veinslash_tex
 300902	WeakeningEffect	True	False	False	ネーブスラッシュ III	効果持続中は、全てのスキルのクールタイムが$H_W_BAD1,55$COLOR_END延長されます。	icon_skills.veinslash_tex
-301000	WeakeningEffect	True	False	False	モータルスラッシュ I	障害ステータス終了時、即死します。	icon_skills.cuthead_tex
-301001	WeakeningEffect	True	False	False	モータルスラッシュ I	障害ステータス終了時、即死します。	icon_skills.cuthead_tex
-301002	WeakeningEffect	True	False	False	モータルスラッシュ I	障害ステータス終了時、HPが$H_W_BAD5%$COLOR_END減少します。	icon_skills.cuthead_tex
-301020	WeakeningEffect	True	False	False	モータルスラッシュ I	障害ステータス終了時、HPが$H_W_BAD30%$COLOR_END減少します。	icon_skills.cuthead_tex
+301000	WeakeningEffect	True	False	False	モータルスラッシュ I	デバフ終了時、即死します。	icon_skills.cuthead_tex
+301001	WeakeningEffect	True	False	False	モータルスラッシュ I	デバフ終了時、即死します。	icon_skills.cuthead_tex
+301002	WeakeningEffect	True	False	False	モータルスラッシュ I	デバフ終了時、HPが$H_W_BAD5%$COLOR_END減少します。	icon_skills.cuthead_tex
+301020	WeakeningEffect	True	False	False	モータルスラッシュ I	デバフ終了時、HPが$H_W_BAD30%$COLOR_END減少します。	icon_skills.cuthead_tex
 301030	WeakeningEffect	True	False	False	フューリーストライク	HP回復効果が$H_W_BAD30%$COLOR_END減少します。	icon_skills.ragingstrike_tex
-301040	Buff	True	True	False	執念	障害ステータス【行動不能】抵抗が大幅に上昇します。	icon_skills.tenacity_tex
+301040	Buff	True	True	False	執念	デバフ【行動不能】抵抗が大幅に上昇します。	icon_skills.tenacity_tex
 301100	Buff	True	True	False	連撃	連撃が4回成功時、ホイールウィンドの発動速度が上昇します。	icon_skills.comboattack_tex
 301150	Buff	True	True	False	連撃	次の攻撃時、ホイールウィンドの発動速度が上昇します。	icon_skills.comboattack_tex
 301200	Buff	True	True	False	緊急回避連係	$time以内に回避を再度使用できますが、クールタイムが適用されます。	icon_skills.tumbling_tex
@@ -1579,7 +1599,7 @@
 468047	Buff	True	True	True	安定した魔力（フェリーレイジ）	完全体デュリオンが爆発した魔石の魔力を安定化させました。もう彼を止める事はできません！	icon_status.darkriftarearage_tex
 468048	WeakeningEffect	True	True	False	黒魔法転移	完全体デュリオンの槍に貫かれて身動きがとれません。	icon_status.fearstatus_tex
 468049	Buff	True	True	True	魔石の力（フェリーレイジ）	暗黒守護ゴーレムが自身に封印されている魔石の力を覚醒させました。攻撃力と攻撃速度が急激に増加します。	icon_skills.rampage_tex
-468050	WeakeningEffect	False	True	True	異常状態免疫	障害ステータス免疫	icon_skills.rampage_tex
+468050	WeakeningEffect	False	True	True	異常状態免疫	デバフ免疫	icon_skills.rampage_tex
 470000	Buff	False	True	True		見えてはいけない	icon_status.minddomination_tex
 470001	Buff	False	True	False	タルスキの気まぐれ	このゲージが一定以上貯まると、タルスキが嘘を言います。嘘を言う頻度はタルスキの気まぐれです。	icon_status.minddomination_tex
 470002	Buff	False	True	True	見えてはいけない	見えてはいけない	
@@ -1685,7 +1705,7 @@
 476815	Buff	True	True	False	ジャンピングハイ！	次元の活力の効果により、ジャンプする度に力が$H_W_GOOD15%$COLOR_ENDずつ、最大$H_W_GOOD75％$COLOR_END上昇します。	icon_status.plusepoisonresist_tex
 476818	Buff	True	True	False	黒次元の本能	力が$H_W_GOOD50%$COLOR_END、攻撃速度が$H_W_GOOD20%$COLOR_END上昇します。	icon_status.darkriftarearage_tex
 476905	WeakeningEffect	True	False	False	放電 - 効果	$H_W_GOOD2$COLOR_END second1毎にダウン/硬直が発生します。$BRこの効果は解除できません。	icon_status.paralyzestatus_tex
-476906	WeakeningEffect	True	False	False	死の宣告	$H_W_GOOD1$COLOR_END second毎に障害ステータスを伝播し、$H_W_BAD1$COLOR_END second毎に全HPの$H_W_BAD50％$COLOR_ENDが減少します。	icon_status.poisonstatus_tex
+476906	WeakeningEffect	True	False	False	死の宣告	$H_W_GOOD1$COLOR_END second毎にデバフを伝播し、$H_W_BAD1$COLOR_END second毎に全HPの$H_W_BAD50％$COLOR_ENDが減少します。	icon_status.poisonstatus_tex
 476907	DamageOverTime	True	False	False	精神崩壊 - 効果	気絶状態のため動くことができず、$H_W_BAD1$COLOR_END second毎に全HPの$H_W_BAD2％$COLOR_ENDが減少します。$BRこの効果は解除できません。	icon_status.confuseup_tex
 476908	WeakeningEffect	True	False	False	放電 - 効果	効果無し	icon_status.paralyzestatus_tex
 477007	DamageOverTime	True	False	False	アルゴンパラサイト	全HPの$H_W_BAD50％$COLOR_ENDが減少します。	icon_status.delaydamage_tex
@@ -1760,7 +1780,7 @@
 501323	Stun	True	False	False	レストレントカーズ IV	効果持続中はその場から動けず、回避及び移動系スキルも封印されます。一定以上ダメージを受けたり、ダウンすると効果は即解除されます。	icon_skills.curseofshackle_tex
 501400	WeakeningEffect	True	False	False	アイスブラスト	凍てつく氷爆風のために体が凍り付き、重複する度に、移動速度が$H_W_BAD10%$COLOR_END減少します。効果は最大4回まで重複します。	icon_skills.icestorm_tex
 501402	WeakeningEffect	True	False	False	アイスブラスト	凍てつく氷爆風のために体が凍り付き、重複する度に、移動速度が$H_W_BAD10%$COLOR_END減少します。効果は最大4回まで重複します。	icon_skills.icestorm_tex
-501500	Buff	True	True	False	ペトリファイドスケイル	効果持続中、全障害ステータスを防ぎます。	icon_skills.stoneshape_tex
+501500	Buff	True	True	False	ペトリファイドスケイル	効果持続中、全てのデバフを防ぎます。	icon_skills.stoneshape_tex
 501501	Buff	False	True	False	ペトリファイドスケイル I - 敵対値免疫	異常状態ツールチップ非表示（isShow=False）このツールチップが出たらBTS処理が必要です。	icon_skills.voidtrap_tex
 501600	Buff	True	True	False	ディストーションフィールド I	$time間、ダメージを無効化し、最大MPの5％を回復します。状態異常が適用されている間、マナイグニッションIIの効果が適用されません。	icon_skills.distortionfield_tex
 501601	Buff	False	True	False			
@@ -1837,7 +1857,7 @@
 601311	WeakeningEffect	True	False	False	アラクノイドアローII	移動速度が$H_W_BAD20%$COLOR_END減少します。	icon_skills.webtraparrow_tex
 601400	Buff	True	True	False	集中準備	アロー、クイックフィリング、クイックシュート10回成功時、ペネトレーティングアロー、ラバントアローのチャージ速度が上昇します。	icon_skills.focusstance_moveslow_tex
 601450	Buff	True	True	False	集中	10秒間ペネトレーティングアロー、ラバントアローのチャージ速度が上昇します。	icon_skills.focusstance_moveslow_tex
-601500	Buff	True	True	False	執念	障害ステータス【行動不能】抵抗が大幅に上昇します。	icon_skills.tenacity_tex
+601500	Buff	True	True	False	執念	デバフ【行動不能】抵抗が大幅に上昇します。	icon_skills.tenacity_tex
 601600	Buff	True	True	False	フェイタルヴィジョン	次の1回目の攻撃のみ、どの位置からでも後方攻撃と等しいダメージを与えます。	icon_skills.weak_point_observed
 601700	Buff	False	True	False	アラクノイドアロー爆発	（見えてはいけない異常状態）	icon_skills.arcaneshockshot02_tex
 601800	Buff	False	True	False	アローレイン強化 I	アローレインのダメージが分散されません。（見えてはいけない異常状態）	icon_skills.arrowfall_tex
@@ -1957,7 +1977,7 @@
 701600	Buff	True	True	False	霊気召喚 - 均衡 I	均衡が$H_W_GOOD100%$COLOR_END上昇します。	icon_skills.energiesofshock_tex
 701601	WeakeningEffect	True	False	False	霊気召喚 - 束縛 I	攻撃速度が$H_W_BAD10%$COLOR_END減少します。	icon_skills.energiesofrestriction_tex
 701602	Buff	True	True	False	霊気召喚 - 迅速 I	攻撃速度が$H_W_GOOD5%$COLOR_END上昇します。	icon_skills.energiesofquickness_tex
-701603	WeakeningEffect	True	False	False	霊気召喚 - 意志 I	全障害ステータス抵抗が$H_W_BAD25%$COLOR_ENDずつ減少します。	icon_skills.energiesofwillpower_tex
+701603	WeakeningEffect	True	False	False	霊気召喚 - 意志 I	全てのデバフ抵抗が$H_W_BAD25%$COLOR_ENDずつ減少します。	icon_skills.energiesofwillpower_tex
 701604	Buff	True	True	False	ガードスピリット I	召喚された霊気が最大$H_W_GOOD5395$COLOR_ENDのダメージを無効化します。最大値を超えると持続時間に関わらず即解除されます。	icon_skills.energiesofprotection_tex
 701605	Buff	True	True	False	ガードスピリット I	召喚された霊気により$H_W_GOOD2$COLOR_END second1毎にHPが$H_W_GOOD529$COLOR_END回復します。	icon_skills.energiesofprotection_tex
 701606	Buff	True	True	False	ガードスピリット II	召喚された霊気が最大$H_W_GOOD7149$COLOR_ENDのダメージを無効化します。最大値を超えると持続時間に関わらず即解除されます。	icon_skills.energiesofprotection_tex
@@ -2138,7 +2158,7 @@
 768047	Buff	True	True	True	安定した魔力（フェリーレイジ）	完全体デュリオンが魔石の魔力を覚醒しようとしています。	icon_status.darkriftarearage_tex
 768048	WeakeningEffect	True	True	False	黒魔法転移	完全体デュリオンの槍に貫かれて身動きがとれません。	icon_status.fearstatus_tex
 768049	Buff	False	True	False			
-768050	WeakeningEffect	False	True	True	異常状態免疫	障害ステータス免疫	icon_skills.rampage_tex
+768050	WeakeningEffect	False	True	True	異常状態免疫	デバフ免疫	icon_skills.rampage_tex
 776013	Buff	False	True	False	動く爆弾	お前は爆弾！　	icon_skills.voidtrap_tex
 776014	Buff	False	True	False	動く爆弾	炸裂！　	icon_skills.voidtrap_tex
 776015	Buff	False	True	False	動く爆弾	炸裂！　	icon_skills.voidtrap_tex
@@ -2331,7 +2351,7 @@
 800302	Buff	True	True	False	プロテクションアーマー III	最大$H_W_GOOD9803$COLOR_ENDのダメージを無効化します。効果持続中、ダウン/硬直状態になりません。最大値を超えると持続時間に関わらず即解除されます。	icon_skills.armorofprotection_tex
 800303	Buff	True	True	False	プロテクションアーマー IV	最大$H_W_GOOD14282$COLOR_ENDのダメージを無効化します。効果持続中、ダウン/硬直状態になりません。最大値を超えると持続時間に関わらず即解除されます。	icon_skills.armorofprotection_tex
 800304	Buff	True	True	False	プロテクションアーマー V	最大$H_W_GOOD39749$COLOR_ENDのダメージを無効化します。効果持続中、ダウン/硬直状態になりません。最大値を超えると持続時間に関わらず即解除されます。	icon_skills.armorofprotection_tex
-800400	Buff	True	True	False	エンデュランスブレシング I	全障害ステータス抵抗が$H_W_GOOD5$COLOR_END上昇します。	icon_skills.resistancebless_tex
+800400	Buff	True	True	False	エンデュランスブレシング I	全てのデバフ抵抗が$H_W_GOOD5$COLOR_END上昇します。	icon_skills.resistancebless_tex
 800500	Buff	True	True	False	プロテクションブレシング I	堅固な保護の祝福により、耐久力が$H_W_GOOD6$COLOR_END上昇します。	icon_skills.agilitybless_tex
 800501	Buff	True	True	False	プロテクションブレシング II	堅固な保護の祝福により、耐久力が$H_W_GOOD11$COLOR_END上昇します。	icon_skills.agilitybless_tex
 800600	Buff	False	True	False	ブレシングバルダー I	癒しと安らぎの中で、$H_W_GOOD2$COLOR_END second1毎にHPが回復します。	icon_skills.refreshbless_tex
@@ -2357,8 +2377,8 @@
 800925	DamageOverTime	True	False	False	フィーブルプレディクション VI	$H_W_BAD3$COLOR_END second1毎にHPが$H_W_BAD-585$COLOR_END減少します。効果持続中、全近距離攻撃スキルのクールタイムが$H_W_BAD1,5$COLOR_END延長されます。	icon_skills.prophecyoflethargy_tex
 800926	DamageOverTime	True	False	False	フィーブルプレディクション VII	$H_W_BAD3$COLOR_END second1毎にHPが$H_W_BAD-819$COLOR_END減少します。効果持続中、全近距離攻撃スキルのクールタイムが$H_W_BAD1,5$COLOR_END延長されます。	icon_skills.prophecyoflethargy_tex
 800927	DamageOverTime	True	False	False	フィーブルプレディクション VIII	$H_W_BAD3$COLOR_END second1毎にHPが$H_W_BAD-1086$COLOR_END減少します。効果持続中、全近距離攻撃スキルのクールタイムが$H_W_BAD1,5$COLOR_END延長されます。	icon_skills.prophecyoflethargy_tex
-801000	Buff	True	True	False	ガーディアンサンクチュアリ I	遠距離攻撃によるダメージが$H_W_GOOD30%$COLOR_END減少し、状態弱化、持続ダメージ障害ステータス抵抗が$H_W_GOOD100%$COLOR_END上昇し、行動不能障害ステータス抵抗数値が上昇します。	icon_skills.guardianaura_tex
-801001	Buff	True	True	False	ガーディアンサンクチュアリ II	遠距離攻撃によるダメージが$H_W_GOOD30%$COLOR_END減少し、状態弱化、持続ダメージ障害ステータス抵抗が$H_W_GOOD100%$COLOR_END上昇し、行動不能障害ステータス抵抗数値が上昇します。	icon_skills.guardianaura_tex
+801000	Buff	True	True	False	ガーディアンサンクチュアリ I	遠距離攻撃によるダメージが$H_W_GOOD30%$COLOR_END減少し、状態弱化、持続ダメージデバフ抵抗が$H_W_GOOD100%$COLOR_END上昇し、行動不能デバフ抵抗数値が上昇します。	icon_skills.guardianaura_tex
+801001	Buff	True	True	False	ガーディアンサンクチュアリ II	遠距離攻撃によるダメージが$H_W_GOOD30%$COLOR_END減少し、状態弱化、持続ダメージデバフ抵抗が$H_W_GOOD100%$COLOR_END上昇し、行動不能デバフ抵抗数値が上昇します。	icon_skills.guardianaura_tex
 801100	Buff	True	True	False	リカバリーブレシング I	$H_W_GOOD1$COLOR_END second毎に全HPの$H_W_GOOD1.8％$COLOR_ENDが回復します。	icon_skills.restoration_tex
 801101	Buff	True	True	False	リカバリーブレシング II	$H_W_GOOD1$COLOR_END second毎に全HPの$H_W_GOOD2％$COLOR_ENDが回復します。	icon_skills.restoration_tex
 801200	Stun	True	False	False	イシャラソング I	深い眠りにつきました。ダメージを受けるとすぐに目覚めます。	icon_skills.lullabyoflshara_tex
@@ -2558,8 +2578,8 @@
 905606	Stun	False	False	False	空間磁場	バルロナの時空間の影響で外部ではスキルを使用することができません。	icon_status.sealskill_tex
 905607	Stun	True	True	True	封印されたバルロナの力	バルロナの攻撃力が$H_W_GOOD25%$COLOR_END、防御力が$H_W_GOOD100%$COLOR_END上昇します。	icon_status.descentofdarkness_tex
 905608	DamageOverTime	True	False	False	封印されたバルロナの呪い	バルロナの呪いにより、1秒あたり全HPの$H_W_BAD12%$COLOR_ENDが持続的に減少します。	icon_status.curse_tex
-905609	Buff	True	True	False	強靭な防御	障害ステータス抵抗が上昇し、全ダメージの$H_W_GOOD20%$COLOR_ENDだけ受けます。	icon_status.plusecritical_tex
-905610	Buff	True	True	False	強靭な防御	障害ステータス抵抗が上昇し、全ダメージの$H_W_GOOD20%$COLOR_ENDだけ受けます。	icon_status.plusecritical_tex
+905609	Buff	True	True	False	強靭な防御	デバフ抵抗が上昇し、全ダメージの$H_W_GOOD20%$COLOR_ENDだけ受けます。	icon_status.plusecritical_tex
+905610	Buff	True	True	False	強靭な防御	デバフ抵抗が上昇し、全ダメージの$H_W_GOOD20%$COLOR_ENDだけ受けます。	icon_status.plusecritical_tex
 905611	Buff	False	True	True			
 905612	Buff	False	True	True			
 905613	Buff	False	True	True			
@@ -3211,10 +3231,10 @@
 999802	WeakeningEffect	True	False	True	不義の英雄	名前の知れた無法者になりました。$BRギルド倉庫、休息の神官、休息の神将を使用できません。$BR死亡時、クリスタル判定回数が増加します。$BR悪名が0の時、非戦闘状態を60秒間維持すると、無法者状態が解除されます。	icon_status.cruel_slayer_2_tex
 999803	WeakeningEffect	True	False	True	悪神のしもべ	有名な無法者になりました。$BR倉庫、ギルド倉庫、狩り場移動管理人、休息の神官、休息の神将を使用できません。$BR死亡時、クリスタル判定回数が増加します。$BR力が $H_W_BAD0,9$COLOR_END 減少し、耐久力が $H_W_BAD0,9$COLOR_END 減少します。$BR悪名が0の時、非戦闘状態を60秒間維持すると、無法者状態が解除されます。	icon_status.cruel_slayer_3_tex
 999804	WeakeningEffect	True	False	True	悪の化身	悪名高き無法者になりました。$BR取引仲介所、倉庫、ギルド倉庫、狩り場移動管理人、休息の神官、休息の神将を使用できません。$BR死亡時、クリスタル判定回数が増加します。$BR力が $H_W_BAD0,7$COLOR_END 減少し、耐久力が $H_W_BAD0,7$COLOR_END 減少します。$BR悪名が0の時、非戦闘状態を60秒間維持すると、無法者状態が解除されます。	icon_status.cruel_slayer_4_tex
-999993	Buff	True	True	False	天上の加護	効果持続中、プレイヤーからのダメージは無効化され、ダウン/硬直も発生しません。また、全障害ステータスを防ぎます。この効果はダメージを受けても乗り物が解除されず、戦闘に関するスキルを使用すると即解除されます。	icon_status.mpsuckup_tex
+999993	Buff	True	True	False	天上の加護	効果持続中、プレイヤーからのダメージは無効化され、ダウン/硬直も発生しません。また、全てのデバフを防ぎます。この効果はダメージを受けても乗り物が解除されず、戦闘に関するスキルを使用すると即解除されます。	icon_status.mpsuckup_tex
 999994	WeakeningEffect	True	False	False	臆病者	恐怖に負けた臆病者です。この状態ではパーティーマッチング申請ができません。パーティー解散時には適用されません。	icon_status.boundmoveup_tex
 999995	WeakeningEffect	True	False	False	即決審判	力が$H_W_BAD90%$COLOR_END減少します。効果は死亡後も解除されません。	icon_status.minusconfuseresist_tex
-999996	Buff	True	True	False	天上の加護	効果持続中、プレイヤーからのダメージは無効化され、ダウン/硬直も発生しません。また、全障害ステータスを防ぎます。この効果はダメージを受けても乗り物が解除されず、戦闘に関するスキルを使用すると即解除されます。	icon_status.mpsuckup_tex
+999996	Buff	True	True	False	天上の加護	効果持続中、プレイヤーからのダメージは無効化され、ダウン/硬直も発生しません。また、全てのデバフを防ぎます。この効果はダメージを受けても乗り物が解除されず、戦闘に関するスキルを使用すると即解除されます。	icon_status.mpsuckup_tex
 999997	Buff	True	True	False	ささやかなプレゼント	サーバー混雑の中、お待ちいただいた皆様にプレゼントです！　狩りの獲得経験値が$H_W_GOOD10%$COLOR_END増加します。	icon_items.presentbox1_tex
 999998	WeakeningEffect	True	False	False	脱走兵	戦場から逃亡しました。脱走中は、戦場に参加することができません。	icon_status.boundmoveup_tex
 999999	WeakeningEffect	False	False	True	水泳中…	水泳中は、一部の戦闘スキル及びアイテムを使用できません。	icon_skills.swimming_tex
@@ -3244,6 +3264,9 @@
 3000019	Buff	True	True	True	飛行騎乗（HP、MP回復）	飛行可能地域で飛行できます。<BR>騎乗中、毎秒HPとMPが2％ずつ回復し、周囲30m内のパーティーメンバーに竜の追い風の効果を付与します。	icon_items.wings_of_fairy_tex
 3000020	Buff	False	True	True	竜の追い風	出たらBTS	icon_skills.criticalupaura_tex
 3000021	Buff	True	True	True	竜の追い風	竜の追い風により、乗り物に搭乗時の移動速度が乗り物の種類に関係なく、$H_W_GOOD10$COLOR_END上昇します。	icon_status.plusmove_tex
+3000022	Buff	True	True	True	不死鳥騎乗（HP、MP回復）	飛行可能地域で飛行できます。<BR>騎乗中、毎秒HPとMPが1％回復します。不死鳥の熱気効果が適用されます。	icon_items.wings_of_fairy_tex
+3000023	Buff	True	True	True	不死鳥騎乗（HP、MP回復）	飛行可能地域で飛行できます。<BR>騎乗中、毎秒HPとMPが2％回復します。不死鳥の熱気効果が適用されます。	icon_items.wings_of_fairy_tex
+3000024	Buff	True	True	True	不死鳥の熱気	不死鳥の熱気により竜の追い風（騎乗時の移動速度＋10）が適用されません。	icon_status.heat_tex
 4510001	Buff	False	False	False			
 4510002	WeakeningEffect	False	True	False			
 4510003	DamageOverTime	False	False	False			
@@ -3481,6 +3504,144 @@
 7777013	Buff	True	True	False			icon_status.icon_yookduk00_ab_tex
 7777014	Buff	True	True	False			icon_status.icon_yookduk00_ab_tex
 7777015	Buff	True	True	False	T.E.R.A TIME	スキルのクールタイムが20％減少し、毎秒のマナ回復量が大きく増加します。	icon_status.pluswill_tex
+7940000	Stun	False	True	True			
+7941001	Stun	True	False	False	強力な頭痛	ケーブキーパーが木に頭をぶつかって朦朧としています。	icon_status.confuseup_tex
+7941002	WeakeningEffect	True	True	False	ケーブキーパーの興味	ケーブキーパーがあなたを睨みつけています。あなたに向かって強力な攻撃を仕掛けてきそうです。	icon_skills.througharrow_tex
+7941003	WeakeningEffect	False	True	False			
+7941004	Stun	False	False	False			
+7941005	Stun	False	False	False			
+7941006	WeakeningEffect	False	True	True			
+7941007	WeakeningEffect	False	True	True			
+7941008	WeakeningEffect	False	True	True			
+7941009	WeakeningEffect	False	True	True			
+7941010	WeakeningEffect	False	True	True			
+7941011	Buff	True	False	True	堅い皮膚	堅い皮膚がケーブキーパーを包めています。これを破ればこいつにもバナナの皮を踏ませることができそうです。	icon_status.balanceup_tex
+7941012	WeakeningEffect	False	True	False			
+7941013	Stun	False	False	False			
+7941014	Stun	True	False	False	出血	床に落ちて怪我をしました。持続的にHPが減少します。	icon_status.injuredbtdarkness_tex
+7941015	Stun	True	False	False	衝撃	強い衝撃で何もできません。	icon_status.confuseup_tex
+7941016	WeakeningEffect	False	True	False			
+7941017	WeakeningEffect	False	True	False			
+7941018	WeakeningEffect	False	True	True			
+7941019	WeakeningEffect	False	True	True			
+7941020	WeakeningEffect	False	True	True			
+7941021	Buff	True	True	True			
+7941022	DamageOverTime	True	False	False	粘つく液体	粘つく液体が体に纏わりついて動けません。	icon_skills.curseofshackle_tex
+7941023	WeakeningEffect	False	True	True			
+7941024	WeakeningEffect	False	True	True			
+7941025	WeakeningEffect	False	True	True			
+7941026	Buff	True	True	True	子サルの応援-1段階	子サルがケーブキーパーを応援します。ケーブキーパーの攻撃力と攻撃速度が増加します。	icon_status.plusciriticalresist_tex
+7941027	Buff	True	True	True	子サルの応援-2段階	子サルがケーブキーパーを応援します。ケーブキーパーの攻撃力と攻撃速度が増加します。	icon_status.plusciriticalresist_tex
+7941028	Buff	True	True	True	子サルの応援-3段階	子サルがケーブキーパーを応援します。ケーブキーパーの攻撃力と攻撃速度が増加します。	icon_status.plusciriticalresist_tex
+7941029	WeakeningEffect	False	True	False			
+7941030	WeakeningEffect	True	True	False	子サルの興味	木にぶら下がったサルがあなたを見つめています。どうやらバナナの皮を投げそうです。	icon_items.banana_tex
+7941031	WeakeningEffect	False	True	True			
+7941032	Stun	False	False	False			
+7941033	WeakeningEffect	False	True	False			
+7941034	WeakeningEffect	False	True	False			
+7941035	WeakeningEffect	False	True	False			
+7942001	WeakeningEffect	False	True	False			
+7942002	WeakeningEffect	True	True	True			
+7942003	WeakeningEffect	True	True	True			
+7942004	DamageOverTime	False	False	False			
+7942005	DamageOverTime	False	True	False			
+7942006	WeakeningEffect	True	True	False	魔力浸透	レニムがあなたに魔力を浸透させて何かを召喚しようとしています。	icon_status.minusfocus_tex
+7942007	WeakeningEffect	True	True	False	魔力浸透	レニムがあなたに魔力を浸透させて何かを召喚しようとしています。	icon_status.minusfocus_tex
+7942008	Stun	True	False	False			
+7942009	Stun	True	False	False			
+7942010	WeakeningEffect	False	True	False			
+7942011	WeakeningEffect	False	True	True			
+7942012	WeakeningEffect	False	True	True			
+7942013	WeakeningEffect	True	True	False			icon_items.cancel_lockon_potion_level_51_tex
+7942014	WeakeningEffect	False	True	False			
+7942015	Buff	True	True	False			
+7942016	WeakeningEffect	False	True	False			
+7942017	WeakeningEffect	False	True	True			
+7942018	WeakeningEffect	False	True	False			
+7942019	WeakeningEffect	False	True	False			
+7942020	WeakeningEffect	False	True	False			
+7942021	Stun	False	False	False			
+7942022	WeakeningEffect	False	True	False			
+7942023	WeakeningEffect	True	True	False			
+7942024	WeakeningEffect	True	True	False			
+7942025	WeakeningEffect	False	True	False			
+7942026	WeakeningEffect	False	True	False			
+7942027	WeakeningEffect	True	True	False			
+7942028	DamageOverTime	False	True	False			
+7942029	DamageOverTime	False	True	False			
+7942030	DamageOverTime	False	True	False			
+7942031	DamageOverTime	False	True	False			
+7942032	DamageOverTime	False	True	False			
+7942033	DamageOverTime	False	False	False			
+7942034	WeakeningEffect	False	True	True			
+7942035	WeakeningEffect	False	True	True			
+7942036	Stun	False	False	False			
+7942037	WeakeningEffect	True	True	True	鉱物の赤いマナ	鉱物の赤いマナがあなたを包んでいます。赤い光の光線に害はありません。	icon_status.immunedebuff_tex
+7942038	WeakeningEffect	True	True	True	鉱物の青いマナ	鉱物の青いマナがあなたを包んでいます。青い光の光線に害はありません。	icon_status.immunedebuff_tex
+7942039	WeakeningEffect	True	True	True	鉱物の白いマナ	鉱物の白いマナがあなたを包んでいます。白い光の光線に害はありません。	icon_status.immunedebuff_tex
+7942040	DamageOverTime	False	True	False			
+7942041	DamageOverTime	False	True	False			
+7942042	WeakeningEffect	False	True	False			
+7942043	WeakeningEffect	False	True	True			
+7942044	WeakeningEffect	False	True	True			
+7942045	WeakeningEffect	False	True	True			
+7942046	WeakeningEffect	False	True	True			
+7942047	WeakeningEffect	False	True	True			
+7942048	WeakeningEffect	False	True	True			
+7942049	WeakeningEffect	False	True	False			
+7942050	WeakeningEffect	False	True	True			
+7943001	WeakeningEffect	False	True	True			
+7943002	WeakeningEffect	False	True	True			
+7943003	WeakeningEffect	False	True	False			
+7943004	WeakeningEffect	False	True	False			
+7943005	WeakeningEffect	False	True	False			
+7943006	WeakeningEffect	False	True	False			
+7943007	WeakeningEffect	False	True	True			
+7943008	WeakeningEffect	False	True	True			
+7943009	WeakeningEffect	False	True	True			
+7943010	WeakeningEffect	False	True	True			
+7943011	WeakeningEffect	False	True	True			
+7943012	WeakeningEffect	False	True	False			
+7943013	WeakeningEffect	False	True	False			
+7943014	WeakeningEffect	False	True	True			
+7943015	WeakeningEffect	False	True	True			
+7943016	Buff	True	True	False			
+7943017	WeakeningEffect	False	True	False			
+7943018	DamageOverTime	False	True	True			
+7943019	DamageOverTime	False	True	False			
+7943020	DamageOverTime	False	True	True			
+7943021	WeakeningEffect	False	True	False			
+7943022	WeakeningEffect	False	True	True			
+7943023	WeakeningEffect	False	True	False			
+7943024	WeakeningEffect	False	True	False			
+7943025	WeakeningEffect	False	True	False			
+7943026	WeakeningEffect	False	True	False			
+7943027	WeakeningEffect	True	False	False			
+7943028	Buff	True	True	False	迅速な移動：準備	ゴブリンの移動速度がもうすぐ速くなりそうです。	icon_status.plusmove_tex
+7943029	WeakeningEffect	False	True	False			
+7943030	WeakeningEffect	False	True	False			
+7943031	WeakeningEffect	False	True	True			
+7943032	WeakeningEffect	False	True	True			
+7943033	WeakeningEffect	False	True	True			
+7943034	Buff	True	True	True	迅速な移動	ゴブリンの移動速度が非常に速くなりました。	icon_status.plusmove_tex
+7943035	WeakeningEffect	False	True	True			
+7943036	WeakeningEffect	False	True	False			
+7943037	WeakeningEffect	False	True	True			
+7943038	WeakeningEffect	True	True	True			
+7943039	WeakeningEffect	True	True	False			
+7943040	WeakeningEffect	True	True	False	冷たい魔力	冷たい魔力があなたを包みます。この魔力が凝集した時に温めてあげないとダメージを受けそうです。	icon_status.poisondown_tex
+7943041	Stun	True	False	False			
+7943042	Stun	True	False	False	熱い魔力	熱い魔力があなたを包みます。この魔力が凝集した時に冷やしてあげないとダメージを受けそうです。	icon_status.confuseup_tex
+7943043	Stun	True	False	False			
+7943044	Stun	True	False	False			
+7943045	WeakeningEffect	True	True	True	火傷	火傷で持続的にHPが減少します。	icon_status.icedamage_tex
+7943046	WeakeningEffect	True	True	True	凍傷	凍傷で移動速度が下がりました。	icon_status.firedamage_tex
+7943047	WeakeningEffect	False	True	False			
+7943048	WeakeningEffect	False	True	False			
+7943049	WeakeningEffect	False	True	False			
+7943050	WeakeningEffect	False	True	False			
+7943051	WeakeningEffect	False	True	True			
+7943052	WeakeningEffect	False	True	True			
 8000000	Buff	True	True	False	高速成長30（5時間）	5時間、狩りの獲得経験値が30％増加します。	icon_items.f2p_xpbooster_tex
 8000001	Buff	True	True	False	高速成長30（10時間）	10時間、狩りの獲得経験値が30％増加します。	icon_items.f2p_xpbooster_tex
 8000002	Buff	True	True	False	高速成長30（30時間）	30時間、狩りの獲得経験値が30％増加します。	icon_items.f2p_xpbooster_tex
@@ -3649,6 +3810,147 @@
 9810017	WeakeningEffect	False	True	True	ラカン追従者	自らの体を犠牲にしてラカンの追従者になった者たちです。	icon_status.cruel_slayer_3_tex
 9810018	Stun	False	False	False			
 9810019	WeakeningEffect	False	True	True			
+9940000	Stun	False	True	True			
+9940001	WeakeningEffect	True	False	False	火傷	火傷で持続的にHPが減少します。	icon_status.minushp_tex
+9940002	WeakeningEffect	True	False	False	凍傷	凍傷で移動速度が下がりました。	icon_skills.freezingtheearth_tex
+9941001	Stun	True	False	False	強力な頭痛	ケーブキーパーが木に頭をぶつかって朦朧としています。	icon_status.confuseup_tex
+9941002	WeakeningEffect	True	True	False	ケーブキーパーの興味	ケーブキーパーがあなたを睨みつけています。あなたに向かって強力な攻撃を仕掛けてきそうです。	icon_skills.througharrow_tex
+9941003	WeakeningEffect	False	True	False			
+9941004	Stun	False	False	False			
+9941005	Stun	False	False	False			
+9941006	WeakeningEffect	False	True	True			
+9941007	WeakeningEffect	False	True	True			
+9941008	WeakeningEffect	False	True	True			
+9941009	WeakeningEffect	False	True	True			
+9941010	WeakeningEffect	False	True	True			
+9941011	Buff	False	False	True	堅い皮膚	堅い皮膚がケーブキーパーを包めています。これを破ればこいつにもバナナの皮を踏ませることができそうです。	icon_status.balanceup_tex
+9941012	WeakeningEffect	False	True	False			
+9941013	Stun	False	False	False			
+9941014	Stun	True	False	False	出血	床に落ちて怪我をしました。持続的にHPが減少します。	icon_status.injuredbtdarkness_tex
+9941015	Stun	True	False	False	衝撃	強い衝撃で何もできません。	icon_status.confuseup_tex
+9941016	WeakeningEffect	False	True	False			
+9941017	WeakeningEffect	False	True	False			
+9941018	WeakeningEffect	False	True	True			
+9941019	WeakeningEffect	False	True	True			
+9941020	WeakeningEffect	False	True	True			
+9941021	Buff	True	True	True			
+9941022	DamageOverTime	True	False	False	粘つく液体	粘つく液体が体に纏わりついて動けません。	icon_skills.curseofshackle_tex
+9941023	WeakeningEffect	False	True	True			
+9941024	WeakeningEffect	False	True	True			
+9941025	WeakeningEffect	False	True	True			
+9941026	Buff	True	True	True	子サルの応援-1段階	子サルがケーブキーパーを応援します。ケーブキーパーの攻撃力と攻撃速度が増加します。	icon_status.plusciriticalresist_tex
+9941027	Buff	True	True	True	子サルの応援-2段階	子サルがケーブキーパーを応援します。ケーブキーパーの攻撃力と攻撃速度が増加します。	icon_status.plusciriticalresist_tex
+9941028	Buff	True	True	True	子サルの応援-3段階	子サルがケーブキーパーを応援します。ケーブキーパーの攻撃力と攻撃速度が増加します。	icon_status.plusciriticalresist_tex
+9941029	WeakeningEffect	False	True	False			
+9941030	WeakeningEffect	True	True	False	子サルの興味	木にぶら下がったサルがあなたを見つめています。どうやらバナナの皮を投げそうです。	icon_items.banana_tex
+9941031	WeakeningEffect	False	True	True			
+9941032	Stun	False	False	False			
+9941034	WeakeningEffect	False	True	False			
+9941035	WeakeningEffect	False	True	False			
+9942001	WeakeningEffect	False	True	False			
+9942002	WeakeningEffect	True	True	True			
+9942003	WeakeningEffect	True	True	True			
+9942004	DamageOverTime	False	False	False			
+9942005	DamageOverTime	False	True	False			
+9942006	WeakeningEffect	True	True	False	魔力浸透	レニムがあなたに魔力を浸透させて何かを召喚しようとしています。	icon_status.minusfocus_tex
+9942007	WeakeningEffect	True	True	False	魔力浸透	レニムがあなたに魔力を浸透させて何かを召喚しようとしています。	icon_status.minusfocus_tex
+9942008	Stun	True	False	False			
+9942009	Stun	True	False	False			
+9942010	WeakeningEffect	False	True	False			
+9942011	WeakeningEffect	False	True	True			
+9942012	WeakeningEffect	False	True	True			
+9942013	WeakeningEffect	True	True	False			icon_items.cancel_lockon_potion_level_51_tex
+9942014	WeakeningEffect	False	True	False			
+9942015	Buff	True	True	False			
+9942016	WeakeningEffect	False	True	False			
+9942017	WeakeningEffect	False	True	True			
+9942018	WeakeningEffect	False	True	False			
+9942019	WeakeningEffect	False	True	False			
+9942020	WeakeningEffect	False	True	False			
+9942021	Stun	False	False	False			
+9942022	WeakeningEffect	False	True	False			
+9942023	WeakeningEffect	True	True	False			
+9942024	WeakeningEffect	True	True	False			
+9942025	WeakeningEffect	False	True	False			
+9942026	WeakeningEffect	False	True	False			
+9942027	WeakeningEffect	True	True	False			
+9942028	DamageOverTime	False	True	False			
+9942029	DamageOverTime	False	True	False			
+9942030	DamageOverTime	False	True	False			
+9942031	DamageOverTime	False	True	False			
+9942032	DamageOverTime	False	True	False			
+9942033	DamageOverTime	False	False	False			
+9942034	WeakeningEffect	False	True	True			
+9942035	WeakeningEffect	False	True	True			
+9942036	Stun	False	False	False			
+9942037	WeakeningEffect	True	True	True	鉱物の赤いマナ	鉱物の赤いマナがあなたを包んでいます。赤い光の光線に害はありません。	icon_status.immunedebuff_tex
+9942038	WeakeningEffect	True	True	True	鉱物の青いマナ	鉱物の青いマナがあなたを包んでいます。青い光の光線に害はありません。	icon_status.immunedebuff_tex
+9942039	WeakeningEffect	True	True	True	鉱物の白いマナ	鉱物の白いマナがあなたを包んでいます。白い光の光線に害はありません。	icon_status.immunedebuff_tex
+9942040	DamageOverTime	False	True	False			
+9942041	DamageOverTime	False	True	False			
+9942042	WeakeningEffect	False	True	False			
+9942043	WeakeningEffect	False	True	True			
+9942044	WeakeningEffect	False	True	True			
+9942045	WeakeningEffect	False	True	True			
+9942046	WeakeningEffect	False	True	True			
+9942047	WeakeningEffect	False	True	True			
+9942048	WeakeningEffect	False	True	True			
+9942049	WeakeningEffect	False	True	False			
+9942050	WeakeningEffect	False	True	True			
+9942051	DamageOverTime	True	False	False	ビリビリ電流	監視塔から流れてきた電流に感電しました。スキル使用不可、移動速度が減少し、HPが少しずつ減少します。	icon_status.paralyzestatus_tex
+9943001	WeakeningEffect	False	True	True			
+9943002	WeakeningEffect	False	True	True			
+9943003	WeakeningEffect	False	True	False			
+9943004	WeakeningEffect	False	True	False			
+9943005	WeakeningEffect	False	True	False			
+9943006	WeakeningEffect	False	True	False			
+9943007	WeakeningEffect	False	True	True			
+9943008	WeakeningEffect	False	True	True			
+9943009	WeakeningEffect	False	True	True			
+9943010	WeakeningEffect	False	True	True			
+9943011	WeakeningEffect	False	True	True			
+9943012	WeakeningEffect	False	True	False			
+9943013	WeakeningEffect	False	True	False			
+9943014	WeakeningEffect	False	True	True			
+9943015	WeakeningEffect	False	True	True			
+9943016	Buff	True	True	False			
+9943017	WeakeningEffect	False	True	False			
+9943018	DamageOverTime	False	True	True			
+9943019	DamageOverTime	False	True	False			
+9943020	DamageOverTime	False	True	True			
+9943021	WeakeningEffect	False	True	False			
+9943022	WeakeningEffect	False	True	True			
+9943023	WeakeningEffect	False	True	False			
+9943024	WeakeningEffect	False	True	False			
+9943025	WeakeningEffect	False	True	False			
+9943026	WeakeningEffect	False	True	False			
+9943027	WeakeningEffect	True	False	False			
+9943028	Buff	True	True	False	迅速な移動：準備	ゴブリンの移動速度がもうすぐ速くなりそうです。	icon_status.plusmove_tex
+9943029	WeakeningEffect	False	True	False			
+9943030	WeakeningEffect	False	True	False			
+9943031	WeakeningEffect	False	True	True			
+9943032	WeakeningEffect	False	True	True			
+9943033	WeakeningEffect	False	True	True			
+9943034	Buff	True	True	True	迅速な移動	ゴブリンの移動速度が非常に速くなりました。	icon_status.plusmove_tex
+9943035	WeakeningEffect	False	True	True			
+9943036	WeakeningEffect	False	True	False			
+9943037	WeakeningEffect	False	True	True			
+9943038	WeakeningEffect	True	True	True			
+9943039	WeakeningEffect	False	True	False			
+9943040	WeakeningEffect	True	True	False	冷たい魔力	冷たい魔力があなたを包みます。この魔力が凝集した時温めないとダメージを負います。	icon_status.poisondown_tex
+9943041	Stun	True	False	False			
+9943042	Stun	True	False	False	熱い魔力	冷たい魔力があなたを包みます。この魔力が凝集した時温めないとダメージを負います。	icon_status.confuseup_tex
+9943043	Stun	True	False	False			
+9943044	Stun	True	False	False			
+9943045	WeakeningEffect	True	True	True	火傷	火傷で持続的にHPが減少します。	icon_status.icedamage_tex
+9943046	WeakeningEffect	True	True	True	凍傷	凍傷で移動速度が下がりました。	icon_status.firedamage_tex
+9943047	WeakeningEffect	False	True	False			
+9943048	WeakeningEffect	False	True	False			
+9943049	WeakeningEffect	False	True	False			
+9943051	WeakeningEffect	False	True	True			
+9943052	WeakeningEffect	False	True	True			
+9943053	WeakeningEffect	False	True	True			
+9943054	WeakeningEffect	True	True	True	不吉な魔力充電	サイラクスが不吉な魔力を集めながら、無防備状態になりました。	icon_status.heat_tex
 9999001	DamageOverTime	False	False	True			
 9999002	DamageOverTime	False	False	True			
 9999003	DamageOverTime	False	False	True			
@@ -3671,6 +3973,8 @@
 10151000	Buff	True	True	False	フラッシュスプリング連係	フラッシュスプリングをもう一度使用できます。	icon_status.instantleap_continuous_tex
 10151010	Buff	True	True	False	闇神降臨	ソウルリーパーが闇の加護を受けます。この効果の適用中は、飛鎌を使用するスキル［デスクリーブ］、［ムーンスラッシュ］、［バックスラッシュ］、［スピニングエッジ］、［メテオストライク］、［デッドリーリープ］、［サタンフレイル］、［スマッシュ］のクールタイムが70％短縮します。	icon_status.descentofdarkness_tex
 10151011	Buff	False	True	False	闇神降臨	「デスクリーブ」、「ムーンスラッシュ」、「バックスラッシュ」、「スピニングエッジ」、「メテオストライク」、「デッドリーリープ」、「サタンフレイル」、「スマッシュ」が初期化されます。	icon_status.descentofdarkness_tex
+10151012	Buff	True	True	True	闇神降臨強化	モンスターを攻撃すると攻撃速度が5％ずつ上昇します。この効果は5回まで重複します。	icon_skills.descentofdarkness_tex
+10151013	Buff	False	True	False			
 10151020	Buff	False	True	False	通常攻撃2打で連結	見えないバフ。見えたらバグ申請をしてください！	icon_skills.comboattack2_tex
 10151021	Buff	False	True	False	通常攻撃3打で連結	見えないバフ。見えたらバグ申請をしてください！	icon_skills.comboattack2_tex
 10151022	Buff	False	True	False	通常攻撃4打で連結	見えないバフ。見えたらバグ申請をしてください！	icon_skills.comboattack2_tex
@@ -3747,6 +4051,7 @@
 10152094	Buff	False	True	False			
 10152095	Buff	False	True	False			
 10152096	Buff	False	True	False	レイジングバーストクール回らなかったら回そう	クラスターボムショット使ってクールタイムを回そう	
+10152097	Buff	False	True	False	アナイアレイト I	アナイアレイトを発動する途中、無敵状態になります。	
 10152100	Buff	True	True	False	エネルギー充電	効果中はアルケインゲージを消費しません。	icon_skills.energycharging_tex
 10152110	Buff	True	True	False	緊急シールド展開	緊急シールドを展開しています。最大$H_W_GOOD27858$COLOR_ENDのダメージを無効化します。	icon_skills.emergencyshield_tex
 10152111	Buff	True	True	False	緊急シールド展開	緊急シールドを展開しています。最大$H_W_GOOD34900$COLOR_ENDのダメージを無効化します。	icon_skills.emergencyshield_tex
@@ -3920,6 +4225,7 @@
 10155300	WeakeningEffect	False	True	False			
 10155310	Buff	False	True	False			
 10155320	Buff	False	True	True			
+10155400	Stun	True	False	False	回り込み	効果持続中は、その場から動けません。ダウンすると効果は即解除されます。	icon_skills.mooncatch_tex
 10230001	Stun	True	False	False	超音波の衝撃	全てのスキルが使用不能となります！　$BRこの効果は解除できません。	icon_status.sealskill_tex
 15200001	Buff	True	True	False	ラバトゥスの甲殻	ラバトゥスの甲殻効果によって$timeの間、防御力と体力が $H_W_GOOD20%$COLOR_END増加します。該当効果はスキル等の効果、死亡時に解除されません。また、ギルド対戦地域を離脱した場合のみ、自動的に解除されます。	icon_skills.emergencyshield_tex
 15200002	Buff	True	True	False	ドゥラカンの火	ドゥラカンの火効果によって$timeの間、防御力と体力が $H_W_GOOD20%$COLOR_END増加します。該当効果はスキル等の効果、死亡時に解除されません。また、ギルド対戦地域を離脱した場合のみ、自動的に解除されます。	icon_items.campfire_tex
@@ -4251,9 +4557,9 @@
 47300800	Buff	True	True	False	レイジ	重複する度に、力が$H_W_GOOD10%$COLOR_END上昇します。効果は最大99回まで重複します。	icon_status.diseaseup_tex
 47300900	DamageOverTime	True	False	False	執行官の猛毒	致命的な猛毒に感染し$H_W_BAD1$COLOR_END second毎にHPが$H_W_BAD-3000$COLOR_ENDずつ減少します。	icon_skills.venomtrap_tex
 47500100	DamageOverTime	True	False	False	破滅の業火	$H_W_BAD5$COLOR_END second1毎に全HPの$H_W_BAD5％$COLOR_ENDが減少し、持続時間が過ぎると対象者は即死します。$BRこの効果は、「破滅の冷気」でのみ解除することができます。	icon_status.firedamage_tex
-47500150	WeakeningEffect	True	True	False	神の聖火	聖なる炎により、全障害ステータス抵抗が大幅に減少しました！	icon_items.fireofpurification_tex
+47500150	WeakeningEffect	True	True	False	神の聖火	聖なる炎により、全てのデバフ抵抗が大幅に減少しました！	icon_items.fireofpurification_tex
 47500200	Buff	True	True	False	削除_生命の叫び	異常状態ツールチップ非表示（isShow=False）このツールチップが出たらBTS処理が必要です。	icon_status.delayheal_tex
-47500250	Buff	True	True	False	強固な結界	全障害ステータスを受け付けません。効果持続中、ダウン/硬直状態になりません。	icon_status.immunedebuff_tex
+47500250	Buff	True	True	False	強固な結界	全てのデバフを受け付けません。効果持続中、ダウン/硬直状態になりません。	icon_status.immunedebuff_tex
 47500300	Stun	True	False	False	無力化の呪縛	全身から力が抜け、効果持続中は全てのスキルを使用できません！	icon_status.sealskill_tex
 47500400	DamageOverTime	True	False	False	報復の結界	$H_W_BAD5$COLOR_END second1毎に全HPの$H_W_BAD20％$COLOR_ENDが減少し、近距離攻撃スキルの威力が$H_W_BAD40%$COLOR_END減少します。$BR結界の効果は解除できません。	icon_status.minuscritical_tex
 47500500	DamageOverTime	True	False	False	懲戒の結界	$H_W_BAD5$COLOR_END second1毎に全HPの$H_W_BAD20％$COLOR_ENDが減少し、遠距離攻撃スキルの威力が$H_W_BAD50%$COLOR_END減少します。$BR結界の効果は解除できません。	icon_status.minorexhaustion_tex
@@ -4275,7 +4581,7 @@
 47502100	Buff	True	True	False	ケルサイクの威容	重複する度に、力が$H_W_GOOD30%$COLOR_END上昇します。効果は最大99回まで重複します。	icon_status.damageup_tex
 47502200	Buff	True	True	False	ケルサイクの守護	強力な守護の力によりケルサイクの耐久力が$H_W_GOOD4倍$COLOR_END上昇します。$BRこの効果は解除できません。	icon_status.plusedefence_tex
 47502300	WeakeningEffect	True	False	False	無能の結界 - 放出	自身とパーティーメンバーのスキル威力が$H_W_BAD50％$COLOR_END減少します。効果は死亡後も解除されません。	icon_status.minuswill_tex
-47600100	Buff	True	True	False	完全無欠の時間	効果持続中、全障害ステータス抵抗が100％になり、どんな攻撃も受け付けません！	icon_status.immunedebuff_tex
+47600100	Buff	True	True	False	完全無欠の時間	効果持続中、全てのデバフ抵抗が100％になり、どんな攻撃も受け付けません！	icon_status.immunedebuff_tex
 47600200	DamageOverTime	False	False	False	苦痛の時間	異常状態ツールチップ非表示（isShow=False）このツールチップが出たらBTS処理が必要です。	icon_status.delayheal_tex
 47600300	Buff	True	True	False	九死一生	九死に一生を得ました！　$H_W_GOOD1$COLOR_END second毎に全HPの$H_W_GOOD3％$COLOR_ENDが回復します。	icon_status.delayheal_tex
 47600400	Stun	True	False	False	苦痛の呪い	苦痛に耐えきれず、逃げ出します。$H_W_BAD3$COLOR_END second1毎に全HPの$H_W_BAD8％$COLOR_ENDが減少します。$BRこの効果は、ダウン時のみ自動で解除されます。	icon_status.fearstatus_tex
@@ -4314,16 +4620,16 @@
 47612400	Buff	True	True	False	防御力上昇 III	耐久力が$H_W_GOOD20%$COLOR_END上昇します。	icon_status.plusedefence_tex
 47612500	Buff	True	True	False	HP持続回復 I	$H_W_GOOD3$COLOR_END second1毎に全HPの$H_W_GOOD3％$COLOR_ENDが回復します。	icon_status.delayheal_tex
 47612600	Buff	False	True	False	HP即時回復 5％	異常状態ツールチップ非表示（isShow=False）このツールチップが出たらBTS処理が必要です。	icon_status.plushp_tex
-47612700	Buff	True	True	False	不死身の時間 III	全障害ステータスを受け付けなくなり、耐久力が$H_W_GOOD$value2$COLOR_END上昇します。	icon_status.immunedebuff_tex
+47612700	Buff	True	True	False	不死身の時間 III	全てのデバフを受け付けなくなり、耐久力が$H_W_GOOD$value2$COLOR_END上昇します。	icon_status.immunedebuff_tex
 47612800	Buff	True	True	False	トゥルサの呪い［破壊］	均衡が減少します。ダウン/硬直発生時、解除されます。	icon_status.minusdefence_tex
 47612900	Buff	True	True	False	ビビッシュの力	クリティカル発生が飛躍的に上昇します。$BRこの効果は解除できません。	icon_status.plusecritical_tex
 47613000	WeakeningEffect	True	False	False	ビビッシュの憤怒	持続時間が過ぎるとHPが$H_W_GOOD-5000$COLOR_END減少します。$BRこの効果は、死亡後も解除されません。	icon_status.minushp_tex
 47613100	DamageOverTime	False	True	False	ダメージ反射	ダメージを反射しています！！　打撃毎に全HPの$H_W_GOOD0.1％$COLOR_ENDが減少します。	icon_status.poisonstatus_tex
 47613200	WeakeningEffect	True	False	False	ビビッシュの力［破滅］	$H_W_BAD3$COLOR_END second1毎に全HPの10％が減少します。	icon_status.poisonstatus_tex
 47613300	WeakeningEffect	True	False	False	魔石破壊	耐久力が$H_W_GOOD99%$COLOR_END、全攻撃スキルによる敵対値が$H_W_GOOD99,9%$COLOR_END減少します。この効果は解除できません。	icon_status.minusdefence_tex
-47620100	WeakeningEffect	True	True	False	ゴブリンの憤怒 I	力が$H_W_GOOD30%$COLOR_END上昇し、均衡が$H_W_BAD100%$COLOR_END減少します。また障害ステータス抵抗が$H_W_BAD100%$COLOR_END減少します。	icon_status.plusattack_tex
-47620200	WeakeningEffect	True	True	False	ゴブリンの憤怒 II	クリティカル発生が$H_W_GOOD80%$COLOR_END上昇し、クリティカル威力が$H_W_GOOD20%$COLOR_END増加します。また均衡が$H_W_BAD100%$COLOR_END減少し、障害ステータス抵抗が$H_W_BAD100%$COLOR_END減少します。	icon_status.plusecritical_tex
-47620300	WeakeningEffect	True	True	False	不知火	最大HPが$H_W_BAD10%$COLOR_END減少し、均衡が$H_W_GOOD100%$COLOR_END増加します。また障害ステータス抵抗が$H_W_GOOD100%$COLOR_END上昇します。	icon_status.plusdiseaseresist_tex
+47620100	WeakeningEffect	True	True	False	ゴブリンの憤怒 I	力が$H_W_GOOD30%$COLOR_END上昇し、均衡が$H_W_BAD100%$COLOR_END減少します。またデバフ抵抗が$H_W_BAD100%$COLOR_END減少します。	icon_status.plusattack_tex
+47620200	WeakeningEffect	True	True	False	ゴブリンの憤怒 II	クリティカル発生が$H_W_GOOD80%$COLOR_END上昇し、クリティカル威力が$H_W_GOOD20%$COLOR_END増加します。また均衡が$H_W_BAD100%$COLOR_END減少し、デバフ抵抗が$H_W_BAD100%$COLOR_END減少します。	icon_status.plusecritical_tex
+47620300	WeakeningEffect	True	True	False	不知火	最大HPが$H_W_BAD10%$COLOR_END減少し、均衡が$H_W_GOOD100%$COLOR_END増加します。またデバフ抵抗が$H_W_GOOD100%$COLOR_END上昇します。	icon_status.plusdiseaseresist_tex
 47620400	DamageOverTime	True	False	False	業火	$H_W_GOOD1$COLOR_END second毎に全HPの$H_W_BAD2％$COLOR_ENDが減少します。	icon_status.minushp_tex
 47620500	WeakeningEffect	True	False	False	クチャートの呪い I	10秒後に最大MPが$H_W_BAD30%$COLOR_END減少します。	icon_status.minusmp_tex
 47620600	WeakeningEffect	True	False	False	クチャートの呪い II	10秒後に最大MPが$H_W_BAD100%$COLOR_END減少します。	icon_status.minusmp_tex
@@ -4348,8 +4654,8 @@
 47630200	Stun	True	False	False	スタニングフラッシュ	自身を除くパーティーメンバーを一定時間気絶させます。有効範囲は周囲約15mです。$BRこの効果は解除できません。	icon_status.fearstatus_tex
 47630300	Buff	True	True	True	凶暴化	力が$H_W_GOOD1000％$COLOR_END、攻撃速度が$H_W_GOOD10％$COLOR_END上昇します。	icon_status.plusattack_tex
 47640100	Buff	True	True	False	偶像の憑依	力が$H_W_GOOD30%$COLOR_END上昇します。	icon_status.plusattack_tex
-47640200	Buff	True	True	False	家紋の祝福	耐久力が$H_W_GOOD900%$COLOR_END上昇し、ダウン/硬直が発生せず、障害ステータスを受け付けません。	icon_status.plusedefence_tex
-47640300	Buff	True	True	False	鉄壁の外殻	耐久力が$H_W_GOOD100%$COLOR_END上昇し、ダウン/硬直が発生しません。また障害ステータスを受け付けません。	icon_status.plusedefence_tex
+47640200	Buff	True	True	False	家紋の祝福	耐久力が$H_W_GOOD900%$COLOR_END上昇し、ダウン/硬直が発生せず、デバフを受け付けません。	icon_status.plusedefence_tex
+47640300	Buff	True	True	False	鉄壁の外殻	耐久力が$H_W_GOOD100%$COLOR_END上昇し、ダウン/硬直が発生しません。またデバフを受け付けません。	icon_status.plusedefence_tex
 47640400	DamageOverTime	True	False	False	破壊の鉄炎	$H_W_BAD1$COLOR_END second毎に全HPの$H_W_BAD7％$COLOR_ENDが減少します。	icon_status.poisonstatus_tex
 47640500	Buff	True	True	False	戦闘の賛歌	力が$H_W_GOOD20%$COLOR_END上昇します。	icon_status.plusattack_tex
 47640600	Buff	True	True	True	聖泉の祝福	泳ぐ速度が$H_W_BAD240$COLOR_END上昇します。効果持続中に死亡した場合、その場で即時に復活します。	icon_status.minusmove_tex
@@ -4365,10 +4671,10 @@
 47650200	Buff	True	True	False	100キルバフ	クリティカル発生が$H_W_GOOD2900%$COLOR_END上昇します。	icon_status.plusecritical_tex
 47650300	Buff	True	True	False	150キルバフ	効果持続中、遠距離攻撃スキルのクールタイムが$H_W_GOOD0,1$COLOR_END短縮されます。	icon_status.pluswill_tex
 47650400	Buff	True	True	False	戦神の恩寵	全HPの$H_W_GOOD50％$COLOR_ENDが即時に回復します。	icon_status.plushp_tex
-47650500	Buff	True	True	False	250キルバフ	全障害ステータスを受け付けず、均衡が上昇します。	icon_status.immunedebuff_tex
+47650500	Buff	True	True	False	250キルバフ	全てのデバフを受け付けず、均衡が上昇します。	icon_status.immunedebuff_tex
 47650510	WeakeningEffect	True	False	False	250キルバフ	気絶しているため動けません。	icon_status.confuseup_tex
 47650600	Stun	True	False	False	時の歪み	時空間が歪み、効果持続中は全てのスキルが使用不可になります。この効果は解除できません。	icon_status.minuswill_tex
-47650700	Buff	True	True	False	保護の秘薬	全障害ステータスを受け付けません。効果持続中、ダウン/硬直状態になりません。	icon_status.sealskill_tex
+47650700	Buff	True	True	False	保護の秘薬	全てのデバフを受け付けません。効果持続中、ダウン/硬直状態になりません。	icon_status.sealskill_tex
 47650800	DamageOverTime	True	False	False	苦痛の棘	移動速度が$H_W_BAD10$COLOR_ENDになり、全HPの$H_W_BAD9％$COLOR_ENDが減少します。この効果は解除できません。	icon_status.poisonstatus_tex
 47650900	WeakeningEffect	True	False	False	天魔鳴動	大地が大きく揺れ、大ダメージを受けます。この効果は解除できません。	icon_status.minuswill_tex
 47651000	Buff	True	True	False	戦神の祝福	効果持続中は、死亡してもその場で即時に復活できます。	icon_status.vitality_tex
@@ -4401,7 +4707,7 @@
 47662500	WeakeningEffect	True	False	False	慈母の悲痛	母の悲痛な叫びが響き渡ります。耐久力が$H_W_BAD10%$COLOR_END減少します。効果は最大6回まで重複します。	icon_status.minusdefence_tex
 47662600	Buff	True	True	False	ゴーレムの剛力	ゴーレムの力により、電撃系スキルのダメージが$H_W_GOOD10%$COLOR_END減少します。	icon_status.minusdefence_tex
 47662700	WeakeningEffect	False	False	False	ライトニングショック	電気ショックを受けました。効果は最大4回まで重複します。	icon_skills.voidtrap_tex
-47662800	Buff	True	True	False	不死身の時間	全障害ステータスを受け付けなくなり、耐久力が$H_W_GOOD200%$COLOR_END上昇します。	icon_status.immunedebuff_tex
+47662800	Buff	True	True	False	不死身の時間	全てのデバフを受け付けなくなり、耐久力が$H_W_GOOD200%$COLOR_END上昇します。	icon_status.immunedebuff_tex
 47670100	Buff	True	True	False	魔法吸収	不思議な力により、最大$H_W_GOOD300000$COLOR_ENDのダメージを無効化します。最大値を超えると持続時間に関わらず即解除されます。この効果は解除できません。	icon_skills.manashield_tex
 47670101	Buff	True	True	False	魔法吸収	不思議な力により、最大$H_W_GOOD100%$COLOR_ENDのダメージを無効化します。最大値を超えると持続時間に関わらず即解除されます。この効果は解除できません。	icon_skills.manashield_tex
 47670200	Buff	True	True	False	戦士の憤怒	力が$H_W_GOOD5%$COLOR_END、移動速度が$H_W_GOOD5%$COLOR_END上昇します。また、耐久力が$H_W_BAD5%$COLOR_END減少します。この効果は解除できません。	icon_status.angerwarrior_tex
@@ -4409,8 +4715,8 @@
 47670400	WeakeningEffect	True	False	False	ダゴンの体液	力が$H_W_BAD50%$COLOR_END、攻撃速度が$H_W_BAD50%$COLOR_END、移動速度が$H_W_BAD80%$COLOR_END減少します。	icon_status.risindagon_tex
 47670500	WeakeningEffect	True	False	False	ダゴンの浄化	自身を除くパーティーメンバーのMPが減少します。有効範囲は周囲約2mです。この効果は解除できません。	icon_status.purifydagon_tex
 47670600	Buff	True	True	False	アガンティの血痕	スキル命中時、全HPの$H_W_GOOD500$COLOR_ENDが即時に回復します。この効果は解除できません。	icon_status.blooduanty_tex
-47670700	WeakeningEffect	False	True	False	聖なる祝福	祝福の恩寵により、全障害ステータスを防ぎます。この効果は解除できません。	icon_status.holybless_tex
-47670800	Buff	False	True	False	狂気のバリア	バリアが発生し、全障害ステータスを防ぎます。	icon_status.immunedebuff_tex
+47670700	WeakeningEffect	False	True	False	聖なる祝福	祝福の恩寵により、全てのデバフを防ぎます。この効果は解除できません。	icon_status.holybless_tex
+47670800	Buff	False	True	False	狂気のバリア	バリアが発生し、全てのデバフを防ぎます。	icon_status.immunedebuff_tex
 47670900	WeakeningEffect	True	True	False	消滅	数秒後、対象者を即死させる効果が発生します。$BRこの効果は解除できません。	icon_status.delaydamage_tex
 47671000	Stun	True	False	False	無力化 I	全身から力が抜け、効果持続中は全てのスキルを使用できません！	icon_status.sealskill_tex
 47680000	WeakeningEffect	True	True	False	次元の狂気	次元の狂気により、力が$H_W_GOOD150%$COLOR_END、ダウン/硬直誘発が$H_W_GOOD100%$COLOR_END上昇します。また移動速度が$H_W_GOOD50%$COLOR_END、攻撃速度が$H_W_GOOD50%$COLOR_END上昇します。	icon_skills.voidtrap_tex
@@ -4454,7 +4760,7 @@
 47700600	Buff	True	True	False	アルゴン状態	陽極磁場の効果を利用し、対象を全て捕獲します。$BRこの効果は解除できません。	icon_status.plusedefence_tex
 47700700	Buff	True	True	False	カルゴン状態	陰極磁場の効果を利用し、対象を全て捕獲します。$BRこの効果は解除できません。	icon_status.plusedefence_tex
 47700800	DamageOverTime	True	False	False	アルゴンパラサイト	$H_W_BAD1$COLOR_END second毎に全HPの$H_W_BAD2％$COLOR_ENDが減少します。この効果は最大5回まで重複し、重複5回目に全HPの$H_W_BAD50％$COLOR_ENDが減少します。$BRジャンプすると「リムーブパラサイト」が発生します。$BRこの効果は解除できません。	icon_status.minusattack_tex
-47701000	Buff	True	True	True	生命エネルギーバリア	生命エネルギーによるバリアが発生しました。全障害ステータスを防ぎます。$BRこの効果は解除できません。	icon_status.immunedebuff_tex
+47701000	Buff	True	True	True	生命エネルギーバリア	生命エネルギーによるバリアが発生しました。全てのデバフを防ぎます。$BRこの効果は解除できません。	icon_status.immunedebuff_tex
 47701100	WeakeningEffect	True	False	True	免疫破壊	耐久力を$H_W_BAD100$COLOR_ENDに固定します。$BRこの効果は解除できません。	icon_status.plusedefence_tex
 47701200	Buff	True	True	True	鋼鉄の意思	アルゴンの女王が全ての敵対値を無視します。$BRこの効果は解除できません。	icon_status.diffusionaggro_tex
 47701300	Buff	True	True	True	自我崩壊	アルゴンの女王の自我が崩壊し、敵対値の高い対象を無条件に攻撃します。$BRこの効果は解除できません。	icon_status.stackabnormality_tex
@@ -4507,6 +4813,73 @@
 71600004	DamageOverTime	True	False	False	ダルカンの炎	$H_W_BAD2$COLOR_END second1毎に全HPの$H_W_BAD5％$COLOR_ENDが持続的に減少します。解除されるまで持続します。	icon_status.firedamage_tex
 71600010	DamageOverTime	True	False	False	火傷	$H_W_BAD1$COLOR_END second毎に全HPの$H_W_BAD5％$COLOR_ENDが持続的に減少します。解除されるまで持続します。	icon_status.firedamage_tex
 71600020	WeakeningEffect	False	False	False			
+73500000	Buff	False	True	False	見えたらBTS	このPCの攻撃はダメージが分散しません	
+73500001	Buff	True	True	True	送風機微風	格納庫換気施設の送風機から吹いてくる風の影響で落下ダメージを受けません。	icon_skills.rage_tex
+73500002	WeakeningEffect	False	True	True	見えたらBTS	このNPCはダメージ/リアクションに抵抗しています	
+73500003	Buff	False	True	False	見えたらBTS	このPCはヒーラークラスとして判定されています。	
+73500004	Buff	False	True	False	見えたらBTS	このPCはタンカークラスとして判定されています。	
+73500005	Buff	False	True	True	見えたらBTS	このPCはタンカー以外のクラスとして判定されています。	
+73500006	WeakeningEffect	False	True	True	見えたらBTS	このNPCは全てのダメージ、異常状態、リアクションに免疫状態です。	
+73501000	Buff	True	True	False	保護されたエネルギー	エネルギーがベンタロンに安全に伝達されるようにエアーホールが全てを保護します。エアーホールを通過する時に落下ダメージを受けません。	icon_skills.rage_tex
+73501001	DamageOverTime	True	False	False	プラズマ露出	時限爆弾が爆発しました！$H_W_BAD1$COLOR_END second毎に$H_W_BAD4％$COLOR_ENDのHPが減少します。	icon_status.paralyzestatus_tex
+73501002	Buff	False	True	False	見えたらBTS	このPCは飛んでいく途中です！他の衝撃波スキルや空間移動スキルにダメージを受けません	
+73501003	Buff	False	True	False	見えたらBTS	このNPCは爆発攻撃を使用できません	
+73501004	Stun	True	False	False	朦朧	ベンタロンの強力な攻撃で気絶したため動けません。	icon_status.confuseup_tex
+73501005	WeakeningEffect	True	False	False	プラズマ衝撃	時限爆弾が爆発しました！衝撃波に攻撃されて移動速度が$H_W_BAD50％$COLOR_END、スキルによる移動距離が$H_W_BAD30％$COLOR_END 減少します。 この効果は解除できません。	icon_status.minusmove_tex
+73501006	Buff	False	True	False	見えたらBTS	このNPCは時限爆弾を召喚できます。	
+73501007	Buff	False	True	False	見えたらBTS	このPCは異常状態の持続時間の間、全滅スキルに攻撃されません。	
+73501008	WeakeningEffect	True	False	False	神経損傷	ベンタロンのプラズマ放出により、スキルを使用できません。	icon_status.vergoscurse_tex
+73501009	Buff	False	True	False	見えたらBTS	このNPCは送風機を動作させることができません	
+73501010	Buff	False	True	False	見えたらBTS	このNPCは異常状態の持続時間の間、連続爆発パターンを実行できません	
+73501011	Buff	False	True	False	見えたらBTS	このNPCは異常状態の持続時間の間、送風機作動パターンを実行できません	
+73501012	WeakeningEffect	True	True	False	リバースカレント	ベンタロンの強力な磁場攻撃によって身体が強制的に移動しています。	icon_status.electriceffect3_tex
+73501013	Buff	False	True	False	見えたらBTS	時限爆弾が設置されました。次のパターンが連続で動作しません：連続爆発パターン、全滅パターン、送風機パターン	
+73501014	Buff	False	True	False	見えたらBTS	送風機が動作します。次のパターンが連続で動作しません：全滅パターン	
+73501015	Buff	False	True	False	見えたらBTS	送風機が動作します。次のパターンが連続で動作しません：時限爆弾パターン	
+73501016	Buff	False	True	False	見えたらBTS	RK-9格納庫レコード達成異常状態 - 吸気排気施設利用	
+73501017	Buff	False	True	False	見えたらBTS	吸気/排気施設の重複被撃を防止します。	
+73501018	Buff	False	True	False	見えたらBTS	時限爆弾100個除去達成異常状態です。	
+73501019	Buff	False	True	True	見えたらBTS	敵意透明NPCを条件として割り当てることができます。	
+73502000	DamageOverTime	True	False	False	電気ショック	強力な電流により1重複当たり$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD6％$COLOR_END減少します。最大12回まで重複されます。	icon_skills.electricshock_tex
+73502001	WeakeningEffect	False	True	True	見えたらBTS	このNPCは全てのダメージとリアクション、異常状態に抵抗しています。	
+73502002	Buff	False	True	True	見えたらBTS	このNPCは電流爆発パターン使用時、電磁気誘導攻撃を先に実行します。	
+73502003	Buff	False	True	True	見えたらBTS	このNPCは電流爆発パターン使用時、近距離爆発攻撃を先に実行します。	
+73502004	Buff	False	True	False	見えたらBTS	このPCはのこぎり回転攻撃を受けました。ヘキサフレオンが連携攻撃を実行できます。	
+73502005	WeakeningEffect	True	False	False	感電ショック	ヘキサフレオンの強力な電流によってショック状態になりました。スキルを使用できません。	icon_skills.electricshock2_tex
+73502006	Buff	False	True	False	見えたらBTS	このNPCはクールタイムになると100％確率で攻撃します。	
+73502007	WeakeningEffect	False	True	True	見えたらBTS	このNPCのエフェクトを出力する異常状態です。	
+73503000	Buff	False	True	False	見えたらBTS	このNPCは異常状態が続く限り月明り衝撃波スキルを使用できません。	
+73503001	Stun	True	False	False	朦朧	RK-9の攻撃で気絶したため動けません。	icon_status.confuseup_tex
+73503002	Buff	False	True	False	見えたらBTS	このNPCは現在月明り衝撃波スキルを使用できません。	
+73503003	Buff	False	True	False	見えたらBTS	このNPCは異常状態の持続時間の間、生命体感知パターンを実行できません	
+73503004	Buff	False	True	False	見えたらBTS	このNPCは現在、生命体感知パターンを実行できません	
+73503005	Buff	False	True	True	見えたらBTS	このNPCは現在、向上した熱感知プロトコルの使用条件をボスに付与することができます。	
+73503006	Buff	False	True	True	見えたらBTS	このNPCは現在、向上した熱感知プロトコルの正順序使用条件をボスに付与することができます。	
+73503007	Buff	False	True	True	見えたらBTS	このNPCは現在、向上した熱感知プロトコルの逆順序使用条件をボスに付与することができます。	
+73503008	Buff	False	True	True	見えたらBTS	このNPCは現在部位破壊パターンで胸保護部分が破壊されました。持続的に誤作動を起こします。	
+73503009	DamageOverTime	True	True	False	レーザー衝撃	高出力レーザーによって持続的な衝撃ダメージを受けます。毎$H_W_BAD2$COLOR_END second1毎に$H_W_BAD6％$COLOR_ENDのHPが減少します。この効果は解除できません。	icon_status.fullelectriceffect_tex
+73503100	Buff	False	True	False	見えたらBTS	このNPCは現在、熱感知プロトコルパターンを実行できません	
+73503101	Buff	False	True	True	見えたらBTS	このNPCは熱感知プロトコルパターンで最初に近距離範囲を打撃します。	
+73503102	Buff	False	True	True	見えたらBTS	このNPCは熱感知プロトコルパターンで最初に遠距離範囲を打撃します。	
+73503103	Buff	False	True	True	見えたらBTS	このNPCは熱感知プロトコルパターンで最初に全範囲を打撃します。	
+73503104	Buff	False	True	True	見えたらBTS	このNPCは熱感知プロトコルパターンで2番目に近距離範囲を打撃します。	
+73503105	Buff	False	True	True	見えたらBTS	このNPCは熱感知プロトコルパターンで2番目に遠距離範囲を打撃します。	
+73503106	Buff	False	True	True	見えたらBTS	このNPCは熱感知プロトコルパターンで2番目に全範囲を打撃します。	
+73503107	Buff	False	True	True	見えたらBTS	このNPCは胸の保護部分が破壊されてないので、正常的なシステムで侵入者を排除します。	
+73503108	Buff	True	True	True	見えたらBTS	このNPCは熱感知プロトコルパターンで正順序で打撃します。	
+73503109	Buff	True	True	True	見えたらBTS	このNPCは熱感知プロトコルパターンで正順序で打撃します。	
+73503200	Buff	False	True	False	見えたらBTS	このNPCは現在遠距離対象に小型爆弾スキルを使用できません。	
+73503201	Buff	False	True	False	見えたらBTS	このNPCは現在復活スキル発動対象に小型爆弾スキルを使用できません	
+73503300	Buff	False	True	True	見えたらBTS	このNPCは保護プロトコルを実行できます。	
+73503301	Buff	True	True	True	プロトコル実行中：保護	RK-9のシステムが危険を感知して保護プロトコルを実行しました。保護プロトコルが実行されると、侵入者をすべて排除します。	icon_skills.emergencyshield_tex
+73503302	Buff	False	True	False	見えたらBTS	このNPCは、保護プロトコルの実行中、過度な衝撃によりシステムが一時ダウンしました。5000ms間行動できません。	
+73503303	Buff	False	True	False	見えたらBTS	このNPCは、保護プロトコルの実行中にシステムエラーが発生しました。20000msの間、ラカンの魔石の保護プレートが弱化され、過度な衝撃を受けると破壊される可能性があります。	
+73503400	Buff	False	True	False	見えたらBTS	このNPCは異常状態の持続時間の間、保護プロトコルパターンを実行できません	
+73503401	Buff	True	True	True	プロトコル実行中：保護	RK-9のシステムが危険を感知して保護プロトコルを実行しました。保護プロトコルが実行されると、侵入者をすべて排除します。	icon_skills.emergencyshield_tex
+73503402	Buff	False	True	False	見えたらBTS	このNPCは、保護プロトコルの実行中、過度な衝撃によりシステムが一時ダウンしました。5000ms間行動できません。	
+73503403	WeakeningEffect	False	True	False	見えたらBTS	このNPCは全てのダメージ、異常状態、リアクションに免疫状態です。	
+73504000	WeakeningEffect	True	True	True	強力な磁場	強力な磁場の影響でスキルを使用することができません。	icon_status.sealskill_tex
+73504001	WeakeningEffect	True	True	False	感電状態	磁場回転装置に触れて、一時的な感電状態になったため移動できません。	icon_skills.excesselectron_tex
 74300002	DamageOverTime	True	True	False	黒い霧	周辺に黒い霧が立ち込めます。霧の中では移動速度が大幅に上昇します。	icon_status.darkeffect_tex
 74300003	Buff	True	True	True	呪いの碑石の力	モンスターの力が$H_W_GOOD50%$COLOR_END上昇します。	icon_status.minushp_tex
 74300012	WeakeningEffect	True	True	False	魔法使いの呪い（赤）	魔法使いの呪いにかかりました。順番通りに解除しなければ、大ダメージを受けます。	icon_status.battlecommand03_tex
@@ -4657,7 +5030,7 @@
 80900005	WeakeningEffect	False	True	True	C		icon_status.battlecommand04_tex
 80900006	WeakeningEffect	False	True	True	D		icon_status.battlecommand01_tex
 80900007	Buff	False	True	False	HP急速回復_1%	異常状態ツールチップ非表示（isShow=False）このツールチップが出たらBTS処理が必要です。	icon_status.plushp_tex
-80900008	Buff	True	True	False	不死身の時間 	全障害ステータス抵抗が$H_W_GOOD100%$COLOR_END上昇し、耐久力が$H_W_GOOD200%$COLOR_END上昇します。	icon_status.immunedebuff_tex
+80900008	Buff	True	True	False	不死身の時間 	全てのデバフ抵抗が$H_W_GOOD100%$COLOR_END上昇し、耐久力が$H_W_GOOD200%$COLOR_END上昇します。	icon_status.immunedebuff_tex
 81300001	DamageOverTime	True	False	False			icon_status.cruel_slayer_3_tex
 81300002	Buff	True	True	True	回復中の古代の岩	$H_W_GOOD2$COLOR_END second1毎に全HPの$H_W_GOOD1％$COLOR_ENDが回復します。	icon_status.aura_of_regeneration_hp_tex
 81300004	WeakeningEffect	False	False	True	精神支配石の保護	精神支配石の力により保護されています。	icon_status.darkriftrage_tex
@@ -4713,7 +5086,7 @@
 91600014	WeakeningEffect	True	False	False	闇の破片 II	闇の中に閉じ込められています。回復量が50%減少し$H_W_BAD1$COLOR_END second毎に全HPの$H_W_BAD2％$COLOR_ENDが減少します。	icon_status.fearstatus_tex
 91600015	WeakeningEffect	True	False	False	闇の破片 III	闇の中に閉じ込められています。回復量が75%減少し$H_W_BAD1$COLOR_END second毎に全HPの$H_W_BAD2％$COLOR_ENDが減少します。	icon_status.fearstatus_tex
 91600016	WeakeningEffect	True	False	False	闇の破片 IV	闇の中に閉じ込められています。回復量が100%減少し$H_W_BAD1$COLOR_END second毎に全HPの$H_W_BAD2％$COLOR_ENDが減少します。	icon_status.fearstatus_tex
-91600017	WeakeningEffect	True	False	False	ダルカンの手	全障害ステータスを受け付けなくなり、効果持続中はダウンと硬直が発生しないが、持続時間が終わると即死します。$BR「神の手」は「ダルカンの火花」でのみ解除可能です。	icon_status.immunedebuff_tex
+91600017	WeakeningEffect	True	False	False	ダルカンの手	全てのデバフを受け付けなくなり、効果持続中はダウンと硬直が発生しないが、持続時間が終わると即死します。$BR「神の手」は「ダルカンの火花」でのみ解除可能です。	icon_status.immunedebuff_tex
 91600018	WeakeningEffect	False	False	True	エルカラス号_3番部屋_ンスターオーバーレイ用	色用	icon_skills.voidtrap_tex
 91600019	Buff	True	False	True	ダルカンのバリア	ダルカンが精神を集中させるために使用したバリア。一定量のダメージを吸収します。	icon_status.plusedefence_tex
 91600020	WeakeningEffect	False	False	False	エルカラス号_3番部屋_アラームエフェクト用	アラームエフェクト用	icon_skills.voidtrap_tex
@@ -4735,6 +5108,82 @@
 91600036	DamageOverTime	False	False	False			
 91600037	DamageOverTime	False	False	False			icon_status.cruel_slayer_3_tex
 91600038	Buff	False	True	False	浮遊石の回復	浮遊石のHP回復用の異常状態	icon_status.aura_of_regeneration_hp_tex
+93500000	Buff	False	True	False	見えたらBTS	このPCの攻撃はダメージが分散しません	
+93500001	Buff	False	True	False	見えたらBTS	格納庫換気施設の送風機から吹いてくる風の影響で落下ダメージが増加します。	
+93500002	WeakeningEffect	False	True	True	見えたらBTS	このNPCはダメージ/リアクションに抵抗しています	
+93500003	Buff	False	True	False	見えたらBTS	このPCはヒーラークラスとして判定されています。	
+93500004	Buff	False	True	False	見えたらBTS	このPCはタンカークラスとして判定されています。	
+93500005	Buff	False	True	True	見えたらBTS	このPCはタンカー以外のクラスとして判定されています。	
+93500006	WeakeningEffect	False	True	True	見えたらBTS	このNPCは全てのダメージ、異常状態、リアクションに免疫状態です。	
+93501000	Buff	True	True	False	保護されたエネルギー	エネルギーがベンタロンに安全に伝達されるようにエアーホールが全てを保護します。エアーホールを通過する時に落下ダメージを受けません。	icon_skills.rage_tex
+93501001	DamageOverTime	True	True	False	プラズマ露出	時限爆弾が爆発しました！$H_W_BAD1$COLOR_END second毎に$H_W_BAD8％$COLOR_ENDのHPが減少します。	icon_status.paralyzestatus_tex
+93501002	Buff	False	True	False	見えたらBTS	このPCは飛んでいく途中です！他の衝撃波スキルや空間移動スキルにダメージを受けません	
+93501003	Buff	False	True	False	見えたらBTS	このNPCは爆発攻撃を使用できません	
+93501004	Stun	True	False	False	朦朧	ベンタロンの強力な攻撃で気絶したため動けません。	icon_status.confuseup_tex
+93501005	WeakeningEffect	True	True	False	プラズマ衝撃	時限爆弾が爆発しました！衝撃波に攻撃されて移動速度が$H_W_BAD50％$COLOR_END、スキルによる移動距離が$H_W_BAD30％$COLOR_END 減少します。 この効果は解除できません。	icon_status.minusmove_tex
+93501006	Buff	False	True	False	見えたらBTS	このNPCは時限爆弾を召喚できます。	
+93501007	Buff	False	True	False	見えたらBTS	このPCは異常状態の持続時間の間、全滅スキルに攻撃されません。	
+93501008	WeakeningEffect	True	True	False	神経損傷	ベンタロンのプラズマ放出により、スキルを使用できません。	icon_status.vergoscurse_tex
+93501009	Buff	False	True	False	見えたらBTS	このNPCは送風機を動作させることができません	
+93501010	Buff	False	True	False	見えたらBTS	このNPCは異常状態の持続時間の間、連続爆発パターンを実行できません	
+93501011	Buff	False	True	False	見えたらBTS	このNPCは異常状態の持続時間の間、送風機作動パターンを実行できません	
+93501012	WeakeningEffect	True	True	False	リバースカレント	ベンタロンの強力な磁場攻撃によって身体が強制的に移動しています。	icon_status.electriceffect3_tex
+93501013	Buff	False	True	False	見えたらBTS	時限爆弾が設置されました。次のパターンが連続で動作しません：連続爆発パターン、全滅パターン、送風機パターン	
+93501014	Buff	False	True	False	見えたらBTS	送風機が動作します。次のパターンが連続で動作しません：全滅パターン	
+93501015	Buff	False	True	False	見えたらBTS	送風機が動作します。次のパターンが連続で動作しません：時限爆弾パターン	
+93501016	Buff	False	True	False	見えたらBTS	このPCは全てのダメージに免疫状態です。	
+93501017	Buff	False	True	False	見えたらBTS	吸気/排気施設の重複被撃を防止します。	
+93501018	Buff	False	True	False	見えたらBTS	時限爆弾100個除去達成異常状態です。	
+93501019	Buff	False	True	True	見えたらBTS	敵意透明NPCを条件として割り当てることができます。	
+93501020	Buff	False	True	False	見えたらBTS	このPCは吸気施設を利用しました。BTS159600現象の防止のため、1秒間落下ダメージを受けません。	
+93502000	DamageOverTime	True	False	False	電気ショック	強力な電流により1重複当たり$H_W_BAD2$COLOR_END second1毎にHPが$H_W_BAD10％$COLOR_END減少します。最大12回まで重複されます。	icon_skills.electricshock_tex
+93502001	WeakeningEffect	False	True	True	見えたらBTS	このNPCは全てのダメージとリアクション、異常状態に抵抗しています。	
+93502002	Buff	False	True	True	見えたらBTS	このNPCは電流爆発パターン使用時、電磁気誘導攻撃を先に実行します。	
+93502003	Buff	False	True	True	見えたらBTS	このNPCは電流爆発パターン使用時、近距離爆発攻撃を先に実行します。	
+93502004	Buff	False	True	False	見えたらBTS	このPCはのこぎり回転攻撃を受けました。ヘキサフレオンが連携攻撃を実行できます。	
+93502005	WeakeningEffect	True	False	False	感電ショック	ヘキサフレオンの強力な電流によってショック状態になりました。スキルを使用できません。	icon_skills.electricshock2_tex
+93502006	Buff	False	True	False	見えたらBTS	このNPCはクールタイムになると100％確率で攻撃します。	
+93502007	WeakeningEffect	False	True	True	見えたらBTS	このNPCのエフェクトを出力する異常状態です。	
+93502008	Buff	False	True	False	見えたらBTS	電気衝撃異常状態を獲得してなかったら達成するレコード異常状態です	
+93502009	Buff	False	True	True	見えたらBTS	電気衝撃異常状態を獲得したなら93502008を獲得できないようにする異常状態です	
+93503000	Buff	False	True	False	見えたらBTS	このNPCは異常状態が続く限り月明り衝撃波スキルを使用できません。	
+93503001	Stun	True	False	False	朦朧	RK-9の攻撃で気絶したため動けません。	icon_status.confuseup_tex
+93503002	Buff	False	True	False	見えたらBTS	このNPCは現在月明り衝撃波スキルを使用できません。	
+93503003	Buff	False	True	False	見えたらBTS	このNPCは異常状態の持続時間の間、生命体感知パターンを実行できません	
+93503004	Buff	False	True	False	見えたらBTS	このNPCは現在、生命体感知パターンを実行できません	
+93503005	Buff	False	True	True	見えたらBTS	このNPCは現在、向上した熱感知プロトコルの使用条件をボスに付与することができます。	
+93503006	Buff	False	True	True	見えたらBTS	このNPCは現在、向上した熱感知プロトコルの正順序使用条件をボスに付与することができます。	
+93503007	Buff	False	True	True	見えたらBTS	このNPCは現在、向上した熱感知プロトコルの逆順序使用条件をボスに付与することができます。	
+93503008	Buff	False	True	True	見えたらBTS	このNPCは現在部位破壊パターンで胸保護部分が破壊されました。持続的に誤作動を起こします。	
+93503009	DamageOverTime	True	True	False	レーザー衝撃	高出力レーザーによって持続的な衝撃ダメージを受けます。毎$H_W_BAD2$COLOR_END second1毎に$H_W_BAD10％$COLOR_ENDのHPが減少します。この効果は解除できません。	icon_status.fullelectriceffect_tex
+93503010	Buff	False	True	False	見えたらBTS	このNPCは持続時間の間、熱感知プロトコルパターンを実行できません	
+93503011	Buff	False	True	False	見えたらBTS	このNPCはRK-9のシステムパラメーターを変更できません。	
+93503100	Buff	False	True	False	見えたらBTS	このNPCは現在、熱感知プロトコルパターンを実行できません	
+93503101	Buff	False	True	True	見えたらBTS	このNPCは熱感知プロトコルパターンで最初に近距離範囲を打撃します。	
+93503102	Buff	False	True	True	見えたらBTS	このNPCは熱感知プロトコルパターンで最初に遠距離範囲を打撃します。	
+93503103	Buff	False	True	True	見えたらBTS	このNPCは熱感知プロトコルパターンで最初に全範囲を打撃します。	
+93503104	Buff	False	True	True	見えたらBTS	このNPCは熱感知プロトコルパターンで2番目に近距離範囲を打撃します。	
+93503105	Buff	False	True	True	見えたらBTS	このNPCは熱感知プロトコルパターンで2番目に遠距離範囲を打撃します。	
+93503106	Buff	False	True	True	見えたらBTS	このNPCは熱感知プロトコルパターンで2番目に全範囲を打撃します。	
+93503107	Buff	False	True	True	見えたらBTS	このNPCは胸の保護部分が破壊されてないので、正常的なシステムで侵入者を排除します。	
+93503108	Buff	False	True	True	見えたらBTS	このNPCは熱感知プロトコルパターンで正順序で打撃します。	icon_status.cruel_slayer_2_tex
+93503109	Buff	False	True	True	見えたらBTS	このNPCは熱感知プロトコルパターンで正順序で打撃します。	icon_status.cruel_slayer_3_tex
+93503200	Buff	False	True	False	見えたらBTS	このNPCは現在遠距離対象に小型爆弾スキルを使用できません。	
+93503201	Buff	False	True	False	見えたらBTS	このNPCは現在復活スキル発動対象に小型爆弾スキルを使用できません	
+93503300	Buff	False	True	True	見えたらBTS	このNPCは保護プロトコルを実行できます。	
+93503301	Buff	True	True	True	プロトコル実行中：保護	RK-9のシステムが危険を感知して保護プロトコルを実行しました。保護プロトコルが実行されると、侵入者をすべて排除します。	icon_skills.emergencyshield_tex
+93503302	Buff	False	True	False	見えたらBTS	このNPCは、保護プロトコルの実行中、過度な衝撃によりシステムが一時ダウンしました。5000ms間行動できません。	
+93503303	Buff	False	True	False	見えたらBTS	このNPCは、保護プロトコルの実行中にシステムエラーが発生しました。20000msの間、ラカンの魔石の保護プレートが弱化され、過度な衝撃を受けると破壊される可能性があります。	
+93503304	Buff	True	True	True	非常防御システム	RK-9のシステムが過度な衝撃を感知し、非常防御システムを稼動しました。RK-9の防御力と攻撃力が増加します。	icon_status.dimensionguard_tex
+93503400	Buff	False	True	False	見えたらBTS	このNPCは異常状態の持続時間の間、保護プロトコルパターンを実行できません	
+93503401	Buff	True	True	True	プロトコル実行中：保護	RK-9のシステムが危険を感知して保護プロトコルを実行しました。保護プロトコルが実行されると、侵入者をすべて排除します。	icon_skills.emergencyshield_tex
+93503402	Buff	False	True	False	見えたらBTS	このNPCは、保護プロトコルの実行中、過度な衝撃によりシステムが一時ダウンしました。5000ms間行動できません。	
+93503500	Buff	False	True	False	見えたらBTS	レーダーシステムパターンで近距離爆発を使用しませんでした。	
+93503501	Buff	False	True	False	見えたらBTS	ノーマルモード1回退治	
+93503502	Buff	False	True	False	見えたらBTS	ハードモード1回退治	
+93503503	Buff	False	True	False	見えたらBTS	ハードモード77回退治	
+93504000	WeakeningEffect	True	True	True	強力な磁場	強力な磁場の影響でスキルを使用することができません。	icon_status.sealskill_tex
+93504001	WeakeningEffect	True	True	False	感電状態	磁場回転装置に触れて、一時的な感電状態になったため移動できません。	icon_skills.excesselectron_tex
 97000001	WeakeningEffect	True	False	True	餌食	空腹の子グモがあなたを追っています。	icon_status.curse_tex
 97000002	WeakeningEffect	True	True	True	満腹感	お腹がいっぱいで休息をとっています。	icon_status.sleepstatus_tex
 97000003	WeakeningEffect	True	True	False	子グモの強力な毒	子グモの毒に感染され、移動速度が減少し、$H_W_BAD0$COLOR_END second1ごとに全HP対比$H_W_BAD10％$COLOR_ENDに至るＨＰが持続的に減少します。	icon_status.diseasedown_tex
@@ -4788,7 +5237,7 @@
 97000051	WeakeningEffect	True	False	False	子グモの毒	子グモの毒に感染され、移動速度が減少し、$H_W_BAD0$COLOR_END second1ごとに全HP対比$H_W_BAD5％$COLOR_ENDに至るＨＰが持続的に減少します。	icon_status.diseasedown_tex
 97000052	DamageOverTime	True	True	False	力強いラケリスの呪い	冥々たるラケリスから受けるダメージが50％増加し、ラケリスの魂の躯体から2倍のダメージを受けます。重複すると死亡します。	icon_status.minusdefence_tex
 97500100	DamageOverTime	True	False	False	破滅の業火	$H_W_BAD2$COLOR_END second1毎に全HPの$H_W_BAD7％$COLOR_ENDが減少し、持続時間が過ぎると対象者は即死します。$BRこの効果は、「破滅の冷気」でのみ解除することができます。	icon_status.firedamage_tex
-97500250	Buff	True	True	False	強固な結界	全障害ステータスを受け付けません。効果持続中、ダウン/硬直状態になりません。	icon_status.immunedebuff_tex
+97500250	Buff	True	True	False	強固な結界	全てのデバフを受け付けません。効果持続中、ダウン/硬直状態になりません。	icon_status.immunedebuff_tex
 97500400	DamageOverTime	True	False	False	報復の結界	$H_W_BAD5$COLOR_END second1毎に全HPの$H_W_BAD20％$COLOR_ENDが減少し、近距離攻撃スキルの威力が$H_W_BAD60%$COLOR_END減少します。$BR結界の効果は解除できません。	icon_status.minuscritical_tex
 97500500	DamageOverTime	True	False	False	懲戒の結界	$H_W_BAD5$COLOR_END second1毎に全HPの$H_W_BAD20％$COLOR_ENDが減少し、遠距離攻撃スキルの威力が$H_W_BAD60%$COLOR_END減少します。$BR結界の効果は解除できません。	icon_status.minorexhaustion_tex
 97500600	DamageOverTime	True	False	False	死の結界	$H_W_BAD2$COLOR_END second1毎に全HPの$H_W_BAD1％$COLOR_ENDが減少し、効果持続中はHPの回復はできません。$BR結界の効果は解除できません。	icon_status.minusfocus_tex
@@ -4895,7 +5344,7 @@
 98000104	Buff	True	True	True	攻撃の連係 III	スキルダメージが$H_W_GOOD10%$COLOR_END、攻撃速度が$H_W_GOOD4%$COLOR_END上昇し、受けるダメージが$H_W_GOOD10%$COLOR_END減少します。	
 98000105	Buff	True	True	True	回復の連係 III	スキルダメージが$H_W_GOOD10%$COLOR_END、攻撃速度が$H_W_GOOD4%$COLOR_END上昇し、受けるダメージが$H_W_GOOD10%$COLOR_END減少します。	
 98000106	WeakeningEffect	True	False	False	耐久力減少［弱化の紋章］	耐久力が$H_W_BAD10%$COLOR_END減少します。	icon_crest.crestactivedefencedown_tex
-98000107	Buff	True	True	False	シークレッドサンダー VI	力が$H_W_GOOD40$COLOR_END、攻撃速度が$H_W_GOOD8$COLOR_END上昇します。	icon_skills.divinelightning_tex
+98000107	Buff	True	True	False	シークレッドサンダー VI	力が$H_W_GOOD48$COLOR_END、攻撃速度が$H_W_GOOD9,6$COLOR_END上昇します。	icon_skills.divinelightning_tex
 98000108	Buff	True	True	False	耐久力上昇［協同の紋章］	耐久力が$H_W_GOOD10%$COLOR_END上昇します。	icon_crest.crestactivedefenceup_tex
 98000109	Buff	True	True	False	ブレシングアルン III	アルンの祝福を受け、非戦闘状態での移動速度が$H_W_GOOD10$COLOR_END上昇し、力が $H_W_GOOD25$COLOR_END上昇します。	icon_skills.attackup_tex
 98000110	Buff	True	True	False	ブレシングシャラ V	シャラの祝福を受け、$H_W_GOOD2秒$COLOR_END毎にHPが持続的に回復され、耐久力が11、全ての状態異常抵抗が5上昇します。	icon_skills.agilitybless_tex
@@ -5115,17 +5564,17 @@
 99001950	Stun	True	False	False	睡眠 VI	深い眠りにつきました。ダメージを受けるとすぐに目覚めます。	icon_status.sleepstatus_tex
 99001960	Stun	True	False	False	睡眠 VII	深い眠りにつきました。ダメージを受けるとすぐに目覚めます。	icon_status.sleepstatus_tex
 99001970	Stun	True	False	False	睡眠 VIII	深い眠りにつきました。ダメージを受けるとすぐに目覚めます。	icon_status.sleepstatus_tex
-99002000	Buff	True	True	False	完全免疫 I	全障害ステータスを受け付けません。	icon_status.immunedebuff_tex
-99002010	Buff	True	True	False	完全免疫 II	全障害ステータスを受け付けません。	icon_status.immunedebuff_tex
-99002020	Buff	True	True	False	完全免疫 III	全障害ステータスを受け付けません。	icon_status.immunedebuff_tex
-99002030	Buff	True	True	False	完全免疫 IV	全障害ステータスを受け付けません。	icon_status.immunedebuff_tex
-99002040	Buff	True	True	False	完全免疫 V	全障害ステータスを受け付けません。	icon_status.immunedebuff_tex
-99002050	Buff	True	True	False	完全免疫 VI	全障害ステータスを受け付けません。	icon_status.immunedebuff_tex
-99002060	Buff	True	True	False	完全免疫 VII	全障害ステータスを受け付けません。	icon_status.immunedebuff_tex
-99002070	Buff	True	True	False	完全免疫 VIII	全障害ステータスを受け付けません。	icon_status.immunedebuff_tex
-99002071	Buff	True	True	False	完全免疫 VIII	全障害ステータスを受け付けません。この効果は解除できません。	icon_status.immunedebuff_tex
-99002072	Buff	True	True	False	完全免疫 VIII	全障害ステータスを受け付けません。この効果は解除できません。	icon_status.immunedebuff_tex
-99002080	Buff	True	True	False	完全免疫 IX	全障害ステータスを受け付けません。	icon_status.immunedebuff_tex
+99002000	Buff	True	True	False	完全免疫 I	全てのデバフを受け付けません。	icon_status.immunedebuff_tex
+99002010	Buff	True	True	False	完全免疫 II	全てのデバフを受け付けません。	icon_status.immunedebuff_tex
+99002020	Buff	True	True	False	完全免疫 III	全てのデバフを受け付けません。	icon_status.immunedebuff_tex
+99002030	Buff	True	True	False	完全免疫 IV	全てのデバフを受け付けません。	icon_status.immunedebuff_tex
+99002040	Buff	True	True	False	完全免疫 V	全てのデバフを受け付けません。	icon_status.immunedebuff_tex
+99002050	Buff	True	True	False	完全免疫 VI	全てのデバフを受け付けません。	icon_status.immunedebuff_tex
+99002060	Buff	True	True	False	完全免疫 VII	全てのデバフを受け付けません。	icon_status.immunedebuff_tex
+99002070	Buff	True	True	False	完全免疫 VIII	全てのデバフを受け付けません。	icon_status.immunedebuff_tex
+99002071	Buff	True	True	False	完全免疫 VIII	全てのデバフを受け付けません。この効果は解除できません。	icon_status.immunedebuff_tex
+99002072	Buff	True	True	False	完全免疫 VIII	全てのデバフを受け付けません。この効果は解除できません。	icon_status.immunedebuff_tex
+99002080	Buff	True	True	False	完全免疫 IX	全てのデバフを受け付けません。	icon_status.immunedebuff_tex
 99002100	WeakeningEffect	False	True	False	消滅	異常状態ツールチップ非表示（isShow=False）このツールチップが出たらBTS処理が必要です。	icon_status.delaydamage_tex
 99002110	WeakeningEffect	False	True	False	消滅	異常状態ツールチップ非表示（isShow=False）このツールチップが出たらBTS処理が必要です。	icon_status.delaydamage_tex
 99002120	WeakeningEffect	False	True	False	消滅	異常状態ツールチップ非表示（isShow=False）このツールチップが出たらBTS処理が必要です。	icon_status.delaydamage_tex
@@ -5135,14 +5584,14 @@
 99002160	WeakeningEffect	False	True	False	消滅	異常状態ツールチップ非表示（isShow=False）このツールチップが出たらBTS処理が必要です。	icon_status.delaydamage_tex
 99002170	WeakeningEffect	False	True	False	消滅	異常状態ツールチップ非表示（isShow=False）このツールチップが出たらBTS処理が必要です。	icon_status.delaydamage_tex
 99002180	WeakeningEffect	False	True	False	消滅	異常状態ツールチップ非表示（isShow=False）このツールチップが出たらBTS処理が必要です。	icon_status.delaydamage_tex
-99002200	Buff	True	True	False	不死身の時間 I	全障害ステータスを受け付けなくなり、耐久力が$H_W_GOOD200%$COLOR_END上昇します。	icon_status.immunedebuff_tex
-99002210	Buff	True	True	False	不死身の時間 II	全障害ステータスを受け付けなくなり、耐久力が$H_W_GOOD200%$COLOR_END上昇します。	icon_status.immunedebuff_tex
-99002220	Buff	True	True	False	不死身の時間 III	全障害ステータスを受け付けなくなり、耐久力が$H_W_GOOD200%$COLOR_END上昇します。	icon_status.immunedebuff_tex
-99002230	Buff	True	True	False	不死身の時間 IV	全障害ステータスを受け付けなくなり、耐久力が$H_W_GOOD200%$COLOR_END上昇します。	icon_status.immunedebuff_tex
-99002240	Buff	True	True	False	不死身の時間 V	全障害ステータスを受け付けなくなり、耐久力が$H_W_GOOD200%$COLOR_END上昇します。	icon_status.immunedebuff_tex
-99002250	Buff	True	True	False	不死身の時間 VI	全障害ステータスを受け付けなくなり、耐久力が$H_W_GOOD200%$COLOR_END上昇します。	icon_status.immunedebuff_tex
-99002260	Buff	True	True	False	不死身の時間 VII	全障害ステータスを受け付けなくなり、耐久力が$H_W_GOOD200%$COLOR_END上昇します。	icon_status.immunedebuff_tex
-99002270	Buff	True	True	False	不死身の時間 VIII	全障害ステータスを受け付けなくなり、耐久力が$H_W_GOOD200%$COLOR_END上昇します。	icon_status.immunedebuff_tex
+99002200	Buff	True	True	False	不死身の時間 I	全てのデバフを受け付けなくなり、耐久力が$H_W_GOOD200%$COLOR_END上昇します。	icon_status.immunedebuff_tex
+99002210	Buff	True	True	False	不死身の時間 II	全てのデバフを受け付けなくなり、耐久力が$H_W_GOOD200%$COLOR_END上昇します。	icon_status.immunedebuff_tex
+99002220	Buff	True	True	False	不死身の時間 III	全てのデバフを受け付けなくなり、耐久力が$H_W_GOOD200%$COLOR_END上昇します。	icon_status.immunedebuff_tex
+99002230	Buff	True	True	False	不死身の時間 IV	全てのデバフを受け付けなくなり、耐久力が$H_W_GOOD200%$COLOR_END上昇します。	icon_status.immunedebuff_tex
+99002240	Buff	True	True	False	不死身の時間 V	全てのデバフを受け付けなくなり、耐久力が$H_W_GOOD200%$COLOR_END上昇します。	icon_status.immunedebuff_tex
+99002250	Buff	True	True	False	不死身の時間 VI	全てのデバフを受け付けなくなり、耐久力が$H_W_GOOD200%$COLOR_END上昇します。	icon_status.immunedebuff_tex
+99002260	Buff	True	True	False	不死身の時間 VII	全てのデバフを受け付けなくなり、耐久力が$H_W_GOOD200%$COLOR_END上昇します。	icon_status.immunedebuff_tex
+99002270	Buff	True	True	False	不死身の時間 VIII	全てのデバフを受け付けなくなり、耐久力が$H_W_GOOD200%$COLOR_END上昇します。	icon_status.immunedebuff_tex
 99002300	DamageOverTime	True	False	False	精神汚染 I	$H_W_BAD3$COLOR_END second1毎に全MPの$H_W_BAD2％$COLOR_ENDが減少します。	icon_status.delaymploss_tex
 99002310	DamageOverTime	True	False	False	精神汚染 II	$H_W_BAD3$COLOR_END second1毎に全MPの$H_W_BAD2.2％$COLOR_ENDが減少します。	icon_status.delaymploss_tex
 99002320	DamageOverTime	True	False	False	精神汚染 III	$H_W_BAD3$COLOR_END second1毎に全MPの$H_W_BAD2.4％$COLOR_ENDが減少します。	icon_status.delaymploss_tex
@@ -5195,7 +5644,7 @@
 99005100	Buff	True	True	False	勇将の狼煙	力が$H_W_GOOD30%$COLOR_END増加します。この効果は、ダンジョンと戦場では適用されません。	icon_skills.union_skillicon5_tex
 99005200	Buff	True	True	False	勇将の保護	耐久力が$H_W_GOOD30%$COLOR_END上昇します。この効果は、ダンジョンと戦場では適用されません。	icon_skills.union_skillicon6_tex
 99005300	Buff	True	True	False	勇将の羽	移動速度が$H_W_GOOD50$COLOR_END上昇します。この効果は、ダンジョンと戦場では適用されません。	icon_skills.union_skillicon7_tex
-99005400	Buff	True	True	False	勇将の加護	リアクション及び障害ステータス抵抗値が$H_W_GOOD50%$COLOR_END上昇します。この効果は、ダンジョンと戦場では適用されません。	icon_skills.union_skillicon8_tex
+99005400	Buff	True	True	False	勇将の加護	リアクション及びデバフ抵抗値が$H_W_GOOD50%$COLOR_END上昇します。この効果は、ダンジョンと戦場では適用されません。	icon_skills.union_skillicon8_tex
 99005500	Buff	True	True	False	セレンの成長	モンスター討伐時に獲得する経験値が増加します。	icon_skills.union_skillicon9_tex
 99005510	Buff	True	True	False	セレンの成長 I	モンスター討伐時に獲得する経験値が10％増加します。	icon_skills.union_skillicon9_tex
 99005520	Buff	True	True	False	セレンの成長 II	モンスター討伐時に獲得する経験値が20％増加します。	icon_skills.union_skillicon9_tex
@@ -5366,6 +5815,7 @@
 81000002	Buff	True	True	False	特性経験値30増加	特性経験値の獲得量が$H_W_GOOD30%$COLOR_END増加します。	icon_items.ep_grow30_tex
 81000003	Buff	True	True	False	特性経験値50増加	特性経験値の獲得量が$H_W_GOOD50%$COLOR_END増加します。	icon_items.ep_grow50_tex
 81000004	Buff	True	True	False	特性経験値100増加	特性経験値の獲得量が$H_W_GOOD100%$COLOR_END増加します。	icon_items.ep_grow100_tex
+81000005	Buff	False	True	True	ネットカフェ特性経験値増加10	特性経験値の獲得量が$H_W_GOOD10%$COLOR_END増加します。	icon_items.ep_grow30_tex
 81010101	Buff	True	True	False	ダメージ減少	ダメージを軽減。戦闘状態に入ると即解除されます。	icon_ep.ep_defense_wellup_tex
 81010102	Buff	True	True	False	ダメージ減少	ダメージを軽減。戦闘状態に入ると即解除されます。	icon_ep.ep_defense_wellup_tex
 81010103	Buff	True	True	False	ダメージ減少	ダメージを軽減。戦闘状態に入ると即解除されます。	icon_ep.ep_defense_wellup_tex
@@ -6460,6 +6910,8 @@
 5020000	Buff	True	True	False		1%	icon_items.parts_heavyarmorc5_tex
 5020001	Buff	True	True	False		5%	icon_items.parts_heavyarmorc5_tex
 5020002	Buff	True	True	False		15%	icon_items.parts_heavyarmorc5_tex
+5020003	Buff	True	True	True			icon_items.q_closedspace_stone_05_tex
+5020004	Buff	True	True	True			icon_items.artisan_lamp_tex
 14400001	Buff	True	True	False	Emblem of Success		icon_items.parts_magicweaponc15_tex
 14400002	Buff	True	True	False	Memento of Fame		icon_items.parts_lightweaponc9_tex
 14400003	Buff	True	True	False	Sigil of Indestructible Flame		icon_items.parts_magicweaponc6_tex

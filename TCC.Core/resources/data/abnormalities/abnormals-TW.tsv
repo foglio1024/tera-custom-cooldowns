@@ -30,13 +30,14 @@
 38	Buff	False	True	False			
 39	Buff	True	True	True	戰鬥的徵象 (網咖)	攻擊力、攻擊速度、以及恢復力上升 2%。該異常狀態只能於網咖中使用。	icon_status.plusecritical_tex
 40	Buff	True	True	True	巴德拉的庇護 (網咖)	在巴德拉的庇護下，採集熟練度增加 30，採集與製作時間則減少。該異常狀態只能於網咖中使用。	icon_items.artisanall_up_tex
-41	Buff	True	True	False	強化匠人庇護	進行強化時，小幅增加最終成功機率。(在覺醒強化、相同裝備強化裡不會套用)	icon_items.parts_heavyarmorc5_tex
-42	Buff	True	True	False	受到祝福的強化匠人庇護	進行強化時，會增加最終成功機率。(在覺醒強化、相同裝備強化裡不會套用)	icon_items.parts_heavyarmorc5_tex
-43	Buff	True	True	False	發光的強化匠人庇護	進行強化時，會增加最終成功機率。(在覺醒強化、相同裝備強化裡不會套用)	icon_items.parts_heavyarmorc5_tex
-44	Buff	True	True	False	強化匠人庇護	進行強化時，會增加最終成功機率。(在覺醒強化、相同裝備強化裡不會套用)	icon_items.parts_heavyarmorc5_tex
-45	Buff	True	True	False	受到祝福的強化匠人庇護	進行強化時，會增加最終成功機率。(在覺醒強化、相同裝備強化裡不會套用)	icon_items.parts_heavyarmorc5_tex
-46	Buff	True	True	False	發光的強化匠人庇護	進行強化時，會增加最終成功機率。(在覺醒強化、相同裝備強化裡不會套用)	icon_items.parts_heavyarmorc5_tex
+41	Buff	True	True	False	強化匠人庇護	進行強化時，小幅增加最終成功機率。	icon_items.parts_heavyarmorc5_tex
+42	Buff	True	True	False	受到祝福的強化匠人庇護	進行強化時，會增加最終成功機率。	icon_items.parts_heavyarmorc5_tex
+43	Buff	True	True	False	發光的強化匠人庇護	進行強化時，最終成功機率大幅增加。	icon_items.parts_heavyarmorc5_tex
+44	Buff	True	True	False	強化匠人庇護	進行強化時，小幅增加最終成功機率。	icon_items.parts_heavyarmorc5_tex
+45	Buff	True	True	False	受到祝福的強化匠人庇護	進行強化時，會增加最終成功機率。	icon_items.parts_heavyarmorc5_tex
+46	Buff	True	True	False	發光的強化匠人庇護	進行強化時，最終成功機率大幅增加。	icon_items.parts_heavyarmorc5_tex
 47	Buff	True	True	False	測試_技能傷害增加 / 仇恨值減少	測試專用! 全部的技能傷害增加 50% / 仇恨值減少 50%	icon_skills.voidtrap_tex
+51	Buff	True	True	False	DPS測試用昏厥	為了DPS測試的昏厥狀態。追加套用下述異常狀態&#xA;抗打減少 $H_W_BAD12%$COLOR_END (粉碎防具疊加3)&#xA;抗打減少 $H_W_BAD10%$COLOR_END (痛苦咒縛紋章)&#xA;暴擊抵抗減少 $H_W_BAD-12$COLOR_END (痛苦咒縛特性)	icon_items.q_bones_tex
 101	Buff	True	True	False	起身攻擊	持續時間內免疫所有反作用。	icon_skills.risingattack_tex
 201	Buff	False	True	False	力量祝福 I	獲得堅強的力量祝福，力量提升$H_W_GOOD17$COLOR_END。	icon_skills.attackup_tex
 202	Buff	False	True	False	力量祝福 II	獲得堅強的力量祝福，力量提升$H_W_GOOD25$COLOR_END。	icon_skills.attackup_tex
@@ -58,6 +59,7 @@
 912	Buff	True	True	True	綠鈦強化彈	使用綠鈦強化彈，讓技能效果增大化。	icon_items.union_supplies5_tex
 913	Buff	True	True	True	綠鈦強化彈	使用綠鈦強化彈，讓技能效果增大化。	icon_items.union_supplies5_tex
 916	Buff	True	True	True	綠鈦強化彈	使用綠鈦強化彈，讓技能效果增大化。	icon_items.union_supplies5_tex
+917	Buff	True	True	True	綠鈦強化彈	使用綠鈦強化彈，讓技能效果增大化。	icon_items.union_supplies5_tex
 920	Buff	True	True	False	精製綠鈦效果 [高級]	使技能效果增加。綠鈦強化彈效果增加  $H_W_GOOD1.5$COLOR_END 倍，所有技能的攻擊力上升  $H_W_GOOD4~12%$COLOR_END 。 (部分技能限定  $H_W_GOOD6~20%$COLOR_END) 與一般綠鈦效果不會重複套用。	icon_items.noctan_tex
 921	Buff	True	True	False	精製綠鈦效果 [稀有]	使技能效果增加。綠鈦強化彈效果增加  $H_W_GOOD1.5$COLOR_END 倍，所有技能的攻擊力上升  $H_W_GOOD4~12%$COLOR_END 。 (部分技能限定  $H_W_GOOD6~20%$COLOR_END) 與一般綠鈦效果不會重複套用。	icon_items.noctan_tex
 922	Buff	True	True	False	精製綠鈦效果 [傳說]	使技能效果增加。綠鈦強化彈效果增加  $H_W_GOOD1.5$COLOR_END 倍，所有技能的攻擊力上升  $H_W_GOOD4~12%$COLOR_END 。 (部分技能限定  $H_W_GOOD6~20%$COLOR_END) 與一般綠鈦效果不會重複套用。	icon_items.noctan_tex
@@ -111,6 +113,7 @@
 1491	Buff	True	True	False	持續性恢復藥水	每$H_W_GOOD1$COLOR_END second持續恢復$H_W_GOOD6%$COLOR_END的HP。	icon_items.potion1_tex
 1495	WeakeningEffect	True	True	False	戰場的毒氣	被戰場毒氣中了，每秒減少20000的HP。	icon_status.poisonstatus_tex
 1510	Buff	False	True	False	急速恢復藥水	立即恢復$H_W_GOOD50%$COLOR_END的HP。	icon_items.potion5_tex
+1511	Buff	False	True	False	萬能藥	整體HP，MP立即恢復 $H_W_GOOD60%$COLOR_END的HP及MP。	icon_items.potion5_tex
 1530	Buff	True	True	False	MP恢復藥水	每$H_W_GOOD1$COLOR_END second持續恢復$H_W_GOOD5%$COLOR_END的MP。	icon_items.potion19_tex
 1610	Buff	True	True	False	恢復晶球	每$H_W_GOOD1$COLOR_END second持續恢復$H_W_GOOD2%$COLOR_END的HP。	icon_items.potion1_tex
 1630	Buff	False	True	False	強力恢復晶球	立即恢復$H_W_GOOD25%$COLOR_END的HP。	icon_items.potion5_tex
@@ -418,6 +421,7 @@
 4402	Buff	True	True	False	[好友邀請優惠] 追加發送100%經驗值  	受到好友邀請優惠，30天內狩獵時經驗值額外獲得$H_W_GOOD100%$COLOR_END。其他種類的經驗值提升卷軸使用時，效果重複套用，下線後時間仍持續計算。	icon_status.vitality_tex
 4403	Buff	False	True	False	好心情打招呼_若顯示就是Bug	若顯示就是Bug	icon_skills.greeting_tex
 4404	Buff	True	True	False	[好友邀請優惠] 增加攻擊力10%效果	請感受一下驚心動魄的攻擊手感！7天內攻擊時攻擊力增加$H_W_GOOD10%$COLOR_END。其他種類的攻擊力增加道具使用時，效果重複套用，下線後時間仍持續計算。	icon_status.buff_of_kaia_tex
+4405	Buff	True	True	False	製作的樂趣	武器，防具，消耗品，魔法刻印石的熟練度在500以下時，可獲得製作時2倍熟練度。	icon_items.small_insecta8_tex
 4500	Buff	True	True	True	高速成長	狩獵時獲得經驗值增加$H_W_GOOD10%$COLOR_END。	icon_status.plusfocus_tex
 4501	Buff	True	True	True	高速成長	狩獵時獲得經驗值增加$H_W_GOOD20%$COLOR_END。	icon_status.plusfocus_tex
 4502	Buff	True	True	True	高速成長	狩獵時獲得經驗值增加$H_W_GOOD30%$COLOR_END。	icon_status.plusfocus_tex
@@ -435,6 +439,7 @@
 4514	Buff	True	True	True	高速成長	狩獵時獲得經驗值增加$H_W_GOOD10倍$COLOR_END。	icon_status.plusfocus_tex
 4600	Buff	True	True	False	水晶防護卷軸	死亡時防止水晶爆破，並會刪除1個堆疊。此效果最多可堆疊99次。在套用完整的水晶防護卷軸狀態時不套用此效果。	icon_items.q_closedspace_stone_05_tex
 4610	Buff	True	True	False	完整的水晶防護卷軸	死亡時防止水晶爆破。	icon_items.q_closedspace_stone_05_tex
+4612	Buff	True	True	False	完整的水晶防護卷軸	死亡時可防止水晶碎裂。	icon_items.q_closedspace_stone_05_tex
 4620	Buff	True	True	False	製作速度增加卷軸	所有道具的製作速度提升$H_W_GOOD50%$COLOR_END。	icon_items.scroll_produce_speedup_tex
 4621	Buff	True	True	False	強力製作速度增加卷軸	所有道具製作速度提升$H_W_GOOD50%$COLOR_END。	icon_items.scroll_produce_speedup_tex
 4630	Buff	True	True	False	採集熟練度增加卷軸	$time內，採集熟練度增加$H_W_GOOD410$COLOR_END。	icon_items.scroll_collection_expup_tex
@@ -509,6 +514,15 @@
 5060	Buff	False	True	False	抵抗精氣吸收反作用	抵抗精氣吸收反作用	icon_skills.voidtrap_tex
 6001	Buff	True	True	False	龍之血脈	攻擊怪物時爆擊威力增加$H_W_GOOD+1.5$COLOR_END倍。	icon_status.passive_dragonblood
 6002	Buff	True	True	False	真龍之血脈	攻擊怪物時爆擊威力增加$H_W_GOOD+2$COLOR_END倍。	icon_status.passive_dragonblood2
+6003	Buff	True	True	False	火焰氣息	怪物攻擊時爆擊威力增加 $H_W_GOOD+1.5$COLOR_END倍。	icon_skills.heataura_tex
+6004	Buff	True	True	False	爆焰氣息	怪物攻擊時爆擊威力增加 $H_W_GOOD+2$COLOR_END倍。	icon_skills.flameaura_tex
+6005	Buff	False	True	False		不該看到該異常狀態的。	
+6006	Buff	True	True	False	不死鳥的氣息	持續時間內為無敵狀態。使用技能時解除。	icon_status.revivenow_status_tex
+6007	Buff	True	True	False	不死鳥的祝福	立即恢復相當於整體 HP，MP的 $H_W_GOOD100%$COLOR_END之 HP，MP。	icon_items.eagles_potion_level_47_tex
+6008	WeakeningEffect	True	True	False	不死鳥的化身 [被動] 冷卻時間	聚集化身的氣息。在聚集化身的氣息前，無法發動 $H_W_GOOD不死鳥的化身$COLOR_END的效果。	icon_skills.flameaura_tex
+6009	Buff	True	True	False	不死鳥的守護	死亡時保護水晶不被打破。	icon_items.q_closedspace_stone_05_tex
+6010	Buff	False	True	False		不該看到該異常狀態的。	
+6011	WeakeningEffect	True	True	False	不死鳥的化身 [被動] 冷卻時間	聚集化身的氣息。在聚集化身的氣息前，無法發動 $H_W_GOOD不死鳥的化身$COLOR_END的效果。	icon_skills.heataura_tex
 10100	DamageOverTime	True	False	False	猛毒 I [水晶] 	每$H_W_BAD1$COLOR_END second持續減少$H_W_BAD-11$COLOR_END的HP。	icon_items.customize9ar_tex
 10101	DamageOverTime	True	False	False	猛毒 II [水晶] 	每$H_W_BAD1$COLOR_END second持續減少$H_W_BAD-23$COLOR_END的HP。	icon_items.customize9br_tex
 10102	DamageOverTime	True	False	False	猛毒 III [水晶] 	每$H_W_BAD1$COLOR_END second持續減少$H_W_BAD-58$COLOR_END的HP。	icon_items.customize9cr_tex
@@ -758,6 +772,7 @@
 15150	Buff	True	True	False	自然同化	持續時間內不累積對怪物的仇恨值。	icon_status.boundmovedown_tex
 15160	Stun	True	False	False	鐵匠的最終援手	昏厥狀態無法行動。	icon_status.confuseup_tex
 15161	WeakeningEffect	True	False	False	鐵匠最後的慈悲	爆擊抵抗減少 $H_W_BAD-10$COLOR_END。	icon_status.plusciriticalresist_tex
+15162	WeakeningEffect	True	False	False	懲罰者的標誌	爆擊抵抗減少 $H_W_BAD-20$COLOR_END。	icon_status.plusciriticalresist_tex
 15170	DamageOverTime	True	False	False	女王的旋轉雷電	女王的雷電圍繞著全身，並在每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD-3710$COLOR_END的HP。	icon_status.paralyzestatus_tex
 15500	Buff	False	True	False			
 15600	Buff	False	True	False			
@@ -959,7 +974,7 @@
 29050	WeakeningEffect	True	False	False	攻擊速度減少 [減速紋章]	攻擊速度每次堆疊減少$H_W_BAD10%$COLOR_END%。	icon_crest.crestactiveattackspeeddown_tex
 29060	Buff	True	True	False	技能威力增加 [連續 鬥志紋章]	以連續技使用飛劍迴轉刀刃時，暴擊率增加$H_W_GOOD30%$COLOR_END。	icon_crest.crestnextskillattackup_tex
 29070	WeakeningEffect	True	False	False	無法移動 [慵懶紋章]	在持續時間內無法在位置上移動。但受到攻擊被擊倒時，效果就會解除。	icon_crest.crestactivespeeddown_tex
-29090	Buff	True	True	False	攻擊速度增加 [神速紋章]	逆捕獲技能成功擊中時，下次使用的技能施展速度會增加50%。	icon_crest.e_crestpassiveskillspeedup_tex
+29090	Buff	True	True	False	攻擊速度增加 [神速紋章]	逆捕獲技能成功擊中時，2.5秒內技能施展速度可增加50%。	icon_crest.e_crestpassiveskillspeedup_tex
 29100	Buff	True	True	False	技能威力增加 [連續 鬥志紋章]	以連續技使用飛劍暗黑爆發時，技能威力會增加$H_W_GOOD20%$COLOR_END。	icon_crest.crestnextskillattackup_tex
 29110	Buff	True	True	False	移動速度增加 [活力紋章]	戰鬥狀態的移動速度提升$H_W_GOOD50$COLOR_END。	icon_crest.e_crestactivespeedup_tex
 29111	Buff	True	True	True	暴擊機率增加 [必殺紋章]	暴擊率增加$H_W_GOOD2倍$COLOR_END。	icon_crest.crestpassivecriticalup_tex
@@ -1009,9 +1024,9 @@
 33130	Buff	True	True	False	技能威力增加 [連續鬥志紋章]	以連續技能使用[昇擊斬]時，技能威力增加力量$H_W_GOOD25%$COLOR_END。	icon_crest.crestnextskillattackup_tex
 33140	Buff	False	True	False			icon_crest.crestpassivecriticalup_tex
 33150	Buff	True	True	False	技能威力增加 [連續鬥志紋章]	以連續技能使用[昇擊斬]時，技能威力增加力量$H_W_GOOD25%$COLOR_END。	icon_crest.crestnextskillattackup_tex
-33170	Buff	True	True	False	HP持續恢復 [特質紋章]	每$H_W_GOOD1$COLOR_END second，持續恢復相當於整體HP的$H_W_GOOD 2%$COLOR_END之HP。	icon_crest.crestpassivehpheal_tex
+33170	Buff	True	True	False	HP持續恢復 [特質紋章]	每$H_W_GOOD1$COLOR_END second，持續恢復相當於整體HP的$H_W_GOOD 3%$COLOR_END之HP。	icon_crest.crestpassivehpheal_tex
 33200	Buff	True	True	False	技能威力增加 [連續鬥志紋章]	下一次攻擊時技能威力增加 30%	icon_crest.crestnextskillattackup_tex
-33210	Buff	True	True	False	技能威力增加 [連續鬥志紋章]	以連續技能使用[月光的共鳴]時，技能威力增加力量$H_W_GOOD25%$COLOR_END。	icon_crest.crestpassivehpheal_tex
+33210	Buff	True	True	False	技能威力增加 [連續鬥志紋章]	以連續技能使用[月光的共鳴]時，技能威力增加力量$H_W_GOOD25%$COLOR_END。	icon_crest.e_crestnextskillattackup_tex
 45301	WeakeningEffect	True	False	False	強力衝擊	被砲彈打到受到強大衝擊。	icon_status.minusdefence_tex
 45302	WeakeningEffect	True	False	False	均衡喪失	受到強大衝擊失去平衡而跌倒。	icon_status.minuscriticalresist_tex
 45303	DamageOverTime	False	False	False		13秒後鑽子消失。 	
@@ -1089,6 +1104,7 @@
 60027	Buff	True	True	False	女神免罪 IV	每$H_W_GOOD1$COLOR_END second恢復$H_W_GOOD1405$COLOR_END的HP、$H_W_GOOD145$COLOR_END的MP。	icon_items.body_enchant_scroll_3_tex
 60029	Buff	True	True	False	集中精神 II	每 $H_W_GOOD1$COLOR_END second持續恢復 $H_W_GOOD5%$COLOR_END的 MP。	icon_skills.neutralizepoison_tex
 60030	Buff	True	True	False	集中精神 I	每 $H_W_GOOD1$COLOR_END second持續恢復 $H_W_GOOD3%$COLOR_END的 MP。	icon_skills.neutralizepoison_tex
+60031	Buff	True	True	False	集中精神 III	每$H_W_GOOD1$COLOR_END second持續恢復$H_W_GOOD7%$COLOR_END的MP。	icon_skills.neutralizepoison_tex
 70201	Buff	True	True	False	爆米花	最大HP增加$H_W_GOOD5%$COLOR_END。	icon_items.fallfestival_popcorn_tex
 70202	Buff	True	True	False	馬鈴薯沙拉	每$H_W_GOOD5$COLOR_END second1持續恢復$H_W_GOOD1%$COLOR_END的HP。	icon_items.fallfestival_potatosalad_tex
 70203	Buff	True	True	False	煙燻肉	每$H_W_GOOD5$COLOR_END second1持續恢復$H_W_GOOD1%$COLOR_END的MP。	icon_items.q_roastmeat_tex
@@ -1112,6 +1128,8 @@
 70242	Buff	False	True	False	梅利沙的高級宴會組合	擁有利卡諾勒沙拉、貝里克翅膀、凱亞多勒正統烤肉的效果。	icon_items.pigling_ribs_tex
 70243	Buff	False	True	False	凱亞多勒正統烤肉	套用HP恢復效果時，恢復量增加$H_W_GOOD70233$COLOR_END 。	icon_items.pigling_ribs_tex
 70244	Buff	False	True	False	貝里克翅膀	效果持續的期間，健康狀態不會減少。	icon_items.pigling_ribs_tex
+70245	Buff	True	True	False	高級利卡諾勒火花沙拉	最大 HP $H_W_GOOD5%$COLOR_END 最大MP $H_W_GOOD10%$COLOR_END 提升，每$H_W_GOOD5$COLOR_END second1整體MP持續恢復 $H_W_GOOD1%$COLOR_END的MP。	icon_items.fallfestival_rikanosalad_tex
+70246	Buff	False	True	False	宴席	具有烤羊肉，高級利卡諾勒火花沙拉，貝里克翅膀，凱亞多勒傳統烤肉效果。	icon_items.pigling_ribs_tex
 70301	Buff	True	True	False	聖所_精靈氣息(臨時)	戰鬥狀態的移動速度提升$H_W_GOOD2$COLOR_END。最多可堆疊3次。	icon_status.aura_of_wind_tex
 70302	Buff	True	True	False	聖所_集中氣息(臨時)	技能擊中時傷害增加$H_W_GOOD20$COLOR_END。	icon_status.aura_of_damage_tex
 70303	Buff	True	True	False	聖所_活力氣息(臨時)	最大健康狀態提升$H_W_GOOD5$COLOR_END。最多可堆疊3次。	icon_status.aura_of_condition_tex
@@ -1212,6 +1230,7 @@
 100203	Buff	True	True	True	鋼鐵決心 IV	抗打增加$H_W_GOOD25%$COLOR_END，平衡增加$H_W_GOOD30$COLOR_END，攻擊怪物時爆擊率增加$H_W_GOOD15%$COLOR_END。所有技能的仇恨值增加$H_W_GOOD120%$COLOR_END，戰鬥時除了部分怪物的特殊攻擊外，不可驅趕。	icon_skills.ironwillb_tex
 100293	Buff	False	True	False	阻擋雙劍基本異常狀態	不能顯示異常狀態之提示說明 (isShow=False) 若看見提示說明則必須回報BTS!	icon_skills.twinswordsdefence_tex
 100294	Buff	True	True	False	克己Ⅰ	因克己Ⅰ的效果而恢復5%的Mp。	icon_skills.twinswordsdefence_tex
+100295	Buff	False	True	False	疾風Ⅰ	疾風Ⅰ效果為疾風劈擊冷卻時間減少0.5秒。	icon_skills.twinswordsdefence_tex
 100296	Buff	False	True	True	鋼鐵決心(目標怪物爆擊機率增加)	目標怪物爆擊機率增加15%(看不見的異常狀態)	icon_skills.ironwillb_tex
 100297	Buff	False	True	True			
 100298	Buff	False	True	True	鋼鐵決心 IV-2	異常狀態的提示說明不會顯示(isShow=False) ，若顯示此提示說明就需要BTS處理!	icon_skills.ironwillb_tex
@@ -1262,6 +1281,7 @@
 101104	Stun	True	False	False	反擊震懾 X	昏厥狀態無法做任何動作。	icon_skills.reversalturningattack_tex
 101105	Stun	True	False	False	反擊震懾 XI	昏厥狀態無法做任何動作。	icon_skills.reversalturningattack_tex
 101200	WeakeningEffect	True	False	False	鬥志一擊	抗打減少$H_W_GOOD8%$COLOR_END。	icon_skills.aggravatingstrike_tex
+101210	WeakeningEffect	True	False	False	鬥志一擊	抗打減少 $H_W_BAD10%$COLOR_END	icon_skills.aggravatingstrike_tex
 101220	WeakeningEffect	True	False	False	鬥志一擊	抗打減少$H_W_BAD8%$COLOR_END、HP恢復效果減少$H_W_BAD30%$COLOR_END。	icon_skills.aggravatingstrike_tex
 101300	Buff	True	True	False	無雙亂舞：刺擊	每次重疊時，攻擊者的攻擊速度增加 0.9%。此效果最多可重疊 13次。	icon_skills.dualrapidpiercing_tex
 101400	WeakeningEffect	True	False	False	撕咬擊	移動速度減少$H_W_GOOD0,5$COLOR_END。	icon_skills.heavybite_tex
@@ -2296,14 +2316,14 @@
 781107	Buff	False	True	False			
 781108	Buff	False	True	False			
 781109	DamageOverTime	False	False	False			
-781110	Buff	False	True	False			
+781110	Buff	False	False	False			
 781111	WeakeningEffect	True	False	False	拉坎的種子	拉坎種下魔力的種子，一定時間後將會爆炸。	icon_status.heat_tex
-781112	Buff	False	True	False			
+781112	Buff	False	False	False			
 781113	Buff	False	True	False			
 781114	DamageOverTime	False	False	False			
-781115	Buff	False	True	False			
+781115	Buff	False	False	False			
 781116	WeakeningEffect	True	False	False	拉坎的種子	拉坎種下魔力的種子，一定時間後將會爆炸。	icon_status.heat_tex
-781117	Buff	False	True	False			
+781117	Buff	False	False	False			
 781118	Buff	False	True	False			
 781119	Buff	True	True	False	魔力凝結	拉坎為了使用殲滅機而將魔力聚集。必須使用睡眠類攻擊，讓拉坎熟睡才行!	icon_status.windtyrant_tex
 781120	Buff	False	True	False			
@@ -3119,14 +3139,14 @@
 981107	Buff	False	True	False			
 981108	Buff	False	True	False			
 981109	DamageOverTime	False	False	False			
-981110	Buff	False	True	False			
+981110	Buff	False	False	False			
 981111	WeakeningEffect	True	False	False	拉坎的種子	拉坎種下魔力的種子，一定時間後將會爆炸。	icon_status.heat_tex
-981112	Buff	False	True	False			
+981112	Buff	False	False	False			
 981113	Buff	False	True	False			
 981114	DamageOverTime	False	False	False			
-981115	Buff	False	True	False			
+981115	Buff	False	False	False			
 981116	WeakeningEffect	True	False	False	拉坎的種子	拉坎種下魔力的種子，一定時間後將會爆炸。	icon_status.heat_tex
-981117	Buff	False	True	False			
+981117	Buff	False	False	False			
 981118	Buff	False	True	False			
 981119	Buff	True	True	False	魔力凝結	拉坎為了使用殲滅機而將魔力聚集。必須使用睡眠類攻擊，讓拉坎熟睡才行!	icon_status.windtyrant_tex
 981120	Buff	False	True	True			
@@ -3244,6 +3264,9 @@
 3000019	Buff	True	True	True	飛行騎乘 (HP，MP 恢復)	在允許飛行的地方可騎乘飛行。<BR>騎乘時，每秒恢復HP與MP的2%，並且給予周圍30m內的隊員龍之風的效果	icon_items.wings_of_fairy_tex
 3000020	Buff	False	True	True	龍之風	看見的話則為BTS	icon_skills.criticalupaura_tex
 3000021	Buff	True	True	True	龍之風	騎乘在龍之風裡不分坐騎種類，移動速度調整至$H_W_GOOD10$COLOR_END。	icon_status.plusmove_tex
+3000022	Buff	True	True	True	搭乘不死鳥 (HP, MP 恢復)	在允許飛行的地方可騎乘飛行。<BR>搭乘期間，每秒恢復1%的HP與MP。可套用不死鳥的熱氣效果。	icon_items.wings_of_fairy_tex
+3000023	Buff	True	True	True	搭乘不死鳥 (HP, MP 恢復)	在允許飛行的地方可騎乘飛行。<BR>每秒恢復2%的HP與MP。可套用不死鳥的熱氣效果。	icon_items.wings_of_fairy_tex
+3000024	Buff	True	True	True	不死鳥的熱氣	由於不死鳥炙熱的氣息，不會受到龍之風 (搭乘移動速度 +10)的效果。	icon_status.heat_tex
 4510001	Buff	False	False	False			
 4510002	WeakeningEffect	False	True	False			
 4510003	DamageOverTime	False	False	False			
@@ -3481,6 +3504,144 @@
 7777013	Buff	True	True	False			icon_status.icon_yookduk00_ab_tex
 7777014	Buff	True	True	False			icon_status.icon_yookduk00_ab_tex
 7777015	Buff	True	True	False	T.E.R.A TIME	請感受一下瘋狂般的技能砲轟! 除了聯盟技能外的所有技能的冷卻時間減少20%，大幅增加每秒魔力恢復量。	icon_status.pluswill_tex
+7940000	Stun	False	True	True			
+7941001	Stun	True	False	False	強而有力的頭痛	凱依普奇波把頭埋進樹木，精神無法集中。	icon_status.confuseup_tex
+7941002	WeakeningEffect	True	True	False	凱依普奇波的關心	凱依普奇波正覬覦著你。好像要朝你施展強力的攻擊。	icon_skills.througharrow_tex
+7941003	WeakeningEffect	False	True	False			
+7941004	Stun	False	False	False			
+7941005	Stun	False	False	False			
+7941006	WeakeningEffect	False	True	True			
+7941007	WeakeningEffect	False	True	True			
+7941008	WeakeningEffect	False	True	True			
+7941009	WeakeningEffect	False	True	True			
+7941010	WeakeningEffect	False	True	True			
+7941011	Buff	True	False	True	堅硬的皮膚	凱依普奇波的外表被堅硬的皮膚覆蓋著。打破的話好像有種剝掉香蕉皮的感覺。	icon_status.balanceup_tex
+7941012	WeakeningEffect	False	True	False			
+7941013	Stun	False	False	False			
+7941014	Stun	True	False	False	出血	摔倒在地受傷了，持續減少 HP。	icon_status.injuredbtdarkness_tex
+7941015	Stun	True	False	False	衝擊	受到強烈的衝擊無法進行任何事。	icon_status.confuseup_tex
+7941016	WeakeningEffect	False	True	False			
+7941017	WeakeningEffect	False	True	False			
+7941018	WeakeningEffect	False	True	True			
+7941019	WeakeningEffect	False	True	True			
+7941020	WeakeningEffect	False	True	True			
+7941021	Buff	True	True	True			
+7941022	DamageOverTime	True	False	False	黏黏的液體	身體被黏黏的液體覆蓋無法移動。	icon_skills.curseofshackle_tex
+7941023	WeakeningEffect	False	True	True			
+7941024	WeakeningEffect	False	True	True			
+7941025	WeakeningEffect	False	True	True			
+7941026	Buff	True	True	True	小猴子的應援-1階段	小猴子為凱依普奇波加油。凱依普奇波的攻擊力及攻擊速度增加。	icon_status.plusciriticalresist_tex
+7941027	Buff	True	True	True	小猴子的應援-2階段	小猴子為凱依普奇波加油。凱依普奇波的攻擊力及攻擊速度增加。	icon_status.plusciriticalresist_tex
+7941028	Buff	True	True	True	小猴子的應援-3階段	小猴子為凱依普奇波加油。凱依普奇波的攻擊力及攻擊速度增加。	icon_status.plusciriticalresist_tex
+7941029	WeakeningEffect	False	True	False			
+7941030	WeakeningEffect	True	True	False	小猴子的關心	掛在樹上的猴子正看著你。好像要朝你丟香蕉皮的樣子。	icon_items.banana_tex
+7941031	WeakeningEffect	False	True	True			
+7941032	Stun	False	False	False			
+7941033	WeakeningEffect	False	True	False			
+7941034	WeakeningEffect	False	True	False			
+7941035	WeakeningEffect	False	True	False			
+7942001	WeakeningEffect	False	True	False			
+7942002	WeakeningEffect	True	True	True			
+7942003	WeakeningEffect	True	True	True			
+7942004	DamageOverTime	False	False	False			
+7942005	DamageOverTime	False	True	False			
+7942006	WeakeningEffect	True	True	False	魔力滲透	雷岩為了召喚某種物品而將魔力滲透給你。	icon_status.minusfocus_tex
+7942007	WeakeningEffect	True	True	False	魔力滲透	雷岩為了召喚某種物品而將魔力滲透給你。	icon_status.minusfocus_tex
+7942008	Stun	True	False	False			
+7942009	Stun	True	False	False			
+7942010	WeakeningEffect	False	True	False			
+7942011	WeakeningEffect	False	True	True			
+7942012	WeakeningEffect	False	True	True			
+7942013	WeakeningEffect	True	True	False			icon_items.cancel_lockon_potion_level_51_tex
+7942014	WeakeningEffect	False	True	False			
+7942015	Buff	True	True	False			
+7942016	WeakeningEffect	False	True	False			
+7942017	WeakeningEffect	False	True	True			
+7942018	WeakeningEffect	False	True	False			
+7942019	WeakeningEffect	False	True	False			
+7942020	WeakeningEffect	False	True	False			
+7942021	Stun	False	False	False			
+7942022	WeakeningEffect	False	True	False			
+7942023	WeakeningEffect	True	True	False			
+7942024	WeakeningEffect	True	True	False			
+7942025	WeakeningEffect	False	True	False			
+7942026	WeakeningEffect	False	True	False			
+7942027	WeakeningEffect	True	True	False			
+7942028	DamageOverTime	False	True	False			
+7942029	DamageOverTime	False	True	False			
+7942030	DamageOverTime	False	True	False			
+7942031	DamageOverTime	False	True	False			
+7942032	DamageOverTime	False	True	False			
+7942033	DamageOverTime	False	False	False			
+7942034	WeakeningEffect	False	True	True			
+7942035	WeakeningEffect	False	True	True			
+7942036	Stun	False	False	False			
+7942037	WeakeningEffect	True	True	True	礦物的紅色氣息	礦物的紅色氣息正包覆著你。紅色光芒的礦石能使你不受到傷害。	icon_status.immunedebuff_tex
+7942038	WeakeningEffect	True	True	True	礦物的藍色氣息	礦物的藍色氣息正包覆著你。藍色光芒的礦石能使你不受到傷害。	icon_status.immunedebuff_tex
+7942039	WeakeningEffect	True	True	True	礦物的白色氣息	礦物的白色氣息正包覆著你。白色光芒的礦石能使你不受到傷害。	icon_status.immunedebuff_tex
+7942040	DamageOverTime	False	True	False			
+7942041	DamageOverTime	False	True	False			
+7942042	WeakeningEffect	False	True	False			
+7942043	WeakeningEffect	False	True	True			
+7942044	WeakeningEffect	False	True	True			
+7942045	WeakeningEffect	False	True	True			
+7942046	WeakeningEffect	False	True	True			
+7942047	WeakeningEffect	False	True	True			
+7942048	WeakeningEffect	False	True	True			
+7942049	WeakeningEffect	False	True	False			
+7942050	WeakeningEffect	False	True	True			
+7943001	WeakeningEffect	False	True	True			
+7943002	WeakeningEffect	False	True	True			
+7943003	WeakeningEffect	False	True	False			
+7943004	WeakeningEffect	False	True	False			
+7943005	WeakeningEffect	False	True	False			
+7943006	WeakeningEffect	False	True	False			
+7943007	WeakeningEffect	False	True	True			
+7943008	WeakeningEffect	False	True	True			
+7943009	WeakeningEffect	False	True	True			
+7943010	WeakeningEffect	False	True	True			
+7943011	WeakeningEffect	False	True	True			
+7943012	WeakeningEffect	False	True	False			
+7943013	WeakeningEffect	False	True	False			
+7943014	WeakeningEffect	False	True	True			
+7943015	WeakeningEffect	False	True	True			
+7943016	Buff	True	True	False			
+7943017	WeakeningEffect	False	True	False			
+7943018	DamageOverTime	False	True	True			
+7943019	DamageOverTime	False	True	False			
+7943020	DamageOverTime	False	True	True			
+7943021	WeakeningEffect	False	True	False			
+7943022	WeakeningEffect	False	True	True			
+7943023	WeakeningEffect	False	True	False			
+7943024	WeakeningEffect	False	True	False			
+7943025	WeakeningEffect	False	True	False			
+7943026	WeakeningEffect	False	True	False			
+7943027	WeakeningEffect	True	False	False			
+7943028	Buff	True	True	False	迅速移動 : 準備	哥布林的移動速度好像變快了。	icon_status.plusmove_tex
+7943029	WeakeningEffect	False	True	False			
+7943030	WeakeningEffect	False	True	False			
+7943031	WeakeningEffect	False	True	True			
+7943032	WeakeningEffect	False	True	True			
+7943033	WeakeningEffect	False	True	True			
+7943034	Buff	True	True	True	迅速移動	哥布林的移動速度變的非常快。	icon_status.plusmove_tex
+7943035	WeakeningEffect	False	True	True			
+7943036	WeakeningEffect	False	True	False			
+7943037	WeakeningEffect	False	True	True			
+7943038	WeakeningEffect	True	True	True			
+7943039	WeakeningEffect	True	True	False			
+7943040	WeakeningEffect	True	True	False	傳染-無法恢復	被哥布林傳染而變成無法恢復的狀態。	icon_status.poisondown_tex
+7943041	Stun	True	False	False			
+7943042	Stun	True	False	False	傳染-擊昏	被哥布林傳染而變成無法移動的狀態。	icon_status.confuseup_tex
+7943043	Stun	True	False	False			
+7943044	Stun	True	False	False			
+7943045	WeakeningEffect	True	True	True	冰冷的氣息	冰冷的氣息圍繞著你。此氣息凝結時，若不溶化好像會受到傷害。	icon_status.icedamage_tex
+7943046	WeakeningEffect	True	True	True	滾燙的氣息	滾燙的氣息圍繞著你。 此氣息凝結時，若不冷卻下來好像會受到傷害。	icon_status.firedamage_tex
+7943047	WeakeningEffect	False	True	False			
+7943048	WeakeningEffect	False	True	False			
+7943049	WeakeningEffect	False	True	False			
+7943050	WeakeningEffect	False	True	False			
+7943051	WeakeningEffect	False	True	True			
+7943052	WeakeningEffect	False	True	True			
 8000000	Buff	True	True	False	高速成長 30 (5小時)	5小時內狩獵時獲得經驗值增加30%。	icon_items.f2p_xpbooster_tex
 8000001	Buff	True	True	False	高速成長30 (10小時)	10小時內狩獵時獲得經驗值增加30%。	icon_items.f2p_xpbooster_tex
 8000002	Buff	True	True	False	高速成長30 (30小時)	30小時內狩獵時獲得經驗值增加30%。	icon_items.f2p_xpbooster_tex
@@ -3649,6 +3810,147 @@
 9810017	WeakeningEffect	False	True	True	拉坎追蹤者	將自己大身體當作祭物成為拉坎的追隨者們	icon_status.cruel_slayer_3_tex
 9810018	Stun	False	False	False			
 9810019	WeakeningEffect	False	True	True			
+9940000	Stun	False	True	True			
+9940001	WeakeningEffect	True	False	False	燙傷	受到燙傷攻擊體力持續減少。	icon_status.minushp_tex
+9940002	WeakeningEffect	True	False	False	凍傷	受到凍傷攻擊移動速度漸漸變慢。	icon_skills.freezingtheearth_tex
+9941001	Stun	True	False	False	強而有力的頭痛	凱依普奇波把頭埋進樹木，精神無法集中。	icon_status.confuseup_tex
+9941002	WeakeningEffect	True	True	False	凱依普奇波的關心	凱依普奇波正覬覦著你。好像要朝你施展強力的攻擊。	icon_skills.througharrow_tex
+9941003	WeakeningEffect	False	True	False			
+9941004	Stun	False	False	False			
+9941005	Stun	False	False	False			
+9941006	WeakeningEffect	False	True	True			
+9941007	WeakeningEffect	False	True	True			
+9941008	WeakeningEffect	False	True	True			
+9941009	WeakeningEffect	False	True	True			
+9941010	WeakeningEffect	False	True	True			
+9941011	Buff	False	False	True	堅硬的皮膚	凱依普奇波的外表被堅硬的皮膚覆蓋著。打破的話好像有種剝掉香蕉皮的感覺。	icon_status.balanceup_tex
+9941012	WeakeningEffect	False	True	False			
+9941013	Stun	False	False	False			
+9941014	Stun	True	False	False	出血	摔倒在地受傷了，持續減少 HP。	icon_status.injuredbtdarkness_tex
+9941015	Stun	True	False	False	衝擊	受到強烈的衝擊無法進行任何事。	icon_status.confuseup_tex
+9941016	WeakeningEffect	False	True	False			
+9941017	WeakeningEffect	False	True	False			
+9941018	WeakeningEffect	False	True	True			
+9941019	WeakeningEffect	False	True	True			
+9941020	WeakeningEffect	False	True	True			
+9941021	Buff	True	True	True			
+9941022	DamageOverTime	True	False	False	黏黏的液體	身體被黏黏的液體覆蓋無法移動。	icon_skills.curseofshackle_tex
+9941023	WeakeningEffect	False	True	True			
+9941024	WeakeningEffect	False	True	True			
+9941025	WeakeningEffect	False	True	True			
+9941026	Buff	True	True	True	小猴子的應援-1階段	小猴子為凱依普奇波加油。凱依普奇波的攻擊力及攻擊速度增加。	icon_status.plusciriticalresist_tex
+9941027	Buff	True	True	True	小猴子的應援-2階段	小猴子為凱依普奇波加油。凱依普奇波的攻擊力及攻擊速度增加。	icon_status.plusciriticalresist_tex
+9941028	Buff	True	True	True	小猴子的應援-3階段	小猴子為凱依普奇波加油。凱依普奇波的攻擊力及攻擊速度增加。	icon_status.plusciriticalresist_tex
+9941029	WeakeningEffect	False	True	False			
+9941030	WeakeningEffect	True	True	False	小猴子的關心	掛在樹上的猴子正看著你。好像要朝你丟香蕉皮的樣子。	icon_items.banana_tex
+9941031	WeakeningEffect	False	True	True			
+9941032	Stun	False	False	False			
+9941034	WeakeningEffect	False	True	False			
+9941035	WeakeningEffect	False	True	False			
+9942001	WeakeningEffect	False	True	False			
+9942002	WeakeningEffect	True	True	True			
+9942003	WeakeningEffect	True	True	True			
+9942004	DamageOverTime	False	False	False			
+9942005	DamageOverTime	False	True	False			
+9942006	WeakeningEffect	True	True	False	魔力滲透	雷岩使你的魔力滲透任何東西都無法召喚。	icon_status.minusfocus_tex
+9942007	WeakeningEffect	True	True	False	魔力滲透	雷岩使你的魔力滲透任何東西都無法召喚。	icon_status.minusfocus_tex
+9942008	Stun	True	False	False			
+9942009	Stun	True	False	False			
+9942010	WeakeningEffect	False	True	False			
+9942011	WeakeningEffect	False	True	True			
+9942012	WeakeningEffect	False	True	True			
+9942013	WeakeningEffect	True	True	False			icon_items.cancel_lockon_potion_level_51_tex
+9942014	WeakeningEffect	False	True	False			
+9942015	Buff	True	True	False			
+9942016	WeakeningEffect	False	True	False			
+9942017	WeakeningEffect	False	True	True			
+9942018	WeakeningEffect	False	True	False			
+9942019	WeakeningEffect	False	True	False			
+9942020	WeakeningEffect	False	True	False			
+9942021	Stun	False	False	False			
+9942022	WeakeningEffect	False	True	False			
+9942023	WeakeningEffect	True	True	False			
+9942024	WeakeningEffect	True	True	False			
+9942025	WeakeningEffect	False	True	False			
+9942026	WeakeningEffect	False	True	False			
+9942027	WeakeningEffect	True	True	False			
+9942028	DamageOverTime	False	True	False			
+9942029	DamageOverTime	False	True	False			
+9942030	DamageOverTime	False	True	False			
+9942031	DamageOverTime	False	True	False			
+9942032	DamageOverTime	False	True	False			
+9942033	DamageOverTime	False	False	False			
+9942034	WeakeningEffect	False	True	True			
+9942035	WeakeningEffect	False	True	True			
+9942036	Stun	False	False	False			
+9942037	WeakeningEffect	True	True	True	礦物的紅色氣息	礦物的紅色氣息正包覆著你。紅色光芒的礦石能使你不受到傷害。	icon_status.immunedebuff_tex
+9942038	WeakeningEffect	True	True	True	礦物的藍色氣息	礦物的藍色氣息正包覆著你。藍色光芒的礦石能使你不受到傷害。	icon_status.immunedebuff_tex
+9942039	WeakeningEffect	True	True	True	礦物的白色氣息	礦物的白色氣息正包覆著你。白色光芒的礦石能使你不受到傷害。	icon_status.immunedebuff_tex
+9942040	DamageOverTime	False	True	False			
+9942041	DamageOverTime	False	True	False			
+9942042	WeakeningEffect	False	True	False			
+9942043	WeakeningEffect	False	True	True			
+9942044	WeakeningEffect	False	True	True			
+9942045	WeakeningEffect	False	True	True			
+9942046	WeakeningEffect	False	True	True			
+9942047	WeakeningEffect	False	True	True			
+9942048	WeakeningEffect	False	True	True			
+9942049	WeakeningEffect	False	True	False			
+9942050	WeakeningEffect	False	True	True			
+9942051	DamageOverTime	True	False	False	刺痛的電流	被從監視塔淌流而出的電流觸電了。無法使用技能，移動速度減少，體力也漸漸減少。	icon_status.paralyzestatus_tex
+9943001	WeakeningEffect	False	True	True			
+9943002	WeakeningEffect	False	True	True			
+9943003	WeakeningEffect	False	True	False			
+9943004	WeakeningEffect	False	True	False			
+9943005	WeakeningEffect	False	True	False			
+9943006	WeakeningEffect	False	True	False			
+9943007	WeakeningEffect	False	True	True			
+9943008	WeakeningEffect	False	True	True			
+9943009	WeakeningEffect	False	True	True			
+9943010	WeakeningEffect	False	True	True			
+9943011	WeakeningEffect	False	True	True			
+9943012	WeakeningEffect	False	True	False			
+9943013	WeakeningEffect	False	True	False			
+9943014	WeakeningEffect	False	True	True			
+9943015	WeakeningEffect	False	True	True			
+9943016	Buff	True	True	False			
+9943017	WeakeningEffect	False	True	False			
+9943018	DamageOverTime	False	True	True			
+9943019	DamageOverTime	False	True	False			
+9943020	DamageOverTime	False	True	True			
+9943021	WeakeningEffect	False	True	False			
+9943022	WeakeningEffect	False	True	True			
+9943023	WeakeningEffect	False	True	False			
+9943024	WeakeningEffect	False	True	False			
+9943025	WeakeningEffect	False	True	False			
+9943026	WeakeningEffect	False	True	False			
+9943027	WeakeningEffect	True	False	False			
+9943028	Buff	True	True	False	迅速移動 : 準備	哥布林的移動速度好像變快了。	icon_status.plusmove_tex
+9943029	WeakeningEffect	False	True	False			
+9943030	WeakeningEffect	False	True	False			
+9943031	WeakeningEffect	False	True	True			
+9943032	WeakeningEffect	False	True	True			
+9943033	WeakeningEffect	False	True	True			
+9943034	Buff	True	True	True	迅速移動	哥布林的移動速度變的非常快。	icon_status.plusmove_tex
+9943035	WeakeningEffect	False	True	True			
+9943036	WeakeningEffect	False	True	False			
+9943037	WeakeningEffect	False	True	True			
+9943038	WeakeningEffect	True	True	True			
+9943039	WeakeningEffect	False	True	False			
+9943040	WeakeningEffect	True	True	False	傳染-無法恢復	被哥布林傳染而變成無法恢復的狀態。	icon_status.poisondown_tex
+9943041	Stun	True	False	False			
+9943042	Stun	True	False	False	傳染-擊昏	被哥布林傳染而變成無法移動的狀態。	icon_status.confuseup_tex
+9943043	Stun	True	False	False			
+9943044	Stun	True	False	False			
+9943045	WeakeningEffect	True	True	True	冰冷的氣息	冰冷的氣息圍繞著你。此氣息凝結時，若不溶化好像會受到傷害。	icon_status.icedamage_tex
+9943046	WeakeningEffect	True	True	True	滾燙的氣息	滾燙的氣息圍繞著你。 此氣息凝結時，若不冷卻下來好像會受到傷害。	icon_status.firedamage_tex
+9943047	WeakeningEffect	False	True	False			
+9943048	WeakeningEffect	False	True	False			
+9943049	WeakeningEffect	False	True	False			
+9943051	WeakeningEffect	False	True	True			
+9943052	WeakeningEffect	False	True	True			
+9943053	WeakeningEffect	False	True	True			
+9943054	WeakeningEffect	True	True	True	不詳的魔力填充	賽伊洛斯正在聚集不詳的魔力，成為無防備狀態。	icon_status.heat_tex
 9999001	DamageOverTime	False	False	True			
 9999002	DamageOverTime	False	False	True			
 9999003	DamageOverTime	False	False	True			
@@ -3671,6 +3973,8 @@
 10151000	Buff	True	True	False	瞬間跳躍連續	可以再次使用瞬間跳躍。能跳出比起第一次的瞬間跳躍更遠的距離。	icon_status.instantleap_continuous_tex
 10151010	Buff	True	True	False	暗黑降臨	飛劍士取得黑暗力量。此效果持續時間內，所使用的飛劍技術[飛劍劈擊]、[飛劍重擊斬]、[飛劍向上揮擊]、[飛劍迴旋刀刃]、[飛劍最後的一擊]、[逆捕獲]、[飛劍揮舞]、[飛劍強擊]的再使用時間減少70%。	icon_status.descentofdarkness_tex
 10151011	Buff	False	True	False	暗黑降臨	[飛劍劈擊] ，[飛劍重擊斬]，[飛劍向上揮擊]， [飛劍迴旋刀刃]，[飛劍最後的一擊]，[逆捕獲]，[飛劍揮舞]，[飛劍強擊]將被初始化。	icon_status.descentofdarkness_tex
+10151012	Buff	True	True	True	暗黑降臨強化	攻擊怪物時，攻擊速度提升 5%。此效果最多可重疊5次。	icon_skills.descentofdarkness_tex
+10151013	Buff	False	True	False			
 10151020	Buff	False	True	False	以一般攻擊2連擊連接	看不見的Buff。若顯示此Buff ，麻煩請舉報Bug！	icon_skills.comboattack2_tex
 10151021	Buff	False	True	False	以一般攻擊3連擊連接	看不見的Buff。若顯示此Buff ，麻煩請舉報Bug！	icon_skills.comboattack2_tex
 10151022	Buff	False	True	False	以一般攻擊4連擊連接	看不見的Buff。若顯示此Buff ，麻煩請舉報Bug！	icon_skills.comboattack2_tex
@@ -3747,6 +4051,7 @@
 10152094	Buff	False	True	False			
 10152095	Buff	False	True	False			
 10152096	Buff	False	True	False	飛凰怒天冷卻時間必須初始化	使用爆擊彈後初始化冷卻時間吧	
+10152097	Buff	False	True	False	殲滅之光 I	殲滅之光施展時進入無敵狀態。	
 10152100	Buff	True	True	False	能量補充	魔工師消滅敵人同時，可對武器補充祕傳能源。持續時間內，能源不會消耗。	icon_skills.energycharging_tex
 10152110	Buff	True	True	False	緊急保護膜啟動	為扺消達到死亡的傷害而啟動緊急保護膜了。緊急保護膜最大可吸收$H_W_GOOD27858$COLOR_END的傷害量。	icon_skills.emergencyshield_tex
 10152111	Buff	True	True	False	緊急保護膜啟動	為扺消達到死亡的傷害而啟動緊急保護膜了。緊急保護膜最大可吸收$H_W_GOOD34900$COLOR_END的傷害量。	icon_skills.emergencyshield_tex
@@ -3920,6 +4225,7 @@
 10155300	WeakeningEffect	False	True	False			
 10155310	Buff	False	True	False			
 10155320	Buff	False	True	True			
+10155400	Stun	True	False	False	月光煉	持續時間內於原地無法動彈。受到攻擊而倒下時效果立即解除。	icon_skills.mooncatch_tex
 10230001	Stun	True	False	False			icon_status.sealskill_tex
 15200001	Buff	True	True	False	拉巴圖斯的甲殼	由於拉巴圖斯的甲殼效果 $time內防禦力與體力增加$H_W_GOOD20%$COLOR_END 。該效果被祝福解除等技能攻擊或死亡時也不會消失，退出公會戰地區時才會自動解除。	icon_skills.emergencyshield_tex
 15200002	Buff	True	True	False	德拉坎之火	由於德拉坎的火效果 $time內攻擊力增加$H_W_GOOD20%$COLOR_END 。該效果被祝福解除等技能攻擊或死亡時也不會消失，退出公會戰地區時才會自動解除。	icon_items.campfire_tex
@@ -4507,6 +4813,73 @@
 71600004	DamageOverTime	True	False	False	達魯坎的火花	直到解除為止，每$H_W_BAD2$COLOR_END second1持續減少$H_W_BAD5%$COLOR_END的HP。	icon_status.firedamage_tex
 71600010	DamageOverTime	True	False	False	被燻黑的傷口	直到解除為止，每$H_W_BAD1$COLOR_END second持續減少 $H_W_BAD5%$COLOR_END的HP。	icon_status.firedamage_tex
 71600020	WeakeningEffect	False	False	False			
+73500000	Buff	False	True	False	看的見的話則為BTS	此玩家的攻擊傷害量無法分散。	
+73500001	Buff	True	True	True	排風機微風	受到機庫通風設備的排風機吹出來的風之影響，不會受到跌落傷害。	icon_skills.rage_tex
+73500002	WeakeningEffect	False	True	True	看的見的話則為BTS	NPC的傷害/反作用抵抗。	
+73500003	Buff	False	True	False	看的見的話則為BTS	此玩家職家判定為補師。	
+73500004	Buff	False	True	False	看的見的話則為BTS	此玩家職業判定為坦克。	
+73500005	Buff	False	True	True	看的見的話則為BTS	此玩家職業判定為非坦克。	
+73500006	WeakeningEffect	False	True	True	看的見的話則為BTS	此NPC對所有傷害、異常狀態、反作用為免疫狀態。	
+73501000	Buff	True	True	False	受保護的能量	為了將能量安全的轉交貝塔倫，排氣孔將會保護一切。通過排氣孔時不會受到跌落傷害。	icon_skills.rage_tex
+73501001	DamageOverTime	True	False	False	普拉茲瑪出現	定時炸彈爆炸了! 海 $H_W_BAD1$COLOR_END second將減少 $H_W_BAD4%$COLOR_END的HP。	icon_status.paralyzestatus_tex
+73501002	Buff	False	True	False	看的見的話則為BTS	此玩家正在飛起! 不會受到其它衝擊波技能及空間移動技能攻擊。	
+73501003	Buff	False	True	False	看的見的話則為BTS	此NPC無法使用爆發攻擊。	
+73501004	Stun	True	False	False	擊暈	受到貝塔倫強力的攻擊而陷入昏厥狀態無法移動。	icon_status.confuseup_tex
+73501005	WeakeningEffect	True	False	False	普拉茲瑪衝擊	定時炸彈爆炸了! 受到衝擊波攻擊移動速度 $H_W_BAD50%$COLOR_END，技能的移動距離減少 $H_W_BAD30%$COLOR_END。此效果無法淨化。	icon_status.minusmove_tex
+73501006	Buff	False	True	False	看的見的話則為BTS	此NPC可召喚定時炸彈。	
+73501007	Buff	False	True	False	看的見的話則為BTS	此玩家於異常狀態持續時間內，不會受到殲滅機攻擊。	
+73501008	WeakeningEffect	True	False	False	神經受損	由於貝塔倫的普拉茲瑪釋放，無法使用技能。	icon_status.vergoscurse_tex
+73501009	Buff	False	True	False	看的見的話則為BTS	此NPC可使排風機進行動作。	
+73501010	Buff	False	True	False	看的見的話則為BTS	此NPC異常狀態持續期間內，無法發動連續爆發模式。	
+73501011	Buff	False	True	False	看的見的話則為BTS	此NPC異常狀態持續期間內，無法發動排風機自動模式。	
+73501012	WeakeningEffect	True	True	False	電荷逆流	由於貝塔倫強力磁氣場的攻擊，身體被強制移動。	icon_status.electriceffect3_tex
+73501013	Buff	False	True	False	看的見的話則為BTS	已設置定時炸彈。下列模式無法啟動:連續爆發模式，殲滅機模式，排風機模式	
+73501014	Buff	False	True	False	看的見的話則為BTS	排風機啟動。下列模式無法啟動:殲滅機模式	
+73501015	Buff	False	True	False	看的見的話則為BTS	排風機啟動。下列模式無法啟動:定時炸彈模式	
+73501016	Buff	False	True	False	看的見的話則為BTS	RK-9 機庫異常狀態成就達成 - 使用吸器排器設備	
+73501017	Buff	False	True	False	看的見的話則為BTS	吸器/排器設備防止重覆受到攻擊。	
+73501018	Buff	False	True	False	看的見的話則為BTS	定時炸彈拆除 100個異常狀態成就達成。	
+73501019	Buff	False	True	True	看的見的話則為BTS	仇恨值透明 NPC條件分配。	
+73502000	DamageOverTime	True	False	False	電氣衝擊	强烈的電流顯露，每1重疊 $H_W_BAD2$COLOR_END second1減少 $H_W_BAD6%$COLOR_END的HP。最大重疊 12次。	icon_skills.electricshock_tex
+73502001	WeakeningEffect	False	True	True	看的見的話則為BTS	此NPC所有傷害及反作用，異常狀態抵抗中。	
+73502002	Buff	False	True	True	看的見的話則為BTS	此NPC電流爆發模式使用時，先執行電磁氣誘導攻擊。	
+73502003	Buff	False	True	True	看的見的話則為BTS	此NPC電流爆發模式使用時，先執行近距離爆發攻擊。	
+73502004	Buff	False	True	False	看的見的話則為BTS	此NPC受到鋸齒迴轉攻擊。核殺波雷恩可進行連續攻擊。	
+73502005	WeakeningEffect	True	False	False	觸電擊殺	因核殺波雷恩強力的電流而陷入休克狀態。無法使用技能。	icon_skills.electricshock2_tex
+73502006	Buff	False	True	False	看的見的話則為BTS	此NPC進入冷卻時間可以100%機率攻擊。	
+73502007	WeakeningEffect	False	True	True	看的見的話則為BTS	此NPC的特效顯示為異常狀態。	
+73503000	Buff	False	True	False	看的見的話則為BTS	此NPC於異常狀態持續時間內無法使用月光衝擊波技能。	
+73503001	Stun	True	False	False	擊暈	RK-9的攻擊陷入昏厥狀態無法移動。	icon_status.confuseup_tex
+73503002	Buff	False	True	False	看的見的話則為BTS	此NPC目前無法使用月光衝擊波技能。	
+73503003	Buff	False	True	False	看的見的話則為BTS	此NPC於異常狀態持續時間內，無法進行生命體探測模式。	
+73503004	Buff	False	True	False	看的見的話則為BTS	此NPC目前無法進行生命體探測模式。	
+73503005	Buff	False	True	True	看的見的話則為BTS	此NPC目前已提升的熱探測協議使用條件，BOSS可視。	
+73503006	Buff	False	True	True	看的見的話則為BTS	此NPC目前已提升的熱探測協議順時針使用條件，BOSS可視。	
+73503007	Buff	False	True	True	看的見的話則為BTS	此NPC目前已提升的熱探測協議逆時針使用條件，BOSS可視。	
+73503008	Buff	False	True	True	看的見的話則為BTS	此NPC目前在部位破壞模式中，胸甲保護部份已被破壞。持續引發故障。	
+73503009	DamageOverTime	True	True	False	雷射衝擊	由於高輸出雷射持續受到衝擊傷害。每 $H_W_BAD2$COLOR_END second1減少 $H_W_BAD6%$COLOR_END的HP。此效果無法淨化。	icon_status.fullelectriceffect_tex
+73503100	Buff	False	True	False	看的見的話則為BTS	此NPC目前熱探測協議模式無法使用。	
+73503101	Buff	False	True	True	看的見的話則為BTS	此NPC首次進行熱探測協議模式的近距離範圍攻擊。	
+73503102	Buff	False	True	True	看的見的話則為BTS	此NPC首次進行熱探測協議模式的遠距離範圍攻擊。	
+73503103	Buff	False	True	True	看的見的話則為BTS	此NPC首次進行熱探測協議模式的整體範圍攻擊。	
+73503104	Buff	False	True	True	看的見的話則為BTS	此NPC進行熱探測協議模式第2次近距離範圍攻擊。	
+73503105	Buff	False	True	True	看的見的話則為BTS	此NPC進行熱探測協議模式第2次遠距離範圍攻擊。	
+73503106	Buff	False	True	True	看的見的話則為BTS	此NPC進行熱探測協議模式第2次整體範圍攻擊。	
+73503107	Buff	False	True	True	看的見的話則為BTS	此NPC由於胸甲保護部份沒有被破壞，可正常消滅系統入侵者。	
+73503108	Buff	True	True	True	看的見的話則為BTS	此NPC在熱探測協議模式下，以順時針進行攻擊。	
+73503109	Buff	True	True	True	看的見的話則為BTS	此NPC在熱探測協議模式下，以逆時針進行攻擊。	
+73503200	Buff	False	True	False	看的見的話則為BTS	此NPC目前對遠距離對象無法使用小型炸彈技能。	
+73503201	Buff	False	True	False	看的見的話則為BTS	此NPC目前對復活技能施展對象無法使用小型炸彈技能。	
+73503300	Buff	False	True	True	看的見的話則為BTS	此NPC可執行保護協議。	
+73503301	Buff	True	True	True	執行協議:保護	探測RK-9的系統危險並執行保護協議。執行保護協議可消滅所有侵入者。	icon_skills.emergencyshield_tex
+73503302	Buff	False	True	False	看的見的話則為BTS	此NPC在保護協議執行時，因過度衝擊導致系統暫時關閉。 5000ms 內無法行動。	
+73503303	Buff	False	True	False	看的見的話則為BTS	此NPC在保護協議執行中發生系統錯誤。 20000ms 內拉坎的魔石保護協議減弱，若受到過度衝擊時將會粉碎。	
+73503400	Buff	False	True	False	看的見的話則為BTS	此NPC在異常狀態維持期間內保護協議模式無法進行。	
+73503401	Buff	True	True	True	執行協議:保護	探測RK-9的系統危險並執行保護協議。執行保護協議可消滅所有侵入者。	icon_skills.emergencyshield_tex
+73503402	Buff	False	True	False	看的見的話則為BTS	此NPC在保護協議執行時，因過度衝擊導致系統暫時關閉。 5000ms 內無法行動。	
+73503403	WeakeningEffect	False	True	False	看的見的話則為BTS	此NPC對所有傷害、異常狀態、反作用為免疫狀態。	
+73504000	WeakeningEffect	True	True	True	強力的磁氣場	受到強力的磁氣場影響無法使用技能。	icon_status.sealskill_tex
+73504001	WeakeningEffect	True	True	False	觸電狀態	由於磁氣場迴轉裝置暫時陷入觸電狀態無法移動。	icon_skills.excesselectron_tex
 74300002	DamageOverTime	True	True	False	暗黑霧氣	四周佈滿暗黑霧氣，在霧氣中大幅提升移動速度。	icon_status.darkeffect_tex
 74300003	Buff	True	True	True	受咒的碑石力量	怪物們的力量提升$H_W_GOOD50%$COLOR_END。	icon_status.minushp_tex
 74300012	WeakeningEffect	True	True	False	魔導士的詛咒(紅)	中了魔導士的詛咒，若不按順序解除將會受到很大的傷害。	icon_status.battlecommand03_tex
@@ -4735,6 +5108,82 @@
 91600036	DamageOverTime	False	False	False			
 91600037	DamageOverTime	False	False	False			icon_status.cruel_slayer_3_tex
 91600038	Buff	False	True	False	浮游石恢復	浮游石 HP恢復用異常狀態	icon_status.aura_of_regeneration_hp_tex
+93500000	Buff	False	True	False	看的見的話則為BTS	此玩家的攻擊傷害量無法分散。	
+93500001	Buff	False	True	False	看的見的話則為BTS	受到機庫通風設備的排風機吹出來的風之影響，跌落傷害量增加。	
+93500002	WeakeningEffect	False	True	True	看的見的話則為BTS	NPC的傷害/反作用抵抗。	
+93500003	Buff	False	True	False	看的見的話則為BTS	此玩家判定為補師職業。	
+93500004	Buff	False	True	False	看的見的話則為BTS	此玩家職業判定為坦克。	
+93500005	Buff	False	True	True	看的見的話則為BTS	此玩家職業判定為非坦克。	
+93500006	WeakeningEffect	False	True	True	看的見的話則為BTS	此NPC對所有傷害、異常狀態、反作用為免疫狀態。	
+93501000	Buff	True	True	False	受保護的能量	為了將能量安全的轉交貝塔倫，排氣孔將會保護一切。通過排氣孔時不會受到跌落傷害。	icon_skills.rage_tex
+93501001	DamageOverTime	True	True	False	普拉茲瑪出現	定時炸彈爆炸了! 每 $H_W_BAD1$COLOR_END second減少 $H_W_BAD8%$COLOR_END的HP。此效果無法淨化。	icon_status.paralyzestatus_tex
+93501002	Buff	False	True	False	看的見的話則為BTS	此玩家正在飛起! 不會受到其它衝擊波技能及空間移動技能攻擊。	
+93501003	Buff	False	True	False	看的見的話則為BTS	此NPC無法使用爆發攻擊。	
+93501004	Stun	True	False	False	擊暈	受到貝塔倫強力的攻擊而陷入昏厥狀態無法移動。	icon_status.confuseup_tex
+93501005	WeakeningEffect	True	True	False	普拉茲瑪衝擊	定時炸彈爆炸了! 受到衝擊波攻擊移動速度 $H_W_BAD50%$COLOR_END，技能的移動距離減少 $H_W_BAD30%$COLOR_END。此效果無法淨化。	icon_status.minusmove_tex
+93501006	Buff	False	True	False	看的見的話則為BTS	此NPC可召喚定時炸彈。	
+93501007	Buff	False	True	False	看的見的話則為BTS	此玩家於異常狀態持續時間內，不會受到殲滅機攻擊。	
+93501008	WeakeningEffect	True	True	False	神經受損	由於貝塔倫的普拉茲瑪釋放，無法使用技能。	icon_status.vergoscurse_tex
+93501009	Buff	False	True	False	看的見的話則為BTS	此NPC可使排風機進行動作。	
+93501010	Buff	False	True	False	看的見的話則為BTS	此NPC異常狀態持續期間內，無法發動連續爆發模式。	
+93501011	Buff	False	True	False	看的見的話則為BTS	此NPC異常狀態持續期間內，無法發動排風機自動模式。	
+93501012	WeakeningEffect	True	True	False	電荷逆流	由於貝塔倫強力磁氣場的攻擊，身體被強制移動。	icon_status.electriceffect3_tex
+93501013	Buff	False	True	False	看的見的話則為BTS	已設置定時炸彈。下列模式無法啟動:連續爆發模式，殲滅機模式，排風機模式	
+93501014	Buff	False	True	False	看的見的話則為BTS	排風機啟動。下列模式無法啟動:殲滅機模式	
+93501015	Buff	False	True	False	看的見的話則為BTS	排風機啟動。下列模式無法啟動:定時炸彈模式	
+93501016	Buff	False	True	False	看的見的話則為BTS	該玩家所有傷害為免疫狀態。	
+93501017	Buff	False	True	False	看的見的話則為BTS	吸器/排器設備防止重覆受到攻擊。	
+93501018	Buff	False	True	False	看的見的話則為BTS	定時炸彈拆除 100個異常狀態成就達成。	
+93501019	Buff	False	True	True	看的見的話則為BTS	仇恨值透明 NPC條件分配。	
+93501020	Buff	False	True	False	看的見的話則為BTS	該玩家使用吸氣設備。為防止BTS 159600現象，1秒內不會受到跌落傷害。	
+93502000	DamageOverTime	True	False	False	電氣衝擊	强烈的電流顯露，每1重疊  $H_W_BAD2$COLOR_END second1減少$H_W_BAD10%$COLOR_END的HP。最大重疊 12次。	icon_skills.electricshock_tex
+93502001	WeakeningEffect	False	True	True	看的見的話則為BTS	此NPC所有傷害及反作用，異常狀態抵抗中。	
+93502002	Buff	False	True	True	看的見的話則為BTS	此NPC電流爆發模式使用時，先執行電磁氣誘導攻擊。	
+93502003	Buff	False	True	True	看的見的話則為BTS	此NPC電流爆發模式使用時，先執行近距離爆發攻擊。	
+93502004	Buff	False	True	False	看的見的話則為BTS	此NPC受到鋸齒迴轉攻擊。核殺波雷恩可進行連續攻擊。	
+93502005	WeakeningEffect	True	False	False	觸電擊殺	因核殺波雷恩強力的電流而陷入休克狀態。無法使用技能。	icon_skills.electricshock2_tex
+93502006	Buff	False	True	False	看的見的話則為BTS	此NPC進入冷卻時間可以100%機率攻擊。	
+93502007	WeakeningEffect	False	True	True	看的見的話則為BTS	此NPC的特效顯示為異常狀態。	
+93502008	Buff	False	True	False	看的見的話則為BTS	電氣衝擊異常狀態無法獲得時所達成的成就為異常狀態。	
+93502009	Buff	False	True	True	看的見的話則為BTS	若獲得電氣衝擊異常狀態，此異常狀態是為了無法獲得 93502008。	
+93503000	Buff	False	True	False	看的見的話則為BTS	此NPC於異常狀態持續時間內無法使用月光衝擊波技能。	
+93503001	Stun	True	False	False	擊暈	RK-9的攻擊陷入昏厥狀態無法移動。	icon_status.confuseup_tex
+93503002	Buff	False	True	False	看的見的話則為BTS	此NPC目前無法使用月光衝擊波技能。	
+93503003	Buff	False	True	False	看的見的話則為BTS	此NPC於異常狀態持續時間內，無法進行生命體探測模式。	
+93503004	Buff	False	True	False	看的見的話則為BTS	此NPC目前無法進行生命體探測模式。	
+93503005	Buff	False	True	True	看的見的話則為BTS	此NPC目前已提升的熱探測協議使用條件，BOSS可視。	
+93503006	Buff	False	True	True	看的見的話則為BTS	此NPC目前已提升的熱探測協議順時針使用條件，BOSS可視。	
+93503007	Buff	False	True	True	看的見的話則為BTS	此NPC目前已提升的熱探測協議逆時針使用條件，BOSS可視。	
+93503008	Buff	False	True	True	看的見的話則為BTS	此NPC目前在部位破壞模式中，胸甲保護部份已被破壞。持續引發故障。	
+93503009	DamageOverTime	True	True	False	雷射衝擊	由於高輸出雷射持續受到衝擊傷害。每 $H_W_BAD2$COLOR_END second1減少 $H_W_BAD10%$COLOR_END的HP。此效果無法淨化。	icon_status.fullelectriceffect_tex
+93503010	Buff	False	True	False	看的見的話則為BTS	此NPC在持續時間內無法使用熱探測協議模式。	
+93503011	Buff	False	True	False	看的見的話則為BTS	此NPC無法變更RK-9的系統參數。	
+93503100	Buff	False	True	False	看的見的話則為BTS	此NPC目前熱探測協議模式無法使用。	
+93503101	Buff	False	True	True	看的見的話則為BTS	此NPC首次進行熱探測協議模式的近距離範圍攻擊。	
+93503102	Buff	False	True	True	看的見的話則為BTS	此NPC首次進行熱探測協議模式的遠距離範圍攻擊。	
+93503103	Buff	False	True	True	看的見的話則為BTS	此NPC首次進行熱探測協議模式的整體範圍攻擊。	
+93503104	Buff	False	True	True	看的見的話則為BTS	此NPC進行熱探測協議模式第2次近距離範圍攻擊。	
+93503105	Buff	False	True	True	看的見的話則為BTS	此NPC進行熱探測協議模式第2次遠距離範圍攻擊。	
+93503106	Buff	False	True	True	看的見的話則為BTS	此NPC進行熱探測協議模式第2次整體範圍攻擊。	
+93503107	Buff	False	True	True	看的見的話則為BTS	此NPC由於胸甲保護部份沒有被破壞，可正常消滅系統入侵者。	
+93503108	Buff	False	True	True	看的見的話則為BTS	此NPC在熱探測協議模式下，以順時針進行攻擊。	icon_status.cruel_slayer_2_tex
+93503109	Buff	False	True	True	看的見的話則為BTS	此NPC在熱探測協議模式下，以逆時針進行攻擊。	icon_status.cruel_slayer_3_tex
+93503200	Buff	False	True	False	看的見的話則為BTS	此NPC目前對遠距離對象無法使用小型炸彈技能。	
+93503201	Buff	False	True	False	看的見的話則為BTS	此NPC目前對復活技能施展對象無法使用小型炸彈技能。	
+93503300	Buff	False	True	True	看的見的話則為BTS	此NPC可執行保護協議。	
+93503301	Buff	True	True	True	執行協議:保護	探測RK-9的系統危險並執行保護協議。執行保護協議可消滅所有侵入者。	icon_skills.emergencyshield_tex
+93503302	Buff	False	True	False	看的見的話則為BTS	此NPC在保護協議執行時，因過度衝擊導致系統暫時關閉。 5000ms 內無法行動。	
+93503303	Buff	False	True	False	看的見的話則為BTS	此NPC在保護協議執行中發生系統錯誤。 20000ms 內拉坎的魔石保護協議減弱，若受到過度衝擊時將會粉碎。	
+93503304	Buff	True	True	True	緊急防禦系統	RK-9的系統探測到過度衝擊時將啟動緊急防禦系統。增加RK-9的防禦力及攻擊力。	icon_status.dimensionguard_tex
+93503400	Buff	False	True	False	看的見的話則為BTS	此NPC在異常狀態維持期間內保護協議模式無法進行。	
+93503401	Buff	True	True	True	執行協議:保護	探測RK-9的系統危險並執行保護協議。執行保護協議可消滅所有侵入者。	icon_skills.emergencyshield_tex
+93503402	Buff	False	True	False	看的見的話則為BTS	此NPC在保護協議執行時，因過度衝擊導致系統暫時關閉。 5000ms 內無法行動。	
+93503500	Buff	False	True	False	看的見的話則為BTS	雷達系統模式下無法使用近距離爆發。	
+93503501	Buff	False	True	False	看的見的話則為BTS	完成一般模式 1次	
+93503502	Buff	False	True	False	看的見的話則為BTS	完成困難模式 1次	
+93503503	Buff	False	True	False	看的見的話則為BTS	完成困難模式 77次	
+93504000	WeakeningEffect	True	True	True	強力的磁氣場	受到強力的磁氣場影響無法使用技能。	icon_status.sealskill_tex
+93504001	WeakeningEffect	True	True	False	觸電狀態	由於磁氣場迴轉裝置暫時陷入觸電狀態無法移動。	icon_skills.excesselectron_tex
 97000001	WeakeningEffect	True	False	True	獵物	肚子餓的小蜘蛛正在追著你。	icon_status.curse_tex
 97000002	WeakeningEffect	True	True	True	飽足感	感到肚子飽，正在取消休息。	icon_status.sleepstatus_tex
 97000003	WeakeningEffect	True	True	False	小蜘蛛的劇毒	感染了小蜘蛛的毒移動速度減少，每$H_W_BAD0$COLOR_END second1減少$H_W_BAD10%$COLOR_END的HP。	icon_status.diseasedown_tex
@@ -4895,7 +5344,7 @@
 98000104	Buff	True	True	True	攻擊連續 III	技能傷害提升$H_W_GOOD10%$COLOR_END，所受到的傷害減少$H_W_GOOD10%$COLOR_END。另外攻擊速度也會跟著提升$H_W_GOOD4%$COLOR_END。	
 98000105	Buff	True	True	True	恢復連續 III	技能傷害提升$H_W_GOOD10%$COLOR_END，所受到的傷害減少$H_W_GOOD10%$COLOR_END。另外攻擊速度也會跟著提升$H_W_GOOD4%$COLOR_END。	
 98000106	WeakeningEffect	True	False	False	抗打減少 [弱化紋章]	抗打減少$H_W_BAD10%$COLOR_END。	icon_crest.crestactivedefencedown_tex
-98000107	Buff	True	True	False	神聖閃電 IV	力量增加$H_W_GOOD40$COLOR_END，攻擊速度也增加$H_W_GOOD8$COLOR_END。	icon_skills.divinelightning_tex
+98000107	Buff	True	True	False	神聖閃電 IV	力量增加$H_W_GOOD48$COLOR_END，攻擊速度也增加$H_W_GOOD9,6$COLOR_END。	icon_skills.divinelightning_tex
 98000108	Buff	True	True	False	抗打增加 [協力紋章]	抗打增加$H_W_GOOD10%$COLOR_END。	icon_crest.crestactivedefenceup_tex
 98000109	Buff	True	True	False	亞倫的祝福 III	受到亞倫的祝福，和平狀態下的移動速度增加$H_W_GOOD10$COLOR_END，力量增加$H_W_GOOD25$COLOR_END。	icon_skills.attackup_tex
 98000110	Buff	True	True	False	夏拉的祝福 V	受到夏拉的祝福，HP每 $H_W_GOOD2秒$COLOR_END會持續恢復、抗打增加11、所有異常狀態抵抗增加 5。	icon_skills.agilitybless_tex
@@ -5366,6 +5815,7 @@
 81000002	Buff	True	True	False	特性經驗值增加 30	特性經驗值獲得量增加$H_W_GOOD30%$COLOR_END 。	icon_items.ep_grow30_tex
 81000003	Buff	True	True	False	特性經驗值增加 50	特性經驗值獲得量增加$H_W_GOOD50%$COLOR_END 。	icon_items.ep_grow50_tex
 81000004	Buff	True	True	False	特性經驗值增加 100	特性經驗值獲得量增加$H_W_GOOD100%$COLOR_END 。	icon_items.ep_grow100_tex
+81000005	Buff	False	True	True	網咖特別經驗值增加10	特別經驗值獲得量增加 $H_W_GOOD10%$COLOR_END。	icon_items.ep_grow30_tex
 81010101	Buff	True	True	False	傷害減少	傷害減少狀態。進入戰鬥狀態時將解除。	icon_ep.ep_defense_wellup_tex
 81010102	Buff	True	True	False	傷害減少	傷害減少狀態。進入戰鬥狀態時將解除。	icon_ep.ep_defense_wellup_tex
 81010103	Buff	True	True	False	傷害減少	傷害減少狀態。進入戰鬥狀態時將解除。	icon_ep.ep_defense_wellup_tex
@@ -6460,6 +6910,8 @@
 5020000	Buff	True	True	False		1%	icon_items.parts_heavyarmorc5_tex
 5020001	Buff	True	True	False		5%	icon_items.parts_heavyarmorc5_tex
 5020002	Buff	True	True	False		15%	icon_items.parts_heavyarmorc5_tex
+5020003	Buff	True	True	True			icon_items.q_closedspace_stone_05_tex
+5020004	Buff	True	True	True			icon_items.artisan_lamp_tex
 14400001	Buff	True	True	False	Emblem of Success		icon_items.parts_magicweaponc15_tex
 14400002	Buff	True	True	False	Memento of Fame		icon_items.parts_lightweaponc9_tex
 14400003	Buff	True	True	False	Sigil of Indestructible Flame		icon_items.parts_magicweaponc6_tex
