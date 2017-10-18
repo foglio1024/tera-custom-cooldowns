@@ -76,5 +76,10 @@ namespace TCC.Windows
         {
             TwitchConnector.Instance.Init();
         }
+
+        private void PaypalLink_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Process.Start("https://paypal.me/foglio1024");
+        }
     }
 }

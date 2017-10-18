@@ -12,6 +12,22 @@
         Title="Settings" Height="Auto" Width="Auto" ResizeMode="NoResize" Loaded="Window_Loaded" SizeToContent="WidthAndHeight" 
         Background="Transparent" UseLayoutRounding="True">
     <Window.Resources>
+        <Style TargetType="{x:Type controls:BoolSetting}">
+            <Setter Property="ToolTipService.ShowDuration" Value="5000000"></Setter>
+            <Setter Property="ToolTipService.InitialShowDelay" Value="0"></Setter>
+        </Style>
+        <Style TargetType="{x:Type controls:ValueSetting}">
+            <Setter Property="ToolTipService.ShowDuration" Value="5000000"></Setter>
+            <Setter Property="ToolTipService.InitialShowDelay" Value="0"></Setter>
+        </Style>
+        <Style TargetType="{x:Type controls:SelectionSetting}">
+            <Setter Property="ToolTipService.ShowDuration" Value="5000000"></Setter>
+            <Setter Property="ToolTipService.InitialShowDelay" Value="0"></Setter>
+        </Style>
+        <Style TargetType="{x:Type controls:FieldSetting}">
+            <Setter Property="ToolTipService.ShowDuration" Value="5000000"></Setter>
+            <Setter Property="ToolTipService.InitialShowDelay" Value="0"></Setter>
+        </Style>
         <Style x:Key="{x:Type ToolTip}" TargetType="{x:Type ToolTip}">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
@@ -23,6 +39,88 @@
             <Setter Property="Background" Value="#3999"/>
             <Setter Property="Margin" Value="10,1"/>
         </Style>
+        <ToolTip x:Key="EnabledSettingTooltip">
+            <Grid Margin="5">
+                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                <Run Text="Completely disables this window, turning off related packet processors if possible. You'll be asked confirmation when turning this off."/>
+                <LineBreak/>
+                <LineBreak/>
+                <Run Text="Warning:" Foreground="DarkOrange"/>
+                <Run Text="Re-enabling this later will restart TCC." />
+                </TextBlock>
+            </Grid>
+        </ToolTip>
+        <ToolTip x:Key="VisibilitySettingTooltip">
+            <Grid Margin="5">
+                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                    <Run Text="Hides this window without closing it."/>
+                </TextBlock>
+            </Grid>
+        </ToolTip>
+        <ToolTip x:Key="ShowAlwaysSettingTooltip">
+            <Grid Margin="5">
+                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                    <Run Text="Keep this window visible regardless of loading screens and tabbing out of TERA. Auto dim will still apply."/>
+                </TextBlock>
+            </Grid>
+        </ToolTip>
+        <ToolTip x:Key="ClickThruModeSettingTooltip">
+            <Grid Margin="5">
+                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                    <Run Text="Decides how to apply click thru on this window:"/>
+                    <LineBreak/>
+                    <LineBreak/>
+                    <Run Text="Never:" FontWeight="Bold" Foreground="White"/>
+                    <Run Text=" click thru is never applied"/>
+                    <LineBreak/>
+                    <LineBreak/>
+                    <Run Text="WhenDim:" FontWeight="Bold" Foreground="White"/>
+                    <Run Text=" click thru is applied when TCC is dim (out of combat)"/>
+                    <LineBreak/>
+                    <LineBreak/>
+                    <Run Text="WhenUndim:" FontWeight="Bold" Foreground="White"/>
+                    <Run Text=" click thru is applied when TCC is not dim (during combat or when using skills/items)"/>
+                    <LineBreak/>
+                    <LineBreak/>
+                    <Run Text="Always:" FontWeight="Bold" Foreground="White"/>
+                    <Run Text=" click thru is always on"/>
+                </TextBlock>
+            </Grid>
+        </ToolTip>
+        <ToolTip x:Key="AutoDimSettingTooltip">
+            <Grid Margin="5">
+                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                    <Run Text="Choose if this window will have its opacity and clickthru settings automatically adjusted when not in combat."/>
+                </TextBlock>
+            </Grid>
+        </ToolTip>
+        <ToolTip x:Key="DimOpacitySettingTooltip">
+            <Grid Margin="5">
+                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                    <Run Text="Sets the window opacity to this when TCC is dimmed."/>
+                </TextBlock>
+            </Grid>
+        </ToolTip>
+        <ToolTip x:Key="TransparencySettingTooltip">
+            <Grid Margin="5">
+                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                    <Run Text="Turns window transparency on/off."/>
+                    <Run Text="It's advised to keep this setting on, unless you want to stream and your video capture software doesen't support transparent windows."/>
+                    <LineBreak/>
+                    <LineBreak/>
+                    <Run Text="Warning:" Foreground="DarkOrange"/>
+                    <Run Text="it requires TCC restart to take effect."/>
+                </TextBlock>
+            </Grid>
+        </ToolTip>
+
     </Window.Resources>
     <Window.DataContext>
         <vm:SettingsWindowViewModel/>
@@ -38,9 +136,10 @@
         </Grid.ColumnDefinitions>
 
         <Border Style="{StaticResource Styles.DefaultBorder}" Grid.ColumnSpan="10" Grid.RowSpan="10"  Opacity=".95"/>
-        <Image RenderOptions.BitmapScalingMode="HighQuality"  Opacity=".02" Margin="0" Width="128" Height="128" Grid.ColumnSpan="10" Grid.RowSpan="10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Source="/TCC;component/resources/images/tera-logo-flat.png" ClipToBounds="False"/>
+        <Image RenderOptions.BitmapScalingMode="HighQuality"  Opacity=".02" Margin="0" Width="128" Height="128" Grid.ColumnSpan="10" Grid.RowSpan="10" HorizontalAlignment="Right" 
+               VerticalAlignment="Bottom" Source="/TCC;component/resources/images/tera-logo-flat.png" ClipToBounds="False"/>
 
-        <TabControl TabStripPlacement="Left" Grid.Row="1" Grid.ColumnSpan="2" Background="#1aaa" BorderThickness="0,0,0,0" Height="500"  >
+        <TabControl TabStripPlacement="Left" Grid.Row="1" Grid.ColumnSpan="2" Background="#1aaa" BorderThickness="0,0,0,0" Height="550"  >
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Template">
@@ -98,36 +197,33 @@
 
                 <!--Settings-->
                 <StackPanel Grid.Row="1" Name="cooldownSettingsGrid" Style="{StaticResource settingsGrid}">
-                    <controls:BoolSetting SettingName="Enabled" Grid.Row="0" IsOn="{Binding CooldownWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" />
-                    <controls:BoolSetting SettingName="Visibility" Grid.Row="0" IsOn="{Binding CooldownWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
-                    <controls:BoolSetting SettingName="Show always" IsOn="{Binding CooldownWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
-
-                    <controls:SelectionSetting SettingName="Click through Mode" Grid.Row="1" SelectedItem="{Binding CooldownWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type tcc:ClickThruMode}"  Choices="{Binding ClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
-                    <controls:ValueSetting SettingName="Scale" Grid.Row="2" Min="0" Max="3" Value="{Binding CooldownWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></controls:ValueSetting>
-                    <controls:BoolSetting SettingName="Auto dim" Grid.Row="3" IsOn="{Binding CooldownWindowSettings.AutoDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" >
-                        <controls:BoolSetting.ToolTip>
-                            <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
-                                <TextBlock Foreground="LightGray" Text="Automatically dim this window when not in combat." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
-                            </Grid>
-                        </controls:BoolSetting.ToolTip>
-                    </controls:BoolSetting>
-                    <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding CooldownWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"></controls:ValueSetting>
-                    <controls:BoolSetting SettingName="Transparency" Grid.Row="5" IsOn="{Binding CooldownWindowSettings.AllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
-
-                    <Separator Grid.Row="6"></Separator>
-                    <controls:BoolSetting SettingName="Use static cooldown bar" Grid.Row="7" IsOn="{Binding ClassWindowOn, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_timelapse_white_24dp_2x.png" >
-                        <controls:BoolSetting.ToolTip>
+                    <controls:BoolSetting SettingName="Enabled" IsOn="{Binding CooldownWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" ToolTip="{StaticResource EnabledSettingTooltip}"/>
+                    <controls:BoolSetting SettingName="Visibility" IsOn="{Binding CooldownWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource VisibilitySettingTooltip}"/>
+                    <controls:BoolSetting SettingName="Show always" IsOn="{Binding CooldownWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource ShowAlwaysSettingTooltip}"/>
+                    <controls:SelectionSetting SettingName="Click through mode" Grid.Row="1" SelectedItem="{Binding CooldownWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type tcc:ClickThruMode}"  Choices="{Binding ClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" ToolTip="{StaticResource ClickThruModeSettingTooltip}"/>
+                    <controls:ValueSetting SettingName="Scale"  Min="0" Max="3" Value="{Binding CooldownWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png" />
+                    <controls:BoolSetting SettingName="Auto dim"  IsOn="{Binding CooldownWindowSettings.AutoDim, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png"  ToolTip="{StaticResource AutoDimSettingTooltip}"/>
+                    <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding CooldownWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png" ToolTip="{StaticResource DimOpacitySettingTooltip}"/>
+                    <controls:BoolSetting SettingName="Transparency" Grid.Row="5" IsOn="{Binding CooldownWindowSettings.AllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource TransparencySettingTooltip}"/>
+                    <Separator/>
+                    <controls:SelectionSetting SettingName="Cooldown bar mode" SelectedItem="{Binding CooldownBarMode, Mode=TwoWay}" Choices="{Binding CooldownBarModes}" ChoicesType="{x:Type tcc:CooldownBarMode}"  ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_timelapse_white_24dp_2x.png" >
+                        <controls:SelectionSetting.ToolTip>
                             <Grid Margin="5">
                                 <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
-                                <Run Text="Warning:" Foreground="DarkOrange"/>
-                                <Run Text=" switching between normal cooldown window and class window will cause any running skill to not be showed in the new window until it is used again." />
+                                    <Run Text="Switch between"/>
+                                    <Run Text="normal" FontWeight="Bold" Foreground="{StaticResource Colors.App.HP}"/>
+                                    <Run Text="layout (skills only visible when in cooldown) and"/>
+                                    <Run Text="fixed" FontWeight="Bold" Foreground="{StaticResource Colors.App.MP}"/>
+                                    <Run Text="layout (configurable via xml file, check wiki for more info)"/>
+                                    <LineBreak/>
+                                    <LineBreak/>
+                                    <Run Text="Warning:" Foreground="DarkOrange"/>
+                                    <Run Text=" changing this will cause any running skill to not be showed in the new mode until it is used again." />
                                 </TextBlock>
                             </Grid>
-                        </controls:BoolSetting.ToolTip>
-                    </controls:BoolSetting>
-
+                        </controls:SelectionSetting.ToolTip>
+                    </controls:SelectionSetting>
                 </StackPanel>
             </TabItem>
             <TabItem Margin="-1,0,0,0">
@@ -143,28 +239,29 @@
                     </Grid>
                 </TabItem.Header>
                 <!-- Boss window settings-->
-                <StackPanel Grid.Row="0" Grid.Column="0" Style="{StaticResource settingsGrid}">
-                    <controls:BoolSetting SettingName="Enabled" Grid.Row="0" IsOn="{Binding BossWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" />
-                    <controls:BoolSetting SettingName="Visibility" Grid.Row="0" IsOn="{Binding BossWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
-                    <controls:BoolSetting SettingName="Show always" IsOn="{Binding BossWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
-
-                    <controls:SelectionSetting SettingName="Click through Mode" Grid.Row="1" SelectedItem="{Binding BossWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type tcc:ClickThruMode}"  Choices="{Binding ClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
-                    <controls:ValueSetting SettingName="Scale" Grid.Row="2" Min="0" Max="3" Value="{Binding BossWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></controls:ValueSetting>
-                    <controls:BoolSetting SettingName="Auto dim" Grid.Row="3" IsOn="{Binding BossWindowSettings.AutoDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" >
+                <StackPanel Style="{StaticResource settingsGrid}">
+                    <controls:BoolSetting SettingName="Enabled" IsOn="{Binding BossWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" ToolTip="{StaticResource EnabledSettingTooltip}"/>
+                    <controls:BoolSetting SettingName="Visibility" IsOn="{Binding BossWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource VisibilitySettingTooltip}"/>
+                    <controls:BoolSetting SettingName="Show always" IsOn="{Binding BossWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource ShowAlwaysSettingTooltip}"/>
+                    <controls:SelectionSetting SettingName="Click through mode" SelectedItem="{Binding BossWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type tcc:ClickThruMode}"  Choices="{Binding ClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" ToolTip="{StaticResource ClickThruModeSettingTooltip}"/>
+                    <controls:ValueSetting SettingName="Scale" Min="0" Max="3" Value="{Binding BossWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"/>
+                    <controls:BoolSetting SettingName="Auto dim" IsOn="{Binding BossWindowSettings.AutoDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" ToolTip="{StaticResource AutoDimSettingTooltip}"/>
+                    <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1"  Value="{Binding BossWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png" ToolTip="{StaticResource DimOpacitySettingTooltip}"/>
+                    <controls:BoolSetting SettingName="Transparency" IsOn="{Binding BossWindowSettings.AllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource TransparencySettingTooltip}" />
+                    <Separator />
+                    <controls:BoolSetting SettingName="Hide adds"  IsOn="{Binding ShowOnlyBosses, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_visibility_off_white_24dp_2x.png" >
                         <controls:BoolSetting.ToolTip>
-                            <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
-                                <TextBlock Foreground="LightGray" Text="Automatically dim this window when not in combat." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
-                            </Grid>
+                            <ToolTip>
+                                <Grid Margin="5">
+                                    <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                                    <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                        <Run Text="Hides the adds column which shows all the mobs not marked as bosses and having small bar indicator."/>
+                                    </TextBlock>
+                                </Grid>
+                            </ToolTip>
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
-                    <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding BossWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"></controls:ValueSetting>
-                    <controls:BoolSetting SettingName="Transparency" Grid.Row="5" IsOn="{Binding BossWindowSettings.AllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
-                    <Separator Grid.Row="6"></Separator>
-                    <controls:BoolSetting SettingName="Hide adds" Grid.Row="7" IsOn="{Binding ShowOnlyBosses, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_visibility_off_white_24dp_2x.png" />
-
                 </StackPanel>
-
             </TabItem>
             <TabItem Margin="-1,0,0,0">
                 <TabItem.Header>
@@ -179,24 +276,15 @@
                     </Grid>
                 </TabItem.Header>
                 <!-- Character window settings -->
-                <StackPanel Grid.Row="1" Grid.Column="0" Name="characterSettingsGrid" Style="{StaticResource settingsGrid}">
-                    <controls:BoolSetting SettingName="Enabled" Grid.Row="0" IsOn="{Binding CharacterWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" />
-                    <controls:BoolSetting Margin="0,0,0,0" SettingName="Visibility" Grid.Row="0" IsOn="{Binding CharacterWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
-                    <controls:BoolSetting SettingName="Show always" IsOn="{Binding CharacterWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
-
-                    <controls:SelectionSetting SettingName="Click through Mode" Grid.Row="1" SelectedItem="{Binding CharacterWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type tcc:ClickThruMode}"  Choices="{Binding ClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
-                    <controls:ValueSetting SettingName="Scale" Grid.Row="2" Min="0" Max="3" Value="{Binding CharacterWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></controls:ValueSetting>
-                    <controls:BoolSetting SettingName="Auto dim" Grid.Row="3" IsOn="{Binding CharacterWindowSettings.AutoDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" >
-                        <controls:BoolSetting.ToolTip>
-                            <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
-                                <TextBlock Foreground="LightGray" Text="Automatically dim this window when not in combat." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
-                            </Grid>
-                        </controls:BoolSetting.ToolTip>
-                    </controls:BoolSetting>
-                    <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding CharacterWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"></controls:ValueSetting>
-                    <controls:BoolSetting SettingName="Transparency" Grid.Row="5" IsOn="{Binding CharacterWindowSettings.AllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
-
+                <StackPanel Name="characterSettingsGrid" Style="{StaticResource settingsGrid}">
+                    <controls:BoolSetting SettingName="Enabled" IsOn="{Binding CharacterWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" ToolTip="{StaticResource EnabledSettingTooltip}"/>
+                    <controls:BoolSetting  SettingName="Visibility" IsOn="{Binding CharacterWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource VisibilitySettingTooltip}"/>
+                    <controls:BoolSetting SettingName="Show always" IsOn="{Binding CharacterWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource ShowAlwaysSettingTooltip}"/>
+                    <controls:SelectionSetting SettingName="Click through mode" SelectedItem="{Binding CharacterWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type tcc:ClickThruMode}"  Choices="{Binding ClickThruModes, Mode=OneWay}" ToolTip="{StaticResource ClickThruModeSettingTooltip}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
+                    <controls:ValueSetting SettingName="Scale" Min="0" Max="3" Value="{Binding CharacterWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"/>
+                    <controls:BoolSetting SettingName="Auto dim" IsOn="{Binding CharacterWindowSettings.AutoDim, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" ToolTip="{StaticResource AutoDimSettingTooltip}"/>
+                    <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Value="{Binding CharacterWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png" ToolTip="{StaticResource DimOpacitySettingTooltip}"/>
+                    <controls:BoolSetting SettingName="Transparency" IsOn="{Binding CharacterWindowSettings.AllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource TransparencySettingTooltip}" />
                 </StackPanel>
             </TabItem>
             <TabItem Margin="-1,0,0,0">
@@ -213,28 +301,17 @@
 
                 </TabItem.Header>
                 <!-- Buffs window settings -->
-                <StackPanel Grid.Row="2" Grid.Column="0" Name="buffsSettingsGrid" Style="{StaticResource settingsGrid}">
-                    <controls:BoolSetting SettingName="Enabled" Grid.Row="0" IsOn="{Binding BuffWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" />
-                    <controls:BoolSetting SettingName="Visibility" Grid.Row="0" IsOn="{Binding BuffWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
-                    <controls:BoolSetting SettingName="Show always" IsOn="{Binding BuffWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
-
-                    <controls:SelectionSetting SettingName="Click through Mode" Grid.Row="1" SelectedItem="{Binding BuffWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type tcc:ClickThruMode}"  Choices="{Binding ClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
-                    <controls:ValueSetting SettingName="Scale" Grid.Row="2" Min="0" Max="3" Value="{Binding BuffWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></controls:ValueSetting>
-                    <controls:BoolSetting SettingName="Auto dim" Grid.Row="3" IsOn="{Binding BuffWindowSettings.AutoDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" >
-                        <controls:BoolSetting.ToolTip>
-                            <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
-                                <TextBlock Foreground="LightGray" Text="Automatically dim this window when not in combat." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
-                            </Grid>
-                        </controls:BoolSetting.ToolTip>
-                    </controls:BoolSetting>
-                    <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding BuffWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"></controls:ValueSetting>
-                    <Separator Grid.Row="5" ></Separator>
-
-                    <controls:BoolSetting SettingName="Show left to right" Grid.Row="6" IsOn="{Binding IsLeftToRightOn, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_swap_horiz_white_24dp_2x.png"/>
-
+                <StackPanel Name="buffsSettingsGrid" Style="{StaticResource settingsGrid}">
+                    <controls:BoolSetting SettingName="Enabled" IsOn="{Binding BuffWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" ToolTip="{StaticResource EnabledSettingTooltip}"/>
+                    <controls:BoolSetting SettingName="Visibility" IsOn="{Binding BuffWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource VisibilitySettingTooltip}"/>
+                    <controls:BoolSetting SettingName="Show always" IsOn="{Binding BuffWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource ShowAlwaysSettingTooltip}"/>
+                    <controls:SelectionSetting SettingName="Click through mode" SelectedItem="{Binding BuffWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type tcc:ClickThruMode}" ToolTip="{StaticResource ClickThruModeSettingTooltip}" Choices="{Binding ClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
+                    <controls:ValueSetting SettingName="Scale" Min="0" Max="3" Value="{Binding BuffWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"/>
+                    <controls:BoolSetting SettingName="Auto dim" IsOn="{Binding BuffWindowSettings.AutoDim, Mode=TwoWay}" ToolTip="{StaticResource AutoDimSettingTooltip}" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" />
+                    <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Value="{Binding BuffWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png" ToolTip="{StaticResource DimOpacitySettingTooltip}"/>
+                    <Separator />
+                    <controls:SelectionSetting SettingName="Direction" ChoicesType="{x:Type FlowDirection}" Choices="{Binding FlowDirections, Mode=OneWay}" SelectedItem="{Binding BuffsDirection, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_swap_horiz_white_24dp_2x.png"/>
                 </StackPanel>
-
             </TabItem>
             <TabItem Margin="-1,0,0,0">
                 <TabItem.Header>
@@ -249,22 +326,14 @@
                     </Grid>
                 </TabItem.Header>
                 <!-- Class window settings -->
-                <StackPanel Grid.Row="2" Grid.Column="0" Style="{StaticResource settingsGrid}">
-                    <controls:BoolSetting SettingName="Enabled" Grid.Row="0" IsOn="{Binding ClassWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" />
-                    <controls:BoolSetting SettingName="Visibility" Grid.Row="0" IsOn="{Binding ClassWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
-                    <controls:BoolSetting SettingName="Show always" IsOn="{Binding ClassWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
-
-                    <controls:SelectionSetting SettingName="Click through Mode" Grid.Row="1" SelectedItem="{Binding ClassWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type tcc:ClickThruMode}"  Choices="{Binding ClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
-                    <controls:ValueSetting SettingName="Scale" Grid.Row="2" Min="0" Max="3" Value="{Binding ClassWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"/>
-                    <controls:BoolSetting SettingName="Auto dim" Grid.Row="3" IsOn="{Binding ClassWindowSettings.AutoDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" >
-                        <controls:BoolSetting.ToolTip>
-                            <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
-                                <TextBlock Foreground="LightGray" Text="Automatically dim this window when not in combat." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
-                            </Grid>
-                        </controls:BoolSetting.ToolTip>
-                    </controls:BoolSetting>
-                    <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding ClassWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"></controls:ValueSetting>
+                <StackPanel Style="{StaticResource settingsGrid}">
+                    <controls:BoolSetting SettingName="Enabled" IsOn="{Binding ClassWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" ToolTip="{StaticResource EnabledSettingTooltip}"/>
+                    <controls:BoolSetting SettingName="Visibility" IsOn="{Binding ClassWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource VisibilitySettingTooltip}"/>
+                    <controls:BoolSetting SettingName="Show always" IsOn="{Binding ClassWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource ShowAlwaysSettingTooltip}"/>
+                    <controls:SelectionSetting SettingName="Click through mode" SelectedItem="{Binding ClassWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type tcc:ClickThruMode}" ToolTip="{StaticResource ClickThruModeSettingTooltip}" Choices="{Binding ClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
+                    <controls:ValueSetting SettingName="Scale" Min="0" Max="3" Value="{Binding ClassWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"/>
+                    <controls:BoolSetting SettingName="Auto dim" IsOn="{Binding ClassWindowSettings.AutoDim, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" ToolTip="{StaticResource AutoDimSettingTooltip}"/>
+                    <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding ClassWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png" ToolTip="{StaticResource DimOpacitySettingTooltip}"/>
                 </StackPanel>
             </TabItem>
             <TabItem Margin="-1,0,0,0">
@@ -281,45 +350,34 @@
 
                 </TabItem.Header>
                 <!-- Group window settings -->
-                <StackPanel Grid.Row="1" Grid.Column="0"  Style="{StaticResource settingsGrid}">
-                    <controls:BoolSetting SettingName="Enabled" Grid.Row="0" IsOn="{Binding GroupWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" />
-                    <controls:BoolSetting SettingName="Visibility" Grid.Row="0" IsOn="{Binding GroupWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
-                    <controls:BoolSetting SettingName="Show always" IsOn="{Binding GroupWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
-
-                    <controls:SelectionSetting SettingName="Click through Mode" Grid.Row="1" SelectedItem="{Binding GroupWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type tcc:ClickThruMode}"  Choices="{Binding ClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
-                    <controls:ValueSetting SettingName="Scale" Grid.Row="2" Min="0" Max="3" Value="{Binding GroupWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"></controls:ValueSetting>
-                    <controls:BoolSetting SettingName="Auto dim" Grid.Row="3" IsOn="{Binding GroupWindowSettings.AutoDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" >
+                <StackPanel Style="{StaticResource settingsGrid}">
+                    <controls:BoolSetting SettingName="Enabled" IsOn="{Binding GroupWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" ToolTip="{StaticResource EnabledSettingTooltip}"/>
+                    <controls:BoolSetting SettingName="Visibility" IsOn="{Binding GroupWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource VisibilitySettingTooltip}"/>
+                    <controls:BoolSetting SettingName="Show always" IsOn="{Binding GroupWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource ShowAlwaysSettingTooltip}"/>
+                    <controls:SelectionSetting SettingName="Click through mode" SelectedItem="{Binding GroupWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type tcc:ClickThruMode}" ToolTip="{StaticResource ClickThruModeSettingTooltip}" Choices="{Binding ClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
+                    <controls:ValueSetting SettingName="Scale" Min="0" Max="3" Value="{Binding GroupWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"/>
+                    <controls:BoolSetting SettingName="Auto dim" IsOn="{Binding GroupWindowSettings.AutoDim, Mode=TwoWay}" ToolTip="{StaticResource AutoDimSettingTooltip}" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" />
+                    <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Value="{Binding GroupWindowSettings.DimOpacity, Mode=TwoWay}" ToolTip="{StaticResource DimOpacitySettingTooltip}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"/>
+                    <Separator />
+                    <controls:BoolSetting SettingName="Hide me" IsOn="{Binding HideMe, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_person_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
-                                <TextBlock Foreground="LightGray" Text="Automatically dim this window when not in combat." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
-                            </Grid>
-                        </controls:BoolSetting.ToolTip>
-                    </controls:BoolSetting>
-                    <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding GroupWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"></controls:ValueSetting>
-
-                    <Separator Grid.Row="5"></Separator>
-                    <controls:BoolSetting SettingName="Hide me" Grid.Row="6" IsOn="{Binding HideMe, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_person_white_24dp_2x.png" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0">
-                        <controls:BoolSetting.ToolTip>
-                            <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
-                                <Run Text="Hides current player from group window."/>
-                                <LineBreak /> <LineBreak/>
-                                <Run Text="Note: " Foreground="#59f"/>
-                                <Run Text="if turned back on while in a party, player will not be visible until party composition changes." />
+                                    <Run Text="Hides current player from group window."/>
+                                    <LineBreak /> <LineBreak/>
+                                    <Run Text="Note: " Foreground="#59f"/>
+                                    <Run Text="if turned back on while in a party, player will not be visible until party composition changes." />
                                 </TextBlock>
                             </Grid>
                         </controls:BoolSetting.ToolTip>
-
                     </controls:BoolSetting>
-                    <controls:BoolSetting SettingName="Hide buffs" Grid.Row="7" IsOn="{Binding HideBuffs, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_visibility_off_white_24dp_2x.png" 
-                                      ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" >
+                    <controls:BoolSetting SettingName="Hide buffs" IsOn="{Binding HideBuffs, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_visibility_off_white_24dp_2x.png"  >
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
-                                <Run Text="Hides all group members' buffs from group window. Debuffs will still be showed (only for healers' buffs)."/>
+                                    <Run Text="Hides buffs row. Tracking will still be active and current buffs will be showed if turned back off."/>
                                 </TextBlock>
                             </Grid>
                         </controls:BoolSetting.ToolTip>
@@ -329,77 +387,67 @@
                             <Grid Margin="5">
                                 <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
-                                <Run Text="Hides all buffs and debuffs for every group member. "/>
+                                    <Run Text="Hides debuffs row. Tracking will still be active and current debuffs will be showed if turned back off."/>
                                 </TextBlock>
                             </Grid>
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
-                    <controls:BoolSetting SettingName="Disable all buffs and debuffs" Grid.Row="8" IsOn="{Binding DisableAllPartyAbnormals, Mode=TwoWay}" 
-                                          ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" 
-                                        SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png" >
+                    <controls:BoolSetting SettingName="Disable all buffs and debuffs" Grid.Row="8" IsOn="{Binding DisableAllPartyAbnormals, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png" >
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                                <Border Style="{StaticResource Styles.DefaultBorder}" />
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
-                                <Run Text="Completely disables party members' abnormalities tracking to save performance."/>
-                                <LineBreak /> <LineBreak/>
-                                <Run Text="Warning: " Foreground="DarkOrange"/>
-                                <Run Text="party members' HP bar will not become purple when a player is debuffed." />
-                                <LineBreak /><LineBreak />
-                                <Run Text="Note: " Foreground="#59f"/>
-                                <Run Text="if turned back on while in a party, pre-existing (de)buffs will not be visible until refreshed." />
-                                <LineBreak /><LineBreak />
-                                <Run Text="Note: " Foreground="#59f"/>
-                                <Run Text="warrior will not be moved to tank or dps column when switching between stances." />
+                                    <Run Text="Completely disables party members' abnormalities tracking to save performance."/>
+                                    <LineBreak /> <LineBreak/>
+                                    <Run Text="Warning: " Foreground="DarkOrange"/>
+                                    <Run Text="party members' HP bar will not become purple when a player is debuffed." />
+                                    <LineBreak /><LineBreak />
+                                    <Run Text="Note: " Foreground="#59f"/>
+                                    <Run Text="if turned back on while in a party, pre-existing (de)buffs will not be visible until refreshed." />
+                                    <LineBreak /><LineBreak />
+                                    <Run Text="Note: " Foreground="#59f"/>
+                                    <Run Text="warriors will not be moved to tank or dps column when switching between stances." />
                                 </TextBlock>
-
                             </Grid>
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
-                    <controls:BoolSetting SettingName="Show only aggro debuff in HH" IsOn="{Binding HhOnlyAggro, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" 
-                                          SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png">
+                    <controls:BoolSetting SettingName="Show only aggro debuff in HH" IsOn="{Binding HhOnlyAggro, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
                                 <TextBlock Foreground="LightGray"  Margin="10" TextWrapping="Wrap" MaxWidth="200">
-                                    <Run Text="Hide all buffs and debuffs except aggro stacks during HH phase 2, 3, and 4."/>
-                                    <LineBreak/>
-                                    <Run Text="Requires 'Hide debuffs' and 'Disable all buffs and debuffs' to be disabled." Foreground="DarkOrange"/>
+                                <Run Text="Hide all buffs and debuffs except aggro stacks during HH phase 2, 3, and 4."/>
+                                <LineBreak/>
+                                <Run Text="Requires 'Hide debuffs' and 'Disable all buffs and debuffs' to be disabled." Foreground="DarkOrange"/>
                                 </TextBlock>
                             </Grid>
                         </controls:BoolSetting.ToolTip>
-
                     </controls:BoolSetting>
-                    <controls:BoolSetting SettingName="Disable HP" IsOn="{Binding DisableHP, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png">
+                    <controls:BoolSetting SettingName="Disable HP" IsOn="{Binding DisableHP, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
                                 <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
                                 <TextBlock Foreground="LightGray" Text="Disable party members' HP tracking to save performance. HP bars will be hidden." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
                             </Grid>
                         </controls:BoolSetting.ToolTip>
-
                     </controls:BoolSetting>
                     <controls:BoolSetting SettingName="Disable MP" IsOn="{Binding DisableMP, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
                                 <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
-                                <TextBlock Foreground="LightGray" Text="Disable party members' MP tracking to save performance. MP bars will be hidden." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
+                                <TextBlock Foreground="LightGray" Text="Disable party members' MP tracking to save performance (recommended). MP bars will be hidden." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
                             </Grid>
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
                     <controls:ValueSetting SettingName="Raid threshold" Min="1" Max="30" Grid.Row="4" Value="{Binding GroupSizeThreshold, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png">
                         <controls:ValueSetting.ToolTip>
                             <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
-                                <TextBlock Foreground="LightGray" Text="Set the max group size for using big party members indicators." 
-                                           Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
+                                <Border Style="{StaticResource Styles.DefaultBorder}" />
+                                <TextBlock Foreground="LightGray" Text="Set the max group size for using big party members indicators (1 to always show raid indicators; 30 to always show party indicators)." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
                             </Grid>
                         </controls:ValueSetting.ToolTip>
-
                     </controls:ValueSetting>
-
                 </StackPanel>
-
             </TabItem>
             <TabItem Margin="-1,0,0,0">
                 <TabItem.Header>
@@ -416,23 +464,83 @@
                 </TabItem.Header>
                 <!-- Chat window settings -->
                 <StackPanel Style="{StaticResource settingsGrid}">
-                    <controls:BoolSetting SettingName="Enabled" Grid.Row="0" IsOn="{Binding ChatWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" />
-                    <controls:BoolSetting SettingName="Visibility" Grid.Row="0" IsOn="{Binding ChatWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
-                    <controls:BoolSetting SettingName="Transparency" Grid.Row="1" IsOn="{Binding ChatWindowSettings.AllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
-                    <controls:BoolSetting SettingName="Show always" IsOn="{Binding ChatWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png"/>
-
-                    <Separator Grid.Row="2"></Separator>
-                    <controls:ValueSetting SettingName="Max messages" Min="0" Max="10000" Value="{Binding MaxMessages, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/chat.png"></controls:ValueSetting>
-                    <controls:ValueSetting SettingName="Spam threshold" Min="0" Max="10" Value="{Binding SpamThreshold, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_filter_list_white_24dp_2x.png"></controls:ValueSetting>
-                    <controls:ValueSetting SettingName="Chat background opacity" Min="0" Max="1" Value="{Binding ChatWindowOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"></controls:ValueSetting>
-                    <controls:ValueSetting SettingName="Font size" Value="{Binding FontSize, Mode=TwoWay}" Min="10" Max="50" SettingImage="/TCC;component/resources/images/ic_format_size_white_24dp_2x.png"></controls:ValueSetting>
-                    <controls:BoolSetting SettingName="Show timestamps" IsOn="{Binding ShowTimestamp, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_access_time_white_24dp_2x.png"></controls:BoolSetting>
-                    <controls:BoolSetting SettingName="Show channel label" IsOn="{Binding ShowChannel, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_label_white_24dp_2x.png"></controls:BoolSetting>
-                    <controls:BoolSetting SettingName="Enable LFG bar" IsOn="{Binding LfgOn, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png"></controls:BoolSetting>
+                    <controls:BoolSetting SettingName="Enabled" IsOn="{Binding ChatWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" ToolTip="{StaticResource EnabledSettingTooltip}"/>
+                    <controls:BoolSetting SettingName="Visibility" IsOn="{Binding ChatWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource VisibilitySettingTooltip}"/>
+                    <controls:BoolSetting SettingName="Show always" IsOn="{Binding ChatWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource ShowAlwaysSettingTooltip}"/>
+                    <controls:BoolSetting SettingName="Transparency" Grid.Row="1" IsOn="{Binding ChatWindowSettings.AllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource TransparencySettingTooltip}"/>
+                    <Separator />
+                    <controls:ValueSetting SettingName="Max messages" Min="0" Max="10000" Value="{Binding MaxMessages, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/chat.png" >
+                        <controls:ValueSetting.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Maximum amount of messages to store. When this amount is reached, oldest messages will start to be deleted."/>
+                                </TextBlock>
+                            </Grid>
+                        </controls:ValueSetting.ToolTip>
+                    </controls:ValueSetting>
+                    <controls:ValueSetting SettingName="Spam threshold" Min="0" Max="10" Value="{Binding SpamThreshold, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_filter_list_white_24dp_2x.png">
+                        <controls:ValueSetting.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Amount of most recent messages to compare. If a new message's author and content match one of these, it will be considered as spam and discarded (0 = spam filter off)."/>
+                                </TextBlock>
+                            </Grid>
+                        </controls:ValueSetting.ToolTip>
+                    </controls:ValueSetting>
+                    <controls:ValueSetting SettingName="Chat background opacity" Min="0" Max="1" Value="{Binding ChatWindowOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png">
+                        <controls:ValueSetting.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Sets the opacity of the black panel containing chat."/>
+                                </TextBlock>
+                            </Grid>
+                        </controls:ValueSetting.ToolTip>
+                    </controls:ValueSetting>
+                    <controls:ValueSetting SettingName="Font size" Value="{Binding FontSize, Mode=TwoWay}" Min="10" Max="50" SettingImage="/TCC;component/resources/images/ic_format_size_white_24dp_2x.png">
+                        <controls:ValueSetting.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Sets the font size of the messages (15 = default)."/>
+                                </TextBlock>
+                            </Grid>
+                        </controls:ValueSetting.ToolTip>
+                    </controls:ValueSetting>
+                    <controls:BoolSetting SettingName="Show timestamps" IsOn="{Binding ShowTimestamp, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_access_time_white_24dp_2x.png">
+                        <controls:BoolSetting.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Turns messages' timestamp on/off."/>
+                                </TextBlock>
+                            </Grid>
+                        </controls:BoolSetting.ToolTip>
+                    </controls:BoolSetting>
+                    <controls:BoolSetting SettingName="Show channel label" IsOn="{Binding ShowChannel, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_label_white_24dp_2x.png">
+                        <controls:BoolSetting.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Turns messages' channel label on/off."/>
+                                </TextBlock>
+                            </Grid>
+                        </controls:BoolSetting.ToolTip>
+                    </controls:BoolSetting>
+                    <controls:BoolSetting SettingName="Enable LFG bar" IsOn="{Binding LfgOn, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
+                        <controls:BoolSetting.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Turns LFG bar on/off."/>
+                                </TextBlock>
+                            </Grid>
+                        </controls:BoolSetting.ToolTip>
+                    </controls:BoolSetting>
                 </StackPanel>
-
             </TabItem>
-
             <TabItem Margin="-1,0,0,0">
                 <TabItem.Header>
 
@@ -448,7 +556,7 @@
 
                 </TabItem.Header>
                 <!-- Other settings -->
-                <StackPanel Grid.Row="3" Grid.Column="0" Style="{StaticResource settingsGrid}">
+                <StackPanel Style="{StaticResource settingsGrid}">
                     <controls:FieldSetting SettingImage="/TCC;component/resources/images/ic_insert_link_white_24dp_2x.png" SettingName="Webhook" Value="{Binding Webhook, Mode=TwoWay}"></controls:FieldSetting>
                     <controls:FieldSetting SettingName="Message" Value="{Binding WebhookMessage, Mode=TwoWay}"></controls:FieldSetting>
                     <Button Style="{StaticResource ButtonMainStyle}" Click="SendWebhookTest" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
@@ -482,7 +590,6 @@
             </TabItem>
             <TabItem Margin="-1,0,0,0">
                 <TabItem.Header>
-
                     <!--Title-->
                     <Grid Height="30">
                         <Grid.ColumnDefinitions>
@@ -550,6 +657,37 @@
                                TextAlignment="Left" 
                                Opacity=".9"/>
                         <Image Width="24" Height="24" Margin="16,4,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality" Source="/TCC;component/resources/images/discord.png" ></Image>
+                        <Border Grid.ColumnSpan="2">
+                            <Border.Style>
+                                <Style>
+                                    <Setter Property="Border.Background" Value="Transparent"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="Border.IsMouseOver" Value="True">
+                                            <Setter Property="Border.Background" Value="#1fff"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                    </Grid>
+                    <!--Paypal-->
+                    <Grid Height="35" MouseDown="PaypalLink_MouseDown" Cursor="Hand" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid Width="22" Height="22" Margin="17,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" >
+
+                        </Grid>
+                        <TextBlock Style="{StaticResource Styles.DefaultText}" 
+                                   Grid.Column="1" 
+                                   Margin="10,0,14,0" 
+                                   Text="Donate" 
+                                   VerticalAlignment="Center" 
+                                   Padding="0" 
+                                   TextAlignment="Left" 
+                                   Opacity=".9"/>
+                        <Path Width="22" Height="22" Margin="16,4,0,4" Stretch="Uniform" Fill="White" HorizontalAlignment="Center" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality" Data="{StaticResource SVG.Paypal}" ></Path>
                         <Border Grid.ColumnSpan="2">
                             <Border.Style>
                                 <Style>
