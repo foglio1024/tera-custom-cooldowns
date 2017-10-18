@@ -34,8 +34,8 @@
                    Opacity=".9"/>
         <ComboBox Grid.Column="2" ItemsSource="{Binding Choices, RelativeSource={RelativeSource AncestorType=local:SelectionSetting}}" 
                   SelectionChanged="Selector_OnSelectionChanged" Foreground="White"  VerticalAlignment="Stretch" BorderThickness="0"
-                  Background="#1fff" VerticalContentAlignment="Center" Margin="0,0,15,0" DropDownOpened="ComboBox_OnDropDownOpened"
-                  Name="Cbox" HorizontalAlignment="Stretch">
+                  VerticalContentAlignment="Center" Margin="0,0,15,0" DropDownOpened="ComboBox_OnDropDownOpened" 
+                  Name="Cbox" HorizontalAlignment="Stretch" >
         </ComboBox>
     </Grid>
 
