@@ -82,8 +82,8 @@ namespace TCC.Parsing.Messages
             //bonusResistStun = reader.ReadSingle();132
             reader.Skip(132);
 
-            level = reader.ReadInt32();
-
+            level = reader.ReadInt16();
+            reader.Skip(2);
             //vitality = reader.ReadInt16();
             reader.Skip(2);
 
