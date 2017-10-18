@@ -879,12 +879,13 @@ namespace TCC.Parsing
 
         public static void HandleInventory(S_INVEN x)
         {
-            if (BuffBarWindowViewModel.Instance.Player.InfBuffs.Any(b => AbnormalityDatabase.NoctIds.Contains(b.Abnormality.Id))) return;
-            if (BuffBarWindowViewModel.Instance.Player.Buffs.Any(b => AbnormalityDatabase.BlueNoctIds.Contains(b.Abnormality.Id))) return;
+            if(!x.IsOpen) return;
+            //if (BuffBarWindowViewModel.Instance.Player.InfBuffs.Any(b => AbnormalityDatabase.NoctIds.Contains(b.Abnormality.Id))) return;
+            //if (BuffBarWindowViewModel.Instance.Player.Buffs.Any(b => AbnormalityDatabase.BlueNoctIds.Contains(b.Abnormality.Id))) return;
 
             if (x.First && x.More) return;
+            if(S_INVEN.Items == null) return;
             InfoWindowViewModel.Instance.CurrentCharacter.ClearGear();
-
             foreach (Tuple<uint, int, uint> tuple in S_INVEN.Items)
             {
                 if (InventoryManager.TryParseGear(tuple.Item1, out Tuple<GearTier, GearPiece> parsedPiece))
@@ -895,6 +896,7 @@ namespace TCC.Parsing
                 }
             }
             InfoWindowViewModel.Instance.SelectCharacter(InfoWindowViewModel.Instance.SelectedCharacter);
+            GroupWindowViewModel.Instance.UpdateMyGear();
             //88273 - 88285 L weapons
             //88286 - 88298 L armors
             //88299 - 88301 L gloves
