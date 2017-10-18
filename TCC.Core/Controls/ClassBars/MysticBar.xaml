@@ -26,34 +26,22 @@
             <Border Style="{StaticResource Styles.DefaultBorder}"
                     Grid.Row="0"
                     Grid.Column="0"
-                    Grid.ColumnSpan="3"
-                    Grid.RowSpan="3"
                     CornerRadius="25"
-                    Margin="-3"
+                    Margin="-3,1"
                     VerticalAlignment="Stretch"/>
 
-            <local:MysticAurasIndicator Grid.Row="0" VerticalAlignment="Center" UseLayoutRounding="True"
-                                        HorizontalAlignment="Stretch" Padding="0,0"
-                                        Margin="0,0,0,0" DataContext="{Binding Auras}" />
-            <!--HP/MP-->
-            <!--<UniformGrid Columns="1" 
-                         HorizontalAlignment="Stretch" 
-                         VerticalAlignment="Center"
-                         Margin="5,5,5,5"
-                         Grid.RowSpan="2"
-                         Grid.Column="2"
-                         Grid.Row="0"
-                         >
-                <local:StatControl DataContext="{Binding HP}" Color="{StaticResource Colors.App.HP}" StatusColor="{StaticResource Colors.App.MP}" Width="85" Margin="0,0,0,2"/>
-                <local:StatControl DataContext="{Binding MP}" Color="{StaticResource Colors.App.MP}" Width="85" Margin="0,0,0,0"/>
-            </UniformGrid>-->
             <Grid Margin="0" ClipToBounds="False" Background="Transparent">
-<Grid.ColumnDefinitions>
+                <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
-    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <local:FixedSkillControl Padding="25" DataContext="{Binding Contagion}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-25,-25,-15,-25"></local:FixedSkillControl>
-                <local:FixedSkillControl Padding="25"  Grid.Column="1" DataContext="{Binding Vow}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-15,-25,-25,-25"></local:FixedSkillControl>
+                <local:FixedSkillControl Padding="20" DataContext="{Binding Contagion}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-20,-20,-16,-20"></local:FixedSkillControl>
+                <local:BuffCooldownControl Padding="20"  Grid.Column="2" DataContext="{Binding Vow}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-20,-20,-24,-20"></local:BuffCooldownControl>
+
+                <local:MysticAurasIndicator Grid.Column="1" VerticalAlignment="Center" UseLayoutRounding="True"
+                                            HorizontalAlignment="Stretch" Padding="0,0"
+                                            Margin="3,0" DataContext="{Binding Auras}" />
             </Grid>
 
         </Grid>
