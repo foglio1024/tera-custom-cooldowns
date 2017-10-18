@@ -26,7 +26,7 @@
     </w:TccWindow.DataContext>
     <Grid>
         <ContentControl Margin="0" x:Name="controlContainer" DataContext="{Binding Instance}" Content="{Binding}"
-                                        ContentTemplate="{Binding Instance.IsClassWindowOn, Converter={StaticResource Converters.BoolToCooldowWindowTemplate}}"
+                                        ContentTemplate="{Binding Instance.Mode, Converter={StaticResource Converters.CooldowWindowModeToTemplate}}"
         >
         </ContentControl>
         <Grid.LayoutTransform>

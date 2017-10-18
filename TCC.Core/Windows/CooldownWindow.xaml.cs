@@ -26,7 +26,7 @@ namespace TCC
         {
             Dispatcher.InvokeIfRequired(() =>
             {
-                if (SettingsManager.ClassWindowOn)
+                if (SettingsManager.CooldownBarMode == CooldownBarMode.Fixed)
                 {
                     controlContainer.Content = new FixedSkillContainers();
                 }

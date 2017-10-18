@@ -292,7 +292,7 @@ namespace TCC.ViewModels
 
         public void AddOrRefreshSkill(SkillCooldown sk)
         {
-            if (SettingsManager.ClassWindowOn)
+            if (SettingsManager.CooldownBarMode == CooldownBarMode.Fixed)
             {
                 FixedCd_AddOrRefreshSkill(sk);
             }
@@ -303,7 +303,7 @@ namespace TCC.ViewModels
         }
         public void RefreshSkill(Skill skill, uint cd)
         {
-            if (SettingsManager.ClassWindowOn)
+            if (SettingsManager.CooldownBarMode == CooldownBarMode.Fixed)
             {
                 FixedCd_RefreshSkill(skill, cd);
             }
@@ -314,7 +314,7 @@ namespace TCC.ViewModels
         }
         public void RemoveSkill(Skill sk)
         {
-            if (SettingsManager.ClassWindowOn)
+            if (SettingsManager.CooldownBarMode == CooldownBarMode.Fixed)
             {
                 FixedCd_RemoveSkill(sk);
             }
@@ -354,11 +354,17 @@ namespace TCC.ViewModels
             }
         }
 
-        public bool IsClassWindowOn
+        public CooldownBarMode Mode => SettingsManager.CooldownBarMode;
+
+        public void NotifyModeChanged()
         {
-            get => SettingsManager.ClassWindowOn;
-            set => NotifyPropertyChanged(nameof(IsClassWindowOn));
+            NotifyPropertyChanged(nameof(Mode));
         }
+        //public bool IsClassWindowOn
+        //{
+        //    get => SettingsManager.CooldownBarMode;
+        //    set => NotifyPropertyChanged(nameof(IsClassWindowOn));
+        //}
         public CooldownWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
