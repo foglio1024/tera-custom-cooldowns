@@ -352,7 +352,7 @@
     <Compile Include="Controls\SmallMobControl.xaml.cs">
       <DependentUpon>SmallMobControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\BoolToCooldownWindowTemplateConverter.cs" />
+    <Compile Include="Converters\CooldownWindowModeToTemplateConverter.cs" />
     <Compile Include="Converters\BoolToVisibleCollapsedConverter.cs" />
     <Compile Include="Converters\BoolToVisibleHidden.cs" />
     <Compile Include="Converters\ContractedToColWidthConverter.cs" />
@@ -383,6 +383,7 @@
     <Compile Include="Data\Databases\QuestDatabase.cs" />
     <Compile Include="Data\Dungeon.cs" />
     <Compile Include="Data\EnragePattern.cs" />
+    <Compile Include="Data\EnumVM.cs" />
     <Compile Include="Data\Friend.cs" />
     <Compile Include="Data\GearItem.cs" />
     <Compile Include="Data\Guard.cs" />
