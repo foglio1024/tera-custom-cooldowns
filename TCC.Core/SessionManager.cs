@@ -11,7 +11,7 @@ namespace TCC
     public static class SessionManager
     {
         public static readonly int MAX_WEEKLY = 16;
-        public static readonly int MAX_DAILY = 8;
+        public static readonly int MAX_DAILY = 16;
         private static bool logged = false || !App.Debug;
         public static bool Logged
         {
