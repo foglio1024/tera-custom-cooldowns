@@ -26,7 +26,7 @@ namespace TCC
         private static bool skillsEnded = true;
         private static int focusCount;
         private static bool waiting;
-        private static Timer _undimTimer;
+        private static Timer _undimTimer = new Timer(5000);
         private static List<Delegate> WindowLoadingDelegates = new List<Delegate>
         {
             new Action(LoadGroupWindow),
@@ -55,22 +55,22 @@ namespace TCC
         public static Icon DefaultIcon;
         public static Icon ConnectedIcon;
 
-        public static event PropertyChangedEventHandler ClickThruChanged;
+        //public static event PropertyChangedEventHandler ClickThruChanged;
         public static event PropertyChangedEventHandler TccVisibilityChanged;
         public static event PropertyChangedEventHandler TccDimChanged;
 
-        public static bool ClickThru
-        {
-            get => clickThru;
-            set
-            {
-                if (clickThru != value)
-                {
-                    clickThru = value;
-                    ClickThruChanged?.Invoke(null, new PropertyChangedEventArgs("ClickThru"));
-                }
-            }
-        }
+        //public static bool ClickThru
+        //{
+        //    get => clickThru;
+        //    set
+        //    {
+        //        if (clickThru != value)
+        //        {
+        //            clickThru = value;
+        //            ClickThruChanged?.Invoke(null, new PropertyChangedEventArgs("ClickThruMode"));
+        //        }
+        //    }
+        //}
         public static bool IsTccVisible
         {
             get
@@ -101,14 +101,14 @@ namespace TCC
             set
             {
                 if (!FocusManager.Running) return;
-                if (isFocused == value)
-                {
-                    //if(focusCount > 3)
-                    //{
-                    //    return;
-                    //}
-                    return;
-                }
+                //if (isFocused == value)
+                //{
+                //    //if(focusCount > 3)
+                //    //{
+                //    //    return;
+                //    //}
+                //    return;
+                //}
                 isFocused = value;
                 //if (isFocused)
                 //{
@@ -163,13 +163,12 @@ namespace TCC
             CloseButton.Click += (s, ev) => App.CloseApp();
             ContextMenu.Items.Add(CloseButton);
 
-            _undimTimer = new System.Timers.Timer(5000);
             _undimTimer.Elapsed += _undimTimer_Elapsed;
 
             FocusManager.FocusTimer = new System.Timers.Timer(1000);
             FocusManager.FocusTimer.Elapsed += FocusManager.CheckForegroundWindow;
 
-            ClickThruChanged += (s, ev) => UpdateClickThru();
+            //ClickThruChanged += (s, ev) => UpdateClickThru();
 
         }
         public static void NotifyDimChanged()
@@ -375,35 +374,35 @@ namespace TCC
             }
             Settings.ShowWindow();
         }
-        private static void SetClickThru()
-        {
-            foreach (Window w in Application.Current.Windows)
-            {
-                if (w.GetType() == typeof(SettingsWindow)) continue;
-                FocusManager.MakeTransparent(new WindowInteropHelper(w).Handle);
-            }
-        }
-        private static void UnsetClickThru()
-        {
-            foreach (Window w in Application.Current.Windows)
-            {
-                if (w.GetType() == typeof(SettingsWindow)) continue;
-                FocusManager.UndoTransparent(new WindowInteropHelper(w).Handle);
-            }
+        //private static void SetClickThru()
+        //{
+        //    foreach (Window w in Application.Current.Windows)
+        //    {
+        //        if (w.GetType() == typeof(SettingsWindow)) continue;
+        //        FocusManager.MakeTransparent(new WindowInteropHelper(w).Handle);
+        //    }
+        //}
+        //private static void UnsetClickThru()
+        //{
+        //    foreach (Window w in Application.Current.Windows)
+        //    {
+        //        if (w.GetType() == typeof(SettingsWindow)) continue;
+        //        FocusManager.UndoTransparent(new WindowInteropHelper(w).Handle);
+        //    }
 
-        }
-        private static void UpdateClickThru()
-        {
-            if (ClickThru)
-            {
-                SetClickThru();
-            }
-            else
-            {
-                UnsetClickThru();
-            }
+        //}
+        //private static void UpdateClickThru()
+        //{
+        //    if (ClickThru)
+        //    {
+        //        SetClickThru();
+        //    }
+        //    else
+        //    {
+        //        UnsetClickThru();
+        //    }
 
-        }
+        //}
         private static void NI_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
