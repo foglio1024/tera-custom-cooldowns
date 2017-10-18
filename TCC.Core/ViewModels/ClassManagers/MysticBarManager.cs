@@ -17,8 +17,18 @@ namespace TCC.ViewModels
             _instance = this;
             CurrentClassManager = this;
             Auras = new AurasTracker();
+            Vow.PropertyChanged += Vow_PropertyChanged;
             LoadSpecialSkills();
         }
+
+        private void Vow_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Vow.IsAvailable))
+            {
+                Vow.FlashOnAvailable = Vow.IsAvailable;
+            }
+        }
+
         protected override void LoadSpecialSkills()
         {
             SkillsDatabase.TryGetSkill(410100, Class.Elementalist, out Skill cont);
