@@ -207,4 +207,10 @@
         WhenDim = 2,
         WhenUndim = 3
     }
+
+    public enum CooldownBarMode
+    {
+        Normal = 0,
+        Fixed = 1
+    }
 }
