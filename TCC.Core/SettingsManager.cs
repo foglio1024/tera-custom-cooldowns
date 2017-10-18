@@ -30,7 +30,8 @@ namespace TCC
         public static bool IgnoreGroupDebuffs { get; set; }
         public static bool IgnoreRaidAbnormalitiesInGroupWindow { get; set; }
         public static FlowDirection BuffsDirection { get; set; } = FlowDirection.RightToLeft;
-        public static bool ClassWindowOn { get; set; } = false;
+        //public static bool ClassWindowOn { get; set; } = false;
+        public static CooldownBarMode CooldownBarMode { get; set; } = CooldownBarMode.Fixed;
         public static bool ClickThruWhenDim { get; set; } = true;
         public static bool ClickThruInCombat { get; set; } = false;
         public static int MaxMessages { get; set; } = 500;
@@ -141,7 +142,8 @@ namespace TCC
                 catch { }
                 try
                 {
-                    ClassWindowOn = Boolean.Parse(b.Attribute("ClassWindowOn").Value);
+                    //ClassWindowOn = Boolean.Parse(b.Attribute("ClassWindowOn").Value);
+                    CooldownBarMode = (TCC.CooldownBarMode) Enum.Parse(typeof(CooldownBarMode), b.Attribute(nameof(TCC.CooldownBarMode)).Value);
                 }
                 catch { }
                 try
@@ -335,7 +337,7 @@ namespace TCC
                 new XAttribute(nameof(IgnoreGroupDebuffs), IgnoreGroupDebuffs),
                 new XAttribute(nameof(IgnoreRaidAbnormalitiesInGroupWindow), IgnoreRaidAbnormalitiesInGroupWindow),
                 new XAttribute(nameof(BuffsDirection), BuffsDirection),
-                new XAttribute(nameof(ClassWindowOn), ClassWindowOn),
+                new XAttribute(nameof(CooldownBarMode), CooldownBarMode),
                 new XAttribute(nameof(ClickThruWhenDim), ClickThruWhenDim),
                 new XAttribute(nameof(ClickThruInCombat), ClickThruInCombat),
                 new XAttribute(nameof(MaxMessages), MaxMessages),
