@@ -67,13 +67,10 @@
         </local:Arc>
 
         <local:Arc Width="60" Height="60" Stroke="White" StrokeThickness="30" StartAngle="-159" EndAngle="160" Effect="{StaticResource FadedDropShadow}" >
-            <local:Arc.CacheMode>
-                <BitmapCache RenderAtScale="2"></BitmapCache>
-            </local:Arc.CacheMode>
         </local:Arc>
 
         <Grid RenderTransformOrigin=".5,.5">
-            <local:Arc Width="60" Height="60" StrokeThickness="20" x:Name="MainArc"
+            <local:Arc Width="60" Height="60" StrokeThickness="20" x:Name="MainArc" Margin="-1,0,0,0"
                        Stroke="{Binding Tier, Converter={StaticResource Converters.GearLevelToColor}}"
                        EndAngle="0"
             >
@@ -81,9 +78,9 @@
             </local:Arc>
             <!--EndAngle="{Binding LevelFactor, Converter={StaticResource Converters.FactorToAngle}}"-->
 
-            <local:Arc StrokeThickness="30" Stroke="#2000" StartAngle="58" EndAngle="60" Width="60" Height="60"></local:Arc>
-            <local:Arc StrokeThickness="30" Stroke="#2000" StartAngle="146" EndAngle="148" Width="60" Height="60"></local:Arc>
-            <local:Arc StrokeThickness="30" Stroke="#2000" StartAngle="234" EndAngle="236" Width="60" Height="60"></local:Arc>
+            <local:Arc StrokeThickness="30" Stroke="#2000" StartAngle="58" EndAngle="60" Width="58" Height="58"></local:Arc>
+            <local:Arc StrokeThickness="30" Stroke="#2000" StartAngle="146" EndAngle="148" Width="58" Height="58"></local:Arc>
+            <local:Arc StrokeThickness="30" Stroke="#2000" StartAngle="234" EndAngle="236" Width="58" Height="58"></local:Arc>
 
             <Grid.RenderTransform>
                 <RotateTransform Angle="198.5"></RotateTransform>
