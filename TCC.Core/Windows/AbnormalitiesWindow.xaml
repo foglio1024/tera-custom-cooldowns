@@ -43,7 +43,7 @@
         <ItemsControl Name="infBuffs" ItemTemplate="{StaticResource abTemplate}" >
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" FlowDirection="{Binding Direction}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" FlowDirection="{Binding Instance.Direction}"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemContainerStyle>
@@ -56,7 +56,7 @@
         <ItemsControl Name="buffs" ItemTemplate="{StaticResource abTemplate}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" FlowDirection="{Binding Direction}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" FlowDirection="{Binding Instance.Direction}"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemContainerStyle>
@@ -69,7 +69,7 @@
         <ItemsControl Name="debuffs" ItemTemplate="{StaticResource abTemplate}" Background="#00000000">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" FlowDirection="{Binding Direction}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" FlowDirection="{Binding Instance.Direction}"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemContainerStyle>
