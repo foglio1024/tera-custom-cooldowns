@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Media;
 using TCC.Data.Databases;
 using TCC.ViewModels;
 
@@ -294,7 +295,8 @@ namespace TCC.Data
                             else if (inPiece.StartsWith("@AchievementGradeInfo"))
                             {
                                 var mp = ParseSysMsgAchiGrade(BuildParametersDictionary(inPiece));
-                                mp.SetColor(customColor);
+                                
+                                //mp.SetColor(customColor);
                                 AddPiece(mp);
                             }
                             else if (inPiece.StartsWith("@quest"))
@@ -802,11 +804,16 @@ namespace TCC.Data
         {
             var id = GetId(info, "AchievementGradeInfo");
             var txt = id.ToString();
+            var col = "fcb06f";
+
             if (AchievementGradeDatabase.Grades.TryGetValue(id, out string g))
             {
                 txt = g;
+                if(id == 104) col = "38bde5";
+                if (id == 105) col = "ff264b";
+
             }
-            return new MessagePiece(txt, MessagePieceType.Simple, Channel, SettingsManager.FontSize, false);
+            return new MessagePiece(txt, MessagePieceType.Simple, Channel, SettingsManager.FontSize, false, col);
         }
         protected MessagePiece ParseSysMsgDungeon(Dictionary<string, string> info)
         {

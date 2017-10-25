@@ -78,7 +78,22 @@ namespace TCC.Parsing
 
             { "SMT_PARTY_LOOT_ITEM_PARTYPLAYER", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleGroupMemberLoot(srvMsg, sysMsg)) },
 
+            { "SMT_ACCOMPLISH_ACHIEVEMENT_GRADE_ALL", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleLaurelMessage(srvMsg, sysMsg)) },
+            { "SMT_ACCOMPLISH_ACHIEVEMENT_GRADE_GUILD", new Action<string, SystemMessage>((srvMsg, sysMsg) => DoNothing(srvMsg, sysMsg)) },
+            { "SMT_ACCOMPLISH_ACHIEVEMENT_GRADE_PARTY", new Action<string, SystemMessage>((srvMsg, sysMsg) => DoNothing(srvMsg, sysMsg)) },
+
         };
+
+        private static void DoNothing(string srvMsg, SystemMessage sysMsg)
+        {
+            
+        }
+
+        private static void HandleLaurelMessage(string srvMsg, SystemMessage sysMsg)
+        {
+            var msg = new ChatMessage(srvMsg, sysMsg, ChatChannel.Laurel);
+            ChatWindowViewModel.Instance.AddChatMessage(msg);
+        }
 
         private static void HandleGroupMemberLoot(string srvMsg, SystemMessage sysMsg)
         {
@@ -89,7 +104,7 @@ namespace TCC.Parsing
         {
             TimeManager.Instance.UploadGuildBamTimestamp();
             TimeManager.Instance.SetGuildBamTime(true);
-            TimeManager.Instance.SendWebhookMessage();
+            TimeManager.Instance.SendWebhookMessageOld();
             var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
             ChatWindowViewModel.Instance.AddChatMessage(msg);
         }
