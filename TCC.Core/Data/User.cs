@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Windows;
 using System.Windows.Threading;
 using TCC.ClassSpecific;
@@ -184,8 +185,9 @@ namespace TCC.Data
             }
         }
 
-        public double HpFactor => MaxHP > 0 ? CurrentHP / (double)MaxHP : 1;
-        public double MpFactor => MaxMP > 0 ? CurrentMP / (double)MaxMP : 1;
+        public double HpFactor => Utils.FactorCalc(CurrentHP, MaxHP);
+        public double MpFactor => Utils.FactorCalc(CurrentMP, MaxMP);
+
 
         //private double hpFactor;
         //public double HpFactor
@@ -326,7 +328,6 @@ namespace TCC.Data
                 NotifyPropertyChanged(nameof(Weapon));
             }
         }
-
         public GearItem Armor
         {
             get => armor;
@@ -337,26 +338,27 @@ namespace TCC.Data
                 NotifyPropertyChanged(nameof(Armor));
             }
         }
-
         public GearItem Gloves
         {
             get => gloves;
             set
             {
-                if(gloves == value)return;
+                if (gloves == value) return;
                 gloves = value;
                 NotifyPropertyChanged(nameof(Gloves));
             }
         }
-
-        public GearItem Boots { get => boots;
+        public GearItem Boots
+        {
+            get => boots;
             set
             {
-                if(boots == value)return;
+                if (boots == value) return;
                 boots = value;
                 NotifyPropertyChanged(nameof(Boots));
             }
         }
+
         public bool IsPlayer => Name == SessionManager.CurrentPlayer.Name;
 
         private List<uint> _debuffList = new List<uint>();
@@ -375,6 +377,17 @@ namespace TCC.Data
         }
         private bool _hasAggro = false;
 
+        private string _location;
+        public string Location
+        {
+            get => _location;
+            set
+            {
+                if (_location == value) return;
+                _location = value;
+                NotifyPropertyChanged(nameof(Location));
+            }
+        }
 
         private SynchronizedObservableCollection<AbnormalityDuration> _buffs;
         public SynchronizedObservableCollection<AbnormalityDuration> Buffs
@@ -414,7 +427,7 @@ namespace TCC.Data
             {
 
                 var newAb = new AbnormalityDuration(ab, duration, stacks, this.EntityId, _dispatcher, false/*, size * .9, size, new Thickness(margin, 1, 1, 1)*/);
-                if(ab.Infinity) Buffs.Insert(0, newAb); else Buffs.Add(newAb);
+                if (ab.Infinity) Buffs.Insert(0, newAb); else Buffs.Add(newAb);
                 return;
             }
             existing.Duration = duration;
