@@ -182,7 +182,7 @@ namespace TCC
             }
         }
 
-        public void SendWebhookMessage()
+        public void SendWebhookMessageOld()
         {
             if (!String.IsNullOrEmpty(SettingsManager.Webhook))
             {
@@ -210,9 +210,45 @@ namespace TCC
                 }
                 catch (Exception)
                 {
-                    ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Failed to send guild bam message to Discord.</FONT>"));
+                    ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Failed to execute Discord webhook.</FONT>"));
                 }
             }
         }
+        public void SendWebhookMessage(string bamName)
+        {
+            if (!String.IsNullOrEmpty(SettingsManager.Webhook))
+            {
+                var msg = SettingsManager.WebhookMessage.IndexOf("{npc_name}", StringComparison.Ordinal) > -1
+                    ? SettingsManager.WebhookMessage.Replace("{npc_name}", bamName)
+                    : SettingsManager.WebhookMessage;
+                var sb = new StringBuilder("{");
+                sb.Append("\""); sb.Append("content"); sb.Append("\"");
+                sb.Append(":");
+                sb.Append("\""); sb.Append(msg); sb.Append("\"");
+                sb.Append(",");
+                sb.Append("\""); sb.Append("username"); sb.Append("\"");
+                sb.Append(":");
+                sb.Append("\""); sb.Append("TCC"); sb.Append("\"");
+                sb.Append(",");
+                sb.Append("\""); sb.Append("avatar_url"); sb.Append("\"");
+                sb.Append(":");
+                sb.Append("\""); sb.Append("http://i.imgur.com/8IltuVz.png"); sb.Append("\"");
+                sb.Append("}");
+
+                try
+                {
+                    using (WebClient client = new WebClient())
+                    {
+                        client.Headers.Add("Content-Type", "application/json");
+                        var resp = client.UploadString(SettingsManager.Webhook, "POST", sb.ToString());
+                    }
+                }
+                catch (Exception)
+                {
+                    ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Failed to execute Discord webhook.</FONT>"));
+                }
+            }
+        }
+
     }
 }
