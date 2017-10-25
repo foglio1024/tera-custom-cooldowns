@@ -134,8 +134,8 @@ namespace TCC
             {
                 user.AddOrRefreshBuff(new Abnormality(4611, true, true, false, AbnormalityType.Buff),60*100*60,1);
                 user.AddOrRefreshBuff(new Abnormality(46126, true, true, false, AbnormalityType.Buff),60*100*60,1);
-                user.AddOrRefreshDebuff(new Abnormality(89308100, true, false, false, AbnormalityType.DamageOverTime),60*100*60,5);
-                user.AddOrRefreshDebuff(new Abnormality(89308101, true, false, false, AbnormalityType.DamageOverTime),60*100*60,5);
+                user.AddOrRefreshDebuff(new Abnormality(89308100, true, false, false, AbnormalityType.DOT),60*100*60,5);
+                user.AddOrRefreshDebuff(new Abnormality(89308101, true, false, false, AbnormalityType.DOT),60*100*60,5);
 
             }
             //GroupWindowViewModel.Instance.StartRoll();
