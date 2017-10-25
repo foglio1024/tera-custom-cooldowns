@@ -64,14 +64,14 @@ namespace TCC.ViewModels
                 var ev = new XElement("Event",
                     new XAttribute("name", "Example Event"),
                     new XAttribute("days", "*"),
-                    new XAttribute("start", 12),
-                    new XAttribute("end", 15),
+                    new XAttribute("start", "12:00"),
+                    new XAttribute("end", "15:00"),
                     new XAttribute("color", "ff5566"));
                 var ev2 = new XElement("Event",
                         new XAttribute("name", "Example event 2"),
                         new XAttribute("days", "*"),
-                        new XAttribute("start", 16),
-                        new XAttribute("duration", 3),
+                        new XAttribute("start", "16:00"),
+                        new XAttribute("duration", "3:00"),
                         new XAttribute("color", "ff5566"));
                 eg.Add(ev);
                 eg.Add(ev2);
