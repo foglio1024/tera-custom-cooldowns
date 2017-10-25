@@ -88,6 +88,9 @@ namespace TCC.Parsing
             {"S_GUILD_TOWER_INFO", Contructor<Func<TeraMessageReader, S_GUILD_TOWER_INFO>>() },
             {"S_INVEN", Contructor<Func<TeraMessageReader, S_INVEN>>() },
             {"S_SPAWN_USER", Contructor<Func<TeraMessageReader, S_SPAWN_USER>>() },
+            {"S_PARTY_MEMBER_INTERVAL_POS_UPDATE", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_INTERVAL_POS_UPDATE>>() },
+            {"S_ABNORMALITY_DAMAGE_ABSORB", Contructor<Func<TeraMessageReader, S_ABNORMALITY_DAMAGE_ABSORB>>() },
+            //{"S_EACH_SKILL_RESULT", Contructor<Func<TeraMessageReader, S_EACH_SKILL_RESULT>>() },
 
         };
 
@@ -114,6 +117,9 @@ namespace TCC.Parsing
             {typeof(S_SYSTEM_MESSAGE), new Action<S_SYSTEM_MESSAGE>(x => PacketProcessor.HandleSystemMessage(x)) },
             {typeof(S_INVEN), new Action<S_INVEN>(x => PacketProcessor.HandleInventory(x)) },
             {typeof(S_SPAWN_USER), new Action<S_SPAWN_USER>(x => PacketProcessor.HandleSpawnUser(x)) },
+            {typeof(S_PARTY_MEMBER_INTERVAL_POS_UPDATE), new Action<S_PARTY_MEMBER_INTERVAL_POS_UPDATE>(x => PacketProcessor.HandlePartyMemberIntervalPosUpdate(x)) },
+            {typeof(S_ABNORMALITY_DAMAGE_ABSORB), new Action<S_ABNORMALITY_DAMAGE_ABSORB>(x => PacketProcessor.HandleShieldDamageAbsorb(x)) },
+            //{typeof(S_EACH_SKILL_RESULT), new Action<S_EACH_SKILL_RESULT>(x => PacketProcessor.HandleSkillResult(x)) },
 
             //{typeof(C_LOAD_TOPO_FIN), new Action<C_LOAD_TOPO_FIN>(x => PacketProcessor.HandleLoadTopoFin(x)) },
 
