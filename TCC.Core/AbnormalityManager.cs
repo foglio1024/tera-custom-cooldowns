@@ -70,6 +70,7 @@ namespace TCC
                 else
                 {
                     BuffBarWindowViewModel.Instance.Player.AddOrRefreshBuff(ab, duration, stacks, PlayerAbSize, PlayerAbLeftMargin);
+                    if(ab.IsShield) SessionManager.SetPlayerMaxShield(ab.ShieldSize);
                 }
             }
             else
@@ -104,6 +105,9 @@ namespace TCC
                 {
 
                     BuffBarWindowViewModel.Instance.Player.RemoveBuff(ab);
+                    if (ab.IsShield) SessionManager.SetPlayerShield(0);
+                    if (ab.IsShield) SessionManager.SetPlayerMaxShield(0);
+
                 }
             }
             else
