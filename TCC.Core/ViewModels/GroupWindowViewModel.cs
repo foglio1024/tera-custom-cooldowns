@@ -934,5 +934,12 @@ namespace TCC.ViewModels
             u.Boots = InfoWindowViewModel.Instance.CurrentCharacter.Gear.FirstOrDefault(x => x.Piece == GearPiece.Feet);
 
         }
+
+        public void UpdateMemberLocation(S_PARTY_MEMBER_INTERVAL_POS_UPDATE p)
+        {
+            if (!GetUser(p.PlayerId, p.ServerId, out var u)) return;
+            string ch = p.Channel > 1000 ? "" : " ch." + p.Channel;
+            u.Location = MapDatabase.TryGetGuardOrDungeonNameFromContinentId(p.ContinentId, out var l) ? l + ch : "Unknown";
+        }
     }
 }

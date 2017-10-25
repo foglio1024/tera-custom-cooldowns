@@ -39,5 +39,9 @@ namespace TCC.Data.Databases
             }
         }
 
+        public string GetDungeonNameOrOpenWorld(uint continentId)
+        {
+            return DungeonNames.ContainsKey(continentId) ? DungeonNames[continentId] : "Open world";
+        }
     }
 }

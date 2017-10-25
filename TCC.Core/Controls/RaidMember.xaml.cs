@@ -116,6 +116,15 @@ namespace TCC.Controls
                 hpGrid.Visibility = !SettingsManager.DisablePartyHP ? Visibility.Visible : Visibility.Collapsed;
             });
         }
+        private void ToolTip_OnOpened(object sender, RoutedEventArgs e)
+        {
+            FocusManager.Running = false;
+        }
+
+        private void ToolTip_OnClosed(object sender, RoutedEventArgs e)
+        {
+            FocusManager.Running = true;
+        }
 
     }
 }

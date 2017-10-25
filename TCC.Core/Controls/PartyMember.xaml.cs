@@ -115,5 +115,15 @@ namespace TCC.Controls
             var dc = (User)DataContext;
             ProxyInterop.SendAskInteractiveMessage(dc.ServerId, dc.Name);
         }
+
+        private void ToolTip_OnOpened(object sender, RoutedEventArgs e)
+        {
+            FocusManager.Running = false;
+        }
+
+        private void ToolTip_OnClosed(object sender, RoutedEventArgs e)
+        {
+            FocusManager.Running = true;
+        }
     }
 }
