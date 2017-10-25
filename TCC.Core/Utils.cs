@@ -165,7 +165,13 @@ namespace TCC
                                 Convert.ToByte(col.Substring(2, 2), 16),
                                 Convert.ToByte(col.Substring(4, 2), 16));
         }
-
+        public static double FactorCalc(double val, double max)
+        {
+            return  max > 0 ? 
+                    val / max > 1 ?
+                        1 : val / max 
+                    : 1;
+        }
         public static DateTime FromUnixTime(long unixTime)
         {
             DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
@@ -175,7 +181,7 @@ namespace TCC
 
     public static class EventUtils
     {
-        public static bool EndsToday(int start, int ed, bool d)
+        public static bool EndsToday(double start, double ed, bool d)
         {
             return d ? start + ed <= 24 : start <= ed;
         }
