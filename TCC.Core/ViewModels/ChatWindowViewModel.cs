@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows.Data;
 using System.Windows.Threading;
 using TCC.Data;
@@ -15,7 +16,7 @@ namespace TCC.ViewModels
     {
         private DispatcherTimer hideTimer;
         private static ChatWindowViewModel _instance;
-        
+
         private bool isChatVisible;
         private SynchronizedObservableCollection<ChatMessage> _chatMessages;
         private ConcurrentQueue<ChatMessage> _queue;
@@ -124,7 +125,7 @@ namespace TCC.ViewModels
                     WindowManager.ChatWindow.RefreshTopmost();
                 }
             };
-            
+
             ChatMessages.CollectionChanged += ChatMessages_CollectionChanged;
             BindingOperations.EnableCollectionSynchronization(ChatMessages, _lock);
 
@@ -182,10 +183,7 @@ namespace TCC.ViewModels
                 for (int i = 0; i < ChatMessages.Count - 1; i++)
                 {
                     var m = ChatMessages[i];
-                    if (m.RawMessage == chatMessage.RawMessage &&
-                        m.Channel == chatMessage.Channel &&
-                        m.Author == chatMessage.Author
-                        ) return;
+                    if (!Pass(chatMessage, m)) return;
                 }
             }
             else
@@ -196,12 +194,7 @@ namespace TCC.ViewModels
                     if (i > ChatMessages.Count - 1) continue;
 
                     var m = ChatMessages[i];
-
-                    if (m.RawMessage == chatMessage.RawMessage &&
-                        m.Author == chatMessage.Author &&
-                        m.Channel != ChatChannel.Money &&
-                        m.Channel != ChatChannel.Loot &&
-                        m.Channel != ChatChannel.Bargain) return;
+                    if (!Pass(chatMessage, m)) return;
                 }
             }
 
@@ -290,7 +283,7 @@ namespace TCC.ViewModels
                 Tabs.Add(chatTabsSetting);
             }
             if (Tabs.Count != 0) return;
-            Tabs.Add(new Tab("ALL", new ChatChannel[] { },new ChatChannel[]{},  new string[] { }, new string[] { "System" }));
+            Tabs.Add(new Tab("ALL", new ChatChannel[] { }, new ChatChannel[] { }, new string[] { }, new string[] { "System" }));
             Tabs.Add(new Tab("GUILD", new ChatChannel[] { ChatChannel.Guild, ChatChannel.GuildNotice, }, new ChatChannel[] { }, new string[] { }, new string[] { }));
             Tabs.Add(new Tab("GROUP", new ChatChannel[]{ChatChannel.Party, ChatChannel.PartyNotice,
                 ChatChannel.RaidLeader, ChatChannel.RaidNotice,
@@ -305,6 +298,24 @@ namespace TCC.ViewModels
             WindowManager.ChatWindow.ScrollToBottom();
         }
 
+        private bool Pass(ChatMessage current, ChatMessage old)
+        {
+            if (current.Author == SessionManager.CurrentPlayer.Name) return true;
+            if (old.RawMessage == current.RawMessage)
+            {
+                if (old.Author == current.Author)
+                {
+                    if (old.Channel == ChatChannel.Money) return true;
+                    if (old.Channel == ChatChannel.Loot) return true;
+                    if (old.Channel == ChatChannel.Bargain) return true;
+                    if (old.Channel == ChatChannel.SentWhisper && current.Channel == ChatChannel.ReceivedWhisper) return true;
+                    if (old.Channel == ChatChannel.ReceivedWhisper && current.Channel == ChatChannel.SentWhisper) return true;
+                    return false;
+                }
+                return false;
+            }
+            return true;
+        }
         public void NotifyOpacityChange()
         {
             NotifyPropertyChanged(nameof(ChatWindowOpacity));
@@ -403,9 +414,9 @@ namespace TCC.ViewModels
                 //    return Authors.Contains(m.Author);
                 //}
 
-                return (Authors.Count == 0 || Authors.Any(x => x == m.Author) )&& 
-                       (Channels.Count == 0 || Channels.Any(x => x == m.Channel)) && 
-                       (ExcludedChannels.Count == 0 || ExcludedChannels.All(x => x != m.Channel) )&&
+                return (Authors.Count == 0 || Authors.Any(x => x == m.Author)) &&
+                       (Channels.Count == 0 || Channels.Any(x => x == m.Channel)) &&
+                       (ExcludedChannels.Count == 0 || ExcludedChannels.All(x => x != m.Channel)) &&
                        (ExcludedAuthors.Count == 0 || ExcludedAuthors.All(x => x != m.Author));
             };
         }
