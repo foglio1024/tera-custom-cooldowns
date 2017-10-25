@@ -82,6 +82,16 @@ namespace TCC.Controls
         // Using a DependencyProperty as the backing store for Size.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SizeProperty =
             DependencyProperty.Register("Size", typeof(double), typeof(AbnormalityIndicator));
+
+        private void ToolTip_OnOpened(object sender, RoutedEventArgs e)
+        {
+            FocusManager.Running = false;
+        }
+
+        private void ToolTip_OnClosed(object sender, RoutedEventArgs e)
+        {
+            FocusManager.Running = true;
+        }
     }
 }
 namespace TCC.Converters
@@ -128,9 +138,9 @@ namespace TCC.Converters
             {
                 case AbnormalityType.Stun:
                     return new SolidColorBrush(Colors.Red);
-                case AbnormalityType.DamageOverTime:
+                case AbnormalityType.DOT:
                     return new SolidColorBrush(Color.FromRgb(0x98, 0x42, 0xf4));
-                case AbnormalityType.WeakeningEffect:
+                case AbnormalityType.Debuff:
                     return new SolidColorBrush(Color.FromRgb(0x8f, 0xf4, 0x42));
                 case AbnormalityType.Buff:
                     return new SolidColorBrush(Color.FromRgb(0x3f, 0x9f, 0xff));
