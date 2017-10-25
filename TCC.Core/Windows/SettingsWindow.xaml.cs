@@ -64,7 +64,7 @@ namespace TCC.Windows
 
         private void SendWebhookTest(object sender, RoutedEventArgs e)
         {
-            TimeManager.Instance.SendWebhookMessage();
+            TimeManager.Instance.SendWebhookMessageOld();
         }
 
         private void OpenSettingsFolder(object sender, RoutedEventArgs e)

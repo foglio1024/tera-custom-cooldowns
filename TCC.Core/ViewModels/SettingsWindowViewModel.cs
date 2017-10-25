@@ -1009,6 +1009,16 @@ namespace TCC.ViewModels
                 NotifyPropertyChanged(nameof(CooldownBarMode));
             }
         }
+        public EnrageLabelMode EnrageLabelMode
+        {
+            get => SettingsManager.EnrageLabelMode;
+            set
+            {
+                if (SettingsManager.EnrageLabelMode == value) return;
+                SettingsManager.EnrageLabelMode = value;
+                NotifyPropertyChanged(nameof(EnrageLabelMode));
+            }
+        }
         public bool ClickThruWhenDim
         {
             get { return SettingsManager.ClickThruWhenDim; }
@@ -1308,5 +1318,6 @@ namespace TCC.ViewModels
         public List<ClickThruMode> ClickThruModes => Utils.ListFromEnum<ClickThruMode>();
         public List<CooldownBarMode> CooldownBarModes => Utils.ListFromEnum<CooldownBarMode>();
         public List<FlowDirection> FlowDirections => Utils.ListFromEnum<FlowDirection>();
+        public List<EnrageLabelMode> EnrageLabelModes => Utils.ListFromEnum<EnrageLabelMode>();
     }
 }
