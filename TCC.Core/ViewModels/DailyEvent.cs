@@ -32,7 +32,9 @@ namespace TCC.ViewModels
         public DailyEvent(string name, double startHour, double durationOrEndHour, string color = "30afff", bool isDuration = true)
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
-            Start = DateTime.Parse(startHour + ":00");
+            var m = startHour % 1;
+            var h = startHour - m;
+            Start = DateTime.Parse(h + ":"+m*60);
             var d = isDuration ? durationOrEndHour : durationOrEndHour - startHour;
             Duration = TimeSpan.FromHours(d);
             _realDuration = Duration;
