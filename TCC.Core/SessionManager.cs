@@ -147,6 +147,20 @@ namespace TCC
                 ClassManager.SetMaxST(Convert.ToInt32(maxST));
             }
         }
+
+        public static void SetPlayerShield(uint damage)
+        {
+            //CurrentPlayer.CurrentShield -= damage;
+            if (CharacterWindowViewModel.Instance.Player.CurrentShield < 0) return;
+            CharacterWindowViewModel.Instance.Player.CurrentShield -= damage;
+        }
+        public static void SetPlayerMaxShield(uint shield)
+        {
+            CurrentPlayer.MaxShield = shield;
+            CharacterWindowViewModel.Instance.Player.MaxShield = shield;
+            CharacterWindowViewModel.Instance.Player.CurrentShield = shield;
+
+        }
     }
 
 }

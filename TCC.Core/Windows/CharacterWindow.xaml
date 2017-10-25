@@ -78,8 +78,8 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Border Grid.Row="0" Style="{StaticResource Styles.DefaultBorder}" HorizontalAlignment="Left" 
-                    VerticalAlignment="Top" Margin="0,0,0,2" CornerRadius="4" Height="Auto" Padding="5,0,5,2">
+            <Border Grid.Row="0" Style="{StaticResource Styles.DefaultBorder}" HorizontalAlignment="Center" 
+                    VerticalAlignment="Top" Margin="0,0,0,-11" CornerRadius="4" Height="Auto" Padding="5,0,5,6">
                 <Grid VerticalAlignment="Top">
                     <TextBlock Foreground="White" FontSize="13" >
                         <Run Text="L" Foreground="#4fff"></Run>
@@ -101,12 +101,11 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Border Background="#15ffffff" CornerRadius="7" Height="14" Margin="-14,0,0,2"  ></Border>
-                    <Border Grid.Row="1" Background="#15ffffff" CornerRadius="7" Height="15" Margin="-14,0,0,0"  ></Border>
-                    <Border Grid.Row="2" Background="#15ffffff" CornerRadius="7" Height="15" Margin="-14,2,0,0" Visibility="{Binding Instance.Player.Class, Converter={StaticResource staminaVisConv}}"
-                    ></Border>
+                    <Border Grid.Row="1" Background="#15ffffff" CornerRadius="7" Height="14" Margin="-14,0,0,0"  ></Border>
+                    <Border Grid.Row="2" Background="#15ffffff" CornerRadius="7" Height="14" Margin="-14,2,0,0" Visibility="{Binding Instance.Player.Class, Converter={StaticResource staminaVisConv}}"/>
                     <Border Grid.Row="0" 
                             Background="{Binding Instance.Player.IsDebuffed, Converter={StaticResource Converters.DebuffStatusToHpColor}}" 
-                            Height="14" Margin="-14,0,0,3"  
+                            Height="14" Margin="-14,0,0,2"  
                             VerticalAlignment="Top" 
                             CornerRadius="0,7,7,0" 
                             HorizontalAlignment="Left" 
@@ -118,6 +117,21 @@
                             </FrameworkElement.LayoutTransform>
                         </FrameworkElement>
                     </Border>
+                    <Border Grid.Row="0" 
+                            Background="MediumSeaGreen" 
+                            Height="14" Margin="-14,0,0,2"  
+                            VerticalAlignment="Top" 
+                            CornerRadius="0,7,7,0" 
+                            HorizontalAlignment="Left" 
+                            Padding="0,0,14,0"
+                            Opacity=".9">
+                        <FrameworkElement Width="{Binding ElementName=BarsMainGrid, Path=ActualWidth}" Margin="0,0,0,0">
+                            <FrameworkElement.LayoutTransform>
+                                <ScaleTransform ScaleX="{Binding Instance.Player.ShieldFactor}"/>
+                            </FrameworkElement.LayoutTransform>
+                        </FrameworkElement>
+                    </Border>
+
                     <Border Grid.Row="1" 
                             Background="{StaticResource Colors.App.MP}" 
                             Height="14" 
@@ -164,7 +178,7 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock Margin="0,-3,10,0"  FontWeight="Normal" Foreground="White" FontSize="13"
                                    HorizontalAlignment="Right">
-                            <Run Text="{Binding Instance.Player.CurrentHP}"></Run>
+                            <Run Text="{Binding Instance.Player.TotalHP, Mode=OneWay}"></Run>
                         </TextBlock>
                         <TextBlock Margin="10,-3,0,0"  FontWeight="Normal" Foreground="White" Opacity=".6"  FontSize="13" Grid.Column="1"
                                    HorizontalAlignment="Left">
