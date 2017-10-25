@@ -5,12 +5,7 @@ using System.Timers;
 using System.Windows;
 using TCC.ViewModels;
 
-namespace TCC
-{
-    public delegate void UpdateBossEnrageEventHandler(ulong id, bool enraged);
-    public delegate void UpdateBossHPEventHandler(ulong id, float hp);
 
-}
 namespace TCC.Data
 {
     public class Boss : TSPropertyChanged, IDisposable
@@ -83,6 +78,34 @@ namespace TCC.Data
                 }
             }
         }
+        private uint maxShield;
+        public uint MaxShield
+        {
+            get => maxShield;
+            set
+            {
+                if (maxShield != value)
+                {
+                    maxShield = value;
+                    NotifyPropertyChanged(nameof(MaxShield));
+                    NotifyPropertyChanged(nameof(ShieldFactor));
+                }
+            }
+        }
+        private float currentShield;
+        public float CurrentShield
+        {
+            get => currentShield;
+            set
+            {
+                if (currentShield == value) return;
+                currentShield = value;
+                NotifyPropertyChanged(nameof(CurrentShield));
+                NotifyPropertyChanged(nameof(ShieldFactor));
+            }
+        }
+
+        public double ShieldFactor => MaxShield > 0 ? CurrentShield / MaxShield : 0;
 
         public float CurrentFactor => _maxHP == 0 ? 0 : (_currentHP / _maxHP);
         public float CurrentPercentage => CurrentFactor * 100;
@@ -140,6 +163,11 @@ namespace TCC.Data
                 var newAb = new AbnormalityDuration(ab, duration, stacks, target, _dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
                 if (ab.Infinity) Buffs.Insert(0, newAb);
                 else Buffs.Add(newAb);
+                if (ab.IsShield)
+                {
+                    MaxShield = ab.ShieldSize;
+                    CurrentShield = ab.ShieldSize;
+                }
                 return;
             }
             existing.Duration = duration;
@@ -157,6 +185,12 @@ namespace TCC.Data
 
                 Buffs.Remove(buff);
                 buff.Dispose();
+                if (ab.IsShield)
+                {
+                    CurrentShield = 0;
+                    MaxShield = 0;
+                }
+
             }
             catch (Exception)
             {
@@ -274,7 +308,10 @@ namespace TCC.Data
             Shield = ShieldStatus.On;
         }
 
-
-
+        public event Action DeleteEvent;
+        public void Delete()
+        {
+            DeleteEvent?.Invoke();
+        }
     }
 }

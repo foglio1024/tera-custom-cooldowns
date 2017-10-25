@@ -1,12 +1,18 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Threading;
+using TCC.Annotations;
+using TCC.Controls;
 using TCC.Data;
 using TCC.ViewModels;
 
@@ -20,21 +26,52 @@ namespace TCC
     {
         NumberFormatInfo nfi = new NumberFormatInfo { NumberGroupSeparator = ".", NumberDecimalDigits = 0 };
         readonly double barLength = 400;
-        Color BaseHpColor = Color.FromRgb(0x00,0x97,0xce);
+        Color BaseHpColor = Color.FromRgb(0x00, 0x97, 0xce);
+        public SynchronizedObservableCollection<EnragePeriodItem> EnrageHistory { get; set; }
 
-        private Boss _boss;
+        public double AverageEnrage
+        {
+            get
+            {
+                var sum = 0D;
+                if (EnrageHistory == null) return 0;
+                if (EnrageHistory.Count == 0) return 0;
+                foreach (var enragePeriodItem in EnrageHistory)
+                {
+                    sum += enragePeriodItem.Duration;
+                }
+                return sum / EnrageHistory.Count;
+            }
+        }
+        public double TotalEnrage
+        {
+            get
+            {
+                var sum = 0D;
+                if (EnrageHistory == null) return 0;
+                if (EnrageHistory.Count == 0) return 0;
+                foreach (var enragePeriodItem in EnrageHistory)
+                {
+                    sum += enragePeriodItem.Duration;
+                }
+                return sum;
+            }
+        }
+
+        private Boss _boss => (Boss)DataContext;
         private float _maxHp;
         private float _currentHp;
         private bool _enraged;
         public double CurrentPercentage => _maxHp == 0 ? 0 : (_currentHp / _maxHp) * 100;
-
+        private DoubleAnimation _shieldSizeAnim;
+        private DoubleAnimation _enrageArcAnimation;
         double nextEnragePerc;
         public double NextEnragePercentage
         {
             get => nextEnragePerc;
             set
             {
-                if(nextEnragePerc != value)
+                if (nextEnragePerc != value)
                 {
                     nextEnragePerc = value;
                     if (value < 0) nextEnragePerc = 0;
@@ -44,6 +81,7 @@ namespace TCC
             }
         }
 
+        public double RemainingPercentage => (CurrentPercentage - NextEnragePercentage) / _boss.EnragePattern.Percentage > 0 ? (CurrentPercentage - NextEnragePercentage) / _boss.EnragePattern.Percentage : 0;
         void NotifyPropertyChanged(string pr)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(pr));
@@ -57,7 +95,7 @@ namespace TCC
             get => curEnrageTime;
             set
             {
-                if(curEnrageTime != value)
+                if (curEnrageTime != value)
                 {
                     curEnrageTime = value;
                     NotifyPropertyChanged("CurrentEnrageTime");
@@ -71,17 +109,24 @@ namespace TCC
             {
                 if (_enraged)
                 {
-                    return String.Format("{0}s", CurrentEnrageTime.ToString());
+                    return $"{CurrentEnrageTime}s";
                 }
                 else
                 {
-                    return String.Format("{0:0.#}", NextEnragePercentage);
+                    switch (SettingsManager.EnrageLabelMode)
+                    {
+                        case EnrageLabelMode.Next:
+                            return $"{NextEnragePercentage:0.#}%";
+                        case EnrageLabelMode.Remaining:
+                            return $"{CurrentPercentage - NextEnragePercentage:0.#}%";
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
                 }
             }
         }
-        
-        Timer NumberTimer = new Timer(1000);
 
+        Timer NumberTimer = new Timer(1000);
 
         public BossGage()
         {
@@ -95,6 +140,7 @@ namespace TCC
             DoubleAnimation.Duration = TimeSpan.FromMilliseconds(AnimationTime);
         }
 
+        public bool ExtraInfo;
         private void boss_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "CurrentHP")
@@ -102,10 +148,15 @@ namespace TCC
                 _currentHp = ((Boss)sender).CurrentHP;
                 if (_currentHp > _maxHp) _maxHp = _currentHp;
                 DoubleAnimation.To = ValueToLength(_currentHp, _maxHp);
-
+                NotifyPropertyChanged(nameof(EnrageTBtext));
+                NotifyPropertyChanged(nameof(RemainingPercentage));
+                NotifyPropertyChanged(nameof(AverageEnrage));
+                NotifyPropertyChanged(nameof(TotalEnrage));
                 if (_enraged)
                 {
                     SlideEnrageIndicator(CurrentPercentage);
+                    EnrageHistory.Last().SetEnd(CurrentPercentage);
+                    NotifyPropertyChanged(nameof(EnrageHistory));
                 }
             }
             if (e.PropertyName == "MaxHP")
@@ -129,6 +180,10 @@ namespace TCC
                         }));
                     };
                     NumberTimer.Enabled = true;
+                    EnrageHistory.Add(new EnragePeriodItem(CurrentPercentage));
+                    NotifyPropertyChanged(nameof(EnrageHistory));
+                    EnrageBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _enrageArcAnimation);
+                    enrageBorder.BeginAnimation(OpacityProperty, new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(1000)) { EasingFunction = new QuadraticEase() });
                 }
                 else
                 {
@@ -136,21 +191,30 @@ namespace TCC
 
                     NextEnragePercentage = CurrentPercentage - _boss.EnragePattern.Percentage;
                     SlideEnrageIndicator(NextEnragePercentage);
-
+                    EnrageBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, null);
+                    ((ScaleTransform)EnrageBar.RenderTransform).ScaleX = 0;
                     CurrentEnrageTime = _boss.EnragePattern.Duration;
+                    NotifyPropertyChanged(nameof(RemainingPercentage));
+
                 }
             }
             if (e.PropertyName == "Visible")
             {
                 Visibility = ((Boss)sender).Visible;
             }
+            if (e.PropertyName == nameof(_boss.ShieldFactor))
+            {
+                _shieldSizeAnim.To = _boss.ShieldFactor;
+                ShieldInnerFrameworkElement.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _shieldSizeAnim);
+            }
         }
+
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
 
-            _boss = (Boss)DataContext;
             _boss.PropertyChanged += boss_PropertyChanged;
+            _boss.DeleteEvent += _boss_DeleteEvent;
             curEnrageTime = _boss.EnragePattern.Duration;
             _currentHp = _boss.CurrentHP;
             _maxHp = _boss.MaxHP;
@@ -158,19 +222,40 @@ namespace TCC
             NextEnragePercentage = 100 - _boss.EnragePattern.Percentage;
             NextEnrage.RenderTransform = new TranslateTransform(HPgauge.Width, 0);
             SlideEnrageIndicator(NextEnragePercentage);
+            _shieldSizeAnim = new DoubleAnimation(0, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() };
+            _enrageArcAnimation = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(_boss.EnragePattern.Duration));
+            _enrageArcAnimation.Completed += _enrageArcAnimation_Completed;
+            EnrageHistory = new SynchronizedObservableCollection<EnragePeriodItem>(Dispatcher);
+        }
+
+        private void _boss_DeleteEvent()
+        {
+            NumberTimer?.Stop();
+            NumberTimer?.Dispose();
+            Dispatcher.Invoke(() => BossGageWindowViewModel.Instance.RemoveMe(_boss));
+        }
+
+        private void _enrageArcAnimation_Completed(object sender, EventArgs e)
+        {
+            EnrageBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, null);
+            try
+            {
+                ((ScaleTransform)EnrageBar.RenderTransform).ScaleX = _boss.Enraged ? 359.9 : 0;
+            }
+            catch { }
         }
 
         void SlideEnrageIndicator(double val)
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                if(val < 0)
+                if (val < 0)
                 {
                     SlideAnimation.To = 0;
                 }
                 else
                 {
-                    SlideAnimation.To = HPgauge.ActualWidth * (val/100);
+                    SlideAnimation.To = HPgauge.ActualWidth * (val / 100);
                 }
 
                 NextEnrage.RenderTransform.BeginAnimation(TranslateTransform.XProperty, SlideAnimation);
@@ -198,8 +283,40 @@ namespace TCC
         {
 
         }
+
+        private void UIElement_OnMouseLeftButtonDown(object sender, RoutedEventArgs routedEventArgs)
+        {
+            ExtraInfo = !ExtraInfo;
+            //ExtraBorder.Visibility = ExtraInfo ? Visibility.Visible: Visibility.Collapsed;
+        }
     }
 
+    public class EnragePeriodItem : TSPropertyChanged
+    {
+        public double Start { get; private set; }
+        public double End { get; private set; }
+        public double Factor => Duration * .01;
+        public double StartFactor => End * .01;
+
+        public double Duration => Start - End;
+        public EnragePeriodItem(double start)
+        {
+            _dispatcher = Dispatcher.CurrentDispatcher;
+            Start = start;
+
+        }
+        public void SetEnd(double end)
+        {
+            End = end;
+            Refresh();
+        }
+
+        public void Refresh()
+        {
+            NotifyPropertyChanged(nameof(Factor));
+            NotifyPropertyChanged(nameof(StartFactor));
+        }
+    }
 }
 
 namespace TCC.Converters
@@ -208,13 +325,13 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if((ulong)value == SessionManager.CurrentPlayer.EntityId)
+            if ((ulong)value == SessionManager.CurrentPlayer.EntityId)
             {
                 return SessionManager.CurrentPlayer.Name;
             }
             else
             {
-                if(GroupWindowViewModel.Instance.GetUser((ulong)value, out User p))
+                if (GroupWindowViewModel.Instance.GetUser((ulong)value, out User p))
                 {
                     return p.Name;
                 }
@@ -242,7 +359,7 @@ namespace TCC.Converters
                 case AggroCircle.Main:
                     return new SolidColorBrush(Colors.Orange);
                 case AggroCircle.Secondary:
-                    return new SolidColorBrush(Color.FromRgb(0x70,0x40,0xff));
+                    return new SolidColorBrush(Color.FromRgb(0x70, 0x40, 0xff));
                 case AggroCircle.None:
                     return new SolidColorBrush(Colors.Transparent);
                 default:
@@ -266,7 +383,7 @@ namespace TCC.Converters
             }
             else
             {
-                return new SolidColorBrush(Color.FromRgb(0x00, 0x97, 0xce));
+                return new SolidColorBrush(Colors.DodgerBlue);
             }
         }
 

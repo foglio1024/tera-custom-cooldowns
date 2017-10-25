@@ -22,7 +22,7 @@ namespace TCC.ViewModels
         private Boss selectedDragon;
         private Boss _vergos;
         private SynchronizedObservableCollection<Boss> _currentNPCs;
-        
+
 
         private List<Boss> _holdedDragons = new List<Boss>();
         private Dictionary<ulong, string> GuildTowers = new Dictionary<ulong, string>();
@@ -187,8 +187,9 @@ namespace TCC.ViewModels
         {
             var boss = _currentNPCs.FirstOrDefault(x => x.EntityId == id);
             if (boss == null) return;
-            _currentNPCs.Remove(boss);
-            boss.Dispose();
+            boss.Delete();
+            //_currentNPCs.Remove(boss);
+            //boss.Dispose();
             if (SelectedDragon != null && SelectedDragon.EntityId == id) SelectedDragon = null;
         }
         public void CopyToClipboard()
@@ -208,7 +209,7 @@ namespace TCC.ViewModels
         }
         public void ClearBosses()
         {
-            _currentNPCs.Clear();           
+            _currentNPCs.Clear();
         }
         public void EndNpcAbnormality(ulong target, Abnormality ab)
         {
@@ -275,6 +276,34 @@ namespace TCC.ViewModels
             }
             if (GuildTowers.ContainsKey(towerId)) return;
             GuildTowers.Add(towerId, guildName);
+        }
+
+        public void UpdateShield(ulong target, uint damage)
+        {
+            var boss = _currentNPCs.FirstOrDefault(x => x.EntityId == target);
+            if (boss != null)
+            {
+                boss.CurrentShield -= damage;
+            }
+        }
+
+        public void RemoveMe(Boss boss)
+        {
+            _dispatcher.Invoke(() =>
+            {
+                var b = CurrentNPCs.FirstOrDefault(x => x == boss);
+                if (b == null) return;
+                b.Buffs.Clear();
+                var dt = new DispatcherTimer(DispatcherPriority.Background, _dispatcher);
+                dt.Interval = TimeSpan.FromMilliseconds(5000);
+                dt.Tick += (s, ev) =>
+                {
+                    dt.Stop();
+                    b.Dispose();
+                    CurrentNPCs.Remove(b);
+                };
+                dt.Start();
+            });
         }
     }
 }
