@@ -61,9 +61,6 @@
         TradeRedirect = 303, //arbitrary
         Enchant12 = 304, //arbitrary
         Enchant15 = 305, //arbitrary
-        Enchant7 = 313, //arbitrary
-        Enchant8 = 314, //arbitrary
-        Enchant9 = 315, //arbitrary
         RaidLeader = 306, //arbitrary
         Bargain = 307, //arbitrary
         Apply = 308, //arb
@@ -71,6 +68,11 @@
         Ress = 310, //arb
         Quest = 311, //arb
         Friend = 312,//arb
+        Enchant7 = 313, //arbitrary
+        Enchant8 = 314, //arbitrary
+        Enchant9 = 315, //arbitrary
+        //WorldBoss = 316, //arb
+        Laurel = 317,
         TCC = 1000,
         Twitch = 1001
     }
@@ -124,8 +126,8 @@
 
     public enum AbnormalityType
     {
-        WeakeningEffect = 1,
-        DamageOverTime = 2,
+        Debuff = 1,
+        DOT = 2,
         Stun = 3,
         Buff = 4
     }
@@ -212,5 +214,11 @@
     {
         Normal = 0,
         Fixed = 1
+    }
+
+    public enum EnrageLabelMode
+    {
+        Next = 0,
+        Remaining = 1
     }
 }
