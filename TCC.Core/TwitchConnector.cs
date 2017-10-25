@@ -34,6 +34,12 @@ namespace TCC
             cred = new ConnectionCredentials(SettingsManager.TwitchName, SettingsManager.TwitchToken);
             client = new TwitchClient(cred, SettingsManager.TwitchChannelName);
             client.OnMessageReceived += Client_OnMessageReceived;
+            client.OnDisconnected += Client_OnDisconnected;
+            client.Connect();
+        }
+
+        private void Client_OnDisconnected(object sender, TwitchLib.Events.Client.OnDisconnectedArgs e)
+        {
             client.Connect();
         }
     }
