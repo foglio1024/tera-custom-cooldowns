@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -128,50 +129,56 @@ namespace TCC.ViewModels
                     if (!isToday && !isYesterday) continue;
 
                     var name = evElement.Attribute("name").Value;
-                    int start = int.Parse(evElement.Attribute("start").Value);
-                    int durationOrEnd;
+                    var parsedStart = DateTime.Parse(evElement.Attribute("start").Value, CultureInfo.InvariantCulture);
+                    TimeSpan parsedDuration = TimeSpan.Zero;
+                    DateTime parsedEnd = DateTime.Now;
                     bool isDuration;
                     if (evElement.Attribute("duration") != null)
                     {
-                        durationOrEnd = int.Parse(evElement.Attribute("duration").Value);
+                        parsedDuration = TimeSpan.Parse(evElement.Attribute("duration").Value, CultureInfo.InvariantCulture);
                         isDuration = true;
                     }
                     else if (evElement.Attribute("end") != null)
                     {
-                        durationOrEnd = int.Parse(evElement.Attribute("end").Value);
+                        parsedEnd = DateTime.Parse(evElement.Attribute("end").Value, CultureInfo.InvariantCulture);
                         isDuration = false;
                     }
                     else
                     {
-                        durationOrEnd = 0;
+                        parsedDuration = TimeSpan.Zero;
+                        parsedEnd = parsedStart;
                         isDuration = true;
                     }
 
                     var color = "5599ff";
+
+                    var start = parsedStart.Hour + parsedStart.Minute / 60D;
+                    var end = isDuration ?  parsedDuration.Hours + parsedDuration.Minutes / 60D : parsedEnd.Hour + parsedEnd.Minute/60D;
+
                     if (evElement.Attribute("color") != null)
                     {
                         color = evElement.Attribute("color").Value;
                     }
                     if (isYesterday)
                     {
-                        if (!EventUtils.EndsToday(start, durationOrEnd, isDuration))
+                        if (!EventUtils.EndsToday(start, end, isDuration))
                         {
                             var e1 = new DailyEvent(name, start, 24, color, false);
-                            durationOrEnd = start + durationOrEnd - 24;
+                            end = start + end - 24;
                             start = 0;
-                            var e2 = new DailyEvent(name, start, durationOrEnd, color, isDuration);
+                            var e2 = new DailyEvent(name, start, end, color, isDuration);
                             if(isToday) eg.AddEvent(e1);
                             eg.AddEvent(e2);
                         }
                         else if (isToday)
                         {
-                            var ev = new DailyEvent(name, start, durationOrEnd, color, isDuration);
+                            var ev = new DailyEvent(name, start, end, color, isDuration);
                             eg.AddEvent(ev);
                         }
                     }
                     else
                     {
-                        var ev = new DailyEvent(name, start, durationOrEnd, color, isDuration);
+                        var ev = new DailyEvent(name, start, end, color, isDuration);
                         eg.AddEvent(ev);
                     }
                 }
@@ -225,6 +232,7 @@ namespace TCC.ViewModels
         public void ShowWindow()
         {
             if (!_dispatcher.Thread.IsAlive) return;
+            LoadEvents(DateTime.Now.DayOfWeek, "EU-EN");
             WindowManager.InfoWindow.ShowWindow();
         }
 
@@ -370,8 +378,18 @@ namespace TCC.ViewModels
 
         public void AddEventGroup(EventGroup eg)
         {
-            if (EventGroups.FirstOrDefault(x => x.Name == eg.Name) != null) return;
-            EventGroups.Add(eg);
+            var g = EventGroups.FirstOrDefault(x => x.Name == eg.Name);
+            if (g != null)
+            {
+                foreach (var ev in eg.Events)
+                {
+                    g.AddEvent(ev);
+                }
+            }
+            else
+            {
+                EventGroups.Add(eg);
+            }
         }
     }
 }

@@ -91,6 +91,7 @@ namespace TCC.Windows
                 Topmost = false; Topmost = true;
                 Opacity = 0;
                 Show();
+                Activate();
                 //AnimateICitems();
                 BeginAnimation(Window.OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
             });
