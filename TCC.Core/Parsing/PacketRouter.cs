@@ -376,6 +376,8 @@ namespace TCC.Parsing
             //if (sourceInParty && targetInParty) return;
             //if (sourceInParty || targetInParty) WindowManager.SkillsEnded = false;
             //if (x.Source == SessionManager.CurrentPlayer.EntityId) WindowManager.SkillsEnded = false;
+            if(x.Source == SessionManager.CurrentPlayer.EntityId) return;
+            BossGageWindowViewModel.Instance.UpdateShield(x.Target, x.Damage);
         }
 
         public static void HandleChangeLeader(S_CHANGE_PARTY_MANAGER x)
@@ -938,6 +940,24 @@ namespace TCC.Parsing
             //88432 T circlet
 
         }
-    }
 
+        public static void HandlePartyMemberIntervalPosUpdate(S_PARTY_MEMBER_INTERVAL_POS_UPDATE sPartyMemberIntervalPosUpdate)
+        {
+            GroupWindowViewModel.Instance.UpdateMemberLocation(sPartyMemberIntervalPosUpdate);
+        }
+
+        public static void HandleShieldDamageAbsorb(S_ABNORMALITY_DAMAGE_ABSORB sAbnormalityDamageAbsorb)
+        {
+            if (sAbnormalityDamageAbsorb.Target == SessionManager.CurrentPlayer.EntityId)
+            {
+                SessionManager.SetPlayerShield(sAbnormalityDamageAbsorb.Damage);
+                return;
+            }
+            if (BossGageWindowViewModel.Instance.CurrentNPCs.Any(x => x.EntityId == sAbnormalityDamageAbsorb.Target))
+            {
+                BossGageWindowViewModel.Instance.UpdateShield(sAbnormalityDamageAbsorb.Target,
+                    sAbnormalityDamageAbsorb.Damage);
+            }
+        }
+    }
 }
