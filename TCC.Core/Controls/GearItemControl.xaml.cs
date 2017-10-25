@@ -26,15 +26,15 @@ namespace TCC.Controls
         public GearItemControl()
         {
             InitializeComponent();
-            _anim = new DoubleAnimation(0,359.9, TimeSpan.FromMilliseconds(500)){EasingFunction = new QuadraticEase()};
+            _anim = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(350)) { EasingFunction = new QuadraticEase() };
         }
 
         private void GearItemControl_OnLoaded(object sender, RoutedEventArgs e)
         {
-            var dc = (GearItem) DataContext;
-            if(dc == null) return;
+            var dc = (GearItem)DataContext;
+            if (dc == null) return;
             _anim.To = dc.LevelFactor * 359.9;
-            MainArc.BeginAnimation(Arc.EndAngleProperty,_anim);
+            MainArc.BeginAnimation(Arc.EndAngleProperty, _anim);
 
         }
     }
