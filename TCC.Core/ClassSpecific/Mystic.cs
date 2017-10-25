@@ -57,7 +57,7 @@ namespace TCC.ClassSpecific
             {
                 ((MysticBarManager)ClassManager.CurrentClassManager).Auras.SwiftAura = true;
             }
-            else if (p.AbnormalityId == VowId)
+            else if (p.AbnormalityId == VowId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
             {
                 ((MysticBarManager)ClassManager.CurrentClassManager).Vow.Buff.Start(p.Duration);
             }
@@ -80,7 +80,7 @@ namespace TCC.ClassSpecific
             {
                 ((MysticBarManager)ClassManager.CurrentClassManager).Auras.SwiftAura = true;
             }
-            else if (p.AbnormalityId == VowId)
+            else if (p.AbnormalityId == VowId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
             {
                 ((MysticBarManager)ClassManager.CurrentClassManager).Vow.Buff.Refresh(p.Duration);
             }
@@ -104,7 +104,7 @@ namespace TCC.ClassSpecific
             {
                 ((MysticBarManager)ClassManager.CurrentClassManager).Auras.SwiftAura = false;
             }
-            else if (p.AbnormalityId == VowId)
+            else if (p.AbnormalityId == VowId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
             {
                 ((MysticBarManager)ClassManager.CurrentClassManager).Vow.Buff.Refresh(0);
             }
