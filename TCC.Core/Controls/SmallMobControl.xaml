@@ -8,11 +8,15 @@
              mc:Ignorable="d" Loaded="SmallMobControl_OnLoaded"
              Visibility="{Binding Visible}">
 
-    <Grid Margin="2" Width="100" MaxWidth="150">
+
+    <Grid Margin="2" Width="100" MaxWidth="150" x:Name="RootGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
+        <Grid.LayoutTransform>
+            <ScaleTransform ScaleX="1" ScaleY="1"></ScaleTransform>
+        </Grid.LayoutTransform>
         <TextBlock Text="{Binding Name}" Grid.Column="1" Style="{StaticResource Styles.DefaultText}" TextTrimming="CharacterEllipsis"/>
         <Border Style="{StaticResource Styles.DefaultBorder}" Margin="0"  Grid.Row="1" Grid.Column="1">
             <StackPanel>
