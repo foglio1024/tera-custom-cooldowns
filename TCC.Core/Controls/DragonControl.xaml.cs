@@ -39,11 +39,20 @@ namespace TCC.Controls
         {
             dc = (Boss)DataContext;
             dc.PropertyChanged += Dc_PropertyChanged;
+            dc.DeleteEvent += Dc_DeleteEvent;
             enrageLine.LayoutTransform = dc.CurrentPercentage > dc.EnragePattern.Percentage ? new RotateTransform((dc.CurrentPercentage - dc.EnragePattern.Percentage) * 3.6) : new RotateTransform(0);
 
         }
 
         DoubleAnimation shieldArcAn;
+        private void Dc_DeleteEvent() => Dispatcher.Invoke(() =>
+        {
+            try
+            {
+                BossGageWindowViewModel.Instance.RemoveMe((Boss)DataContext);
+            }
+            catch { }
+        });
 
         private void Dc_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
