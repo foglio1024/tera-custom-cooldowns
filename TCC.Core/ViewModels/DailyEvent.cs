@@ -29,12 +29,12 @@ namespace TCC.ViewModels
             }
         }
         public string Color { get; }
-        public DailyEvent(string name, double startHour, double durationOrEndHour, string color = "30afff", bool isDuration = true)
+        public DailyEvent(string name, double startHour, double startMin, double durationOrEndHour, string color = "30afff", bool isDuration = true)
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
-            var m = startHour % 1;
-            var h = startHour - m;
-            Start = DateTime.Parse(h + ":"+m*60);
+            //var m = startHour % 1;
+            //var h = startHour - m;
+            Start = DateTime.Parse(startHour + ":"+startMin);
             var d = isDuration ? durationOrEndHour : durationOrEndHour - startHour;
             Duration = TimeSpan.FromHours(d);
             _realDuration = Duration;

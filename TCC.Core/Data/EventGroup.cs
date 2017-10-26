@@ -32,7 +32,8 @@ namespace TCC.ViewModels
         }
         public void AddEvent(DailyEvent ev)
         {
-            Events.Insert(0, ev);
+            Events.Add(ev);
+            //Events.Insert(0, ev);
         }
     }
 }

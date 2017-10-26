@@ -4,8 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
-             mc:Ignorable="d" Width="1000"
-             >
+             mc:Ignorable="d" Width="1000" d:DataContext="{d:DesignData InfoWindowViewModel}">
     <UserControl.Resources>
         <DataTemplate x:Key="TimeMarkerTemplate">
             <local:TimeMarkerControl/>

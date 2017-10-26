@@ -10,6 +10,7 @@ using System.Windows.Threading;
 using System.Xml.Linq;
 using TCC.Data;
 using TCC.Data.Databases;
+using TCC.Parsing;
 using TCC.Parsing.Messages;
 
 namespace TCC.ViewModels
@@ -163,28 +164,28 @@ namespace TCC.ViewModels
                     {
                         if (!EventUtils.EndsToday(start, end, isDuration))
                         {
-                            var e1 = new DailyEvent(name, start, 24, color, false);
+                            var e1 = new DailyEvent(name, parsedStart.Hour, 24, 0,color, false);
                             end = start + end - 24;
                             start = 0;
-                            var e2 = new DailyEvent(name, start, end, color, isDuration);
+                            var e2 = new DailyEvent(name, parsedStart.Hour, parsedStart.Minute, end, color, isDuration);
                             if(isToday) eg.AddEvent(e1);
                             eg.AddEvent(e2);
                         }
                         else if (isToday)
                         {
-                            var ev = new DailyEvent(name, start, end, color, isDuration);
+                            var ev = new DailyEvent(name, parsedStart.Hour, parsedStart.Minute, end, color, isDuration);
                             eg.AddEvent(ev);
                         }
                     }
                     else
                     {
-                        var ev = new DailyEvent(name, start, end, color, isDuration);
+                        var ev = new DailyEvent(name, parsedStart.Hour,parsedStart.Minute, end, color, isDuration);
                         eg.AddEvent(ev);
                     }
                 }
                 if (eg.Events.Count != 0) AddEventGroup(eg);
             }
-            SpecialEvents.Add(new DailyEvent("Reset", TimeManager.Instance.ResetHour, 0, "ff0000"));
+            SpecialEvents.Add(new DailyEvent("Reset", TimeManager.Instance.ResetHour,0, 0, "ff0000"));
         }
         public void ClearEvents()
         {
@@ -232,7 +233,7 @@ namespace TCC.ViewModels
         public void ShowWindow()
         {
             if (!_dispatcher.Thread.IsAlive) return;
-            LoadEvents(DateTime.Now.DayOfWeek, "EU-EN");
+            LoadEvents(DateTime.Now.DayOfWeek, TimeManager.Instance.CurrentRegion);
             WindowManager.InfoWindow.ShowWindow();
         }
 
