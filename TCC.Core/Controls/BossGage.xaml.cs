@@ -240,7 +240,7 @@ namespace TCC
             EnrageBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, null);
             try
             {
-                ((ScaleTransform)EnrageBar.RenderTransform).ScaleX = _boss.Enraged ? 359.9 : 0;
+                ((ScaleTransform)EnrageBar.RenderTransform).ScaleX = _boss.Enraged ? 1 : 0;
             }
             catch { }
         }
