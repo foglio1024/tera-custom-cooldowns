@@ -305,9 +305,9 @@ namespace TCC.ViewModels
             {
                 if (old.Author == current.Author)
                 {
-                    if (old.Channel == ChatChannel.Money) return true;
-                    if (old.Channel == ChatChannel.Loot) return true;
-                    if (old.Channel == ChatChannel.Bargain) return true;
+                    if (current.Channel == ChatChannel.Money) return true;
+                    if (current.Channel == ChatChannel.Loot) return true;
+                    if (current.Channel == ChatChannel.Bargain) return true;
                     if (old.Channel == ChatChannel.SentWhisper && current.Channel == ChatChannel.ReceivedWhisper) return true;
                     if (old.Channel == ChatChannel.ReceivedWhisper && current.Channel == ChatChannel.SentWhisper) return true;
                     return false;

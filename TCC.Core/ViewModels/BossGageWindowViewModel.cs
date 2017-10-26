@@ -187,7 +187,15 @@ namespace TCC.ViewModels
         {
             var boss = _currentNPCs.FirstOrDefault(x => x.EntityId == id);
             if (boss == null) return;
-            boss.Delete();
+            if (boss.Visible != Visibility.Visible)
+            {
+                CurrentNPCs.Remove(boss);
+                boss.Dispose();
+            }
+            else
+            {
+                boss.Delete();
+            }
             //_currentNPCs.Remove(boss);
             //boss.Dispose();
             if (SelectedDragon != null && SelectedDragon.EntityId == id) SelectedDragon = null;
@@ -299,8 +307,8 @@ namespace TCC.ViewModels
                 dt.Tick += (s, ev) =>
                 {
                     dt.Stop();
-                    b.Dispose();
                     CurrentNPCs.Remove(b);
+                    b.Dispose();
                 };
                 dt.Start();
             });
