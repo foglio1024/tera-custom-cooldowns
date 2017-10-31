@@ -8,7 +8,7 @@ using TCC.ViewModels;
 
 namespace TCC.Data
 {
-    public class Boss : TSPropertyChanged, IDisposable
+    public class Npc : TSPropertyChanged, IDisposable
     {
         public ulong EntityId { get; set; }
         protected string name;
@@ -154,13 +154,13 @@ namespace TCC.Data
         public uint ZoneId { get; protected set; }
         public uint TemplateId { get; protected set; }
 
-        public EnragePattern EnragePattern { get; set; }
-        public void AddorRefresh(Abnormality ab, uint duration, int stacks, double size, double margin)
+        public EnragePattern EnragePattern { get; private set; }
+        public void AddorRefresh(Abnormality ab, uint duration, int stacks)
         {
             var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, target, _dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
+                var newAb = new AbnormalityDuration(ab, duration, stacks, target, _dispatcher, true);
                 if (ab.Infinity) Buffs.Insert(0, newAb);
                 else Buffs.Add(newAb);
                 if (ab.IsShield)
@@ -197,7 +197,19 @@ namespace TCC.Data
             }
         }
 
-        //public Boss(ulong eId, uint zId, uint tId, float curHP, float maxHP, Visibility visible)
+        public bool IsTower => Utils.IsGuildTower(ZoneId, TemplateId);
+        public bool IsPhase1Dragon => Utils.IsPhase1Dragon(ZoneId, TemplateId);
+
+        public uint GuildId
+        {
+            get
+            {
+                BossGageWindowViewModel.Instance.GuildIds.TryGetValue(EntityId, out var val);
+                return val;
+            }
+        }
+
+        //public Npc(ulong eId, uint zId, uint tId, float curHP, float maxHP, Visibility visible)
         //{
         //    _dispatcher = BossGageWindowViewModel.Instance.GetDispatcher();
         //    EntityId = eId;
@@ -219,7 +231,7 @@ namespace TCC.Data
         //    }
 
         //}
-        public Boss(ulong eId, uint zId, uint tId, bool boss, Visibility visible)
+        public Npc(ulong eId, uint zId, uint tId, bool boss, Visibility visible)
         {
             _dispatcher = BossGageWindowViewModel.Instance.GetDispatcher();
             EntityId = eId;
@@ -237,14 +249,14 @@ namespace TCC.Data
             if (IsPhase1Dragon)
             {
                 ShieldDuration = new Timer();
-                ShieldDuration.Interval = BossGageWindowViewModel.PH1SHIELD_DURATION*1000;
+                ShieldDuration.Interval = BossGageWindowViewModel.Ph1ShieldDuration*1000;
                 ShieldDuration.Elapsed += ShieldFailed;
 
                 EnragePattern.Duration = 50;
                 EnragePattern.Percentage = 14;
             }
         }
-        public Boss() { }
+        public Npc() { }
         public override string ToString()
         {
             return String.Format("{0} - {1}", EntityId, Name);
@@ -255,13 +267,7 @@ namespace TCC.Data
             foreach (var buff in _buffs) buff.Dispose();
             ShieldDuration?.Dispose();
         }
-        public bool IsPhase1Dragon
-        {
-            get
-            {
-                return Utils.IsPhase1Dragon(ZoneId, TemplateId);
-            }
-        }
+
         ///////////////////////////////////////////
         Timer ShieldDuration;
 
