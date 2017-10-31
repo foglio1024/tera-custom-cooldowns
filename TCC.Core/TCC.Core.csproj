@@ -267,6 +267,9 @@
     <Compile Include="Controls\GearItemControl.xaml.cs">
       <DependentUpon>GearItemControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\GuildTowerControl.xaml.cs">
+      <DependentUpon>GuildTowerControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\OutlineText.cs" />
     <Compile Include="Controls\SelectionSetting.xaml.cs">
       <DependentUpon>SelectionSetting.xaml</DependentUpon>
@@ -345,6 +348,7 @@
     <Compile Include="Controls\Phase4BossControl.xaml.cs">
       <DependentUpon>Phase4BossControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\LogoInfoToImageConverter.cs" />
     <Compile Include="Converters\NullToVisibleCollapsedConverter.cs" />
     <Compile Include="Converters\PieceToPathConverter.cs" />
     <Compile Include="Converters\ReadyToColorConverter.cs" />
@@ -384,7 +388,6 @@
     <Compile Include="Data\Databases\QuestDatabase.cs" />
     <Compile Include="Data\Dungeon.cs" />
     <Compile Include="Data\EnragePattern.cs" />
-    <Compile Include="Data\EnumVM.cs" />
     <Compile Include="Data\Friend.cs" />
     <Compile Include="Data\GearItem.cs" />
     <Compile Include="Data\Guard.cs" />
@@ -406,6 +409,7 @@
     <Compile Include="Parsing\Messages\S_FRIEND_LIST.cs" />
     <Compile Include="Parsing\Messages\C_REQUEST_GAMESTAT_PING.cs" />
     <Compile Include="Parsing\Messages\S_GUILD_TOWER_INFO.cs" />
+    <Compile Include="Parsing\Messages\S_IMAGE_DATA.cs" />
     <Compile Include="Parsing\Messages\S_INVEN.cs" />
     <Compile Include="Parsing\Messages\S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA.cs" />
     <Compile Include="Parsing\Messages\S_OTHER_USER_APPLY_PARTY.cs" />
@@ -484,7 +488,7 @@
     <Compile Include="Converters\RollToStringConverter.cs" />
     <Compile Include="Converters\WinningToColorConverter.cs" />
     <Compile Include="Data\ArcherFocusTracker.cs" />
-    <Compile Include="Data\Boss.cs" />
+    <Compile Include="Data\Npc.cs" />
     <Compile Include="Data\Abnormality.cs" />
     <Compile Include="Data\Databases\AbnormalityDatabase.cs" />
     <Compile Include="Data\ChatMessage.cs" />
@@ -545,7 +549,7 @@
     <Compile Include="Parsing\Messages\S_WHISPER.cs" />
     <Compile Include="Parsing\SystemChatMessage.cs" />
     <Compile Include="Parsing\ThreadSafeManager.cs" />
-    <Compile Include="ProxyInterop.cs" />
+    <Compile Include="Proxy.cs" />
     <Compile Include="SettingsManager.cs" />
     <Compile Include="SkillUtils.cs" />
     <Compile Include="Sniffing\ConnectionId.cs" />
@@ -818,6 +822,7 @@
     <Compile Include="Windows\ChatWindow.xaml.cs">
       <DependentUpon>ChatWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\ClassToFillConverter.cs" />
     <Compile Include="Windows\ClassWindow.xaml.cs">
       <DependentUpon>ClassWindow.xaml</DependentUpon>
     </Compile>
@@ -999,6 +1004,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\GearItemControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\GuildTowerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1290,6 +1299,7 @@
     <Content Include="resources\data\abnormalities\hotdot-TW.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="resources\images\default_guild_logo.png" />
     <Resource Include="resources\images\twitch.png" />
     <Resource Include="resources\images\ic_format_size_white_24dp_2x.png" />
     <Resource Include="resources\images\ic_pause_white_24dp_2x.png" />
