@@ -55,6 +55,7 @@
         <system:Double x:Key="MapWidth">800</system:Double>
         <system:Double x:Key="MapHeight">600</system:Double>
 
+        <ImageSource x:Key="DefaultGuildLogo">pack://application:,,,/resources/images/default_guild_logo.png</ImageSource>
 
 
         <!--Chat colors-->
@@ -175,6 +176,7 @@
         <converters:GearLevelToFactorConverter x:Key="Converters.GearLevelToFactor"/>
         <converters:GearLevelToColorConverter x:Key="Converters.GearLevelToColor"/>
         <converters:NullToVisibleCollapsedConverter x:Key="Converters.NullToVisibleCollapsed"/>
+        <converters:LogoInfoToImageConverter x:Key="Converters.LogoInfoToImage"/>
 
         <!--AbnormalityIndicator resources-->
         <converters:AbnormalityStrokeConverter x:Key="Converters.AbnormalityTypeToStrokeColor"/>
@@ -641,6 +643,11 @@
         <DataTemplate x:Key="MobDataTemplate">
             <controls:SmallMobControl/>
         </DataTemplate>
+        <!--Guild tower template-->
+        <DataTemplate x:Key="GuildTowerTemplate">
+            <controls:GuildTowerControl/>
+        </DataTemplate>
+        
         <templateselectors:EnemyTemplateSelector x:Key="EnemyTemplateSelector" 
                                                  BossDataTemplate="{StaticResource BossDataTemplate}"
                                                  MobDataTemplate="{StaticResource MobDataTemplate}"/>
