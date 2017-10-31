@@ -1019,6 +1019,18 @@ namespace TCC.ViewModels
                 NotifyPropertyChanged(nameof(EnrageLabelMode));
             }
         }
+
+        public bool ChatFadeOut
+        {
+            get => SettingsManager.ChatFadeOut;
+            set
+            {
+                if (SettingsManager.ChatFadeOut == value) return;
+                SettingsManager.ChatFadeOut = value;
+                if(value) ChatWindowViewModel.Instance.RefreshTimer();
+                NotifyPropertyChanged(nameof(ChatFadeOut));
+            }
+        }
         public bool ClickThruWhenDim
         {
             get { return SettingsManager.ClickThruWhenDim; }
