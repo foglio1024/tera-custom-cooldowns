@@ -29,6 +29,17 @@ namespace TCC
         Color BaseHpColor = Color.FromRgb(0x00, 0x97, 0xce);
         public SynchronizedObservableCollection<EnragePeriodItem> EnrageHistory { get; set; }
 
+        public string MainPercInt => (Convert.ToInt32(Npc.CurrentFactor*100)).ToString();
+
+        public string MainPercDec
+        {
+            get
+            {
+                double val = (Npc.CurrentFactor*100) %1 * 100;
+                return $"{val:00}";
+
+            }
+        }
         public double AverageEnrage
         {
             get
@@ -58,13 +69,14 @@ namespace TCC
             }
         }
 
-        private Boss _boss => (Boss)DataContext;
+        private Npc Npc => (Npc)DataContext;
         private float _maxHp;
         private float _currentHp;
         private bool _enraged;
         public double CurrentPercentage => _maxHp == 0 ? 0 : (_currentHp / _maxHp) * 100;
         private DoubleAnimation _shieldSizeAnim;
         private DoubleAnimation _enrageArcAnimation;
+        private DoubleAnimation _hpAnim;
         double nextEnragePerc;
         public double NextEnragePercentage
         {
@@ -81,7 +93,7 @@ namespace TCC
             }
         }
 
-        public double RemainingPercentage => (CurrentPercentage - NextEnragePercentage) / _boss.EnragePattern.Percentage > 0 ? (CurrentPercentage - NextEnragePercentage) / _boss.EnragePattern.Percentage : 0;
+        public double RemainingPercentage => (CurrentPercentage - NextEnragePercentage) / Npc.EnragePattern.Percentage > 0 ? (CurrentPercentage - NextEnragePercentage) / Npc.EnragePattern.Percentage : 0;
         void NotifyPropertyChanged(string pr)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(pr));
@@ -138,6 +150,7 @@ namespace TCC
             SlideAnimation.Duration = TimeSpan.FromMilliseconds(250);
             ColorChangeAnimation.Duration = TimeSpan.FromMilliseconds(AnimationTime);
             DoubleAnimation.Duration = TimeSpan.FromMilliseconds(AnimationTime);
+            _hpAnim = new DoubleAnimation(1,TimeSpan.FromMilliseconds(150)){EasingFunction = new QuadraticEase()};
         }
 
         public bool ExtraInfo;
@@ -145,13 +158,16 @@ namespace TCC
         {
             if (e.PropertyName == "CurrentHP")
             {
-                _currentHp = ((Boss)sender).CurrentHP;
+                _currentHp = ((Npc)sender).CurrentHP;
                 if (_currentHp > _maxHp) _maxHp = _currentHp;
                 DoubleAnimation.To = ValueToLength(_currentHp, _maxHp);
+                AnimateHp();
                 NotifyPropertyChanged(nameof(EnrageTBtext));
                 NotifyPropertyChanged(nameof(RemainingPercentage));
-                NotifyPropertyChanged(nameof(AverageEnrage));
+                //NotifyPropertyChanged(nameof(AverageEnrage));
                 NotifyPropertyChanged(nameof(TotalEnrage));
+                NotifyPropertyChanged(nameof(MainPercDec));
+                NotifyPropertyChanged(nameof(MainPercInt));
                 if (_enraged)
                 {
                     SlideEnrageIndicator(CurrentPercentage);
@@ -161,11 +177,11 @@ namespace TCC
             }
             if (e.PropertyName == "MaxHP")
             {
-                _maxHp = ((Boss)sender).MaxHP;
+                _maxHp = ((Npc)sender).MaxHP;
             }
             if (e.PropertyName == "Enraged")
             {
-                var value = ((Boss)sender).Enraged;
+                var value = ((Npc)sender).Enraged;
                 if (_enraged == value) return;
                 _enraged = value;
                 if (_enraged)
@@ -189,50 +205,100 @@ namespace TCC
                 {
                     NumberTimer?.Stop();
 
-                    NextEnragePercentage = CurrentPercentage - _boss.EnragePattern.Percentage;
+                    NextEnragePercentage = CurrentPercentage - Npc.EnragePattern.Percentage;
                     SlideEnrageIndicator(NextEnragePercentage);
                     EnrageBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, null);
                     ((ScaleTransform)EnrageBar.RenderTransform).ScaleX = 0;
-                    CurrentEnrageTime = _boss.EnragePattern.Duration;
+                    CurrentEnrageTime = Npc.EnragePattern.Duration;
                     NotifyPropertyChanged(nameof(RemainingPercentage));
 
                 }
             }
             if (e.PropertyName == "Visible")
             {
-                Visibility = ((Boss)sender).Visible;
+                AnimateAppear();
             }
-            if (e.PropertyName == nameof(_boss.ShieldFactor))
+            if (e.PropertyName == nameof(Npc.ShieldFactor))
             {
-                _shieldSizeAnim.To = _boss.ShieldFactor;
+                _shieldSizeAnim.To = Npc.ShieldFactor;
                 ShieldInnerFrameworkElement.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _shieldSizeAnim);
             }
         }
 
+        private void AnimateAppear()
+        {
+            var sc = new ScaleTransform();
+            sc.ScaleY = 0;
+            LayoutTransform = sc;
+            BossNameGrid.Opacity = 0;
+            hpBarGrid.Opacity = 0;
+            topInfoGrid.Opacity = 0;
+            Visibility = Npc.Visible;
+            var expand = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(300));
+            LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, expand);
+            var fade = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(300));
+            fade.BeginTime = TimeSpan.FromMilliseconds(300);
+            //mainBorder.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, expand);
+            mainBorder.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, expand);
+            BossNameGrid.BeginAnimation(OpacityProperty, fade);
+            hpBarGrid.BeginAnimation(OpacityProperty, fade);
+            topInfoGrid.BeginAnimation(OpacityProperty, fade);
+        }
 
+        private void AnimateHp()
+        {
+            _hpAnim.To = Npc.CurrentFactor;
+            DotPusher.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _hpAnim);
+            HpBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _hpAnim);
+        }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
 
-            _boss.PropertyChanged += boss_PropertyChanged;
-            _boss.DeleteEvent += _boss_DeleteEvent;
-            curEnrageTime = _boss.EnragePattern.Duration;
-            _currentHp = _boss.CurrentHP;
-            _maxHp = _boss.MaxHP;
-            _enraged = _boss.Enraged;
-            NextEnragePercentage = 100 - _boss.EnragePattern.Percentage;
-            NextEnrage.RenderTransform = new TranslateTransform(HPgauge.Width, 0);
+            Npc.PropertyChanged += boss_PropertyChanged;
+            Npc.DeleteEvent += _boss_DeleteEvent;
+            curEnrageTime = Npc.EnragePattern.Duration;
+            _currentHp = Npc.CurrentHP;
+            _maxHp = Npc.MaxHP;
+            _enraged = Npc.Enraged;
+            NextEnragePercentage = 100 - Npc.EnragePattern.Percentage;
+            NextEnrage.RenderTransform = new TranslateTransform(hpBarGrid.Width, 0);
             SlideEnrageIndicator(NextEnragePercentage);
             _shieldSizeAnim = new DoubleAnimation(0, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() };
-            _enrageArcAnimation = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(_boss.EnragePattern.Duration));
+            _enrageArcAnimation = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(Npc.EnragePattern.Duration));
             _enrageArcAnimation.Completed += _enrageArcAnimation_Completed;
             EnrageHistory = new SynchronizedObservableCollection<EnragePeriodItem>(Dispatcher);
+            t = new DispatcherTimer() {Interval = TimeSpan.FromSeconds(5)};
+            t.Tick += (s, ev) =>
+            {
+                t.Stop();
+                var sc = new ScaleTransform();
+                sc.ScaleY = 0;
+                LayoutTransform = sc;
+
+                var fade = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(250));
+
+                LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty,
+                    new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(250)));
+                BossNameGrid.BeginAnimation(OpacityProperty, fade);
+                hpBarGrid.BeginAnimation(OpacityProperty, fade);
+                topInfoGrid.BeginAnimation(OpacityProperty, fade);
+                this.BeginAnimation(OpacityProperty, fade);
+
+            };
+            if (Npc.Visible == Visibility.Visible)
+            {
+                AnimateAppear();            
+            }
+
         }
 
+        private DispatcherTimer t;
         private void _boss_DeleteEvent()
         {
             NumberTimer?.Stop();
             NumberTimer?.Dispose();
-            Dispatcher.Invoke(() => BossGageWindowViewModel.Instance.RemoveMe(_boss));
+            t.Start();
+            Dispatcher.Invoke(() => BossGageWindowViewModel.Instance.RemoveMe(Npc));
         }
 
         private void _enrageArcAnimation_Completed(object sender, EventArgs e)
@@ -240,7 +306,7 @@ namespace TCC
             EnrageBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, null);
             try
             {
-                ((ScaleTransform)EnrageBar.RenderTransform).ScaleX = _boss.Enraged ? 1 : 0;
+                ((ScaleTransform)EnrageBar.RenderTransform).ScaleX = Npc.Enraged ? 1 : 0;
             }
             catch { }
         }
@@ -255,7 +321,7 @@ namespace TCC
                 }
                 else
                 {
-                    SlideAnimation.To = HPgauge.ActualWidth * (val / 100);
+                    SlideAnimation.To = hpBarGrid.ActualWidth * (val / 100);
                 }
 
                 NextEnrage.RenderTransform.BeginAnimation(TranslateTransform.XProperty, SlideAnimation);

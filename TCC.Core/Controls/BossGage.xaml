@@ -13,7 +13,10 @@
              UseLayoutRounding="True" 
              Width="Auto"
              Height="Auto"
-             Visibility="{Binding Visible}" d:DataContext="{d:DesignInstance data:Boss}">
+             Visibility="{Binding Visible}" d:DataContext="{d:DesignInstance data:Npc}">
+    <UserControl.CacheMode>
+        <BitmapCache RenderAtScale="2"></BitmapCache>
+    </UserControl.CacheMode>
     <UserControl.Resources>
         <DataTemplate x:Key="EnrageHistoryItem" DataType="local:EnragePeriodItem">
             <StackPanel Orientation="Horizontal" Width="406">
@@ -76,9 +79,15 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Border Margin="0,0,0,-1" CornerRadius="4,4,0,0" Opacity=".7"  Style="{StaticResource Styles.DefaultBorder}" x:Name="mainBorder" Grid.RowSpan="2" Grid.Row="1" HorizontalAlignment="Stretch" />
+                <Border Margin="0,0,0,-1" CornerRadius="4,4,0,0" Opacity=".7"  RenderTransformOrigin="0,0"
+                        Style="{StaticResource Styles.DefaultBorder}" x:Name="mainBorder" Grid.RowSpan="2" Grid.Row="1" 
+                        HorizontalAlignment="Stretch" >
+                    <Border.RenderTransform>
+                        <ScaleTransform ScaleY="0"></ScaleTransform>
+                    </Border.RenderTransform>
+                </Border>
                 <Border Background="Red" Margin="0,0,0,-1" CornerRadius="4,4,0,0" Opacity="0"  Style="{StaticResource Styles.DefaultBorder}" x:Name="enrageBorder" Grid.RowSpan="2" Grid.Row="1" HorizontalAlignment="Stretch"/>
-                <Grid Grid.Row="0" >
+                <Grid Grid.Row="0" Name="BossNameGrid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -108,7 +117,6 @@
                                Grid.Row="0" Grid.Column="2" TextTrimming="WordEllipsis" MaxWidth="200"/>
 
                 </Grid>
-
                 <Grid Margin="9,2" Name="topInfoGrid" Grid.Row="1" UseLayoutRounding="True" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -132,19 +140,23 @@
                         <Run Text="{Binding CurrentHP, StringFormat={}{0:N0}}"/>
                         <Run Text="/" Foreground="#5fff"/><Run Text="{Binding MaxHP, StringFormat={}{0:N0}}" Foreground="#5fff"/>
                     </TextBlock>
-                    <TextBlock Style="{StaticResource Styles.DefaultText}"
+                    <TextBlock 
                                HorizontalAlignment="Center" 
                                FontWeight="DemiBold"
                                Grid.Column="1"
                                VerticalAlignment="Center" 
-                               Margin="0,2,0,-1" 
-                               FontSize="16"
-                               Text="{Binding CurrentFactor, StringFormat=##0.00%, Mode=OneWay}"
-                               Grid.Row="1"/>
-                    
-                    <Grid Height="Auto" Grid.Row="1" HorizontalAlignment="Right" Margin="15,0,5,-0" Grid.Column="2">
-                        <StackPanel Orientation="Horizontal">
-                            <Grid Width="100" Height="5">
+                               Margin="0,-1,0,1" 
+                               Foreground="#7fff"
+                               Grid.Row="1">
+                        <Run Foreground="White" FontSize="16"
+                             Text="{Binding MainPercInt, Mode=OneWay, RelativeSource={RelativeSource AncestorType=local:BossGage}}"/><Run Text="."/><Run Text="{Binding MainPercDec, Mode=OneWay, RelativeSource={RelativeSource AncestorType=local:BossGage}}"/><Run Text="%"/>
+                    </TextBlock>
+                    <Grid Height="Auto" Grid.Row="1" HorizontalAlignment="Right" Margin="0,0,0,-0" Grid.Column="2">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <TextBlock Width="45" FontSize="14" FontWeight="DemiBold" Style="{StaticResource Styles.DefaultText}"  
+                               TextAlignment="Right" VerticalAlignment="Center" Margin="3,2,5,-1"  Foreground="#afff"
+                               Text="{Binding EnrageTBtext, RelativeSource={RelativeSource AncestorType=local:BossGage}}"/>
+                            <Grid Width="90" Height="5" >
                                 <Rectangle Fill="#1fff" Width="90" Height="5" HorizontalAlignment="Left"></Rectangle>
                                 <Rectangle Fill="DodgerBlue" Width="90" HorizontalAlignment="Left">
                                     <Rectangle.LayoutTransform>
@@ -157,9 +169,6 @@
                                     </Rectangle.RenderTransform>
                                 </Rectangle>
                             </Grid>
-                            <TextBlock Width="45" FontSize="14" FontWeight="DemiBold" Style="{StaticResource Styles.DefaultText}"  
-                               TextAlignment="Left" VerticalAlignment="Center" Margin="3,0,3,0"  Foreground="#afff"
-                               Text="{Binding EnrageTBtext, RelativeSource={RelativeSource AncestorType=local:BossGage}}"/>
                         </StackPanel>
                     </Grid>
                     <!--<Button Style="{StaticResource ButtonMainStyle}"  Grid.Row="1" Click="UIElement_OnMouseLeftButtonDown"
@@ -167,13 +176,22 @@
                         <Path Data="{StaticResource SVG.Info}" Stretch="Uniform" Fill="#2fff"></Path>
                     </Button>-->
                 </Grid>
-                <Grid Grid.Row="2" Margin="1,0,1,0" Name="hpBarGrid" VerticalAlignment="Bottom" ClipToBounds="False">
+                <Grid Grid.Row="2" Margin="1,0,1,0" Name="hpBarGrid" Width="406"  VerticalAlignment="Bottom" ClipToBounds="False" Background="#5000">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-
-                    <controls:GenericGauge Height="6" Width="406" Opacity="1"
+                    <Rectangle HorizontalAlignment="Stretch"
+                               Width="Auto"
+                               Height="6"
+                               Name="HpBar"
+                               Fill="{Binding Enraged, Converter={StaticResource Converters.EnrageToHpColor}}"
+                               >
+                        <Rectangle.RenderTransform>
+                            <ScaleTransform ScaleX="1"/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <!--<controls:GenericGauge Height="6" Width="406" Opacity="1"
                                            BarColor="{Binding Enraged, Converter={StaticResource Converters.EnrageToHpColor}}"
                                            GaugeName=""
                                            ShowPercentage="False"
@@ -182,7 +200,8 @@
                                            CurrentVal="{Binding CurrentHP}"
                                            MaxVal="{Binding MaxHP}"
                                            x:Name="HPgauge"
-                                           />
+                                           />-->
+                    
                     <!--Enrage history-->
                     <ItemsControl                         ItemsSource="{Binding EnrageHistory, RelativeSource={RelativeSource AncestorType=local:BossGage}}"
 
@@ -212,6 +231,21 @@
                         <!--<TextBlock Width="Auto" FontSize="12" Style="{StaticResource Styles.DefaultText}"
                                    TextAlignment="Center" VerticalAlignment="Top" Margin="0,3,0,0" Padding="0"
                                    Text="{Binding EnrageTBtext, RelativeSource={RelativeSource AncestorType=local:BossGage}}"/>-->
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <FrameworkElement Width="{Binding ElementName=hpBarGrid, Path=ActualWidth}" Name="DotPusher">
+                            <FrameworkElement.LayoutTransform>
+                                <ScaleTransform ScaleX="1"></ScaleTransform>
+                            </FrameworkElement.LayoutTransform>
+                        </FrameworkElement>
+                        <Ellipse Name="Dot"
+                                 Height="8"
+                                 Width="8"
+                                 Effect="{StaticResource dropShadow}"
+                                 Fill="Orange"
+                                 HorizontalAlignment="Left"
+                                 Margin="-4,-1,-50,-1"
+                                 Opacity="{Binding CurrentHP}"/>
                     </StackPanel>
 
                 </Grid>
@@ -273,6 +307,7 @@
             <!--<TextBlock.Effect>
                 <DropShadowEffect ShadowDepth="0" BlurRadius="0" Color="White"></DropShadowEffect>
             </TextBlock.Effect>-->
+            
             <!--
                         </TextBlock>
                     </Viewbox>
