@@ -112,8 +112,8 @@ namespace TCC.Converters
                     return (SolidColorBrush)App.Current.FindResource("Colors.Chat.System.Friend");
                 case ChatChannel.Twitch:
                     return (SolidColorBrush)App.Current.FindResource("Colors.App.Twitch");
-                //case ChatChannel.WorldBoss:
-                //    return (SolidColorBrush)App.Current.FindResource("Colors.Chat.System.WorldBoss");                
+                case ChatChannel.WorldBoss:
+                    return (SolidColorBrush)App.Current.FindResource("Colors.Chat.System.WorldBoss");
                 case ChatChannel.Laurel:
                     return Brushes.OrangeRed;
                 default:
