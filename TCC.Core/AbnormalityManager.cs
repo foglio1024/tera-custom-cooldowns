@@ -4,20 +4,8 @@ using TCC.ViewModels;
 
 namespace TCC
 {
-    public delegate void UpdateAbnormalityEventHandler(ulong target, Abnormality ab, int duration, int stacks);
-
     public static class AbnormalityManager
     {
-        public const double PlayerAbSize = 32;
-        public const double PartyAbSize = 28;
-        public const double RaidAbSize = 24;
-        public const double BossAbSize = 30;
-        public const double PlayerAbLeftMargin = 2;
-        public const double PartyAbLeftMargin = 1;
-        public const double RaidAbLeftMargin = -9;
-        public const double BossAbLeftMargin = 2;
-
-
         public static AbnormalityDatabase CurrentDb;
 
         public static void BeginAbnormality(uint id, ulong target, uint duration, int stacks)
@@ -47,7 +35,7 @@ namespace TCC
                     GroupWindowViewModel.Instance.EndUserAbnormality(ab, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
 
                 }
-                //else if (EntitiesManager.TryGetBossById(target, out Boss b))
+                //else if (EntitiesManager.TryGetBossById(target, out Npc b))
                 //{
                 //    b.EndBuff(ab);
                 //}
@@ -64,18 +52,18 @@ namespace TCC
             {
                 if (ab.Infinity)
                 {
-                    BuffBarWindowViewModel.Instance.Player.AddOrRefreshInfBuff(ab, duration, stacks, PlayerAbSize, PlayerAbLeftMargin);
+                    BuffBarWindowViewModel.Instance.Player.AddOrRefreshInfBuff(ab, duration, stacks);
 
                 }
                 else
                 {
-                    BuffBarWindowViewModel.Instance.Player.AddOrRefreshBuff(ab, duration, stacks, PlayerAbSize, PlayerAbLeftMargin);
+                    BuffBarWindowViewModel.Instance.Player.AddOrRefreshBuff(ab, duration, stacks);
                     if(ab.IsShield) SessionManager.SetPlayerMaxShield(ab.ShieldSize);
                 }
             }
             else
             {
-                BuffBarWindowViewModel.Instance.Player.AddOrRefreshDebuff(ab, duration, stacks, PlayerAbSize, PlayerAbLeftMargin);
+                BuffBarWindowViewModel.Instance.Player.AddOrRefreshDebuff(ab, duration, stacks);
                 CharacterWindowViewModel.Instance.Player.AddToDebuffList(ab);
                 ClassManager.SetStatus(ab, true);
             }
@@ -120,11 +108,11 @@ namespace TCC
 
         static void BeginNpcAbnormality(Abnormality ab, int stacks, uint duration, ulong target)
         {
-            //if (EntitiesViewModel.TryGetBossById(target, out Boss b))
+            //if (EntitiesViewModel.TryGetBossById(target, out Npc b))
             //{
             //    b.AddorRefresh(ab, duration, stacks, BOSS_AB_SIZE, BOSS_AB_LEFT_MARGIN);
             //}
-            BossGageWindowViewModel.Instance.AddOrRefreshNpcAbnormality(ab, stacks, duration, target, BossAbSize, BossAbLeftMargin);
+            BossGageWindowViewModel.Instance.AddOrRefreshNpcAbnormality(ab, stacks, duration, target);
         }
         static bool Filter(Abnormality ab)
         {
