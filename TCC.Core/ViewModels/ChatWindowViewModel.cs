@@ -25,6 +25,7 @@ namespace TCC.ViewModels
         public LFG LastClickedLfg;
         private SynchronizedObservableCollection<LFG> _lfgs;
         public readonly PrivateChatChannel[] PrivateChannels = new PrivateChatChannel[8];
+        public Tab CurrentTab { get; set; }
         private bool paused;
 
         public static ChatWindowViewModel Instance => _instance ?? (_instance = new ChatWindowViewModel());
@@ -164,12 +165,15 @@ namespace TCC.ViewModels
         }
         private void HideTimer_Tick(object sender, EventArgs e)
         {
-            IsChatVisible = false;
+            if (SettingsManager.ChatFadeOut)
+            {
+                IsChatVisible = false;
+            }
             hideTimer.Stop();
         }
         private void ChatMessages_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            RefreshHideTimer();
+            RefreshTimer();
             NotifyPropertyChanged("NewItem");
             IsChatVisible = true;
         }
@@ -200,6 +204,23 @@ namespace TCC.ViewModels
 
             ChatMessage.SplitSimplePieces(chatMessage);
 
+            if (CurrentTab != null && !CurrentTab.Filter(chatMessage))
+            {
+                chatMessage.Animate = false; //set animate to false if the message is not going in the active tab
+                if (chatMessage.ContainsPlayerName || chatMessage.Channel == ChatChannel.ReceivedWhisper)
+                {
+                    var t = Tabs.FirstOrDefault(x => x.Channels.Contains(chatMessage.Channel));
+                    if (t != null)
+                    {
+                        t.Attention = true;
+                    }
+                    else
+                    {
+                        t = Tabs.FirstOrDefault(x => !x.ExcludedChannels.Contains(chatMessage.Channel));
+                        if (t != null) t.Attention = true;
+                    }
+                }
+            }
             if (!Paused) ChatMessages.Insert(0, chatMessage);
             else _queue.Enqueue(chatMessage);
 
@@ -257,7 +278,7 @@ namespace TCC.ViewModels
                 lfg.MembersCount = p.MembersCount;
             }
         }
-        public void RefreshHideTimer()
+        public void RefreshTimer()
         {
             hideTimer.Stop();
             hideTimer.Start();
@@ -291,6 +312,7 @@ namespace TCC.ViewModels
                 ChatChannel.Group, ChatChannel.GroupAlerts  }, new ChatChannel[] { }, new string[] { }, new string[] { }));
             Tabs.Add(new Tab("WHISPERS", new ChatChannel[] { ChatChannel.ReceivedWhisper, ChatChannel.SentWhisper, }, new ChatChannel[] { }, new string[] { }, new string[] { }));
             Tabs.Add(new Tab("SYSTEM", new ChatChannel[] { }, new ChatChannel[] { }, new string[] { "System" }, new string[] { }));
+            CurrentTab = Tabs[0];
         }
 
         public void ScrollToBottom()
@@ -336,6 +358,18 @@ namespace TCC.ViewModels
                 if (_tabName == value) return;
                 _tabName = value;
                 NotifyPropertyChanged(nameof(TabName));
+            }
+        }
+        private bool _attention;
+
+        public bool Attention
+        {
+            get => _attention;
+            set
+            {
+                if (_attention == value) return;
+                _attention = value;
+                NotifyPropertyChanged(nameof(Attention));
             }
         }
 
@@ -392,11 +426,20 @@ namespace TCC.ViewModels
             ApplyFilter();
         }
 
+        public bool Filter(ChatMessage m)
+        {
+            return (Authors.Count == 0 || Authors.Any(x => x == m.Author)) &&
+                   (Channels.Count == 0 || Channels.Any(x => x == m.Channel)) &&
+                   (ExcludedChannels.Count == 0 || ExcludedChannels.All(x => x != m.Channel)) &&
+                   (ExcludedAuthors.Count == 0 || ExcludedAuthors.All(x => x != m.Author));
+
+        }
         public void ApplyFilter()
         {
             Messages.Filter = f =>
             {
                 var m = f as ChatMessage;
+                return Filter(m);
                 //if (Authors.Count == 0 && Channels.Count != 0)
                 //{
                 //    if (ExcludedChannels.Count != 0)
@@ -414,10 +457,6 @@ namespace TCC.ViewModels
                 //    return Authors.Contains(m.Author);
                 //}
 
-                return (Authors.Count == 0 || Authors.Any(x => x == m.Author)) &&
-                       (Channels.Count == 0 || Channels.Any(x => x == m.Channel)) &&
-                       (ExcludedChannels.Count == 0 || ExcludedChannels.All(x => x != m.Channel)) &&
-                       (ExcludedAuthors.Count == 0 || ExcludedAuthors.All(x => x != m.Author));
             };
         }
     }
