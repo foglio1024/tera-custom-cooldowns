@@ -303,7 +303,7 @@ namespace TCC.Data
         }
 
 
-        public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks, double size, double margin)
+        public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks)
         {
             var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
@@ -325,7 +325,7 @@ namespace TCC.Data
             existing.Refresh();
 
         }
-        public void AddOrRefreshDebuff(Abnormality ab, uint duration, int stacks, double size, double margin)
+        public void AddOrRefreshDebuff(Abnormality ab, uint duration, int stacks)
         {
 
             var existing = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
@@ -341,7 +341,7 @@ namespace TCC.Data
             existing.Stacks = stacks;
             existing.Refresh();
         }
-        public void AddOrRefreshInfBuff(Abnormality ab, uint duration, int stacks, double size, double margin)
+        public void AddOrRefreshInfBuff(Abnormality ab, uint duration, int stacks)
         {
             var existing = InfBuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
