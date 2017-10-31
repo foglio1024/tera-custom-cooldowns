@@ -14,6 +14,28 @@ using TCC.Data.Databases;
 using TCC.Parsing.Messages;
 using TCC.ViewModels;
 using Tera.Game;
+using Tera.Game.Messages;
+using C_PLAYER_LOCATION = TCC.Parsing.Messages.C_PLAYER_LOCATION;
+using S_AVAILABLE_EVENT_MATCHING_LIST = TCC.Parsing.Messages.S_AVAILABLE_EVENT_MATCHING_LIST;
+using S_BAN_PARTY = TCC.Parsing.Messages.S_BAN_PARTY;
+using S_BAN_PARTY_MEMBER = TCC.Parsing.Messages.S_BAN_PARTY_MEMBER;
+using S_BOSS_GAGE_INFO = TCC.Parsing.Messages.S_BOSS_GAGE_INFO;
+using S_CHAT = TCC.Parsing.Messages.S_CHAT;
+using S_CHECK_TO_READY_PARTY = TCC.Parsing.Messages.S_CHECK_TO_READY_PARTY;
+using S_CREST_MESSAGE = TCC.Parsing.Messages.S_CREST_MESSAGE;
+using S_GET_USER_LIST = TCC.Parsing.Messages.S_GET_USER_LIST;
+using S_LEAVE_PARTY = TCC.Parsing.Messages.S_LEAVE_PARTY;
+using S_LEAVE_PARTY_MEMBER = TCC.Parsing.Messages.S_LEAVE_PARTY_MEMBER;
+using S_LOAD_TOPO = TCC.Parsing.Messages.S_LOAD_TOPO;
+using S_OTHER_USER_APPLY_PARTY = TCC.Parsing.Messages.S_OTHER_USER_APPLY_PARTY;
+using S_PARTY_MEMBER_LIST = TCC.Parsing.Messages.S_PARTY_MEMBER_LIST;
+using S_PARTY_MEMBER_STAT_UPDATE = TCC.Parsing.Messages.S_PARTY_MEMBER_STAT_UPDATE;
+using S_PLAYER_STAT_UPDATE = TCC.Parsing.Messages.S_PLAYER_STAT_UPDATE;
+using S_PRIVATE_CHAT = TCC.Parsing.Messages.S_PRIVATE_CHAT;
+using S_START_COOLTIME_SKILL = TCC.Parsing.Messages.S_START_COOLTIME_SKILL;
+using S_SYSTEM_MESSAGE = TCC.Parsing.Messages.S_SYSTEM_MESSAGE;
+using S_TRADE_BROKER_DEAL_SUGGESTED = TCC.Parsing.Messages.S_TRADE_BROKER_DEAL_SUGGESTED;
+using S_WHISPER = TCC.Parsing.Messages.S_WHISPER;
 
 namespace TCC.Parsing
 {
@@ -50,11 +72,11 @@ namespace TCC.Parsing
             var td = new TeraData(Region);
             var lang = td.GetLanguage(Region);
 
-            if (TimeManager.Instance.CurrentRegion != Region)
-            {
+            //if (TimeManager.Instance.CurrentRegion != Region)
+            //{
                 TimeManager.Instance.SetServerTimeZone(lang);
                 SettingsManager.LastRegion = lang;
-            }
+            //}
             TimeManager.Instance.SetGuildBamTime(false);
 
             EntitiesManager.CurrentDatabase = new MonsterDatabase(lang);
@@ -80,7 +102,7 @@ namespace TCC.Parsing
                 SystemMessageNamer = new OpCodeNamer(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/smt_{Version}.txt"));
                 MessageFactory.Init();
                 TeraSniffer.Instance.Connected = true;
-                ProxyInterop.ConnectToProxy();
+                Proxy.ConnectToProxy();
 
             }
             Packets.Enqueue(obj);
@@ -189,7 +211,7 @@ namespace TCC.Parsing
             {
                 BossGageWindowViewModel.Instance.UnsetBossTarget(p.EntityId);
             }
-            var b = BossGageWindowViewModel.Instance.CurrentNPCs.FirstOrDefault(x => x.EntityId == p.EntityId);
+            var b = BossGageWindowViewModel.Instance.NpcList.FirstOrDefault(x => x.EntityId == p.EntityId);
             if (b != null && b.IsBoss && b.Visible == System.Windows.Visibility.Visible) GroupWindowViewModel.Instance.SetAggro(p);
 
         }
@@ -441,7 +463,7 @@ namespace TCC.Parsing
 
         internal static void HandleGuildTowerInfo(S_GUILD_TOWER_INFO x)
         {
-            BossGageWindowViewModel.Instance.AddGuildTower(x.TowerId, x.GuildName);
+            BossGageWindowViewModel.Instance.AddGuildTower(x.TowerId, x.GuildName, x.GuildId);
         }
 
         public static void HandleLeavePrivateChat(S_LEAVE_PRIVATE_CHANNEL x)
@@ -482,7 +504,7 @@ namespace TCC.Parsing
             if (p.MessageId == 9950045)
             {
                 //shield start
-                foreach (Boss item in BossGageWindowViewModel.Instance.CurrentNPCs.Where(x => x.IsPhase1Dragon))
+                foreach (Npc item in BossGageWindowViewModel.Instance.NpcList.Where(x => x.IsPhase1Dragon))
                 {
                     item.StartShield();
                 }
@@ -490,24 +512,24 @@ namespace TCC.Parsing
             else if (p.MessageId == 9950113)
             {
                 //aquadrax interrupted
-                BossGageWindowViewModel.Instance.CurrentNPCs.First(x => x.ZoneId == 950 && x.TemplateId == 1103).BreakShield();
+                BossGageWindowViewModel.Instance.NpcList.First(x => x.ZoneId == 950 && x.TemplateId == 1103).BreakShield();
             }
             else if (p.MessageId == 9950114)
             {
                 //umbradrax interrupted
-                BossGageWindowViewModel.Instance.CurrentNPCs.First(x => x.ZoneId == 950 && x.TemplateId == 1102).BreakShield();
+                BossGageWindowViewModel.Instance.NpcList.First(x => x.ZoneId == 950 && x.TemplateId == 1102).BreakShield();
 
             }
             else if (p.MessageId == 9950115)
             {
                 //ignidrax interrupted
-                BossGageWindowViewModel.Instance.CurrentNPCs.First(x => x.ZoneId == 950 && x.TemplateId == 1100).BreakShield();
+                BossGageWindowViewModel.Instance.NpcList.First(x => x.ZoneId == 950 && x.TemplateId == 1100).BreakShield();
 
             }
             else if (p.MessageId == 9950116)
             {
                 //terradrax interrupted
-                BossGageWindowViewModel.Instance.CurrentNPCs.First(x => x.ZoneId == 950 && x.TemplateId == 1101).BreakShield();
+                BossGageWindowViewModel.Instance.NpcList.First(x => x.ZoneId == 950 && x.TemplateId == 1101).BreakShield();
 
             }
             else if (p.MessageId == 9950044)
@@ -603,7 +625,7 @@ namespace TCC.Parsing
                 ChatWindowViewModel.Instance.TooltipInfo.ShowGuildInvite = !x.HasGuild;
                 ChatWindowViewModel.Instance.TooltipInfo.ShowPartyInvite = !x.HasParty;
             }
-            if (!ProxyInterop.IsConnected) return;
+            if (!Proxy.IsConnected) return;
             WindowManager.ChatWindow.OpenTooltip();
         }
 
@@ -636,7 +658,7 @@ namespace TCC.Parsing
 
         public static void HandleDespawnNpc(S_DESPAWN_NPC p)
         {
-            EntitiesManager.DespawnNPC(p.Target);
+            EntitiesManager.DespawnNPC(p.Target, p.Type);
         }
 
 
@@ -859,7 +881,7 @@ namespace TCC.Parsing
 
         //public static void Debug(bool x)
         //{
-        //    SessionManager.TryGetBossById(10, out Boss b);
+        //    SessionManager.TryGetBossById(10, out Npc b);
         //    if (x)
         //    {
         //        b.CurrentHP = b.MaxHP/2;
@@ -872,7 +894,7 @@ namespace TCC.Parsing
         //}
         //public static void DebugEnrage(bool e)
         //{
-        //    SessionManager.TryGetBossById(10, out Boss b);
+        //    SessionManager.TryGetBossById(10, out Npc b);
 
         //    b.Enraged = e;
         //    //EnragedChanged?.Invoke(10, e);
@@ -953,11 +975,23 @@ namespace TCC.Parsing
                 SessionManager.SetPlayerShield(sAbnormalityDamageAbsorb.Damage);
                 return;
             }
-            if (BossGageWindowViewModel.Instance.CurrentNPCs.Any(x => x.EntityId == sAbnormalityDamageAbsorb.Target))
+            if (BossGageWindowViewModel.Instance.NpcList.Any(x => x.EntityId == sAbnormalityDamageAbsorb.Target))
             {
                 BossGageWindowViewModel.Instance.UpdateShield(sAbnormalityDamageAbsorb.Target,
                     sAbnormalityDamageAbsorb.Damage);
             }
+        }
+
+        public static void HandleImageData(S_IMAGE_DATA sImageData)
+        {
+            
+
+        }
+
+        public static void HandleUserGuildLogo(S_GET_USER_GUILD_LOGO sGetUserGuildLogo)
+        {
+            if(S_IMAGE_DATA.Database.ContainsKey(sGetUserGuildLogo.GuildId)) return;
+            S_IMAGE_DATA.Database.Add(sGetUserGuildLogo.GuildId, sGetUserGuildLogo.GuildLogo);
         }
     }
 }
