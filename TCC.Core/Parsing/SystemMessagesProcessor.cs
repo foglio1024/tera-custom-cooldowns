@@ -41,6 +41,7 @@ namespace TCC.Parsing
         {
             var sysmsg = "@0\vUserName\v" + friendName;
             var msg = new ChatMessage(sysmsg, sysMsg, ChatChannel.Friend);
+            msg.Author = friendName;
             ChatWindowViewModel.Instance.AddChatMessage(msg);
         }
 
@@ -50,7 +51,7 @@ namespace TCC.Parsing
         {
             { "SMT_MAX_ENCHANT_SUCCEED", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleMaxEnchantSucceed(srvMsg)) },
             { "SMT_FRIEND_IS_CONNECTED", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleFriendLogin(srvMsg, sysMsg)) },
-            { "SMT_FRIEND_WALK_INTO_SAME_AREA", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleFriendMessage(srvMsg, sysMsg)) },
+            { "SMT_FRIEND_WALK_INTO_SAME_AREA", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleFriendInAreaMessage(srvMsg, sysMsg)) },
             { "SMT_CHAT_LINKTEXT_DISCONNECT", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleInvalidLink(srvMsg, sysMsg)) },
 
             { "SMT_BATTLE_PARTY_DIE", new Action<string, SystemMessage>((srvMsg, sysMsg) => HandleDeathMessage(srvMsg, sysMsg)) },
@@ -117,9 +118,13 @@ namespace TCC.Parsing
             var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
             ChatWindowViewModel.Instance.AddChatMessage(msg);
         }
-        private static void HandleFriendMessage(string srvMsg, SystemMessage sysMsg)
+        private static void HandleFriendInAreaMessage(string srvMsg, SystemMessage sysMsg)
         {
             var msg = new ChatMessage(srvMsg, sysMsg, ChatChannel.Friend);
+            var start = srvMsg.IndexOf("UserName\v") + "UserName\v".Length;
+            var end = srvMsg.IndexOf("\v", start);
+            var friendName = srvMsg.Substring(start, end- start);
+            msg.Author = friendName;
             ChatWindowViewModel.Instance.AddChatMessage(msg);
         }
         private static void HandleQuestMessage(string srvMsg, SystemMessage sysMsg)
