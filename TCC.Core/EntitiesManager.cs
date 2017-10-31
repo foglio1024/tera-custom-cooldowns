@@ -11,17 +11,17 @@ namespace TCC
         private static ulong currentEncounter;
         public static void SpawnNPC(ushort zoneId, uint templateId, ulong entityId, Visibility v)
         {
-            //if (IsWorldBoss(zoneId, templateId))
-            //{
-            //    CurrentDatabase.TryGetMonster(templateId, zoneId, out var monst);
-            //    TimeManager.Instance.SendWebhookMessage(monst.Name);
-            //    if (monst.IsBoss)
-            //    {
-                    
-            //    var msg = new ChatMessage(ChatChannel.WorldBoss, "System", $"<font>{monst.Name}</font><font size=\"15\" color=\"#cccccc\"> is nearby.</font>");
-            //    ChatWindowViewModel.Instance.AddChatMessage(msg);
-            //    }
-            //}
+            if (IsWorldBoss(zoneId, templateId))
+            {
+                CurrentDatabase.TryGetMonster(templateId, zoneId, out var monst);
+                //TimeManager.Instance.SendWebhookMessage(monst.Name);
+                if (monst.IsBoss)
+                {
+
+                    var msg = new ChatMessage(ChatChannel.WorldBoss, "System", $"<font>{monst.Name}</font><font size=\"15\" color=\"#cccccc\"> is nearby.</font>");
+                    ChatWindowViewModel.Instance.AddChatMessage(msg);
+                }
+            }
             if (!Filter(zoneId, templateId)) return;
 
             if (CurrentDatabase.TryGetMonster(templateId, zoneId, out Monster m))
@@ -55,9 +55,9 @@ namespace TCC
             return true;
         }
 
-        public static void DespawnNPC(ulong target)
+        public static void DespawnNPC(ulong target, DespawnType type)
         {
-            BossGageWindowViewModel.Instance.RemoveBoss(target);
+            BossGageWindowViewModel.Instance.RemoveBoss(target, type);
             if (BossGageWindowViewModel.Instance.VisibleBossesCount == 0)
             {
                 SessionManager.Encounter = false;
