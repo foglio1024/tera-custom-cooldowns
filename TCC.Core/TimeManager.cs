@@ -92,8 +92,8 @@ namespace TCC
         private void CheckReset()
         {
             if (CurrentRegion == null) return;
-            if (SettingsManager.LastRun.Hour >= ResetHour + ServerHourOffsetFromLocal ||
-                DateTime.Now.Hour <= ResetHour + ServerHourOffsetFromLocal) return;
+            var todayReset = DateTime.Today.AddHours(ResetHour + ServerHourOffsetFromLocal);
+            if(SettingsManager.LastRun > todayReset || DateTime.Now < todayReset) return;
             foreach (var ch in InfoWindowViewModel.Instance.Characters)
             {
                 foreach (var dg in ch.Dungeons)
