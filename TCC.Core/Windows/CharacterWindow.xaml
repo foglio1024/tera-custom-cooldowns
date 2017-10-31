@@ -17,7 +17,6 @@
         AllowsTransparency="True" 
         SizeToContent="WidthAndHeight" 
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
-        MouseRightButtonDown="Window_MouseRightButtonDown"
         Loaded="Window_Loaded"            
         ResizeMode="NoResize" 
         >

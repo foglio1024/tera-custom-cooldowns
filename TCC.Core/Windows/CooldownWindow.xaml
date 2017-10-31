@@ -18,7 +18,6 @@
         WindowStyle="None" 
         Background="Transparent" 
         MouseLeftButtonDown="Window_MouseLeftButtonDown" 
-        MouseRightButtonDown="Window_MouseRightButtonDown"
         Loaded="Window_Loaded"    
         ResizeMode="NoResize">
     <w:TccWindow.DataContext>

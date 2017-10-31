@@ -18,7 +18,6 @@
                  Title="GroupWindow" Height="Auto" Width="Auto"
                  Loaded="TccWindow_Loaded" 
                  MouseLeftButtonDown="Window_MouseLeftButtonDown" 
-                 PreviewMouseRightButtonDown="TccWindow_PreviewMouseRightButtonDown"
                  ShowInTaskbar="False" UseLayoutRounding="True"
                  >
     <local:TccWindow.DataContext>

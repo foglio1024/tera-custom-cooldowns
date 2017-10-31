@@ -39,11 +39,6 @@ namespace TCC
 
             }, DispatcherPriority.Normal);
         }
-
-        private void Window_MouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            ContextMenu.IsOpen = true;
-        }
     }
 }
 

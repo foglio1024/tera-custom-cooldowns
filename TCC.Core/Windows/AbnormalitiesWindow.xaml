@@ -17,7 +17,6 @@
         SizeToContent="WidthAndHeight"
         Loaded="Window_Loaded"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
-        MouseRightButtonDown="Window_MouseRightButtonDown"
         >
     <w:TccWindow.DataContext>
         <vm:BuffBarWindowViewModel />
