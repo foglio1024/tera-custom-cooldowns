@@ -23,7 +23,7 @@ namespace TCC.ViewModels
 
         public EventGroup(string name, DateTime start, DateTime end, bool rc)
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            _dispatcher = InfoWindowViewModel.Instance.GetDispatcher();
             Events = new SynchronizedObservableCollection<DailyEvent>(_dispatcher);
             Name = name;
             RemoteCheck = rc;
@@ -32,7 +32,7 @@ namespace TCC.ViewModels
         }
         public void AddEvent(DailyEvent ev)
         {
-            Events.Add(ev);
+            _dispatcher.Invoke(() => Events.Add(ev));
             //Events.Insert(0, ev);
         }
     }
