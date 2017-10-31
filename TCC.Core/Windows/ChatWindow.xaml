@@ -24,7 +24,10 @@
         <DataTemplate x:Key="ChatMessageTemplate">
             <controls:ChatMessageControl VerticalAlignment="Top">
                 <controls:ChatMessageControl.LayoutTransform>
-                    <RotateTransform Angle="180"></RotateTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="1"></ScaleTransform>
+                        <RotateTransform Angle="180"></RotateTransform>
+                    </TransformGroup>
                 </controls:ChatMessageControl.LayoutTransform>
             </controls:ChatMessageControl>
         </DataTemplate>
@@ -85,6 +88,7 @@
                         <VirtualizingStackPanel Margin="0,0,0,0" 
                                                 VerticalAlignment="Stretch"
                                                 Background="#01000000" 
+                                                VirtualizationMode="Standard"
                         >
                             <VirtualizingStackPanel.LayoutTransform>
                                 <RotateTransform Angle="180"></RotateTransform>
@@ -135,6 +139,13 @@
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type TabItem}">
                                     <Grid Name="Panel" Cursor="Hand" MouseLeftButtonDown="TabClicked">
+                                        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Margin="-4,0"
+                                              Visibility="{Binding Attention, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
+                                            <Ellipse Fill="Orange" Opacity=".4" Width="12" Height="12" Margin="0"/>
+
+                                            <Ellipse Fill="Orange" Width="6" Height="6" Margin="0"/>
+                                        </Grid>
+
                                         <ContentPresenter x:Name="ContentSite"
                                                           VerticalAlignment="Center"
                                                           HorizontalAlignment="Center"
@@ -170,7 +181,7 @@
 
                 </TabControl.Resources>
             </TabControl>
-            <Rectangle Height="3" Fill="{StaticResource Colors.App.MP}" Width="0" x:Name="selectionRect" 
+            <Rectangle Height="3" Fill="{StaticResource Colors.App.MP}" Width="10" x:Name="selectionRect" 
                    IsHitTestVisible="False" HorizontalAlignment="Left" 
                    Opacity="1" VerticalAlignment="Top" Margin="0,22,0,0" Grid.Row="1">
                 <Rectangle.RenderTransform>
@@ -218,8 +229,8 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
 
-            <Popup Name="playerInfo" StaysOpen="True" Placement="Mouse"
-               AllowsTransparency="True" Width="Auto" HorizontalOffset="95" UseLayoutRounding="True"
+            <Popup Name="playerInfo" StaysOpen="True" Placement="MousePoint" 
+               AllowsTransparency="True" Width="Auto" HorizontalOffset="0" UseLayoutRounding="True"
                VerticalAlignment="Center"
                VerticalOffset="0">
                 <chatcontrols:PlayerTooltip />
@@ -256,7 +267,7 @@
                                                   >
                                         <ItemsControl.ItemsPanel>
                                             <ItemsPanelTemplate>
-                                                    <WrapPanel Orientation="Vertical" MaxHeight="800" Margin="4,0"/>
+                                                <WrapPanel Orientation="Vertical" MaxHeight="800" Margin="4,0"/>
                                             </ItemsPanelTemplate>
                                         </ItemsControl.ItemsPanel>
                                     </ItemsControl>
