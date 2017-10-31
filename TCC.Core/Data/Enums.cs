@@ -71,7 +71,7 @@
         Enchant7 = 313, //arbitrary
         Enchant8 = 314, //arbitrary
         Enchant9 = 315, //arbitrary
-        //WorldBoss = 316, //arb
+        WorldBoss = 316, //arb
         Laurel = 317,
         TCC = 1000,
         Twitch = 1001
@@ -220,5 +220,11 @@
     {
         Next = 0,
         Remaining = 1
+    }
+
+    public enum DespawnType
+    {
+        OutOfView = 1,
+        Dead = 5
     }
 }
