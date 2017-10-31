@@ -135,7 +135,7 @@ namespace TCC
                 return long.Parse(data);
 
             }
-            catch (Exception e)
+            catch
             {
                 ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Failed to retrieve guild bam info.</FONT>"));
                 return 0;
@@ -157,7 +157,7 @@ namespace TCC
             {
                 c.UploadDataAsync(new Uri(sb.ToString()), new byte[] { });
             }
-            catch (Exception e)
+            catch 
             {
                 ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Failed to upload guild bam info.</FONT>"));   
             }
