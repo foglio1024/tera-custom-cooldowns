@@ -140,6 +140,12 @@ namespace TCC.Windows
 
             var s = sender as FrameworkElement;
             AnimateTabRect(s);
+            var t = s.DataContext as Tab;
+            if (t != null)
+            {
+                t.Attention = false;
+                ChatWindowViewModel.Instance.CurrentTab = t;
+            }
             //_currentContent = tabControl.SelectedContent as ItemsControl;
             //var b = (Border)VisualTreeHelper.GetChild(_currentContent, 0);
             //var sw = (ScrollViewer)VisualTreeHelper.GetChild(b, 0);
@@ -287,7 +293,7 @@ namespace TCC.Windows
 
         private void TccWindow_MouseLeave(object sender, MouseEventArgs e)
         {
-            ChatWindowViewModel.Instance.RefreshHideTimer();
+            ChatWindowViewModel.Instance.RefreshTimer();
 
         }
 
