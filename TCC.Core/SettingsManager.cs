@@ -54,6 +54,7 @@ namespace TCC
         public static string TwitchName { get; set; } = "";
         public static string TwitchToken { get; set; } = "";
         public static string TwitchChannelName { get; set; } = "";
+        public static bool ChatFadeOut { get; set; } = true;
 
         public static Dictionary<Class, List<uint>> GroupAbnormals = new Dictionary<Class, List<uint>>();
         public static uint GroupSizeThreshold = 7;
@@ -214,6 +215,11 @@ namespace TCC
                 catch (Exception) { }
                 try
                 {
+                    ChatFadeOut = Boolean.Parse(b.Attribute(nameof(ChatFadeOut)).Value);
+                }
+                catch (Exception) { }
+                try
+                {
                     ChatWindowOpacity = Double.Parse(b.Attribute(nameof(ChatWindowOpacity)).Value, CultureInfo.InvariantCulture);
                 }
                 catch (Exception) { }
@@ -357,6 +363,7 @@ namespace TCC
                 new XAttribute(nameof(DisablePartyAbnormals), DisablePartyAbnormals),
                 new XAttribute(nameof(ShowOnlyAggroStacks), ShowOnlyAggroStacks),
                 new XAttribute(nameof(LfgOn), LfgOn),
+                new XAttribute(nameof(ChatFadeOut), ChatFadeOut),
                 new XAttribute(nameof(ChatWindowOpacity), ChatWindowOpacity),
                 new XAttribute(nameof(LastRun), DateTime.Now),
                 new XAttribute(nameof(LastRegion), LastRegion),
