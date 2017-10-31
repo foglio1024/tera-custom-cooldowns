@@ -11,26 +11,70 @@ using TCC.ViewModels;
 
 namespace TCC
 {
-    public static class ProxyInterop
+    public static class Proxy
     {
-        static TcpClient client = new TcpClient();
-        static int retries = 2;
-        public static bool IsConnected
+        private static TcpClient _client = new TcpClient();
+        private static int _retries = 2;
+
+        public static bool IsConnected => _client.Connected;
+
+        public static void ConnectToProxy()
         {
-            get
+            try
             {
-                return client.Connected;
+                if (_client.Client != null && _client.Connected) return;
+                Debug.WriteLine("Connecting...");
+                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Trying to connect to tera-proxy...</FONT>"));
+
+                _client = new TcpClient();
+                _client.Connect("127.0.0.50", 9550);
+                Debug.WriteLine("Connected");
+                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Connected to tera-proxy.</FONT>"));
+                var t = new Thread(ReceiveData);
+                t.Start();
+            }
+            catch (Exception e)
+            {
+                _retries--;
+                Debug.WriteLine(e.Message);
+                Task.Delay(2000).ContinueWith(t =>
+                {
+                    if (_retries <= 0)
+                    {
+                        Debug.WriteLine("Maximum retries exceeded...");
+                        ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Maximum retries exceeded. tera-proxy functionalities won't be available.</FONT>"));
+
+                        _retries = 2;
+                        return;
+                    }
+                    ConnectToProxy();
+                });
             }
         }
-
-        static void ReceiveData()
+        private static void SendData(string data)
+        {
+            try
+            {
+                var stream = _client.GetStream();
+                UTF8Encoding utf8 = new UTF8Encoding();
+                byte[] bb = utf8.GetBytes(data);
+                stream.Write(bb, 0, bb.Length);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                _retries = 2;
+                //ConnectToProxy();
+            }
+        }
+        private static void ReceiveData()
         {
             var buffer = new byte[2048];
             try
             {
-                while (client.Connected)
+                while (_client.Connected)
                 {
-                    var size = client.GetStream().Read(buffer, 0, buffer.Length);
+                    var size = _client.GetStream().Read(buffer, 0, buffer.Length);
                     var msg = "<FONT>"+Encoding.UTF8.GetString(buffer.Take(size).ToArray())+"</FONT>";
                     PacketProcessor.HandleCommandOutput(msg);
                 }
@@ -40,43 +84,21 @@ namespace TCC
                 Console.WriteLine(e.ToString());
             }
         }
-
-        public static void ConnectToProxy()
+        public static void CloseConnection()
         {
             try
             {
-                if (client.Client != null && client.Connected) return;
-                Debug.WriteLine("Connecting...");
-                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Trying to connect to tera-proxy...</FONT>"));
-
-                client = new TcpClient();
-                client.Connect("127.0.0.50", 9550);
-                Debug.WriteLine("Connected");
-                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Connected to tera-proxy.</FONT>"));
-                var t = new Thread(new ThreadStart(ReceiveData));
-                t.Start();
+                _client?.GetStream().Close();
+                _client?.Client?.Close();
+                _client?.Close();
             }
-            catch (Exception e)
+            catch
             {
-                retries--;
-                Debug.WriteLine(e.Message);
-                Task.Delay(2000).ContinueWith(t =>
-                {
-                    if (retries <= 0)
-                    {
-                        Debug.WriteLine("Maximum retries exceeded...");
-                        ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Maximum retries exceeded. tera-proxy functionalities won't be available.</FONT>"));
-
-                        retries = 2;
-                        return;
-                    }
-                    ConnectToProxy();
-                });
-
+                // ignored
             }
         }
 
-        internal static void SendLinkData(string linkData)
+        public static void ChatLinkData(string linkData)
         {
             // linkData = T#####DATA
             if (linkData == null) return;
@@ -85,28 +107,10 @@ namespace TCC
             sb.Append(":tcc:");
             sb.Append(linkData.Replace("#####", ":tcc:"));
             sb.Append(":tcc:");
-            System.IO.File.AppendAllText("link-test.txt", sb.ToString() + "\n");
+            System.IO.File.AppendAllText("link-test.txt", sb + "\n");
             SendData(sb.ToString());
         }
-
-        static void SendData(string data)
-        {
-            try
-            {
-                var stream = client.GetStream();
-                UTF8Encoding utf8 = new UTF8Encoding();
-                byte[] bb = utf8.GetBytes(data);
-                stream.Write(bb, 0, bb.Length);
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e.Message);
-                retries = 2;
-                //ConnectToProxy();
-            }
-        }
-
-        internal static void SendRequestPartyInfo(int id)
+        public static void RequestPartyInfo(int id)
         {
             var sb = new StringBuilder("lfg_party_req");
             sb.Append("&id=");
@@ -114,27 +118,7 @@ namespace TCC
 
             SendData(sb.ToString());
         }
-
-        public static void SendExTooltipMessage(long itemUid, string ownerName)
-        {
-            var sb = new StringBuilder("ex_tooltip");
-            sb.Append("&uid=");
-            sb.Append(itemUid);
-            sb.Append("&name=");
-            sb.Append(ownerName);
-
-            SendData(sb.ToString());
-        }
-        public static void SendNondbItemInfoMessage(uint itemId)
-        {
-            var sb = new StringBuilder("nondb_info");
-            sb.Append("&id=");
-            sb.Append(itemId);
-
-            SendData(sb.ToString());
-        }
-
-        public static void SendFriendRequestMessage(string name, string message)
+        public static void FriendRequest(string name, string message)
         {
             var sb = new StringBuilder("friend_req");
             sb.Append("&name=");
@@ -144,7 +128,7 @@ namespace TCC
 
             SendData(sb.ToString());
         }
-        public static void SendUnfriendUserMessage(string name)
+        public static void UnfriendUser(string name)
         {
             var sb = new StringBuilder("unfriend");
             sb.Append("&name=");
@@ -152,8 +136,7 @@ namespace TCC
 
             SendData(sb.ToString());
         }
-
-        public static void SendBlockUserMessage(string name)
+        public static void BlockUser(string name)
         {
             var sb = new StringBuilder("block");
             sb.Append("&name=");
@@ -161,8 +144,7 @@ namespace TCC
 
             SendData(sb.ToString());
         }
-
-        internal static void SendGrantRevokeInvite(uint serverId, uint playerId, bool v)
+        public static void SetInvitePower(uint serverId, uint playerId, bool v)
         {
             var sb = new StringBuilder("power_change");
             sb.Append("&sId=");
@@ -174,8 +156,7 @@ namespace TCC
 
             SendData(sb.ToString());
         }
-
-        public static void SendUnblockUserMessage(string name)
+        public static void UnblockUser(string name)
         {
             var sb = new StringBuilder("unblock");
             sb.Append("&name=");
@@ -183,7 +164,7 @@ namespace TCC
 
             SendData(sb.ToString());
         }
-        public static void SendAskInteractiveMessage(uint srvId, string name)
+        public static void AskInteractive(uint srvId, string name)
         {
             var sb = new StringBuilder("ask_int");
             sb.Append("&srvId=");
@@ -193,8 +174,7 @@ namespace TCC
 
             SendData(sb.ToString());
         }
-
-        internal static void SendDelegateLeader(uint serverId, uint playerId)
+        public static void DelegateLeader(uint serverId, uint playerId)
         {
             var sb = new StringBuilder("leader");
             sb.Append("&sId=");
@@ -204,8 +184,7 @@ namespace TCC
 
             SendData(sb.ToString());
         }
-
-        public static void SendInspect(string name)
+        public static void Inspect(string name)
         {
             var sb = new StringBuilder("inspect");
             sb.Append("&name=");
@@ -213,7 +192,7 @@ namespace TCC
 
             SendData(sb.ToString());
         }
-        public static void SendPartyInvite(string name)
+        public static void PartyInvite(string name)
         {
             var sb = new StringBuilder("inv_party");
             sb.Append("&name=");
@@ -223,7 +202,7 @@ namespace TCC
 
             SendData(sb.ToString());
         }
-        public static void SendGuildInvite(string name)
+        public static void GuildInvite(string name)
         {
             var sb = new StringBuilder("inv_guild");
             sb.Append("&name=");
@@ -231,7 +210,7 @@ namespace TCC
 
             SendData(sb.ToString());
         }
-        public static void SendTradeBrokerDecline(uint playerId, uint listingId)
+        public static void DeclineBrokerOffer(uint playerId, uint listingId)
         {
             var sb = new StringBuilder("tb_decline");
             sb.Append("&player=");
@@ -242,7 +221,7 @@ namespace TCC
             SendData(sb.ToString());
 
         }
-        public static void SendTradeBrokerAccept(uint playerId, uint listingId)
+        public static void AcceptBrokerOffer(uint playerId, uint listingId)
         {
             var sb = new StringBuilder("tb_accept");
             sb.Append("&player=");
@@ -253,7 +232,7 @@ namespace TCC
             SendData(sb.ToString());
 
         }
-        public static void SendDeclineApply(uint playerId)
+        public static void DeclineApply(uint playerId)
         {
             var sb = new StringBuilder("apply_decline");
             sb.Append("&player=");
@@ -261,20 +240,23 @@ namespace TCC
 
             SendData(sb.ToString());
         }
-        public static void CloseConnection()
+        public static void ExTooltip(long itemUid, string ownerName)
         {
-            try
-            {
-                client?.GetStream().Close();
-                client?.Client?.Close();
-                client?.Close();
+            var sb = new StringBuilder("ex_tooltip");
+            sb.Append("&uid=");
+            sb.Append(itemUid);
+            sb.Append("&name=");
+            sb.Append(ownerName);
 
-            }
-            catch (Exception)
-            {
+            SendData(sb.ToString());
+        }
+        public static void NondbItemInfo(uint itemId)
+        {
+            var sb = new StringBuilder("nondb_info");
+            sb.Append("&id=");
+            sb.Append(itemId);
 
-
-            }
+            SendData(sb.ToString());
         }
     }
 }
