@@ -81,7 +81,7 @@ namespace TCC
 
                 SkillManager.Clear();
                 WindowManager.TrayIcon.Icon = WindowManager.DefaultIcon;
-                ProxyInterop.CloseConnection();
+                Proxy.CloseConnection();
             };
 
             SessionManager.CurrentPlayer.Class = Class.None;
@@ -147,7 +147,7 @@ namespace TCC
             TeraSniffer.Instance.Enabled = false;
             SettingsManager.SaveSettings();
             WindowManager.Dispose();
-            ProxyInterop.CloseConnection();
+            Proxy.CloseConnection();
             Environment.Exit(0);
         }
 
