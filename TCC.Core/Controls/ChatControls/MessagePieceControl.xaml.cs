@@ -29,16 +29,16 @@ namespace TCC.Controls
             switch (_context.Type)
             {
                 case MessagePieceType.Item:
-                    ProxyInterop.SendLinkData(_context.RawLink);
+                    Proxy.ChatLinkData(_context.RawLink);
                     break;
                 case MessagePieceType.Url:
                     Process.Start(_context.Text);
                     break;
                 case MessagePieceType.Point_of_interest:
-                    ProxyInterop.SendLinkData(_context.RawLink);
+                    Proxy.ChatLinkData(_context.RawLink);
                     break;
                 case MessagePieceType.Quest:
-                    ProxyInterop.SendLinkData(_context.RawLink);
+                    Proxy.ChatLinkData(_context.RawLink);
                     break;
             }
         }

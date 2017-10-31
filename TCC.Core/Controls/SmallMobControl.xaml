@@ -6,10 +6,10 @@
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:data="clr-namespace:TCC.Data"
              mc:Ignorable="d" Loaded="SmallMobControl_OnLoaded"
-             Visibility="{Binding Visible}">
+             Visibility="{Binding Visible}" IsHitTestVisible="False">
 
 
-    <Grid Margin="2" Width="100" MaxWidth="150" x:Name="RootGrid">
+    <Grid Margin="2" Width="100" MaxWidth="150" x:Name="RootGrid" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />

@@ -36,7 +36,7 @@ namespace TCC.Controls.ChatControls
 
         private void root_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            ProxyInterop.SendRequestPartyInfo(_dc.Id);
+            Proxy.RequestPartyInfo(_dc.Id);
             ChatWindowViewModel.Instance.LastClickedLfg = _dc;
         }
 

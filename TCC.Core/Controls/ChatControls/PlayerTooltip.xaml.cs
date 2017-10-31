@@ -34,19 +34,19 @@ namespace TCC.Controls.ChatControls
 
         private void InspectClick(object sender, RoutedEventArgs e)
         {
-            ProxyInterop.SendInspect(ChatWindowViewModel.Instance.TooltipInfo.Name);
+            Proxy.Inspect(ChatWindowViewModel.Instance.TooltipInfo.Name);
             WindowManager.ChatWindow.CloseTooltip();
         }
 
         private void PartyInviteClick(object sender, RoutedEventArgs e)
         {
-            ProxyInterop.SendPartyInvite(ChatWindowViewModel.Instance.TooltipInfo.Name);
+            Proxy.PartyInvite(ChatWindowViewModel.Instance.TooltipInfo.Name);
             WindowManager.ChatWindow.CloseTooltip();
         }
 
         private void GuildInviteClick(object sender, RoutedEventArgs e)
         {
-            ProxyInterop.SendGuildInvite(ChatWindowViewModel.Instance.TooltipInfo.Name);
+            Proxy.GuildInvite(ChatWindowViewModel.Instance.TooltipInfo.Name);
             WindowManager.ChatWindow.CloseTooltip();
         }
 
@@ -54,7 +54,7 @@ namespace TCC.Controls.ChatControls
         {
             if (ChatWindowViewModel.Instance.TooltipInfo.IsFriend)
             {
-                ProxyInterop.SendUnfriendUserMessage(ChatWindowViewModel.Instance.TooltipInfo.Name);
+                Proxy.UnfriendUser(ChatWindowViewModel.Instance.TooltipInfo.Name);
                 WindowManager.ChatWindow.CloseTooltip();
             }
             else
@@ -68,7 +68,7 @@ namespace TCC.Controls.ChatControls
         {
             if (!ChatWindowViewModel.Instance.TooltipInfo.IsBlocked)
             {
-                ProxyInterop.SendBlockUserMessage(ChatWindowViewModel.Instance.TooltipInfo.Name);
+                Proxy.BlockUser(ChatWindowViewModel.Instance.TooltipInfo.Name);
                 ChatWindowViewModel.Instance.BlockedUsers.Add(ChatWindowViewModel.Instance.TooltipInfo.Name);
                 try
                 {
@@ -78,7 +78,7 @@ namespace TCC.Controls.ChatControls
             }
             else
             {
-                ProxyInterop.SendUnblockUserMessage(ChatWindowViewModel.Instance.TooltipInfo.Name);
+                Proxy.UnblockUser(ChatWindowViewModel.Instance.TooltipInfo.Name);
                 ChatWindowViewModel.Instance.BlockedUsers.Remove(ChatWindowViewModel.Instance.TooltipInfo.Name);
 
             }
@@ -114,14 +114,14 @@ namespace TCC.Controls.ChatControls
         {
             
             GroupWindowViewModel.Instance.GetUser(ChatWindowViewModel.Instance.TooltipInfo.Name, out User u);
-            if (u != null) { ProxyInterop.SendGrantRevokeInvite(u.ServerId, u.PlayerId, !u.CanInvite); u.CanInvite = !u.CanInvite; }
+            if (u != null) { Proxy.SetInvitePower(u.ServerId, u.PlayerId, !u.CanInvite); u.CanInvite = !u.CanInvite; }
             WindowManager.ChatWindow.CloseTooltip();
         }
 
         private void DelegateLeaderClick(object sender, RoutedEventArgs e)
         {
             GroupWindowViewModel.Instance.GetUser(ChatWindowViewModel.Instance.TooltipInfo.Name, out User u);
-            ProxyInterop.SendDelegateLeader(u.ServerId, u.PlayerId);
+            Proxy.DelegateLeader(u.ServerId, u.PlayerId);
             WindowManager.ChatWindow.CloseTooltip();
         }
     }

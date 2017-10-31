@@ -19,11 +19,11 @@ namespace TCC.Controls
         public DragonControl()
         {
             InitializeComponent();
-            shieldArcAn = new DoubleAnimation(0, 359.99, TimeSpan.FromSeconds(BossGageWindowViewModel.PH1SHIELD_DURATION));
+            shieldArcAn = new DoubleAnimation(0, 359.99, TimeSpan.FromSeconds(BossGageWindowViewModel.Ph1ShieldDuration));
 
         }
 
-        Boss dc;
+        Npc dc;
         private string _enrageLabel;
         public string EnrageLabel
         {
@@ -37,7 +37,7 @@ namespace TCC.Controls
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            dc = (Boss)DataContext;
+            dc = (Npc)DataContext;
             dc.PropertyChanged += Dc_PropertyChanged;
             dc.DeleteEvent += Dc_DeleteEvent;
             enrageLine.LayoutTransform = dc.CurrentPercentage > dc.EnragePattern.Percentage ? new RotateTransform((dc.CurrentPercentage - dc.EnragePattern.Percentage) * 3.6) : new RotateTransform(0);
@@ -49,7 +49,7 @@ namespace TCC.Controls
         {
             try
             {
-                BossGageWindowViewModel.Instance.RemoveMe((Boss)DataContext);
+                BossGageWindowViewModel.Instance.RemoveMe((Npc)DataContext);
             }
             catch { }
         });
@@ -60,7 +60,7 @@ namespace TCC.Controls
             {
                 if (dc.Shield == ShieldStatus.On)
                 {
-                    shieldArcAn = new DoubleAnimation(0, 359.99, TimeSpan.FromSeconds(BossGageWindowViewModel.PH1SHIELD_DURATION));
+                    shieldArcAn = new DoubleAnimation(0, 359.99, TimeSpan.FromSeconds(BossGageWindowViewModel.Ph1ShieldDuration));
                     shieldArc.BeginAnimation(Arc.EndAngleProperty, shieldArcAn);
                 }
                 else

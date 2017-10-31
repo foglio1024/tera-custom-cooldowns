@@ -113,7 +113,7 @@ namespace TCC.Controls
         private void UserControl_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var dc = (User)DataContext;
-            ProxyInterop.SendAskInteractiveMessage(dc.ServerId, dc.Name);
+            Proxy.AskInteractive(dc.ServerId, dc.Name);
         }
 
         private void ToolTip_OnOpened(object sender, RoutedEventArgs e)

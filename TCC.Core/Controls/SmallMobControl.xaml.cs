@@ -22,7 +22,7 @@ namespace TCC.Controls
 
         private void SmallMobControl_OnLoaded(object sender, RoutedEventArgs e)
         {
-            var dc = (Boss) DataContext;
+            var dc = (Npc) DataContext;
             dc.DeleteEvent += Dc_DeleteEvent;
             t = new DispatcherTimer {Interval = TimeSpan.FromSeconds(4700)};
             t.Tick += (s,ev) => RootGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(1,0,TimeSpan.FromMilliseconds(200)));
@@ -34,7 +34,7 @@ namespace TCC.Controls
             t.Start();
             try
             {
-                BossGageWindowViewModel.Instance.RemoveMe((Boss) DataContext);
+                BossGageWindowViewModel.Instance.RemoveMe((Npc) DataContext);
             }
             catch { }
         });

@@ -12,7 +12,7 @@ namespace TCC.TemplateSelectors
         {
             if (item == null) return null;
 
-            if (((Boss)item).IsBoss) return BossDataTemplate;
+            if (((Npc)item).IsBoss) return BossDataTemplate;
             else return MobDataTemplate;
         }
     }

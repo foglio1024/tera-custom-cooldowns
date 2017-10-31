@@ -17,19 +17,19 @@ namespace TCC.Controls.ChatControls
         {
             var dc = (ApplyMessage)DataContext;
             if (dc.Handled) return;
-            ProxyInterop.SendPartyInvite(dc.Author);
+            Proxy.PartyInvite(dc.Author);
             dc.Handled = true;
         }
         private void InspectBtn(object sender, MouseButtonEventArgs e)
         {
             var dc = (ApplyMessage)DataContext;
-            ProxyInterop.SendInspect(dc.Author);
+            Proxy.Inspect(dc.Author);
         }
         private void DeclineApplyBtn(object sender, MouseButtonEventArgs e)
         {
             var dc = (ApplyMessage)DataContext;
             if (dc.Handled) return;
-            ProxyInterop.SendDeclineApply(dc.PlayerId);
+            Proxy.DeclineApply(dc.PlayerId);
             dc.Handled = true;
         }
     }
