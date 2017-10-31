@@ -60,7 +60,7 @@ namespace TCC.Data
         public string Author
         {
             get => author;
-            protected set
+            set
             {
                 if (author == value) return;
                 author = value;
@@ -79,11 +79,15 @@ namespace TCC.Data
             }
         }
 
-        public bool IsVisible
+        protected bool _animate = true;
+
+        public bool Animate
         {
-            get
+            get => _animate;
+            set
             {
-                return true;// ChatWindowViewModel.Instance.VisibleChannels.Contains(Channel);            
+                if(_animate == value) return;
+                _animate = value;
             }
         }
 
@@ -439,8 +443,6 @@ namespace TCC.Data
         {
             AddPiece(new MessagePiece(msg, MessagePieceType.Simple, ch, SettingsManager.FontSize, false));
         }
-
-
         protected void ParseEmoteMessage(string msg)
         {
             string header = "@social:";
