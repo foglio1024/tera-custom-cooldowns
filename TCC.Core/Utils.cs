@@ -177,6 +177,14 @@ namespace TCC
             DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
             return epoch.AddSeconds(unixTime);
         }
+
+        public static string TimeFormatter(uint seconds)
+        {
+            if (seconds < 99) return seconds+"";
+            if (seconds < 99 * 60) return seconds / 60 + "m";
+            return seconds / (60 * 60) + "h";
+        }
+
     }
 
     public static class EventUtils
