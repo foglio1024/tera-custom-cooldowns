@@ -29,7 +29,8 @@ namespace TCC.Data.Databases
                 //var bound = s[2];
                 var name = s[2];
                 var expId = Convert.ToUInt32(s[3]);
-
+                var cd = Convert.ToUInt32(s[4]);
+                var icon = s[5];
                 //lazy raw overrides because BHS can't do stuff right .-.
 
                 //if (bound == "EquipToItem") bound = "Equip";
@@ -37,7 +38,7 @@ namespace TCC.Data.Databases
                 //if (bound == "NONE") bound = "None";
                 //if (bound == "EQUIP") bound = "Equip";
 
-                var item = new Item(id, name, grad, expId);
+                var item = new Item(id, name, grad, expId, cd, icon);
                 Items.Add(id, item);
             }
             var xpFile = XDocument.Load(Environment.CurrentDirectory + "/resources/data/EquipmentExpData.xml");
@@ -80,12 +81,16 @@ namespace TCC.Data.Databases
         public uint ExpId { get; private set; }
         public string Name { get; private set; }
         public RareGrade RareGrade { get; private set; }
-        public Item(uint id, string name, uint g, uint expId)
+        public  uint Cooldown { get; private set; }
+        public  string Icon { get; private set; }
+        public Item(uint id, string name, uint g, uint expId, uint cd, string icon)
         {
             Id = id;
             Name = name;
             RareGrade = (RareGrade)g;
             ExpId = expId;
+            Cooldown = cd;
+            Icon = icon;
         }
     }
 
