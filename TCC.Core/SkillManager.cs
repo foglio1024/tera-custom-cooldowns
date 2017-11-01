@@ -28,11 +28,11 @@ namespace TCC
         {
             if (skillCooldown.Cooldown == 0)
             {
-                CooldownWindowViewModel.Instance.RemoveSkill(skillCooldown.Skill);
+                CooldownWindowViewModel.Instance.Remove(skillCooldown.Skill);
             }
             else
             {
-                CooldownWindowViewModel.Instance.AddOrRefreshSkill(skillCooldown);
+                CooldownWindowViewModel.Instance.AddOrRefresh(skillCooldown);
             }
         }
 
@@ -63,7 +63,7 @@ namespace TCC
         {
             if (SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out Skill skill))
             {
-                CooldownWindowViewModel.Instance.RefreshSkill(skill, cd);
+                CooldownWindowViewModel.Instance.Change(skill, cd);
             }
 
         }
