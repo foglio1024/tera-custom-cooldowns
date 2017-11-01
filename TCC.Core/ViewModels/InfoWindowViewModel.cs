@@ -90,7 +90,7 @@ namespace TCC.ViewModels
                     ? DateTime.Parse(egElement.Attribute("start").Value)
                     : DateTime.MinValue;
                 var egEnd = egElement.Attribute("end") != null
-                    ? DateTime.Parse(egElement.Attribute("end").Value)
+                    ? DateTime.Parse(egElement.Attribute("end").Value).AddDays(1)
                     : DateTime.MaxValue;
 
                 if (TimeManager.Instance.CurrentServerTime < egStart ||
