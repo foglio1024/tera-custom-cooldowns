@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:controls="clr-namespace:TCC.Controls"
-             mc:Ignorable="d" >
+             xmlns:viewModels="clr-namespace:TCC.ViewModels"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:CooldownWindowViewModel}">
     <UserControl.Resources>
         <DataTemplate x:Key="SkillDataTemplate">
             <controls:SkillIconControl />
@@ -12,6 +13,7 @@
     </UserControl.Resources>
     <Grid Width="Auto" Name="root" Height="Auto">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -31,6 +33,22 @@
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Width="Auto"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
+        </ItemsControl>
+        <ItemsControl x:Name="ItemSkillsPanel" Grid.Row="2" ItemTemplate="{StaticResource SkillDataTemplate}" Width="Auto" ItemsSource="{Binding ItemSkills}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Width="Auto"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style TargetType="ContentPresenter">
+                    <Setter Property="LayoutTransform">
+                        <Setter.Value>
+                            <ScaleTransform ScaleX=".8" ScaleY=".8"></ScaleTransform>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
 
         </ItemsControl>
     </Grid>

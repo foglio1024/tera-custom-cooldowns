@@ -10,6 +10,7 @@ namespace TCC
         public Skill Skill { get; set; }
         public uint Cooldown { get; set; }
         public uint OriginalCooldown { get; set; }
+        public CooldownType Type { get; set; }
         private Timer _timer;
 
         public void SetDispatcher(Dispatcher d)
@@ -24,6 +25,7 @@ namespace TCC
 
             Skill = sk;
             Cooldown = t==CooldownType.Skill ? cd : cd*1000;
+            Type = t;
             OriginalCooldown = Cooldown;
 
             if (cd == 0) return;

@@ -102,19 +102,25 @@ namespace TCC.Data
         }
         private void _secondsTimer_Tick(object sender, EventArgs e)
         {
+            var s = Seconds;
             if(Seconds == 1)
             {
                 _secondsTimer.Stop();
                 IsAvailable = true;
             }
             Seconds--;
+            if (Seconds > s)
+            {
+                _secondsTimer.Stop();
+                IsAvailable = true;
+            }
         }
 
         public void Start(uint cd)
         {
             if (cd > 1000)
             {
-                Cooldown = _type == CooldownType.Skill ? cd : cd * 1000;
+                Cooldown = cd;//_type == CooldownType.Skill ? cd : cd * 1000;
                 OriginalCooldown = Cooldown;
                 Seconds = 1 + (Cooldown / 1000);
                 var offset = Cooldown % 1000;

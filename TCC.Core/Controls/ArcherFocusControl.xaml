@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              >
     <UserControl.LayoutTransform>
-        <ScaleTransform ScaleX=".9" ScaleY=".9"/>
+        <ScaleTransform ScaleX="1" ScaleY="1"/>
     </UserControl.LayoutTransform>
     <Grid Margin="0,0,0,0" Width="55" Height="55">
         <local:Arc StrokeThickness="5" Margin="-5"

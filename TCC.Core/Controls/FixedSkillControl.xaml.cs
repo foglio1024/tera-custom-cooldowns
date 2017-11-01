@@ -34,6 +34,7 @@ namespace TCC.Controls
             }
         }
 
+        public string SecondsText => _context == null? "" : Utils.TimeFormatter(Convert.ToUInt32(_context.Seconds));
 
         public FixedSkillControl()
         {
@@ -88,6 +89,10 @@ namespace TCC.Controls
                     {
                         warnTimer.Stop();
                     }
+                }
+                else if (e.PropertyName == nameof(_context.Seconds))
+                {
+                    NotifyPropertyChanged(nameof(SecondsText));
                 }
             },
             DispatcherPriority.DataBind);
