@@ -29,38 +29,42 @@
                     Grid.Row="0"
                     Grid.Column="1"
                     Grid.ColumnSpan="2"
-                    CornerRadius="0,28,28,0"
+                    CornerRadius="0,29,29,0"
                     Margin="-30,0,0,0"                
                     Padding="30,0,0,0"
                     VerticalAlignment="Center"
                     >
-                
-            <UniformGrid Rows="1" ClipToBounds="False" Grid.Column="1" >
-                
-            <local:BuffCooldownControl DataContext="{Binding Bombardment}" ></local:BuffCooldownControl>
-            <local:BuffCooldownControl DataContext="{Binding Balder}" ></local:BuffCooldownControl>
-            </UniformGrid>
+                <UniformGrid Rows="1" ClipToBounds="False" Grid.Column="1" Margin="0,-2,-1,-2" >
+                    <local:BuffCooldownControl DataContext="{Binding Bombardment}" />
+                    <local:BuffCooldownControl DataContext="{Binding Balder}" />
+                </UniformGrid>
             </Border>
-            <Border Grid.Column="0" CornerRadius="32" Style="{StaticResource Styles.DefaultBorder}" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Border Grid.Column="0" CornerRadius="36" Style="{StaticResource Styles.DefaultBorder}" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <Grid>
-                    
-            <local:BuffCooldownControl DataContext="{Binding BurstFire}" RenderTransformOrigin=".5,.5">
-            </local:BuffCooldownControl>
-            <local:Arc EndAngle="0"
-                       StrokeThickness="8" Stroke="Orange" HorizontalAlignment="Left" VerticalAlignment="Center"
-                       Margin="0,0,0,0"
-                       Width="64" Height="64" x:Name="MainReArc">
-                <local:Arc.LayoutTransform>
-                    <ScaleTransform ScaleX="-1"></ScaleTransform>
-                </local:Arc.LayoutTransform>
-
-            </local:Arc>
+                    <local:BuffCooldownControl DataContext="{Binding BurstFire}" RenderTransformOrigin=".5,.5">
+                        <local:BuffCooldownControl.RenderTransform>
+                            <ScaleTransform ScaleX=".95" ScaleY=".95"></ScaleTransform>
+                        </local:BuffCooldownControl.RenderTransform>
+                    </local:BuffCooldownControl>
+                    <local:Arc EndAngle="0"
+                               StrokeThickness="8" Stroke="Orange" HorizontalAlignment="Left" VerticalAlignment="Center"
+                               Margin="0,0,0,0"
+                               Width="68" Height="68" x:Name="MainReArc">
+                        <local:Arc.LayoutTransform>
+                            <ScaleTransform ScaleX="-1"></ScaleTransform>
+                        </local:Arc.LayoutTransform>
+                    </local:Arc>
                 </Grid>
             </Border>
+
             <Border Grid.Column="0" Style="{StaticResource Styles.DefaultBorder}" VerticalAlignment="Center" Margin="-0,0,0,-75" Padding="1,1"  HorizontalAlignment="Center" CornerRadius="10" Opacity="1" Background="#222222">
                 <TextBlock Style="{StaticResource Styles.DefaultText}" TextAlignment="Center" Margin="0,-1,0,-2" FontSize="16" FontWeight="DemiBold" Foreground="Orange" Text="{Binding ST.Val}" Width="45"></TextBlock>
             </Border>
 
         </Grid>
+        <Grid.CacheMode>
+            <BitmapCache RenderAtScale="2"></BitmapCache>
+        </Grid.CacheMode>
+
     </Grid>
 </UserControl>

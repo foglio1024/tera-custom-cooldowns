@@ -14,7 +14,7 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Column="1" Margin="-14,0,0,0" BorderThickness="0" CornerRadius="0,22,22,0"
+        <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Column="1" Margin="-14,0,0,0" BorderThickness="0" CornerRadius="0,25,25,0"
                 Opacity="{Binding CounterProc, Converter={StaticResource Converters.BoolToOpacity}}" VerticalAlignment="Center"
                 Background="Orange"
                 >
@@ -44,7 +44,7 @@
                                StrokeThickness="2" Stroke="Orange" EndAngle="359.9"></local:Arc>
                         <local:Arc Opacity="{Binding IsGfOn, Converter={StaticResource Converters.BoolToOpacity}}"
                                Margin="-10" StrokeThickness="2" Stroke="Orange" EndAngle="359.9"></local:Arc>
-                        <local:FixedSkillControl DataContext="{Binding GrowingFury}" Margin="-25" Padding="25"/>
+                        <local:FixedSkillControl DataContext="{Binding GrowingFury}" Margin="-26" Padding="25"/>
                     </Grid>
                 </Grid>
             </Border>

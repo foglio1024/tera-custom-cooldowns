@@ -19,7 +19,7 @@
             <Border Style="{StaticResource Styles.DefaultBorder}"
                     Grid.Row="0"
                     Grid.Column="1"
-                    CornerRadius="0,25,25,0"
+                    CornerRadius="0,30,30,0"
                     Margin="-30,0,0,0"  
                     Padding="30,1,1,1"
                     VerticalAlignment="Center"
@@ -28,19 +28,24 @@
                     <local:FixedSkillControl DataContext="{Binding FireAvalanche}" Padding="20" Margin="-20"/>
                 </UniformGrid>
             </Border>
-            <Border CornerRadius="32" Style="{StaticResource Styles.DefaultBorder}" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="1">
+            <Border CornerRadius="34" Style="{StaticResource Styles.DefaultBorder}" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="1">
                 <Grid>
                     <local:Arc EndAngle="0" 
                                StrokeThickness="8" Stroke="#c387ff" HorizontalAlignment="Center" VerticalAlignment="Center"
                                Margin="0,0,0,0" x:Name="MainReArc"
-                               Width="63" Height="63">
+                               Width="68" Height="68">
                         <local:Arc.LayoutTransform>
                             <ScaleTransform ScaleX="-1"></ScaleTransform>
                         </local:Arc.LayoutTransform>
 
                     </local:Arc>
                     <local:FixedSkillControl DataContext="{Binding BurningHeart}" Padding="20" Margin="-20"
-                                             HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                             HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin=".5,.5">
+                        <local:FixedSkillControl.RenderTransform>
+                            <ScaleTransform ScaleX=".95" ScaleY=".95"></ScaleTransform>
+                        </local:FixedSkillControl.RenderTransform>
+
+                    </local:FixedSkillControl>
 
                 </Grid>
             </Border>

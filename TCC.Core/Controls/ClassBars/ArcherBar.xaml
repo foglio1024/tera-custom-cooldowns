@@ -24,13 +24,13 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     Grid.ColumnSpan="3"
-                    CornerRadius="26"
+                    CornerRadius="29"
                     Margin="0"
                     VerticalAlignment="Stretch"
                     Height="Auto">
-            <UniformGrid Grid.Column="1" Rows="1" Margin="-6,-8,-8,-9" ClipToBounds="False">
+            <UniformGrid Grid.Column="1" Rows="1" Margin="-8,-10,-9,-11" ClipToBounds="False">
                 <local:ArcherFocusControl x:Name="focusControl" 
-                                      Margin="-5,-1,0,0" Padding="5,0"
+                                      Margin="-5,-1,0,0" Padding="0,0"
                                       DataContext="{Binding Focus}" 
                                       VerticalAlignment="Center"
                                       HorizontalAlignment="Center"/>
