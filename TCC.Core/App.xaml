@@ -91,10 +91,11 @@
         <SolidColorBrush x:Key="Colors.Chat.System.Friend" Color="#FF84E1FB"/>
         <SolidColorBrush x:Key="Colors.Chat.System.WorldBoss" Color="#fffcb7ff"/>
 
-        <FontFamily x:Key="DroidSans">pack://application:,,,/resources/fonts/#droidsans</FontFamily>
-        <FontFamily x:Key="OpenSans">pack://application:,,,/resources/fonts/#OpenSans-Regular</FontFamily>
-        <FontFamily x:Key="Frutiger">pack://application:,,,/resources/fonts/#Frutiger</FontFamily>
-        <FontFamily x:Key="SourceSans">pack://application:,,,/resources/fonts/#SourceSans</FontFamily>
+        <FontFamily x:Key="DroidSans">pack://application:,,,/fonts/#Droid sans</FontFamily>
+        <FontFamily x:Key="OpenSans">pack://application:,,,/resources/fonts/#Open Sans</FontFamily>
+        <FontFamily x:Key="Frutiger">pack://application:,,,/resources/fonts/#Frutiger LT Pro 55 Roman</FontFamily>
+        <FontFamily x:Key="SourceSans">pack://application:,,,/resources/fonts/#Source Sans Pro SemiBold</FontFamily>
+        <FontFamily x:Key="RobotoMonoMedium">pack://application:,,,/resources/fonts/#Roboto Mono Medium</FontFamily>
 
         <Style x:Key="Styles.DefaultBorder" TargetType="{x:Type Border}">
             <Setter Property="Background" Value="{StaticResource Colors.App.DefaultBackground}"/>
@@ -553,18 +554,18 @@
         <DataTemplate x:Key="DefaultChannelLabelTemplate">
             <TextBlock  Foreground="{Binding Channel, Converter={StaticResource Converters.ChatChannelToColor}}" 
                         Opacity=".5" 
-                        FontWeight="DemiBold" 
+                        FontWeight="SemiBold" 
                         FontSize="11"
-                        FontFamily="{StaticResource Frutiger}"
                         HorizontalAlignment="Right" 
                         VerticalAlignment="Top"
                         TextAlignment="Center"
                         Visibility="Visible"
                         TextTrimming="CharacterEllipsis"
                         MinWidth="33"
-                        Margin="0,-1,0,0"
+                        Margin="0,-3,0,0"
                         Text="{Binding Channel, Converter={StaticResource Converters.ChatChannelToName}}"
-                                />
+            />
+
         </DataTemplate>
         <DataTemplate x:Key="EnchantChannelLabelTemplate">
             <Grid>

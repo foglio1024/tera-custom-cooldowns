@@ -20,7 +20,7 @@
             <Style TargetType="{x:Type controls:OutlinedTextBlock}">
                 <Setter Property="StrokeThickness" Value="3"/>
                 <Setter Property="Stroke" Value="#9000"/>
-                <Setter Property="FontFamily" Value="Roboto"/>
+                <Setter Property="FontFamily" Value="{StaticResource Frutiger}"/>
             </Style>
             <controls:MoneyAmountToVisibilityConverter x:Key="amountToVisibilityConv" />
         </Grid.Resources>

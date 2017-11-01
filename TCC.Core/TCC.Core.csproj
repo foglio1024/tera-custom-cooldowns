@@ -1299,6 +1299,7 @@
     <Content Include="resources\data\abnormalities\hotdot-TW.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="resources\fonts\RobotoMono-Medium.ttf" />
     <Resource Include="resources\images\default_guild_logo.png" />
     <Resource Include="resources\images\twitch.png" />
     <Resource Include="resources\images\ic_format_size_white_24dp_2x.png" />
