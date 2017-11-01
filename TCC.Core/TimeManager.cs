@@ -79,13 +79,13 @@ namespace TCC
                 ServerHourOffsetFromLocal = -TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours + ServerHourOffsetFromUtc;
             }
 
-            if (InfoWindowViewModel.Instance.Markers.FirstOrDefault(x => x.Name.Equals(region + " server time")) == null)
+            if (InfoWindowViewModel.Instance.Markers.FirstOrDefault(x => x.Name.Equals(CurrentRegion + " server time")) == null)
             {
-                InfoWindowViewModel.Instance.Markers.Add(new TimeMarker(ServerHourOffsetFromLocal, region + " server time"));
+                InfoWindowViewModel.Instance.Markers.Add(new TimeMarker(ServerHourOffsetFromLocal, CurrentRegion + " server time"));
             }
 
             CheckReset();
-            InfoWindowViewModel.Instance.LoadEvents(DateTime.Now.DayOfWeek, region);
+            InfoWindowViewModel.Instance.LoadEvents(DateTime.Now.DayOfWeek, CurrentRegion);
 
         }
 

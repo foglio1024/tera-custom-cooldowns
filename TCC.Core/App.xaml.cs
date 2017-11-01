@@ -55,7 +55,7 @@ namespace TCC
             UpdateManager.CheckDatabaseVersion();
 
             SkillsDatabase.Load();
-            ItemSkillsDatabase.SetBroochesIcons();
+            //ItemSkillsDatabase.SetBroochesIcons();
             SettingsManager.LoadWindowSettings();
             SettingsManager.LoadSettings();
             WindowManager.Init();
