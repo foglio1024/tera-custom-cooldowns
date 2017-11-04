@@ -91,11 +91,13 @@
         <SolidColorBrush x:Key="Colors.Chat.System.Friend" Color="#FF84E1FB"/>
         <SolidColorBrush x:Key="Colors.Chat.System.WorldBoss" Color="#fffcb7ff"/>
 
-        <FontFamily x:Key="DroidSans">pack://application:,,,/fonts/#Droid sans</FontFamily>
+        <FontFamily x:Key="DroidSans">pack://application:,,,/fonts/#Droid Sans</FontFamily>
+        <FontFamily x:Key="DroidSansMono">pack://application:,,,/fonts/#Droid Sans Mono</FontFamily>
         <FontFamily x:Key="OpenSans">pack://application:,,,/resources/fonts/#Open Sans</FontFamily>
         <FontFamily x:Key="Frutiger">pack://application:,,,/resources/fonts/#Frutiger LT Pro 55 Roman</FontFamily>
         <FontFamily x:Key="SourceSans">pack://application:,,,/resources/fonts/#Source Sans Pro SemiBold</FontFamily>
         <FontFamily x:Key="RobotoMonoMedium">pack://application:,,,/resources/fonts/#Roboto Mono Medium</FontFamily>
+        <FontFamily x:Key="ArialMonoBold">pack://application:,,,/resources/fonts/#Arial Monospaced MT</FontFamily>
 
         <Style x:Key="Styles.DefaultBorder" TargetType="{x:Type Border}">
             <Setter Property="Background" Value="{StaticResource Colors.App.DefaultBackground}"/>
