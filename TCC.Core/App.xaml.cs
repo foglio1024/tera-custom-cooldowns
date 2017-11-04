@@ -69,12 +69,12 @@ namespace TCC
                 SkillManager.Clear();
                 WindowManager.TrayIcon.Icon = WindowManager.ConnectedIcon;
                 ChatWindowViewModel.Instance.AddChatMessage(
-                    new ChatMessage(ChatChannel.TCC, "System", "<FONT>Connected to server.</FONT>"));
+                    new ChatMessage(ChatChannel.TCC, "System", $"<FONT>Connected to {srv.Name}.</FONT>"));
             };
             TeraSniffer.Instance.EndConnection += () =>
             {
                 ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System",
-                    "<FONT>Disconnected from server.</FONT>"));
+                    "<FONT>Disconnected from the server.</FONT>"));
                 GroupWindowViewModel.Instance.ClearAllAbnormalities();
                 BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
                 EntitiesManager.ClearNPC();
@@ -94,7 +94,7 @@ namespace TCC
             var ver = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
             ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", $"<FONT>{ver}</FONT>"));
 
-            return;
+            if(!Debug) return;
             SessionManager.CurrentPlayer = new Player(1, "Foglio");
             CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(Class.Warrior).ToLower() + "-skills.xml", Class.Warrior);
 
@@ -130,14 +130,14 @@ namespace TCC
                 u.UserClass = Class.Lancer;
                 GroupWindowViewModel.Instance.AddOrUpdateMember(u);
             }
-            foreach (var user in GroupWindowViewModel.Instance.All)
-            {
-                user.AddOrRefreshBuff(new Abnormality(4611, true, true, false, AbnormalityType.Buff),60*100*60,1);
-                user.AddOrRefreshBuff(new Abnormality(46126, true, true, false, AbnormalityType.Buff),60*100*60,1);
-                user.AddOrRefreshDebuff(new Abnormality(89308100, true, false, false, AbnormalityType.DOT),60*100*60,5);
-                user.AddOrRefreshDebuff(new Abnormality(89308101, true, false, false, AbnormalityType.DOT),60*100*60,5);
+            //foreach (var user in GroupWindowViewModel.Instance.Members)
+            //{
+            //    user.AddOrRefreshBuff(new Abnormality(4611, true, true, false, AbnormalityType.Buff),60*100*60,1);
+            //    user.AddOrRefreshBuff(new Abnormality(46126, true, true, false, AbnormalityType.Buff),60*100*60,1);
+            //    user.AddOrRefreshDebuff(new Abnormality(89308100, true, false, false, AbnormalityType.DOT),60*100*60,5);
+            //    user.AddOrRefreshDebuff(new Abnormality(89308101, true, false, false, AbnormalityType.DOT),60*100*60,5);
 
-            }
+            //}
             //GroupWindowViewModel.Instance.StartRoll();
             //GroupWindowViewModel.Instance.SetReadyStatus(new ReadyPartyMember());
         }
