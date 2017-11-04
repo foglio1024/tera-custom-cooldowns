@@ -31,12 +31,12 @@ namespace TCC.Controls
         {
             if (!(DataContext is ChatMessage))
             {
-                Debug.WriteLine("DataContext is not a ChatMessage");
+                //Debug.WriteLine("DataContext is not a ChatMessage");
                 return;
             }
             var dc = ((ChatMessage)DataContext);
             dc.Animate = false;
-            Debug.WriteLine($"{dc.RawMessage} -- set animated");
+            //Debug.WriteLine($"{dc.RawMessage} -- set animated");
 
         }
         private void UserControl_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
@@ -64,7 +64,7 @@ namespace TCC.Controls
             //    }
             //    catch (Exception) { }
             //}), DispatcherPriority.Loaded);
-            Debug.WriteLine($"{dc.RawMessage} -- loaded");
+            //Debug.WriteLine($"{dc.RawMessage} -- loaded");
 
             var tg = (TransformGroup) LayoutTransform;
             var sc = tg.Children[0];
@@ -85,7 +85,7 @@ namespace TCC.Controls
             var tg = (TransformGroup)LayoutTransform;
             var sc = tg.Children[0];
             sc.BeginAnimation(ScaleTransform.ScaleYProperty, null);
-            Debug.WriteLine($"{dc.RawMessage} -- unloaded");
+            //Debug.WriteLine($"{dc.RawMessage} -- unloaded");
 
             SetAnimated();
 

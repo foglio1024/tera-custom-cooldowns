@@ -7,7 +7,9 @@
              xmlns:converters="clr-namespace:TCC.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="100" Loaded="ControlLoaded" Unloaded="UserControl_Unloaded"
-             UseLayoutRounding="True"  ToolTip="{Binding Skill.Name}">
+             UseLayoutRounding="True"  ToolTip="{Binding Skill.Name}" 
+             ToolTipOpening="SkillIconControl_OnToolTipOpening"
+             ToolTipClosing="SkillIconControl_OnToolTipClosing">
 
     <UserControl.LayoutTransform>
         <ScaleTransform ScaleX="1" ScaleY="1"/>
@@ -26,25 +28,25 @@
 
         <Grid Width="Auto" MinWidth="12" 
               Height="Auto" x:Name="g" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0" >
-            <Border Background="White" CornerRadius="5"  BorderBrush="#bbb" BorderThickness="1"  Padding="4,0" Effect="{StaticResource FadedDropShadow}">
+            <Border Background="#202027" CornerRadius="5"  BorderBrush="#404047" BorderThickness="1"  Padding="4,0" Effect="{StaticResource FadedDropShadow}">
 
-            <TextBlock Foreground="#d000" 
+            <TextBlock Foreground="#bfff" 
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center" 
                    TextAlignment="Center"
                    FontSize="15" 
                    x:Name="number" 
-                   FontFamily="{StaticResource RobotoMonoMedium}" 
+                   FontFamily="{StaticResource ArialMonoBold}"
                    Opacity="1" 
-                   Margin="0,-1"
+                   Margin="0,0"
                    Text="{Binding CurrentCD, RelativeSource={RelativeSource AncestorType=local:SkillIconControl}}">
                 </TextBlock>
 
             </Border>
         </Grid>
-        <Grid.CacheMode>
+        <!--<Grid.CacheMode>
             <BitmapCache RenderAtScale="2"></BitmapCache>
-        </Grid.CacheMode>
+        </Grid.CacheMode>-->
 
     </Grid>
 </UserControl>

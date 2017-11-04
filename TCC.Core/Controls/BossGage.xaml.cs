@@ -391,21 +391,9 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((ulong)value == SessionManager.CurrentPlayer.EntityId)
-            {
-                return SessionManager.CurrentPlayer.Name;
-            }
-            else
-            {
-                if (GroupWindowViewModel.Instance.GetUser((ulong)value, out User p))
-                {
-                    return p.Name;
-                }
-                else
-                {
-                    return "";
-                }
-            }
+            return (ulong) value == SessionManager.CurrentPlayer.EntityId
+                ? SessionManager.CurrentPlayer.Name
+                : (GroupWindowViewModel.Instance.TryGetUser((ulong) value, out var p) ? p.Name : "");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

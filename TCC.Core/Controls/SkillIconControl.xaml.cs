@@ -62,6 +62,7 @@ namespace TCC.Controls
                 if (_context.Cooldown == _context.OriginalCooldown) return;
                 NumberTimer.Stop();
                 NumberTimer.IsEnabled = true;
+                _secondsPassed = 0;
                 //CurrentCD = (double)_context.Cooldown / 1000;
                 NotifyPropertyChanged(nameof(CurrentCD));
                 double newAngle = (double)_context.Cooldown / (double)_context.OriginalCooldown;
@@ -125,6 +126,16 @@ namespace TCC.Controls
         {
             NumberTimer.Stop();
             CloseTimer.Stop();
+        }
+
+        private void SkillIconControl_OnToolTipOpening(object sender, ToolTipEventArgs e)
+        {
+            FocusManager.Running = false;
+        }
+
+        private void SkillIconControl_OnToolTipClosing(object sender, ToolTipEventArgs e)
+        {
+            FocusManager.Running = true;
         }
     }
 }

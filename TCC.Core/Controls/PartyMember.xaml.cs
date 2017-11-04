@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 using TCC.Data;
 using TCC.ViewModels;
@@ -25,26 +26,14 @@ namespace TCC.Controls
             SetBuffs();
             SetDebuffs();
             AnimateIn();
-            GroupWindowViewModel.Instance.PropertyChanged += Instance_PropertyChanged;
+            GroupWindowViewModel.Instance.SettingsUpdated += UpdateSettings;
         }
-        private void Instance_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void UpdateSettings()
         {
-            if (e.PropertyName == nameof(GroupWindowViewModel.Instance.MPenabled))
-            {
-                SetMP();
-            }
-            else if (e.PropertyName == nameof(GroupWindowViewModel.Instance.HPenabled))
-            {
-                SetHP();
-            }
-            else if (e.PropertyName == nameof(GroupWindowViewModel.Instance.BuffsEnabled))
-            {
-                SetBuffs();
-            }
-            else if (e.PropertyName == nameof(GroupWindowViewModel.Instance.DebuffsEnabled))
-            {
-                SetDebuffs();
-            }
+            SetMP();
+            SetHP();
+            SetBuffs();
+            SetDebuffs();
         }
         private void SetBuffs()
         {
@@ -52,7 +41,8 @@ namespace TCC.Controls
             {
                 Dispatcher.Invoke(() =>
                 {
-                    buffs.ItemsSource = SettingsManager.IgnoreGroupBuffs ? null : ((User)DataContext).Buffs;
+                    if(!(DataContext is User user))return;
+                    buffs.ItemsSource = SettingsManager.IgnoreGroupBuffs ? null : user.Buffs;
                     BuffGrid.Visibility = SettingsManager.IgnoreGroupBuffs
                         ? Visibility.Collapsed
                         : Visibility.Visible;
@@ -68,6 +58,7 @@ namespace TCC.Controls
             {
                 Dispatcher.Invoke(() =>
                 {
+                    if(!(DataContext is User)) return;
                     debuffs.ItemsSource = SettingsManager.IgnoreGroupDebuffs ? null : ((User)DataContext).Debuffs;
                     DebuffGrid.Visibility = SettingsManager.IgnoreGroupDebuffs
                         ? Visibility.Collapsed

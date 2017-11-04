@@ -27,26 +27,14 @@ namespace TCC.Controls
             SetDebuffs();
 
             AnimateIn();
-            GroupWindowViewModel.Instance.PropertyChanged += Instance_PropertyChanged;
+            GroupWindowViewModel.Instance.SettingsUpdated += UpdateSettings;
         }
-        private void Instance_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void UpdateSettings()
         {
-            if (e.PropertyName == nameof(GroupWindowViewModel.Instance.MPenabled))
-            {
-                SetMP();
-            }
-            else if (e.PropertyName == nameof(GroupWindowViewModel.Instance.HPenabled))
-            {
-                SetHP();
-            }
-            else if (e.PropertyName == nameof(GroupWindowViewModel.Instance.BuffsEnabled))
-            {
-                SetBuffs();
-            }
-            else if (e.PropertyName == nameof(GroupWindowViewModel.Instance.DebuffsEnabled))
-            {
-                SetDebuffs();
-            }
+            SetMP();
+            SetHP();
+            SetBuffs();
+            SetDebuffs();
         }
         private void SetBuffs()
         {
@@ -54,7 +42,9 @@ namespace TCC.Controls
             {
                 Dispatcher.Invoke(() =>
                 {
-                    buffs.ItemsSource = SettingsManager.IgnoreGroupBuffs ? null : dc.Buffs;
+                    if (!(DataContext is User user)) return;
+
+                    buffs.ItemsSource = SettingsManager.IgnoreGroupBuffs ? null : user.Buffs;
                     BuffGrid.Visibility = SettingsManager.IgnoreGroupBuffs
                         ? Visibility.Collapsed
                         : Visibility.Visible;
@@ -73,6 +63,7 @@ namespace TCC.Controls
             {
                 Dispatcher.Invoke(() =>
                 {
+                    if(!(dc is User)) return;
                     debuffs.ItemsSource = SettingsManager.IgnoreGroupDebuffs ? null : dc.Debuffs;
                     DebuffGrid.Visibility = SettingsManager.IgnoreGroupDebuffs
                         ? Visibility.Collapsed

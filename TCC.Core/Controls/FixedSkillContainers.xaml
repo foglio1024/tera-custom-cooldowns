@@ -70,7 +70,8 @@
                       HorizontalAlignment="Right" ItemsSource="{Binding ItemSkills}" BorderBrush="Red" BorderThickness="00" Grid.Row="0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Margin="0,0,0,0" IsItemsHost="True" Width="Auto" Height="Auto" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <StackPanel Margin="0,0,0,0" IsItemsHost="True" Width="Auto" Height="Auto" FlowDirection="RightToLeft"
+                                    Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             <ItemsControl.ItemContainerStyle>
@@ -80,6 +81,7 @@
                             <ScaleTransform ScaleX=".85" ScaleY=".85"></ScaleTransform>
                         </Setter.Value>
                     </Setter>
+                    <Setter Property="FlowDirection" Value="LeftToRight"/>
                 </Style>
             </ItemsControl.ItemContainerStyle>
             </ItemsControl>
