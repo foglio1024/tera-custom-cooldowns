@@ -14,28 +14,7 @@ using TCC.Data.Databases;
 using TCC.Parsing.Messages;
 using TCC.ViewModels;
 using Tera.Game;
-using Tera.Game.Messages;
-using C_PLAYER_LOCATION = TCC.Parsing.Messages.C_PLAYER_LOCATION;
-using S_AVAILABLE_EVENT_MATCHING_LIST = TCC.Parsing.Messages.S_AVAILABLE_EVENT_MATCHING_LIST;
-using S_BAN_PARTY = TCC.Parsing.Messages.S_BAN_PARTY;
-using S_BAN_PARTY_MEMBER = TCC.Parsing.Messages.S_BAN_PARTY_MEMBER;
-using S_BOSS_GAGE_INFO = TCC.Parsing.Messages.S_BOSS_GAGE_INFO;
-using S_CHAT = TCC.Parsing.Messages.S_CHAT;
-using S_CHECK_TO_READY_PARTY = TCC.Parsing.Messages.S_CHECK_TO_READY_PARTY;
-using S_CREST_MESSAGE = TCC.Parsing.Messages.S_CREST_MESSAGE;
-using S_GET_USER_LIST = TCC.Parsing.Messages.S_GET_USER_LIST;
-using S_LEAVE_PARTY = TCC.Parsing.Messages.S_LEAVE_PARTY;
-using S_LEAVE_PARTY_MEMBER = TCC.Parsing.Messages.S_LEAVE_PARTY_MEMBER;
-using S_LOAD_TOPO = TCC.Parsing.Messages.S_LOAD_TOPO;
-using S_OTHER_USER_APPLY_PARTY = TCC.Parsing.Messages.S_OTHER_USER_APPLY_PARTY;
-using S_PARTY_MEMBER_LIST = TCC.Parsing.Messages.S_PARTY_MEMBER_LIST;
-using S_PARTY_MEMBER_STAT_UPDATE = TCC.Parsing.Messages.S_PARTY_MEMBER_STAT_UPDATE;
-using S_PLAYER_STAT_UPDATE = TCC.Parsing.Messages.S_PLAYER_STAT_UPDATE;
-using S_PRIVATE_CHAT = TCC.Parsing.Messages.S_PRIVATE_CHAT;
-using S_START_COOLTIME_SKILL = TCC.Parsing.Messages.S_START_COOLTIME_SKILL;
-using S_SYSTEM_MESSAGE = TCC.Parsing.Messages.S_SYSTEM_MESSAGE;
-using S_TRADE_BROKER_DEAL_SUGGESTED = TCC.Parsing.Messages.S_TRADE_BROKER_DEAL_SUGGESTED;
-using S_WHISPER = TCC.Parsing.Messages.S_WHISPER;
+using S_GET_USER_GUILD_LOGO = Tera.Game.Messages.S_GET_USER_GUILD_LOGO;
 
 namespace TCC.Parsing
 {
@@ -212,13 +191,14 @@ namespace TCC.Parsing
                 BossGageWindowViewModel.Instance.UnsetBossTarget(p.EntityId);
             }
             var b = BossGageWindowViewModel.Instance.NpcList.FirstOrDefault(x => x.EntityId == p.EntityId);
-            if (b != null && b.IsBoss && b.Visible == System.Windows.Visibility.Visible) GroupWindowViewModel.Instance.SetAggro(p);
+            if (BossGageWindowViewModel.Instance.CurrentHHphase == HarrowholdPhase.None) return;
+            if (b != null && b.IsBoss && b.Visible == System.Windows.Visibility.Visible) GroupWindowViewModel.Instance.SetAggro(p.Target);
 
         }
         public static void HandleUserEffect(S_USER_EFFECT p)
         {
             BossGageWindowViewModel.Instance.SetBossAggro(p.Source, p.Circle, p.User);
-            GroupWindowViewModel.Instance.SetAggro(p);
+            GroupWindowViewModel.Instance.SetAggroCircle(p);
         }
 
         public static void HandleCharList(S_GET_USER_LIST p)
@@ -318,7 +298,7 @@ namespace TCC.Parsing
             SessionManager.LoadingScreen = true;
             SessionManager.Encounter = false;
             GroupWindowViewModel.Instance.ClearAllAbnormalities();
-            GroupWindowViewModel.Instance.ResetAggro();
+            GroupWindowViewModel.Instance.SetAggro(0);
             BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
             BossGageWindowViewModel.Instance.CurrentHHphase = HarrowholdPhase.None;
             BossGageWindowViewModel.Instance.ClearGuildTowers();
@@ -362,7 +342,7 @@ namespace TCC.Parsing
         }
         public static void HandleSpawnUser(S_SPAWN_USER p)
         {
-            if(!GroupWindowViewModel.Instance.UserExists(p.EntityId)) return;
+            if(!GroupWindowViewModel.Instance.Exists(p.EntityId)) return;
 
             GroupWindowViewModel.Instance.UpdateMemberGear(p);
         }
@@ -409,7 +389,7 @@ namespace TCC.Parsing
 
         public static void HandlePartyMemberAbnormalClear(S_PARTY_MEMBER_ABNORMAL_CLEAR x)
         {
-            GroupWindowViewModel.Instance.ClearUserAbnormality(x.PlayerId, x.ServerId);
+            GroupWindowViewModel.Instance.ClearAbnormality(x.PlayerId, x.ServerId);
         }
         public static void HandlePartyMemberAbnormalRefresh(S_PARTY_MEMBER_ABNORMAL_REFRESH x)
         {
@@ -833,7 +813,7 @@ namespace TCC.Parsing
         public static void HandlePartyMemberLogout(S_LOGOUT_PARTY_MEMBER p)
         {
             GroupWindowViewModel.Instance.LogoutMember(p.PlayerId, p.ServerId);
-            GroupWindowViewModel.Instance.ClearUserAbnormality(p.PlayerId, p.ServerId);
+            GroupWindowViewModel.Instance.ClearAbnormality(p.PlayerId, p.ServerId);
 
         }
         public static void HandlePartyMemberKick(S_BAN_PARTY_MEMBER p)
@@ -842,11 +822,11 @@ namespace TCC.Parsing
         }
         public static void HandlePartyMemberHp(S_PARTY_MEMBER_CHANGE_HP p)
         {
-            GroupWindowViewModel.Instance.UpdateMemberHP(p.PlayerId, p.ServerId, p.CurrentHP, p.MaxHP);
+            GroupWindowViewModel.Instance.UpdateMemberHp(p.PlayerId, p.ServerId, p.CurrentHP, p.MaxHP);
         }
         public static void HandlePartyMemberMp(S_PARTY_MEMBER_CHANGE_MP p)
         {
-            GroupWindowViewModel.Instance.UpdateMemberMP(p.PlayerId, p.ServerId, p.CurrentMP, p.MaxMP);
+            GroupWindowViewModel.Instance.UpdateMemberMp(p.PlayerId, p.ServerId, p.CurrentMP, p.MaxMP);
         }
         public static void HandlePartyMemberStats(S_PARTY_MEMBER_STAT_UPDATE p)
         {

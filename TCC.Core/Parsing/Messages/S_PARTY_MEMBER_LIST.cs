@@ -19,17 +19,12 @@ namespace TCC.Parsing.Messages
         uint unk10;
         byte unk11;
 
-        private List<User> members;
-
         public bool Im { get { return im; } }
         public bool Raid { get { return raid; } }
         public uint LeaderServerId { get { return leaderServerId; } }
         public uint LeaderPlayerId { get { return leaderPlayerId; } }
 
-        public List<User> Members
-        {
-            get { return members; }
-        }
+        public List<User> Members { get; }
 
         public S_PARTY_MEMBER_LIST(TeraMessageReader reader) : base(reader)
         {
@@ -57,7 +52,7 @@ namespace TCC.Parsing.Messages
             //unk10 = reader.ReadUInt32();
             //unk11 = reader.ReadByte();
 
-            members = new List<User>();
+            Members = new List<User>();
 
             for (int i = 0; i < count; i++)
             {
@@ -75,8 +70,8 @@ namespace TCC.Parsing.Messages
                 u.Laurel = (Laurel)reader.ReadUInt32();
                 u.Name = reader.ReadTeraString();
                 u.Alive = true;
-                if (u.ServerId == LeaderServerId && u.PlayerId == LeaderPlayerId) u.IsLeader = true;
-                members.Add(u);
+                u.IsLeader = u.ServerId == LeaderServerId && u.PlayerId == LeaderPlayerId;
+                Members.Add(u);
             }
         }
     }
