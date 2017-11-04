@@ -17,7 +17,7 @@ namespace TCC
                 {
                     BeginPlayerAbnormality(ab, stacks, duration);
                     if (SettingsManager.DisablePartyAbnormals) return;
-                    GroupWindowViewModel.Instance.BeginOrRefreshUserAbnormality(ab, stacks, duration, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
+                    GroupWindowViewModel.Instance.BeginOrRefreshAbnormality(ab, stacks, duration, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
                 }
                 else
                 {
@@ -32,7 +32,7 @@ namespace TCC
                 if (target == SessionManager.CurrentPlayer.EntityId)
                 {
                     EndPlayerAbnormality(ab);
-                    GroupWindowViewModel.Instance.EndUserAbnormality(ab, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
+                    GroupWindowViewModel.Instance.EndAbnormality(ab, SessionManager.CurrentPlayer.PlayerId, SessionManager.CurrentPlayer.ServerId);
 
                 }
                 //else if (EntitiesManager.TryGetBossById(target, out Npc b))
@@ -46,7 +46,8 @@ namespace TCC
             }
 
         }
-        static void BeginPlayerAbnormality(Abnormality ab, int stacks, uint duration)
+
+        private static void BeginPlayerAbnormality(Abnormality ab, int stacks, uint duration)
         {
             if (ab.Type == AbnormalityType.Buff)
             {
@@ -67,21 +68,21 @@ namespace TCC
                 CharacterWindowViewModel.Instance.Player.AddToDebuffList(ab);
                 ClassManager.SetStatus(ab, true);
             }
-            CheckDragonProc(ab);
+            CheckPassivity(ab);
             //var sysMsg = new ChatMessage("@661\vAbnormalName\v" + ab.Name, SystemMessages.Messages["SMT_BATTLE_BUFF_DEBUFF"]);
             //ChatWindowViewModel.Instance.AddChatMessage(sysMsg);
 
         }
 
-        private static void CheckDragonProc(Abnormality ab)
+        private static void CheckPassivity(Abnormality ab)
         {
-            if (ab.Id >= 6001 && ab.Id <= 6002)
+            if (PassivityDatabase.Passivities.Contains(ab.Id))
             {
-                SkillManager.AddItemSkill(ab.Id, 60);
+                SkillManager.AddPassivitySkill(ab.Id, 60);
             }
         }
 
-        static void EndPlayerAbnormality(Abnormality ab)
+        private static void EndPlayerAbnormality(Abnormality ab)
         {
             if (ab.Type == AbnormalityType.Buff)
             {
@@ -106,7 +107,7 @@ namespace TCC
             }
         }
 
-        static void BeginNpcAbnormality(Abnormality ab, int stacks, uint duration, ulong target)
+        private static void BeginNpcAbnormality(Abnormality ab, int stacks, uint duration, ulong target)
         {
             //if (EntitiesViewModel.TryGetBossById(target, out Npc b))
             //{
@@ -114,7 +115,8 @@ namespace TCC
             //}
             BossGageWindowViewModel.Instance.AddOrRefreshNpcAbnormality(ab, stacks, duration, target);
         }
-        static bool Filter(Abnormality ab)
+
+        private static bool Filter(Abnormality ab)
         {
             if (ab.Name.Contains("BTS") || ab.ToolTip.Contains("BTS") || !ab.IsShow) return false;
             if (ab.Name.Contains("(Hidden)") || ab.Name.Equals("Unknown") || ab.Name.Equals(string.Empty)) return false;
@@ -126,7 +128,7 @@ namespace TCC
             if (CurrentDb.Abnormalities.TryGetValue(id, out Abnormality ab))
             {
                 if (!Filter(ab)) return;
-                GroupWindowViewModel.Instance.BeginOrRefreshUserAbnormality(ab, stacks, duration, playerId, serverId);
+                GroupWindowViewModel.Instance.BeginOrRefreshAbnormality(ab, stacks, duration, playerId, serverId);
             }
         }
 
@@ -135,7 +137,7 @@ namespace TCC
             if (CurrentDb.Abnormalities.TryGetValue(id, out Abnormality ab))
             {
                 if (!Filter(ab)) return;
-                GroupWindowViewModel.Instance.EndUserAbnormality(ab, playerId, serverId);
+                GroupWindowViewModel.Instance.EndAbnormality(ab, playerId, serverId);
             }
         }
     }

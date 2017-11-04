@@ -77,5 +77,14 @@ namespace TCC
             SessionManager.CurrentPlayer.EntityId = 0;
             SessionManager.Logged = false;
         }
+
+        public static void AddPassivitySkill(uint abId, uint cd)
+        {
+            if (PassivityDatabase.TryGetPassivitySkill(abId, out var skill))
+            {
+                RouteSkill(new SkillCooldown(skill, cd*1000, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher()));
+            }
+
+        }
     }
 }

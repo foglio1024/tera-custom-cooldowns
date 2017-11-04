@@ -121,7 +121,8 @@
     public enum CooldownType
     {
         Skill,
-        Item
+        Item,
+        Passive
     }
 
     public enum AbnormalityType
@@ -226,5 +227,12 @@
     {
         OutOfView = 1,
         Dead = 5
+    }
+
+    public enum Role
+    {
+        Dps = 0,
+        Tank = 1,
+        Healer = 2
     }
 }

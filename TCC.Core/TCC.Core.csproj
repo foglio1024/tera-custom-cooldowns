@@ -385,6 +385,7 @@
     <Compile Include="Data\Databases\GuildQuestDatabase.cs" />
     <Compile Include="Data\Databases\ItemsDatabase.cs" />
     <Compile Include="Data\Databases\MapDatabase.cs" />
+    <Compile Include="Data\Databases\PassivityDatabase.cs" />
     <Compile Include="Data\Databases\QuestDatabase.cs" />
     <Compile Include="Data\Dungeon.cs" />
     <Compile Include="Data\EnragePattern.cs" />
@@ -1299,6 +1300,8 @@
     <Content Include="resources\data\abnormalities\hotdot-TW.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="resources\fonts\copyfonts.com_arial-monospaced-mt-bold.ttf" />
+    <Resource Include="resources\fonts\DroidSansMono.ttf" />
     <Resource Include="resources\fonts\RobotoMono-Medium.ttf" />
     <Resource Include="resources\images\default_guild_logo.png" />
     <Resource Include="resources\images\twitch.png" />

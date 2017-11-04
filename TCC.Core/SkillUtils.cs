@@ -20,6 +20,7 @@ namespace TCC
             {
                 var type = CooldownType.Skill;
                 if (skillElement.Name == "Item") type = CooldownType.Item;
+                if (skillElement.Name == "Passive") type = CooldownType.Passive;
 
                 var skillId = Convert.ToUInt32(skillElement.Attribute("id").Value);
                 var row = Convert.ToInt32(skillElement.Attribute("row").Value);
@@ -59,6 +60,25 @@ namespace TCC
                         }
                     }
                 }
+                else if (type == CooldownType.Passive)
+                {
+                    if (PassivityDatabase.TryGetPassivitySkill(skillId, out var sk))
+                    {
+                        switch (row)
+                        {
+                            case 1:
+                                Main.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                break;
+                            case 2:
+                                Secondary.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                break;
+                            case 3:
+                                Hidden.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                break;
+                        }
+                    }
+                }
+
             }
         }
 
