@@ -39,27 +39,27 @@ namespace TCC.Windows
             FocusManager.MakeUnfocusable(_handle);
             FocusManager.HideFromToolBar(_handle);
             Topmost = true;
-            ContextMenu = new System.Windows.Controls.ContextMenu();
+            //ContextMenu = new System.Windows.Controls.ContextMenu();
 
-            if (canHide)
-            {
-                var HideButton = new System.Windows.Controls.MenuItem() { Header = "Hide" };
-                HideButton.Click += (s, ev) =>
-                {
-                    SetVisibility(Visibility.Hidden);
-                };
-                ContextMenu.Items.Add(HideButton);
-            }
+            //if (canHide)
+            //{
+            //    var HideButton = new System.Windows.Controls.MenuItem() { Header = "Hide" };
+            //    HideButton.Click += (s, ev) =>
+            //    {
+            //        SetVisibility(Visibility.Hidden);
+            //    };
+            //    ContextMenu.Items.Add(HideButton);
+            //}
 
-            if (canClickThru)
-            {
-                var ClickThruButton = new System.Windows.Controls.MenuItem() { Header = "Click through" };
-                ClickThruButton.Click += (s, ev) =>
-                {
-                    SetClickThru(true);
-                };
-                ContextMenu.Items.Add(ClickThruButton);
-            }
+            //if (canClickThru)
+            //{
+            //    var ClickThruButton = new System.Windows.Controls.MenuItem() { Header = "Click through" };
+            //    ClickThruButton.Click += (s, ev) =>
+            //    {
+            //        SetClickThru(true);
+            //    };
+            //    ContextMenu.Items.Add(ClickThruButton);
+            //}
 
             _settings = ws;
             _settings.NotifyWindowSafeClose += CloseWindowSafe;
