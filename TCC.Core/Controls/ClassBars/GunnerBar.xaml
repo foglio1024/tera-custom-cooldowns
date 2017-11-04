@@ -34,7 +34,7 @@
                     Padding="30,0,0,0"
                     VerticalAlignment="Center"
                     >
-                <UniformGrid Rows="1" ClipToBounds="False" Grid.Column="1" Margin="0,-2,-1,-2" >
+                <UniformGrid Rows="1" ClipToBounds="False" Grid.Column="1" Margin="0,-2,0,-2" >
                     <local:BuffCooldownControl DataContext="{Binding Bombardment}" />
                     <local:BuffCooldownControl DataContext="{Binding Balder}" />
                 </UniformGrid>
