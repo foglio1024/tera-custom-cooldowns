@@ -915,24 +915,24 @@ namespace TCC.ViewModels
         }
         public bool HideBuffs
         {
-            get { return SettingsManager.IgnoreGroupBuffs; }
+            get => SettingsManager.IgnoreGroupBuffs;
             set
             {
                 if (SettingsManager.IgnoreGroupBuffs == value) return;
                 SettingsManager.IgnoreGroupBuffs = value;
                 NotifyPropertyChanged(nameof(HideBuffs));
-                GroupWindowViewModel.Instance.BuffsEnabled = !value;
+                GroupWindowViewModel.Instance.NotifySettingUpdated();
             }
         }
         public bool HideDebuffs
         {
-            get { return SettingsManager.IgnoreGroupDebuffs; }
+            get => SettingsManager.IgnoreGroupDebuffs;
             set
             {
                 if (SettingsManager.IgnoreGroupDebuffs == value) return;
                 SettingsManager.IgnoreGroupDebuffs = value;
                 NotifyPropertyChanged(nameof(HideDebuffs));
-                GroupWindowViewModel.Instance.DebuffsEnabled = !value;
+                GroupWindowViewModel.Instance.NotifySettingUpdated();
             }
         }
         public bool DisableAllPartyAbnormals
@@ -1123,7 +1123,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.DisablePartyMP == value) return;
                 SettingsManager.DisablePartyMP = value;
-                GroupWindowViewModel.Instance.MPenabled = !value;
+                GroupWindowViewModel.Instance.NotifySettingUpdated();
                 MessageFactory.Update();
                 NotifyPropertyChanged(nameof(DisableMP));
             }
@@ -1135,7 +1135,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.DisablePartyHP == value) return;
                 SettingsManager.DisablePartyHP = value;
-                GroupWindowViewModel.Instance.HPenabled = !value;
+                GroupWindowViewModel.Instance.NotifySettingUpdated();
                 MessageFactory.Update();
                 NotifyPropertyChanged(nameof(DisableHP));
             }
