@@ -61,7 +61,7 @@ namespace TCC
             if (BossGageWindowViewModel.Instance.VisibleBossesCount == 0)
             {
                 SessionManager.Encounter = false;
-                GroupWindowViewModel.Instance.ResetAggro();
+                GroupWindowViewModel.Instance.SetAggro(0);
             }
         }
         public static void SetNPCStatus(ulong entityId, bool enraged)
