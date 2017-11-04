@@ -32,6 +32,8 @@
 
         ContentTemplate="{Binding Instance.CurrentHHphase, Converter={StaticResource Converters.HarrowholdPhaseToLayout}}"
                        />
-
+<Grid.CacheMode>
+    <BitmapCache RenderAtScale="2"></BitmapCache>
+</Grid.CacheMode>
     </Grid>
 </w:TccWindow>
