@@ -54,7 +54,7 @@
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Vertical" 
                                ItemHeight="Auto" 
-                               MaxHeight="270" 
+                               MaxHeight="100" 
                                ItemWidth="Auto" 
                                Background="Transparent"/>
                 </ItemsPanelTemplate>
