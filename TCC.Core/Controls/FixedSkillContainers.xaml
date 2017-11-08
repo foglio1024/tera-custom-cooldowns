@@ -67,7 +67,7 @@
 
         </Grid>
         <ItemsControl Name="itemSkills" ItemTemplate="{StaticResource DefaultSkillIndicator}" Width="Auto" Height="50"  VerticalAlignment="Stretch" 
-                      HorizontalAlignment="Right" ItemsSource="{Binding ItemSkills}" BorderBrush="Red" BorderThickness="00" Grid.Row="0">
+                      HorizontalAlignment="Right" ItemsSource="{Binding ItemSkills}" BorderBrush="Red" BorderThickness="00" Grid.Row="0" Visibility="{Binding ShowItems, Converter={StaticResource Converters.BoolToVisibleHidden}}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Margin="0,0,0,0" IsItemsHost="True" Width="Auto" Height="Auto" FlowDirection="RightToLeft"

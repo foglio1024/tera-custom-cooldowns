@@ -59,6 +59,8 @@ namespace TCC
         public static Dictionary<Class, List<uint>> GroupAbnormals = new Dictionary<Class, List<uint>>();
         public static uint GroupSizeThreshold = 7;
         public static EnrageLabelMode EnrageLabelMode { get; set; } = EnrageLabelMode.Remaining;
+        public static bool ShowItemsCooldown { get; set; } = true;
+
         public static void LoadWindowSettings()
         {
             if (File.Exists(Environment.CurrentDirectory + @"/tcc-config.xml"))
@@ -268,6 +270,11 @@ namespace TCC
                     EnrageLabelMode = (EnrageLabelMode)Enum.Parse(typeof(EnrageLabelMode), b.Attribute(nameof(EnrageLabelMode)).Value);
                 }
                 catch { }
+                try
+                {
+                    ShowItemsCooldown = Boolean.Parse(b.Attribute(nameof(ShowItemsCooldown)).Value);
+                }
+                catch (Exception) { }
                 //add settings here
 
                 try
@@ -373,7 +380,8 @@ namespace TCC
                 new XAttribute(nameof(TwitchToken), TwitchToken),
                 new XAttribute(nameof(TwitchChannelName), TwitchChannelName),
                 new XAttribute(nameof(GroupSizeThreshold), GroupSizeThreshold),
-                new XAttribute(nameof(EnrageLabelMode), EnrageLabelMode)
+                new XAttribute(nameof(EnrageLabelMode), EnrageLabelMode),
+                new XAttribute(nameof(ShowItemsCooldown), ShowItemsCooldown)
                 //add setting here
                 ),
                 BuildChannelsXElement(),

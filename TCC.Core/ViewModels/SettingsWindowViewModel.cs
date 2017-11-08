@@ -1140,6 +1140,18 @@ namespace TCC.ViewModels
                 NotifyPropertyChanged(nameof(DisableHP));
             }
         }
+
+        public bool ShowItemsCooldown
+        {
+            get => SettingsManager.ShowItemsCooldown;
+            set
+            {
+                if(SettingsManager.ShowItemsCooldown == value) return;
+                SettingsManager.ShowItemsCooldown = value;
+                CooldownWindowViewModel.Instance.NotifyItemsDisplay();
+                NotifyPropertyChanged(nameof(ShowItemsCooldown));
+            }
+        }
         public bool HhOnlyAggro
         {
             get => SettingsManager.ShowOnlyAggroStacks;

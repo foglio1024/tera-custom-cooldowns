@@ -17,7 +17,7 @@ namespace TCC.ViewModels
         public static CooldownWindowViewModel Instance => _instance ?? (_instance = new CooldownWindowViewModel());
 
         public bool IsTeraOnTop => WindowManager.IsTccVisible;
-
+        public bool ShowItems => SettingsManager.ShowItemsCooldown;
 
         private SynchronizedObservableCollection<SkillCooldown> _shortSkills;
         private SynchronizedObservableCollection<SkillCooldown> _longSkills;
@@ -423,6 +423,11 @@ namespace TCC.ViewModels
             };
 
 
+        }
+
+        public void NotifyItemsDisplay()
+        {
+            NotifyPropertyChanged(nameof(ShowItems));
         }
     }
 }

@@ -203,8 +203,8 @@
                     <controls:SelectionSetting SettingName="Click through mode" Grid.Row="1" SelectedItem="{Binding CooldownWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type tcc:ClickThruMode}"  Choices="{Binding ClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" ToolTip="{StaticResource ClickThruModeSettingTooltip}"/>
                     <controls:ValueSetting SettingName="Scale"  Min="0" Max="3" Value="{Binding CooldownWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png" />
                     <controls:BoolSetting SettingName="Auto dim"  IsOn="{Binding CooldownWindowSettings.AutoDim, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png"  ToolTip="{StaticResource AutoDimSettingTooltip}"/>
-                    <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding CooldownWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png" ToolTip="{StaticResource DimOpacitySettingTooltip}"/>
-                    <controls:BoolSetting SettingName="Transparency" Grid.Row="5" IsOn="{Binding CooldownWindowSettings.AllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource TransparencySettingTooltip}"/>
+                    <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Value="{Binding CooldownWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png" ToolTip="{StaticResource DimOpacitySettingTooltip}"/>
+                    <controls:BoolSetting SettingName="Transparency" IsOn="{Binding CooldownWindowSettings.AllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource TransparencySettingTooltip}"/>
                     <Separator/>
                     <controls:SelectionSetting SettingName="Cooldown bar mode" SelectedItem="{Binding CooldownBarMode, Mode=TwoWay}" Choices="{Binding CooldownBarModes}" ChoicesType="{x:Type tcc:CooldownBarMode}"  ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_timelapse_white_24dp_2x.png" >
                         <controls:SelectionSetting.ToolTip>
@@ -224,6 +224,8 @@
                             </Grid>
                         </controls:SelectionSetting.ToolTip>
                     </controls:SelectionSetting>
+                    <controls:BoolSetting SettingName="Show items cooldown" IsOn="{Binding ShowItemsCooldown, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" />
+
                 </StackPanel>
             </TabItem>
             <TabItem Margin="-1,0,0,0">
