@@ -47,6 +47,8 @@ namespace TCC.Controls
             ArcAnimation = new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(1));
             ExpandWarn = new DoubleAnimation(0, 1.5, TimeSpan.FromMilliseconds(300)) { EasingFunction = new QuadraticEase() };
             ExpandWarnInner = new DoubleAnimation(35, 0, TimeSpan.FromMilliseconds(400)) { EasingFunction = new QuadraticEase() };
+            Timeline.SetDesiredFrameRate(ExpandWarn, 30);
+            Timeline.SetDesiredFrameRate(ExpandWarnInner, 30);
         }
 
         void Control_Loaded(object sender, RoutedEventArgs e)
@@ -115,7 +117,7 @@ namespace TCC.Controls
             ArcAnimation.Duration = TimeSpan.FromMilliseconds(_context.Cooldown);
             ArcAnimation.From = 359.9 * val;
             int fps = _context.Cooldown > 80000 ? 1 : 30;
-            DoubleAnimation.SetDesiredFrameRate(ArcAnimation, fps);
+            Timeline.SetDesiredFrameRate(ArcAnimation, fps);
             arc.BeginAnimation(Arc.EndAngleProperty, ArcAnimation);
         }
 

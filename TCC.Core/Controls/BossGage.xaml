@@ -14,9 +14,7 @@
              Width="Auto"
              Height="Auto"
              Visibility="{Binding Visible}" d:DataContext="{d:DesignInstance data:Npc}">
-    <UserControl.CacheMode>
-        <BitmapCache RenderAtScale="2"></BitmapCache>
-    </UserControl.CacheMode>
+    
     <UserControl.Resources>
         <DataTemplate x:Key="EnrageHistoryItem" DataType="local:EnragePeriodItem">
             <StackPanel Orientation="Horizontal" Width="406">
@@ -25,7 +23,7 @@
                         <ScaleTransform ScaleX="{Binding StartFactor}"></ScaleTransform>
                     </Rectangle.LayoutTransform>
                 </Rectangle>
-                <Rectangle Width="406" Fill="#5f00">
+                <Rectangle Width="406" Fill="#4f55">
                     <Rectangle.RenderTransform>
                         <ScaleTransform ScaleX="{Binding Factor}"/>
                     </Rectangle.RenderTransform>
@@ -203,8 +201,7 @@
                                            />-->
                     
                     <!--Enrage history-->
-                    <ItemsControl                         ItemsSource="{Binding EnrageHistory, RelativeSource={RelativeSource AncestorType=local:BossGage}}"
-
+                    <ItemsControl ItemsSource="{Binding EnrageHistory, RelativeSource={RelativeSource AncestorType=local:BossGage}}"
                                   ItemTemplate="{StaticResource EnrageHistoryItem}"
                                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
                         <ItemsControl.ItemsPanel>
@@ -226,7 +223,7 @@
                         </StackPanel.RenderTransform>
                         <!--<Polygon Points="0,7 5,0 10,7"  Margin="0,0,0,0"  Fill="Orange" VerticalAlignment="Center" Height="Auto"  HorizontalAlignment="Center" Grid.Column="1" >
                         </Polygon>-->
-                        <Border Background="White" Width="8" Height="8" Name="enrageEll" CornerRadius="8" 
+                        <Border Background="White" Width="6" Height="6" Name="enrageEll" CornerRadius="0" 
                                 Effect="{StaticResource dropShadow}" Margin="0,1,0,0"/>
                         <!--<TextBlock Width="Auto" FontSize="12" Style="{StaticResource Styles.DefaultText}"
                                    TextAlignment="Center" VerticalAlignment="Top" Margin="0,3,0,0" Padding="0"
@@ -238,13 +235,13 @@
                                 <ScaleTransform ScaleX="1"></ScaleTransform>
                             </FrameworkElement.LayoutTransform>
                         </FrameworkElement>
-                        <Ellipse Name="Dot"
-                                 Height="8"
-                                 Width="8"
-                                 Effect="{StaticResource dropShadow}"
-                                 Fill="Orange"
+                        <Rectangle Name="Dot"
+                                 Height="6"
+                                 Width="2"
+                                 
+                                 Fill="#dfff"
                                  HorizontalAlignment="Left"
-                                 Margin="-4,-1,-50,-1"
+                                 Margin="-2,-1,-50,-1"
                                  Opacity="{Binding CurrentHP}"/>
                     </StackPanel>
 
@@ -317,7 +314,7 @@
             </Grid>-->
         </Grid>
 
-        <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="5" ClipToBounds="False"
+        <!--<Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="5" ClipToBounds="False"
                 Margin="-10,48,-10,0" Height="14" HorizontalAlignment="Center" Visibility="Collapsed"
                 VerticalAlignment="Top" Name="MainShieldBorder" Width="428">
             <Grid>
@@ -349,7 +346,7 @@
             </Grid>
 
 
-        </Border>
+        </Border>-->
 
     </Grid>
 </UserControl>

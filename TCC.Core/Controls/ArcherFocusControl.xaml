@@ -22,9 +22,6 @@
             <Ellipse.Fill>
                 <ImageBrush ImageSource="{Binding Icon, Converter={StaticResource Converters.IconNameToPath}}" />
             </Ellipse.Fill>
-            <Ellipse.CacheMode>
-                <BitmapCache RenderAtScale="2"/>
-            </Ellipse.CacheMode>
         </Ellipse>
 
         <Grid Width="22" Height="22"  

@@ -19,7 +19,7 @@ namespace TCC.Controls
             InitializeComponent();
             da = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(250)){EasingFunction = new QuadraticEase()};
             da.Completed += Da_Completed;
-
+            Timeline.SetDesiredFrameRate(da, 30);
         }
 
         private void Da_Completed(object sender, EventArgs e)
