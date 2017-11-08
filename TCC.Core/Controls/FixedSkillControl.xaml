@@ -30,7 +30,7 @@
                    UseLayoutRounding="False" 
                    Width="Auto" 
                    Height="Auto" 
-                   StrokeThickness="25" Margin="3" 
+                   StrokeThickness="26" Margin="2" 
                    Stroke="#a000" 
                    EndAngle="0.01" 
                    HorizontalAlignment="Stretch" 
@@ -57,8 +57,8 @@
               VerticalAlignment="Bottom"
               ClipToBounds="False"
               Opacity="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=local:FixedSkillControl}, Converter={StaticResource Converters.BoolToOpacity}}">
-            <Border Background="#202027" CornerRadius="5" Effect="{StaticResource FadedDropShadow}" BorderBrush="#404047" BorderThickness="1" Padding="4,0">
-                <TextBlock Foreground="#bfff" 
+            <Border Background="#fff" CornerRadius="5" Effect="{StaticResource FadedDropShadow}" BorderBrush="#404047" BorderThickness="1" Padding="4,0">
+                <TextBlock Foreground="#d000" 
                            HorizontalAlignment="Center" 
                            VerticalAlignment="Center" 
                            TextAlignment="Center"
