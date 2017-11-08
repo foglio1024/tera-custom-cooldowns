@@ -29,7 +29,7 @@ namespace TCC
         Color BaseHpColor = Color.FromRgb(0x00, 0x97, 0xce);
         public SynchronizedObservableCollection<EnragePeriodItem> EnrageHistory { get; set; }
 
-        public string MainPercInt => (Convert.ToInt32(Npc.CurrentFactor*100)).ToString();
+        public string MainPercInt => (Convert.ToInt32(Math.Floor(Npc.CurrentFactor*100))).ToString();
 
         public string MainPercDec
         {
@@ -76,7 +76,8 @@ namespace TCC
         public double CurrentPercentage => _maxHp == 0 ? 0 : (_currentHp / _maxHp) * 100;
         private DoubleAnimation _shieldSizeAnim;
         private DoubleAnimation _enrageArcAnimation;
-        private DoubleAnimation _hpAnim;
+        private readonly DoubleAnimation _hpAnim;
+        private readonly DoubleAnimation _flash;
         double nextEnragePerc;
         public double NextEnragePercentage
         {
@@ -151,6 +152,9 @@ namespace TCC
             ColorChangeAnimation.Duration = TimeSpan.FromMilliseconds(AnimationTime);
             DoubleAnimation.Duration = TimeSpan.FromMilliseconds(AnimationTime);
             _hpAnim = new DoubleAnimation(1,TimeSpan.FromMilliseconds(150)){EasingFunction = new QuadraticEase()};
+            _flash = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(1000)){EasingFunction = new QuadraticEase()};
+            Timeline.SetDesiredFrameRate(_flash, 30);
+            Timeline.SetDesiredFrameRate(_hpAnim, 30);
         }
 
         public bool ExtraInfo;
@@ -199,7 +203,7 @@ namespace TCC
                     EnrageHistory.Add(new EnragePeriodItem(CurrentPercentage));
                     NotifyPropertyChanged(nameof(EnrageHistory));
                     EnrageBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _enrageArcAnimation);
-                    enrageBorder.BeginAnimation(OpacityProperty, new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(1000)) { EasingFunction = new QuadraticEase() });
+                    enrageBorder.BeginAnimation(OpacityProperty, _flash);
                 }
                 else
                 {
@@ -221,7 +225,7 @@ namespace TCC
             if (e.PropertyName == nameof(Npc.ShieldFactor))
             {
                 _shieldSizeAnim.To = Npc.ShieldFactor;
-                ShieldInnerFrameworkElement.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _shieldSizeAnim);
+                //ShieldInnerFrameworkElement.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _shieldSizeAnim);
             }
         }
 
@@ -235,9 +239,11 @@ namespace TCC
             topInfoGrid.Opacity = 0;
             Visibility = Npc.Visible;
             var expand = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(300));
+            Timeline.SetDesiredFrameRate(expand, 30);
             LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, expand);
             var fade = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(300));
             fade.BeginTime = TimeSpan.FromMilliseconds(300);
+            Timeline.SetDesiredFrameRate(fade, 30);
             //mainBorder.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, expand);
             mainBorder.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, expand);
             BossNameGrid.BeginAnimation(OpacityProperty, fade);
@@ -265,6 +271,7 @@ namespace TCC
             SlideEnrageIndicator(NextEnragePercentage);
             _shieldSizeAnim = new DoubleAnimation(0, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() };
             _enrageArcAnimation = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(Npc.EnragePattern.Duration));
+            Timeline.SetDesiredFrameRate(_enrageArcAnimation, 30);
             _enrageArcAnimation.Completed += _enrageArcAnimation_Completed;
             EnrageHistory = new SynchronizedObservableCollection<EnragePeriodItem>(Dispatcher);
             t = new DispatcherTimer() {Interval = TimeSpan.FromSeconds(5)};
