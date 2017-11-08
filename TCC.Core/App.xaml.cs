@@ -68,13 +68,11 @@ namespace TCC
             {
                 SkillManager.Clear();
                 WindowManager.TrayIcon.Icon = WindowManager.ConnectedIcon;
-                ChatWindowViewModel.Instance.AddChatMessage(
-                    new ChatMessage(ChatChannel.TCC, "System", $"<FONT>Connected to {srv.Name}.</FONT>"));
+                ChatWindowViewModel.Instance.AddTccMessage($"Connected to {srv.Name}.");
             };
             TeraSniffer.Instance.EndConnection += () =>
             {
-                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System",
-                    "<FONT>Disconnected from the server.</FONT>"));
+                ChatWindowViewModel.Instance.AddTccMessage("Disconnected from the server.");
                 GroupWindowViewModel.Instance.ClearAllAbnormalities();
                 BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
                 EntitiesManager.ClearNPC();
@@ -92,7 +90,7 @@ namespace TCC
 
             var v = Assembly.GetExecutingAssembly().GetName().Version;
             var ver = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
-            ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", $"<FONT>{ver}</FONT>"));
+            ChatWindowViewModel.Instance.AddTccMessage(ver);
 
             if(!Debug) return;
             SessionManager.CurrentPlayer = new Player(1, "Foglio");

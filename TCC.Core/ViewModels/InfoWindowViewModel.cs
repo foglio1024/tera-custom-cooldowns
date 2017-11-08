@@ -56,6 +56,11 @@ namespace TCC.ViewModels
         {
             ClearEvents();
             var yesterday = today - 1;
+            if (region == null)
+            {
+                ChatWindowViewModel.Instance.AddTccMessage("Unable to load events.");
+                return;
+            }
             if (region.StartsWith("EU")) region = "EU";
             var path = $"resources/config/events/events-{region}.xml";
             if (!File.Exists(path))

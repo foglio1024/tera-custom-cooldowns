@@ -230,6 +230,12 @@ namespace TCC.ViewModels
             }
             NotifyPropertyChanged(nameof(MessageCount));
         }
+
+        public void AddTccMessage(string message)
+        {
+            var msg = new ChatMessage(ChatChannel.TCC, "System", "<FONT>" + message + "</FONT>");
+            AddChatMessage(msg);
+        }
         public void AddOrRefreshLfg(S_PARTY_MATCH_LINK x)
         {
             LFG lfg;

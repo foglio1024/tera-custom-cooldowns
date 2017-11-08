@@ -24,12 +24,12 @@ namespace TCC
             {
                 if (_client.Client != null && _client.Connected) return;
                 Debug.WriteLine("Connecting...");
-                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Trying to connect to tera-proxy...</FONT>"));
+                ChatWindowViewModel.Instance.AddTccMessage("Trying to connect to tera-proxy...");
 
                 _client = new TcpClient();
                 _client.Connect("127.0.0.50", 9550);
                 Debug.WriteLine("Connected");
-                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Connected to tera-proxy.</FONT>"));
+                ChatWindowViewModel.Instance.AddTccMessage("Connected to tera-proxy.");
                 var t = new Thread(ReceiveData);
                 t.Start();
             }
@@ -42,7 +42,7 @@ namespace TCC
                     if (_retries <= 0)
                     {
                         Debug.WriteLine("Maximum retries exceeded...");
-                        ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Maximum retries exceeded. tera-proxy functionalities won't be available.</FONT>"));
+                        ChatWindowViewModel.Instance.AddTccMessage("Maximum retries exceeded. tera-proxy functionalities won't be available.");
 
                         _retries = 2;
                         return;

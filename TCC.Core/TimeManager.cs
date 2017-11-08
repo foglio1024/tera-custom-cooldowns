@@ -30,7 +30,7 @@ namespace TCC
         private DayOfWeek _resetDay;
         public int ResetHour;
         public static TimeManager Instance => _instance ?? (_instance = new TimeManager());
-        public string CurrentRegion;
+        public string CurrentRegion { get; set; }
         public int ServerHourOffsetFromLocal;
         public int ServerHourOffsetFromUtc;
 
@@ -115,9 +115,12 @@ namespace TCC
             SettingsManager.LastRun = DateTime.Now;
             InfoWindowViewModel.Instance.SaveToFile();
             SettingsManager.SaveSettings();
+            if (DateTime.Now.DayOfWeek == _resetDay)
+            {
+                ChatWindowViewModel.Instance.AddTccMessage("Weekly data has been reset.");
+            }
 
-            ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System",
-                "<FONT>Daily/weekly data has been reset.</FONT>"));
+            ChatWindowViewModel.Instance.AddTccMessage("Daily data has been reset.");
         }
 
 
@@ -137,7 +140,7 @@ namespace TCC
             }
             catch
             {
-                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Failed to retrieve guild bam info.</FONT>"));
+                ChatWindowViewModel.Instance.AddTccMessage("Failed to retrieve guild bam info.");
                 return 0;
             }
         }
@@ -159,7 +162,7 @@ namespace TCC
             }
             catch 
             {
-                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Failed to upload guild bam info.</FONT>"));   
+                ChatWindowViewModel.Instance.AddTccMessage("Failed to upload guild bam info.");   
             }
 
         }
@@ -210,7 +213,7 @@ namespace TCC
                 }
                 catch (Exception)
                 {
-                    ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Failed to execute Discord webhook.</FONT>"));
+                    ChatWindowViewModel.Instance.AddTccMessage("Failed to execute Discord webhook.");
                 }
             }
         }
@@ -245,7 +248,7 @@ namespace TCC
                 }
                 catch (Exception)
                 {
-                    ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Failed to execute Discord webhook.</FONT>"));
+                    ChatWindowViewModel.Instance.AddTccMessage("Failed to execute Discord webhook.");
                 }
             }
         }
