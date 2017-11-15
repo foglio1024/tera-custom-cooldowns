@@ -2152,6 +2152,7 @@
 203	SMT_YOU_MUST_DETACH_CRYSTAL_AND_ARTIFACT	Please remove all crystals and niveots first.
 203	SMT_CANT_REGIST_ITEM	You cannot select this item.
 203	SMT_CANT_REGIST_IN_CURRENT	You already learned.
+203	SMT_CANT_REGIST_EQUIP	You must unequip the item before enchanting.
 201	SMT_CANT_USE_MATERIAL_ENCHANT	Unable to use Material Enchanting System.
 201	SMT_CANT_USE_EQUIPMENT_UPGRADE	Unable to use Upgrade System.
 201	SMT_CANT_USE_ITEM_DECOMPOSITION	Unable to use Dismantle System.

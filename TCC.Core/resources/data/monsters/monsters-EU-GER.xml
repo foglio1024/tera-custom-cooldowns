@@ -86,6 +86,7 @@
 		<Monster name="Elinpriesterin" id="11007" isBoss="False" hp="0" />
 		<Monster name="Elinmystikerin" id="11008" isBoss="False" hp="0" />
 		<Monster name="Elinklingentänzerin" id="11009" isBoss="False" hp="0" />
+		<Monster name="Elin-Arkaningenieurin" id="11010" isBoss="False" hp="0" />
 		<Monster name="Elin Ninja" id="11012" isBoss="False" hp="0" />
 		<Monster name="Barakakrieger" id="11101" isBoss="False" hp="0" />
 		<Monster name="Barakalanzer" id="11102" isBoss="False" hp="0" />
@@ -4883,7 +4884,7 @@
 		<Monster name="Eingang zu Vernos Laboratorium" id="9067" isBoss="False" hp="0" />
 		<Monster name="Eingang zum Mogelplateau" id="9070" isBoss="False" hp="0" />
 		<Monster name="Zerstörter Eingang zum Himmelreich der Götter" id="9501" isBoss="False" hp="0" />
-		<Monster name="Eingang zu Lakans verzerrtem Gefängnis" id="9710" isBoss="False" hp="0" />
+		<Monster name="Eingang zu Lakans Gefängnis (schwierig)" id="9710" isBoss="False" hp="0" />
 		<Monster name="Eingang zum RK-9 Hangar" id="9735" isBoss="False" hp="0" />
 		<Monster name="Eingang zur Lilitasfestung (leicht)" id="9769" isBoss="False" hp="0" />
 		<Monster name="Velika-Untergrundtor, Eingang zu Veliks Zuflucht" id="9780" isBoss="False" hp="0" />
@@ -5066,6 +5067,8 @@
 		<Monster name="Nachtanam" id="6047" isBoss="False" hp="10000" />
 		<Monster name="Alba" id="6048" isBoss="False" hp="10000" />
 		<Monster name="Anansha" id="7001" isBoss="True" hp="737685828" />
+		<Monster name="Karagos" id="7002" isBoss="True" hp="737685828" />
+		<Monster name="Sabranak" id="7003" isBoss="True" hp="737685828" />
 	</Zone>
 	<Zone id="172" name="Wildlande" >
 		<Monster name="Paesen" id="1000" isBoss="False" hp="366797" />
@@ -11610,7 +11613,7 @@
 		<Monster name="Elitefächerklingennaga" id="64309" isBoss="False" hp="1300464" />
 		<Monster name="Nagakrieger" id="64310" isBoss="False" hp="1300464" />
 	</Zone>
-	<Zone id="710" name="Lakans verzerrtes Gefängnis" >
+	<Zone id="710" name="Lakans Gefängnis (schwierig)" >
 		<Monster name="Besiegt Ghorgoyn" id="911" isBoss="False" hp="0" />
 		<Monster name="Besiegt Molorkh" id="912" isBoss="False" hp="0" />
 		<Monster name="Besiegt Baalbaoth" id="913" isBoss="False" hp="0" />
@@ -13635,7 +13638,7 @@
 		<Monster name="Caprinkrieger" id="885117" isBoss="False" hp="3500000" />
 		<Monster name="Gewalttätiger Maligos" id="885118" isBoss="False" hp="3500000" />
 		<Monster name="Gorilla" id="885119" isBoss="False" hp="3500000" />
-		<Monster name="Suryati" id="885121" isBoss="False" hp="2147483647" />
+		<Monster name="Suryati" id="885121" isBoss="False" hp="3600000000" />
 		<Monster name="Argonenmauer" id="885122" isBoss="False" hp="3000000" />
 		<Monster name="Reißerschlund" id="885131" isBoss="False" hp="0" />
 		<Monster name="Geisterhafter Obelisk" id="885132" isBoss="False" hp="5000000" />
@@ -14014,11 +14017,11 @@
 		<Monster name="Aktiviert sämtliche Magnetfeld-Entferner." id="914" isBoss="False" hp="0" />
 		<Monster name="Beseitigt Hexapleion." id="915" isBoss="False" hp="0" />
 		<Monster name="Beseitigt RK-9." id="916" isBoss="False" hp="0" />
-		<Monster name="Ventaron" id="1000" isBoss="True" hp="2147483647" />
+		<Monster name="Ventaron" id="1000" isBoss="True" hp="2880000000" />
 		<Monster name="Zeitbombe" id="1009" isBoss="False" hp="6750000" />
 		<Monster name="Teleportal" id="1501" isBoss="False" hp="10000" />
-		<Monster name="Hexapleion" id="2000" isBoss="True" hp="2147483647" />
-		<Monster name="RK-9 (schwierig)" id="3000" isBoss="True" hp="2147483647" />
+		<Monster name="Hexapleion" id="2000" isBoss="True" hp="3072000000" />
+		<Monster name="RK-9 (schwierig)" id="3000" isBoss="True" hp="3670000000" />
 		<Monster name="Hangar-Komponentenkiste" id="5000" isBoss="False" hp="500000" />
 		<Monster name="Kiste mit Randuns Hinterlassenschaften" id="5001" isBoss="False" hp="500000" />
 		<Monster name="Fragwürdiger alter Mann" id="6002" isBoss="False" hp="1" />

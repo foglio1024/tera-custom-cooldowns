@@ -86,6 +86,7 @@
 		<Monster name="Prêtresse elin" id="11007" isBoss="False" hp="0" />
 		<Monster name="Mystique elin" id="11008" isBoss="False" hp="0" />
 		<Monster name="Mortiféra Elin" id="11009" isBoss="False" hp="0" />
+		<Monster name="Artilleuse Élin" id="11010" isBoss="False" hp="0" />
 		<Monster name="Ninja Élin" id="11012" isBoss="False" hp="0" />
 		<Monster name="Guerrier Baraka" id="11101" isBoss="False" hp="0" />
 		<Monster name="Lancier Baraka" id="11102" isBoss="False" hp="0" />
@@ -4883,7 +4884,7 @@
 		<Monster name="Entrée du Laboratoire de Verno" id="9067" isBoss="False" hp="0" />
 		<Monster name="Entrée du Plateau trompeur" id="9070" isBoss="False" hp="0" />
 		<Monster name="Entrée détruite du royaume des dieux" id="9501" isBoss="False" hp="0" />
-		<Monster name="Entrée de la Prison défigurée de Lakan" id="9710" isBoss="False" hp="0" />
+		<Monster name="Entrée de la Prison de Lakan (difficile)" id="9710" isBoss="False" hp="0" />
 		<Monster name="Entrée du Hangar du RK-9" id="9735" isBoss="False" hp="0" />
 		<Monster name="Entrée de la Forteresse de Lilitas (facile)" id="9769" isBoss="False" hp="0" />
 		<Monster name="Souterrain de Velika, entrée du Sanctuaire de Velik" id="9780" isBoss="False" hp="0" />
@@ -5066,6 +5067,8 @@
 		<Monster name="Nachtanam" id="6047" isBoss="False" hp="10000" />
 		<Monster name="Alba" id="6048" isBoss="False" hp="10000" />
 		<Monster name="Anansha" id="7001" isBoss="True" hp="737685828" />
+		<Monster name="Frygaras" id="7002" isBoss="True" hp="737685828" />
+		<Monster name="Sabranak" id="7003" isBoss="True" hp="737685828" />
 	</Zone>
 	<Zone id="172" name="Plaine barbare" >
 		<Monster name="Paesyn" id="1000" isBoss="False" hp="366797" />
@@ -11610,7 +11613,7 @@
 		<Monster name="Toubillelame Naga d'élite" id="64309" isBoss="False" hp="1300464" />
 		<Monster name="Guerrier naga" id="64310" isBoss="False" hp="1300464" />
 	</Zone>
-	<Zone id="710" name="Prison défigurée de Lakan" >
+	<Zone id="710" name="Prison de Lakan (difficile)" >
 		<Monster name="Triomphez de Ghorgoyn" id="911" isBoss="False" hp="0" />
 		<Monster name="Triomphez de Molorkh" id="912" isBoss="False" hp="0" />
 		<Monster name="Triomphez de Baalbaoth" id="913" isBoss="False" hp="0" />
@@ -13635,7 +13638,7 @@
 		<Monster name="Guerrier caprin" id="885117" isBoss="False" hp="3500000" />
 		<Monster name="Maligos violent" id="885118" isBoss="False" hp="3500000" />
 		<Monster name="Gorille" id="885119" isBoss="False" hp="3500000" />
-		<Monster name="Suryati" id="885121" isBoss="False" hp="2147483647" />
+		<Monster name="Suryati" id="885121" isBoss="False" hp="3600000000" />
 		<Monster name="Mur argon" id="885122" isBoss="False" hp="3000000" />
 		<Monster name="Avaleur à crocs" id="885131" isBoss="False" hp="0" />
 		<Monster name="Obélisque fantomatique" id="885132" isBoss="False" hp="5000000" />
@@ -14014,11 +14017,11 @@
 		<Monster name="Ceci active tous les supresseurs de champ magnétique." id="914" isBoss="False" hp="0" />
 		<Monster name="Éliminez Hexapleion." id="915" isBoss="False" hp="0" />
 		<Monster name="Éliminez RK-9." id="916" isBoss="False" hp="0" />
-		<Monster name="Ventaron" id="1000" isBoss="True" hp="2147483647" />
+		<Monster name="Ventaron" id="1000" isBoss="True" hp="2880000000" />
 		<Monster name="Bombe à retardement" id="1009" isBoss="False" hp="6750000" />
 		<Monster name="Téléportail" id="1501" isBoss="False" hp="10000" />
-		<Monster name="Hexapleion" id="2000" isBoss="True" hp="2147483647" />
-		<Monster name="RK-9 (difficile)" id="3000" isBoss="True" hp="2147483647" />
+		<Monster name="Hexapleion" id="2000" isBoss="True" hp="3072000000" />
+		<Monster name="RK-9 (difficile)" id="3000" isBoss="True" hp="3670000000" />
 		<Monster name="Boîte de pièces détachées du hangar" id="5000" isBoss="False" hp="500000" />
 		<Monster name="Caisse d'héritage de Randun" id="5001" isBoss="False" hp="500000" />
 		<Monster name="Vieil homme louche" id="6002" isBoss="False" hp="1" />

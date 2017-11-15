@@ -3387,6 +3387,8 @@
 5020000	EnchantChance	Buff	True	perc	300000	1	1.01	유럽 강화 주문서 1(5분)	153495	[PC방] 강화 장인의 가호 주문서 (5분)	1%	icon_items.parts_heavyarmorc5_tex	icon_items.parts_heavyarmorc5_tex	True
 5020001	EnchantChance	Buff	True	perc	300000	1	1.05	유럽 강화 주문서 2(5분)	153496	[PC방] 축복받은 강화 장인의 가호 주문서 (5분)	5%	icon_items.parts_heavyarmorc5_tex	icon_items.parts_heavyarmorc5_tex	True
 5020002	EnchantChance	Buff	True	perc	300000	1	1.15	유럽 강화 주문서 3(5분)	153497	[PC방] 빛나는 강화 장인의 가호 주문서 (5분)	15%	icon_items.parts_heavyarmorc5_tex	icon_items.parts_heavyarmorc5_tex	True
+5020003	CCrystalBind	Buff	True	abs	0	0	1	완전한 크리스탈 보호 주문서(VIP)			사망 시 크리스탈이 깨지는 것을 방지합니다.	icon_items.q_closedspace_stone_05_tex	icon_items.q_closedspace_stone_05_tex	True
+5020004	CraftTime	Buff	True	perc	0	0	0.5	장인의 등불(VIP)			모든 아이템의 제작 시간이 $H_W_GOOD50%$COLOR_END 단축됩니다.	icon_items.artisan_lamp_tex	icon_items.artisan_lamp_tex	True
 5690001	StaminaDecay	Buff	True	seta	0	0	0	기억의 추적자			기억의 파편 수집 중에는 사망 시 강화 크리스탈이 파괴되지 않습니다. 	icon_skills.refineresin_tex	icon_skills.refineresin_tex	True
 5690001	CrystalBind	Buff	True	abs	0	0	1	기억의 추적자			기억의 파편 수집 중에는 사망 시 강화 크리스탈이 파괴되지 않습니다. 	icon_skills.refineresin_tex	icon_skills.refineresin_tex	True
 5690002	Resurrect	Buff	True	seta	60000	0	1	기억의 재구성			기억 재구성을 통해 사망했던 기억을 삭제하여 부활할 수 있습니다. 	icon_status.mpsuckdown_tex	icon_status.mpsuckdown_tex	True
@@ -5764,7 +5766,7 @@
 97000021	HPLoss	Debuff	True	abs	1000	0	-50000000	라켈리스_PC_(역방향)스페이드			(역방향)스페이드	icon_status.confuseup_tex	icon_status.confuseup_tex	True
 97000022	HPLoss	Debuff	True	abs	1000	0	-50000000	라켈리스_PC_(역방향)세모			(역방향)세모	icon_status.confuseup_tex	icon_status.confuseup_tex	True
 97000024	Stun	Stun	False	swch	9000	0	5	기절 VIII			기절한 상태로 움직일 수 없습니다.	icon_status.confuseup_tex	icon_status.confuseup_tex	True
-97000025	HPChange	DOT	False	perc	15000	1	-0.2	라켈리스가 남긴 치명적인 상처			$H_W_BAD1s$COLOR_END마다 전체 HP 대비 $H_W_BAD20%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.injuredbtdarkness_tex	icon_status.injuredbtdarkness_tex	True
+97000025	HPChange	DOT	True	perc	15000	2	-0.15	라켈리스가 남긴 치명적인 상처			$H_W_BAD2s$COLOR_END마다 전체 HP 대비 $H_W_BAD15%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.injuredbtdarkness_tex	icon_status.injuredbtdarkness_tex	True
 97000026	HPChange	DOT	False	perc	15000	2	-0.1	라켈리스가 남긴 상처			$H_W_BAD2s$COLOR_END마다 전체 HP 대비 $H_W_BAD10%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.injuredbtdarkness_tex	icon_status.injuredbtdarkness_tex	True
 97000027	DelayedEffect	Debuff	True	perc	30000	0	97000028	각성한 릴리스(3넴)_누킹			각성한 릴리스(3넴)_누킹	icon_status.diseaseup_tex	icon_status.diseaseup_tex	True
 97000028	MaxHP	Debuff	True	perc	3000	0	1	각성한 릴리스(3넴)_누킹_발사			각성한 릴리스(3넴)_누킹_발사	icon_status.diseaseup_tex	icon_status.diseaseup_tex	True
@@ -5782,15 +5784,19 @@
 97000043	StackCounter	Debuff	True	seta	60000	0	97000044	크루얼하운드의 분노			지속 시간이 종료되거나 2중첩이 되면 사망에 이릅니다.	icon_status.delaympgain_tex	icon_status.delaympgain_tex	True
 97000044	HPChange	Debuff	False	abs	1100	1	-50000000	라켈리스(1넴) 2중첩_사망			라켈리스(1넴) 2중첩_사망	icon_status.injuredbtdarkness_tex	icon_status.injuredbtdarkness_tex	False
 97000045	HPChange	Debuff	True	perc	0	1	1	라켈리스(3넴)투명NPC 보호용			라켈리스(3넴)투명NPC 보호용	icon_skills.voidtrap_tex	icon_skills.voidtrap_tex	True
+97000045	101	Debuff	True	perc	0	1	1	라켈리스(3넴)투명NPC 보호용			라켈리스(3넴)투명NPC 보호용	icon_skills.voidtrap_tex	icon_skills.voidtrap_tex	True
 97000045	AllowAggro	Debuff	True	swch	0	0	0	라켈리스(3넴)투명NPC 보호용			라켈리스(3넴)투명NPC 보호용	icon_skills.voidtrap_tex	icon_skills.voidtrap_tex	True
 97000045	Immune	Debuff	True	9	0	0	0	라켈리스(3넴)투명NPC 보호용			라켈리스(3넴)투명NPC 보호용	icon_skills.voidtrap_tex	icon_skills.voidtrap_tex	True
-97000046	Stun	Stun	False	swch	9000	0	5	기절			기절한 상태로 움직일 수 없습니다.	icon_status.confuseup_tex	icon_status.confuseup_tex	True
+97000046	Stun	Stun	False	swch	6000	0	5	기절			기절한 상태로 움직일 수 없습니다.	icon_status.confuseup_tex	icon_status.confuseup_tex	True
+97000046	295	Stun	False	swch	6000	0	0	기절			기절한 상태로 움직일 수 없습니다.	icon_status.confuseup_tex	icon_status.confuseup_tex	True
 97000047	Stun	Stun	False	swch	5000	0	5	기절			기절한 상태로 움직일 수 없습니다.	icon_status.confuseup_tex	icon_status.confuseup_tex	True
-97000051	MovSpd	Debuff	False	setp	3000	0	0.5	새끼거미의 독			새끼 거미의 독에 감염되어 이동속도가 감소하고, $H_W_BAD0s$COLOR_END마다 전체 HP 대비 $H_W_BAD5%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.diseasedown_tex	icon_status.diseasedown_tex	True
-97000051	HPDrain	Debuff	False	perc	3000	0	0.9	새끼거미의 독			새끼 거미의 독에 감염되어 이동속도가 감소하고, $H_W_BAD0s$COLOR_END마다 전체 HP 대비 $H_W_BAD5%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.diseasedown_tex	icon_status.diseasedown_tex	True
-97000051	HPChange	Debuff	False	perc	3000	1	-0.05	새끼거미의 독			새끼 거미의 독에 감염되어 이동속도가 감소하고, $H_W_BAD0s$COLOR_END마다 전체 HP 대비 $H_W_BAD5%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.diseasedown_tex	icon_status.diseasedown_tex	True
+97000047	295	Stun	False	swch	5000	0	0	기절			기절한 상태로 움직일 수 없습니다.	icon_status.confuseup_tex	icon_status.confuseup_tex	True
+97000051	MovSpd	Debuff	True	setp	3000	0	0.5	새끼거미의 독			새끼 거미의 독에 감염되어 이동속도가 감소하고, $H_W_BAD0s$COLOR_END마다 전체 HP 대비 $H_W_BAD5%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.diseasedown_tex	icon_status.diseasedown_tex	True
+97000051	HPDrain	Debuff	True	perc	3000	0	0.9	새끼거미의 독			새끼 거미의 독에 감염되어 이동속도가 감소하고, $H_W_BAD0s$COLOR_END마다 전체 HP 대비 $H_W_BAD5%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.diseasedown_tex	icon_status.diseasedown_tex	True
+97000051	HPChange	Debuff	True	perc	3000	1	-0.05	새끼거미의 독			새끼 거미의 독에 감염되어 이동속도가 감소하고, $H_W_BAD0s$COLOR_END마다 전체 HP 대비 $H_W_BAD5%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.diseasedown_tex	icon_status.diseasedown_tex	True
 97000052	DefPotion	DOT	True	perc	100000	0	1.5	강력한 라켈리스의 저주			초월한 라켈리스에게 받는 피해가 50% 증가하며, 영혼구체에 두 배의 피해를 입습니다. 2중첩이 되면 사망에 이릅니다.	icon_status.minusdefence_tex	icon_status.minusdefence_tex	True
 97000052	StackCounter	DOT	True	seta	100000	0	97000038	강력한 라켈리스의 저주			초월한 라켈리스에게 받는 피해가 50% 증가하며, 영혼구체에 두 배의 피해를 입습니다. 2중첩이 되면 사망에 이릅니다.	icon_status.minusdefence_tex	icon_status.minusdefence_tex	True
+97000055	HPChange	DOT	False	perc	15000	1	-0.2	라켈리스가 남긴 죽음의 상처			$H_W_BAD1s$COLOR_END마다 전체 HP 대비 $H_W_BAD20%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.injuredbtdarkness_tex	icon_status.injuredbtdarkness_tex	True
 97500100	HPChange	DOT	False	perc	120000	2	-0.07	파멸의 업화			$H_W_BAD2s$COLOR_END마다 전체 HP 대비 $H_W_BAD7%$COLOR_END에 달하는 HP가 지속적으로 감소되며, 지속 시간이 끝날 때 대상자를 즉사시킵니다.$BR파멸의 업화는 오직 파멸의 냉기를 통해서만 제거할 수 있습니다.	icon_status.firedamage_tex	icon_status.firedamage_tex	True
 97500100	HPLoss	DOT	False	abs	120000	0	-10000000	파멸의 업화			$H_W_BAD2s$COLOR_END마다 전체 HP 대비 $H_W_BAD7%$COLOR_END에 달하는 HP가 지속적으로 감소되며, 지속 시간이 끝날 때 대상자를 즉사시킵니다.$BR파멸의 업화는 오직 파멸의 냉기를 통해서만 제거할 수 있습니다.	icon_status.firedamage_tex	icon_status.firedamage_tex	True
 97500250	KnockDownChance	Buff	True	perc	20000	0	0	강고한 결계			모든 해로운 효과에 100% 저항합니다. 효과가 유지되는 동안에는 다운 및 경직이 발생하지 않습니다.	icon_status.immunedebuff_tex	icon_status.immunedebuff_tex	True

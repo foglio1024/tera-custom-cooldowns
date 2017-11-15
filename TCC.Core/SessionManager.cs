@@ -120,7 +120,7 @@ namespace TCC
             }
         }
 
-        public static void SetPlayerMaxHP(ulong target, int maxHP)
+        public static void SetPlayerMaxHP(ulong target, long maxHP)
         {
             if (target == CurrentPlayer.EntityId)
             {

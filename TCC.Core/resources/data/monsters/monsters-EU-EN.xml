@@ -86,6 +86,7 @@
 		<Monster name="Elin Priest" id="11007" isBoss="False" hp="0" />
 		<Monster name="Elin Mystic" id="11008" isBoss="False" hp="0" />
 		<Monster name="Elin Reaper" id="11009" isBoss="False" hp="0" />
+		<Monster name="Elin Gunner" id="11010" isBoss="False" hp="0" />
 		<Monster name="Elin Ninja" id="11012" isBoss="False" hp="0" />
 		<Monster name="Baraka Warrior" id="11101" isBoss="False" hp="0" />
 		<Monster name="Baraka Lancer" id="11102" isBoss="False" hp="0" />
@@ -5066,6 +5067,8 @@
 		<Monster name="Danam" id="6047" isBoss="False" hp="10000" />
 		<Monster name="Albi" id="6048" isBoss="False" hp="10000" />
 		<Monster name="Anansha" id="7001" isBoss="True" hp="737685828" />
+		<Monster name="Frygaras" id="7002" isBoss="True" hp="737685828" />
+		<Monster name="Sabranak" id="7003" isBoss="True" hp="737685828" />
 	</Zone>
 	<Zone id="172" name="Savage Reach" >
 		<Monster name="Paesyn" id="1000" isBoss="False" hp="366797" />
@@ -13665,7 +13668,7 @@
 		<Monster name="Caprin Warrior" id="885117" isBoss="False" hp="3500000" />
 		<Monster name="Violent Maligos" id="885118" isBoss="False" hp="3500000" />
 		<Monster name="Gorilla" id="885119" isBoss="False" hp="3500000" />
-		<Monster name="Suryati" id="885121" isBoss="False" hp="2147483647" />
+		<Monster name="Suryati" id="885121" isBoss="False" hp="3600000000" />
 		<Monster name="Argon Wall" id="885122" isBoss="False" hp="3000000" />
 		<Monster name="Fanged Gullet" id="885131" isBoss="False" hp="0" />
 		<Monster name="Ghostly Obelisk" id="885132" isBoss="False" hp="5000000" />
@@ -14040,15 +14043,15 @@
 		<Monster name="Portal" id="104" isBoss="False" hp="10000" />
 		<Monster name="Chase the hooded figure through the teleportal." id="911" isBoss="False" hp="0" />
 		<Monster name="Use the Portal Room teleportal." id="912" isBoss="False" hp="0" />
-		<Monster name="Defeat Ventarun" id="913" isBoss="False" hp="0" />
+		<Monster name="Defeat Nightmare Ventarun" id="913" isBoss="False" hp="0" />
 		<Monster name="Deactivate All Control Panels" id="914" isBoss="False" hp="0" />
-		<Monster name="Defeat Hexapleon" id="915" isBoss="False" hp="0" />
+		<Monster name="Defeat Nightmare Hexapleon" id="915" isBoss="False" hp="0" />
 		<Monster name="Defeat Nightmare RK-9" id="916" isBoss="False" hp="0" />
-		<Monster name="Ventarun" id="1000" isBoss="True" hp="2147483647" />
+		<Monster name="Nightmare Ventarun" id="1000" isBoss="True" hp="2880000000" />
 		<Monster name="Time Bomb" id="1009" isBoss="False" hp="6750000" />
 		<Monster name="Teleportal" id="1501" isBoss="False" hp="10000" />
-		<Monster name="Hexapleon" id="2000" isBoss="True" hp="2147483647" />
-		<Monster name="RK-9 Kennel (Hard)" id="3000" isBoss="True" hp="2147483647" />
+		<Monster name="Nightmare Hexapleon" id="2000" isBoss="True" hp="3072000000" />
+		<Monster name="RK-9 Kennel (Hard)" id="3000" isBoss="True" hp="3670000000" />
 		<Monster name="Box of Parts" id="5000" isBoss="False" hp="500000" />
 		<Monster name="Randun's Belongings" id="5001" isBoss="False" hp="500000" />
 		<Monster name="Hooded Figure" id="6002" isBoss="False" hp="1" />

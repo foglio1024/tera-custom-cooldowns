@@ -6,16 +6,17 @@ namespace TCC.Parsing.Messages
     public class S_PARTY_MEMBER_STAT_UPDATE : ParsedMessage
     {
         private uint serverId, playerId;
-        int curHP, curMP, maxHP, maxMP;
+        int curMP, maxMP;
+        long curHP, maxHP;
         short level, combat, vitality;
         bool alive;
         int stamina, curRE, maxRE;
 
         public uint ServerId { get { return serverId; } }
         public uint PlayerId { get { return playerId; } }
-        public int CurrentHP { get { return curHP; } }
+        public long CurrentHP { get { return curHP; } }
         public int CurrentMP { get { return curMP; } }
-        public int MaxHP { get { return maxHP; } }
+        public long MaxHP { get { return maxHP; } }
         public int MaxMP { get { return maxMP; } }
         public short Level { get { return level; } }
         public short Combat { get { return combat; } }
@@ -29,9 +30,9 @@ namespace TCC.Parsing.Messages
             serverId = reader.ReadUInt32();
             playerId = reader.ReadUInt32();
 
-            curHP = reader.ReadInt32();
+            curHP = reader.Version < 321550 || reader.Version > 321600 ? reader.ReadInt64() : reader.ReadInt32();
             curMP = reader.ReadInt32();
-            maxHP = reader.ReadInt32();
+            maxHP = reader.Version < 321550 || reader.Version > 321600 ? reader.ReadInt64() : reader.ReadInt32();
             maxMP = reader.ReadInt32();
 
             level = reader.ReadInt16();

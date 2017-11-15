@@ -20,9 +20,9 @@ namespace TCC.Data
         private bool _canInvite;
         private Laurel _laurel;
         private string _name;
-        private int _currentHp = 1;
+        private long _currentHp = 1;
         private int _currentMp = 1;
-        private int _maxHp = 1;
+        private long _maxHp = 1;
         private int _maxMp = 1;
         private ReadyStatus _ready = ReadyStatus.None;
         private bool _alive = true;
@@ -167,7 +167,7 @@ namespace TCC.Data
                 NotifyPropertyChanged(nameof(Name));
             }
         }
-        public int CurrentHp
+        public long CurrentHp
         {
             get => _currentHp;
             set
@@ -189,7 +189,7 @@ namespace TCC.Data
                 NotifyPropertyChanged(nameof(MpFactor));
             }
         }
-        public int MaxHp
+        public long MaxHp
         {
             get => _maxHp;
             set

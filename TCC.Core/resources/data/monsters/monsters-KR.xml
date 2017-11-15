@@ -4893,7 +4893,7 @@
 		<Monster name="파괴된 신계의 관문 입구" id="9501" isBoss="False" hp="0" />
 		<Monster name="뒤틀린 라칸의 제단 입구" id="9710" isBoss="False" hp="0" />
 		<Monster name="RK-9 격납고 입구" id="9735" isBoss="False" hp="0" />
-		<Monster name="릴리스의 성 입구" id="9769" isBoss="False" hp="0" />
+		<Monster name="릴리스의 성, 라켈리스의 폐허 입구" id="9769" isBoss="False" hp="0" />
 		<Monster name="벨리카 지하 관문, 벨릭의 신전 입구" id="9780" isBoss="False" hp="0" />
 		<Monster name="사이럭스 연구 기지 입구" id="9794" isBoss="False" hp="0" />
 		<Monster name="고고학 연구소" id="18101" isBoss="False" hp="0" />
@@ -4974,9 +4974,9 @@
 		<Monster name="비공정" id="1001" isBoss="False" hp="50000" />
 		<Monster name="비공정" id="1002" isBoss="False" hp="50000" />
 		<Monster name="비공정" id="1003" isBoss="False" hp="30000" />
-		<Monster name="수호 탑" id="2000" isBoss="False" hp="3200000" />
-		<Monster name="외 성문" id="3000" isBoss="False" hp="12960675" />
-		<Monster name="내 성문" id="3001" isBoss="False" hp="14400750" />
+		<Monster name="수호 탑" id="2000" isBoss="False" hp="2400000" />
+		<Monster name="외 성문" id="3000" isBoss="False" hp="9720506" />
+		<Monster name="내 성문" id="3001" isBoss="False" hp="10800563" />
 		<Monster name="공성병기" id="4000" isBoss="False" hp="96005" />
 		<Monster name="공성병기" id="4001" isBoss="False" hp="96005" />
 		<Monster name="공성병기" id="4002" isBoss="False" hp="96005" />
@@ -12479,15 +12479,15 @@
 		<Monster name="부활한 베르베로스를 처치하세요" id="912" isBoss="False" hp="0" />
 		<Monster name="라켈리스를 처치하세요" id="913" isBoss="False" hp="0" />
 		<Monster name="(보스) 차원의 마법석을 통해 라켈리스의 공간으로 이동한 후, 라켈리스를 처치하세요" id="914" isBoss="False" hp="0" />
-		<Monster name="부활한 크루얼하운드" id="1000" isBoss="True" hp="1400000000" />
+		<Monster name="부활한 크루얼하운드" id="1000" isBoss="True" hp="2510000000" />
 		<Monster name="부활한 크루얼하운드" id="1001" isBoss="False" hp="12670" />
 		<Monster name="차원의 마법석" id="1501" isBoss="False" hp="10000" />
 		<Monster name="차원의 마법석" id="1502" isBoss="False" hp="10000" />
 		<Monster name="차원의 마법석" id="1503" isBoss="False" hp="10000" />
-		<Monster name="부활한 베르베로스" id="2000" isBoss="True" hp="1248000000" />
+		<Monster name="부활한 베르베로스" id="2000" isBoss="True" hp="2300000000" />
 		<Monster name="배고픈 새끼 거미" id="2001" isBoss="False" hp="2000000000" />
 		<Monster name="거미알" id="2002" isBoss="False" hp="100000" />
-		<Monster name="라켈리스" id="3000" isBoss="True" hp="1344000000" />
+		<Monster name="라켈리스" id="3000" isBoss="True" hp="2890000000" />
 	</Zone>
 	<Zone id="773" name="검은탑(상급)" >
 		<Monster name="정화의 토템" id="1001" isBoss="False" hp="10000" />
@@ -14205,15 +14205,15 @@
 		<Monster name="부활한 베르베로스를 처치하세요" id="912" isBoss="False" hp="0" />
 		<Monster name="초월한 라켈리스를 처치하세요" id="913" isBoss="False" hp="0" />
 		<Monster name="(보스) 차원의 마법석을 통해 라켈리스의 공간으로 이동한 후, 초월한 라켈리스를 처치하세요" id="914" isBoss="False" hp="0" />
-		<Monster name="부활한 크루얼하운드" id="1000" isBoss="True" hp="1540000000" />
+		<Monster name="부활한 크루얼하운드" id="1000" isBoss="True" hp="3462000000" />
 		<Monster name="부활한 크루얼하운드" id="1001" isBoss="False" hp="12670" />
 		<Monster name="차원의 마법석" id="1501" isBoss="False" hp="10000" />
 		<Monster name="차원의 마법석" id="1502" isBoss="False" hp="10000" />
 		<Monster name="차원의 마법석" id="1503" isBoss="False" hp="10000" />
-		<Monster name="부활한 베르베로스" id="2000" isBoss="True" hp="1400000000" />
+		<Monster name="부활한 베르베로스" id="2000" isBoss="True" hp="2768000000" />
 		<Monster name="배고픈 새끼 거미" id="2001" isBoss="False" hp="2000000000" />
 		<Monster name="거미알" id="2002" isBoss="False" hp="100000" />
-		<Monster name="초월한 라켈리스" id="3000" isBoss="True" hp="1440000000" />
+		<Monster name="초월한 라켈리스" id="3000" isBoss="True" hp="3452000000" />
 	</Zone>
 	<Zone id="975" name="폭주한 켈사이크의 성소(상급)" >
 		<Monster name="폭주한 켈사이크" id="1000" isBoss="True" hp="341391474" />

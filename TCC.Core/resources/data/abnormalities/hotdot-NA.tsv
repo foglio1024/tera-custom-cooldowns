@@ -130,8 +130,8 @@
 1130	MPChange	Buff	True	perc	25000	1	0.04	Heart Candy Cane	435	Heart Candy Cane	Replenishes $H_W_GOOD4%$COLOR_END of maximum MP every $H_W_GOOD1s$COLOR_END.	icon_items.heartlollipop_tex	icon_items.heartlollipop_tex	True
 1131	MPChange	Buff	True	perc	1000	1	0.5	Heart Chocolate	434	Heart Chocolate	Replenishes $H_W_GOOD50%$COLOR_END of maximum MP.	icon_items.heartchocolate_tex	icon_items.heartchocolate_tex	True
 1133	MPChange	Buff	True	perc	25000	1	0.04	Shining Candy			Replenishes $H_W_GOOD4%$COLOR_END of maximum MP every $H_W_GOOD1s$COLOR_END.	icon_items.heartlollipop_tex	icon_items.heartlollipop_tex	True
-1134	Immune	Buff	True	27	12000	0	0	Goddess's Blessing	60260	Goddess' Blessing	Invincible for a short period. Ends upon using any skills.	icon_status.revivenow_status_tex	icon_status.revivenow_status_tex	True
-1134	StatusImmune	Buff	True	swch	12000	0	0	Goddess's Blessing	60260	Goddess' Blessing	Invincible for a short period. Ends upon using any skills.	icon_status.revivenow_status_tex	icon_status.revivenow_status_tex	True
+1134	Immune	Buff	True	27	12000	0	0	Goddess's Blessing	60260	Goddess's Blessing	Invincible for a short period. Ends upon using any skills.	icon_status.revivenow_status_tex	icon_status.revivenow_status_tex	True
+1134	StatusImmune	Buff	True	swch	12000	0	0	Goddess's Blessing	60260	Goddess's Blessing	Invincible for a short period. Ends upon using any skills.	icon_status.revivenow_status_tex	icon_status.revivenow_status_tex	True
 1135	Endurance	Buff	True	perc	0	0	1	Federation's Call			Valkyon federation rewards for recruits! Doubles all Gold rewards, except for repeatable quests.	icon_status.plusfocus_tex	icon_status.plusfocus_tex	True
 1150	HPChange	Buff	True	perc	1800000	5	0.01	Vigorous Renewal Draught			Recovers $H_W_GOOD1%$COLOR_END of maximum HP every $H_W_GOOD5s$COLOR_END.	icon_items.potion14_tex	icon_items.potion14_tex	True
 1151	HPChange	Buff	True	perc	10800000	5	0.01	Powerful Vigorous Renewal Draught			Recovers $H_W_GOOD1%$COLOR_END of maximum HP every $H_W_GOOD5s$COLOR_END.	icon_items.potion14_tex	icon_items.potion14_tex	True
@@ -3403,6 +3403,8 @@
 5020000	EnchantChance	Buff	True	perc	300000	1	1.01	Substantial Enchantment Blessing			Your enchantment chance is substantially increased. Applies to items of all tiers, but only up to enchantment level +12.	icon_items.parts_heavyarmorc5_tex	icon_items.parts_heavyarmorc5_tex	True
 5020001	EnchantChance	Buff	True	perc	300000	1	1.05	Greater Enchantment Blessing			Your enchantment chance is greatly increased. Applies to items of all tiers, but only up to enchantment level +12.	icon_items.parts_heavyarmorc5_tex	icon_items.parts_heavyarmorc5_tex	True
 5020002	EnchantChance	Buff	True	perc	300000	1	1.15	Massive Enchantment Blessing			Your enchantment chance is massively increased. Applies to items of all tiers, but only up to enchantment level +12.	icon_items.parts_heavyarmorc5_tex	icon_items.parts_heavyarmorc5_tex	True
+5020003	CCrystalBind	Buff	True	abs	0	0	1	Continuous Crystalbind			Circumvents crystal breakage upon death.	icon_items.q_closedspace_stone_05_tex	icon_items.q_closedspace_stone_05_tex	True
+5020004	CraftTime	Buff	True	perc	0	0	0.5	Crafter's Speed Boost			Increases crafting speed by $H_W_GOOD50%$COLOR_END.	icon_items.artisan_lamp_tex	icon_items.artisan_lamp_tex	True
 5690001	StaminaDecay	Buff	True	seta	0	0	0	Arcana Protection			To aid in the collection of echo memories, crystals are not destroyed on death. 	icon_skills.refineresin_tex	icon_skills.refineresin_tex	True
 5690001	CrystalBind	Buff	True	abs	0	0	1	Arcana Protection			To aid in the collection of echo memories, crystals are not destroyed on death. 	icon_skills.refineresin_tex	icon_skills.refineresin_tex	True
 5690002	Resurrect	Buff	True	seta	60000	0	1	Memory Mend			To resurrect, use Memory Mend and erase the memory of death.	icon_status.mpsuckdown_tex	icon_status.mpsuckdown_tex	True
@@ -4502,10 +4504,10 @@
 73502005	Block	Debuff	False	swch	7000	0	0	Electric Shock			You are electrified and unable to use skills.	icon_skills.electricshock2_tex	icon_skills.electricshock2_tex	True
 73503001	Stun	Stun	False	swch	5000	0	5	Dazed			You are stunned by RK-9's attack, and cannot move.	icon_status.confuseup_tex	icon_status.confuseup_tex	True
 73503009	HPChange	DOT	True	perc	30000	2	-0.06	Laser Shock			You will receive continuous damage from the high-energy laser. Reduces HP by $H_W_BAD6%$COLOR_END every $H_W_BAD2s$COLOR_END. This effect cannot be removed.	icon_status.fullelectriceffect_tex	icon_status.fullelectriceffect_tex	True
-73503301	DelayedEffect	Buff	True	swch	0	0	73503302	Protocal: Protection			The RK-9 system has activated protection protocal. All intruders will be eliminated.	icon_skills.emergencyshield_tex	icon_skills.emergencyshield_tex	True
-73503301	Absorb	Buff	True	swch	0	0	35000000	Protocal: Protection			The RK-9 system has activated protection protocal. All intruders will be eliminated.	icon_skills.emergencyshield_tex	icon_skills.emergencyshield_tex	True
-73503401	DelayedEffect	Buff	True	swch	0	0	73503402	Protocal: Protection			The RK-9 system has activated protection protocal. All intruders will be eliminated.	icon_skills.emergencyshield_tex	icon_skills.emergencyshield_tex	True
-73503401	Absorb	Buff	True	swch	0	0	35000000	Protocal: Protection			The RK-9 system has activated protection protocal. All intruders will be eliminated.	icon_skills.emergencyshield_tex	icon_skills.emergencyshield_tex	True
+73503301	DelayedEffect	Buff	True	swch	0	0	73503302	Protocol: Protection			The RK-9 system has activated protection protocol. All intruders will be eliminated.	icon_skills.emergencyshield_tex	icon_skills.emergencyshield_tex	True
+73503301	Absorb	Buff	True	swch	0	0	35000000	Protocol: Protection			The RK-9 system has activated protection protocol. All intruders will be eliminated.	icon_skills.emergencyshield_tex	icon_skills.emergencyshield_tex	True
+73503401	DelayedEffect	Buff	True	swch	0	0	73503402	Protocol: Protection			The RK-9 system has activated protection protocol. All intruders will be eliminated.	icon_skills.emergencyshield_tex	icon_skills.emergencyshield_tex	True
+73503401	Absorb	Buff	True	swch	0	0	35000000	Protocol: Protection			The RK-9 system has activated protection protocol. All intruders will be eliminated.	icon_skills.emergencyshield_tex	icon_skills.emergencyshield_tex	True
 73504000	Block	Debuff	True	swch	0	0	0	Magnetic Field			The magnetic field keeps you from using skills.	icon_status.sealskill_tex	icon_status.sealskill_tex	True
 73504001	MovSpd	Debuff	True	setp	2000	0	0.01	Electrocuted			You are shocked and cannot move.	icon_skills.excesselectron_tex	icon_skills.excesselectron_tex	True
 73504001	MovSpdInCombat	Debuff	True	setp	2000	0	0.01	Electrocuted			You are shocked and cannot move.	icon_skills.excesselectron_tex	icon_skills.excesselectron_tex	True
@@ -5646,12 +5648,12 @@
 93502005	Block	Debuff	False	swch	7000	0	0	Electric Shock			You are electrified and unable to use skills.	icon_skills.electricshock2_tex	icon_skills.electricshock2_tex	True
 93503001	Stun	Stun	False	swch	5000	0	5	Dazed			You are stunned by RK-9's attack, and cannot move.	icon_status.confuseup_tex	icon_status.confuseup_tex	True
 93503009	HPChange	DOT	True	perc	30000	2	-0.1	Laser Shock			You will receive continuous damage from the high-energy laser. Reduces HP by $H_W_BAD10%$COLOR_END every $H_W_BAD2s$COLOR_END. This effect cannot be removed.	icon_status.fullelectriceffect_tex	icon_status.fullelectriceffect_tex	True
-93503301	DelayedEffect	Buff	True	swch	0	0	93503302	Protocal: Protection			The RK-9 system has activated protection protocal. All intruders will be eliminated.	icon_skills.emergencyshield_tex	icon_skills.emergencyshield_tex	True
-93503301	Absorb	Buff	True	swch	0	0	50000000	Protocal: Protection			The RK-9 system has activated protection protocal. All intruders will be eliminated.	icon_skills.emergencyshield_tex	icon_skills.emergencyshield_tex	True
+93503301	DelayedEffect	Buff	True	swch	0	0	93503302	Protocol: Protection			The RK-9 system has activated protection protocol. All intruders will be eliminated.	icon_skills.emergencyshield_tex	icon_skills.emergencyshield_tex	True
+93503301	Absorb	Buff	True	swch	0	0	50000000	Protocol: Protection			The RK-9 system has activated protection protocol. All intruders will be eliminated.	icon_skills.emergencyshield_tex	icon_skills.emergencyshield_tex	True
 93503304	Endurance	Buff	True	perc	0	0	1.1	Emergency Defense System			RK-9 has increased defense and attack.	icon_status.dimensionguard_tex	icon_status.dimensionguard_tex	True
 93503304	Attack	Buff	True	perc	0	0	1.1	Emergency Defense System			RK-9 has increased defense and attack.	icon_status.dimensionguard_tex	icon_status.dimensionguard_tex	True
-93503401	DelayedEffect	Buff	True	swch	0	0	93503402	Protocal: Protection			The RK-9 system has activated protection protocal. All intruders will be eliminated.	icon_skills.emergencyshield_tex	icon_skills.emergencyshield_tex	True
-93503401	Absorb	Buff	True	swch	0	0	50000000	Protocal: Protection			The RK-9 system has activated protection protocal. All intruders will be eliminated.	icon_skills.emergencyshield_tex	icon_skills.emergencyshield_tex	True
+93503401	DelayedEffect	Buff	True	swch	0	0	93503402	Protocol: Protection			The RK-9 system has activated protection protocol. All intruders will be eliminated.	icon_skills.emergencyshield_tex	icon_skills.emergencyshield_tex	True
+93503401	Absorb	Buff	True	swch	0	0	50000000	Protocol: Protection			The RK-9 system has activated protection protocol. All intruders will be eliminated.	icon_skills.emergencyshield_tex	icon_skills.emergencyshield_tex	True
 93504000	Block	Debuff	True	swch	0	0	0	Magnetic Field			The magnetic field keeps you from using skills.	icon_status.sealskill_tex	icon_status.sealskill_tex	True
 93504001	MovSpd	Debuff	True	setp	2000	0	0.01	Electrocuted			You are shocked and cannot move.	icon_skills.excesselectron_tex	icon_skills.excesselectron_tex	True
 93504001	MovSpdInCombat	Debuff	True	setp	2000	0	0.01	Electrocuted			You are shocked and cannot move.	icon_skills.excesselectron_tex	icon_skills.excesselectron_tex	True

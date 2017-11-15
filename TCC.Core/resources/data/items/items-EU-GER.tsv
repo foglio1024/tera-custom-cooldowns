@@ -20373,7 +20373,7 @@
 83307	1	Teleportschriftrolle: Zerstörter Eingang zum Himmelreich der Götter	0	300	icon_items.dungeon_recall_tex
 83400	1	Teleportschriftrolle: Lilitasfestung	0	300	icon_items.dungeon_recall_tex
 83401	1	Teleportschriftrolle: Lachelitas-Ruine	0	300	icon_items.dungeon_recall_tex
-83402	1	Teleportschriftrolle: Lakans verzerrtes Gefängnis	0	300	icon_items.dungeon_recall_tex
+83402	1	Teleportschriftrolle: Lakans Gefängnis (schwierig)	0	300	icon_items.dungeon_recall_tex
 83403	1	Teleportschriftrolle: Velika-Untergrundtor, Eingang zu Veliks Zuflucht	0	300	icon_items.dungeon_recall_tex
 83404	1	Teleportschriftrolle: Demoroths Roulette	0	300	icon_items.dungeon_recall_tex
 83405	1	Teleportschriftrolle: Syruks Forschungsstation	0	300	icon_items.dungeon_recall_tex
@@ -21882,6 +21882,30 @@
 92099	3	Stab der Besserung	0	0	icon_equipments.staff6_b_tex
 92100	3	Zepter der Linderung	0	0	icon_equipments.rod6_e_tex
 92101	3	Kettenklingen der Veränderung	0	0	icon_equipments.chain30_b_tex
+92102	2	Pinker Kettenpanzer (Elin-Arkaningenieurin)	0	0	icon_equipments.popori_f_b07_body_tex
+92103	2	Pinker Kettenpanzer (Elin-Arkaningenieurin)	0	0	icon_equipments.popori_f_b07_body_tex
+92104	2	Pinker Kettenpanzer (Elin-Arkaningenieurin, 3 Tage)	0	0	icon_equipments.popori_f_b07_body_tex
+92105	2	Pinker Kettenpanzer (Elin-Arkaningenieurin, 7 Tage)	0	0	icon_equipments.popori_f_b07_body_tex
+92106	2	Pinker Kettenpanzer (Elin-Arkaningenieurin, 7 Tage)	0	0	icon_equipments.popori_f_b07_body_tex
+92107	2	Pinker Kettenpanzer (Elin-Arkaningenieurin, 14 Tage)	0	0	icon_equipments.popori_f_b07_body_tex
+92108	2	Pinker Kettenpanzer (Elin-Arkaningenieurin, 30 Tage)	0	0	icon_equipments.popori_f_b07_body_tex
+92109	2	Pinker Kettenpanzer (Elin-Arkaningenieurin, 30 Tage)	0	0	icon_equipments.popori_f_b07_body_tex
+92110	2	Pinker Kettenpanzer (Elin-Arkaningenieurin)	0	0	icon_equipments.popori_f_b07_body_tex
+92111	2	Pinker Kettenpanzer (Elin-Arkaningenieurin)	0	0	icon_equipments.popori_f_b07_body_tex
+92112	2	Pinker Kettenpanzer (Elin-Arkaningenieurin)	0	0	icon_equipments.popori_f_b07_body_tex
+92113	2	Pinker Kettenpanzer (Elin-Arkaningenieurin)	0	0	icon_equipments.popori_f_b07_body_tex
+92114	2	Pinke Arkanone (Elin-Arkaningenieurin)	0	0	icon_equipments.blaster29_c_tex
+92115	2	Pinke Arkanone (Elin-Arkaningenieurin)	0	0	icon_equipments.blaster29_c_tex
+92116	2	Pinke Arkanone (Elin-Arkaningenieurin, 3 Tage)	0	0	icon_equipments.blaster29_c_tex
+92117	2	Pinke Arkanone (Elin-Arkaningenieurin, 7 Tage)	0	0	icon_equipments.blaster29_c_tex
+92118	2	Pinke Arkanone (Elin-Arkaningenieurin, 7 Tage)	0	0	icon_equipments.blaster29_c_tex
+92119	2	Pinke Arkanone (Elin-Arkaningenieurin, 14 Tage)	0	0	icon_equipments.blaster29_c_tex
+92120	2	Pinke Arkanone (Elin-Arkaningenieurin, 30 Tage)	0	0	icon_equipments.blaster29_c_tex
+92121	2	Pinke Arkanone (Elin-Arkaningenieurin, 30 Tage)	0	0	icon_equipments.blaster29_c_tex
+92122	2	Pinke Arkanone (Elin-Arkaningenieurin)	0	0	icon_equipments.blaster29_c_tex
+92123	2	Pinke Arkanone (Elin-Arkaningenieurin)	0	0	icon_equipments.blaster29_c_tex
+92124	2	Pinke Arkanone (Elin-Arkaningenieurin)	0	0	icon_equipments.blaster29_c_tex
+92125	2	Pinke Arkanone (Elin-Arkaningenieurin)	0	0	icon_equipments.blaster29_c_tex
 93102	2	Schneesturmharnisch (7 Tage)	0	0	icon_equipments.lightchest16_tex
 93103	2	Schneesturmkettenpanzer (7 Tage)	0	0	icon_equipments.heavychest16_tex
 93104	2	Schneesturmgewand (7 Tage)	0	0	icon_equipments.robechest16_tex
@@ -23742,11 +23766,22 @@
 98566	2	Seltener Gravierungskristall	0	0	icon_items.q_piece_03_tex
 98567	3	Legendärer Gravierungskristall	0	0	icon_items.q_piece_tex
 98568	3	Kiste mit Beweisen des Wandels	0	0	icon_items.premiumbox_enchant_tex
+98569	0	Komplette Kristallbindung (1 Std.)	0	180	icon_items.weapon_scrolla12_tex
+98570	0	Föderationsvorräte: Komplette Kristallbindung (3 Std.)	0	180	icon_items.weapon_scrolla12_tex
+98571	0	Komplette Kristallbindung (3 Std.)	0	180	icon_items.weapon_scrolla12_tex
+98572	0	Föderationsvorräte: Komplette Kristallbindung (6 Std.)	0	180	icon_items.weapon_scrolla12_tex
+98573	0	Komplette Kristallbindung (6 Std.)	0	180	icon_items.weapon_scrolla12_tex
 98574	3	Strahlende Gilden-Vorratskiste	0	1	icon_items.mysterybox5_tex
 98575	2	Leuchtende Gilden-Vorratskiste	0	1	icon_items.mysterybox5_tex
 98576	1	Gilden-Vorratskiste	0	1	icon_items.mysterybox2_tex
 98577	0	Kleine Gilden-Vorratskiste	0	1	icon_items.mysterybox1_tex
 98578	2	Abgegriffene Gilden-Vorratskiste	0	0	icon_items.mysterybox1_tex
+98584	2	Korsarenfestung-Belohnungskiste	0	0	icon_items.tresurebox1_tex
+98585	2	Canyon-der-Ehre-Belohnungskiste	0	0	icon_items.tresurebox1_tex
+98586	2	Föderationskampf-Belohnungskiste	0	0	icon_items.tresurebox1_tex
+98587	2	Kriegssturm-Belohnungskiste	0	0	icon_items.tresurebox1_tex
+98588	2	Kumaskrippe-Belohnungskiste	0	0	icon_items.tresurebox1_tex
+98589	2	Tal-des-Donners-Belohnungskiste	0	0	icon_items.tresurebox1_tex
 99000	0	Schlachtfeldunterwäsche	0	0	icon_equipments.underwear00_m_tex
 99001	0	Schlachtfeld-Kopfreif	0	0	icon_equipments.acc_580_tex
 99011	0	[Counterstrike Online] Männliche Zombieverwandlung (1 Stunde)	0	3	icon_items.rare_potion11_tex
@@ -23896,9 +23931,9 @@
 99238	3	[Test] Magnus-Stiefel	0	0	icon_equipments.lightboots25a_c_tex
 99239	3	[Test] Magnus-Schuhe	0	0	icon_equipments.robeboots25a_c_tex
 99240	3	[Test] Magnus-Gürtel	0	0	icon_items.belt30_tex
-99241	1	Schriftrolle des Rastlosen: Lakans verzerrtes Gefängnis	0	18000	icon_items.dungeonresetscroll_tex
-99242	1	Schriftrolle des Rastlosen: Lakans verzerrtes Gefängnis	0	18000	icon_items.dungeonresetscroll_tex
-99243	1	Schriftrolle des Rastlosen: Lakans verzerrtes Gefängnis	0	18000	icon_items.dungeonresetscroll_tex
+99241	1	Schriftrolle des Rastlosen: Lakans Gefängnis (schwierig)	0	18000	icon_items.dungeonresetscroll_tex
+99242	1	Schriftrolle des Rastlosen: Lakans Gefängnis (schwierig)	0	18000	icon_items.dungeonresetscroll_tex
+99243	1	Schriftrolle des Rastlosen: Lakans Gefängnis (schwierig)	0	18000	icon_items.dungeonresetscroll_tex
 99244	1	Minderwertige Schriftrolle des Rastlosen: Dungeon	0	18000	icon_items.dungeonresetscroll_tex
 99245	1	Minderwertige Schriftrolle des Rastlosen: Dungeon	0	18000	icon_items.dungeonresetscroll_tex
 99246	1	Minderwertige Schriftrolle des Rastlosen: Dungeon	0	18000	icon_items.dungeonresetscroll_tex
@@ -24162,6 +24197,30 @@
 99504	3	Hochwertige sportliche Neonunterwäsche	0	0	icon_equipments.pc_event_57_f_b_tex
 99505	3	Hochwertige wärmende Neonunterwäsche	0	0	icon_equipments.pc_event_57_f_b_tex
 99506	3	Hochwertige strahlende Neonunterwäsche	0	0	icon_equipments.pc_event_57_f_b_tex
+99507	3	Fährte: Qietscheentchen	0	0	icon_items.footprint_rubberduck_tex
+99508	3	Fährte: Qietscheentchen	0	0	icon_items.footprint_rubberduck_tex
+99509	3	Fährte: Qietscheentchen	0	0	icon_items.footprint_rubberduck_tex
+99510	3	Fährte: Qietscheentchen	0	0	icon_items.footprint_rubberduck_tex
+99511	3	Fährte: Qietscheentchen	0	0	icon_items.footprint_rubberduck_tex
+99512	3	Fährte: Qietscheentchen	0	0	icon_items.footprint_rubberduck_tex
+99513	3	Fährte: Qietscheentchen	0	0	icon_items.footprint_rubberduck_tex
+99514	3	Fährte: Qietscheentchen	0	0	icon_items.footprint_rubberduck_tex
+99515	3	Fährte: Qietscheentchen	0	0	icon_items.footprint_rubberduck_tex
+99516	3	Fährte: Qietscheentchen	0	0	icon_items.footprint_rubberduck_tex
+99517	3	Fährte: Qietscheentchen	0	0	icon_items.footprint_rubberduck_tex
+99518	3	Fährte: Qietscheentchen	0	0	icon_items.footprint_rubberduck_tex
+99519	2	Fährte: Elin	0	0	icon_items.footprint_elin_tex
+99520	2	Fährte: Elin	0	0	icon_items.footprint_elin_tex
+99521	2	Fährte: Elin	0	0	icon_items.footprint_elin_tex
+99522	2	Fährte: Elin	0	0	icon_items.footprint_elin_tex
+99523	2	Fährte: Elin	0	0	icon_items.footprint_elin_tex
+99524	2	Fährte: Elin	0	0	icon_items.footprint_elin_tex
+99525	2	Fährte: Elin	0	0	icon_items.footprint_elin_tex
+99526	2	Fährte: Elin	0	0	icon_items.footprint_elin_tex
+99527	2	Fährte: Elin	0	0	icon_items.footprint_elin_tex
+99528	2	Fährte: Elin	0	0	icon_items.footprint_elin_tex
+99529	2	Fährte: Elin	0	0	icon_items.footprint_elin_tex
+99530	2	Fährte: Elin	0	0	icon_items.footprint_elin_tex
 99531	2	Phönixfertigkeit: Mächtige Eisflamme	0	0	icon_items.skillbook_lion1_tex
 99532	3	Phönixfertigkeit: Uralte mächtige Eisflamme	0	0	icon_items.skillbook_lion1_tex
 99533	2	Flugfertigkeit: Eisflamme	0	0	icon_items.skillbook_lion1_tex
@@ -24210,6 +24269,42 @@
 99576	3	Flugfertigkeit: Uralte Brandschwinge (7 Tage)	0	0	icon_items.skillbook_lion1_tex
 99577	3	Flugfertigkeit: Uralte Brandschwinge (14 Tage)	0	0	icon_items.skillbook_lion1_tex
 99578	3	Flugfertigkeit: Uralte Brandschwinge (30 Tage)	0	0	icon_items.skillbook_lion1_tex
+99579	3	Fährte: Mochi-Häschen	0	0	icon_items.footprint_ricecake02_tex
+99580	3	Fährte: Mochi-Häschen	0	0	icon_items.footprint_ricecake02_tex
+99581	3	Fährte: Mochi-Häschen	0	0	icon_items.footprint_ricecake02_tex
+99582	3	Fährte: Mochi-Häschen	0	0	icon_items.footprint_ricecake02_tex
+99583	3	Fährte: Mochi-Häschen	0	0	icon_items.footprint_ricecake02_tex
+99584	3	Fährte: Mochi-Häschen	0	0	icon_items.footprint_ricecake02_tex
+99585	3	Fährte: Mochi-Häschen	0	0	icon_items.footprint_ricecake02_tex
+99586	3	Fährte: Mochi-Häschen	0	0	icon_items.footprint_ricecake02_tex
+99587	3	Fährte: Mochi-Häschen	0	0	icon_items.footprint_ricecake02_tex
+99588	3	Fährte: Mochi-Häschen	0	0	icon_items.footprint_ricecake02_tex
+99589	3	Fährte: Mochi-Häschen	0	0	icon_items.footprint_ricecake02_tex
+99590	3	Fährte: Mochi-Häschen	0	0	icon_items.footprint_ricecake02_tex
+99591	3	Fährte: Mochi-Kaninchen	0	0	icon_items.footprint_ricecake01_tex
+99592	3	Fährte: Mochi-Kaninchen	0	0	icon_items.footprint_ricecake01_tex
+99593	3	Fährte: Mochi-Kaninchen	0	0	icon_items.footprint_ricecake01_tex
+99594	3	Fährte: Mochi-Kaninchen	0	0	icon_items.footprint_ricecake01_tex
+99595	3	Fährte: Mochi-Kaninchen	0	0	icon_items.footprint_ricecake01_tex
+99596	3	Fährte: Mochi-Kaninchen	0	0	icon_items.footprint_ricecake01_tex
+99597	3	Fährte: Mochi-Kaninchen	0	0	icon_items.footprint_ricecake01_tex
+99598	3	Fährte: Mochi-Kaninchen	0	0	icon_items.footprint_ricecake01_tex
+99599	3	Fährte: Mochi-Kaninchen	0	0	icon_items.footprint_ricecake01_tex
+99600	3	Fährte: Mochi-Kaninchen	0	0	icon_items.footprint_ricecake01_tex
+99601	3	Fährte: Mochi-Kaninchen	0	0	icon_items.footprint_ricecake01_tex
+99602	3	Fährte: Mochi-Kaninchen	0	0	icon_items.footprint_ricecake01_tex
+99603	3	Fährte: Buntes Mochi-Häschen	0	0	icon_items.footprint_ricecake03_tex
+99604	3	Fährte: Buntes Mochi-Häschen	0	0	icon_items.footprint_ricecake03_tex
+99605	3	Fährte: Buntes Mochi-Häschen	0	0	icon_items.footprint_ricecake03_tex
+99606	3	Fährte: Buntes Mochi-Häschen	0	0	icon_items.footprint_ricecake03_tex
+99607	3	Fährte: Buntes Mochi-Häschen	0	0	icon_items.footprint_ricecake03_tex
+99608	3	Fährte: Buntes Mochi-Häschen	0	0	icon_items.footprint_ricecake03_tex
+99609	3	Fährte: Buntes Mochi-Häschen	0	0	icon_items.footprint_ricecake03_tex
+99610	3	Fährte: Buntes Mochi-Häschen	0	0	icon_items.footprint_ricecake03_tex
+99611	3	Fährte: Buntes Mochi-Häschen	0	0	icon_items.footprint_ricecake03_tex
+99612	3	Fährte: Buntes Mochi-Häschen	0	0	icon_items.footprint_ricecake03_tex
+99613	3	Fährte: Buntes Mochi-Häschen	0	0	icon_items.footprint_ricecake03_tex
+99614	3	Fährte: Buntes Mochi-Häschen	0	0	icon_items.footprint_ricecake03_tex
 99615	1	Frische Leinenunterwäsche	0	0	icon_equipments.underwear00_f_tex
 99616	1	Bequeme Leinenunterwäsche	0	0	icon_equipments.underwear00_f_tex
 99617	1	Sportliche Leinenunterwäsche	0	0	icon_equipments.underwear00_f_tex
@@ -25178,6 +25273,54 @@
 201300	3	[Vorhut] Alltagskettenpanzer	0	0	icon_equipments.heavychest21_tex
 201301	3	[Vorhut] Alltagsharnisch	0	0	icon_equipments.lightchest21_tex
 201302	3	[Vorhut] Alltagsgewand	0	0	icon_equipments.robechest21_tex
+201303	3	Beschützer-Kettenpanzer	0	0	icon_equipments.heavychest26_tex
+201304	3	Beschützer-Harnisch	0	0	icon_equipments.lightchest26_tex
+201305	3	Beschützer-Robe	0	0	icon_equipments.robechest26_tex
+201306	3	Traumkettenpanzer	0	0	icon_equipments.heavychest_be_tex
+201307	3	Traumharnisch	0	0	icon_equipments.lightchest_be_tex
+201308	3	Traumgewand	0	0	icon_equipments.robechest_be_tex
+201309	3	Sterlingsilberkettenpanzer	0	0	icon_equipments.heavychest_silver_tex
+201310	3	Sterlingsilberharnisch	0	0	icon_equipments.lightchest_silver_tex
+201311	3	Sterlingsilbergewand	0	0	icon_equipments.robechest_silver_tex
+201312	3	Klar & Deutlich	0	0	icon_equipments.dual27_a_tex
+201313	3	Silberspitze	0	0	icon_equipments.lance27_a_tex
+201314	3	Lippenspalter	0	0	icon_equipments.twohand27_a_tex
+201315	3	Schimmeraxt	0	0	icon_equipments.axe27_a_tex
+201316	3	Traumrunde	0	0	icon_equipments.circle27_a_tex
+201317	3	Erwartungsspitze	0	0	icon_equipments.bow27_a_tex
+201318	3	Nachtstimmung	0	0	icon_equipments.staff27_a_tex
+201319	3	Zepter des Richters	0	0	icon_equipments.rod27_a_tex
+201320	3	Schlächter-Kettenklingen	0	0	icon_equipments.chain30_b_tex
+201321	3	Schlächter-Arkanone	0	0	icon_equipments.blaster31_a_tex
+201322	3	Schlächter-Stahlfäuste	0	0	icon_equipments.gauntlet1_a_tex
+201323	3	Schlächter-Wurfstern	0	0	icon_equipments.shuriken05_b_tex
+201324	3	Schlächter-Mondgleve	0	0	icon_equipments.glaive03_b_tex
+201325	3	Nokteniumzwillingsschwerter	0	0	icon_equipments.dual25_tex
+201326	3	Nokteniumlanze	0	0	icon_equipments.lance25_tex
+201327	3	Nokteniumgroßschwert	0	0	icon_equipments.twohand25_tex
+201328	3	Nokteniumaxt	0	0	icon_equipments.axe25_tex
+201329	3	Nokteniumscheibe	0	0	icon_equipments.circle25_tex
+201330	3	Nokteniumbogen	0	0	icon_equipments.bow25_tex
+201331	3	Nokteniumstab	0	0	icon_equipments.staff25_tex
+201332	3	Nokteniumzepter	0	0	icon_equipments.rod25_tex
+201333	3	Nokteniumkettenklingen	0	0	icon_equipments.chain28_tex
+201334	3	Nokteniumarkanone	0	0	icon_equipments.blaster30_b_tex
+201335	3	Nokteniumstahlfäuste	0	0	icon_equipments.gauntlet1_b_tex
+201336	3	Nokteniumwurfstern	0	0	icon_equipments.shuriken03_tex
+201337	3	Nokteniummondgleve	0	0	icon_equipments.glaive01_tex
+201338	3	Macht & Majestät	0	0	icon_equipments.dual24_c_tex
+201339	3	Regentinnenspitze	0	0	icon_equipments.lance24_c_tex
+201340	3	Königsklinge	0	0	icon_equipments.twohand24_c_tex
+201341	3	Herrschaftsaxt	0	0	icon_equipments.axe24_c_tex
+201342	3	Herz der Königin	0	0	icon_equipments.circle24_c_tex
+201343	3	Kaisergriff	0	0	icon_equipments.bow24_c_tex
+201344	3	Stab der Königin	0	0	icon_equipments.staff24_c_tex
+201345	3	Regentinnenzepter	0	0	icon_equipments.rod24_c_tex
+201346	3	Shandra Manaya-Kettenklingen	0	0	icon_equipments.chain30_tex
+201347	3	Geschütz der Königin	0	0	icon_equipments.blaster31_b_tex
+201348	3	Fäuste der Argonenkönigin	0	0	icon_equipments.gauntlet29_a_tex
+201349	3	Majestätische Wurfsterne	0	0	icon_equipments.shuriken03_b_tex
+201350	3	Shandra Manaya-Mondgleve	0	0	icon_equipments.glaive02_a_tex
 20000000	0	Geld	0	0	icon_items.goldcoin_tex
 20000001	0	EP	0	0	icon_items.icon_exp_tex
 20000002	0	Nicht angegebene Belohnung	0	0	icon_items.icon_reward_unclear_tex
@@ -30547,6 +30690,10 @@
 155548	3	Schatulle des Juwelenfeuers	0	0	icon_items.f2p_box_tex
 155549	3	Überragende Gravierungsschachtel IV	0	0	icon_items.premiumbox_enchantagent_tex
 155550	3	Unvergleichliche Gravierungsschachtel IV	0	0	icon_items.premiumbox_enchantagent_tex
+155551	3	Überraschungsbox: Himmelsleuchten	0	1	icon_items.premiumbox_dress4_tex
+155552	1	Elin-Fährtensplitter	0	0	icon_items.footprint_elin_tex
+155553	2	Kupferuniform des Einheitstheorieinstituts	0	0	icon_equipments.blasterchest6_winghide_a_tex
+155554	2	Purpuruniform des Einheitstheorieinstituts	0	0	icon_equipments.blasterchest6_winghide_d_tex
 160001	0	Reitfertigkeit: Sleipner	0	0	icon_items.skillbook_rider1_tex
 160002	0	Reitfertigkeit: Sleipner	0	0	icon_items.skillbook_rider1_tex
 160003	1	Reitfertigkeit: Sandpfote	0	0	icon_items.skillbook_lion1_tex
@@ -30618,6 +30765,15 @@
 160327	0	Schriftrolle des Handelsagenten	0	600	icon_items.premium_summonnpc_04_tex
 160328	0	Halloweenschatztruhe	0	0	icon_items.gachabox_tex
 160329	0	Reitfertigkeit: Knochentänzer	0	0	icon_items.skillbook_rider1_tex
+160330	2	Precious Gem Box	0	0	icon_items.gachabox_tex
+160331	2	Elin Gunner Reward Box	0	1	icon_items.gift_box04_tex
+160332	2	Level 15 Elin Gunner Reward Box	0	1	icon_items.gift_box04_tex
+160333	2	Level 20 Elin Gunner Reward Box	0	1	icon_items.gift_box04_tex
+160334	2	Level 40 Elin Gunner Reward Box	0	1	icon_items.gift_box04_tex
+160335	2	Level 60 Elin Gunner Reward Box	0	1	icon_items.gift_box04_tex
+160336	2	Level 65 Elin Gunner Reward Box	0	1	icon_items.gift_box04_tex
+160337	2	v62 winback event box	0	0	icon_items.gachabox_tex
+160338	2	v62 login event box	0	0	icon_items.gachabox_tex
 160404	0	Föderationsschein	0	0	icon_items.federation_bill_tex
 160500	1	Schatz des Herrschers	0	1	icon_items.gift_box03_tex
 160501	1	Schmuckstück des Herrschers	0	1	icon_items.presentbox1_tex
@@ -36616,8 +36772,8 @@
 180672	1	Emergency Gacha 115	0	1	icon_items.gift_box04_tex
 180673	1	Emergency Gacha 116	0	1	icon_items.gift_box04_tex
 180674	1	Emergency Gacha 117	0	1	icon_items.gift_box04_tex
-180675	1	Emergency Gacha 118	0	1	icon_items.gift_box04_tex
-180676	1	Emergency Gacha 119	0	1	icon_items.gift_box04_tex
+180675	3	Emergency Gacha 118	0	1	icon_items.gift_box04_tex
+180676	3	Emergency Gacha 119	0	1	icon_items.gift_box04_tex
 180677	3	Human Male Bloodshadow Ninjagi	0	0	icon_equipments.pc_event_18_m
 180678	3	Human Male Bloodshadow Ninjagi	0	0	icon_equipments.pc_event_18_m
 180679	3	Human Male Bloodshadow Ninjagi	0	0	icon_equipments.pc_event_18_m
@@ -37059,7 +37215,7 @@
 181115	1	Underwear Showcase Potion (7 day)	0	3	icon_items.portion_underwear2_tex
 181116	2	Handbuch des Reisenden: Dorfreisen	0	0	icon_items.travelbook_portal_tex
 181117	2	Handbuch des Reisenden: Private Abkürzungen	0	0	icon_items.travelbook_village_tex
-181118	2	Undergarments Box	0	1	icon_items.gift_box04_tex
+181118	3	Undergarments Box	0	1	icon_items.gift_box04_tex
 181119	1	Universal Additive	0	0	icon_items.artisan_critical_up1_tex
 181120	1	Riding Skill: Nexus Warhorse	0	0	icon_items.skillbook_rider3_tex
 181121	1	Riding Skill: Aeolian Zebra	0	0	icon_items.skillbook_rider3_tex
@@ -37937,7 +38093,7 @@
 181993	1	Instance Reset: Rift's Edge	0	18000	icon_items.dungeonresetscroll_tex
 181994	1	Instance Reset: Rift's Edge (Hard)	0	18000	icon_items.dungeonresetscroll_tex
 181995	1	Instance Reset: Ghillieglade	0	18000	icon_items.dungeonresetscroll_tex
-181996	1	Instance Reset: Lakan's Prison	0	18000	icon_items.dungeonresetscroll_tex
+181996	1	Schriftrolle des Rastlosen: Lakans Gefängnis	0	18000	icon_items.dungeonresetscroll_tex
 181997	1	Instance Reset: The Abscess	0	18000	icon_items.dungeonresetscroll_tex
 181998	0	Bronze Token	0	0	icon_items.parts_armormark9_tex
 181999	0	Silver Token	0	0	icon_items.parts_armormark10_tex
@@ -40415,12 +40571,12 @@
 186784	3	15-Day Care and Use of Your Pet Argette	0	0	icon_items.petskillbook_tex
 186785	3	15-Day Travel Journal	0	0	icon_items.travelbook_village_tex
 186786	3	15-Day Village Atlas	0	0	icon_items.travelbook_portal_tex
-186787	2	Reservation Reward Box	0	1	icon_items.gift_box04_tex
-186788	2	Level 15 Reward Box	0	1	icon_items.gift_box04_tex
+186787	3	Reservation Reward Box	0	1	icon_items.gift_box04_tex
+186788	3	Level 15 Reward Box	0	1	icon_items.gift_box04_tex
 186789	1	Riding Skill: Snarl	0	0	icon_items.skillbook_lion1_tex
 186790	2	Level 20 Box	0	1	icon_items.gift_box04_tex
 186791	2	Level 40 Box	0	1	icon_items.gift_box04_tex
-186792	2	Level 60 Box	0	1	icon_items.gift_box04_tex
+186792	3	Level 60 Box	0	1	icon_items.gift_box04_tex
 186793	2	Level 65 Box	0	1	icon_items.gift_box04_tex
 186795	2	+12 Slaughter Weapon Box	0	0	icon_items.gachabox_tex
 244520	2	Dummy Smart Box20	0	1	icon_items.gift_box04_tex
@@ -40442,7 +40598,7 @@
 244536	3	Dummy Gacha14	0	0	icon_items.tresurebox2_tex
 244537	3	Dummy Gacha13	0	0	icon_items.tresurebox2_tex
 244538	3	Dummy Gacha12	0	0	icon_items.tresurebox2_tex
-244539	0	Dummy Gacha11	0	0	icon_items.tresurebox2_tex
+244539	3	Dummy Gacha11	0	0	icon_items.tresurebox2_tex
 244540	2	Dummy Smart Box30	0	1	icon_items.gift_box04_tex
 244541	2	Dummy Smart Box29	0	1	icon_items.gift_box04_tex
 244542	2	Dummy Smart Box28	0	1	icon_items.gift_box04_tex
@@ -40458,13 +40614,40 @@
 244552	3	Dummy Gacha28	0	0	icon_items.tresurebox2_tex
 244553	3	Dummy Gacha27	0	0	icon_items.tresurebox2_tex
 244554	3	Dummy Gacha26	0	0	icon_items.tresurebox2_tex
-244555	0	Dummy Gacha25	0	0	icon_items.tresurebox2_tex
-244556	0	Dummy Gacha24	0	0	icon_items.tresurebox2_tex
-244557	0	Dummy Gacha23	0	0	icon_items.tresurebox2_tex
-244558	0	Dummy Gacha22	0	0	icon_items.tresurebox2_tex
-244559	0	Dummy Gacha21	0	0	icon_items.tresurebox2_tex
+244555	3	Dummy Gacha25	0	0	icon_items.tresurebox2_tex
+244556	3	Dummy Gacha24	0	0	icon_items.tresurebox2_tex
+244557	3	Dummy Gacha23	0	0	icon_items.tresurebox2_tex
+244558	3	Dummy Gacha22	0	0	icon_items.tresurebox2_tex
+244559	3	Dummy Gacha21	0	0	icon_items.tresurebox2_tex
 244560	2	Wedding Dress Costume box	0	1	icon_items.gift_box04_tex
 244561	2	Dyeable Wedding Dress Costume box	0	1	icon_items.gift_box04_tex
+244562	2	Extensive Alkahest Box	0	0	icon_items.tresurebox2_tex
+244563	2	Spellbind Box	0	0	icon_items.tresurebox2_tex
+244564	2	Blessed Enigmatic Scroll Case	0	0	icon_items.tresurebox2_tex
+244565	2	Pet Food Box	0	0	icon_items.tresurebox2_tex
+244566	2	Celestial Spirit Box	0	0	icon_items.tresurebox2_tex
+244567	2	Ice Box	0	0	icon_items.tresurebox2_tex
+244568	2	Ice Drake Weapon Crate	0	0	icon_items.tresurebox2_tex
+244569	2	Fire Drake Weapon Crate	0	0	icon_items.tresurebox2_tex
+244570	2	Elleon's Nobility Box	0	0	icon_items.tresurebox2_tex
+244571	2	Elleon's Bravery Box	0	0	icon_items.tresurebox2_tex
+244572	2	Dress for Success Loot Box	0	0	icon_items.tresurebox2_tex
+244573	2	Dress to Impress Loot Box	0	0	icon_items.tresurebox2_tex
+244574	2	Hero's Cape Box	0	0	icon_items.tresurebox2_tex
+244575	2	Rainy Day Loot Box	0	0	icon_items.tresurebox2_tex
+244576	2	Avenging Angel Loot Box	0	0	icon_items.tresurebox2_tex
+244577	2	Guardian Angel Loot Box	0	0	icon_items.tresurebox2_tex
+244578	2	Technicolor Yawn Box	0	0	icon_items.tresurebox2_tex
+244579	2	Red Wolf Box	0	0	icon_items.tresurebox2_tex
+244580	2	Blue Wolf Box	0	0	icon_items.tresurebox2_tex
+244581	2	Purple Wolf Box	0	0	icon_items.tresurebox2_tex
+244582	2	Gold Wolf Box	0	0	icon_items.tresurebox2_tex
+244583	2	Snarlheart Wolfrider Box	0	0	icon_items.tresurebox2_tex
+244584	2	Gloryheart Wolfrider Box	0	0	icon_items.tresurebox2_tex
+244585	2	Fiery Birdcage	0	0	icon_items.tresurebox2_tex
+244586	2	Violet Birdcage	0	0	icon_items.tresurebox2_tex
+244587	2	Steamer Wardrobe	0	0	icon_items.tresurebox2_tex
+244588	2	Steampunked Loot Box	0	0	icon_items.tresurebox2_tex
 244589	2	Dummy Smart Box1	0	1	icon_items.gift_box04_tex
 244590	2	Dummy Smart Box2	0	1	icon_items.gift_box04_tex
 244591	2	Dummy Smart Box3	0	1	icon_items.gift_box04_tex
@@ -43491,6 +43674,19 @@
 247654	2	Smartbox: Rare elemental costume (non-tradable)	0	1	icon_items.premiumbox_dress3_tex
 247655	2	Smartbox: Rare elemental costume	0	1	icon_items.premiumbox_dress3_tex
 247656	2	Smartbox: Rare elemental costume (3 days)	0	1	icon_items.premiumbox_dress3_tex
+247657	2	Smartbox: Stage Costume (non-tradable)	0	1	icon_items.premiumbox_dress3_tex
+247658	2	Smartbox: Stage Costume (tradable)	0	1	icon_items.premiumbox_dress3_tex
+247659	2	Smartbox: Stage Costume (3 days)	0	1	icon_items.premiumbox_dress3_tex
+247660	2	Smartbox: Dyeable Stage Costume (non-tradable)	0	1	icon_items.premiumbox_dress3_tex
+247661	2	Smartbox: Dyeable Stage Costume (tradable)	0	1	icon_items.premiumbox_dress3_tex
+247662	2	Smartbox: Dyeable Stage Costume (3 days)	0	1	icon_items.premiumbox_dress3_tex
+247663	2	Wheel of Fortune box	0	0	icon_items.premiumbox_flyveh5_tex
+247664	2	Wheel of Fortune box	0	0	icon_items.premiumbox_flyveh5_tex
+247665	2	Wheel of Fortune box	0	0	icon_items.premiumbox_flyveh5_tex
+247666	2	Wheel of Fortune box	0	0	icon_items.premiumbox_flyveh5_tex
+247667	2	Wheel of Fortune box	0	0	icon_items.premiumbox_flyveh5_tex
+247668	2	Wheel of Fortune box	0	0	icon_items.premiumbox_flyveh5_tex
+247669	2	Wheel of Fortune box	0	0	icon_items.premiumbox_flyveh5_tex
 250000	3	TERA-Sonderkommando (Menschenherren)	0	0	icon_equipments.pc_event_43_m_tex
 250001	3	TERA-Sonderkommando (Menschenherren)	0	0	icon_equipments.pc_event_43_m_tex
 250002	3	TERA-Sonderkommando (Menschenherren)	0	0	icon_equipments.pc_event_43_m_tex
@@ -50631,6 +50827,162 @@
 257525	3	Antlitz der Eishölle	0	0	icon_equipments.acc_625_tex
 257526	3	Antlitz der Eishölle	0	0	icon_equipments.acc_625_tex
 257527	3	Antlitz der Eishölle	0	0	icon_equipments.acc_625_tex
+257528	3	Goldenes Pop-Sternchen (Menschendamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257529	3	Goldenes Pop-Sternchen (Menschendamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257530	3	Goldenes Pop-Sternchen (Menschendamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257531	3	Goldenes Pop-Sternchen (Menschendamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257532	3	Goldenes Pop-Sternchen (Menschendamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257533	3	Goldenes Pop-Sternchen (Menschendamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257534	3	Goldenes Pop-Sternchen (Menschendamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257535	3	Goldenes Pop-Sternchen (Menschendamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257536	3	Goldenes Pop-Sternchen (Menschendamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257537	3	Goldenes Pop-Sternchen (Menschendamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257538	3	Goldenes Pop-Sternchen (Menschendamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257539	3	Goldenes Pop-Sternchen (Menschendamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257540	3	Färbbares Disko-Sternchen (Menschendamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257541	3	Färbbares Disko-Sternchen (Menschendamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257542	3	Färbbares Disko-Sternchen (Menschendamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257543	3	Färbbares Disko-Sternchen (Menschendamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257544	3	Färbbares Disko-Sternchen (Menschendamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257545	3	Färbbares Disko-Sternchen (Menschendamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257546	3	Färbbares Disko-Sternchen (Menschendamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257547	3	Färbbares Disko-Sternchen (Menschendamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257548	3	Färbbares Disko-Sternchen (Menschendamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257549	3	Färbbares Disko-Sternchen (Menschendamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257550	3	Färbbares Disko-Sternchen (Menschendamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257551	3	Färbbares Disko-Sternchen (Menschendamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257552	3	Goldenes Pop-Sternchen (Hochelfendamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257553	3	Goldenes Pop-Sternchen (Hochelfendamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257554	3	Goldenes Pop-Sternchen (Hochelfendamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257555	3	Goldenes Pop-Sternchen (Hochelfendamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257556	3	Goldenes Pop-Sternchen (Hochelfendamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257557	3	Goldenes Pop-Sternchen (Hochelfendamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257558	3	Goldenes Pop-Sternchen (Hochelfendamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257559	3	Goldenes Pop-Sternchen (Hochelfendamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257560	3	Goldenes Pop-Sternchen (Hochelfendamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257561	3	Goldenes Pop-Sternchen (Hochelfendamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257562	3	Goldenes Pop-Sternchen (Hochelfendamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257563	3	Goldenes Pop-Sternchen (Hochelfendamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257564	3	Färbbares Disko-Sternchen (Hochelfendamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257565	3	Färbbares Disko-Sternchen (Hochelfendamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257566	3	Färbbares Disko-Sternchen (Hochelfendamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257567	3	Färbbares Disko-Sternchen (Hochelfendamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257568	3	Färbbares Disko-Sternchen (Hochelfendamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257569	3	Färbbares Disko-Sternchen (Hochelfendamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257570	3	Färbbares Disko-Sternchen (Hochelfendamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257571	3	Färbbares Disko-Sternchen (Hochelfendamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257572	3	Färbbares Disko-Sternchen (Hochelfendamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257573	3	Färbbares Disko-Sternchen (Hochelfendamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257574	3	Färbbares Disko-Sternchen (Hochelfendamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257575	3	Färbbares Disko-Sternchen (Hochelfendamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257576	3	Goldenes Pop-Sternchen (Amanidamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257577	3	Goldenes Pop-Sternchen (Amanidamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257578	3	Goldenes Pop-Sternchen (Amanidamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257579	3	Goldenes Pop-Sternchen (Amanidamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257580	3	Goldenes Pop-Sternchen (Amanidamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257581	3	Goldenes Pop-Sternchen (Amanidamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257582	3	Goldenes Pop-Sternchen (Amanidamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257583	3	Goldenes Pop-Sternchen (Amanidamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257584	3	Goldenes Pop-Sternchen (Amanidamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257585	3	Goldenes Pop-Sternchen (Amanidamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257586	3	Goldenes Pop-Sternchen (Amanidamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257587	3	Goldenes Pop-Sternchen (Amanidamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257588	3	Färbbares Disko-Sternchen (Amanidamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257589	3	Färbbares Disko-Sternchen (Amanidamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257590	3	Färbbares Disko-Sternchen (Amanidamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257591	3	Färbbares Disko-Sternchen (Amanidamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257592	3	Färbbares Disko-Sternchen (Amanidamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257593	3	Färbbares Disko-Sternchen (Amanidamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257594	3	Färbbares Disko-Sternchen (Amanidamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257595	3	Färbbares Disko-Sternchen (Amanidamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257596	3	Färbbares Disko-Sternchen (Amanidamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257597	3	Färbbares Disko-Sternchen (Amanidamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257598	3	Färbbares Disko-Sternchen (Amanidamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257599	3	Färbbares Disko-Sternchen (Amanidamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257600	3	Goldenes Pop-Sternchen (Castanicdamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257601	3	Goldenes Pop-Sternchen (Castanicdamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257602	3	Goldenes Pop-Sternchen (Castanicdamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257603	3	Goldenes Pop-Sternchen (Castanicdamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257604	3	Goldenes Pop-Sternchen (Castanicdamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257605	3	Goldenes Pop-Sternchen (Castanicdamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257606	3	Goldenes Pop-Sternchen (Castanicdamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257607	3	Goldenes Pop-Sternchen (Castanicdamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257608	3	Goldenes Pop-Sternchen (Castanicdamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257609	3	Goldenes Pop-Sternchen (Castanicdamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257610	3	Goldenes Pop-Sternchen (Castanicdamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257611	3	Goldenes Pop-Sternchen (Castanicdamen)	0	0	icon_equipments.pc_event_61_f_a_tex
+257612	3	Färbbares Disko-Sternchen (Castanicdamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257613	3	Färbbares Disko-Sternchen (Castanicdamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257614	3	Färbbares Disko-Sternchen (Castanicdamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257615	3	Färbbares Disko-Sternchen (Castanicdamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257616	3	Färbbares Disko-Sternchen (Castanicdamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257617	3	Färbbares Disko-Sternchen (Castanicdamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257618	3	Färbbares Disko-Sternchen (Castanicdamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257619	3	Färbbares Disko-Sternchen (Castanicdamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257620	3	Färbbares Disko-Sternchen (Castanicdamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257621	3	Färbbares Disko-Sternchen (Castanicdamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257622	3	Färbbares Disko-Sternchen (Castanicdamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257623	3	Färbbares Disko-Sternchen (Castanicdamen)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257624	3	Goldenes Pop-Sternchen (Elin)	0	0	icon_equipments.pc_event_61_f_a_tex
+257625	3	Goldenes Pop-Sternchen (Elin)	0	0	icon_equipments.pc_event_61_f_a_tex
+257626	3	Goldenes Pop-Sternchen (Elin)	0	0	icon_equipments.pc_event_61_f_a_tex
+257627	3	Goldenes Pop-Sternchen (Elin)	0	0	icon_equipments.pc_event_61_f_a_tex
+257628	3	Goldenes Pop-Sternchen (Elin)	0	0	icon_equipments.pc_event_61_f_a_tex
+257629	3	Goldenes Pop-Sternchen (Elin)	0	0	icon_equipments.pc_event_61_f_a_tex
+257630	3	Goldenes Pop-Sternchen (Elin)	0	0	icon_equipments.pc_event_61_f_a_tex
+257631	3	Goldenes Pop-Sternchen (Elin)	0	0	icon_equipments.pc_event_61_f_a_tex
+257632	3	Goldenes Pop-Sternchen (Elin)	0	0	icon_equipments.pc_event_61_f_a_tex
+257633	3	Goldenes Pop-Sternchen (Elin)	0	0	icon_equipments.pc_event_61_f_a_tex
+257634	3	Goldenes Pop-Sternchen (Elin)	0	0	icon_equipments.pc_event_61_f_a_tex
+257635	3	Goldenes Pop-Sternchen (Elin)	0	0	icon_equipments.pc_event_61_f_a_tex
+257636	3	Färbbares Disko-Sternchen (Elin)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257637	3	Färbbares Disko-Sternchen (Elin)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257638	3	Färbbares Disko-Sternchen (Elin)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257639	3	Färbbares Disko-Sternchen (Elin)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257640	3	Färbbares Disko-Sternchen (Elin)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257641	3	Färbbares Disko-Sternchen (Elin)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257642	3	Färbbares Disko-Sternchen (Elin)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257643	3	Färbbares Disko-Sternchen (Elin)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257644	3	Färbbares Disko-Sternchen (Elin)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257645	3	Färbbares Disko-Sternchen (Elin)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257646	3	Färbbares Disko-Sternchen (Elin)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257647	3	Färbbares Disko-Sternchen (Elin)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257648	3	Idol von Pora Elinu (Elin)	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257649	3	Idol von Pora Elinu (Elin)	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257650	3	Idol von Pora Elinu (Elin)	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257651	3	Idol von Pora Elinu (Elin)	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257652	3	Idol von Pora Elinu (Elin)	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257653	3	Idol von Pora Elinu (Elin)	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257654	3	Idol von Pora Elinu (Elin)	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257655	3	Idol von Pora Elinu (Elin)	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257656	3	Idol von Pora Elinu (Elin)	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257657	3	Idol von Pora Elinu (Elin)	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257658	3	Idol von Pora Elinu (Elin)	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257659	3	Idol von Pora Elinu (Elin)	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257660	3	Bühnenmikrofon	0	0	icon_equipments.acc_626_tex
+257661	3	Bühnenmikrofon	0	0	icon_equipments.acc_626_tex
+257662	3	Bühnenmikrofon	0	0	icon_equipments.acc_626_tex
+257663	3	Bühnenmikrofon	0	0	icon_equipments.acc_626_tex
+257664	3	Bühnenmikrofon	0	0	icon_equipments.acc_626_tex
+257665	3	Bühnenmikrofon	0	0	icon_equipments.acc_626_tex
+257666	3	Bühnenmikrofon	0	0	icon_equipments.acc_626_tex
+257667	3	Bühnenmikrofon	0	0	icon_equipments.acc_626_tex
+257668	3	Bühnenmikrofon	0	0	icon_equipments.acc_626_tex
+257669	3	Bühnenmikrofon	0	0	icon_equipments.acc_626_tex
+257670	3	Bühnenmikrofon	0	0	icon_equipments.acc_626_tex
+257671	3	Bühnenmikrofon	0	0	icon_equipments.acc_626_tex
+257672	3	Profimikrofon	0	0	icon_equipments.acc_627_tex
+257673	3	Profimikrofon	0	0	icon_equipments.acc_627_tex
+257674	3	Profimikrofon	0	0	icon_equipments.acc_627_tex
+257675	3	Profimikrofon	0	0	icon_equipments.acc_627_tex
+257676	3	Profimikrofon	0	0	icon_equipments.acc_627_tex
+257677	3	Profimikrofon	0	0	icon_equipments.acc_627_tex
+257678	3	Profimikrofon	0	0	icon_equipments.acc_627_tex
+257679	3	Profimikrofon	0	0	icon_equipments.acc_627_tex
+257680	3	Profimikrofon	0	0	icon_equipments.acc_627_tex
+257681	3	Profimikrofon	0	0	icon_equipments.acc_627_tex
+257682	3	Profimikrofon	0	0	icon_equipments.acc_627_tex
+257683	3	Profimikrofon	0	0	icon_equipments.acc_627_tex
 220353	3	T-cat 01	0	0	icon_items.tcattoken_tex
 220354	3	T-cat 02	0	0	icon_items.tcattoken_tex
 222678	3	Massive Loot Box 	0	0	icon_items.mysterybox2_tex
@@ -52975,6 +53327,12 @@
 246147	2	Trickkiste: Färbbare Bandagen der Untoten	0	1	icon_items.gift_box04_tex
 246148	2	Trickkiste: Färbbare Bandagen der Untoten (30 Tage)	0	1	icon_items.gift_box04_tex
 246149	2	Trickkiste: Färbbare Bandagen der Untoten (7 Tage)	0	1	icon_items.gift_box04_tex
+246150	2	Trickkiste: Goldenes Pop-Sternchen	0	1	icon_items.gift_box04_tex
+246151	2	Trickkiste: Goldenes Pop-Sternchen (30 Tage)	0	1	icon_items.gift_box04_tex
+246152	2	Trickkiste: Goldenes Pop-Sternchen (7 Tage)	0	1	icon_items.gift_box04_tex
+246153	2	Trickkiste: Färbbares Disko-Sternchen	0	1	icon_items.gift_box04_tex
+246154	2	Trickkiste: Färbbares Disko-Sternchen (30 Tage)	0	1	icon_items.gift_box04_tex
+246155	2	Trickkiste: Färbbares Disko-Sternchen (7 Tage)	0	1	icon_items.gift_box04_tex
 100507	0	T	0	1	icon_items.event_letter01_tex
 100508	0	E	0	1	icon_items.event_letter02_tex
 100509	0	R	0	1	icon_items.event_letter03_tex
@@ -53005,6 +53363,7 @@
 100790	0	!	0	1	icon_items.event2_letter14_tex
 100863	2	[TBU]	0	0	icon_items.petskillbook_tex
 100864	2	[TBU]	0	0	icon_items.petskillbook_tex
+100939	1	[Föderationsvorräte] Schriftrolle des Rastlosen: Lakans Gefängnis	0	18000	icon_items.dungeonresetscroll_tex
 100974	1	Riding Skill: Ookami	0	0	icon_items.skillbook_lion1_tex
 115396	3	[TBU]	0	0	icon_equipments.pc_event_02_popori_f_01_tex
 115397	3	[TBU]	0	0	icon_equipments.pc_event_02a_popori_f_01_tex
@@ -55031,7 +55390,10 @@
 139352	2	Moon Shadow Coupon Exchange Ticket	0	0	icon_items.recipe_etc_tex
 139353	1	Underwear Showcase Potion	0	3	icon_items.portion_underwear1_tex
 139354	1	Underwear Private Potion	0	3	icon_items.portion_underwear1_tex
+139375	1	Schriftrolle des Rastlosen: Lakans Gefängnis	0	18000	icon_items.dungeonresetscroll_tex
+139531	1	[Event] Schriftrolle des Rastlosen: Lakans Gefängnis	0	600	icon_items.dungeonresetscroll_tex
 139545	1	Sharp Tiger Claw	0	0	icon_items.q_mobclaw_tex
+139663	1	[Event] Schriftrolle des Rastlosen: Lakans Gefängnis	0	18000	icon_items.dungeonresetscroll_tex
 139700	1	Instance Reset: Macellarius Catacombs	0	18000	icon_items.dungeonresetscroll_tex
 139705	2	[Event] Care and Use of Your Pet Carnivorous Plant	0	0	icon_items.petskillbook_tex
 139706	2	[Event] Care and Use of Your Pet Prince	0	0	icon_items.petskillbook_tex
