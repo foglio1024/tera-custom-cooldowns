@@ -166,8 +166,8 @@
 1495	OutOfCombatMovSpd	Debuff	True	perc	2000	0	0.2	戰場的毒氣			被戰場毒氣中了，每秒減少20000的HP。	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
 1495	HPChange	Debuff	True	perc	2000	1	-20000	戰場的毒氣			被戰場毒氣中了，每秒減少20000的HP。	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
 1510	HPChange	Buff	True	perc	1000	1	0.5	急速恢復藥水	114	聯盟補給品：急速恢復藥水	立即恢復$H_W_GOOD50%$COLOR_END的HP。	icon_items.potion5_tex	icon_items.potion5_tex	False
-1511	HPChange	Buff	True	perc	1000	1	0.6	萬能藥	7219	萬能藥	整體HP，MP立即恢復 $H_W_GOOD60%$COLOR_END的HP及MP。	icon_items.potion5_tex	icon_items.potion5_tex	False
-1511	MPChange	Buff	True	perc	1000	1	0.6	萬能藥	7219	萬能藥	整體HP，MP立即恢復 $H_W_GOOD60%$COLOR_END的HP及MP。	icon_items.potion5_tex	icon_items.potion5_tex	False
+1511	HPChange	Buff	True	perc	1000	1	0.6	萬能藥	7219	萬能藥	整體HP，MP立即恢復 $H_W_GOOD60%$COLOR_END的HP及MP。	icon_items.eagles_potion_level_47_tex	icon_items.eagles_potion_level_47_tex	False
+1511	MPChange	Buff	True	perc	1000	1	0.6	萬能藥	7219	萬能藥	整體HP，MP立即恢復 $H_W_GOOD60%$COLOR_END的HP及MP。	icon_items.eagles_potion_level_47_tex	icon_items.eagles_potion_level_47_tex	False
 1530	MPChange	Buff	True	perc	15000	1	0.05	MP恢復藥水	130	MP恢復藥水	每$H_W_GOOD1s$COLOR_END持續恢復$H_W_GOOD5%$COLOR_END的MP。	icon_items.potion19_tex	icon_items.potion19_tex	True
 1610	HPChange	Buff	True	perc	10000	1	0.02	恢復晶球	8000	恢復晶球	每$H_W_GOOD1s$COLOR_END持續恢復$H_W_GOOD2%$COLOR_END的HP。	icon_items.potion1_tex	icon_items.potion1_tex	True
 1630	HPChange	Buff	True	perc	1000	1	0.25	強力恢復晶球	8005	強力恢復晶球	立即恢復$H_W_GOOD25%$COLOR_END的HP。	icon_items.potion5_tex	icon_items.potion5_tex	False
@@ -266,6 +266,7 @@
 2091	OutOfCombatMovSpd	Buff	True	abs	10000	0	20	快速的氣息			和平狀態的移動速度提升$H_W_GOOD20$COLOR_END。	icon_status.plusmove_tex	icon_status.plusmove_tex	True
 2097	Block	Stun	False	swch	3000	0	0	技能封鎖			被嚇到的庫魔斯寶寶於3秒內，除了基本攻擊之外的所有技能皆無法使用。	icon_status.sealskill_tex	icon_status.sealskill_tex	True
 2099	HPChange	Buff	True	abs	25000	1	3000	治癒的繩索			從被破壞的石像那獲得了恢復的氣息。而使周圍庫魔斯寶寶的體力週期性恢復。	icon_status.aura_of_regeneration_hp_tex	icon_status.aura_of_regeneration_hp_tex	True
+2099	Plague	Buff	True	9	25000	3	2101	治癒的繩索			從被破壞的石像那獲得了恢復的氣息。而使周圍庫魔斯寶寶的體力週期性恢復。	icon_status.aura_of_regeneration_hp_tex	icon_status.aura_of_regeneration_hp_tex	True
 2099	298	Buff	True	swch	25000	0	1	治癒的繩索			從被破壞的石像那獲得了恢復的氣息。而使周圍庫魔斯寶寶的體力週期性恢復。	icon_status.aura_of_regeneration_hp_tex	icon_status.aura_of_regeneration_hp_tex	True
 2100	MovSpd	Debuff	False	setp	3000	0	0.5	減速！			移動速度減少$H_W_BAD50%$COLOR_END。	icon_status.minusmove_tex	icon_status.minusmove_tex	True
 2101	MovSpd	Buff	True	abs	5000	0	80	恢復的氣息			藉由治癒的繩索獲得了恢復的氣息。每$H_W_GOOD1s$COLOR_END HP會逐漸恢復 $H_W_GOOD6000$COLOR_END。並且移動速度會增加 $H_W_GOOD80$COLOR_END。	icon_skills.refreshbless_tex	icon_skills.refreshbless_tex	True
@@ -597,13 +598,14 @@
 4514	XPBoost	Buff	True	perc	0	0	10	高速成長			狩獵時獲得經驗值增加$H_W_GOOD10倍$COLOR_END。	icon_status.plusfocus_tex	icon_status.plusfocus_tex	True
 4600	CrystalBind	Buff	True	abs	3600000	0	1	水晶防護卷軸	354	水晶防護卷軸	死亡時防止水晶爆破，並會刪除1個堆疊。此效果最多可堆疊99次。在套用完整的水晶防護卷軸狀態時不套用此效果。	icon_items.q_closedspace_stone_05_tex	icon_items.q_closedspace_stone_05_tex	True
 4610	CCrystalBind	Buff	True	abs	43200000	0	1	完整的水晶防護卷軸	396	聯盟補給品：完整的水晶防護卷軸	死亡時防止水晶爆破。	icon_items.q_closedspace_stone_05_tex	icon_items.q_closedspace_stone_05_tex	True
-4611	CCrystalBind	Buff	True	abs	3600000	0	1	聯盟補給品：完整的水晶防護卷軸 (1小時)	98526	聯盟補給品：完整的水晶防護卷軸 (1小時)		icon_items.q_closedspace_stone_05_tex	icon_items.q_closedspace_stone_05_tex	True
-4612	CCrystalBind	Buff	True	abs	3600000	0	1	完整的水晶防護卷軸			死亡時可防止水晶碎裂。	icon_items.q_closedspace_stone_05_tex	icon_items.q_closedspace_stone_05_tex	True
+4612	CCrystalBind	Buff	True	abs	3600000	0	1	完整的水晶防護卷軸	98526	聯盟補給品：完整的水晶防護卷軸 (1小時)	死亡時可防止水晶碎裂。	icon_items.q_closedspace_stone_05_tex	icon_items.q_closedspace_stone_05_tex	True
+4615	CCrystalBind	Buff	True	abs	10800000	0	1	完整的水晶防護卷軸	98570	聯盟補給品：完整的水晶防護卷軸 (3小時)	死亡時可防止水晶碎裂。	icon_items.q_closedspace_stone_05_tex	icon_items.q_closedspace_stone_05_tex	True
+4616	CCrystalBind	Buff	True	abs	21600000	0	1	完整的水晶防護卷軸	98572	聯盟補給品：完整的水晶防護卷軸 (6小時)	死亡時可防止水晶碎裂。	icon_items.q_closedspace_stone_05_tex	icon_items.q_closedspace_stone_05_tex	True
 4620	CraftTime	Buff	True	perc	300000	0	0.5	製作速度增加卷軸	6293	製作速度增加卷軸	所有道具的製作速度提升$H_W_GOOD50%$COLOR_END。	icon_items.scroll_produce_speedup_tex	icon_items.scroll_produce_speedup_tex	True
 4621	CraftTime	Buff	True	perc	3600000	0	0.5	強力製作速度增加卷軸	6296	強力製作速度增加卷軸	所有道具製作速度提升$H_W_GOOD50%$COLOR_END。	icon_items.scroll_produce_speedup_tex	icon_items.scroll_produce_speedup_tex	True
 4630	Gathering	Buff	True	seta	600000	0	410	採集熟練度增加卷軸	6295	採集熟練度增加卷軸	600s內，採集熟練度增加$H_W_GOOD410$COLOR_END。	icon_items.scroll_collection_expup_tex	icon_items.scroll_collection_expup_tex	True
 4640	XPBoost	Buff	True	perc	3600000	0	1.15	賽蓮之手卷軸	6294	賽蓮之手卷軸	狩獵時所獲得的經驗值增加$H_W_GOOD15%$COLOR_END。	icon_items.scroll_seren_blessing_tex	icon_items.scroll_seren_blessing_tex	True
-4650	Endurance	Buff	True	perc	0	0	1	貝里克的豐饒祝福 - 釋放			為了副本初學者的貝里克祝福，將提升最終BOSS的掉落率25%。就算在和BOSS的戰鬥中死亡而祝福暫時消失，只要回到BOSS的100公尺以內就會維持掉落率提升效果。$BR貝里克的豐饒祝福會維持到完成該副本3次為止。	icon_skills.exp_buff_seren_aura_tex	icon_skills.exp_buff_seren_aura_tex	True
+4650	Plague	Buff	True	abs	0	5	4651	貝里克的豐饒祝福 - 釋放			為了副本初學者的貝里克祝福，將提升最終BOSS的掉落率25%。就算在和BOSS的戰鬥中死亡而祝福暫時消失，只要回到BOSS的100公尺以內就會維持掉落率提升效果。$BR貝里克的豐饒祝福會維持到完成該副本3次為止。	icon_skills.exp_buff_seren_aura_tex	icon_skills.exp_buff_seren_aura_tex	True
 4651	Endurance	Buff	True	perc	0	0	1	貝里克的豐饒祝福			和副本初學者一起進行組隊，副本最終BOSS的掉落率會提升25%。就算在和BOSS的戰鬥中初學者死亡而祝福暫時消失，只要初學者回到BOSS的100公尺以內就會維持掉落率提升效果。	icon_status.exp_buff_serenparty_tex	icon_status.exp_buff_serenparty_tex	True
 4660	GatheringTime	Buff	True	perc	1800000	0	0.6	採集速度增加卷軸	6297	採集速度增加卷軸	採集速度增加$H_W_GOOD40%$COLOR_END。	icon_status.collect_speedup_tex	icon_status.collect_speedup_tex	True
 4710	HPChange	DOT	False	perc	3000	1	-0.12	詛咒解放			每$H_W_BAD1s$COLOR_END持續減少$H_W_BAD12%$COLOR_END的HP。	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
@@ -668,7 +670,7 @@
 4841	DefPotion	Buff	True	perc	1800000	0	0.95	攻擊機恢復的藥水			攻擊速度提升$H_W_GOOD3%$COLOR_END，攻擊力增加$H_W_GOOD10%$COLOR_END，防禦力增加$H_W_GOOD10%$COLOR_END。	icon_status.plusattack_tex	icon_status.plusattack_tex	True
 4841	AtkPotion	Buff	True	perc	1800000	0	1.05	攻擊機恢復的藥水			攻擊速度提升$H_W_GOOD3%$COLOR_END，攻擊力增加$H_W_GOOD10%$COLOR_END，防禦力增加$H_W_GOOD10%$COLOR_END。	icon_status.plusattack_tex	icon_status.plusattack_tex	True
 4850	Drunk	Buff	True	60013	2000	0	0	潛入狀態			因為變更為潛入狀態，周邊變得模糊。	icon_status.plusfocus_tex	icon_status.plusfocus_tex	True
-4851	ASpd	Buff	True	perc	30000	0	2	凱亞的守護			除了自己以外的周圍20m內，PC的攻擊速度提高$H_W_GOOD100%$COLOR_END，力量和抗打會提高$H_W_GOOD100倍$COLOR_END。並且再使用時間 會減少$H_W_GOOD90%$COLOR_END。	icon_status.pluswill_tex	icon_status.pluswill_tex	True
+4851	Plague	Buff	True	seta	3600000	4	4852	凱亞的守護			除了自己以外的周圍20m內，PC的攻擊速度提高$H_W_GOOD100%$COLOR_END，力量和抗打會提高$H_W_GOOD100倍$COLOR_END。並且再使用時間 會減少$H_W_GOOD90%$COLOR_END。	icon_status.pluswill_tex	icon_status.pluswill_tex	True
 4852	Power	Buff	True	perc	30000	0	150	凱亞的守護			攻擊速度提高$H_W_GOOD100%$COLOR_END，力量和抗打提高$H_W_GOOD100倍$COLOR_END，另外，再使用時間減少 $H_W_GOOD90%$COLOR_END。	icon_status.pluswill_tex	icon_status.pluswill_tex	True
 4852	Endurance	Buff	True	perc	30000	0	150	凱亞的守護			攻擊速度提高$H_W_GOOD100%$COLOR_END，力量和抗打提高$H_W_GOOD100倍$COLOR_END，另外，再使用時間減少 $H_W_GOOD90%$COLOR_END。	icon_status.pluswill_tex	icon_status.pluswill_tex	True
 4852	ASpd	Buff	True	perc	30000	0	2	凱亞的守護			攻擊速度提高$H_W_GOOD100%$COLOR_END，力量和抗打提高$H_W_GOOD100倍$COLOR_END，另外，再使用時間減少 $H_W_GOOD90%$COLOR_END。	icon_status.pluswill_tex	icon_status.pluswill_tex	True
@@ -1506,6 +1508,7 @@
 101220	Endurance	Debuff	False	perc	15000	0	0.92	鬥志一擊			抗打減少$H_W_BAD8%$COLOR_END、HP恢復效果減少$H_W_BAD30%$COLOR_END。	icon_skills.aggravatingstrike_tex	icon_skills.aggravatingstrike_tex	True
 101220	IncreasedHeal	Debuff	False	perc	15000	0	0.7	鬥志一擊			抗打減少$H_W_BAD8%$COLOR_END、HP恢復效果減少$H_W_BAD30%$COLOR_END。	icon_skills.aggravatingstrike_tex	icon_skills.aggravatingstrike_tex	True
 101300	ASpd	Buff	True	perc	27000	0	1.009	無雙亂舞：刺擊			每次重疊時，攻擊者的攻擊速度增加 0.9%。此效果最多可重疊 13次。	icon_skills.dualrapidpiercing_tex	icon_skills.dualrapidpiercing_tex	True
+101301	ASpd	Buff	True	perc	27000	0	1.009	無雙亂舞：刺擊			每次重疊時，攻擊者的攻擊速度增加 0.9%。此效果最多可重疊 13次。	icon_skills.dualrapidpiercing_tex	icon_skills.dualrapidpiercing_tex	True
 101400	MovSpd	Debuff	False	setp	3000	0	0.5	撕咬擊I			移動速度減少$H_W_GOOD50%$COLOR_END。	icon_skills.heavybite_tex	icon_skills.heavybite_tex	True
 101400	HPDrain	Debuff	False	perc	3000	0	0.7	撕咬擊I			移動速度減少$H_W_GOOD50%$COLOR_END。	icon_skills.heavybite_tex	icon_skills.heavybite_tex	True
 101500	DefPotion	Debuff	False	perc	15000	0	1.25	破烈			使用疾風劈擊攻擊時，技能威力增加$H_W_BAD25%$COLOR_END。	icon_skills.rupture_tex	icon_skills.rupture_tex	True
@@ -1685,7 +1688,7 @@
 401400	Aggro	Buff	True	perc	0	0	1.4	憤怒逆流 I			對周圍 8m 範圍放出怒氣，另外對於所有攻擊技能的仇恨值將增加$H_W_GOOD40%$COLOR_END。但戰鬥時除了怪物的部分特殊攻擊外，其餘皆無法抵抗。	icon_skills.toughspirit_tex	icon_skills.toughspirit_tex	True
 401400	NoMPDecay	Buff	True	seta	0	0	0	憤怒逆流 I			對周圍 8m 範圍放出怒氣，另外對於所有攻擊技能的仇恨值將增加$H_W_GOOD40%$COLOR_END。但戰鬥時除了怪物的部分特殊攻擊外，其餘皆無法抵抗。	icon_skills.toughspirit_tex	icon_skills.toughspirit_tex	True
 401400	MPChange	Buff	True	abs	0	1	50	憤怒逆流 I			對周圍 8m 範圍放出怒氣，另外對於所有攻擊技能的仇恨值將增加$H_W_GOOD40%$COLOR_END。但戰鬥時除了怪物的部分特殊攻擊外，其餘皆無法抵抗。	icon_skills.toughspirit_tex	icon_skills.toughspirit_tex	True
-401400	63	DOT	True	swch	3000	1	10000	憤怒逆流 I			對周圍 8m 範圍放出怒氣，另外對於所有攻擊技能的仇恨值將增加$H_W_GOOD40%$COLOR_END。但戰鬥時除了怪物的部分特殊攻擊外，其餘皆無法抵抗。	icon_skills.toughspirit_tex	icon_skills.toughspirit_tex	True
+401400	Plague	Buff	True	perc	0	1	401401	憤怒逆流 I			對周圍 8m 範圍放出怒氣，另外對於所有攻擊技能的仇恨值將增加$H_W_GOOD40%$COLOR_END。但戰鬥時除了怪物的部分特殊攻擊外，其餘皆無法抵抗。	icon_skills.toughspirit_tex	icon_skills.toughspirit_tex	True
 401400	113	Buff	True	perc	0	0	1.6	憤怒逆流 I			對周圍 8m 範圍放出怒氣，另外對於所有攻擊技能的仇恨值將增加$H_W_GOOD40%$COLOR_END。但戰鬥時除了怪物的部分特殊攻擊外，其餘皆無法抵抗。	icon_skills.toughspirit_tex	icon_skills.toughspirit_tex	True
 401400	PVPAtk	Buff	True	abs	0	0	-18	憤怒逆流 I			對周圍 8m 範圍放出怒氣，另外對於所有攻擊技能的仇恨值將增加$H_W_GOOD40%$COLOR_END。但戰鬥時除了怪物的部分特殊攻擊外，其餘皆無法抵抗。	icon_skills.toughspirit_tex	icon_skills.toughspirit_tex	True
 401400	209	Buff	True	perc	3000	0	0	憤怒逆流 I			對周圍 8m 範圍放出怒氣，另外對於所有攻擊技能的仇恨值將增加$H_W_GOOD40%$COLOR_END。但戰鬥時除了怪物的部分特殊攻擊外，其餘皆無法抵抗。	icon_skills.toughspirit_tex	icon_skills.toughspirit_tex	True
@@ -1723,8 +1726,8 @@
 429019	MovSpdInCombat	Debuff	False	perc	10000	0	1	魔羯的目標			魔羯把你當作目標了！	icon_skills.markingofarcher_tex	icon_skills.markingofarcher_tex	True
 429020	HPChange	DOT	False	abs	10000	1	-10000	出血			被魔羯的銳利鐮刀砍傷，造成出血。HP持續減少。	icon_status.blooduanty_tex	icon_status.blooduanty_tex	True
 457002	ASpd	Buff	False	perc	0	0	1	燃燒吧			石巨人開始憤怒，身上發出火焰了。位在半徑 20m以內的對象會獲得'熱氣'異常狀態。	icon_status.firedamage_tex	icon_status.firedamage_tex	True
-457002	HPChange	Stun	False	perc	20000	2	-0.2	燃燒吧			石巨人開始憤怒，身上發出火焰了。位在半徑 20m以內的對象會獲得'熱氣'異常狀態。	icon_status.firedamage_tex	icon_status.firedamage_tex	True
-457003	HPChange	Stun	False	perc	20000	2	-0.2	燃燒吧			石巨人開始憤怒，身上發出火焰了。位在半徑 3m以內的對象會獲得'熱氣'異常狀態。	icon_status.firedamage_tex	icon_status.firedamage_tex	True
+457002	Plague	Buff	False	setp	0	2	457004	燃燒吧			石巨人開始憤怒，身上發出火焰了。位在半徑 20m以內的對象會獲得'熱氣'異常狀態。	icon_status.firedamage_tex	icon_status.firedamage_tex	True
+457003	Plague	Buff	False	setp	0	5	457004	燃燒吧			石巨人開始憤怒，身上發出火焰了。位在半徑 3m以內的對象會獲得'熱氣'異常狀態。	icon_status.firedamage_tex	icon_status.firedamage_tex	True
 457004	HPChange	Stun	True	perc	2000	1	-0.05	熱氣			因為石巨人炙熱的熱氣，身體好像快要被溶化似的。	icon_status.firedamage_tex	icon_status.firedamage_tex	True
 457004	StackCounter	Stun	True	seta	2000	0	457005	熱氣			因為石巨人炙熱的熱氣，身體好像快要被溶化似的。	icon_status.firedamage_tex	icon_status.firedamage_tex	True
 457005	HPChange	Stun	False	perc	20000	2	-0.2	不滅之火			石巨人的強烈熱氣讓我的身體燃燒了。我應該完了。	icon_status.firedamage_tex	icon_status.firedamage_tex	True
@@ -1843,17 +1846,20 @@
 470009	HPChange	Buff	True	abs	0	1	-10000000	不該看到						False
 470015	MovSpd	Stun	False	perc	60000	0	0.8	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 5%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470015	HPChange	Stun	False	perc	60000	1	-0.05	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 5%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
+470015	Plague	Stun	False	seta	60000	1	470015	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 5%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470015	191	Stun	False	perc	60000	0	0	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 5%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470015	Block	Stun	False	swch	60000	0	0	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 5%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470015	DelayedEffect	Stun	False	abs	60000	0	470035	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 5%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470017	MovSpd	Stun	False	perc	60000	0	0.8	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 5%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470017	HPChange	Stun	False	perc	60000	1	-0.05	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 5%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
+470017	Plague	Stun	False	seta	60000	1	470015	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 5%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470017	191	Stun	False	perc	60000	0	0	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 5%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470017	Block	Stun	False	swch	60000	0	0	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 5%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470017	DelayedEffect	Stun	False	abs	60000	0	470035	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 5%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470018	Power	Debuff	True	perc	1000	0	1	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 5%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470018	MovSpd	Stun	False	perc	60000	0	0.8	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 5%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470018	HPChange	Stun	False	perc	60000	1	-0.05	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 5%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
+470018	Plague	Stun	False	seta	60000	1	470015	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 5%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470018	191	Stun	False	perc	60000	0	0	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 5%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470018	Block	Stun	False	swch	60000	0	0	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 5%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470018	DelayedEffect	Stun	False	abs	60000	0	470035	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 5%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
@@ -1868,17 +1874,20 @@
 470025	HPChange	Buff	True	abs	3000	1	-100000000	善變 - 即死			完完全全被塔勒斯基給騙了呢。即將死亡。			False
 470026	MovSpd	Stun	False	perc	60000	0	0.8	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 25%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470026	HPChange	Stun	False	perc	60000	1	-0.25	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 25%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
+470026	Plague	Stun	False	seta	60000	1	470026	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 25%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470026	191	Stun	False	perc	60000	0	0	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 25%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470026	Block	Stun	False	swch	60000	0	0	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 25%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470026	DelayedEffect	Stun	False	abs	60000	0	470035	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 25%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470027	MovSpd	Stun	False	perc	60000	0	0.8	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 25%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470027	HPChange	Stun	False	perc	60000	1	-0.25	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 25%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
+470027	Plague	Stun	False	seta	60000	1	470026	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 25%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470027	191	Stun	False	perc	60000	0	0	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 25%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470027	Block	Stun	False	swch	60000	0	0	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 25%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470027	DelayedEffect	Stun	False	abs	60000	0	470035	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 25%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470028	Power	Debuff	True	perc	1000	0	1	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 25%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470028	MovSpd	Stun	False	perc	60000	0	0.8	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 25%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470028	HPChange	Stun	False	perc	60000	1	-0.25	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 25%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
+470028	Plague	Stun	False	seta	60000	1	470026	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 25%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470028	191	Stun	False	perc	60000	0	0	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 25%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470028	Block	Stun	False	swch	60000	0	0	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 25%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470028	DelayedEffect	Stun	False	abs	60000	0	470035	雪人			被塔勒斯基的部下給騙了啊?若連續跳躍則可以解除，HP每秒會減少 25%。	icon_status.icedamage_tex	icon_status.icedamage_tex	True
@@ -2324,42 +2333,42 @@
 701605	HPChange	Buff	True	abs	15000	2	529	靈氣召喚 - 庇護 I			藉由被召喚的靈氣，每$H_W_GOOD2s$COLOR_END時，HP會慢慢恢復$H_W_GOOD529$COLOR_END。	icon_skills.energiesofprotection_tex	icon_skills.energiesofprotection_tex	True
 701606	Absorb	Buff	True	swch	5000	0	7149	靈氣召喚 - 庇護 II			被召喚的靈氣最多可吸收$H_W_GOOD7149$COLOR_END的損害，過了最大損害吸收量之後，無關持續時間，效果立即解除。	icon_skills.energiesofprotection_tex	icon_skills.energiesofprotection_tex	True
 701607	HPChange	Buff	True	abs	15000	2	700	靈氣召喚 - 庇護 II			藉由被召喚的靈氣，每$H_W_GOOD2s$COLOR_END時，HP會慢慢恢復$H_W_GOOD700$COLOR_END。	icon_skills.energiesofprotection_tex	icon_skills.energiesofprotection_tex	True
-701700	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍			在5s內成為疫病的宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法使用淨化技能解除，會將疫病傳播給周圍 7m 內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701700	HPChange	DOT	False	abs	5000	1	-1141	疫病長槍			在5s內成為疫病的宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法使用淨化技能解除，會將疫病傳播給周圍 7m 內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701701	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 II			在5s內成為疫病的宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法使用淨化技能解除，會將疫病傳播給周圍 7m 內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701701	HPChange	DOT	False	abs	5000	1	-1585	疫病長槍 II			在5s內成為疫病的宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法使用淨化技能解除，會將疫病傳播給周圍 7m 內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701702	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 III			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701702	HPChange	DOT	False	abs	5000	1	-2202	疫病長槍 III			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701703	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 IV			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701703	HPChange	DOT	False	abs	5000	1	-3059	疫病長槍 IV			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701704	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 V			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701704	HPChange	DOT	False	abs	5000	1	-4248	疫病長槍 V			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701705	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 VI			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701705	HPChange	DOT	False	abs	5000	1	-5900	疫病長槍 VI			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701706	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 VII			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701706	HPChange	DOT	False	abs	5000	1	-8194	疫病長槍 VII			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701707	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 VIII			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701707	HPChange	DOT	False	abs	5000	1	-11380	疫病長槍 VIII			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701708	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 IX			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701708	HPChange	DOT	False	abs	5000	1	-15086	疫病長槍 IX			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701720	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 I			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701720	HPChange	DOT	False	abs	5000	1	-141	疫病長槍 I			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701721	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 II			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701721	HPChange	DOT	False	abs	5000	1	-196	疫病長槍 II			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701722	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 III			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701722	HPChange	DOT	False	abs	5000	1	-272	疫病長槍 III			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701723	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 IV			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701723	HPChange	DOT	False	abs	5000	1	-378	疫病長槍 IV			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701724	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 V			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701724	HPChange	DOT	False	abs	5000	1	-525	疫病長槍 V			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701725	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 VI			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701725	HPChange	DOT	False	abs	5000	1	-729	疫病長槍 VI			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701726	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 VII			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701726	HPChange	DOT	False	abs	5000	1	-1012	疫病長槍 VII			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701727	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 VIII			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701727	HPChange	DOT	False	abs	5000	1	-1406	疫病長槍 VIII			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701728	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 IX			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
-701728	HPChange	DOT	False	abs	5000	1	-1953	疫病長槍 IX			5s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701700	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍			在20s內成為疫病的宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法使用淨化技能解除，會將疫病傳播給周圍 7m 內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701700	Plague	Debuff	False	perc	20000	0	701800	疫病長槍			在20s內成為疫病的宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法使用淨化技能解除，會將疫病傳播給周圍 7m 內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701701	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 II			在20s內成為疫病的宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法使用淨化技能解除，會將疫病傳播給周圍 7m 內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701701	Plague	Debuff	False	perc	20000	0	701801	疫病長槍 II			在20s內成為疫病的宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法使用淨化技能解除，會將疫病傳播給周圍 7m 內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701702	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 III			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701702	Plague	Debuff	False	perc	20000	0	701802	疫病長槍 III			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701703	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 IV			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701703	Plague	Debuff	False	perc	20000	0	701803	疫病長槍 IV			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701704	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 V			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701704	Plague	Debuff	False	perc	20000	0	701804	疫病長槍 V			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701705	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 VI			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701705	Plague	Debuff	False	perc	20000	0	701805	疫病長槍 VI			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701706	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 VII			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701706	Plague	Debuff	False	perc	20000	0	701806	疫病長槍 VII			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701707	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 VIII			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701707	Plague	Debuff	False	perc	20000	0	701807	疫病長槍 VIII			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701708	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 IX			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701708	Plague	Debuff	False	perc	20000	0	701808	疫病長槍 IX			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701720	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 I			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701720	Plague	Debuff	False	7	20000	0	701820	疫病長槍 I			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701721	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 II			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701721	Plague	Debuff	False	7	20000	0	701821	疫病長槍 II			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701722	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 III			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701722	Plague	Debuff	False	7	20000	0	701822	疫病長槍 III			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701723	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 IV			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701723	Plague	Debuff	False	7	20000	0	701823	疫病長槍 IV			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701724	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 V			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701724	Plague	Debuff	False	7	20000	0	701824	疫病長槍 V			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701725	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 VI			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701725	Plague	Debuff	False	7	20000	0	701825	疫病長槍 VI			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701726	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 VII			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701726	Plague	Debuff	False	7	20000	0	701826	疫病長槍 VII			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701727	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 VIII			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701727	Plague	Debuff	False	7	20000	0	701827	疫病長槍 VIII			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701728	Endurance	Debuff	False	perc	20000	0	0.95	疫病長槍 IX			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
+701728	Plague	Debuff	False	7	20000	0	701828	疫病長槍 IX			20s內將成為疫病宿主，抗打減少$H_W_BAD5%$COLOR_END。宿主無法以強化技能解除，且會傳染疫病給周圍7m內的我軍。	icon_skills.plague_tex	icon_skills.plague_tex	True
 701800	HPChange	DOT	False	abs	5000	1	-1141	疫病長槍			被疫病感染。持續受到$H_W_BAD-1141$COLOR_END的傷害。	icon_skills.plague_tex	icon_skills.plague_tex	True
 701801	HPChange	DOT	False	abs	5000	1	-1585	疫病長槍 II			被疫病感染。持續受到$H_W_BAD-1585$COLOR_END的傷害。	icon_skills.plague_tex	icon_skills.plague_tex	True
 701802	HPChange	DOT	False	abs	5000	1	-2202	疫病長槍 III			被疫病感染。持續受到$H_W_BAD-2202$COLOR_END的傷害。	icon_skills.plague_tex	icon_skills.plague_tex	True
@@ -2389,8 +2398,8 @@
 701828	IncreasedHeal	DOT	False	perc	5000	0	0.9	疫病長槍 IX			被疫病感染。持續受到$H_W_BAD-1953$COLOR_END的傷害。HP恢復量減少$H_W_BAD10%$COLOR_END。	icon_skills.plague_tex	icon_skills.plague_tex	True
 701900	Immune	Buff	True	21	1000	0	0	瞬間移動無敵			不可看到	icon_skills.voidtrap_tex	icon_skills.voidtrap_tex	True
 757002	ASpd	Buff	False	perc	0	0	1	燃燒吧			石巨人感到憤怒而全身都著火了。在半徑 21m裡的對象都會獲得 '熱氣' 異常狀態。	icon_status.firedamage_tex	icon_status.firedamage_tex	True
-757002	HPChange	Stun	False	perc	20000	2	-0.2	燃燒吧			石巨人感到憤怒而全身都著火了。在半徑 21m裡的對象都會獲得 '熱氣' 異常狀態。	icon_status.firedamage_tex	icon_status.firedamage_tex	True
-757003	HPChange	Stun	False	perc	20000	2	-0.2	燃燒吧			石巨人感到憤怒而全身都著火了。在半徑裡的對象都會獲得 '熱氣' 異常狀態。	icon_status.firedamage_tex	icon_status.firedamage_tex	True
+757002	Plague	Buff	False	setp	0	2	757004	燃燒吧			石巨人感到憤怒而全身都著火了。在半徑 21m裡的對象都會獲得 '熱氣' 異常狀態。	icon_status.firedamage_tex	icon_status.firedamage_tex	True
+757003	Plague	Buff	False	setp	0	5	457004	燃燒吧			石巨人感到憤怒而全身都著火了。在半徑裡的對象都會獲得 '熱氣' 異常狀態。	icon_status.firedamage_tex	icon_status.firedamage_tex	True
 757004	HPChange	Stun	True	perc	2000	1	-0.03	熱氣			受到石巨人的炙熱的熱氣的影響，身體好像在溶化。	icon_status.firedamage_tex	icon_status.firedamage_tex	True
 757004	StackCounter	Stun	True	seta	2000	0	457005	熱氣			受到石巨人的炙熱的熱氣的影響，身體好像在溶化。	icon_status.firedamage_tex	icon_status.firedamage_tex	True
 757005	HPChange	Stun	False	perc	20000	2	-0.1	不滅之火			受到熔岩的強烈熱氣的影響，身體正要燃燒起來了。	icon_status.firedamage_tex	icon_status.firedamage_tex	True
@@ -2519,8 +2528,8 @@
 777002	AtkPotion	Buff	True	perc	20000	2	2	完整的古代破壞力			攻擊力增加$H_W_GOOD100%$COLOR_END。	icon_status.cruel_slayer_3_tex	icon_status.cruel_slayer_3_tex	True
 777007	HPChange	DOT	False	perc	2000	2	-0.3	阿勒坤寄生蟲			減少$H_W_BAD50%$COLOR_END的HP。	icon_status.delaydamage_tex	icon_status.delaydamage_tex	True
 777007	Drunk	DOT	False	426718	2000	0	0	阿勒坤寄生蟲			減少$H_W_BAD50%$COLOR_END的HP。	icon_status.delaydamage_tex	icon_status.delaydamage_tex	True
-777009	64	Debuff	True	seta	0	1	777010	地下水道_1次方_群集_解除_1			群聚攻擊_解除_1	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
-777010	64	Debuff	True	seta	0	1	777009	地下水道_1次方_群集_解除_2			群聚攻擊_解除_2	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
+777009	Plague	Debuff	True	seta	0	1	777010	地下水道_1次方_群集_解除_1			群聚攻擊_解除_1	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
+777010	Plague	Debuff	True	seta	0	1	777009	地下水道_1次方_群集_解除_2			群聚攻擊_解除_2	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
 777014	MovSpd	DOT	False	perc	6000	0	0.5	阿勒坤病毒			已遭受病毒侵害！將會在每$H_W_BAD1s$COLOR_END持續減少$H_W_BAD20%$COLOR_END的HP，且移動速度減少$H_W_GOOD50%$COLOR_END。另外會觸發暈眩效果。$BR阿勒坤末期癌症無法解除。	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
 777014	HPDrain	DOT	False	perc	6000	0	0.9	阿勒坤病毒			已遭受病毒侵害！將會在每$H_W_BAD1s$COLOR_END持續減少$H_W_BAD20%$COLOR_END的HP，且移動速度減少$H_W_GOOD50%$COLOR_END。另外會觸發暈眩效果。$BR阿勒坤末期癌症無法解除。	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
 777014	HPChange	DOT	False	perc	6000	1	-0.2	阿勒坤病毒			已遭受病毒侵害！將會在每$H_W_BAD1s$COLOR_END持續減少$H_W_BAD20%$COLOR_END的HP，且移動速度減少$H_W_GOOD50%$COLOR_END。另外會觸發暈眩效果。$BR阿勒坤末期癌症無法解除。	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
@@ -2621,7 +2630,7 @@
 781090	Absorb	Buff	True	abs	6000000	0	30794400	內心的保護膜			拉坎轉換為內心世界，生成阻擋你攻擊的保護膜。	icon_status.balanceup_tex	icon_status.balanceup_tex	True
 781093	HPChange	Debuff	False	perc	30000	2	-0.3	拉坎的詛咒			受到詛咒後，於1秒內下降30%的體力。	icon_status.blooduanty_tex	icon_status.blooduanty_tex	True
 781094	DelayedEffect	Buff	True	swch	4000	0	781090	前往靈魂世界			轉換為靈魂世界，拉坎生成保護膜。可以解除。	icon_skills.selfbuff_tex	icon_skills.selfbuff_tex	True
-781095	HPChange	Debuff	False	perc	30000	2	-0.3	心滿意足的拉坎			看到受詛咒的你使得拉坎非常滿足。	icon_skills.selfbuff_tex	icon_skills.selfbuff_tex	True
+781095	Plague	Buff	True	setp	120000	1	781093	心滿意足的拉坎			看到受詛咒的你使得拉坎非常滿足。	icon_skills.selfbuff_tex	icon_skills.selfbuff_tex	True
 781095	DelayedEffect	Buff	True	abs	120000	0	781097	心滿意足的拉坎			看到受詛咒的你使得拉坎非常滿足。	icon_skills.selfbuff_tex	icon_skills.selfbuff_tex	True
 781099	MovSpd	DOT	True	setp	2000	0	0	昏厥			受到拉坎的攻擊之前，因被強烈的氣息侵襲而昏厥。	icon_status.confuseup_tex	icon_status.confuseup_tex	True
 781099	Block	DOT	True	swch	2000	0	0	昏厥			受到拉坎的攻擊之前，因被強烈的氣息侵襲而昏厥。	icon_status.confuseup_tex	icon_status.confuseup_tex	True
@@ -2844,13 +2853,13 @@
 905413	MovSpd	Buff	True	perc	0	0	1.3	神格化			強大的力強將奧露卡的力量和速度提升至界限，不過防禦力減少$H_W_BAD35%$COLOR_END。	icon_status.plusattack_tex	icon_status.plusattack_tex	True
 905413	ASpd	Buff	True	perc	0	0	1.88	神格化			強大的力強將奧露卡的力量和速度提升至界限，不過防禦力減少$H_W_BAD35%$COLOR_END。	icon_status.plusattack_tex	icon_status.plusattack_tex	True
 905414	Drunk1	Stun	False	seta	10000	0	0	被水弄濕的身體			對奧露卡的電擊強烈反應。	icon_status.minushp_tex	icon_status.minushp_tex	True
-905416	HPChange	Debuff	False	perc	1000	1	-0.3	奧露卡的電波閃電			受到奧露卡的電擊影響，造成周邊範圍內的同伴們持續減少$H_W_BAD30%$COLOR_END的HP。	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
+905416	Plague	Buff	True	seta	3000	1	905407	奧露卡的電波閃電			受到奧露卡的電擊影響，造成周邊範圍內的同伴們持續減少$H_W_BAD30%$COLOR_END的HP。	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
 905416	DelayedEffect	Buff	True	abs	3000	0	905417	奧露卡的電波閃電			受到奧露卡的電擊影響，造成周邊範圍內的同伴們持續減少$H_W_BAD30%$COLOR_END的HP。	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
-905417	HPChange	Debuff	False	perc	1000	1	-0.3	奧露卡的電波閃電			受到奧露卡的電擊影響，造成周邊範圍內的同伴們持續減少$H_W_BAD30%$COLOR_END的HP。	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
+905417	Plague	Buff	True	seta	3000	1	905407	奧露卡的電波閃電			受到奧露卡的電擊影響，造成周邊範圍內的同伴們持續減少$H_W_BAD30%$COLOR_END的HP。	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
 905417	DelayedEffect	Buff	True	abs	3000	0	905418	奧露卡的電波閃電			受到奧露卡的電擊影響，造成周邊範圍內的同伴們持續減少$H_W_BAD30%$COLOR_END的HP。	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
-905418	HPChange	Debuff	False	perc	1000	1	-0.3	奧露卡的電波閃電			受到奧露卡的電擊影響，造成周邊範圍內的同伴們持續減少$H_W_BAD30%$COLOR_END的HP。	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
-905419	HPChange	Debuff	False	perc	1000	1	-0.3	奧露卡的電波閃電			受到奧露卡的電擊影響，造成周邊範圍內的同伴們持續減少$H_W_BAD30%$COLOR_END的HP。	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
-905420	HPChange	Debuff	False	perc	1000	1	-0.3	奧露卡的閃電			受到奧露卡的電擊影響，造成周邊範圍內的同伴們受到強力的電擊傷害。	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
+905418	Plague	Buff	True	seta	3000	1	905407	奧露卡的電波閃電			受到奧露卡的電擊影響，造成周邊範圍內的同伴們持續減少$H_W_BAD30%$COLOR_END的HP。	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
+905419	Plague	Stun	False	seta	3000	1	905407	奧露卡的電波閃電			受到奧露卡的電擊影響，造成周邊範圍內的同伴們持續減少$H_W_BAD30%$COLOR_END的HP。	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
+905420	Plague	Stun	False	seta	3000	1	905407	奧露卡的閃電			受到奧露卡的電擊影響，造成周邊範圍內的同伴們受到強力的電擊傷害。	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
 905420	DelayedEffect	Stun	False	abs	3000	0	905421	奧露卡的閃電			受到奧露卡的電擊影響，造成周邊範圍內的同伴們受到強力的電擊傷害。	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
 905423	MPChange	DOT	False	perc	180000	1	-0.05	噁心黏液			因為深海魚的噁心黏液，MP無法恢復。用乾淨的水沖洗，就會消失。	icon_status.minusmove_tex	icon_status.minusmove_tex	True
 905423	NoHeal	DOT	False	abs	180000	0	0	噁心黏液			因為深海魚的噁心黏液，MP無法恢復。用乾淨的水沖洗，就會消失。	icon_status.minusmove_tex	icon_status.minusmove_tex	True
@@ -2868,6 +2877,7 @@
 905445	HPChange	DOT	False	perc	15000	1	-0.125	水勢出血			受到強力的水勢後，產生損血傷害，每$H_W_BAD1s$COLOR_END逐漸減少$H_W_BAD12.5%$COLOR_END的HP。	icon_status.darkriftareawind_tex	icon_status.darkriftareawind_tex	True
 905448	MovSpd	Debuff	False	perc	5000	0	0.6	精靈的泡沫			因為泡沫的影響，身體變重移動速度減少$H_W_BAD40%$COLOR_END。	icon_status.mprecoverup_tex	icon_status.mprecoverup_tex	True
 905605	HPChange	Debuff	False	perc	600000	1	-0.15	庫魔斯電流			受到庫魔斯電流的影響，讓周圍範圍內的同伴們持續減少$H_W_BAD25%$COLOR_END的HP，並持續減少自身$H_W_BAD15%$COLOR_END的HP。	icon_status.fullelectriceffect_tex	icon_status.fullelectriceffect_tex	True
+905605	Plague	Debuff	False	perc	600000	1	975603	庫魔斯電流			受到庫魔斯電流的影響，讓周圍範圍內的同伴們持續減少$H_W_BAD25%$COLOR_END的HP，並持續減少自身$H_W_BAD15%$COLOR_END的HP。	icon_status.fullelectriceffect_tex	icon_status.fullelectriceffect_tex	True
 905607	Power	Stun	True	perc	0	0	1.25	被封印的法羅納力量			法羅納的攻擊力提升$H_W_GOOD25%$COLOR_END、防禦力提升 $H_W_GOOD100%$COLOR_END。	icon_status.descentofdarkness_tex	icon_status.descentofdarkness_tex	True
 905607	Endurance	Stun	True	perc	0	0	2	被封印的法羅納力量			法羅納的攻擊力提升$H_W_GOOD25%$COLOR_END、防禦力提升 $H_W_GOOD100%$COLOR_END。	icon_status.descentofdarkness_tex	icon_status.descentofdarkness_tex	True
 905608	HPChange	DOT	False	perc	600000	1	-0.12	被封印的法羅納詛咒			因為受到法羅納的詛咒，每秒持續減少$H_W_BAD12%$COLOR_END的HP。	icon_status.curse_tex	icon_status.curse_tex	True
@@ -2880,7 +2890,7 @@
 905624	HPChange	Buff	False	perc	120000	3	-0.125	閃電充電 !!			因為強力的雷電能量而受到傷害，每$H_W_BAD3s$COLOR_END 持續減少$H_W_BAD12.5%$COLOR_END的HP。再被到雷電能量擊中時，會變成 '過度充電'狀態。			True
 905624	StackCounter	Buff	False	seta	120000	0	905625	閃電充電 !!			因為強力的雷電能量而受到傷害，每$H_W_BAD3s$COLOR_END 持續減少$H_W_BAD12.5%$COLOR_END的HP。再被到雷電能量擊中時，會變成 '過度充電'狀態。			True
 905625	HPChange	Buff	False	perc	60000	3	-0.3	過度充電			體內累積了過多的電擊能量。位在周邊的PC都會受到擊昏效果。			True
-905625	Stun	Buff	False	swch	5000	0	5	過度充電			體內累積了過多的電擊能量。位在周邊的PC都會受到擊昏效果。			True
+905625	Plague	Buff	False	seta	60000	1	905626	過度充電			體內累積了過多的電擊能量。位在周邊的PC都會受到擊昏效果。			True
 905626	Stun	Buff	False	swch	5000	0	5	觸電			受到過度充電的影響造成昏厥。			True
 905627	AllResist	Debuff	True	perc	3000	0	0.001	靜電充電			在揮動手臂時，會烏雲翻滾。在行動結束以後，活動量條會填補20。	icon_status.minushp_tex	icon_status.minushp_tex	True
 905630	AllResist	Debuff	True	perc	4000	0	0.0001	無防備狀態			法羅納對於昏迷變成無防備狀態。	icon_status.minusdefence_tex	icon_status.minusdefence_tex	True
@@ -2889,10 +2899,9 @@
 905641	DefPotion	Debuff	True	perc	0	0	0.7	黑龍的氣息			黑龍的氣息包覆全身的狀態。對於白龍的攻擊減少 30%傷害，且如果周圍有白龍的氣息時，會持續受到傷害。	icon_status.battlefieldbuff02_tex	icon_status.battlefieldbuff02_tex	True
 905643	Endurance	Buff	False	perc	0	0	100	白龍的氣息			全身籠罩著白龍氣息的狀態。防禦力很高，攻擊時HP減少10%。龍的晶球吸收白龍力量，使用特殊攻擊。	icon_status.battlefieldbuff01_tex	icon_status.battlefieldbuff01_tex	True
 905643	Reflect	Buff	False	perc	0	1	0.1	白龍的氣息			全身籠罩著白龍氣息的狀態。防禦力很高，攻擊時HP減少10%。龍的晶球吸收白龍力量，使用特殊攻擊。	icon_status.battlefieldbuff01_tex	icon_status.battlefieldbuff01_tex	True
+905651	Plague	Buff	True	perc	0	15	905657	太陽之光			對法羅納產生一定量的保護膜，反射玩家的攻擊傷害。	icon_status.valrhona_sun_tex	icon_status.valrhona_sun_tex	True
 905651	Absorb	Buff	True	abs	0	0	10100000	太陽之光			對法羅納產生一定量的保護膜，反射玩家的攻擊傷害。	icon_status.valrhona_sun_tex	icon_status.valrhona_sun_tex	True
-905651	Drunk	Debuff	True	60012	15000	0	0	太陽之光			對法羅納產生一定量的保護膜，反射玩家的攻擊傷害。	icon_status.valrhona_sun_tex	icon_status.valrhona_sun_tex	True
-905652	HPLoss	DOT	False	abs	10000	0	-200000	惡魔的微笑			法羅納的周邊被關在黑暗裡，視野受到制約，15秒內受到出血異常狀態。	icon_status.valrhona_devil_tex	icon_status.valrhona_devil_tex	True
-905652	Drunk	Debuff	True	905601	15000	0	0	惡魔的微笑			法羅納的周邊被關在黑暗裡，視野受到制約，15秒內受到出血異常狀態。	icon_status.valrhona_devil_tex	icon_status.valrhona_devil_tex	True
+905652	Plague	Buff	True	perc	0	15	905655	惡魔的微笑			法羅納的周邊被關在黑暗裡，視野受到制約，15秒內受到出血異常狀態。	icon_status.valrhona_devil_tex	icon_status.valrhona_devil_tex	True
 905653	Power	Buff	True	perc	0	0	1.3	女神的呼喚			法羅納的攻擊力30%、防禦力100%、加速度上升 20%。	icon_status.valrhona_goddess_tex	icon_status.valrhona_goddess_tex	True
 905653	Endurance	Buff	True	perc	0	0	2	女神的呼喚			法羅納的攻擊力30%、防禦力100%、加速度上升 20%。	icon_status.valrhona_goddess_tex	icon_status.valrhona_goddess_tex	True
 905653	ASpd	Buff	True	perc	0	0	1.2	女神的呼喚			法羅納的攻擊力30%、防禦力100%、加速度上升 20%。	icon_status.valrhona_goddess_tex	icon_status.valrhona_goddess_tex	True
@@ -2938,13 +2947,14 @@
 905933	HPChange	DOT	True	perc	90000	2	-0.08	拉道斯的詛咒			每$H_W_BAD2s$COLOR_END持續減少HP$H_W_BAD8%$COLOR_END，重疊 3次時即死亡。無法解除拉道斯的詛咒。	icon_status.injuredbtdarkness_tex	icon_status.injuredbtdarkness_tex	True
 905933	StackCounter	DOT	True	seta	90000	0	905931	拉道斯的詛咒			每$H_W_BAD2s$COLOR_END持續減少HP$H_W_BAD8%$COLOR_END，重疊 3次時即死亡。無法解除拉道斯的詛咒。	icon_status.injuredbtdarkness_tex	icon_status.injuredbtdarkness_tex	True
 905934	HPChange	Buff	True	perc	5000	1	-0.07	惡靈島幽靈			因幽靈的影響，自己也成為幽靈，並在變為幽靈的過程中HP持續以 $H_W_BAD8%$COLOR_END減少。但對於特定攻擊具有免疫狀態。	icon_status.diseasedown_tex	icon_status.diseasedown_tex	True
+905934	Plague	Buff	True	seta	5000	1	905934	惡靈島幽靈			因幽靈的影響，自己也成為幽靈，並在變為幽靈的過程中HP持續以 $H_W_BAD8%$COLOR_END減少。但對於特定攻擊具有免疫狀態。	icon_status.diseasedown_tex	icon_status.diseasedown_tex	True
 905934	IncreasedHeal	Buff	True	swch	5000	0	0	惡靈島幽靈			因幽靈的影響，自己也成為幽靈，並在變為幽靈的過程中HP持續以 $H_W_BAD8%$COLOR_END減少。但對於特定攻擊具有免疫狀態。	icon_status.diseasedown_tex	icon_status.diseasedown_tex	True
 905934	Block	Buff	True	swch	5000	0	0	惡靈島幽靈			因幽靈的影響，自己也成為幽靈，並在變為幽靈的過程中HP持續以 $H_W_BAD8%$COLOR_END減少。但對於特定攻擊具有免疫狀態。	icon_status.diseasedown_tex	icon_status.diseasedown_tex	True
 905934	DelayedEffect	Buff	True	seta	5000	0	905929	惡靈島幽靈			因幽靈的影響，自己也成為幽靈，並在變為幽靈的過程中HP持續以 $H_W_BAD8%$COLOR_END減少。但對於特定攻擊具有免疫狀態。	icon_status.diseasedown_tex	icon_status.diseasedown_tex	True
 905934	Drunk	Buff	True	905901	5000	0	0	惡靈島幽靈			因幽靈的影響，自己也成為幽靈，並在變為幽靈的過程中HP持續以 $H_W_BAD8%$COLOR_END減少。但對於特定攻擊具有免疫狀態。	icon_status.diseasedown_tex	icon_status.diseasedown_tex	True
 905934	Immune	Buff	True	17	5000	0	0	惡靈島幽靈			因幽靈的影響，自己也成為幽靈，並在變為幽靈的過程中HP持續以 $H_W_BAD8%$COLOR_END減少。但對於特定攻擊具有免疫狀態。	icon_status.diseasedown_tex	icon_status.diseasedown_tex	True
 905934	StackCounter	Buff	True	swch	5000	0	905943	惡靈島幽靈			因幽靈的影響，自己也成為幽靈，並在變為幽靈的過程中HP持續以 $H_W_BAD8%$COLOR_END減少。但對於特定攻擊具有免疫狀態。	icon_status.diseasedown_tex	icon_status.diseasedown_tex	True
-905935	Drunk	Buff	True	905902	1000	0	0	傳播用						True
+905935	Plague	Buff	True	perc	0	1	905934	傳播用						True
 905936	DelayedEffect	Buff	True	abs	15000	1	905935	幽靈解除						True
 905939	IncreasedHeal	Debuff	False	swch	3000	0	0.75	黑暗碎片( 2階段)			重疊 2次時，獲得黑暗保護膜效果。	icon_status.darkriftwhisper_tex	icon_status.darkriftwhisper_tex	True
 905939	StackCounter	Debuff	False	seta	3000	0	905942	黑暗碎片( 2階段)			重疊 2次時，獲得黑暗保護膜效果。	icon_status.darkriftwhisper_tex	icon_status.darkriftwhisper_tex	True
@@ -3097,7 +3107,7 @@
 975409	Absorb	Debuff	True	abs	14000	0	2200000	奧露卡的保護膜			因為強大的保護膜，而受到保護的狀態	icon_status.immunedebuff_tex	icon_status.immunedebuff_tex	True
 975423	MPChange	DOT	False	perc	180000	1	-0.16	噁心黏液			因為深海魚的噁心黏液每$H_W_GOOD1s$COLOR_END持續減少$H_W_BAD16%$COLOR_END的MP。用乾淨的水洗淨身體就會消失。	icon_status.minusmove_tex	icon_status.minusmove_tex	True
 975430	Absorb	Debuff	True	abs	10000	0	1850000	堅強的防禦罩			使用甲殼一邊保護自己，一邊聚集強大的力量。	icon_status.balanceup_tex	icon_status.balanceup_tex	True
-975601	HPChange	Debuff	False	perc	1000	1	-0.1	庫魔斯電流			受到庫魔斯電流的影響，讓周圍範圍內的同伴們持續減少$H_W_BAD10%$COLOR_END的HP。	icon_status.fullelectriceffect_tex	icon_status.fullelectriceffect_tex	True
+975601	Plague	Debuff	False	perc	600000	1	975602	庫魔斯電流			受到庫魔斯電流的影響，讓周圍範圍內的同伴們持續減少$H_W_BAD10%$COLOR_END的HP。	icon_status.fullelectriceffect_tex	icon_status.fullelectriceffect_tex	True
 975602	HPChange	Debuff	False	perc	1000	1	-0.1	庫魔斯電流			受到庫魔斯電流的影響，讓周圍範圍內的同伴們持續減少$H_W_BAD10%$COLOR_END的HP。	icon_status.fullelectriceffect_tex	icon_status.fullelectriceffect_tex	False
 975603	HPChange	Debuff	False	perc	1000	1	-0.25	庫魔斯電流			受到庫魔斯電流的影響，讓周圍範圍內的同伴們持續減少$H_W_BAD25%$COLOR_END的HP，並持續減少自身$H_W_BAD15%$COLOR_END的HP。	icon_status.fullelectriceffect_tex	icon_status.fullelectriceffect_tex	False
 975651	Power	Buff	True	perc	0	0	1.1	太陽之光			法羅納的攻擊力提升$H_W_GOOD10%$COLOR_END、防禦力提升$H_W_GOOD25%$COLOR_END。	icon_status.valrhona_sun_tex	icon_status.valrhona_sun_tex	True
@@ -3196,7 +3206,7 @@
 981090	Absorb	Buff	True	abs	6000000	0	54172800	內心的保護膜			拉坎轉換為內心世界，生成阻擋你攻擊的保護膜。	icon_status.balanceup_tex	icon_status.balanceup_tex	True
 981093	HPChange	Debuff	False	perc	30000	2	-0.3	拉坎的詛咒			受到詛咒後，於1秒內下降30%的體力。	icon_status.blooduanty_tex	icon_status.blooduanty_tex	True
 981094	DelayedEffect	Buff	True	swch	2500	0	981090	前往靈魂世界			轉換為靈魂世界，拉坎生成保護膜。可以解除。	icon_skills.selfbuff_tex	icon_skills.selfbuff_tex	True
-981095	HPChange	Debuff	False	perc	30000	2	-0.3	心滿意足的拉坎			看到受詛咒的你使得拉坎非常滿足。	icon_skills.selfbuff_tex	icon_skills.selfbuff_tex	True
+981095	Plague	Buff	True	setp	120000	1	981093	心滿意足的拉坎			看到受詛咒的你使得拉坎非常滿足。	icon_skills.selfbuff_tex	icon_skills.selfbuff_tex	True
 981095	DelayedEffect	Buff	True	abs	120000	0	981097	心滿意足的拉坎			看到受詛咒的你使得拉坎非常滿足。	icon_skills.selfbuff_tex	icon_skills.selfbuff_tex	True
 981099	MovSpd	Stun	True	setp	2000	0	0	昏厥			受到拉坎的攻擊之前，因被強烈的氣息侵襲而昏厥。	icon_status.confuseup_tex	icon_status.confuseup_tex	True
 981099	Block	Stun	True	swch	2000	0	0	昏厥			受到拉坎的攻擊之前，因被強烈的氣息侵襲而昏厥。	icon_status.confuseup_tex	icon_status.confuseup_tex	True
@@ -3220,7 +3230,7 @@
 988535	DropUp	Buff	True	perc	0	1	1.5	提落率增加(2階段)			自己及隊員們的掉落率增加$H_W_GOOD50%$COLOR_END。	icon_items.gift_box04_tex	icon_items.gift_box04_tex	True
 988536	DropUp	Buff	True	perc	0	1	2	提落率增加(3階段)			自己及隊員們的掉落率增加$H_W_GOOD100%$COLOR_END。	icon_items.gift_box03_tex	icon_items.gift_box03_tex	True
 988550	HPChange	Debuff	False	abs	1000	1	-100000	幻影的氣息			獲得強大的幻影力量，將強勁的氣息散發在周圍。	icon_status.electriceffect3_tex	icon_status.electriceffect3_tex	False
-988551	HPChange	Debuff	False	abs	1000	1	-100000	幻影的氣息			獲得強大的幻影力量，將強勁的氣息散發在周圍。	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
+988551	Plague	Stun	False	perc	150000	1	988550	幻影的氣息			獲得強大的幻影力量，將強勁的氣息散發在周圍。	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
 988570	MovSpd	Debuff	False	perc	10000	0	0.1	費比修的詛咒_減速			移動速度減少$H_W_GOOD90%$COLOR_END。費比修的詛咒_減速無法解除。	icon_status.minusmove_tex	icon_status.minusmove_tex	True
 988570	HPDrain	Debuff	False	perc	10000	0	0.9	費比修的詛咒_減速			移動速度減少$H_W_GOOD90%$COLOR_END。費比修的詛咒_減速無法解除。	icon_status.minusmove_tex	icon_status.minusmove_tex	True
 988571	Power	Debuff	False	perc	10000	0	0.1	費比修的詛咒_弱化			力量減少$H_W_GOOD90%$COLOR_END。費比修的詛咒_弱化無法解除。	icon_status.diseaseup_tex	icon_status.diseaseup_tex	True
@@ -3228,12 +3238,12 @@
 988573	Chaos	Stun	False	swch	10000	0	0	費比修的詛咒_混亂			已陷入精神錯亂狀態!輸入移動按鍵時的移動方向會相反。費比修的詛咒_混亂無法解除。	icon_status.fearstatus_tex	icon_status.fearstatus_tex	True
 988574	Fear	Stun	False	swch	10000	0	200	費比修的詛咒_恐怖			受到驚嚇而逃走! 雖然費比修的詛咒無法解除，但是因被攻擊而發生倒下時會自動解除。費比修的詛咒_恐怖無法解除。	icon_status.fearstatus_tex	icon_status.fearstatus_tex	True
 988575	Block	Stun	False	swch	10000	0	0	費比修的詛咒_沈默			效果持續時間內任何種類的技能都不能使用!費比修的詛咒_沈默無法解除。	icon_status.sealskill_tex	icon_status.sealskill_tex	True
-988576	MovSpd	Debuff	False	perc	10000	0	0.1	費比修的詛咒_減速			已發生費比修的詛咒。自己除外讓周邊10m範圍內的組隊隊員的移動速度減少。	icon_status.minuswill_tex	icon_status.minuswill_tex	True
-988577	Power	Debuff	False	perc	10000	0	0.1	費比修的詛咒_弱化			已發生費比修的詛咒。自己除外，讓周邊10m範圍內的組隊隊員的力量減少。	icon_status.minuswill_tex	icon_status.minuswill_tex	True
-988578	HPChange	Debuff	True	abs	1000	1	-1000000	費比修的詛咒_破壞			已發生費比修的詛咒。自己除外，讓周邊20m範圍內的組隊隊員立即死亡。	icon_status.minuswill_tex	icon_status.minuswill_tex	True
-988579	Chaos	Stun	False	swch	10000	0	0	費比修的詛咒_混亂			已發生費比修的詛咒。自己除外，讓周邊10m範圍內的組隊隊員陷入精神錯亂狀態。	icon_status.minuswill_tex	icon_status.minuswill_tex	True
-988580	Fear	Stun	False	swch	10000	0	200	費比修的詛咒_恐怖			已發生費比修的詛咒。自己除外，周邊10m範圍內的組隊隊員因受到驚嚇而逃走。	icon_status.minuswill_tex	icon_status.minuswill_tex	True
-988581	Block	Stun	False	swch	10000	0	0	費比修的詛咒_沈默			已發生費比修的詛咒。自己除外，周邊10m範圍內的組隊隊員無法使用技能。	icon_status.minuswill_tex	icon_status.minuswill_tex	True
+988576	Plague	Debuff	False	perc	5000	1	988570	費比修的詛咒_減速			已發生費比修的詛咒。自己除外讓周邊10m範圍內的組隊隊員的移動速度減少。	icon_status.minuswill_tex	icon_status.minuswill_tex	True
+988577	Plague	Debuff	False	perc	5000	1	988571	費比修的詛咒_弱化			已發生費比修的詛咒。自己除外，讓周邊10m範圍內的組隊隊員的力量減少。	icon_status.minuswill_tex	icon_status.minuswill_tex	True
+988578	Plague	Debuff	True	perc	5000	1	988572	費比修的詛咒_破壞			已發生費比修的詛咒。自己除外，讓周邊20m範圍內的組隊隊員立即死亡。	icon_status.minuswill_tex	icon_status.minuswill_tex	True
+988579	Plague	Debuff	False	perc	5000	1	988573	費比修的詛咒_混亂			已發生費比修的詛咒。自己除外，讓周邊10m範圍內的組隊隊員陷入精神錯亂狀態。	icon_status.minuswill_tex	icon_status.minuswill_tex	True
+988580	Plague	Debuff	False	perc	5000	1	988574	費比修的詛咒_恐怖			已發生費比修的詛咒。自己除外，周邊10m範圍內的組隊隊員因受到驚嚇而逃走。	icon_status.minuswill_tex	icon_status.minuswill_tex	True
+988581	Plague	Debuff	False	perc	5000	1	988575	費比修的詛咒_沈默			已發生費比修的詛咒。自己除外，周邊10m範圍內的組隊隊員無法使用技能。	icon_status.minuswill_tex	icon_status.minuswill_tex	True
 988582	DelayedEffect	Debuff	False	abs	5000	0	988576	費比修的詛咒_減速			5秒後發生拉米安的詛咒_減速效果。	icon_status.firedamage_tex	icon_status.firedamage_tex	True
 988583	DelayedEffect	Debuff	False	abs	5000	0	988577	費比修的詛咒_弱化			5秒後發生拉米安的詛咒_弱化效果。	icon_status.firedamage_tex	icon_status.firedamage_tex	True
 988584	DelayedEffect	Debuff	False	abs	10000	0	988578	費比修的詛咒_破壞			10秒後發生拉米安的詛咒_破壞效果。	icon_status.firedamage_tex	icon_status.firedamage_tex	True
@@ -3329,7 +3339,7 @@
 4510012	OutOfCombatMovSpd	Buff	True	abs	600000	0	15	太陽晶球			追隨著太陽晶球，和平狀態下移動速度提升$H_W_GOOD15$COLOR_END。	icon_items.orb_of_luck_tex	icon_items.orb_of_luck_tex	True
 4510013	OutOfCombatMovSpd	Buff	True	abs	600000	0	15	太陽晶球			追隨著太陽晶球，和平狀態下移動速度提升$H_W_GOOD15$COLOR_END。	icon_items.orb_of_luck_tex	icon_items.orb_of_luck_tex	True
 4510014	OutOfCombatMovSpd	Buff	True	abs	600000	0	15	太陽晶球			追隨著太陽晶球，和平狀態下移動速度提升$H_W_GOOD15$COLOR_END。	icon_items.orb_of_luck_tex	icon_items.orb_of_luck_tex	True
-4510015	AtkPotion	Buff	True	perc	60000	0	1.03	勇氣的旋律			聽到扈卡笛子的聲音，勇氣好像湧出來了一樣。 技能偒害值增加$H_W_GOOD3%$COLOR_END。	icon_items.fallfestival_whistle_tex	icon_items.fallfestival_whistle_tex	True
+4510015	AtkPotion	Buff	True	perc	60000	0	1.01	勇氣的旋律			聽到扈卡笛子的聲音，勇氣好像湧出來了一樣。 技能偒害值增加$H_W_GOOD1%$COLOR_END。	icon_items.fallfestival_whistle_tex	icon_items.fallfestival_whistle_tex	True
 5000000	Power	Buff	True	abs	0	0	3	從今天開始，我們變得更強了!!			力量 / 抗打 / 衝擊 / 均衡 / 爆擊率 / 移動速度增加$H_W_GOOD3$COLOR_END。	icon_items.wings_of_fairy_tex	icon_items.wings_of_fairy_tex	True
 5000000	Endurance	Buff	True	abs	0	0	3	從今天開始，我們變得更強了!!			力量 / 抗打 / 衝擊 / 均衡 / 爆擊率 / 移動速度增加$H_W_GOOD3$COLOR_END。	icon_items.wings_of_fairy_tex	icon_items.wings_of_fairy_tex	True
 5000000	MovSpd	Buff	True	abs	0	0	3	從今天開始，我們變得更強了!!			力量 / 抗打 / 衝擊 / 均衡 / 爆擊率 / 移動速度增加$H_W_GOOD3$COLOR_END。	icon_items.wings_of_fairy_tex	icon_items.wings_of_fairy_tex	True
@@ -4297,16 +4307,14 @@
 47681601	Endurance	Buff	True	perc	3600000	0	1	次元召喚			已感覺到逐漸被捲入暗黑裂縫的縫隙裡。只能在該效果堆疊2次的狀態下，才能進入暗黑次元的異空間。$BR只要同一帳號內有任何一隻角色進入過異空間，其他角色將於一小時內無法進入異空間。	icon_status.calldimension_tex	icon_status.calldimension_tex	True
 47681602	Endurance	Buff	True	perc	3600000	0	1	次元召喚			已感覺到逐漸被捲入暗黑裂縫的縫隙裡。只能在該效果堆疊2次的狀態下，才能進入暗黑次元的異空間。$BR只要同一帳號內有任何一隻角色進入過異空間，其他角色將於一小時內無法進入異空間。	icon_status.calldimension_tex	icon_status.calldimension_tex	True
 47681700	Endurance	Buff	True	perc	46800000	0	1	次元哨兵			到暗黑次元的異空間探險過的冒險家。有此狀態效果時，就不會獲得次元召喚的異常狀態，且無法進入暗黑次元的異空間。	icon_status.dimensionguard_tex	icon_status.dimensionguard_tex	True
-47681800	Power	Buff	True	perc	20000	0	1.5	暗黑次元的吸引			每$H_W_GOOD0s$COLOR_END向周圍12m範圍內的我軍觸發暗黑次元的本能效果。	icon_status.darkriftareatimeshift_tex	icon_status.darkriftareatimeshift_tex	True
+47681800	Plague	Buff	True	seta	3600000	5	476818	暗黑次元的吸引			每$H_W_GOOD5s$COLOR_END向周圍12m範圍內的我軍觸發暗黑次元的本能效果。	icon_status.darkriftareatimeshift_tex	icon_status.darkriftareatimeshift_tex	True
 47690000	Block	Stun	False	swch	10000	0	0	超音波衝擊			因為超音波的強力衝擊，在效果持續時間內無法使用任何技能！$BR超音波衝擊無法解除。	icon_status.sealskill_tex	icon_status.sealskill_tex	True
 47690100	Endurance	Debuff	False	perc	60000	0	0.2	突進粉碎			因為突進波長，抗打將減少$H_W_BAD80%$COLOR_END。$BR突進粉碎無法解除。	icon_status.minusdefence_tex	icon_status.minusdefence_tex	True
 47690200	DefPotion	Buff	True	perc	0	0	0.2	赤紅盾牌			以鮮明的赤紅盾牌之力量，被遠距離攻擊時所受的傷害將減少$H_W_GOOD80%$COLOR_END。$BR赤紅盾牌無法解除。	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
 47690300	DefPotion	Buff	True	perc	0	0	0.2	青藍盾牌			以鮮明的青藍盾牌之力量，被近距離攻擊時所受的傷害將減少$H_W_GOOD80%$COLOR_END。$BR青藍盾牌無法解除。	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
 47690400	Stun	Stun	False	swch	0	0	5	釋電			因釋電導致昏厥狀態而無法行動。$BR釋電無法解除。	icon_status.confuseup_tex	icon_status.confuseup_tex	True
-47690500	Endurance	Debuff	False	perc	15000	0	1	電流釋放			已成為電流釋放的狀態。每$H_W_GOOD2s$COLOR_END向周圍10m範圍內我軍觸發擊倒僵硬。電流釋放將會解除釋電。$BR電流釋放無法解除。	icon_status.paralyzestatus_tex	icon_status.paralyzestatus_tex	True
-47690500	Stun1	Debuff	False	swch	15000	2	1	電流釋放			已成為電流釋放的狀態。每$H_W_GOOD2s$COLOR_END向周圍10m範圍內我軍觸發擊倒僵硬。電流釋放將會解除釋電。$BR電流釋放無法解除。	icon_status.paralyzestatus_tex	icon_status.paralyzestatus_tex	True
-47690600	HPChange	Debuff	False	perc	1000	1	-0.5	死亡宣言 - 釋放			持續時間之後，每$H_W_BAD1s$COLOR_END讓對方持續減少$H_W_BAD50%$COLOR_END的HP。	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
-47690600	64	Debuff	False	seta	3000	1	476906	死亡宣言 - 釋放			持續時間之後，每$H_W_BAD1s$COLOR_END讓對方持續減少$H_W_BAD50%$COLOR_END的HP。	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
+47690500	Plague	Debuff	False	seta	15000	2	476905	電流釋放			已成為電流釋放的狀態。每$H_W_GOOD2s$COLOR_END向周圍10m範圍內我軍觸發擊倒僵硬。電流釋放將會解除釋電。$BR電流釋放無法解除。	icon_status.paralyzestatus_tex	icon_status.paralyzestatus_tex	True
+47690600	Plague	Debuff	False	seta	3000	1	476906	死亡宣言 - 釋放			持續時間之後，每$H_W_BAD1s$COLOR_END讓對方持續減少$H_W_BAD50%$COLOR_END的HP。	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
 47690700	DelayedEffect	DOT	False	abs	5000	0	476907	精神崩潰			持續時間之後，將陷入精神崩潰-效果。	icon_status.confuseup_tex	icon_status.confuseup_tex	True
 47690800	HPChange	Debuff	False	perc	10000	10	-0.1	深海支配			已遭受深海支配的異常狀態。持續時間結束之後，將減少$H_W_BAD10%$COLOR_END的HP。$BR深海支配無法解除。	icon_status.minushp_tex	icon_status.minushp_tex	True
 47690800	StackCounter	Debuff	False	swch	10000	0	47690900	深海支配			已遭受深海支配的異常狀態。持續時間結束之後，將減少$H_W_BAD10%$COLOR_END的HP。$BR深海支配無法解除。	icon_status.minushp_tex	icon_status.minushp_tex	True
@@ -4460,7 +4468,7 @@
 77700006	HPDrain	Debuff	False	perc	10000	0	0.9	妨礙移動			減少移動速度。	icon_skills.slowball_tex	icon_skills.slowball_tex	True
 77700007	DefPotion	Stun	True	swch	30000	0	0	裝置啟動3重疊			傷害全部被吸收。	icon_skills.manashield_tex	icon_skills.manashield_tex	True
 77700008	HPLoss	DOT	True	abs	13000	0	-10000	地下水道_1次方_破滅			持續時間後 30000的傷害	icon_skills.voidtrap_tex	icon_skills.voidtrap_tex	True
-77700009	64	Debuff	True	seta	0	1	777009	地下水道_1次方_群集			持續時間後 30000的傷害	icon_status.plusattack_tex	icon_status.plusattack_tex	True
+77700009	Plague	Debuff	True	seta	13000	1	777009	地下水道_1次方_群集			持續時間後 30000的傷害	icon_status.plusattack_tex	icon_status.plusattack_tex	True
 77700009	HPLoss	Debuff	True	abs	13000	0	-10000	地下水道_1次方_群集			持續時間後 30000的傷害	icon_status.plusattack_tex	icon_status.plusattack_tex	True
 77700010	Aggro	Buff	False	perc	80000	0	0.5	不安定的狂氣			每次堆疊時暴擊觸發增加$H_W_GOOD5%$COLOR_END，此效果最多可堆疊至10次。	icon_status.battlefieldbuff01_tex	icon_status.battlefieldbuff01_tex	True
 77700010	CritChance	Buff	False	abs	80000	2	0.05	不安定的狂氣			每次堆疊時暴擊觸發增加$H_W_GOOD5%$COLOR_END，此效果最多可堆疊至10次。	icon_status.battlefieldbuff01_tex	icon_status.battlefieldbuff01_tex	True
@@ -4528,7 +4536,7 @@
 77703434	IncreasedHeal	DOT	False	swch	60000	0	0.8	感染 : 戴蒙克隆病毒			已感染戴蒙克隆病毒。恢復量變得緩慢。	icon_status.minuscriticalresist_tex	icon_status.minuscriticalresist_tex	True
 77703435	Endurance	Buff	False	perc	15000	0	10000	戴蒙克隆細胞			已覆蓋上戴蒙克隆細胞。該效果維持的期間內，給予戴蒙克隆的傷害會減少。	icon_status.balanceup_tex	icon_status.balanceup_tex	True
 77703437	Power	DOT	False	perc	15000	0	1.2	狂暴化			戴蒙克隆失去理性變得凶暴化。每次堆疊時攻擊力會增加。	icon_status.diseaseup_tex	icon_status.diseaseup_tex	True
-77703438	HPChange	DOT	False	abs	20000	2	-5000	電流釋放			已成為電流釋放的狀態。每$H_W_GOOD2s$COLOR_END向周圍10m範圍內我軍誘發擊倒僵硬。電流釋放將會解除釋電。$BR電流釋放無法解除。	icon_status.paralyzestatus_tex	icon_status.paralyzestatus_tex	True
+77703438	Plague	Debuff	False	perc	15000	2	777033	電流釋放			已成為電流釋放的狀態。每$H_W_GOOD2s$COLOR_END向周圍10m範圍內我軍誘發擊倒僵硬。電流釋放將會解除釋電。$BR電流釋放無法解除。	icon_status.paralyzestatus_tex	icon_status.paralyzestatus_tex	True
 77703439	220	Buff	True	swch	5000	0	0	充電 : 戴蒙克隆能源			正在聚集戴蒙克隆能量。如果無法解除，就會獲得到強大的力量。	icon_status.fearstatus_tex	icon_status.fearstatus_tex	True
 77703439	DelayedEffect	Buff	True	abs	5000	0	777032	充電 : 戴蒙克隆能源			正在聚集戴蒙克隆能量。如果無法解除，就會獲得到強大的力量。	icon_status.fearstatus_tex	icon_status.fearstatus_tex	True
 77703440	Ballance	Buff	True	perc	7000	0	3.87E-06	暴衝			基露卡爾正在發狂，所以他的平衡能力下滑了。成為容易被擊倒的狀態。	icon_status.risindagon_tex	icon_status.risindagon_tex	True
@@ -5693,7 +5701,7 @@
 97502500	Fear	Stun	False	swch	30000	0	150	心驚膽顫			被可怕的咆哮聲嚇到。	icon_status.fearstatus_tex	icon_status.fearstatus_tex	True
 97502600	Stun1	Stun	False	swch	15000	5	15	無法操控			讓我們一起跳舞吧！就這樣一起死去吧！	icon_status.confusestatusnpc_tex	icon_status.confusestatusnpc_tex	True
 97502700	Block	Buff	True	swch	0	0	0	禁止復活			無法復活	icon_items.q_closedspace_stone_05_tex	icon_items.q_closedspace_stone_05_tex	True
-97502800	HPChange	Buff	True	perc	6000	0	0.03	貝里克力量			團結就是力量！10m內的玩家們都會有BUFF效果。	icon_status.plusattack_tex	icon_status.plusattack_tex	True
+97502800	Plague	Buff	True	seta	0	5	975029	貝里克力量			團結就是力量！10m內的玩家們都會有BUFF效果。	icon_status.plusattack_tex	icon_status.plusattack_tex	True
 97502800	StaminaDecay	Buff	True	swch	0	0	0	貝里克力量			團結就是力量！10m內的玩家們都會有BUFF效果。	icon_status.plusattack_tex	icon_status.plusattack_tex	True
 97503000	DefPotion	Debuff	False	swch	60000	0	1.1	神之憤怒			堆疊的越多恢復量效果會減少，傷害量則會增加。	icon_status.minusdefence_tex	icon_status.minusdefence_tex	True
 97503000	IncreasedHeal	Debuff	False	swch	60000	0	0.83	神之憤怒			堆疊的越多恢復量效果會減少，傷害量則會增加。	icon_status.minusdefence_tex	icon_status.minusdefence_tex	True
@@ -5701,8 +5709,8 @@
 97503400	Endurance	Debuff	False	perc	30000	0	0	火焰砲彈			劇痛的炸彈	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
 97503500	MovSpd	Debuff	False	perc	30000	0	0.3	寒氣砲彈			緩慢的炸彈	icon_status.minusmove_tex	icon_status.minusmove_tex	True
 97503700	DefPotion	Debuff	True	perc	0	0	0	大砲免疫			即使被大砲擊中也不會損血。	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
-97503800	MovSpdInCombat	Debuff	True	perc	5000	0	2	凱爾賽克巢穴_專用_中間BOSS移動速度增加_光環			附近5m範圍內我軍增加移動速度。 	icon_status.plusmove_tex	icon_status.plusmove_tex	True
-97504000	DefPotion	Debuff	True	perc	5000	0	0	凱爾賽克巢穴_專用_BOSS周圍無敵_光環			附近10m範位內我軍有無敵保護膜效果。	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
+97503800	Plague	Debuff	True	seta	0	5	975039	凱爾賽克巢穴_專用_中間BOSS移動速度增加_光環			附近5m範圍內我軍增加移動速度。 	icon_status.plusmove_tex	icon_status.plusmove_tex	True
+97504000	Plague	Debuff	True	seta	0	5	975041	凱爾賽克巢穴_專用_BOSS周圍無敵_光環			附近10m範位內我軍有無敵保護膜效果。	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
 97504200	Power	Debuff	True	perc	600000	0	1.5	凱爾賽克的憤怒			攻擊力增加$H_W_GOOD50%$COLOR_END ，攻擊速度增加 $H_W_GOOD30%$COLOR_END。無法解除。	icon_status.plusattack_tex	icon_status.plusattack_tex	True
 97504200	ASpd	Debuff	True	perc	600000	0	1.3	凱爾賽克的憤怒			攻擊力增加$H_W_GOOD50%$COLOR_END ，攻擊速度增加 $H_W_GOOD30%$COLOR_END。無法解除。	icon_status.plusattack_tex	icon_status.plusattack_tex	True
 97504300	Power	Debuff	False	perc	60000	0	1.5	凱爾賽克的挑釁			力量和攻擊速度增加$H_W_GOOD50%$COLOR_END。但異常狀態結束時則立即死亡。	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
@@ -5814,6 +5822,7 @@
 98850039	Block	Stun	False	swch	10000	0	0	幻影詛咒_沉默			效果持續時間內任何種類的技能都不能使用!費比修的詛咒_沈默無法解除。	icon_status.sealskill_tex	icon_status.sealskill_tex	True
 98850040	Power	Buff	True	perc	20000	0	10	窟拉德緒的憤怒			受到幻影的強大力量，攻擊力和攻擊速度暫時大幅增加。	icon_skills.berserk_tex	icon_skills.berserk_tex	True
 98850041	HPChange	DOT	False	perc	10000	1	-0.15	細胞爆發 [轉移]			每$H_W_BAD1s$COLOR_END持續減少$H_W_BAD15%$COLOR_END的HP。經持續時間之後， 減少$H_W_BAD-30000$COLOR_END的HP。$BR細胞爆發 [轉移]會將HP減少效果轉移至周邊。	icon_status.delaydamage_tex	icon_status.delaydamage_tex	True
+98850041	Plague	DOT	False	perc	10000	1	905407	細胞爆發 [轉移]			每$H_W_BAD1s$COLOR_END持續減少$H_W_BAD15%$COLOR_END的HP。經持續時間之後， 減少$H_W_BAD-30000$COLOR_END的HP。$BR細胞爆發 [轉移]會將HP減少效果轉移至周邊。	icon_status.delaydamage_tex	icon_status.delaydamage_tex	True
 98850041	HPLoss	DOT	False	abs	10000	1	-30000	細胞爆發 [轉移]			每$H_W_BAD1s$COLOR_END持續減少$H_W_BAD15%$COLOR_END的HP。經持續時間之後， 減少$H_W_BAD-30000$COLOR_END的HP。$BR細胞爆發 [轉移]會將HP減少效果轉移至周邊。	icon_status.delaydamage_tex	icon_status.delaydamage_tex	True
 98850042	HPChange	Buff	True	perc	12000	3	0.005	HP持續恢復			每$H_W_GOOD3s$COLOR_END持續恢復$H_W_GOOD3%$COLOR_END的HP。	icon_status.delayheal_tex	icon_status.delayheal_tex	True
 98850050	Endurance	Buff	True	perc	60000	0	1	阿勒坤狀態			利用正極磁場效果，將周圍對象全部捕獲。$BR正極磁場無法解除。	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
@@ -6171,9 +6180,9 @@
 99006700	256	Debuff	True	swch	2147483647	0	0	監視者			可偵測附近透明的物體。	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
 99006800	Immune	Buff	True	21	0	0	0	和平時間NPC保護			和平狀態下無法攻擊NPC。	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
 99006800	StatusImmune	Buff	True	swch	0	0	0	和平時間NPC保護			和平狀態下無法攻擊NPC。	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
-99006900	HPChange	Buff	True	perc	30000	1	0.0025	傑里亞德狄亞勒的庇護			傑里亞德狄亞勒所擁有的神聖氣息散播給附近聯盟成員們。	icon_status.delayheal_tex	icon_status.delayheal_tex	True
-99007000	MPChange	Buff	True	perc	30000	1	0.003	德米勒史波萊恩的庇護			德米勒史波萊恩所擁有的核心氣息散播給附近聯盟成員們。	icon_status.aura_of_regeneration_mp_tex	icon_status.aura_of_regeneration_mp_tex	True
-99007100	Endurance	Buff	True	abs	30000	0	1	普拉戴寇卡依倫的庇護			普拉戴寇卡依倫的勇猛散播給附近的聯盟成員們。 	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
+99006900	Plague	Buff	True	abs	0	10	990070	傑里亞德狄亞勒的庇護			傑里亞德狄亞勒所擁有的神聖氣息散播給附近聯盟成員們。	icon_status.delayheal_tex	icon_status.delayheal_tex	True
+99007000	Plague	Buff	True	abs	0	10	990071	德米勒史波萊恩的庇護			德米勒史波萊恩所擁有的核心氣息散播給附近聯盟成員們。	icon_status.aura_of_regeneration_mp_tex	icon_status.aura_of_regeneration_mp_tex	True
+99007100	Plague	Buff	True	abs	0	10	990072	普拉戴寇卡依倫的庇護			普拉戴寇卡依倫的勇猛散播給附近的聯盟成員們。 	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
 99008200	Power	Buff	True	abs	7200000	0	34	連勝的歡呼			在領地裡各聯盟的聯盟成員數量差距出現20名以上時，人數較少的聯盟會套用力量 34、抗打 20。(該BUFF每3分鐘就會確認人數並更新。)	icon_status.mprecoverdown_tex	icon_status.mprecoverdown_tex	True
 99008200	Endurance	Buff	True	abs	7200000	0	20	連勝的歡呼			在領地裡各聯盟的聯盟成員數量差距出現20名以上時，人數較少的聯盟會套用力量 34、抗打 20。(該BUFF每3分鐘就會確認人數並更新。)	icon_status.mprecoverdown_tex	icon_status.mprecoverdown_tex	True
 99008300	Power	Buff	True	abs	7200000	0	41	聯盟鬥爭			為了給在上一場聯盟戰取得前 2/3的聯盟提振勇氣，套用力量 41、抗打 25。如果一支聯盟連勝時，隨著連勝的次數異常狀態會堆疊。(最多堆疊5次。)	icon_status.plusspeedresist_tex	icon_status.plusspeedresist_tex	True
@@ -6186,9 +6195,9 @@
 99008900	Power	Debuff	True	abs	604800000	0	0	聯盟祝福			為了聯盟！	icon_status.battlefieldbuff04_tex	icon_status.battlefieldbuff04_tex	True
 99009000	HPChange	Stun	True	perc	10800000	12	0.003	保護石的力量			保護石每12秒會恢復0.3%的自身HP。	icon_status.vitality_tex	icon_status.vitality_tex	True
 99010000	HPLoss	Debuff	False	perc	30000	0	-0.9	大炮變換			立即變換成大砲。	icon_status.minushp_tex	icon_status.minushp_tex	True
-99010110	Immune	Buff	True	16	30000	0	0	往前突擊！			將突擊司令官所持有的湧出勇氣的效果傳送給周邊聯盟成員們。	icon_skills.armor_passivity_tex	icon_skills.armor_passivity_tex	True
-99010210	Endurance	Buff	True	abs	30000	1	10	金剛不壞			將防禦司令官所持有的像鋼鐵一樣的皮膚的效果傳送給周邊聯盟成員們。	icon_skills.defenceup_tex	icon_skills.defenceup_tex	True
-99010310	StaminaRegen	Buff	True	perc	30000	1	1	連勝的歡呼			將資源司令官所持有的無盡資源的效果傳送給周邊聯盟成員們。	icon_skills.adventgoddess_tex	icon_skills.adventgoddess_tex	True
+99010110	Plague	Buff	True	abs	0	10	990101	往前突擊！			將突擊司令官所持有的湧出勇氣的效果傳送給周邊聯盟成員們。	icon_skills.armor_passivity_tex	icon_skills.armor_passivity_tex	True
+99010210	Plague	Buff	True	abs	0	10	990102	金剛不壞			將防禦司令官所持有的像鋼鐵一樣的皮膚的效果傳送給周邊聯盟成員們。	icon_skills.defenceup_tex	icon_skills.defenceup_tex	True
+99010310	Plague	Buff	True	abs	0	10	990103	連勝的歡呼			將資源司令官所持有的無盡資源的效果傳送給周邊聯盟成員們。	icon_skills.adventgoddess_tex	icon_skills.adventgoddess_tex	True
 99020000	MaxHP	Buff	True	perc	0	0	1.01	巴其溫的勇猛 I			最近7日內上線3~4日時獲得下面效果。$BR$BR和平狀態下移動速度增加$H_W_GOOD7$COLOR_END $BR最大HP增加 $H_W_GOOD1%$COLOR_END $BR力量增加$H_W_GOOD1$COLOR_END。$BR$BR此效果可套用於帳號內的所有角色。	icon_status.archerspirit_tex	icon_status.archerspirit_tex	True
 99020000	Power	Buff	True	abs	0	0	1	巴其溫的勇猛 I			最近7日內上線3~4日時獲得下面效果。$BR$BR和平狀態下移動速度增加$H_W_GOOD7$COLOR_END $BR最大HP增加 $H_W_GOOD1%$COLOR_END $BR力量增加$H_W_GOOD1$COLOR_END。$BR$BR此效果可套用於帳號內的所有角色。	icon_status.archerspirit_tex	icon_status.archerspirit_tex	True
 99020000	OutOfCombatMovSpd	Buff	True	abs	0	0	7	巴其溫的勇猛 I			最近7日內上線3~4日時獲得下面效果。$BR$BR和平狀態下移動速度增加$H_W_GOOD7$COLOR_END $BR最大HP增加 $H_W_GOOD1%$COLOR_END $BR力量增加$H_W_GOOD1$COLOR_END。$BR$BR此效果可套用於帳號內的所有角色。	icon_status.archerspirit_tex	icon_status.archerspirit_tex	True
@@ -6310,7 +6319,7 @@
 999009810	Endurance	Buff	True	perc	60000	0	2	污染體			你被工廠廢棄物給污染了，在周圍有持續造成傷害的龍卷風在纏繞你。	icon_status.darkriftareawind_tex	icon_status.darkriftareawind_tex	True
 999009810	MovSpdInCombat	Buff	True	seta	60000	0	200	污染體			你被工廠廢棄物給污染了，在周圍有持續造成傷害的龍卷風在纏繞你。	icon_status.darkriftareawind_tex	icon_status.darkriftareawind_tex	True
 999009810	OutOfCombatMovSpd	Buff	True	seta	60000	0	200	污染體			你被工廠廢棄物給污染了，在周圍有持續造成傷害的龍卷風在纏繞你。	icon_status.darkriftareawind_tex	icon_status.darkriftareawind_tex	True
-999009810	HPChange	Debuff	True	perc	2000	1	-20000	污染體			你被工廠廢棄物給污染了，在周圍有持續造成傷害的龍卷風在纏繞你。	icon_status.darkriftareawind_tex	icon_status.darkriftareawind_tex	True
+999009810	Plague	Buff	True	7	60000	1	1495	污染體			你被工廠廢棄物給污染了，在周圍有持續造成傷害的龍卷風在纏繞你。	icon_status.darkriftareawind_tex	icon_status.darkriftareawind_tex	True
 999009820	Power	Buff	True	perc	60000	0	1.5	保護膜			產生傷害吸收保護膜，力量增加$H_W_GOOD50%$COLOR_END。現在剩下的只有屠殺敵人而已。	icon_status.plusfocus_tex	icon_status.plusfocus_tex	True
 999009820	Absorb	Buff	True	swch	60000	0	100000	保護膜			產生傷害吸收保護膜，力量增加$H_W_GOOD50%$COLOR_END。現在剩下的只有屠殺敵人而已。	icon_status.plusfocus_tex	icon_status.plusfocus_tex	True
 999010000	PVPDef	Buff	True	abs	0	0	0	戰場 綠鈦強化彈			戰場鬥士基本獲得的綠鈦強化彈效果。使用綠鈦強化彈讓效果擴大化。	icon_items.union_supplies5_tex	icon_items.union_supplies5_tex	True

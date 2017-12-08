@@ -9,6 +9,7 @@
 		<Monster name="휴먼 남 궁수" id="10106" isBoss="False" hp="0" />
 		<Monster name="휴먼 남 사제" id="10107" isBoss="False" hp="0" />
 		<Monster name="휴먼 남 정령사" id="10108" isBoss="False" hp="0" />
+		<Monster name="휴먼 남 권술사" id="10111" isBoss="False" hp="0" />
 		<Monster name="휴먼 여 검투사" id="10201" isBoss="False" hp="0" />
 		<Monster name="휴먼 여 창기사" id="10202" isBoss="False" hp="0" />
 		<Monster name="휴먼 여 무사" id="10203" isBoss="False" hp="0" />
@@ -14406,6 +14407,7 @@
 		<Monster name="천공의 보물 찾기 교환원G" id="160315" isBoss="False" hp="10000" />
 		<Monster name="천공의 보물 찾기 교환원H" id="160316" isBoss="False" hp="10000" />
 		<Monster name="천공의 보물 찾기 교환원(루키(비기너))" id="160317" isBoss="False" hp="10000" />
+		<Monster name="멍더풀" id="160319" isBoss="False" hp="10000" />
 		<Monster name="크리스마스의 악몽" id="300937" isBoss="False" hp="723" />
 		<Monster name="튼튼한 칼라쉬 아르메로" id="885061" isBoss="False" hp="405000000" />
 		<Monster name="샨드라마나이아" id="885200" isBoss="False" hp="3150000000" />

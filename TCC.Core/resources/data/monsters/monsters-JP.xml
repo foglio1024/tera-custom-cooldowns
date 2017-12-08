@@ -86,6 +86,7 @@
 		<Monster name="エリーン プリースト" id="11007" isBoss="False" hp="0" />
 		<Monster name="エリーン エレメンタリスト" id="11008" isBoss="False" hp="0" />
 		<Monster name="エリーンソウルリーパー" id="11009" isBoss="False" hp="0" />
+		<Monster name="エリーンヘビーガンナー" id="11010" isBoss="False" hp="0" />
 		<Monster name="エリーンくノ一" id="11012" isBoss="False" hp="0" />
 		<Monster name="バラカ男ウォーリアー" id="11101" isBoss="False" hp="0" />
 		<Monster name="バラカ男ランサー" id="11102" isBoss="False" hp="0" />
@@ -5067,6 +5068,8 @@
 		<Monster name="深い夜・ダナム" id="6047" isBoss="False" hp="10000" />
 		<Monster name="セノミア・エリーン" id="6048" isBoss="False" hp="10000" />
 		<Monster name="貪欲のアナンシャ" id="7001" isBoss="True" hp="737685828" />
+		<Monster name="激昂のカラゴス" id="7002" isBoss="True" hp="737685828" />
+		<Monster name="虐殺のサブラニア" id="7003" isBoss="True" hp="737685828" />
 	</Zone>
 	<Zone id="172" name="原始の地" >
 		<Monster name="ポアロン" id="1000" isBoss="False" hp="366797" />
@@ -13684,7 +13687,7 @@
 		<Monster name="ニンピ妖精戦士" id="885117" isBoss="False" hp="3500000" />
 		<Monster name="獰猛なマリゴス" id="885118" isBoss="False" hp="3500000" />
 		<Monster name="ゴリラ" id="885119" isBoss="False" hp="3500000" />
-		<Monster name="ラマヤン・ビビッシュ" id="885121" isBoss="False" hp="2147483647" />
+		<Monster name="ラマヤン・ビビッシュ" id="885121" isBoss="False" hp="3600000000" />
 		<Monster name="アルゴンの壁" id="885122" isBoss="False" hp="3000000" />
 		<Monster name="猛毒の寄生野獣" id="885131" isBoss="False" hp="0" />
 		<Monster name="奇妙な幻影の魔石" id="885132" isBoss="False" hp="5000000" />
@@ -14051,7 +14054,7 @@
 		<Monster name="中級兵士" id="99903" isBoss="False" hp="91545" />
 		<Monster name="兵士" id="99904" isBoss="False" hp="91545" />
 	</Zone>
-	<Zone id="935" name="究極のRK-9格納庫" >
+	<Zone id="935" name="Ultimate RK-9格納庫" >
 		<Monster name="移動ポータル" id="100" isBoss="False" hp="10000" />
 		<Monster name="移動ポータル" id="101" isBoss="False" hp="10000" />
 		<Monster name="移動ポータル" id="102" isBoss="False" hp="10000" />
@@ -14063,11 +14066,11 @@
 		<Monster name="磁場解除装備をすべて作動させよう" id="914" isBoss="False" hp="0" />
 		<Monster name="ヘキサフレオンを討伐せよ" id="915" isBoss="False" hp="0" />
 		<Monster name="究極のRK-9を討伐せよ" id="916" isBoss="False" hp="0" />
-		<Monster name="ベンタロン" id="1000" isBoss="True" hp="2147483647" />
+		<Monster name="ベンタロン" id="1000" isBoss="True" hp="2880000000" />
 		<Monster name="時限爆弾" id="1009" isBoss="False" hp="6750000" />
 		<Monster name="次元の魔法石" id="1501" isBoss="False" hp="10000" />
-		<Monster name="ヘキサフレオン" id="2000" isBoss="True" hp="2147483647" />
-		<Monster name="究極のRK-9" id="3000" isBoss="True" hp="2147483647" />
+		<Monster name="ヘキサフレオン" id="2000" isBoss="True" hp="3072000000" />
+		<Monster name="究極のRK-9" id="3000" isBoss="True" hp="3670000000" />
 		<Monster name="格納庫の部品箱" id="5000" isBoss="False" hp="500000" />
 		<Monster name="ランダンの遺品箱" id="5001" isBoss="False" hp="500000" />
 		<Monster name="謎の老人" id="6002" isBoss="False" hp="1" />

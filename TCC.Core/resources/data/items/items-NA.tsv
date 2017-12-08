@@ -20965,7 +20965,7 @@
 88606	3	Pumped Prospect Necklace	0	0	icon_equipments.necklace_29_tex
 88607	3	Pumped Prospect Earring	0	0	icon_equipments.earring_23_tex
 88608	3	Pumped Prospect Ring	0	0	icon_equipments.ring_23_tex
-88609	3	Verdant Circlet	0	0	icon_equipments.acc_616_tex
+88609	3	Prospect Circlet	0	0	icon_equipments.acc_616_tex
 88610	3	Carving Bellum Necklace	200	0	icon_equipments.necklace_31_tex
 88611	3	Carving Bellum Earring	200	0	icon_equipments.earring_25_tex
 88612	3	Carving Bellum Ring	200	0	icon_equipments.ring_25_tex
@@ -21882,6 +21882,30 @@
 92099	3	Amelior	0	0	icon_equipments.staff6_b_tex
 92100	3	Assuagia	0	0	icon_equipments.rod6_e_tex
 92101	3	Shifteur	0	0	icon_equipments.chain30_b_tex
+92102	2	Elin Pink Will Suit	0	0	icon_equipments.popori_f_b07_body_tex
+92103	2	Elin Pink Will Suit	0	0	icon_equipments.popori_f_b07_body_tex
+92104	2	Elin Pink Will Suit (3 Days)	0	0	icon_equipments.popori_f_b07_body_tex
+92105	2	Elin Pink Will Suit (7 Days)	0	0	icon_equipments.popori_f_b07_body_tex
+92106	2	Elin Pink Will Suit (7 Days)	0	0	icon_equipments.popori_f_b07_body_tex
+92107	2	Elin Pink Will Suit (14 Days)	0	0	icon_equipments.popori_f_b07_body_tex
+92108	2	Elin Pink Will Suit (30 Days)	0	0	icon_equipments.popori_f_b07_body_tex
+92109	2	Elin Pink Will Suit (30 Days)	0	0	icon_equipments.popori_f_b07_body_tex
+92110	2	Elin Pink Will Suit	0	0	icon_equipments.popori_f_b07_body_tex
+92111	2	Elin Pink Will Suit	0	0	icon_equipments.popori_f_b07_body_tex
+92112	2	Elin Pink Will Suit	0	0	icon_equipments.popori_f_b07_body_tex
+92113	2	Elin Pink Will Suit	0	0	icon_equipments.popori_f_b07_body_tex
+92114	2	Elin Pink Arcannon	0	0	icon_equipments.blaster29_c_tex
+92115	2	Elin Pink Arcannon	0	0	icon_equipments.blaster29_c_tex
+92116	2	Elin Pink Arcannon (3 Days)	0	0	icon_equipments.blaster29_c_tex
+92117	2	Elin Pink Arcannon (7 Days)	0	0	icon_equipments.blaster29_c_tex
+92118	2	Elin Pink Arcannon (7 Days)	0	0	icon_equipments.blaster29_c_tex
+92119	2	Elin Pink Arcannon (14 Days)	0	0	icon_equipments.blaster29_c_tex
+92120	2	Elin Pink Arcannon (30 Days)	0	0	icon_equipments.blaster29_c_tex
+92121	2	Elin Pink Arcannon (30 Days)	0	0	icon_equipments.blaster29_c_tex
+92122	2	Elin Pink Arcannon	0	0	icon_equipments.blaster29_c_tex
+92123	2	Elin Pink Arcannon	0	0	icon_equipments.blaster29_c_tex
+92124	2	Elin Pink Arcannon	0	0	icon_equipments.blaster29_c_tex
+92125	2	Elin Pink Arcannon	0	0	icon_equipments.blaster29_c_tex
 93102	2	Snowfall Cuirass for a Week	0	0	icon_equipments.lightchest16_tex
 93103	2	Snowfall Hauberk for a Week	0	0	icon_equipments.heavychest16_tex
 93104	2	Snowfall Robe for a Week	0	0	icon_equipments.robechest16_tex
@@ -23742,11 +23766,22 @@
 98566	2	Rare Etching Crystal	0	0	icon_items.q_piece_03_tex
 98567	3	Superior Etching Crystal	0	0	icon_items.q_piece_tex
 98568	3	Metamorphic Emblem Chest	0	0	icon_items.premiumbox_enchant_tex
+98569	0	Complete Crystalbind (1 hour)	0	180	icon_items.weapon_scrolla12_tex
+98570	0	Complete Veteran Crystalbind (3 hours)	0	180	icon_items.weapon_scrolla12_tex
+98571	0	Complete Crystalbind (3 hours)	0	180	icon_items.weapon_scrolla12_tex
+98572	0	Complete Veteran Crystalbind (6 hours)	0	180	icon_items.weapon_scrolla12_tex
+98573	0	Complete Crystalbind (6 hours)	0	180	icon_items.weapon_scrolla12_tex
 98574	3	Regal Guild Supplies	0	1	icon_items.mysterybox5_tex
 98575	2	Princely Guild Supplies	0	1	icon_items.mysterybox5_tex
 98576	1	Baronial Guild Supplies	0	1	icon_items.mysterybox2_tex
 98577	0	Ducal Guild Supplies	0	1	icon_items.mysterybox1_tex
 98578	2	Guild Supplies	0	0	icon_items.mysterybox1_tex
+98584	2	Corsairs' Stronghold Victory Chest	0	0	icon_items.tresurebox1_tex
+98585	2	Fraywind Canyon Victory Chest	0	0	icon_items.tresurebox1_tex
+98586	2	Kumasylum Victory Chest	0	0	icon_items.tresurebox1_tex
+98587	2	Gridiron Victory Chest	0	0	icon_items.tresurebox1_tex
+98588	2	Kumas Royale Victory Chest	0	0	icon_items.tresurebox1_tex
+98589	2	Iron Battleground Victory Chest	0	0	icon_items.tresurebox1_tex
 99000	0	Battleground Inner Armor	0	0	icon_equipments.underwear00_m_tex
 99001	0	Battleground Circlet	0	0	icon_equipments.acc_580_tex
 99011	0	Expiring Anthrozombie Elixir (1 hour)	0	3	icon_items.rare_potion11_tex
@@ -23766,7 +23801,7 @@
 99102	2	Flying Skill: Ghost Dragon	0	0	icon_items.skillbook_lion1_tex
 99103	2	Flying Skill: Diamond Dragon	0	0	icon_items.skillbook_lion1_tex
 99104	3	Flying Skill: Royal Iron Dragon	0	0	icon_items.skillbook_lion1_tex
-99105	3	Flying Skill: Royal Crimson Dragon	0	0	icon_items.skillbook_lion1_tex
+99105	3	Flying Skill: Crimsonscale	0	0	icon_items.skillbook_lion1_tex
 99106	3	Flying Skill: Royal Ghost Dragon	0	0	icon_items.skillbook_lion1_tex
 99107	3	Flying Skill: Royal Diamond Dragon	0	0	icon_items.skillbook_lion1_tex
 99108	2	Flying Skill: Ironhide	0	0	icon_items.skillbook_lion1_tex
@@ -23782,7 +23817,7 @@
 99118	2	Flying Skill: Ghost Dragon	0	0	icon_items.skillbook_lion1_tex
 99119	2	Flying Skill: Diamond Dragon	0	0	icon_items.skillbook_lion1_tex
 99120	3	Flying Skill: Royal Iron Dragon	0	0	icon_items.skillbook_lion1_tex
-99121	3	Flying Skill: Royal Crimson Dragon	0	0	icon_items.skillbook_lion1_tex
+99121	3	Flying Skill: Crimsonscale	0	0	icon_items.skillbook_lion1_tex
 99122	3	Flying Skill: Royal Ghost Dragon	0	0	icon_items.skillbook_lion1_tex
 99123	3	Flying Skill: Royal Diamond Dragon	0	0	icon_items.skillbook_lion1_tex
 99124	2	Flying Skill: Ironhide	0	0	icon_items.skillbook_lion1_tex
@@ -24162,6 +24197,30 @@
 99504	3	Fortified Pinkalicious Innerwear	0	0	icon_equipments.pc_event_57_f_b_tex
 99505	3	Insulated Pinkalicious Innerwear	0	0	icon_equipments.pc_event_57_f_b_tex
 99506	3	Performance Pinkalicious Innerwear	0	0	icon_equipments.pc_event_57_f_b_tex
+99507	3	Footsteps: Rubber Duck	0	0	icon_items.footprint_rubberduck_tex
+99508	3	Footsteps: Rubber Duck	0	0	icon_items.footprint_rubberduck_tex
+99509	3	Footsteps: Rubber Duck (3 Days)	0	0	icon_items.footprint_rubberduck_tex
+99510	3	Footsteps: Rubber Duck (7 Days)	0	0	icon_items.footprint_rubberduck_tex
+99511	3	Footsteps: Rubber Duck (7 Days)	0	0	icon_items.footprint_rubberduck_tex
+99512	3	Footsteps: Rubber Duck (14 Days)	0	0	icon_items.footprint_rubberduck_tex
+99513	3	Footsteps: Rubber Duck (30 Days)	0	0	icon_items.footprint_rubberduck_tex
+99514	3	Footsteps: Rubber Duck (30 Days)	0	0	icon_items.footprint_rubberduck_tex
+99515	3	Footsteps: Rubber Duck	0	0	icon_items.footprint_rubberduck_tex
+99516	3	Footsteps: Rubber Duck	0	0	icon_items.footprint_rubberduck_tex
+99517	3	Footsteps: Rubber Duck	0	0	icon_items.footprint_rubberduck_tex
+99518	3	Footsteps: Rubber Duck	0	0	icon_items.footprint_rubberduck_tex
+99519	2	Footsteps: Cutie	0	0	icon_items.footprint_elin_tex
+99520	2	Footsteps: Cutie	0	0	icon_items.footprint_elin_tex
+99521	2	Footsteps: Cutie (3 Days)	0	0	icon_items.footprint_elin_tex
+99522	2	Footsteps: Cutie (7 Days)	0	0	icon_items.footprint_elin_tex
+99523	2	Footsteps: Cutie (7 Days)	0	0	icon_items.footprint_elin_tex
+99524	2	Footsteps: Cutie (14 Days)	0	0	icon_items.footprint_elin_tex
+99525	2	Footsteps: Cutie (30 Days)	0	0	icon_items.footprint_elin_tex
+99526	2	Footsteps: Cutie (30 Days)	0	0	icon_items.footprint_elin_tex
+99527	2	Footsteps: Cutie	0	0	icon_items.footprint_elin_tex
+99528	2	Footsteps: Cutie	0	0	icon_items.footprint_elin_tex
+99529	2	Footsteps: Cutie	0	0	icon_items.footprint_elin_tex
+99530	2	Footsteps: Cutie	0	0	icon_items.footprint_elin_tex
 99531	2	Flying Skill: Azure Phoenix	0	0	icon_items.skillbook_lion1_tex
 99532	3	Flying Skill: Urvog	0	0	icon_items.skillbook_lion1_tex
 99533	2	Flying Skill: Blue Phoenix	0	0	icon_items.skillbook_lion1_tex
@@ -24210,6 +24269,42 @@
 99576	3	Flying Skill: Fiery Phoenix (7 Days)	0	0	icon_items.skillbook_lion1_tex
 99577	3	Flying Skill: Fiery Phoenix (14 Days)	0	0	icon_items.skillbook_lion1_tex
 99578	3	Flying Skill: Fiery Phoenix (30 Days)	0	0	icon_items.skillbook_lion1_tex
+99579	3	Footsteps: Pink Kkultteok Plate	0	0	icon_items.footprint_ricecake02_tex
+99580	3	Footsteps: Pink Kkultteok Plate	0	0	icon_items.footprint_ricecake02_tex
+99581	3	Footsteps: Pink Kkultteok Plate (3 Days)	0	0	icon_items.footprint_ricecake02_tex
+99582	3	Footsteps: Pink Kkultteok Plate (7 Days)	0	0	icon_items.footprint_ricecake02_tex
+99583	3	Footsteps: Pink Kkultteok Plate (7 Days)	0	0	icon_items.footprint_ricecake02_tex
+99584	3	Footsteps: Pink Kkultteok Plate (14 Days)	0	0	icon_items.footprint_ricecake02_tex
+99585	3	Footsteps: Pink Kkultteok Plate (30 Days)	0	0	icon_items.footprint_ricecake02_tex
+99586	3	Footsteps: Pink Kkultteok Plate (30 Days)	0	0	icon_items.footprint_ricecake02_tex
+99587	3	Footsteps: Pink Kkultteok Plate	0	0	icon_items.footprint_ricecake02_tex
+99588	3	Footsteps: Pink Kkultteok Plate	0	0	icon_items.footprint_ricecake02_tex
+99589	3	Footsteps: Pink Kkultteok Plate	0	0	icon_items.footprint_ricecake02_tex
+99590	3	Footsteps: Pink Kkultteok Plate	0	0	icon_items.footprint_ricecake02_tex
+99591	3	Footsteps: Blue Kkultteok Plate	0	0	icon_items.footprint_ricecake01_tex
+99592	3	Footsteps: Blue Kkultteok Plate	0	0	icon_items.footprint_ricecake01_tex
+99593	3	Footsteps: Blue Kkultteok Plate (3 Days)	0	0	icon_items.footprint_ricecake01_tex
+99594	3	Footsteps: Blue Kkultteok Plate (7 Days)	0	0	icon_items.footprint_ricecake01_tex
+99595	3	Footsteps: Blue Kkultteok Plate (7 Days)	0	0	icon_items.footprint_ricecake01_tex
+99596	3	Footsteps: Blue Kkultteok Plate (14 Days)	0	0	icon_items.footprint_ricecake01_tex
+99597	3	Footsteps: Blue Kkultteok Plate (30 Days)	0	0	icon_items.footprint_ricecake01_tex
+99598	3	Footsteps: Blue Kkultteok Plate (30 Days)	0	0	icon_items.footprint_ricecake01_tex
+99599	3	Footsteps: Blue Kkultteok Plate	0	0	icon_items.footprint_ricecake01_tex
+99600	3	Footsteps: Blue Kkultteok Plate	0	0	icon_items.footprint_ricecake01_tex
+99601	3	Footsteps: Blue Kkultteok Plate	0	0	icon_items.footprint_ricecake01_tex
+99602	3	Footsteps: Blue Kkultteok Plate	0	0	icon_items.footprint_ricecake01_tex
+99603	3	Footsteps: Chromatic Kkultteok Plate	0	0	icon_items.footprint_ricecake03_tex
+99604	3	Footsteps: Chromatic Kkultteok Plate	0	0	icon_items.footprint_ricecake03_tex
+99605	3	Footsteps: Chromatic Kkultteok Plate (3 Days)	0	0	icon_items.footprint_ricecake03_tex
+99606	3	Footsteps: Chromatic Kkultteok Plate (7 Days)	0	0	icon_items.footprint_ricecake03_tex
+99607	3	Footsteps: Chromatic Kkultteok Plate (7 Days)	0	0	icon_items.footprint_ricecake03_tex
+99608	3	Footsteps: Chromatic Kkultteok Plate (14 Days)	0	0	icon_items.footprint_ricecake03_tex
+99609	3	Footsteps: Chromatic Kkultteok Plate (30 Days)	0	0	icon_items.footprint_ricecake03_tex
+99610	3	Footsteps: Chromatic Kkultteok Plate (30 Days)	0	0	icon_items.footprint_ricecake03_tex
+99611	3	Footsteps: Chromatic Kkultteok Plate	0	0	icon_items.footprint_ricecake03_tex
+99612	3	Footsteps: Chromatic Kkultteok Plate	0	0	icon_items.footprint_ricecake03_tex
+99613	3	Footsteps: Chromatic Kkultteok Plate	0	0	icon_items.footprint_ricecake03_tex
+99614	3	Footsteps: Chromatic Kkultteok Plate	0	0	icon_items.footprint_ricecake03_tex
 99615	1	Reinforced Gym Skivvies	0	0	icon_equipments.underwear00_f_tex
 99616	1	Fitness Woolens	0	0	icon_equipments.underwear00_f_tex
 99617	1	Fortified Woolens	0	0	icon_equipments.underwear00_f_tex
@@ -25096,7 +25191,7 @@
 200900	3	Regent's Bow	0	0	icon_equipments.bow24_c_tex
 200901	3	Regent's Staff	0	0	icon_equipments.staff24_c_tex
 200902	3	Regent's Scepter	0	0	icon_equipments.rod24_c_tex
-200903	3	Regent's Arccannon	0	5	icon_equipments.blaster31_b_tex
+200903	3	Regent's Arcannon	0	5	icon_equipments.blaster31_b_tex
 200904	3	Sterling Hauberk Template	0	0	icon_equipments.heavychest_silver_tex
 200905	3	Sterling Cuirass Template	0	0	icon_equipments.lightchest_silver_tex
 200906	3	Sterling Robe Template	0	0	icon_equipments.robechest_silver_tex
@@ -25221,6 +25316,54 @@
 201300	3	Vanguard Ornamental Hauberk	0	0	icon_equipments.heavychest21_tex
 201301	3	Vanguard Ornamental Cuirass	0	0	icon_equipments.lightchest21_tex
 201302	3	Vanguard Ornamental Robe	0	0	icon_equipments.robechest21_tex
+201303	3	Riddler Hauberk	0	0	icon_equipments.heavychest26_tex
+201304	3	Riddler Cuirass	0	0	icon_equipments.lightchest26_tex
+201305	3	Riddler Robe	0	0	icon_equipments.robechest26_tex
+201306	3	Oneiric Hauberk	0	0	icon_equipments.heavychest_be_tex
+201307	3	Oneiric Cuirass	0	0	icon_equipments.lightchest_be_tex
+201308	3	Oneiric Robe	0	0	icon_equipments.robechest_be_tex
+201309	3	Sterling Hauberk	0	0	icon_equipments.heavychest_silver_tex
+201310	3	Sterling Cuirass	0	0	icon_equipments.lightchest_silver_tex
+201311	3	Sterling Robe	0	0	icon_equipments.robechest_silver_tex
+201312	3	Clear & Present Weapon Skins	0	0	icon_equipments.dual27_a_tex
+201313	3	Silverspike Weapon Skin	0	0	icon_equipments.lance27_a_tex
+201314	3	Lipsplitter Weapon Skin	0	0	icon_equipments.twohand27_a_tex
+201315	3	Gleaming Axe Weapon Skin	0	0	icon_equipments.axe27_a_tex
+201316	3	Dreamround Weapon Skin	0	0	icon_equipments.circle27_a_tex
+201317	3	Anticipation's Reach Weapon Skin	0	0	icon_equipments.bow27_a_tex
+201318	3	Night Sentiment Weapon Skin	0	0	icon_equipments.staff27_a_tex
+201319	3	Judge's Scepter Weapon Skin	0	0	icon_equipments.rod27_a_tex
+201320	3	Ruthless Scythes Weapon Skin	0	0	icon_equipments.chain30_b_tex
+201321	3	Ruthless Arcannon Weapon Skin	0	0	icon_equipments.blaster31_a_tex
+201322	3	Ruthless Powerfists Weapon Skin	0	0	icon_equipments.gauntlet1_a_tex
+201323	3	Ruthless Shuriken Weapon Skin	0	0	icon_equipments.shuriken05_b_tex
+201324	3	Ruthless Runeglaive Weapon Skin	0	0	icon_equipments.glaive03_b_tex
+201325	3	Noctenite Twin Swords	0	0	icon_equipments.dual25_tex
+201326	3	Noctenite Lance	0	0	icon_equipments.lance25_tex
+201327	3	Noctenite Greatsword	0	0	icon_equipments.twohand25_tex
+201328	3	Noctenite Axe	0	0	icon_equipments.axe25_tex
+201329	3	Noctenite Disc	0	0	icon_equipments.circle25_tex
+201330	3	Noctenite Bow	0	0	icon_equipments.bow25_tex
+201331	3	Noctenite Staff	0	0	icon_equipments.staff25_tex
+201332	3	Noctenite Scepter	0	0	icon_equipments.rod25_tex
+201333	3	Noctenite Scythes	0	0	icon_equipments.chain28_tex
+201334	3	Noctenite Arcannon	0	0	icon_equipments.blaster30_b_tex
+201335	3	Noctenite Powerfists	0	0	icon_equipments.gauntlet1_b_tex
+201336	3	Noctenite Shuriken	0	0	icon_equipments.shuriken03_tex
+201337	3	Noctenite Runeglaive	0	0	icon_equipments.glaive01_tex
+201338	3	Regent's Twin Swords	0	0	icon_equipments.dual24_c_tex
+201339	3	Regent's Lance	0	0	icon_equipments.lance24_c_tex
+201340	3	Regent's Greatsword	0	0	icon_equipments.twohand24_c_tex
+201341	3	Regent's Axe	0	0	icon_equipments.axe24_c_tex
+201342	3	Regent's Disc	0	0	icon_equipments.circle24_c_tex
+201343	3	Regent's Bow	0	0	icon_equipments.bow24_c_tex
+201344	3	Regent's Staff	0	0	icon_equipments.staff24_c_tex
+201345	3	Regent's Scepter	0	0	icon_equipments.rod24_c_tex
+201346	3	Regent's Scythes	0	0	icon_equipments.chain30_tex
+201347	3	Regent's Arcannon	0	0	icon_equipments.blaster31_b_tex
+201348	3	Regent's Powerfists	0	0	icon_equipments.gauntlet29_a_tex
+201349	3	Regent's Shuriken	0	0	icon_equipments.shuriken03_b_tex
+201350	3	Regent's Runeglaive	0	0	icon_equipments.glaive02_a_tex
 20000000	0	Money	0	0	icon_items.goldcoin_tex
 20000001	0	XP	0	0	icon_items.icon_exp_tex
 20000002	0	Unspecified Reward	0	0	icon_items.icon_reward_unclear_tex
@@ -25406,6 +25549,26 @@
 247634	2	Smartbox: Rare elemental weapon	0	1	icon_items.premiumbox_weapon3_tex
 247635	2	Smartbox: Rare elemental weapon (3 days)	0	1	icon_items.premiumbox_weapon3_tex
 247636	2	Wheel of Fortune box	0	0	icon_items.premiumbox_weapon4_tex
+247637	2	Wheel of Fortune box: Blue Phoenix	0	0	icon_items.premiumbox_crystalarmor_tex
+247638	2	Wheel of Fortune box: Red Phoenix	0	0	icon_items.premiumbox_crystalweapon_tex
+247639	2	Smartbox: Suit or dress (non-tradable)	0	1	icon_items.premiumbox_dress3_tex
+247640	2	Smartbox: Suit or dress (tradable)	0	1	icon_items.premiumbox_dress3_tex
+247641	2	Smartbox: Suit or dress (3 days)	0	1	icon_items.premiumbox_dress3_tex
+247642	2	Smartbox: Suit or dress (non-tradable)	0	1	icon_items.premiumbox_dress3_tex
+247643	2	Smartbox: Suit or dress (tradable)	0	1	icon_items.premiumbox_dress3_tex
+247644	2	Smartbox: Suit or dress (3 days)	0	1	icon_items.premiumbox_dress3_tex
+247645	2	Smartbox: Mummy costume (non-tradable)	0	1	icon_items.premiumbox_dress3_tex
+247646	2	Smartbox: Mummy costume (tradable)	0	1	icon_items.premiumbox_dress3_tex
+247647	2	Smartbox: Mummy costume (3 days)	0	1	icon_items.premiumbox_dress3_tex
+247648	2	Smartbox: Dyeable mummy costume (non-tradable)	0	1	icon_items.premiumbox_dress3_tex
+247649	2	Smartbox: Dyeable mummy costume (tradable)	0	1	icon_items.premiumbox_dress3_tex
+247650	2	Smartbox: Dyeable mummy costume (3 days)	0	1	icon_items.premiumbox_dress3_tex
+247651	2	Smartbox: Elemental costume (non-tradable)	0	1	icon_items.premiumbox_dress3_tex
+247652	2	Smartbox: Elemental costume	0	1	icon_items.premiumbox_dress3_tex
+247653	2	Smartbox: Elemental costume (3 days)	0	1	icon_items.premiumbox_dress3_tex
+247654	2	Smartbox: Rare elemental costume (non-tradable)	0	1	icon_items.premiumbox_dress3_tex
+247655	2	Smartbox: Rare elemental costume	0	1	icon_items.premiumbox_dress3_tex
+247656	2	Smartbox: Rare elemental costume (3 days)	0	1	icon_items.premiumbox_dress3_tex
 250000	3	Human Male SWAT Uniform	0	0	icon_equipments.pc_event_43_m_tex
 250001	3	Human Male SWAT Uniform	0	0	icon_equipments.pc_event_43_m_tex
 250002	3	Human Male SWAT Uniform	0	0	icon_equipments.pc_event_43_m_tex
@@ -32546,6 +32709,162 @@
 257525	3	Icy Hot Skull Mask	0	0	icon_equipments.acc_625_tex
 257526	3	Icy Hot Skull Mask	0	0	icon_equipments.acc_625_tex
 257527	3	Icy Hot Skull Mask	0	0	icon_equipments.acc_625_tex
+257528	3	Human Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257529	3	Human Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257530	3	Human Female Star Honey Outfit (3 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257531	3	Human Female Star Honey Outfit (7 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257532	3	Human Female Star Honey Outfit (7 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257533	3	Human Female Star Honey Outfit (14 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257534	3	Human Female Star Honey Outfit (30 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257535	3	Human Female Star Honey Outfit (30 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257536	3	Human Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257537	3	Human Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257538	3	Human Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257539	3	Human Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257540	3	Dyeable Human Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257541	3	Dyeable Human Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257542	3	Dyeable Human Female Star Honey Outfit (3 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257543	3	Dyeable Human Female Star Honey Outfit (7 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257544	3	Dyeable Human Female Star Honey Outfit (7 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257545	3	Dyeable Human Female Star Honey Outfit (14 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257546	3	Dyeable Human Female Star Honey Outfit (30 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257547	3	Dyeable Human Female Star Honey Outfit (30 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257548	3	Dyeable Human Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257549	3	Dyeable Human Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257550	3	Dyeable Human Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257551	3	Dyeable Human Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257552	3	High Elf Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257553	3	High Elf Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257554	3	High Elf Female Star Honey Outfit (3 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257555	3	High Elf Female Star Honey Outfit (7 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257556	3	High Elf Female Star Honey Outfit (7 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257557	3	High Elf Female Star Honey Outfit (14 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257558	3	High Elf Female Star Honey Outfit (30 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257559	3	High Elf Female Star Honey Outfit (30 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257560	3	High Elf Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257561	3	High Elf Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257562	3	High Elf Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257563	3	High Elf Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257564	3	Dyeable High Elf Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257565	3	Dyeable High Elf Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257566	3	Dyeable High Elf Female Star Honey Outfit (3 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257567	3	Dyeable High Elf Female Star Honey Outfit (7 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257568	3	Dyeable High Elf Female Star Honey Outfit (7 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257569	3	Dyeable High Elf Female Star Honey Outfit (14 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257570	3	Dyeable High Elf Female Star Honey Outfit (30 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257571	3	Dyeable High Elf Female Star Honey Outfit (30 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257572	3	Dyeable High Elf Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257573	3	Dyeable High Elf Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257574	3	Dyeable High Elf Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257575	3	Dyeable High Elf Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257576	3	Aman Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257577	3	Aman Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257578	3	Aman Female Star Honey Outfit (3 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257579	3	Aman Female Star Honey Outfit (7 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257580	3	Aman Female Star Honey Outfit (7 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257581	3	Aman Female Star Honey Outfit (14 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257582	3	Aman Female Star Honey Outfit (30 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257583	3	Aman Female Star Honey Outfit (30 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257584	3	Aman Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257585	3	Aman Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257586	3	Aman Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257587	3	Aman Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257588	3	Dyeable Aman Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257589	3	Dyeable Aman Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257590	3	Dyeable Aman Female Star Honey Outfit (3 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257591	3	Dyeable Aman Female Star Honey Outfit (7 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257592	3	Dyeable Aman Female Star Honey Outfit (7 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257593	3	Dyeable Aman Female Star Honey Outfit (14 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257594	3	Dyeable Aman Female Star Honey Outfit (30 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257595	3	Dyeable Aman Female Star Honey Outfit (30 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257596	3	Dyeable Aman Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257597	3	Dyeable Aman Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257598	3	Dyeable Aman Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257599	3	Dyeable Aman Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257600	3	Castanic Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257601	3	Castanic Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257602	3	Castanic Female Star Honey Outfit (3 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257603	3	Castanic Female Star Honey Outfit (7 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257604	3	Castanic Female Star Honey Outfit (7 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257605	3	Castanic Female Star Honey Outfit (14 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257606	3	Castanic Female Star Honey Outfit (30 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257607	3	Castanic Female Star Honey Outfit (30 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257608	3	Castanic Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257609	3	Castanic Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257610	3	Castanic Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257611	3	Castanic Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257612	3	Dyeable Castanic Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257613	3	Dyeable Castanic Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257614	3	Dyeable Castanic Female Star Honey Outfit (3 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257615	3	Dyeable Castanic Female Star Honey Outfit (7 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257616	3	Dyeable Castanic Female Star Honey Outfit (7 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257617	3	Dyeable Castanic Female Star Honey Outfit (14 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257618	3	Dyeable Castanic Female Star Honey Outfit (30 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257619	3	Dyeable Castanic Female Star Honey Outfit (30 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257620	3	Dyeable Castanic Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257621	3	Dyeable Castanic Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257622	3	Dyeable Castanic Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257623	3	Dyeable Castanic Female Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257624	3	Elin Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257625	3	Elin Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257626	3	Elin Star Honey Outfit (3 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257627	3	Elin Star Honey Outfit (7 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257628	3	Elin Star Honey Outfit (7 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257629	3	Elin Star Honey Outfit (14 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257630	3	Elin Star Honey Outfit (30 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257631	3	Elin Star Honey Outfit (30 Days)	0	0	icon_equipments.pc_event_61_f_a_tex
+257632	3	Elin Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257633	3	Elin Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257634	3	Elin Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257635	3	Elin Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_tex
+257636	3	Dyeable Elin Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257637	3	Dyeable Elin Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257638	3	Dyeable Elin Star Honey Outfit (3 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257639	3	Dyeable Elin Star Honey Outfit (7 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257640	3	Dyeable Elin Star Honey Outfit (7 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257641	3	Dyeable Elin Star Honey Outfit (14 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257642	3	Dyeable Elin Star Honey Outfit (30 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257643	3	Dyeable Elin Star Honey Outfit (30 Days)	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257644	3	Dyeable Elin Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257645	3	Dyeable Elin Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257646	3	Dyeable Elin Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257647	3	Dyeable Elin Star Honey Outfit	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257648	3	Elin Cutie Star Outfit	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257649	3	Elin Cutie Star Outfit	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257650	3	Elin Cutie Star Outfit (3 Days)	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257651	3	Elin Cutie Star Outfit (7 Days)	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257652	3	Elin Cutie Star Outfit (7 Days)	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257653	3	Elin Cutie Star Outfit (14 Days)	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257654	3	Elin Cutie Star Outfit (30 Days)	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257655	3	Elin Cutie Star Outfit (30 Days)	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257656	3	Elin Cutie Star Outfit	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257657	3	Elin Cutie Star Outfit	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257658	3	Elin Cutie Star Outfit	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257659	3	Elin Cutie Star Outfit	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257660	3	Gray Headset	0	0	icon_equipments.acc_626_tex
+257661	3	Gray Headset	0	0	icon_equipments.acc_626_tex
+257662	3	Gray Headset (3 Days)	0	0	icon_equipments.acc_626_tex
+257663	3	Gray Headset (7 Days)	0	0	icon_equipments.acc_626_tex
+257664	3	Gray Headset (7 Days)	0	0	icon_equipments.acc_626_tex
+257665	3	Gray Headset (14 Days)	0	0	icon_equipments.acc_626_tex
+257666	3	Gray Headset (30 Days)	0	0	icon_equipments.acc_626_tex
+257667	3	Gray Headset (30 Days)	0	0	icon_equipments.acc_626_tex
+257668	3	Gray Headset	0	0	icon_equipments.acc_626_tex
+257669	3	Gray Headset	0	0	icon_equipments.acc_626_tex
+257670	3	Gray Headset	0	0	icon_equipments.acc_626_tex
+257671	3	Gray Headset	0	0	icon_equipments.acc_626_tex
+257672	3	Blue Headset	0	0	icon_equipments.acc_627_tex
+257673	3	Blue Headset	0	0	icon_equipments.acc_627_tex
+257674	3	Blue Headset (3 Days)	0	0	icon_equipments.acc_627_tex
+257675	3	Blue Headset (7 Days)	0	0	icon_equipments.acc_627_tex
+257676	3	Blue Headset (7 Days)	0	0	icon_equipments.acc_627_tex
+257677	3	Blue Headset (14 Days)	0	0	icon_equipments.acc_627_tex
+257678	3	Blue Headset (30 Days)	0	0	icon_equipments.acc_627_tex
+257679	3	Blue Headset (30 Days)	0	0	icon_equipments.acc_627_tex
+257680	3	Blue Headset	0	0	icon_equipments.acc_627_tex
+257681	3	Blue Headset	0	0	icon_equipments.acc_627_tex
+257682	3	Blue Headset	0	0	icon_equipments.acc_627_tex
+257683	3	Blue Headset	0	0	icon_equipments.acc_627_tex
 220353	3	T-cat 01	0	0	icon_items.tcattoken_tex
 220354	3	T-cat 02	0	0	icon_items.tcattoken_tex
 222678	3	Massive Loot Box 	0	0	icon_items.mysterybox2_tex
@@ -35280,6 +35599,30 @@
 155524	3	Box 4	0	0	icon_items.gachabox_tex
 155525	3	Box 5	0	0	icon_items.gachabox_tex
 155526	3	Box 6	0	0	icon_items.gachabox_tex
+155527	2	Unique Cube of Doom	0	0	icon_items.cube_reward02_tex
+155528	3	Halloween Runestone	0	3	icon_items.q_argoncore_tex
+155529	3	Halloween Reward Box	0	0	icon_items.solventa10_tex
+155530	2	Token: Oath of the Cursed	0	0	icon_items.q_parts_tex
+155531	2	Supply Box: Enchantment Masters	0	0	icon_items.premiumbox_vehicle4_tex
+155532	2	Supply Box: Enchantment Enthousiasts	0	0	icon_items.premiumbox_vehicle2_tex
+155533	2	Non-Tradable SES	0	0	icon_items.optionresetscroll_tex
+155534	2	Tradable SES	0	0	icon_items.optionresetscroll_tex
+155535	2	Master Fusioneer Chest	0	0	icon_items.tresurebox2_tex
+155536	2	War Cry Chest	0	0	icon_items.parts_magicweaponc6_tex
+155537	0	Summon NPC: XXX [Vanguard Initiative]	0	600	icon_items.premium_summonnpc_02_tex
+155538	1	Club Ghillieglade Scroll	0	10	icon_items.dungeon_recall_tex
+155539	2	Box: Archdevan Enchantment Tools	0	0	icon_items.parts_lightarmorc15_tex
+155540	2	Box: Blood-soaked Metallic Structure	0	0	icon_items.refine_leather8_tex
+155541	2	Box: Ash of the Unspoken	0	0	icon_items.refined_insecta13_tex
+155542	2	Box: Wondrous Holy Water	0	0	icon_items.refinedplant_a11_tex
+155543	2	Box: Ominous Spell Scroll	0	0	icon_items.solventg15_tex
+155544	2	Box: Ornamental Piece	0	0	icon_items.parts_lightweaponc8_tex
+155545	2	Box: Dimensional Fragment	0	0	icon_items.perfectcrestoftime_tex
+155546	1	Locked Crystal Coffer	0	0	icon_items.premiumbox_weapon2_tex
+155547	3	Locked Enchantment Coffer	0	0	icon_items.f2p_box_tex
+155548	3	Locked Gem Coffer	0	0	icon_items.f2p_box_tex
+155549	3	Tier IV Etching Master 1	0	0	icon_items.premiumbox_enchantagent_tex
+155550	3	Tier IV Etching Master 2	0	0	icon_items.premiumbox_enchantagent_tex
 160001	0	Riding Skill: Sleipnir	0	0	icon_items.skillbook_rider1_tex
 160002	0	Riding Skill: Sleipnir	0	0	icon_items.skillbook_rider1_tex
 160003	1	Riding Skill: Tawny Huntress	0	0	icon_items.skillbook_lion1_tex
@@ -35351,6 +35694,15 @@
 160327	0	Summon NPC: Schwab	0	600	icon_items.premium_summonnpc_04_tex
 160328	0	Trick-or-Treat Box	0	0	icon_items.gachabox_tex
 160329	0	Riding Skill: Boneshaker	0	0	icon_items.skillbook_rider1_tex
+160330	2	Precious Gem Box	0	0	icon_items.gachabox_tex
+160331	2	Elin Gunner Reward Box	0	1	icon_items.gift_box04_tex
+160332	2	Level 15 Elin Gunner Reward Box	0	1	icon_items.gift_box04_tex
+160333	2	Level 20 Elin Gunner Reward Box	0	1	icon_items.gift_box04_tex
+160334	2	Level 40 Elin Gunner Reward Box	0	1	icon_items.gift_box04_tex
+160335	2	Level 60 Elin Gunner Reward Box	0	1	icon_items.gift_box04_tex
+160336	2	Level 65 Elin Gunner Reward Box	0	1	icon_items.gift_box04_tex
+160337	2	Homecoming Haul Box	0	0	icon_items.gachabox_tex
+160338	2	Weekend Boom Box	0	0	icon_items.gachabox_tex
 160404	0	Federation Bill	0	0	icon_items.federation_bill_tex
 160500	1	Sovereign's Treasure	0	1	icon_items.gift_box03_tex
 160501	1	Sovereign's Trinket	0	1	icon_items.presentbox1_tex
@@ -37571,7 +37923,7 @@
 170024	0	Black Horn-Rimmed Glasses	0	0	icon_equipments.acc_004a_tex
 170025	0	Pirate Eye Patch	0	0	icon_equipments.acc_011a_tex
 170026	0	Princess Tiara	0	0	icon_equipments.acc_012a_tex
-170027	2	[Server] Additional Character Slot 	0	0	icon_items.charater_add_tex
+170027	2	[Server] Additional Character Slot	0	0	icon_items.charater_add_tex
 170028	0	Butcher & Block	0	0	icon_equipments.event_rare_dual_01_tex
 170029	0	Kingsguard	0	0	icon_equipments.event_rare_lance_01_tex
 170030	0	Columnarity	0	0	icon_equipments.event_rare_twohand_01_tex
@@ -41349,8 +41701,8 @@
 180672	1	Complete Crystalbind Loot Box	0	1	icon_items.gift_box04_tex
 180673	1	Noctenium Infusion Loot Box	0	1	icon_items.gift_box04_tex
 180674	1	Blessed Enigmatic Scroll Case	0	1	icon_items.gift_box04_tex
-180675	1	Deliver Elite Consumable Box	0	1	icon_items.gift_box04_tex
-180676	1	Elite Consumable Box	0	1	icon_items.gift_box04_tex
+180675	3	Deliver Elite Consumable Box	0	1	icon_items.gift_box04_tex
+180676	3	Elite Consumable Box	0	1	icon_items.gift_box04_tex
 180677	3	Human Male Bloodshadow Ninjagi	0	0	icon_equipments.pc_event_18_m
 180678	3	Human Male Bloodshadow Ninjagi	0	0	icon_equipments.pc_event_18_m
 180679	3	Human Male Bloodshadow Ninjagi	0	0	icon_equipments.pc_event_18_m
@@ -41792,7 +42144,7 @@
 181115	1	Self-Confidence Potion (7 days)	0	3	icon_items.portion_underwear2_tex
 181116	2	Village Atlas	0	0	icon_items.travelbook_portal_tex
 181117	2	Travel Journal	0	0	icon_items.travelbook_village_tex
-181118	2	Undergarment Bag	0	1	icon_items.gift_box04_tex
+181118	3	Undergarment Bag	0	1	icon_items.gift_box04_tex
 181119	1	Artisan Additive	0	0	icon_items.artisan_critical_up1_tex
 181120	1	Riding Skill: Nexus Warhorse	0	0	icon_items.skillbook_rider3_tex
 181121	1	Riding Skill: Aeolian Zebra	0	0	icon_items.skillbook_rider3_tex
@@ -47277,12 +47629,12 @@
 186617	2	Flying Skill: Sultan	0	0	icon_items.skillbook_lion1_tex
 186618	2	Flying Skill: Sultan	0	0	icon_items.skillbook_lion1_tex
 186619	1	Bone Box	0	0	icon_items.gachabox_tex
-186620	1	Castanic Female Croptop Loot Box	0	0	icon_items.gachabox_tex
-186621	1	Dyeable Bleachstringer and Fundoshi Loot Box	0	0	icon_items.gachabox_tex
-186622	1	Dyeable Silver Bikini and Speeders Loot Box	0	0	icon_items.gachabox_tex
-186623	1	Sandy Summer Festival Loot Box	0	0	icon_items.gachabox_tex
-186624	1	Summer Festival Loot Box	0	0	icon_items.gachabox_tex
-186625	1	Argon Assault Loot Box	0	0	icon_items.gachabox_tex
+186620	3	Castanic Female Croptop Loot Box	0	0	icon_items.gachabox_tex
+186621	3	Dyeable Bleachstringer and Fundoshi Loot Box	0	0	icon_items.gachabox_tex
+186622	3	Dyeable Silver Bikini and Speeders Loot Box	0	0	icon_items.gachabox_tex
+186623	3	Sandy Summer Festival Loot Box	0	0	icon_items.gachabox_tex
+186624	3	Summer Festival Loot Box	0	0	icon_items.gachabox_tex
+186625	3	Argon Assault Loot Box	0	0	icon_items.gachabox_tex
 186626	1	Emergency Gacha 0613-8	0	0	icon_items.gachabox_tex
 186627	1	Emergency Gacha 0613-9	0	0	icon_items.gachabox_tex
 186628	1	Emergency Gacha 0613-10	0	0	icon_items.gachabox_tex
@@ -47351,11 +47703,11 @@
 186691	2	Glacial Dragon Weapon Skin Smart Box	0	1	icon_items.gift_box04_tex
 186692	2	Obsidian Dragon Weapon Skin Smart Box	0	1	icon_items.gift_box04_tex
 186693	2	Volcanic Dragon Weapon Skin Smart Box	0	1	icon_items.gift_box04_tex
-186694	2	Sword and Hoard Leveling Event Box	0	1	icon_items.gift_box04_tex
+186694	3	Sword and Hoard Leveling Event Box	0	1	icon_items.gift_box04_tex
 186695	2	Ironward Armor Smart Box	0	1	icon_items.gift_box04_tex
 186696	2	Dawn's Guard Armor Smart Box	0	1	icon_items.gift_box04_tex
 186697	2	Night Watch Armor Smart Box	0	1	icon_items.gift_box04_tex
-186698	2	Argon Assault Supply Kit	0	1	icon_items.gift_box04_tex
+186698	3	Argon Assault Supply Kit	0	1	icon_items.gift_box04_tex
 186699	2	Dyeable Duckie Swimsuit Box	0	1	icon_items.gift_box04_tex
 186700	2	Deep Blue Jammers Box	0	1	icon_items.gift_box04_tex
 186701	2	Dyeable Deep Jammers Box	0	1	icon_items.gift_box04_tex
@@ -47444,12 +47796,12 @@
 186784	3	15-Day Care and Use of Your Pet Argette	0	0	icon_items.petskillbook_tex
 186785	3	15-Day Travel Journal	0	0	icon_items.travelbook_village_tex
 186786	3	15-Day Village Atlas	0	0	icon_items.travelbook_portal_tex
-186787	2	Valkyrie Rewards Box	0	1	icon_items.gift_box04_tex
-186788	2	Level 15 Valkyrie Reward Box	0	1	icon_items.gift_box04_tex
+186787	3	Valkyrie Rewards Box	0	1	icon_items.gift_box04_tex
+186788	3	Level 15 Valkyrie Reward Box	0	1	icon_items.gift_box04_tex
 186789	1	Riding Skill: Snarl	0	0	icon_items.skillbook_lion1_tex
 186790	2	Level 20 Valkyrie Reward Box	0	1	icon_items.gift_box04_tex
 186791	2	Level 40 Valkyrie Reward Box	0	1	icon_items.gift_box04_tex
-186792	2	Level 60 Valkyrie Reward Box	0	1	icon_items.gift_box04_tex
+186792	3	Level 60 Valkyrie Reward Box	0	1	icon_items.gift_box04_tex
 186793	2	Level 65 Valkyrie Reward Box	0	1	icon_items.gift_box04_tex
 186794	2	Chooser of the Slain	0	0	icon_items.crystalscroll_tex
 186795	2	+12 Meathanger Box	0	0	icon_items.gachabox_tex
@@ -47466,10 +47818,10 @@
 244509	2	Obsidian Dragon Armor Smart Box	0	1	icon_items.gift_box04_tex
 244510	0	Winter Coat Box	0	0	icon_items.tresurebox2_tex
 244511	0	Personalized Gym Uniform Loot Box	0	0	icon_items.tresurebox2_tex
-244512	0	Chromaplasm Weapon Skin Loot Box	0	0	icon_items.tresurebox2_tex
-244513	0	Skycycle Loot Box	0	0	icon_items.tresurebox2_tex
-244514	0	Jetcycle Loot Box	0	0	icon_items.tresurebox2_tex
-244515	0	Ladies' Night Loot Box	0	0	icon_items.tresurebox2_tex
+244512	3	Chromaplasm Weapon Skin Loot Box	0	0	icon_items.tresurebox2_tex
+244513	3	Skycycle Loot Box	0	0	icon_items.tresurebox2_tex
+244514	3	Jetcycle Loot Box	0	0	icon_items.tresurebox2_tex
+244515	3	Ladies' Night Loot Box	0	0	icon_items.tresurebox2_tex
 244516	3	Volcanic Armor Loot Box	0	0	icon_items.tresurebox2_tex
 244517	3	Volcanic Weapon Loot Box	0	0	icon_items.tresurebox2_tex
 244518	3	Angora Air Loot Box	0	0	icon_items.tresurebox2_tex
@@ -47493,7 +47845,7 @@
 244536	3	Maid's Bonnet Loot Box	0	0	icon_items.tresurebox2_tex
 244537	3	Arctic Weapon Loot Box	0	0	icon_items.tresurebox2_tex
 244538	3	Arctic Armor Loot Box	0	0	icon_items.tresurebox2_tex
-244539	0	Starglow Costume Loot Box	0	0	icon_items.tresurebox2_tex
+244539	3	Starglow Costume Loot Box	0	0	icon_items.tresurebox2_tex
 244540	2	Lifeguard Smart Box	0	1	icon_items.gift_box04_tex
 244541	2	Diver Dude Smart Box	0	1	icon_items.gift_box04_tex
 244542	2	Tan-Tastic Smart Box	0	1	icon_items.gift_box04_tex
@@ -47509,11 +47861,11 @@
 244552	0	Bronze Look Loot Box	0	0	icon_items.tresurebox2_tex
 244553	3	Suitable Groom Loot Box	0	0	icon_items.tresurebox2_tex
 244554	3	Hope Chest Loot Box	0	0	icon_items.tresurebox2_tex
-244555	0	Performance Inner Armor Loot Box	0	0	icon_items.tresurebox2_tex
-244556	0	Insulated Inner Armor Loot Box	0	0	icon_items.tresurebox2_tex
-244557	0	Fortified Inner Armor Loot Box	0	0	icon_items.tresurebox2_tex
-244558	0	Fitness Inner Armor Loot Box	0	0	icon_items.tresurebox2_tex
-244559	0	Empowered Inner Armor Loot Box	0	0	icon_items.tresurebox2_tex
+244555	3	Performance Inner Armor Loot Box	0	0	icon_items.tresurebox2_tex
+244556	3	Insulated Inner Armor Loot Box	0	0	icon_items.tresurebox2_tex
+244557	3	Fortified Inner Armor Loot Box	0	0	icon_items.tresurebox2_tex
+244558	3	Fitness Inner Armor Loot Box	0	0	icon_items.tresurebox2_tex
+244559	3	Empowered Inner Armor Loot Box	0	0	icon_items.tresurebox2_tex
 244560	2	Wedding Costume Box	0	1	icon_items.gift_box04_tex
 244561	2	Dyeable Wedding Costume Box	0	1	icon_items.gift_box04_tex
 244562	2	Extensive Alkahest Box	0	0	icon_items.tresurebox2_tex
@@ -47549,30 +47901,30 @@
 244592	2	Starglow Costume Box	0	1	icon_items.gift_box04_tex
 244593	2	Crystal Blue Weapon Skin Box	0	1	icon_items.gift_box04_tex
 244594	2	Starglow Weapon Skin Box	0	1	icon_items.gift_box04_tex
-244595	2	(No Trade) Homemade Costume Smart Box	0	1	icon_items.gift_box04_tex
-244596	2	(No Trade) Dyeable Homemade Costume Smart Box	0	1	icon_items.gift_box04_tex
-244597	2	No Trade Dummy Smart Box9	0	1	icon_items.gift_box04_tex
-244598	2	No Trade Dummy Smart Box10	0	1	icon_items.gift_box04_tex
+244595	2	Homemade Costume Smart Box	0	1	icon_items.gift_box04_tex
+244596	2	Dyeable Homemade Costume Smart Box	0	1	icon_items.gift_box04_tex
+244597	2	Dummy Smart Box9	0	1	icon_items.gift_box04_tex
+244598	2	Dummy Smart Box10	0	1	icon_items.gift_box04_tex
 244599	2	Homemade Costume Smart Box	0	1	icon_items.gift_box04_tex
 244600	2	Dyeable Homemade Costume Smart Box	0	1	icon_items.gift_box04_tex
-244601	2	Dummy Smart Box13	0	1	icon_items.gift_box04_tex
-244602	2	Dummy Smart Box14	0	1	icon_items.gift_box04_tex
-244603	2	Dummy Smart Box15	0	1	icon_items.gift_box04_tex
-244604	2	Dummy Smart Box16	0	1	icon_items.gift_box04_tex
+244601	2	Black Devilish Costume Box	0	1	icon_items.gift_box04_tex
+244602	2	Red Devilish Costume Box	0	1	icon_items.gift_box04_tex
+244603	2	Silver Devilish Costume Box	0	1	icon_items.gift_box04_tex
+244604	2	Gold Devilish Costume Box	0	1	icon_items.gift_box04_tex
 244605	2	No Trade Dummy Smart Box17	0	1	icon_items.gift_box04_tex
 244606	2	No Trade Dummy Smart Box18	0	1	icon_items.gift_box04_tex
 244607	2	No Trade Dummy Smart Box19	0	1	icon_items.gift_box04_tex
 244608	2	No Trade Dummy Smart Box20	0	1	icon_items.gift_box04_tex
-244609	2	Dummy Smart Box21	0	1	icon_items.gift_box04_tex
-244610	2	Dummy Smart Box22	0	1	icon_items.gift_box04_tex
-244611	2	Dummy Smart Box23	0	1	icon_items.gift_box04_tex
-244612	2	Dummy Smart Box24	0	1	icon_items.gift_box04_tex
+244609	2	Dyeable Titan Force Costume Box	0	1	icon_items.gift_box04_tex
+244610	2	Elin Cutie Star Shopping Spree Box	0	1	icon_items.gift_box04_tex
+244611	2	Pop Superstar Costume Smart Box	0	1	icon_items.gift_box04_tex
+244612	2	Pop Star Costume Smart Box	0	1	icon_items.gift_box04_tex
 244613	2	Dummy Smart Box25	0	1	icon_items.gift_box04_tex
 244614	2	Dummy Smart Box26	0	1	icon_items.gift_box04_tex
-244615	2	No Trade Dummy Smart Box27	0	1	icon_items.gift_box04_tex
-244616	2	No Trade Dummy Smart Box28	0	1	icon_items.gift_box04_tex
-244617	2	No Trade Dummy Smart Box29	0	1	icon_items.gift_box04_tex
-244618	2	No Trade Dummy Smart Box30	0	1	icon_items.gift_box04_tex
+244615	2	Dummy Smart Box27	0	1	icon_items.gift_box04_tex
+244616	2	Dummy Smart Box28	0	1	icon_items.gift_box04_tex
+244617	2	Dummy Smart Box29	0	1	icon_items.gift_box04_tex
+244618	2	Dummy Smart Box30	0	1	icon_items.gift_box04_tex
 244619	3	Obsidian Airwolf Loot Box	0	0	icon_items.tresurebox2_tex
 244620	3	Thunderbolt Airwolf Loot Box	0	0	icon_items.tresurebox2_tex
 244621	3	Cherry Airwolf Loot Box	0	0	icon_items.tresurebox2_tex
@@ -47582,11 +47934,11 @@
 244625	3	Sky Visor Loot Box	0	0	icon_items.tresurebox2_tex
 244626	3	Phoenix Loot Box	0	0	icon_items.tresurebox2_tex
 244627	3	Barely Bandaged Loot Box	0	0	icon_items.tresurebox2_tex
-244628	3	Dummy Gacha10	0	0	icon_items.tresurebox2_tex
-244629	3	Dummy Gacha11	0	0	icon_items.tresurebox2_tex
-244630	3	Dummy Gacha12	0	0	icon_items.tresurebox2_tex
-244631	3	Dummy Gacha13	0	0	icon_items.tresurebox2_tex
-244632	3	Dummy Gacha14	0	0	icon_items.tresurebox2_tex
+244628	3	Opening Act Loot Box	0	0	icon_items.tresurebox2_tex
+244629	3	Cutie Footsteps Loot Box	0	0	icon_items.tresurebox2_tex
+244630	3	Pink Plate Footsteps Loot Box	0	0	icon_items.tresurebox2_tex
+244631	3	Blue Plate Footsteps Loot Box	0	0	icon_items.tresurebox2_tex
+244632	3	Pop Superstar Tour Bus Loot Box	0	0	icon_items.tresurebox2_tex
 244633	3	Dummy Gacha15	0	0	icon_items.tresurebox2_tex
 244634	3	Dummy Gacha16	0	0	icon_items.tresurebox2_tex
 244635	3	Dummy Gacha17	0	0	icon_items.tresurebox2_tex
@@ -47629,20 +47981,20 @@
 244672	2	Dummy Smart Box34	0	1	icon_items.gift_box04_tex
 244673	2	Dummy Smart Box35	0	1	icon_items.gift_box04_tex
 244674	2	Dummy Smart Box36	0	1	icon_items.gift_box04_tex
-244675	2	No Trade Dummy Smart Box37	0	1	icon_items.gift_box04_tex
-244676	2	No Trade Dummy Smart Box38	0	1	icon_items.gift_box04_tex
-244677	2	No Trade Dummy Smart Box39	0	1	icon_items.gift_box04_tex
-244678	2	No Trade Dummy Smart Box40	0	1	icon_items.gift_box04_tex
+244675	2	Dummy Smart Box37	0	1	icon_items.gift_box04_tex
+244676	2	Dummy Smart Box38	0	1	icon_items.gift_box04_tex
+244677	2	Dummy Smart Box39	0	1	icon_items.gift_box04_tex
+244678	2	Dummy Smart Box40	0	1	icon_items.gift_box04_tex
 244679	2	Dummy Smart Box41	0	1	icon_items.gift_box04_tex
 244680	2	Dummy Smart Box42	0	1	icon_items.gift_box04_tex
 244681	2	Dummy Smart Box43	0	1	icon_items.gift_box04_tex
 244682	2	Dummy Smart Box44	0	1	icon_items.gift_box04_tex
 244683	2	Dummy Smart Box45	0	1	icon_items.gift_box04_tex
 244684	2	Dummy Smart Box46	0	1	icon_items.gift_box04_tex
-244685	2	No Trade Dummy Smart Box47	0	1	icon_items.gift_box04_tex
-244686	2	No Trade Dummy Smart Box48	0	1	icon_items.gift_box04_tex
-244687	2	No Trade Dummy Smart Box49	0	1	icon_items.gift_box04_tex
-244688	2	No Trade Dummy Smart Box50	0	1	icon_items.gift_box04_tex
+244685	2	Dummy Smart Box47	0	1	icon_items.gift_box04_tex
+244686	2	Dummy Smart Box48	0	1	icon_items.gift_box04_tex
+244687	2	Dummy Smart Box49	0	1	icon_items.gift_box04_tex
+244688	2	Dummy Smart Box50	0	1	icon_items.gift_box04_tex
 458	0	Riding Skill: Summon Fortuna	0	0	icon_items.skillbook_rider2_tex
 459	0	Riding Skill: Summon Fides	0	0	icon_items.skillbook_rider2_tex
 460	0	Riding Skill: Summon Virtus	0	0	icon_items.skillbook_rider2_tex
@@ -50155,6 +50507,12 @@
 246141	2	Smart Box: Elemental Costume (rare) (7 Days)	0	1	icon_items.gift_box04_tex
 246142	2	Smart Box: Elemental Costume (rare) (3 Days)	0	1	icon_items.gift_box04_tex
 246143	2	Smart Box: Luminous Raiments of the Dead (Permanent)	0	1	icon_items.gift_box04_tex
+246144	2	Smart Box: Halloween 2017	0	1	icon_items.gift_box04_tex
+246145	2	Smart Box: Halloween 2017 (30 Days)	0	1	icon_items.gift_box04_tex
+246146	2	Smart Box: Halloween 2017 (7 Days)	0	1	icon_items.gift_box04_tex
+246147	2	Smart Box: Halloween 2017 (rare)	0	1	icon_items.gift_box04_tex
+246148	2	Smart Box: Halloween 2017 (rare) (30 Days)	0	1	icon_items.gift_box04_tex
+246149	2	Smart Box: Halloween 2017 (rare) (7 Days)	0	1	icon_items.gift_box04_tex
 100507	0	T	0	1	icon_items.event_letter01_tex
 100508	0	E	0	1	icon_items.event_letter02_tex
 100509	0	R	0	1	icon_items.event_letter03_tex
@@ -50493,7 +50851,7 @@
 60257	3	Piton	0	0	icon_equipments.event_rare_rod_01_tex
 60258	3	Piton	0	0	icon_equipments.event_rare_rod_01_tex
 60259	3	Piton	0	0	icon_equipments.event_rare_rod_01_tex
-60260	0	Goddess' Blessing	0	3600	icon_items.revivenow_tex
+60260	0	Goddess's Blessing	0	3600	icon_items.revivenow_tex
 60261	1	Riding Skill: Night Mare	0	0	icon_items.skillbook_rider1_tex
 60262	0	Summon NPC: Monti	0	600	icon_items.premium_summonnpc_01_tex
 60263	0	Summon NPC: Dimon	0	600	icon_items.premium_summonnpc_02_tex
@@ -50936,9 +51294,9 @@
 99989	1	Style Box [High Elf Female]	0	0	icon_items.q_boxjewel_tex
 99990	1	Style Box [Elin]	0	0	icon_items.q_boxjewel_tex
 99991	1	Style Box [Castanic Female]	0	0	icon_items.q_boxjewel_tex
-99992	3	Entropic Essence Gold Box I	0	0	icon_items.tresurebox1_tex
-99993	3	Entropic Essence Gold Box I	0	0	icon_items.tresurebox1_tex
-99994	3	Gold Box of Preservation (Robe)	0	0	icon_items.tresurebox1_tex
+99992	3	Entropic Emblem Gold Box I	0	0	icon_items.tresurebox1_tex
+99993	3	Entropic Emblem Gold Box II	0	0	icon_items.tresurebox1_tex
+99994	3	Entropic Emblem Gold Box III	0	0	icon_items.tresurebox1_tex
 99995	2	Cold Treasure Box	0	0	icon_items.gachabox_tex
 99996	0	Superior Enchantment Box	0	0	icon_items.q_tresurebox_tex
 99997	1	Luxurious Enchantment Box	0	0	icon_items.q_tresurebox_tex
@@ -51759,7 +52117,7 @@
 138001	2	Red Runner's Bag	0	1	icon_items.gift_box04_tex
 138002	2	Red Volleyball Bag	0	1	icon_items.gift_box04_tex
 138003	2	Red Team Captain's Bag	0	1	icon_items.gift_box04_tex
-138004	2	Small Body (1 minute)	0	0	icon_items.gachabox_tex
+138004	2	Balder's Reliquary	0	0	icon_items.gachabox_tex
 138005	2	Keyclip	0	0	icon_items.mystic_tcat_pocket_tex
 138006	2	Red Christmas Box	0	0	icon_items.presentbox1_tex
 138007	1	Year-End Fireworks Box	0	0	icon_items.gift_box04_tex
@@ -52067,7 +52425,7 @@
 139163	2	100% XP Boost (15 Days)	0	3	icon_items.f2p_xpbooster_tex
 139164	2	30% Reputation Boost (15 Days)	0	3	icon_items.f2p_reputationbooster_tex
 139165	0	Old Pandora's Box	0	0	icon_items.mysterybox3_tex
-139166	2	[Account] Additional Character Slot  	0	0	icon_items.charater_add_tex
+139166	2	[Account] Additional Character Slot	0	0	icon_items.charater_add_tex
 139167	2	[Account] Bank Expansion  	0	0	icon_items.extend_personwarehouse_tex
 139168	2	100% XP Boost (10 Days)	0	3	icon_items.f2p_xpbooster_tex
 139169	2	100% Gold Hunter Boost (10 Days)	0	3	icon_items.f2p_dropgoldbooster_tex
@@ -52090,6 +52448,7 @@
 139186	2	100% Reputation Boost (10 days)	0	3	icon_items.f2p_reputationbooster_tex
 139187	2	Village Atlas	0	30	icon_items.travelbook_portal_tex
 139188	2	Travel Journal	0	30	icon_items.travelbook_village_tex
+139189	2	[Account] Additional Character Slot	0	0	icon_items.charater_add_tex
 139200	0	Big Breasts (1 minute)	0	3	icon_items.icon_poongu_item_tex
 139201	0	Small Breasts (1 minute)	0	3	icon_items.icon_poongu_item_tex_minus
 139202	0	Tall Body (1 minute)	0	3	icon_items.icon_jangshin_item_tex
@@ -52632,6 +52991,7 @@
 149440	3	[Event] Black Wings (60days)	0	0	icon_equipments.acc_401_tex
 149441	3	[Event] Wing Box	0	0	icon_items.premiumbox_weapon2_tex
 149445	2	[Event] Valkyon Federation Token	0	0	icon_items.medal1_tex
+149487	2	[Server] Additional Character Slot	0	0	icon_items.charater_add_tex
 149646	2	TERA HOT TIME BOX	0	0	icon_items.gift_box06_tex
 149760	0	T	0	0	icon_items.event_letter01_tex
 149761	0	E	0	0	icon_items.event_letter02_tex

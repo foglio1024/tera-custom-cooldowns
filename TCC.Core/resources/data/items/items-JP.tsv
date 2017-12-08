@@ -2039,12 +2039,12 @@
 6705	2	首飾り刻印書－強力な野獣の強打 III	0	5	icon_items.necklace_enchant_scroll_3_tex
 6706	2	首飾り刻印書－強力な野獣の猛撃 III	0	5	icon_items.necklace_enchant_scroll_3_tex
 6707	2	首飾り刻印書－強力な野獣の速歩 III	0	5	icon_items.necklace_enchant_scroll_3_tex
-6710	3	首飾り刻印書－野獣の強打 IＶ	0	5	icon_items.necklace_enchant_scroll_3_tex
-6711	3	首飾り刻印書－野獣の猛撃 IＶ	0	5	icon_items.necklace_enchant_scroll_3_tex
-6712	3	首飾り刻印書－野獣の速歩 IＶ	0	5	icon_items.necklace_enchant_scroll_3_tex
-6715	3	首飾り刻印書－強力な野獣の強打 IＶ	0	5	icon_items.necklace_enchant_scroll_3_tex
-6716	3	首飾り刻印書－強力な野獣の猛撃 IＶ	0	5	icon_items.necklace_enchant_scroll_3_tex
-6717	3	首飾り刻印書－強力な野獣の速歩 IＶ	0	5	icon_items.necklace_enchant_scroll_3_tex
+6710	3	首飾り刻印書－野獣の強打 IV	0	5	icon_items.necklace_enchant_scroll_3_tex
+6711	3	首飾り刻印書－野獣の猛撃 IV	0	5	icon_items.necklace_enchant_scroll_3_tex
+6712	3	首飾り刻印書－野獣の速歩 IV	0	5	icon_items.necklace_enchant_scroll_3_tex
+6715	3	首飾り刻印書－強力な野獣の強打 IV	0	5	icon_items.necklace_enchant_scroll_3_tex
+6716	3	首飾り刻印書－強力な野獣の猛撃 IV	0	5	icon_items.necklace_enchant_scroll_3_tex
+6717	3	首飾り刻印書－強力な野獣の速歩 IV	0	5	icon_items.necklace_enchant_scroll_3_tex
 6760	1	耳飾り刻印書－野獣の強打 I	0	5	icon_items.earring_enchant_scroll_1_tex
 6761	1	耳飾り刻印書－野獣の猛撃 I	0	5	icon_items.earring_enchant_scroll_1_tex
 6762	1	耳飾り刻印書－野獣の速歩 I	0	5	icon_items.earring_enchant_scroll_1_tex
@@ -2060,12 +2060,12 @@
 6785	2	耳飾り刻印書－強力な野獣の強打 III	0	5	icon_items.earring_enchant_scroll_3_tex
 6786	2	耳飾り刻印書－強力な野獣の猛撃 III	0	5	icon_items.earring_enchant_scroll_3_tex
 6787	2	耳飾り刻印書－強力な野獣の速歩 III	0	5	icon_items.earring_enchant_scroll_3_tex
-6790	3	耳飾り刻印書－野獣の強打 IＶ	0	5	icon_items.earring_enchant_scroll_3_tex
-6791	3	耳飾り刻印書－野獣の猛撃 IＶ	0	5	icon_items.earring_enchant_scroll_3_tex
-6792	3	耳飾り刻印書－野獣の速歩 IＶ	0	5	icon_items.earring_enchant_scroll_3_tex
-6795	3	耳飾り刻印書－強力な野獣の強打 IＶ	0	5	icon_items.earring_enchant_scroll_3_tex
-6796	3	耳飾り刻印書－強力な野獣の猛撃 IＶ	0	5	icon_items.earring_enchant_scroll_3_tex
-6797	3	耳飾り刻印書－強力な野獣の速歩 IＶ	0	5	icon_items.earring_enchant_scroll_3_tex
+6790	3	耳飾り刻印書－野獣の強打 IV	0	5	icon_items.earring_enchant_scroll_3_tex
+6791	3	耳飾り刻印書－野獣の猛撃 IV	0	5	icon_items.earring_enchant_scroll_3_tex
+6792	3	耳飾り刻印書－野獣の速歩 IV	0	5	icon_items.earring_enchant_scroll_3_tex
+6795	3	耳飾り刻印書－強力な野獣の強打 IV	0	5	icon_items.earring_enchant_scroll_3_tex
+6796	3	耳飾り刻印書－強力な野獣の猛撃 IV	0	5	icon_items.earring_enchant_scroll_3_tex
+6797	3	耳飾り刻印書－強力な野獣の速歩 IV	0	5	icon_items.earring_enchant_scroll_3_tex
 6840	1	指輪刻印書－野獣の強打 I	0	5	icon_items.ring_enchant_scroll_1_tex
 6841	1	指輪刻印書－野獣の猛撃 I	0	5	icon_items.ring_enchant_scroll_1_tex
 6842	1	指輪刻印書－野獣の速歩 I	0	5	icon_items.ring_enchant_scroll_1_tex
@@ -2075,39 +2075,39 @@
 6855	2	指輪刻印書－強力な野獣の強打 II	0	5	icon_items.ring_enchant_scroll_2_tex
 6856	2	指輪刻印書－強力な野獣の猛撃 II	0	5	icon_items.ring_enchant_scroll_2_tex
 6857	2	指輪刻印書－強力な野獣の速歩 II	0	5	icon_items.ring_enchant_scroll_2_tex
-6860	1	指輪刻印書－野獣の強打 IIＩ	0	5	icon_items.ring_enchant_scroll_3_tex
-6861	1	指輪刻印書－野獣の猛撃 IIＩ	0	5	icon_items.ring_enchant_scroll_3_tex
-6862	1	指輪刻印書－野獣の速歩 IIＩ	0	5	icon_items.ring_enchant_scroll_3_tex
-6865	2	指輪刻印書－強力な野獣の強打 IIＩ	0	5	icon_items.ring_enchant_scroll_3_tex
-6866	2	指輪刻印書－強力な野獣の猛撃 IIＩ	0	5	icon_items.ring_enchant_scroll_3_tex
-6867	2	指輪刻印書－強力な野獣の速歩 IIＩ	0	5	icon_items.ring_enchant_scroll_3_tex
-6870	3	指輪刻印書－野獣の強打 IＶ	0	5	icon_items.ring_enchant_scroll_3_tex
-6871	3	指輪刻印書－野獣の猛撃 IＶ	0	5	icon_items.ring_enchant_scroll_3_tex
-6872	3	指輪刻印書－野獣の速歩 IＶ	0	5	icon_items.ring_enchant_scroll_3_tex
-6875	3	指輪刻印書－強力な野獣の強打 IＶ	0	5	icon_items.ring_enchant_scroll_3_tex
-6876	3	指輪刻印書－強力な野獣の猛撃 IＶ	0	5	icon_items.ring_enchant_scroll_3_tex
-6877	3	指輪刻印書－強力な野獣の速歩 IＶ	0	5	icon_items.ring_enchant_scroll_3_tex
+6860	1	指輪刻印書－野獣の強打 III	0	5	icon_items.ring_enchant_scroll_3_tex
+6861	1	指輪刻印書－野獣の猛撃 III	0	5	icon_items.ring_enchant_scroll_3_tex
+6862	1	指輪刻印書－野獣の速歩 III	0	5	icon_items.ring_enchant_scroll_3_tex
+6865	2	指輪刻印書－強力な野獣の強打 III	0	5	icon_items.ring_enchant_scroll_3_tex
+6866	2	指輪刻印書－強力な野獣の猛撃 III	0	5	icon_items.ring_enchant_scroll_3_tex
+6867	2	指輪刻印書－強力な野獣の速歩 III	0	5	icon_items.ring_enchant_scroll_3_tex
+6870	3	指輪刻印書－野獣の強打 IV	0	5	icon_items.ring_enchant_scroll_3_tex
+6871	3	指輪刻印書－野獣の猛撃 IV	0	5	icon_items.ring_enchant_scroll_3_tex
+6872	3	指輪刻印書－野獣の速歩 IV	0	5	icon_items.ring_enchant_scroll_3_tex
+6875	3	指輪刻印書－強力な野獣の強打 IV	0	5	icon_items.ring_enchant_scroll_3_tex
+6876	3	指輪刻印書－強力な野獣の猛撃 IV	0	5	icon_items.ring_enchant_scroll_3_tex
+6877	3	指輪刻印書－強力な野獣の速歩 IV	0	5	icon_items.ring_enchant_scroll_3_tex
 6920	1	ベルト刻印書－野獣の強打 I	0	5	icon_items.belt_enchant_scroll_1_tex
 6921	1	ベルト刻印書－野獣の猛撃 I	0	5	icon_items.belt_enchant_scroll_1_tex
 6922	1	ベルト刻印書－野獣の速歩 I	0	5	icon_items.belt_enchant_scroll_1_tex
-6930	1	ベルト刻印書－野獣の強打 IＩ	0	5	icon_items.belt_enchant_scroll_2_tex
-6931	1	ベルト刻印書－野獣の猛撃 IＩ	0	5	icon_items.belt_enchant_scroll_2_tex
-6932	1	ベルト刻印書－野獣の速歩 IＩ	0	5	icon_items.belt_enchant_scroll_2_tex
+6930	1	ベルト刻印書－野獣の強打 II	0	5	icon_items.belt_enchant_scroll_2_tex
+6931	1	ベルト刻印書－野獣の猛撃 II	0	5	icon_items.belt_enchant_scroll_2_tex
+6932	1	ベルト刻印書－野獣の速歩 II	0	5	icon_items.belt_enchant_scroll_2_tex
 6935	2	ベルト刻印書－強力な野獣の強打 II	0	5	icon_items.belt_enchant_scroll_2_tex
 6936	2	ベルト刻印書－強力な野獣の猛撃 II	0	5	icon_items.belt_enchant_scroll_2_tex
 6937	2	ベルト刻印書－強力な野獣の速歩 II	0	5	icon_items.belt_enchant_scroll_2_tex
-6940	1	ベルト刻印書－野獣の強打 IＩＩ	0	5	icon_items.belt_enchant_scroll_3_tex
-6941	1	ベルト刻印書－野獣の猛撃 IIＩ	0	5	icon_items.belt_enchant_scroll_3_tex
-6942	1	ベルト刻印書－野獣の速歩 IＩＩ	0	5	icon_items.belt_enchant_scroll_3_tex
-6945	2	ベルト刻印書－強力な野獣の強打 IIＩ	0	5	icon_items.belt_enchant_scroll_3_tex
-6946	2	ベルト刻印書－強力な野獣の猛撃 IIＩ	0	5	icon_items.belt_enchant_scroll_3_tex
-6947	2	ベルト刻印書－強力な野獣の速歩 IIＩ	0	5	icon_items.belt_enchant_scroll_3_tex
-6950	3	ベルト刻印書－野獣の強打 IＶ	0	5	icon_items.belt_enchant_scroll_3_tex
-6951	3	ベルト刻印書－野獣の猛撃 IＶ	0	5	icon_items.belt_enchant_scroll_3_tex
-6952	3	ベルト刻印書－野獣の速歩 IＶ	0	5	icon_items.belt_enchant_scroll_3_tex
-6955	3	ベルト刻印書－強力な野獣の強打 IＶ	0	5	icon_items.belt_enchant_scroll_3_tex
-6956	3	ベルト刻印書－強力な野獣の猛撃 IＶ	0	5	icon_items.belt_enchant_scroll_3_tex
-6957	3	ベルト刻印書－強力な野獣の速歩 IＶ	0	5	icon_items.belt_enchant_scroll_3_tex
+6940	1	ベルト刻印書－野獣の強打 III	0	5	icon_items.belt_enchant_scroll_3_tex
+6941	1	ベルト刻印書－野獣の猛撃 III	0	5	icon_items.belt_enchant_scroll_3_tex
+6942	1	ベルト刻印書－野獣の速歩 III	0	5	icon_items.belt_enchant_scroll_3_tex
+6945	2	ベルト刻印書－強力な野獣の強打 III	0	5	icon_items.belt_enchant_scroll_3_tex
+6946	2	ベルト刻印書－強力な野獣の猛撃 III	0	5	icon_items.belt_enchant_scroll_3_tex
+6947	2	ベルト刻印書－強力な野獣の速歩 III	0	5	icon_items.belt_enchant_scroll_3_tex
+6950	3	ベルト刻印書－野獣の強打 IV	0	5	icon_items.belt_enchant_scroll_3_tex
+6951	3	ベルト刻印書－野獣の猛撃 IV	0	5	icon_items.belt_enchant_scroll_3_tex
+6952	3	ベルト刻印書－野獣の速歩 IV	0	5	icon_items.belt_enchant_scroll_3_tex
+6955	3	ベルト刻印書－強力な野獣の強打 IV	0	5	icon_items.belt_enchant_scroll_3_tex
+6956	3	ベルト刻印書－強力な野獣の猛撃 IV	0	5	icon_items.belt_enchant_scroll_3_tex
+6957	3	ベルト刻印書－強力な野獣の速歩 IV	0	5	icon_items.belt_enchant_scroll_3_tex
 7000	0	古びた変心の実	0	0	icon_items.homonpbrts1b_tex
 7100	0	知識の護符 I	0	3	icon_items.mysterypaper1_tex
 7101	0	知識の護符 II	0	3	icon_items.mysterypaper2_tex
@@ -12069,46 +12069,46 @@
 20819	3	腕防具刻印書－女神の権能IV	0	5	icon_items.arm_enchant_scroll_3_tex
 20820	3	腕防具刻印書－野獣の脅威IV	0	5	icon_items.arm_enchant_scroll_3_tex
 20821	3	腕防具刻印書－野獣の速攻IV	0	5	icon_items.arm_enchant_scroll_3_tex
-20830	3	胴防具刻印書－巨人の甲冑 IＶ	0	5	icon_items.body_enchant_scroll_3_tex
-20831	3	胴防具刻印書－巨人の心臓 IＶ	0	5	icon_items.body_enchant_scroll_3_tex
-20832	3	胴防具刻印書－巨人の胆塊 IＶ	0	5	icon_items.body_enchant_scroll_3_tex
-20833	3	胴防具刻印書－野獣の強打 IＶ	0	5	icon_items.body_enchant_scroll_3_tex
-20834	3	胴防具刻印書－野獣の猛撃 IＶ	0	5	icon_items.body_enchant_scroll_3_tex
-20835	3	武器刻印書－野獣の強打 IＶ	0	5	icon_items.weapon_enchant_scroll_3_tex
-20836	3	武器刻印書－野獣の猛撃 IＶ	0	5	icon_items.weapon_enchant_scroll_3_tex
-20837	3	武器刻印書－女神の権能 IＶ	0	5	icon_items.weapon_enchant_scroll_3_tex
-20838	3	武器刻印書－野獣の脅威 IＶ	0	5	icon_items.weapon_enchant_scroll_3_tex
-20839	3	武器刻印書－野獣の速攻 IＶ	0	5	icon_items.weapon_enchant_scroll_3_tex
-20840	3	脚防具刻印書－巨人の甲冑 IＶ	0	5	icon_items.leg_enchant_scroll_3_tex
-20841	3	脚防具刻印書－巨人の心臓 IＶ	0	5	icon_items.leg_enchant_scroll_3_tex
-20842	3	脚防具刻印書－巨人の胆塊 IＶ	0	5	icon_items.leg_enchant_scroll_3_tex
-20843	3	脚防具刻印書－野獣の強打 IＶ	0	5	icon_items.leg_enchant_scroll_3_tex
-20844	3	脚防具刻印書－野獣の猛撃 IＶ	0	5	icon_items.leg_enchant_scroll_3_tex
-20845	3	腕防具刻印書－野獣の強打 IＶ	0	5	icon_items.arm_enchant_scroll_3_tex
-20846	3	腕防具刻印書－野獣の猛撃 IＶ	0	5	icon_items.arm_enchant_scroll_3_tex
-20847	3	腕防具刻印書－女神の権能 IＶ	0	5	icon_items.arm_enchant_scroll_3_tex
-20848	3	腕防具刻印書－野獣の脅威 IＶ	0	5	icon_items.arm_enchant_scroll_3_tex
-20849	3	腕防具刻印書－野獣の速攻 IＶ	0	5	icon_items.arm_enchant_scroll_3_tex
-20850	3	胴防具刻印書－強力な巨人の甲冑 IＶ	0	5	icon_items.body_enchant_scroll_3_tex
-20851	3	胴防具刻印書－強力な巨人の心臓 IＶ	0	5	icon_items.body_enchant_scroll_3_tex
-20852	3	胴防具刻印書－強力な巨人の胆塊 IＶ	0	5	icon_items.body_enchant_scroll_3_tex
-20853	3	胴防具刻印書－強力な野獣の強打 IＶ	0	5	icon_items.body_enchant_scroll_3_tex
-20854	3	胴防具刻印書－強力な野獣の猛撃 IＶ	0	5	icon_items.body_enchant_scroll_3_tex
-20855	3	武器刻印書－強力な野獣の強打 IＶ	0	5	icon_items.weapon_enchant_scroll_3_tex
-20856	3	武器刻印書－強力な野獣の猛撃 IＶ	0	5	icon_items.weapon_enchant_scroll_3_tex
-20857	3	武器刻印書－強力な女神の権能 IＶ	0	5	icon_items.weapon_enchant_scroll_3_tex
-20858	3	武器刻印書－強力な野獣の脅威 IＶ	0	5	icon_items.weapon_enchant_scroll_3_tex
-20859	3	武器刻印書－強力な野獣の速攻 IＶ	0	5	icon_items.weapon_enchant_scroll_3_tex
-20860	3	脚防具刻印書－強力な巨人の甲冑 IＶ	0	5	icon_items.leg_enchant_scroll_3_tex
-20861	3	脚防具刻印書－強力な巨人の心臓 IＶ	0	5	icon_items.leg_enchant_scroll_3_tex
-20862	3	脚防具刻印書－強力な巨人の胆塊 IＶ	0	5	icon_items.leg_enchant_scroll_3_tex
-20863	3	脚防具刻印書－強力な野獣の強打 IＶ	0	5	icon_items.leg_enchant_scroll_3_tex
-20864	3	脚防具刻印書－強力な野獣の猛撃 IＶ	0	5	icon_items.leg_enchant_scroll_3_tex
-20865	3	腕防具刻印書－強力な野獣の強打 IＶ	0	5	icon_items.arm_enchant_scroll_3_tex
-20866	3	腕防具刻印書－強力な野獣の猛撃 IＶ	0	5	icon_items.arm_enchant_scroll_3_tex
-20867	3	腕防具刻印書－強力な女神の権能 IＶ	0	5	icon_items.arm_enchant_scroll_3_tex
-20868	3	腕防具刻印書－強力な野獣の脅威 IＶ	0	5	icon_items.arm_enchant_scroll_3_tex
-20869	3	腕防具刻印書－強力な野獣の速攻 IＶ	0	5	icon_items.arm_enchant_scroll_3_tex
+20830	3	胴防具刻印書－巨人の甲冑 IV	0	5	icon_items.body_enchant_scroll_3_tex
+20831	3	胴防具刻印書－巨人の心臓 IV	0	5	icon_items.body_enchant_scroll_3_tex
+20832	3	胴防具刻印書－巨人の胆塊 IV	0	5	icon_items.body_enchant_scroll_3_tex
+20833	3	胴防具刻印書－野獣の強打 IV	0	5	icon_items.body_enchant_scroll_3_tex
+20834	3	胴防具刻印書－野獣の猛撃 IV	0	5	icon_items.body_enchant_scroll_3_tex
+20835	3	武器刻印書－野獣の強打 IV	0	5	icon_items.weapon_enchant_scroll_3_tex
+20836	3	武器刻印書－野獣の猛撃 IV	0	5	icon_items.weapon_enchant_scroll_3_tex
+20837	3	武器刻印書－女神の権能 IV	0	5	icon_items.weapon_enchant_scroll_3_tex
+20838	3	武器刻印書－野獣の脅威 IV	0	5	icon_items.weapon_enchant_scroll_3_tex
+20839	3	武器刻印書－野獣の速攻 IV	0	5	icon_items.weapon_enchant_scroll_3_tex
+20840	3	脚防具刻印書－巨人の甲冑 IV	0	5	icon_items.leg_enchant_scroll_3_tex
+20841	3	脚防具刻印書－巨人の心臓 IV	0	5	icon_items.leg_enchant_scroll_3_tex
+20842	3	脚防具刻印書－巨人の胆塊 IV	0	5	icon_items.leg_enchant_scroll_3_tex
+20843	3	脚防具刻印書－野獣の強打 IV	0	5	icon_items.leg_enchant_scroll_3_tex
+20844	3	脚防具刻印書－野獣の猛撃 IV	0	5	icon_items.leg_enchant_scroll_3_tex
+20845	3	腕防具刻印書－野獣の強打 IV	0	5	icon_items.arm_enchant_scroll_3_tex
+20846	3	腕防具刻印書－野獣の猛撃 IV	0	5	icon_items.arm_enchant_scroll_3_tex
+20847	3	腕防具刻印書－女神の権能 IV	0	5	icon_items.arm_enchant_scroll_3_tex
+20848	3	腕防具刻印書－野獣の脅威 IV	0	5	icon_items.arm_enchant_scroll_3_tex
+20849	3	腕防具刻印書－野獣の速攻 IV	0	5	icon_items.arm_enchant_scroll_3_tex
+20850	3	胴防具刻印書－強力な巨人の甲冑 IV	0	5	icon_items.body_enchant_scroll_3_tex
+20851	3	胴防具刻印書－強力な巨人の心臓 IV	0	5	icon_items.body_enchant_scroll_3_tex
+20852	3	胴防具刻印書－強力な巨人の胆塊 IV	0	5	icon_items.body_enchant_scroll_3_tex
+20853	3	胴防具刻印書－強力な野獣の強打 IV	0	5	icon_items.body_enchant_scroll_3_tex
+20854	3	胴防具刻印書－強力な野獣の猛撃 IV	0	5	icon_items.body_enchant_scroll_3_tex
+20855	3	武器刻印書－強力な野獣の強打 IV	0	5	icon_items.weapon_enchant_scroll_3_tex
+20856	3	武器刻印書－強力な野獣の猛撃 IV	0	5	icon_items.weapon_enchant_scroll_3_tex
+20857	3	武器刻印書－強力な女神の権能 IV	0	5	icon_items.weapon_enchant_scroll_3_tex
+20858	3	武器刻印書－強力な野獣の脅威 IV	0	5	icon_items.weapon_enchant_scroll_3_tex
+20859	3	武器刻印書－強力な野獣の速攻 IV	0	5	icon_items.weapon_enchant_scroll_3_tex
+20860	3	脚防具刻印書－強力な巨人の甲冑 IV	0	5	icon_items.leg_enchant_scroll_3_tex
+20861	3	脚防具刻印書－強力な巨人の心臓 IV	0	5	icon_items.leg_enchant_scroll_3_tex
+20862	3	脚防具刻印書－強力な巨人の胆塊 IV	0	5	icon_items.leg_enchant_scroll_3_tex
+20863	3	脚防具刻印書－強力な野獣の強打 IV	0	5	icon_items.leg_enchant_scroll_3_tex
+20864	3	脚防具刻印書－強力な野獣の猛撃 IV	0	5	icon_items.leg_enchant_scroll_3_tex
+20865	3	腕防具刻印書－強力な野獣の強打 IV	0	5	icon_items.arm_enchant_scroll_3_tex
+20866	3	腕防具刻印書－強力な野獣の猛撃 IV	0	5	icon_items.arm_enchant_scroll_3_tex
+20867	3	腕防具刻印書－強力な女神の権能 IV	0	5	icon_items.arm_enchant_scroll_3_tex
+20868	3	腕防具刻印書－強力な野獣の脅威 IV	0	5	icon_items.arm_enchant_scroll_3_tex
+20869	3	腕防具刻印書－強力な野獣の速攻 IV	0	5	icon_items.arm_enchant_scroll_3_tex
 20900	2	リリスの羽の粉	0	0	icon_items.refinedinsecta6_tex
 20901	2	汚染された鋳塊	0	0	icon_items.refined_minerala6_tex
 20902	3	加工されたリリスの羽の粉	0	0	icon_items.refinedinsecta13_tex
@@ -15190,9 +15190,9 @@
 28720	1	【製作書】首飾り刻印書－野獣の強打 III	0	0	icon_items.recipe_necklace_enchant_tex
 28721	1	【製作書】首飾り刻印書－野獣の猛撃 III	0	0	icon_items.recipe_necklace_enchant_tex
 28722	1	【製作書】首飾り刻印書－野獣の速歩 III	0	0	icon_items.recipe_necklace_enchant_tex
-28730	1	【製作書】首飾り刻印書－野獣の強打 IＶ	0	0	icon_items.recipe_necklace_enchant_tex
-28731	1	【製作書】首飾り刻印書－野獣の猛撃 IＶ	0	0	icon_items.recipe_necklace_enchant_tex
-28732	1	【製作書】首飾り刻印書－野獣の速歩 IＶ	0	0	icon_items.recipe_necklace_enchant_tex
+28730	1	【製作書】首飾り刻印書－野獣の強打 IV	0	0	icon_items.recipe_necklace_enchant_tex
+28731	1	【製作書】首飾り刻印書－野獣の猛撃 IV	0	0	icon_items.recipe_necklace_enchant_tex
+28732	1	【製作書】首飾り刻印書－野獣の速歩 IV	0	0	icon_items.recipe_necklace_enchant_tex
 28740	0	【製作書】耳飾り刻印書－野獣の強打 I	0	0	icon_items.recipe_earring_enchant_tex
 28741	0	【製作書】耳飾り刻印書－野獣の猛撃 I	0	0	icon_items.recipe_earring_enchant_tex
 28742	0	【製作書】耳飾り刻印書－野獣の速歩 I	0	0	icon_items.recipe_earring_enchant_tex
@@ -15202,53 +15202,53 @@
 28760	1	【製作書】耳飾り刻印書－野獣の強打 III	0	0	icon_items.recipe_earring_enchant_tex
 28761	1	【製作書】耳飾り刻印書－野獣の猛撃 III	0	0	icon_items.recipe_earring_enchant_tex
 28762	1	【製作書】耳飾り刻印書－野獣の速歩 III	0	0	icon_items.recipe_earring_enchant_tex
-28770	1	【製作書】耳飾り刻印書－野獣の強打 IＶ	0	0	icon_items.recipe_earring_enchant_tex
-28771	1	【製作書】耳飾り刻印書－野獣の猛撃 IＶ	0	0	icon_items.recipe_earring_enchant_tex
-28772	1	【製作書】耳飾り刻印書－野獣の速歩 IＶ	0	0	icon_items.recipe_earring_enchant_tex
+28770	1	【製作書】耳飾り刻印書－野獣の強打 IV	0	0	icon_items.recipe_earring_enchant_tex
+28771	1	【製作書】耳飾り刻印書－野獣の猛撃 IV	0	0	icon_items.recipe_earring_enchant_tex
+28772	1	【製作書】耳飾り刻印書－野獣の速歩 IV	0	0	icon_items.recipe_earring_enchant_tex
 28780	0	【製作書】指輪刻印書－野獣の強打 I	0	0	icon_items.recipe_ring_enchant_tex
 28781	0	【製作書】指輪刻印書－野獣の猛撃 I	0	0	icon_items.recipe_ring_enchant_tex
 28782	0	【製作書】指輪刻印書－野獣の速歩 I	0	0	icon_items.recipe_ring_enchant_tex
 28790	1	【製作書】指輪刻印書－野獣の強打 II	0	0	icon_items.recipe_ring_enchant_tex
 28791	1	【製作書】指輪刻印書－野獣の猛撃 II	0	0	icon_items.recipe_ring_enchant_tex
 28792	1	【製作書】指輪刻印書－野獣の速歩 II	0	0	icon_items.recipe_ring_enchant_tex
-28800	1	【製作書】指輪刻印書－野獣の強打 IIＩ	0	0	icon_items.recipe_ring_enchant_tex
-28801	1	【製作書】指輪刻印書－野獣の猛撃 IIＩ	0	0	icon_items.recipe_ring_enchant_tex
-28802	1	【製作書】指輪刻印書－野獣の速歩 IIＩ	0	0	icon_items.recipe_ring_enchant_tex
-28810	1	【製作書】指輪刻印書－野獣の強打 IＶ	0	0	icon_items.recipe_ring_enchant_tex
-28811	1	【製作書】指輪刻印書－野獣の猛撃 IＶ	0	0	icon_items.recipe_ring_enchant_tex
-28812	1	【製作書】指輪刻印書－野獣の速歩 IＶ	0	0	icon_items.recipe_ring_enchant_tex
+28800	1	【製作書】指輪刻印書－野獣の強打 III	0	0	icon_items.recipe_ring_enchant_tex
+28801	1	【製作書】指輪刻印書－野獣の猛撃 III	0	0	icon_items.recipe_ring_enchant_tex
+28802	1	【製作書】指輪刻印書－野獣の速歩 III	0	0	icon_items.recipe_ring_enchant_tex
+28810	1	【製作書】指輪刻印書－野獣の強打 IV	0	0	icon_items.recipe_ring_enchant_tex
+28811	1	【製作書】指輪刻印書－野獣の猛撃 IV	0	0	icon_items.recipe_ring_enchant_tex
+28812	1	【製作書】指輪刻印書－野獣の速歩 IV	0	0	icon_items.recipe_ring_enchant_tex
 28820	0	【製作書】ベルト刻印書－野獣の強打 I	0	0	icon_items.recipe_belt_enchant_tex
 28821	0	【製作書】ベルト刻印書－野獣の猛撃 I	0	0	icon_items.recipe_belt_enchant_tex
 28822	0	【製作書】ベルト刻印書－野獣の速歩 I	0	0	icon_items.recipe_belt_enchant_tex
-28830	1	【製作書】ベルト刻印書－野獣の強打 IＩ	0	0	icon_items.recipe_belt_enchant_tex
-28831	1	【製作書】ベルト刻印書－野獣の猛撃 IＩ	0	0	icon_items.recipe_belt_enchant_tex
-28832	1	【製作書】ベルト刻印書－野獣の速歩 IＩ	0	0	icon_items.recipe_belt_enchant_tex
-28840	1	【製作書】ベルト刻印書－野獣の強打 IＩＩ	0	0	icon_items.recipe_belt_enchant_tex
-28841	1	【製作書】ベルト刻印書－野獣の猛撃 IIＩ	0	0	icon_items.recipe_belt_enchant_tex
+28830	1	【製作書】ベルト刻印書－野獣の強打 II	0	0	icon_items.recipe_belt_enchant_tex
+28831	1	【製作書】ベルト刻印書－野獣の猛撃 II	0	0	icon_items.recipe_belt_enchant_tex
+28832	1	【製作書】ベルト刻印書－野獣の速歩 II	0	0	icon_items.recipe_belt_enchant_tex
+28840	1	【製作書】ベルト刻印書－野獣の強打 III	0	0	icon_items.recipe_belt_enchant_tex
+28841	1	【製作書】ベルト刻印書－野獣の猛撃 III	0	0	icon_items.recipe_belt_enchant_tex
 28842	1	【製作書】ベルト刻印書－野獣の速歩 III	0	0	icon_items.recipe_belt_enchant_tex
-28850	1	【製作書】ベルト刻印書－野獣の強打 IＶ	0	0	icon_items.recipe_belt_enchant_tex
-28851	1	【製作書】ベルト刻印書－野獣の猛撃 IＶ	0	0	icon_items.recipe_belt_enchant_tex
-28852	1	【製作書】ベルト刻印書－野獣の速歩 IＶ	0	0	icon_items.recipe_belt_enchant_tex
-28860	1	【製作書】胴防具刻印書－巨人の甲冑 IＶ	0	0	icon_items.recipe_body_enchant_tex
-28861	1	【製作書】胴防具刻印書－巨人の心臓 IＶ	0	0	icon_items.recipe_body_enchant_tex
-28862	1	【製作書】胴防具刻印書－巨人の胆塊 IＶ	0	0	icon_items.recipe_body_enchant_tex
-28863	1	【製作書】胴防具刻印書－野獣の強打 IＶ	0	0	icon_items.recipe_body_enchant_tex
-28864	1	【製作書】胴防具刻印書－野獣の猛撃 IＶ	0	0	icon_items.recipe_body_enchant_tex
-28865	1	【製作書】武器刻印書－野獣の強打 IＶ	0	0	icon_items.recipe_weapon_enchant_tex
-28866	1	【製作書】武器刻印書－野獣の猛撃 IＶ	0	0	icon_items.recipe_weapon_enchant_tex
-28867	1	【製作書】武器刻印書－女神の権能 IＶ	0	0	icon_items.recipe_weapon_enchant_tex
-28868	1	【製作書】武器刻印書－野獣の脅威 IＶ	0	0	icon_items.recipe_weapon_enchant_tex
-28869	1	【製作書】武器刻印書－野獣の速攻 IＶ	0	0	icon_items.recipe_weapon_enchant_tex
-28870	1	【製作書】腕防具刻印書－野獣の強打 IＶ	0	0	icon_items.recipe_arm_enchant_tex
-28871	1	【製作書】腕防具刻印書－野獣の猛撃 IＶ	0	0	icon_items.recipe_arm_enchant_tex
-28872	1	【製作書】腕防具刻印書－女神の権能 IＶ	0	0	icon_items.recipe_arm_enchant_tex
-28873	1	【製作書】腕防具刻印書－野獣の脅威 IＶ	0	0	icon_items.recipe_arm_enchant_tex
-28874	1	【製作書】腕防具刻印書－野獣の速攻 IＶ	0	0	icon_items.recipe_arm_enchant_tex
-28875	1	【製作書】脚防具刻印書－巨人の甲冑 IＶ	0	0	icon_items.recipe_leg_enchant_tex
-28876	1	【製作書】脚防具刻印書－巨人の心臓 IＶ	0	0	icon_items.recipe_leg_enchant_tex
-28877	1	【製作書】脚防具刻印書－巨人の胆塊 IＶ	0	0	icon_items.recipe_leg_enchant_tex
-28878	1	【製作書】脚防具刻印書－野獣の強打 IＶ	0	0	icon_items.recipe_leg_enchant_tex
-28879	1	【製作書】脚防具刻印書－野獣の猛撃 IＶ	0	0	icon_items.recipe_leg_enchant_tex
+28850	1	【製作書】ベルト刻印書－野獣の強打 IV	0	0	icon_items.recipe_belt_enchant_tex
+28851	1	【製作書】ベルト刻印書－野獣の猛撃 IV	0	0	icon_items.recipe_belt_enchant_tex
+28852	1	【製作書】ベルト刻印書－野獣の速歩 IV	0	0	icon_items.recipe_belt_enchant_tex
+28860	1	【製作書】胴防具刻印書－巨人の甲冑 IV	0	0	icon_items.recipe_body_enchant_tex
+28861	1	【製作書】胴防具刻印書－巨人の心臓 IV	0	0	icon_items.recipe_body_enchant_tex
+28862	1	【製作書】胴防具刻印書－巨人の胆塊 IV	0	0	icon_items.recipe_body_enchant_tex
+28863	1	【製作書】胴防具刻印書－野獣の強打 IV	0	0	icon_items.recipe_body_enchant_tex
+28864	1	【製作書】胴防具刻印書－野獣の猛撃 IV	0	0	icon_items.recipe_body_enchant_tex
+28865	1	【製作書】武器刻印書－野獣の強打 IV	0	0	icon_items.recipe_weapon_enchant_tex
+28866	1	【製作書】武器刻印書－野獣の猛撃 IV	0	0	icon_items.recipe_weapon_enchant_tex
+28867	1	【製作書】武器刻印書－女神の権能 IV	0	0	icon_items.recipe_weapon_enchant_tex
+28868	1	【製作書】武器刻印書－野獣の脅威 IV	0	0	icon_items.recipe_weapon_enchant_tex
+28869	1	【製作書】武器刻印書－野獣の速攻 IV	0	0	icon_items.recipe_weapon_enchant_tex
+28870	1	【製作書】腕防具刻印書－野獣の強打 IV	0	0	icon_items.recipe_arm_enchant_tex
+28871	1	【製作書】腕防具刻印書－野獣の猛撃 IV	0	0	icon_items.recipe_arm_enchant_tex
+28872	1	【製作書】腕防具刻印書－女神の権能 IV	0	0	icon_items.recipe_arm_enchant_tex
+28873	1	【製作書】腕防具刻印書－野獣の脅威 IV	0	0	icon_items.recipe_arm_enchant_tex
+28874	1	【製作書】腕防具刻印書－野獣の速攻 IV	0	0	icon_items.recipe_arm_enchant_tex
+28875	1	【製作書】脚防具刻印書－巨人の甲冑 IV	0	0	icon_items.recipe_leg_enchant_tex
+28876	1	【製作書】脚防具刻印書－巨人の心臓 IV	0	0	icon_items.recipe_leg_enchant_tex
+28877	1	【製作書】脚防具刻印書－巨人の胆塊 IV	0	0	icon_items.recipe_leg_enchant_tex
+28878	1	【製作書】脚防具刻印書－野獣の強打 IV	0	0	icon_items.recipe_leg_enchant_tex
+28879	1	【製作書】脚防具刻印書－野獣の猛撃 IV	0	0	icon_items.recipe_leg_enchant_tex
 32099	3	金霜の双剣	0	0	icon_equipments.dual16_tex
 32100	3	金霜の槍	0	0	icon_equipments.lance16_tex
 32101	3	金霜の大剣	0	0	icon_equipments.twohand16_tex
@@ -21882,6 +21882,30 @@
 92099	3	翔覇凱帝の僧杖・輝	0	0	icon_equipments.staff6_b_tex
 92100	3	翔覇凱帝の霊杖・輝	0	0	icon_equipments.rod6_e_tex
 92101	3	翔覇凱帝の飛鎌・輝	0	0	icon_equipments.chain30_b_tex
+92102	2	エリーンのラズベリーピンクスーツ	0	0	icon_equipments.popori_f_b07_body_tex
+92103	2	エリーンのラズベリーピンクスーツ	0	0	icon_equipments.popori_f_b07_body_tex
+92104	2	エリーンのラズベリーピンクスーツ（3日）	0	0	icon_equipments.popori_f_b07_body_tex
+92105	2	エリーンのラズベリーピンクスーツ（7日）	0	0	icon_equipments.popori_f_b07_body_tex
+92106	2	エリーンのラズベリーピンクスーツ（7日）	0	0	icon_equipments.popori_f_b07_body_tex
+92107	2	エリーンのラズベリーピンクスーツ（14日）	0	0	icon_equipments.popori_f_b07_body_tex
+92108	2	エリーンのラズベリーピンクスーツ（30日）	0	0	icon_equipments.popori_f_b07_body_tex
+92109	2	エリーンのラズベリーピンクスーツ（30日）	0	0	icon_equipments.popori_f_b07_body_tex
+92110	2	エリーンのラズベリーピンクスーツ	0	0	icon_equipments.popori_f_b07_body_tex
+92111	2	エリーンのラズベリーピンクスーツ	0	0	icon_equipments.popori_f_b07_body_tex
+92112	2	エリーンのラズベリーピンクスーツ	0	0	icon_equipments.popori_f_b07_body_tex
+92113	2	エリーンのラズベリーピンクスーツ	0	0	icon_equipments.popori_f_b07_body_tex
+92114	2	エリーンのラズベリーピンクランチャー	0	0	icon_equipments.blaster29_c_tex
+92115	2	エリーンのラズベリーピンクランチャー	0	0	icon_equipments.blaster29_c_tex
+92116	2	エリーンのラズベリーピンクランチャー（3日）	0	0	icon_equipments.blaster29_c_tex
+92117	2	エリーンのラズベリーピンクランチャー（7日）	0	0	icon_equipments.blaster29_c_tex
+92118	2	エリーンのラズベリーピンクランチャー（7日）	0	0	icon_equipments.blaster29_c_tex
+92119	2	エリーンのラズベリーピンクランチャー（14日）	0	0	icon_equipments.blaster29_c_tex
+92120	2	エリーンのラズベリーピンクランチャー（30日）	0	0	icon_equipments.blaster29_c_tex
+92121	2	エリーンのラズベリーピンクランチャー（30日）	0	0	icon_equipments.blaster29_c_tex
+92122	2	エリーンのラズベリーピンクランチャー	0	0	icon_equipments.blaster29_c_tex
+92123	2	エリーンのラズベリーピンクランチャー	0	0	icon_equipments.blaster29_c_tex
+92124	2	エリーンのラズベリーピンクランチャー	0	0	icon_equipments.blaster29_c_tex
+92125	2	エリーンのラズベリーピンクランチャー	0	0	icon_equipments.blaster29_c_tex
 93102	2	氷塵の服（染色）	0	0	icon_equipments.lightchest16_tex
 93103	2	氷塵の鎧（染色）	0	0	icon_equipments.heavychest16_tex
 93104	2	氷塵の法衣（染色）	0	0	icon_equipments.robechest16_tex
@@ -23710,7 +23734,7 @@
 98534	1	中級黎明の強化材料ボックス	0	0	icon_items.refine_chemical4_tex
 98535	2	上級黎明の強化材料ボックス	0	0	icon_items.refine_chemical4_tex
 98536	3	闘士の強化材料ボックス	0	0	icon_items.spiritbox_tex
-98537	3	燦爛たる賞ボックス	0	1	icon_items.mysterybox5_tex
+98537	3	燦爛たる報酬ボックス	0	1	icon_items.mysterybox5_tex
 98538	2	輝くギルド報酬ボックス	0	1	icon_items.mysterybox5_tex
 98539	1	ギルド報酬ボックス	0	1	icon_items.mysterybox2_tex
 98540	0	小型ギルド報酬ボックス	0	1	icon_items.mysterybox1_tex
@@ -23742,11 +23766,22 @@
 98566	2	貴重刻印書結晶体	0	0	icon_items.q_piece_03_tex
 98567	3	伝説刻印書結晶体	0	0	icon_items.q_piece_tex
 98568	3	変化の証拠ボックス	0	0	icon_items.premiumbox_enchant_tex
-98574	3	燦爛たるギルド補給品ボックス	0	1	icon_items.mysterybox5_tex
-98575	2	輝くギルド補給品ボックス	0	1	icon_items.mysterybox5_tex
+98569	0	完全な光輝の書：クリスタル保護（1時間）	0	180	icon_items.weapon_scrolla12_tex
+98570	0	【連合補給品】完全な光輝の書：クリスタル保護（3時間）	0	180	icon_items.weapon_scrolla12_tex
+98571	0	完全な光輝の書：クリスタル保護（3時間）	0	180	icon_items.weapon_scrolla12_tex
+98572	0	【連合補給品】完全な光輝の書：クリスタル保護（6時間）	0	180	icon_items.weapon_scrolla12_tex
+98573	0	完全な光輝の書：クリスタル保護（6時間）	0	180	icon_items.weapon_scrolla12_tex
+98574	3	燦爛たるギルド褒賞ボックス	0	1	icon_items.mysterybox5_tex
+98575	2	輝くギルド褒賞ボックス	0	1	icon_items.mysterybox5_tex
 98576	1	ギルド補給品ボックス	0	1	icon_items.mysterybox2_tex
 98577	0	小型ギルド補給品ボックス	0	1	icon_items.mysterybox1_tex
 98578	2	古いギルド補給品ボックス	0	0	icon_items.mysterybox1_tex
+98584	2	砲火の戦場報酬ボックス	0	0	icon_items.tresurebox1_tex
+98585	2	名誉の戦場報酬ボックス	0	0	icon_items.tresurebox1_tex
+98586	2	秘宝探査隊報酬ボックス	0	0	icon_items.tresurebox1_tex
+98587	2	大乱戦報酬ボックス	0	0	icon_items.tresurebox1_tex
+98588	2	クーマスパラダイス報酬ボックス	0	0	icon_items.tresurebox1_tex
+98589	2	鋼の戦場報酬ボックス	0	0	icon_items.tresurebox1_tex
 99000	0	戦場のインナー	0	0	icon_equipments.underwear00_m_tex
 99001	0	戦場のサークレット	0	0	icon_equipments.acc_580_tex
 99011	0	男ゾンビ変身ポーション（1時間)	0	3	icon_items.rare_potion11_tex
@@ -24092,76 +24127,100 @@
 99434	1	名品強化剤：ランク10	0	0	icon_items.enrichment_masterpiece_10_tex
 99435	1	名品強化剤：ランク11	0	0	icon_items.enrichment_masterpiece_11_tex
 99436	1	名品強化剤：ランク12	0	0	icon_items.enrichment_masterpiece_12_tex
-99437	3	剛力のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99438	3	生命のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99439	3	命中のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99440	3	守護のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99441	3	魔力のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99442	3	【期間制】剛力のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99443	3	【期間制】生命のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99444	3	【期間制】命中のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99445	3	【期間制】守護のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99446	3	【期間制】魔力のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99447	3	【期間制】剛力のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99448	3	【期間制】生命のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99449	3	【期間制】命中のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99450	3	【期間制】守護のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99451	3	【期間制】魔力のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99452	3	【期間制】剛力のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99453	3	【期間制】生命のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99454	3	【期間制】命中のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99455	3	【期間制】守護のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99456	3	【期間制】魔力のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99457	3	【期間制】剛力のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99458	3	【期間制】生命のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99459	3	【期間制】命中のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99460	3	【期間制】守護のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99461	3	【期間制】魔力のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99462	3	剛力のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99463	3	生命のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99464	3	命中のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99465	3	守護のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99466	3	魔力のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99467	3	剛力のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99468	3	生命のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99469	3	命中のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99470	3	守護のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99471	3	魔力のエクササイズシルクインナー Ｖ（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
-99472	3	剛力のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99473	3	生命のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99474	3	命中のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99475	3	守護のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99476	3	魔力のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99477	3	【期間制】剛力のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99478	3	【期間制】生命のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99479	3	【期間制】命中のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99480	3	【期間制】守護のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99481	3	【期間制】魔力のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99482	3	【期間制】剛力のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99483	3	【期間制】生命のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99484	3	【期間制】命中のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99485	3	【期間制】守護のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99486	3	【期間制】魔力のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99487	3	【期間制】剛力のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99488	3	【期間制】生命のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99489	3	【期間制】命中のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99490	3	【期間制】守護のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99491	3	【期間制】魔力のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99492	3	【期間制】剛力のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99493	3	【期間制】生命のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99494	3	【期間制】命中のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99495	3	【期間制】守護のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99496	3	【期間制】魔力のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99497	3	剛力のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99498	3	生命のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99499	3	命中のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99500	3	守護のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99501	3	魔力のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99502	3	剛力のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99503	3	生命のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99504	3	命中のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99505	3	守護のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
-99506	3	魔力のエクササイズシルクインナー Ｖ（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99437	3	剛力のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99438	3	生命のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99439	3	命中のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99440	3	守護のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99441	3	魔力のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99442	3	【期間制】剛力のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99443	3	【期間制】生命のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99444	3	【期間制】命中のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99445	3	【期間制】守護のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99446	3	【期間制】魔力のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99447	3	【期間制】剛力のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99448	3	【期間制】生命のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99449	3	【期間制】命中のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99450	3	【期間制】守護のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99451	3	【期間制】魔力のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99452	3	【期間制】剛力のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99453	3	【期間制】生命のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99454	3	【期間制】命中のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99455	3	【期間制】守護のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99456	3	【期間制】魔力のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99457	3	【期間制】剛力のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99458	3	【期間制】生命のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99459	3	【期間制】命中のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99460	3	【期間制】守護のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99461	3	【期間制】魔力のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99462	3	剛力のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99463	3	生命のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99464	3	命中のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99465	3	守護のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99466	3	魔力のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99467	3	剛力のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99468	3	生命のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99469	3	命中のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99470	3	守護のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99471	3	魔力のエクササイズシルクインナー V（ホワイト）	0	0	icon_equipments.pc_event_57_f_a_tex
+99472	3	剛力のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99473	3	生命のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99474	3	命中のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99475	3	守護のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99476	3	魔力のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99477	3	【期間制】剛力のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99478	3	【期間制】生命のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99479	3	【期間制】命中のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99480	3	【期間制】守護のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99481	3	【期間制】魔力のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99482	3	【期間制】剛力のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99483	3	【期間制】生命のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99484	3	【期間制】命中のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99485	3	【期間制】守護のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99486	3	【期間制】魔力のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99487	3	【期間制】剛力のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99488	3	【期間制】生命のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99489	3	【期間制】命中のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99490	3	【期間制】守護のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99491	3	【期間制】魔力のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99492	3	【期間制】剛力のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99493	3	【期間制】生命のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99494	3	【期間制】命中のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99495	3	【期間制】守護のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99496	3	【期間制】魔力のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99497	3	剛力のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99498	3	生命のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99499	3	命中のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99500	3	守護のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99501	3	魔力のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99502	3	剛力のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99503	3	生命のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99504	3	命中のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99505	3	守護のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99506	3	魔力のエクササイズシルクインナー V（ピンク）	0	0	icon_equipments.pc_event_57_f_b_tex
+99507	3	ラバー・ダックスタンプ	0	0	icon_items.footprint_rubberduck_tex
+99508	3	ラバー・ダックスタンプ	0	0	icon_items.footprint_rubberduck_tex
+99509	3	ラバー・ダックスタンプ（3日）	0	0	icon_items.footprint_rubberduck_tex
+99510	3	ラバー・ダックスタンプ（7日）	0	0	icon_items.footprint_rubberduck_tex
+99511	3	ラバー・ダックスタンプ（7日）	0	0	icon_items.footprint_rubberduck_tex
+99512	3	ラバー・ダックスタンプ（14日）	0	0	icon_items.footprint_rubberduck_tex
+99513	3	ラバー・ダックスタンプ（30日）	0	0	icon_items.footprint_rubberduck_tex
+99514	3	ラバー・ダックスタンプ（30日）	0	0	icon_items.footprint_rubberduck_tex
+99515	3	ラバー・ダックスタンプ	0	0	icon_items.footprint_rubberduck_tex
+99516	3	ラバー・ダックスタンプ	0	0	icon_items.footprint_rubberduck_tex
+99517	3	ラバー・ダックスタンプ	0	0	icon_items.footprint_rubberduck_tex
+99518	3	ラバー・ダックスタンプ	0	0	icon_items.footprint_rubberduck_tex
+99519	2	エリーンスタンプ	0	0	icon_items.footprint_elin_tex
+99520	2	エリーンスタンプ	0	0	icon_items.footprint_elin_tex
+99521	2	エリーンスタンプ（3日）	0	0	icon_items.footprint_elin_tex
+99522	2	エリーンスタンプ（7日）	0	0	icon_items.footprint_elin_tex
+99523	2	エリーンスタンプ（7日）	0	0	icon_items.footprint_elin_tex
+99524	2	エリーンスタンプ（14日）	0	0	icon_items.footprint_elin_tex
+99525	2	エリーンスタンプ（30日）	0	0	icon_items.footprint_elin_tex
+99526	2	エリーンスタンプ（30日）	0	0	icon_items.footprint_elin_tex
+99527	2	エリーンスタンプ	0	0	icon_items.footprint_elin_tex
+99528	2	エリーンスタンプ	0	0	icon_items.footprint_elin_tex
+99529	2	エリーンスタンプ	0	0	icon_items.footprint_elin_tex
+99530	2	エリーンスタンプ	0	0	icon_items.footprint_elin_tex
 99531	2	【スキル書】ブルーフェニックス召喚	0	0	icon_items.skillbook_lion1_tex
 99532	3	【スキル書】真・ブルーフェニックス召喚	0	0	icon_items.skillbook_lion1_tex
 99533	2	【スキル書】ブルーフェニックス召喚	0	0	icon_items.skillbook_lion1_tex
@@ -24210,6 +24269,42 @@
 99576	3	【スキル書】真・レッドフェニックス召喚（7日）	0	0	icon_items.skillbook_lion1_tex
 99577	3	【スキル書】真・レッドフェニックス召喚（14日）	0	0	icon_items.skillbook_lion1_tex
 99578	3	【スキル書】真・レッドフェニックス召喚（30日）	0	0	icon_items.skillbook_lion1_tex
+99579	3	雪ウサギスタンプ（ピンク）	0	0	icon_items.footprint_ricecake02_tex
+99580	3	雪ウサギスタンプ（ピンク）	0	0	icon_items.footprint_ricecake02_tex
+99581	3	雪ウサギスタンプ（ピンク）（3日）	0	0	icon_items.footprint_ricecake02_tex
+99582	3	雪ウサギスタンプ（ピンク）（7日）	0	0	icon_items.footprint_ricecake02_tex
+99583	3	雪ウサギスタンプ（ピンク）（7日）	0	0	icon_items.footprint_ricecake02_tex
+99584	3	雪ウサギスタンプ（ピンク）（14日）	0	0	icon_items.footprint_ricecake02_tex
+99585	3	雪ウサギスタンプ（ピンク）（30日）	0	0	icon_items.footprint_ricecake02_tex
+99586	3	雪ウサギスタンプ（ピンク）（30日）	0	0	icon_items.footprint_ricecake02_tex
+99587	3	雪ウサギスタンプ（ピンク）	0	0	icon_items.footprint_ricecake02_tex
+99588	3	雪ウサギスタンプ（ピンク）	0	0	icon_items.footprint_ricecake02_tex
+99589	3	雪ウサギスタンプ（ピンク）	0	0	icon_items.footprint_ricecake02_tex
+99590	3	雪ウサギスタンプ（ピンク）	0	0	icon_items.footprint_ricecake02_tex
+99591	3	雪ウサギスタンプ（ブルー）	0	0	icon_items.footprint_ricecake01_tex
+99592	3	雪ウサギスタンプ（ブルー）	0	0	icon_items.footprint_ricecake01_tex
+99593	3	雪ウサギスタンプ（ブルー）（3日）	0	0	icon_items.footprint_ricecake01_tex
+99594	3	雪ウサギスタンプ（ブルー）（7日）	0	0	icon_items.footprint_ricecake01_tex
+99595	3	雪ウサギスタンプ（ブルー）（7日）	0	0	icon_items.footprint_ricecake01_tex
+99596	3	雪ウサギスタンプ（ブルー）（14日）	0	0	icon_items.footprint_ricecake01_tex
+99597	3	雪ウサギスタンプ（ブルー）（30日）	0	0	icon_items.footprint_ricecake01_tex
+99598	3	雪ウサギスタンプ（ブルー）（30日）	0	0	icon_items.footprint_ricecake01_tex
+99599	3	雪ウサギスタンプ（ブルー）	0	0	icon_items.footprint_ricecake01_tex
+99600	3	雪ウサギスタンプ（ブルー）	0	0	icon_items.footprint_ricecake01_tex
+99601	3	雪ウサギスタンプ（ブルー）	0	0	icon_items.footprint_ricecake01_tex
+99602	3	雪ウサギスタンプ（ブルー）	0	0	icon_items.footprint_ricecake01_tex
+99603	3	雪ウサギスタンプ（グラデーション）	0	0	icon_items.footprint_ricecake03_tex
+99604	3	雪ウサギスタンプ（グラデーション）	0	0	icon_items.footprint_ricecake03_tex
+99605	3	雪ウサギスタンプ（グラデーション）（3日）	0	0	icon_items.footprint_ricecake03_tex
+99606	3	雪ウサギスタンプ（グラデーション）（7日）	0	0	icon_items.footprint_ricecake03_tex
+99607	3	雪ウサギスタンプ（グラデーション）（7日）	0	0	icon_items.footprint_ricecake03_tex
+99608	3	雪ウサギスタンプ（グラデーション）（14日）	0	0	icon_items.footprint_ricecake03_tex
+99609	3	雪ウサギスタンプ（グラデーション）（30日）	0	0	icon_items.footprint_ricecake03_tex
+99610	3	雪ウサギスタンプ（グラデーション）（30日）	0	0	icon_items.footprint_ricecake03_tex
+99611	3	雪ウサギスタンプ（グラデーション）	0	0	icon_items.footprint_ricecake03_tex
+99612	3	雪ウサギスタンプ（グラデーション）	0	0	icon_items.footprint_ricecake03_tex
+99613	3	雪ウサギスタンプ（グラデーション）	0	0	icon_items.footprint_ricecake03_tex
+99614	3	雪ウサギスタンプ（グラデーション）	0	0	icon_items.footprint_ricecake03_tex
 99615	1	剛力のグレーインナー I	0	0	icon_equipments.underwear00_f_tex
 99616	1	生命のグレーインナー I	0	0	icon_equipments.underwear00_f_tex
 99617	1	命中のグレーインナー I	0	0	icon_equipments.underwear00_f_tex
@@ -25221,6 +25316,54 @@
 201300	3	【ヴァルキオン偵察隊】フリルコレクションの鎧（染色）	0	0	icon_equipments.heavychest21_tex
 201301	3	【ヴァルキオン偵察隊】フリルコレクションの服（染色）	0	0	icon_equipments.lightchest21_tex
 201302	3	【ヴァルキオン偵察隊】フリルコレクションの法衣（染色）	0	0	icon_equipments.robechest21_tex
+201303	3	【ヴァルキオン偵察隊】守護コレクションの鎧	0	0	icon_equipments.heavychest26_tex
+201304	3	【ヴァルキオン偵察隊】守護コレクションの服	0	0	icon_equipments.lightchest26_tex
+201305	3	【ヴァルキオン偵察隊】守護コレクションの法衣	0	0	icon_equipments.robechest26_tex
+201306	3	【ヴァルキオン偵察隊】 ムフラック・ブラックラベルの鎧	0	0	icon_equipments.heavychest_be_tex
+201307	3	【ヴァルキオン偵察隊】 ムフラック・ブラックラベルの服	0	0	icon_equipments.lightchest_be_tex
+201308	3	【ヴァルキオン偵察隊】 ムフラック・ブラックラベルの法衣	0	0	icon_equipments.robechest_be_tex
+201309	3	【ヴァルキオン偵察隊】ムフラック・シルバーラベルの鎧	0	0	icon_equipments.heavychest_silver_tex
+201310	3	【ヴァルキオン偵察隊】ムフラック・シルバーラベルの服	0	0	icon_equipments.lightchest_silver_tex
+201311	3	【ヴァルキオン偵察隊】ムフラック・シルバーラベルの法衣	0	0	icon_equipments.robechest_silver_tex
+201312	3	【ヴァルキオン偵察隊】無慈悲な虐殺者の双剣	0	0	icon_equipments.dual27_a_tex
+201313	3	【ヴァルキオン偵察隊】無慈悲な虐殺者の槍	0	0	icon_equipments.lance27_a_tex
+201314	3	【ヴァルキオン偵察隊】無慈悲な虐殺者の大剣	0	0	icon_equipments.twohand27_a_tex
+201315	3	【ヴァルキオン偵察隊】無慈悲な虐殺者の斧	0	0	icon_equipments.axe27_a_tex
+201316	3	【ヴァルキオン偵察隊】無慈悲な虐殺者の法環	0	0	icon_equipments.circle27_a_tex
+201317	3	【ヴァルキオン偵察隊】無慈悲な虐殺者の弓	0	0	icon_equipments.bow27_a_tex
+201318	3	【ヴァルキオン偵察隊】無慈悲な虐殺者の僧杖	0	0	icon_equipments.staff27_a_tex
+201319	3	【ヴァルキオン偵察隊】無慈悲な虐殺者の霊杖	0	0	icon_equipments.rod27_a_tex
+201320	3	【ヴァルキオン偵察隊】無慈悲な虐殺者の飛鎌	0	0	icon_equipments.chain30_b_tex
+201321	3	【ヴァルキオン偵察隊】無慈悲な虐殺者の魔工砲	0	0	icon_equipments.blaster31_a_tex
+201322	3	【ヴァルキオン偵察隊】無慈悲な虐殺者の甲拳	0	0	icon_equipments.gauntlet1_a_tex
+201323	3	【ヴァルキオン偵察隊】無慈悲な虐殺者の手裏剣	0	0	icon_equipments.shuriken05_b_tex
+201324	3	【ヴァルキオン偵察隊】無慈悲な虐殺者の偃月刀	0	0	icon_equipments.glaive03_b_tex
+201325	3	【ヴァルキオン偵察隊】ノクタニウムの双剣・輝	0	0	icon_equipments.dual25_tex
+201326	3	【ヴァルキオン偵察隊】ノクタニウムの槍・輝	0	0	icon_equipments.lance25_tex
+201327	3	【ヴァルキオン偵察隊】ノクタニウムの大剣・輝	0	0	icon_equipments.twohand25_tex
+201328	3	【ヴァルキオン偵察隊】ノクタニウムの斧・輝	0	0	icon_equipments.axe25_tex
+201329	3	【ヴァルキオン偵察隊】ノクタニウムの法環・輝	0	0	icon_equipments.circle25_tex
+201330	3	【ヴァルキオン偵察隊】ノクタニウムの弓・輝	0	0	icon_equipments.bow25_tex
+201331	3	【ヴァルキオン偵察隊】ノクタニウムの僧杖・輝	0	0	icon_equipments.staff25_tex
+201332	3	【ヴァルキオン偵察隊】ノクタニウムの霊杖・輝	0	0	icon_equipments.rod25_tex
+201333	3	【ヴァルキオン偵察隊】ノクタニウムの飛鎌・輝	0	0	icon_equipments.chain28_tex
+201334	3	【ヴァルキオン偵察隊】ノクタニウムの魔工砲・輝	0	0	icon_equipments.blaster30_b_tex
+201335	3	【ヴァルキオン偵察隊】ノクタニウムの甲拳・輝	0	0	icon_equipments.gauntlet1_b_tex
+201336	3	【ヴァルキオン偵察隊】ノクタニウムの手裏剣・輝	0	0	icon_equipments.shuriken03_tex
+201337	3	【ヴァルキオン偵察隊】ノクタニウムの偃月刀・輝	0	0	icon_equipments.glaive01_tex
+201338	3	【ヴァルキオン偵察隊】シャンドラ・マナイアの双剣	0	0	icon_equipments.dual24_c_tex
+201339	3	【ヴァルキオン偵察隊】シャンドラ・マナイアの槍	0	0	icon_equipments.lance24_c_tex
+201340	3	【ヴァルキオン偵察隊】シャンドラ・マナイアの大剣	0	0	icon_equipments.twohand24_c_tex
+201341	3	【ヴァルキオン偵察隊】シャンドラ・マナイアの斧	0	0	icon_equipments.axe24_c_tex
+201342	3	【ヴァルキオン偵察隊】シャンドラ・マナイアの法環	0	0	icon_equipments.circle24_c_tex
+201343	3	【ヴァルキオン偵察隊】シャンドラ・マナイアの弓	0	0	icon_equipments.bow24_c_tex
+201344	3	【ヴァルキオン偵察隊】シャンドラ・マナイアの僧杖	0	0	icon_equipments.staff24_c_tex
+201345	3	【ヴァルキオン偵察隊】シャンドラ・マナイアの霊杖	0	0	icon_equipments.rod24_c_tex
+201346	3	【ヴァルキオン偵察隊】シャンドラ・マナイアの飛鎌	0	0	icon_equipments.chain30_tex
+201347	3	【ヴァルキオン偵察隊】シャンドラ・マナイアの魔工砲	0	0	icon_equipments.blaster31_b_tex
+201348	3	【ヴァルキオン偵察隊】シャンドラ・マナイアの甲拳	0	0	icon_equipments.gauntlet29_a_tex
+201349	3	【ヴァルキオン偵察隊】シャンドラ・マナイアの手裏剣	0	0	icon_equipments.shuriken03_b_tex
+201350	3	【ヴァルキオン偵察隊】シャンドラ・マナイアの偃月刀	0	0	icon_equipments.glaive02_a_tex
 20000000	0	ゴールド	0	0	icon_items.goldcoin_tex
 20000001	0	経験値	0	0	icon_items.icon_exp_tex
 20000002	0	報酬未定	0	0	icon_items.icon_reward_unclear_tex
@@ -25549,6 +25692,17 @@
 155548	3	Locked Gem Coffer	0	0	icon_items.f2p_box_tex
 155549	3	Tier IV Etching Master 1	0	0	icon_items.premiumbox_enchantagent_tex
 155550	3	Tier IV Etching Master 2	0	0	icon_items.premiumbox_enchantagent_tex
+155551	3	Surprise Box: Mighty Phoenix	0	1	icon_items.premiumbox_dress4_tex
+155552	1	Elin Shard	0	0	icon_items.footprint_elin_tex
+160330	2	Precious Gem Box	0	0	icon_items.gachabox_tex
+160331	2	Elin Gunner Reward Box	0	1	icon_items.gift_box04_tex
+160332	2	Level 15 Elin Gunner Reward Box	0	1	icon_items.gift_box04_tex
+160333	2	Level 20 Elin Gunner Reward Box	0	1	icon_items.gift_box04_tex
+160334	2	Level 40 Elin Gunner Reward Box	0	1	icon_items.gift_box04_tex
+160335	2	Level 60 Elin Gunner Reward Box	0	1	icon_items.gift_box04_tex
+160336	2	Level 65 Elin Gunner Reward Box	0	1	icon_items.gift_box04_tex
+160337	2	v62 winback event box	0	0	icon_items.gachabox_tex
+160338	2	v62 login event box	0	0	icon_items.gachabox_tex
 160404	0	Federation Bill	0	0	icon_items.federation_bill_tex
 167296	0	T	0	0	icon_items.event_letter01_tex
 167297	0	E	0	0	icon_items.event_letter02_tex
@@ -25583,12 +25737,12 @@
 186784	3	15-Day Care and Use of Your Pet Argette	0	0	icon_items.petskillbook_tex
 186785	3	15-Day Travel Journal	0	0	icon_items.travelbook_village_tex
 186786	3	15-Day Village Atlas	0	0	icon_items.travelbook_portal_tex
-186787	2	Reservation Reward Box	0	1	icon_items.gift_box04_tex
-186788	2	Level 15 Reward Box	0	1	icon_items.gift_box04_tex
+186787	3	Reservation Reward Box	0	1	icon_items.gift_box04_tex
+186788	3	Level 15 Reward Box	0	1	icon_items.gift_box04_tex
 186789	1	Riding Skill: Snarl	0	0	icon_items.skillbook_lion1_tex
 186790	2	Level 20 Box	0	1	icon_items.gift_box04_tex
 186791	2	Level 40 Box	0	1	icon_items.gift_box04_tex
-186792	2	Level 60 Box	0	1	icon_items.gift_box04_tex
+186792	3	Level 60 Box	0	1	icon_items.gift_box04_tex
 186793	2	Level 65 Box	0	1	icon_items.gift_box04_tex
 186795	2	+12 Slaughter Weapon Box	0	0	icon_items.gachabox_tex
 244520	2	Dummy Smart Box20	0	1	icon_items.gift_box04_tex
@@ -25633,6 +25787,33 @@
 244559	3	Dummy Gacha21	0	0	icon_items.tresurebox2_tex
 244560	2	Wedding Dress Costume box	0	1	icon_items.gift_box04_tex
 244561	2	Dyeable Wedding Dress Costume box	0	1	icon_items.gift_box04_tex
+244562	2	Extensive Alkahest Box	0	0	icon_items.tresurebox2_tex
+244563	2	Spellbind Box	0	0	icon_items.tresurebox2_tex
+244564	2	Blessed Enigmatic Scroll Case	0	0	icon_items.tresurebox2_tex
+244565	2	Pet Food Box	0	0	icon_items.tresurebox2_tex
+244566	2	Celestial Spirit Box	0	0	icon_items.tresurebox2_tex
+244567	2	Ice Box	0	0	icon_items.tresurebox2_tex
+244568	2	Ice Drake Weapon Crate	0	0	icon_items.tresurebox2_tex
+244569	2	Fire Drake Weapon Crate	0	0	icon_items.tresurebox2_tex
+244570	2	Elleon's Nobility Box	0	0	icon_items.tresurebox2_tex
+244571	2	Elleon's Bravery Box	0	0	icon_items.tresurebox2_tex
+244572	2	Dress for Success Loot Box	0	0	icon_items.tresurebox2_tex
+244573	2	Dress to Impress Loot Box	0	0	icon_items.tresurebox2_tex
+244574	2	Hero's Cape Box	0	0	icon_items.tresurebox2_tex
+244575	2	Rainy Day Loot Box	0	0	icon_items.tresurebox2_tex
+244576	2	Avenging Angel Loot Box	0	0	icon_items.tresurebox2_tex
+244577	2	Guardian Angel Loot Box	0	0	icon_items.tresurebox2_tex
+244578	2	Technicolor Yawn Box	0	0	icon_items.tresurebox2_tex
+244579	2	Red Wolf Box	0	0	icon_items.tresurebox2_tex
+244580	2	Blue Wolf Box	0	0	icon_items.tresurebox2_tex
+244581	2	Purple Wolf Box	0	0	icon_items.tresurebox2_tex
+244582	2	Gold Wolf Box	0	0	icon_items.tresurebox2_tex
+244583	2	Snarlheart Wolfrider Box	0	0	icon_items.tresurebox2_tex
+244584	2	Gloryheart Wolfrider Box	0	0	icon_items.tresurebox2_tex
+244585	2	Fiery Birdcage	0	0	icon_items.tresurebox2_tex
+244586	2	Violet Birdcage	0	0	icon_items.tresurebox2_tex
+244587	2	Steamer Wardrobe	0	0	icon_items.tresurebox2_tex
+244588	2	Steampunked Loot Box	0	0	icon_items.tresurebox2_tex
 244589	2	Dummy Smart Box1	0	1	icon_items.gift_box04_tex
 244590	2	Dummy Smart Box2	0	1	icon_items.gift_box04_tex
 244591	2	Dummy Smart Box3	0	1	icon_items.gift_box04_tex
@@ -25909,6 +26090,19 @@
 247654	2	Smartbox: Rare elemental costume (non-tradable)	0	1	icon_items.premiumbox_dress3_tex
 247655	2	Smartbox: Rare elemental costume	0	1	icon_items.premiumbox_dress3_tex
 247656	2	Smartbox: Rare elemental costume (3 days)	0	1	icon_items.premiumbox_dress3_tex
+247657	2	Smartbox: Stage Costume (non-tradable)	0	1	icon_items.premiumbox_dress3_tex
+247658	2	Smartbox: Stage Costume (tradable)	0	1	icon_items.premiumbox_dress3_tex
+247659	2	Smartbox: Stage Costume (3 days)	0	1	icon_items.premiumbox_dress3_tex
+247660	2	Smartbox: Dyeable Stage Costume (non-tradable)	0	1	icon_items.premiumbox_dress3_tex
+247661	2	Smartbox: Dyeable Stage Costume (tradable)	0	1	icon_items.premiumbox_dress3_tex
+247662	2	Smartbox: Dyeable Stage Costume (3 days)	0	1	icon_items.premiumbox_dress3_tex
+247663	2	Wheel of Fortune box	0	0	icon_items.premiumbox_flyveh5_tex
+247664	2	Wheel of Fortune box	0	0	icon_items.premiumbox_flyveh5_tex
+247665	2	Wheel of Fortune box	0	0	icon_items.premiumbox_flyveh5_tex
+247666	2	Wheel of Fortune box	0	0	icon_items.premiumbox_flyveh5_tex
+247667	2	Wheel of Fortune box	0	0	icon_items.premiumbox_flyveh5_tex
+247668	2	Wheel of Fortune box	0	0	icon_items.premiumbox_flyveh5_tex
+247669	2	Wheel of Fortune box	0	0	icon_items.premiumbox_flyveh5_tex
 250000	3	コマンドフォースアーマー（ヒューマン男性）	0	0	icon_equipments.pc_event_43_m_tex
 250001	3	コマンドフォースアーマー（ヒューマン男性）	0	0	icon_equipments.pc_event_43_m_tex
 250002	3	コマンドフォースアーマー（ヒューマン男性）	0	0	icon_equipments.pc_event_43_m_tex
@@ -33049,6 +33243,162 @@
 257525	3	ガイコツマスク（ブルーファイア）	0	0	icon_equipments.acc_625_tex
 257526	3	ガイコツマスク（ブルーファイア）	0	0	icon_equipments.acc_625_tex
 257527	3	ガイコツマスク（ブルーファイア）	0	0	icon_equipments.acc_625_tex
+257528	3	シャイニーアイドル（ヒューマン女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257529	3	シャイニーアイドル（ヒューマン女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257530	3	シャイニーアイドル（ヒューマン女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257531	3	シャイニーアイドル（ヒューマン女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257532	3	シャイニーアイドル（ヒューマン女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257533	3	シャイニーアイドル（ヒューマン女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257534	3	シャイニーアイドル（ヒューマン女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257535	3	シャイニーアイドル（ヒューマン女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257536	3	シャイニーアイドル（ヒューマン女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257537	3	シャイニーアイドル（ヒューマン女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257538	3	シャイニーアイドル（ヒューマン女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257539	3	シャイニーアイドル（ヒューマン女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257540	3	シャイニーアイドル（染色・ヒューマン女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257541	3	シャイニーアイドル（染色・ヒューマン女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257542	3	シャイニーアイドル（染色・ヒューマン女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257543	3	シャイニーアイドル（染色・ヒューマン女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257544	3	シャイニーアイドル（染色・ヒューマン女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257545	3	シャイニーアイドル（染色・ヒューマン女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257546	3	シャイニーアイドル（染色・ヒューマン女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257547	3	シャイニーアイドル（染色・ヒューマン女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257548	3	シャイニーアイドル（染色・ヒューマン女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257549	3	シャイニーアイドル（染色・ヒューマン女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257550	3	シャイニーアイドル（染色・ヒューマン女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257551	3	シャイニーアイドル（染色・ヒューマン女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257552	3	シャイニーアイドル（ハイエルフ女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257553	3	シャイニーアイドル（ハイエルフ女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257554	3	シャイニーアイドル（ハイエルフ女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257555	3	シャイニーアイドル（ハイエルフ女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257556	3	シャイニーアイドル（ハイエルフ女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257557	3	シャイニーアイドル（ハイエルフ女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257558	3	シャイニーアイドル（ハイエルフ女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257559	3	シャイニーアイドル（ハイエルフ女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257560	3	シャイニーアイドル（ハイエルフ女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257561	3	シャイニーアイドル（ハイエルフ女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257562	3	シャイニーアイドル（ハイエルフ女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257563	3	シャイニーアイドル（ハイエルフ女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257564	3	シャイニーアイドル（染色・ハイエルフ女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257565	3	シャイニーアイドル（染色・ハイエルフ女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257566	3	シャイニーアイドル（染色・ハイエルフ女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257567	3	シャイニーアイドル（染色・ハイエルフ女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257568	3	シャイニーアイドル（染色・ハイエルフ女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257569	3	シャイニーアイドル（染色・ハイエルフ女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257570	3	シャイニーアイドル（染色・ハイエルフ女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257571	3	シャイニーアイドル（染色・ハイエルフ女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257572	3	シャイニーアイドル（染色・ハイエルフ女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257573	3	シャイニーアイドル（染色・ハイエルフ女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257574	3	シャイニーアイドル（染色・ハイエルフ女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257575	3	シャイニーアイドル（染色・ハイエルフ女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257576	3	シャイニーアイドル（アーマン女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257577	3	シャイニーアイドル（アーマン女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257578	3	シャイニーアイドル（アーマン女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257579	3	シャイニーアイドル（アーマン女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257580	3	シャイニーアイドル（アーマン女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257581	3	シャイニーアイドル（アーマン女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257582	3	シャイニーアイドル（アーマン女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257583	3	シャイニーアイドル（アーマン女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257584	3	シャイニーアイドル（アーマン女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257585	3	シャイニーアイドル（アーマン女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257586	3	シャイニーアイドル（アーマン女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257587	3	シャイニーアイドル（アーマン女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257588	3	シャイニーアイドル（染色・アーマン女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257589	3	シャイニーアイドル（染色・アーマン女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257590	3	シャイニーアイドル（染色・アーマン女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257591	3	シャイニーアイドル（染色・アーマン女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257592	3	シャイニーアイドル（染色・アーマン女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257593	3	シャイニーアイドル（染色・アーマン女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257594	3	シャイニーアイドル（染色・アーマン女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257595	3	シャイニーアイドル（染色・アーマン女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257596	3	シャイニーアイドル（染色・アーマン女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257597	3	シャイニーアイドル（染色・アーマン女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257598	3	シャイニーアイドル（染色・アーマン女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257599	3	シャイニーアイドル（染色・アーマン女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257600	3	シャイニーアイドル（キャスタニック女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257601	3	シャイニーアイドル（キャスタニック女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257602	3	シャイニーアイドル（キャスタニック女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257603	3	シャイニーアイドル（キャスタニック女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257604	3	シャイニーアイドル（キャスタニック女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257605	3	シャイニーアイドル（キャスタニック女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257606	3	シャイニーアイドル（キャスタニック女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257607	3	シャイニーアイドル（キャスタニック女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257608	3	シャイニーアイドル（キャスタニック女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257609	3	シャイニーアイドル（キャスタニック女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257610	3	シャイニーアイドル（キャスタニック女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257611	3	シャイニーアイドル（キャスタニック女性）	0	0	icon_equipments.pc_event_61_f_a_tex
+257612	3	シャイニーアイドル（染色・キャスタニック女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257613	3	シャイニーアイドル（染色・キャスタニック女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257614	3	シャイニーアイドル（染色・キャスタニック女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257615	3	シャイニーアイドル（染色・キャスタニック女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257616	3	シャイニーアイドル（染色・キャスタニック女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257617	3	シャイニーアイドル（染色・キャスタニック女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257618	3	シャイニーアイドル（染色・キャスタニック女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257619	3	シャイニーアイドル（染色・キャスタニック女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257620	3	シャイニーアイドル（染色・キャスタニック女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257621	3	シャイニーアイドル（染色・キャスタニック女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257622	3	シャイニーアイドル（染色・キャスタニック女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257623	3	シャイニーアイドル（染色・キャスタニック女性）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257624	3	シャイニーアイドル（エリーン）	0	0	icon_equipments.pc_event_61_f_a_tex
+257625	3	シャイニーアイドル（エリーン）	0	0	icon_equipments.pc_event_61_f_a_tex
+257626	3	シャイニーアイドル（エリーン）	0	0	icon_equipments.pc_event_61_f_a_tex
+257627	3	シャイニーアイドル（エリーン）	0	0	icon_equipments.pc_event_61_f_a_tex
+257628	3	シャイニーアイドル（エリーン）	0	0	icon_equipments.pc_event_61_f_a_tex
+257629	3	シャイニーアイドル（エリーン）	0	0	icon_equipments.pc_event_61_f_a_tex
+257630	3	シャイニーアイドル（エリーン）	0	0	icon_equipments.pc_event_61_f_a_tex
+257631	3	シャイニーアイドル（エリーン）	0	0	icon_equipments.pc_event_61_f_a_tex
+257632	3	シャイニーアイドル（エリーン）	0	0	icon_equipments.pc_event_61_f_a_tex
+257633	3	シャイニーアイドル（エリーン）	0	0	icon_equipments.pc_event_61_f_a_tex
+257634	3	シャイニーアイドル（エリーン）	0	0	icon_equipments.pc_event_61_f_a_tex
+257635	3	シャイニーアイドル（エリーン）	0	0	icon_equipments.pc_event_61_f_a_tex
+257636	3	シャイニーアイドル（染色・エリーン）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257637	3	シャイニーアイドル（染色・エリーン）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257638	3	シャイニーアイドル（染色・エリーン）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257639	3	シャイニーアイドル（染色・エリーン）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257640	3	シャイニーアイドル（染色・エリーン）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257641	3	シャイニーアイドル（染色・エリーン）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257642	3	シャイニーアイドル（染色・エリーン）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257643	3	シャイニーアイドル（染色・エリーン）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257644	3	シャイニーアイドル（染色・エリーン）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257645	3	シャイニーアイドル（染色・エリーン）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257646	3	シャイニーアイドル（染色・エリーン）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257647	3	シャイニーアイドル（染色・エリーン）	0	0	icon_equipments.pc_event_61_f_a_dye_tex
+257648	3	スターライトアイドル（センター・エリーン）	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257649	3	スターライトアイドル（センター・エリーン）	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257650	3	スターライトアイドル（センター・エリーン）	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257651	3	スターライトアイドル（センター・エリーン）	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257652	3	スターライトアイドル（センター・エリーン）	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257653	3	スターライトアイドル（センター・エリーン）	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257654	3	スターライトアイドル（センター・エリーン）	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257655	3	スターライトアイドル（センター・エリーン）	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257656	3	スターライトアイドル（センター・エリーン）	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257657	3	スターライトアイドル（センター・エリーン）	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257658	3	スターライトアイドル（センター・エリーン）	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257659	3	スターライトアイドル（センター・エリーン）	0	0	icon_equipments.pc_event_61_popori_f_b_tex
+257660	3	ヘッドセットマイク（グレー）	0	0	icon_equipments.acc_626_tex
+257661	3	ヘッドセットマイク（グレー）	0	0	icon_equipments.acc_626_tex
+257662	3	ヘッドセットマイク（グレー）	0	0	icon_equipments.acc_626_tex
+257663	3	ヘッドセットマイク（グレー）	0	0	icon_equipments.acc_626_tex
+257664	3	ヘッドセットマイク（グレー）	0	0	icon_equipments.acc_626_tex
+257665	3	ヘッドセットマイク（グレー）	0	0	icon_equipments.acc_626_tex
+257666	3	ヘッドセットマイク（グレー）	0	0	icon_equipments.acc_626_tex
+257667	3	ヘッドセットマイク（グレー）	0	0	icon_equipments.acc_626_tex
+257668	3	ヘッドセットマイク（グレー）	0	0	icon_equipments.acc_626_tex
+257669	3	ヘッドセットマイク（グレー）	0	0	icon_equipments.acc_626_tex
+257670	3	ヘッドセットマイク（グレー）	0	0	icon_equipments.acc_626_tex
+257671	3	ヘッドセットマイク（グレー）	0	0	icon_equipments.acc_626_tex
+257672	3	ヘッドセットマイク（ブルー）	0	0	icon_equipments.acc_627_tex
+257673	3	ヘッドセットマイク（ブルー）	0	0	icon_equipments.acc_627_tex
+257674	3	ヘッドセットマイク（ブルー）	0	0	icon_equipments.acc_627_tex
+257675	3	ヘッドセットマイク（ブルー）	0	0	icon_equipments.acc_627_tex
+257676	3	ヘッドセットマイク（ブルー）	0	0	icon_equipments.acc_627_tex
+257677	3	ヘッドセットマイク（ブルー）	0	0	icon_equipments.acc_627_tex
+257678	3	ヘッドセットマイク（ブルー）	0	0	icon_equipments.acc_627_tex
+257679	3	ヘッドセットマイク（ブルー）	0	0	icon_equipments.acc_627_tex
+257680	3	ヘッドセットマイク（ブルー）	0	0	icon_equipments.acc_627_tex
+257681	3	ヘッドセットマイク（ブルー）	0	0	icon_equipments.acc_627_tex
+257682	3	ヘッドセットマイク（ブルー）	0	0	icon_equipments.acc_627_tex
+257683	3	ヘッドセットマイク（ブルー）	0	0	icon_equipments.acc_627_tex
 220353	3	T-cat 01	0	0	icon_items.tcattoken_tex
 220354	3	T-cat 02	0	0	icon_items.tcattoken_tex
 222678	3	Massive Loot Box 	0	0	icon_items.mysterybox2_tex
@@ -35706,6 +36056,12 @@
 246147	2	Smart Box: Halloween 2017 (rare)	0	1	icon_items.gift_box04_tex
 246148	2	Smart Box: Halloween 2017 (rare) (30 Days)	0	1	icon_items.gift_box04_tex
 246149	2	Smart Box: Halloween 2017 (rare) (7 Days)	0	1	icon_items.gift_box04_tex
+246150	2	Smart Box: 2017 Stage Costume	0	1	icon_items.gift_box04_tex
+246151	2	Smart Box: 2017 Stage Costume (30 Days)	0	1	icon_items.gift_box04_tex
+246152	2	Smart Box: 2017 Stage Costume (7 Days)	0	1	icon_items.gift_box04_tex
+246153	2	Smart Box: 2017 Stage Costume (rare)	0	1	icon_items.gift_box04_tex
+246154	2	Smart Box: 2017 Stage Costume (rare) (30 Days)	0	1	icon_items.gift_box04_tex
+246155	2	Smart Box: 2017 Stage Costume (rare) (7 Days)	0	1	icon_items.gift_box04_tex
 100001	1	セレンのブレッシングボックス	0	1	icon_items.presentbox1_tex
 100002	1	ヴェリックのブレイブボックス	0	1	icon_items.gift_box01_tex
 100003	3	黄金の宝箱	0	1	icon_items.tresurebox1_tex
@@ -36091,6 +36447,22 @@
 100393	3	ジャックオーランタン	0	0	icon_items.eviloflight_tex
 100394	3	【期間制】勇猛のポーションII	0	5	icon_items.potion10_tex
 100395	3	【期間制】破壊のポーション	0	5	icon_items.potion10_tex
+100416	2	【連合補給品】急速成長の書 I	0	0	icon_items.revivenow_tex
+100417	2	【連合補給品】急速成長の書 II	0	0	icon_items.revivenow_tex
+100418	2	【連合補給品】急速成長の書 III	0	0	icon_items.revivenow_tex
+100419	2	【連合補給品】急速成長の書 IV	0	0	icon_items.revivenow_tex
+100420	2	【連合補給品】急速成長の書 V	0	0	icon_items.revivenow_tex
+100421	3	急速成長支援アイテム交換券	0	0	icon_items.event_coupon_style2_tex
+100422	3	雪合戦参加賞交換券	0	0	icon_items.event_coupon_style0_tex
+100423	3	雪玉のかけら	0	0	icon_items.snowball_tex
+100424	2	アップデート記念リアルグッズ応募券	0	0	icon_items.chronoscroll_tex
+100425	3	【イベント】ALICE IN TERA（染色・エリーン・14日）	0	0	icon_equipments.pc_event_23_f_dye
+100426	3	【イベント】シャンドラ・マナイアの魔工砲（14日）	0	5	icon_equipments.blaster31_b_tex
+100427	2	エクストラボイス変更券（1日）	0	0	icon_items.charextravoice_change_tex
+100428	2	アルケインランチャーの部品	0	0	icon_items.q_parts_tex
+100429	2	ムフラック・ブラックラベル交換券	0	0	icon_items.event_coupon_style1_tex
+100430	3	ヘビーガンナーアバター交換券	0	0	icon_items.mysterypaper5_tex
+100431	3	アルケインランチャー設計図	0	0	icon_items.recipeparts_tex
 100501	1	完全な鍛錬の粉	0	0	icon_items.enchant_event01_tex
 100502	1	神秘の鍛錬の粉	0	0	icon_items.enchant_event02_tex
 100503	0	【連合補給品】オプションリセット呪文書	0	0	icon_items.optionresetscroll_tex
@@ -39163,7 +39535,7 @@
 116453	3	【期間制】ALICE IN TERA（アリス・ハイエルフ女性）	0	0	icon_equipments.pc_event_23_f
 116454	3	【期間制】ALICE IN TERA（アリス・アーマン女性）	0	0	icon_equipments.pc_event_23_f
 116455	3	【期間制】ALICE IN TERA（アリス・キャスタニック女性）	0	0	icon_equipments.pc_event_23_f
-116456	3	【期間制】ALICE IN TERA（アリス・エリーン）	0	0	icon_equipments.pc_event_23_f
+116456	3	【イベント】ALICE IN TERA（アリス・エリーン・14日）	0	0	icon_equipments.pc_event_23_f
 116457	3	【期間制】ALICE IN TERA（チェシャ猫・ヒューマン男性）	0	0	icon_equipments.pc_event_23_m_csc
 116458	3	【期間制】ALICE IN TERA（チェシャ猫・ハイエルフ男性）	0	0	icon_equipments.pc_event_23_m_csc
 116459	3	【期間制】ALICE IN TERA（チェシャ猫・アーマン男性）	0	0	icon_equipments.pc_event_23_m_csc
@@ -40058,6 +40430,7 @@
 117368	3	ねこの耳交換チケット	0	0	icon_items.event_coupon_style0_tex
 117369	3	狼乗り物交換チケット	0	0	icon_items.event_coupon_style2_tex
 117370	3	真・フェニックスの召喚スキル書交換券	0	0	icon_items.event_coupon_style2_tex
+117371	3	スタンプセレクトチケット	0	0	icon_items.ticket2_tex
 117375	2	TERADEMY受賞者	0	0	icon_items.crystalscroll_tex
 117376	3	新年の宝探し地図（AB）	0	0	icon_items.q_mapall_tex
 117377	3	新年の宝探し地図（CD）	0	0	icon_items.q_mapall_tex
@@ -40399,9 +40772,9 @@
 241562	3	乗り物キューブ（スカルドラゴン）	0	0	icon_items.cube_reward15_tex
 241563	3	巨大な大容量名品強化剤ボックス	0	0	icon_items.gift_box03_tex
 241564	3	【キャンペーン】乗り物ボックス（スカルドラゴン）	0	0	icon_items.gift_box03_tex
-241565	3	伝説インナーボックス（エクササイズシルクインナーＶ）	0	0	icon_items.premiumbox_vehicle2_tex
+241565	3	伝説インナーボックス（エクササイズシルクインナー V）	0	0	icon_items.premiumbox_vehicle2_tex
 241566	3	クラートのインナーボックス（リッチシルク）	0	0	icon_items.gift_box03_tex
-241567	3	伝説インナーキューブ（エクササイズシルクインナーＶ）	0	0	icon_items.cube_reward11_tex
+241567	3	伝説インナーキューブ（エクササイズシルクインナー V）	0	0	icon_items.cube_reward11_tex
 241568	2	【連合補給品】オプションリセット呪文書ボックス	0	0	icon_items.gift_box03_tex
 241569	2	保存の粉：ランク10ボックス	0	0	icon_items.gift_box03_tex
 241570	2	強化石ボックス（ランク10）	0	0	icon_items.premiumbox_etc3_tex
@@ -40431,6 +40804,15 @@
 241594	3	アルボレア結晶石ボックスII	0	1	icon_items.premiumbox_etc3_tex
 241595	3	大容量アルボレア結晶石ボックスII	0	1	icon_items.premiumbox_etc3_tex
 241596	3	変化の証拠ボックス	0	1	icon_items.premiumbox_etc2_tex
+241597	3	スタンプボックス	0	0	icon_items.q_boxjewel_tex
+241598	2	アバターボックス（アイドル・ハイエルフ女性）	0	0	icon_items.premiumbox_vehicle4_tex
+241599	2	アバターボックス（アイドル・アーマン女性）	0	0	icon_items.premiumbox_vehicle4_tex
+241600	2	アバターボックス（アイドル・キャスタニック女性）	0	0	icon_items.premiumbox_vehicle4_tex
+241601	2	アバターボックス（アイドル・ヒューマン女性）	0	0	icon_items.premiumbox_vehicle4_tex
+241602	2	アバターボックス（アイドル・エリーン）	0	0	icon_items.premiumbox_vehicle4_tex
+241603	2	スタンプキューブ	0	0	icon_items.cube_reward15_tex
+241604	2	アバターボックス（アイドル）	0	1	icon_items.premiumbox_vehicle2_tex
+241605	2	ファッションキューブ（アイドル）	0	0	icon_items.cube_reward09_tex
 456	1	【スキル書】魔導機械BTS-001召喚	0	0	icon_items.skillbook_rider1_tex
 481	1	【スキル書】ユニコーン召喚	0	0	icon_items.skillbook_rider1_tex
 482	1	【スキル書】アルゴン軍馬召喚	0	0	icon_items.skillbook_rider1_tex

@@ -86,6 +86,7 @@
 		<Monster name="Элин-жрец" id="11007" isBoss="False" hp="0" />
 		<Monster name="Элин-мистик" id="11008" isBoss="False" hp="0" />
 		<Monster name="Элин-жнец" id="11009" isBoss="False" hp="0" />
+		<Monster name="Инженер-элин" id="11010" isBoss="False" hp="0" />
 		<Monster name="Элин-шиноби" id="11012" isBoss="False" hp="0" />
 		<Monster name="Барака-воин" id="11101" isBoss="False" hp="0" />
 		<Monster name="Барака-рыцарь" id="11102" isBoss="False" hp="0" />
@@ -5066,6 +5067,8 @@
 		<Monster name="Данам - темная ночь" id="6047" isBoss="False" hp="10000" />
 		<Monster name="Альба" id="6048" isBoss="False" hp="10000" />
 		<Monster name="Ананша" id="7001" isBoss="True" hp="737685828" />
+		<Monster name="Фрайгарас" id="7002" isBoss="True" hp="737685828" />
+		<Monster name="Сабранак" id="7003" isBoss="True" hp="737685828" />
 	</Zone>
 	<Zone id="172" name="Дикарский Предел" >
 		<Monster name="Пэйсен" id="1000" isBoss="False" hp="366797" />
@@ -13635,7 +13638,7 @@
 		<Monster name="Капринский воин" id="885117" isBoss="False" hp="3500000" />
 		<Monster name="Неистовый малигос" id="885118" isBoss="False" hp="3500000" />
 		<Monster name="Горилла" id="885119" isBoss="False" hp="3500000" />
-		<Monster name="Сурьяти" id="885121" isBoss="False" hp="2147483647" />
+		<Monster name="Сурьяти" id="885121" isBoss="False" hp="3600000000" />
 		<Monster name="Аргонская стена" id="885122" isBoss="False" hp="3000000" />
 		<Monster name="Клыкастый пожиратель" id="885131" isBoss="False" hp="0" />
 		<Monster name="Призрачный обелиск" id="885132" isBoss="False" hp="5000000" />
@@ -14014,11 +14017,11 @@
 		<Monster name="Активируйте все устройства блокировки магнитного поля" id="914" isBoss="False" hp="0" />
 		<Monster name="Победите Гексапреона" id="915" isBoss="False" hp="0" />
 		<Monster name="Победите совершенного RK-9" id="916" isBoss="False" hp="0" />
-		<Monster name="Вентарон" id="1000" isBoss="True" hp="2147483647" />
+		<Monster name="Вентарон" id="1000" isBoss="True" hp="2880000000" />
 		<Monster name="Бомба с часовым механизмом" id="1009" isBoss="False" hp="6750000" />
 		<Monster name="Телепорт" id="1501" isBoss="False" hp="10000" />
-		<Monster name="Гексапреон" id="2000" isBoss="True" hp="2147483647" />
-		<Monster name="Совершенный RK-9" id="3000" isBoss="True" hp="2147483647" />
+		<Monster name="Гексапреон" id="2000" isBoss="True" hp="3072000000" />
+		<Monster name="Совершенный RK-9" id="3000" isBoss="True" hp="3670000000" />
 		<Monster name="Ящик с деталями в ангаре" id="5000" isBoss="False" hp="500000" />
 		<Monster name="Ящик Лэндона" id="5001" isBoss="False" hp="500000" />
 		<Monster name="Загадочный старец" id="6002" isBoss="False" hp="1" />

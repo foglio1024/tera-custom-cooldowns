@@ -86,6 +86,7 @@
 		<Monster name="艾琳祭司" id="11007" isBoss="False" hp="0" />
 		<Monster name="艾琳元素使" id="11008" isBoss="False" hp="0" />
 		<Monster name="艾琳劍鬥士" id="11009" isBoss="False" hp="0" />
+		<Monster name="艾琳魔工師" id="11010" isBoss="False" hp="0" />
 		<Monster name="艾琳忍術士" id="11012" isBoss="False" hp="0" />
 		<Monster name="巴拉卡(男)劍鬥士" id="11101" isBoss="False" hp="0" />
 		<Monster name="巴拉卡(男)槍騎士" id="11102" isBoss="False" hp="0" />
@@ -5067,6 +5068,8 @@
 		<Monster name="漆黑夜 達南" id="6047" isBoss="False" hp="10000" />
 		<Monster name="賽諾米亞艾琳" id="6048" isBoss="False" hp="10000" />
 		<Monster name="貪婪的阿嵐夏" id="7001" isBoss="True" hp="737685828" />
+		<Monster name="憤怒的卡魯古斯" id="7002" isBoss="True" hp="737685828" />
+		<Monster name="虐殺的煞布拉尼惡" id="7003" isBoss="True" hp="737685828" />
 	</Zone>
 	<Zone id="172" name="原始之地" >
 		<Monster name="波亞儂" id="1000" isBoss="False" hp="366797" />
@@ -13685,7 +13688,7 @@
 		<Monster name="獰貓妖精戰士" id="885117" isBoss="False" hp="3500000" />
 		<Monster name="狂暴瑪利古斯" id="885118" isBoss="False" hp="3500000" />
 		<Monster name="大金剛" id="885119" isBoss="False" hp="3500000" />
-		<Monster name="拉魔安費比修" id="885121" isBoss="False" hp="2147483647" />
+		<Monster name="拉魔安費比修" id="885121" isBoss="False" hp="3600000000" />
 		<Monster name="阿勒坤花" id="885122" isBoss="False" hp="3000000" />
 		<Monster name="猛毒寄生獸" id="885131" isBoss="False" hp="0" />
 		<Monster name="奇妙的幻影魔石" id="885132" isBoss="False" hp="5000000" />
@@ -14064,11 +14067,11 @@
 		<Monster name="磁氣場解除裝置全部自動化。" id="914" isBoss="False" hp="0" />
 		<Monster name="請消滅核殺波雷恩" id="915" isBoss="False" hp="0" />
 		<Monster name="請消滅終極RK-9" id="916" isBoss="False" hp="0" />
-		<Monster name="貝塔倫" id="1000" isBoss="True" hp="2147483647" />
+		<Monster name="貝塔倫" id="1000" isBoss="True" hp="2880000000" />
 		<Monster name="定時炸彈" id="1009" isBoss="False" hp="6750000" />
 		<Monster name="次元的魔法石" id="1501" isBoss="False" hp="10000" />
-		<Monster name="核殺波雷恩" id="2000" isBoss="True" hp="2147483647" />
-		<Monster name="終極RK-9" id="3000" isBoss="True" hp="2147483647" />
+		<Monster name="核殺波雷恩" id="2000" isBoss="True" hp="3072000000" />
+		<Monster name="終極RK-9" id="3000" isBoss="True" hp="3670000000" />
 		<Monster name="機庫零件箱子" id="5000" isBoss="False" hp="500000" />
 		<Monster name="雷頓的遺物箱子" id="5001" isBoss="False" hp="500000" />
 		<Monster name="可疑的老人" id="6002" isBoss="False" hp="1" />

@@ -268,6 +268,7 @@
 2091	OutOfCombatMovSpd	Buff	True	abs	10000	0	20	쾌속의 기운			평화 상태에서의 이동 속도가 $H_W_GOOD20$COLOR_END 향상됩니다.	icon_status.plusmove_tex	icon_status.plusmove_tex	True
 2097	Block	Stun	False	swch	3000	0	0	스킬 봉쇄			깜짝 놀란 아기쿠마스는 3초간 기본 공격을 제외한 모든 스킬을 사용할 수 없게 됩니다.	icon_status.sealskill_tex	icon_status.sealskill_tex	True
 2099	HPChange	Buff	True	abs	25000	1	3000	치유의 오라			파괴된 석상에게서 회복의 기운을 얻었습니다. 주위 아기 쿠마스들의 체력을 주기적으로 회복 시킵니다.	icon_status.aura_of_regeneration_hp_tex	icon_status.aura_of_regeneration_hp_tex	True
+2099	Plague	Buff	True	9	25000	3	2101	치유의 오라			파괴된 석상에게서 회복의 기운을 얻었습니다. 주위 아기 쿠마스들의 체력을 주기적으로 회복 시킵니다.	icon_status.aura_of_regeneration_hp_tex	icon_status.aura_of_regeneration_hp_tex	True
 2099	298	Buff	True	swch	25000	0	1	치유의 오라			파괴된 석상에게서 회복의 기운을 얻었습니다. 주위 아기 쿠마스들의 체력을 주기적으로 회복 시킵니다.	icon_status.aura_of_regeneration_hp_tex	icon_status.aura_of_regeneration_hp_tex	True
 2100	MovSpd	Debuff	False	setp	3000	0	0.5	감속!			이동 속도가 $H_W_BAD50%$COLOR_END 감소됩니다.	icon_status.minusmove_tex	icon_status.minusmove_tex	True
 2101	MovSpd	Buff	True	abs	5000	0	80	회복의 기운			치유의 오라 효과로 회복의 기운을 얻었습니다. $H_W_GOOD1s$COLOR_END마다 HP가 $H_W_GOOD6000$COLOR_END씩 점차 회복됩니다. 추가로 이동 속도가 $H_W_GOOD80$COLOR_END 증가합니다.	icon_skills.refreshbless_tex	icon_skills.refreshbless_tex	True
@@ -612,7 +613,7 @@
 4621	CraftTime	Buff	True	perc	3600000	0	0.5	강력한 제작 속도 증가 주문서	6296	강력한 제작 속도 증가 주문서	모든 아이템의 제작 속도가 $H_W_GOOD50%$COLOR_END 향상됩니다.	icon_items.scroll_produce_speedup_tex	icon_items.scroll_produce_speedup_tex	True
 4630	Gathering	Buff	True	seta	600000	0	410	채집 숙련도 증가 주문서	6295	채집 숙련도 증가 주문서	600s 동안 채집 숙련도가 $H_W_GOOD410$COLOR_END 증가합니다.	icon_items.scroll_collection_expup_tex	icon_items.scroll_collection_expup_tex	True
 4640	XPBoost	Buff	True	perc	3600000	0	1.15	세렌의 손길 주문서	6294	세렌의 손길 주문서	사냥 시 획득 경험치가 $H_W_GOOD15%$COLOR_END 증가됩니다.	icon_items.scroll_seren_blessing_tex	icon_items.scroll_seren_blessing_tex	True
-4650	Endurance	Buff	True	perc	0	0	1	벨릭의 풍요로운 축복 - 방출			인던 초심자를 위한 벨릭의 축복으로 인던 마지막 보스의 드랍률이 25% 상승합니다. 보스와의 전투 중에 사망하여 일시적으로 축복이 사라지더라도 보스의 100미터 이내에 있다면 드랍률 상승 효과는 유지됩니다.$BR벨릭의 풍요로운 축복은 해당 인던을 10회 클리어 할때까지 유지됩니다.	icon_skills.exp_buff_seren_aura_tex	icon_skills.exp_buff_seren_aura_tex	True
+4650	Plague	Buff	True	abs	0	5	4651	벨릭의 풍요로운 축복 - 방출			인던 초심자를 위한 벨릭의 축복으로 인던 마지막 보스의 드랍률이 25% 상승합니다. 보스와의 전투 중에 사망하여 일시적으로 축복이 사라지더라도 보스의 100미터 이내에 있다면 드랍률 상승 효과는 유지됩니다.$BR벨릭의 풍요로운 축복은 해당 인던을 10회 클리어 할때까지 유지됩니다.	icon_skills.exp_buff_seren_aura_tex	icon_skills.exp_buff_seren_aura_tex	True
 4651	Endurance	Buff	True	perc	0	0	1	벨릭의 풍요로운 축복			인던 초심자와 함께 파티를 하여 인던 마지막 보스의 드랍률이 25% 상승합니다. 보스와의 전투 중에 초심자가 사망하여 일시적으로 축복이 사라지더라도 초심자가 보스의 100미터 이내에 있다면 드랍률 상승 효과는 유지됩니다.	icon_status.exp_buff_serenparty_tex	icon_status.exp_buff_serenparty_tex	True
 4660	GatheringTime	Buff	True	perc	1800000	0	0.6	채집 속도 증가 주문서	6297	채집 속도 증가 주문서	채집 속도가 $H_W_GOOD40%$COLOR_END 증가합니다.	icon_status.collect_speedup_tex	icon_status.collect_speedup_tex	True
 4710	HPChange	DOT	False	perc	3000	1	-0.12	저주 해방			$H_W_BAD1s$COLOR_END마다 전체 HP 대비 $H_W_BAD12%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
@@ -680,7 +681,7 @@
 4841	DefPotion	Buff	True	perc	1800000	0	0.95	공격과 회복의 물약	100999	공격과 회복의 물약	스킬 데미지가 $H_W_GOOD5%$COLOR_END 향상되고, 받는 피해가 $H_W_GOOD5%$COLOR_END 감소됩니다. 추가로 공격 속도도 $H_W_GOOD3%$COLOR_END 향상됩니다.	icon_status.plusattack_tex	icon_status.plusattack_tex	True
 4841	AtkPotion	Buff	True	perc	1800000	0	1.05	공격과 회복의 물약	100999	공격과 회복의 물약	스킬 데미지가 $H_W_GOOD5%$COLOR_END 향상되고, 받는 피해가 $H_W_GOOD5%$COLOR_END 감소됩니다. 추가로 공격 속도도 $H_W_GOOD3%$COLOR_END 향상됩니다.	icon_status.plusattack_tex	icon_status.plusattack_tex	True
 4850	Drunk	Buff	True	60013	2000	0	0	잠입상태			잠입 상태로 변경되어 주변이 흐려집니다.	icon_status.plusfocus_tex	icon_status.plusfocus_tex	True
-4851	ASpd	Buff	True	perc	30000	0	2	카이아의 수호			자신을 제외한 주변 20m 범위 내 PC의 공격 속도가 $H_W_GOOD100%$COLOR_END 향상되며 힘과 맷집이 $H_W_GOOD100배$COLOR_END 향상 됩니다. 또한 재사용 시간이 $H_W_GOOD90%$COLOR_END만큼 감소합니다.	icon_status.pluswill_tex	icon_status.pluswill_tex	True
+4851	Plague	Buff	True	seta	3600000	4	4852	카이아의 수호			자신을 제외한 주변 20m 범위 내 PC의 공격 속도가 $H_W_GOOD100%$COLOR_END 향상되며 힘과 맷집이 $H_W_GOOD100배$COLOR_END 향상 됩니다. 또한 재사용 시간이 $H_W_GOOD90%$COLOR_END만큼 감소합니다.	icon_status.pluswill_tex	icon_status.pluswill_tex	True
 4852	Power	Buff	True	perc	30000	0	150	카이아의 수호			공격 속도가 $H_W_GOOD100%$COLOR_END 향상되며 힘과 맷집이 $H_W_GOOD100배$COLOR_END 향상 됩니다. 또한 재사용 시간이 $H_W_GOOD90%$COLOR_END만큼 감소합니다.	icon_status.pluswill_tex	icon_status.pluswill_tex	True
 4852	Endurance	Buff	True	perc	30000	0	150	카이아의 수호			공격 속도가 $H_W_GOOD100%$COLOR_END 향상되며 힘과 맷집이 $H_W_GOOD100배$COLOR_END 향상 됩니다. 또한 재사용 시간이 $H_W_GOOD90%$COLOR_END만큼 감소합니다.	icon_status.pluswill_tex	icon_status.pluswill_tex	True
 4852	ASpd	Buff	True	perc	30000	0	2	카이아의 수호			공격 속도가 $H_W_GOOD100%$COLOR_END 향상되며 힘과 맷집이 $H_W_GOOD100배$COLOR_END 향상 됩니다. 또한 재사용 시간이 $H_W_GOOD90%$COLOR_END만큼 감소합니다.	icon_status.pluswill_tex	icon_status.pluswill_tex	True
@@ -1698,7 +1699,7 @@
 401400	Aggro	Buff	True	perc	0	0	1.4	분노의 역류 I			주변 8m 범위로 분노를 방출하며, 추가로 모든 공격 스킬에 의한 적대치가 $H_W_GOOD40%$COLOR_END 향상되며 전투 시 몬스터의 특수한 일부공격을 제외하고 밀려나지 않습니다.	icon_skills.toughspirit_tex	icon_skills.toughspirit_tex	True
 401400	NoMPDecay	Buff	True	seta	0	0	0	분노의 역류 I			주변 8m 범위로 분노를 방출하며, 추가로 모든 공격 스킬에 의한 적대치가 $H_W_GOOD40%$COLOR_END 향상되며 전투 시 몬스터의 특수한 일부공격을 제외하고 밀려나지 않습니다.	icon_skills.toughspirit_tex	icon_skills.toughspirit_tex	True
 401400	MPChange	Buff	True	abs	0	1	50	분노의 역류 I			주변 8m 범위로 분노를 방출하며, 추가로 모든 공격 스킬에 의한 적대치가 $H_W_GOOD40%$COLOR_END 향상되며 전투 시 몬스터의 특수한 일부공격을 제외하고 밀려나지 않습니다.	icon_skills.toughspirit_tex	icon_skills.toughspirit_tex	True
-401400	63	DOT	True	swch	3000	1	10000	분노의 역류 I			주변 8m 범위로 분노를 방출하며, 추가로 모든 공격 스킬에 의한 적대치가 $H_W_GOOD40%$COLOR_END 향상되며 전투 시 몬스터의 특수한 일부공격을 제외하고 밀려나지 않습니다.	icon_skills.toughspirit_tex	icon_skills.toughspirit_tex	True
+401400	Plague	Buff	True	perc	0	1	401401	분노의 역류 I			주변 8m 범위로 분노를 방출하며, 추가로 모든 공격 스킬에 의한 적대치가 $H_W_GOOD40%$COLOR_END 향상되며 전투 시 몬스터의 특수한 일부공격을 제외하고 밀려나지 않습니다.	icon_skills.toughspirit_tex	icon_skills.toughspirit_tex	True
 401400	113	Buff	True	perc	0	0	1.6	분노의 역류 I			주변 8m 범위로 분노를 방출하며, 추가로 모든 공격 스킬에 의한 적대치가 $H_W_GOOD40%$COLOR_END 향상되며 전투 시 몬스터의 특수한 일부공격을 제외하고 밀려나지 않습니다.	icon_skills.toughspirit_tex	icon_skills.toughspirit_tex	True
 401400	PVPAtk	Buff	True	abs	0	0	-18	분노의 역류 I			주변 8m 범위로 분노를 방출하며, 추가로 모든 공격 스킬에 의한 적대치가 $H_W_GOOD40%$COLOR_END 향상되며 전투 시 몬스터의 특수한 일부공격을 제외하고 밀려나지 않습니다.	icon_skills.toughspirit_tex	icon_skills.toughspirit_tex	True
 401400	209	Buff	True	perc	3000	0	0	분노의 역류 I			주변 8m 범위로 분노를 방출하며, 추가로 모든 공격 스킬에 의한 적대치가 $H_W_GOOD40%$COLOR_END 향상되며 전투 시 몬스터의 특수한 일부공격을 제외하고 밀려나지 않습니다.	icon_skills.toughspirit_tex	icon_skills.toughspirit_tex	True
@@ -1736,8 +1737,8 @@
 429019	MovSpdInCombat	Debuff	False	perc	10000	0	1	카프리콘의 표적			카프리콘가 당신을 표적으로 삼았습니다!!	icon_skills.markingofarcher_tex	icon_skills.markingofarcher_tex	True
 429020	HPChange	DOT	False	abs	10000	1	-10000	출혈			카프리콘의 날카로운 낫에 베어 출혈이 일어났습니다. 지속적으로 HP가 감소합니다.	icon_status.blooduanty_tex	icon_status.blooduanty_tex	True
 457002	ASpd	Buff	False	perc	0	0	1	타올라라			돌거인이 분노하여 몸에 불이 붙었습니다. 반경 21m안에 위치한 대상은 '열기' 이상상태를 획득합니다.	icon_status.firedamage_tex	icon_status.firedamage_tex	True
-457002	HPChange	Stun	False	perc	20000	2	-0.2	타올라라			돌거인이 분노하여 몸에 불이 붙었습니다. 반경 21m안에 위치한 대상은 '열기' 이상상태를 획득합니다.	icon_status.firedamage_tex	icon_status.firedamage_tex	True
-457003	HPChange	Stun	False	perc	20000	2	-0.2	타올라라			돌거인이 분노하여 몸에 불이 붙었습니다. 반경 3m안에 위치한 대상은 '열기' 이상상태를 획득합니다.	icon_status.firedamage_tex	icon_status.firedamage_tex	True
+457002	Plague	Buff	False	setp	0	2	457004	타올라라			돌거인이 분노하여 몸에 불이 붙었습니다. 반경 21m안에 위치한 대상은 '열기' 이상상태를 획득합니다.	icon_status.firedamage_tex	icon_status.firedamage_tex	True
+457003	Plague	Buff	False	setp	0	5	457004	타올라라			돌거인이 분노하여 몸에 불이 붙었습니다. 반경 3m안에 위치한 대상은 '열기' 이상상태를 획득합니다.	icon_status.firedamage_tex	icon_status.firedamage_tex	True
 457004	HPChange	Stun	True	perc	2000	1	-0.05	열기			돌거인의 뜨거운 열기에 몸이 녹아내리는 것 같습니다.	icon_status.firedamage_tex	icon_status.firedamage_tex	True
 457004	StackCounter	Stun	True	seta	2000	0	457005	열기			돌거인의 뜨거운 열기에 몸이 녹아내리는 것 같습니다.	icon_status.firedamage_tex	icon_status.firedamage_tex	True
 457005	HPChange	Stun	False	perc	20000	2	-0.2	꺼지지 않는 불			용암의 강력한 열기에 몸이 불타고 있습니다.	icon_status.firedamage_tex	icon_status.firedamage_tex	True
@@ -1856,17 +1857,20 @@
 470009	HPChange	Buff	True	abs	0	1	-10000000	보이면 안됨						False
 470015	MovSpd	Stun	False	perc	60000	0	0.8	눈사람			타르스키의 부하에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 5%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470015	HPChange	Stun	False	perc	60000	1	-0.05	눈사람			타르스키의 부하에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 5%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
+470015	Plague	Stun	False	seta	60000	1	470015	눈사람			타르스키의 부하에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 5%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470015	191	Stun	False	perc	60000	0	0	눈사람			타르스키의 부하에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 5%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470015	Block	Stun	False	swch	60000	0	0	눈사람			타르스키의 부하에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 5%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470015	DelayedEffect	Stun	False	abs	60000	0	470035	눈사람			타르스키의 부하에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 5%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470017	MovSpd	Stun	False	perc	60000	0	0.8	눈사람			타르스키의 부하에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 5%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470017	HPChange	Stun	False	perc	60000	1	-0.05	눈사람			타르스키의 부하에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 5%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
+470017	Plague	Stun	False	seta	60000	1	470015	눈사람			타르스키의 부하에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 5%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470017	191	Stun	False	perc	60000	0	0	눈사람			타르스키의 부하에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 5%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470017	Block	Stun	False	swch	60000	0	0	눈사람			타르스키의 부하에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 5%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470017	DelayedEffect	Stun	False	abs	60000	0	470035	눈사람			타르스키의 부하에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 5%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470018	Power	Debuff	True	perc	1000	0	1	눈사람			타르스키의 부하에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 5%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470018	MovSpd	Stun	False	perc	60000	0	0.8	눈사람			타르스키의 부하에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 5%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470018	HPChange	Stun	False	perc	60000	1	-0.05	눈사람			타르스키의 부하에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 5%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
+470018	Plague	Stun	False	seta	60000	1	470015	눈사람			타르스키의 부하에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 5%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470018	191	Stun	False	perc	60000	0	0	눈사람			타르스키의 부하에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 5%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470018	Block	Stun	False	swch	60000	0	0	눈사람			타르스키의 부하에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 5%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470018	DelayedEffect	Stun	False	abs	60000	0	470035	눈사람			타르스키의 부하에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 5%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
@@ -1881,17 +1885,20 @@
 470025	HPChange	Buff	True	abs	3000	1	-100000000	변덕 - 즉사			타르스키에게 완전히 속아 넘어갔군요. 곧 죽습니다.			False
 470026	MovSpd	Stun	False	perc	60000	0	0.8	눈사람			타르스키에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 25%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470026	HPChange	Stun	False	perc	60000	1	-0.25	눈사람			타르스키에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 25%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
+470026	Plague	Stun	False	seta	60000	1	470026	눈사람			타르스키에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 25%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470026	191	Stun	False	perc	60000	0	0	눈사람			타르스키에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 25%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470026	Block	Stun	False	swch	60000	0	0	눈사람			타르스키에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 25%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470026	DelayedEffect	Stun	False	abs	60000	0	470035	눈사람			타르스키에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 25%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470027	MovSpd	Stun	False	perc	60000	0	0.8	눈사람			타르스키에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 25%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470027	HPChange	Stun	False	perc	60000	1	-0.25	눈사람			타르스키에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 25%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
+470027	Plague	Stun	False	seta	60000	1	470026	눈사람			타르스키에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 25%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470027	191	Stun	False	perc	60000	0	0	눈사람			타르스키에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 25%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470027	Block	Stun	False	swch	60000	0	0	눈사람			타르스키에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 25%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470027	DelayedEffect	Stun	False	abs	60000	0	470035	눈사람			타르스키에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 25%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470028	Power	Debuff	True	perc	1000	0	1	눈사람			타르스키에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 25%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470028	MovSpd	Stun	False	perc	60000	0	0.8	눈사람			타르스키에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 25%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470028	HPChange	Stun	False	perc	60000	1	-0.25	눈사람			타르스키에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 25%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
+470028	Plague	Stun	False	seta	60000	1	470026	눈사람			타르스키에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 25%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470028	191	Stun	False	perc	60000	0	0	눈사람			타르스키에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 25%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470028	Block	Stun	False	swch	60000	0	0	눈사람			타르스키에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 25%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 470028	DelayedEffect	Stun	False	abs	60000	0	470035	눈사람			타르스키에게 속아 넘어가셨군요? 점프를 연속으로 하면 해제되며, 초당 HP가 25%씩 줄어듭니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
@@ -2346,42 +2353,42 @@
 701605	HPChange	Buff	True	abs	15000	2	529	영기 소환 - 보호 I			소횐된 영기로 인해 $H_W_GOOD2s$COLOR_END마다 HP가 $H_W_GOOD529$COLOR_END씩 점차 회복됩니다.	icon_skills.energiesofprotection_tex	icon_skills.energiesofprotection_tex	True
 701606	Absorb	Buff	True	swch	5000	0	7149	영기 소환 - 보호 II			소환된 영기가 최대 $H_W_GOOD7149$COLOR_END의 피해를 흡수합니다. 최대 피해 흡수량을 넘어서면 지속 시간에 상관 없이 효과는 즉시 해제됩니다.	icon_skills.energiesofprotection_tex	icon_skills.energiesofprotection_tex	True
 701607	HPChange	Buff	True	abs	15000	2	700	영기 소환 - 보호 II			소횐된 영기로 인해 $H_W_GOOD2s$COLOR_END마다 HP가 $H_W_GOOD700$COLOR_END씩 점차 회복됩니다.	icon_skills.energiesofprotection_tex	icon_skills.energiesofprotection_tex	True
-701700	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701700	HPChange	DOT	False	abs	5000	1	-1141	역병 창궐			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701701	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 II			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701701	HPChange	DOT	False	abs	5000	1	-1585	역병 창궐 II			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701702	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 III			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701702	HPChange	DOT	False	abs	5000	1	-2202	역병 창궐 III			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701703	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 IV			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701703	HPChange	DOT	False	abs	5000	1	-3059	역병 창궐 IV			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701704	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 V			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701704	HPChange	DOT	False	abs	5000	1	-4248	역병 창궐 V			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701705	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 VI			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701705	HPChange	DOT	False	abs	5000	1	-5900	역병 창궐 VI			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701706	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 VII			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701706	HPChange	DOT	False	abs	5000	1	-8194	역병 창궐 VII			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701707	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 VIII			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701707	HPChange	DOT	False	abs	5000	1	-11380	역병 창궐 VIII			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701708	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 IX			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701708	HPChange	DOT	False	abs	5000	1	-15086	역병 창궐 IX			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701720	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 I			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701720	HPChange	DOT	False	abs	5000	1	-141	역병 창궐 I			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701721	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 II			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701721	HPChange	DOT	False	abs	5000	1	-196	역병 창궐 II			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701722	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 III			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701722	HPChange	DOT	False	abs	5000	1	-272	역병 창궐 III			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701723	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 IV			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701723	HPChange	DOT	False	abs	5000	1	-378	역병 창궐 IV			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701724	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 V			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701724	HPChange	DOT	False	abs	5000	1	-525	역병 창궐 V			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701725	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 VI			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701725	HPChange	DOT	False	abs	5000	1	-729	역병 창궐 VI			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701726	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 VII			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701726	HPChange	DOT	False	abs	5000	1	-1012	역병 창궐 VII			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701727	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 VIII			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701727	HPChange	DOT	False	abs	5000	1	-1406	역병 창궐 VIII			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701728	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 IX			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
-701728	HPChange	DOT	False	abs	5000	1	-1953	역병 창궐 IX			5s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701700	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701700	Plague	Debuff	False	perc	20000	0	701800	역병 창궐			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701701	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 II			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701701	Plague	Debuff	False	perc	20000	0	701801	역병 창궐 II			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701702	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 III			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701702	Plague	Debuff	False	perc	20000	0	701802	역병 창궐 III			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701703	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 IV			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701703	Plague	Debuff	False	perc	20000	0	701803	역병 창궐 IV			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701704	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 V			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701704	Plague	Debuff	False	perc	20000	0	701804	역병 창궐 V			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701705	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 VI			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701705	Plague	Debuff	False	perc	20000	0	701805	역병 창궐 VI			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701706	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 VII			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701706	Plague	Debuff	False	perc	20000	0	701806	역병 창궐 VII			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701707	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 VIII			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701707	Plague	Debuff	False	perc	20000	0	701807	역병 창궐 VIII			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701708	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 IX			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701708	Plague	Debuff	False	perc	20000	0	701808	역병 창궐 IX			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701720	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 I			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701720	Plague	Debuff	False	7	20000	0	701820	역병 창궐 I			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701721	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 II			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701721	Plague	Debuff	False	7	20000	0	701821	역병 창궐 II			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701722	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 III			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701722	Plague	Debuff	False	7	20000	0	701822	역병 창궐 III			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701723	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 IV			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701723	Plague	Debuff	False	7	20000	0	701823	역병 창궐 IV			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701724	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 V			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701724	Plague	Debuff	False	7	20000	0	701824	역병 창궐 V			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701725	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 VI			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701725	Plague	Debuff	False	7	20000	0	701825	역병 창궐 VI			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701726	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 VII			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701726	Plague	Debuff	False	7	20000	0	701826	역병 창궐 VII			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701727	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 VIII			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701727	Plague	Debuff	False	7	20000	0	701827	역병 창궐 VIII			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701728	Endurance	Debuff	False	perc	20000	0	0.95	역병 창궐 IX			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
+701728	Plague	Debuff	False	7	20000	0	701828	역병 창궐 IX			20s동안 역병의 숙주가 되어 맷집이 $H_W_BAD5%$COLOR_END만큼 감소됩니다. 숙주는 정화 스킬로 해제가 불가능하며, 주변 7m 내의 아군에게 역병을 전파합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
 701800	HPChange	DOT	False	abs	5000	1	-1141	역병 창궐 I			역병에 감염되었습니다. 지속적으로 $H_W_BAD-1141$COLOR_END만큼 피해를 받습니다.	icon_skills.plague_tex	icon_skills.plague_tex	True
 701801	HPChange	DOT	False	abs	5000	1	-1585	역병 창궐 II			역병에 감염되었습니다. 지속적으로 $H_W_BAD-1585$COLOR_END만큼 피해를 받습니다.	icon_skills.plague_tex	icon_skills.plague_tex	True
 701802	HPChange	DOT	False	abs	5000	1	-2202	역병 창궐 III			역병에 감염되었습니다. 지속적으로 $H_W_BAD-2202$COLOR_END만큼 피해를 받습니다.	icon_skills.plague_tex	icon_skills.plague_tex	True
@@ -2411,8 +2418,8 @@
 701828	IncreasedHeal	DOT	False	perc	5000	0	0.9	역병 창궐 IX			역병에 감염되었습니다. 지속적으로 $H_W_BAD-1953$COLOR_END만큼 피해를 받으며, HP회복량이 $H_W_BAD10%$COLOR_END만큼 감소합니다. 	icon_skills.plague_tex	icon_skills.plague_tex	True
 701900	Immune	Buff	True	21	1000	0	0	순간이동 무적			보이면안됨	icon_skills.voidtrap_tex	icon_skills.voidtrap_tex	True
 757002	ASpd	Buff	False	perc	0	0	1	타올라라			돌거인이 분노하여 몸에 불이 붙었습니다. 반경 21m안에 위치한 대상은 '열기' 이상상태를 획득합니다.	icon_status.firedamage_tex	icon_status.firedamage_tex	True
-757002	HPChange	Stun	False	perc	20000	2	-0.2	타올라라			돌거인이 분노하여 몸에 불이 붙었습니다. 반경 21m안에 위치한 대상은 '열기' 이상상태를 획득합니다.	icon_status.firedamage_tex	icon_status.firedamage_tex	True
-757003	HPChange	Stun	False	perc	20000	2	-0.2	타올라라			돌거인이 분노하여 몸에 불이 붙었습니다. 반경 3m안에 위치한 대상은 '열기' 이상상태를 획득합니다.	icon_status.firedamage_tex	icon_status.firedamage_tex	True
+757002	Plague	Buff	False	setp	0	2	757004	타올라라			돌거인이 분노하여 몸에 불이 붙었습니다. 반경 21m안에 위치한 대상은 '열기' 이상상태를 획득합니다.	icon_status.firedamage_tex	icon_status.firedamage_tex	True
+757003	Plague	Buff	False	setp	0	5	457004	타올라라			돌거인이 분노하여 몸에 불이 붙었습니다. 반경 3m안에 위치한 대상은 '열기' 이상상태를 획득합니다.	icon_status.firedamage_tex	icon_status.firedamage_tex	True
 757004	HPChange	Stun	True	perc	2000	1	-0.03	열기			돌거인의 뜨거운 열기에 몸이 녹아내리는 것 같습니다.	icon_status.firedamage_tex	icon_status.firedamage_tex	True
 757004	StackCounter	Stun	True	seta	2000	0	457005	열기			돌거인의 뜨거운 열기에 몸이 녹아내리는 것 같습니다.	icon_status.firedamage_tex	icon_status.firedamage_tex	True
 757005	HPChange	Stun	False	perc	20000	2	-0.1	꺼지지 않는 불			용암의 강력한 열기에 몸이 불타고 있습니다.	icon_status.firedamage_tex	icon_status.firedamage_tex	True
@@ -2542,8 +2549,8 @@
 777002	AtkPotion	Buff	True	perc	20000	2	2	완전한 고대의 파괴력			공격력이 $H_W_GOOD100%$COLOR_END 증가합니다.	icon_status.cruel_slayer_3_tex	icon_status.cruel_slayer_3_tex	True
 777007	HPChange	DOT	False	perc	2000	2	-0.3	아르곤 기생충			전체 HP 대비 $H_W_BAD50%$COLOR_END에 달하는 HP가 감소됩니다.	icon_status.delaydamage_tex	icon_status.delaydamage_tex	True
 777007	Drunk	DOT	False	426718	2000	0	0	아르곤 기생충			전체 HP 대비 $H_W_BAD50%$COLOR_END에 달하는 HP가 감소됩니다.	icon_status.delaydamage_tex	icon_status.delaydamage_tex	True
-777009	64	Debuff	True	seta	0	1	777010	지하수로_1번방_모여맞기_해제_1			모여맞기_해제_1	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
-777010	64	Debuff	True	seta	0	1	777009	지하수로_1번방_모여맞기_해제_2			모여맞기_해제_2	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
+777009	Plague	Debuff	True	seta	0	1	777010	지하수로_1번방_모여맞기_해제_1			모여맞기_해제_1	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
+777010	Plague	Debuff	True	seta	0	1	777009	지하수로_1번방_모여맞기_해제_2			모여맞기_해제_2	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
 777014	MovSpd	DOT	False	perc	6000	0	0.5	아르곤 바이러스			바이러스에 걸렸습니다! $H_W_BAD1s$COLOR_END마다 전체 HP 대비 $H_W_BAD20%$COLOR_END에 달하는 HP가 지속적으로 감소되며 이동 속도가 $H_W_GOOD50%$COLOR_END 감소됩니다. 또한 현기증 효과를 유발합니다.$BR아르곤 바이러스는 해제 할 수 없습니다.	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
 777014	HPDrain	DOT	False	perc	6000	0	0.9	아르곤 바이러스			바이러스에 걸렸습니다! $H_W_BAD1s$COLOR_END마다 전체 HP 대비 $H_W_BAD20%$COLOR_END에 달하는 HP가 지속적으로 감소되며 이동 속도가 $H_W_GOOD50%$COLOR_END 감소됩니다. 또한 현기증 효과를 유발합니다.$BR아르곤 바이러스는 해제 할 수 없습니다.	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
 777014	HPChange	DOT	False	perc	6000	1	-0.2	아르곤 바이러스			바이러스에 걸렸습니다! $H_W_BAD1s$COLOR_END마다 전체 HP 대비 $H_W_BAD20%$COLOR_END에 달하는 HP가 지속적으로 감소되며 이동 속도가 $H_W_GOOD50%$COLOR_END 감소됩니다. 또한 현기증 효과를 유발합니다.$BR아르곤 바이러스는 해제 할 수 없습니다.	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
@@ -2644,7 +2651,7 @@
 781090	Absorb	Buff	True	abs	6000000	0	30794400	내면의 보호막			라칸이 내면 세계로 전환하며, 당신의 공격을 막을 보호막을 생성했습니다.	icon_status.balanceup_tex	icon_status.balanceup_tex	True
 781093	HPChange	Debuff	False	perc	30000	2	-0.3	라칸의 저주			저주에 걸려 1초에 30%의 체력이 하락합니다	icon_status.blooduanty_tex	icon_status.blooduanty_tex	True
 781094	DelayedEffect	Buff	True	swch	4000	0	781090	영혼 세계로의 이동			영혼 세계로 전환하며 라칸이 보호막을 생성합니다. 해제가 가능합니다.	icon_skills.selfbuff_tex	icon_skills.selfbuff_tex	True
-781095	HPChange	Debuff	False	perc	30000	2	-0.3	흐뭇한 라칸			저주에 걸린 당신을 보며 라칸이 만족스러워 합니다	icon_skills.selfbuff_tex	icon_skills.selfbuff_tex	True
+781095	Plague	Buff	True	setp	120000	1	781093	흐뭇한 라칸			저주에 걸린 당신을 보며 라칸이 만족스러워 합니다	icon_skills.selfbuff_tex	icon_skills.selfbuff_tex	True
 781095	DelayedEffect	Buff	True	abs	120000	0	781097	흐뭇한 라칸			저주에 걸린 당신을 보며 라칸이 만족스러워 합니다	icon_skills.selfbuff_tex	icon_skills.selfbuff_tex	True
 781099	MovSpd	DOT	True	setp	2000	0	0	기절			라칸의 공격에 맞기 직전, 강력한 기운이 당신을 엄습해 기절시켰습니다	icon_status.confuseup_tex	icon_status.confuseup_tex	True
 781099	Block	DOT	True	swch	2000	0	0	기절			라칸의 공격에 맞기 직전, 강력한 기운이 당신을 엄습해 기절시켰습니다	icon_status.confuseup_tex	icon_status.confuseup_tex	True
@@ -2871,13 +2878,13 @@
 905413	MovSpd	Buff	True	perc	0	0	1.3	신격화			강력한 기운이 오르카의 힘과 속도를 한계까지 끌어올린 상태 대신 방어력이 $H_W_BAD35%$COLOR_END 만큼 감소합니다	icon_status.plusattack_tex	icon_status.plusattack_tex	True
 905413	ASpd	Buff	True	perc	0	0	1.88	신격화			강력한 기운이 오르카의 힘과 속도를 한계까지 끌어올린 상태 대신 방어력이 $H_W_BAD35%$COLOR_END 만큼 감소합니다	icon_status.plusattack_tex	icon_status.plusattack_tex	True
 905414	Drunk1	Stun	False	seta	10000	0	0	물살에 젖은 몸			오르카의 전격에 크게 반응한다.	icon_status.minushp_tex	icon_status.minushp_tex	True
-905416	HPChange	Debuff	False	perc	1000	1	-0.3	오르카의 전파전격			오르카의 전파전격의 영향으로 주변 범위 안에 있는 동료들에게 전체 HP 대비 $H_W_BAD30%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
+905416	Plague	Buff	True	seta	3000	1	905407	오르카의 전파전격			오르카의 전파전격의 영향으로 주변 범위 안에 있는 동료들에게 전체 HP 대비 $H_W_BAD30%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
 905416	DelayedEffect	Buff	True	abs	3000	0	905417	오르카의 전파전격			오르카의 전파전격의 영향으로 주변 범위 안에 있는 동료들에게 전체 HP 대비 $H_W_BAD30%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
-905417	HPChange	Debuff	False	perc	1000	1	-0.3	오르카의 전파전격			오르카의 전파전격의 영향으로 주변 범위 안에 있는 동료들에게 전체 HP 대비 $H_W_BAD30%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
+905417	Plague	Buff	True	seta	3000	1	905407	오르카의 전파전격			오르카의 전파전격의 영향으로 주변 범위 안에 있는 동료들에게 전체 HP 대비 $H_W_BAD30%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
 905417	DelayedEffect	Buff	True	abs	3000	0	905418	오르카의 전파전격			오르카의 전파전격의 영향으로 주변 범위 안에 있는 동료들에게 전체 HP 대비 $H_W_BAD30%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
-905418	HPChange	Debuff	False	perc	1000	1	-0.3	오르카의 전파전격			오르카의 전파전격의 영향으로 주변 범위 안에 있는 동료들에게 전체 HP 대비 $H_W_BAD30%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
-905419	HPChange	Debuff	False	perc	1000	1	-0.3	오르카의 전파전격			오르카의 전파전격의 영향으로 주변 범위 안에 있는 동료들에게 전체 HP 대비 $H_W_BAD30%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
-905420	HPChange	Debuff	False	perc	1000	1	-0.3	오르카의 전격			오르카의 전격의 영향으로 주변 범위 안에 있는 동료들에게 강력한 전기피해를 주게 된다.	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
+905418	Plague	Buff	True	seta	3000	1	905407	오르카의 전파전격			오르카의 전파전격의 영향으로 주변 범위 안에 있는 동료들에게 전체 HP 대비 $H_W_BAD30%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
+905419	Plague	Stun	False	seta	3000	1	905407	오르카의 전파전격			오르카의 전파전격의 영향으로 주변 범위 안에 있는 동료들에게 전체 HP 대비 $H_W_BAD30%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
+905420	Plague	Stun	False	seta	3000	1	905407	오르카의 전격			오르카의 전격의 영향으로 주변 범위 안에 있는 동료들에게 강력한 전기피해를 주게 된다.	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
 905420	DelayedEffect	Stun	False	abs	3000	0	905421	오르카의 전격			오르카의 전격의 영향으로 주변 범위 안에 있는 동료들에게 강력한 전기피해를 주게 된다.	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
 905423	MPChange	DOT	False	perc	180000	1	-0.05	지독한 점액			심해어의 지독한 점액으로 인해 MP회복이 되지 않습니다.  깨끗한 물로 몸을 씻으면 사라집니다.	icon_status.minusmove_tex	icon_status.minusmove_tex	True
 905423	NoHeal	DOT	False	abs	180000	0	0	지독한 점액			심해어의 지독한 점액으로 인해 MP회복이 되지 않습니다.  깨끗한 물로 몸을 씻으면 사라집니다.	icon_status.minusmove_tex	icon_status.minusmove_tex	True
@@ -2895,6 +2902,7 @@
 905445	HPChange	DOT	False	perc	15000	1	-0.125	물살 출혈			강력한 물살에 의해 출혈이 발생해 $H_W_BAD1s$COLOR_END 마다 전체 HP 대비 $H_W_BAD12.5%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.darkriftareawind_tex	icon_status.darkriftareawind_tex	True
 905448	MovSpd	Debuff	False	perc	5000	0	0.6	정령의 물거품			물거품에 의해 몸이 무거워져 이동 속도가 $H_W_BAD40%$COLOR_END 감소됩니다.	icon_status.mprecoverup_tex	icon_status.mprecoverup_tex	True
 905605	HPChange	Debuff	False	perc	600000	1	-0.15	쿠마스전류			쿠마스전류의 영향으로 주변 범위 안에 있는 동료들에게 전체 HP 대비 $H_W_BAD25%$COLOR_END에 달하는 HP가 지속적으로 감소되며, 자신의 전체 HP 대비 $H_W_BAD15%$COLOR_END에 달하는 HP가 지속적으로 감소합니다.	icon_status.fullelectriceffect_tex	icon_status.fullelectriceffect_tex	True
+905605	Plague	Debuff	False	perc	600000	1	975603	쿠마스전류			쿠마스전류의 영향으로 주변 범위 안에 있는 동료들에게 전체 HP 대비 $H_W_BAD25%$COLOR_END에 달하는 HP가 지속적으로 감소되며, 자신의 전체 HP 대비 $H_W_BAD15%$COLOR_END에 달하는 HP가 지속적으로 감소합니다.	icon_status.fullelectriceffect_tex	icon_status.fullelectriceffect_tex	True
 905607	Power	Stun	True	perc	0	0	1.25	봉인된 발로나의 힘			발로나의 공격력 $H_W_GOOD25%$COLOR_END, 방어력 $H_W_GOOD100%$COLOR_END가 상승하게 됩니다.	icon_status.descentofdarkness_tex	icon_status.descentofdarkness_tex	True
 905607	Endurance	Stun	True	perc	0	0	2	봉인된 발로나의 힘			발로나의 공격력 $H_W_GOOD25%$COLOR_END, 방어력 $H_W_GOOD100%$COLOR_END가 상승하게 됩니다.	icon_status.descentofdarkness_tex	icon_status.descentofdarkness_tex	True
 905608	HPChange	DOT	False	perc	600000	1	-0.12	봉인된 발로나의 저주			발로나의 저주로 인해 초당 전체 HP 대비 $H_W_BAD12%$COLOR_END에 달하는 HP가 지속적으로 감소합니다.	icon_status.curse_tex	icon_status.curse_tex	True
@@ -2907,7 +2915,7 @@
 905624	HPChange	Buff	False	perc	120000	3	-0.125	벼락 충전 !!			강력한 벼락 에너지에 상처를 입어 $H_W_BAD3s$COLOR_END 마다 전체 HP 대비 $H_W_BAD12.5%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다. 벼락 에너지를 다시 맞게 될 경우 '과충전'상태가 됩니다.			True
 905624	StackCounter	Buff	False	seta	120000	0	905625	벼락 충전 !!			강력한 벼락 에너지에 상처를 입어 $H_W_BAD3s$COLOR_END 마다 전체 HP 대비 $H_W_BAD12.5%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다. 벼락 에너지를 다시 맞게 될 경우 '과충전'상태가 됩니다.			True
 905625	HPChange	Buff	False	perc	60000	3	-0.3	과충전			체내에 너무 많은 전격 에너지가 쌓였습니다. 주변에 위치한 PC가 스턴 상태에 걸려듭니다.			True
-905625	Stun	Buff	False	swch	5000	0	5	과충전			체내에 너무 많은 전격 에너지가 쌓였습니다. 주변에 위치한 PC가 스턴 상태에 걸려듭니다.			True
+905625	Plague	Buff	False	seta	60000	1	905626	과충전			체내에 너무 많은 전격 에너지가 쌓였습니다. 주변에 위치한 PC가 스턴 상태에 걸려듭니다.			True
 905626	Stun	Buff	False	swch	5000	0	5	감전			과충전의 여파에 의해 기절했습니다.			True
 905627	AllResist	Debuff	True	perc	3000	0	0.001	정전기 충전			팔을 돌리는 동안 먹구름이 몰려옵니다. 행동이 끝난 이후에는 이벤트 게이지가 20채워집니다.	icon_status.minushp_tex	icon_status.minushp_tex	True
 905630	AllResist	Debuff	True	perc	4000	0	0.0001	무방비 상태			발로나가 스턴에 무방비 상태가 되었습니다	icon_status.minusdefence_tex	icon_status.minusdefence_tex	True
@@ -2916,10 +2924,9 @@
 905641	DefPotion	Debuff	True	perc	0	0	0.7	흑룡의 기운			흑룡의 기운이 온 몸을 감싸고 있는 상태. 백룡의 공격에 대해 30% 피해가 감소하며, 주변에 백룡의 기운이 있을 시 지속적으로 피해를 받게 된다.	icon_status.battlefieldbuff02_tex	icon_status.battlefieldbuff02_tex	True
 905643	Endurance	Buff	False	perc	0	0	100	백룡의 기운			백룡의 기운이 온 몸을 감싸고 있는 상태입니다. 방어력이 매우 높으며, 공격 시 HP가 10% 감소합니다. 용의 구슬은 백룡의 힘을 흡수하여 특수 공격을 사용합니다.	icon_status.battlefieldbuff01_tex	icon_status.battlefieldbuff01_tex	True
 905643	Reflect	Buff	False	perc	0	1	0.1	백룡의 기운			백룡의 기운이 온 몸을 감싸고 있는 상태입니다. 방어력이 매우 높으며, 공격 시 HP가 10% 감소합니다. 용의 구슬은 백룡의 힘을 흡수하여 특수 공격을 사용합니다.	icon_status.battlefieldbuff01_tex	icon_status.battlefieldbuff01_tex	True
+905651	Plague	Buff	True	perc	0	15	905657	태양의 빛			발로나의 주변에 주기적으로 강력한 빛으로 인해 시야를 제약받게 되고, 일정량의 보호막이 생성됩니다.	icon_status.valrhona_sun_tex	icon_status.valrhona_sun_tex	True
 905651	Absorb	Buff	True	abs	0	0	10100000	태양의 빛			발로나의 주변에 주기적으로 강력한 빛으로 인해 시야를 제약받게 되고, 일정량의 보호막이 생성됩니다.	icon_status.valrhona_sun_tex	icon_status.valrhona_sun_tex	True
-905651	Drunk	Debuff	True	60012	15000	0	0	태양의 빛			발로나의 주변에 주기적으로 강력한 빛으로 인해 시야를 제약받게 되고, 일정량의 보호막이 생성됩니다.	icon_status.valrhona_sun_tex	icon_status.valrhona_sun_tex	True
-905652	HPLoss	DOT	False	abs	10000	0	-200000	악마의 미소			발로나의 주변에 어둠 속에 갖혀 시야를 제약받게 하고, 15초당 악마의 계약이 걸리게 됩니다.	icon_status.valrhona_devil_tex	icon_status.valrhona_devil_tex	True
-905652	Drunk	Debuff	True	905601	15000	0	0	악마의 미소			발로나의 주변에 어둠 속에 갖혀 시야를 제약받게 하고, 15초당 악마의 계약이 걸리게 됩니다.	icon_status.valrhona_devil_tex	icon_status.valrhona_devil_tex	True
+905652	Plague	Buff	True	perc	0	15	905655	악마의 미소			발로나의 주변에 어둠 속에 갖혀 시야를 제약받게 하고, 15초당 악마의 계약이 걸리게 됩니다.	icon_status.valrhona_devil_tex	icon_status.valrhona_devil_tex	True
 905653	Power	Buff	True	perc	0	0	1.3	여신의 손짓			발로나의 공격력 $H_W_GOOD30%$COLOR_END, 방어력 $H_W_GOOD100%$COLOR_END, 가속도가 $H_W_GOOD20%$COLOR_END 상승하게 됩니다.	icon_status.valrhona_goddess_tex	icon_status.valrhona_goddess_tex	True
 905653	Endurance	Buff	True	perc	0	0	2	여신의 손짓			발로나의 공격력 $H_W_GOOD30%$COLOR_END, 방어력 $H_W_GOOD100%$COLOR_END, 가속도가 $H_W_GOOD20%$COLOR_END 상승하게 됩니다.	icon_status.valrhona_goddess_tex	icon_status.valrhona_goddess_tex	True
 905653	ASpd	Buff	True	perc	0	0	1.2	여신의 손짓			발로나의 공격력 $H_W_GOOD30%$COLOR_END, 방어력 $H_W_GOOD100%$COLOR_END, 가속도가 $H_W_GOOD20%$COLOR_END 상승하게 됩니다.	icon_status.valrhona_goddess_tex	icon_status.valrhona_goddess_tex	True
@@ -2965,13 +2972,14 @@
 905933	HPChange	DOT	True	perc	90000	2	-0.08	락도스의 저주			$H_W_BAD2s$COLOR_END마다 HP가 $H_W_BAD8%$COLOR_END씩 지속적으로 감소되며, 3중첩 시 사망합니다. 락도스의 저주는 해제할 수 없습니다.	icon_status.injuredbtdarkness_tex	icon_status.injuredbtdarkness_tex	True
 905933	StackCounter	DOT	True	seta	90000	0	905931	락도스의 저주			$H_W_BAD2s$COLOR_END마다 HP가 $H_W_BAD8%$COLOR_END씩 지속적으로 감소되며, 3중첩 시 사망합니다. 락도스의 저주는 해제할 수 없습니다.	icon_status.injuredbtdarkness_tex	icon_status.injuredbtdarkness_tex	True
 905934	HPChange	Buff	True	perc	5000	1	-0.07	악령섬의 유령			유령의 영향으로 자신도 유령이 되며, 유령화가 되어 있는 동안 HP가 $H_W_BAD8%$COLOR_END씩 지속적으로 감소됩니다. 단, 특정 공격에 대해 면역 상태가 됩니다.	icon_status.diseasedown_tex	icon_status.diseasedown_tex	True
+905934	Plague	Buff	True	seta	5000	1	905934	악령섬의 유령			유령의 영향으로 자신도 유령이 되며, 유령화가 되어 있는 동안 HP가 $H_W_BAD8%$COLOR_END씩 지속적으로 감소됩니다. 단, 특정 공격에 대해 면역 상태가 됩니다.	icon_status.diseasedown_tex	icon_status.diseasedown_tex	True
 905934	IncreasedHeal	Buff	True	swch	5000	0	0	악령섬의 유령			유령의 영향으로 자신도 유령이 되며, 유령화가 되어 있는 동안 HP가 $H_W_BAD8%$COLOR_END씩 지속적으로 감소됩니다. 단, 특정 공격에 대해 면역 상태가 됩니다.	icon_status.diseasedown_tex	icon_status.diseasedown_tex	True
 905934	Block	Buff	True	swch	5000	0	0	악령섬의 유령			유령의 영향으로 자신도 유령이 되며, 유령화가 되어 있는 동안 HP가 $H_W_BAD8%$COLOR_END씩 지속적으로 감소됩니다. 단, 특정 공격에 대해 면역 상태가 됩니다.	icon_status.diseasedown_tex	icon_status.diseasedown_tex	True
 905934	DelayedEffect	Buff	True	seta	5000	0	905929	악령섬의 유령			유령의 영향으로 자신도 유령이 되며, 유령화가 되어 있는 동안 HP가 $H_W_BAD8%$COLOR_END씩 지속적으로 감소됩니다. 단, 특정 공격에 대해 면역 상태가 됩니다.	icon_status.diseasedown_tex	icon_status.diseasedown_tex	True
 905934	Drunk	Buff	True	905901	5000	0	0	악령섬의 유령			유령의 영향으로 자신도 유령이 되며, 유령화가 되어 있는 동안 HP가 $H_W_BAD8%$COLOR_END씩 지속적으로 감소됩니다. 단, 특정 공격에 대해 면역 상태가 됩니다.	icon_status.diseasedown_tex	icon_status.diseasedown_tex	True
 905934	Immune	Buff	True	17	5000	0	0	악령섬의 유령			유령의 영향으로 자신도 유령이 되며, 유령화가 되어 있는 동안 HP가 $H_W_BAD8%$COLOR_END씩 지속적으로 감소됩니다. 단, 특정 공격에 대해 면역 상태가 됩니다.	icon_status.diseasedown_tex	icon_status.diseasedown_tex	True
 905934	StackCounter	Buff	True	swch	5000	0	905943	악령섬의 유령			유령의 영향으로 자신도 유령이 되며, 유령화가 되어 있는 동안 HP가 $H_W_BAD8%$COLOR_END씩 지속적으로 감소됩니다. 단, 특정 공격에 대해 면역 상태가 됩니다.	icon_status.diseasedown_tex	icon_status.diseasedown_tex	True
-905935	Drunk	Buff	True	905902	1000	0	0	전파용						True
+905935	Plague	Buff	True	perc	0	1	905934	전파용						True
 905936	DelayedEffect	Buff	True	abs	15000	1	905935	유령 해제						True
 905939	IncreasedHeal	Debuff	False	swch	3000	0	0.75	어둠의 파편(2단계)			2중첩 시, 어둠의 보호막 효과를 얻습니다.	icon_status.darkriftwhisper_tex	icon_status.darkriftwhisper_tex	True
 905939	StackCounter	Debuff	False	seta	3000	0	905942	어둠의 파편(2단계)			2중첩 시, 어둠의 보호막 효과를 얻습니다.	icon_status.darkriftwhisper_tex	icon_status.darkriftwhisper_tex	True
@@ -3124,7 +3132,7 @@
 975409	Absorb	Debuff	True	abs	14000	0	2200000	오르카의 보호막			강력한 보호막에 의해 보호받고 있는 상태	icon_status.immunedebuff_tex	icon_status.immunedebuff_tex	True
 975423	MPChange	DOT	False	perc	180000	1	-0.16	지독한 점액			심해어의 지독한 점액으로 인해 $H_W_GOOD1s$COLOR_END마다 $H_W_BAD16%$COLOR_END씩 MP가 감소합니다. 깨끗한 물로 몸을 씻으면 사라집니다.	icon_status.minusmove_tex	icon_status.minusmove_tex	True
 975430	Absorb	Debuff	True	abs	10000	0	1850000	강인한 방어막			등껍질로 자신을 보호받으면서 강력한 힘을 모으고 있다. 	icon_status.balanceup_tex	icon_status.balanceup_tex	True
-975601	HPChange	Debuff	False	perc	1000	1	-0.1	쿠마스전류			쿠마스전류의 영향으로 주변 범위 안에 있는 동료들에게 전체 HP 대비 $H_W_BAD10%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.fullelectriceffect_tex	icon_status.fullelectriceffect_tex	True
+975601	Plague	Debuff	False	perc	600000	1	975602	쿠마스전류			쿠마스전류의 영향으로 주변 범위 안에 있는 동료들에게 전체 HP 대비 $H_W_BAD10%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.fullelectriceffect_tex	icon_status.fullelectriceffect_tex	True
 975602	HPChange	Debuff	False	perc	1000	1	-0.1	쿠마스전류			쿠마스전류의 영향으로 주변 범위 안에 있는 동료들에게 전체 HP 대비 $H_W_BAD10%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.fullelectriceffect_tex	icon_status.fullelectriceffect_tex	False
 975603	HPChange	Debuff	False	perc	1000	1	-0.25	쿠마스전류			쿠마스전류의 영향으로 주변 범위 안에 있는 동료들에게 전체 HP 대비 $H_W_BAD25%$COLOR_END에 달하는 HP가 지속적으로 감소되며, 자신의 전체 HP 대비 $H_W_BAD15%$COLOR_END에 달하는 HP가 지속적으로 감소합니다.	icon_status.fullelectriceffect_tex	icon_status.fullelectriceffect_tex	False
 975651	Power	Buff	True	perc	0	0	1.1	태양의 빛			발로나의 공격력 $H_W_GOOD10%$COLOR_END, 방어력 $H_W_GOOD25%$COLOR_END가 상승하게 됩니다.	icon_status.valrhona_sun_tex	icon_status.valrhona_sun_tex	True
@@ -3223,7 +3231,7 @@
 981090	Absorb	Buff	True	abs	6000000	0	54172800	내면의 보호막			라칸이 내면 세계로 전환하며, 당신의 공격을 막을 보호막을 생성했습니다.	icon_status.balanceup_tex	icon_status.balanceup_tex	True
 981093	HPChange	Debuff	False	perc	30000	2	-0.3	라칸의 저주			저주에 걸려 1초에 30%의 체력이 하락합니다	icon_status.blooduanty_tex	icon_status.blooduanty_tex	True
 981094	DelayedEffect	Buff	True	swch	2500	0	981090	영혼 세계로의 이동			영혼 세계로 전환하며 라칸이 보호막을 생성합니다. 해제가 가능합니다.	icon_skills.selfbuff_tex	icon_skills.selfbuff_tex	True
-981095	HPChange	Debuff	False	perc	30000	2	-0.3	흐뭇한 라칸			저주에 걸린 당신을 보며 라칸이 만족스러워 합니다	icon_skills.selfbuff_tex	icon_skills.selfbuff_tex	True
+981095	Plague	Buff	True	setp	120000	1	981093	흐뭇한 라칸			저주에 걸린 당신을 보며 라칸이 만족스러워 합니다	icon_skills.selfbuff_tex	icon_skills.selfbuff_tex	True
 981095	DelayedEffect	Buff	True	abs	120000	0	981097	흐뭇한 라칸			저주에 걸린 당신을 보며 라칸이 만족스러워 합니다	icon_skills.selfbuff_tex	icon_skills.selfbuff_tex	True
 981099	MovSpd	Stun	True	setp	2000	0	0	기절			라칸의 공격에 맞기 직전, 강력한 기운이 당신을 엄습해 기절시켰습니다	icon_status.confuseup_tex	icon_status.confuseup_tex	True
 981099	Block	Stun	True	swch	2000	0	0	기절			라칸의 공격에 맞기 직전, 강력한 기운이 당신을 엄습해 기절시켰습니다	icon_status.confuseup_tex	icon_status.confuseup_tex	True
@@ -3247,7 +3255,7 @@
 988535	DropUp	Buff	True	perc	0	1	1.5	드랍율 증가(2단계)			자신 및 파티원들의 드랍율이 $H_W_GOOD50%$COLOR_END만큼 증가합니다.	icon_items.gift_box04_tex	icon_items.gift_box04_tex	True
 988536	DropUp	Buff	True	perc	0	1	2	드랍율 증가(3단계)			자신 및 파티원들의 드랍율이 $H_W_GOOD100%$COLOR_END만큼 증가합니다.	icon_items.gift_box03_tex	icon_items.gift_box03_tex	True
 988550	HPChange	Debuff	False	abs	1000	1	-100000	환영의 기운			강력한 환영의 힘을 얻어 막강한 기운을 주위에 흩뿌립니다.	icon_status.electriceffect3_tex	icon_status.electriceffect3_tex	False
-988551	HPChange	Debuff	False	abs	1000	1	-100000	환영의 기운			강력한 환영의 힘을 얻어 막강한 기운을 주위에 흩뿌립니다.	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
+988551	Plague	Stun	False	perc	150000	1	988550	환영의 기운			강력한 환영의 힘을 얻어 막강한 기운을 주위에 흩뿌립니다.	icon_status.electriccharge3_tex	icon_status.electriccharge3_tex	True
 988570	MovSpd	Debuff	False	perc	10000	0	0.1	비비슈의 저주_감속			이동 속도가 $H_W_BAD90%$COLOR_END 감소됩니다. 비비슈의 저주_감속은 해제 할 수 없습니다.	icon_status.minusmove_tex	icon_status.minusmove_tex	True
 988570	HPDrain	Debuff	False	perc	10000	0	0.9	비비슈의 저주_감속			이동 속도가 $H_W_BAD90%$COLOR_END 감소됩니다. 비비슈의 저주_감속은 해제 할 수 없습니다.	icon_status.minusmove_tex	icon_status.minusmove_tex	True
 988571	Power	Debuff	False	perc	10000	0	0.1	비비슈의 저주_약화			힘이 $H_W_BAD90%$COLOR_END 감소됩니다. 비비슈의 저주_약화는 해제 할 수 없습니다.	icon_status.diseaseup_tex	icon_status.diseaseup_tex	True
@@ -3255,12 +3263,12 @@
 988573	Chaos	Stun	False	swch	10000	0	0	비비슈의 저주_혼란			정신착란 상태에 빠졌습니다! 이동 버튼 입력 시의 이동 방향이 반대가 됩니다. 비비슈의 저주_혼란은 해제 할 수 없습니다.	icon_status.fearstatus_tex	icon_status.fearstatus_tex	True
 988574	Fear	Stun	False	swch	10000	0	200	비비슈의 저주_공포			겁에 질려 도망칩니다! 비비슈의 저주는 해제할 수 없지만, 피격에 의해 다운 발생 시에는 자동 해제됩니다. 비비슈의 저주_공포는 해제 할 수 없습니다.	icon_status.fearstatus_tex	icon_status.fearstatus_tex	True
 988575	Block	Stun	False	swch	10000	0	0	비비슈의 저주_침묵			효과 지속 시간 동안 그 어떤 종류의 스킬도 사용할 수 없습니다! 비비슈의 저주_침묵은 해제 할 수 없습니다.	icon_status.sealskill_tex	icon_status.sealskill_tex	True
-988576	MovSpd	Debuff	False	perc	10000	0	0.1	비비슈의 저주_감속			비비슈의 저주가 발생하였습니다. 자신을 제외한 주변 10m 범위 내 파티원들의 이동 속도가 감소됩니다.	icon_status.minuswill_tex	icon_status.minuswill_tex	True
-988577	Power	Debuff	False	perc	10000	0	0.1	비비슈의 저주_약화			비비슈의 저주가 발생하였습니다. 자신을 제외한 주변 10m 범위 내 파티원들의 힘의 감소됩니다.	icon_status.minuswill_tex	icon_status.minuswill_tex	True
-988578	HPChange	Debuff	True	abs	1000	1	-1000000	비비슈의 저주_파괴			비비슈의 저주가 발생하였습니다. 자신을 제외한 주변 20m 범위 내 파티원들이 즉사합니다.	icon_status.minuswill_tex	icon_status.minuswill_tex	True
-988579	Chaos	Stun	False	swch	10000	0	0	비비슈의 저주_혼란			비비슈의 저주가 발생하였습니다. 자신을 제외한 주변 10m 범위 내 파티원들의 정신착란 상태에 빠집니다.	icon_status.minuswill_tex	icon_status.minuswill_tex	True
-988580	Fear	Stun	False	swch	10000	0	200	비비슈의 저주_공포			비비슈의 저주가 발생하였습니다. 자신을 제외한 주변 10m 범위 내 파티원들이 겁에 질려 도망갑니다.	icon_status.minuswill_tex	icon_status.minuswill_tex	True
-988581	Block	Stun	False	swch	10000	0	0	비비슈의 저주_침묵			비비슈의 저주가 발생하였습니다. 자신을 제외한 주변 10m 범위 내 파티원들이 스킬을 사용 할 수 없습니다.	icon_status.minuswill_tex	icon_status.minuswill_tex	True
+988576	Plague	Debuff	False	perc	5000	1	988570	비비슈의 저주_감속			비비슈의 저주가 발생하였습니다. 자신을 제외한 주변 10m 범위 내 파티원들의 이동 속도가 감소됩니다.	icon_status.minuswill_tex	icon_status.minuswill_tex	True
+988577	Plague	Debuff	False	perc	5000	1	988571	비비슈의 저주_약화			비비슈의 저주가 발생하였습니다. 자신을 제외한 주변 10m 범위 내 파티원들의 힘의 감소됩니다.	icon_status.minuswill_tex	icon_status.minuswill_tex	True
+988578	Plague	Debuff	True	perc	5000	1	988572	비비슈의 저주_파괴			비비슈의 저주가 발생하였습니다. 자신을 제외한 주변 20m 범위 내 파티원들이 즉사합니다.	icon_status.minuswill_tex	icon_status.minuswill_tex	True
+988579	Plague	Debuff	False	perc	5000	1	988573	비비슈의 저주_혼란			비비슈의 저주가 발생하였습니다. 자신을 제외한 주변 10m 범위 내 파티원들의 정신착란 상태에 빠집니다.	icon_status.minuswill_tex	icon_status.minuswill_tex	True
+988580	Plague	Debuff	False	perc	5000	1	988574	비비슈의 저주_공포			비비슈의 저주가 발생하였습니다. 자신을 제외한 주변 10m 범위 내 파티원들이 겁에 질려 도망갑니다.	icon_status.minuswill_tex	icon_status.minuswill_tex	True
+988581	Plague	Debuff	False	perc	5000	1	988575	비비슈의 저주_침묵			비비슈의 저주가 발생하였습니다. 자신을 제외한 주변 10m 범위 내 파티원들이 스킬을 사용 할 수 없습니다.	icon_status.minuswill_tex	icon_status.minuswill_tex	True
 988582	DelayedEffect	Debuff	False	abs	5000	0	988576	비비슈의 저주_대기(감속)			5초 후에 비비슈의 저주_감속 효과가 발생합니다.	icon_status.firedamage_tex	icon_status.firedamage_tex	True
 988583	DelayedEffect	Debuff	False	abs	5000	0	988577	비비슈의 저주_대기(약화)			5초 후에 비비슈의 저주_약화 효과가 발생합니다.	icon_status.firedamage_tex	icon_status.firedamage_tex	True
 988584	DelayedEffect	Debuff	False	abs	10000	0	988578	비비슈의 저주_대기(파괴)			10초 후에 비비슈의 저주_파괴 효과가 발생합니다.	icon_status.firedamage_tex	icon_status.firedamage_tex	True
@@ -3384,11 +3392,18 @@
 5010008	DefPotion	Buff	True	perc	1800000	0	0.8	영광의 기억	117532	영광의 기억	다음 효과들을 획득합니다.$BR $BR최대 HP $H_W_GOOD7%$COLOR_END 증가$BR받는 피해 $H_W_GOOD20%$COLOR_END 감소$BR공격 속도 $H_W_GOOD15%$COLOR_END 증가$BR스킬 공격력 $H_W_GOOD20%$COLOR_END 증가$BR크리스탈 $H_W_GOOD1회$COLOR_END 깨짐 방지$BR이동 속도 $H_W_GOOD7%$COLOR_END 증가	icon_items.parts_lightweaponc9_tex	icon_items.parts_lightweaponc9_tex	True
 5010008	AtkPotion	Buff	True	perc	1800000	0	1.2	영광의 기억	117532	영광의 기억	다음 효과들을 획득합니다.$BR $BR최대 HP $H_W_GOOD7%$COLOR_END 증가$BR받는 피해 $H_W_GOOD20%$COLOR_END 감소$BR공격 속도 $H_W_GOOD15%$COLOR_END 증가$BR스킬 공격력 $H_W_GOOD20%$COLOR_END 증가$BR크리스탈 $H_W_GOOD1회$COLOR_END 깨짐 방지$BR이동 속도 $H_W_GOOD7%$COLOR_END 증가	icon_items.parts_lightweaponc9_tex	icon_items.parts_lightweaponc9_tex	True
 5010008	CrystalBind	Buff	True	abs	1800000	0	1	영광의 기억	117532	영광의 기억	다음 효과들을 획득합니다.$BR $BR최대 HP $H_W_GOOD7%$COLOR_END 증가$BR받는 피해 $H_W_GOOD20%$COLOR_END 감소$BR공격 속도 $H_W_GOOD15%$COLOR_END 증가$BR스킬 공격력 $H_W_GOOD20%$COLOR_END 증가$BR크리스탈 $H_W_GOOD1회$COLOR_END 깨짐 방지$BR이동 속도 $H_W_GOOD7%$COLOR_END 증가	icon_items.parts_lightweaponc9_tex	icon_items.parts_lightweaponc9_tex	True
+5010009	PVPDef	Buff	True	abs	0	0	0	녹테늄 강화탄(프리미엄)	100451	녹테늄 강화탄(프리미엄)	녹테늄 강화탄을 사용하여 스킬의 효과를 증대화 시킵니다.	icon_items.union_supplies5_tex	icon_items.union_supplies5_tex	True
+5010009	PVPAtk	Buff	True	abs	0	0	0	녹테늄 강화탄(프리미엄)	100451	녹테늄 강화탄(프리미엄)	녹테늄 강화탄을 사용하여 스킬의 효과를 증대화 시킵니다.	icon_items.union_supplies5_tex	icon_items.union_supplies5_tex	True
+5010009	Noctenium	Buff	True	swch	0	0	8	녹테늄 강화탄(프리미엄)	100451	녹테늄 강화탄(프리미엄)	녹테늄 강화탄을 사용하여 스킬의 효과를 증대화 시킵니다.	icon_items.union_supplies5_tex	icon_items.union_supplies5_tex	True
+5010010	MaxHP	Buff	True	perc	0	0	1.05	발키온의 용맹 III(프리미엄)			평화 상태에서 이동 속도 $H_W_GOOD20$COLOR_END 증가$BR최대 HP $H_W_GOOD5%$COLOR_END 증가$BR힘 $H_W_GOOD6$COLOR_END 증가$BR$BR본 효과는 계정 내 모든 캐릭터에게 적용됩니다.	icon_status.buff_of_kaia_tex	icon_status.buff_of_kaia_tex	True
+5010010	Power	Buff	True	abs	0	0	6	발키온의 용맹 III(프리미엄)			평화 상태에서 이동 속도 $H_W_GOOD20$COLOR_END 증가$BR최대 HP $H_W_GOOD5%$COLOR_END 증가$BR힘 $H_W_GOOD6$COLOR_END 증가$BR$BR본 효과는 계정 내 모든 캐릭터에게 적용됩니다.	icon_status.buff_of_kaia_tex	icon_status.buff_of_kaia_tex	True
+5010010	OutOfCombatMovSpd	Buff	True	abs	0	0	20	발키온의 용맹 III(프리미엄)			평화 상태에서 이동 속도 $H_W_GOOD20$COLOR_END 증가$BR최대 HP $H_W_GOOD5%$COLOR_END 증가$BR힘 $H_W_GOOD6$COLOR_END 증가$BR$BR본 효과는 계정 내 모든 캐릭터에게 적용됩니다.	icon_status.buff_of_kaia_tex	icon_status.buff_of_kaia_tex	True
 5020000	EnchantChance	Buff	True	perc	300000	1	1.01	유럽 강화 주문서 1(5분)	153495	[PC방] 강화 장인의 가호 주문서 (5분)	1%	icon_items.parts_heavyarmorc5_tex	icon_items.parts_heavyarmorc5_tex	True
 5020001	EnchantChance	Buff	True	perc	300000	1	1.05	유럽 강화 주문서 2(5분)	153496	[PC방] 축복받은 강화 장인의 가호 주문서 (5분)	5%	icon_items.parts_heavyarmorc5_tex	icon_items.parts_heavyarmorc5_tex	True
 5020002	EnchantChance	Buff	True	perc	300000	1	1.15	유럽 강화 주문서 3(5분)	153497	[PC방] 빛나는 강화 장인의 가호 주문서 (5분)	15%	icon_items.parts_heavyarmorc5_tex	icon_items.parts_heavyarmorc5_tex	True
 5020003	CCrystalBind	Buff	True	abs	0	0	1	완전한 크리스탈 보호 주문서(VIP)			사망 시 크리스탈이 깨지는 것을 방지합니다.	icon_items.q_closedspace_stone_05_tex	icon_items.q_closedspace_stone_05_tex	True
 5020004	CraftTime	Buff	True	perc	0	0	0.5	장인의 등불(VIP)			모든 아이템의 제작 시간이 $H_W_GOOD50%$COLOR_END 단축됩니다.	icon_items.artisan_lamp_tex	icon_items.artisan_lamp_tex	True
+5020006	297	Buff	True	seta	3600000	0	0	다르칸의 날개			다르칸의 날개를 활성화 했습니다.<br>다르칸의 날개는 전투 시작 시, 스킬 적중 시 또는 피해를 입을 시 해제됩니다.	icon_status.descentofdarkness_tex	icon_status.descentofdarkness_tex	True
 5690001	StaminaDecay	Buff	True	seta	0	0	0	기억의 추적자			기억의 파편 수집 중에는 사망 시 강화 크리스탈이 파괴되지 않습니다. 	icon_skills.refineresin_tex	icon_skills.refineresin_tex	True
 5690001	CrystalBind	Buff	True	abs	0	0	1	기억의 추적자			기억의 파편 수집 중에는 사망 시 강화 크리스탈이 파괴되지 않습니다. 	icon_skills.refineresin_tex	icon_skills.refineresin_tex	True
 5690002	Resurrect	Buff	True	seta	60000	0	1	기억의 재구성			기억 재구성을 통해 사망했던 기억을 삭제하여 부활할 수 있습니다. 	icon_status.mpsuckdown_tex	icon_status.mpsuckdown_tex	True
@@ -3825,15 +3840,15 @@
 10153000	209	Buff	True	perc	6000	0	0	[반격타] 사용 가능			[반격타] 스킬을 사용 가능합니다.	icon_skills.counterattack2_tex	icon_skills.counterattack2_tex	True
 10153020	Block	Stun	False	swch	3000	0	0	강타 (방어)			허공에서 중심을 잃어 정신을 차릴 수 없습니다.	icon_skills.smashattack02_tex	icon_skills.lossofbalance_tex	True
 10153030	Stun	Stun	False	swch	3000	0	5	공중 차기			머리를 가격 당하여 잠시 기절하였습니다.	icon_skills.airkick_tex	icon_skills.concussion_tex	True
-10153040	Power	Buff	True	abs	0	0	45	거인의 힘 (방어)			몸을 거대화 하여 내면의 엄청난 힘을 끌어냅니다. 공격 속도가 10 감소하는 대신 힘 45, 치명타 유발 50이 증가하고, 추가 적대치 10%를 획득하고, 모든 스킬 재사용 시간이 30% 감소하며 모든 스킬이 전방 방어 효과를 갖게 됩니다.	icon_skills.rampage_tex	icon_skills.rampage_tex	True
-10153040	Crit	Buff	True	abs	0	0	50	거인의 힘 (방어)			몸을 거대화 하여 내면의 엄청난 힘을 끌어냅니다. 공격 속도가 10 감소하는 대신 힘 45, 치명타 유발 50이 증가하고, 추가 적대치 10%를 획득하고, 모든 스킬 재사용 시간이 30% 감소하며 모든 스킬이 전방 방어 효과를 갖게 됩니다.	icon_skills.rampage_tex	icon_skills.rampage_tex	True
-10153040	Aggro	Buff	True	perc	0	0	1.1	거인의 힘 (방어)			몸을 거대화 하여 내면의 엄청난 힘을 끌어냅니다. 공격 속도가 10 감소하는 대신 힘 45, 치명타 유발 50이 증가하고, 추가 적대치 10%를 획득하고, 모든 스킬 재사용 시간이 30% 감소하며 모든 스킬이 전방 방어 효과를 갖게 됩니다.	icon_skills.rampage_tex	icon_skills.rampage_tex	True
-10153040	ASpd	Buff	True	abs	0	0	-10	거인의 힘 (방어)			몸을 거대화 하여 내면의 엄청난 힘을 끌어냅니다. 공격 속도가 10 감소하는 대신 힘 45, 치명타 유발 50이 증가하고, 추가 적대치 10%를 획득하고, 모든 스킬 재사용 시간이 30% 감소하며 모든 스킬이 전방 방어 효과를 갖게 됩니다.	icon_skills.rampage_tex	icon_skills.rampage_tex	True
-10153040	RageChange	Buff	True	abs	0	1	-250	거인의 힘 (방어)			몸을 거대화 하여 내면의 엄청난 힘을 끌어냅니다. 공격 속도가 10 감소하는 대신 힘 45, 치명타 유발 50이 증가하고, 추가 적대치 10%를 획득하고, 모든 스킬 재사용 시간이 30% 감소하며 모든 스킬이 전방 방어 효과를 갖게 됩니다.	icon_skills.rampage_tex	icon_skills.rampage_tex	True
-10153040	CDR	Buff	True	swch	0	0	0.7	거인의 힘 (방어)			몸을 거대화 하여 내면의 엄청난 힘을 끌어냅니다. 공격 속도가 10 감소하는 대신 힘 45, 치명타 유발 50이 증가하고, 추가 적대치 10%를 획득하고, 모든 스킬 재사용 시간이 30% 감소하며 모든 스킬이 전방 방어 효과를 갖게 됩니다.	icon_skills.rampage_tex	icon_skills.rampage_tex	True
-10153040	Block	Buff	True	swch	0	0	0	거인의 힘 (방어)			몸을 거대화 하여 내면의 엄청난 힘을 끌어냅니다. 공격 속도가 10 감소하는 대신 힘 45, 치명타 유발 50이 증가하고, 추가 적대치 10%를 획득하고, 모든 스킬 재사용 시간이 30% 감소하며 모든 스킬이 전방 방어 효과를 갖게 됩니다.	icon_skills.rampage_tex	icon_skills.rampage_tex	True
-10153040	Range	Buff	True	swch	0	0	0.1	거인의 힘 (방어)			몸을 거대화 하여 내면의 엄청난 힘을 끌어냅니다. 공격 속도가 10 감소하는 대신 힘 45, 치명타 유발 50이 증가하고, 추가 적대치 10%를 획득하고, 모든 스킬 재사용 시간이 30% 감소하며 모든 스킬이 전방 방어 효과를 갖게 됩니다.	icon_skills.rampage_tex	icon_skills.rampage_tex	True
-10153040	SuperArmor	Buff	True	swch	0	0	0	거인의 힘 (방어)			몸을 거대화 하여 내면의 엄청난 힘을 끌어냅니다. 공격 속도가 10 감소하는 대신 힘 45, 치명타 유발 50이 증가하고, 추가 적대치 10%를 획득하고, 모든 스킬 재사용 시간이 30% 감소하며 모든 스킬이 전방 방어 효과를 갖게 됩니다.	icon_skills.rampage_tex	icon_skills.rampage_tex	True
+10153040	Power	Buff	True	abs	0	0	45	거인의 힘 (방어)			효과가 지속되는 동안 모든 공격 스킬 사용 시 <font color = '#66bbff'>전방을 방어</font>하며, 몸집 및 적대치 10%, 힘 45, 치명타 유발이 50 증가하고 공격속도 10, 모든 스킬 재사용 시간이 30%만큼 감소합니다.	icon_skills.rampage_tex	icon_skills.rampage_tex	True
+10153040	Crit	Buff	True	abs	0	0	50	거인의 힘 (방어)			효과가 지속되는 동안 모든 공격 스킬 사용 시 <font color = '#66bbff'>전방을 방어</font>하며, 몸집 및 적대치 10%, 힘 45, 치명타 유발이 50 증가하고 공격속도 10, 모든 스킬 재사용 시간이 30%만큼 감소합니다.	icon_skills.rampage_tex	icon_skills.rampage_tex	True
+10153040	Aggro	Buff	True	perc	0	0	1.1	거인의 힘 (방어)			효과가 지속되는 동안 모든 공격 스킬 사용 시 <font color = '#66bbff'>전방을 방어</font>하며, 몸집 및 적대치 10%, 힘 45, 치명타 유발이 50 증가하고 공격속도 10, 모든 스킬 재사용 시간이 30%만큼 감소합니다.	icon_skills.rampage_tex	icon_skills.rampage_tex	True
+10153040	ASpd	Buff	True	abs	0	0	-10	거인의 힘 (방어)			효과가 지속되는 동안 모든 공격 스킬 사용 시 <font color = '#66bbff'>전방을 방어</font>하며, 몸집 및 적대치 10%, 힘 45, 치명타 유발이 50 증가하고 공격속도 10, 모든 스킬 재사용 시간이 30%만큼 감소합니다.	icon_skills.rampage_tex	icon_skills.rampage_tex	True
+10153040	RageChange	Buff	True	abs	0	1	-250	거인의 힘 (방어)			효과가 지속되는 동안 모든 공격 스킬 사용 시 <font color = '#66bbff'>전방을 방어</font>하며, 몸집 및 적대치 10%, 힘 45, 치명타 유발이 50 증가하고 공격속도 10, 모든 스킬 재사용 시간이 30%만큼 감소합니다.	icon_skills.rampage_tex	icon_skills.rampage_tex	True
+10153040	CDR	Buff	True	swch	0	0	0.7	거인의 힘 (방어)			효과가 지속되는 동안 모든 공격 스킬 사용 시 <font color = '#66bbff'>전방을 방어</font>하며, 몸집 및 적대치 10%, 힘 45, 치명타 유발이 50 증가하고 공격속도 10, 모든 스킬 재사용 시간이 30%만큼 감소합니다.	icon_skills.rampage_tex	icon_skills.rampage_tex	True
+10153040	Block	Buff	True	swch	0	0	0	거인의 힘 (방어)			효과가 지속되는 동안 모든 공격 스킬 사용 시 <font color = '#66bbff'>전방을 방어</font>하며, 몸집 및 적대치 10%, 힘 45, 치명타 유발이 50 증가하고 공격속도 10, 모든 스킬 재사용 시간이 30%만큼 감소합니다.	icon_skills.rampage_tex	icon_skills.rampage_tex	True
+10153040	Range	Buff	True	swch	0	0	0.1	거인의 힘 (방어)			효과가 지속되는 동안 모든 공격 스킬 사용 시 <font color = '#66bbff'>전방을 방어</font>하며, 몸집 및 적대치 10%, 힘 45, 치명타 유발이 50 증가하고 공격속도 10, 모든 스킬 재사용 시간이 30%만큼 감소합니다.	icon_skills.rampage_tex	icon_skills.rampage_tex	True
+10153040	SuperArmor	Buff	True	swch	0	0	0	거인의 힘 (방어)			효과가 지속되는 동안 모든 공격 스킬 사용 시 <font color = '#66bbff'>전방을 방어</font>하며, 몸집 및 적대치 10%, 힘 45, 치명타 유발이 50 증가하고 공격속도 10, 모든 스킬 재사용 시간이 30%만큼 감소합니다.	icon_skills.rampage_tex	icon_skills.rampage_tex	True
 10153050	209	Buff	True	perc	0	0	0	넘치는 분노			분노를 주체할 수 없습니다.	icon_skills.flaringanger_tex	icon_skills.flaringanger_tex	True
 10153052	33	Buff	True	seta	30000	0	0	싸움의 욕망			분노가 사그라들지 않습니다.	icon_skills.desireofbattle_tex	icon_skills.desireofbattle_tex	True
 10153053	33	Buff	True	seta	60000	0	0	넘치는 분노			분노를 주체할 수 없습니다.	icon_skills.flaringanger_tex	icon_skills.flaringanger_tex	True
@@ -4381,16 +4396,14 @@
 47681601	Endurance	Buff	True	perc	3600000	0	1	차원의 부름			검은 틈의 틈 사이로 끌려 들어가는 느낌을 받고 있습니다! 해당 효과가 적용된 상태에서만, 검은 차원의 아공간에 입장할 수 있습니다.$BR동일 계정 내 캐릭터가 하나라도 아공간에 입장을 하면, 계정 내 다른 캐릭터들은 두 시간 동안 아공간에 다시 입장할 수 없습니다.	icon_status.calldimension_tex	icon_status.calldimension_tex	True
 47681602	Endurance	Buff	True	perc	3600000	0	1	차원의 부름			검은 틈의 틈 사이로 끌려 들어가는 느낌을 받고 있습니다! 해당 효과가 적용된 상태에서만, 검은 차원의 아공간에 입장할 수 있습니다.$BR동일 계정 내 캐릭터가 하나라도 아공간에 입장을 하면, 계정 내 다른 캐릭터들은 두 시간 동안 아공간에 다시 입장할 수 없습니다.	icon_status.calldimension_tex	icon_status.calldimension_tex	True
 47681700	Endurance	Buff	True	perc	46800000	0	1	차원의 파수꾼			검은 차원의 아공간을 탐험한 모험가. 해당 효과가 있을 때에는, 차원의 부름 이상상태를 받을 수 없으며, 검은 차원의 아공간에 입장 할 수 없습니다.	icon_status.dimensionguard_tex	icon_status.dimensionguard_tex	True
-47681800	Power	Buff	True	perc	20000	0	1.5	검은 차원의 이끌림			주변 12m 범위 내 아군에게 $H_W_GOOD0s$COLOR_END마다 검은 차원의 본능 효과를 유발합니다.	icon_status.darkriftareatimeshift_tex	icon_status.darkriftareatimeshift_tex	True
+47681800	Plague	Buff	True	seta	3600000	5	476818	검은 차원의 이끌림			주변 12m 범위 내 아군에게 $H_W_GOOD5s$COLOR_END마다 검은 차원의 본능 효과를 유발합니다.	icon_status.darkriftareatimeshift_tex	icon_status.darkriftareatimeshift_tex	True
 47690000	Block	Stun	False	swch	10000	0	0	초음파 충격			초음파의 강력한 충격으로 인해 효과 지속 시간 동안 그 어떤 종류의 스킬도 사용할 수 없습니다!$BR초음파 충격은 해제 할 수 없습니다.	icon_status.sealskill_tex	icon_status.sealskill_tex	True
 47690100	Endurance	Debuff	False	perc	60000	0	0.2	돌진 부수기			돌진의 파장으로 인해 맷집이 $H_W_BAD80%$COLOR_END 감소됩니다.$BR돌진 부수기는 해제 할 수 없습니다.	icon_status.minusdefence_tex	icon_status.minusdefence_tex	True
 47690200	DefPotion	Buff	True	perc	0	0	0.2	붉은 방패			선명한 붉은 방패의 힘으로 원거리 피격 시 피해가 $H_W_GOOD80%$COLOR_END 감소됩니다.$BR붉은 방패는 해제 할 수 없습니다.	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
 47690300	DefPotion	Buff	True	perc	0	0	0.2	푸른 방패			선명한 푸른 방패의 힘으로 근거리 피격 시 피해가 $H_W_GOOD80%$COLOR_END 감소됩니다.$BR푸른 방패는 해제 할 수 없습니다.	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
 47690400	Stun	Stun	False	swch	0	0	5	방전			방전이 되어 기절한 상태로 움직일 수 없습니다.$BR방전은 해제 할 수 없습니다.	icon_status.confuseup_tex	icon_status.confuseup_tex	True
-47690500	Endurance	Debuff	False	perc	15000	0	1	전류 방출			전류 방출이 되었습니다. 주변 10m 범위 내 아군에게 $H_W_GOOD2s$COLOR_END마다 다운 경직을 유발합니다. 전류 방출은 방전을 해제시킵니다.$BR전류 방출은 해제 할 수 없습니다.	icon_status.paralyzestatus_tex	icon_status.paralyzestatus_tex	True
-47690500	Stun1	Debuff	False	swch	15000	2	1	전류 방출			전류 방출이 되었습니다. 주변 10m 범위 내 아군에게 $H_W_GOOD2s$COLOR_END마다 다운 경직을 유발합니다. 전류 방출은 방전을 해제시킵니다.$BR전류 방출은 해제 할 수 없습니다.	icon_status.paralyzestatus_tex	icon_status.paralyzestatus_tex	True
-47690600	HPChange	Debuff	False	perc	1000	1	-0.5	죽음의 선언 - 방출			지속 시간 이후 대상자를 $H_W_BAD1s$COLOR_END마다 전체 HP 대비 $H_W_BAD50%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
-47690600	64	Debuff	False	seta	3000	1	476906	죽음의 선언 - 방출			지속 시간 이후 대상자를 $H_W_BAD1s$COLOR_END마다 전체 HP 대비 $H_W_BAD50%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
+47690500	Plague	Debuff	False	seta	15000	2	476905	전류 방출			전류 방출이 되었습니다. 주변 10m 범위 내 아군에게 $H_W_GOOD2s$COLOR_END마다 다운 경직을 유발합니다. 전류 방출은 방전을 해제시킵니다.$BR전류 방출은 해제 할 수 없습니다.	icon_status.paralyzestatus_tex	icon_status.paralyzestatus_tex	True
+47690600	Plague	Debuff	False	seta	3000	1	476906	죽음의 선언 - 방출			지속 시간 이후 대상자를 $H_W_BAD1s$COLOR_END마다 전체 HP 대비 $H_W_BAD50%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
 47690700	DelayedEffect	DOT	False	abs	5000	0	476907	정신 붕괴			지속 시간 이후 정신 붕괴-효과에 빠져들게 됩니다.	icon_status.confuseup_tex	icon_status.confuseup_tex	True
 47690800	HPChange	Debuff	False	perc	10000	10	-0.1	심해의 지배			심해의 지배에 걸려 들었습니다. 지속 시간 이후 전체 HP 대비 $H_W_BAD10%$COLOR_END에 달하는 HP가 감소됩니다.$BR심해의 지배 해제 할 수 없습니다.	icon_status.minushp_tex	icon_status.minushp_tex	True
 47690800	StackCounter	Debuff	False	swch	10000	0	47690900	심해의 지배			심해의 지배에 걸려 들었습니다. 지속 시간 이후 전체 HP 대비 $H_W_BAD10%$COLOR_END에 달하는 HP가 감소됩니다.$BR심해의 지배 해제 할 수 없습니다.	icon_status.minushp_tex	icon_status.minushp_tex	True
@@ -4544,7 +4557,7 @@
 77700006	HPDrain	Debuff	False	perc	10000	0	0.9	이동방해			이동속도가 감소합니다.	icon_skills.slowball_tex	icon_skills.slowball_tex	True
 77700007	DefPotion	Stun	True	swch	30000	0	0	스위치작동 3중첩			모든 데미지가 피해 없이 흡수 됩니다.	icon_skills.manashield_tex	icon_skills.manashield_tex	True
 77700008	HPLoss	DOT	True	abs	13000	0	-10000	지하수로_1번방_파멸			지속 시간 후 30000의 데미지	icon_skills.voidtrap_tex	icon_skills.voidtrap_tex	True
-77700009	64	Debuff	True	seta	0	1	777009	지하수로_1번방_모여맞기			지속 시간 후 30000의 데미지	icon_status.plusattack_tex	icon_status.plusattack_tex	True
+77700009	Plague	Debuff	True	seta	13000	1	777009	지하수로_1번방_모여맞기			지속 시간 후 30000의 데미지	icon_status.plusattack_tex	icon_status.plusattack_tex	True
 77700009	HPLoss	Debuff	True	abs	13000	0	-10000	지하수로_1번방_모여맞기			지속 시간 후 30000의 데미지	icon_status.plusattack_tex	icon_status.plusattack_tex	True
 77700010	Aggro	Buff	False	perc	80000	0	0.5	불안정한 광기			매 중첩 시마다 치명타 유발이 $H_W_GOOD5%$COLOR_END씩 증가합니다. 이 효과는 최대 10번까지 중첩됩니다.	icon_status.battlefieldbuff01_tex	icon_status.battlefieldbuff01_tex	True
 77700010	CritChance	Buff	False	abs	80000	2	0.05	불안정한 광기			매 중첩 시마다 치명타 유발이 $H_W_GOOD5%$COLOR_END씩 증가합니다. 이 효과는 최대 10번까지 중첩됩니다.	icon_status.battlefieldbuff01_tex	icon_status.battlefieldbuff01_tex	True
@@ -4612,7 +4625,7 @@
 77703434	IncreasedHeal	DOT	False	swch	60000	0	0.8	감염 : 데모크론 바이러스			데모크론 바이러스에 감염 되었습니다. 회복량이 더디게 적용됩니다.	icon_status.minuscriticalresist_tex	icon_status.minuscriticalresist_tex	True
 77703435	Endurance	Buff	False	perc	15000	0	10000	데모크론 세포			데모크론 세포를 뒤집어 썼습니다. 이 효과가 유지될 동안은 데모크론에게 입는 피해가 감소합니다.	icon_status.balanceup_tex	icon_status.balanceup_tex	True
 77703437	Power	DOT	False	perc	15000	0	1.2	광폭화			퀴르갈이 이성을 잃고 광폭화 합니다. 매 중첩 시마다 공격력이 증가됩니다.	icon_status.diseaseup_tex	icon_status.diseaseup_tex	True
-77703438	HPChange	DOT	False	abs	20000	2	-5000	전류 방출			전류 방출이 되었습니다. 주변 10m 범위 내 아군에게 $H_W_GOOD2s$COLOR_END마다 다운 경직을 유발합니다. 전류 방출은 방전을 해제시킵니다.$BR전류 방출은 해제 할 수 없습니다.	icon_status.paralyzestatus_tex	icon_status.paralyzestatus_tex	True
+77703438	Plague	Debuff	False	perc	15000	2	777033	전류 방출			전류 방출이 되었습니다. 주변 10m 범위 내 아군에게 $H_W_GOOD2s$COLOR_END마다 다운 경직을 유발합니다. 전류 방출은 방전을 해제시킵니다.$BR전류 방출은 해제 할 수 없습니다.	icon_status.paralyzestatus_tex	icon_status.paralyzestatus_tex	True
 77703439	220	Buff	True	swch	5000	0	0	충전 : 데모크론 에너지			데모크론 에너지가 모이고 있습니다. 해제하지 못할 경우 강력한 힘을 얻습니다.	icon_status.fearstatus_tex	icon_status.fearstatus_tex	True
 77703439	DelayedEffect	Buff	True	abs	5000	0	777032	충전 : 데모크론 에너지			데모크론 에너지가 모이고 있습니다. 해제하지 못할 경우 강력한 힘을 얻습니다.	icon_status.fearstatus_tex	icon_status.fearstatus_tex	True
 77703440	Ballance	Buff	True	perc	7000	0	3.87E-06	마구 날뛰기			퀴르갈이 마구 날뛰는 바람에 균형 감각이 하락합니다. 다운이 잘 일어나는 상태가 됩니다.	icon_status.risindagon_tex	icon_status.risindagon_tex	True
@@ -4620,6 +4633,15 @@
 77703442	HPChange	Buff	True	perc	1000	1	-0.25	감염 : 데모크론 바이러스			강력한 데모크론 바이러스에 감염 되었습니다. 너무 강력하여 데모크론에게도 피해를 입습니다.	icon_status.cruel_slayer_3_tex	icon_status.cruel_slayer_3_tex	True
 77703443	Endurance	Buff	True	perc	0	0	10	데모크론의 단단한 가죽			데모크론의 단단한 가죽으로 보호받고 있습니다. 일반적인 공격으로는 처치하기 어렵습니다.	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
 77703444	IncreasedHeal	DOT	True	swch	180000	0	0.3	데모크론의 저주			데모크론의 공격에 영혼까지 타격을 입었습니다. 받는 치유량이 감소합니다.	icon_status.diffusionabnormality_tex	icon_status.diffusionabnormality_tex	True
+77771001	Power	Buff	True	abs	2400000	0	25	아룬의 축복 III(수호자 임무 전용)			아룬의 축복을 받아 평화 상태에서의 이동 속도가 $H_W_GOOD10$COLOR_END 향상되고 힘이 $H_W_GOOD25$COLOR_END 향상됩니다.	icon_skills.attackup_tex	icon_skills.attackup_tex	True
+77771001	OutOfCombatMovSpd	Buff	True	abs	30000	0	10	아룬의 축복 III(수호자 임무 전용)			아룬의 축복을 받아 평화 상태에서의 이동 속도가 $H_W_GOOD10$COLOR_END 향상되고 힘이 $H_W_GOOD25$COLOR_END 향상됩니다.	icon_skills.attackup_tex	icon_skills.attackup_tex	True
+77771002	Endurance	Buff	True	abs	30000	0	11	샤라의 축복 V(수호자 임무 전용)			샤라의 축복을 받아  $H_W_GOOD2초$COLOR_END마다 HP가 지속적으로 회복되며 맷집이 11, 모든 상태이상 저항이 5 증가합니다.	icon_skills.agilitybless_tex	icon_skills.agilitybless_tex	True
+77771002	AllResist	Buff	True	abs	30000	0	5	샤라의 축복 V(수호자 임무 전용)			샤라의 축복을 받아  $H_W_GOOD2초$COLOR_END마다 HP가 지속적으로 회복되며 맷집이 11, 모든 상태이상 저항이 5 증가합니다.	icon_skills.agilitybless_tex	icon_skills.agilitybless_tex	True
+77771002	HPChange	Buff	True	abs	30000	2	73	샤라의 축복 V(수호자 임무 전용)			샤라의 축복을 받아  $H_W_GOOD2초$COLOR_END마다 HP가 지속적으로 회복되며 맷집이 11, 모든 상태이상 저항이 5 증가합니다.	icon_skills.agilitybless_tex	icon_skills.agilitybless_tex	True
+77771003	MPChange	Buff	True	abs	30000	1	20	정신의 결계 I(수호자 임무 전용)			$H_W_GOOD1s$COLOR_END마다 $H_W_GOOD20$COLOR_END씩 MP가 지속적으로 회복됩니다.	icon_status.mprecoverup_tex	icon_status.mprecoverup_tex	True
+77771004	Crit	Buff	True	perc	30000	0	2.2	분노의 힘 II(수호자 임무 전용)			분노의 정령의 영향을 받아 치명타 유발이 $H_W_GOOD2.2배$COLOR_END 증가합니다.	icon_status.plusecritical_tex	icon_status.plusecritical_tex	True
+77771005	Power	Buff	True	abs	30000	0	48	광기의 힘 III(수호자 임무 전용)			광기어린 정령의 기운을 받아 힘이 $H_W_GOOD48$COLOR_END 증가하고, 공격 속도가 $H_W_GOOD9.6$COLOR_END 향상됩니다.	icon_skills.rage_tex	icon_skills.rage_tex	True
+77771005	ASpd	Buff	True	abs	30000	0	9.6	광기의 힘 III(수호자 임무 전용)			광기어린 정령의 기운을 받아 힘이 $H_W_GOOD48$COLOR_END 증가하고, 공격 속도가 $H_W_GOOD9.6$COLOR_END 향상됩니다.	icon_skills.rage_tex	icon_skills.rage_tex	True
 78100006	Drunk	Debuff	False	781003	0	0	0	라칸의 영혼 세계			라칸의 영혼 세계에 들어왔습니다.	icon_socials.social_010_tex	icon_socials.social_010_tex	True
 78100009	HPChange	DOT	True	perc	200000	1	-0.03	라칸의 주시			라칸이 당신을 주시하고 있습니다. $H_W_BAD1s$COLOR_END마다 전체 HP 대비 $H_W_BAD3%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_items.q_animaleyeball_tex	icon_items.q_animaleyeball_tex	True
 78100009	StackCounter	DOT	True	seta	200000	0	78100010	라칸의 주시			라칸이 당신을 주시하고 있습니다. $H_W_BAD1s$COLOR_END마다 전체 HP 대비 $H_W_BAD3%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_items.q_animaleyeball_tex	icon_items.q_animaleyeball_tex	True
@@ -5823,7 +5845,7 @@
 97502500	Fear	Stun	False	swch	30000	0	150	겁에 질림			끔찍한 포효소리에 겁에 질렸습니다	icon_status.fearstatus_tex	icon_status.fearstatus_tex	True
 97502600	Stun1	Stun	False	swch	15000	5	15	제어 불능			우리 모두 다함께 춤을 춥시다. 그렇게 하나씩 죽어가는 겁니다	icon_status.confusestatusnpc_tex	icon_status.confusestatusnpc_tex	True
 97502700	Block	Buff	True	swch	0	0	0	부활금지			부활이 안됩니다	icon_items.q_closedspace_stone_05_tex	icon_items.q_closedspace_stone_05_tex	True
-97502800	HPChange	Buff	True	perc	6000	0	0.03	벨릭파워			뭉치면 강해집니다 10m 내에 유저들에게 버프를 전달합니다	icon_status.plusattack_tex	icon_status.plusattack_tex	True
+97502800	Plague	Buff	True	seta	0	5	975029	벨릭파워			뭉치면 강해집니다 10m 내에 유저들에게 버프를 전달합니다	icon_status.plusattack_tex	icon_status.plusattack_tex	True
 97502800	StaminaDecay	Buff	True	swch	0	0	0	벨릭파워			뭉치면 강해집니다 10m 내에 유저들에게 버프를 전달합니다	icon_status.plusattack_tex	icon_status.plusattack_tex	True
 97503000	DefPotion	Debuff	False	swch	60000	0	1.1	신의분노			효과가 중첩될수록 받는 회복량이 감소하고, 피해량이 증가합니다.	icon_status.minusdefence_tex	icon_status.minusdefence_tex	True
 97503000	IncreasedHeal	Debuff	False	swch	60000	0	0.83	신의분노			효과가 중첩될수록 받는 회복량이 감소하고, 피해량이 증가합니다.	icon_status.minusdefence_tex	icon_status.minusdefence_tex	True
@@ -5831,8 +5853,8 @@
 97503400	Endurance	Debuff	False	perc	30000	0	0	화염포탄			아픈 폭탄	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
 97503500	MovSpd	Debuff	False	perc	30000	0	0.3	냉기포탄			느려지는 폭탄	icon_status.minusmove_tex	icon_status.minusmove_tex	True
 97503700	DefPotion	Debuff	True	perc	0	0	0	대포면역			대포에 맞아도 피가 안깎임	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
-97503800	MovSpdInCombat	Debuff	True	perc	5000	0	2	켈사이크의둥지_전용_중간보스이속증가_오라			주변 5m 범위 아군에게 이동속도 증가	icon_status.plusmove_tex	icon_status.plusmove_tex	True
-97504000	DefPotion	Debuff	True	perc	5000	0	0	켈사이크의둥지_전용_보스주변무적_오라			주변 10m 범위 아군에게 무적 보호막	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
+97503800	Plague	Debuff	True	seta	0	5	975039	켈사이크의둥지_전용_중간보스이속증가_오라			주변 5m 범위 아군에게 이동속도 증가	icon_status.plusmove_tex	icon_status.plusmove_tex	True
+97504000	Plague	Debuff	True	seta	0	5	975041	켈사이크의둥지_전용_보스주변무적_오라			주변 10m 범위 아군에게 무적 보호막	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
 97504200	Power	Debuff	True	perc	600000	0	1.5	켈사이크의 분노			공격력이 $H_W_GOOD50%$COLOR_END 만큼, 공격속도가 $H_W_GOOD30%$COLOR_END 만큼 증가합니다. 해제할 수 없습니다	icon_status.plusattack_tex	icon_status.plusattack_tex	True
 97504200	ASpd	Debuff	True	perc	600000	0	1.3	켈사이크의 분노			공격력이 $H_W_GOOD50%$COLOR_END 만큼, 공격속도가 $H_W_GOOD30%$COLOR_END 만큼 증가합니다. 해제할 수 없습니다	icon_status.plusattack_tex	icon_status.plusattack_tex	True
 97504300	Power	Debuff	False	perc	60000	0	1.5	켈사이크의 도발			힘과 공격속도가 $H_W_GOOD50%$COLOR_END 만큼 증가합니다. 단, 이상상태가 종료될 때 사망에 이르게 됩니다.	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
@@ -5944,6 +5966,7 @@
 98850039	Block	Stun	False	swch	10000	0	0	환영의 저주_침묵			효과 지속 시간 동안 그 어떤 종류의 스킬도 사용할 수 없습니다! 환영의 저주_침묵은 해제 할 수 없습니다.	icon_status.sealskill_tex	icon_status.sealskill_tex	True
 98850040	Power	Buff	True	perc	20000	0	10	굴라드쉬의 분노			환영의 강력한 힘으로 잠시동안 공격력과 공격속도가 대폭 상승합니다.	icon_skills.berserk_tex	icon_skills.berserk_tex	True
 98850041	HPChange	DOT	False	perc	10000	1	-0.15	세포 폭발 [전이]			$H_W_BAD1s$COLOR_END마다 전체 HP 대비 $H_W_BAD15%$COLOR_END에 달하는 HP가 지속적으로 감소되며 지속 시간 이후 $H_W_BAD-30000$COLOR_END에 달하는 HP가 감소됩니다.$BR세포 폭발 [전이]는 HP감소 효과를 주변에 전이시킵니다.	icon_status.delaydamage_tex	icon_status.delaydamage_tex	True
+98850041	Plague	DOT	False	perc	10000	1	905407	세포 폭발 [전이]			$H_W_BAD1s$COLOR_END마다 전체 HP 대비 $H_W_BAD15%$COLOR_END에 달하는 HP가 지속적으로 감소되며 지속 시간 이후 $H_W_BAD-30000$COLOR_END에 달하는 HP가 감소됩니다.$BR세포 폭발 [전이]는 HP감소 효과를 주변에 전이시킵니다.	icon_status.delaydamage_tex	icon_status.delaydamage_tex	True
 98850041	HPLoss	DOT	False	abs	10000	1	-30000	세포 폭발 [전이]			$H_W_BAD1s$COLOR_END마다 전체 HP 대비 $H_W_BAD15%$COLOR_END에 달하는 HP가 지속적으로 감소되며 지속 시간 이후 $H_W_BAD-30000$COLOR_END에 달하는 HP가 감소됩니다.$BR세포 폭발 [전이]는 HP감소 효과를 주변에 전이시킵니다.	icon_status.delaydamage_tex	icon_status.delaydamage_tex	True
 98850042	HPChange	Buff	True	perc	12000	3	0.005	HP 지속 회복			$H_W_GOOD3s$COLOR_END마다 전체 HP 대비 $H_W_GOOD3%$COLOR_END에 달하는 HP가 지속적으로 회복됩니다.	icon_status.delayheal_tex	icon_status.delayheal_tex	True
 98850050	Endurance	Buff	True	perc	60000	0	1	아르곤 상태			양극 자기장 효과를 이용해 주변 대상을 모두 포획합니다.$BR양극 자기장은 해제 할 수 없습니다.	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
@@ -6301,9 +6324,9 @@
 99006700	256	Debuff	True	swch	2147483647	0	0	감시자			주변의 투명한 유닛을 감지할 수 있다.	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
 99006800	Immune	Buff	True	21	0	0	0	평화 시간 NPC 보호			평화 시간에는 NPC를 공격 할 수 없습니다.	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
 99006800	StatusImmune	Buff	True	swch	0	0	0	평화 시간 NPC 보호			평화 시간에는 NPC를 공격 할 수 없습니다.	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
-99006900	HPChange	Buff	True	perc	30000	1	0.0025	젤리아드 디아르의 가호			젤리아드 디아르가 가지고 있는 성스러운 기운을 주변 연맹원들에게 전파한다.	icon_status.delayheal_tex	icon_status.delayheal_tex	True
-99007000	MPChange	Buff	True	perc	30000	1	0.003	드미르 실버레인의 가호			드미르 실버레인이 가지고 있는 코어의 기운을 주변 연맹원들에게 전파한다.	icon_status.aura_of_regeneration_mp_tex	icon_status.aura_of_regeneration_mp_tex	True
-99007100	Endurance	Buff	True	abs	30000	0	1	프라테코 카일룸의 가호			프라테코 카일룸의 용맹함을 주변 연맹원들에게 전파한다.	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
+99006900	Plague	Buff	True	abs	0	10	990070	젤리아드 디아르의 가호			젤리아드 디아르가 가지고 있는 성스러운 기운을 주변 연맹원들에게 전파한다.	icon_status.delayheal_tex	icon_status.delayheal_tex	True
+99007000	Plague	Buff	True	abs	0	10	990071	드미르 실버레인의 가호			드미르 실버레인이 가지고 있는 코어의 기운을 주변 연맹원들에게 전파한다.	icon_status.aura_of_regeneration_mp_tex	icon_status.aura_of_regeneration_mp_tex	True
+99007100	Plague	Buff	True	abs	0	10	990072	프라테코 카일룸의 가호			프라테코 카일룸의 용맹함을 주변 연맹원들에게 전파한다.	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
 99008200	Power	Buff	True	abs	7200000	0	34	연맹의 함성			영지에 있는 각 연맹의 연맹원 수 차이가 20명 이상 차이 날 경우, 작은 수의 연맹에게 힘 34, 맷집 20이 적용 됩니다. (해당 버프는 3분마다 인원 수를 체크하여 갱신 됩니다.)	icon_status.mprecoverdown_tex	icon_status.mprecoverdown_tex	True
 99008200	Endurance	Buff	True	abs	7200000	0	20	연맹의 함성			영지에 있는 각 연맹의 연맹원 수 차이가 20명 이상 차이 날 경우, 작은 수의 연맹에게 힘 34, 맷집 20이 적용 됩니다. (해당 버프는 3분마다 인원 수를 체크하여 갱신 됩니다.)	icon_status.mprecoverdown_tex	icon_status.mprecoverdown_tex	True
 99008300	Power	Buff	True	abs	7200000	0	41	연맹의 투쟁			저번 연맹전에 2/3등한 연맹에게 용기를 북돋아 주기 위해, 힘 41, 맷집 25이 적용 됩니다. 만약 한 연맹이 연승 할 경우, 연승 횟수만큼 이상상태가 중첩 됩니다. (최대 5중첩)	icon_status.plusspeedresist_tex	icon_status.plusspeedresist_tex	True
@@ -6316,9 +6339,9 @@
 99008900	Power	Debuff	True	abs	604800000	0	0	연맹의 축복			연맹을 위하여!!	icon_status.battlefieldbuff04_tex	icon_status.battlefieldbuff04_tex	True
 99009000	HPChange	Stun	True	perc	10800000	12	0.003	보호석의 힘			보호석은 매 12초마다 자신의 HP를 0.3% 회복한다.	icon_status.vitality_tex	icon_status.vitality_tex	True
 99010000	HPLoss	Debuff	False	perc	30000	0	-0.9	대포 변환			즉시 대포로 변환 됩니다.	icon_status.minushp_tex	icon_status.minushp_tex	True
-99010110	Immune	Buff	True	16	30000	0	0	돌격 앞으로!			돌격 사령관이 가지고 있는 샘솟는 용기 효과를 주변 연맹원들에게 전파한다.	icon_skills.armor_passivity_tex	icon_skills.armor_passivity_tex	True
-99010210	Endurance	Buff	True	abs	30000	1	10	금강 불괴			방어 사령관이 가지고 있는 강철 같은 피부 효과를 주변 연맹원들에게 전파한다.	icon_skills.defenceup_tex	icon_skills.defenceup_tex	True
-99010310	StaminaRegen	Buff	True	perc	30000	1	1	승리의 함성			지원 사령관이 가지고 있는 끊임 없는 지원 효과를 주변 연맹원들에게 전파한다.	icon_skills.adventgoddess_tex	icon_skills.adventgoddess_tex	True
+99010110	Plague	Buff	True	abs	0	10	990101	돌격 앞으로!			돌격 사령관이 가지고 있는 샘솟는 용기 효과를 주변 연맹원들에게 전파한다.	icon_skills.armor_passivity_tex	icon_skills.armor_passivity_tex	True
+99010210	Plague	Buff	True	abs	0	10	990102	금강 불괴			방어 사령관이 가지고 있는 강철 같은 피부 효과를 주변 연맹원들에게 전파한다.	icon_skills.defenceup_tex	icon_skills.defenceup_tex	True
+99010310	Plague	Buff	True	abs	0	10	990103	승리의 함성			지원 사령관이 가지고 있는 끊임 없는 지원 효과를 주변 연맹원들에게 전파한다.	icon_skills.adventgoddess_tex	icon_skills.adventgoddess_tex	True
 99020000	MaxHP	Buff	True	perc	0	0	1.01	발키온의 용맹 I			최근 7일 중 2~3일 접속하여 아래 효과를 얻었습니다.$BR$BR평화 상태에서 이동 속도 $H_W_GOOD7$COLOR_END 증가$BR최대 HP $H_W_GOOD1%$COLOR_END 증가$BR힘 $H_W_GOOD1$COLOR_END 증가$BR$BR본 효과는 계정 내 모든 캐릭터에게 적용됩니다.	icon_status.archerspirit_tex	icon_status.archerspirit_tex	True
 99020000	Power	Buff	True	abs	0	0	1	발키온의 용맹 I			최근 7일 중 2~3일 접속하여 아래 효과를 얻었습니다.$BR$BR평화 상태에서 이동 속도 $H_W_GOOD7$COLOR_END 증가$BR최대 HP $H_W_GOOD1%$COLOR_END 증가$BR힘 $H_W_GOOD1$COLOR_END 증가$BR$BR본 효과는 계정 내 모든 캐릭터에게 적용됩니다.	icon_status.archerspirit_tex	icon_status.archerspirit_tex	True
 99020000	OutOfCombatMovSpd	Buff	True	abs	0	0	7	발키온의 용맹 I			최근 7일 중 2~3일 접속하여 아래 효과를 얻었습니다.$BR$BR평화 상태에서 이동 속도 $H_W_GOOD7$COLOR_END 증가$BR최대 HP $H_W_GOOD1%$COLOR_END 증가$BR힘 $H_W_GOOD1$COLOR_END 증가$BR$BR본 효과는 계정 내 모든 캐릭터에게 적용됩니다.	icon_status.archerspirit_tex	icon_status.archerspirit_tex	True
@@ -6440,7 +6463,7 @@
 999009810	Endurance	Buff	True	perc	60000	0	2	오염체			당신은 공장 폐기물에 오염되어 주변에 지속 데미지를 주는 회오리가 당신을 휘감습니다.	icon_status.darkriftareawind_tex	icon_status.darkriftareawind_tex	True
 999009810	MovSpdInCombat	Buff	True	seta	60000	0	200	오염체			당신은 공장 폐기물에 오염되어 주변에 지속 데미지를 주는 회오리가 당신을 휘감습니다.	icon_status.darkriftareawind_tex	icon_status.darkriftareawind_tex	True
 999009810	OutOfCombatMovSpd	Buff	True	seta	60000	0	200	오염체			당신은 공장 폐기물에 오염되어 주변에 지속 데미지를 주는 회오리가 당신을 휘감습니다.	icon_status.darkriftareawind_tex	icon_status.darkriftareawind_tex	True
-999009810	HPChange	Debuff	True	perc	2000	1	-20000	오염체			당신은 공장 폐기물에 오염되어 주변에 지속 데미지를 주는 회오리가 당신을 휘감습니다.	icon_status.darkriftareawind_tex	icon_status.darkriftareawind_tex	True
+999009810	Plague	Buff	True	7	60000	1	1495	오염체			당신은 공장 폐기물에 오염되어 주변에 지속 데미지를 주는 회오리가 당신을 휘감습니다.	icon_status.darkriftareawind_tex	icon_status.darkriftareawind_tex	True
 999009820	Power	Buff	True	perc	60000	0	1.5	보호막			데미지 흡수 보호막이 생겼고, 힘이 $H_W_GOOD50%$COLOR_END 상승했습니다. 이제 남은 건 적을 학살하는 것 뿐입니다.	icon_status.plusfocus_tex	icon_status.plusfocus_tex	True
 999009820	Absorb	Buff	True	swch	60000	0	100000	보호막			데미지 흡수 보호막이 생겼고, 힘이 $H_W_GOOD50%$COLOR_END 상승했습니다. 이제 남은 건 적을 학살하는 것 뿐입니다.	icon_status.plusfocus_tex	icon_status.plusfocus_tex	True
 999010000	PVPDef	Buff	True	abs	0	0	0	전장 녹테늄 강화탄			전장 투사들에게 기본으로 제공되는 녹테늄 강화탄 효과입니다. 녹테늄 강화탄을 사용하여 스킬의 효과를 증대화 시킵니다.	icon_items.union_supplies5_tex	icon_items.union_supplies5_tex	True
