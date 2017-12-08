@@ -56,16 +56,6 @@ namespace TCC.Controls
         {
             if(!(DataContext is ChatMessage)) return;
             var dc = ((ChatMessage) DataContext);
-            //Dispatcher.Invoke(new Action(() =>
-            //{
-            //    try
-            //    {
-            //    ((ChatMessage)DataContext).Rows = WindowManager.ChatWindow.GetMessageRows(this.ActualHeight);
-            //    }
-            //    catch (Exception) { }
-            //}), DispatcherPriority.Loaded);
-            //Debug.WriteLine($"{dc.RawMessage} -- loaded");
-
             var tg = (TransformGroup) LayoutTransform;
             var sc = tg.Children[0];
             if (!dc.Animate)

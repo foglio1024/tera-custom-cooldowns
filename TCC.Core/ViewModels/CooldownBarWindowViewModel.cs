@@ -3,6 +3,7 @@ using System.Collections;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Threading;
@@ -285,8 +286,11 @@ namespace TCC.ViewModels
             var item = ItemSkills.FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (item != null)
             {
-                ItemSkills.Remove(item);
-                item.Dispose();
+
+                    ItemSkills.Remove(item);
+                    item.Dispose();
+                    return;
+                
             }
 
             try
