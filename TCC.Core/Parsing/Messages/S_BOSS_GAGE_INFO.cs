@@ -24,21 +24,21 @@ namespace TCC.Parsing.Messages
             templateId = reader.ReadInt32();
             targetId = reader.ReadUInt64();
             reader.Skip(4); //unk1 = reader.ReadInt32();
-            if (reader.Version < 321550 || reader.Version > 321600)
-            {
+            //if (reader.Version < 321550 || reader.Version > 321600)
+            //{
                 enrage = reader.ReadByte();
                 currHp = reader.ReadInt64();
                 maxHp = reader.ReadInt64();
 
-            }
-            else
-            {
+            //}
+            //else
+            //{
 
-                hpDiff = reader.ReadSingle();
-                enrage = reader.ReadByte();
-                currHp = reader.ReadSingle();
-                maxHp = reader.ReadSingle();
-            }
+            //    hpDiff = reader.ReadSingle();
+            //    enrage = reader.ReadByte();
+            //    currHp = reader.ReadSingle();
+            //    maxHp = reader.ReadSingle();
+            //}
 
             //System.Console.WriteLine("[S_BOSS_GAGE_INFO] id:{0} name:{1}", EntityId, MonsterDatabase.GetName((uint)npc, (uint)type));
             //unk3 = reader.ReadByte();

@@ -30,9 +30,9 @@ namespace TCC.Parsing.Messages
             serverId = reader.ReadUInt32();
             playerId = reader.ReadUInt32();
 
-            curHP = reader.Version < 321550 || reader.Version > 321600 ? reader.ReadInt64() : reader.ReadInt32();
+            curHP = /*reader.Version < 321550 || reader.Version > 321600 ? */reader.ReadInt64() /*: reader.ReadInt32()*/;
             curMP = reader.ReadInt32();
-            maxHP = reader.Version < 321550 || reader.Version > 321600 ? reader.ReadInt64() : reader.ReadInt32();
+            maxHP = /*reader.Version < 321550 || reader.Version > 321600 ? */reader.ReadInt64() /*: reader.ReadInt32()*/;
             maxMP = reader.ReadInt32();
 
             level = reader.ReadInt16();
