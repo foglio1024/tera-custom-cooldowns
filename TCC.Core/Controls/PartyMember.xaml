@@ -116,7 +116,7 @@
                 BorderBrush="Orange" Background="#40ffa500" BorderThickness="2" Height="Auto" Width="Auto" Grid.ColumnSpan="1" Margin="0" CornerRadius="6,6,0,6" 
                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  d:IsHidden="True" Grid.Column="0">
             <Border.Effect>
-                <DropShadowEffect Color="Orange" ShadowDepth="0" BlurRadius="5" RenderingBias="Performance"/>
+                <DropShadowEffect Color="Orange" ShadowDepth="0" BlurRadius="15" RenderingBias="Performance"/>
             </Border.Effect>
         </Border>
         <!--Death red border
@@ -131,10 +131,41 @@
         </Border>
 
         <Grid Margin="0">
+            <Image  Opacity="1" x:Name="LaurelImage" Source="{Binding Laurel, Converter={StaticResource Converters.LaurelToImage}}" 
+                       Margin="-4,-10,-4,-4" RenderOptions.BitmapScalingMode="Linear" UseLayoutRounding="True" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Width="42" Height="42"  Stretch="Uniform">
+                <Image.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Online}" Value="False">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation From="1" To=".5"
+                                                             Duration="0:0:0.2"
+                                                             Storyboard.TargetProperty="Opacity"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation From=".5" To="1"
+                                                             Duration="0:0:0.2"
+                                                             Storyboard.TargetProperty="Opacity"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+
+            </Image>
             <Rectangle Fill="#fff" Opacity="1"
-                       Margin="2" RenderOptions.BitmapScalingMode="Fant" UseLayoutRounding="True" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Margin="2" RenderOptions.BitmapScalingMode="Linear" UseLayoutRounding="True" HorizontalAlignment="Center" VerticalAlignment="Center"
                        Width="30" Height="30"  Stretch="Uniform">
-                
+
                 <Rectangle.OpacityMask>
                     <ImageBrush ImageSource="{Binding UserClass, Converter={StaticResource Converters.ClassToImage}}" />
                 </Rectangle.OpacityMask>

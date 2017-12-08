@@ -1152,6 +1152,17 @@ namespace TCC.ViewModels
                 NotifyPropertyChanged(nameof(ShowItemsCooldown));
             }
         }
+        public bool ShowMembersLaurels
+        {
+            get => SettingsManager.ShowMembersLaurels;
+            set
+            {
+                if (SettingsManager.ShowMembersLaurels == value) return;
+                SettingsManager.ShowMembersLaurels = value;
+                GroupWindowViewModel.Instance.NotifySettingUpdated();
+                NotifyPropertyChanged(nameof(ShowMembersLaurels));
+            }
+        }
         public bool HhOnlyAggro
         {
             get => SettingsManager.ShowOnlyAggroStacks;

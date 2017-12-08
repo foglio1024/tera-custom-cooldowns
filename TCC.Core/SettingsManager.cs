@@ -60,6 +60,7 @@ namespace TCC
         public static uint GroupSizeThreshold = 7;
         public static EnrageLabelMode EnrageLabelMode { get; set; } = EnrageLabelMode.Remaining;
         public static bool ShowItemsCooldown { get; set; } = true;
+        public static bool ShowMembersLaurels { get; set; } = false;
 
         public static void LoadWindowSettings()
         {

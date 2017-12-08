@@ -21,10 +21,7 @@ namespace TCC.Controls
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             dc = (User)DataContext;
-            SetMP();
-            SetHP();
-            SetBuffs();
-            SetDebuffs();
+            UpdateSettings();
 
             AnimateIn();
             GroupWindowViewModel.Instance.SettingsUpdated += UpdateSettings;
@@ -35,6 +32,20 @@ namespace TCC.Controls
             SetHP();
             SetBuffs();
             SetDebuffs();
+            SetLaurels();
+        }
+        private void SetLaurels()
+        {
+            try
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    LaurelImage.Visibility = SettingsManager.ShowMembersLaurels ? Visibility.Visible : Visibility.Collapsed;
+                });
+            }
+            catch (Exception)
+            {
+            }
         }
         private void SetBuffs()
         {
