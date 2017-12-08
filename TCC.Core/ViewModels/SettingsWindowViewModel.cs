@@ -1163,6 +1163,16 @@ namespace TCC.ViewModels
                 NotifyPropertyChanged(nameof(ShowMembersLaurels));
             }
         }
+        public bool AnimateChatMessages
+        {
+            get => SettingsManager.AnimateChatMessages;
+            set
+            {
+                if (SettingsManager.AnimateChatMessages == value) return;
+                SettingsManager.AnimateChatMessages = value;
+                NotifyPropertyChanged(nameof(AnimateChatMessages));
+            }
+        }
         public bool HhOnlyAggro
         {
             get => SettingsManager.ShowOnlyAggroStacks;

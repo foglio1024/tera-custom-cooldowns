@@ -61,6 +61,7 @@ namespace TCC
         public static EnrageLabelMode EnrageLabelMode { get; set; } = EnrageLabelMode.Remaining;
         public static bool ShowItemsCooldown { get; set; } = true;
         public static bool ShowMembersLaurels { get; set; } = false;
+        public static bool AnimateChatMessages { get; set; } = false;
 
         public static void LoadWindowSettings()
         {
@@ -276,6 +277,16 @@ namespace TCC
                     ShowItemsCooldown = Boolean.Parse(b.Attribute(nameof(ShowItemsCooldown)).Value);
                 }
                 catch (Exception) { }
+                try
+                {
+                    ShowMembersLaurels = Boolean.Parse(b.Attribute(nameof(ShowMembersLaurels)).Value);
+                }
+                catch (Exception) { }
+                try
+                {
+                    AnimateChatMessages = Boolean.Parse(b.Attribute(nameof(AnimateChatMessages)).Value);
+                }
+                catch (Exception) { }
                 //add settings here
 
                 try
@@ -382,6 +393,8 @@ namespace TCC
                 new XAttribute(nameof(TwitchChannelName), TwitchChannelName),
                 new XAttribute(nameof(GroupSizeThreshold), GroupSizeThreshold),
                 new XAttribute(nameof(EnrageLabelMode), EnrageLabelMode),
+                new XAttribute(nameof(ShowMembersLaurels), ShowMembersLaurels),
+                new XAttribute(nameof(AnimateChatMessages), AnimateChatMessages),
                 new XAttribute(nameof(ShowItemsCooldown), ShowItemsCooldown)
                 //add setting here
                 ),

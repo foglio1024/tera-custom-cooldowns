@@ -83,7 +83,7 @@ namespace TCC.Data
 
         public bool Animate
         {
-            get => _animate;
+            get => _animate && SettingsManager.AnimateChatMessages;
             set
             {
                 if(_animate == value) return;
@@ -562,8 +562,8 @@ namespace TCC.Data
                     var t = msg.Substring(linkIndex - 1, 1);
                     int type = Int32.Parse(t);
 
-                    var aStart = msg.IndexOf("<A");
-                    var aEnd = msg.IndexOf("</A>");
+                    var aStart = msg.IndexOf("<ChatLinkAction");
+                    var aEnd = msg.IndexOf("</ChatLinkAction>");
 
                     var a = msg.Substring(aStart, aEnd - aStart + 1);
 
