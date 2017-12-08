@@ -153,7 +153,7 @@ namespace TCC.ViewModels
         public void BeginOrRefreshAbnormality(Abnormality ab, int stacks, uint duration, uint playerId, uint serverId)
         {
             if (ab.Infinity) duration = uint.MaxValue;
-            var u = Members.FirstOrDefault(x => x.ServerId == serverId && x.PlayerId == playerId);
+            var u = Members.ToArray().FirstOrDefault(x => x.ServerId == serverId && x.PlayerId == playerId);
             if (u == null) return;
 
             if (ab.Type == AbnormalityType.Buff)
