@@ -42,7 +42,7 @@ namespace TCC.Data.Databases
                     {
                         isBoss = true;
                     }
-                    var maxHP = Convert.ToUInt32(monster.Attribute("hp").Value);
+                    var maxHP = Convert.ToUInt64(monster.Attribute("hp").Value);
 
                     Monster m = new Monster(id, name, maxHP, isBoss);
                     z.AddMonster(m);
@@ -74,7 +74,7 @@ namespace TCC.Data.Databases
                         {
                             var name = monst.Attribute("name").Value;
                             var isBoss = bool.Parse(monst.Attribute("isBoss").Value);
-                            var maxHp = UInt32.Parse(monst.Attribute("hp").Value);
+                            var maxHp = UInt64.Parse(monst.Attribute("hp").Value);
                             z.Monsters.Add(mId, new Monster(mId, name, maxHp, isBoss));
                         }
                     }
@@ -110,7 +110,7 @@ namespace TCC.Data.Databases
             }
             else return "Unknown";
         }
-        public uint GetMaxHP(uint templateId, uint zoneId)
+        public ulong GetMaxHP(uint templateId, uint zoneId)
         {
             if (TryGetMonster(templateId, zoneId, out Monster m))
             {
@@ -142,10 +142,10 @@ namespace TCC.Data.Databases
     {
         public uint Id { get; private set; } //npc
         public string Name { get; set; }
-        public uint MaxHP { get; set; }
+        public ulong MaxHP { get; set; }
         public bool IsBoss { get; set; }
 
-        public Monster(uint npc, string name, uint maxHp, bool isBoss)
+        public Monster(uint npc, string name, ulong maxHp, bool isBoss)
         {
             Id = npc;
             Name = name;
