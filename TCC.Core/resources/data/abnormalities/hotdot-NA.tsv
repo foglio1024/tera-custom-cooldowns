@@ -168,8 +168,8 @@
 1495	OutOfCombatMovSpd	Debuff	True	perc	2000	0	0.2	Battlefield Poison			Decreases HP by 20,000 per second.	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
 1495	HPChange	Debuff	True	perc	2000	1	-20000	Battlefield Poison			Decreases HP by 20,000 per second.	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
 1510	HPChange	Buff	True	perc	1000	1	0.5	Healing Potion	114	Valkyon Health Potion	Instantly Recovers $H_W_GOOD50%$COLOR_END of maximum HP.	icon_items.potion5_tex	icon_items.potion5_tex	False
-1511	HPChange	Buff	True	perc	1000	1	0.6	Elixir	7219	Elixir	Recovers $H_W_GOOD60%$COLOR_END of your maximum HP and MP.	icon_items.potion5_tex	icon_items.potion5_tex	False
-1511	MPChange	Buff	True	perc	1000	1	0.6	Elixir	7219	Elixir	Recovers $H_W_GOOD60%$COLOR_END of your maximum HP and MP.	icon_items.potion5_tex	icon_items.potion5_tex	False
+1511	HPChange	Buff	True	perc	1000	1	0.6	Elixir	7219	Elixir	Recovers $H_W_GOOD60%$COLOR_END of your maximum HP and MP.	icon_items.eagles_potion_level_47_tex	icon_items.eagles_potion_level_47_tex	False
+1511	MPChange	Buff	True	perc	1000	1	0.6	Elixir	7219	Elixir	Recovers $H_W_GOOD60%$COLOR_END of your maximum HP and MP.	icon_items.eagles_potion_level_47_tex	icon_items.eagles_potion_level_47_tex	False
 1530	MPChange	Buff	True	perc	15000	1	0.05	Divine Infusion	130	Divine Infusion	Replenishes $H_W_GOOD5%$COLOR_END of maximum MP every $H_W_GOOD1s$COLOR_END.	icon_items.potion19_tex	icon_items.potion19_tex	True
 1610	HPChange	Buff	True	perc	10000	1	0.02	Rejuvenation Mote	8000	Rejuvenation Mote	Recovers $H_W_GOOD2%$COLOR_END of maximum HP every $H_W_GOOD1s$COLOR_END.	icon_items.potion1_tex	icon_items.potion1_tex	True
 1630	HPChange	Buff	True	perc	1000	1	0.25	Healing Mote	8005	Healing Mote	Recovers $H_W_GOOD25%$COLOR_END of maximum HP.	icon_items.potion5_tex	icon_items.potion5_tex	False
@@ -600,9 +600,11 @@
 4514	XPBoost	Buff	True	perc	0	0	10	Rapid XP			Increases hunting XP by $H_W_GOOD10 times$COLOR_END.	icon_status.plusfocus_tex	icon_status.plusfocus_tex	True
 4600	CrystalBind	Buff	True	abs	3600000	0	1	Crystalbind	354	Crystalbind	Circumvents crystal breakage upon death, consuming one effect. The effect stacks up to 99 times.	icon_items.q_closedspace_stone_05_tex	icon_items.q_closedspace_stone_05_tex	True
 4610	CCrystalBind	Buff	True	abs	43200000	0	1	Complete Crystalbind	396	Complete Veteran Crystalbind	Circumvents crystal breakage upon death.	icon_items.q_closedspace_stone_05_tex	icon_items.q_closedspace_stone_05_tex	True
-4611	CCrystalBind	Buff	True	abs	3600000	0	1	Complete Crystalbind	98526	Complete Veteran Crystalbind (1 hour)	Circumvents crystal breakage upon death.	icon_items.q_closedspace_stone_05_tex	icon_items.q_closedspace_stone_05_tex	True
-4612	CCrystalBind	Buff	True	abs	3600000	0	1	Complete Crystalbind			Circumvents crystal breakage upon death.	icon_items.q_closedspace_stone_05_tex	icon_items.q_closedspace_stone_05_tex	True
+4611	CCrystalBind	Buff	True	abs	3600000	0	1	Complete Crystalbind			Circumvents crystal breakage upon death.	icon_items.q_closedspace_stone_05_tex	icon_items.q_closedspace_stone_05_tex	True
+4612	CCrystalBind	Buff	True	abs	3600000	0	1	Complete Crystalbind	98526	Complete Veteran Crystalbind (1 hour)	Circumvents crystal breakage upon death.	icon_items.q_closedspace_stone_05_tex	icon_items.q_closedspace_stone_05_tex	True
 4613	CCrystalBind	Buff	True	abs	0	0	1	Complete Crystalbind			Circumvents crystal breakage upon death.	icon_items.q_closedspace_stone_05_tex	icon_items.q_closedspace_stone_05_tex	True
+4615	CCrystalBind	Buff	True	abs	10800000	0	1	Complete Crystalbind	98570	Complete Veteran Crystalbind (3 hours)	Circumvents crystal breakage upon death.	icon_items.q_closedspace_stone_05_tex	icon_items.q_closedspace_stone_05_tex	True
+4616	CCrystalBind	Buff	True	abs	21600000	0	1	Complete Crystalbind	98572	Complete Veteran Crystalbind (6 hours)	Circumvents crystal breakage upon death.	icon_items.q_closedspace_stone_05_tex	icon_items.q_closedspace_stone_05_tex	True
 4620	CraftTime	Buff	True	perc	300000	0	0.5	Valsekyr Crafter's Scroll	6293	Valsekyr Crafter's Scroll	Increases crafting speed of all items by $H_W_GOOD50%$COLOR_END.	icon_items.scroll_produce_speedup_tex	icon_items.scroll_produce_speedup_tex	True
 4621	CraftTime	Buff	True	perc	3600000	0	0.5	Dedicated Crafter's Scroll	6296	Dedicated Crafter's Scroll	Increases crafting speed of all items by $H_W_GOOD50%$COLOR_END.	icon_items.scroll_produce_speedup_tex	icon_items.scroll_produce_speedup_tex	True
 4630	Gathering	Buff	True	seta	600000	0	410	Valsekyr Gatherer's Scroll	6295	Valsekyr Gatherer's Scroll	Increases all gathering skills to $H_W_GOOD410$COLOR_END.	icon_items.scroll_collection_expup_tex	icon_items.scroll_collection_expup_tex	True
@@ -1567,6 +1569,7 @@
 101220	Endurance	Debuff	False	perc	15000	0	0.92	Combative Strike			Reduces Endurance by $H_W_BAD8%$COLOR_END and the effect of healing skills on you by $H_W_BAD30%$COLOR_END.	icon_skills.aggravatingstrike_tex	icon_skills.aggravatingstrike_tex	True
 101220	IncreasedHeal	Debuff	False	perc	15000	0	0.7	Combative Strike			Reduces Endurance by $H_W_BAD8%$COLOR_END and the effect of healing skills on you by $H_W_BAD30%$COLOR_END.	icon_skills.aggravatingstrike_tex	icon_skills.aggravatingstrike_tex	True
 101300	ASpd	Buff	True	perc	27000	0	1.009	Traverse Cut			Increases Attack Speed by 0.9% with every stack. The effect stacks up to 13 times.	icon_skills.dualrapidpiercing_tex	icon_skills.dualrapidpiercing_tex	True
+101301	ASpd	Buff	True	perc	27000	0	1.009	Traverse Cut			Increases Attack Speed by 0.9% with every stack. The effect stacks up to 13 times.	icon_skills.dualrapidpiercing_tex	icon_skills.dualrapidpiercing_tex	True
 101400	MovSpd	Debuff	False	setp	3000	0	0.5	Pounce			Decreases Movement Speed by $H_W_BAD50%$COLOR_END.	icon_skills.heavybite_tex	icon_skills.heavybite_tex	True
 101400	HPDrain	Debuff	False	perc	3000	0	0.7	Pounce			Decreases Movement Speed by $H_W_BAD50%$COLOR_END.	icon_skills.heavybite_tex	icon_skills.heavybite_tex	True
 101500	DefPotion	Debuff	False	perc	15000	0	1.25	Reaping Slash			Takes $H_W_BAD25%$COLOR_END more damage from Scythe.	icon_skills.rupture_tex	icon_skills.rupture_tex	True
@@ -3142,18 +3145,18 @@
 950436	Stun	Stun	True	swch	30000	0	5	Earthen Rock			Trapped in the Earthen Rock. The rock will explode in few moments and deal damage to a wide area.	icon_status.rock_tex	icon_status.rock_tex	True
 950436	Immune	Stun	True	perc	30000	0	0	Earthen Rock			Trapped in the Earthen Rock. The rock will explode in few moments and deal damage to a wide area.	icon_status.rock_tex	icon_status.rock_tex	True
 950436	295	Stun	True	swch	30000	0	0	Earthen Rock			Trapped in the Earthen Rock. The rock will explode in few moments and deal damage to a wide area.	icon_status.rock_tex	icon_status.rock_tex	True
-950513	Endurance	Buff	True	perc	60000	0	1.1	Mana Scales			Vergos’s scales are infused with mana. Each stack increases Defense by 10% and Attack Speed by 20%.	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
-950513	ASpd	Buff	True	perc	60000	0	1.2	Mana Scales			Vergos’s scales are infused with mana. Each stack increases Defense by 10% and Attack Speed by 20%.	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
-950514	DelayedEffect	Debuff	True	swch	3000	0	950513	Mana Scales Generation			Vergos’s scales are infused with mana. Must be removed.	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
-950514	StackCounter	Debuff	True	seta	3000	0	950513	Mana Scales Generation			Vergos’s scales are infused with mana. Must be removed.	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
+950513	Endurance	Buff	True	perc	60000	0	1.1	Mana Scales			Vergos's scales are infused with mana. Each stack increases Defense by 10% and Attack Speed by 20%.	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
+950513	ASpd	Buff	True	perc	60000	0	1.2	Mana Scales			Vergos's scales are infused with mana. Each stack increases Defense by 10% and Attack Speed by 20%.	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
+950514	DelayedEffect	Debuff	True	swch	3000	0	950513	Mana Scales Generation			Vergos's scales are infused with mana. Must be removed.	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
+950514	StackCounter	Debuff	True	seta	3000	0	950513	Mana Scales Generation			Vergos's scales are infused with mana. Must be removed.	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
 950515	Endurance	Buff	True	perc	0	0	1.7	Last Resort			Vergos concentrates his power as a last resort. Attack Speed increases by 40% and Defense increases by 70%.	icon_status.vergosdust_tex	icon_status.vergosdust_tex	True
 950515	ASpd	Buff	True	perc	0	0	1.4	Last Resort			Vergos concentrates his power as a last resort. Attack Speed increases by 40% and Defense increases by 70%.	icon_status.vergosdust_tex	icon_status.vergosdust_tex	True
 950516	Endurance	DOT	True	perc	1	0	1	Flame Warning			You are about to receive Flame.	icon_status.vergosflame_tex	icon_status.vergosflame_tex	True
 950516	DelayedEffect	Debuff	True	swch	7000	0	950064	Flame Warning			You are about to receive Flame.	icon_status.vergosflame_tex	icon_status.vergosflame_tex	True
 950517	Endurance	DOT	True	perc	1	0	1	Dust Warning			You are about to receive Dust.	icon_status.vergosdust_tex	icon_status.vergosdust_tex	True
 950517	DelayedEffect	Debuff	True	swch	7000	0	950065	Dust Warning			You are about to receive Dust.	icon_status.vergosdust_tex	icon_status.vergosdust_tex	True
-950518	StackCounter	Debuff	True	abs	300000	0	950502	Wounded Front Leg			Vergos’s front leg is wounded. Next hit will cause it to explode.	icon_status.damageup_tex	icon_status.damageup_tex	True
-950519	StackCounter	Debuff	True	abs	300000	0	950502	Wounded Back Leg			Vergos’s back leg is wounded. Next hit will cause it to explode.	icon_status.damagedown_tex	icon_status.damagedown_tex	True
+950518	StackCounter	Debuff	True	abs	300000	0	950502	Wounded Front Leg			Vergos's front leg is wounded. Next hit will cause it to explode.	icon_status.damageup_tex	icon_status.damageup_tex	True
+950519	StackCounter	Debuff	True	abs	300000	0	950502	Wounded Back Leg			Vergos's back leg is wounded. Next hit will cause it to explode.	icon_status.damagedown_tex	icon_status.damagedown_tex	True
 950600	Power	Buff	True	abs	0	0	23	Goddess Blessing			You feel the power of Velik's blessing upon you.	icon_skills.tranquility_tex	icon_skills.tranquility_tex	True
 950600	Endurance	Buff	True	abs	0	0	23	Goddess Blessing			You feel the power of Velik's blessing upon you.	icon_skills.tranquility_tex	icon_skills.tranquility_tex	True
 975029	HPChange	Buff	True	perc	6000	0	0.03	Velik's Power			Increases Power and the chance to crit.	icon_status.plusattack_tex	icon_status.plusattack_tex	True
@@ -3397,7 +3400,7 @@
 4510012	OutOfCombatMovSpd	Buff	True	abs	600000	0	15	Solar Orb			Increases non-combat Movement Speed by $H_W_GOOD15$COLOR_END.	icon_items.orb_of_luck_tex	icon_items.orb_of_luck_tex	True
 4510013	OutOfCombatMovSpd	Buff	True	abs	600000	0	15	Solar Orb			Increases non-combat Movement Speed by $H_W_GOOD15$COLOR_END.	icon_items.orb_of_luck_tex	icon_items.orb_of_luck_tex	True
 4510014	OutOfCombatMovSpd	Buff	True	abs	600000	0	15	Solar Orb			Increases non-combat Movement Speed by $H_W_GOOD15$COLOR_END.	icon_items.orb_of_luck_tex	icon_items.orb_of_luck_tex	True
-4510015	AtkPotion	Buff	True	perc	60000	0	1.03	Courageous Melody			The soothing melodies of the tuwangi reedflute make you feel more courageous; Increases skill damage by $H_W_GOOD3%$COLOR_END.	icon_items.fallfestival_whistle_tex	icon_items.fallfestival_whistle_tex	True
+4510015	AtkPotion	Buff	True	perc	60000	0	1.01	Courageous Melody			The soothing melodies of the tuwangi reedflute make you feel more courageous; Increases skill damage by $H_W_GOOD1%$COLOR_END.	icon_items.fallfestival_whistle_tex	icon_items.fallfestival_whistle_tex	True
 5000000	Power	Buff	True	abs	0	0	3	Strength in Threes			Increases Power, Endurance, Impact Factor, Balance Factor, Crit Factor, and Movement Speed by $H_W_GOOD3$COLOR_END.	icon_items.wings_of_fairy_tex	icon_items.wings_of_fairy_tex	True
 5000000	Endurance	Buff	True	abs	0	0	3	Strength in Threes			Increases Power, Endurance, Impact Factor, Balance Factor, Crit Factor, and Movement Speed by $H_W_GOOD3$COLOR_END.	icon_items.wings_of_fairy_tex	icon_items.wings_of_fairy_tex	True
 5000000	MovSpd	Buff	True	abs	0	0	3	Strength in Threes			Increases Power, Endurance, Impact Factor, Balance Factor, Crit Factor, and Movement Speed by $H_W_GOOD3$COLOR_END.	icon_items.wings_of_fairy_tex	icon_items.wings_of_fairy_tex	True
@@ -3408,8 +3411,8 @@
 5000002	296	Buff	True	perc	0	1	1.1	Proper Instruction			Increases crafting critical success chance by 10%.	icon_items.artisanmaster_up_tex	icon_items.artisanmaster_up_tex	True
 5000003	CCrystalBind	Buff	True	abs	0	0	1	Complete Crystalbind			Circumvents crystal breakage upon death.	icon_items.q_closedspace_stone_05_tex	icon_items.q_closedspace_stone_05_tex	True
 5000004	GatheringTime	Buff	True	perc	0	0	0.6	Forager			Increases gathering speed by $H_W_GOOD40%$COLOR_END.	icon_status.collect_speedup_tex	icon_status.collect_speedup_tex	True
-5020000	EnchantChance	Buff	True	perc	300000	1	1.01	Substantial Enchantment Blessing			Your enchantment chance is substantially increased. Applies to items of all tiers, but only up to enchantment level +12.	icon_items.parts_heavyarmorc5_tex	icon_items.parts_heavyarmorc5_tex	True
-5020001	EnchantChance	Buff	True	perc	300000	1	1.05	Greater Enchantment Blessing			Your enchantment chance is greatly increased. Applies to items of all tiers, but only up to enchantment level +12.	icon_items.parts_heavyarmorc5_tex	icon_items.parts_heavyarmorc5_tex	True
+5020000	EnchantChance	Buff	True	perc	300000	1	1.01	Substantial Enchantment Blessing			Your enchantment chance is substantially increased. Applies to all items, up to an enchantment bonus of +12.	icon_items.parts_heavyarmorc5_tex	icon_items.parts_heavyarmorc5_tex	True
+5020001	EnchantChance	Buff	True	perc	300000	1	1.05	Greater Enchantment Blessing			Your enchantment chance is greatly increased. Applies to all items, up to an enchantment bonus of +12.	icon_items.parts_heavyarmorc5_tex	icon_items.parts_heavyarmorc5_tex	True
 5020002	EnchantChance	Buff	True	perc	300000	1	1.15	Massive Enchantment Blessing			Your enchantment chance is massively increased. Applies to items of all tiers, but only up to enchantment level +12.	icon_items.parts_heavyarmorc5_tex	icon_items.parts_heavyarmorc5_tex	True
 5020003	CCrystalBind	Buff	True	abs	0	0	1	Continuous Crystalbind			Circumvents crystal breakage upon death.	icon_items.q_closedspace_stone_05_tex	icon_items.q_closedspace_stone_05_tex	True
 5020004	CraftTime	Buff	True	perc	0	0	0.5	Crafter's Speed Boost			Increases crafting speed by $H_W_GOOD50%$COLOR_END.	icon_items.artisan_lamp_tex	icon_items.artisan_lamp_tex	True
@@ -3536,12 +3539,12 @@
 7941015	Stun	Stun	False	swch	3000	0	5	Impact			You are helpless due to the impact.	icon_status.confuseup_tex	icon_status.confuseup_tex	True
 7941022	MovSpd	DOT	False	setp	3500	0	0	Sticky Liquid			You cannot move due to the sticky liquid.	icon_skills.curseofshackle_tex	icon_skills.curseofshackle_tex	True
 7941022	Block	DOT	False	swch	3500	0	0	Sticky Liquid			You cannot move due to the sticky liquid.	icon_skills.curseofshackle_tex	icon_skills.curseofshackle_tex	True
-7941026	Power	Buff	True	perc	0	0	1.1	First Cheer			The baby monkey cheers for Birchback, granting increased attack power and attack speed.	icon_status.plusciriticalresist_tex	icon_status.plusciriticalresist_tex	True
-7941026	ASpd	Buff	True	perc	0	0	1.05	First Cheer			The baby monkey cheers for Birchback, granting increased attack power and attack speed.	icon_status.plusciriticalresist_tex	icon_status.plusciriticalresist_tex	True
-7941027	Power	Buff	True	perc	0	0	1.2	Second Cheer			The baby monkey cheers for Birchback, granting increased attack power and attack speed.	icon_status.plusciriticalresist_tex	icon_status.plusciriticalresist_tex	True
-7941027	ASpd	Buff	True	perc	0	0	1.08	Second Cheer			The baby monkey cheers for Birchback, granting increased attack power and attack speed.	icon_status.plusciriticalresist_tex	icon_status.plusciriticalresist_tex	True
-7941028	Power	Buff	True	perc	0	0	1.3	Third Cheer			The baby monkey cheers for Birchback, granting increased attack power and attack speed.	icon_status.plusciriticalresist_tex	icon_status.plusciriticalresist_tex	True
-7941028	ASpd	Buff	True	perc	0	0	1.11	Third Cheer			The baby monkey cheers for Birchback, granting increased attack power and attack speed.	icon_status.plusciriticalresist_tex	icon_status.plusciriticalresist_tex	True
+7941026	Power	Buff	True	perc	0	0	1.1	First Cheer			The baby monkey cheers for Birchback, granting increased Power and Attack Speed.	icon_status.plusciriticalresist_tex	icon_status.plusciriticalresist_tex	True
+7941026	ASpd	Buff	True	perc	0	0	1.05	First Cheer			The baby monkey cheers for Birchback, granting increased Power and Attack Speed.	icon_status.plusciriticalresist_tex	icon_status.plusciriticalresist_tex	True
+7941027	Power	Buff	True	perc	0	0	1.2	Second Cheer			The baby monkey cheers for Birchback, granting increased Power and Attack Speed.	icon_status.plusciriticalresist_tex	icon_status.plusciriticalresist_tex	True
+7941027	ASpd	Buff	True	perc	0	0	1.08	Second Cheer			The baby monkey cheers for Birchback, granting increased Power and Attack Speed.	icon_status.plusciriticalresist_tex	icon_status.plusciriticalresist_tex	True
+7941028	Power	Buff	True	perc	0	0	1.3	Third Cheer			The baby monkey cheers for Birchback, granting increased Power and Attack Speed.	icon_status.plusciriticalresist_tex	icon_status.plusciriticalresist_tex	True
+7941028	ASpd	Buff	True	perc	0	0	1.11	Third Cheer			The baby monkey cheers for Birchback, granting increased Power and Attack Speed.	icon_status.plusciriticalresist_tex	icon_status.plusciriticalresist_tex	True
 7941030	Drunk1	Debuff	True	seta	10500	0	0	Tree Monkey's Interest			The tree monkey has noticed you and is about to throw a banana peel.	icon_items.banana_tex	icon_items.banana_tex	True
 7942006	MovSpd	Debuff	True	perc	6000	0	1	Noticed			Lehnym noticed you. Better keep moving.	icon_status.minusfocus_tex	icon_status.minusfocus_tex	True
 7942007	MovSpd	Debuff	True	perc	6000	0	1	Noticed			Lehnym noticed you. Better keep moving.	icon_status.minusfocus_tex	icon_status.minusfocus_tex	True
@@ -3715,12 +3718,12 @@
 9941015	Stun	Stun	False	swch	3500	0	5	Impact			You are helpless due to the impact.	icon_status.confuseup_tex	icon_status.confuseup_tex	True
 9941022	MovSpd	DOT	False	setp	3500	0	0	Sticky Liquid			You cannot move due to the sticky liquid.	icon_skills.curseofshackle_tex	icon_skills.curseofshackle_tex	True
 9941022	Block	DOT	False	swch	3500	0	0	Sticky Liquid			You cannot move due to the sticky liquid.	icon_skills.curseofshackle_tex	icon_skills.curseofshackle_tex	True
-9941026	Power	Buff	True	perc	0	0	1.1	First Cheer			The baby monkey cheers for Birchback, granting increased attack power and attack speed	icon_status.plusciriticalresist_tex	icon_status.plusciriticalresist_tex	True
-9941026	ASpd	Buff	True	perc	0	0	1.05	First Cheer			The baby monkey cheers for Birchback, granting increased attack power and attack speed	icon_status.plusciriticalresist_tex	icon_status.plusciriticalresist_tex	True
-9941027	Power	Buff	True	perc	0	0	1.2	Second Cheer			The baby monkey cheers for Birchback, granting increased attack power and attack speed	icon_status.plusciriticalresist_tex	icon_status.plusciriticalresist_tex	True
-9941027	ASpd	Buff	True	perc	0	0	1.08	Second Cheer			The baby monkey cheers for Birchback, granting increased attack power and attack speed	icon_status.plusciriticalresist_tex	icon_status.plusciriticalresist_tex	True
-9941028	Power	Buff	True	perc	0	0	1.3	Third Cheer			The baby monkey cheers for Birchback, granting increased attack power and attack speed	icon_status.plusciriticalresist_tex	icon_status.plusciriticalresist_tex	True
-9941028	ASpd	Buff	True	perc	0	0	1.11	Third Cheer			The baby monkey cheers for Birchback, granting increased attack power and attack speed	icon_status.plusciriticalresist_tex	icon_status.plusciriticalresist_tex	True
+9941026	Power	Buff	True	perc	0	0	1.1	First Cheer			The baby monkey cheers for Birchback, granting increased Power and Attack Speed.	icon_status.plusciriticalresist_tex	icon_status.plusciriticalresist_tex	True
+9941026	ASpd	Buff	True	perc	0	0	1.05	First Cheer			The baby monkey cheers for Birchback, granting increased Power and Attack Speed.	icon_status.plusciriticalresist_tex	icon_status.plusciriticalresist_tex	True
+9941027	Power	Buff	True	perc	0	0	1.2	Second Cheer			The baby monkey cheers for Birchback, granting increased Power and Attack Speed.	icon_status.plusciriticalresist_tex	icon_status.plusciriticalresist_tex	True
+9941027	ASpd	Buff	True	perc	0	0	1.08	Second Cheer			The baby monkey cheers for Birchback, granting increased Power and Attack Speed.	icon_status.plusciriticalresist_tex	icon_status.plusciriticalresist_tex	True
+9941028	Power	Buff	True	perc	0	0	1.3	Third Cheer			The baby monkey cheers for Birchback, granting increased Power and Attack Speed.	icon_status.plusciriticalresist_tex	icon_status.plusciriticalresist_tex	True
+9941028	ASpd	Buff	True	perc	0	0	1.11	Third Cheer			The baby monkey cheers for Birchback, granting increased Power and Attack Speed.	icon_status.plusciriticalresist_tex	icon_status.plusciriticalresist_tex	True
 9941030	Drunk1	Debuff	True	seta	10500	0	0	Tree Monkey's Interest			The tree monkey has noticed you and is about to throw a banana peel.	icon_items.banana_tex	icon_items.banana_tex	True
 9942006	MovSpd	Debuff	True	perc	6000	0	1	Noticed			Lehnym noticed you. Better keep moving.	icon_status.minusfocus_tex	icon_status.minusfocus_tex	True
 9942007	MovSpd	Debuff	True	perc	6000	0	1	Noticed			Lehnym noticed you. Better keep moving.	icon_status.minusfocus_tex	icon_status.minusfocus_tex	True

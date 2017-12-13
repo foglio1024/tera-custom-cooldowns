@@ -3,6 +3,7 @@
 79.110.94.213 EU 28 Yurian
 79.110.94.214 EU 29 Seren
 79.110.94.215 EU 30 Sikander
+79.110.94.217 EU 33 Manahan
 79.110.94.218 EU 31 Saleron
 79.110.94.219 EU 32 Amarun
 

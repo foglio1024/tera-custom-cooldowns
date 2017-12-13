@@ -117,6 +117,7 @@
         <Npc type="MARKER_CAMP" pos="110525,-10490,2899" continentId="7001" nameId="99,1004" />
       </Section>
       <Section id="14" desc="3 잊혀진 숲" nameId="3001" floor="1" mapId="WMap_ANC_Field_02" height="53620.37" width="71493.82" top="134051.0" left="-18851.0">
+        <Npc type="MARKER_enter_Dungeon" pos="109281,2988,3013" continentId="7001" nameId="99,9710" />
         <Npc type="MARKER_CAMP" pos="100635,4625,844" continentId="7001" nameId="99,1005" />
         <Npc type="MARKER_CAMP" pos="107906,16551,2712" continentId="7001" nameId="99,1006" />
         <Npc type="MARKER_enter_Dungeon" pos="119977.6719,25520.3457,2815.7637" continentId="7001" nameId="99,5001" />
@@ -936,6 +937,7 @@
       <Section id="9019" desc="미스테리움 연구소 앞마당" nameId="9019001" floor="0" mapId="WMap_AX2_Empty_01" height="53620.37" width="71493.82" top="126371.0" left="-49571.0" mode="5" />
       <Section id="9020" desc="비밀기지 후문" nameId="9020001" floor="0" mapId="WMap_ANC_Empty_02" height="15360.0" width="15360.0" top="76800.0" left="0.0" mode="5" />
       <Section id="9090" desc="숲의사자 호위" nameId="9090001" floor="0" mapId="WMap_ANC_Empty_01" height="53620.37" width="71493.82" top="126371.0" left="-49571.0" mode="5" />
+      <Section id="9710" desc="뒤틀린 라칸의 제단" type="dungeon" nameId="9710001" floor="1" mapId="WMap_DG_Lakan_Twisted" height="15360.0" width="30720.0" top="-76800.0" left="30720.0" mode="5" />
       <Section id="9713" desc="길리안의 숲 (프리미엄)" nameId="9713001" floor="1" mapId="EX_Ghillian_SD" height="15360.0" width="15360.0" top="61440.0" left="107520.0" mode="5" />
     </Guard>
     <Guard id="4" desc="밤피르의 저택, 호송대 습격지, 차원의 경계, 마녀의 성 연회장">

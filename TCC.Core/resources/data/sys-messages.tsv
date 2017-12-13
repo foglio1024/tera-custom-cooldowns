@@ -2144,7 +2144,7 @@
 201	SMT_OPTIONRESET_FAIL_BECAUSE_MATERIAL	Not enough semi-enigmatic scrolls.
 203	SMT_INVALID_MATERIAL_ENCHANT	Item cannot be enchanted.
 203	SMT_INVALID_EQUIPMENT_UPGRADE	Item cannot be upgraded.
-203	SMT_INVALID_EQUIPMENT_UPGRADE_NOTBELONGTO	Soulbound items cannot be upgraded.
+203	SMT_INVALID_EQUIPMENT_UPGRADE_NOTBELONGTO	Only items bound to you can be upgraded.
 201	SMT_EQUIPMENT_UPGRADE_SUCCESS	You've successfully upgraded {ItemName}.
 201	SMT_EQUIPMENT_UPGRADE_FAILE	Failed to upgrade {ItemName}.
 201	SMT_UPGRADE_BALANCE_MEDIUM	Your advantage increased. Your chance of succeeding on your next upgrade attempt will be higher.
@@ -2156,3 +2156,7 @@
 201	SMT_CANT_USE_MATERIAL_ENCHANT	Unable to use Material Enchanting System.
 201	SMT_CANT_USE_EQUIPMENT_UPGRADE	Unable to use Upgrade System.
 201	SMT_CANT_USE_ITEM_DECOMPOSITION	Unable to use Dismantle System.
+302	SMT_CANNOT_USE_SKILL_NON_EQUIPPED	You can’t use "{SkillName}" because you are not wearing the correct costume.
+302	SMT_CANNOT_USE_SKILL_THIS_ITEM	You can't use "{SkillName}" with "{ItemName}".
+203	SMT_CANNOT_USE_SKILL_WHILE_ACTION	You can't use that skill in combat.
+203	SMT_NOTIFY_NEED_SKILLBOOK	<BR><font color = '#ff5555'>You must learn Flying Skill: Free Flight before you can use an eligible costume to fly.</font>

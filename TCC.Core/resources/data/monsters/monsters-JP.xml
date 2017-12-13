@@ -11618,18 +11618,18 @@
 		<Monster name="バルバトスが召喚するゴルゴスを討伐せよ" id="911" isBoss="False" hp="0" />
 		<Monster name="バルバトスが召喚するモレクを討伐せよ" id="912" isBoss="False" hp="0" />
 		<Monster name="バルバトスを討伐せよ" id="913" isBoss="False" hp="0" />
-		<Monster name="ゴルゴス" id="1000" isBoss="True" hp="1100000000" />
+		<Monster name="ゴルゴス" id="1000" isBoss="True" hp="1800000000" />
 		<Monster name="次元の魔法石" id="1501" isBoss="False" hp="10000" />
 		<Monster name="次元の魔法石" id="1502" isBoss="False" hp="10000" />
 		<Monster name="次元の魔法石" id="1503" isBoss="False" hp="10000" />
-		<Monster name="モレク" id="2000" isBoss="True" hp="1000000000" />
-		<Monster name="バルバトス" id="3000" isBoss="True" hp="1100000000" />
+		<Monster name="モレク" id="2000" isBoss="True" hp="1650000000" />
+		<Monster name="バルバトス" id="3000" isBoss="True" hp="1850000000" />
 		<Monster name="負傷した兵士" id="5001" isBoss="False" hp="200" />
 		<Monster name="負傷した兵士" id="5002" isBoss="False" hp="366797" />
 		<Monster name="負傷した兵士" id="5003" isBoss="False" hp="200" />
-		<Monster name="アークデヴァ魔術師" id="5004" isBoss="False" hp="4000000" />
-		<Monster name="アークデヴァ射手" id="5005" isBoss="False" hp="4000000" />
-		<Monster name="アークデヴァ剣闘士" id="5006" isBoss="False" hp="7000000" />
+		<Monster name="アークデヴァ魔術師" id="5004" isBoss="False" hp="3500000" />
+		<Monster name="アークデヴァ射手" id="5005" isBoss="False" hp="3500000" />
+		<Monster name="アークデヴァ剣闘士" id="5006" isBoss="False" hp="5000000" />
 		<Monster name="兵士" id="5007" isBoss="False" hp="10000" />
 		<Monster name="兵士" id="5008" isBoss="False" hp="945" />
 		<Monster name="兵士" id="5009" isBoss="False" hp="13038" />
@@ -12711,9 +12711,9 @@
 		<Monster name="レニム" id="2000" isBoss="True" hp="1350000000" />
 		<Monster name="サイラクス" id="3000" isBoss="True" hp="1600000000" />
 		<Monster name="ビドン" id="5001" isBoss="False" hp="366797" />
-		<Monster name="アークデヴァ魔術師" id="5002" isBoss="False" hp="20000000" />
-		<Monster name="アークデヴァ射手" id="5003" isBoss="False" hp="15000000" />
-		<Monster name="アークデヴァ剣闘士" id="5004" isBoss="False" hp="25000000" />
+		<Monster name="アークデヴァ魔術師" id="5002" isBoss="False" hp="27000000" />
+		<Monster name="アークデヴァ射手" id="5003" isBoss="False" hp="23000000" />
+		<Monster name="アークデヴァ剣闘士" id="5004" isBoss="False" hp="32000000" />
 		<Monster name="アークデヴァ射手" id="6001" isBoss="False" hp="4000000" />
 		<Monster name="アークデヴァ射手" id="6002" isBoss="False" hp="4000000" />
 		<Monster name="アークデヴァ射手" id="6003" isBoss="False" hp="4000000" />
@@ -14065,12 +14065,12 @@
 		<Monster name="ベンタロンを討伐せよ" id="913" isBoss="False" hp="0" />
 		<Monster name="磁場解除装備をすべて作動させよう" id="914" isBoss="False" hp="0" />
 		<Monster name="ヘキサフレオンを討伐せよ" id="915" isBoss="False" hp="0" />
-		<Monster name="究極のRK-9を討伐せよ" id="916" isBoss="False" hp="0" />
+		<Monster name="Ultimate RK-9を討伐せよ" id="916" isBoss="False" hp="0" />
 		<Monster name="ベンタロン" id="1000" isBoss="True" hp="2880000000" />
 		<Monster name="時限爆弾" id="1009" isBoss="False" hp="6750000" />
 		<Monster name="次元の魔法石" id="1501" isBoss="False" hp="10000" />
 		<Monster name="ヘキサフレオン" id="2000" isBoss="True" hp="3072000000" />
-		<Monster name="究極のRK-9" id="3000" isBoss="True" hp="3670000000" />
+		<Monster name="Ultimate RK-9" id="3000" isBoss="True" hp="3670000000" />
 		<Monster name="格納庫の部品箱" id="5000" isBoss="False" hp="500000" />
 		<Monster name="ランダンの遺品箱" id="5001" isBoss="False" hp="500000" />
 		<Monster name="謎の老人" id="6002" isBoss="False" hp="1" />
@@ -14258,9 +14258,9 @@
 		<Monster name="洗脳されたレニム" id="2000" isBoss="True" hp="1690000000" />
 		<Monster name="アルファサイラクス" id="3000" isBoss="True" hp="1870000000" />
 		<Monster name="ビドン" id="5001" isBoss="False" hp="366797" />
-		<Monster name="アークデヴァ魔術師" id="5002" isBoss="False" hp="25000000" />
-		<Monster name="アークデヴァ射手" id="5003" isBoss="False" hp="20000000" />
-		<Monster name="アークデヴァ剣闘士" id="5004" isBoss="False" hp="30000000" />
+		<Monster name="アークデヴァ魔術師" id="5002" isBoss="False" hp="34000000" />
+		<Monster name="アークデヴァ射手" id="5003" isBoss="False" hp="30000000" />
+		<Monster name="アークデヴァ剣闘士" id="5004" isBoss="False" hp="38000000" />
 	</Zone>
 	<Zone id="1022" name="帝国領地" >
 		<Monster name="黒時空の破壊者" id="101" isBoss="True" hp="9118362" />
@@ -14318,18 +14318,27 @@
 		<Monster name="ジャック・オー・ランタン" id="112" isBoss="False" hp="100000000" />
 		<Monster name="ジャックオーランタン" id="400" isBoss="False" hp="66578" />
 		<Monster name="テストクーマス" id="1000" isBoss="False" hp="147000000" />
+		<Monster name="軍団将校" id="42733" isBoss="False" hp="876340" />
+		<Monster name="軍団戦士" id="42734" isBoss="False" hp="876340" />
 		<Monster name="ギガントケルサイク" id="77101" isBoss="False" hp="0" />
 		<Monster name="ミニケルサイク" id="77102" isBoss="False" hp="0" />
-		<Monster name="天空の宝探し交換員A" id="160309" isBoss="False" hp="10000" />
-		<Monster name="天空の宝探し交換員B" id="160310" isBoss="False" hp="10000" />
-		<Monster name="天空の宝探し交換員C" id="160311" isBoss="False" hp="10000" />
-		<Monster name="天空の宝探し交換員D" id="160312" isBoss="False" hp="10000" />
+		<Monster name="汚染された高原捕食者" id="88511" isBoss="False" hp="432000000" />
+		<Monster name="ラマヤン・ニルヴァーナ" id="88516" isBoss="False" hp="1650000000" />
+		<Monster name="アカカラシュ・フェルカトゥラン" id="88517" isBoss="False" hp="1350000000" />
+		<Monster name="メルディタ" id="88519" isBoss="False" hp="1950000000" />
+		<Monster name="年末年始宝探し交換員A" id="160309" isBoss="False" hp="10000" />
+		<Monster name="年末年始宝探し交換員B" id="160310" isBoss="False" hp="10000" />
+		<Monster name="年末年始宝探し交換員C" id="160311" isBoss="False" hp="10000" />
+		<Monster name="年末年始宝探し交換員D" id="160312" isBoss="False" hp="10000" />
 		<Monster name="天空の宝探し交換員E" id="160313" isBoss="False" hp="10000" />
 		<Monster name="天空の宝探し交換員F" id="160314" isBoss="False" hp="10000" />
 		<Monster name="天空の宝探し交換員G" id="160315" isBoss="False" hp="10000" />
 		<Monster name="天空の宝探し交換員H" id="160316" isBoss="False" hp="10000" />
 		<Monster name="天空の宝探し交換員（ビギナー）" id="160317" isBoss="False" hp="10000" />
+		<Monster name="わんだふる" id="160319" isBoss="False" hp="10000" />
 		<Monster name="クリスマスギリード" id="300937" isBoss="False" hp="723" />
+		<Monster name="堅硬のカラシュアルメロ" id="885061" isBoss="False" hp="405000000" />
+		<Monster name="シャンドラ・マナイア" id="885200" isBoss="False" hp="3150000000" />
 		<Monster name="シャドウ" id="1010100" isBoss="False" hp="1" />
 		<Monster name="シャドウ" id="1010101" isBoss="False" hp="1" />
 		<Monster name="シャドウ" id="1010102" isBoss="False" hp="1" />
@@ -14601,6 +14610,7 @@
 		<Monster name="カイアトール連盟警備兵" id="3000024" isBoss="False" hp="599206" />
 		<Monster name="カブトムシ" id="3022123" isBoss="False" hp="1" />
 		<Monster name="黄金のカブトムシ" id="3022124" isBoss="False" hp="1" />
+		<Monster name="ケルサイク" id="9751000" isBoss="False" hp="5974350795" />
 		<Monster name="守護の精霊" id="10235001" isBoss="False" hp="7612" />
 		<Monster name="守護の精霊" id="10235002" isBoss="False" hp="9435" />
 		<Monster name="守護の精霊" id="10235003" isBoss="False" hp="12396" />

@@ -1205,12 +1205,13 @@
 700014001	Complete Baracos' Trial
 700019001	Complete Lilith's Keep
 700020001	Conquer Lilith's Keep (Hard)
+700026001	Complete the Broken Prison
 700035001	Complete the Thaumetal Refinery
 700036001	Conquer the Thaumetal Refinery (Hard)
 700037001	Complete Sky Cruiser Endeavor
 700038001	Complete Ravenous Gorge
-700039001	Complete the Shattered Fleet
 871001	(Guild) Suppression Orders: Kazuur Syndicate
+700039001	Complete the Shattered Fleet
 700040001	Complete the RK-9 Kennel
 700041001	Conquer the RK-9 Kennel (Hard)
 700113001	Complete Akasha's Trial
@@ -1218,11 +1219,12 @@
 700117001	Conquer Kalivan's Dreadnaught (Hard)
 700119001	Complete Lilith's Keep
 700120001	Conquer Lilith's Keep (Hard)
+700126001	Complete the Broken Prison
 700134001	Conquer Forsaken Island (Hard)
-700135001	Complete the Thaumetal Refinery
-700136001	Conquer the Thaumetal Refinery (Hard)
 238001	Hunting the Big Cats
 872001	(Guild) Clearing the Catacombs
+700135001	Complete the Thaumetal Refinery
+700136001	Conquer the Thaumetal Refinery (Hard)
 700137001	Complete Sky Cruiser Endeavor
 700138001	Complete Ravenous Gorge
 700139001	Complete the Shattered Fleet
@@ -1231,9 +1233,9 @@
 800001001	Complete the Bastion of Lok!
 800002001	Complete Sinestral Manor!
 800003001	Complete Saravash's Ascent!
+880001	(Vanarch) Depth Charge
 800004001	Complete the Cultists' Refuge!
 800005001	Complete the Necromancer Tomb!
-880001	(Vanarch) Depth Charge
 800006001	Complete the Golden Labyrinth!
 800007001	Complete Akasha's Hideout
 800008001	Complete Saleron's Sky Garden
@@ -1242,9 +1244,9 @@
 800012001	Complete the Timescape
 800014001	[Event] Conquer the Abscess
 800015001	
+901001	Enemies in the Midst
 800016001	
 800017001	
-901001	Enemies in the Midst
 800018001	
 800030001	Hunt Basilisks
 800031001	Clean Up Godric's Farm!
@@ -1252,10 +1254,10 @@
 800034001	Hunt Fimbrilisks!
 800035001	Hunt Ovoliths!
 800036001	Hunt Dusky Basilisks!
-800037001	Hunt Labyrith Denizens!
+800037001	Hunt Labyrinth Denizens!
+902001	Sic Semper Proditores
 800038001	Hunt Lurking Teraliths!
 800039001	Hunt Giant Gladiators!
-902001	Sic Semper Proditores
 800040001	Hunt Desert Lightning Kumases!
 800041001	Hunt Patient Lithikumases!
 800042001	Hunt Onyx Hydraths!
@@ -1264,9 +1266,9 @@
 800045001	Hunt Naga Leviathans
 800046001	Clean up the Hatchery!
 800047001	Hunt the Sandlurker Lizards!
+903001	Relic of a Bygone Age
 800050001	Win in Kumas Royale
 800051001	Win in Kumas Royale
-903001	Relic of a Bygone Age
 800052001	Win in Kumas Royale
 800053001	Win in Kumas Royale
 800054001	Win in Kumas Royale
@@ -1275,9 +1277,9 @@
 800057001	Win in Kumas Royale
 800058001	Win in Kumas Royale
 800059001	Hunt Devas
+904001	The Fall of the Betrayer
 800060001	Hunt Runekeepers
 800061001	Hunt Tirkai Grizzlies
-904001	The Fall of the Betrayer
 800062001	Hunt the Argonomorphs!
 800063001	Clean up the Twisted Plains
 800064001	Clean up the Cardovek Remnants
@@ -1286,9 +1288,9 @@
 800067001	Hunt Kamaras
 800068001	Hunt Prion Njalvars
 800069001	Clean up Mags Tohopka
+921001	Crocuta Blankets for the Night
 800070001	Hunt Noruks
 800071001	Hunt Wendigos
-921001	Crocuta Blankets for the Night
 800101001	Clean up the Fey Forest
 800104001	Clean up the Celestial Hills
 800105001	Clean up the Cliffs of Insanity
@@ -1297,9 +1299,9 @@
 800108001	Clean up Mistmoor Island
 800109001	Clean up Azarel's Labyrinth
 800110001	Clean up the Lake of Tears
+922001	Eliminate the Raging Beasts
 800111001	Clean up the Colossal Ruins
 800112001	Clean up Aurum Road
-922001	Eliminate the Raging Beasts
 800113001	Clean up the Dark Cathedral
 800114001	Clean up Essenian Crest
 800115001	Clean up the Blightwood
@@ -1308,9 +1310,9 @@
 800118001	Clean up Mount Tyrannus
 800119001	Clean up the Citadel of Torment
 800120001	Clean up the Quarantine Zone
+923001	Missing Supplies from Velika
 800121001	Clean up Arachnaea
 800122001	Clean up the Feral Valley
-923001	Missing Supplies from Velika
 800123001	Clean up the Temple of Dagon
 800124001	Clean up Fyrmount
 800125001	Clean up the Hungry Caverns
@@ -1319,9 +1321,9 @@
 800128001	Clean up Tor Exsul
 800129001	Clean up the Doomcrypt
 800130001	Clean up the Plain of the Damned
+924001	The Dangerous Nest
 800131001	Clean up the Vale of Spires
 800132001	Clean up Tirkai Forest
-924001	The Dangerous Nest
 800133001	Clean up Thrallhold
 800134001	Clean up the Three Towers
 800135001	Clean up the Khanovar Front
@@ -1330,10 +1332,10 @@
 800138001	Hunt Devan Brigands
 800139001	Colect Stolen Money Bags
 800140001	Hunt Agitated Sporewalkers
-800141001	Hunt Fallen Defenders
-800142001	Hunt Devan Brigands
 239001	The Storm Has Passed
 925001	Desperate Struggle for Survival
+800141001	Hunt Fallen Defenders
+800142001	Hunt Devan Brigands
 800143001	Hunt Lok Believers
 800144001	Hunt Mossy Ghilliedhus
 810001001	Complete the Bastion of Lok!
@@ -1342,9 +1344,9 @@
 810004001	Complete the Cultists' Refuge
 810005001	Complete the Necromancer Tomb!
 810006001	Complete the Golden Labyrinth
+926001	Beholder of Darkness
 810007001	Complete Akasha's Hideout
 810008001	Complete Saleron's Sky Garden!
-926001	Beholder of Darkness
 810009001	Complete the Labyrinth of Terror
 810010001	Complete the Ebon Tower
 810012001	Complete the Timescape
@@ -1353,20 +1355,20 @@
 810033001	Hunt Juggernaut Mercenaries
 810034001	Hunt Fimbrilisks
 810035001	Hunt Ovoliths
-810036001	Hunt Dusky Basilisks
-810037001	Hunt Azarel's Juggernauts
 927001	Eyes in the Darkness
-810038001	Hunt Lurking Teraliths
-810039001	Hunt Giant Gladiators
-810040001	Hunt Desert Lightning Kumases
-810041001	Hunt Patient Lithikumases
-810042001	Hunt Onyx Hydraths
-810043001	Hunt Ravenous Basilisks
-810044001	Hunt Naga Battlemasters
-810045001	Hunt Naga Leviathans
+810036001	Hunt Dusky Basilisks
+810037001	Hunt Azarel's Juggernauts!
+810038001	Hunt Lurking Teraliths!
+810039001	Hunt Giant Gladiators!
+810040001	Hunt Desert Lightning Kumases!
+810041001	Hunt Patient Lithikumases!
+810042001	Hunt Onyx Hydraths!
+810043001	Hunt Ravenous Basilisks!
+810044001	Hunt Naga Battlemasters!
+810045001	Hunt Naga Leviathans!
+928001	Cook the Chefs
 810046001	Clean up the Hatchery
 810047001	Hunt Sandlurker Lizards!
-928001	Cook the Chefs
 810050001	Win in Kumas Royale
 810051001	Win in Kumas Royale
 810052001	Win in Kumas Royale
@@ -1375,20 +1377,20 @@
 810055001	Win in Kumas Royale
 810056001	Win in Kumas Royale
 810057001	Win in Kumas Royale
+929001	Cure for Crazy
 810058001	Win in Kumas Royale
 810059001	Hunt Devas
-929001	Cure for Crazy
 810060001	Hunt Runekeepers
 810061001	Hunt Tirkai Grizzlies
-810062001	Hunt Argonomorphs
+810062001	Hunt Argonomorphs!
 810063001	Clean up the Twisted Plains
 810064001	Clean up the Cardovek Remnants
 810065001	Clean up the Shattered City
 810066001	Clean up the Bloodblades
 810067001	Hunt Kamaras
+930001	Don't Play with Knives
 810068001	Hunt Prion Njalvars
 810069001	Clean up Mags Tohopka
-930001	Don't Play with Knives
 810070001	Hunt Noruks
 810071001	Hunt Wendigos
 810101001	Clean up the Fey Forest
@@ -1397,9 +1399,9 @@
 810106001	Clean up the Vale of the Fang
 810107001	Clean up the Tenebrous Mines
 810108001	Clean up Mistmoor Island
+931001	Gula Leftovers
 810109001	Clean out the Labyrinth
 810110001	Clean up the Lake of Tears
-931001	Gula Leftovers
 810111001	Clean up the Colossal Ruins
 810112001	Clean up Aurum Road
 810113001	Clean up the Dark Cathedral
@@ -1407,10 +1409,10 @@
 810115001	Clean up the Blightwood
 810116001	Clean up the Timeless Woods
 810117001	Clean up Tempest Reach
-810118001	Clean up Mount Tyrannus
+810118001	Clean up Mount Tyrannas
+932001	Pride of the Protectors
 810119001	Clean up the Citadel of Torment
 810120001	Clean up the Quarantine Zone
-932001	Pride of the Protectors
 810121001	Clean up Arachnaea
 810122001	Clean up the Feral Valley
 810123001	Clean up the Temple of Dagon
@@ -1419,9 +1421,9 @@
 810126001	Clean up the Darkquaver Woods
 810127001	Clean up the Susurrus Woods
 810128001	Clean up Tor Exsul
+933001	The Price of Hubris
 810129001	Clean up the Doomcrypt
 810130001	Clean up the Plain of the Damned
-933001	The Price of Hubris
 810131001	Clean up the Vale of Spires
 810132001	Clean up Tirkai Forest
 810133001	Clean up Thrallhold
@@ -1430,9 +1432,9 @@
 810136001	Clean up Argonea
 810137001	Hunt Stonebeaks
 810138001	Hunt Devan Brigands
+934001	Mysterious Disappearance
 810139001	Collect Stolen Money Bags
 810140001	Hunt Agitated Sporewalkers
-934001	Mysterious Disappearance
 810141001	Hunt Fallen Defenders
 810142001	Hunt Devan Brigands
 810143001	Hunt Lok Beleivers
@@ -1441,10 +1443,10 @@
 980052001	Win in the Iron Battleground
 980053001	Win in the Iron Battleground
 980054001	Win in the Iron Battleground
-980055001	Win in the Iron Battleground
-980056001	Win in the Iron Battleground
 240001	A Brutal Sort of Mercy
 935001	Remaining Proof
+980055001	Win in the Iron Battleground
+980056001	Win in the Iron Battleground
 980057001	Win in the Iron Battleground
 980058001	Win in the Iron Battleground
 980059001	Win in the Iron Battleground
@@ -1453,9 +1455,9 @@
 981053001	Win in the Iron Battleground
 981054001	Win in the Iron Battleground
 981055001	Win in the Iron Battleground
+936001	The Best Offense Is...Dentistry
 981056001	Win in the Iron Battleground
 981057001	Win in the Iron Battleground
-936001	The Best Offense Is...Dentistry
 981058001	Win in the Iron Battleground
 981059001	Win in the Iron Battleground
 983001001	Win in Celestial Arena
@@ -1464,9 +1466,9 @@
 983102001	Complete Echoes of Aranea
 983201001	Complete the Pit of Petrax
 983202001	Complete the Pit of Petrax
+937001	Beheading a Nightmare
 999601001	Hunt Brutal Basilisks
 999602001	Hunt Brutal Orisks
-937001	Beheading a Nightmare
 999603001	Hunt Brutal Ovoliths
 999604001	Hunt Brutal Bloodbound Teraliths
 999605001	Hunt Brutal Fimbrilisks
@@ -1475,9 +1477,9 @@
 999608001	Hunt Brutal Iron Giants!
 999609001	Hunt Brutal Onyx Hydraths
 999701001	Hunt Brutal Basilisks
+938001	The Circle Is Complete
 999702001	Hunt Brutal Orisks!
 999703001	Hunt Brutal Ovoliths
-938001	The Circle Is Complete
 999704001	Hunt Brutal Bloodbound Teraliths
 999705001	Hunt Brutal Fimbrilisks!
 999706001	Hunt Brutal Searing Fangspawns
@@ -1486,9 +1488,9 @@
 999709001	Hunt Brutal Onyx Hydraths!
 999805001	Complete Manaya's Core
 999806001	Complete Sabex Armory
+970001	(Guild) Paws in Mid-Battle
 999807001	Complete the Marcellarius Catacombs
 999809001	Dungeon Raiders
-970001	(Guild) Paws in Mid-Battle
 999811001	Clean up the Velika Outskirts
 999812001	Hunt Mandrills
 999813001	Hunt Guwangis
@@ -1497,9 +1499,9 @@
 999816001	Collect Engine Pieces
 999817001	Hunt Ruin Sprites
 999818001	Clean up the Yaldaru Hills
+971001	(Guild) Lust and Deceit
 999819001	Collect Moaloth Eggs
 999820001	Hunt Starving Velika Bears
-971001	(Guild) Lust and Deceit
 999821001	Hunt Orisks
 999822001	Hunt Demokron Thralls
 999823001	Clean up Spring Valley
@@ -1508,9 +1510,9 @@
 999826001	Hunt the Archdevan Imperial Army
 999827001	Clean up Kazan's Ridge
 999828001	Collect Vanguard Supply Crates
+972001	(Guild) Chaos and Destruction
 999829001	Hunt Jungle Arachnens
 999830001	Hunt Spring Valley Invaders
-972001	(Guild) Chaos and Destruction
 999831001	Hunt Demokron Shock Troopers
 999832001	Hunt Ruins Guardians
 999833001	Collect Reflective Roots
@@ -1519,9 +1521,9 @@
 999836001	Clean up Diranas Quarry
 999837001	Hunt Mutating Parthians
 999838001	Hunt Archdevan Imperial Officers
+973001	(Guild) Suppression Orders: Tabruk
 999839001	Hunt Goblin Tomb Robbers
 999840001	Hunt Goblin Brigands
-973001	(Guild) Suppression Orders: Tabruk
 999841001	Clean up Frostvale
 999842001	Collect Boxes of Parts
 999843001	Hunt Snowfall Sabertooths
@@ -1530,9 +1532,9 @@
 999846001	Hunt Lesser Demokrons
 999847001	Hunt Furyguards
 999848001	Hunt Parthian Brutes
+981001	(Vanarch) Suppression Orders: Tabruk
 999849001	Hunt Demokron Thralls
 999850001	Clean up the Delvias Front
-981001	(Vanarch) Suppression Orders: Tabruk
 999851001	Win in Corsairs' Stronghold
 999853001	Win in Fraywind Canyon
 999854001	Win in Champions' Skyring (Ranked: Solo)
@@ -1541,9 +1543,9 @@
 999857001	Hunt Greater Demokrons
 999861001	Complete the Macellarious Catacombs
 999865001	Hunt Valley Noruks
+1021001	Island Vacation
 999869001	Complete Kalivan's Dreadnaught
 999875001	Clean up Boscan Terrace
-1021001	Island Vacation
 999876001	Hunt Parthian Bowmen
 999877001	Hunt Archdevan Imperial Officers
 999878001	Hunt Lesser Demokrons
@@ -1552,10 +1554,10 @@
 999881001	Collect Reflective Roots
 999882001	Collect Soul Fragments
 999883001	Collect Boxes of Parts
-999884001	Collect Sarberries
-999885001	Collect Construction Sand
 241001	An Errand to Aron
 1022001	Breaking the Shells
+999884001	Collect Sarberries
+999885001	Collect Construction Sand
 999886001	Collect Construction Sand
 999888001	Collect Taproots
 999891001	Complete Kalivan's Challenge
@@ -1564,9 +1566,9 @@
 999898001	Win in the Gridiron
 999899001	Win in Kumas Royale
 999905001	Complete Manaya's Core
+1023001	A Little Long in the Tooth
 999906001	Complete Sabex Armory
 999907001	Complete Macellarius Catacombs
-1023001	A Little Long in the Tooth
 999909001	Apply for Dungeon Raiders!
 999911001	Clean up the Velika Outskirts
 999912001	Hunt Mandrills
@@ -1575,9 +1577,9 @@
 999915001	Clean up the Pools of Zurusuru
 999916001	Collect Engine Pieces
 999917001	Hunt Ruin Sprites
+1024001	The Shell Game
 999918001	Clean up the Yaldaru Hills
 999919001	Collect Moaloth Eggs
-1024001	The Shell Game
 999920001	Hunt Starving Velika Bears
 999921001	Hunt Orisks
 999922001	Hunt Demokron Thralls
@@ -1586,9 +1588,9 @@
 999925001	Clean up the Hina Hot Springs
 999926001	Hunt the Archdevan Imperial Army
 999927001	Clean up Kazan's Ridge
+1025001	Mycanar Trouble
 999928001	Collect Vanguard Supply Crates
 999929001	Hunt Jungle Arachnens
-1025001	Mycanar Trouble
 999930001	Hunt Spring Valley Invaders
 999931001	Hunt Demokron Shock Troopers
 999932001	Hunt Ruins Guardians
@@ -1597,9 +1599,9 @@
 999935001	Collect Soul Fragments
 999936001	Clean up Diranas Quarry
 999937001	Hunt Mutating Parthians
+1026001	A Makeup Test
 999938001	Hunt Archdevan Imperial Officers
 999939001	Hunt Goblin Tomb Robbers
-1026001	A Makeup Test
 999940001	Hunt Goblin Brigands
 999941001	Clean up Frostvale
 999942001	Collect Boxes of Parts
@@ -1608,9 +1610,9 @@
 999945001	Hunt the Bloodthrall Corps
 999946001	Hunt Lesser Demokrons
 999947001	Hunt Furyguards
+1027001	It's Flotsam...or Is It Jetsam
 999948001	Hunt Parthian Brutes
 999949001	Hunt Demokron Thralls
-1027001	It's Flotsam...or Is It Jetsam
 999950001	Clean up the Delvias Front
 999951001	Win in Corsairs' Stronghold
 999953001	Win in Fraywind Canyon
@@ -1619,9 +1621,9 @@
 999956001	Collect Blatherweed
 999957001	Hunt Greater Demokrons
 999961001	Complete the Macellarious Catacombs
+1028001	Reach the Beach
 999965001	Hunt Valley Noruks
 999969001	Complete Kalivan's Dreadnaught
-1028001	Reach the Beach
 999975001	Clean up Boscan Terrace
 999976001	Hunt Parthian Bowmen
 999977001	Hunt Archdevan Imperial Officers
@@ -1630,9 +1632,9 @@
 999980001	Collect Lime Deposits
 999981001	Collect Reflective Roots
 999982001	Collect Soul Fragments
+1029001	Scales of Justice
 999983001	Collect Boxes of Parts
 999984001	Collect Sarberries
-1029001	Scales of Justice
 999985001	Collect Construction Sand
 999986001	Collect Construction Sand
 999988001	Collect Taproots

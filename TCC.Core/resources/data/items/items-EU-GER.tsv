@@ -2092,7 +2092,7 @@
 6922	1	Gürtelgravierung: Eilend I	0	5	icon_items.belt_enchant_scroll_1_tex
 6930	1	Gürtelgravierung: Gestärkt II	0	5	icon_items.belt_enchant_scroll_2_tex
 6931	1	Gürtelgravierung: Scharf II	0	5	icon_items.belt_enchant_scroll_2_tex
-6932	1	Gürtelgravierung: Eilend I	0	5	icon_items.belt_enchant_scroll_2_tex
+6932	1	Gürtelgravierung: Eilend II	0	5	icon_items.belt_enchant_scroll_2_tex
 6935	2	Gürtelgravierung: Gestärkt II	0	5	icon_items.belt_enchant_scroll_2_tex
 6936	2	Gürtelgravierung: Scharf II	0	5	icon_items.belt_enchant_scroll_2_tex
 6937	2	Gürtelgravierung: Eilend II	0	5	icon_items.belt_enchant_scroll_2_tex
@@ -2104,7 +2104,7 @@
 6947	2	Gürtelgravierung: Eilend III	0	5	icon_items.belt_enchant_scroll_3_tex
 6950	3	Gürtelgravierung: Gestärkt IV	0	5	icon_items.belt_enchant_scroll_3_tex
 6951	3	Gürtelgravierung: Scharf IV	0	5	icon_items.belt_enchant_scroll_3_tex
-6952	3	Ohrringgravierung: Eilend IV	0	5	icon_items.belt_enchant_scroll_3_tex
+6952	3	Gürtelgravierung: Eilend IV	0	5	icon_items.belt_enchant_scroll_3_tex
 6955	3	Gürtelgravierung: Gestärkt IV	0	5	icon_items.belt_enchant_scroll_3_tex
 6956	3	Gürtelgravierung: Scharf IV	0	5	icon_items.belt_enchant_scroll_3_tex
 6957	3	Gürtelgravierung: Eilend IV	0	5	icon_items.belt_enchant_scroll_3_tex
@@ -19512,7 +19512,7 @@
 81202	3	Zeichen der Freundschaft: Stufe 60	0	1	icon_items.presentbox2_tex
 81203	3	Zeichen der Freundschaft: Stufe 65	0	1	icon_items.presentbox1_tex
 81204	1	Reitfertigkeit: Jadeschuppe	0	0	icon_items.skillbook_lion1_tex
-81205	2	Begleiterfertigkeit: Joker	0	0	icon_items.petskillbook_tex
+81205	2	Begleiterfertigkeit: Wölkchen	0	0	icon_items.petskillbook_tex
 81206	1	Verzauberungsschriftrolle (+12)	0	60	icon_items.scroll_mysterypaper1_tex
 81207	0	Föderationsschein	0	0	icon_items.tcattoken_tex
 81208	2	Freundliche Schriftrolle der meisterhaften Verwandlung	0	0	icon_items.unidentify_scroll_2_tex
@@ -24320,6 +24320,348 @@
 99627	3	[Event] Noble sportliche Leinenunterwäsche	0	0	icon_equipments.underwear00_f_tex
 99628	3	[Event] Noble wärmende Leinenunterwäsche	0	0	icon_equipments.underwear00_f_tex
 99629	3	[Event] Noble strahlende Leinenunterwäsche	0	0	icon_equipments.underwear00_f_tex
+99630	3	IM39-Prototyp (Menschenherren)	0	0	icon_equipments.pc_event_62_m_tex
+99631	3	IM39-Prototyp (Menschenherren)	0	0	icon_equipments.pc_event_62_m_tex
+99632	3	IM39-Prototyp (Menschenherren)	0	0	icon_equipments.pc_event_62_m_tex
+99633	3	IM39-Prototyp (Menschenherren)	0	0	icon_equipments.pc_event_62_m_tex
+99634	3	IM39-Prototyp (Menschenherren)	0	0	icon_equipments.pc_event_62_m_tex
+99635	3	IM39-Prototyp (Menschenherren)	0	0	icon_equipments.pc_event_62_m_tex
+99636	3	IM39-Prototyp (Menschenherren)	0	0	icon_equipments.pc_event_62_m_tex
+99637	3	IM39-Prototyp (Menschenherren)	0	0	icon_equipments.pc_event_62_m_tex
+99638	3	IM39-Prototyp (Menschenherren)	0	0	icon_equipments.pc_event_62_m_tex
+99639	3	IM39-Prototyp (Menschenherren)	0	0	icon_equipments.pc_event_62_m_tex
+99640	3	IM39-Prototyp (Menschenherren)	0	0	icon_equipments.pc_event_62_m_tex
+99641	3	IM39-Prototyp (Menschenherren)	0	0	icon_equipments.pc_event_62_m_tex
+99642	3	IM39-Prototyp COLORSTORM (Menschenherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99643	3	IM39-Prototyp COLORSTORM (Menschenherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99644	3	IM39-Prototyp COLORSTORM (Menschenherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99645	3	IM39-Prototyp COLORSTORM (Menschenherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99646	3	IM39-Prototyp COLORSTORM (Menschenherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99647	3	IM39-Prototyp COLORSTORM (Menschenherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99648	3	IM39-Prototyp COLORSTORM (Menschenherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99649	3	IM39-Prototyp COLORSTORM (Menschenherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99650	3	IM39-Prototyp COLORSTORM (Menschenherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99651	3	IM39-Prototyp COLORSTORM (Menschenherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99652	3	IM39-Prototyp COLORSTORM (Menschenherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99653	3	IM39-Prototyp COLORSTORM (Menschenherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99654	3	IM39-Prototyp (Menschendamen)	0	0	icon_equipments.pc_event_62_f_tex
+99655	3	IM39-Prototyp (Menschendamen)	0	0	icon_equipments.pc_event_62_f_tex
+99656	3	IM39-Prototyp (Menschendamen)	0	0	icon_equipments.pc_event_62_f_tex
+99657	3	IM39-Prototyp (Menschendamen)	0	0	icon_equipments.pc_event_62_f_tex
+99658	3	IM39-Prototyp (Menschendamen)	0	0	icon_equipments.pc_event_62_f_tex
+99659	3	IM39-Prototyp (Menschendamen)	0	0	icon_equipments.pc_event_62_f_tex
+99660	3	IM39-Prototyp (Menschendamen)	0	0	icon_equipments.pc_event_62_f_tex
+99661	3	IM39-Prototyp (Menschendamen)	0	0	icon_equipments.pc_event_62_f_tex
+99662	3	IM39-Prototyp (Menschendamen)	0	0	icon_equipments.pc_event_62_f_tex
+99663	3	IM39-Prototyp (Menschendamen)	0	0	icon_equipments.pc_event_62_f_tex
+99664	3	IM39-Prototyp (Menschendamen)	0	0	icon_equipments.pc_event_62_f_tex
+99665	3	IM39-Prototyp (Menschendamen)	0	0	icon_equipments.pc_event_62_f_tex
+99666	3	IM39-Prototyp COLORSTORM (Menschendamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99667	3	IM39-Prototyp COLORSTORM (Menschendamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99668	3	IM39-Prototyp COLORSTORM (Menschendamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99669	3	IM39-Prototyp COLORSTORM (Menschendamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99670	3	IM39-Prototyp COLORSTORM (Menschendamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99671	3	IM39-Prototyp COLORSTORM (Menschendamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99672	3	IM39-Prototyp COLORSTORM (Menschendamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99673	3	IM39-Prototyp COLORSTORM (Menschendamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99674	3	IM39-Prototyp COLORSTORM (Menschendamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99675	3	IM39-Prototyp COLORSTORM (Menschendamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99676	3	IM39-Prototyp COLORSTORM (Menschendamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99677	3	IM39-Prototyp COLORSTORM (Menschendamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99678	3	IM39-Prototyp (Hochelfenherren)	0	0	icon_equipments.pc_event_62_m_tex
+99679	3	IM39-Prototyp (Hochelfenherren)	0	0	icon_equipments.pc_event_62_m_tex
+99680	3	IM39-Prototyp (Hochelfenherren)	0	0	icon_equipments.pc_event_62_m_tex
+99681	3	IM39-Prototyp (Hochelfenherren)	0	0	icon_equipments.pc_event_62_m_tex
+99682	3	IM39-Prototyp (Hochelfenherren)	0	0	icon_equipments.pc_event_62_m_tex
+99683	3	IM39-Prototyp (Hochelfenherren)	0	0	icon_equipments.pc_event_62_m_tex
+99684	3	IM39-Prototyp (Hochelfenherren)	0	0	icon_equipments.pc_event_62_m_tex
+99685	3	IM39-Prototyp (Hochelfenherren)	0	0	icon_equipments.pc_event_62_m_tex
+99686	3	IM39-Prototyp (Hochelfenherren)	0	0	icon_equipments.pc_event_62_m_tex
+99687	3	IM39-Prototyp (Hochelfenherren)	0	0	icon_equipments.pc_event_62_m_tex
+99688	3	IM39-Prototyp (Hochelfenherren)	0	0	icon_equipments.pc_event_62_m_tex
+99689	3	IM39-Prototyp (Hochelfenherren)	0	0	icon_equipments.pc_event_62_m_tex
+99690	3	IM39-Prototyp COLORSTORM (Hochelfenherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99691	3	IM39-Prototyp COLORSTORM (Hochelfenherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99692	3	IM39-Prototyp COLORSTORM (Hochelfenherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99693	3	IM39-Prototyp COLORSTORM (Hochelfenherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99694	3	IM39-Prototyp COLORSTORM (Hochelfenherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99695	3	IM39-Prototyp COLORSTORM (Hochelfenherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99696	3	IM39-Prototyp COLORSTORM (Hochelfenherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99697	3	IM39-Prototyp COLORSTORM (Hochelfenherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99698	3	IM39-Prototyp COLORSTORM (Hochelfenherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99699	3	IM39-Prototyp COLORSTORM (Hochelfenherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99700	3	IM39-Prototyp COLORSTORM (Hochelfenherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99701	3	IM39-Prototyp COLORSTORM (Hochelfenherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99702	3	IM39-Prototyp (Hochelfendamen)	0	0	icon_equipments.pc_event_62_f_tex
+99703	3	IM39-Prototyp (Hochelfendamen)	0	0	icon_equipments.pc_event_62_f_tex
+99704	3	IM39-Prototyp (Hochelfendamen)	0	0	icon_equipments.pc_event_62_f_tex
+99705	3	IM39-Prototyp (Hochelfendamen)	0	0	icon_equipments.pc_event_62_f_tex
+99706	3	IM39-Prototyp (Hochelfendamen)	0	0	icon_equipments.pc_event_62_f_tex
+99707	3	IM39-Prototyp (Hochelfendamen)	0	0	icon_equipments.pc_event_62_f_tex
+99708	3	IM39-Prototyp (Hochelfendamen)	0	0	icon_equipments.pc_event_62_f_tex
+99709	3	IM39-Prototyp (Hochelfendamen)	0	0	icon_equipments.pc_event_62_f_tex
+99710	3	IM39-Prototyp (Hochelfendamen)	0	0	icon_equipments.pc_event_62_f_tex
+99711	3	IM39-Prototyp (Hochelfendamen)	0	0	icon_equipments.pc_event_62_f_tex
+99712	3	IM39-Prototyp (Hochelfendamen)	0	0	icon_equipments.pc_event_62_f_tex
+99713	3	IM39-Prototyp (Hochelfendamen)	0	0	icon_equipments.pc_event_62_f_tex
+99714	3	IM39-Prototyp COLORSTORM (Hochelfendamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99715	3	IM39-Prototyp COLORSTORM (Hochelfendamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99716	3	IM39-Prototyp COLORSTORM (Hochelfendamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99717	3	IM39-Prototyp COLORSTORM (Hochelfendamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99718	3	IM39-Prototyp COLORSTORM (Hochelfendamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99719	3	IM39-Prototyp COLORSTORM (Hochelfendamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99720	3	IM39-Prototyp COLORSTORM (Hochelfendamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99721	3	IM39-Prototyp COLORSTORM (Hochelfendamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99722	3	IM39-Prototyp COLORSTORM (Hochelfendamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99723	3	IM39-Prototyp COLORSTORM (Hochelfendamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99724	3	IM39-Prototyp COLORSTORM (Hochelfendamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99725	3	IM39-Prototyp COLORSTORM (Hochelfendamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99726	3	IM39-Prototyp (Amaniherren)	0	0	icon_equipments.pc_event_62_m_tex
+99727	3	IM39-Prototyp (Amaniherren)	0	0	icon_equipments.pc_event_62_m_tex
+99728	3	IM39-Prototyp (Amaniherren)	0	0	icon_equipments.pc_event_62_m_tex
+99729	3	IM39-Prototyp (Amaniherren)	0	0	icon_equipments.pc_event_62_m_tex
+99730	3	IM39-Prototyp (Amaniherren)	0	0	icon_equipments.pc_event_62_m_tex
+99731	3	IM39-Prototyp (Amaniherren)	0	0	icon_equipments.pc_event_62_m_tex
+99732	3	IM39-Prototyp (Amaniherren)	0	0	icon_equipments.pc_event_62_m_tex
+99733	3	IM39-Prototyp (Amaniherren)	0	0	icon_equipments.pc_event_62_m_tex
+99734	3	IM39-Prototyp (Amaniherren)	0	0	icon_equipments.pc_event_62_m_tex
+99735	3	IM39-Prototyp (Amaniherren)	0	0	icon_equipments.pc_event_62_m_tex
+99736	3	IM39-Prototyp (Amaniherren)	0	0	icon_equipments.pc_event_62_m_tex
+99737	3	IM39-Prototyp (Amaniherren)	0	0	icon_equipments.pc_event_62_m_tex
+99738	3	IM39-Prototyp COLORSTORM (Amaniherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99739	3	IM39-Prototyp COLORSTORM (Amaniherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99740	3	IM39-Prototyp COLORSTORM (Amaniherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99741	3	IM39-Prototyp COLORSTORM (Amaniherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99742	3	IM39-Prototyp COLORSTORM (Amaniherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99743	3	IM39-Prototyp COLORSTORM (Amaniherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99744	3	IM39-Prototyp COLORSTORM (Amaniherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99745	3	IM39-Prototyp COLORSTORM (Amaniherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99746	3	IM39-Prototyp COLORSTORM (Amaniherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99747	3	IM39-Prototyp COLORSTORM (Amaniherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99748	3	IM39-Prototyp COLORSTORM (Amaniherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99749	3	IM39-Prototyp COLORSTORM (Amaniherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99750	3	IM39-Prototyp (Amanidamen)	0	0	icon_equipments.pc_event_62_f_tex
+99751	3	IM39-Prototyp (Amanidamen)	0	0	icon_equipments.pc_event_62_f_tex
+99752	3	IM39-Prototyp (Amanidamen)	0	0	icon_equipments.pc_event_62_f_tex
+99753	3	IM39-Prototyp (Amanidamen)	0	0	icon_equipments.pc_event_62_f_tex
+99754	3	IM39-Prototyp (Amanidamen)	0	0	icon_equipments.pc_event_62_f_tex
+99755	3	IM39-Prototyp (Amanidamen)	0	0	icon_equipments.pc_event_62_f_tex
+99756	3	IM39-Prototyp (Amanidamen)	0	0	icon_equipments.pc_event_62_f_tex
+99757	3	IM39-Prototyp (Amanidamen)	0	0	icon_equipments.pc_event_62_f_tex
+99758	3	IM39-Prototyp (Amanidamen)	0	0	icon_equipments.pc_event_62_f_tex
+99759	3	IM39-Prototyp (Amanidamen)	0	0	icon_equipments.pc_event_62_f_tex
+99760	3	IM39-Prototyp (Amanidamen)	0	0	icon_equipments.pc_event_62_f_tex
+99761	3	IM39-Prototyp (Amanidamen)	0	0	icon_equipments.pc_event_62_f_tex
+99762	3	IM39-Prototyp COLORSTORM (Amanidamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99763	3	IM39-Prototyp COLORSTORM (Amanidamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99764	3	IM39-Prototyp COLORSTORM (Amanidamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99765	3	IM39-Prototyp COLORSTORM (Amanidamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99766	3	IM39-Prototyp COLORSTORM (Amanidamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99767	3	IM39-Prototyp COLORSTORM (Amanidamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99768	3	IM39-Prototyp COLORSTORM (Amanidamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99769	3	IM39-Prototyp COLORSTORM (Amanidamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99770	3	IM39-Prototyp COLORSTORM (Amanidamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99771	3	IM39-Prototyp COLORSTORM (Amanidamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99772	3	IM39-Prototyp COLORSTORM (Amanidamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99773	3	IM39-Prototyp COLORSTORM (Amanidamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99774	3	IM39-Prototyp (Castanicherren)	0	0	icon_equipments.pc_event_62_m_tex
+99775	3	IM39-Prototyp (Castanicherren)	0	0	icon_equipments.pc_event_62_m_tex
+99776	3	IM39-Prototyp (Castanicherren)	0	0	icon_equipments.pc_event_62_m_tex
+99777	3	IM39-Prototyp (Castanicherren)	0	0	icon_equipments.pc_event_62_m_tex
+99778	3	IM39-Prototyp (Castanicherren)	0	0	icon_equipments.pc_event_62_m_tex
+99779	3	IM39-Prototyp (Castanicherren)	0	0	icon_equipments.pc_event_62_m_tex
+99780	3	IM39-Prototyp (Castanicherren)	0	0	icon_equipments.pc_event_62_m_tex
+99781	3	IM39-Prototyp (Castanicherren)	0	0	icon_equipments.pc_event_62_m_tex
+99782	3	IM39-Prototyp (Castanicherren)	0	0	icon_equipments.pc_event_62_m_tex
+99783	3	IM39-Prototyp (Castanicherren)	0	0	icon_equipments.pc_event_62_m_tex
+99784	3	IM39-Prototyp (Castanicherren)	0	0	icon_equipments.pc_event_62_m_tex
+99785	3	IM39-Prototyp (Castanicherren)	0	0	icon_equipments.pc_event_62_m_tex
+99786	3	IM39-Prototyp COLORSTORM (Castanicherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99787	3	IM39-Prototyp COLORSTORM (Castanicherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99788	3	IM39-Prototyp COLORSTORM (Castanicherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99789	3	IM39-Prototyp COLORSTORM (Castanicherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99790	3	IM39-Prototyp COLORSTORM (Castanicherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99791	3	IM39-Prototyp COLORSTORM (Castanicherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99792	3	IM39-Prototyp COLORSTORM (Castanicherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99793	3	IM39-Prototyp COLORSTORM (Castanicherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99794	3	IM39-Prototyp COLORSTORM (Castanicherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99795	3	IM39-Prototyp COLORSTORM (Castanicherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99796	3	IM39-Prototyp COLORSTORM (Castanicherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99797	3	IM39-Prototyp COLORSTORM (Castanicherren)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99798	3	IM39-Prototyp (Castanicdamen)	0	0	icon_equipments.pc_event_62_f_tex
+99799	3	IM39-Prototyp (Castanicdamen)	0	0	icon_equipments.pc_event_62_f_tex
+99800	3	IM39-Prototyp (Castanicdamen)	0	0	icon_equipments.pc_event_62_f_tex
+99801	3	IM39-Prototyp (Castanicdamen)	0	0	icon_equipments.pc_event_62_f_tex
+99802	3	IM39-Prototyp (Castanicdamen)	0	0	icon_equipments.pc_event_62_f_tex
+99803	3	IM39-Prototyp (Castanicdamen)	0	0	icon_equipments.pc_event_62_f_tex
+99804	3	IM39-Prototyp (Castanicdamen)	0	0	icon_equipments.pc_event_62_f_tex
+99805	3	IM39-Prototyp (Castanicdamen)	0	0	icon_equipments.pc_event_62_f_tex
+99806	3	IM39-Prototyp (Castanicdamen)	0	0	icon_equipments.pc_event_62_f_tex
+99807	3	IM39-Prototyp (Castanicdamen)	0	0	icon_equipments.pc_event_62_f_tex
+99808	3	IM39-Prototyp (Castanicdamen)	0	0	icon_equipments.pc_event_62_f_tex
+99809	3	IM39-Prototyp (Castanicdamen)	0	0	icon_equipments.pc_event_62_f_tex
+99810	3	IM39-Prototyp COLORSTORM (Castanicdamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99811	3	IM39-Prototyp COLORSTORM (Castanicdamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99812	3	IM39-Prototyp COLORSTORM (Castanicdamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99813	3	IM39-Prototyp COLORSTORM (Castanicdamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99814	3	IM39-Prototyp COLORSTORM (Castanicdamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99815	3	IM39-Prototyp COLORSTORM (Castanicdamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99816	3	IM39-Prototyp COLORSTORM (Castanicdamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99817	3	IM39-Prototyp COLORSTORM (Castanicdamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99818	3	IM39-Prototyp COLORSTORM (Castanicdamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99819	3	IM39-Prototyp COLORSTORM (Castanicdamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99820	3	IM39-Prototyp COLORSTORM (Castanicdamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99821	3	IM39-Prototyp COLORSTORM (Castanicdamen)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99822	3	IM39-Prototyp (Popori)	0	0	icon_equipments.pc_event_62_m_tex
+99823	3	IM39-Prototyp (Popori)	0	0	icon_equipments.pc_event_62_m_tex
+99824	3	IM39-Prototyp (Popori)	0	0	icon_equipments.pc_event_62_m_tex
+99825	3	IM39-Prototyp (Popori)	0	0	icon_equipments.pc_event_62_m_tex
+99826	3	IM39-Prototyp (Popori)	0	0	icon_equipments.pc_event_62_m_tex
+99827	3	IM39-Prototyp (Popori)	0	0	icon_equipments.pc_event_62_m_tex
+99828	3	IM39-Prototyp (Popori)	0	0	icon_equipments.pc_event_62_m_tex
+99829	3	IM39-Prototyp (Popori)	0	0	icon_equipments.pc_event_62_m_tex
+99830	3	IM39-Prototyp (Popori)	0	0	icon_equipments.pc_event_62_m_tex
+99831	3	IM39-Prototyp (Popori)	0	0	icon_equipments.pc_event_62_m_tex
+99832	3	IM39-Prototyp (Popori)	0	0	icon_equipments.pc_event_62_m_tex
+99833	3	IM39-Prototyp (Popori)	0	0	icon_equipments.pc_event_62_m_tex
+99834	3	IM39-Prototyp COLORSTORM (Popori)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99835	3	IM39-Prototyp COLORSTORM (Popori)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99836	3	IM39-Prototyp COLORSTORM (Popori)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99837	3	IM39-Prototyp COLORSTORM (Popori)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99838	3	IM39-Prototyp COLORSTORM (Popori)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99839	3	IM39-Prototyp COLORSTORM (Popori)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99840	3	IM39-Prototyp COLORSTORM (Popori)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99841	3	IM39-Prototyp COLORSTORM (Popori)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99842	3	IM39-Prototyp COLORSTORM (Popori)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99843	3	IM39-Prototyp COLORSTORM (Popori)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99844	3	IM39-Prototyp COLORSTORM (Popori)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99845	3	IM39-Prototyp COLORSTORM (Popori)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99846	3	IM39-Prototyp (Elin)	0	0	icon_equipments.pc_event_62_f_tex
+99847	3	IM39-Prototyp (Elin)	0	0	icon_equipments.pc_event_62_f_tex
+99848	3	IM39-Prototyp (Elin)	0	0	icon_equipments.pc_event_62_f_tex
+99849	3	IM39-Prototyp (Elin)	0	0	icon_equipments.pc_event_62_f_tex
+99850	3	IM39-Prototyp (Elin)	0	0	icon_equipments.pc_event_62_f_tex
+99851	3	IM39-Prototyp (Elin)	0	0	icon_equipments.pc_event_62_f_tex
+99852	3	IM39-Prototyp (Elin)	0	0	icon_equipments.pc_event_62_f_tex
+99853	3	IM39-Prototyp (Elin)	0	0	icon_equipments.pc_event_62_f_tex
+99854	3	IM39-Prototyp (Elin)	0	0	icon_equipments.pc_event_62_f_tex
+99855	3	IM39-Prototyp (Elin)	0	0	icon_equipments.pc_event_62_f_tex
+99856	3	IM39-Prototyp (Elin)	0	0	icon_equipments.pc_event_62_f_tex
+99857	3	IM39-Prototyp (Elin)	0	0	icon_equipments.pc_event_62_f_tex
+99858	3	IM39-Prototyp COLORSTORM (Elin)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99859	3	IM39-Prototyp COLORSTORM (Elin)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99860	3	IM39-Prototyp COLORSTORM (Elin)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99861	3	IM39-Prototyp COLORSTORM (Elin)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99862	3	IM39-Prototyp COLORSTORM (Elin)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99863	3	IM39-Prototyp COLORSTORM (Elin)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99864	3	IM39-Prototyp COLORSTORM (Elin)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99865	3	IM39-Prototyp COLORSTORM (Elin)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99866	3	IM39-Prototyp COLORSTORM (Elin)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99867	3	IM39-Prototyp COLORSTORM (Elin)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99868	3	IM39-Prototyp COLORSTORM (Elin)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99869	3	IM39-Prototyp COLORSTORM (Elin)	0	0	icon_equipments.pc_event_62_f_dye_tex
+99870	3	IM39-Prototyp (Baraka)	0	0	icon_equipments.pc_event_62_m_tex
+99871	3	IM39-Prototyp (Baraka)	0	0	icon_equipments.pc_event_62_m_tex
+99872	3	IM39-Prototyp (Baraka)	0	0	icon_equipments.pc_event_62_m_tex
+99873	3	IM39-Prototyp (Baraka)	0	0	icon_equipments.pc_event_62_m_tex
+99874	3	IM39-Prototyp (Baraka)	0	0	icon_equipments.pc_event_62_m_tex
+99875	3	IM39-Prototyp (Baraka)	0	0	icon_equipments.pc_event_62_m_tex
+99876	3	IM39-Prototyp (Baraka)	0	0	icon_equipments.pc_event_62_m_tex
+99877	3	IM39-Prototyp (Baraka)	0	0	icon_equipments.pc_event_62_m_tex
+99878	3	IM39-Prototyp (Baraka)	0	0	icon_equipments.pc_event_62_m_tex
+99879	3	IM39-Prototyp (Baraka)	0	0	icon_equipments.pc_event_62_m_tex
+99880	3	IM39-Prototyp (Baraka)	0	0	icon_equipments.pc_event_62_m_tex
+99881	3	IM39-Prototyp (Baraka)	0	0	icon_equipments.pc_event_62_m_tex
+99882	3	IM39-Prototyp COLORSTORM (Baraka)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99883	3	IM39-Prototyp COLORSTORM (Baraka)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99884	3	IM39-Prototyp COLORSTORM (Baraka)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99885	3	IM39-Prototyp COLORSTORM (Baraka)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99886	3	IM39-Prototyp COLORSTORM (Baraka)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99887	3	IM39-Prototyp COLORSTORM (Baraka)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99888	3	IM39-Prototyp COLORSTORM (Baraka)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99889	3	IM39-Prototyp COLORSTORM (Baraka)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99890	3	IM39-Prototyp COLORSTORM (Baraka)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99891	3	IM39-Prototyp COLORSTORM (Baraka)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99892	3	IM39-Prototyp COLORSTORM (Baraka)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99893	3	IM39-Prototyp COLORSTORM (Baraka)	0	0	icon_equipments.pc_event_62_m_dye_tex
+99894	3	IM39-Protohelm R	0	0	icon_equipments.acc_628_tex
+99895	3	IM39-Protohelm R	0	0	icon_equipments.acc_628_tex
+99896	3	IM39-Protohelm R	0	0	icon_equipments.acc_628_tex
+99897	3	IM39-Protohelm R	0	0	icon_equipments.acc_628_tex
+99898	3	IM39-Protohelm R	0	0	icon_equipments.acc_628_tex
+99899	3	IM39-Protohelm R	0	0	icon_equipments.acc_628_tex
+99900	3	IM39-Protohelm R	0	0	icon_equipments.acc_628_tex
+99901	3	IM39-Protohelm R	0	0	icon_equipments.acc_628_tex
+99902	3	IM39-Protohelm R	0	0	icon_equipments.acc_628_tex
+99903	3	IM39-Protohelm R	0	0	icon_equipments.acc_628_tex
+99904	3	IM39-Protohelm R	0	0	icon_equipments.acc_628_tex
+99905	3	IM39-Protohelm R	0	0	icon_equipments.acc_628_tex
+99906	3	IM39-Protohelm S	0	0	icon_equipments.acc_629_tex
+99907	3	IM39-Protohelm S	0	0	icon_equipments.acc_629_tex
+99908	3	IM39-Protohelm S	0	0	icon_equipments.acc_629_tex
+99909	3	IM39-Protohelm S	0	0	icon_equipments.acc_629_tex
+99910	3	IM39-Protohelm S	0	0	icon_equipments.acc_629_tex
+99911	3	IM39-Protohelm S	0	0	icon_equipments.acc_629_tex
+99912	3	IM39-Protohelm S	0	0	icon_equipments.acc_629_tex
+99913	3	IM39-Protohelm S	0	0	icon_equipments.acc_629_tex
+99914	3	IM39-Protohelm S	0	0	icon_equipments.acc_629_tex
+99915	3	IM39-Protohelm S	0	0	icon_equipments.acc_629_tex
+99916	3	IM39-Protohelm S	0	0	icon_equipments.acc_629_tex
+99917	3	IM39-Protohelm S	0	0	icon_equipments.acc_629_tex
+99918	3	IM39-Kontrollvisier R	0	0	icon_equipments.acc_630_tex
+99919	3	IM39-Kontrollvisier R	0	0	icon_equipments.acc_630_tex
+99920	3	IM39-Kontrollvisier R	0	0	icon_equipments.acc_630_tex
+99921	3	IM39-Kontrollvisier R	0	0	icon_equipments.acc_630_tex
+99922	3	IM39-Kontrollvisier R	0	0	icon_equipments.acc_630_tex
+99923	3	IM39-Kontrollvisier R	0	0	icon_equipments.acc_630_tex
+99924	3	IM39-Kontrollvisier R	0	0	icon_equipments.acc_630_tex
+99925	3	IM39-Kontrollvisier R	0	0	icon_equipments.acc_630_tex
+99926	3	IM39-Kontrollvisier R	0	0	icon_equipments.acc_630_tex
+99927	3	IM39-Kontrollvisier R	0	0	icon_equipments.acc_630_tex
+99928	3	IM39-Kontrollvisier R	0	0	icon_equipments.acc_630_tex
+99929	3	IM39-Kontrollvisier R	0	0	icon_equipments.acc_630_tex
+99930	3	IM39-Kontrollvisier S	0	0	icon_equipments.acc_631_tex
+99931	3	IM39-Kontrollvisier S	0	0	icon_equipments.acc_631_tex
+99932	3	IM39-Kontrollvisier S	0	0	icon_equipments.acc_631_tex
+99933	3	IM39-Kontrollvisier S	0	0	icon_equipments.acc_631_tex
+99934	3	IM39-Kontrollvisier S	0	0	icon_equipments.acc_631_tex
+99935	3	IM39-Kontrollvisier S	0	0	icon_equipments.acc_631_tex
+99936	3	IM39-Kontrollvisier S	0	0	icon_equipments.acc_631_tex
+99937	3	IM39-Kontrollvisier S	0	0	icon_equipments.acc_631_tex
+99938	3	IM39-Kontrollvisier S	0	0	icon_equipments.acc_631_tex
+99939	3	IM39-Kontrollvisier S	0	0	icon_equipments.acc_631_tex
+99940	3	IM39-Kontrollvisier S	0	0	icon_equipments.acc_631_tex
+99941	3	IM39-Kontrollvisier S	0	0	icon_equipments.acc_631_tex
+99942	3	IM39-Plasmaschwingen R	0	0	icon_equipments.acc_632_tex
+99943	3	IM39-Plasmaschwingen R	0	0	icon_equipments.acc_632_tex
+99944	3	IM39-Plasmaschwingen R	0	0	icon_equipments.acc_632_tex
+99945	3	IM39-Plasmaschwingen R	0	0	icon_equipments.acc_632_tex
+99946	3	IM39-Plasmaschwingen R	0	0	icon_equipments.acc_632_tex
+99947	3	IM39-Plasmaschwingen R	0	0	icon_equipments.acc_632_tex
+99948	3	IM39-Plasmaschwingen R	0	0	icon_equipments.acc_632_tex
+99949	3	IM39-Plasmaschwingen R	0	0	icon_equipments.acc_632_tex
+99950	3	IM39-Plasmaschwingen R	0	0	icon_equipments.acc_632_tex
+99951	3	IM39-Plasmaschwingen R	0	0	icon_equipments.acc_632_tex
+99952	3	IM39-Plasmaschwingen R	0	0	icon_equipments.acc_632_tex
+99953	3	IM39-Plasmaschwingen R	0	0	icon_equipments.acc_632_tex
+99954	3	IM39-Plasmaschwingen S	0	0	icon_equipments.acc_633_tex
+99955	3	IM39-Plasmaschwingen S	0	0	icon_equipments.acc_633_tex
+99956	3	IM39-Plasmaschwingen S	0	0	icon_equipments.acc_633_tex
+99957	3	IM39-Plasmaschwingen S	0	0	icon_equipments.acc_633_tex
+99958	3	IM39-Plasmaschwingen S	0	0	icon_equipments.acc_633_tex
+99959	3	IM39-Plasmaschwingen S	0	0	icon_equipments.acc_633_tex
+99960	3	IM39-Plasmaschwingen S	0	0	icon_equipments.acc_633_tex
+99961	3	IM39-Plasmaschwingen S	0	0	icon_equipments.acc_633_tex
+99962	3	IM39-Plasmaschwingen S	0	0	icon_equipments.acc_633_tex
+99963	3	IM39-Plasmaschwingen S	0	0	icon_equipments.acc_633_tex
+99964	3	IM39-Plasmaschwingen S	0	0	icon_equipments.acc_633_tex
+99965	3	IM39-Plasmaschwingen S	0	0	icon_equipments.acc_633_tex
+99966	3	Flugfertigkeit: Freier Flug	0	0	icon_items.skillbook_lion1_tex
+99967	3	Flugfertigkeit: Freier Flug	0	0	icon_items.skillbook_lion1_tex
+99968	3	Flugfertigkeit: Freier Flug	0	0	icon_items.skillbook_lion1_tex
+99969	3	Flugfertigkeit: Freier Flug	0	0	icon_items.skillbook_lion1_tex
+99970	3	Flugfertigkeit: Freier Flug	0	0	icon_items.skillbook_lion1_tex
+99971	3	Flugfertigkeit: Freier Flug	0	0	icon_items.skillbook_lion1_tex
 200001	0	Federleichter Schwebetrank	0	60	icon_items.potion21_tex
 200002	3	Groteskes Geschirr	0	0	icon_equipments.event02_dual_tex
 200003	3	Grotesker Sargnagel	0	0	icon_equipments.event02_lance_tex
@@ -25321,6 +25663,54 @@
 201348	3	Fäuste der Argonenkönigin	0	0	icon_equipments.gauntlet29_a_tex
 201349	3	Majestätische Wurfsterne	0	0	icon_equipments.shuriken03_b_tex
 201350	3	Shandra Manaya-Mondgleve	0	0	icon_equipments.glaive02_a_tex
+201531	2	Riding Skill: Elephant	0	0	icon_items.skillbook_lion1_tex
+201532	2	Riding Skill: Elephant	0	0	icon_items.skillbook_lion1_tex
+201533	2	Riding Skill: Elephant	0	0	icon_items.skillbook_lion1_tex
+201534	2	Riding Skill: Elephant	0	0	icon_items.skillbook_lion1_tex
+201535	2	Riding Skill: Elephant (3 Days)	0	0	icon_items.skillbook_lion1_tex
+201536	2	Riding Skill: Elephant (7 Days)	0	0	icon_items.skillbook_lion1_tex
+201537	2	Riding Skill: Elephant (14 Days)	0	0	icon_items.skillbook_lion1_tex
+201538	2	Riding Skill: Elephant (30 Days)	0	0	icon_items.skillbook_lion1_tex
+201539	3	Riding Skill: Rare Elephant	0	0	icon_items.skillbook_lion1_tex
+201540	3	Riding Skill: Rare Elephant	0	0	icon_items.skillbook_lion1_tex
+201541	3	Riding Skill: Rare Elephant	0	0	icon_items.skillbook_lion1_tex
+201542	3	Riding Skill: Rare Elephant	0	0	icon_items.skillbook_lion1_tex
+201543	3	Riding Skill: Rare Elephant (3 Days)	0	0	icon_items.skillbook_lion1_tex
+201544	3	Riding Skill: Rare Elephant (7 Days)	0	0	icon_items.skillbook_lion1_tex
+201545	3	Riding Skill: Rare Elephant (14 Days)	0	0	icon_items.skillbook_lion1_tex
+201546	3	Riding Skill: Rare Elephant (30 Days)	0	0	icon_items.skillbook_lion1_tex
+201547	2	Care and Use of Your Kitty Pet Brownie	0	0	icon_items.petskillbook_tex
+201548	2	Care and Use of Your Kitty Pet Brownie	0	0	icon_items.petskillbook_tex
+201549	2	Care and Use of Your Kitty Pet Brownie	0	0	icon_items.petskillbook_tex
+201550	2	Care and Use of Your Kitty Pet Brownie	0	0	icon_items.petskillbook_tex
+201551	2	Care and Use of Your Kitty Pet Brownie (3 Days)	0	0	icon_items.petskillbook_tex
+201552	2	Care and Use of Your Kitty Pet Brownie (7 Days)	0	0	icon_items.petskillbook_tex
+201553	2	Care and Use of Your Kitty Pet Brownie (14 Days)	0	0	icon_items.petskillbook_tex
+201554	2	Care and Use of Your Kitty Pet Brownie (30 Days)	0	0	icon_items.petskillbook_tex
+201555	2	Care and Use of Your Kitty Pet Gray	0	0	icon_items.petskillbook_tex
+201556	2	Care and Use of Your Kitty Pet Gray	0	0	icon_items.petskillbook_tex
+201557	2	Care and Use of Your Kitty Pet Gray	0	0	icon_items.petskillbook_tex
+201558	2	Care and Use of Your Kitty Pet Gray	0	0	icon_items.petskillbook_tex
+201559	2	Care and Use of Your Kitty Pet Gray (3 Days)	0	0	icon_items.petskillbook_tex
+201560	2	Care and Use of Your Kitty Pet Gray (7 Days)	0	0	icon_items.petskillbook_tex
+201561	2	Care and Use of Your Kitty Pet Gray (14 Days)	0	0	icon_items.petskillbook_tex
+201562	2	Care and Use of Your Kitty Pet Gray (30 Days)	0	0	icon_items.petskillbook_tex
+201563	3	Care and Use of Your Kitty Pet Rare Brownie	0	0	icon_items.petskillbook_tex
+201564	3	Care and Use of Your Kitty Pet Rare Brownie	0	0	icon_items.petskillbook_tex
+201565	3	Care and Use of Your Kitty Pet Rare Brownie	0	0	icon_items.petskillbook_tex
+201566	3	Care and Use of Your Kitty Pet Rare Brownie	0	0	icon_items.petskillbook_tex
+201567	3	Care and Use of Your Kitty Pet Rare Brownie (3 Days)	0	0	icon_items.petskillbook_tex
+201568	3	Care and Use of Your Kitty Pet Rare Brownie (7 Days)	0	0	icon_items.petskillbook_tex
+201569	3	Care and Use of Your Kitty Pet Rare Brownie (14 Days)	0	0	icon_items.petskillbook_tex
+201570	3	Care and Use of Your Kitty Pet Rare Brownie (30 Days)	0	0	icon_items.petskillbook_tex
+201571	3	Care and Use of Your Kitty Pet Rare Gray	0	0	icon_items.petskillbook_tex
+201572	3	Care and Use of Your Kitty Pet Rare Gray	0	0	icon_items.petskillbook_tex
+201573	3	Care and Use of Your Kitty Pet Rare Gray	0	0	icon_items.petskillbook_tex
+201574	3	Care and Use of Your Kitty Pet Rare Gray	0	0	icon_items.petskillbook_tex
+201575	3	Care and Use of Your Kitty Pet Rare Gray (3 Days)	0	0	icon_items.petskillbook_tex
+201576	3	Care and Use of Your Kitty Pet Rare Gray (7 Days)	0	0	icon_items.petskillbook_tex
+201577	3	Care and Use of Your Kitty Pet Rare Gray (14 Days)	0	0	icon_items.petskillbook_tex
+201578	3	Care and Use of Your Kitty Pet Rare Gray (30 Days)	0	0	icon_items.petskillbook_tex
 20000000	0	Geld	0	0	icon_items.goldcoin_tex
 20000001	0	EP	0	0	icon_items.icon_exp_tex
 20000002	0	Nicht angegebene Belohnung	0	0	icon_items.icon_reward_unclear_tex
@@ -27531,14 +27921,14 @@
 152281	3	Schlafendes Tigerkätzchen	0	0	icon_equipments.acc_269_tex
 152282	2	Freundeskreis	0	1	icon_items.q_coin_tex
 152283	3	Wachsames Samtpfötchen	0	0	icon_equipments.acc_270_tex
-152284	2	Ein Gruselwürfel zur Halloweenzeit (Event)	0	1	icon_items.cube_reward02_tex
-152285	2	Ein Gruselwürfel zur Halloweenzeit (Event)	0	1	icon_items.cube_reward01_tex
-152286	2	Ein Gruselwürfel zur Halloweenzeit (Event)	0	1	icon_items.cube_reward04_tex
-152287	2	Ein Gruselwürfel zur Halloweenzeit (Event)	0	1	icon_items.cube_reward03_tex
-152288	2	Ein Gruselwürfel zur Halloweenzeit (Event)	0	1	icon_items.cube_reward06_tex
-152289	3	Ein Gruselwürfel zur Halloweenzeit (Event)	0	1	icon_items.cube_reward05_tex
-152290	3	Ein Gruselwürfel zur Halloweenzeit (Event)	0	1	icon_items.cube_reward07_tex
-152291	3	Ein Gruselwürfel zur Halloweenzeit (Event)	0	1	icon_items.cube_reward08_tex
+152284	2	Gruselwürfel	0	1	icon_items.cube_reward02_tex
+152285	2	Rätselhafter Gruselwürfel	0	1	icon_items.cube_reward01_tex
+152286	2	Unheimlicher Gruselwürfel	0	1	icon_items.cube_reward04_tex
+152287	2	Grässlicher Gruselwürfel	0	1	icon_items.cube_reward03_tex
+152288	2	Schrecklicher Gruselwürfel	0	1	icon_items.cube_reward06_tex
+152289	3	Entsetzlicher Gruselwürfel	0	1	icon_items.cube_reward05_tex
+152290	3	Verfluchter Gruselwürfel	0	1	icon_items.cube_reward07_tex
+152291	3	Teuflischer Gruselwürfel	0	1	icon_items.cube_reward08_tex
 152292	1	Mysteriöser Staub eines alten Halloweengeistes (Event)	0	3	icon_items.q_fragment_tex
 152293	3	Schaurig-süßes Bonbon	0	1	icon_items.holloweencandy_tex
 152294	3	Grauenhafte Gruftitorte	0	1	icon_items.holloweencake_tex
@@ -28078,8 +28468,8 @@
 152828	2	[Event] Buchstabe P	0	0	icon_items.fireworks_eng_p_tex
 152829	2	[Event] Buchstabe Q	0	0	icon_items.fireworks_eng_q_tex
 152830	2	[Event] Buchstabe R	0	0	icon_items.fireworks_eng_r_tex
-152831	3	[Event] Veteranenbuchband des Wyvernforschers	0	0	icon_items.q_book1_tex
-152832	3	[Event] Buchband des Wyvernforschers	0	0	icon_items.q_book1_tex
+152831	3	[Event] Veteranenbuchband des Feuerdämons	0	0	icon_items.q_book1_tex
+152832	3	[Event] Buchband des Feuerdämons	0	0	icon_items.q_book1_tex
 152833	2	[Event] Runenstein: L, Q, R	0	1	icon_items.armorstonea1_tex
 152834	2	[Event] Runenstein: K, P, F	0	1	icon_items.weaponstonea1_tex
 152835	2	[Event] Runenstein: D, J, O	0	1	icon_items.armorstonea2_tex
@@ -28088,19 +28478,19 @@
 152838	2	[Event] Runenstein: G bis L	0	1	icon_items.weaponstonea3_tex
 152839	3	[Event] Runenstein: B, H, M	0	1	icon_items.armorstonea4_tex
 152840	3	[Event] Runenstein: B, G, M	0	1	icon_items.weaponstonea4_tex
-152841	3	[Event] Runenstein der unauslöschlichen Flamme	0	1	icon_items.armorstonea5_tex
-152842	3	[Event] Runenstein des uralten mächtigen Wyvern	0	1	icon_items.weaponstonea5_tex
-152843	2	[Event] Truhe des vergänglichen Schwans	0	1	icon_items.gift_box04_tex
-152844	2	[Event] Truhe des vergänglichen Raben	0	1	icon_items.gift_box04_tex
-152845	2	[Event] Truhe des vergänglichen Sternenlichts	0	1	icon_items.gift_box04_tex
-152846	2	[Event] Truhe des vergänglichen Feenwalds	0	1	icon_items.gift_box04_tex
-152847	2	[Event] Truhe des Schwans	0	1	icon_items.gift_box04_tex
-152848	2	[Event] Truhe des Wyvernforschers	0	1	icon_items.gift_box04_tex
-152849	3	[Event] Truhe des Wyvernforschers	0	1	icon_items.gift_box04_tex
-152850	3	[Event] Truhe des Wyvernforschers	0	1	icon_items.gift_box04_tex
-152851	3	[Event] Truhe des Wyvernforschers	0	1	icon_items.gift_box04_tex
-152852	3	[Event] Truhe des unsterblichen Phoenix	0	1	icon_items.gift_box04_tex
-152853	3	[Event] Truhe der Verzauberung	0	1	icon_items.gift_box04_tex
+152841	3	[Event] Runenstein: A bis F	0	1	icon_items.armorstonea5_tex
+152842	3	[Event] Runenstein: Alle Buchstaben	0	1	icon_items.weaponstonea5_tex
+152843	2	[Event] Truhe des Feuerdämons	0	1	icon_items.gift_box04_tex
+152844	2	[Event] Truhe des Feuerdämons	0	1	icon_items.gift_box04_tex
+152845	2	[Event] Truhe des Feuerdämons	0	1	icon_items.gift_box04_tex
+152846	2	[Event] Truhe des Feuerdämons	0	1	icon_items.gift_box04_tex
+152847	2	[Event] Truhe des Feuerdämons	0	1	icon_items.gift_box04_tex
+152848	2	[Event] Truhe des Feuerdämons	0	1	icon_items.gift_box04_tex
+152849	3	[Event] Truhe des Feuerdämons	0	1	icon_items.gift_box04_tex
+152850	3	[Event] Truhe des Feuerdämons	0	1	icon_items.gift_box04_tex
+152851	3	[Event] Truhe des Feuerdämons	0	1	icon_items.gift_box04_tex
+152852	3	[Event] Truhe des Feuerdämons	0	1	icon_items.gift_box04_tex
+152853	3	[Event] Truhe des Feuerdämons	0	1	icon_items.gift_box04_tex
 152854	2	[Event] Buchstabenkästchen A	0	1	icon_items.gift_box04_tex
 152855	2	[Event] Buchstabenkästchen B	0	1	icon_items.gift_box04_tex
 152856	2	[Event] Buchstabenkästchen C	0	1	icon_items.gift_box04_tex
@@ -30690,10 +31080,31 @@
 155548	3	Schatulle des Juwelenfeuers	0	0	icon_items.f2p_box_tex
 155549	3	Überragende Gravierungsschachtel IV	0	0	icon_items.premiumbox_enchantagent_tex
 155550	3	Unvergleichliche Gravierungsschachtel IV	0	0	icon_items.premiumbox_enchantagent_tex
-155551	3	Überraschungsbox: Himmelsleuchten	0	1	icon_items.premiumbox_dress4_tex
+155551	3	Überraschungsbox: Mächtige Phönixe	0	1	icon_items.premiumbox_dress4_tex
 155552	1	Elin-Fährtensplitter	0	0	icon_items.footprint_elin_tex
 155553	2	Kupferuniform des Einheitstheorieinstituts	0	0	icon_equipments.blasterchest6_winghide_a_tex
 155554	2	Purpuruniform des Einheitstheorieinstituts	0	0	icon_equipments.blasterchest6_winghide_d_tex
+155555	3	Fertigkeit: Darkans Flügel	0	0	icon_items.skillbook_rider1_tex
+155556	2	[Event] Manahans Schnellstarter	0	0	icon_items.cube_reward11_tex
+155557	2	[Event] Manahans Widersacher	0	0	icon_items.cube_reward11_tex
+155558	2	[Event] Manahans Held der Schlachtfelder	0	0	icon_items.cube_reward11_tex
+155559	2	[Event] Manahans Aufstieg	0	0	icon_items.cube_reward11_tex
+155560	2	[Event] Manahans Erzfeind	0	0	icon_items.cube_reward11_tex
+155561	2	[Event] Manahans Blutdurst	0	0	icon_items.cube_reward11_tex
+155562	2	[Event] Manahans Unnachgiebigkeit	0	0	icon_items.cube_reward11_tex
+155563	2	[Event] Manahans Unbeirrbarkeit	0	0	icon_items.cube_reward11_tex
+155564	2	[Event] Manahans Club-Unterstützung	0	0	icon_items.gift_box04_tex
+155565	2	[Event] Dungeon-Insigne I	0	0	icon_items.corecolor0_4_tex
+155566	2	[Event] Dungeon-Insigne II	0	0	icon_items.corecolor3_4_tex
+155567	2	[Event] Dungeon-Insigne III	0	0	icon_items.corecolor4_4_tex
+155568	2	[Event] Dungeon-Insigne IV	0	0	icon_items.corecolor6_4_tex
+155569	2	[Event] Dungeon-Insigne V	0	0	icon_items.corecolor_inactive_4_tex
+155570	2	[Event] Schlachtfeld-Insigne I	0	0	icon_items.battlefield_medal02_tex
+155571	2	[Event] Schlachtfeld-Insigne II	0	0	icon_items.union_bomb4_tex
+155572	2	[Event] Schlachtfeld-Insigne III	0	0	icon_items.union_bomb2_tex
+155573	3	[Event] Fusion für Dungeon-Insignien	0	0	icon_items.fc_a_function_tex
+155574	3	[Event] Fusion für Schlachtfeld-Insignien	0	0	icon_items.fc_a_function_tex
+155575	3	[Event] Anwesenheits-Insigne	0	0	icon_items.politics_reward_tex
 160001	0	Reitfertigkeit: Sleipner	0	0	icon_items.skillbook_rider1_tex
 160002	0	Reitfertigkeit: Sleipner	0	0	icon_items.skillbook_rider1_tex
 160003	1	Reitfertigkeit: Sandpfote	0	0	icon_items.skillbook_lion1_tex
@@ -40748,6 +41159,9 @@
 244686	2	Dummy Smart Box48	0	1	icon_items.gift_box04_tex
 244687	2	Dummy Smart Box49	0	1	icon_items.gift_box04_tex
 244688	2	Dummy Smart Box50	0	1	icon_items.gift_box04_tex
+244691	3	Flying Skillbook Loot Box	0	0	icon_items.tresurebox2_tex
+244692	3	Normal Mechanic Costume Loot Box	0	0	icon_items.tresurebox2_tex
+244693	3	Dyeable Mechanic Costume Loot Box	0	0	icon_items.tresurebox2_tex
 210000	1	Riding Skill: Sleipnir	0	0	icon_items.skillbook_rider1_tex
 210001	1	Riding Skill: Sleipnir	0	0	icon_items.skillbook_rider1_tex
 210002	1	Riding Skill: Tawny Huntress	0	0	icon_items.skillbook_lion1_tex
@@ -43639,6 +44053,23 @@
 216733	3	Box 3	0	0	icon_items.gachabox_tex
 216734	3	Box 4	0	0	icon_items.gachabox_tex
 216736	3	Box 6	0	0	icon_items.gachabox_tex
+216737	2	Sealed Chest	0	0	icon_items.premiumbox_weapon1_tex
+216738	3	Magic Chest	0	0	icon_items.premiumbox_weapon4_tex
+216739	1	Magic Snowflake	0	0	icon_items.pure_white_magic_crystal_tex
+216740	1	Liquid Ice	0	0	icon_items.armor_blue_blood_tex
+216741	1	Black Ice	0	0	icon_items.bluerock_tex
+216742	1	Sphere of Cold	0	0	icon_items.fullmoon_gemstone_tex
+216743	1	Rune of Ice	0	0	icon_items.corecolor7_4_tex
+216744	2	Ice Сube	0	0	icon_items.cube_reward14_tex
+216745	1	Heart of Winter	0	0	icon_items.union_quest3_tex
+216746	2	Gift of Santa Claus	0	0	icon_items.premiumbox_dress1_tex
+216747	3	Crystal Casket	0	0	icon_items.q_boxjewel_tex
+216748	3	Crystal plate	0	0	icon_items.smallenergya1_tex
+216749	3	Crystal	0	0	icon_items.q_prism_tex
+216750	3	Chest of the Beast Master	0	0	icon_items.premiumbox_battlepet1_tex
+216751	3	Meruma's Cache	0	0	icon_items.premiumbox_crystalweapon_tex
+216752	3	Box with mysterious weapons	0	0	icon_items.premiumbox_enchantmaterial_tex
+216753	3	Bag with accessories	0	0	icon_items.gachabox_face
 219000	0	Manual: Outlaw Declaration	0	0	icon_items.codebook_tex
 247623	2	Smart Box: Swimwear Male A + Female A	0	1	icon_items.gift_box04_tex
 247624	2	Smart Box: Swimwear Male B + Female D	0	1	icon_items.gift_box04_tex
@@ -43687,6 +44118,17 @@
 247667	2	Wheel of Fortune box	0	0	icon_items.premiumbox_flyveh5_tex
 247668	2	Wheel of Fortune box	0	0	icon_items.premiumbox_flyveh5_tex
 247669	2	Wheel of Fortune box	0	0	icon_items.premiumbox_flyveh5_tex
+247670	2	Smartbox: Mechanical Costume (non-tradable)	0	1	icon_items.premiumbox_dress3_tex
+247671	2	Smartbox: Mechanical Costume (tradable)	0	1	icon_items.premiumbox_dress3_tex
+247672	2	Smartbox: Mechanical Costume (3 days)	0	1	icon_items.premiumbox_dress3_tex
+247673	2	Smartbox: Mechanical Costume (14 days)	0	1	icon_items.premiumbox_dress3_tex
+247674	2	Smartbox: Dyeable Mechanical Costume (non-tradable)	0	1	icon_items.premiumbox_dress3_tex
+247675	2	Smartbox: Dyeable Mechanical Costume (tradable)	0	1	icon_items.premiumbox_dress3_tex
+247676	2	Smartbox: Dyeable Mechanical Costume (3 days)	0	1	icon_items.premiumbox_dress3_tex
+247677	2	Smartbox: Dyeable Mechanical Costume (14 days)	0	1	icon_items.premiumbox_dress3_tex
+247678	2	Wheel of Fortune box	0	0	icon_items.premiumbox_flyveh5_tex
+855596	3	Placeholder Delivery Elite Consumable Box	0	1	icon_items.gift_box04_tex
+855597	2	Elite Gift Box	0	1	icon_items.gift_box03_tex
 250000	3	TERA-Sonderkommando (Menschenherren)	0	0	icon_equipments.pc_event_43_m_tex
 250001	3	TERA-Sonderkommando (Menschenherren)	0	0	icon_equipments.pc_event_43_m_tex
 250002	3	TERA-Sonderkommando (Menschenherren)	0	0	icon_equipments.pc_event_43_m_tex
@@ -50983,6 +51425,18 @@
 257681	3	Profimikrofon	0	0	icon_equipments.acc_627_tex
 257682	3	Profimikrofon	0	0	icon_equipments.acc_627_tex
 257683	3	Profimikrofon	0	0	icon_equipments.acc_627_tex
+257684	3	Färbbares Schleifchenkleid der Magd (Elin)	0	0	icon_equipments.pc_event_19a_popori_f_dye_tex
+257685	3	Färbbares Schleifchenkleid der Magd (Elin)	0	0	icon_equipments.pc_event_19a_popori_f_dye_tex
+257686	3	Färbbares Schleifchenkleid der Magd (Elin)	0	0	icon_equipments.pc_event_19a_popori_f_dye_tex
+257687	3	Färbbares Schleifchenkleid der Magd (Elin)	0	0	icon_equipments.pc_event_19a_popori_f_dye_tex
+257688	3	Färbbares Schleifchenkleid der Magd (Elin)	0	0	icon_equipments.pc_event_19a_popori_f_dye_tex
+257689	3	Färbbares Schleifchenkleid der Magd (Elin)	0	0	icon_equipments.pc_event_19a_popori_f_dye_tex
+257690	3	Färbbares Schleifchenkleid der Magd (Elin)	0	0	icon_equipments.pc_event_19a_popori_f_dye_tex
+257691	3	Färbbares Schleifchenkleid der Magd (Elin)	0	0	icon_equipments.pc_event_19a_popori_f_dye_tex
+257692	3	Färbbares Schleifchenkleid der Magd (Elin)	0	0	icon_equipments.pc_event_19a_popori_f_dye_tex
+257693	3	Färbbares Schleifchenkleid der Magd (Elin)	0	0	icon_equipments.pc_event_19a_popori_f_dye_tex
+257694	3	Färbbares Schleifchenkleid der Magd (Elin)	0	0	icon_equipments.pc_event_19a_popori_f_dye_tex
+257695	3	Färbbares Schleifchenkleid der Magd (Elin)	0	0	icon_equipments.pc_event_19a_popori_f_dye_tex
 220353	3	T-cat 01	0	0	icon_items.tcattoken_tex
 220354	3	T-cat 02	0	0	icon_items.tcattoken_tex
 222678	3	Massive Loot Box 	0	0	icon_items.mysterybox2_tex
@@ -53333,6 +53787,14 @@
 246153	2	Trickkiste: Färbbares Disko-Sternchen	0	1	icon_items.gift_box04_tex
 246154	2	Trickkiste: Färbbares Disko-Sternchen (30 Tage)	0	1	icon_items.gift_box04_tex
 246155	2	Trickkiste: Färbbares Disko-Sternchen (7 Tage)	0	1	icon_items.gift_box04_tex
+246156	2	Trickkiste: IM39-Prototyp	0	1	icon_items.gift_box04_tex
+246157	2	Trickkiste: IM39-Prototyp (30 Tage)	0	1	icon_items.gift_box04_tex
+246158	2	Trickkiste: IM39-Prototyp (7 Tage)	0	1	icon_items.gift_box04_tex
+246159	2	Trickkiste: IM39-Prototyp (3 Tage)	0	1	icon_items.gift_box04_tex
+246160	2	Trickkiste: IM39-Prototyp COLORSTORM	0	1	icon_items.gift_box04_tex
+246161	2	Trickkiste: IM39-Prototyp COLORSTORM (30 Tage)	0	1	icon_items.gift_box04_tex
+246162	2	Trickkiste: IM39-Prototyp COLORSTORM (7 Tage)	0	1	icon_items.gift_box04_tex
+246163	2	Trickkiste: IM39-Prototyp COLORSTORM (3 Tage)	0	1	icon_items.gift_box04_tex
 100507	0	T	0	1	icon_items.event_letter01_tex
 100508	0	E	0	1	icon_items.event_letter02_tex
 100509	0	R	0	1	icon_items.event_letter03_tex
@@ -55408,6 +55870,7 @@
 140308	2	Truhe des erfahrenen Kriegers	0	0	icon_items.premiumbox_etc3_tex
 140309	2	Funkelnde Truhe des Kriegers	0	0	icon_items.premiumbox_etc3_tex
 149183	1	Niveotsplitter	0	0	icon_items.corecolor3_1_tex
+149388	3	Anfrage: Finale in der Spitze der Furcht	0	0	icon_items.weapon_scrolla6_tex
 149646	2	TERA HOT TIME BOX	0	0	icon_items.gift_box06_tex
 149760	0	T	0	0	icon_items.event_letter01_tex
 149761	0	E	0	0	icon_items.event_letter02_tex

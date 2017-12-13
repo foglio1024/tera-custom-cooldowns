@@ -11617,18 +11617,18 @@
 		<Monster name="Уничтожьте Горкоса, призванного Барбатосом." id="911" isBoss="False" hp="0" />
 		<Monster name="Уничтожьте Молоха, призванного Барбатосом." id="912" isBoss="False" hp="0" />
 		<Monster name="Убейте Барбатоса." id="913" isBoss="False" hp="0" />
-		<Monster name="Горкос" id="1000" isBoss="True" hp="1100000000" />
+		<Monster name="Горкос" id="1000" isBoss="True" hp="1800000000" />
 		<Monster name="Телепорт" id="1501" isBoss="False" hp="10000" />
 		<Monster name="Телепорт" id="1502" isBoss="False" hp="10000" />
 		<Monster name="Телепорт" id="1503" isBoss="False" hp="10000" />
-		<Monster name="Молох" id="2000" isBoss="True" hp="1000000000" />
-		<Monster name="Барбатос" id="3000" isBoss="True" hp="1100000000" />
+		<Monster name="Молох" id="2000" isBoss="True" hp="1650000000" />
+		<Monster name="Барбатос" id="3000" isBoss="True" hp="1850000000" />
 		<Monster name="Раненый солдат" id="5001" isBoss="False" hp="200" />
 		<Monster name="Раненый солдат" id="5002" isBoss="False" hp="366797" />
 		<Monster name="Раненый солдат" id="5003" isBoss="False" hp="200" />
-		<Monster name="Маг кровавого гнева" id="5004" isBoss="False" hp="4000000" />
-		<Monster name="Архидеванский лучник" id="5005" isBoss="False" hp="4000000" />
-		<Monster name="Архидеванский воин" id="5006" isBoss="False" hp="7000000" />
+		<Monster name="Маг кровавого гнева" id="5004" isBoss="False" hp="3500000" />
+		<Monster name="Архидеванский лучник" id="5005" isBoss="False" hp="3500000" />
+		<Monster name="Архидеванский воин" id="5006" isBoss="False" hp="5000000" />
 		<Monster name="Солдат" id="5007" isBoss="False" hp="10000" />
 		<Monster name="Солдат" id="5008" isBoss="False" hp="945" />
 		<Monster name="Солдат" id="5009" isBoss="False" hp="13038" />
@@ -12710,9 +12710,9 @@
 		<Monster name="Реним" id="2000" isBoss="True" hp="1350000000" />
 		<Monster name="Сайрекс" id="3000" isBoss="True" hp="1600000000" />
 		<Monster name="Бидунг" id="5001" isBoss="False" hp="366797" />
-		<Monster name="Маг кровавого гнева" id="5002" isBoss="False" hp="20000000" />
-		<Monster name="Архидеванский лучник" id="5003" isBoss="False" hp="15000000" />
-		<Monster name="Архидеванский воин" id="5004" isBoss="False" hp="25000000" />
+		<Monster name="Маг кровавого гнева" id="5002" isBoss="False" hp="27000000" />
+		<Monster name="Архидеванский лучник" id="5003" isBoss="False" hp="23000000" />
+		<Monster name="Архидеванский воин" id="5004" isBoss="False" hp="32000000" />
 		<Monster name="Архидеванский лучник" id="6001" isBoss="False" hp="4000000" />
 		<Monster name="Архидеванский лучник" id="6002" isBoss="False" hp="4000000" />
 		<Monster name="Архидеванский лучник" id="6003" isBoss="False" hp="4000000" />
@@ -14209,9 +14209,9 @@
 		<Monster name="Пустоголовый Реним" id="2000" isBoss="True" hp="1690000000" />
 		<Monster name="Альфа-сайрекс" id="3000" isBoss="True" hp="1870000000" />
 		<Monster name="Бидунг" id="5001" isBoss="False" hp="366797" />
-		<Monster name="Маг кровавого гнева" id="5002" isBoss="False" hp="25000000" />
-		<Monster name="Архидеванский лучник" id="5003" isBoss="False" hp="20000000" />
-		<Monster name="Архидеванский воин" id="5004" isBoss="False" hp="30000000" />
+		<Monster name="Маг кровавого гнева" id="5002" isBoss="False" hp="34000000" />
+		<Monster name="Архидеванский лучник" id="5003" isBoss="False" hp="30000000" />
+		<Monster name="Архидеванский воин" id="5004" isBoss="False" hp="38000000" />
 	</Zone>
 	<Zone id="1022" name="Аркс-Умбра" >
 		<Monster name="Тералит-покоритель Нексуса" id="101" isBoss="True" hp="9118362" />
@@ -14269,7 +14269,15 @@
 		<Monster name="Тыкван с плащом" id="112" isBoss="False" hp="100000000" />
 		<Monster name="Тыкван" id="400" isBoss="False" hp="66578" />
 		<Monster name="Кумас" id="1000" isBoss="False" hp="147000000" />
+		<Monster name="Опасный калас-защитник" id="42733" isBoss="False" hp="876340" />
+		<Monster name="Опасный хулрап-лиходей" id="42734" isBoss="False" hp="876340" />
+		<Monster name="Аргонский хищник" id="88511" isBoss="False" hp="432000000" />
+		<Monster name="Локмар Соргалур" id="88516" isBoss="False" hp="1650000000" />
+		<Monster name="Мелкатран" id="88517" isBoss="False" hp="1350000000" />
+		<Monster name="Мелдита" id="88519" isBoss="False" hp="1950000000" />
 		<Monster name="Рождественский кошмар" id="300937" isBoss="False" hp="723" />
+		<Monster name="Сильный Арзакаар" id="885061" isBoss="False" hp="405000000" />
+		<Monster name="Обитель Манайи" id="885200" isBoss="False" hp="3150000000" />
 		<Monster name="Тень" id="1010100" isBoss="False" hp="1" />
 		<Monster name="Тень" id="1010101" isBoss="False" hp="1" />
 		<Monster name="Тень" id="1010102" isBoss="False" hp="1" />
@@ -14539,6 +14547,7 @@
 		<Monster name="Страж Торговцев" id="3000022" isBoss="False" hp="599206" />
 		<Monster name="Страж Союза Просвещенных" id="3000023" isBoss="False" hp="599206" />
 		<Monster name="Страж Железного Ордена" id="3000024" isBoss="False" hp="599206" />
+		<Monster name="Ледяное Пламя" id="9751000" isBoss="False" hp="5974350795" />
 		<Monster name="Миньон-защитник" id="10235001" isBoss="False" hp="7612" />
 		<Monster name="Миньон-защитник" id="10235002" isBoss="False" hp="9435" />
 		<Monster name="Миньон-защитник" id="10235003" isBoss="False" hp="12396" />

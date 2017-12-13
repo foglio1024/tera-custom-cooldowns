@@ -11617,18 +11617,18 @@
 		<Monster name="Besiegt Ghorgoyn" id="911" isBoss="False" hp="0" />
 		<Monster name="Besiegt Molorkh" id="912" isBoss="False" hp="0" />
 		<Monster name="Besiegt Baalbaoth" id="913" isBoss="False" hp="0" />
-		<Monster name="Ghorgoyn" id="1000" isBoss="True" hp="1100000000" />
+		<Monster name="Ghorgoyn" id="1000" isBoss="True" hp="1800000000" />
 		<Monster name="Teleportal" id="1501" isBoss="False" hp="10000" />
 		<Monster name="Teleportal" id="1502" isBoss="False" hp="10000" />
 		<Monster name="Teleportal" id="1503" isBoss="False" hp="10000" />
-		<Monster name="Molorkh" id="2000" isBoss="True" hp="1000000000" />
-		<Monster name="Baalbaoth" id="3000" isBoss="True" hp="1100000000" />
+		<Monster name="Molorkh" id="2000" isBoss="True" hp="1650000000" />
+		<Monster name="Baalbaoth" id="3000" isBoss="True" hp="1850000000" />
 		<Monster name="Verletzter Soldat" id="5001" isBoss="False" hp="200" />
 		<Monster name="Verletzter Soldat" id="5002" isBoss="False" hp="366797" />
 		<Monster name="Verletzter Soldat" id="5003" isBoss="False" hp="200" />
-		<Monster name="Erzdevanerzauberer" id="5004" isBoss="False" hp="4000000" />
-		<Monster name="Erzdevanerbogenschütze" id="5005" isBoss="False" hp="4000000" />
-		<Monster name="Erzdevanerkrieger" id="5006" isBoss="False" hp="7000000" />
+		<Monster name="Erzdevanerzauberer" id="5004" isBoss="False" hp="3500000" />
+		<Monster name="Erzdevanerbogenschütze" id="5005" isBoss="False" hp="3500000" />
+		<Monster name="Erzdevanerkrieger" id="5006" isBoss="False" hp="5000000" />
 		<Monster name="Soldat" id="5007" isBoss="False" hp="10000" />
 		<Monster name="Soldat" id="5008" isBoss="False" hp="945" />
 		<Monster name="Soldat" id="5009" isBoss="False" hp="13038" />
@@ -12710,9 +12710,9 @@
 		<Monster name="Renim" id="2000" isBoss="True" hp="1350000000" />
 		<Monster name="Syruk" id="3000" isBoss="True" hp="1600000000" />
 		<Monster name="Bidung" id="5001" isBoss="False" hp="366797" />
-		<Monster name="Erzdevanerzauberer" id="5002" isBoss="False" hp="20000000" />
-		<Monster name="Erzdevanerbogenschütze" id="5003" isBoss="False" hp="15000000" />
-		<Monster name="Erzdevanerkrieger" id="5004" isBoss="False" hp="25000000" />
+		<Monster name="Erzdevanerzauberer" id="5002" isBoss="False" hp="27000000" />
+		<Monster name="Erzdevanerbogenschütze" id="5003" isBoss="False" hp="23000000" />
+		<Monster name="Erzdevanerkrieger" id="5004" isBoss="False" hp="32000000" />
 		<Monster name="Erzdevanerbogenschütze" id="6001" isBoss="False" hp="4000000" />
 		<Monster name="Erzdevanerbogenschütze" id="6002" isBoss="False" hp="4000000" />
 		<Monster name="Erzdevanerbogenschütze" id="6003" isBoss="False" hp="4000000" />
@@ -14209,9 +14209,9 @@
 		<Monster name="Gehirnwäsche-Renim" id="2000" isBoss="True" hp="1690000000" />
 		<Monster name="Alpha-Syruk" id="3000" isBoss="True" hp="1870000000" />
 		<Monster name="Bidung" id="5001" isBoss="False" hp="366797" />
-		<Monster name="Erzdevanerzauberer" id="5002" isBoss="False" hp="25000000" />
-		<Monster name="Erzdevanerbogenschütze" id="5003" isBoss="False" hp="20000000" />
-		<Monster name="Erzdevanerkrieger" id="5004" isBoss="False" hp="30000000" />
+		<Monster name="Erzdevanerzauberer" id="5002" isBoss="False" hp="34000000" />
+		<Monster name="Erzdevanerbogenschütze" id="5003" isBoss="False" hp="30000000" />
+		<Monster name="Erzdevanerkrieger" id="5004" isBoss="False" hp="38000000" />
 	</Zone>
 	<Zone id="1022" name="Arx Umbra" >
 		<Monster name="Nexusteralithbezwinger" id="101" isBoss="True" hp="9118362" />
@@ -14269,7 +14269,15 @@
 		<Monster name="Hohler Kürbiskopf" id="112" isBoss="False" hp="100000000" />
 		<Monster name="Kürbiskopf" id="400" isBoss="False" hp="66578" />
 		<Monster name="Kumas" id="1000" isBoss="False" hp="147000000" />
+		<Monster name="Präfekt" id="42733" isBoss="False" hp="876340" />
+		<Monster name="Ermächtigter Hulrapbarbar" id="42734" isBoss="False" hp="876340" />
+		<Monster name="Argonenräuber" id="88511" isBoss="False" hp="432000000" />
+		<Monster name="Lokmarsorgalur" id="88516" isBoss="False" hp="1650000000" />
+		<Monster name="Akalath Melkaran" id="88517" isBoss="False" hp="1350000000" />
+		<Monster name="Meldita" id="88519" isBoss="False" hp="1950000000" />
 		<Monster name="Weihnachtsalbtraum" id="300937" isBoss="False" hp="723" />
+		<Monster name="Kräftiger Arzakaar" id="885061" isBoss="False" hp="405000000" />
+		<Monster name="Manya" id="885200" isBoss="False" hp="3150000000" />
 		<Monster name="Schatten" id="1010100" isBoss="False" hp="1" />
 		<Monster name="Schatten" id="1010101" isBoss="False" hp="1" />
 		<Monster name="Schatten" id="1010102" isBoss="False" hp="1" />
@@ -14539,6 +14547,7 @@
 		<Monster name="Freihandelswache" id="3000022" isBoss="False" hp="599206" />
 		<Monster name="Erleuchtungswache" id="3000023" isBoss="False" hp="599206" />
 		<Monster name="Eiserne Wache" id="3000024" isBoss="False" hp="599206" />
+		<Monster name="Kelsaik" id="9751000" isBoss="False" hp="5974350795" />
 		<Monster name="Leibeigener des Schutzes" id="10235001" isBoss="False" hp="7612" />
 		<Monster name="Leibeigener des Schutzes" id="10235002" isBoss="False" hp="9435" />
 		<Monster name="Leibeigener des Schutzes" id="10235003" isBoss="False" hp="12396" />
