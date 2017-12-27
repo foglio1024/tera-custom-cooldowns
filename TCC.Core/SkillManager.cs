@@ -1,4 +1,5 @@
-﻿using TCC.Data.Databases;
+﻿using System;
+using TCC.Data.Databases;
 using TCC.ViewModels;
 
 namespace TCC
@@ -38,7 +39,7 @@ namespace TCC
 
 
 
-        public static void AddSkill(uint id, uint cd)
+        public static void AddSkill(uint id, ulong cd)
         {
             if (SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out Skill skill))
             {
@@ -54,7 +55,15 @@ namespace TCC
         {
             if (ItemSkillsDatabase.TryGetItemSkill(id, out Skill brooch))
             {
-                RouteSkill(new SkillCooldown(brooch, cd, CooldownType.Item, CooldownWindowViewModel.Instance.GetDispatcher()));
+                try
+                {
+                    RouteSkill(new SkillCooldown(brooch, cd, CooldownType.Item, CooldownWindowViewModel.Instance.GetDispatcher()));
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
 
         }

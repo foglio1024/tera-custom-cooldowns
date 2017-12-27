@@ -54,7 +54,7 @@ namespace TCC.Controls
             AnimateCooldown();
         }
 
-        private int _secondsPassed = 0;
+        private ulong _secondsPassed = 0;
         private void _context_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "Refresh")

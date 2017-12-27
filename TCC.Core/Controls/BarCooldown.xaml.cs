@@ -93,7 +93,7 @@ namespace TCC.Controls
             }
         }
 
-        private void AnimateCooldown(uint cooldown)
+        private void AnimateCooldown(ulong cooldown)
         {
             IsRunning = true;
             _numberTimer.IsEnabled = false;

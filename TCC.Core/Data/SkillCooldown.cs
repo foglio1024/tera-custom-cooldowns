@@ -8,8 +8,8 @@ namespace TCC
     {
         public Dispatcher Dispatcher { get => _dispatcher; }
         public Skill Skill { get; set; }
-        public uint Cooldown { get; set; }
-        public uint OriginalCooldown { get; set; }
+        public ulong Cooldown { get; set; }
+        public ulong OriginalCooldown { get; set; }
         public CooldownType Type { get; set; }
         private Timer _timer;
 
@@ -18,7 +18,7 @@ namespace TCC
             _dispatcher = d;
         }
 
-        public SkillCooldown(Skill sk, uint cd, CooldownType t, Dispatcher d)
+        public SkillCooldown(Skill sk, ulong cd, CooldownType t, Dispatcher d)
         {
             _dispatcher = d;
 
@@ -41,7 +41,7 @@ namespace TCC
             _timer?.Stop();
         }
 
-        public void Refresh(uint cd)
+        public void Refresh(ulong cd)
         {
             Cooldown = cd;
             NotifyPropertyChanged("Refresh");

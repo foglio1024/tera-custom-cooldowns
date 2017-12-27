@@ -59,8 +59,8 @@
 51	Endurance	Buff	True	perc	36000000	0	0.88	DPS測試用昏厥	7216	DPS推測用炸彈	為了DPS測試的昏厥狀態。追加套用下述異常狀態$BR抗打減少 $H_W_BAD12%$COLOR_END (粉碎防具疊加3)$BR抗打減少 $H_W_BAD10%$COLOR_END (痛苦咒縛紋章)$BR暴擊抵抗減少 $H_W_BAD-12$COLOR_END (痛苦咒縛特性)	icon_items.q_bones_tex	icon_items.q_bones_tex	True
 51	CritResist	Buff	True	abs	36000000	0	-12	DPS測試用昏厥	7216	DPS推測用炸彈	為了DPS測試的昏厥狀態。追加套用下述異常狀態$BR抗打減少 $H_W_BAD12%$COLOR_END (粉碎防具疊加3)$BR抗打減少 $H_W_BAD10%$COLOR_END (痛苦咒縛紋章)$BR暴擊抵抗減少 $H_W_BAD-12$COLOR_END (痛苦咒縛特性)	icon_items.q_bones_tex	icon_items.q_bones_tex	True
 51	Stun	Buff	True	swch	36000000	0	4	DPS測試用昏厥	7216	DPS推測用炸彈	為了DPS測試的昏厥狀態。追加套用下述異常狀態$BR抗打減少 $H_W_BAD12%$COLOR_END (粉碎防具疊加3)$BR抗打減少 $H_W_BAD10%$COLOR_END (痛苦咒縛紋章)$BR暴擊抵抗減少 $H_W_BAD-12$COLOR_END (痛苦咒縛特性)	icon_items.q_bones_tex	icon_items.q_bones_tex	True
-101	Immune	Buff	True	16	2100	0	0	起身攻擊			持續時間內免疫所有反作用。	icon_skills.risingattack2_tex	icon_skills.risingattack_tex	True
-101	StatusImmune	Buff	True	swch	2100	0	0	起身攻擊			持續時間內免疫所有反作用。	icon_skills.risingattack2_tex	icon_skills.risingattack_tex	True
+101	Immune	Buff	True	16	2100	0	0	起身攻擊			持續時間內免疫所有反作用。	icon_skills.risingattack_tex	icon_skills.risingattack_tex	True
+101	StatusImmune	Buff	True	swch	2100	0	0	起身攻擊			持續時間內免疫所有反作用。	icon_skills.risingattack_tex	icon_skills.risingattack_tex	True
 201	Power	Buff	True	abs	2400000	0	17	力量祝福 I			獲得堅強的力量祝福，力量提升$H_W_GOOD17$COLOR_END。	icon_skills.attackup_tex	icon_skills.attackup_tex	False
 202	Power	Buff	True	abs	2400000	0	25	亞倫的祝福 V			獲得堅強的力量祝福，力量提升$H_W_GOOD25$COLOR_END。	icon_skills.attackup_tex	icon_skills.attackup_tex	False
 301	Stun	Stun	False	swch	6000	0	5	雷電刻印 I			因為強大的電氣衝擊而昏厥了。	icon_skills.shocktrap_tex	icon_skills.shocktrap_tex	True
@@ -2024,8 +2024,8 @@
 500150	ASpd	Buff	True	perc	15000	0	1.3	魔力強化 II			攻擊速度增加30%，使用技能攻擊對象為怪物時提升$H_W_GOOD20%$COLOR_END的傷害值。	icon_skills.c5_strengthenmana	icon_skills.c5_strengthenmana	True
 500150	AtkPotion	Buff	True	perc	15000	0	1.2	魔力強化 II			攻擊速度增加30%，使用技能攻擊對象為怪物時提升$H_W_GOOD20%$COLOR_END的傷害值。	icon_skills.c5_strengthenmana	icon_skills.c5_strengthenmana	True
 500150	DelayedEffect	Buff	True	swch	15000	0	501606	魔力強化 II			攻擊速度增加30%，使用技能攻擊對象為怪物時提升$H_W_GOOD20%$COLOR_END的傷害值。	icon_skills.c5_strengthenmana	icon_skills.c5_strengthenmana	True
-500200	MovSpd	Debuff	False	setp	5000	0	0.3	混沌詛咒			因為結冰大地的深層寒氣，移動速度減少$H_W_GOOD70%$COLOR_END。	icon_skills.spiritofconfusion_tex	icon_skills.freezingtheearth_tex	True
-500200	HPDrain	Debuff	False	perc	5000	0	0.9	混沌詛咒			因為結冰大地的深層寒氣，移動速度減少$H_W_GOOD70%$COLOR_END。	icon_skills.spiritofconfusion_tex	icon_skills.freezingtheearth_tex	True
+500200	MovSpd	Debuff	False	setp	5000	0	0.3	結冰大地			因為結冰大地的深層寒氣，移動速度減少$H_W_GOOD70%$COLOR_END。	icon_skills.freezingtheearth_tex	icon_skills.freezingtheearth_tex	True
+500200	HPDrain	Debuff	False	perc	5000	0	0.9	結冰大地			因為結冰大地的深層寒氣，移動速度減少$H_W_GOOD70%$COLOR_END。	icon_skills.freezingtheearth_tex	icon_skills.freezingtheearth_tex	True
 500300	MPChange	Buff	True	abs	25000	2	120	魔力凝集 I			每$H_W_GOOD2s$COLOR_END逐漸恢復$H_W_GOOD120$COLOR_END的MP。	icon_skills.mpcondensing_tex	icon_skills.mpcondensing_tex	True
 500301	MPChange	Buff	True	abs	25000	1	120	魔力凝集			每$H_W_GOOD1s$COLOR_END逐漸恢復$H_W_GOOD120$COLOR_END的MP。	icon_skills.mpcondensing_tex	icon_skills.mpcondensing_tex	True
 500500	MovSpd	Debuff	False	setp	5000	0	0.8	凝霜術			身體結冰移動速度減少$H_W_GOOD20%$COLOR_END。	icon_skills.c5_iceorb	icon_skills.icicle_tex	True
@@ -2408,6 +2408,7 @@
 757012	StunKnockDown	Debuff	False	swch	20000	0	6	哐哐！			在一定時間內接連受到強力衝擊，躺下來了。	icon_status.minuscriticalresist_tex	icon_status.minuscriticalresist_tex	True
 757013	HPChange	Debuff	False	perc	3000	2	0.1	超酷的封印劍			封印劍會自行回復 hp	icon_status.minuscriticalresist_tex	icon_status.minuscriticalresist_tex	False
 757015	Stun	Buff	False	swch	1500	0	5	吸收			熔岩怪物正在吸收水蒸氣。請快處理消滅他們吧。	icon_skills.paralysistrap_tex	icon_skills.paralysistrap_tex	True
+757015	220	Buff	False	seta	1500	0	0	吸收			熔岩怪物正在吸收水蒸氣。請快處理消滅他們吧。	icon_skills.paralysistrap_tex	icon_skills.paralysistrap_tex	True
 757016	Endurance	Buff	True	perc	0	0	10	要堅固			熔岩怪物為了吸收水蒸氣，佔據位置躺下來了。抗打提升$H_W_GOOD900%$COLOR_END。	icon_status.dimensionguard_tex	icon_status.dimensionguard_tex	True
 757017	MovSpd	Debuff	True	setp	0	0	0.8	阿凱倫的保護			獲得阿凱倫的保護。在保護持續的時間內只會踩各位。	icon_skills.manashield_tex	icon_skills.manashield_tex	True
 757017	220	Debuff	True	swch	0	0	0	阿凱倫的保護			獲得阿凱倫的保護。在保護持續的時間內只會踩各位。	icon_skills.manashield_tex	icon_skills.manashield_tex	True
@@ -3284,7 +3285,7 @@
 2000000	40	Buff	True	perc	3600000	1	1.3	幸運收集家 30 (1小時)			1小時內狩獵時獲得金幣增加30%。	icon_items.f2p_dropgoldbooster_tex	icon_items.f2p_dropgoldbooster_tex	True
 2000001	41	Buff	True	perc	3600000	1	1.3	合成名手 30 (1小時)			1小時內任務金幣獎勵增加30%。	icon_items.f2p_questrewardbooster_tex	icon_items.f2p_questrewardbooster_tex	True
 2000002	41	Buff	True	perc	3600000	1	1.5	合成名手 50 (1小時)			1小時內任務金幣獎勵增加50%。	icon_items.f2p_questrewardbooster_tex	icon_items.f2p_questrewardbooster_tex	True
-2000003	41	Buff	True	perc	3600000	1	2	合成名手 100 (1小時)			1小時內任務金幣獎勵增加100%。	icon_items.f2p_questrewardbooster_tex	icon_items.f2p_questrewardbooster_tex	True
+2000003	41	Buff	True	perc	3600000	1	2	合成名手 100 (1小時)	855586	협상의 명수 100 (1시간)	1小時內任務金幣獎勵增加100%。	icon_items.f2p_questrewardbooster_tex	icon_items.f2p_questrewardbooster_tex	True
 2000004	42	Buff	True	perc	3600000	1	1.3	信賴的證明 30 (1小時)			1小時內獲得的聲望數值和聲望點數增加30%。 但獲得戰場聲望數值和戰場聲望點數時則不套用。	icon_items.f2p_reputationbooster_tex	icon_items.f2p_reputationbooster_tex	True
 2000005	42	Buff	True	perc	3600000	1	1.5	信賴的證明 50 (1小時)			1小時內獲得的聲望數值和聲望點數增加50%。 但獲得戰場聲望數值和戰場聲望點數時則不套用。	icon_items.f2p_reputationbooster_tex	icon_items.f2p_reputationbooster_tex	True
 2000006	42	Buff	True	perc	3600000	1	2	信賴的證明 100 (1小時)			1小時內獲得的聲望數值和聲望點數增加100%。 但獲得戰場聲望數值和戰場聲望點數時則不套用。	icon_items.f2p_reputationbooster_tex	icon_items.f2p_reputationbooster_tex	True
@@ -3350,6 +3351,10 @@
 5000002	296	Buff	True	perc	0	1	1.1	製作大成功機率提升			此為大陸上備受稱讚的鐵匠頓坎家族的祝福。$BR進行製作時大成功機率增加10%。	icon_items.artisanmaster_up_tex	icon_items.artisanmaster_up_tex	True
 5000003	CCrystalBind	Buff	True	abs	0	0	1	完整的水晶防護			死亡時可防止水晶碎裂。	icon_items.q_closedspace_stone_05_tex	icon_items.q_closedspace_stone_05_tex	True
 5000004	GatheringTime	Buff	True	perc	0	0	0.6	採集速度提升			採集速度增加$H_W_GOOD40%$COLOR_END。	icon_status.collect_speedup_tex	icon_status.collect_speedup_tex	True
+5060000	AtkPotion	Buff	True	perc	1800000	0	1.15	강화의 물약	854569	강화의 물약	공격력이 $H_W_GOOD15%$COLOR_END 증가됩니다. 서버간 파티 매칭 버프와 중첩되지 않습니다.	icon_status.plusattack_tex	icon_status.plusattack_tex	True
+5060001	ASpd	Buff	True	perc	1800000	0	1.06	용맹의 물약	855593	용맹의 물약	스킬 데미지가 $H_W_GOOD12%$COLOR_END 향상되고, 받는 피해가 $H_W_GOOD10%$COLOR_END 감소됩니다. 추가로 공격 속도도 $H_W_GOOD6%$COLOR_END 향상됩니다.	icon_items.potion10_tex	icon_items.potion10_tex	True
+5060001	DefPotion	Buff	True	perc	1800000	0	0.9	용맹의 물약	855593	용맹의 물약	스킬 데미지가 $H_W_GOOD12%$COLOR_END 향상되고, 받는 피해가 $H_W_GOOD10%$COLOR_END 감소됩니다. 추가로 공격 속도도 $H_W_GOOD6%$COLOR_END 향상됩니다.	icon_items.potion10_tex	icon_items.potion10_tex	True
+5060001	AtkPotion	Buff	True	perc	1800000	0	1.12	용맹의 물약	855593	용맹의 물약	스킬 데미지가 $H_W_GOOD12%$COLOR_END 향상되고, 받는 피해가 $H_W_GOOD10%$COLOR_END 감소됩니다. 추가로 공격 속도도 $H_W_GOOD6%$COLOR_END 향상됩니다.	icon_items.potion10_tex	icon_items.potion10_tex	True
 5690001	StaminaDecay	Buff	True	seta	0	0	0	記憶的追蹤者			為了收集記憶的殘骸，將無法破壞強化水晶。	icon_skills.refineresin_tex	icon_skills.refineresin_tex	True
 5690001	CrystalBind	Buff	True	abs	0	0	1	記憶的追蹤者			為了收集記憶的殘骸，將無法破壞強化水晶。	icon_skills.refineresin_tex	icon_skills.refineresin_tex	True
 5690002	Resurrect	Buff	True	seta	60000	0	1	記憶重建			透過記憶重建，死去的記憶被刪除後可重新復活。	icon_status.mpsuckdown_tex	icon_status.mpsuckdown_tex	True
@@ -3398,6 +3403,8 @@
 7101000	Power	Debuff	True	perc	600000	0	1.3	魔力凝結			凝結強大的魔力，力量與攻擊速度增加。此異常狀態無法解除。			True
 7101000	ASpd	Debuff	True	perc	600000	0	1.1	魔力凝結			凝結強大的魔力，力量與攻擊速度增加。此異常狀態無法解除。			True
 7101008	Power	Buff	True	perc	600000	0	1.05	火與閃電之氣			寇勒高斯透過屬性的氣息增加了自身的攻擊力。	icon_status.darkriftgravity_tex	icon_status.darkriftgravity_tex	True
+7101030	StackCounter	DOT	True	seta	15000	0	7101031	火中毒			因火之氣息而中毒。若受到被其它人轉移的火將立即死亡。	icon_status.orangeaura_tex	icon_status.orangeaura_tex	True
+7101032	StackCounter	DOT	True	seta	15000	0	7101033	閃電中毒			因閃電的氣息而中毒。若受到被其它人轉移的閃電將立即死亡。	icon_status.paralyzestatus_tex	icon_status.paralyzestatus_tex	True
 7102000	Endurance	Debuff	True	perc	40000	0	1	這地方危險了!!			不祥的魔力氣息包圍著身體。要快點從這個地方逃出去才行。治癒量減少 $H_W_BAD30%$COLOR_END，$H_W_BAD5$COLOR_END重疊時好像會發生不好的事。			True
 7102000	IncreasedHeal	Debuff	True	perc	40000	0	0.3	這地方危險了!!			不祥的魔力氣息包圍著身體。要快點從這個地方逃出去才行。治癒量減少 $H_W_BAD30%$COLOR_END，$H_W_BAD5$COLOR_END重疊時好像會發生不好的事。			True
 7102000	StackCounter	Debuff	True	swch	40000	0	7102001	這地方危險了!!			不祥的魔力氣息包圍著身體。要快點從這個地方逃出去才行。治癒量減少 $H_W_BAD30%$COLOR_END，$H_W_BAD5$COLOR_END重疊時好像會發生不好的事。			True
@@ -3427,6 +3434,7 @@
 7103008	MovSpd	Debuff	True	perc	6000	0	1	這空間的力量			峇巴托斯打算對你做些什麼	icon_status.godspell_tex	icon_status.godspell_tex	True
 7103009	MovSpd	Debuff	True	perc	6000	0	1	這空間的力量			峇巴托斯打算對你做些什麼	icon_status.godspell_tex	icon_status.godspell_tex	True
 7103020	MovSpd	Debuff	True	perc	6000	0	1	這空間的力量			峇巴托斯打算對你做些什麼	icon_status.godspell_tex	icon_status.godspell_tex	True
+7103040	Block	DOT	True	swch	5000	0	0	異空間的魔力			峇巴托斯封印了你的技能後打算將你殺死。	icon_status.omniousspell_tex	icon_status.omniousspell_tex	True
 7691000	HPChange	Debuff	True	abs	12000	2	-10000	精氣吸收			陷入莉里斯的魅惑無法做任何動作，並且每 $H_W_BAD2秒$COLOR_END受到 $H_W_BAD10000$COLOR_END的固定傷害	icon_status.minusfocus_tex	icon_status.minusfocus_tex	True
 7691000	Stun	Debuff	True	swch	12000	0	5	精氣吸收			陷入莉里斯的魅惑無法做任何動作，並且每 $H_W_BAD2秒$COLOR_END受到 $H_W_BAD10000$COLOR_END的固定傷害	icon_status.minusfocus_tex	icon_status.minusfocus_tex	True
 7691001	DelayedEffect	Buff	True	swch	10000	0	7691002	保護膜			莉里斯吸收精氣時，會吸收到一定的傷害量。	icon_status.immunedebuff_tex	icon_status.immunedebuff_tex	True
@@ -3674,8 +3682,8 @@
 10151031	ReloadingSkill	Buff	True	perc	9500	0	90013	可位置交換			位置交換技能命中時，如果再使用技能，就可以和被擊中的敵人交換位置。這效果只有在黑暗觸手擊中敵人時出現。	icon_status.darkwater_tex	icon_status.darkwater_tex	True
 10151032	HPChange	Debuff	False	abs	10000	2	-3454	位置交換 I			被黑暗觸手而發動的暗黑鎖鏈纏繞身體，每2秒就受到3454的傷害。這效果持續的期間，無論何時都可以和發射黑暗觸手的施展者交換位置。	icon_skills.darkgrasp_tex	icon_status.positionswap_tex	True
 10151032	263	Debuff	False	perc	10000	0	10151031	位置交換 I			被黑暗觸手而發動的暗黑鎖鏈纏繞身體，每2秒就受到3454的傷害。這效果持續的期間，無論何時都可以和發射黑暗觸手的施展者交換位置。	icon_skills.darkgrasp_tex	icon_status.positionswap_tex	True
-10151033	Stun	Stun	False	swch	2500	0	5	位置交換 I			暫時陷入無法行動的狀態。	icon_skills.darkgrasp_tex	icon_skills.darkgrasp_tex	True
-10151033	Drunk1	Stun	False	seta	2500	0	0	位置交換 I			暫時陷入無法行動的狀態。	icon_skills.darkgrasp_tex	icon_skills.darkgrasp_tex	True
+10151033	Stun	Stun	False	swch	2500	0	5	位置交換			暫時陷入無法行動的狀態。	icon_skills.darkgrasp_tex	icon_skills.darkgrasp_tex	True
+10151033	Drunk1	Stun	False	seta	2500	0	0	位置交換			暫時陷入無法行動的狀態。	icon_skills.darkgrasp_tex	icon_skills.darkgrasp_tex	True
 10151050	MovSpd	Debuff	False	setp	3000	0	0	飛劍向上揮擊			下巴遭受攻擊，成為暫時無法移動的狀態。該效果只會套用於怪物身上。	icon_skills.chainuppercut_tex	icon_skills.chainuppercut_tex	True
 10151050	MovSpdInCombat	Debuff	False	setp	3000	0	0	飛劍向上揮擊			下巴遭受攻擊，成為暫時無法移動的狀態。該效果只會套用於怪物身上。	icon_skills.chainuppercut_tex	icon_skills.chainuppercut_tex	True
 10151050	HPDrain	Debuff	False	perc	3000	0	0	飛劍向上揮擊			下巴遭受攻擊，成為暫時無法移動的狀態。該效果只會套用於怪物身上。	icon_skills.chainuppercut_tex	icon_skills.chainuppercut_tex	True
@@ -6198,15 +6206,15 @@
 99010110	Plague	Buff	True	abs	0	10	990101	往前突擊！			將突擊司令官所持有的湧出勇氣的效果傳送給周邊聯盟成員們。	icon_skills.armor_passivity_tex	icon_skills.armor_passivity_tex	True
 99010210	Plague	Buff	True	abs	0	10	990102	金剛不壞			將防禦司令官所持有的像鋼鐵一樣的皮膚的效果傳送給周邊聯盟成員們。	icon_skills.defenceup_tex	icon_skills.defenceup_tex	True
 99010310	Plague	Buff	True	abs	0	10	990103	連勝的歡呼			將資源司令官所持有的無盡資源的效果傳送給周邊聯盟成員們。	icon_skills.adventgoddess_tex	icon_skills.adventgoddess_tex	True
-99020000	MaxHP	Buff	True	perc	0	0	1.01	巴其溫的勇猛 I			最近7日內上線3~4日時獲得下面效果。$BR$BR和平狀態下移動速度增加$H_W_GOOD7$COLOR_END $BR最大HP增加 $H_W_GOOD1%$COLOR_END $BR力量增加$H_W_GOOD1$COLOR_END。$BR$BR此效果可套用於帳號內的所有角色。	icon_status.archerspirit_tex	icon_status.archerspirit_tex	True
-99020000	Power	Buff	True	abs	0	0	1	巴其溫的勇猛 I			最近7日內上線3~4日時獲得下面效果。$BR$BR和平狀態下移動速度增加$H_W_GOOD7$COLOR_END $BR最大HP增加 $H_W_GOOD1%$COLOR_END $BR力量增加$H_W_GOOD1$COLOR_END。$BR$BR此效果可套用於帳號內的所有角色。	icon_status.archerspirit_tex	icon_status.archerspirit_tex	True
-99020000	OutOfCombatMovSpd	Buff	True	abs	0	0	7	巴其溫的勇猛 I			最近7日內上線3~4日時獲得下面效果。$BR$BR和平狀態下移動速度增加$H_W_GOOD7$COLOR_END $BR最大HP增加 $H_W_GOOD1%$COLOR_END $BR力量增加$H_W_GOOD1$COLOR_END。$BR$BR此效果可套用於帳號內的所有角色。	icon_status.archerspirit_tex	icon_status.archerspirit_tex	True
-99020010	MaxHP	Buff	True	perc	0	0	1.03	巴其溫的勇猛 II			最近7日內上線5~6日時獲得下面效果。$BR$BR和平狀態下移動速度增加$H_W_GOOD14$COLOR_END $BR最大HP增加 $H_W_GOOD3%$COLOR_END $BR力量增加$H_W_GOOD3$COLOR_END。$BR$BR此效果可套用於帳號內的所有角色。	icon_status.plusattack_tex	icon_status.plusattack_tex	True
-99020010	Power	Buff	True	abs	0	0	3	巴其溫的勇猛 II			最近7日內上線5~6日時獲得下面效果。$BR$BR和平狀態下移動速度增加$H_W_GOOD14$COLOR_END $BR最大HP增加 $H_W_GOOD3%$COLOR_END $BR力量增加$H_W_GOOD3$COLOR_END。$BR$BR此效果可套用於帳號內的所有角色。	icon_status.plusattack_tex	icon_status.plusattack_tex	True
-99020010	OutOfCombatMovSpd	Buff	True	abs	0	0	14	巴其溫的勇猛 II			最近7日內上線5~6日時獲得下面效果。$BR$BR和平狀態下移動速度增加$H_W_GOOD14$COLOR_END $BR最大HP增加 $H_W_GOOD3%$COLOR_END $BR力量增加$H_W_GOOD3$COLOR_END。$BR$BR此效果可套用於帳號內的所有角色。	icon_status.plusattack_tex	icon_status.plusattack_tex	True
-99020020	MaxHP	Buff	True	perc	0	0	1.05	巴其溫的勇猛 III			最近7日內每日皆上線時獲得下面效果。$BR$BR和平狀態下移動速度增加$H_W_GOOD20$COLOR_END $BR最大HP增加 $H_W_GOOD5%$COLOR_END $BR力量增加$H_W_GOOD6$COLOR_END。$BR$BR此效果可套用於帳號內的所有角色。	icon_status.buff_of_kaia_tex	icon_status.buff_of_kaia_tex	True
-99020020	Power	Buff	True	abs	0	0	6	巴其溫的勇猛 III			最近7日內每日皆上線時獲得下面效果。$BR$BR和平狀態下移動速度增加$H_W_GOOD20$COLOR_END $BR最大HP增加 $H_W_GOOD5%$COLOR_END $BR力量增加$H_W_GOOD6$COLOR_END。$BR$BR此效果可套用於帳號內的所有角色。	icon_status.buff_of_kaia_tex	icon_status.buff_of_kaia_tex	True
-99020020	OutOfCombatMovSpd	Buff	True	abs	0	0	20	巴其溫的勇猛 III			最近7日內每日皆上線時獲得下面效果。$BR$BR和平狀態下移動速度增加$H_W_GOOD20$COLOR_END $BR最大HP增加 $H_W_GOOD5%$COLOR_END $BR力量增加$H_W_GOOD6$COLOR_END。$BR$BR此效果可套用於帳號內的所有角色。	icon_status.buff_of_kaia_tex	icon_status.buff_of_kaia_tex	True
+99020000	MaxHP	Buff	True	perc	0	0	1.01	巴其溫的勇猛 I			最近7日內上線2~3日時獲得下面效果。$BR$BR和平狀態下移動速度增加$H_W_GOOD7$COLOR_END $BR最大HP增加 $H_W_GOOD1%$COLOR_END $BR力量增加$H_W_GOOD1$COLOR_END。$BR$BR此效果可套用於帳號內的所有角色。	icon_status.archerspirit_tex	icon_status.archerspirit_tex	True
+99020000	Power	Buff	True	abs	0	0	1	巴其溫的勇猛 I			最近7日內上線2~3日時獲得下面效果。$BR$BR和平狀態下移動速度增加$H_W_GOOD7$COLOR_END $BR最大HP增加 $H_W_GOOD1%$COLOR_END $BR力量增加$H_W_GOOD1$COLOR_END。$BR$BR此效果可套用於帳號內的所有角色。	icon_status.archerspirit_tex	icon_status.archerspirit_tex	True
+99020000	OutOfCombatMovSpd	Buff	True	abs	0	0	7	巴其溫的勇猛 I			最近7日內上線2~3日時獲得下面效果。$BR$BR和平狀態下移動速度增加$H_W_GOOD7$COLOR_END $BR最大HP增加 $H_W_GOOD1%$COLOR_END $BR力量增加$H_W_GOOD1$COLOR_END。$BR$BR此效果可套用於帳號內的所有角色。	icon_status.archerspirit_tex	icon_status.archerspirit_tex	True
+99020010	MaxHP	Buff	True	perc	0	0	1.03	巴其溫的勇猛 II			最近7日內上線4~5日時獲得下面效果。$BR$BR和平狀態下移動速度增加$H_W_GOOD14$COLOR_END $BR最大HP增加 $H_W_GOOD3%$COLOR_END $BR力量增加$H_W_GOOD3$COLOR_END。$BR$BR此效果可套用於帳號內的所有角色。	icon_status.plusattack_tex	icon_status.plusattack_tex	True
+99020010	Power	Buff	True	abs	0	0	3	巴其溫的勇猛 II			最近7日內上線4~5日時獲得下面效果。$BR$BR和平狀態下移動速度增加$H_W_GOOD14$COLOR_END $BR最大HP增加 $H_W_GOOD3%$COLOR_END $BR力量增加$H_W_GOOD3$COLOR_END。$BR$BR此效果可套用於帳號內的所有角色。	icon_status.plusattack_tex	icon_status.plusattack_tex	True
+99020010	OutOfCombatMovSpd	Buff	True	abs	0	0	14	巴其溫的勇猛 II			最近7日內上線4~5日時獲得下面效果。$BR$BR和平狀態下移動速度增加$H_W_GOOD14$COLOR_END $BR最大HP增加 $H_W_GOOD3%$COLOR_END $BR力量增加$H_W_GOOD3$COLOR_END。$BR$BR此效果可套用於帳號內的所有角色。	icon_status.plusattack_tex	icon_status.plusattack_tex	True
+99020020	MaxHP	Buff	True	perc	0	0	1.05	巴其溫的勇猛 III			最近7日內6日以上上線時獲得下面效果。$BR$BR和平狀態下移動速度增加$H_W_GOOD20$COLOR_END $BR最大HP增加 $H_W_GOOD5%$COLOR_END $BR力量增加$H_W_GOOD6$COLOR_END。$BR$BR此效果可套用於帳號內的所有角色。	icon_status.buff_of_kaia_tex	icon_status.buff_of_kaia_tex	True
+99020020	Power	Buff	True	abs	0	0	6	巴其溫的勇猛 III			最近7日內6日以上上線時獲得下面效果。$BR$BR和平狀態下移動速度增加$H_W_GOOD20$COLOR_END $BR最大HP增加 $H_W_GOOD5%$COLOR_END $BR力量增加$H_W_GOOD6$COLOR_END。$BR$BR此效果可套用於帳號內的所有角色。	icon_status.buff_of_kaia_tex	icon_status.buff_of_kaia_tex	True
+99020020	OutOfCombatMovSpd	Buff	True	abs	0	0	20	巴其溫的勇猛 III			最近7日內6日以上上線時獲得下面效果。$BR$BR和平狀態下移動速度增加$H_W_GOOD20$COLOR_END $BR最大HP增加 $H_W_GOOD5%$COLOR_END $BR力量增加$H_W_GOOD6$COLOR_END。$BR$BR此效果可套用於帳號內的所有角色。	icon_status.buff_of_kaia_tex	icon_status.buff_of_kaia_tex	True
 99070000	MovSpd	DOT	False	setp	6000	0	0.7	出血			因受到強烈的一擊發生出血，移動速度減少 $H_W_BAD30%$COLOR_END , 每$H_W_BAD3$COLOR_END 減少 $H_W_BAD3%$COLOR_END的HP。	icon_status.minuscriticalresist_tex	icon_status.minuscriticalresist_tex	True
 99070000	HPDrain	DOT	False	perc	6000	0	0.9	出血			因受到強烈的一擊發生出血，移動速度減少 $H_W_BAD30%$COLOR_END , 每$H_W_BAD3$COLOR_END 減少 $H_W_BAD3%$COLOR_END的HP。	icon_status.minuscriticalresist_tex	icon_status.minuscriticalresist_tex	True
 99070000	HPChange	DOT	False	perc	6000	3	-0.01	出血			因受到強烈的一擊發生出血，移動速度減少 $H_W_BAD30%$COLOR_END , 每$H_W_BAD3$COLOR_END 減少 $H_W_BAD3%$COLOR_END的HP。	icon_status.minuscriticalresist_tex	icon_status.minuscriticalresist_tex	True

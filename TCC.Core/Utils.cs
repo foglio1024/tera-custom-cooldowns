@@ -178,11 +178,12 @@ namespace TCC
             return epoch.AddSeconds(unixTime);
         }
 
-        public static string TimeFormatter(uint seconds)
+        public static string TimeFormatter(ulong seconds)
         {
             if (seconds < 99) return seconds+"";
             if (seconds < 99 * 60) return seconds / 60 + "m";
-            return seconds / (60 * 60) + "h";
+            if (seconds < 99 * 60 * 60) return seconds / (60*60) + "h";
+            return seconds / (60 * 60 *24) + "d";
         }
 
     }
