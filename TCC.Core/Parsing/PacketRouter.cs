@@ -53,8 +53,8 @@ namespace TCC.Parsing
 
             //if (TimeManager.Instance.CurrentRegion != Region)
             //{
-                TimeManager.Instance.SetServerTimeZone(lang);
-                SettingsManager.LastRegion = lang;
+            TimeManager.Instance.SetServerTimeZone(lang);
+            SettingsManager.LastRegion = lang;
             //}
             TimeManager.Instance.SetGuildBamTime(false);
 
@@ -75,10 +75,21 @@ namespace TCC.Parsing
         {
             if (obj.Direction == Tera.MessageDirection.ClientToServer && obj.OpCode == 19900)
             {
-                var msg = new C_CHECK_VERSION_CUSTOM(new CustomReader(obj));
-                Version = msg.Versions[0];
-                OpCodeNamer = new OpCodeNamer(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/{Version}.txt"));
-                SystemMessageNamer = new OpCodeNamer(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/smt_{Version}.txt"));
+                var message = new C_CHECK_VERSION_CUSTOM(new CustomReader(obj));
+                Version = message.Versions[0];
+                OpcodeDownloader.DownloadIfNotExist(Version, Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/"));
+                if (!File.Exists(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/{message.Versions[0]}.txt")) && !File.Exists(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/protocol.{message.Versions[0]}.map"))
+ || !File.Exists(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/smt_{message.Versions[0]}.txt")) && !File.Exists(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/sysmsg.{message.Versions[0]}.map")))
+                {
+                    {
+                        BasicTeraData.LogError("Unknown client version: " + message.Versions[0]);
+                        System.Windows.MessageBox.Show("Unknown client version: " + message.Versions[0]);
+                        App.CloseApp();
+                        return;
+                    }
+                }
+                OpCodeNamer = new OpCodeNamer(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/{message.Versions[0]}.txt"));
+                SystemMessageNamer = new OpCodeNamer(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/smt_{message.Versions[0]}.txt"));
                 MessageFactory.Init();
                 TeraSniffer.Instance.Connected = true;
                 Proxy.ConnectToProxy();
@@ -314,7 +325,7 @@ namespace TCC.Parsing
         }
         public static void HandleRollResult(S_RESULT_BIDDING_DICE_THROW x)
         {
-            if(!GroupWindowViewModel.Instance.Rolling) GroupWindowViewModel.Instance.StartRoll();
+            if (!GroupWindowViewModel.Instance.Rolling) GroupWindowViewModel.Instance.StartRoll();
             GroupWindowViewModel.Instance.SetRoll(x.EntityId, x.RollResult);
         }
         public static void HandleEndRoll(S_RESULT_ITEM_BIDDING x)
@@ -342,7 +353,7 @@ namespace TCC.Parsing
         }
         public static void HandleSpawnUser(S_SPAWN_USER p)
         {
-            if(!GroupWindowViewModel.Instance.Exists(p.EntityId)) return;
+            if (!GroupWindowViewModel.Instance.Exists(p.EntityId)) return;
 
             GroupWindowViewModel.Instance.UpdateMemberGear(p);
         }
@@ -378,7 +389,7 @@ namespace TCC.Parsing
             //if (sourceInParty && targetInParty) return;
             //if (sourceInParty || targetInParty) WindowManager.SkillsEnded = false;
             //if (x.Source == SessionManager.CurrentPlayer.EntityId) WindowManager.SkillsEnded = false;
-            if(x.Source == SessionManager.CurrentPlayer.EntityId) return;
+            if (x.Source == SessionManager.CurrentPlayer.EntityId) return;
             BossGageWindowViewModel.Instance.UpdateShield(x.Target, x.Damage);
         }
 
@@ -883,12 +894,12 @@ namespace TCC.Parsing
 
         public static void HandleInventory(S_INVEN x)
         {
-            if(!x.IsOpen) return;
+            if (!x.IsOpen) return;
             //if (BuffBarWindowViewModel.Instance.Player.InfBuffs.Any(b => AbnormalityDatabase.NoctIds.Contains(b.Abnormality.Id))) return;
             //if (BuffBarWindowViewModel.Instance.Player.Buffs.Any(b => AbnormalityDatabase.BlueNoctIds.Contains(b.Abnormality.Id))) return;
 
             if (x.First && x.More) return;
-            if(S_INVEN.Items == null) return;
+            if (S_INVEN.Items == null) return;
             InfoWindowViewModel.Instance.CurrentCharacter.ClearGear();
             foreach (Tuple<uint, int, uint> tuple in S_INVEN.Items)
             {
@@ -964,13 +975,13 @@ namespace TCC.Parsing
 
         public static void HandleImageData(S_IMAGE_DATA sImageData)
         {
-            
+
 
         }
 
         public static void HandleUserGuildLogo(S_GET_USER_GUILD_LOGO sGetUserGuildLogo)
         {
-            if(S_IMAGE_DATA.Database.ContainsKey(sGetUserGuildLogo.GuildId)) return;
+            if (S_IMAGE_DATA.Database.ContainsKey(sGetUserGuildLogo.GuildId)) return;
             S_IMAGE_DATA.Database.Add(sGetUserGuildLogo.GuildId, sGetUserGuildLogo.GuildLogo);
         }
     }

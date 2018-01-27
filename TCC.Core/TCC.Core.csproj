@@ -420,6 +420,7 @@
     <Compile Include="Parsing\Messages\S_TRADE_BROKER_DEAL_SUGGESTED.cs" />
     <Compile Include="Parsing\Messages\S_UPDATE_FRIEND_INFO.cs" />
     <Compile Include="Parsing\Messages\S_USER_BLOCK_LIST.cs" />
+    <Compile Include="Parsing\OpcodeDownloader.cs" />
     <Compile Include="Parsing\SystemMessagesProcessor.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="TemplateSelectors\EnemyTemplateSelector.cs" />
