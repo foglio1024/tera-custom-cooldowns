@@ -41,7 +41,7 @@ namespace TCC.Parsing
             catch { }
             try
             {
-                Download("https://raw.githubusercontent.com/meishuu/tera-data/master/map_base/protocol." + version + ".map", filename);
+                Download("https://raw.githubusercontent.com/meishuu/tera-data/master/map/protocol." + version + ".map", filename);
                 return;
             }
             catch { }
@@ -73,7 +73,7 @@ namespace TCC.Parsing
             catch { }
             try
             {
-                Download("https://raw.githubusercontent.com/meishuu/tera-data/master/map_base/sysmsg." + version + ".map", filename);
+                Download("https://raw.githubusercontent.com/meishuu/tera-data/master/map/sysmsg." + version + ".map", filename);
                 return;
             }
             catch { }
