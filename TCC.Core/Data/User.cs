@@ -91,7 +91,7 @@ namespace TCC.Data
             get => _role;
             set
             {
-                if(_role == value) return;
+                if (_role == value) return;
                 _role = value;
                 NotifyPropertyChanged(nameof(Role));
             }
@@ -340,14 +340,18 @@ namespace TCC.Data
 
         public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks)
         {
-            if (!SettingsManager.GroupAbnormals[Class.Common].Contains(ab.Id))
+            if (SettingsManager.GroupAbnormals.ContainsKey(Class.Common))
             {
-                if (SettingsManager.GroupAbnormals.ContainsKey(SessionManager.CurrentPlayer.Class))
+                if (!SettingsManager.GroupAbnormals[Class.Common].Contains(ab.Id))
                 {
-                    if (!SettingsManager.GroupAbnormals[SessionManager.CurrentPlayer.Class].Contains(ab.Id)) return;
+                    if (SettingsManager.GroupAbnormals.ContainsKey(SessionManager.CurrentPlayer.Class))
+                    {
+                        if (!SettingsManager.GroupAbnormals[SessionManager.CurrentPlayer.Class].Contains(ab.Id)) return;
+                    }
+                    else return;
                 }
-                else return;
             }
+            else return;
 
             var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
