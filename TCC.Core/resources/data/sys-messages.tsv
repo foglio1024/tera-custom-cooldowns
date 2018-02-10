@@ -2156,6 +2156,18 @@
 201	SMT_CANT_USE_MATERIAL_ENCHANT	Unable to use Material Enchanting System.
 201	SMT_CANT_USE_EQUIPMENT_UPGRADE	Unable to use Upgrade System.
 201	SMT_CANT_USE_ITEM_DECOMPOSITION	Unable to use Dismantle System.
+203	SMT_FIELD_EVENT_ENTER	Entering the Guardian Legion mission zone.
+203	SMT_FIELD_EVENT_LEAVE	You left the Guardian Legion mission zone.
+203	SMT_FIELD_EVENT_COMPLETE	Completed all mission requirements.
+203	SMT_FIELD_EVENT_FAIL_OVERTIME	The Guardian Legion mission has ended.
+203	SMT_FIELD_EVENT_REWARD_AVAILABLE	You may claim {number} rewards for completing Guardian Legion missions (up to {number}).
+203	SMT_FIELD_EVENT_USER_LIMIT_FULL	Teleport failed. The mission zone is full.
+203	SMT_FIELD_EVENT_TELEPORT_FAIL_ENTERED_EVENT	You are already participating.
+203	SMT_FIELD_EVENT_TELEPORT_FAIL_IN_COMBAT	Cannot use when in combat.
+203	SMT_FIELD_EVENT_TELEPORT_FAIL_NONEXISTENT_EVENT	This mission is no longer available.
+201	SMT_FIELD_EVENT_BAN_GUIDE_MESSAGE	You are AFK. You will be automatically moved to a safe zone in {Sec} sec. Move your character to cancel.
+203	SMT_FIELD_EVENT_BAN_MESSAGE	You have been AFK for too long. Moving you to a safe zone.
+203	SMT_NON_PK_SECTION	You can't PvP here.
 302	SMT_CANNOT_USE_SKILL_NON_EQUIPPED	You can’t use "{SkillName}" because you are not wearing the correct costume.
 302	SMT_CANNOT_USE_SKILL_THIS_ITEM	You can't use "{SkillName}" with "{ItemName}".
 203	SMT_CANNOT_USE_SKILL_WHILE_ACTION	You can't use that skill in combat.

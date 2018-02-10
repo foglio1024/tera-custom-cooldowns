@@ -12,6 +12,8 @@
   <Dungeon ShortName="RKN"  MaxBaseRuns="1" Tier="Tier4" Id="9735" />
   <Dungeon ShortName="RKH"  MaxBaseRuns="1" Tier="Tier5" Id="9935" />
   <Dungeon ShortName="BP" MaxBaseRuns="1" Tier="Tier4" Id="9710" />
+  <Dungeon ShortName="FIN"  MaxBaseRuns="2" Tier="Tier4" Id="9059" />
+  <Dungeon ShortName="FIH"  MaxBaseRuns="1" Tier="Tier5" Id="9759" />
   <!-- <Dungeon ShortName="ABN" MaxBaseRuns="2" Tier="Tier2" Id="9511" /> -->
   <!-- <Dungeon ShortName="VHN" MaxBaseRuns="2" Tier="Tier3" Id="9780" /> -->
   <!-- <Dungeon ShortName="DFN" MaxBaseRuns="2" Tier="Tier3" Id="9767" /> -->
@@ -29,6 +31,6 @@
   <Dungeon ShortName="GG"  MaxBaseRuns="2" Tier="Solo"  Id="9713" />
   <Dungeon ShortName="HH"  MaxBaseRuns="0" Tier="Tier5" Id="9950" />
   <!-- <Dungeon ShortName="DSL"  MaxBaseRuns="5" Tier="Tier5" Id="9885" /> -->
-  <Dungeon ShortName="DSU"  MaxBaseRuns="5" Tier="Tier5" Id="9886" />
+  <!-- <Dungeon ShortName="DSU"  MaxBaseRuns="5" Tier="Tier5" Id="9886" /> -->
   <!-- <Dungeon ShortName="DW"  MaxBaseRuns="1" Tier="Tier4" Id="9066" /> -->
 </ArrayOfDungeon>

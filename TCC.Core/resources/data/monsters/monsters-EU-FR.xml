@@ -663,7 +663,7 @@
 		<Monster name="Joel" id="8006" isBoss="False" hp="10000" />
 		<Monster name="Aktan" id="8007" isBoss="False" hp="421817" />
 		<Monster name="Adria" id="8008" isBoss="False" hp="10000" />
-		<Monster name="Lian" id="8009" isBoss="False" hp="10000" />
+		<Monster name="Jowin" id="8009" isBoss="False" hp="10000" />
 		<Monster name="Morian" id="8010" isBoss="False" hp="945" />
 		<Monster name="Tanya" id="8011" isBoss="False" hp="10000" />
 		<Monster name="Cadavre d'un inconnu" id="8012" isBoss="False" hp="10000" />
@@ -672,7 +672,7 @@
 		<Monster name="Joel" id="8016" isBoss="False" hp="10000" />
 		<Monster name="Aktan" id="8017" isBoss="False" hp="421817" />
 		<Monster name="Adria" id="8018" isBoss="False" hp="10000" />
-		<Monster name="Lian" id="8019" isBoss="False" hp="10000" />
+		<Monster name="Jowin" id="8019" isBoss="False" hp="10000" />
 		<Monster name="Adria" id="8020" isBoss="False" hp="10000" />
 		<Monster name="Homme encagoulé" id="8021" isBoss="False" hp="945" />
 		<Monster name="Djik" id="8022" isBoss="False" hp="945" />
@@ -2762,6 +2762,12 @@
 		<Monster name="Fantasque du clair de lune" id="5217" isBoss="False" hp="10000" />
 		<Monster name="Fantasque du clair de lune" id="5218" isBoss="False" hp="10000" />
 		<Monster name="Fantasque du clair de lune" id="5219" isBoss="False" hp="10000" />
+		<Monster name="Ailee" id="6110" isBoss="False" hp="10000" />
+		<Monster name="Kenes" id="6111" isBoss="False" hp="10000" />
+		<Monster name="Mia" id="6112" isBoss="False" hp="10000" />
+		<Monster name="Ailee" id="6113" isBoss="False" hp="10000" />
+		<Monster name="Kenes" id="6114" isBoss="False" hp="10000" />
+		<Monster name="Mia" id="6115" isBoss="False" hp="10000" />
 		<Monster name="Shurimon" id="7000" isBoss="False" hp="10000" />
 		<Monster name="Gaderong" id="7001" isBoss="False" hp="10000" />
 		<Monster name="Angk" id="7002" isBoss="False" hp="10000" />
@@ -5821,6 +5827,7 @@
 		<Monster name="Téléportail vers le Bastion de Lok" id="1501" isBoss="False" hp="10000" />
 		<Monster name="Téléportail vers la Clairière dérobée" id="1502" isBoss="False" hp="10000" />
 		<Monster name="Téléportail" id="1503" isBoss="False" hp="53600" />
+		<Monster name="Téléportail" id="1504" isBoss="False" hp="10000" />
 		<Monster name="Garde" id="1700" isBoss="False" hp="807599" />
 		<Monster name="Matia" id="8000" isBoss="False" hp="945" />
 	</Zone>
@@ -9564,7 +9571,7 @@
 		<Monster name="Téléportail de sortie" id="1501" isBoss="False" hp="10000" />
 		<Monster name="Téléportail" id="1502" isBoss="False" hp="53600" />
 		<Monster name="Joel" id="8001" isBoss="False" hp="10000" />
-		<Monster name="Lian" id="8002" isBoss="False" hp="10000" />
+		<Monster name="Jowin" id="8002" isBoss="False" hp="10000" />
 		<Monster name="Membre d'expédition de l'Union des Éclairés" id="8003" isBoss="False" hp="1464727" />
 		<Monster name="Chasseur de trésor" id="8004" isBoss="False" hp="10999" />
 		<Monster name="Chasseur de trésor" id="8005" isBoss="False" hp="10999" />
@@ -11528,6 +11535,71 @@
 		<Monster name="Globulin d'élite" id="81109" isBoss="False" hp="3869177" />
 		<Monster name="Coagulus cauchemardesque" id="81118" isBoss="False" hp="50412440" />
 		<Monster name="Vermineux d'élite" id="81125" isBoss="False" hp="3869177" />
+	</Zone>
+	<Zone id="620" name="District de Veritas" >
+		<Monster name="Behemoth" id="1000" isBoss="True" hp="4200000000" />
+		<Monster name="Orkantom" id="1001" isBoss="True" hp="840000000" />
+		<Monster name="Orkanbort" id="1004" isBoss="True" hp="840000000" />
+		<Monster name="Orkanwilli" id="1005" isBoss="True" hp="840000000" />
+		<Monster name="Seona" id="1006" isBoss="False" hp="10000" />
+		<Monster name="Lora" id="2000" isBoss="False" hp="945" />
+		<Monster name="Ayer" id="2001" isBoss="False" hp="945" />
+		<Monster name="Lora" id="2100" isBoss="False" hp="945" />
+		<Monster name="Ayer" id="2101" isBoss="False" hp="945" />
+		<Monster name="Lora" id="2200" isBoss="False" hp="945" />
+		<Monster name="Ayer" id="2201" isBoss="False" hp="945" />
+		<Monster name="Anonyme" id="9000" isBoss="False" hp="945" />
+		<Monster name="Helen" id="9004" isBoss="False" hp="10000" />
+		<Monster name="Orkan" id="9999" isBoss="False" hp="0" />
+	</Zone>
+	<Zone id="621" name="Val Elenium" >
+		<Monster name="Monstre d'âme" id="1000" isBoss="False" hp="0" />
+		<Monster name="Alphamorphe" id="1002" isBoss="False" hp="0" />
+		<Monster name="Bétamorphe" id="1003" isBoss="False" hp="0" />
+		<Monster name="Gammamorphe" id="1004" isBoss="False" hp="0" />
+		<Monster name="Lora" id="2000" isBoss="False" hp="945" />
+		<Monster name="Ayer" id="2001" isBoss="False" hp="945" />
+		<Monster name="Birank" id="2003" isBoss="False" hp="366797" />
+		<Monster name="Birank" id="2103" isBoss="False" hp="366797" />
+		<Monster name="Birank" id="2203" isBoss="False" hp="366797" />
+		<Monster name="Blashyda" id="3000" isBoss="False" hp="0" />
+		<Monster name="Malaraka" id="3001" isBoss="True" hp="1485000000" />
+		<Monster name="Anonyme" id="9000" isBoss="False" hp="0" />
+		<Monster name="Monstromorphe" id="9001" isBoss="False" hp="0" />
+	</Zone>
+	<Zone id="622" name="Bassin béni" >
+		<Monster name="Faucheur terrifiant" id="1000" isBoss="True" hp="4875000000" />
+		<Monster name="Soldat d'élite kuzad" id="1002" isBoss="False" hp="530000000" />
+		<Monster name="Aile ancestrale" id="1003" isBoss="False" hp="300000000" />
+		<Monster name="Lora" id="1005" isBoss="False" hp="945" />
+		<Monster name="Ayer" id="1006" isBoss="False" hp="945" />
+		<Monster name="Lora" id="2005" isBoss="False" hp="945" />
+		<Monster name="Ayer" id="2006" isBoss="False" hp="945" />
+		<Monster name="Anonyme" id="9000" isBoss="False" hp="945" />
+		<Monster name="Kuzad" id="9999" isBoss="False" hp="0" />
+	</Zone>
+	<Zone id="623" name="Arcadia" >
+		<Monster name="Instructeur tuwangi" id="1009" isBoss="False" hp="10000" />
+		<Monster name="Morrink" id="2001" isBoss="False" hp="366797" />
+	</Zone>
+	<Zone id="626" name="Val Aureum" >
+		<Monster name="Basilic" id="1000" isBoss="True" hp="330000000" />
+		<Monster name="Basilic brutal" id="1004" isBoss="True" hp="825000000" />
+		<Monster name="Rokssa" id="3001" isBoss="False" hp="91545" />
+		<Monster name="Murak Naktum" id="3002" isBoss="False" hp="100000000" />
+		<Monster name="Rokssa" id="3004" isBoss="False" hp="91545" />
+	</Zone>
+	<Zone id="627" name="Westonia" >
+		<Monster name="Chariot de ravitaillement" id="1001" isBoss="True" hp="100000000" />
+		<Monster name="Dent-de-sabre givré" id="1003" isBoss="False" hp="62550000" />
+		<Monster name="Assaillant kobold" id="1004" isBoss="False" hp="62550000" />
+		<Monster name="Enragé wendigo" id="1007" isBoss="False" hp="104625000" />
+		<Monster name="Chamane wendigo" id="1008" isBoss="False" hp="104625000" />
+		<Monster name="Shaptus" id="1009" isBoss="False" hp="5780726" />
+		<Monster name="Assassin caïman" id="1010" isBoss="False" hp="100000000" />
+		<Monster name="Kalrak Naktum" id="1011" isBoss="False" hp="5780726" />
+		<Monster name="Garde" id="1012" isBoss="False" hp="100000000" />
+		<Monster name="Verten" id="1013" isBoss="True" hp="900000000" />
 	</Zone>
 	<Zone id="643" name="Wonderholme" >
 		<Monster name="Morgak cauchemardesque" id="1001" isBoss="True" hp="161159398" />
@@ -14604,6 +14676,10 @@
 		<Monster name="Serviteur de courroux" id="10238100" isBoss="False" hp="0" />
 		<Monster name="Fantôme de Dkurion" id="20150805" isBoss="False" hp="999999999" />
 		<Monster name="ギガントクーマス" id="20170711" isBoss="False" hp="1496000000" />
+		<Monster name="Tuwangi confus" id="20170715" isBoss="False" hp="500" />
+		<Monster name="Pixie stylée" id="20170716" isBoss="False" hp="500" />
+		<Monster name="Diable rouge hargneux" id="20170717" isBoss="False" hp="500" />
+		<Monster name="Kobold expérimenté" id="20170718" isBoss="False" hp="500" />
 		<Monster name="ST-1" id="30301001" isBoss="False" hp="36532" />
 		<Monster name="ST-2" id="30301002" isBoss="False" hp="56414" />
 		<Monster name="ST-3" id="30301003" isBoss="False" hp="90553" />
