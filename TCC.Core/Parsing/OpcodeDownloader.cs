@@ -17,6 +17,8 @@ namespace TCC.Parsing
 
         private static void DownloadOpcode(uint version, String directory)
         {
+            Directory.CreateDirectory(directory);
+
             String filename = directory + Path.DirectorySeparatorChar + version + ".txt";
             if (File.Exists(filename))
             {
@@ -49,6 +51,8 @@ namespace TCC.Parsing
 
         private static void DownloadSysmsg(uint version, String directory)
         {
+            Directory.CreateDirectory(directory);
+
             String filename = directory + Path.DirectorySeparatorChar + "smt_" + version + ".txt";
             if (File.Exists(filename))
             {
