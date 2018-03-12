@@ -663,7 +663,7 @@
 		<Monster name="Джоэл Уайтривер" id="8006" isBoss="False" hp="10000" />
 		<Monster name="Разбойник Нактум" id="8007" isBoss="False" hp="421817" />
 		<Monster name="Адрия" id="8008" isBoss="False" hp="10000" />
-		<Monster name="Леандр" id="8009" isBoss="False" hp="10000" />
+		<Monster name="Джоин Лионас" id="8009" isBoss="False" hp="10000" />
 		<Monster name="Хани Мориан" id="8010" isBoss="False" hp="945" />
 		<Monster name="Танит Кайлум" id="8011" isBoss="False" hp="10000" />
 		<Monster name="Неопознанное тело" id="8012" isBoss="False" hp="10000" />
@@ -672,7 +672,7 @@
 		<Monster name="Джоэл Уайтривер" id="8016" isBoss="False" hp="10000" />
 		<Monster name="Разбойник Нактум" id="8017" isBoss="False" hp="421817" />
 		<Monster name="Адрия" id="8018" isBoss="False" hp="10000" />
-		<Monster name="Леандр" id="8019" isBoss="False" hp="10000" />
+		<Monster name="Джоин Лионас" id="8019" isBoss="False" hp="10000" />
 		<Monster name="Адрия" id="8020" isBoss="False" hp="10000" />
 		<Monster name="Мужчина в бандане" id="8021" isBoss="False" hp="945" />
 		<Monster name="Зик" id="8022" isBoss="False" hp="945" />
@@ -2762,6 +2762,12 @@
 		<Monster name="Группа поддержки 'Лунный свет'" id="5217" isBoss="False" hp="10000" />
 		<Monster name="Группа поддержки 'Лунный свет'" id="5218" isBoss="False" hp="10000" />
 		<Monster name="Группа поддержки 'Лунный свет'" id="5219" isBoss="False" hp="10000" />
+		<Monster name="Эйла" id="6110" isBoss="False" hp="10000" />
+		<Monster name="Кеннет" id="6111" isBoss="False" hp="10000" />
+		<Monster name="Миа Роэн" id="6112" isBoss="False" hp="10000" />
+		<Monster name="Эйла" id="6113" isBoss="False" hp="10000" />
+		<Monster name="Кеннет" id="6114" isBoss="False" hp="10000" />
+		<Monster name="Миа Роэн" id="6115" isBoss="False" hp="10000" />
 		<Monster name="Шуримон" id="7000" isBoss="False" hp="10000" />
 		<Monster name="Гадрон" id="7001" isBoss="False" hp="10000" />
 		<Monster name="Анкх" id="7002" isBoss="False" hp="10000" />
@@ -5821,6 +5827,7 @@
 		<Monster name="Телепорт в Бастион Лока" id="1501" isBoss="False" hp="10000" />
 		<Monster name="Телепорт на Поляну Древней" id="1502" isBoss="False" hp="10000" />
 		<Monster name="Телепорт" id="1503" isBoss="False" hp="53600" />
+		<Monster name="Телепорт" id="1504" isBoss="False" hp="10000" />
 		<Monster name="Стража" id="1700" isBoss="False" hp="807599" />
 		<Monster name="Матия" id="8000" isBoss="False" hp="945" />
 	</Zone>
@@ -9564,7 +9571,7 @@
 		<Monster name="Телепорт обратно" id="1501" isBoss="False" hp="10000" />
 		<Monster name="Телепорт" id="1502" isBoss="False" hp="53600" />
 		<Monster name="Джоэл Уайтривер" id="8001" isBoss="False" hp="10000" />
-		<Monster name="Леандр" id="8002" isBoss="False" hp="10000" />
+		<Monster name="Джоин Лионас" id="8002" isBoss="False" hp="10000" />
 		<Monster name="Член экспедиции Союза Просвещенных" id="8003" isBoss="False" hp="1464727" />
 		<Monster name="Охотник за сокровищами" id="8004" isBoss="False" hp="10999" />
 		<Monster name="Охотник за сокровищами" id="8005" isBoss="False" hp="10999" />
@@ -11528,6 +11535,71 @@
 		<Monster name="Элитный Глобулин" id="81109" isBoss="False" hp="3869177" />
 		<Monster name="Кошмарный Коагулус" id="81118" isBoss="False" hp="50412440" />
 		<Monster name="Элитная Личинка" id="81125" isBoss="False" hp="3869177" />
+	</Zone>
+	<Zone id="620" name="Район Веритас" >
+		<Monster name="Бегемот" id="1000" isBoss="True" hp="4200000000" />
+		<Monster name="Оркан Том" id="1001" isBoss="True" hp="840000000" />
+		<Monster name="Оркан Берт" id="1004" isBoss="True" hp="840000000" />
+		<Monster name="Оркан Вильям" id="1005" isBoss="True" hp="840000000" />
+		<Monster name="Сиона" id="1006" isBoss="False" hp="10000" />
+		<Monster name="Лаура" id="2000" isBoss="False" hp="945" />
+		<Monster name="Айер" id="2001" isBoss="False" hp="945" />
+		<Monster name="Лаура" id="2100" isBoss="False" hp="945" />
+		<Monster name="Айер" id="2101" isBoss="False" hp="945" />
+		<Monster name="Лаура" id="2200" isBoss="False" hp="945" />
+		<Monster name="Айер" id="2201" isBoss="False" hp="945" />
+		<Monster name="Инкогнито" id="9000" isBoss="False" hp="945" />
+		<Monster name="Елена Роэн" id="9004" isBoss="False" hp="10000" />
+		<Monster name="Оркан-лиходей" id="9999" isBoss="False" hp="0" />
+	</Zone>
+	<Zone id="621" name="Вал-Элениум" >
+		<Monster name="Разумное существо" id="1000" isBoss="False" hp="0" />
+		<Monster name="Клыкарь-мутант Альфа" id="1002" isBoss="False" hp="0" />
+		<Monster name="Клыкарь-мутант Бета" id="1003" isBoss="False" hp="0" />
+		<Monster name="Клыкарь-мутант Гамма" id="1004" isBoss="False" hp="0" />
+		<Monster name="Лаура" id="2000" isBoss="False" hp="945" />
+		<Monster name="Айер" id="2001" isBoss="False" hp="945" />
+		<Monster name="Бранк Кайлум" id="2003" isBoss="False" hp="366797" />
+		<Monster name="Бранк Кайлум" id="2103" isBoss="False" hp="366797" />
+		<Monster name="Бранк Кайлум" id="2203" isBoss="False" hp="366797" />
+		<Monster name="Брашфод" id="3000" isBoss="False" hp="0" />
+		<Monster name="Лангуст" id="3001" isBoss="True" hp="1485000000" />
+		<Monster name="Инкогнито" id="9000" isBoss="False" hp="0" />
+		<Monster name="Клыкарь-мутант" id="9001" isBoss="False" hp="0" />
+	</Zone>
+	<Zone id="622" name="Блаженное озеро" >
+		<Monster name="Жуткодер" id="1000" isBoss="True" hp="4875000000" />
+		<Monster name="Живодер-опустошитель" id="1002" isBoss="False" hp="530000000" />
+		<Monster name="Археоптерикс" id="1003" isBoss="False" hp="300000000" />
+		<Monster name="Лаура" id="1005" isBoss="False" hp="945" />
+		<Monster name="Айер" id="1006" isBoss="False" hp="945" />
+		<Monster name="Лаура" id="2005" isBoss="False" hp="945" />
+		<Monster name="Айер" id="2006" isBoss="False" hp="945" />
+		<Monster name="Инкогнито" id="9000" isBoss="False" hp="945" />
+		<Monster name="Живодер" id="9999" isBoss="False" hp="0" />
+	</Zone>
+	<Zone id="623" name="Аркадия" >
+		<Monster name="Тренер Туванги" id="1009" isBoss="False" hp="10000" />
+		<Monster name="Моринг Кайлум" id="2001" isBoss="False" hp="366797" />
+	</Zone>
+	<Zone id="626" name="Вал-Ауреум" >
+		<Monster name="Василиск джунглей" id="1000" isBoss="True" hp="330000000" />
+		<Monster name="Окаянный василиск" id="1004" isBoss="True" hp="825000000" />
+		<Monster name="Роксана" id="3001" isBoss="False" hp="91545" />
+		<Monster name="Мурак Нактум" id="3002" isBoss="False" hp="100000000" />
+		<Monster name="Роксана" id="3004" isBoss="False" hp="91545" />
+	</Zone>
+	<Zone id="627" name="Вестония" >
+		<Monster name="Фургон с припасами" id="1001" isBoss="True" hp="100000000" />
+		<Monster name="Морозный саблезуб" id="1003" isBoss="False" hp="62550000" />
+		<Monster name="Кобольд-солдат" id="1004" isBoss="False" hp="62550000" />
+		<Monster name="Вендиго-злобень" id="1007" isBoss="False" hp="104625000" />
+		<Monster name="Вендиго-шаман" id="1008" isBoss="False" hp="104625000" />
+		<Monster name="Саблезуб" id="1009" isBoss="False" hp="5780726" />
+		<Monster name="Кайман-самоубийца" id="1010" isBoss="False" hp="100000000" />
+		<Monster name="Карак Нактум" id="1011" isBoss="False" hp="5780726" />
+		<Monster name="Стражник" id="1012" isBoss="False" hp="100000000" />
+		<Monster name="Вертен" id="1013" isBoss="True" hp="900000000" />
 	</Zone>
 	<Zone id="643" name="Замок Чудес" >
 		<Monster name="Моргак" id="1001" isBoss="True" hp="161159398" />
@@ -14604,6 +14676,10 @@
 		<Monster name="Миньон-разрушитель" id="10238100" isBoss="False" hp="0" />
 		<Monster name="Приветствие Дуриона" id="20150805" isBoss="False" hp="999999999" />
 		<Monster name="ギガントクーマス" id="20170711" isBoss="False" hp="1496000000" />
+		<Monster name="Заблудившийся туванги" id="20170715" isBoss="False" hp="500" />
+		<Monster name="Стильная фея" id="20170716" isBoss="False" hp="500" />
+		<Monster name="Неистовый красный демон" id="20170717" isBoss="False" hp="500" />
+		<Monster name="Старший кобольд" id="20170718" isBoss="False" hp="500" />
 		<Monster name="СТ-1" id="30301001" isBoss="False" hp="36532" />
 		<Monster name="СТ-2" id="30301002" isBoss="False" hp="56414" />
 		<Monster name="СТ-3" id="30301003" isBoss="False" hp="90553" />

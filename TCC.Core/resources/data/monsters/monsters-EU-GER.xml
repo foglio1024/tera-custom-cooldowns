@@ -9,6 +9,7 @@
 		<Monster name="Menschenbogenschütze" id="10106" isBoss="False" hp="0" />
 		<Monster name="Menschenpriester" id="10107" isBoss="False" hp="0" />
 		<Monster name="Menschenmystiker" id="10108" isBoss="False" hp="0" />
+		<Monster name="Sturmfaust (Mensch, männlich)" id="10111" isBoss="False" hp="0" />
 		<Monster name="Menschenkriegerin" id="10201" isBoss="False" hp="0" />
 		<Monster name="Menschenlanzerin" id="10202" isBoss="False" hp="0" />
 		<Monster name="Menschenzerstörerin" id="10203" isBoss="False" hp="0" />
@@ -17,7 +18,7 @@
 		<Monster name="Menschenbogenschützin" id="10206" isBoss="False" hp="0" />
 		<Monster name="Menschenpriesterin" id="10207" isBoss="False" hp="0" />
 		<Monster name="Menschenmystikerin" id="10208" isBoss="False" hp="0" />
-		<Monster name="Sturmfurie" id="10211" isBoss="False" hp="0" />
+		<Monster name="Sturmfaust" id="10211" isBoss="False" hp="0" />
 		<Monster name="Hochelfenkrieger" id="10301" isBoss="False" hp="0" />
 		<Monster name="Hochelfenlanzer" id="10302" isBoss="False" hp="0" />
 		<Monster name="Hochelfenzerstörer" id="10303" isBoss="False" hp="0" />
@@ -185,9 +186,9 @@
 		<Monster name="Skelettbediensteter" id="5" isBoss="False" hp="213" />
 		<Monster name="Skelettsoldat" id="6" isBoss="False" hp="208" />
 		<Monster name="Dakanius" id="7" isBoss="False" hp="6857" />
-		<Monster name="Basenius" id="9" isBoss="False" hp="7737" />
-		<Monster name="Tuebenius" id="12" isBoss="False" hp="5000" />
-		<Monster name="Dunkle Maid" id="13" isBoss="False" hp="3741" />
+		<Monster name="Kleriker der Dunkelheit" id="9" isBoss="False" hp="7737" />
+		<Monster name="Devaner Sturmtrupp" id="12" isBoss="False" hp="5000" />
+		<Monster name="Devaner Sturmtrupp" id="13" isBoss="False" hp="3741" />
 		<Monster name="Auferstehungsräuber" id="14" isBoss="False" hp="4457" />
 		<Monster name="Ebenholzherzzauberer" id="15" isBoss="False" hp="4457" />
 		<Monster name="Gefallener Verteidiger" id="16" isBoss="False" hp="677" />
@@ -890,7 +891,7 @@
 	<Zone id="20" name="Val Aureum" >
 		<Monster name="Skelettdiener" id="98" isBoss="False" hp="1412" />
 		<Monster name="Jurzeniir" id="99" isBoss="False" hp="17936" />
-		<Monster name="Waffenkisten" id="6008500" isBoss="False" hp="6" />
+		<Monster name="Waffenkiste der Kultisten" id="6008500" isBoss="False" hp="6" />
 		<Monster name="Sklavenvorarbeiter" id="30011000" isBoss="False" hp="9124" />
 		<Monster name="Sklavenaufseher" id="30011001" isBoss="False" hp="9124" />
 		<Monster name="Grausamer Zuchtmeister" id="30011002" isBoss="False" hp="9124" />
@@ -4892,7 +4893,7 @@
 		<Monster name="Zerstörter Eingang zum Himmelreich der Götter" id="9501" isBoss="False" hp="0" />
 		<Monster name="Eingang zu Lakans Gefängnis (schwierig)" id="9710" isBoss="False" hp="0" />
 		<Monster name="Eingang zum RK-9 Hangar" id="9735" isBoss="False" hp="0" />
-		<Monster name="Eingang zur Lilitasfestung (leicht)" id="9769" isBoss="False" hp="0" />
+		<Monster name="Eingang zur Lilitasfestung, Lachelitas-Ruine" id="9769" isBoss="False" hp="0" />
 		<Monster name="Velika-Untergrundtor, Eingang zu Veliks Zuflucht" id="9780" isBoss="False" hp="0" />
 		<Monster name="Eingang zu Syruks Forschungsstation" id="9794" isBoss="False" hp="0" />
 		<Monster name="Queldarstation" id="18101" isBoss="False" hp="0" />
@@ -12479,15 +12480,15 @@
 		<Monster name="Besiegt den Wiederbelebten Malgarios." id="912" isBoss="False" hp="0" />
 		<Monster name="Besiegt Lachelitas des Albtraums." id="913" isBoss="False" hp="0" />
 		<Monster name="(Boss) Benutzt das Teleportal, um in Lachelitas' Bereich zu gelangen und Lachelitas zu töten." id="914" isBoss="False" hp="0" />
-		<Monster name="Wiederbelebter Atrocitas" id="1000" isBoss="True" hp="1400000000" />
+		<Monster name="Wiederbelebter Atrocitas" id="1000" isBoss="True" hp="2510000000" />
 		<Monster name="Wiederbelebter Atrocitas" id="1001" isBoss="False" hp="12670" />
 		<Monster name="Teleportal" id="1501" isBoss="False" hp="10000" />
 		<Monster name="Teleportal" id="1502" isBoss="False" hp="10000" />
 		<Monster name="Teleportal" id="1503" isBoss="False" hp="10000" />
-		<Monster name="Wiederbelebter Malgarios" id="2000" isBoss="True" hp="1248000000" />
+		<Monster name="Wiederbelebter Malgarios" id="2000" isBoss="True" hp="2300000000" />
 		<Monster name="Hungrige Spinne" id="2001" isBoss="False" hp="2000000000" />
 		<Monster name="Spinnenei" id="2002" isBoss="False" hp="100000" />
-		<Monster name="Lachelitas" id="3000" isBoss="True" hp="1344000000" />
+		<Monster name="Lachelitas" id="3000" isBoss="True" hp="2890000000" />
 	</Zone>
 	<Zone id="773" name="Ebenholzturm (schwierig)" >
 		<Monster name="Reinigungstotem" id="1001" isBoss="False" hp="10000" />
@@ -14157,15 +14158,15 @@
 		<Monster name="Besiegt den Wiederbelebten Malgarios." id="912" isBoss="False" hp="0" />
 		<Monster name="Besiegt Lachelitas des Albtraums." id="913" isBoss="False" hp="0" />
 		<Monster name="(Boss) Benutzt das Teleportal, um in Lachelitas' Bereich zu gelangen und Lachelitas des Albtraums zu töten." id="914" isBoss="False" hp="0" />
-		<Monster name="Wiederbelebter Atrocitas" id="1000" isBoss="True" hp="1540000000" />
+		<Monster name="Wiederbelebter Atrocitas" id="1000" isBoss="True" hp="3462000000" />
 		<Monster name="Wiederbelebter Atrocitas" id="1001" isBoss="False" hp="12670" />
 		<Monster name="Teleportal" id="1501" isBoss="False" hp="10000" />
 		<Monster name="Teleportal" id="1502" isBoss="False" hp="10000" />
 		<Monster name="Teleportal" id="1503" isBoss="False" hp="10000" />
-		<Monster name="Wiederbelebter Malgarios" id="2000" isBoss="True" hp="1400000000" />
+		<Monster name="Wiederbelebter Malgarios" id="2000" isBoss="True" hp="2768000000" />
 		<Monster name="Hungrige Spinne" id="2001" isBoss="False" hp="2000000000" />
 		<Monster name="Spinnenei" id="2002" isBoss="False" hp="100000" />
-		<Monster name="Lachelitas des Albtraums" id="3000" isBoss="True" hp="1440000000" />
+		<Monster name="Lachelitas des Albtraums" id="3000" isBoss="True" hp="3452000000" />
 	</Zone>
 	<Zone id="975" name="Kelsaiks Feuersturm (20er-Schlachtgruppe)" >
 		<Monster name="Kelsaik XX" id="1000" isBoss="True" hp="341391474" />
