@@ -121,10 +121,11 @@ namespace TCC.Parsing.Messages
                 c.weaponEnchant = reader.ReadInt32();
                 c.curRestExp = reader.ReadInt32();
                 c.maxRestExp = reader.ReadInt32();
-                c.unk38 = reader.ReadInt32();
-                c.unk39 = reader.ReadInt16();
-                c.rested = reader.ReadByte();
-                c.curRestExpPerc = reader.ReadInt32();
+                reader.Skip(1); //bool showFace
+                reader.Skip(31 * 8); //floats accTransform
+                reader.Skip(4 + 1); //uint unk, byte unk
+                reader.Skip(1); //bool showStyle
+                c.curRestExpPerc = reader.ReadInt32(); //unk25 from tera-data?
                 c.achiPoints = reader.ReadInt32();
                 c.laurel = reader.ReadInt32();
                 c.pos = reader.ReadInt32();
