@@ -1986,6 +1986,7 @@
 6538	0	猛獸秘藥 V	0	150	icon_items.griffon_potion_level_59_tex
 6539	1	大容量猛獸秘藥 V	0	150	icon_items.griffon_potion_level_60_tex
 6540	1	老舊的消耗品製作圖: 大容量猛獸秘藥 V	0	0	icon_items.scroll_alchemy_potion_tex
+6542	0	蓋堤的移動卷軸	0	30	icon_items.scroll2_tex
 6550	1	[初級HP恢復藥水]	0	10	icon_items.hp_potion_level_9_tex
 6551	2	中級HP恢復藥水	0	10	icon_items.hp_potion_level_33_tex
 6552	3	高級HP恢復藥水	0	10	icon_items.hp_potion_level_60_tex
@@ -12353,6 +12354,7 @@
 21352	0	強化石 11階段	0	0	icon_items.enchant_material_11_tex
 21353	0	強化石 12階段	0	0	icon_items.enchant_material_12_tex
 21354	3	被淨化的礦石粉末	0	0	icon_items.abradant1_tex
+21355	3	帽子型態凝固劑	0	0	icon_items.refine_chemical11_tex
 22001	0	1級衣料萃取書	0	0	icon_items.secret_extract_cloth_tex
 22002	0	1級板金萃取書	0	0	icon_items.secret_extract_metal_tex
 22004	0	1級精石萃取書	0	0	icon_items.secret_extract_stone_tex
@@ -19566,6 +19568,7 @@
 81278	0	活力布甲鞋子	0	0	icon_equipments.robeboots1_c_tex
 81279	0	活力魔工砲	0	0	icon_equipments.blaster0_a_tex
 81280	0	活力拳甲	0	0	icon_equipments.gauntlet0_a_tex
+81281	0	比托勒納勒迪的移動卷軸	0	30	icon_items.townrecall_tex
 82000	3	法羅納的幸運星拳甲	0	0	icon_equipments.gauntlet0_tex
 82001	2	魯倫龐的強壯拳甲	0	0	icon_equipments.gauntlet0_a_tex
 82002	2	憂奇的尖銳拳甲	0	0	icon_equipments.gauntlet0_b_tex
@@ -20371,7 +20374,7 @@
 83305	1	移動卷軸: 吹牛王塔勒斯基的遊樂場	0	300	icon_items.dungeon_recall_tex
 83306	3	幻影之塔入場券 - 16層 (第 3季)	0	0	icon_skills.guildskill3_4_monrepute10_tex
 83307	1	移動卷軸: 破壞的神界關口	0	300	icon_items.dungeon_recall_tex
-83400	1	移動卷軸: 莉里斯城	0	300	icon_items.dungeon_recall_tex
+83400	1	移動卷軸: 莉里斯城, 拉坎里斯的廢墟	0	300	icon_items.dungeon_recall_tex
 83401	1	移動卷軸: 拉坎里斯的廢墟	0	300	icon_items.dungeon_recall_tex
 83402	1	移動卷軸: 扭曲的拉坎祭壇	0	300	icon_items.dungeon_recall_tex
 83403	1	移動卷軸：貝利卡地下關口、貝里克神殿	0	300	icon_items.dungeon_recall_tex
@@ -23781,6 +23784,11 @@
 98576	1	公會補給品箱子	0	1	icon_items.mysterybox2_tex
 98577	0	小型公會補給品箱子	0	1	icon_items.mysterybox1_tex
 98578	2	老舊的公會補給品箱子	0	0	icon_items.mysterybox1_tex
+98579	2	守護者的高級獎勵箱子	0	0	icon_items.material_box_4_tex
+98580	2	守護者的中級獎勵箱子	0	0	icon_items.material_box_3_tex
+98581	2	守護者的初級獎勵箱子	0	0	icon_items.material_box_2_tex
+98582	2	守護者任務寶石箱	0	0	icon_items.material_box_7_tex
+98583	3	靈魂牆碎片	0	0	icon_items.union_enchantmaterial1_tex
 98584	2	砲火戰場獎勵箱子	0	0	icon_items.tresurebox1_tex
 98585	2	名譽戰場獎勵箱子	0	0	icon_items.tresurebox1_tex
 98586	2	寶物遠征隊獎勵箱子	0	0	icon_items.tresurebox1_tex
@@ -23801,6 +23809,22 @@
 99020	3	[可交易]名家製作添加劑	0	0	icon_items.refine_energya2_tex
 99021	3	[可交易]鐵匠製作添加劑	0	0	icon_items.artisanmaster_up_tex
 99022	3	[可交易]名家製作添加劑	0	0	icon_items.refine_energya2_tex
+99023	3	美髮兌換券	0	0	icon_items.randomcoupon_hair_3_tex
+99024	3	美髮兌換券	0	0	icon_items.randomcoupon_hair_3_tex
+99025	3	皇家美髮兌換券	0	0	icon_items.randomcoupon_hair_3_tex
+99026	3	皇家美髮兌換券	0	0	icon_items.randomcoupon_hair_3_tex
+99027	3	美髮兌換券(指定)	0	0	icon_items.randomcoupon_hair_1_tex
+99028	3	美髮兌換券(指定)	0	0	icon_items.randomcoupon_hair_1_tex
+99029	3	美髮兌換券(3選1)	0	0	icon_items.randomcoupon_hair_2_tex
+99030	3	美髮兌換券(3選1)	0	0	icon_items.randomcoupon_hair_2_tex
+99031	3	皇家美髮兌換券(3選1)	0	0	icon_items.randomcoupon_hair_2_tex
+99032	3	皇家美髮兌換券(3選1)	0	0	icon_items.randomcoupon_hair_2_tex
+99033	3	美髮兌換券(4選1)	0	0	icon_items.randomcoupon_hair_4_tex
+99034	3	美髮兌換券(4選1)	0	0	icon_items.randomcoupon_hair_4_tex
+99035	3	皇家美髮兌換券(4選1)	0	0	icon_items.randomcoupon_hair_4_tex
+99036	3	皇家美髮兌換券(4選1)	0	0	icon_items.randomcoupon_hair_4_tex
+99037	3	[不可交易]角色髮型變更券	0	0	icon_items.randomcoupon_hair_4_tex
+99038	3	角色髮型變更券	0	0	icon_items.randomcoupon_hair_4_tex
 99100	2	[S]技能教本：召喚鋼鐵飛龍	0	0	icon_items.skillbook_lion1_tex
 99101	2	[S]技能教本：召喚緋紅飛龍	0	0	icon_items.skillbook_lion1_tex
 99102	2	[S]技能教本：召喚幽影飛龍	0	0	icon_items.skillbook_lion1_tex
@@ -25711,6 +25735,182 @@
 201348	3	[巴其溫偵察隊] 珊德拉馬奈伊亞拳甲	0	0	icon_equipments.gauntlet29_a_tex
 201349	3	[巴其溫偵察隊] 珊德拉馬奈伊亞手裏劍	0	0	icon_equipments.shuriken03_b_tex
 201350	3	[巴其溫偵察隊] 珊德拉馬奈伊亞月光刀	0	0	icon_equipments.glaive02_a_tex
+201351	1	[虛擬] 髮型酷碰券	0	0	icon_equipments.acc_074a_tex
+201352	1	[虛擬] 整型酷碰券	0	0	icon_items.charface_change_tex
+201353	1	[虛擬] 染色酷碰券 (人類女)	0	0	icon_items.bluecustomize21g_tex
+201354	1	[虛擬] 助曬酷碰券 (人類女)	0	0	icon_items.dye_result_random_tex
+201355	2	[虛擬] 隨機髮型酷碰券 (人類女)	0	0	icon_equipments.acc_074a_tex
+201356	2	[虛擬] 隨機整型酷碰券 (人類女)	0	0	icon_items.charface_change_tex
+201357	2	[虛擬] 隨機染色酷碰券 (人類女)	0	0	icon_items.bluecustomize21g_tex
+201358	2	[虛擬] 隨機助曬酷碰券 (人類女)	0	0	icon_items.dye_result_random_tex
+201359	3	[虛擬] 指定髮型酷碰券	0	0	icon_equipments.acc_074a_tex
+201360	3	[虛擬] 指定整型酷碰券 (人類女)	0	0	icon_items.charface_change_tex
+201361	3	[虛擬] 指定染色酷碰券 (人類女)	0	0	icon_items.bluecustomize21g_tex
+201362	3	[虛擬] 指定助曬酷碰券 (人類女)	0	0	icon_items.dye_result_random_tex
+201483	3	轉轉企鵝印記	0	0	icon_items.footprint_wintera01_tex
+201484	3	轉轉企鵝印記	0	0	icon_items.footprint_wintera01_tex
+201485	3	轉轉企鵝印記 (3天)	0	0	icon_items.footprint_wintera01_tex
+201486	3	轉轉企鵝印記 (7天)	0	0	icon_items.footprint_wintera01_tex
+201487	3	轉轉企鵝印記 (7天)	0	0	icon_items.footprint_wintera01_tex
+201488	3	轉轉企鵝印記 (14天)	0	0	icon_items.footprint_wintera01_tex
+201489	3	轉轉企鵝印記 (30天)	0	0	icon_items.footprint_wintera01_tex
+201490	3	轉轉企鵝印記 (30天)	0	0	icon_items.footprint_wintera01_tex
+201491	3	轉轉企鵝印記	0	0	icon_items.footprint_wintera01_tex
+201492	3	轉轉企鵝印記	0	0	icon_items.footprint_wintera01_tex
+201493	3	轉轉企鵝印記	0	0	icon_items.footprint_wintera01_tex
+201494	3	轉轉企鵝印記	0	0	icon_items.footprint_wintera01_tex
+201495	3	[稀有]轉轉企鵝印記	0	0	icon_items.footprint_wintera02_tex
+201496	3	[稀有]轉轉企鵝印記	0	0	icon_items.footprint_wintera02_tex
+201497	3	[稀有]轉轉企鵝印記 (3天)	0	0	icon_items.footprint_wintera02_tex
+201498	3	[稀有]轉轉企鵝印記 (7天)	0	0	icon_items.footprint_wintera02_tex
+201499	3	[稀有]轉轉企鵝印記 (7天)	0	0	icon_items.footprint_wintera02_tex
+201500	3	[稀有]轉轉企鵝印記 (14天)	0	0	icon_items.footprint_wintera02_tex
+201501	3	[稀有]轉轉企鵝印記 (30天)	0	0	icon_items.footprint_wintera02_tex
+201502	3	[稀有]轉轉企鵝印記 (30天)	0	0	icon_items.footprint_wintera02_tex
+201503	3	[稀有]轉轉企鵝印記	0	0	icon_items.footprint_wintera02_tex
+201504	3	[稀有]轉轉企鵝印記	0	0	icon_items.footprint_wintera02_tex
+201505	3	[稀有]轉轉企鵝印記	0	0	icon_items.footprint_wintera02_tex
+201506	3	[稀有]轉轉企鵝印記	0	0	icon_items.footprint_wintera02_tex
+201507	3	悠閒的轉轉企鵝印記	0	0	icon_items.footprint_winterb01_tex
+201508	3	悠閒的轉轉企鵝印記	0	0	icon_items.footprint_winterb01_tex
+201509	3	悠閒的轉轉企鵝印記 (3天)	0	0	icon_items.footprint_winterb01_tex
+201510	3	悠閒的轉轉企鵝印記 (7天)	0	0	icon_items.footprint_winterb01_tex
+201511	3	悠閒的轉轉企鵝印記 (7天)	0	0	icon_items.footprint_winterb01_tex
+201512	3	悠閒的轉轉企鵝印記 (14天)	0	0	icon_items.footprint_winterb01_tex
+201513	3	悠閒的轉轉企鵝印記 (30天)	0	0	icon_items.footprint_winterb01_tex
+201514	3	悠閒的轉轉企鵝印記 (30天)	0	0	icon_items.footprint_winterb01_tex
+201515	3	悠閒的轉轉企鵝印記	0	0	icon_items.footprint_winterb01_tex
+201516	3	悠閒的轉轉企鵝印記	0	0	icon_items.footprint_winterb01_tex
+201517	3	悠閒的轉轉企鵝印記	0	0	icon_items.footprint_winterb01_tex
+201518	3	悠閒的轉轉企鵝印記	0	0	icon_items.footprint_winterb01_tex
+201519	3	[稀有]悠閒的轉轉企鵝印記	0	0	icon_items.footprint_winterb02_tex
+201520	3	[稀有]悠閒的轉轉企鵝印記	0	0	icon_items.footprint_winterb02_tex
+201521	3	[稀有]悠閒的轉轉企鵝印記 (3天)	0	0	icon_items.footprint_winterb02_tex
+201522	3	[稀有]悠閒的轉轉企鵝印記 (7天)	0	0	icon_items.footprint_winterb02_tex
+201523	3	[稀有]悠閒的轉轉企鵝印記 (7天)	0	0	icon_items.footprint_winterb02_tex
+201524	3	[稀有]悠閒的轉轉企鵝印記 (14天)	0	0	icon_items.footprint_winterb02_tex
+201525	3	[稀有]悠閒的轉轉企鵝印記 (30天)	0	0	icon_items.footprint_winterb02_tex
+201526	3	[稀有]悠閒的轉轉企鵝印記 (30天)	0	0	icon_items.footprint_winterb02_tex
+201527	3	[稀有]悠閒的轉轉企鵝印記	0	0	icon_items.footprint_winterb02_tex
+201528	3	[稀有]悠閒的轉轉企鵝印記	0	0	icon_items.footprint_winterb02_tex
+201529	3	[稀有]悠閒的轉轉企鵝印記	0	0	icon_items.footprint_winterb02_tex
+201530	3	[稀有]悠閒的轉轉企鵝印記	0	0	icon_items.footprint_winterb02_tex
+201531	2	Riding Skill: Elephant	0	0	icon_items.skillbook_lion1_tex
+201532	2	Riding Skill: Elephant	0	0	icon_items.skillbook_lion1_tex
+201533	2	Riding Skill: Elephant	0	0	icon_items.skillbook_lion1_tex
+201534	2	Riding Skill: Elephant	0	0	icon_items.skillbook_lion1_tex
+201535	2	Riding Skill: Elephant (3 Days)	0	0	icon_items.skillbook_lion1_tex
+201536	2	Riding Skill: Elephant (7 Days)	0	0	icon_items.skillbook_lion1_tex
+201537	2	Riding Skill: Elephant (14 Days)	0	0	icon_items.skillbook_lion1_tex
+201538	2	Riding Skill: Elephant (30 Days)	0	0	icon_items.skillbook_lion1_tex
+201539	3	Riding Skill: Rare Elephant	0	0	icon_items.skillbook_lion1_tex
+201540	3	Riding Skill: Rare Elephant	0	0	icon_items.skillbook_lion1_tex
+201541	3	Riding Skill: Rare Elephant	0	0	icon_items.skillbook_lion1_tex
+201542	3	Riding Skill: Rare Elephant	0	0	icon_items.skillbook_lion1_tex
+201543	3	Riding Skill: Rare Elephant (3 Days)	0	0	icon_items.skillbook_lion1_tex
+201544	3	Riding Skill: Rare Elephant (7 Days)	0	0	icon_items.skillbook_lion1_tex
+201545	3	Riding Skill: Rare Elephant (14 Days)	0	0	icon_items.skillbook_lion1_tex
+201546	3	Riding Skill: Rare Elephant (30 Days)	0	0	icon_items.skillbook_lion1_tex
+201547	2	Care and Use of Your Kitty Pet Brownie	0	0	icon_items.petskillbook_tex
+201548	2	Care and Use of Your Kitty Pet Brownie	0	0	icon_items.petskillbook_tex
+201549	2	Care and Use of Your Kitty Pet Brownie	0	0	icon_items.petskillbook_tex
+201550	2	Care and Use of Your Kitty Pet Brownie	0	0	icon_items.petskillbook_tex
+201551	2	Care and Use of Your Kitty Pet Brownie (3 Days)	0	0	icon_items.petskillbook_tex
+201552	2	Care and Use of Your Kitty Pet Brownie (7 Days)	0	0	icon_items.petskillbook_tex
+201553	2	Care and Use of Your Kitty Pet Brownie (14 Days)	0	0	icon_items.petskillbook_tex
+201554	2	Care and Use of Your Kitty Pet Brownie (30 Days)	0	0	icon_items.petskillbook_tex
+201555	2	Care and Use of Your Kitty Pet Gray	0	0	icon_items.petskillbook_tex
+201556	2	Care and Use of Your Kitty Pet Gray	0	0	icon_items.petskillbook_tex
+201557	2	Care and Use of Your Kitty Pet Gray	0	0	icon_items.petskillbook_tex
+201558	2	Care and Use of Your Kitty Pet Gray	0	0	icon_items.petskillbook_tex
+201559	2	Care and Use of Your Kitty Pet Gray (3 Days)	0	0	icon_items.petskillbook_tex
+201560	2	Care and Use of Your Kitty Pet Gray (7 Days)	0	0	icon_items.petskillbook_tex
+201561	2	Care and Use of Your Kitty Pet Gray (14 Days)	0	0	icon_items.petskillbook_tex
+201562	2	Care and Use of Your Kitty Pet Gray (30 Days)	0	0	icon_items.petskillbook_tex
+201563	3	Care and Use of Your Kitty Pet Rare Brownie	0	0	icon_items.petskillbook_tex
+201564	3	Care and Use of Your Kitty Pet Rare Brownie	0	0	icon_items.petskillbook_tex
+201565	3	Care and Use of Your Kitty Pet Rare Brownie	0	0	icon_items.petskillbook_tex
+201566	3	Care and Use of Your Kitty Pet Rare Brownie	0	0	icon_items.petskillbook_tex
+201567	3	Care and Use of Your Kitty Pet Rare Brownie (3 Days)	0	0	icon_items.petskillbook_tex
+201568	3	Care and Use of Your Kitty Pet Rare Brownie (7 Days)	0	0	icon_items.petskillbook_tex
+201569	3	Care and Use of Your Kitty Pet Rare Brownie (14 Days)	0	0	icon_items.petskillbook_tex
+201570	3	Care and Use of Your Kitty Pet Rare Brownie (30 Days)	0	0	icon_items.petskillbook_tex
+201571	3	Care and Use of Your Kitty Pet Rare Gray	0	0	icon_items.petskillbook_tex
+201572	3	Care and Use of Your Kitty Pet Rare Gray	0	0	icon_items.petskillbook_tex
+201573	3	Care and Use of Your Kitty Pet Rare Gray	0	0	icon_items.petskillbook_tex
+201574	3	Care and Use of Your Kitty Pet Rare Gray	0	0	icon_items.petskillbook_tex
+201575	3	Care and Use of Your Kitty Pet Rare Gray (3 Days)	0	0	icon_items.petskillbook_tex
+201576	3	Care and Use of Your Kitty Pet Rare Gray (7 Days)	0	0	icon_items.petskillbook_tex
+201577	3	Care and Use of Your Kitty Pet Rare Gray (14 Days)	0	0	icon_items.petskillbook_tex
+201578	3	Care and Use of Your Kitty Pet Rare Gray (30 Days)	0	0	icon_items.petskillbook_tex
+201579	3	花之印記	0	0	icon_items.footprint_flowerroad_tex
+201580	3	花之印記	0	0	icon_items.footprint_flowerroad_tex
+201581	3	花之印記 (3天)	0	0	icon_items.footprint_flowerroad_tex
+201582	3	花之印記 (7天)	0	0	icon_items.footprint_flowerroad_tex
+201583	3	花之印記 (7天)	0	0	icon_items.footprint_flowerroad_tex
+201584	3	花之印記 (14天)	0	0	icon_items.footprint_flowerroad_tex
+201585	3	花之印記 (30天)	0	0	icon_items.footprint_flowerroad_tex
+201586	3	花之印記 (30天)	0	0	icon_items.footprint_flowerroad_tex
+201587	3	花之印記	0	0	icon_items.footprint_flowerroad_tex
+201588	3	花之印記	0	0	icon_items.footprint_flowerroad_tex
+201589	3	花之印記	0	0	icon_items.footprint_flowerroad_tex
+201590	3	花之印記	0	0	icon_items.footprint_flowerroad_tex
+201591	2	雪煙花	0	60	icon_items.snowflower_tex
+201592	2	雪煙花	0	60	icon_items.snowflower_tex
+201593	2	雪煙花(永久)	0	60	icon_items.snowflower_tex
+201594	2	雪煙花(永久)	0	60	icon_items.snowflower_tex
+201595	2	雪煙花(3天)	0	60	icon_items.snowflower_tex
+201596	2	雪煙花(7天)	0	60	icon_items.snowflower_tex
+201597	2	雪煙花(14天)	0	60	icon_items.snowflower_tex
+201598	2	雪煙花(30天)	0	60	icon_items.snowflower_tex
+201599	3	與汪同行印記(麥色)	0	0	icon_items.footprint_newyeara_tex
+201600	3	與汪同行印記(麥色)	0	0	icon_items.footprint_newyeara_tex
+201601	3	與汪同行印記(麥色)(3天)	0	0	icon_items.footprint_newyeara_tex
+201602	3	與汪同行印記(麥色)(7天)	0	0	icon_items.footprint_newyeara_tex
+201603	3	與汪同行印記(麥色)(7天)	0	0	icon_items.footprint_newyeara_tex
+201604	3	與汪同行印記(麥色)(14天)	0	0	icon_items.footprint_newyeara_tex
+201605	3	與汪同行印記(麥色)(30天)	0	0	icon_items.footprint_newyeara_tex
+201606	3	與汪同行印記(麥色)(30天)	0	0	icon_items.footprint_newyeara_tex
+201607	3	與汪同行印記(麥色)	0	0	icon_items.footprint_newyeara_tex
+201608	3	與汪同行印記(麥色)	0	0	icon_items.footprint_newyeara_tex
+201609	3	與汪同行印記(麥色)	0	0	icon_items.footprint_newyeara_tex
+201610	3	與汪同行印記(麥色)	0	0	icon_items.footprint_newyeara_tex
+201611	3	與汪同行印記(棕色)	0	0	icon_items.footprint_newyearb_tex
+201612	3	與汪同行印記(棕色)	0	0	icon_items.footprint_newyearb_tex
+201613	3	與汪同行印記(棕色)(3天)	0	0	icon_items.footprint_newyearb_tex
+201614	3	與汪同行印記(棕色)(7天)	0	0	icon_items.footprint_newyearb_tex
+201615	3	與汪同行印記(棕色)(7天)	0	0	icon_items.footprint_newyearb_tex
+201616	3	與汪同行印記(棕色)(14天)	0	0	icon_items.footprint_newyearb_tex
+201617	3	與汪同行印記(棕色)(30天)	0	0	icon_items.footprint_newyearb_tex
+201618	3	與汪同行印記(棕色)(30天)	0	0	icon_items.footprint_newyearb_tex
+201619	3	與汪同行印記(棕色)	0	0	icon_items.footprint_newyearb_tex
+201620	3	與汪同行印記(棕色)	0	0	icon_items.footprint_newyearb_tex
+201621	3	與汪同行印記(棕色)	0	0	icon_items.footprint_newyearb_tex
+201622	3	與汪同行印記(棕色)	0	0	icon_items.footprint_newyearb_tex
+201623	3	與汪同行印記(黑色)	0	0	icon_items.footprint_newyearc_tex
+201624	3	與汪同行印記(黑色)	0	0	icon_items.footprint_newyearc_tex
+201625	3	與汪同行印記(黑色)(3天)	0	0	icon_items.footprint_newyearc_tex
+201626	3	與汪同行印記(黑色)(7天)	0	0	icon_items.footprint_newyearc_tex
+201627	3	與汪同行印記(黑色)(7天)	0	0	icon_items.footprint_newyearc_tex
+201628	3	與汪同行印記(黑色)(14天)	0	0	icon_items.footprint_newyearc_tex
+201629	3	與汪同行印記(黑色)(30天)	0	0	icon_items.footprint_newyearc_tex
+201630	3	與汪同行印記(黑色)(30天)	0	0	icon_items.footprint_newyearc_tex
+201631	3	與汪同行印記(黑色)	0	0	icon_items.footprint_newyearc_tex
+201632	3	與汪同行印記(黑色)	0	0	icon_items.footprint_newyearc_tex
+201633	3	與汪同行印記(黑色)	0	0	icon_items.footprint_newyearc_tex
+201634	3	與汪同行印記(黑色)	0	0	icon_items.footprint_newyearc_tex
+201635	3	[稀有]與汪同行印記	0	0	icon_items.footprint_newyearrare_tex
+201636	3	[稀有]與汪同行印記	0	0	icon_items.footprint_newyearrare_tex
+201637	3	[稀有]與汪同行印記(3天)	0	0	icon_items.footprint_newyearrare_tex
+201638	3	[稀有]與汪同行印記(7天)	0	0	icon_items.footprint_newyearrare_tex
+201639	3	[稀有]與汪同行印記(7天)	0	0	icon_items.footprint_newyearrare_tex
+201640	3	[稀有]與汪同行印記(14天)	0	0	icon_items.footprint_newyearrare_tex
+201641	3	[稀有]與汪同行印記(30天)	0	0	icon_items.footprint_newyearrare_tex
+201642	3	[稀有]與汪同行印記(30天)	0	0	icon_items.footprint_newyearrare_tex
+201643	3	[稀有]與汪同行印記	0	0	icon_items.footprint_newyearrare_tex
+201644	3	[稀有]與汪同行印記	0	0	icon_items.footprint_newyearrare_tex
+201645	3	[稀有]與汪同行印記	0	0	icon_items.footprint_newyearrare_tex
+201646	3	[稀有]與汪同行印記	0	0	icon_items.footprint_newyearrare_tex
 20000000	0	金額	0	0	icon_items.goldcoin_tex
 20000001	0	經驗值	0	0	icon_items.icon_exp_tex
 20000002	0	獎勵未定	0	0	icon_items.icon_reward_unclear_tex
@@ -25971,77 +26171,6 @@
 155477	3	Tier 12 +15 Enchantment Scroll [Hand armor]	0	3	icon_items.scroll_mysterypaper1_tex
 155478	3	Tier 12 +15 Enchantment Scroll [Footwear]	0	3	icon_items.scroll_mysterypaper1_tex
 155479	2	Dreamy Desires	0	0	icon_items.parts_magicweaponc13_tex
-155480	2	Smart Box: Dyeable SWAT Team Uniform	0	1	icon_items.gift_box04_tex
-155481	3	Parthian-Scarf	0	0	icon_equipments.acc_214_tex
-155482	3	[Event] Gift of the Stars #1	0	1800	icon_equipments.acc_324_tex
-155483	3	[Event] Reward Box #2	0	5	icon_items.gift_box03_tex
-155484	3	[Event] Reward Box #3	0	5	icon_items.gift_box03_tex
-155485	3	[Event] Reward Box #4	0	5	icon_items.gift_box03_tex
-155486	3	[Event] Reward Box #5	0	5	icon_items.gift_box03_tex
-155487	3	[Event] Reward Box #6	0	5	icon_items.gift_box03_tex
-155488	2	[Event] Lasting Memory	0	0	icon_status.laxyarcher_tex
-155489	2	[Event] Twinkle of a Star	0	0	icon_status.lighteffect_tex
-155490	2	[Event] Elemental Clue	0	0	icon_items.parts_magicweaponc11_tex
-155491	2	[Event] Dark Secrets #1	0	5	icon_items.refine_energya13_tex
-155492	3	[Event] Dark Secrets #2	0	5	icon_items.parts_magicweaponc7_tex
-155493	2	Dragon Skill: Mighty Armored Dragon (4 days)	0	0	icon_items.skillbook_lion1_tex
-155494	3	Club Reward Box	0	60	icon_items.special_box03_tex
-155495	3	[Event] Gift of the Stars #2	0	5	icon_equipments.acc_324_tex
-155496	3	[Event] Gift of the Stars #3	0	5	icon_equipments.acc_324_tex
-155497	3	[Event] Gift of the Stars #4	0	5	icon_equipments.acc_324_tex
-155498	3	[Event] Gift of the Stars #5	0	5	icon_equipments.acc_324_tex
-155499	3	[Event] Gift of the Stars #6	0	5	icon_equipments.acc_324_tex
-155500	3	[Fashion] Guile Mail	0	0	icon_equipments.heavychest25a_e_tex
-155501	3	[Fashion] Guile Vest	0	0	icon_equipments.lightchest25_b_tex
-155502	3	[Fashion] Guile Robe	0	0	icon_equipments.robechest25a_e_tex
-155503	3	Club Membership Voucher (30-day)	0	60	icon_items.chronoscroll_tex
-155504	3	Luminous Abhorribbon	0	0	icon_equipments.acc_436_tex
-155505	3	Luminous Skull	0	0	icon_equipments.acc_437_tex
-155506	2	Mr.Cleaver	0	0	icon_equipments.acc_182_tex
-155507	3	Luminous Raiments of the Dead (Human Male)	0	0	icon_equipments.pc_event_34_m_rare_tex
-155508	3	Luminous Raiments of the Dead (Human Female)	0	0	icon_equipments.pc_event_34_f_rare_tex
-155509	3	Luminous Raiments of the Dead (High Elf Male)	0	0	icon_equipments.pc_event_34_m_rare_tex
-155510	3	Luminous Raiments of the Dead (High Elf Female)	0	0	icon_equipments.pc_event_34_f_rare_tex
-155511	3	Luminous Raiments of the Dead (Amani Male)	0	0	icon_equipments.pc_event_34_m_rare_tex
-155512	3	Luminous Raiments of the Dead (Amani Female)	0	0	icon_equipments.pc_event_34_f_rare_tex
-155513	3	Luminous Raiments of the Dead (Castanic Male)	0	0	icon_equipments.pc_event_34_m_rare_tex
-155514	3	Luminous Raiments of the Dead (Castanic Female)	0	0	icon_equipments.pc_event_34_f_rare_tex
-155515	3	Luminous Raiments of the Dead (Popori)	0	0	icon_equipments.pc_event_34_m_rare_tex
-155516	3	Luminous Raiments of the Dead (Elin)	0	0	icon_equipments.pc_event_34_f_rare_tex
-155517	3	Luminous Raiments of the Dead (Baraka)	0	0	icon_equipments.pc_event_34_m_rare_tex
-155518	3	Massive Loot Box 	0	0	icon_items.mysterybox2_tex
-155519	3	Extreme Loot Box	0	0	icon_items.premiumbox_vehicle2_tex
-155520	3	Extreme Key	0	0	icon_items.unionextractorkey_tex
-155521	3	Box 1	0	0	icon_items.gachabox_tex
-155522	3	Box 2	0	0	icon_items.gachabox_tex
-155523	3	Box 3	0	0	icon_items.gachabox_tex
-155524	3	Box 4	0	0	icon_items.gachabox_tex
-155525	3	Box 5	0	0	icon_items.gachabox_tex
-155526	3	Box 6	0	0	icon_items.gachabox_tex
-155527	2	Unique Cube of Doom	0	0	icon_items.cube_reward02_tex
-155528	3	Halloween Runestone	0	3	icon_items.q_argoncore_tex
-155529	3	Halloween Reward Box	0	0	icon_items.solventa10_tex
-155530	2	Token: Oath of the Cursed	0	0	icon_items.q_parts_tex
-155531	2	Supply Box: Enchantment Masters	0	0	icon_items.premiumbox_vehicle4_tex
-155532	2	Supply Box: Enchantment Enthousiasts	0	0	icon_items.premiumbox_vehicle2_tex
-155533	2	Non-Tradable SES	0	0	icon_items.optionresetscroll_tex
-155534	2	Tradable SES	0	0	icon_items.optionresetscroll_tex
-155535	2	Master Fusioneer Chest	0	0	icon_items.tresurebox2_tex
-155536	2	War Cry Chest	0	0	icon_items.parts_magicweaponc6_tex
-155537	0	Summon NPC: XXX [Vanguard Initiative]	0	600	icon_items.premium_summonnpc_02_tex
-155538	1	Club Ghillieglade Scroll	0	10	icon_items.dungeon_recall_tex
-155539	2	Box: Archdevan Enchantment Tools	0	0	icon_items.parts_lightarmorc15_tex
-155540	2	Box: Blood-soaked Metallic Structure	0	0	icon_items.refine_leather8_tex
-155541	2	Box: Ash of the Unspoken	0	0	icon_items.refined_insecta13_tex
-155542	2	Box: Wondrous Holy Water	0	0	icon_items.refinedplant_a11_tex
-155543	2	Box: Ominous Spell Scroll	0	0	icon_items.solventg15_tex
-155544	2	Box: Ornamental Piece	0	0	icon_items.parts_lightweaponc8_tex
-155545	2	Box: Dimensional Fragment	0	0	icon_items.perfectcrestoftime_tex
-155546	1	Locked Crystal Coffer	0	0	icon_items.premiumbox_weapon2_tex
-155547	3	Locked Enchantment Coffer	0	0	icon_items.f2p_box_tex
-155548	3	Locked Gem Coffer	0	0	icon_items.f2p_box_tex
-155549	3	Tier IV Etching Master 1	0	0	icon_items.premiumbox_enchantagent_tex
-155550	3	Tier IV Etching Master 2	0	0	icon_items.premiumbox_enchantagent_tex
 160404	0	Federation Bill	0	0	icon_items.federation_bill_tex
 167296	0	T	0	0	icon_items.event_letter01_tex
 167297	0	E	0	0	icon_items.event_letter02_tex
@@ -26256,6 +26385,96 @@
 244691	3	Flying Skillbook Loot Box	0	0	icon_items.tresurebox2_tex
 244692	3	Normal Mechanic Costume Loot Box	0	0	icon_items.tresurebox2_tex
 244693	3	Dyeable Mechanic Costume Loot Box	0	0	icon_items.tresurebox2_tex
+244694	2	Retro Loot Box	0	0	icon_items.tresurebox2_tex
+244695	2	Emulator Loot Box	0	0	icon_items.tresurebox2_tex
+244696	2	Maid's Loot Box	0	0	icon_items.tresurebox2_tex
+244697	2	Lucky Cat Carrier	0	0	icon_items.tresurebox2_tex
+244698	2	Shadowlaced Loot Box	0	0	icon_items.tresurebox2_tex
+244699	2	Blackguard's Tool Kit	0	0	icon_items.tresurebox2_tex
+244700	2	Aurumheart Dragonrider Box	0	0	icon_items.tresurebox2_tex
+244701	2	Crimsonheart Dragonrider Box	0	0	icon_items.tresurebox2_tex
+244702	2	Empowering Trousseau	0	0	icon_items.tresurebox2_tex
+244703	2	Fortified Trousseau	0	0	icon_items.tresurebox2_tex
+244704	2	Performance Trousseau	0	0	icon_items.tresurebox2_tex
+244705	2	Fitness Trousseau	0	0	icon_items.tresurebox2_tex
+244706	2	Endurance Trousseau	0	0	icon_items.tresurebox2_tex
+244707	2	Empowering Innerwear Box	0	0	icon_items.tresurebox2_tex
+244708	2	Fortified Innerwear Box	0	0	icon_items.tresurebox2_tex
+244709	2	Performance Innerwear Box	0	0	icon_items.tresurebox2_tex
+244710	2	Fitness Innerwear Box	0	0	icon_items.tresurebox2_tex
+244711	2	Endurance Innerwear Box	0	0	icon_items.tresurebox2_tex
+244712	2	Spider Silk Trousseau	0	0	icon_items.tresurebox2_tex
+244713	2	Dragon Silk Innerwear	0	0	icon_items.tresurebox2_tex
+244714	2	True Ultimate Elin Elite Box	0	0	icon_items.tresurebox2_tex
+244715	2	Chromaplasm Weapon Skin Loot Box	0	0	icon_items.tresurebox2_tex
+244716	2	Dire Crimson Loot Box	0	0	icon_items.tresurebox2_tex
+244717	2	Foreboding Purple Loot Box	0	0	icon_items.tresurebox2_tex
+244718	2	Shocking Green Loot Box	0	0	icon_items.tresurebox2_tex
+244719	2	Electric Blue Loot Box	0	0	icon_items.tresurebox2_tex
+244720	2	Airborne Assault Loot Box	0	0	icon_items.tresurebox2_tex
+244721	2	High on the Hog Loot Box	0	0	icon_items.tresurebox2_tex
+244722	2	Governess Loot Box	0	0	icon_items.tresurebox2_tex
+244723	2	Elin Housemaid Loot Box	0	0	icon_items.tresurebox2_tex
+244724	2	Black Box	0	0	icon_items.tresurebox2_tex
+244725	2	Kitty Box	0	0	icon_items.tresurebox2_tex
+244726	2	Skycycle Loot Box	0	0	icon_items.tresurebox2_tex
+244727	2	Jetcycle Loot Box	0	0	icon_items.tresurebox2_tex
+244728	2	Royal Crimson Dragon Loot Box	0	0	icon_items.tresurebox2_tex
+244729	2	Royal Iron Dragon Loot Box	0	0	icon_items.tresurebox2_tex
+244730	2	Royal Diamond Dragonlord Box	0	0	icon_items.tresurebox2_tex
+244731	2	Royal Ghost Dragonlord Box	0	0	icon_items.tresurebox2_tex
+244732	2	Empowered Inner Armor Box	0	0	icon_items.tresurebox2_tex
+244733	2	Fitness Inner Armor Box	0	0	icon_items.tresurebox2_tex
+244734	2	Fortified Inner Armor Box	0	0	icon_items.tresurebox2_tex
+244735	2	Insulated Inner Armor Box	0	0	icon_items.tresurebox2_tex
+244736	2	Performance Inner Armor Box	0	0	icon_items.tresurebox2_tex
+244737	2	True Ultimate Power Weapon Box	0	0	icon_items.tresurebox2_tex
+244738	2	Dummy Box	0	0	icon_items.tresurebox2_tex
+244739	2	Dummy Box	0	0	icon_items.tresurebox2_tex
+244740	2	Dummy Box	0	0	icon_items.tresurebox2_tex
+244741	2	Dummy Box	0	0	icon_items.tresurebox2_tex
+244742	2	Dummy Box	0	0	icon_items.tresurebox2_tex
+244743	2	Dummy Box	0	0	icon_items.tresurebox2_tex
+244744	2	Dummy Box	0	0	icon_items.tresurebox2_tex
+244745	2	Dummy Box	0	0	icon_items.tresurebox2_tex
+244746	2	Dummy Box	0	0	icon_items.tresurebox2_tex
+244747	2	Dummy Box	0	0	icon_items.tresurebox2_tex
+244748	2	Dummy Box	0	0	icon_items.tresurebox2_tex
+244749	2	Dummy Box	0	0	icon_items.tresurebox2_tex
+244750	2	Dummy Box	0	0	icon_items.tresurebox2_tex
+244751	2	Dummy Box	0	0	icon_items.tresurebox2_tex
+244752	2	Dummy Box	0	0	icon_items.tresurebox2_tex
+244753	2	Level 10 Box	0	0	icon_items.gachabox_tex
+244754	2	Level 20 Box	0	0	icon_items.gachabox_tex
+244755	2	Level 30 Box	0	0	icon_items.gachabox_tex
+244756	2	Level 40 Box	0	0	icon_items.gachabox_tex
+244757	2	Level 45 Box	0	0	icon_items.gachabox_tex
+244758	2	Level 50 Box	0	0	icon_items.gachabox_tex
+244759	2	Level 55 Box	0	0	icon_items.gachabox_tex
+244760	2	Level 60 Box	0	0	icon_items.gachabox_tex
+244761	2	Level 65 Box	0	0	icon_items.gachabox_tex
+244762	2	Striped Bikini Leisure Shorts Box	0	1	icon_items.gift_box04_tex
+244763	2	Butterfly Plunge Fitted Beach Wear Box	0	1	icon_items.gift_box04_tex
+244764	2	Dyeable Striped Bikini Leisure Shorts Box	0	1	icon_items.gift_box04_tex
+244765	2	Dyeable Peachstringer Fitted Beach Wear Box	0	1	icon_items.gift_box04_tex
+244766	2	Deep Blue Jammers Box	0	1	icon_items.gift_box04_tex
+244767	2	Yellow Duckie Swimsuit Box	0	1	icon_items.gift_box04_tex
+244768	2	Dyeable Duckie Swimsuit Box	0	1	icon_items.gift_box04_tex
+244769	2	Bleachwear and Fundoshi Smart Box	0	1	icon_items.gift_box04_tex
+244770	2	Bikini and Golden Speeders Smart Box	0	1	icon_items.gift_box04_tex
+244771	2	Dyeable Bleachstringer and Fundoshi Box	0	1	icon_items.gift_box04_tex
+244772	2	Dyeable Silver Bikini and Speeders Smart Box	0	1	icon_items.gift_box04_tex
+244773	2	Dummy Smartbox	0	1	icon_items.gift_box04_tex
+244774	2	Dummy Smartbox	0	1	icon_items.gift_box04_tex
+244775	2	Dummy Smartbox	0	1	icon_items.gift_box04_tex
+244776	2	Dummy Smartbox	0	1	icon_items.gift_box04_tex
+244777	2	Dummy Smartbox	0	1	icon_items.gift_box04_tex
+244778	2	Dummy Smartbox	0	1	icon_items.gift_box04_tex
+244779	2	Dummy Smartbox	0	1	icon_items.gift_box04_tex
+244780	2	Dummy Smartbox	0	1	icon_items.gift_box04_tex
+244781	2	Dummy Smartbox	0	1	icon_items.gift_box04_tex
+244782	2	Personalized Gym Uniform Loot Box	0	0	icon_items.tresurebox2_tex
+244783	3	Purple Master Plasma Smart Box	0	1	icon_items.gift_box04_tex
 213832	0	Russian Federation Bill	0	0	icon_items.federation_bill_tex
 215981	2	Recipe 1	0	1	icon_items.cube_reward03_tex
 215982	2	Recipe 2	0	1	icon_items.cube_reward03_tex
@@ -26280,158 +26499,6 @@
 216611	1	Жетон события	0	0	icon_items.kanstria_soldier_token_tex
 216612	1	Жетон события	0	0	icon_items.medal3_tex
 216613	1	Жетон события	0	0	icon_items.parts_magicweaponc10_tex
-216616	2	Зелье Канефоры	0	3600	icon_items.rare_potion11_tex
-216617	2	Зелье Канефоры	0	3600	icon_items.rare_potion11_tex
-216618	2	Сильное зелье Канефоры	0	1800	icon_items.rare_potion11_tex
-216619	2	Сильное зелье Канефоры	0	1800	icon_items.rare_potion11_tex
-216620	2	Книга питомца: Драконетта	0	0	icon_items.petskillbook_tex
-216621	2	Книга питомца: Драконетта	0	0	icon_items.petskillbook_tex
-216622	2	Книга питомца: Конфетка	0	0	icon_items.petskillbook_tex
-216623	2	Книга питомца: Конфетка	0	0	icon_items.petskillbook_tex
-216624	2	Книга питомца: Адамс	0	0	icon_items.petskillbook_tex
-216625	2	Книга питомца: Адамс	0	0	icon_items.petskillbook_tex
-216626	2	Книга питомца: Банзай	0	0	icon_items.petskillbook_tex
-216627	2	Книга питомца: Банзай	0	0	icon_items.petskillbook_tex
-216628	2	Книга питомца: Рейни	0	0	icon_items.petskillbook_tex
-216629	2	Книга питомца: Рейни	0	0	icon_items.petskillbook_tex
-216630	2	Книга питомца: Расти	0	0	icon_items.petskillbook_tex
-216631	2	Книга питомца: Расти	0	0	icon_items.petskillbook_tex
-216632	2	Книга питомца: Пинки	0	0	icon_items.petskillbook_tex
-216633	2	Книга питомца: Пинки	0	0	icon_items.petskillbook_tex
-216634	2	Книга питомца: Зеро	0	0	icon_items.petskillbook_tex
-216635	2	Книга питомца: Зеро	0	0	icon_items.petskillbook_tex
-216636	2	Книга питомца: Мисс Катоник	0	0	icon_items.petskillbook_tex
-216637	2	Книга питомца: Мисс Катоник	0	0	icon_items.petskillbook_tex
-216638	2	Книга питомца: Драконетта	0	0	icon_items.petskillbook_tex
-216639	2	Книга питомца: Конфетка	0	0	icon_items.petskillbook_tex
-216640	2	Книга питомца: Адамс	0	0	icon_items.petskillbook_tex
-216641	2	Книга питомца: Банзай	0	0	icon_items.petskillbook_tex
-216642	2	Книга питомца: Рейни	0	0	icon_items.petskillbook_tex
-216643	2	Книга питомца: Расти	0	0	icon_items.petskillbook_tex
-216644	2	Книга питомца: Пинки	0	0	icon_items.petskillbook_tex
-216645	2	Книга питомца: Зеро	0	0	icon_items.petskillbook_tex
-216646	2	Книга питомца: Мисс Катоник	0	0	icon_items.petskillbook_tex
-216647	2	Книга питомца: Драконетта	0	0	icon_items.petskillbook_tex
-216648	2	Книга питомца: Конфетка	0	0	icon_items.petskillbook_tex
-216649	2	Книга питомца: Адамс	0	0	icon_items.petskillbook_tex
-216650	2	Книга питомца: Банзай	0	0	icon_items.petskillbook_tex
-216651	2	Книга питомца: Рейни	0	0	icon_items.petskillbook_tex
-216652	2	Книга питомца: Расти	0	0	icon_items.petskillbook_tex
-216653	2	Книга питомца: Пинки	0	0	icon_items.petskillbook_tex
-216654	2	Книга питомца: Зеро	0	0	icon_items.petskillbook_tex
-216655	2	Книга питомца: Мисс Катоник	0	0	icon_items.petskillbook_tex
-216656	2	G	0	0	icon_items.fireworks_eng_g_tex
-216657	2	M	0	0	icon_items.fireworks_eng_m_tex
-216658	2	P	0	0	icon_items.fireworks_eng_p_tex
-216659	2	Часть буквы	0	1	icon_items.q_slatepiece_tex
-216660	2	Эссенция Дракона	0	1	icon_items.q_slatepiece_tex
-216661	2	Волшебный расщепитель	0	1	icon_items.refined_insecta6_tex
-216662	2	Магический мешок	0	0	icon_items.gold_tcat_pocket_tex
-216663	3	Руна Дракона (TERA)	0	1	icon_items.smallminerala15_tex
-216664	3	Руна Дракона (Summer)	0	1	icon_items.smallminerala15_tex
-216665	3	Руна Дракона (Update)	0	1	icon_items.smallminerala15_tex
-216666	3	Руна Дракона (Evil)	0	1	icon_items.smallminerala15_tex
-216667	3	Руна Дракона (Dragon)	0	1	icon_items.smallminerala15_tex
-216668	3	Руна Дракона (Returned)	0	1	icon_items.smallminerala15_tex
-216669	2	Волшебный расщепитель (Letter)	0	5	icon_items.refine_energya13_tex
-216671	3	Перо	0	0	icon_equipments.acc_024a_tex
-216672	3	Кость дракона	0	0	icon_items.vergos_bone_tex
-216673	3	Жетон приручения	0	0	icon_items.fallfestival_coin_tex
-216674	3	Билет поддержки	0	0	icon_items.icon_valkion_medal1_tex
-216675	2	Лоскут ткани	0	0	icon_items.refine_cloth13_tex
-216676	3	Шелковый лоскут	0	0	icon_items.refine_cloth16_tex
-216677	3	Магическая сталь	0	0	icon_items.blockofchaos_tex
-216678	3	Самоцвет	0	0	icon_items.fullmoon_gemstone_tex
-216679	3	Жетон листопада	0	0	icon_items.command_exp_tex
-216680	3	Жетон снегопада	0	0	icon_items.fallfestival_coin2_tex
-216681	3	Valkyon Federation Medal	0	0	icon_items.politics_reward_tex
-216682	3	Demonic Amulet	0	0	icon_items.q_amulet_tex
-216683	3	Heart of the Beast	0	0	icon_items.refine_heart13_tex
-216684	2	Mystical letters	0	0	icon_items.q_scrollpub_tex
-216685	2	Crystal of Ether	0	0	icon_items.parts_magicweaponc12_tex
-216686	3	Blood of Demon	0	0	icon_items.refinedplant_a12_tex
-216687	2	Dendrite Shard	0	0	icon_items.horcashield_tex
-216688	2	Uncommon Faridei's Cube	0	0	icon_items.cube_reward01_tex
-216689	2	Rare Faridei's Cube	0	0	icon_items.cube_reward02_tex
-216690	3	Superior Faridei's Cube	0	0	icon_items.cube_reward03_tex
-216691	3	Golden Faridei's Cube	0	0	icon_items.cube_reward06_tex
-216692	3	Legendary Faridei's Cube	0	0	icon_items.cube_reward05_tex
-216693	0	Element Essence	0	0	icon_items.union_point_tex
-216694	1	Unstable Water crystal	0	0	icon_items.refine_energya7_tex
-216695	1	Unstable Fire crystal	0	0	icon_items.refine_energya9_tex
-216696	1	Unstable Earth crystal	0	0	icon_items.refine_energya8_tex
-216697	2	Unstable Water energy	0	0	icon_items.refine_energya7_tex
-216698	2	Unstable Fire energy	0	0	icon_items.refine_energya9_tex
-216699	2	Unstable Earth energy	0	0	icon_items.refine_energya8_tex
-216700	2	Unstable Water essence	0	0	icon_items.refine_energya7_tex
-216701	2	Unstable Fire essence	0	0	icon_items.refine_energya9_tex
-216702	2	Unstable Earth essence	0	0	icon_items.refine_energya8_tex
-216703	2	Unstable Water element	0	0	icon_items.refine_energya7_tex
-216704	2	Unstable Fire element	0	0	icon_items.refine_energya9_tex
-216705	2	Unstable Earth element	0	0	icon_items.refine_energya8_tex
-216706	3	Relic of the Water	0	0	icon_items.cube_reward14_tex
-216707	3	Relic of the Fire	0	0	icon_items.cube_reward12_tex
-216708	3	Relic of the Earth	0	0	icon_items.cube_reward15_tex
-216709	1	Water fragment	0	0	icon_items.corecolor4_1_tex
-216710	1	Fire fragment	0	0	icon_items.corecolor0_1_tex
-216711	1	Earth fragment	0	0	icon_items.corecolor3_1_tex
-216712	2	Water crystal	0	0	icon_items.corecolor4_2_tex
-216713	2	Fire crystal	0	0	icon_items.corecolor0_2_tex
-216714	2	Earth crystal	0	0	icon_items.corecolor3_2_tex
-216715	2	Water energy	0	0	icon_items.corecolor4_3_tex
-216716	2	Fire energy	0	0	icon_items.corecolor0_3_tex
-216717	2	Earth energy	0	0	icon_items.corecolor3_3_tex
-216718	3	Prime Water essence	0	0	icon_items.corecolor4_4_tex
-216719	3	Prime Fire essence	0	0	icon_items.corecolor0_4_tex
-216720	3	Prime Earth essence	0	0	icon_items.corecolor3_4_tex
-216721	0	Quintessence	0	0	icon_items.orthoclaseofwinner_tex
-216722	3	Obsidian Shard	0	0	icon_items.corecolor_inactive_1_tex
-216723	3	Obsidian Crystal	0	0	icon_items.corecolor_inactive_2_tex
-216724	3	Obsidian Sphere	0	0	icon_items.corecolor_inactive_3_tex
-216725	3	Prime Darkness	0	0	icon_items.corecolor_inactive_4_tex
-216726	1	Stone of the Light	0	0	icon_items.corecolor1_1_tex
-216727	3	Elements Secrets	0	0	icon_items.cube_reward11_tex
-216728	3	Massive Loot Box 	0	0	icon_items.mysterybox2_tex
-216729	3	Extreme Loot Box	0	0	icon_items.premiumbox_vehicle2_tex
-216730	3	Extreme Key	0	0	icon_items.unionextractorkey_tex
-216731	3	Box 1	0	0	icon_items.gachabox_tex
-216733	3	Box 3	0	0	icon_items.gachabox_tex
-216734	3	Box 4	0	0	icon_items.gachabox_tex
-216736	3	Box 6	0	0	icon_items.gachabox_tex
-247623	2	Smart Box: Swimwear Male A + Female A	0	1	icon_items.gift_box04_tex
-247624	2	Smart Box: Swimwear Male B + Female D	0	1	icon_items.gift_box04_tex
-247625	2	Smart Box: Swimwear Female B	0	1	icon_items.gift_box04_tex
-247626	2	Smart Box: Swimwear Female C	0	1	icon_items.gift_box04_tex
-247627	2	Smart Box: Swimwear Male A + Female A (7 Days)	0	1	icon_items.gift_box04_tex
-247628	2	Smart Box: Swimwear Male B + Female D (7 Days)	0	1	icon_items.gift_box04_tex
-247629	2	Smart Box: Swimwear Female B (7 Days)	0	1	icon_items.gift_box04_tex
-247630	2	Smart Box: Swimwear Female C (7 Days)	0	1	icon_items.gift_box04_tex
-247631	2	Smartbox: Elemental weapon (non-tradable)	0	1	icon_items.premiumbox_weapon3_tex
-247632	2	Smartbox: Elemental weapon	0	1	icon_items.premiumbox_weapon3_tex
-247633	2	Smartbox: Rare elemental weapon (non-tradable)	0	1	icon_items.premiumbox_weapon3_tex
-247634	2	Smartbox: Rare elemental weapon	0	1	icon_items.premiumbox_weapon3_tex
-247635	2	Smartbox: Rare elemental weapon (3 days)	0	1	icon_items.premiumbox_weapon3_tex
-247636	2	Wheel of Fortune box	0	0	icon_items.premiumbox_weapon4_tex
-247637	2	Wheel of Fortune box: Blue Phoenix	0	0	icon_items.premiumbox_crystalarmor_tex
-247638	2	Wheel of Fortune box: Red Phoenix	0	0	icon_items.premiumbox_crystalweapon_tex
-247639	2	Smartbox: Suit or dress (non-tradable)	0	1	icon_items.premiumbox_dress3_tex
-247640	2	Smartbox: Suit or dress (tradable)	0	1	icon_items.premiumbox_dress3_tex
-247641	2	Smartbox: Suit or dress (3 days)	0	1	icon_items.premiumbox_dress3_tex
-247642	2	Smartbox: Suit or dress (non-tradable)	0	1	icon_items.premiumbox_dress3_tex
-247643	2	Smartbox: Suit or dress (tradable)	0	1	icon_items.premiumbox_dress3_tex
-247644	2	Smartbox: Suit or dress (3 days)	0	1	icon_items.premiumbox_dress3_tex
-247645	2	Smartbox: Mummy costume (non-tradable)	0	1	icon_items.premiumbox_dress3_tex
-247646	2	Smartbox: Mummy costume (tradable)	0	1	icon_items.premiumbox_dress3_tex
-247647	2	Smartbox: Mummy costume (3 days)	0	1	icon_items.premiumbox_dress3_tex
-247648	2	Smartbox: Dyeable mummy costume (non-tradable)	0	1	icon_items.premiumbox_dress3_tex
-247649	2	Smartbox: Dyeable mummy costume (tradable)	0	1	icon_items.premiumbox_dress3_tex
-247650	2	Smartbox: Dyeable mummy costume (3 days)	0	1	icon_items.premiumbox_dress3_tex
-247651	2	Smartbox: Elemental costume (non-tradable)	0	1	icon_items.premiumbox_dress3_tex
-247652	2	Smartbox: Elemental costume	0	1	icon_items.premiumbox_dress3_tex
-247653	2	Smartbox: Elemental costume (3 days)	0	1	icon_items.premiumbox_dress3_tex
-247654	2	Smartbox: Rare elemental costume (non-tradable)	0	1	icon_items.premiumbox_dress3_tex
-247655	2	Smartbox: Rare elemental costume	0	1	icon_items.premiumbox_dress3_tex
-247656	2	Smartbox: Rare elemental costume (3 days)	0	1	icon_items.premiumbox_dress3_tex
 850000	3	상급 마녀의 가면	0	0	icon_equipments.acc_001a_tex
 850001	3	상급 마녀의 가면	0	0	icon_equipments.acc_001a_tex
 850002	3	상급 마녀의 가면	0	0	icon_equipments.acc_001a_tex
@@ -32037,6 +32104,533 @@
 855602	2	검은 용의 기운이 서린 무기상자	0	1	icon_items.gift_box04_tex
 855603	1	이동 주문서: 프리미엄 전용 공간	0	10	icon_items.dungeon_recall_tex
 855604	3	[VIP]만능 전투 비약	0	5	icon_items.add_extract_potion_2_tex
+855626	3	어쌔신 후드	0	0	icon_equipments.acc_384_tex
+855627	3	어쌔신 후드	0	0	icon_equipments.acc_384_tex
+855628	3	어쌔신 후드	0	0	icon_equipments.acc_384_tex
+855629	3	어쌔신 망토	0	0	icon_equipments.acc_385_tex
+855630	3	어쌔신 망토	0	0	icon_equipments.acc_385_tex
+855631	3	어쌔신 망토	0	0	icon_equipments.acc_385_tex
+855632	3	어쌔신 해골탈	0	0	icon_equipments.acc_386_tex
+855633	3	어쌔신 해골탈	0	0	icon_equipments.acc_386_tex
+855634	3	어쌔신 해골탈	0	0	icon_equipments.acc_386_tex
+855635	3	어쌔신 해골마스크	0	0	icon_equipments.acc_387_tex
+855636	3	어쌔신 해골마스크	0	0	icon_equipments.acc_387_tex
+855637	3	어쌔신 해골마스크	0	0	icon_equipments.acc_387_tex
+855638	3	어쌔신 마스크	0	0	icon_equipments.acc_388_tex
+855639	3	어쌔신 마스크	0	0	icon_equipments.acc_388_tex
+855640	3	어쌔신 마스크	0	0	icon_equipments.acc_388_tex
+855641	3	어쌔신 쌍검	0	0	icon_equipments.event13_duel_tex
+855642	3	어쌔신 쌍검	0	0	icon_equipments.event13_duel_tex
+855643	3	어쌔신 쌍검	0	0	icon_equipments.event13_duel_tex
+855644	3	어쌔신 창	0	0	icon_equipments.event13_lance_tex
+855645	3	어쌔신 창	0	0	icon_equipments.event13_lance_tex
+855646	3	어쌔신 창	0	0	icon_equipments.event13_lance_tex
+855647	3	어쌔신 대검	0	0	icon_equipments.event13_twohand_tex
+855648	3	어쌔신 대검	0	0	icon_equipments.event13_twohand_tex
+855649	3	어쌔신 대검	0	0	icon_equipments.event13_twohand_tex
+855650	3	어쌔신 도끼	0	0	icon_equipments.event13_axe_tex
+855651	3	어쌔신 도끼	0	0	icon_equipments.event13_axe_tex
+855652	3	어쌔신 도끼	0	0	icon_equipments.event13_axe_tex
+855653	3	어쌔신 원반	0	0	icon_equipments.event13_circle_tex
+855654	3	어쌔신 원반	0	0	icon_equipments.event13_circle_tex
+855655	3	어쌔신 원반	0	0	icon_equipments.event13_circle_tex
+855656	3	어쌔신 활	0	0	icon_equipments.event13_bow_tex
+855657	3	어쌔신 활	0	0	icon_equipments.event13_bow_tex
+855658	3	어쌔신 활	0	0	icon_equipments.event13_bow_tex
+855659	3	어쌔신 지팡이	0	0	icon_equipments.event13_staff_tex
+855660	3	어쌔신 지팡이	0	0	icon_equipments.event13_staff_tex
+855661	3	어쌔신 지팡이	0	0	icon_equipments.event13_staff_tex
+855662	3	어쌔신 마법봉	0	0	icon_equipments.event13_rod_tex
+855663	3	어쌔신 마법봉	0	0	icon_equipments.event13_rod_tex
+855664	3	어쌔신 마법봉	0	0	icon_equipments.event13_rod_tex
+855665	3	어쌔신 비검	0	0	icon_equipments.event13_chain_tex
+855666	3	어쌔신 비검	0	0	icon_equipments.event13_chain_tex
+855667	3	어쌔신 비검	0	0	icon_equipments.event13_chain_tex
+855668	3	어쌔신 마공포	0	0	icon_equipments.event13_blaster_tex
+855669	3	어쌔신 마공포	0	0	icon_equipments.event13_blaster_tex
+855670	3	어쌔신 마공포	0	0	icon_equipments.event13_blaster_tex
+855671	3	휴먼남_어쌔신 	0	0	icon_equipments.pc_event_30_m_tex
+855672	3	휴먼남_어쌔신 	0	0	icon_equipments.pc_event_30_m_tex
+855673	3	휴먼남_어쌔신 	0	0	icon_equipments.pc_event_30_m_tex
+855674	3	휴먼여_어쌔신 	0	0	icon_equipments.pc_event_30_f_b_tex
+855675	3	휴먼여_어쌔신 	0	0	icon_equipments.pc_event_30_f_b_tex
+855676	3	휴먼여_어쌔신 	0	0	icon_equipments.pc_event_30_f_b_tex
+855677	3	휴먼여_어쌔신 레어	0	0	icon_equipments.pc_event_30_f_a_tex
+855678	3	휴먼여_어쌔신 레어	0	0	icon_equipments.pc_event_30_f_a_tex
+855679	3	휴먼여_어쌔신 레어	0	0	icon_equipments.pc_event_30_f_a_tex
+855680	3	하이엘프남_어쌔신 	0	0	icon_equipments.pc_event_30_m_tex
+855681	3	하이엘프남_어쌔신 	0	0	icon_equipments.pc_event_30_m_tex
+855682	3	하이엘프남_어쌔신 	0	0	icon_equipments.pc_event_30_m_tex
+855683	3	하이엘프여_어쌔신 	0	0	icon_equipments.pc_event_30_f_b_tex
+855684	3	하이엘프여_어쌔신 	0	0	icon_equipments.pc_event_30_f_b_tex
+855685	3	하이엘프여_어쌔신 	0	0	icon_equipments.pc_event_30_f_b_tex
+855686	3	하이엘프여_어쌔신 레어	0	0	icon_equipments.pc_event_30_f_a_tex
+855687	3	하이엘프여_어쌔신 레어	0	0	icon_equipments.pc_event_30_f_a_tex
+855688	3	하이엘프여_어쌔신 레어	0	0	icon_equipments.pc_event_30_f_a_tex
+855689	3	아만남_어쌔신 	0	0	icon_equipments.pc_event_30_m_tex
+855690	3	아만남_어쌔신 	0	0	icon_equipments.pc_event_30_m_tex
+855691	3	아만남_어쌔신 	0	0	icon_equipments.pc_event_30_m_tex
+855692	3	아만여_어쌔신 	0	0	icon_equipments.pc_event_30_f_b_tex
+855693	3	아만여_어쌔신 	0	0	icon_equipments.pc_event_30_f_b_tex
+855694	3	아만여_어쌔신 	0	0	icon_equipments.pc_event_30_f_b_tex
+855695	3	아만여_어쌔신 레어	0	0	icon_equipments.pc_event_30_f_a_tex
+855696	3	아만여_어쌔신 레어	0	0	icon_equipments.pc_event_30_f_a_tex
+855697	3	아만여_어쌔신 레어	0	0	icon_equipments.pc_event_30_f_a_tex
+855698	3	캐스타닉남_어쌔신 	0	0	icon_equipments.pc_event_30_m_tex
+855699	3	캐스타닉남_어쌔신 	0	0	icon_equipments.pc_event_30_m_tex
+855700	3	캐스타닉남_어쌔신 	0	0	icon_equipments.pc_event_30_m_tex
+855701	3	캐스타닉여_어쌔신 	0	0	icon_equipments.pc_event_30_f_b_tex
+855702	3	캐스타닉여_어쌔신 	0	0	icon_equipments.pc_event_30_f_b_tex
+855703	3	캐스타닉여_어쌔신 	0	0	icon_equipments.pc_event_30_f_b_tex
+855704	3	캐스타닉여_어쌔신 레어	0	0	icon_equipments.pc_event_30_f_a_tex
+855705	3	캐스타닉여_어쌔신 레어	0	0	icon_equipments.pc_event_30_f_a_tex
+855706	3	캐스타닉여_어쌔신 레어	0	0	icon_equipments.pc_event_30_f_a_tex
+855707	3	포포리남_어쌔신 	0	0	icon_equipments.pc_event_30_m_tex
+855708	3	포포리남_어쌔신 	0	0	icon_equipments.pc_event_30_m_tex
+855709	3	포포리남_어쌔신 	0	0	icon_equipments.pc_event_30_m_tex
+855710	3	포포리여_어쌔신	0	0	icon_equipments.pc_event_30_f_popori_f_b_tex
+855711	3	포포리여_어쌔신	0	0	icon_equipments.pc_event_30_f_popori_f_b_tex
+855712	3	포포리여_어쌔신	0	0	icon_equipments.pc_event_30_f_popori_f_b_tex
+855713	3	포포리여_어쌔신 레어	0	0	icon_equipments.pc_event_30_f_popori_f_a_tex
+855714	3	포포리여_어쌔신 레어	0	0	icon_equipments.pc_event_30_f_popori_f_a_tex
+855715	3	포포리여_어쌔신 레어	0	0	icon_equipments.pc_event_30_f_popori_f_a_tex
+855716	3	바라카_어쌔신	0	0	icon_equipments.pc_event_30_m_tex
+855717	3	바라카_어쌔신	0	0	icon_equipments.pc_event_30_m_tex
+855718	3	바라카_어쌔신	0	0	icon_equipments.pc_event_30_m_tex
+855719	3	스킬교본: 화이트 펑키 소환	0	0	icon_items.skillbook_rider1_tex
+855720	3	스킬교본: 블랙 펑키 소환	0	0	icon_items.skillbook_rider1_tex
+855721	3	스킬교본: 호랑이A 소환	0	0	icon_items.skillbook_lion1_tex
+855722	3	스킬교본: 호랑이B 소환	0	0	icon_items.skillbook_lion1_tex
+855723	3	스킬교본: 호랑이C 소환	0	0	icon_items.skillbook_lion1_tex
+855724	3	스킬교본: 호랑이D 소환	0	0	icon_items.skillbook_lion1_tex
+855725	3	스킬교본: 호랑이D 소환 (7일)	0	0	icon_items.skillbook_lion1_tex
+855726	3	스킬교본: 흰 날개의 아기돼지 꼬미 소환	0	0	icon_items.skillbook_lion1_tex
+855727	3	스킬교본: 흰 날개의 얼룩돼지 똘이 소환	0	0	icon_items.skillbook_lion1_tex
+855728	3	스킬교본: 흰 날개의 검정돼지 까미 소환	0	0	icon_items.skillbook_lion1_tex
+855729	3	스킬교본: 흰 날개의 꽃돼지 도나 소환	0	0	icon_items.skillbook_lion1_tex
+855730	3	[유니크] 스킬교본: 흰 날개의 폭주돼지 뭉치 소환	0	0	icon_items.skillbook_lion1_tex
+855731	3	스킬교본: 무지개 날개의 아기돼지 꼬미 소환	0	0	icon_items.skillbook_lion1_tex
+855732	3	스킬교본: 무지개 날개의 얼룩돼지 똘이 소환	0	0	icon_items.skillbook_lion1_tex
+855733	3	스킬교본: 무지개 날개의 검정돼지 까미 소환	0	0	icon_items.skillbook_lion1_tex
+855734	3	스킬교본: 무지개 날개의 꽃돼지 도나 소환	0	0	icon_items.skillbook_lion1_tex
+855735	3	[유니크] 스킬교본: 무지개 날개의 폭주돼지 뭉치 소환	0	0	icon_items.skillbook_lion1_tex
+855736	3	분홍꽃 왕관	0	0	icon_equipments.acc_047a_tex
+855737	3	쁘띠 천사 날개	0	0	icon_equipments.acc_143ap_tex
+855738	3	[서버] 캐릭터 소켓 확장	0	0	icon_items.charater_add_tex
+855739	3	[서버] 창고 확장	0	0	icon_items.extend_personwarehouse_tex
+855740	3	[계정] 캐릭터 소켓 확장	0	0	icon_items.charater_add_tex
+855741	3	[계정] 창고 확장	0	0	icon_items.extend_personwarehouse_tex
+855742	1	인던초기화: 오르카의 신전	0	18000	icon_items.dungeonresetscroll_tex
+855743	1	인던초기화: 사악한 오르카의 신전	0	18000	icon_items.dungeonresetscroll_tex
+855744	1	인던초기화: 엘카라스 호	0	18000	icon_items.dungeonresetscroll_tex
+855745	1	인던초기화: 폭풍의 엘카라스 호	0	18000	icon_items.dungeonresetscroll_tex
+855746	2	소셜교본: 공손한 인사(메이드 복 시리즈)	0	0	icon_items.skillbook_social_tex
+855747	2	소셜교본: 엉덩이 춤(메이드 복 시리즈)	0	0	icon_items.skillbook_social_tex
+855748	2	소셜교본: 브이 포즈(휴먼 여성)	0	0	icon_items.skillbook_social_tex
+855749	2	소셜교본: 귀여운 앉기(하이엘프 여성)	0	0	icon_items.skillbook_social_tex
+855750	2	소셜교본: 브이 포즈(하이엘프 여성)	0	0	icon_items.skillbook_social_tex
+855751	2	소셜교본: 귀여운 앉기(케스타닉 여성)	0	0	icon_items.skillbook_social_tex
+855752	2	소셜교본: 브이 포즈(케스타닉 여성)	0	0	icon_items.skillbook_social_tex
+855753	2	소셜교본: 귀여운 앉기(엘린)	0	0	icon_items.skillbook_social_tex
+855754	2	소셜교본: 브이 포즈(엘린)	0	0	icon_items.skillbook_social_tex
+855755	2	소셜교본: 귀여운 앉기(휴먼 여성)	0	0	icon_items.skillbook_social_tex
+855756	2	황금신체비율 캔디 (1일)	0	3	icon_items.icon_deadoo_item_tex
+855757	2	일반신체비율 캔디 	0	3	icon_items.icon_deadoo_item_tex_minus
+855758	2	황금신체비율 캔디 (7일)	0	3	icon_items.icon_deadoo_item_tex
+855759	2	변형의 비약 - 뿌앙청심원 (2013,2014 수영복 전용)	0	3	icon_items.icon_poongu_item_tex
+855760	2	변형의 비약 - 키크그라정	0	3	icon_items.icon_jangshin_item_tex
+855761	2	변형의 비약 - 엘프슬림정	0	3	icon_items.icon_yookduk_item_tex
+855762	2	모두에게 보이는 탈의 물약(2일)	0	3	icon_items.portion_underwear1_tex
+855763	2	나에게만 보이는 탈의 물약(2일)	0	3	icon_items.portion_underwear1_tex
+855764	2	모두에게 보이는 탈의 물약(5일)	0	3	icon_items.portion_underwear2_tex
+855765	2	나에게만 보이는 탈의 물약(5일)	0	3	icon_items.portion_underwear2_tex
+855766	2	2013 스쿨린 이름 변경권	0	0	icon_items.charname_change_tex
+855767	2	유르제의 간호복 이름 변경권	0	0	icon_items.charname_change_tex
+855768	3	동물의상: 토끼 [휴먼 남자]	0	0	icon_equipments.pc_event_21_02_tex
+855769	3	동물의상: 고양이 [휴먼 남자]	0	0	icon_equipments.pc_event_21_03_tex
+855770	3	동물의상: 판다 [휴먼 남자]	0	0	icon_equipments.pc_event_21_04_tex
+855771	3	동물의상: 토끼 [휴먼 여자]	0	0	icon_equipments.pc_event_21_02_tex
+855772	3	동물의상: 고양이 [휴먼 여자]	0	0	icon_equipments.pc_event_21_03_tex
+855773	3	동물의상: 판다 [휴먼 여자]	0	0	icon_equipments.pc_event_21_04_tex
+855774	3	동물의상: 토끼 [하이엘프 남자]	0	0	icon_equipments.pc_event_21_02_tex
+855775	3	동물의상: 고양이 [하이엘프 남자]	0	0	icon_equipments.pc_event_21_03_tex
+855776	3	동물의상: 판다 [하이엘프 남자]	0	0	icon_equipments.pc_event_21_04_tex
+855777	3	동물의상: 토끼 [하이엘프 여자]	0	0	icon_equipments.pc_event_21_02_tex
+855778	3	동물의상: 고양이 [하이엘프 여자]	0	0	icon_equipments.pc_event_21_03_tex
+855779	3	동물의상: 판다 [하이엘프 여자]	0	0	icon_equipments.pc_event_21_04_tex
+855780	3	동물의상: 토끼 [아만 남자]	0	0	icon_equipments.pc_event_21_02_tex
+855781	3	동물의상: 고양이 [아만 남자]	0	0	icon_equipments.pc_event_21_03_tex
+855782	3	동물의상: 판다 [아만 남자]	0	0	icon_equipments.pc_event_21_04_tex
+855783	3	동물의상: 토끼 [아만 여자]	0	0	icon_equipments.pc_event_21_02_tex
+855784	3	동물의상: 고양이 [아만 여자]	0	0	icon_equipments.pc_event_21_03_tex
+855785	3	동물의상: 판다 [아만 여자]	0	0	icon_equipments.pc_event_21_04_tex
+855786	3	동물의상: 토끼 [케스타닉 남자]	0	0	icon_equipments.pc_event_21_02_tex
+855787	3	동물의상: 고양이 [케스타닉 남자]	0	0	icon_equipments.pc_event_21_03_tex
+855788	3	동물의상: 판다 [케스타닉 남자]	0	0	icon_equipments.pc_event_21_04_tex
+855789	3	동물의상: 토끼 [케스타닉 여자]	0	0	icon_equipments.pc_event_21_02_tex
+855790	3	동물의상: 고양이 [케스타닉 여자]	0	0	icon_equipments.pc_event_21_03_tex
+855791	3	동물의상: 판다 [케스타닉 여자]	0	0	icon_equipments.pc_event_21_04_tex
+855792	3	동물의상: 토끼 [포포리]	0	0	icon_equipments.pc_event_21_02_tex
+855793	3	동물의상: 고양이 [포포리]	0	0	icon_equipments.pc_event_21_03_tex
+855794	3	동물의상: 판다 [포포리]	0	0	icon_equipments.pc_event_21_04_tex
+855795	3	동물의상: 토끼 [엘린]	0	0	icon_equipments.pc_event_21_02_tex
+855796	3	동물의상: 고양이 [엘린]	0	0	icon_equipments.pc_event_21_03_tex
+855797	3	동물의상: 판다 [엘린]	0	0	icon_equipments.pc_event_21_04_tex
+855798	3	동물의상: 토끼 [바라카]	0	0	icon_equipments.pc_event_21_02_tex
+855799	3	동물의상: 고양이 [바라카]	0	0	icon_equipments.pc_event_21_03_tex
+855800	3	동물의상: 판다 [바라카]	0	0	icon_equipments.pc_event_21_04_tex
+855801	3	휴먼남_테라데미 US룩 	0	0	icon_equipments.pc_event_33_m_tex
+855802	3	휴먼여_테라데미 US룩 	0	0	icon_equipments.pc_event_33_f_tex
+855803	3	하이엘프남_테라데미 US룩 	0	0	icon_equipments.pc_event_33_m_tex
+855804	3	하이엘프여_테라데미 US룩 	0	0	icon_equipments.pc_event_33_f_tex
+855805	3	아만남_테라데미 US룩 	0	0	icon_equipments.pc_event_33_m_tex
+855806	3	아만여_테라데미 US룩 	0	0	icon_equipments.pc_event_33_f_tex
+855807	3	캐스타닉남_테라데미 US룩 	0	0	icon_equipments.pc_event_33_m_tex
+855808	3	캐스타닉여_테라데미 US룩 	0	0	icon_equipments.pc_event_33_f_tex
+855809	3	포포리남_테라데미 US룩 	0	0	icon_equipments.pc_event_33_m_tex
+855810	3	포포리여_테라데미 US룩	0	0	icon_equipments.pc_event_33_popori_f_tex
+855811	3	포포리여_테라데미 US룩 레어	0	0	icon_equipments.pc_event_33_popori_f_rare_tex
+855812	3	바라카_테라데미 US룩	0	0	icon_equipments.pc_event_33_m_tex
+855813	3	섬광 그림자 의복 (휴먼 남자)	0	0	icon_equipments.pc_event_18_m
+855814	3	섬광 그림자 의복 (휴먼 여자)	0	0	icon_equipments.pc_event_18_f
+855815	3	섬광 그림자 의복 (하이엘프 남자)	0	0	icon_equipments.pc_event_18_m
+855816	3	섬광 그림자 의복 (하이엘프 여자)	0	0	icon_equipments.pc_event_18_f
+855817	3	섬광 그림자 의복 (아만 남자)	0	0	icon_equipments.pc_event_18_m
+855818	3	섬광 그림자 의복 (아만 여자)	0	0	icon_equipments.pc_event_18_f
+855819	3	섬광 그림자 의복 (케스타닉 남자)	0	0	icon_equipments.pc_event_18_m
+855820	3	섬광 그림자 의복 (케스타닉 여자)	0	0	icon_equipments.pc_event_18_f
+855821	3	섬광 그림자 의복 (포포리)	0	0	icon_equipments.pc_event_18_m
+855822	3	섬광 그림자 의복 (엘린)	0	0	icon_equipments.pc_event_18_popori_f_rare
+855823	3	섬광 그림자 의복: 연 (엘린)	0	0	icon_equipments.pc_event_18_popori_f_01_rare
+855824	3	섬광 그림자 의복 (바라카)	0	0	icon_equipments.pc_event_18_m
+855825	3	휴먼남_테라데미 캔버스룩 레어	0	0	icon_equipments.pc_event_32_m_tex
+855826	3	휴먼여_테라데미 캔버스룩 레어	0	0	icon_equipments.pc_event_32_f_b_tex
+855827	3	하이엘프남_테라데미 캔버스룩 레어	0	0	icon_equipments.pc_event_32_m_tex
+855828	3	하이엘프여_테라데미 캔버스룩 레어	0	0	icon_equipments.pc_event_32_f_b_tex
+855829	3	아만남_테라데미 캔버스룩 레어 	0	0	icon_equipments.pc_event_32_m_tex
+855830	3	아만여_테라데미 캔버스룩 레어	0	0	icon_equipments.pc_event_32_f_b_tex
+855831	3	캐스타닉남_테라데미 캔버스룩 레어 	0	0	icon_equipments.pc_event_32_m_tex
+855832	3	캐스타닉여_테라데미 캔버스룩 레어	0	0	icon_equipments.pc_event_32_f_b_tex
+855833	3	포포리남_테라데미 캔버스룩 레어	0	0	icon_equipments.pc_event_32_m_tex
+855834	3	포포리여_테라데미 캔버스룩 레어	0	0	icon_equipments.pc_event_32_f_b_tex
+855835	3	바라카_테라데미 캔버스룩 레어	0	0	icon_equipments.pc_event_32_m_tex
+855836	3	개척자의 건틀릿 (휴먼 남자)	0	0	icon_equipments.pc_event_12_m_rare_tex
+855837	3	개척자의 건틀릿 (휴먼 여자)	0	0	icon_equipments.pc_event_12_f_rare_tex
+855838	3	개척자의 건틀릿 (하이엘프 남자)	0	0	icon_equipments.pc_event_12_m_rare_tex
+855839	3	개척자의 건틀릿 (하이엘프 여자)	0	0	icon_equipments.pc_event_12_f_rare_tex
+855840	3	개척자의 건틀릿 (아만 남자)	0	0	icon_equipments.pc_event_12_m_rare_tex
+855841	3	개척자의 건틀릿 (아만 여자)	0	0	icon_equipments.pc_event_12_f_rare_tex
+855842	3	개척자의 건틀릿 (케스타닉 남자)	0	0	icon_equipments.pc_event_12_m_rare_tex
+855843	3	개척자의 건틀릿 (케스타닉 여자)	0	0	icon_equipments.pc_event_12_f_rare_tex
+855844	3	개척자의 건틀릿 (포포리)	0	0	icon_equipments.pc_event_12_m_rare_tex
+855845	3	개척자의 건틀릿 (엘린)	0	0	icon_equipments.pc_event_12_f_rare_tex
+855846	3	개척자의 건틀릿 (바라카)	0	0	icon_equipments.pc_event_12_m_rare_tex
+855847	2	행운의 열쇠	0	0	icon_items.f2p_key_tex
+855848	3	장비 해방 주문서	0	5	icon_items.unbindscroll_tex
+855849	0	숙련공 제작 첨가제	0	0	icon_items.artisanveteran_up_tex
+855850	0	고속 성장 30 (1시간)	0	3	icon_items.f2p_xpbooster_tex
+855851	0	고속 성장 30 (5시간)	0	3	icon_items.f2p_xpbooster_tex
+855852	0	고속 성장 30 (10시간)	0	3	icon_items.f2p_xpbooster_tex
+855853	0	고속 성장 30 (30시간)	0	3	icon_items.f2p_xpbooster_tex
+855854	0	고속 성장 30 (1일)	0	3	icon_items.f2p_xpbooster_tex
+855855	0	고속 성장 30 (7일)	0	3	icon_items.f2p_xpbooster_tex
+855856	0	고속 성장 30 (30일)	0	3	icon_items.f2p_xpbooster_tex
+855857	1	고속 성장 50 (1시간)	0	3	icon_items.f2p_xpbooster_tex
+855858	1	고속 성장 50 (5시간)	0	3	icon_items.f2p_xpbooster_tex
+855859	1	고속 성장 50 (10시간)	0	3	icon_items.f2p_xpbooster_tex
+855860	1	고속 성장 50 (30시간)	0	3	icon_items.f2p_xpbooster_tex
+855861	1	고속 성장 50 (1일)	0	3	icon_items.f2p_xpbooster_tex
+855862	1	고속 성장 50 (7일)	0	3	icon_items.f2p_xpbooster_tex
+855863	1	고속 성장 50 (30일)	0	3	icon_items.f2p_xpbooster_tex
+855864	2	고속 성장 100 (1시간)	0	3	icon_items.f2p_xpbooster_tex
+855865	2	고속 성장 100 (5시간)	0	3	icon_items.f2p_xpbooster_tex
+855866	2	고속 성장 100 (10시간)	0	3	icon_items.f2p_xpbooster_tex
+855867	2	고속 성장 100 (30시간)	0	3	icon_items.f2p_xpbooster_tex
+855868	2	고속 성장 100 (1일)	0	3	icon_items.f2p_xpbooster_tex
+855869	2	고속 성장 100 (7일)	0	3	icon_items.f2p_xpbooster_tex
+855870	2	고속 성장 100 (30일)	0	3	icon_items.f2p_xpbooster_tex
+855871	0	행운의 수집가 30 (5시간)	0	3	icon_items.f2p_dropgoldbooster_tex
+855872	0	행운의 수집가 30 (10시간)	0	3	icon_items.f2p_dropgoldbooster_tex
+855873	0	행운의 수집가 30 (30시간)	0	3	icon_items.f2p_dropgoldbooster_tex
+855874	0	행운의 수집가 30 (1일)	0	3	icon_items.f2p_dropgoldbooster_tex
+855875	0	행운의 수집가 30 (7일)	0	3	icon_items.f2p_dropgoldbooster_tex
+855876	0	행운의 수집가 30 (30일)	0	3	icon_items.f2p_dropgoldbooster_tex
+855877	1	행운의 수집가 50 (1시간)	0	3	icon_items.f2p_dropgoldbooster_tex
+855878	1	행운의 수집가 50 (5시간)	0	3	icon_items.f2p_dropgoldbooster_tex
+855879	1	행운의 수집가 50 (10시간)	0	3	icon_items.f2p_dropgoldbooster_tex
+855880	1	행운의 수집가 50 (30시간)	0	3	icon_items.f2p_dropgoldbooster_tex
+855881	1	행운의 수집가 50 (1일)	0	3	icon_items.f2p_dropgoldbooster_tex
+855882	1	행운의 수집가 50 (7일)	0	3	icon_items.f2p_dropgoldbooster_tex
+855883	1	행운의 수집가 50 (30일)	0	3	icon_items.f2p_dropgoldbooster_tex
+855884	2	행운의 수집가 100 (1시간)	0	3	icon_items.f2p_dropgoldbooster_tex
+855885	2	행운의 수집가 100 (5시간)	0	3	icon_items.f2p_dropgoldbooster_tex
+855886	2	행운의 수집가 100 (10시간)	0	3	icon_items.f2p_dropgoldbooster_tex
+855887	2	행운의 수집가 100 (30시간)	0	3	icon_items.f2p_dropgoldbooster_tex
+855888	2	행운의 수집가 100 (1일)	0	3	icon_items.f2p_dropgoldbooster_tex
+855889	2	행운의 수집가 100 (7일)	0	3	icon_items.f2p_dropgoldbooster_tex
+855890	2	행운의 수집가 100 (30일)	0	3	icon_items.f2p_dropgoldbooster_tex
+855891	0	협상의 명수 30 (5시간)	0	3	icon_items.f2p_questrewardbooster_tex
+855892	0	협상의 명수 30 (10시간)	0	3	icon_items.f2p_questrewardbooster_tex
+855893	0	협상의 명수 30 (30시간)	0	3	icon_items.f2p_questrewardbooster_tex
+855894	0	협상의 명수 30 (1일)	0	3	icon_items.f2p_questrewardbooster_tex
+855895	0	협상의 명수 30 (7일)	0	3	icon_items.f2p_questrewardbooster_tex
+855896	0	협상의 명수 30 (30일)	0	3	icon_items.f2p_questrewardbooster_tex
+855897	1	협상의 명수 50 (5시간)	0	3	icon_items.f2p_questrewardbooster_tex
+855898	1	협상의 명수 50 (10시간)	0	3	icon_items.f2p_questrewardbooster_tex
+855899	1	협상의 명수 50 (30시간)	0	3	icon_items.f2p_questrewardbooster_tex
+855900	1	협상의 명수 50 (1일)	0	3	icon_items.f2p_questrewardbooster_tex
+855901	1	협상의 명수 50 (7일)	0	3	icon_items.f2p_questrewardbooster_tex
+855902	1	협상의 명수 50 (30일)	0	3	icon_items.f2p_questrewardbooster_tex
+855903	2	협상의 명수 100 (5시간)	0	3	icon_items.f2p_questrewardbooster_tex
+855904	2	협상의 명수 100 (10시간)	0	3	icon_items.f2p_questrewardbooster_tex
+855905	2	협상의 명수 100 (30시간)	0	3	icon_items.f2p_questrewardbooster_tex
+855906	2	협상의 명수 100 (1일)	0	3	icon_items.f2p_questrewardbooster_tex
+855907	2	협상의 명수 100 (7일)	0	3	icon_items.f2p_questrewardbooster_tex
+855908	2	협상의 명수 100 (30일)	0	3	icon_items.f2p_questrewardbooster_tex
+855909	0	신뢰의 증표 30 (5시간)	0	3	icon_items.f2p_reputationbooster_tex
+855910	0	신뢰의 증표 30 (10시간)	0	3	icon_items.f2p_reputationbooster_tex
+855911	0	신뢰의 증표 30 (30시간)	0	3	icon_items.f2p_reputationbooster_tex
+855912	0	신뢰의 증표 30 (1일)	0	3	icon_items.f2p_reputationbooster_tex
+855913	0	신뢰의 증표 30 (7일)	0	3	icon_items.f2p_reputationbooster_tex
+855914	0	신뢰의 증표 30 (30일)	0	3	icon_items.f2p_reputationbooster_tex
+855915	1	신뢰의 증표 50 (5시간)	0	3	icon_items.f2p_reputationbooster_tex
+855916	1	신뢰의 증표 50 (10시간)	0	3	icon_items.f2p_reputationbooster_tex
+855917	1	신뢰의 증표 50 (30시간)	0	3	icon_items.f2p_reputationbooster_tex
+855918	1	신뢰의 증표 50 (1일)	0	3	icon_items.f2p_reputationbooster_tex
+855919	1	신뢰의 증표 50 (7일)	0	3	icon_items.f2p_reputationbooster_tex
+855920	1	신뢰의 증표 50 (30일)	0	3	icon_items.f2p_reputationbooster_tex
+855921	2	신뢰의 증표 100 (5시간)	0	3	icon_items.f2p_reputationbooster_tex
+855922	2	신뢰의 증표 100 (10시간)	0	3	icon_items.f2p_reputationbooster_tex
+855923	2	신뢰의 증표 100 (30시간)	0	3	icon_items.f2p_reputationbooster_tex
+855924	2	신뢰의 증표 100 (1일)	0	3	icon_items.f2p_reputationbooster_tex
+855925	2	신뢰의 증표 100 (7일)	0	3	icon_items.f2p_reputationbooster_tex
+855926	2	신뢰의 증표 100 (30일)	0	3	icon_items.f2p_reputationbooster_tex
+855927	3	여행자의 책: 장소이동 (15일)	0	0	icon_items.travelbook_village_tex
+855928	1	길드명 변경권	0	1800	icon_items.charname_change_tex
+855929	1	펫 먹이	0	3	icon_items.petfeed_tex
+855930	1	먹음직스러운 펫 먹이	0	3	icon_items.petfeed_tex
+855931	2	스킬교본: 본드래곤[반] 소환 [비전투]	0	0	icon_items.skillbook_lion1_tex
+855932	2	스킬교본: 본드래곤[흑] 소환 [비전투]	0	0	icon_items.skillbook_lion1_tex
+855933	2	스킬교본: 본드래곤[금] 소환 [비전투]	0	0	icon_items.skillbook_lion1_tex
+855934	1	스킬교본: 기린 소환 - HP, MP 회복	0	0	icon_items.skillbook_lion1_tex
+855935	2	스킬교본: 싸리싸리킹 소환	0	0	icon_items.petskillbook_tex
+855936	2	스킬교본: 재간둥이 루이 소환	0	0	icon_items.petskillbook_tex
+855937	2	스킬교본: 포포리 꼬마 펫	0	0	icon_items.petskillbook_tex
+855938	2	스킬교본: 북미 다혈질 타미 레드 소환	0	0	icon_items.petskillbook_tex
+855939	3	일렉기타(검정)	0	0	icon_equipments.acc_406_tex
+855940	2	고양이귀 머리띠	0	0	icon_equipments.acc_109_tex
+855941	2	날개 머리장식	0	0	icon_equipments.acc_005ap_tex
+855942	3	도깨비 가면	0	0	icon_equipments.acc_076a_tex
+855943	3	여우 가면	0	0	icon_equipments.acc_077a_tex
+855944	3	코스모 헤드셋 BSF-14	0	0	icon_equipments.acc_205_tex
+855945	3	민무늬 동그리 안경	0	0	icon_equipments.acc_256_tex
+855946	3	무늬 동그리 안경	0	0	icon_equipments.acc_257_tex
+855947	3	분홍색 긴 토끼 귀	0	0	icon_equipments.acc_265_tex
+855948	3	흰색 짧은 토끼 귀	0	0	icon_equipments.acc_266_tex
+855949	3	고양이 수염	0	0	icon_equipments.acc_275_tex
+855950	3	북미 V선글라스	0	0	icon_equipments.acc_408_tex
+855951	3	보닛(검정레이스)	0	0	icon_equipments.acc_418_tex
+855952	3	속이 안좋은 무지개 구름	0	0	icon_equipments.acc_502_tex
+855953	0	일체형 잿빛 속옷 [일반]	0	0	icon_equipments.underwear00_f_tex
+855954	0	일체형 잿빛 속옷 [일반]	0	0	icon_equipments.underwear00_f_tex
+855955	0	일체형 잿빛 속옷 [일반]	0	0	icon_equipments.underwear00_f_tex
+855956	0	일체형 잿빛 속옷 [일반]	0	0	icon_equipments.underwear00_f_tex
+855957	0	일체형 잿빛 속옷 [일반]	0	0	icon_equipments.underwear00_f_tex
+855958	1	초록 눈사람 요정 변신 주문서	0	60	icon_items.snowmangreen_scroll_tex
+855959	1	노랑 눈사람 요정 변신 주문서	0	60	icon_items.snowmanyellow_scroll_tex
+855960	1	파랑 눈사람 요정 변신 주문서	0	60	icon_items.snowmanblue_scroll_tex
+855961	1	빨강 눈사람 요정 변신 주문서	0	60	icon_items.snowman_scroll_tex
+855962	1	달콤한 핫초코	0	60	icon_items.hotchocolate_tex
+855963	1	알록달록 아이스크림	0	30	icon_items.colourful_icecream_tex
+855964	1	시원한 블루 스무디	0	30	icon_items.bluesmoothie_tex
+855965	3	2013 루돌프의 갈색뿔	0	0	icon_equipments.acc_206_tex
+855966	3	푸른 털방울 모자	0	0	icon_equipments.acc_210_tex
+855967	3	2013 산타모자	0	0	icon_equipments.acc_203_tex
+855968	3	흰색 짧은 토끼 귀	0	0	icon_equipments.acc_266_tex
+855969	0	자이언트 캔디 (1시간)	0	3	icon_items.icon_janggoe_item_tex
+855970	0	꼬꼬마 캔디 (1시간)	0	3	icon_items.icon_janggoe_item_tex_minus
+855971	2	엘리누의 눈물 II	0	5	icon_items.refinedplanta14_tex
+855972	2	용맹의 물약 II	0	900	icon_items.potion10_tex
+855973	3	푸른 빛의 광선무기(쌍검)	0	0	icon_equipments.event16_dual_a_tex
+855974	3	푸른 빛의 광선무기(창)	0	0	icon_equipments.event16_lance_a_tex
+855975	3	푸른 빛의 광선무기(대검)	0	0	icon_equipments.event16_twohand_a_tex
+855976	3	푸른 빛의 광선무기(도끼)	0	0	icon_equipments.event16_axe_a_tex
+855977	3	푸른 빛의 광선무기(원반)	0	0	icon_equipments.event16_circle_a_tex
+855978	3	푸른 빛의 광선무기(활)	0	0	icon_equipments.event16_bow_a_tex
+855979	3	푸른 빛의 광선무기(지팡이)	0	0	icon_equipments.event16_staff_a_tex
+855980	3	푸른 빛의 광선무기(마법봉)	0	0	icon_equipments.event16_rod_a_tex
+855981	3	푸른 빛의 광선무기(비검)	0	0	icon_equipments.event16_chain_a_tex
+855982	3	푸른 빛의 광선무기(마공포)	0	0	icon_equipments.event16_blaster_a_tex
+855983	3	푸른 빛의 광선무기(권갑)	0	0	icon_equipments.event16_gauntlet_a_tex
+855984	3	푸른 빛의 광선무기(수리검)	0	0	icon_equipments.event16_shuriken_a_tex
+855985	3	붉은빛의 광선무기(쌍검)	0	0	icon_equipments.event16_dual_d_tex
+855986	3	붉은빛의 광선무기(창)	0	0	icon_equipments.event16_lance_d_tex
+855987	3	붉은빛의 광선무기(대검)	0	0	icon_equipments.event16_twohand_d_tex
+855988	3	붉은빛의 광선무기(도끼)	0	0	icon_equipments.event16_axe_d_tex
+855989	3	붉은빛의 광선무기(원반)	0	0	icon_equipments.event16_circle_d_tex
+855990	3	붉은빛의 광선무기(활)	0	0	icon_equipments.event16_bow_d_tex
+855991	3	붉은빛의 광선무기(지팡이)	0	0	icon_equipments.event16_staff_d_tex
+855992	3	붉은빛의 광선무기(마법봉)	0	0	icon_equipments.event16_rod_d_tex
+855993	3	붉은빛의 광선무기(비검)	0	0	icon_equipments.event16_chain_d_tex
+855994	3	붉은빛의 광선무기(마공포)	0	0	icon_equipments.event16_blaster_d_tex
+855995	3	붉은빛의 광선무기(권갑)	0	0	icon_equipments.event16_gauntlet_d_tex
+855996	3	붉은빛의 광선무기(수리검)	0	0	icon_equipments.event16_shuriken_d_tex
+855997	3	날렵한 톱니 비검	0	0	icon_equipments.chain30_tex
+855998	2	은빛 깃털 마공포	0	0	icon_equipments.blaster32_b_tex
+855999	3	강인한 일체형 잿빛 속옷 [전설]	0	0	icon_equipments.underwear00_f_tex
+856000	3	생명의 일체형 잿빛 속옷 [전설]	0	0	icon_equipments.underwear00_f_tex
+856001	3	날카로운 일체형 잿빛 속옷 [전설]	0	0	icon_equipments.underwear00_f_tex
+856002	3	수호의 일체형 잿빛 속옷 [전설]	0	0	icon_equipments.underwear00_f_tex
+856003	3	흐름의 일체형 잿빛 속옷 [전설]	0	0	icon_equipments.underwear00_f_tex
+856004	0	마르샤 화이트 레이스 속옷 [일반]	0	0	icon_equipments.pc_event_31_f_b_tex
+856005	1	강인한 마르샤 화이트 레이스 속옷 [고급]	0	0	icon_equipments.pc_event_31_f_b_tex
+856006	1	생명의 마르샤 화이트 레이스 속옷 [고급]	0	0	icon_equipments.pc_event_31_f_b_tex
+856007	1	날카로운 마르샤 화이트 레이스 속옷 [고급]	0	0	icon_equipments.pc_event_31_f_b_tex
+856008	1	수호의 마르샤 화이트 레이스 속옷 [고급]	0	0	icon_equipments.pc_event_31_f_b_tex
+856009	1	흐름의 마르샤 화이트 레이스 속옷 [고급]	0	0	icon_equipments.pc_event_31_f_b_tex
+856010	2	강인한 마르샤 화이트 레이스 속옷 [희귀]	0	0	icon_equipments.pc_event_31_f_b_tex
+856011	2	생명의 마르샤 화이트 레이스 속옷 [희귀]	0	0	icon_equipments.pc_event_31_f_b_tex
+856012	2	날카로운 마르샤 화이트 레이스 속옷 [희귀]	0	0	icon_equipments.pc_event_31_f_b_tex
+856013	2	수호의 마르샤 화이트 레이스 속옷 [희귀]	0	0	icon_equipments.pc_event_31_f_b_tex
+856014	2	흐름의 마르샤 화이트 레이스 속옷 [희귀]	0	0	icon_equipments.pc_event_31_f_b_tex
+856015	3	강인한 마르샤 화이트 레이스 속옷 [전설]	0	0	icon_equipments.pc_event_31_f_b_tex
+856016	3	생명의 마르샤 화이트 레이스 속옷 [전설]	0	0	icon_equipments.pc_event_31_f_b_tex
+856017	3	날카로운 마르샤 화이트 레이스 속옷 [전설]	0	0	icon_equipments.pc_event_31_f_b_tex
+856018	3	수호의 마르샤 화이트 레이스 속옷 [전설]	0	0	icon_equipments.pc_event_31_f_b_tex
+856019	3	흐름의 마르샤 화이트 레이스 속옷 [전설]	0	0	icon_equipments.pc_event_31_f_b_tex
+856020	0	마르샤 블랙 레이스 속옷 [일반]	0	0	icon_equipments.pc_event_31_f_a_tex
+856021	1	강인한 마르샤 블랙 레이스 속옷 [고급]	0	0	icon_equipments.pc_event_31_f_a_tex
+856022	1	생명의 마르샤 블랙 레이스 속옷 [고급]	0	0	icon_equipments.pc_event_31_f_a_tex
+856023	1	날카로운 마르샤 블랙 레이스 속옷 [고급]	0	0	icon_equipments.pc_event_31_f_a_tex
+856024	1	수호의 마르샤 블랙 레이스 속옷 [고급]	0	0	icon_equipments.pc_event_31_f_a_tex
+856025	1	흐름의 마르샤 블랙 레이스 속옷 [고급]	0	0	icon_equipments.pc_event_31_f_a_tex
+856026	2	강인한 마르샤 블랙 레이스 속옷 [희귀]	0	0	icon_equipments.pc_event_31_f_a_tex
+856027	2	생명의 마르샤 블랙 레이스 속옷 [희귀]	0	0	icon_equipments.pc_event_31_f_a_tex
+856028	2	날카로운 마르샤 블랙 레이스 속옷 [희귀]	0	0	icon_equipments.pc_event_31_f_a_tex
+856029	2	수호의 마르샤 블랙 레이스 속옷 [희귀]	0	0	icon_equipments.pc_event_31_f_a_tex
+856030	2	흐름의 마르샤 블랙 레이스 속옷 [희귀]	0	0	icon_equipments.pc_event_31_f_a_tex
+856031	3	강인한 마르샤 블랙 레이스 속옷 [전설]	0	0	icon_equipments.pc_event_31_f_a_tex
+856032	3	생명의 마르샤 블랙 레이스 속옷 [전설]	0	0	icon_equipments.pc_event_31_f_a_tex
+856033	3	날카로운 마르샤 블랙 레이스 속옷 [전설]	0	0	icon_equipments.pc_event_31_f_a_tex
+856034	3	수호의 마르샤 블랙 레이스 속옷 [전설]	0	0	icon_equipments.pc_event_31_f_a_tex
+856035	3	흐름의 마르샤 블랙 레이스 속옷 [전설]	0	0	icon_equipments.pc_event_31_f_a_tex
+856036	3	설빔: 려 [휴먼 여자]	0	0	icon_equipments.pc_event_27_human_f_b_tex
+856037	3	설빔: 미 [휴먼 여자]	0	0	icon_equipments.pc_event_27_human_f_c_tex
+856038	3	설빔: 려 [하이엘프 여자]	0	0	icon_equipments.pc_event_27_human_f_b_tex
+856039	3	설빔: 미 [하이엘프 여자]	0	0	icon_equipments.pc_event_27_human_f_c_tex
+856040	3	설빔: 려 [아만 여자]	0	0	icon_equipments.pc_event_27_human_f_b_tex
+856041	3	설빔: 미 [아만 여자]	0	0	icon_equipments.pc_event_27_human_f_c_tex
+856042	3	설빔: 려 [케스타닉 여자]	0	0	icon_equipments.pc_event_27_human_f_b_tex
+856043	3	설빔: 미 [케스타닉 여자]	0	0	icon_equipments.pc_event_27_human_f_c_tex
+856044	3	설빔: 려 [엘린]	0	0	icon_equipments.pc_event_27_popori_f_b_tex
+856045	3	설빔: 미 [엘린]	0	0	icon_equipments.pc_event_27_popori_f_c_tex
+856046	3	복실한 흰 고양이발	0	0	icon_equipments.event14_gauntlet_a_tex
+856047	3	복실한 노랑 고양이발	0	0	icon_equipments.event14_gauntlet_b_tex
+856048	3	복실한 검정 고양이발	0	0	icon_equipments.event14_gauntlet_c_tex
+856049	2	스킬교본: 털모자 더키 소환	0	0	icon_items.skillbook_rider1_tex
+856050	2	스킬교본: 털모자 더키 소환 (30일)	0	0	icon_items.skillbook_rider1_tex
+856051	1	스킬교본: 야구모자 더키 소환	0	0	icon_items.skillbook_rider1_tex
+856052	1	스킬교본: 야구모자 더키 소환 (30일)	0	0	icon_items.skillbook_rider1_tex
+856053	3	스킬교본: 붉은 발톱 하미르 소환 (30일)	0	0	icon_items.skillbook_rider1_tex
+856054	3	스킬교본: 레드 드래곤 소환 (레어) (30일)	0	0	icon_items.skillbook_lion1_tex
+856055	1	하급 전투 비약	0	5	icon_items.add_extract_potion_1_tex
+856056	2	중급 전투 비약	0	5	icon_items.add_extract_potion_1_tex
+856057	3	상급 전투 비약	0	5	icon_items.add_extract_potion_1_tex
+856058	1	하급 전투 비약	0	5	icon_items.add_extract_potion_1_tex
+856059	2	중급 전투 비약	0	5	icon_items.add_extract_potion_1_tex
+856060	3	상급 전투 비약	0	5	icon_items.add_extract_potion_1_tex
+856061	1	연합 보급품: MP 회복 물약	0	30	icon_items.potion19_tex
+856062	2	[서버] 스타일 창고 확장권	0	0	icon_items.extend_personwarehouse_tex
+856063	2	[계정] 스타일 창고 확장권	0	0	icon_items.extend_personwarehouse_tex
+856064	2	제작 숙련도 고속 성장 100 (3일)	0	3600	icon_items.small_insecta8_tex
+856065	3	메가폰	0	5	icon_items.premiummegaphone_tex
+249000	3	변형의 비약 - 엘프슬림정 3개 묶음	0	0	icon_items.gift_box04_tex
+249001	3	변형의 비약 - 키크그라정 3개 묶음	0	0	icon_items.gift_box04_tex
+249002	3	변형의 비약 - 뿌앙청심원 (2013,2014 수영복 전용) 3개묶음	0	0	icon_items.gift_box04_tex
+249003	3	달토끼 레드 가챠	0	0	icon_items.gift_box04_tex
+249004	3	달토끼 블루 가챠	0	0	icon_items.gift_box04_tex
+249005	3	분홍 갈기의 늑대 가챠	0	0	icon_items.gift_box04_tex
+249006	3	푸른 갈기의 유령 늑대 가챠	0	0	icon_items.gift_box04_tex
+249007	3	검은 갈기의 늑대 가챠	0	0	icon_items.gift_box04_tex
+249008	3	녹테늄 강화탄 상자	0	0	icon_items.gift_box04_tex
+249009	3	대용량 녹테늄 강화탄 상자	0	0	icon_items.gift_box04_tex
+249010	3	일체형 잿빛 속옷 상자	0	0	icon_items.gift_box04_tex
+249011	3	써머의 선물 상자	0	0	icon_items.gift_box04_tex
+249012	2	TERA 보상 상자	0	0	icon_items.gift_box05_tex
+249013	2	TERA 임시점검 보상 상자 II	0	0	icon_items.gift_box05_tex
+249014	2	TERA 임시점검 보상 상자 I	0	0	icon_items.gift_box05_tex
+249015	2	TERA 점검연장 보상 상자 II	0	0	icon_items.gift_box05_tex
+249016	2	TERA 점검연장 보상 상자 I	0	0	icon_items.gift_box05_tex
+249017	3	엘리누의 눈물 상자	0	0	icon_items.gift_box04_tex
+249018	3	자이언트 캔디 20개 묶음	0	0	icon_items.gift_box04_tex
+249019	3	꼬꼬마 캔디 20개 묶음	0	0	icon_items.gift_box04_tex
+249020	3	아이돌 코스튬(염색) 상자	0	1	icon_items.gift_box04_tex
+249021	0	아이돌 코스튬 상자	0	1	icon_items.gift_box04_tex
+249022	3	치파오 상자	0	1	icon_items.gift_box04_tex
+249023	3	강아지 동물 의상 상자	0	1	icon_items.gift_box04_tex
+249024	3	설빔(수) 상자	0	1	icon_items.gift_box04_tex
+249025	3	설빔(려) 상자	0	1	icon_items.gift_box04_tex
+249026	3	설빔(미) 상자	0	1	icon_items.gift_box04_tex
+249027	3	불멸의 피닉스 상자	0	0	icon_items.gift_box04_tex
+249028	3	 복실한 고양이발 상자 (권술사 전용)	0	0	icon_items.gift_box04_tex
+249029	3	펀펀 무기 상자	0	1	icon_items.gift_box04_tex
+249030	3	츄링의 스포티 속옷 상자	0	0	icon_items.gift_box04_tex
+249031	3	블랙 드레스 & 슈트 상자	0	1	icon_items.gift_box04_tex
+249032	3	유니크: 모던 락시크룩 상자	0	1	icon_items.gift_box04_tex
+249033	3	대선장 카르닉스의 의복 상자	0	1	icon_items.gift_box04_tex
+249034	3	화이트 드레스 & 슈트 상자	0	1	icon_items.gift_box04_tex
+249035	3	쉐도우 헌터 의복 상자	0	1	icon_items.gift_box04_tex
+249036	3	Federation Bill Lucky Box	0	0	icon_items.gold_tcat_pocket_tex
+249037	3	 Starglow Weapon Skin Box	0	1	icon_items.gift_box04_tex
+249038	3	 Starglow Costume Box	0	1	icon_items.gift_box04_tex
+249039	3	Dyeable Female Gothic Dress Costume Box 	0	1	icon_items.gift_box04_tex
+249040	3	Dyeable Male Noblesse Suit Costume Box 	0	1	icon_items.gift_box04_tex
+249041	3	Male Classic Butler's Uniform Costume Box 	0	1	icon_items.gift_box04_tex
+249042	3	Dyeable Female Classic Housekeeper Uniform Costume Box 	0	1	icon_items.gift_box04_tex
+249043	3	Male Fitted Beach Wear Costume Box 	0	1	icon_items.gift_box04_tex
+249044	3	Dyeable Female Striped Bikini Costume Box 	0	1	icon_items.gift_box04_tex
+249045	3	Female Striped Bikini Costume Box 	0	1	icon_items.gift_box04_tex
+249046	3	Dyeable Bomber JacketCostume Box	0	1	icon_items.gift_box04_tex
+249047	3	Bomber Jacket Costume Box	0	1	icon_items.gift_box04_tex
+249048	3	Female Dyeable 2017 Maid Costume Costume Box 	0	1	icon_items.gift_box04_tex
+249049	3	Male Dyeable Embroidered Suit Costume Box 	0	1	icon_items.gift_box04_tex
+249050	3	Female Dyeable Chiffon Dress Costume Box 	0	1	icon_items.gift_box04_tex
+249051	3	Assassin Costume Box	0	1	icon_items.gift_box04_tex
+249052	3	츄링의 스포티 속옷 상자	0	0	icon_items.premiumbox_pet2_tex
+249053	3	행운의 변화의 증거 상자	0	0	icon_items.premiumbox_pet2_tex
+249054	3	행운의 대용량 아르보레아 결정체 상자 II	0	0	icon_items.premiumbox_pet2_tex
+249055	3	행운의 대용량 아르보레아 결정체 상자	0	0	icon_items.premiumbox_pet2_tex
+249056	3	행운의 아르보레아 결정체 상자 II	0	0	icon_items.premiumbox_pet2_tex
+249057	3	행운의 아르보레아 결정체 상자	0	0	icon_items.premiumbox_pet2_tex
+249058	3	Iron Wing Gacha	0	0	icon_items.gift_box04_tex
+249059	3	Crimson Wing Gacha	0	0	icon_items.gift_box04_tex
+249060	3	Dracolich Gacha	0	0	icon_items.gift_box04_tex
+249061	3	Glitter Wing Gacha	0	0	icon_items.gift_box04_tex
+249062	3	Bonefury Gacha	0	0	icon_items.gift_box04_tex
+249063	3	Nightfury Gacha	0	0	icon_items.gift_box04_tex
+249064	3	Ultrafury Gacha	0	0	icon_items.gift_box04_tex
+249065	3	Astrafury Gacha	0	0	icon_items.gift_box04_tex
+855605	3	고양이 동물 의상 상자 (영구제)	0	1	icon_items.gift_box04_tex
+855606	3	토끼 동물 의상 상자 (영구제)	0	1	icon_items.gift_box04_tex
+855607	3	판다 동물 의상 상자 (영구제)	0	1	icon_items.gift_box04_tex
+855608	3	2017 웨딩 예복 상자 (남자)	0	1	icon_items.gift_box04_tex
+855609	3	2017 웨딩 예복 상자 (여자)	0	1	icon_items.gift_box04_tex
+855610	3	테라데미 US룩 상자 (남자)	0	1	icon_items.gift_box04_tex
+855611	3	테라데미 US룩 상자 (여자)	0	1	icon_items.gift_box04_tex
+855612	3	검은 파도 해적단 의복 상자	0	1	icon_items.gift_box04_tex
+855613	3	섬광 그림자 의복 상자	0	1	icon_items.gift_box04_tex
+855614	3	테라데미 캔버스룩 레어 상자 (영구제)	0	1	icon_items.gift_box04_tex
+855615	3	프로즌 코스튬 상자	0	1	icon_items.gift_box04_tex
+855616	3	유니크: 특수기동대 의복 상자 (염색)	0	1	icon_items.gift_box04_tex
+855617	3	스팀펑크 레어 스마트 상자 (영구제)	0	1	icon_items.gift_box04_tex
+855618	3	화룡의 기운이 서린 무기 상자	0	1	icon_items.gift_box04_tex
+855619	3	카이아의 영웅 무기 상자	0	1	icon_items.gift_box04_tex
+855620	3	붉은빛의 광선 무기 상자	0	1	icon_items.gift_box04_tex
+855621	3	푸른 빛의 광선 무기 상자	0	1	icon_items.gift_box04_tex
+855622	3	푸른 용의 기운이 서린 갑주 상자	0	1	icon_items.gift_box04_tex
+855623	3	푸른 용의 기운이 서린 무기 상자	0	1	icon_items.gift_box04_tex
+855624	3	검은 용의 기운이 서린 갑주 상자	0	1	icon_items.gift_box04_tex
+855625	3	검은 용의 기운이 서린 무기 상자	0	1	icon_items.gift_box04_tex
 250000	3	[稀有]特殊機動隊時裝[人類男]	0	0	icon_equipments.pc_event_43_m_tex
 250001	3	[稀有]特殊機動隊時裝[人類男]	0	0	icon_equipments.pc_event_43_m_tex
 250002	3	[稀有]特殊機動隊時裝[人類男]	0	0	icon_equipments.pc_event_43_m_tex
@@ -39345,6 +39939,894 @@
 257693	3	[稀有]維多利亞黑色甜心女僕服(可染色)[艾琳]	0	0	icon_equipments.pc_event_19a_popori_f_dye_tex
 257694	3	[稀有]維多利亞黑色甜心女僕服(可染色)[艾琳]	0	0	icon_equipments.pc_event_19a_popori_f_dye_tex
 257695	3	[稀有]維多利亞黑色甜心女僕服(可染色)[艾琳]	0	0	icon_equipments.pc_event_19a_popori_f_dye_tex
+257696	3	[稀有]朱紅鋼鐵動能雙劍	0	0	icon_equipments.event20_dual_a_tex
+257697	3	[稀有]朱紅鋼鐵動能雙劍	0	0	icon_equipments.event20_dual_a_tex
+257698	3	[稀有]朱紅鋼鐵動能雙劍 (3天)	0	0	icon_equipments.event20_dual_a_tex
+257699	3	[稀有]朱紅鋼鐵動能雙劍 (7天)	0	0	icon_equipments.event20_dual_a_tex
+257700	3	[稀有]朱紅鋼鐵動能雙劍 (7天)	0	0	icon_equipments.event20_dual_a_tex
+257701	3	[稀有]朱紅鋼鐵動能雙劍 (14天)	0	0	icon_equipments.event20_dual_a_tex
+257702	3	[稀有]朱紅鋼鐵動能雙劍 (30天)	0	0	icon_equipments.event20_dual_a_tex
+257703	3	[稀有]朱紅鋼鐵動能雙劍 (30天)	0	0	icon_equipments.event20_dual_a_tex
+257704	3	[稀有]朱紅鋼鐵動能雙劍	0	0	icon_equipments.event20_dual_a_tex
+257705	3	[稀有]朱紅鋼鐵動能雙劍	0	0	icon_equipments.event20_dual_a_tex
+257706	3	[稀有]朱紅鋼鐵動能雙劍	0	0	icon_equipments.event20_dual_a_tex
+257707	3	[稀有]朱紅鋼鐵動能雙劍	0	0	icon_equipments.event20_dual_a_tex
+257708	3	[稀有]朱紅鋼鐵動能長槍	0	0	icon_equipments.event20_lance_a_tex
+257709	3	[稀有]朱紅鋼鐵動能長槍	0	0	icon_equipments.event20_lance_a_tex
+257710	3	[稀有]朱紅鋼鐵動能長槍 (3天)	0	0	icon_equipments.event20_lance_a_tex
+257711	3	[稀有]朱紅鋼鐵動能長槍 (7天)	0	0	icon_equipments.event20_lance_a_tex
+257712	3	[稀有]朱紅鋼鐵動能長槍 (7天)	0	0	icon_equipments.event20_lance_a_tex
+257713	3	[稀有]朱紅鋼鐵動能長槍 (14天)	0	0	icon_equipments.event20_lance_a_tex
+257714	3	[稀有]朱紅鋼鐵動能長槍 (30天)	0	0	icon_equipments.event20_lance_a_tex
+257715	3	[稀有]朱紅鋼鐵動能長槍 (30天)	0	0	icon_equipments.event20_lance_a_tex
+257716	3	[稀有]朱紅鋼鐵動能長槍	0	0	icon_equipments.event20_lance_a_tex
+257717	3	[稀有]朱紅鋼鐵動能長槍	0	0	icon_equipments.event20_lance_a_tex
+257718	3	[稀有]朱紅鋼鐵動能長槍	0	0	icon_equipments.event20_lance_a_tex
+257719	3	[稀有]朱紅鋼鐵動能長槍	0	0	icon_equipments.event20_lance_a_tex
+257720	3	[稀有]朱紅鋼鐵動能巨劍	0	0	icon_equipments.event20_twohand_a_tex
+257721	3	[稀有]朱紅鋼鐵動能巨劍	0	0	icon_equipments.event20_twohand_a_tex
+257722	3	[稀有]朱紅鋼鐵動能巨劍 (3天)	0	0	icon_equipments.event20_twohand_a_tex
+257723	3	[稀有]朱紅鋼鐵動能巨劍 (7天)	0	0	icon_equipments.event20_twohand_a_tex
+257724	3	[稀有]朱紅鋼鐵動能巨劍 (7天)	0	0	icon_equipments.event20_twohand_a_tex
+257725	3	[稀有]朱紅鋼鐵動能巨劍 (14天)	0	0	icon_equipments.event20_twohand_a_tex
+257726	3	[稀有]朱紅鋼鐵動能巨劍 (30天)	0	0	icon_equipments.event20_twohand_a_tex
+257727	3	[稀有]朱紅鋼鐵動能巨劍 (30天)	0	0	icon_equipments.event20_twohand_a_tex
+257728	3	[稀有]朱紅鋼鐵動能巨劍	0	0	icon_equipments.event20_twohand_a_tex
+257729	3	[稀有]朱紅鋼鐵動能巨劍	0	0	icon_equipments.event20_twohand_a_tex
+257730	3	[稀有]朱紅鋼鐵動能巨劍	0	0	icon_equipments.event20_twohand_a_tex
+257731	3	[稀有]朱紅鋼鐵動能巨劍	0	0	icon_equipments.event20_twohand_a_tex
+257732	3	[稀有]朱紅鋼鐵動能戰斧	0	0	icon_equipments.event20_axe_a_tex
+257733	3	[稀有]朱紅鋼鐵動能戰斧	0	0	icon_equipments.event20_axe_a_tex
+257734	3	[稀有]朱紅鋼鐵動能戰斧 (3天)	0	0	icon_equipments.event20_axe_a_tex
+257735	3	[稀有]朱紅鋼鐵動能戰斧 (7天)	0	0	icon_equipments.event20_axe_a_tex
+257736	3	[稀有]朱紅鋼鐵動能戰斧 (7天)	0	0	icon_equipments.event20_axe_a_tex
+257737	3	[稀有]朱紅鋼鐵動能戰斧 (14天)	0	0	icon_equipments.event20_axe_a_tex
+257738	3	[稀有]朱紅鋼鐵動能戰斧 (30天)	0	0	icon_equipments.event20_axe_a_tex
+257739	3	[稀有]朱紅鋼鐵動能戰斧 (30天)	0	0	icon_equipments.event20_axe_a_tex
+257740	3	[稀有]朱紅鋼鐵動能戰斧	0	0	icon_equipments.event20_axe_a_tex
+257741	3	[稀有]朱紅鋼鐵動能戰斧	0	0	icon_equipments.event20_axe_a_tex
+257742	3	[稀有]朱紅鋼鐵動能戰斧	0	0	icon_equipments.event20_axe_a_tex
+257743	3	[稀有]朱紅鋼鐵動能戰斧	0	0	icon_equipments.event20_axe_a_tex
+257744	3	[稀有]朱紅鋼鐵動能法環	0	0	icon_equipments.event20_circle_a_tex
+257745	3	[稀有]朱紅鋼鐵動能法環	0	0	icon_equipments.event20_circle_a_tex
+257746	3	[稀有]朱紅鋼鐵動能法環 (3天)	0	0	icon_equipments.event20_circle_a_tex
+257747	3	[稀有]朱紅鋼鐵動能法環 (7天)	0	0	icon_equipments.event20_circle_a_tex
+257748	3	[稀有]朱紅鋼鐵動能法環 (7天)	0	0	icon_equipments.event20_circle_a_tex
+257749	3	[稀有]朱紅鋼鐵動能法環 (14天)	0	0	icon_equipments.event20_circle_a_tex
+257750	3	[稀有]朱紅鋼鐵動能法環 (30天)	0	0	icon_equipments.event20_circle_a_tex
+257751	3	[稀有]朱紅鋼鐵動能法環 (30天)	0	0	icon_equipments.event20_circle_a_tex
+257752	3	[稀有]朱紅鋼鐵動能法環	0	0	icon_equipments.event20_circle_a_tex
+257753	3	[稀有]朱紅鋼鐵動能法環	0	0	icon_equipments.event20_circle_a_tex
+257754	3	[稀有]朱紅鋼鐵動能法環	0	0	icon_equipments.event20_circle_a_tex
+257755	3	[稀有]朱紅鋼鐵動能法環	0	0	icon_equipments.event20_circle_a_tex
+257756	3	[稀有]朱紅鋼鐵動能之弓	0	0	icon_equipments.event20_bow_a_tex
+257757	3	[稀有]朱紅鋼鐵動能之弓	0	0	icon_equipments.event20_bow_a_tex
+257758	3	[稀有]朱紅鋼鐵動能之弓 (3天)	0	0	icon_equipments.event20_bow_a_tex
+257759	3	[稀有]朱紅鋼鐵動能之弓 (7天)	0	0	icon_equipments.event20_bow_a_tex
+257760	3	[稀有]朱紅鋼鐵動能之弓 (7天)	0	0	icon_equipments.event20_bow_a_tex
+257761	3	[稀有]朱紅鋼鐵動能之弓 (14天)	0	0	icon_equipments.event20_bow_a_tex
+257762	3	[稀有]朱紅鋼鐵動能之弓 (30天)	0	0	icon_equipments.event20_bow_a_tex
+257763	3	[稀有]朱紅鋼鐵動能之弓 (30天)	0	0	icon_equipments.event20_bow_a_tex
+257764	3	[稀有]朱紅鋼鐵動能之弓	0	0	icon_equipments.event20_bow_a_tex
+257765	3	[稀有]朱紅鋼鐵動能之弓	0	0	icon_equipments.event20_bow_a_tex
+257766	3	[稀有]朱紅鋼鐵動能之弓	0	0	icon_equipments.event20_bow_a_tex
+257767	3	[稀有]朱紅鋼鐵動能之弓	0	0	icon_equipments.event20_bow_a_tex
+257768	3	[稀有]朱紅鋼鐵動能權杖	0	0	icon_equipments.event20_staff_a_tex
+257769	3	[稀有]朱紅鋼鐵動能權杖	0	0	icon_equipments.event20_staff_a_tex
+257770	3	[稀有]朱紅鋼鐵動能權杖 (3天)	0	0	icon_equipments.event20_staff_a_tex
+257771	3	[稀有]朱紅鋼鐵動能權杖 (7天)	0	0	icon_equipments.event20_staff_a_tex
+257772	3	[稀有]朱紅鋼鐵動能權杖 (7天)	0	0	icon_equipments.event20_staff_a_tex
+257773	3	[稀有]朱紅鋼鐵動能權杖 (14天)	0	0	icon_equipments.event20_staff_a_tex
+257774	3	[稀有]朱紅鋼鐵動能權杖 (30天)	0	0	icon_equipments.event20_staff_a_tex
+257775	3	[稀有]朱紅鋼鐵動能權杖 (30天)	0	0	icon_equipments.event20_staff_a_tex
+257776	3	[稀有]朱紅鋼鐵動能權杖	0	0	icon_equipments.event20_staff_a_tex
+257777	3	[稀有]朱紅鋼鐵動能權杖	0	0	icon_equipments.event20_staff_a_tex
+257778	3	[稀有]朱紅鋼鐵動能權杖	0	0	icon_equipments.event20_staff_a_tex
+257779	3	[稀有]朱紅鋼鐵動能權杖	0	0	icon_equipments.event20_staff_a_tex
+257780	3	[稀有]朱紅鋼鐵動能魔棒	0	0	icon_equipments.event20_rod_a_tex
+257781	3	[稀有]朱紅鋼鐵動能魔棒	0	0	icon_equipments.event20_rod_a_tex
+257782	3	[稀有]朱紅鋼鐵動能魔棒 (3天)	0	0	icon_equipments.event20_rod_a_tex
+257783	3	[稀有]朱紅鋼鐵動能魔棒 (7天)	0	0	icon_equipments.event20_rod_a_tex
+257784	3	[稀有]朱紅鋼鐵動能魔棒 (7天)	0	0	icon_equipments.event20_rod_a_tex
+257785	3	[稀有]朱紅鋼鐵動能魔棒 (14天)	0	0	icon_equipments.event20_rod_a_tex
+257786	3	[稀有]朱紅鋼鐵動能魔棒 (30天)	0	0	icon_equipments.event20_rod_a_tex
+257787	3	[稀有]朱紅鋼鐵動能魔棒 (30天)	0	0	icon_equipments.event20_rod_a_tex
+257788	3	[稀有]朱紅鋼鐵動能魔棒	0	0	icon_equipments.event20_rod_a_tex
+257789	3	[稀有]朱紅鋼鐵動能魔棒	0	0	icon_equipments.event20_rod_a_tex
+257790	3	[稀有]朱紅鋼鐵動能魔棒	0	0	icon_equipments.event20_rod_a_tex
+257791	3	[稀有]朱紅鋼鐵動能魔棒	0	0	icon_equipments.event20_rod_a_tex
+257792	3	[稀有]朱紅鋼鐵動能拳甲	0	0	icon_equipments.event20_gauntlet_a_tex
+257793	3	[稀有]朱紅鋼鐵動能拳甲	0	0	icon_equipments.event20_gauntlet_a_tex
+257794	3	[稀有]朱紅鋼鐵動能拳甲 (3天)	0	0	icon_equipments.event20_gauntlet_a_tex
+257795	3	[稀有]朱紅鋼鐵動能拳甲 (7天)	0	0	icon_equipments.event20_gauntlet_a_tex
+257796	3	[稀有]朱紅鋼鐵動能拳甲 (7天)	0	0	icon_equipments.event20_gauntlet_a_tex
+257797	3	[稀有]朱紅鋼鐵動能拳甲 (14天)	0	0	icon_equipments.event20_gauntlet_a_tex
+257798	3	[稀有]朱紅鋼鐵動能拳甲 (30天)	0	0	icon_equipments.event20_gauntlet_a_tex
+257799	3	[稀有]朱紅鋼鐵動能拳甲 (30天)	0	0	icon_equipments.event20_gauntlet_a_tex
+257800	3	[稀有]朱紅鋼鐵動能拳甲	0	0	icon_equipments.event20_gauntlet_a_tex
+257801	3	[稀有]朱紅鋼鐵動能拳甲	0	0	icon_equipments.event20_gauntlet_a_tex
+257802	3	[稀有]朱紅鋼鐵動能拳甲	0	0	icon_equipments.event20_gauntlet_a_tex
+257803	3	[稀有]朱紅鋼鐵動能拳甲	0	0	icon_equipments.event20_gauntlet_a_tex
+257804	3	[稀有]朱紅鋼鐵動能槍	0	0	icon_equipments.event20_blaster_a_tex
+257805	3	[稀有]朱紅鋼鐵動能槍	0	0	icon_equipments.event20_blaster_a_tex
+257806	3	[稀有]朱紅鋼鐵動能槍 (3天)	0	0	icon_equipments.event20_blaster_a_tex
+257807	3	[稀有]朱紅鋼鐵動能槍 (7天)	0	0	icon_equipments.event20_blaster_a_tex
+257808	3	[稀有]朱紅鋼鐵動能槍 (7天)	0	0	icon_equipments.event20_blaster_a_tex
+257809	3	[稀有]朱紅鋼鐵動能槍 (14天)	0	0	icon_equipments.event20_blaster_a_tex
+257810	3	[稀有]朱紅鋼鐵動能槍 (30天)	0	0	icon_equipments.event20_blaster_a_tex
+257811	3	[稀有]朱紅鋼鐵動能槍 (30天)	0	0	icon_equipments.event20_blaster_a_tex
+257812	3	[稀有]朱紅鋼鐵動能槍	0	0	icon_equipments.event20_blaster_a_tex
+257813	3	[稀有]朱紅鋼鐵動能槍	0	0	icon_equipments.event20_blaster_a_tex
+257814	3	[稀有]朱紅鋼鐵動能槍	0	0	icon_equipments.event20_blaster_a_tex
+257815	3	[稀有]朱紅鋼鐵動能槍	0	0	icon_equipments.event20_blaster_a_tex
+257816	3	[稀有]朱紅鋼鐵動能月光刀	0	0	icon_equipments.event20_spear_a_tex
+257817	3	[稀有]朱紅鋼鐵動能月光刀	0	0	icon_equipments.event20_spear_a_tex
+257818	3	[稀有]朱紅鋼鐵動能月光刀 (3天)	0	0	icon_equipments.event20_spear_a_tex
+257819	3	[稀有]朱紅鋼鐵動能月光刀 (7天)	0	0	icon_equipments.event20_spear_a_tex
+257820	3	[稀有]朱紅鋼鐵動能月光刀 (7天)	0	0	icon_equipments.event20_spear_a_tex
+257821	3	[稀有]朱紅鋼鐵動能月光刀 (14天)	0	0	icon_equipments.event20_spear_a_tex
+257822	3	[稀有]朱紅鋼鐵動能月光刀 (30天)	0	0	icon_equipments.event20_spear_a_tex
+257823	3	[稀有]朱紅鋼鐵動能月光刀 (30天)	0	0	icon_equipments.event20_spear_a_tex
+257824	3	[稀有]朱紅鋼鐵動能月光刀	0	0	icon_equipments.event20_spear_a_tex
+257825	3	[稀有]朱紅鋼鐵動能月光刀	0	0	icon_equipments.event20_spear_a_tex
+257826	3	[稀有]朱紅鋼鐵動能月光刀	0	0	icon_equipments.event20_spear_a_tex
+257827	3	[稀有]朱紅鋼鐵動能月光刀	0	0	icon_equipments.event20_spear_a_tex
+257828	3	[稀有]朱紅鋼鐵動能飛劍	0	0	icon_equipments.event20_chain_a_tex
+257829	3	[稀有]朱紅鋼鐵動能飛劍	0	0	icon_equipments.event20_chain_a_tex
+257830	3	[稀有]朱紅鋼鐵動能飛劍 (3天)	0	0	icon_equipments.event20_chain_a_tex
+257831	3	[稀有]朱紅鋼鐵動能飛劍 (7天)	0	0	icon_equipments.event20_chain_a_tex
+257832	3	[稀有]朱紅鋼鐵動能飛劍 (7天)	0	0	icon_equipments.event20_chain_a_tex
+257833	3	[稀有]朱紅鋼鐵動能飛劍 (14天)	0	0	icon_equipments.event20_chain_a_tex
+257834	3	[稀有]朱紅鋼鐵動能飛劍 (30天)	0	0	icon_equipments.event20_chain_a_tex
+257835	3	[稀有]朱紅鋼鐵動能飛劍 (30天)	0	0	icon_equipments.event20_chain_a_tex
+257836	3	[稀有]朱紅鋼鐵動能飛劍	0	0	icon_equipments.event20_chain_a_tex
+257837	3	[稀有]朱紅鋼鐵動能飛劍	0	0	icon_equipments.event20_chain_a_tex
+257838	3	[稀有]朱紅鋼鐵動能飛劍	0	0	icon_equipments.event20_chain_a_tex
+257839	3	[稀有]朱紅鋼鐵動能飛劍	0	0	icon_equipments.event20_chain_a_tex
+257840	3	[稀有]朱紅鋼鐵動能手裏劍	0	0	icon_equipments.event20_shuriken_a_tex
+257841	3	[稀有]朱紅鋼鐵動能手裏劍	0	0	icon_equipments.event20_shuriken_a_tex
+257842	3	[稀有]朱紅鋼鐵動能手裏劍 (3天)	0	0	icon_equipments.event20_shuriken_a_tex
+257843	3	[稀有]朱紅鋼鐵動能手裏劍 (7天)	0	0	icon_equipments.event20_shuriken_a_tex
+257844	3	[稀有]朱紅鋼鐵動能手裏劍 (7天)	0	0	icon_equipments.event20_shuriken_a_tex
+257845	3	[稀有]朱紅鋼鐵動能手裏劍 (14天)	0	0	icon_equipments.event20_shuriken_a_tex
+257846	3	[稀有]朱紅鋼鐵動能手裏劍 (30天)	0	0	icon_equipments.event20_shuriken_a_tex
+257847	3	[稀有]朱紅鋼鐵動能手裏劍 (30天)	0	0	icon_equipments.event20_shuriken_a_tex
+257848	3	[稀有]朱紅鋼鐵動能手裏劍	0	0	icon_equipments.event20_shuriken_a_tex
+257849	3	[稀有]朱紅鋼鐵動能手裏劍	0	0	icon_equipments.event20_shuriken_a_tex
+257850	3	[稀有]朱紅鋼鐵動能手裏劍	0	0	icon_equipments.event20_shuriken_a_tex
+257851	3	[稀有]朱紅鋼鐵動能手裏劍	0	0	icon_equipments.event20_shuriken_a_tex
+257852	3	[稀有]銀白鋼鐵動能雙劍	0	0	icon_equipments.event20_dual_b_tex
+257853	3	[稀有]銀白鋼鐵動能雙劍	0	0	icon_equipments.event20_dual_b_tex
+257854	3	[稀有]銀白鋼鐵動能雙劍 (3天)	0	0	icon_equipments.event20_dual_b_tex
+257855	3	[稀有]銀白鋼鐵動能雙劍 (7天)	0	0	icon_equipments.event20_dual_b_tex
+257856	3	[稀有]銀白鋼鐵動能雙劍 (7天)	0	0	icon_equipments.event20_dual_b_tex
+257857	3	[稀有]銀白鋼鐵動能雙劍 (14天)	0	0	icon_equipments.event20_dual_b_tex
+257858	3	[稀有]銀白鋼鐵動能雙劍 (30天)	0	0	icon_equipments.event20_dual_b_tex
+257859	3	[稀有]銀白鋼鐵動能雙劍 (30天)	0	0	icon_equipments.event20_dual_b_tex
+257860	3	[稀有]銀白鋼鐵動能雙劍	0	0	icon_equipments.event20_dual_b_tex
+257861	3	[稀有]銀白鋼鐵動能雙劍	0	0	icon_equipments.event20_dual_b_tex
+257862	3	[稀有]銀白鋼鐵動能雙劍	0	0	icon_equipments.event20_dual_b_tex
+257863	3	[稀有]銀白鋼鐵動能雙劍	0	0	icon_equipments.event20_dual_b_tex
+257864	3	[稀有]銀白鋼鐵動能長槍	0	0	icon_equipments.event20_lance_b_tex
+257865	3	[稀有]銀白鋼鐵動能長槍	0	0	icon_equipments.event20_lance_b_tex
+257866	3	[稀有]銀白鋼鐵動能長槍 (3天)	0	0	icon_equipments.event20_lance_b_tex
+257867	3	[稀有]銀白鋼鐵動能長槍 (7天)	0	0	icon_equipments.event20_lance_b_tex
+257868	3	[稀有]銀白鋼鐵動能長槍 (7天)	0	0	icon_equipments.event20_lance_b_tex
+257869	3	[稀有]銀白鋼鐵動能長槍 (14天)	0	0	icon_equipments.event20_lance_b_tex
+257870	3	[稀有]銀白鋼鐵動能長槍 (30天)	0	0	icon_equipments.event20_lance_b_tex
+257871	3	[稀有]銀白鋼鐵動能長槍 (30天)	0	0	icon_equipments.event20_lance_b_tex
+257872	3	[稀有]銀白鋼鐵動能長槍	0	0	icon_equipments.event20_lance_b_tex
+257873	3	[稀有]銀白鋼鐵動能長槍	0	0	icon_equipments.event20_lance_b_tex
+257874	3	[稀有]銀白鋼鐵動能長槍	0	0	icon_equipments.event20_lance_b_tex
+257875	3	[稀有]銀白鋼鐵動能長槍	0	0	icon_equipments.event20_lance_b_tex
+257876	3	[稀有]銀白鋼鐵動能巨劍	0	0	icon_equipments.event20_twohand_b_tex
+257877	3	[稀有]銀白鋼鐵動能巨劍	0	0	icon_equipments.event20_twohand_b_tex
+257878	3	[稀有]銀白鋼鐵動能巨劍 (3天)	0	0	icon_equipments.event20_twohand_b_tex
+257879	3	[稀有]銀白鋼鐵動能巨劍 (7天)	0	0	icon_equipments.event20_twohand_b_tex
+257880	3	[稀有]銀白鋼鐵動能巨劍 (7天)	0	0	icon_equipments.event20_twohand_b_tex
+257881	3	[稀有]銀白鋼鐵動能巨劍 (14天)	0	0	icon_equipments.event20_twohand_b_tex
+257882	3	[稀有]銀白鋼鐵動能巨劍 (30天)	0	0	icon_equipments.event20_twohand_b_tex
+257883	3	[稀有]銀白鋼鐵動能巨劍 (30天)	0	0	icon_equipments.event20_twohand_b_tex
+257884	3	[稀有]銀白鋼鐵動能巨劍	0	0	icon_equipments.event20_twohand_b_tex
+257885	3	[稀有]銀白鋼鐵動能巨劍	0	0	icon_equipments.event20_twohand_b_tex
+257886	3	[稀有]銀白鋼鐵動能巨劍	0	0	icon_equipments.event20_twohand_b_tex
+257887	3	[稀有]銀白鋼鐵動能巨劍	0	0	icon_equipments.event20_twohand_b_tex
+257888	3	[稀有]銀白鋼鐵動能戰斧	0	0	icon_equipments.event20_axe_b_tex
+257889	3	[稀有]銀白鋼鐵動能戰斧	0	0	icon_equipments.event20_axe_b_tex
+257890	3	[稀有]銀白鋼鐵動能戰斧 (3天)	0	0	icon_equipments.event20_axe_b_tex
+257891	3	[稀有]銀白鋼鐵動能戰斧 (7天)	0	0	icon_equipments.event20_axe_b_tex
+257892	3	[稀有]銀白鋼鐵動能戰斧 (7天)	0	0	icon_equipments.event20_axe_b_tex
+257893	3	[稀有]銀白鋼鐵動能戰斧 (14天)	0	0	icon_equipments.event20_axe_b_tex
+257894	3	[稀有]銀白鋼鐵動能戰斧 (30天)	0	0	icon_equipments.event20_axe_b_tex
+257895	3	[稀有]銀白鋼鐵動能戰斧 (30天)	0	0	icon_equipments.event20_axe_b_tex
+257896	3	[稀有]銀白鋼鐵動能戰斧	0	0	icon_equipments.event20_axe_b_tex
+257897	3	[稀有]銀白鋼鐵動能戰斧	0	0	icon_equipments.event20_axe_b_tex
+257898	3	[稀有]銀白鋼鐵動能戰斧	0	0	icon_equipments.event20_axe_b_tex
+257899	3	[稀有]銀白鋼鐵動能戰斧	0	0	icon_equipments.event20_axe_b_tex
+257900	3	[稀有]銀白鋼鐵動能法環	0	0	icon_equipments.event20_circle_b_tex
+257901	3	[稀有]銀白鋼鐵動能法環	0	0	icon_equipments.event20_circle_b_tex
+257902	3	[稀有]銀白鋼鐵動能法環 (3天)	0	0	icon_equipments.event20_circle_b_tex
+257903	3	[稀有]銀白鋼鐵動能法環 (7天)	0	0	icon_equipments.event20_circle_b_tex
+257904	3	[稀有]銀白鋼鐵動能法環 (7天)	0	0	icon_equipments.event20_circle_b_tex
+257905	3	[稀有]銀白鋼鐵動能法環 (14天)	0	0	icon_equipments.event20_circle_b_tex
+257906	3	[稀有]銀白鋼鐵動能法環 (30天)	0	0	icon_equipments.event20_circle_b_tex
+257907	3	[稀有]銀白鋼鐵動能法環 (30天)	0	0	icon_equipments.event20_circle_b_tex
+257908	3	[稀有]銀白鋼鐵動能法環	0	0	icon_equipments.event20_circle_b_tex
+257909	3	[稀有]銀白鋼鐵動能法環	0	0	icon_equipments.event20_circle_b_tex
+257910	3	[稀有]銀白鋼鐵動能法環	0	0	icon_equipments.event20_circle_b_tex
+257911	3	[稀有]銀白鋼鐵動能法環	0	0	icon_equipments.event20_circle_b_tex
+257912	3	[稀有]銀白鋼鐵動能之弓	0	0	icon_equipments.event20_bow_b_tex
+257913	3	[稀有]銀白鋼鐵動能之弓	0	0	icon_equipments.event20_bow_b_tex
+257914	3	[稀有]銀白鋼鐵動能之弓 (3天)	0	0	icon_equipments.event20_bow_b_tex
+257915	3	[稀有]銀白鋼鐵動能之弓 (7天)	0	0	icon_equipments.event20_bow_b_tex
+257916	3	[稀有]銀白鋼鐵動能之弓 (7天)	0	0	icon_equipments.event20_bow_b_tex
+257917	3	[稀有]銀白鋼鐵動能之弓 (14天)	0	0	icon_equipments.event20_bow_b_tex
+257918	3	[稀有]銀白鋼鐵動能之弓 (30天)	0	0	icon_equipments.event20_bow_b_tex
+257919	3	[稀有]銀白鋼鐵動能之弓 (30天)	0	0	icon_equipments.event20_bow_b_tex
+257920	3	[稀有]銀白鋼鐵動能之弓	0	0	icon_equipments.event20_bow_b_tex
+257921	3	[稀有]銀白鋼鐵動能之弓	0	0	icon_equipments.event20_bow_b_tex
+257922	3	[稀有]銀白鋼鐵動能之弓	0	0	icon_equipments.event20_bow_b_tex
+257923	3	[稀有]銀白鋼鐵動能之弓	0	0	icon_equipments.event20_bow_b_tex
+257924	3	[稀有]銀白鋼鐵動能權杖	0	0	icon_equipments.event20_staff_b_tex
+257925	3	[稀有]銀白鋼鐵動能權杖	0	0	icon_equipments.event20_staff_b_tex
+257926	3	[稀有]銀白鋼鐵動能權杖 (3天)	0	0	icon_equipments.event20_staff_b_tex
+257927	3	[稀有]銀白鋼鐵動能權杖 (7天)	0	0	icon_equipments.event20_staff_b_tex
+257928	3	[稀有]銀白鋼鐵動能權杖 (7天)	0	0	icon_equipments.event20_staff_b_tex
+257929	3	[稀有]銀白鋼鐵動能權杖 (14天)	0	0	icon_equipments.event20_staff_b_tex
+257930	3	[稀有]銀白鋼鐵動能權杖 (30天)	0	0	icon_equipments.event20_staff_b_tex
+257931	3	[稀有]銀白鋼鐵動能權杖 (30天)	0	0	icon_equipments.event20_staff_b_tex
+257932	3	[稀有]銀白鋼鐵動能權杖	0	0	icon_equipments.event20_staff_b_tex
+257933	3	[稀有]銀白鋼鐵動能權杖	0	0	icon_equipments.event20_staff_b_tex
+257934	3	[稀有]銀白鋼鐵動能權杖	0	0	icon_equipments.event20_staff_b_tex
+257935	3	[稀有]銀白鋼鐵動能權杖	0	0	icon_equipments.event20_staff_b_tex
+257936	3	[稀有]銀白鋼鐵動能魔棒	0	0	icon_equipments.event20_rod_b_tex
+257937	3	[稀有]銀白鋼鐵動能魔棒	0	0	icon_equipments.event20_rod_b_tex
+257938	3	[稀有]銀白鋼鐵動能魔棒 (3天)	0	0	icon_equipments.event20_rod_b_tex
+257939	3	[稀有]銀白鋼鐵動能魔棒 (7天)	0	0	icon_equipments.event20_rod_b_tex
+257940	3	[稀有]銀白鋼鐵動能魔棒 (7天)	0	0	icon_equipments.event20_rod_b_tex
+257941	3	[稀有]銀白鋼鐵動能魔棒 (14天)	0	0	icon_equipments.event20_rod_b_tex
+257942	3	[稀有]銀白鋼鐵動能魔棒 (30天)	0	0	icon_equipments.event20_rod_b_tex
+257943	3	[稀有]銀白鋼鐵動能魔棒 (30天)	0	0	icon_equipments.event20_rod_b_tex
+257944	3	[稀有]銀白鋼鐵動能魔棒	0	0	icon_equipments.event20_rod_b_tex
+257945	3	[稀有]銀白鋼鐵動能魔棒	0	0	icon_equipments.event20_rod_b_tex
+257946	3	[稀有]銀白鋼鐵動能魔棒	0	0	icon_equipments.event20_rod_b_tex
+257947	3	[稀有]銀白鋼鐵動能魔棒	0	0	icon_equipments.event20_rod_b_tex
+257948	3	[稀有]銀白鋼鐵動能拳甲	0	0	icon_equipments.event20_gauntlet_b_tex
+257949	3	[稀有]銀白鋼鐵動能拳甲	0	0	icon_equipments.event20_gauntlet_b_tex
+257950	3	[稀有]銀白鋼鐵動能拳甲 (3天)	0	0	icon_equipments.event20_gauntlet_b_tex
+257951	3	[稀有]銀白鋼鐵動能拳甲 (7天)	0	0	icon_equipments.event20_gauntlet_b_tex
+257952	3	[稀有]銀白鋼鐵動能拳甲 (7天)	0	0	icon_equipments.event20_gauntlet_b_tex
+257953	3	[稀有]銀白鋼鐵動能拳甲 (14天)	0	0	icon_equipments.event20_gauntlet_b_tex
+257954	3	[稀有]銀白鋼鐵動能拳甲 (30天)	0	0	icon_equipments.event20_gauntlet_b_tex
+257955	3	[稀有]銀白鋼鐵動能拳甲 (30天)	0	0	icon_equipments.event20_gauntlet_b_tex
+257956	3	[稀有]銀白鋼鐵動能拳甲	0	0	icon_equipments.event20_gauntlet_b_tex
+257957	3	[稀有]銀白鋼鐵動能拳甲	0	0	icon_equipments.event20_gauntlet_b_tex
+257958	3	[稀有]銀白鋼鐵動能拳甲	0	0	icon_equipments.event20_gauntlet_b_tex
+257959	3	[稀有]銀白鋼鐵動能拳甲	0	0	icon_equipments.event20_gauntlet_b_tex
+257960	3	[稀有]銀白鋼鐵動能槍	0	0	icon_equipments.event20_blaster_b_tex
+257961	3	[稀有]銀白鋼鐵動能槍	0	0	icon_equipments.event20_blaster_b_tex
+257962	3	[稀有]銀白鋼鐵動能槍 (3天)	0	0	icon_equipments.event20_blaster_b_tex
+257963	3	[稀有]銀白鋼鐵動能槍 (7天)	0	0	icon_equipments.event20_blaster_b_tex
+257964	3	[稀有]銀白鋼鐵動能槍 (7天)	0	0	icon_equipments.event20_blaster_b_tex
+257965	3	[稀有]銀白鋼鐵動能槍 (14天)	0	0	icon_equipments.event20_blaster_b_tex
+257966	3	[稀有]銀白鋼鐵動能槍 (30天)	0	0	icon_equipments.event20_blaster_b_tex
+257967	3	[稀有]銀白鋼鐵動能槍 (30天)	0	0	icon_equipments.event20_blaster_b_tex
+257968	3	[稀有]銀白鋼鐵動能槍	0	0	icon_equipments.event20_blaster_b_tex
+257969	3	[稀有]銀白鋼鐵動能槍	0	0	icon_equipments.event20_blaster_b_tex
+257970	3	[稀有]銀白鋼鐵動能槍	0	0	icon_equipments.event20_blaster_b_tex
+257971	3	[稀有]銀白鋼鐵動能槍	0	0	icon_equipments.event20_blaster_b_tex
+257972	3	[稀有]銀白鋼鐵動能月光刀	0	0	icon_equipments.event20_spear_b_tex
+257973	3	[稀有]銀白鋼鐵動能月光刀	0	0	icon_equipments.event20_spear_b_tex
+257974	3	[稀有]銀白鋼鐵動能月光刀 (3天)	0	0	icon_equipments.event20_spear_b_tex
+257975	3	[稀有]銀白鋼鐵動能月光刀 (7天)	0	0	icon_equipments.event20_spear_b_tex
+257976	3	[稀有]銀白鋼鐵動能月光刀 (7天)	0	0	icon_equipments.event20_spear_b_tex
+257977	3	[稀有]銀白鋼鐵動能月光刀 (14天)	0	0	icon_equipments.event20_spear_b_tex
+257978	3	[稀有]銀白鋼鐵動能月光刀 (30天)	0	0	icon_equipments.event20_spear_b_tex
+257979	3	[稀有]銀白鋼鐵動能月光刀 (30天)	0	0	icon_equipments.event20_spear_b_tex
+257980	3	[稀有]銀白鋼鐵動能月光刀	0	0	icon_equipments.event20_spear_b_tex
+257981	3	[稀有]銀白鋼鐵動能月光刀	0	0	icon_equipments.event20_spear_b_tex
+257982	3	[稀有]銀白鋼鐵動能月光刀	0	0	icon_equipments.event20_spear_b_tex
+257983	3	[稀有]銀白鋼鐵動能月光刀	0	0	icon_equipments.event20_spear_b_tex
+257984	3	[稀有]銀白鋼鐵動能飛劍	0	0	icon_equipments.event20_chain_b_tex
+257985	3	[稀有]銀白鋼鐵動能飛劍	0	0	icon_equipments.event20_chain_b_tex
+257986	3	[稀有]銀白鋼鐵動能飛劍 (3天)	0	0	icon_equipments.event20_chain_b_tex
+257987	3	[稀有]銀白鋼鐵動能飛劍 (7天)	0	0	icon_equipments.event20_chain_b_tex
+257988	3	[稀有]銀白鋼鐵動能飛劍 (7天)	0	0	icon_equipments.event20_chain_b_tex
+257989	3	[稀有]銀白鋼鐵動能飛劍 (14天)	0	0	icon_equipments.event20_chain_b_tex
+257990	3	[稀有]銀白鋼鐵動能飛劍 (30天)	0	0	icon_equipments.event20_chain_b_tex
+257991	3	[稀有]銀白鋼鐵動能飛劍 (30天)	0	0	icon_equipments.event20_chain_b_tex
+257992	3	[稀有]銀白鋼鐵動能飛劍	0	0	icon_equipments.event20_chain_b_tex
+257993	3	[稀有]銀白鋼鐵動能飛劍	0	0	icon_equipments.event20_chain_b_tex
+257994	3	[稀有]銀白鋼鐵動能飛劍	0	0	icon_equipments.event20_chain_b_tex
+257995	3	[稀有]銀白鋼鐵動能飛劍	0	0	icon_equipments.event20_chain_b_tex
+257996	3	[稀有]銀白鋼鐵動能手裏劍	0	0	icon_equipments.event20_shuriken_b_tex
+257997	3	[稀有]銀白鋼鐵動能手裏劍	0	0	icon_equipments.event20_shuriken_b_tex
+257998	3	[稀有]銀白鋼鐵動能手裏劍 (3天)	0	0	icon_equipments.event20_shuriken_b_tex
+257999	3	[稀有]銀白鋼鐵動能手裏劍 (7天)	0	0	icon_equipments.event20_shuriken_b_tex
+258000	3	[稀有]銀白鋼鐵動能手裏劍 (7天)	0	0	icon_equipments.event20_shuriken_b_tex
+258001	3	[稀有]銀白鋼鐵動能手裏劍 (14天)	0	0	icon_equipments.event20_shuriken_b_tex
+258002	3	[稀有]銀白鋼鐵動能手裏劍 (30天)	0	0	icon_equipments.event20_shuriken_b_tex
+258003	3	[稀有]銀白鋼鐵動能手裏劍 (30天)	0	0	icon_equipments.event20_shuriken_b_tex
+258004	3	[稀有]銀白鋼鐵動能手裏劍	0	0	icon_equipments.event20_shuriken_b_tex
+258005	3	[稀有]銀白鋼鐵動能手裏劍	0	0	icon_equipments.event20_shuriken_b_tex
+258006	3	[稀有]銀白鋼鐵動能手裏劍	0	0	icon_equipments.event20_shuriken_b_tex
+258007	3	[稀有]銀白鋼鐵動能手裏劍	0	0	icon_equipments.event20_shuriken_b_tex
+258008	3	朱紅鋼鐵動能雙劍	0	0	icon_equipments.event20_dual_a_tex
+258009	3	朱紅鋼鐵動能雙劍	0	0	icon_equipments.event20_dual_a_tex
+258010	3	朱紅鋼鐵動能雙劍 (3天)	0	0	icon_equipments.event20_dual_a_tex
+258011	3	朱紅鋼鐵動能雙劍 (7天)	0	0	icon_equipments.event20_dual_a_tex
+258012	3	朱紅鋼鐵動能雙劍 (7天)	0	0	icon_equipments.event20_dual_a_tex
+258013	3	朱紅鋼鐵動能雙劍 (14天)	0	0	icon_equipments.event20_dual_a_tex
+258014	3	朱紅鋼鐵動能雙劍 (30天)	0	0	icon_equipments.event20_dual_a_tex
+258015	3	朱紅鋼鐵動能雙劍 (30天)	0	0	icon_equipments.event20_dual_a_tex
+258016	3	朱紅鋼鐵動能雙劍	0	0	icon_equipments.event20_dual_a_tex
+258017	3	朱紅鋼鐵動能雙劍	0	0	icon_equipments.event20_dual_a_tex
+258018	3	朱紅鋼鐵動能雙劍	0	0	icon_equipments.event20_dual_a_tex
+258019	3	朱紅鋼鐵動能雙劍	0	0	icon_equipments.event20_dual_a_tex
+258020	3	朱紅鋼鐵動能長槍	0	0	icon_equipments.event20_lance_a_tex
+258021	3	朱紅鋼鐵動能長槍	0	0	icon_equipments.event20_lance_a_tex
+258022	3	朱紅鋼鐵動能長槍 (3天)	0	0	icon_equipments.event20_lance_a_tex
+258023	3	朱紅鋼鐵動能長槍 (7天)	0	0	icon_equipments.event20_lance_a_tex
+258024	3	朱紅鋼鐵動能長槍 (7天)	0	0	icon_equipments.event20_lance_a_tex
+258025	3	朱紅鋼鐵動能長槍 (14天)	0	0	icon_equipments.event20_lance_a_tex
+258026	3	朱紅鋼鐵動能長槍 (30天)	0	0	icon_equipments.event20_lance_a_tex
+258027	3	朱紅鋼鐵動能長槍 (30天)	0	0	icon_equipments.event20_lance_a_tex
+258028	3	朱紅鋼鐵動能長槍	0	0	icon_equipments.event20_lance_a_tex
+258029	3	朱紅鋼鐵動能長槍	0	0	icon_equipments.event20_lance_a_tex
+258030	3	朱紅鋼鐵動能長槍	0	0	icon_equipments.event20_lance_a_tex
+258031	3	朱紅鋼鐵動能長槍	0	0	icon_equipments.event20_lance_a_tex
+258032	3	朱紅鋼鐵動能巨劍	0	0	icon_equipments.event20_twohand_a_tex
+258033	3	朱紅鋼鐵動能巨劍	0	0	icon_equipments.event20_twohand_a_tex
+258034	3	朱紅鋼鐵動能巨劍 (3天)	0	0	icon_equipments.event20_twohand_a_tex
+258035	3	朱紅鋼鐵動能巨劍 (7天)	0	0	icon_equipments.event20_twohand_a_tex
+258036	3	朱紅鋼鐵動能巨劍 (7天)	0	0	icon_equipments.event20_twohand_a_tex
+258037	3	朱紅鋼鐵動能巨劍 (14天)	0	0	icon_equipments.event20_twohand_a_tex
+258038	3	朱紅鋼鐵動能巨劍 (30天)	0	0	icon_equipments.event20_twohand_a_tex
+258039	3	朱紅鋼鐵動能巨劍 (30天)	0	0	icon_equipments.event20_twohand_a_tex
+258040	3	朱紅鋼鐵動能巨劍	0	0	icon_equipments.event20_twohand_a_tex
+258041	3	朱紅鋼鐵動能巨劍	0	0	icon_equipments.event20_twohand_a_tex
+258042	3	朱紅鋼鐵動能巨劍	0	0	icon_equipments.event20_twohand_a_tex
+258043	3	朱紅鋼鐵動能巨劍	0	0	icon_equipments.event20_twohand_a_tex
+258044	3	朱紅鋼鐵動能戰斧	0	0	icon_equipments.event20_axe_a_tex
+258045	3	朱紅鋼鐵動能戰斧	0	0	icon_equipments.event20_axe_a_tex
+258046	3	朱紅鋼鐵動能戰斧 (3天)	0	0	icon_equipments.event20_axe_a_tex
+258047	3	朱紅鋼鐵動能戰斧 (7天)	0	0	icon_equipments.event20_axe_a_tex
+258048	3	朱紅鋼鐵動能戰斧 (7天)	0	0	icon_equipments.event20_axe_a_tex
+258049	3	朱紅鋼鐵動能戰斧 (14天)	0	0	icon_equipments.event20_axe_a_tex
+258050	3	朱紅鋼鐵動能戰斧 (30天)	0	0	icon_equipments.event20_axe_a_tex
+258051	3	朱紅鋼鐵動能戰斧 (30天)	0	0	icon_equipments.event20_axe_a_tex
+258052	3	朱紅鋼鐵動能戰斧	0	0	icon_equipments.event20_axe_a_tex
+258053	3	朱紅鋼鐵動能戰斧	0	0	icon_equipments.event20_axe_a_tex
+258054	3	朱紅鋼鐵動能戰斧	0	0	icon_equipments.event20_axe_a_tex
+258055	3	朱紅鋼鐵動能戰斧	0	0	icon_equipments.event20_axe_a_tex
+258056	3	朱紅鋼鐵動能法環	0	0	icon_equipments.event20_circle_a_tex
+258057	3	朱紅鋼鐵動能法環	0	0	icon_equipments.event20_circle_a_tex
+258058	3	朱紅鋼鐵動能法環 (3天)	0	0	icon_equipments.event20_circle_a_tex
+258059	3	朱紅鋼鐵動能法環 (7天)	0	0	icon_equipments.event20_circle_a_tex
+258060	3	朱紅鋼鐵動能法環 (7天)	0	0	icon_equipments.event20_circle_a_tex
+258061	3	朱紅鋼鐵動能法環 (14天)	0	0	icon_equipments.event20_circle_a_tex
+258062	3	朱紅鋼鐵動能法環 (30天)	0	0	icon_equipments.event20_circle_a_tex
+258063	3	朱紅鋼鐵動能法環 (30天)	0	0	icon_equipments.event20_circle_a_tex
+258064	3	朱紅鋼鐵動能法環	0	0	icon_equipments.event20_circle_a_tex
+258065	3	朱紅鋼鐵動能法環	0	0	icon_equipments.event20_circle_a_tex
+258066	3	朱紅鋼鐵動能法環	0	0	icon_equipments.event20_circle_a_tex
+258067	3	朱紅鋼鐵動能法環	0	0	icon_equipments.event20_circle_a_tex
+258068	3	朱紅鋼鐵動能之弓	0	0	icon_equipments.event20_bow_a_tex
+258069	3	朱紅鋼鐵動能之弓	0	0	icon_equipments.event20_bow_a_tex
+258070	3	朱紅鋼鐵動能之弓 (3天)	0	0	icon_equipments.event20_bow_a_tex
+258071	3	朱紅鋼鐵動能之弓 (7天)	0	0	icon_equipments.event20_bow_a_tex
+258072	3	朱紅鋼鐵動能之弓 (7天)	0	0	icon_equipments.event20_bow_a_tex
+258073	3	朱紅鋼鐵動能之弓 (14天)	0	0	icon_equipments.event20_bow_a_tex
+258074	3	朱紅鋼鐵動能之弓 (30天)	0	0	icon_equipments.event20_bow_a_tex
+258075	3	朱紅鋼鐵動能之弓 (30天)	0	0	icon_equipments.event20_bow_a_tex
+258076	3	朱紅鋼鐵動能之弓	0	0	icon_equipments.event20_bow_a_tex
+258077	3	朱紅鋼鐵動能之弓	0	0	icon_equipments.event20_bow_a_tex
+258078	3	朱紅鋼鐵動能之弓	0	0	icon_equipments.event20_bow_a_tex
+258079	3	朱紅鋼鐵動能之弓	0	0	icon_equipments.event20_bow_a_tex
+258080	3	朱紅鋼鐵動能權杖	0	0	icon_equipments.event20_staff_a_tex
+258081	3	朱紅鋼鐵動能權杖	0	0	icon_equipments.event20_staff_a_tex
+258082	3	朱紅鋼鐵動能權杖 (3天)	0	0	icon_equipments.event20_staff_a_tex
+258083	3	朱紅鋼鐵動能權杖 (7天)	0	0	icon_equipments.event20_staff_a_tex
+258084	3	朱紅鋼鐵動能權杖 (7天)	0	0	icon_equipments.event20_staff_a_tex
+258085	3	朱紅鋼鐵動能權杖 (14天)	0	0	icon_equipments.event20_staff_a_tex
+258086	3	朱紅鋼鐵動能權杖 (30天)	0	0	icon_equipments.event20_staff_a_tex
+258087	3	朱紅鋼鐵動能權杖 (30天)	0	0	icon_equipments.event20_staff_a_tex
+258088	3	朱紅鋼鐵動能權杖	0	0	icon_equipments.event20_staff_a_tex
+258089	3	朱紅鋼鐵動能權杖	0	0	icon_equipments.event20_staff_a_tex
+258090	3	朱紅鋼鐵動能權杖	0	0	icon_equipments.event20_staff_a_tex
+258091	3	朱紅鋼鐵動能權杖	0	0	icon_equipments.event20_staff_a_tex
+258092	3	朱紅鋼鐵動能魔棒	0	0	icon_equipments.event20_rod_a_tex
+258093	3	朱紅鋼鐵動能魔棒	0	0	icon_equipments.event20_rod_a_tex
+258094	3	朱紅鋼鐵動能魔棒 (3天)	0	0	icon_equipments.event20_rod_a_tex
+258095	3	朱紅鋼鐵動能魔棒 (7天)	0	0	icon_equipments.event20_rod_a_tex
+258096	3	朱紅鋼鐵動能魔棒 (7天)	0	0	icon_equipments.event20_rod_a_tex
+258097	3	朱紅鋼鐵動能魔棒 (14天)	0	0	icon_equipments.event20_rod_a_tex
+258098	3	朱紅鋼鐵動能魔棒 (30天)	0	0	icon_equipments.event20_rod_a_tex
+258099	3	朱紅鋼鐵動能魔棒 (30天)	0	0	icon_equipments.event20_rod_a_tex
+258100	3	朱紅鋼鐵動能魔棒	0	0	icon_equipments.event20_rod_a_tex
+258101	3	朱紅鋼鐵動能魔棒	0	0	icon_equipments.event20_rod_a_tex
+258102	3	朱紅鋼鐵動能魔棒	0	0	icon_equipments.event20_rod_a_tex
+258103	3	朱紅鋼鐵動能魔棒	0	0	icon_equipments.event20_rod_a_tex
+258104	3	朱紅鋼鐵動能拳甲	0	0	icon_equipments.event20_gauntlet_a_tex
+258105	3	朱紅鋼鐵動能拳甲	0	0	icon_equipments.event20_gauntlet_a_tex
+258106	3	朱紅鋼鐵動能拳甲 (3天)	0	0	icon_equipments.event20_gauntlet_a_tex
+258107	3	朱紅鋼鐵動能拳甲 (7天)	0	0	icon_equipments.event20_gauntlet_a_tex
+258108	3	朱紅鋼鐵動能拳甲 (7天)	0	0	icon_equipments.event20_gauntlet_a_tex
+258109	3	朱紅鋼鐵動能拳甲 (14天)	0	0	icon_equipments.event20_gauntlet_a_tex
+258110	3	朱紅鋼鐵動能拳甲 (30天)	0	0	icon_equipments.event20_gauntlet_a_tex
+258111	3	朱紅鋼鐵動能拳甲 (30天)	0	0	icon_equipments.event20_gauntlet_a_tex
+258112	3	朱紅鋼鐵動能拳甲	0	0	icon_equipments.event20_gauntlet_a_tex
+258113	3	朱紅鋼鐵動能拳甲	0	0	icon_equipments.event20_gauntlet_a_tex
+258114	3	朱紅鋼鐵動能拳甲	0	0	icon_equipments.event20_gauntlet_a_tex
+258115	3	朱紅鋼鐵動能拳甲	0	0	icon_equipments.event20_gauntlet_a_tex
+258116	3	朱紅鋼鐵動能槍	0	0	icon_equipments.event20_blaster_a_tex
+258117	3	朱紅鋼鐵動能槍	0	0	icon_equipments.event20_blaster_a_tex
+258118	3	朱紅鋼鐵動能槍 (3天)	0	0	icon_equipments.event20_blaster_a_tex
+258119	3	朱紅鋼鐵動能槍 (7天)	0	0	icon_equipments.event20_blaster_a_tex
+258120	3	朱紅鋼鐵動能槍 (7天)	0	0	icon_equipments.event20_blaster_a_tex
+258121	3	朱紅鋼鐵動能槍 (14天)	0	0	icon_equipments.event20_blaster_a_tex
+258122	3	朱紅鋼鐵動能槍 (30天)	0	0	icon_equipments.event20_blaster_a_tex
+258123	3	朱紅鋼鐵動能槍 (30天)	0	0	icon_equipments.event20_blaster_a_tex
+258124	3	朱紅鋼鐵動能槍	0	0	icon_equipments.event20_blaster_a_tex
+258125	3	朱紅鋼鐵動能槍	0	0	icon_equipments.event20_blaster_a_tex
+258126	3	朱紅鋼鐵動能槍	0	0	icon_equipments.event20_blaster_a_tex
+258127	3	朱紅鋼鐵動能槍	0	0	icon_equipments.event20_blaster_a_tex
+258128	3	朱紅鋼鐵動能月光刀	0	0	icon_equipments.event20_spear_a_tex
+258129	3	朱紅鋼鐵動能月光刀	0	0	icon_equipments.event20_spear_a_tex
+258130	3	朱紅鋼鐵動能月光刀 (3天)	0	0	icon_equipments.event20_spear_a_tex
+258131	3	朱紅鋼鐵動能月光刀 (7天)	0	0	icon_equipments.event20_spear_a_tex
+258132	3	朱紅鋼鐵動能月光刀 (7天)	0	0	icon_equipments.event20_spear_a_tex
+258133	3	朱紅鋼鐵動能月光刀 (14天)	0	0	icon_equipments.event20_spear_a_tex
+258134	3	朱紅鋼鐵動能月光刀 (30天)	0	0	icon_equipments.event20_spear_a_tex
+258135	3	朱紅鋼鐵動能月光刀 (30天)	0	0	icon_equipments.event20_spear_a_tex
+258136	3	朱紅鋼鐵動能月光刀	0	0	icon_equipments.event20_spear_a_tex
+258137	3	朱紅鋼鐵動能月光刀	0	0	icon_equipments.event20_spear_a_tex
+258138	3	朱紅鋼鐵動能月光刀	0	0	icon_equipments.event20_spear_a_tex
+258139	3	朱紅鋼鐵動能月光刀	0	0	icon_equipments.event20_spear_a_tex
+258140	3	朱紅鋼鐵動能飛劍	0	0	icon_equipments.event20_chain_a_tex
+258141	3	朱紅鋼鐵動能飛劍	0	0	icon_equipments.event20_chain_a_tex
+258142	3	朱紅鋼鐵動能飛劍 (3天)	0	0	icon_equipments.event20_chain_a_tex
+258143	3	朱紅鋼鐵動能飛劍 (7天)	0	0	icon_equipments.event20_chain_a_tex
+258144	3	朱紅鋼鐵動能飛劍 (7天)	0	0	icon_equipments.event20_chain_a_tex
+258145	3	朱紅鋼鐵動能飛劍 (14天)	0	0	icon_equipments.event20_chain_a_tex
+258146	3	朱紅鋼鐵動能飛劍 (30天)	0	0	icon_equipments.event20_chain_a_tex
+258147	3	朱紅鋼鐵動能飛劍 (30天)	0	0	icon_equipments.event20_chain_a_tex
+258148	3	朱紅鋼鐵動能飛劍	0	0	icon_equipments.event20_chain_a_tex
+258149	3	朱紅鋼鐵動能飛劍	0	0	icon_equipments.event20_chain_a_tex
+258150	3	朱紅鋼鐵動能飛劍	0	0	icon_equipments.event20_chain_a_tex
+258151	3	朱紅鋼鐵動能飛劍	0	0	icon_equipments.event20_chain_a_tex
+258152	3	朱紅鋼鐵動能手裏劍	0	0	icon_equipments.event20_shuriken_a_tex
+258153	3	朱紅鋼鐵動能手裏劍	0	0	icon_equipments.event20_shuriken_a_tex
+258154	3	朱紅鋼鐵動能手裏劍 (3天)	0	0	icon_equipments.event20_shuriken_a_tex
+258155	3	朱紅鋼鐵動能手裏劍 (7天)	0	0	icon_equipments.event20_shuriken_a_tex
+258156	3	朱紅鋼鐵動能手裏劍 (7天)	0	0	icon_equipments.event20_shuriken_a_tex
+258157	3	朱紅鋼鐵動能手裏劍 (14天)	0	0	icon_equipments.event20_shuriken_a_tex
+258158	3	朱紅鋼鐵動能手裏劍 (30天)	0	0	icon_equipments.event20_shuriken_a_tex
+258159	3	朱紅鋼鐵動能手裏劍 (30天)	0	0	icon_equipments.event20_shuriken_a_tex
+258160	3	朱紅鋼鐵動能手裏劍	0	0	icon_equipments.event20_shuriken_a_tex
+258161	3	朱紅鋼鐵動能手裏劍	0	0	icon_equipments.event20_shuriken_a_tex
+258162	3	朱紅鋼鐵動能手裏劍	0	0	icon_equipments.event20_shuriken_a_tex
+258163	3	朱紅鋼鐵動能手裏劍	0	0	icon_equipments.event20_shuriken_a_tex
+258164	3	銀白鋼鐵動能雙劍	0	0	icon_equipments.event20_dual_b_tex
+258165	3	銀白鋼鐵動能雙劍	0	0	icon_equipments.event20_dual_b_tex
+258166	3	銀白鋼鐵動能雙劍 (3天)	0	0	icon_equipments.event20_dual_b_tex
+258167	3	銀白鋼鐵動能雙劍 (7天)	0	0	icon_equipments.event20_dual_b_tex
+258168	3	銀白鋼鐵動能雙劍 (7天)	0	0	icon_equipments.event20_dual_b_tex
+258169	3	銀白鋼鐵動能雙劍 (14天)	0	0	icon_equipments.event20_dual_b_tex
+258170	3	銀白鋼鐵動能雙劍 (30天)	0	0	icon_equipments.event20_dual_b_tex
+258171	3	銀白鋼鐵動能雙劍 (30天)	0	0	icon_equipments.event20_dual_b_tex
+258172	3	銀白鋼鐵動能雙劍	0	0	icon_equipments.event20_dual_b_tex
+258173	3	銀白鋼鐵動能雙劍	0	0	icon_equipments.event20_dual_b_tex
+258174	3	銀白鋼鐵動能雙劍	0	0	icon_equipments.event20_dual_b_tex
+258175	3	銀白鋼鐵動能雙劍	0	0	icon_equipments.event20_dual_b_tex
+258176	3	銀白鋼鐵動能長槍	0	0	icon_equipments.event20_lance_b_tex
+258177	3	銀白鋼鐵動能長槍	0	0	icon_equipments.event20_lance_b_tex
+258178	3	銀白鋼鐵動能長槍 (3天)	0	0	icon_equipments.event20_lance_b_tex
+258179	3	銀白鋼鐵動能長槍 (7天)	0	0	icon_equipments.event20_lance_b_tex
+258180	3	銀白鋼鐵動能長槍 (7天)	0	0	icon_equipments.event20_lance_b_tex
+258181	3	銀白鋼鐵動能長槍 (14天)	0	0	icon_equipments.event20_lance_b_tex
+258182	3	銀白鋼鐵動能長槍 (30天)	0	0	icon_equipments.event20_lance_b_tex
+258183	3	銀白鋼鐵動能長槍 (30天)	0	0	icon_equipments.event20_lance_b_tex
+258184	3	銀白鋼鐵動能長槍	0	0	icon_equipments.event20_lance_b_tex
+258185	3	銀白鋼鐵動能長槍	0	0	icon_equipments.event20_lance_b_tex
+258186	3	銀白鋼鐵動能長槍	0	0	icon_equipments.event20_lance_b_tex
+258187	3	銀白鋼鐵動能長槍	0	0	icon_equipments.event20_lance_b_tex
+258188	3	銀白鋼鐵動能巨劍	0	0	icon_equipments.event20_twohand_b_tex
+258189	3	銀白鋼鐵動能巨劍	0	0	icon_equipments.event20_twohand_b_tex
+258190	3	銀白鋼鐵動能巨劍 (3天)	0	0	icon_equipments.event20_twohand_b_tex
+258191	3	銀白鋼鐵動能巨劍 (7天)	0	0	icon_equipments.event20_twohand_b_tex
+258192	3	銀白鋼鐵動能巨劍 (7天)	0	0	icon_equipments.event20_twohand_b_tex
+258193	3	銀白鋼鐵動能巨劍 (14天)	0	0	icon_equipments.event20_twohand_b_tex
+258194	3	銀白鋼鐵動能巨劍 (30天)	0	0	icon_equipments.event20_twohand_b_tex
+258195	3	銀白鋼鐵動能巨劍 (30天)	0	0	icon_equipments.event20_twohand_b_tex
+258196	3	銀白鋼鐵動能巨劍	0	0	icon_equipments.event20_twohand_b_tex
+258197	3	銀白鋼鐵動能巨劍	0	0	icon_equipments.event20_twohand_b_tex
+258198	3	銀白鋼鐵動能巨劍	0	0	icon_equipments.event20_twohand_b_tex
+258199	3	銀白鋼鐵動能巨劍	0	0	icon_equipments.event20_twohand_b_tex
+258200	3	銀白鋼鐵動能戰斧	0	0	icon_equipments.event20_axe_b_tex
+258201	3	銀白鋼鐵動能戰斧	0	0	icon_equipments.event20_axe_b_tex
+258202	3	銀白鋼鐵動能戰斧 (3天)	0	0	icon_equipments.event20_axe_b_tex
+258203	3	銀白鋼鐵動能戰斧 (7天)	0	0	icon_equipments.event20_axe_b_tex
+258204	3	銀白鋼鐵動能戰斧 (7天)	0	0	icon_equipments.event20_axe_b_tex
+258205	3	銀白鋼鐵動能戰斧 (14天)	0	0	icon_equipments.event20_axe_b_tex
+258206	3	銀白鋼鐵動能戰斧 (30天)	0	0	icon_equipments.event20_axe_b_tex
+258207	3	銀白鋼鐵動能戰斧 (30天)	0	0	icon_equipments.event20_axe_b_tex
+258208	3	銀白鋼鐵動能戰斧	0	0	icon_equipments.event20_axe_b_tex
+258209	3	銀白鋼鐵動能戰斧	0	0	icon_equipments.event20_axe_b_tex
+258210	3	銀白鋼鐵動能戰斧	0	0	icon_equipments.event20_axe_b_tex
+258211	3	銀白鋼鐵動能戰斧	0	0	icon_equipments.event20_axe_b_tex
+258212	3	銀白鋼鐵動能法環	0	0	icon_equipments.event20_circle_b_tex
+258213	3	銀白鋼鐵動能法環	0	0	icon_equipments.event20_circle_b_tex
+258214	3	銀白鋼鐵動能法環 (3天)	0	0	icon_equipments.event20_circle_b_tex
+258215	3	銀白鋼鐵動能法環 (7天)	0	0	icon_equipments.event20_circle_b_tex
+258216	3	銀白鋼鐵動能法環 (7天)	0	0	icon_equipments.event20_circle_b_tex
+258217	3	銀白鋼鐵動能法環 (14天)	0	0	icon_equipments.event20_circle_b_tex
+258218	3	銀白鋼鐵動能法環 (30天)	0	0	icon_equipments.event20_circle_b_tex
+258219	3	銀白鋼鐵動能法環 (30天)	0	0	icon_equipments.event20_circle_b_tex
+258220	3	銀白鋼鐵動能法環	0	0	icon_equipments.event20_circle_b_tex
+258221	3	銀白鋼鐵動能法環	0	0	icon_equipments.event20_circle_b_tex
+258222	3	銀白鋼鐵動能法環	0	0	icon_equipments.event20_circle_b_tex
+258223	3	銀白鋼鐵動能法環	0	0	icon_equipments.event20_circle_b_tex
+258224	3	銀白鋼鐵動能之弓	0	0	icon_equipments.event20_bow_b_tex
+258225	3	銀白鋼鐵動能之弓	0	0	icon_equipments.event20_bow_b_tex
+258226	3	銀白鋼鐵動能之弓 (3天)	0	0	icon_equipments.event20_bow_b_tex
+258227	3	銀白鋼鐵動能之弓 (7天)	0	0	icon_equipments.event20_bow_b_tex
+258228	3	銀白鋼鐵動能之弓 (7天)	0	0	icon_equipments.event20_bow_b_tex
+258229	3	銀白鋼鐵動能之弓 (14天)	0	0	icon_equipments.event20_bow_b_tex
+258230	3	銀白鋼鐵動能之弓 (30天)	0	0	icon_equipments.event20_bow_b_tex
+258231	3	銀白鋼鐵動能之弓 (30天)	0	0	icon_equipments.event20_bow_b_tex
+258232	3	銀白鋼鐵動能之弓	0	0	icon_equipments.event20_bow_b_tex
+258233	3	銀白鋼鐵動能之弓	0	0	icon_equipments.event20_bow_b_tex
+258234	3	銀白鋼鐵動能之弓	0	0	icon_equipments.event20_bow_b_tex
+258235	3	銀白鋼鐵動能之弓	0	0	icon_equipments.event20_bow_b_tex
+258236	3	銀白鋼鐵動能權杖	0	0	icon_equipments.event20_staff_b_tex
+258237	3	銀白鋼鐵動能權杖	0	0	icon_equipments.event20_staff_b_tex
+258238	3	銀白鋼鐵動能權杖 (3天)	0	0	icon_equipments.event20_staff_b_tex
+258239	3	銀白鋼鐵動能權杖 (7天)	0	0	icon_equipments.event20_staff_b_tex
+258240	3	銀白鋼鐵動能權杖 (7天)	0	0	icon_equipments.event20_staff_b_tex
+258241	3	銀白鋼鐵動能權杖 (14天)	0	0	icon_equipments.event20_staff_b_tex
+258242	3	銀白鋼鐵動能權杖 (30天)	0	0	icon_equipments.event20_staff_b_tex
+258243	3	銀白鋼鐵動能權杖 (30天)	0	0	icon_equipments.event20_staff_b_tex
+258244	3	銀白鋼鐵動能權杖	0	0	icon_equipments.event20_staff_b_tex
+258245	3	銀白鋼鐵動能權杖	0	0	icon_equipments.event20_staff_b_tex
+258246	3	銀白鋼鐵動能權杖	0	0	icon_equipments.event20_staff_b_tex
+258247	3	銀白鋼鐵動能權杖	0	0	icon_equipments.event20_staff_b_tex
+258248	3	銀白鋼鐵動能魔棒	0	0	icon_equipments.event20_rod_b_tex
+258249	3	銀白鋼鐵動能魔棒	0	0	icon_equipments.event20_rod_b_tex
+258250	3	銀白鋼鐵動能魔棒 (3天)	0	0	icon_equipments.event20_rod_b_tex
+258251	3	銀白鋼鐵動能魔棒 (7天)	0	0	icon_equipments.event20_rod_b_tex
+258252	3	銀白鋼鐵動能魔棒 (7天)	0	0	icon_equipments.event20_rod_b_tex
+258253	3	銀白鋼鐵動能魔棒 (14天)	0	0	icon_equipments.event20_rod_b_tex
+258254	3	銀白鋼鐵動能魔棒 (30天)	0	0	icon_equipments.event20_rod_b_tex
+258255	3	銀白鋼鐵動能魔棒 (30天)	0	0	icon_equipments.event20_rod_b_tex
+258256	3	銀白鋼鐵動能魔棒	0	0	icon_equipments.event20_rod_b_tex
+258257	3	銀白鋼鐵動能魔棒	0	0	icon_equipments.event20_rod_b_tex
+258258	3	銀白鋼鐵動能魔棒	0	0	icon_equipments.event20_rod_b_tex
+258259	3	銀白鋼鐵動能魔棒	0	0	icon_equipments.event20_rod_b_tex
+258260	3	銀白鋼鐵動能拳甲	0	0	icon_equipments.event20_gauntlet_b_tex
+258261	3	銀白鋼鐵動能拳甲	0	0	icon_equipments.event20_gauntlet_b_tex
+258262	3	銀白鋼鐵動能拳甲 (3天)	0	0	icon_equipments.event20_gauntlet_b_tex
+258263	3	銀白鋼鐵動能拳甲 (7天)	0	0	icon_equipments.event20_gauntlet_b_tex
+258264	3	銀白鋼鐵動能拳甲 (7天)	0	0	icon_equipments.event20_gauntlet_b_tex
+258265	3	銀白鋼鐵動能拳甲 (14天)	0	0	icon_equipments.event20_gauntlet_b_tex
+258266	3	銀白鋼鐵動能拳甲 (30天)	0	0	icon_equipments.event20_gauntlet_b_tex
+258267	3	銀白鋼鐵動能拳甲 (30天)	0	0	icon_equipments.event20_gauntlet_b_tex
+258268	3	銀白鋼鐵動能拳甲	0	0	icon_equipments.event20_gauntlet_b_tex
+258269	3	銀白鋼鐵動能拳甲	0	0	icon_equipments.event20_gauntlet_b_tex
+258270	3	銀白鋼鐵動能拳甲	0	0	icon_equipments.event20_gauntlet_b_tex
+258271	3	銀白鋼鐵動能拳甲	0	0	icon_equipments.event20_gauntlet_b_tex
+258272	3	銀白鋼鐵動能槍	0	0	icon_equipments.event20_blaster_b_tex
+258273	3	銀白鋼鐵動能槍	0	0	icon_equipments.event20_blaster_b_tex
+258274	3	銀白鋼鐵動能槍 (3天)	0	0	icon_equipments.event20_blaster_b_tex
+258275	3	銀白鋼鐵動能槍 (7天)	0	0	icon_equipments.event20_blaster_b_tex
+258276	3	銀白鋼鐵動能槍 (7天)	0	0	icon_equipments.event20_blaster_b_tex
+258277	3	銀白鋼鐵動能槍 (14天)	0	0	icon_equipments.event20_blaster_b_tex
+258278	3	銀白鋼鐵動能槍 (30天)	0	0	icon_equipments.event20_blaster_b_tex
+258279	3	銀白鋼鐵動能槍 (30天)	0	0	icon_equipments.event20_blaster_b_tex
+258280	3	銀白鋼鐵動能槍	0	0	icon_equipments.event20_blaster_b_tex
+258281	3	銀白鋼鐵動能槍	0	0	icon_equipments.event20_blaster_b_tex
+258282	3	銀白鋼鐵動能槍	0	0	icon_equipments.event20_blaster_b_tex
+258283	3	銀白鋼鐵動能槍	0	0	icon_equipments.event20_blaster_b_tex
+258284	3	銀白鋼鐵動能月光刀	0	0	icon_equipments.event20_spear_b_tex
+258285	3	銀白鋼鐵動能月光刀	0	0	icon_equipments.event20_spear_b_tex
+258286	3	銀白鋼鐵動能月光刀 (3天)	0	0	icon_equipments.event20_spear_b_tex
+258287	3	銀白鋼鐵動能月光刀 (7天)	0	0	icon_equipments.event20_spear_b_tex
+258288	3	銀白鋼鐵動能月光刀 (7天)	0	0	icon_equipments.event20_spear_b_tex
+258289	3	銀白鋼鐵動能月光刀 (14天)	0	0	icon_equipments.event20_spear_b_tex
+258290	3	銀白鋼鐵動能月光刀 (30天)	0	0	icon_equipments.event20_spear_b_tex
+258291	3	銀白鋼鐵動能月光刀 (30天)	0	0	icon_equipments.event20_spear_b_tex
+258292	3	銀白鋼鐵動能月光刀	0	0	icon_equipments.event20_spear_b_tex
+258293	3	銀白鋼鐵動能月光刀	0	0	icon_equipments.event20_spear_b_tex
+258294	3	銀白鋼鐵動能月光刀	0	0	icon_equipments.event20_spear_b_tex
+258295	3	銀白鋼鐵動能月光刀	0	0	icon_equipments.event20_spear_b_tex
+258296	3	銀白鋼鐵動能飛劍	0	0	icon_equipments.event20_chain_b_tex
+258297	3	銀白鋼鐵動能飛劍	0	0	icon_equipments.event20_chain_b_tex
+258298	3	銀白鋼鐵動能飛劍 (3天)	0	0	icon_equipments.event20_chain_b_tex
+258299	3	銀白鋼鐵動能飛劍 (7天)	0	0	icon_equipments.event20_chain_b_tex
+258300	3	銀白鋼鐵動能飛劍 (7天)	0	0	icon_equipments.event20_chain_b_tex
+258301	3	銀白鋼鐵動能飛劍 (14天)	0	0	icon_equipments.event20_chain_b_tex
+258302	3	銀白鋼鐵動能飛劍 (30天)	0	0	icon_equipments.event20_chain_b_tex
+258303	3	銀白鋼鐵動能飛劍 (30天)	0	0	icon_equipments.event20_chain_b_tex
+258304	3	銀白鋼鐵動能飛劍	0	0	icon_equipments.event20_chain_b_tex
+258305	3	銀白鋼鐵動能飛劍	0	0	icon_equipments.event20_chain_b_tex
+258306	3	銀白鋼鐵動能飛劍	0	0	icon_equipments.event20_chain_b_tex
+258307	3	銀白鋼鐵動能飛劍	0	0	icon_equipments.event20_chain_b_tex
+258308	3	銀白鋼鐵動能手裏劍	0	0	icon_equipments.event20_shuriken_b_tex
+258309	3	銀白鋼鐵動能手裏劍	0	0	icon_equipments.event20_shuriken_b_tex
+258310	3	銀白鋼鐵動能手裏劍 (3天)	0	0	icon_equipments.event20_shuriken_b_tex
+258311	3	銀白鋼鐵動能手裏劍 (7天)	0	0	icon_equipments.event20_shuriken_b_tex
+258312	3	銀白鋼鐵動能手裏劍 (7天)	0	0	icon_equipments.event20_shuriken_b_tex
+258313	3	銀白鋼鐵動能手裏劍 (14天)	0	0	icon_equipments.event20_shuriken_b_tex
+258314	3	銀白鋼鐵動能手裏劍 (30天)	0	0	icon_equipments.event20_shuriken_b_tex
+258315	3	銀白鋼鐵動能手裏劍 (30天)	0	0	icon_equipments.event20_shuriken_b_tex
+258316	3	銀白鋼鐵動能手裏劍	0	0	icon_equipments.event20_shuriken_b_tex
+258317	3	銀白鋼鐵動能手裏劍	0	0	icon_equipments.event20_shuriken_b_tex
+258318	3	銀白鋼鐵動能手裏劍	0	0	icon_equipments.event20_shuriken_b_tex
+258319	3	銀白鋼鐵動能手裏劍	0	0	icon_equipments.event20_shuriken_b_tex
+258452	3	冬季幻想時裝[人類男]	0	0	icon_equipments.pc_event_63_m_a_tex
+258453	3	冬季幻想時裝[人類男]	0	0	icon_equipments.pc_event_63_m_a_tex
+258454	3	冬季幻想時裝[人類男](3天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258455	3	冬季幻想時裝[人類男](7天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258456	3	冬季幻想時裝[人類男](7天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258457	3	冬季幻想時裝[人類男](14天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258458	3	冬季幻想時裝[人類男](30天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258459	3	冬季幻想時裝[人類男](30天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258460	3	冬季幻想時裝[人類男]	0	0	icon_equipments.pc_event_63_m_a_tex
+258461	3	冬季幻想時裝[人類男]	0	0	icon_equipments.pc_event_63_m_a_tex
+258462	3	冬季幻想時裝[人類男]	0	0	icon_equipments.pc_event_63_m_a_tex
+258463	3	冬季幻想時裝[人類男]	0	0	icon_equipments.pc_event_63_m_a_tex
+258464	3	[染色]冬季幻想時裝[人類男]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258465	3	[染色]冬季幻想時裝[人類男]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258466	3	[染色]冬季幻想時裝[人類男](3天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258467	3	[染色]冬季幻想時裝[人類男](7天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258468	3	[染色]冬季幻想時裝[人類男](7天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258469	3	[染色]冬季幻想時裝[人類男](14天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258470	3	[染色]冬季幻想時裝[人類男](30天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258471	3	[染色]冬季幻想時裝[人類男](30天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258472	3	[染色]冬季幻想時裝[人類男]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258473	3	[染色]冬季幻想時裝[人類男]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258474	3	[染色]冬季幻想時裝[人類男]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258475	3	[染色]冬季幻想時裝[人類男]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258476	3	冬季幻想時裝[人類女]	0	0	icon_equipments.pc_event_63_f_a_tex
+258477	3	冬季幻想時裝[人類女]	0	0	icon_equipments.pc_event_63_f_a_tex
+258478	3	冬季幻想時裝[人類女](3天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258479	3	冬季幻想時裝[人類女](7天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258480	3	冬季幻想時裝[人類女](7天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258481	3	冬季幻想時裝[人類女](14天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258482	3	冬季幻想時裝[人類女](30天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258483	3	冬季幻想時裝[人類女](30天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258484	3	冬季幻想時裝[人類女]	0	0	icon_equipments.pc_event_63_f_a_tex
+258485	3	冬季幻想時裝[人類女]	0	0	icon_equipments.pc_event_63_f_a_tex
+258486	3	冬季幻想時裝[人類女]	0	0	icon_equipments.pc_event_63_f_a_tex
+258487	3	冬季幻想時裝[人類女]	0	0	icon_equipments.pc_event_63_f_a_tex
+258488	3	[染色]冬季幻想時裝[人類女]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258489	3	[染色]冬季幻想時裝[人類女]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258490	3	[染色]冬季幻想時裝[人類女](3天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258491	3	[染色]冬季幻想時裝[人類女](7天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258492	3	[染色]冬季幻想時裝[人類女](7天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258493	3	[染色]冬季幻想時裝[人類女](14天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258494	3	[染色]冬季幻想時裝[人類女](30天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258495	3	[染色]冬季幻想時裝[人類女](30天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258496	3	[染色]冬季幻想時裝[人類女]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258497	3	[染色]冬季幻想時裝[人類女]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258498	3	[染色]冬季幻想時裝[人類女]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258499	3	[染色]冬季幻想時裝[人類女]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258500	3	冬季幻想時裝[高精男]	0	0	icon_equipments.pc_event_63_m_a_tex
+258501	3	冬季幻想時裝[高精男]	0	0	icon_equipments.pc_event_63_m_a_tex
+258502	3	冬季幻想時裝[高精男](3天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258503	3	冬季幻想時裝[高精男](7天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258504	3	冬季幻想時裝[高精男](7天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258505	3	冬季幻想時裝[高精男](14天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258506	3	冬季幻想時裝[高精男](30天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258507	3	冬季幻想時裝[高精男](30天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258508	3	冬季幻想時裝[高精男]	0	0	icon_equipments.pc_event_63_m_a_tex
+258509	3	冬季幻想時裝[高精男]	0	0	icon_equipments.pc_event_63_m_a_tex
+258510	3	冬季幻想時裝[高精男]	0	0	icon_equipments.pc_event_63_m_a_tex
+258511	3	冬季幻想時裝[高精男]	0	0	icon_equipments.pc_event_63_m_a_tex
+258512	3	[染色]冬季幻想時裝[高精男]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258513	3	[染色]冬季幻想時裝[高精男]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258514	3	[染色]冬季幻想時裝[高精男](3天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258515	3	[染色]冬季幻想時裝[高精男](7天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258516	3	[染色]冬季幻想時裝[高精男](7天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258517	3	[染色]冬季幻想時裝[高精男](14天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258518	3	[染色]冬季幻想時裝[高精男](30天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258519	3	[染色]冬季幻想時裝[高精男](30天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258520	3	[染色]冬季幻想時裝[高精男]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258521	3	[染色]冬季幻想時裝[高精男]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258522	3	[染色]冬季幻想時裝[高精男]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258523	3	[染色]冬季幻想時裝[高精男]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258524	3	冬季幻想時裝[高精女]	0	0	icon_equipments.pc_event_63_f_a_tex
+258525	3	冬季幻想時裝[高精女]	0	0	icon_equipments.pc_event_63_f_a_tex
+258526	3	冬季幻想時裝[高精女](3天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258527	3	冬季幻想時裝[高精女](7天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258528	3	冬季幻想時裝[高精女](7天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258529	3	冬季幻想時裝[高精女](14天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258530	3	冬季幻想時裝[高精女](30天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258531	3	冬季幻想時裝[高精女](30天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258532	3	冬季幻想時裝[高精女]	0	0	icon_equipments.pc_event_63_f_a_tex
+258533	3	冬季幻想時裝[高精女]	0	0	icon_equipments.pc_event_63_f_a_tex
+258534	3	冬季幻想時裝[高精女]	0	0	icon_equipments.pc_event_63_f_a_tex
+258535	3	冬季幻想時裝[高精女]	0	0	icon_equipments.pc_event_63_f_a_tex
+258536	3	[染色]冬季幻想時裝[高精女]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258537	3	[染色]冬季幻想時裝[高精女]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258538	3	[染色]冬季幻想時裝[高精女](3天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258539	3	[染色]冬季幻想時裝[高精女](7天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258540	3	[染色]冬季幻想時裝[高精女](7天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258541	3	[染色]冬季幻想時裝[高精女](14天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258542	3	[染色]冬季幻想時裝[高精女](30天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258543	3	[染色]冬季幻想時裝[高精女](30天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258544	3	[染色]冬季幻想時裝[高精女]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258545	3	[染色]冬季幻想時裝[高精女]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258546	3	[染色]冬季幻想時裝[高精女]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258547	3	[染色]冬季幻想時裝[高精女]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258548	3	冬季幻想時裝[亞曼男]	0	0	icon_equipments.pc_event_63_m_a_tex
+258549	3	冬季幻想時裝[亞曼男]	0	0	icon_equipments.pc_event_63_m_a_tex
+258550	3	冬季幻想時裝[亞曼男](3天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258551	3	冬季幻想時裝[亞曼男](7天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258552	3	冬季幻想時裝[亞曼男](7天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258553	3	冬季幻想時裝[亞曼男](14天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258554	3	冬季幻想時裝[亞曼男](30天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258555	3	冬季幻想時裝[亞曼男](30天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258556	3	冬季幻想時裝[亞曼男]	0	0	icon_equipments.pc_event_63_m_a_tex
+258557	3	冬季幻想時裝[亞曼男]	0	0	icon_equipments.pc_event_63_m_a_tex
+258558	3	冬季幻想時裝[亞曼男]	0	0	icon_equipments.pc_event_63_m_a_tex
+258559	3	冬季幻想時裝[亞曼男]	0	0	icon_equipments.pc_event_63_m_a_tex
+258560	3	[染色]冬季幻想時裝[亞曼男]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258561	3	[染色]冬季幻想時裝[亞曼男]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258562	3	[染色]冬季幻想時裝[亞曼男](3天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258563	3	[染色]冬季幻想時裝[亞曼男](7天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258564	3	[染色]冬季幻想時裝[亞曼男](7天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258565	3	[染色]冬季幻想時裝[亞曼男](14天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258566	3	[染色]冬季幻想時裝[亞曼男](30天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258567	3	[染色]冬季幻想時裝[亞曼男](30天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258568	3	[染色]冬季幻想時裝[亞曼男]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258569	3	[染色]冬季幻想時裝[亞曼男]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258570	3	[染色]冬季幻想時裝[亞曼男]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258571	3	[染色]冬季幻想時裝[亞曼男]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258572	3	冬季幻想時裝[亞曼女]	0	0	icon_equipments.pc_event_63_f_a_tex
+258573	3	冬季幻想時裝[亞曼女]	0	0	icon_equipments.pc_event_63_f_a_tex
+258574	3	冬季幻想時裝[亞曼女](3天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258575	3	冬季幻想時裝[亞曼女](7天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258576	3	冬季幻想時裝[亞曼女](7天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258577	3	冬季幻想時裝[亞曼女](14天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258578	3	冬季幻想時裝[亞曼女](30天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258579	3	冬季幻想時裝[亞曼女](30天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258580	3	冬季幻想時裝[亞曼女]	0	0	icon_equipments.pc_event_63_f_a_tex
+258581	3	冬季幻想時裝[亞曼女]	0	0	icon_equipments.pc_event_63_f_a_tex
+258582	3	冬季幻想時裝[亞曼女]	0	0	icon_equipments.pc_event_63_f_a_tex
+258583	3	冬季幻想時裝[亞曼女]	0	0	icon_equipments.pc_event_63_f_a_tex
+258584	3	[染色]冬季幻想時裝[亞曼女]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258585	3	[染色]冬季幻想時裝[亞曼女]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258586	3	[染色]冬季幻想時裝[亞曼女](3天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258587	3	[染色]冬季幻想時裝[亞曼女](7天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258588	3	[染色]冬季幻想時裝[亞曼女](7天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258589	3	[染色]冬季幻想時裝[亞曼女](14天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258590	3	[染色]冬季幻想時裝[亞曼女](30天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258591	3	[染色]冬季幻想時裝[亞曼女](30天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258592	3	[染色]冬季幻想時裝[亞曼女]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258593	3	[染色]冬季幻想時裝[亞曼女]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258594	3	[染色]冬季幻想時裝[亞曼女]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258595	3	[染色]冬季幻想時裝[亞曼女]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258596	3	冬季幻想時裝[卡斯塔男]	0	0	icon_equipments.pc_event_63_m_a_tex
+258597	3	冬季幻想時裝[卡斯塔男]	0	0	icon_equipments.pc_event_63_m_a_tex
+258598	3	冬季幻想時裝[卡斯塔男](3天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258599	3	冬季幻想時裝[卡斯塔男](7天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258600	3	冬季幻想時裝[卡斯塔男](7天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258601	3	冬季幻想時裝[卡斯塔男](14天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258602	3	冬季幻想時裝[卡斯塔男](30天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258603	3	冬季幻想時裝[卡斯塔男](30天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258604	3	冬季幻想時裝[卡斯塔男]	0	0	icon_equipments.pc_event_63_m_a_tex
+258605	3	冬季幻想時裝[卡斯塔男]	0	0	icon_equipments.pc_event_63_m_a_tex
+258606	3	冬季幻想時裝[卡斯塔男]	0	0	icon_equipments.pc_event_63_m_a_tex
+258607	3	冬季幻想時裝[卡斯塔男]	0	0	icon_equipments.pc_event_63_m_a_tex
+258608	3	[染色]冬季幻想時裝[卡斯塔男]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258609	3	[染色]冬季幻想時裝[卡斯塔男]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258610	3	[染色]冬季幻想時裝[卡斯塔男](3天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258611	3	[染色]冬季幻想時裝[卡斯塔男](7天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258612	3	[染色]冬季幻想時裝[卡斯塔男](7天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258613	3	[染色]冬季幻想時裝[卡斯塔男](14天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258614	3	[染色]冬季幻想時裝[卡斯塔男](30天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258615	3	[染色]冬季幻想時裝[卡斯塔男](30天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258616	3	[染色]冬季幻想時裝[卡斯塔男]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258617	3	[染色]冬季幻想時裝[卡斯塔男]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258618	3	[染色]冬季幻想時裝[卡斯塔男]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258619	3	[染色]冬季幻想時裝[卡斯塔男]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258620	3	冬季幻想時裝[卡斯塔女]	0	0	icon_equipments.pc_event_63_f_a_tex
+258621	3	冬季幻想時裝[卡斯塔女]	0	0	icon_equipments.pc_event_63_f_a_tex
+258622	3	冬季幻想時裝[卡斯塔女](3天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258623	3	冬季幻想時裝[卡斯塔女](7天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258624	3	冬季幻想時裝[卡斯塔女](7天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258625	3	冬季幻想時裝[卡斯塔女](14天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258626	3	冬季幻想時裝[卡斯塔女](30天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258627	3	冬季幻想時裝[卡斯塔女](30天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258628	3	冬季幻想時裝[卡斯塔女]	0	0	icon_equipments.pc_event_63_f_a_tex
+258629	3	冬季幻想時裝[卡斯塔女]	0	0	icon_equipments.pc_event_63_f_a_tex
+258630	3	冬季幻想時裝[卡斯塔女]	0	0	icon_equipments.pc_event_63_f_a_tex
+258631	3	冬季幻想時裝[卡斯塔女]	0	0	icon_equipments.pc_event_63_f_a_tex
+258632	3	[染色]冬季幻想時裝[卡斯塔女]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258633	3	[染色]冬季幻想時裝[卡斯塔女]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258634	3	[染色]冬季幻想時裝[卡斯塔女](3天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258635	3	[染色]冬季幻想時裝[卡斯塔女](7天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258636	3	[染色]冬季幻想時裝[卡斯塔女](7天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258637	3	[染色]冬季幻想時裝[卡斯塔女](14天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258638	3	[染色]冬季幻想時裝[卡斯塔女](30天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258639	3	[染色]冬季幻想時裝[卡斯塔女](30天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258640	3	[染色]冬季幻想時裝[卡斯塔女]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258641	3	[染色]冬季幻想時裝[卡斯塔女]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258642	3	[染色]冬季幻想時裝[卡斯塔女]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258643	3	[染色]冬季幻想時裝[卡斯塔女]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258644	3	冬季幻想時裝[波波利]	0	0	icon_equipments.pc_event_63_m_a_tex
+258645	3	冬季幻想時裝[波波利]	0	0	icon_equipments.pc_event_63_m_a_tex
+258646	3	冬季幻想時裝[波波利](3天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258647	3	冬季幻想時裝[波波利](7天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258648	3	冬季幻想時裝[波波利](7天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258649	3	冬季幻想時裝[波波利](14天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258650	3	冬季幻想時裝[波波利](30天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258651	3	冬季幻想時裝[波波利](30天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258652	3	冬季幻想時裝[波波利]	0	0	icon_equipments.pc_event_63_m_a_tex
+258653	3	冬季幻想時裝[波波利]	0	0	icon_equipments.pc_event_63_m_a_tex
+258654	3	冬季幻想時裝[波波利]	0	0	icon_equipments.pc_event_63_m_a_tex
+258655	3	冬季幻想時裝[波波利]	0	0	icon_equipments.pc_event_63_m_a_tex
+258656	3	[染色]冬季幻想時裝[波波利]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258657	3	[染色]冬季幻想時裝[波波利]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258658	3	[染色]冬季幻想時裝[波波利](3天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258659	3	[染色]冬季幻想時裝[波波利](7天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258660	3	[染色]冬季幻想時裝[波波利](7天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258661	3	[染色]冬季幻想時裝[波波利](14天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258662	3	[染色]冬季幻想時裝[波波利](30天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258663	3	[染色]冬季幻想時裝[波波利](30天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258664	3	[染色]冬季幻想時裝[波波利]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258665	3	[染色]冬季幻想時裝[波波利]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258666	3	[染色]冬季幻想時裝[波波利]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258667	3	[染色]冬季幻想時裝[波波利]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258668	3	冬季幻想時裝[艾琳]	0	0	icon_equipments.pc_event_63_f_a_tex
+258669	3	冬季幻想時裝[艾琳]	0	0	icon_equipments.pc_event_63_f_a_tex
+258670	3	冬季幻想時裝[艾琳](3天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258671	3	冬季幻想時裝[艾琳](7天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258672	3	冬季幻想時裝[艾琳](7天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258673	3	冬季幻想時裝[艾琳](14天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258674	3	冬季幻想時裝[艾琳](30天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258675	3	冬季幻想時裝[艾琳](30天)	0	0	icon_equipments.pc_event_63_f_a_tex
+258676	3	冬季幻想時裝[艾琳]	0	0	icon_equipments.pc_event_63_f_a_tex
+258677	3	冬季幻想時裝[艾琳]	0	0	icon_equipments.pc_event_63_f_a_tex
+258678	3	冬季幻想時裝[艾琳]	0	0	icon_equipments.pc_event_63_f_a_tex
+258679	3	冬季幻想時裝[艾琳]	0	0	icon_equipments.pc_event_63_f_a_tex
+258680	3	[染色]冬季幻想時裝[艾琳]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258681	3	[染色]冬季幻想時裝[艾琳]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258682	3	[染色]冬季幻想時裝[艾琳](3天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258683	3	[染色]冬季幻想時裝[艾琳](7天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258684	3	[染色]冬季幻想時裝[艾琳](7天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258685	3	[染色]冬季幻想時裝[艾琳](14天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258686	3	[染色]冬季幻想時裝[艾琳](30天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258687	3	[染色]冬季幻想時裝[艾琳](30天)	0	0	icon_equipments.pc_event_63_f_dye_tex
+258688	3	[染色]冬季幻想時裝[艾琳]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258689	3	[染色]冬季幻想時裝[艾琳]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258690	3	[染色]冬季幻想時裝[艾琳]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258691	3	[染色]冬季幻想時裝[艾琳]	0	0	icon_equipments.pc_event_63_f_dye_tex
+258692	3	冬季幻想時裝[巴拉卡]	0	0	icon_equipments.pc_event_63_m_a_tex
+258693	3	冬季幻想時裝[巴拉卡]	0	0	icon_equipments.pc_event_63_m_a_tex
+258694	3	冬季幻想時裝[巴拉卡](3天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258695	3	冬季幻想時裝[巴拉卡](7天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258696	3	冬季幻想時裝[巴拉卡](7天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258697	3	冬季幻想時裝[巴拉卡](14天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258698	3	冬季幻想時裝[巴拉卡](30天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258699	3	冬季幻想時裝[巴拉卡](30天)	0	0	icon_equipments.pc_event_63_m_a_tex
+258700	3	冬季幻想時裝[巴拉卡]	0	0	icon_equipments.pc_event_63_m_a_tex
+258701	3	冬季幻想時裝[巴拉卡]	0	0	icon_equipments.pc_event_63_m_a_tex
+258702	3	冬季幻想時裝[巴拉卡]	0	0	icon_equipments.pc_event_63_m_a_tex
+258703	3	冬季幻想時裝[巴拉卡]	0	0	icon_equipments.pc_event_63_m_a_tex
+258704	3	[染色]冬季幻想時裝[巴拉卡]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258705	3	[染色]冬季幻想時裝[巴拉卡]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258706	3	[染色]冬季幻想時裝[巴拉卡](3天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258707	3	[染色]冬季幻想時裝[巴拉卡](7天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258708	3	[染色]冬季幻想時裝[巴拉卡](7天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258709	3	[染色]冬季幻想時裝[巴拉卡](14天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258710	3	[染色]冬季幻想時裝[巴拉卡](30天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258711	3	[染色]冬季幻想時裝[巴拉卡](30天)	0	0	icon_equipments.pc_event_63_m_dye_tex
+258712	3	[染色]冬季幻想時裝[巴拉卡]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258713	3	[染色]冬季幻想時裝[巴拉卡]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258714	3	[染色]冬季幻想時裝[巴拉卡]	0	0	icon_equipments.pc_event_63_m_dye_tex
+258715	3	[染色]冬季幻想時裝[巴拉卡]	0	0	icon_equipments.pc_event_63_m_dye_tex
 220000	3	燃燒黃金龍雙劍	0	0	icon_equipments.event_season_dual_01_tex
 220001	3	燃燒黃金龍長槍	0	0	icon_equipments.event_season_lance_01_tex
 220002	3	燃燒黃金龍巨劍	0	0	icon_equipments.event_season_twohand_01_tex
@@ -42125,6 +43607,27 @@
 243105	3	鋼鐵偵查者時裝(可染色)箱子	0	1	icon_items.premiumbox_vehicle2_tex
 243106	3	鋼鐵復仇者時裝箱子	0	1	icon_items.premiumbox_vehicle2_tex
 243107	3	鋼鐵偵查者時裝箱子	0	1	icon_items.premiumbox_vehicle2_tex
+243108	3	轉轉企鵝印記扭蛋	0	0	icon_items.premiumbox_etc5_tex
+243109	3	冬季幻想時裝扭蛋	0	0	icon_items.premiumbox_etc5_tex
+243110	3	轉轉企鵝印記扭蛋	0	0	icon_items.premiumbox_etc5_tex
+243111	3	春節福袋扭蛋	0	0	icon_items.premiumbox_etc5_tex
+243112	3	綢緞春節新衣：美時裝箱	0	1	icon_items.premiumbox_vehicle2_tex
+243113	3	綢緞春節新衣：麗時裝箱	0	1	icon_items.premiumbox_vehicle2_tex
+243114	3	綢緞春節新衣：秀時裝箱	0	1	icon_items.premiumbox_vehicle2_tex
+243115	3	春節新衣：麗時裝箱	0	1	icon_items.premiumbox_vehicle2_tex
+243116	3	春節新衣：美時裝箱	0	1	icon_items.premiumbox_vehicle2_tex
+243117	3	春節新衣：秀時裝箱	0	1	icon_items.premiumbox_vehicle2_tex
+243118	3	銀白鋼鐵動能武器箱	0	1	icon_items.premiumbox_vehicle2_tex
+243119	3	朱紅鋼鐵動能武器箱	0	1	icon_items.premiumbox_vehicle2_tex
+243120	3	[稀有]銀白鋼鐵動能武器箱	0	1	icon_items.premiumbox_vehicle2_tex
+243121	3	[稀有]朱紅鋼鐵動能武器武器箱	0	1	icon_items.premiumbox_vehicle2_tex
+243122	3	鋼鐵動能扭蛋	0	0	icon_items.premiumbox_etc5_tex
+243123	3	冬季幻想時裝扭蛋	0	0	icon_items.premiumbox_etc5_tex
+243124	3	花之印記扭蛋	0	0	icon_items.premiumbox_etc5_tex
+243125	3	冬季幻想時裝箱	0	1	icon_items.premiumbox_vehicle2_tex
+243126	3	[染色]冬季幻想時裝箱	0	1	icon_items.premiumbox_vehicle2_tex
+243127	3	冬季幻想時裝扭蛋	0	0	icon_items.premiumbox_etc5_tex
+243128	3	2018春節足跡扭蛋	0	0	icon_items.premiumbox_etc5_tex
 458	0	技能教本：召喚貝利卡聯盟軍馬	0	0	icon_items.skillbook_rider2_tex
 459	0	技能教本：召喚爾雷曼西亞聯盟軍馬	0	0	icon_items.skillbook_rider2_tex
 460	0	技能教本：召喚凱亞多勒聯盟軍馬	0	0	icon_items.skillbook_rider2_tex
@@ -44787,6 +46290,24 @@
 246161	2	Smart Box: Dyeable Mechanical Costume (30 Days)	0	1	icon_items.gift_box04_tex
 246162	2	Smart Box: Dyeable Mechanical Costume (7 Days)	0	1	icon_items.gift_box04_tex
 246163	2	Smart Box: Dyeable Mechanical Costume (3 Days)	0	1	icon_items.gift_box04_tex
+246164	2	Smart Box: Snowland Costume	0	1	icon_items.gift_box04_tex
+246165	2	Smart Box: Snowland Costume (30 Days)	0	1	icon_items.gift_box04_tex
+246166	2	Smart Box: Snowland Costume (7 Days)	0	1	icon_items.gift_box04_tex
+246167	2	Smart Box: Dyeable Snowland Costume	0	1	icon_items.gift_box04_tex
+246168	2	Smart Box: Dyeable Snowland Costume (30 Days)	0	1	icon_items.gift_box04_tex
+246169	2	Smart Box: Dyeable Snowland Costume (7 Days)	0	1	icon_items.gift_box04_tex
+246170	2	Smart Box: Rare Red Mech Weapon	0	1	icon_items.gift_box04_tex
+246171	2	Smart Box: Rare Red Mech Weapon (30 Days)	0	1	icon_items.gift_box04_tex
+246172	2	Smart Box: Rare Red Mech Weapon (7 Days)	0	1	icon_items.gift_box04_tex
+246173	2	Smart Box: Rare Silver Mech Weapon	0	1	icon_items.gift_box04_tex
+246174	2	Smart Box: Rare Silver Mech Weapon (30 Days)	0	1	icon_items.gift_box04_tex
+246175	2	Smart Box: Rare Silver Mech Weapon (7 Days)	0	1	icon_items.gift_box04_tex
+246176	2	Smart Box: Red Mech Weapon	0	1	icon_items.gift_box04_tex
+246177	2	Smart Box: Red Mech Weapon (30 Days)	0	1	icon_items.gift_box04_tex
+246178	2	Smart Box: Red Mech Weapon (7 Days)	0	1	icon_items.gift_box04_tex
+246179	2	Smart Box: Silver Mech Weapon	0	1	icon_items.gift_box04_tex
+246180	2	Smart Box: Silver Mech Weapon (30 Days)	0	1	icon_items.gift_box04_tex
+246181	2	Smart Box: Silver Mech Weapon (7 Days)	0	1	icon_items.gift_box04_tex
 456	1	技能教本：阿卡莎的幻影	0	0	icon_items.skillbook_rider1_tex
 481	1	技能教本：聖潔獨角獸	0	0	icon_items.skillbook_rider1_tex
 482	1	技能教本：阿勒坤戰鬥軍馬	0	0	icon_items.skillbook_rider1_tex

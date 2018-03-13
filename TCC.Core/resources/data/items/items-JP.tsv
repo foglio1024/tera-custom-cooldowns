@@ -23776,6 +23776,10 @@
 98576	1	ギルド補給品ボックス	0	1	icon_items.mysterybox2_tex
 98577	0	小型ギルド補給品ボックス	0	1	icon_items.mysterybox1_tex
 98578	2	古いギルド補給品ボックス	0	0	icon_items.mysterybox1_tex
+98579	2	守護者の上級報酬ボックス	0	0	icon_items.material_box_4_tex
+98580	2	守護者の中級報酬ボックス	0	0	icon_items.material_box_3_tex
+98581	2	守護者の下級報酬ボックス	0	0	icon_items.material_box_2_tex
+98582	2	守護者の特別任務宝石ボックス	0	0	icon_items.material_box_7_tex
 98584	2	砲火の戦場報酬ボックス	0	0	icon_items.tresurebox1_tex
 98585	2	名誉の戦場報酬ボックス	0	0	icon_items.tresurebox1_tex
 98586	2	秘宝探査隊報酬ボックス	0	0	icon_items.tresurebox1_tex
@@ -25706,6 +25710,54 @@
 201348	3	【ヴァルキオン偵察隊】シャンドラ・マナイアの甲拳	0	0	icon_equipments.gauntlet29_a_tex
 201349	3	【ヴァルキオン偵察隊】シャンドラ・マナイアの手裏剣	0	0	icon_equipments.shuriken03_b_tex
 201350	3	【ヴァルキオン偵察隊】シャンドラ・マナイアの偃月刀	0	0	icon_equipments.glaive02_a_tex
+201483	3	ペンギンパタパタちゃんスタンプ	0	0	icon_items.footprint_wintera01_tex
+201484	3	ペンギンパタパタちゃんスタンプ	0	0	icon_items.footprint_wintera01_tex
+201485	3	ペンギンパタパタちゃんスタンプ（3日）	0	0	icon_items.footprint_wintera01_tex
+201486	3	ペンギンパタパタちゃんスタンプ（7日）	0	0	icon_items.footprint_wintera01_tex
+201487	3	ペンギンパタパタちゃんスタンプ（7日）	0	0	icon_items.footprint_wintera01_tex
+201488	3	ペンギンパタパタちゃんスタンプ（14日）	0	0	icon_items.footprint_wintera01_tex
+201489	3	ペンギンパタパタちゃんスタンプ（30日）	0	0	icon_items.footprint_wintera01_tex
+201490	3	ペンギンパタパタちゃんスタンプ（30日）	0	0	icon_items.footprint_wintera01_tex
+201491	3	ペンギンパタパタちゃんスタンプ	0	0	icon_items.footprint_wintera01_tex
+201492	3	ペンギンパタパタちゃんスタンプ	0	0	icon_items.footprint_wintera01_tex
+201493	3	ペンギンパタパタちゃんスタンプ	0	0	icon_items.footprint_wintera01_tex
+201494	3	ペンギンパタパタちゃんスタンプ	0	0	icon_items.footprint_wintera01_tex
+201495	3	パタパタ寒がりペンギンスタンプ	0	0	icon_items.footprint_wintera02_tex
+201496	3	パタパタ寒がりペンギンスタンプ	0	0	icon_items.footprint_wintera02_tex
+201497	3	パタパタ寒がりペンギンスタンプ（3日）	0	0	icon_items.footprint_wintera02_tex
+201498	3	パタパタ寒がりペンギンスタンプ（7日）	0	0	icon_items.footprint_wintera02_tex
+201499	3	パタパタ寒がりペンギンスタンプ（7日）	0	0	icon_items.footprint_wintera02_tex
+201500	3	パタパタ寒がりペンギンスタンプ（14日）	0	0	icon_items.footprint_wintera02_tex
+201501	3	パタパタ寒がりペンギンスタンプ（30日）	0	0	icon_items.footprint_wintera02_tex
+201502	3	パタパタ寒がりペンギンスタンプ（30日）	0	0	icon_items.footprint_wintera02_tex
+201503	3	パタパタ寒がりペンギンスタンプ	0	0	icon_items.footprint_wintera02_tex
+201504	3	パタパタ寒がりペンギンスタンプ	0	0	icon_items.footprint_wintera02_tex
+201505	3	パタパタ寒がりペンギンスタンプ	0	0	icon_items.footprint_wintera02_tex
+201506	3	パタパタ寒がりペンギンスタンプ	0	0	icon_items.footprint_wintera02_tex
+201507	3	ペンギンパタパタちゃんスタンプ	0	0	icon_items.footprint_winterb01_tex
+201508	3	ペンギンパタパタちゃんスタンプ	0	0	icon_items.footprint_winterb01_tex
+201509	3	ペンギンパタパタちゃんスタンプ（3日）	0	0	icon_items.footprint_winterb01_tex
+201510	3	ペンギンパタパタちゃんスタンプ（7日）	0	0	icon_items.footprint_winterb01_tex
+201511	3	ペンギンパタパタちゃんスタンプ（7日）	0	0	icon_items.footprint_winterb01_tex
+201512	3	ペンギンパタパタちゃんスタンプ（14日）	0	0	icon_items.footprint_winterb01_tex
+201513	3	ペンギンパタパタちゃんスタンプ（30日）	0	0	icon_items.footprint_winterb01_tex
+201514	3	ペンギンパタパタちゃんスタンプ（30日）	0	0	icon_items.footprint_winterb01_tex
+201515	3	ペンギンパタパタちゃんスタンプ	0	0	icon_items.footprint_winterb01_tex
+201516	3	ペンギンパタパタちゃんスタンプ	0	0	icon_items.footprint_winterb01_tex
+201517	3	ペンギンパタパタちゃんスタンプ	0	0	icon_items.footprint_winterb01_tex
+201518	3	ペンギンパタパタちゃんスタンプ	0	0	icon_items.footprint_winterb01_tex
+201519	3	クルクル寒がりペンギンスタンプ	0	0	icon_items.footprint_winterb02_tex
+201520	3	クルクル寒がりペンギンスタンプ	0	0	icon_items.footprint_winterb02_tex
+201521	3	クルクル寒がりペンギンスタンプ（3日）	0	0	icon_items.footprint_winterb02_tex
+201522	3	クルクル寒がりペンギンスタンプ（7日）	0	0	icon_items.footprint_winterb02_tex
+201523	3	クルクル寒がりペンギンスタンプ（7日）	0	0	icon_items.footprint_winterb02_tex
+201524	3	クルクル寒がりペンギンスタンプ（14日）	0	0	icon_items.footprint_winterb02_tex
+201525	3	クルクル寒がりペンギンスタンプ（30日）	0	0	icon_items.footprint_winterb02_tex
+201526	3	クルクル寒がりペンギンスタンプ（30日）	0	0	icon_items.footprint_winterb02_tex
+201527	3	クルクル寒がりペンギンスタンプ	0	0	icon_items.footprint_winterb02_tex
+201528	3	クルクル寒がりペンギンスタンプ	0	0	icon_items.footprint_winterb02_tex
+201529	3	クルクル寒がりペンギンスタンプ	0	0	icon_items.footprint_winterb02_tex
+201530	3	クルクル寒がりペンギンスタンプ	0	0	icon_items.footprint_winterb02_tex
 201531	2	Riding Skill: Elephant	0	0	icon_items.skillbook_lion1_tex
 201532	2	Riding Skill: Elephant	0	0	icon_items.skillbook_lion1_tex
 201533	2	Riding Skill: Elephant	0	0	icon_items.skillbook_lion1_tex
@@ -26105,6 +26157,29 @@
 155573	3	[Event] Dungeon Participation Fusion	0	0	icon_items.fc_a_function_tex
 155574	3	[Event] Battleground Participation Fusion	0	0	icon_items.fc_a_function_tex
 155575	3	[Event] Login Participation Medal	0	0	icon_items.politics_reward_tex
+155576	3	[Gacha] Phoenix 2.0	0	0	icon_items.cube_reward11_tex
+155577	2	[Event] [Gacha] Valentine's Day	0	0	icon_items.cube_reward11_tex
+155578	3	Care and Use of Your Bouncy	0	0	icon_items.petskillbook_tex
+155579	3	Care and Use of Your Bouncy	0	0	icon_items.petskillbook_tex
+155580	3	Care and Use of Your Mushroom	0	0	icon_items.petskillbook_tex
+155581	3	Care and Use of Your Mushroom	0	0	icon_items.petskillbook_tex
+155582	3	Care and Use of Your Cat Simon	0	0	icon_items.petskillbook_tex
+155583	3	Care and Use of Your Cat Simon	0	0	icon_items.petskillbook_tex
+155584	3	Care and Use of Your Blossom Tree	0	0	icon_items.petskillbook_tex
+155585	3	Care and Use of Your Blossom Tree	0	0	icon_items.petskillbook_tex
+160018	3	Achievement Reward(Junior Detective)	0	0	icon_achievement.icon_achievement_quest_tex
+160019	3	Achievement Reward2(Senior Detective)	0	0	icon_achievement.icon_achievement_quest_tex_r
+160020	3	Achievement Reward3(Master Detective)	0	0	icon_achievement.icon_achievement_quest_tex_u
+160021	3	1st Clue	0	0	icon_items.fireworks_eng_p_tex
+160022	3	2nd Clue	0	0	icon_items.fireworks_eng_o_tex
+160023	3	3rd Clue	0	0	icon_items.fireworks_eng_l_tex
+160024	3	4th Clue	0	0	icon_items.fireworks_eng_i_tex
+160025	3	5th Clue	0	0	icon_items.fireworks_eng_c_tex
+160026	3	6th Clue	0	0	icon_items.fireworks_eng_e_tex
+160027	3	Police Report	0	0	icon_items.q_book1_tex
+160028	3	Police Report	0	0	icon_items.q_book1_tex
+160029	2	Police Medallion	0	0	icon_items.icon_valkion_medal3_tex
+160030	2	Clue Converter	0	1	icon_items.q_book3_tex
 160330	2	Precious Gem Box	0	0	icon_items.gachabox_tex
 160331	2	Elin Gunner Reward Box	0	1	icon_items.gift_box04_tex
 160332	2	Level 15 Elin Gunner Reward Box	0	1	icon_items.gift_box04_tex
@@ -26487,6 +26562,8 @@
 216751	3	Meruma's Cache	0	0	icon_items.premiumbox_crystalweapon_tex
 216752	3	Box with mysterious weapons	0	0	icon_items.premiumbox_enchantmaterial_tex
 216753	3	Bag with accessories	0	0	icon_items.gachabox_face
+216754	0	Summon NPC: Phargo	0	300	icon_items.premium_summonnpc_03_tex
+216755	0	Summon NPC: Schwab	0	300	icon_items.premium_summonnpc_04_tex
 247623	2	Smart Box: Swimwear Male A + Female A	0	1	icon_items.gift_box04_tex
 247624	2	Smart Box: Swimwear Male B + Female D	0	1	icon_items.gift_box04_tex
 247625	2	Smart Box: Swimwear Female B	0	1	icon_items.gift_box04_tex
@@ -36946,6 +37023,27 @@
 100450	1	【レシピ】2018年ワンチャンボックス	0	0	icon_items.crystalscroll_2_tex
 100451	1	ノクタニウム強化弾（プレミアム）	0	1	icon_items.union_supplies5_tex
 100452	2	エリクサー（プレミアム）	0	1800	icon_items.eagles_potion_level_47_tex
+100453	3	乙女のブラックチョコレート	0	0	icon_items.heartchocolate_tex
+100454	3	【レシピ】チョコレートギフト	0	1	icon_items.weapon_scrolla8_tex
+100455	3	【レシピ】大きなチョコレートギフト	0	1	icon_items.weapon_scrolla7_tex
+100456	3	チョコレートギフト	0	0	icon_items.q_present_tex
+100457	3	大きなチョコレートギフト	0	0	icon_items.presentbox2_tex
+100458	3	恋する乙女	0	0	icon_items.q_playdoll_tex
+100459	1	中級挑戦の証	0	0	icon_items.parts_magicweaponc6_tex
+100460	2	上級挑戦の証	0	0	icon_items.parts_magicweaponc6_tex
+100461	3	最上級挑戦の証	0	0	icon_items.parts_magicweaponc6_tex
+100462	2	ファッションキューブ IVの欠片	0	0	icon_items.rawminerala9_tex
+100463	3	神秘のファッションキューブIV	0	0	icon_items.cube_reward04_tex
+100464	3	強化職人の加護の呪文書	0	0	icon_items.parts_heavyarmorc5_tex
+100465	3	祝福された強化職人の加護の呪文書	0	0	icon_items.parts_heavyarmorc5_tex
+100466	3	輝く強化職人の加護の呪文書	0	0	icon_items.parts_heavyarmorc5_tex
+100467	3	神秘的な強化職人の加護の呪文書	0	0	icon_items.parts_heavyarmorc5_tex
+100468	3	2017春休みのシーズンチケット（シルバー）	0	0	icon_items.ticket1_tex
+100469	3	2017春休みのシーズンチケット（ゴールド）	0	0	icon_items.ticket2_tex
+100470	3	アバターボックス（ゴールドスーツ/ホワイトローズドレス）（7日）	0	0	icon_items.gift_box03_tex
+100471	3	アバターボックス（テラファイタースーツ/ナイトメアスーツ） （7日）	0	0	icon_items.gift_box03_tex
+100472	3	アバターボックス（サーバントスーツ/メイド） （7日）	0	0	icon_items.gift_box03_tex
+100473	3	ランダムアバターボックス（7日）	0	0	icon_items.gift_box03_tex
 100501	1	完全な鍛錬の粉	0	0	icon_items.enchant_event01_tex
 100502	1	神秘の鍛錬の粉	0	0	icon_items.enchant_event02_tex
 100503	0	【連合補給品】オプションリセット呪文書	0	0	icon_items.optionresetscroll_tex
@@ -40908,6 +41006,7 @@
 117356	1	2017水着の生地	0	0	icon_items.refine_cloth14_tex
 117357	1	フェニックスの召喚スキル書の断片	0	0	icon_items.fireofpurification_tex
 117358	1	アーマードフレームの部品	0	0	icon_items.parts_lightarmorb9_tex
+117359	1	冬のファンタジーの生地	0	0	icon_items.refine_cloth15_tex
 117365	3	春のプレゼントチケット	0	0	icon_items.ticket4_tex
 117366	3	春のプレゼントチケット（ルーキー）	0	0	icon_items.ticket3_tex
 117367	3	WHITEDAYプレゼントチケット	0	0	icon_items.event_coupon_giftcard_tex
@@ -41324,6 +41423,9 @@
 241629	2	アバターボックス（アーマードフレーム・バラカ）	0	0	icon_items.gift_box03_tex
 241630	2	アバターボックス(アーマードフレーム)	0	1	icon_items.gift_box03_tex
 241631	2	ファッションキューブ（アーマードフレーム）	0	0	icon_items.cube_reward12_tex
+241632	3	スタンプボックス（ペンギン）	0	0	icon_items.q_boxjewel_tex
+241633	2	アバターボックス（冬のファンタジー）	0	1	icon_items.gold_kaia_presentbox_tex
+241634	2	ファッションキューブ（冬のファンタジー）	0	0	icon_items.cube_reward14_tex
 456	1	【スキル書】魔導機械BTS-001召喚	0	0	icon_items.skillbook_rider1_tex
 481	1	【スキル書】ユニコーン召喚	0	0	icon_items.skillbook_rider1_tex
 482	1	【スキル書】アルゴン軍馬召喚	0	0	icon_items.skillbook_rider1_tex
