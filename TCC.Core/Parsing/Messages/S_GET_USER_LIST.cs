@@ -82,7 +82,7 @@ namespace TCC.Parsing.Messages
                 c.face = reader.ReadInt32();
                 c.appearance = reader.ReadInt64();
                 //if(reader.Version < 321150 || reader.Version > 321600)
-                    reader.Skip(8);
+                reader.Skip(8);
                 c.unk10 = reader.ReadInt32();
                 c.unk11 = reader.ReadInt32();
                 c.unk12 = reader.ReadInt32();
@@ -121,16 +121,23 @@ namespace TCC.Parsing.Messages
                 c.weaponEnchant = reader.ReadInt32();
                 c.curRestExp = reader.ReadInt32();
                 c.maxRestExp = reader.ReadInt32();
-                reader.Skip(1); //bool showFace
-                reader.Skip(31 * 8); //floats accTransform
-                reader.Skip(4 + 1); //uint unk, byte unk
-                reader.Skip(1); //bool showStyle
-                c.curRestExpPerc = reader.ReadInt32(); //unk25 from tera-data?
-                c.achiPoints = reader.ReadInt32();
-                c.laurel = reader.ReadInt32();
-                c.pos = reader.ReadInt32();
-                c.guildId = reader.ReadInt32();
+                try
+                {
+                    reader.Skip(1); //bool showFace
+                    reader.Skip(30 * 4); //floats accTransform
+                    reader.Skip(1);
+                    reader.Skip(4 + 1); //uint unk, byte unk
+                    reader.Skip(1); //bool showStyle
+                    c.curRestExpPerc = reader.ReadInt32(); //unk25 from tera-data?
+                    c.achiPoints = reader.ReadInt32();
+                    c.laurel = reader.ReadInt32();
+                    c.pos = reader.ReadInt32();
+                    c.guildId = reader.ReadInt32();
+                }
+                catch (Exception)
+                {
 
+                }
                 reader.BaseStream.Position = nameOffset - 4;
                 c.name = reader.ReadTeraString();
 
@@ -165,7 +172,7 @@ namespace TCC.Data
         public int unk1;
         public short nameOffset, detailsOffset, detailsCount, details2offset, details2count, guildOffset;
         public uint id;
-        public int  gender, race, charClass, level, unk2, unk3;
+        public int gender, race, charClass, level, unk2, unk3;
         public long lastOnline;
         public byte unk4;
         public int unk5, unk6, unk7, unk8;
