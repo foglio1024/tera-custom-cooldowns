@@ -22,13 +22,14 @@ namespace TCC
         {
             _dispatcher = d;
 
+            var cooldown = cd > Int32.MaxValue ? Int32.MaxValue : cd;
 
             Skill = sk;
-            Cooldown = t==CooldownType.Skill ? cd : cd*1000;
+            Cooldown = t==CooldownType.Skill ? cooldown : cooldown * 1000;
             Type = t;
             OriginalCooldown = Cooldown;
 
-            if (cd == 0) return;
+            if (cooldown == 0) return;
             _timer = new Timer(Cooldown);
             _timer.Elapsed += _timer_Elapsed;
             _timer.Start();
