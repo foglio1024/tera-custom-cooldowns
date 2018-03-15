@@ -9,6 +9,7 @@
 		<Monster name="Человек-лучник (муж.)" id="10106" isBoss="False" hp="0" />
 		<Monster name="Человек-жрец (муж.)" id="10107" isBoss="False" hp="0" />
 		<Monster name="Человек-мистик (муж.)" id="10108" isBoss="False" hp="0" />
+		<Monster name="Крушитель-мужчина" id="10111" isBoss="False" hp="0" />
 		<Monster name="Человек-воин (жен.)" id="10201" isBoss="False" hp="0" />
 		<Monster name="Человек-рыцарь (жен.)" id="10202" isBoss="False" hp="0" />
 		<Monster name="Человек-убийца (жен.)" id="10203" isBoss="False" hp="0" />
@@ -86,7 +87,7 @@
 		<Monster name="Элин-жрец" id="11007" isBoss="False" hp="0" />
 		<Monster name="Элин-мистик" id="11008" isBoss="False" hp="0" />
 		<Monster name="Элин-жнец" id="11009" isBoss="False" hp="0" />
-		<Monster name="Инженер-элин" id="11010" isBoss="False" hp="0" />
+		<Monster name="Элин Инженер" id="11010" isBoss="False" hp="0" />
 		<Monster name="Элин-шиноби" id="11012" isBoss="False" hp="0" />
 		<Monster name="Барака-воин" id="11101" isBoss="False" hp="0" />
 		<Monster name="Барака-рыцарь" id="11102" isBoss="False" hp="0" />
@@ -185,9 +186,9 @@
 		<Monster name="Костяной прислужник" id="5" isBoss="False" hp="213" />
 		<Monster name="Костяной солдат" id="6" isBoss="False" hp="208" />
 		<Monster name="Даканиус" id="7" isBoss="False" hp="6857" />
-		<Monster name="Базениус" id="9" isBoss="False" hp="7737" />
-		<Monster name="Тубениус" id="12" isBoss="False" hp="5000" />
-		<Monster name="Темная Дева" id="13" isBoss="False" hp="3741" />
+		<Monster name="Темный жрец" id="9" isBoss="False" hp="7737" />
+		<Monster name="Деванский убийца" id="12" isBoss="False" hp="5000" />
+		<Monster name="Деванский убийца" id="13" isBoss="False" hp="3741" />
 		<Monster name="Расхититель святилища" id="14" isBoss="False" hp="4457" />
 		<Monster name="Маг-черное сердце" id="15" isBoss="False" hp="4457" />
 		<Monster name="Павший защитник" id="16" isBoss="False" hp="677" />
@@ -890,7 +891,7 @@
 	<Zone id="20" name="Вал-Ауреум" >
 		<Monster name="Костяной служитель" id="98" isBoss="False" hp="1412" />
 		<Monster name="Джурзенир" id="99" isBoss="False" hp="17936" />
-		<Monster name="Ящики с оружием" id="6008500" isBoss="False" hp="6" />
+		<Monster name="Сундук с оружием культистов" id="6008500" isBoss="False" hp="6" />
 		<Monster name="Невольник-бригадир" id="30011000" isBoss="False" hp="9124" />
 		<Monster name="Невольник-надсмотрщик" id="30011001" isBoss="False" hp="9124" />
 		<Monster name="Жестокий десятник" id="30011002" isBoss="False" hp="9124" />
@@ -4892,7 +4893,7 @@
 		<Monster name="Вход в Разрушенные врата в Новый мир" id="9501" isBoss="False" hp="0" />
 		<Monster name="Вход в Разрушенный алтарь Лакана" id="9710" isBoss="False" hp="0" />
 		<Monster name="Вход в Ангар RK-9" id="9735" isBoss="False" hp="0" />
-		<Monster name="Вход в Замок Лилит" id="9769" isBoss="False" hp="0" />
+		<Monster name="Замок Лилит, вход в Руины Абнукты" id="9769" isBoss="False" hp="0" />
 		<Monster name="Вход в катакомбы Велики, вход в Святилище Велики" id="9780" isBoss="False" hp="0" />
 		<Monster name="Вход в Лабораторию Сайрекса" id="9794" isBoss="False" hp="0" />
 		<Monster name="Станция Келдар" id="18101" isBoss="False" hp="0" />
@@ -12479,15 +12480,15 @@
 		<Monster name="Убейте Воскресшего Малгариоса" id="912" isBoss="False" hp="0" />
 		<Monster name="Убейте Абнукту." id="913" isBoss="False" hp="0" />
 		<Monster name="С помощью телепорта переместитесь к Абнукте и убейте ее." id="914" isBoss="False" hp="0" />
-		<Monster name="Воскресший Атроцитос" id="1000" isBoss="True" hp="1400000000" />
+		<Monster name="Воскресший Атроцитос" id="1000" isBoss="True" hp="2510000000" />
 		<Monster name="Воскресший Атроцитос" id="1001" isBoss="False" hp="12670" />
 		<Monster name="Телепорт" id="1501" isBoss="False" hp="10000" />
 		<Monster name="Телепорт" id="1502" isBoss="False" hp="10000" />
 		<Monster name="Телепорт" id="1503" isBoss="False" hp="10000" />
-		<Monster name="Воскресшая Демония" id="2000" isBoss="True" hp="1248000000" />
+		<Monster name="Воскресшая Демония" id="2000" isBoss="True" hp="2300000000" />
 		<Monster name="Голодные паучата" id="2001" isBoss="False" hp="2000000000" />
 		<Monster name="Паучий кокон" id="2002" isBoss="False" hp="100000" />
-		<Monster name="Абнукта" id="3000" isBoss="True" hp="1344000000" />
+		<Monster name="Абнукта" id="3000" isBoss="True" hp="2890000000" />
 	</Zone>
 	<Zone id="773" name="Эбеновая Башня (сложно)" >
 		<Monster name="Тотем очищения" id="1001" isBoss="False" hp="10000" />
@@ -14157,15 +14158,15 @@
 		<Monster name="Убейте Воскресшего Малгариоса" id="912" isBoss="False" hp="0" />
 		<Monster name="Убейте Кошмарную Абнукту" id="913" isBoss="False" hp="0" />
 		<Monster name="С помощью телепорта переместитесь к Кошмарной Абнукте и убейте ее." id="914" isBoss="False" hp="0" />
-		<Monster name="Воскресший Атроцитос" id="1000" isBoss="True" hp="1540000000" />
+		<Monster name="Воскресший Атроцитос" id="1000" isBoss="True" hp="3462000000" />
 		<Monster name="Воскресший Атроцитос" id="1001" isBoss="False" hp="12670" />
 		<Monster name="Телепорт" id="1501" isBoss="False" hp="10000" />
 		<Monster name="Телепорт" id="1502" isBoss="False" hp="10000" />
 		<Monster name="Телепорт" id="1503" isBoss="False" hp="10000" />
-		<Monster name="Воскресшая Демония" id="2000" isBoss="True" hp="1400000000" />
+		<Monster name="Воскресшая Демония" id="2000" isBoss="True" hp="2768000000" />
 		<Monster name="Голодные паучата" id="2001" isBoss="False" hp="2000000000" />
 		<Monster name="Паучий кокон" id="2002" isBoss="False" hp="100000" />
-		<Monster name="Кошмарная Абнукта" id="3000" isBoss="True" hp="1440000000" />
+		<Monster name="Кошмарная Абнукта" id="3000" isBoss="True" hp="3452000000" />
 	</Zone>
 	<Zone id="975" name="Рейд на Келсаика (20 игроков)" >
 		<Monster name="Рейд XX - Келсаик" id="1000" isBoss="True" hp="341391474" />

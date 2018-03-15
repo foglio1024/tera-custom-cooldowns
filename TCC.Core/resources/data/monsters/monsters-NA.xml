@@ -9,6 +9,7 @@
 		<Monster name="Human Male Archer" id="10106" isBoss="False" hp="0" />
 		<Monster name="Human Male Priest" id="10107" isBoss="False" hp="0" />
 		<Monster name="Human Male Mystic" id="10108" isBoss="False" hp="0" />
+		<Monster name="Human Male Brawler" id="10111" isBoss="False" hp="0" />
 		<Monster name="Human Female Warrior" id="10201" isBoss="False" hp="0" />
 		<Monster name="Human Female Lancer" id="10202" isBoss="False" hp="0" />
 		<Monster name="Human Female Slayer" id="10203" isBoss="False" hp="0" />
@@ -185,8 +186,8 @@
 		<Monster name="Skeletal Retainer" id="5" isBoss="False" hp="213" />
 		<Monster name="Skeletal Soldier" id="6" isBoss="False" hp="208" />
 		<Monster name="Dakanius" id="7" isBoss="False" hp="6857" />
-		<Monster name="Basenius" id="9" isBoss="False" hp="7737" />
-		<Monster name="Tuebenius" id="12" isBoss="False" hp="5000" />
+		<Monster name="Devan Archpriest" id="9" isBoss="False" hp="7737" />
+		<Monster name="Devan Warlord" id="12" isBoss="False" hp="5000" />
 		<Monster name="Dark Maiden" id="13" isBoss="False" hp="3741" />
 		<Monster name="Reaver of Resurrection" id="14" isBoss="False" hp="4457" />
 		<Monster name="Ebonheart Sorcerer" id="15" isBoss="False" hp="4457" />
@@ -4892,7 +4893,7 @@
 		<Monster name="Harrowhold Entrance" id="9501" isBoss="False" hp="0" />
 		<Monster name="Entrance to the Broken Prison" id="9710" isBoss="False" hp="0" />
 		<Monster name="Entrance to RK-9 Kennel" id="9735" isBoss="False" hp="0" />
-		<Monster name="Entrance to Lilith's Keep" id="9769" isBoss="False" hp="0" />
+		<Monster name="Entrance to Lilith's Keep and Ruinous Manor" id="9769" isBoss="False" hp="0" />
 		<Monster name="Velik's Hold and Velik's Sanctuary Entrance" id="9780" isBoss="False" hp="0" />
 		<Monster name="Entrance to Thaumetal Refinery" id="9794" isBoss="False" hp="0" />
 		<Monster name="Qeldar Station" id="18101" isBoss="False" hp="0" />
@@ -12479,15 +12480,15 @@
 		<Monster name="Kill Resurrected Malgarios" id="912" isBoss="False" hp="0" />
 		<Monster name="Kill Lachelith" id="913" isBoss="False" hp="0" />
 		<Monster name="(Boss) Go to the Lady's Chamber via a teleportal and kill Lachelith." id="914" isBoss="False" hp="0" />
-		<Monster name="Resurrected Atrocitas" id="1000" isBoss="True" hp="1400000000" />
+		<Monster name="Resurrected Atrocitas" id="1000" isBoss="True" hp="2510000000" />
 		<Monster name="Resurrected Atrocitas" id="1001" isBoss="False" hp="12670" />
 		<Monster name="Teleportal" id="1501" isBoss="False" hp="10000" />
 		<Monster name="Teleportal" id="1502" isBoss="False" hp="10000" />
 		<Monster name="Teleportal" id="1503" isBoss="False" hp="10000" />
-		<Monster name="Resurrected Malgarios" id="2000" isBoss="True" hp="1248000000" />
+		<Monster name="Resurrected Malgarios" id="2000" isBoss="True" hp="2300000000" />
 		<Monster name="Baby Arachnen" id="2001" isBoss="False" hp="2000000000" />
 		<Monster name="Tasty Arachnen Egg" id="2002" isBoss="False" hp="100000" />
-		<Monster name="Lachelith" id="3000" isBoss="True" hp="1344000000" />
+		<Monster name="Lachelith" id="3000" isBoss="True" hp="2890000000" />
 	</Zone>
 	<Zone id="773" name="Ebon Tower (Hard)" >
 		<Monster name="Purification Totem" id="1001" isBoss="False" hp="10000" />
@@ -14187,15 +14188,15 @@
 		<Monster name="Kill Nightmare Resurrected Malgarios" id="912" isBoss="False" hp="0" />
 		<Monster name="Kill Nightmare Lachelith" id="913" isBoss="False" hp="0" />
 		<Monster name="(Boss) Go to the Lady's Chamber via a teleportal and kill Nightmare Lachelith." id="914" isBoss="False" hp="0" />
-		<Monster name="Nightmare Resurrected Atrocitas" id="1000" isBoss="True" hp="1540000000" />
+		<Monster name="Nightmare Resurrected Atrocitas" id="1000" isBoss="True" hp="3462000000" />
 		<Monster name="Nightmare Resurrected Atrocitas" id="1001" isBoss="False" hp="12670" />
 		<Monster name="Teleportal" id="1501" isBoss="False" hp="10000" />
 		<Monster name="Teleportal" id="1502" isBoss="False" hp="10000" />
 		<Monster name="Teleportal" id="1503" isBoss="False" hp="10000" />
-		<Monster name="Nightmare Resurrected Malgarios" id="2000" isBoss="True" hp="1400000000" />
+		<Monster name="Nightmare Resurrected Malgarios" id="2000" isBoss="True" hp="2768000000" />
 		<Monster name="Baby Arachnen" id="2001" isBoss="False" hp="2000000000" />
 		<Monster name="Tasty Arachnen Egg" id="2002" isBoss="False" hp="100000" />
-		<Monster name="Nightmare Lachelith" id="3000" isBoss="True" hp="1440000000" />
+		<Monster name="Nightmare Lachelith" id="3000" isBoss="True" hp="3452000000" />
 	</Zone>
 	<Zone id="975" name="Kelsaik's Raid (20-Person)" >
 		<Monster name="Raid XX Kelsaik" id="1000" isBoss="True" hp="341391474" />
