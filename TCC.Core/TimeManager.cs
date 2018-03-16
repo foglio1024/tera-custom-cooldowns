@@ -20,6 +20,7 @@ namespace TCC
             {"RU", new TeraServerTimeInfo("Russian Standard Time", 6, DayOfWeek.Wednesday) },
             {"TW", new TeraServerTimeInfo("China Standard Time", 6, DayOfWeek.Wednesday) },
             {"JP", new TeraServerTimeInfo("Tokyo Standard Time", 6, DayOfWeek.Wednesday) },
+            {"THA", new TeraServerTimeInfo("Indochina Time", 6, DayOfWeek.Wednesday) },
             {"KR", new TeraServerTimeInfo("Korea Standard Time", 6, DayOfWeek.Wednesday) }
         };
 
