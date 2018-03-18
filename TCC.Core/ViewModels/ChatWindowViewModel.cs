@@ -2,8 +2,10 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
 using System.Windows.Data;
 using System.Windows.Threading;
 using TCC.Data;
@@ -181,7 +183,27 @@ namespace TCC.ViewModels
         {
             if (!SettingsManager.ChatWindowSettings.Enabled) return;
             if (BlockedUsers.Contains(chatMessage.Author)) return;
-            if (!VisibleChannels.FirstOrDefault(x => x.Channel == chatMessage.Channel).Enabled) return;
+            var vch = VisibleChannels.FirstOrDefault(x => x.Channel == chatMessage.Channel);
+            if(vch == null)
+            {
+                var sb = new StringBuilder();
+                sb.Append("TIME: ");
+                sb.Append(DateTime.UtcNow);
+                sb.Append("\n");
+                sb.Append("FROM: ");
+                sb.Append(chatMessage.Author);
+                sb.Append("\n");
+                sb.Append("CHANNEL: ");
+                sb.Append(chatMessage.Channel);
+                sb.Append("\n");
+                sb.Append("TEXT: ");
+                sb.Append(chatMessage.RawMessage);
+
+                File.WriteAllText("chat-message-error.txt", sb.ToString());
+                var err = new ChatMessage(ChatChannel.Error, "TCC", "Failed to display chat message. Please send chat-message-error.txt to the developer via Discord or GitHub issue.");
+                AddChatMessage(err);
+            }
+            if (!vch.Enabled) return;
             if (ChatMessages.Count < SettingsManager.SpamThreshold)
             {
                 for (int i = 0; i < ChatMessages.Count - 1; i++)
