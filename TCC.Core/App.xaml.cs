@@ -64,7 +64,7 @@ namespace TCC
             ssThread.Start();
             while (waiting)
             {
-
+                Thread.Sleep(1);
             }
             var cd = AppDomain.CurrentDomain;
             cd.UnhandledException += GlobalUnhandledExceptionHandler;
