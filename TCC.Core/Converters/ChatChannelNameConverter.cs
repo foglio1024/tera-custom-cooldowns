@@ -98,6 +98,8 @@ namespace TCC.Converters
                     return "Offer";
                 case ChatChannel.WorldBoss:
                     return "WB";
+                case ChatChannel.SystemDefault:
+                    return "System";
                 default:
                     return ch.ToString();
             }

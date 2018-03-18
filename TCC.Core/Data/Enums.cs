@@ -38,6 +38,8 @@
         Private7 = 17,
         Private8 = 18,
         PartyNotice = 21,
+        TeamAlert = 22,
+        SystemDefault = 24,
         RaidNotice = 25,
         Emote = 26,
         Global = 27,
