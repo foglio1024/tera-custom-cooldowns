@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
 using TCC.Data;
@@ -20,6 +21,7 @@ namespace TCC
     public partial class App
     {
         public static bool Debug = false;
+        public static TCC.Windows.SplashScreen SplashScreen;
         private static void GlobalUnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
         {
             var ex = (Exception)e.ExceptionObject;
@@ -42,8 +44,28 @@ namespace TCC
             CloseApp();
         }
 
-        private void OnStartup(object sender, StartupEventArgs ev)
+        private void OnStartup(object sender, StartupEventArgs e)
         {
+            var v = Assembly.GetExecutingAssembly().GetName().Version;
+            var ver = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
+            var waiting = true;
+            var ssThread = new Thread(new ThreadStart(() =>
+            {
+                SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                SplashScreen = new TCC.Windows.SplashScreen();
+                SplashScreen.SetText("Initializing...");
+                SplashScreen.SetVer(ver);
+                SplashScreen.Show();
+                waiting = false;
+                Dispatcher.Run();
+            }));
+            ssThread.Name = "SplashScreen window thread";
+            ssThread.SetApartmentState(ApartmentState.STA);
+            ssThread.Start();
+            while (waiting)
+            {
+
+            }
             var cd = AppDomain.CurrentDomain;
             cd.UnhandledException += GlobalUnhandledExceptionHandler;
             Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.Normal;
@@ -51,17 +73,26 @@ namespace TCC
             {
                 File.Delete(Environment.CurrentDirectory + "/TCCupdater.exe");
             }
+            SplashScreen.SetText("Checking for application updates...");
+
             UpdateManager.CheckAppVersion();
+            SplashScreen.SetText("Checking for database updates...");
+
             UpdateManager.CheckDatabaseVersion();
 
+            SplashScreen.SetText("Loading skills...");
             SkillsDatabase.Load();
             //ItemSkillsDatabase.SetBroochesIcons();
+            SplashScreen.SetText("Loading settings...");
             SettingsManager.LoadWindowSettings();
             SettingsManager.LoadSettings();
+            SplashScreen.SetText("Initializing windows...");
             WindowManager.Init();
             WindowManager.Settings = new SettingsWindow() { Name = "Settings" };
             FocusManager.FocusTimer.Start();
+            SplashScreen.SetText("Initializing Twitch connector...");
             TwitchConnector.Instance.Init();
+            SplashScreen.SetText("Initializing packet processor...");
             PacketProcessor.Init();
 
             TeraSniffer.Instance.NewConnection += (srv) =>
@@ -86,13 +117,18 @@ namespace TCC
             SessionManager.CurrentPlayer.Name = "player";
 
             TeraSniffer.Instance.Enabled = true;
+
+            SplashScreen.SetText("Starting");
+
             TimeManager.Instance.SetServerTimeZone(SettingsManager.LastRegion);
 
-            var v = Assembly.GetExecutingAssembly().GetName().Version;
-            var ver = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
             ChatWindowViewModel.Instance.AddTccMessage(ver);
 
-            if(!Debug) return;
+            SplashScreen.CloseWindowSafe();
+            if (!Debug) return;
+
+            //ss.Dispatcher.Invoke(new Action(() => ss.Close()));
+
             SessionManager.CurrentPlayer = new Player(1, "Foglio");
             CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(Class.Warrior).ToLower() + "-skills.xml", Class.Warrior);
 
@@ -103,7 +139,7 @@ namespace TCC
                 u.PlayerId = i;
                 u.Online = true;
                 u.UserClass = Class.Warrior;
-                
+
 
                 GroupWindowViewModel.Instance.AddOrUpdateMember(u);
             }
@@ -111,7 +147,7 @@ namespace TCC
             {
                 var u = new User(GroupWindowViewModel.Instance.GetDispatcher());
                 u.Name = "Test_Healer" + i;
-                u.PlayerId = i +10;
+                u.PlayerId = i + 10;
                 u.Online = true;
                 u.UserClass = Class.Elementalist;
                 if (i == 1) u.Alive = false;
@@ -150,4 +186,5 @@ namespace TCC
         }
 
     }
+
 }
