@@ -2,7 +2,10 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Net;
+using System.Net.Http;
 using System.Reflection;
+using System.Text;
 using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
@@ -12,6 +15,8 @@ using TCC.Parsing;
 using TCC.Parsing.Messages;
 using TCC.ViewModels;
 using TCC.Windows;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace TCC
 {
@@ -22,6 +27,7 @@ namespace TCC
     {
         public static bool Debug = false;
         public static TCC.Windows.SplashScreen SplashScreen;
+        public static string Version;
         private static void GlobalUnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
         {
             var ex = (Exception)e.ExceptionObject;
@@ -29,32 +35,62 @@ namespace TCC
                 "##### CRASH #####\r\n" + ex.Message + "\r\n" +
                 ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" + ex.InnerException +
                 "\r\n" + ex.TargetSite);
+            try
+            {
+                var t = new Thread(() => UploadCrashDump(e))
+                {
+                    CurrentUICulture = new System.Globalization.CultureInfo("en-US"),
+                    CurrentCulture = new System.Globalization.CultureInfo("en-US")
+                };
+                t.Start();
+            }
+            catch (Exception)
+            {
+            }
             MessageBox.Show("An error occured and TCC will now close. Check error.txt for more info.", "TCC",
                 MessageBoxButton.OK, MessageBoxImage.Error);
+
             if (WindowManager.TrayIcon != null)
             {
                 WindowManager.TrayIcon.Dispose();
             }
-        }
 
+            Environment.Exit(-1);
+        }
+        private static void UploadCrashDump(UnhandledExceptionEventArgs e)
+        {
+            var ex = (Exception)e.ExceptionObject;
+            var c = new WebClient();
+            c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+            var js = new JObject();
+            var full = ex.Message + "\r\n" +
+                ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" + ex.InnerException +
+                "\r\n" + ex.TargetSite;
+            js.Add("tcc_version", new JValue(Version));
+            js.Add("full_exception", new JValue(full.Replace(@"C:\Users\Vincenzo\Documents\Progetti VS\", "")));
+            js.Add("inner_exception", new JValue(ex.InnerException != null ? ex.InnerException.Message.ToString(): "undefined"));
+            js.Add("exception", new JValue(ex.Message.ToString()));
+            js.Add("game_version", new JValue(PacketProcessor.Version));
+            js.Add("region", new JValue(PacketProcessor.Region));
+            js.Add("server_id", new JValue(PacketProcessor.ServerId));
+
+            c.UploadString(new Uri("https://us-central1-tcc-report.cloudfunctions.net/crash"), js.ToString());
+        }
         internal static void Restart()
         {
             SettingsManager.SaveSettings();
             Process.Start("TCC.exe");
             CloseApp();
         }
-
-        private void OnStartup(object sender, StartupEventArgs e)
+        private static void InitSS()
         {
-            var v = Assembly.GetExecutingAssembly().GetName().Version;
-            var ver = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
             var waiting = true;
             var ssThread = new Thread(new ThreadStart(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 SplashScreen = new TCC.Windows.SplashScreen();
                 SplashScreen.SetText("Initializing...");
-                SplashScreen.SetVer(ver);
+                SplashScreen.SetVer(Version);
                 SplashScreen.Show();
                 waiting = false;
                 Dispatcher.Run();
@@ -66,6 +102,12 @@ namespace TCC
             {
                 Thread.Sleep(1);
             }
+        }
+        private void OnStartup(object sender, StartupEventArgs e)
+        {
+            var v = Assembly.GetExecutingAssembly().GetName().Version;
+            Version = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
+            InitSS();
             var cd = AppDomain.CurrentDomain;
             cd.UnhandledException += GlobalUnhandledExceptionHandler;
             Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.Normal;
@@ -73,6 +115,7 @@ namespace TCC
             {
                 File.Delete(Environment.CurrentDirectory + "/TCCupdater.exe");
             }
+            //SplashScreen = null; //######################################################################
             SplashScreen.SetText("Checking for application updates...");
 
             UpdateManager.CheckAppVersion();
@@ -122,7 +165,7 @@ namespace TCC
 
             TimeManager.Instance.SetServerTimeZone(SettingsManager.LastRegion);
 
-            ChatWindowViewModel.Instance.AddTccMessage(ver);
+            ChatWindowViewModel.Instance.AddTccMessage(Version);
 
             SplashScreen.CloseWindowSafe();
             if (!Debug) return;
