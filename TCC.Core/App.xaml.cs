@@ -69,7 +69,7 @@ namespace TCC
             js.Add("exception", new JValue(ex.Message.ToString()));
             js.Add("game_version", new JValue(PacketProcessor.Version));
             js.Add("region", new JValue(PacketProcessor.Region));
-            js.Add("server_id", new JValue("фыва"));
+            js.Add("server_id", new JValue(PacketProcessor.ServerId));
             c.Encoding = Encoding.UTF8;
             c.UploadString(new Uri("https://us-central1-tcc-report.cloudfunctions.net/crash"), Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
         }
@@ -113,7 +113,7 @@ namespace TCC
                 File.Delete(Environment.CurrentDirectory + "/TCCupdater.exe");
             }
             catch (Exception) { }
-            SplashScreen = null; //######################################################################
+            //SplashScreen = null; //######################################################################
             SplashScreen.SetText("Checking for application updates...");
 
             UpdateManager.CheckAppVersion();
