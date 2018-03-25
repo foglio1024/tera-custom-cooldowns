@@ -37,11 +37,7 @@ namespace TCC
                 "\r\n" + ex.TargetSite);
             try
             {
-                var t = new Thread(() => UploadCrashDump(e))
-                {
-                    CurrentUICulture = new System.Globalization.CultureInfo("en-US"),
-                    CurrentCulture = new System.Globalization.CultureInfo("en-US")
-                };
+                var t = new Thread(() => UploadCrashDump(e));
                 t.Start();
             }
             catch (Exception)
@@ -62,6 +58,7 @@ namespace TCC
             var ex = (Exception)e.ExceptionObject;
             var c = new WebClient();
             c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+            c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
             var js = new JObject();
             var full = ex.Message + "\r\n" +
                 ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" + ex.InnerException +
@@ -72,9 +69,9 @@ namespace TCC
             js.Add("exception", new JValue(ex.Message.ToString()));
             js.Add("game_version", new JValue(PacketProcessor.Version));
             js.Add("region", new JValue(PacketProcessor.Region));
-            js.Add("server_id", new JValue(PacketProcessor.ServerId));
-
-            c.UploadString(new Uri("https://us-central1-tcc-report.cloudfunctions.net/crash"), js.ToString());
+            js.Add("server_id", new JValue("фыва"));
+            c.Encoding = Encoding.UTF8;
+            c.UploadString(new Uri("https://us-central1-tcc-report.cloudfunctions.net/crash"), Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
         }
         internal static void Restart()
         {
@@ -116,7 +113,7 @@ namespace TCC
                 File.Delete(Environment.CurrentDirectory + "/TCCupdater.exe");
             }
             catch (Exception) { }
-            //SplashScreen = null; //######################################################################
+            SplashScreen = null; //######################################################################
             SplashScreen.SetText("Checking for application updates...");
 
             UpdateManager.CheckAppVersion();
