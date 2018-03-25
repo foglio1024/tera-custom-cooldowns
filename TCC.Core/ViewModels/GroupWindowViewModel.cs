@@ -346,14 +346,28 @@ namespace TCC.ViewModels
         }
         public void UpdateMemberHp(uint playerId, uint serverId, int curHp, int maxHp)
         {
-            var u = Members.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
+            User u = null;
+            try
+            {
+                u = Members.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
+            }
+            catch (Exception)
+            {
+            }
             if (u == null) return;
             u.CurrentHp = curHp;
             u.MaxHp = maxHp;
         }
         public void UpdateMemberMp(uint playerId, uint serverId, int curMp, int maxMp)
         {
-            var u = Members.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
+            User u = null;
+            try
+            {
+                u = Members.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
+            }
+            catch (Exception)
+            {
+            }
             if (u == null) return;
             u.CurrentMp = curMp;
             u.MaxMp = maxMp;
