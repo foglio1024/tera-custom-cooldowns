@@ -111,10 +111,11 @@ namespace TCC
             var cd = AppDomain.CurrentDomain;
             cd.UnhandledException += GlobalUnhandledExceptionHandler;
             Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.Normal;
-            if (File.Exists(Environment.CurrentDirectory + "/TCCupdater.exe"))
+            try
             {
                 File.Delete(Environment.CurrentDirectory + "/TCCupdater.exe");
             }
+            catch (Exception) { }
             //SplashScreen = null; //######################################################################
             SplashScreen.SetText("Checking for application updates...");
 
