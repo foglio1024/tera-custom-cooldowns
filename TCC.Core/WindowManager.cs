@@ -118,7 +118,7 @@ namespace TCC
                 //{
                 //    focusCount = 0;
                 //}
-                NotifyVisibilityChanged();             
+                NotifyVisibilityChanged();
             }
         }
         public static bool SkillsEnded
@@ -192,13 +192,21 @@ namespace TCC
 
             foreach (Window w in Application.Current.Windows)
             {
-                if(w.GetType() == typeof(TccWindow))
+                try
                 {
-                    ((TccWindow)w).CloseWindowSafe();
+
+                    if (w.GetType() == typeof(TccWindow))
+                    {
+                        ((TccWindow)w).CloseWindowSafe();
+                    }
+                    else
+                    {
+                        w.Close();
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    w.Close();
+
                 }
             }
         }

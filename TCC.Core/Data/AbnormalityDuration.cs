@@ -77,7 +77,7 @@ namespace TCC
             Duration = d;
             Stacks = s;
             Target = t;
-
+            _isTimerDisposed = false;
 
             //IconSize = iconSize;
             //BackgroundEllipseSize = bgEllSize;
@@ -88,8 +88,14 @@ namespace TCC
             {
                 timer = new System.Timers.Timer(1000);
                 timer.Elapsed += DecreaseDuration;
+                timer.Disposed += SetDisposed;
                 timer.Start();
             }
+        }
+        bool _isTimerDisposed;
+        private void SetDisposed(object sender, EventArgs e)
+        {
+            _isTimerDisposed = true;
         }
 
         private void DecreaseDuration(object sender, ElapsedEventArgs e)
@@ -100,7 +106,7 @@ namespace TCC
 
         public void Refresh()
         {
-            if(timer == null) return;
+            if(timer == null || _isTimerDisposed) return;
             timer?.Stop();
             if (Duration != 0) timer?.Start();
             NotifyPropertyChanged("Refresh");

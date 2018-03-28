@@ -177,7 +177,14 @@ namespace TCC.ViewModels
         }
         public void EndAbnormality(Abnormality ab, uint playerId, uint serverId)
         {
-            var u = Members.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
+            User u = null;
+            try
+            {
+                u = Members.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
+            }
+            catch (Exception)
+            {
+            }
             if (u == null) return;
 
             if (ab.Type == AbnormalityType.Buff)
@@ -200,7 +207,6 @@ namespace TCC.ViewModels
         {
             Members.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId)?.ClearAbnormalities();
         }
-
         public void AddOrUpdateMember(User p)
         {
             if (SettingsManager.IgnoreMeInGroupWindow && p.IsPlayer) return;
@@ -417,7 +423,12 @@ namespace TCC.ViewModels
         }
         public void UpdateMemberLocation(S_PARTY_MEMBER_INTERVAL_POS_UPDATE p)
         {
-            var u = Members.FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
+            User u = null;
+            try
+            {
+                u = Members.FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
+            }
+            catch (Exception) { }
             if(u == null) return;
             var ch = p.Channel > 1000 ? "" : " ch." + p.Channel;
             u.Location = MapDatabase.TryGetGuardOrDungeonNameFromContinentId(p.ContinentId, out var l) ? l + ch : "Unknown";

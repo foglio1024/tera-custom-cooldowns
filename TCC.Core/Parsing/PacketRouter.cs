@@ -47,7 +47,8 @@ namespace TCC.Parsing
         private static void InitDb(uint serverId)
         {
             var server = BasicTeraData.Instance.Servers.GetServer(serverId);
-            Region = server.Region;
+            if (server == null) Region = "EU";
+            else Region = server.Region;
             var td = new TeraData(Region);
             var lang = td.GetLanguage(Region);
 

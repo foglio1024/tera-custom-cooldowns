@@ -305,7 +305,13 @@ namespace TCC
             NumberTimer?.Stop();
             NumberTimer?.Dispose();
             t.Start();
-            Dispatcher.Invoke(() => BossGageWindowViewModel.Instance.RemoveMe(Npc));
+            try
+            {
+                Dispatcher.Invoke(() => BossGageWindowViewModel.Instance.RemoveMe(Npc));
+            }
+            catch (Exception)
+            {
+            }
         }
 
         private void _enrageArcAnimation_Completed(object sender, EventArgs e)
