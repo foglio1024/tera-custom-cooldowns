@@ -51,6 +51,7 @@ namespace TCC.Parsing
             else Region = server.Region;
             var td = new TeraData(Region);
             var lang = td.GetLanguage(Region);
+            App.SendUsageStat();
 
             //if (TimeManager.Instance.CurrentRegion != Region)
             //{

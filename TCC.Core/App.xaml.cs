@@ -17,6 +17,7 @@ using TCC.ViewModels;
 using TCC.Windows;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Linq;
 
 namespace TCC
 {
@@ -65,7 +66,7 @@ namespace TCC
                 "\r\n" + ex.TargetSite;
             js.Add("tcc_version", new JValue(Version));
             js.Add("full_exception", new JValue(full.Replace(@"C:\Users\Vincenzo\Documents\Progetti VS\", "")));
-            js.Add("inner_exception", new JValue(ex.InnerException != null ? ex.InnerException.Message.ToString(): "undefined"));
+            js.Add("inner_exception", new JValue(ex.InnerException != null ? ex.InnerException.Message.ToString() : "undefined"));
             js.Add("exception", new JValue(ex.Message.ToString()));
             js.Add("game_version", new JValue(PacketProcessor.Version));
             js.Add("region", new JValue(PacketProcessor.Region));
@@ -100,8 +101,27 @@ namespace TCC
                 Thread.Sleep(1);
             }
         }
+
+        public static void SendUsageStat()
+        {
+            using (var c = new WebClient())
+            {
+                c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
+                var js = new JObject()
+                {
+                    { "server", PacketProcessor.ServerId},
+                    { "id", InfoWindowViewModel.Instance.Characters == null ?0 : InfoWindowViewModel.Instance.Characters.Count == 0 ? 0 : InfoWindowViewModel.Instance.Characters.FirstOrDefault(x => x.Position == 1).Id },
+                    { "region", PacketProcessor.Region },
+                };
+                c.Encoding = Encoding.UTF8;
+                c.UploadStringAsync(new Uri("https://us-central1-tcc-report.cloudfunctions.net/stat"), Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
+            }
+        }
         private void OnStartup(object sender, StartupEventArgs e)
         {
+
+            
             var v = Assembly.GetExecutingAssembly().GetName().Version;
             Version = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
             InitSS();
@@ -173,37 +193,32 @@ namespace TCC
             SessionManager.CurrentPlayer = new Player(1, "Foglio");
             CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(Class.Warrior).ToLower() + "-skills.xml", Class.Warrior);
 
-            for (uint i = 0; i < 1; i++)
-            {
-                var u = new User(GroupWindowViewModel.Instance.GetDispatcher());
-                u.Name = "Test_Dps" + i;
-                u.PlayerId = i;
-                u.Online = true;
-                u.UserClass = Class.Warrior;
+            var u = new User(GroupWindowViewModel.Instance.GetDispatcher());
+            u.Name = "Test_Dps";
+            u.PlayerId = 1;
+            u.ServerId = 0;
+            u.Online = true;
+            u.UserClass = Class.Warrior;
 
 
-                GroupWindowViewModel.Instance.AddOrUpdateMember(u);
-            }
-            for (uint i = 0; i < 2; i++)
-            {
-                var u = new User(GroupWindowViewModel.Instance.GetDispatcher());
-                u.Name = "Test_Healer" + i;
-                u.PlayerId = i + 10;
-                u.Online = true;
-                u.UserClass = Class.Elementalist;
-                if (i == 1) u.Alive = false;
-                if (i == 0) u.Name = "Foglio";
+            GroupWindowViewModel.Instance.AddOrUpdateMember(u);
 
-                GroupWindowViewModel.Instance.AddOrUpdateMember(u);
-            }
-            for (uint i = 0; i < 4; i++)
+            var t = new Thread(new ThreadStart(() =>
             {
-                var u = new User(GroupWindowViewModel.Instance.GetDispatcher());
-                u.Name = "Test_Tank" + i;
-                u.PlayerId = i + 100;
-                u.Online = true;
-                u.UserClass = Class.Lancer;
-                GroupWindowViewModel.Instance.AddOrUpdateMember(u);
+                uint i = 0;
+                while (true)
+                {
+                    var usr = new User(GroupWindowViewModel.Instance.GetDispatcher())
+                    { Name = $"T{i}", PlayerId = i };
+                    GroupWindowViewModel.Instance.AddOrUpdateMember(usr);
+                    i++;
+                }
+            }));
+            t.Name = "test";
+            t.Start();
+            while (true)
+            {
+                GroupWindowViewModel.Instance.UpdateMemberHp(5, 0, 50, 25);
             }
             //foreach (var user in GroupWindowViewModel.Instance.Members)
             //{
