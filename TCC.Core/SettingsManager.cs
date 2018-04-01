@@ -149,7 +149,7 @@ namespace TCC
                 try
                 {
                     //ClassWindowOn = Boolean.Parse(b.Attribute("ClassWindowOn").Value);
-                    CooldownBarMode = (TCC.CooldownBarMode) Enum.Parse(typeof(CooldownBarMode), b.Attribute(nameof(TCC.CooldownBarMode)).Value);
+                    CooldownBarMode = (TCC.CooldownBarMode)Enum.Parse(typeof(CooldownBarMode), b.Attribute(nameof(TCC.CooldownBarMode)).Value);
                 }
                 catch { }
                 try
@@ -402,9 +402,21 @@ namespace TCC
                 BuildChatTabsXElement(),
                 BuildGroupAbnormalsXElement()
             );
-            xSettings.Save(Environment.CurrentDirectory + @"/tcc-config.xml");
+            SaveSettingsDoc(xSettings);
         }
+        private static void SaveSettingsDoc(XElement doc)
+        {
+            try
+            {
+                doc.Save(Environment.CurrentDirectory + @"/tcc-config.xml");
+            }
+            catch (Exception)
+            {
+                var res = MessageBox.Show("Could not write settings data to tcc-config.xml. File is being used by another process. Try again?", "TCC", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (res == MessageBoxResult.Yes) SaveSettingsDoc(doc);
+            }
 
+        }
         private static WindowSettings ParseWindowSettings(XElement ws)
         {
             double x = 0, y = 0, w = 0, h = 0, scale = 1, dimOp = .3;

@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Threading;
 using System.Xml.Linq;
@@ -100,7 +101,7 @@ namespace TCC.ViewModels
 
                 if (TimeManager.Instance.CurrentServerTime < egStart ||
                     TimeManager.Instance.CurrentServerTime > egEnd) continue;
-                
+
                 var eg = new EventGroup(egName, egStart, egEnd, egRc);
                 foreach (var evElement in egElement.Descendants().Where(x => x.Name == "Event"))
                 {
@@ -114,14 +115,14 @@ namespace TCC.ViewModels
                             var days = evElement.Attribute("days").Value.Split(',');
                             foreach (var dayString in days)
                             {
-                                var day = (DayOfWeek) Enum.Parse(typeof(DayOfWeek), dayString);
+                                var day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), dayString);
                                 if (day == today) isToday = true;
                                 if (day == yesterday) isYesterday = true;
                             }
                         }
                         else
                         {
-                            var eventDay = (DayOfWeek) Enum.Parse(typeof(DayOfWeek), evElement.Attribute("days").Value);
+                            var eventDay = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), evElement.Attribute("days").Value);
                             isToday = eventDay == today;
                             isYesterday = eventDay == yesterday;
                         }
@@ -159,7 +160,7 @@ namespace TCC.ViewModels
                     var color = "5599ff";
 
                     var start = parsedStart.Hour + parsedStart.Minute / 60D;
-                    var end = isDuration ?  parsedDuration.Hours + parsedDuration.Minutes / 60D : parsedEnd.Hour + parsedEnd.Minute/60D;
+                    var end = isDuration ? parsedDuration.Hours + parsedDuration.Minutes / 60D : parsedEnd.Hour + parsedEnd.Minute / 60D;
 
                     if (evElement.Attribute("color") != null)
                     {
@@ -169,11 +170,11 @@ namespace TCC.ViewModels
                     {
                         if (!EventUtils.EndsToday(start, end, isDuration))
                         {
-                            var e1 = new DailyEvent(name, parsedStart.Hour, 24, 0,color, false);
+                            var e1 = new DailyEvent(name, parsedStart.Hour, 24, 0, color, false);
                             end = start + end - 24;
                             start = 0;
                             var e2 = new DailyEvent(name, parsedStart.Hour, parsedStart.Minute, end, color, isDuration);
-                            if(isToday) eg.AddEvent(e1);
+                            if (isToday) eg.AddEvent(e1);
                             eg.AddEvent(e2);
                         }
                         else if (isToday)
@@ -184,13 +185,13 @@ namespace TCC.ViewModels
                     }
                     else
                     {
-                        var ev = new DailyEvent(name, parsedStart.Hour,parsedStart.Minute, end, color, isDuration);
+                        var ev = new DailyEvent(name, parsedStart.Hour, parsedStart.Minute, end, color, isDuration);
                         eg.AddEvent(ev);
                     }
                 }
                 if (eg.Events.Count != 0) AddEventGroup(eg);
             }
-            SpecialEvents.Add(new DailyEvent("Reset", TimeManager.Instance.ResetHour,0, 0, "ff0000"));
+            SpecialEvents.Add(new DailyEvent("Reset", TimeManager.Instance.ResetHour, 0, 0, "ff0000"));
         }
         public void ClearEvents()
         {
@@ -207,13 +208,13 @@ namespace TCC.ViewModels
             }
             NotifyPropertyChanged(nameof(SelectedCharacter));
 
-            AllDungeons = new CollectionViewSource {Source = SelectedCharacter.Dungeons}.View;
+            AllDungeons = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
             SoloDungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
             T2Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
             T3Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
             T4Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
             T5Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
-            Items = new CollectionViewSource {Source = SelectedCharacter.Gear}.View;
+            Items = new CollectionViewSource { Source = SelectedCharacter.Gear }.View;
 
             AllDungeons.Filter = null;
             Items.Filter = null;
@@ -327,14 +328,26 @@ namespace TCC.ViewModels
             }
 
             XDocument doc = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), root);
-            var fs = new FileStream(Environment.CurrentDirectory + "/resources/config/characters.xml", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
-            fs.SetLength(0);
-            using (var sr = new StreamWriter(fs, new UTF8Encoding(true)))
+            SaveCharDoc(doc);
+        }
+
+        private void SaveCharDoc(XDocument doc)
+        {
+            try
             {
-                sr.Write(doc.Declaration + Environment.NewLine + doc);
+                var fs = new FileStream(Environment.CurrentDirectory + "/resources/config/characters.xml", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+                fs.SetLength(0);
+                using (var sr = new StreamWriter(fs, new UTF8Encoding(true)))
+                {
+                    sr.Write(doc.Declaration + Environment.NewLine + doc);
+                }
+                fs.Close();
             }
-            fs.Close();
-            //root.Save("resources/config/characters.xml");
+            catch (Exception)
+            {
+                var res = MessageBox.Show("Could not write character data to characters.xml. File is being used by another process. Try again?", "TCC", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (res == MessageBoxResult.Yes) SaveCharDoc(doc);
+            }
         }
 
 
