@@ -87,7 +87,7 @@ namespace TCC.ViewModels
 
         private void FindAndUpdate(SynchronizedObservableCollection<SkillCooldown> list, SkillCooldown sk)
         {
-            var existing = list.FirstOrDefault(x => x.Skill.Name == sk.Skill.Name);
+            var existing = list.ToSyncArray().FirstOrDefault(x => x.Skill.Name == sk.Skill.Name);
             if (existing == null)
             {
                 list.Add(sk);
@@ -103,24 +103,24 @@ namespace TCC.ViewModels
             if (!SettingsManager.CooldownWindowSettings.Enabled) return;
             if (sk.Type == CooldownType.Item)
             {
-                FindAndUpdate(itemSkills, sk);
+                FindAndUpdate(ItemSkills, sk);
                 return;
             }
             try
             {
                 if (sk.Cooldown < SkillManager.LongSkillTreshold)
                 {
-                    FindAndUpdate(_shortSkills, sk);
+                    FindAndUpdate(ShortSkills, sk);
                 }
                 else
                 {
-                    var existing = _longSkills.FirstOrDefault(x => x.Skill.Name == sk.Skill.Name);
+                    var existing = LongSkills.ToSyncArray().FirstOrDefault(x => x.Skill.Name == sk.Skill.Name);
                     if (existing == null)
                     {
-                        existing = _shortSkills.FirstOrDefault(x => x.Skill.Name == sk.Skill.Name);
+                        existing = ShortSkills.ToSyncArray().FirstOrDefault(x => x.Skill.Name == sk.Skill.Name);
                         if (existing == null)
                         {
-                            _longSkills.Add(sk);
+                            LongSkills.Add(sk);
                         }
                         else
                         {
@@ -142,25 +142,25 @@ namespace TCC.ViewModels
             {
                 if (cd < SkillManager.LongSkillTreshold)
                 {
-                    var existing = _shortSkills.FirstOrDefault(x => x.Skill.Name == skill.Name);
+                    var existing = ShortSkills.ToSyncArray().FirstOrDefault(x => x.Skill.Name == skill.Name);
                     if (existing == null)
                     {
                         sk = new SkillCooldown(skill, cd, CooldownType.Skill, _dispatcher);
-                        _shortSkills.Add(sk);
+                        ShortSkills.Add(sk);
                         return;
                     }
                     existing.Refresh(cd);
                 }
                 else
                 {
-                    var existing = _longSkills.FirstOrDefault(x => x.Skill.Name == skill.Name);
+                    var existing = LongSkills.ToSyncArray().FirstOrDefault(x => x.Skill.Name == skill.Name);
                     if (existing == null)
                     {
-                        existing = _shortSkills.FirstOrDefault(x => x.Skill.Name == skill.Name);
+                        existing = ShortSkills.ToSyncArray().FirstOrDefault(x => x.Skill.Name == skill.Name);
                         if (existing == null)
                         {
                             sk = new SkillCooldown(skill, cd, CooldownType.Skill, _dispatcher);
-                            _longSkills.Add(sk);
+                            LongSkills.Add(sk);
                         }
                         else
                         {
@@ -182,24 +182,24 @@ namespace TCC.ViewModels
 
             try
             {
-                var longSkill = _longSkills.FirstOrDefault(x => x.Skill.Name == sk.Name);
+                var longSkill = LongSkills.ToSyncArray().FirstOrDefault(x => x.Skill.Name == sk.Name);
                 if (longSkill != null)
                 {
-                    _longSkills.Remove(longSkill);
+                    LongSkills.Remove(longSkill);
                     longSkill.Dispose();
                 }
-                var shortSkill = _shortSkills.FirstOrDefault(x => x.Skill.Name == sk.Name);
+                var shortSkill = ShortSkills.ToSyncArray().FirstOrDefault(x => x.Skill.Name == sk.Name);
                 if (shortSkill != null)
                 {
 
-                    _shortSkills.Remove(shortSkill);
+                    ShortSkills.Remove(shortSkill);
                     shortSkill.Dispose();
                 }
-                var itemSkill = itemSkills.FirstOrDefault(x => x.Skill.Name == sk.Name);
+                var itemSkill = ItemSkills.ToSyncArray().FirstOrDefault(x => x.Skill.Name == sk.Name);
                 if (itemSkill != null)
                 {
 
-                    itemSkills.Remove(itemSkill);
+                    ItemSkills.Remove(itemSkill);
                     itemSkill.Dispose();
                 }
             }
@@ -214,7 +214,7 @@ namespace TCC.ViewModels
             if (SettingsManager.ClassWindowSettings.Enabled && _classManager.StartSpecialSkill(sk)) return;
             if (!SettingsManager.CooldownWindowSettings.Enabled) return;
 
-            var skill = HiddenSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
+            var skill = HiddenSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
             if (skill != null) return;
 
             skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
@@ -223,7 +223,7 @@ namespace TCC.ViewModels
                 skill.Start(sk.Cooldown);
                 return;
             }
-            skill = SecondarySkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
+            skill = SecondarySkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
             if (skill != null)
             {
                 skill.Start(sk.Cooldown);
@@ -237,17 +237,17 @@ namespace TCC.ViewModels
         {
             if (!SettingsManager.CooldownWindowSettings.Enabled) return;
 
-            var skill = HiddenSkills.FirstOrDefault(x => x.Skill.IconName == sk.IconName);
+            var skill = HiddenSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (skill != null) return;
 
 
-            skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.IconName);
+            skill = MainSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (skill != null)
             {
                 skill.Refresh(cd);
                 return;
             }
-            skill = SecondarySkills.FirstOrDefault(x => x.Skill.IconName == sk.IconName);
+            skill = SecondarySkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (skill != null)
             {
                 skill.Refresh(cd);
@@ -255,7 +255,7 @@ namespace TCC.ViewModels
             }
             try
             {
-                var otherSkill = OtherSkills.FirstOrDefault(x => x.Skill.Name == sk.Name);
+                var otherSkill = OtherSkills.ToSyncArray().FirstOrDefault(x => x.Skill.Name == sk.Name);
                 if (otherSkill != null)
                 {
 
@@ -270,20 +270,20 @@ namespace TCC.ViewModels
             //sk.SetDispatcher(Dispatcher);
             if (!SettingsManager.CooldownWindowSettings.Enabled) return;
 
-            var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.IconName);
+            var skill = MainSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (skill != null)
             {
                 skill.Refresh(0);
                 return;
             }
-            skill = SecondarySkills.FirstOrDefault(x => x.Skill.IconName == sk.IconName);
+            skill = SecondarySkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (skill != null)
             {
                 skill.Refresh(0);
                 return;
             }
 
-            var item = ItemSkills.FirstOrDefault(x => x.Skill.IconName == sk.IconName);
+            var item = ItemSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (item != null)
             {
 
@@ -295,7 +295,7 @@ namespace TCC.ViewModels
 
             try
             {
-                var otherSkill = OtherSkills.FirstOrDefault(x => x.Skill.Name == sk.Name);
+                var otherSkill = OtherSkills.ToSyncArray().FirstOrDefault(x => x.Skill.Name == sk.Name);
                 if (otherSkill != null)
                 {
 

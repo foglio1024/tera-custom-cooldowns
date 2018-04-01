@@ -112,7 +112,7 @@ namespace TCC.ViewModels
             u = Exists(id) ? Members.FirstOrDefault(x => x.EntityId == id) : null;
             return Exists(id);
         }
-        public bool TryGetUser(uint pId,uint sId, out User u)
+        public bool TryGetUser(uint pId, uint sId, out User u)
         {
             u = Exists(pId, sId) ? Members.FirstOrDefault(x => x.PlayerId == pId && x.ServerId == sId) : null;
             return Exists(pId, sId);
@@ -210,23 +210,20 @@ namespace TCC.ViewModels
         public void AddOrUpdateMember(User p)
         {
             if (SettingsManager.IgnoreMeInGroupWindow && p.IsPlayer) return;
-            lock (_lock)
+            var user = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
+            if (user == null)
             {
-                var user = Members.FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
-                if (user == null)
-                {
-                    Members.Add(p);
-                    SendAddMessage(p.Name);
-                    return;
-                }
-                user.Online = p.Online;
-                user.EntityId = p.EntityId;
-                user.IsLeader = p.IsLeader;
+                Members.Add(p);
+                SendAddMessage(p.Name);
+                return;
             }
+            user.Online = p.Online;
+            user.EntityId = p.EntityId;
+            user.IsLeader = p.IsLeader;
         }
         private void SendAddMessage(string name)
         {
-            if(App.Debug) return;
+            if (App.Debug) return;
             string msg;
             string opcode;
             if (Raid)
@@ -263,7 +260,7 @@ namespace TCC.ViewModels
         public void RemoveMember(uint playerId, uint serverId, bool kick = false)
         {
             var u = Members.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
-            if(u == null) return;
+            if (u == null) return;
             Members.Remove(u);
             if (!kick) SendLeaveMessage(u.Name);
         }
@@ -276,7 +273,7 @@ namespace TCC.ViewModels
         public void LogoutMember(uint playerId, uint serverId)
         {
             var u = Members.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
-            if(u == null) return;
+            if (u == null) return;
             u.Online = false;
         }
         public void RemoveMe()
@@ -304,40 +301,62 @@ namespace TCC.ViewModels
         }
         public void SetNewLeader(ulong entityId, string name)
         {
-            Members.ToList().ForEach(x => x.IsLeader = x.Name == name);
+            foreach (var m in Members.ToSyncArray())
+            {
+                m.IsLeader = m.Name == name;
+            }
         }
         public void StartRoll()
         {
             Rolling = true;
-            Members.ToList().ForEach(u => u.IsRolling = true);
+            //Members.ToList().ForEach(u => u.IsRolling = true);
+            foreach (var m in Members.ToSyncArray())
+            {
+                m.IsRolling = true;
+            }
         }
         public void SetRoll(ulong entityId, int rollResult)
         {
             if (rollResult == int.MaxValue) rollResult = -1;
-            var u = Members.FirstOrDefault(x => x.EntityId == entityId);
+            var u = Members.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId);
             if (u != null) u.RollResult = rollResult;
         }
         public void EndRoll()
         {
             Rolling = false;
-            Members.ToList().ForEach(u =>
+
+            foreach (var m in Members.ToSyncArray())
             {
-                u.IsRolling = false;
-                u.IsWinning = false;
-                u.RollResult = 0;
-            });
+                m.IsRolling = false;
+                m.IsWinning = false;
+                m.RollResult = 0;
+            }
+            //Members.ToList().ForEach(u =>
+            //{
+            //u.IsRolling = false;
+            //u.IsWinning = false;
+            //u.RollResult = 0;
+            //});
         }
         private void FindHighestRoll()
         {
-            Members.ToList().ForEach(user => user.IsWinning = user.EntityId == Members.OrderByDescending(u => u.RollResult).First().EntityId);
+            foreach (var user in Members.ToSyncArray())
+            {
+                user.EntityId = Members.ToSyncArray().OrderByDescending(u => u.RollResult).First().EntityId;
+            }
+            //Members.ToList().ForEach(user => user.IsWinning = user.EntityId == Members.OrderByDescending(u => u.RollResult).First().EntityId);
         }
         public void SetReadyStatus(ReadyPartyMember p)
         {
             if (_firstCheck)
             {
-                Members.ToList().ForEach(u => u.Ready = ReadyStatus.Undefined);
+                //Members.ToList().ForEach(u => u.Ready = ReadyStatus.Undefined);
+                foreach (var u in Members.ToSyncArray())
+                {
+                    u.Ready = ReadyStatus.Undefined;
+                }
             }
-            var user = Members.FirstOrDefault(u => u.PlayerId == p.PlayerId && u.ServerId == p.ServerId);
+            var user = Members.ToSyncArray().FirstOrDefault(u => u.PlayerId == p.PlayerId && u.ServerId == p.ServerId);
             if (user != null) user.Ready = p.Status;
             _firstCheck = false;
             NotifyPropertyChanged(nameof(ReadyCount));
@@ -346,20 +365,18 @@ namespace TCC.ViewModels
         {
             Task.Delay(4000).ContinueWith(t =>
             {
-                Members.ToList().ForEach(x => x.Ready = ReadyStatus.None);
+                //Members.ToList().ForEach(x => x.Ready = ReadyStatus.None);
+                foreach (var u in Members.ToSyncArray())
+                {
+                    u.Ready = ReadyStatus.None;
+                }
             });
             _firstCheck = true;
         }
         public void UpdateMemberHp(uint playerId, uint serverId, int curHp, int maxHp)
         {
             User u = null;
-            try
-            {
-                u = Members.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
-            }
-            catch (Exception)
-            {
-            }
+            u = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
             if (u == null) return;
             u.CurrentHp = curHp;
             u.MaxHp = maxHp;
@@ -367,13 +384,7 @@ namespace TCC.ViewModels
         public void UpdateMemberMp(uint playerId, uint serverId, int curMp, int maxMp)
         {
             User u = null;
-            try
-            {
-                u = Members.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
-            }
-            catch (Exception)
-            {
-            }
+            u = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
             if (u == null) return;
             u.CurrentMp = curMp;
             u.MaxMp = maxMp;
@@ -384,7 +395,7 @@ namespace TCC.ViewModels
         }
         public void UpdateMember(S_PARTY_MEMBER_STAT_UPDATE p)
         {
-            var u = Members.FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
+            var u = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
             if (u != null)
             {
                 u.CurrentHp = p.CurrentHP;
@@ -403,7 +414,7 @@ namespace TCC.ViewModels
         }
         public void UpdateMemberGear(S_SPAWN_USER sSpawnUser)
         {
-            var u = Members.FirstOrDefault(x => x.PlayerId == sSpawnUser.PlayerId && x.ServerId == sSpawnUser.ServerId);
+            var u = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == sSpawnUser.PlayerId && x.ServerId == sSpawnUser.ServerId);
             if (u == null) return;
             u.Weapon = sSpawnUser.Weapon;
             u.Armor = sSpawnUser.Armor;
@@ -412,7 +423,7 @@ namespace TCC.ViewModels
         }
         public void UpdateMyGear()
         {
-            var u = Members.FirstOrDefault(x => x.IsPlayer);
+            var u = Members.ToSyncArray().FirstOrDefault(x => x.IsPlayer);
             if (u == null) return;
 
             u.Weapon = InfoWindowViewModel.Instance.CurrentCharacter.Gear.FirstOrDefault(x => x.Piece == GearPiece.Weapon);
@@ -424,12 +435,8 @@ namespace TCC.ViewModels
         public void UpdateMemberLocation(S_PARTY_MEMBER_INTERVAL_POS_UPDATE p)
         {
             User u = null;
-            try
-            {
-                u = Members.FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
-            }
-            catch (Exception) { }
-            if(u == null) return;
+            u = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
+            if (u == null) return;
             var ch = p.Channel > 1000 ? "" : " ch." + p.Channel;
             u.Location = MapDatabase.TryGetGuardOrDungeonNameFromContinentId(p.ContinentId, out var l) ? l + ch : "Unknown";
         }

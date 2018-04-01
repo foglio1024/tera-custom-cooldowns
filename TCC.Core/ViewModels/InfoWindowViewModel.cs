@@ -34,11 +34,11 @@ namespace TCC.ViewModels
         public ICollectionView Items { get; set; }
         public Character CurrentCharacter
         {
-            get => Characters.FirstOrDefault(x => x.Id == SessionManager.CurrentPlayer.PlayerId);
+            get => Characters.ToSyncArray().FirstOrDefault(x => x.Id == SessionManager.CurrentPlayer.PlayerId);
         }
         public Character SelectedCharacter
         {
-            get => Characters.FirstOrDefault(x => x.Id == _selectedCharacterId);
+            get => Characters.ToSyncArray().FirstOrDefault(x => x.Id == _selectedCharacterId);
         }
 
 
@@ -249,7 +249,7 @@ namespace TCC.ViewModels
                 DiscardFirstVanguardPacket = false;
                 return;
             }
-            var ch = Characters.FirstOrDefault(c => c.Id == SessionManager.CurrentPlayer.PlayerId);
+            var ch = Characters.ToSyncArray().FirstOrDefault(c => c.Id == SessionManager.CurrentPlayer.PlayerId);
             if (ch != null)
             {
                 ch.WeekliesDone = x.WeeklyDone;
@@ -276,7 +276,7 @@ namespace TCC.ViewModels
         }
         public void SetDungeons(Dictionary<uint, short> dungeonCooldowns)
         {
-            var ch = Characters.FirstOrDefault(x => x.Id == SessionManager.CurrentPlayer.PlayerId);
+            var ch = Characters.ToSyncArray().FirstOrDefault(x => x.Id == SessionManager.CurrentPlayer.PlayerId);
             ch?.UpdateDungeons(dungeonCooldowns);
         }
         public void EngageDungeon(uint dgId)
@@ -384,7 +384,7 @@ namespace TCC.ViewModels
 
         public void AddEventGroup(EventGroup eg)
         {
-            var g = EventGroups.FirstOrDefault(x => x.Name == eg.Name);
+            var g = EventGroups.ToSyncArray().FirstOrDefault(x => x.Name == eg.Name);
             if (g != null)
             {
                 foreach (var ev in eg.Events)

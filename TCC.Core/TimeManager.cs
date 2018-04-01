@@ -177,9 +177,9 @@ namespace TCC
 
         public void SetGuildBamTime(bool force)
         {
-            foreach (var eg in InfoWindowViewModel.Instance.EventGroups.Where(x => x.RemoteCheck))
+            foreach (var eg in InfoWindowViewModel.Instance.EventGroups.ToSyncArray().Where(x => x.RemoteCheck))
             {
-                foreach (var ev in eg.Events)
+                foreach (var ev in eg.Events.ToSyncArray())
                 {
                     ev.UpdateFromServer(force);
                 }

@@ -40,7 +40,7 @@ namespace TCC.ViewModels
 
         public bool IsTeraOnTop => WindowManager.IsTccVisible;
 
-        public int VisibleBossesCount => NpcList.Count(x => x.Visible == Visibility.Visible);
+        public int VisibleBossesCount => NpcList.ToSyncArray().Count(x => x.Visible == Visibility.Visible);
 
         public HarrowholdPhase CurrentHHphase
         {
@@ -146,13 +146,7 @@ namespace TCC.ViewModels
         public void AddOrUpdateBoss(ulong entityId, float maxHp, float curHp, bool isBoss, uint templateId = 0, uint zoneId = 0, Visibility v = Visibility.Visible)
         {
             Npc boss = null;
-            try
-            {
-                boss = _npcList.FirstOrDefault(x => x.EntityId == entityId);
-            }
-            catch (Exception)
-            {
-            }
+            boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId);
             if (boss == null)
             {
                 if (SettingsManager.ShowOnlyBosses && !isBoss) return;
@@ -172,13 +166,7 @@ namespace TCC.ViewModels
                 if (boss.IsPhase1Dragon)
                 {
                     Npc d = null;
-                    try
-                    {
-                        d = _holdedDragons.FirstOrDefault(x => x.EntityId == entityId);
-                    }
-                    catch (Exception)
-                    {
-                    }
+                    d = _holdedDragons.FirstOrDefault(x => x.EntityId == entityId);
                     if (d == null)
                     {
                         _holdedDragons.Add(boss);
@@ -192,7 +180,7 @@ namespace TCC.ViewModels
                 {
                     if (boss.ZoneId == 950 && (boss.TemplateId == 1000 || boss.TemplateId == 2000 || boss.TemplateId == 3000 || boss.TemplateId == 4000)) Vergos = boss;
                     if (_savedHp.ContainsKey(boss.EntityId)) boss.CurrentHP = _savedHp[boss.EntityId];
-                    _npcList.Add(boss);
+                    NpcList.Add(boss);
                 }
 
             }
@@ -204,13 +192,7 @@ namespace TCC.ViewModels
         {
             Npc boss = null;
 
-            try
-            {
-                boss = _npcList.FirstOrDefault(x => x.EntityId == id);
-            }
-            catch (Exception)
-            {
-            }
+                boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == id);
             if (boss == null) return;
             if (type == DespawnType.OutOfView)
             {
@@ -236,7 +218,7 @@ namespace TCC.ViewModels
         public void CopyToClipboard()
         {
             var sb = new StringBuilder();
-            foreach (var boss in _npcList)
+            foreach (var boss in NpcList.ToSyncArray())
             {
                 if (boss.Visible == Visibility.Visible)
                 {
@@ -250,18 +232,12 @@ namespace TCC.ViewModels
         }
         public void ClearBosses()
         {
-            _npcList.Clear();
+            NpcList.Clear();
         }
         public void EndNpcAbnormality(ulong target, Abnormality ab)
         {
             Npc boss = null;
-            try
-            {
-                boss = _npcList.FirstOrDefault(x => x.EntityId == target);
-            }
-            catch (Exception)
-            {
-            }
+                boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == target);
             if (boss != null)
             {
                 boss.EndBuff(ab);
@@ -270,42 +246,20 @@ namespace TCC.ViewModels
         public void AddOrRefreshNpcAbnormality(Abnormality ab, int stacks, uint duration, ulong target)
         {
             Npc boss = null;
-
-            try
-            {
-                boss = _npcList.FirstOrDefault(x => x.EntityId == target);
-            }
-            catch (Exception)
-            {
-
-            }
+            boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == target);
             boss?.AddorRefresh(ab, duration, stacks);
         }
         public void SetBossEnrage(ulong entityId, bool enraged)
         {
             Npc boss = null;
-            try
-            {
-                boss = _npcList.FirstOrDefault(x => x.EntityId == entityId);
-            }
-            catch (Exception)
-            {
-
-            }
+            boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId);
             if (boss == null) return;
             boss.Enraged = enraged;
         }
         public void UnsetBossTarget(ulong entityId)
         {
             Npc boss = null;
-            try
-            {
-                boss = _npcList.FirstOrDefault(x => x.EntityId == entityId);
-            }
-            catch (Exception)
-            {
-
-            }
+                boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId);
             if (boss == null)
             {
                 return;
@@ -315,14 +269,7 @@ namespace TCC.ViewModels
         public void SetBossAggro(ulong entityId, AggroCircle circle, ulong user)
         {
             Npc boss = null;
-            try
-            {
-                boss = _npcList.FirstOrDefault(x => x.EntityId == entityId);
-            }
-            catch (Exception)
-            {
-
-            }
+                boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == entityId);
             if (boss == null)
             {
                 return;
@@ -332,7 +279,7 @@ namespace TCC.ViewModels
         }
         public void SelectDragon(Dragon dragon)
         {
-            foreach (var item in _npcList.Where(x => x.TemplateId > 1099 && x.TemplateId < 1104))
+            foreach (var item in NpcList.ToSyncArray().Where(x => x.TemplateId > 1099 && x.TemplateId < 1104))
             {
                 if (item.TemplateId == (uint)dragon) { item.IsSelected = true; SelectedDragon = item; }
                 else item.IsSelected = false;
@@ -346,13 +293,7 @@ namespace TCC.ViewModels
         {
             if (!GuildIds.ContainsKey(towerId)) GuildIds.Add(towerId, guildId);
             Npc t = null;
-            try
-            {
-                t = NpcList.FirstOrDefault(x => x.EntityId == towerId);
-            }
-            catch (Exception)
-            {
-            }
+                t = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == towerId);
             if (t != null) t.Name = guildName;
             if (_towerNames.ContainsKey(towerId)) return;
             _towerNames.Add(towerId, guildName);
@@ -361,14 +302,7 @@ namespace TCC.ViewModels
         public void UpdateShield(ulong target, uint damage)
         {
             Npc boss = null;
-            try
-            {
-                boss = _npcList.FirstOrDefault(x => x.EntityId == target);
-            }
-            catch (Exception)
-            {
-
-            }
+                boss = NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == target);
             if (boss != null)
             {
                 boss.CurrentShield -= damage;
@@ -379,7 +313,7 @@ namespace TCC.ViewModels
         {
             _dispatcher.Invoke(() =>
             {
-                var b = NpcList.FirstOrDefault(x => x == npc);
+                var b = NpcList.ToSyncArray().FirstOrDefault(x => x == npc);
                 if (b == null) return;
                 b.Buffs.Clear();
                 var dt = new DispatcherTimer(DispatcherPriority.Background, _dispatcher)

@@ -268,7 +268,7 @@ namespace TCC.ViewModels
             }
             else
             {
-                _lfgs.Add(new LFG(x.Id, x.Name, x.Message, x.Raid));
+                LFGs.Add(new LFG(x.Id, x.Name, x.Message, x.Raid));
             }
         }
         public void RemoveLfg(LFG lfg)
@@ -278,13 +278,13 @@ namespace TCC.ViewModels
         }
         private bool TryGetLfg(int id, string msg, string name, out LFG lfg)
         {
-            lfg = _lfgs.FirstOrDefault(x => x.Id == id);
+            lfg = LFGs.ToSyncArray().FirstOrDefault(x => x.Id == id);
             if (lfg == null)
             {
-                lfg = _lfgs.FirstOrDefault(x => x.Name == name);
+                lfg = LFGs.ToSyncArray().FirstOrDefault(x => x.Name == name);
                 if (lfg == null)
                 {
-                    lfg = _lfgs.FirstOrDefault(x => x.Message == msg);
+                    lfg = LFGs.ToSyncArray().FirstOrDefault(x => x.Message == msg);
                     if (lfg == null)
                     {
                         return false;
