@@ -44,14 +44,14 @@ namespace TCC
             catch (Exception)
             {
             }
-            MessageBox.Show("An error occured and TCC will now close. Check error.txt for more info.", "TCC",
+            System.Windows.MessageBox.Show("An error occured and TCC will now close. Check error.txt for more info.", "TCC",
                 MessageBoxButton.OK, MessageBoxImage.Error);
 
             if (WindowManager.TrayIcon != null)
             {
                 WindowManager.TrayIcon.Dispose();
             }
-
+            try { WindowManager.Dispose(); } catch { }
             Environment.Exit(-1);
         }
         private static void UploadCrashDump(UnhandledExceptionEventArgs e)
@@ -120,8 +120,6 @@ namespace TCC
         }
         private void OnStartup(object sender, StartupEventArgs e)
         {
-
-            
             var v = Assembly.GetExecutingAssembly().GetName().Version;
             Version = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
             InitSS();
