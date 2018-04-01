@@ -187,7 +187,7 @@ namespace TCC
         public static void Dispose()
         {
             FocusManager.FocusTimer.Stop();
-            TrayIcon.Visible = false;
+            TrayIcon?.Dispose();
 
 
             foreach (Window w in Application.Current.Windows)
