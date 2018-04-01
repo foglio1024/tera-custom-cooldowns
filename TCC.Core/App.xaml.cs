@@ -209,7 +209,7 @@ namespace TCC
                 while (true)
                 {
                     var usr = new User(GroupWindowViewModel.Instance.GetDispatcher())
-                    { Name = $"T{i}", PlayerId = i };
+                    { Name = $"T{i}", PlayerId = i, ServerId = 0 };
                     GroupWindowViewModel.Instance.AddOrUpdateMember(usr);
                     i++;
                 }
@@ -218,7 +218,7 @@ namespace TCC
             t.Start();
             while (true)
             {
-                GroupWindowViewModel.Instance.UpdateMemberHp(5, 0, 50, 25);
+                GroupWindowViewModel.Instance.UpdateMemberHp(10, 0, 25, 50);
             }
             //foreach (var user in GroupWindowViewModel.Instance.Members)
             //{

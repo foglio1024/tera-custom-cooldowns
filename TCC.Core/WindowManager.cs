@@ -192,23 +192,17 @@ namespace TCC
 
             foreach (Window w in Application.Current.Windows)
             {
-                try
-                {
-
-                    if (w.GetType() == typeof(TccWindow))
-                    {
-                        ((TccWindow)w).CloseWindowSafe();
-                    }
-                    else
-                    {
-                        w.Close();
-                    }
-                }
-                catch (Exception)
-                {
-
-                }
+                try { w.Close(); } catch { }
             }
+
+            try { CharacterWindow.CloseWindowSafe(); } catch { }
+            try { CooldownWindow.CloseWindowSafe(); } catch { }
+            try { GroupWindow.CloseWindowSafe(); } catch { }
+            try { BossWindow.CloseWindowSafe(); } catch { }
+            try { BuffWindow.CloseWindowSafe(); } catch { }
+            try { InfoWindow.Close(); } catch { }
+            try { ChatWindow.CloseWindowSafe(); } catch { }
+            try { ClassWindow.CloseWindowSafe(); } catch { }
         }
 
         private static void LoadWindows()
