@@ -8,16 +8,8 @@ namespace TCC.Parsing.Messages
     public class S_PARTY_MEMBER_LIST : ParsedMessage
     {
         bool im, raid;
-        uint unk1, unk2;
-        ushort unk3, unk4;
         uint leaderServerId;
         uint leaderPlayerId;
-        uint unk5, unk6;
-        byte unk7;
-        uint unk8;
-        byte unk9;
-        uint unk10;
-        byte unk11;
 
         public bool Im { get { return im; } }
         public bool Raid { get { return raid; } }
@@ -57,7 +49,10 @@ namespace TCC.Parsing.Messages
             for (int i = 0; i < count; i++)
             {
                 var u = new User(WindowManager.GroupWindow.Dispatcher);
-                reader.Skip(4);
+
+                reader.BaseStream.Position = offset - 4;
+                var pointer = reader.ReadUInt16();
+                var nextOffset = reader.ReadUInt16();
                 var nameOffset = reader.ReadUInt16();
                 u.ServerId = reader.ReadUInt32();
                 u.PlayerId = reader.ReadUInt32();
@@ -68,6 +63,7 @@ namespace TCC.Parsing.Messages
                 u.Order = reader.ReadInt32();
                 u.CanInvite = reader.ReadBoolean();
                 u.Laurel = (Laurel)reader.ReadUInt32();
+                reader.BaseStream.Position = nameOffset - 4;
                 u.Name = reader.ReadTeraString();
                 u.Alive = true;
                 u.IsLeader = u.ServerId == LeaderServerId && u.PlayerId == LeaderPlayerId;
