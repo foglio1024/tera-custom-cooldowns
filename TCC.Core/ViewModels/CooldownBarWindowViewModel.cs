@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Threading;
+using System.Xml;
 using TCC.Data;
 
 namespace TCC.ViewModels
@@ -287,10 +288,10 @@ namespace TCC.ViewModels
             if (item != null)
             {
 
-                    ItemSkills.Remove(item);
-                    item.Dispose();
-                    return;
-                
+                ItemSkills.Remove(item);
+                item.Dispose();
+                return;
+
             }
 
             try
@@ -376,11 +377,23 @@ namespace TCC.ViewModels
 
         public void LoadSkills(string filename, Class c)
         {
+            SkillConfigParser sp = null;
             if (!File.Exists("resources/config/skills/" + filename))
             {
                 SkillUtils.BuildDefaultSkillConfig(filename, c);
             }
-            var sp = new SkillConfigParser(filename, c);
+            try
+            {
+                sp = new SkillConfigParser(filename, c);
+            }
+            catch (Exception)
+            {
+                var res = MessageBox.Show($"There was an error while reading {filename}. Try correcting the error and press Retry to try again, else press Cancel to build a default config file.", "TCC", MessageBoxButtons.RetryCancel);
+
+                if (res == DialogResult.Cancel) File.Delete("resources/config/skills/" + filename);
+                LoadSkills(filename, c);
+                return;
+            }
             foreach (var sk in sp.Main)
             {
                 MainSkills.Add(sk);
