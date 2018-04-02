@@ -68,6 +68,7 @@ namespace TCC.Parsing.Messages
                 u.Alive = true;
                 u.IsLeader = u.ServerId == LeaderServerId && u.PlayerId == LeaderPlayerId;
                 Members.Add(u);
+                offset = nextOffset;
             }
         }
     }
