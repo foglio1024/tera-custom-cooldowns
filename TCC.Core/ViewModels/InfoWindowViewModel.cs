@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Forms;
 using System.Windows.Threading;
 using System.Xml.Linq;
 using TCC.Data;
@@ -56,12 +57,16 @@ namespace TCC.ViewModels
         public void LoadEvents(DayOfWeek today, string region)
         {
             ClearEvents();
-            var yesterday = today - 1;
             if (region == null)
             {
                 ChatWindowViewModel.Instance.AddTccMessage("Unable to load events.");
                 return;
             }
+            LoadEventFile(today, region);
+        }
+        private void LoadEventFile(DayOfWeek today, string region)
+        {
+            var yesterday = today - 1;
             if (region.StartsWith("EU")) region = "EU";
             var path = $"resources/config/events/events-{region}.xml";
             if (!File.Exists(path))
@@ -87,112 +92,129 @@ namespace TCC.ViewModels
                     Directory.CreateDirectory($"resources/config/events");
                 root.Save(path);
             }
-            XDocument d = XDocument.Load(path);
-            foreach (var egElement in d.Descendants().Where(x => x.Name == "EventGroup"))
+
+            try
             {
-                var egName = egElement.Attribute("name").Value;
-                var egRc = egElement.Attribute("remote") != null && bool.Parse(egElement.Attribute("remote").Value);
-                var egStart = egElement.Attribute("start") != null
-                    ? DateTime.Parse(egElement.Attribute("start").Value)
-                    : DateTime.MinValue;
-                var egEnd = egElement.Attribute("end") != null
-                    ? DateTime.Parse(egElement.Attribute("end").Value).AddDays(1)
-                    : DateTime.MaxValue;
-
-                if (TimeManager.Instance.CurrentServerTime < egStart ||
-                    TimeManager.Instance.CurrentServerTime > egEnd) continue;
-
-                var eg = new EventGroup(egName, egStart, egEnd, egRc);
-                foreach (var evElement in egElement.Descendants().Where(x => x.Name == "Event"))
+                XDocument d = XDocument.Load(path);
+                foreach (var egElement in d.Descendants().Where(x => x.Name == "EventGroup"))
                 {
-                    var isYesterday = false;
-                    var isToday = false;
+                    var egName = egElement.Attribute("name").Value;
+                    var egRc = egElement.Attribute("remote") != null && bool.Parse(egElement.Attribute("remote").Value);
+                    var egStart = egElement.Attribute("start") != null
+                        ? DateTime.Parse(egElement.Attribute("start").Value)
+                        : DateTime.MinValue;
+                    var egEnd = egElement.Attribute("end") != null
+                        ? DateTime.Parse(egElement.Attribute("end").Value).AddDays(1)
+                        : DateTime.MaxValue;
 
-                    if (evElement.Attribute("days").Value != "*")
+                    if (TimeManager.Instance.CurrentServerTime < egStart ||
+                        TimeManager.Instance.CurrentServerTime > egEnd) continue;
+
+                    var eg = new EventGroup(egName, egStart, egEnd, egRc);
+                    foreach (var evElement in egElement.Descendants().Where(x => x.Name == "Event"))
                     {
-                        if (evElement.Attribute("days").Value.Contains(','))
+                        var isYesterday = false;
+                        var isToday = false;
+
+                        if (evElement.Attribute("days").Value != "*")
                         {
-                            var days = evElement.Attribute("days").Value.Split(',');
-                            foreach (var dayString in days)
+                            if (evElement.Attribute("days").Value.Contains(','))
                             {
-                                var day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), dayString);
-                                if (day == today) isToday = true;
-                                if (day == yesterday) isYesterday = true;
+                                var days = evElement.Attribute("days").Value.Split(',');
+                                foreach (var dayString in days)
+                                {
+                                    var day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), dayString);
+                                    if (day == today) isToday = true;
+                                    if (day == yesterday) isYesterday = true;
+                                }
+                            }
+                            else
+                            {
+                                var eventDay = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), evElement.Attribute("days").Value);
+                                isToday = eventDay == today;
+                                isYesterday = eventDay == yesterday;
                             }
                         }
                         else
                         {
-                            var eventDay = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), evElement.Attribute("days").Value);
-                            isToday = eventDay == today;
-                            isYesterday = eventDay == yesterday;
+                            isToday = true;
+                            isYesterday = true;
                         }
-                    }
-                    else
-                    {
-                        isToday = true;
-                        isYesterday = true;
-                    }
 
-                    if (!isToday && !isYesterday) continue;
+                        if (!isToday && !isYesterday) continue;
 
-                    var name = evElement.Attribute("name").Value;
-                    var parsedStart = DateTime.Parse(evElement.Attribute("start").Value, CultureInfo.InvariantCulture);
-                    TimeSpan parsedDuration = TimeSpan.Zero;
-                    DateTime parsedEnd = DateTime.Now;
-                    bool isDuration;
-                    if (evElement.Attribute("duration") != null)
-                    {
-                        parsedDuration = TimeSpan.Parse(evElement.Attribute("duration").Value, CultureInfo.InvariantCulture);
-                        isDuration = true;
-                    }
-                    else if (evElement.Attribute("end") != null)
-                    {
-                        parsedEnd = DateTime.Parse(evElement.Attribute("end").Value, CultureInfo.InvariantCulture);
-                        isDuration = false;
-                    }
-                    else
-                    {
-                        parsedDuration = TimeSpan.Zero;
-                        parsedEnd = parsedStart;
-                        isDuration = true;
-                    }
-
-                    var color = "5599ff";
-
-                    var start = parsedStart.Hour + parsedStart.Minute / 60D;
-                    var end = isDuration ? parsedDuration.Hours + parsedDuration.Minutes / 60D : parsedEnd.Hour + parsedEnd.Minute / 60D;
-
-                    if (evElement.Attribute("color") != null)
-                    {
-                        color = evElement.Attribute("color").Value;
-                    }
-                    if (isYesterday)
-                    {
-                        if (!EventUtils.EndsToday(start, end, isDuration))
+                        var name = evElement.Attribute("name").Value;
+                        var parsedStart = DateTime.Parse(evElement.Attribute("start").Value, CultureInfo.InvariantCulture);
+                        TimeSpan parsedDuration = TimeSpan.Zero;
+                        DateTime parsedEnd = DateTime.Now;
+                        bool isDuration;
+                        if (evElement.Attribute("duration") != null)
                         {
-                            var e1 = new DailyEvent(name, parsedStart.Hour, 24, 0, color, false);
-                            end = start + end - 24;
-                            start = 0;
-                            var e2 = new DailyEvent(name, parsedStart.Hour, parsedStart.Minute, end, color, isDuration);
-                            if (isToday) eg.AddEvent(e1);
-                            eg.AddEvent(e2);
+                            parsedDuration = TimeSpan.Parse(evElement.Attribute("duration").Value, CultureInfo.InvariantCulture);
+                            isDuration = true;
                         }
-                        else if (isToday)
+                        else if (evElement.Attribute("end") != null)
+                        {
+                            parsedEnd = DateTime.Parse(evElement.Attribute("end").Value, CultureInfo.InvariantCulture);
+                            isDuration = false;
+                        }
+                        else
+                        {
+                            parsedDuration = TimeSpan.Zero;
+                            parsedEnd = parsedStart;
+                            isDuration = true;
+                        }
+
+                        var color = "5599ff";
+
+                        var start = parsedStart.Hour + parsedStart.Minute / 60D;
+                        var end = isDuration ? parsedDuration.Hours + parsedDuration.Minutes / 60D : parsedEnd.Hour + parsedEnd.Minute / 60D;
+
+                        if (evElement.Attribute("color") != null)
+                        {
+                            color = evElement.Attribute("color").Value;
+                        }
+                        if (isYesterday)
+                        {
+                            if (!EventUtils.EndsToday(start, end, isDuration))
+                            {
+                                var e1 = new DailyEvent(name, parsedStart.Hour, 24, 0, color, false);
+                                end = start + end - 24;
+                                start = 0;
+                                var e2 = new DailyEvent(name, parsedStart.Hour, parsedStart.Minute, end, color, isDuration);
+                                if (isToday) eg.AddEvent(e1);
+                                eg.AddEvent(e2);
+                            }
+                            else if (isToday)
+                            {
+                                var ev = new DailyEvent(name, parsedStart.Hour, parsedStart.Minute, end, color, isDuration);
+                                eg.AddEvent(ev);
+                            }
+                        }
+                        else
                         {
                             var ev = new DailyEvent(name, parsedStart.Hour, parsedStart.Minute, end, color, isDuration);
                             eg.AddEvent(ev);
                         }
                     }
-                    else
-                    {
-                        var ev = new DailyEvent(name, parsedStart.Hour, parsedStart.Minute, end, color, isDuration);
-                        eg.AddEvent(ev);
-                    }
+                    if (eg.Events.Count != 0) AddEventGroup(eg);
                 }
-                if (eg.Events.Count != 0) AddEventGroup(eg);
+                SpecialEvents.Add(new DailyEvent("Reset", TimeManager.Instance.ResetHour, 0, 0, "ff0000"));
+
+
+
             }
-            SpecialEvents.Add(new DailyEvent("Reset", TimeManager.Instance.ResetHour, 0, 0, "ff0000"));
+            catch (Exception)
+            {
+
+                var res = System.Windows.Forms.MessageBox.Show($"There was an error while reading events-{region}.xml. Try correcting the error and press Retry to try again, else press Cancel to build a default config file.", "TCC", MessageBoxButtons.RetryCancel);
+
+                if (res == DialogResult.Cancel) File.Delete(path);
+                LoadEventFile(today, region);
+                return;
+            }
         }
+
         public void ClearEvents()
         {
             EventGroups.Clear();
@@ -345,7 +367,7 @@ namespace TCC.ViewModels
             }
             catch (Exception)
             {
-                var res = MessageBox.Show("Could not write character data to characters.xml. File is being used by another process. Try again?", "TCC", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                var res = System.Windows.MessageBox.Show("Could not write character data to characters.xml. File is being used by another process. Try again?", "TCC", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (res == MessageBoxResult.Yes) SaveCharDoc(doc);
             }
         }
