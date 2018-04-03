@@ -47,8 +47,8 @@ namespace TCC.Parsing
         private static void InitDb(uint serverId)
         {
             var server = BasicTeraData.Instance.Servers.GetServer(serverId);
-            if (server == null) Region = "EU";
-            else Region = server.Region;
+            //if (server == null) Region = "EU";
+            /*else*/ Region = server.Region;
             var td = new TeraData(Region);
             var lang = td.GetLanguage(Region);
             App.SendUsageStat();
@@ -81,7 +81,7 @@ namespace TCC.Parsing
                 Version = message.Versions[0];
                 OpcodeDownloader.DownloadIfNotExist(Version, Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/"));
                 if (!File.Exists(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/{message.Versions[0]}.txt")) && !File.Exists(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/protocol.{message.Versions[0]}.map"))
- || !File.Exists(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/smt_{message.Versions[0]}.txt")) && !File.Exists(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/sysmsg.{message.Versions[0]}.map")))
+                    || !File.Exists(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/smt_{message.Versions[0]}.txt")) && !File.Exists(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/sysmsg.{message.Versions[0]}.map")))
                 {
                     {
                         BasicTeraData.LogError("Unknown client version: " + message.Versions[0]);
@@ -813,10 +813,10 @@ namespace TCC.Parsing
             GroupWindowViewModel.Instance.SetRaid(p.Raid);
             foreach (var user in p.Members)
             {
-                Task.Delay(200).ContinueWith(t =>
-                {
+                //Task.Delay(200).ContinueWith(t =>
+                //{
                     GroupWindowViewModel.Instance.AddOrUpdateMember(user);
-                });
+                //});
             }
         }
         public static void HandlePartyMemberLeave(S_LEAVE_PARTY_MEMBER p)
