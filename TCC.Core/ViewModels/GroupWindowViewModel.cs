@@ -210,16 +210,19 @@ namespace TCC.ViewModels
         public void AddOrUpdateMember(User p)
         {
             if (SettingsManager.IgnoreMeInGroupWindow && p.IsPlayer) return;
-            var user = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
-            if (user == null)
+            lock (_lock)
             {
-                Members.Add(p);
-                SendAddMessage(p.Name);
-                return;
+                var user = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
+                if (user == null)
+                {
+                    Members.Add(p);
+                    SendAddMessage(p.Name);
+                    return;
+                }
+                user.Online = p.Online;
+                user.EntityId = p.EntityId;
+                user.IsLeader = p.IsLeader;
             }
-            user.Online = p.Online;
-            user.EntityId = p.EntityId;
-            user.IsLeader = p.IsLeader;
         }
         private void SendAddMessage(string name)
         {
