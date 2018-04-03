@@ -18,6 +18,7 @@ using TCC.Windows;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace TCC
 {
@@ -200,34 +201,26 @@ namespace TCC
 
 
             GroupWindowViewModel.Instance.AddOrUpdateMember(u);
-
-            var t = new Thread(new ThreadStart(() =>
+            var l = new List<User>();
+            for (uint i = 0; i < 10; i++)
             {
-                uint i = 0;
-                while (true)
+                l.Add(new User(GroupWindowViewModel.Instance.GetDispatcher())
                 {
-                    var usr = new User(GroupWindowViewModel.Instance.GetDispatcher())
-                    { Name = $"T{i}", PlayerId = i, ServerId = 0 };
-                    GroupWindowViewModel.Instance.AddOrUpdateMember(usr);
-                    i++;
-                }
-            }));
-            t.Name = "test";
-            t.Start();
-            while (true)
-            {
-                GroupWindowViewModel.Instance.UpdateMemberHp(10, 0, 25, 50);
+                    Name = i.ToString(),
+                    PlayerId = i,
+                    ServerId = i,
+                    EntityId = i
+                });
             }
-            //foreach (var user in GroupWindowViewModel.Instance.Members)
-            //{
-            //    user.AddOrRefreshBuff(new Abnormality(4611, true, true, false, AbnormalityType.Buff),60*100*60,1);
-            //    user.AddOrRefreshBuff(new Abnormality(46126, true, true, false, AbnormalityType.Buff),60*100*60,1);
-            //    user.AddOrRefreshDebuff(new Abnormality(89308100, true, false, false, AbnormalityType.DOT),60*100*60,5);
-            //    user.AddOrRefreshDebuff(new Abnormality(89308101, true, false, false, AbnormalityType.DOT),60*100*60,5);
 
-            //}
-            //GroupWindowViewModel.Instance.StartRoll();
-            //GroupWindowViewModel.Instance.SetReadyStatus(new ReadyPartyMember());
+            foreach (var item in l)
+            {
+                GroupWindowViewModel.Instance.AddOrUpdateMember(item);
+            }
+            foreach (var item in l)
+            {
+                GroupWindowViewModel.Instance.AddOrUpdateMember(item);
+            }
         }
 
         public static void CloseApp()
