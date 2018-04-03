@@ -95,36 +95,36 @@ namespace TCC.ViewModels
         }
         public bool Exists(string name)
         {
-            return Members.Any(x => x.Name == name);
+            return Members.ToSyncArray().Any(x => x.Name == name);
         }
         public bool Exists(uint pId, uint sId)
         {
-            return Members.Any(x => x.PlayerId == pId && x.ServerId == sId);
+            return Members.ToSyncArray().Any(x => x.PlayerId == pId && x.ServerId == sId);
         }
 
         public bool TryGetUser(string name, out User u)
         {
-            u = Exists(name) ? Members.FirstOrDefault(x => x.Name == name) : null;
+            u = Exists(name) ? Members.ToSyncArray().FirstOrDefault(x => x.Name == name) : null;
             return Exists(name);
         }
         public bool TryGetUser(ulong id, out User u)
         {
-            u = Exists(id) ? Members.FirstOrDefault(x => x.EntityId == id) : null;
+            u = Exists(id) ? Members.ToSyncArray().FirstOrDefault(x => x.EntityId == id) : null;
             return Exists(id);
         }
         public bool TryGetUser(uint pId, uint sId, out User u)
         {
-            u = Exists(pId, sId) ? Members.FirstOrDefault(x => x.PlayerId == pId && x.ServerId == sId) : null;
+            u = Exists(pId, sId) ? Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == pId && x.ServerId == sId) : null;
             return Exists(pId, sId);
         }
 
         public bool IsLeader(string name)
         {
-            return Members.FirstOrDefault(x => x.Name == name)?.IsLeader ?? false;
+            return Members.ToSyncArray().FirstOrDefault(x => x.Name == name)?.IsLeader ?? false;
         }
         public bool HasPowers(string name)
         {
-            return Members.FirstOrDefault(x => x.Name == name)?.CanInvite ?? false;
+            return Members.ToSyncArray().FirstOrDefault(x => x.Name == name)?.CanInvite ?? false;
         }
         public bool AmILeader()
         {
@@ -134,11 +134,19 @@ namespace TCC.ViewModels
         {
             if (target == 0)
             {
-                Members.ToList().ForEach(user => user.HasAggro = false);
+                //Members.ToList().ForEach(user => user.HasAggro = false);
+                foreach (var item in Members.ToSyncArray())
+                {
+                    item.HasAggro = false;
+                }
                 return;
             }
             if (_aggroHolder == target) return;
-            Members.ToList().ForEach(user => user.HasAggro = user.EntityId == target);
+            //Members.ToList().ForEach(user => user.HasAggro = user.EntityId == target);
+            foreach (var item in Members.ToSyncArray())
+            {
+                item.HasAggro = item.EntityId == target;
+            }
         }
         public void SetAggroCircle(S_USER_EFFECT p)
         {
@@ -153,7 +161,7 @@ namespace TCC.ViewModels
         public void BeginOrRefreshAbnormality(Abnormality ab, int stacks, uint duration, uint playerId, uint serverId)
         {
             if (ab.Infinity) duration = uint.MaxValue;
-            var u = Members.ToArray().FirstOrDefault(x => x.ServerId == serverId && x.PlayerId == playerId);
+            var u = Members.ToSyncArray().FirstOrDefault(x => x.ServerId == serverId && x.PlayerId == playerId);
             if (u == null) return;
 
             if (ab.Type == AbnormalityType.Buff)
@@ -178,13 +186,7 @@ namespace TCC.ViewModels
         public void EndAbnormality(Abnormality ab, uint playerId, uint serverId)
         {
             User u = null;
-            try
-            {
-                u = Members.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
-            }
-            catch (Exception)
-            {
-            }
+            u = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
             if (u == null) return;
 
             if (ab.Type == AbnormalityType.Buff)
@@ -205,7 +207,7 @@ namespace TCC.ViewModels
         }
         public void ClearAbnormality(uint playerId, uint serverId)
         {
-            Members.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId)?.ClearAbnormalities();
+            Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId)?.ClearAbnormalities();
         }
         public void AddOrUpdateMember(User p)
         {
@@ -262,7 +264,7 @@ namespace TCC.ViewModels
         }
         public void RemoveMember(uint playerId, uint serverId, bool kick = false)
         {
-            var u = Members.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
+            var u = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
             if (u == null) return;
             Members.Remove(u);
             if (!kick) SendLeaveMessage(u.Name);
@@ -275,13 +277,13 @@ namespace TCC.ViewModels
         }
         public void LogoutMember(uint playerId, uint serverId)
         {
-            var u = Members.FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
+            var u = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
             if (u == null) return;
             u.Online = false;
         }
         public void RemoveMe()
         {
-            var me = Members.FirstOrDefault(x => x.IsPlayer);
+            var me = Members.ToSyncArray().FirstOrDefault(x => x.IsPlayer);
             if (me != null) Members.Remove(me);
         }
         public void ClearAllBuffs()
