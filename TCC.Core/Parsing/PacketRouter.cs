@@ -203,7 +203,7 @@ namespace TCC.Parsing
             {
                 BossGageWindowViewModel.Instance.UnsetBossTarget(p.EntityId);
             }
-            var b = BossGageWindowViewModel.Instance.NpcList.FirstOrDefault(x => x.EntityId == p.EntityId);
+            var b = BossGageWindowViewModel.Instance.NpcList.ToSyncArray().FirstOrDefault(x => x.EntityId == p.EntityId);
             if (BossGageWindowViewModel.Instance.CurrentHHphase == HarrowholdPhase.None) return;
             if (b != null && b.IsBoss && b.Visible == System.Windows.Visibility.Visible) GroupWindowViewModel.Instance.SetAggro(p.Target);
 
