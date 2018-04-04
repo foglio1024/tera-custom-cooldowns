@@ -194,7 +194,7 @@ namespace TCC
                     while (!ready) Thread.Sleep(1);
 
                     App.SplashScreen.SetText("Extracting zip...");
-
+                    if (Directory.Exists(Environment.CurrentDirectory + "/tmp")) Directory.Delete(Environment.CurrentDirectory + "/tmp");
                     ZipFile.ExtractToDirectory("update.zip", Environment.CurrentDirectory + "/tmp");
                     App.SplashScreen.SetText("Moving files...");
 
