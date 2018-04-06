@@ -57,6 +57,8 @@ namespace TCC.Windows
         private bool updateAnswer = false;
         public bool AskUpdate(string updateText)
         {
+            Topmost = true;
+            Topmost = false;
             SetText(updateText);
             Dispatcher.Invoke(() => ShowHideButton(true));
             while (waiting)
