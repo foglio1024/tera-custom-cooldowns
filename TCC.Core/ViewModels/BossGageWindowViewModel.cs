@@ -228,7 +228,14 @@ namespace TCC.ViewModels
                     sb.Append("\\");
                 }
             }
-            Clipboard.SetText(sb.ToString());
+            try
+            {
+                Clipboard.SetText(sb.ToString());
+            }
+            catch 
+            {
+                ChatWindowViewModel.Instance.AddTccMessage("Failed to copy boss HP.");
+            }
         }
         public void ClearBosses()
         {
