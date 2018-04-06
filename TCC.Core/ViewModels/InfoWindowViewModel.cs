@@ -51,7 +51,7 @@ namespace TCC.ViewModels
             EventGroups = new SynchronizedObservableCollection<EventGroup>(_dispatcher);
             Markers = new SynchronizedObservableCollection<TimeMarker>(_dispatcher);
             SpecialEvents = new SynchronizedObservableCollection<DailyEvent>(_dispatcher);
-            LoadCharacters();
+            LoadCharDoc();
         }
 
         public void LoadEvents(DayOfWeek today, string region)
@@ -222,6 +222,7 @@ namespace TCC.ViewModels
         }
         public void SelectCharacter(Character c)
         {
+            if (c == null) return;
             _selectedCharacterId = c.Id;
             foreach (var ch in Characters)
             {
@@ -357,7 +358,7 @@ namespace TCC.ViewModels
         {
             try
             {
-                var fs = new FileStream(Environment.CurrentDirectory + "/resources/config/characters.xml", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+                var fs = new FileStream(AppDomain.CurrentDomain.BaseDirectory + "/resources/config/characters.xml", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
                 fs.SetLength(0);
                 using (var sr = new StreamWriter(fs, new UTF8Encoding(true)))
                 {
@@ -372,7 +373,23 @@ namespace TCC.ViewModels
             }
         }
 
-
+        private void LoadCharDoc()
+        {
+            try
+            {
+                LoadCharacters();
+            }
+            catch (Exception)
+            {
+                var res = System.Windows.Forms.MessageBox.Show($"There was an error while reading characters.xml. Try correcting the error and press Retry to try again, else press Cancel to delete current data.", "TCC", MessageBoxButtons.RetryCancel);
+                if (res == DialogResult.Retry) LoadCharDoc();
+                else
+                {
+                    File.Delete("resources/config/characters.xml");
+                    LoadCharDoc();
+                }
+            }
+        }
         private void LoadCharacters()
         {
             if (!File.Exists("resources/config/characters.xml")) return;
