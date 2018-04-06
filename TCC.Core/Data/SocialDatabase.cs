@@ -9,7 +9,7 @@ namespace TCC.Data
         public static Dictionary<uint, string> Social;
         public static void Load()
         {
-            var f = File.OpenText(Environment.CurrentDirectory + "/resources/data/social.tsv");
+            var f = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "/resources/data/social.tsv");
             Social = new Dictionary<uint, string>();
             while (true)
             {

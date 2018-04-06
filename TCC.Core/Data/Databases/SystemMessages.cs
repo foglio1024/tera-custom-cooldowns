@@ -10,7 +10,7 @@ namespace TCC.Data.Databases
 
         public static void Load()
         {
-            var f = File.OpenText(Environment.CurrentDirectory + "/resources/data/sys-messages.tsv");
+            var f = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "/resources/data/sys-messages.tsv");
             Messages = new Dictionary<string, SystemMessage>();
             while (true)
             {

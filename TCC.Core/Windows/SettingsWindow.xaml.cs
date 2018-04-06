@@ -69,7 +69,7 @@ namespace TCC.Windows
 
         private void OpenSettingsFolder(object sender, RoutedEventArgs e)
         {
-            Process.Start(Environment.CurrentDirectory + "/resources/config");
+            Process.Start(AppDomain.CurrentDomain.BaseDirectory + "/resources/config");
         }
 
         private void ConnectToTwitch(object sender, RoutedEventArgs e)

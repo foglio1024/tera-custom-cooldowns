@@ -22,8 +22,8 @@ namespace TCC.Data.Databases
 
         void LoadDoc(string region)
         {
-            MonstersDoc = XDocument.Load(Environment.CurrentDirectory + @"/resources/data/monsters/monsters-" + region + ".xml");
-            OverrideDoc = XDocument.Load(Environment.CurrentDirectory + @"/resources/data/monsters/monsters-override.xml");
+            MonstersDoc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"/resources/data/monsters/monsters-" + region + ".xml");
+            OverrideDoc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"/resources/data/monsters/monsters-override.xml");
         }
         void ParseDoc()
         {

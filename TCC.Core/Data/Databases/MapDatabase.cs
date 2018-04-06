@@ -93,7 +93,7 @@ namespace TCC.Data.Databases
 
         static void LoadNames()
         {
-            var f = File.OpenText(Environment.CurrentDirectory + "/resources/data/regions.tsv");
+            var f = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "/resources/data/regions.tsv");
             while (true)
             {
                 var line = f.ReadLine();

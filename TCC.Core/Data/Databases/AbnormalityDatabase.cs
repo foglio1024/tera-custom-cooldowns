@@ -14,7 +14,7 @@ namespace TCC.Data.Databases
 
         public AbnormalityDatabase(string lang)
         {
-            //var f = File.OpenText(Environment.CurrentDirectory + "/resources/data/abnormalities/abnormals-"+lang+".tsv");
+            //var f = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "/resources/data/abnormalities/abnormals-"+lang+".tsv");
             Abnormalities = new Dictionary<uint, Abnormality>();
             //while (true)
             //{
@@ -47,7 +47,7 @@ namespace TCC.Data.Databases
 
             //    Abnormalities.Add(id, ab);
             //}
-            var hd = File.OpenText(Environment.CurrentDirectory + "/resources/data/abnormalities/hotdot-" + lang +".tsv");
+            var hd = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "/resources/data/abnormalities/hotdot-" + lang +".tsv");
             while (true)
             {
                 var l = hd.ReadLine();

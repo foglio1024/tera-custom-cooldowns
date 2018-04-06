@@ -96,7 +96,7 @@ namespace TCC
             }
             App.SplashScreen.SetText("Extracting database...");
 
-            ZipFile.ExtractToDirectory("icons.zip", Environment.CurrentDirectory);
+            ZipFile.ExtractToDirectory("icons.zip", AppDomain.CurrentDomain.BaseDirectory);
             App.SplashScreen.SetText("Extracting database... Done.");
 
             foreach (var dirPath in Directory.GetDirectories(baseDatabaseDir, "*", SearchOption.AllDirectories))
@@ -165,7 +165,7 @@ namespace TCC
                 }
                 catch (Exception ex)
                 {
-                    File.WriteAllText(Environment.CurrentDirectory + "/update-check-error.txt", "##### CRASH #####\r\n" + ex.Message + "\r\n" +
+                    File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "/update-check-error.txt", "##### CRASH #####\r\n" + ex.Message + "\r\n" +
                              ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" + ex.InnerException +
                              "\r\n" + ex.TargetSite);
                     //MessageBox.Show("Error while checking updates. More info in update-check-error.txt", "TCC", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -194,19 +194,19 @@ namespace TCC
                     while (!ready) Thread.Sleep(1);
 
                     App.SplashScreen.SetText("Extracting zip...");
-                    if (Directory.Exists(Environment.CurrentDirectory + "/tmp")) Directory.Delete(Environment.CurrentDirectory + "/tmp");
-                    ZipFile.ExtractToDirectory("update.zip", Environment.CurrentDirectory + "/tmp");
+                    if (Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "/tmp")) Directory.Delete(AppDomain.CurrentDomain.BaseDirectory + "/tmp");
+                    ZipFile.ExtractToDirectory("update.zip", AppDomain.CurrentDomain.BaseDirectory + "/tmp");
                     App.SplashScreen.SetText("Moving files...");
 
-                    File.Move(Environment.CurrentDirectory + "/tmp/TCCupdater.exe", Environment.CurrentDirectory + "/TCCupdater.exe");
+                    File.Move(AppDomain.CurrentDomain.BaseDirectory + "/tmp/TCCupdater.exe", AppDomain.CurrentDomain.BaseDirectory + "/TCCupdater.exe");
                     App.SplashScreen.SetText("Starting updater...");
 
-                    Process.Start(Environment.CurrentDirectory + "/TCCupdater.exe");
+                    Process.Start(AppDomain.CurrentDomain.BaseDirectory + "/TCCupdater.exe");
                     Environment.Exit(0);
                 }
                 catch (Exception ex)
                 {
-                    File.WriteAllText(Environment.CurrentDirectory + "/update-error.txt", "##### CRASH #####\r\n" + ex.Message + "\r\n" +
+                    File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "/update-error.txt", "##### CRASH #####\r\n" + ex.Message + "\r\n" +
          ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" + ex.InnerException +
          "\r\n" + ex.TargetSite);
                     //           MessageBox.Show("Error while checking updates. More info in update-error.txt", "TCC", MessageBoxButton.OK, MessageBoxImage.Error);

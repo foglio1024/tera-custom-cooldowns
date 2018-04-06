@@ -33,7 +33,7 @@ namespace TCC
         private static void GlobalUnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
         {
             var ex = (Exception)e.ExceptionObject;
-            File.WriteAllText(Environment.CurrentDirectory + "/error.txt",
+            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "/error.txt",
                 "##### CRASH #####\r\n" + ex.Message + "\r\n" +
                 ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" + ex.InnerException +
                 "\r\n" + ex.TargetSite);
@@ -129,7 +129,7 @@ namespace TCC
             Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.Normal;
             try
             {
-                File.Delete(Environment.CurrentDirectory + "/TCCupdater.exe");
+                File.Delete(AppDomain.CurrentDomain.BaseDirectory + "/TCCupdater.exe");
             }
             catch (Exception) { }
             //SplashScreen = null; //######################################################################

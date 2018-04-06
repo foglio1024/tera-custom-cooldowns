@@ -65,9 +65,9 @@ namespace TCC
 
         public static void LoadWindowSettings()
         {
-            if (File.Exists(Environment.CurrentDirectory + @"/tcc-config.xml"))
+            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml"))
             {
-                SettingsDoc = XDocument.Load(Environment.CurrentDirectory + @"/tcc-config.xml");
+                SettingsDoc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml");
 
                 foreach (var ws in SettingsDoc.Descendants().Where(x => x.Name == "WindowSetting"))
                 {
@@ -115,9 +115,9 @@ namespace TCC
         }
         public static void LoadSettings()
         {
-            if (File.Exists(Environment.CurrentDirectory + @"/tcc-config.xml"))
+            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml"))
             {
-                SettingsDoc = XDocument.Load(Environment.CurrentDirectory + @"/tcc-config.xml");
+                SettingsDoc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml");
 
                 var b = SettingsDoc.Descendants("OtherSettings").FirstOrDefault();
                 if (b == null) return;
@@ -408,7 +408,7 @@ namespace TCC
         {
             try
             {
-                doc.Save(Environment.CurrentDirectory + @"/tcc-config.xml");
+                doc.Save(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml");
             }
             catch (Exception)
             {

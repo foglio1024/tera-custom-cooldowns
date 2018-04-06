@@ -15,7 +15,7 @@ namespace TCC.Data.Databases
         public Dictionary<uint, Dictionary<int, int>> ExpData;
         public ItemsDatabase(string lang = "EU-EN")
         {
-            var f = File.OpenText(Environment.CurrentDirectory + "/resources/data/items/items-" + lang + ".tsv");
+            var f = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "/resources/data/items/items-" + lang + ".tsv");
             Items = new Dictionary<uint, Item>();
             while (true)
             {
@@ -41,7 +41,7 @@ namespace TCC.Data.Databases
                 var item = new Item(id, name, grad, expId, cd, icon);
                 Items.Add(id, item);
             }
-            var xpFile = XDocument.Load(Environment.CurrentDirectory + "/resources/data/EquipmentExpData.xml");
+            var xpFile = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + "/resources/data/EquipmentExpData.xml");
             ExpData = new Dictionary<uint, Dictionary<int, int>>();
             foreach (var xElement in xpFile.Descendants().Where(x => x.Name == "EquipmentExp"))
             {
