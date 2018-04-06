@@ -39,8 +39,8 @@ namespace TCC.ViewModels
             }
         }
         public int Size => Members.Count;
-        public int ReadyCount => Members.Count(x => x.Ready == ReadyStatus.Ready);
-        public int AliveCount => Members.Count(x => x.Alive);
+        public int ReadyCount => Members.ToSyncArray().Count(x => x.Ready == ReadyStatus.Ready);
+        public int AliveCount => Members.ToSyncArray().Count(x => x.Alive);
         public bool Formed => Size > 0;
         public bool Rolling { get; set; }
 
@@ -91,7 +91,7 @@ namespace TCC.ViewModels
         }
         public bool Exists(ulong id)
         {
-            return Members.Any(x => x.EntityId == id);
+            return Members.ToSyncArray().Any(x => x.EntityId == id);
         }
         public bool Exists(string name)
         {
