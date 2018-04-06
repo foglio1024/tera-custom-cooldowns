@@ -40,7 +40,14 @@ namespace TCC
 
         private void Client_OnDisconnected(object sender, TwitchLib.Events.Client.OnDisconnectedArgs e)
         {
-            client.Connect();
+            try
+            {
+                client.Connect();
+            }
+            catch 
+            {
+
+            }
         }
     }
 }
