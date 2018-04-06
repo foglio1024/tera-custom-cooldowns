@@ -813,10 +813,7 @@ namespace TCC.Parsing
             GroupWindowViewModel.Instance.SetRaid(p.Raid);
             foreach (var user in p.Members)
             {
-                //Task.Delay(200).ContinueWith(t =>
-                //{
                     GroupWindowViewModel.Instance.AddOrUpdateMember(user);
-                //});
             }
         }
         public static void HandlePartyMemberLeave(S_LEAVE_PARTY_MEMBER p)
