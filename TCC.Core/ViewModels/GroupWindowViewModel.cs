@@ -288,21 +288,30 @@ namespace TCC.ViewModels
         }
         public void ClearAllBuffs()
         {
-            Members.ToList().ForEach(x =>
+            foreach (var x in Members.ToSyncArray())
             {
-                x.Buffs.ToList().ForEach(b => b.Dispose());
+                foreach (var b in x.Buffs.ToSyncArray())
+                {
+                    b.Dispose();
+                }
                 x.Buffs.Clear();
-            });
+            }
         }
         internal void ClearAllAbnormalities()
         {
-            Members.ToList().ForEach(x =>
+            foreach (var x in Members.ToSyncArray())
             {
-                x.Buffs.ToList().ForEach(b => b.Dispose());
+                foreach (var b in x.Buffs.ToSyncArray())
+                {
+                    b.Dispose();
+                }
                 x.Buffs.Clear();
-                x.Debuffs.ToList().ForEach(b => b.Dispose());
+                foreach (var b in x.Debuffs.ToSyncArray())
+                {
+                    b.Dispose();
+                }
                 x.Debuffs.Clear();
-            });
+            }
         }
         public void SetNewLeader(ulong entityId, string name)
         {
