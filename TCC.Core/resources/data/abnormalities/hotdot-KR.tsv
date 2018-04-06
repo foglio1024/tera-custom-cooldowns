@@ -729,20 +729,24 @@
 6002	CritPower1	Buff	True	abs	6000	0	2	진룡의 혈맥			몬스터 공격 시 치명타 위력이 $H_W_GOOD+2$COLOR_END배 증가됩니다.	icon_status.passive_dragonblood2	icon_status.passive_dragonblood2	True
 6003	CritPower1	Buff	True	abs	6000	0	1	화염의 기운			몬스터 공격 시 치명타 위력이 $H_W_GOOD+1.5$COLOR_END배 증가됩니다.	icon_skills.heataura_tex	icon_skills.heataura_tex	True
 6004	CritPower1	Buff	True	abs	6000	0	2	폭염의 기운			몬스터 공격 시 치명타 위력이 $H_W_GOOD+2$COLOR_END배 증가됩니다.	icon_skills.flameaura_tex	icon_skills.flameaura_tex	True
-6006	Power	Debuff	True	abs	86400000	0	0	피닉스의 기운			지속 시간 동안 무적 상태가 됩니다. 스킬 사용 시 해제됩니다.	icon_status.revivenow_status_tex	icon_status.revivenow_status_tex	True
 6006	HPChange	Buff	True	perc	1000	1	1	피닉스의 기운			지속 시간 동안 무적 상태가 됩니다. 스킬 사용 시 해제됩니다.	icon_status.revivenow_status_tex	icon_status.revivenow_status_tex	True
 6006	CrystalBind	Buff	True	abs	7000	0	1	피닉스의 기운			지속 시간 동안 무적 상태가 됩니다. 스킬 사용 시 해제됩니다.	icon_status.revivenow_status_tex	icon_status.revivenow_status_tex	True
 6006	Immune	Buff	True	27	12000	0	0	피닉스의 기운			지속 시간 동안 무적 상태가 됩니다. 스킬 사용 시 해제됩니다.	icon_status.revivenow_status_tex	icon_status.revivenow_status_tex	True
+6006	ReloadingSkill	Debuff	True	abs	86400000	0	6500003	피닉스의 기운			지속 시간 동안 무적 상태가 됩니다. 스킬 사용 시 해제됩니다.	icon_status.revivenow_status_tex	icon_status.revivenow_status_tex	True
 6006	StatusImmune	Buff	True	swch	12000	0	0	피닉스의 기운			지속 시간 동안 무적 상태가 됩니다. 스킬 사용 시 해제됩니다.	icon_status.revivenow_status_tex	icon_status.revivenow_status_tex	True
 6007	HPChange	Buff	True	perc	1000	1	1	피닉스의 회복			전체 HP, MP 대비 $H_W_GOOD100%$COLOR_END에 달하는 HP, MP가 즉시 회복됩니다.	icon_items.eagles_potion_level_47_tex	icon_items.eagles_potion_level_47_tex	True
 6007	MPChange	Buff	True	perc	1000	1	1	피닉스의 회복			전체 HP, MP 대비 $H_W_GOOD100%$COLOR_END에 달하는 HP, MP가 즉시 회복됩니다.	icon_items.eagles_potion_level_47_tex	icon_items.eagles_potion_level_47_tex	True
-6008	Power	Debuff	True	abs	3600000	0	0	피닉스의 화신 [패시브] 대기시간			화신의 기운이 모여들고 있습니다. 화신의 기운이 모두 모여들기 전까지 $H_W_GOOD피닉스의 화신$COLOR_END의 효과가 발동되지 않습니다.	icon_skills.flameaura_tex	icon_skills.flameaura_tex	True
+6008	ReloadingSkill	Debuff	True	abs	3600000	0	6500004	[영물](전설)패시브 공용 대기시간			[영물]의 기운을 받았습니다. 지속시간이 끝나기 전까지 전설급 [영물]들의 고유 효과가 발동되지 않습니다.	icon_skills.vehicle_debuff_legend_tex	icon_skills.vehicle_debuff_legend_tex	True
+6008	344	Debuff	True	swch	3600000	0	100007	[영물](전설)패시브 공용 대기시간			[영물]의 기운을 받았습니다. 지속시간이 끝나기 전까지 전설급 [영물]들의 고유 효과가 발동되지 않습니다.	icon_skills.vehicle_debuff_legend_tex	icon_skills.vehicle_debuff_legend_tex	True
 6009	CrystalBind	Buff	True	abs	7000	0	1	피닉스의 보호			사망 시 크리스탈이 깨지는 것을 방지합니다.	icon_items.q_closedspace_stone_05_tex	icon_items.q_closedspace_stone_05_tex	True
-6011	Power	Debuff	True	abs	86400000	0	0	피닉스의 화신 [패시브] 대기시간			화신의 기운이 모여들고 있습니다. 화신의 기운이 모두 모여들기 전까지 $H_W_GOOD피닉스의 화신$COLOR_END의 효과가 발동되지 않습니다.	icon_skills.heataura_tex	icon_skills.heataura_tex	True
-6016	Power	Debuff	True	abs	3600000	0	0	피닉스의 기운			지속 시간 동안 무적 상태가 됩니다. 스킬 사용 시 해제됩니다.	icon_status.revivenow_status_tex	icon_status.revivenow_status_tex	True
+6011	ReloadingSkill	Debuff	True	abs	86400000	0	6500003	[영물](희귀)패시브 공용 대기시간			[영물]의 기운을 받았습니다. 지속시간이 끝나기 전까지 희귀급 [영물]들의 고유 효과가 발동되지 않습니다.	icon_skills.vehicle_debuff_rare_tex	icon_skills.vehicle_debuff_rare_tex	True
+6011	343	Debuff	True	swch	86400000	0	100005	[영물](희귀)패시브 공용 대기시간			[영물]의 기운을 받았습니다. 지속시간이 끝나기 전까지 희귀급 [영물]들의 고유 효과가 발동되지 않습니다.	icon_skills.vehicle_debuff_rare_tex	icon_skills.vehicle_debuff_rare_tex	True
+6012	CritPower1	Buff	True	abs	6000	0	1	행운의 기운			몬스터 공격 시 치명타 위력이 $H_W_GOOD+1.5$COLOR_END배 증가됩니다.	icon_skills.bluebird_passive_rare_tex	icon_skills.bluebird_passive_rare_tex	True
+6013	CritPower1	Buff	True	abs	6000	0	2	행운의 상징			몬스터 공격 시 치명타 위력이 $H_W_GOOD+2$COLOR_END배 증가됩니다.	icon_skills.bluebird_passive_legend_tex	icon_skills.bluebird_passive_legend_tex	True
 6016	HPChange	Buff	True	perc	1000	1	1	피닉스의 기운			지속 시간 동안 무적 상태가 됩니다. 스킬 사용 시 해제됩니다.	icon_status.revivenow_status_tex	icon_status.revivenow_status_tex	True
 6016	CrystalBind	Buff	True	abs	7000	0	1	피닉스의 기운			지속 시간 동안 무적 상태가 됩니다. 스킬 사용 시 해제됩니다.	icon_status.revivenow_status_tex	icon_status.revivenow_status_tex	True
 6016	Immune	Buff	True	27	12000	0	0	피닉스의 기운			지속 시간 동안 무적 상태가 됩니다. 스킬 사용 시 해제됩니다.	icon_status.revivenow_status_tex	icon_status.revivenow_status_tex	True
+6016	ReloadingSkill	Debuff	True	abs	3600000	0	6500004	피닉스의 기운			지속 시간 동안 무적 상태가 됩니다. 스킬 사용 시 해제됩니다.	icon_status.revivenow_status_tex	icon_status.revivenow_status_tex	True
 6016	StatusImmune	Buff	True	swch	12000	0	0	피닉스의 기운			지속 시간 동안 무적 상태가 됩니다. 스킬 사용 시 해제됩니다.	icon_status.revivenow_status_tex	icon_status.revivenow_status_tex	True
 10100	HPChange	DOT	False	abs	5000	1	-11	맹독 I [크리스탈]			$H_W_BAD1s$COLOR_END마다 $H_W_BAD-11$COLOR_END씩 HP가 지속적으로 감소됩니다.	icon_items.customize9ar_tex	icon_items.customize9ar_tex	True
 10101	HPChange	DOT	False	abs	5000	1	-23	맹독 II [크리스탈]			$H_W_BAD1s$COLOR_END마다 $H_W_BAD-23$COLOR_END씩 HP가 지속적으로 감소됩니다.	icon_items.customize9br_tex	icon_items.customize9br_tex	True
@@ -1741,7 +1745,7 @@
 400700	AtkPotion	Buff	True	perc	30000	0	1.1	격노 I			힘이 $H_W_GOOD26$COLOR_END 만큼 향상되고, 충격과 균형도 각각 $H_W_GOOD50%$COLOR_END씩 향상됩니다. 추가로 몬스터 공격 시에는 스킬 데미지가 $H_W_GOOD10%$COLOR_END 향상됩니다.	icon_skills.fury_tex	icon_skills.fury_tex	True
 400701	Power	Buff	True	abs	30000	0	29	격노 II			힘이 $H_W_GOOD29$COLOR_END 만큼 향상되고, 충격과 균형도 각각 $H_W_GOOD60%$COLOR_END씩 향상됩니다. 추가로 몬스터 공격 시에는 스킬 데미지가 $H_W_GOOD10%$COLOR_END 향상됩니다.	icon_skills.fury_tex	icon_skills.fury_tex	True
 400701	ImpactEffective	Buff	True	perc	30000	0	1.6	격노 II			힘이 $H_W_GOOD29$COLOR_END 만큼 향상되고, 충격과 균형도 각각 $H_W_GOOD60%$COLOR_END씩 향상됩니다. 추가로 몬스터 공격 시에는 스킬 데미지가 $H_W_GOOD10%$COLOR_END 향상됩니다.	icon_skills.fury_tex	icon_skills.fury_tex	True
-400701	Ballance	Buff	True	perc	30000	0	1.5	격노 II			힘이 $H_W_GOOD29$COLOR_END 만큼 향상되고, 충격과 균형도 각각 $H_W_GOOD60%$COLOR_END씩 향상됩니다. 추가로 몬스터 공격 시에는 스킬 데미지가 $H_W_GOOD10%$COLOR_END 향상됩니다.	icon_skills.fury_tex	icon_skills.fury_tex	True
+400701	Ballance	Buff	True	perc	30000	0	1.6	격노 II			힘이 $H_W_GOOD29$COLOR_END 만큼 향상되고, 충격과 균형도 각각 $H_W_GOOD60%$COLOR_END씩 향상됩니다. 추가로 몬스터 공격 시에는 스킬 데미지가 $H_W_GOOD10%$COLOR_END 향상됩니다.	icon_skills.fury_tex	icon_skills.fury_tex	True
 400701	AtkPotion	Buff	True	perc	30000	0	1.1	격노 II			힘이 $H_W_GOOD29$COLOR_END 만큼 향상되고, 충격과 균형도 각각 $H_W_GOOD60%$COLOR_END씩 향상됩니다. 추가로 몬스터 공격 시에는 스킬 데미지가 $H_W_GOOD10%$COLOR_END 향상됩니다.	icon_skills.fury_tex	icon_skills.fury_tex	True
 400800	MovSpd	Stun	False	setp	6000	0	0.4	살기 분출 I			이동 속도가 $H_W_BAD60%$COLOR_END 감소됩니다. 추가로 플레이어 캐릭터에게 효과 적용 시에는 효과 지속 시간 동안 회피 및 이동 계열 스킬을 사용할 수 없습니다.	icon_skills.murderousvent_tex	icon_skills.murderousvent_tex	True
 400800	HPDrain	Stun	False	perc	6000	0	0.9	살기 분출 I			이동 속도가 $H_W_BAD60%$COLOR_END 감소됩니다. 추가로 플레이어 캐릭터에게 효과 적용 시에는 효과 지속 시간 동안 회피 및 이동 계열 스킬을 사용할 수 없습니다.	icon_skills.murderousvent_tex	icon_skills.murderousvent_tex	True
@@ -2333,6 +2337,21 @@
 622002	Fear	Stun	False	swch	3000	0	100	혼돈의 저주			혼돈의 저주에 의해 공포에 떨며 도망치고 있습니다!	icon_status.fearstatus_tex	icon_status.fearstatus_tex	True
 622003	Stun	Stun	True	swch	4000	0	5	기절			기절한 상태로 움직일 수 없습니다.	icon_status.confuseup_tex	icon_status.confuseup_tex	True
 623009	336	Buff	True	swch	108000000	0	-1	후카의 실망(수호자 임무 전용)			훈련에 건성으로 참여하는 당신의 모습에 실망한 후카가 반연합에 대한 정보를 제공하지 않습니다.(정보를 얻지 못하면 수호자 점수를 획득할 수 없습니다.)$BR$BR훈련에 열심히 참여하는 모습을 보여주면 해제됩니다.	icon_status.boundmoveup_tex	icon_status.boundmoveup_tex	True
+628000	Endurance	Debuff	True	perc	60000	0	0	분노 보호막			마그누트의 붉은 힘, 분노의 공격을 흡수하는 보호막	icon_skills.focusstance_moveslow_tex	icon_skills.focusstance_moveslow_tex	True
+628000	330	Debuff	True	swch	60000	0	0	분노 보호막			마그누트의 붉은 힘, 분노의 공격을 흡수하는 보호막	icon_skills.focusstance_moveslow_tex	icon_skills.focusstance_moveslow_tex	True
+628000	331	Debuff	True	swch	60000	0	0	분노 보호막			마그누트의 붉은 힘, 분노의 공격을 흡수하는 보호막	icon_skills.focusstance_moveslow_tex	icon_skills.focusstance_moveslow_tex	True
+628001	Endurance	Debuff	True	perc	60000	0	0	증오 보호막			마그누트의 푸른 힘, 증오의 공격을 흡수하는 보호막	icon_skills.focusstance_tex	icon_skills.focusstance_tex	True
+628001	330	Debuff	True	swch	60000	0	0	증오 보호막			마그누트의 푸른 힘, 증오의 공격을 흡수하는 보호막	icon_skills.focusstance_tex	icon_skills.focusstance_tex	True
+628001	331	Debuff	True	swch	60000	0	0	증오 보호막			마그누트의 푸른 힘, 증오의 공격을 흡수하는 보호막	icon_skills.focusstance_tex	icon_skills.focusstance_tex	True
+628002	StackCounter	DOT	True	swch	20000	0	628005	분노 부스터			분노의 힘을 흡수하였습니다. 스택 갯수에 따라 공격력이 크게 증가합니다.	icon_skills.guildskills_str_tex	icon_skills.guildskills_str_tex	True
+628003	StackCounter	DOT	True	swch	20000	0	628010	증오 부스터			증오의 힘을 흡수하였습니다. 스택 갯수에 따라 공격력이 크게 증가합니다.	icon_skills.guildskills_str_tex	icon_skills.guildskills_str_tex	True
+628016	Stun	Stun	True	swch	3000	0	5	기절			기절한 상태로 움직일 수 없습니다.	icon_status.confuseup_tex	icon_status.confuseup_tex	True
+628017	Endurance	Debuff	True	perc	60000	0	0	분노 보호막			마그누트의 붉은 힘, 분노의 공격을 흡수하는 보호막	icon_skills.focusstance_moveslow_tex	icon_skills.focusstance_moveslow_tex	True
+628017	330	Debuff	True	swch	60000	0	0	분노 보호막			마그누트의 붉은 힘, 분노의 공격을 흡수하는 보호막	icon_skills.focusstance_moveslow_tex	icon_skills.focusstance_moveslow_tex	True
+628017	331	Debuff	True	swch	60000	0	0	분노 보호막			마그누트의 붉은 힘, 분노의 공격을 흡수하는 보호막	icon_skills.focusstance_moveslow_tex	icon_skills.focusstance_moveslow_tex	True
+628018	Endurance	Debuff	True	perc	60000	0	0	증오 보호막			마그누트의 푸른 힘, 증오의 공격을 흡수하는 보호막	icon_skills.focusstance_tex	icon_skills.focusstance_tex	True
+628018	330	Debuff	True	swch	60000	0	0	증오 보호막			마그누트의 푸른 힘, 증오의 공격을 흡수하는 보호막	icon_skills.focusstance_tex	icon_skills.focusstance_tex	True
+628018	331	Debuff	True	swch	60000	0	0	증오 보호막			마그누트의 푸른 힘, 증오의 공격을 흡수하는 보호막	icon_skills.focusstance_tex	icon_skills.focusstance_tex	True
 700100	Resurrect	Buff	True	seta	600000	0	1	환생의 축복			축복의 힘으로 지속 시간 내에 사망 시 그 자리에서 즉시 부활할 수 있습니다.	icon_skills.autoresurrect_tex	icon_skills.autoresurrect_tex	True
 700200	MPChange	Buff	True	abs	0	2	-30	안개의 결계 I			자신을 포함한 주변 30m 범위 내 파티원들에게 안개의 결계 효과를 부여합니다. 스킬을 활성화하고 있는 동안 $H_W_BAD2$COLOR_END 마다 $H_W_BAD-30$COLOR_END씩 지속적으로 MP가 감소 합니다.	icon_skills.areahpgain_tex	icon_skills.areahpgain_tex	True
 700200	BuffNearbyParty	Buff	True	seta	0	3	700230	안개의 결계 I			자신을 포함한 주변 30m 범위 내 파티원들에게 안개의 결계 효과를 부여합니다. 스킬을 활성화하고 있는 동안 $H_W_BAD2$COLOR_END 마다 $H_W_BAD-30$COLOR_END씩 지속적으로 MP가 감소 합니다.	icon_skills.areahpgain_tex	icon_skills.areahpgain_tex	True
@@ -3506,6 +3525,12 @@
 3000023	MaxHP	Buff	True	perc	0	0	1	피닉스 탑승 (HP, MP 회복)			비행 가능 지역에서 비행할 수 있습니다.<BR>탑승 중 매 초마다 HP와 MP가 2%씩 회복됩니다. 피닉스의 열기 효과가 적용됩니다.	icon_items.wings_of_fairy_tex	icon_items.wings_of_fairy_tex	True
 3000023	HPChange	Buff	True	perc	0	1	0.02	피닉스 탑승 (HP, MP 회복)			비행 가능 지역에서 비행할 수 있습니다.<BR>탑승 중 매 초마다 HP와 MP가 2%씩 회복됩니다. 피닉스의 열기 효과가 적용됩니다.	icon_items.wings_of_fairy_tex	icon_items.wings_of_fairy_tex	True
 3000023	MPChange	Buff	True	perc	0	1	0.02	피닉스 탑승 (HP, MP 회복)			비행 가능 지역에서 비행할 수 있습니다.<BR>탑승 중 매 초마다 HP와 MP가 2%씩 회복됩니다. 피닉스의 열기 효과가 적용됩니다.	icon_items.wings_of_fairy_tex	icon_items.wings_of_fairy_tex	True
+3000025	MaxHP	Buff	True	perc	0	0	1	럭키 리리 탑승 (HP, MP 회복)			비행 가능 지역에서 비행할 수 있습니다.<BR>탑승 중 매 초마다 HP와 MP가 1%씩 회복됩니다. [영물] 효과가 적용됩니다.	icon_items.wings_of_fairy_tex	icon_items.wings_of_fairy_tex	True
+3000025	HPChange	Buff	True	perc	0	1	0.01	럭키 리리 탑승 (HP, MP 회복)			비행 가능 지역에서 비행할 수 있습니다.<BR>탑승 중 매 초마다 HP와 MP가 1%씩 회복됩니다. [영물] 효과가 적용됩니다.	icon_items.wings_of_fairy_tex	icon_items.wings_of_fairy_tex	True
+3000025	MPChange	Buff	True	perc	0	1	0.01	럭키 리리 탑승 (HP, MP 회복)			비행 가능 지역에서 비행할 수 있습니다.<BR>탑승 중 매 초마다 HP와 MP가 1%씩 회복됩니다. [영물] 효과가 적용됩니다.	icon_items.wings_of_fairy_tex	icon_items.wings_of_fairy_tex	True
+3000026	MaxHP	Buff	True	perc	0	0	1	럭키 리리 탑승 (HP, MP 회복)			비행 가능 지역에서 비행할 수 있습니다.<BR>탑승 중 매 초마다 HP와 MP가 2%씩 회복됩니다. [영물] 효과가 적용됩니다.	icon_items.wings_of_fairy_tex	icon_items.wings_of_fairy_tex	True
+3000026	HPChange	Buff	True	perc	0	1	0.02	럭키 리리 탑승 (HP, MP 회복)			비행 가능 지역에서 비행할 수 있습니다.<BR>탑승 중 매 초마다 HP와 MP가 2%씩 회복됩니다. [영물] 효과가 적용됩니다.	icon_items.wings_of_fairy_tex	icon_items.wings_of_fairy_tex	True
+3000026	MPChange	Buff	True	perc	0	1	0.02	럭키 리리 탑승 (HP, MP 회복)			비행 가능 지역에서 비행할 수 있습니다.<BR>탑승 중 매 초마다 HP와 MP가 2%씩 회복됩니다. [영물] 효과가 적용됩니다.	icon_items.wings_of_fairy_tex	icon_items.wings_of_fairy_tex	True
 4510004	OutOfCombatMovSpd	Buff	True	abs	600000	0	15	태양의 구슬			태양의 구슬이 따라다닙니다. 평화 상태에서의 이동 속도가 $H_W_GOOD15$COLOR_END 향상됩니다.	icon_items.orb_of_luck_tex	icon_items.orb_of_luck_tex	True
 4510005	OutOfCombatMovSpd	Buff	True	abs	600000	0	15	태양의 구슬			태양의 구슬이 따라다닙니다. 평화 상태에서의 이동 속도가 $H_W_GOOD15$COLOR_END 향상됩니다.	icon_items.orb_of_luck_tex	icon_items.orb_of_luck_tex	True
 4510006	OutOfCombatMovSpd	Buff	True	abs	600000	0	15	태양의 구슬			태양의 구슬이 따라다닙니다. 평화 상태에서의 이동 속도가 $H_W_GOOD15$COLOR_END 향상됩니다.	icon_items.orb_of_luck_tex	icon_items.orb_of_luck_tex	True
@@ -3528,6 +3553,17 @@
 5000002	296	Buff	True	perc	0	1	1.1	제작 대성공 확률 상승			대륙 최고의 철기장, 둔칸 가문의 축복입니다.$BR제작 진행 시 대성공 확률이 10% 증가합니다.	icon_items.artisanmaster_up_tex	icon_items.artisanmaster_up_tex	True
 5000003	CCrystalBind	Buff	True	abs	0	0	1	완전한 크리스탈 보호			사망 시 크리스탈이 깨지는 것을 방지합니다.	icon_items.q_closedspace_stone_05_tex	icon_items.q_closedspace_stone_05_tex	True
 5000004	GatheringTime	Buff	True	perc	0	0	0.6	채집 속도 상승			채집 속도가 $H_W_GOOD40%$COLOR_END 증가합니다.	icon_status.collect_speedup_tex	icon_status.collect_speedup_tex	True
+5000005	Power	Buff	False	perc	0	0	3	슈퍼 테라타임[힘/공속]			힘이 200%, 공격 속도가 20% 상승합니다.	icon_status.plusattack_tex	icon_status.plusattack_tex	True
+5000005	ASpd	Buff	False	perc	0	0	1.2	슈퍼 테라타임[힘/공속]			힘이 200%, 공격 속도가 20% 상승합니다.	icon_status.plusattack_tex	icon_status.plusattack_tex	True
+5000006	Power	Buff	True	perc	0	0	1.5	테라타임[힘/공속/스킬위력]			힘이 50%, 공격 속도가 10%, 스킬 위력이 50% 상승합니다.	icon_status.plusattack_tex	icon_status.plusattack_tex	True
+5000006	Attack	Buff	True	perc	0	0	1.5	테라타임[힘/공속/스킬위력]			힘이 50%, 공격 속도가 10%, 스킬 위력이 50% 상승합니다.	icon_status.plusattack_tex	icon_status.plusattack_tex	True
+5000006	ASpd	Buff	True	perc	0	0	1.1	테라타임[힘/공속/스킬위력]			힘이 50%, 공격 속도가 10%, 스킬 위력이 50% 상승합니다.	icon_status.plusattack_tex	icon_status.plusattack_tex	True
+5000007	CritPower	Buff	True	abs	0	0	1.42	테라타임[치명타 위력]			치명타 위력이 1.42배 상승합니다.	icon_status.plusspeedresist_tex	icon_status.plusspeedresist_tex	True
+5000008	MPChange	Buff	True	perc	0	1	0.5	슈퍼 테라타임[스킬 쿨타임/MP회복]			모든 스킬 쿨타임이 80% 감소, 초당 MP회복량이 증가합니다.	icon_status.plusepoisonresist_tex	icon_status.plusepoisonresist_tex	True
+5000008	CDR	Buff	True	swch	0	0	0.2	슈퍼 테라타임[스킬 쿨타임/MP회복]			모든 스킬 쿨타임이 80% 감소, 초당 MP회복량이 증가합니다.	icon_status.plusepoisonresist_tex	icon_status.plusepoisonresist_tex	True
+5000009	CDR	Buff	True	swch	0	0	0.85	테라타임[스킬 쿨타임]			모든 스킬 쿨타임이 15% 감소합니다.	icon_status.pluswill_tex	icon_status.pluswill_tex	True
+5000010	Crit	Buff	True	perc	0	0	30	슈퍼 테라타임[치명타 유발]			크리티컬 발생 확률이 2900% 상승합니다.	icon_status.pluswill_tex	icon_status.pluswill_tex	True
+5000011	Crit	Buff	True	abs	0	0	55	테라타임[치명타 유발]			치명타 유발이 55 상승합니다.	icon_status.plusecritical_tex	icon_status.plusecritical_tex	True
 5010000	HPChange	Buff	True	perc	30000	1	0.03	환영의 회복 포션	101305	환영의 회복 포션	30초 동안 1초 마다 전체 HP 대비 3%씩 총 90%의 HP가 지속적으로 회복됩니다.	icon_items.potion17_tex	icon_items.potion17_tex	True
 5010001	Resurrect	Buff	True	seta	0	0	1	벨릭의 은총			벨릭의 은총으로 지속 시간 내에 사망 시 그 자리에서 즉시 부활할 수 있습니다.	icon_skills.selfpreresurrection_tex	icon_skills.selfpreresurrection_tex	True
 5010002	EnchantChance	Buff	True	perc	0	1	1.2	빛나는 강화 장인의 가호			강화 시도 시, 최종 성공 확률이 크게 증가합니다. (각성 강화에는 적용되지 않습니다)	icon_items.parts_heavyarmorc5_tex	icon_items.parts_heavyarmorc5_tex	True
@@ -3562,14 +3598,50 @@
 5010019	EnchantChance	Buff	True	perc	300000	1	1.05	축복받은 강화 장인의 가호			5분간 장비 강화 시의 최종 성공 확률이 조금 증가합니다.	icon_items.parts_heavyarmorc5_tex	icon_items.parts_heavyarmorc5_tex	True
 5010020	EnchantChance	Buff	True	perc	300000	1	1.07	빛나는 강화 장인의 가호			5분간 장비 강화 시의 최종 성공 확률이 조금 증가합니다.	icon_items.parts_heavyarmorc5_tex	icon_items.parts_heavyarmorc5_tex	True
 5010021	EnchantChance	Buff	True	perc	300000	1	1.15	철기장 강화 장인의 가호			5분간 장비 강화 시의 최종 성공 확률이 조금 증가합니다.	icon_items.parts_heavyarmorc5_tex	icon_items.parts_heavyarmorc5_tex	True
+5010022	MaxHP	Buff	True	perc	0	0	1.1	신병의 수호			던전에 도전하는 모험가의 최대 HP가 10% 상승합니다.	icon_skills.heart_buff_tex	icon_skills.heart_buff_tex	True
+5010023	339	Buff	True	perc	0	0	1.1	귀환자의 축복			장비 숙련도 획득률이 10% 증가합니다.	icon_items.vip_growth_tex	icon_items.vip_growth_tex	True
+5010024	339	Buff	True	perc	0	0	1.1	장비 숙련도 10% 증가			장비 숙련도 획득 시 10% 증가하여 획득합니다.	icon_items.vip_growth_tex	icon_items.vip_growth_tex	True
+5010025	339	Buff	True	perc	0	0	1.2	장비 숙련도 20% 증가			장비 숙련도 획득 시 20% 증가하여 획득합니다.	icon_items.vip_growth_tex	icon_items.vip_growth_tex	True
+5010026	ChangeBody	Buff	True	setp	1800000	0	8	전투 체형 변화 : 체격	101505	전투 급성장 캔디 (중복 - 30분)	전투 급성장 캔디 효과로 체격이 변화됩니다.<br>전투 상태에서도 해제되지 않습니다.	icon_status.icon_janggoe_ab_tex	icon_status.icon_janggoe_ab_tex	True
+5010026	StackCounter	Buff	True	swch	1800000	0	5010027	전투 체형 변화 : 체격	101505	전투 급성장 캔디 (중복 - 30분)	전투 급성장 캔디 효과로 체격이 변화됩니다.<br>전투 상태에서도 해제되지 않습니다.	icon_status.icon_janggoe_ab_tex	icon_status.icon_janggoe_ab_tex	True
+5010027	AtkPotion	Buff	True	perc	1800000	0	1.05	완전한 거대한 힘			공격력 5% 증가	icon_status.angerwarrior_tex	icon_status.angerwarrior_tex	True
 5020000	EnchantChance	Buff	True	perc	300000	1	1.01	유럽 강화 주문서 1(5분)	153495	[PC방] 강화 장인의 가호 주문서 (5분)	0.01	icon_items.parts_heavyarmorc5_tex	icon_items.parts_heavyarmorc5_tex	True
 5020001	EnchantChance	Buff	True	perc	300000	1	1.05	유럽 강화 주문서 2(5분)	153496	[PC방] 축복받은 강화 장인의 가호 주문서 (5분)	0.05	icon_items.parts_heavyarmorc5_tex	icon_items.parts_heavyarmorc5_tex	True
 5020002	EnchantChance	Buff	True	perc	300000	1	1.15	유럽 강화 주문서 3(5분)	153497	[PC방] 빛나는 강화 장인의 가호 주문서 (5분)	0.15	icon_items.parts_heavyarmorc5_tex	icon_items.parts_heavyarmorc5_tex	True
 5020003	CCrystalBind	Buff	True	abs	0	0	1	완전한 크리스탈 보호 주문서(VIP)			사망 시 크리스탈이 깨지는 것을 방지합니다.	icon_items.q_closedspace_stone_05_tex	icon_items.q_closedspace_stone_05_tex	True
 5020004	CraftTime	Buff	True	perc	0	0	0.5	장인의 등불(VIP)			모든 아이템의 제작 시간이 $H_W_GOOD50%$COLOR_END 단축됩니다.	icon_items.artisan_lamp_tex	icon_items.artisan_lamp_tex	True
 5020006	297	Buff	True	seta	3600000	0	0	다르칸의 날개			다르칸의 날개를 활성화 했습니다.<br>다르칸의 날개는 전투 시작 시, 스킬 적중 시 또는 피해를 입을 시 해제됩니다.	icon_status.descentofdarkness_tex	icon_status.descentofdarkness_tex	True
+5020007	190	Buff	True	swch	300000	0	0	Potion: Murderous Intend			Rewarded to the best PvP players. A cloak of dark energy transforms you into the reaper of death!	icon_skills.battlefield_high_ranking_tex	icon_skills.battlefield_high_ranking_tex	True
+5020008	190	Buff	True	swch	300000	0	2	Potion: Eclipse the Sun			Rewarded to the best PvP player during 3 seasons. The power of the sun fills your veigns, and lets you glow in an eerie orange glow.	icon_skills.redmoon_tex	icon_skills.redmoon_tex	True
+5020009	ChangeBody	Buff	True	setp	300000	0	8	Potion: Size of the Mighty			Infuse your body with the energy of the giant, and grow in size. Can be used up to 2x to increase size even more.	icon_status.vitality_tex	icon_status.vitality_tex	True
+5020010	MovSpd	Buff	True	perc	30000	0	0.9	Thoughts of Ice			Decreases movement speed by 10% and increases skill damage by 5%. Covers your body in ice.	icon_skills.c5_iceorb	icon_skills.c5_iceorb	True
+5020010	AtkPotion	Buff	True	perc	30000	0	1.05	Thoughts of Ice			Decreases movement speed by 10% and increases skill damage by 5%. Covers your body in ice.	icon_skills.c5_iceorb	icon_skills.c5_iceorb	True
+5020011	ASpd	Buff	True	perc	60000	0	1.05	Breath of Fire			Reduces your HP by 75%, decreases received healing by 85%, and increases attack speed by 5%. Covers your body in fire.	icon_skills.hellfire_tex	icon_skills.hellfire_tex	True
+5020011	IncreasedHeal	Buff	True	swch	60000	0	0.15	Breath of Fire			Reduces your HP by 75%, decreases received healing by 85%, and increases attack speed by 5%. Covers your body in fire.	icon_skills.hellfire_tex	icon_skills.hellfire_tex	True
+5020011	HPChange2	Buff	True	perc	60000	0	0.25	Breath of Fire			Reduces your HP by 75%, decreases received healing by 85%, and increases attack speed by 5%. Covers your body in fire.	icon_skills.hellfire_tex	icon_skills.hellfire_tex	True
+5020012	339	Buff	True	perc	10800000	0	1.05	5% Item XP			Increases the Item XP you get from Vanguard initiative quests by 5%.<br><font color = '#FF0000'>로그 아웃 시에도 지속 시간이 감소합니다.</font>	icon_items.vip_growth_tex	icon_items.vip_growth_tex	True
 5030000	CCrystalBind	Buff	True	abs	0	0	1	완전한 크리스탈 보호 주문서			사망 시 크리스탈이 깨지는 것을 방지합니다.	icon_items.q_closedspace_stone_05_tex	icon_items.q_closedspace_stone_05_tex	True
 5030001	40	Buff	True	perc	0	0	2	행운의 수집가 100			사냥 시 획득 골드가 100% 증가합니다.	icon_items.f2p_dropgoldbooster_tex	icon_items.f2p_dropgoldbooster_tex	True
+5030002	HPChange	Buff	True	perc	900000	1	0.01	Emblem of Success	216820	Emblem of Success	다음 효과들을 획득합니다.$BR$BR매 초마다 전체 HP의 $H_W_GOOD1%$COLOR_END 회복	icon_items.parts_magicweaponc15_tex	icon_items.parts_magicweaponc15_tex	True
+5030003	MPChange	Buff	True	perc	900000	1	0.05	Power potion - CD, MP regen	216820	Emblem of Success	다음 효과들을 획득합니다.$BR$BR모든 스킬의 재사용 시간 $H_W_GOOD20%$COLOR_END 감소$BR매 초마다 전체 MP의 $H_W_GOOD5%$COLOR_END 회복	icon_status.darkriftareatimeshift_tex	icon_status.darkriftareatimeshift_tex	True
+5030003	CDR	Buff	True	perc	900000	0	0.8	Power potion - CD, MP regen	216820	Emblem of Success	다음 효과들을 획득합니다.$BR$BR모든 스킬의 재사용 시간 $H_W_GOOD20%$COLOR_END 감소$BR매 초마다 전체 MP의 $H_W_GOOD5%$COLOR_END 회복	icon_status.darkriftareatimeshift_tex	icon_status.darkriftareatimeshift_tex	True
+5030004	MaxHP	Buff	True	perc	900000	0	1.07	Memento of Fame	216821	Memento of Fame	다음 효과들을 획득합니다.$BR$BR최대 HP $H_W_GOOD7%$COLOR_END 증가$BR맷집 $H_W_GOOD20%$COLOR_END 증가$BR공격 속도 $H_W_GOOD15%$COLOR_END 증가$BR스킬 공격력 $H_W_GOOD20%$COLOR_END 증가$BR크리스탈 $H_W_GOOD1회$COLOR_END 깨짐 방지$BR이동 속도 $H_W_GOOD7%$COLOR_END 증가	icon_items.parts_lightweaponc9_tex	icon_items.parts_lightweaponc9_tex	True
+5030004	Endurance	Buff	True	perc	900000	0	1.2	Memento of Fame	216821	Memento of Fame	다음 효과들을 획득합니다.$BR$BR최대 HP $H_W_GOOD7%$COLOR_END 증가$BR맷집 $H_W_GOOD20%$COLOR_END 증가$BR공격 속도 $H_W_GOOD15%$COLOR_END 증가$BR스킬 공격력 $H_W_GOOD20%$COLOR_END 증가$BR크리스탈 $H_W_GOOD1회$COLOR_END 깨짐 방지$BR이동 속도 $H_W_GOOD7%$COLOR_END 증가	icon_items.parts_lightweaponc9_tex	icon_items.parts_lightweaponc9_tex	True
+5030004	ASpd	Buff	True	perc	900000	0	1.15	Memento of Fame	216821	Memento of Fame	다음 효과들을 획득합니다.$BR$BR최대 HP $H_W_GOOD7%$COLOR_END 증가$BR맷집 $H_W_GOOD20%$COLOR_END 증가$BR공격 속도 $H_W_GOOD15%$COLOR_END 증가$BR스킬 공격력 $H_W_GOOD20%$COLOR_END 증가$BR크리스탈 $H_W_GOOD1회$COLOR_END 깨짐 방지$BR이동 속도 $H_W_GOOD7%$COLOR_END 증가	icon_items.parts_lightweaponc9_tex	icon_items.parts_lightweaponc9_tex	True
+5030004	MovSpdInCombat	Buff	True	abs	900000	0	10	Memento of Fame	216821	Memento of Fame	다음 효과들을 획득합니다.$BR$BR최대 HP $H_W_GOOD7%$COLOR_END 증가$BR맷집 $H_W_GOOD20%$COLOR_END 증가$BR공격 속도 $H_W_GOOD15%$COLOR_END 증가$BR스킬 공격력 $H_W_GOOD20%$COLOR_END 증가$BR크리스탈 $H_W_GOOD1회$COLOR_END 깨짐 방지$BR이동 속도 $H_W_GOOD7%$COLOR_END 증가	icon_items.parts_lightweaponc9_tex	icon_items.parts_lightweaponc9_tex	True
+5030004	AtkPotion	Buff	True	perc	900000	0	1.2	Memento of Fame	216821	Memento of Fame	다음 효과들을 획득합니다.$BR$BR최대 HP $H_W_GOOD7%$COLOR_END 증가$BR맷집 $H_W_GOOD20%$COLOR_END 증가$BR공격 속도 $H_W_GOOD15%$COLOR_END 증가$BR스킬 공격력 $H_W_GOOD20%$COLOR_END 증가$BR크리스탈 $H_W_GOOD1회$COLOR_END 깨짐 방지$BR이동 속도 $H_W_GOOD7%$COLOR_END 증가	icon_items.parts_lightweaponc9_tex	icon_items.parts_lightweaponc9_tex	True
+5030004	CrystalBind	Buff	True	abs	900000	0	1	Memento of Fame	216821	Memento of Fame	다음 효과들을 획득합니다.$BR$BR최대 HP $H_W_GOOD7%$COLOR_END 증가$BR맷집 $H_W_GOOD20%$COLOR_END 증가$BR공격 속도 $H_W_GOOD15%$COLOR_END 증가$BR스킬 공격력 $H_W_GOOD20%$COLOR_END 증가$BR크리스탈 $H_W_GOOD1회$COLOR_END 깨짐 방지$BR이동 속도 $H_W_GOOD7%$COLOR_END 증가	icon_items.parts_lightweaponc9_tex	icon_items.parts_lightweaponc9_tex	True
+5030005	MaxHP	Buff	True	perc	900000	0	1.07	Sigil of Indestructible Flame	216822	Sigil of Indestructible Flame	다음 효과들을 획득합니다.$BR$BR최대 HP $H_W_GOOD7%$COLOR_END 증가$BR맷집 $H_W_GOOD20%$COLOR_END 증가$BR이동 속도 $H_W_GOOD10$COLOR_END 증가$BR공격 속도 $H_W_GOOD15%$COLOR_END 증가$BR매 초마다 전체 HP의 $H_W_GOOD1%$COLOR_END 회복$BR스킬 공격력 $H_W_GOOD20%$COLOR_END 증가$BR크리스탈 $H_W_GOOD1회$COLOR_END 깨짐 방지$BR이동 속도 $H_W_GOOD7%$COLOR_END 증가	icon_items.parts_magicweaponc6_tex	icon_items.parts_magicweaponc6_tex	True
+5030005	Endurance	Buff	True	perc	900000	0	1.2	Sigil of Indestructible Flame	216822	Sigil of Indestructible Flame	다음 효과들을 획득합니다.$BR$BR최대 HP $H_W_GOOD7%$COLOR_END 증가$BR맷집 $H_W_GOOD20%$COLOR_END 증가$BR이동 속도 $H_W_GOOD10$COLOR_END 증가$BR공격 속도 $H_W_GOOD15%$COLOR_END 증가$BR매 초마다 전체 HP의 $H_W_GOOD1%$COLOR_END 회복$BR스킬 공격력 $H_W_GOOD20%$COLOR_END 증가$BR크리스탈 $H_W_GOOD1회$COLOR_END 깨짐 방지$BR이동 속도 $H_W_GOOD7%$COLOR_END 증가	icon_items.parts_magicweaponc6_tex	icon_items.parts_magicweaponc6_tex	True
+5030005	ASpd	Buff	True	perc	900000	0	1.15	Sigil of Indestructible Flame	216822	Sigil of Indestructible Flame	다음 효과들을 획득합니다.$BR$BR최대 HP $H_W_GOOD7%$COLOR_END 증가$BR맷집 $H_W_GOOD20%$COLOR_END 증가$BR이동 속도 $H_W_GOOD10$COLOR_END 증가$BR공격 속도 $H_W_GOOD15%$COLOR_END 증가$BR매 초마다 전체 HP의 $H_W_GOOD1%$COLOR_END 회복$BR스킬 공격력 $H_W_GOOD20%$COLOR_END 증가$BR크리스탈 $H_W_GOOD1회$COLOR_END 깨짐 방지$BR이동 속도 $H_W_GOOD7%$COLOR_END 증가	icon_items.parts_magicweaponc6_tex	icon_items.parts_magicweaponc6_tex	True
+5030005	MovSpdInCombat	Buff	True	abs	900000	0	10	Sigil of Indestructible Flame	216822	Sigil of Indestructible Flame	다음 효과들을 획득합니다.$BR$BR최대 HP $H_W_GOOD7%$COLOR_END 증가$BR맷집 $H_W_GOOD20%$COLOR_END 증가$BR이동 속도 $H_W_GOOD10$COLOR_END 증가$BR공격 속도 $H_W_GOOD15%$COLOR_END 증가$BR매 초마다 전체 HP의 $H_W_GOOD1%$COLOR_END 회복$BR스킬 공격력 $H_W_GOOD20%$COLOR_END 증가$BR크리스탈 $H_W_GOOD1회$COLOR_END 깨짐 방지$BR이동 속도 $H_W_GOOD7%$COLOR_END 증가	icon_items.parts_magicweaponc6_tex	icon_items.parts_magicweaponc6_tex	True
+5030005	HPChange	Buff	True	perc	900000	1	0.01	Sigil of Indestructible Flame	216822	Sigil of Indestructible Flame	다음 효과들을 획득합니다.$BR$BR최대 HP $H_W_GOOD7%$COLOR_END 증가$BR맷집 $H_W_GOOD20%$COLOR_END 증가$BR이동 속도 $H_W_GOOD10$COLOR_END 증가$BR공격 속도 $H_W_GOOD15%$COLOR_END 증가$BR매 초마다 전체 HP의 $H_W_GOOD1%$COLOR_END 회복$BR스킬 공격력 $H_W_GOOD20%$COLOR_END 증가$BR크리스탈 $H_W_GOOD1회$COLOR_END 깨짐 방지$BR이동 속도 $H_W_GOOD7%$COLOR_END 증가	icon_items.parts_magicweaponc6_tex	icon_items.parts_magicweaponc6_tex	True
+5030005	AtkPotion	Buff	True	perc	900000	0	1.2	Sigil of Indestructible Flame	216822	Sigil of Indestructible Flame	다음 효과들을 획득합니다.$BR$BR최대 HP $H_W_GOOD7%$COLOR_END 증가$BR맷집 $H_W_GOOD20%$COLOR_END 증가$BR이동 속도 $H_W_GOOD10$COLOR_END 증가$BR공격 속도 $H_W_GOOD15%$COLOR_END 증가$BR매 초마다 전체 HP의 $H_W_GOOD1%$COLOR_END 회복$BR스킬 공격력 $H_W_GOOD20%$COLOR_END 증가$BR크리스탈 $H_W_GOOD1회$COLOR_END 깨짐 방지$BR이동 속도 $H_W_GOOD7%$COLOR_END 증가	icon_items.parts_magicweaponc6_tex	icon_items.parts_magicweaponc6_tex	True
+5030005	CrystalBind	Buff	True	abs	900000	0	1	Sigil of Indestructible Flame	216822	Sigil of Indestructible Flame	다음 효과들을 획득합니다.$BR$BR최대 HP $H_W_GOOD7%$COLOR_END 증가$BR맷집 $H_W_GOOD20%$COLOR_END 증가$BR이동 속도 $H_W_GOOD10$COLOR_END 증가$BR공격 속도 $H_W_GOOD15%$COLOR_END 증가$BR매 초마다 전체 HP의 $H_W_GOOD1%$COLOR_END 회복$BR스킬 공격력 $H_W_GOOD20%$COLOR_END 증가$BR크리스탈 $H_W_GOOD1회$COLOR_END 깨짐 방지$BR이동 속도 $H_W_GOOD7%$COLOR_END 증가	icon_items.parts_magicweaponc6_tex	icon_items.parts_magicweaponc6_tex	True
+5030006	AtkPotion	Buff	True	perc	3600000	0	1.12	강화의 물약	216815	강화의 물약	공격력이 $H_W_GOOD12%$COLOR_END 증가됩니다. 서버간 파티 매칭 버프와 중첩되지 않습니다.	icon_status.plusattack_tex	icon_status.plusattack_tex	True
+5030007	AtkPotion	Buff	True	perc	1800000	0	1.15	강화의 물약	216814	러시아용 강화의 물약	공격력이 $H_W_GOOD15%$COLOR_END 증가됩니다. 서버간 파티 매칭 버프와 중첩되지 않습니다.	icon_status.plusattack_tex	icon_status.plusattack_tex	True
+5030008	Power	Buff	True	abs	1800000	0	7	공격력 강화 시약	216812	러시아용 공격력 강화 시약	힘이 $H_W_GOOD7$COLOR_END 향상됩니다.	icon_items.potion11_tex	icon_items.potion11_tex	True
+5030009	Endurance	Buff	True	abs	1800000	0	15	방어력 강화 시약	216813	러시아용 방어력 강화 시약	맷집이 $H_W_GOOD15$COLOR_END 향상됩니다.	icon_items.potion17_tex	icon_items.potion17_tex	True
 5060000	AtkPotion	Buff	True	perc	1800000	0	1.15	강화의 물약	854569	강화의 물약	공격력이 $H_W_GOOD15%$COLOR_END 증가됩니다. 서버간 파티 매칭 버프와 중첩되지 않습니다.	icon_status.plusattack_tex	icon_status.plusattack_tex	True
 5060001	ASpd	Buff	True	perc	1800000	0	1.06	용맹의 물약	855593	용맹의 물약	스킬 데미지가 $H_W_GOOD12%$COLOR_END 향상되고, 받는 피해가 $H_W_GOOD10%$COLOR_END 감소됩니다. 추가로 공격 속도도 $H_W_GOOD6%$COLOR_END 향상됩니다.	icon_items.potion10_tex	icon_items.potion10_tex	True
 5060001	DefPotion	Buff	True	perc	1800000	0	0.9	용맹의 물약	855593	용맹의 물약	스킬 데미지가 $H_W_GOOD12%$COLOR_END 향상되고, 받는 피해가 $H_W_GOOD10%$COLOR_END 감소됩니다. 추가로 공격 속도도 $H_W_GOOD6%$COLOR_END 향상됩니다.	icon_items.potion10_tex	icon_items.potion10_tex	True
@@ -3620,6 +3692,7 @@
 7000029	ChangeBody	Buff	True	setp	600000	0	13	신체 변화: 몸집	115817	[이벤트] 급성장 캔디 (중첩 - 10분)	급성장 캔디의 효과로 몸집이 변화되었습니다. $BR $BR전투 상태에 들어가면, 효과는 즉시 해제 됩니다. 일정 시간이 지나면 원래 크기로 돌아옵니다.	icon_status.icon_janggoe_ab_tex	icon_status.icon_janggoe_ab_tex	True
 7000030	BigHead	Buff	True	setp	600000	0	14	신체 변화: 몸집	115818	[이벤트] 급성장 캔디 (10분)	급성장 캔디의 효과로 몸집이 변화되었습니다. $BR $BR전투 상태에 들어가면, 효과는 즉시 해제 됩니다. 일정 시간이 지나면 원래 크기로 돌아옵니다.	icon_status.icon_janggoe_ab_tex	icon_status.icon_janggoe_ab_tex	True
 7000031	BigHead	Buff	True	setp	604800000	0	4	신체 변화: 황금 비율	139218	황금신체비율 캔디 (7일)	귀여움으로 먹고 사는 싸리싸리 요정족의 황금 신체 비율로 변화되었습니다.$BR $BR일정 시간이 지나면 원래 비율로 돌아옵니다.	icon_status.icon_deadoo_ab_tex	icon_status.icon_deadoo_ab_tex	True
+7000032	265	Buff	True	setp	600000	0	7	속옷 보기: 모두에게	204003	짖궂은 탈의 물폭탄	모두에게 속옷이 보이는 상태입니다.$BR $BR일정 시간이 지나면 다시 원래대로 속옷이 보이지 않게 됩니다.	icon_items.portion_underwear1_tex	icon_items.portion_underwear1_tex	True
 7101000	Power	Debuff	True	perc	600000	0	1.3	마력 응축			강력한 마력을 응축하여 힘과 공격 속도가 증가합니다. 이 이상상태는 해제할 수 없습니다.			True
 7101000	ASpd	Debuff	True	perc	600000	0	1.1	마력 응축			강력한 마력을 응축하여 힘과 공격 속도가 증가합니다. 이 이상상태는 해제할 수 없습니다.			True
 7101008	Power	Buff	True	perc	600000	0	1.05	불과 번개의 기운			고르고스가 속성의 기운을 통해 자신의 공격력을 증가시켰습니다.	icon_status.darkriftgravity_tex	icon_status.darkriftgravity_tex	True
@@ -5961,10 +6034,11 @@
 90048060	Stun	Stun	False	swch	10000	0	5	스턴	48060	드랍폭탄	녹테늄 추출기 열쇠 아이템을 드랍하여 놀란 나머지 스턴을 일으킵니다	icon_status.confuseup_tex	icon_status.confuseup_tex	True
 90290001	Immune	Debuff	True	abs	7000	0	0	완전방어(무적)			$H_W_BAD[완전방어]$COLOR_END 부활한 코르누스가 완전방어 상태로 모든 피해에 면역상태 입니다. 	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
 90290002	DelayedEffect	Debuff	True	seta	7000	0	429001	완전방어(무적)			부활한 코르누스가 기를 모으고 있습니다. 해제 하지 않을 경우 1분간 부활한 코르누스가 $H_W_BAD[방어력증가]$COLOR_END 효과를 받게 됩니다.	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
-90340002	HPChange	DOT	True	perc	0	2	-0.05	광대의 가벼운 저주			광대가 가벼운 저주를 내렸습니다. $H_W_BAD2s$COLOR_END마다 전체 HP 대비 $H_W_BAD5%$COLOR_END에 달하는 HP가 지속적으로 감소합니다	icon_status.darkriftrecovery_tex	icon_status.darkriftrecovery_tex	True
-90340003	HPChange	DOT	True	perc	0	2	-0.07	광대의 따끔한 저주			광대가 따끔한 저주를 내렸습니다. $H_W_BAD2s$COLOR_END마다 전체 HP 대비 $H_W_BAD7%$COLOR_END에 달하는 HP가 지속적으로 감소합니다	icon_status.diffusionabnormality_tex	icon_status.diffusionabnormality_tex	True
-90340004	HPChange	DOT	True	perc	0	2	-0.09	광대의 강력한 저주			광대가 강력한 저주를 내렸습니다. $H_W_BAD2s$COLOR_END마다 전체 HP 대비 $H_W_BAD9%$COLOR_END에 달하는 HP가 지속적으로 감소합니다	icon_status.darkriftrage_tex	icon_status.darkriftrage_tex	True
-90340005	HPChange	DOT	True	perc	0	2	-0.1	광대의 극심한 저주			광대가 극심한 저주를 내렸습니다. $H_W_BAD2s$COLOR_END마다 전체 HP 대비 $H_W_BAD10%$COLOR_END에 달하는 HP가 지속적으로 감소합니다	icon_status.darkriftdestroy_tex	icon_status.darkriftdestroy_tex	True
+90340002	HPChange	DOT	True	perc	0	2	-0.05	팬텀의 가벼운 저주			팬텀이 가벼운 저주를 내렸습니다. $H_W_BAD2s$COLOR_END마다 전체 HP 대비 $H_W_BAD5%$COLOR_END에 달하는 HP가 지속적으로 감소합니다	icon_status.darkriftrecovery_tex	icon_status.darkriftrecovery_tex	True
+90340003	HPChange	DOT	True	perc	0	2	-0.07	팬텀의 따끔한 저주			팬텀이 따끔한 저주를 내렸습니다. $H_W_BAD2s$COLOR_END마다 전체 HP 대비 $H_W_BAD7%$COLOR_END에 달하는 HP가 지속적으로 감소합니다	icon_status.diffusionabnormality_tex	icon_status.diffusionabnormality_tex	True
+90340004	HPChange	DOT	True	perc	0	2	-0.09	팬텀의 강력한 저주			팬텀이 강력한 저주를 내렸습니다. $H_W_BAD2s$COLOR_END마다 전체 HP 대비 $H_W_BAD9%$COLOR_END에 달하는 HP가 지속적으로 감소합니다	icon_status.darkriftrage_tex	icon_status.darkriftrage_tex	True
+90340005	HPChange	DOT	True	perc	0	2	-0.1	팬텀의 극심한 저주			팬텀이 극심한 저주를 내렸습니다. $H_W_BAD2s$COLOR_END마다 전체 HP 대비 $H_W_BAD10%$COLOR_END에 달하는 HP가 지속적으로 감소합니다	icon_status.darkriftdestroy_tex	icon_status.darkriftdestroy_tex	True
+90340007	Immune	Buff	True	18	0	0	0	환영의 힘			팬텀에게서 환영의 힘을 받아 무적 상태가 되었습니다.	icon_skills.guildskills_def_tex	icon_skills.guildskills_def_tex	True
 90340104	HPChange	DOT	False	perc	15000	2	-0.1	역병 중독			아카샤의 역병에 중독되어, 지속적으로 체력이 감소합니다.	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
 90340105	AllResist	Debuff	True	perc	3000	0	0.0001	소환 마법			아카샤가 강력한 소환 마법을 시전합니다. 스턴으로 시전을 차단해야 합니다.	icon_status.holybless_tex	icon_status.holybless_tex	True
 90340106	Stun	Stun	False	swch	8000	0	5	기절			폭발통의 범위에 휩쓸려 기절합니다.	icon_status.confuseup_tex	icon_status.confuseup_tex	True
@@ -5976,7 +6050,8 @@
 90340203	Stun	Stun	False	swch	6000	0	5	스턴			바포메트의 낫에 머리를 맞았습니다.	icon_status.confuseup_tex	icon_status.confuseup_tex	True
 90340204	HPChange	DOT	True	perc	0	1	-0.03	뱀에게 물림			뱀에게 물렸습니다. 체력이 지속적으로 감소하며 움직일 수 없습니다.	icon_status.poisonup_tex	icon_status.poisonup_tex	True
 90340204	Stun	DOT	True	swch	0	0	5	뱀에게 물림			뱀에게 물렸습니다. 체력이 지속적으로 감소하며 움직일 수 없습니다.	icon_status.poisonup_tex	icon_status.poisonup_tex	True
-90340206	MovSpdInCombat	Debuff	True	perc	10000	0	-0.5	뱀의 시선			뱀이 당신을 주시하고 있습니다. 무언가 불길합니다.	icon_skills.througharrow_tex	icon_skills.througharrow_tex	True
+90340206	MovSpd	Debuff	True	perc	10000	0	0.5	뱀의 시선			뱀이 당신을 주시하고 있습니다. 무언가 불길합니다.	icon_skills.througharrow_tex	icon_skills.througharrow_tex	True
+90340206	KnockDownChance	Debuff	True	perc	10000	0	0	뱀의 시선			뱀이 당신을 주시하고 있습니다. 무언가 불길합니다.	icon_skills.througharrow_tex	icon_skills.througharrow_tex	True
 90340206	DelayedEffect	Debuff	True	seta	10000	0	90340207	뱀의 시선			뱀이 당신을 주시하고 있습니다. 무언가 불길합니다.	icon_skills.througharrow_tex	icon_skills.througharrow_tex	True
 90340212	Stun	Stun	False	swch	4000	0	5	기절			기절한 상태로 움직일 수 없습니다.	icon_status.confuseup_tex	icon_status.confuseup_tex	True
 90340306	HPLoss	Debuff	True	abs	10000	0	-10000000	흑마법의 저주1			흑마법의 저주로 온 몸이 휩싸였습니다. 저주를 태워버리지 않으면 큰일 날 것 같습니다.	icon_status.cruel_slayer_3_tex	icon_status.cruel_slayer_3_tex	True
@@ -5991,6 +6066,16 @@
 90340315	HPLoss	Debuff	True	abs	14000	0	-10000000	흑마법의 저주5			흑마법의 저주로 온 몸이 휩싸였습니다. 저주를 태워버리지 않으면 큰일 날 것 같습니다.	icon_status.cruel_slayer_4_tex	icon_status.cruel_slayer_4_tex	True
 90340326	Endurance	Buff	True	perc	100000	0	100	듀리온의 흑마력			듀리온의 흑마력으로 방어력이 대폭 상승합니다.	icon_status.plusedefence_tex	icon_status.plusedefence_tex	True
 90340328	HPChange	Stun	False	perc	10000	2	-0.1	마기			듀리온의 마기에 피격당해 중독되었습니다. Hp가 지속적으로 감소합니다.	icon_status.blooduanty_tex	icon_status.blooduanty_tex	True
+90340329	Power	Buff	False	perc	990000000	0	1.03	불안정한 마기			듀리온의 완전체가 라칸의 권능을 빌려 마기를 폭주시켰습니다. 듀리온의 완전체의 공격력이 강해지고 공격 속도가 더 빨라지지만 그의 몸이 불안정한 마기로 둘러싸입니다. 만약, 마기를 안정화할 시간이 주어진다면 감당할 수 없을 것입니다.	icon_status.darkriftarearage_tex	icon_status.darkriftarearage_tex	True
+90340329	ASpd	Buff	False	perc	990000000	0	1.05	불안정한 마기			듀리온의 완전체가 라칸의 권능을 빌려 마기를 폭주시켰습니다. 듀리온의 완전체의 공격력이 강해지고 공격 속도가 더 빨라지지만 그의 몸이 불안정한 마기로 둘러싸입니다. 만약, 마기를 안정화할 시간이 주어진다면 감당할 수 없을 것입니다.	icon_status.darkriftarearage_tex	icon_status.darkriftarearage_tex	True
+90340330	StackCounter	Debuff	True	swch	90000	0	90340331	주시			듀리온의 환영이 당신을 주시하고 있습니다. 불길합니다.	icon_skills.markingofarcher_tex	icon_skills.markingofarcher_tex	True
+90340331	MovSpd	Debuff	True	perc	30000	0	1	집중 주시대상			듀리온의 환영이 나만 쳐다보는 것 같습니다. 뭔가 끔찍한 일이 일어 날 것 같습니다!	icon_skills.througharrow_tex	icon_skills.througharrow_tex	True
+90340333	MovSpd	Debuff	True	setp	30000	0	0	암흑 패기			듀리온의 완전체의 흑마법이 온 몸을 파고들어 몸을 움직일 수 없습니다.	icon_status.staminadown_tex	icon_status.staminadown_tex	True
+90340333	MovSpdInCombat	Debuff	True	setp	30000	0	0	암흑 패기			듀리온의 완전체의 흑마법이 온 몸을 파고들어 몸을 움직일 수 없습니다.	icon_status.staminadown_tex	icon_status.staminadown_tex	True
+90340333	OutOfCombatMovSpd	Debuff	True	setp	30000	0	0	암흑 패기			듀리온의 완전체의 흑마법이 온 몸을 파고들어 몸을 움직일 수 없습니다.	icon_status.staminadown_tex	icon_status.staminadown_tex	True
+90340333	HPDrain	Debuff	True	setp	30000	0	0	암흑 패기			듀리온의 완전체의 흑마법이 온 몸을 파고들어 몸을 움직일 수 없습니다.	icon_status.staminadown_tex	icon_status.staminadown_tex	True
+90340333	Stun	Debuff	True	swch	30000	0	5	암흑 패기			듀리온의 완전체의 흑마법이 온 몸을 파고들어 몸을 움직일 수 없습니다.	icon_status.staminadown_tex	icon_status.staminadown_tex	True
+90340333	295	Debuff	True	swch	30000	0	0	암흑 패기			듀리온의 완전체의 흑마법이 온 몸을 파고들어 몸을 움직일 수 없습니다.	icon_status.staminadown_tex	icon_status.staminadown_tex	True
 90340401	DelayedEffect	Debuff	True	seta	85000	0	90340402	소환 쿨타임			소환 스킬 쿨타임 관리용	icon_status.cruel_slayer_4_tex	icon_status.cruel_slayer_4_tex	True
 90340501	Endurance	DOT	True	perc	120000	0	1	파멸의 업화			지속 시간이 끝날 때 대상자를 즉사시킵니다.$BR파멸의 업화는 오직 파멸의 냉기를 통해서만 제거할 수 있습니다.	icon_status.firedamage_tex	icon_status.firedamage_tex	True
 90340501	HPLoss	DOT	True	abs	120000	0	-10000000	파멸의 업화			지속 시간이 끝날 때 대상자를 즉사시킵니다.$BR파멸의 업화는 오직 파멸의 냉기를 통해서만 제거할 수 있습니다.	icon_status.firedamage_tex	icon_status.firedamage_tex	True
@@ -6004,13 +6089,64 @@
 90340512	319	Debuff	False	swch	0	0	90340501	냉기 저항 상태			오직 화염의 기운으로만 제거할 수 있습니다.	icon_status.icedamage_tex	icon_status.icedamage_tex	True
 90340514	Stun	Stun	False	swch	4000	0	5	켈사이크의 포효			강력한 충격을 받아 움직일 수 없습니다.	icon_status.confuseup_tex	icon_status.confuseup_tex	True
 90340515	HPChange	DOT	False	perc	15000	3	-0.06	과다 출혈			과도한 출혈로 인해 $H_W_BAD3s$COLOR_END 마다 전체 HP 대비 $H_W_BAD6%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_status.damagedown_tex	icon_status.damagedown_tex	True
-90340601	HPChange	DOT	True	perc	480000	3	-0.01	데모크론의 저주			매 중첩 시마다 스킬 위력이 $H_W_GOOD5%$COLOR_END씩 증가되지만, $H_W_BAD1초$COLOR_END마다 전체 HP 대비 $H_W_BAD1%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다. 이 효과는 최대 99번까지 중첩되며, 정화할 수 없습니다.	icon_status.diseaseup_tex	icon_status.diseaseup_tex	True
-90340601	AtkPotion	DOT	True	perc	480000	0	1.1	데모크론의 저주			매 중첩 시마다 스킬 위력이 $H_W_GOOD5%$COLOR_END씩 증가되지만, $H_W_BAD1초$COLOR_END마다 전체 HP 대비 $H_W_BAD1%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다. 이 효과는 최대 99번까지 중첩되며, 정화할 수 없습니다.	icon_status.diseaseup_tex	icon_status.diseaseup_tex	True
+90340601	HPChange	DOT	True	perc	480000	1	-0.01	데모크론의 저주			매 중첩 시마다 스킬 위력이 $H_W_GOOD10%$COLOR_END씩 증가되지만, $H_W_BAD1초$COLOR_END마다 전체 HP 대비 $H_W_BAD1%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다. 이 효과는 최대 99번까지 중첩되며, 정화할 수 없습니다.	icon_status.diseaseup_tex	icon_status.diseaseup_tex	True
+90340601	AtkPotion	DOT	True	perc	480000	0	1.1	데모크론의 저주			매 중첩 시마다 스킬 위력이 $H_W_GOOD10%$COLOR_END씩 증가되지만, $H_W_BAD1초$COLOR_END마다 전체 HP 대비 $H_W_BAD1%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다. 이 효과는 최대 99번까지 중첩되며, 정화할 수 없습니다.	icon_status.diseaseup_tex	icon_status.diseaseup_tex	True
 90340602	IncreasedHeal	DOT	False	swch	60000	0	0.8	감염 : 데모크론 바이러스			데모크론 바이러스에 감염 되었습니다. 회복량이 더디게 적용됩니다.	icon_status.minuscriticalresist_tex	icon_status.minuscriticalresist_tex	True
-90340811	DefPotion	Debuff	True	perc	120000	0	0.7	해방된 영혼의 힘			빨간색 봉인함으로 다시 봉인해야만 합니다. 받는 피해가 30% 감소합니다.	icon_status.battlecommand03_tex	icon_status.battlecommand03_tex	True
-90340812	DefPotion	Debuff	True	perc	120000	0	0.7	해방된 영혼의 힘			노란색 봉인함으로 다시 봉인해야만 합니다. 받는 피해가 30% 감소합니다.	icon_status.battlecommand02_tex	icon_status.battlecommand02_tex	True
-90340813	DefPotion	Debuff	True	perc	120000	0	0.7	해방된 영혼의 힘			초록색 봉인함으로 다시 봉인해야만 합니다. 받는 피해가 30% 감소합니다.	icon_status.battlecommand04_tex	icon_status.battlecommand04_tex	True
-90340814	DefPotion	Debuff	True	perc	120000	0	0.7	해방된 영혼의 힘			파란색 봉인함으로 다시 봉인해야만 합니다. 받는 피해가 30% 감소합니다.	icon_status.battlecommand01_tex	icon_status.battlecommand01_tex	True
+90340604	220	Buff	True	swch	5000	0	0	충전 : 데모크론 에너지			데모크론 에너지가 모이고 있습니다. 해제하지 못할 경우 강력한 힘을 얻습니다.	icon_status.fearstatus_tex	icon_status.fearstatus_tex	True
+90340604	DelayedEffect	Buff	True	abs	5000	0	90340605	충전 : 데모크론 에너지			데모크론 에너지가 모이고 있습니다. 해제하지 못할 경우 강력한 힘을 얻습니다.	icon_status.fearstatus_tex	icon_status.fearstatus_tex	True
+90340605	Power	Buff	False	perc	30000	0	2.5	진화 : 퀴르갈			퀴르갈이 데모크론 에너지를 이용해 강력해 졌습니다.	icon_skills.paralysistrap_tex	icon_skills.paralysistrap_tex	True
+90340605	MovSpd	Buff	False	perc	30000	0	3	진화 : 퀴르갈			퀴르갈이 데모크론 에너지를 이용해 강력해 졌습니다.	icon_skills.paralysistrap_tex	icon_skills.paralysistrap_tex	True
+90340605	ASpd	Buff	False	perc	30000	0	1.2	진화 : 퀴르갈			퀴르갈이 데모크론 에너지를 이용해 강력해 졌습니다.	icon_skills.paralysistrap_tex	icon_skills.paralysistrap_tex	True
+90340702	MovSpd	Stun	False	perc	5000	0	0.7	라칸의 마력			라칸의 마력이 온 몸을 휘감습니다. 스킬을 사용할 수 없고, 이동속도가 감소합니다.	icon_status.sealskill_tex	icon_status.sealskill_tex	True
+90340702	Block	Stun	False	swch	5000	0	0	라칸의 마력			라칸의 마력이 온 몸을 휘감습니다. 스킬을 사용할 수 없고, 이동속도가 감소합니다.	icon_status.sealskill_tex	icon_status.sealskill_tex	True
+90340705	HPChange	DOT	True	perc	200000	1	-0.03	라칸의 주시			라칸이 당신을 주시하고 있습니다. $H_W_BAD1s$COLOR_END마다 전체 HP 대비 $H_W_BAD3%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_items.q_animaleyeball_tex	icon_items.q_animaleyeball_tex	True
+90340705	StackCounter	DOT	True	seta	200000	0	90340715	라칸의 주시			라칸이 당신을 주시하고 있습니다. $H_W_BAD1s$COLOR_END마다 전체 HP 대비 $H_W_BAD3%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다.	icon_items.q_animaleyeball_tex	icon_items.q_animaleyeball_tex	True
+90340706	DelayedEffect	Buff	True	swch	2500	0	90340707	영혼 세계로의 이동			영혼 세계로 전환하며 라칸이 보호막을 생성합니다. 해제가 가능합니다.	icon_skills.selfbuff_tex	icon_skills.selfbuff_tex	True
+90340707	Absorb	Buff	True	abs	6000000	0	70000000	내면의 보호막			라칸이 내면 세계로 전환하며, 당신의 공격을 막을 보호막을 생성했습니다.	icon_status.balanceup_tex	icon_status.balanceup_tex	True
+90340708	AllResist	Buff	True	perc	2500	0	3.87E-09	마력 응축			라칸이 전멸기를 시전하기 위해 마력을 모으고 있습니다. 라칸에게 수면류 공격을 사용하여, 잠재워야 됩니다!	icon_status.windtyrant_tex	icon_status.windtyrant_tex	True
+90340722	Drunk	Debuff	False	781003	0	0	0	라칸의 영혼 세계			라칸의 영혼 세계에 들어왔습니다.	icon_socials.social_010_tex	icon_socials.social_010_tex	True
+90340726	Stun	DOT	False	swch	6000	0	5	기절			라칸의 공격에 맞아 6초 동안 기절합니다. 이 상태는 해제가 가능합니다.	icon_status.confuseup_tex	icon_status.confuseup_tex	True
+90340729	DelayedEffect	Debuff	False	swch	3000	0	90340730	라칸의 씨앗			라칸이 당신에게 마력의 씨앗을 심었습니다. 일정 시간 후 폭발합니다	icon_status.heat_tex	icon_status.heat_tex	True
+90340734	DelayedEffect	Debuff	False	swch	3000	0	981117	라칸의 씨앗			라칸이 당신에게 마력의 씨앗을 심었습니다. 일정 시간 후 폭발합니다	icon_status.heat_tex	icon_status.heat_tex	True
+90340737	MovSpd	Stun	True	setp	2000	0	0	기절			라칸의 공격에 맞기 직전, 강력한 기운이 당신을 엄습해 기절시켰습니다	icon_status.confuseup_tex	icon_status.confuseup_tex	True
+90340737	Block	Stun	True	swch	2000	0	0	기절			라칸의 공격에 맞기 직전, 강력한 기운이 당신을 엄습해 기절시켰습니다	icon_status.confuseup_tex	icon_status.confuseup_tex	True
+90340737	Stun	Stun	True	swch	2000	0	5	기절			라칸의 공격에 맞기 직전, 강력한 기운이 당신을 엄습해 기절시켰습니다	icon_status.confuseup_tex	icon_status.confuseup_tex	True
+90340737	295	Stun	True	swch	2000	0	0	기절			라칸의 공격에 맞기 직전, 강력한 기운이 당신을 엄습해 기절시켰습니다	icon_status.confuseup_tex	icon_status.confuseup_tex	True
+90340818	IncreasedHeal	DOT	True	swch	90000	0	0.8	락도스의 저주			락도스의 저주를 받아 HP 회복량이 20% 감소하고, 2중첩 시 사망합니다. 락도스의 저주는 해제할 수 없습니다.	icon_status.injuredbtdarkness_tex	icon_status.injuredbtdarkness_tex	True
+90340818	StackCounter	DOT	True	seta	90000	0	90340819	락도스의 저주			락도스의 저주를 받아 HP 회복량이 20% 감소하고, 2중첩 시 사망합니다. 락도스의 저주는 해제할 수 없습니다.	icon_status.injuredbtdarkness_tex	icon_status.injuredbtdarkness_tex	True
+90340820	MovSpd	Stun	False	perc	5000	0	0.7	비오르의 저주			비오르의 저주를 받아 스킬을 사용할 수 없습니다. 이동속도가 감소합니다.	icon_status.sealskill_tex	icon_status.sealskill_tex	True
+90340820	Block	Stun	False	swch	5000	0	0	비오르의 저주			비오르의 저주를 받아 스킬을 사용할 수 없습니다. 이동속도가 감소합니다.	icon_status.sealskill_tex	icon_status.sealskill_tex	True
+90340903	Block	Debuff	True	swch	3000	0	0	암흑 파편			다르칸의 힘에 의해 스킬을 사용할 수 없습니다. 암흑파편 효과는 해제할 수 없습니다.	icon_status.fearstatus_tex	icon_status.fearstatus_tex	True
+90340904	HPChange	DOT	True	perc	15000	2	-0.1	다르칸의 꺼지지 않는 불꽃			$H_W_BAD2s$COLOR_END마다 전체 HP 대비 $H_W_BAD10%$COLOR_END에 달하는 HP가 지속적으로 감소됩니다. 다르칸의 꺼지지 않는 불꽃은 해제할 수 없습니다.	icon_status.firedamage_tex	icon_status.firedamage_tex	True
+90341001	HPChange	DOT	True	perc	90000	5	-0.1	탐욕의 파동			탐욕적인 생각이 온 몸을 휘감고 있습니다. 지속 시간이 끝나기 전에 증오의 파동으로 갱신해야 합니다.	icon_status.cruel_slayer_1_tex	icon_status.cruel_slayer_1_tex	True
+90341001	HPLoss	DOT	True	abs	90000	0	-10000000	탐욕의 파동			탐욕적인 생각이 온 몸을 휘감고 있습니다. 지속 시간이 끝나기 전에 증오의 파동으로 갱신해야 합니다.	icon_status.cruel_slayer_1_tex	icon_status.cruel_slayer_1_tex	True
+90341002	HPChange	DOT	True	perc	90000	5	-0.1	증오의 파동			누군가를 증오하는 마음이 커집니다. 지속 시간이 끝나기 전에 절망의 파동으로 갱신해야 합니다.	icon_status.cruel_slayer_2_tex	icon_status.cruel_slayer_2_tex	True
+90341002	HPLoss	DOT	True	abs	90000	0	-10000000	증오의 파동			누군가를 증오하는 마음이 커집니다. 지속 시간이 끝나기 전에 절망의 파동으로 갱신해야 합니다.	icon_status.cruel_slayer_2_tex	icon_status.cruel_slayer_2_tex	True
+90341003	HPChange	DOT	True	perc	90000	5	-0.1	절망의 파동			절망의 나락에 점점 더 깊게 빠져갑니다. 지속 시간이 끝나기 전에 탐욕의 파동으로 갱신해야 합니다.	icon_status.cruel_slayer_3_tex	icon_status.cruel_slayer_3_tex	True
+90341003	HPLoss	DOT	True	abs	90000	0	-10000000	절망의 파동			절망의 나락에 점점 더 깊게 빠져갑니다. 지속 시간이 끝나기 전에 탐욕의 파동으로 갱신해야 합니다.	icon_status.cruel_slayer_3_tex	icon_status.cruel_slayer_3_tex	True
+90341004	HPChange	DOT	True	perc	8500	5	-0.1	탐욕의 파동			탐욕적인 생각이 온 몸을 휘감고 있습니다. 지속 시간이 끝나기 전에 증오의 파동으로 갱신해야 합니다.	icon_status.cruel_slayer_1_tex	icon_status.cruel_slayer_1_tex	True
+90341004	HPLoss	DOT	True	abs	8500	0	-10000000	탐욕의 파동			탐욕적인 생각이 온 몸을 휘감고 있습니다. 지속 시간이 끝나기 전에 증오의 파동으로 갱신해야 합니다.	icon_status.cruel_slayer_1_tex	icon_status.cruel_slayer_1_tex	True
+90341005	HPChange	DOT	True	perc	8500	5	-0.1	증오의 파동			누군가를 증오하는 마음이 커집니다. 지속 시간이 끝나기 전에 절망의 파동으로 갱신해야 합니다.	icon_status.cruel_slayer_2_tex	icon_status.cruel_slayer_2_tex	True
+90341005	HPLoss	DOT	True	abs	8500	0	-10000000	증오의 파동			누군가를 증오하는 마음이 커집니다. 지속 시간이 끝나기 전에 절망의 파동으로 갱신해야 합니다.	icon_status.cruel_slayer_2_tex	icon_status.cruel_slayer_2_tex	True
+90341006	HPChange	DOT	True	perc	8500	5	-0.1	절망의 파동			절망의 나락에 점점 더 깊게 빠져갑니다. 지속 시간이 끝나기 전에 탐욕의 파동으로 갱신해야 합니다.	icon_status.cruel_slayer_3_tex	icon_status.cruel_slayer_3_tex	True
+90341006	HPLoss	DOT	True	abs	8500	0	-10000000	절망의 파동			절망의 나락에 점점 더 깊게 빠져갑니다. 지속 시간이 끝나기 전에 탐욕의 파동으로 갱신해야 합니다.	icon_status.cruel_slayer_3_tex	icon_status.cruel_slayer_3_tex	True
+90341008	StackCounter	Buff	True	swch	20000	0	90341009	여왕의 포효			여왕의 포효가 들립니다. 해당 효과가 3중첩이 될 경우 여왕의 진노가 발생합니다.	icon_status.plusattack_tex	icon_status.plusattack_tex	True
+90341009	Power	Buff	False	perc	0	0	3	여왕의 진노			힘이 $H_W_GOOD200%$COLOR_END 향상되며 공격속도가 $H_W_GOOD20%$COLOR_END 향상됩니다.	icon_status.plusattack_tex	icon_status.plusattack_tex	True
+90341009	ASpd	Buff	False	perc	0	0	1.2	여왕의 진노			힘이 $H_W_GOOD200%$COLOR_END 향상되며 공격속도가 $H_W_GOOD20%$COLOR_END 향상됩니다.	icon_status.plusattack_tex	icon_status.plusattack_tex	True
+90341010	Absorb	Buff	False	abs	15000	0	42000000	철의 장막			철의 장막이 최대 $H_W_GOOD42000000$COLOR_END 만큼의 피해를 흡수합니다. 최대 피해 흡수량을 넘어서면 지속 시간에 상관 없이 효과는 즉시 해제됩니다.	icon_skills.manashield_tex	icon_skills.manashield_tex	True
+90341010	Immune	Buff	False	20	15000	0	0	철의 장막			철의 장막이 최대 $H_W_GOOD42000000$COLOR_END 만큼의 피해를 흡수합니다. 최대 피해 흡수량을 넘어서면 지속 시간에 상관 없이 효과는 즉시 해제됩니다.	icon_skills.manashield_tex	icon_skills.manashield_tex	True
+90341010	StatusImmune	Buff	False	swch	15000	0	0	철의 장막			철의 장막이 최대 $H_W_GOOD42000000$COLOR_END 만큼의 피해를 흡수합니다. 최대 피해 흡수량을 넘어서면 지속 시간에 상관 없이 효과는 즉시 해제됩니다.	icon_skills.manashield_tex	icon_skills.manashield_tex	True
+90341011	MovSpd	DOT	True	perc	6000	0	0.5	아르곤 바이러스			바이러스에 걸렸습니다! $H_W_BAD1s$COLOR_END마다 전체 HP 대비 $H_W_BAD50%$COLOR_END에 달하는 HP가 지속적으로 감소되며 이동 속도가 $H_W_GOOD50%$COLOR_END 감소됩니다. 또한 현기증 효과를 유발합니다.$BR아르곤 바이러스는 해제 할 수 없습니다.	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
+90341011	HPDrain	DOT	True	perc	6000	0	0.1	아르곤 바이러스			바이러스에 걸렸습니다! $H_W_BAD1s$COLOR_END마다 전체 HP 대비 $H_W_BAD50%$COLOR_END에 달하는 HP가 지속적으로 감소되며 이동 속도가 $H_W_GOOD50%$COLOR_END 감소됩니다. 또한 현기증 효과를 유발합니다.$BR아르곤 바이러스는 해제 할 수 없습니다.	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
+90341011	HPChange	DOT	True	perc	6000	1	-0.5	아르곤 바이러스			바이러스에 걸렸습니다! $H_W_BAD1s$COLOR_END마다 전체 HP 대비 $H_W_BAD50%$COLOR_END에 달하는 HP가 지속적으로 감소되며 이동 속도가 $H_W_GOOD50%$COLOR_END 감소됩니다. 또한 현기증 효과를 유발합니다.$BR아르곤 바이러스는 해제 할 수 없습니다.	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
+90341011	Drunk	DOT	True	426716	6000	0	0	아르곤 바이러스			바이러스에 걸렸습니다! $H_W_BAD1s$COLOR_END마다 전체 HP 대비 $H_W_BAD50%$COLOR_END에 달하는 HP가 지속적으로 감소되며 이동 속도가 $H_W_GOOD50%$COLOR_END 감소됩니다. 또한 현기증 효과를 유발합니다.$BR아르곤 바이러스는 해제 할 수 없습니다.	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
+90341012	Endurance	Debuff	True	perc	40000	0	1	아르곤 세포 전이			5중첩 시 아르곤 바이러스 효과가 발동합니다.	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
+90341012	StackCounter	Debuff	True	swch	40000	0	90341011	아르곤 세포 전이			5중첩 시 아르곤 바이러스 효과가 발동합니다.	icon_status.poisonstatus_tex	icon_status.poisonstatus_tex	True
+90341013	Power	Buff	False	perc	0	0	3	여왕의 진노			힘이 $H_W_GOOD200%$COLOR_END 향상되며 공격속도가 $H_W_GOOD20%$COLOR_END 향상됩니다.	icon_status.plusattack_tex	icon_status.plusattack_tex	True
+90341013	ASpd	Buff	False	perc	0	0	1.2	여왕의 진노			힘이 $H_W_GOOD200%$COLOR_END 향상되며 공격속도가 $H_W_GOOD20%$COLOR_END 향상됩니다.	icon_status.plusattack_tex	icon_status.plusattack_tex	True
+90341014	MovSpd	Stun	False	setp	10000	0	0	여왕의 주박			지속 시간 동안 제 자리에서 움직일 수 없으며, 그 어떤 종류의 이동,방어 스킬도 사용할 수 없습니다!	icon_status.minusmove_tex	icon_status.minusmove_tex	True
+90341014	Block	Stun	False	swch	10000	0	0	여왕의 주박			지속 시간 동안 제 자리에서 움직일 수 없으며, 그 어떤 종류의 이동,방어 스킬도 사용할 수 없습니다!	icon_status.minusmove_tex	icon_status.minusmove_tex	True
+90341015	ASpd	Debuff	False	perc	7200000	0	1.1	끝 없는 힘			공격 속도가 $H_W_GOOD10%$COLOR_END 증가됩니다. 이 효과는 최대 3번 중첩됩니다.	icon_status.plusmove_tex	icon_status.plusmove_tex	True
 90991001	MovSpd	Debuff	False	setp	0	0	0.3	개발용_무궁화꽃이 피었습니다			무궁화꽃이 피었나요?	icon_status.minusmove_tex	icon_status.minusmove_tex	True
 90991001	MovSpdInCombat	Debuff	False	setp	0	0	0.1	개발용_무궁화꽃이 피었습니다			무궁화꽃이 피었나요?	icon_status.minusmove_tex	icon_status.minusmove_tex	True
 90991001	HPDrain	Debuff	False	setp	0	0	0.1	개발용_무궁화꽃이 피었습니다			무궁화꽃이 피었나요?	icon_status.minusmove_tex	icon_status.minusmove_tex	True
@@ -6827,7 +6963,7 @@
 999009600	Stun1	Debuff	False	seta	3930000	15	4	기절 공격			적군에게 15초에 한 번씩 기절 상태를 만듭니다.	icon_status.minddomination_tex	icon_status.minddomination_tex	True
 999009700	Power	Buff	True	perc	60000	0	1.5	투명화			투명화 상태가 되어 적에게 보이지 않게 되고, 힘이 $H_W_GOOD50%$COLOR_END 상승합니다.	icon_status.immunedebuff_tex	icon_status.immunedebuff_tex	True
 999009700	Visibility	Buff	True	swch	60000	0	0	투명화			투명화 상태가 되어 적에게 보이지 않게 되고, 힘이 $H_W_GOOD50%$COLOR_END 상승합니다.	icon_status.immunedebuff_tex	icon_status.immunedebuff_tex	True
-999009710	HPChange	Buff	True	abs	1000	1	10000	HP 회복			HP가 10000 회복됩니다.	icon_items.potion14_tex	icon_items.potion14_tex	True
+999009710	HPChange	Buff	True	abs	1000	1	30000	HP 회복			HP가 10000 회복됩니다.	icon_items.potion14_tex	icon_items.potion14_tex	True
 999009720	CDR	Buff	True	swch	60000	0	0.8	쿨타임 감소			쿨 타임이 $H_W_GOOD20%$COLOR_END 감소됩니다.	icon_status.pluswill_tex	icon_status.pluswill_tex	True
 999009730	MovSpdInCombat	Buff	True	seta	60000	0	240	이동 속도 상승			이동 속도가 $H_W_GOOD240$COLOR_END으로 고정됩니다.	icon_status.aura_of_wind_tex	icon_status.aura_of_wind_tex	True
 999009730	OutOfCombatMovSpd	Buff	True	seta	60000	0	240	이동 속도 상승			이동 속도가 $H_W_GOOD240$COLOR_END으로 고정됩니다.	icon_status.aura_of_wind_tex	icon_status.aura_of_wind_tex	True

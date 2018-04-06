@@ -2517,7 +2517,7 @@
 		<Monster name="애니" id="8100" isBoss="False" hp="945" />
 		<Monster name="T-cat 교환원" id="9000" isBoss="False" hp="10000" />
 	</Zone>
-	<Zone id="63" name="포포리아 가드" >
+	<Zone id="63" name="벨리카 직할령" >
 		<Monster name="앨런 케일" id="1001" isBoss="False" hp="10000" />
 		<Monster name="제인 모리스" id="1002" isBoss="False" hp="10000" />
 		<Monster name="크루드" id="1003" isBoss="False" hp="10000" />
@@ -4891,6 +4891,7 @@
 		<Monster name="수비대 중부 캠프" id="1171" isBoss="False" hp="0" />
 		<Monster name="수비대 남부 캠프" id="1172" isBoss="False" hp="0" />
 		<Monster name="이벤트 경기장" id="1173" isBoss="False" hp="0" />
+		<Monster name="이벤트 경기장" id="1174" isBoss="False" hp="0" />
 		<Monster name="아논족 저항군 캠프" id="1721" isBoss="False" hp="0" />
 		<Monster name="아논족 피난 캠프" id="1722" isBoss="False" hp="0" />
 		<Monster name="바라카니아 경제인 연합" id="1820" isBoss="False" hp="0" />
@@ -4969,6 +4970,7 @@
 		<Monster name="전투/마법 기술 교관" id="8272" isBoss="False" hp="0" />
 		<Monster name="페가수스 관리인" id="8273" isBoss="False" hp="0" />
 		<Monster name="전투/마법 기술 교관" id="8281" isBoss="False" hp="0" />
+		<Monster name="잔혹한 환영의 탑 입구" id="9034" isBoss="False" hp="0" />
 		<Monster name="데모로스의 룰렛 입구" id="9066" isBoss="False" hp="0" />
 		<Monster name="베르노의 실험실 입구" id="9067" isBoss="False" hp="0" />
 		<Monster name="거짓말쟁이 타르스키의 놀이터 입구" id="9070" isBoss="False" hp="0" />
@@ -5792,7 +5794,7 @@
 		<Monster name="피룽" id="9161" isBoss="False" hp="10000" />
 		<Monster name="카룽" id="9757" isBoss="False" hp="10000" />
 	</Zone>
-	<Zone id="201" name="벨리카 직할령" >
+	<Zone id="201" name="포포리아 가드" >
 		<Monster name="레오릭스" id="1001" isBoss="False" hp="0" />
 		<Monster name="로미리 메렌" id="1002" isBoss="False" hp="0" />
 		<Monster name="테세리스" id="1003" isBoss="False" hp="0" />
@@ -9651,7 +9653,7 @@
 		<Monster name="크라카톡스" id="81118" isBoss="False" hp="3647345" />
 		<Monster name="SH - 2007" id="81125" isBoss="False" hp="1048611" />
 	</Zone>
-	<Zone id="434" name="환영의 탑" >
+	<Zone id="434" name="잔혹한 환영의 탑" >
 		<Monster name="1층의 마석" id="101" isBoss="False" hp="100" />
 		<Monster name="2층의 마석" id="102" isBoss="False" hp="100" />
 		<Monster name="3층의 마석" id="103" isBoss="False" hp="100" />
@@ -9672,11 +9674,11 @@
 		<Monster name="팬텀" id="208" isBoss="False" hp="1400000000" />
 		<Monster name="팬텀" id="209" isBoss="False" hp="1400000000" />
 		<Monster name="팬텀" id="210" isBoss="False" hp="1400000000" />
-		<Monster name="아카샤의 환영" id="1000" isBoss="True" hp="3266498919" />
+		<Monster name="아카샤의 환영" id="1000" isBoss="True" hp="3756473757" />
 		<Monster name="돌진 소라게의 환영" id="1001" isBoss="False" hp="3500000" />
 		<Monster name="중독 소라게의 환영" id="1002" isBoss="False" hp="3500000" />
 		<Monster name="수면 소라게의 환영" id="1003" isBoss="False" hp="3500000" />
-		<Monster name="시누스의 환영" id="1004" isBoss="False" hp="11709490" />
+		<Monster name="시누스의 환영" id="1004" isBoss="False" hp="13465913" />
 		<Monster name="차원의 마법석" id="1501" isBoss="False" hp="10000" />
 		<Monster name="차원의 마법석" id="1502" isBoss="False" hp="10000" />
 		<Monster name="차원의 마법석" id="1503" isBoss="False" hp="10000" />
@@ -9688,25 +9690,43 @@
 		<Monster name="차원의 마법석" id="1509" isBoss="False" hp="10000" />
 		<Monster name="차원의 마법석" id="1510" isBoss="False" hp="10000" />
 		<Monster name="차원의 마법석" id="1511" isBoss="False" hp="10000" />
-		<Monster name="바포메트의 환영" id="2000" isBoss="True" hp="4758870816" />
-		<Monster name="뱀머리의 환영" id="2001" isBoss="False" hp="7318431" />
-		<Monster name="듀리온의 환영" id="3000" isBoss="True" hp="4343058720" />
-		<Monster name="저주받은 실험체의 환영" id="3001" isBoss="False" hp="4000000" />
+		<Monster name="카프리콘의 환영" id="2000" isBoss="True" hp="5472701438" />
+		<Monster name="뱀머리의 환영" id="2001" isBoss="False" hp="8416195" />
+		<Monster name="듀리온의 환영" id="3000" isBoss="True" hp="4994517528" />
+		<Monster name="저주받은 실험체의 환영" id="3001" isBoss="False" hp="4600000" />
 		<Monster name="창기사의 환영" id="3003" isBoss="False" hp="4391059" />
-		<Monster name="독살자의 환영" id="3004" isBoss="False" hp="5693758" />
-		<Monster name="검투사의 환영" id="3005" isBoss="False" hp="5693758" />
-		<Monster name="멜디타의 환영" id="4000" isBoss="True" hp="4714107552" />
-		<Monster name="촉수의 환영" id="4001" isBoss="False" hp="10976635" />
-		<Monster name="켈사이크의 환영" id="5000" isBoss="True" hp="5512262112" />
-		<Monster name="화염 정령의 환영" id="5002" isBoss="False" hp="31267489" />
-		<Monster name="냉기 정령의 환영" id="5003" isBoss="False" hp="31267489" />
-		<Monster name="퀴르갈의 환영" id="6000" isBoss="True" hp="4000000000" />
-		<Monster name="라칸의 환영" id="7000" isBoss="True" hp="4000000000" />
-		<Monster name="번스타인의 환영" id="8000" isBoss="True" hp="2379435408" />
+		<Monster name="독살자의 환영" id="3004" isBoss="False" hp="6547821" />
+		<Monster name="검투사의 환영" id="3005" isBoss="False" hp="6547821" />
+		<Monster name="멜디타의 환영" id="4000" isBoss="True" hp="5421223685" />
+		<Monster name="촉수의 환영" id="4001" isBoss="False" hp="12623130" />
+		<Monster name="켈사이크의 환영" id="5000" isBoss="True" hp="6339101429" />
+		<Monster name="화염 정령의 환영" id="5002" isBoss="False" hp="35957612" />
+		<Monster name="냉기 정령의 환영" id="5003" isBoss="False" hp="35957612" />
+		<Monster name="퀴르갈의 환영" id="6000" isBoss="True" hp="10853930405" />
+		<Monster name="촉수의 환영" id="6001" isBoss="False" hp="31674742" />
+		<Monster name="데모크론 마석의 환영" id="6002" isBoss="False" hp="10000" />
+		<Monster name="라칸의 환영" id="7000" isBoss="True" hp="7174792555" />
+		<Monster name="번스타인의 환영" id="8000" isBoss="True" hp="7864792555" />
 		<Monster name="락도스의 환영" id="8100" isBoss="True" hp="1189717704" />
+		<Monster name="영혼 봉인함의 환영" id="8101" isBoss="False" hp="30000" />
+		<Monster name="영혼 봉인함의 환영" id="8102" isBoss="False" hp="30000" />
+		<Monster name="영혼 봉인함의 환영" id="8103" isBoss="False" hp="30000" />
+		<Monster name="영혼 봉인함의 환영" id="8104" isBoss="False" hp="30000" />
+		<Monster name="영혼 봉인함의 환영" id="8105" isBoss="False" hp="30000" />
+		<Monster name="영혼 봉인함의 환영" id="8106" isBoss="False" hp="30000" />
+		<Monster name="영혼 봉인함의 환영" id="8107" isBoss="False" hp="30000" />
+		<Monster name="영혼 봉인함의 환영" id="8108" isBoss="False" hp="30000" />
+		<Monster name="영혼 봉인함의 환영" id="8109" isBoss="False" hp="30000" />
+		<Monster name="영혼 봉인함의 환영" id="8110" isBoss="False" hp="30000" />
+		<Monster name="영혼 봉인함의 환영" id="8111" isBoss="False" hp="30000" />
+		<Monster name="영혼 봉인함의 환영" id="8112" isBoss="False" hp="30000" />
+		<Monster name="영혼 봉인함의 환영" id="8113" isBoss="False" hp="30000" />
+		<Monster name="영혼 봉인함의 환영" id="8114" isBoss="False" hp="30000" />
+		<Monster name="영혼 봉인함의 환영" id="8115" isBoss="False" hp="30000" />
+		<Monster name="영혼 봉인함의 환영" id="8116" isBoss="False" hp="30000" />
 		<Monster name="비오르의 환영" id="8200" isBoss="True" hp="1189717704" />
-		<Monster name="다르칸의 환영" id="9000" isBoss="True" hp="750000000" />
-		<Monster name="샨드라마나이아의 환영" id="10000" isBoss="True" hp="2100000000" />
+		<Monster name="다르칸의 환영" id="9000" isBoss="True" hp="7637007230" />
+		<Monster name="샨드라마나이아의 환영" id="10000" isBoss="True" hp="8907742671" />
 	</Zone>
 	<Zone id="436" name="카라스챠 소환지" >
 		<Monster name="로크의 광신도" id="1001" isBoss="False" hp="1160" />
@@ -10490,7 +10510,7 @@
 		<Monster name="속은 자의 일지" id="504" isBoss="False" hp="366797" />
 		<Monster name="탈출한 자의 일지" id="505" isBoss="False" hp="10000" />
 		<Monster name="꼬장꼬장한 할머니" id="800" isBoss="False" hp="10000" />
-		<Monster name="타르스키" id="1000" isBoss="True" hp="1577724000" />
+		<Monster name="타르스키" id="1000" isBoss="True" hp="3264000000" />
 		<Monster name="차원의 마법석" id="1501" isBoss="False" hp="10000" />
 	</Zone>
 	<Zone id="471" name="사령술 연구소" >
@@ -11925,6 +11945,8 @@
 		<Monster name="길버트 그레이스" id="302" isBoss="False" hp="366797" />
 		<Monster name="딘 플랜" id="303" isBoss="False" hp="120000000" />
 		<Monster name="라실 오르단" id="304" isBoss="False" hp="120000000" />
+		<Monster name="새라 화이트리버" id="400" isBoss="False" hp="10000" />
+		<Monster name="메이슨 쿠벨" id="401" isBoss="False" hp="10000" />
 		<Monster name="차원의 마법석" id="900" isBoss="False" hp="10000" />
 		<Monster name="차원의 마법석" id="901" isBoss="False" hp="10000" />
 		<Monster name="오리아 쿠벨" id="903" isBoss="False" hp="10000" />
@@ -11951,6 +11973,34 @@
 		<Monster name="NJ - 4885" id="81109" isBoss="False" hp="3869177" />
 		<Monster name="크라카톡스" id="81118" isBoss="False" hp="50412440" />
 		<Monster name="SH - 2007" id="81125" isBoss="False" hp="3869177" />
+	</Zone>
+	<Zone id="618" name="벨리카 이벤트 경기장" >
+		<Monster name="안내 요원" id="5101" isBoss="False" hp="10000" />
+		<Monster name="안내 요원" id="5102" isBoss="False" hp="10000" />
+		<Monster name="안내 요원" id="5103" isBoss="False" hp="10000" />
+		<Monster name="잡화 상인" id="5104" isBoss="False" hp="10000" />
+		<Monster name="창고지기" id="5105" isBoss="False" hp="10000" />
+		<Monster name="출입 관리인" id="5106" isBoss="False" hp="10000" />
+		<Monster name="차원의 마법석" id="5107" isBoss="False" hp="53600" />
+		<Monster name="샘 호킨스" id="5201" isBoss="False" hp="10000" />
+		<Monster name="잭 베일" id="5202" isBoss="False" hp="10000" />
+		<Monster name="줄리아 해리스" id="5203" isBoss="False" hp="10000" />
+		<Monster name="릭" id="5204" isBoss="False" hp="10000" />
+		<Monster name="도칸 카일룸" id="5205" isBoss="False" hp="10000" />
+		<Monster name="푸른열쇠 마람" id="5206" isBoss="False" hp="10000" />
+		<Monster name="안나 라펠레이트" id="5207" isBoss="False" hp="10000" />
+		<Monster name="달빛 응원단" id="5208" isBoss="False" hp="10000" />
+		<Monster name="레넥 나크툼" id="5209" isBoss="False" hp="10000" />
+		<Monster name="탈리 오르단" id="5210" isBoss="False" hp="10000" />
+		<Monster name="코코링" id="5211" isBoss="False" hp="807599" />
+		<Monster name="타이몽" id="5212" isBoss="False" hp="343984" />
+		<Monster name="안전 요원" id="5213" isBoss="False" hp="10000" />
+		<Monster name="청소 요원" id="5214" isBoss="False" hp="10000" />
+		<Monster name="달빛 응원단" id="5215" isBoss="False" hp="10000" />
+		<Monster name="달빛 응원단" id="5216" isBoss="False" hp="10000" />
+		<Monster name="달빛 응원단" id="5217" isBoss="False" hp="10000" />
+		<Monster name="달빛 응원단" id="5218" isBoss="False" hp="10000" />
+		<Monster name="달빛 응원단" id="5219" isBoss="False" hp="10000" />
 	</Zone>
 	<Zone id="620" name="베리타스 특별지구" >
 		<Monster name="베헤모스" id="1000" isBoss="True" hp="6300000000" />
@@ -12016,6 +12066,22 @@
 		<Monster name="카르락 나크툼" id="1011" isBoss="False" hp="5780726" />
 		<Monster name="경비병" id="1012" isBoss="False" hp="100000000" />
 		<Monster name="벨텐" id="1013" isBoss="True" hp="900000000" />
+	</Zone>
+	<Zone id="628" name="벨리카 직할령" >
+		<Monster name="마그누트" id="1000" isBoss="True" hp="20000000000" />
+		<Monster name="에드윈" id="1100" isBoss="False" hp="615" />
+		<Monster name="에드윈" id="1101" isBoss="False" hp="615" />
+		<Monster name="에드윈" id="1102" isBoss="False" hp="615" />
+		<Monster name="경비병" id="1201" isBoss="False" hp="10000" />
+		<Monster name="경비병" id="1202" isBoss="False" hp="10000" />
+		<Monster name="경비병" id="1203" isBoss="False" hp="10000" />
+		<Monster name="경비병" id="1204" isBoss="False" hp="10000" />
+		<Monster name="리다 엘린" id="1205" isBoss="False" hp="10000" />
+		<Monster name="기슬란 리오나스" id="1206" isBoss="False" hp="10000" />
+		<Monster name="에스트" id="3000" isBoss="True" hp="3000000000" />
+		<Monster name="오스트" id="3001" isBoss="True" hp="3000000000" />
+		<Monster name="분노 타워" id="5400" isBoss="False" hp="73015" />
+		<Monster name="증오 타워" id="5401" isBoss="False" hp="73015" />
 	</Zone>
 	<Zone id="643" name="마법사의 요새" >
 		<Monster name="바르가스" id="1001" isBoss="True" hp="161159398" />
@@ -15107,6 +15173,15 @@
 		<Monster name="아크마 둔칸" id="160324" isBoss="False" hp="10000" />
 		<Monster name="로도스" id="160325" isBoss="False" hp="10000" />
 		<Monster name="프레이아 로헨" id="160326" isBoss="False" hp="10000" />
+		<Monster name="기간드 농부" id="160327" isBoss="False" hp="6764" />
+		<Monster name="기간드 크리쳐" id="160328" isBoss="False" hp="6389" />
+		<Monster name="기간드 검술사" id="160329" isBoss="False" hp="17275" />
+		<Monster name="기간드 도끼전사" id="160330" isBoss="False" hp="17275" />
+		<Monster name="기간드 칼트룬" id="160331" isBoss="False" hp="44251" />
+		<Monster name="기간드 테세크" id="160332" isBoss="False" hp="44251" />
+		<Monster name="기간드 감독관" id="160333" isBoss="False" hp="9124" />
+		<Monster name="기간드 기생 야수" id="160334" isBoss="False" hp="99941" />
+		<Monster name="사쿠란보 베르노" id="160335" isBoss="False" hp="1496000000" />
 		<Monster name="크리스마스의 악몽" id="300937" isBoss="False" hp="723" />
 		<Monster name="튼튼한 칼라쉬 아르메로" id="885061" isBoss="False" hp="405000000" />
 		<Monster name="샨드라마나이아" id="885200" isBoss="False" hp="3150000000" />
