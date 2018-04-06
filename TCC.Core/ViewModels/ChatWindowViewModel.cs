@@ -184,24 +184,27 @@ namespace TCC.ViewModels
             if (!SettingsManager.ChatWindowSettings.Enabled) return;
             if (BlockedUsers.Contains(chatMessage.Author)) return;
             var vch = VisibleChannels.FirstOrDefault(x => x.Channel == chatMessage.Channel);
-            if(vch == null)
+            if (vch == null)
             {
-                var sb = new StringBuilder();
-                sb.Append("TIME: ");
-                sb.Append(DateTime.UtcNow);
-                sb.Append("\n");
-                sb.Append("FROM: ");
-                sb.Append(chatMessage.Author);
-                sb.Append("\n");
-                sb.Append("CHANNEL: ");
-                sb.Append(chatMessage.Channel);
-                sb.Append("\n");
-                sb.Append("TEXT: ");
-                sb.Append(chatMessage.RawMessage);
+                try
+                {
+                    var sb = new StringBuilder();
+                    sb.Append("TIME: ");
+                    sb.Append(DateTime.UtcNow);
+                    sb.Append("\n");
+                    sb.Append("FROM: ");
+                    sb.Append(chatMessage.Author);
+                    sb.Append("\n");
+                    sb.Append("CHANNEL: ");
+                    sb.Append(chatMessage.Channel);
+                    sb.Append("\n");
+                    sb.Append("TEXT: ");
+                    sb.Append(chatMessage.RawMessage);
 
-                File.WriteAllText("chat-message-error.txt", sb.ToString());
-                var err = new ChatMessage(ChatChannel.Error, "TCC", "Failed to display chat message. Please send chat-message-error.txt to the developer via Discord or GitHub issue.");
-                AddChatMessage(err);
+                    File.WriteAllText("chat-message-error.txt", sb.ToString());
+                    var err = new ChatMessage(ChatChannel.Error, "TCC", "Failed to display chat message. Please send chat-message-error.txt to the developer via Discord or GitHub issue.");
+                    AddChatMessage(err);
+                } catch { }
             }
             if (!vch.Enabled) return;
             if (ChatMessages.Count < SettingsManager.SpamThreshold)
