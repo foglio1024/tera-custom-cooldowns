@@ -6,6 +6,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using TCC.Data;
+using TCC.ViewModels;
 
 namespace TCC.Controls
 {
@@ -145,5 +146,20 @@ namespace TCC.Controls
             warnArc.BeginAnimation(Arc.StrokeThicknessProperty, ExpandWarnInner);
         }
 
+        private void UserControl_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            DeleteButton.Visibility = Visibility.Visible;
+        }
+
+        private void UserControl_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            DeleteButton.Visibility = Visibility.Collapsed;
+
+        }
+
+        private void DeleteButton_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            CooldownWindowViewModel.Instance.DeleteFixedSkill(_context);
+        }
     }
 }
