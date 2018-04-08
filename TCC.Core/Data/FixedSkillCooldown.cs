@@ -59,7 +59,10 @@ namespace TCC.Data
                 NotifyPropertyChanged(nameof(IsAvailable));
             }
         }
-
+        public override string ToString()
+        {
+            return Skill.Name;
+        }
         public FixedSkillCooldown(Skill sk, CooldownType t, Dispatcher d, bool flashOnAvailable)
         {
             _dispatcher = d;
