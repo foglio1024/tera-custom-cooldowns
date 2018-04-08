@@ -207,13 +207,28 @@ namespace TCC
 
         private static void LoadWindows()
         {
-            waiting = true;
-            foreach (var del in WindowLoadingDelegates)
-            {
-                waiting = true;
-                del.DynamicInvoke();
-                while (waiting) { }
-            }
+            //waiting = true;
+            //foreach (var del in WindowLoadingDelegates)
+            //{
+            //    waiting = true;
+            //    del.DynamicInvoke();
+            //    while (waiting) { }
+            //}
+            GroupWindow = new GroupWindow();
+            ChatWindow = new ChatWindow(); 
+            CooldownWindow = new CooldownWindow();
+            BossWindow = new BossWindow();
+            BuffWindow = new BuffWindow();
+            CharacterWindow = new CharacterWindow();
+            ClassWindow = new ClassWindow();
+            InfoWindow = new InfoWindow();
+            GroupWindow.Show();     
+            ChatWindow.Show();      
+            CooldownWindow.Show();  
+            BossWindow.Show();      
+            BuffWindow.Show();      
+            CharacterWindow.Show(); 
+            ClassWindow.Show();     
             Debug.WriteLine("Windows loaded");
 
         }
