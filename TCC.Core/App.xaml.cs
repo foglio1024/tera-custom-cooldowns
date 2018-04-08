@@ -27,7 +27,7 @@ namespace TCC
     /// </summary>
     public partial class App
     {
-        public static bool Debug = false;
+        public static bool Debug = true;
         public static TCC.Windows.SplashScreen SplashScreen;
         public static string Version;
         private static void GlobalUnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
@@ -125,14 +125,13 @@ namespace TCC
             Version = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
             InitSS();
             var cd = AppDomain.CurrentDomain;
-            cd.UnhandledException += GlobalUnhandledExceptionHandler;
+            //cd.UnhandledException += GlobalUnhandledExceptionHandler;
             Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.Normal;
             try
             {
                 File.Delete(AppDomain.CurrentDomain.BaseDirectory + "/TCCupdater.exe");
             }
             catch (Exception) { }
-            //SplashScreen = null; //######################################################################
             SplashScreen.SetText("Checking for application updates...");
 
             UpdateManager.CheckAppVersion();
@@ -142,7 +141,6 @@ namespace TCC
 
             SplashScreen.SetText("Loading skills...");
             SkillsDatabase.Load();
-            //ItemSkillsDatabase.SetBroochesIcons();
             SplashScreen.SetText("Loading settings...");
             SettingsManager.LoadWindowSettings();
             SettingsManager.LoadSettings();
@@ -186,11 +184,12 @@ namespace TCC
 
             SplashScreen.CloseWindowSafe();
             if (!Debug) return;
-
+            SessionManager.CurrentPlayer = new Player(1, "Foglio");
+            SessionManager.CurrentPlayer.Class = Class.Warrior;
+            CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(Class.Warrior).ToLower() + "-skills.xml", Class.Warrior);
+            return;
             //ss.Dispatcher.Invoke(new Action(() => ss.Close()));
 
-            SessionManager.CurrentPlayer = new Player(1, "Foglio");
-            CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(Class.Warrior).ToLower() + "-skills.xml", Class.Warrior);
 
             var u = new User(GroupWindowViewModel.Instance.GetDispatcher());
             u.Name = "Test_Dps";
@@ -232,6 +231,16 @@ namespace TCC
             Environment.Exit(0);
         }
 
+        private void ToolTip_Opened(object sender, RoutedEventArgs e)
+        {
+            FocusManager.Running = false;
+        }
+
+        private void ToolTip_Closed(object sender, RoutedEventArgs e)
+        {
+            FocusManager.Running = true;
+
+        }
     }
 
 }
