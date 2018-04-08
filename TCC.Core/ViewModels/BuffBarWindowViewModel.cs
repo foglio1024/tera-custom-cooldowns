@@ -15,6 +15,7 @@ namespace TCC.ViewModels
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
             _scale = SettingsManager.BuffWindowSettings.Scale;
+            Player = new Player();
             WindowManager.TccVisibilityChanged += (s, ev) =>
             {
                 //RaisePropertyChanged("IsTeraOnTop");
