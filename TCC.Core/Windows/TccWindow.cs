@@ -32,6 +32,7 @@ namespace TCC.Windows
             }
         }
 
+        public WindowSettings WindowSettings => _settings;
 
         protected void InitWindow(WindowSettings ws, bool canClickThru = true, bool canHide = true, bool ignoreSize = true)
         {
@@ -81,6 +82,7 @@ namespace TCC.Windows
             SizeChanged += TccWindow_SizeChanged;
             Closed += TccWindow_Closed;
             Loaded += TccWindow_Loaded;
+
         }
 
         private void _settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -128,6 +130,7 @@ namespace TCC.Windows
 
         private void TccWindow_SizeChanged(object sender, SizeChangedEventArgs e)
         {
+            CheckBounds();
             if (_ignoreSize) return;
             _settings.W = ActualWidth;
             _settings.H = ActualHeight;
@@ -208,7 +211,7 @@ namespace TCC.Windows
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Visibility"));
             });
         }
-
+        
         public void AnimateContentOpacity(double opacity)
         {
             Dispatcher.InvokeIfRequired(() =>
@@ -224,12 +227,14 @@ namespace TCC.Windows
         {
             _settings = ws;
         }
+        
         protected void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             try
             {
                 if (!_ignoreSize) ResizeMode = ResizeMode.NoResize;
                 DragMove();
+                CheckBounds();
                 if (!_ignoreSize) ResizeMode = ResizeMode.CanResize;
                 var screen = Screen.FromHandle(new WindowInteropHelper(this).Handle);
                 var source = PresentationSource.FromVisual(this);
@@ -246,6 +251,20 @@ namespace TCC.Windows
             }
             catch (Exception) { }
         }
+
+        private void CheckBounds()
+        {
+            if (Left < 0) Left = 0;
+            if ((Left + ActualWidth) > Screen.PrimaryScreen.WorkingArea.Width)
+            {
+                Left = Screen.PrimaryScreen.Bounds.Width - ActualWidth;
+            }
+            if ((Top + ActualHeight) > Screen.PrimaryScreen.WorkingArea.Height)
+            {
+                Top = Screen.PrimaryScreen.Bounds.Height - ActualHeight;
+            }
+        }
+
         public void CloseWindowSafe()
         {
             if (Dispatcher.CheckAccess())
