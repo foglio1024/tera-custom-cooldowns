@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using System.Windows.Threading;
 using System.Xml;
 using TCC.Data;
+using TCC.Data.Databases;
+using TCC.Windows;
 
 namespace TCC.ViewModels
 {
@@ -17,7 +19,6 @@ namespace TCC.ViewModels
     {
         private static CooldownWindowViewModel _instance;
         public static CooldownWindowViewModel Instance => _instance ?? (_instance = new CooldownWindowViewModel());
-
         public bool IsTeraOnTop => WindowManager.IsTccVisible;
         public bool ShowItems => SettingsManager.ShowItemsCooldown;
 
@@ -83,6 +84,26 @@ namespace TCC.ViewModels
             }
         }
         public SynchronizedObservableCollection<FixedSkillCooldown> HiddenSkills { get; }
+
+        public SynchronizedObservableCollection<Skill> ChoiceList
+        {
+            get
+            {
+                var list = new SynchronizedObservableCollection<Skill>();
+                var c = SessionManager.CurrentPlayer.Class;
+                var skillsForClass = SkillsDatabase.Skills[c];
+                foreach (var skill in skillsForClass.Values)
+                {
+                    if (MainSkills.Any(x => x.Skill.IconName == skill.IconName)) continue;
+                    if (SecondarySkills.Any(x => x.Skill.IconName == skill.IconName)) continue;
+                    if (list.All(x => x.IconName != skill.IconName))
+                    {
+                        list.Add(skill);
+                    }
+                }
+                return list;
+            }
+        }
 
         private static ClassManager _classManager => ClassManager.CurrentClassManager;
 
@@ -177,6 +198,20 @@ namespace TCC.ViewModels
 
             }
         }
+
+        internal void DeleteFixedSkill(FixedSkillCooldown context)
+        {
+            if (MainSkills.Contains(context)) MainSkills.Remove(context);
+            else if (SecondarySkills.Contains(context)) SecondarySkills.Remove(context);
+
+            SaveSkillsConfig();
+        }
+
+        private void SaveSkillsConfig()
+        {
+            //throw new NotImplementedException();
+        }
+
         private void NormalMode_Remove(Skill sk)
         {
             if (!SettingsManager.CooldownWindowSettings.Enabled) return;
@@ -430,6 +465,7 @@ namespace TCC.ViewModels
             OtherSkills = new SynchronizedObservableCollection<SkillCooldown>(_dispatcher);
             HiddenSkills = new SynchronizedObservableCollection<FixedSkillCooldown>(_dispatcher);
             ItemSkills = new SynchronizedObservableCollection<SkillCooldown>(_dispatcher);
+            //ChoiceList = new SynchronizedObservableCollection<FixedSkillCooldown>(_dispatcher);
             WindowManager.TccVisibilityChanged += (s, ev) =>
             {
                 NotifyPropertyChanged("IsTeraOnTop");
