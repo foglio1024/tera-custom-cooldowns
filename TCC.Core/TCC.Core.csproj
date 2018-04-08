@@ -83,6 +83,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dragablz, Version=0.0.3.203, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dragablz.0.0.3.203\lib\net45\Dragablz.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -229,6 +232,9 @@
     <Compile Include="Controls\SelectionSetting.xaml.cs">
       <DependentUpon>SelectionSetting.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SkillAddButton.xaml.cs">
+      <DependentUpon>SkillAddButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TimelineControl.xaml.cs">
       <DependentUpon>TimelineControl.xaml</DependentUpon>
     </Compile>
@@ -242,6 +248,7 @@
       <DependentUpon>VanguardInfoControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolToBrushConverter.cs" />
+    <Compile Include="Converters\BoolToPinIconConverter.cs" />
     <Compile Include="Converters\DungeonIdToStarsConverter.cs" />
     <Compile Include="Converters\DungeonIdToImageConverter.cs" />
     <Compile Include="Converters\DungeonIdToNameConverter.cs" />
@@ -847,6 +854,9 @@
     <Compile Include="Controls\ChatControls\MoneyMessagePiece.xaml.cs">
       <DependentUpon>MoneyMessagePiece.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\WindowButtons.xaml.cs">
+      <DependentUpon>WindowButtons.xaml</DependentUpon>
+    </Compile>
     <Page Include="Controls\AbnormalityIndicator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1000,6 +1010,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\SelectionSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SkillAddButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1193,6 +1207,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SplashScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\WindowButtons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
