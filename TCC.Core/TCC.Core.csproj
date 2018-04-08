@@ -232,9 +232,6 @@
     <Compile Include="Controls\SelectionSetting.xaml.cs">
       <DependentUpon>SelectionSetting.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SkillAddButton.xaml.cs">
-      <DependentUpon>SkillAddButton.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\TimelineControl.xaml.cs">
       <DependentUpon>TimelineControl.xaml</DependentUpon>
     </Compile>
@@ -1010,10 +1007,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\SelectionSetting.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\SkillAddButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
