@@ -16,10 +16,10 @@ namespace TCC.Windows
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             InitWindow(SettingsManager.BuffWindowSettings, ignoreSize: true);
-
-            buffs.ItemsSource = BuffBarWindowViewModel.Instance.Player.Buffs;
-            debuffs.ItemsSource = BuffBarWindowViewModel.Instance.Player.Debuffs;
-            infBuffs.ItemsSource = BuffBarWindowViewModel.Instance.Player.InfBuffs;
+            //(this.DataContext as BuffBarWindowViewModel).Player = new Data.Player();
+            //buffs.ItemsSource = BuffBarWindowViewModel.Instance.Player.Buffs;
+            //debuffs.ItemsSource = BuffBarWindowViewModel.Instance.Player.Debuffs;
+            //infBuffs.ItemsSource = BuffBarWindowViewModel.Instance.Player.InfBuffs;
         }
 
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)

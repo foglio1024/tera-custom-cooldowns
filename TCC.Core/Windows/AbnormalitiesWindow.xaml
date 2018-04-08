@@ -39,7 +39,7 @@
         <StackPanel.LayoutTransform>
             <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
         </StackPanel.LayoutTransform>
-        <ItemsControl Name="infBuffs" ItemTemplate="{StaticResource abTemplate}" >
+        <ItemsControl Name="infBuffs" ItemTemplate="{StaticResource abTemplate}" ItemsSource="{Binding Instance.Player.InfBuffs}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" FlowDirection="{Binding Instance.Direction}"/>
@@ -52,7 +52,7 @@
             </ItemsControl.ItemContainerStyle>
 
         </ItemsControl>
-        <ItemsControl Name="buffs" ItemTemplate="{StaticResource abTemplate}">
+        <ItemsControl Name="buffs" ItemTemplate="{StaticResource abTemplate}" ItemsSource="{Binding Instance.Player.Buffs}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" FlowDirection="{Binding Instance.Direction}"/>
@@ -65,7 +65,8 @@
             </ItemsControl.ItemContainerStyle>
 
         </ItemsControl>
-        <ItemsControl Name="debuffs" ItemTemplate="{StaticResource abTemplate}" Background="#00000000">
+        <ItemsControl Name="debuffs" ItemTemplate="{StaticResource abTemplate}" Background="#00000000"
+                      ItemsSource="{Binding Instance.Player.Debuffs}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" FlowDirection="{Binding Instance.Direction}"/>
