@@ -17,19 +17,19 @@
         ShowInTaskbar="False" 
         WindowStyle="None" 
         Background="Transparent" 
-        Loaded="Window_Loaded"    
+        Loaded="TccWindow_Loaded"    
         ResizeMode="NoResize">
     <w:TccWindow.DataContext>
         <vm:CooldownWindowViewModel />
     </w:TccWindow.DataContext>
-    <Grid Background="Transparent" MouseEnter="Grid_MouseEnter" MouseLeave="Grid_MouseLeave" >
+    <Grid Background="Transparent" >
         <ContentControl x:Name="controlContainer" 
                         Margin="10" 
                         DataContext="{Binding Instance}" 
                         Content="{Binding}"
                         ContentTemplate="{Binding Instance.Mode, Converter={StaticResource Converters.CooldowWindowModeToTemplate}}" />
         <w:WindowButtons Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="0" WindowName="Cooldown bar"
-                         MouseLeftButtonDown="Window_MouseLeftButtonDown" x:Name="buttons" Margin="0" Visibility="Visible"
+                         x:Name="buttons" Margin="0" Visibility="Visible"
                          DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWindow}}"
                          />
         <Grid.LayoutTransform>
