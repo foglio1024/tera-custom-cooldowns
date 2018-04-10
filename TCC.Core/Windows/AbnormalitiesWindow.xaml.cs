@@ -12,16 +12,9 @@ namespace TCC.Windows
         public BuffWindow()
         {
             InitializeComponent();
-        }
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
+            _b = buttons;
             InitWindow(SettingsManager.BuffWindowSettings, ignoreSize: true);
-            //(this.DataContext as BuffBarWindowViewModel).Player = new Data.Player();
-            //buffs.ItemsSource = BuffBarWindowViewModel.Instance.Player.Buffs;
-            //debuffs.ItemsSource = BuffBarWindowViewModel.Instance.Player.Debuffs;
-            //infBuffs.ItemsSource = BuffBarWindowViewModel.Instance.Player.InfBuffs;
         }
-
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             ContextMenu.IsOpen = true;

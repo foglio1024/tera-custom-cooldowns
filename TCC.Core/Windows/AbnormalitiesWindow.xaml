@@ -15,7 +15,6 @@
         AllowsTransparency="True"
         ResizeMode="NoResize"
         SizeToContent="WidthAndHeight"
-        Loaded="Window_Loaded"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         >
     <w:TccWindow.DataContext>
@@ -31,18 +30,25 @@
                 </controls:AbnormalityIndicator.Resources>
             </controls:AbnormalityIndicator>
         </DataTemplate>
-        <Style x:Key="flowPanel" TargetType="StackPanel">
-            <Setter Property="FlowDirection" Value="{Binding Direction}"/>
+        <Style x:Key="flowPanel" TargetType="FrameworkElement">
+            <Setter Property="FlowDirection" Value="{Binding Instance.Direction}"/>
         </Style>
     </w:TccWindow.Resources>
-    <StackPanel>
+    <StackPanel Background="Transparent">
         <StackPanel.LayoutTransform>
             <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
         </StackPanel.LayoutTransform>
+        <w:WindowButtons Width="Auto" Height="Auto" 
+                         VerticalAlignment="Top" Opacity="0" WindowName="Buff bar"
+                         x:Name="buttons" Margin="0" Visibility="Visible" HorizontalAlignment="{Binding ElementName=directionGovernor, Path=FlowDirection, Converter={StaticResource Converters.DirectionToHorAlignConveter}}"
+                         DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWindow}}"
+                         />
+        <FrameworkElement FlowDirection="{Binding Instance.Direction}" x:Name="directionGovernor"></FrameworkElement>
         <ItemsControl Name="infBuffs" ItemTemplate="{StaticResource abTemplate}" ItemsSource="{Binding Instance.Player.InfBuffs}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" FlowDirection="{Binding Instance.Direction}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" 
+                                FlowDirection="{Binding Instance.Direction}" x:Name="infBuffsPanel"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemContainerStyle>
