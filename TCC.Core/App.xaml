@@ -195,14 +195,14 @@
             </Setter>
         </Style>
         <Style TargetType="{x:Type ToolTip}">
-            <Setter Property="Background" Value="#00000000" />
+            <Setter Property="Background" Value="{StaticResource Colors.App.DefaultBackground}" />
             <Setter Property="FontSize" Value="12" />
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Foreground" Value="#9fff" />
-            <Setter Property="ToolTipService.Placement" Value="Bottom"/>
+            <Setter Property="Padding" Value="16 6"/>
             <EventSetter Event="Opened" Handler="ToolTip_Opened"></EventSetter>
             <EventSetter Event="Closed" Handler="ToolTip_Closed"></EventSetter>
-            <Setter Property="ContentTemplate">
+            <!--<Setter Property="ContentTemplate">
                 <Setter.Value>
                     <DataTemplate>
                         <Grid Margin="0">
@@ -212,7 +212,7 @@
                         </Grid>
                     </DataTemplate>
                 </Setter.Value>
-            </Setter>
+            </Setter>-->
         </Style>
 
         <PathGeometry x:Key="SVG.Close" >M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z</PathGeometry>
@@ -265,7 +265,7 @@
         <converters:GearLevelToColorConverter x:Key="Converters.GearLevelToColor"/>
         <converters:NullToVisibleCollapsedConverter x:Key="Converters.NullToVisibleCollapsed"/>
         <converters:LogoInfoToImageConverter x:Key="Converters.LogoInfoToImage"/>
-
+        <converters:DirectionToHorAlignConveter x:Key="Converters.DirectionToHorAlignConveter"/>
         <!--AbnormalityIndicator resources-->
         <converters:AbnormalityStrokeConverter x:Key="Converters.AbnormalityTypeToStrokeColor"/>
         <converters:DurationLabelConverter x:Key="Converters.DurationToTimeFormat"/>
