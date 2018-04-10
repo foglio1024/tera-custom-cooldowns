@@ -925,6 +925,10 @@
       <Section id="998101" desc="함락된 벨릭의 궁전 입구" type="dungeon" nameId="9981006" floor="1" mapId="WMap_DG_Velik_Palace_DG_01" height="15360.0" width="15360.0" top="46080.0" left="-138240.0" mode="5" />
       <Section id="9781" desc="벨릭의 궁전" type="dungeon" nameId="9781" floor="1" mapId="WMap_DG_Velik_Palace_DG_02_L" height="15360.0" width="30720.0" top="46080.0" left="-138240.0" mode="5" />
       <Section id="978101" desc="벨릭의 궁전 입구" type="dungeon" nameId="9781006" floor="1" mapId="WMap_DG_Velik_Palace_DG_01_L" height="15360.0" width="15360.0" top="46080.0" left="-138240.0" mode="5" />
+      <Section id="9505" desc="파괴된 벨리카 연회장" type="dungeon" nameId="506004" floor="1" mapId="WMap_DG_AWAKEN_VK_D" height="15360.0" width="15360.0" top="-30720.0" left="0.0" mode="5" />
+      <Section id="9506" desc="벨리카 연회장" type="dungeon" nameId="506001" floor="1" mapId="WMap_DG_AWAKEN_VK_N" height="15360.0" width="15360.0" top="-30720.0" left="15360.0" mode="5" />
+      <Section id="9507" desc="알 수 없는 공간" nameId="507001" floor="0" mapId="WMap_AWAKEN_Dragon_P" height="53620.37" width="71493.82" top="76800.0" left="27229.0" mode="5" />
+      <Section id="9509" desc="벨리카 연회장" type="dungeon" nameId="506001" floor="1" mapId="WMap_DG_AWAKEN_VK_N_02" height="15360.0" width="15360.0" top="-30720.0" left="15360.0" mode="5" />
     </Guard>
     <Guard id="2" desc="여명의 정원">
       <Section id="9036" desc="카라스챠 소환지" nameId="9036001" floor="1" mapId="WMap_SJ_03" height="7680.0" width="15360.0" top="72960.0" left="-15360.0" mode="5" />
@@ -952,6 +956,10 @@
       <Section id="9052" desc="피의 축제장" type="dungeon" nameId="9052001" floor="1" mapId="WMap_DG_FV_SUM_DG03" height="15360.0" width="15360.0" top="-19200.0" left="96000.0" mode="5" />
       <Section id="9769" desc="릴리스의 성" type="dungeon" nameId="9769" floor="1" mapId="WMap_DG_Lilith_Castle" height="15360.0" width="30720.0" top="-92160.0" left="30720.0" mode="5" />
       <Section id="9969" desc="릴리스의 성" type="dungeon" nameId="9969" floor="1" mapId="WMap_DG_Lilith_Castle_01" height="15360.0" width="30720.0" top="-92160.0" left="30720.0" mode="5" />
+      <Section id="99701" desc="초월한 라켈리스의 폐허_성" type="dungeon" nameId="9970" floor="1" mapId="WMap_DG_Lachelith_Castle_01" height="15360.0" width="30720.0" top="-92160.0" left="0.0" mode="5" />
+      <Section id="99702" desc="초월한 라켈리스의 폐허_3번방" type="dungeon" nameId="9970" floor="2" mapId="WMap_DG_Lachelith_Castle_02" height="15360.0" width="30720.0" top="-92160.0" left="15360.0" mode="5" />
+      <Section id="97701" desc="라켈리스의 폐허_성" type="dungeon" nameId="9770" floor="1" mapId="WMap_LDG_Lachelith_Castle_01" height="15360.0" width="30720.0" top="-92160.0" left="0.0" mode="5" />
+      <Section id="97702" desc="라켈리스의 폐허_3번방" type="dungeon" nameId="9770" floor="2" mapId="WMap_LDG_Lachelith_Castle_02" height="15360.0" width="30720.0" top="-92160.0" left="15360.0" mode="5" />
     </Guard>
     <Guard id="5" desc="사교도의 은신처">
       <Section id="553" desc="사교도의 은신처" type="dungeon" nameId="9089001" floor="1" mapId="WMap_DG_SD_03" height="15360.0" width="15360.0" top="76800.0" left="30720.0" mode="5" />
@@ -1000,10 +1008,12 @@
       <Section id="9045" desc="T4.2 소인던 릴리파트" nameId="9045001" floor="1" mapId="WMap_EX_HNC_B_T42_02_P" height="19664.64" width="26219.52" top="-13824.0" left="101376.0" mode="5" />
       <Section id="9066" desc="데모로스의 룰렛('17상반기비수기던전)" type="dungeon" nameId="9066" floor="1" mapId="WMap_DG_Nightmare" height="15360.0" width="15360.0" top="-15360.0" left="30720.0" mode="5" />
     </Guard>
-    <Guard id="11" desc="광대의별장 공중정원">
+    <Guard id="11" desc="광대의별장 공중정원, 각성 뉴엘레논,각성 고룡의협곡">
       <Section id="9062" desc="광대의 별장 " type="dungeon" nameId="8000052" floor="1" mapId="WMap_SJ_04" height="7680.0" width="7680.0" top="72960.0" left="-149760.0" mode="5" />
       <Section id="9094" desc="살레론의 공중정원" type="dungeon" nameId="9094001" floor="1" mapId="WMap_DG_SD_10" height="46080.0" width="15360.0" top="76800.0" left="168960.0" mode="5" />
       <Section id="9061" desc="거인의 유적지" type="dungeon" nameId="9061001" floor="0" mapId="WMap_HSC_Empty_02" height="53620.37" width="71493.82" top="76800.0" left="27229.0" mode="5" />
+      <Section id="98331" desc="뉴엘레논" nameId="35001" floor="1" mapId="WMap_DG_AWAKEN_HSC_Loot_Vill" height="9830.4" width="13107.2" top="-127488.0" left="13824.0" mode="5" />
+      <Section id="98332" desc="고룡의 협곡" nameId="35001" floor="1" mapId="WMap_DG_AWAKEN_HSC_Loot_Field" height="53620.37" width="71493.82" top="-96349.0" left="-34211.0" mode="5" />
     </Guard>
     <Guard id="12" desc="사령술 연구소">
       <Section id="626" desc="사령술 연구소" type="dungeon" nameId="9071001" floor="1" mapId="WMap_DG_SD_06" height="15360.0" width="15360.0" top="76800.0" left="46080.0" mode="5">
