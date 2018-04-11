@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using TCC.Parsing;
+using TCC.ViewModels;
 using Tera;
 using Tera.Game;
+using Tera.PacketLog;
 
 namespace TCC
 {
@@ -152,6 +152,55 @@ namespace TCC
                 Stats.Add(opName, new MessageStats(opName, msg.Data.Count));
             }
         }
+
+        public static void Analyze(Message msg)
+        {
+            return;
+            if (msg.Direction == MessageDirection.ClientToServer) return;
+            var r = new TeraMessageReader(msg, PacketProcessor.OpCodeNamer, PacketProcessor.Version, PacketProcessor.SystemMessageNamer);
+            Debug.WriteLine("OpCode: " + msg.OpCode + " [" + msg.Data.Count + "]");
+            Debug.WriteLine(r.ReadUInt32());
+            Debug.WriteLine(r.ReadUInt32());
+            Debug.WriteLine(r.ReadUInt32());
+            Debug.WriteLine(r.ReadUInt32());
+
+            //try
+            //{
+            //    Debug.WriteLine("id: " + r.ReadUInt64());
+            //    Debug.WriteLine("unk1: " + r.ReadInt32());
+            //    Debug.WriteLine("skill: " + r.ReadUInt32());
+            //    Debug.WriteLine("x1: " + r.ReadSingle());
+            //    Debug.WriteLine("y1: " + r.ReadSingle());
+            //    Debug.WriteLine("z1: " + r.ReadSingle());
+            //    Debug.WriteLine("x2: " + r.ReadSingle());
+            //    Debug.WriteLine("y2: " + r.ReadSingle());
+            //    Debug.WriteLine("z2: " + r.ReadSingle());
+            //    Debug.WriteLine("unk2: " + r.ReadByte());
+            //    Debug.WriteLine("spd: " + r.ReadSingle());
+            //    Debug.WriteLine("src: " + r.ReadUInt64());
+            //    Debug.WriteLine("model: " + r.ReadUInt32());
+            //    Debug.WriteLine("unk4: " + r.ReadUInt32());
+            //    Debug.WriteLine("unk5: " + r.ReadUInt32());
+            //    Debug.WriteLine("");
+            //}
+            //catch (Exception e)
+            //{
+            //    //ignore
+            //}
+        }
+        private static Dictionary<string, int> FixedSizePackets = new Dictionary<string, int>
+        {
+            { "S_RETURN_TO_LOBBY", 4 },
+            { "S_USER_EFFECT",4+8+8+4+4 },
+            { "S_PARTY_MEMBER_ABNORMAL_ADD", 4+4+4+4+4+4+4 },
+            { "S_PARTY_MEMBER_ABNORMAL_CLEAR", 4+4+4 },
+            { "S_PARTY_MEMBER_ABNORMAL_DEL",4+4+4+4 },
+            { "S_PARTY_MEMBER_ABNORMAL_REFRESH",4+4+4+4+4+4+4},
+            { "S_PARTY_MEMBER_CHANGE_HP",4+4+4+4+4 },
+            { "S_PARTY_MEMBER_CHANGE_MP",4+4+4+4+4 },
+            { "S_PARTY_MEMBER_STAT_UPDATE",4+4+4+4+4+4+4+2+2+2+1+4+4+4+4 },
+            { "S_DUNGEON_EVENT_MESSAGE",4+2+4+1+4 },
+        };
     }
 
     public class MessageStats

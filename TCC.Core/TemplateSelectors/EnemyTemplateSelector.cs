@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using TCC.Data;
 
@@ -17,7 +12,7 @@ namespace TCC.TemplateSelectors
         {
             if (item == null) return null;
 
-            if (((Boss)item).IsBoss) return BossDataTemplate;
+            if (((Npc)item).IsBoss) return BossDataTemplate;
             else return MobDataTemplate;
         }
     }

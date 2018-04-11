@@ -9,8 +9,8 @@ namespace TCC.Data
         DispatcherTimer _offsetTimer;
         DispatcherTimer _shortTimer;
         public Skill Skill { get; set; }
-        uint cooldown;
-        public uint Cooldown
+        ulong cooldown;
+        public ulong Cooldown
         {
             get => cooldown; set
             {
@@ -18,7 +18,7 @@ namespace TCC.Data
                 cooldown = value;
             }
         }
-        public uint OriginalCooldown { get; set; }
+        public ulong OriginalCooldown { get; set; }
         bool isAvailable = true;
         public bool IsAvailable
         {
@@ -31,10 +31,10 @@ namespace TCC.Data
             }
         }
 
-        uint seconds = 0;
+        ulong seconds = 0;
         private bool _flashOnAvailable;
 
-        public uint Seconds
+        public ulong Seconds
         {
             get
             {
@@ -102,19 +102,25 @@ namespace TCC.Data
         }
         private void _secondsTimer_Tick(object sender, EventArgs e)
         {
+            var s = Seconds;
             if(Seconds == 1)
             {
                 _secondsTimer.Stop();
                 IsAvailable = true;
             }
             Seconds--;
+            if (Seconds > s)
+            {
+                _secondsTimer.Stop();
+                IsAvailable = true;
+            }
         }
 
-        public void Start(uint cd)
+        public void Start(ulong cd)
         {
             if (cd > 1000)
             {
-                Cooldown = _type == CooldownType.Skill ? cd : cd * 1000;
+                Cooldown = cd;//_type == CooldownType.Skill ? cd : cd * 1000;
                 OriginalCooldown = Cooldown;
                 Seconds = 1 + (Cooldown / 1000);
                 var offset = Cooldown % 1000;

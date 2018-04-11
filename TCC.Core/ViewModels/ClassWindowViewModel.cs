@@ -1,15 +1,8 @@
-﻿using System;
-
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Threading;
+﻿using System.Windows.Threading;
 
 namespace TCC.ViewModels
 {
-    public class ClassWindowViewModel : TSPropertyChanged
+    public class ClassWindowViewModel : TccWindowViewModel
     {
         private static ClassWindowViewModel _instance;
         public static ClassWindowViewModel Instance => _instance ?? (_instance = new ClassWindowViewModel());
@@ -17,6 +10,7 @@ namespace TCC.ViewModels
         public ClassWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
+            _scale = SettingsManager.ClassWindowSettings.Scale;
             WindowManager.TccVisibilityChanged += (s, ev) =>
             {
                 NotifyPropertyChanged("IsTeraOnTop");
@@ -31,20 +25,6 @@ namespace TCC.ViewModels
         public bool IsTeraOnTop
         {
             get => WindowManager.IsTccVisible;
-        }
-        private double scale = SettingsManager.ClassWindowSettings.Scale;
-        public double Scale
-        {
-            get
-            {
-                return scale;
-            }
-            set
-            {
-                if (scale == value) return;
-                scale = value;
-                NotifyPropertyChanged("Scale");
-            }
         }
         private Class currentClass = Class.None;
         public Class CurrentClass

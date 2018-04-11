@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Timers;
-using System.Windows.Threading;
 
 namespace TCC
 {
@@ -46,10 +40,20 @@ namespace TCC
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         public static extern bool PostMessage(IntPtr hWnd, uint msg, int wParam, int lParam);
 
+        [DllImport("user32.dll", EntryPoint = "FindWindow", SetLastError = true)]
+        static extern IntPtr FindWindowByCaption(IntPtr ZeroOnly, string lpWindowName);
+
         public static IntPtr FindTeraWindow()
         {
             Marshal.GetLastWin32Error();
             var result = FindWindow("LaunchUnrealUWindowsClient", "TERA");
+            Marshal.GetLastWin32Error();
+            return result;
+        }
+        public static IntPtr FindMeterWindow()
+        {
+            Marshal.GetLastWin32Error();
+            var result = FindWindow("Shinra Meter", null);
             Marshal.GetLastWin32Error();
             return result;
         }
@@ -59,14 +63,21 @@ namespace TCC
         public static bool IsActive()
         {
             var teraWindow = FindTeraWindow();
+            var meterWindow = FindMeterWindow();
             var activeWindow = GetForegroundWindow();
-            return teraWindow != IntPtr.Zero && (teraWindow == activeWindow || settingsWindowHandle == activeWindow);
+            return teraWindow != IntPtr.Zero && (teraWindow == activeWindow || settingsWindowHandle == activeWindow ) ||
+                   meterWindow != IntPtr.Zero && (meterWindow == activeWindow || settingsWindowHandle == activeWindow);
         }
 
         public static void MakeUnfocusable(IntPtr hwnd)
         {
             uint extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
             SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_NOACTIVATE);
+        }
+        public static void UndoUnfocusable(IntPtr hwnd)
+        {
+            uint extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
+            SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle & ~WS_EX_NOACTIVATE);
         }
         public static void HideFromToolBar(IntPtr hwnd)
         {

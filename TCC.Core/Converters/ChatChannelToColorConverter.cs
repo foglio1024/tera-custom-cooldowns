@@ -88,6 +88,12 @@ namespace TCC.Converters
                     return Brushes.Orange;
                 case ChatChannel.Enchant15:
                     return Brushes.OrangeRed;
+                case ChatChannel.Enchant7:
+                    return Brushes.Orange;
+                case ChatChannel.Enchant8:
+                    return Brushes.Orange;
+                case ChatChannel.Enchant9:
+                    return Brushes.OrangeRed;
                 case ChatChannel.RaidLeader:
                     return (SolidColorBrush)App.Current.FindResource("Colors.Chat.RaidNotice");
                 case ChatChannel.TCC:
@@ -104,6 +110,12 @@ namespace TCC.Converters
                     return (SolidColorBrush)App.Current.FindResource("Colors.Chat.System.Quest");
                 case ChatChannel.Friend:
                     return (SolidColorBrush)App.Current.FindResource("Colors.Chat.System.Friend");
+                case ChatChannel.Twitch:
+                    return (SolidColorBrush)App.Current.FindResource("Colors.App.Twitch");
+                case ChatChannel.WorldBoss:
+                    return (SolidColorBrush)App.Current.FindResource("Colors.Chat.System.WorldBoss");
+                case ChatChannel.Laurel:
+                    return Brushes.OrangeRed;
                 default:
                     return (SolidColorBrush)App.Current.FindResource("Colors.Chat.System.Generic");
             }

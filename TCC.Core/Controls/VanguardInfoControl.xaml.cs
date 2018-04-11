@@ -1,20 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using TCC.ViewModels;
 
 namespace TCC.Controls
@@ -60,7 +50,17 @@ namespace TCC.Controls
             moveDown = new DoubleAnimation(3, growDuration) { EasingFunction = new QuadraticEase() };
             scaleRipple = new DoubleAnimation(0, 7, TimeSpan.FromMilliseconds(650)) { EasingFunction = new QuadraticEase() };
             fadeRipple = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(650));
+            ContextMenu = new ContextMenu();
+            var i = new MenuItem {Header = "Remove"};
+            i.Click += RemoveCharacter;
+            ContextMenu.Items.Add(i);
         }
+
+        private void RemoveCharacter(object sender, RoutedEventArgs e)
+        {
+            InfoWindowViewModel.Instance.Characters.Remove((Character) DataContext);
+        }
+
 
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -71,6 +71,11 @@ namespace TCC.Controls
             scaleTrans.BeginAnimation(ScaleTransform.ScaleYProperty, scaleRipple);
             ripple.BeginAnimation(OpacityProperty, fadeRipple);
             InfoWindowViewModel.Instance.SelectCharacter((Character)DataContext);
+
+        }
+        
+        private void RootBorder_OnPreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
 
         }
     }

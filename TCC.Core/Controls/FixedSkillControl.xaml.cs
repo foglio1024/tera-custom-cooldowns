@@ -1,19 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using TCC.Data;
 
@@ -44,6 +34,7 @@ namespace TCC.Controls
             }
         }
 
+        public string SecondsText => _context == null? "" : Utils.TimeFormatter(Convert.ToUInt32(_context.Seconds));
 
         public FixedSkillControl()
         {
@@ -56,6 +47,8 @@ namespace TCC.Controls
             ArcAnimation = new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(1));
             ExpandWarn = new DoubleAnimation(0, 1.5, TimeSpan.FromMilliseconds(300)) { EasingFunction = new QuadraticEase() };
             ExpandWarnInner = new DoubleAnimation(35, 0, TimeSpan.FromMilliseconds(400)) { EasingFunction = new QuadraticEase() };
+            Timeline.SetDesiredFrameRate(ExpandWarn, 30);
+            Timeline.SetDesiredFrameRate(ExpandWarnInner, 30);
         }
 
         void Control_Loaded(object sender, RoutedEventArgs e)
@@ -99,6 +92,10 @@ namespace TCC.Controls
                         warnTimer.Stop();
                     }
                 }
+                else if (e.PropertyName == nameof(_context.Seconds))
+                {
+                    NotifyPropertyChanged(nameof(SecondsText));
+                }
             },
             DispatcherPriority.DataBind);
 
@@ -120,7 +117,7 @@ namespace TCC.Controls
             ArcAnimation.Duration = TimeSpan.FromMilliseconds(_context.Cooldown);
             ArcAnimation.From = 359.9 * val;
             int fps = _context.Cooldown > 80000 ? 1 : 30;
-            DoubleAnimation.SetDesiredFrameRate(ArcAnimation, fps);
+            Timeline.SetDesiredFrameRate(ArcAnimation, fps);
             arc.BeginAnimation(Arc.EndAngleProperty, ArcAnimation);
         }
 

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TCC.Data
 {
@@ -13,7 +9,8 @@ namespace TCC.Data
         public string MapId { get; }
         public double Top { get; }
         public double Left { get; }
-        double Width { get; }
+        public double Width { get; }
+        public double Height { get; }
         public bool IsDungeon { get; }
         public double Scale
         {
@@ -22,7 +19,7 @@ namespace TCC.Data
                 return Width / (Double)App.Current.FindResource("MapWidth");
             }
         }
-        public Section(uint sId, uint sNameId, string mapId, double top, double left, double width, bool dg)
+        public Section(uint sId, uint sNameId, string mapId, double top, double left, double width, double height, bool dg)
         {
             Id = sId;
             NameId = sNameId;
@@ -30,7 +27,20 @@ namespace TCC.Data
             Top = top;
             Left = left;
             Width = width;
+            Height = height;
             IsDungeon = dg;
+        }
+
+        public bool ContainsPoint(float x, float y)
+        {
+            var matchesY = y > Left &&  y < Width + Left;
+            var matchesX = x < Top && x > Top - Height;
+            if (matchesX & matchesY)
+            {
+                Console.WriteLine($"  |  X:{x}\n  |  T:{Top} - B:{Top-Height}");
+                Console.WriteLine($"  |  Y:{y}\n  |  L:{Left} - R:{Left+Width}");
+            }
+            return matchesX && matchesY;
         }
     }
 }

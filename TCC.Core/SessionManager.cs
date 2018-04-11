@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Windows;
 using TCC.Data;
 using TCC.Data.Databases;
 using TCC.ViewModels;
@@ -14,9 +10,9 @@ namespace TCC
 
     public static class SessionManager
     {
-        public static readonly int MAX_WEEKLY = 15;
-        public static readonly int MAX_DAILY = 8;
-        private static bool logged = false;
+        public static readonly int MAX_WEEKLY = 16;
+        public static readonly int MAX_DAILY = 16;
+        private static bool logged = false || !App.Debug;
         public static bool Logged
         {
             get => logged;
@@ -29,7 +25,7 @@ namespace TCC
                 }
             }
         }
-        private static bool loadingScreen = true;
+        private static bool loadingScreen = true || !App.Debug;
         public static bool LoadingScreen
         {
             get => loadingScreen;
@@ -62,8 +58,6 @@ namespace TCC
         public static bool IsElite { get; set; }
 
         public static Player CurrentPlayer = new Player();
-
-        public static ItemsDatabase ItemsDatabase;
 
         public static void SetCombatStatus(ulong target, bool combat)
         {
@@ -126,7 +120,7 @@ namespace TCC
             }
         }
 
-        public static void SetPlayerMaxHP(ulong target, int maxHP)
+        public static void SetPlayerMaxHP(ulong target, long maxHP)
         {
             if (target == CurrentPlayer.EntityId)
             {
@@ -152,6 +146,20 @@ namespace TCC
                 CharacterWindowViewModel.Instance.Player.MaxST = maxST;
                 ClassManager.SetMaxST(Convert.ToInt32(maxST));
             }
+        }
+
+        public static void SetPlayerShield(uint damage)
+        {
+            //CurrentPlayer.CurrentShield -= damage;
+            if (CharacterWindowViewModel.Instance.Player.CurrentShield < 0) return;
+            CharacterWindowViewModel.Instance.Player.CurrentShield -= damage;
+        }
+        public static void SetPlayerMaxShield(uint shield)
+        {
+            CurrentPlayer.MaxShield = shield;
+            CharacterWindowViewModel.Instance.Player.MaxShield = shield;
+            CharacterWindowViewModel.Instance.Player.CurrentShield = shield;
+
         }
     }
 

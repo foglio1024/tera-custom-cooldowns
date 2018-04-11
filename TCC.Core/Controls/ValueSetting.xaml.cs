@@ -1,19 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace TCC.Controls
 {
@@ -23,12 +14,6 @@ namespace TCC.Controls
     public partial class ValueSetting : UserControl
     {
 
-        public double Value
-        {
-            get { return (double)GetValue(ValueProperty); }
-            set { SetValue(ValueProperty, value); }
-        }
-        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(double), typeof(ValueSetting));
         public string SettingName
         {
             get { return (string)GetValue(SettingNameProperty); }
@@ -66,6 +51,12 @@ namespace TCC.Controls
             DependencyProperty.Register("Min", typeof(double), typeof(ValueSetting));
 
 
+        public double Value
+        {
+            get { return (double)GetValue(ValueProperty); }
+            set { SetValue(ValueProperty, value); }
+        }
+        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(double), typeof(ValueSetting));
 
 
 
@@ -112,8 +103,11 @@ namespace TCC.Controls
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            var s = sender as Slider;
-            Value = Math.Round(s.Value, 2);
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+            {
+                var s = sender as Slider;
+                Value = Math.Round(s.Value, 2);
+            }
         }
 
         private void Slider_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -150,6 +144,11 @@ namespace TCC.Controls
             {
                 tb.Text = Value.ToString();
             }
+        }
+
+        private void FrameworkElement_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

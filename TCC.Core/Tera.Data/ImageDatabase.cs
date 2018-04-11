@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Media.Imaging;
 using Image = System.Windows.Controls.Image;
 

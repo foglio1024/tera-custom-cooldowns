@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.Eventing.Reader;
-
-namespace Tera.Game.Messages
+﻿namespace Tera.Game.Messages
 {
     public class SpawnUserServerMessage : ParsedMessage
     {

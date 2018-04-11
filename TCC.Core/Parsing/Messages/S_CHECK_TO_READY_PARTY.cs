@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Tera.Game;
 using Tera.Game.Messages;
 
@@ -12,7 +9,7 @@ namespace TCC.Parsing.Messages
     {
         public uint ServerId;
         public uint PlayerId;
-        public byte Status;
+        public ReadyStatus Status;
     }
 
     public class S_CHECK_TO_READY_PARTY : ParsedMessage
@@ -36,7 +33,7 @@ namespace TCC.Parsing.Messages
                 {
                     ServerId = serverId,
                     PlayerId = playerId,
-                    Status = status
+                    Status = status == 1? ReadyStatus.Ready : ReadyStatus.NotReady
                 });
                 offset = nextOffset;
             }

@@ -1,51 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
+using System.Collections;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Threading;
+using System.Xml;
 using TCC.Data;
-using TCC.Parsing.Messages;
 
 namespace TCC.ViewModels
 {
 
-    public class CooldownWindowViewModel : TSPropertyChanged
+    public class CooldownWindowViewModel : TccWindowViewModel
     {
         private static CooldownWindowViewModel _instance;
         public static CooldownWindowViewModel Instance => _instance ?? (_instance = new CooldownWindowViewModel());
 
-        public bool IsTeraOnTop
-        {
-            get => WindowManager.IsTccVisible;
-        }
-        private double scale = SettingsManager.CooldownWindowSettings.Scale;
-        public double Scale
-        {
-            get { return scale; }
-            set
-            {
-                if (scale == value) return;
-                scale = value;
-                NotifyPropertyChanged("Scale");
-            }
-        }
+        public bool IsTeraOnTop => WindowManager.IsTccVisible;
+        public bool ShowItems => SettingsManager.ShowItemsCooldown;
 
         private SynchronizedObservableCollection<SkillCooldown> _shortSkills;
         private SynchronizedObservableCollection<SkillCooldown> _longSkills;
         private SynchronizedObservableCollection<FixedSkillCooldown> mainSkills;
         private SynchronizedObservableCollection<FixedSkillCooldown> secondarySkills;
         private SynchronizedObservableCollection<SkillCooldown> otherSkills;
+        private SynchronizedObservableCollection<SkillCooldown> itemSkills;
 
         public SynchronizedObservableCollection<SkillCooldown> ShortSkills
         {
-            get { return _shortSkills; }
+            get => _shortSkills;
             set
             {
                 if (_shortSkills == value) return;
@@ -54,7 +39,7 @@ namespace TCC.ViewModels
         }
         public SynchronizedObservableCollection<SkillCooldown> LongSkills
         {
-            get { return _longSkills; }
+            get => _longSkills;
             set
             {
                 if (_longSkills == value) return;
@@ -63,10 +48,7 @@ namespace TCC.ViewModels
         }
         public SynchronizedObservableCollection<FixedSkillCooldown> MainSkills
         {
-            get
-            {
-                return mainSkills; ;
-            }
+            get => mainSkills;
             set
             {
                 if (mainSkills == value) return;
@@ -75,10 +57,7 @@ namespace TCC.ViewModels
         }
         public SynchronizedObservableCollection<FixedSkillCooldown> SecondarySkills
         {
-            get
-            {
-                return secondarySkills; ;
-            }
+            get => secondarySkills;
             set
             {
                 if (secondarySkills == value) return;
@@ -87,45 +66,62 @@ namespace TCC.ViewModels
         }
         public SynchronizedObservableCollection<SkillCooldown> OtherSkills
         {
-            get
-            {
-                return otherSkills;
-            }
+            get => otherSkills;
             set
             {
                 if (otherSkills == value) return;
                 otherSkills = value;
             }
         }
+        public SynchronizedObservableCollection<SkillCooldown> ItemSkills
+        {
+            get => itemSkills;
+            set
+            {
+                if (itemSkills == value) return;
+                itemSkills = value;
+            }
+        }
+        public SynchronizedObservableCollection<FixedSkillCooldown> HiddenSkills { get; }
 
         private static ClassManager _classManager => ClassManager.CurrentClassManager;
 
-        private void NormalCd_AddOrRefreshSkill(SkillCooldown sk)
+        private void FindAndUpdate(SynchronizedObservableCollection<SkillCooldown> list, SkillCooldown sk)
+        {
+            var existing = list.ToSyncArray().FirstOrDefault(x => x.Skill.Name == sk.Skill.Name);
+            if (existing == null)
+            {
+                list.Add(sk);
+                return;
+            }
+            existing.Refresh(sk.Cooldown);
+        }
+
+        private void NormalMode_Update(SkillCooldown sk)
         {
 
             if (SettingsManager.ClassWindowSettings.Enabled && _classManager.StartSpecialSkill(sk)) return;
             if (!SettingsManager.CooldownWindowSettings.Enabled) return;
+            if (sk.Type == CooldownType.Item)
+            {
+                FindAndUpdate(ItemSkills, sk);
+                return;
+            }
             try
             {
                 if (sk.Cooldown < SkillManager.LongSkillTreshold)
                 {
-                    var existing = _shortSkills.FirstOrDefault(x => x.Skill.Name == sk.Skill.Name);
-                    if (existing == null)
-                    {
-                        _shortSkills.Add(sk);
-                        return;
-                    }
-                    existing.Refresh(sk.Cooldown);
+                    FindAndUpdate(ShortSkills, sk);
                 }
                 else
                 {
-                    var existing = _longSkills.FirstOrDefault(x => x.Skill.Name == sk.Skill.Name);
+                    var existing = LongSkills.ToSyncArray().FirstOrDefault(x => x.Skill.Name == sk.Skill.Name);
                     if (existing == null)
                     {
-                        existing = _shortSkills.FirstOrDefault(x => x.Skill.Name == sk.Skill.Name);
+                        existing = ShortSkills.ToSyncArray().FirstOrDefault(x => x.Skill.Name == sk.Skill.Name);
                         if (existing == null)
                         {
-                            _longSkills.Add(sk);
+                            LongSkills.Add(sk);
                         }
                         else
                         {
@@ -136,12 +132,9 @@ namespace TCC.ViewModels
                     existing.Refresh(sk.Cooldown);
                 }
             }
-            catch
-            {
-
-            }
+            catch {/* ignored*/}
         }
-        private void NormalCd_RefreshSkill(Skill skill, uint cd)
+        private void NormalMode_Change(Skill skill, uint cd)
         {
             if (!SettingsManager.CooldownWindowSettings.Enabled) return;
 
@@ -150,25 +143,25 @@ namespace TCC.ViewModels
             {
                 if (cd < SkillManager.LongSkillTreshold)
                 {
-                    var existing = _shortSkills.FirstOrDefault(x => x.Skill.Name == skill.Name);
+                    var existing = ShortSkills.ToSyncArray().FirstOrDefault(x => x.Skill.Name == skill.Name);
                     if (existing == null)
                     {
                         sk = new SkillCooldown(skill, cd, CooldownType.Skill, _dispatcher);
-                        _shortSkills.Add(sk);
+                        ShortSkills.Add(sk);
                         return;
                     }
                     existing.Refresh(cd);
                 }
                 else
                 {
-                    var existing = _longSkills.FirstOrDefault(x => x.Skill.Name == skill.Name);
+                    var existing = LongSkills.ToSyncArray().FirstOrDefault(x => x.Skill.Name == skill.Name);
                     if (existing == null)
                     {
-                        existing = _shortSkills.FirstOrDefault(x => x.Skill.Name == skill.Name);
+                        existing = ShortSkills.ToSyncArray().FirstOrDefault(x => x.Skill.Name == skill.Name);
                         if (existing == null)
                         {
                             sk = new SkillCooldown(skill, cd, CooldownType.Skill, _dispatcher);
-                            _longSkills.Add(sk);
+                            LongSkills.Add(sk);
                         }
                         else
                         {
@@ -184,25 +177,31 @@ namespace TCC.ViewModels
 
             }
         }
-        private void NormalCd_RemoveSkill(Skill sk)
+        private void NormalMode_Remove(Skill sk)
         {
             if (!SettingsManager.CooldownWindowSettings.Enabled) return;
 
             try
             {
-
-                var longSkill = _longSkills.FirstOrDefault(x => x.Skill.Name == sk.Name);
+                var longSkill = LongSkills.ToSyncArray().FirstOrDefault(x => x.Skill.Name == sk.Name);
                 if (longSkill != null)
                 {
-                    _longSkills.Remove(longSkill);
+                    LongSkills.Remove(longSkill);
                     longSkill.Dispose();
                 }
-                var shortSkill = _shortSkills.FirstOrDefault(x => x.Skill.Name == sk.Name);
+                var shortSkill = ShortSkills.ToSyncArray().FirstOrDefault(x => x.Skill.Name == sk.Name);
                 if (shortSkill != null)
                 {
 
-                    _shortSkills.Remove(shortSkill);
+                    ShortSkills.Remove(shortSkill);
                     shortSkill.Dispose();
+                }
+                var itemSkill = ItemSkills.ToSyncArray().FirstOrDefault(x => x.Skill.Name == sk.Name);
+                if (itemSkill != null)
+                {
+
+                    ItemSkills.Remove(itemSkill);
+                    itemSkill.Dispose();
                 }
             }
             catch
@@ -211,39 +210,45 @@ namespace TCC.ViewModels
             }
         }
 
-        private void FixedCd_AddOrRefreshSkill(SkillCooldown sk)
+        private void FixedMode_Update(SkillCooldown sk)
         {
             if (SettingsManager.ClassWindowSettings.Enabled && _classManager.StartSpecialSkill(sk)) return;
             if (!SettingsManager.CooldownWindowSettings.Enabled) return;
 
-            var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
+            var skill = HiddenSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
+            if (skill != null) return;
+
+            skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
+            if (skill != null)
+            {
+                skill.Start(sk.Cooldown);
+                return;
+            }
+            skill = SecondarySkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
             if (skill != null)
             {
                 skill.Start(sk.Cooldown);
                 return;
             }
 
-            skill = SecondarySkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
-            if (skill != null)
-            {
-                skill.Start(sk.Cooldown);
-                return;
-            }
 
-
-            AddOrRefreshOtherSkill(sk);
+            UpdateOther(sk);
         }
-        private void FixedCd_RefreshSkill(Skill sk, uint cd)
+        private void FixedMode_Change(Skill sk, uint cd)
         {
             if (!SettingsManager.CooldownWindowSettings.Enabled) return;
 
-            var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.IconName);
+            var skill = HiddenSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
+            if (skill != null) return;
+
+
+            skill = MainSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (skill != null)
             {
                 skill.Refresh(cd);
                 return;
             }
-            skill = SecondarySkills.FirstOrDefault(x => x.Skill.IconName == sk.IconName);
+            skill = SecondarySkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (skill != null)
             {
                 skill.Refresh(cd);
@@ -251,7 +256,7 @@ namespace TCC.ViewModels
             }
             try
             {
-                var otherSkill = OtherSkills.FirstOrDefault(x => x.Skill.Name == sk.Name);
+                var otherSkill = OtherSkills.ToSyncArray().FirstOrDefault(x => x.Skill.Name == sk.Name);
                 if (otherSkill != null)
                 {
 
@@ -261,26 +266,37 @@ namespace TCC.ViewModels
             }
             catch { }
         }
-        private void FixedCd_RemoveSkill(Skill sk)
+        private void FixedMode_Remove(Skill sk)
         {
             //sk.SetDispatcher(Dispatcher);
             if (!SettingsManager.CooldownWindowSettings.Enabled) return;
 
-            var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.IconName);
+            var skill = MainSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (skill != null)
             {
                 skill.Refresh(0);
                 return;
             }
-            skill = SecondarySkills.FirstOrDefault(x => x.Skill.IconName == sk.IconName);
+            skill = SecondarySkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (skill != null)
             {
                 skill.Refresh(0);
                 return;
             }
+
+            var item = ItemSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
+            if (item != null)
+            {
+
+                ItemSkills.Remove(item);
+                item.Dispose();
+                return;
+
+            }
+
             try
             {
-                var otherSkill = OtherSkills.FirstOrDefault(x => x.Skill.Name == sk.Name);
+                var otherSkill = OtherSkills.ToSyncArray().FirstOrDefault(x => x.Skill.Name == sk.Name);
                 if (otherSkill != null)
                 {
 
@@ -291,7 +307,7 @@ namespace TCC.ViewModels
             catch { }
         }
 
-        private void AddOrRefreshOtherSkill(SkillCooldown sk)
+        private void UpdateOther(SkillCooldown sk)
         {
             if (!SettingsManager.CooldownWindowSettings.Enabled) return;
 
@@ -299,13 +315,12 @@ namespace TCC.ViewModels
 
             try
             {
-                var existing = OtherSkills.FirstOrDefault(x => x.Skill.Name == sk.Skill.Name);
-                if (existing == null)
+                if (sk.Type == CooldownType.Item)
                 {
-                    OtherSkills.Add(sk);
+                    FindAndUpdate(ItemSkills, sk);
                     return;
                 }
-                existing.Refresh(sk.Cooldown);
+                FindAndUpdate(OtherSkills, sk);
             }
             catch
             {
@@ -313,37 +328,40 @@ namespace TCC.ViewModels
             }
         }
 
-        public void AddOrRefreshSkill(SkillCooldown sk)
+        public void AddOrRefresh(SkillCooldown sk)
         {
-            if (SettingsManager.ClassWindowOn)
+            switch (SettingsManager.CooldownBarMode)
             {
-                FixedCd_AddOrRefreshSkill(sk);
-            }
-            else
-            {
-                NormalCd_AddOrRefreshSkill(sk);
+                case CooldownBarMode.Fixed:
+                    FixedMode_Update(sk);
+                    break;
+                default:
+                    NormalMode_Update(sk);
+                    break;
             }
         }
-        public void RefreshSkill(Skill skill, uint cd)
+        public void Change(Skill skill, uint cd)
         {
-            if (SettingsManager.ClassWindowOn)
+            switch (SettingsManager.CooldownBarMode)
             {
-                FixedCd_RefreshSkill(skill, cd);
-            }
-            else
-            {
-                NormalCd_RefreshSkill(skill, cd);
+                case CooldownBarMode.Fixed:
+                    FixedMode_Change(skill, cd);
+                    break;
+                default:
+                    NormalMode_Change(skill, cd);
+                    break;
             }
         }
-        public void RemoveSkill(Skill sk)
+        public void Remove(Skill sk)
         {
-            if (SettingsManager.ClassWindowOn)
+            switch (SettingsManager.CooldownBarMode)
             {
-                FixedCd_RemoveSkill(sk);
-            }
-            else
-            {
-                NormalCd_RemoveSkill(sk);
+                case CooldownBarMode.Fixed:
+                    FixedMode_Remove(sk);
+                    break;
+                default:
+                    NormalMode_Remove(sk);
+                    break;
             }
         }
 
@@ -354,15 +372,28 @@ namespace TCC.ViewModels
             MainSkills.Clear();
             SecondarySkills.Clear();
             OtherSkills.Clear();
+            ItemSkills.Clear();
         }
 
         public void LoadSkills(string filename, Class c)
         {
+            SkillConfigParser sp = null;
             if (!File.Exists("resources/config/skills/" + filename))
             {
                 SkillUtils.BuildDefaultSkillConfig(filename, c);
             }
-            var sp = new SkillConfigParser(filename, c);
+            try
+            {
+                sp = new SkillConfigParser(filename, c);
+            }
+            catch (Exception)
+            {
+                var res = MessageBox.Show($"There was an error while reading {filename}. Try correcting the error and press Retry to try again, else press Cancel to build a default config file.", "TCC", MessageBoxButtons.RetryCancel);
+
+                if (res == DialogResult.Cancel) File.Delete("resources/config/skills/" + filename);
+                LoadSkills(filename, c);
+                return;
+            }
             foreach (var sk in sp.Main)
             {
                 MainSkills.Add(sk);
@@ -371,25 +402,34 @@ namespace TCC.ViewModels
             {
                 SecondarySkills.Add(sk);
             }
-        }
-
-        public bool IsClassWindowOn
-        {
-            get => SettingsManager.ClassWindowOn;
-            set
+            foreach (var sk in sp.Hidden)
             {
-                NotifyPropertyChanged(nameof(IsClassWindowOn));
+                HiddenSkills.Add(sk);
             }
         }
+
+        public CooldownBarMode Mode => SettingsManager.CooldownBarMode;
+
+        public void NotifyModeChanged()
+        {
+            NotifyPropertyChanged(nameof(Mode));
+        }
+        //public bool IsClassWindowOn
+        //{
+        //    get => SettingsManager.CooldownBarMode;
+        //    set => NotifyPropertyChanged(nameof(IsClassWindowOn));
+        //}
         public CooldownWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
+            _scale = SettingsManager.CooldownWindowSettings.Scale;
             ShortSkills = new SynchronizedObservableCollection<SkillCooldown>(_dispatcher);
             LongSkills = new SynchronizedObservableCollection<SkillCooldown>(_dispatcher);
             SecondarySkills = new SynchronizedObservableCollection<FixedSkillCooldown>(_dispatcher);
             MainSkills = new SynchronizedObservableCollection<FixedSkillCooldown>(_dispatcher);
             OtherSkills = new SynchronizedObservableCollection<SkillCooldown>(_dispatcher);
-
+            HiddenSkills = new SynchronizedObservableCollection<FixedSkillCooldown>(_dispatcher);
+            ItemSkills = new SynchronizedObservableCollection<SkillCooldown>(_dispatcher);
             WindowManager.TccVisibilityChanged += (s, ev) =>
             {
                 NotifyPropertyChanged("IsTeraOnTop");
@@ -400,6 +440,11 @@ namespace TCC.ViewModels
             };
 
 
+        }
+
+        public void NotifyItemsDisplay()
+        {
+            NotifyPropertyChanged(nameof(ShowItems));
         }
     }
 }

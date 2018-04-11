@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using TCC.Data;
+﻿using TCC.Data;
 using TCC.Data.Databases;
 
 namespace TCC.ViewModels
@@ -36,13 +29,24 @@ namespace TCC.ViewModels
             _instance = this;
             CurrentClassManager = this;
             LoadSpecialSkills();
+            ST.PropertyChanged += FlashOnMaxSt;
         }
+
+        private void FlashOnMaxSt(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(ST.Maxed))
+            {
+                BurningHeart.FlashOnAvailable = ST.Maxed;
+                FireAvalanche.FlashOnAvailable = ST.Maxed;
+            }
+        }
+
         protected override void LoadSpecialSkills()
         {
             SkillsDatabase.TryGetSkill(150700, Class.Assassin, out Skill bh);
             SkillsDatabase.TryGetSkill(80200, Class.Assassin, out Skill fa);
-            BurningHeart = new FixedSkillCooldown(bh, CooldownType.Skill, _dispatcher, true);
-            FireAvalanche = new FixedSkillCooldown(fa, CooldownType.Skill, _dispatcher, true);
+            BurningHeart = new FixedSkillCooldown(bh, CooldownType.Skill, _dispatcher, false);
+            FireAvalanche = new FixedSkillCooldown(fa, CooldownType.Skill, _dispatcher, false);
 
         }
 

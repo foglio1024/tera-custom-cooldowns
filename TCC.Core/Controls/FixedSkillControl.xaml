@@ -9,11 +9,12 @@
              ClipToBounds="False">
     
     <UserControl.LayoutTransform>
-        <ScaleTransform ScaleX=".9" ScaleY=".9"/>
+        <ScaleTransform ScaleX="1" ScaleY="1"/>
     </UserControl.LayoutTransform>
+    
     <Grid Width="55" Height="55" Margin="2" HorizontalAlignment="Left" Name="MainGrid" ClipToBounds="False">
         <Grid ClipToBounds="False">
-            <Ellipse Width="51" Height="{Binding ElementName=icon, Path=ActualWidth}" x:Name="icon" Stroke="#afff" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Ellipse Width="51" Height="{Binding ElementName=icon, Path=ActualWidth}" x:Name="icon" Stroke="#7fff" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Ellipse.Fill>
                     <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource Converters.IconNameToPath}}"/>
                 </Ellipse.Fill>
@@ -23,16 +24,13 @@
                     <ScaleTransform ScaleX="0" ScaleY="0"/>
                 </local:Arc.LayoutTransform>
             </local:Arc>
-            <Grid.CacheMode>
-                <BitmapCache RenderAtScale="2"/>
-            </Grid.CacheMode>
         </Grid>
         <local:Arc x:Name="arc" 
                    Opacity="1" 
                    UseLayoutRounding="False" 
                    Width="Auto" 
                    Height="Auto" 
-                   StrokeThickness="25" Margin="2" 
+                   StrokeThickness="26" Margin="2" 
                    Stroke="#a000" 
                    EndAngle="0.01" 
                    HorizontalAlignment="Stretch" 
@@ -51,37 +49,32 @@
             </Ellipse.LayoutTransform>
         </Ellipse>
         <Ellipse Fill="White" Name="glow" Opacity="0"/>
-
-
-        <Grid Width="22" 
-              Height="22" 
+        <Grid Width="Auto" 
+              MinWidth="12"
+              Height="Auto" 
               x:Name="g" 
               HorizontalAlignment="Right" 
               VerticalAlignment="Bottom"
               ClipToBounds="False"
               Opacity="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=local:FixedSkillControl}, Converter={StaticResource Converters.BoolToOpacity}}">
-
-            <Ellipse x:Name="fill" Fill="#dfff"  Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stroke="#40000000"/>
-            
-            <Viewbox StretchDirection="DownOnly" Stretch="Uniform" UseLayoutRounding="True">
-                <TextBlock Foreground="#d9000000" 
-                   HorizontalAlignment="Center" 
-                   VerticalAlignment="Center" 
-                   TextAlignment="Center"
-                   FontWeight="Normal" 
-                   FontSize="16" 
-                   x:Name="number" 
-                   FontFamily="Roboto Mono" 
-                   FontStyle="Normal"
-                   Opacity="1" 
-                   Margin="3"
-                   Text="{Binding Seconds, StringFormat=0}">
+            <Border Background="#fff" CornerRadius="5" Effect="{StaticResource FadedDropShadow}" BorderBrush="#404047" BorderThickness="1" Padding="4,0">
+                <TextBlock Foreground="#d000" 
+                           HorizontalAlignment="Center" 
+                           VerticalAlignment="Center" 
+                           TextAlignment="Center"
+                           FontSize="15" 
+                           x:Name="number" 
+                           Opacity="1" 
+                           FontFamily="{StaticResource ArialMonoBold}"
+                           Margin="0,0"
+                           Text="{Binding SecondsText, RelativeSource={RelativeSource AncestorType=local:FixedSkillControl}}"
+                >
                 </TextBlock>
-            </Viewbox>
-            <Grid.CacheMode>
-                <BitmapCache RenderAtScale="2"/>
-            </Grid.CacheMode>
 
+            </Border>
         </Grid>
+        <!--<Grid.CacheMode>
+            <BitmapCache RenderAtScale="2"></BitmapCache>
+        </Grid.CacheMode>-->
     </Grid>
 </UserControl>

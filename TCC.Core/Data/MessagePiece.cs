@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Media;
-using TCC.Windows;
+using TCC.ViewModels;
 
 namespace TCC.Data
 {
@@ -91,6 +91,20 @@ namespace TCC.Data
             }
         }
 
+        private int _size = 18;
+        private bool _customSize;
+
+        public int Size
+        {
+            get => _customSize ? _size : SettingsManager.FontSize;
+            set
+            {
+                if (_size == value) return;
+                _size = value;
+                _customSize = value != SettingsManager.FontSize;
+                NotifyPropertyChanged(nameof(Size));
+            }
+        }
 
         private Thickness SetThickness(string text)
         {
@@ -122,29 +136,54 @@ namespace TCC.Data
                 }
                 else
                 {
-                    Color = new SolidColorBrush(Utils.ParseColor(color));
+                    try
+                    {
+                        Color = new SolidColorBrush(Utils.ParseColor(color));
+                    }
+                    catch (Exception e)
+                    {
+                        var conv = new Converters.ChatChannelToColor();
+                        var col = ((SolidColorBrush)conv.Convert(Channel, null, null, null));
+                        Color = col;
+                    }
                 }
             });
         }
-        public MessagePiece(string text, MessagePieceType type, ChatChannel ch, string customColor = "") : this(text)
+        public MessagePiece(string text, MessagePieceType type, ChatChannel ch, int size, bool customSize, string customColor = "") : this(text)
         {
             Channel = ch;
-
             SetColor(customColor);
-
             Type = type;
+
+            _size = size;
+            _customSize = customSize;
+
         }
         public MessagePiece(string text)
         {
             _dispatcher = WindowManager.ChatWindow.Dispatcher;
+            WindowManager.Settings.Dispatcher.Invoke(() => ((SettingsWindowViewModel)WindowManager.Settings.DataContext).PropertyChanged += MessagePiece_PropertyChanged);
+
             Text = text;
             Spaces = SetThickness(text);
+            _customSize = false;
+
         }
+
+        private void MessagePiece_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "FontSize")
+            {
+                NotifyPropertyChanged(nameof(Size));
+            }
+        }
+
         public MessagePiece(Money money, ChatChannel ch) : this(text:"")
         {
             SetColor("");
             Type = MessagePieceType.Money;
             Money = money;
+            _customSize = false;
         }
     }
 }

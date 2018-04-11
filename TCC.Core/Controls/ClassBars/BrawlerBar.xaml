@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
-             mc:Ignorable="d" >
+             mc:Ignorable="d" Loaded="BrawlerBar_OnLoaded">
     <UserControl.DataContext>
         <viewModels:BrawlerBarManager/>
     </UserControl.DataContext>
@@ -14,22 +14,18 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Column="1" Margin="-30,0,-6,0" BorderThickness="0" Height="44" CornerRadius="0,21,21,0"
-                Opacity="{Binding CounterProc, Converter={StaticResource Converters.BoolToOpacity}}" 
+        <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Column="1" Margin="-14,0,0,0" BorderThickness="0" CornerRadius="0,25,25,0"
+                Opacity="{Binding CounterProc, Converter={StaticResource Converters.BoolToOpacity}}" VerticalAlignment="Center"
                 Background="Orange"
-                />
-        <Grid Grid.Column="1" Margin="-10"
-              Opacity="{Binding CounterProc, Converter={StaticResource Converters.BoolToOpacity}}"
-              >
-
-            <local:FixedSkillControl  HorizontalAlignment="Center" Margin="5,0,0,1" VerticalAlignment="Center" DataContext="{Binding Counter}" RenderTransformOrigin=".5,.5">
+                >
+            <Grid Grid.Column="1" Margin="10,-4,-3,-4">
+                <local:FixedSkillControl  HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" DataContext="{Binding Counter}" RenderTransformOrigin=".5,.5">
                 <local:FixedSkillControl.RenderTransform>
                     <ScaleTransform ScaleY=".9" ScaleX=".9"></ScaleTransform>
                 </local:FixedSkillControl.RenderTransform>
             </local:FixedSkillControl>
-            <!--<local:Arc StrokeThickness="3" Stroke="Orange" EndAngle="359.9" Width="42" Height="42" Margin="0,0,0,0"></local:Arc>-->
         </Grid>
-        <!--HP/MP-->
+        </Border>
         <Grid ClipToBounds="False">
             <Border Style="{StaticResource Styles.DefaultBorder}"
                     CornerRadius="70"
@@ -38,7 +34,7 @@
                     Padding="9"
                     VerticalAlignment="Stretch">
                 <Grid HorizontalAlignment="Center" Margin="0,0,0,0" ClipToBounds="False">
-                    <local:Arc EndAngle="{Binding ST.Factor, Converter={StaticResource Converters.FactorToAngle}}" Margin="-8" StrokeThickness="8" Stroke="Orange">
+                    <local:Arc EndAngle="0" x:Name="MainReArc" Margin="-8" StrokeThickness="8" Stroke="Orange">
                         <FrameworkElement.LayoutTransform>
                             <ScaleTransform ScaleX="-1"></ScaleTransform>
                         </FrameworkElement.LayoutTransform>
@@ -48,7 +44,7 @@
                                StrokeThickness="2" Stroke="Orange" EndAngle="359.9"></local:Arc>
                         <local:Arc Opacity="{Binding IsGfOn, Converter={StaticResource Converters.BoolToOpacity}}"
                                Margin="-10" StrokeThickness="2" Stroke="Orange" EndAngle="359.9"></local:Arc>
-                        <local:FixedSkillControl DataContext="{Binding GrowingFury}" Margin="-25" Padding="25"/>
+                        <local:FixedSkillControl DataContext="{Binding GrowingFury}" Margin="-26" Padding="25"/>
                     </Grid>
                 </Grid>
             </Border>
@@ -56,5 +52,9 @@
                 <DropShadowEffect Opacity="{Binding IsGfOn, Converter={StaticResource Converters.BoolToOpacity}}" Color="Orange" ShadowDepth="0" BlurRadius="15"></DropShadowEffect>
             </Grid.Effect>
         </Grid>
+        <Border Grid.Column="0" Style="{StaticResource Styles.DefaultBorder}" VerticalAlignment="Center" Margin="-0,0,0,-75" Padding="1,1"  HorizontalAlignment="Center" CornerRadius="10" Opacity="1" Background="#222222">
+            <TextBlock Style="{StaticResource Styles.DefaultText}" TextAlignment="Center" Margin="0,-1,0,-2" FontSize="16" FontWeight="DemiBold" Foreground="Orange" Text="{Binding ST.Val}" Width="45"></TextBlock>
+        </Border>
+
     </Grid>
 </UserControl>

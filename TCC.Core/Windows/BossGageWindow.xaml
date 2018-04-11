@@ -17,7 +17,6 @@
         WindowStyle="None"
         Background="Transparent"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
-        MouseRightButtonDown="Window_MouseRightButtonDown"
         Loaded="Window_Loaded"
         ResizeMode="NoResize" 
         MouseDoubleClick="TccWindow_MouseDoubleClick">
@@ -29,10 +28,8 @@
             <ScaleTransform ScaleX="{Binding Scale}" 
                             ScaleY="{Binding Scale}"/>
         </Grid.LayoutTransform>
-        <ContentControl  Content="{Binding Instance}"
-
-        ContentTemplate="{Binding Instance.CurrentHHphase, Converter={StaticResource Converters.HarrowholdPhaseToLayout}}"
+        <ContentControl Content="{Binding Instance}"
+                        ContentTemplate="{Binding Instance.CurrentHHphase, Converter={StaticResource Converters.HarrowholdPhaseToLayout}}"
                        />
-
     </Grid>
 </w:TccWindow>

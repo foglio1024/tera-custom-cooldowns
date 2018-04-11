@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Media.Effects;
 using TCC.Data;
 using TCC.Parsing;
 
@@ -30,14 +19,30 @@ namespace TCC.Controls
         private void OutlinedTextBlock_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var context = (ChatMessage)DataContext;
-            if (context.Author == "System") return;
+            if (context.Author == "System" || context.Channel == ChatChannel.Twitch) return;
             WindowManager.ChatWindow.CurrentSender = sender;
-            ProxyInterop.SendAskInteractiveMessage(PacketProcessor.ServerId, context.Author);
+            Proxy.AskInteractive(PacketProcessor.ServerId, context.Author);
         }
 
         private void UserControl_MouseEnter(object sender, MouseEventArgs e)
         {
             WindowManager.ChatWindow.CloseTooltip();
+        }
+
+        private void UIElement_OnMouseEnter(object sender, MouseEventArgs e)
+        {
+            var s = sender as ContentControl;
+            var eff = s.Effect as DropShadowEffect;
+            eff.Opacity = .7;
+
+        }
+
+        private void UIElement_OnMouseLeave(object sender, MouseEventArgs e)
+        {
+            var s = sender as ContentControl;
+            var eff = s.Effect as DropShadowEffect;
+            eff.Opacity = 0;
+
         }
     }
 }

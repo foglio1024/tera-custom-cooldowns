@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using TCC.Annotations;
 using TCC.Data;
 using TCC.ViewModels;
 
@@ -21,25 +14,45 @@ namespace TCC.Controls
     /// <summary>
     /// Interaction logic for DragonControl.xaml
     /// </summary>
-    public partial class DragonControl : UserControl
+    public partial class DragonControl : UserControl, INotifyPropertyChanged
     {
         public DragonControl()
         {
             InitializeComponent();
-            shieldArcAn = new DoubleAnimation(0, 359.99, TimeSpan.FromSeconds(BossGageWindowViewModel.PH1SHIELD_DURATION));
+            shieldArcAn = new DoubleAnimation(0, 359.99, TimeSpan.FromSeconds(BossGageWindowViewModel.Ph1ShieldDuration));
 
         }
 
-        Boss dc;
+        Npc dc;
+        private string _enrageLabel;
+        public string EnrageLabel
+        {
+            get => _enrageLabel;
+            set
+            {
+                if (_enrageLabel == value) return;
+                _enrageLabel = value;
+                NotifyPropertyChanged(nameof(EnrageLabel));
+            }
+        }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            dc = (Boss)DataContext;
+            dc = (Npc)DataContext;
             dc.PropertyChanged += Dc_PropertyChanged;
+            dc.DeleteEvent += Dc_DeleteEvent;
             enrageLine.LayoutTransform = dc.CurrentPercentage > dc.EnragePattern.Percentage ? new RotateTransform((dc.CurrentPercentage - dc.EnragePattern.Percentage) * 3.6) : new RotateTransform(0);
 
         }
 
         DoubleAnimation shieldArcAn;
+        private void Dc_DeleteEvent() => Dispatcher.Invoke(() =>
+        {
+            try
+            {
+                BossGageWindowViewModel.Instance.RemoveMe((Npc)DataContext);
+            }
+            catch { }
+        });
 
         private void Dc_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
@@ -47,7 +60,7 @@ namespace TCC.Controls
             {
                 if (dc.Shield == ShieldStatus.On)
                 {
-                    shieldArcAn = new DoubleAnimation(0, 359.99, TimeSpan.FromSeconds(BossGageWindowViewModel.PH1SHIELD_DURATION));
+                    shieldArcAn = new DoubleAnimation(0, 359.99, TimeSpan.FromSeconds(BossGageWindowViewModel.Ph1ShieldDuration));
                     shieldArc.BeginAnimation(Arc.EndAngleProperty, shieldArcAn);
                 }
                 else
@@ -76,5 +89,12 @@ namespace TCC.Controls
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

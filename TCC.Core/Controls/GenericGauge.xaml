@@ -34,7 +34,7 @@
         <TextBlock HorizontalAlignment="Right" Margin="0,-1,3,0" 
                    Style="{StaticResource text}" VerticalAlignment="Center"
                    Visibility="{Binding ShowPercentage, Converter={StaticResource Converters.BoolToVisibleHidden},RelativeSource={RelativeSource AncestorType=local:GenericGauge}}"
-                   Text="{Binding Factor, StringFormat=#.#%, RelativeSource={RelativeSource AncestorType=local:GenericGauge}}"/>
+                   Text="{Binding Factor, StringFormat=#.##%, RelativeSource={RelativeSource AncestorType=local:GenericGauge}}"/>
 
 
     </Grid>

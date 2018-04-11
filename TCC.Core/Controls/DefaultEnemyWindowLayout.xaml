@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
-             mc:Ignorable="d" >
+             xmlns:viewModels="clr-namespace:TCC.ViewModels"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:BossGageWindowViewModel}">
     <StackPanel Width="Auto" 
                 HorizontalAlignment="Left" 
                 Orientation="Horizontal"
@@ -36,6 +37,24 @@
                     <WrapPanel Orientation="Vertical" 
                                ItemHeight="Auto" 
                                MaxHeight="270" 
+                               ItemWidth="Auto" 
+                               Background="Transparent"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+
+
+        <ItemsControl Name="GuildTowers" 
+                      ItemTemplate="{StaticResource GuildTowerTemplate}"
+                      ItemsSource="{Binding Instance.GuildTowers}"
+
+                      Width="Auto"
+                      HorizontalAlignment="Left">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Vertical" 
+                               ItemHeight="Auto" 
+                               MaxHeight="100" 
                                ItemWidth="Auto" 
                                Background="Transparent"/>
                 </ItemsPanelTemplate>

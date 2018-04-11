@@ -1,18 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Effects;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using TCC.Data;
 
 namespace TCC.Controls
@@ -39,27 +29,16 @@ namespace TCC.Controls
             switch (_context.Type)
             {
                 case MessagePieceType.Item:
-                    //if (_context.BoundType == BoundType.Equip || _context.ItemUid > 0)
-                    //{
-                    //    ProxyInterop.SendExTooltipMessage(_context.ItemUid, _context.OwnerName);
-                    //}
-                    //else
-                    //{
-                    //    ProxyInterop.SendNondbItemInfoMessage(_context.ItemId);
-                    //}
-                    ProxyInterop.SendLinkData(_context.RawLink);
-
+                    Proxy.ChatLinkData(_context.RawLink);
                     break;
                 case MessagePieceType.Url:
                     Process.Start(_context.Text);
                     break;
                 case MessagePieceType.Point_of_interest:
-                    ProxyInterop.SendLinkData(_context.RawLink);
+                    Proxy.ChatLinkData(_context.RawLink);
                     break;
                 case MessagePieceType.Quest:
-                    ProxyInterop.SendLinkData(_context.RawLink);
-                    break;
-                default:
+                    Proxy.ChatLinkData(_context.RawLink);
                     break;
             }
         }

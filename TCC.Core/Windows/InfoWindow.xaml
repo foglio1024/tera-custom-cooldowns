@@ -16,7 +16,10 @@
             <controls:VanguardInfoControl/>
         </DataTemplate>
         <DataTemplate x:Key="dngs">
-            <controls:DungeonInfoControl/>
+            <local:NewDungeonInfoControl/>
+        </DataTemplate>
+        <DataTemplate x:Key="gear">
+            <controls:GearItemControl/>
         </DataTemplate>
     </Window.Resources>
     <Grid Margin="15" Height="Auto" Opacity="1"  UseLayoutRounding="True" >
@@ -25,7 +28,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.CacheMode>
-            <BitmapCache RenderAtScale="2"/>
+            <BitmapCache RenderAtScale="1"/>
         </Grid.CacheMode>
         <Border Width="Auto" Height="Auto" Background="#fff0f0f0" Grid.RowSpan="2"/>
 
@@ -54,9 +57,11 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="1" Margin="10"> 
+            <!--Vangaurd-->
+            <Grid Grid.Row="1" Margin="10" Grid.RowSpan="2"> 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -75,7 +80,7 @@
                 </ItemsControl>
             </Grid>
             <!--Dungeons-->
-            <Grid Grid.Row="1" Grid.Column="2" Margin="10">
+            <Grid Grid.Row="2" Grid.Column="1" Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -84,51 +89,36 @@
                 <TextBlock FontSize="24" Opacity=".4" HorizontalAlignment="Center" Margin="0,0,0,10" TextAlignment="Center"
                        VerticalAlignment="Center" FontWeight="Thin" >Dungeon entries</TextBlock>
                 <!--Content-->
-                <StackPanel Grid.Row="1" x:Name="dngICs">
-                    <ItemsControl Grid.Row="1" ItemsSource="{Binding Instance.SoloDungs}" ItemTemplate="{StaticResource dngs}" Name="soloIC"
-                               VerticalAlignment="Top" Margin="0,0,0,5" Height="Auto" >
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <UniformGrid Columns="3" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                    <ItemsControl Grid.Row="1" ItemsSource="{Binding Instance.T2Dungs}" ItemTemplate="{StaticResource dngs}" Name="T2IC"
-                               VerticalAlignment="Top" Margin="0,0,0,5" Height="Auto" >
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <UniformGrid Columns="3"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                    <ItemsControl Grid.Row="1" ItemsSource="{Binding Instance.T3Dungs}" ItemTemplate="{StaticResource dngs}" Name="T3IC"
-                               VerticalAlignment="Top" Margin="0,0,0,5" Height="Auto" >
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <UniformGrid Columns="3"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                    <ItemsControl Grid.Row="1" ItemsSource="{Binding Instance.T4Dungs}" ItemTemplate="{StaticResource dngs}" Name="T4IC"
-                               VerticalAlignment="Top" Margin="0,0,0,5" Height="Auto" >
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <UniformGrid Columns="3"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                    <ItemsControl Grid.Row="1" ItemsSource="{Binding Instance.T5Dungs}" ItemTemplate="{StaticResource dngs}" Name="T5IC"
-                               VerticalAlignment="Top" Margin="0,0,0,0" Height="Auto" >
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <UniformGrid Columns="3"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                </StackPanel>
+                <ItemsControl ItemsSource="{Binding Instance.AllDungeons}" ItemTemplate="{StaticResource dngs}" Grid.Row="1">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="2"></UniformGrid>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
             </Grid>
             <!--Timeline-->
-            <controls:TimelineControl x:Name="TimeLine" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="10,10,10,10"/>
+            <controls:TimelineControl x:Name="TimeLine" Grid.ColumnSpan="2" 
+                                      HorizontalAlignment="Left" Margin="15,10,15,30"/>
+            <!--Gear-->
+            <Grid Grid.Row="1" Grid.Column="1" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <!--Title-->
+                <TextBlock FontSize="24" Opacity=".4" HorizontalAlignment="Center" Margin="0,0,0,10" TextAlignment="Center"
+                           VerticalAlignment="Center" FontWeight="Thin" >Gear</TextBlock>
+                <!--Content-->
+
+                <ItemsControl ItemsSource="{Binding Instance.Items}" ItemTemplate="{StaticResource gear}" Grid.Row="1" HorizontalAlignment="Center">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid  Columns="7" ></UniformGrid>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </Grid>
         </Grid>
 
         <Grid.Effect>

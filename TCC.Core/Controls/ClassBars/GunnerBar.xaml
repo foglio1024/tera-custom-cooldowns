@@ -5,11 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
-             mc:Ignorable="d" >
+             mc:Ignorable="d" Loaded="GunnerBar_OnLoaded" >
     <UserControl.DataContext>
         <viewModels:GunnerBarManager/>
     </UserControl.DataContext>
-    <Grid Width="Auto" Margin="5" Name="root" ClipToBounds="False">
+    <Grid Width="Auto" Margin="5,5,5,20" Name="root" ClipToBounds="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -25,57 +25,46 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-
             <Border Style="{StaticResource Styles.DefaultBorder}"
                     Grid.Row="0"
                     Grid.Column="1"
-                    Grid.ColumnSpan="3"
-                    Grid.RowSpan="3"
-                    CornerRadius="0,25,25,0"
-                    Margin="-30,6,1,6"                   
-                    VerticalAlignment="Stretch"
-                    />
-            <UniformGrid Rows="1" ClipToBounds="False" Grid.Column="1" Margin="0,0,0,0">
-                
-            <local:BuffCooldownControl DataContext="{Binding Bombardment}" ></local:BuffCooldownControl>
-            <local:BuffCooldownControl DataContext="{Binding Balder}" ></local:BuffCooldownControl>
-            </UniformGrid>
-            <Border CornerRadius="32" Style="{StaticResource Styles.DefaultBorder}" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    Grid.ColumnSpan="2"
+                    CornerRadius="0,29,29,0"
+                    Margin="-30,0,0,0"                
+                    Padding="30,0,0,0"
+                    VerticalAlignment="Center"
+                    >
+                <UniformGrid Rows="1" ClipToBounds="False" Grid.Column="1" Margin="0,-2,0,-2" >
+                    <local:BuffCooldownControl DataContext="{Binding Bombardment}" />
+                    <local:BuffCooldownControl DataContext="{Binding Balder}" />
+                </UniformGrid>
+            </Border>
+            <Border Grid.Column="0" CornerRadius="36" Style="{StaticResource Styles.DefaultBorder}" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <Grid>
-                    
-            <local:BuffCooldownControl DataContext="{Binding BurstFire}" RenderTransformOrigin=".5,.5">
-            </local:BuffCooldownControl>
-            <local:Arc EndAngle="{Binding ST.Factor, Converter={StaticResource Converters.FactorToAngle}}" 
-                       StrokeThickness="8" Stroke="Orange" HorizontalAlignment="Left" VerticalAlignment="Center"
-                       Margin="0,0,0,0"
-                       Width="64" Height="64">
-                <local:Arc.LayoutTransform>
-                    <ScaleTransform ScaleX="-1"></ScaleTransform>
-                </local:Arc.LayoutTransform>
-
-            </local:Arc>
+                    <local:BuffCooldownControl DataContext="{Binding BurstFire}" RenderTransformOrigin=".5,.5">
+                        <local:BuffCooldownControl.RenderTransform>
+                            <ScaleTransform ScaleX=".95" ScaleY=".95"></ScaleTransform>
+                        </local:BuffCooldownControl.RenderTransform>
+                    </local:BuffCooldownControl>
+                    <local:Arc EndAngle="0"
+                               StrokeThickness="8" Stroke="Orange" HorizontalAlignment="Left" VerticalAlignment="Center"
+                               Margin="0,0,0,0"
+                               Width="68" Height="68" x:Name="MainReArc">
+                        <local:Arc.LayoutTransform>
+                            <ScaleTransform ScaleX="-1"></ScaleTransform>
+                        </local:Arc.LayoutTransform>
+                    </local:Arc>
                 </Grid>
             </Border>
 
-            <!--<Rectangle Fill="Orange" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="4" Margin="1,1,1,1">
-                <Rectangle.RenderTransform>
-                    <ScaleTransform ScaleX="{Binding ST.Factor}"/>
-                </Rectangle.RenderTransform>
-            </Rectangle>-->
-            <!--HP/MP-->
-            <!--<UniformGrid Columns="2" 
-                         HorizontalAlignment="Stretch" 
-                         VerticalAlignment="Center"
-                         Margin="5"
-                         Grid.RowSpan="2"
-                         Grid.Column="2"
-                         Grid.Row="0"
-                         >
-                <local:StatControl DataContext="{Binding HP}" Color="{StaticResource Colors.App.HP}" StatusColor="{StaticResource Colors.App.MP}" Width="85" Margin="0,0,0,0"/>
+            <Border Grid.Column="0" Style="{StaticResource Styles.DefaultBorder}" VerticalAlignment="Center" Margin="-0,0,0,-75" Padding="1,1"  HorizontalAlignment="Center" CornerRadius="10" Opacity="1" Background="#222222">
+                <TextBlock Style="{StaticResource Styles.DefaultText}" TextAlignment="Center" Margin="0,-1,0,-2" FontSize="16" FontWeight="DemiBold" Foreground="Orange" Text="{Binding ST.Val}" Width="45"></TextBlock>
+            </Border>
 
-                <local:StatControl DataContext="{Binding MP}" Color="{StaticResource Colors.App.MP}" Width="85" Margin="3,0,3,0"/>
-                --><!--<local:StatControl DataContext="{Binding ST}" Color="Orange" Width="85" Margin="0,0,0,0"/>--><!--
-            </UniformGrid>-->
         </Grid>
+        <Grid.CacheMode>
+            <BitmapCache RenderAtScale="2"></BitmapCache>
+        </Grid.CacheMode>
+
     </Grid>
 </UserControl>

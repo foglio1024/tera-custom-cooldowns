@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 using TCC.ViewModels;
 
 namespace TCC.Windows
@@ -23,29 +11,23 @@ namespace TCC.Windows
         public ClassWindow()
         {
             InitializeComponent();
-
         }
 
-        ClassWindowViewModel _context;
-        public ClassWindowViewModel Context
-        {
-            get => _context;
-        }
+        public ClassWindowViewModel Context { get; private set; }
+
         private void TccWindow_Loaded(object sender, RoutedEventArgs e)
         {
             InitWindow(SettingsManager.ClassWindowSettings, ignoreSize: true);
 
-            _context = (ClassWindowViewModel)DataContext;
-            _context.PropertyChanged += _context_PropertyChanged;
-
-
+            Context = (ClassWindowViewModel)DataContext;
+            Context.PropertyChanged += _context_PropertyChanged;
         }
 
         private void _context_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "CurrentClass")
             {
-                switch (_context.CurrentClass)
+                switch (Context.CurrentClass)
                 {
                     case Class.Warrior:
                         root.ContentTemplate = FindResource("warrior") as DataTemplate;

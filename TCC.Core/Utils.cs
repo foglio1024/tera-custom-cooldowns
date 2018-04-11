@@ -4,10 +4,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
@@ -110,13 +108,18 @@ namespace TCC
 
         public static List<ChatChannelOnOff> GetEnabledChannelsList()
         {
-            var ch = Enum.GetValues(typeof(ChatChannel)).Cast<ChatChannel>().ToList();
+            var ch = ListFromEnum<ChatChannel>();
             var result = new List<ChatChannelOnOff>();
             foreach (var c in ch)
             {
                 result.Add(new ChatChannelOnOff(c));
             }
             return result;
+        }
+
+        public static List<T> ListFromEnum<T>()
+        {
+            return Enum.GetValues(typeof(T)).Cast<T>().ToList();
         }
         public static T FindVisualParent<T>(DependencyObject sender) where T : DependencyObject
         {
@@ -162,11 +165,34 @@ namespace TCC
                                 Convert.ToByte(col.Substring(2, 2), 16),
                                 Convert.ToByte(col.Substring(4, 2), 16));
         }
-
+        public static double FactorCalc(double val, double max)
+        {
+            return  max > 0 ? 
+                    val / max > 1 ?
+                        1 : val / max 
+                    : 1;
+        }
         public static DateTime FromUnixTime(long unixTime)
         {
             DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
             return epoch.AddSeconds(unixTime);
+        }
+
+        public static string TimeFormatter(ulong seconds)
+        {
+            if (seconds < 99) return seconds+"";
+            if (seconds < 99 * 60) return seconds / 60 + "m";
+            if (seconds < 99 * 60 * 60) return seconds / (60*60) + "h";
+            return seconds / (60 * 60 *24) + "d";
+        }
+
+    }
+
+    public static class EventUtils
+    {
+        public static bool EndsToday(double start, double ed, bool d)
+        {
+            return d ? start + ed <= 24 : start <= ed;
         }
     }
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Timers;
 using TCC.ViewModels;
-using TCC.Windows;
 
 namespace TCC.Data
 {

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Threading;
 using TCC.Data.Databases;
-using TCC.ViewModels;
 
 namespace TCC.Data
 {
@@ -18,6 +17,10 @@ namespace TCC.Data
                 NotifyPropertyChanged(nameof(Entries));
             }
         }
+
+        public DungeonTier Tier => DungeonDatabase.Instance.DungeonDefinitions[Id].Tier;
+
+
         public DungeonCooldown(uint id, Dispatcher d)
         {
             _dispatcher = d;

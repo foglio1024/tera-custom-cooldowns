@@ -17,14 +17,13 @@
         SizeToContent="WidthAndHeight"
         Loaded="Window_Loaded"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
-        MouseRightButtonDown="Window_MouseRightButtonDown"
         >
     <w:TccWindow.DataContext>
         <vm:BuffBarWindowViewModel />
     </w:TccWindow.DataContext>
     <w:TccWindow.Resources>
         <DataTemplate x:Key="abTemplate">
-            <controls:AbnormalityIndicator HorizontalAlignment="Right">
+            <controls:AbnormalityIndicator HorizontalAlignment="Right" Size="32">
                 <controls:AbnormalityIndicator.Resources>
                     <Style TargetType="{x:Type Path}">
                         <Setter Property="FlowDirection" Value="RightToLeft"/>
@@ -43,23 +42,41 @@
         <ItemsControl Name="infBuffs" ItemTemplate="{StaticResource abTemplate}" >
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" FlowDirection="{Binding Direction}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" FlowDirection="{Binding Instance.Direction}"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Value="2" Property="ContentControl.Margin"></Setter>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+
         </ItemsControl>
         <ItemsControl Name="buffs" ItemTemplate="{StaticResource abTemplate}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" FlowDirection="{Binding Direction}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" FlowDirection="{Binding Instance.Direction}"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Value="2" Property="ContentControl.Margin"></Setter>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+
         </ItemsControl>
         <ItemsControl Name="debuffs" ItemTemplate="{StaticResource abTemplate}" Background="#00000000">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" FlowDirection="{Binding Direction}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="1000" FlowDirection="{Binding Instance.Direction}"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Value="2" Property="ContentControl.Margin"></Setter>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+
         </ItemsControl>
 
     </StackPanel>

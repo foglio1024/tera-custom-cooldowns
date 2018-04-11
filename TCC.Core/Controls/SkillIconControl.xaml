@@ -7,40 +7,46 @@
              xmlns:converters="clr-namespace:TCC.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="100" Loaded="ControlLoaded" Unloaded="UserControl_Unloaded"
-             UseLayoutRounding="True"  ToolTip="{Binding Skill.Name}">
+             UseLayoutRounding="True"  ToolTip="{Binding Skill.Name}" 
+             ToolTipOpening="SkillIconControl_OnToolTipOpening"
+             ToolTipClosing="SkillIconControl_OnToolTipClosing">
 
     <UserControl.LayoutTransform>
-        <ScaleTransform ScaleX=".9" ScaleY=".9"/>
+        <ScaleTransform ScaleX="1" ScaleY="1"/>
     </UserControl.LayoutTransform>
     <Grid Width="55" Height="55" Margin="2" HorizontalAlignment="Left" Name="MainGrid">
         <Grid>
-            <Ellipse Width="51" Height="{Binding ElementName=icon, Path=ActualWidth}" x:Name="icon" Stroke="#ffff" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Ellipse Width="51" Height="{Binding ElementName=icon, Path=ActualWidth}" x:Name="icon" Stroke="#7fff" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Ellipse.Fill>
                     <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource Converters.IconNameToPath}}"/>
                 </Ellipse.Fill>
             </Ellipse>
         </Grid>
-        <local:Arc x:Name="arc" Opacity="1" Width="Auto" Height="Auto" StrokeThickness="25" Margin="2" Stroke="#a000" EndAngle="359.9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+        <local:Arc x:Name="arc" Opacity="1" Width="Auto" Height="Auto" StrokeThickness="26" Margin="2"
+                   Stroke="#a000" EndAngle="359.9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
         </local:Arc>
 
-        <Grid Width="22" Height="22" x:Name="g" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0">
-            <Ellipse x:Name="fill" Fill="#dfff"  Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stroke="#40000000"/>
-            <Viewbox StretchDirection="DownOnly" Stretch="Uniform" UseLayoutRounding="True">
-                <TextBlock Foreground="#d9000000" 
+        <Grid Width="Auto" MinWidth="12" 
+              Height="Auto" x:Name="g" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0" >
+            <Border Background="#fff" CornerRadius="5"  BorderBrush="#404047" BorderThickness="1"  Padding="4,0" Effect="{StaticResource FadedDropShadow}">
+
+            <TextBlock Foreground="#d000" 
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center" 
                    TextAlignment="Center"
-                   FontWeight="Normal" 
-                   FontSize="16" 
+                   FontSize="15" 
                    x:Name="number" 
-                   FontFamily="Roboto Mono" 
-                   FontStyle="Normal"
+                   FontFamily="{StaticResource ArialMonoBold}"
                    Opacity="1" 
-                   Margin="3"
-                   Text="{Binding CurrentCD, StringFormat=0, RelativeSource={RelativeSource AncestorType=local:SkillIconControl}}">
+                   Margin="0,0"
+                   Text="{Binding CurrentCD, RelativeSource={RelativeSource AncestorType=local:SkillIconControl}}">
                 </TextBlock>
-            </Viewbox>
 
+            </Border>
         </Grid>
+        <!--<Grid.CacheMode>
+            <BitmapCache RenderAtScale="2"></BitmapCache>
+        </Grid.CacheMode>-->
+
     </Grid>
 </UserControl>

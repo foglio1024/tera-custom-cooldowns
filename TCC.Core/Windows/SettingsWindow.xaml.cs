@@ -1,19 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Interop;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace TCC.Windows
 {
@@ -32,12 +22,15 @@ namespace TCC.Windows
             DragMove();
         }
 
-        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Image_MouseLeftButtonDown(object sender, RoutedEventArgs routedEventArgs)
         {
             SettingsManager.SaveSettings();
             var a = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200));
             a.Completed += (s, ev) => Hide();
             this.BeginAnimation(OpacityProperty, a);
+            WindowManager.IsTccVisible = false;
+            WindowManager.IsTccVisible = true;
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -63,14 +56,30 @@ namespace TCC.Windows
         public void ShowWindow()
         {
             Opacity = 0;
+            Activate();
             Show();
             BeginAnimation(Window.OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
 
         }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        private void SendWebhookTest(object sender, RoutedEventArgs e)
         {
-            TimeManager.Instance.SendWebhookMessage();
+            TimeManager.Instance.SendWebhookMessageOld();
+        }
+
+        private void OpenSettingsFolder(object sender, RoutedEventArgs e)
+        {
+            Process.Start(AppDomain.CurrentDomain.BaseDirectory + "/resources/config");
+        }
+
+        private void ConnectToTwitch(object sender, RoutedEventArgs e)
+        {
+            TwitchConnector.Instance.Init();
+        }
+
+        private void PaypalLink_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Process.Start("https://paypal.me/foglio1024");
         }
     }
 }

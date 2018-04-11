@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Tera.Game
+﻿namespace Tera.Game
 {
     public enum PlayerClass
     {

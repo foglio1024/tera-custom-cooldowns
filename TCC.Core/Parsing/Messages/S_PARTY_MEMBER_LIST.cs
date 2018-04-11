@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using TCC.Data;
 using Tera.Game;
 using Tera.Game.Messages;
@@ -12,28 +8,15 @@ namespace TCC.Parsing.Messages
     public class S_PARTY_MEMBER_LIST : ParsedMessage
     {
         bool im, raid;
-        uint unk1, unk2;
-        ushort unk3, unk4;
         uint leaderServerId;
         uint leaderPlayerId;
-        uint unk5, unk6;
-        byte unk7;
-        uint unk8;
-        byte unk9;
-        uint unk10;
-        byte unk11;
-
-        private List<User> members;
 
         public bool Im { get { return im; } }
         public bool Raid { get { return raid; } }
         public uint LeaderServerId { get { return leaderServerId; } }
         public uint LeaderPlayerId { get { return leaderPlayerId; } }
 
-        public List<User> Members
-        {
-            get { return members; }
-        }
+        public List<User> Members { get; }
 
         public S_PARTY_MEMBER_LIST(TeraMessageReader reader) : base(reader)
         {
@@ -61,12 +44,15 @@ namespace TCC.Parsing.Messages
             //unk10 = reader.ReadUInt32();
             //unk11 = reader.ReadByte();
 
-            members = new List<User>();
+            Members = new List<User>();
 
             for (int i = 0; i < count; i++)
             {
                 var u = new User(WindowManager.GroupWindow.Dispatcher);
-                reader.Skip(4);
+
+                reader.BaseStream.Position = offset - 4;
+                var pointer = reader.ReadUInt16();
+                var nextOffset = reader.ReadUInt16();
                 var nameOffset = reader.ReadUInt16();
                 u.ServerId = reader.ReadUInt32();
                 u.PlayerId = reader.ReadUInt32();
@@ -77,10 +63,12 @@ namespace TCC.Parsing.Messages
                 u.Order = reader.ReadInt32();
                 u.CanInvite = reader.ReadBoolean();
                 u.Laurel = (Laurel)reader.ReadUInt32();
+                reader.BaseStream.Position = nameOffset - 4;
                 u.Name = reader.ReadTeraString();
                 u.Alive = true;
-                if (u.ServerId == LeaderServerId && u.PlayerId == LeaderPlayerId) u.IsLeader = true;
-                members.Add(u);
+                u.IsLeader = u.ServerId == LeaderServerId && u.PlayerId == LeaderPlayerId;
+                Members.Add(u);
+                offset = nextOffset;
             }
         }
     }

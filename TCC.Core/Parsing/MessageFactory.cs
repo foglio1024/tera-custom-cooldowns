@@ -3,11 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Tera;
 using Tera.Game;
 using TCC.Parsing.Messages;
+using Tera.Game.Messages;
+using C_PLAYER_LOCATION = TCC.Parsing.Messages.C_PLAYER_LOCATION;
+using S_AVAILABLE_EVENT_MATCHING_LIST = TCC.Parsing.Messages.S_AVAILABLE_EVENT_MATCHING_LIST;
+using S_BAN_PARTY = TCC.Parsing.Messages.S_BAN_PARTY;
+using S_BAN_PARTY_MEMBER = TCC.Parsing.Messages.S_BAN_PARTY_MEMBER;
+using S_BOSS_GAGE_INFO = TCC.Parsing.Messages.S_BOSS_GAGE_INFO;
+using S_CHAT = TCC.Parsing.Messages.S_CHAT;
+using S_CHECK_TO_READY_PARTY = TCC.Parsing.Messages.S_CHECK_TO_READY_PARTY;
+using S_CREST_MESSAGE = TCC.Parsing.Messages.S_CREST_MESSAGE;
+using S_GET_USER_LIST = TCC.Parsing.Messages.S_GET_USER_LIST;
+using S_LEAVE_PARTY = TCC.Parsing.Messages.S_LEAVE_PARTY;
+using S_LEAVE_PARTY_MEMBER = TCC.Parsing.Messages.S_LEAVE_PARTY_MEMBER;
+using S_LOAD_TOPO = TCC.Parsing.Messages.S_LOAD_TOPO;
+using S_OTHER_USER_APPLY_PARTY = TCC.Parsing.Messages.S_OTHER_USER_APPLY_PARTY;
+using S_PARTY_MEMBER_LIST = TCC.Parsing.Messages.S_PARTY_MEMBER_LIST;
+using S_PARTY_MEMBER_STAT_UPDATE = TCC.Parsing.Messages.S_PARTY_MEMBER_STAT_UPDATE;
+using S_PLAYER_STAT_UPDATE = TCC.Parsing.Messages.S_PLAYER_STAT_UPDATE;
+using S_PRIVATE_CHAT = TCC.Parsing.Messages.S_PRIVATE_CHAT;
+using S_START_COOLTIME_SKILL = TCC.Parsing.Messages.S_START_COOLTIME_SKILL;
+using S_SYSTEM_MESSAGE = TCC.Parsing.Messages.S_SYSTEM_MESSAGE;
+using S_TRADE_BROKER_DEAL_SUGGESTED = TCC.Parsing.Messages.S_TRADE_BROKER_DEAL_SUGGESTED;
+using S_WHISPER = TCC.Parsing.Messages.S_WHISPER;
 
 namespace TCC.Parsing
 {
@@ -88,6 +108,13 @@ namespace TCC.Parsing
             {"S_DUNGEON_COOL_TIME_LIST", Contructor<Func<TeraMessageReader, S_DUNGEON_COOL_TIME_LIST>>() },
             {"S_ACCOUNT_PACKAGE_LIST", Contructor<Func<TeraMessageReader, S_ACCOUNT_PACKAGE_LIST>>() },
             {"S_GUILD_TOWER_INFO", Contructor<Func<TeraMessageReader, S_GUILD_TOWER_INFO>>() },
+            {"S_INVEN", Contructor<Func<TeraMessageReader, S_INVEN>>() },
+            {"S_SPAWN_USER", Contructor<Func<TeraMessageReader, S_SPAWN_USER>>() },
+            {"S_PARTY_MEMBER_INTERVAL_POS_UPDATE", Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_INTERVAL_POS_UPDATE>>() },
+            {"S_ABNORMALITY_DAMAGE_ABSORB", Contructor<Func<TeraMessageReader, S_ABNORMALITY_DAMAGE_ABSORB>>() },
+            {"S_IMAGE_DATA", Contructor<Func<TeraMessageReader, S_IMAGE_DATA>>() },
+            {"S_GET_USER_GUILD_LOGO", Contructor<Func<TeraMessageReader, S_GET_USER_GUILD_LOGO>>() },
+            //{"S_EACH_SKILL_RESULT", Contructor<Func<TeraMessageReader, S_EACH_SKILL_RESULT>>() },
 
         };
 
@@ -112,6 +139,13 @@ namespace TCC.Parsing
             {typeof(S_ABNORMALITY_END), new Action<S_ABNORMALITY_END>(x => PacketProcessor.HandleAbnormalityEnd(x)) },
             {typeof(S_USER_EFFECT), new Action<S_USER_EFFECT>(x => PacketProcessor.HandleUserEffect(x)) },
             {typeof(S_SYSTEM_MESSAGE), new Action<S_SYSTEM_MESSAGE>(x => PacketProcessor.HandleSystemMessage(x)) },
+            {typeof(S_INVEN), new Action<S_INVEN>(x => PacketProcessor.HandleInventory(x)) },
+            {typeof(S_SPAWN_USER), new Action<S_SPAWN_USER>(x => PacketProcessor.HandleSpawnUser(x)) },
+            {typeof(S_PARTY_MEMBER_INTERVAL_POS_UPDATE), new Action<S_PARTY_MEMBER_INTERVAL_POS_UPDATE>(x => PacketProcessor.HandlePartyMemberIntervalPosUpdate(x)) },
+            {typeof(S_ABNORMALITY_DAMAGE_ABSORB), new Action<S_ABNORMALITY_DAMAGE_ABSORB>(x => PacketProcessor.HandleShieldDamageAbsorb(x)) },
+            {typeof(S_IMAGE_DATA), new Action<S_IMAGE_DATA>(x => PacketProcessor.HandleImageData(x)) },
+            {typeof(S_GET_USER_GUILD_LOGO), new Action<S_GET_USER_GUILD_LOGO>(x => PacketProcessor.HandleUserGuildLogo(x)) },
+            //{typeof(S_EACH_SKILL_RESULT), new Action<S_EACH_SKILL_RESULT>(x => PacketProcessor.HandleSkillResult(x)) },
 
             //{typeof(C_LOAD_TOPO_FIN), new Action<C_LOAD_TOPO_FIN>(x => PacketProcessor.HandleLoadTopoFin(x)) },
 

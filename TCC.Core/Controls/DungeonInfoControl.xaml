@@ -14,26 +14,26 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Border  CornerRadius="13,2,2,13" Height="26" Opacity="1" Background="White" >
+            <Border  CornerRadius="13,2,2,2" Height="80" Opacity="1"  >
 
-                <!--<Border.Background>
+                <Border.Background>
                     <ImageBrush ImageSource="{Binding Id, Converter={StaticResource Converters.DungeonIdToImage}}" 
                                         Stretch="UniformToFill"/>
-                </Border.Background>-->
-                <!--<Border.Effect>
+                </Border.Background>
+                <Border.Effect>
                     <DropShadowEffect ShadowDepth="1" BlurRadius="4" Opacity=".3"/>
-                </Border.Effect>-->
-                <!--<Rectangle RadiusX="2" RadiusY="2">
+                </Border.Effect>
+                <Rectangle RadiusX="2" RadiusY="2" Visibility="Collapsed"> 
                     <Rectangle.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#c000" Offset=".8"/>
                             <GradientStop Color="#0000" Offset=".2"/>
                         </LinearGradientBrush>
                     </Rectangle.Fill>
-                </Rectangle>-->
+                </Rectangle>
             </Border>
-            <Border Height="26" Width="26" Background="{Binding Id, Converter={StaticResource Converters.DungeonIdToTierColor}}" Padding="0" CornerRadius="15" 
-                    HorizontalAlignment="Right" VerticalAlignment="Center" Margin="-13,0,0,0" Grid.Column="1" x:Name="entriesBubble" RenderTransformOrigin=".5,.5">
+            <Border Height="26" Width="26" Effect="{StaticResource dropShadow}" Background="{Binding Id, Converter={StaticResource Converters.DungeonIdToTierColor}}" Padding="0" CornerRadius="15" 
+                    HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-3,-3,0,0" Grid.Column="0" x:Name="entriesBubble" RenderTransformOrigin=".5,.5">
                 <Grid Opacity="1">
                     <TextBlock Text="{Binding Entries}" FontWeight="Normal" HorizontalAlignment="Center" 
                                VerticalAlignment="Bottom" Margin="0,0,0,1" FontSize="18" Foreground="#d000"/>
@@ -42,7 +42,7 @@
                     <ScaleTransform ScaleX="1" ScaleY="1"/>
                 </Border.RenderTransform>
             </Border>
-            <TextBlock Foreground="#a000"  VerticalAlignment="Center" Margin="7,2,15,2" FontWeight="Normal" HorizontalAlignment="Left" 
+            <TextBlock Foreground="#afff"  VerticalAlignment="Bottom" Margin="7,2,15,2" FontWeight="Normal" HorizontalAlignment="Left" 
                                    FontSize="13" TextWrapping="WrapWithOverflow" Text="{Binding Id, Converter={StaticResource Converters.DungeonIdToName},ConverterParameter=False}"></TextBlock>
         </Grid>
         <Border.RenderTransform>

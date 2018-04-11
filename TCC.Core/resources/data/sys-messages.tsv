@@ -769,6 +769,7 @@
 203	SMT_DUNGEONMATCHING_CANT_REQUEST1	Some party members aren't eligible for instance matching.
 203	SMT_DUNGEONMATCHING_CANT_REQUEST2	You have a full {party}.
 203	SMT_DUNGEONMATCHING_CANT_REQUEST3	The {party} composition is not valid.
+203	SMT_DUNGEONMATCHING_CANT_REQUEST4	{UserName} can’t use instance matching.
 203	SMT_DUNGEONMATCHING_DEL_REQUEST	Canceling instance matching. Please wait.
 201	SMT_DUNGEONMATCHING_DOING	Instance matching is in progress. Please wait.
 201	SMT_DUNGEONMATCHING_JOIN_COMPENSATION	You received a reward for instance matching via parcel post.
@@ -784,9 +785,9 @@
 201	SMT_ELECTION_VOTE_COMPLETED	Voting successful.
 201	SMT_ELECT_CONSUL	You have been elected as exarch.
 201	SMT_ENABLE_LIMITED_LOOT_ON_BATTLE_STATE	Looting during combat disabled.
-201	SMT_ENCHANT_BALANCE_HIGH	Your enchantment advantage increased significantly. Your chance of succeeding on your next enchantment attempt will be much higher.
-201	SMT_ENCHANT_BALANCE_LOW	Your enchantment advantage increased slightly. Your chance of succeeding on your next enchantment attempt be a little higher.
-201	SMT_ENCHANT_BALANCE_MEDIUM	Your enchantment advantage increased. Your chance of succeeding on your next enchantment attempt will be higher.
+201	SMT_ENCHANT_BALANCE_HIGH	Your enchantment advantage increased significantly. The success chance of your next enchanting attempt will be much higher.
+201	SMT_ENCHANT_BALANCE_LOW	Your enchantment advantage increased slightly. The success chance of your next enchanting attempt be a little higher.
+201	SMT_ENCHANT_BALANCE_MEDIUM	Your enchantment advantage increased. The success chance of your next enchanting attempt will be higher.
 203	SMT_ENCHANT_DECOMPOSE_COMPLETE	Dismantled {TargetName} and obtained {ResultName} ×{ResultAmount}.
 203	SMT_ENCHANT_DECOMPOSE_FEE	You spent {Amount@money} on dismantling.
 201	SMT_ENCHANT_FAILED	Failed to enchant {ItemName}.
@@ -795,7 +796,7 @@
 201	SMT_ENCHANT_RESULT_FAILED	The enchanting attempt has failed.
 201	SMT_ENCHANT_RESULT_IMG_AND_NAME	<BR><img src='{imgSrc}'><BR>+{enchantCount} {resultItemName}
 201	SMT_ENCHANT_RESULT_SUCCEED	Successfully enchanted.
-201	SMT_ENCHANT_SUCCEED	You've successfully enchanted (+{Added}) {ItemName}.
+201	SMT_ENCHANT_SUCCEED	You've successfully enchanted {ItemName}.
 201	SMT_ENCHANT_SUCCEED_CAN_UNBIND	You have succeeded in obtaining +{Added}{ItemName} enchantment bonus. You may liberate this equipment with a Liberation Scroll.
 201	SMT_END_COMPETITION_TIME	The alliance competition has ended.
 201	SMT_END_SEASON	The alliance season has ended.
@@ -820,7 +821,7 @@
 203	SMT_EVENT_CANNOT_USE_NOT_ENOUGH_SPACE	Can't use {ItemName} here. Please try again in another place.
 201	SMT_EVENT_END	The event ends.
 201	SMT_EVENT_ITEM_EMPTY	You have obtained all items, ending the event.
-201	SMT_EVENT_OBTAIN_EXCEPT_ITEM	{UserName} obtained {ItemName} x {ItemCount} from the event.
+201	SMT_EVENT_OBTAIN_EXCEPT_ITEM	{UserName} obtained {ItemName} ×{ItemCount} from the event.
 201	SMT_EVENT_START	The event starts.
 201	SMT_EXIST_CLASS	The position is available.
 201	SMT_EXTEND_SKILL_PERIOD	You've extended the period of {SkillName}.
@@ -880,7 +881,7 @@
 201	SMT_FRIEND_SOMEONE_ADDED_ME	You've been added to {UserName}'s friends list.
 201	SMT_FRIEND_SOMEONE_DELETED_ME	{UserName} removed you from their friends list.
 201	SMT_FRIEND_WALK_INTO_SAME_AREA	{UserName} has entered {AreaName}.
-201	SMT_GACHA_REWARD	{UserName} obtained {randomItemName} x {randomItemCount} from {gachaItemName}.
+201	SMT_GACHA_REWARD	{UserName} obtained {randomItemName} ×{randomItemCount} from {gachaItemName}.
 201	SMT_GACHA_SEND_PARCEL	The item has been sent to your parcel post because your inventory is full.
 203	SMT_GAIN_REPUTATION_POINT_LIMIT	That source cannot give you any more credits until reset.
 201	SMT_GAMBLE_ALERT_BONFIRE_DISAPPEAR	If your campfire goes out, the Engine of Mischief will vanish.
@@ -1215,7 +1216,7 @@
 203	SMT_ITEM_MIX_NEED_METERIAL	You're missing materials needed for that.
 201	SMT_ITEM_MIX_SUCCESS	Well done!
 203	SMT_ITEM_RECEIVER_INVEN_FULL	{UserName}'s inventory is full. The item cannot be released.
-203	SMT_ITEM_RESET_CANT	Can't change enchantments on that.
+203	SMT_ITEM_RESET_CANT	Item option cannot be changed.
 201	SMT_ITEM_RESET_SUCCESS	Enigma completed. Enchantments changed.
 204	SMT_ITEM_ROULETTE_VALUE	{UserName}'s roll result for {ItemName}: {Amount}
 203	SMT_ITEM_UNBIND_MSGBOX_MESSAGE	You can only liberate {ItemName} {UnbindCount} times. Do you want to liberate?
@@ -1303,7 +1304,7 @@
 203	SMT_LOW_TCAT_MESSAGE	Not enough Federation Bills.
 201	SMT_MANDATE_CONSUL	{username} has been appointed as exarch.
 203	SMT_MATCHING_CANT_REQUEST4	You can't use the instance matching function due to an incorrectly formed {party}.
-201	SMT_MAX_ENCHANT_SUCCEED	{UserName} has successfully enchanted (+{Added}) {ItemName}.
+201	SMT_MAX_ENCHANT_SUCCEED	{UserName} has successfully enchanted {ItemName}.
 203	SMT_MEDALSTORE_LACK_MEDAL_ITEM	Not enough {ItemName}s.
 203	SMT_MEDIATE_ACCOUNT_FAIL	That player can't carry any more gold.
 201	SMT_MEDIATE_CALCULATE	Transaction finished.
@@ -1965,7 +1966,6 @@
 201	SMT_WAREHOUSE_ITEM_DRAW	You withdrew {ItemName} x {ItemAmount}.
 201	SMT_WAREHOUSE_ITEM_INSERT	You deposited {ItemName} x {ItemAmount}.
 203	SMT_WAREHOUSE_LIMIT_MONEY	You've exceeded the gold storage maximum for your account's bank.
-203	SMT_WARNING_DECOMPOSE_COST	{ItemName}&#xA;Are you sure you want to dismantle this item?&#xA;The cost will be {Cost}.
 203	SMT_WARNING_DELETE_PCBANG_EQUIPMENT	You are not in PC café. Equipment items intended only for PC café users will be deleted, and the crystals and niveots used in the items will be returned to you by mail.
 203	SMT_WARNING_DELETE_PERIOD_ITEM	Duration for {item} is ending soon. It will disappear from inventory when the duration ends.
 203	SMT_WARNING_REINFORCED_OR_MASTERPIECE_EQUIPMENT	That equipment is masterwork or enchanted.&#xA;
@@ -2118,7 +2118,7 @@
 302	SMT_DREVENT_NOT_MEET_CONDITION	Not eligible for a reward from the Dungeon Mentor Event.
 203	SMT_MEDIATE_REG_WARNING_UI_TITLE	Caution!
 203	SMT_MEDIATE_REG_WARNING_UI_MESSAGE	The price of the item is lower than the <font color = '#FF0000'>average price over the past 3 days.</font> Do you want to list the item anyway?<br><br>{ItemDesc}<br>Asking price: {HopeSellPrice@money}<br>Price per unit: {EachSellPrice@money}<br>Average price: {AvgPrice@money}<br>Earnest money: {fee@money}<br>
-203	SMT_DUALOPTION_OPEN_INFO	Activating a second set of enchantment effects has the following cost:
+203	SMT_DUALOPTION_OPEN_INFO	Activating a second set of enchantment effects has the following cost. Effect sets are reset when upgrading an item, and must be activated again.
 203	SMT_DUALOPTION_OPEN_ITEM_INFO	{ItemName} {CurrentItemCount}/{ItemCount}
 203	SMT_DUALOPTION_CHANGE_INFO	Do you want to switch enchantment effects to set {OPTIONNUMBER}?
 201	SMT_DUALOPTION_OPEN_SUCCESS	Activated Effect Set 2 for {ItemName}.
@@ -2132,7 +2132,43 @@
 203	SMT_DUALOPTION_CHANGE_FAIL_PROGRESS	Failed to switch effects sets.
 203	SMT_DUALOPTION_CHANGE_FAIL	Failed to change effects sets.
 203	SMT_DUALOPTION_CHANGE_FAIL_FIGHT	Cannot switch effects sets during combat.
-203	SMT_DUALOPTION_STRING_BEFORE	Effect Set Activation: Shift + R-Click on an item with +12 enchantment or higher.
+203	SMT_DUALOPTION_STRING_BEFORE	Effect Set Activation: Shift + R-Click on an item
 203	SMT_DUALOPTION_STRING_AFTER	Switch Effect Set: [Shift + R-Click]&#xA;View other set: [Ctrl]
+203	SMT_HUDDLEADDING_USER	{Username} can’t trade items or gold.
 302	SMT_CATCHBACK_SYSMSG_TOOCLOSE	Target is too close. Cannot use skill.
 203	SMT_CAN_USE_IN_DUNGEON_ONLY	Can only be used in dungeons.
+201	SMT_OPTIONRESET_FAIL	Failed to change enchantment effect.
+201	SMT_OPTIONRESET_CANT	{ItemName}'s enchantment effect cannot be changed.
+201	SMT_OPTIONRESET_CANT_BECAUSE_COMBAT	Cannot change enchantment effects during combat.
+201	SMT_OPTIONRESET_CANT_BECAUSE_ANY	Enchantment effects cannot be changed. Please try again later.
+201	SMT_OPTIONRESET_FAIL_BECAUSE_MATERIAL	Not enough semi-enigmatic scrolls.
+203	SMT_INVALID_MATERIAL_ENCHANT	Item cannot be enchanted.
+203	SMT_INVALID_EQUIPMENT_UPGRADE	Item cannot be upgraded.
+203	SMT_INVALID_EQUIPMENT_UPGRADE_NOTBELONGTO	Only items bound to you can be upgraded.
+201	SMT_EQUIPMENT_UPGRADE_SUCCESS	You've successfully upgraded {ItemName}.
+201	SMT_EQUIPMENT_UPGRADE_FAILE	Failed to upgrade {ItemName}.
+201	SMT_UPGRADE_BALANCE_MEDIUM	Your advantage increased. Your chance of succeeding on your next upgrade attempt will be higher.
+203	SMT_ITEM_DECOMPOSE_COMPLETE	Dismantled {TargetName} ×{Amount} and obtained {ResultName} ×{ResultAmount}.
+203	SMT_YOU_MUST_DETACH_CRYSTAL_AND_ARTIFACT	Please remove all crystals and niveots first.
+203	SMT_CANT_REGIST_ITEM	You cannot select this item.
+203	SMT_CANT_REGIST_IN_CURRENT	You already learned.
+203	SMT_CANT_REGIST_EQUIP	You must unequip the item before enchanting.
+201	SMT_CANT_USE_MATERIAL_ENCHANT	Unable to use Material Enchanting System.
+201	SMT_CANT_USE_EQUIPMENT_UPGRADE	Unable to use Upgrade System.
+201	SMT_CANT_USE_ITEM_DECOMPOSITION	Unable to use Dismantle System.
+203	SMT_FIELD_EVENT_ENTER	Entering the Guardian Legion mission zone.
+203	SMT_FIELD_EVENT_LEAVE	You left the Guardian Legion mission zone.
+203	SMT_FIELD_EVENT_COMPLETE	Completed all mission requirements.
+203	SMT_FIELD_EVENT_FAIL_OVERTIME	The Guardian Legion mission has ended.
+203	SMT_FIELD_EVENT_REWARD_AVAILABLE	You may claim {number} rewards for completing Guardian Legion missions (up to {number}).
+203	SMT_FIELD_EVENT_USER_LIMIT_FULL	Teleport failed. The mission zone is full.
+203	SMT_FIELD_EVENT_TELEPORT_FAIL_ENTERED_EVENT	You are already participating.
+203	SMT_FIELD_EVENT_TELEPORT_FAIL_IN_COMBAT	Cannot use when in combat.
+203	SMT_FIELD_EVENT_TELEPORT_FAIL_NONEXISTENT_EVENT	This mission is no longer available.
+201	SMT_FIELD_EVENT_BAN_GUIDE_MESSAGE	You are AFK. You will be automatically moved to a safe zone in {Sec} sec. Move your character to cancel.
+203	SMT_FIELD_EVENT_BAN_MESSAGE	You have been AFK for too long. Moving you to a safe zone.
+203	SMT_NON_PK_SECTION	You can't PvP here.
+302	SMT_CANNOT_USE_SKILL_NON_EQUIPPED	You can’t use "{SkillName}" because you are not wearing the correct costume.
+302	SMT_CANNOT_USE_SKILL_THIS_ITEM	You can't use "{SkillName}" with "{ItemName}".
+203	SMT_CANNOT_USE_SKILL_WHILE_ACTION	You can't use that skill in combat.
+203	SMT_NOTIFY_NEED_SKILLBOOK	<BR><font color = '#ff5555'>You must learn Flying Skill: Free Flight before you can use an eligible costume to fly.</font>

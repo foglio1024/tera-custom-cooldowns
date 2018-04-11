@@ -9,10 +9,11 @@
                           ItemTemplate="{StaticResource MessageBodyTemplate}" 
                           Background="#0f00"  
                           Margin="3,0,0,0" 
-                          VerticalAlignment="Top" >
+                          VerticalAlignment="Center" >
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
-                <WrapPanel HorizontalAlignment="Stretch"  Width="Auto" Height="Auto" Background="#0f00" PreviewMouseRightButtonDown="WrapPanel_PreviewMouseRightButtonDown">
+                <WrapPanel HorizontalAlignment="Stretch"  Width="Auto" Height="Auto" Background="#0f00" 
+                           PreviewMouseRightButtonDown="WrapPanel_PreviewMouseRightButtonDown" VerticalAlignment="Top">
                     <WrapPanel.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Copy text" Click="I_Click"/>

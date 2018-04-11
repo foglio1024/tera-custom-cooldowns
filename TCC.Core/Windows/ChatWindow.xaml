@@ -24,7 +24,10 @@
         <DataTemplate x:Key="ChatMessageTemplate">
             <controls:ChatMessageControl VerticalAlignment="Top">
                 <controls:ChatMessageControl.LayoutTransform>
-                    <RotateTransform Angle="180"></RotateTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="1"></ScaleTransform>
+                        <RotateTransform Angle="180"></RotateTransform>
+                    </TransformGroup>
                 </controls:ChatMessageControl.LayoutTransform>
             </controls:ChatMessageControl>
         </DataTemplate>
@@ -50,6 +53,52 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style TargetType="ItemsControl" x:Key="ChatItemsControl">
+            <Setter Property="VirtualizingPanel.IsVirtualizing" Value="True"/>
+            <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling"/>
+            <Setter Property="Height" Value="Auto"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border SnapsToDevicePixels="True"
+                                BorderThickness="{TemplateBinding Border.BorderThickness}"
+                                Padding="{TemplateBinding Control.Padding}"
+                                BorderBrush="{TemplateBinding Border.BorderBrush}"
+                                Background="{TemplateBinding Panel.Background}">
+                            <ScrollViewer Padding="{TemplateBinding Control.Padding}" Focusable="False" PreviewMouseWheel="SWPreviewMouseWheel"
+                                          FlowDirection="RightToLeft" VerticalContentAlignment="Top" VerticalAlignment="Top" Height="Auto"
+                                          CanContentScroll="True" ScrollChanged="ScrollViewer_ScrollChanged">
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" FlowDirection="LeftToRight" />
+                            </ScrollViewer>
+                        </Border>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <DataTemplate x:Key="TabContentTemplate">
+            <ItemsControl Name="itemsControl" VerticalAlignment="Stretch"
+                          VerticalContentAlignment="Top"
+                          Style="{StaticResource ChatItemsControl}"
+                          ItemsSource="{Binding Messages}"  
+                          ItemTemplate="{StaticResource ChatMessageTemplate}" 
+                          Width="Auto">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel Margin="0,0,0,0" 
+                                                VerticalAlignment="Stretch"
+                                                Background="#01000000" 
+                                                VirtualizationMode="Standard"
+                        >
+                            <VirtualizingStackPanel.LayoutTransform>
+                                <RotateTransform Angle="180"></RotateTransform>
+                            </VirtualizingStackPanel.LayoutTransform>
+                        </VirtualizingStackPanel>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+
+        </DataTemplate>
     </local:TccWindow.Resources>
     <Grid>
         <Grid Margin="0" Width="Auto" Name="root" MouseLeftButtonDown="Window_MouseLeftButtonDown">
@@ -69,25 +118,40 @@
                    FontFamily="{DynamicResource Frutiger}"
                    Text="{Binding Instance.MessageCount}" 
                    Margin="3,3,23,3"/>
-            <TabControl Grid.Row="1" Background="Transparent"  
-                        BorderBrush="#0000" BorderThickness="0,0,0,0"
-                        Style="{DynamicResource ChatTabControlStyle}" Margin="0,0,0,0" x:Name="tabControl" >
+            <TabControl Grid.Row="1" 
+                        Background="Transparent"  
+                        BorderBrush="#0000" 
+                        BorderThickness="0,0,0,0"
+                        Style="{DynamicResource ChatTabControlStyle}" 
+                        Margin="0,0,0,0" 
+                        ItemsSource="{Binding Instance.Tabs}"
+                        ContentTemplate="{StaticResource TabContentTemplate}"
+                        x:Name="tabControl">
                 <TabControl.Resources>
                     <Style TargetType="{x:Type TabItem}">
                         <Setter Property="Margin" Value="0,0,0,0"/>
                         <Setter Property="Width" Value="Auto"/>
                         <Setter Property="Height" Value="25"/>
                         <Setter Property="Foreground" Value="#9fff"/>
+                        <Setter Property="Header" Value="{Binding TabName}"/>
+                        <Setter Property="FontWeight" Value="DemiBold"/>
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type TabItem}">
                                     <Grid Name="Panel" Cursor="Hand" MouseLeftButtonDown="TabClicked">
+                                        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Margin="-4,0"
+                                              Visibility="{Binding Attention, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
+                                            <Ellipse Fill="Orange" Opacity=".4" Width="12" Height="12" Margin="0"/>
+
+                                            <Ellipse Fill="Orange" Width="6" Height="6" Margin="0"/>
+                                        </Grid>
+
                                         <ContentPresenter x:Name="ContentSite"
-                                                                  VerticalAlignment="Center"
-                                                                  HorizontalAlignment="Center"
-                                                                  ContentSource="Header"
-                                                                  Margin="10,0"
-                                                                  RecognizesAccessKey="True" >
+                                                          VerticalAlignment="Center"
+                                                          HorizontalAlignment="Center"
+                                                          ContentSource="Header"
+                                                          Margin="10,0"
+                                                          RecognizesAccessKey="True" >
                                         </ContentPresenter>
                                         <Grid.Style>
                                             <Style>
@@ -96,7 +160,6 @@
                                                     <Trigger Property="Grid.IsMouseOver" Value="True">
                                                         <Setter Property="Grid.Background" Value="#1fff"/>
                                                     </Trigger>
-
                                                 </Style.Triggers>
                                             </Style>
 
@@ -115,141 +178,10 @@
                             </Setter.Value>
                         </Setter>
                     </Style>
-                    <Style TargetType="ItemsControl" x:Key="ChatItemsControl">
-                        <Setter Property="VirtualizingPanel.IsVirtualizing" Value="True"/>
-                        <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling"/>
-                        <Setter Property="Height" Value="Auto"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate>
-                                    <Border SnapsToDevicePixels="True"
-                                        BorderThickness="{TemplateBinding Border.BorderThickness}"
-                                        Padding="{TemplateBinding Control.Padding}"
-                                        BorderBrush="{TemplateBinding Border.BorderBrush}"
-                                        Background="{TemplateBinding Panel.Background}">
-                                        <ScrollViewer Padding="{TemplateBinding Control.Padding}" Focusable="False" PreviewMouseWheel="SWPreviewMouseWheel"
-                                                  FlowDirection="RightToLeft" VerticalContentAlignment="Top" VerticalAlignment="Top" Height="Auto"
-                                                  CanContentScroll="True" ScrollChanged="ScrollViewer_ScrollChanged">
-                                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" FlowDirection="LeftToRight" />
-                                        </ScrollViewer>
-                                    </Border>
 
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
                 </TabControl.Resources>
-                <TabItem Header="ALL" FontWeight="DemiBold"  
-                     VerticalAlignment="Stretch" >
-                    <ItemsControl Name="itemsControl" VerticalAlignment="Stretch"
-                               VerticalContentAlignment="Top"
-                              Style="{StaticResource ChatItemsControl}"
-                              ItemsSource="{Binding Instance.AllMessages}"  
-                              ItemTemplate="{StaticResource ChatMessageTemplate}" 
-                              Width="Auto"
-                              Grid.Row="1">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <VirtualizingStackPanel Margin="0,0,0,0" 
-                                                    VerticalAlignment="Stretch"
-                                                    Background="#01000000" 
-                                                        >
-                                    <VirtualizingStackPanel.LayoutTransform>
-                                        <RotateTransform Angle="180"></RotateTransform>
-                                    </VirtualizingStackPanel.LayoutTransform>
-                                </VirtualizingStackPanel>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-
-                </TabItem>
-                <TabItem Header="GUILD" FontWeight="DemiBold" 
-                     VerticalAlignment="Stretch">
-                    <ItemsControl Name="guildControl" 
-                              Style="{StaticResource ChatItemsControl}"
-                              ItemsSource="{Binding Instance.GuildMessages}"  
-                              ItemTemplate="{StaticResource ChatMessageTemplate}" 
-                              Width="Auto"  Grid.Row="1">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <VirtualizingStackPanel Margin="0" 
-                                                    Orientation="Vertical" 
-                                                    Background="#01000000" 
-                                                        >
-                                    <VirtualizingStackPanel.LayoutTransform>
-                                        <RotateTransform Angle="180"></RotateTransform>
-                                    </VirtualizingStackPanel.LayoutTransform>
-                                </VirtualizingStackPanel>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                </TabItem>
-                <TabItem Header="GROUP" FontWeight="DemiBold"
-                     VerticalAlignment="Stretch">
-                    <ItemsControl Name="partyControl" 
-                              Style="{StaticResource ChatItemsControl}"
-                              ItemsSource="{Binding Instance.GroupMessages}"  
-                              ItemTemplate="{StaticResource ChatMessageTemplate}" 
-                              Width="Auto"  Grid.Row="1">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <VirtualizingStackPanel Margin="0" 
-                                                    Orientation="Vertical" 
-                                                    Background="#01000000" 
-                                                        >
-                                    <VirtualizingStackPanel.LayoutTransform>
-                                        <RotateTransform Angle="180"></RotateTransform>
-                                    </VirtualizingStackPanel.LayoutTransform>
-                                </VirtualizingStackPanel>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                </TabItem>
-                <TabItem Header="WHISPERS" FontWeight="DemiBold" 
-                     VerticalAlignment="Stretch">
-                    <ItemsControl Name="whispersControl" 
-                              Style="{StaticResource ChatItemsControl}"
-                               ItemsSource="{Binding Instance.WhisperMessages}"  
-                              ItemTemplate="{StaticResource ChatMessageTemplate}" 
-                              Width="Auto"  Grid.Row="1">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <VirtualizingStackPanel Margin="0"
-                                                    Orientation="Vertical" 
-                                                    Background="#01000000" 
-                                                        >
-                                    <VirtualizingStackPanel.LayoutTransform>
-                                        <RotateTransform Angle="180"></RotateTransform>
-                                    </VirtualizingStackPanel.LayoutTransform>
-                                </VirtualizingStackPanel>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                </TabItem>
-                <TabItem Header="SYSTEM" FontWeight="DemiBold" 
-                     VerticalAlignment="Stretch">
-                    <ItemsControl Name="systemControl" 
-                              Style="{StaticResource ChatItemsControl}"
-                                                            ItemsSource="{Binding Instance.SystemMessages}"  
-
-                              ItemTemplate="{StaticResource ChatMessageTemplate}" 
-                              Width="Auto"  Grid.Row="1">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <VirtualizingStackPanel Margin="0"
-                                                    Orientation="Vertical" 
-                                                    Background="#01000000" 
-                                                        >
-                                    <VirtualizingStackPanel.LayoutTransform>
-                                        <RotateTransform Angle="180"></RotateTransform>
-                                    </VirtualizingStackPanel.LayoutTransform>
-                                </VirtualizingStackPanel>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                </TabItem>
             </TabControl>
-            <Rectangle Height="3" Fill="{StaticResource Colors.App.MP}" Width="0" x:Name="selectionRect" 
+            <Rectangle Height="3" Fill="{StaticResource Colors.App.MP}" Width="10" x:Name="selectionRect" 
                    IsHitTestVisible="False" HorizontalAlignment="Left" 
                    Opacity="1" VerticalAlignment="Top" Margin="0,22,0,0" Grid.Row="1">
                 <Rectangle.RenderTransform>
@@ -278,12 +210,13 @@
                   Opacity=".4"
                   ></Path>
             <Border Background="{StaticResource Colors.App.DefaultBackground}" Width="Auto"
-                    Grid.Column="0" Grid.Row="0" Opacity=".0" 
+                    Grid.Column="0" Grid.Row="0" Opacity=".0" MouseEnter="SettingsButtonEnter"
                     Visibility="{Binding Instance.LfgOn, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"/>
 
             <ItemsControl ItemsSource="{Binding Instance.LFGs}" 
                               ItemTemplate="{StaticResource LfgTemplate}" 
                               Margin="2" 
+
                               HorizontalAlignment="Left"
                               Width="Auto"
                               Height="18"
@@ -296,43 +229,104 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
 
-            <Popup Name="playerInfo" StaysOpen="True" Placement="Mouse"
-               AllowsTransparency="True" Width="Auto" HorizontalOffset="95" UseLayoutRounding="True"
+            <Popup Name="playerInfo" StaysOpen="True" Placement="MousePoint" 
+               AllowsTransparency="True" Width="Auto" HorizontalOffset="0" UseLayoutRounding="True"
                VerticalAlignment="Center"
                VerticalOffset="0">
                 <chatcontrols:PlayerTooltip />
             </Popup>
-            <Popup x:Name="enabledChannelsPopup" StaysOpen="True" Placement="Top" 
-                   AllowsTransparency="True" >
+            <Popup x:Name="ChatSettingsPopup" StaysOpen="True" Placement="Top"  VerticalAlignment="Stretch"
+                   AllowsTransparency="True" MinWidth="350" HorizontalAlignment="Left">
                 <Popup.Resources>
-                    <DataTemplate x:Key="channelSetting">
+                    <DataTemplate x:Key="ChannelSettingTemplate">
                         <chatcontrols:ChannelSetting />
 
                     </DataTemplate>
                 </Popup.Resources>
-                <Border Style="{StaticResource Styles.DefaultBorder}" Opacity=".85" Width="Auto" Height="Auto" Margin="5" CornerRadius="5">
+                <Border Style="{StaticResource Styles.DefaultBorder}" Margin="5" CornerRadius="5" BorderThickness="0">
                     <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Border Background="#1fff" HorizontalAlignment="Stretch">
-                            <Grid>
-                                <TextBlock Foreground="#7fff" Text="Enabled channels" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"/>
-                                <Image Source="/TCC;component/resources/images/ic_close_white_24dp_2x.png" Width="20" 
-                                       HorizontalAlignment="Right" Margin="5" Opacity=".9" Cursor="Hand" 
-                                       MouseLeftButtonDown="CloseChannelSettings"/>
-                            </Grid>
-                        </Border>
-                        <ItemsControl ItemTemplate="{StaticResource channelSetting}"
+                        <TabControl Style="{StaticResource ChatTabControlStyle}">
+                            <TabItem Header="Globally enabled channels">
+                                <Grid>
+                                    <ItemsControl ItemTemplate="{StaticResource ChannelSettingTemplate}"
                                   ItemsSource="{Binding Instance.VisibleChannels}"
-                                      Grid.Row="1" Margin="3">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <UniformGrid Columns="4"></UniformGrid>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                        </ItemsControl>
+                                      Margin="-2">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <UniformGrid Columns="4"/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                </Grid>
+                            </TabItem>
+                            <TabItem Header="Tabs">
+                                <StackPanel>
+
+                                    <ItemsControl ItemsSource="{Binding Instance.Tabs}" Margin="-2,0"
+                                              ItemTemplate="{StaticResource TabSettingsTemplate}" 
+                                                  >
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel Orientation="Vertical" MaxHeight="800" Margin="4,0"/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                    <Button Click="AddChatTab" Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Stretch" Padding="5" VerticalContentAlignment="Stretch">
+                                        <TextBlock Margin="5" Style="{StaticResource Styles.DefaultText}" Text="Add chat tab" TextAlignment="Center"></TextBlock>
+                                    </Button>
+                                </StackPanel>
+
+                            </TabItem>
+                            <TabControl.Resources>
+                                <Style TargetType="{x:Type TabItem}">
+                                    <Setter Property="Margin" Value="0"/>
+                                    <Setter Property="Width" Value="Auto"/>
+                                    <Setter Property="Height" Value="25"/>
+                                    <Setter Property="Foreground" Value="#9fff"/>
+                                    <Setter Property="FontWeight" Value="DemiBold"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type TabItem}">
+                                                <Grid Name="Panel" Cursor="Hand">
+                                                    <ContentPresenter x:Name="ContentSite"
+                                                                  VerticalAlignment="Center"
+                                                                  HorizontalAlignment="Center"
+                                                                  ContentSource="Header"
+                                                                  Margin="10,0"
+                                                                  RecognizesAccessKey="True" >
+                                                    </ContentPresenter>
+                                                    <Grid.Style>
+                                                        <Style>
+                                                            <Setter Property="Grid.Background" Value="Transparent"/>
+                                                            <Style.Triggers>
+                                                                <Trigger Property="Grid.IsMouseOver" Value="True">
+                                                                    <Setter Property="Grid.Background" Value="#1fff"/>
+                                                                </Trigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+
+                                                    </Grid.Style>
+                                                </Grid>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsSelected" Value="True">
+                                                        <Setter Property="Panel.ZIndex" Value="100" />
+                                                    </Trigger>
+                                                    <Trigger Property="IsSelected" Value="True">
+                                                    </Trigger>
+
+                                                    <Trigger Property="IsEnabled" Value="False" />
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+
+                            </TabControl.Resources>
+
+                        </TabControl>
+                        <Image Source="/TCC;component/resources/images/ic_close_white_24dp_2x.png" Width="18" 
+                               HorizontalAlignment="Right" Margin="3" Opacity=".9" Cursor="Hand" VerticalAlignment="Top"
+                               MouseLeftButtonDown="CloseChannelSettings"/>
                     </Grid>
                 </Border>
 

@@ -27,7 +27,8 @@
 
 
         </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Column="2" Grid.RowSpan="2" Grid.Row="1">
+        <StackPanel Orientation="Vertical" Grid.Column="2" Grid.RowSpan="2" Grid.Row="1" 
+                    MouseEnter="UIElement_OnMouseEnter" MouseLeave="UIElement_OnMouseLeave">
             <Border Cursor="Hand" 
                     x:Name="acceptButton"
                     PreviewMouseLeftButtonDown="Accept"

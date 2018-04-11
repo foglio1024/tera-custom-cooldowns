@@ -4,8 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
-             mc:Ignorable="d" Width="1000"
-             >
+             mc:Ignorable="d" Width="1000" d:DataContext="{d:DesignData InfoWindowViewModel}">
     <UserControl.Resources>
         <DataTemplate x:Key="TimeMarkerTemplate">
             <local:TimeMarkerControl/>
@@ -14,15 +13,19 @@
             <local:EventControl />
         </DataTemplate>
         <DataTemplate x:Key="EventGroupTemplate">
-            <Grid>
-                <Rectangle Height="4" 
+            <Grid Margin="0">
+                <Rectangle Height="6" 
                    Width="1000" 
                     Opacity=".8"
                    HorizontalAlignment="Left" 
                    Margin="0,0,0,0" 
                    VerticalAlignment="Center"
                    Fill="#5aaa"
-                           IsHitTestVisible="False"
+                   IsHitTestVisible="True"
+                   ToolTip="{Binding TimeSpanTooltip}"
+                           ToolTipService.InitialShowDelay="0"
+                           ToolTipService.ShowDuration="500000"
+                           ToolTipService.HasDropShadow="True"
                    x:Name="TimelineBase">
                 </Rectangle>
                 <ItemsControl ItemsSource="{Binding Events}" 
@@ -118,10 +121,10 @@
         <ItemsControl ItemsSource="{Binding Instance.EventGroups}"
                       ItemTemplate="{StaticResource EventGroupTemplate}"
                       VerticalAlignment="Top"
-                      Margin="0,18,0,0">
+                      Margin="-10,18,-10,0">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel />
+                    <StackPanel Margin="10,0,0,0"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>

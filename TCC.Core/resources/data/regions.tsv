@@ -93,6 +93,7 @@
 5008	Moss Glen
 5009	Burning Frog Altar
 5010	Sacred Spawning Pond
+5011	Tuwangi Training Camp
 6001	Valley of Titans
 6002	Invasion-free Zone
 6003	Mags Strix
@@ -122,6 +123,7 @@
 7008	Orcan Bivouac
 7009	Consecrated Stone
 7010	Crossroads of Pythia
+7777	Guardian Legion Mission Zone
 8001	Hungry Caverns
 8002	Hungry Caverns Vaults
 8003	Hungry Caverns Catacombs
@@ -151,13 +153,16 @@
 9013	Saravash's Ascent Entrance
 9054	Bathysmal Rise Entrance
 9056	Timescape (Hard)
+9057	Akeron's Inferno (Hard)
 9059	Forsaken Island
 9060	Kalivan's Dreadnaught (Hard)
+9066	Demon's Wheel
 9067	Demokron Factory (Hard)
 9068	Shadow Sanguinary (Hard)
 9069	Castle Aranea
 9070	Manglemire
 9710	Broken Prison
+9735	RK-9 Kennel
 9756	Timescape
 9759	Forsaken Island (Hard)
 9760	Kalivan's Dreadnaught
@@ -167,15 +172,18 @@
 9770	Ruinous Manor
 9780	Velik's Hold
 9781	Velik's Sanctuary
+9794	Thaumetal Refinery
 9795	Crucible of Fame
 9810	Entrance to Lakan's Prison
 9830	Celestial Arena
 9860	Kalivan's Challenge
+9935	RK-9 Kennel (Hard)
 9950	Harrowhold
-9969	Nightmare Lilith's Keep
+9969	Lilith's Keep (Hard)
 9970	Ruinous Manor (Hard)
 9980	Velik's Hold (Hard)
 9981	Velik's Sanctuary (Hard)
+9994	Thaumetal Refinery (Hard)
 9999	TERA Instanced Space
 10001	Serpentis Isle
 10002	Boan Strand
@@ -318,6 +326,7 @@
 19020	Fairground—Frying Pan and Stove
 19021	Fairground—Fire Pit
 19022	Fairground—Salad Table
+19023	Bamarama Grounds
 19101	Arx Umbra
 19102	Inferus Approach
 19103	Domare Outpost
@@ -1166,6 +1175,8 @@
 907002	Playpen
 950001	Harrowhold
 950002	Harrowhold Entrance
+973501	RK-9 Kennel
+973502	Entrance to RK-9 Kennel
 975601	Timescape
 975602	Scarlet Way
 975603	Beyond Thundertrial
@@ -1443,6 +1454,9 @@
 9060006	Sentry Ship Deck
 9061001	Ruin of the Giants
 9065001	Twilight Valley
+9066001	Grand Plaza
+9066002	Demon's Wheel
+9066003	Demon's Wheel—Entrance
 9068001	Shadow Sanguinary (Hard)
 9068002	Guardian's Chamber
 9068003	Bloodshard Repository
@@ -1589,6 +1603,13 @@
 9726005	Sanctuary of the Seer (Hard)
 9727001	Manaya's Core
 9727002	The Plexus
+9735001	Portal Room
+9735002	Ventilation Room
+9735003	Magnetic Field Testing Room
+9735004	Component Reprocessing Area
+9735005	Restricted Area: D
+9735006	Restricted Area: E
+9735007	Observation Room
 9743001	Wonderholme
 9743002	Mockinghall
 9743011	Great Hall
@@ -1672,6 +1693,10 @@
 9793005	Chamber of Eccentricity (Hard)
 9793006	Chamber of Awe (Hard)
 9793007	Akasha's Chamber (Hard)
+9794001	Hidden Cave Entrance
+9794002	Refinery Mine
+9794003	Transgoblification Lab
+9794004	Entrance to Thaumetal Refinery
 9801001	Nexus Traverse
 9801002	Velika 
 9801003	Allemantheia 
@@ -1778,6 +1803,13 @@
 9916003	Control Room (Hard)
 9916004	Engine Room (Hard) 
 9916005	Sky Cruiser Deck (Hard) 
+9935001	Portal Room
+9935002	Ventilation Room
+9935003	Magnetic Field Testing Room
+9935004	Component Reprocessing Area
+9935005	Restricted Area: D
+9935006	Restricted Area: E
+9935007	Observation Room
 9950001	Harrowhold
 9950002	Harrowhold - Courtyard
 9950003	Harrowhold - Cliffs
@@ -1803,6 +1835,9 @@
 9990002	Defend!
 9990003	Danger!
 9990004	Converge!
+9994001	Hidden Cave Entrance
+9994002	Refinery Mine
+9994003	Transgoblification Lab
 9999998	A map is being developed for this area.
 9999999	Map cannot be displayed for this area.
 96431504	Shortcut

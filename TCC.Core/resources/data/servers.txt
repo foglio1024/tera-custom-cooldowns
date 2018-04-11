@@ -1,7 +1,11 @@
-79.110.94.211 EU 26 Killian
+﻿79.110.94.211 EU 26 Killian
 79.110.94.212 EU 27 Mystel
 79.110.94.213 EU 28 Yurian
 79.110.94.214 EU 29 Seren
+79.110.94.215 EU 30 Sikander
+79.110.94.217 EU 33 Manahan
+79.110.94.218 EU 31 Saleron
+79.110.94.219 EU 32 Amarun
 
 208.67.49.28 NA 4004 Tempest Reach
 208.67.49.68 NA 4009 Celestial Hills
@@ -20,3 +24,7 @@
 
 183.110.3.6 KR 1 아룬의 영광
 183.110.3.7 KR 8 카이아의 가호
+183.110.3.5 KR-PTS 7 테스트 서버
+
+103.80.216.173 THA 1 Karas
+103.80.216.174 THA 2 Zuras

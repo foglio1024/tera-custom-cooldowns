@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
+﻿using System.Collections.Generic;
 using System.Windows.Threading;
 using TCC.Data;
 

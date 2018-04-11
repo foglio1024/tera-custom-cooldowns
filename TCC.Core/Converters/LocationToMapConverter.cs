@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using TCC.Data;
 using TCC.Data.Databases;
@@ -15,7 +11,7 @@ namespace TCC.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var loc = (Location)value;
-            return Environment.CurrentDirectory + "/resources/images/maps/" + MapDatabase.GetMapId(loc.World, loc.Guard, loc.Section) + ".jpg";
+            return AppDomain.CurrentDomain.BaseDirectory + "/resources/images/maps/" + MapDatabase.GetMapId(loc.World, loc.Guard, loc.Section) + ".jpg";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

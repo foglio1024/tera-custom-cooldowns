@@ -1,21 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using TCC.Controls;
+using TCC.ViewModels;
 
 namespace TCC.Windows
 {
@@ -68,8 +62,9 @@ namespace TCC.Windows
         }
         private void CloseWindow(object sender, RoutedEventArgs e)
         {
+            InfoWindowViewModel.Instance.SaveToFile();
             var a = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(150));
-            a.Completed += (s, ev) => Hide();
+            a.Completed += (s, ev) => { Hide(); InfoWindowViewModel.Instance.SaveToFile(); };
             this.BeginAnimation(OpacityProperty, a);
         }
         private void DragWindow(object sender, MouseButtonEventArgs e)
@@ -96,6 +91,7 @@ namespace TCC.Windows
                 Topmost = false; Topmost = true;
                 Opacity = 0;
                 Show();
+                Activate();
                 //AnimateICitems();
                 BeginAnimation(Window.OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
             });
@@ -103,15 +99,15 @@ namespace TCC.Windows
 
         public void AnimateICitems()
         {
-            icIndex = 0;
-            itemIndex = 0;
+            //icIndex = 0;
+            //itemIndex = 0;
 
-            ICs = new List<ItemsControl>();
-            foreach (ItemsControl ic in dngICs.Children)
-            {
-                if(ic.Visibility == Visibility.Visible) ICs.Add(ic);
-            }
-            Task.Delay(50).ContinueWith(task => t.Start());
+            //ICs = new List<ItemsControl>();
+            //foreach (ItemsControl ic in dngICs.Children)
+            //{
+            //    if(ic.Visibility == Visibility.Visible) ICs.Add(ic);
+            //}
+            //Task.Delay(50).ContinueWith(task => t.Start());
         }
         private UniformGrid GetInnerUniformGrid(FrameworkElement element)
         {

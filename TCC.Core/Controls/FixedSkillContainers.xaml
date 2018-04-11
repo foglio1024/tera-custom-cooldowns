@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             xmlns:tcc="clr-namespace:TCC.ViewModels"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance tcc:CooldownWindowViewModel}">
     <UserControl.Resources>
         <DataTemplate x:Key="FixedSkillIndicator">
             <local:FixedSkillControl/>
@@ -14,22 +14,22 @@
             <local:SkillIconControl />
         </DataTemplate>
     </UserControl.Resources>
-
-    <Grid Margin="4">
+    <Grid Margin="4" UseLayoutRounding="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-
         <!--Main Styles.DefaultBorder-->
-        <Border Style="{StaticResource Styles.DefaultBorder}" Width="Auto" Grid.Row="1" Margin="-1" CornerRadius="25" x:Name="mainBorder" >
+        <Border Style="{StaticResource Styles.DefaultBorder}" Width="Auto" Grid.Row="1" Margin="1" CornerRadius="29" x:Name="mainBorder" 
+                HorizontalAlignment="Stretch" >
         </Border>
-            <!--Main skills grid-->
-            <Grid Grid.Row="1" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center">
-            <ItemsControl Name="mainSkills" ItemTemplate="{StaticResource FixedSkillIndicator}" Width="Auto" Height="Auto" ItemsSource="{Binding MainSkills}" BorderThickness="0" BorderBrush="Red">
+
+        <!--Main skills grid-->
+            <Grid Grid.Row="1" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                <ItemsControl Name="mainSkills" ItemTemplate="{StaticResource FixedSkillIndicator}" 
+                          Width="Auto" Height="Auto" HorizontalAlignment="Left" ItemsSource="{Binding MainSkills}" BorderThickness="0" BorderBrush="Red" >
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="{Binding MainSkills.Count}" Rows="1" Margin="0,0,0,0" IsItemsHost="True" Width="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Center" />
@@ -37,30 +37,65 @@
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
             </Grid>
+
         <!--Secondary + other skills grid-->
-        <Grid Grid.Row="2" Grid.Column="1" Width="Auto" Height="{Binding ElementName=mainSkills, Path=ActualHeight}" HorizontalAlignment="Left" VerticalAlignment="Center" UseLayoutRounding="True" Opacity=".9">
+        <Grid Grid.Row="2"  Width="Auto" Height="{Binding ElementName=mainSkills, Path=ActualHeight}" HorizontalAlignment="Left" VerticalAlignment="Center" UseLayoutRounding="False" Opacity=".9">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <!--Secondary skills-->
-            <ItemsControl Name="secSkills" ItemTemplate="{StaticResource FixedSkillIndicator}" Width="Auto" VerticalAlignment="Stretch" ItemsSource="{Binding SecondarySkills}" BorderBrush="Orange" BorderThickness="0">
+            <ItemsControl Name="secSkills" ItemTemplate="{StaticResource FixedSkillIndicator}" Width="Auto" 
+                          VerticalAlignment="Stretch" ItemsSource="{Binding Instance.SecondarySkills}" BorderBrush="Orange" BorderThickness="0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <UniformGrid Columns="{Binding SecondarySkills.Count}" Rows="1" Margin="0,0,0,0" IsItemsHost="True" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <UniformGrid Columns="{Binding SecondarySkills.Count}" Rows="1" Margin="0,0,0,0" IsItemsHost="True" 
+                                     Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
 
             <!--Other skills-->
-            <ItemsControl Name="otherSkills" ItemTemplate="{StaticResource DefaultSkillIndicator}" Width="Auto"  VerticalAlignment="Stretch" Grid.Column="1" HorizontalAlignment="Left" ItemsSource="{Binding OtherSkills}" BorderBrush="Green" BorderThickness="0">
+            <ItemsControl Name="otherSkills" ItemTemplate="{StaticResource DefaultSkillIndicator}" Width="Auto"  VerticalAlignment="Stretch" 
+                          Grid.Column="1" HorizontalAlignment="Left" ItemsSource="{Binding OtherSkills}" BorderBrush="Green" BorderThickness="0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Margin="0,0,0,0" IsItemsHost="True" Width="Auto" Height="Auto" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <StackPanel Margin="0,0,0,0" IsItemsHost="True" Width="Auto" Height="Auto" Orientation="Horizontal" 
+                                    HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
-        </Grid>
-    </Grid>
 
+        </Grid>
+        <!--Item skills grid-->
+        <Grid Grid.Row="0" UseLayoutRounding="True">
+            <ItemsControl Name="itemSkills" ItemTemplate="{StaticResource DefaultSkillIndicator}" Width="Auto" Height="50"  VerticalAlignment="Stretch" 
+                          HorizontalAlignment="Right" ItemsSource="{Binding ItemSkills}" BorderBrush="Red" BorderThickness="00" Grid.Row="0" 
+                          Visibility="{Binding ShowItems, Converter={StaticResource Converters.BoolToVisibleHidden}}" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Margin="0,0,0,0" IsItemsHost="True" Width="Auto" Height="Auto" FlowDirection="RightToLeft"
+                                    Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="LayoutTransform">
+                            <Setter.Value>
+                                <ScaleTransform ScaleX=".85" ScaleY=".85"></ScaleTransform>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="FlowDirection" Value="LeftToRight"/>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+            </ItemsControl>
+            <!--<Grid.CacheMode>
+                <BitmapCache RenderAtScale="2"></BitmapCache>
+            </Grid.CacheMode>-->
+        </Grid>
+
+        <!--<Grid.CacheMode>
+            <BitmapCache RenderAtScale="2"></BitmapCache>
+        </Grid.CacheMode>-->
+    </Grid>
 </UserControl>

@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace TCC.Updater
 {
     class Program
     {
-        static string SourcePath = Environment.CurrentDirectory + "/tmp";
-        static string DestinationPath = Environment.CurrentDirectory;
+        static string SourcePath = AppDomain.CurrentDomain.BaseDirectory + "/tmp";
+        static string DestinationPath = AppDomain.CurrentDomain.BaseDirectory;
 
         static void Main(string[] args)
         {
+            Thread.Sleep(2000);
             //Create all of the directories
             foreach (string dirPath in Directory.GetDirectories(SourcePath, "*", SearchOption.AllDirectories))
             {
@@ -31,7 +29,7 @@ namespace TCC.Updater
 
             Directory.Delete(SourcePath, true);
             Process.Start("explorer.exe","https://github.com/Foglio1024/Tera-custom-cooldowns/releases");
-            Process.Start(Environment.CurrentDirectory + "/TCC.exe");
+            Process.Start(AppDomain.CurrentDomain.BaseDirectory + "/TCC.exe");
             Environment.Exit(0);
         }
     }

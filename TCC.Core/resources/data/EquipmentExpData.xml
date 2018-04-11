@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EquipmentExpData>
+  <EquipmentExp id="100">
+    <Exp enchantStep="0" maxExp="328" />
+    <Exp enchantStep="1" maxExp="376" />
+    <Exp enchantStep="2" maxExp="441" />
+    <Exp enchantStep="3" maxExp="525" />
+    <Exp enchantStep="4" maxExp="639" />
+    <Exp enchantStep="5" maxExp="786" />
+    <Exp enchantStep="6" maxExp="985" />
+    <Exp enchantStep="7" maxExp="1241" />
+    <Exp enchantStep="8" maxExp="1571" />
+    <Exp enchantStep="9" maxExp="2045" />
+  </EquipmentExp>
+  <EquipmentExp id="101">
+    <Exp enchantStep="0" maxExp="1588" />
+    <Exp enchantStep="1" maxExp="1629" />
+    <Exp enchantStep="2" maxExp="1705" />
+    <Exp enchantStep="3" maxExp="1828" />
+    <Exp enchantStep="4" maxExp="2016" />
+    <Exp enchantStep="5" maxExp="2311" />
+    <Exp enchantStep="6" maxExp="2747" />
+    <Exp enchantStep="7" maxExp="3341" />
+    <Exp enchantStep="8" maxExp="4213" />
+    <Exp enchantStep="9" maxExp="5490" />
+  </EquipmentExp>
+  <EquipmentExp id="102">
+    <Exp enchantStep="0" maxExp="4244" />
+    <Exp enchantStep="1" maxExp="4565" />
+    <Exp enchantStep="2" maxExp="5386" />
+    <Exp enchantStep="3" maxExp="6931" />
+    <Exp enchantStep="4" maxExp="9523" />
+    <Exp enchantStep="5" maxExp="13645" />
+    <Exp enchantStep="6" maxExp="19978" />
+    <Exp enchantStep="7" maxExp="28883" />
+    <Exp enchantStep="8" maxExp="41253" />
+  </EquipmentExp>
+  <EquipmentExp id="200">
+    <Exp enchantStep="0" maxExp="8938" />
+  </EquipmentExp>
+  <EquipmentExp id="201">
+    <Exp enchantStep="0" maxExp="80638" />
+  </EquipmentExp>
+</EquipmentExpData>

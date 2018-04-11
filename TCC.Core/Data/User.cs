@@ -1,320 +1,281 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
 using System.Windows.Threading;
-using TCC.ClassSpecific;
-using TCC.ViewModels;
 
 namespace TCC.Data
 {
     public class User : TSPropertyChanged
     {
-        private ulong entityId;
+
+
+        private ulong _entityId;
+        private uint _level;
+        private Class _userClass;
+        private Role _role;
+        private bool _online;
+        private uint _serverId;
+        private uint _playerId;
+        private int _order;
+        private bool _canInvite;
+        private Laurel _laurel;
+        private string _name;
+        private long _currentHp = 1;
+        private int _currentMp = 1;
+        private long _maxHp = 1;
+        private int _maxMp = 1;
+        private ReadyStatus _ready = ReadyStatus.None;
+        private bool _alive = true;
+        private int _rollResult;
+        private bool _isRolling;
+        private bool _isWinning;
+        private bool _isLeader;
+        private bool _hasAggro;
+        private string _location;
+        private readonly List<uint> _debuffList = new List<uint>();
+        private GearItem _weapon;
+        private GearItem _armor;
+        private GearItem _gloves;
+        private GearItem _boots;
+
         public ulong EntityId
         {
-            get { return entityId; }
+            get => _entityId;
             set
             {
-                if (entityId == value) return;
-                entityId = value;
-                NotifyPropertyChanged("EntityId");
+                if (_entityId == value) return;
+                _entityId = value;
+                NotifyPropertyChanged(nameof(EntityId));
             }
         }
-
-        private uint level;
         public uint Level
         {
-            get { return level; }
+            get => _level;
             set
             {
-                if (level == value) return;
-                level = value;
-                NotifyPropertyChanged("Level");
+                if (_level == value) return;
+                _level = value;
+                NotifyPropertyChanged(nameof(Level));
             }
         }
-
-        private Class userClass;
         public Class UserClass
         {
-            get { return userClass; }
+            get => _userClass;
             set
             {
-                if (userClass == value) return;
-                userClass = value;
-                NotifyPropertyChanged("UserClass");
+                if (_userClass == value) return;
+                _userClass = value;
+                switch (value)
+                {
+                    case Class.Lancer:
+                        Role = Role.Tank;
+                        break;
+                    case Class.Priest:
+                        Role = Role.Healer;
+                        break;
+                    case Class.Elementalist:
+                        Role = Role.Healer;
+                        break;
+                    case Class.Fighter:
+                        Role = Role.Tank;
+                        break;
+                    default:
+                        Role = Role.Dps;
+                        break;
+                }
+                NotifyPropertyChanged(nameof(UserClass));
             }
         }
-
-        private bool online;
+        public Role Role
+        {
+            get => _role;
+            set
+            {
+                if (_role == value) return;
+                _role = value;
+                NotifyPropertyChanged(nameof(Role));
+            }
+        }
         public bool Online
         {
-            get
-            {
-                return online;
-            }
+            get => _online;
             set
             {
-                if (online == value) return;
-                online = value;
-                if (!online) { CurrentHP = 0; CurrentMP = 0; }
-                NotifyPropertyChanged("Online");
+                if (_online == value) return;
+                _online = value;
+                if (!_online) { CurrentHp = 0; CurrentMp = 0; }
+                NotifyPropertyChanged(nameof(Online));
             }
         }
-
-        private uint serverId;
         public uint ServerId
         {
-            get { return serverId; }
+            get => _serverId;
             set
             {
-                if (serverId == value) return;
-                serverId = value;
-                NotifyPropertyChanged("ServerId");
+                if (_serverId == value) return;
+                _serverId = value;
+                NotifyPropertyChanged(nameof(ServerId));
             }
         }
-
-        private uint playerId;
         public uint PlayerId
         {
-            get { return playerId; }
+            get => _playerId;
             set
             {
-                if (playerId == value) return;
-                playerId = value;
-                NotifyPropertyChanged("PlayerId");
+                if (_playerId == value) return;
+                _playerId = value;
+                NotifyPropertyChanged(nameof(PlayerId));
             }
         }
-
-        private int order;
         public int Order
         {
-            get { return order; }
+            get => _order;
             set
             {
-                if (order == value) return;
-                order = value;
-                NotifyPropertyChanged("Order");
+                if (_order == value) return;
+                _order = value;
+                NotifyPropertyChanged(nameof(Order));
             }
         }
-
-        private bool canInvite;
         public bool CanInvite
         {
-            get { return canInvite; }
+            get => _canInvite;
             set
             {
-                if (canInvite == value) return;
-                canInvite = value;
-                NotifyPropertyChanged("CanInvite");
+                if (_canInvite == value) return;
+                _canInvite = value;
+                NotifyPropertyChanged(nameof(CanInvite));
             }
         }
-
-        private Laurel laurel;
         public Laurel Laurel
         {
-            get { return laurel; }
+            get => _laurel;
             set
             {
-                if (laurel == value) return;
-                laurel = value;
-                NotifyPropertyChanged("Laurel");
+                if (_laurel == value) return;
+                _laurel = value;
+                NotifyPropertyChanged(nameof(Laurel));
             }
         }
-
-        private string name;
         public string Name
         {
-            get { return name; }
+            get => _name;
             set
             {
-                if (name == value) return;
-                name = value;
-                NotifyPropertyChanged("Name");
+                if (_name == value) return;
+                _name = value;
+                NotifyPropertyChanged(nameof(Name));
             }
         }
-
-        private int currentHP;
-        public int CurrentHP
+        public long CurrentHp
         {
-            get { return currentHP; }
+            get => _currentHp;
             set
             {
-                if (currentHP == value) return;
-                currentHP = value;
-                NotifyPropertyChanged("CurrentHP");
-                NotifyPropertyChanged("HpFactor");
+                if (_currentHp == value) return;
+                _currentHp = value;
+                NotifyPropertyChanged(nameof(CurrentHp));
+                NotifyPropertyChanged(nameof(HpFactor));
             }
         }
-
-        private int maxHP;
-        public int MaxHP
+        public int CurrentMp
         {
-            get { return maxHP; }
+            get => _currentMp;
             set
             {
-                if (maxHP == value) return;
-                maxHP = value;
-                NotifyPropertyChanged("MaxHP");
-                NotifyPropertyChanged("HpFactor");
+                if (_currentMp == value) return;
+                _currentMp = value;
+                NotifyPropertyChanged(nameof(CurrentMp));
+                NotifyPropertyChanged(nameof(MpFactor));
             }
         }
-
-        private int currentMP;
-        public int CurrentMP
+        public long MaxHp
         {
-            get { return currentMP; }
+            get => _maxHp;
             set
             {
-                if (currentMP == value) return;
-                currentMP = value;
-                NotifyPropertyChanged("CurrentMP");
-                NotifyPropertyChanged("MpFactor");
+                if (_maxHp == value) return;
+                _maxHp = value;
+                NotifyPropertyChanged(nameof(MaxHp));
+                NotifyPropertyChanged(nameof(HpFactor));
             }
         }
-
-        private int maxMP;
-        public int MaxMP
+        public int MaxMp
         {
-            get { return maxMP; }
+            get => _maxMp;
             set
             {
-                if (maxMP == value) return;
-                maxMP = value;
-                NotifyPropertyChanged("MaxMP");
-                NotifyPropertyChanged("MpFactor");
+                if (_maxMp == value) return;
+                _maxMp = value;
+                NotifyPropertyChanged(nameof(MaxMp));
+                NotifyPropertyChanged(nameof(MpFactor));
             }
         }
-
-        private double hpFactor;
-        public double HpFactor
-        {
-            get
-            {
-                if (maxHP > 0)
-                {
-                    hpFactor = (double)currentHP / (double)maxHP > 1 ? 1 : (double)currentHP / (double)maxHP;
-                    return hpFactor;
-                }
-                else
-                {
-                    hpFactor = 1;
-                    return hpFactor;
-                }
-            }
-            set
-            {
-                if (hpFactor == value) return;
-                hpFactor = value;
-                NotifyPropertyChanged("HpFactor");
-            }
-        }
-
-        private double mpFactor;
-        public double MpFactor
-        {
-            get
-            {
-                if (maxMP > 0)
-                {
-                    mpFactor = (double)currentMP / (double)maxMP > 1 ? 1 : (double)currentMP / (double)maxMP;
-                    return mpFactor;
-                }
-                else
-                {
-                    mpFactor = 1;
-                    return mpFactor;
-                }
-            }
-            set
-            {
-                if (mpFactor == value) return;
-                mpFactor = value;
-                NotifyPropertyChanged("MpFactor");
-            }
-        }
-
-        private ReadyStatus ready = ReadyStatus.None;
+        public double HpFactor => Utils.FactorCalc(CurrentHp, MaxHp);
+        public double MpFactor => Utils.FactorCalc(CurrentMp, MaxMp);
         public ReadyStatus Ready
         {
-            get { return ready; }
+            get => _ready;
             set
             {
-                if (ready == value) return;
-                ready = value;
-                NotifyPropertyChanged("Ready");
+                if (_ready == value) return;
+                _ready = value;
+                NotifyPropertyChanged(nameof(Ready));
             }
         }
-
-        private bool alive = true;
         public bool Alive
         {
-            get { return alive; }
+            get => _alive;
             set
             {
-                if (alive == value) return;
-                alive = value;
-                NotifyPropertyChanged("Alive");
+                if (_alive == value) return;
+                _alive = value;
+                NotifyPropertyChanged(nameof(Alive));
             }
         }
-
-        private int rollResult = 0;
         public int RollResult
         {
-            get { return rollResult; }
+            get => _rollResult;
             set
             {
-                if (rollResult == value) return;
-                rollResult = value;
-                if (rollResult == -1) IsRolling = false;
-                NotifyPropertyChanged("RollResult");
+                if (_rollResult == value) return;
+                _rollResult = value;
+                if (_rollResult == -1) IsRolling = false;
+                NotifyPropertyChanged(nameof(RollResult));
             }
         }
-
-        private bool isRolling = false;
         public bool IsRolling
         {
-            get { return isRolling; }
+            get => _isRolling;
             set
             {
-                if (isRolling == value) return;
-                isRolling = value;
-                NotifyPropertyChanged("IsRolling");
+                if (_isRolling == value) return;
+                _isRolling = value;
+                NotifyPropertyChanged(nameof(IsRolling));
             }
         }
-
-        private bool isWinning = false;
         public bool IsWinning
         {
-            get { return isWinning; }
+            get => _isWinning;
             set
             {
-                if (isWinning == value) return;
-                isWinning = value;
-                NotifyPropertyChanged("IsWinning");
+                if (_isWinning == value) return;
+                _isWinning = value;
+                NotifyPropertyChanged(nameof(IsWinning));
             }
         }
-
-        private bool isLeader = false;
         public bool IsLeader
         {
-            get
-            {
-                return isLeader;
-            }
+            get => _isLeader;
             set
             {
-                if (isLeader == value) return;
-                isLeader = value;
-                NotifyPropertyChanged("IsLeader");
+                if (_isLeader == value) return;
+                _isLeader = value;
+                NotifyPropertyChanged(nameof(IsLeader));
             }
         }
-
-        private List<uint> _debuffList = new List<uint>();
-        public bool IsDebuffed
-        {
-            get => _debuffList.Count == 0 ? false : true;
-        }
+        public bool IsPlayer => Name == SessionManager.CurrentPlayer.Name;
+        public bool IsDebuffed => _debuffList.Count != 0;
         public bool HasAggro
         {
             get => _hasAggro; set
@@ -324,55 +285,80 @@ namespace TCC.Data
                 NotifyPropertyChanged(nameof(HasAggro));
             }
         }
-        private bool _hasAggro = false;
-
-
-        private SynchronizedObservableCollection<AbnormalityDuration> _buffs;
-        public SynchronizedObservableCollection<AbnormalityDuration> Buffs
+        public string Location
         {
-            get { return _buffs; }
+            get => _location;
             set
             {
-                if (_buffs == value) return;
-                _buffs = value;
+                if (_location == value) return;
+                _location = value;
+                NotifyPropertyChanged(nameof(Location));
             }
         }
-        private SynchronizedObservableCollection<AbnormalityDuration> _debuffs;
-        public SynchronizedObservableCollection<AbnormalityDuration> Debuffs
+        public GearItem Weapon
         {
-            get { return _debuffs; }
+            get => _weapon;
             set
             {
-                if (_debuffs == value) return;
-                _debuffs = value;
+                if (_weapon == value) return;
+                _weapon = value;
+                NotifyPropertyChanged(nameof(Weapon));
             }
         }
-
-
-        public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks, double size, double margin)
+        public GearItem Armor
         {
-            if (SettingsManager.IgnoreAllBuffsInGroupWindow) return;
-            if (SettingsManager.IgnoreRaidAbnormalitiesInGroupWindow) return;
-            if (SettingsManager.IgnoreAllBuffsInGroupWindow && ab.Type == AbnormalityType.Buff) return;
-
-
-            switch (SessionManager.CurrentPlayer.Class)
+            get => _armor;
+            set
             {
-                case Class.Priest:
-                    if (FilterPriest(ab)) return;
-                    break;
-                case Class.Elementalist:
-                    if (FilterMystic(ab)) return;
-                    break;
-                default:
-                    return;
+                if (_armor == value) return;
+                _armor = value;
+                NotifyPropertyChanged(nameof(Armor));
             }
+        }
+        public GearItem Gloves
+        {
+            get => _gloves;
+            set
+            {
+                if (_gloves == value) return;
+                _gloves = value;
+                NotifyPropertyChanged(nameof(Gloves));
+            }
+        }
+        public GearItem Boots
+        {
+            get => _boots;
+            set
+            {
+                if (_boots == value) return;
+                _boots = value;
+                NotifyPropertyChanged(nameof(Boots));
+            }
+        }
+        public SynchronizedObservableCollection<AbnormalityDuration> Buffs { get; }
+        public SynchronizedObservableCollection<AbnormalityDuration> Debuffs { get; }
+
+        public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks)
+        {
+            if (SettingsManager.GroupAbnormals.ContainsKey(Class.Common))
+            {
+                if (!SettingsManager.GroupAbnormals[Class.Common].Contains(ab.Id))
+                {
+                    if (SettingsManager.GroupAbnormals.ContainsKey(SessionManager.CurrentPlayer.Class))
+                    {
+                        if (!SettingsManager.GroupAbnormals[SessionManager.CurrentPlayer.Class].Contains(ab.Id)) return;
+                    }
+                    else return;
+                }
+            }
+            else return;
+
             var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
 
-                var newAb = new AbnormalityDuration(ab, duration, stacks, this.EntityId, _dispatcher, false, size * .9, size, new Thickness(margin, 1, 1, 1));
-                Buffs.Add(newAb);
+                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, false);
+                if (ab.Infinity) Buffs.Insert(0, newAb); else Buffs.Add(newAb);
                 return;
             }
             existing.Duration = duration;
@@ -381,19 +367,18 @@ namespace TCC.Data
             existing.Refresh();
 
         }
-        public void AddOrRefreshDebuff(Abnormality ab, uint duration, int stacks, double size, double margin)
+        public void AddOrRefreshDebuff(Abnormality ab, uint duration, int stacks)
         {
             if (!ab.IsBuff && !_debuffList.Contains(ab.Id))
             {
                 _debuffList.Add(ab.Id);
-                NotifyPropertyChanged("IsDebuffed");
+                NotifyPropertyChanged(nameof(IsDebuffed));
             }
 
-            if (SettingsManager.IgnoreRaidAbnormalitiesInGroupWindow) return;
             var existing = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, this.EntityId, _dispatcher, false, size * .9, size, new Thickness(margin, 1, 1, 1));
+                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, false/*, size * .9, size, new Thickness(margin, 1, 1, 1)*/);
 
                 Debuffs.Add(newAb);
                 return;
@@ -403,18 +388,6 @@ namespace TCC.Data
             existing.Stacks = stacks;
             existing.Refresh();
         }
-
-        private bool FilterPriest(Abnormality ab)
-        {
-            if (!Priest.CommonBuffs.Any(x => x == ab.Id)) return true;
-            else return false;
-        }
-        private bool FilterMystic(Abnormality ab)
-        {
-            if (!Mystic.CommonBuffs.Any(x => x == ab.Id)) return true;
-            else return false;
-        }
-
         public void RemoveBuff(Abnormality ab)
         {
             var buff = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
@@ -436,24 +409,24 @@ namespace TCC.Data
         }
         public void ClearAbnormalities()
         {
-            foreach (var item in _buffs)
+            foreach (var item in Buffs)
             {
                 item.Dispose();
             }
-            foreach (var item in _debuffs)
+            foreach (var item in Debuffs)
             {
                 item.Dispose();
             }
-            _buffs.Clear();
-            _debuffs.Clear();
+            Buffs.Clear();
+            Debuffs.Clear();
             _debuffList.Clear();
         }
 
         public User(Dispatcher d)
         {
             _dispatcher = d;
-            _debuffs = new SynchronizedObservableCollection<AbnormalityDuration>(d);
-            _buffs = new SynchronizedObservableCollection<AbnormalityDuration>(d);
+            Debuffs = new SynchronizedObservableCollection<AbnormalityDuration>(d);
+            Buffs = new SynchronizedObservableCollection<AbnormalityDuration>(d);
         }
     }
 }

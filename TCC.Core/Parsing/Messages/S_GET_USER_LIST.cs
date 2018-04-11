@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using TCC.Data;
 using TCC.ViewModels;
 using Tera.Game;
@@ -48,7 +47,7 @@ namespace TCC.Parsing.Messages
                 reader.Skip(2);
                 nextAddr = reader.ReadInt16();
                 c.unk1 = reader.ReadInt32();
-                c.nameOffset = reader.ReadInt16();
+                var nameOffset = reader.ReadInt16();
                 c.detailsOffset = reader.ReadInt16();
                 c.detailsCount = reader.ReadInt16();
                 c.details2offset = reader.ReadInt16();
@@ -82,6 +81,8 @@ namespace TCC.Parsing.Messages
                 c.head = reader.ReadInt32();
                 c.face = reader.ReadInt32();
                 c.appearance = reader.ReadInt64();
+                //if(reader.Version < 321150 || reader.Version > 321600)
+                reader.Skip(8);
                 c.unk10 = reader.ReadInt32();
                 c.unk11 = reader.ReadInt32();
                 c.unk12 = reader.ReadInt32();
@@ -120,14 +121,24 @@ namespace TCC.Parsing.Messages
                 c.weaponEnchant = reader.ReadInt32();
                 c.curRestExp = reader.ReadInt32();
                 c.maxRestExp = reader.ReadInt32();
-                c.unk38 = reader.ReadInt32();
-                c.unk39 = reader.ReadInt16();
-                c.rested = reader.ReadByte();
-                c.curRestExpPerc = reader.ReadInt32();
-                c.achiPoints = reader.ReadInt32();
-                c.laurel = reader.ReadInt32();
-                c.pos = reader.ReadInt32();
-                c.guildId = reader.ReadInt32();
+                try
+                {
+                    reader.Skip(1); //bool showFace
+                    reader.Skip(30 * 4); //floats accTransform
+                    reader.Skip(1);
+                    reader.Skip(4 + 1); //uint unk, byte unk
+                    reader.Skip(1); //bool showStyle
+                    c.curRestExpPerc = reader.ReadInt32(); //unk25 from tera-data?
+                    c.achiPoints = reader.ReadInt32();
+                    c.laurel = reader.ReadInt32();
+                    c.pos = reader.ReadInt32();
+                    c.guildId = reader.ReadInt32();
+                }
+                catch (Exception)
+                {
+
+                }
+                reader.BaseStream.Position = nameOffset - 4;
                 c.name = reader.ReadTeraString();
 
                 //c.details = new byte[c.detailsCount];
@@ -161,7 +172,7 @@ namespace TCC.Data
         public int unk1;
         public short nameOffset, detailsOffset, detailsCount, details2offset, details2count, guildOffset;
         public uint id;
-        public int  gender, race, charClass, level, unk2, unk3;
+        public int gender, race, charClass, level, unk2, unk3;
         public long lastOnline;
         public byte unk4;
         public int unk5, unk6, unk7, unk8;

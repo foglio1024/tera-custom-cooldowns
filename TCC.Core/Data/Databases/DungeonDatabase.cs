@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace TCC.Data.Databases
@@ -41,5 +39,9 @@ namespace TCC.Data.Databases
             }
         }
 
+        public string GetDungeonNameOrOpenWorld(uint continentId)
+        {
+            return DungeonNames.ContainsKey(continentId) ? DungeonNames[continentId] : "Open world";
+        }
     }
 }

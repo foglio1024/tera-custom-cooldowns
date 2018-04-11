@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Threading;
-using TCC.ViewModels;
 
 namespace TCC.Data
 {
@@ -13,10 +9,7 @@ namespace TCC.Data
         string name;
         public string Name
         {
-            get
-            {
-                return name;
-            }
+            get => name;
             set
             {
                 if (name != value)
@@ -30,10 +23,7 @@ namespace TCC.Data
         ulong entityId;
         public ulong EntityId
         {
-            get
-            {
-                return entityId;
-            }
+            get => entityId;
             set
             {
                 if (entityId != value)
@@ -49,10 +39,7 @@ namespace TCC.Data
         Class playerclass;
         public Class Class
         {
-            get
-            {
-                return playerclass;
-            }
+            get => playerclass;
             set
             {
                 if (playerclass != value)
@@ -66,10 +53,7 @@ namespace TCC.Data
         Laurel laurel;
         public Laurel Laurel
         {
-            get
-            {
-                return laurel;
-            }
+            get => laurel;
             set
             {
                 if (laurel != value)
@@ -83,10 +67,7 @@ namespace TCC.Data
         int level;
         public int Level
         {
-            get
-            {
-                return level;
-            }
+            get => level;
             set
             {
                 if (level != value)
@@ -111,10 +92,10 @@ namespace TCC.Data
             }
         }
 
-        private int maxHP;
-        public int MaxHP
+        private long maxHP;
+        public long MaxHP
         {
-            get { return maxHP; }
+            get => maxHP;
             set
             {
                 if (maxHP != value)
@@ -130,7 +111,7 @@ namespace TCC.Data
         private int maxMP;
         public int MaxMP
         {
-            get { return maxMP; }
+            get => maxMP;
             set
             {
                 if (maxMP != value)
@@ -146,7 +127,7 @@ namespace TCC.Data
         private int maxST;
         public int MaxST
         {
-            get { return maxST; }
+            get => maxST;
             set
             {
                 if (maxST != value)
@@ -158,19 +139,32 @@ namespace TCC.Data
             }
         }
 
+        private uint maxShield;
+        public uint MaxShield
+        {
+            get => maxShield;
+            set
+            {
+                if (maxShield != value)
+                {
+                    maxShield = value;
+                    NotifyPropertyChanged(nameof(MaxShield));
+                    NotifyPropertyChanged(nameof(ShieldFactor));
+                }
+            }
+        }
+
         private float currentHP;
         public float CurrentHP
         {
-            get
-            {
-                return currentHP;
-            }
+            get => currentHP;
             set
             {
                 if (currentHP != value)
                 {
                     currentHP = value;
-                    NotifyPropertyChanged("CurrentHP");
+                    NotifyPropertyChanged(nameof(CurrentHP));
+                    NotifyPropertyChanged(nameof(TotalHP));
                     NotifyPropertyChanged(nameof(HpFactor));
                 }
             }
@@ -179,14 +173,14 @@ namespace TCC.Data
         public double HpFactor => MaxHP > 0 ? CurrentHP / MaxHP : 1;
         public double MpFactor => MaxMP > 0 ? CurrentMP / MaxMP : 1;
         public double StFactor => MaxST > 0 ? CurrentST / MaxST : 1;
+        public double ShieldFactor => MaxShield > 0 ? CurrentShield / MaxShield : 0;
+
+        public float TotalHP => CurrentHP + CurrentShield;
 
         private float currentMP;
         public float CurrentMP
         {
-            get
-            {
-                return currentMP;
-            }
+            get => currentMP;
             set
             {
                 if (currentMP != value)
@@ -201,10 +195,7 @@ namespace TCC.Data
         private float currentST;
         public float CurrentST
         {
-            get
-            {
-                return currentST;
-            }
+            get => currentST;
             set
             {
                 if (currentST != value)
@@ -217,10 +208,25 @@ namespace TCC.Data
             }
         }
 
+        private float currentShield;
+        public float CurrentShield
+        {
+            get => currentShield;
+            set
+            {
+                if(currentShield == value) return;
+                if(value < 0) return;
+                currentShield = value;
+                NotifyPropertyChanged(nameof(CurrentShield));
+                NotifyPropertyChanged(nameof(TotalHP));
+                NotifyPropertyChanged(nameof(ShieldFactor));
+            }
+        }
+
         private float flightEnergy;
         public float FlightEnergy
         {
-            get { return flightEnergy; }
+            get => flightEnergy;
             set
             {
                 if (flightEnergy != value)
@@ -232,7 +238,7 @@ namespace TCC.Data
         }
         public float MaxFlightEnergy { get; } = 1000;
 
-        private List<uint> _debuffList;
+        private readonly List<uint> _debuffList;
         internal void AddToDebuffList(Abnormality ab)
         {
             if (!ab.IsBuff && !_debuffList.Contains(ab.Id))
@@ -249,15 +255,12 @@ namespace TCC.Data
                 NotifyPropertyChanged("IsDebuffed");
             }
         }
-        public bool IsDebuffed
-        {
-            get => _debuffList.Count == 0 ? false : true;
-        }
+        public bool IsDebuffed => _debuffList.Count != 0;
 
         bool isInCombat;
         public bool IsInCombat
         {
-            get { return isInCombat; }
+            get => isInCombat;
             set
             {
                 if (value != isInCombat)
@@ -271,7 +274,7 @@ namespace TCC.Data
         private SynchronizedObservableCollection<AbnormalityDuration> _buffs;
         public SynchronizedObservableCollection<AbnormalityDuration> Buffs
         {
-            get { return _buffs; }
+            get => _buffs;
             set
             {
                 if (_buffs == value) return;
@@ -281,7 +284,7 @@ namespace TCC.Data
         private SynchronizedObservableCollection<AbnormalityDuration> _debuffs;
         public SynchronizedObservableCollection<AbnormalityDuration> Debuffs
         {
-            get { return _debuffs; }
+            get => _debuffs;
             set
             {
                 if (_debuffs == value) return;
@@ -291,7 +294,7 @@ namespace TCC.Data
         private SynchronizedObservableCollection<AbnormalityDuration> _infBuffs;
         public SynchronizedObservableCollection<AbnormalityDuration> InfBuffs
         {
-            get { return _infBuffs; }
+            get => _infBuffs;
             set
             {
                 if (_infBuffs == value) return;
@@ -300,14 +303,20 @@ namespace TCC.Data
         }
 
 
-        public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks, double size, double margin)
+        public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks)
         {
             var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, true, size * .9, size, new System.Windows.Thickness(margin));
+                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
 
                 Buffs.Add(newAb);
+                if (ab.IsShield)
+                {
+                    MaxShield = ab.ShieldSize;
+                    CurrentShield = ab.ShieldSize;
+                }
+
                 return;
             }
             existing.Duration = duration;
@@ -316,13 +325,13 @@ namespace TCC.Data
             existing.Refresh();
 
         }
-        public void AddOrRefreshDebuff(Abnormality ab, uint duration, int stacks, double size, double margin)
+        public void AddOrRefreshDebuff(Abnormality ab, uint duration, int stacks)
         {
 
             var existing = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, true, size * .9, size, new System.Windows.Thickness(margin));
+                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
 
                 Debuffs.Add(newAb);
                 return;
@@ -332,12 +341,12 @@ namespace TCC.Data
             existing.Stacks = stacks;
             existing.Refresh();
         }
-        public void AddOrRefreshInfBuff(Abnormality ab, uint duration, int stacks, double size, double margin)
+        public void AddOrRefreshInfBuff(Abnormality ab, uint duration, int stacks)
         {
             var existing = InfBuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, true, size * .9, size, new System.Windows.Thickness(margin));
+                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
 
                 InfBuffs.Add(newAb);
                 return;
@@ -353,8 +362,16 @@ namespace TCC.Data
         {
             var buff = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (buff == null) return;
+
             Buffs.Remove(buff);
             buff.Dispose();
+
+            if (ab.IsShield)
+            {
+                MaxShield = 0;
+                CurrentShield = 0;
+            }
+
         }
         public void RemoveDebuff(Abnormality ab)
         {

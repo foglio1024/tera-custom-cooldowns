@@ -1,15 +1,4 @@
-﻿using DamageMeter.Sniffing;
-using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
+﻿using System.Windows;
 using System.Windows.Threading;
 using TCC.Controls;
 using TCC.ViewModels;
@@ -37,7 +26,7 @@ namespace TCC
         {
             Dispatcher.InvokeIfRequired(() =>
             {
-                if (SettingsManager.ClassWindowOn)
+                if (SettingsManager.CooldownBarMode == CooldownBarMode.Fixed)
                 {
                     controlContainer.Content = new FixedSkillContainers();
                 }
@@ -49,11 +38,6 @@ namespace TCC
                 ((FrameworkElement)controlContainer.Content).DataContext = CooldownWindowViewModel.Instance;
 
             }, DispatcherPriority.Normal);
-        }
-
-        private void Window_MouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            ContextMenu.IsOpen = true;
         }
     }
 }

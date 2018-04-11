@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows.Threading;
 
 namespace TCC.ViewModels
@@ -105,11 +104,11 @@ namespace TCC.ViewModels
 
         public bool ShowGrantPowers
         {
-            get => GroupWindowViewModel.Instance.AmILeader() && GroupWindowViewModel.Instance.Raid && GroupWindowViewModel.Instance.UserExists(Name) && Name != SessionManager.CurrentPlayer.Name;
+            get => GroupWindowViewModel.Instance.AmILeader() && GroupWindowViewModel.Instance.Raid && GroupWindowViewModel.Instance.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
         }
         public bool ShowDelegateLeader
         {
-            get => GroupWindowViewModel.Instance.AmILeader() && GroupWindowViewModel.Instance.UserExists(Name) && Name != SessionManager.CurrentPlayer.Name;
+            get => GroupWindowViewModel.Instance.AmILeader() && GroupWindowViewModel.Instance.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
         }
         public bool IsBlocked
         {

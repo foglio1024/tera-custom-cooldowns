@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Threading;
 using System.Xml.Linq;
 using TCC.Data;
 using TCC.Data.Databases;
@@ -14,27 +10,75 @@ namespace TCC
 {
     public class SkillConfigParser
     {
-        public List<FixedSkillCooldown> Main; 
+        public List<FixedSkillCooldown> Main;
         public List<FixedSkillCooldown> Secondary;
+        public List<FixedSkillCooldown> Hidden;
         void ParseSkillConfig(string filename, Class c)
         {
             XDocument skillsDoc = XDocument.Load("resources/config/skills/" + filename);
-            foreach (XElement skillElement in skillsDoc.Descendants("Skill"))
+            foreach (XElement skillElement in skillsDoc.Descendants("Skills").Descendants())
             {
-                uint skillId = Convert.ToUInt32(skillElement.Attribute("id").Value);
-                int row = Convert.ToInt32(skillElement.Attribute("row").Value);
+                var type = CooldownType.Skill;
+                if (skillElement.Name == "Item") type = CooldownType.Item;
+                if (skillElement.Name == "Passive") type = CooldownType.Passive;
 
-                if (SkillsDatabase.TryGetSkill(skillId, c, out Skill sk))
+                var skillId = Convert.ToUInt32(skillElement.Attribute("id").Value);
+                var row = Convert.ToInt32(skillElement.Attribute("row").Value);
+                if (type == CooldownType.Skill)
                 {
-                    if (row == 1)
+                    if (SkillsDatabase.TryGetSkill(skillId, c, out var sk))
                     {
-                        Main.Add(new FixedSkillCooldown(sk, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher(), false));
-                    }
-                    else if (row == 2)
-                    {
-                        Secondary.Add(new FixedSkillCooldown(sk, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                        switch (row)
+                        {
+                            case 1:
+                                Main.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                break;
+                            case 2:
+                                Secondary.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                break;
+                            case 3:
+                                Hidden.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                break;
+                        }
                     }
                 }
+                else if (type == CooldownType.Item)
+                {
+                    if (ItemSkillsDatabase.TryGetItemSkill(skillId, out var sk))
+                    {
+                        switch (row)
+                        {
+                            case 1:
+                                Main.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                break;
+                            case 2:
+                                Secondary.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                break;
+                            case 3:
+                                Hidden.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                break;
+                        }
+                    }
+                }
+                else if (type == CooldownType.Passive)
+                {
+                    if (PassivityDatabase.TryGetPassivitySkill(skillId, out var sk))
+                    {
+                        switch (row)
+                        {
+                            case 1:
+                                Main.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                break;
+                            case 2:
+                                Secondary.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                break;
+                            case 3:
+                                Hidden.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                break;
+                        }
+                    }
+                }
+
             }
         }
 
@@ -42,6 +86,7 @@ namespace TCC
         {
             Main = new List<FixedSkillCooldown>();
             Secondary = new List<FixedSkillCooldown>();
+            Hidden = new List<FixedSkillCooldown>();
             ParseSkillConfig(filename, c);
         }
     }
@@ -170,8 +215,8 @@ namespace TCC
                 new XElement("Skill", new XAttribute("id", 420100), new XAttribute("row", 1)), //boomerang pulse
                 new XElement("Skill", new XAttribute("id", 370200), new XAttribute("row", 1)), //totem
                 new XElement("Skill", new XAttribute("id", 241010), new XAttribute("row", 1)) //voc
-                //new XElement("Skill", new XAttribute("id", 410100), new XAttribute("row", 1)), //contagion
-                //new XElement("Skill", new XAttribute("id", 120100), new XAttribute("row", 1)) //vow
+                                                                                              //new XElement("Skill", new XAttribute("id", 410100), new XAttribute("row", 1)), //contagion
+                                                                                              //new XElement("Skill", new XAttribute("id", 120100), new XAttribute("row", 1)) //vow
                 );
             SaveSkillFile(skills, filename);
         }
@@ -193,7 +238,7 @@ namespace TCC
                 new XElement("Skill", new XAttribute("id", 41200), new XAttribute("row", 1)),   //PA
                 new XElement("Skill", new XAttribute("id", 50200), new XAttribute("row", 1)),   //RoA
                 new XElement("Skill", new XAttribute("id", 80900), new XAttribute("row", 1)),   //RF
-                //new XElement("Skill", new XAttribute("id", 290100), new XAttribute("row", 1)),  //TB
+                                                                                                //new XElement("Skill", new XAttribute("id", 290100), new XAttribute("row", 1)),  //TB
                 new XElement("Skill", new XAttribute("id", 250200), new XAttribute("row", 1)),  //IT
                 new XElement("Skill", new XAttribute("id", 220800), new XAttribute("row", 1))   //SF
                 );
@@ -229,7 +274,7 @@ namespace TCC
         {
             XElement skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 21100), new XAttribute("row", 1)),
-                new XElement("Skill", new XAttribute("id", 80930), new XAttribute("row", 1)),
+                //new XElement("Skill", new XAttribute("id", 80930), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 120500), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 230200), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 240100), new XAttribute("row", 1))

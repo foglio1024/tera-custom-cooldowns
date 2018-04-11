@@ -16,7 +16,7 @@ namespace TCC.Converters
                     iconName = iconName.Replace(".", "/");
                 }
             }
-            return Environment.CurrentDirectory + "/resources/images/" + iconName + ".png";
+            return AppDomain.CurrentDomain.BaseDirectory + "/resources/images/" + iconName + ".png";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

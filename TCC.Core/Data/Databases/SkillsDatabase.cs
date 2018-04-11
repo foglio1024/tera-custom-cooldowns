@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Media.Imaging;
 using System.Xml.Linq;
 
 namespace TCC.Data.Databases
@@ -37,7 +31,7 @@ namespace TCC.Data.Databases
 
         public static void Load()
         {
-            var f = File.OpenText(Environment.CurrentDirectory + "/resources/data/skills.tsv");
+            var f = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "/resources/data/skills.tsv");
 
             SkillConnections = new List<SkillConnection>();
             Skills = new Dictionary<Class, Dictionary<uint, Skill>>();
@@ -46,6 +40,7 @@ namespace TCC.Data.Databases
                 Skills.Add((Class)i, new Dictionary<uint, Skill>());
             }
             Skills.Add(Class.Common, new Dictionary<uint, Skill>());
+            Skills.Add(Class.None, new Dictionary<uint, Skill>());
 
 
             while (true)
@@ -182,19 +177,19 @@ namespace TCC.Data.Databases
 
         static void LoadFiles()
         {
-            foreach (var f in Directory.EnumerateFiles(Environment.CurrentDirectory + @"/resources/database/StrSheet_UserSkill"))
+            foreach (var f in Directory.EnumerateFiles(AppDomain.CurrentDomain.BaseDirectory + @"/resources/database/StrSheet_UserSkill"))
             {
                 var d = XDocument.Load(f);
                 StrSheet_UserSkillsDocs.Add(d);
             }
 
-            foreach (var f in Directory.EnumerateFiles(Environment.CurrentDirectory + @"/resources/database/SkillIconData"))
+            foreach (var f in Directory.EnumerateFiles(AppDomain.CurrentDomain.BaseDirectory + @"/resources/database/SkillIconData"))
             {
                 var d = XDocument.Load(f);
                 SkillIconData.Add(d);
             }
 
-            ConnectedSkillsDoc = XDocument.Load(Environment.CurrentDirectory + @"/resources/database/ConnectedSkills.xml");
+            ConnectedSkillsDoc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"/resources/database/ConnectedSkills.xml");
         }
         static void ParseUserSkillDoc(XDocument doc)
         {

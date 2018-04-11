@@ -18,7 +18,6 @@
         WindowStyle="None" 
         Background="Transparent" 
         MouseLeftButtonDown="Window_MouseLeftButtonDown" 
-        MouseRightButtonDown="Window_MouseRightButtonDown"
         Loaded="Window_Loaded"    
         ResizeMode="NoResize">
     <w:TccWindow.DataContext>
@@ -26,7 +25,7 @@
     </w:TccWindow.DataContext>
     <Grid>
         <ContentControl Margin="0" x:Name="controlContainer" DataContext="{Binding Instance}" Content="{Binding}"
-                                        ContentTemplate="{Binding Instance.IsClassWindowOn, Converter={StaticResource Converters.BoolToCooldowWindowTemplate}}"
+                                        ContentTemplate="{Binding Instance.Mode, Converter={StaticResource Converters.CooldowWindowModeToTemplate}}"
         >
         </ContentControl>
         <Grid.LayoutTransform>

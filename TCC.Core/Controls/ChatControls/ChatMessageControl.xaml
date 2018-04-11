@@ -7,9 +7,16 @@
              xmlns:ts="clr-namespace:TCC.TemplateSelectors"
              xmlns:c="clr-namespace:TCC.Converters"
              xmlns:chatcontrols="clr-namespace:TCC.Controls.ChatControls"
-             mc:Ignorable="d"  Loaded="UserControl_Loaded">
-    <Grid Margin="2,1" HorizontalAlignment="Left" Width="Auto" Name="root" Height="Auto" Background="#0f00" VerticalAlignment="Top"
-          Visibility="{Binding IsVisible, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
+             mc:Ignorable="d"  
+             DataContextChanged="UserControl_Loaded">
+    <UserControl.LayoutTransform>
+        <TransformGroup>
+            <ScaleTransform ScaleY="1"></ScaleTransform>
+            <RotateTransform Angle="180"></RotateTransform>
+        </TransformGroup>
+    </UserControl.LayoutTransform>
+    <Grid Margin="2,1" HorizontalAlignment="Left" Width="Auto" Name="root" Height="Auto" Background="#0f00" VerticalAlignment="Top" 
+          >
         <Grid Width="Auto" MinWidth="0" Margin="0,0" VerticalAlignment="Top" Background="Transparent" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -20,7 +27,7 @@
                             ContentTemplate="{StaticResource MessageHeaderTemplate}"/>
             <!--Message-->
             <ContentControl Content="{Binding}" Name="body" Grid.Column="1" 
-                            ContentTemplateSelector="{StaticResource BodyTemplateSelector}"/>
+                            ContentTemplateSelector="{StaticResource BodyTemplateSelector}"  />
 
             <Popup IsOpen="False" StaysOpen="True" Placement="Top" AllowsTransparency="True" x:Name="popup" MouseLeave="popup_MouseLeave">
                 <Border Style="{StaticResource Styles.DefaultBorder}" Width="Auto" Padding="5" >

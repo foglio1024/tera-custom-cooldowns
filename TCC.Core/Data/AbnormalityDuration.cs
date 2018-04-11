@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Threading;
 using System.Timers;
 using System.Windows;
 using System.Windows.Threading;
 using TCC.Data;
-using TCC.ViewModels;
 
 namespace TCC
 {
@@ -56,21 +54,21 @@ namespace TCC
             }
         }
 
-        private double _iconSize;
-        public double IconSize
-        {
-            get { return _iconSize; }
-            set
-            {
-                if (_iconSize == value) return;
-                _iconSize = value;
-            }
-        }
-        public double BackgroundEllipseSize { get; set; }
-        public Thickness IndicatorMargin { get; set; }
+        //private double _iconSize;
+        //public double IconSize
+        //{
+        //    get { return _iconSize; }
+        //    set
+        //    {
+        //        if (_iconSize == value) return;
+        //        _iconSize = value;
+        //    }
+        //}
+        //public double BackgroundEllipseSize { get; set; }
+        //public Thickness IndicatorMargin { get; set; }
         static int _count = 0;
         public bool Animated { get; private set; }
-        public AbnormalityDuration(Abnormality b, uint d, int s, ulong t, Dispatcher disp, bool animated, double iconSize, double bgEllSize, Thickness margin)
+        public AbnormalityDuration(Abnormality b, uint d, int s, ulong t, Dispatcher disp, bool animated/*,double iconSize, double bgEllSize, Thickness margin*/)
         {
             _count++;
             _dispatcher = disp;
@@ -79,19 +77,25 @@ namespace TCC
             Duration = d;
             Stacks = s;
             Target = t;
+            _isTimerDisposed = false;
 
-
-            IconSize = iconSize;
-            BackgroundEllipseSize = bgEllSize;
-            IndicatorMargin = margin;
+            //IconSize = iconSize;
+            //BackgroundEllipseSize = bgEllSize;
+            //IndicatorMargin = margin;
 
             DurationLeft = d;
             if (!Abnormality.Infinity)
             {
                 timer = new System.Timers.Timer(1000);
                 timer.Elapsed += DecreaseDuration;
+                timer.Disposed += SetDisposed;
                 timer.Start();
             }
+        }
+        bool _isTimerDisposed;
+        private void SetDisposed(object sender, EventArgs e)
+        {
+            _isTimerDisposed = true;
         }
 
         private void DecreaseDuration(object sender, ElapsedEventArgs e)
@@ -102,6 +106,7 @@ namespace TCC
 
         public void Refresh()
         {
+            if(timer == null || _isTimerDisposed) return;
             timer?.Stop();
             if (Duration != 0) timer?.Start();
             NotifyPropertyChanged("Refresh");

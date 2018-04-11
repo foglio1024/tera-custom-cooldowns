@@ -14,21 +14,9 @@
             <Border Style="{StaticResource Styles.DefaultBorder}"
                     Grid.Row="0"
                     Grid.Column="0"
-                    CornerRadius="25"
-                    Margin="1"
+                    CornerRadius="29"
+                    Margin="2"
                     VerticalAlignment="Stretch"/>
-            <!--HP/MP-->
-            <!--<UniformGrid Columns="1" 
-                         HorizontalAlignment="Stretch" 
-                         VerticalAlignment="Center"
-                         Margin="5,0"
-                         Grid.RowSpan="2"
-                         Grid.Column="2"
-                         Grid.Row="0"
-                         >
-                <local:StatControl DataContext="{Binding HP}" Color="{StaticResource Colors.App.HP}" StatusColor="{StaticResource Colors.App.MP}" Width="85" Margin="0,0,0,3" VerticalAlignment="Center"/>
-                <local:StatControl DataContext="{Binding MP}" Color="{StaticResource Colors.App.MP}" Width="85" Margin="0,0,0,0" VerticalAlignment="Center"/>
-            </UniformGrid>-->
             <UniformGrid Rows="1">
                 <local:BuffCooldownControl DataContext="{Binding Instance.EnergyStars}" Margin="-20" Padding="20"/>
                 <local:BuffCooldownControl DataContext="{Binding Instance.Grace}" Margin="-20" Padding="20"/>

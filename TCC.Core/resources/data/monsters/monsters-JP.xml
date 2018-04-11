@@ -9,6 +9,7 @@
 		<Monster name="ヒューマン男アーチャー" id="10106" isBoss="False" hp="0" />
 		<Monster name="ヒューマン男プリースト" id="10107" isBoss="False" hp="0" />
 		<Monster name="ヒューマン男エレメンタリスト" id="10108" isBoss="False" hp="0" />
+		<Monster name="ヒューマン男性ファイター" id="10111" isBoss="False" hp="0" />
 		<Monster name="ヒューマン女ウォーリアー" id="10201" isBoss="False" hp="0" />
 		<Monster name="ヒューマン女ランサー" id="10202" isBoss="False" hp="0" />
 		<Monster name="ヒューマン女スレイヤー" id="10203" isBoss="False" hp="0" />
@@ -86,6 +87,7 @@
 		<Monster name="エリーン プリースト" id="11007" isBoss="False" hp="0" />
 		<Monster name="エリーン エレメンタリスト" id="11008" isBoss="False" hp="0" />
 		<Monster name="エリーンソウルリーパー" id="11009" isBoss="False" hp="0" />
+		<Monster name="エリーンヘビーガンナー" id="11010" isBoss="False" hp="0" />
 		<Monster name="エリーンくノ一" id="11012" isBoss="False" hp="0" />
 		<Monster name="バラカ男ウォーリアー" id="11101" isBoss="False" hp="0" />
 		<Monster name="バラカ男ランサー" id="11102" isBoss="False" hp="0" />
@@ -184,9 +186,9 @@
 		<Monster name="精鋭護衛兵" id="5" isBoss="False" hp="213" />
 		<Monster name="精鋭追跡者" id="6" isBoss="False" hp="208" />
 		<Monster name="族長ドアカン" id="7" isBoss="False" hp="6857" />
-		<Monster name="バーセン" id="9" isBoss="False" hp="7737" />
-		<Monster name="突撃隊長チューベン" id="12" isBoss="False" hp="5000" />
-		<Monster name="チューベンの護衛兵" id="13" isBoss="False" hp="3741" />
+		<Monster name="闇の神官" id="9" isBoss="False" hp="7737" />
+		<Monster name="デヴァ突撃団" id="12" isBoss="False" hp="5000" />
+		<Monster name="デヴァ突撃団" id="13" isBoss="False" hp="3741" />
 		<Monster name="暗黒の信徒" id="14" isBoss="False" hp="4457" />
 		<Monster name="暗黒の呪術師" id="15" isBoss="False" hp="4457" />
 		<Monster name="アンデッドソルジャー" id="16" isBoss="False" hp="677" />
@@ -256,7 +258,7 @@
 		<Monster name="希少な紅蓮老木の精霊" id="5007" isBoss="False" hp="19390" />
 		<Monster name="希少な歪曲したウルフ" id="5008" isBoss="False" hp="19390" />
 		<Monster name="希少な岩の精霊" id="5009" isBoss="False" hp="19390" />
-		<Monster name="爆風のカナッシュ" id="5011" isBoss="True" hp="1064795" />
+		<Monster name="爆風のカナッシュ" id="5011" isBoss="True" hp="400000000" />
 		<Monster name="山羊" id="6011" isBoss="False" hp="14979" />
 		<Monster name="マラルカディ" id="7011" isBoss="True" hp="755397" />
 		<Monster name="ラシャカンダール" id="7012" isBoss="True" hp="413713" />
@@ -469,7 +471,7 @@
 		<Monster name="悪魔炎華隊長" id="36" isBoss="False" hp="169" />
 		<Monster name="炎の悪魔" id="37" isBoss="False" hp="169" />
 		<Monster name="水の悪魔" id="38" isBoss="False" hp="169" />
-		<Monster name="サシャラク" id="99" isBoss="True" hp="819073" />
+		<Monster name="サシャラク" id="99" isBoss="True" hp="400000000" />
 		<Monster name="狂ったグレグ" id="104" isBoss="False" hp="476837" />
 		<Monster name="グレグの部下" id="105" isBoss="False" hp="366797" />
 		<Monster name="ヘライム" id="5002" isBoss="False" hp="0" />
@@ -645,15 +647,15 @@
 		<Monster name="ヴァルキオン連合調査官" id="6050" isBoss="False" hp="945" />
 		<Monster name="ヴァルキオン連合調査官" id="6051" isBoss="False" hp="945" />
 		<Monster name="ヴァルキオン連合調査官" id="6052" isBoss="False" hp="945" />
-		<Monster name="凶暴なバシリスク" id="7001" isBoss="True" hp="5858302" />
-		<Monster name="凶暴なギガニア" id="7002" isBoss="True" hp="5858302" />
-		<Monster name="凶暴なアラクネア" id="7003" isBoss="True" hp="5858302" />
-		<Monster name="凶暴なブラッドゴーレム" id="7004" isBoss="True" hp="15800546" />
-		<Monster name="凶暴なダークリッパー" id="7005" isBoss="True" hp="15800546" />
-		<Monster name="凶暴な地獄の炎魔獣" id="7006" isBoss="True" hp="15800546" />
-		<Monster name="凶暴な鱗戦士" id="7007" isBoss="True" hp="19876958" />
-		<Monster name="凶暴な鋼鉄の巨人" id="7008" isBoss="True" hp="19876958" />
-		<Monster name="凶暴な闇の化身" id="7009" isBoss="True" hp="19876958" />
+		<Monster name="凶暴なバシリスク" id="7001" isBoss="True" hp="11716605" />
+		<Monster name="凶暴なギガニア" id="7002" isBoss="True" hp="11716605" />
+		<Monster name="凶暴なアラクネア" id="7003" isBoss="True" hp="11716605" />
+		<Monster name="凶暴なブラッドゴーレム" id="7004" isBoss="True" hp="18960655" />
+		<Monster name="凶暴なダークリッパー" id="7005" isBoss="True" hp="18960655" />
+		<Monster name="凶暴な地獄の炎魔獣" id="7006" isBoss="True" hp="18960655" />
+		<Monster name="凶暴な鱗戦士" id="7007" isBoss="True" hp="23852350" />
+		<Monster name="凶暴な鋼鉄の巨人" id="7008" isBoss="True" hp="23852350" />
+		<Monster name="凶暴な闇の化身" id="7009" isBoss="True" hp="23852350" />
 		<Monster name="ユーリア" id="8001" isBoss="False" hp="10000" />
 		<Monster name="ユーリア" id="8002" isBoss="False" hp="10000" />
 		<Monster name="ランバート" id="8003" isBoss="False" hp="10000" />
@@ -662,7 +664,7 @@
 		<Monster name="ジョエル・ホワイトリバー" id="8006" isBoss="False" hp="10000" />
 		<Monster name="アクタン・ナクトゥム" id="8007" isBoss="False" hp="421817" />
 		<Monster name="ユーリア" id="8008" isBoss="False" hp="10000" />
-		<Monster name="リアン・クベル" id="8009" isBoss="False" hp="10000" />
+		<Monster name="ジョウィン・リオナス" id="8009" isBoss="False" hp="10000" />
 		<Monster name="西の風・モリアン" id="8010" isBoss="False" hp="945" />
 		<Monster name="タニャ・カイルム" id="8011" isBoss="False" hp="10000" />
 		<Monster name="正体不明の死体" id="8012" isBoss="False" hp="10000" />
@@ -671,7 +673,7 @@
 		<Monster name="ジョエル・ホワイトリバー" id="8016" isBoss="False" hp="10000" />
 		<Monster name="アクタン・ナクトゥム" id="8017" isBoss="False" hp="421817" />
 		<Monster name="ユーリア" id="8018" isBoss="False" hp="10000" />
-		<Monster name="リアン・クベル" id="8019" isBoss="False" hp="10000" />
+		<Monster name="ジョウィン・リオナス" id="8019" isBoss="False" hp="10000" />
 		<Monster name="ユーリア" id="8020" isBoss="False" hp="10000" />
 		<Monster name="バンダナの男" id="8021" isBoss="False" hp="945" />
 		<Monster name="ジーク" id="8022" isBoss="False" hp="945" />
@@ -890,7 +892,7 @@
 	<Zone id="20" name="ヴィアアウレウム領" >
 		<Monster name="スケルトン槍兵" id="98" isBoss="False" hp="1412" />
 		<Monster name="心眼のジェライスト" id="99" isBoss="False" hp="17936" />
-		<Monster name="武器箱" id="6008500" isBoss="False" hp="6" />
+		<Monster name="邪教徒の武器箱" id="6008500" isBoss="False" hp="6" />
 		<Monster name="奴隷監督官" id="30011000" isBoss="False" hp="9124" />
 		<Monster name="奴隷監視者" id="30011001" isBoss="False" hp="9124" />
 		<Monster name="悪辣な奴隷監視者" id="30011002" isBoss="False" hp="9124" />
@@ -1192,7 +1194,7 @@
 		<Monster name="メッセージボード" id="1049" isBoss="False" hp="10000" />
 		<Monster name="禍根の略奪者" id="1051" isBoss="True" hp="296719" />
 		<Monster name="次元の魔法石" id="1501" isBoss="False" hp="10000" />
-		<Monster name="貪欲のアナンシャ" id="2001" isBoss="True" hp="670623480" />
+		<Monster name="貪欲のアナンシャ" id="2001" isBoss="True" hp="737685828" />
 		<Monster name="長牙のブッシュホッグ" id="2011" isBoss="False" hp="35625" />
 		<Monster name="ブッシュマンティスコア" id="2021" isBoss="False" hp="22443" />
 		<Monster name="獰猛なブッシュマンティスコア" id="2031" isBoss="False" hp="22443" />
@@ -1378,8 +1380,8 @@
 		<Monster name="氷塊巨人" id="1010" isBoss="True" hp="457574" />
 		<Monster name="氷結の貪食者" id="1100" isBoss="True" hp="457574" />
 		<Monster name="氷結の捕食者" id="1110" isBoss="True" hp="418086" />
-		<Monster name="激昂のカラゴス" id="2002" isBoss="True" hp="670623480" />
-		<Monster name="虐殺のサブラニア" id="2003" isBoss="True" hp="670623480" />
+		<Monster name="激昂のカラゴス" id="2002" isBoss="True" hp="737685828" />
+		<Monster name="虐殺のサブラニア" id="2003" isBoss="True" hp="737685828" />
 		<Monster name="氷結のトゥパーク" id="5000" isBoss="False" hp="66851" />
 		<Monster name="修羅カイデュー" id="5001" isBoss="False" hp="66851" />
 		<Monster name="追憶のバブラック" id="5002" isBoss="True" hp="497557" />
@@ -1512,7 +1514,7 @@
 		<Monster name="飢渇の廃墟ハイエナ" id="31" isBoss="False" hp="105149" />
 		<Monster name="廃墟破壊者アルクス" id="32" isBoss="True" hp="963074" />
 		<Monster name="ダチョウ" id="33" isBoss="False" hp="21390" />
-		<Monster name="ケスケレン" id="35" isBoss="True" hp="3332775" />
+		<Monster name="ケスケレン" id="35" isBoss="True" hp="400000000" />
 		<Monster name="プリオン探査官" id="36" isBoss="False" hp="98204" />
 		<Monster name="プリオン略奪戦士" id="37" isBoss="False" hp="66244" />
 		<Monster name="プリオン狂信戦士" id="38" isBoss="False" hp="66244" />
@@ -1931,7 +1933,7 @@
 		<Monster name="山羊" id="6011" isBoss="False" hp="27674" />
 		<Monster name="山羊" id="6021" isBoss="False" hp="29764" />
 		<Monster name="山羊" id="6031" isBoss="False" hp="32007" />
-		<Monster name="ラキヌア" id="7011" isBoss="True" hp="3332775" />
+		<Monster name="ラキヌア" id="7011" isBoss="True" hp="400000000" />
 		<Monster name="エルピサ" id="8011" isBoss="False" hp="65032" />
 		<Monster name="ウェンディゴ精鋭闘士" id="8012" isBoss="False" hp="86003" />
 		<Monster name="ウェンディゴ精鋭狩人" id="8013" isBoss="False" hp="0" />
@@ -1988,7 +1990,7 @@
 		<Monster name="トゥルサの親衛隊ナイト" id="9019" isBoss="False" hp="86003" />
 		<Monster name="捕虜移送馬車" id="9020" isBoss="False" hp="31496" />
 		<Monster name="ポポリ技術者" id="9021" isBoss="False" hp="108659" />
-		<Monster name="スネグルトス" id="9050" isBoss="True" hp="3332775" />
+		<Monster name="スネグルトス" id="9050" isBoss="True" hp="400000000" />
 	</Zone>
 	<Zone id="53" name="ロスアカディア領" >
 		<Monster name="苦悶の監獄番犬" id="100" isBoss="False" hp="172637" />
@@ -2135,7 +2137,7 @@
 		<Monster name="闇の傭兵団ブラックフェンサー" id="26" isBoss="False" hp="53659" />
 		<Monster name="クトラク" id="27" isBoss="False" hp="74859" />
 		<Monster name="ポティカ" id="28" isBoss="False" hp="74859" />
-		<Monster name="カザスタン" id="33" isBoss="True" hp="3332775" />
+		<Monster name="カザスタン" id="33" isBoss="True" hp="400000000" />
 		<Monster name="シャマラン・ケジェラン" id="38" isBoss="False" hp="127665" />
 		<Monster name="アメナ・クアトラ守護者" id="39" isBoss="True" hp="887752" />
 		<Monster name="いにしえの碑石" id="5007" isBoss="False" hp="10000" />
@@ -2551,6 +2553,7 @@
 		<Monster name="シベル" id="1167" isBoss="False" hp="10000" />
 		<Monster name="エルリオン・クベル" id="1168" isBoss="False" hp="10000" />
 		<Monster name="エルリオン・クベル" id="1169" isBoss="False" hp="10000" />
+		<Monster name="ベシ" id="1170" isBoss="False" hp="10000" />
 		<Monster name="ロカン・フェイビス" id="1172" isBoss="False" hp="10000" />
 		<Monster name="アリアン・ナクトゥム" id="1173" isBoss="False" hp="10000" />
 		<Monster name="ユスティア・レクィン" id="1174" isBoss="False" hp="10000" />
@@ -2709,6 +2712,7 @@
 		<Monster name="出張クリスタル商人" id="1961" isBoss="False" hp="10000" />
 		<Monster name="出張倉庫管理人" id="1962" isBoss="False" hp="10000" />
 		<Monster name="出張取引仲介人" id="1963" isBoss="False" hp="10000" />
+		<Monster name="シオンヌ" id="1965" isBoss="False" hp="10000" />
 		<Monster name="紅蓮石収集家" id="1999" isBoss="False" hp="10000" />
 		<Monster name="サマエル・クランウッド" id="2000" isBoss="False" hp="10000" />
 		<Monster name="ヴェリカ警備兵" id="2001" isBoss="False" hp="10000" />
@@ -2760,6 +2764,12 @@
 		<Monster name="月の光応援団" id="5217" isBoss="False" hp="10000" />
 		<Monster name="月の光応援団" id="5218" isBoss="False" hp="10000" />
 		<Monster name="月の光応援団" id="5219" isBoss="False" hp="10000" />
+		<Monster name="エイラ" id="6110" isBoss="False" hp="10000" />
+		<Monster name="ケーネス" id="6111" isBoss="False" hp="10000" />
+		<Monster name="ミア・ローヘン" id="6112" isBoss="False" hp="10000" />
+		<Monster name="エイラ" id="6113" isBoss="False" hp="10000" />
+		<Monster name="ケーネス" id="6114" isBoss="False" hp="10000" />
+		<Monster name="ミア・ローヘン" id="6115" isBoss="False" hp="10000" />
 		<Monster name="シュリモン" id="7000" isBoss="False" hp="10000" />
 		<Monster name="ガデロン" id="7001" isBoss="False" hp="10000" />
 		<Monster name="アンク" id="7002" isBoss="False" hp="10000" />
@@ -3317,6 +3327,23 @@
 		<Monster name="カリン・セコンド" id="1067" isBoss="False" hp="10000" />
 		<Monster name="ローズ・エリーン" id="1068" isBoss="False" hp="10000" />
 		<Monster name="リネル・ルーナ" id="1069" isBoss="False" hp="10000" />
+		<Monster name="シャキラ・ルッドミラー" id="1070" isBoss="False" hp="10000" />
+		<Monster name="ダイアナ・ルッドミラー" id="1071" isBoss="False" hp="10000" />
+		<Monster name="ダイアナ・ルッドミラー" id="1072" isBoss="False" hp="10000" />
+		<Monster name="シルビア・バーネット" id="1073" isBoss="False" hp="10000" />
+		<Monster name="ペルナンド・カストロ" id="1074" isBoss="False" hp="10000" />
+		<Monster name="べリオン・シルバーレイン" id="1075" isBoss="False" hp="10000" />
+		<Monster name="テルミン・ラフェレイト" id="1076" isBoss="False" hp="10000" />
+		<Monster name="ニムエ・ローヘン" id="1077" isBoss="False" hp="10000" />
+		<Monster name="ラザ・ローネ" id="1078" isBoss="False" hp="10000" />
+		<Monster name="クロシャル・プンハン" id="1079" isBoss="False" hp="10000" />
+		<Monster name="シェビ・トランプ" id="1080" isBoss="False" hp="10000" />
+		<Monster name="ニア・ベントスリープ" id="1081" isBoss="False" hp="10000" />
+		<Monster name="ドレック・ウェイスト" id="1082" isBoss="False" hp="10000" />
+		<Monster name="ビア・ムーク" id="1083" isBoss="False" hp="10000" />
+		<Monster name="マディー・ニナ" id="1084" isBoss="False" hp="10000" />
+		<Monster name="ダイアナ・ルッドミラー" id="1085" isBoss="False" hp="10000" />
+		<Monster name="ダイアナ・ルッドミラー" id="1086" isBoss="False" hp="10000" />
 		<Monster name="フレイア・ローヘン" id="1100" isBoss="False" hp="10000" />
 		<Monster name="ロアナ・ホワイトリバー" id="1101" isBoss="False" hp="10000" />
 		<Monster name="アイク・ヘインズ" id="1102" isBoss="False" hp="10000" />
@@ -3512,6 +3539,7 @@
 		<Monster name="アンク" id="7002" isBoss="False" hp="10000" />
 		<Monster name="ちび魔女エルロニア" id="8000" isBoss="False" hp="10000" />
 		<Monster name="ポポリメダル交換員" id="9000" isBoss="False" hp="10000" />
+		<Monster name="次元移動ポータル" id="9066" isBoss="False" hp="10000" />
 		<Monster name="ドミル・バタル" id="22001" isBoss="False" hp="10000" />
 		<Monster name="シューナ" id="22002" isBoss="False" hp="10000" />
 		<Monster name="インナ・バタル" id="22003" isBoss="False" hp="10000" />
@@ -4838,7 +4866,7 @@
 		<Monster name="ハルキアの安息地 入口" id="5028" isBoss="False" hp="0" />
 		<Monster name="デモクロン実験室 入口" id="5029" isBoss="False" hp="0" />
 		<Monster name="オルカの神殿 入口" id="5030" isBoss="False" hp="0" />
-		<Monster name="エルカラス号 乗り場" id="5031" isBoss="False" hp="0" />
+		<Monster name="エルカラス号乗り場" id="5031" isBoss="False" hp="0" />
 		<Monster name="幻影の塔 入口" id="5032" isBoss="False" hp="0" />
 		<Monster name="再誕の冥堂 入口" id="5033" isBoss="False" hp="0" />
 		<Monster name="アケロンの煉獄 入口" id="5034" isBoss="False" hp="0" />
@@ -4860,12 +4888,15 @@
 		<Monster name="戦闘/魔法技術教官" id="8272" isBoss="False" hp="0" />
 		<Monster name="ペガサス管理人" id="8273" isBoss="False" hp="0" />
 		<Monster name="戦闘/魔法技術教官" id="8281" isBoss="False" hp="0" />
+		<Monster name="デモロスのルーレット入口" id="9066" isBoss="False" hp="0" />
 		<Monster name="ベルノの実験室 入口" id="9067" isBoss="False" hp="0" />
 		<Monster name="嘘つきタルスキの遊び場　入口" id="9070" isBoss="False" hp="0" />
 		<Monster name="破壊された神界の門入り口" id="9501" isBoss="False" hp="0" />
 		<Monster name="崩れたラカンの祭壇 入口" id="9710" isBoss="False" hp="0" />
+		<Monster name="RK-9格納庫入口" id="9735" isBoss="False" hp="0" />
 		<Monster name="リリスの城、ラケリスの廃墟入口" id="9769" isBoss="False" hp="0" />
 		<Monster name="ヴェリカ地下関門、ヴェリックの神殿入口" id="9780" isBoss="False" hp="0" />
+		<Monster name="サイラクス研究基地入口" id="9794" isBoss="False" hp="0" />
 		<Monster name="考古学研究所" id="18101" isBoss="False" hp="0" />
 		<Monster name="バラカ守備隊の野営地" id="18102" isBoss="False" hp="0" />
 		<Monster name="遺跡監視所" id="18103" isBoss="False" hp="0" />
@@ -4931,14 +4962,14 @@
 		<Monster name="万能型戦車" id="7000" isBoss="False" hp="360000" />
 	</Zone>
 	<Zone id="112" name="名誉の戦場" >
-		<Monster name="流配のアガンティ虐殺者" id="1000" isBoss="False" hp="17871700" />
-		<Monster name="拘束されたゴーレム" id="2000" isBoss="False" hp="17871700" />
-		<Monster name="背徳のクチャート予言者" id="3000" isBoss="False" hp="151921" />
-		<Monster name="背徳のクチャート戦士" id="3001" isBoss="False" hp="36811" />
-		<Monster name="風来のオーカン海賊" id="4000" isBoss="False" hp="151921" />
-		<Monster name="風来のオーカンミニミ" id="4001" isBoss="False" hp="36811" />
-		<Monster name="風の魔石" id="5000" isBoss="False" hp="16643" />
-		<Monster name="保護の魔石" id="5001" isBoss="False" hp="16643" />
+		<Monster name="流配のアガンティ虐殺者" id="1000" isBoss="False" hp="19658870" />
+		<Monster name="拘束されたゴーレム" id="2000" isBoss="False" hp="19658870" />
+		<Monster name="背徳のクチャート予言者" id="3000" isBoss="False" hp="167113" />
+		<Monster name="背徳のクチャート戦士" id="3001" isBoss="False" hp="40492" />
+		<Monster name="風来のオーカン海賊" id="4000" isBoss="False" hp="167113" />
+		<Monster name="風来のオーカンミニミ" id="4001" isBoss="False" hp="40492" />
+		<Monster name="風の魔石" id="5000" isBoss="False" hp="18308" />
+		<Monster name="保護の魔石" id="5001" isBoss="False" hp="18308" />
 	</Zone>
 	<Zone id="116" name="砲火の戦場" >
 		<Monster name="飛空艇" id="1001" isBoss="False" hp="50000" />
@@ -4994,21 +5025,21 @@
 		<Monster name="調練されたブルカヌス" id="104" isBoss="True" hp="12220960" />
 		<Monster name="調練されたブルカヌス" id="105" isBoss="True" hp="7511613" />
 		<Monster name="調練されたブルカヌス" id="106" isBoss="True" hp="3666288" />
-		<Monster name="ペトレ" id="107" isBoss="True" hp="35364133" />
-		<Monster name="護衛兵士" id="108" isBoss="False" hp="250000" />
-		<Monster name="養成所教官" id="109" isBoss="False" hp="250000" />
+		<Monster name="ペトレ" id="107" isBoss="True" hp="43710068" />
+		<Monster name="護衛兵士" id="108" isBoss="False" hp="300000" />
+		<Monster name="養成所教官" id="109" isBoss="False" hp="300000" />
 		<Monster name="次元の魔法石" id="1501" isBoss="False" hp="10000" />
 	</Zone>
 	<Zone id="152" name="ヴェリカ直轄領" >
-		<Monster name="ラバトゥス" id="1001" isBoss="True" hp="44708232" />
-		<Monster name="ドゥラカン" id="1002" isBoss="True" hp="44708232" />
-		<Monster name="カイタン" id="1003" isBoss="True" hp="44708232" />
+		<Monster name="ラバトゥス" id="1001" isBoss="True" hp="49179055" />
+		<Monster name="ドゥラカン" id="1002" isBoss="True" hp="49179055" />
+		<Monster name="カイタン" id="1003" isBoss="True" hp="49179055" />
 		<Monster name="貪欲のアナンシャ" id="2001" isBoss="True" hp="670623480" />
 		<Monster name="激昂のカラゴス" id="2002" isBoss="True" hp="670623480" />
 		<Monster name="虐殺のサブラニア" id="2003" isBoss="True" hp="670623480" />
 		<Monster name="羊" id="3001" isBoss="False" hp="100000000" />
 		<Monster name="セルゲオル" id="4001" isBoss="False" hp="10000" />
-		<Monster name="前衛基地" id="5001" isBoss="False" hp="62094780" />
+		<Monster name="前衛基地" id="5001" isBoss="False" hp="68304258" />
 		<Monster name="アンクリアス・カイルム" id="6001" isBoss="False" hp="13038" />
 		<Monster name="ガデルン・カイルム" id="6002" isBoss="False" hp="945" />
 		<Monster name="ジャルミア" id="6003" isBoss="False" hp="945" />
@@ -5043,6 +5074,9 @@
 		<Monster name="警備兵" id="6046" isBoss="False" hp="10000" />
 		<Monster name="深い夜・ダナム" id="6047" isBoss="False" hp="10000" />
 		<Monster name="セノミア・エリーン" id="6048" isBoss="False" hp="10000" />
+		<Monster name="貪欲のアナンシャ" id="7001" isBoss="True" hp="737685828" />
+		<Monster name="激昂のカラゴス" id="7002" isBoss="True" hp="737685828" />
+		<Monster name="虐殺のサブラニア" id="7003" isBoss="True" hp="737685828" />
 	</Zone>
 	<Zone id="172" name="原始の地" >
 		<Monster name="ポアロン" id="1000" isBoss="False" hp="366797" />
@@ -5080,6 +5114,15 @@
 		<Monster name="ラベネ" id="1064" isBoss="False" hp="366797" />
 		<Monster name="リバダン" id="1065" isBoss="False" hp="10000" />
 		<Monster name="カトゥバドゥ" id="1066" isBoss="False" hp="1333810" />
+		<Monster name="ホアキム" id="1067" isBoss="False" hp="366797" />
+		<Monster name="コルルン" id="1068" isBoss="False" hp="1000000000" />
+		<Monster name="ホアキム" id="1069" isBoss="False" hp="366797" />
+		<Monster name="アークデヴァ指揮官" id="1070" isBoss="False" hp="100" />
+		<Monster name="憤怒したグブリン" id="1071" isBoss="False" hp="1000000000" />
+		<Monster name="次元の魔法石" id="1072" isBoss="False" hp="10000" />
+		<Monster name="ロードス" id="1073" isBoss="False" hp="366797" />
+		<Monster name="憤怒したグブリン" id="1075" isBoss="False" hp="1000000000" />
+		<Monster name="ロードス" id="1076" isBoss="False" hp="366797" />
 		<Monster name="ポアロン" id="1100" isBoss="False" hp="366797" />
 		<Monster name="ギルバート・グレイス" id="1101" isBoss="False" hp="366797" />
 		<Monster name="シオズ・エリーン" id="1102" isBoss="False" hp="366797" />
@@ -5330,6 +5373,10 @@
 		<Monster name="怒足の二級戦闘生命体" id="1116" isBoss="False" hp="302468" />
 		<Monster name="強靭な翼・リクム" id="1500" isBoss="False" hp="10000" />
 		<Monster name="ガルタのカエル" id="1501" isBoss="False" hp="169" />
+		<Monster name="ドナキム" id="1502" isBoss="False" hp="366797" />
+		<Monster name="ロードス" id="1503" isBoss="False" hp="366797" />
+		<Monster name="ホアキム" id="1504" isBoss="False" hp="366797" />
+		<Monster name="ドナキム" id="1505" isBoss="False" hp="366797" />
 		<Monster name="監視者" id="2001" isBoss="False" hp="366797" />
 		<Monster name="ガルタ" id="2002" isBoss="False" hp="366797" />
 		<Monster name="作業員" id="2003" isBoss="False" hp="366797" />
@@ -5418,6 +5465,7 @@
 		<Monster name="訓練用木人" id="3018" isBoss="False" hp="4881919" />
 		<Monster name="次元の魔法石" id="3022" isBoss="False" hp="10000" />
 		<Monster name="ピルオ" id="4001" isBoss="False" hp="366797" />
+		<Monster name="次元の魔法石" id="9735" isBoss="False" hp="10000" />
 	</Zone>
 	<Zone id="183" name="イルカ近郊" >
 		<Monster name="ギルバート・グレイス" id="1001" isBoss="False" hp="945" />
@@ -5782,6 +5830,7 @@
 		<Monster name="次元の魔法石" id="1501" isBoss="False" hp="10000" />
 		<Monster name="次元の魔法石" id="1502" isBoss="False" hp="10000" />
 		<Monster name="次元の魔法石" id="1503" isBoss="False" hp="53600" />
+		<Monster name="次元の魔法石" id="1504" isBoss="False" hp="10000" />
 		<Monster name="警備兵" id="1700" isBoss="False" hp="807599" />
 		<Monster name="マチルダ" id="8000" isBoss="False" hp="945" />
 	</Zone>
@@ -9523,7 +9572,7 @@
 		<Monster name="次元の魔法石" id="1501" isBoss="False" hp="10000" />
 		<Monster name="次元の魔法石" id="1502" isBoss="False" hp="53600" />
 		<Monster name="ジョエル・ホワイトリバー" id="8001" isBoss="False" hp="10000" />
-		<Monster name="リアン・クベル" id="8002" isBoss="False" hp="10000" />
+		<Monster name="ジョウィン・リオナス" id="8002" isBoss="False" hp="10000" />
 		<Monster name="アルレマンシア連盟調査員" id="8003" isBoss="False" hp="1464727" />
 		<Monster name="トレジャーハンター" id="8004" isBoss="False" hp="10999" />
 		<Monster name="トレジャーハンター" id="8005" isBoss="False" hp="10999" />
@@ -9870,20 +9919,20 @@
 		<Monster name="フェンリック" id="4521" isBoss="False" hp="945" />
 	</Zone>
 	<Zone id="454" name="邪悪なオルカの神殿" >
-		<Monster name="土の心臓" id="93" isBoss="False" hp="11250000" />
-		<Monster name="水の心臓" id="94" isBoss="False" hp="11250000" />
+		<Monster name="土の心臓" id="93" isBoss="False" hp="16000000" />
+		<Monster name="水の心臓" id="94" isBoss="False" hp="16000000" />
 		<Monster name="心臓のコア" id="95" isBoss="False" hp="10000" />
-		<Monster name="火の心臓" id="97" isBoss="False" hp="11250000" />
-		<Monster name="電撃球体" id="100" isBoss="False" hp="800000" />
+		<Monster name="火の心臓" id="97" isBoss="False" hp="16000000" />
+		<Monster name="電撃球体" id="100" isBoss="False" hp="4000000" />
 		<Monster name="海底岩" id="404" isBoss="False" hp="1" />
 		<Monster name="海底岩" id="405" isBoss="False" hp="1" />
-		<Monster name="深海カメ" id="408" isBoss="False" hp="2184781" />
-		<Monster name="深海クラゲ" id="500" isBoss="False" hp="2184781" />
-		<Monster name="深海ヒトデ" id="501" isBoss="False" hp="2184781" />
-		<Monster name="神殿偵察兵" id="502" isBoss="False" hp="2184781" />
-		<Monster name="深海怪物" id="503" isBoss="False" hp="11000000" />
-		<Monster name="深海怪物" id="504" isBoss="False" hp="11000000" />
-		<Monster name="古代の機械" id="600" isBoss="False" hp="15000000" />
+		<Monster name="深海カメ" id="408" isBoss="False" hp="13600000" />
+		<Monster name="深海クラゲ" id="500" isBoss="False" hp="13600000" />
+		<Monster name="深海ヒトデ" id="501" isBoss="False" hp="13600000" />
+		<Monster name="神殿偵察兵" id="502" isBoss="False" hp="13600000" />
+		<Monster name="深海怪物" id="503" isBoss="False" hp="17600000" />
+		<Monster name="深海怪物" id="504" isBoss="False" hp="17600000" />
+		<Monster name="古代の機械" id="600" isBoss="False" hp="48000000" />
 		<Monster name="オルカの精霊" id="601" isBoss="False" hp="2184781" />
 		<Monster name="オルカの精霊" id="602" isBoss="False" hp="2184781" />
 		<Monster name="オルカの精霊" id="603" isBoss="False" hp="2184781" />
@@ -9891,10 +9940,10 @@
 		<Monster name="オルカの精霊" id="605" isBoss="False" hp="2184781" />
 		<Monster name="オルカの精霊" id="606" isBoss="False" hp="2184781" />
 		<Monster name="オルカの精霊" id="607" isBoss="False" hp="2184781" />
-		<Monster name="オルカリトルゴーレム" id="700" isBoss="False" hp="2184781" />
-		<Monster name="オルカダムファーカン" id="701" isBoss="False" hp="2184781" />
-		<Monster name="オルカゴーレム" id="702" isBoss="False" hp="15000000" />
-		<Monster name="神殿の心臓" id="903" isBoss="False" hp="3500000" />
+		<Monster name="オルカリトルゴーレム" id="700" isBoss="False" hp="13600000" />
+		<Monster name="オルカダムファーカン" id="701" isBoss="False" hp="13600000" />
+		<Monster name="オルカゴーレム" id="702" isBoss="False" hp="56000000" />
+		<Monster name="神殿の心臓" id="903" isBoss="False" hp="5000000" />
 		<Monster name="宝箱" id="904" isBoss="False" hp="100" />
 		<Monster name="銀色の宝箱" id="905" isBoss="False" hp="100" />
 		<Monster name="金色の宝箱" id="906" isBoss="False" hp="100" />
@@ -9909,15 +9958,15 @@
 		<Monster name="オルカゴーレムを破壊せよ" id="918" isBoss="False" hp="0" />
 		<Monster name="【ボス】オルカを討伐せよ" id="919" isBoss="False" hp="0" />
 		<Monster name="カシャ・クルダン" id="999" isBoss="False" hp="10000" />
-		<Monster name="猛毒カメ" id="1000" isBoss="True" hp="147000000" />
-		<Monster name="深海アンコウ" id="1001" isBoss="True" hp="115500000" />
-		<Monster name="邪悪なオルカ" id="1002" isBoss="True" hp="136500000" />
+		<Monster name="猛毒カメ" id="1000" isBoss="True" hp="950400000" />
+		<Monster name="深海アンコウ" id="1001" isBoss="True" hp="902880000" />
+		<Monster name="邪悪なオルカ" id="1002" isBoss="True" hp="823680000" />
 		<Monster name="次元の魔法石" id="4000" isBoss="False" hp="10000" />
 		<Monster name="次元の魔法石" id="4001" isBoss="False" hp="10000" />
 		<Monster name="次元の魔法石" id="4002" isBoss="False" hp="10000" />
 	</Zone>
 	<Zone id="455" name="ハルキアの安息地" >
-		<Monster name="トゥンガ" id="100" isBoss="True" hp="50000000" />
+		<Monster name="トゥンガ" id="100" isBoss="True" hp="222398500" />
 		<Monster name="ツムツム" id="101" isBoss="False" hp="100000" />
 		<Monster name="ルムルム" id="102" isBoss="False" hp="100000" />
 		<Monster name="プムプム" id="103" isBoss="False" hp="100000" />
@@ -9925,20 +9974,20 @@
 		<Monster name="トゥンガの分身" id="105" isBoss="False" hp="10" />
 		<Monster name="トゥンガの分身" id="106" isBoss="False" hp="10" />
 		<Monster name="トゥンガの分身" id="107" isBoss="False" hp="10" />
-		<Monster name="バナナの木" id="110" isBoss="False" hp="125000" />
-		<Monster name="森の薬草" id="120" isBoss="False" hp="100000" />
-		<Monster name="羊の肉" id="130" isBoss="False" hp="250000" />
+		<Monster name="バナナの木" id="110" isBoss="False" hp="334937" />
+		<Monster name="森の薬草" id="120" isBoss="False" hp="267950" />
+		<Monster name="羊の肉" id="130" isBoss="False" hp="669875" />
 		<Monster name="ハルキアの分身" id="150" isBoss="False" hp="500000" />
-		<Monster name="グルグル" id="200" isBoss="True" hp="50000000" />
+		<Monster name="グルグル" id="200" isBoss="True" hp="348102000" />
 		<Monster name="硬い岩" id="211" isBoss="False" hp="30000000" />
 		<Monster name="ハルキアの分身" id="230" isBoss="False" hp="500000" />
-		<Monster name="押し出し草" id="240" isBoss="False" hp="500000" />
-		<Monster name="ハルキア" id="300" isBoss="True" hp="70000000" />
+		<Monster name="押し出し草" id="240" isBoss="False" hp="2097000" />
+		<Monster name="ハルキア" id="300" isBoss="True" hp="357771500" />
 		<Monster name="ハルキアの小さな卵" id="310" isBoss="False" hp="90000000" />
-		<Monster name="ハルキアの大きな卵" id="311" isBoss="False" hp="1500000" />
-		<Monster name="活発な幼生" id="320" isBoss="False" hp="1000000" />
-		<Monster name="力溢れる幼生" id="321" isBoss="False" hp="1000000" />
-		<Monster name="回復力がある幼生" id="322" isBoss="False" hp="1000000" />
+		<Monster name="ハルキアの大きな卵" id="311" isBoss="False" hp="4618392" />
+		<Monster name="活発な幼生" id="320" isBoss="False" hp="3078928" />
+		<Monster name="力溢れる幼生" id="321" isBoss="False" hp="3078928" />
+		<Monster name="回復力がある幼生" id="322" isBoss="False" hp="3078928" />
 		<Monster name="赤い森の花" id="401" isBoss="False" hp="10" />
 		<Monster name="青い森の花" id="402" isBoss="False" hp="10" />
 		<Monster name="アリアンヌ" id="410" isBoss="False" hp="10000000" />
@@ -9990,14 +10039,14 @@
 		<Monster name="次元の魔法石" id="1504" isBoss="False" hp="10000" />
 	</Zone>
 	<Zone id="457" name="傲慢なアケロンの煉獄" >
-		<Monster name="グレイム" id="202" isBoss="False" hp="150000000" />
-		<Monster name="洗脳された使徒" id="212" isBoss="False" hp="4500000" />
-		<Monster name="洗脳された巫女" id="213" isBoss="False" hp="4500000" />
-		<Monster name="溶岩怪物" id="404" isBoss="False" hp="1000000" />
-		<Monster name="溶岩怪物" id="408" isBoss="False" hp="1000000" />
-		<Monster name="溶岩怪物" id="409" isBoss="False" hp="1000000" />
-		<Monster name="溶岩怪物" id="410" isBoss="False" hp="1000000" />
-		<Monster name="獰猛なマリゴス" id="503" isBoss="False" hp="1000000" />
+		<Monster name="グレイム" id="202" isBoss="False" hp="250000000" />
+		<Monster name="洗脳された使徒" id="212" isBoss="False" hp="12187500" />
+		<Monster name="洗脳された巫女" id="213" isBoss="False" hp="12187500" />
+		<Monster name="溶岩怪物" id="404" isBoss="False" hp="4500000" />
+		<Monster name="溶岩怪物" id="408" isBoss="False" hp="4500000" />
+		<Monster name="溶岩怪物" id="409" isBoss="False" hp="4500000" />
+		<Monster name="溶岩怪物" id="410" isBoss="False" hp="4500000" />
+		<Monster name="獰猛なマリゴス" id="503" isBoss="False" hp="10000000" />
 		<Monster name="卑劣なマリゴス" id="504" isBoss="False" hp="9906750" />
 		<Monster name="グレアム・ヘインツ" id="607" isBoss="False" hp="10000" />
 		<Monster name="リオネ" id="608" isBoss="False" hp="945" />
@@ -10006,28 +10055,28 @@
 		<Monster name="マグテノンを討伐せよ" id="912" isBoss="False" hp="0" />
 		<Monster name="ドルトゥマを討伐せよ" id="913" isBoss="False" hp="0" />
 		<Monster name="【ボス】ケトラスを討伐せよ" id="914" isBoss="False" hp="0" />
-		<Monster name="ダルトゥマ" id="1001" isBoss="True" hp="204000000" />
-		<Monster name="マグテノン" id="1002" isBoss="True" hp="204000000" />
-		<Monster name="ドルトゥマ" id="1003" isBoss="True" hp="284000000" />
-		<Monster name="ケトラス" id="1004" isBoss="True" hp="482000000" />
-		<Monster name="獰猛なパンドロス" id="1005" isBoss="False" hp="36000000" />
+		<Monster name="ダルトゥマ" id="1001" isBoss="True" hp="1555200000" />
+		<Monster name="マグテノン" id="1002" isBoss="True" hp="991440000" />
+		<Monster name="ドルトゥマ" id="1003" isBoss="True" hp="1544400000" />
+		<Monster name="ケトラス" id="1004" isBoss="True" hp="1512000000" />
+		<Monster name="獰猛なパンドロス" id="1005" isBoss="False" hp="128000000" />
 		<Monster name="次元の魔法石" id="1501" isBoss="False" hp="10000" />
 		<Monster name="次元の魔法石" id="1502" isBoss="False" hp="10000" />
 		<Monster name="次元の魔法石" id="1503" isBoss="False" hp="10000" />
 		<Monster name="次元の魔法石" id="1504" isBoss="False" hp="10000" />
 	</Zone>
 	<Zone id="459" name="バーンスタインの幽霊島" >
-		<Monster name="船員の墓" id="109" isBoss="False" hp="2000000" />
+		<Monster name="船員の墓" id="109" isBoss="False" hp="4200000" />
 		<Monster name="溺死した船員" id="333" isBoss="False" hp="1890675" />
-		<Monster name="亡者の墓" id="334" isBoss="False" hp="500000" />
+		<Monster name="亡者の墓" id="334" isBoss="False" hp="1050000" />
 		<Monster name="モンスターを討伐せよ" id="911" isBoss="False" hp="0" />
 		<Monster name="ラクドスを討伐せよ" id="912" isBoss="False" hp="0" />
 		<Monster name="ビオールを討伐せよ" id="913" isBoss="False" hp="0" />
 		<Monster name="【ボス】バーンスタインを討伐せよ" id="914" isBoss="False" hp="0" />
 		<Monster name="ケレン・カイルム" id="999" isBoss="False" hp="10000" />
-		<Monster name="ラクドス" id="1001" isBoss="True" hp="292951933" />
-		<Monster name="ビオール" id="1002" isBoss="True" hp="292951933" />
-		<Monster name="バーンスタイン" id="1003" isBoss="True" hp="318278538" />
+		<Monster name="ラクドス" id="1001" isBoss="True" hp="740000000" />
+		<Monster name="ビオール" id="1002" isBoss="True" hp="790000000" />
+		<Monster name="バーンスタイン" id="1003" isBoss="True" hp="880000000" />
 		<Monster name="次元の魔法石" id="1501" isBoss="False" hp="10000" />
 		<Monster name="次元の魔法石" id="1502" isBoss="False" hp="10000" />
 		<Monster name="船員の日誌" id="2001" isBoss="False" hp="366797" />
@@ -10047,7 +10096,7 @@
 		<Monster name="モンスターを討伐せよ" id="917" isBoss="False" hp="0" />
 		<Monster name="【ボス】罪深きケリーヴァンを討伐せよ" id="918" isBoss="False" hp="0" />
 		<Monster name="バイロン・ヘルカン" id="999" isBoss="False" hp="8500" />
-		<Monster name="罪深きポリーペモス" id="1000" isBoss="True" hp="221000000" />
+		<Monster name="罪深きポリーペモス" id="1000" isBoss="True" hp="750000000" />
 		<Monster name="罪深き自爆兵" id="1001" isBoss="False" hp="80000" />
 		<Monster name="罪深き突撃兵" id="1002" isBoss="False" hp="210000" />
 		<Monster name="罪深き咎人" id="1003" isBoss="False" hp="11332897" />
@@ -10066,15 +10115,15 @@
 		<Monster name="次元の魔法石" id="1502" isBoss="False" hp="8500" />
 		<Monster name="次元の魔法石" id="1503" isBoss="False" hp="8500" />
 		<Monster name="次元の魔法石" id="1504" isBoss="False" hp="8500" />
-		<Monster name="罪深きペペロ" id="2000" isBoss="True" hp="195500000" />
+		<Monster name="罪深きペペロ" id="2000" isBoss="True" hp="710000000" />
 		<Monster name="罪深き一等航海士" id="2003" isBoss="False" hp="8714897" />
-		<Monster name="罪深き船長" id="2004" isBoss="False" hp="21634897" />
+		<Monster name="罪深き船長" id="2004" isBoss="False" hp="51000000" />
 		<Monster name="罪深き甲板兵" id="2005" isBoss="False" hp="4294897" />
-		<Monster name="罪深きケリーヴァン" id="3000" isBoss="True" hp="195500000" />
-		<Monster name="罪深き副船長" id="3002" isBoss="False" hp="6971917" />
-		<Monster name="罪深き上級甲板兵" id="3003" isBoss="False" hp="4294897" />
-		<Monster name="罪深きタアナン" id="3004" isBoss="False" hp="21634897" />
-		<Monster name="罪深きケリーヴァン追従者" id="3005" isBoss="False" hp="6971917" />
+		<Monster name="罪深きケリーヴァン" id="3000" isBoss="True" hp="820000000" />
+		<Monster name="罪深き副船長" id="3002" isBoss="False" hp="15000000" />
+		<Monster name="罪深き上級甲板兵" id="3003" isBoss="False" hp="9200000" />
+		<Monster name="罪深きタアナン" id="3004" isBoss="False" hp="35000000" />
+		<Monster name="罪深きケリーヴァン追従者" id="3005" isBoss="False" hp="13000000" />
 	</Zone>
 	<Zone id="461" name="巨人の遺跡" >
 		<Monster name="次元の魔法石" id="1001" isBoss="False" hp="10000" />
@@ -10132,6 +10181,32 @@
 		<Monster name="アガンティ戦士" id="5006" isBoss="True" hp="3039454" />
 		<Monster name="ケルバー狂信徒" id="5007" isBoss="False" hp="8955" />
 		<Monster name="アルゴン装置" id="6000" isBoss="False" hp="25747" />
+	</Zone>
+	<Zone id="466" name="デモロスのルーレット" >
+		<Monster name="トゥルガスを退治せよ" id="911" isBoss="False" hp="0" />
+		<Monster name="デモロスを退治せよ" id="912" isBoss="False" hp="0" />
+		<Monster name="ショウズ・プンハン" id="1078" isBoss="False" hp="10000" />
+		<Monster name="ゼニ・ソン" id="1079" isBoss="False" hp="10000" />
+		<Monster name="ボードレール・ヘンリック" id="1080" isBoss="False" hp="10000" />
+		<Monster name="パティーマ・メロー" id="1081" isBoss="False" hp="10000" />
+		<Monster name="マックス・アンドゥルー" id="1082" isBoss="False" hp="10000" />
+		<Monster name="ゼニ・ソン" id="1083" isBoss="False" hp="10000" />
+		<Monster name="パティーマ・メロー" id="1084" isBoss="False" hp="10000" />
+		<Monster name="マックス・アンドゥルー" id="1085" isBoss="False" hp="10000" />
+		<Monster name="次元移動ポータル" id="1501" isBoss="False" hp="10000" />
+		<Monster name="トゥルガス" id="46601" isBoss="True" hp="900000000" />
+		<Monster name="デモロス" id="46602" isBoss="True" hp="1040000000" />
+		<Monster name="デモロスの宝箱" id="46613" isBoss="False" hp="100" />
+		<Monster name="デモロスのダイス" id="46677" isBoss="False" hp="10000000" />
+		<Monster name="デモロスのダイス" id="46678" isBoss="False" hp="10000000" />
+		<Monster name="デモロスのダイス" id="46679" isBoss="False" hp="10000000" />
+		<Monster name="赤いダイス" id="46688" isBoss="False" hp="1400000000" />
+		<Monster name="白いダイス" id="46689" isBoss="False" hp="1400000000" />
+		<Monster name="青いダイス" id="46690" isBoss="False" hp="1400000000" />
+		<Monster name="デモロスのダイス" id="46692" isBoss="False" hp="1400000000" />
+		<Monster name="デモロスのダイス" id="46697" isBoss="False" hp="10000000" />
+		<Monster name="デモロスのダイス" id="46698" isBoss="False" hp="10000000" />
+		<Monster name="デモロスのダイス" id="46699" isBoss="False" hp="10000000" />
 	</Zone>
 	<Zone id="467" name="非道なベルノの実験室" >
 		<Monster name="非道なベラと非道なプリマを討伐せよ" id="911" isBoss="False" hp="0" />
@@ -10268,7 +10343,7 @@
 		<Monster name="騙された人の日誌" id="504" isBoss="False" hp="366797" />
 		<Monster name="脱出した人の日誌" id="505" isBoss="False" hp="10000" />
 		<Monster name="うるさいおばさん" id="800" isBoss="False" hp="10000" />
-		<Monster name="タルスキ" id="1000" isBoss="True" hp="1271815251" />
+		<Monster name="タルスキ" id="1000" isBoss="True" hp="1577724000" />
 		<Monster name="次元の魔法石" id="1501" isBoss="False" hp="10000" />
 	</Zone>
 	<Zone id="471" name="死霊術研究所" >
@@ -11335,11 +11410,11 @@
 		<Monster name="カディア・レスニア" id="1009" isBoss="False" hp="10000" />
 	</Zone>
 	<Zone id="569" name="ラクナン城の記憶" >
-		<Monster name="グリーンデラ" id="1000" isBoss="True" hp="4881919" />
-		<Monster name="RK-8" id="2000" isBoss="True" hp="4881919" />
-		<Monster name="RK-8" id="2100" isBoss="True" hp="4881919" />
-		<Monster name="ムーラ" id="3000" isBoss="True" hp="4201502" />
-		<Monster name="変身したムーラ" id="3001" isBoss="True" hp="5858303" />
+		<Monster name="グリーンデラ" id="1000" isBoss="True" hp="9763838" />
+		<Monster name="RK-8" id="2000" isBoss="True" hp="9763838" />
+		<Monster name="RK-8" id="2100" isBoss="True" hp="9763838" />
+		<Monster name="ムーラ" id="3000" isBoss="True" hp="8403004" />
+		<Monster name="変身したムーラ" id="3001" isBoss="True" hp="11716607" />
 		<Monster name="マズキ" id="4000" isBoss="False" hp="1500000" />
 		<Monster name="アークデヴァ射手" id="5100" isBoss="False" hp="366797" />
 		<Monster name="アークデヴァ精霊士" id="5200" isBoss="False" hp="366797" />
@@ -11351,7 +11426,7 @@
 		<Monster name="デヴァ精鋭狩人" id="6500" isBoss="False" hp="231082" />
 		<Monster name="デヴァ呪術師" id="6600" isBoss="False" hp="190734" />
 		<Monster name="調練されたハイエナ" id="6800" isBoss="False" hp="231082" />
-		<Monster name="サディキン" id="6900" isBoss="False" hp="3361919" />
+		<Monster name="サディキン" id="6900" isBoss="False" hp="6723838" />
 		<Monster name="親衛隊長ハズキ" id="7000" isBoss="False" hp="606797" />
 		<Monster name="アークデヴァ偵察射手" id="9100" isBoss="False" hp="366797" />
 	</Zone>
@@ -11463,6 +11538,71 @@
 		<Monster name="クラカトクス" id="81118" isBoss="False" hp="50412440" />
 		<Monster name="SH-2007" id="81125" isBoss="False" hp="3869177" />
 	</Zone>
+	<Zone id="620" name="ヴェリタス特別地区" >
+		<Monster name="ベヒモス" id="1000" isBoss="True" hp="4200000000" />
+		<Monster name="オーカントム" id="1001" isBoss="True" hp="840000000" />
+		<Monster name="オーカンバート" id="1004" isBoss="True" hp="840000000" />
+		<Monster name="オーカンウィリアム" id="1005" isBoss="True" hp="840000000" />
+		<Monster name="セオナ" id="1006" isBoss="False" hp="10000" />
+		<Monster name="ローラ・エリーン" id="2000" isBoss="False" hp="945" />
+		<Monster name="アイエル" id="2001" isBoss="False" hp="945" />
+		<Monster name="ローラ・エリーン" id="2100" isBoss="False" hp="945" />
+		<Monster name="アイエル" id="2101" isBoss="False" hp="945" />
+		<Monster name="ローラ・エリーン" id="2200" isBoss="False" hp="945" />
+		<Monster name="アイエル" id="2201" isBoss="False" hp="945" />
+		<Monster name="名を捨てた者" id="9000" isBoss="False" hp="945" />
+		<Monster name="エレーネ・ローヘン" id="9004" isBoss="False" hp="10000" />
+		<Monster name="オーカン" id="9999" isBoss="False" hp="0" />
+	</Zone>
+	<Zone id="621" name="ヴィアエレニウム領" >
+		<Monster name="精神体" id="1000" isBoss="False" hp="0" />
+		<Monster name="異形の魔獣-アルファ" id="1002" isBoss="False" hp="0" />
+		<Monster name="異形の魔獣-ベータ" id="1003" isBoss="False" hp="0" />
+		<Monster name="異形の魔獣-ガンマ" id="1004" isBoss="False" hp="0" />
+		<Monster name="ローラ・エリーン" id="2000" isBoss="False" hp="945" />
+		<Monster name="アイエル" id="2001" isBoss="False" hp="945" />
+		<Monster name="ヴィランク・カイルム" id="2003" isBoss="False" hp="366797" />
+		<Monster name="ヴィランク・カイルム" id="2103" isBoss="False" hp="366797" />
+		<Monster name="ヴィランク・カイルム" id="2203" isBoss="False" hp="366797" />
+		<Monster name="ブラシュフォーダ" id="3000" isBoss="False" hp="0" />
+		<Monster name="マルラコスタ" id="3001" isBoss="True" hp="1485000000" />
+		<Monster name="名を捨てた者" id="9000" isBoss="False" hp="0" />
+		<Monster name="異形の魔獣" id="9001" isBoss="False" hp="0" />
+	</Zone>
+	<Zone id="622" name="命紡の峡谷" >
+		<Monster name="ドレッドリーパー" id="1000" isBoss="True" hp="4875000000" />
+		<Monster name="クチャート精鋭戦士" id="1002" isBoss="False" hp="530000000" />
+		<Monster name="始祖鳥" id="1003" isBoss="False" hp="300000000" />
+		<Monster name="ローラ・エリーン" id="1005" isBoss="False" hp="945" />
+		<Monster name="アイエル" id="1006" isBoss="False" hp="945" />
+		<Monster name="ローラ・エリーン" id="2005" isBoss="False" hp="945" />
+		<Monster name="アイエル" id="2006" isBoss="False" hp="945" />
+		<Monster name="名を捨てた者" id="9000" isBoss="False" hp="945" />
+		<Monster name="クチャート" id="9999" isBoss="False" hp="0" />
+	</Zone>
+	<Zone id="623" name="アルカニア領" >
+		<Monster name="フカ教官" id="1009" isBoss="False" hp="10000" />
+		<Monster name="モリンク・カイルム" id="2001" isBoss="False" hp="366797" />
+	</Zone>
+	<Zone id="626" name="ヴィアアウレウム領" >
+		<Monster name="バシリスク" id="1000" isBoss="True" hp="330000000" />
+		<Monster name="凶暴なバシリスク" id="1004" isBoss="True" hp="825000000" />
+		<Monster name="ロクサノ" id="3001" isBoss="False" hp="91545" />
+		<Monster name="ムルラック・ナクトゥム" id="3002" isBoss="False" hp="100000000" />
+		<Monster name="ロクサノ" id="3004" isBoss="False" hp="91545" />
+	</Zone>
+	<Zone id="627" name="ウェストニア領" >
+		<Monster name="補給馬車" id="1001" isBoss="True" hp="100000000" />
+		<Monster name="フロストクーガ" id="1003" isBoss="False" hp="62550000" />
+		<Monster name="コボルト襲撃兵" id="1004" isBoss="False" hp="62550000" />
+		<Monster name="ウェンディゴ戦士" id="1007" isBoss="False" hp="104625000" />
+		<Monster name="ウェンディゴ呪術師" id="1008" isBoss="False" hp="104625000" />
+		<Monster name="シャフトゥス" id="1009" isBoss="False" hp="5780726" />
+		<Monster name="シヌス自爆兵" id="1010" isBoss="False" hp="100000000" />
+		<Monster name="カルラック・ナクトゥム" id="1011" isBoss="False" hp="5780726" />
+		<Monster name="警備兵" id="1012" isBoss="False" hp="100000000" />
+		<Monster name="ベルテン" id="1013" isBoss="True" hp="900000000" />
+	</Zone>
 	<Zone id="643" name="魔法使いの砦" >
 		<Monster name="バルガス" id="1001" isBoss="True" hp="161159398" />
 		<Monster name="ハウルド" id="1002" isBoss="True" hp="161159398" />
@@ -11551,18 +11691,18 @@
 		<Monster name="バルバトスが召喚するゴルゴスを討伐せよ" id="911" isBoss="False" hp="0" />
 		<Monster name="バルバトスが召喚するモレクを討伐せよ" id="912" isBoss="False" hp="0" />
 		<Monster name="バルバトスを討伐せよ" id="913" isBoss="False" hp="0" />
-		<Monster name="ゴルゴス" id="1000" isBoss="True" hp="1100000000" />
+		<Monster name="ゴルゴス" id="1000" isBoss="True" hp="1800000000" />
 		<Monster name="次元の魔法石" id="1501" isBoss="False" hp="10000" />
 		<Monster name="次元の魔法石" id="1502" isBoss="False" hp="10000" />
 		<Monster name="次元の魔法石" id="1503" isBoss="False" hp="10000" />
-		<Monster name="モレク" id="2000" isBoss="True" hp="1000000000" />
-		<Monster name="バルバトス" id="3000" isBoss="True" hp="1100000000" />
+		<Monster name="モレク" id="2000" isBoss="True" hp="1650000000" />
+		<Monster name="バルバトス" id="3000" isBoss="True" hp="1850000000" />
 		<Monster name="負傷した兵士" id="5001" isBoss="False" hp="200" />
 		<Monster name="負傷した兵士" id="5002" isBoss="False" hp="366797" />
 		<Monster name="負傷した兵士" id="5003" isBoss="False" hp="200" />
-		<Monster name="アークデヴァ魔術師" id="5004" isBoss="False" hp="4000000" />
-		<Monster name="アークデヴァ射手" id="5005" isBoss="False" hp="4000000" />
-		<Monster name="アークデヴァ剣闘士" id="5006" isBoss="False" hp="7000000" />
+		<Monster name="アークデヴァ魔術師" id="5004" isBoss="False" hp="3500000" />
+		<Monster name="アークデヴァ射手" id="5005" isBoss="False" hp="3500000" />
+		<Monster name="アークデヴァ剣闘士" id="5006" isBoss="False" hp="5000000" />
 		<Monster name="兵士" id="5007" isBoss="False" hp="10000" />
 		<Monster name="兵士" id="5008" isBoss="False" hp="945" />
 		<Monster name="兵士" id="5009" isBoss="False" hp="13038" />
@@ -11583,7 +11723,7 @@
 	<Zone id="713" name="ギルリアンの森（プレミアム）" >
 		<Monster name="次元の魔法石" id="1000" isBoss="False" hp="10000" />
 		<Monster name="次元の魔法石" id="1001" isBoss="False" hp="10000" />
-		<Monster name="ギルリアン" id="81301" isBoss="False" hp="33242400" />
+		<Monster name="ギルリアン" id="81301" isBoss="False" hp="38228760" />
 		<Monster name="支配された森の巨人" id="81303" isBoss="False" hp="10000000" />
 		<Monster name="支配された強力なギリード" id="81305" isBoss="False" hp="450000" />
 		<Monster name="支配された古代の岩" id="81306" isBoss="False" hp="10000000" />
@@ -11609,7 +11749,7 @@
 		<Monster name="精神支配石の欠片" id="81393" isBoss="False" hp="364734" />
 		<Monster name="精神支配石の欠片" id="81394" isBoss="False" hp="364734" />
 		<Monster name="強力な精神支配石" id="81398" isBoss="False" hp="22230000" />
-		<Monster name="強力な精神支配石" id="81399" isBoss="False" hp="19699200" />
+		<Monster name="強力な精神支配石" id="81399" isBoss="False" hp="22654080" />
 	</Zone>
 	<Zone id="714" name="プレミアムフィールド" >
 		<Monster name="ヴェリックの意志" id="1001" isBoss="False" hp="10000" />
@@ -11620,8 +11760,8 @@
 		<Monster name="モンスターを討伐せよ" id="912" isBoss="False" hp="0" />
 		<Monster name="フェリーモスを討伐せよ" id="913" isBoss="False" hp="0" />
 		<Monster name="【ボス】次元の魔法石を通じてエルカラス号 甲板に移動後、ダルカンを討伐せよ" id="914" isBoss="False" hp="0" />
-		<Monster name="ダルカン" id="1000" isBoss="True" hp="128000000" />
-		<Monster name="ダルカン" id="1001" isBoss="True" hp="200000000" />
+		<Monster name="ダルカン" id="1000" isBoss="True" hp="1828698168" />
+		<Monster name="ダルカン" id="1001" isBoss="True" hp="959745024" />
 		<Monster name="アルクス" id="1002" isBoss="False" hp="0" />
 		<Monster name="次元の魔法石" id="1501" isBoss="False" hp="10000" />
 		<Monster name="次元の魔法石" id="1502" isBoss="False" hp="10000" />
@@ -11631,7 +11771,7 @@
 		<Monster name="アークデヴァ剣闘士" id="91602" isBoss="False" hp="0" />
 		<Monster name="アークデヴァ魔術師" id="91603" isBoss="False" hp="0" />
 		<Monster name="アークデヴァ精霊士" id="91604" isBoss="False" hp="0" />
-		<Monster name="フェリーモス" id="91606" isBoss="True" hp="153600000" />
+		<Monster name="フェリーモス" id="91606" isBoss="True" hp="1713105567" />
 		<Monster name="浮遊石" id="91618" isBoss="False" hp="110000" />
 		<Monster name="浮遊石" id="91621" isBoss="False" hp="110000" />
 		<Monster name="浮遊石" id="91622" isBoss="False" hp="110000" />
@@ -11640,15 +11780,15 @@
 		<Monster name="浮遊石" id="91625" isBoss="False" hp="110000" />
 		<Monster name="浮遊石" id="91628" isBoss="False" hp="110000" />
 		<Monster name="浮遊石" id="91629" isBoss="False" hp="110000" />
-		<Monster name="ダルカンの下手人" id="91638" isBoss="False" hp="10000000" />
-		<Monster name="ピュトリオン" id="91650" isBoss="True" hp="70000000" />
+		<Monster name="ダルカンの下手人" id="91638" isBoss="False" hp="76170240" />
+		<Monster name="ピュトリオン" id="91650" isBoss="True" hp="550118400" />
 		<Monster name="フェリーモス" id="91660" isBoss="False" hp="90000000" />
-		<Monster name="SH-35" id="91671" isBoss="False" hp="3500000" />
-		<Monster name="SM-31" id="91672" isBoss="False" hp="3500000" />
-		<Monster name="BB-29" id="91673" isBoss="False" hp="12000000" />
-		<Monster name="アークデヴァ精鋭射手" id="91674" isBoss="False" hp="3500000" />
-		<Monster name="アークデヴァ精鋭僧兵" id="91675" isBoss="False" hp="5000000" />
-		<Monster name="アークデヴァ精鋭剣闘士" id="91676" isBoss="False" hp="5000000" />
+		<Monster name="SH-35" id="91671" isBoss="False" hp="33659640" />
+		<Monster name="SM-31" id="91672" isBoss="False" hp="33659640" />
+		<Monster name="BB-29" id="91673" isBoss="False" hp="115404480" />
+		<Monster name="アークデヴァ精鋭射手" id="91674" isBoss="False" hp="33659640" />
+		<Monster name="アークデヴァ精鋭僧兵" id="91675" isBoss="False" hp="47796688" />
+		<Monster name="アークデヴァ精鋭剣闘士" id="91676" isBoss="False" hp="47796688" />
 		<Monster name="ギルバート・グレイス" id="99901" isBoss="False" hp="366797" />
 		<Monster name="中級兵士" id="99902" isBoss="False" hp="91545" />
 		<Monster name="中級兵士" id="99903" isBoss="False" hp="91545" />
@@ -11878,6 +12018,30 @@
 		<Monster name="軍団将校" id="42758" isBoss="False" hp="1048611" />
 		<Monster name="カラシュ・カチャトゥス" id="42759" isBoss="True" hp="1048611" />
 		<Monster name="軍団将校" id="42760" isBoss="False" hp="915" />
+	</Zone>
+	<Zone id="735" name="RK-9格納庫" >
+		<Monster name="移動ポータル" id="100" isBoss="False" hp="10000" />
+		<Monster name="移動ポータル" id="101" isBoss="False" hp="10000" />
+		<Monster name="移動ポータル" id="102" isBoss="False" hp="10000" />
+		<Monster name="移動ポータル" id="103" isBoss="False" hp="10000" />
+		<Monster name="移動ポータル" id="104" isBoss="False" hp="10000" />
+		<Monster name="ポータルで移動し、謎の老人を追いかけよう" id="911" isBoss="False" hp="0" />
+		<Monster name="エネルギー増幅実験施設のポータルを利用せよ" id="912" isBoss="False" hp="0" />
+		<Monster name="ベンタロンを討伐せよ" id="913" isBoss="False" hp="0" />
+		<Monster name="磁場解除装備をすべて作動させよう" id="914" isBoss="False" hp="0" />
+		<Monster name="ヘキサフレオンを討伐せよ" id="915" isBoss="False" hp="0" />
+		<Monster name="RK-9を討伐せよ" id="916" isBoss="False" hp="0" />
+		<Monster name="ベンタロン" id="1000" isBoss="True" hp="1680000000" />
+		<Monster name="時限爆弾" id="1009" isBoss="False" hp="6000000" />
+		<Monster name="次元の魔法石" id="1501" isBoss="False" hp="10000" />
+		<Monster name="ヘキサフレオン" id="2000" isBoss="True" hp="1750000000" />
+		<Monster name="RK-9" id="3000" isBoss="True" hp="2056250000" />
+		<Monster name="謎の老人" id="6002" isBoss="False" hp="1" />
+		<Monster name="ランダン" id="6003" isBoss="False" hp="1" />
+		<Monster name="ランダン" id="6004" isBoss="False" hp="1" />
+		<Monster name="ランダンの日記 14" id="6005" isBoss="False" hp="10000" />
+		<Monster name="ランダンの日記 239" id="6006" isBoss="False" hp="10000" />
+		<Monster name="移動ポータル" id="6007" isBoss="False" hp="10000" />
 	</Zone>
 	<Zone id="743" name="魔法使いの砦" >
 		<Monster name="バルガス" id="1001" isBoss="True" hp="11233822" />
@@ -12132,11 +12296,11 @@
 		<Monster name="ラクドスを討伐せよ" id="912" isBoss="False" hp="0" />
 		<Monster name="ビオールを討伐せよ" id="913" isBoss="False" hp="0" />
 		<Monster name="【ボス】バーンスタインを討伐せよ" id="914" isBoss="False" hp="0" />
-		<Monster name="ラクドス" id="1001" isBoss="True" hp="539000000" />
-		<Monster name="ビオール" id="1002" isBoss="True" hp="588000000" />
-		<Monster name="バーンスタイン" id="1003" isBoss="False" hp="455000000" />
-		<Monster name="ラクドスの命令" id="1004" isBoss="True" hp="231000000" />
-		<Monster name="ビオールの命令" id="1005" isBoss="True" hp="231000000" />
+		<Monster name="ラクドス" id="1001" isBoss="True" hp="840000000" />
+		<Monster name="ビオール" id="1002" isBoss="True" hp="880000000" />
+		<Monster name="バーンスタイン" id="1003" isBoss="False" hp="710000000" />
+		<Monster name="ラクドスの命令" id="1004" isBoss="True" hp="251000000" />
+		<Monster name="ビオールの命令" id="1005" isBoss="True" hp="251000000" />
 		<Monster name="次元の魔法石" id="1501" isBoss="False" hp="10000" />
 		<Monster name="次元の魔法石" id="1502" isBoss="False" hp="10000" />
 		<Monster name="無名のゴースト" id="2008" isBoss="False" hp="1890675" />
@@ -12175,7 +12339,7 @@
 		<Monster name="モンスターを討伐せよ" id="917" isBoss="False" hp="0" />
 		<Monster name="【ボス】ケリーヴァンを討伐せよ" id="918" isBoss="False" hp="0" />
 		<Monster name="バイロン・ヘルカン" id="999" isBoss="False" hp="10000" />
-		<Monster name="ポリーペモス" id="1000" isBoss="True" hp="891000000" />
+		<Monster name="ポリーペモス" id="1000" isBoss="True" hp="1496880000" />
 		<Monster name="自爆兵" id="1001" isBoss="False" hp="80000" />
 		<Monster name="突撃兵" id="1002" isBoss="False" hp="50000" />
 		<Monster name="呪われし咎人" id="1003" isBoss="False" hp="9480912" />
@@ -12194,11 +12358,11 @@
 		<Monster name="次元の魔法石" id="1502" isBoss="False" hp="10000" />
 		<Monster name="次元の魔法石" id="1503" isBoss="False" hp="10000" />
 		<Monster name="次元の魔法石" id="1504" isBoss="False" hp="10000" />
-		<Monster name="ペペロ" id="2000" isBoss="True" hp="791000000" />
+		<Monster name="ペペロ" id="2000" isBoss="True" hp="1328880000" />
 		<Monster name="一等航海士" id="2003" isBoss="False" hp="20000000" />
 		<Monster name="船長" id="2004" isBoss="False" hp="80000000" />
 		<Monster name="甲板兵" id="2005" isBoss="False" hp="10000000" />
-		<Monster name="ケリーヴァン" id="3000" isBoss="True" hp="866000000" />
+		<Monster name="ケリーヴァン" id="3000" isBoss="True" hp="1454880000" />
 		<Monster name="副船長" id="3002" isBoss="False" hp="15000000" />
 		<Monster name="上級甲板兵" id="3003" isBoss="False" hp="10000000" />
 		<Monster name="タアナン" id="3004" isBoss="False" hp="100000000" />
@@ -12210,19 +12374,19 @@
 		<Monster name="ジャックを討伐せよ" id="913" isBoss="False" hp="0" />
 		<Monster name="【ボス】バルボサを討伐せよ" id="914" isBoss="False" hp="0" />
 		<Monster name="次元の魔法石" id="1501" isBoss="False" hp="500000" />
-		<Monster name="船員" id="76601" isBoss="False" hp="2000000" />
-		<Monster name="船員" id="76602" isBoss="False" hp="2000000" />
-		<Monster name="船員" id="76603" isBoss="False" hp="2000000" />
-		<Monster name="船員" id="76604" isBoss="False" hp="2000000" />
-		<Monster name="トゥンカ" id="76609" isBoss="True" hp="80000000" />
+		<Monster name="船員" id="76601" isBoss="False" hp="3780000" />
+		<Monster name="船員" id="76602" isBoss="False" hp="3780000" />
+		<Monster name="船員" id="76603" isBoss="False" hp="3780000" />
+		<Monster name="船員" id="76604" isBoss="False" hp="3780000" />
+		<Monster name="トゥンカ" id="76609" isBoss="True" hp="472500000" />
 		<Monster name="射手の亡霊" id="76610" isBoss="False" hp="2000000" />
-		<Monster name="魔術師の亡霊" id="76611" isBoss="True" hp="2000000" />
+		<Monster name="魔術師の亡霊" id="76611" isBoss="True" hp="8820000" />
 		<Monster name="設置型爆弾" id="76615" isBoss="False" hp="500000" />
-		<Monster name="フォンク" id="76618" isBoss="False" hp="30000000" />
-		<Monster name="バルボサ" id="76619" isBoss="True" hp="100000000" />
+		<Monster name="フォンク" id="76618" isBoss="False" hp="132300000" />
+		<Monster name="バルボサ" id="76619" isBoss="True" hp="551250000" />
 		<Monster name="トゥンカ" id="76620" isBoss="True" hp="1000000" />
-		<Monster name="ジャック" id="76626" isBoss="True" hp="130000000" />
-		<Monster name="ミニジャック" id="76635" isBoss="False" hp="1000000" />
+		<Monster name="ジャック" id="76626" isBoss="True" hp="472500000" />
+		<Monster name="ミニジャック" id="76635" isBoss="False" hp="2872800" />
 		<Monster name="テイラー" id="76637" isBoss="False" hp="500000" />
 		<Monster name="善良な魔石" id="76638" isBoss="False" hp="100000" />
 		<Monster name="善良な魔石" id="76639" isBoss="False" hp="100000" />
@@ -12307,25 +12471,25 @@
 		<Monster name="アークデヴァ魔術師" id="2027" isBoss="False" hp="3500000" />
 		<Monster name="アークデヴァ射手" id="2028" isBoss="False" hp="3500000" />
 		<Monster name="アークデヴァ剣闘士" id="2032" isBoss="False" hp="6000000" />
-		<Monster name="ナイトメア" id="76901" isBoss="True" hp="440000000" />
-		<Monster name="キャンドルスパイダー" id="76902" isBoss="True" hp="490000000" />
-		<Monster name="リリス" id="76903" isBoss="True" hp="590000000" />
-		<Monster name="火の精霊" id="769015" isBoss="False" hp="5000000" />
+		<Monster name="ナイトメア" id="76901" isBoss="True" hp="1153845000" />
+		<Monster name="キャンドルスパイダー" id="76902" isBoss="True" hp="1309770000" />
+		<Monster name="リリス" id="76903" isBoss="True" hp="1450102500" />
+		<Monster name="火の精霊" id="769015" isBoss="False" hp="13111875" />
 	</Zone>
 	<Zone id="770" name="ラケリスの廃墟" >
 		<Monster name="復活したクリューエルハウンドを討伐せよ。" id="911" isBoss="False" hp="0" />
 		<Monster name="復活したベルベロスを討伐せよ。" id="912" isBoss="False" hp="0" />
 		<Monster name="ラケリスを討伐せよ。" id="913" isBoss="False" hp="0" />
 		<Monster name="【ボス】次元の魔法石を通じてラケリスの空間に移動後、ラケリスを討伐せよ。" id="914" isBoss="False" hp="0" />
-		<Monster name="復活したクリューエルハウンド" id="1000" isBoss="True" hp="1400000000" />
+		<Monster name="復活したクリューエルハウンド" id="1000" isBoss="True" hp="2510000000" />
 		<Monster name="復活したクリューエルハウンド" id="1001" isBoss="False" hp="12670" />
 		<Monster name="次元の魔法石" id="1501" isBoss="False" hp="10000" />
 		<Monster name="次元の魔法石" id="1502" isBoss="False" hp="10000" />
 		<Monster name="次元の魔法石" id="1503" isBoss="False" hp="10000" />
-		<Monster name="復活したベルベロス" id="2000" isBoss="True" hp="1248000000" />
+		<Monster name="復活したベルベロス" id="2000" isBoss="True" hp="2300000000" />
 		<Monster name="空腹の子グモ" id="2001" isBoss="False" hp="2000000000" />
 		<Monster name="クモの卵" id="2002" isBoss="False" hp="100000" />
-		<Monster name="ラケリス" id="3000" isBoss="True" hp="1344000000" />
+		<Monster name="ラケリス" id="3000" isBoss="True" hp="2890000000" />
 	</Zone>
 	<Zone id="773" name="黒紋塔（上級）" >
 		<Monster name="浄化のトーテム" id="1001" isBoss="False" hp="10000" />
@@ -12607,6 +12771,31 @@
 		<Monster name="上級疫病の闘士" id="6007" isBoss="False" hp="369706" />
 		<Monster name="逆襲のナダイム" id="6008" isBoss="False" hp="369706" />
 		<Monster name="上級アダノックの侍従" id="9001" isBoss="False" hp="0" />
+	</Zone>
+	<Zone id="794" name="サイラクス研究基地" >
+		<Monster name="ケーブキーパーを討伐せよ" id="911" isBoss="False" hp="0" />
+		<Monster name="レニムを討伐せよ" id="912" isBoss="False" hp="0" />
+		<Monster name="サイラクスを討伐せよ" id="913" isBoss="False" hp="0" />
+		<Monster name="鉱車" id="999" isBoss="False" hp="945" />
+		<Monster name="ケーブキーパー" id="1000" isBoss="True" hp="1400000000" />
+		<Monster name="次元の魔法石" id="1501" isBoss="False" hp="10000" />
+		<Monster name="次元の魔法石" id="1502" isBoss="False" hp="10000" />
+		<Monster name="次元の魔法石" id="1503" isBoss="False" hp="10000" />
+		<Monster name="レニム" id="2000" isBoss="True" hp="1350000000" />
+		<Monster name="サイラクス" id="3000" isBoss="True" hp="1600000000" />
+		<Monster name="ビドン" id="5001" isBoss="False" hp="366797" />
+		<Monster name="アークデヴァ魔術師" id="5002" isBoss="False" hp="27000000" />
+		<Monster name="アークデヴァ射手" id="5003" isBoss="False" hp="23000000" />
+		<Monster name="アークデヴァ剣闘士" id="5004" isBoss="False" hp="32000000" />
+		<Monster name="アークデヴァ射手" id="6001" isBoss="False" hp="4000000" />
+		<Monster name="アークデヴァ射手" id="6002" isBoss="False" hp="4000000" />
+		<Monster name="アークデヴァ射手" id="6003" isBoss="False" hp="4000000" />
+		<Monster name="アークデヴァ指揮官" id="6004" isBoss="False" hp="100" />
+		<Monster name="ゴブリン" id="6005" isBoss="False" hp="1000000000" />
+		<Monster name="ゴブリン" id="6006" isBoss="False" hp="1000000000" />
+		<Monster name="ゴブリン" id="6007" isBoss="False" hp="1000000000" />
+		<Monster name="怪しい老人" id="6008" isBoss="False" hp="100" />
+		<Monster name="アークデヴァ指揮官" id="6009" isBoss="False" hp="100" />
 	</Zone>
 	<Zone id="795" name="クチャートの鉱山" >
 		<Monster name="宝物運搬兵士" id="101" isBoss="False" hp="13038" />
@@ -13209,38 +13398,38 @@
 		<Monster name="！！！" id="4002" isBoss="False" hp="240000" />
 		<Monster name="突撃サリサリ" id="5001" isBoss="False" hp="240000" />
 		<Monster name="自由奔放サリサリ" id="5004" isBoss="False" hp="240000" />
-		<Monster name="サリサリ" id="1000100" isBoss="False" hp="66000" />
-		<Monster name="病変した熊" id="1000200" isBoss="False" hp="118800" />
-		<Monster name="乱暴なクマ" id="1000201" isBoss="False" hp="316800" />
-		<Monster name="乱暴なクマ" id="1000202" isBoss="False" hp="316800" />
-		<Monster name="ゾンビ鉱夫" id="1000300" isBoss="False" hp="316800" />
-		<Monster name="ゾンビ鉱夫" id="1000301" isBoss="False" hp="316800" />
-		<Monster name="飴を持ったネコ" id="1000400" isBoss="False" hp="66000" />
-		<Monster name="ピクシー" id="1000500" isBoss="False" hp="66000" />
-		<Monster name="アンデッドポポリ" id="1000700" isBoss="False" hp="316800" />
-		<Monster name="アンデッドポポリ" id="1000701" isBoss="False" hp="316800" />
-		<Monster name="ストーンヘッド" id="1000800" isBoss="False" hp="66000" />
-		<Monster name="シヌス海賊" id="1001100" isBoss="False" hp="316800" />
-		<Monster name="シヌス海賊" id="1001101" isBoss="False" hp="316800" />
-		<Monster name="流浪のポポリ" id="1001200" isBoss="False" hp="475200" />
-		<Monster name="ドベルマン・エリート" id="1001401" isBoss="False" hp="316800" />
-		<Monster name="シャドークーガ" id="1001500" isBoss="False" hp="316800" />
-		<Monster name="シャドークーガ" id="1001501" isBoss="False" hp="316800" />
-		<Monster name="地獄のレッドインプ" id="1001600" isBoss="False" hp="316800" />
-		<Monster name="地獄のレッドインプ" id="1001601" isBoss="False" hp="316800" />
-		<Monster name="病変した猪" id="1001700" isBoss="False" hp="118800" />
-		<Monster name="病変した狼" id="1001900" isBoss="False" hp="118800" />
-		<Monster name="カマラ" id="1002000" isBoss="False" hp="316800" />
-		<Monster name="奴隷管理人" id="1002100" isBoss="False" hp="316800" />
-		<Monster name="プリオン戦士" id="1002300" isBoss="False" hp="316800" />
-		<Monster name="プリオン狂人" id="1002400" isBoss="False" hp="316800" />
-		<Monster name="アクタス" id="1002500" isBoss="False" hp="316800" />
-		<Monster name="ブラッドソーサラー" id="1002600" isBoss="False" hp="442200" />
-		<Monster name="ジャイアントフカ" id="1002702" isBoss="False" hp="316800" />
-		<Monster name="ビッグフカ" id="1002703" isBoss="False" hp="264000" />
-		<Monster name="ノーマルフカ" id="1002704" isBoss="False" hp="132000" />
-		<Monster name="フカ" id="1002705" isBoss="False" hp="66000" />
-		<Monster name="シャドウ・ハイエナ" id="1002800" isBoss="False" hp="316800" />
+		<Monster name="サリサリ" id="1000100" isBoss="False" hp="76560" />
+		<Monster name="病変した熊" id="1000200" isBoss="False" hp="137808" />
+		<Monster name="乱暴なクマ" id="1000201" isBoss="False" hp="367488" />
+		<Monster name="乱暴なクマ" id="1000202" isBoss="False" hp="367488" />
+		<Monster name="ゾンビ鉱夫" id="1000300" isBoss="False" hp="367488" />
+		<Monster name="ゾンビ鉱夫" id="1000301" isBoss="False" hp="367488" />
+		<Monster name="飴を持ったネコ" id="1000400" isBoss="False" hp="76560" />
+		<Monster name="ピクシー" id="1000500" isBoss="False" hp="76560" />
+		<Monster name="アンデッドポポリ" id="1000700" isBoss="False" hp="367488" />
+		<Monster name="アンデッドポポリ" id="1000701" isBoss="False" hp="367488" />
+		<Monster name="ストーンヘッド" id="1000800" isBoss="False" hp="76560" />
+		<Monster name="シヌス海賊" id="1001100" isBoss="False" hp="367488" />
+		<Monster name="シヌス海賊" id="1001101" isBoss="False" hp="367488" />
+		<Monster name="流浪のポポリ" id="1001200" isBoss="False" hp="551232" />
+		<Monster name="ドベルマン・エリート" id="1001401" isBoss="False" hp="367488" />
+		<Monster name="シャドークーガ" id="1001500" isBoss="False" hp="367488" />
+		<Monster name="シャドークーガ" id="1001501" isBoss="False" hp="367488" />
+		<Monster name="地獄のレッドインプ" id="1001600" isBoss="False" hp="367488" />
+		<Monster name="地獄のレッドインプ" id="1001601" isBoss="False" hp="367488" />
+		<Monster name="病変した猪" id="1001700" isBoss="False" hp="137808" />
+		<Monster name="病変した狼" id="1001900" isBoss="False" hp="137808" />
+		<Monster name="カマラ" id="1002000" isBoss="False" hp="367488" />
+		<Monster name="奴隷管理人" id="1002100" isBoss="False" hp="367488" />
+		<Monster name="プリオン戦士" id="1002300" isBoss="False" hp="367488" />
+		<Monster name="プリオン狂人" id="1002400" isBoss="False" hp="367488" />
+		<Monster name="アクタス" id="1002500" isBoss="False" hp="367488" />
+		<Monster name="ブラッドソーサラー" id="1002600" isBoss="False" hp="512952" />
+		<Monster name="ジャイアントフカ" id="1002702" isBoss="False" hp="367488" />
+		<Monster name="ビッグフカ" id="1002703" isBoss="False" hp="306240" />
+		<Monster name="ノーマルフカ" id="1002704" isBoss="False" hp="153120" />
+		<Monster name="フカ" id="1002705" isBoss="False" hp="76560" />
+		<Monster name="シャドウ・ハイエナ" id="1002800" isBoss="False" hp="367488" />
 		<Monster name="ソーサラー" id="1003000" isBoss="False" hp="288000" />
 		<Monster name="天空の闘技場挑戦成功" id="2000104" isBoss="False" hp="100" />
 		<Monster name="クーマス石像" id="2000200" isBoss="False" hp="240000" />
@@ -13275,7 +13464,7 @@
 		<Monster name="モンスターを討伐せよ" id="917" isBoss="False" hp="0" />
 		<Monster name="【ボス】ケリーヴァンを討伐せよ" id="918" isBoss="False" hp="0" />
 		<Monster name="バイロン・ヘルカン" id="999" isBoss="False" hp="10000" />
-		<Monster name="ポリーペモス" id="1000" isBoss="True" hp="159200000" />
+		<Monster name="ポリーペモス" id="1000" isBoss="True" hp="452128000" />
 		<Monster name="自爆兵" id="1001" isBoss="False" hp="56000" />
 		<Monster name="突撃兵" id="1002" isBoss="False" hp="35000" />
 		<Monster name="呪われし咎人" id="1003" isBoss="False" hp="6636638" />
@@ -13295,11 +13484,11 @@
 		<Monster name="次元の魔法石" id="1502" isBoss="False" hp="10000" />
 		<Monster name="次元の魔法石" id="1503" isBoss="False" hp="10000" />
 		<Monster name="次元の魔法石" id="1504" isBoss="False" hp="10000" />
-		<Monster name="ペペロ" id="2000" isBoss="True" hp="128000000" />
+		<Monster name="ペペロ" id="2000" isBoss="True" hp="363520000" />
 		<Monster name="一等航海士" id="2003" isBoss="False" hp="1920000" />
 		<Monster name="船長" id="2004" isBoss="False" hp="8596638" />
 		<Monster name="甲板兵" id="2005" isBoss="False" hp="1920000" />
-		<Monster name="ケリーヴァン" id="3000" isBoss="True" hp="159200000" />
+		<Monster name="ケリーヴァン" id="3000" isBoss="True" hp="452128000" />
 		<Monster name="副船長" id="3002" isBoss="False" hp="1920000" />
 		<Monster name="上級甲板兵" id="3003" isBoss="False" hp="1920000" />
 		<Monster name="タアナン" id="3004" isBoss="False" hp="8596638" />
@@ -13571,7 +13760,7 @@
 		<Monster name="ニンピ妖精戦士" id="885117" isBoss="False" hp="3500000" />
 		<Monster name="獰猛なマリゴス" id="885118" isBoss="False" hp="3500000" />
 		<Monster name="ゴリラ" id="885119" isBoss="False" hp="3500000" />
-		<Monster name="ラマヤン・ビビッシュ" id="885121" isBoss="False" hp="2147483647" />
+		<Monster name="ラマヤン・ビビッシュ" id="885121" isBoss="False" hp="3600000000" />
 		<Monster name="アルゴンの壁" id="885122" isBoss="False" hp="3000000" />
 		<Monster name="猛毒の寄生野獣" id="885131" isBoss="False" hp="0" />
 		<Monster name="奇妙な幻影の魔石" id="885132" isBoss="False" hp="5000000" />
@@ -13938,6 +14127,32 @@
 		<Monster name="中級兵士" id="99903" isBoss="False" hp="91545" />
 		<Monster name="兵士" id="99904" isBoss="False" hp="91545" />
 	</Zone>
+	<Zone id="935" name="Ultimate RK-9格納庫" >
+		<Monster name="移動ポータル" id="100" isBoss="False" hp="10000" />
+		<Monster name="移動ポータル" id="101" isBoss="False" hp="10000" />
+		<Monster name="移動ポータル" id="102" isBoss="False" hp="10000" />
+		<Monster name="移動ポータル" id="103" isBoss="False" hp="10000" />
+		<Monster name="移動ポータル" id="104" isBoss="False" hp="10000" />
+		<Monster name="ポータルで移動し、謎の老人を追いかけよう" id="911" isBoss="False" hp="0" />
+		<Monster name="エネルギー増幅実験施設のポータルを利用せよ" id="912" isBoss="False" hp="0" />
+		<Monster name="ベンタロンを討伐せよ" id="913" isBoss="False" hp="0" />
+		<Monster name="磁場解除装備をすべて作動させよう" id="914" isBoss="False" hp="0" />
+		<Monster name="ヘキサフレオンを討伐せよ" id="915" isBoss="False" hp="0" />
+		<Monster name="Ultimate RK-9を討伐せよ" id="916" isBoss="False" hp="0" />
+		<Monster name="ベンタロン" id="1000" isBoss="True" hp="2880000000" />
+		<Monster name="時限爆弾" id="1009" isBoss="False" hp="6750000" />
+		<Monster name="次元の魔法石" id="1501" isBoss="False" hp="10000" />
+		<Monster name="ヘキサフレオン" id="2000" isBoss="True" hp="3072000000" />
+		<Monster name="Ultimate RK-9" id="3000" isBoss="True" hp="3670000000" />
+		<Monster name="格納庫の部品箱" id="5000" isBoss="False" hp="500000" />
+		<Monster name="ランダンの遺品箱" id="5001" isBoss="False" hp="500000" />
+		<Monster name="謎の老人" id="6002" isBoss="False" hp="1" />
+		<Monster name="ランダン" id="6003" isBoss="False" hp="1" />
+		<Monster name="ランダン" id="6004" isBoss="False" hp="1" />
+		<Monster name="ランダンの日記 14" id="6005" isBoss="False" hp="10000" />
+		<Monster name="ランダンの日記 239" id="6006" isBoss="False" hp="10000" />
+		<Monster name="移動ポータル" id="6007" isBoss="False" hp="10000" />
+	</Zone>
 	<Zone id="950" name="破壊された神界の門" >
 		<Monster name="硫黄のサブナク複製" id="901" isBoss="True" hp="1500000000" />
 		<Monster name="ベルゴス複製" id="902" isBoss="True" hp="1890000000" />
@@ -13953,7 +14168,7 @@
 		<Monster name="暗黒のグラドリム" id="1102" isBoss="True" hp="1014000000" />
 		<Monster name="暴風のアガレス" id="1103" isBoss="True" hp="1014000000" />
 		<Monster name="暗黒思念体" id="1120" isBoss="False" hp="1000000" />
-		<Monster name="ベルゴス" id="2000" isBoss="False" hp="99960000" />
+		<Monster name="ベルゴス" id="2000" isBoss="False" hp="125960000" />
 		<Monster name="神界の巨大弓" id="2005" isBoss="False" hp="576000" />
 		<Monster name="ストーンゴーレム" id="2500" isBoss="False" hp="0" />
 		<Monster name="ベルゴス" id="3000" isBoss="True" hp="2000000000" />
@@ -13982,25 +14197,25 @@
 		<Monster name="アークデヴァ上級魔術師" id="2027" isBoss="False" hp="4000000" />
 		<Monster name="アークデヴァ上級射手" id="2028" isBoss="False" hp="4000000" />
 		<Monster name="アークデヴァ上級剣闘士" id="2032" isBoss="False" hp="7000000" />
-		<Monster name="猛炎のナイトメア" id="76901" isBoss="True" hp="800000000" />
-		<Monster name="焦熱のキャンドルスパイダー" id="76902" isBoss="True" hp="800000000" />
-		<Monster name="妖艶なリリス" id="76903" isBoss="True" hp="1100000000" />
-		<Monster name="火の精霊" id="769015" isBoss="False" hp="9000000" />
+		<Monster name="猛炎のナイトメア" id="76901" isBoss="True" hp="1263071846" />
+		<Monster name="焦熱のキャンドルスパイダー" id="76902" isBoss="True" hp="1443510681" />
+		<Monster name="妖艶なリリス" id="76903" isBoss="True" hp="1623949516" />
+		<Monster name="火の精霊" id="769015" isBoss="False" hp="22660646" />
 	</Zone>
 	<Zone id="970" name="冥々たるラケリスの廃墟" >
 		<Monster name="復活したクリューエルハウンドを討伐せよ。" id="911" isBoss="False" hp="0" />
 		<Monster name="復活したベルベロスを討伐せよ。" id="912" isBoss="False" hp="0" />
 		<Monster name="冥々たるラケリスを討伐せよ。" id="913" isBoss="False" hp="0" />
 		<Monster name="【ボス】次元の魔法石を通じてラケリスの空間に移動後、ラケリスを討伐せよ。" id="914" isBoss="False" hp="0" />
-		<Monster name="復活したクリューエルハウンド" id="1000" isBoss="True" hp="1540000000" />
+		<Monster name="復活したクリューエルハウンド" id="1000" isBoss="True" hp="3462000000" />
 		<Monster name="復活したクリューエルハウンド" id="1001" isBoss="False" hp="12670" />
 		<Monster name="次元の魔法石" id="1501" isBoss="False" hp="10000" />
 		<Monster name="次元の魔法石" id="1502" isBoss="False" hp="10000" />
 		<Monster name="次元の魔法石" id="1503" isBoss="False" hp="10000" />
-		<Monster name="復活したベルベロス" id="2000" isBoss="True" hp="1400000000" />
+		<Monster name="復活したベルベロス" id="2000" isBoss="True" hp="2768000000" />
 		<Monster name="空腹の子グモ" id="2001" isBoss="False" hp="2000000000" />
 		<Monster name="クモの卵" id="2002" isBoss="False" hp="100000" />
-		<Monster name="冥々たるラケリス" id="3000" isBoss="True" hp="1440000000" />
+		<Monster name="冥々たるラケリス" id="3000" isBoss="True" hp="3452000000" />
 	</Zone>
 	<Zone id="975" name="苛虐のケルサイクの聖域（上級）" >
 		<Monster name="苛虐のケルサイク" id="1000" isBoss="True" hp="341391474" />
@@ -14104,6 +14319,22 @@
 		<Monster name="憎悪" id="78102" isBoss="False" hp="2071815251" />
 		<Monster name="闇" id="78103" isBoss="False" hp="2071815251" />
 	</Zone>
+	<Zone id="994" name="アルファサイラクス研究基地" >
+		<Monster name="洗脳されたケーブキーパーを討伐せよ" id="911" isBoss="False" hp="0" />
+		<Monster name="洗脳されたレニムを討伐せよ" id="912" isBoss="False" hp="0" />
+		<Monster name="アルファサイラクスを討伐せよ" id="913" isBoss="False" hp="0" />
+		<Monster name="鉱車" id="999" isBoss="False" hp="945" />
+		<Monster name="洗脳されたケーブキーパー" id="1000" isBoss="True" hp="1740000000" />
+		<Monster name="次元の魔法石" id="1501" isBoss="False" hp="10000" />
+		<Monster name="次元の魔法石" id="1502" isBoss="False" hp="10000" />
+		<Monster name="次元の魔法石" id="1503" isBoss="False" hp="10000" />
+		<Monster name="洗脳されたレニム" id="2000" isBoss="True" hp="1690000000" />
+		<Monster name="アルファサイラクス" id="3000" isBoss="True" hp="1870000000" />
+		<Monster name="ビドン" id="5001" isBoss="False" hp="366797" />
+		<Monster name="アークデヴァ魔術師" id="5002" isBoss="False" hp="34000000" />
+		<Monster name="アークデヴァ射手" id="5003" isBoss="False" hp="30000000" />
+		<Monster name="アークデヴァ剣闘士" id="5004" isBoss="False" hp="38000000" />
+	</Zone>
 	<Zone id="1022" name="帝国領地" >
 		<Monster name="黒時空の破壊者" id="101" isBoss="True" hp="9118362" />
 		<Monster name="黒時空の破壊者" id="102" isBoss="True" hp="9118362" />
@@ -14158,19 +14389,36 @@
 		<Monster name="ジャック・オー・ランタン" id="110" isBoss="False" hp="100000000" />
 		<Monster name="ジャック・オー・ランタン" id="111" isBoss="False" hp="100000000" />
 		<Monster name="ジャック・オー・ランタン" id="112" isBoss="False" hp="100000000" />
+		<Monster name="ジャックオーランタン" id="400" isBoss="False" hp="66578" />
 		<Monster name="テストクーマス" id="1000" isBoss="False" hp="147000000" />
+		<Monster name="軍団将校" id="42733" isBoss="False" hp="876340" />
+		<Monster name="軍団戦士" id="42734" isBoss="False" hp="876340" />
 		<Monster name="ギガントケルサイク" id="77101" isBoss="False" hp="0" />
 		<Monster name="ミニケルサイク" id="77102" isBoss="False" hp="0" />
-		<Monster name="天空の宝探し交換員A" id="160309" isBoss="False" hp="10000" />
-		<Monster name="天空の宝探し交換員B" id="160310" isBoss="False" hp="10000" />
-		<Monster name="天空の宝探し交換員C" id="160311" isBoss="False" hp="10000" />
-		<Monster name="天空の宝探し交換員D" id="160312" isBoss="False" hp="10000" />
+		<Monster name="汚染された高原捕食者" id="88511" isBoss="False" hp="432000000" />
+		<Monster name="ラマヤン・ニルヴァーナ" id="88516" isBoss="False" hp="1650000000" />
+		<Monster name="アカカラシュ・フェルカトゥラン" id="88517" isBoss="False" hp="1350000000" />
+		<Monster name="メルディタ" id="88519" isBoss="False" hp="1950000000" />
+		<Monster name="年末年始宝探し交換員A" id="160309" isBoss="False" hp="10000" />
+		<Monster name="年末年始宝探し交換員B" id="160310" isBoss="False" hp="10000" />
+		<Monster name="年末年始宝探し交換員C" id="160311" isBoss="False" hp="10000" />
+		<Monster name="年末年始宝探し交換員D" id="160312" isBoss="False" hp="10000" />
 		<Monster name="天空の宝探し交換員E" id="160313" isBoss="False" hp="10000" />
 		<Monster name="天空の宝探し交換員F" id="160314" isBoss="False" hp="10000" />
 		<Monster name="天空の宝探し交換員G" id="160315" isBoss="False" hp="10000" />
 		<Monster name="天空の宝探し交換員H" id="160316" isBoss="False" hp="10000" />
 		<Monster name="天空の宝探し交換員（ビギナー）" id="160317" isBoss="False" hp="10000" />
+		<Monster name="わんだふる" id="160319" isBoss="False" hp="10000" />
+		<Monster name="デュリオン" id="160320" isBoss="False" hp="10000" />
+		<Monster name="エルリオン・クベル" id="160321" isBoss="False" hp="10000" />
+		<Monster name="ギルバート・グレイス" id="160322" isBoss="False" hp="10000" />
+		<Monster name="シュリモン" id="160323" isBoss="False" hp="10000" />
+		<Monster name="アクマ・ドンカン" id="160324" isBoss="False" hp="10000" />
+		<Monster name="ロードス" id="160325" isBoss="False" hp="10000" />
+		<Monster name="フレイア・ローヘン" id="160326" isBoss="False" hp="10000" />
 		<Monster name="クリスマスギリード" id="300937" isBoss="False" hp="723" />
+		<Monster name="堅硬のカラシュアルメロ" id="885061" isBoss="False" hp="405000000" />
+		<Monster name="シャンドラ・マナイア" id="885200" isBoss="False" hp="3150000000" />
 		<Monster name="シャドウ" id="1010100" isBoss="False" hp="1" />
 		<Monster name="シャドウ" id="1010101" isBoss="False" hp="1" />
 		<Monster name="シャドウ" id="1010102" isBoss="False" hp="1" />
@@ -14442,6 +14690,7 @@
 		<Monster name="カイアトール連盟警備兵" id="3000024" isBoss="False" hp="599206" />
 		<Monster name="カブトムシ" id="3022123" isBoss="False" hp="1" />
 		<Monster name="黄金のカブトムシ" id="3022124" isBoss="False" hp="1" />
+		<Monster name="ケルサイク" id="9751000" isBoss="False" hp="5974350795" />
 		<Monster name="守護の精霊" id="10235001" isBoss="False" hp="7612" />
 		<Monster name="守護の精霊" id="10235002" isBoss="False" hp="9435" />
 		<Monster name="守護の精霊" id="10235003" isBoss="False" hp="12396" />
@@ -14498,6 +14747,14 @@
 		<Monster name="破壊の精霊" id="10238100" isBoss="False" hp="0" />
 		<Monster name="デュリオンの幻影" id="20150805" isBoss="False" hp="999999999" />
 		<Monster name="桃色ギリード" id="20160322" isBoss="False" hp="999999999" />
+		<Monster name="ギガントデュリオン" id="20170710" isBoss="False" hp="1496000000" />
+		<Monster name="ギガントクーマス" id="20170711" isBoss="False" hp="1496000000" />
+		<Monster name="ギガントカシュバル" id="20170712" isBoss="False" hp="1496000000" />
+		<Monster name="ギガントメルディタ" id="20170713" isBoss="False" hp="1496000000" />
+		<Monster name="迷子のフカ" id="20170715" isBoss="False" hp="500" />
+		<Monster name="おしゃれピクシー" id="20170716" isBoss="False" hp="500" />
+		<Monster name="乱暴な赤い悪魔" id="20170717" isBoss="False" hp="500" />
+		<Monster name="老練家コボルト" id="20170718" isBoss="False" hp="500" />
 		<Monster name="セントリータワー" id="30301001" isBoss="False" hp="36532" />
 		<Monster name="セントリータワー" id="30301002" isBoss="False" hp="56414" />
 		<Monster name="セントリータワー" id="30301003" isBoss="False" hp="90553" />
@@ -14521,7 +14778,7 @@
 		<Monster name="宝箱" id="88888888" isBoss="False" hp="100000000" />
 		<Monster name="宝箱" id="88888889" isBoss="False" hp="99999999" />
 		<Monster name="魔女の不思議な宝箱" id="88888890" isBoss="False" hp="1" />
-		<Monster name="1周年祝祭のびっくり箱" id="98888888" isBoss="False" hp="1" />
+		<Monster name="バラカ祝祭のビックリボックス" id="98888888" isBoss="False" hp="1" />
 		<Monster name="1周年祝祭のびっくり箱" id="98888889" isBoss="False" hp="1" />
 		<Monster name="ガブガブくん" id="99999991" isBoss="False" hp="100000000" />
 		<Monster name="ガブガブくん" id="99999992" isBoss="False" hp="99999999" />

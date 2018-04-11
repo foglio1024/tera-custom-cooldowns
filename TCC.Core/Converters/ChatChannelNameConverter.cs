@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
-using TCC.Data;
 using TCC.ViewModels;
 
 namespace TCC.Converters
@@ -87,10 +86,20 @@ namespace TCC.Converters
                     return "+12";
                 case ChatChannel.Enchant15:
                     return "+15";
+                case ChatChannel.Enchant7:
+                    return "+7";
+                case ChatChannel.Enchant8:
+                    return "+8";
+                case ChatChannel.Enchant9:
+                    return "+9";
                 case ChatChannel.RaidLeader:
                     return "Leader";
                 case ChatChannel.Bargain:
                     return "Offer";
+                case ChatChannel.WorldBoss:
+                    return "WB";
+                case ChatChannel.SystemDefault:
+                    return "System";
                 default:
                     return ch.ToString();
             }

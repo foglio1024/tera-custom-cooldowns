@@ -6,9 +6,9 @@
              xmlns:local="clr-namespace:TCC.Controls"
              mc:Ignorable="d" Loaded="UserControl_Loaded" >
     <Grid Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" ClipToBounds="False">
-        <local:Arc Width="52" 
-                   Height="52" 
-                   StrokeThickness="5" 
+        <local:Arc Width="58" 
+                   Height="58" 
+                   StrokeThickness="7" 
                    Stroke="#ffbd3d" 
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
@@ -18,8 +18,11 @@
         </local:Arc>
         <local:FixedSkillControl HorizontalAlignment="Center"
                                  VerticalAlignment="Center" Padding="25" Margin="-25"
-                                 DataContext="{Binding Cooldown}" />
-
+                                 DataContext="{Binding Cooldown}" >
+            <local:FixedSkillControl.LayoutTransform>
+                <ScaleTransform ScaleX=".95" ScaleY=".95"></ScaleTransform>
+            </local:FixedSkillControl.LayoutTransform>
+        </local:FixedSkillControl>
 
 
 
@@ -27,22 +30,25 @@
                 Opacity="{Binding Buff.Seconds}"
                 BorderThickness="0"
                 Background="#ffbd3d"
-                Width="19" 
-                Height="19"
+                Height="Auto"
+                MinWidth="20"
                 HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                CornerRadius="11"
-                Margin="0,0,2,2">
-            <Viewbox StretchDirection="DownOnly" Width="17" Stretch="Uniform">
-                
-            <TextBlock Foreground="Black" 
-                       Text="{Binding Buff.Seconds}"
+                VerticalAlignment="Top"
+                CornerRadius="5"
+                Margin="0,-4,2,0"
+                Padding="4,0">
+            <TextBlock Foreground="#d000" 
+                       Text="{Binding DurationLabel, RelativeSource={RelativeSource AncestorType=local:BuffCooldownControl}}"
                        TextAlignment="Center"
                        HorizontalAlignment="Center"
-                       VerticalAlignment="Stretch"
-                       FontSize="14"
-                       FontWeight="DemiBold"/>
-            </Viewbox>
+                       VerticalAlignment="Center"
+                       FontSize="15"
+                       FontFamily="{StaticResource ArialMonoBold}"
+                       Margin="0,1,0,0"/>
         </Border>
+        <!--<Grid.CacheMode>
+            <BitmapCache RenderAtScale="2"></BitmapCache>
+        </Grid.CacheMode>-->
+
     </Grid>
 </UserControl>

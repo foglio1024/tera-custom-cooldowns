@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TCC.Data.Databases;
+﻿using TCC.Data.Databases;
 using TCC.Parsing.Messages;
 
 namespace TCC.Data
@@ -65,12 +60,12 @@ namespace TCC.Data
             ListingId = p.Listing;
             PlayerId = p.PlayerId;
 
-            Amount = new MessagePiece("Offer for " + p.Amount.ToString(), MessagePieceType.Simple, Channel);
+            Amount = new MessagePiece("Offer for " + p.Amount.ToString(), MessagePieceType.Simple, Channel, SettingsManager.FontSize, false);
             OfferedPrice = new MessagePiece(new Money(p.OfferedPrice), Channel);
             StartingPrice = new MessagePiece(new Money(p.SellerPrice), Channel);
             Listing = new MessagePiece("");
             
-            SessionManager.ItemsDatabase.Items.TryGetValue((uint)p.Item, out Item i);
+            ItemsDatabase.Instance.Items.TryGetValue((uint)p.Item, out Item i);
             if(i != null)
             {
                 Listing.Text = "<"+ i.Name + ">";

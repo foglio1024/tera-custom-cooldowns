@@ -11,6 +11,7 @@ namespace TCC.ClassSpecific
     {
         const int HurricaneId = 60010;
         const int HurricaneDuration = 120000;
+        static readonly int VowId = 700100;
 
         public static List<uint> CommonBuffs = new List<uint>
         {
@@ -56,6 +57,10 @@ namespace TCC.ClassSpecific
             {
                 ((MysticBarManager)ClassManager.CurrentClassManager).Auras.SwiftAura = true;
             }
+            else if (p.AbnormalityId == VowId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            {
+                ((MysticBarManager)ClassManager.CurrentClassManager).Vow.Buff.Start(p.Duration);
+            }
         }
         public static void CheckAura(S_ABNORMALITY_REFRESH p)
         {
@@ -75,6 +80,11 @@ namespace TCC.ClassSpecific
             {
                 ((MysticBarManager)ClassManager.CurrentClassManager).Auras.SwiftAura = true;
             }
+            else if (p.AbnormalityId == VowId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            {
+                ((MysticBarManager)ClassManager.CurrentClassManager).Vow.Buff.Refresh(p.Duration);
+            }
+
         }
         public static void CheckAuraEnd(S_ABNORMALITY_END p)
         {
@@ -94,6 +104,12 @@ namespace TCC.ClassSpecific
             {
                 ((MysticBarManager)ClassManager.CurrentClassManager).Auras.SwiftAura = false;
             }
+            else if (p.AbnormalityId == VowId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            {
+                ((MysticBarManager)ClassManager.CurrentClassManager).Vow.Buff.Refresh(0);
+            }
+
         }
+
     }
 }

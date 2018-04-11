@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TCC.Data.Databases
 {
@@ -13,7 +10,7 @@ namespace TCC.Data.Databases
         public static void Load()
         {
             Benefits = new Dictionary<uint, string>();
-            var f = File.OpenText(Environment.CurrentDirectory + "/resources/data/account-benefit.tsv");
+            var f = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "/resources/data/account-benefit.tsv");
             while (true)
             {
                 var line = f.ReadLine();

@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
-using System.Windows.Media;
+using System.Windows.Forms;
 using System.Windows.Threading;
 using System.Xml.Linq;
 using TCC.Data;
 using TCC.Data.Databases;
+using TCC.Parsing;
 using TCC.Parsing.Messages;
-using TCC.Windows;
 
 namespace TCC.ViewModels
 {
@@ -32,13 +32,15 @@ namespace TCC.ViewModels
         public ICollectionView T3Dungs { get; set; }
         public ICollectionView T4Dungs { get; set; }
         public ICollectionView T5Dungs { get; set; }
+        public ICollectionView AllDungeons { get; set; }
+        public ICollectionView Items { get; set; }
         public Character CurrentCharacter
         {
-            get => Characters.FirstOrDefault(x => x.Id == SessionManager.CurrentPlayer.PlayerId);
+            get => Characters.ToSyncArray().FirstOrDefault(x => x.Id == SessionManager.CurrentPlayer.PlayerId);
         }
         public Character SelectedCharacter
         {
-            get => Characters.FirstOrDefault(x => x.Id == _selectedCharacterId);
+            get => Characters.ToSyncArray().FirstOrDefault(x => x.Id == _selectedCharacterId);
         }
 
 
@@ -49,12 +51,22 @@ namespace TCC.ViewModels
             EventGroups = new SynchronizedObservableCollection<EventGroup>(_dispatcher);
             Markers = new SynchronizedObservableCollection<TimeMarker>(_dispatcher);
             SpecialEvents = new SynchronizedObservableCollection<DailyEvent>(_dispatcher);
-            LoadCharacters();
+            LoadCharDoc();
         }
 
         public void LoadEvents(DayOfWeek today, string region)
         {
             ClearEvents();
+            if (region == null)
+            {
+                ChatWindowViewModel.Instance.AddTccMessage("Unable to load events.");
+                return;
+            }
+            LoadEventFile(today, region);
+        }
+        private void LoadEventFile(DayOfWeek today, string region)
+        {
+            var yesterday = today - 1;
             if (region.StartsWith("EU")) region = "EU";
             var path = $"resources/config/events/events-{region}.xml";
             if (!File.Exists(path))
@@ -64,14 +76,14 @@ namespace TCC.ViewModels
                 var ev = new XElement("Event",
                     new XAttribute("name", "Example Event"),
                     new XAttribute("days", "*"),
-                    new XAttribute("start", 12),
-                    new XAttribute("end", 15),
+                    new XAttribute("start", "12:00"),
+                    new XAttribute("end", "15:00"),
                     new XAttribute("color", "ff5566"));
                 var ev2 = new XElement("Event",
                         new XAttribute("name", "Example event 2"),
                         new XAttribute("days", "*"),
-                        new XAttribute("start", 16),
-                        new XAttribute("duration", 3),
+                        new XAttribute("start", "16:00"),
+                        new XAttribute("duration", "3:00"),
                         new XAttribute("color", "ff5566"));
                 eg.Add(ev);
                 eg.Add(ev2);
@@ -80,68 +92,129 @@ namespace TCC.ViewModels
                     Directory.CreateDirectory($"resources/config/events");
                 root.Save(path);
             }
-            XDocument d = XDocument.Load(path);
-            foreach (var egElement in d.Descendants().Where(x => x.Name == "EventGroup"))
+
+            try
             {
-                var eg = new EventGroup(egElement.Attribute("name").Value);
-                foreach (var evElement in egElement.Descendants().Where(x => x.Name == "Event"))
+                XDocument d = XDocument.Load(path);
+                foreach (var egElement in d.Descendants().Where(x => x.Name == "EventGroup"))
                 {
-                    if (evElement.Attribute("days").Value != "*")
+                    var egName = egElement.Attribute("name").Value;
+                    var egRc = egElement.Attribute("remote") != null && bool.Parse(egElement.Attribute("remote").Value);
+                    var egStart = egElement.Attribute("start") != null
+                        ? DateTime.Parse(egElement.Attribute("start").Value)
+                        : DateTime.MinValue;
+                    var egEnd = egElement.Attribute("end") != null
+                        ? DateTime.Parse(egElement.Attribute("end").Value).AddDays(1)
+                        : DateTime.MaxValue;
+
+                    if (TimeManager.Instance.CurrentServerTime < egStart ||
+                        TimeManager.Instance.CurrentServerTime > egEnd) continue;
+
+                    var eg = new EventGroup(egName, egStart, egEnd, egRc);
+                    foreach (var evElement in egElement.Descendants().Where(x => x.Name == "Event"))
                     {
-                        if (evElement.Attribute("days").Value.Contains(','))
+                        var isYesterday = false;
+                        var isToday = false;
+
+                        if (evElement.Attribute("days").Value != "*")
                         {
-                            var days = evElement.Attribute("days").Value.Split(',');
-                            bool isToday = false;
-                            foreach (var dayString in days)
+                            if (evElement.Attribute("days").Value.Contains(','))
                             {
-                                var day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), dayString);
-                                if (day == today) isToday = true;
+                                var days = evElement.Attribute("days").Value.Split(',');
+                                foreach (var dayString in days)
+                                {
+                                    var day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), dayString);
+                                    if (day == today) isToday = true;
+                                    if (day == yesterday) isYesterday = true;
+                                }
                             }
-                            if (!isToday) continue;
+                            else
+                            {
+                                var eventDay = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), evElement.Attribute("days").Value);
+                                isToday = eventDay == today;
+                                isYesterday = eventDay == yesterday;
+                            }
                         }
                         else
                         {
-                            var eventDay = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), evElement.Attribute("days").Value);
-                            if (eventDay != today)
+                            isToday = true;
+                            isYesterday = true;
+                        }
+
+                        if (!isToday && !isYesterday) continue;
+
+                        var name = evElement.Attribute("name").Value;
+                        var parsedStart = DateTime.Parse(evElement.Attribute("start").Value, CultureInfo.InvariantCulture);
+                        TimeSpan parsedDuration = TimeSpan.Zero;
+                        DateTime parsedEnd = DateTime.Now;
+                        bool isDuration;
+                        if (evElement.Attribute("duration") != null)
+                        {
+                            parsedDuration = TimeSpan.Parse(evElement.Attribute("duration").Value, CultureInfo.InvariantCulture);
+                            isDuration = true;
+                        }
+                        else if (evElement.Attribute("end") != null)
+                        {
+                            parsedEnd = DateTime.Parse(evElement.Attribute("end").Value, CultureInfo.InvariantCulture);
+                            isDuration = false;
+                        }
+                        else
+                        {
+                            parsedDuration = TimeSpan.Zero;
+                            parsedEnd = parsedStart;
+                            isDuration = true;
+                        }
+
+                        var color = "5599ff";
+
+                        var start = parsedStart.Hour + parsedStart.Minute / 60D;
+                        var end = isDuration ? parsedDuration.Hours + parsedDuration.Minutes / 60D : parsedEnd.Hour + parsedEnd.Minute / 60D;
+
+                        if (evElement.Attribute("color") != null)
+                        {
+                            color = evElement.Attribute("color").Value;
+                        }
+                        if (isYesterday)
+                        {
+                            if (!EventUtils.EndsToday(start, end, isDuration))
                             {
-                                continue;
+                                var e1 = new DailyEvent(name, parsedStart.Hour, 24, 0, color, false);
+                                end = start + end - 24;
+                                start = 0;
+                                var e2 = new DailyEvent(name, parsedStart.Hour, parsedStart.Minute, end, color, isDuration);
+                                if (isToday) eg.AddEvent(e1);
+                                eg.AddEvent(e2);
+                            }
+                            else if (isToday)
+                            {
+                                var ev = new DailyEvent(name, parsedStart.Hour, parsedStart.Minute, end, color, isDuration);
+                                eg.AddEvent(ev);
                             }
                         }
+                        else
+                        {
+                            var ev = new DailyEvent(name, parsedStart.Hour, parsedStart.Minute, end, color, isDuration);
+                            eg.AddEvent(ev);
+                        }
                     }
-
-
-                    var name = evElement.Attribute("name").Value;
-                    int start = int.Parse(evElement.Attribute("start").Value);
-                    int durationOrEnd;
-                    bool isDuration;
-                    if (evElement.Attribute("duration") != null)
-                    {
-                        durationOrEnd = int.Parse(evElement.Attribute("duration").Value);
-                        isDuration = true;
-                    }
-                    else if (evElement.Attribute("end") != null)
-                    {
-                        durationOrEnd = int.Parse(evElement.Attribute("end").Value);
-                        isDuration = false;
-                    }
-                    else
-                    {
-                        durationOrEnd = 0;
-                        isDuration = true;
-                    }
-
-                    var color = "5599ff";
-                    if (evElement.Attribute("color") != null)
-                    {
-                        color = evElement.Attribute("color").Value;
-                    }
-                    var ev = new DailyEvent(name, start, durationOrEnd, color, isDuration);
-                    eg.AddEvent(ev);
+                    if (eg.Events.Count != 0) AddEventGroup(eg);
                 }
-                if(eg.Events.Count != 0) AddEventGroup(eg);
+                SpecialEvents.Add(new DailyEvent("Reset", TimeManager.Instance.ResetHour, 0, 0, "ff0000"));
+
+
+
             }
-            SpecialEvents.Add(new DailyEvent("Reset", TimeManager.Instance.ResetHour, 0, "ff0000"));
+            catch (Exception)
+            {
+
+                var res = System.Windows.Forms.MessageBox.Show($"There was an error while reading events-{region}.xml. Try correcting the error and press Retry to try again, else press Cancel to build a default config file.", "TCC", MessageBoxButtons.RetryCancel);
+
+                if (res == DialogResult.Cancel) File.Delete(path);
+                LoadEventFile(today, region);
+                return;
+            }
         }
+
         public void ClearEvents()
         {
             EventGroups.Clear();
@@ -149,6 +222,7 @@ namespace TCC.ViewModels
         }
         public void SelectCharacter(Character c)
         {
+            if (c == null) return;
             _selectedCharacterId = c.Id;
             foreach (var ch in Characters)
             {
@@ -157,29 +231,38 @@ namespace TCC.ViewModels
             }
             NotifyPropertyChanged(nameof(SelectedCharacter));
 
+            AllDungeons = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
             SoloDungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
             T2Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
             T3Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
             T4Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
             T5Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
+            Items = new CollectionViewSource { Source = SelectedCharacter.Gear }.View;
 
+            AllDungeons.Filter = null;
+            Items.Filter = null;
             SoloDungs.Filter = d => DungeonDatabase.Instance.DungeonDefinitions[((DungeonCooldown)d).Id].Tier == DungeonTier.Solo;
             T2Dungs.Filter = d => DungeonDatabase.Instance.DungeonDefinitions[((DungeonCooldown)d).Id].Tier == DungeonTier.Tier2;
             T3Dungs.Filter = d => DungeonDatabase.Instance.DungeonDefinitions[((DungeonCooldown)d).Id].Tier == DungeonTier.Tier3;
             T4Dungs.Filter = d => DungeonDatabase.Instance.DungeonDefinitions[((DungeonCooldown)d).Id].Tier == DungeonTier.Tier4;
             T5Dungs.Filter = d => DungeonDatabase.Instance.DungeonDefinitions[((DungeonCooldown)d).Id].Tier == DungeonTier.Tier5;
 
+            AllDungeons.SortDescriptions.Add(new SortDescription("Tier", ListSortDirection.Ascending));
+            Items.SortDescriptions.Add(new SortDescription("Piece", ListSortDirection.Ascending));
+
+            NotifyPropertyChanged(nameof(AllDungeons));
             NotifyPropertyChanged(nameof(SoloDungs));
             NotifyPropertyChanged(nameof(T2Dungs));
             NotifyPropertyChanged(nameof(T3Dungs));
             NotifyPropertyChanged(nameof(T4Dungs));
             NotifyPropertyChanged(nameof(T5Dungs));
-
+            NotifyPropertyChanged(nameof(Items));
             //_dispatcher.Invoke(() => WindowManager.InfoWindow.AnimateICitems());
         }
         public void ShowWindow()
         {
             if (!_dispatcher.Thread.IsAlive) return;
+            LoadEvents(DateTime.Now.DayOfWeek, TimeManager.Instance.CurrentRegion);
             WindowManager.InfoWindow.ShowWindow();
         }
 
@@ -190,7 +273,7 @@ namespace TCC.ViewModels
                 DiscardFirstVanguardPacket = false;
                 return;
             }
-            var ch = Characters.FirstOrDefault(c => c.Id == SessionManager.CurrentPlayer.PlayerId);
+            var ch = Characters.ToSyncArray().FirstOrDefault(c => c.Id == SessionManager.CurrentPlayer.PlayerId);
             if (ch != null)
             {
                 ch.WeekliesDone = x.WeeklyDone;
@@ -217,7 +300,7 @@ namespace TCC.ViewModels
         }
         public void SetDungeons(Dictionary<uint, short> dungeonCooldowns)
         {
-            var ch = Characters.FirstOrDefault(x => x.Id == SessionManager.CurrentPlayer.PlayerId);
+            var ch = Characters.ToSyncArray().FirstOrDefault(x => x.Id == SessionManager.CurrentPlayer.PlayerId);
             ch?.UpdateDungeons(dungeonCooldowns);
         }
         public void EngageDungeon(uint dgId)
@@ -250,14 +333,63 @@ namespace TCC.ViewModels
                     dungs.Add(dg);
                 }
 
+                XElement gear = new XElement("GearPieces");
+
+                foreach (var gearItem in c.Gear)
+                {
+                    XElement g = new XElement("Gear",
+                        new XAttribute("id", gearItem.Id),
+                        new XAttribute("piece", gearItem.Piece),
+                        new XAttribute("tier", gearItem.Tier),
+                        new XAttribute("exp", gearItem.Experience),
+                        new XAttribute("enchant", gearItem.Enchant));
+                    gear.Add(g);
+                }
+                ce.Add(gear);
                 ce.Add(dungs);
                 root.Add(ce);
             }
 
-            root.Save("resources/config/characters.xml");
+            XDocument doc = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), root);
+            SaveCharDoc(doc);
         }
 
+        private void SaveCharDoc(XDocument doc)
+        {
+            try
+            {
+                var fs = new FileStream(AppDomain.CurrentDomain.BaseDirectory + "/resources/config/characters.xml", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+                fs.SetLength(0);
+                using (var sr = new StreamWriter(fs, new UTF8Encoding(true)))
+                {
+                    sr.Write(doc.Declaration + Environment.NewLine + doc);
+                }
+                fs.Close();
+            }
+            catch (Exception)
+            {
+                var res = System.Windows.MessageBox.Show("Could not write character data to characters.xml. File is being used by another process. Try again?", "TCC", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (res == MessageBoxResult.Yes) SaveCharDoc(doc);
+            }
+        }
 
+        private void LoadCharDoc()
+        {
+            try
+            {
+                LoadCharacters();
+            }
+            catch (Exception)
+            {
+                var res = System.Windows.Forms.MessageBox.Show($"There was an error while reading characters.xml. Try correcting the error and press Retry to try again, else press Cancel to delete current data.", "TCC", MessageBoxButtons.RetryCancel);
+                if (res == DialogResult.Retry) LoadCharDoc();
+                else
+                {
+                    File.Delete("resources/config/characters.xml");
+                    LoadCharDoc();
+                }
+            }
+        }
         private void LoadCharacters()
         {
             if (!File.Exists("resources/config/characters.xml")) return;
@@ -287,109 +419,34 @@ namespace TCC.ViewModels
                     dgDict.Add(dgId, dgEntries);
                 }
                 ch.UpdateDungeons(dgDict);
+                var gear = new List<GearItem>();
+                foreach (var gearEl in c.Descendants().Where(x => x.Name == "Gear"))
+                {
+                    var pieceId = Convert.ToUInt32(gearEl.Attribute("id").Value);
+                    var pieceType = (GearPiece)Enum.Parse(typeof(GearPiece), gearEl.Attribute("piece").Value);
+                    var pieceTier = (GearTier)Enum.Parse(typeof(GearTier), gearEl.Attribute("tier").Value);
+                    var pieceEnchant = Convert.ToInt32(gearEl.Attribute("enchant").Value);
+                    var exp = Convert.ToUInt32(gearEl.Attribute("exp").Value);
+                    gear.Add(new GearItem(pieceId, pieceTier, pieceType, pieceEnchant, exp));
+                }
+                ch.UpdateGear(gear);
                 Characters.Add(ch);
             }
         }
 
         public void AddEventGroup(EventGroup eg)
         {
-            if (EventGroups.FirstOrDefault(x => x.Name == eg.Name) != null) return;
-            EventGroups.Add(eg);
-        }
-    }
-
-    public class TimeMarker : TSPropertyChanged
-    {
-        private readonly DispatcherTimer _t = new DispatcherTimer();
-        private DateTime _dateTime;
-        private readonly int _hourOffset;
-        public string TimeString
-        {
-            get => _dateTime.ToShortTimeString();
-        }
-        public double TimeFactor
-        {
-            get => ((_dateTime.Hour * 60 + _dateTime.Minute) * 60) / TimeManager.SecondsInDay;
-        }
-        public string Name { get; }
-        public string Color { get; }
-        public TimeMarker(int hourOffset, string name, string color = "ffffff")
-        {
-            _dispatcher = Dispatcher.CurrentDispatcher;
-            Name = name;
-            Color = color;
-            _hourOffset = hourOffset;
-            _dateTime = DateTime.Now.AddHours(_hourOffset);
-            _t.Interval = TimeSpan.FromSeconds(1);
-            _t.Tick += T_Tick;
-            _t.Start();
-        }
-
-        private void T_Tick(object sender, EventArgs e)
-        {
-            _dateTime = DateTime.Now.AddHours(_hourOffset);
-            NotifyPropertyChanged(nameof(TimeString));
-            NotifyPropertyChanged(nameof(TimeFactor));
-        }
-    }
-
-    public class DailyEvent : TSPropertyChanged
-    {
-        private DateTime Start { get; set; }
-        private TimeSpan Duration { get; set; }
-        private readonly TimeSpan _realDuration;
-        public double StartFactor => 60 * (Start.Hour * 60 + Start.Minute) / TimeManager.SecondsInDay;
-        public double DurationFactor => Duration.TotalSeconds / TimeManager.SecondsInDay;
-        private bool _happened = false;
-        public bool IsClose
-        {
-            get
+            var g = EventGroups.ToSyncArray().FirstOrDefault(x => x.Name == eg.Name);
+            if (g != null)
             {
-                var ts = Start - TimeManager.Instance.CurrentServerTime;
-                return ts.TotalMinutes > 0 && ts.TotalMinutes <= 5;
-            }
-        }
-        public string Name { get; set; }
-        public string ToolTip
-        {
-            get
-            {
-                var d = Duration > TimeSpan.FromHours(0) ? " to " + Start.Add(_realDuration).ToShortTimeString() : "";
-                return Name + " " + Start.ToShortTimeString() + d;
-            }
-        }
-        public string Color { get; }
-        public DailyEvent(string name, double startHour, double durationOrEndHour, string color = "30afff", bool isDuration = true)
-        {
-            _dispatcher = Dispatcher.CurrentDispatcher;
-            Start = DateTime.Parse(startHour + ":00");
-            var d = isDuration ? durationOrEndHour : durationOrEndHour - startHour;
-            Duration = TimeSpan.FromHours(d);
-            _realDuration = Duration;
-            var dayend = DateTime.Parse("00:00").AddDays(1);
-            if (Start.Add(Duration) > dayend)
-            {
-                Duration = dayend - Start;
-            }
-            Name = name;
-            Color = color;
-        }
-
-        public void UpdateFromServer(bool force = false)
-        {
-            if (TimeManager.Instance.CurrentServerTime >= Start && !_happened)
-            {
-                var time = force ? TimeManager.Instance.CurrentServerTime : TimeManager.Instance.RetrieveGuildBamDateTime();
-
-                if (time >= Start)
+                foreach (var ev in eg.Events)
                 {
-                    Start = time;
-                    Duration = TimeSpan.Zero;
-                    _happened = true;
-                    NotifyPropertyChanged(nameof(StartFactor));
-                    NotifyPropertyChanged(nameof(DurationFactor));
-                    NotifyPropertyChanged(nameof(ToolTip));
+                    g.AddEvent(ev);
                 }
+            }
+            else
+            {
+                EventGroups.Add(eg);
             }
         }
     }

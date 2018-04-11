@@ -17,10 +17,10 @@
 
         <Grid HorizontalAlignment="Center" Margin="0,0,0,0">
             <Border Style="{StaticResource Styles.DefaultBorder}"
-                    CornerRadius="27"
+                    CornerRadius="29"
                     Margin="0"
                     VerticalAlignment="Stretch">
-                <UniformGrid Rows="1">
+                <UniformGrid Rows="1" Margin="-1">
                     <local:BuffCooldownControl DataContext="{Binding Instance.FieryRage}" Padding="20" Margin="-20"/>
                     <local:BuffCooldownControl DataContext="{Binding Instance.Bloodlust}" Padding="20" Margin="-20"/>
                 </UniformGrid>

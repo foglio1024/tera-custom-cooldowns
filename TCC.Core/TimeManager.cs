@@ -20,6 +20,7 @@ namespace TCC
             {"RU", new TeraServerTimeInfo("Russian Standard Time", 6, DayOfWeek.Wednesday) },
             {"TW", new TeraServerTimeInfo("China Standard Time", 6, DayOfWeek.Wednesday) },
             {"JP", new TeraServerTimeInfo("Tokyo Standard Time", 6, DayOfWeek.Wednesday) },
+            {"THA", new TeraServerTimeInfo("Indochina Time", 6, DayOfWeek.Wednesday) },
             {"KR", new TeraServerTimeInfo("Korea Standard Time", 6, DayOfWeek.Wednesday) }
         };
 
@@ -30,10 +31,11 @@ namespace TCC
         private DayOfWeek _resetDay;
         public int ResetHour;
         public static TimeManager Instance => _instance ?? (_instance = new TimeManager());
-        public string CurrentRegion;
-        private int _serverHourOffset;
+        public string CurrentRegion { get; set; }
+        public int ServerHourOffsetFromLocal;
+        public int ServerHourOffsetFromUtc;
 
-        public DateTime CurrentServerTime => DateTime.Now.AddHours(_serverHourOffset);
+        public DateTime CurrentServerTime => DateTime.Now.AddHours(ServerHourOffsetFromLocal);
 
         private TimeManager()
         {
@@ -53,9 +55,9 @@ namespace TCC
 
         private void CheckNewDay(object sender, EventArgs e)
         {
-            if (DateTime.Now.Hour == 0 && DateTime.Now.Minute == 0)
-                InfoWindowViewModel.Instance.LoadEvents(DateTime.Now.DayOfWeek, CurrentRegion);
-            if (DateTime.Now.Second == 0 && DateTime.Now.Minute % 2 == 0) CheckCloseEvents();
+            if (CurrentServerTime.Hour == 0 && CurrentServerTime.Minute== 0)
+                InfoWindowViewModel.Instance.LoadEvents(CurrentServerTime.DayOfWeek, CurrentRegion);
+            if (CurrentServerTime.Second == 0 && CurrentServerTime.Minute % 3 == 0) CheckCloseEvents();
         }
 
         public void SetServerTimeZone(string region)
@@ -72,27 +74,27 @@ namespace TCC
 
             if (timezone != null)
             {
-                var serverUtcOffset = timezone.IsDaylightSavingTime(DateTime.UtcNow + timezone.BaseUtcOffset)
+                ServerHourOffsetFromUtc = timezone.IsDaylightSavingTime(DateTime.UtcNow + timezone.BaseUtcOffset)
                     ? timezone.BaseUtcOffset.Hours + 1
                     : timezone.BaseUtcOffset.Hours;
-                _serverHourOffset = -TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours + serverUtcOffset;
+                ServerHourOffsetFromLocal = -TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours + ServerHourOffsetFromUtc;
             }
 
-            if (InfoWindowViewModel.Instance.Markers.FirstOrDefault(x => x.Name.Equals(region + " server time")) == null)
+            if (InfoWindowViewModel.Instance.Markers.FirstOrDefault(x => x.Name.Equals(CurrentRegion + " server time")) == null)
             {
-                InfoWindowViewModel.Instance.Markers.Add(new TimeMarker(_serverHourOffset, region + " server time"));
+                InfoWindowViewModel.Instance.Markers.Add(new TimeMarker(ServerHourOffsetFromLocal, CurrentRegion + " server time"));
             }
 
             CheckReset();
-            InfoWindowViewModel.Instance.LoadEvents(DateTime.Now.DayOfWeek, region);
+            InfoWindowViewModel.Instance.LoadEvents(DateTime.Now.DayOfWeek, CurrentRegion);
 
         }
 
         private void CheckReset()
         {
             if (CurrentRegion == null) return;
-            if (SettingsManager.LastRun.Hour >= ResetHour + _serverHourOffset ||
-                DateTime.Now.Hour <= ResetHour + _serverHourOffset) return;
+            var todayReset = DateTime.Today.AddHours(ResetHour + ServerHourOffsetFromLocal);
+            if(SettingsManager.LastRun > todayReset || DateTime.Now < todayReset) return;
             foreach (var ch in InfoWindowViewModel.Instance.Characters)
             {
                 foreach (var dg in ch.Dungeons)
@@ -114,9 +116,12 @@ namespace TCC
             SettingsManager.LastRun = DateTime.Now;
             InfoWindowViewModel.Instance.SaveToFile();
             SettingsManager.SaveSettings();
+            if (DateTime.Now.DayOfWeek == _resetDay)
+            {
+                ChatWindowViewModel.Instance.AddTccMessage("Weekly data has been reset.");
+            }
 
-            ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System",
-                "<FONT>Daily/weekly data has been reset.</FONT>"));
+            ChatWindowViewModel.Instance.AddTccMessage("Daily data has been reset.");
         }
 
 
@@ -134,9 +139,9 @@ namespace TCC
                 return long.Parse(data);
 
             }
-            catch (Exception e)
+            catch
             {
-                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Failed to retrieve guild bam info.</FONT>"));
+                ChatWindowViewModel.Instance.AddTccMessage("Failed to retrieve guild bam info.");
                 return 0;
             }
         }
@@ -150,16 +155,15 @@ namespace TCC
             sb.Append(PacketProcessor.ServerId);
             sb.Append("&reg=");
             sb.Append(CurrentRegion);
-            sb.Append("&set=");
-            sb.Append(time);
+            sb.Append("&post");
             var c = new WebClient();
             try
             {
                 c.UploadDataAsync(new Uri(sb.ToString()), new byte[] { });
             }
-            catch (Exception e)
+            catch 
             {
-                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Failed to upload guild bam info.</FONT>"));   
+                ChatWindowViewModel.Instance.AddTccMessage("Failed to upload guild bam info.");   
             }
 
         }
@@ -173,16 +177,16 @@ namespace TCC
 
         public void SetGuildBamTime(bool force)
         {
-            foreach (var eg in InfoWindowViewModel.Instance.EventGroups.Where(x => x.RemoteCheck))
+            foreach (var eg in InfoWindowViewModel.Instance.EventGroups.ToSyncArray().Where(x => x.RemoteCheck))
             {
-                foreach (var ev in eg.Events)
+                foreach (var ev in eg.Events.ToSyncArray())
                 {
                     ev.UpdateFromServer(force);
                 }
             }
         }
 
-        public void SendWebhookMessage()
+        public void SendWebhookMessageOld()
         {
             if (!String.IsNullOrEmpty(SettingsManager.Webhook))
             {
@@ -210,9 +214,45 @@ namespace TCC
                 }
                 catch (Exception)
                 {
-                    ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.TCC, "System", "<FONT>Failed to send guild bam message to Discord.</FONT>"));
+                    ChatWindowViewModel.Instance.AddTccMessage("Failed to execute Discord webhook.");
                 }
             }
         }
+        public void SendWebhookMessage(string bamName)
+        {
+            if (!String.IsNullOrEmpty(SettingsManager.Webhook))
+            {
+                var msg = SettingsManager.WebhookMessage.IndexOf("{npc_name}", StringComparison.Ordinal) > -1
+                    ? SettingsManager.WebhookMessage.Replace("{npc_name}", bamName)
+                    : SettingsManager.WebhookMessage;
+                var sb = new StringBuilder("{");
+                sb.Append("\""); sb.Append("content"); sb.Append("\"");
+                sb.Append(":");
+                sb.Append("\""); sb.Append(msg); sb.Append("\"");
+                sb.Append(",");
+                sb.Append("\""); sb.Append("username"); sb.Append("\"");
+                sb.Append(":");
+                sb.Append("\""); sb.Append("TCC"); sb.Append("\"");
+                sb.Append(",");
+                sb.Append("\""); sb.Append("avatar_url"); sb.Append("\"");
+                sb.Append(":");
+                sb.Append("\""); sb.Append("http://i.imgur.com/8IltuVz.png"); sb.Append("\"");
+                sb.Append("}");
+
+                try
+                {
+                    using (WebClient client = new WebClient())
+                    {
+                        client.Headers.Add("Content-Type", "application/json");
+                        var resp = client.UploadString(SettingsManager.Webhook, "POST", sb.ToString());
+                    }
+                }
+                catch (Exception)
+                {
+                    ChatWindowViewModel.Instance.AddTccMessage("Failed to execute Discord webhook.");
+                }
+            }
+        }
+
     }
 }

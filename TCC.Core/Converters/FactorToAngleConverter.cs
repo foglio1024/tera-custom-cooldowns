@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace TCC.Converters
@@ -14,7 +10,7 @@ namespace TCC.Converters
         {
             var val = System.Convert.ToDouble(value);
             double mult = 1;
-            if (parameter != null) mult = System.Convert.ToDouble(parameter);
+            if (parameter != null && parameter != "") mult = System.Convert.ToDouble(parameter, CultureInfo.InvariantCulture);
 
             return val * (359.99/mult);
         }

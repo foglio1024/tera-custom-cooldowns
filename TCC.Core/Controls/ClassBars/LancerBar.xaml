@@ -23,10 +23,10 @@
                     Grid.Column="0"
                     Grid.ColumnSpan="1"
                     Grid.RowSpan="3"
-                    CornerRadius="27,27,27,27"
-                    Margin="3,0,3,0"
+                    CornerRadius="29"
+                    Margin="4,2"
                     VerticalAlignment="Stretch"
-                    Height="54"/>
+                    Height="Auto"/>
             <!--Arush + Gshout-->
             <UniformGrid Grid.Column="0" 
                          Grid.Row="1"

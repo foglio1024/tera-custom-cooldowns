@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Timers;
 using System.Windows.Threading;
-using TCC.ViewModels;
 
 namespace TCC
 {
@@ -9,8 +8,9 @@ namespace TCC
     {
         public Dispatcher Dispatcher { get => _dispatcher; }
         public Skill Skill { get; set; }
-        public uint Cooldown { get; set; }
-        public uint OriginalCooldown { get; set; }
+        public ulong Cooldown { get; set; }
+        public ulong OriginalCooldown { get; set; }
+        public CooldownType Type { get; set; }
         private Timer _timer;
 
         public void SetDispatcher(Dispatcher d)
@@ -18,16 +18,18 @@ namespace TCC
             _dispatcher = d;
         }
 
-        public SkillCooldown(Skill sk, uint cd, CooldownType t, Dispatcher d)
+        public SkillCooldown(Skill sk, ulong cd, CooldownType t, Dispatcher d)
         {
             _dispatcher = d;
 
+            var cooldown = cd > Int32.MaxValue ? Int32.MaxValue : cd;
 
             Skill = sk;
-            Cooldown = t==CooldownType.Skill ? cd : cd*1000;
+            Cooldown = t==CooldownType.Skill ? cooldown : cooldown * 1000;
+            Type = t;
             OriginalCooldown = Cooldown;
 
-            if (cd == 0) return;
+            if (cooldown == 0) return;
             _timer = new Timer(Cooldown);
             _timer.Elapsed += _timer_Elapsed;
             _timer.Start();
@@ -40,7 +42,7 @@ namespace TCC
             _timer?.Stop();
         }
 
-        public void Refresh(uint cd)
+        public void Refresh(ulong cd)
         {
             Cooldown = cd;
             NotifyPropertyChanged("Refresh");

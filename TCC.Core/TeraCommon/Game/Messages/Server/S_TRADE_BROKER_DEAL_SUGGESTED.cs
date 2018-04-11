@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Tera.Game.Messages
+﻿namespace Tera.Game.Messages
 {
     public class S_TRADE_BROKER_DEAL_SUGGESTED : ParsedMessage
     {

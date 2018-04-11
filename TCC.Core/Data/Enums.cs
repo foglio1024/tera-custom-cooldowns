@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TCC
+﻿namespace TCC
 {
     public enum DungeonTier
     {
@@ -44,6 +38,8 @@ namespace TCC
         Private7 = 17,
         Private8 = 18,
         PartyNotice = 21,
+        TeamAlert = 22,
+        SystemDefault = 24,
         RaidNotice = 25,
         Emote = 26,
         Global = 27,
@@ -74,7 +70,13 @@ namespace TCC
         Ress = 310, //arb
         Quest = 311, //arb
         Friend = 312,//arb
+        Enchant7 = 313, //arbitrary
+        Enchant8 = 314, //arbitrary
+        Enchant9 = 315, //arbitrary
+        WorldBoss = 316, //arb
+        Laurel = 317,
         TCC = 1000,
+        Twitch = 1001
     }
 
     public enum Class
@@ -121,13 +123,14 @@ namespace TCC
     public enum CooldownType
     {
         Skill,
-        Item
+        Item,
+        Passive
     }
 
     public enum AbnormalityType
     {
-        WeakeningEffect = 1,
-        DamageOverTime = 2,
+        Debuff = 1,
+        DOT = 2,
         Stun = 3,
         Buff = 4
     }
@@ -176,5 +179,62 @@ namespace TCC
         On,
         Broken,
         Failed
+    }
+
+    public enum GearPiece
+    {
+        Weapon = 1,
+        Armor = 2,
+        Hands = 3,
+        Feet = 4,
+        CritNecklace = 5,
+        CritEarring = 6,
+        CritRing = 7,
+        PowerNecklace = 8,
+        PowerEarring = 9,
+        PowerRing = 10,
+        Circlet = 11,
+        Belt = 12,
+    }
+
+    public enum GearTier
+    {
+        Low = 0,
+        Mid = 1,
+        High = 2,
+        Top = 3
+    }
+
+    public enum ClickThruMode
+    {
+        Never = 0,
+        Always = 1,
+        WhenDim = 2,
+        WhenUndim = 3
+    }
+
+    public enum CooldownBarMode
+    {
+        Normal = 0,
+        Fixed = 1
+    }
+
+    public enum EnrageLabelMode
+    {
+        Next = 0,
+        Remaining = 1
+    }
+
+    public enum DespawnType
+    {
+        OutOfView = 1,
+        Dead = 5
+    }
+
+    public enum Role
+    {
+        Dps = 0,
+        Tank = 1,
+        Healer = 2
     }
 }

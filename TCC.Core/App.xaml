@@ -1,4 +1,4 @@
-﻿<Application x:Class="TCC.App"
+﻿<Application
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:TCC"
@@ -7,15 +7,22 @@
              xmlns:chatcontrols="clr-namespace:TCC.Controls.ChatControls"
              xmlns:templateselectors="clr-namespace:TCC.TemplateSelectors"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+             xmlns:data="clr-namespace:TCC.Data"
+             x:Class="TCC.App"
              Startup="OnStartup">
     <Application.Resources>
         <DropShadowEffect x:Key="dropShadow" BlurRadius="4" ShadowDepth="2" Opacity=".4" />
+        <DropShadowEffect x:Key="FadedDropShadow" BlurRadius="3" ShadowDepth="1" Opacity=".3" />
 
         <SolidColorBrush x:Key="Colors.App.Main" Color="#ff6822"/>
         <SolidColorBrush x:Key="Colors.App.Green" Color="#00A561"/>
         <SolidColorBrush x:Key="Colors.App.LightGreen" Color="#5f7"/>
+        <SolidColorBrush x:Key="Colors.App.Twitch" Color="#975eff "/>
 
         <SolidColorBrush x:Key="Colors.App.DefaultBackground" Color="#101017" Opacity="1"/>
+        <SolidColorBrush x:Key="Colors.App.FadedBorderBrush" Color="#aa303035" Opacity="1"/>
+        <SolidColorBrush x:Key="Colors.App.FadedBackground" Color="#a0101017" Opacity="1"/>
         <SolidColorBrush x:Key="Colors.App.HP" Color="#ff5555"/>
         <SolidColorBrush x:Key="Colors.App.MP" Color="#4499ff"/>
         <SolidColorBrush x:Key="Colors.App.HP.Debuff" Color="#b74be5"/>
@@ -28,9 +35,9 @@
         <SolidColorBrush x:Key="Colors.ClassWindow.AssaultStance" Color="#ff264b" />
         <SolidColorBrush x:Key="Colors.ClassWindow.SniperEye" Color="#38bde5" />
 
-        <SolidColorBrush x:Key="Colors.GroupWindow.Healer" Color="#7cffab" />
-        <SolidColorBrush x:Key="Colors.GroupWindow.Dps" Color="#ffaf72" />
-        <SolidColorBrush x:Key="Colors.GroupWindow.Tank" Color="#7aceff" />
+        <SolidColorBrush x:Key="Colors.GroupWindow.Healer" Color="#3bdb83" />
+        <SolidColorBrush x:Key="Colors.GroupWindow.Dps" Color="#ff894a" />
+        <SolidColorBrush x:Key="Colors.GroupWindow.Tank" Color="#32b3e2" />
 
         <SolidColorBrush x:Key="Colors.BossWindow.Ignidrax" Color="#ff894a"/>
         <SolidColorBrush x:Key="Colors.BossWindow.Terradrax" Color="#ffcb76"/>
@@ -39,8 +46,8 @@
 
         <SolidColorBrush x:Key="Colors.App.VanguardBorder" Color="#69975200"/>
 
-        <SolidColorBrush x:Key="Colors.DungeonTier.Solo" Color="#cee5ff"/>
-        <SolidColorBrush x:Key="Colors.DungeonTier.2" Color="#a5fc6f"/>
+        <SolidColorBrush x:Key="Colors.DungeonTier.Solo" Color="#88d9f7"/>
+        <SolidColorBrush x:Key="Colors.DungeonTier.2" Color="#3bdb83"/>
         <SolidColorBrush x:Key="Colors.DungeonTier.3" Color="#fcb06f"/>
         <SolidColorBrush x:Key="Colors.DungeonTier.4" Color="#fc946f"/>
         <SolidColorBrush x:Key="Colors.DungeonTier.5" Color="#fc6f6f"/>
@@ -48,18 +55,21 @@
         <system:Double x:Key="MapWidth">800</system:Double>
         <system:Double x:Key="MapHeight">600</system:Double>
 
+        <ImageSource x:Key="DefaultGuildLogo">pack://application:,,,/resources/images/default_guild_logo.png</ImageSource>
+
+
         <!--Chat colors-->
-        <SolidColorBrush x:Key="Colors.Chat.Say" Color="#fff"/>
+        <SolidColorBrush x:Key="Colors.Chat.Say" Color="#ffffff"/>
         <SolidColorBrush x:Key="Colors.Chat.Party" Color="#0071bb"/>
         <SolidColorBrush x:Key="Colors.Chat.Guild" Color="#40fb40"/>
         <SolidColorBrush x:Key="Colors.Chat.Area" Color="#ba82f2"/>
         <SolidColorBrush x:Key="Colors.Chat.Trade" Color="#c07a81"/>
-        <SolidColorBrush x:Key="Colors.Chat.Greet" Color="#999"/>
+        <SolidColorBrush x:Key="Colors.Chat.Greet" Color="#999999"/>
         <SolidColorBrush x:Key="Colors.Chat.PartyNotice" Color="#8effff"/>
         <SolidColorBrush x:Key="Colors.Chat.RaidNotice" Color="#f28730"/>
         <SolidColorBrush x:Key="Colors.Chat.Emote" Color="#ffb9b9"/>
         <SolidColorBrush x:Key="Colors.Chat.Global" Color="#f0ff89"/>
-        <SolidColorBrush x:Key="Colors.Chat.Raid" Color="#fc0"/>
+        <SolidColorBrush x:Key="Colors.Chat.Raid" Color="#ffcc00"/>
         <SolidColorBrush x:Key="Colors.Chat.Megaphone" Color="#00d8ff"/>
         <SolidColorBrush x:Key="Colors.Chat.GuildAd" Color="#70c401"/>
         <SolidColorBrush x:Key="Colors.Chat.Private" Color="#ff5f38"/>
@@ -68,24 +78,28 @@
         <SolidColorBrush x:Key="Colors.Chat.System.Generic" Color="#c8c8b6"/>
         <SolidColorBrush x:Key="Colors.Chat.System.Notify" Color="#c8c8b6"/>
         <SolidColorBrush x:Key="Colors.Chat.System.Event" Color="#c8c8b6"/>
-        <SolidColorBrush x:Key="Colors.Chat.System.Error" Color="#f00"/>
+        <SolidColorBrush x:Key="Colors.Chat.System.Error" Color="#ff0000"/>
         <SolidColorBrush x:Key="Colors.Chat.System.Group" Color="#d9d9d9"/>
         <SolidColorBrush x:Key="Colors.Chat.System.Deathmatch" Color="#d9d9d9"/>
         <SolidColorBrush x:Key="Colors.Chat.System.ContractAlert" Color="#d9d9d9"/>
         <SolidColorBrush x:Key="Colors.Chat.System.GroupAlert" Color="#d9d9d9"/>
-        <SolidColorBrush x:Key="Colors.Chat.System.Loot" Color="#d9d9d9"/>
-        <SolidColorBrush x:Key="Colors.Chat.System.Exp" Color="#d9d9d9"/>
-        <SolidColorBrush x:Key="Colors.Chat.System.Money" Color="#d9d9d9"/>
+        <SolidColorBrush x:Key="Colors.Chat.System.Loot" Color="#FFC5FBD4"/>
+        <SolidColorBrush x:Key="Colors.Chat.System.Exp" Color="#FFA0E5FF"/>
+        <SolidColorBrush x:Key="Colors.Chat.System.Money" Color="#FFFFFACC"/>
         <SolidColorBrush x:Key="Colors.Chat.System.Bargain" Color="#ffbf8f"/>
-        <SolidColorBrush x:Key="Colors.Chat.System.Quest" Color="#f7d6af"/>
-        <SolidColorBrush x:Key="Colors.Chat.System.Friend" Color="#afe7f7"/>
+        <SolidColorBrush x:Key="Colors.Chat.System.Quest" Color="#FFFFDDB6"/>
+        <SolidColorBrush x:Key="Colors.Chat.System.Friend" Color="#FF84E1FB"/>
+        <SolidColorBrush x:Key="Colors.Chat.System.WorldBoss" Color="#fffcb7ff"/>
 
-        <FontFamily x:Key="DroidSans">pack://application:,,,/resources/fonts/#droidsans</FontFamily>
-        <FontFamily x:Key="OpenSans">pack://application:,,,/resources/fonts/#OpenSans-Regular</FontFamily>
-        <FontFamily x:Key="Frutiger">pack://application:,,,/resources/fonts/#Frutiger</FontFamily>
-        <FontFamily x:Key="SourceSans">pack://application:,,,/resources/fonts/#SourceSans</FontFamily>
+        <FontFamily x:Key="DroidSans">pack://application:,,,/fonts/#Droid Sans</FontFamily>
+        <FontFamily x:Key="DroidSansMono">pack://application:,,,/fonts/#Droid Sans Mono</FontFamily>
+        <FontFamily x:Key="OpenSans">pack://application:,,,/resources/fonts/#Open Sans</FontFamily>
+        <FontFamily x:Key="Frutiger">pack://application:,,,/resources/fonts/#Frutiger LT Pro 55 Roman</FontFamily>
+        <FontFamily x:Key="SourceSans">pack://application:,,,/resources/fonts/#Source Sans Pro SemiBold</FontFamily>
+        <FontFamily x:Key="RobotoMonoMedium">pack://application:,,,/resources/fonts/#Roboto Mono Medium</FontFamily>
+        <FontFamily x:Key="ArialMonoBold">pack://application:,,,/resources/fonts/#Arial Monospaced MT</FontFamily>
 
-        <Style x:Key="Styles.DefaultBorder" TargetType="Border">
+        <Style x:Key="Styles.DefaultBorder" TargetType="{x:Type Border}">
             <Setter Property="Background" Value="{StaticResource Colors.App.DefaultBackground}"/>
             <Setter Property="CornerRadius" Value="0"/>
             <Setter Property="BorderThickness" Value="1"/>
@@ -95,7 +109,7 @@
             <Setter Property="Effect" Value="{StaticResource dropShadow}" />
             <Setter Property="Opacity" Value=".85"/>
         </Style>
-        <Style x:Key="Styles.DefaultText" TargetType="TextBlock">
+        <Style x:Key="Styles.DefaultText" TargetType="{x:Type TextBlock}">
             <Setter Property="UseLayoutRounding" Value="True"/>
             <Setter Property="Foreground" Value="#bbffffff"/>
             <Setter Property="FontFamily" Value="/TCC;component/resources/#Open Sans"/>
@@ -107,18 +121,22 @@
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Name="border"
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+
+                            <Border x:Name="border"
                                                 BorderThickness="0"
                                                 Padding="0"
                                                 BorderBrush="Transparent"
                                                 CornerRadius="0"
                                                 Background="Transparent">
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-                        </Border>
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </Border>
+                            <Border x:Name="hl" Background="#1fff" Opacity="0"></Border>
+                        </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="Background" Value="#2999" />
+                                <Setter TargetName="hl" Property="Opacity" Value="1" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -127,13 +145,27 @@
         </Style>
 
         <PathGeometry x:Key="SVG.Close" >M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z</PathGeometry>
+        <PathGeometry x:Key="SVG.Confirm" >M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z</PathGeometry>
         <PathGeometry x:Key="SVG.Star">M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z</PathGeometry>
         <PathGeometry x:Key="SVG.Info">M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z</PathGeometry>
         <PathGeometry x:Key="SVG.Settings">M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z</PathGeometry>
+        <PathGeometry x:Key="SVG.Folder">M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z</PathGeometry>
+        <PathGeometry x:Key="SVG.Twitch">m 0,0 -13.652,-13.651 -21.445,0 -11.699,-11.697 0,11.697 -17.548,0 0,56.544 L 0,42.893 0,0 z m -72.146,50.692 -3.899,-15.599 0,-70.19 17.55,0 0,-9.751 9.746,0 9.752,9.751 15.596,0 31.196,31.192 0,54.597 -79.941,0 z</PathGeometry>
+        <PathGeometry x:Key="SVG.Paypal">M1647 646q18 84-4 204-87 444-565 444h-44q-25 0-44 16.5t-24 42.5l-4 19-55 346-2 15q-5 26-24.5 42.5t-44.5 16.5h-251q-21 0-33-15t-9-36q9-56 26.5-168t26.5-168 27-167.5 27-167.5q5-37 43-37h131q133 2 236-21 175-39 287-144 102-95 155-246 24-70 35-133 1-6 2.5-7.5t3.5-1 6 3.5q79 59 98 162zm-172-282q0 107-46 236-80 233-302 315-113 40-252 42 0 1-90 1l-90-1q-100 0-118 96-2 8-85 530-1 10-12 10h-295q-22 0-36.5-16.5t-11.5-38.5l232-1471q5-29 27.5-48t51.5-19h598q34 0 97.5 13t111.5 32q107 41 163.5 123t56.5 196z</PathGeometry>
+        <PathGeometry x:Key="SVG.Weapon">M6.92,5H5L14,14L15,13.06M19.96,19.12L19.12,19.96C18.73,20.35 18.1,20.35 17.71,19.96L14.59,16.84L11.91,19.5L10.5,18.09L11.92,16.67L3,7.75V3H7.75L16.67,11.92L18.09,10.5L19.5,11.91L16.83,14.58L19.95,17.7C20.35,18.1 20.35,18.73 19.96,19.12Z</PathGeometry>
+        <PathGeometry x:Key="SVG.Armor">m 102.46371,124.83721 c 9.47037,-1.13178 10.18541,7.82999 12.15325,13.97339 -4.48801,-1.56106 -8.13725,-1.02523 -11.62854,-0.0945 2.38668,7.33863 -2.89238,18.03101 -5.746293,27.66239 -9.269447,-1.08683 -8.259367,-0.21565 -10.690777,0 -2.431415,-0.21565 -1.421335,-1.08683 -10.690781,0 -2.853911,-9.63138 -8.132968,-20.32376 -5.746294,-27.66239 -3.491285,-0.93073 -7.14053,-1.46656 -11.628529,0.0945 1.967837,-6.1434 2.682872,-15.10517 12.153244,-13.97339 4.55835,0.61526 4.58991,2.92249 7.359736,5.32626 1.293813,0.71071 2.365964,-0.62871 4.677217,-0.93544 2.426052,3.70241 4.96936,4.64935 7.750807,0 2.311256,0.30673 3.383407,1.64615 4.67722,0.93544 2.769827,-2.40377 2.801387,-4.711 7.35974,-5.32626 z</PathGeometry>
+        <PathGeometry x:Key="SVG.Hands">M 2.7087676,95.695558 C -5.2078434,82.773494 10.687741,75.296423 17.320828,83.460552 L 42.234293,113.01244 C 57.079834,130.68236 59.863181,106.13908 60.654168,93.940168 60.809453,81.749423 61.340913,49.095697 61.302951,23.392186 62.775878,9.2057302 78.349263,13.202172 79.601095,22.587907 L 83.046993,89.305968 85.126735,9.4114182 C 86.987866,-2.5637217 104.51964,-1.9866267 105.66221,8.6320612 l 0.55525,80.2129188 8.68928,-66.745177 c 2.95962,-14.3524938 20.80814,-13.9295558 19.53118,1.968221 l -7.30862,66.806644 17.77269,-41.641709 c 1.92836,-5.502266 19.4477,-8.955904 15.1922,7.13287 l -29.90301,113.942251 13.19054,47.65917 c -31.47278,-4.5584 -33.70763,-7.87518 -48.985589,9.15331 C 79.118174,210.09207 73.68103,213.40885 42.208248,217.96725 l 16.047813,-47.76637 z</PathGeometry>
+        <PathGeometry x:Key="SVG.Feet">m 36.826691,215.3613 c 112.415639,0 126.878489,-0.65226 126.878489,-0.65226 1.33254,-20.19714 -2.72345,-37.05559 -17.24512,-43.27764 2.79614,-4.54187 3.85689,-6.55073 13.9581,-12.49004 -7.53355,-23.42234 -2.55771,-41.78978 1.3148,-68.486657 C 143.38211,79.712617 115.41881,66.432236 92.705814,69.582584 89.742492,90.934756 88.278246,116.93902 97.520113,149.586 c -4.707276,3.74476 -6.380753,4.53954 -9.66505,12.3996 11.45176,1.30756 13.356677,5.56724 15.073497,8.06046 -17.049524,7.67307 -71.303811,23.87981 -66.101869,45.31524 z</PathGeometry>
+        <PathGeometry x:Key="SVG.Ring">M12,10L8,4.4L9.6,2H14.4L16,4.4L12,10M15.5,6.8L14.3,8.5C16.5,9.4 18,11.5 18,14A6,6 0 0,1 12,20A6,6 0 0,1 6,14C6,11.5 7.5,9.4 9.7,8.5L8.5,6.8C5.8,8.1 4,10.8 4,14A8,8 0 0,0 12,22A8,8 0 0,0 20,14C20,10.8 18.2,8.1 15.5,6.8Z</PathGeometry>
+        <PathGeometry x:Key="SVG.Earring">m 89.586653,136.05528 v 0 c -3.56319,-0.93287 -2.911281,-6.94658 -0.343139,-8.15985 2.465523,-1.43591 5.67251,-0.8733 6.116573,-3.11834 0.671315,-3.39395 -4.328983,-5.264 -7.778204,-2.21998 -1.582529,1.39662 -5.321301,-1.52102 -0.36651,-3.68607 2.242289,-0.98717 6.931297,-1.53584 9.087165,0.60135 2.055124,2.03732 2.921473,7.50681 0.648607,8.65721 -4.714294,2.55654 -8.724287,-0.542 -7.364486,7.92568 z m 0.861076,4.8571 c 1.292443,0.41532 6.231915,5.4387 6.467888,6.79463 0.386765,1.02317 -0.846426,3.44589 -1.367994,8.7231 -0.569293,1.61943 -1.479301,0.88802 -4.866067,4.45783 2.049589,-5.11265 4.936716,-9.61785 -0.233827,-19.97556 z m -0.861076,-4.8571 c -1.769097,0.56847 -10.13283,8.27065 -10.455816,10.12666 -0.529411,1.4005 1.1593,4.7176 1.873208,11.94102 0.77925,2.21667 3.946816,2.97377 8.582608,7.86012 4.635791,-4.88635 7.80336,-5.64345 8.58261,-7.86012 0.713908,-7.22342 2.401767,-10.54052 1.872357,-11.94102 -0.322987,-1.85601 -8.685866,-9.55819 -10.454967,-10.12666 z</PathGeometry>
+        <PathGeometry x:Key="SVG.Belt">m 149.76452,123.1626 c -1.34258,1.33197 -4.68819,13.78006 -28.66059,15.09512 -0.64978,3.80845 -1.48715,6.56891 -4.16497,10.72685 27.83634,-0.61166 30.67999,-8.54563 30.67999,-8.54563 0,0 3.66998,-14.52263 2.14557,-17.27634 z m -92.109508,-0.37798 c 1.342587,1.33197 4.688193,13.78006 28.660559,15.09512 0.649774,3.80845 1.487141,6.56891 4.164947,10.72685 -27.836284,-0.61166 -30.679933,-8.54563 -30.679933,-8.54563 0,0 -3.669983,-14.52263 -2.145573,-17.27634 z m 43.176368,7.54591 c -3.292731,0.005 -8.442872,3.88639 -11.248929,2.14198 -3.717678,8.6021 4.299133,21.79816 14.193449,24.16752 9.89432,-2.36936 17.91061,-15.56542 14.19293,-24.16752 -4.08154,2.53731 -13.12195,-6.82808 -14.19293,1.14774 -0.33468,-2.49245 -1.44783,-3.29181 -2.94452,-3.28972 z m 1.13274,5.03225 c 0.99358,-0.001 1.73275,0.50964 1.95492,2.10323 0.71097,-5.09948 6.71264,0.88847 9.42217,-0.73381 2.46798,5.4999 -2.85383,13.9374 -9.42217,15.45229 -6.568319,-1.51489 -11.89014,-9.95239 -9.42216,-15.45229 1.862797,1.11532 5.281375,-1.36542 7.46724,-1.36942 z</PathGeometry>
+        <PathGeometry x:Key="SVG.Circlet">m 367.05859,352.82422 c 0,0 -12.8327,108.47339 -58.85937,133.03125 -19.32597,10.31149 -63.99805,12.68359 -63.99805,12.68359 0,0 23.26974,29.2159 -3.73633,47.08203 -52.7498,34.89714 -107.7398,-12.08971 -164.267574,-82.25195 -12.651942,-15.70356 -35.526404,-2.52478 -27.13086,7.58984 101.734054,122.56491 200.731714,150.4375 317.992184,150.4375 117.26047,0 216.25816,-27.87259 317.99219,-150.4375 8.39554,-10.11462 -14.47893,-23.2934 -27.13086,-7.58984 -56.52778,70.16224 -111.51781,117.14909 -164.26758,82.25195 -27.00608,-17.86613 -3.73632,-47.08203 -3.73632,-47.08203 0,0 -44.67204,-2.3721 -63.99805,-12.68359 C 379.8913,461.29761 367.05859,352.82422 367.05859,352.82422 Z m 1.71485,109.30859 c 6.82856,40.55135 33.87683,48.68591 75.68554,59.63867 -28.53996,2.33152 -53.078,9.92203 -57.57031,22.94141 43.70071,42.0655 -6.27557,35.25561 -17.83398,48.49023 -11.5584,-13.23462 -61.53471,-6.42473 -17.83399,-48.49023 -4.49231,-13.01938 -29.03034,-20.60989 -57.57031,-22.94141 41.80873,-10.95276 68.2945,-19.08728 75.12305,-59.63867 z</PathGeometry>
+        <PathGeometry x:Key="SVG.Necklace">m 111.58219,124.95058 c 0,0 -2.05492,-1.23996 -2.93944,1.43056 -5.5484,15.9368 -15.502436,18.1486 -22.271865,19.10492 -6.769429,-0.95632 -16.723468,-3.16812 -22.271864,-19.10492 -0.884522,-2.67052 -2.939438,-1.43056 -2.939438,-1.43056 7.150648,19.25648 16.033581,21.33935 25.211302,22.4726 9.177721,-1.13325 18.060655,-3.21612 25.211305,-22.4726 z m -24.97507,22.4726 c -1.071255,0.35539 -6.135816,5.17056 -6.331396,6.33088 -0.320579,0.87555 0.702,2.94931 1.134298,7.46518 0.471867,1.38579 2.389949,1.85911 5.197098,4.91391 2.807149,-3.0548 4.725233,-3.52812 5.197099,-4.91391 0.432297,-4.51587 1.454361,-6.58963 1.133782,-7.46518 -0.19558,-1.16032 -5.259623,-5.97549 -6.330881,-6.33088 z m 0.521417,3.03651 c 0.782624,0.25964 3.773664,3.40011 3.916555,4.2478 0.234201,0.63965 -0.512543,2.15427 -0.828373,5.45342 -0.344728,1.01242 -0.895774,0.55517 -2.946591,2.78691 1.241105,-3.19628 2.989371,-6.0128 -0.141591,-12.48813 z</PathGeometry>
+        <PathGeometry x:Key="SVG.MapMarker">M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z</PathGeometry>
         <!--Converters-->
         <converters:BoolToOpacityConverter x:Key="Converters.BoolToOpacity"/>
         <converters:BoolToOpacityInverseConverter x:Key="Converters.BoolToOpacityInverse"/>
-        <converters:BoolToVisibilityConverter x:Key="Converters.BoolToVisibleCollapsed" />
+        <converters:BoolToVisibleCollapsedConverter x:Key="Converters.BoolToVisibleCollapsed" />
         <converters:BoolToVisibleHidden x:Key="Converters.BoolToVisibleHidden" />
         <converters:RollToStringConverter x:Key="Converters.RollToString"/>
         <converters:WinningToColorConverter x:Key="Converters.WinningToColor"/>
@@ -147,7 +179,12 @@
         <converters:HPbarColorConverter x:Key="Converters.DebuffStatusToHpColor"/>
         <converters:ContractedToColWidthConverter x:Key="Converters.MessageContractedToColumnWidth"/>
         <converters:RowsToHeightConverter x:Key="Converters.RowsToHeight"/>
-        <converters:BoolToCooldowWindowTemplateConverter x:Key="Converters.BoolToCooldowWindowTemplate"/>
+        <converters:CooldownWindowModeToTemplateConverter x:Key="Converters.CooldowWindowModeToTemplate"/>
+        <converters:PieceToPathConverter x:Key="Converters.PieceToPath"/>
+        <converters:GearLevelToFactorConverter x:Key="Converters.GearLevelToFactor"/>
+        <converters:GearLevelToColorConverter x:Key="Converters.GearLevelToColor"/>
+        <converters:NullToVisibleCollapsedConverter x:Key="Converters.NullToVisibleCollapsed"/>
+        <converters:LogoInfoToImageConverter x:Key="Converters.LogoInfoToImage"/>
 
         <!--AbnormalityIndicator resources-->
         <converters:AbnormalityStrokeConverter x:Key="Converters.AbnormalityTypeToStrokeColor"/>
@@ -172,11 +209,16 @@
         <converters:ReadyToIconConverter x:Key="Converters.ReadyToIcon"/>
         <converters:ReadyToColorConverter x:Key="Converters.ReadyToColor"/>
         <converters:GroupSizeToTemplateConverter x:Key="Converters.GroupSizeToTemplate"/>
-        
-        <DataTemplate x:Key="abnorm">
-            <controls:AbnormalityIndicator/>
-        </DataTemplate>
 
+        <DataTemplate x:Key="PartyAbnormality">
+            <controls:AbnormalityIndicator Size="28"/>
+        </DataTemplate>
+        <DataTemplate x:Key="RaidAbnormality">
+            <controls:AbnormalityIndicator Size="24"/>
+        </DataTemplate>
+        <DataTemplate x:Key="BossAbnormality">
+            <controls:AbnormalityIndicator Size="30" Margin="2"/>
+        </DataTemplate>
         <converters:LocationToMapConverter x:Key="Converters.LocationToMap"/>
         <converters:LocationToMarkerPositionConverter x:Key="Converters.LocationToMarkerPosition"/>
         <converters:LocationToStretchConverter x:Key="Converters.LocationToStretch"/>
@@ -242,8 +284,64 @@
                                                   Focusable="false" />
                                 </Track.DecreaseRepeatButton>
                                 <Track.LayoutTransform>
-                                    <RotateTransform Angle="180"></RotateTransform>
+                                    <RotateTransform Angle="180"/>
                                 </Track.LayoutTransform>
+                            </Track>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Thumb" Property="Visibility" Value="Collapsed" />
+                            </Trigger>
+                            <Trigger Property="Orientation" Value="Horizontal">
+                                <Setter TargetName="GridRoot" Property="LayoutTransform">
+                                    <Setter.Value>
+                                        <RotateTransform Angle="-90" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="PART_Track" Property="LayoutTransform">
+                                    <Setter.Value>
+                                        <RotateTransform Angle="-90" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Width" Value="Auto" />
+                                <Setter Property="Height" Value="8" />
+                                <Setter TargetName="Thumb" Property="Tag" Value="Horizontal" />
+                                <Setter TargetName="PageDown" Property="Command" Value="ScrollBar.PageLeftCommand" />
+                                <Setter TargetName="PageUp" Property="Command" Value="ScrollBar.PageRightCommand" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="NormalScrollBar" TargetType="{x:Type ScrollBar}">
+            <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
+            <Setter Property="Foreground" Value="#2fff" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Width" Value="8" />
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollBar}">
+                        <Grid x:Name="GridRoot" Width="8" Background="{TemplateBinding Background}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.00001*" />
+                            </Grid.RowDefinitions>
+
+                            <Track x:Name="PART_Track" Grid.Row="0" IsDirectionReversed="true" Focusable="false">
+                                <Track.Thumb>
+                                    <Thumb x:Name="Thumb" Background="{TemplateBinding Foreground}"
+                                           Style="{StaticResource ScrollThumbs}" />
+                                </Track.Thumb>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton x:Name="PageUp" Command="ScrollBar.PageDownCommand" Opacity="0"
+                                                  Focusable="false" />
+                                </Track.IncreaseRepeatButton>
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton x:Name="PageDown" Command="ScrollBar.PageUpCommand" Opacity="0"
+                                                  Focusable="false" />
+                                </Track.DecreaseRepeatButton>
                             </Track>
                         </Grid>
 
@@ -391,13 +489,13 @@
             </Setter>
         </Style>
 
-        <DataTemplate x:Key="SimpleTemplate">
+        <DataTemplate x:Key="SimpleTemplate" DataType="data:MessagePiece">
             <controls:OutlinedTextBlock Fill="{Binding Color}"
                                         Text="{Binding Text}" 
                                         Cursor="{Binding Type, Converter={StaticResource Converters.MessageTypeToCursor}}"
                                         Stroke="#9000"
                                         StrokeThickness="3"
-                                        FontSize="15"
+                                        FontSize="{Binding Size}"
                                         FontFamily="{StaticResource Frutiger}"
                                         TextWrapping="WrapWithOverflow"
                                         FontWeight="Normal"
@@ -406,8 +504,7 @@
                                         HorizontalAlignment="Stretch"
                                         TextTrimming="None"
                                         Margin="{Binding Spaces}"
-                                        >
-            </controls:OutlinedTextBlock>
+                                        />
         </DataTemplate>
         <DataTemplate x:Key="MoneyTemplate">
             <controls:MoneyMessagePiece />
@@ -457,32 +554,25 @@
         </DataTemplate>
         <DataTemplate x:Key="MegaphoneChannelLabelTemplate">
             <Grid Height="12" Width="12" VerticalAlignment="Top" UseLayoutRounding="True">
-                <Path Data="M81.114,30.146C73.196,11.725,60.456-2.306,54.009,0.316C43.062,4.765,60.53,26.133,6.774,47.984
-		                                c-4.643,1.887-5.82,9.441-3.877,13.957c1.939,4.515,8.291,9.01,12.936,7.123c0.803-0.326,3.754-1.275,3.754-1.275
-		                                c3.316,4.45,6.787,1.811,8.018,4.639c1.479,3.398,4.697,10.785,5.789,13.298c1.096,2.511,3.576,4.837,5.377,4.153
-		                                c1.795-0.684,7.91-3.011,10.25-3.901c2.338-0.89,2.896-2.974,2.182-4.619c-0.771-1.772-3.932-2.292-4.832-4.36
-		                                c-0.902-2.068-3.848-8.696-4.695-10.785c-1.152-2.841,1.295-5.152,4.85-5.522c24.467-2.55,29.041,12.561,37.371,9.173
-		                                C90.343,67.243,89.03,48.568,81.114,30.146z M78.358,60.03c-1.432,0.582-11.061-7.013-17.215-21.334
-		                                c-6.152-14.318-5.379-27.408-3.949-27.989c1.43-0.582,10.822,8.58,16.975,22.898C80.321,47.923,79.79,59.448,78.358,60.03z"
-                                  Fill="#ff2b2b" Opacity=".7" Stretch="Uniform" VerticalAlignment="Center">
-                </Path>
+                <Path Data="M81.114,30.146C73.196,11.725,60.456-2.306,54.009,0.316C43.062,4.765,60.53,26.133,6.774,47.984                                   c-4.643,1.887-5.82,9.441-3.877,13.957c1.939,4.515,8.291,9.01,12.936,7.123c0.803-0.326,3.754-1.275,3.754-1.275                                   c3.316,4.45,6.787,1.811,8.018,4.639c1.479,3.398,4.697,10.785,5.789,13.298c1.096,2.511,3.576,4.837,5.377,4.153                                   c1.795-0.684,7.91-3.011,10.25-3.901c2.338-0.89,2.896-2.974,2.182-4.619c-0.771-1.772-3.932-2.292-4.832-4.36                                   c-0.902-2.068-3.848-8.696-4.695-10.785c-1.152-2.841,1.295-5.152,4.85-5.522c24.467-2.55,29.041,12.561,37.371,9.173                                   C90.343,67.243,89.03,48.568,81.114,30.146z M78.358,60.03c-1.432,0.582-11.061-7.013-17.215-21.334                                   c-6.152-14.318-5.379-27.408-3.949-27.989c1.43-0.582,10.822,8.58,16.975,22.898C80.321,47.923,79.79,59.448,78.358,60.03z"
+                                  Fill="#ff2b2b" Opacity=".7" Stretch="Uniform" VerticalAlignment="Center"/>
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="DefaultChannelLabelTemplate">
             <TextBlock  Foreground="{Binding Channel, Converter={StaticResource Converters.ChatChannelToColor}}" 
                         Opacity=".5" 
-                        FontWeight="DemiBold" 
+                        FontWeight="SemiBold" 
                         FontSize="11"
-                        FontFamily="{StaticResource Frutiger}"
                         HorizontalAlignment="Right" 
                         VerticalAlignment="Top"
                         TextAlignment="Center"
                         Visibility="Visible"
                         TextTrimming="CharacterEllipsis"
                         MinWidth="33"
-                        Margin="0,-1,0,0"
+                        Margin="0,-3,0,0"
                         Text="{Binding Channel, Converter={StaticResource Converters.ChatChannelToName}}"
-                                />
+            />
+
         </DataTemplate>
         <DataTemplate x:Key="EnchantChannelLabelTemplate">
             <Grid>
@@ -534,9 +624,7 @@
                         TextTrimming="CharacterEllipsis"
                         Stroke="#9000"
                         StrokeThickness="3"                       
-                        >
-
-            </controls:OutlinedTextBlock>
+                        />
 
         </DataTemplate>
         <DataTemplate x:Key="SystemAuthorTemplate">
@@ -552,17 +640,22 @@
                                         SystemAuthorTemplate="{StaticResource SystemAuthorTemplate}"
                                         />
         <DataTemplate x:Key="LfgTemplate">
-            <chatcontrols:LFGcontrol Margin="1"></chatcontrols:LFGcontrol>
+            <chatcontrols:LFGcontrol Margin="1"/>
         </DataTemplate>
 
         <!--Boss template-->
         <DataTemplate x:Key="BossDataTemplate">
             <local:BossGage/>
-        </DataTemplate>       
+        </DataTemplate>
         <!--Mob template-->
         <DataTemplate x:Key="MobDataTemplate">
             <controls:SmallMobControl/>
         </DataTemplate>
+        <!--Guild tower template-->
+        <DataTemplate x:Key="GuildTowerTemplate">
+            <controls:GuildTowerControl/>
+        </DataTemplate>
+
         <templateselectors:EnemyTemplateSelector x:Key="EnemyTemplateSelector" 
                                                  BossDataTemplate="{StaticResource BossDataTemplate}"
                                                  MobDataTemplate="{StaticResource MobDataTemplate}"/>
@@ -585,7 +678,7 @@
         <DataTemplate x:Key="Phase4EnemyWindowLayout">
             <controls:Phase4BossControl />
         </DataTemplate>
-        <Style TargetType="Grid" x:Key="Style.DragonSelectionGrid">
+        <Style TargetType="{x:Type Grid}" x:Key="Style.DragonSelectionGrid">
             <Setter Property="Opacity" Value=".45"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsSelected}" Value="True">
@@ -609,6 +702,288 @@
         </DataTemplate>
         <DataTemplate x:Key="NormalCooldownTemplate">
             <controls:NormalSkillContainer/>
+        </DataTemplate>
+        <DataTemplate x:Key="TabSettingsTemplate">
+            <chatcontrols:TabSettingControl/>
+        </DataTemplate>
+        <Style x:Key="FocusVisual3">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle StrokeDashArray="1 2" StrokeThickness="1" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" Margin="2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="ComboBox.Static.Background" Color="#1fff"/>
+        <SolidColorBrush x:Key="ComboBox.Static.Border" Color="#FFACACAC"/>
+        <SolidColorBrush x:Key="ComboBox.Static.Editable.Background" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="ComboBox.Static.Editable.Border" Color="#FFABADB3"/>
+        <SolidColorBrush x:Key="ComboBox.Static.Editable.Button.Background" Color="Transparent"/>
+        <SolidColorBrush x:Key="ComboBox.Static.Editable.Button.Border" Color="Transparent"/>
+        <SolidColorBrush x:Key="ComboBox.MouseOver.Glyph" Color="#fff"/>
+        <SolidColorBrush x:Key="ComboBox.MouseOver.Background" Color="#2fff"/>
+        <SolidColorBrush x:Key="ComboBox.MouseOver.Border" Color="#2fff"/>
+        <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Background" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Border" Color="#2fff"/>
+        <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Button.Background" Color="#2fff"/>
+
+        <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Button.Border" Color="#2fff"/>
+        <SolidColorBrush x:Key="ComboBox.Pressed.Glyph" Color="#fff"/>
+        <SolidColorBrush x:Key="ComboBox.Pressed.Background" Color="#2fff"/>
+
+        <SolidColorBrush x:Key="ComboBox.Pressed.Border" Color="#2fff"/>
+        <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Background" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Border" Color="#2fff"/>
+        <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Button.Background" Color="#2fff"/>
+        <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Button.Border" Color="#2fff"/>
+        <SolidColorBrush x:Key="ComboBox.Disabled.Glyph" Color="#FFBFBFBF"/>
+        <SolidColorBrush x:Key="ComboBox.Disabled.Background" Color="#FFF0F0F0"/>
+        <SolidColorBrush x:Key="ComboBox.Disabled.Border" Color="#FFD9D9D9"/>
+        <SolidColorBrush x:Key="ComboBox.Disabled.Editable.Background" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="ComboBox.Disabled.Editable.Border" Color="#FFBFBFBF"/>
+        <SolidColorBrush x:Key="ComboBox.Disabled.Editable.Button.Background" Color="Transparent"/>
+        <SolidColorBrush x:Key="ComboBox.Disabled.Editable.Button.Border" Color="Transparent"/>
+        <SolidColorBrush x:Key="ComboBox.Static.Glyph" Color="#9fff"/>
+        <Style x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="IsTabStop" Value="false"/>
+            <Setter Property="Focusable" Value="false"/>
+            <Setter Property="ClickMode" Value="Press"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border x:Name="templateRoot" SnapsToDevicePixels="true" Background="{StaticResource ComboBox.Static.Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{StaticResource ComboBox.Static.Border}">
+                            <Border x:Name="splitBorder" Width="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" SnapsToDevicePixels="true" Margin="0" HorizontalAlignment="Right" BorderThickness="1" BorderBrush="Transparent">
+                                <Path x:Name="arrow" VerticalAlignment="Center" Margin="0" HorizontalAlignment="Center" Fill="{StaticResource ComboBox.Static.Glyph}" Data="F1 M 0,0 L 2.667,2.66665 L 5.3334,0 L 5.3334,-1.78168 L 2.6667,0.88501 L0,-1.78168 L0,0 Z"/>
+                            </Border>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="true"/>
+                                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="false"/>
+                                    <Condition Binding="{Binding IsPressed, RelativeSource={RelativeSource Self}}" Value="false"/>
+                                    <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="true"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ComboBox.Static.Editable.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="templateRoot" Value="{StaticResource ComboBox.Static.Editable.Border}"/>
+                                <Setter Property="Background" TargetName="splitBorder" Value="{StaticResource ComboBox.Static.Editable.Button.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="splitBorder" Value="{StaticResource ComboBox.Static.Editable.Button.Border}"/>
+                            </MultiDataTrigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Fill" TargetName="arrow" Value="{StaticResource ComboBox.MouseOver.Glyph}"/>
+                            </Trigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true"/>
+                                    <Condition Binding="{Binding IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="false"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ComboBox.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="templateRoot" Value="{StaticResource ComboBox.MouseOver.Border}"/>
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true"/>
+                                    <Condition Binding="{Binding IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="true"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ComboBox.MouseOver.Editable.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="templateRoot" Value="{StaticResource ComboBox.MouseOver.Editable.Border}"/>
+                                <Setter Property="Background" TargetName="splitBorder" Value="{StaticResource ComboBox.MouseOver.Editable.Button.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="splitBorder" Value="{StaticResource ComboBox.MouseOver.Editable.Button.Border}"/>
+                            </MultiDataTrigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Fill" TargetName="arrow" Value="{StaticResource ComboBox.Pressed.Glyph}"/>
+                            </Trigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsPressed, RelativeSource={RelativeSource Self}}" Value="true"/>
+                                    <Condition Binding="{Binding IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="false"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ComboBox.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="templateRoot" Value="{StaticResource ComboBox.Pressed.Border}"/>
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsPressed, RelativeSource={RelativeSource Self}}" Value="true"/>
+                                    <Condition Binding="{Binding IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="true"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ComboBox.Pressed.Editable.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="templateRoot" Value="{StaticResource ComboBox.Pressed.Editable.Border}"/>
+                                <Setter Property="Background" TargetName="splitBorder" Value="{StaticResource ComboBox.Pressed.Editable.Button.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="splitBorder" Value="{StaticResource ComboBox.Pressed.Editable.Button.Border}"/>
+                            </MultiDataTrigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Fill" TargetName="arrow" Value="{StaticResource ComboBox.Disabled.Glyph}"/>
+                            </Trigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false"/>
+                                    <Condition Binding="{Binding IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="false"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ComboBox.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="templateRoot" Value="{StaticResource ComboBox.Disabled.Border}"/>
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false"/>
+                                    <Condition Binding="{Binding IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="true"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ComboBox.Disabled.Editable.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="templateRoot" Value="{StaticResource ComboBox.Disabled.Editable.Border}"/>
+                                <Setter Property="Background" TargetName="splitBorder" Value="{StaticResource ComboBox.Disabled.Editable.Button.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="splitBorder" Value="{StaticResource ComboBox.Disabled.Editable.Button.Border}"/>
+                            </MultiDataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <ControlTemplate x:Key="ComboBoxTemplate" TargetType="{x:Type ComboBox}">
+            <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="0"/>
+                </Grid.ColumnDefinitions>
+                <Popup x:Name="PART_Popup" AllowsTransparency="true" Grid.ColumnSpan="2" IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Margin="1" PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" Placement="Bottom">
+                    <Themes:SystemDropShadowChrome x:Name="shadow" Color="Transparent" MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{Binding ActualWidth, ElementName=templateRoot}">
+                        <Border x:Name="dropDownBorder" Style="{StaticResource Styles.DefaultBorder}">
+                            <ScrollViewer x:Name="DropDownScrollViewer" VerticalScrollBarVisibility="Hidden">
+                                <Grid x:Name="grid" RenderOptions.ClearTypeHint="Enabled">
+                                    <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">
+                                        <Rectangle x:Name="opaqueRect" Fill="{Binding Background, ElementName=dropDownBorder}" Height="{Binding ActualHeight, ElementName=dropDownBorder}" Width="{Binding ActualWidth, ElementName=dropDownBorder}"/>
+                                    </Canvas>
+                                    <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                </Grid>
+                            </ScrollViewer>
+                        </Border>
+                    </Themes:SystemDropShadowChrome>
+                </Popup>
+                <ToggleButton x:Name="toggleButton" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.ColumnSpan="2" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource ComboBoxToggleButton}"/>
+                <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" Content="{TemplateBinding SelectionBoxItem}" ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" IsHitTestVisible="false" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="HasDropShadow" SourceName="PART_Popup" Value="true">
+                    <Setter Property="Margin" TargetName="shadow" Value="0,0,5,5"/>
+                    <Setter Property="Color" TargetName="shadow" Value="#71000000"/>
+                </Trigger>
+                <Trigger Property="HasItems" Value="false">
+                    <Setter Property="Height" TargetName="dropDownBorder" Value="95"/>
+                </Trigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsGrouping" Value="true"/>
+                        <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                </MultiTrigger>
+                <Trigger Property="ScrollViewer.CanContentScroll" SourceName="DropDownScrollViewer" Value="false">
+                    <Setter Property="Canvas.Top" TargetName="opaqueRect" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}"/>
+                    <Setter Property="Canvas.Left" TargetName="opaqueRect" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <SolidColorBrush x:Key="TextBox.Static.Background" Color="#FFFFFFFF"/>
+        <Style x:Key="ComboBoxEditableTextBox" TargetType="{x:Type TextBox}">
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="MinWidth" Value="0"/>
+            <Setter Property="MinHeight" Value="0"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <ScrollViewer x:Name="PART_ContentHost" Background="Transparent" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <ControlTemplate x:Key="ComboBoxEditableTemplate" TargetType="{x:Type ComboBox}">
+            <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="0"/>
+                </Grid.ColumnDefinitions>
+                <Popup x:Name="PART_Popup" AllowsTransparency="true" Grid.ColumnSpan="2" IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" Placement="Bottom">
+                    <Themes:SystemDropShadowChrome x:Name="shadow" Color="Transparent" MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{Binding ActualWidth, ElementName=templateRoot}">
+                        <Border x:Name="dropDownBorder" BorderBrush="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}" BorderThickness="1" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+                            <ScrollViewer x:Name="DropDownScrollViewer">
+                                <Grid x:Name="grid" RenderOptions.ClearTypeHint="Enabled">
+                                    <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">
+                                        <Rectangle x:Name="opaqueRect" Fill="{Binding Background, ElementName=dropDownBorder}" Height="{Binding ActualHeight, ElementName=dropDownBorder}" Width="{Binding ActualWidth, ElementName=dropDownBorder}"/>
+                                    </Canvas>
+                                    <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                </Grid>
+                            </ScrollViewer>
+                        </Border>
+                    </Themes:SystemDropShadowChrome>
+                </Popup>
+                <ToggleButton x:Name="toggleButton" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.ColumnSpan="2" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource ComboBoxToggleButton}"/>
+                <Border x:Name="border" Background="{StaticResource TextBox.Static.Background}" Margin="{TemplateBinding BorderThickness}">
+                    <TextBox x:Name="PART_EditableTextBox" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent}}" Margin="{TemplateBinding Padding}" Style="{StaticResource ComboBoxEditableTextBox}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                </Border>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                </Trigger>
+                <Trigger Property="IsKeyboardFocusWithin" Value="true">
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+                <Trigger Property="HasDropShadow" SourceName="PART_Popup" Value="true">
+                    <Setter Property="Margin" TargetName="shadow" Value="0,0,5,5"/>
+                    <Setter Property="Color" TargetName="shadow" Value="#71000000"/>
+                </Trigger>
+                <Trigger Property="HasItems" Value="false">
+                    <Setter Property="Height" TargetName="dropDownBorder" Value="95"/>
+                </Trigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsGrouping" Value="true"/>
+                        <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                </MultiTrigger>
+                <Trigger Property="ScrollViewer.CanContentScroll" SourceName="DropDownScrollViewer" Value="false">
+                    <Setter Property="Canvas.Top" TargetName="opaqueRect" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}"/>
+                    <Setter Property="Canvas.Left" TargetName="opaqueRect" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <Style TargetType="{x:Type ComboBox}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource ComboBox.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource ComboBox.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="Padding" Value="6,3,5,3"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template" Value="{StaticResource ComboBoxTemplate}"/>
+            <Style.Triggers>
+                <Trigger Property="IsEditable" Value="true">
+                    <Setter Property="IsTabStop" Value="false"/>
+                    <Setter Property="Padding" Value="2"/>
+                    <Setter Property="Template" Value="{StaticResource ComboBoxEditableTemplate}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <DataTemplate x:Key="SimpleChatChannelTemplate" DataType="data:ChatChannelOnOff">
+            <Grid ToolTip="{Binding Channel}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Ellipse Width="12" Height="12" Margin="4,0" VerticalAlignment="Center"
+                         Fill="{Binding Channel, Converter={StaticResource Converters.ChatChannelToColor}}"/>
+                <TextBlock Grid.Column="1" Style="{StaticResource Styles.DefaultText}" VerticalAlignment="Center"
+                           Foreground="#8fff" Text="{Binding Channel, Converter={StaticResource Converters.ChatChannelToName}}"></TextBlock>
+            </Grid>
         </DataTemplate>
     </Application.Resources>
 </Application>

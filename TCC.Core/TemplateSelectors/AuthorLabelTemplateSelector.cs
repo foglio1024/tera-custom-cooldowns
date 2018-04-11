@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using TCC.Data;
 
@@ -58,6 +53,12 @@ namespace TCC.TemplateSelectors
                 case ChatChannel.Quest:
                     return SystemAuthorTemplate;
                 case ChatChannel.Friend:
+                    return SystemAuthorTemplate;
+                case ChatChannel.SystemDefault:
+                    return SystemAuthorTemplate;
+                //case ChatChannel.WorldBoss:
+                //    return SystemAuthorTemplate;
+                case ChatChannel.Laurel:
                     return SystemAuthorTemplate;
                 default:
                     return DefaultAuthorTemplate;

@@ -41,7 +41,14 @@
                         HorizontalAlignment="Right"
                         Width="Auto"  
                         PreviewMouseLeftButtonDown="OutlinedTextBlock_PreviewMouseLeftButtonDown"
-/>
+                        MouseEnter="UIElement_OnMouseEnter"
+                        MouseLeave="UIElement_OnMouseLeave"
+        >
+            <ContentControl.Effect>
+                <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="1" Opacity="0"></DropShadowEffect>
+            </ContentControl.Effect>
+        </ContentControl>
+
         <!--Channel-->
         <ContentControl ContentTemplateSelector="{StaticResource ChannelLabelTemplateSelector}" 
                         Content="{Binding}"

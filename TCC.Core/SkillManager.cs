@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Threading;
 using TCC.Data.Databases;
-using TCC.Parsing.Messages;
 using TCC.ViewModels;
 
 namespace TCC
@@ -36,17 +29,17 @@ namespace TCC
         {
             if (skillCooldown.Cooldown == 0)
             {
-                CooldownWindowViewModel.Instance.RemoveSkill(skillCooldown.Skill);
+                CooldownWindowViewModel.Instance.Remove(skillCooldown.Skill);
             }
             else
             {
-                CooldownWindowViewModel.Instance.AddOrRefreshSkill(skillCooldown);
+                CooldownWindowViewModel.Instance.AddOrRefresh(skillCooldown);
             }
         }
 
 
 
-        public static void AddSkill(uint id, uint cd)
+        public static void AddSkill(uint id, ulong cd)
         {
             if (SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out Skill skill))
             {
@@ -58,11 +51,19 @@ namespace TCC
                 //WindowManager.SkillsEnded = false;
             }
         }
-        public static void AddBrooch(uint id, uint cd)
+        public static void AddItemSkill(uint id, uint cd)
         {
-            if (BroochesDatabase.TryGetBrooch(id, out Skill brooch))
+            if (ItemSkillsDatabase.TryGetItemSkill(id, out Skill brooch))
             {
-                RouteSkill(new SkillCooldown(brooch, cd, CooldownType.Item, CooldownWindowViewModel.Instance.GetDispatcher()));
+                try
+                {
+                    RouteSkill(new SkillCooldown(brooch, cd, CooldownType.Item, CooldownWindowViewModel.Instance.GetDispatcher()));
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
 
         }
@@ -71,7 +72,7 @@ namespace TCC
         {
             if (SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out Skill skill))
             {
-                CooldownWindowViewModel.Instance.RefreshSkill(skill, cd);
+                CooldownWindowViewModel.Instance.Change(skill, cd);
             }
 
         }
@@ -84,6 +85,15 @@ namespace TCC
             SessionManager.CurrentPlayer.Class = Class.None;
             SessionManager.CurrentPlayer.EntityId = 0;
             SessionManager.Logged = false;
+        }
+
+        public static void AddPassivitySkill(uint abId, uint cd)
+        {
+            if (PassivityDatabase.TryGetPassivitySkill(abId, out var skill))
+            {
+                RouteSkill(new SkillCooldown(skill, cd*1000, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher()));
+            }
+
         }
     }
 }

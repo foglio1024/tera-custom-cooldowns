@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using TCC.ViewModels;
 
@@ -15,7 +11,7 @@ namespace TCC.Converters
         {
             var val = (int)value;
 
-            if(val > GroupWindowViewModel.GROUP_SIZE_THRESHOLD)
+            if(val > SettingsManager.GroupSizeThreshold)
             {
                 return App.Current.FindResource("raid");
             }

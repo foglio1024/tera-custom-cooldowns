@@ -4,9 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Management;
 using System.Net;
-using System.Windows.Forms;
 using Data;
-using PacketDotNet;
 
 namespace NetworkSniffer
 {

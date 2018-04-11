@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tera.Game;
+﻿using Tera.Game;
 using Tera.Game.Messages;
 
 namespace TCC.Parsing.Messages
@@ -41,14 +36,15 @@ namespace TCC.Parsing.Messages
         public S_PLAYER_STAT_UPDATE(TeraMessageReader reader) : base(reader)
         {
             currHp = reader.ReadInt32();
+            /*if (reader.Version < 321550 || reader.Version > 321600)*/ reader.Skip(4);
             currMp = reader.ReadInt32();
-
+            /*if (reader.Version < 321550 || reader.Version > 321600)*/ reader.Skip(4);
             //unk1 = reader.ReadInt32();
             reader.Skip(4);
 
             maxHp = reader.ReadInt32();
+            /*if (reader.Version < 321550 || reader.Version > 321600)*/ reader.Skip(4);
             maxMp = reader.ReadInt32();
-
             //basePower = reader.ReadInt32();4
             //baseEndu = reader.ReadInt32();8
             //baseImpactFactor = reader.ReadInt32();12
@@ -87,8 +83,8 @@ namespace TCC.Parsing.Messages
             //bonusResistStun = reader.ReadSingle();132
             reader.Skip(132);
 
-            level = reader.ReadInt32();
-
+            level = reader.ReadInt16();
+            reader.Skip(2);
             //vitality = reader.ReadInt16();
             reader.Skip(2);
 

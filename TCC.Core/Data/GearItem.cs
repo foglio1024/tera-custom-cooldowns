@@ -1,0 +1,67 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using TCC.Data.Databases;
+
+namespace TCC.Data
+{
+    public class GearItem
+    {
+        public uint Id { get; private set; }
+        public GearTier Tier { get; private set; }
+        public GearPiece Piece { get; private set; }
+
+        public int Enchant { get; private set; }
+        public uint Experience { get; private set; }
+        public int MaxExperience => ItemsDatabase.Instance.GetMaxExp(Id, Enchant);
+
+        public double ExperienceFactor
+        {
+            get
+            {
+                if (MaxExperience == 0) return 0;
+                if (Experience >= MaxExperience) return 1;
+                return Experience / (double)MaxExperience;
+            }
+        }
+
+        public int CorrectedEnchant
+        {
+            get
+            {
+                if (!IsJewel) return Enchant;
+                return Tier == 0 ? 6 : 9;
+            }
+        }
+
+        public bool IsJewel => (int)Piece >= 5;
+        public int TotalLevel => CalculateLevel();
+        public double LevelFactor => TotalLevel / (double)37;
+        private int CalculateLevel()
+        {
+            var t = 0;
+            if (Tier > GearTier.Low)
+            {
+                t = ((int)Tier - 1) * 9 + 6;
+            }
+            return t + CorrectedEnchant;
+        }
+
+        public string Name => ItemsDatabase.Instance.GetItemName(Id);
+        public GearItem(uint id, GearTier t, GearPiece p, int enchant, uint exp)
+        {
+            Id = id;
+            Tier = t;
+            Piece = p;
+            Enchant = enchant;
+            Experience = exp;
+        }
+
+        public override string ToString()
+        {
+            return $"[{Id}] {Piece} {Tier} +{Enchant}";
+        }
+    }
+}

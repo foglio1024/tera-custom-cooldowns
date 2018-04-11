@@ -17,6 +17,8 @@ namespace TCC.Parsing.Messages
             playerId = reader.ReadUInt32();
 
             currentHP = reader.ReadInt32();
+            //if (reader.Version < 321550 || reader.Version > 321600)
+                reader.Skip(4);
             maxHP = reader.ReadInt32();
         }
     }

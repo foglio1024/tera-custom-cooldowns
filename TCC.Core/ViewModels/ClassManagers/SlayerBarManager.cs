@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using TCC.Data;
+﻿using TCC.Data;
 using TCC.Data.Databases;
 
 namespace TCC.ViewModels
@@ -16,7 +9,7 @@ namespace TCC.ViewModels
         public static SlayerBarManager Instance => _instance ?? (_instance = new SlayerBarManager());
 
         public DurationCooldownIndicator InColdBlood { get; set; }
-
+        public FixedSkillCooldown OverhandStrike { get; set; }
         public SlayerBarManager() : base()
         {
             _instance = this;
@@ -27,12 +20,18 @@ namespace TCC.ViewModels
         protected override void LoadSpecialSkills()
         {
             SkillsDatabase.TryGetSkill(200200, Class.Slayer, out Skill icb);
+            SkillsDatabase.TryGetSkill(80900, Class.Slayer, out Skill ohs);
+
             InColdBlood =
                 new DurationCooldownIndicator(_dispatcher)
                 {
                     Buff = new FixedSkillCooldown(icb, CooldownType.Skill, _dispatcher, false),
                     Cooldown = new FixedSkillCooldown(icb, CooldownType.Skill, _dispatcher, true)
                 };
+
+            OverhandStrike =
+                new FixedSkillCooldown(ohs, CooldownType.Skill, _dispatcher, false);
+
         }
 
         public override bool StartSpecialSkill(SkillCooldown sk)
@@ -40,6 +39,11 @@ namespace TCC.ViewModels
             if (sk.Skill.IconName == InColdBlood.Cooldown.Skill.IconName)
             {
                 InColdBlood.Cooldown.Start(sk.Cooldown);
+                return true;
+            }
+            if (sk.Skill.IconName == OverhandStrike.Skill.IconName)
+            {
+                OverhandStrike.Start(sk.Cooldown);
                 return true;
             }
             return false;

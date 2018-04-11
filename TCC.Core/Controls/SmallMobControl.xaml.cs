@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Media.Animation;
+using System.Windows.Threading;
+using TCC.Data;
+using TCC.ViewModels;
 
 namespace TCC.Controls
 {
@@ -20,9 +14,30 @@ namespace TCC.Controls
     /// </summary>
     public partial class SmallMobControl : UserControl
     {
+        private DispatcherTimer t;
         public SmallMobControl()
         {
             InitializeComponent();
         }
+
+        private void SmallMobControl_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            var dc = (Npc) DataContext;
+            dc.DeleteEvent += Dc_DeleteEvent;
+            t = new DispatcherTimer {Interval = TimeSpan.FromSeconds(4700)};
+            t.Tick += (s,ev) => RootGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(1,0,TimeSpan.FromMilliseconds(200)));
+            RootGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0,1,TimeSpan.FromMilliseconds(200)));
+        }
+
+        private void Dc_DeleteEvent() => Dispatcher.Invoke(() =>
+        {
+            t.Start();
+            try
+            {
+                BossGageWindowViewModel.Instance.RemoveMe((Npc) DataContext);
+            }
+            catch { }
+        });
+
     }
 }
