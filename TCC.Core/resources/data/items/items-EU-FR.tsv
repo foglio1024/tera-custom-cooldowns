@@ -819,6 +819,24 @@
 2217	1	Caisse de ravitaillement de cristaux du gardien VI	0	1	icon_items.gift_box01_tex
 2218	1	Caisse de ravitaillement de cristaux du juge VI	0	1	icon_items.gift_box01_tex
 2219	1	Caisse de ravitaillement de cristaux du guérisseur VI	0	1	icon_items.gift_box01_tex
+2220	1	Caisse de ravitaillement de cristaux VII	0	1	icon_items.gift_box01_tex
+2221	1	Caisse de ravitaillement de cristaux du Pourfendeur VII	0	1	icon_items.gift_box01_tex
+2222	1	Caisse de ravitaillement de cristaux du gardien VII	0	1	icon_items.gift_box01_tex
+2223	1	Caisse de ravitaillement de cristaux du juge VII	0	1	icon_items.gift_box01_tex
+2224	1	Caisse de ravitaillement de cristaux du guérisseur VII	0	1	icon_items.gift_box01_tex
+2230	1	[Niveau 1 à 19] Équipement du Guerrier revenu	0	1	icon_items.gift_box03_tex
+2231	1	[Niveau 20 à 25] Équipement du Guerrier revenu	0	1	icon_items.gift_box03_tex
+2232	1	[Niveau 26 à 31] Équipement du Guerrier revenu	0	1	icon_items.gift_box03_tex
+2233	1	[Niveau 32 à 37] Équipement du Guerrier revenu	0	1	icon_items.gift_box03_tex
+2234	1	[Niveau 38 à 43] Équipement du Guerrier revenu	0	1	icon_items.gift_box03_tex
+2235	1	[Niveau 44 à 49] Équipement du Guerrier revenu	0	1	icon_items.gift_box03_tex
+2236	1	[Niveau 50 à 54] Équipement du Guerrier revenu	0	1	icon_items.gift_box03_tex
+2237	1	[Niveau 55 à 57] Équipement du Guerrier revenu	0	1	icon_items.gift_box03_tex
+2238	1	[Niveau 58 à 59] Équipement du Guerrier revenu	0	1	icon_items.gift_box03_tex
+2239	1	[Niveau 60 à 61] Équipement du Guerrier revenu	0	1	icon_items.gift_box03_tex
+2240	1	[Niveau 62 à 63] Équipement du Guerrier revenu	0	1	icon_items.gift_box03_tex
+2241	1	[Niveau 64] Équipement du Guerrier revenu	0	1	icon_items.gift_box03_tex
+2242	1	[Niveau 65] Équipement du Guerrier revenu	0	1	icon_items.gift_box03_tex
 4001	0	ExteriorExtractionWeapon_7ExteriorLevel_TwinSwords	0	0	icon_equipments.dual1_tex
 4002	0	ExteriorExtractionWeapon_7ExteriorLevel_Lance	0	0	icon_equipments.lance1_tex
 4003	0	ExteriorExtractionWeapon_7ExteriorLevel_Broadsword	0	0	icon_equipments.twohand1_tex
@@ -1476,6 +1494,7 @@
 5267	1	Équipement de Hautegarde pour Ninja	0	1	icon_items.gift_box03_tex
 5268	1	Équipement d'Arx Umbra pour Ninja	0	1	icon_items.gift_box03_tex
 5269	2	Potion puissante de chasse (1 jour)	0	3	icon_items.f2p_xpbooster_tex
+5270	2	Guide du voyageur : raccourcis personnels (15 jours)	0	30	icon_items.travelbook_village_tex
 6000	0	Potion de soins I	0	60	icon_items.hp_potion_level_1_tex
 6001	1	Potion de soins majeure I	0	60	icon_items.hp_potion_level_1_tex
 6002	0	Potion de soins II	0	60	icon_items.hp_potion_level_9_tex
@@ -15281,6 +15300,7 @@
 32126	1	[Défenseur archidevan] Marchandises de ravitaillement de niveau 3	0	1	icon_items.k_treasurebox1_tex
 32127	1	[Défenseur archidevan] Marchandises de ravitaillement de niveau 4	0	1	icon_items.k_treasurebox1_tex
 32128	0	[Défenseur archidevan] Marchandises de ravitaillement de niveau 5	0	1	icon_items.k_treasurebox1_tex
+32129	3	Fête de Velika : souvenir	0	0	icon_items.leaprage_tex
 35000	1	Glyphe de puissance	0	0	icon_crest.crestpointattack_tex
 35001	1	Glyphe d'énergie	0	0	icon_crest.crestevasionattack_tex
 35002	1	Glyphe de récupération	0	0	icon_crest.crestpointattack_tex
@@ -15298,15 +15318,15 @@
 35014	1	Glyphe de lien de pouvoir	0	0	icon_crest.crestreversalturningattack_tex
 35015	1	Glyphe de puissance	0	0	icon_crest.crestraker_tex
 35016	1	Glyphe de persistance	0	0	icon_crest.crestbackattack_tex
-35017	1	Glyphe du rapide	0	0	icon_crest.crestheavybite_tex
+35017	1	Frappe bondissante rapide	0	0	icon_crest.crestdownblowattack_tex
 35018	1	Glyphe d'accumulation	0	0	icon_crest.crestpoisonblowattack_tex
 35019	1	Glyphe d'avantage	0	0	icon_crest.crestdualslash_tex
 35020	0	Eclat de glyphe du passé	0	0	icon_crest.crestrupture_tex
 35021	0	Eclat de glyphe du passé	0	0	icon_crest.cresttwinswordsdefence_tex
 35022	0	Eclat de glyphe du passé	0	0	icon_crest.crestshadowchange_tex
 35023	1	Glyphe du rapide	0	0	icon_crest.cresttumbling_tex
-35024	1	Glyphe de brutalité	0	0	icon_crest.crestnanmu_tex
-35025	1	Glyphe de puissance	0	0	icon_crest.crestallroundslash_tex
+35024	0	Glyphe de brutalité	0	0	icon_crest.crestnanmu_tex
+35025	1	Glyphe de puissance	0	0	icon_crest.stormcut_tex
 35026	1	Glyphe d'alimentation	0	0	icon_crest.cresthardslash_tex
 35027	1	Glyphe d'hébétude	0	0	icon_crest.cresttenaciousattack_tex
 35028	1	Glyphe d'énergie	0	0	icon_crest.crestbackattack_tex
@@ -15324,7 +15344,7 @@
 35654	1	Glyphe de brillance	0	0	icon_crest.crestroar_tex
 35655	1	Glyphe de ralentissement	0	0	icon_crest.crestshockblow_tex
 35656	1	Glyphe de brillance	0	0	icon_crest.crestscrewthough_tex
-35657	1	Glyphe d'énergie	0	0	icon_crest.crestinspiringroar_tex
+35657	0	Glyphe d'énergie	0	0	icon_crest.crestinspiringroar_tex
 35658	1	Glyphe d'hébétude	0	0	icon_crest.crestprovokerage_tex
 35659	1	Glyphe d'hébétude	0	0	icon_crest.cresthookthrow_tex
 35660	1	Glyphe de menace	0	0	icon_crest.cresthookthrow_tex
@@ -15368,8 +15388,8 @@
 36309	1	Glyphe du tranchant	0	0	icon_crest.crestsworddance_tex
 36310	1	Glyphe de lien de pouvoir	0	0	icon_crest.cresttumbling_tex
 36311	1	Glyphe du tranchant	0	0	icon_crest.creststingerblade_tex
-36312	1	Glyphe du tranchant	0	0	icon_crest.crestgatheringstrength_tex
-36313	1	Glyphe d'augmentation	0	0	icon_crest.crestgatheringstrength_tex
+36312	1	Coup renversant de gravure	0	0	icon_crest.cresthandyslash_tex
+36313	1	Tourbillon puissant	0	0	icon_crest.crestsworddance_tex
 36314	1	Glyphe du rapide	0	0	icon_crest.crestretreatingkick_tex
 36315	1	Glyphe de puissance	0	0	icon_crest.crestcuthead_tex
 36316	1	Glyphe de puissance	0	0	icon_crest.crestragingstrike_tex
@@ -15383,26 +15403,26 @@
 36324	2	Frappe verticale occasionnelle	0	0	icon_crest.crestcuttingslash_tex
 36325	2	Glyphe de puissance	0	0	icon_crest.cresthandyslash_tex
 36326	2	Glyphe de gravure	0	0	icon_crest.crestsworddance_tex
-36327	2	Glyphe de gravure	0	0	icon_crest.crestgatheringstrength_tex
+36327	2	Coup renversant de gravure	0	0	icon_crest.cresthandyslash_tex
 36328	1	Glyphe de gravure	0	0	icon_crest.crestcuthead_tex
 36329	2	Glyphe de puissance	0	0	icon_crest.crestcuthead_tex
 36330	2	Glyphe de puissance	0	0	icon_crest.crestjawbreaker_tex
 36331	1	Glyphe d'alimentation	0	0	icon_crest.crestjawbreaker_tex
 36500	0	Eclat de glyphe du passé	0	0	icon_crest.crestcuthead_tex
 36950	1	Glyphe de gravure	0	0	icon_crest.crestblastslash_tex
-36951	1	Glyphe du lissage	0	0	icon_crest.crestblastslash_tex
+36951	1	Frappe de tonnerre puissante	0	0	icon_crest.crestblastslash_tex
 36952	1	Glyphe du rapide	0	0	icon_crest.crestbash_tex
 36953	1	Glyphe de la guérison	0	0	icon_crest.crestblastslash_tex
 36954	1	Glyphe de hâte	0	0	icon_crest.crestwhirlwind_tex
 36955	1	Glyphe de puissance	0	0	icon_crest.crestbash_tex
-36956	1	Glyphe d'équilibre	0	0	icon_crest.cresttenacity_tex
-36957	1	Glyphe de hâte [cyclone] - Cri moqueur	0	0	icon_crest.crestshockingshout_tex
+36956	1	Cri de triomphe équilibrant	0	0	icon_crest.cresttenacity_tex
+36957	1	Glyphe d'enchaînement (Cyclone rapide) : Terrasser	0	0	icon_crest.crestassaultattack_tex
 36958	1	Glyphe d'embrasement	0	0	icon_crest.crestmurderousvent_tex
-36959	1	Ténacité protectrice	0	0	icon_crest.cresttenacity_tex
+36959	1	Cri de triomphe protecteur	0	0	icon_crest.cresttenacity_tex
 36960	1	Célérité occasionnelle	0	0	icon_crest.crestdash_tex
 36961	1	Glyphe du tranchant	0	0	icon_crest.crestdownblowattack_tex
-36962	1	Glyphe de récupération	0	0	icon_crest.cresttenacity_tex
-36963	1	Glyphe d'esprit	0	0	icon_crest.cresttenacity_tex
+36962	1	Cri de triomphe de restauration	0	0	icon_crest.cresttenacity_tex
+36963	1	Cri de triomphe brillant	0	0	icon_crest.cresttenacity_tex
 36964	1	Glyphe de furie	0	0	icon_crest.crestrisingattack_tex
 36965	1	Glyphe de gravure	0	0	icon_crest.crestribbreaker_tex
 36966	1	Glyphe de stimulation	0	0	icon_crest.crestweapondefence_tex
@@ -15412,7 +15432,7 @@
 36970	1	Glyphe de la pompe	0	0	icon_crest.crestberserk_tex
 36971	1	Frénésie persistante	0	0	icon_crest.crestberserk_tex
 36972	1	Glyphe de puissance	0	0	icon_crest.crestsoulstrike_tex
-36973	2	Glyphe du lissage	0	0	icon_crest.crestblastslash_tex
+36973	2	Frappe de tonnerre puissante	0	0	icon_crest.crestblastslash_tex
 36974	2	Glyphe du rapide	0	0	icon_crest.crestwhirlwind_tex
 36975	2	Glyphe de puissance	0	0	icon_crest.crestbash_tex
 36976	1	Glyphe de puissance	0	0	icon_crest.crestribbreaker_tex
@@ -15526,15 +15546,15 @@
 38931	1	Glyphe de persistance	0	0	icon_crest.crestplague_tex
 38932	2	Glyphe d'énergie	0	0	icon_crest.crestarmorofprotection_tex
 38933	1	Glyphe d'énergie	0	0	icon_crest.crestresurrect_tex
-38934	1	Glyphe d'alimentation	0	0	icon_crest.crestmanarejuvenation_tex
+38934	1	Glyphe d'enchaînement (Implosion électrique puissante) : Charge de mana, ultime invocation	0	0	icon_crest.crestmanarejuvenation_tex
 38935	1	Contre-attaque finale occasionnelle	0	0	icon_crest.crestpunishingtouch_tex
 38936	1	Glyphe d'affaiblissement	0	0	icon_crest.crestdivineretribution_tex
 38937	2	Glyphe d'alimentation [Contre-attaque finale] - Implosion électrique	0	0	icon_crest.crestdamagedeal_tex
 38938	2	Glyphe d'énergie	0	0	icon_crest.crestprophecyoflethargy_tex
 38939	2	Glyphe d'énergie	0	0	icon_crest.crestsanctuary_tex
-38940	2	Glyphe d'esprit	0	0	icon_crest.crestmanarejuvenation_tex
+38940	2	Charge de mana brillante, ultime invocation brillante	0	0	icon_crest.crestmanarejuvenation_tex
 38941	2	Glyphe d'encouragement	0	0	icon_crest.crestresurrect_tex
-38942	1	Glyphe de dispersion	0	0	icon_crest.cresthelpinghand_tex
+38942	1	Intervention divine galopante, ultime tentative galopante	0	0	icon_crest.cresthelpinghand_tex
 38943	2	Glyphe d'énergie	0	0	icon_crest.crestgodbreath_tex
 38944	1	Glyphe d'alimentation	0	0	icon_crest.crestchainsmash_tex
 38945	1	Glyphe de puissance	0	0	icon_crest.crestchainblow_tex
@@ -15568,18 +15588,18 @@
 39554	1	Glyphe de prestesse	0	0	icon_crest.crestattackup_tex
 39555	1	Glyphe d'énergie	0	0	icon_crest.cresthealingwind_tex
 39556	1	Glyphe d'énergie	0	0	icon_crest.crestprophecyoflethargy_tex
-39557	1	Glyphe de brillance	0	0	icon_crest.crestsanctuaryofregeneration_tex
+39557	0	Glyphe de brillance	0	0	icon_crest.crestsanctuaryofregeneration_tex
 39558	1	Glyphe de brillance	0	0	icon_crest.crestresurrect_tex
 39559	1	Glyphe d'énergie	0	0	icon_crest.crestsanctuary_tex
 39560	1	Glyphe de régénération	0	0	icon_crest.crestarmorofprotection_tex
-39561	1	Glyphe d'esprit	0	0	icon_crest.crestmanarejuvenation_tex
+39561	1	Charge de mana brillante, ultime invocation brillante	0	0	icon_crest.crestmanarejuvenation_tex
 39562	1	Glyphe d'apaisement	0	0	icon_crest.cresthealinglightlockon_tex
 39563	1	Glyphe d'équilibre	0	0	icon_crest.crestguardianaura_tex
 39564	1	Glyphe de persistance	0	0	icon_crest.crestrecovery_tex
 39565	1	Glyphe de récupération	0	0	icon_crest.crestcurewing_tex
 39566	1	Glyphe d'augmentation	0	0	icon_crest.crestattackup_tex
 39567	1	Glyphe de hâte	0	0	icon_crest.crestmpcharge_tex
-39568	1	Glyphe d'esprit	0	0	icon_crest.crestsanctuaryofregeneration_tex
+39568	1	Cercle de régénération brillant	0	0	icon_crest.crestsanctuaryofregeneration_tex
 39569	1	Glyphe d'encouragement	0	0	icon_crest.crestresurrect_tex
 39570	1	Glyphe d'énergie	0	0	icon_crest.crestholdtheline_tex
 39571	1	Glyphe de persistance	0	0	icon_crest.crestholdtheline_tex
@@ -15594,7 +15614,7 @@
 39580	1	Glyphe d'énergie	0	0	icon_crest.cresttenacity_tex
 39581	1	Glyphe d'esprit	0	0	icon_crest.cresttenacity_tex
 39582	1	Glyphe d'équilibre	0	0	icon_crest.cresttenacity_tex
-39583	1	Glyphe de brillance	0	0	icon_crest.cresthelpinghand_tex
+39583	1	Intervention divine brillante, ultime tentative brillante	0	0	icon_crest.cresthelpinghand_tex
 39584	1	Glyphe d'encouragement	0	0	icon_crest.crestresurrect_tex
 39585	1	Glyphe d'affaiblissement	0	0	icon_crest.crestpainfulshackle_tex
 39586	1	Glyphe d'énergie	0	0	icon_crest.cresthideindarkness_tex
@@ -15607,7 +15627,7 @@
 39593	1	Glyphe de menace	0	0	icon_crest.crestholdtheline_tex
 39594	1	Glyphe d'énergie	0	0	icon_crest.crestjawbreaker_tex
 39595	1	Glyphe d'énergie	0	0	icon_crest.crestmanaburst_tex
-39596	1	Glyphe d'énergie	0	0	icon_crest.cresthelpinghand_tex
+39596	1	Intervention divine énergétique, ultime tentative énergétique	0	0	icon_crest.cresthelpinghand_tex
 39597	1	Glyphe d'énergie	0	0	icon_crest.crestgodbreath_tex
 39598	1	Glyphe d'énergie	0	0	icon_crest.crestmysticorb_tex
 39599	1	Glyphe du tranchant	0	0	icon_crest.crestchainsuperblow_tex
@@ -15689,6 +15709,13 @@
 39803	2	Glyphe de gravure	0	0	icon_crest.cr12_twinslash
 39804	2	Glyphe de puissance	0	0	icon_crest.cr12_flamebreath
 39805	2	Glyphe d'énergie	0	0	icon_crest.cr12_dash
+39806	3	[Légendaire] Frappe verticale opportune	0	0	icon_crest.crestcuttingslash_tex
+39807	3	[Légendaire] Coup mortel de gravure	0	0	icon_crest.crestsoulstrike_tex
+39808	3	[Légendaire] Marteau-pilon de gravure	0	0	icon_crest.crestrisingblow_tex
+39809	3	[Légendaire] En garde opportun	0	0	icon_crest.crestdualslash_tex
+39810	3	[Légendaire] Bourrade de gravure	0	0	icon_crest.crestoverhelm_tex
+39811	3	[Légendaire] Concentration de soins opportune	0	0	icon_crest.crestcurewing_tex
+39812	3	[Légendaire] Serviteur de vie opportun	0	0	icon_crest.crestsummonspiritofheal_tex
 45001	0	Viande séchée de noruk	0	180	icon_items.beefjerky_tex
 45002	0	Potion leste	0	180	icon_items.leoparddrug_tex
 45003	0	Vin millésimé	0	180	icon_items.oldwine_tex
@@ -15899,6 +15926,8 @@
 46600	0	Missive de Seir	0	0	icon_items.q_scrollseal_tex
 46601	0	Parchemin de téléportation : San Allema	0	30	icon_items.townrecall_tex
 46701	0	Liquide expérimental	0	0	icon_items.potion2_tex
+46702	0	Document inconnu	0	0	icon_items.goldenletter_tex
+46703	0	Plan stratégique : Préparation de l'attaque sur Velika	0	0	icon_items.goldenletter_tex
 47001	3	Épave & Ruine	0	0	icon_equipments.dual10_tex
 47002	3	Éperon fulgurant	0	0	icon_equipments.lance10_tex
 47003	3	Abattoir des profondeurs	0	0	icon_equipments.twohand10_tex
@@ -20990,6 +21019,19 @@
 88628	3	Boucle d'oreille puissante d'éternité	0	0	icon_equipments.earring_26_tex
 88629	3	Anneau puissant d'immortalité	0	0	icon_equipments.ring_26_tex
 88630	3	Serre-tête d'honneur	0	0	icon_equipments.acc_619_tex
+88700	1	Fête de Velika : invitation	0	60	icon_items.q_letterseal_tex
+88701	0	Parchemin de téléportation du sage : Élénea	0	30	icon_items.townrecall_tex
+88702	0	Parchemin de téléportation : Crête déchiquetée	0	30	icon_items.townrecall_tex
+88703	0	Fête de Velika : clé de caisses de fortune	0	0	icon_items.q_key3_tex
+88704	0	Fête de Velika : médaille commémorative	0	0	icon_items.goldcoin_tex
+88705	0	Lettre de Berdash	0	0	icon_items.q_letterseal_tex
+88706	3	Barbecue traditionnel des Champs lugubres	0	60	icon_items.pigling_ribs_tex
+88707	3	Salade de flammèches des Terres libres	0	60	icon_items.fallfestival_rikanosalad_tex
+88708	3	Ailes lugubres	0	60	icon_items.fallfestival_wing_tex
+88709	3	Caisse de glyphe légendaire de Mystel	0	0	icon_items.gift_box04_tex
+88710	2	Insigne du gardien	0	0	icon_items.parchment_tex
+88711	0	Fête de Velika : médaille commémorative	0	0	icon_items.goldcoin_tex
+88715	2	Document du gardien	0	0	icon_items.missing_person_book_tex
 90086	1	Compétence de familier : Miss Kitty	0	0	icon_items.petskillbook_tex
 90087	1	Compétence de familier : Willoe	0	0	icon_items.petskillbook_tex
 90088	1	Compétence de familier : Dundee	0	0	icon_items.petskillbook_tex
@@ -23790,6 +23832,54 @@
 98587	2	Caisse de récompense de la Claire-voie	0	0	icon_items.tresurebox1_tex
 98588	2	Caisse de récompense du Berceau des Kumas	0	0	icon_items.tresurebox1_tex
 98589	2	Caisse de récompense de la Vallée du tonnerre	0	0	icon_items.tresurebox1_tex
+98601	2	Compétence de chance : Vakna puissante	0	0	icon_items.skillbook_lion1_tex
+98602	3	Compétence de chance : ancienne Vakna puissante	0	0	icon_items.skillbook_lion1_tex
+98603	2	Compétences de vol : Vakna	0	0	icon_items.skillbook_lion1_tex
+98604	3	Compétences de vol : ancienne Vakna	0	0	icon_items.skillbook_lion1_tex
+98605	2	Compétence de chance : Vakna puissante	0	0	icon_items.skillbook_lion1_tex
+98606	3	Compétence de chance : ancienne Vakna puissante	0	0	icon_items.skillbook_lion1_tex
+98607	2	Compétences de vol : Vakna	0	0	icon_items.skillbook_lion1_tex
+98608	3	Compétences de vol : ancienne Vakna	0	0	icon_items.skillbook_lion1_tex
+98609	2	Compétence de chance : Vakna puissante (3 jours)	0	0	icon_items.skillbook_lion1_tex
+98610	3	Compétence de chance : ancienne Vakna puissante (3 jours)	0	0	icon_items.skillbook_lion1_tex
+98611	2	Compétence de chance : Vakna puissante (7 jours)	0	0	icon_items.skillbook_lion1_tex
+98612	3	Compétence de chance : ancienne Vakna puissante (7 jours)	0	0	icon_items.skillbook_lion1_tex
+98613	2	Compétence de chance : Vakna puissante (14 jours)	0	0	icon_items.skillbook_lion1_tex
+98614	3	Compétence de chance : ancienne Vakna puissante (14 jours)	0	0	icon_items.skillbook_lion1_tex
+98615	2	Compétence de chance : Vakna puissante (30 jours)	0	0	icon_items.skillbook_lion1_tex
+98616	3	Compétence de chance : ancienne Vakna puissante (30 jours)	0	0	icon_items.skillbook_lion1_tex
+98617	2	Compétences de vol : Vakna (3 jours)	0	0	icon_items.skillbook_lion1_tex
+98618	2	Compétences de vol : Vakna (7 jours)	0	0	icon_items.skillbook_lion1_tex
+98619	2	Compétences de vol : Vakna (14 jours)	0	0	icon_items.skillbook_lion1_tex
+98620	2	Compétences de vol : Vakna (30 jours)	0	0	icon_items.skillbook_lion1_tex
+98621	3	Compétences de vol : ancienne Vakna (3 jours)	0	0	icon_items.skillbook_lion1_tex
+98622	3	Compétences de vol : ancienne Vakna (7 jours)	0	0	icon_items.skillbook_lion1_tex
+98623	3	Compétences de vol : ancienne Vakna (14 jours)	0	0	icon_items.skillbook_lion1_tex
+98624	3	Compétences de vol : ancienne Vakna (30 jours)	0	0	icon_items.skillbook_lion1_tex
+98625	2	Compétence de chance : Somno puissant	0	0	icon_items.skillbook_lion1_tex
+98626	3	Compétence de chance : ancien Somno puissant	0	0	icon_items.skillbook_lion1_tex
+98627	2	Compétences de vol : Somno	0	0	icon_items.skillbook_lion1_tex
+98628	3	Compétences de vol : ancien Somno	0	0	icon_items.skillbook_lion1_tex
+98629	2	Compétence de chance : Somno puissant	0	0	icon_items.skillbook_lion1_tex
+98630	3	Compétence de chance : ancien Somno puissant	0	0	icon_items.skillbook_lion1_tex
+98631	2	Compétences de vol : Somno	0	0	icon_items.skillbook_lion1_tex
+98632	3	Compétences de vol : ancien Somno	0	0	icon_items.skillbook_lion1_tex
+98633	2	Compétence de chance : Somno puissant (3 jours)	0	0	icon_items.skillbook_lion1_tex
+98634	3	Compétence de chance : ancien Somno puissant (3 jours)	0	0	icon_items.skillbook_lion1_tex
+98635	2	Compétence de chance : Somno puissant (7 jours)	0	0	icon_items.skillbook_lion1_tex
+98636	3	Compétence de chance : ancien Somno puissant (7 jours)	0	0	icon_items.skillbook_lion1_tex
+98637	2	Compétence de chance : Somno puissant (14 jours)	0	0	icon_items.skillbook_lion1_tex
+98638	3	Compétence de chance : ancien Somno puissant (14 jours)	0	0	icon_items.skillbook_lion1_tex
+98639	2	Compétence de chance : Somno puissant (30 jours)	0	0	icon_items.skillbook_lion1_tex
+98640	3	Compétence de chance : ancien Somno puissant (30 jours)	0	0	icon_items.skillbook_lion1_tex
+98641	2	Compétences de vol : Somno (3 jours)	0	0	icon_items.skillbook_lion1_tex
+98642	2	Compétences de vol : Somno (7 jours)	0	0	icon_items.skillbook_lion1_tex
+98643	2	Compétences de vol : Somno (14 jours)	0	0	icon_items.skillbook_lion1_tex
+98644	2	Compétences de vol : Somno (30 jours)	0	0	icon_items.skillbook_lion1_tex
+98645	3	Compétences de vol : ancien Somno (3 jours)	0	0	icon_items.skillbook_lion1_tex
+98646	3	Compétences de vol : ancien Somno (7 jours)	0	0	icon_items.skillbook_lion1_tex
+98647	3	Compétences de vol : ancien Somno (14 jours)	0	0	icon_items.skillbook_lion1_tex
+98648	3	Compétences de vol : ancien Somno (30 jours)	0	0	icon_items.skillbook_lion1_tex
 99000	0	Sous-vêtements du champ de bataille	0	0	icon_equipments.underwear00_m_tex
 99001	0	Serre-tête de champ de bataille	0	0	icon_equipments.acc_580_tex
 99011	0	[Counterstrike Online] Transformation en zombie mâle (1&nbsp;heure)	0	3	icon_items.rare_potion11_tex
@@ -25600,7 +25690,7 @@
 201100	3	Potion PEX de clarté	0	1	icon_items.ep_reset_tex
 201101	3	Points de PE I	0	604800	icon_items.ep_point1_tex
 201102	3	Points de PE II	0	1209600	icon_items.ep_point2_tex
-201105	3	Points de PE V	0	2419200	icon_items.ep_point5_tex
+201105	3	Points de PE V	0	1	icon_items.ep_point5_tex
 201151	1	Potion de chasse PE (1 heure)	0	3	icon_items.ep_grow30_tex
 201152	1	Grande potion de chasse PE (1 heure)	0	3	icon_items.ep_grow50_tex
 201153	1	Puissante potion de chasse PE (1 heure)	0	3	icon_items.ep_grow100_tex
@@ -25699,6 +25789,126 @@
 201360	3	[Emplacement réservé] Bon de visage spécifique (Humain, femme)	0	0	icon_items.charface_change_tex
 201361	3	[Emplacement réservé] Bon de couleur de cheveux spécifique (Humain, femme)	0	0	icon_items.bluecustomize21g_tex
 201362	3	[Emplacement réservé] Bon de bronzage spécifique (Humain, femme)	0	0	icon_items.dye_result_random_tex
+201363	2	Armure de bourreau du dragon noir	0	0	icon_equipments.human_m_h25b_tex
+201364	2	Armure de bourreau du dragon noir	0	0	icon_equipments.human_m_h25b_tex
+201365	2	Armure de bourreau du dragon noir (3 jours)	0	0	icon_equipments.human_m_h25b_tex
+201366	2	Armure de bourreau du dragon noir (7 jours)	0	0	icon_equipments.human_m_h25b_tex
+201367	2	Armure de bourreau du dragon noir (7 jours)	0	0	icon_equipments.human_m_h25b_tex
+201368	2	Armure de bourreau du dragon noir (14 jours)	0	0	icon_equipments.human_m_h25b_tex
+201369	2	Armure de bourreau du dragon noir (30 jours)	0	0	icon_equipments.human_m_h25b_tex
+201370	2	Armure de bourreau du dragon noir (30 jours)	0	0	icon_equipments.human_m_h25b_tex
+201371	2	Armure de bourreau du dragon noir	0	0	icon_equipments.human_m_h25b_tex
+201372	2	Armure de bourreau du dragon noir	0	0	icon_equipments.human_m_h25b_tex
+201373	2	Armure de bourreau du dragon noir	0	0	icon_equipments.human_m_h25b_tex
+201374	2	Armure de bourreau du dragon noir	0	0	icon_equipments.human_m_h25b_tex
+201375	2	Cuirasse de bourreau du dragon noir	0	0	icon_equipments.human_m_l26b_tex
+201376	2	Cuirasse de bourreau du dragon noir	0	0	icon_equipments.human_m_l26b_tex
+201377	2	Cuirasse de bourreau du dragon noir (3 jours)	0	0	icon_equipments.human_m_l26b_tex
+201378	2	Cuirasse de bourreau du dragon noir (7 jours)	0	0	icon_equipments.human_m_l26b_tex
+201379	2	Cuirasse de bourreau du dragon noir (7 jours)	0	0	icon_equipments.human_m_l26b_tex
+201380	2	Cuirasse de bourreau du dragon noir (14 jours)	0	0	icon_equipments.human_m_l26b_tex
+201381	2	Cuirasse de bourreau du dragon noir (30 jours)	0	0	icon_equipments.human_m_l26b_tex
+201382	2	Cuirasse de bourreau du dragon noir (30 jours)	0	0	icon_equipments.human_m_l26b_tex
+201383	2	Cuirasse de bourreau du dragon noir	0	0	icon_equipments.human_m_l26b_tex
+201384	2	Cuirasse de bourreau du dragon noir	0	0	icon_equipments.human_m_l26b_tex
+201385	2	Cuirasse de bourreau du dragon noir	0	0	icon_equipments.human_m_l26b_tex
+201386	2	Cuirasse de bourreau du dragon noir	0	0	icon_equipments.human_m_l26b_tex
+201387	2	Toge de bourreau du dragon noir	0	0	icon_equipments.human_m_r25b_tex
+201388	2	Toge de bourreau du dragon noir	0	0	icon_equipments.human_m_r25b_tex
+201389	2	Toge de bourreau du dragon noir (3 jours)	0	0	icon_equipments.human_m_r25b_tex
+201390	2	Toge de bourreau du dragon noir (7 jours)	0	0	icon_equipments.human_m_r25b_tex
+201391	2	Toge de bourreau du dragon noir (7 jours)	0	0	icon_equipments.human_m_r25b_tex
+201392	2	Toge de bourreau du dragon noir (14 jours)	0	0	icon_equipments.human_m_r25b_tex
+201393	2	Toge de bourreau du dragon noir (30 jours)	0	0	icon_equipments.human_m_r25b_tex
+201394	2	Toge de bourreau du dragon noir (30 jours)	0	0	icon_equipments.human_m_r25b_tex
+201395	2	Toge de bourreau du dragon noir	0	0	icon_equipments.human_m_r25b_tex
+201396	2	Toge de bourreau du dragon noir	0	0	icon_equipments.human_m_r25b_tex
+201397	2	Toge de bourreau du dragon noir	0	0	icon_equipments.human_m_r25b_tex
+201398	2	Toge de bourreau du dragon noir	0	0	icon_equipments.human_m_r25b_tex
+201399	2	Lance de bourreau du dragon noir	0	0	icon_equipments.lance31_c_tex
+201400	2	Lance de bourreau du dragon noir	0	0	icon_equipments.lance31_c_tex
+201401	2	Lance de bourreau du dragon noir (3 jours)	0	0	icon_equipments.lance31_c_tex
+201402	2	Lance de bourreau du dragon noir (7 jours)	0	0	icon_equipments.lance31_c_tex
+201403	2	Lance de bourreau du dragon noir (7 jours)	0	0	icon_equipments.lance31_c_tex
+201404	2	Lance de bourreau du dragon noir (14 jours)	0	0	icon_equipments.lance31_c_tex
+201405	2	Lance de bourreau du dragon noir (30 jours)	0	0	icon_equipments.lance31_c_tex
+201406	2	Lance de bourreau du dragon noir (30 jours)	0	0	icon_equipments.lance31_c_tex
+201407	2	Lance de bourreau du dragon noir	0	0	icon_equipments.lance31_c_tex
+201408	2	Lance de bourreau du dragon noir	0	0	icon_equipments.lance31_c_tex
+201409	2	Lance de bourreau du dragon noir	0	0	icon_equipments.lance31_c_tex
+201410	2	Lance de bourreau du dragon noir	0	0	icon_equipments.lance31_c_tex
+201411	2	Espadon de bourreau du dragon noir	0	0	icon_equipments.twohand31_c_tex
+201412	2	Espadon de bourreau du dragon noir	0	0	icon_equipments.twohand31_c_tex
+201413	2	Espadon de bourreau du dragon noir (3 jours)	0	0	icon_equipments.twohand31_c_tex
+201414	2	Espadon de bourreau du dragon noir (7 jours)	0	0	icon_equipments.twohand31_c_tex
+201415	2	Espadon de bourreau du dragon noir (7 jours)	0	0	icon_equipments.twohand31_c_tex
+201416	2	Espadon de bourreau du dragon noir (14 jours)	0	0	icon_equipments.twohand31_c_tex
+201417	2	Espadon de bourreau du dragon noir (30 jours)	0	0	icon_equipments.twohand31_c_tex
+201418	2	Espadon de bourreau du dragon noir (30 jours)	0	0	icon_equipments.twohand31_c_tex
+201419	2	Espadon de bourreau du dragon noir	0	0	icon_equipments.twohand31_c_tex
+201420	2	Espadon de bourreau du dragon noir	0	0	icon_equipments.twohand31_c_tex
+201421	2	Espadon de bourreau du dragon noir	0	0	icon_equipments.twohand31_c_tex
+201422	2	Espadon de bourreau du dragon noir	0	0	icon_equipments.twohand31_c_tex
+201423	2	Hache de bourreau du dragon noir	0	0	icon_equipments.axe26_c_tex
+201424	2	Hache de bourreau du dragon noir	0	0	icon_equipments.axe26_c_tex
+201425	2	Hache de bourreau du dragon noir (3 jours)	0	0	icon_equipments.axe26_c_tex
+201426	2	Hache de bourreau du dragon noir (7 jours)	0	0	icon_equipments.axe26_c_tex
+201427	2	Hache de bourreau du dragon noir (7 jours)	0	0	icon_equipments.axe26_c_tex
+201428	2	Hache de bourreau du dragon noir (14 jours)	0	0	icon_equipments.axe26_c_tex
+201429	2	Hache de bourreau du dragon noir (30 jours)	0	0	icon_equipments.axe26_c_tex
+201430	2	Hache de bourreau du dragon noir (30 jours)	0	0	icon_equipments.axe26_c_tex
+201431	2	Hache de bourreau du dragon noir	0	0	icon_equipments.axe26_c_tex
+201432	2	Hache de bourreau du dragon noir	0	0	icon_equipments.axe26_c_tex
+201433	2	Hache de bourreau du dragon noir	0	0	icon_equipments.axe26_c_tex
+201434	2	Hache de bourreau du dragon noir	0	0	icon_equipments.axe26_c_tex
+201435	2	Lames doubles de bourreau du dragon noir	0	0	icon_equipments.dual26_c_tex
+201436	2	Lames doubles de bourreau du dragon noir	0	0	icon_equipments.dual26_c_tex
+201437	2	Lames doubles de bourreau du dragon noir (3 jours)	0	0	icon_equipments.dual26_c_tex
+201438	2	Lames doubles de bourreau du dragon noir (7 jours)	0	0	icon_equipments.dual26_c_tex
+201439	2	Lames doubles de bourreau du dragon noir (7 jours)	0	0	icon_equipments.dual26_c_tex
+201440	2	Lames doubles de bourreau du dragon noir (14 jours)	0	0	icon_equipments.dual26_c_tex
+201441	2	Lames doubles de bourreau du dragon noir (30 jours)	0	0	icon_equipments.dual26_c_tex
+201442	2	Lames doubles de bourreau du dragon noir (30 jours)	0	0	icon_equipments.dual26_c_tex
+201443	2	Lames doubles de bourreau du dragon noir	0	0	icon_equipments.dual26_c_tex
+201444	2	Lames doubles de bourreau du dragon noir	0	0	icon_equipments.dual26_c_tex
+201445	2	Lames doubles de bourreau du dragon noir	0	0	icon_equipments.dual26_c_tex
+201446	2	Lames doubles de bourreau du dragon noir	0	0	icon_equipments.dual26_c_tex
+201447	2	Bâton de bourreau du dragon noir	0	0	icon_equipments.staff26_c_tex
+201448	2	Bâton de bourreau du dragon noir	0	0	icon_equipments.staff26_c_tex
+201449	2	Bâton de bourreau du dragon noir (3 jours)	0	0	icon_equipments.staff26_c_tex
+201450	2	Bâton de bourreau du dragon noir (7 jours)	0	0	icon_equipments.staff26_c_tex
+201451	2	Bâton de bourreau du dragon noir (7 jours)	0	0	icon_equipments.staff26_c_tex
+201452	2	Bâton de bourreau du dragon noir (14 jours)	0	0	icon_equipments.staff26_c_tex
+201453	2	Bâton de bourreau du dragon noir (30 jours)	0	0	icon_equipments.staff26_c_tex
+201454	2	Bâton de bourreau du dragon noir (30 jours)	0	0	icon_equipments.staff26_c_tex
+201455	2	Bâton de bourreau du dragon noir	0	0	icon_equipments.staff26_c_tex
+201456	2	Bâton de bourreau du dragon noir	0	0	icon_equipments.staff26_c_tex
+201457	2	Bâton de bourreau du dragon noir	0	0	icon_equipments.staff26_c_tex
+201458	2	Bâton de bourreau du dragon noir	0	0	icon_equipments.staff26_c_tex
+201459	2	Sceptre de bourreau du dragon noir	0	0	icon_equipments.rod26_c_tex
+201460	2	Sceptre de bourreau du dragon noir	0	0	icon_equipments.rod26_c_tex
+201461	2	Sceptre de bourreau du dragon noir (3 jours)	0	0	icon_equipments.rod26_c_tex
+201462	2	Sceptre de bourreau du dragon noir (7 jours)	0	0	icon_equipments.rod26_c_tex
+201463	2	Sceptre de bourreau du dragon noir (7 jours)	0	0	icon_equipments.rod26_c_tex
+201464	2	Sceptre de bourreau du dragon noir (14 jours)	0	0	icon_equipments.rod26_c_tex
+201465	2	Sceptre de bourreau du dragon noir (30 jours)	0	0	icon_equipments.rod26_c_tex
+201466	2	Sceptre de bourreau du dragon noir (30 jours)	0	0	icon_equipments.rod26_c_tex
+201467	2	Sceptre de bourreau du dragon noir	0	0	icon_equipments.rod26_c_tex
+201468	2	Sceptre de bourreau du dragon noir	0	0	icon_equipments.rod26_c_tex
+201469	2	Sceptre de bourreau du dragon noir	0	0	icon_equipments.rod26_c_tex
+201470	2	Sceptre de bourreau du dragon noir	0	0	icon_equipments.rod26_c_tex
+201471	2	Cestes de bourreau du dragon noir	0	0	icon_equipments.gauntlet29_b_tex
+201472	2	Cestes de bourreau du dragon noir	0	0	icon_equipments.gauntlet29_b_tex
+201473	2	Cestes de bourreau du dragon noir (3 jours)	0	0	icon_equipments.gauntlet29_b_tex
+201474	2	Cestes de bourreau du dragon noir (7 jours)	0	0	icon_equipments.gauntlet29_b_tex
+201475	2	Cestes de bourreau du dragon noir (7 jours)	0	0	icon_equipments.gauntlet29_b_tex
+201476	2	Cestes de bourreau du dragon noir (14 jours)	0	0	icon_equipments.gauntlet29_b_tex
+201477	2	Cestes de bourreau du dragon noir (30 jours)	0	0	icon_equipments.gauntlet29_b_tex
+201478	2	Cestes de bourreau du dragon noir (30 jours)	0	0	icon_equipments.gauntlet29_b_tex
+201479	2	Cestes de bourreau du dragon noir	0	0	icon_equipments.gauntlet29_b_tex
+201480	2	Cestes de bourreau du dragon noir	0	0	icon_equipments.gauntlet29_b_tex
+201481	2	Cestes de bourreau du dragon noir	0	0	icon_equipments.gauntlet29_b_tex
+201482	2	Cestes de bourreau du dragon noir	0	0	icon_equipments.gauntlet29_b_tex
 201483	3	Piste : pingouin pataud	0	0	icon_items.footprint_wintera01_tex
 201484	3	Piste : pingouin pataud	0	0	icon_items.footprint_wintera01_tex
 201485	3	Piste : pingouin pataud	0	0	icon_items.footprint_wintera01_tex
@@ -25863,6 +26073,24 @@
 201644	3	Piste : chiot fétiche à pièces d'or	0	0	icon_items.footprint_newyearrare_tex
 201645	3	Piste : chiot fétiche à pièces d'or	0	0	icon_items.footprint_newyearrare_tex
 201646	3	Piste : chiot fétiche à pièces d'or	0	0	icon_items.footprint_newyearrare_tex
+202100	3	Labrys d'apogée	0	0	icon_equipments.axe10_tex
+204006	3	[Évènement] Mission : niveau d'équipement 418	0	0	icon_items.weapon_scrolla6_tex
+204007	3	[Évènement] Mission : niveau d'équipement 422	0	0	icon_items.weapon_scrolla6_tex
+204008	3	[Évènement] Mission : niveau d'équipement 428	0	0	icon_items.weapon_scrolla6_tex
+204009	3	[Évènement] Mission : niveau d'équipement 431	0	0	icon_items.weapon_scrolla6_tex
+204010	3	[Évènement] Mission : niveau d'équipement 432	0	0	icon_items.weapon_scrolla6_tex
+204011	3	[Évènement] Mission : niveau d'équipement 433	0	0	icon_items.weapon_scrolla6_tex
+204012	3	[Évènement] Mission : niveau d'équipement 435	0	0	icon_items.weapon_scrolla6_tex
+204013	3	[Évènement] Mission : niveau d'équipement 436	0	0	icon_items.weapon_scrolla6_tex
+204014	3	[Évènement] Mission : niveau d'équipement 437	0	0	icon_items.weapon_scrolla6_tex
+204015	3	[Évènement] Mission : niveau d'équipement 438	0	0	icon_items.weapon_scrolla6_tex
+204016	3	[Évènement] Mission : niveau d'équipement 439	0	0	icon_items.weapon_scrolla6_tex
+204017	2	[Évènement] Sous-vêtements en lin élégants et propres (rares)	0	0	icon_equipments.underwear00_f_tex
+204018	2	[Évènement] Sous-vêtements en lin élégants et confortables (rares)	0	0	icon_equipments.underwear00_f_tex
+204019	2	[Évènement] Sous-vêtements de sport en lin élégants (rares)	0	0	icon_equipments.underwear00_f_tex
+204020	2	[Évènement] Sous-vêtements en lin chauds et élégants (rares)	0	0	icon_equipments.underwear00_f_tex
+204021	2	[Évènement] Sous-vêtements en lin élégants et rayonnants (rares)	0	0	icon_equipments.underwear00_f_tex
+204022	2	Bon d'échange pour des sous-vêtements élégants de gardien	0	0	icon_items.ticket3_tex
 20000000	0	Or	0	0	icon_items.goldcoin_tex
 20000001	0	PEX	0	0	icon_items.icon_exp_tex
 20000002	0	Récompense non précisée	0	0	icon_items.icon_reward_unclear_tex
@@ -31267,6 +31495,34 @@
 155583	3	Compétence de familier : Élisa	0	0	icon_items.petskillbook_tex
 155584	3	Compétence de familier : cerisier gardien	0	0	icon_items.petskillbook_tex
 155585	3	Compétence de familier : cerisier gardien	0	0	icon_items.petskillbook_tex
+155586	3	[Exploit] Le meilleur en son genre	0	0	icon_achievement.icon_achievement_quest_tex_r
+155587	3	[Exploit] Toute résistance est futile	0	0	icon_achievement.icon_achievement_quest_tex_r
+155588	3	[Exploit] Tremblez, mortels !	0	0	icon_achievement.icon_achievement_quest_tex_u
+155589	3	Potion de l'intention meurtrière	0	600	icon_skills.battlefield_high_ranking_tex
+155590	3	Potion du jugement divin	0	600	icon_skills.redmoon_tex
+155591	3	Potion de la force des géants	0	3	icon_status.vitality_tex
+155592	3	Potion de la force des géants	0	3	icon_status.vitality_tex
+155593	3	Insigne L'Attaque des Titans	0	0	icon_items.q_mobfang_tex
+155594	1	Bribe de givre rude	0	0	icon_items.union_composematerial28_tex
+155595	1	Bribe de flammes ardentes	0	0	icon_items.refinestone5_tex
+155596	1	Bribe élémentaire	0	0	icon_items.armorstonea1_tex
+155597	2	Orbe de givre rude	0	0	icon_items.smallenergya7_tex
+155598	2	Orbe de flammes ardentes	0	0	icon_items.smallenergya10_tex
+155599	2	Orbe élémentaire	0	0	icon_items.smallenergya1_tex
+155600	2	Recette de fusion : orbe de givre rude	0	0	icon_items.weapon_scrolla7_tex
+155601	2	Recette de fusion : orbe de flammes ardentes	0	0	icon_items.weapon_scrolla8_tex
+155602	2	Combinateur de givre rude	0	1	icon_items.corecolor7_1_tex
+155603	2	Combinateur de flammes ardentes	0	1	icon_items.corecolor0_1_tex
+155604	3	Grand combinateur de givre rude	0	1	icon_items.corecolor7_2_tex
+155605	3	Grand combinateur de flammes ardentes	0	1	icon_items.corecolor0_2_tex
+155606	3	Puissant combinateur de givre rude	0	1	icon_items.corecolor7_3_tex
+155607	3	Puissant combinateur de flammes ardentes	0	1	icon_items.corecolor0_3_tex
+155608	3	Soupir glacial	0	300	icon_skills.c5_iceorb
+155609	3	Soupir glacial	0	300	icon_skills.c5_iceorb
+155610	3	Souffle embrasé	0	300	icon_skills.hellfire_tex
+155611	3	Souffle embrasé	0	300	icon_skills.hellfire_tex
+155612	3	Feu d'artifice (dragon, permanent)	0	60	icon_items.firecracker_dragon_tex
+155613	3	+5 % de PEX d'équipement	0	30	icon_items.vip_growth_tex
 160001	0	Compétence d'équitation : Sleipnir	0	0	icon_items.skillbook_rider1_tex
 160002	0	Compétence d'équitation : Sleipnir	0	0	icon_items.skillbook_rider1_tex
 160003	1	Compétence d'équitation : Chasseresse fauve	0	0	icon_items.skillbook_lion1_tex
@@ -41165,6 +41421,18 @@
 186792	3	Level 60 Box	0	1	icon_items.gift_box04_tex
 186793	2	Level 65 Box	0	1	icon_items.gift_box04_tex
 186795	2	+12 Slaughter Weapon Box	0	0	icon_items.gachabox_tex
+186798	2	Console Log-in Token	0	0	icon_items.event_coupon_style0_tex
+186799	1	Egg Tier 1	0	0	icon_items.event_egg_bronze_tex
+186800	1	Egg Tier 2	0	0	icon_skills.pet_tinydragon_black_tex
+186801	2	Egg Tier 3	0	0	icon_skills.pet_tinydragon_black_tex
+186802	2	Egg Tier 4	0	0	icon_skills.vehicle_kirin_black_tex
+186803	3	Egg Tier 5	0	0	icon_skills.vehicle_kirin_black_tex
+186804	3	Final Egg	0	1	icon_equipments.vehicle_dragon_a_tex
+186805	2	1st Feed	0	1	icon_items.petfeed_tex
+186806	2	2nd Feed	0	1	icon_items.petfeed_tex
+186807	2	3rd Feed	0	1	icon_items.petfeed_tex
+186808	2	4th Feed	0	1	icon_items.petfeed_tex
+186809	2	5th Feed	0	1	icon_items.petfeed_tex
 244520	2	Dummy Smart Box20	0	1	icon_items.gift_box04_tex
 244521	2	Dummy Smart Box19	0	1	icon_items.gift_box04_tex
 244522	2	Dummy Smart Box18	0	1	icon_items.gift_box04_tex
@@ -41195,9 +41463,9 @@
 244547	2	Dummy Smart Box23	0	1	icon_items.gift_box04_tex
 244548	2	Dummy Smart Box22	0	1	icon_items.gift_box04_tex
 244549	2	Dummy Smart Box21	0	1	icon_items.gift_box04_tex
-244550	3	Dummy Gacha30	0	0	icon_items.tresurebox2_tex
-244551	3	Dummy Gacha29	0	0	icon_items.tresurebox2_tex
-244552	3	Dummy Gacha28	0	0	icon_items.tresurebox2_tex
+244550	0	Dummy Gacha30	0	0	icon_items.tresurebox2_tex
+244551	0	Dummy Gacha29	0	0	icon_items.tresurebox2_tex
+244552	0	Dummy Gacha28	0	0	icon_items.tresurebox2_tex
 244553	3	Dummy Gacha27	0	0	icon_items.tresurebox2_tex
 244554	3	Dummy Gacha26	0	0	icon_items.tresurebox2_tex
 244555	3	Dummy Gacha25	0	0	icon_items.tresurebox2_tex
@@ -41589,6 +41857,25 @@
 216754	0	Summon NPC: Phargo	0	300	icon_items.premium_summonnpc_03_tex
 216755	0	Summon NPC: Schwab	0	300	icon_items.premium_summonnpc_04_tex
 216756	1	Velik's Opportunity	0	0	icon_items.cloth1_tex
+216808	3	Colorful Token	0	0	icon_items.politics_reward_tex
+216820	3	Emblem of Success	0	5	icon_items.parts_magicweaponc15_tex
+216821	3	Memento of Fame	0	5	icon_items.parts_lightweaponc9_tex
+216822	3	Sigil of Indestructible Flame	0	5	icon_items.parts_magicweaponc6_tex
+216823	1	Burnt Scale	0	0	icon_items.artifact_piece_tex
+216824	1	Broken Claw	0	0	icon_items.raw_claw10_tex
+216825	2	Gore	0	0	icon_items.research_bomb_tex
+216826	2	Tattered Wing	0	0	icon_items.q_mobwing_tex
+216827	2	Dragon Vial	0	0	icon_items.refinedplant_a12_tex
+216828	3	Vergoth's Soul Parcticle	0	0	icon_items.blockofchaos_tex
+216829	2	Fangless Dragon Fang	0	0	icon_items.low_bluedarkknife_tex
+216830	3	Golden Dragon Fang	0	0	icon_items.people_item_relic08_tex
+216831	3	Diamond Dragon Fang	0	0	icon_items.bluedarkknife_tex
+216832	2	Dragon's treasure	0	0	icon_items.premiumbox_dress2_tex
+216833	3	Dragon's ancient treasure	0	0	icon_items.premiumbox_dress4_tex
+216834	3	Dragon's legendary treasure	0	0	icon_items.premiumbox_enchant_tex
+216835	3	Essence of Dragon	0	0	icon_items.parts_lightweaponc15_tex
+216836	3	Essence of Wyvern	0	0	icon_items.q_monsterhead1_tex
+216837	3	Essence of Phoenix	0	0	icon_items.q_feather_tex
 247623	2	Smart Box: Swimwear Male A + Female A	0	1	icon_items.gift_box04_tex
 247624	2	Smart Box: Swimwear Male B + Female D	0	1	icon_items.gift_box04_tex
 247625	2	Smart Box: Swimwear Female B	0	1	icon_items.gift_box04_tex
@@ -41680,8 +41967,16 @@
 247711	2	Lucky box	0	0	icon_items.premiumbox_flyveh5_tex
 247712	2	Lucky box	0	0	icon_items.premiumbox_flyveh5_tex
 247713	2	Lucky box	0	0	icon_items.premiumbox_flyveh5_tex
+247714	2	Wheel of Fortune box	0	0	icon_items.premiumbox_flyveh5_tex
+247715	2	Lucky box	0	0	icon_items.premiumbox_flyveh5_tex
+247716	2	Wheel of Fortune box	0	0	icon_items.premiumbox_flyveh5_tex
+247717	2	Lucky box	0	0	icon_items.premiumbox_flyveh5_tex
 855596	3	Placeholder Delivery Elite Consumable Box	0	1	icon_items.gift_box04_tex
 855597	2	Elite Gift Box	0	1	icon_items.gift_box03_tex
+856133	3	[Event] Songkran gift box	0	0	icon_items.gachabox_tex
+856134	0	[Event] SONGKRAN	0	3	icon_items.weapon_scrolla14_tex
+856135	0	[Event] SONG	0	3	icon_items.weapon_scrolla13_tex
+856136	0	[Event] KRAN	0	3	icon_items.weapon_scrolla13_tex
 249036	3	Federation Bill Lucky Box	0	0	icon_items.gold_tcat_pocket_tex
 249037	3	 Starglow Weapon Skin Box	0	1	icon_items.gift_box04_tex
 249038	3	 Starglow Costume Box	0	1	icon_items.gift_box04_tex
@@ -41706,6 +42001,30 @@
 249063	3	Nightfury Gacha	0	0	icon_items.gift_box04_tex
 249064	3	Ultrafury Gacha	0	0	icon_items.gift_box04_tex
 249065	3	Astrafury Gacha	0	0	icon_items.gift_box04_tex
+249066	3	White Cute Llma Gacha	0	0	icon_items.premiumbox_flyveh5_tex
+249067	3	White Tuxido Llma Gacha	0	0	icon_items.premiumbox_flyveh5_tex
+249068	3	Brown Tuxido Llma Gacha	0	0	icon_items.premiumbox_weapon1_tex
+249069	3	Winged Lion White Gacha	0	0	icon_items.premiumbox_weapon1_tex
+249070	3	Winged Lion Black Gacha	0	0	icon_items.premiumbox_weapon1_tex
+249071	3	Winged Lion Gold Gacha	0	0	icon_items.premiumbox_weapon1_tex
+249072	3	Winged Lion Silver Gacha	0	0	icon_items.premiumbox_weapon1_tex
+249073	3	Red Phoenix Gacha	0	0	icon_items.premiumbox_weapon1_tex
+249074	3	Blue Phoenix Gacha	0	0	icon_items.premiumbox_weapon1_tex
+249080	3	Snowboard Suit Costume Box	0	1	icon_items.gift_box04_tex
+249081	3	Personalized Gym Uniform Costume Box	0	1	icon_items.gift_box04_tex
+249082	3	Ironward Armor Costume Box	0	1	icon_items.gift_box04_tex
+249083	3	Dawn's Guard Armor Costume Box	0	1	icon_items.gift_box04_tex
+249084	3	Night Watch Armor Costume Box	0	1	icon_items.gift_box04_tex
+249085	3	Mechanical Costume (?????????) Box	0	1	icon_items.gift_box04_tex
+249086	3	Mechanical Costume Box	0	1	icon_items.gift_box04_tex
+249091	3	Red High Waist School Uniform (Shirt) Costume Box 	0	1	icon_items.gift_box04_tex
+249092	3	Black High Waist School Uniform (Shirt) Costume Box 	0	1	icon_items.gift_box04_tex
+249093	3	 Blue High Waist School Uniform (Shirt) Costume Box 	0	1	icon_items.gift_box04_tex
+249094	3	Red High Waist School Uniform (Blazer) Costume Box 	0	1	icon_items.gift_box04_tex
+249095	3	Black High Waist School Uniform (Blazer) Costume Box 	0	1	icon_items.gift_box04_tex
+249096	3	Blue High Waist School Uniform (Blazer) Costume Box 	0	1	icon_items.gift_box04_tex
+249099	3	Female Jaeron's White Nurse Uniform Costume Box 	0	1	icon_items.gift_box04_tex
+249102	3	Songkran Costume Gacha	0	0	icon_items.premiumbox_etc5_tex
 250000	3	Commando spécial de TERA (Humain, homme)	0	0	icon_equipments.pc_event_43_m_tex
 250001	3	Commando spécial de TERA (Humain, homme)	0	0	icon_equipments.pc_event_43_m_tex
 250002	3	Commando spécial de TERA (Humain, homme)	0	0	icon_equipments.pc_event_43_m_tex

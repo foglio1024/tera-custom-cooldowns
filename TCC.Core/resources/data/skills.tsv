@@ -14,12 +14,6 @@
 30100	Warrior	Torrent of Blows I		icon_skills.nanmu_tex
 30200	Warrior	Torrent of Blows II		icon_skills.nanmu_tex
 30300	Warrior	Torrent of Blows III		icon_skills.nanmu_tex
-30400	Warrior	Torrent of Blows IV		icon_skills.nanmu_tex
-30500	Warrior	Torrent of Blows V		icon_skills.nanmu_tex
-30600	Warrior	Torrent of Blows VI		icon_skills.nanmu_tex
-30700	Warrior	Torrent of Blows VII		icon_skills.nanmu_tex
-30800	Warrior	Torrent of Blows VIII		icon_skills.nanmu_tex
-30900	Warrior	Torrent of Blows IX		icon_skills.nanmu_tex
 40100	Warrior	Rain of Blows I		icon_skills.pointattack_tex	40130
 40200	Warrior	Rain of Blows II		icon_skills.pointattack_tex	40230
 40300	Warrior	Rain of Blows III		icon_skills.pointattack_tex	40330
@@ -29,17 +23,9 @@
 40700	Warrior	Rain of Blows VII		icon_skills.pointattack_tex	40730
 40800	Warrior	Rain of Blows VIII		icon_skills.pointattack_tex	40830
 40900	Warrior	Rain of Blows IX		icon_skills.pointattack_tex	360100	40930
-41000	Warrior	Rain of Blows X		icon_skills.pointattack_tex	41030
-41100	Warrior	Rain of Blows XI		icon_skills.pointattack_tex	360100	41130
 50100	Warrior	Battle Cry I		icon_skills.thunderingroar_tex
 50200	Warrior	Battle Cry II		icon_skills.thunderingroar_tex
 50300	Warrior	Battle Cry III		icon_skills.thunderingroar_tex
-50400	Warrior	Battle Cry IV		icon_skills.thunderingroar_tex
-50500	Warrior	Battle Cry V		icon_skills.thunderingroar_tex
-50600	Warrior	Battle Cry VI		icon_skills.thunderingroar_tex
-50700	Warrior	Battle Cry VII		icon_skills.thunderingroar_tex
-50800	Warrior	Battle Cry VIII		icon_skills.thunderingroar_tex
-50900	Warrior	Battle Cry IX		icon_skills.thunderingroar_tex
 80100	Warrior	Assault Stance I		icon_skills.ironwilla_tex	80150
 80200	Warrior	Assault Stance II		icon_skills.ironwilla_tex	80250
 80300	Warrior	Assault Stance III		icon_skills.ironwilla_tex	80350
@@ -92,17 +78,13 @@
 160800	Warrior	Charging Slash VIII		icon_skills.rushingslash_tex	160801
 160900	Warrior	Charging Slash IX		icon_skills.rushingslash_tex	160901
 161000	Warrior	Charging Slash X		icon_skills.rushingslash_tex	161001
-170100	Warrior	Vortex Slash I		icon_skills.allroundslash_tex
-170200	Warrior	Vortex Slash II		icon_skills.allroundslash_tex
-170300	Warrior	Vortex Slash III		icon_skills.allroundslash_tex
-170400	Warrior	Vortex Slash IV		icon_skills.allroundslash_tex
-170500	Warrior	Vortex Slash V		icon_skills.allroundslash_tex
-170600	Warrior	Vortex Slash VI		icon_skills.allroundslash_tex
-170700	Warrior	Vortex Slash VII		icon_skills.allroundslash_tex
-170800	Warrior	Vortex Slash VIII		icon_skills.allroundslash_tex
-170900	Warrior	Vortex Slash IX		icon_skills.allroundslash_tex
-171000	Warrior	Vortex Slash X		icon_skills.allroundslash_tex
-171100	Warrior	Vortex Slash XI		icon_skills.allroundslash_tex
+170100	Warrior	Vortex Slash I		icon_skills.stormcut_tex
+170200	Warrior	Vortex Slash II		icon_skills.stormcut_tex
+170300	Warrior	Vortex Slash III		icon_skills.stormcut_tex
+170400	Warrior	Vortex Slash IV		icon_skills.stormcut_tex
+170500	Warrior	Vortex Slash V		icon_skills.stormcut_tex	170502	170501
+170600	Warrior	Vortex Slash VI		icon_skills.stormcut_tex	170602	170601
+170700	Warrior	Vortex Slash VII		icon_skills.stormcut_tex	170702	170701
 180100	Warrior	Combative Strike I		icon_skills.aggravatingstrike_tex
 180200	Warrior	Combative Strike II		icon_skills.aggravatingstrike_tex
 180300	Warrior	Combative Strike III		icon_skills.aggravatingstrike_tex
@@ -142,23 +124,8 @@
 230600	Warrior	Spinning Counter VI		icon_skills.reversalturningattack_tex
 240100	Warrior	Smoke Aggressor I		icon_skills.decoy_tex
 240200	Warrior	Smoke Aggressor II		icon_skills.decoy_tex
-240300	Warrior	Smoke Aggressor III		icon_skills.decoy_tex
-240400	Warrior	Smoke Aggressor IV		icon_skills.decoy_tex
-240500	Warrior	Smoke Aggressor V		icon_skills.decoy_tex
-240600	Warrior	Smoke Aggressor VI		icon_skills.decoy_tex
-240700	Warrior	Smoke Aggressor VII		icon_skills.decoy_tex
-240800	Warrior	Smoke Aggressor VIII		icon_skills.decoy_tex
-240900	Warrior	Smoke Aggressor IX		icon_skills.decoy_tex
 250100	Warrior	Command: Attack		icon_skills.petorderattack_tex
-260100	Warrior	Command: Follow		icon_skills.petorderfollowme_tex
-270100	Warrior	Pounce I		icon_skills.heavybite_tex
-270200	Warrior	Pounce II		icon_skills.heavybite_tex
-270300	Warrior	Pounce III		icon_skills.heavybite_tex
-270400	Warrior	Pounce IV		icon_skills.heavybite_tex
-270500	Warrior	Pounce V		icon_skills.heavybite_tex
-270600	Warrior	Pounce VI		icon_skills.heavybite_tex
-270700	Warrior	Pounce VII		icon_skills.heavybite_tex
-270800	Warrior	Pounce VIII		icon_skills.heavybite_tex
+260100	Warrior	Command: Follow		icon_skills.petorderfollowme_tex	260130
 280100	Warrior	Traverse Cut I		icon_skills.dualrapidpiercing_tex	280130
 280200	Warrior	Traverse Cut II		icon_skills.dualrapidpiercing_tex	280230
 280300	Warrior	Traverse Cut III		icon_skills.dualrapidpiercing_tex	280330
@@ -195,20 +162,16 @@
 310600	Warrior	Reaping Slash VI		icon_skills.rupture_tex	310630
 310700	Warrior	Reaping Slash VII		icon_skills.rupture_tex	310730
 310800	Warrior	Reaping Slash VIII		icon_skills.rupture_tex	310830
-310900	Warrior	Reaping Slash IX		icon_skills.rupture_tex	310930
 320100	Warrior	Cross Parry		icon_skills.twinswordsdefence_tex
 330100	Warrior	Smoke Flanker I		icon_skills.shadowchange_tex
 330200	Warrior	Smoke Flanker II		icon_skills.shadowchange_tex
-330300	Warrior	Smoke Flanker III		icon_skills.shadowchange_tex
-330400	Warrior	Smoke Flanker IV		icon_skills.shadowchange_tex
-330500	Warrior	Smoke Flanker V		icon_skills.shadowchange_tex
-330600	Warrior	Smoke Flanker VI		icon_skills.shadowchange_tex
-330700	Warrior	Smoke Flanker VII		icon_skills.shadowchange_tex
-330800	Warrior	Smoke Flanker VIII		icon_skills.shadowchange_tex
-330900	Warrior	Smoke Flanker IX		icon_skills.shadowchange_tex
 340100	Warrior	Binding Sword		icon_skills.bindingblade_tex
 350100	Warrior	Infuriate I		icon_skills.provokerage_tex
-140100	Warrior	Mangle		icon_skills.aimingankle_tex
+400100	Warrior	Blade Waltz		icon_skills.doublesworddance_tex	400120	400110	400111	400112	400119	400121	400122	400129
+410100	Warrior	Aerial Scythe		icon_skills.tumblingattack_tex	410131	410130	410190
+420100	Warrior	Blade Frenzy		icon_skills.bladestorm_tex	420130
+420131	Warrior	Blade Frenzy		icon_skills.bladestorm_tex
+420190	Warrior	Blade Frenzy		icon_skills.bladestorm_tex
 10100	Lancer	Combo Attack I		icon_skills.comboattack_tex	10101	10102
 10200	Lancer	Combo Attack II		icon_skills.comboattack_tex	10201	10202
 10300	Lancer	Combo Attack III		icon_skills.comboattack_tex	10301	10302
@@ -225,22 +188,16 @@
 20200	Lancer	Stand Fast II		icon_skills.defence_tex
 30100	Lancer	Onslaught I		icon_skills.screwthrough_tex	30130
 30200	Lancer	Onslaught II		icon_skills.screwthrough_tex	30230
-30300	Lancer	Onslaught III		icon_skills.screwthrough_tex	30330
-30400	Lancer	Onslaught IV		icon_skills.screwthrough_tex	30430
-30500	Lancer	Onslaught V		icon_skills.screwthrough_tex	30530
-30600	Lancer	Onslaught VI		icon_skills.screwthrough_tex	30630
-30700	Lancer	Onslaught VII		icon_skills.screwthrough_tex	30730
-30800	Lancer	Onslaught VIII		icon_skills.screwthrough_tex	30830
-40100	Lancer	Challenging Shout I		icon_skills.roar_tex
-40200	Lancer	Challenging Shout II		icon_skills.roar_tex
-40300	Lancer	Challenging Shout III		icon_skills.roar_tex
-40400	Lancer	Challenging Shout IV		icon_skills.roar_tex
-40500	Lancer	Challenging Shout V		icon_skills.roar_tex
-40600	Lancer	Challenging Shout VI		icon_skills.roar_tex
-40700	Lancer	Challenging Shout VII		icon_skills.roar_tex
-40800	Lancer	Challenging Shout VIII		icon_skills.roar_tex
-40900	Lancer	Challenging Shout IX		icon_skills.roar_tex
-50100	Lancer	Shield Bash		icon_skills.shieldstrike_tex
+40100	Lancer	Challenging Shout I		icon_skills.roar_tex	40130
+40200	Lancer	Challenging Shout II		icon_skills.roar_tex	40230
+40300	Lancer	Challenging Shout III		icon_skills.roar_tex	40330
+40400	Lancer	Challenging Shout IV		icon_skills.roar_tex	40430
+40500	Lancer	Challenging Shout V		icon_skills.roar_tex	40530
+40600	Lancer	Challenging Shout VI		icon_skills.roar_tex	40630
+40700	Lancer	Challenging Shout VII		icon_skills.roar_tex	40730
+40800	Lancer	Challenging Shout VIII		icon_skills.roar_tex	40830
+40900	Lancer	Challenging Shout IX		icon_skills.roar_tex	40930
+50100	Lancer	Shield Bash		icon_skills.shieldstrike_tex	50102	50101	50130
 70100	Lancer	Guardian Shout I		icon_skills.inspiringroar_tex
 70200	Lancer	Guardian Shout II		icon_skills.inspiringroar_tex
 70300	Lancer	Guardian Shout III		icon_skills.inspiringroar_tex
@@ -258,9 +215,9 @@
 90100	Lancer	Leash I		icon_skills.hookthrow_tex
 90200	Lancer	Leash II		icon_skills.hookthrow_tex
 90300	Lancer	Leash III		icon_skills.hookthrow_tex
-100100	Lancer	Debilitate I		icon_skills.armorbreak_tex
-100200	Lancer	Debilitate II		icon_skills.armorbreak_tex
-100300	Lancer	Debilitate III		icon_skills.armorbreak_tex
+100100	Lancer	Debilitate I		icon_skills.armorbreak_tex	100130
+100200	Lancer	Debilitate II		icon_skills.armorbreak_tex	100230
+100300	Lancer	Debilitate III		icon_skills.armorbreak_tex	100330
 110100	Lancer	Retaliate I		icon_skills.risingattack_tex
 110200	Lancer	Retaliate II		icon_skills.risingattack_tex
 110300	Lancer	Retaliate III		icon_skills.risingattack_tex
@@ -300,8 +257,6 @@
 160500	Lancer	Second Wind V		icon_skills.rejuvenation_tex
 160600	Lancer	Second Wind VI		icon_skills.rejuvenation_tex
 160700	Lancer	Second Wind VII		icon_skills.rejuvenation_tex
-160800	Lancer	Second Wind VIII		icon_skills.rejuvenation_tex
-160900	Lancer	Second Wind IX		icon_skills.rejuvenation_tex
 170100	Lancer	Adrenaline Rush I		icon_skills.fightingwill_tex
 170200	Lancer	Adrenaline Rush II		icon_skills.fightingwill_tex
 180100	Lancer	Shield Barrage I		icon_skills.shieldattack_tex	180101
@@ -316,11 +271,10 @@
 181000	Lancer	Shield Barrage X		icon_skills.shieldattack_tex	181001
 181100	Lancer	Shield Barrage XI		icon_skills.shieldattack_tex	181101
 190100	Lancer	Pledge of Protection		icon_skills.vowofprotection_tex
-200100	Lancer	Menacing Wave		icon_skills.menacewave_tex
-210100	Lancer	Lockdown Blow I		icon_skills.shockblow_tex
-210200	Lancer	Lockdown Blow II		icon_skills.shockblow_tex
-210300	Lancer	Lockdown Blow III		icon_skills.shockblow_tex
-210400	Lancer	Lockdown Blow IV		icon_skills.shockblow_tex
+210100	Lancer	Lockdown Blow I		icon_skills.shockblow_tex	210102	210101	210130
+210200	Lancer	Lockdown Blow II		icon_skills.shockblow_tex	210202	210201	210230
+210300	Lancer	Lockdown Blow III		icon_skills.shockblow_tex	210302	210301	210330
+210400	Lancer	Lockdown Blow IV		icon_skills.shockblow_tex	210402	210401	210430
 220100	Lancer	Iron Will I		icon_skills.armoredwill_tex
 220200	Lancer	Iron Will II		icon_skills.armoredwill_tex
 220300	Lancer	Iron Will III		icon_skills.armoredwill_tex
@@ -329,7 +283,7 @@
 220600	Lancer	Iron Will VI		icon_skills.armoredwill_tex
 230100	Lancer	Master's Leash I		icon_skills.chaincapture_tex
 230200	Lancer	Master's Leash II		icon_skills.chaincapture_tex
-240100	Lancer	Chained Leash		icon_skills.harpoonshot_tex	240120
+240100	Lancer	Chained Leash		icon_skills.harpoonshot_tex	240102	240101	240121	240122
 250100	Lancer	Wallop I		icon_skills.overhelm_tex	250130
 250200	Lancer	Wallop II		icon_skills.overhelm_tex	250230
 250300	Lancer	Wallop III		icon_skills.overhelm_tex	250330
@@ -342,6 +296,9 @@
 251000	Lancer	Wallop X		icon_skills.overhelm_tex	251030
 260100	Lancer	Backstep		icon_skills.backstep_tex
 270100	Lancer	Rallying Cry		icon_skills.holdtheline_tex
+280100	Lancer	Righteous Leap		icon_skills.justiceleap_tex	280101
+290100	Lancer	Guardian's Barrier I		icon_skills.shieldwall_tex
+300100	Lancer	Divine Protection I		icon_skills.arcaneshield_tex
 10100	Slayer	Combo Attack I		icon_skills.comboattack_tex	10101	10102	10103
 10200	Slayer	Combo Attack II		icon_skills.comboattack_tex	10201	10202	10203
 10300	Slayer	Combo Attack III		icon_skills.comboattack_tex	10301	10302	10303
@@ -457,12 +414,13 @@
 170300	Slayer	Headlong Rush III		icon_skills.advancingleap_tex
 170400	Slayer	Headlong Rush IV		icon_skills.advancingleap_tex
 180100	Slayer	Overpower I		icon_skills.gatheringstrength_tex
-180200	Slayer	Overpower II		icon_skills.gatheringstrength_tex
+180200	Slayer	Overpower II		icon_skills.gatheringstrength_tex	180250
 190100	Slayer	Tenacity I		icon_skills.tenacity_tex
 190200	Slayer	Tenacity II		icon_skills.tenacity_tex
 190300	Slayer	Tenacity III		icon_skills.tenacity_tex
 200100	Slayer	In Cold Blood I		icon_skills.destructionvigor_tex
 200200	Slayer	In Cold Blood II		icon_skills.destructionvigor_tex
+200300	Slayer	In Cold Blood II		icon_skills.destructionvigor_tex
 210100	Slayer	Exhausting Blow		icon_skills.veinslash_tex
 230100	Slayer	Measured Slice I		icon_skills.cuthead_tex	230130
 230200	Slayer	Measured Slice II		icon_skills.cuthead_tex	230230
@@ -482,6 +440,10 @@
 240700	Slayer	Eviscerate VII		icon_skills.jawbreaker_tex	240730
 240800	Slayer	Eviscerate VIII		icon_skills.jawbreaker_tex	240830
 240900	Slayer	Eviscerate IX		icon_skills.jawbreaker_tex	240930
+270100	Slayer	Blazing Thrust		icon_skills.slidingslash_tex	270131	270130	270190
+280100	Slayer	Unsheathe		icon_skills.drawsword_tex	280101	280102	280103
+260100	Slayer	Decimate		icon_skills.gaiacrucsh_tex
+260130	Slayer	Decimate		icon_skills.gaiacrucsh_tex
 10100	Berserker	Combo Attack I		icon_skills.comboattack_tex	10101	10102	10103
 10200	Berserker	Combo Attack II		icon_skills.comboattack_tex	10201	10202	10203
 10300	Berserker	Combo Attack III		icon_skills.comboattack_tex	10301	10302	10303
@@ -494,7 +456,7 @@
 11000	Berserker	Combo Attack X		icon_skills.comboattack_tex	11001	11002	11003
 11100	Berserker	Combo Attack XI		icon_skills.comboattack_tex	11101	11102	11103
 11200	Berserker	Combo Attack XII		icon_skills.comboattack_tex	11201	11202	11203
-20100	Berserker	Axe Block		icon_skills.weapondefence_tex
+20100	Berserker	Axe Block I		icon_skills.weapondefence_tex
 20200	Berserker	Axe Block II		icon_skills.weapondefence_tex	20231	20230
 30100	Berserker	Thunder Strike I		icon_skills.blastslash_tex	30110	30111	30112	30113
 30200	Berserker	Thunder Strike II		icon_skills.blastslash_tex	30210	30211	30212	30213
@@ -587,15 +549,15 @@
 160200	Berserker	Fearsome Shout II		icon_skills.piercingshout_tex
 160300	Berserker	Fearsome Shout III		icon_skills.piercingshout_tex
 160400	Berserker	Fearsome Shout IV		icon_skills.piercingshout_tex
-180100	Berserker	Lethal Strike I		icon_skills.soulstrike_tex	180110	180111	180112	180113
-180200	Berserker	Lethal Strike II		icon_skills.soulstrike_tex	180210	180211	180212	180213
-180300	Berserker	Lethal Strike III		icon_skills.soulstrike_tex	180310	180311	180312	180313
-180400	Berserker	Lethal Strike IV		icon_skills.soulstrike_tex	180410	180411	180412	180413
-180500	Berserker	Lethal Strike V		icon_skills.soulstrike_tex	180510	180511	180512	180513
-180600	Berserker	Lethal Strike VI		icon_skills.soulstrike_tex	180610	180611	180612	180613
-190100	Berserker	Tenacity I		icon_skills.tenacity_tex
-190200	Berserker	Tenacity II		icon_skills.tenacity_tex
-190300	Berserker	Tenacity III		icon_skills.tenacity_tex
+180100	Berserker	Lethal Strike I		icon_skills.soulstrike_tex	180130
+180200	Berserker	Lethal Strike II		icon_skills.soulstrike_tex	180230
+180300	Berserker	Lethal Strike III		icon_skills.soulstrike_tex	180330
+180400	Berserker	Lethal Strike IV		icon_skills.soulstrike_tex	180430
+180500	Berserker	Lethal Strike V		icon_skills.soulstrike_tex	180530
+180600	Berserker	Lethal Strike VI		icon_skills.soulstrike_tex	180630
+190100	Berserker	Triumphant Shout I		icon_skills.tenacity_tex
+190200	Berserker	Triumphant Shout II		icon_skills.tenacity_tex
+190300	Berserker	Triumphant Shout III		icon_skills.tenacity_tex
 200100	Berserker	Inescapable Doom I		icon_skills.murderousvent_tex
 200200	Berserker	Inescapable Doom II		icon_skills.murderousvent_tex
 210100	Berserker	Bloodlust I		icon_skills.fury_tex
@@ -612,7 +574,7 @@
 250800	Berserker	Raze VIII		icon_skills.sideslash_tex	250801	250830	250831
 250900	Berserker	Raze IX		icon_skills.sideslash_tex	250901	250930	250931
 260100	Berserker	Tackle		icon_skills.throwaxe_tex	260120
-270100	Berserker	Unbreakable		icon_skills.selfbuff_tex
+270100	Berserker	Unbreakable		icon_skills.selfbuff_tex	270130
 280100	Berserker	Intimidation		icon_skills.toughspirit_tex	280150
 290100	Berserker	Evasive Roll		icon_skills.tumbling_tex
 300100	Berserker	Axe Counter		icon_skills.determinationofadvance_tex	300130
@@ -627,6 +589,11 @@
 310900	Berserker	Overwhelm IX		icon_skills.assaultattack_tex	310901
 311000	Berserker	Overwhelm X		icon_skills.assaultattack_tex	311001
 320100	Berserker	Punishing Strike		icon_skills.upperslashcombo_tex	320101
+330100	Berserker	Unleash		icon_skills.rage2_tex
+340100	Berserker	Unleashed: Dexter		icon_skills.rageright_tex	340131	340130
+350100	Berserker	Unleashed: Sinister		icon_skills.rageleft_tex	350131	350101	350130
+360100	Berserker	Unleashed: Rampage		icon_skills.rageboth_tex	360131	360130
+370100	Berserker	Unleashed: Beast Fury		icon_skills.ragerush_tex	370130
 10100	Sorcerer	Fireball I		icon_skills.fireball_tex
 10200	Sorcerer	Fireball II		icon_skills.fireball_tex
 10300	Sorcerer	Fireball III		icon_skills.fireball_tex
@@ -652,18 +619,18 @@
 30100	Sorcerer	Lightning Trap I		icon_skills.shocktrap_tex	30120
 30200	Sorcerer	Lightning Trap II		icon_skills.shocktrap_tex	30220
 30300	Sorcerer	Lightning Trap III		icon_skills.shocktrap_tex	30320
-40100	Sorcerer	Arcane Pulse I		icon_skills.blastball_tex	40110	40111	40112	40113	40120	40121	40122	40123
-40200	Sorcerer	Arcane Pulse II		icon_skills.blastball_tex	40210	40211	40212	40213	40220	40221	40222	40223
-40300	Sorcerer	Arcane Pulse III		icon_skills.blastball_tex	40310	40311	40312	40313	40320	40321	40322	40323
-40400	Sorcerer	Arcane Pulse IV		icon_skills.blastball_tex	40410	40411	40412	40413	40420	40421	40422	40423
-40500	Sorcerer	Arcane Pulse V		icon_skills.blastball_tex	40510	40511	40512	40513	40520	40521	40522	40523
-40600	Sorcerer	Arcane Pulse VI		icon_skills.blastball_tex	40610	40611	40612	40613	40620	40621	40622	40623
-40700	Sorcerer	Arcane Pulse VII		icon_skills.blastball_tex	40710	40711	40712	40713	40720	40721	40722	40723
-40800	Sorcerer	Arcane Pulse VIII		icon_skills.blastball_tex	40810	40811	40812	40813	40820	40821	40822	40823
-40900	Sorcerer	Arcane Pulse IX		icon_skills.blastball_tex	40910	40911	40912	40913	40920	40921	40922	40923
-41000	Sorcerer	Arcane Pulse X		icon_skills.blastball_tex	41010	41011	41012	41013	41020	41021	41022	41023
-41100	Sorcerer	Arcane Pulse XI		icon_skills.blastball_tex	41110	41111	41112	41113	41120	41121	41122	41123
-41200	Sorcerer	Arcane Pulse XII		icon_skills.blastball_tex	41210	41211	41212	41213	41220	41221	41222	41223
+40100	Sorcerer	Arcane Pulse I		icon_skills.blastball_tex	40113	40110	40111	40112	40120	40121	40122	40123
+40200	Sorcerer	Arcane Pulse II		icon_skills.blastball_tex	40213	40210	40211	40212	40220	40221	40222	40223
+40300	Sorcerer	Arcane Pulse III		icon_skills.blastball_tex	40313	40310	40311	40312	40320	40321	40322	40323
+40400	Sorcerer	Arcane Pulse IV		icon_skills.blastball_tex	40413	40410	40411	40412	40420	40421	40422	40423
+40500	Sorcerer	Arcane Pulse V		icon_skills.blastball_tex	40513	40510	40511	40512	40520	40521	40522	40523
+40600	Sorcerer	Arcane Pulse VI		icon_skills.blastball_tex	40613	40610	40611	40612	40620	40621	40622	40623
+40700	Sorcerer	Arcane Pulse VII		icon_skills.blastball_tex	40713	40710	40711	40712	40720	40721	40722	40723
+40800	Sorcerer	Arcane Pulse VIII		icon_skills.blastball_tex	40813	40810	40811	40812	40820	40821	40822	40823
+40900	Sorcerer	Arcane Pulse IX		icon_skills.blastball_tex	40913	40910	40911	40912	40920	40921	40922	40923
+41000	Sorcerer	Arcane Pulse X		icon_skills.blastball_tex	41013	41010	41011	41012	41020	41021	41022	41023
+41100	Sorcerer	Arcane Pulse XI		icon_skills.blastball_tex	41113	41110	41111	41112	41120	41121	41122	41123
+41200	Sorcerer	Arcane Pulse XII		icon_skills.blastball_tex	41213	41210	41211	41212	41220	41221	41222	41223
 50100	Sorcerer	Mana Infusion I		icon_skills.mpcondensing_tex
 50200	Sorcerer	Mana Infusion II		icon_skills.mpcondensing_tex
 60100	Sorcerer	Meteor Strike I		icon_skills.hellfire_tex
@@ -1010,21 +977,18 @@
 20700	Priest	Regeneration Circle VII		icon_skills.healingwind_tex
 20800	Priest	Regeneration Circle VIII		icon_skills.healingwind_tex
 20900	Priest	Regeneration Circle IX		icon_skills.healingwind_tex
-30100	Priest	Healing Circle I		icon_skills.healarea_tex
-30200	Priest	Healing Circle II		icon_skills.healarea_tex
-30300	Priest	Healing Circle III		icon_skills.healarea_tex
-30400	Priest	Healing Circle IV		icon_skills.healarea_tex
-30500	Priest	Healing Circle V		icon_skills.healarea_tex
-30600	Priest	Healing Circle VI		icon_skills.healarea_tex
-30700	Priest	Healing Circle VII		icon_skills.healarea_tex
+30100	Priest	Healing Circle I		icon_skills.healarea_tex	30130
+30200	Priest	Healing Circle II		icon_skills.healarea_tex	30230
+30300	Priest	Healing Circle III		icon_skills.healarea_tex	30330
+30400	Priest	Healing Circle IV		icon_skills.healarea_tex	30430
+30500	Priest	Healing Circle V		icon_skills.healarea_tex	30530
+30600	Priest	Healing Circle VI		icon_skills.healarea_tex	30630
+30700	Priest	Healing Circle VII		icon_skills.healarea_tex	30730
 50100	Priest	Blessing of Shakan I		icon_skills.attackup_tex
 50200	Priest	Blessing of Shakan II		icon_skills.attackup_tex
 50300	Priest	Blessing of Shakan III		icon_skills.attackup_tex
 60100	Priest	Arise I		icon_skills.recovery_tex
 60200	Priest	Arise II		icon_skills.recovery_tex
-70100	Priest	Slumber I		icon_skills.sleep_tex	70120
-70200	Priest	Slumber II		icon_skills.sleep_tex	70220
-70300	Priest	Slumber III		icon_skills.sleep_tex	70320
 80100	Priest	Mana Infusion		icon_skills.mpcharge_tex
 100100	Priest	Purifying Circle		icon_skills.purify_tex
 110100	Priest	Metamorphic Blast I		icon_skills.punishingshield_tex
@@ -1037,24 +1001,19 @@
 110800	Priest	Metamorphic Blast VIII		icon_skills.punishingshield_tex
 110900	Priest	Metamorphic Blast IX		icon_skills.punishingshield_tex
 111000	Priest	Metamorphic Blast X		icon_skills.punishingshield_tex
-111100	Priest	Metamorphic Blast XI		icon_skills.punishingshield_tex
+111100	Priest	Metamorphic Blast XI		icon_skills.punishingshield_tex	111102	111101
 120100	Priest	Resurrect		icon_skills.resurrect_tex
-130100	Priest	Homeward Bound		icon_skills.teleportall_tex
-160100	Priest	Shocking Implosion I		icon_skills.damagedeal_tex
-160200	Priest	Shocking Implosion II		icon_skills.damagedeal_tex
-160300	Priest	Shocking Implosion III		icon_skills.damagedeal_tex
-160400	Priest	Shocking Implosion IV		icon_skills.damagedeal_tex
-160500	Priest	Shocking Implosion V		icon_skills.damagedeal_tex
-160600	Priest	Shocking Implosion VI		icon_skills.damagedeal_tex
-160700	Priest	Shocking Implosion VII		icon_skills.damagedeal_tex
-160800	Priest	Shocking Implosion VIII		icon_skills.damagedeal_tex
-160900	Priest	Shocking Implosion IX		icon_skills.damagedeal_tex
-161000	Priest	Shocking Implosion X		icon_skills.damagedeal_tex
-161100	Priest	Shocking Implosion XI		icon_skills.damagedeal_tex
-170100	Priest	Prayer of Peace I		icon_skills.agrorelease_tex
-170200	Priest	Prayer of Peace II		icon_skills.agrorelease_tex
-170300	Priest	Prayer of Peace III		icon_skills.agrorelease_tex
-170400	Priest	Prayer of Peace IV		icon_skills.agrorelease_tex
+160100	Priest	Shocking Implosion I		icon_skills.damagedeal_tex	160130
+160200	Priest	Shocking Implosion II		icon_skills.damagedeal_tex	160230
+160300	Priest	Shocking Implosion III		icon_skills.damagedeal_tex	160330
+160400	Priest	Shocking Implosion IV		icon_skills.damagedeal_tex	160430
+160500	Priest	Shocking Implosion V		icon_skills.damagedeal_tex	160530
+160600	Priest	Shocking Implosion VI		icon_skills.damagedeal_tex	160630
+160700	Priest	Shocking Implosion VII		icon_skills.damagedeal_tex	160730
+160800	Priest	Shocking Implosion VIII		icon_skills.damagedeal_tex	160830
+160900	Priest	Shocking Implosion IX		icon_skills.damagedeal_tex	160930
+161000	Priest	Shocking Implosion X		icon_skills.damagedeal_tex	161030
+161100	Priest	Shocking Implosion XI		icon_skills.damagedeal_tex	161120	161110	161111	161121
 180100	Priest	Heal Thyself I		icon_skills.healingpray_tex
 180200	Priest	Heal Thyself II		icon_skills.healingpray_tex
 180300	Priest	Heal Thyself III		icon_skills.healingpray_tex
@@ -1081,11 +1040,6 @@
 220300	Priest	Kaia's Shield III		icon_skills.armorofprotection_tex
 220400	Priest	Kaia's Shield IV		icon_skills.armorofprotection_tex
 220500	Priest	Kaia's Shield V		icon_skills.armorofprotection_tex
-230100	Priest	Blessing of Balder I		icon_skills.agilitybless_tex
-230200	Priest	Blessing of Balder II		icon_skills.agilitybless_tex
-230300	Priest	Blessing of Balder III		icon_skills.agilitybless_tex
-230400	Priest	Blessing of Balder IV		icon_skills.agilitybless_tex
-230500	Priest	Blessing of Balder V		icon_skills.agilitybless_tex
 250100	Priest	Retaliate I		icon_skills.risingattack_tex
 250200	Priest	Retaliate II		icon_skills.risingattack_tex
 250300	Priest	Retaliate III		icon_skills.risingattack_tex
@@ -1106,7 +1060,6 @@
 260800	Priest	Fiery Escape VIII		icon_skills.sanctuary_tex
 260900	Priest	Fiery Escape IX		icon_skills.sanctuary_tex
 261000	Priest	Fiery Escape X		icon_skills.sanctuary_tex
-261100	Priest	Fiery Escape XI		icon_skills.sanctuary_tex
 270100	Priest	Final Reprisal I		icon_skills.punishingtouch_tex	270130
 270200	Priest	Final Reprisal II		icon_skills.punishingtouch_tex	270230
 270300	Priest	Final Reprisal III		icon_skills.punishingtouch_tex	270330
@@ -1117,8 +1070,9 @@
 270800	Priest	Final Reprisal VIII		icon_skills.punishingtouch_tex	270830
 270900	Priest	Final Reprisal IX		icon_skills.punishingtouch_tex	270930
 271000	Priest	Final Reprisal X		icon_skills.punishingtouch_tex	271030
-271100	Priest	Final Reprisal XI		icon_skills.punishingtouch_tex	271130
+271100	Priest	Final Reprisal XI		icon_skills.punishingtouch_tex	271120	271110	271111	271121
 280100	Priest	Mana Charge		icon_skills.manarejuvenation_tex	280110	280111	280112
+280200	Priest	Words of Vitality		icon_skills.spirit2_tex	280210	280211	280212	280213
 290100	Priest	Triple Nemesis I		icon_skills.divineretribution_tex	290101	290102
 290200	Priest	Triple Nemesis II		icon_skills.divineretribution_tex	290201	290202
 290300	Priest	Triple Nemesis III		icon_skills.divineretribution_tex	290301	290302
@@ -1128,8 +1082,6 @@
 290700	Priest	Triple Nemesis VII		icon_skills.divineretribution_tex	290701	290702
 290800	Priest	Triple Nemesis VIII		icon_skills.divineretribution_tex	290801	290802
 290900	Priest	Triple Nemesis IX		icon_skills.divineretribution_tex	290901	290902
-291000	Priest	Triple Nemesis X		icon_skills.divineretribution_tex	291001	291002
-291100	Priest	Triple Nemesis XI		icon_skills.divineretribution_tex	291101	291102
 300100	Priest	Plague of Exhaustion I		icon_skills.prophecyoflethargy_tex	300110
 300200	Priest	Plague of Exhaustion II		icon_skills.prophecyoflethargy_tex	300210
 300300	Priest	Plague of Exhaustion III		icon_skills.prophecyoflethargy_tex	300310
@@ -1140,8 +1092,8 @@
 300800	Priest	Plague of Exhaustion VIII		icon_skills.prophecyoflethargy_tex	300810
 310100	Priest	Guardian Sanctuary I		icon_skills.guardianaura_tex
 310200	Priest	Guardian Sanctuary II		icon_skills.guardianaura_tex
-320100	Priest	Divine Respite I		icon_skills.restoration_tex
-320200	Priest	Divine Respite II		icon_skills.restoration_tex
+320100	Priest	Divine Prayer I		icon_skills.restoration_tex
+320200	Priest	Divine Prayer II		icon_skills.restoration_tex
 330100	Priest	Ishara's Lullaby I		icon_skills.lullabyoflshara_tex	330110
 330200	Priest	Ishara's Lullaby II		icon_skills.lullabyoflshara_tex	330210
 330300	Priest	Ishara's Lullaby III		icon_skills.lullabyoflshara_tex	330310
@@ -1151,8 +1103,6 @@
 350200	Priest	Energy Stars II		icon_skills.divinelightning_tex	350210
 350300	Priest	Energy Stars III		icon_skills.divinelightning_tex	350310
 350400	Priest	Energy Stars IV		icon_skills.divinelightning_tex	350410
-350500	Priest	Energy Stars V		icon_skills.divinelightning_tex	350510
-350600	Priest	Energy Stars VI		icon_skills.divinelightning_tex	350610
 360100	Priest	Epiphany of the Goddess I		icon_skills.adventgoddess_tex
 370100	Priest	Healing Immersion I		icon_skills.curewing_tex	370110
 370200	Priest	Healing Immersion II		icon_skills.curewing_tex	370210
@@ -1167,12 +1117,12 @@
 400700	Priest	Zenobia's Vortex VII		icon_skills.godbreath_tex	400720
 400800	Priest	Zenobia's Vortex VIII		icon_skills.godbreath_tex	400820
 400900	Priest	Zenobia's Vortex IX		icon_skills.godbreath_tex	400920
-401000	Priest	Zenobia's Vortex X		icon_skills.godbreath_tex	401020
+401000	Priest	Zenobia's Vortex X		icon_skills.godbreath_tex	401020	401010	401012	401022
 410100	Priest	Divine Intervention		icon_skills.helpinghand_tex	410110
-150100	Priest	Blessing of Zenobia		icon_skills.fastwalk_tex
-200100	Priest	Blessing of Seren I		icon_skills.agilitybless_tex
-200200	Priest	Blessing of Seren II		icon_skills.agilitybless_tex
-210100	Priest	Blessing of Arachne		icon_skills.resistancebless_tex
+410200	Priest	Divine Vitality		icon_skills.spirithand_tex	410210
+420100	Priest	Holy Burst		icon_skills.lightspark_tex	420130	420120	420121	420122	420131	420132
+430100	Priest	Words of Judgment		icon_skills.judgment_tex	430150
+9100100	Priest	Awakening Aura		icon_skills.awakenaura_tex
 10100	Elementalist	Sharan Bolt I		icon_skills.elementalshot_tex	10101	10102	10103
 10200	Elementalist	Sharan Bolt II		icon_skills.elementalshot_tex	10201	10202	10203
 10300	Elementalist	Sharan Bolt III		icon_skills.elementalshot_tex	10301	10302	10303
@@ -1280,7 +1230,7 @@
 241000	Elementalist	Volley of Curses X		icon_skills.painfulshackle_tex	241010
 250100	Elementalist	Thrall of Protection I		icon_skills.summonspiritofaggro_tex
 250200	Elementalist	Thrall of Protection II		icon_skills.summonspiritofaggro_tex
-250300	Elementalist	Thrall of Protection III		icon_skills.summonspiritofaggro_tex
+250300	Elementalist	Thrall of Protection III		icon_skills.summonspiritofaggro_tex	250330	250310
 250400	Elementalist	Thrall of Protection IV		icon_skills.summonspiritofaggro_tex
 250500	Elementalist	Thrall of Protection V		icon_skills.summonspiritofaggro_tex
 250600	Elementalist	Thrall of Protection VI		icon_skills.summonspiritofaggro_tex
@@ -1307,7 +1257,7 @@
 271000	Elementalist	Thrall of Life X		icon_skills.summonspiritofheal_tex
 271100	Elementalist	Thrall of Life XI		icon_skills.summonspiritofheal_tex
 271200	Elementalist	Thrall of Life XII		icon_skills.summonspiritofheal_tex
-271300	Elementalist	Thrall of Life XIII		icon_skills.summonspiritofheal_tex
+271300	Elementalist	Thrall of Life XIII		icon_skills.summonspiritofheal_tex	271330	271310
 271400	Elementalist	Thrall of Life XIV		icon_skills.summonspiritofheal_tex
 280100	Elementalist	Sonorous Dreams I		icon_skills.shackleofquicksand_tex	280110
 280200	Elementalist	Sonorous Dreams II		icon_skills.shackleofquicksand_tex	280210
@@ -1330,7 +1280,7 @@
 330900	Elementalist	Thrall of Vengeance IX		icon_skills.summonspiritofrange_tex
 331000	Elementalist	Thrall of Vengeance X		icon_skills.summonspiritofrange_tex
 331100	Elementalist	Thrall of Vengeance XI		icon_skills.summonspiritofrange_tex
-331200	Elementalist	Thrall of Vengeance XII		icon_skills.summonspiritofrange_tex
+331200	Elementalist	Thrall of Vengeance XII		icon_skills.summonspiritofrange_tex	331230	331210
 331300	Elementalist	Thrall of Vengeance XIII		icon_skills.summonspiritofrange_tex
 331400	Elementalist	Thrall of Vengeance XIV		icon_skills.summonspiritofrange_tex
 331500	Elementalist	Thrall of Vengeance XV		icon_skills.summonspiritofrange_tex
@@ -1340,7 +1290,7 @@
 340400	Elementalist	Thrall of Wrath IV		icon_skills.summonspiritofattack_tex
 340500	Elementalist	Thrall of Wrath V		icon_skills.summonspiritofattack_tex
 340600	Elementalist	Thrall of Wrath VI		icon_skills.summonspiritofattack_tex
-340700	Elementalist	Thrall of Wrath VII		icon_skills.summonspiritofattack_tex
+340700	Elementalist	Thrall of Wrath VII		icon_skills.summonspiritofattack_tex	340730	340710
 340800	Elementalist	Thrall of Wrath VIII		icon_skills.summonspiritofattack_tex
 350100	Elementalist	Command: Attack		icon_skills.petorderattack_tex
 360100	Elementalist	Command: Follow		icon_skills.petorderfollowme_tex
@@ -1369,6 +1319,9 @@
 420900	Elementalist	Boomerang Pulse IX		icon_skills.mysticorb_tex	420920
 421000	Elementalist	Boomerang Pulse X		icon_skills.mysticorb_tex	421020
 430100	Elementalist	Unsummon Thrall		icon_skills.petskill_buff_tex
+440100	Elementalist	Mass Teleport		icon_skills.masstel_tex
+450100	Elementalist	Thrall Augmentation		icon_skills.spiritedness_tex	450150
+470100	Elementalist	Arunic Release		icon_skills.marbleexplosion_tex
 30100	Elementalist	Titanic Wrath I		icon_skills.rage_tex
 30200	Elementalist	Titanic Wrath II		icon_skills.rage_tex
 30300	Elementalist	Titanic Wrath III		icon_skills.rage_tex
@@ -1722,10 +1675,16 @@
 200600	Fighter	Meat Grinder VI		icon_skills.catchair_tex
 200700	Fighter	Meat Grinder VII		icon_skills.catchair_tex
 210100	Fighter	Mounting Rage		icon_skills.arouseangercancel_tex	210102	210101
+220100	Fighter	Flying Kick		icon_skills.kicker_tex	220130
+240100	Fighter	One-inch Punch		icon_skills.oneinchpunch_tex	240102	240101	240130	240131
+260100	Fighter	Brawling Roll		icon_skills.dampseyroll_tex	260103	260102	260104	260105	260106	260107	260101
+270100	Fighter	One-inch Punch range check		icon_skills.oneinchpunch_tex	240131	240130
 400100	Fighter	Quick Dash		icon_skills.instancerush_tex	400130
+230100	Fighter	Spinning Back Elbow		icon_skills.pet_mushroom_tex	230101
 200800	Fighter	Meat Grinder VIII		icon_skills.catchair_tex
 200900	Fighter	Meat Grinder IX		icon_skills.catchair_tex
 201000	Fighter	Meat Grinder X		icon_skills.catchair_tex
+250100	Fighter	Dempsey Roll (Slow)		icon_skills.dampseyroll_tex
 10100	Assassin	Combo Attack I		icon_skills.c12_meleecombo	10101	10102	10103	10104	10105	10106	10130	10140	10141	10142	10143	10144	10145	10146	10170
 10200	Assassin	Combo Attack II		icon_skills.c12_meleecombo	10201	10202	10203	10204	10205	10206	10230	10240	10241	10242	10243	10244	10245	10246	10270
 10300	Assassin	Combo Attack III		icon_skills.c12_meleecombo	10301	10302	10303	10304	10305	10306	10330	10340	10341	10342	10343	10344	10345	10346	10370

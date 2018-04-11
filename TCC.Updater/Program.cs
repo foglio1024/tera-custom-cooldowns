@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 
 namespace TCC.Updater
 {
@@ -11,6 +12,7 @@ namespace TCC.Updater
 
         static void Main(string[] args)
         {
+            Thread.Sleep(2000);
             //Create all of the directories
             foreach (string dirPath in Directory.GetDirectories(SourcePath, "*", SearchOption.AllDirectories))
             {
