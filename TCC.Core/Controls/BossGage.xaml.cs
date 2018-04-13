@@ -253,6 +253,7 @@ namespace TCC
 
         private void AnimateHp()
         {
+            if (!(Npc is Npc)) return; //weird but could happen
             _hpAnim.To = Npc.CurrentFactor;
             DotPusher.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _hpAnim);
             HpBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _hpAnim);
