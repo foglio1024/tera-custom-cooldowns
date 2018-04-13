@@ -21,7 +21,7 @@ namespace TCC.Windows
     /// </summary>
     public partial class WindowButtons : UserControl, INotifyPropertyChanged
     {
-        WindowSettings _dc;
+        WindowSettings _dc => this.DataContext as WindowSettings;
         public WindowButtons()
         {
             InitializeComponent();
@@ -33,10 +33,17 @@ namespace TCC.Windows
             get { return (string)GetValue(WindowNameProperty); }
             set { SetValue(WindowNameProperty, value); }
         }
+        public static readonly DependencyProperty WindowNameProperty = DependencyProperty.Register("WindowName", typeof(string), typeof(WindowButtons));
 
-        // Using a DependencyProperty as the backing store for WindowName.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty WindowNameProperty =
-            DependencyProperty.Register("WindowName", typeof(string), typeof(WindowButtons));
+
+
+        public Visibility AutoDimButtonVisiblity
+        {
+            get { return (Visibility)GetValue(AutoDimButtonVisiblityProperty); }
+            set { SetValue(AutoDimButtonVisiblityProperty, value); }
+        }
+        public static readonly DependencyProperty AutoDimButtonVisiblityProperty = DependencyProperty.Register("AutoDimButtonVisiblity", typeof(Visibility), typeof(WindowButtons));
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -59,7 +66,7 @@ namespace TCC.Windows
 
         private void UserControl_Loaded_1(object sender, RoutedEventArgs e)
         {
-            _dc = DataContext as WindowSettings;
+            //_dc = DataContext as WindowSettings;
         }
 
         private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
