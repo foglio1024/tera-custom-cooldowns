@@ -27,7 +27,7 @@ namespace TCC
     /// </summary>
     public partial class App
     {
-        public static bool Debug = true;
+        public static bool Debug = false;
         public static TCC.Windows.SplashScreen SplashScreen;
         public static string Version;
         private static void GlobalUnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
@@ -187,7 +187,9 @@ namespace TCC
             SessionManager.CurrentPlayer = new Player(1, "Foglio");
             SessionManager.CurrentPlayer.Class = Class.Warrior;
             CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(Class.Warrior).ToLower() + "-skills.xml", Class.Warrior);
-            return;
+            AbnormalityManager.CurrentDb = new AbnormalityDatabase("EU-EN");
+            var s = AbnormalityManager.CurrentDb.Abnormalities[4];
+            BuffBarWindowViewModel.Instance.Player.AddOrRefreshBuff(s, Int32.MaxValue, 5);
             //ss.Dispatcher.Invoke(new Action(() => ss.Close()));
 
 
@@ -199,7 +201,24 @@ namespace TCC
             u.UserClass = Class.Warrior;
 
 
+            //GroupWindowViewModel.Instance.AddOrUpdateMember(u);
+            //u = new User(GroupWindowViewModel.Instance.GetDispatcher());
+            //u.Name = "Test_Healer";
+            //u.PlayerId = 2;
+            //u.ServerId = 0;
+            //u.Online = true;
+            //u.UserClass = Class.Priest;
+
+            //GroupWindowViewModel.Instance.AddOrUpdateMember(u);
+            //u = new User(GroupWindowViewModel.Instance.GetDispatcher());
+            //u.Name = "Test_Tank";
+            //u.PlayerId = 3;
+            //u.ServerId = 0;
+            //u.Online = true;
+            //u.UserClass = Class.Lancer;
+
             GroupWindowViewModel.Instance.AddOrUpdateMember(u);
+            WindowManager.ClassWindow.Context.CurrentClass = Class.Warrior;
             var l = new List<User>();
             for (uint i = 0; i < 10; i++)
             {
@@ -216,6 +235,7 @@ namespace TCC
             {
                 GroupWindowViewModel.Instance.AddOrUpdateMember(item);
             }
+            return;
             foreach (var item in l)
             {
                 GroupWindowViewModel.Instance.AddOrUpdateMember(item);
