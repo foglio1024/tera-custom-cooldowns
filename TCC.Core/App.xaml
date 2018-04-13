@@ -195,13 +195,15 @@
             </Setter>
         </Style>
         <Style TargetType="{x:Type ToolTip}">
-            <Setter Property="Background" Value="{StaticResource Colors.App.DefaultBackground}" />
+            <Setter Property="Background" Value="{StaticResource Colors.App.TooltipColor}" />
             <Setter Property="FontSize" Value="12" />
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Foreground" Value="#9fff" />
             <Setter Property="Padding" Value="16 6"/>
-            <EventSetter Event="Opened" Handler="ToolTip_Opened"></EventSetter>
-            <EventSetter Event="Closed" Handler="ToolTip_Closed"></EventSetter>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Effect" Value="{StaticResource dropShadow}"></Setter>
+            <EventSetter Event="Opened" Handler="ToolTip_Opened"/>
+            <EventSetter Event="Closed" Handler="ToolTip_Closed"/>
             <!--<Setter Property="ContentTemplate">
                 <Setter.Value>
                     <DataTemplate>
