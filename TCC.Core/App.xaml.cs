@@ -48,6 +48,7 @@ namespace TCC
             System.Windows.MessageBox.Show("An error occured and TCC will now close. Check error.txt for more info.", "TCC",
                 MessageBoxButton.OK, MessageBoxImage.Error);
 
+            if(Proxy.IsConnected) Proxy.CloseConnection();
             if (WindowManager.TrayIcon != null)
             {
                 WindowManager.TrayIcon.Dispose();
