@@ -22,16 +22,22 @@ namespace TCC.Windows
         bool _bottom = true;
         int _testCounter = 0;
 
+        public ChatWindow()
+        {
+            InitializeComponent();
+            _b = buttons;
+            InitWindow(SettingsManager.ChatWindowSettings, false, true, false);
+            opacityUp = new DoubleAnimation(0.01, 1, TimeSpan.FromMilliseconds(300));
+            opacityDown = new DoubleAnimation(1, 0.01, TimeSpan.FromMilliseconds(300));
+            ChatWindowViewModel.Instance.PropertyChanged += Instance_PropertyChanged; //TODO: use DataContext as ChatWindowVM?
+            ChatWindowViewModel.Instance.LoadTabs(SettingsManager.ParseTabsSettings());
+
+        }
         public object CurrentSender { get; internal set; }
 
         private void TccWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            InitWindow(SettingsManager.ChatWindowSettings, false, true, false);
-            opacityUp = new DoubleAnimation(0.01, 1, TimeSpan.FromMilliseconds(300));
-            opacityDown = new DoubleAnimation(1, 0.01, TimeSpan.FromMilliseconds(300));
-            ChatWindowViewModel.Instance.PropertyChanged += Instance_PropertyChanged;
             //_currentContent = itemsControl;
-            ChatWindowViewModel.Instance.LoadTabs(SettingsManager.ParseTabsSettings());
 
         }
 
@@ -123,11 +129,6 @@ namespace TCC.Windows
 
                 playerInfo.IsOpen = false;
             });
-        }
-        public ChatWindow()
-        {
-            InitializeComponent();
-
         }
 
         private void playerInfo_MouseLeave(object sender, MouseEventArgs e)

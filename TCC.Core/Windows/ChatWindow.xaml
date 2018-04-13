@@ -1,9 +1,9 @@
-﻿<local:TccWindow x:Class="TCC.Windows.ChatWindow"
+﻿<w:TccWindow x:Class="TCC.Windows.ChatWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TCC.Windows" 
+             xmlns:w="clr-namespace:TCC.Windows" 
         xmlns:vm="clr-namespace:TCC.ViewModels"
         xmlns:data="clr-namespace:TCC.Data"
         xmlns:controls="clr-namespace:TCC.Controls"
@@ -12,15 +12,15 @@
         MouseDoubleClick="TccWindow_MouseDoubleClick" 
         MouseLeave="TccWindow_MouseLeave" 
         MouseEnter="TccWindow_MouseEnter"
-        Title="ChatWindow" WindowStyle="None" AllowsTransparency="True" MinWidth="350"
+        Title="ChatWindow" WindowStyle="None" AllowsTransparency="True" MinWidth="350" MinHeight="110"
         Background="Transparent" Topmost="True" Loaded="TccWindow_Loaded" ResizeMode="CanResize">
     <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="0" ResizeBorderThickness="0,3,5,5" GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5,5,5,5" GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
-    <local:TccWindow.DataContext>
+    <w:TccWindow.DataContext>
         <vm:ChatWindowViewModel />
-    </local:TccWindow.DataContext>
-    <local:TccWindow.Resources>
+    </w:TccWindow.DataContext>
+    <w:TccWindow.Resources>
         <DataTemplate x:Key="ChatMessageTemplate">
             <controls:ChatMessageControl VerticalAlignment="Top">
                 <controls:ChatMessageControl.LayoutTransform>
@@ -99,13 +99,25 @@
             </ItemsControl>
 
         </DataTemplate>
-    </local:TccWindow.Resources>
+    </w:TccWindow.Resources>
     <Grid>
-        <Grid Margin="0" Width="Auto" Name="root" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <w:WindowButtons Width="Auto" Height="Auto" 
+                         VerticalAlignment="Top" Opacity="0" WindowName="Chat window"
+                         x:Name="buttons" Margin="0" Visibility="Visible" HorizontalAlignment="Left"
+                         DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWindow}}"
+                         AutoDimButtonVisiblity="Collapsed"
+                         />
+
+        <Grid Margin="0" Width="Auto" Name="root" MouseLeftButtonDown="Drag" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+
             <Border Background="{StaticResource Colors.App.DefaultBackground}" Opacity="{Binding Instance.ChatWindowOpacity}" 
                     CornerRadius="1" Grid.ColumnSpan="2" Grid.RowSpan="2" BorderThickness="1" BorderBrush="Black" 
                     Margin="0,0,0,0" Grid.Row="0" VerticalAlignment="Stretch" />
@@ -333,4 +345,4 @@
             </Popup>
         </Grid>
     </Grid>
-</local:TccWindow>
+</w:TccWindow>
