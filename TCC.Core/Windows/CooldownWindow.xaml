@@ -17,7 +17,6 @@
         ShowInTaskbar="False" 
         WindowStyle="None" 
         Background="Transparent" 
-        Loaded="TccWindow_Loaded"    
         ResizeMode="NoResize">
     <w:TccWindow.DataContext>
         <vm:CooldownWindowViewModel />
@@ -29,7 +28,7 @@
                         Content="{Binding}"
                         ContentTemplate="{Binding Instance.Mode, Converter={StaticResource Converters.CooldowWindowModeToTemplate}}" />
         <w:WindowButtons Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="0" WindowName="Cooldown bar"
-                         x:Name="buttons" Margin="0" Visibility="Visible"
+                         x:Name="buttons" Margin="0" Visibility="Visible" 
                          DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWindow}}"
                          />
         <Grid.LayoutTransform>
