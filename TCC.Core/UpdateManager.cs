@@ -18,6 +18,8 @@ namespace TCC
         {
             using (WebClient c = new WebClient())
             {
+                c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+
                 try
                 {
                     var st = c.OpenRead(databaseVersion);
@@ -67,6 +69,8 @@ namespace TCC
             using (WebClient c = new WebClient())
             {
                 bool ready = false;
+                c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+
                 c.DownloadProgressChanged += App.SplashScreen.UpdateProgress;
                 c.DownloadFileCompleted += (s, ev) => ready = true;
                 try
@@ -136,6 +140,7 @@ namespace TCC
         {
             using (WebClient c = new WebClient())
             {
+                c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
 
                 try
                 {
@@ -185,6 +190,8 @@ namespace TCC
             {
                 try
                 {
+                    c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+
                     App.SplashScreen.SetText("Downloading update...");
                     bool ready = false;
                     c.DownloadProgressChanged += App.SplashScreen.UpdateProgress;

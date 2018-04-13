@@ -55,7 +55,7 @@ namespace TCC
 
         private void CheckNewDay(object sender, EventArgs e)
         {
-            if (CurrentServerTime.Hour == 0 && CurrentServerTime.Minute== 0)
+            if (CurrentServerTime.Hour == 0 && CurrentServerTime.Minute == 0)
                 InfoWindowViewModel.Instance.LoadEvents(CurrentServerTime.DayOfWeek, CurrentRegion);
             if (CurrentServerTime.Second == 0 && CurrentServerTime.Minute % 3 == 0) CheckCloseEvents();
         }
@@ -94,7 +94,7 @@ namespace TCC
         {
             if (CurrentRegion == null) return;
             var todayReset = DateTime.Today.AddHours(ResetHour + ServerHourOffsetFromLocal);
-            if(SettingsManager.LastRun > todayReset || DateTime.Now < todayReset) return;
+            if (SettingsManager.LastRun > todayReset || DateTime.Now < todayReset) return;
             foreach (var ch in InfoWindowViewModel.Instance.Characters)
             {
                 foreach (var dg in ch.Dungeons)
@@ -133,6 +133,8 @@ namespace TCC
             sb.Append("&reg=");
             sb.Append(CurrentRegion);
             var c = new WebClient();
+            c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+
             try
             {
                 var data = await c.DownloadStringTaskAsync(sb.ToString());
@@ -157,13 +159,15 @@ namespace TCC
             sb.Append(CurrentRegion);
             sb.Append("&post");
             var c = new WebClient();
+            c.Headers.Set("user-agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+
             try
             {
                 c.UploadDataAsync(new Uri(sb.ToString()), new byte[] { });
             }
-            catch 
+            catch
             {
-                ChatWindowViewModel.Instance.AddTccMessage("Failed to upload guild bam info.");   
+                ChatWindowViewModel.Instance.AddTccMessage("Failed to upload guild bam info.");
             }
 
         }
@@ -191,9 +195,9 @@ namespace TCC
             if (!String.IsNullOrEmpty(SettingsManager.Webhook))
             {
                 var sb = new StringBuilder("{");
-                sb.Append("\"");sb.Append("content");sb.Append("\"");
+                sb.Append("\""); sb.Append("content"); sb.Append("\"");
                 sb.Append(":");
-                sb.Append("\"");sb.Append(SettingsManager.WebhookMessage);sb.Append("\"");
+                sb.Append("\""); sb.Append(SettingsManager.WebhookMessage); sb.Append("\"");
                 sb.Append(",");
                 sb.Append("\""); sb.Append("username"); sb.Append("\"");
                 sb.Append(":");
@@ -208,7 +212,9 @@ namespace TCC
                 {
                     using (WebClient client = new WebClient())
                     {
-                        client.Headers.Add("Content-Type", "application/json");
+                        client.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+                        client.Headers.Add( HttpRequestHeader.ContentType, "application/json");
+
                         var resp = client.UploadString(SettingsManager.Webhook, "POST", sb.ToString());
                     }
                 }
@@ -243,7 +249,9 @@ namespace TCC
                 {
                     using (WebClient client = new WebClient())
                     {
-                        client.Headers.Add("Content-Type", "application/json");
+                        client.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+
+                        client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
                         var resp = client.UploadString(SettingsManager.Webhook, "POST", sb.ToString());
                     }
                 }
