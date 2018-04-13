@@ -11,11 +11,12 @@ namespace TCC.Windows
         public CharacterWindow()
         {
             InitializeComponent();
+            _b = buttons;
+            InitWindow(SettingsManager.CharacterWindowSettings, ignoreSize: true);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            InitWindow(SettingsManager.CharacterWindowSettings, ignoreSize: true);
 
             //rootGrid.DataContext = CharacterWindowViewModel.Instance.Player;
         }
@@ -26,6 +27,7 @@ namespace TCC.Windows
         {
             ContextMenu.IsOpen = true;
         }
+
     }
 }
 
