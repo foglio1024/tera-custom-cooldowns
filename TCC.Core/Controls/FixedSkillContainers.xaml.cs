@@ -65,11 +65,11 @@ namespace TCC.Controls
             if(open && (targetspacer.LayoutTransform as ScaleTransform).ScaleX == 1) return;
             if(!open && (targetspacer.LayoutTransform as ScaleTransform).ScaleX == 0) return;
             var to = open ? 1 : 0;
-            var from = open ? 0 : 1;
+            //var from = open ? 0 : 1;
             targetspacer.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty,
-                new DoubleAnimation(from, to, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() });
+                new DoubleAnimation(to, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() });
             addButtonGrid.BeginAnimation(OpacityProperty,
-                new DoubleAnimation(from, to, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() });
+                new DoubleAnimation(to, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() });
         }
         private void SelectionPopup_Closed(object sender, EventArgs e)
         {
