@@ -53,13 +53,20 @@ namespace Tera.Game
         // Tera uses null terminated litte endian UTF-16 strings
         public string ReadTeraString()
         {
-            var builder = new StringBuilder();
-            while (true)
+            try
             {
-                var c = ReadChar();
-                if (c == 0)
-                    return builder.ToString();
-                builder.Append(c);
+                var builder = new StringBuilder();
+                while (true)
+                {
+                    var c = ReadChar();
+                    if (c == 0)
+                        return builder.ToString();
+                    builder.Append(c);
+                }
+            }
+            catch (System.Exception)
+            {
+                return "";
             }
         }
     }
