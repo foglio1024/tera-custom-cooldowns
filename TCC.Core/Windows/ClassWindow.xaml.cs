@@ -11,13 +11,14 @@ namespace TCC.Windows
         public ClassWindow()
         {
             InitializeComponent();
+            _b = buttons;
+            InitWindow(SettingsManager.ClassWindowSettings, ignoreSize: true);
         }
 
         public ClassWindowViewModel Context { get; private set; }
 
         private void TccWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            InitWindow(SettingsManager.ClassWindowSettings, ignoreSize: true);
 
             Context = (ClassWindowViewModel)DataContext;
             Context.PropertyChanged += _context_PropertyChanged;
