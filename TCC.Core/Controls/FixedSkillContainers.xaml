@@ -20,7 +20,7 @@
             <ControlTemplate.Resources>
                 <SineEase x:Key="Ease" EasingMode="EaseInOut" />
             </ControlTemplate.Resources>
-            <Grid RenderTransformOrigin=".5 .5">
+            <Grid RenderTransformOrigin=".5 .5" ToolTip="{Binding Skill.Name}">
                 <local:FixedSkillControl />
                 <Rectangle Fill="#01000000" x:Name="Activator" Height="30" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"></Rectangle>
                 <Thumb x:Name="Thumb" Visibility="Collapsed" dragablz:DragablzItem.IsCustomThumb="True" Cursor="None" HorizontalAlignment="Center" 
