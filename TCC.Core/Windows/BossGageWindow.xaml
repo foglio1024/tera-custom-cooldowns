@@ -16,7 +16,7 @@
         ShowInTaskbar="False"
         WindowStyle="None"
         Background="Transparent"
-        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        MouseLeftButtonDown="Drag"
         Loaded="Window_Loaded"
         ResizeMode="NoResize" 
         MouseDoubleClick="TccWindow_MouseDoubleClick">

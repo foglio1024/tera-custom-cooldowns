@@ -16,8 +16,7 @@
         WindowStyle="None" 
         AllowsTransparency="True" 
         SizeToContent="WidthAndHeight" 
-        MouseLeftButtonDown="Window_MouseLeftButtonDown"
-        Loaded="Window_Loaded"            
+        MouseLeftButtonDown="Drag"
         ResizeMode="NoResize" 
         >
     <w:TccWindow.Resources>
@@ -72,7 +71,7 @@
         <Grid.CacheMode>
             <BitmapCache RenderAtScale="2"></BitmapCache>
         </Grid.CacheMode>
-        <Grid Margin="25,5,5,5"  Name="rootGrid" ClipToBounds="False">
+        <Grid Margin="25,40,5,5"  Name="rootGrid" ClipToBounds="False">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -242,5 +241,8 @@
                 </Grid>
             </Border>
         </Grid>
+        <w:WindowButtons VerticalAlignment="Top" Opacity="0" HorizontalAlignment="Left" WindowName="Character window" x:Name="buttons"
+                         DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWindow}}"
+                         ></w:WindowButtons>
     </Grid>
 </w:TccWindow>

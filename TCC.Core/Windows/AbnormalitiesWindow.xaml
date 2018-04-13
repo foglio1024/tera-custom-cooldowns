@@ -15,7 +15,7 @@
         AllowsTransparency="True"
         ResizeMode="NoResize"
         SizeToContent="WidthAndHeight"
-        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        MouseLeftButtonDown="Drag"
         >
     <w:TccWindow.DataContext>
         <vm:BuffBarWindowViewModel />
