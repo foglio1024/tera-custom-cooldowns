@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
+using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Threading;
 using TCC.Data;
 using TCC.Data.Databases;
@@ -20,7 +24,6 @@ namespace TCC.ViewModels
         private bool _firstCheck = true;
         private readonly object _lock = new object();
         public event Action SettingsUpdated;
-
 
         public static GroupWindowViewModel Instance => _instance ?? (_instance = new GroupWindowViewModel());
         public bool IsTeraOnTop => WindowManager.IsTccVisible; //TODO: is this needed? need to check for all VM
@@ -455,5 +458,80 @@ namespace TCC.ViewModels
             u.Location = MapDatabase.TryGetGuardOrDungeonNameFromContinentId(p.ContinentId, out var l) ? l + ch : "Unknown";
         }
 
+    }
+
+    public class DragBehavior
+    {
+        public readonly TranslateTransform Transform = new TranslateTransform();
+        private System.Windows.Point _elementStartPosition2;
+        private System.Windows.Point _mouseStartPosition2;
+        private static DragBehavior _instance = new DragBehavior();
+        public static DragBehavior Instance
+        {
+            get { return _instance; }
+            set { _instance = value; }
+        }
+
+        public static bool GetDrag(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(IsDragProperty);
+        }
+
+        public static void SetDrag(DependencyObject obj, bool value)
+        {
+            obj.SetValue(IsDragProperty, value);
+        }
+
+        public static readonly DependencyProperty IsDragProperty =
+          DependencyProperty.RegisterAttached("Drag",
+          typeof(bool), typeof(DragBehavior),
+          new PropertyMetadata(false, OnDragChanged));
+
+        private static void OnDragChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            // ignoring error checking
+            var element = (UIElement)sender;
+            var isDrag = (bool)(e.NewValue);
+
+            Instance = new DragBehavior();
+            ((UIElement)sender).RenderTransform = Instance.Transform;
+
+            if (isDrag)
+            {
+                element.MouseLeftButtonDown += Instance.ElementOnMouseLeftButtonDown;
+                element.MouseLeftButtonUp += Instance.ElementOnMouseLeftButtonUp;
+                element.MouseMove += Instance.ElementOnMouseMove;
+            }
+            else
+            {
+                element.MouseLeftButtonDown -= Instance.ElementOnMouseLeftButtonDown;
+                element.MouseLeftButtonUp -= Instance.ElementOnMouseLeftButtonUp;
+                element.MouseMove -= Instance.ElementOnMouseMove;
+            }
+        }
+
+        private void ElementOnMouseLeftButtonDown(object sender, MouseButtonEventArgs mouseButtonEventArgs)
+        {
+            var parent = Application.Current.MainWindow;
+            _mouseStartPosition2 = mouseButtonEventArgs.GetPosition(parent);
+            ((UIElement)sender).CaptureMouse();
+        }
+
+        private void ElementOnMouseLeftButtonUp(object sender, MouseButtonEventArgs mouseButtonEventArgs)
+        {
+            ((UIElement)sender).ReleaseMouseCapture();
+            _elementStartPosition2.X = Transform.X;
+            _elementStartPosition2.Y = Transform.Y;
+        }
+
+        private void ElementOnMouseMove(object sender, MouseEventArgs mouseEventArgs)
+        {
+            var parent = Application.Current.MainWindow;
+            var mousePos = mouseEventArgs.GetPosition(parent);
+            var diff = (mousePos - _mouseStartPosition2);
+            if (!((UIElement)sender).IsMouseCaptured) return;
+            Transform.X = _elementStartPosition2.X + diff.X;
+            Transform.Y = _elementStartPosition2.Y + diff.Y;
+        }
     }
 }
