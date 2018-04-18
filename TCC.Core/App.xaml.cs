@@ -27,7 +27,7 @@ namespace TCC
     /// </summary>
     public partial class App
     {
-        public static bool Debug = false;
+        public static bool Debug = true;
         public static TCC.Windows.SplashScreen SplashScreen;
         public static string Version;
         private static void GlobalUnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
@@ -48,7 +48,7 @@ namespace TCC
             System.Windows.MessageBox.Show("An error occured and TCC will now close. Check error.txt for more info.", "TCC",
                 MessageBoxButton.OK, MessageBoxImage.Error);
 
-            if(Proxy.IsConnected) Proxy.CloseConnection();
+            if (Proxy.IsConnected) Proxy.CloseConnection();
             if (WindowManager.TrayIcon != null)
             {
                 WindowManager.TrayIcon.Dispose();
@@ -71,8 +71,16 @@ namespace TCC
             js.Add("inner_exception", new JValue(ex.InnerException != null ? ex.InnerException.Message.ToString() : "undefined"));
             js.Add("exception", new JValue(ex.Message.ToString()));
             js.Add("game_version", new JValue(PacketProcessor.Version));
-            js.Add("region", new JValue(PacketProcessor.Region));
-            js.Add("server_id", new JValue(PacketProcessor.ServerId));
+            if (PacketProcessor.Server != null)
+            {
+                js.Add("region", new JValue(PacketProcessor.Server.Region));
+                js.Add("server_id", new JValue(PacketProcessor.Server.ServerId));
+            }
+            else
+            {
+                js.Add("region", new JValue(""));
+                js.Add("server_id", new JValue(""));
+            }
             c.Encoding = Encoding.UTF8;
             c.UploadString(new Uri("https://us-central1-tcc-report.cloudfunctions.net/crash"), Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
         }
@@ -112,9 +120,9 @@ namespace TCC
                 c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
                 var js = new JObject()
                 {
-                    { "server", PacketProcessor.ServerId},
+                    { "server", PacketProcessor.Server.ServerId},
                     { "id", InfoWindowViewModel.Instance.Characters == null ?0 : InfoWindowViewModel.Instance.Characters.Count == 0 ? 0 : InfoWindowViewModel.Instance.Characters.FirstOrDefault(x => x.Position == 1).Id },
-                    { "region", PacketProcessor.Region },
+                    { "region", PacketProcessor.Server.Region },
                 };
                 c.Encoding = Encoding.UTF8;
                 c.UploadStringAsync(new Uri("https://us-central1-tcc-report.cloudfunctions.net/stat"), Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
@@ -126,7 +134,7 @@ namespace TCC
             Version = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
             InitSS();
             var cd = AppDomain.CurrentDomain;
-            //cd.UnhandledException += GlobalUnhandledExceptionHandler;
+            cd.UnhandledException += GlobalUnhandledExceptionHandler;
             Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.Normal;
             try
             {
@@ -140,8 +148,6 @@ namespace TCC
 
             UpdateManager.CheckDatabaseVersion();
 
-            SplashScreen.SetText("Loading skills...");
-            SkillsDatabase.Load();
             SplashScreen.SetText("Loading settings...");
             SettingsManager.LoadWindowSettings();
             SettingsManager.LoadSettings();
@@ -156,6 +162,7 @@ namespace TCC
 
             TeraSniffer.Instance.NewConnection += (srv) =>
             {
+                PacketProcessor.Server = srv;
                 SkillManager.Clear();
                 WindowManager.TrayIcon.Icon = WindowManager.ConnectedIcon;
                 ChatWindowViewModel.Instance.AddTccMessage($"Connected to {srv.Name}.");
@@ -187,6 +194,7 @@ namespace TCC
             if (!Debug) return;
             SessionManager.CurrentPlayer = new Player(1, "Foglio");
             SessionManager.CurrentPlayer.Class = Class.Warrior;
+            SkillsDatabase.Load("EU-EN");
             CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(Class.Warrior).ToLower() + "-skills.xml", Class.Warrior);
             AbnormalityManager.CurrentDb = new AbnormalityDatabase("EU-EN");
             var s = AbnormalityManager.CurrentDb.Abnormalities[4];
