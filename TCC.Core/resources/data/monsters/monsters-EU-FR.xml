@@ -15027,6 +15027,7 @@
 		<Monster name="Hollow Gourdo" id="112" isBoss="False" hp="100000000" />
 		<Monster name="Gourdo" id="400" isBoss="False" hp="66578" />
 		<Monster name="Kumas" id="1000" isBoss="False" hp="147000000" />
+		<Monster name="Frappe sournoise I" id="12345" isBoss="False" hp="1" />
 		<Monster name="Préfet" id="42733" isBoss="False" hp="876340" />
 		<Monster name="Brute hulrap puissante" id="42734" isBoss="False" hp="876340" />
 		<Monster name="Prédateur argon" id="88511" isBoss="False" hp="432000000" />
@@ -15036,8 +15037,8 @@
 		<Monster name="Cauchemar de Noël" id="300937" isBoss="False" hp="723" />
 		<Monster name="Arzakaar robuste" id="885061" isBoss="False" hp="405000000" />
 		<Monster name="Manaya" id="885200" isBoss="False" hp="3150000000" />
-		<Monster name="Ombre" id="1010100" isBoss="False" hp="1" />
-		<Monster name="Ombre" id="1010101" isBoss="False" hp="1" />
+		<Monster name="Agression enfumée I" id="1010100" isBoss="False" hp="1" />
+		<Monster name="Agression enfumée II" id="1010101" isBoss="False" hp="1" />
 		<Monster name="Ombre" id="1010102" isBoss="False" hp="1" />
 		<Monster name="Ombre" id="1010103" isBoss="False" hp="1" />
 		<Monster name="Ombre" id="1010104" isBoss="False" hp="1" />
@@ -15068,7 +15069,7 @@
 		<Monster name="Serviteur de protection" id="1023011" isBoss="False" hp="269588" />
 		<Monster name="Serviteur de protection" id="1023012" isBoss="False" hp="353307" />
 		<Monster name="Serviteur de protection" id="1023013" isBoss="False" hp="497239" />
-		<Monster name="Serviteur de protection" id="1023014" isBoss="False" hp="697311" />
+		<Monster name="Serviteur de protection XVIII" id="1023014" isBoss="False" hp="697311" />
 		<Monster name="Serviteur de vie" id="1023200" isBoss="False" hp="3651" />
 		<Monster name="Serviteur de vie" id="1023201" isBoss="False" hp="5639" />
 		<Monster name="Serviteur de vie" id="1023202" isBoss="False" hp="8154" />
@@ -15081,6 +15082,8 @@
 		<Monster name="Serviteur de vie" id="1023209" isBoss="False" hp="72427" />
 		<Monster name="Serviteur de vie" id="1023210" isBoss="False" hp="98066" />
 		<Monster name="Serviteur de vie" id="1023211" isBoss="False" hp="134333" />
+		<Monster name="Serviteur de vie XV" id="1023214" isBoss="False" hp="0" />
+		<Monster name="Serviteur de vie XVI" id="1023215" isBoss="False" hp="0" />
 		<Monster name="Serviteur de vengeance" id="1023300" isBoss="False" hp="1171" />
 		<Monster name="Serviteur de vengeance" id="1023301" isBoss="False" hp="1634" />
 		<Monster name="Serviteur de vengeance" id="1023302" isBoss="False" hp="2295" />
@@ -15094,14 +15097,24 @@
 		<Monster name="Serviteur de vengeance" id="1023310" isBoss="False" hp="25026" />
 		<Monster name="Serviteur de vengeance" id="1023311" isBoss="False" hp="35220" />
 		<Monster name="Serviteur de vengeance" id="1023312" isBoss="False" hp="49393" />
+		<Monster name="Serviteur de vengeance XVI" id="1023315" isBoss="False" hp="0" />
 		<Monster name="Serviteur de courroux" id="1023400" isBoss="False" hp="551610" />
 		<Monster name="Serviteur de courroux" id="1023401" isBoss="False" hp="757769" />
 		<Monster name="Serviteur de courroux" id="1023402" isBoss="False" hp="979956" />
 		<Monster name="Serviteur de courroux" id="1023403" isBoss="False" hp="1276458" />
 		<Monster name="Serviteur de courroux" id="1023404" isBoss="False" hp="1700669" />
 		<Monster name="Serviteur de courroux" id="1023405" isBoss="False" hp="2481031" />
-		<Monster name="Totem de protection" id="1024000" isBoss="False" hp="332892" />
-		<Monster name="Totem protecteur" id="1024001" isBoss="False" hp="465946" />
+		<Monster name="Serviteur de courroux IX" id="1023408" isBoss="False" hp="0" />
+		<Monster name="Serviteur de courroux X" id="1023409" isBoss="False" hp="0" />
+		<Monster name="Serviteur de courroux XI" id="1023410" isBoss="False" hp="0" />
+		<Monster name="Serviteur de courroux XII" id="1023411" isBoss="False" hp="0" />
+		<Monster name="Serviteur de courroux XIII" id="1023412" isBoss="False" hp="0" />
+		<Monster name="Serviteur de courroux XIV" id="1023413" isBoss="False" hp="0" />
+		<Monster name="Serviteur de courroux XV" id="1023414" isBoss="False" hp="0" />
+		<Monster name="Serviteur de courroux XVI" id="1023415" isBoss="False" hp="0" />
+		<Monster name="Totem de protection I" id="1024000" isBoss="False" hp="332892" />
+		<Monster name="Totem de protection II" id="1024001" isBoss="False" hp="465946" />
+		<Monster name="Totem de protection III" id="1024002" isBoss="False" hp="0" />
 		<Monster name="Totem d'hébétude" id="1024100" isBoss="False" hp="332892" />
 		<Monster name="Totem de vitesse" id="1024200" isBoss="False" hp="332892" />
 		<Monster name="Totem d'assaut" id="1024300" isBoss="False" hp="332892" />
@@ -15186,8 +15199,8 @@
 		<Monster name="Ombre" id="1110106" isBoss="False" hp="1" />
 		<Monster name="Ombre" id="1110107" isBoss="False" hp="1" />
 		<Monster name="Ombre" id="1110108" isBoss="False" hp="1" />
-		<Monster name="Ombre" id="2010100" isBoss="False" hp="10000000" />
-		<Monster name="Ombre" id="2010101" isBoss="False" hp="10000000" />
+		<Monster name="Ailier ombreux I" id="2010100" isBoss="False" hp="10000000" />
+		<Monster name="Ailier ombreux II" id="2010101" isBoss="False" hp="10000000" />
 		<Monster name="Ombre" id="2010102" isBoss="False" hp="10000000" />
 		<Monster name="Ombre" id="2010103" isBoss="False" hp="10000000" />
 		<Monster name="Ombre" id="2010104" isBoss="False" hp="10000000" />
@@ -15309,61 +15322,66 @@
 		<Monster name="Serviteur de protection" id="10235001" isBoss="False" hp="7612" />
 		<Monster name="Serviteur de protection" id="10235002" isBoss="False" hp="9435" />
 		<Monster name="Serviteur de protection" id="10235003" isBoss="False" hp="12396" />
-		<Monster name="Serviteur de protection" id="10235004" isBoss="False" hp="17301" />
-		<Monster name="Serviteur de protection" id="10235005" isBoss="False" hp="24297" />
-		<Monster name="Serviteur de protection" id="10235006" isBoss="False" hp="34125" />
-		<Monster name="Serviteur de protection" id="10235007" isBoss="False" hp="44400" />
-		<Monster name="Serviteur de protection" id="10235008" isBoss="False" hp="64614" />
-		<Monster name="Serviteur de protection" id="10235009" isBoss="False" hp="87219" />
-		<Monster name="Serviteur de protection" id="10235010" isBoss="False" hp="119890" />
-		<Monster name="Serviteur de protection" id="10235011" isBoss="False" hp="155140" />
-		<Monster name="Serviteur de protection" id="10235012" isBoss="False" hp="202191" />
-		<Monster name="Serviteur de protection" id="10235013" isBoss="False" hp="264979" />
-		<Monster name="Serviteur de protection" id="10235014" isBoss="False" hp="370962" />
-		<Monster name="Serviteur de protection" id="10235015" isBoss="False" hp="514723" />
-		<Monster name="Serviteur de protection" id="10235016" isBoss="False" hp="1785366" />
-		<Monster name="Serviteur de protection ensorcelé" id="10235017" isBoss="False" hp="1785366" />
+		<Monster name="Serviteur de protection IV" id="10235004" isBoss="False" hp="17301" />
+		<Monster name="Serviteur de protection V" id="10235005" isBoss="False" hp="24297" />
+		<Monster name="Serviteur de protection VI" id="10235006" isBoss="False" hp="34125" />
+		<Monster name="Serviteur de protection VII" id="10235007" isBoss="False" hp="44400" />
+		<Monster name="Serviteur de protection VIII" id="10235008" isBoss="False" hp="64614" />
+		<Monster name="Serviteur de protection IX" id="10235009" isBoss="False" hp="87219" />
+		<Monster name="Serviteur de protection X" id="10235010" isBoss="False" hp="119890" />
+		<Monster name="Serviteur de protection XI" id="10235011" isBoss="False" hp="155140" />
+		<Monster name="Serviteur de protection XII" id="10235012" isBoss="False" hp="202191" />
+		<Monster name="Serviteur de protection XIII" id="10235013" isBoss="False" hp="264979" />
+		<Monster name="Serviteur de protection I" id="10235014" isBoss="False" hp="370962" />
+		<Monster name="Serviteur de protection II" id="10235015" isBoss="False" hp="514723" />
+		<Monster name="Serviteur de protection III" id="10235016" isBoss="False" hp="1785366" />
+		<Monster name="Serviteur de protection II" id="10235017" isBoss="False" hp="1785366" />
 		<Monster name="Serviteur de protection" id="10235100" isBoss="False" hp="697311" />
-		<Monster name="Serviteur de vie" id="10236001" isBoss="False" hp="3651" />
-		<Monster name="Serviteur de vie" id="10236002" isBoss="False" hp="5639" />
-		<Monster name="Serviteur de vie" id="10236003" isBoss="False" hp="8154" />
-		<Monster name="Serviteur de vie" id="10236004" isBoss="False" hp="10997" />
-		<Monster name="Serviteur de vie" id="10236005" isBoss="False" hp="15869" />
-		<Monster name="Serviteur de vie" id="10236006" isBoss="False" hp="21890" />
-		<Monster name="Serviteur de vie" id="10236007" isBoss="False" hp="30517" />
-		<Monster name="Serviteur de vie" id="10236008" isBoss="False" hp="40645" />
-		<Monster name="Serviteur de vie" id="10236009" isBoss="False" hp="54655" />
-		<Monster name="Serviteur de vie" id="10236010" isBoss="False" hp="72427" />
-		<Monster name="Serviteur de vie" id="10236011" isBoss="False" hp="98066" />
-		<Monster name="Serviteur de vie" id="10236012" isBoss="False" hp="134333" />
-		<Monster name="Serviteur de vie" id="10236013" isBoss="False" hp="931892" />
-		<Monster name="Serviteur de vie ensorcelé" id="10236014" isBoss="False" hp="931892" />
+		<Monster name="Serviteur de protection XVII" id="10235117" isBoss="False" hp="0" />
+		<Monster name="Serviteur de vie I" id="10236001" isBoss="False" hp="3651" />
+		<Monster name="Serviteur de vie II" id="10236002" isBoss="False" hp="5639" />
+		<Monster name="Serviteur de vie III" id="10236003" isBoss="False" hp="8154" />
+		<Monster name="Serviteur de vie IV" id="10236004" isBoss="False" hp="10997" />
+		<Monster name="Serviteur de vie V" id="10236005" isBoss="False" hp="15869" />
+		<Monster name="Serviteur de vie VI" id="10236006" isBoss="False" hp="21890" />
+		<Monster name="Serviteur de vie VII" id="10236007" isBoss="False" hp="30517" />
+		<Monster name="Serviteur de vie VIII" id="10236008" isBoss="False" hp="40645" />
+		<Monster name="Serviteur de vie IX" id="10236009" isBoss="False" hp="54655" />
+		<Monster name="Serviteur de vie X" id="10236010" isBoss="False" hp="72427" />
+		<Monster name="Serviteur de vie XI" id="10236011" isBoss="False" hp="98066" />
+		<Monster name="Serviteur de vie XII" id="10236012" isBoss="False" hp="134333" />
+		<Monster name="Serviteur de vie XIII" id="10236013" isBoss="False" hp="931892" />
+		<Monster name="Serviteur de vie II" id="10236014" isBoss="False" hp="931892" />
 		<Monster name="Serviteur de vie" id="10236100" isBoss="False" hp="0" />
+		<Monster name="Serviteur de vie XIV" id="10236114" isBoss="False" hp="0" />
 		<Monster name="Serviteur de vengeance" id="10237001" isBoss="False" hp="2634" />
 		<Monster name="Serviteur de vengeance" id="10237002" isBoss="False" hp="3676" />
-		<Monster name="Serviteur de vengeance" id="10237003" isBoss="False" hp="5163" />
-		<Monster name="Serviteur de vengeance" id="10237004" isBoss="False" hp="7251" />
-		<Monster name="Serviteur de vengeance" id="10237005" isBoss="False" hp="9435" />
-		<Monster name="Serviteur de vengeance" id="10237006" isBoss="False" hp="13731" />
-		<Monster name="Serviteur de vengeance" id="10237007" isBoss="False" hp="18534" />
-		<Monster name="Serviteur de vengeance" id="10237008" isBoss="False" hp="25476" />
-		<Monster name="Serviteur de vengeance" id="10237009" isBoss="False" hp="32965" />
-		<Monster name="Serviteur de vengeance" id="10237010" isBoss="False" hp="42966" />
-		<Monster name="Serviteur de vengeance" id="10237011" isBoss="False" hp="56308" />
-		<Monster name="Serviteur de vengeance" id="10237012" isBoss="False" hp="79246" />
-		<Monster name="Serviteur de vengeance" id="10237013" isBoss="False" hp="111135" />
-		<Monster name="Serviteur de vengeance" id="10237014" isBoss="False" hp="379390" />
-		<Monster name="Serviteur de vengeance ensorcelé" id="10237015" isBoss="False" hp="379390" />
+		<Monster name="Serviteur de vengeance I" id="10237003" isBoss="False" hp="5163" />
+		<Monster name="Serviteur de vengeance II" id="10237004" isBoss="False" hp="7251" />
+		<Monster name="Serviteur de vengeance III" id="10237005" isBoss="False" hp="9435" />
+		<Monster name="Serviteur de vengeance IV" id="10237006" isBoss="False" hp="13731" />
+		<Monster name="Serviteur de vengeance V" id="10237007" isBoss="False" hp="18534" />
+		<Monster name="Serviteur de vengeance VI" id="10237008" isBoss="False" hp="25476" />
+		<Monster name="Serviteur de vengeance VII" id="10237009" isBoss="False" hp="32965" />
+		<Monster name="Serviteur de vengeance VIII" id="10237010" isBoss="False" hp="42966" />
+		<Monster name="Serviteur de vengeance IX" id="10237011" isBoss="False" hp="56308" />
+		<Monster name="Serviteur de vengeance X" id="10237012" isBoss="False" hp="79246" />
+		<Monster name="Serviteur de vengeance XI" id="10237013" isBoss="False" hp="111135" />
+		<Monster name="Serviteur de vengeance XII" id="10237014" isBoss="False" hp="379390" />
+		<Monster name="Serviteur de vengeance II" id="10237015" isBoss="False" hp="379390" />
 		<Monster name="Serviteur de vengeance" id="10237100" isBoss="False" hp="0" />
-		<Monster name="Serviteur de courroux" id="10238001" isBoss="False" hp="551610" />
-		<Monster name="Serviteur de courroux" id="10238002" isBoss="False" hp="757769" />
-		<Monster name="Serviteur de courroux" id="10238003" isBoss="False" hp="979956" />
-		<Monster name="Serviteur de courroux" id="10238004" isBoss="False" hp="1276458" />
-		<Monster name="Serviteur de courroux" id="10238005" isBoss="False" hp="1700669" />
-		<Monster name="Serviteur de courroux" id="10238006" isBoss="False" hp="2481031" />
-		<Monster name="Serviteur de courroux" id="10238007" isBoss="False" hp="9918703" />
-		<Monster name="Serviteur de courroux ensorcelé" id="10238008" isBoss="False" hp="9918703" />
+		<Monster name="Serviteur de vengeance XV" id="10237115" isBoss="False" hp="0" />
+		<Monster name="Serviteur de courroux I" id="10238001" isBoss="False" hp="551610" />
+		<Monster name="Serviteur de courroux II" id="10238002" isBoss="False" hp="757769" />
+		<Monster name="Serviteur de courroux III" id="10238003" isBoss="False" hp="979956" />
+		<Monster name="Serviteur de courroux IV" id="10238004" isBoss="False" hp="1276458" />
+		<Monster name="Serviteur de courroux V" id="10238005" isBoss="False" hp="1700669" />
+		<Monster name="Serviteur de courroux VI" id="10238006" isBoss="False" hp="2481031" />
+		<Monster name="Serviteur de courroux VII" id="10238007" isBoss="False" hp="9918703" />
+		<Monster name="Serviteur de courroux II" id="10238008" isBoss="False" hp="9918703" />
 		<Monster name="Serviteur de courroux" id="10238100" isBoss="False" hp="0" />
+		<Monster name="Serviteur de courroux VIII" id="10238108" isBoss="False" hp="0" />
+		<Monster name="Invocation de roi" id="10239003" isBoss="False" hp="200000" />
 		<Monster name="Fantôme de Dkurion" id="20150805" isBoss="False" hp="999999999" />
 		<Monster name="ギガントクーマス" id="20170711" isBoss="False" hp="1496000000" />
 		<Monster name="Tuwangi confus" id="20170715" isBoss="False" hp="500" />

@@ -15027,6 +15027,7 @@
 		<Monster name="Hohler Kürbiskopf" id="112" isBoss="False" hp="100000000" />
 		<Monster name="Kürbiskopf" id="400" isBoss="False" hp="66578" />
 		<Monster name="Kumas" id="1000" isBoss="False" hp="147000000" />
+		<Monster name="Hinterlist I" id="12345" isBoss="False" hp="1" />
 		<Monster name="Präfekt" id="42733" isBoss="False" hp="876340" />
 		<Monster name="Ermächtigter Hulrapbarbar" id="42734" isBoss="False" hp="876340" />
 		<Monster name="Argonenräuber" id="88511" isBoss="False" hp="432000000" />
@@ -15036,8 +15037,8 @@
 		<Monster name="Weihnachtsalbtraum" id="300937" isBoss="False" hp="723" />
 		<Monster name="Kräftiger Arzakaar" id="885061" isBoss="False" hp="405000000" />
 		<Monster name="Manaya" id="885200" isBoss="False" hp="3150000000" />
-		<Monster name="Schatten" id="1010100" isBoss="False" hp="1" />
-		<Monster name="Schatten" id="1010101" isBoss="False" hp="1" />
+		<Monster name="Rauchprovokation I" id="1010100" isBoss="False" hp="1" />
+		<Monster name="Rauchprovokation II" id="1010101" isBoss="False" hp="1" />
 		<Monster name="Schatten" id="1010102" isBoss="False" hp="1" />
 		<Monster name="Schatten" id="1010103" isBoss="False" hp="1" />
 		<Monster name="Schatten" id="1010104" isBoss="False" hp="1" />
@@ -15068,7 +15069,7 @@
 		<Monster name="Leibeigener des Schutzes" id="1023011" isBoss="False" hp="269588" />
 		<Monster name="Leibeigener des Schutzes" id="1023012" isBoss="False" hp="353307" />
 		<Monster name="Leibeigener des Schutzes" id="1023013" isBoss="False" hp="497239" />
-		<Monster name="Leibeigener des Schutzes" id="1023014" isBoss="False" hp="697311" />
+		<Monster name="Leibeigener des Schutzes XVIII" id="1023014" isBoss="False" hp="697311" />
 		<Monster name="Leibeigener des Lebens" id="1023200" isBoss="False" hp="3651" />
 		<Monster name="Leibeigener des Lebens" id="1023201" isBoss="False" hp="5639" />
 		<Monster name="Leibeigener des Lebens" id="1023202" isBoss="False" hp="8154" />
@@ -15081,6 +15082,8 @@
 		<Monster name="Leibeigener des Lebens" id="1023209" isBoss="False" hp="72427" />
 		<Monster name="Leibeigener des Lebens" id="1023210" isBoss="False" hp="98066" />
 		<Monster name="Leibeigener des Lebens" id="1023211" isBoss="False" hp="134333" />
+		<Monster name="Leibeigener des Lebens XV" id="1023214" isBoss="False" hp="0" />
+		<Monster name="Leibeigener des Lebens XVI" id="1023215" isBoss="False" hp="0" />
 		<Monster name="Leibeigener der Vergeltung" id="1023300" isBoss="False" hp="1171" />
 		<Monster name="Leibeigener der Vergeltung" id="1023301" isBoss="False" hp="1634" />
 		<Monster name="Leibeigener der Vergeltung" id="1023302" isBoss="False" hp="2295" />
@@ -15094,14 +15097,24 @@
 		<Monster name="Leibeigener der Vergeltung" id="1023310" isBoss="False" hp="25026" />
 		<Monster name="Leibeigener der Vergeltung" id="1023311" isBoss="False" hp="35220" />
 		<Monster name="Leibeigener der Vergeltung" id="1023312" isBoss="False" hp="49393" />
+		<Monster name="Leibeigener der Vergeltung XVI" id="1023315" isBoss="False" hp="0" />
 		<Monster name="Leibeigener des Zorns" id="1023400" isBoss="False" hp="551610" />
 		<Monster name="Leibeigener des Zorns" id="1023401" isBoss="False" hp="757769" />
 		<Monster name="Leibeigener des Zorns" id="1023402" isBoss="False" hp="979956" />
 		<Monster name="Leibeigener des Zorns" id="1023403" isBoss="False" hp="1276458" />
 		<Monster name="Leibeigener des Zorns" id="1023404" isBoss="False" hp="1700669" />
 		<Monster name="Leibeigener des Zorns" id="1023405" isBoss="False" hp="2481031" />
-		<Monster name="Schutztotem" id="1024000" isBoss="False" hp="332892" />
-		<Monster name="Schutztotem" id="1024001" isBoss="False" hp="465946" />
+		<Monster name="Leibeigener des Zorns IX" id="1023408" isBoss="False" hp="0" />
+		<Monster name="Leibeigener des Zorns X" id="1023409" isBoss="False" hp="0" />
+		<Monster name="Leibeigener des Zorns XI" id="1023410" isBoss="False" hp="0" />
+		<Monster name="Leibeigener des Zorns XII" id="1023411" isBoss="False" hp="0" />
+		<Monster name="Leibeigener des Zorns XIII" id="1023412" isBoss="False" hp="0" />
+		<Monster name="Leibeigener des Zorns XIV" id="1023413" isBoss="False" hp="0" />
+		<Monster name="Leibeigener des Zorns XV" id="1023414" isBoss="False" hp="0" />
+		<Monster name="Leibeigener des Zorns XVI" id="1023415" isBoss="False" hp="0" />
+		<Monster name="Schutztotem I" id="1024000" isBoss="False" hp="332892" />
+		<Monster name="Schutztotem II" id="1024001" isBoss="False" hp="465946" />
+		<Monster name="Schutztotem III" id="1024002" isBoss="False" hp="0" />
 		<Monster name="Benebelndes Totem" id="1024100" isBoss="False" hp="332892" />
 		<Monster name="Geschwindigkeitstotem" id="1024200" isBoss="False" hp="332892" />
 		<Monster name="Angriffstotem" id="1024300" isBoss="False" hp="332892" />
@@ -15186,8 +15199,8 @@
 		<Monster name="Schatten" id="1110106" isBoss="False" hp="1" />
 		<Monster name="Schatten" id="1110107" isBoss="False" hp="1" />
 		<Monster name="Schatten" id="1110108" isBoss="False" hp="1" />
-		<Monster name="Schatten" id="2010100" isBoss="False" hp="10000000" />
-		<Monster name="Schatten" id="2010101" isBoss="False" hp="10000000" />
+		<Monster name="Rauchflanke I" id="2010100" isBoss="False" hp="10000000" />
+		<Monster name="Rauchflanke II" id="2010101" isBoss="False" hp="10000000" />
 		<Monster name="Schatten" id="2010102" isBoss="False" hp="10000000" />
 		<Monster name="Schatten" id="2010103" isBoss="False" hp="10000000" />
 		<Monster name="Schatten" id="2010104" isBoss="False" hp="10000000" />
@@ -15309,61 +15322,66 @@
 		<Monster name="Leibeigener des Schutzes" id="10235001" isBoss="False" hp="7612" />
 		<Monster name="Leibeigener des Schutzes" id="10235002" isBoss="False" hp="9435" />
 		<Monster name="Leibeigener des Schutzes" id="10235003" isBoss="False" hp="12396" />
-		<Monster name="Leibeigener des Schutzes" id="10235004" isBoss="False" hp="17301" />
-		<Monster name="Leibeigener des Schutzes" id="10235005" isBoss="False" hp="24297" />
-		<Monster name="Leibeigener des Schutzes" id="10235006" isBoss="False" hp="34125" />
-		<Monster name="Leibeigener des Schutzes" id="10235007" isBoss="False" hp="44400" />
-		<Monster name="Leibeigener des Schutzes" id="10235008" isBoss="False" hp="64614" />
-		<Monster name="Leibeigener des Schutzes" id="10235009" isBoss="False" hp="87219" />
-		<Monster name="Leibeigener des Schutzes" id="10235010" isBoss="False" hp="119890" />
-		<Monster name="Leibeigener des Schutzes" id="10235011" isBoss="False" hp="155140" />
-		<Monster name="Leibeigener des Schutzes" id="10235012" isBoss="False" hp="202191" />
-		<Monster name="Leibeigener des Schutzes" id="10235013" isBoss="False" hp="264979" />
-		<Monster name="Leibeigener des Schutzes" id="10235014" isBoss="False" hp="370962" />
-		<Monster name="Leibeigener des Schutzes" id="10235015" isBoss="False" hp="514723" />
-		<Monster name="Leibeigener des Schutzes" id="10235016" isBoss="False" hp="1785366" />
-		<Monster name="Verzauberter Leibeigener des Schutzes" id="10235017" isBoss="False" hp="1785366" />
+		<Monster name="Leibeigener des Schutzes IV" id="10235004" isBoss="False" hp="17301" />
+		<Monster name="Leibeigener des Schutzes V" id="10235005" isBoss="False" hp="24297" />
+		<Monster name="Leibeigener des Schutzes VI" id="10235006" isBoss="False" hp="34125" />
+		<Monster name="Leibeigener des Schutzes VII" id="10235007" isBoss="False" hp="44400" />
+		<Monster name="Leibeigener des Schutzes VIII" id="10235008" isBoss="False" hp="64614" />
+		<Monster name="Leibeigener des Schutzes IX" id="10235009" isBoss="False" hp="87219" />
+		<Monster name="Leibeigener des Schutzes X" id="10235010" isBoss="False" hp="119890" />
+		<Monster name="Leibeigener des Schutzes XI" id="10235011" isBoss="False" hp="155140" />
+		<Monster name="Leibeigener des Schutzes XII" id="10235012" isBoss="False" hp="202191" />
+		<Monster name="Leibeigener des Schutzes XIII" id="10235013" isBoss="False" hp="264979" />
+		<Monster name="Leibeigener des Schutzes I" id="10235014" isBoss="False" hp="370962" />
+		<Monster name="Leibeigener des Schutzes II" id="10235015" isBoss="False" hp="514723" />
+		<Monster name="Leibeigener des Schutzes III" id="10235016" isBoss="False" hp="1785366" />
+		<Monster name="Leibeigener des Schutzes II" id="10235017" isBoss="False" hp="1785366" />
 		<Monster name="Leibeigener des Schutzes" id="10235100" isBoss="False" hp="697311" />
-		<Monster name="Leibeigener des Lebens" id="10236001" isBoss="False" hp="3651" />
-		<Monster name="Leibeigener des Lebens" id="10236002" isBoss="False" hp="5639" />
-		<Monster name="Leibeigener des Lebens" id="10236003" isBoss="False" hp="8154" />
-		<Monster name="Leibeigener des Lebens" id="10236004" isBoss="False" hp="10997" />
-		<Monster name="Leibeigener des Lebens" id="10236005" isBoss="False" hp="15869" />
-		<Monster name="Leibeigener des Lebens" id="10236006" isBoss="False" hp="21890" />
-		<Monster name="Leibeigener des Lebens" id="10236007" isBoss="False" hp="30517" />
-		<Monster name="Leibeigener des Lebens" id="10236008" isBoss="False" hp="40645" />
-		<Monster name="Leibeigener des Lebens" id="10236009" isBoss="False" hp="54655" />
-		<Monster name="Leibeigener des Lebens" id="10236010" isBoss="False" hp="72427" />
-		<Monster name="Leibeigener des Lebens" id="10236011" isBoss="False" hp="98066" />
-		<Monster name="Leibeigener des Lebens" id="10236012" isBoss="False" hp="134333" />
-		<Monster name="Leibeigener des Lebens" id="10236013" isBoss="False" hp="931892" />
-		<Monster name="Verzauberter Leibeigener des Lebens" id="10236014" isBoss="False" hp="931892" />
+		<Monster name="Leibeigener des Schutzes XVII" id="10235117" isBoss="False" hp="0" />
+		<Monster name="Leibeigener des Lebens I" id="10236001" isBoss="False" hp="3651" />
+		<Monster name="Leibeigener des Lebens II" id="10236002" isBoss="False" hp="5639" />
+		<Monster name="Leibeigener des Lebens III" id="10236003" isBoss="False" hp="8154" />
+		<Monster name="Leibeigener des Lebens IV" id="10236004" isBoss="False" hp="10997" />
+		<Monster name="Leibeigener des Lebens V" id="10236005" isBoss="False" hp="15869" />
+		<Monster name="Leibeigener des Lebens VI" id="10236006" isBoss="False" hp="21890" />
+		<Monster name="Leibeigener des Lebens VII" id="10236007" isBoss="False" hp="30517" />
+		<Monster name="Leibeigener des Lebens VIII" id="10236008" isBoss="False" hp="40645" />
+		<Monster name="Leibeigener des Lebens IX" id="10236009" isBoss="False" hp="54655" />
+		<Monster name="Leibeigener des Lebens X" id="10236010" isBoss="False" hp="72427" />
+		<Monster name="Leibeigener des Lebens XI" id="10236011" isBoss="False" hp="98066" />
+		<Monster name="Leibeigener des Lebens XII" id="10236012" isBoss="False" hp="134333" />
+		<Monster name="Leibeigener des Lebens XIII" id="10236013" isBoss="False" hp="931892" />
+		<Monster name="Leibeigener des Lebens II" id="10236014" isBoss="False" hp="931892" />
 		<Monster name="Leibeigener des Lebens" id="10236100" isBoss="False" hp="0" />
+		<Monster name="Leibeigener des Lebens XIV" id="10236114" isBoss="False" hp="0" />
 		<Monster name="Leibeigener der Vergeltung" id="10237001" isBoss="False" hp="2634" />
 		<Monster name="Leibeigener der Vergeltung" id="10237002" isBoss="False" hp="3676" />
-		<Monster name="Leibeigener der Vergeltung" id="10237003" isBoss="False" hp="5163" />
-		<Monster name="Leibeigener der Vergeltung" id="10237004" isBoss="False" hp="7251" />
-		<Monster name="Leibeigener der Vergeltung" id="10237005" isBoss="False" hp="9435" />
-		<Monster name="Leibeigener der Vergeltung" id="10237006" isBoss="False" hp="13731" />
-		<Monster name="Leibeigener der Vergeltung" id="10237007" isBoss="False" hp="18534" />
-		<Monster name="Leibeigener der Vergeltung" id="10237008" isBoss="False" hp="25476" />
-		<Monster name="Leibeigener der Vergeltung" id="10237009" isBoss="False" hp="32965" />
-		<Monster name="Leibeigener der Vergeltung" id="10237010" isBoss="False" hp="42966" />
-		<Monster name="Leibeigener der Vergeltung" id="10237011" isBoss="False" hp="56308" />
-		<Monster name="Leibeigener der Vergeltung" id="10237012" isBoss="False" hp="79246" />
-		<Monster name="Leibeigener der Vergeltung" id="10237013" isBoss="False" hp="111135" />
-		<Monster name="Leibeigener der Vergeltung" id="10237014" isBoss="False" hp="379390" />
-		<Monster name="Verzauberter Leibeigener der Vergeltung" id="10237015" isBoss="False" hp="379390" />
+		<Monster name="Leibeigener der Vergeltung I" id="10237003" isBoss="False" hp="5163" />
+		<Monster name="Leibeigener der Vergeltung II" id="10237004" isBoss="False" hp="7251" />
+		<Monster name="Leibeigener der Vergeltung III" id="10237005" isBoss="False" hp="9435" />
+		<Monster name="Leibeigener der Vergeltung IV" id="10237006" isBoss="False" hp="13731" />
+		<Monster name="Leibeigener der Vergeltung V" id="10237007" isBoss="False" hp="18534" />
+		<Monster name="Leibeigener der Vergeltung VI" id="10237008" isBoss="False" hp="25476" />
+		<Monster name="Leibeigener der Vergeltung VII" id="10237009" isBoss="False" hp="32965" />
+		<Monster name="Leibeigener der Vergeltung VIII" id="10237010" isBoss="False" hp="42966" />
+		<Monster name="Leibeigener der Vergeltung IX" id="10237011" isBoss="False" hp="56308" />
+		<Monster name="Leibeigener der Vergeltung X" id="10237012" isBoss="False" hp="79246" />
+		<Monster name="Leibeigener der Vergeltung XI" id="10237013" isBoss="False" hp="111135" />
+		<Monster name="Leibeigener der Vergeltung XII" id="10237014" isBoss="False" hp="379390" />
+		<Monster name="Leibeigener der Vergeltung II" id="10237015" isBoss="False" hp="379390" />
 		<Monster name="Leibeigener der Vergeltung" id="10237100" isBoss="False" hp="0" />
-		<Monster name="Leibeigener des Zorns" id="10238001" isBoss="False" hp="551610" />
-		<Monster name="Leibeigener des Zorns" id="10238002" isBoss="False" hp="757769" />
-		<Monster name="Leibeigener des Zorns" id="10238003" isBoss="False" hp="979956" />
-		<Monster name="Leibeigener des Zorns" id="10238004" isBoss="False" hp="1276458" />
-		<Monster name="Leibeigener des Zorns" id="10238005" isBoss="False" hp="1700669" />
-		<Monster name="Leibeigener des Zorns" id="10238006" isBoss="False" hp="2481031" />
-		<Monster name="Leibeigener des Zorns" id="10238007" isBoss="False" hp="9918703" />
-		<Monster name="Verzauberter Leibeigener des Zorns" id="10238008" isBoss="False" hp="9918703" />
+		<Monster name="Leibeigener der Vergeltung XV" id="10237115" isBoss="False" hp="0" />
+		<Monster name="Leibeigener des Zorns I" id="10238001" isBoss="False" hp="551610" />
+		<Monster name="Leibeigener des Zorns II" id="10238002" isBoss="False" hp="757769" />
+		<Monster name="Leibeigener des Zorns III" id="10238003" isBoss="False" hp="979956" />
+		<Monster name="Leibeigener des Zorns IV" id="10238004" isBoss="False" hp="1276458" />
+		<Monster name="Leibeigener des Zorns V" id="10238005" isBoss="False" hp="1700669" />
+		<Monster name="Leibeigener des Zorns VI" id="10238006" isBoss="False" hp="2481031" />
+		<Monster name="Leibeigener des Zorns VII" id="10238007" isBoss="False" hp="9918703" />
+		<Monster name="Leibeigener des Zorns II" id="10238008" isBoss="False" hp="9918703" />
 		<Monster name="Leibeigener des Zorns" id="10238100" isBoss="False" hp="0" />
+		<Monster name="Leibeigener des Zorns VIII" id="10238108" isBoss="False" hp="0" />
+		<Monster name="Königsbeschwörung" id="10239003" isBoss="False" hp="200000" />
 		<Monster name="Durions Phantom" id="20150805" isBoss="False" hp="999999999" />
 		<Monster name="ギガントクーマス" id="20170711" isBoss="False" hp="1496000000" />
 		<Monster name="Verirrter Tuwangi" id="20170715" isBoss="False" hp="500" />
