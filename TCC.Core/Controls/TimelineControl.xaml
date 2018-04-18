@@ -74,9 +74,9 @@
                         RenderTransformOrigin=".5,.5"
                         ToolTipService.InitialShowDelay="0"
                         ToolTipService.ShowDuration="500000">
-                        <Border.Effect>
+                        <!--<Border.Effect>
                             <DropShadowEffect ShadowDepth="1" BlurRadius="3" Opacity=".6"></DropShadowEffect>
-                        </Border.Effect>
+                        </Border.Effect>-->
 
                         <Border.RenderTransform>
                             <ScaleTransform />
