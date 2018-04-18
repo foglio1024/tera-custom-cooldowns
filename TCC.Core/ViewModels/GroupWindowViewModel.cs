@@ -64,20 +64,10 @@ namespace TCC.ViewModels
             Members = new SynchronizedObservableCollection<User>(_dispatcher);
             Members.CollectionChanged += Members_CollectionChanged;
 
-            Dps = InitLiveView(o => ((User)o).Role == Role.Dps);
-            Tanks = InitLiveView(o => ((User)o).Role == Role.Tank);
-            Healers = InitLiveView(o => ((User)o).Role == Role.Healer);
+            Dps = Utils.InitLiveView(o => ((User)o).Role == Role.Dps, Members, new string[] { nameof(User.Role) }, new string[] { });
+            Tanks = Utils.InitLiveView(o => ((User)o).Role == Role.Tank, Members, new string[] { nameof(User.Role) }, new string[] { });
+            Healers = Utils.InitLiveView(o => ((User)o).Role == Role.Healer, Members, new string[] { nameof(User.Role) },  new string[] { });
 
-            ICollectionViewLiveShaping InitLiveView(Predicate<object> predicate)
-            {
-                var cv = new CollectionViewSource { Source = Members }.View;
-                cv.Filter = predicate;
-                var liveView = cv as ICollectionViewLiveShaping;
-                if (!liveView.CanChangeLiveFiltering) return null;
-                liveView.LiveFilteringProperties.Add(nameof(User.Role));
-                liveView.IsLiveFiltering = true;
-                return liveView;
-            }
         }
 
         private void Members_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
