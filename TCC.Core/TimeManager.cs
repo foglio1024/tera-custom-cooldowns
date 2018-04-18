@@ -65,7 +65,7 @@ namespace TCC
             if (string.IsNullOrEmpty(region)) return;
             CurrentRegion = region.StartsWith("EU") ? "EU" : region;
 
-            SettingsManager.LastRegion = CurrentRegion;
+            SettingsManager.LastRegion = region;
 
             var timezone = TimeZoneInfo.GetSystemTimeZones()
                 .FirstOrDefault(x => x.Id == _serverTimezones[CurrentRegion].Timezone);
@@ -129,7 +129,7 @@ namespace TCC
         {
             var sb = new StringBuilder(BaseUrl);
             sb.Append("?srv=");
-            sb.Append(PacketProcessor.ServerId);
+            sb.Append(PacketProcessor.Server.ServerId);
             sb.Append("&reg=");
             sb.Append(CurrentRegion);
             var c = new WebClient();
@@ -154,7 +154,7 @@ namespace TCC
             var time = (long)ts.TotalSeconds;
             var sb = new StringBuilder(BaseUrl);
             sb.Append("?srv=");
-            sb.Append(PacketProcessor.ServerId);
+            sb.Append(PacketProcessor.Server.ServerId);
             sb.Append("&reg=");
             sb.Append(CurrentRegion);
             sb.Append("&post");
