@@ -231,32 +231,32 @@ namespace TCC.ViewModels
             }
             NotifyPropertyChanged(nameof(SelectedCharacter));
 
-            AllDungeons = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
-            SoloDungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
-            T2Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
-            T3Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
-            T4Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
-            T5Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
-            Items = new CollectionViewSource { Source = SelectedCharacter.Gear }.View;
+            //AllDungeons = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
+            //SoloDungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
+            //T2Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
+            //T3Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
+            //T4Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
+            //T5Dungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
+            //Items = new CollectionViewSource { Source = SelectedCharacter.Gear }.View;
 
-            AllDungeons.Filter = null;
-            Items.Filter = null;
-            SoloDungs.Filter = d => DungeonDatabase.Instance.DungeonDefinitions[((DungeonCooldown)d).Id].Tier == DungeonTier.Solo;
-            T2Dungs.Filter = d => DungeonDatabase.Instance.DungeonDefinitions[((DungeonCooldown)d).Id].Tier == DungeonTier.Tier2;
-            T3Dungs.Filter = d => DungeonDatabase.Instance.DungeonDefinitions[((DungeonCooldown)d).Id].Tier == DungeonTier.Tier3;
-            T4Dungs.Filter = d => DungeonDatabase.Instance.DungeonDefinitions[((DungeonCooldown)d).Id].Tier == DungeonTier.Tier4;
-            T5Dungs.Filter = d => DungeonDatabase.Instance.DungeonDefinitions[((DungeonCooldown)d).Id].Tier == DungeonTier.Tier5;
+            //AllDungeons.Filter = null;
+            //Items.Filter = null;
+            //SoloDungs.Filter = d => DungeonDatabase.Instance.Dungeons[((DungeonCooldown)d).Id].Tier == DungeonTier.Solo;
+            //T2Dungs.Filter = d => DungeonDatabase.Instance.  Dungeons[((DungeonCooldown)d).Id].Tier == DungeonTier.Tier2;
+            //T3Dungs.Filter = d => DungeonDatabase.Instance.  Dungeons[((DungeonCooldown)d).Id].Tier == DungeonTier.Tier3;
+            //T4Dungs.Filter = d => DungeonDatabase.Instance.  Dungeons[((DungeonCooldown)d).Id].Tier == DungeonTier.Tier4;
+            //T5Dungs.Filter = d => DungeonDatabase.Instance.  Dungeons[((DungeonCooldown)d).Id].Tier == DungeonTier.Tier5;
 
-            AllDungeons.SortDescriptions.Add(new SortDescription("Tier", ListSortDirection.Ascending));
-            Items.SortDescriptions.Add(new SortDescription("Piece", ListSortDirection.Ascending));
+            //AllDungeons.SortDescriptions.Add(new SortDescription("Tier", ListSortDirection.Ascending));
+            //Items.SortDescriptions.Add(new SortDescription("Piece", ListSortDirection.Ascending));
 
-            NotifyPropertyChanged(nameof(AllDungeons));
-            NotifyPropertyChanged(nameof(SoloDungs));
-            NotifyPropertyChanged(nameof(T2Dungs));
-            NotifyPropertyChanged(nameof(T3Dungs));
-            NotifyPropertyChanged(nameof(T4Dungs));
-            NotifyPropertyChanged(nameof(T5Dungs));
-            NotifyPropertyChanged(nameof(Items));
+            //NotifyPropertyChanged(nameof(AllDungeons));
+            //NotifyPropertyChanged(nameof(SoloDungs));
+            //NotifyPropertyChanged(nameof(T2Dungs));
+            //NotifyPropertyChanged(nameof(T3Dungs));
+            //NotifyPropertyChanged(nameof(T4Dungs));
+            //NotifyPropertyChanged(nameof(T5Dungs));
+            //NotifyPropertyChanged(nameof(Items));
             //_dispatcher.Invoke(() => WindowManager.InfoWindow.AnimateICitems());
         }
         public void ShowWindow()

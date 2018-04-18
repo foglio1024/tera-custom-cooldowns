@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Windows.Themes;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
@@ -8,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
 using TCC.Controls;
 using TCC.ViewModels;
 
@@ -27,6 +29,12 @@ namespace TCC.Windows
             InitializeComponent();
             t = new System.Timers.Timer(30);
             t.Elapsed += AnimateNextItem;
+            _expW = new DoubleAnimation(0, TimeSpan.FromMilliseconds(200)) { EasingFunction = new QuadraticEase() };
+            _expH = new DoubleAnimation(0, TimeSpan.FromMilliseconds(200)) { EasingFunction = new QuadraticEase() };
+            _expM = new ThicknessAnimation(new Thickness(0), TimeSpan.FromMilliseconds(200)) { EasingFunction = new QuadraticEase() };
+            _expO = new DoubleAnimation(0, TimeSpan.FromMilliseconds(200)) { BeginTime = TimeSpan.FromMilliseconds(300) };
+            //_expO.Completed += (s1, ev1) => { b.Visibility = Visibility.Collapsed; _expO.BeginAnimation(OpacityProperty, new DoubleAnimation(1, TimeSpan.FromMilliseconds(1))); };
+
         }
 
         private void AnimateNextItem(object sender, System.Timers.ElapsedEventArgs e)
@@ -65,7 +73,8 @@ namespace TCC.Windows
             InfoWindowViewModel.Instance.SaveToFile();
             var a = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(150));
             a.Completed += (s, ev) => { Hide(); InfoWindowViewModel.Instance.SaveToFile(); };
-            this.BeginAnimation(OpacityProperty, a);
+            //this.BeginAnimation(OpacityProperty, a);
+            this.Hide();
         }
         private void DragWindow(object sender, MouseButtonEventArgs e)
         {
@@ -82,18 +91,17 @@ namespace TCC.Windows
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var _handle = new WindowInteropHelper(this).Handle;
-            FocusManager.HideFromToolBar(_handle);
+            //FocusManager.HideFromToolBar(_handle);
         }
         internal void ShowWindow()
         {
             Dispatcher.Invoke(() =>
             {
                 Topmost = false; Topmost = true;
-                Opacity = 0;
+                //Opacity = 0;
                 Show();
                 Activate();
-                //AnimateICitems();
-                BeginAnimation(Window.OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
+                //BeginAnimation(Window.OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
             });
         }
 
@@ -109,6 +117,30 @@ namespace TCC.Windows
             //}
             //Task.Delay(50).ContinueWith(task => t.Start());
         }
+
+        DoubleAnimation _expW, _expH, _expO;
+        ThicknessAnimation _expM;
+        internal void ExpandCharacter(Point relativePoint, double actualWidth, double actualHeight)
+        {
+            relPoint = relativePoint;
+            b.Width = actualWidth;
+            b.Height = actualHeight;
+            var startThickness = new Thickness(relativePoint.X - 15, relativePoint.Y - 15, 0, 0);
+            w = actualWidth; h = actualHeight;
+            var endThickness = new Thickness(10);
+            var endH = g2.ActualHeight - 20;
+            var endW = g2.ActualWidth - 20;
+            _expW.To = endW;
+            _expH.To = endH;
+            _expM.To = endThickness;
+            _expM.From = startThickness;
+            b.BeginAnimation(WidthProperty,  _expW);
+            b.BeginAnimation(HeightProperty, _expH);
+            b.BeginAnimation(MarginProperty, _expM);
+            b.Opacity = 1;
+            b.Visibility = Visibility.Visible;
+        }
+
         private UniformGrid GetInnerUniformGrid(FrameworkElement element)
         {
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(element); i++)
@@ -130,5 +162,20 @@ namespace TCC.Windows
 
         }
 
+        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ExpandCharacter(Mouse.GetPosition(this), 50, 50);
+        }
+        Point relPoint = new Point();
+        double w, h = 0;
+        private void b_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            b.BeginAnimation(WidthProperty, new DoubleAnimation(w, TimeSpan.FromMilliseconds(200)) { EasingFunction = new QuarticEase() });
+            b.BeginAnimation(HeightProperty, new DoubleAnimation(h, TimeSpan.FromMilliseconds(200)) { EasingFunction = new QuarticEase() });
+            b.BeginAnimation(MarginProperty, new ThicknessAnimation(new Thickness(relPoint.X - 15, relPoint.Y - 15, 0, 0), TimeSpan.FromMilliseconds(200)) { EasingFunction = new QuarticEase() });
+            //b.BeginAnimation(Border.OpacityProperty, _expO);
+            Task.Delay(100).ContinueWith(t => Dispatcher.Invoke(() => b.Visibility = Visibility.Collapsed));
+
+        }
     }
 }
