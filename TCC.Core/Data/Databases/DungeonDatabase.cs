@@ -36,7 +36,7 @@ namespace TCC.Data.Databases
                 var s = line.Split('\t');
                 var id = UInt32.Parse(s[0]);
                 var name = s[1];
-                var t = (DungeonTier)Enum.Parse(typeof(DungeonTier), s[2]);
+                //var t = (DungeonTier)Enum.Parse(typeof(DungeonTier), s[2]);
 
                 if (defs.ContainsKey(id))
                 {
@@ -45,7 +45,7 @@ namespace TCC.Data.Databases
                 }
                 else
                 {
-                    var dg = new Dungeon(id, name, t, 0, false);
+                    //var dg = new Dungeon(id, name, t, 0, false);
                 }
             }
 
