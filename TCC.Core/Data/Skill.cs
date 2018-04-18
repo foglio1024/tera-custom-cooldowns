@@ -5,7 +5,6 @@ namespace TCC
 {
     public class Skill
     {
-        Bitmap iconBitmap;
         public string IconName { get; set; }
         public uint Id { get; set; }
         public Class Class { get; set; }
