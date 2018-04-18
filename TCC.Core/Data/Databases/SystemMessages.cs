@@ -10,7 +10,7 @@ namespace TCC.Data.Databases
 
         public static void Load(string lang)
         {
-            var f = File.OpenText($"/resources/data/sys_msg/sysmsg-{lang}.tsv");
+            var f = File.OpenText($"resources/data/sys_msg/sys_msg-{lang}.tsv");
             Messages = new Dictionary<string, SystemMessage>();
             while (true)
             {

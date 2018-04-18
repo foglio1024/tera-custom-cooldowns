@@ -9,7 +9,7 @@ namespace TCC.Data
         public static Dictionary<uint, string> Social;
         public static void Load(string lang)
         {
-            var f = File.OpenText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"/resources/data/social/social-{lang}.tsv"));
+            var f = File.OpenText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"resources/data/social/social-{lang}.tsv"));
             Social = new Dictionary<uint, string>();
             while (true)
             {

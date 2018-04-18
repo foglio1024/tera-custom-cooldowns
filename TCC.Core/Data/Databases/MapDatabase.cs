@@ -36,7 +36,7 @@ namespace TCC.Data.Databases
                     //var gHeight = g.Attribute("height") != null ? Double.Parse(g.Attribute("height").Value, CultureInfo.InvariantCulture) : 0;
 
                     var guard = new Guard(gId, gNameId, gMapId/*, gLeft, gTop, gWidth, gHeight*/);
-                    guard.ContinentId = Convert.ToUInt32(g.Attribute("continentId").Value);
+                    guard.ContinentId = g.Attribute("continentId") != null? Convert.ToUInt32(g.Attribute("continentId").Value) : 0;
 
                     foreach (var s in g.Descendants().Where(x => x.Name == "Section"))
                     {
@@ -57,7 +57,7 @@ namespace TCC.Data.Databases
                 }
                 Worlds.Add(world.Id, world);
             }
-            LoadNames();
+            LoadNames(lang);
         }
 
         public static bool TryGetGuardOrDungeonNameFromContinentId(uint continent, out string s)
@@ -91,9 +91,9 @@ namespace TCC.Data.Databases
 
         }
 
-        static void LoadNames()
+        static void LoadNames(string lang)
         {
-            var f = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "/resources/data/regions.tsv");
+            var f = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + $"/resources/data/regions/regions-{lang}.tsv");
             while (true)
             {
                 var line = f.ReadLine();
