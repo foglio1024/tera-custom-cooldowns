@@ -5,8 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
              Cursor="Hand"
-             mc:Ignorable="d" MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave" Loaded="UserControl_Loaded" MouseLeftButtonDown="UserControl_MouseLeftButtonDown">
-    <Border Background="White" Margin="3" x:Name="rootBorder" RenderTransformOrigin=".5,.5" UseLayoutRounding="True"  CornerRadius="2" PreviewMouseRightButtonDown="RootBorder_OnPreviewMouseRightButtonDown">
+             mc:Ignorable="d" MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave" Loaded="UserControl_Loaded"
+             MouseLeftButtonDown="UserControl_MouseLeftButtonDown">
+    <Border Background="White" Margin="3" x:Name="rootBorder" RenderTransformOrigin=".5,.5" UseLayoutRounding="True"  CornerRadius="2"
+            PreviewMouseRightButtonDown="RootBorder_OnPreviewMouseRightButtonDown">
         <Grid ClipToBounds="True">
             <Ellipse VerticalAlignment="Top" HorizontalAlignment="Left" Width="50" Height="50" x:Name="ripple" Opacity="0" RenderTransformOrigin=".5,.5" Fill="#1a000000" IsHitTestVisible="False">
                 <Ellipse.RenderTransform>
