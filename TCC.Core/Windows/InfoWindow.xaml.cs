@@ -73,8 +73,8 @@ namespace TCC.Windows
             InfoWindowViewModel.Instance.SaveToFile();
             var a = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(150));
             a.Completed += (s, ev) => { Hide(); InfoWindowViewModel.Instance.SaveToFile(); };
-            //this.BeginAnimation(OpacityProperty, a);
-            this.Hide();
+            this.BeginAnimation(OpacityProperty, a);
+            //this.Hide();
         }
         private void DragWindow(object sender, MouseButtonEventArgs e)
         {
@@ -91,17 +91,17 @@ namespace TCC.Windows
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var _handle = new WindowInteropHelper(this).Handle;
-            //FocusManager.HideFromToolBar(_handle);
+            FocusManager.HideFromToolBar(_handle);
         }
         internal void ShowWindow()
         {
             Dispatcher.Invoke(() =>
             {
                 Topmost = false; Topmost = true;
-                //Opacity = 0;
+                Opacity = 0;
                 Show();
                 Activate();
-                //BeginAnimation(Window.OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
+                BeginAnimation(Window.OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
             });
         }
 

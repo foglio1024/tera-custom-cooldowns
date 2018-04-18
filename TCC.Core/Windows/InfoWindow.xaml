@@ -7,8 +7,9 @@
         xmlns:viewmodels="clr-namespace:TCC.ViewModels"
         xmlns:controls="clr-namespace:TCC.Controls"
         xmlns:themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" Loaded="Window_Loaded" 
-        mc:Ignorable="d" Width="Auto" Height="Auto" ResizeMode="CanResize" AllowsTransparency="False" WindowStyle="SingleBorderWindow"
-        Title="InfoWindow" SizeToContent="WidthAndHeight" Topmost="False" ShowInTaskbar="True" ShowActivated="True" >
+        mc:Ignorable="d" Width="Auto" Height="Auto" ResizeMode="CanResize" AllowsTransparency="True" WindowStyle="None"
+        Title="InfoWindow" SizeToContent="WidthAndHeight" Topmost="False" ShowInTaskbar="True" ShowActivated="True" 
+        BorderThickness="0" BorderBrush="#aaa" Background="Transparent">
     <Window.DataContext>
         <viewmodels:InfoWindowViewModel/>
     </Window.DataContext>
@@ -26,9 +27,8 @@
     <WindowChrome.WindowChrome >
         <WindowChrome  CaptionHeight="0"  ResizeBorderThickness="0" GlassFrameThickness="0" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
-    <Grid Margin="0"  Opacity="1" x:Name="rootGrid" MinHeight="610"
-          UseLayoutRounding="True" VerticalAlignment="Stretch" >
-
+    <Grid  Opacity="1" x:Name="rootGrid" MinHeight="610" Margin="5"
+          UseLayoutRounding="True" VerticalAlignment="Stretch" Effect="{StaticResource dropShadow}" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
