@@ -26,6 +26,7 @@ namespace TCC.Windows
         {
             InitializeComponent();
             _b = buttons;
+            _c = content;
             InitWindow(SettingsManager.ChatWindowSettings, false, true, false);
             opacityUp = new DoubleAnimation(0.01, 1, TimeSpan.FromMilliseconds(300));
             opacityDown = new DoubleAnimation(1, 0.01, TimeSpan.FromMilliseconds(300));

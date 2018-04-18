@@ -6,7 +6,7 @@
         xmlns:w="clr-namespace:TCC.Windows"
         xmlns:converters="clr-namespace:TCC.Converters"
         xmlns:vm="clr-namespace:TCC.ViewModels"
-        xmlns:controls="clr-namespace:TCC.Controls"
+        xmlns:c="clr-namespace:TCC.Controls"
         mc:Ignorable="d"
         Title="HPbar" 
         Height="Auto" Width="Auto"
@@ -64,44 +64,49 @@
     <w:TccWindow.DataContext>
         <vm:CharacterWindowViewModel/>
     </w:TccWindow.DataContext>
-    <Grid UseLayoutRounding="True" ClipToBounds="False">
-        <Grid.LayoutTransform>
-            <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
-        </Grid.LayoutTransform>
-        <Grid.CacheMode>
-            <BitmapCache RenderAtScale="2"></BitmapCache>
-        </Grid.CacheMode>
-        <Grid Margin="25,40,5,5"  Name="rootGrid" ClipToBounds="False">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Border Grid.Row="0" Style="{StaticResource Styles.DefaultBorder}" HorizontalAlignment="Center" 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid UseLayoutRounding="True" ClipToBounds="False" Grid.Row="1" Name="content">
+            <Grid.LayoutTransform>
+                <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
+            </Grid.LayoutTransform>
+            <Grid.CacheMode>
+                <BitmapCache RenderAtScale="2"></BitmapCache>
+            </Grid.CacheMode>
+            <Grid Margin="25,10,5,5"  Name="rootGrid" ClipToBounds="False">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Style="{StaticResource Styles.DefaultBorder}" HorizontalAlignment="Center" 
                     VerticalAlignment="Top" Margin="0,0,0,-11" CornerRadius="4" Height="Auto" Padding="5,0,5,6">
-                <Grid VerticalAlignment="Top">
-                    <TextBlock Foreground="White" FontSize="13" >
+                    <Grid VerticalAlignment="Top">
+                        <TextBlock Foreground="White" FontSize="13" >
                         <Run Text="L" Foreground="#4fff"></Run>
                         <Run Text="{Binding Mode=OneWay, Path=Player.Level}" Foreground="#afff"></Run>
                         <Run Text="" Foreground="#4fff"></Run>
                         <Run Text="{Binding Mode=OneWay, Path=Player.Name}" FontWeight="DemiBold" FontSize="13"></Run>
                         <Run Text=" ilvl:" Foreground="#4fff"></Run>
                         <Run Text="{Binding Mode=OneWay, Path=Player.ItemLevel}" Foreground="#afff"></Run>
-                    </TextBlock>
-                </Grid>
-            </Border>
+                        </TextBlock>
+                    </Grid>
+                </Border>
 
-            <Border Grid.Row="1" Width="Auto" Height="Auto" Style="{StaticResource Styles.DefaultBorder}" 
+                <Border Grid.Row="1" Width="Auto" Height="Auto" Style="{StaticResource Styles.DefaultBorder}" 
                     CornerRadius="8,8,8,8" VerticalAlignment="Center" Opacity="1">
-                <Grid Margin="35,2,1,1" x:Name="BarsMainGrid" Width="350" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Border Background="#15ffffff" CornerRadius="7" Height="14" Margin="-14,0,0,2"  ></Border>
-                    <Border Grid.Row="1" Background="#15ffffff" CornerRadius="7" Height="14" Margin="-14,0,0,0"  ></Border>
-                    <Border Grid.Row="2" Background="#15ffffff" CornerRadius="7" Height="14" Margin="-14,2,0,0" Visibility="{Binding Instance.Player.Class, Converter={StaticResource staminaVisConv}}"/>
-                    <Border Grid.Row="0" 
+                    <Grid Margin="35,2,1,1" x:Name="BarsMainGrid" Width="350" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Border Background="#15ffffff" CornerRadius="7" Height="14" Margin="-14,0,0,2"  ></Border>
+                        <Border Grid.Row="1" Background="#15ffffff" CornerRadius="7" Height="14" Margin="-14,0,0,0"  ></Border>
+                        <Border Grid.Row="2" Background="#15ffffff" CornerRadius="7" Height="14" Margin="-14,2,0,0" Visibility="{Binding Instance.Player.Class, Converter={StaticResource staminaVisConv}}"/>
+                        <Border Grid.Row="0" 
                             Background="{Binding Instance.Player.IsDebuffed, Converter={StaticResource Converters.DebuffStatusToHpColor}}" 
                             Height="14" Margin="-14,0,0,2"  
                             VerticalAlignment="Top" 
@@ -109,13 +114,13 @@
                             HorizontalAlignment="Left" 
                             Padding="0,0,14,0"
                             Opacity=".9">
-                        <FrameworkElement Width="{Binding ElementName=BarsMainGrid, Path=ActualWidth}" Margin="0,0,0,0">
-                            <FrameworkElement.LayoutTransform>
-                                <ScaleTransform ScaleX="{Binding Instance.Player.HpFactor}"/>
-                            </FrameworkElement.LayoutTransform>
-                        </FrameworkElement>
-                    </Border>
-                    <Border Grid.Row="0" 
+                            <FrameworkElement Width="{Binding ElementName=BarsMainGrid, Path=ActualWidth}" Margin="0,0,0,0">
+                                <FrameworkElement.LayoutTransform>
+                                    <ScaleTransform ScaleX="{Binding Instance.Player.HpFactor}"/>
+                                </FrameworkElement.LayoutTransform>
+                            </FrameworkElement>
+                        </Border>
+                        <Border Grid.Row="0" 
                             Background="MediumSeaGreen" 
                             Height="14" Margin="-14,0,0,2"  
                             VerticalAlignment="Top" 
@@ -123,14 +128,14 @@
                             HorizontalAlignment="Left" 
                             Padding="0,0,14,0"
                             Opacity=".9">
-                        <FrameworkElement Width="{Binding ElementName=BarsMainGrid, Path=ActualWidth}" Margin="0,0,0,0">
-                            <FrameworkElement.LayoutTransform>
-                                <ScaleTransform ScaleX="{Binding Instance.Player.ShieldFactor}"/>
-                            </FrameworkElement.LayoutTransform>
-                        </FrameworkElement>
-                    </Border>
+                            <FrameworkElement Width="{Binding ElementName=BarsMainGrid, Path=ActualWidth}" Margin="0,0,0,0">
+                                <FrameworkElement.LayoutTransform>
+                                    <ScaleTransform ScaleX="{Binding Instance.Player.ShieldFactor}"/>
+                                </FrameworkElement.LayoutTransform>
+                            </FrameworkElement>
+                        </Border>
 
-                    <Border Grid.Row="1" 
+                        <Border Grid.Row="1" 
                             Background="{StaticResource Colors.App.MP}" 
                             Height="14" 
                             Margin="-14,0,0,0" 
@@ -139,13 +144,13 @@
                             CornerRadius="0,7,7,0"
                             Padding="0,0,14,0"
                             Opacity=".7">
-                        <FrameworkElement Width="{Binding ElementName=BarsMainGrid, Path=ActualWidth}" Margin="0,0,0,0">
-                            <FrameworkElement.LayoutTransform>
-                                <ScaleTransform ScaleX="{Binding Instance.Player.MpFactor}"/>
-                            </FrameworkElement.LayoutTransform>
-                        </FrameworkElement>
-                    </Border>
-                    <Border Grid.Row="2" 
+                            <FrameworkElement Width="{Binding ElementName=BarsMainGrid, Path=ActualWidth}" Margin="0,0,0,0">
+                                <FrameworkElement.LayoutTransform>
+                                    <ScaleTransform ScaleX="{Binding Instance.Player.MpFactor}"/>
+                                </FrameworkElement.LayoutTransform>
+                            </FrameworkElement>
+                        </Border>
+                        <Border Grid.Row="2" 
                             Background="{Binding Instance.Player.Class, Converter={StaticResource staminaColConv}}" 
                             Height="14" 
                             Margin="-14,2,0,0" 
@@ -155,94 +160,93 @@
                             HorizontalAlignment="Left"
                             Padding="0,0,14,0"
                             Opacity=".8">
-                        <FrameworkElement Width="{Binding ElementName=BarsMainGrid, Path=ActualWidth}" 
+                            <FrameworkElement Width="{Binding ElementName=BarsMainGrid, Path=ActualWidth}" 
                                           Margin="0,0,0,0">
-                            <FrameworkElement.LayoutTransform>
-                                <ScaleTransform ScaleX="{Binding Instance.Player.StFactor}"/>
-                            </FrameworkElement.LayoutTransform>
-                        </FrameworkElement>
-                    </Border>
-                    <Path Fill="{StaticResource Colors.App.DefaultBackground}" 
+                                <FrameworkElement.LayoutTransform>
+                                    <ScaleTransform ScaleX="{Binding Instance.Player.StFactor}"/>
+                                </FrameworkElement.LayoutTransform>
+                            </FrameworkElement>
+                        </Border>
+                        <Path Fill="{StaticResource Colors.App.DefaultBackground}" 
                           Data="M0,0 2,0 1,1 0,0" 
                           Stretch="Uniform" 
                           HorizontalAlignment="Center" 
                           Grid.Row="0" 
                           VerticalAlignment="Top" 
                           Height="7"/>
-                    <Grid Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Margin="0,-3,10,0"  FontWeight="Normal" Foreground="White" FontSize="13"
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Margin="0,-3,10,0"  FontWeight="Normal" Foreground="White" FontSize="13"
                                    HorizontalAlignment="Right">
                             <Run Text="{Binding Instance.Player.TotalHP, Mode=OneWay}"></Run>
-                        </TextBlock>
-                        <TextBlock Margin="10,-3,0,0"  FontWeight="Normal" Foreground="White" Opacity=".6"  FontSize="13" Grid.Column="1"
+                            </TextBlock>
+                            <TextBlock Margin="10,-3,0,0"  FontWeight="Normal" Foreground="White" Opacity=".6"  FontSize="13" Grid.Column="1"
                                    HorizontalAlignment="Left">
                             <Run Text="{Binding Instance.Player.MaxHP}"></Run>
-                        </TextBlock>
+                            </TextBlock>
 
-                        <TextBlock Margin="10,-3,0,0" FontWeight="Normal"  Foreground="White"
+                            <TextBlock Margin="10,-3,0,0" FontWeight="Normal"  Foreground="White"
                                    Grid.Column="0"
                                    Text="{Binding Instance.Player.HpFactor, StringFormat=0.# %}" FontSize="13" HorizontalAlignment="Left"></TextBlock>
-                    </Grid>
-                    <Grid Grid.Row="1" Margin="0,0,0,-2" >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Margin="0,-2.5,10,0"  FontWeight="Normal" Foreground="White" FontSize="13"
+                        </Grid>
+                        <Grid Grid.Row="1" Margin="0,0,0,-2" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Margin="0,-2.5,10,0"  FontWeight="Normal" Foreground="White" FontSize="13"
                                    HorizontalAlignment="Right">
                             <Run Text="{Binding Instance.Player.CurrentMP}"></Run>
-                        </TextBlock>
-                        <TextBlock Margin="10,-2,0,0"  FontWeight="Normal" Foreground="White" Opacity=".6"  FontSize="13" Grid.Column="1"
+                            </TextBlock>
+                            <TextBlock Margin="10,-2,0,0"  FontWeight="Normal" Foreground="White" Opacity=".6"  FontSize="13" Grid.Column="1"
                                    HorizontalAlignment="Left">
                             <Run Text="{Binding Instance.Player.MaxMP}"></Run>
-                        </TextBlock>
+                            </TextBlock>
 
-                    </Grid>
-                    <Grid Grid.Row="2" 
+                        </Grid>
+                        <Grid Grid.Row="2" 
                           Visibility="{Binding Instance.Player.Class, Converter={StaticResource staminaVisConv}}"
                     >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Margin="0,0,0,-20"  FontWeight="Normal" 
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Margin="0,0,0,-20"  FontWeight="Normal" 
                                                     Foreground="White" FontSize="13"
                                    HorizontalAlignment="Center" Text="{Binding Instance.Player.CurrentST}" Grid.ColumnSpan="2">
 
-                        </TextBlock>
-                    </Grid>
+                            </TextBlock>
+                        </Grid>
 
-                </Grid>
-            </Border>
-            <Border Grid.Row="1" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Height="62" 
+                    </Grid>
+                </Border>
+                <Border Grid.Row="1" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Height="62" 
                     Style="{StaticResource Styles.DefaultBorder}" CornerRadius="30,30,30,30" 
                     VerticalAlignment="Stretch" Margin="-20,-1,0,-1" Opacity="1" HorizontalAlignment="Left" Padding="6" BorderThickness="2" >
 
-                <Grid >
-                    <controls:Arc StrokeThickness="3" Stroke="Crimson" Margin="-8" EndAngle="359.9" Visibility="{Binding Instance.Player.IsInCombat, Converter={StaticResource Converters.BoolToVisibleHidden}}"></controls:Arc>
-                    <Image Name="laurelIcon" Source="{Binding Instance.Player.Laurel, Converter={StaticResource Converters.LaurelToImage}}" Width="Auto" Height="Auto"
+                    <Grid >
+                        <c:Arc StrokeThickness="3" Stroke="Crimson" Margin="-8" EndAngle="359.9" Visibility="{Binding Instance.Player.IsInCombat, Converter={StaticResource Converters.BoolToVisibleHidden}}"></c:Arc>
+                        <Image Name="laurelIcon" Source="{Binding Instance.Player.Laurel, Converter={StaticResource Converters.LaurelToImage}}" Width="Auto" Height="Auto"
                            Margin="-6,-12,-6,-6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="Uniform">
-                        <Image.Effect>
-                            <DropShadowEffect Color="Black" BlurRadius="7" ShadowDepth="0" Opacity=".6"/>
-                        </Image.Effect>
-                    </Image>
-                    <Rectangle Name="classIcon" Fill="White" Stretch="Uniform" Width="Auto" Height="Auto" Margin="2,3,2,-4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <Rectangle.OpacityMask>
-                            <ImageBrush ImageSource="{Binding Instance.Player.Class, Converter={StaticResource Converters.ClassToImage}}"/>
-                        </Rectangle.OpacityMask>
-                        <Rectangle.Effect>
-                            <DropShadowEffect Color="#ff20f0ff" BlurRadius="7" ShadowDepth="0"/>
-                        </Rectangle.Effect>
-                    </Rectangle>
-                </Grid>
-            </Border>
+                            <Image.Effect>
+                                <DropShadowEffect Color="Black" BlurRadius="7" ShadowDepth="0" Opacity=".6"/>
+                            </Image.Effect>
+                        </Image>
+                        <Rectangle Name="classIcon" Fill="White" Stretch="Uniform" Width="Auto" Height="Auto" Margin="2,3,2,-4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Rectangle.OpacityMask>
+                                <ImageBrush ImageSource="{Binding Instance.Player.Class, Converter={StaticResource Converters.ClassToImage}}"/>
+                            </Rectangle.OpacityMask>
+                            <Rectangle.Effect>
+                                <DropShadowEffect Color="#ff20f0ff" BlurRadius="7" ShadowDepth="0"/>
+                            </Rectangle.Effect>
+                        </Rectangle>
+                    </Grid>
+                </Border>
+            </Grid>
         </Grid>
-        <w:WindowButtons VerticalAlignment="Top" Opacity="0" HorizontalAlignment="Left" WindowName="Character window" x:Name="buttons"
-                         DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWindow}}"
-                         ></w:WindowButtons>
+        <c:WindowButtons WindowName="Character window" x:Name="buttons" DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWindow}}" />
     </Grid>
 </w:TccWindow>

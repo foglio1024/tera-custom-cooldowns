@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Threading;
 using System.Xml;
+using System.Xml.Linq;
 using TCC.Data;
 using TCC.Data.Databases;
 using TCC.Windows;
@@ -243,6 +244,24 @@ namespace TCC.ViewModels
             {
 
             }
+        }
+
+        internal void Save()
+        {
+            var root = new XElement("Skills");
+            MainSkills.ToList().ForEach(mainSkill =>
+            {
+                root.Add(new XElement("Skill", new XAttribute("id", mainSkill.Skill.Id), new XAttribute("row", 1)));
+            });
+            SecondarySkills.ToList().ForEach(secSkill =>
+            {
+                root.Add(new XElement("Skill", new XAttribute("id", secSkill.Skill.Id), new XAttribute("row", 2)));
+            });
+            HiddenSkills.ToList().ForEach(sk =>
+            {
+                root.Add(new XElement("Skill", new XAttribute("id", sk.Skill.Id), new XAttribute("row", 0)));
+            });
+            root.Save(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources/config/skills", $"{SessionManager.CurrentPlayer.Class.ToString().ToLowerInvariant()}-skills.xml"));
         }
 
         private void FixedMode_Update(SkillCooldown sk)

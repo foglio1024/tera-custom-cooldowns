@@ -12,6 +12,7 @@ namespace TCC.Windows
         {
             InitializeComponent();
             _b = buttons;
+            _c = content;
             InitWindow(SettingsManager.CharacterWindowSettings, ignoreSize: true);
         }
 

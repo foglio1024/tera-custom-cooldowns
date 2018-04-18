@@ -3,10 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:w="clr-namespace:TCC.Windows" 
+        xmlns:w="clr-namespace:TCC.Windows" 
         xmlns:vm="clr-namespace:TCC.ViewModels"
         xmlns:data="clr-namespace:TCC.Data"
-        xmlns:controls="clr-namespace:TCC.Controls"
+        xmlns:c="clr-namespace:TCC.Controls"
         xmlns:chatcontrols="clr-namespace:TCC.Controls.ChatControls"
         mc:Ignorable="d" ShowInTaskbar="False" ShowActivated="False" 
         MouseDoubleClick="TccWindow_MouseDoubleClick" 
@@ -22,14 +22,14 @@
     </w:TccWindow.DataContext>
     <w:TccWindow.Resources>
         <DataTemplate x:Key="ChatMessageTemplate">
-            <controls:ChatMessageControl VerticalAlignment="Top">
-                <controls:ChatMessageControl.LayoutTransform>
+            <c:ChatMessageControl VerticalAlignment="Top">
+                <c:ChatMessageControl.LayoutTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="1"></ScaleTransform>
                         <RotateTransform Angle="180"></RotateTransform>
                     </TransformGroup>
-                </controls:ChatMessageControl.LayoutTransform>
-            </controls:ChatMessageControl>
+                </c:ChatMessageControl.LayoutTransform>
+            </c:ChatMessageControl>
         </DataTemplate>
         <Style TargetType="ItemsControl" x:Key="LfgItemsControl">
             <Setter Property="Height" Value="Auto"/>
@@ -105,24 +105,21 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <w:WindowButtons Width="Auto" Height="Auto" 
-                         VerticalAlignment="Top" Opacity="0" WindowName="Chat window"
-                         x:Name="buttons" Margin="0" Visibility="Visible" HorizontalAlignment="Left"
-                         DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWindow}}"
-                         AutoDimButtonVisiblity="Collapsed"
-                         />
+        <c:WindowButtons  WindowName="Chat window" x:Name="buttons" AutoDimButtonVisiblity="Collapsed"
+                          DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWindow}}" />
+        <Grid Name="content" Grid.Row="1">
 
-        <Grid Margin="0" Width="Auto" Name="root" MouseLeftButtonDown="Drag" Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+            <Grid Margin="0" Width="Auto" Name="root" MouseLeftButtonDown="Drag" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-            <Border Background="{StaticResource Colors.App.DefaultBackground}" Opacity="{Binding Instance.ChatWindowOpacity}" 
+                <Border Background="{StaticResource Colors.App.DefaultBackground}" Opacity="{Binding Instance.ChatWindowOpacity}" 
                     CornerRadius="1" Grid.ColumnSpan="2" Grid.RowSpan="2" BorderThickness="1" BorderBrush="Black" 
                     Margin="0,0,0,0" Grid.Row="0" VerticalAlignment="Stretch" />
-            <!--Message counter-->
-            <TextBlock VerticalAlignment="Top"
+                <!--Message counter-->
+                <TextBlock VerticalAlignment="Top"
                    HorizontalAlignment="Right"
                    Foreground="Gray"
                    Opacity=".5"
@@ -130,7 +127,7 @@
                    FontFamily="{DynamicResource Frutiger}"
                    Text="{Binding Instance.MessageCount}" 
                    Margin="3,3,23,3"/>
-            <TabControl Grid.Row="1" 
+                <TabControl Grid.Row="1" 
                         Background="Transparent"  
                         BorderBrush="#0000" 
                         BorderThickness="0,0,0,0"
@@ -139,78 +136,78 @@
                         ItemsSource="{Binding Instance.Tabs}"
                         ContentTemplate="{StaticResource TabContentTemplate}"
                         x:Name="tabControl">
-                <TabControl.Resources>
-                    <Style TargetType="{x:Type TabItem}">
-                        <Setter Property="Margin" Value="0,0,0,0"/>
-                        <Setter Property="Width" Value="Auto"/>
-                        <Setter Property="Height" Value="25"/>
-                        <Setter Property="Foreground" Value="#9fff"/>
-                        <Setter Property="Header" Value="{Binding TabName}"/>
-                        <Setter Property="FontWeight" Value="DemiBold"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type TabItem}">
-                                    <Grid Name="Panel" Cursor="Hand" MouseLeftButtonDown="TabClicked">
-                                        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Margin="-4,0"
+                    <TabControl.Resources>
+                        <Style TargetType="{x:Type TabItem}">
+                            <Setter Property="Margin" Value="0,0,0,0"/>
+                            <Setter Property="Width" Value="Auto"/>
+                            <Setter Property="Height" Value="25"/>
+                            <Setter Property="Foreground" Value="#9fff"/>
+                            <Setter Property="Header" Value="{Binding TabName}"/>
+                            <Setter Property="FontWeight" Value="DemiBold"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type TabItem}">
+                                        <Grid Name="Panel" Cursor="Hand" MouseLeftButtonDown="TabClicked">
+                                            <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Margin="-4,0"
                                               Visibility="{Binding Attention, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
-                                            <Ellipse Fill="Orange" Opacity=".4" Width="12" Height="12" Margin="0"/>
+                                                <Ellipse Fill="Orange" Opacity=".4" Width="12" Height="12" Margin="0"/>
 
-                                            <Ellipse Fill="Orange" Width="6" Height="6" Margin="0"/>
-                                        </Grid>
+                                                <Ellipse Fill="Orange" Width="6" Height="6" Margin="0"/>
+                                            </Grid>
 
-                                        <ContentPresenter x:Name="ContentSite"
+                                            <ContentPresenter x:Name="ContentSite"
                                                           VerticalAlignment="Center"
                                                           HorizontalAlignment="Center"
                                                           ContentSource="Header"
                                                           Margin="10,0"
                                                           RecognizesAccessKey="True" >
-                                        </ContentPresenter>
-                                        <Grid.Style>
-                                            <Style>
-                                                <Setter Property="Grid.Background" Value="Transparent"/>
-                                                <Style.Triggers>
-                                                    <Trigger Property="Grid.IsMouseOver" Value="True">
-                                                        <Setter Property="Grid.Background" Value="#1fff"/>
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
+                                            </ContentPresenter>
+                                            <Grid.Style>
+                                                <Style>
+                                                    <Setter Property="Grid.Background" Value="Transparent"/>
+                                                    <Style.Triggers>
+                                                        <Trigger Property="Grid.IsMouseOver" Value="True">
+                                                            <Setter Property="Grid.Background" Value="#1fff"/>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
 
-                                        </Grid.Style>
-                                    </Grid>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsSelected" Value="True">
-                                            <Setter Property="Panel.ZIndex" Value="100" />
-                                        </Trigger>
-                                        <Trigger Property="IsSelected" Value="True">
-                                        </Trigger>
+                                            </Grid.Style>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Panel.ZIndex" Value="100" />
+                                            </Trigger>
+                                            <Trigger Property="IsSelected" Value="True">
+                                            </Trigger>
 
-                                        <Trigger Property="IsEnabled" Value="False" />
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
+                                            <Trigger Property="IsEnabled" Value="False" />
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
 
-                </TabControl.Resources>
-            </TabControl>
-            <Rectangle Height="3" Fill="{StaticResource Colors.App.MP}" Width="10" x:Name="selectionRect" 
+                    </TabControl.Resources>
+                </TabControl>
+                <Rectangle Height="3" Fill="{StaticResource Colors.App.MP}" Width="10" x:Name="selectionRect" 
                    IsHitTestVisible="False" HorizontalAlignment="Left" 
                    Opacity="1" VerticalAlignment="Top" Margin="0,22,0,0" Grid.Row="1">
-                <Rectangle.RenderTransform>
-                    <TranslateTransform X="0"/>
-                </Rectangle.RenderTransform>
-            </Rectangle>
-            <Image Source="/TCC;component/resources/images/ic_pause_white_24dp_2x.png" VerticalAlignment="Bottom" 
+                    <Rectangle.RenderTransform>
+                        <TranslateTransform X="0"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Image Source="/TCC;component/resources/images/ic_pause_white_24dp_2x.png" VerticalAlignment="Bottom" 
                    HorizontalAlignment="Right"  Height="40" Width="40" Grid.Row="1" Opacity=".2"
                    Visibility="{Binding Instance.Paused, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"/>
-            <Ellipse HorizontalAlignment="Right"
+                <Ellipse HorizontalAlignment="Right"
                      VerticalAlignment="Top" Width="18" Height="18"
                      Fill="#1fff"
                      Cursor="Hand"
                      Grid.Row="1"
                      Margin="2"
                      PreviewMouseLeftButtonDown="OpenChannelSettings" />
-            <Path Data="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"
+                <Path Data="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"
                   HorizontalAlignment="Right"
                   VerticalAlignment="Top"
                   Fill="White"
@@ -221,11 +218,11 @@
                   Margin="4"
                   Opacity=".4"
                   ></Path>
-            <Border Background="{StaticResource Colors.App.DefaultBackground}" Width="Auto"
+                <Border Background="{StaticResource Colors.App.DefaultBackground}" Width="Auto"
                     Grid.Column="0" Grid.Row="0" Opacity=".0" MouseEnter="SettingsButtonEnter"
                     Visibility="{Binding Instance.LfgOn, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"/>
 
-            <ItemsControl ItemsSource="{Binding Instance.LFGs}" 
+                <ItemsControl ItemsSource="{Binding Instance.LFGs}" 
                               ItemTemplate="{StaticResource LfgTemplate}" 
                               Margin="2" 
 
@@ -234,115 +231,116 @@
                               Height="18"
                               Style="{StaticResource LfgItemsControl}"
                               Visibility="{Binding Instance.LfgOn, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal" ></WrapPanel>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" ></WrapPanel>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
 
-            <Popup Name="playerInfo" StaysOpen="True" Placement="MousePoint" 
+                <Popup Name="playerInfo" StaysOpen="True" Placement="MousePoint" 
                AllowsTransparency="True" Width="Auto" HorizontalOffset="0" UseLayoutRounding="True"
                VerticalAlignment="Center"
                VerticalOffset="0">
-                <chatcontrols:PlayerTooltip />
-            </Popup>
-            <Popup x:Name="ChatSettingsPopup" StaysOpen="True" Placement="Top"  VerticalAlignment="Stretch"
+                    <chatcontrols:PlayerTooltip />
+                </Popup>
+                <Popup x:Name="ChatSettingsPopup" StaysOpen="True" Placement="Top"  VerticalAlignment="Stretch"
                    AllowsTransparency="True" MinWidth="350" HorizontalAlignment="Left">
-                <Popup.Resources>
-                    <DataTemplate x:Key="ChannelSettingTemplate">
-                        <chatcontrols:ChannelSetting />
+                    <Popup.Resources>
+                        <DataTemplate x:Key="ChannelSettingTemplate">
+                            <chatcontrols:ChannelSetting />
 
-                    </DataTemplate>
-                </Popup.Resources>
-                <Border Style="{StaticResource Styles.DefaultBorder}" Margin="5" CornerRadius="5" BorderThickness="0">
-                    <Grid>
-                        <TabControl Style="{StaticResource ChatTabControlStyle}">
-                            <TabItem Header="Globally enabled channels">
-                                <Grid>
-                                    <ItemsControl ItemTemplate="{StaticResource ChannelSettingTemplate}"
+                        </DataTemplate>
+                    </Popup.Resources>
+                    <Border Style="{StaticResource Styles.DefaultBorder}" Margin="5" CornerRadius="5" BorderThickness="0">
+                        <Grid>
+                            <TabControl Style="{StaticResource ChatTabControlStyle}">
+                                <TabItem Header="Globally enabled channels">
+                                    <Grid>
+                                        <ItemsControl ItemTemplate="{StaticResource ChannelSettingTemplate}"
                                   ItemsSource="{Binding Instance.VisibleChannels}"
                                       Margin="-2">
-                                        <ItemsControl.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <UniformGrid Columns="4"/>
-                                            </ItemsPanelTemplate>
-                                        </ItemsControl.ItemsPanel>
-                                    </ItemsControl>
-                                </Grid>
-                            </TabItem>
-                            <TabItem Header="Tabs">
-                                <StackPanel>
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <UniformGrid Columns="4"/>
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                        </ItemsControl>
+                                    </Grid>
+                                </TabItem>
+                                <TabItem Header="Tabs">
+                                    <StackPanel>
 
-                                    <ItemsControl ItemsSource="{Binding Instance.Tabs}" Margin="-2,0"
+                                        <ItemsControl ItemsSource="{Binding Instance.Tabs}" Margin="-2,0"
                                               ItemTemplate="{StaticResource TabSettingsTemplate}" 
                                                   >
-                                        <ItemsControl.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <WrapPanel Orientation="Vertical" MaxHeight="800" Margin="4,0"/>
-                                            </ItemsPanelTemplate>
-                                        </ItemsControl.ItemsPanel>
-                                    </ItemsControl>
-                                    <Button Click="AddChatTab" Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Stretch" Padding="5" VerticalContentAlignment="Stretch">
-                                        <TextBlock Margin="5" Style="{StaticResource Styles.DefaultText}" Text="Add chat tab" TextAlignment="Center"></TextBlock>
-                                    </Button>
-                                </StackPanel>
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapPanel Orientation="Vertical" MaxHeight="800" Margin="4,0"/>
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                        </ItemsControl>
+                                        <Button Click="AddChatTab" Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Stretch" Padding="5" VerticalContentAlignment="Stretch">
+                                            <TextBlock Margin="5" Style="{StaticResource Styles.DefaultText}" Text="Add chat tab" TextAlignment="Center"></TextBlock>
+                                        </Button>
+                                    </StackPanel>
 
-                            </TabItem>
-                            <TabControl.Resources>
-                                <Style TargetType="{x:Type TabItem}">
-                                    <Setter Property="Margin" Value="0"/>
-                                    <Setter Property="Width" Value="Auto"/>
-                                    <Setter Property="Height" Value="25"/>
-                                    <Setter Property="Foreground" Value="#9fff"/>
-                                    <Setter Property="FontWeight" Value="DemiBold"/>
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="{x:Type TabItem}">
-                                                <Grid Name="Panel" Cursor="Hand">
-                                                    <ContentPresenter x:Name="ContentSite"
+                                </TabItem>
+                                <TabControl.Resources>
+                                    <Style TargetType="{x:Type TabItem}">
+                                        <Setter Property="Margin" Value="0"/>
+                                        <Setter Property="Width" Value="Auto"/>
+                                        <Setter Property="Height" Value="25"/>
+                                        <Setter Property="Foreground" Value="#9fff"/>
+                                        <Setter Property="FontWeight" Value="DemiBold"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type TabItem}">
+                                                    <Grid Name="Panel" Cursor="Hand">
+                                                        <ContentPresenter x:Name="ContentSite"
                                                                   VerticalAlignment="Center"
                                                                   HorizontalAlignment="Center"
                                                                   ContentSource="Header"
                                                                   Margin="10,0"
                                                                   RecognizesAccessKey="True" >
-                                                    </ContentPresenter>
-                                                    <Grid.Style>
-                                                        <Style>
-                                                            <Setter Property="Grid.Background" Value="Transparent"/>
-                                                            <Style.Triggers>
-                                                                <Trigger Property="Grid.IsMouseOver" Value="True">
-                                                                    <Setter Property="Grid.Background" Value="#1fff"/>
-                                                                </Trigger>
-                                                            </Style.Triggers>
-                                                        </Style>
+                                                        </ContentPresenter>
+                                                        <Grid.Style>
+                                                            <Style>
+                                                                <Setter Property="Grid.Background" Value="Transparent"/>
+                                                                <Style.Triggers>
+                                                                    <Trigger Property="Grid.IsMouseOver" Value="True">
+                                                                        <Setter Property="Grid.Background" Value="#1fff"/>
+                                                                    </Trigger>
+                                                                </Style.Triggers>
+                                                            </Style>
 
-                                                    </Grid.Style>
-                                                </Grid>
-                                                <ControlTemplate.Triggers>
-                                                    <Trigger Property="IsSelected" Value="True">
-                                                        <Setter Property="Panel.ZIndex" Value="100" />
-                                                    </Trigger>
-                                                    <Trigger Property="IsSelected" Value="True">
-                                                    </Trigger>
+                                                        </Grid.Style>
+                                                    </Grid>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsSelected" Value="True">
+                                                            <Setter Property="Panel.ZIndex" Value="100" />
+                                                        </Trigger>
+                                                        <Trigger Property="IsSelected" Value="True">
+                                                        </Trigger>
 
-                                                    <Trigger Property="IsEnabled" Value="False" />
-                                                </ControlTemplate.Triggers>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
+                                                        <Trigger Property="IsEnabled" Value="False" />
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
 
-                            </TabControl.Resources>
+                                </TabControl.Resources>
 
-                        </TabControl>
-                        <Image Source="/TCC;component/resources/images/ic_close_white_24dp_2x.png" Width="18" 
+                            </TabControl>
+                            <Image Source="/TCC;component/resources/images/ic_close_white_24dp_2x.png" Width="18" 
                                HorizontalAlignment="Right" Margin="3" Opacity=".9" Cursor="Hand" VerticalAlignment="Top"
                                MouseLeftButtonDown="CloseChannelSettings"/>
-                    </Grid>
-                </Border>
+                        </Grid>
+                    </Border>
 
-            </Popup>
+                </Popup>
+            </Grid>
         </Grid>
     </Grid>
 </w:TccWindow>

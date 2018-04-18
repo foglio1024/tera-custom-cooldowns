@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TCC"
         xmlns:vm="clr-namespace:TCC.ViewModels"
         xmlns:w="clr-namespace:TCC.Windows"
-             xmlns:controls="clr-namespace:TCC.Controls"
+        xmlns:c="clr-namespace:TCC.Controls"
         mc:Ignorable="d"
         Title="Tera Custom Cooldowns"
         Height="Auto" 
@@ -22,18 +22,24 @@
         <vm:CooldownWindowViewModel />
     </w:TccWindow.DataContext>
     <Grid Background="Transparent" >
-        <ContentControl x:Name="controlContainer" 
-                        Margin="10" 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <ContentControl x:Name="content" 
+                        Margin="5" 
+                        Grid.Row="1"
                         DataContext="{Binding Instance}" 
                         Content="{Binding}"
-                        ContentTemplate="{Binding Instance.Mode, Converter={StaticResource Converters.CooldowWindowModeToTemplate}}" />
-        <w:WindowButtons Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="0" WindowName="Cooldown bar"
-                         x:Name="buttons" Margin="0" Visibility="Visible" 
-                         DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWindow}}"
-                         />
-        <Grid.LayoutTransform>
-            <ScaleTransform ScaleX="{Binding Scale}" 
+                        ContentTemplate="{Binding Instance.Mode, Converter={StaticResource Converters.CooldowWindowModeToTemplate}}" >
+
+            <ContentControl.LayoutTransform>
+                <ScaleTransform ScaleX="{Binding Scale}" 
                             ScaleY="{Binding Scale}"/>
-        </Grid.LayoutTransform>
+            </ContentControl.LayoutTransform>
+        </ContentControl>
+        <c:WindowButtons WindowName="Cooldown bar" x:Name="buttons" 
+                         DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWindow}}"/>
     </Grid>
 </w:TccWindow>

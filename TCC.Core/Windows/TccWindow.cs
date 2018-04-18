@@ -2,11 +2,13 @@
 using System.ComponentModel;
 using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using TCC.Controls;
 using TCC.ViewModels;
 
 namespace TCC.Windows
@@ -16,6 +18,7 @@ namespace TCC.Windows
         protected IntPtr _handle;
         protected WindowSettings _settings;
         protected WindowButtons _b;
+        protected UIElement _c;
         DispatcherTimer _t;
         DoubleAnimation _showButtons;
         DoubleAnimation _hideButtons;
@@ -213,9 +216,11 @@ namespace TCC.Windows
 
         public void AnimateContentOpacity(double opacity)
         {
+            if (_c == null) return;
             Dispatcher.InvokeIfRequired(() =>
             {
-                ((FrameworkElement)this.Content).BeginAnimation(OpacityProperty, new DoubleAnimation(opacity, TimeSpan.FromMilliseconds(250)));
+                //var grid = ((Grid)this.Content);
+                _c.BeginAnimation(OpacityProperty, new DoubleAnimation(opacity, TimeSpan.FromMilliseconds(250)));
             }, System.Windows.Threading.DispatcherPriority.DataBind);
         }
         public void RefreshTopmost()

@@ -19,23 +19,23 @@ namespace TCC
         }
 
 
-        public void SwitchMode()
-        {
-            Dispatcher.InvokeIfRequired(() =>
-            {
-                if (SettingsManager.CooldownBarMode == CooldownBarMode.Fixed)
-                {
-                    controlContainer.Content = new FixedSkillContainers();
-                }
-                else
-                {
-                    controlContainer.Content = new NormalSkillContainer();
-                }
+        //public void SwitchMode()
+        //{
+        //    Dispatcher.InvokeIfRequired(() =>
+        //    {
+        //        if (SettingsManager.CooldownBarMode == CooldownBarMode.Fixed)
+        //        {
+        //            controlContainer.Content = new FixedSkillContainers();
+        //        }
+        //        else
+        //        {
+        //            controlContainer.Content = new NormalSkillContainer();
+        //        }
 
-                ((FrameworkElement)controlContainer.Content).DataContext = CooldownWindowViewModel.Instance;
+        //        ((FrameworkElement)controlContainer.Content).DataContext = CooldownWindowViewModel.Instance;
 
-            }, DispatcherPriority.Normal);
-        }
+        //    }, DispatcherPriority.Normal);
+        //}
 
     }
 }

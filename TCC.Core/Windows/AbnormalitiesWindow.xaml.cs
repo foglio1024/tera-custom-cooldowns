@@ -13,6 +13,7 @@ namespace TCC.Windows
         {
             InitializeComponent();
             _b = buttons;
+            _c = content;
             InitWindow(SettingsManager.BuffWindowSettings, ignoreSize: true);
         }
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
