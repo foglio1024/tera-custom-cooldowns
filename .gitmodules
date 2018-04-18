@@ -1,6 +1,3 @@
 [submodule "TCC.Core/resources/data"]
 	path = TCC.Core/resources/data
 	url = https://github.com/neowutran/TeraDpsMeterData
-[submodule "TeraCommon"]
-	path = TeraCommon
-	url = https://github.com/neowutran/Tera
