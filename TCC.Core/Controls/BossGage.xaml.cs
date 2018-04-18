@@ -175,7 +175,7 @@ namespace TCC
                 if (_enraged)
                 {
                     SlideEnrageIndicator(CurrentPercentage);
-                    EnrageHistory.Last().SetEnd(CurrentPercentage);
+                    if(EnrageHistory.Count > 0) EnrageHistory.Last().SetEnd(CurrentPercentage);
                     NotifyPropertyChanged(nameof(EnrageHistory));
                 }
             }
