@@ -22,11 +22,12 @@ namespace TCC.Parsing
 
     public static class PacketProcessor
     {
-        public static uint Version;
-        public static string Region;
-        public static uint ServerId;
+        public static uint Version ;
+        public static Server Server;
+        public static string Language => new TeraData(Server.Region).GetLanguage(Server.Region);
         public static OpCodeNamer OpCodeNamer;
         public static OpCodeNamer SystemMessageNamer;
+        public static MessageFactory Factory;
         private static readonly ConcurrentQueue<Tera.Message> Packets = new ConcurrentQueue<Tera.Message>();
         private static System.Timers.Timer _x;
         public static void Init()
@@ -44,33 +45,26 @@ namespace TCC.Parsing
             //x.Start();
         }
 
-        private static void InitDb(uint serverId)
+        private static void InitDb()
         {
-            var server = BasicTeraData.Instance.Servers.GetServer(serverId);
-            //if (server == null) Region = "EU";
-            /*else*/ Region = server.Region;
-            var td = new TeraData(Region);
-            var lang = td.GetLanguage(Region);
             App.SendUsageStat();
 
-            //if (TimeManager.Instance.CurrentRegion != Region)
-            //{
-            TimeManager.Instance.SetServerTimeZone(lang);
-            SettingsManager.LastRegion = lang;
-            //}
+            TimeManager.Instance.SetServerTimeZone(Language);
+            SettingsManager.LastRegion = Language;
             TimeManager.Instance.SetGuildBamTime(false);
 
-            EntitiesManager.CurrentDatabase = new MonsterDatabase(lang);
-            ItemsDatabase.Reload(lang);
-            AbnormalityManager.CurrentDb = new AbnormalityDatabase(lang);
-            SocialDatabase.Load();
-            SystemMessages.Load();
-            GuildQuestDatabase.Load();
-            AccountBenefitDatabase.Load();
-            AchievementDatabase.Load();
-            AchievementGradeDatabase.Load();
-            MapDatabase.Load();
-            QuestDatabase.Load();
+            EntitiesManager.CurrentDatabase = new MonsterDatabase(Language);
+            ItemsDatabase.Reload(Language);
+            AbnormalityManager.CurrentDb = new AbnormalityDatabase(Language);
+            SocialDatabase.Load(Language);
+            SkillsDatabase.Load(Language);
+            SystemMessages.Load(Language);
+            GuildQuestDatabase.Load(Language);
+            AccountBenefitDatabase.Load(Language);
+            AchievementDatabase.Load(Language);
+            AchievementGradeDatabase.Load(Language);
+            MapDatabase.Load(Language);
+            QuestDatabase.Load(Language);
         }
 
         private static void MessageReceived(Tera.Message obj)
@@ -92,7 +86,7 @@ namespace TCC.Parsing
                 }
                 OpCodeNamer = new OpCodeNamer(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/{message.Versions[0]}.txt"));
                 SystemMessageNamer = new OpCodeNamer(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/smt_{message.Versions[0]}.txt"));
-                MessageFactory.Init();
+                Factory = new TCC.Parsing.MessageFactory(OpCodeNamer,Server.Region, message.Versions[0], sysMsgNamer: SystemMessageNamer);
                 TeraSniffer.Instance.Connected = true;
                 Proxy.ConnectToProxy();
 
@@ -113,8 +107,8 @@ namespace TCC.Parsing
                     Thread.Sleep(1);
                     continue;
                 }
-                var message = MessageFactory.Create(msg);
-                MessageFactory.Process(message);
+                var message = Factory.Create(msg);
+                Factory.Process(message);
                 //PacketInspector.Analyze(msg); continue;
                 //if (!MessageFactory.Process(message))
                 //{
@@ -243,10 +237,7 @@ namespace TCC.Parsing
         }
         public static void HandleLogin(S_LOGIN p)
         {
-            var srv = p.ServerId;
-            ServerId = srv;
-            InitDb(srv);
-
+            InitDb();
             CooldownWindowViewModel.Instance.ClearSkills();
             CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(p.CharacterClass).ToLower() + "-skills.xml", p.CharacterClass);
             if (SettingsManager.ClassWindowSettings.Enabled) WindowManager.ClassWindow.Context.CurrentClass = p.CharacterClass;
@@ -290,7 +281,7 @@ namespace TCC.Parsing
 
             var seg = new ArraySegment<byte>(arr);
 
-            var sysMsg = new S_SYSTEM_MESSAGE(new TeraMessageReader(new Tera.Message(DateTime.Now, Tera.MessageDirection.ServerToClient, seg), OpCodeNamer, Version, SystemMessageNamer));
+            var sysMsg = new S_SYSTEM_MESSAGE(new TeraMessageReader(new Tera.Message(DateTime.Now, Tera.MessageDirection.ServerToClient, seg), OpCodeNamer, Factory, SystemMessageNamer));
             HandleSystemMessage(sysMsg);
 
         }
