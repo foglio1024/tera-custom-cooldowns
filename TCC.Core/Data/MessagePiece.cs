@@ -140,7 +140,7 @@ namespace TCC.Data
                     {
                         Color = new SolidColorBrush(Utils.ParseColor(color));
                     }
-                    catch (Exception e)
+                    catch 
                     {
                         var conv = new Converters.ChatChannelToColor();
                         var col = ((SolidColorBrush)conv.Convert(Channel, null, null, null));
