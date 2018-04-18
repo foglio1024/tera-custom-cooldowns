@@ -8,9 +8,9 @@ namespace TCC.Data.Databases
     {
         public static Dictionary<string, SystemMessage> Messages;
 
-        public static void Load()
+        public static void Load(string lang)
         {
-            var f = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "/resources/data/sys-messages.tsv");
+            var f = File.OpenText($"/resources/data/sys_msg/sysmsg-{lang}.tsv");
             Messages = new Dictionary<string, SystemMessage>();
             while (true)
             {

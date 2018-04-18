@@ -47,7 +47,7 @@ namespace TCC.Data.Databases
 
             //    Abnormalities.Add(id, ab);
             //}
-            var hd = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "/resources/data/abnormalities/hotdot-" + lang +".tsv");
+            var hd = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "/resources/data/hotdot/hotdot-" + lang +".tsv");
             while (true)
             {
                 var l = hd.ReadLine();

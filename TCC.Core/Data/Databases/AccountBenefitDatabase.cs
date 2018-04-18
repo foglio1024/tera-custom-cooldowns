@@ -7,10 +7,10 @@ namespace TCC.Data.Databases
     public static class AccountBenefitDatabase
     {
         public static Dictionary<uint, string> Benefits;
-        public static void Load()
+        public static void Load(string lang)
         {
             Benefits = new Dictionary<uint, string>();
-            var f = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "/resources/data/account-benefit.tsv");
+            var f = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + $"/resources/data/acc_benefits/acc_benefits-{lang}.tsv");
             while (true)
             {
                 var line = f.ReadLine();

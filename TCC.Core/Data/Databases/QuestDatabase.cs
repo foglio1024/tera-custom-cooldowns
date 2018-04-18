@@ -7,9 +7,9 @@ namespace TCC.Data.Databases
     public static class QuestDatabase
     {
         public static Dictionary<uint, string> Quests;
-        public static void Load()
+        public static void Load(string lang)
         {
-            var f = File.OpenText("resources/data/quests.tsv");
+            var f = File.OpenText($"resources/data/quests/quests-{lang}.tsv");
             Quests = new Dictionary<uint, string>();
             while (true)
             {

@@ -41,7 +41,7 @@ namespace TCC.Data.Databases
                 var item = new Item(id, name, grad, expId, cd, icon);
                 Items.Add(id, item);
             }
-            var xpFile = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + "/resources/data/EquipmentExpData.xml");
+            var xpFile = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory +$"/resources/data/equip_exp/equip_exp-{lang}.xml");
             ExpData = new Dictionary<uint, Dictionary<int, int>>();
             foreach (var xElement in xpFile.Descendants().Where(x => x.Name == "EquipmentExp"))
             {

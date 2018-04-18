@@ -12,12 +12,12 @@ namespace TCC.Data.Databases
     {
         public static Dictionary<uint, World> Worlds;
         public static Dictionary<uint, string> Names;
-        public static void Load()
+        public static void Load(string lang)
         {
             Worlds = new Dictionary<uint, World>();
             Names = new Dictionary<uint, string>();
 
-            var xdoc = XDocument.Load("resources/data/NewWorldMapData.xml");
+            var xdoc = XDocument.Load($"resources/data/world_map/world_map-{lang}.xml");
 
             foreach (var w in xdoc.Descendants().Where(x => x.Name == "World"))
             {
@@ -30,27 +30,27 @@ namespace TCC.Data.Databases
                     var gId = uint.Parse(g.Attribute("id").Value);
                     var gNameId = g.Attribute("nameId") != null ? uint.Parse(g.Attribute("nameId").Value) : 0;
                     var gMapId = g.Attribute("mapId") != null ? g.Attribute("mapId").Value : "";
-                    var gTop = g.Attribute("top") != null ? Double.Parse(g.Attribute("top").Value, CultureInfo.InvariantCulture) : 0;
-                    var gLeft = g.Attribute("left") != null ? Double.Parse(g.Attribute("left").Value, CultureInfo.InvariantCulture) : 0;
-                    var gWidth = g.Attribute("width") != null ? Double.Parse(g.Attribute("width").Value, CultureInfo.InvariantCulture) : 0;
-                    var gHeight = g.Attribute("height") != null ? Double.Parse(g.Attribute("height").Value, CultureInfo.InvariantCulture) : 0;
+                    //var gTop = g.Attribute("top") != null ? Double.Parse(g.Attribute("top").Value, CultureInfo.InvariantCulture) : 0;
+                    //var gLeft = g.Attribute("left") != null ? Double.Parse(g.Attribute("left").Value, CultureInfo.InvariantCulture) : 0;
+                    //var gWidth = g.Attribute("width") != null ? Double.Parse(g.Attribute("width").Value, CultureInfo.InvariantCulture) : 0;
+                    //var gHeight = g.Attribute("height") != null ? Double.Parse(g.Attribute("height").Value, CultureInfo.InvariantCulture) : 0;
 
-                    var guard = new Guard(gId, gNameId, gMapId, gLeft, gTop, gWidth, gHeight);
+                    var guard = new Guard(gId, gNameId, gMapId/*, gLeft, gTop, gWidth, gHeight*/);
+                    guard.ContinentId = Convert.ToUInt32(g.Attribute("continentId").Value);
 
                     foreach (var s in g.Descendants().Where(x => x.Name == "Section"))
                     {
                         var sId = uint.Parse(s.Attribute("id").Value);
                         var sNameId = s.Attribute("nameId") != null ? uint.Parse(s.Attribute("nameId").Value) : 0;
-                        var sTop = s.Attribute("top") != null ? Double.Parse(s.Attribute("top").Value, CultureInfo.InvariantCulture) : 0;
-                        var sLeft = s.Attribute("left") != null ? Double.Parse(s.Attribute("left").Value, CultureInfo.InvariantCulture) : 0;
-                        var sWidth = s.Attribute("width") != null ? Double.Parse(s.Attribute("width").Value, CultureInfo.InvariantCulture) : 0;
-                        var sHeight = s.Attribute("height") != null ? Double.Parse(s.Attribute("height").Value, CultureInfo.InvariantCulture) : 0;
+                        //var sTop = s.Attribute("top") != null ? Double.Parse(s.Attribute("top").Value, CultureInfo.InvariantCulture) : 0;
+                        //var sLeft = s.Attribute("left") != null ? Double.Parse(s.Attribute("left").Value, CultureInfo.InvariantCulture) : 0;
+                        //var sWidth = s.Attribute("width") != null ? Double.Parse(s.Attribute("width").Value, CultureInfo.InvariantCulture) : 0;
+                        //var sHeight = s.Attribute("height") != null ? Double.Parse(s.Attribute("height").Value, CultureInfo.InvariantCulture) : 0;
                         var sMapId = s.Attribute("mapId") != null ? s.Attribute("mapId").Value : "";
                         var dg = s.Attribute("type") != null && s.Attribute("type").Value == "dungeon" ? true : false;
-                        var cId = s.Descendants().Any()? uint.Parse(s.Descendants().FirstOrDefault(x => x.Name == "Npc").Attribute("continentId").Value) : 0;
+                        //var cId = s.Descendants().Any()? uint.Parse(s.Descendants().FirstOrDefault(x => x.Name == "Npc").Attribute("continentId").Value) : 0;
 
-                        var section = new Section(sId, sNameId, sMapId, sTop, sLeft, sWidth, sHeight, dg);
-                        if (guard.ContinentId == 0) guard.ContinentId = cId;
+                        var section = new Section(sId, sNameId, sMapId/*, sTop, sLeft, sWidth, sHeight*/, dg);
                         guard.Sections.Add(sId, section);
                     }
                     world.Guards.Add(guard.Id, guard);
@@ -62,9 +62,9 @@ namespace TCC.Data.Databases
 
         public static bool TryGetGuardOrDungeonNameFromContinentId(uint continent, out string s)
         {
-            if (DungeonDatabase.Instance.DungeonNames.ContainsKey(continent))
+            if (DungeonDatabase.Instance.Dungeons.ContainsKey(continent))
             {
-                s = DungeonDatabase.Instance.DungeonNames[continent];
+                s = DungeonDatabase.Instance.Dungeons[continent].Name;
                 return true;
             }
             var guard = Worlds[1].Guards.FirstOrDefault(x => x.Value.ContinentId == continent);
