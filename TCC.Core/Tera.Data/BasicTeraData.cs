@@ -44,8 +44,8 @@ namespace Data
             Servers.AddOverrides(overriddenServers);
 
 
-            ImageDatabase = new ImageDatabase(Path.Combine(ResourceDirectory, "img/"));
-            Icons = new IconsDatabase(Path.Combine(ResourceDirectory, "data/"));
+            //ImageDatabase = new ImageDatabase(Path.Combine(ResourceDirectory, "img/"));
+            //Icons = new IconsDatabase(Path.Combine(ResourceDirectory, "data/"));
         }
 
         private static IEnumerable<Server> GetServers(string filename)
