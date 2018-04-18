@@ -27,6 +27,7 @@ namespace TCC.Controls
         {
             InitializeComponent();
             _anim = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(350)) { EasingFunction = new QuadraticEase() };
+            _anim.BeginTime = TimeSpan.FromMilliseconds(200);
         }
 
         private void GearItemControl_OnLoaded(object sender, RoutedEventArgs e)
