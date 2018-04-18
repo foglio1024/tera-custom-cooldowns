@@ -21,7 +21,7 @@ namespace TCC.Controls
             var context = (ChatMessage)DataContext;
             if (context.Author == "System" || context.Channel == ChatChannel.Twitch) return;
             WindowManager.ChatWindow.CurrentSender = sender;
-            Proxy.AskInteractive(PacketProcessor.ServerId, context.Author);
+            Proxy.AskInteractive(PacketProcessor.Server.ServerId, context.Author);
         }
 
         private void UserControl_MouseEnter(object sender, MouseEventArgs e)
