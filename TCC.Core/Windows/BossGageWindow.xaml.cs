@@ -39,16 +39,10 @@ namespace TCC.Windows
         public BossWindow()
         {
             InitializeComponent();
+            _b = buttons;
+            InitWindow(SettingsManager.CooldownWindowSettings, ignoreSize: true);
 
-        }
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            InitWindow(SettingsManager.BossWindowSettings, ignoreSize: true);
-        }
 
-        private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            ContextMenu.IsOpen = true;
         }
 
         private void TccWindow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
