@@ -37,9 +37,9 @@
                 </Border.LayoutTransform>
             </Border>
         </StackPanel>
-        <Grid.Effect>
+        <!--<Grid.Effect>
             <DropShadowEffect Opacity=".4" ShadowDepth="1" BlurRadius="3" />
-        </Grid.Effect>
+        </Grid.Effect>-->
     </Grid>
     <UserControl.RenderTransform>
         <TranslateTransform Y="-00"/>
