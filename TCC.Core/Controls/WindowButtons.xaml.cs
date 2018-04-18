@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TCC.Windows
+namespace TCC.Controls
 {
     /// <summary>
     /// Logica di interazione per WindowButtons.xaml

@@ -97,10 +97,13 @@ namespace TCC.Controls
                 }
             }
             else if ((sender as FrameworkElement).Name == "secSkills")
+            {
                 foreach (var i in _secondaryOrder)
                 {
                     CooldownWindowViewModel.Instance.SecondarySkills.Add(i as FixedSkillCooldown);
                 }
+            }
+            CooldownWindowViewModel.Instance.Save();
             FocusManager.FocusTimer.Enabled = true;
         }
         private void MainSkillOrderChanged(object sender, OrderChangedEventArgs e)
@@ -154,6 +157,7 @@ namespace TCC.Controls
                 ChoiceListBox.ItemsSource = null;
             }
             SelectionPopup.IsOpen = false;
+            CooldownWindowViewModel.Instance.Save();
         }
         private void SecondarySkillsGridMouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {

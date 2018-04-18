@@ -1,9 +1,11 @@
-﻿<UserControl x:Class="TCC.Windows.WindowButtons"
+﻿<UserControl x:Class="TCC.Controls.WindowButtons"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TCC.Windows" Loaded="UserControl_Loaded_1" 
+             xmlns:w="clr-namespace:TCC.Windows" 
+             xmlns:c="clr-namespace:TCC.Controls"
+             Loaded="UserControl_Loaded_1" 
              mc:Ignorable="d" >
     <Grid Margin="3">
         <Grid.ColumnDefinitions>
@@ -26,7 +28,7 @@
                   Stretch="Uniform" HorizontalAlignment="Center" Margin="2"/>
         </Button>
         <Button Style="{StaticResource ButtonContentOpacityStyle}" Margin="5 5 5 5" HorizontalContentAlignment="Center" 
-                Visibility="{Binding AutoDimButtonVisiblity, RelativeSource={RelativeSource AncestorType=local:WindowButtons}}"
+                Visibility="{Binding AutoDimButtonVisiblity, RelativeSource={RelativeSource AncestorType=c:WindowButtons}}"
                 VerticalContentAlignment="Center" Click="AutoDim" Height="22" Width="22" Grid.Column="2" ToolTip="Auto dim">
             <Path Fill="White" Data="{Binding AutoDim, Converter={StaticResource Converters.BoolToSvgSwitchConverter}, ConverterParameter=SVG.BlurOn:SVG.BlurOff}" 
                   Stretch="Uniform" HorizontalAlignment="Center" Margin="2"/>
@@ -38,7 +40,7 @@
         </Button>
 
         <!--<Path Fill="#3fff" Data="{StaticResource SVG.Move}" Height="22" Width="22" Stretch="Uniform" Grid.Column="1" Margin="5 5 10 5" VerticalAlignment="Center"></Path>-->
-        <TextBlock Text="{Binding WindowName, RelativeSource={RelativeSource AncestorType=local:WindowButtons}}"
+        <TextBlock Text="{Binding WindowName, RelativeSource={RelativeSource AncestorType=c:WindowButtons}}"
                    Grid.Column="10" Foreground="#2fff" VerticalAlignment="Center" Margin="5 0 10 1" FontSize="14"></TextBlock>
 
     </Grid>

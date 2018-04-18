@@ -96,7 +96,7 @@
         </Grid.RowDefinitions>
 
         <!--Main Styles.DefaultBorder-->
-        <Border Style="{StaticResource Styles.DefaultBorder}"  Grid.Row="1" Margin="0" CornerRadius="29" x:Name="mainBorder" 
+        <Border Style="{StaticResource Styles.DefaultBorder}" Opacity=".4" Grid.Row="1" Margin="0" CornerRadius="29" x:Name="mainBorder" 
                 HorizontalAlignment="Left"  Width="{Binding ElementName=MainSkillsGrid, Path=ActualWidth}">
         </Border>
 
