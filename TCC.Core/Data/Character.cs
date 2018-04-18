@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Threading;
 using TCC.Data;
@@ -63,7 +64,7 @@ namespace TCC
         {
             foreach (var keyVal in dungeonCooldowns)
             {
-                if (!DungeonDatabase.Instance.DungeonDefinitions.ContainsKey(keyVal.Key)) continue;
+                if (!DungeonDatabase.Instance.Dungeons.ContainsKey(keyVal.Key)) continue;
                 var dg = Dungeons.FirstOrDefault(x => x.Id == keyVal.Key);
                 if (dg != null) dg.Entries = keyVal.Value;
                 //else
@@ -123,6 +124,7 @@ namespace TCC
             get => (double)DailiesDone / (double)SessionManager.MAX_DAILY;
         }
         public SynchronizedObservableCollection<DungeonCooldown> Dungeons { get; set; }
+        public ICollectionViewLiveShaping VisibleDungeons { get; set; }
         public SynchronizedObservableCollection<GearItem> Gear { get; set; }
         public Character(string name, Class c, uint id, int pos, Dispatcher d, Laurel l = Laurel.None)
         {
@@ -136,10 +138,12 @@ namespace TCC
             WeekliesDone = 0;
             Id = id;
             Position = pos;
-            foreach (var dg in DungeonDatabase.Instance.DungeonDefinitions)
+            foreach (var dg in DungeonDatabase.Instance.Dungeons)
             {
                 Dungeons.Add(new DungeonCooldown(dg.Key, _dispatcher));
             }
+            VisibleDungeons = Utils.InitLiveView(dc => DungeonDatabase.Instance.Dungeons.ContainsKey(((DungeonCooldown)dc).Id) &&
+            DungeonDatabase.Instance.Dungeons[((DungeonCooldown)dc).Id].Show, Dungeons, new string[] { nameof(Dungeon.Show) }, new string[] { nameof(Dungeon.Tier) });
         }
 
         public int CompareTo(object obj)

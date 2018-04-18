@@ -821,9 +821,9 @@ namespace TCC.Data
         {
             var id = GetId(info, "dungeon");
             string txt = id.ToString();
-            if (DungeonDatabase.Instance.DungeonNames.TryGetValue(id, out string dngName))
+            if (DungeonDatabase.Instance.Dungeons.TryGetValue(id, out Dungeon dngName))
             {
-                txt = dngName;
+                txt = dngName.Name;
             }
             return new MessagePiece(txt, MessagePieceType.Simple, Channel, SettingsManager.FontSize, false);
         }
