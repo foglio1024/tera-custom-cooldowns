@@ -13,11 +13,6 @@ namespace TCC
         public CooldownType Type { get; set; }
         private Timer _timer;
 
-        public void SetDispatcher(Dispatcher d)
-        {
-            _dispatcher = d;
-        }
-
         public SkillCooldown(Skill sk, ulong cd, CooldownType t, Dispatcher d)
         {
             _dispatcher = d;
