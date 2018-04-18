@@ -132,7 +132,7 @@ namespace TCC
 
             };
             var opName = PacketProcessor.OpCodeNamer.GetName(msg.OpCode);
-            TeraMessageReader tmr = new TeraMessageReader(msg, PacketProcessor.OpCodeNamer, PacketProcessor.Version, PacketProcessor.SystemMessageNamer);
+            TeraMessageReader tmr = new TeraMessageReader(msg, PacketProcessor.OpCodeNamer, PacketProcessor.Factory, PacketProcessor.SystemMessageNamer);
             if (exclusionList.Any(opName.Contains)) return;
             //            if(opName.Equals("S_LOAD_TOPO") || opName.Equals("C_LOAD_TOPO_FIN")|| opName.Equals("S_SPAWN_ME"))
             Debug.WriteLine(opName + " " + msg.OpCode);
@@ -153,41 +153,41 @@ namespace TCC
             }
         }
 
-        public static void Analyze(Message msg)
-        {
-            return;
-            if (msg.Direction == MessageDirection.ClientToServer) return;
-            var r = new TeraMessageReader(msg, PacketProcessor.OpCodeNamer, PacketProcessor.Version, PacketProcessor.SystemMessageNamer);
-            Debug.WriteLine("OpCode: " + msg.OpCode + " [" + msg.Data.Count + "]");
-            Debug.WriteLine(r.ReadUInt32());
-            Debug.WriteLine(r.ReadUInt32());
-            Debug.WriteLine(r.ReadUInt32());
-            Debug.WriteLine(r.ReadUInt32());
+        //public static void Analyze(Message msg)
+        //{
+        //    return;
+        //    if (msg.Direction == MessageDirection.ClientToServer) return;
+        //    var r = new TeraMessageReader(msg, PacketProcessor.OpCodeNamer, PacketProcessor.Version, PacketProcessor.SystemMessageNamer);
+        //    Debug.WriteLine("OpCode: " + msg.OpCode + " [" + msg.Data.Count + "]");
+        //    Debug.WriteLine(r.ReadUInt32());
+        //    Debug.WriteLine(r.ReadUInt32());
+        //    Debug.WriteLine(r.ReadUInt32());
+        //    Debug.WriteLine(r.ReadUInt32());
 
-            //try
-            //{
-            //    Debug.WriteLine("id: " + r.ReadUInt64());
-            //    Debug.WriteLine("unk1: " + r.ReadInt32());
-            //    Debug.WriteLine("skill: " + r.ReadUInt32());
-            //    Debug.WriteLine("x1: " + r.ReadSingle());
-            //    Debug.WriteLine("y1: " + r.ReadSingle());
-            //    Debug.WriteLine("z1: " + r.ReadSingle());
-            //    Debug.WriteLine("x2: " + r.ReadSingle());
-            //    Debug.WriteLine("y2: " + r.ReadSingle());
-            //    Debug.WriteLine("z2: " + r.ReadSingle());
-            //    Debug.WriteLine("unk2: " + r.ReadByte());
-            //    Debug.WriteLine("spd: " + r.ReadSingle());
-            //    Debug.WriteLine("src: " + r.ReadUInt64());
-            //    Debug.WriteLine("model: " + r.ReadUInt32());
-            //    Debug.WriteLine("unk4: " + r.ReadUInt32());
-            //    Debug.WriteLine("unk5: " + r.ReadUInt32());
-            //    Debug.WriteLine("");
-            //}
-            //catch (Exception e)
-            //{
-            //    //ignore
-            //}
-        }
+        //    //try
+        //    //{
+        //    //    Debug.WriteLine("id: " + r.ReadUInt64());
+        //    //    Debug.WriteLine("unk1: " + r.ReadInt32());
+        //    //    Debug.WriteLine("skill: " + r.ReadUInt32());
+        //    //    Debug.WriteLine("x1: " + r.ReadSingle());
+        //    //    Debug.WriteLine("y1: " + r.ReadSingle());
+        //    //    Debug.WriteLine("z1: " + r.ReadSingle());
+        //    //    Debug.WriteLine("x2: " + r.ReadSingle());
+        //    //    Debug.WriteLine("y2: " + r.ReadSingle());
+        //    //    Debug.WriteLine("z2: " + r.ReadSingle());
+        //    //    Debug.WriteLine("unk2: " + r.ReadByte());
+        //    //    Debug.WriteLine("spd: " + r.ReadSingle());
+        //    //    Debug.WriteLine("src: " + r.ReadUInt64());
+        //    //    Debug.WriteLine("model: " + r.ReadUInt32());
+        //    //    Debug.WriteLine("unk4: " + r.ReadUInt32());
+        //    //    Debug.WriteLine("unk5: " + r.ReadUInt32());
+        //    //    Debug.WriteLine("");
+        //    //}
+        //    //catch (Exception e)
+        //    //{
+        //    //    //ignore
+        //    //}
+        //}
         private static Dictionary<string, int> FixedSizePackets = new Dictionary<string, int>
         {
             { "S_RETURN_TO_LOBBY", 4 },
