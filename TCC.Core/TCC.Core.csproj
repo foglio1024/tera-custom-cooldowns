@@ -253,6 +253,7 @@
     <Compile Include="Converters\DungeonIdToTierColorConverter.cs" />
     <Compile Include="Converters\GearLevelToColorConverter.cs" />
     <Compile Include="Converters\GearLevelToFactorConverter.cs" />
+    <Compile Include="Converters\GuardianPointsStringConverter.cs" />
     <Compile Include="Converters\IconConverter.cs" />
     <Compile Include="Converters\BoolToOpacityInverseConverter.cs" />
     <Compile Include="Converters\BoolToOpacityConverter.cs" />
@@ -368,6 +369,7 @@
     <Compile Include="Parsing\Messages\S_BAN_PARTY.cs" />
     <Compile Include="Parsing\Messages\S_DUNGEON_COOL_TIME_LIST.cs" />
     <Compile Include="Parsing\Messages\S_DUNGEON_EVENT_MESSAGE.cs" />
+    <Compile Include="Parsing\Messages\S_FIELD_POINT_INFO.cs" />
     <Compile Include="Parsing\Messages\S_FRIEND_LIST.cs" />
     <Compile Include="Parsing\Messages\C_REQUEST_GAMESTAT_PING.cs" />
     <Compile Include="Parsing\Messages\S_GUILD_TOWER_INFO.cs" />

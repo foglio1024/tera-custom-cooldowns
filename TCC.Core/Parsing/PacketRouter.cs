@@ -478,6 +478,12 @@ namespace TCC.Parsing
             }
         }
 
+        internal static void HandleGuardianInfo(S_FIELD_POINT_INFO x)
+        {
+            InfoWindowViewModel.Instance.CurrentCharacter.GuardianPoints = x.Points;
+            InfoWindowViewModel.Instance.CurrentCharacter.MaxGuardianPoints = x.MaxPoints;
+        }
+
         internal static void HandleVanguardReceived(S_AVAILABLE_EVENT_MATCHING_LIST x)
         {
             InfoWindowViewModel.Instance.SetVanguard(x);
@@ -901,6 +907,7 @@ namespace TCC.Parsing
                 }
             }
             InfoWindowViewModel.Instance.SelectCharacter(InfoWindowViewModel.Instance.SelectedCharacter);
+            InfoWindowViewModel.Instance.CurrentCharacter.ElleonMarks = S_INVEN.ElleonMarks;
             GroupWindowViewModel.Instance.UpdateMyGear();
             //88273 - 88285 L weapons
             //88286 - 88298 L armors

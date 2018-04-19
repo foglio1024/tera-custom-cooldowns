@@ -1,27 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace TCC.Converters
 {
-    class ValueToFactorConverter : IValueConverter
+    class GuardianPointsStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            try
-            {
-
-            var val = System.Convert.ToDouble(value);
-            var max = System.Convert.ToDouble(parameter);
-
-            if (max != 0) return val / max;
-            else return 0;
-            }
-            catch (Exception)
-            {
-
-                return 0;
-            }
+            var v = (uint)value;
+            if (v == 100000) return "Max";
+            else if (v >= 1000) return v / 1000 + "k";
+            else return v;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

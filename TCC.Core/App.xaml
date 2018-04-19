@@ -320,6 +320,7 @@
         <converters:DungeonIdToStarsConverter x:Key="Converters.DungeonIdToStars"/>
         <converters:DungeonIdToTierColorConverter x:Key="Converters.DungeonIdToTierColor"/>
         <converters:StringToFillConverter x:Key="Converters.StringToFill"/>
+        <converters:GuardianPointsStringConverter x:Key="GuardianPointsStringConverter"/>
         <!--Scrollbar Thumbs-->
         <Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">
             <Setter Property="Template">

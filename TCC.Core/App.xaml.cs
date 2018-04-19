@@ -193,9 +193,9 @@ namespace TCC
             SplashScreen.CloseWindowSafe();
             if (!Debug) return;
             SessionManager.CurrentPlayer = new Player(1, "Foglio");
-            SessionManager.CurrentPlayer.Class = Class.Warrior;
+            SessionManager.CurrentPlayer.Class = Class.Priest;
             SkillsDatabase.Load("EU-EN");
-            CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(Class.Warrior).ToLower() + "-skills.xml", Class.Warrior);
+            CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(Class.Priest).ToLower() + "-skills.xml", Class.Priest);
             AbnormalityManager.CurrentDb = new AbnormalityDatabase("EU-EN");
             var s = AbnormalityManager.CurrentDb.Abnormalities[4];
             BuffBarWindowViewModel.Instance.Player.AddOrRefreshBuff(s, Int32.MaxValue, 5);
@@ -227,7 +227,7 @@ namespace TCC
             //u.UserClass = Class.Lancer;
 
             GroupWindowViewModel.Instance.AddOrUpdateMember(u);
-            WindowManager.ClassWindow.Context.CurrentClass = Class.Warrior;
+            WindowManager.ClassWindow.Context.CurrentClass = Class.Priest;
             var l = new List<User>();
             for (uint i = 0; i < 10; i++)
             {

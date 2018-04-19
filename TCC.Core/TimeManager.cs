@@ -107,7 +107,7 @@ namespace TCC
                     dg.Reset();
                 }
                 ch.DailiesDone = 0;
-
+                ch.GuardianPoints = 0;
                 if (DateTime.Now.DayOfWeek == _resetDay)
                 {
                     ch.WeekliesDone = 0;

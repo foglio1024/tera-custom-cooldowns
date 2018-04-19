@@ -7,8 +7,8 @@
         xmlns:viewmodels="clr-namespace:TCC.ViewModels"
         xmlns:controls="clr-namespace:TCC.Controls"
         xmlns:themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" Loaded="Window_Loaded" 
-        mc:Ignorable="d" Width="Auto" Height="Auto" ResizeMode="CanResize" AllowsTransparency="True" WindowStyle="None"
-        Title="InfoWindow" SizeToContent="WidthAndHeight" Topmost="False" ShowInTaskbar="True" ShowActivated="True" 
+        mc:Ignorable="d" Width="1050" Height="Auto" ResizeMode="CanResize" AllowsTransparency="True" WindowStyle="None"
+        Title="InfoWindow" SizeToContent="Height" Topmost="False" ShowInTaskbar="True" ShowActivated="True" 
         BorderThickness="0" BorderBrush="#aaa" Background="Transparent">
     <Window.DataContext>
         <viewmodels:InfoWindowViewModel/>
@@ -28,7 +28,7 @@
         <WindowChrome  CaptionHeight="0"  ResizeBorderThickness="0" GlassFrameThickness="0" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
     <Grid  Opacity="1" x:Name="rootGrid" MinHeight="610" Margin="5"
-          UseLayoutRounding="True" VerticalAlignment="Stretch" Effect="{StaticResource dropShadow}" >
+          UseLayoutRounding="True" VerticalAlignment="Stretch"  >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -65,13 +65,13 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="AUto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <!--Vangaurd-->
-            <Grid Grid.Row="2" Margin="10" Grid.ColumnSpan="2">
+            <Grid Grid.Row="0" Margin="10" Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -80,11 +80,11 @@
                 <TextBlock FontSize="24" Opacity=".4" TextAlignment="Center" Margin="0,0,0,10"
                            HorizontalAlignment="Stretch" VerticalAlignment="Top" FontWeight="Thin" >Characters</TextBlock>
                 <!--Content-->
-                <ItemsControl Grid.Row="1" ItemsSource="{Binding Instance.Characters}" 
+                <ItemsControl Grid.Row="1" ItemsSource="{Binding Instance.Characters}" HorizontalAlignment="Center"
                               ItemTemplate="{StaticResource vang}" VerticalAlignment="Top"  >
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <UniformGrid  Columns="4" VerticalAlignment="Stretch"/>
+                            <UniformGrid  VerticalAlignment="Top"  HorizontalAlignment="Center" Columns="3"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.CacheMode>
@@ -117,8 +117,8 @@
                 </ItemsControl>
             </Grid>-->
             <!--Timeline-->
-            <controls:TimelineControl x:Name="TimeLine" Grid.ColumnSpan="2" 
-                                      HorizontalAlignment="Left" Margin="15,10,15,30"/>
+            <controls:TimelineControl x:Name="TimeLine" Grid.ColumnSpan="2" Grid.Row="2"
+                                      HorizontalAlignment="Center" Margin="15,10,15,30"/>
 
             <!--Gear-->
             <!--<Grid Grid.Row="1" Grid.Column="1" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Top">

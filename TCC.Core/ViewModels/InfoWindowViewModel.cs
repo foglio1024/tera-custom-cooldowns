@@ -320,7 +320,9 @@ namespace TCC.ViewModels
                     new XAttribute("credits", c.Credits),
                     new XAttribute("weekly", c.WeekliesDone),
                     new XAttribute("daily", c.DailiesDone),
-                    new XAttribute("class", c.Class)
+                    new XAttribute("class", c.Class),
+                    new XAttribute("guardianPoints", c.GuardianPoints),
+                    new XAttribute("elleonMarks", c.ElleonMarks)
                     );
 
                 XElement dungs = new XElement("Dungeons");
@@ -403,13 +405,17 @@ namespace TCC.ViewModels
                 var d = Convert.ToInt32(c.Attribute("daily").Value);
                 var id = Convert.ToUInt32(c.Attribute("id").Value);
                 var pos = Convert.ToInt32(c.Attribute("pos").Value);
+                var guard = c.Attribute("guardianPoints") != null? Convert.ToUInt32(c.Attribute("guardianPoints").Value) : 0;
+                var marks = c.Attribute("elleonMarks") != null ? Convert.ToUInt32(c.Attribute("elleonMarks").Value) : 0;
                 var cl = (Class)Enum.Parse(typeof(Class), c.Attribute("class").Value);
 
                 var ch = new Character(name, cl, id, pos, _dispatcher)
                 {
                     Credits = cr,
                     WeekliesDone = w,
-                    DailiesDone = d
+                    DailiesDone = d,
+                    GuardianPoints = guard,
+                    ElleonMarks = marks
                 };
                 var dgDict = new Dictionary<uint, short>();
                 foreach (var dgEl in c.Descendants().Where(x => x.Name == "Dungeon"))

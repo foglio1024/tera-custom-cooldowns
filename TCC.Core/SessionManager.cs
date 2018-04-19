@@ -12,6 +12,7 @@ namespace TCC
     {
         public static readonly int MAX_WEEKLY = 16;
         public static readonly int MAX_DAILY = 16;
+        public static readonly uint MAX_GUARDIAN_POINTS = 100000;
         private static bool logged = false || !App.Debug;
         public static bool Logged
         {

@@ -75,8 +75,8 @@ namespace TCC.Controls
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             _animDown = false;
-            var scaleTrans = (ripple.RenderTransform as TransformGroup).Children[0];
-            (ripple.RenderTransform as TransformGroup).Children[1] = new TranslateTransform(e.MouseDevice.GetPosition(this).X - ripple.Width / 2, e.MouseDevice.GetPosition(this).Y - ripple.Height / 2);
+            //var scaleTrans = (ripple.RenderTransform as TransformGroup).Children[0];
+            //(ripple.RenderTransform as TransformGroup).Children[1] = new TranslateTransform(e.MouseDevice.GetPosition(this).X - ripple.Width / 2, e.MouseDevice.GetPosition(this).Y - ripple.Height / 2);
 
             //scaleTrans.BeginAnimation(ScaleTransform.ScaleXProperty, scaleRipple);
             //scaleTrans.BeginAnimation(ScaleTransform.ScaleYProperty, scaleRipple);

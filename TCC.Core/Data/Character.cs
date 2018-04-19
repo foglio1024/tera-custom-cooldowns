@@ -18,6 +18,9 @@ namespace TCC
         int _credits;
         bool _isLoggedIn;
         bool _isSelected;
+        private uint _guardianPoints;
+        private uint _maxGuardianPoints;
+        private uint _elleonMarks;
 
         public uint Id { get; set; }
         public int Position { get; set; }
@@ -115,17 +118,45 @@ namespace TCC
                 NotifyPropertyChanged(nameof(IsSelected));
             }
         }
-        public double VanguardWeeklyCompletion
-        {
-            get => (double)WeekliesDone / (double)SessionManager.MAX_WEEKLY;
-        }
-        public double VanguardDailyCompletion
-        {
-            get => (double)DailiesDone / (double)SessionManager.MAX_DAILY;
-        }
+        public double VanguardWeeklyCompletion => (double)WeekliesDone / (double)SessionManager.MAX_WEEKLY;
+        public double VanguardDailyCompletion => (double)DailiesDone / (double)SessionManager.MAX_DAILY;
+        public double GuardianCompletion => (double)GuardianPoints / (double)MaxGuardianPoints;
+
         public SynchronizedObservableCollection<DungeonCooldown> Dungeons { get; set; }
         public ICollectionViewLiveShaping VisibleDungeons { get; set; }
         public SynchronizedObservableCollection<GearItem> Gear { get; set; }
+        public uint GuardianPoints
+        {
+            get => _guardianPoints;
+            set
+            {
+                if (_guardianPoints == value) return;
+                _guardianPoints = value;
+                NotifyPropertyChanged(nameof(GuardianPoints));
+                NotifyPropertyChanged(nameof(GuardianCompletion));
+            }
+        }
+        public uint MaxGuardianPoints
+        {
+            get => _maxGuardianPoints; set
+            {
+                if (_maxGuardianPoints == value) return;
+                _maxGuardianPoints = value;
+                NotifyPropertyChanged(nameof(MaxGuardianPoints));
+                NotifyPropertyChanged(nameof(GuardianCompletion));
+            }
+        }
+
+        public uint ElleonMarks
+        {
+            get => _elleonMarks; set
+            {
+                if (_elleonMarks == value) return;
+                _elleonMarks = value;
+                NotifyPropertyChanged(nameof(ElleonMarks));
+            }
+        }
+
         public Character(string name, Class c, uint id, int pos, Dispatcher d, Laurel l = Laurel.None)
         {
             _dispatcher = d;
@@ -138,6 +169,7 @@ namespace TCC
             WeekliesDone = 0;
             Id = id;
             Position = pos;
+            MaxGuardianPoints = SessionManager.MAX_GUARDIAN_POINTS;
             foreach (var dg in DungeonDatabase.Instance.Dungeons)
             {
                 Dungeons.Add(new DungeonCooldown(dg.Key, _dispatcher));
