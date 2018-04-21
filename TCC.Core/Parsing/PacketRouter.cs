@@ -489,6 +489,14 @@ namespace TCC.Parsing
             InfoWindowViewModel.Instance.SetVanguard(x);
         }
 
+        internal static void HandleDungeonClears(S_DUNGEON_CLEAR_COUNT_LIST x)
+        {
+            foreach (var dg in x.DungeonClears)
+            {
+                InfoWindowViewModel.Instance.SelectedCharacter.SetDungeonTotalRuns(dg.Key, dg.Value);
+            }
+        }
+
         internal static void HandleDungeonMessage(S_DUNGEON_EVENT_MESSAGE p)
         {
             if (p.MessageId == 9950045)

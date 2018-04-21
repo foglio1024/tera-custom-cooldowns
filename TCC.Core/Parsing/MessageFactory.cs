@@ -117,6 +117,7 @@ namespace TCC.Parsing
             {"S_IMAGE_DATA", Contructor<Func<TeraMessageReader, S_IMAGE_DATA>>() },
             {"S_GET_USER_GUILD_LOGO", Contructor<Func<TeraMessageReader, S_GET_USER_GUILD_LOGO>>() },
             {"S_FIELD_POINT_INFO", Contructor<Func<TeraMessageReader, S_FIELD_POINT_INFO>>() },
+            {"S_DUNGEON_CLEAR_COUNT_LIST", Contructor<Func<TeraMessageReader, S_DUNGEON_CLEAR_COUNT_LIST>>() },
             //{"S_EACH_SKILL_RESULT", Contructor<Func<TeraMessageReader, S_EACH_SKILL_RESULT>>() },
 
         };
@@ -247,6 +248,7 @@ namespace TCC.Parsing
             {typeof(S_DUNGEON_COOL_TIME_LIST), new Action<S_DUNGEON_COOL_TIME_LIST>(x => PacketProcessor.HandleDungeonCooltimeList(x)) },
             {typeof(S_ACCOUNT_PACKAGE_LIST), new Action<S_ACCOUNT_PACKAGE_LIST>(x => PacketProcessor.HandleAccountPackageList(x)) },
             {typeof(S_FIELD_POINT_INFO), new Action<S_FIELD_POINT_INFO>(x => PacketProcessor.HandleGuardianInfo(x)) },
+            {typeof(S_DUNGEON_CLEAR_COUNT_LIST), new Action<S_DUNGEON_CLEAR_COUNT_LIST>(x => PacketProcessor.HandleDungeonClears(x)) },
         };
 
         private readonly OpCodeNamer _opCodeNamer;
