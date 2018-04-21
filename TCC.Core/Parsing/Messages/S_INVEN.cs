@@ -58,7 +58,7 @@ namespace TCC.Parsing.Messages
                     reader.Skip(4 + 1 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 8 + 1 + 4 + 4 + 4 + 4 + 4 + 4 + 1 + 4 + 4 + 4 + 4 + 1 + 1);
                     var exp = reader.ReadUInt32();
                     Items.Add(new Tuple<uint, int, uint>(itemId, enchant, exp));
-                    Console.WriteLine(itemId + " " + enchant + " [" + slot + "]");
+                    //Console.WriteLine(itemId + " " + enchant + " [" + slot + "]");
                     reader.BaseStream.Position = next - 4;
                 }
 
