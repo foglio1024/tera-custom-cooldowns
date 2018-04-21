@@ -18,10 +18,10 @@
 
         <Border Height="14" 
                 MinWidth="14"
-                CornerRadius="6"
+                CornerRadius="7"
                 Background="{Binding Color, Converter={StaticResource Converters.StringToFill}}"
-                BorderBrush="White"
-                BorderThickness="2"
+                BorderBrush="#1fff"
+                BorderThickness="0"
                 HorizontalAlignment="Left"
                 ToolTip="{Binding ToolTip}"
                 Name="border"
