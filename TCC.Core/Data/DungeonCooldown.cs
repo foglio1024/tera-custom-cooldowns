@@ -7,6 +7,7 @@ namespace TCC.Data
     public class DungeonCooldown : TSPropertyChanged
     {
         short _entries;
+        int _total;
         public uint Id { get; }
         public short Entries
         {
@@ -15,6 +16,16 @@ namespace TCC.Data
                 if (_entries == value) return;
                 _entries = value;
                 NotifyPropertyChanged(nameof(Entries));
+            }
+        }
+        public int Clears
+        {
+            get => _total;
+            set
+            {
+                if (_total == value) return;
+                _total = value;
+                NotifyPropertyChanged(nameof(Clears));
             }
         }
 
