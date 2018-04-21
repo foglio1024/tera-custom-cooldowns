@@ -35,7 +35,7 @@ namespace TCC.Controls
             var dc = (GearItem)DataContext;
             if (dc == null) return;
             _anim.To = dc.LevelFactor * 359.9;
-            MainArc.BeginAnimation(Arc.EndAngleProperty, _anim);
+            //MainArc.BeginAnimation(Arc.EndAngleProperty, _anim);
 
         }
     }
