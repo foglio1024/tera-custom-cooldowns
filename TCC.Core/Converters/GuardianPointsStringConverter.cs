@@ -12,7 +12,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var v = (uint)value;
+            var v =  System.Convert.ToUInt32(value);
             if (v == 100000) return "Max";
             else if (v >= 1000) return v / 1000 + "k";
             else return v;
