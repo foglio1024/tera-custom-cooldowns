@@ -24,15 +24,22 @@ namespace TCC.Windows
         int itemIndex = 0;
         int icIndex = 0;
         List<ItemsControl> ICs;
+        ColorAnimation mainBorderfadeIn, mainBorderFadeOut;
+        Color borderFull, borderTransp;
         public InfoWindow()
         {
             InitializeComponent();
             t = new System.Timers.Timer(30);
             t.Elapsed += AnimateNextItem;
-            _expW = new DoubleAnimation(0, TimeSpan.FromMilliseconds(200)) { EasingFunction = new QuadraticEase() };
-            _expH = new DoubleAnimation(0, TimeSpan.FromMilliseconds(200)) { EasingFunction = new QuadraticEase() };
-            _expM = new ThicknessAnimation(new Thickness(0), TimeSpan.FromMilliseconds(200)) { EasingFunction = new QuadraticEase() };
-            _expO = new DoubleAnimation(0, TimeSpan.FromMilliseconds(200)) { BeginTime = TimeSpan.FromMilliseconds(300) };
+            var animTime = TimeSpan.FromMilliseconds(300);
+            _expW = new DoubleAnimation(0, animTime) { EasingFunction = new QuadraticEase() };
+            _expH = new DoubleAnimation(0, animTime) { EasingFunction = new QuadraticEase() };
+            _expM = new ThicknessAnimation(new Thickness(0), animTime) { EasingFunction = new QuadraticEase() };
+            _expO = new DoubleAnimation(0, 1, animTime) { BeginTime = TimeSpan.FromMilliseconds(300) };
+            borderFull = Color.FromArgb(0xff, 0xf0, 0xf0, 0xf0);
+            borderTransp = Color.FromArgb(0x00, 0xf0, 0xf0, 0xf0);
+            mainBorderfadeIn = new ColorAnimation(borderTransp, borderFull, TimeSpan.FromMilliseconds(200));
+            mainBorderFadeOut = new ColorAnimation(borderFull, borderTransp, TimeSpan.FromMilliseconds(100)) { BeginTime = animTime - TimeSpan.FromMilliseconds(50) };
             //_expO.Completed += (s1, ev1) => { b.Visibility = Visibility.Collapsed; _expO.BeginAnimation(OpacityProperty, new DoubleAnimation(1, TimeSpan.FromMilliseconds(1))); };
 
         }
@@ -134,9 +141,21 @@ namespace TCC.Windows
             _expH.To = endH;
             _expM.To = endThickness;
             _expM.From = startThickness;
-            b.BeginAnimation(WidthProperty,  _expW);
+            _expO.To = 1;
+            _expO.From = 0;
+
+            b.BeginAnimation(WidthProperty, _expW);
             b.BeginAnimation(HeightProperty, _expH);
             b.BeginAnimation(MarginProperty, _expM);
+            (b.Child as FrameworkElement).BeginAnimation(OpacityProperty, _expO);
+            //mainBorder.Background.BeginAnimation(SolidColorBrush.ColorProperty, mainBorderFadeOut);
+            Task.Delay(300).ContinueWith(t => Dispatcher.Invoke(() => (b.Child as FrameworkElement).Visibility = Visibility.Visible));
+            mainBorder.BeginAnimation(MarginProperty, new ThicknessAnimation(new Thickness(20), TimeSpan.FromMilliseconds(500))
+            {
+                BeginTime = TimeSpan.FromMilliseconds(300),
+                EasingFunction = new QuadraticEase()
+            });
+
             b.Opacity = 1;
             b.Visibility = Visibility.Visible;
         }
@@ -170,11 +189,29 @@ namespace TCC.Windows
         double w, h = 0;
         private void b_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            b.BeginAnimation(WidthProperty, new DoubleAnimation(w, TimeSpan.FromMilliseconds(200)) { EasingFunction = new QuarticEase() });
-            b.BeginAnimation(HeightProperty, new DoubleAnimation(h, TimeSpan.FromMilliseconds(200)) { EasingFunction = new QuarticEase() });
-            b.BeginAnimation(MarginProperty, new ThicknessAnimation(new Thickness(relPoint.X - 15, relPoint.Y - 15, 0, 0), TimeSpan.FromMilliseconds(200)) { EasingFunction = new QuarticEase() });
-            //b.BeginAnimation(Border.OpacityProperty, _expO);
-            Task.Delay(100).ContinueWith(t => Dispatcher.Invoke(() => b.Visibility = Visibility.Collapsed));
+            b.BeginAnimation(WidthProperty, new DoubleAnimation(w, TimeSpan.FromMilliseconds(150))
+            {
+                EasingFunction = new QuarticEase(),
+                BeginTime = TimeSpan.FromMilliseconds(150)
+            });
+            b.BeginAnimation(HeightProperty, new DoubleAnimation(h, TimeSpan.FromMilliseconds(150))
+            {
+                EasingFunction = new QuarticEase(),
+                BeginTime = TimeSpan.FromMilliseconds(150)
+
+            });
+            b.BeginAnimation(MarginProperty, new ThicknessAnimation(new Thickness(relPoint.X - 15, relPoint.Y - 15, 0, 0), 
+                TimeSpan.FromMilliseconds(150))
+            {
+                EasingFunction = new QuarticEase(),
+                BeginTime = TimeSpan.FromMilliseconds(150)
+            });
+            (b.Child as FrameworkElement).BeginAnimation(OpacityProperty, 
+                new DoubleAnimation (1 , 0 ,TimeSpan.FromMilliseconds(150)));
+            //mainBorder.Background.BeginAnimation(SolidColorBrush.ColorProperty, mainBorderfadeIn);
+            mainBorder.BeginAnimation(MarginProperty, new ThicknessAnimation(new Thickness(0), TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
+            Task.Delay(300).ContinueWith(t => Dispatcher.Invoke(() => b.Visibility = Visibility.Collapsed));
+            Task.Delay(150).ContinueWith(t => Dispatcher.Invoke(() => b.Child.Visibility = Visibility.Collapsed));
 
         }
     }

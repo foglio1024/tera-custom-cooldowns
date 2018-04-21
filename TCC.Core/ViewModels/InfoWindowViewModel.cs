@@ -42,8 +42,8 @@ namespace TCC.ViewModels
         {
             get => Characters.ToSyncArray().FirstOrDefault(x => x.Id == _selectedCharacterId);
         }
-
-
+        public bool SelectedCharacterExists => SelectedCharacter != null;
+        public bool ShowElleonMarks => TimeManager.Instance.CurrentRegion == "EU";
         public InfoWindowViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
@@ -52,6 +52,8 @@ namespace TCC.ViewModels
             Markers = new SynchronizedObservableCollection<TimeMarker>(_dispatcher);
             SpecialEvents = new SynchronizedObservableCollection<DailyEvent>(_dispatcher);
             LoadCharDoc();
+            if (Characters.Count > 0) SelectCharacter(Characters[0]);
+            else SelectCharacter(new Character("", Class.None, 0, 0, _dispatcher));
         }
 
         public void LoadEvents(DayOfWeek today, string region)
@@ -264,6 +266,8 @@ namespace TCC.ViewModels
             if (!_dispatcher.Thread.IsAlive) return;
             LoadEvents(DateTime.Now.DayOfWeek, TimeManager.Instance.CurrentRegion);
             WindowManager.InfoWindow.ShowWindow();
+            NotifyPropertyChanged(nameof(SelectedCharacterExists));
+            //SelectCharacter(SelectedCharacter);
         }
 
         public void SetVanguard(S_AVAILABLE_EVENT_MATCHING_LIST x)
@@ -331,7 +335,8 @@ namespace TCC.ViewModels
                 {
                     XElement dg = new XElement("Dungeon",
                         new XAttribute("id", d.Id),
-                        new XAttribute("entries", d.Entries));
+                        new XAttribute("entries", d.Entries),
+                        new XAttribute("total", d.Clears));
                     dungs.Add(dg);
                 }
 
@@ -422,6 +427,8 @@ namespace TCC.ViewModels
                 {
                     var dgId = Convert.ToUInt32(dgEl.Attribute("id").Value);
                     var dgEntries = Convert.ToInt16(dgEl.Attribute("entries").Value);
+                    var dgTotal = dgEl.Attribute("total") != null  ? Convert.ToInt16(dgEl.Attribute("total").Value) : 0;
+                    ch.SetDungeonTotalRuns(dgId, dgTotal);
                     dgDict.Add(dgId, dgEntries);
                 }
                 ch.UpdateDungeons(dgDict);
