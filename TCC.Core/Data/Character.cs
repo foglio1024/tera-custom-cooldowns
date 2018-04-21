@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows.Data;
 using System.Windows.Threading;
 using TCC.Data;
 using TCC.Data.Databases;
@@ -69,14 +70,21 @@ namespace TCC
             {
                 if (!DungeonDatabase.Instance.Dungeons.ContainsKey(keyVal.Key)) continue;
                 var dg = Dungeons.FirstOrDefault(x => x.Id == keyVal.Key);
-                if (dg != null) dg.Entries = keyVal.Value;
+                if (dg != null)
+                {
+                    dg.Entries = keyVal.Value;
+                }
                 //else
                 //{
                 //    Dungeons.Add(new DungeonCooldown(keyVal.Key, keyVal.Value, _dispatcher));
                 //}
             }
         }
-
+        public void SetDungeonTotalRuns(uint dgId, int runs)
+        {
+            var dg = Dungeons.ToSyncArray().FirstOrDefault(d => d.Id == dgId);
+            if (dg != null) dg.Clears = runs;
+        }
         public int WeekliesDone
         {
             get => _weekliesDone;
@@ -97,8 +105,10 @@ namespace TCC
                 if (_credits == value) return;
                 _credits = value;
                 NotifyPropertyChanged(nameof(Credits));
+                NotifyPropertyChanged(nameof(CreditsFactor));
             }
         }
+        public double CreditsFactor => Credits / 9000.0d;
         public bool IsLoggedIn
         {
             get => _isLoggedIn;
@@ -123,8 +133,17 @@ namespace TCC
         public double GuardianCompletion => (double)GuardianPoints / (double)MaxGuardianPoints;
 
         public SynchronizedObservableCollection<DungeonCooldown> Dungeons { get; set; }
-        public ICollectionViewLiveShaping VisibleDungeons { get; set; }
+        public ICollectionView VisibleDungeons { get; set; }
         public SynchronizedObservableCollection<GearItem> Gear { get; set; }
+
+        public GearItem Weapon => Gear.ToSyncArray().FirstOrDefault(x => x.Piece == GearPiece.Weapon) ?? new GearItem(0,GearTier.Low, GearPiece.Weapon,0,0);
+        public GearItem Chest => Gear.ToSyncArray().FirstOrDefault(x => x.Piece == GearPiece.Armor) ?? new GearItem(0, GearTier.Low, GearPiece.Armor, 0, 0);
+        public GearItem Hands => Gear.ToSyncArray().FirstOrDefault(x => x.Piece == GearPiece.Hands) ?? new GearItem(0, GearTier.Low, GearPiece.Hands, 0, 0);
+        public GearItem Feet => Gear.ToSyncArray().FirstOrDefault(x => x.Piece == GearPiece.Feet) ?? new GearItem(0, GearTier.Low, GearPiece.Feet, 0, 0);
+        public GearItem Belt => Gear.ToSyncArray().FirstOrDefault(x => x.Piece == GearPiece.Belt) ?? new GearItem(0, GearTier.Low, GearPiece.Belt, 0, 0);
+        public GearItem Circlet => Gear.ToSyncArray().FirstOrDefault(x => x.Piece == GearPiece.Circlet) ?? new GearItem(0, GearTier.Low, GearPiece.Circlet, 0, 0);
+        public ICollectionView Jewels { get; set; }
+
         public uint GuardianPoints
         {
             get => _guardianPoints;
@@ -174,8 +193,17 @@ namespace TCC
             {
                 Dungeons.Add(new DungeonCooldown(dg.Key, _dispatcher));
             }
-            VisibleDungeons = Utils.InitLiveView(dc => DungeonDatabase.Instance.Dungeons.ContainsKey(((DungeonCooldown)dc).Id) &&
-            DungeonDatabase.Instance.Dungeons[((DungeonCooldown)dc).Id].Show, Dungeons, new string[] { nameof(Dungeon.Show) }, new string[] { nameof(Dungeon.Tier) });
+            VisibleDungeons = new CollectionViewSource() { Source = Dungeons }.View;
+            VisibleDungeons.Filter = dc => DungeonDatabase.Instance.Dungeons.ContainsKey(((DungeonCooldown)dc).Id) &&
+            DungeonDatabase.Instance.Dungeons[((DungeonCooldown)dc).Id].Show;
+            VisibleDungeons.SortDescriptions.Add(new SortDescription("Tier", ListSortDirection.Ascending));
+
+            Jewels = new CollectionViewSource() { Source = Gear }.View;
+            Jewels.Filter = g => ((GearItem)g).IsJewel && ((GearItem)g).Piece < GearPiece.Circlet;
+            Jewels.SortDescriptions.Add(new SortDescription("Piece", ListSortDirection.Ascending));
+
+            //Utils.InitLiveView(dc => DungeonDatabase.Instance.Dungeons.ContainsKey(((DungeonCooldown)dc).Id) &&
+            //DungeonDatabase.Instance.Dungeons[((DungeonCooldown)dc).Id].Show, Dungeons, new string[] { nameof(Dungeon.Show) }, new string[] { nameof(Dungeon.Tier) });
         }
 
         public int CompareTo(object obj)
