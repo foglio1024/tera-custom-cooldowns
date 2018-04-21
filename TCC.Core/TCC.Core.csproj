@@ -367,6 +367,7 @@
     <Compile Include="Parsing\Messages\S_ANSWER_INTERACTIVE.cs" />
     <Compile Include="Parsing\Messages\S_AVAILABLE_EVENT_MATCHING_LIST.cs" />
     <Compile Include="Parsing\Messages\S_BAN_PARTY.cs" />
+    <Compile Include="Parsing\Messages\S_DUNGEON_CLEAR_COUNT_LIST.cs" />
     <Compile Include="Parsing\Messages\S_DUNGEON_COOL_TIME_LIST.cs" />
     <Compile Include="Parsing\Messages\S_DUNGEON_EVENT_MESSAGE.cs" />
     <Compile Include="Parsing\Messages\S_FIELD_POINT_INFO.cs" />
