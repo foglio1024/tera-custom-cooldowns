@@ -67,7 +67,7 @@
                         Background="{StaticResource Colors.App.HP}"
                         BorderBrush="White"
                         VerticalAlignment="Stretch"
-                        BorderThickness="2"
+                        BorderThickness="0"
                         HorizontalAlignment="Left"
                         ToolTip="Reset"
                         Name="border"
