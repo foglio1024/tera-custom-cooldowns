@@ -61,6 +61,7 @@ namespace TCC.Data.Databases
 
         public int GetMaxExp(uint id, int enchant)
         {
+            if (!Items.ContainsKey(id)) return 0;
             if (Items[id].ExpId == 0) return 0;
             return ExpData[Items[id].ExpId][enchant];
         }
