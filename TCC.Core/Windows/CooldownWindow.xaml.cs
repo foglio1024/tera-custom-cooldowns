@@ -14,6 +14,7 @@ namespace TCC
         {
             InitializeComponent();
             _b = buttons;
+            _c = content;
             InitWindow(SettingsManager.CooldownWindowSettings, ignoreSize: true);
 
         }
