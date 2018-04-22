@@ -32,9 +32,21 @@ namespace TCC.Controls
             mainButtonTimer.Tick += MainButtonTimer_Tick;
             secButtonTimer.Tick += SecButtonTimer_Tick;
             SelectionPopup.Closed += SelectionPopup_Closed;
+            SelectionPopup.Opened += SelectionPopup_Opened;
             CooldownWindowViewModel.Instance.SecondarySkills.CollectionChanged += SecondarySkills_CollectionChanged;
+            CooldownWindowViewModel.Instance.MainSkills.CollectionChanged += MainSkills_CollectionChanged; ;
         }
 
+        private void MainSkills_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            mainSkills.InvalidateMeasure();
+            mainSkills.Dispatcher.Invoke(DispatcherPriority.Render, EmptyDelegate);
+        }
+
+        private void SelectionPopup_Opened(object sender, EventArgs e)
+        {
+            FocusManager.Running = false;
+        }
 
         private void SecondarySkills_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
@@ -76,6 +88,7 @@ namespace TCC.Controls
             mainButtonTimer.Start();
             secButtonTimer.Start();
             ChoiceListBox.UnselectAll();
+            FocusManager.Running = true;
         }
         private void ItemDragStarted(object sender, DragablzDragStartedEventArgs e)
         {
@@ -88,7 +101,7 @@ namespace TCC.Controls
         private void ItemDragCompleted(object sender, DragablzDragCompletedEventArgs e)
         {
             //var item = e.DragablzItem.DataContext;
-            if ((sender as FrameworkElement).Name == "mainSkills")
+            if (CooldownWindowViewModel.Instance.MainSkills.Contains(e.DragablzItem.DataContext as FixedSkillCooldown))
             {
                 CooldownWindowViewModel.Instance.MainSkills.Clear();
                 foreach (var i in _mainOrder)
@@ -96,7 +109,7 @@ namespace TCC.Controls
                     CooldownWindowViewModel.Instance.MainSkills.Add(i as FixedSkillCooldown);
                 }
             }
-            else if ((sender as FrameworkElement).Name == "secSkills")
+            else if (CooldownWindowViewModel.Instance.SecondarySkills.Contains(e.DragablzItem.DataContext as FixedSkillCooldown))
             {
                 foreach (var i in _secondaryOrder)
                 {
@@ -116,14 +129,12 @@ namespace TCC.Controls
         }
         private void UserControl_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            mainSkills.InvalidateMeasure();
-            mainSkills.Dispatcher.Invoke(DispatcherPriority.Render, EmptyDelegate);
         }
         private void AddButtonPressed(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             //CooldownWindowViewModel.Instance.MainSkills.Add(new FixedSkillCooldown(new Skill(181100, Class.Warrior, "", ""), CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher(), true));
             SelectionPopup.IsOpen = true;
-            if (ChoiceListBox.ItemsSource == null) ChoiceListBox.ItemsSource = CooldownWindowViewModel.Instance.ChoiceList;
+            ChoiceListBox.ItemsSource = CooldownWindowViewModel.Instance.ChoiceList;
             lastSender = (sender as Grid).Name;
         }
         private void MainSkillsGrid_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
@@ -146,12 +157,12 @@ namespace TCC.Controls
             {
                 if (lastSender == AddButtonGrid.Name)
                 {
-                    if (_mainOrder.Any(x => ((FixedSkillCooldown)x).Skill.IconName == (s.SelectedItems[0] as Skill).IconName)) return;
+                    if (CooldownWindowViewModel.Instance.MainSkills.Any(x => ((FixedSkillCooldown)x).Skill.IconName == (s.SelectedItems[0] as Skill).IconName)) return;
                     CooldownWindowViewModel.Instance.MainSkills.Add(new FixedSkillCooldown(s.SelectedItems[0] as Skill, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher(), false));
                 }
                 else if (lastSender == AddButtonGrid2.Name)
                 {
-                    if (_secondaryOrder.Any(x => ((FixedSkillCooldown)x).Skill.IconName == (s.SelectedItems[0] as Skill).IconName)) return;
+                    if (CooldownWindowViewModel.Instance.SecondarySkills.Any(x => ((FixedSkillCooldown)x).Skill.IconName == (s.SelectedItems[0] as Skill).IconName)) return;
                     CooldownWindowViewModel.Instance.SecondarySkills.Add(new FixedSkillCooldown(s.SelectedItems[0] as Skill, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher(), false));
                 }
                 ChoiceListBox.ItemsSource = null;
