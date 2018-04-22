@@ -206,18 +206,6 @@
             </Grid>
         </Grid>
 
-        <Grid Grid.RowSpan="3" x:Name="g2" Margin="0" >
-            <Border x:Name="b" Effect="{StaticResource dropShadow}" Background="{StaticResource CardDarkColor}" Margin="15" Visibility="Collapsed"
-                    CornerRadius="3" VerticalAlignment="Top" HorizontalAlignment="Left"
-                    MouseLeftButtonDown="b_MouseLeftButtonDown">
-                <controls:ExtendedCharacterControl DataContext="{Binding Instance.SelectedCharacter}" Visibility="Collapsed"/>
-            </Border>
-            <!--<Grid.Effect>
-                <DropShadowEffect ShadowDepth="4" BlurRadius="15" Opacity=".4"></DropShadowEffect>
-            </Grid.Effect>-->
-
-
-        </Grid>
         <!--<Grid.Effect>
             <DropShadowEffect ShadowDepth="4" 
                                   BlurRadius="10" Opacity=".4"></DropShadowEffect>
