@@ -106,6 +106,7 @@ namespace TCC.ViewModels
         {
             get => GroupWindowViewModel.Instance.AmILeader() && GroupWindowViewModel.Instance.Raid && GroupWindowViewModel.Instance.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
         }
+        public bool ShowKick => GroupWindowViewModel.Instance.AmILeader() && GroupWindowViewModel.Instance.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
         public bool ShowDelegateLeader
         {
             get => GroupWindowViewModel.Instance.AmILeader() && GroupWindowViewModel.Instance.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
@@ -136,6 +137,7 @@ namespace TCC.ViewModels
             NPC(nameof(ShowPartyInvite));
             NPC(nameof(ShowGuildInvite));
             NPC(nameof(ShowAddFriend));
+            NPC(nameof(ShowKick));
             NPC(nameof(ShowWhisper));
             NPC(nameof(BlockLabelText));
             NPC(nameof(FriendLabelText));
