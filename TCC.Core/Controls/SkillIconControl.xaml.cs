@@ -137,6 +137,21 @@ namespace TCC.Controls
         {
             FocusManager.Running = true;
         }
+
+        private void HideButton_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            CooldownWindowViewModel.Instance.AddHiddenSkill(_context);
+        }
+
+        private void Rectangle_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            HideButton.Visibility = Visibility.Visible;
+        }
+
+        private void UserControl_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            HideButton.Visibility = Visibility.Collapsed;
+        }
     }
 }
 

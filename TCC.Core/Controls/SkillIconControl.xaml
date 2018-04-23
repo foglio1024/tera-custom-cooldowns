@@ -7,6 +7,7 @@
              xmlns:converters="clr-namespace:TCC.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="100" Loaded="ControlLoaded" Unloaded="UserControl_Unloaded"
+             MouseLeave="UserControl_MouseLeave"
              UseLayoutRounding="True"  ToolTip="{Binding Skill.Name}" 
              ToolTipOpening="SkillIconControl_OnToolTipOpening"
              ToolTipClosing="SkillIconControl_OnToolTipClosing">
@@ -30,7 +31,7 @@
               Height="Auto" x:Name="g" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0" >
             <Border Background="#fff" CornerRadius="5"  BorderBrush="#404047" BorderThickness="1"  Padding="4,0" Effect="{StaticResource FadedDropShadow}">
 
-            <TextBlock Foreground="#d000" 
+                <TextBlock Foreground="#d000" 
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center" 
                    TextAlignment="Center"
@@ -44,6 +45,13 @@
 
             </Border>
         </Grid>
+        <Rectangle Height="20" VerticalAlignment="Top" MouseEnter="Rectangle_MouseEnter" Fill="#01000000"></Rectangle>
+
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Width="20" Height="20" ToolTip="Hide" Cursor="Hand" Visibility="Collapsed"  Name="HideButton"
+              MouseLeftButtonDown="HideButton_MouseLeftButtonDown">
+                <Ellipse Fill="DarkOrange" Effect="{StaticResource dropShadow}"></Ellipse>
+                <Path Data="{StaticResource SVG.Hide}" Fill="White" Stretch="Uniform" Margin="3"></Path>
+            </Grid>
         <!--<Grid.CacheMode>
             <BitmapCache RenderAtScale="2"></BitmapCache>
         </Grid.CacheMode>-->
