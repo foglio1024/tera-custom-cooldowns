@@ -229,6 +229,9 @@
       <DependentUpon>GuildTowerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\OutlineText.cs" />
+    <Compile Include="Controls\Ripple.xaml.cs">
+      <DependentUpon>Ripple.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SelectionSetting.xaml.cs">
       <DependentUpon>SelectionSetting.xaml</DependentUpon>
     </Compile>
@@ -360,6 +363,7 @@
     <Compile Include="Data\StanceTracker.cs" />
     <Compile Include="Data\World.cs" />
     <Compile Include="Data\DungeonCooldown.cs" />
+    <Compile Include="ObservableTabablzControl.cs" />
     <Compile Include="Parsing\Messages\C_LOGIN_ARBITER.cs" />
     <Compile Include="Parsing\Messages\S_ABNORMALITY_DAMAGE_ABSORB.cs" />
     <Compile Include="Parsing\Messages\S_ACCOMPLISH_ACHIEVEMENT.cs" />
@@ -729,6 +733,7 @@
     <Compile Include="Data\EventGroup.cs" />
     <Compile Include="ViewModels\DailyEvent.cs" />
     <Compile Include="ViewModels\InfoWindowViewModel.cs" />
+    <Compile Include="ViewModels\Tab.cs" />
     <Compile Include="ViewModels\TccWindowViewModel.cs" />
     <Compile Include="ViewModels\TimeMarker.cs" />
     <Compile Include="ViewModels\TooltipInfo.cs" />
@@ -1007,6 +1012,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Ripple.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\SelectionSetting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1104,6 +1113,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\VanguardInfoControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dragablz.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
