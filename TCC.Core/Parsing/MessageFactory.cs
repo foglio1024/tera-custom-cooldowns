@@ -283,7 +283,7 @@ namespace TCC.Parsing
 
             InfoWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
 
-            if (SettingsManager.ChatWindowSettings.Enabled)
+            if (SettingsManager.ChatEnabled)
             {
                 ChatWindow.ToList().ForEach(x => MainProcessor[x.Key] = x.Value);
                 if (SettingsManager.LfgOn)
