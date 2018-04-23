@@ -363,7 +363,6 @@
     <Compile Include="Data\StanceTracker.cs" />
     <Compile Include="Data\World.cs" />
     <Compile Include="Data\DungeonCooldown.cs" />
-    <Compile Include="ObservableTabablzControl.cs" />
     <Compile Include="Parsing\Messages\C_LOGIN_ARBITER.cs" />
     <Compile Include="Parsing\Messages\S_ABNORMALITY_DAMAGE_ABSORB.cs" />
     <Compile Include="Parsing\Messages\S_ACCOMPLISH_ACHIEVEMENT.cs" />
@@ -1119,6 +1118,10 @@
     <Page Include="Dragablz.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DragablzMaterialDesign.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\AbnormalitiesWindow.xaml">
       <SubType>Designer</SubType>
