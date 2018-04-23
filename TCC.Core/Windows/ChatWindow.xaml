@@ -130,7 +130,7 @@
                         Background="Transparent"  
                         BorderBrush="#0000" 
                         BorderThickness="0,0,0,0"
-                        Margin="1,-2,0,0" 
+                        Margin="1,0,0,0" 
                         HeaderMemberPath="Header"
                         DisplayMemberPath="Content"
                         ItemsSource="{Binding TabVMs, Mode=TwoWay}"
@@ -138,8 +138,11 @@
                         ItemContainerStyle="{StaticResource TrapezoidDragableTabItemStyle}"
                         x:Name="tabControl" IsDraggingWindowChanged="tabControl_IsDraggingWindowChanged"
                         DragOver="tabControl_Drop"
-                                         >
-                    <!--Style="{DynamicResource ChatTabablzControlStyle}"-->
+                        ShowDefaultAddButton="True"
+                        NewItemFactory="{Binding AddNewTabCommand}"
+                        ShowDefaultCloseButton="True"
+                    Style="{DynamicResource ChatTabablzControlStyle}"
+                         >
 
                     <!--ContentTemplate="{StaticResource TabContentTemplate}"-->
                     <dragablz:TabablzControl.InterTabController>
