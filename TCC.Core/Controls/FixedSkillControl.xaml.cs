@@ -161,5 +161,9 @@ namespace TCC.Controls
         {
             CooldownWindowViewModel.Instance.DeleteFixedSkill(_context);
         }
+        private void HideButton_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            CooldownWindowViewModel.Instance.AddHiddenSkill(_context);
+        }
     }
 }
