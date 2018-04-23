@@ -45,7 +45,7 @@ namespace TCC
         public static BuffWindow BuffWindow;
         public static GroupWindow GroupWindow;
         public static ClassWindow ClassWindow;
-        public static ChatWindow ChatWindow;
+        //public static ChatWindow ChatWindow;
         public static SettingsWindow Settings;
         public static InfoWindow InfoWindow;
         public static FloatingButtonWindow FloatingButton;
@@ -201,7 +201,8 @@ namespace TCC
             try { BossWindow.CloseWindowSafe(); } catch { }
             try { BuffWindow.CloseWindowSafe(); } catch { }
             try { InfoWindow.Close(); } catch { }
-            try { ChatWindow.CloseWindowSafe(); } catch { }
+            //try { ChatWindow.CloseWindowSafe(); } catch { }
+            ChatWindowManager.Instance.CloseAllWindows();
             try { ClassWindow.CloseWindowSafe(); } catch { }
         }
 
@@ -215,7 +216,8 @@ namespace TCC
             //    while (waiting) { }
             //}
             GroupWindow = new GroupWindow();
-            ChatWindow = new ChatWindow(); 
+            //ChatWindow = new ChatWindow(); 
+            ChatWindowManager.Instance.InitWindows();
             CooldownWindow = new CooldownWindow();
             BossWindow = new BossWindow();
             BuffWindow = new BuffWindow();
@@ -223,7 +225,7 @@ namespace TCC
             ClassWindow = new ClassWindow();
             InfoWindow = new InfoWindow();
             GroupWindow.Show();     
-            ChatWindow.Show();      
+            //ChatWindow.Show();      
             CooldownWindow.Show();  
             BossWindow.Show();      
             BuffWindow.Show();      
@@ -343,9 +345,9 @@ namespace TCC
             var chatWindowThread = new Thread(new ThreadStart(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
-                ChatWindow = new ChatWindow();
-                ChatWindow.AllowsTransparency = SettingsManager.ChatWindowSettings.AllowTransparency;
-                ChatWindow.Show();
+                //ChatWindow = new ChatWindow();
+                //ChatWindow.AllowsTransparency = SettingsManager.ChatWindowSettings.AllowTransparency;
+                //ChatWindow.Show();
                 waiting = false;
 
                 Dispatcher.Run();
