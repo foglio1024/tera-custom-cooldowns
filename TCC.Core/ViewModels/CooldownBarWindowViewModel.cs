@@ -84,7 +84,7 @@ namespace TCC.ViewModels
                 itemSkills = value;
             }
         }
-        public SynchronizedObservableCollection<FixedSkillCooldown> HiddenSkills { get; }
+        public SynchronizedObservableCollection<Skill> HiddenSkills { get; }
 
         public SynchronizedObservableCollection<Skill> ChoiceList
         {
@@ -200,6 +200,17 @@ namespace TCC.ViewModels
             }
         }
 
+        internal void AddHiddenSkill(SkillCooldown context)
+        {
+            HiddenSkills.Add(context.Skill);
+        }
+
+
+        internal void AddHiddenSkill(FixedSkillCooldown context)
+        {
+            HiddenSkills.Add(context.Skill);
+        }
+
         internal void DeleteFixedSkill(FixedSkillCooldown context)
         {
             if (MainSkills.Contains(context)) MainSkills.Remove(context);
@@ -259,7 +270,7 @@ namespace TCC.ViewModels
             });
             HiddenSkills.ToList().ForEach(sk =>
             {
-                root.Add(new XElement("Skill", new XAttribute("id", sk.Skill.Id), new XAttribute("row", 0)));
+                root.Add(new XElement("Skill", new XAttribute("id", sk.Id), new XAttribute("row", 3)));
             });
             root.Save(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources/config/skills", $"{SessionManager.CurrentPlayer.Class.ToString().ToLowerInvariant()}-skills.xml"));
         }
@@ -269,10 +280,10 @@ namespace TCC.ViewModels
             if (SettingsManager.ClassWindowSettings.Enabled && _classManager.StartSpecialSkill(sk)) return;
             if (!SettingsManager.CooldownWindowSettings.Enabled) return;
 
-            var skill = HiddenSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
-            if (skill != null) return;
+            var hSkill = HiddenSkills.ToSyncArray().FirstOrDefault(x => x.IconName == sk.Skill.IconName);
+            if (hSkill != null) return;
 
-            skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
+            var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
             if (skill != null)
             {
                 skill.Start(sk.Cooldown);
@@ -292,11 +303,11 @@ namespace TCC.ViewModels
         {
             if (!SettingsManager.CooldownWindowSettings.Enabled) return;
 
-            var skill = HiddenSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
-            if (skill != null) return;
+            var hSkill = HiddenSkills.ToSyncArray().FirstOrDefault(x => x.IconName == sk.IconName);
+            if (hSkill != null) return;
 
 
-            skill = MainSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
+            var skill = MainSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (skill != null)
             {
                 skill.Refresh(cd);
@@ -458,7 +469,7 @@ namespace TCC.ViewModels
             }
             foreach (var sk in sp.Hidden)
             {
-                HiddenSkills.Add(sk);
+                HiddenSkills.Add(sk.Skill);
             }
         }
 
@@ -482,7 +493,7 @@ namespace TCC.ViewModels
             SecondarySkills = new SynchronizedObservableCollection<FixedSkillCooldown>(_dispatcher);
             MainSkills = new SynchronizedObservableCollection<FixedSkillCooldown>(_dispatcher);
             OtherSkills = new SynchronizedObservableCollection<SkillCooldown>(_dispatcher);
-            HiddenSkills = new SynchronizedObservableCollection<FixedSkillCooldown>(_dispatcher);
+            HiddenSkills = new SynchronizedObservableCollection<Skill>(_dispatcher);
             ItemSkills = new SynchronizedObservableCollection<SkillCooldown>(_dispatcher);
             //ChoiceList = new SynchronizedObservableCollection<FixedSkillCooldown>(_dispatcher);
             WindowManager.TccVisibilityChanged += (s, ev) =>
