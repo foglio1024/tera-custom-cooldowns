@@ -611,6 +611,7 @@ namespace TCC
             var result = new XElement("ChatWindows");
             ChatWindowManager.Instance.ChatWindows.ToList().ForEach(cw =>
             {
+                if(cw.VM.Tabs.Count == 0) return;
                 result.Add(new XElement("ChatWindow", cw.WindowSettings.ToXElement("Settings")));
             });
             return result;
