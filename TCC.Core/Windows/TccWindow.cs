@@ -141,7 +141,7 @@ namespace TCC.Windows
 
         private void TccWindow_Closed(object sender, EventArgs e)
         {
-            Dispatcher.InvokeShutdown();
+            //Dispatcher.InvokeShutdown();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
