@@ -118,10 +118,10 @@ namespace TCC
             SettingsManager.SaveSettings();
             if (DateTime.Now.DayOfWeek == _resetDay)
             {
-                ChatWindowViewModel.Instance.AddTccMessage("Weekly data has been reset.");
+                ChatWindowManager.Instance.AddTccMessage("Weekly data has been reset.");
             }
 
-            ChatWindowViewModel.Instance.AddTccMessage("Daily data has been reset.");
+            ChatWindowManager.Instance.AddTccMessage("Daily data has been reset.");
         }
 
 
@@ -143,7 +143,7 @@ namespace TCC
             }
             catch
             {
-                ChatWindowViewModel.Instance.AddTccMessage("Failed to retrieve guild bam info.");
+                ChatWindowManager.Instance.AddTccMessage("Failed to retrieve guild bam info.");
                 return 0;
             }
         }
@@ -167,7 +167,7 @@ namespace TCC
             }
             catch
             {
-                ChatWindowViewModel.Instance.AddTccMessage("Failed to upload guild bam info.");
+                ChatWindowManager.Instance.AddTccMessage("Failed to upload guild bam info.");
             }
 
         }
@@ -220,7 +220,7 @@ namespace TCC
                 }
                 catch (Exception)
                 {
-                    ChatWindowViewModel.Instance.AddTccMessage("Failed to execute Discord webhook.");
+                    ChatWindowManager.Instance.AddTccMessage("Failed to execute Discord webhook.");
                 }
             }
         }
@@ -257,7 +257,7 @@ namespace TCC
                 }
                 catch (Exception)
                 {
-                    ChatWindowViewModel.Instance.AddTccMessage("Failed to execute Discord webhook.");
+                    ChatWindowManager.Instance.AddTccMessage("Failed to execute Discord webhook.");
                 }
             }
         }

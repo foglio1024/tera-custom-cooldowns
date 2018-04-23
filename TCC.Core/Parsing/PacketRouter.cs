@@ -402,27 +402,27 @@ namespace TCC.Parsing
 
         public static void HandleChat(S_CHAT x)
         {
-            ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(x.Channel, x.AuthorName, x.Message));
+            ChatWindowManager.Instance.AddChatMessage(new ChatMessage(x.Channel, x.AuthorName, x.Message));
         }
 
         public static void HandlePrivateChat(S_PRIVATE_CHAT x)
         {
-            var i = ChatWindowViewModel.Instance.PrivateChannels.FirstOrDefault(y => y.Id == x.Channel).Index;
-            var ch = (ChatChannel)(ChatWindowViewModel.Instance.PrivateChannels[i].Index + 11);
+            var i = ChatWindowManager.Instance.PrivateChannels.FirstOrDefault(y => y.Id == x.Channel).Index;
+            var ch = (ChatChannel)(ChatWindowManager.Instance.PrivateChannels[i].Index + 11);
 
-            ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ch, x.AuthorName, x.Message));
+            ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ch, x.AuthorName, x.Message));
         }
         public static void HandleCommandOutput(string msg)
         {
 
-            var ch = (ChatChannel)(ChatWindowViewModel.Instance.PrivateChannels[7].Index + 11);
+            var ch = (ChatChannel)(ChatWindowManager.Instance.PrivateChannels[7].Index + 11);
 
-            ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ch, "System", msg));
+            ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ch, "System", msg));
         }
 
         internal static void HandleFriendIntoArea(S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA x)
         {
-            var friend = ChatWindowViewModel.Instance.Friends.FirstOrDefault(f => f.PlayerId == x.PlayerId);
+            var friend = ChatWindowManager.Instance.Friends.FirstOrDefault(f => f.PlayerId == x.PlayerId);
             if (friend == null) return;
             const string opcode = "SMT_FRIEND_WALK_INTO_SAME_AREA";
             var areaName = x.SectionId.ToString();
@@ -442,7 +442,7 @@ namespace TCC.Parsing
 
         public static void HandleJoinPrivateChat(S_JOIN_PRIVATE_CHANNEL x)
         {
-            ChatWindowViewModel.Instance.PrivateChannels[x.Index] = new PrivateChatChannel(x.Id, x.Name, x.Index);
+            ChatWindowManager.Instance.PrivateChannels[x.Index] = new PrivateChatChannel(x.Id, x.Name, x.Index);
         }
 
         internal static void HandleGuildTowerInfo(S_GUILD_TOWER_INFO x)
@@ -452,8 +452,8 @@ namespace TCC.Parsing
 
         public static void HandleLeavePrivateChat(S_LEAVE_PRIVATE_CHANNEL x)
         {
-            var i = ChatWindowViewModel.Instance.PrivateChannels.FirstOrDefault(c => c.Id == x.Id).Index;
-            ChatWindowViewModel.Instance.PrivateChannels[i].Joined = false;
+            var i = ChatWindowManager.Instance.PrivateChannels.FirstOrDefault(c => c.Id == x.Id).Index;
+            ChatWindowManager.Instance.PrivateChannels[i].Joined = false;
         }
 
         internal static void HandleDungeonCooltimeList(S_DUNGEON_COOL_TIME_LIST x)
@@ -470,11 +470,11 @@ namespace TCC.Parsing
         {
             if (x.Author == SessionManager.CurrentPlayer.Name)
             {
-                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.SentWhisper, x.Recipient, x.Message));
+                ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.SentWhisper, x.Recipient, x.Message));
             }
             else
             {
-                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(ChatChannel.ReceivedWhisper, x.Author, x.Message));
+                ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.ReceivedWhisper, x.Author, x.Message));
             }
         }
 
@@ -538,12 +538,12 @@ namespace TCC.Parsing
 
         internal static void HandleBrokerOffer(S_TRADE_BROKER_DEAL_SUGGESTED x)
         {
-            ChatWindowViewModel.Instance.AddChatMessage(new BrokerChatMessage(x));
+            ChatWindowManager.Instance.AddChatMessage(new BrokerChatMessage(x));
         }
 
         internal static void HandleUserApplyToParty(S_OTHER_USER_APPLY_PARTY x)
         {
-            ChatWindowViewModel.Instance.AddChatMessage(new ApplyMessage(x));
+            ChatWindowManager.Instance.AddChatMessage(new ApplyMessage(x));
         }
 
         internal static void HandleFriendStatus(S_UPDATE_FRIEND_INFO x)
@@ -561,7 +561,7 @@ namespace TCC.Parsing
             if (x.Message.IndexOf("WTB", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
             if (x.Message.IndexOf("WTS", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
             if (x.Message.IndexOf("WTT", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
-            ChatWindowViewModel.Instance.AddOrRefreshLfg(x);
+            ChatWindowManager.Instance.AddOrRefreshLfg(x);
         }
 
         public static void HandleSystemMessage(S_SYSTEM_MESSAGE x)
@@ -591,40 +591,40 @@ namespace TCC.Parsing
                 if (SystemMessages.Messages.TryGetValue("SMT_ACHIEVEMENT_GRADE0_CLEAR_MESSAGE", out SystemMessage m))
                 {
                     var sysMsg = new ChatMessage("@0\vAchievementName\v@achievement:" + x.AchievementId, m, (ChatChannel)m.ChatChannel);
-                    ChatWindowViewModel.Instance.AddChatMessage(sysMsg);
+                    ChatWindowManager.Instance.AddChatMessage(sysMsg);
                 }
             }
         }
 
         public static void HandleBlockList(S_USER_BLOCK_LIST x)
         {
-            ChatWindowViewModel.Instance.BlockedUsers = x.BlockedUsers;
+            ChatWindowManager.Instance.BlockedUsers = x.BlockedUsers;
         }
 
         internal static void HandleFriendList(S_FRIEND_LIST x)
         {
-            ChatWindowViewModel.Instance.Friends = x.Friends;
+            ChatWindowManager.Instance.Friends = x.Friends;
         }
 
         internal static void HandleAnswerInteractive(S_ANSWER_INTERACTIVE x)
         {
             EntitiesManager.CurrentDatabase.TryGetMonster(x.Model, 0, out Monster m);
-            ChatWindowViewModel.Instance.TooltipInfo.Name = x.Name;
-            ChatWindowViewModel.Instance.TooltipInfo.Info = m.Name;
-            ChatWindowViewModel.Instance.TooltipInfo.Level = (int)x.Level;
-            ChatWindowViewModel.Instance.TooltipInfo.SetInfo(x.Model);
+            ChatWindowManager.Instance.TooltipInfo.Name = x.Name;
+            ChatWindowManager.Instance.TooltipInfo.Info = m.Name;
+            ChatWindowManager.Instance.TooltipInfo.Level = (int)x.Level;
+            ChatWindowManager.Instance.TooltipInfo.SetInfo(x.Model);
             if (x.Name == SessionManager.CurrentPlayer.Name)
             {
-                ChatWindowViewModel.Instance.TooltipInfo.ShowGuildInvite = false;
-                ChatWindowViewModel.Instance.TooltipInfo.ShowPartyInvite = false;
+                ChatWindowManager.Instance.TooltipInfo.ShowGuildInvite = false;
+                ChatWindowManager.Instance.TooltipInfo.ShowPartyInvite = false;
             }
             else
             {
-                ChatWindowViewModel.Instance.TooltipInfo.ShowGuildInvite = !x.HasGuild;
-                ChatWindowViewModel.Instance.TooltipInfo.ShowPartyInvite = !x.HasParty;
+                ChatWindowManager.Instance.TooltipInfo.ShowGuildInvite = !x.HasGuild;
+                ChatWindowManager.Instance.TooltipInfo.ShowPartyInvite = !x.HasParty;
             }
             if (!Proxy.IsConnected) return;
-            WindowManager.ChatWindow.OpenTooltip();
+            ChatWindowManager.Instance.OpenTooltip();
         }
 
         internal static void HandleCrestMessage(S_CREST_MESSAGE x)
@@ -643,7 +643,7 @@ namespace TCC.Parsing
                 if (SystemMessages.Messages.TryGetValue(opcodeName, out SystemMessage m))
                 {
                     var sysMsg = new ChatMessage(x.SysMessage, m, (ChatChannel)m.ChatChannel);
-                    ChatWindowViewModel.Instance.AddChatMessage(sysMsg);
+                    ChatWindowManager.Instance.AddChatMessage(sysMsg);
                 }
 
             }
@@ -871,7 +871,7 @@ namespace TCC.Parsing
         //for lfg, not used
         public static void HandlePartyMemberInfo(S_PARTY_MEMBER_INFO p)
         {
-            ChatWindowViewModel.Instance.UpdateLfgMembers(p);
+            ChatWindowManager.Instance.UpdateLfgMembers(p);
         }
 
         //public static void Debug(bool x)

@@ -19,7 +19,7 @@ namespace TCC
                 {
 
                     var msg = new ChatMessage(ChatChannel.WorldBoss, "System", $"<font>{monst.Name}</font><font size=\"15\" color=\"#cccccc\"> is nearby.</font>");
-                    ChatWindowViewModel.Instance.AddChatMessage(msg);
+                    ChatWindowManager.Instance.AddChatMessage(msg);
                 }
             }
             if (!Filter(zoneId, templateId)) return;

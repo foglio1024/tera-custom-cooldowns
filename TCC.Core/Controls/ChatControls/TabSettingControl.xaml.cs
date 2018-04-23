@@ -36,10 +36,11 @@ namespace TCC.Controls.ChatControls
 
         private void RemoveTab(object sender, RoutedEventArgs e)
         {
-            if (ChatWindowViewModel.Instance.Tabs.Count >= 1)
-            {
-                ChatWindowViewModel.Instance.Tabs.Remove(_dc);
-            }
+            ChatWindowManager.Instance.RemoveTab(_dc);
+            //if (ChatWindowManager.Instance.TabVMs.Count >= 1)
+            //{
+            //    ChatWindowManager.Instance.TabVMs.Remove(_dc);
+            //}
         }
 
         private void AddAuthor(object sender, RoutedEventArgs e)
