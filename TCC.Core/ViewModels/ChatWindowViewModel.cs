@@ -33,7 +33,7 @@ namespace TCC.ViewModels
         }
         internal void CloseTooltip()
         {
-            Console.WriteLine("NYI: Close tooltip");
+            ChatWindows[0].CloseTooltip();
         }
         internal void RemoveTab(Tab dc)
         {
@@ -48,7 +48,7 @@ namespace TCC.ViewModels
 
         public static ChatWindowManager Instance => _instance ?? (_instance = new ChatWindowManager());
 
-            internal void SetPaused(bool v, ChatMessage dc)
+        internal void SetPaused(bool v, ChatMessage dc)
         {
             ChatWindows.ToList().ForEach(w =>
             {
@@ -146,9 +146,13 @@ namespace TCC.ViewModels
 
         private void ChatWindows_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            ChatWindows.ToList().ForEach(x =>
-            {
-            });
+            //Console.WriteLine($"Chat windows list changed; count: {ChatWindows.Count}");
+
+
+            //ChatWindows.ToList().ForEach(x =>
+            //{
+            //    //Console.WriteLine($"\t - {x.VM.TabVMs.Count} tabs");
+            //});
         }
 
         public void RemoveDeadLfg()
@@ -386,7 +390,7 @@ namespace TCC.ViewModels
 
         internal void OpenTooltip()
         {
-            throw new NotImplementedException();
+            ChatWindows[0].OpenTooltip();
         }
 
         internal SynchronizedObservableCollection<HeaderedItemViewModel> FindContainer(HeaderedItemViewModel i)
@@ -459,6 +463,22 @@ namespace TCC.ViewModels
         }
         public Tab CurrentTab { get; set; }
         public double ChatWindowOpacity => SettingsManager.ChatWindowOpacity;
+        public Func<HeaderedItemViewModel> AddNewTabCommand
+        {
+            get
+            {
+                return
+                    () =>
+                    {
+                        return new HeaderedItemViewModel()
+                        {
+                            Header = "NEW TAB",
+                            Content = new Tab("NEW TAB", new ChatChannel[] { }, new ChatChannel[] { }, new string[] { }, new string[] { } )
+                        };
+                    };
+            }
+        }
+
 
         public void NotifyOpacityChange()
         {
