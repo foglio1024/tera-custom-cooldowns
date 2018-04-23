@@ -61,7 +61,7 @@ namespace TCC.ViewModels
             ClearEvents();
             if (region == null)
             {
-                ChatWindowViewModel.Instance.AddTccMessage("Unable to load events.");
+                ChatWindowManager.Instance.AddTccMessage("Unable to load events.");
                 return;
             }
             LoadEventFile(today, region);
@@ -231,7 +231,7 @@ namespace TCC.ViewModels
                 if (ch.Id == c.Id) ch.IsSelected = true;
                 else ch.IsSelected = false;
             }
-            NotifyPropertyChanged(nameof(SelectedCharacter));
+            NPC(nameof(SelectedCharacter));
 
             //AllDungeons = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
             //SoloDungs = new CollectionViewSource { Source = SelectedCharacter.Dungeons }.View;
@@ -266,7 +266,7 @@ namespace TCC.ViewModels
             if (!_dispatcher.Thread.IsAlive) return;
             LoadEvents(DateTime.Now.DayOfWeek, TimeManager.Instance.CurrentRegion);
             WindowManager.InfoWindow.ShowWindow();
-            NotifyPropertyChanged(nameof(SelectedCharacterExists));
+            NPC(nameof(SelectedCharacterExists));
             //SelectCharacter(SelectedCharacter);
         }
 
@@ -295,7 +295,7 @@ namespace TCC.ViewModels
                 {
                     ch.IsLoggedIn = true;
                     DiscardFirstVanguardPacket = true;
-                    NotifyPropertyChanged(nameof(CurrentCharacter));
+                    NPC(nameof(CurrentCharacter));
                     SelectCharacter(CurrentCharacter);
                 }
                 else ch.IsLoggedIn = false;
