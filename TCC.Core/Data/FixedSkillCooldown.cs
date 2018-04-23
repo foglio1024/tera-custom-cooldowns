@@ -27,7 +27,7 @@ namespace TCC.Data
             {
                 if (isAvailable == value) return;
                 isAvailable = value;
-                NotifyPropertyChanged("IsAvailable");
+                NPC("IsAvailable");
             }
         }
 
@@ -44,7 +44,7 @@ namespace TCC.Data
             {
                 if (seconds == value) return;
                 seconds = value;
-                NotifyPropertyChanged("Seconds");
+                NPC("Seconds");
             }
         }
 
@@ -55,8 +55,8 @@ namespace TCC.Data
             {
                 if (_flashOnAvailable == value) return;
                 _flashOnAvailable = value;
-                NotifyPropertyChanged(nameof(FlashOnAvailable));
-                NotifyPropertyChanged(nameof(IsAvailable));
+                NPC(nameof(FlashOnAvailable));
+                NPC(nameof(IsAvailable));
             }
         }
         public override string ToString()
@@ -139,7 +139,7 @@ namespace TCC.Data
                 Seconds = 0;
                 IsAvailable = false;
             }
-            NotifyPropertyChanged("Start");
+            NPC("Start");
 
         }
         public void Refresh(uint cd)
@@ -150,7 +150,7 @@ namespace TCC.Data
                 IsAvailable = true;
                 Cooldown = 0;
                 Seconds = 0;
-                NotifyPropertyChanged("Refresh");
+                NPC("Refresh");
                 return;
             }
             Cooldown = cd;
@@ -163,7 +163,7 @@ namespace TCC.Data
             }
             _offsetTimer.Interval = TimeSpan.FromMilliseconds(Cooldown % 1000);
             _offsetTimer.Start();
-            NotifyPropertyChanged("Refresh");
+            NPC("Refresh");
         }
         public void ForceAvailable(bool available)
         {

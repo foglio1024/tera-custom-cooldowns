@@ -33,14 +33,14 @@ namespace TCC
 
         private void _timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            NotifyPropertyChanged("Ending");
+            NPC("Ending");
             _timer?.Stop();
         }
 
         public void Refresh(ulong cd)
         {
             Cooldown = cd;
-            NotifyPropertyChanged("Refresh");
+            NPC("Refresh");
             if (_timer == null) return;
             _timer.Stop();
             _timer.Interval = Cooldown > 0 ? Cooldown : 1;

@@ -393,8 +393,8 @@ namespace TCC
 
         public void Refresh()
         {
-            NotifyPropertyChanged(nameof(Factor));
-            NotifyPropertyChanged(nameof(StartFactor));
+            NPC(nameof(Factor));
+            NPC(nameof(StartFactor));
         }
     }
 }

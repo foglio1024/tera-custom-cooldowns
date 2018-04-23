@@ -27,7 +27,7 @@ namespace TCC
             {
                 if (value == _duration) return;
                 _duration = value;
-                NotifyPropertyChanged("Duration");
+                NPC("Duration");
             }
         }
         private int _stacks;
@@ -38,7 +38,7 @@ namespace TCC
             {
                 if (value == _stacks) return;
                 _stacks = value;
-                NotifyPropertyChanged("Stacks");
+                NPC("Stacks");
             }
         }
         private readonly System.Timers.Timer timer;
@@ -50,7 +50,7 @@ namespace TCC
             {
                 if (value == _durationLeft) return;
                 _durationLeft = value;
-                NotifyPropertyChanged("DurationLeft");
+                NPC("DurationLeft");
             }
         }
 
@@ -109,7 +109,7 @@ namespace TCC
             if(timer == null || _isTimerDisposed) return;
             timer?.Stop();
             if (Duration != 0) timer?.Start();
-            NotifyPropertyChanged("Refresh");
+            NPC("Refresh");
         }
 
         public void Dispose()

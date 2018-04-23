@@ -102,7 +102,7 @@ namespace TCC.Data
                 if (_size == value) return;
                 _size = value;
                 _customSize = value != SettingsManager.FontSize;
-                NotifyPropertyChanged(nameof(Size));
+                NPC(nameof(Size));
             }
         }
 
@@ -161,7 +161,7 @@ namespace TCC.Data
         }
         public MessagePiece(string text)
         {
-            _dispatcher = WindowManager.ChatWindow.Dispatcher;
+            _dispatcher = ChatWindowManager.Instance.GetDispatcher();
             WindowManager.Settings.Dispatcher.Invoke(() => ((SettingsWindowViewModel)WindowManager.Settings.DataContext).PropertyChanged += MessagePiece_PropertyChanged);
 
             Text = text;
@@ -174,7 +174,7 @@ namespace TCC.Data
         {
             if (e.PropertyName == "FontSize")
             {
-                NotifyPropertyChanged(nameof(Size));
+                NPC(nameof(Size));
             }
         }
 

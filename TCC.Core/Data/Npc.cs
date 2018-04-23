@@ -20,7 +20,7 @@ namespace TCC.Data
                 if (name != value)
                 {
                     name = value;
-                    NotifyPropertyChanged(nameof(Name));
+                    NPC(nameof(Name));
                 }
             }
         }
@@ -34,7 +34,7 @@ namespace TCC.Data
             {
                 if (_buffs == value) return;
                 _buffs = value;
-                NotifyPropertyChanged("Buffs");
+                NPC("Buffs");
             }
         }
 
@@ -46,7 +46,7 @@ namespace TCC.Data
             {
                 if (enraged == value) return;
                 enraged = value;
-                NotifyPropertyChanged(nameof(Enraged));
+                NPC(nameof(Enraged));
             }
         }
 
@@ -59,7 +59,7 @@ namespace TCC.Data
                 if (_maxHP != value)
                 {
                     _maxHP = value;
-                    NotifyPropertyChanged("MaxHP");
+                    NPC("MaxHP");
                 }
             }
         }
@@ -72,9 +72,9 @@ namespace TCC.Data
                 if (_currentHP != value)
                 {
                     _currentHP = value;
-                    NotifyPropertyChanged(nameof(CurrentHP));
-                    NotifyPropertyChanged(nameof(CurrentPercentage));
-                    NotifyPropertyChanged(nameof(CurrentFactor));
+                    NPC(nameof(CurrentHP));
+                    NPC(nameof(CurrentPercentage));
+                    NPC(nameof(CurrentFactor));
                 }
             }
         }
@@ -87,8 +87,8 @@ namespace TCC.Data
                 if (maxShield != value)
                 {
                     maxShield = value;
-                    NotifyPropertyChanged(nameof(MaxShield));
-                    NotifyPropertyChanged(nameof(ShieldFactor));
+                    NPC(nameof(MaxShield));
+                    NPC(nameof(ShieldFactor));
                 }
             }
         }
@@ -100,8 +100,8 @@ namespace TCC.Data
             {
                 if (currentShield == value) return;
                 currentShield = value;
-                NotifyPropertyChanged(nameof(CurrentShield));
-                NotifyPropertyChanged(nameof(ShieldFactor));
+                NPC(nameof(CurrentShield));
+                NPC(nameof(ShieldFactor));
             }
         }
 
@@ -118,7 +118,7 @@ namespace TCC.Data
                 if (visible != value)
                 {
                     visible = value;
-                    NotifyPropertyChanged("Visible");
+                    NPC("Visible");
                 }
             }
         }
@@ -132,7 +132,7 @@ namespace TCC.Data
                 if (target != value)
                 {
                     target = value;
-                    NotifyPropertyChanged("Target");
+                    NPC("Target");
                 }
             }
         }
@@ -146,7 +146,7 @@ namespace TCC.Data
                 if (currentAggroType != value)
                 {
                     currentAggroType = value;
-                    NotifyPropertyChanged("CurrentAggroType");
+                    NPC("CurrentAggroType");
                 }
             }
         }
@@ -279,7 +279,7 @@ namespace TCC.Data
             {
                 if (_shield == value) return;
                 _shield = value;
-                NotifyPropertyChanged(nameof(Shield));
+                NPC(nameof(Shield));
             }
         }
 
@@ -291,7 +291,7 @@ namespace TCC.Data
             {
                 if (isSelected == value) return;
                 isSelected = value;
-                NotifyPropertyChanged(nameof(IsSelected));
+                NPC(nameof(IsSelected));
             }
         }
         private void ShieldFailed(object sender, EventArgs e)

@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using System.Runtime.CompilerServices;
 using TCC.Data;
 
 namespace TCC
@@ -285,7 +286,7 @@ namespace TCC
             _dispatcher = newDispatcher;
         }
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void NotifyPropertyChanged(string v)
+        protected void NPC([CallerMemberName] string v = null)
         {
             _dispatcher.InvokeIfRequired(() =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(v)), DispatcherPriority.DataBind);

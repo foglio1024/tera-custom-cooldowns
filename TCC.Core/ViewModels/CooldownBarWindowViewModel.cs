@@ -466,7 +466,7 @@ namespace TCC.ViewModels
 
         public void NotifyModeChanged()
         {
-            NotifyPropertyChanged(nameof(Mode));
+            NPC(nameof(Mode));
         }
         //public bool IsClassWindowOn
         //{
@@ -487,7 +487,7 @@ namespace TCC.ViewModels
             //ChoiceList = new SynchronizedObservableCollection<FixedSkillCooldown>(_dispatcher);
             WindowManager.TccVisibilityChanged += (s, ev) =>
             {
-                NotifyPropertyChanged("IsTeraOnTop");
+                NPC("IsTeraOnTop");
                 if (IsTeraOnTop)
                 {
                     WindowManager.CooldownWindow.RefreshTopmost();
@@ -499,7 +499,7 @@ namespace TCC.ViewModels
 
         public void NotifyItemsDisplay()
         {
-            NotifyPropertyChanged(nameof(ShowItems));
+            NPC(nameof(ShowItems));
         }
     }
 }

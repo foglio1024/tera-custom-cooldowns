@@ -15,7 +15,7 @@ namespace TCC.Data
             {
                 if (_entries == value) return;
                 _entries = value;
-                NotifyPropertyChanged(nameof(Entries));
+                NPC(nameof(Entries));
             }
         }
         public int Clears
@@ -25,7 +25,7 @@ namespace TCC.Data
             {
                 if (_total == value) return;
                 _total = value;
-                NotifyPropertyChanged(nameof(Clears));
+                NPC(nameof(Clears));
             }
         }
 

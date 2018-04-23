@@ -16,7 +16,7 @@ namespace TCC.ViewModels
             {
                 if(_scale == value)return;
                 _scale = value;
-                NotifyPropertyChanged(nameof(Scale));
+                NPC(nameof(Scale));
             }
         }
     }

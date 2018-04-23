@@ -38,7 +38,7 @@ namespace TCC.ViewModels
             {
                 if (_raid == value) return;
                 _raid = value;
-                NotifyPropertyChanged(nameof(Raid));
+                NPC(nameof(Raid));
             }
         }
         public int Size => Members.Count;
@@ -54,7 +54,7 @@ namespace TCC.ViewModels
 
             WindowManager.TccVisibilityChanged += (s, ev) =>
             {
-                NotifyPropertyChanged("IsTeraOnTop");
+                NPC("IsTeraOnTop");
                 if (IsTeraOnTop)
                 {
                     WindowManager.GroupWindow.RefreshTopmost();
@@ -72,10 +72,10 @@ namespace TCC.ViewModels
 
         private void Members_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            Task.Delay(100).ContinueWith(t => NotifyPropertyChanged(nameof(Size)));
-            NotifyPropertyChanged(nameof(Formed));
-            NotifyPropertyChanged(nameof(AliveCount));
-            NotifyPropertyChanged(nameof(ReadyCount));
+            Task.Delay(100).ContinueWith(t => NPC(nameof(Size)));
+            NPC(nameof(Formed));
+            NPC(nameof(AliveCount));
+            NPC(nameof(ReadyCount));
 
         }
         public void NotifySettingUpdated()
@@ -366,7 +366,7 @@ namespace TCC.ViewModels
             var user = Members.ToSyncArray().FirstOrDefault(u => u.PlayerId == p.PlayerId && u.ServerId == p.ServerId);
             if (user != null) user.Ready = p.Status;
             _firstCheck = false;
-            NotifyPropertyChanged(nameof(ReadyCount));
+            NPC(nameof(ReadyCount));
         }
         public void EndReadyCheck()
         {
@@ -411,13 +411,13 @@ namespace TCC.ViewModels
                 u.MaxMp = p.MaxMP;
                 u.Level = (uint)p.Level;
                 u.Alive = p.Alive;
-                NotifyPropertyChanged(nameof(AliveCount));
+                NPC(nameof(AliveCount));
                 if (!p.Alive) u.HasAggro = false;
             }
         }
         public void NotifyThresholdChanged()
         {
-            NotifyPropertyChanged(nameof(Size));
+            NPC(nameof(Size));
         }
         public void UpdateMemberGear(S_SPAWN_USER sSpawnUser)
         {

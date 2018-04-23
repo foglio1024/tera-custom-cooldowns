@@ -28,7 +28,7 @@ namespace TCC.ViewModels
 
         public void NotifyDirectionChanged()
         {
-            NotifyPropertyChanged(nameof(Direction));
+            NPC(nameof(Direction));
         }
         private Player _player;
         public Player Player

@@ -31,7 +31,7 @@ namespace TCC
             {
                 if (_name == value) return;
                 _name = value;
-                NotifyPropertyChanged(nameof(Name));
+                NPC(nameof(Name));
             }
         }
         public Class Class
@@ -40,7 +40,7 @@ namespace TCC
             {
                 if (_class == value) return;
                 _class = value;
-                NotifyPropertyChanged(nameof(Class));
+                NPC(nameof(Class));
             }
         }
         public Laurel Laurel
@@ -49,7 +49,7 @@ namespace TCC
             {
                 if (_laurel == value) return;
                 _laurel = value;
-                NotifyPropertyChanged(nameof(Laurel));
+                NPC(nameof(Laurel));
             }
         }
         public int DailiesDone
@@ -59,8 +59,8 @@ namespace TCC
             {
                 if (_dailiesDone == value) return;
                 _dailiesDone = value;
-                NotifyPropertyChanged(nameof(DailiesDone));
-                NotifyPropertyChanged(nameof(VanguardDailyCompletion));
+                NPC(nameof(DailiesDone));
+                NPC(nameof(VanguardDailyCompletion));
             }
         }
 
@@ -92,8 +92,8 @@ namespace TCC
             {
                 if (_weekliesDone == value) return;
                 _weekliesDone = value;
-                NotifyPropertyChanged(nameof(WeekliesDone));
-                NotifyPropertyChanged(nameof(VanguardWeeklyCompletion));
+                NPC(nameof(WeekliesDone));
+                NPC(nameof(VanguardWeeklyCompletion));
 
             }
         }
@@ -104,8 +104,8 @@ namespace TCC
             {
                 if (_credits == value) return;
                 _credits = value;
-                NotifyPropertyChanged(nameof(Credits));
-                NotifyPropertyChanged(nameof(CreditsFactor));
+                NPC(nameof(Credits));
+                NPC(nameof(CreditsFactor));
             }
         }
         public double CreditsFactor => Credits / 9000.0d;
@@ -116,7 +116,7 @@ namespace TCC
             {
                 if (_isLoggedIn == value) return;
                 _isLoggedIn = value;
-                NotifyPropertyChanged(nameof(IsLoggedIn));
+                NPC(nameof(IsLoggedIn));
             }
         }
         public bool IsSelected
@@ -125,7 +125,7 @@ namespace TCC
             {
                 if (_isSelected == value) return;
                 _isSelected = value;
-                NotifyPropertyChanged(nameof(IsSelected));
+                NPC(nameof(IsSelected));
             }
         }
         public double VanguardWeeklyCompletion => (double)WeekliesDone / (double)SessionManager.MAX_WEEKLY;
@@ -151,8 +151,8 @@ namespace TCC
             {
                 if (_guardianPoints == value) return;
                 _guardianPoints = value;
-                NotifyPropertyChanged(nameof(GuardianPoints));
-                NotifyPropertyChanged(nameof(GuardianCompletion));
+                NPC(nameof(GuardianPoints));
+                NPC(nameof(GuardianCompletion));
             }
         }
         public uint MaxGuardianPoints
@@ -161,8 +161,8 @@ namespace TCC
             {
                 if (_maxGuardianPoints == value) return;
                 _maxGuardianPoints = value;
-                NotifyPropertyChanged(nameof(MaxGuardianPoints));
-                NotifyPropertyChanged(nameof(GuardianCompletion));
+                NPC(nameof(MaxGuardianPoints));
+                NPC(nameof(GuardianCompletion));
             }
         }
 
@@ -172,7 +172,7 @@ namespace TCC
             {
                 if (_elleonMarks == value) return;
                 _elleonMarks = value;
-                NotifyPropertyChanged(nameof(ElleonMarks));
+                NPC(nameof(ElleonMarks));
             }
         }
 

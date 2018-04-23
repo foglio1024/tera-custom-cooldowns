@@ -24,7 +24,7 @@ namespace TCC.ViewModels
             SessionManager.CurrentPlayer.PropertyChanged += CurrentPlayer_PropertyChanged;
             WindowManager.TccVisibilityChanged += (s, ev) =>
             {
-                NotifyPropertyChanged("IsTeraOnTop");
+                NPC("IsTeraOnTop");
                 if (IsTeraOnTop)
                 {
                     WindowManager.CharacterWindow.RefreshTopmost();
@@ -34,7 +34,7 @@ namespace TCC.ViewModels
 
         private void CurrentPlayer_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            NotifyPropertyChanged(e.PropertyName);
+            NPC(e.PropertyName);
         }
     }
 

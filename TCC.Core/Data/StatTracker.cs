@@ -13,10 +13,10 @@ namespace TCC.ViewModels
                 if (val == value) return;
                 val = value;
 
-                NotifyPropertyChanged("Val");
-                NotifyPropertyChanged("Factor");
+                NPC("Val");
+                NPC("Factor");
                 Maxed = Val == Max;
-                NotifyPropertyChanged(nameof(Maxed));
+                NPC(nameof(Maxed));
             }
         }
         public bool Maxed { get; set; }
@@ -29,8 +29,8 @@ namespace TCC.ViewModels
                 if (max == value) return;
                 max = value;
                 if (max == 0) max = 1;
-                NotifyPropertyChanged("Max");
-                NotifyPropertyChanged("Factor");
+                NPC("Max");
+                NPC("Factor");
             }
         }
 
@@ -44,7 +44,7 @@ namespace TCC.ViewModels
             {
                 if (status == value) return;
                 status = value;
-                NotifyPropertyChanged("Status");
+                NPC("Status");
             }
         }
 
