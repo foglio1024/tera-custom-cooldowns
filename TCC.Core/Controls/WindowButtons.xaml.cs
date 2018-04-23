@@ -45,6 +45,16 @@ namespace TCC.Controls
         public static readonly DependencyProperty AutoDimButtonVisiblityProperty = DependencyProperty.Register("AutoDimButtonVisiblity", typeof(Visibility), typeof(WindowButtons));
 
 
+
+        public Visibility HideButtonVisibility
+        {
+            get { return (Visibility)GetValue(HideButtonVisibilityProperty); }
+            set { SetValue(HideButtonVisibilityProperty, value); }
+        }
+        public static readonly DependencyProperty HideButtonVisibilityProperty = DependencyProperty.Register("HideButtonVisibility", typeof(Visibility), typeof(WindowButtons));
+
+
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void Hide(object sender, RoutedEventArgs e)
@@ -73,7 +83,7 @@ namespace TCC.Controls
         {
             if (DataContext == null) {Console.WriteLine($"Data context is null"); return; }
             var t = DataContext.GetType().Name;
-            Console.WriteLine($"Data context is {t}");
+            //Console.WriteLine($"Data context is {t}");
         }
 
         private void AutoDim(object sender, RoutedEventArgs e)

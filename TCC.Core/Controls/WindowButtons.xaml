@@ -19,6 +19,7 @@
                 CornerRadius="10" Grid.ColumnSpan="20"
                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
         <Button Style="{StaticResource ButtonContentOpacityStyle}" Margin="10 5 5 5" 
+                Visibility="{Binding HideButtonVisibility, RelativeSource={RelativeSource AncestorType=c:WindowButtons}}"
                 VerticalContentAlignment="Center" Click="Hide" Height="22" Width="22" Grid.Column="0" ToolTip="Hide">
             <Path Fill="White" Data="{StaticResource SVG.Hide}" Stretch="Uniform" Margin="2"/>
         </Button>
