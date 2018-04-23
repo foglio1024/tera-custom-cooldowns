@@ -43,12 +43,22 @@ namespace TCC.Windows
             var newOrder = tabControl.GetOrderedHeaders();
             var old = new HeaderedItemViewModel[VM.TabVMs.Count];
             VM.TabVMs.CopyTo(old,0);
+            var same = true;
+            for (int i = 0; i < newOrder.Count(); i++)
+            {
+                if (old[i].Header != newOrder.ToList()[i].Content)
+                {
+                    same = false;
+                    break;
+                }
+            }
+            if (same) return;
             VM.TabVMs.Clear();
             foreach (var tab in newOrder)
             {
                 VM.TabVMs.Add(old.FirstOrDefault(x => x.Header == tab.Content));
             }
-            Console.WriteLine("drag completed");
+            //Console.WriteLine("drag completed");
         }
 
         public object CurrentSender { get; internal set; }
