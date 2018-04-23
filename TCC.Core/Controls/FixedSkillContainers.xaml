@@ -175,7 +175,7 @@
               VerticalAlignment="Center" UseLayoutRounding="False" Opacity=".9" 
               x:Name="SecSkillsGrid"
               MouseLeave="SecSkillsGrid_MouseLeave"
-              MouseEnter="SecondarySkillsGridMouseEnter" 
+              
               >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -192,7 +192,7 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>-->
-            <dragablz:DragablzItemsControl Name="secSkills" ItemsSource="{Binding SecondarySkills}" Grid.Column="0"
+            <dragablz:DragablzItemsControl Name="secSkills" ItemsSource="{Binding SecondarySkills}" Grid.Column="0" MouseEnter="SecondarySkillsGridMouseEnter" 
                           VerticalAlignment="Top" HorizontalAlignment="Left"  BorderThickness="0" BorderBrush="Red" Margin="0">
                 <dragablz:DragablzItemsControl.ItemContainerStyle>
                     <Style TargetType="dragablz:DragablzItem">
@@ -210,7 +210,7 @@
                     <dragablz:HorizontalPositionMonitor OrderChanged="SecondarySkillOrderChanged" />
                 </dragablz:DragablzItemsControl.PositionMonitor>
             </dragablz:DragablzItemsControl>
-            <Grid Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Right" Cursor="Hand" Opacity="0" x:Name="AddButtonGrid2" 
+            <Grid Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Right" Cursor="Hand" Opacity="0" x:Name="AddButtonGrid2" Margin="0 0 0 0"
                   MouseLeftButtonDown="AddButtonPressed" >
                 <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Stretch="Uniform" Width="20" Fill="#9fff"></Path>
                 <Ellipse Width="50" Margin="5 0 5 0" Height="50" Stroke="#3fff" Fill="#1fff" StrokeThickness="1"></Ellipse>
@@ -223,7 +223,7 @@
 
             <!--Other skills-->
             <ItemsControl Name="otherSkills" ItemTemplate="{StaticResource DefaultSkillIndicator}" Width="Auto"  VerticalAlignment="Stretch" 
-                          Grid.Column="2" HorizontalAlignment="Left" ItemsSource="{Binding OtherSkills}" BorderBrush="Green" BorderThickness="0">
+                          Grid.Column="2" HorizontalAlignment="Left" ItemsSource="{Binding OtherSkills}" BorderBrush="Green" BorderThickness="0" >
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Margin="0,0,0,0" IsItemsHost="True" Width="Auto" Height="Auto" Orientation="Horizontal" 

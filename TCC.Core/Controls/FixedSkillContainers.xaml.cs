@@ -39,8 +39,11 @@ namespace TCC.Controls
 
         private void MainSkills_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            mainSkills.InvalidateMeasure();
-            mainSkills.Dispatcher.Invoke(DispatcherPriority.Render, EmptyDelegate);
+            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
+            {
+                mainSkills.InvalidateMeasure();
+                mainSkills.Dispatcher.Invoke(DispatcherPriority.Render, EmptyDelegate);
+            }
         }
 
         private void SelectionPopup_Opened(object sender, EventArgs e)
@@ -50,8 +53,13 @@ namespace TCC.Controls
 
         private void SecondarySkills_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            secSkills.InvalidateMeasure();
-            secSkills.Dispatcher.Invoke(DispatcherPriority.Render, EmptyDelegate);
+            if(e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
+            {
+                secSkills.InvalidateMeasure();
+                secSkills.Dispatcher.Invoke(DispatcherPriority.Render, EmptyDelegate);
+            }
+            if ((sender as SynchronizedObservableCollection<FixedSkillCooldown>).Count == 0) otherSkills.Margin = new Thickness(-60,0,0,0);
+            else otherSkills.Margin = new Thickness(0);
         }
         private void MainButtonTimer_Tick(object sender, EventArgs e)
         {
@@ -111,6 +119,8 @@ namespace TCC.Controls
             }
             else if (CooldownWindowViewModel.Instance.SecondarySkills.Contains(e.DragablzItem.DataContext as FixedSkillCooldown))
             {
+                CooldownWindowViewModel.Instance.SecondarySkills.Clear();
+
                 foreach (var i in _secondaryOrder)
                 {
                     CooldownWindowViewModel.Instance.SecondarySkills.Add(i as FixedSkillCooldown);
