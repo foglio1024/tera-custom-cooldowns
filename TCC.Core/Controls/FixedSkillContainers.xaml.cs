@@ -22,6 +22,7 @@ namespace TCC.Controls
         private DispatcherTimer secButtonTimer;
         private static Action EmptyDelegate = delegate () { };
         private string lastSender = "";
+
         public FixedSkillContainers()
         {
             InitializeComponent();
@@ -45,12 +46,6 @@ namespace TCC.Controls
                 mainSkills.Dispatcher.Invoke(DispatcherPriority.Render, EmptyDelegate);
             }
         }
-
-        private void SelectionPopup_Opened(object sender, EventArgs e)
-        {
-            FocusManager.Running = false;
-        }
-
         private void SecondarySkills_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if(e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
@@ -61,6 +56,23 @@ namespace TCC.Controls
             if ((sender as SynchronizedObservableCollection<FixedSkillCooldown>).Count == 0) otherSkills.Margin = new Thickness(-60,0,0,0);
             else otherSkills.Margin = new Thickness(0);
         }
+
+        private void SelectionPopup_Opened(object sender, EventArgs e)
+        {
+            FocusManager.Running = false;
+        }
+        private void SelectionPopup_Closed(object sender, EventArgs e)
+        {
+            mainButtonTimer.Start();
+            secButtonTimer.Start();
+            ChoiceListBox.UnselectAll();
+            FocusManager.Running = true;
+        }
+        private void SelectionPopup_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            SelectionPopup.IsOpen = false;
+        }
+
         private void MainButtonTimer_Tick(object sender, EventArgs e)
         {
             mainButtonTimer.Stop();
@@ -80,6 +92,7 @@ namespace TCC.Controls
             }
 
         }
+
         private void AnimateAddButton(bool open, Grid targetspacer, Grid addButtonGrid)
         {
             if(open && (targetspacer.LayoutTransform as ScaleTransform).ScaleX == 1) return;
@@ -91,13 +104,7 @@ namespace TCC.Controls
             addButtonGrid.BeginAnimation(OpacityProperty,
                 new DoubleAnimation(to, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() });
         }
-        private void SelectionPopup_Closed(object sender, EventArgs e)
-        {
-            mainButtonTimer.Start();
-            secButtonTimer.Start();
-            ChoiceListBox.UnselectAll();
-            FocusManager.Running = true;
-        }
+
         private void ItemDragStarted(object sender, DragablzDragStartedEventArgs e)
         {
             var item = e.DragablzItem.DataContext;
@@ -129,6 +136,7 @@ namespace TCC.Controls
             CooldownWindowViewModel.Instance.Save();
             FocusManager.FocusTimer.Enabled = true;
         }
+
         private void MainSkillOrderChanged(object sender, OrderChangedEventArgs e)
         {
             _mainOrder = e.NewOrder;
@@ -137,9 +145,11 @@ namespace TCC.Controls
         {
             _secondaryOrder = e.NewOrder;
         }
+
         private void UserControl_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
         }
+
         private void AddButtonPressed(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             //CooldownWindowViewModel.Instance.MainSkills.Add(new FixedSkillCooldown(new Skill(181100, Class.Warrior, "", ""), CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher(), true));
@@ -147,6 +157,7 @@ namespace TCC.Controls
             ChoiceListBox.ItemsSource = CooldownWindowViewModel.Instance.ChoiceList;
             lastSender = (sender as Grid).Name;
         }
+
         private void MainSkillsGrid_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             AnimateAddButton(true, spacer, AddButtonGrid);
@@ -156,10 +167,17 @@ namespace TCC.Controls
         {
             mainButtonTimer.Start();
         }
-        private void SelectionPopup_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+
+        private void SecondarySkillsGridMouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            SelectionPopup.IsOpen = false;
+            AnimateAddButton(true, spacer2, AddButtonGrid2);
         }
+        private void SecSkillsGrid_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            secButtonTimer.Start();
+
+        }
+
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var s = sender as ListBox;
@@ -179,15 +197,6 @@ namespace TCC.Controls
             }
             SelectionPopup.IsOpen = false;
             CooldownWindowViewModel.Instance.Save();
-        }
-        private void SecondarySkillsGridMouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            AnimateAddButton(true, spacer2, AddButtonGrid2);
-        }
-        private void SecSkillsGrid_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            secButtonTimer.Start();
-
         }
     }
 }
