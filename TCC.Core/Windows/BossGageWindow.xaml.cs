@@ -41,7 +41,7 @@ namespace TCC.Windows
             InitializeComponent();
             _b = buttons;
             _c = content;
-            InitWindow(SettingsManager.CooldownWindowSettings, ignoreSize: true);
+            InitWindow(SettingsManager.BossWindowSettings, ignoreSize: true);
 
 
         }
