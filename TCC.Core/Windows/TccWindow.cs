@@ -54,7 +54,8 @@ namespace TCC.Windows
                 if (ws.W != 0) Width = ws.W;
             }
             _ignoreSize = ignoreSize;
-            Visibility = ws.Visible ? Visibility.Visible : Visibility.Hidden;
+            SetVisibility(ws.Visible);
+            //Visibility = ws.Visible ? Visibility.Visible : Visibility.Hidden;
             SetClickThru(ws.ClickThruMode == ClickThruMode.Always);
             if (_settings.AutoDim) AnimateContentOpacity(_settings.DimOpacity);
             if (!WindowManager.IsTccVisible) AnimateContentOpacity(0);
@@ -209,7 +210,8 @@ namespace TCC.Windows
             }
             Dispatcher.Invoke(() =>
             {
-                Visibility = v ? Visibility.Visible : Visibility.Hidden;
+                Visibility = !v ? Visibility.Visible : Visibility.Collapsed; // meh ok
+                Visibility = v ? Visibility.Visible : Visibility.Collapsed;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Visibility"));
             });
         }
