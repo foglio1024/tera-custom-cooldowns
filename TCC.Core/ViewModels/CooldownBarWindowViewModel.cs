@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Threading;
@@ -453,9 +454,9 @@ namespace TCC.ViewModels
             }
             catch (Exception)
             {
-                var res = MessageBox.Show($"There was an error while reading {filename}. Try correcting the error and press Retry to try again, else press Cancel to build a default config file.", "TCC", MessageBoxButtons.RetryCancel);
+                var res = TccMessageBox.Show("TCC", $"There was an error while reading {filename}. Manually correct the error and press Ok to try again, else press Cancel to build a default config file.", MessageBoxButton.OKCancel);
 
-                if (res == DialogResult.Cancel) File.Delete("resources/config/skills/" + filename);
+                if (res == MessageBoxResult.Cancel) File.Delete("resources/config/skills/" + filename);
                 LoadSkills(filename, c);
                 return;
             }

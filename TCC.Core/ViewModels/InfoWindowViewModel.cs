@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Data;
-using System.Windows.Forms;
 using System.Windows.Threading;
 using System.Xml.Linq;
 using TCC.Data;
 using TCC.Data.Databases;
 using TCC.Parsing;
 using TCC.Parsing.Messages;
+using TCC.Windows;
 
 namespace TCC.ViewModels
 {
@@ -209,9 +209,9 @@ namespace TCC.ViewModels
             catch (Exception)
             {
 
-                var res = System.Windows.Forms.MessageBox.Show($"There was an error while reading events-{region}.xml. Try correcting the error and press Retry to try again, else press Cancel to build a default config file.", "TCC", MessageBoxButtons.RetryCancel);
+                var res = TccMessageBox.Show("TCC", $"There was an error while reading events-{region}.xml. Manually correct the error and and press Ok to try again, else press Cancel to build a default config file.",  MessageBoxButton.OKCancel);
 
-                if (res == DialogResult.Cancel) File.Delete(path);
+                if (res == MessageBoxResult.Cancel) File.Delete(path);
                 LoadEventFile(today, region);
                 return;
             }
@@ -375,7 +375,7 @@ namespace TCC.ViewModels
             }
             catch (Exception)
             {
-                var res = System.Windows.MessageBox.Show("Could not write character data to characters.xml. File is being used by another process. Try again?", "TCC", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                var res = TccMessageBox.Show("TCC", "Could not write character data to characters.xml. File is being used by another process. Try again?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (res == MessageBoxResult.Yes) SaveCharDoc(doc);
             }
         }
@@ -388,8 +388,8 @@ namespace TCC.ViewModels
             }
             catch (Exception)
             {
-                var res = System.Windows.Forms.MessageBox.Show($"There was an error while reading characters.xml. Try correcting the error and press Retry to try again, else press Cancel to delete current data.", "TCC", MessageBoxButtons.RetryCancel);
-                if (res == DialogResult.Retry) LoadCharDoc();
+                var res = TccMessageBox.Show("TCC", $"There was an error while reading characters.xml. Manually correct the error and press Ok to try again, else press Cancel to delete current data.",  MessageBoxButton.OKCancel);
+                if (res == MessageBoxResult.OK) LoadCharDoc();
                 else
                 {
                     File.Delete("resources/config/characters.xml");

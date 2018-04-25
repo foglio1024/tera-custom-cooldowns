@@ -13,6 +13,7 @@ using TCC.Data;
 using TCC.Data.Databases;
 using TCC.Parsing.Messages;
 using TCC.ViewModels;
+using TCC.Windows;
 using Tera.Game;
 using S_GET_USER_GUILD_LOGO = Tera.Game.Messages.S_GET_USER_GUILD_LOGO;
 
@@ -56,6 +57,7 @@ namespace TCC.Parsing
             EntitiesManager.CurrentDatabase = new MonsterDatabase(Language);
             ItemsDatabase.Reload(Language);
             AbnormalityManager.CurrentDb = new AbnormalityDatabase(Language);
+            DungeonDatabase.Reload(Language);
             SocialDatabase.Load(Language);
             SkillsDatabase.Load(Language);
             SystemMessages.Load(Language);
@@ -79,7 +81,7 @@ namespace TCC.Parsing
                 {
                     {
                         BasicTeraData.LogError("Unknown client version: " + message.Versions[0]);
-                        System.Windows.MessageBox.Show("Unknown client version: " + message.Versions[0]);
+                        TccMessageBox.Show("Unknown client version: " + message.Versions[0], MessageBoxType.Error);
                         App.CloseApp();
                         return;
                     }
