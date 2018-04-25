@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls.ChatControls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
+             xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
              xmlns:tcc="clr-namespace:TCC"
              mc:Ignorable="d" Loaded="TabSettingControl_OnLoaded" d:DataContext="{d:DesignInstance viewModels:Tab }" Margin="0">
     <UserControl.Resources>
@@ -100,45 +101,44 @@
         </DataTemplate>
 
     </UserControl.Resources>
-    <Border Margin="4" Style="{StaticResource Styles.DefaultBorder}" UseLayoutRounding="True" 
-            ClipToBounds="False" CornerRadius="4" Background="#222227" BorderThickness="0">
+    <Border Margin="0" Style="{StaticResource Styles.DefaultBorder}" UseLayoutRounding="True" Effect="{x:Null}"
+            ClipToBounds="False" CornerRadius="4" Background="Transparent" BorderThickness="0">
         <StackPanel>
             <Border Background="#09ffffff" CornerRadius="4,4,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="1" Background="Transparent" Foreground="White" FontSize="14" CaretBrush="White"
-                       Text="{Binding TabName, Mode=TwoWay}" BorderThickness="0" Margin="5"/>
-                    <Button Grid.Column="0" VerticalAlignment="Stretch" FontSize="15" Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" 
+                    <TextBox Grid.Column="0" Background="Transparent" Foreground="White" FontSize="14" CaretBrush="White" ToolTip="Tab name"
+                       Text="{Binding TabName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" Margin="5"/>
+                    <Path Data="{StaticResource SVG.Pen}" HorizontalAlignment="Right" Grid.Column="1" Margin="10 5" Height="15" IsHitTestVisible="False" Opacity=".3"/>
+                    <!--<Button Grid.Column="0" VerticalAlignment="Stretch" FontSize="15" Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" 
                     HorizontalAlignment="Stretch" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="RemoveTab">
                         <Path Data="{StaticResource SVG.Close}" Stretch="Uniform" Fill="{StaticResource Colors.App.HP}"/>
-                    </Button>
+                    </Button>-->
                 </Grid>
 
             </Border>
             <Border Background="#1ccc" Margin="0,0,0,5">
-                <Grid >
+                <Grid ToolTip="Channels to display in this tab. All other channels will be excluded.">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="150" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-
-                    <TextBlock Style="{StaticResource Styles.DefaultText}" FontSize="13" Text="Channels" Padding="10,5"
+                    <TextBlock Style="{StaticResource Styles.DefaultText}" FontSize="13" Text="Displayed channels" Padding="10,5"
                                VerticalAlignment="Center" Foreground="#9fff" />
                     <ComboBox Name="NewChannelComboBox" Grid.Column="1" ItemsSource="{Binding AllChannels}"
-                              ItemTemplate="{StaticResource SimpleChatChannelTemplate}"
-                              VerticalContentAlignment="Center"
-                              Background="#1fff" BorderThickness="0" VerticalAlignment="Stretch">
+                              ItemTemplate="{StaticResource SimpleChatChannelTemplate}" 
+                              VerticalContentAlignment="Center" SelectionChanged="NewChannelComboBox_SelectionChanged"
+                              Background="#0fff" BorderThickness="0" VerticalAlignment="Stretch">
                         <ComboBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel RequestBringIntoView="OnRequestBringIntoView" />
                             </ItemsPanelTemplate>
                         </ComboBox.ItemsPanel>
                     </ComboBox>
-                    <Button Grid.Column="2" ToolTip="Add selected channel" FontSize="16"
+                    <!--<Button Grid.Column="2" ToolTip="Add selected channel" FontSize="16"
                             Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Stretch"
                             VerticalContentAlignment="Stretch"
                             HorizontalAlignment="Right"
@@ -147,7 +147,7 @@
                                    VerticalAlignment="Center">
                             +
                         </TextBlock>
-                    </Button>
+                    </Button>-->
 
                 </Grid>
             </Border>
@@ -160,19 +160,19 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
             <Border Background="#1ccc" CornerRadius="0,0,0,0" Margin="0,0,0,5">
-                <Grid >
+                <Grid ToolTip="Authors to display in this tab. All other authors will be excluded.">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="150" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource Styles.DefaultText}" FontSize="13" Text="Authors" Padding="10,5"
-                               VerticalAlignment="Center" Foreground="#9fff" />
-                    <TextBox Padding="0" Name="NewAuthorTextBox" VerticalAlignment="Stretch" Grid.Column="1"
-                             VerticalContentAlignment="Center" Background="#1fff" BorderThickness="0"
-                             Foreground="#3fff" Margin="0" CaretBrush="White" Text="New author...">
+                    <TextBlock Style="{StaticResource Styles.DefaultText}" FontSize="13" Text="Displayed authors" Padding="10,5"
+                               VerticalAlignment="Center" Foreground="#9fff"/>
+                    <TextBox Padding="0" Name="NewAuthorTextBox" VerticalAlignment="Stretch" Grid.Column="1" PreviewMouseLeftButtonDown="NewExAuthorTextBox_MouseLeftButtonDown"
+                             VerticalContentAlignment="Center" Background="#1fff" BorderThickness="0" LostFocus="NewAuthorTextBox_LostFocus"
+                             Foreground="#3fff" Margin="0" CaretBrush="White" Text="New author..." KeyDown="NewAuthorTextBox_KeyDown">
                     </TextBox>
-                    <Button Grid.Column="2" FontSize="16" Style="{StaticResource ButtonMainStyle}"
+                    <!--<Button Grid.Column="2" FontSize="16" Style="{StaticResource ButtonMainStyle}"
                             HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                             HorizontalAlignment="Right" VerticalAlignment="Stretch"
                             Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="AddAuthor">
@@ -180,7 +180,7 @@
                                    TextAlignment="Center" VerticalAlignment="Center">
                             +
                         </TextBlock>
-                    </Button>
+                    </Button>-->
 
                 </Grid>
             </Border>
@@ -200,11 +200,11 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Style="{StaticResource Styles.DefaultText}" FontSize="13" Text="Ex. Channels" Padding="10,5" ToolTip="Excluded channels"
+                    <TextBlock Style="{StaticResource Styles.DefaultText}" FontSize="13" Text="Hidden channels" Padding="10,5" ToolTip="Channels to hide from this tab"
                                VerticalAlignment="Center" Foreground="#9faa" />
                     <ComboBox Name="NewExChannelComboBox" Grid.Column="1" ItemsSource="{Binding AllChannels}"
                               ItemTemplate="{StaticResource SimpleChatChannelTemplate}"
-                              VerticalContentAlignment="Center"
+                              VerticalContentAlignment="Center" SelectionChanged="NewExChannelComboBox_SelectionChanged"
                               Background="#1fff" BorderThickness="0" VerticalAlignment="Stretch">
                         <ComboBox.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -212,7 +212,7 @@
                             </ItemsPanelTemplate>
                         </ComboBox.ItemsPanel>
                     </ComboBox>
-                    <Button Grid.Column="2" ToolTip="Add selected channel" FontSize="16"
+                    <!--<Button Grid.Column="2" ToolTip="Add selected channel" FontSize="16"
                             Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Stretch"
                             VerticalContentAlignment="Stretch"
                             HorizontalAlignment="Right"
@@ -221,7 +221,7 @@
                                    VerticalAlignment="Center">
                             +
                         </TextBlock>
-                    </Button>
+                    </Button>-->
 
                 </Grid>
             </Border>
@@ -240,13 +240,14 @@
                         <ColumnDefinition Width="150" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource Styles.DefaultText}" FontSize="13" Text="Ex. Authors" Padding="10,5" ToolTip="Excluded authors"
+                    <TextBlock Style="{StaticResource Styles.DefaultText}" FontSize="13" Text="Hidden authors" Padding="10,5" ToolTip="Authors to hide from this tab"
                                VerticalAlignment="Center" Foreground="#9faa" />
                     <TextBox Padding="0" Name="NewExAuthorTextBox" VerticalAlignment="Stretch" Grid.Column="1"
                              VerticalContentAlignment="Center" Background="#1fff" BorderThickness="0"
-                             Foreground="#3fff" Margin="0" CaretBrush="White" Text="New author...">
+                             Foreground="#3fff" Margin="0" CaretBrush="White" Text="New author..." PreviewMouseLeftButtonDown="NewExAuthorTextBox_MouseLeftButtonDown"
+                             KeyDown="NewExAuthorTextBox_KeyDown" LostFocus="NewAuthorTextBox_LostFocus">
                     </TextBox>
-                    <Button Grid.Column="2" FontSize="16" Style="{StaticResource ButtonMainStyle}"
+                    <!--<Button Grid.Column="2" FontSize="16" Style="{StaticResource ButtonMainStyle}"
                             HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                             HorizontalAlignment="Right" VerticalAlignment="Stretch"
                             Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="AddExAuthor">
@@ -254,7 +255,7 @@
                                    TextAlignment="Center" VerticalAlignment="Center">
                             +
                         </TextBlock>
-                    </Button>
+                    </Button>-->
 
                 </Grid>
             </Border>
