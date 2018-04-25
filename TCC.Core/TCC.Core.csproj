@@ -787,6 +787,9 @@
     </Compile>
     <Compile Include="Converters\ChatChannelNameConverter.cs" />
     <Compile Include="Converters\ChatChannelToColorConverter.cs" />
+    <Compile Include="Windows\ChatSettingsWindow.xaml.cs">
+      <DependentUpon>ChatSettingsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\ChatWindow.xaml.cs">
       <DependentUpon>ChatWindow.xaml</DependentUpon>
     </Compile>
@@ -799,6 +802,7 @@
     <Compile Include="Controls\ClassBars\WarriorBar.xaml.cs">
       <DependentUpon>WarriorBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\CodeFile1.cs" />
     <Compile Include="Windows\DebugWindow.xaml.cs">
       <DependentUpon>DebugWindow.xaml</DependentUpon>
     </Compile>
@@ -851,6 +855,9 @@
     <Compile Include="WindowManager.cs" />
     <Compile Include="SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\TccMessageBox.xaml.cs">
+      <DependentUpon>TccMessageBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\TccWindow.cs" />
     <Compile Include="Controls\ChatControls\MoneyMessagePiece.xaml.cs">
@@ -1135,6 +1142,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\ChatSettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\ChatWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1221,6 +1232,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\WindowButtons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TccMessageBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
