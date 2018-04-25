@@ -5,6 +5,7 @@ using System.Windows.Threading;
 using System.Xml.Linq;
 using TCC.Parsing;
 using TCC.ViewModels;
+using TCC.Windows;
 
 namespace TCC
 {
@@ -140,7 +141,7 @@ namespace TCC
                 if (enabled == value) return;
                 if (value == false)
                 {
-                    if (MessageBox.Show("Re-enabling this later will require TCC restart.\nDo you want to continue?", "TCC", MessageBoxButton.OKCancel, MessageBoxImage.Question) ==
+                    if (TccMessageBox.Show("TCC", "Re-enabling this later will require TCC restart.\nDo you want to continue?", MessageBoxButton.OKCancel, MessageBoxImage.Question) ==
                         MessageBoxResult.Cancel) return;
                     //SettingsManager.CooldownWindowSettings.Enabled = value;
                     //Visibility = Visibility.Hidden;
@@ -151,7 +152,7 @@ namespace TCC
                 }
                 else
                 {
-                    MessageBox.Show("TCC will now be restarted.", "TCC", MessageBoxButton.OK, MessageBoxImage.Information);
+                    TccMessageBox.Show("TCC", "TCC will now be restarted.", MessageBoxButton.OK, MessageBoxImage.Information);
                     //SettingsManager.CooldownWindowSettings.Enabled = value;
                     //Visibility = Visibility.Visible;
                     Visible = value;
@@ -203,19 +204,12 @@ namespace TCC
 
     public class ChatWindowSettings : WindowSettings
     {
-        private bool lfgOn;
+        private double bgOpacity;
+
+        public double BackgroundOpacity { get; set; } = .3;
 
         public List<Tab> Tabs { get; set; }
-        public bool LfgOn
-        {
-            get { return lfgOn; }
-            set
-            {
-                if (lfgOn == value) return;
-                lfgOn = value;
-                NPC();
-            }
-        }
+        public bool LfgOn { get; set; } = true;
 
         public ChatWindowSettings(double _x, double _y, double _h, double _w, bool _visible, ClickThruMode _ctm, double _scale, bool _autoDim, double _dimOpacity, bool _showAlways, bool _allowTransparency, bool _enabled) : base(_x, _y, _h, _w, _visible, _ctm, _scale, _autoDim, _dimOpacity, _showAlways, _allowTransparency, _enabled)
         {
@@ -225,7 +219,8 @@ namespace TCC
         {
             var b = base.ToXElement(name);
             b.Add(SettingsManager.BuildChatTabsXElement(Tabs));
-            b.Add(new XElement(nameof(LfgOn), LfgOn));
+            b.Add(new XAttribute(nameof(LfgOn), LfgOn));
+            b.Add(new XAttribute(nameof(BackgroundOpacity), BackgroundOpacity));
             return b;
         }
     }
