@@ -37,7 +37,10 @@ namespace TCC.ViewModels
         }
         internal void RemoveTab(Tab dc)
         {
-            throw new NotImplementedException();
+            ChatWindows.ToList().ForEach(x =>
+            {
+                if (x.VM.Tabs.Contains(dc)) x.VM.RemoveTab(dc);
+            });
         }
 
         public List<SimpleUser> Friends;
@@ -262,6 +265,8 @@ namespace TCC.ViewModels
                 w.DataContext = m;
                 ChatWindows.Add(w);
                 m.LoadTabs(s.Tabs);
+                m.LfgOn = s.LfgOn;
+                m.BackgroundOpacity = s.BackgroundOpacity;
                 w.Show();
             });
             if (ChatWindows.Count == 0)
@@ -415,9 +420,10 @@ namespace TCC.ViewModels
     public class ChatViewModel : INotifyPropertyChanged
     {
         private SynchronizedObservableCollection<HeaderedItemViewModel> _tabVMs;
-        private bool lfgOn;
         private bool canUpdate = true;
         private bool paused;
+        private bool _lfgOn;
+        private double _backgroundOpacity = 0.3;
 
         public bool Paused
         {
@@ -432,14 +438,6 @@ namespace TCC.ViewModels
         public bool IsTeraOnTop
         {
             get => WindowManager.IsTccVisible;
-        }
-        public bool LfgOn
-        {
-            get => lfgOn;
-            set
-            {
-                NPC();
-            }
         }
         public SynchronizedObservableCollection<HeaderedItemViewModel> TabVMs
         {
@@ -461,6 +459,7 @@ namespace TCC.ViewModels
                 return ret;
             }
         }
+        public SynchronizedObservableCollection<LFG> LFGs => ChatWindowManager.Instance.LFGs;
         public Tab CurrentTab { get; set; }
         public double ChatWindowOpacity => SettingsManager.ChatWindowOpacity;
         public Func<HeaderedItemViewModel> AddNewTabCommand
@@ -470,15 +469,34 @@ namespace TCC.ViewModels
                 return
                     () =>
                     {
-                        return new HeaderedItemViewModel()
+                        var t = new HeaderedItemViewModel()
                         {
-                            Header = "NEW TAB",
-                            Content = new Tab("NEW TAB", new ChatChannel[] { }, new ChatChannel[] { }, new string[] { }, new string[] { } )
+                            Content = new Tab("NEW TAB", new ChatChannel[] { }, new ChatChannel[] { }, new string[] { }, new string[] { })
                         };
+                        t.Header = (t.Content as Tab).TabName;
+                        return t;
                     };
             }
         }
 
+        public bool LfgOn
+        {
+            get => _lfgOn; set
+            {
+                if (_lfgOn == value) return;
+                _lfgOn = value;
+                NPC();
+            }
+        }
+        public double BackgroundOpacity
+        {
+            get => _backgroundOpacity; set
+            {
+                if (_backgroundOpacity == value) return;
+                _backgroundOpacity = value;
+                NPC();
+            }
+        } 
 
         public void NotifyOpacityChange()
         {
@@ -502,9 +520,9 @@ namespace TCC.ViewModels
         }
         private void TabVMs_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            if (!canUpdate) return;
-            var w = ChatWindowManager.Instance.FindMyWindow(this);
-            w.UpdateSettings();
+            //if (!canUpdate) return;
+            //var w = ChatWindowManager.Instance.FindMyWindow(this);
+            //w.UpdateSettings();
         }
 
         public void LoadTabs(IEnumerable<Tab> tabs = null)
@@ -520,17 +538,22 @@ namespace TCC.ViewModels
             }
             if (TabVMs.Count != 0) return;
             canUpdate = false;
-            TabVMs.Add(new HeaderedItemViewModel("ALL", new Tab("ALL", new ChatChannel[] { }, new ChatChannel[] { }, new string[] { }, new string[] { "System" })));
-            TabVMs.Add(new HeaderedItemViewModel("GUILD", new Tab("GUILD", new ChatChannel[] { ChatChannel.Guild, ChatChannel.GuildNotice, }, new ChatChannel[] { }, new string[] { }, new string[] { })));
-            TabVMs.Add(new HeaderedItemViewModel("GROUP", new Tab("GROUP", new ChatChannel[]{ChatChannel.Party, ChatChannel.PartyNotice,
+            var all = new Tab("ALL", new ChatChannel[] { }, new ChatChannel[] { }, new string[] { }, new string[] { "System" });
+            var guild = new Tab("GUILD", new ChatChannel[] { ChatChannel.Guild, ChatChannel.GuildNotice, }, new ChatChannel[] { }, new string[] { }, new string[] { });
+            var group = new Tab("GROUP", new ChatChannel[]{ChatChannel.Party, ChatChannel.PartyNotice,
                 ChatChannel.RaidLeader, ChatChannel.RaidNotice,
                 ChatChannel.Raid, ChatChannel.Ress,ChatChannel.Death,
-                ChatChannel.Group, ChatChannel.GroupAlerts  }, new ChatChannel[] { }, new string[] { }, new string[] { })));
-            TabVMs.Add(new HeaderedItemViewModel("WHISPERS", new Tab("WHISPERS", new ChatChannel[] { ChatChannel.ReceivedWhisper, ChatChannel.SentWhisper, }, new ChatChannel[] { }, new string[] { }, new string[] { })));
-            TabVMs.Add(new HeaderedItemViewModel("SYSTEM", new Tab("SYSTEM", new ChatChannel[] { }, new ChatChannel[] { }, new string[] { "System" }, new string[] { })));
+                ChatChannel.Group, ChatChannel.GroupAlerts  }, new ChatChannel[] { }, new string[] { }, new string[] { });
+            var w = new Tab("WHISPERS", new ChatChannel[] { ChatChannel.ReceivedWhisper, ChatChannel.SentWhisper, }, new ChatChannel[] { }, new string[] { }, new string[] { });
+            var sys = new Tab("SYSTEM", new ChatChannel[] { }, new ChatChannel[] { }, new string[] { "System" }, new string[] { });
+            TabVMs.Add(new HeaderedItemViewModel(all.TabName, all));
+            TabVMs.Add(new HeaderedItemViewModel(guild.TabName, guild));
+            TabVMs.Add(new HeaderedItemViewModel(group.TabName, group));
+            TabVMs.Add(new HeaderedItemViewModel(w.TabName, w));
+            TabVMs.Add(new HeaderedItemViewModel(sys.TabName, sys));
             canUpdate = true;
             CurrentTab = TabVMs[0].Content as Tab;
-            ChatWindowManager.Instance.FindMyWindow(this).UpdateSettings();
+            //ChatWindowManager.Instance.FindMyWindow(this).UpdateSettings();
 
         }
         public void CheckAttention(ChatMessage chatMessage)
@@ -559,6 +582,13 @@ namespace TCC.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
+
+        internal void RemoveTab(Tab dc)
+        {
+            var t = TabVMs.FirstOrDefault(x => x.Content == dc);
+            if (t != null) TabVMs.Remove(t);
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
     }
 
@@ -566,10 +596,9 @@ namespace TCC.ViewModels
     {
         public INewTabHost<Window> GetNewHost(IInterTabClient interTabClient, object partition, TabablzControl source)
         {
-            var view = new ChatWindow(new ChatWindowSettings(0, 0, 200, 500, true, ClickThruMode.Never,
-                1, false, 1, false, true, true));
             var model = new ChatViewModel();
-            view.DataContext = model;
+            var view = new ChatWindow(new ChatWindowSettings(0, 0, 200, 500, true, ClickThruMode.Never,
+                1, false, 1, false, true, true), model);
             ChatWindowManager.Instance.ChatWindows.Add(view);
             return new NewTabHost<Window>(view, view.tabControl);
 
