@@ -67,7 +67,9 @@ namespace TCC
             get => visible;
             set
             {
+                if (visible == value) return;
                 visible = value;
+                //Console.WriteLine($"Visible changed to {value}");
                 NPC(nameof(Visible));
             }
         }
