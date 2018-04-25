@@ -18,7 +18,8 @@
              Title="ChatWindow" 
              MinWidth="350" MinHeight="110"
              Loaded="TccWindow_Loaded" 
-             ResizeMode="CanResize">
+             ResizeMode="CanResize"
+             SizeToContent="Manual">
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0" ResizeBorderThickness="5,5,5,5" GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
