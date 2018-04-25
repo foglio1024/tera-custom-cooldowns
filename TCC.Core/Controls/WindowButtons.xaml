@@ -15,28 +15,33 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
+        <Grid.Resources>
+            <Style TargetType="Button" BasedOn="{StaticResource ButtonContentOpacityStyle}">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="Height" Value="20"/>
+                <Setter Property="Width" Value="20"/>
+                <Setter Property="Margin" Value="5 2"/>
+            </Style>
+        </Grid.Resources>
         <Border Style="{StaticResource Styles.DefaultBorder}" 
-                CornerRadius="10" Grid.ColumnSpan="20"
+                CornerRadius="2" Grid.ColumnSpan="20" Opacity=".4"
                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
-        <Button Style="{StaticResource ButtonContentOpacityStyle}" Margin="10 5 5 5" 
-                Visibility="{Binding HideButtonVisibility, RelativeSource={RelativeSource AncestorType=c:WindowButtons}}"
-                VerticalContentAlignment="Center" Click="Hide" Height="22" Width="22" Grid.Column="0" ToolTip="Hide">
+        <Button Visibility="{Binding HideButtonVisibility, RelativeSource={RelativeSource AncestorType=c:WindowButtons}}"
+                Click="Hide" ToolTip="Hide">
             <Path Fill="White" Data="{StaticResource SVG.Hide}" Stretch="Uniform" Margin="2"/>
         </Button>
-        <Button Style="{StaticResource ButtonContentOpacityStyle}" Margin="5 5 5 5" HorizontalContentAlignment="Center" 
-                VerticalContentAlignment="Center" Click="Pin" Height="22" Width="22" Grid.Column="1" ToolTip="Show always">
+        <Button Click="Pin" Grid.Column="1" ToolTip="Show always">
             <Path Fill="White" Data="{Binding ShowAlways, Converter={StaticResource Converters.BoolToSvgSwitchConverter}, ConverterParameter=SVG.Pin:SVG.Unpin}" 
                   Stretch="Uniform" HorizontalAlignment="Center" Margin="2"/>
         </Button>
-        <Button Style="{StaticResource ButtonContentOpacityStyle}" Margin="5 5 5 5" HorizontalContentAlignment="Center" 
-                Visibility="{Binding AutoDimButtonVisiblity, RelativeSource={RelativeSource AncestorType=c:WindowButtons}}"
-                VerticalContentAlignment="Center" Click="AutoDim" Height="22" Width="22" Grid.Column="2" ToolTip="Auto dim">
+        <Button Visibility="{Binding AutoDimButtonVisiblity, RelativeSource={RelativeSource AncestorType=c:WindowButtons}}"
+                Click="AutoDim" Grid.Column="2" ToolTip="Auto dim">
             <Path Fill="White" Data="{Binding AutoDim, Converter={StaticResource Converters.BoolToSvgSwitchConverter}, ConverterParameter=SVG.BlurOn:SVG.BlurOff}" 
-                  Stretch="Uniform" HorizontalAlignment="Center" Margin="2"/>
+                   HorizontalAlignment="Center" Margin="2"/>
         </Button>
-
-        <Button Style="{StaticResource ButtonContentOpacityStyle}" Margin="5 5 5 5" HorizontalContentAlignment="Center" 
-                VerticalContentAlignment="Center" Click="Close" Height="22" Width="22" Grid.Column="3" ToolTip="Close">
+        <Button Click="Close" Grid.Column="3" ToolTip="Close">
             <Path Fill="{StaticResource Colors.App.HP}" Data="{StaticResource SVG.Close}" Stretch="Uniform" HorizontalAlignment="Center" Margin="2"/>
         </Button>
 
