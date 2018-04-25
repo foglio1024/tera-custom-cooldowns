@@ -45,7 +45,7 @@ namespace TCC
             catch (Exception)
             {
             }
-            System.Windows.MessageBox.Show("An error occured and TCC will now close. Check error.txt for more info.", "TCC",
+            TccMessageBox.Show("TCC", "An error occured and TCC will now close. Check error.txt for more info.",
                 MessageBoxButton.OK, MessageBoxImage.Error);
 
             if (Proxy.IsConnected) Proxy.CloseConnection();
@@ -165,11 +165,11 @@ namespace TCC
                 PacketProcessor.Server = srv;
                 SkillManager.Clear();
                 WindowManager.TrayIcon.Icon = WindowManager.ConnectedIcon;
-                ChatWindowViewModel.Instance.AddTccMessage($"Connected to {srv.Name}.");
+                ChatWindowManager.Instance.AddTccMessage($"Connected to {srv.Name}.");
             };
             TeraSniffer.Instance.EndConnection += () =>
             {
-                ChatWindowViewModel.Instance.AddTccMessage("Disconnected from the server.");
+                ChatWindowManager.Instance.AddTccMessage("Disconnected from the server.");
                 GroupWindowViewModel.Instance.ClearAllAbnormalities();
                 BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
                 EntitiesManager.ClearNPC();
@@ -188,9 +188,10 @@ namespace TCC
 
             TimeManager.Instance.SetServerTimeZone(SettingsManager.LastRegion);
 
-            ChatWindowViewModel.Instance.AddTccMessage(Version);
-
+            ChatWindowManager.Instance.AddTccMessage(Version);
             SplashScreen.CloseWindowSafe();
+            UpdateManager.StartCheck();
+
             if (!Debug) return;
             SessionManager.CurrentPlayer = new Player(1, "Foglio");
             SessionManager.CurrentPlayer.Class = Class.Priest;
@@ -257,6 +258,7 @@ namespace TCC
             SettingsManager.SaveSettings();
             WindowManager.Dispose();
             Proxy.CloseConnection();
+            UpdateManager.StopTimer();
             Environment.Exit(0);
         }
 
