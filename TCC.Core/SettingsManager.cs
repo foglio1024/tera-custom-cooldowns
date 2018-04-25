@@ -9,6 +9,7 @@ using System.Windows;
 using System.Xml.Linq;
 using TCC.Data;
 using TCC.ViewModels;
+using TCC.Windows;
 
 namespace TCC
 {
@@ -127,7 +128,8 @@ namespace TCC
         {
             var ws = s.Descendants().FirstOrDefault(x => x.Name == "WindowSetting");
             var ts = s.Descendants().FirstOrDefault(x => x.Name == "Tabs");
-            var lfg = s.Descendants().FirstOrDefault(x => x.Name == nameof(ChatWindowSettings.LfgOn));
+            var lfg = ws.Attribute(nameof(ChatWindowSettings.LfgOn));
+            var op = ws.Attribute(nameof(ChatWindowSettings.BackgroundOpacity));
 
             var sett = ParseWindowSettings(ws);
             var tabs = ParseTabsSettings(ts);
@@ -139,7 +141,8 @@ namespace TCC
                                           sett.Enabled)
                                           {
                                               Tabs = tabs,
-                                              LfgOn = lfg != null? bool.Parse(lfg.Value) : true
+                                              LfgOn = lfg != null? bool.Parse(lfg.Value) : true,
+                                              BackgroundOpacity = op != null? double.Parse(op.Value, CultureInfo.InvariantCulture) : 0.3
                                           };
         }
 
@@ -444,7 +447,7 @@ namespace TCC
             }
             catch (Exception)
             {
-                var res = MessageBox.Show("Could not write settings data to tcc-config.xml. File is being used by another process. Try again?", "TCC", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                var res = TccMessageBox.Show("TCC", "Could not write settings data to tcc-config.xml. File is being used by another process. Try again?",  MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (res == MessageBoxResult.Yes) SaveSettingsDoc(doc);
             }
 
@@ -612,6 +615,7 @@ namespace TCC
             ChatWindowManager.Instance.ChatWindows.ToList().ForEach(cw =>
             {
                 if(cw.VM.Tabs.Count == 0) return;
+                cw.UpdateSettings();
                 result.Add(new XElement("ChatWindow", cw.WindowSettings.ToXElement("Settings")));
             });
             return result;
