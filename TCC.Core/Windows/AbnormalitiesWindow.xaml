@@ -7,15 +7,9 @@
         xmlns:controls="clr-namespace:TCC.Controls"
         xmlns:vm="clr-namespace:TCC.ViewModels"
         mc:Ignorable="d"
-        Title="AbnormalitiesWindow" Height="Auto" Width="Auto"
-        Topmost="True"
-        ShowInTaskbar="False"
-        WindowStyle="None"
-        Background="Transparent"
-        AllowsTransparency="True"
-        ResizeMode="NoResize"
-        SizeToContent="WidthAndHeight"
+        Title="AbnormalitiesWindow" 
         MouseLeftButtonDown="Drag"
+        Style="{StaticResource BaseWindowStyle}"
         >
     <w:TccWindow.DataContext>
         <vm:BuffBarWindowViewModel />

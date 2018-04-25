@@ -9,6 +9,7 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
              xmlns:data="clr-namespace:TCC.Data"
+             xmlns:w="clr-namespace:TCC.Windows"
              xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
              x:Class="TCC.App"
              Startup="OnStartup">
@@ -110,7 +111,17 @@
             <FontFamily x:Key="SourceSans">pack://application:,,,/resources/fonts/#Source Sans Pro SemiBold</FontFamily>
             <FontFamily x:Key="RobotoMonoMedium">pack://application:,,,/resources/fonts/#Roboto Mono Medium</FontFamily>
             <FontFamily x:Key="ArialMonoBold">pack://application:,,,/resources/fonts/#Arial Monospaced MT</FontFamily>
-
+            <Style TargetType="{x:Type w:TccWindow}" x:Key="BaseWindowStyle">
+                <Setter Property="Height" Value="Auto"/>
+                <Setter Property="Width" Value="Auto"/>
+                <Setter Property="ResizeMode" Value="NoResize"/>
+                <Setter Property="AllowsTransparency" Value="True"/>
+                <Setter Property="SizeToContent" Value="WidthAndHeight"/>
+                <Setter Property="ShowInTaskbar" Value="False"/>
+                <Setter Property="Topmost" Value="True"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="WindowStyle" Value="None"/>
+            </Style>
             <Style x:Key="Styles.DefaultBorder" TargetType="{x:Type Border}">
                 <Setter Property="Background" Value="{StaticResource Colors.App.DefaultBackground}"/>
                 <Setter Property="CornerRadius" Value="0"/>

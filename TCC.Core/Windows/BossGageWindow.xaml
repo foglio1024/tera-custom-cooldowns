@@ -9,15 +9,9 @@
         xmlns:vm="clr-namespace:TCC.ViewModels"
         xmlns:w="clr-namespace:TCC.Windows"
         mc:Ignorable="d"
-        Title="BossGageWindow" Height="Auto" Width="Auto"
-        SizeToContent="WidthAndHeight"
-        Topmost="True"
-        AllowsTransparency="True"
-        ShowInTaskbar="False"
-        WindowStyle="None"
-        Background="Transparent"
+        Title="BossGageWindow" 
+        Style="{StaticResource BaseWindowStyle}"
         MouseLeftButtonDown="Drag"
-        ResizeMode="NoResize" 
         MouseDoubleClick="TccWindow_MouseDoubleClick">
     <w:TccWindow.DataContext>
         <vm:BossGageWindowViewModel/>

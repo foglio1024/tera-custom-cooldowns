@@ -9,15 +9,7 @@
         xmlns:c="clr-namespace:TCC.Controls"
         mc:Ignorable="d"
         Title="Tera Custom Cooldowns"
-        Height="Auto" 
-        Width="Auto" 
-        SizeToContent="WidthAndHeight" 
-        Topmost="True" 
-        AllowsTransparency="True" 
-        ShowInTaskbar="False" 
-        WindowStyle="None" 
-        Background="Transparent" 
-        ResizeMode="NoResize">
+        Style="{StaticResource BaseWindowStyle}">
     <w:TccWindow.DataContext>
         <vm:CooldownWindowViewModel />
     </w:TccWindow.DataContext>

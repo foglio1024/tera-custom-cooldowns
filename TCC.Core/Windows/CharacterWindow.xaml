@@ -9,15 +9,8 @@
         xmlns:c="clr-namespace:TCC.Controls"
         mc:Ignorable="d"
         Title="HPbar" 
-        Height="Auto" Width="Auto"
-        Topmost="True" 
-        Background="Transparent" 
-        ShowInTaskbar="False" 
-        WindowStyle="None" 
-        AllowsTransparency="True" 
-        SizeToContent="WidthAndHeight" 
+        Style="{StaticResource BaseWindowStyle}"
         MouseLeftButtonDown="Drag"
-        ResizeMode="NoResize" 
         >
     <w:TccWindow.Resources>
         <Style x:Key="hpBarNumber" TargetType="TextBlock" BasedOn="{StaticResource Styles.DefaultText}">

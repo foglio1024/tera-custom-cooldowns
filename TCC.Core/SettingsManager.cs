@@ -512,7 +512,7 @@ namespace TCC
             catch (Exception) { }
             try
             {
-                allowTrans = Boolean.Parse(ws.Attribute("AllowTransparency").Value);
+                //allowTrans = Boolean.Parse(ws.Attribute("AllowTransparency").Value);
             }
             catch (Exception) { }
             try

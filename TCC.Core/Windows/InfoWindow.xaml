@@ -7,9 +7,12 @@
         xmlns:viewmodels="clr-namespace:TCC.ViewModels"
         xmlns:controls="clr-namespace:TCC.Controls"
         xmlns:themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" Loaded="Window_Loaded" 
-        mc:Ignorable="d" Width="Auto" Height="Auto" ResizeMode="NoResize" AllowsTransparency="True" WindowStyle="None"
-        Title="InfoWindow" SizeToContent="WidthAndHeight" Topmost="False" ShowInTaskbar="True" ShowActivated="True" 
-        BorderThickness="0" BorderBrush="#aaa" Background="Transparent">
+        mc:Ignorable="d" 
+        Title="InfoWindow" 
+        Width="Auto" Height="Auto" ResizeMode="NoResize" AllowsTransparency="True" WindowStyle="None"
+        SizeToContent="WidthAndHeight" Topmost="False" ShowInTaskbar="True" ShowActivated="True" 
+        Background="Transparent"
+        >
     <Window.DataContext>
         <viewmodels:InfoWindowViewModel/>
     </Window.DataContext>

@@ -4,10 +4,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCC.Windows"
-        xmlns:vm="clr-namespace:TCC.ViewModels" Loaded="Window_Loaded" SizeToContent="Height" ResizeMode="NoResize"
-        xmlns:chatcontrols="clr-namespace:TCC.Controls.ChatControls" Background="Transparent" Topmost="True"
-        mc:Ignorable="d" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen"
-        Title="Chat tab settings" Height="Auto" Width="300" d:DataContext="{d:DesignInstance {x:Type vm:Tab}}">
+        xmlns:chatcontrols="clr-namespace:TCC.Controls.ChatControls" 
+        xmlns:vm="clr-namespace:TCC.ViewModels" 
+        mc:Ignorable="d" 
+        Loaded="Window_Loaded" 
+        SizeToContent="Height" 
+        ResizeMode="NoResize"
+        Background="Transparent" 
+        Topmost="True"
+        AllowsTransparency="True" 
+        WindowStyle="None" 
+        WindowStartupLocation="CenterScreen"
+        Title="Chat tab settings" 
+        Height="Auto" 
+        Width="300" 
+        d:DataContext="{d:DesignInstance {x:Type vm:Tab}}">
     <Grid x:Name="ChatSettingsPopup"  VerticalAlignment="Stretch"
                    HorizontalAlignment="Stretch">
         <Grid.Resources>
