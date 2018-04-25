@@ -15,6 +15,7 @@ namespace TCC.Data.Databases
         //public Dictionary<uint, Dungeon> DungeonDefinitions;
         public DungeonDatabase(string lang)
         {
+            if (string.IsNullOrEmpty(lang)) lang = "EU-EN";
             var f = File.OpenText($"resources/data/dungeons/dungeons-{lang}.tsv");
             //DungeonNames = new Dictionary<uint, string>();
             Dungeons = new Dictionary<uint, Dungeon>();
@@ -27,7 +28,7 @@ namespace TCC.Data.Databases
                 var r = Convert.ToInt16(dg.Attribute("MaxBaseRuns").Value);
                 //var n = dg.Attribute("ShortName").Value;
                 var t = (DungeonTier)Enum.Parse(typeof(DungeonTier), dg.Attribute("Tier").Value);
-                defs.Add(id, new Tuple<short, DungeonTier>(r,t));
+                defs.Add(id, new Tuple<short, DungeonTier>(r, t));
             }
             while (true)
             {
@@ -48,11 +49,11 @@ namespace TCC.Data.Databases
                     //var dg = new Dungeon(id, name, t, 0, false);
                 }
             }
+        }
 
-            foreach (var item in Dungeons)
-            {
-                if (item.Key.ToString().EndsWith("69")) Console.WriteLine($"{item.Key} - {item.Value.Name}");
-            }
+        internal static void Reload(string language)
+        {
+            _instance = new DungeonDatabase(language);
         }
 
         public string GetDungeonNameOrOpenWorld(uint continentId)
