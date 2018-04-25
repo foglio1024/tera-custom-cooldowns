@@ -642,6 +642,12 @@
                         <ControlTemplate TargetType="{x:Type dragablz:DragablzItem}">
                             <Grid x:Name="templateRoot" SnapsToDevicePixels="true" Margin="0 1 0 -1">
                                 <Rectangle x:Name="hl" Fill="#1fff" Visibility="Collapsed"/>
+                                <Rectangle x:Name="sel" Fill="{StaticResource Colors.App.Green}" Visibility="Visible" Height="3"
+                                           VerticalAlignment="Top" RenderTransformOrigin=".5 .5">
+                                    <Rectangle.RenderTransform>
+                                        <ScaleTransform ScaleX="0"/>
+                                    </Rectangle.RenderTransform>
+                                </Rectangle>
                                 <Grid x:Name="Trapezoid" 
                                          Background="{TemplateBinding Background}"                                          
                                          Margin="0 0 0 0">
@@ -649,9 +655,9 @@
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-
-                                    <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0" Grid.Column="1"
-                                              Visibility="{Binding Content.Attention, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
+                                    <Grid HorizontalAlignment="Right" VerticalAlignment="Center"
+                                              Visibility="{Binding Content.Attention, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"
+                                                Margin="0" Grid.Column="1">
                                         <Ellipse Fill="Orange" Opacity=".4" Width="12" Height="12" Margin="0"/>
                                         <Ellipse Fill="Orange" Width="6" Height="6" Margin="0"/>
                                     </Grid>
@@ -660,7 +666,6 @@
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
-
                                         <ContentPresenter Content="{Binding Content.TabName}" 
                                                       ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}" 
                                                       ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}" 
@@ -669,13 +674,11 @@
                                                       SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"
                                                   Margin="{TemplateBinding Control.Padding}"
                                                   x:Name="contentPresenter"/>
-
                                         <Thumb Grid.Column="0" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" 
                                                x:Name="PART_Thumb"
                                                Style="{StaticResource MaterialDesignInvisibleThumbStyle}" >
                                             
                                         </Thumb>
-
                                         <Button Grid.Column="1" x:Name="CloseButton" VerticalAlignment="Center"
                                                 Style="{StaticResource MaterialDesignCloseItemCommandButtonStyle}"  
                                                 Foreground="{StaticResource Colors.App.HP}" Background="Transparent"
@@ -693,7 +696,6 @@
                                                 <ScaleTransform ScaleX="0"/>
                                             </Button.LayoutTransform>
                                         </Button>
-
                                     </Grid>
 
                                 </Grid>
@@ -703,8 +705,32 @@
                                     <Setter TargetName="contentPresenter" Property="Content" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DataContext.Header}" />
                                 </Trigger>
                                 <Trigger Property="IsSelected" Value="True">
-                                    <Setter Property="Background" Value="#1fff" TargetName="Trapezoid"/>
+                                    <!--<Setter Property="Background" Value="#1fff" TargetName="Trapezoid"/>-->
                                     <!--<Setter Property="LongBasePenBrush" Value="{StaticResource TabItem.Selected.Background}" TargetName="Trapezoid"/>-->
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="sel" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
+                                                         Duration="0:0:0.15" To="1">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <QuadraticEase />
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="sel" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
+                                                         Duration="0:0:0.15" To="0">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <QuadraticEase />
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
                                 </Trigger>
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter Property="Visibility" Value="Visible" TargetName="hl"/>
