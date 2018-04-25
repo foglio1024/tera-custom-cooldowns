@@ -27,13 +27,18 @@ namespace TCC.Windows
         public ChatWindow(ChatWindowSettings ws)
         {
             InitializeComponent();
-            _b = buttons;
+            //_b = buttons;
             _c = content;
             InitWindow(ws, false, true, false);
             opacityUp = new DoubleAnimation(0.01, 1, TimeSpan.FromMilliseconds(300));
             opacityDown = new DoubleAnimation(1, 0.01, TimeSpan.FromMilliseconds(300));
             ChatWindowManager.Instance.PropertyChanged += Instance_PropertyChanged; //TODO: use DataContext as ChatWindowVM?
             AddHandler(HeaderedDragablzItem.IsDraggingChangedEvent, new RoutedPropertyChangedEventHandler<bool>(OnDragCompleted));
+        }
+        public ChatWindow(ChatWindowSettings ws, ChatViewModel vm) : this(ws)
+        {
+            DataContext = vm;
+            UpdateSettings();
         }
 
 
@@ -42,7 +47,7 @@ namespace TCC.Windows
             if (e.NewValue == true) return;
             var newOrder = tabControl.GetOrderedHeaders();
             var old = new HeaderedItemViewModel[VM.TabVMs.Count];
-            VM.TabVMs.CopyTo(old,0);
+            VM.TabVMs.CopyTo(old, 0);
             var same = true;
             for (int i = 0; i < newOrder.Count(); i++)
             {
@@ -72,10 +77,12 @@ namespace TCC.Windows
         {
             (WindowSettings as ChatWindowSettings).Tabs.Clear();
             (WindowSettings as ChatWindowSettings).Tabs.AddRange(VM.Tabs);
+            (WindowSettings as ChatWindowSettings).LfgOn = VM.LfgOn;
+            (WindowSettings as ChatWindowSettings).BackgroundOpacity = VM.BackgroundOpacity;
         }
         private void Instance_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-             if (e.PropertyName == nameof(ChatWindowManager.Instance.IsChatVisible))
+            if (e.PropertyName == nameof(ChatWindowManager.Instance.IsChatVisible))
             {
                 AnimateChatVisibility(ChatWindowManager.Instance.IsChatVisible);
             }
@@ -165,12 +172,12 @@ namespace TCC.Windows
         {
 
             var s = sender as FrameworkElement;
-            AnimateTabRect(s);
-            var t = s.DataContext as Tab;
+            //AnimateTabRect(s);
+            var t = s.DataContext as HeaderedItemViewModel;
             if (t != null)
             {
-                t.Attention = false;
-                (DataContext as ChatViewModel).CurrentTab = t;
+                (t.Content as Tab).Attention = false;
+                (DataContext as ChatViewModel).CurrentTab = t.Content as Tab;
             }
             //_currentContent = tabControl.SelectedContent as ItemsControl;
             //var b = (Border)VisualTreeHelper.GetChild(_currentContent, 0);
@@ -291,7 +298,7 @@ namespace TCC.Windows
         }
         private void TccWindow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            
+            //var res = TccMessageBox.Show("TCC", $"There was an error while reading events-EU.xml. Manually correct the error and and press Ok to try again, else press Cancel to build a default config file.", MessageBoxButton.OKCancel);
             //Proxy.ChatTest("test");
             //ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.Global, "Moonfury", "<font size=\"50\" color=\"#e87d7d\"> M</font>" + "<font size=\"70\" color=\"#e8b07d\">E</font>" + "<font size=\"70\" color=\"#e8d77d\">M</font>" + "<font size=\"70\" color=\"#c6e87d\">E</font>" + "<font size=\"50\" color=\"#92e87d\">S</font>" + "<font size=\"50\" color=\"#7de89b\">L</font>" + "<font size=\"50\" color=\"#7de8ce\">A</font>" + "<font size=\"50\" color=\"#7dcee8\">S</font>" + "<font size=\"50\" color=\"#7d8ee8\">H</font>"));
             //ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.Global, "PODEM CONFIAR", "<font size=\"25\" color=\"#ff0000\"><a href=\"asfunction:chatLinkAction\">I am a retard that runs random code from the internet, so my character has been sent to the DOOMZONE.</a></font>"));
@@ -320,13 +327,14 @@ namespace TCC.Windows
         private void TccWindow_MouseLeave(object sender, MouseEventArgs e)
         {
             ChatWindowManager.Instance.RefreshTimer();
+            Settings.BeginAnimation(OpacityProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(300)));
 
         }
 
         private void TccWindow_MouseEnter(object sender, MouseEventArgs e)
         {
             ChatWindowManager.Instance.StopHideTimer();
-
+            Settings.BeginAnimation(OpacityProperty, new DoubleAnimation(1, TimeSpan.FromMilliseconds(300)));
         }
 
         private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
@@ -336,40 +344,41 @@ namespace TCC.Windows
 
         private void OpenChannelSettings(object sender, MouseButtonEventArgs e)
         {
-            if (ChatSettingsPopup.IsOpen)
-            {
-                FocusManager.MakeUnfocusable(_handle);
-                var anc = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(150));
-                anc.Completed += (s, ev) =>
-                {
-                    ChatSettingsPopup.IsOpen = false;
-                    SettingsManager.SaveSettings();
+            return;
+            //if (ChatSettingsPopup.IsOpen)
+            //{
+            //    FocusManager.MakeUnfocusable(_handle);
+            //    var anc = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(150));
+            //    anc.Completed += (s, ev) =>
+            //    {
+            //        ChatSettingsPopup.IsOpen = false;
+            //        SettingsManager.SaveSettings();
 
-                };
-                ChatSettingsPopup.Child.BeginAnimation(OpacityProperty, anc);
-                return;
+            //    };
+            //    ChatSettingsPopup.Child.BeginAnimation(OpacityProperty, anc);
+            //    return;
 
-            }
-            ChatSettingsPopup.IsOpen = true;
-            var an = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150));
-            ChatSettingsPopup.Child.BeginAnimation(OpacityProperty, an);
-            FocusManager.UndoUnfocusable(_handle);
-            Activate();
-            ChatSettingsPopup.Focus();
+            //}
+            //ChatSettingsPopup.IsOpen = true;
+            //var an = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150));
+            //ChatSettingsPopup.Child.BeginAnimation(OpacityProperty, an);
+            //FocusManager.UndoUnfocusable(_handle);
+            //Activate();
+            //ChatSettingsPopup.Focus();
 
         }
 
         private void CloseChannelSettings(object sender, MouseButtonEventArgs e)
         {
-            FocusManager.MakeUnfocusable(_handle);
-            var an = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(150));
-            an.Completed += (s, ev) =>
-            {
-                ChatSettingsPopup.IsOpen = false;
-                SettingsManager.SaveSettings();
+            //FocusManager.MakeUnfocusable(_handle);
+            //var an = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(150));
+            //an.Completed += (s, ev) =>
+            //{
+            //    ChatSettingsPopup.IsOpen = false;
+            //    SettingsManager.SaveSettings();
 
-            };
-            ChatSettingsPopup.Child.BeginAnimation(OpacityProperty, an);
+            //};
+            //ChatSettingsPopup.Child.BeginAnimation(OpacityProperty, an);
 
         }
 
@@ -379,18 +388,52 @@ namespace TCC.Windows
 
         private void AddChatTab(object sender, RoutedEventArgs e)
         {
-            (this.DataContext as ChatViewModel).TabVMs.Add(new Dragablz.HeaderedItemViewModel( "NEW TAB", new Tab("NEW TAB", new ChatChannel[] { }, new ChatChannel[] { }, new string[] { }, new string[] { })));
+            var n = new Tab("NEW TAB", new ChatChannel[] { }, new ChatChannel[] { }, new string[] { }, new string[] { });
+            (this.DataContext as ChatViewModel).TabVMs.Add(new Dragablz.HeaderedItemViewModel(n.TabName, n));
         }
 
         private void tabControl_IsDraggingWindowChanged(object sender, RoutedPropertyChangedEventArgs<bool> e)
         {
-            
+
             Console.WriteLine($"dragging changed to {e.NewValue}; items: {tabControl.Items.Count}");
 
         }
 
         private void tabControl_Drop(object sender, DragEventArgs e)
         {
+
+        }
+
+        private void OpenTabSettings(object sender, MouseButtonEventArgs e)
+        {
+            var s = sender as FrameworkElement;
+            var dc = s.DataContext as HeaderedItemViewModel;
+            var t = dc.Content as Tab;
+            var sw = new ChatSettingsWindow(t);
+            sw.Show();
+            sw.Activate();
+
+        }
+
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsPopup.IsOpen = !SettingsPopup.IsOpen;
+        }
+
+        private void SettingsPopup_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (SettingsPopup.IsMouseCaptured) return;
+            SettingsPopup.IsOpen = false;
+        }
+
+        private void SettingsPopup_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            (sender as FrameworkElement).CaptureMouse();
+        }
+
+        private void SettingsPopup_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            (sender as FrameworkElement).ReleaseMouseCapture();
 
         }
     }
