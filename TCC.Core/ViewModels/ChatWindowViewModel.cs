@@ -245,9 +245,12 @@ namespace TCC.ViewModels
 
             ChatMessage.SplitSimplePieces(chatMessage);
 
-            /*if (!Paused) */
-            ChatMessages.Insert(0, chatMessage);
-            //else _queue.Enqueue(chatMessage);
+            if (ChatWindows.Any(x => !x.IsPaused))
+            {
+                ChatMessages.Insert(0, chatMessage);
+            }
+            else _queue.Enqueue(chatMessage);
+
             NewMessage?.Invoke(chatMessage);
             if (ChatMessages.Count > SettingsManager.MaxMessages)
             {
@@ -496,7 +499,7 @@ namespace TCC.ViewModels
                 _backgroundOpacity = value;
                 NPC();
             }
-        } 
+        }
 
         public void NotifyOpacityChange()
         {

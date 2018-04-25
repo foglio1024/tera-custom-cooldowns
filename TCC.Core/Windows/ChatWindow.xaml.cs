@@ -67,6 +67,7 @@ namespace TCC.Windows
         }
 
         public object CurrentSender { get; internal set; }
+        public bool IsPaused => Dispatcher.Invoke(() => VM.Paused);
 
         private void TccWindow_Loaded(object sender, RoutedEventArgs e)
         {
