@@ -184,6 +184,18 @@ namespace TCC
 
             SendData(sb.ToString());
         }
+
+        public static void KickMember(uint serverId, uint playerId)
+        {
+            var sb = new StringBuilder("kick");
+            sb.Append("&sId=");
+            sb.Append(serverId);
+            sb.Append("&pId=");
+            sb.Append(playerId);
+
+            SendData(sb.ToString());
+        }
+
         public static void Inspect(string name)
         {
             var sb = new StringBuilder("inspect");

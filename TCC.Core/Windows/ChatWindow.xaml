@@ -312,12 +312,6 @@
                 </Button>
 
 
-                <Popup Name="playerInfo" StaysOpen="True" Placement="MousePoint" 
-                       AllowsTransparency="True" Width="Auto" HorizontalOffset="0" UseLayoutRounding="True"
-                       VerticalAlignment="Center"
-                       VerticalOffset="0">
-                    <chatcontrols:PlayerTooltip />
-                </Popup>
                 <!--<Popup x:Name="ChatSettingsPopup" StaysOpen="True" Placement="Top"  VerticalAlignment="Stretch"
                    AllowsTransparency="True" MinWidth="350" HorizontalAlignment="Left">
                     <Popup.Resources>
@@ -419,6 +413,12 @@
                 </Popup>-->
             </Grid>
         </dockablz:Layout>
+        <Popup Name="playerInfo" StaysOpen="True" Placement="MousePoint"  IsOpen="False"
+                       AllowsTransparency="True" Width="Auto" HorizontalOffset="0" UseLayoutRounding="True"
+                       VerticalAlignment="Center"
+                       VerticalOffset="0">
+                    <chatcontrols:PlayerTooltip />
+                </Popup>
         <Popup Placement="Relative" x:Name="SettingsPopup" Focusable="True" HorizontalOffset="20" MouseLeave="SettingsPopup_MouseLeave"
                        MouseLeftButtonDown="SettingsPopup_PreviewMouseLeftButtonDown"
                        MouseLeftButtonUp="SettingsPopup_PreviewMouseLeftButtonUp"

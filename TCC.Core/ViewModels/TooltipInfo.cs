@@ -106,7 +106,7 @@ namespace TCC.ViewModels
         {
             get => GroupWindowViewModel.Instance.AmILeader() && GroupWindowViewModel.Instance.Raid && GroupWindowViewModel.Instance.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
         }
-        public bool ShowKick => GroupWindowViewModel.Instance.AmILeader() && GroupWindowViewModel.Instance.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
+        public bool ShowKick => GroupWindowViewModel.Instance.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
         public bool ShowDelegateLeader
         {
             get => GroupWindowViewModel.Instance.AmILeader() && GroupWindowViewModel.Instance.Exists(Name) && Name != SessionManager.CurrentPlayer.Name;
