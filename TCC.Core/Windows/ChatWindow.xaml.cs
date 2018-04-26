@@ -23,7 +23,7 @@ namespace TCC.Windows
         DoubleAnimation opacityDown;
         bool _bottom = true;
         int _testCounter = 0;
-        public ChatViewModel VM => DataContext as ChatViewModel;
+        public ChatViewModel VM => Dispatcher.Invoke(() => DataContext as ChatViewModel);
         public ChatWindow(ChatWindowSettings ws)
         {
             InitializeComponent();
