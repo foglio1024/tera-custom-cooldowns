@@ -83,6 +83,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dragablz, Version=0.0.3.203, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dragablz.0.0.3.203\lib\net45\Dragablz.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -226,6 +229,9 @@
       <DependentUpon>GuildTowerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\OutlineText.cs" />
+    <Compile Include="Controls\Ripple.xaml.cs">
+      <DependentUpon>Ripple.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SelectionSetting.xaml.cs">
       <DependentUpon>SelectionSetting.xaml</DependentUpon>
     </Compile>
@@ -242,12 +248,15 @@
       <DependentUpon>VanguardInfoControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolToBrushConverter.cs" />
+    <Compile Include="Converters\BoolToPinIconConverter.cs" />
+    <Compile Include="Converters\DirectionToHorAlignConveter.cs" />
     <Compile Include="Converters\DungeonIdToStarsConverter.cs" />
     <Compile Include="Converters\DungeonIdToImageConverter.cs" />
     <Compile Include="Converters\DungeonIdToNameConverter.cs" />
     <Compile Include="Converters\DungeonIdToTierColorConverter.cs" />
     <Compile Include="Converters\GearLevelToColorConverter.cs" />
     <Compile Include="Converters\GearLevelToFactorConverter.cs" />
+    <Compile Include="Converters\GuardianPointsStringConverter.cs" />
     <Compile Include="Converters\IconConverter.cs" />
     <Compile Include="Converters\BoolToOpacityInverseConverter.cs" />
     <Compile Include="Converters\BoolToOpacityConverter.cs" />
@@ -354,14 +363,17 @@
     <Compile Include="Data\StanceTracker.cs" />
     <Compile Include="Data\World.cs" />
     <Compile Include="Data\DungeonCooldown.cs" />
+    <Compile Include="Parsing\Messages\C_LOGIN_ARBITER.cs" />
     <Compile Include="Parsing\Messages\S_ABNORMALITY_DAMAGE_ABSORB.cs" />
     <Compile Include="Parsing\Messages\S_ACCOMPLISH_ACHIEVEMENT.cs" />
     <Compile Include="Parsing\Messages\S_ACCOUNT_PACKAGE_LIST.cs" />
     <Compile Include="Parsing\Messages\S_ANSWER_INTERACTIVE.cs" />
     <Compile Include="Parsing\Messages\S_AVAILABLE_EVENT_MATCHING_LIST.cs" />
     <Compile Include="Parsing\Messages\S_BAN_PARTY.cs" />
+    <Compile Include="Parsing\Messages\S_DUNGEON_CLEAR_COUNT_LIST.cs" />
     <Compile Include="Parsing\Messages\S_DUNGEON_COOL_TIME_LIST.cs" />
     <Compile Include="Parsing\Messages\S_DUNGEON_EVENT_MESSAGE.cs" />
+    <Compile Include="Parsing\Messages\S_FIELD_POINT_INFO.cs" />
     <Compile Include="Parsing\Messages\S_FRIEND_LIST.cs" />
     <Compile Include="Parsing\Messages\C_REQUEST_GAMESTAT_PING.cs" />
     <Compile Include="Parsing\Messages\S_GUILD_TOWER_INFO.cs" />
@@ -504,8 +516,6 @@
     <Compile Include="Parsing\Messages\S_PARTY_MEMBER_STAT_UPDATE.cs" />
     <Compile Include="Parsing\Messages\S_WEAK_POINT.cs" />
     <Compile Include="Parsing\Messages\S_WHISPER.cs" />
-    <Compile Include="Parsing\SystemChatMessage.cs" />
-    <Compile Include="Parsing\ThreadSafeManager.cs" />
     <Compile Include="Proxy.cs" />
     <Compile Include="SettingsManager.cs" />
     <Compile Include="SkillUtils.cs" />
@@ -533,6 +543,65 @@
     <Compile Include="Tera.Data\InvalidConfigFileException.cs" />
     <Compile Include="Tera.Data\TeraData.cs" />
     <Compile Include="Tera.Data\WindowData.cs" />
+    <Compile Include="Data\AbnormalityDuration.cs" />
+    <Compile Include="Controls\AbnormalityIndicator.xaml.cs">
+      <DependentUpon>AbnormalityIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AbnormalityTooltip.xaml.cs">
+      <DependentUpon>AbnormalityTooltip.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BoolSetting.xaml.cs">
+      <DependentUpon>BoolSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BossGage.xaml.cs">
+      <DependentUpon>BossGage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ClassSpecific\Mystic.cs" />
+    <Compile Include="ClassSpecific\Warrior.cs" />
+    <Compile Include="Data\Databases\MonsterDatabase.cs" />
+    <Compile Include="Parsing\Messages\S_BOSS_GAGE_INFO.cs" />
+    <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_FLIGHT_ENERGY.cs" />
+    <Compile Include="Parsing\Messages\S_NPC_STATUS.cs" />
+    <Compile Include="Controls\CircularGauge.xaml.cs">
+      <DependentUpon>CircularGauge.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DragonSmallGauge.xaml.cs">
+      <DependentUpon>DragonSmallGauge.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GenericGauge.xaml.cs">
+      <DependentUpon>GenericGauge.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\HarrowholdBossesControl.xaml.cs">
+      <DependentUpon>HarrowholdBossesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MaterialSwitch.xaml.cs">
+      <DependentUpon>MaterialSwitch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PartyMember.xaml.cs">
+      <DependentUpon>PartyMember.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RaidMember.xaml.cs">
+      <DependentUpon>RaidMember.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ValueSetting.xaml.cs">
+      <DependentUpon>ValueSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TeraCommon\Game\Abnormality\Abnormality.cs" />
+    <Compile Include="TeraCommon\Game\Abnormality\AbnormalityDuration.cs" />
+    <Compile Include="TeraCommon\Game\Abnormality\AbnormalityStorage.cs" />
+    <Compile Include="TeraCommon\Game\Abnormality\Death.cs" />
+    <Compile Include="TeraCommon\Game\Abnormality\Duration.cs" />
+    <Compile Include="TeraCommon\Game\Abnormality\PlayerAbnormals.cs" />
+    <Compile Include="TeraCommon\Game\Angle.cs" />
+    <Compile Include="TeraCommon\Game\Entity.cs" />
+    <Compile Include="TeraCommon\Game\EntityId.cs" />
+    <Compile Include="TeraCommon\Game\Gender.cs" />
+    <Compile Include="TeraCommon\Game\GuildQuest.cs" />
+    <Compile Include="TeraCommon\Game\GuildQuestItem.cs" />
+    <Compile Include="TeraCommon\Game\GuildQuestTarget.cs" />
+    <Compile Include="TeraCommon\Game\HotDot.cs" />
+    <Compile Include="TeraCommon\Game\IHasOwner.cs" />
+    <Compile Include="TeraCommon\Game\Messages\Client\C_CHECK_VERSION.cs" />
     <Compile Include="TeraCommon\Game\Messages\Client\C_PLAYER_LOCATION.cs" />
     <Compile Include="TeraCommon\Game\Messages\ParsedMessage.cs" />
     <Compile Include="TeraCommon\Game\Messages\Server\EachSkillResultServerMessage.cs" />
@@ -599,7 +668,16 @@
     <Compile Include="TeraCommon\Game\Messages\Server\S_USER_STATUS.cs" />
     <Compile Include="TeraCommon\Game\Messages\Server\S_WHISPER.cs" />
     <Compile Include="TeraCommon\Game\Messages\UnknownMessage.cs" />
-    <Compile Include="TeraCommon\Game\Messages\Client\C_CHECK_VERSION.cs" />
+    <Compile Include="TeraCommon\Game\NpcEntity.cs" />
+    <Compile Include="TeraCommon\Game\NpcInfo.cs" />
+    <Compile Include="TeraCommon\Game\PlaceHolderEntity.cs" />
+    <Compile Include="TeraCommon\Game\Player.cs" />
+    <Compile Include="TeraCommon\Game\PlayerClass.cs" />
+    <Compile Include="TeraCommon\Game\ProjectileEntity.cs" />
+    <Compile Include="TeraCommon\Game\Race.cs" />
+    <Compile Include="TeraCommon\Game\RaceGenderClass.cs" />
+    <Compile Include="TeraCommon\Game\Region.cs" />
+    <Compile Include="TeraCommon\Game\Server.cs" />
     <Compile Include="TeraCommon\Game\Services\AbnormalityTracker.cs" />
     <Compile Include="TeraCommon\Game\Services\EntityTracker.cs" />
     <Compile Include="TeraCommon\Game\Services\Helpers.cs" />
@@ -615,37 +693,12 @@
     <Compile Include="TeraCommon\Game\Services\SkillDatabase.cs" />
     <Compile Include="TeraCommon\Game\Services\TeraMessageReader.cs" />
     <Compile Include="TeraCommon\Game\Services\UserLogoTracker.cs" />
-    <Compile Include="TeraCommon\Message.cs" />
-    <Compile Include="TeraCommon\MessageDirection.cs" />
-    <Compile Include="TeraCommon\Game\Angle.cs" />
-    <Compile Include="TeraCommon\Game\Entity.cs" />
-    <Compile Include="TeraCommon\Game\EntityId.cs" />
-    <Compile Include="TeraCommon\Game\Gender.cs" />
-    <Compile Include="TeraCommon\Game\GuildQuest.cs" />
-    <Compile Include="TeraCommon\Game\GuildQuestItem.cs" />
-    <Compile Include="TeraCommon\Game\GuildQuestTarget.cs" />
-    <Compile Include="TeraCommon\Game\HotDot.cs" />
-    <Compile Include="TeraCommon\Game\IHasOwner.cs" />
-    <Compile Include="TeraCommon\Game\Abnormality\Abnormality.cs" />
-    <Compile Include="TeraCommon\Game\Abnormality\AbnormalityDuration.cs" />
-    <Compile Include="TeraCommon\Game\Abnormality\AbnormalityStorage.cs" />
-    <Compile Include="TeraCommon\Game\Abnormality\Death.cs" />
-    <Compile Include="TeraCommon\Game\Abnormality\Duration.cs" />
-    <Compile Include="TeraCommon\Game\Abnormality\PlayerAbnormals.cs" />
-    <Compile Include="TeraCommon\Game\NpcEntity.cs" />
-    <Compile Include="TeraCommon\Game\NpcInfo.cs" />
-    <Compile Include="TeraCommon\Game\PlaceHolderEntity.cs" />
-    <Compile Include="TeraCommon\Game\Player.cs" />
-    <Compile Include="TeraCommon\Game\PlayerClass.cs" />
-    <Compile Include="TeraCommon\Game\ProjectileEntity.cs" />
-    <Compile Include="TeraCommon\Game\Race.cs" />
-    <Compile Include="TeraCommon\Game\RaceGenderClass.cs" />
-    <Compile Include="TeraCommon\Game\Region.cs" />
-    <Compile Include="TeraCommon\Game\Server.cs" />
     <Compile Include="TeraCommon\Game\Skill.cs" />
     <Compile Include="TeraCommon\Game\SkillResult.cs" />
     <Compile Include="TeraCommon\Game\UserEntity.cs" />
     <Compile Include="TeraCommon\Game\Vector3f.cs" />
+    <Compile Include="TeraCommon\Message.cs" />
+    <Compile Include="TeraCommon\MessageDirection.cs" />
     <Compile Include="TeraCommon\PacketLog\LogHeader.cs" />
     <Compile Include="TeraCommon\PacketLog\PacketLogFile.cs" />
     <Compile Include="TeraCommon\PacketLog\PacketLogReader.cs" />
@@ -663,49 +716,6 @@
     <Compile Include="TeraCommon\Sniffing\Crypt\Utils.cs" />
     <Compile Include="TeraCommon\Sniffing\ITeraSniffer.cs" />
     <Compile Include="TeraCommon\Sniffing\MessageSplitter.cs" />
-    <Compile Include="Data\AbnormalityDuration.cs" />
-    <Compile Include="Controls\AbnormalityIndicator.xaml.cs">
-      <DependentUpon>AbnormalityIndicator.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\AbnormalityTooltip.xaml.cs">
-      <DependentUpon>AbnormalityTooltip.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\BoolSetting.xaml.cs">
-      <DependentUpon>BoolSetting.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\BossGage.xaml.cs">
-      <DependentUpon>BossGage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ClassSpecific\Mystic.cs" />
-    <Compile Include="ClassSpecific\Warrior.cs" />
-    <Compile Include="Data\Databases\MonsterDatabase.cs" />
-    <Compile Include="Parsing\Messages\S_BOSS_GAGE_INFO.cs" />
-    <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_FLIGHT_ENERGY.cs" />
-    <Compile Include="Parsing\Messages\S_NPC_STATUS.cs" />
-    <Compile Include="Controls\CircularGauge.xaml.cs">
-      <DependentUpon>CircularGauge.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\DragonSmallGauge.xaml.cs">
-      <DependentUpon>DragonSmallGauge.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\GenericGauge.xaml.cs">
-      <DependentUpon>GenericGauge.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\HarrowholdBossesControl.xaml.cs">
-      <DependentUpon>HarrowholdBossesControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\MaterialSwitch.xaml.cs">
-      <DependentUpon>MaterialSwitch.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\PartyMember.xaml.cs">
-      <DependentUpon>PartyMember.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\RaidMember.xaml.cs">
-      <DependentUpon>RaidMember.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ValueSetting.xaml.cs">
-      <DependentUpon>ValueSetting.xaml</DependentUpon>
-    </Compile>
     <Compile Include="TeraServerTimeInfo.cs" />
     <Compile Include="TimeManager.cs" />
     <Compile Include="TwitchConnector.cs" />
@@ -722,6 +732,7 @@
     <Compile Include="Data\EventGroup.cs" />
     <Compile Include="ViewModels\DailyEvent.cs" />
     <Compile Include="ViewModels\InfoWindowViewModel.cs" />
+    <Compile Include="ViewModels\Tab.cs" />
     <Compile Include="ViewModels\TccWindowViewModel.cs" />
     <Compile Include="ViewModels\TimeMarker.cs" />
     <Compile Include="ViewModels\TooltipInfo.cs" />
@@ -776,6 +787,9 @@
     </Compile>
     <Compile Include="Converters\ChatChannelNameConverter.cs" />
     <Compile Include="Converters\ChatChannelToColorConverter.cs" />
+    <Compile Include="Windows\ChatSettingsWindow.xaml.cs">
+      <DependentUpon>ChatSettingsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\ChatWindow.xaml.cs">
       <DependentUpon>ChatWindow.xaml</DependentUpon>
     </Compile>
@@ -820,11 +834,9 @@
     <Compile Include="Data\SkillCooldown.cs" />
     <Compile Include="Controls\Arc.cs" />
     <Compile Include="Data\Character.cs" />
-    <Compile Include="Parsing\CharLoginProcessor.cs" />
     <Compile Include="Data\Enums.cs" />
     <Compile Include="Data\Databases\ItemSkillsDatabase.cs" />
     <Compile Include="FocusManager.cs" />
-    <Compile Include="Parsing\ListParser.cs" />
     <Compile Include="Parsing\Messages\S_ABNORMALITY_BEGIN.cs" />
     <Compile Include="Parsing\Messages\S_DECREASE_COOLTIME_SKILL.cs" />
     <Compile Include="Parsing\Messages\S_GET_USER_LIST.cs" />
@@ -843,9 +855,15 @@
     <Compile Include="SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\TccMessageBox.xaml.cs">
+      <DependentUpon>TccMessageBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\TccWindow.cs" />
     <Compile Include="Controls\ChatControls\MoneyMessagePiece.xaml.cs">
       <DependentUpon>MoneyMessagePiece.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WindowButtons.xaml.cs">
+      <DependentUpon>WindowButtons.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\AbnormalityIndicator.xaml">
       <SubType>Designer</SubType>
@@ -999,6 +1017,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Ripple.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\SelectionSetting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1099,6 +1121,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Dragablz.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DragablzMaterialDesign.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Windows\AbnormalitiesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1108,6 +1138,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\CharacterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ChatSettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1196,6 +1230,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\WindowButtons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TccMessageBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Parsing\Messages\C_CHECK_VERSION_CUSTOM.cs" />
@@ -1209,11 +1251,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="resources\data\equip_exp\equip_exp-EU-EN.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="resources\data\dungeons-def.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\EquipmentExpData.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\data\items\items-EU-EN.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1239,67 +1281,10 @@
     <Content Include="resources\data\items\items-KR.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\data\abnormalities\hotdot-EU-EN.tsv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\abnormalities\hotdot-EU-FR.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\abnormalities\hotdot-EU-GER.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\abnormalities\hotdot-JP.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\abnormalities\hotdot-KR.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\abnormalities\hotdot-NA.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\abnormalities\hotdot-RU.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\abnormalities\hotdot-TW.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\abnormalities\hotdot-KR-PTS.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\abnormalities\hotdot-short-RU.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\abnormalities\hotdot-THA.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\opcodes\protocol.328426.map">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\opcodes\sysmsg.328426.map">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="resources\data\items\items-KR-PTS.tsv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\data\items\items-THA.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\opcodes\protocol.328425.map">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\opcodes\protocol.328428.map">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\opcodes\sysmsg.328425.map">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\opcodes\sysmsg.328428.map">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\opcodes\protocol.328423.map">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\opcodes\protocol.329223.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\data\opcodes\protocol.329230.map">
@@ -1308,18 +1293,141 @@
     <Content Include="resources\data\opcodes\protocol.329686.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\data\opcodes\sysmsg.328423.map">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\opcodes\sysmsg.329223.map">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="resources\data\opcodes\sysmsg.329230.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\data\opcodes\sysmsg.329686.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="resources\data\opcodes\protocol.329685.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="resources\data\opcodes\protocol.329268.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\opcodes\protocol.329687.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\opcodes\protocol.329688.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="resources\data\opcodes\protocol.329689.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\data\opcodes\sysmsg.329685.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="resources\data\opcodes\sysmsg.329268.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\opcodes\sysmsg.329687.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\opcodes\sysmsg.329688.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="resources\data\opcodes\sysmsg.329689.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="resources\data\opcodes\sysmsg.67.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\opcodes\sysmsg.72.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\world_map\world_map-EU-EN.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\acc_benefits\acc_benefits-EU-EN.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\achievements\achievements-EU-EN.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\achi_grade\achi_grade-EU-EN.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\dungeons\dungeons-EU-EN.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\guild_quests\guild_quests-EU-EN.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\hotdot\hotdot-EU-EN.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\hotdot\hotdot-EU-FR.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\hotdot\hotdot-EU-GER.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\hotdot\hotdot-JP.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\hotdot\hotdot-KR-PTS.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\hotdot\hotdot-KR.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\hotdot\hotdot-NA.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\hotdot\hotdot-RU.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\hotdot\hotdot-short-RU.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\hotdot\hotdot-THA.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\hotdot\hotdot-TW.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\quests\quests-EU-EN.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\regions\regions-EU-EN.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\skills\skills-EU-EN.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\skills\skills-EU-FR.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\skills\skills-EU-GER.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\skills\skills-JP.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\skills\skills-KR-PTS.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\skills\skills-KR.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\skills\skills-NA.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\skills\skills-RU.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\skills\skills-THA.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\skills\skills-TW.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\social\social-EU-EN.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\data\sys_msg\sys_msg-EU-EN.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Resource Include="resources\fonts\copyfonts.com_arial-monospaced-mt-bold.ttf" />
     <Resource Include="resources\fonts\DroidSansMono.ttf" />
     <Resource Include="resources\fonts\RobotoMono-Medium.ttf" />
@@ -1343,36 +1451,6 @@
     </Content>
     <Content Include="resources\data\monsters\monsters-THA.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\NewWorldMapData.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\social.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\sys-messages.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\guild-quests.tsv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\account-benefit.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\achievement-grade-info.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\achievements.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\dungeons.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\quests.tsv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\data\regions.tsv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="resources\fonts\SourceSansPro-SemiBold.ttf" />
     <Resource Include="resources\fonts\Frutiger.ttf" />
@@ -1455,9 +1533,6 @@
     <Resource Include="resources\images\Icon_Laurels\gold.png" />
     <Resource Include="resources\images\Icon_Laurels\silver.png" />
     <Resource Include="resources\fonts\OpenSans-Regular.ttf" />
-    <Content Include="resources\data\skills.tsv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Resource Include="resources\images\enraged.png" />
     <Content Include="resources\data\servers.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

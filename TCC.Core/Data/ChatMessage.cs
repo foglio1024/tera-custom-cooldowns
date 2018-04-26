@@ -28,7 +28,7 @@ namespace TCC.Data
             {
                 if (channel == value) return;
                 channel = value;
-                NotifyPropertyChanged(nameof(Channel));
+                NPC(nameof(Channel));
             }
         }
 
@@ -40,7 +40,7 @@ namespace TCC.Data
             {
                 if (timestamp == value) return;
                 timestamp = value;
-                NotifyPropertyChanged(nameof(timestamp));
+                NPC(nameof(timestamp));
             }
         }
 
@@ -52,7 +52,7 @@ namespace TCC.Data
             {
                 if (rawMessage == value) return;
                 rawMessage = value;
-                NotifyPropertyChanged(nameof(RawMessage));
+                NPC(nameof(RawMessage));
             }
         }
 
@@ -64,7 +64,7 @@ namespace TCC.Data
             {
                 if (author == value) return;
                 author = value;
-                NotifyPropertyChanged(nameof(Author));
+                NPC(nameof(Author));
             }
         }
 
@@ -103,7 +103,7 @@ namespace TCC.Data
             {
                 if (isContracted == value) return;
                 isContracted = value;
-                NotifyPropertyChanged(nameof(IsContracted));
+                NPC(nameof(IsContracted));
             }
         }
 
@@ -115,7 +115,7 @@ namespace TCC.Data
             {
                 if (rows == value) return;
                 rows = value;
-                NotifyPropertyChanged(nameof(Rows));
+                NPC(nameof(Rows));
             }
         }
         public bool ShowTimestamp
@@ -134,7 +134,7 @@ namespace TCC.Data
             {
                 if (pieces == value) return;
                 pieces = value;
-                NotifyPropertyChanged(nameof(Pieces));
+                NPC(nameof(Pieces));
             }
         }
         #endregion
@@ -142,7 +142,7 @@ namespace TCC.Data
         #region Constructors
         public ChatMessage()
         {
-            _dispatcher = WindowManager.ChatWindow.Dispatcher;
+            _dispatcher = ChatWindowManager.Instance.GetDispatcher();
             Pieces = new SynchronizedObservableCollection<MessagePiece>(_dispatcher);
             Timestamp = DateTime.Now.ToShortTimeString();
             WindowManager.Settings.Dispatcher.Invoke(() => ((SettingsWindowViewModel)WindowManager.Settings.DataContext).PropertyChanged += VM_PropChanged);
@@ -420,11 +420,11 @@ namespace TCC.Data
         {
             if (e.PropertyName == nameof(ShowChannel))
             {
-                NotifyPropertyChanged(nameof(ShowChannel));
+                NPC(nameof(ShowChannel));
             }
             else if (e.PropertyName == nameof(ShowTimestamp))
             {
-                NotifyPropertyChanged(nameof(ShowTimestamp));
+                NPC(nameof(ShowTimestamp));
             }
         }
         public override string ToString()
@@ -821,9 +821,9 @@ namespace TCC.Data
         {
             var id = GetId(info, "dungeon");
             string txt = id.ToString();
-            if (DungeonDatabase.Instance.DungeonNames.TryGetValue(id, out string dngName))
+            if (DungeonDatabase.Instance.Dungeons.TryGetValue(id, out Dungeon dngName))
             {
-                txt = dngName;
+                txt = dngName.Name;
             }
             return new MessagePiece(txt, MessagePieceType.Simple, Channel, SettingsManager.FontSize, false);
         }

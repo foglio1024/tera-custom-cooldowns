@@ -27,6 +27,7 @@ namespace TCC.Controls
         {
             InitializeComponent();
             _anim = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(350)) { EasingFunction = new QuadraticEase() };
+            _anim.BeginTime = TimeSpan.FromMilliseconds(200);
         }
 
         private void GearItemControl_OnLoaded(object sender, RoutedEventArgs e)
@@ -34,7 +35,7 @@ namespace TCC.Controls
             var dc = (GearItem)DataContext;
             if (dc == null) return;
             _anim.To = dc.LevelFactor * 359.9;
-            MainArc.BeginAnimation(Arc.EndAngleProperty, _anim);
+            //MainArc.BeginAnimation(Arc.EndAngleProperty, _anim);
 
         }
     }

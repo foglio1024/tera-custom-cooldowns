@@ -15,6 +15,7 @@ namespace TCC.ViewModels
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
             _scale = SettingsManager.BuffWindowSettings.Scale;
+            Player = new Player();
             WindowManager.TccVisibilityChanged += (s, ev) =>
             {
                 //RaisePropertyChanged("IsTeraOnTop");
@@ -27,7 +28,7 @@ namespace TCC.ViewModels
 
         public void NotifyDirectionChanged()
         {
-            NotifyPropertyChanged(nameof(Direction));
+            NPC(nameof(Direction));
         }
         private Player _player;
         public Player Player

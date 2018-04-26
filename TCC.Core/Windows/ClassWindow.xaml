@@ -8,20 +8,11 @@
              xmlns:w="clr-namespace:TCC.Windows"
              xmlns:data="clr-namespace:TCC.Data"
              xmlns:tcc="clr-namespace:TCC"
-             xmlns:controls="clr-namespace:TCC.Controls"
-             AllowsTransparency="True" 
+             xmlns:c="clr-namespace:TCC.Controls"
+             Style="{StaticResource BaseWindowStyle}"
              Loaded="TccWindow_Loaded"
-             WindowStyle="None" 
-             ResizeMode="NoResize" 
-             Topmost="True" 
-             SizeToContent="WidthAndHeight"
-             Background="Transparent" 
-             MouseLeftButtonDown="Window_MouseLeftButtonDown"
              mc:Ignorable="d" 
-             ShowInTaskbar="False" 
              Title="WarriorBar" 
-             Height="Auto" 
-             Width="Auto" 
              UseLayoutRounding="True"
              x:Name="win">
     <w:TccWindow.DataContext>
@@ -29,43 +20,43 @@
     </w:TccWindow.DataContext>
     <w:TccWindow.Resources>
         <DataTemplate x:Key="warrior">
-            <controls:WarriorBar />
+            <c:WarriorBar />
         </DataTemplate>
         <DataTemplate x:Key="valkyrie">
-            <controls:ValkyrieBar />
+            <c:ValkyrieBar />
         </DataTemplate>
         <DataTemplate x:Key="archer">
-            <controls:ArcherBar />
+            <c:ArcherBar />
         </DataTemplate>
         <DataTemplate x:Key="lancer">
-            <controls:LancerBar/>
+            <c:LancerBar/>
         </DataTemplate>
         <DataTemplate x:Key="priest">
-            <controls:PriestBar />
+            <c:PriestBar />
         </DataTemplate>
         <DataTemplate x:Key="mystic">
-            <controls:MysticBar/>
+            <c:MysticBar/>
         </DataTemplate>
         <DataTemplate x:Key="ninja">
-            <controls:NinjaBar/>
+            <c:NinjaBar/>
         </DataTemplate>
         <DataTemplate x:Key="gunner">
-            <controls:GunnerBar/>
+            <c:GunnerBar/>
         </DataTemplate>
         <DataTemplate x:Key="brawler">
-            <controls:BrawlerBar/>
+            <c:BrawlerBar/>
         </DataTemplate>
         <DataTemplate x:Key="reaper">
-            <controls:ReaperBar/>
+            <c:ReaperBar/>
         </DataTemplate>
         <DataTemplate x:Key="sorcerer">
-            <controls:SorcererBar/>
+            <c:SorcererBar/>
         </DataTemplate>
         <DataTemplate x:Key="berserker">
-            <controls:BerserkerBar/>
+            <c:BerserkerBar/>
         </DataTemplate>
         <DataTemplate x:Key="slayer">
-            <controls:SlayerBar/>
+            <c:SlayerBar/>
         </DataTemplate>
         <DataTemplate x:Key="emptyTemplate">
         </DataTemplate>
@@ -96,7 +87,16 @@
         </Style>
 
     </w:TccWindow.Resources>
-    <ContentControl x:Name="root" Content="{Binding CurrentManager}" Margin="5" Background="Transparent">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <c:WindowButtons VerticalAlignment="Top" Opacity="0" HorizontalAlignment="Left" WindowName="Class window" x:Name="buttons"
+                         DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWindow}}" 
+                         />
+
+        <ContentControl x:Name="content" Content="{Binding CurrentManager}" Margin="5" Background="Transparent" Grid.Row="1">
         <ContentControl.LayoutTransform>
             <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
         </ContentControl.LayoutTransform>
@@ -104,6 +104,5 @@
             <BitmapCache RenderAtScale="2"></BitmapCache>
         </ContentControl.CacheMode>
     </ContentControl>
-
-
+    </Grid>
 </w:TccWindow>

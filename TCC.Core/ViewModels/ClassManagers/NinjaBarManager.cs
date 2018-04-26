@@ -19,7 +19,7 @@ namespace TCC.ViewModels
             {
                 if (_focusOn == value) return;
                 _focusOn = value;
-                NotifyPropertyChanged(nameof(FocusOn));
+                NPC(nameof(FocusOn));
             }
 
         }

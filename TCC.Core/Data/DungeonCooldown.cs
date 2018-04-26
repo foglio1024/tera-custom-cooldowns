@@ -7,6 +7,7 @@ namespace TCC.Data
     public class DungeonCooldown : TSPropertyChanged
     {
         short _entries;
+        int _total;
         public uint Id { get; }
         public short Entries
         {
@@ -14,11 +15,21 @@ namespace TCC.Data
             {
                 if (_entries == value) return;
                 _entries = value;
-                NotifyPropertyChanged(nameof(Entries));
+                NPC(nameof(Entries));
+            }
+        }
+        public int Clears
+        {
+            get => _total;
+            set
+            {
+                if (_total == value) return;
+                _total = value;
+                NPC(nameof(Clears));
             }
         }
 
-        public DungeonTier Tier => DungeonDatabase.Instance.DungeonDefinitions[Id].Tier;
+        public DungeonTier Tier => DungeonDatabase.Instance.Dungeons[Id].Tier;
 
 
         public DungeonCooldown(uint id, Dispatcher d)
@@ -35,7 +46,7 @@ namespace TCC.Data
 
         internal int GetMaxBaseRuns()
         {
-            return DungeonDatabase.Instance.DungeonDefinitions[Id].MaxBaseRuns;
+            return DungeonDatabase.Instance.Dungeons[Id].MaxBaseRuns;
         }
         public int GetRuns()
         {

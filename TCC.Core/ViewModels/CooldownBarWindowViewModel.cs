@@ -4,11 +4,15 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Threading;
 using System.Xml;
+using System.Xml.Linq;
 using TCC.Data;
+using TCC.Data.Databases;
+using TCC.Windows;
 
 namespace TCC.ViewModels
 {
@@ -17,7 +21,6 @@ namespace TCC.ViewModels
     {
         private static CooldownWindowViewModel _instance;
         public static CooldownWindowViewModel Instance => _instance ?? (_instance = new CooldownWindowViewModel());
-
         public bool IsTeraOnTop => WindowManager.IsTccVisible;
         public bool ShowItems => SettingsManager.ShowItemsCooldown;
 
@@ -82,7 +85,27 @@ namespace TCC.ViewModels
                 itemSkills = value;
             }
         }
-        public SynchronizedObservableCollection<FixedSkillCooldown> HiddenSkills { get; }
+        public SynchronizedObservableCollection<Skill> HiddenSkills { get; }
+
+        public SynchronizedObservableCollection<Skill> ChoiceList
+        {
+            get
+            {
+                var list = new SynchronizedObservableCollection<Skill>();
+                var c = SessionManager.CurrentPlayer.Class;
+                var skillsForClass = SkillsDatabase.Skills[c];
+                foreach (var skill in skillsForClass.Values)
+                {
+                    if (MainSkills.Any(x => x.Skill.IconName == skill.IconName)) continue;
+                    if (SecondarySkills.Any(x => x.Skill.IconName == skill.IconName)) continue;
+                    if (list.All(x => x.IconName != skill.IconName))
+                    {
+                        list.Add(skill);
+                    }
+                }
+                return list;
+            }
+        }
 
         private static ClassManager _classManager => ClassManager.CurrentClassManager;
 
@@ -177,6 +200,31 @@ namespace TCC.ViewModels
 
             }
         }
+
+        internal void AddHiddenSkill(SkillCooldown context)
+        {
+            HiddenSkills.Add(context.Skill);
+        }
+
+
+        internal void AddHiddenSkill(FixedSkillCooldown context)
+        {
+            HiddenSkills.Add(context.Skill);
+        }
+
+        internal void DeleteFixedSkill(FixedSkillCooldown context)
+        {
+            if (MainSkills.Contains(context)) MainSkills.Remove(context);
+            else if (SecondarySkills.Contains(context)) SecondarySkills.Remove(context);
+
+            SaveSkillsConfig();
+        }
+
+        private void SaveSkillsConfig()
+        {
+            //throw new NotImplementedException();
+        }
+
         private void NormalMode_Remove(Skill sk)
         {
             if (!SettingsManager.CooldownWindowSettings.Enabled) return;
@@ -210,15 +258,33 @@ namespace TCC.ViewModels
             }
         }
 
+        internal void Save()
+        {
+            var root = new XElement("Skills");
+            MainSkills.ToList().ForEach(mainSkill =>
+            {
+                root.Add(new XElement("Skill", new XAttribute("id", mainSkill.Skill.Id), new XAttribute("row", 1)));
+            });
+            SecondarySkills.ToList().ForEach(secSkill =>
+            {
+                root.Add(new XElement("Skill", new XAttribute("id", secSkill.Skill.Id), new XAttribute("row", 2)));
+            });
+            HiddenSkills.ToList().ForEach(sk =>
+            {
+                root.Add(new XElement("Skill", new XAttribute("id", sk.Id), new XAttribute("row", 3)));
+            });
+            root.Save(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources/config/skills", $"{SessionManager.CurrentPlayer.Class.ToString().ToLowerInvariant()}-skills.xml"));
+        }
+
         private void FixedMode_Update(SkillCooldown sk)
         {
             if (SettingsManager.ClassWindowSettings.Enabled && _classManager.StartSpecialSkill(sk)) return;
             if (!SettingsManager.CooldownWindowSettings.Enabled) return;
 
-            var skill = HiddenSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
-            if (skill != null) return;
+            var hSkill = HiddenSkills.ToSyncArray().FirstOrDefault(x => x.IconName == sk.Skill.IconName);
+            if (hSkill != null) return;
 
-            skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
+            var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
             if (skill != null)
             {
                 skill.Start(sk.Cooldown);
@@ -238,11 +304,11 @@ namespace TCC.ViewModels
         {
             if (!SettingsManager.CooldownWindowSettings.Enabled) return;
 
-            var skill = HiddenSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
-            if (skill != null) return;
+            var hSkill = HiddenSkills.ToSyncArray().FirstOrDefault(x => x.IconName == sk.IconName);
+            if (hSkill != null) return;
 
 
-            skill = MainSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
+            var skill = MainSkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (skill != null)
             {
                 skill.Refresh(cd);
@@ -388,9 +454,9 @@ namespace TCC.ViewModels
             }
             catch (Exception)
             {
-                var res = MessageBox.Show($"There was an error while reading {filename}. Try correcting the error and press Retry to try again, else press Cancel to build a default config file.", "TCC", MessageBoxButtons.RetryCancel);
+                var res = TccMessageBox.Show("TCC", $"There was an error while reading {filename}. Manually correct the error and press Ok to try again, else press Cancel to build a default config file.", MessageBoxButton.OKCancel);
 
-                if (res == DialogResult.Cancel) File.Delete("resources/config/skills/" + filename);
+                if (res == MessageBoxResult.Cancel) File.Delete("resources/config/skills/" + filename);
                 LoadSkills(filename, c);
                 return;
             }
@@ -404,7 +470,7 @@ namespace TCC.ViewModels
             }
             foreach (var sk in sp.Hidden)
             {
-                HiddenSkills.Add(sk);
+                HiddenSkills.Add(sk.Skill);
             }
         }
 
@@ -412,7 +478,7 @@ namespace TCC.ViewModels
 
         public void NotifyModeChanged()
         {
-            NotifyPropertyChanged(nameof(Mode));
+            NPC(nameof(Mode));
         }
         //public bool IsClassWindowOn
         //{
@@ -428,11 +494,12 @@ namespace TCC.ViewModels
             SecondarySkills = new SynchronizedObservableCollection<FixedSkillCooldown>(_dispatcher);
             MainSkills = new SynchronizedObservableCollection<FixedSkillCooldown>(_dispatcher);
             OtherSkills = new SynchronizedObservableCollection<SkillCooldown>(_dispatcher);
-            HiddenSkills = new SynchronizedObservableCollection<FixedSkillCooldown>(_dispatcher);
+            HiddenSkills = new SynchronizedObservableCollection<Skill>(_dispatcher);
             ItemSkills = new SynchronizedObservableCollection<SkillCooldown>(_dispatcher);
+            //ChoiceList = new SynchronizedObservableCollection<FixedSkillCooldown>(_dispatcher);
             WindowManager.TccVisibilityChanged += (s, ev) =>
             {
-                NotifyPropertyChanged("IsTeraOnTop");
+                NPC("IsTeraOnTop");
                 if (IsTeraOnTop)
                 {
                     WindowManager.CooldownWindow.RefreshTopmost();
@@ -444,7 +511,7 @@ namespace TCC.ViewModels
 
         public void NotifyItemsDisplay()
         {
-            NotifyPropertyChanged(nameof(ShowItems));
+            NPC(nameof(ShowItems));
         }
     }
 }

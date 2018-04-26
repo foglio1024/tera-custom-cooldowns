@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dragablz;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -21,25 +22,30 @@ namespace TCC.Controls.ChatControls
 
         private void TabSettingControl_OnLoaded(object sender, RoutedEventArgs e)
         {
-            _dc = (Tab)DataContext;
+            _dc = DataContext as Tab;
         }
 
         private void RemoveAuthor(object sender, RoutedEventArgs e)
         {
             _dc.Authors.Remove(((FrameworkElement)sender).DataContext as string);
+            _dc.ApplyFilter();
+            
         }
 
         private void RemoveChannel(object sender, RoutedEventArgs e)
         {
             _dc.Channels.Remove((ChatChannel)((FrameworkElement)sender).DataContext);
+            _dc.ApplyFilter();
+
         }
 
         private void RemoveTab(object sender, RoutedEventArgs e)
         {
-            if (ChatWindowViewModel.Instance.Tabs.Count >= 1)
-            {
-                ChatWindowViewModel.Instance.Tabs.Remove(_dc);
-            }
+            ChatWindowManager.Instance.RemoveTab(_dc);
+            //if (ChatWindowManager.Instance.TabVMs.Count >= 1)
+            //{
+            //    ChatWindowManager.Instance.TabVMs.Remove(_dc);
+            //}
         }
 
         private void AddAuthor(object sender, RoutedEventArgs e)
@@ -79,11 +85,15 @@ namespace TCC.Controls.ChatControls
         private void RemoveExAuthor(object sender, RoutedEventArgs e)
         {
             _dc.ExcludedAuthors.Remove(((FrameworkElement)sender).DataContext as string);
+            _dc.ApplyFilter();
+
         }
 
         private void RemoveExChannel(object sender, RoutedEventArgs e)
         {
             _dc.ExcludedChannels.Remove((ChatChannel)((FrameworkElement)sender).DataContext);
+            _dc.ApplyFilter();
+
         }
 
         private void AddExAuthor(object sender, RoutedEventArgs e)
@@ -110,6 +120,85 @@ namespace TCC.Controls.ChatControls
             {
                 // ignored
             }
+        }
+
+        private void NewChannelComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (e.AddedItems.Count == 0) return;
+                var i = e.AddedItems[0] as ChatChannelOnOff;
+                var ch = i.Channel;
+                if (!_dc.Channels.Contains(ch))
+                {
+                    _dc.Channels.Add(ch);
+                    _dc.ApplyFilter();
+                }
+                var s = sender as ComboBox;
+                s.SelectedIndex = -1;
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
+        }
+
+        private void NewAuthorTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key != Key.Enter) return;
+            var s = sender as TextBox;
+            if (!string.IsNullOrEmpty(s.Text) && !string.Equals(s.Text, "New author..."))
+            {
+                if (_dc.Authors.Contains(s.Text)) return;
+                _dc.Authors.Add(s.Text);
+                _dc.ApplyFilter();
+            }
+
+        }
+
+        private void NewAuthorTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            (sender as TextBox).Text = "New author...";
+        }
+
+        private void NewExChannelComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (e.AddedItems.Count == 0) return;
+                var i = e.AddedItems[0] as ChatChannelOnOff;
+                var ch = i.Channel;
+                if (!_dc.ExcludedChannels.Contains(ch))
+                {
+                    _dc.ExcludedChannels.Add(ch);
+                    _dc.ApplyFilter();
+                }
+                var s = sender as ComboBox;
+                s.SelectedIndex = -1;
+
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
+        }
+
+        private void NewExAuthorTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key != Key.Enter) return;
+            var s = sender as TextBox;
+            if (!string.IsNullOrEmpty(s.Text) && !string.Equals(s.Text, "New author..."))
+            {
+                if (_dc.ExcludedAuthors.Contains(s.Text)) return;
+                _dc.ExcludedAuthors.Add(s.Text);
+                _dc.ApplyFilter();
+            }
+        }
+
+        private void NewExAuthorTextBox_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if ((sender as TextBox).Text != "New author...") return;
+            (sender as TextBox).Text = "";
         }
     }
 }

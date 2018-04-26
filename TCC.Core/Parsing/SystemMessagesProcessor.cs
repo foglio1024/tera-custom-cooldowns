@@ -29,20 +29,20 @@ namespace TCC.Parsing
 
             if (!Process(srvMsg, sysMsg, opcodeName))
             {
-                ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel));
+                ChatWindowManager.Instance.AddChatMessage(new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel));
             }
         }
         private static void HandleMaxEnchantSucceed(string x)
         {
             ChatMessage sysMsg = ChatMessage.BuildEnchantSystemMessage(x);
-            ChatWindowViewModel.Instance.AddChatMessage(sysMsg);
+            ChatWindowManager.Instance.AddChatMessage(sysMsg);
         }
         private static void HandleFriendLogin(string friendName, SystemMessage sysMsg)
         {
             var sysmsg = "@0\vUserName\v" + friendName;
             var msg = new ChatMessage(sysmsg, sysMsg, ChatChannel.Friend);
             msg.Author = friendName;
-            ChatWindowViewModel.Instance.AddChatMessage(msg);
+            ChatWindowManager.Instance.AddChatMessage(msg);
         }
 
         #region Factory
@@ -93,13 +93,13 @@ namespace TCC.Parsing
         private static void HandleLaurelMessage(string srvMsg, SystemMessage sysMsg)
         {
             var msg = new ChatMessage(srvMsg, sysMsg, ChatChannel.Laurel);
-            ChatWindowViewModel.Instance.AddChatMessage(msg);
+            ChatWindowManager.Instance.AddChatMessage(msg);
         }
 
         private static void HandleGroupMemberLoot(string srvMsg, SystemMessage sysMsg)
         {
             var msg = new ChatMessage(srvMsg, sysMsg, ChatChannel.Loot);
-            ChatWindowViewModel.Instance.AddChatMessage(msg);
+            ChatWindowManager.Instance.AddChatMessage(msg);
         }
         private static void HandleGuilBamSpawn(string srvMsg, SystemMessage sysMsg)
         {
@@ -107,7 +107,7 @@ namespace TCC.Parsing
             TimeManager.Instance.SetGuildBamTime(true);
             TimeManager.Instance.SendWebhookMessageOld();
             var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
-            ChatWindowViewModel.Instance.AddChatMessage(msg);
+            ChatWindowManager.Instance.AddChatMessage(msg);
         }
         private static void HandleDungeonEngagedMessage(string srvMsg, SystemMessage sysMsg)
         {
@@ -116,7 +116,7 @@ namespace TCC.Parsing
             InfoWindowViewModel.Instance.EngageDungeon(dgId);
 
             var msg = new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel);
-            ChatWindowViewModel.Instance.AddChatMessage(msg);
+            ChatWindowManager.Instance.AddChatMessage(msg);
         }
         private static void HandleFriendInAreaMessage(string srvMsg, SystemMessage sysMsg)
         {
@@ -125,27 +125,27 @@ namespace TCC.Parsing
             var end = srvMsg.IndexOf("\v", start);
             var friendName = srvMsg.Substring(start, end- start);
             msg.Author = friendName;
-            ChatWindowViewModel.Instance.AddChatMessage(msg);
+            ChatWindowManager.Instance.AddChatMessage(msg);
         }
         private static void HandleQuestMessage(string srvMsg, SystemMessage sysMsg)
         {
             var msg = new ChatMessage(srvMsg, sysMsg, ChatChannel.Quest);
-            ChatWindowViewModel.Instance.AddChatMessage(msg);
+            ChatWindowManager.Instance.AddChatMessage(msg);
         }
         private static void HandleRessMessage(string srvMsg, SystemMessage sysMsg)
         {
             var msg = new ChatMessage(srvMsg, sysMsg, ChatChannel.Ress);
-            ChatWindowViewModel.Instance.AddChatMessage(msg);
+            ChatWindowManager.Instance.AddChatMessage(msg);
         }
         private static void HandleDeathMessage(string srvMsg, SystemMessage sysMsg)
         {
             var msg = new ChatMessage(srvMsg, sysMsg, ChatChannel.Death);
-            ChatWindowViewModel.Instance.AddChatMessage(msg);
+            ChatWindowManager.Instance.AddChatMessage(msg);
         }
         private static void HandleInvalidLink(string srvMsg, SystemMessage sysMsg)
         {
-            ChatWindowViewModel.Instance.AddChatMessage(new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel));
-            ChatWindowViewModel.Instance.RemoveDeadLfg();
+            ChatWindowManager.Instance.AddChatMessage(new ChatMessage(srvMsg, sysMsg, (ChatChannel)sysMsg.ChatChannel));
+            ChatWindowManager.Instance.RemoveDeadLfg();
         }
 
         private static bool Process(string serverMsg, SystemMessage sysMsg, string opcodeName)

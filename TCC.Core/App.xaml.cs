@@ -27,7 +27,7 @@ namespace TCC
     /// </summary>
     public partial class App
     {
-        public static bool Debug = false;
+        public static bool Debug = true;
         public static TCC.Windows.SplashScreen SplashScreen;
         public static string Version;
         private static void GlobalUnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
@@ -45,9 +45,10 @@ namespace TCC
             catch (Exception)
             {
             }
-            System.Windows.MessageBox.Show("An error occured and TCC will now close. Check error.txt for more info.", "TCC",
+            TccMessageBox.Show("TCC", "An error occured and TCC will now close. Check error.txt for more info.",
                 MessageBoxButton.OK, MessageBoxImage.Error);
 
+            if (Proxy.IsConnected) Proxy.CloseConnection();
             if (WindowManager.TrayIcon != null)
             {
                 WindowManager.TrayIcon.Dispose();
@@ -70,8 +71,16 @@ namespace TCC
             js.Add("inner_exception", new JValue(ex.InnerException != null ? ex.InnerException.Message.ToString() : "undefined"));
             js.Add("exception", new JValue(ex.Message.ToString()));
             js.Add("game_version", new JValue(PacketProcessor.Version));
-            js.Add("region", new JValue(PacketProcessor.Region));
-            js.Add("server_id", new JValue(PacketProcessor.ServerId));
+            if (PacketProcessor.Server != null)
+            {
+                js.Add("region", new JValue(PacketProcessor.Server.Region));
+                js.Add("server_id", new JValue(PacketProcessor.Server.ServerId));
+            }
+            else
+            {
+                js.Add("region", new JValue(""));
+                js.Add("server_id", new JValue(""));
+            }
             c.Encoding = Encoding.UTF8;
             c.UploadString(new Uri("https://us-central1-tcc-report.cloudfunctions.net/crash"), Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
         }
@@ -111,9 +120,9 @@ namespace TCC
                 c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
                 var js = new JObject()
                 {
-                    { "server", PacketProcessor.ServerId},
+                    { "server", PacketProcessor.Server.ServerId},
                     { "id", InfoWindowViewModel.Instance.Characters == null ?0 : InfoWindowViewModel.Instance.Characters.Count == 0 ? 0 : InfoWindowViewModel.Instance.Characters.FirstOrDefault(x => x.Position == 1).Id },
-                    { "region", PacketProcessor.Region },
+                    { "region", PacketProcessor.Server.Region },
                 };
                 c.Encoding = Encoding.UTF8;
                 c.UploadStringAsync(new Uri("https://us-central1-tcc-report.cloudfunctions.net/stat"), Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
@@ -132,7 +141,6 @@ namespace TCC
                 File.Delete(AppDomain.CurrentDomain.BaseDirectory + "/TCCupdater.exe");
             }
             catch (Exception) { }
-            //SplashScreen = null; //######################################################################
             SplashScreen.SetText("Checking for application updates...");
 
             UpdateManager.CheckAppVersion();
@@ -140,9 +148,6 @@ namespace TCC
 
             UpdateManager.CheckDatabaseVersion();
 
-            SplashScreen.SetText("Loading skills...");
-            SkillsDatabase.Load();
-            //ItemSkillsDatabase.SetBroochesIcons();
             SplashScreen.SetText("Loading settings...");
             SettingsManager.LoadWindowSettings();
             SettingsManager.LoadSettings();
@@ -157,13 +162,14 @@ namespace TCC
 
             TeraSniffer.Instance.NewConnection += (srv) =>
             {
+                PacketProcessor.Server = srv;
                 SkillManager.Clear();
                 WindowManager.TrayIcon.Icon = WindowManager.ConnectedIcon;
-                ChatWindowViewModel.Instance.AddTccMessage($"Connected to {srv.Name}.");
+                ChatWindowManager.Instance.AddTccMessage($"Connected to {srv.Name}.");
             };
             TeraSniffer.Instance.EndConnection += () =>
             {
-                ChatWindowViewModel.Instance.AddTccMessage("Disconnected from the server.");
+                ChatWindowManager.Instance.AddTccMessage("Disconnected from the server.");
                 GroupWindowViewModel.Instance.ClearAllAbnormalities();
                 BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
                 EntitiesManager.ClearNPC();
@@ -182,15 +188,20 @@ namespace TCC
 
             TimeManager.Instance.SetServerTimeZone(SettingsManager.LastRegion);
 
-            ChatWindowViewModel.Instance.AddTccMessage(Version);
-
+            ChatWindowManager.Instance.AddTccMessage(Version);
             SplashScreen.CloseWindowSafe();
-            if (!Debug) return;
+            UpdateManager.StartCheck();
 
+            if (!Debug) return;
+            SessionManager.CurrentPlayer = new Player(1, "Foglio");
+            SessionManager.CurrentPlayer.Class = Class.Priest;
+            SkillsDatabase.Load("EU-EN");
+            CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(Class.Priest).ToLower() + "-skills.xml", Class.Priest);
+            AbnormalityManager.CurrentDb = new AbnormalityDatabase("EU-EN");
+            var s = AbnormalityManager.CurrentDb.Abnormalities[4];
+            BuffBarWindowViewModel.Instance.Player.AddOrRefreshBuff(s, Int32.MaxValue, 5);
             //ss.Dispatcher.Invoke(new Action(() => ss.Close()));
 
-            SessionManager.CurrentPlayer = new Player(1, "Foglio");
-            CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(Class.Warrior).ToLower() + "-skills.xml", Class.Warrior);
 
             var u = new User(GroupWindowViewModel.Instance.GetDispatcher());
             u.Name = "Test_Dps";
@@ -200,7 +211,24 @@ namespace TCC
             u.UserClass = Class.Warrior;
 
 
+            //GroupWindowViewModel.Instance.AddOrUpdateMember(u);
+            //u = new User(GroupWindowViewModel.Instance.GetDispatcher());
+            //u.Name = "Test_Healer";
+            //u.PlayerId = 2;
+            //u.ServerId = 0;
+            //u.Online = true;
+            //u.UserClass = Class.Priest;
+
+            //GroupWindowViewModel.Instance.AddOrUpdateMember(u);
+            //u = new User(GroupWindowViewModel.Instance.GetDispatcher());
+            //u.Name = "Test_Tank";
+            //u.PlayerId = 3;
+            //u.ServerId = 0;
+            //u.Online = true;
+            //u.UserClass = Class.Lancer;
+
             GroupWindowViewModel.Instance.AddOrUpdateMember(u);
+            WindowManager.ClassWindow.Context.CurrentClass = Class.Priest;
             var l = new List<User>();
             for (uint i = 0; i < 10; i++)
             {
@@ -217,6 +245,7 @@ namespace TCC
             {
                 GroupWindowViewModel.Instance.AddOrUpdateMember(item);
             }
+            return;
             foreach (var item in l)
             {
                 GroupWindowViewModel.Instance.AddOrUpdateMember(item);
@@ -229,9 +258,20 @@ namespace TCC
             SettingsManager.SaveSettings();
             WindowManager.Dispose();
             Proxy.CloseConnection();
+            UpdateManager.StopTimer();
             Environment.Exit(0);
         }
 
+        private void ToolTip_Opened(object sender, RoutedEventArgs e)
+        {
+            FocusManager.Running = false;
+        }
+
+        private void ToolTip_Closed(object sender, RoutedEventArgs e)
+        {
+            FocusManager.Running = true;
+
+        }
     }
 
 }

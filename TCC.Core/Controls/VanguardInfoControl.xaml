@@ -4,10 +4,154 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
-             Cursor="Hand"
-             mc:Ignorable="d" MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave" Loaded="UserControl_Loaded" MouseLeftButtonDown="UserControl_MouseLeftButtonDown">
-    <Border Background="White" Margin="3" x:Name="rootBorder" RenderTransformOrigin=".5,.5" UseLayoutRounding="True"  CornerRadius="2" PreviewMouseRightButtonDown="RootBorder_OnPreviewMouseRightButtonDown">
-        <Grid ClipToBounds="True">
+             xmlns:vm="clr-namespace:TCC.ViewModels"
+             Cursor="Hand" Background="Transparent"
+             mc:Ignorable="d" MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave" Loaded="UserControl_Loaded"
+             MouseLeftButtonDown="UserControl_MouseLeftButtonDown">
+    <Border  Margin="0" x:Name="rootBorder" RenderTransformOrigin=".5,.5" 
+            UseLayoutRounding="True"  CornerRadius="2" 
+            PreviewMouseRightButtonDown="RootBorder_OnPreviewMouseRightButtonDown">
+        <Grid Width="Auto" ClipToBounds="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Grid.ColumnSpan="3" Fill="#1fff" Opacity="0" x:Name="glow"/>
+            <Rectangle Grid.ColumnSpan="3" Fill="{StaticResource Colors.App.Main}" Width="3" Margin="0" 
+                       HorizontalAlignment="Left" x:Name="sel" RenderTransformOrigin=".5 .5">
+                <Rectangle.RenderTransform>
+                    <ScaleTransform ScaleY="0"/>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Ellipse VerticalAlignment="Top" HorizontalAlignment="Left" Width="10" Height="10" x:Name="ripple" Opacity="0" RenderTransformOrigin=".5,.5" Fill="#5999" IsHitTestVisible="False">
+                <Ellipse.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                        <TranslateTransform X="0" Y="0" />
+                    </TransformGroup>
+                </Ellipse.RenderTransform>
+            </Ellipse>
+            <Rectangle Fill="#888" Height="36" Width="36" Grid.RowSpan="1" 
+                       Margin="7 2 2 2" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <Rectangle.OpacityMask>
+                    <ImageBrush ImageSource="{Binding Class, Converter={StaticResource Converters.ClassToImage}}" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+            <TextBlock Grid.Column="1" Text="{Binding Name}" Grid.RowSpan="1" HorizontalAlignment="Left" 
+                       VerticalAlignment="Center" FontSize="16" Margin="5 0" Foreground="#ddd"></TextBlock>
+            <!--<Grid HorizontalAlignment="Stretch" Margin="0,2,0,0" Grid.Row="2" Grid.ColumnSpan="3" ToolTip="Vanguard Credits">
+                <Rectangle Height="3" Width="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Grid}}}" Fill="#1fff" HorizontalAlignment="Stretch"></Rectangle>
+                <Rectangle x:Name="creditsRect" Height="3" 
+                           Width="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Grid}}}" 
+                           Fill="Orange"  Opacity=".8"
+                           HorizontalAlignment="Left">
+                    <Rectangle.LayoutTransform>
+                        <ScaleTransform ScaleX="{Binding Credits, Converter={StaticResource Converters.ValueToFactor}, ConverterParameter=9000}" CenterX="0"/>
+                    </Rectangle.LayoutTransform>
+                </Rectangle>
+            </Grid>-->
+            <StackPanel Grid.Column="2" VerticalAlignment="Center" Grid.RowSpan="3"
+                        Orientation="Horizontal" HorizontalAlignment="Right">
+                <!--Elleon mark-->
+                <Grid Margin="5 0" Background="Transparent" ToolTip="Elleon's Marks of Valor."
+                  HorizontalAlignment="Right" VerticalAlignment="Center" Visibility="{Binding Source={x:Static vm:InfoWindowViewModel.Instance},
+                    Path=ShowElleonMarks, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
+                    <Ellipse Fill="{StaticResource MarksColor}" Opacity=".2" Margin="2"></Ellipse>
+                    <Viewbox StretchDirection="DownOnly" Width="19">
+                        <TextBlock Text="{Binding ElleonMarks}" 
+                                   Foreground="{StaticResource MarksColor}" 
+                                   TextAlignment="Center" FontSize="15" VerticalAlignment="Center"></TextBlock>
+                    </Viewbox>
+                    <local:Arc x:Name="elleonArc"
+                           Width="30" 
+                           Height="30" 
+                           Stroke="{StaticResource MarksColor}" 
+                           StrokeThickness="3" 
+                           Margin="0" 
+                           Opacity=".8"
+                           EndAngle="{Binding ElleonMarks, Converter={StaticResource Converters.FactorToAngle}, ConverterParameter=1000}"
+
+                           />
+                </Grid>
+                <!--Guardian points-->
+                <Grid Margin="5 0" Background="Transparent" ToolTip="Guardian points."
+                  HorizontalAlignment="Right" VerticalAlignment="Center" >
+                    <Ellipse Fill="{StaticResource GuardianColor}" Opacity=".2" Margin="2"></Ellipse>
+                    <Viewbox StretchDirection="DownOnly" Width="19">
+                        <TextBlock Text="{Binding GuardianPoints, Converter={StaticResource GuardianPointsStringConverter}}"
+                                   Foreground="{StaticResource GuardianColor}" 
+                                   TextAlignment="Center" FontSize="15" VerticalAlignment="Center"></TextBlock>
+                    </Viewbox>
+                    <local:Arc x:Name="guardianArc"
+                           Width="30" 
+                           Height="30" 
+                           Stroke="{StaticResource GuardianColor}" 
+                           StrokeThickness="3" 
+                           Margin="0" 
+                           Opacity=".8"
+                           EndAngle="{Binding GuardianCompletion, Converter={StaticResource Converters.FactorToAngle}}"
+                           />
+                </Grid>
+                <!--Vanguard credits-->
+                <Grid Margin="5 0" Background="Transparent" ToolTip="Vanguard credits."
+                  HorizontalAlignment="Right" VerticalAlignment="Center" >
+                    <Ellipse Fill="{StaticResource Colors.DungeonTier.3}" Opacity=".2" Margin="2"></Ellipse>
+                    <Viewbox StretchDirection="DownOnly" Width="19">
+                        <TextBlock Text="{Binding Credits, Converter={StaticResource GuardianPointsStringConverter}}"
+                                   Foreground="{StaticResource Colors.DungeonTier.3}" 
+                                   TextAlignment="Center" FontSize="15" VerticalAlignment="Center"></TextBlock>
+                    </Viewbox>
+                    <local:Arc x:Name="creditsArc"
+                           Width="30" 
+                           Height="30" 
+                           Stroke="{StaticResource Colors.DungeonTier.3}" 
+                           StrokeThickness="3" 
+                           Margin="0" 
+                           Opacity=".8"
+                           EndAngle="{Binding CreditsFactor, Converter={StaticResource Converters.FactorToAngle}}"
+                           />
+                </Grid>
+
+                <!--Daily-->
+                <Grid Margin="5 0" Background="Transparent" 
+                  HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="Completed daily Vanguard quests.">
+                    <Ellipse Fill="{StaticResource DailyColor}" Opacity=".2" Margin="2"></Ellipse>
+                    <TextBlock Text="{Binding DailiesDone}" Foreground="{StaticResource DailyColor}" TextAlignment="Center" FontSize="15" VerticalAlignment="Center"></TextBlock>
+                    <local:Arc x:Name="dailyArc"
+                           Width="30" 
+                           Height="30" 
+                           Stroke="{StaticResource DailyColor}"
+                           StrokeThickness="3" 
+                           Margin="0" 
+                           Opacity=".8"
+                           EndAngle="{Binding VanguardDailyCompletion, Converter={StaticResource Converters.FactorToAngle}}"
+                           />
+                </Grid>
+                <!--Weekly-->
+                <Grid Margin="5 0" Background="Transparent" 
+                  HorizontalAlignment="Right" VerticalAlignment="Center"  ToolTip="Completed weekly Vanguard quests.">
+                    <Ellipse Fill="{StaticResource WeeklyColor}" Opacity=".2" Margin="2"/>
+                    <TextBlock Text="{Binding WeekliesDone}" Foreground="{StaticResource WeeklyColor}" TextAlignment="Center" FontSize="15" VerticalAlignment="Center"></TextBlock>
+                    <local:Arc x:Name="weeklyArc"
+                           Width="30" 
+                           Height="30" 
+                           Stroke="{StaticResource WeeklyColor}" 
+                           StrokeThickness="3" 
+                           Margin="0" 
+                           Opacity=".8"
+                           EndAngle="{Binding VanguardWeeklyCompletion, Converter={StaticResource Converters.FactorToAngle}}"
+                           ToolTip="Completed weekly Vanguard quests."
+                           />
+                </Grid>
+            </StackPanel>
+        </Grid>
+        <!--<Grid ClipToBounds="True">
             <Ellipse VerticalAlignment="Top" HorizontalAlignment="Left" Width="50" Height="50" x:Name="ripple" Opacity="0" RenderTransformOrigin=".5,.5" Fill="#1a000000" IsHitTestVisible="False">
                 <Ellipse.RenderTransform>
                     <TransformGroup>
@@ -120,11 +264,11 @@
             </Grid>
             <TextBlock Text="{Binding Credits}" HorizontalAlignment="Center" Foreground="#8000" Margin="0,0,0,3"></TextBlock>
         </StackPanel>
-        </Grid>
+        </Grid>-->
+
         <Border.Effect>
             <DropShadowEffect ShadowDepth="1" BlurRadius="3" Opacity=".3"/>
         </Border.Effect>
-        
         <Border.RenderTransform>
             <TranslateTransform Y="0"/>
         </Border.RenderTransform>

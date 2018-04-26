@@ -6,30 +6,32 @@
         xmlns:local="clr-namespace:TCC"
         xmlns:vm="clr-namespace:TCC.ViewModels"
         xmlns:w="clr-namespace:TCC.Windows"
-             xmlns:controls="clr-namespace:TCC.Controls"
+        xmlns:c="clr-namespace:TCC.Controls"
         mc:Ignorable="d"
         Title="Tera Custom Cooldowns"
-        Height="Auto" 
-        Width="Auto" 
-        SizeToContent="WidthAndHeight" 
-        Topmost="True" 
-        AllowsTransparency="True" 
-        ShowInTaskbar="False" 
-        WindowStyle="None" 
-        Background="Transparent" 
-        MouseLeftButtonDown="Window_MouseLeftButtonDown" 
-        Loaded="Window_Loaded"    
-        ResizeMode="NoResize">
+        Style="{StaticResource BaseWindowStyle}">
     <w:TccWindow.DataContext>
         <vm:CooldownWindowViewModel />
     </w:TccWindow.DataContext>
-    <Grid>
-        <ContentControl Margin="0" x:Name="controlContainer" DataContext="{Binding Instance}" Content="{Binding}"
-                                        ContentTemplate="{Binding Instance.Mode, Converter={StaticResource Converters.CooldowWindowModeToTemplate}}"
-        >
+    <Grid Background="Transparent" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <ContentControl x:Name="content" 
+                        Margin="5" 
+                        Grid.Row="1"
+                        DataContext="{Binding Instance}" 
+                        Content="{Binding}"
+                        ContentTemplate="{Binding Instance.Mode, Converter={StaticResource Converters.CooldowWindowModeToTemplate}}" >
+
+            <ContentControl.LayoutTransform>
+                <ScaleTransform ScaleX="{Binding Scale}" 
+                            ScaleY="{Binding Scale}"/>
+            </ContentControl.LayoutTransform>
         </ContentControl>
-        <Grid.LayoutTransform>
-            <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
-        </Grid.LayoutTransform>
+        <c:WindowButtons WindowName="Cooldown bar" x:Name="buttons" 
+                         DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWindow}}"/>
     </Grid>
 </w:TccWindow>

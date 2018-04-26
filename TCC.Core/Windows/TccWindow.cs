@@ -2,11 +2,13 @@
 using System.ComponentModel;
 using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using TCC.Controls;
 using TCC.ViewModels;
 
 namespace TCC.Windows
@@ -15,6 +17,11 @@ namespace TCC.Windows
     {
         protected IntPtr _handle;
         protected WindowSettings _settings;
+        protected WindowButtons _b;
+        protected UIElement _c;
+        DispatcherTimer _t;
+        DoubleAnimation _showButtons;
+        DoubleAnimation _hideButtons;
         protected bool _ignoreSize;
         protected bool clickThru;
         public bool ClickThru
@@ -31,36 +38,11 @@ namespace TCC.Windows
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ClickThru)));
             }
         }
-
+        public WindowSettings WindowSettings => _settings;
 
         protected void InitWindow(WindowSettings ws, bool canClickThru = true, bool canHide = true, bool ignoreSize = true)
         {
-            _handle = new WindowInteropHelper(this).Handle;
-            FocusManager.MakeUnfocusable(_handle);
-            FocusManager.HideFromToolBar(_handle);
             Topmost = true;
-            //ContextMenu = new System.Windows.Controls.ContextMenu();
-
-            //if (canHide)
-            //{
-            //    var HideButton = new System.Windows.Controls.MenuItem() { Header = "Hide" };
-            //    HideButton.Click += (s, ev) =>
-            //    {
-            //        SetVisibility(Visibility.Hidden);
-            //    };
-            //    ContextMenu.Items.Add(HideButton);
-            //}
-
-            //if (canClickThru)
-            //{
-            //    var ClickThruButton = new System.Windows.Controls.MenuItem() { Header = "Click through" };
-            //    ClickThruButton.Click += (s, ev) =>
-            //    {
-            //        SetClickThru(true);
-            //    };
-            //    ContextMenu.Items.Add(ClickThruButton);
-            //}
-
             _settings = ws;
             _settings.NotifyWindowSafeClose += CloseWindowSafe;
             _settings.PropertyChanged += _settings_PropertyChanged;
@@ -72,15 +54,34 @@ namespace TCC.Windows
                 if (ws.W != 0) Width = ws.W;
             }
             _ignoreSize = ignoreSize;
-            Visibility = ws.Visible ? Visibility.Visible : Visibility.Hidden;
+            SetVisibility(ws.Visible);
+            //Visibility = ws.Visible ? Visibility.Visible : Visibility.Hidden;
             SetClickThru(ws.ClickThruMode == ClickThruMode.Always);
-            if(_settings.AutoDim) AnimateContentOpacity(_settings.DimOpacity);
-            if(!WindowManager.IsTccVisible) AnimateContentOpacity(0);
+            if (_settings.AutoDim) AnimateContentOpacity(_settings.DimOpacity);
+            if (!WindowManager.IsTccVisible) AnimateContentOpacity(0);
+
             WindowManager.TccVisibilityChanged += OpacityChange;
             WindowManager.TccDimChanged += OpacityChange;
             SizeChanged += TccWindow_SizeChanged;
             Closed += TccWindow_Closed;
             Loaded += TccWindow_Loaded;
+
+            if (_b == null) return;
+
+            _hideButtons = new DoubleAnimation(0, TimeSpan.FromMilliseconds(1000));
+            _showButtons = new DoubleAnimation(1, TimeSpan.FromMilliseconds(150));
+
+            _t = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(2) };
+            _t.Tick += (s, ev) =>
+            {
+                _t.Stop();
+                if (this.IsMouseOver) return;
+                _b.BeginAnimation(OpacityProperty, _hideButtons);
+            };
+
+            MouseEnter += (s, ev) => _b.BeginAnimation(OpacityProperty, _showButtons); 
+            MouseLeave += (s, ev) => _t.Start();
+            _b.MouseLeftButtonDown += Drag;
         }
 
         private void _settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -96,11 +97,11 @@ namespace TCC.Windows
                         FocusManager.MakeTransparent(_handle);
                         break;
                     case ClickThruMode.WhenDim:
-                        if(WindowManager.IsTccDim) FocusManager.MakeTransparent(_handle);
+                        if (WindowManager.IsTccDim) FocusManager.MakeTransparent(_handle);
                         else FocusManager.UndoTransparent(_handle);
                         break;
                     case ClickThruMode.WhenUndim:
-                        if(WindowManager.IsTccDim) FocusManager.UndoTransparent(_handle);
+                        if (WindowManager.IsTccDim) FocusManager.UndoTransparent(_handle);
                         else FocusManager.MakeTransparent(_handle);
                         break;
                     default:
@@ -111,7 +112,7 @@ namespace TCC.Windows
             {
                 Dispatcher.Invoke(() =>
                 {
-                    var vm = (TccWindowViewModel) DataContext;
+                    var vm = (TccWindowViewModel)DataContext;
                     vm.GetDispatcher().Invoke(() => vm.Scale = _settings.Scale);
                 });
             }
@@ -123,11 +124,16 @@ namespace TCC.Windows
 
         private void TccWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            _handle = new WindowInteropHelper(this).Handle;
+            FocusManager.MakeUnfocusable(_handle);
+            FocusManager.HideFromToolBar(_handle);
+
             if (!_settings.Enabled) CloseWindowSafe();
         }
 
         private void TccWindow_SizeChanged(object sender, SizeChangedEventArgs e)
         {
+            CheckBounds();
             if (_ignoreSize) return;
             _settings.W = ActualWidth;
             _settings.H = ActualHeight;
@@ -136,7 +142,7 @@ namespace TCC.Windows
 
         private void TccWindow_Closed(object sender, EventArgs e)
         {
-            Dispatcher.InvokeShutdown();
+            //Dispatcher.InvokeShutdown();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -204,16 +210,19 @@ namespace TCC.Windows
             }
             Dispatcher.Invoke(() =>
             {
-                Visibility = v? Visibility.Visible : Visibility.Hidden;
+                Visibility = !v ? Visibility.Visible : Visibility.Collapsed; // meh ok
+                Visibility = v ? Visibility.Visible : Visibility.Collapsed;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Visibility"));
             });
         }
 
         public void AnimateContentOpacity(double opacity)
         {
+            if (_c == null) return;
             Dispatcher.InvokeIfRequired(() =>
             {
-                ((FrameworkElement)this.Content).BeginAnimation(OpacityProperty, new DoubleAnimation(opacity, TimeSpan.FromMilliseconds(250)));
+                //var grid = ((Grid)this.Content);
+                _c.BeginAnimation(OpacityProperty, new DoubleAnimation(opacity, TimeSpan.FromMilliseconds(250)));
             }, System.Windows.Threading.DispatcherPriority.DataBind);
         }
         public void RefreshTopmost()
@@ -224,12 +233,14 @@ namespace TCC.Windows
         {
             _settings = ws;
         }
-        protected void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+
+        protected void Drag(object sender, MouseButtonEventArgs e)
         {
             try
             {
                 if (!_ignoreSize) ResizeMode = ResizeMode.NoResize;
                 DragMove();
+                CheckBounds();
                 if (!_ignoreSize) ResizeMode = ResizeMode.CanResize;
                 var screen = Screen.FromHandle(new WindowInteropHelper(this).Handle);
                 var source = PresentationSource.FromVisual(this);
@@ -246,6 +257,20 @@ namespace TCC.Windows
             }
             catch (Exception) { }
         }
+
+        private void CheckBounds()
+        {
+            if (Left < 0) Left = 0;
+            if ((Left + ActualWidth) > Screen.PrimaryScreen.WorkingArea.Width)
+            {
+                Left = Screen.PrimaryScreen.Bounds.Width - ActualWidth;
+            }
+            if ((Top + ActualHeight) > Screen.PrimaryScreen.WorkingArea.Height)
+            {
+                Top = Screen.PrimaryScreen.Bounds.Height - ActualHeight;
+            }
+        }
+
         public void CloseWindowSafe()
         {
             if (Dispatcher.CheckAccess())

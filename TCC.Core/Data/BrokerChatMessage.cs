@@ -12,7 +12,7 @@ namespace TCC.Data
             set
             {
                 startingPrice = value;
-                NotifyPropertyChanged(nameof(StartingPrice));
+                NPC(nameof(StartingPrice));
             }
         }
 
@@ -23,7 +23,7 @@ namespace TCC.Data
             set
             {
                 offeredPrice = value;
-                NotifyPropertyChanged(nameof(OfferedPrice));
+                NPC(nameof(OfferedPrice));
             }
         }
 
@@ -34,7 +34,7 @@ namespace TCC.Data
             set
             {
                 listing = value;
-                NotifyPropertyChanged(nameof(Listing));
+                NPC(nameof(Listing));
             }
         }
 
@@ -45,7 +45,7 @@ namespace TCC.Data
             set
             {
                 amount = value;
-                NotifyPropertyChanged(nameof(Amount));
+                NPC(nameof(Amount));
             }
         }
 

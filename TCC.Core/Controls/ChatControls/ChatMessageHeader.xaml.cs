@@ -3,6 +3,7 @@ using System.Windows.Input;
 using System.Windows.Media.Effects;
 using TCC.Data;
 using TCC.Parsing;
+using TCC.ViewModels;
 
 namespace TCC.Controls
 {
@@ -20,13 +21,13 @@ namespace TCC.Controls
         {
             var context = (ChatMessage)DataContext;
             if (context.Author == "System" || context.Channel == ChatChannel.Twitch) return;
-            WindowManager.ChatWindow.CurrentSender = sender;
-            Proxy.AskInteractive(PacketProcessor.ServerId, context.Author);
+            ChatWindowManager.Instance.CurrentSender = sender;
+            Proxy.AskInteractive(PacketProcessor.Server.ServerId, context.Author);
         }
 
         private void UserControl_MouseEnter(object sender, MouseEventArgs e)
         {
-            WindowManager.ChatWindow.CloseTooltip();
+            ChatWindowManager.Instance.CloseTooltip();
         }
 
         private void UIElement_OnMouseEnter(object sender, MouseEventArgs e)

@@ -204,7 +204,7 @@
                     <controls:ValueSetting SettingName="Scale"  Min="0" Max="3" Value="{Binding CooldownWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png" />
                     <controls:BoolSetting SettingName="Auto dim"  IsOn="{Binding CooldownWindowSettings.AutoDim, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png"  ToolTip="{StaticResource AutoDimSettingTooltip}"/>
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Value="{Binding CooldownWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png" ToolTip="{StaticResource DimOpacitySettingTooltip}"/>
-                    <controls:BoolSetting SettingName="Transparency" IsOn="{Binding CooldownWindowSettings.AllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource TransparencySettingTooltip}"/>
+                    <!--<controls:BoolSetting SettingName="Transparency" IsOn="{Binding CooldownWindowSettings.AllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource TransparencySettingTooltip}"/>-->
                     <Separator/>
                     <controls:SelectionSetting SettingName="Cooldown bar mode" SelectedItem="{Binding CooldownBarMode, Mode=TwoWay}" Choices="{Binding CooldownBarModes}" ChoicesType="{x:Type tcc:CooldownBarMode}"  ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_timelapse_white_24dp_2x.png" >
                         <controls:SelectionSetting.ToolTip>
@@ -249,7 +249,7 @@
                     <controls:ValueSetting SettingName="Scale" Min="0" Max="3" Value="{Binding BossWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"/>
                     <controls:BoolSetting SettingName="Auto dim" IsOn="{Binding BossWindowSettings.AutoDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" ToolTip="{StaticResource AutoDimSettingTooltip}"/>
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1"  Value="{Binding BossWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png" ToolTip="{StaticResource DimOpacitySettingTooltip}"/>
-                    <controls:BoolSetting SettingName="Transparency" IsOn="{Binding BossWindowSettings.AllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource TransparencySettingTooltip}" />
+                    <!--<controls:BoolSetting SettingName="Transparency" IsOn="{Binding BossWindowSettings.AllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource TransparencySettingTooltip}" />-->
                     <Separator />
                     <controls:BoolSetting SettingName="Hide adds"  IsOn="{Binding ShowOnlyBosses, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_visibility_off_white_24dp_2x.png" >
                         <controls:BoolSetting.ToolTip>
@@ -288,7 +288,7 @@
                     <controls:ValueSetting SettingName="Scale" Min="0" Max="3" Value="{Binding CharacterWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"/>
                     <controls:BoolSetting SettingName="Auto dim" IsOn="{Binding CharacterWindowSettings.AutoDim, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" ToolTip="{StaticResource AutoDimSettingTooltip}"/>
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Value="{Binding CharacterWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png" ToolTip="{StaticResource DimOpacitySettingTooltip}"/>
-                    <controls:BoolSetting SettingName="Transparency" IsOn="{Binding CharacterWindowSettings.AllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource TransparencySettingTooltip}" />
+                    <!--<controls:BoolSetting SettingName="Transparency" IsOn="{Binding CharacterWindowSettings.AllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource TransparencySettingTooltip}" />-->
                 </StackPanel>
             </TabItem>
             <TabItem Margin="-1,0,0,0">
@@ -480,7 +480,7 @@
                     <controls:BoolSetting SettingName="Enabled" IsOn="{Binding ChatWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" ToolTip="{StaticResource EnabledSettingTooltip}"/>
                     <controls:BoolSetting SettingName="Visibility" IsOn="{Binding ChatWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource VisibilitySettingTooltip}"/>
                     <controls:BoolSetting SettingName="Show always" IsOn="{Binding ChatWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource ShowAlwaysSettingTooltip}"/>
-                    <controls:BoolSetting SettingName="Transparency" Grid.Row="1" IsOn="{Binding ChatWindowSettings.AllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource TransparencySettingTooltip}"/>
+                    <!--<controls:BoolSetting SettingName="Transparency" Grid.Row="1" IsOn="{Binding ChatWindowSettings.AllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource TransparencySettingTooltip}"/>-->
                     <Separator />
                     <controls:ValueSetting SettingName="Max messages" Min="0" Max="10000" Value="{Binding MaxMessages, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/chat.png" >
                         <controls:ValueSetting.ToolTip>

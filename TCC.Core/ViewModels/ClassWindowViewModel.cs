@@ -13,7 +13,7 @@ namespace TCC.ViewModels
             _scale = SettingsManager.ClassWindowSettings.Scale;
             WindowManager.TccVisibilityChanged += (s, ev) =>
             {
-                NotifyPropertyChanged("IsTeraOnTop");
+                NPC("IsTeraOnTop");
                 if (IsTeraOnTop)
                 {
                     WindowManager.ClassWindow.RefreshTopmost();
@@ -82,7 +82,7 @@ namespace TCC.ViewModels
                             break;
                     }
                 });
-                NotifyPropertyChanged("CurrentClass");
+                NPC("CurrentClass");
             }
         }
 
@@ -95,7 +95,7 @@ namespace TCC.ViewModels
                 if (currentManager == value) return;
                 currentManager = value;
                 ClassManager.CurrentClassManager = currentManager;
-                NotifyPropertyChanged("CurrentManager");
+                NPC("CurrentManager");
             }
         }
 

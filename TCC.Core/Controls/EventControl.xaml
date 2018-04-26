@@ -18,10 +18,10 @@
 
         <Border Height="14" 
                 MinWidth="14"
-                CornerRadius="6"
+                CornerRadius="7"
                 Background="{Binding Color, Converter={StaticResource Converters.StringToFill}}"
-                BorderBrush="White"
-                BorderThickness="2"
+                BorderBrush="#1fff"
+                BorderThickness="0"
                 HorizontalAlignment="Left"
                 ToolTip="{Binding ToolTip}"
                 Name="border"
@@ -34,9 +34,9 @@
                     <ScaleTransform ScaleX="{Binding DurationFactor}"></ScaleTransform>
                 </FrameworkElement.LayoutTransform>
             </FrameworkElement>
-            <Border.Effect>
+            <!--<Border.Effect>
                 <DropShadowEffect ShadowDepth="1" BlurRadius="3" Opacity=".6"></DropShadowEffect>
-            </Border.Effect>
+            </Border.Effect>-->
             <Border.RenderTransform>
                 <ScaleTransform />
             </Border.RenderTransform>

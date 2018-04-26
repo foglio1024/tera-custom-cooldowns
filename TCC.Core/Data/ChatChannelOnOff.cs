@@ -14,7 +14,7 @@ namespace TCC.Data
             {
                 if (enabled == value) return;
                 enabled = value;
-                NotifyPropertyChanged(nameof(Enabled));
+                NPC(nameof(Enabled));
             }
         }
         public ChatChannel Channel
@@ -24,7 +24,7 @@ namespace TCC.Data
             {
                 if (channel == value) return;
                 channel = value;
-                NotifyPropertyChanged(nameof(Channel));
+                NPC(nameof(Channel));
             }
         }
 

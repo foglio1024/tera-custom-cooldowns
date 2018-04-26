@@ -49,6 +49,7 @@ namespace TCC.Windows
                 an.Completed += (s, ev) =>
                  {
                      Close();
+                     Dispatcher.InvokeShutdown();
                  };
                 BeginAnimation(OpacityProperty, an);
             });

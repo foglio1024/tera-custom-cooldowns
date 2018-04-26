@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Threading;
 using System.Xml.Linq;
 using TCC.Parsing;
+using TCC.ViewModels;
+using TCC.Windows;
 
 namespace TCC
 {
@@ -29,60 +32,56 @@ namespace TCC
             set
             {
                 x = value;
-                NotifyPropertyChanged(nameof(X));
+                NPC(nameof(X));
             }
         }
-
         public double Y
         {
             get => y;
             set
             {
                 y = value;
-                NotifyPropertyChanged(nameof(Y));
+                NPC(nameof(Y));
             }
         }
-
         public double W
         {
             get => w;
             set
             {
                 w = value;
-                NotifyPropertyChanged(nameof(W));
+                NPC(nameof(W));
             }
         }
-
         public double H
         {
             get => h;
             set
             {
                 h = value;
-                NotifyPropertyChanged(nameof(H));
+                NPC(nameof(H));
             }
         }
-
         public bool Visible
         {
             get => visible;
             set
             {
+                if (visible == value) return;
                 visible = value;
-                NotifyPropertyChanged(nameof(Visible));
+                //Console.WriteLine($"Visible changed to {value}");
+                NPC(nameof(Visible));
             }
         }
-
         public ClickThruMode ClickThruMode
         {
             get => clickThruMode;
             set
             {
                 clickThruMode = value;
-                NotifyPropertyChanged(nameof(ClickThruMode));
+                NPC(nameof(ClickThruMode));
             }
         }
-
         public double Scale
         {
             get => scale;
@@ -90,20 +89,18 @@ namespace TCC
             {
                 if (scale == value) return;
                 scale = value;
-                NotifyPropertyChanged(nameof(Scale));
+                NPC(nameof(Scale));
             }
         }
-
         public bool AutoDim
         {
             get => autoDim;
             set
             {
                 autoDim = value;
-                NotifyPropertyChanged(nameof(AutoDim));
+                NPC(nameof(AutoDim));
             }
         }
-
         public double DimOpacity
         {
             get => dimOpacity;
@@ -116,31 +113,28 @@ namespace TCC
                 //    WindowManager.SkillsEnded = false;
                 //    WindowManager.SkillsEnded = true;
                 //}
-                NotifyPropertyChanged(nameof(DimOpacity));
+                NPC(nameof(DimOpacity));
                 WindowManager.RefreshDim();
             }
         }
-
         public bool ShowAlways
         {
             get => showAlways;
             set
             {
                 showAlways = value;
-                NotifyPropertyChanged(nameof(ShowAlways));
+                NPC(nameof(ShowAlways));
             }
         }
-
         public bool AllowTransparency
         {
             get => allowTransparency;
             set
             {
                 allowTransparency = value;
-                NotifyPropertyChanged(nameof(AllowTransparency));
+                NPC(nameof(AllowTransparency));
             }
         }
-
         public bool Enabled
         {
             get => enabled;
@@ -149,7 +143,7 @@ namespace TCC
                 if (enabled == value) return;
                 if (value == false)
                 {
-                    if (MessageBox.Show("Re-enabling this later will require TCC restart.\nDo you want to continue?", "TCC", MessageBoxButton.OKCancel, MessageBoxImage.Question) ==
+                    if (TccMessageBox.Show("TCC", "Re-enabling this later will require TCC restart.\nDo you want to continue?", MessageBoxButton.OKCancel, MessageBoxImage.Question) ==
                         MessageBoxResult.Cancel) return;
                     //SettingsManager.CooldownWindowSettings.Enabled = value;
                     //Visibility = Visibility.Hidden;
@@ -160,7 +154,7 @@ namespace TCC
                 }
                 else
                 {
-                    MessageBox.Show("TCC will now be restarted.", "TCC", MessageBoxButton.OK, MessageBoxImage.Information);
+                    TccMessageBox.Show("TCC", "TCC will now be restarted.", MessageBoxButton.OK, MessageBoxImage.Information);
                     //SettingsManager.CooldownWindowSettings.Enabled = value;
                     //Visibility = Visibility.Visible;
                     Visible = value;
@@ -169,10 +163,9 @@ namespace TCC
                     App.Restart();
                 }
                 MessageFactory.Update();
-                NotifyPropertyChanged(nameof(Enabled));
+                NPC(nameof(Enabled));
             }
         }
-
 
         public WindowSettings(double _x, double _y, double _h, double _w, bool _visible, ClickThruMode _ctm, double _scale, bool _autoDim, double _dimOpacity, bool _showAlways, bool _allowTransparency, bool _enabled)
         {
@@ -191,7 +184,7 @@ namespace TCC
             enabled = _enabled;
         }
 
-        public XElement ToXElement(string name)
+        public virtual XElement ToXElement(string name)
         {
             var xe = new XElement("WindowSetting");
             xe.Add(new XAttribute("Name", name));
@@ -208,6 +201,29 @@ namespace TCC
             xe.Add(new XAttribute(nameof(AllowTransparency), AllowTransparency));
             xe.Add(new XAttribute(nameof(Enabled), Enabled));
             return xe;
+        }
+    }
+
+    public class ChatWindowSettings : WindowSettings
+    {
+        private double bgOpacity;
+
+        public double BackgroundOpacity { get; set; } = .3;
+
+        public List<Tab> Tabs { get; set; }
+        public bool LfgOn { get; set; } = true;
+
+        public ChatWindowSettings(double _x, double _y, double _h, double _w, bool _visible, ClickThruMode _ctm, double _scale, bool _autoDim, double _dimOpacity, bool _showAlways, bool _allowTransparency, bool _enabled) : base(_x, _y, _h, _w, _visible, _ctm, _scale, _autoDim, _dimOpacity, _showAlways, _allowTransparency, _enabled)
+        {
+            Tabs = new List<Tab>();
+        }
+        public override XElement ToXElement(string name)
+        {
+            var b = base.ToXElement(name);
+            b.Add(SettingsManager.BuildChatTabsXElement(Tabs));
+            b.Add(new XAttribute(nameof(LfgOn), LfgOn));
+            b.Add(new XAttribute(nameof(BackgroundOpacity), BackgroundOpacity));
+            return b;
         }
     }
 }

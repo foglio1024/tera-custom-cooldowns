@@ -26,7 +26,7 @@ namespace TCC.ViewModels
             {
                 if (_isGfOn == value) return;
                 _isGfOn = value;
-                NotifyPropertyChanged(nameof(IsGfOn));
+                NPC(nameof(IsGfOn));
             }
         }
 
@@ -37,7 +37,7 @@ namespace TCC.ViewModels
             {
                 if (_counterProc == value) return;
                 _counterProc = value;
-                NotifyPropertyChanged(nameof(CounterProc));
+                NPC(nameof(CounterProc));
             }
         }
 

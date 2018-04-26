@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using System.Runtime.CompilerServices;
 using TCC.Data;
 
 namespace TCC
@@ -167,9 +168,9 @@ namespace TCC
         }
         public static double FactorCalc(double val, double max)
         {
-            return  max > 0 ? 
+            return max > 0 ?
                     val / max > 1 ?
-                        1 : val / max 
+                        1 : val / max
                     : 1;
         }
         public static DateTime FromUnixTime(long unixTime)
@@ -180,10 +181,35 @@ namespace TCC
 
         public static string TimeFormatter(ulong seconds)
         {
-            if (seconds < 99) return seconds+"";
+            if (seconds < 99) return seconds + "";
             if (seconds < 99 * 60) return seconds / 60 + "m";
-            if (seconds < 99 * 60 * 60) return seconds / (60*60) + "h";
-            return seconds / (60 * 60 *24) + "d";
+            if (seconds < 99 * 60 * 60) return seconds / (60 * 60) + "h";
+            return seconds / (60 * 60 * 24) + "d";
+        }
+
+        public static ICollectionViewLiveShaping InitLiveView<T>(Predicate<object> predicate, IEnumerable<T> source, string[] filters, string[] sortFilters)
+        {
+            var cv = new CollectionViewSource { Source = source }.View;
+            cv.Filter = predicate;
+            var liveView = cv as ICollectionViewLiveShaping;
+            if (!liveView.CanChangeLiveFiltering) return null;
+            if (filters.Count() > 0)
+            {
+                liveView.IsLiveFiltering = true;
+                foreach (var filter in filters)
+                {
+                    liveView.LiveFilteringProperties.Add(filter);
+                }
+            }
+            if (sortFilters.Count() > 0)
+            {
+                liveView.IsLiveSorting = true;
+                foreach (var filter in sortFilters)
+                {
+                    liveView.LiveSortingProperties.Add(filter);
+                }
+            }
+            return liveView;
         }
 
     }
@@ -260,7 +286,7 @@ namespace TCC
             _dispatcher = newDispatcher;
         }
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void NotifyPropertyChanged(string v)
+        protected void NPC([CallerMemberName] string v = null)
         {
             _dispatcher.InvokeIfRequired(() =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(v)), DispatcherPriority.DataBind);

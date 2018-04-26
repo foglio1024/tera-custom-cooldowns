@@ -15,10 +15,12 @@ namespace TCC.Windows
         public GroupWindow()
         {
             InitializeComponent();
+            _b = buttons;
+            _c = content;
+            InitWindow(SettingsManager.GroupWindowSettings, ignoreSize: false);
         }
         private void TccWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            InitWindow(SettingsManager.GroupWindowSettings, ignoreSize: true);
         }
     }
 }

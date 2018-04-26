@@ -5,6 +5,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 using TCC.Data;
 using TCC.ViewModels;
@@ -16,15 +17,20 @@ namespace TCC.Controls.ChatControls
     /// </summary>
     public partial class PlayerTooltip : UserControl
     {
+        DoubleAnimation expandAnim, rippleScale, rippleFade;
         public PlayerTooltip()
         {
             InitializeComponent();
             expandAnim = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() };
+            rippleScale = new DoubleAnimation(1, 50, TimeSpan.FromMilliseconds(650)) { EasingFunction = new QuadraticEase() };
+            rippleFade = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(650)) { EasingFunction = new QuadraticEase() };
         }
-        DoubleAnimation expandAnim;
         private void UserControl_MouseLeave(object sender, MouseEventArgs e)
         {
-            WindowManager.ChatWindow.CloseTooltip();
+            KickText.Text = "Kick";
+            ripple.Opacity = 0;
+            _kicking = false;
+            ChatWindowManager.Instance.CloseTooltip();
         }
 
         public void AnimateOpening()
@@ -34,57 +40,57 @@ namespace TCC.Controls.ChatControls
 
         private void InspectClick(object sender, RoutedEventArgs e)
         {
-            Proxy.Inspect(ChatWindowViewModel.Instance.TooltipInfo.Name);
-            WindowManager.ChatWindow.CloseTooltip();
+            Proxy.Inspect(ChatWindowManager.Instance.TooltipInfo.Name);
+            ChatWindowManager.Instance.CloseTooltip();
         }
 
         private void PartyInviteClick(object sender, RoutedEventArgs e)
         {
-            Proxy.PartyInvite(ChatWindowViewModel.Instance.TooltipInfo.Name);
-            WindowManager.ChatWindow.CloseTooltip();
+            Proxy.PartyInvite(ChatWindowManager.Instance.TooltipInfo.Name);
+            ChatWindowManager.Instance.CloseTooltip();
         }
 
         private void GuildInviteClick(object sender, RoutedEventArgs e)
         {
-            Proxy.GuildInvite(ChatWindowViewModel.Instance.TooltipInfo.Name);
-            WindowManager.ChatWindow.CloseTooltip();
+            Proxy.GuildInvite(ChatWindowManager.Instance.TooltipInfo.Name);
+            ChatWindowManager.Instance.CloseTooltip();
         }
 
         private void AddFriendClick(object sender, RoutedEventArgs e)
         {
-            if (ChatWindowViewModel.Instance.TooltipInfo.IsFriend)
+            if (ChatWindowManager.Instance.TooltipInfo.IsFriend)
             {
-                Proxy.UnfriendUser(ChatWindowViewModel.Instance.TooltipInfo.Name);
-                WindowManager.ChatWindow.CloseTooltip();
+                Proxy.UnfriendUser(ChatWindowManager.Instance.TooltipInfo.Name);
+                ChatWindowManager.Instance.CloseTooltip();
             }
             else
             {
                 var friendDg = new FriendMessageDialog();
                 friendDg.Show();
             }
-            ChatWindowViewModel.Instance.TooltipInfo.Refresh();
+            ChatWindowManager.Instance.TooltipInfo.Refresh();
         }
         private void BlockClick(object sender, RoutedEventArgs e)
         {
-            if (!ChatWindowViewModel.Instance.TooltipInfo.IsBlocked)
+            if (!ChatWindowManager.Instance.TooltipInfo.IsBlocked)
             {
-                Proxy.BlockUser(ChatWindowViewModel.Instance.TooltipInfo.Name);
-                ChatWindowViewModel.Instance.BlockedUsers.Add(ChatWindowViewModel.Instance.TooltipInfo.Name);
+                Proxy.BlockUser(ChatWindowManager.Instance.TooltipInfo.Name);
+                ChatWindowManager.Instance.BlockedUsers.Add(ChatWindowManager.Instance.TooltipInfo.Name);
                 try
                 {
-                    var i = ChatWindowViewModel.Instance.Friends.IndexOf(ChatWindowViewModel.Instance.Friends.FirstOrDefault(x => x.Name == ChatWindowViewModel.Instance.TooltipInfo.Name));
-                    ChatWindowViewModel.Instance.Friends.RemoveAt(i);
+                    var i = ChatWindowManager.Instance.Friends.IndexOf(ChatWindowManager.Instance.Friends.FirstOrDefault(x => x.Name == ChatWindowManager.Instance.TooltipInfo.Name));
+                    ChatWindowManager.Instance.Friends.RemoveAt(i);
                 }
                 catch (Exception) { }
             }
             else
             {
-                Proxy.UnblockUser(ChatWindowViewModel.Instance.TooltipInfo.Name);
-                ChatWindowViewModel.Instance.BlockedUsers.Remove(ChatWindowViewModel.Instance.TooltipInfo.Name);
+                Proxy.UnblockUser(ChatWindowManager.Instance.TooltipInfo.Name);
+                ChatWindowManager.Instance.BlockedUsers.Remove(ChatWindowManager.Instance.TooltipInfo.Name);
 
             }
-            ChatWindowViewModel.Instance.TooltipInfo.Refresh();
-            WindowManager.ChatWindow.CloseTooltip();
+            ChatWindowManager.Instance.TooltipInfo.Refresh();
+            ChatWindowManager.Instance.CloseTooltip();
 
         }
         void SendString(string s)
@@ -107,28 +113,55 @@ namespace TCC.Controls.ChatControls
 
         private void WhisperClick(object sender, RoutedEventArgs e)
         {
-            WindowManager.ChatWindow.CloseTooltip();
-            SendString("/w " + ChatWindowViewModel.Instance.TooltipInfo.Name + " ");
+            ChatWindowManager.Instance.CloseTooltip();
+            SendString("/w " + ChatWindowManager.Instance.TooltipInfo.Name + " ");
         }
 
         private void GrantInviteClick(object sender, RoutedEventArgs e)
         {
 
-            if (GroupWindowViewModel.Instance.TryGetUser(ChatWindowViewModel.Instance.TooltipInfo.Name, out var u))
+            if (GroupWindowViewModel.Instance.TryGetUser(ChatWindowManager.Instance.TooltipInfo.Name, out var u))
             {
                 Proxy.SetInvitePower(u.ServerId, u.PlayerId, !u.CanInvite);
                 u.CanInvite = !u.CanInvite;
             }
-            WindowManager.ChatWindow.CloseTooltip();
+            ChatWindowManager.Instance.CloseTooltip();
         }
 
         private void DelegateLeaderClick(object sender, RoutedEventArgs e)
         {
-            if (GroupWindowViewModel.Instance.TryGetUser(ChatWindowViewModel.Instance.TooltipInfo.Name, out var u))
+            if (GroupWindowViewModel.Instance.TryGetUser(ChatWindowManager.Instance.TooltipInfo.Name, out var u))
             {
                 Proxy.DelegateLeader(u.ServerId, u.PlayerId);
             }
-            WindowManager.ChatWindow.CloseTooltip();
+            ChatWindowManager.Instance.CloseTooltip();
+        }
+
+        bool _kicking;
+        private void KickClick(object sender, RoutedEventArgs e)
+        {
+            if (_kicking)
+            {
+                ChatWindowManager.Instance.CloseTooltip();
+                KickText.Text = "Kick";
+                ripple.Opacity = 0;
+                _kicking = false;
+                if (GroupWindowViewModel.Instance.TryGetUser(ChatWindowManager.Instance.TooltipInfo.Name, out var u))
+                {
+                    Proxy.KickMember(u.ServerId, u.PlayerId);
+                }
+            }
+            else
+            {
+                KickText.Text = "Are you sure?";
+                var scaleTrans = (ripple.RenderTransform as TransformGroup).Children[0];
+                (ripple.RenderTransform as TransformGroup).Children[1] = new TranslateTransform(Mouse.GetPosition(kickGrid).X - ripple.Width / 2,
+                    Mouse.GetPosition(kickGrid).Y - ripple.Height / 2);
+                ripple.Opacity = 1;
+                scaleTrans.BeginAnimation(ScaleTransform.ScaleXProperty, rippleScale);
+                scaleTrans.BeginAnimation(ScaleTransform.ScaleYProperty, rippleScale);
+                _kicking = true;
+            }
         }
     }
 }

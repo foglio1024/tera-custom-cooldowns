@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using TCC.Controls;
 using TCC.ViewModels;
@@ -11,34 +13,31 @@ namespace TCC
         public CooldownWindow()
         {
             InitializeComponent();
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
+            _b = buttons;
+            _c = content;
             InitWindow(SettingsManager.CooldownWindowSettings, ignoreSize: true);
 
-            //SwitchMode();
-
-            //((FrameworkElement)controlContainer.Content).DataContext = CooldownWindowViewModel.Instance;
         }
 
-        public void SwitchMode()
-        {
-            Dispatcher.InvokeIfRequired(() =>
-            {
-                if (SettingsManager.CooldownBarMode == CooldownBarMode.Fixed)
-                {
-                    controlContainer.Content = new FixedSkillContainers();
-                }
-                else
-                {
-                    controlContainer.Content = new NormalSkillContainer();
-                }
 
-                ((FrameworkElement)controlContainer.Content).DataContext = CooldownWindowViewModel.Instance;
+        //public void SwitchMode()
+        //{
+        //    Dispatcher.InvokeIfRequired(() =>
+        //    {
+        //        if (SettingsManager.CooldownBarMode == CooldownBarMode.Fixed)
+        //        {
+        //            controlContainer.Content = new FixedSkillContainers();
+        //        }
+        //        else
+        //        {
+        //            controlContainer.Content = new NormalSkillContainer();
+        //        }
 
-            }, DispatcherPriority.Normal);
-        }
+        //        ((FrameworkElement)controlContainer.Content).DataContext = CooldownWindowViewModel.Instance;
+
+        //    }, DispatcherPriority.Normal);
+        //}
+
     }
 }
 

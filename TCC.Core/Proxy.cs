@@ -24,12 +24,12 @@ namespace TCC
             {
                 if (_client.Client != null && _client.Connected) return;
                 Debug.WriteLine("Connecting...");
-                ChatWindowViewModel.Instance.AddTccMessage("Trying to connect to tera-proxy...");
+                ChatWindowManager.Instance.AddTccMessage("Trying to connect to tera-proxy...");
 
                 _client = new TcpClient();
                 _client.Connect("127.0.0.50", 9550);
                 Debug.WriteLine("Connected");
-                ChatWindowViewModel.Instance.AddTccMessage("Connected to tera-proxy.");
+                ChatWindowManager.Instance.AddTccMessage("Connected to tera-proxy.");
                 var t = new Thread(ReceiveData);
                 t.Start();
             }
@@ -42,7 +42,7 @@ namespace TCC
                     if (_retries <= 0)
                     {
                         Debug.WriteLine("Maximum retries exceeded...");
-                        ChatWindowViewModel.Instance.AddTccMessage("Maximum retries exceeded. tera-proxy functionalities won't be available.");
+                        ChatWindowManager.Instance.AddTccMessage("Maximum retries exceeded. tera-proxy functionalities won't be available.");
 
                         _retries = 2;
                         return;
@@ -184,6 +184,18 @@ namespace TCC
 
             SendData(sb.ToString());
         }
+
+        public static void KickMember(uint serverId, uint playerId)
+        {
+            var sb = new StringBuilder("kick");
+            sb.Append("&sId=");
+            sb.Append(serverId);
+            sb.Append("&pId=");
+            sb.Append(playerId);
+
+            SendData(sb.ToString());
+        }
+
         public static void Inspect(string name)
         {
             var sb = new StringBuilder("inspect");

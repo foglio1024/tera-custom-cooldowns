@@ -22,7 +22,7 @@ namespace TCC
         private void Client_OnMessageReceived(object sender, TwitchLib.Events.Client.OnMessageReceivedArgs e)
         {
             var msg = new TCC.Data.ChatMessage(ChatChannel.Twitch, e.ChatMessage.Username, "<FONT>" + e.ChatMessage.Message + "</FONT>");
-            ChatWindowViewModel.Instance.AddChatMessage(msg);
+            ChatWindowManager.Instance.AddChatMessage(msg);
         }
 
         public void Init()

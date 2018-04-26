@@ -9,6 +9,7 @@ using System.Windows;
 using System.Xml.Linq;
 using TCC.Data;
 using TCC.ViewModels;
+using TCC.Windows;
 
 namespace TCC
 {
@@ -23,7 +24,7 @@ namespace TCC
         public static WindowSettings BuffWindowSettings;
         public static WindowSettings CharacterWindowSettings;
         public static WindowSettings ClassWindowSettings;
-        public static WindowSettings ChatWindowSettings;
+        public static SynchronizedObservableCollection<ChatWindowSettings> ChatWindowsSettings = new SynchronizedObservableCollection<ChatWindowSettings>();
 
         public static bool IgnoreMeInGroupWindow { get; set; }
         public static bool IgnoreGroupBuffs { get; set; }
@@ -62,6 +63,7 @@ namespace TCC
         public static bool ShowItemsCooldown { get; set; } = true;
         public static bool ShowMembersLaurels { get; set; } = false;
         public static bool AnimateChatMessages { get; set; } = false;
+        public static bool ChatEnabled { get; set; } = true;
 
         public static void LoadWindowSettings()
         {
@@ -95,14 +97,22 @@ namespace TCC
                     {
                         ClassWindowSettings = ParseWindowSettings(ws);
                     }
-                    else if (ws.Attribute("Name").Value == "ChatWindow")
-                    {
-                        ChatWindowSettings = ParseWindowSettings(ws);
-                    }
+                    //else if (ws.Attribute("Name").Value == "ChatWindow")
+                    //{
+                    //    ChatWindowSettings = ParseWindowSettings(ws);
+                    //}
                     //add window here
                 }
+
+                if (SettingsDoc.Descendants().Count(x => x.Name == "ChatWindow") > 0)
+                {
+                    SettingsDoc.Descendants().Where(x => x.Name == "ChatWindow").ToList().ForEach(s =>
+                    {
+                        ChatWindowsSettings.Add(ParseChatWindowSettings(s));
+                    });
+                }
             }
-            else
+            else //settings file doesen't exist
             {
                 GroupWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Never, 1, true, .2, false, true, true);
                 CooldownWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.WhenDim, 1, true, .2, false, true, true);
@@ -110,9 +120,32 @@ namespace TCC
                 BuffWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.WhenDim, 1, true, .2, false, true, true);
                 CharacterWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Always, 1, true, .2, false, true, true);
                 ClassWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Always, 1, true, .2, false, true, true);
-                ChatWindowSettings = new WindowSettings(0, 0, 200, 600, true, ClickThruMode.Never, 1, false, 1, false, true, true);
+                //ChatWindowSettings = new WindowSettings(0, 0, 200, 600, true, ClickThruMode.Never, 1, false, 1, false, true, true);
             }
         }
+
+        private static ChatWindowSettings ParseChatWindowSettings(XElement s)
+        {
+            var ws = s.Descendants().FirstOrDefault(x => x.Name == "WindowSetting");
+            var ts = s.Descendants().FirstOrDefault(x => x.Name == "Tabs");
+            var lfg = ws.Attribute(nameof(ChatWindowSettings.LfgOn));
+            var op = ws.Attribute(nameof(ChatWindowSettings.BackgroundOpacity));
+
+            var sett = ParseWindowSettings(ws);
+            var tabs = ParseTabsSettings(ts);
+
+            return new ChatWindowSettings(sett.X, sett.Y, sett.H, sett.W,
+                                          sett.Visible, sett.ClickThruMode,
+                                          sett.Scale, sett.AutoDim, sett.DimOpacity,
+                                          sett.ShowAlways, sett.AllowTransparency,
+                                          sett.Enabled)
+                                          {
+                                              Tabs = tabs,
+                                              LfgOn = lfg != null? bool.Parse(lfg.Value) : true,
+                                              BackgroundOpacity = op != null? double.Parse(op.Value, CultureInfo.InvariantCulture) : 0.3
+                                          };
+        }
+
         public static void LoadSettings()
         {
             if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml"))
@@ -313,13 +346,12 @@ namespace TCC
         }
 
 
-        public static List<Tab> ParseTabsSettings()
+        public static List<Tab> ParseTabsSettings(XElement elem)
         {
             var result = new List<Tab>();
-            if (SettingsDoc != null)
+            if (elem != null)
             {
-                var el = SettingsDoc.Descendants().Where(x => x.Name == "ChatTabsSettings");
-                foreach (var t in el.Descendants().Where(x => x.Name == "Tab"))
+                foreach (var t in elem.Descendants().Where(x => x.Name == "Tab"))
                 {
                     var tabName = t.Attribute("name").Value;
                     var channels = new List<ChatChannel>();
@@ -359,7 +391,8 @@ namespace TCC
                     CooldownWindowSettings.ToXElement("CooldownWindow"),
                     GroupWindowSettings.ToXElement("GroupWindow"),
                     ClassWindowSettings.ToXElement("ClassWindow"),
-                    ChatWindowSettings.ToXElement("ChatWindow")
+                    BuildChatWindowSettings("ChatWindows")
+                    //ChatWindowSettings.ToXElement("ChatWindow")
                     //add window here
                     ),
                 new XElement("OtherSettings",
@@ -399,11 +432,13 @@ namespace TCC
                 //add setting here
                 ),
                 BuildChannelsXElement(),
-                BuildChatTabsXElement(),
+                //BuildChatTabsXElement(),
                 BuildGroupAbnormalsXElement()
             );
             SaveSettingsDoc(xSettings);
         }
+
+
         private static void SaveSettingsDoc(XElement doc)
         {
             try
@@ -412,7 +447,7 @@ namespace TCC
             }
             catch (Exception)
             {
-                var res = MessageBox.Show("Could not write settings data to tcc-config.xml. File is being used by another process. Try again?", "TCC", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                var res = TccMessageBox.Show("TCC", "Could not write settings data to tcc-config.xml. File is being used by another process. Try again?",  MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (res == MessageBoxResult.Yes) SaveSettingsDoc(doc);
             }
 
@@ -477,7 +512,7 @@ namespace TCC
             catch (Exception) { }
             try
             {
-                allowTrans = Boolean.Parse(ws.Attribute("AllowTransparency").Value);
+                //allowTrans = Boolean.Parse(ws.Attribute("AllowTransparency").Value);
             }
             catch (Exception) { }
             try
@@ -516,10 +551,10 @@ namespace TCC
             }
         }
 
-        private static XElement BuildChatTabsXElement()
+        public static XElement BuildChatTabsXElement(List<Tab> tabList)
         {
-            XElement result = new XElement("ChatTabsSettings");
-            foreach (var tab in ChatWindowViewModel.Instance.Tabs)
+            XElement result = new XElement("Tabs");
+            foreach (var tab in tabList)
             {
                 XAttribute tabName = new XAttribute("name", tab.TabName);
                 XElement tabElement = new XElement("Tab", tabName);
@@ -572,6 +607,17 @@ namespace TCC
                 var xel = new XElement("Abnormals", cl, sb.ToString());
                 result.Add(xel);
             }
+            return result;
+        }
+        private static XElement BuildChatWindowSettings(string v)
+        {
+            var result = new XElement("ChatWindows");
+            ChatWindowManager.Instance.ChatWindows.ToList().ForEach(cw =>
+            {
+                if(cw.VM.Tabs.Count == 0) return;
+                cw.UpdateSettings();
+                result.Add(new XElement("ChatWindow", cw.WindowSettings.ToXElement("Settings")));
+            });
             return result;
         }
 

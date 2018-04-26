@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCC.Windows" ResizeMode="NoResize" AllowsTransparency="True" SizeToContent="Height" ShowInTaskbar="False"
         mc:Ignorable="d" Loaded="Window_Loaded" WindowStyle="None" WindowStartupLocation="CenterScreen" Topmost="False"
-        Title="SplashScreen" Height="Auto" Width="420" Background="Transparent" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+        Title="SplashScreen" Height="Auto" Width="420" Background="Transparent" MouseLeftButtonDown="Drag">
     
     <Grid VerticalAlignment="Top" Background="{StaticResource Colors.App.Main}" Margin="10">
         <Grid.Effect>

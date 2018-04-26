@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:converters="clr-namespace:TCC.Converters"
              mc:Ignorable="d" Loaded="Control_Loaded"
-             ClipToBounds="False">
+             ClipToBounds="False" 
+             MouseLeave="UserControl_MouseLeave">
     
     <UserControl.LayoutTransform>
         <ScaleTransform ScaleX="1" ScaleY="1"/>
@@ -73,6 +74,18 @@
 
             </Border>
         </Grid>
+        <Rectangle Height="20" VerticalAlignment="Top" MouseEnter="UserControl_MouseEnter" Fill="#01000000"></Rectangle>
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Width="20" Height="20" ToolTip="Remove" Cursor="Hand" Visibility="Collapsed"  Name="DeleteButton"
+              MouseLeftButtonDown="DeleteButton_MouseLeftButtonDown">
+            <Ellipse Fill="{StaticResource Colors.App.HP}" Effect="{StaticResource dropShadow}"></Ellipse>
+            <Path Data="{StaticResource SVG.Close}" Fill="White" Stretch="Uniform" Margin="5"></Path>
+        </Grid>
+        <!--<Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Height="20" ToolTip="Remove" Cursor="Hand" Visibility="Collapsed"  Name="HideButton"
+              MouseLeftButtonDown="HideButton_MouseLeftButtonDown">
+            <Ellipse Fill="{StaticResource Colors.App.Gold}" Effect="{StaticResource dropShadow}"></Ellipse>
+            <Path Data="{StaticResource SVG.Hide}" Fill="White" Stretch="Uniform" Margin="5"></Path>
+        </Grid>-->
+
         <!--<Grid.CacheMode>
             <BitmapCache RenderAtScale="2"></BitmapCache>
         </Grid.CacheMode>-->

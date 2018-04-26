@@ -15,7 +15,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ToolTip>
-            <ToolTip Background="Transparent" BorderBrush="Transparent" Opened="ToolTip_OnOpened" Closed="ToolTip_OnClosed">
+            <ToolTip Background="Transparent" BorderBrush="Transparent">
                 <Grid>
                     <controls:AbnormalityToolTipControl AbnormalityName="{Binding Abnormality.Name}" 
                                                         AbnormalityToolTip="{Binding Abnormality.ToolTip}"

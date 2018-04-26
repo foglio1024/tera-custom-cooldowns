@@ -175,7 +175,7 @@ namespace TCC
                 if (_enraged)
                 {
                     SlideEnrageIndicator(CurrentPercentage);
-                    EnrageHistory.Last().SetEnd(CurrentPercentage);
+                    if(EnrageHistory.Count > 0) EnrageHistory.Last().SetEnd(CurrentPercentage);
                     NotifyPropertyChanged(nameof(EnrageHistory));
                 }
             }
@@ -253,6 +253,7 @@ namespace TCC
 
         private void AnimateHp()
         {
+            if (!(Npc is Npc)) return; //weird but could happen
             _hpAnim.To = Npc.CurrentFactor;
             DotPusher.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _hpAnim);
             HpBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _hpAnim);
@@ -392,8 +393,8 @@ namespace TCC
 
         public void Refresh()
         {
-            NotifyPropertyChanged(nameof(Factor));
-            NotifyPropertyChanged(nameof(StartFactor));
+            NPC(nameof(Factor));
+            NPC(nameof(StartFactor));
         }
     }
 }

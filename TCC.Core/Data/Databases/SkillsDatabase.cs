@@ -29,9 +29,9 @@ namespace TCC.Data.Databases
             }
         }
 
-        public static void Load()
+        public static void Load(string lang)
         {
-            var f = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "/resources/data/skills.tsv");
+            var f = File.OpenText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory , $"resources/data/skills/skills-{lang}.tsv"));
 
             SkillConnections = new List<SkillConnection>();
             Skills = new Dictionary<Class, Dictionary<uint, Skill>>();
@@ -49,25 +49,36 @@ namespace TCC.Data.Databases
                 if (line == null) break;
                 var s = line.Split('\t');
                 var id = Convert.ToUInt32(s[0]);
-                Enum.TryParse(s[1], out Class c);
-                var name = s[2];
-                var tooltip = s[3];
-                var iconName = s[4];
+                var cString = s[3];
+                if(!Enum.TryParse(s[3], out Class c))
+                {
+                    if (cString == "Mystic") cString = "Elementalist";
+                    if (cString == "Reaper") cString = "Soulless";
+                    if (cString == "Brawler") cString = "Fighter";
+                    if (cString == "Ninja") cString = "Assassin";
+                    if (cString == "Gunner") cString = "Engineer";
+                    if (cString == "Valkyrie") cString = "Glaiver";
+                }
+                Enum.TryParse(cString, out c);
+                var name = s[4];
+                //var tooltip = s[3];
+                var iconName = s[7];
 
-                var sk = new Skill(id, c, name, tooltip);
+                var sk = new Skill(id, c, name, "");
                 sk.SetSkillIcon(iconName);
+                if (Skills[c].ContainsKey(id)) continue;
                 Skills[c].Add(id, sk);
 
 
-                var skc = new SkillConnection((int)id, c);
-                for (int i = 5; i < s.Count(); i++)
-                {
-                    skc.AddConnectedSkill(Convert.ToInt32(s[i]));
-                }
-                if(skc.ConnectedSkills.Count > 0)
-                {
-                    SkillConnections.Add(skc);
-                }
+                //var skc = new SkillConnection((int)id, c);
+                //for (int i = 5; i < s.Count(); i++)
+                //{
+                //    skc.AddConnectedSkill(Convert.ToInt32(s[i]));
+                //}
+                //if(skc.ConnectedSkills.Count > 0)
+                //{
+                //    SkillConnections.Add(skc);
+                //}
             }
 
         }
@@ -112,20 +123,20 @@ namespace TCC.Data.Databases
         public static bool TryGetSkill(uint id, Class c, out Skill sk)
         {
             bool result = false;
-            var connSkills = GetSkillIdByConnectedId(id, c);
+            //var connSkills = GetSkillIdByConnectedId(id, c);
             sk = new Skill(0, Class.None, string.Empty, string.Empty);
             if (Skills[c].TryGetValue(id, out sk))
             {
                 //sk = Skills.Where(x => x.Id == id).Where(x => x.Class == c).First();
                 result = true;
             }
-            else if (connSkills != -1)
-            {
-                if (Skills[c].TryGetValue((uint)connSkills, out sk))
-                {
-                    result = true;
-                }
-            }
+            //else if (connSkills != -1)
+            //{
+            //    if (Skills[c].TryGetValue((uint)connSkills, out sk))
+            //    {
+            //        result = true;
+            //    }
+            //}
             return result;
 
         }

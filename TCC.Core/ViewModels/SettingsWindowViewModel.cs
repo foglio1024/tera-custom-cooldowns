@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Threading;
 using TCC.Parsing;
@@ -15,8 +16,8 @@ namespace TCC.ViewModels
         public WindowSettings GroupWindowSettings => SettingsManager.GroupWindowSettings;
         public WindowSettings BuffWindowSettings => SettingsManager.BuffWindowSettings;
         public WindowSettings CharacterWindowSettings => SettingsManager.CharacterWindowSettings;
-        public WindowSettings ChatWindowSettings => SettingsManager.ChatWindowSettings;
         public WindowSettings BossWindowSettings => SettingsManager.BossWindowSettings;
+        public SynchronizedObservableCollection<ChatWindowSettings> ChatWindowSettings => SettingsManager.ChatWindowsSettings;
 
         //enable settings
         //public bool IsCooldownWindowEnabled
@@ -604,7 +605,7 @@ namespace TCC.ViewModels
         //        SettingsManager.ChatWindowSettings.Scale = value;
         //        WindowManager.ChatWindow.Dispatcher.Invoke(() =>
         //        {
-        //            ((ChatWindowViewModel)WindowManager.ChatWindow.DataContext).Scale = value;
+        //            ((ChatWindowManager)WindowManager.ChatWindow.DataContext).Scale = value;
         //        });
         //        NotifyPropertyChanged(nameof(ChatWindowScale));
         //    }
@@ -854,7 +855,7 @@ namespace TCC.ViewModels
         //        if (val > 1) val = 1;
 
         //        SettingsManager.ChatWindowOpacity = val;
-        //        ChatWindowViewModel.Instance.ChatWindowOpacity = SettingsManager.ChatWindowOpacity;
+        //        ChatWindowManager.Instance.ChatWindowOpacity = SettingsManager.ChatWindowOpacity;
         //        NotifyPropertyChanged(nameof(ChatWindowOpacity));
         //    }
         //}
@@ -910,7 +911,7 @@ namespace TCC.ViewModels
                 if (SettingsManager.IgnoreMeInGroupWindow == value) return;
                 SettingsManager.IgnoreMeInGroupWindow = value;
                 if (value == true) GroupWindowViewModel.Instance.RemoveMe();
-                NotifyPropertyChanged("HideMe");
+                NPC("HideMe");
             }
         }
         public bool HideBuffs
@@ -920,7 +921,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.IgnoreGroupBuffs == value) return;
                 SettingsManager.IgnoreGroupBuffs = value;
-                NotifyPropertyChanged(nameof(HideBuffs));
+                NPC(nameof(HideBuffs));
                 GroupWindowViewModel.Instance.NotifySettingUpdated();
             }
         }
@@ -931,7 +932,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.IgnoreGroupDebuffs == value) return;
                 SettingsManager.IgnoreGroupDebuffs = value;
-                NotifyPropertyChanged(nameof(HideDebuffs));
+                NPC(nameof(HideDebuffs));
                 GroupWindowViewModel.Instance.NotifySettingUpdated();
             }
         }
@@ -942,7 +943,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.DisablePartyAbnormals == value) return;
                 SettingsManager.DisablePartyAbnormals = value;
-                NotifyPropertyChanged(nameof(DisableAllPartyAbnormals));
+                NPC(nameof(DisableAllPartyAbnormals));
                 MessageFactory.Update();
                 if (value == true) GroupWindowViewModel.Instance.ClearAllAbnormalities();
             }
@@ -973,7 +974,7 @@ namespace TCC.ViewModels
                 if (SettingsManager.BuffsDirection == value) return;
                 SettingsManager.BuffsDirection = value;
                 BuffBarWindowViewModel.Instance.NotifyDirectionChanged();
-                NotifyPropertyChanged(nameof(BuffsDirection));
+                NPC(nameof(BuffsDirection));
             }
         }
         //public bool ClassWindowOn
@@ -1006,7 +1007,7 @@ namespace TCC.ViewModels
                 if (SettingsManager.CooldownBarMode == value) return;
                 SettingsManager.CooldownBarMode = value;
                 CooldownWindowViewModel.Instance.NotifyModeChanged();
-                NotifyPropertyChanged(nameof(CooldownBarMode));
+                NPC(nameof(CooldownBarMode));
             }
         }
         public EnrageLabelMode EnrageLabelMode
@@ -1016,7 +1017,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.EnrageLabelMode == value) return;
                 SettingsManager.EnrageLabelMode = value;
-                NotifyPropertyChanged(nameof(EnrageLabelMode));
+                NPC(nameof(EnrageLabelMode));
             }
         }
 
@@ -1027,8 +1028,8 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.ChatFadeOut == value) return;
                 SettingsManager.ChatFadeOut = value;
-                if(value) ChatWindowViewModel.Instance.RefreshTimer();
-                NotifyPropertyChanged(nameof(ChatFadeOut));
+                if(value) ChatWindowManager.Instance.RefreshTimer();
+                NPC(nameof(ChatFadeOut));
             }
         }
         public bool ClickThruWhenDim
@@ -1042,7 +1043,7 @@ namespace TCC.ViewModels
                 WindowManager.SkillsEnded = false;
                 WindowManager.SkillsEnded = true;
 
-                NotifyPropertyChanged("ClickThruWhenDim");
+                NPC("ClickThruWhenDim");
             }
         }
         public bool ClickThruInCombat
@@ -1056,7 +1057,7 @@ namespace TCC.ViewModels
                 WindowManager.SkillsEnded = false;
                 WindowManager.SkillsEnded = true;
 
-                NotifyPropertyChanged(nameof(ClickThruInCombat));
+                NPC(nameof(ClickThruInCombat));
             }
         }
         public int MaxMessages
@@ -1071,7 +1072,7 @@ namespace TCC.ViewModels
                     val = 20;
                 }
                 SettingsManager.MaxMessages = val;
-                NotifyPropertyChanged("MaxMessages");
+                NPC("MaxMessages");
             }
         }
         public int SpamThreshold
@@ -1081,7 +1082,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.SpamThreshold == value) return;
                 SettingsManager.SpamThreshold = value;
-                NotifyPropertyChanged("SpamThreshold");
+                NPC("SpamThreshold");
             }
         }
         public bool ShowTimestamp
@@ -1091,7 +1092,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.ShowTimestamp == value) return;
                 SettingsManager.ShowTimestamp = value;
-                NotifyPropertyChanged(nameof(ShowTimestamp));
+                NPC(nameof(ShowTimestamp));
             }
 
         }
@@ -1102,7 +1103,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.ShowChannel == value) return;
                 SettingsManager.ShowChannel = value;
-                NotifyPropertyChanged(nameof(ShowChannel));
+                NPC(nameof(ShowChannel));
             }
 
         }
@@ -1113,7 +1114,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.ShowOnlyBosses == value) return;
                 SettingsManager.ShowOnlyBosses = value;
-                NotifyPropertyChanged(nameof(ShowOnlyBosses));
+                NPC(nameof(ShowOnlyBosses));
             }
         }
         public bool DisableMP
@@ -1125,7 +1126,7 @@ namespace TCC.ViewModels
                 SettingsManager.DisablePartyMP = value;
                 GroupWindowViewModel.Instance.NotifySettingUpdated();
                 MessageFactory.Update();
-                NotifyPropertyChanged(nameof(DisableMP));
+                NPC(nameof(DisableMP));
             }
         }
         public bool DisableHP
@@ -1137,7 +1138,7 @@ namespace TCC.ViewModels
                 SettingsManager.DisablePartyHP = value;
                 GroupWindowViewModel.Instance.NotifySettingUpdated();
                 MessageFactory.Update();
-                NotifyPropertyChanged(nameof(DisableHP));
+                NPC(nameof(DisableHP));
             }
         }
 
@@ -1149,7 +1150,7 @@ namespace TCC.ViewModels
                 if(SettingsManager.ShowItemsCooldown == value) return;
                 SettingsManager.ShowItemsCooldown = value;
                 CooldownWindowViewModel.Instance.NotifyItemsDisplay();
-                NotifyPropertyChanged(nameof(ShowItemsCooldown));
+                NPC(nameof(ShowItemsCooldown));
             }
         }
         public bool ShowMembersLaurels
@@ -1160,7 +1161,7 @@ namespace TCC.ViewModels
                 if (SettingsManager.ShowMembersLaurels == value) return;
                 SettingsManager.ShowMembersLaurels = value;
                 GroupWindowViewModel.Instance.NotifySettingUpdated();
-                NotifyPropertyChanged(nameof(ShowMembersLaurels));
+                NPC(nameof(ShowMembersLaurels));
             }
         }
         public bool AnimateChatMessages
@@ -1170,7 +1171,7 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.AnimateChatMessages == value) return;
                 SettingsManager.AnimateChatMessages = value;
-                NotifyPropertyChanged(nameof(AnimateChatMessages));
+                NPC(nameof(AnimateChatMessages));
             }
         }
         public bool HhOnlyAggro
@@ -1180,22 +1181,22 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.ShowOnlyAggroStacks == value) return;
                 SettingsManager.ShowOnlyAggroStacks = value;
-                NotifyPropertyChanged(nameof(HhOnlyAggro));
+                NPC(nameof(HhOnlyAggro));
             }
         }
-        public bool LfgOn
-        {
-            get => SettingsManager.LfgOn;
-            set
-            {
-                if (SettingsManager.LfgOn == value) return;
-                SettingsManager.LfgOn = value;
-                ChatWindowViewModel.Instance.LfgOn = value;
-                MessageFactory.Update();
-                NotifyPropertyChanged(nameof(LfgOn));
+        //public bool LfgOn
+        //{
+        //    get => SettingsManager.LfgOn;
+        //    set
+        //    {
+        //        if (SettingsManager.LfgOn == value) return;
+        //        SettingsManager.LfgOn = value;
+        //        ChatWindowManager.Instance.LfgOn = value;
+        //        MessageFactory.Update();
+        //        NotifyPropertyChanged(nameof(LfgOn));
 
-            }
-        }
+        //    }
+        //}
         public string Webhook
         {
             get => SettingsManager.Webhook;
@@ -1203,7 +1204,7 @@ namespace TCC.ViewModels
             {
                 if (value == SettingsManager.Webhook) return;
                 SettingsManager.Webhook = value;
-                NotifyPropertyChanged(nameof(Webhook));
+                NPC(nameof(Webhook));
             }
         }
         public string WebhookMessage
@@ -1213,7 +1214,7 @@ namespace TCC.ViewModels
             {
                 if (value == SettingsManager.WebhookMessage) return;
                 SettingsManager.WebhookMessage = value;
-                NotifyPropertyChanged(nameof(WebhookMessage));
+                NPC(nameof(WebhookMessage));
             }
         }
         public string TwitchUsername
@@ -1223,7 +1224,7 @@ namespace TCC.ViewModels
             {
                 if (value == SettingsManager.TwitchName) return;
                 SettingsManager.TwitchName = value;
-                NotifyPropertyChanged(nameof(TwitchUsername));
+                NPC(nameof(TwitchUsername));
             }
         }
         public string TwitchToken
@@ -1233,7 +1234,7 @@ namespace TCC.ViewModels
             {
                 if (value == SettingsManager.TwitchToken) return;
                 SettingsManager.TwitchToken = value;
-                NotifyPropertyChanged(nameof(TwitchToken));
+                NPC(nameof(TwitchToken));
             }
         }
         public string TwitchChannelName
@@ -1243,7 +1244,7 @@ namespace TCC.ViewModels
             {
                 if (value == SettingsManager.TwitchChannelName) return;
                 SettingsManager.TwitchChannelName = value;
-                NotifyPropertyChanged(nameof(TwitchChannelName));
+                NPC(nameof(TwitchChannelName));
             }
         }
         public uint GroupSizeThreshold
@@ -1254,7 +1255,7 @@ namespace TCC.ViewModels
                 if (SettingsManager.GroupSizeThreshold == value) return;
                 SettingsManager.GroupSizeThreshold = value;
                 GroupWindowViewModel.Instance.NotifyThresholdChanged();
-                NotifyPropertyChanged(nameof(GroupSizeThreshold));
+                NPC(nameof(GroupSizeThreshold));
             }
         }
 
@@ -1265,8 +1266,8 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.ChatWindowOpacity == value) return;
                 SettingsManager.ChatWindowOpacity = value;
-                ChatWindowViewModel.Instance.NotifyOpacityChange();
-                NotifyPropertyChanged(nameof(ChatWindowOpacity));
+                ChatWindowManager.Instance.NotifyOpacityChange();
+                NPC(nameof(ChatWindowOpacity));
             }
         }
         public int FontSize
@@ -1278,7 +1279,7 @@ namespace TCC.ViewModels
                 var val = value;
                 if (val < 10) val = 10;
                 SettingsManager.FontSize = val;
-                NotifyPropertyChanged(nameof(FontSize));
+                NPC(nameof(FontSize));
             }
         }
         public SettingsWindowViewModel()

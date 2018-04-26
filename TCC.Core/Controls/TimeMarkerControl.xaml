@@ -7,6 +7,9 @@
              mc:Ignorable="d" 
              Loaded="TimeMarkerControl_OnLoaded">
     <Grid  ClipToBounds="False"  ToolTip="{Binding Name}" Margin="0,-8,0,0" VerticalAlignment="Stretch">
+        <Grid.Effect>
+            <DropShadowEffect ShadowDepth="0" Opacity=".2"></DropShadowEffect>
+        </Grid.Effect>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -17,29 +20,33 @@
                     <ScaleTransform ScaleX="{Binding TimeFactor}"></ScaleTransform>
                 </FrameworkElement.LayoutTransform>
             </FrameworkElement>
-            <Border Background="{Binding Color, Converter={StaticResource Converters.StringToFill}}"
-                        Width="2" Height="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Left" Margin="0,-2,0,-3"></Border>
+            <Border Background="#fff" Width="2" Height="Auto" 
+                    VerticalAlignment="Stretch" HorizontalAlignment="Left" 
+                    Margin="0,-2,0,0">
+                
+            </Border>
+        <Ellipse Width="8" Height="8" Fill="#ccc" Margin="-5 4 0 0" ></Ellipse>
         </StackPanel>
-        
         <StackPanel Orientation="Horizontal" Grid.Row="0">
             <FrameworkElement Width="960" Grid.Row="0">
                 <FrameworkElement.LayoutTransform>
                     <ScaleTransform ScaleX="{Binding TimeFactor}"></ScaleTransform>
                 </FrameworkElement.LayoutTransform>
             </FrameworkElement>
-            <Border Background="{Binding Color, Converter={StaticResource Converters.StringToFill}}" 
+            <Border Background="#555" 
                         HorizontalAlignment="Right" VerticalAlignment="Top" 
                         Padding="4,1" CornerRadius="3,3,3,3" MinWidth="10"
-                        Margin="0,0,0,0" Name="TextBorder" Grid.Row="0">
-                <TextBlock Foreground="#9000" FontSize="15" FontWeight="Normal" Width="Auto" Text="{Binding TimeString}" Name="TimeTextBlock"/>
+                    BorderThickness="1" BorderBrush="#aaa"
+                        Margin="-1" Name="TextBorder" Grid.Row="0">
+                <TextBlock Foreground="#ccc" FontSize="15" FontWeight="Normal" Width="Auto" Text="{Binding TimeString}" Name="TimeTextBlock"/>
                 <Border.LayoutTransform>
                     <TranslateTransform X="0"></TranslateTransform>
                 </Border.LayoutTransform>
             </Border>
         </StackPanel>
-        <Grid.Effect>
+        <!--<Grid.Effect>
             <DropShadowEffect Opacity=".4" ShadowDepth="1" BlurRadius="3" />
-        </Grid.Effect>
+        </Grid.Effect>-->
     </Grid>
     <UserControl.RenderTransform>
         <TranslateTransform Y="-00"/>

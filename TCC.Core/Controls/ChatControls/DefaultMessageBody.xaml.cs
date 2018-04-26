@@ -17,7 +17,14 @@ namespace TCC.Controls.ChatControls
 
         private void I_Click(object sender, RoutedEventArgs e)
         {
-            Clipboard.SetText(((ChatMessage)DataContext).ToString());
+            try
+            {
+                Clipboard.SetText(((ChatMessage)DataContext).ToString());
+            }
+            catch (System.Exception)
+            {
+
+            }
         }
 
         private void WrapPanel_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)

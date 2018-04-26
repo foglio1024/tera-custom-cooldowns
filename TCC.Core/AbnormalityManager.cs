@@ -70,7 +70,7 @@ namespace TCC
             }
             CheckPassivity(ab);
             //var sysMsg = new ChatMessage("@661\vAbnormalName\v" + ab.Name, SystemMessages.Messages["SMT_BATTLE_BUFF_DEBUFF"]);
-            //ChatWindowViewModel.Instance.AddChatMessage(sysMsg);
+            //ChatWindowManager.Instance.AddChatMessage(sysMsg);
 
         }
 

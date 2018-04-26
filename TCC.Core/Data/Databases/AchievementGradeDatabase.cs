@@ -7,9 +7,9 @@ namespace TCC.Data.Databases
     public static class AchievementGradeDatabase
     {
         public static Dictionary<uint, string> Grades;
-        public static void Load()
+        public static void Load(string lang)
         {
-            var f = File.OpenText("resources/data/achievement-grade-info.tsv");
+            var f = File.OpenText($"resources/data/achi_grade/achi_grade-{lang}.tsv");
             Grades = new Dictionary<uint, string>();
             while (true)
             {

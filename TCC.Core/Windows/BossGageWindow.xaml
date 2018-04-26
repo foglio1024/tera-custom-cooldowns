@@ -4,32 +4,29 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCC"
-        xmlns:elements="clr-namespace:TCC.Controls"
+        xmlns:c="clr-namespace:TCC.Controls"
         xmlns:converters="clr-namespace:TCC.Converters"
         xmlns:vm="clr-namespace:TCC.ViewModels"
         xmlns:w="clr-namespace:TCC.Windows"
         mc:Ignorable="d"
-        Title="BossGageWindow" Height="Auto" Width="Auto"
-        SizeToContent="WidthAndHeight"
-        Topmost="True"
-        AllowsTransparency="True"
-        ShowInTaskbar="False"
-        WindowStyle="None"
-        Background="Transparent"
-        MouseLeftButtonDown="Window_MouseLeftButtonDown"
-        Loaded="Window_Loaded"
-        ResizeMode="NoResize" 
+        Title="BossGageWindow" 
+        Style="{StaticResource BaseWindowStyle}"
+        MouseLeftButtonDown="Drag"
         MouseDoubleClick="TccWindow_MouseDoubleClick">
     <w:TccWindow.DataContext>
         <vm:BossGageWindowViewModel/>
     </w:TccWindow.DataContext>
     <Grid>
-        <Grid.LayoutTransform>
-            <ScaleTransform ScaleX="{Binding Scale}" 
-                            ScaleY="{Binding Scale}"/>
-        </Grid.LayoutTransform>
-        <ContentControl Content="{Binding Instance}"
-                        ContentTemplate="{Binding Instance.CurrentHHphase, Converter={StaticResource Converters.HarrowholdPhaseToLayout}}"
-                       />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1" Name="content">
+            <Grid.LayoutTransform>
+                <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
+            </Grid.LayoutTransform>
+            <ContentControl Content="{Binding Instance}" ContentTemplate="{Binding Instance.CurrentHHphase, Converter={StaticResource Converters.HarrowholdPhaseToLayout}}" />
+        </Grid>
+            <c:WindowButtons WindowName="Boss bar" x:Name="buttons" DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWindow}}" />
     </Grid>
 </w:TccWindow>

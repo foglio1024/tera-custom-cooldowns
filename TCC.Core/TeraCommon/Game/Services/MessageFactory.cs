@@ -12,6 +12,9 @@ namespace Tera.Game
     {
         private static readonly Delegate UnknownMessageDelegate = Helpers.Contructor<Func<TeraMessageReader, UnknownMessage>>();
         private static readonly Dictionary<ushort, Delegate> OpcodeNameToType = new Dictionary<ushort, Delegate> {{ 19900, Helpers.Contructor<Func<TeraMessageReader, C_CHECK_VERSION>>() } };
+
+        public int ReleaseVersion { get; set; }
+
         private static readonly Dictionary<string, Delegate> CoreServices = new Dictionary<string, Delegate>
         {
             {"C_CHECK_VERSION", Helpers.Contructor<Func<TeraMessageReader,C_CHECK_VERSION>>()},
@@ -131,10 +134,10 @@ namespace Tera.Game
             return (ParsedMessage) type.DynamicInvoke(reader);
         }
 
-        public ParsedMessage Create(Message message)
-        {
-            var reader = new TeraMessageReader(message, _opCodeNamer, Version, _sysMsgNamer);
-            return Instantiate(message.OpCode, reader);
-        }
+        //public parsedmessage create(message message)
+        //{
+        //    //var reader = new teramessagereader(message, _opcodenamer, this, _sysmsgnamer);
+        //    //return instantiate(message.opcode, reader);
+        //}
     }
 }

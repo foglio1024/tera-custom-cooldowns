@@ -15,10 +15,10 @@ namespace TCC.ViewModels
                 val = value;
                 if (val == _max)
                 {
-                    NotifyPropertyChanged("Maxed");
+                    NPC("Maxed");
                 }
                 RefreshTimer();
-                NotifyPropertyChanged("Val");
+                NPC("Val");
             }
         }
 

@@ -26,6 +26,13 @@ namespace TCC.Controls
             set { SetValue(SettingImageProperty, value); }
         }
         public static readonly DependencyProperty SettingImageProperty = DependencyProperty.Register("SettingImage", typeof(ImageSource), typeof(ValueSetting));
+        public Visibility TextBoxVisibility
+        {
+            get { return (Visibility)GetValue(TextBoxVisibilityProperty); }
+            set { SetValue(TextBoxVisibilityProperty, value); }
+        }
+        public static readonly DependencyProperty TextBoxVisibilityProperty = DependencyProperty.Register("TextBoxVisibility", typeof(Visibility), typeof(ValueSetting));
+
 
 
         public double Max
@@ -106,6 +113,7 @@ namespace TCC.Controls
             if (Mouse.LeftButton == MouseButtonState.Pressed)
             {
                 var s = sender as Slider;
+                if (!s.IsMouseOver) return;
                 Value = Math.Round(s.Value, 2);
             }
         }

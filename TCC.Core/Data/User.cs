@@ -45,7 +45,7 @@ namespace TCC.Data
             {
                 if (_entityId == value) return;
                 _entityId = value;
-                NotifyPropertyChanged(nameof(EntityId));
+                NPC(nameof(EntityId));
             }
         }
         public uint Level
@@ -55,7 +55,7 @@ namespace TCC.Data
             {
                 if (_level == value) return;
                 _level = value;
-                NotifyPropertyChanged(nameof(Level));
+                NPC(nameof(Level));
             }
         }
         public Class UserClass
@@ -83,7 +83,7 @@ namespace TCC.Data
                         Role = Role.Dps;
                         break;
                 }
-                NotifyPropertyChanged(nameof(UserClass));
+                NPC(nameof(UserClass));
             }
         }
         public Role Role
@@ -93,7 +93,7 @@ namespace TCC.Data
             {
                 if (_role == value) return;
                 _role = value;
-                NotifyPropertyChanged(nameof(Role));
+                NPC(nameof(Role));
             }
         }
         public bool Online
@@ -104,7 +104,7 @@ namespace TCC.Data
                 if (_online == value) return;
                 _online = value;
                 if (!_online) { CurrentHp = 0; CurrentMp = 0; }
-                NotifyPropertyChanged(nameof(Online));
+                NPC(nameof(Online));
             }
         }
         public uint ServerId
@@ -114,7 +114,7 @@ namespace TCC.Data
             {
                 if (_serverId == value) return;
                 _serverId = value;
-                NotifyPropertyChanged(nameof(ServerId));
+                NPC(nameof(ServerId));
             }
         }
         public uint PlayerId
@@ -124,7 +124,7 @@ namespace TCC.Data
             {
                 if (_playerId == value) return;
                 _playerId = value;
-                NotifyPropertyChanged(nameof(PlayerId));
+                NPC(nameof(PlayerId));
             }
         }
         public int Order
@@ -134,7 +134,7 @@ namespace TCC.Data
             {
                 if (_order == value) return;
                 _order = value;
-                NotifyPropertyChanged(nameof(Order));
+                NPC(nameof(Order));
             }
         }
         public bool CanInvite
@@ -144,7 +144,7 @@ namespace TCC.Data
             {
                 if (_canInvite == value) return;
                 _canInvite = value;
-                NotifyPropertyChanged(nameof(CanInvite));
+                NPC(nameof(CanInvite));
             }
         }
         public Laurel Laurel
@@ -154,7 +154,7 @@ namespace TCC.Data
             {
                 if (_laurel == value) return;
                 _laurel = value;
-                NotifyPropertyChanged(nameof(Laurel));
+                NPC(nameof(Laurel));
             }
         }
         public string Name
@@ -164,7 +164,7 @@ namespace TCC.Data
             {
                 if (_name == value) return;
                 _name = value;
-                NotifyPropertyChanged(nameof(Name));
+                NPC(nameof(Name));
             }
         }
         public long CurrentHp
@@ -174,8 +174,8 @@ namespace TCC.Data
             {
                 if (_currentHp == value) return;
                 _currentHp = value;
-                NotifyPropertyChanged(nameof(CurrentHp));
-                NotifyPropertyChanged(nameof(HpFactor));
+                NPC(nameof(CurrentHp));
+                NPC(nameof(HpFactor));
             }
         }
         public int CurrentMp
@@ -185,8 +185,8 @@ namespace TCC.Data
             {
                 if (_currentMp == value) return;
                 _currentMp = value;
-                NotifyPropertyChanged(nameof(CurrentMp));
-                NotifyPropertyChanged(nameof(MpFactor));
+                NPC(nameof(CurrentMp));
+                NPC(nameof(MpFactor));
             }
         }
         public long MaxHp
@@ -196,8 +196,8 @@ namespace TCC.Data
             {
                 if (_maxHp == value) return;
                 _maxHp = value;
-                NotifyPropertyChanged(nameof(MaxHp));
-                NotifyPropertyChanged(nameof(HpFactor));
+                NPC(nameof(MaxHp));
+                NPC(nameof(HpFactor));
             }
         }
         public int MaxMp
@@ -207,8 +207,8 @@ namespace TCC.Data
             {
                 if (_maxMp == value) return;
                 _maxMp = value;
-                NotifyPropertyChanged(nameof(MaxMp));
-                NotifyPropertyChanged(nameof(MpFactor));
+                NPC(nameof(MaxMp));
+                NPC(nameof(MpFactor));
             }
         }
         public double HpFactor => Utils.FactorCalc(CurrentHp, MaxHp);
@@ -220,7 +220,7 @@ namespace TCC.Data
             {
                 if (_ready == value) return;
                 _ready = value;
-                NotifyPropertyChanged(nameof(Ready));
+                NPC(nameof(Ready));
             }
         }
         public bool Alive
@@ -230,7 +230,7 @@ namespace TCC.Data
             {
                 if (_alive == value) return;
                 _alive = value;
-                NotifyPropertyChanged(nameof(Alive));
+                NPC(nameof(Alive));
             }
         }
         public int RollResult
@@ -241,7 +241,7 @@ namespace TCC.Data
                 if (_rollResult == value) return;
                 _rollResult = value;
                 if (_rollResult == -1) IsRolling = false;
-                NotifyPropertyChanged(nameof(RollResult));
+                NPC(nameof(RollResult));
             }
         }
         public bool IsRolling
@@ -251,7 +251,7 @@ namespace TCC.Data
             {
                 if (_isRolling == value) return;
                 _isRolling = value;
-                NotifyPropertyChanged(nameof(IsRolling));
+                NPC(nameof(IsRolling));
             }
         }
         public bool IsWinning
@@ -261,7 +261,7 @@ namespace TCC.Data
             {
                 if (_isWinning == value) return;
                 _isWinning = value;
-                NotifyPropertyChanged(nameof(IsWinning));
+                NPC(nameof(IsWinning));
             }
         }
         public bool IsLeader
@@ -271,7 +271,7 @@ namespace TCC.Data
             {
                 if (_isLeader == value) return;
                 _isLeader = value;
-                NotifyPropertyChanged(nameof(IsLeader));
+                NPC(nameof(IsLeader));
             }
         }
         public bool IsPlayer => Name == SessionManager.CurrentPlayer.Name;
@@ -282,7 +282,7 @@ namespace TCC.Data
             {
                 if (_hasAggro == value) return;
                 _hasAggro = value;
-                NotifyPropertyChanged(nameof(HasAggro));
+                NPC(nameof(HasAggro));
             }
         }
         public string Location
@@ -292,7 +292,7 @@ namespace TCC.Data
             {
                 if (_location == value) return;
                 _location = value;
-                NotifyPropertyChanged(nameof(Location));
+                NPC(nameof(Location));
             }
         }
         public GearItem Weapon
@@ -302,7 +302,7 @@ namespace TCC.Data
             {
                 if (_weapon == value) return;
                 _weapon = value;
-                NotifyPropertyChanged(nameof(Weapon));
+                NPC(nameof(Weapon));
             }
         }
         public GearItem Armor
@@ -312,7 +312,7 @@ namespace TCC.Data
             {
                 if (_armor == value) return;
                 _armor = value;
-                NotifyPropertyChanged(nameof(Armor));
+                NPC(nameof(Armor));
             }
         }
         public GearItem Gloves
@@ -322,7 +322,7 @@ namespace TCC.Data
             {
                 if (_gloves == value) return;
                 _gloves = value;
-                NotifyPropertyChanged(nameof(Gloves));
+                NPC(nameof(Gloves));
             }
         }
         public GearItem Boots
@@ -332,7 +332,7 @@ namespace TCC.Data
             {
                 if (_boots == value) return;
                 _boots = value;
-                NotifyPropertyChanged(nameof(Boots));
+                NPC(nameof(Boots));
             }
         }
         public SynchronizedObservableCollection<AbnormalityDuration> Buffs { get; }
@@ -372,7 +372,7 @@ namespace TCC.Data
             if (!ab.IsBuff && !_debuffList.Contains(ab.Id))
             {
                 _debuffList.Add(ab.Id);
-                NotifyPropertyChanged(nameof(IsDebuffed));
+                NPC(nameof(IsDebuffed));
             }
 
             var existing = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
@@ -400,7 +400,7 @@ namespace TCC.Data
             if (!ab.IsBuff)
             {
                 _debuffList.Remove(ab.Id);
-                NotifyPropertyChanged("IsDebuffed");
+                NPC("IsDebuffed");
             }
             var buff = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (buff == null) return;

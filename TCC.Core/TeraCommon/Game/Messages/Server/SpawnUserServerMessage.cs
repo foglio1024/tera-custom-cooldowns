@@ -7,7 +7,7 @@
         {
             reader.Skip(8);
             var nameOffset = reader.ReadUInt16();
-            if (reader.Version > 306637) reader.Skip(14);
+            if (reader.Factory.Version > 306637) reader.Skip(14);
             else reader.Skip(16);
             ServerId = reader.ReadUInt32();
             // not sure, whether full uint32 is serverid, or only first 2 bytes and the rest part of it is actualy a part of PlayerId, or something else, but it always come along with PlayerID as complex player id

@@ -11,13 +11,17 @@ namespace TCC
 {
     public static class UpdateManager
     {
+        static System.Timers.Timer checkTimer;
         static string databasePath = "https://github.com/Foglio1024/tera-used-icons/archive/master.zip";
         static string databaseVersion = "https://raw.githubusercontent.com/Foglio1024/tera-used-icons/master/current_version";
+        static string appVersion = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/master/version";
         static string baseDatabaseDir = "tera-used-icons-master";
         public static void CheckDatabaseVersion()
         {
             using (WebClient c = new WebClient())
             {
+                c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+
                 try
                 {
                     var st = c.OpenRead(databaseVersion);
@@ -67,6 +71,8 @@ namespace TCC
             using (WebClient c = new WebClient())
             {
                 bool ready = false;
+                c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+
                 c.DownloadProgressChanged += App.SplashScreen.UpdateProgress;
                 c.DownloadFileCompleted += (s, ev) => ready = true;
                 try
@@ -129,13 +135,58 @@ namespace TCC
                 // ignored
             }
         }
+        public static void StartCheck()
+        {
+            checkTimer = new System.Timers.Timer(60 * 10 * 1000);
+            checkTimer.Elapsed += CheckTimer_Elapsed;
+        }
 
-        static string appVersion = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/master/version";
+        private static void CheckTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            //TODO check for update an warn via notification
+            checkTimer.Stop();
+            CheckAppVersionPeriodic();
+            checkTimer.Start();
+        }
+        static void CheckAppVersionPeriodic()
+        {
+            using (WebClient c = new WebClient())
+            {
+                c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
 
+                try
+                {
+                    var st = c.OpenRead(appVersion);
+                    if (st != null)
+                    {
+                        StreamReader sr = new StreamReader(st);
+                        string newVersionInfo = sr.ReadLine();
+                        string newVersionUrl = sr.ReadLine();
+
+                        if (newVersionInfo != null)
+                        {
+                            var v = Version.Parse(newVersionInfo);
+                            if (v > Assembly.GetExecutingAssembly().GetName().Version)
+                            {
+                                //TODO warn user
+                                
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "/update-check-error.txt", "##### CRASH #####\r\n" + ex.Message + "\r\n" +
+                             ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" + ex.InnerException +
+                             "\r\n" + ex.TargetSite);
+                }
+            }
+        }
         public static void CheckAppVersion()
         {
             using (WebClient c = new WebClient())
             {
+                c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
 
                 try
                 {
@@ -185,6 +236,8 @@ namespace TCC
             {
                 try
                 {
+                    c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+
                     App.SplashScreen.SetText("Downloading update...");
                     bool ready = false;
                     c.DownloadProgressChanged += App.SplashScreen.UpdateProgress;
@@ -194,7 +247,7 @@ namespace TCC
                     while (!ready) Thread.Sleep(1);
 
                     App.SplashScreen.SetText("Extracting zip...");
-                    if (Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "/tmp")) Directory.Delete(AppDomain.CurrentDomain.BaseDirectory + "/tmp");
+                    if (Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "/tmp")) Directory.Delete(AppDomain.CurrentDomain.BaseDirectory + "/tmp", true);
                     ZipFile.ExtractToDirectory("update.zip", AppDomain.CurrentDomain.BaseDirectory + "/tmp");
                     App.SplashScreen.SetText("Moving files...");
 
@@ -222,5 +275,9 @@ namespace TCC
 
         }
 
+        internal static void StopTimer()
+        {
+            checkTimer?.Stop();
+        }
     }
 }

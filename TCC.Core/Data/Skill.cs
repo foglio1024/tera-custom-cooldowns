@@ -1,15 +1,36 @@
 ﻿using System.Drawing;
+using System.Text;
 
 namespace TCC
 {
     public class Skill
     {
-        Bitmap iconBitmap;
         public string IconName { get; set; }
         public uint Id { get; set; }
         public Class Class { get; set; }
         public string Name { get; set; }
         public string ToolTip { get; set; }
+        public string ShortName
+        {
+            get
+            {
+                var n = Name.Split(' ');
+                var last = n[n.Length - 1];
+                if (last.Length < 5)
+                {
+                    if (!(last.Contains("X") || last.Contains("I") || last.Contains("V"))) return Name;
+                    var sb = new StringBuilder();
+                    for (int i = 0; i < n.Length-1; i++)
+                    {
+                        sb.Append(n[i]);
+                        sb.Append(" ");
+                    }
+                    
+                    return sb.ToString().Substring(0,sb.Length-1);
+                }
+                return Name;
+            }
+        }
         //public ImageBrush IconBrush { get
         //    {
 
@@ -24,7 +45,7 @@ namespace TCC
             Id = id;
             Class = c;
             Name = name;
-            ToolTip = toolTip;           
+            ToolTip = toolTip;
         }
 
         public void SetSkillIcon(string iconName)
