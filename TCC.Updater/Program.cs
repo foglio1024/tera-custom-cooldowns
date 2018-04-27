@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading;
+using System.Windows;
 
 namespace TCC.Updater
 {
@@ -12,6 +14,11 @@ namespace TCC.Updater
 
         static void Main(string[] args)
         {
+            if (!args.Any(x => x == "update"))
+            {
+                MessageBox.Show("This is not meant to be launched manually!", "TCC Updater", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             Thread.Sleep(2000);
             //Create all of the directories
             foreach (string dirPath in Directory.GetDirectories(SourcePath, "*", SearchOption.AllDirectories))
@@ -28,7 +35,7 @@ namespace TCC.Updater
             }
 
             Directory.Delete(SourcePath, true);
-            Process.Start("explorer.exe","https://github.com/Foglio1024/Tera-custom-cooldowns/releases");
+            Process.Start("explorer.exe", "https://github.com/Foglio1024/Tera-custom-cooldowns/releases");
             Process.Start(AppDomain.CurrentDomain.BaseDirectory + "/TCC.exe");
             Environment.Exit(0);
         }

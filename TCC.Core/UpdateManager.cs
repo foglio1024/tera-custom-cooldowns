@@ -254,7 +254,7 @@ namespace TCC
                     File.Move(AppDomain.CurrentDomain.BaseDirectory + "/tmp/TCCupdater.exe", AppDomain.CurrentDomain.BaseDirectory + "/TCCupdater.exe");
                     App.SplashScreen.SetText("Starting updater...");
 
-                    Process.Start(AppDomain.CurrentDomain.BaseDirectory + "/TCCupdater.exe");
+                    Process.Start(AppDomain.CurrentDomain.BaseDirectory + "/TCCupdater.exe", "update");
                     Environment.Exit(0);
                 }
                 catch (Exception ex)
