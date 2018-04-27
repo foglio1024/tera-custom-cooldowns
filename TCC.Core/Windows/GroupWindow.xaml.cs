@@ -1,6 +1,9 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
+using TCC.ViewModels;
 
 namespace TCC.Converters
 {
@@ -19,8 +22,11 @@ namespace TCC.Windows
             _c = content;
             InitWindow(SettingsManager.GroupWindowSettings, ignoreSize: false);
         }
-        private void TccWindow_Loaded(object sender, RoutedEventArgs e)
+
+        private void LootSettingsButtonClicked(object sender, RoutedEventArgs e)
         {
+            Proxy.LootSettings();
         }
+
     }
 }

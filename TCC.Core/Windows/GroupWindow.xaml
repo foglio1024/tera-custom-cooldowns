@@ -40,31 +40,44 @@
             </Grid.LayoutTransform>
 
             <!--Info border-->
+            <Grid Grid.Column="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
             <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Row="0" Background="{StaticResource Colors.App.FadedBackground}" 
                 BorderBrush="{StaticResource Colors.App.FadedBorderBrush}"
-                Grid.ColumnSpan="1" Grid.Column="3"  Margin="4,0" CornerRadius="6"
+                Grid.ColumnSpan="1" Grid.Column="3"  Margin="4,0" CornerRadius="3"
                 Width="Auto" VerticalAlignment="Top" HorizontalAlignment="Left"
-                Padding="5,1" Visibility="{Binding Instance.Formed, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
+                Padding="5,1" Visibility="{Binding Instance.Formed, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"
+                    >
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,2" ToolTip="Total members">
-                        <Path Data="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"
+                        <Path Data="{StaticResource SVG.Users}"
                           Fill="{StaticResource Colors.App.Silver}" Stretch="Uniform" Width="15" Margin="0"></Path>
                         <TextBlock Text="{Binding Instance.Size, Mode=OneWay}" FontWeight="DemiBold" Margin="6,0,0,0" Foreground="#afff"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,2" ToolTip="Alive members">
-                        <Path Data="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                        <Path Data="{StaticResource SVG.Heart}"
                           Fill="{StaticResource Colors.App.HP}" Stretch="Uniform" Width="15" Margin="0"></Path>
-
                         <TextBlock Text="{Binding Instance.AliveCount, Mode=OneWay}" FontWeight="DemiBold" Margin="6,0,0,0" Foreground="#afff"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,2" ToolTip="Ready members" Visibility="{Binding Instance.Raid,Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
-                        <Path Data="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                        <Path Data="{StaticResource SVG.CheckCircle}"
                           Fill="{StaticResource Colors.App.LightGreen}" Stretch="Uniform" Width="15" Margin="0"></Path>
                         <TextBlock Text="{Binding Instance.ReadyCount, Mode=OneWay}" FontWeight="DemiBold" Margin="6,0,0,0" Foreground="#afff"/>
                     </StackPanel>
-
                 </StackPanel>
             </Border>
+            <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Row="1" Background="{StaticResource Colors.App.FadedBackground}"
+                    BorderBrush="{StaticResource Colors.App.FadedBorderBrush}" Margin="4 4 4 0" CornerRadius="3" Visibility="{Binding Instance.AmILeader, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
+                <Button Style="{StaticResource ButtonContentOpacityStyle}" x:Name="LootSettingsButton" 
+                        ToolTip="Loot options" Click="LootSettingsButtonClicked" HorizontalAlignment="Center">
+                    <Path Data="{StaticResource SVG.Settings}" Fill="#fff" Margin="3" Width="15" />
+                </Button>
+            </Border>
+
+            </Grid>
             <!--Member lists-->
             <ItemsControl x:Name="dps"  Width="Auto" ClipToBounds="False"
                       ItemsSource="{Binding Instance.Dps}" 
