@@ -75,7 +75,9 @@ namespace TCC
                 while (_client.Connected)
                 {
                     var size = _client.GetStream().Read(buffer, 0, buffer.Length);
-                    var msg = "<FONT>"+Encoding.UTF8.GetString(buffer.Take(size).ToArray())+"</FONT>";
+                    var data = Encoding.UTF8.GetString(buffer.Take(size).ToArray());
+                    var msg = data.StartsWith("<font", StringComparison.InvariantCultureIgnoreCase) ? data : "<FONT>" + data;
+                    msg = msg.EndsWith("</font>", StringComparison.InvariantCultureIgnoreCase) ? msg : msg + "</FONT>";
                     PacketProcessor.HandleCommandOutput(msg);
                 }
             }
@@ -108,6 +110,11 @@ namespace TCC
             sb.Append(linkData.Replace("#####", ":tcc:"));
             sb.Append(":tcc:");
             System.IO.File.AppendAllText("link-test.txt", sb + "\n");
+            SendData(sb.ToString());
+        }
+        public static void LootSettings()
+        {
+            var sb = new StringBuilder("loot_settings");
             SendData(sb.ToString());
         }
         public static void RequestPartyInfo(int id)
@@ -184,7 +191,6 @@ namespace TCC
 
             SendData(sb.ToString());
         }
-
         public static void KickMember(uint serverId, uint playerId)
         {
             var sb = new StringBuilder("kick");
@@ -195,7 +201,6 @@ namespace TCC
 
             SendData(sb.ToString());
         }
-
         public static void Inspect(string name)
         {
             var sb = new StringBuilder("inspect");
