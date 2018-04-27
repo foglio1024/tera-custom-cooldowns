@@ -64,6 +64,7 @@ namespace TCC
         public static bool ShowMembersLaurels { get; set; } = false;
         public static bool AnimateChatMessages { get; set; } = false;
         public static bool ChatEnabled { get; set; } = true;
+        public static bool StatSent { get; set; } = false;
 
         public static void LoadWindowSettings()
         {
@@ -320,6 +321,11 @@ namespace TCC
                     AnimateChatMessages = Boolean.Parse(b.Attribute(nameof(AnimateChatMessages)).Value);
                 }
                 catch (Exception) { }
+                try
+                {
+                    StatSent = Boolean.Parse(b.Attribute(nameof(StatSent)).Value);
+                }
+                catch (Exception) { }
                 //add settings here
 
                 try
@@ -428,7 +434,8 @@ namespace TCC
                 new XAttribute(nameof(EnrageLabelMode), EnrageLabelMode),
                 new XAttribute(nameof(ShowMembersLaurels), ShowMembersLaurels),
                 new XAttribute(nameof(AnimateChatMessages), AnimateChatMessages),
-                new XAttribute(nameof(ShowItemsCooldown), ShowItemsCooldown)
+                new XAttribute(nameof(ShowItemsCooldown), ShowItemsCooldown),
+                new XAttribute(nameof(StatSent), StatSent)
                 //add setting here
                 ),
                 BuildChannelsXElement(),

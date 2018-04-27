@@ -27,7 +27,7 @@ namespace TCC
     /// </summary>
     public partial class App
     {
-        public static bool Debug = true;
+        public static bool Debug = false;
         public static TCC.Windows.SplashScreen SplashScreen;
         public static string Version;
         private static void GlobalUnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
@@ -118,6 +118,8 @@ namespace TCC
             {
                 c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
                 c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
+                c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+
                 var js = new JObject()
                 {
                     { "server", PacketProcessor.Server.ServerId},
@@ -126,6 +128,9 @@ namespace TCC
                 };
                 c.Encoding = Encoding.UTF8;
                 c.UploadStringAsync(new Uri("https://us-central1-tcc-report.cloudfunctions.net/stat"), Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
+
+                SettingsManager.StatSent = true;
+                SettingsManager.SaveSettings();
             }
         }
         private void OnStartup(object sender, StartupEventArgs e)

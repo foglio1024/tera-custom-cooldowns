@@ -48,7 +48,8 @@ namespace TCC.Parsing
 
         private static void InitDb()
         {
-            App.SendUsageStat();
+
+            if(!SettingsManager.StatSent) App.SendUsageStat();
 
             TimeManager.Instance.SetServerTimeZone(Language);
             SettingsManager.LastRegion = Language;
