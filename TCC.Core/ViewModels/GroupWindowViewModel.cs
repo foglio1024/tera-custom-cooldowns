@@ -66,7 +66,7 @@ namespace TCC.ViewModels
 
             Dps = Utils.InitLiveView(o => ((User)o).Role == Role.Dps, Members, new string[] { nameof(User.Role) }, new string[] { });
             Tanks = Utils.InitLiveView(o => ((User)o).Role == Role.Tank, Members, new string[] { nameof(User.Role) }, new string[] { });
-            Healers = Utils.InitLiveView(o => ((User)o).Role == Role.Healer, Members, new string[] { nameof(User.Role) },  new string[] { });
+            Healers = Utils.InitLiveView(o => ((User)o).Role == Role.Healer, Members, new string[] { nameof(User.Role) }, new string[] { });
 
         }
 
@@ -119,10 +119,8 @@ namespace TCC.ViewModels
         {
             return Members.ToSyncArray().FirstOrDefault(x => x.Name == name)?.CanInvite ?? false;
         }
-        public bool AmILeader()
-        {
-            return IsLeader(SessionManager.CurrentPlayer.Name);
-        }
+        public bool AmILeader => IsLeader(SessionManager.CurrentPlayer.Name);
+
         public void SetAggro(ulong target)
         {
             if (target == 0)
