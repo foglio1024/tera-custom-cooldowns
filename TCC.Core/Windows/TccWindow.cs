@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,7 +14,7 @@ using TCC.ViewModels;
 
 namespace TCC.Windows
 {
-    public class TccWindow : Window
+    public class TccWindow : Window, INotifyPropertyChanged
     {
         protected IntPtr _handle;
         protected WindowSettings _settings;
@@ -29,13 +30,12 @@ namespace TCC.Windows
             get { return clickThru; }
             set
             {
-                if (clickThru == value) return;
                 clickThru = value;
 
                 if (clickThru) FocusManager.MakeTransparent(_handle);
                 else FocusManager.UndoTransparent(_handle);
 
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ClickThru)));
+                NPC();
             }
         }
         public WindowSettings WindowSettings => _settings;
@@ -79,7 +79,7 @@ namespace TCC.Windows
                 _b.BeginAnimation(OpacityProperty, _hideButtons);
             };
 
-            MouseEnter += (s, ev) => _b.BeginAnimation(OpacityProperty, _showButtons); 
+            MouseEnter += (s, ev) => _b.BeginAnimation(OpacityProperty, _showButtons);
             MouseLeave += (s, ev) => _t.Start();
             _b.MouseLeftButtonDown += Drag;
         }
@@ -122,7 +122,7 @@ namespace TCC.Windows
             }
         }
 
-        private void TccWindow_Loaded(object sender, RoutedEventArgs e)
+        protected void TccWindow_Loaded(object sender, RoutedEventArgs e)
         {
             _handle = new WindowInteropHelper(this).Handle;
             FocusManager.MakeUnfocusable(_handle);
@@ -146,7 +146,10 @@ namespace TCC.Windows
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
+        protected void NPC([CallerMemberName] string p = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
+        }
         private void OpacityChange(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "IsTccVisible")
@@ -199,7 +202,7 @@ namespace TCC.Windows
             Dispatcher.Invoke(() =>
             {
                 Visibility = v;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Visibility"));
+                NPC("Visibility");
             });
         }
         public void SetVisibility(bool v)
@@ -212,7 +215,7 @@ namespace TCC.Windows
             {
                 Visibility = !v ? Visibility.Visible : Visibility.Collapsed; // meh ok
                 Visibility = v ? Visibility.Visible : Visibility.Collapsed;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Visibility"));
+                NPC("Visibility");
             });
         }
 
