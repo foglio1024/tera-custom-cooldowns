@@ -805,6 +805,9 @@
     <Compile Include="Windows\DebugWindow.xaml.cs">
       <DependentUpon>DebugWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\FlightDurationWindow.xaml.cs">
+      <DependentUpon>FlightDurationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\FloatingButtonWindow.xaml.cs">
       <DependentUpon>FloatingButtonWindow.xaml</DependentUpon>
     </Compile>
@@ -1183,6 +1186,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Windows\DebugWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\FlightDurationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

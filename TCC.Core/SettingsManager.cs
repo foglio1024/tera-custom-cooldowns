@@ -65,6 +65,7 @@ namespace TCC
         public static bool AnimateChatMessages { get; set; } = false;
         public static bool ChatEnabled { get; set; } = true;
         public static bool StatSent { get; set; } = false;
+        public static bool ShowFlightEnergy { get; set; } = true;
 
         public static void LoadWindowSettings()
         {
@@ -326,6 +327,16 @@ namespace TCC
                     StatSent = Boolean.Parse(b.Attribute(nameof(StatSent)).Value);
                 }
                 catch (Exception) { }
+                try
+                {
+                    StatSent = Boolean.Parse(b.Attribute(nameof(StatSent)).Value);
+                }
+                catch (Exception) { }
+                try
+                {
+                    ShowFlightEnergy = Boolean.Parse(b.Attribute(nameof(ShowFlightEnergy)).Value);
+                }
+                catch (Exception) { }
                 //add settings here
 
                 try
@@ -350,7 +361,6 @@ namespace TCC
                 }
             }
         }
-
 
         public static List<Tab> ParseTabsSettings(XElement elem)
         {
@@ -435,7 +445,8 @@ namespace TCC
                 new XAttribute(nameof(ShowMembersLaurels), ShowMembersLaurels),
                 new XAttribute(nameof(AnimateChatMessages), AnimateChatMessages),
                 new XAttribute(nameof(ShowItemsCooldown), ShowItemsCooldown),
-                new XAttribute(nameof(StatSent), StatSent)
+                new XAttribute(nameof(StatSent), StatSent),
+                new XAttribute(nameof(ShowFlightEnergy), ShowFlightEnergy)
                 //add setting here
                 ),
                 BuildChannelsXElement(),
