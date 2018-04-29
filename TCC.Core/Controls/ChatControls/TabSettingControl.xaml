@@ -27,7 +27,7 @@
 
                 <Button Grid.Column="0" VerticalAlignment="Stretch" FontSize="16" Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Stretch"
                          HorizontalAlignment="Stretch" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="RemoveChannel" VerticalContentAlignment="Center">
-                    <Path Fill="#a000" Data="{StaticResource Svg_Close}" Stretch="Uniform" Margin="7"></Path>
+                    <Path Fill="#a000" Data="{StaticResource SvgClose}" Stretch="Uniform" Margin="7"></Path>
                 </Button>
 
             </Grid>
@@ -49,7 +49,7 @@
                            Margin="4,5,0,4"/>
                 <Button Grid.Column="0" VerticalAlignment="Stretch" FontSize="16" Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" 
                          HorizontalAlignment="Stretch" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="RemoveAuthor">
-                    <Path Fill="#a000" Data="{StaticResource Svg_Close}" Stretch="Uniform" Margin="7"></Path>
+                    <Path Fill="#a000" Data="{StaticResource SvgClose}" Stretch="Uniform" Margin="7"></Path>
                 </Button>
 
             </Grid>
@@ -72,7 +72,7 @@
 
                 <Button Grid.Column="0" VerticalAlignment="Stretch" FontSize="16" Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Stretch"
                         HorizontalAlignment="Stretch" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="RemoveExChannel" VerticalContentAlignment="Center">
-                    <Path Fill="#a000" Data="{StaticResource Svg_Close}" Stretch="Uniform" Margin="7"></Path>
+                    <Path Fill="#a000" Data="{StaticResource SvgClose}" Stretch="Uniform" Margin="7"></Path>
                 </Button>
 
             </Grid>
@@ -94,7 +94,7 @@
                            Margin="4,5,0,4"/>
                 <Button Grid.Column="0" VerticalAlignment="Stretch" FontSize="16" Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" 
                         HorizontalAlignment="Stretch" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="RemoveExAuthor">
-                    <Path Fill="#a000" Data="{StaticResource Svg_Close}" Stretch="Uniform" Margin="7"></Path>
+                    <Path Fill="#a000" Data="{StaticResource SvgClose}" Stretch="Uniform" Margin="7"></Path>
                 </Button>
 
             </Grid>
@@ -111,10 +111,10 @@
                     </Grid.ColumnDefinitions>
                     <TextBox Grid.Column="0" Background="Transparent" Foreground="White" FontSize="14" CaretBrush="White" ToolTip="Tab name"
                        Text="{Binding TabName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" Margin="5"/>
-                    <Path Data="{StaticResource Svg_Pen}" HorizontalAlignment="Right" Grid.Column="1" Margin="10 5" Height="15" IsHitTestVisible="False" Opacity=".3"/>
+                    <Path Data="{StaticResource SvgPen}" HorizontalAlignment="Right" Grid.Column="1" Margin="10 5" Height="15" IsHitTestVisible="False" Opacity=".3"/>
                     <!--<Button Grid.Column="0" VerticalAlignment="Stretch" FontSize="15" Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" 
                     HorizontalAlignment="Stretch" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="RemoveTab">
-                        <Path Data="{StaticResource Svg_Close}" Stretch="Uniform" Fill="{StaticResource HpColor}"/>
+                        <Path Data="{StaticResource SvgClose}" Stretch="Uniform" Fill="{StaticResource HpColor}"/>
                     </Button>-->
                 </Grid>
 

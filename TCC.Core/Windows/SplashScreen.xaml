@@ -26,13 +26,13 @@
         <UniformGrid Grid.Row="2"  Rows="1" Name="buttonsGrid" Margin="80,0">
             <Button Height="20" Margin="5" Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Center"
                     VerticalContentAlignment="Center" Click="NoClick">
-                <!--<Path Data="{StaticResource Svg_Close}" Fill="White" Stretch="Uniform" Margin="3"></Path>-->
+                <!--<Path Data="{StaticResource SvgClose}" Fill="White" Stretch="Uniform" Margin="3"></Path>-->
                 <TextBlock Foreground="#90ffffff" FontWeight="Bold">NO</TextBlock>
 
             </Button>
             <Button Height="20" Margin="5" Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Center"
                     VerticalContentAlignment="Center" Click="OkClick">
-                <!--<Path Data="{StaticResource Svg_Confirm}" Fill="White" Stretch="Uniform" Margin="3"></Path>-->
+                <!--<Path Data="{StaticResource SvgConfirm}" Fill="White" Stretch="Uniform" Margin="3"></Path>-->
                 <TextBlock Foreground="#90ffffff" FontWeight="Bold">YES</TextBlock>
             </Button>
             <UniformGrid.LayoutTransform>

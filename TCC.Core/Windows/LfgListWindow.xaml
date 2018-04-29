@@ -80,7 +80,7 @@
                                                 <Run Text="lv." Foreground="#5999" FontSize="10"/><Run Text="{Binding Level, Mode=OneWay}" Foreground="#5999" FontSize="10"/>
                                                 <Run Text="{Binding Name, Mode=OneWay}"/>
                     </TextBlock>
-                    <Path Data="{StaticResource Svg_DelegateLeader}" Fill="{StaticResource GoldColor}" Height="8"
+                    <Path Data="{StaticResource SvgDelegateLeader}" Fill="{StaticResource GoldColor}" Height="8"
                                                   Visibility="{Binding IsLeader, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Column="1"
                                                   HorizontalAlignment="Right" Margin="5 0 5 1"></Path>
                 </StackPanel>
@@ -197,7 +197,7 @@
                         Style="{StaticResource ButtonContentOpacityStyle}" 
                         IsEnabled="{Binding CanApply}" 
                         Command="{Binding Apply}">
-                    <Path Data="{StaticResource Svg_AddUser}" Margin="3" Width="15" Stretch="Uniform" ToolTip="Apply" Fill="White"/>
+                    <Path Data="{StaticResource SvgAddUser}" Margin="3" Width="15" Stretch="Uniform" ToolTip="Apply" Fill="White"/>
                 </Button>
             </Grid>
             <DataTemplate.Triggers>
@@ -273,12 +273,12 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <!--Title-->
-            <Path Data="{StaticResource Svg_Users}" HorizontalAlignment="Left" Margin="8 9 5 7" VerticalAlignment="Center" Fill="#3fff"></Path>
+            <Path Data="{StaticResource SvgUsers}" HorizontalAlignment="Left" Margin="8 9 5 7" VerticalAlignment="Center" Fill="#3fff"></Path>
             <TextBlock Text="Looking for group" VerticalAlignment="Center" Opacity=".4" FontSize="24" 
                        FontWeight="Thin" IsHitTestVisible="False" Foreground="#ddd" Grid.Row="0" Margin="50 0"/>
             <Rectangle MouseLeftButtonDown="Border_MouseLeftButtonDown" Fill="Transparent"></Rectangle>
             <Button Style="{StaticResource ButtonContentOpacityStyle}" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0" Click="Button_Click">
-                <Path Data="{StaticResource Svg_Close}" Stretch="Uniform" Fill="#fff" Margin="12" ></Path>
+                <Path Data="{StaticResource SvgClose}" Stretch="Uniform" Fill="#fff" Margin="12" ></Path>
             </Button>
             <!--Header-->
             <Grid Grid.Row="1" VerticalAlignment="Stretch" Margin="0 0 5 0">

@@ -53,17 +53,17 @@
                     >
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,2" ToolTip="Total members">
-                        <Path Data="{StaticResource Svg_Users}"
+                        <Path Data="{StaticResource SvgUsers}"
                           Fill="{StaticResource SilverColor}" Stretch="Uniform" Width="15" Margin="0"></Path>
                         <TextBlock Text="{Binding Instance.Size, Mode=OneWay}" FontWeight="DemiBold" Margin="6,0,0,0" Foreground="#afff"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,2" ToolTip="Alive members">
-                        <Path Data="{StaticResource Svg_Heart}"
+                        <Path Data="{StaticResource SvgHeart}"
                           Fill="{StaticResource HpColor}" Stretch="Uniform" Width="15" Margin="0"></Path>
                         <TextBlock Text="{Binding Instance.AliveCount, Mode=OneWay}" FontWeight="DemiBold" Margin="6,0,0,0" Foreground="#afff"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,2" ToolTip="Ready members" Visibility="{Binding Instance.Raid,Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
-                        <Path Data="{StaticResource Svg_CheckCircle}"
+                        <Path Data="{StaticResource SvgCheckCircle}"
                           Fill="{StaticResource LightGreenColor}" Stretch="Uniform" Width="15" Margin="0"></Path>
                         <TextBlock Text="{Binding Instance.ReadyCount, Mode=OneWay}" FontWeight="DemiBold" Margin="6,0,0,0" Foreground="#afff"/>
                     </StackPanel>
@@ -73,7 +73,7 @@
                     BorderBrush="{StaticResource FadedBorderColor}" Margin="4 4 4 0" CornerRadius="3" Visibility="{Binding Instance.AmILeader, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
                 <Button Style="{StaticResource ButtonContentOpacityStyle}" x:Name="LootSettingsButton" 
                         ToolTip="Loot options" Click="LootSettingsButtonClicked" HorizontalAlignment="Center">
-                    <Path Data="{StaticResource Svg_Settings}" Fill="#fff" Margin="3" Width="15" />
+                    <Path Data="{StaticResource SvgSettings}" Fill="#fff" Margin="3" Width="15" />
                 </Button>
             </Border>
 

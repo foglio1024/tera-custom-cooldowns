@@ -106,37 +106,37 @@
                     </StackPanel.Resources>
                     <Button Click="InspectClick">
                         <StackPanel Orientation="Horizontal" >
-                            <Path Data="{StaticResource Svg_Eye}"/>
+                            <Path Data="{StaticResource SvgEye}"/>
                             <TextBlock Text="Inspect" Margin="3"></TextBlock>
                         </StackPanel>
                     </Button>
                     <Button Click="WhisperClick" Visibility="{Binding TooltipInfo.ShowWhisper, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
                         <StackPanel Orientation="Horizontal">
-                            <Path Data="{StaticResource Svg_ChatMessage}"/>
+                            <Path Data="{StaticResource SvgChatMessage}"/>
                             <TextBlock Text="Whisper" Margin="3"></TextBlock>
                         </StackPanel>
                     </Button>
                     <Button Click="PartyInviteClick" Visibility="{Binding TooltipInfo.ShowPartyInvite, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
                         <StackPanel Orientation="Horizontal">
-                            <Path Data="{StaticResource Svg_AddUser}"/>
+                            <Path Data="{StaticResource SvgAddUser}"/>
                             <TextBlock Text="Party invite" Margin="3"></TextBlock>
                         </StackPanel>
                     </Button>
                     <Button Click="GrantInviteClick" Visibility="{Binding TooltipInfo.ShowGrantPowers, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
                         <StackPanel Orientation="Horizontal">
-                            <Path Data="{StaticResource Svg_Achievements}"/>
+                            <Path Data="{StaticResource SvgAchievements}"/>
                             <TextBlock Text="{Binding TooltipInfo.PowersLabelText}" Margin="3"></TextBlock>
                         </StackPanel>
                     </Button>
                     <Button Click="DelegateLeaderClick" Visibility="{Binding TooltipInfo.ShowDelegateLeader, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
                         <StackPanel Orientation="Horizontal">
-                            <Path Margin="4,3,2,3" Data="{StaticResource Svg_DelegateLeader}"/>
+                            <Path Margin="4,3,2,3" Data="{StaticResource SvgDelegateLeader}"/>
                             <TextBlock Text="Delegate leader" Margin="3"></TextBlock>
                         </StackPanel>
                     </Button>
                     <Button Click="GuildInviteClick" Visibility="{Binding TooltipInfo.ShowGuildInvite, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
                         <StackPanel Orientation="Horizontal">
-                            <Path  Data="{StaticResource Svg_AddUsers}"/>
+                            <Path  Data="{StaticResource SvgAddUsers}"/>
                             <TextBlock Text="Guild invite" Margin="3"></TextBlock>
                         </StackPanel>
                     </Button>
@@ -154,7 +154,7 @@
                         <Button Click="KickClick" 
                             >
                             <StackPanel Orientation="Horizontal">
-                                <Path  Data="{StaticResource Svg_RemoveUser}" Fill="{StaticResource HpColor}"/>
+                                <Path  Data="{StaticResource SvgRemoveUser}" Fill="{StaticResource HpColor}"/>
                                 <TextBlock Text="Kick" Margin="3" x:Name="KickText"/>
                             </StackPanel>
                         </Button>
@@ -162,13 +162,13 @@
 
                     <Button Click="AddFriendClick" Visibility="{Binding TooltipInfo.ShowAddFriend, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
                         <StackPanel Orientation="Horizontal">
-                            <Path Data="{StaticResource Svg_Star}"/>
+                            <Path Data="{StaticResource SvgStar}"/>
                             <TextBlock Text="{Binding TooltipInfo.FriendLabelText}" Margin="3"></TextBlock>
                         </StackPanel>
                     </Button>
                     <Button Click="BlockClick">
                         <StackPanel Orientation="Horizontal">
-                            <Path  Fill="{StaticResource HpColor}" Data="{StaticResource Svg_Block}"/>
+                            <Path  Fill="{StaticResource HpColor}" Data="{StaticResource SvgBlock}"/>
                             <TextBlock Text="{Binding TooltipInfo.BlockLabelText}" Margin="3"></TextBlock>
                         </StackPanel>
                     </Button>

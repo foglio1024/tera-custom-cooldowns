@@ -722,7 +722,7 @@
                                    Padding="0" 
                                    TextAlignment="Left" 
                                    Opacity=".9"/>
-                        <Path Width="22" Height="22" Margin="16,4,0,4" Stretch="Uniform" Fill="White" HorizontalAlignment="Center" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality" Data="{StaticResource Svg_Paypal}" ></Path>
+                        <Path Width="22" Height="22" Margin="16,4,0,4" Stretch="Uniform" Fill="White" HorizontalAlignment="Center" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality" Data="{StaticResource SvgPaypal}" ></Path>
                         <Border Grid.ColumnSpan="2">
                             <Border.Style>
                                 <Style>
@@ -759,7 +759,7 @@
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Style="{StaticResource ButtonMainStyle}" VerticalAlignment="Stretch" Margin="0" Click="OpenSettingsFolder" 
                         HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" Width="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}">
-                    <Path Data="{StaticResource Svg_Folder}" Fill="White" Stretch="Uniform" Opacity=".9"></Path>
+                    <Path Data="{StaticResource SvgFolder}" Fill="White" Stretch="Uniform" Opacity=".9"></Path>
                     <Button.ToolTip>
                         <Grid Margin="5">
                             <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
@@ -770,7 +770,7 @@
                 <Button Grid.Column="1" Style="{StaticResource ButtonMainStyle}" VerticalAlignment="Stretch"
                    HorizontalContentAlignment="Center" Opacity=".9" Width="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}"
                         Click="Image_MouseLeftButtonDown" VerticalContentAlignment="Center">
-                    <Path Data="{StaticResource Svg_Close}" Fill="White" Stretch="Uniform" Margin="5" Opacity=".9" ></Path>
+                    <Path Data="{StaticResource SvgClose}" Fill="White" Stretch="Uniform" Margin="5" Opacity=".9" ></Path>
                 </Button>
             </StackPanel>
         </Grid>

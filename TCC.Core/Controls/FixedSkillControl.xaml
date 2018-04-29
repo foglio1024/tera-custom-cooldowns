@@ -78,12 +78,12 @@
         <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Width="20" Height="20" ToolTip="Remove" Cursor="Hand" Visibility="Collapsed"  Name="DeleteButton"
               MouseLeftButtonDown="DeleteButton_MouseLeftButtonDown">
             <Ellipse Fill="{StaticResource HpColor}" Effect="{StaticResource DropShadow}"></Ellipse>
-            <Path Data="{StaticResource Svg_Close}" Fill="White" Stretch="Uniform" Margin="5"></Path>
+            <Path Data="{StaticResource SvgClose}" Fill="White" Stretch="Uniform" Margin="5"></Path>
         </Grid>
         <!--<Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Height="20" ToolTip="Remove" Cursor="Hand" Visibility="Collapsed"  Name="HideButton"
               MouseLeftButtonDown="HideButton_MouseLeftButtonDown">
             <Ellipse Fill="{StaticResource GoldColor}" Effect="{StaticResource dropShadow}"></Ellipse>
-            <Path Data="{StaticResource Svg_Hide}" Fill="White" Stretch="Uniform" Margin="5"></Path>
+            <Path Data="{StaticResource SvgHide}" Fill="White" Stretch="Uniform" Margin="5"></Path>
         </Grid>-->
 
         <!--<Grid.CacheMode>
