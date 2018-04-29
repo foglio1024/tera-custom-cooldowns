@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using System.Runtime.CompilerServices;
 using TCC.Data;
+using System.Windows.Controls;
 
 namespace TCC
 {
@@ -405,5 +406,18 @@ namespace TCC
                 this._lock.ExitReadLock();
             }
         }
+    }
+    public class ButtonExtensions
+    {
+        public static CornerRadius GetCornerRadius(DependencyObject obj)
+        {
+            return (CornerRadius)obj.GetValue(CornerRadiusProperty);
+        }
+        public static void SetCornerRadius(DependencyObject obj, CornerRadius value)
+        {
+            obj.SetValue(CornerRadiusProperty, value);
+        }
+        public static readonly DependencyProperty CornerRadiusProperty =
+        DependencyProperty.RegisterAttached("CornerRadius", typeof(CornerRadius), typeof(ButtonExtensions), new PropertyMetadata(new CornerRadius(0)));
     }
 }
