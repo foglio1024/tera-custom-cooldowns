@@ -19,8 +19,13 @@
             x:Name="rootBorder" Margin="0,10" HorizontalAlignment="Left">
         <Grid >
             <StackPanel Width="35">
-                <Button Style="{StaticResource ButtonMainStyle}" Click="Button_Click">
-                    <Path Data="{StaticResource SVG.Info}" Fill="White" Stretch="UniformToFill" Margin="5" IsHitTestVisible="False"></Path>
+                <Button VerticalContentAlignment="Center" Style="{StaticResource ButtonMainStyle}" Click="Button_Click_2" ToolTip="LFG" Height="{Binding ElementName=infoBtn, Path=ActualHeight}">
+                    <Path Data="{StaticResource SVG.Users}" Fill="White" 
+                          Stretch="Uniform" Margin="5" 
+                          IsHitTestVisible="False" ></Path>
+                </Button>
+                <Button Style="{StaticResource ButtonMainStyle}" Click="Button_Click" x:Name="infoBtn">
+                    <Path Data="{StaticResource SVG.Info}" Fill="White" x:Name="infoPath" Stretch="UniformToFill" Margin="5" IsHitTestVisible="False"></Path>
                 </Button>
                 <Button Style="{StaticResource ButtonMainStyle}" Click="Button_Click_1">
                     <Path Data="{StaticResource SVG.Settings}" Fill="White" Stretch="UniformToFill" Margin="5" IsHitTestVisible="False"></Path>

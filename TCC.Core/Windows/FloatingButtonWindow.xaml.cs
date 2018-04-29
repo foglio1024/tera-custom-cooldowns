@@ -110,5 +110,10 @@ namespace TCC.Windows
                 t.Start();
             });
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            Proxy.RequestLfgList();
+        }
     }
 }
