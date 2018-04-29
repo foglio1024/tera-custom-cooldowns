@@ -11,7 +11,7 @@ namespace TCC.Parsing.Messages
             var nameOffset = reader.ReadUInt16();
             var msgOffset = reader.ReadUInt16();
 
-            Id = reader.ReadInt32();
+            Id = reader.ReadUInt32();
             reader.Skip(1);
             Raid = reader.ReadBoolean();
 
@@ -22,7 +22,7 @@ namespace TCC.Parsing.Messages
             Message = ChatMessage.ReplaceEscapes(reader.ReadTeraString());
         }
 
-        public int Id { get; private set; }
+        public uint Id { get; private set; }
         public bool Raid { get; private set; }
         public string Name { get; private set; }
         public string Message { get; private set; }
