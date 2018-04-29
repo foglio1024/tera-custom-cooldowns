@@ -23,32 +23,7 @@
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Trigger.EnterActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="hl"
-                                                                         Storyboard.TargetProperty="Opacity"
-                                                                         To="1" Duration="0:0:0.1">
-                                                <DoubleAnimation.EasingFunction>
-                                                    <QuadraticEase/>
-                                                </DoubleAnimation.EasingFunction>
-                                            </DoubleAnimation>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.EnterActions>
-                                <Trigger.ExitActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="hl"
-                                                                         Storyboard.TargetProperty="Opacity"
-                                                                         To="0" Duration="0:0:0.1">
-                                                <DoubleAnimation.EasingFunction>
-                                                    <QuadraticEase/>
-                                                </DoubleAnimation.EasingFunction>
-                                            </DoubleAnimation>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.ExitActions>
+                                <Setter Property="Opacity" TargetName="hl" Value="1"/>
                             </Trigger>
                             <Trigger Property="ItemsControl.AlternationIndex" Value="0">
                                 <Setter Property="Opacity" TargetName="alt" Value="0"></Setter>
@@ -77,32 +52,7 @@
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Trigger.EnterActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="hl"
-                                                                         Storyboard.TargetProperty="Opacity"
-                                                                         To="1" Duration="0:0:0.1">
-                                                <DoubleAnimation.EasingFunction>
-                                                    <QuadraticEase/>
-                                                </DoubleAnimation.EasingFunction>
-                                            </DoubleAnimation>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.EnterActions>
-                                <Trigger.ExitActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="hl"
-                                                                         Storyboard.TargetProperty="Opacity"
-                                                                         To="0" Duration="0:0:0.1">
-                                                <DoubleAnimation.EasingFunction>
-                                                    <QuadraticEase/>
-                                                </DoubleAnimation.EasingFunction>
-                                            </DoubleAnimation>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.ExitActions>
+                                <Setter Property="Opacity" Value="1" TargetName="hl"></Setter>
                             </Trigger>
 
                         </ControlTemplate.Triggers>
@@ -228,6 +178,17 @@
                         <ScaleTransform ScaleY="0"/>
                     </ListBox.LayoutTransform>
                 </ListBox>
+                <controls:Arc StrokeThickness="10" 
+                              Stroke="{StaticResource Colors.DungeonTier.5}" 
+                              Grid.Column="4"
+                              Width="22" 
+                              Height="22" 
+                              EndAngle="0" 
+                              Opacity=".8"
+                              HorizontalAlignment="Center" 
+                              Margin="4 0 -4 0" 
+                              x:Name="cdArc"/>
+
                 <Button x:Name="btn" 
                         Grid.Row="0" 
                         VerticalAlignment="Center" 
@@ -238,16 +199,6 @@
                         Command="{Binding Apply}">
                     <Path Data="{StaticResource SVG.AddUser}" Margin="3" Width="15" Stretch="Uniform" ToolTip="Apply" Fill="White"/>
                 </Button>
-                <controls:Arc StrokeThickness="3" 
-                              Stroke="{StaticResource Colors.DungeonTier.5}" 
-                              Grid.Column="4"
-                              Width="22" 
-                              Height="22" 
-                              EndAngle="0" 
-                              Opacity=".3"
-                              HorizontalAlignment="Center" 
-                              Margin="4 0 -4 0" 
-                              x:Name="cdArc"/>
             </Grid>
             <DataTemplate.Triggers>
                 <DataTrigger Binding="{Binding CanApply}" Value="False">
