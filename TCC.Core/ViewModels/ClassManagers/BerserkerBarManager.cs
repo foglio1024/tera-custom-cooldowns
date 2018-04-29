@@ -22,8 +22,8 @@ namespace TCC.ViewModels
 
         protected override void LoadSpecialSkills()
         {
-            SkillsDatabase.TryGetSkill(80600, Class.Berserker, out Skill fr);
-            SkillsDatabase.TryGetSkill(210200, Class.Berserker, out Skill bl);
+            SkillsDatabase.TryGetSkill(80600, Class.Berserker, out var fr);
+            SkillsDatabase.TryGetSkill(210200, Class.Berserker, out var bl);
             FieryRage = new DurationCooldownIndicator(_dispatcher)
             {
                 Cooldown = new FixedSkillCooldown(fr, CooldownType.Skill, _dispatcher, true),

@@ -133,7 +133,7 @@ namespace Tera.Game
 
         public List<UserEntity> PartyList()
         {
-            List<UserEntity> list = new List<UserEntity>();
+            var list = new List<UserEntity>();
             _currentParty.ForEach(x =>
                 {
                     Player player;

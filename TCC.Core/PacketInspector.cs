@@ -29,7 +29,7 @@ namespace TCC
         }
         public static void Dump()
         {
-            List<string> lines = new List<string>();
+            var lines = new List<string>();
             foreach (var item in Stats)
             {
                 var sb = new StringBuilder();
@@ -49,7 +49,7 @@ namespace TCC
         }
         public static void InspectPacket(Message msg)
         {
-            List<string> exclusionList = new List<string>()
+            var exclusionList = new List<string>()
             {
                 "S_USER_LOCATION",
                 "S_SOCIAL",
@@ -132,7 +132,7 @@ namespace TCC
 
             };
             var opName = PacketProcessor.OpCodeNamer.GetName(msg.OpCode);
-            TeraMessageReader tmr = new TeraMessageReader(msg, PacketProcessor.OpCodeNamer, PacketProcessor.Factory, PacketProcessor.SystemMessageNamer);
+            var tmr = new TeraMessageReader(msg, PacketProcessor.OpCodeNamer, PacketProcessor.Factory, PacketProcessor.SystemMessageNamer);
             if (exclusionList.Any(opName.Contains)) return;
             //            if(opName.Equals("S_LOAD_TOPO") || opName.Equals("C_LOAD_TOPO_FIN")|| opName.Equals("S_SPAWN_ME"))
             Debug.WriteLine(opName + " " + msg.OpCode);

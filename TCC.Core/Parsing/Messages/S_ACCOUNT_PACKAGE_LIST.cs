@@ -14,7 +14,7 @@ namespace TCC.Parsing.Messages
 
             var count = reader.ReadUInt16();
             reader.Skip(2);
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
                 reader.Skip(4);
                 packageIDs.Add(reader.ReadUInt32());

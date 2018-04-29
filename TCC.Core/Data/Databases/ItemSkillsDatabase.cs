@@ -7,7 +7,7 @@ namespace TCC.Data.Databases
     {
         internal static bool TryGetItemSkill(uint itemId, out Skill sk)
         {
-            bool result = false;
+            var result = false;
             sk = new Skill(0, Class.None, string.Empty, string.Empty);
 
             if (ItemsDatabase.Instance.Items.ContainsKey(itemId))

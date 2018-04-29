@@ -326,9 +326,9 @@ namespace TCC.Parsing
             //var str = "@3789cityname@cityWar:20guildFated";
             //var str = "@1773ItemName@item:152141ItemName1@item:447ItemCount5";
             var str = "@3821userNametestNameguildQuestName@GuildQuest:31007001value1targetValue3";
-            byte[] toBytes = Encoding.Unicode.GetBytes(str);
-            byte[] arr = new byte[toBytes.Length + 2 + 4];
-            for (int i = 0; i < toBytes.Length - 1; i++)
+            var toBytes = Encoding.Unicode.GetBytes(str);
+            var arr = new byte[toBytes.Length + 2 + 4];
+            for (var i = 0; i < toBytes.Length - 1; i++)
             {
                 arr[i + 4] = toBytes[i];
             }
@@ -383,7 +383,7 @@ namespace TCC.Parsing
         public static void HandleSpawnMe(S_SPAWN_ME p)
         {
             EntitiesManager.ClearNPC();
-            System.Timers.Timer t = new System.Timers.Timer(2000);
+            var t = new System.Timers.Timer(2000);
             t.Elapsed += (s, ev) =>
             {
                 t.Stop();
@@ -489,7 +489,7 @@ namespace TCC.Parsing
                 // ignored
             }
             var srvMsg = "@0\vUserName\v" + friend.Name + "\vAreaName\v" + areaName;
-            SystemMessages.Messages.TryGetValue(opcode, out SystemMessage m);
+            SystemMessages.Messages.TryGetValue(opcode, out var m);
 
             SystemMessagesProcessor.AnalyzeMessage(srvMsg, m, opcode);
         }
@@ -556,7 +556,7 @@ namespace TCC.Parsing
             if (p.MessageId == 9950045)
             {
                 //shield start
-                foreach (Npc item in BossGageWindowViewModel.Instance.NpcList.Where(x => x.IsPhase1Dragon))
+                foreach (var item in BossGageWindowViewModel.Instance.NpcList.Where(x => x.IsPhase1Dragon))
                 {
                     item.StartShield();
                 }
@@ -604,7 +604,7 @@ namespace TCC.Parsing
         {
             var opcodeName = "SMT_FRIEND_IS_CONNECTED";
             if (!x.Online) return;
-            if (SystemMessages.Messages.TryGetValue(opcodeName, out SystemMessage m))
+            if (SystemMessages.Messages.TryGetValue(opcodeName, out var m))
             {
                 SystemMessagesProcessor.AnalyzeMessage(x.Name, m, opcodeName);
             }
@@ -623,10 +623,10 @@ namespace TCC.Parsing
             try
             {
                 var msg = x.Message.Split('\v');
-                var opcode = UInt16.Parse(msg[0].Substring(1));
+                var opcode = ushort.Parse(msg[0].Substring(1));
                 var opcodeName = SystemMessageNamer.GetName(opcode);
 
-                if (SystemMessages.Messages.TryGetValue(opcodeName, out SystemMessage m))
+                if (SystemMessages.Messages.TryGetValue(opcodeName, out var m))
                 {
                     SystemMessagesProcessor.AnalyzeMessage(x.Message, m, opcodeName);
                 }
@@ -640,9 +640,9 @@ namespace TCC.Parsing
 
         internal static void HandleAccomplishAchievement(S_ACCOMPLISH_ACHIEVEMENT x)
         {
-            if (AchievementDatabase.Achievements.TryGetValue(x.AchievementId, out string name))
+            if (AchievementDatabase.Achievements.TryGetValue(x.AchievementId, out var name))
             {
-                if (SystemMessages.Messages.TryGetValue("SMT_ACHIEVEMENT_GRADE0_CLEAR_MESSAGE", out SystemMessage m))
+                if (SystemMessages.Messages.TryGetValue("SMT_ACHIEVEMENT_GRADE0_CLEAR_MESSAGE", out var m))
                 {
                     var sysMsg = new ChatMessage("@0\vAchievementName\v@achievement:" + x.AchievementId, m, (ChatChannel)m.ChatChannel);
                     ChatWindowManager.Instance.AddChatMessage(sysMsg);
@@ -662,7 +662,7 @@ namespace TCC.Parsing
 
         internal static void HandleAnswerInteractive(S_ANSWER_INTERACTIVE x)
         {
-            EntitiesManager.CurrentDatabase.TryGetMonster(x.Model, 0, out Monster m);
+            EntitiesManager.CurrentDatabase.TryGetMonster(x.Model, 0, out var m);
             ChatWindowManager.Instance.TooltipInfo.Name = x.Name;
             ChatWindowManager.Instance.TooltipInfo.Info = m.Name;
             ChatWindowManager.Instance.TooltipInfo.Level = (int)x.Level;
@@ -691,10 +691,10 @@ namespace TCC.Parsing
             try
             {
                 var msg = x.SysMessage.Split('\v');
-                var opcode = UInt16.Parse(msg[0].Substring(1));
+                var opcode = ushort.Parse(msg[0].Substring(1));
                 var opcodeName = SystemMessageNamer.GetName(opcode);
 
-                if (SystemMessages.Messages.TryGetValue(opcodeName, out SystemMessage m))
+                if (SystemMessages.Messages.TryGetValue(opcodeName, out var m))
                 {
                     var sysMsg = new ChatMessage(x.SysMessage, m, (ChatChannel)m.ChatChannel);
                     ChatWindowManager.Instance.AddChatMessage(sysMsg);
@@ -986,9 +986,9 @@ namespace TCC.Parsing
             if (x.First && x.More) return;
             if (S_INVEN.Items == null) return;
             InfoWindowViewModel.Instance.CurrentCharacter.ClearGear();
-            foreach (Tuple<uint, int, uint> tuple in S_INVEN.Items)
+            foreach (var tuple in S_INVEN.Items)
             {
-                if (InventoryManager.TryParseGear(tuple.Item1, out Tuple<GearTier, GearPiece> parsedPiece))
+                if (InventoryManager.TryParseGear(tuple.Item1, out var parsedPiece))
                 {
                     var i = new GearItem(tuple.Item1, parsedPiece.Item1, parsedPiece.Item2, tuple.Item2, tuple.Item3);
                     Console.WriteLine($"Item: {i}");

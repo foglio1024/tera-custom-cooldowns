@@ -15,8 +15,8 @@ namespace TCC
         public List<FixedSkillCooldown> Hidden;
         void ParseSkillConfig(string filename, Class c)
         {
-            XDocument skillsDoc = XDocument.Load("resources/config/skills/" + filename);
-            foreach (XElement skillElement in skillsDoc.Descendants("Skills").Descendants())
+            var skillsDoc = XDocument.Load("resources/config/skills/" + filename);
+            foreach (var skillElement in skillsDoc.Descendants("Skills").Descendants())
             {
                 var type = CooldownType.Skill;
                 if (skillElement.Name == "Item") type = CooldownType.Item;
@@ -147,7 +147,7 @@ namespace TCC
 
         private static void BuildDefaultValkyrieSkillConfig(string filename)
         {
-            XElement skills = new XElement("Skills",
+            var skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 136100), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 66230), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 35930), new XAttribute("row", 1)),
@@ -162,7 +162,7 @@ namespace TCC
         }
         private static void BuildDefaultNinjaSkillConfig(string filename)
         {
-            XElement skills = new XElement("Skills",
+            var skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 141100), new XAttribute("row", 1)), //DC
                 new XElement("Skill", new XAttribute("id", 121100), new XAttribute("row", 1)), //SF
                 new XElement("Skill", new XAttribute("id", 131000), new XAttribute("row", 1)), //CoS
@@ -174,7 +174,7 @@ namespace TCC
         }
         private static void BuildDefaultBrawlerSkillConfig(string filename)
         {
-            XElement skills = new XElement("Skills",
+            var skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 71230), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 91130), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 81130), new XAttribute("row", 1)),
@@ -185,7 +185,7 @@ namespace TCC
         }
         private static void BuildDefaultGunnerSkillConfig(string filename)
         {
-            XElement skills = new XElement("Skills",
+            var skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 70800), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 31100), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 150900), new XAttribute("row", 1)),
@@ -197,7 +197,7 @@ namespace TCC
         }
         private static void BuildDefaultReaperSkillConfig(string filename)
         {
-            XElement skills = new XElement("Skills",
+            var skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 60231), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 30300), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 50330), new XAttribute("row", 1)),
@@ -211,7 +211,7 @@ namespace TCC
         }
         private static void BuildDefaultMysticSkillConfig(string filename)
         {
-            XElement skills = new XElement("Skills",
+            var skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 420100), new XAttribute("row", 1)), //boomerang pulse
                 new XElement("Skill", new XAttribute("id", 370200), new XAttribute("row", 1)), //totem
                 new XElement("Skill", new XAttribute("id", 241010), new XAttribute("row", 1)) //voc
@@ -222,7 +222,7 @@ namespace TCC
         }
         private static void BuildDefaultPriestSkillConfig(string filename)
         {
-            XElement skills = new XElement("Skills",
+            var skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 280100), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 291100), new XAttribute("row", 1)),
                 //new XElement("Skill", new XAttribute("id", 390100), new XAttribute("row", 1)),
@@ -233,7 +233,7 @@ namespace TCC
         }
         private static void BuildDefaultArcherSkillConfig(string filename)
         {
-            XElement skills = new XElement("Skills",
+            var skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 30900), new XAttribute("row", 1)),   //RA
                 new XElement("Skill", new XAttribute("id", 41200), new XAttribute("row", 1)),   //PA
                 new XElement("Skill", new XAttribute("id", 50200), new XAttribute("row", 1)),   //RoA
@@ -246,7 +246,7 @@ namespace TCC
         }
         private static void BuildDefaultSorcererSkillConfig(string filename)
         {
-            XElement skills = new XElement("Skills",
+            var skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 270400), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 40900), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 60700), new XAttribute("row", 1)),
@@ -260,7 +260,7 @@ namespace TCC
         }
         private static void BuildDefaultBerserkerSkillConfig(string filename)
         {
-            XElement skills = new XElement("Skills",
+            var skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 31000), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 101100), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 150900), new XAttribute("row", 1)),
@@ -272,7 +272,7 @@ namespace TCC
         }
         private static void BuildDefaultSlayerSkillConfig(string filename)
         {
-            XElement skills = new XElement("Skills",
+            var skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 21100), new XAttribute("row", 1)),
                 //new XElement("Skill", new XAttribute("id", 80930), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 120500), new XAttribute("row", 1)),
@@ -283,7 +283,7 @@ namespace TCC
         }
         private static void BuildDefaultWarriorSkillConfig(string filename)
         {
-            XElement skills = new XElement("Skills",
+            var skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 181100), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 41100), new XAttribute("row", 1)),
                 new XElement("Skill", new XAttribute("id", 110800), new XAttribute("row", 1)),
@@ -311,7 +311,7 @@ namespace TCC
         }
         private static void BuildDefaultLancerSkillConfig(string filename)
         {
-            XElement skills = new XElement("Skills",
+            var skills = new XElement("Skills",
                 new XElement("Skill", new XAttribute("id", 50100), new XAttribute("row", 1)),   //shield bash
                 new XElement("Skill", new XAttribute("id", 30800), new XAttribute("row", 1)),   //onslaught
                 new XElement("Skill", new XAttribute("id", 181100), new XAttribute("row", 1)),  //shield barrage

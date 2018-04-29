@@ -35,7 +35,7 @@ namespace TCC.Data.Databases
 
             SkillConnections = new List<SkillConnection>();
             Skills = new Dictionary<Class, Dictionary<uint, Skill>>();
-            for (int i = 0; i <= 12; i++)
+            for (var i = 0; i <= 12; i++)
             {
                 Skills.Add((Class)i, new Dictionary<uint, Skill>());
             }
@@ -84,7 +84,7 @@ namespace TCC.Data.Databases
         }
         static string FindSkillNameByIdClass(uint id, Class c)
         {
-            if (Skills[c].TryGetValue(id, out Skill sk))
+            if (Skills[c].TryGetValue(id, out var sk))
             {
                 return sk.Name;
             }
@@ -122,7 +122,7 @@ namespace TCC.Data.Databases
         }
         public static bool TryGetSkill(uint id, Class c, out Skill sk)
         {
-            bool result = false;
+            var result = false;
             //var connSkills = GetSkillIdByConnectedId(id, c);
             sk = new Skill(0, Class.None, string.Empty, string.Empty);
             if (Skills[c].TryGetValue(id, out sk))
@@ -207,13 +207,13 @@ namespace TCC.Data.Databases
             foreach (var s in doc.Descendants().Where(x => x.Name == "String"))
             {
                 var id = Convert.ToUInt32(s.Attribute("id").Value);
-                string name = string.Empty;
+                var name = string.Empty;
                 if(s.Attribute("name") != null)
                 {
                     name = s.Attribute("name").Value;
                 }
                 Enum.TryParse(s.Attribute("class").Value, out Class c);
-                string toolTip = string.Empty;
+                var toolTip = string.Empty;
 
                 if(s.Attribute("toolTip") != null)
                 {
@@ -233,7 +233,7 @@ namespace TCC.Data.Databases
                 var id = Convert.ToUInt32(s.Attribute("skillId").Value);
                 var iconName = s.Attribute("iconName").Value;
                 Enum.TryParse(s.Attribute("class").Value, out Class c);
-                if(Skills[c].TryGetValue(id, out Skill sk))
+                if(Skills[c].TryGetValue(id, out var sk))
                 {
                     sk.SetSkillIcon(iconName);
                 }
@@ -256,7 +256,7 @@ namespace TCC.Data.Databases
         }
         static string FindSkillNameByIdClass(uint id, Class c)
         {
-            if (Skills[c].TryGetValue(id, out Skill sk))
+            if (Skills[c].TryGetValue(id, out var sk))
             {
                 return sk.Name;
             }
@@ -292,7 +292,7 @@ namespace TCC.Data.Databases
             SkillIconData = new List<XDocument>();
 
             Skills = new Dictionary<Class, Dictionary<uint, Skill>>();
-            for (int i = 0; i <= 12; i++)
+            for (var i = 0; i <= 12; i++)
             {
                 Skills.Add((Class)i, new Dictionary<uint, Skill>());
             }
@@ -355,7 +355,7 @@ namespace TCC.Data.Databases
         }
         public static bool TryGetSkill(uint id, Class c, out Skill sk)
         {
-            bool result = false;
+            var result = false;
             var connSkills = GetSkillIdByConnectedId(id, c);
             sk = new Skill(0, Class.None, string.Empty, string.Empty);
             if (Skills[c].TryGetValue(id, out sk))

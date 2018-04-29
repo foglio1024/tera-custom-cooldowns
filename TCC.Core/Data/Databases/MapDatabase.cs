@@ -116,7 +116,7 @@ namespace TCC.Data.Databases
 
         public static string GetName(uint guardId, uint sectionId)
         {
-            string ret = "Unknown;";
+            var ret = "Unknown;";
             try
             {
                 Worlds.ToList().ForEach(w =>

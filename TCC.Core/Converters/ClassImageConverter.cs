@@ -7,9 +7,9 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Class c = (Class)value;
+            var c = (Class)value;
             //System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(50, 50);
-            string className = "common";
+            var className = "common";
             switch (c)
             {
                 case Class.Warrior:

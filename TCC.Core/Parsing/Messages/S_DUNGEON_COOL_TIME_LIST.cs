@@ -13,7 +13,7 @@ namespace TCC.Parsing.Messages
             var offset = reader.ReadUInt16();
             reader.Skip(4);
             DungeonCooldowns = new Dictionary<uint, short>();
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
                 reader.Skip(4);
                 var id = reader.ReadUInt32();

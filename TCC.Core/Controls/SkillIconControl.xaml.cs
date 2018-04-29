@@ -65,7 +65,7 @@ namespace TCC.Controls
                 _secondsPassed = 0;
                 //CurrentCD = (double)_context.Cooldown / 1000;
                 NotifyPropertyChanged(nameof(CurrentCD));
-                double newAngle = (double)_context.Cooldown / (double)_context.OriginalCooldown;
+                var newAngle = (double)_context.Cooldown / (double)_context.OriginalCooldown;
                 if (_context.Cooldown == 0) newAngle = 0;
                 if (newAngle > 1) newAngle = 1;
 
@@ -111,7 +111,7 @@ namespace TCC.Controls
         void AnimateCooldown(double angle = 1)
         {
             var an = new DoubleAnimation(angle*359.9, 0, TimeSpan.FromMilliseconds(_context.Cooldown));
-            int fps = _context.Cooldown > 80000 ? 1 : 30;
+            var fps = _context.Cooldown > 80000 ? 1 : 30;
             DoubleAnimation.SetDesiredFrameRate(an, fps);
             arc.BeginAnimation(Arc.EndAngleProperty, an);
             NumberTimer.IsEnabled = true;

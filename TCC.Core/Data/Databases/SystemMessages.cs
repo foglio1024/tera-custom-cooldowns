@@ -19,7 +19,7 @@ namespace TCC.Data.Databases
 
                 var s = line.Split('\t');
 
-                var ch = Int32.Parse(s[0]);
+                var ch = int.Parse(s[0]);
                 var opcodeName = s[1];
                 var msg = s[2].Replace("&#xA","\n");
 

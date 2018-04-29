@@ -19,8 +19,8 @@ namespace TCC.ViewModels
 
         protected override void LoadSpecialSkills()
         {
-            SkillsDatabase.TryGetSkill(200200, Class.Slayer, out Skill icb);
-            SkillsDatabase.TryGetSkill(80900, Class.Slayer, out Skill ohs);
+            SkillsDatabase.TryGetSkill(200200, Class.Slayer, out var icb);
+            SkillsDatabase.TryGetSkill(80900, Class.Slayer, out var ohs);
 
             InColdBlood =
                 new DurationCooldownIndicator(_dispatcher)

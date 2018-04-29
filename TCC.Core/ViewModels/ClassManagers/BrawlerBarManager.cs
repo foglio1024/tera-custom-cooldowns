@@ -44,8 +44,8 @@ namespace TCC.ViewModels
         protected override void LoadSpecialSkills()
         {
             
-            SkillsDatabase.TryGetSkill(180100, Class.Fighter, out Skill gf);
-            SkillsDatabase.TryGetSkill(21200, Class.Fighter, out Skill c);
+            SkillsDatabase.TryGetSkill(180100, Class.Fighter, out var gf);
+            SkillsDatabase.TryGetSkill(21200, Class.Fighter, out var c);
             GrowingFury = new FixedSkillCooldown(gf, CooldownType.Skill, _dispatcher, false);
             Counter = new FixedSkillCooldown(c, CooldownType.Skill, _dispatcher, false);
         }

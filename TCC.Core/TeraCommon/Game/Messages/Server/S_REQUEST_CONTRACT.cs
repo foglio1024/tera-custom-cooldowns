@@ -7,7 +7,7 @@ namespace Tera.Game.Messages
         {
             //PrintRaw();
             reader.Skip(24);
-            short type = reader.ReadInt16();
+            var type = reader.ReadInt16();
             Type = (RequestType)type;
             reader.Skip(14);
             //int unk3 = reader.ReadInt32();

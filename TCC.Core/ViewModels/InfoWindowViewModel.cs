@@ -73,7 +73,7 @@ namespace TCC.ViewModels
             var path = $"resources/config/events/events-{region}.xml";
             if (!File.Exists(path))
             {
-                XElement root = new XElement("Events");
+                var root = new XElement("Events");
                 var eg = new XElement("EventGroup", new XAttribute("name", "Example event group"));
                 var ev = new XElement("Event",
                     new XAttribute("name", "Example Event"),
@@ -97,7 +97,7 @@ namespace TCC.ViewModels
 
             try
             {
-                XDocument d = XDocument.Load(path);
+                var d = XDocument.Load(path);
                 foreach (var egElement in d.Descendants().Where(x => x.Name == "EventGroup"))
                 {
                     var egName = egElement.Attribute("name").Value;
@@ -147,8 +147,8 @@ namespace TCC.ViewModels
 
                         var name = evElement.Attribute("name").Value;
                         var parsedStart = DateTime.Parse(evElement.Attribute("start").Value, CultureInfo.InvariantCulture);
-                        TimeSpan parsedDuration = TimeSpan.Zero;
-                        DateTime parsedEnd = DateTime.Now;
+                        var parsedDuration = TimeSpan.Zero;
+                        var parsedEnd = DateTime.Now;
                         bool isDuration;
                         if (evElement.Attribute("duration") != null)
                         {
@@ -313,11 +313,11 @@ namespace TCC.ViewModels
         }
         public void SaveToFile()
         {
-            XElement root = new XElement("Characters", new XAttribute("elite", SessionManager.IsElite));
+            var root = new XElement("Characters", new XAttribute("elite", SessionManager.IsElite));
 
             foreach (var c in Characters)
             {
-                XElement ce = new XElement("Character",
+                var ce = new XElement("Character",
                     new XAttribute("name", c.Name),
                     new XAttribute("id", c.Id),
                     new XAttribute("pos", c.Position),
@@ -329,22 +329,22 @@ namespace TCC.ViewModels
                     new XAttribute("elleonMarks", c.ElleonMarks)
                     );
 
-                XElement dungs = new XElement("Dungeons");
+                var dungs = new XElement("Dungeons");
 
                 foreach (var d in c.Dungeons)
                 {
-                    XElement dg = new XElement("Dungeon",
+                    var dg = new XElement("Dungeon",
                         new XAttribute("id", d.Id),
                         new XAttribute("entries", d.Entries),
                         new XAttribute("total", d.Clears));
                     dungs.Add(dg);
                 }
 
-                XElement gear = new XElement("GearPieces");
+                var gear = new XElement("GearPieces");
 
                 foreach (var gearItem in c.Gear)
                 {
-                    XElement g = new XElement("Gear",
+                    var g = new XElement("Gear",
                         new XAttribute("id", gearItem.Id),
                         new XAttribute("piece", gearItem.Piece),
                         new XAttribute("tier", gearItem.Tier),
@@ -357,7 +357,7 @@ namespace TCC.ViewModels
                 root.Add(ce);
             }
 
-            XDocument doc = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), root);
+            var doc = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), root);
             SaveCharDoc(doc);
         }
 
@@ -400,8 +400,8 @@ namespace TCC.ViewModels
         private void LoadCharacters()
         {
             if (!File.Exists("resources/config/characters.xml")) return;
-            XDocument doc = XDocument.Load("resources/config/characters.xml");
-            SessionManager.IsElite = Boolean.Parse(doc.Descendants().FirstOrDefault(x => x.Name == "Characters").Attribute("elite").Value);
+            var doc = XDocument.Load("resources/config/characters.xml");
+            SessionManager.IsElite = bool.Parse(doc.Descendants().FirstOrDefault(x => x.Name == "Characters").Attribute("elite").Value);
             foreach (var c in doc.Descendants().Where(x => x.Name == "Character"))
             {
                 var name = c.Attribute("name").Value;

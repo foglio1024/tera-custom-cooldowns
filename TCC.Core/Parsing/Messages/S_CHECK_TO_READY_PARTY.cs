@@ -39,7 +39,7 @@ namespace TCC.Parsing.Messages
             }
         }
 
-        public UInt16 Count { get; set; }
+        public ushort Count { get; set; }
 
         public List<ReadyPartyMember> Party { get; } = new List<ReadyPartyMember>();
     }

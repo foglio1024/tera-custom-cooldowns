@@ -39,7 +39,7 @@ namespace TCC.Controls
             if (diff == 0) return;
             if (diff > 0)
             {
-                for (int i = 0; i < diff; i++)
+                for (var i = 0; i < diff; i++)
                 {
                     dotsContainer.Children[_currentRunes + i].Opacity = 1;
                 }
@@ -49,7 +49,7 @@ namespace TCC.Controls
                 //baseBorder.Background = new SolidColorBrush(Color.FromRgb(0x20, 0x20, 0x27));
                 maxBorder.Opacity = 0;
 
-                for (int i = dotsContainer.Children.Count - 1; i >= 0; i--)
+                for (var i = dotsContainer.Children.Count - 1; i >= 0; i--)
                 {
                     dotsContainer.Children[i].Opacity = 0;
                 }

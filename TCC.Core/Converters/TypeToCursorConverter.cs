@@ -11,7 +11,7 @@ namespace TCC.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var val = (MessagePieceType)value;
-            Cursor c = Cursors.Arrow;
+            var c = Cursors.Arrow;
             switch (val)
             {
                 case MessagePieceType.Simple:

@@ -28,7 +28,7 @@ namespace TCC
             ms = new MemoryStream();
             bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
             ms.Position = 0;
-            BitmapImage bitmapimage = new BitmapImage();
+            var bitmapimage = new BitmapImage();
             bitmapimage.BeginInit();
             bitmapimage.StreamSource = ms;
             bitmapimage.CacheOption = BitmapCacheOption.OnLoad;
@@ -83,14 +83,14 @@ namespace TCC
 
         public static string ReplaceFirstOccurrenceCaseInsensitive(string input, string search, string replacement)
         {
-            int pos = input.IndexOf(search, StringComparison.InvariantCultureIgnoreCase);
+            var pos = input.IndexOf(search, StringComparison.InvariantCultureIgnoreCase);
             if (pos < 0) return input;
             var result = input.Substring(0, pos) + replacement + input.Substring(pos + search.Length);
             return result;
         }
         public static string ReplaceCaseInsensitive(string input, string search, string replacement)
         {
-            string result = Regex.Replace(
+            var result = Regex.Replace(
                 input,
                 Regex.Escape(search),
                 replacement.Replace("$", "$$"),
@@ -135,14 +135,14 @@ namespace TCC
             }
             else
             {
-                DependencyObject parent = VisualTreeHelper.GetParent(sender);
+                var parent = VisualTreeHelper.GetParent(sender);
                 return (FindVisualParent<T>(parent));
             }
         }
         public static T GetChild<T>(DependencyObject obj) where T : DependencyObject
         {
             DependencyObject child = null;
-            for (Int32 i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            for (var i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
             {
                 child = VisualTreeHelper.GetChild(obj, i);
                 if (child != null && child.GetType() == typeof(T))
@@ -176,7 +176,7 @@ namespace TCC
         }
         public static DateTime FromUnixTime(long unixTime)
         {
-            DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
             return epoch.AddSeconds(unixTime);
         }
 
@@ -252,7 +252,7 @@ namespace TCC
 
         public static void OnPropertyChanged(object sender, DependencyPropertyChangedEventArgs args)
         {
-            DependencyPropertyWatcher<T> source = (DependencyPropertyWatcher<T>)sender;
+            var source = (DependencyPropertyWatcher<T>)sender;
 
             if (source.PropertyChanged != null)
             {
@@ -345,7 +345,7 @@ namespace TCC
             this._dispatcher.InvokeIfRequired((Action)(() =>
             {
                 this._lock.EnterReadLock();
-                int count = this.Count;
+                var count = this.Count;
                 this._lock.ExitReadLock();
                 if (oldIndex >= count | newIndex >= count | oldIndex == newIndex)
                     return;
@@ -397,7 +397,7 @@ namespace TCC
             this._lock.EnterReadLock();
             try
             {
-                T[] array = new T[this.Count];
+                var array = new T[this.Count];
                 this.CopyTo(array, 0);
                 return array;
             }

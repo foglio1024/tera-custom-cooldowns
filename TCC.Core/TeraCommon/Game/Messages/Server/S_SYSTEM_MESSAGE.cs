@@ -15,7 +15,7 @@ namespace Tera.Game.Messages
             ushort id;
             ushort.TryParse(parts[0].Replace("@", ""), out id);
             MsgType = reader.SysMsgNamer?.GetName(id) ?? id.ToString();
-            int i = 1;
+            var i = 1;
             while (i + 2 <= parts.Length)
             {
                 Parameters[parts[i]] = parts[i + 1];

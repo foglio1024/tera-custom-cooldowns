@@ -43,8 +43,8 @@ namespace TCC.ViewModels
 
         protected override void LoadSpecialSkills()
         {
-            SkillsDatabase.TryGetSkill(150700, Class.Assassin, out Skill bh);
-            SkillsDatabase.TryGetSkill(80200, Class.Assassin, out Skill fa);
+            SkillsDatabase.TryGetSkill(150700, Class.Assassin, out var bh);
+            SkillsDatabase.TryGetSkill(80200, Class.Assassin, out var fa);
             BurningHeart = new FixedSkillCooldown(bh, CooldownType.Skill, _dispatcher, false);
             FireAvalanche = new FixedSkillCooldown(fa, CooldownType.Skill, _dispatcher, false);
 

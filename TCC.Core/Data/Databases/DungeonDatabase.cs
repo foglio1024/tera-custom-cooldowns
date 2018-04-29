@@ -35,7 +35,7 @@ namespace TCC.Data.Databases
                 var line = f.ReadLine();
                 if (line == null) break;
                 var s = line.Split('\t');
-                var id = UInt32.Parse(s[0]);
+                var id = uint.Parse(s[0]);
                 var name = s[1];
                 //var t = (DungeonTier)Enum.Parse(typeof(DungeonTier), s[2]);
 

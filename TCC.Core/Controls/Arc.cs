@@ -53,7 +53,7 @@ namespace TCC.Controls
 
         protected static void UpdateArc(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            Arc arc = d as Arc;
+            var arc = d as Arc;
             arc.InvalidateVisual();
         }
 
@@ -69,15 +69,15 @@ namespace TCC.Controls
 
         private Geometry GetArcGeometry()
         {
-            Point startPoint = PointAtAngle(Math.Min(StartAngle, EndAngle), Direction);
-            Point endPoint = PointAtAngle(Math.Max(StartAngle, EndAngle), Direction);
+            var startPoint = PointAtAngle(Math.Min(StartAngle, EndAngle), Direction);
+            var endPoint = PointAtAngle(Math.Max(StartAngle, EndAngle), Direction);
 
-            Size arcSize = new Size(Math.Max(0, (RenderSize.Width - StrokeThickness) / 2),
+            var arcSize = new Size(Math.Max(0, (RenderSize.Width - StrokeThickness) / 2),
                 Math.Max(0, (RenderSize.Height - StrokeThickness) / 2));
-            bool isLargeArc = Math.Abs(EndAngle - StartAngle) > 180;
+            var isLargeArc = Math.Abs(EndAngle - StartAngle) > 180;
 
-            StreamGeometry geom = new StreamGeometry();
-            using (StreamGeometryContext context = geom.Open())
+            var geom = new StreamGeometry();
+            using (var context = geom.Open())
             {
                 context.BeginFigure(startPoint, false, false);
                 context.ArcTo(endPoint, arcSize, 0, isLargeArc, Direction, true, false);
@@ -88,13 +88,13 @@ namespace TCC.Controls
 
         private Point PointAtAngle(double angle, SweepDirection sweep)
         {
-            double translatedAngle = angle + OriginRotationDegrees;
-            double radAngle = translatedAngle * (Math.PI / 180);
-            double xr = (RenderSize.Width - StrokeThickness) / 2;
-            double yr = (RenderSize.Height - StrokeThickness) / 2;
+            var translatedAngle = angle + OriginRotationDegrees;
+            var radAngle = translatedAngle * (Math.PI / 180);
+            var xr = (RenderSize.Width - StrokeThickness) / 2;
+            var yr = (RenderSize.Height - StrokeThickness) / 2;
 
-            double x = xr + xr * Math.Cos(radAngle);
-            double y = yr * Math.Sin(radAngle);
+            var x = xr + xr * Math.Cos(radAngle);
+            var y = yr * Math.Sin(radAngle);
 
             if (sweep == SweepDirection.Counterclockwise)
             {

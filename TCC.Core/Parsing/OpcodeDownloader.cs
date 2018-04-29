@@ -9,17 +9,17 @@ namespace TCC.Parsing
 {
     public class OpcodeDownloader
     {
-        public static void DownloadIfNotExist(uint version, String directory)
+        public static void DownloadIfNotExist(uint version, string directory)
         {
             DownloadOpcode(version, directory);
             DownloadSysmsg(version, directory);
         }
 
-        private static void DownloadOpcode(uint version, String directory)
+        private static void DownloadOpcode(uint version, string directory)
         {
             Directory.CreateDirectory(directory);
 
-            String filename = directory + Path.DirectorySeparatorChar + version + ".txt";
+            var filename = directory + Path.DirectorySeparatorChar + version + ".txt";
             if (File.Exists(filename))
             {
                 return;
@@ -49,11 +49,11 @@ namespace TCC.Parsing
             catch { }
         }
 
-        private static void DownloadSysmsg(uint version, String directory)
+        private static void DownloadSysmsg(uint version, string directory)
         {
             Directory.CreateDirectory(directory);
 
-            String filename = directory + Path.DirectorySeparatorChar + "smt_" + version + ".txt";
+            var filename = directory + Path.DirectorySeparatorChar + "smt_" + version + ".txt";
             if (File.Exists(filename))
             {
                 return;
@@ -83,9 +83,9 @@ namespace TCC.Parsing
             catch { }
         }
 
-        private static void Download(String remote, String local)
+        private static void Download(string remote, string local)
         {
-            using (System.Net.WebClient client = new System.Net.WebClient())
+            using (var client = new System.Net.WebClient())
             {
                 client.Headers.Add(System.Net.HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
                 client.DownloadFile(remote, local);

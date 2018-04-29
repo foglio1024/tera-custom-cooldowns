@@ -18,13 +18,13 @@ namespace TCC.Controls
 
         private void UserControl_MouseEnter(object sender, MouseEventArgs e)
         {
-            Grid p = Utils.FindVisualParent<Grid>(this);
+            var p = Utils.FindVisualParent<Grid>(this);
             Grid.SetZIndex(this, int.MaxValue);
         }
 
         private void UserControl_MouseLeave(object sender, MouseEventArgs e)
         {
-            Grid p = Utils.FindVisualParent<Grid>(this);
+            var p = Utils.FindVisualParent<Grid>(this);
             Grid.SetZIndex(this, int.MinValue);
 
         }

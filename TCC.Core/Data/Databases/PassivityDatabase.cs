@@ -14,7 +14,7 @@ namespace TCC.Data.Databases
         };
         public static bool TryGetPassivitySkill(uint id, out Skill sk)
         {
-            bool result = false;
+            var result = false;
             sk = new Skill(0, Class.None, string.Empty, string.Empty);
 
             if (AbnormalityManager.CurrentDb.Abnormalities.ContainsKey(id))

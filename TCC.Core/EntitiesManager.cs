@@ -24,7 +24,7 @@ namespace TCC
             }
             if (!Filter(zoneId, templateId)) return;
 
-            if (CurrentDatabase.TryGetMonster(templateId, zoneId, out Monster m))
+            if (CurrentDatabase.TryGetMonster(templateId, zoneId, out var m))
             {
                 if (m.IsBoss)
                 {

@@ -30,7 +30,7 @@ namespace TCC.Parsing.Messages
             RawCharacters = new List<RawChar>();
             count = reader.ReadInt16();
             offset = reader.ReadInt16();
-            short nextAddr = offset;
+            var nextAddr = offset;
             unkh1 = reader.ReadByte();
             unkh2 = reader.ReadInt32();
             maxChar = reader.ReadInt32();
@@ -40,7 +40,7 @@ namespace TCC.Parsing.Messages
             unkh7 = reader.ReadInt32();
             unkh8 = reader.ReadInt32();
 
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
                 var c = new RawChar();
                 reader.BaseStream.Position = nextAddr - 4;
@@ -212,11 +212,11 @@ namespace TCC.Data
         {
             var sb = new StringBuilder();
 
-            sb.AppendLine(String.Format("Character [{0}] <", pos));
-            sb.AppendLine(String.Format("\tName: {0}", name));
-            sb.AppendLine(String.Format("\tLevel: {0}", level));
-            sb.AppendLine(String.Format("\tClass: {0}", (Class)charClass));
-            sb.AppendLine(String.Format("\tLaurel: {0}", (Laurel)laurel));
+            sb.AppendLine(string.Format("Character [{0}] <", pos));
+            sb.AppendLine(string.Format("\tName: {0}", name));
+            sb.AppendLine(string.Format("\tLevel: {0}", level));
+            sb.AppendLine(string.Format("\tClass: {0}", (Class)charClass));
+            sb.AppendLine(string.Format("\tLaurel: {0}", (Laurel)laurel));
             sb.AppendLine(">");
 
             return sb.ToString();

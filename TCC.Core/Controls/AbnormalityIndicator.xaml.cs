@@ -36,7 +36,7 @@ namespace TCC.Controls
             if (_context == null) return;
 
             var an = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(_context.DurationLeft));
-            int fps = _context.DurationLeft > 20000 ? 1 : 10;
+            var fps = _context.DurationLeft > 20000 ? 1 : 10;
             DoubleAnimation.SetDesiredFrameRate(an, fps);
             Arc.BeginAnimation(Arc.EndAngleProperty, an);
 
@@ -100,10 +100,10 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            uint seconds = (uint)value / 1000;
-            uint minutes = seconds / 60;
-            uint hours = minutes / 60;
-            uint days = hours / 24;
+            var seconds = (uint)value / 1000;
+            var minutes = seconds / 60;
+            var hours = minutes / 60;
+            var days = hours / 24;
 
             if (minutes < 3)
             {
@@ -158,7 +158,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            int stacks = (int)value;
+            var stacks = (int)value;
             if (stacks > 1)
             {
                 return Visibility.Visible;
@@ -178,7 +178,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            uint duration = (uint)value;
+            var duration = (uint)value;
             if (duration == uint.MaxValue)
             {
                 return Visibility.Hidden;
@@ -198,7 +198,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            double size = (double)value;
+            var size = (double)value;
             return size / 1.7;
         }
 
@@ -211,7 +211,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            double size = (double)value;
+            var size = (double)value;
             return size / 1.9;
         }
 
@@ -224,7 +224,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            double size = (double)value;
+            var size = (double)value;
             return new Thickness(0, 0, 0, -size * 1.25);
         }
 

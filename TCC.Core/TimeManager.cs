@@ -192,7 +192,7 @@ namespace TCC
 
         public void SendWebhookMessageOld()
         {
-            if (!String.IsNullOrEmpty(SettingsManager.Webhook))
+            if (!string.IsNullOrEmpty(SettingsManager.Webhook))
             {
                 var sb = new StringBuilder("{");
                 sb.Append("\""); sb.Append("content"); sb.Append("\"");
@@ -210,7 +210,7 @@ namespace TCC
 
                 try
                 {
-                    using (WebClient client = new WebClient())
+                    using (var client = new WebClient())
                     {
                         client.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
                         client.Headers.Add( HttpRequestHeader.ContentType, "application/json");
@@ -226,7 +226,7 @@ namespace TCC
         }
         public void SendWebhookMessage(string bamName)
         {
-            if (!String.IsNullOrEmpty(SettingsManager.Webhook))
+            if (!string.IsNullOrEmpty(SettingsManager.Webhook))
             {
                 var msg = SettingsManager.WebhookMessage.IndexOf("{npc_name}", StringComparison.Ordinal) > -1
                     ? SettingsManager.WebhookMessage.Replace("{npc_name}", bamName)
@@ -247,7 +247,7 @@ namespace TCC
 
                 try
                 {
-                    using (WebClient client = new WebClient())
+                    using (var client = new WebClient())
                     {
                         client.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
 

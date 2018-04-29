@@ -25,7 +25,7 @@ namespace TCC.Converters
 
             }
 
-            IntPtr ip = S_IMAGE_DATA.Database[guildId].GetHbitmap();
+            var ip = S_IMAGE_DATA.Database[guildId].GetHbitmap();
             BitmapSource bs = null;
             try
             {

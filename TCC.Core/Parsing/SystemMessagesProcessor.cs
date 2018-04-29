@@ -34,7 +34,7 @@ namespace TCC.Parsing
         }
         private static void HandleMaxEnchantSucceed(string x)
         {
-            ChatMessage sysMsg = ChatMessage.BuildEnchantSystemMessage(x);
+            var sysMsg = ChatMessage.BuildEnchantSystemMessage(x);
             ChatWindowManager.Instance.AddChatMessage(sysMsg);
         }
         private static void HandleFriendLogin(string friendName, SystemMessage sysMsg)

@@ -34,7 +34,7 @@ namespace TCC.Parsing.Messages
             reader.BaseStream.Position = invOffset - 4;
             try
             {
-                for (int i = 0; i < count; i++)
+                for (var i = 0; i < count; i++)
                 {
 
                     var offset = reader.ReadUInt16();

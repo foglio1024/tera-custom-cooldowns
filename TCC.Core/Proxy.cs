@@ -58,8 +58,8 @@ namespace TCC
             try
             {
                 var stream = _client.GetStream();
-                UTF8Encoding utf8 = new UTF8Encoding();
-                byte[] bb = utf8.GetBytes(data);
+                var utf8 = new UTF8Encoding();
+                var bb = utf8.GetBytes(data);
                 stream.Write(bb, 0, bb.Length);
             }
             catch (Exception e)

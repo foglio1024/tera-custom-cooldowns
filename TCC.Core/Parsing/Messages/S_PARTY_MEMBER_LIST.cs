@@ -46,7 +46,7 @@ namespace TCC.Parsing.Messages
 
             Members = new List<User>();
 
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
                 var u = new User(WindowManager.GroupWindow.Dispatcher);
 

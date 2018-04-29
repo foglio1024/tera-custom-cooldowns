@@ -32,8 +32,8 @@ namespace TCC.ViewModels
 
         protected override void LoadSpecialSkills()
         {
-            SkillsDatabase.TryGetSkill(410100, Class.Elementalist, out Skill cont);
-            SkillsDatabase.TryGetSkill(120100, Class.Elementalist, out Skill vow);
+            SkillsDatabase.TryGetSkill(410100, Class.Elementalist, out var cont);
+            SkillsDatabase.TryGetSkill(120100, Class.Elementalist, out var vow);
             Contagion = new FixedSkillCooldown(cont, CooldownType.Skill, _dispatcher, true);
             Vow = new DurationCooldownIndicator(_dispatcher);
             Vow.Buff = new FixedSkillCooldown(vow, CooldownType.Skill, _dispatcher, false);

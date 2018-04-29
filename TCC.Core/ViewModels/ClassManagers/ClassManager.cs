@@ -73,7 +73,7 @@ namespace TCC.ViewModels
                 _debuffs.Remove(ab.Id);
             }
 
-            bool status = _debuffs.Count == 0 ? false : true;
+            var status = _debuffs.Count == 0 ? false : true;
             CurrentClassManager.GetDispatcher().Invoke(() => { CurrentClassManager.HP.Status = status; });
         }
         public ClassManager()

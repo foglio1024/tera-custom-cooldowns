@@ -71,27 +71,27 @@ namespace TCC
 
         public static void MakeUnfocusable(IntPtr hwnd)
         {
-            uint extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
+            var extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
             SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_NOACTIVATE);
         }
         public static void UndoUnfocusable(IntPtr hwnd)
         {
-            uint extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
+            var extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
             SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle & ~WS_EX_NOACTIVATE);
         }
         public static void HideFromToolBar(IntPtr hwnd)
         {
-            uint extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
+            var extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
             SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_TOOLWINDOW);
         }
         public static void MakeTransparent(IntPtr hwnd)
         {
-            uint extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
+            var extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
             SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_TRANSPARENT);
         }
         public static void UndoTransparent(IntPtr hwnd)
         {
-            uint extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
+            var extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
             SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle & ~WS_EX_TRANSPARENT);
         }
         public static void CheckForegroundWindow(object sender, ElapsedEventArgs e)

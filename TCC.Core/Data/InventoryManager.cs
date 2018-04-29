@@ -23,7 +23,7 @@ namespace TCC.Data
             parsedGear = null;
             if (id < StartId || id >= StartId + TotalItems) return false;
 
-            uint offset = id - StartId;  //offset = 97
+            var offset = id - StartId;  //offset = 97
             uint tier, tierOffset, tierIndex, itemOffsetInTier;
             if (offset < TotalTierItems * 4)
             {

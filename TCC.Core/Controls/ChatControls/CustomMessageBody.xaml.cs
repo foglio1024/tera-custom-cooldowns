@@ -31,7 +31,7 @@ namespace TCC.Controls.ChatControls
                 sb.Append(item.Text);
             }
             var tp = new Typeface((FontFamily)App.Current.FindResource("Frutiger"), FontStyles.Normal, FontWeights.Normal, FontStretches.Normal);
-            FormattedText ft = new FormattedText(sb.ToString(), CultureInfo.CurrentCulture, FlowDirection.LeftToRight, tp, 15, Brushes.White);
+            var ft = new FormattedText(sb.ToString(), CultureInfo.CurrentCulture, FlowDirection.LeftToRight, tp, 15, Brushes.White);
             foreach (var item in _context.Pieces)
             {
                 if (item.Text == null) continue;

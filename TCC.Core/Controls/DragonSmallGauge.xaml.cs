@@ -165,7 +165,7 @@ namespace TCC.Controls
                     DoubleAnimation.To = ValueToLength(CurrentHP, MaxHP);
                     HPrect.BeginAnimation(WidthProperty, DoubleAnimation);
 
-                    dragonHPpercTB.Text = String.Format("{0:0.0}%", CurrentPercentage);
+                    dragonHPpercTB.Text = string.Format("{0:0.0}%", CurrentPercentage);
 
                     if (Enraged)
                     {
@@ -234,7 +234,7 @@ namespace TCC.Controls
             }
             else
             {
-                double n = BaseRect.ActualWidth * ((double)value / (double)maxValue);
+                var n = BaseRect.ActualWidth * ((double)value / (double)maxValue);
                 return n;
             }
 

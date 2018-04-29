@@ -129,7 +129,7 @@ namespace TCC.Controls
             double result;
             try
             {
-                result = Double.Parse(tb.Text, CultureInfo.InvariantCulture);
+                result = double.Parse(tb.Text, CultureInfo.InvariantCulture);
                 if (result > Max) Value = Max;
                 else if (result < Min) Value = Min;
                 else Value = result;
@@ -144,7 +144,7 @@ namespace TCC.Controls
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             var tb = sender as TextBox;
-            if (Double.TryParse(tb.Text, out double result))
+            if (double.TryParse(tb.Text, out var result))
             {
                 Value = result;
             }

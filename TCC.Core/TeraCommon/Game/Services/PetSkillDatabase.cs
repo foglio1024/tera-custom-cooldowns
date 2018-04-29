@@ -28,8 +28,8 @@ namespace Tera.Game
                 if (line == null) continue;
                 var values = line.Split('\t');
 
-                ushort huntingZoneId = ushort.Parse(values[0]);
-                uint templateId = uint.Parse(values[1]);
+                var huntingZoneId = ushort.Parse(values[0]);
+                var templateId = uint.Parse(values[1]);
                 var petName = values[2];
                 var skillId = (huntingZoneId << 16) + ushort.Parse(values[3]);
                 var skillName = values[4];

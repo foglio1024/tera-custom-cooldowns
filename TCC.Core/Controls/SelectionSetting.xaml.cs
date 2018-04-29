@@ -116,7 +116,7 @@ namespace TCC.Controls
 
         private void SelectionSetting_OnLoaded(object sender, RoutedEventArgs e)
         {
-            int i = 0;
+            var i = 0;
             if(Choices == null) return;
             foreach (var choice in Choices)
             {

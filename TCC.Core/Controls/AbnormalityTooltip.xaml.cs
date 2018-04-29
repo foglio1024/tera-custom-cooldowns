@@ -49,7 +49,7 @@ namespace TCC.Controls
             t = t.Replace(cr2, "\n");
             var s = t.Split(new string[] { end }, StringSplitOptions.None);
 
-            for (int i = 0; i < s.Length; i++)
+            for (var i = 0; i < s.Length; i++)
             {
                 if(i != s.Length - 1)
                 {
@@ -57,7 +57,7 @@ namespace TCC.Controls
                     {
                         var d = s[i].Split(new string[] { goodStart }, StringSplitOptions.None);
                         toolTipTB.Inlines.Add(d[0]);
-                        Run r = new Run(d[1]);
+                        var r = new Run(d[1]);
                         r.Foreground = new SolidColorBrush(Color.FromRgb(0x3f,0x9f,0xff));
                         toolTipTB.Inlines.Add(r);
                     }
@@ -65,7 +65,7 @@ namespace TCC.Controls
                     {
                         var d = s[i].Split(new string[] { badStart }, StringSplitOptions.None);
                         toolTipTB.Inlines.Add(d[0]);
-                        Run r = new Run(d[1]);
+                        var r = new Run(d[1]);
                         r.Foreground = new SolidColorBrush(Colors.OrangeRed);
                         toolTipTB.Inlines.Add(r);
                     }

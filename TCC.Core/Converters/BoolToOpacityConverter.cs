@@ -12,7 +12,7 @@ namespace TCC.Converters
             if (parameter != null)
             {
                 var pars = ((string) parameter).Split('_');
-                minOpacty = Double.Parse(pars[0], CultureInfo.InvariantCulture);
+                minOpacty = double.Parse(pars[0], CultureInfo.InvariantCulture);
                 maxOpacity = double.Parse(pars[1], CultureInfo.InvariantCulture);
             }
             if ((bool)value)

@@ -16,7 +16,7 @@ namespace Tera.Game.Messages
         {
             User=reader.ReadEntityId();
             reader.Skip(8);
-            int type = reader.ReadInt32();
+            var type = reader.ReadInt32();
             Type = (NpcGuildType)type;
             reader.Skip(8);
             Credits = reader.ReadInt32();

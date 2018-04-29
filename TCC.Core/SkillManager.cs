@@ -41,7 +41,7 @@ namespace TCC
 
         public static void AddSkill(uint id, ulong cd)
         {
-            if (SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out Skill skill))
+            if (SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out var skill))
             {
                 if (!Filter(skill.Name))
                 {
@@ -53,7 +53,7 @@ namespace TCC
         }
         public static void AddItemSkill(uint id, uint cd)
         {
-            if (ItemSkillsDatabase.TryGetItemSkill(id, out Skill brooch))
+            if (ItemSkillsDatabase.TryGetItemSkill(id, out var brooch))
             {
                 try
                 {
@@ -70,7 +70,7 @@ namespace TCC
 
         public static void ChangeSkillCooldown(uint id, uint cd)
         {
-            if (SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out Skill skill))
+            if (SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out var skill))
             {
                 CooldownWindowViewModel.Instance.Change(skill, cd);
             }

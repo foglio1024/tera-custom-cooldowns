@@ -34,7 +34,7 @@ namespace TCC.ClassSpecific
             if(msg.AbnormalityId == HurricaneId) Debug.WriteLine("Checking hurricane; id={0} caster={1} player={2}", msg.AbnormalityId, msg.CasterId, SessionManager.CurrentPlayer.EntityId);
             if (msg.AbnormalityId == HurricaneId && msg.CasterId == SessionManager.CurrentPlayer.EntityId)
             {
-                SkillsDatabase.TryGetSkill(HurricaneId, Class.Common, out Skill hurricane);
+                SkillsDatabase.TryGetSkill(HurricaneId, Class.Common, out var hurricane);
                 SkillManager.AddSkillDirectly(hurricane, HurricaneDuration);
             }
 

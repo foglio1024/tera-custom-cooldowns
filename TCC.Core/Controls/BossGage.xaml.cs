@@ -349,7 +349,7 @@ namespace TCC
             }
             else
             {
-                double n = ((double)value / (double)maxValue);
+                var n = ((double)value / (double)maxValue);
                 return n;
             }
 
@@ -420,7 +420,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            AggroCircle x = (AggroCircle)value;
+            var x = (AggroCircle)value;
 
             switch (x)
             {

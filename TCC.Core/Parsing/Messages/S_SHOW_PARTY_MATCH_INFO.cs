@@ -28,7 +28,7 @@ namespace TCC.Parsing.Messages
             }
 
             reader.BaseStream.Position = offset - 4;
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
                 var l = new Listing();
                 var curr = reader.ReadUInt16();

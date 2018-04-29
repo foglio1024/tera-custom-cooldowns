@@ -24,7 +24,7 @@ namespace TCC.Controls
             if (diff == 0) return;
             if (diff > 0)
             {
-                for (int i = 0; i < diff; i++)
+                for (var i = 0; i < diff; i++)
                 {
                     edgeContainer.Children[_currentEdge + i].Opacity = 1;
                 }
@@ -34,7 +34,7 @@ namespace TCC.Controls
                 //baseBorder.Background = (SolidColorBrush)App.Current.FindResource("Colors.App.DefaultBackground");
                 maxBorder.Opacity = 0;
 
-                for (int i = edgeContainer.Children.Count - 1; i >= 0; i--)
+                for (var i = edgeContainer.Children.Count - 1; i >= 0; i--)
                 {
                     edgeContainer.Children[i].Opacity = 0;
                 }

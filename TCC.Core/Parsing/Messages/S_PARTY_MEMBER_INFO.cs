@@ -21,7 +21,7 @@ namespace TCC.Parsing.Messages
 
             reader.BaseStream.Position = offset - 4;
             Members = new List<User>();
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
                 var u = new User(WindowManager.GroupWindow.Dispatcher);
                 var current = reader.ReadUInt16();

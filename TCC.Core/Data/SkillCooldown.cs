@@ -17,7 +17,7 @@ namespace TCC
         {
             _dispatcher = d;
 
-            var cooldown = cd > Int32.MaxValue ? Int32.MaxValue : cd;
+            var cooldown = cd > int.MaxValue ? int.MaxValue : cd;
 
             Skill = sk;
             Cooldown = t==CooldownType.Skill ? cooldown : cooldown * 1000;

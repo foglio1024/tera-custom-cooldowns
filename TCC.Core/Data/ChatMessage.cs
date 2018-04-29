@@ -218,7 +218,7 @@ namespace TCC.Data
                     {
                         string content;
                         string customColor;
-                        int fontSize = 18;
+                        var fontSize = 18;
                         if (piece.StartsWith("<font"))
                         {
                             //formatted piece: get color and content
@@ -240,14 +240,14 @@ namespace TCC.Data
                             customColor = "";
                         }
                         var innerPieces = content.Split(new char[] { '{', '}' }, StringSplitOptions.RemoveEmptyEntries);
-                        bool plural = false;
-                        int selectionStep = 0;
+                        var plural = false;
+                        var selectionStep = 0;
 
                         foreach (var inPiece in innerPieces)
                         {
                             if (selectionStep == 1)
                             {
-                                var n = Int32.Parse(inPiece);
+                                var n = int.Parse(inPiece);
                                 if (n != 1) plural = true;
 
                                 selectionStep++;
@@ -372,7 +372,7 @@ namespace TCC.Data
         internal static void SplitSimplePieces(ChatMessage chatMessage)
         {
             var simplePieces = new List<MessagePiece>();
-            bool onlySimple = true;
+            var onlySimple = true;
             foreach (var item in chatMessage.Pieces)
             {
                 if (item.Type == MessagePieceType.Simple)
@@ -391,13 +391,13 @@ namespace TCC.Data
             }
             if (onlySimple) return;
 
-            for (int i = 0; i < simplePieces.Count; i++)
+            for (var i = 0; i < simplePieces.Count; i++)
             {
                 simplePieces[i].Text = simplePieces[i].Text.Replace(" ", " [[");
                 var split = simplePieces[i].Text.Split(new string[] { "[[" }, StringSplitOptions.RemoveEmptyEntries);
 
-                int index = chatMessage.Pieces.IndexOf(simplePieces[i]);
-                for (int j = 0; j < split.Length; j++)
+                var index = chatMessage.Pieces.IndexOf(simplePieces[i]);
+                for (var j = 0; j < split.Length; j++)
                 {
                     var mp = new MessagePiece(split[j])
                     {
@@ -445,7 +445,7 @@ namespace TCC.Data
         }
         protected void ParseEmoteMessage(string msg)
         {
-            string header = "@social:";
+            var header = "@social:";
             var start = msg.IndexOf(header);
             if (start == -1)
             {
@@ -453,7 +453,7 @@ namespace TCC.Data
                 return;
             }
             start += header.Length;
-            var id = UInt32.Parse(msg.Substring(start));
+            var id = uint.Parse(msg.Substring(start));
             var text = SocialDatabase.Social[id].Replace("{Name}", Author);
             AddPiece(new MessagePiece(text, MessagePieceType.Simple, Channel, SettingsManager.FontSize, false));
 
@@ -461,7 +461,7 @@ namespace TCC.Data
         protected void ParseFormattedMessage(string msg)
         {
             var piecesCount = Regex.Matches(msg, C_TAG, RegexOptions.IgnoreCase).Count;
-            for (int i = 0; i < piecesCount; i++)
+            for (var i = 0; i < piecesCount; i++)
             {
                 try
                 {
@@ -507,10 +507,10 @@ namespace TCC.Data
                 var t2 = text.Replace(" ", " [[");
                 var split = t2.Split(new string[] { "[[" }, StringSplitOptions.RemoveEmptyEntries).ToList();
 
-                StringBuilder content = new StringBuilder("");
+                var content = new StringBuilder("");
                 foreach (var item in split)
                 {
-                    Regex RgxUrl = new Regex(@"^http(s)?://([\w-]+.)+[\w-]+(/[\w- ./?%&=])?$");
+                    var RgxUrl = new Regex(@"^http(s)?://([\w-]+.)+[\w-]+(/[\w- ./?%&=])?$");
                     if (RgxUrl.IsMatch(item) || item.StartsWith("discord.gg"))
                     {
                         if (content.ToString() != "")
@@ -538,7 +538,7 @@ namespace TCC.Data
                 //it's formatted: parse then add
 
                 //get custom color
-                bool hasSpace = false;
+                var hasSpace = false;
                 var colorIndex = msg.IndexOf("COLOR=", StringComparison.InvariantCultureIgnoreCase);
                 if (colorIndex == -1)
                 {
@@ -560,7 +560,7 @@ namespace TCC.Data
                 if (linkIndex > -1)
                 {
                     var t = msg.Substring(linkIndex - 1, 1);
-                    int type = Int32.Parse(t);
+                    var type = int.Parse(t);
 
                     var aStart = msg.IndexOf("<ChatLinkAction");
                     var aEnd = msg.IndexOf("</ChatLinkAction>");
@@ -614,9 +614,9 @@ namespace TCC.Data
             var linkData = a.Substring(a.IndexOf("#####") - 1);
             linkData = linkData.Substring(0, linkData.IndexOf(">") - 1);
             var pars = ParseLinkedParameters(a);
-            var id = UInt32.Parse(pars[0]);
-            var uid = Int32.Parse(pars[1]);
-            string owner = "";
+            var id = uint.Parse(pars[0]);
+            var uid = int.Parse(pars[1]);
+            var owner = "";
             try { owner = pars[2]; }
             catch (Exception)
             {
@@ -669,16 +669,16 @@ namespace TCC.Data
 
             var pars = ParseLinkedParameters(a);
             var locTree = pars[0].Split('_');
-            var worldId = UInt32.Parse(locTree[0]);
-            var guardId = UInt32.Parse(locTree[1]);
-            var sectionId = UInt32.Parse(locTree[2]);
+            var worldId = uint.Parse(locTree[0]);
+            var guardId = uint.Parse(locTree[1]);
+            var sectionId = uint.Parse(locTree[2]);
             if (worldId == 1 && guardId == 2 && sectionId == 9) sectionId = 7;
-            var continent = UInt32.Parse(pars[1]);
+            var continent = uint.Parse(pars[1]);
             continent = continent == 0 && worldId == 1 && guardId == 24 && sectionId == 183001 ? 7031 : continent;
             var coords = pars[2].Split(',');
-            var x = Double.Parse(coords[0], CultureInfo.InvariantCulture);
-            var y = Double.Parse(coords[1], CultureInfo.InvariantCulture);
-            var z = Double.Parse(coords[2], CultureInfo.InvariantCulture);
+            var x = double.Parse(coords[0], CultureInfo.InvariantCulture);
+            var y = double.Parse(coords[1], CultureInfo.InvariantCulture);
+            var z = double.Parse(coords[2], CultureInfo.InvariantCulture);
 
             var textStart = a.IndexOf('>', a.IndexOf("#####")) + 1;
             var textEnd = a.IndexOf('<', textStart);
@@ -719,9 +719,9 @@ namespace TCC.Data
         {
             var zoneId = uint.Parse(dictionary["zoneName"]);
             var zoneName = EntitiesManager.CurrentDatabase.GetZoneName(zoneId);
-            string txt = zoneId.ToString();
+            var txt = zoneId.ToString();
             if (zoneName != null) txt = zoneName;
-            MessagePiece mp = new MessagePiece(txt)
+            var mp = new MessagePiece(txt)
             {
                 Type = MessagePieceType.Simple
             };
@@ -734,14 +734,14 @@ namespace TCC.Data
             var zoneId = uint.Parse(creatureSplit[0]);
             var templateId = uint.Parse(creatureSplit[1]);
 
-            string txt = creatureId;
+            var txt = creatureId;
 
-            if (EntitiesManager.CurrentDatabase.TryGetMonster(templateId, zoneId, out Monster m))
+            if (EntitiesManager.CurrentDatabase.TryGetMonster(templateId, zoneId, out var m))
             {
                 txt = m.Name;
             }
 
-            MessagePiece mp = new MessagePiece(txt)
+            var mp = new MessagePiece(txt)
             {
                 Type = MessagePieceType.Simple
             };
@@ -759,16 +759,16 @@ namespace TCC.Data
                 rawLink.Append("@" + uid.ToString());
             }
 
-            string username = SessionManager.CurrentPlayer.Name;
+            var username = SessionManager.CurrentPlayer.Name;
             if (info.ContainsKey("UserName"))
             {
                 username = info["UserName"];
                 rawLink.Append("@" + username);
             }
-            MessagePiece mp = new MessagePiece(id.ToString());
-            if (ItemsDatabase.Instance.Items.TryGetValue(id, out Item i))
+            var mp = new MessagePiece(id.ToString());
+            if (ItemsDatabase.Instance.Items.TryGetValue(id, out var i))
             {
-                var txt = String.Format("<{0}>", i.Name);
+                var txt = string.Format("<{0}>", i.Name);
                 mp = new MessagePiece(txt)
                 {
                     Type = MessagePieceType.Item,
@@ -786,17 +786,17 @@ namespace TCC.Data
         {
             var id = GetId(info, "achievement");
             var achiName = id.ToString();
-            if (AchievementDatabase.Achievements.TryGetValue(id, out string g))
+            if (AchievementDatabase.Achievements.TryGetValue(id, out var g))
             {
-                achiName = String.Format("[{0}]", g);
+                achiName = string.Format("[{0}]", g);
             }
             return new MessagePiece(achiName, MessagePieceType.Simple, Channel, SettingsManager.FontSize, false);
         }
         protected MessagePiece ParseSysMsgQuest(Dictionary<string, string> info)
         {
             var id = GetId(info, "quest");
-            string txt = id.ToString();
-            if (QuestDatabase.Quests.TryGetValue(id, out string q))
+            var txt = id.ToString();
+            if (QuestDatabase.Quests.TryGetValue(id, out var q))
             {
                 txt = q;
             }
@@ -808,7 +808,7 @@ namespace TCC.Data
             var txt = id.ToString();
             var col = "fcb06f";
 
-            if (AchievementGradeDatabase.Grades.TryGetValue(id, out string g))
+            if (AchievementGradeDatabase.Grades.TryGetValue(id, out var g))
             {
                 txt = g;
                 if(id == 104) col = "38bde5";
@@ -820,8 +820,8 @@ namespace TCC.Data
         protected MessagePiece ParseSysMsgDungeon(Dictionary<string, string> info)
         {
             var id = GetId(info, "dungeon");
-            string txt = id.ToString();
-            if (DungeonDatabase.Instance.Dungeons.TryGetValue(id, out Dungeon dngName))
+            var txt = id.ToString();
+            if (DungeonDatabase.Instance.Dungeons.TryGetValue(id, out var dngName))
             {
                 txt = dngName.Name;
             }
@@ -830,8 +830,8 @@ namespace TCC.Data
         protected MessagePiece ParseSysMsgAccBenefit(Dictionary<string, string> info)
         {
             var id = GetId(info, "accountBenefit");
-            string txt = id.ToString();
-            if (AccountBenefitDatabase.Benefits.TryGetValue(id, out string ab))
+            var txt = id.ToString();
+            if (AccountBenefitDatabase.Benefits.TryGetValue(id, out var ab))
             {
                 txt = ab;
             }
@@ -840,8 +840,8 @@ namespace TCC.Data
         protected MessagePiece ParseSysMsgGuildQuest(Dictionary<string, string> info)
         {
             var id = GetId(info, "GuildQuest");
-            string questName = id.ToString();
-            if (GuildQuestDatabase.GuildQuests.TryGetValue(id, out GuildQuest q))
+            var questName = id.ToString();
+            if (GuildQuestDatabase.GuildQuests.TryGetValue(id, out var q))
             {
                 questName = q.Title;
             }
@@ -855,7 +855,7 @@ namespace TCC.Data
                 return null;
             }
             var dict = new Dictionary<string, string>();
-            for (int i = 1; i < parameters.Length - 1; i = i + 2)
+            for (var i = 1; i < parameters.Length - 1; i = i + 2)
             {
                 dict.Add(parameters[i], parameters[i + 1]);
             }
@@ -865,8 +865,8 @@ namespace TCC.Data
         {
             //@464UserNameChippyAdded12ItemName@item:88176?dbid:273547775?masterpiece
             //@1613ItemAmount5ItemName@item:179072?dbid:254819647
-            string[] itemPars = p.Replace("@", "").Split('?');
-            Dictionary<string, string> itemParsDict = new Dictionary<string, string>();
+            var itemPars = p.Replace("@", "").Split('?');
+            var itemParsDict = new Dictionary<string, string>();
             foreach (var i in itemPars)
             {
                 var keyVal = i.Split(':');
@@ -921,7 +921,7 @@ namespace TCC.Data
         }
         protected static string ReplaceParameters(string txt, Dictionary<string, string> pars, bool all)
         {
-            string result = "";
+            var result = "";
             if (!all)
             {
                 foreach (var keyVal in pars)
@@ -963,10 +963,10 @@ namespace TCC.Data
         }
         protected static string GetItemColor(Item i)
         {
-            string CommonColor = "FFFFFF";
-            string UncommonColor = "4DCB30";
-            string RareColor = "009ED9";
-            string SuperiorColor = "EEBE00";
+            var CommonColor = "FFFFFF";
+            var UncommonColor = "4DCB30";
+            var RareColor = "009ED9";
+            var SuperiorColor = "EEBE00";
 
             switch (i.RareGrade)
             {
@@ -997,8 +997,8 @@ namespace TCC.Data
         public static ChatMessage BuildEnchantSystemMessage(string systemMessage)
         {
             var msg = new ChatMessage();
-            string mw = " Masterwork ";
-            string e = "+12";
+            var mw = " Masterwork ";
+            var e = "+12";
             if (systemMessage.Contains("Added12"))
             {
                 msg.Channel = ChatChannel.Enchant12;
@@ -1036,7 +1036,7 @@ namespace TCC.Data
             txt = txt.Replace("}", "");
             var mp = ParseSysMsgItem(BuildParametersDictionary(txt));
 
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             sb.Append("<");
             sb.Append(e);
             sb.Append(mw);

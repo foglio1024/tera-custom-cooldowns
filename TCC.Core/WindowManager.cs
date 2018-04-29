@@ -160,7 +160,7 @@ namespace TCC
             TrayIcon.MouseDown += NI_MouseDown;
             TrayIcon.MouseDoubleClick += TrayIcon_MouseDoubleClick;
             var v = Assembly.GetExecutingAssembly().GetName().Version;
-            TrayIcon.Text = String.Format("TCC v{0}.{1}.{2}", v.Major, v.Minor, v.Build);
+            TrayIcon.Text = string.Format("TCC v{0}.{1}.{2}", v.Major, v.Minor, v.Build);
             var CloseButton = new MenuItem() { Header = "Close" };
 
             CloseButton.Click += (s, ev) => App.CloseApp();

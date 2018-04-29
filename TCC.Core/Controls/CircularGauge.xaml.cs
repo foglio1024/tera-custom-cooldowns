@@ -69,20 +69,20 @@ namespace TCC.Controls
 
         private static void OnPercentageChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
         {
-            CircularGauge circle = sender as CircularGauge;
+            var circle = sender as CircularGauge;
             circle.Angle = (circle.Percentage * 360) / 100;
         }
 
         private static void OnPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
         {
-            CircularGauge circle = sender as CircularGauge;
+            var circle = sender as CircularGauge;
             circle.RenderArc();
         }
 
         public void RenderArc()
         {
-            Point startPoint = new Point(Radius, 0);
-            Point endPoint = ComputeCartesianCoordinate(Angle, Radius);
+            var startPoint = new Point(Radius, 0);
+            var endPoint = ComputeCartesianCoordinate(Angle, Radius);
             endPoint.X += Radius;
             endPoint.Y += Radius;
 
@@ -90,9 +90,9 @@ namespace TCC.Controls
             pathRoot.Height = Radius * 2 + StrokeThickness;
             pathRoot.Margin = new Thickness(StrokeThickness, StrokeThickness, 0, 0);
 
-            bool largeArc = Angle > 180.0;
+            var largeArc = Angle > 180.0;
 
-            Size outerArcSize = new Size(Radius, Radius);
+            var outerArcSize = new Size(Radius, Radius);
 
             pathFigure.StartPoint = startPoint;
 
@@ -107,10 +107,10 @@ namespace TCC.Controls
         private Point ComputeCartesianCoordinate(double angle, double radius)
         {
             // convert to radians
-            double angleRad = (Math.PI / 180.0) * (angle - 90);
+            var angleRad = (Math.PI / 180.0) * (angle - 90);
 
-            double x = radius * Math.Cos(angleRad);
-            double y = radius * Math.Sin(angleRad);
+            var x = radius * Math.Cos(angleRad);
+            var y = radius * Math.Sin(angleRad);
 
             return new Point(x, y);
         }

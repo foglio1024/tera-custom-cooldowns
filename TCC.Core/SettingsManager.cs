@@ -159,22 +159,22 @@ namespace TCC
                 if (b == null) return;
                 try
                 {
-                    IgnoreMeInGroupWindow = Boolean.Parse(b.Attribute("IgnoreMeInGroupWindow").Value);
+                    IgnoreMeInGroupWindow = bool.Parse(b.Attribute("IgnoreMeInGroupWindow").Value);
                 }
                 catch { }
                 try
                 {
-                    IgnoreGroupBuffs = Boolean.Parse(b.Attribute(nameof(IgnoreGroupBuffs)).Value);
+                    IgnoreGroupBuffs = bool.Parse(b.Attribute(nameof(IgnoreGroupBuffs)).Value);
                 }
                 catch { }
                 try
                 {
-                    IgnoreGroupDebuffs = Boolean.Parse(b.Attribute(nameof(IgnoreGroupDebuffs)).Value);
+                    IgnoreGroupDebuffs = bool.Parse(b.Attribute(nameof(IgnoreGroupDebuffs)).Value);
                 }
                 catch { }
                 try
                 {
-                    IgnoreRaidAbnormalitiesInGroupWindow = Boolean.Parse(b.Attribute("IgnoreRaidAbnormalitiesInGroupWindow").Value);
+                    IgnoreRaidAbnormalitiesInGroupWindow = bool.Parse(b.Attribute("IgnoreRaidAbnormalitiesInGroupWindow").Value);
                 }
                 catch { }
                 try
@@ -190,77 +190,77 @@ namespace TCC
                 catch { }
                 try
                 {
-                    ClickThruWhenDim = Boolean.Parse(b.Attribute("ClickThruWhenDim").Value);
+                    ClickThruWhenDim = bool.Parse(b.Attribute("ClickThruWhenDim").Value);
                 }
                 catch { }
                 try
                 {
-                    ClickThruInCombat = Boolean.Parse(b.Attribute(nameof(ClickThruInCombat)).Value);
+                    ClickThruInCombat = bool.Parse(b.Attribute(nameof(ClickThruInCombat)).Value);
                 }
                 catch { }
                 try
                 {
-                    MaxMessages = Int32.Parse(b.Attribute(nameof(MaxMessages)).Value);
+                    MaxMessages = int.Parse(b.Attribute(nameof(MaxMessages)).Value);
                 }
                 catch { }
                 try
                 {
-                    SpamThreshold = Int32.Parse(b.Attribute(nameof(SpamThreshold)).Value);
+                    SpamThreshold = int.Parse(b.Attribute(nameof(SpamThreshold)).Value);
                 }
                 catch { }
                 try
                 {
-                    FontSize = Int32.Parse(b.Attribute(nameof(FontSize)).Value);
+                    FontSize = int.Parse(b.Attribute(nameof(FontSize)).Value);
                 }
                 catch { }
                 try
                 {
-                    ShowChannel = Boolean.Parse(b.Attribute(nameof(ShowChannel)).Value);
+                    ShowChannel = bool.Parse(b.Attribute(nameof(ShowChannel)).Value);
                 }
                 catch { }
                 try
                 {
-                    ShowTimestamp = Boolean.Parse(b.Attribute(nameof(ShowTimestamp)).Value);
+                    ShowTimestamp = bool.Parse(b.Attribute(nameof(ShowTimestamp)).Value);
                 }
                 catch { }
                 try
                 {
-                    ShowOnlyBosses = Boolean.Parse(b.Attribute(nameof(ShowOnlyBosses)).Value);
+                    ShowOnlyBosses = bool.Parse(b.Attribute(nameof(ShowOnlyBosses)).Value);
                 }
                 catch { }
                 try
                 {
-                    DisablePartyMP = Boolean.Parse(b.Attribute(nameof(DisablePartyMP)).Value);
+                    DisablePartyMP = bool.Parse(b.Attribute(nameof(DisablePartyMP)).Value);
                 }
                 catch { }
                 try
                 {
-                    DisablePartyHP = Boolean.Parse(b.Attribute(nameof(DisablePartyHP)).Value);
+                    DisablePartyHP = bool.Parse(b.Attribute(nameof(DisablePartyHP)).Value);
                 }
                 catch { }
                 try
                 {
-                    ShowOnlyAggroStacks = Boolean.Parse(b.Attribute(nameof(ShowOnlyAggroStacks)).Value);
+                    ShowOnlyAggroStacks = bool.Parse(b.Attribute(nameof(ShowOnlyAggroStacks)).Value);
                 }
                 catch { }
                 try
                 {
-                    DisablePartyAbnormals = Boolean.Parse(b.Attribute(nameof(DisablePartyAbnormals)).Value);
+                    DisablePartyAbnormals = bool.Parse(b.Attribute(nameof(DisablePartyAbnormals)).Value);
                 }
                 catch (Exception) { }
                 try
                 {
-                    LfgOn = Boolean.Parse(b.Attribute(nameof(LfgOn)).Value);
+                    LfgOn = bool.Parse(b.Attribute(nameof(LfgOn)).Value);
                 }
                 catch (Exception) { }
                 try
                 {
-                    ChatFadeOut = Boolean.Parse(b.Attribute(nameof(ChatFadeOut)).Value);
+                    ChatFadeOut = bool.Parse(b.Attribute(nameof(ChatFadeOut)).Value);
                 }
                 catch (Exception) { }
                 try
                 {
-                    ChatWindowOpacity = Double.Parse(b.Attribute(nameof(ChatWindowOpacity)).Value, CultureInfo.InvariantCulture);
+                    ChatWindowOpacity = double.Parse(b.Attribute(nameof(ChatWindowOpacity)).Value, CultureInfo.InvariantCulture);
                 }
                 catch (Exception) { }
                 try
@@ -300,7 +300,7 @@ namespace TCC
                 catch (Exception) { }
                 try
                 {
-                    GroupSizeThreshold = UInt32.Parse(b.Attribute(nameof(GroupSizeThreshold)).Value);
+                    GroupSizeThreshold = uint.Parse(b.Attribute(nameof(GroupSizeThreshold)).Value);
                 }
                 catch { }
                 try
@@ -310,37 +310,37 @@ namespace TCC
                 catch { }
                 try
                 {
-                    ShowItemsCooldown = Boolean.Parse(b.Attribute(nameof(ShowItemsCooldown)).Value);
+                    ShowItemsCooldown = bool.Parse(b.Attribute(nameof(ShowItemsCooldown)).Value);
                 }
                 catch (Exception) { }
                 try
                 {
-                    ShowMembersLaurels = Boolean.Parse(b.Attribute(nameof(ShowMembersLaurels)).Value);
+                    ShowMembersLaurels = bool.Parse(b.Attribute(nameof(ShowMembersLaurels)).Value);
                 }
                 catch (Exception) { }
                 try
                 {
-                    AnimateChatMessages = Boolean.Parse(b.Attribute(nameof(AnimateChatMessages)).Value);
+                    AnimateChatMessages = bool.Parse(b.Attribute(nameof(AnimateChatMessages)).Value);
                 }
                 catch (Exception) { }
                 try
                 {
-                    StatSent = Boolean.Parse(b.Attribute(nameof(StatSent)).Value);
+                    StatSent = bool.Parse(b.Attribute(nameof(StatSent)).Value);
                 }
                 catch (Exception) { }
                 try
                 {
-                    StatSent = Boolean.Parse(b.Attribute(nameof(StatSent)).Value);
+                    StatSent = bool.Parse(b.Attribute(nameof(StatSent)).Value);
                 }
                 catch (Exception) { }
                 try
                 {
-                    ShowFlightEnergy = Boolean.Parse(b.Attribute(nameof(ShowFlightEnergy)).Value);
+                    ShowFlightEnergy = bool.Parse(b.Attribute(nameof(ShowFlightEnergy)).Value);
                 }
                 catch (Exception) { }
                 try
                 {
-                    LfgEnabled = Boolean.Parse(b.Attribute(nameof(LfgEnabled)).Value);
+                    LfgEnabled = bool.Parse(b.Attribute(nameof(LfgEnabled)).Value);
                 }
                 catch (Exception) { }
                 //add settings here
@@ -480,27 +480,27 @@ namespace TCC
         private static WindowSettings ParseWindowSettings(XElement ws)
         {
             double x = 0, y = 0, w = 0, h = 0, scale = 1, dimOp = .3;
-            ClickThruMode ctm = ClickThruMode.Never;
+            var ctm = ClickThruMode.Never;
             bool vis = true, enabled = true, autoDim = true, allowTrans = true, alwaysVis = false;
 
             try
             {
-                x = Double.Parse(ws.Attribute("X").Value, CultureInfo.InvariantCulture);
+                x = double.Parse(ws.Attribute("X").Value, CultureInfo.InvariantCulture);
             }
             catch (Exception) { }
             try
             {
-                y = Double.Parse(ws.Attribute("Y").Value, CultureInfo.InvariantCulture);
+                y = double.Parse(ws.Attribute("Y").Value, CultureInfo.InvariantCulture);
             }
             catch (Exception) { }
             try
             {
-                w = Double.Parse(ws.Attribute("W").Value, CultureInfo.InvariantCulture);
+                w = double.Parse(ws.Attribute("W").Value, CultureInfo.InvariantCulture);
             }
             catch (Exception) { }
             try
             {
-                h = Double.Parse(ws.Attribute("H").Value, CultureInfo.InvariantCulture);
+                h = double.Parse(ws.Attribute("H").Value, CultureInfo.InvariantCulture);
             }
             catch (Exception) { }
             try
@@ -511,28 +511,28 @@ namespace TCC
             try
             {
                 //w.Visibility = (Visibility)Enum.Parse(typeof(Visibility), ws.Attribute("Visibility").Value);
-                vis = Boolean.Parse(ws.Attribute("Visible").Value);
+                vis = bool.Parse(ws.Attribute("Visible").Value);
             }
             catch (Exception) { }
 
             try
             {
-                scale = Double.Parse(ws.Attribute("Scale").Value, CultureInfo.InvariantCulture);
+                scale = double.Parse(ws.Attribute("Scale").Value, CultureInfo.InvariantCulture);
             }
             catch (Exception) { }
             try
             {
-                autoDim = Boolean.Parse(ws.Attribute("AutoDim").Value);
+                autoDim = bool.Parse(ws.Attribute("AutoDim").Value);
             }
             catch (Exception) { }
             try
             {
-                dimOp = Double.Parse(ws.Attribute("DimOpacity").Value, CultureInfo.InvariantCulture);
+                dimOp = double.Parse(ws.Attribute("DimOpacity").Value, CultureInfo.InvariantCulture);
             }
             catch (Exception) { }
             try
             {
-                alwaysVis = Boolean.Parse(ws.Attribute("ShowAlways").Value);
+                alwaysVis = bool.Parse(ws.Attribute("ShowAlways").Value);
             }
             catch (Exception) { }
             try
@@ -542,7 +542,7 @@ namespace TCC
             catch (Exception) { }
             try
             {
-                enabled = Boolean.Parse(ws.Attribute("Enabled").Value);
+                enabled = bool.Parse(ws.Attribute("Enabled").Value);
             }
             catch (Exception) { }
             return new WindowSettings(x, y, h, w, vis, ctm, scale, autoDim, dimOp, alwaysVis, allowTrans, enabled);
@@ -551,7 +551,7 @@ namespace TCC
         {
             foreach (var e in xElement.Descendants().Where(x => x.Name == "Channel"))
             {
-                EnabledChatChannels.FirstOrDefault(x => x.Channel == (ChatChannel)Enum.Parse(typeof(ChatChannel), e.Attribute("name").Value)).Enabled = Boolean.Parse(e.Attribute("enabled").Value);
+                EnabledChatChannels.FirstOrDefault(x => x.Channel == (ChatChannel)Enum.Parse(typeof(ChatChannel), e.Attribute("name").Value)).Enabled = bool.Parse(e.Attribute("enabled").Value);
             }
         }
         private static void ParseGroupAbnormalSettings(XElement el)
@@ -578,11 +578,11 @@ namespace TCC
 
         public static XElement BuildChatTabsXElement(List<Tab> tabList)
         {
-            XElement result = new XElement("Tabs");
+            var result = new XElement("Tabs");
             foreach (var tab in tabList)
             {
-                XAttribute tabName = new XAttribute("name", tab.TabName);
-                XElement tabElement = new XElement("Tab", tabName);
+                var tabName = new XAttribute("name", tab.TabName);
+                var tabElement = new XElement("Tab", tabName);
                 foreach (var ch in tab.Channels)
                 {
                     tabElement.Add(new XElement("Channel", new XAttribute("value", ch)));
@@ -606,12 +606,12 @@ namespace TCC
         }
         private static XElement BuildChannelsXElement()
         {
-            XElement result = new XElement(nameof(EnabledChatChannels));
+            var result = new XElement(nameof(EnabledChatChannels));
             foreach (var c in EnabledChatChannels)
             {
-                XAttribute name = new XAttribute("name", c.Channel.ToString());
-                XAttribute val = new XAttribute("enabled", c.Enabled.ToString());
-                XElement chElement = new XElement("Channel", name, val);
+                var name = new XAttribute("name", c.Channel.ToString());
+                var val = new XAttribute("enabled", c.Enabled.ToString());
+                var chElement = new XElement("Channel", name, val);
                 result.Add(chElement);
             }
             return result;
@@ -619,7 +619,7 @@ namespace TCC
         private static XElement BuildGroupAbnormalsXElement()
         {
             var result = new XElement(nameof(GroupAbnormals));
-            foreach (KeyValuePair<Class, List<uint>> pair in GroupAbnormals)
+            foreach (var pair in GroupAbnormals)
             {
                 var c = pair.Key;
                 var sb = new StringBuilder();

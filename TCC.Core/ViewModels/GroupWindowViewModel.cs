@@ -249,7 +249,7 @@ namespace TCC.ViewModels
                 opcode = "SMT_LEAVE_PARTY_PARTYPLAYER";
                 msg = "@0\vPartyPlayerName\v" + name + "\vparty\vparty";
             }
-            SystemMessages.Messages.TryGetValue(opcode, out SystemMessage m);
+            SystemMessages.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
 
         }

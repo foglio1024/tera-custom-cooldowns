@@ -95,7 +95,7 @@ namespace TCC.Parsing.Messages
         {
             get
             {
-                int classId = (int)(model - 10101) % 100;
+                var classId = (int)(model - 10101) % 100;
                 return (Class)classId;
             }
         }
@@ -192,11 +192,11 @@ namespace TCC.Parsing.Messages
             return;
             details = new byte[detailsCount];
             details2 = new byte[details2Count];
-            for (int i = 0; i < detailsCount; i++)
+            for (var i = 0; i < detailsCount; i++)
             {
                 details[i] = reader.ReadByte();
             }
-            for (int i = 0; i < details2Count; i++)
+            for (var i = 0; i < details2Count; i++)
             {
                 details2[i] = reader.ReadByte();
             }

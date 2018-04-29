@@ -168,7 +168,7 @@ namespace TCC.ViewModels
         }
         public void AddFromQueue(int itemsToAdd)
         {
-            for (int i = 0; i < itemsToAdd; i++)
+            for (var i = 0; i < itemsToAdd; i++)
             {
                 ChatMessage msg;
                 if (_queue.TryDequeue(out msg))
@@ -226,7 +226,7 @@ namespace TCC.ViewModels
             if (!vch.Enabled) return;
             if (ChatMessages.Count < SettingsManager.SpamThreshold)
             {
-                for (int i = 0; i < ChatMessages.Count - 1; i++)
+                for (var i = 0; i < ChatMessages.Count - 1; i++)
                 {
                     var m = ChatMessages[i];
                     if (!Pass(chatMessage, m)) return;
@@ -234,7 +234,7 @@ namespace TCC.ViewModels
             }
             else
             {
-                for (int i = 0; i < SettingsManager.SpamThreshold; i++)
+                for (var i = 0; i < SettingsManager.SpamThreshold; i++)
                 {
                     if (i > ChatMessages.Count - 1) continue;
 

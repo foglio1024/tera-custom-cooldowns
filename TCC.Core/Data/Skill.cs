@@ -20,7 +20,7 @@ namespace TCC
                 {
                     if (!(last.Contains("X") || last.Contains("I") || last.Contains("V"))) return Name;
                     var sb = new StringBuilder();
-                    for (int i = 0; i < n.Length-1; i++)
+                    for (var i = 0; i < n.Length-1; i++)
                     {
                         sb.Append(n[i]);
                         sb.Append(" ");

@@ -9,7 +9,7 @@ namespace TCC.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var rows = (int)value;
-            if (rows == 0) return Double.NaN;
+            if (rows == 0) return double.NaN;
             return 19 * rows;
         }
 

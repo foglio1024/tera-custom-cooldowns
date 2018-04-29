@@ -61,7 +61,7 @@ namespace TCC.Windows
                     var container = ICs[icIndex].ItemContainerGenerator.ContainerFromIndex(itemIndex);
                     if (container != null)
                     {
-                        DungeonInfoControl dgc = Utils.GetChild<DungeonInfoControl>(container);
+                        var dgc = Utils.GetChild<DungeonInfoControl>(container);
                         if (dgc != null) dgc.AnimateIn();
                     }
 
@@ -162,7 +162,7 @@ namespace TCC.Windows
 
         private UniformGrid GetInnerUniformGrid(FrameworkElement element)
         {
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(element); i++)
+            for (var i = 0; i < VisualTreeHelper.GetChildrenCount(element); i++)
             {
                 var child = VisualTreeHelper.GetChild(element, i) as FrameworkElement;
 

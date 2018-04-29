@@ -259,7 +259,7 @@ namespace TCC.Data
         public Npc() { }
         public override string ToString()
         {
-            return String.Format("{0} - {1}", EntityId, Name);
+            return string.Format("{0} - {1}", EntityId, Name);
         }
 
         public void Dispose()

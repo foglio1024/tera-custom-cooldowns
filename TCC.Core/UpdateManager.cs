@@ -18,7 +18,7 @@ namespace TCC
         static string baseDatabaseDir = "tera-used-icons-master";
         public static void CheckDatabaseVersion()
         {
-            using (WebClient c = new WebClient())
+            using (var c = new WebClient())
             {
                 c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
 
@@ -27,10 +27,10 @@ namespace TCC
                     var st = c.OpenRead(databaseVersion);
                     if (st != null)
                     {
-                        StreamReader sr = new StreamReader(st);
+                        var sr = new StreamReader(st);
 
-                        int newVersion = Convert.ToInt32(sr.ReadLine());
-                        int currentVersion = 0;
+                        var newVersion = Convert.ToInt32(sr.ReadLine());
+                        var currentVersion = 0;
                         if (File.Exists("resources/images/current_version"))
                         {
                             using (var str = File.OpenText("resources/images/current_version"))
@@ -68,9 +68,9 @@ namespace TCC
         }
         static void DownloadDatabase()
         {
-            using (WebClient c = new WebClient())
+            using (var c = new WebClient())
             {
-                bool ready = false;
+                var ready = false;
                 c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
 
                 c.DownloadProgressChanged += App.SplashScreen.UpdateProgress;
@@ -150,7 +150,7 @@ namespace TCC
         }
         static void CheckAppVersionPeriodic()
         {
-            using (WebClient c = new WebClient())
+            using (var c = new WebClient())
             {
                 c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
 
@@ -159,9 +159,9 @@ namespace TCC
                     var st = c.OpenRead(appVersion);
                     if (st != null)
                     {
-                        StreamReader sr = new StreamReader(st);
-                        string newVersionInfo = sr.ReadLine();
-                        string newVersionUrl = sr.ReadLine();
+                        var sr = new StreamReader(st);
+                        var newVersionInfo = sr.ReadLine();
+                        var newVersionUrl = sr.ReadLine();
 
                         if (newVersionInfo != null)
                         {
@@ -184,7 +184,7 @@ namespace TCC
         }
         public static void CheckAppVersion()
         {
-            using (WebClient c = new WebClient())
+            using (var c = new WebClient())
             {
                 c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
 
@@ -193,9 +193,9 @@ namespace TCC
                     var st = c.OpenRead(appVersion);
                     if (st != null)
                     {
-                        StreamReader sr = new StreamReader(st);
-                        string newVersionInfo = sr.ReadLine();
-                        string newVersionUrl = sr.ReadLine();
+                        var sr = new StreamReader(st);
+                        var newVersionInfo = sr.ReadLine();
+                        var newVersionUrl = sr.ReadLine();
 
                         if (newVersionInfo != null)
                         {
@@ -239,7 +239,7 @@ namespace TCC
                     c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
 
                     App.SplashScreen.SetText("Downloading update...");
-                    bool ready = false;
+                    var ready = false;
                     c.DownloadProgressChanged += App.SplashScreen.UpdateProgress;
                     c.DownloadFileCompleted += (s, ev) => ready = true;
                     App.SplashScreen.Dispatcher.Invoke(() => c.DownloadFileAsync(new Uri(url), "update.zip"));

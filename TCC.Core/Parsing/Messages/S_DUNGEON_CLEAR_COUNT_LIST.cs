@@ -17,7 +17,7 @@ namespace TCC.Parsing.Messages
             var offset = reader.ReadUInt16();
             var playerId = reader.ReadUInt32();
             DungeonClears = new Dictionary<uint, int>();
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
                 //reader.BaseStream.Position = 8;
                 var current = reader.ReadUInt16();

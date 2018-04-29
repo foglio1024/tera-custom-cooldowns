@@ -45,7 +45,7 @@ namespace Tera.Game
             Name = "Unknown damage";
             GuildName = "";
             RaceGenderClass = new RaceGenderClass(Race.Common,Gender.Common, PlayerClass.Common);
-            PlayerId = UInt32.MaxValue;
+            PlayerId = uint.MaxValue;
             ServerId = serverid;
             Level = 0;
             OutOfRange = true;

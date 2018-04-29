@@ -15,8 +15,8 @@ namespace TCC.Parsing.Messages
 {
     public class S_IMAGE_DATA : ParsedMessage
     {
-        private static Dictionary<GuildId, Bitmap> _database;
-        public static Dictionary<GuildId, Bitmap> Database => _database ?? (_database = new Dictionary<GuildId, Bitmap>());
+        private static Dictionary<uint, Bitmap> _database;
+        public static Dictionary<uint, Bitmap> Database => _database ?? (_database = new Dictionary<uint, Bitmap>());
 
 
         public S_IMAGE_DATA(TeraMessageReader reader) : base(reader)

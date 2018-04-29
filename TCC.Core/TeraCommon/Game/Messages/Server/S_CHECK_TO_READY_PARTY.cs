@@ -39,13 +39,13 @@ namespace Tera.Game.Messages
             }
 
             Debug.WriteLine($"Count:{Count}");
-            foreach(ReadyPartyMembers menber in Party)
+            foreach(var menber in Party)
             {
                 Debug.WriteLine($"ServerId:{BitConverter.ToString(BitConverter.GetBytes(menber.ServerId))}, PlayerId:{BitConverter.ToString(BitConverter.GetBytes(menber.PlayerId))}, State:{menber.Status}");
             }
         }
 
-        public UInt16 Count { get; set; }
+        public ushort Count { get; set; }
 
         public List<ReadyPartyMembers> Party { get; } = new List<ReadyPartyMembers>();
     }

@@ -10,7 +10,7 @@ namespace TCC
 
         public static void BeginAbnormality(uint id, ulong target, uint duration, int stacks)
         {
-            if (CurrentDb.Abnormalities.TryGetValue(id, out Abnormality ab))
+            if (CurrentDb.Abnormalities.TryGetValue(id, out var ab))
             {
                 if (!Filter(ab)) return;
                 if (target == SessionManager.CurrentPlayer.EntityId)
@@ -27,7 +27,7 @@ namespace TCC
         }
         public static void EndAbnormality(ulong target, uint id)
         {
-            if (CurrentDb.Abnormalities.TryGetValue(id, out Abnormality ab))
+            if (CurrentDb.Abnormalities.TryGetValue(id, out var ab))
             {
                 if (target == SessionManager.CurrentPlayer.EntityId)
                 {
@@ -125,7 +125,7 @@ namespace TCC
 
         public static void BeginOrRefreshPartyMemberAbnormality(uint playerId, uint serverId, uint id, uint duration, int stacks)
         {
-            if (CurrentDb.Abnormalities.TryGetValue(id, out Abnormality ab))
+            if (CurrentDb.Abnormalities.TryGetValue(id, out var ab))
             {
                 if (!Filter(ab)) return;
                 GroupWindowViewModel.Instance.BeginOrRefreshAbnormality(ab, stacks, duration, playerId, serverId);
@@ -134,7 +134,7 @@ namespace TCC
 
         internal static void EndPartyMemberAbnormality(uint playerId, uint serverId, uint id)
         {
-            if (CurrentDb.Abnormalities.TryGetValue(id, out Abnormality ab))
+            if (CurrentDb.Abnormalities.TryGetValue(id, out var ab))
             {
                 if (!Filter(ab)) return;
                 GroupWindowViewModel.Instance.EndAbnormality(ab, playerId, serverId);

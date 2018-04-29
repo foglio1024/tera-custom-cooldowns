@@ -65,7 +65,7 @@ namespace TCC.Controls
                 if (e.PropertyName == "Refresh")
                 {
                     if (_context.Cooldown == _context.OriginalCooldown) return;
-                    double newVal = (double)_context.Cooldown / (double)_context.OriginalCooldown;
+                    var newVal = (double)_context.Cooldown / (double)_context.OriginalCooldown;
                     if (newVal > 1) newVal = 1;
                     if (_context.Cooldown == 0)
                     {
@@ -117,7 +117,7 @@ namespace TCC.Controls
         {
             ArcAnimation.Duration = TimeSpan.FromMilliseconds(_context.Cooldown);
             ArcAnimation.From = 359.9 * val;
-            int fps = _context.Cooldown > 80000 ? 1 : 30;
+            var fps = _context.Cooldown > 80000 ? 1 : 30;
             Timeline.SetDesiredFrameRate(ArcAnimation, fps);
             arc.BeginAnimation(Arc.EndAngleProperty, ArcAnimation);
         }

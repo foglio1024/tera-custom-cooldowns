@@ -7,8 +7,8 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            ReadyStatus v = (ReadyStatus)value;
-            string img = "resources/images/Icon_Laurels/blank.png";
+            var v = (ReadyStatus)value;
+            var img = "resources/images/Icon_Laurels/blank.png";
             switch (v)
             {
                 case ReadyStatus.NotReady:

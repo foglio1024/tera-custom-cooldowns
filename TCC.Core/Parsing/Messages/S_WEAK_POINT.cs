@@ -32,7 +32,7 @@ namespace TCC.Parsing.Messages
 
         public override string ToString()
         {
-            return String.Format("T:{0} | total:{1} | moved:{2} | {3} | S:{4}", Target, TotalRunemarks, RemovedRunemarks, Type, SkillId);
+            return string.Format("T:{0} | total:{1} | moved:{2} | {3} | S:{4}", Target, TotalRunemarks, RemovedRunemarks, Type, SkillId);
         }
     }
 }

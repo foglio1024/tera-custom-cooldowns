@@ -52,7 +52,7 @@ namespace TCC.Windows
             var old = new HeaderedItemViewModel[VM.TabVMs.Count];
             VM.TabVMs.CopyTo(old, 0);
             var same = true;
-            for (int i = 0; i < newOrder.Count(); i++)
+            for (var i = 0; i < newOrder.Count(); i++)
             {
                 if (old[i].Header != newOrder.ToList()[i].Content)
                 {
@@ -120,7 +120,7 @@ namespace TCC.Windows
         }
         private void SWPreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            ScrollViewer s = (ScrollViewer)sender;
+            var s = (ScrollViewer)sender;
             var offset = e.Delta > 0 ? -2 : 2;
             s.ScrollToVerticalOffset(s.VerticalOffset - offset);
             e.Handled = true;
@@ -242,10 +242,10 @@ namespace TCC.Windows
         }
         private List<FrameworkElement> GetVisibleItems(Rect svViewportBounds)
         {
-            List<FrameworkElement> result = new List<FrameworkElement>();
+            var result = new List<FrameworkElement>();
             if (_currentPanel.Children.Count > 2)
             {
-                for (int i = 0; i < _currentPanel.Children.Count; i++)
+                for (var i = 0; i < _currentPanel.Children.Count; i++)
                 {
                     var container = (_currentPanel.Children[i] as FrameworkElement);
 
@@ -275,7 +275,7 @@ namespace TCC.Windows
         }
         private VirtualizingStackPanel GetInnerStackPanel(FrameworkElement element)
         {
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(element); i++)
+            for (var i = 0; i < VisualTreeHelper.GetChildrenCount(element); i++)
             {
                 var child = VisualTreeHelper.GetChild(element, i) as FrameworkElement;
 

@@ -10,7 +10,7 @@ namespace TCC.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var dgId = (uint)value;
-            if (parameter != null && Boolean.Parse((string)parameter))
+            if (parameter != null && bool.Parse((string)parameter))
             {
                 //use short names
                 if (DungeonDatabase.Instance.Dungeons.ContainsKey(dgId)) return DungeonDatabase.Instance.Dungeons[dgId].Name;//.DungeonDefinitions[dgId].ShortName;

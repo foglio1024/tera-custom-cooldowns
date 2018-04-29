@@ -15,7 +15,7 @@ namespace TCC.Parsing.Messages
             var count = reader.ReadUInt16();
             var offest = reader.ReadUInt16();
 
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
                 BlockedUsers.Add(ParseBlockedUser(reader));
             }
