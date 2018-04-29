@@ -51,6 +51,8 @@ namespace TCC
                 });
             }
         }
+
+
         private static void SendData(string data)
         {
             try
@@ -117,9 +119,17 @@ namespace TCC
             var sb = new StringBuilder("loot_settings");
             SendData(sb.ToString());
         }
-        public static void RequestPartyInfo(int id)
+        public static void RequestPartyInfo(uint id)
         {
             var sb = new StringBuilder("lfg_party_req");
+            sb.Append("&id=");
+            sb.Append(id);
+
+            SendData(sb.ToString());
+        }
+        public static void ApplyToLfg(uint id)
+        {
+            var sb = new StringBuilder("lfg_apply_req");
             sb.Append("&id=");
             sb.Append(id);
 
@@ -163,6 +173,18 @@ namespace TCC
 
             SendData(sb.ToString());
         }
+
+        internal static void PublicizeLfg()
+        {
+            var sb = new StringBuilder("lfg_publicize");
+            SendData(sb.ToString());
+        }
+        internal static void RemoveLfg()
+        {
+            var sb = new StringBuilder("lfg_remove");
+            SendData(sb.ToString());
+        }
+
         public static void UnblockUser(string name)
         {
             var sb = new StringBuilder("unblock");
@@ -171,6 +193,17 @@ namespace TCC
 
             SendData(sb.ToString());
         }
+
+        internal static void RequestLfgList(int min = 60, int max = 65)
+        {
+            var sb = new StringBuilder("lfg_request_list");
+            sb.Append("&minlvl=");
+            sb.Append(min);
+            sb.Append("&maxlvl=");
+            sb.Append(max);
+            SendData(sb.ToString());
+        }
+
         public static void AskInteractive(uint srvId, string name)
         {
             var sb = new StringBuilder("ask_int");
@@ -272,6 +305,30 @@ namespace TCC
             var sb = new StringBuilder("nondb_info");
             sb.Append("&id=");
             sb.Append(itemId);
+
+            SendData(sb.ToString());
+        }
+        public static void RequestNextLfgPage(int page)
+        {
+            var sb = new StringBuilder("lfg_page_req");
+            sb.Append("&page=");
+            sb.Append(page);
+            SendData(sb.ToString());
+        }
+        public static void RegisterLfg(string msg, bool raid)
+        {
+            var sb = new StringBuilder("lfg_register");
+            sb.Append("&msg=");
+            sb.Append(msg);
+            sb.Append("&raid=");
+            sb.Append(raid.ToString().ToLower());
+            SendData(sb.ToString());
+        }
+        public static void InitStub()
+        {
+            var sb = new StringBuilder("init_stub");
+            sb.Append("&use_lfg=");
+            sb.Append(SettingsManager.LfgEnabled);
 
             SendData(sb.ToString());
         }
