@@ -283,6 +283,15 @@ namespace TCC.ViewModels
                 m.LoadTabs();
                 w.Show();
             }
+
+            WindowManager.TccVisibilityChanged += (s, ev) =>
+            {
+                if (WindowManager.IsTccVisible)
+                {
+                    ChatWindows.ToList().ForEach(w => w.RefreshTopmost());
+                }
+            };
+
         }
 
         internal void CloseAllWindows()
@@ -316,7 +325,7 @@ namespace TCC.ViewModels
             lfg.Dispose();
             LFGs.Remove(lfg);
         }
-        private bool TryGetLfg(int id, string msg, string name, out LFG lfg)
+        private bool TryGetLfg(uint id, string msg, string name, out LFG lfg)
         {
             lfg = LFGs.ToSyncArray().FirstOrDefault(x => x.Id == id);
             if (lfg == null)
@@ -343,7 +352,7 @@ namespace TCC.ViewModels
             LFG lfg;
             if (TryGetLfg(p.Id, "", "", out lfg))
             {
-                lfg.MembersCount = p.MembersCount;
+                lfg.MembersCount = p.Members.Count;
             }
         }
         public void RefreshTimer()
