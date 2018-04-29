@@ -19,9 +19,9 @@ namespace TCC.Windows
         protected WindowSettings _settings;
         protected WindowButtons _b;
         protected UIElement _c;
-        DispatcherTimer _t;
-        DoubleAnimation _showButtons;
-        DoubleAnimation _hideButtons;
+        private DispatcherTimer _t;
+        private DoubleAnimation _showButtons;
+        private DoubleAnimation _hideButtons;
         protected bool _ignoreSize;
         protected bool clickThru;
         public bool ClickThru

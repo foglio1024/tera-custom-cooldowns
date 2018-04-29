@@ -9,9 +9,9 @@ namespace TCC.Data.Databases
     public static class SkillsDatabase
     {
         public static Dictionary<Class, Dictionary<uint, Skill>> Skills;
-        static List<SkillConnection> SkillConnections;
+        private static List<SkillConnection> SkillConnections;
 
-        class SkillConnection
+        private class SkillConnection
         {
             public Class Class;
             public int Id;
@@ -82,7 +82,8 @@ namespace TCC.Data.Databases
             }
 
         }
-        static string FindSkillNameByIdClass(uint id, Class c)
+
+        private static string FindSkillNameByIdClass(uint id, Class c)
         {
             if (Skills[c].TryGetValue(id, out var sk))
             {
@@ -91,7 +92,8 @@ namespace TCC.Data.Databases
             else return "Not found";
 
         }
-        static int GetSkillIdByConnectedId(uint id, Class c)
+
+        private static int GetSkillIdByConnectedId(uint id, Class c)
         {
             foreach (var skillConnection in SkillConnections.Where(x => x.Class == c))
             {
@@ -163,12 +165,12 @@ namespace TCC.Data.Databases
 
         public static event Action<double> Progress;
 
-        static List<XDocument> StrSheet_UserSkillsDocs;
-        static List<XDocument> SkillIconData;
-        static XDocument ConnectedSkillsDoc;
-        static List<SkillConnection> SkillConnections;
+        private static List<XDocument> StrSheet_UserSkillsDocs;
+        private static List<XDocument> SkillIconData;
+        private static XDocument ConnectedSkillsDoc;
+        private static List<SkillConnection> SkillConnections;
 
-        class SkillConnection
+        private class SkillConnection
         {
             public Class Class;
             public int Id;
@@ -186,7 +188,7 @@ namespace TCC.Data.Databases
             }
         }
 
-        static void LoadFiles()
+        private static void LoadFiles()
         {
             foreach (var f in Directory.EnumerateFiles(AppDomain.CurrentDomain.BaseDirectory + @"/resources/database/StrSheet_UserSkill"))
             {
@@ -202,7 +204,8 @@ namespace TCC.Data.Databases
 
             ConnectedSkillsDoc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"/resources/database/ConnectedSkills.xml");
         }
-        static void ParseUserSkillDoc(XDocument doc)
+
+        private static void ParseUserSkillDoc(XDocument doc)
         {
             foreach (var s in doc.Descendants().Where(x => x.Name == "String"))
             {
@@ -226,7 +229,8 @@ namespace TCC.Data.Databases
                 }
             }
         }
-        static void ParseSkillIconDoc(XDocument doc)
+
+        private static void ParseSkillIconDoc(XDocument doc)
         {
             foreach (var s in doc.Descendants().Where(x => x.Name == "Icon"))
             {
@@ -239,7 +243,8 @@ namespace TCC.Data.Databases
                 }
             }
         }
-        static void ParseConnectedSkills()
+
+        private static void ParseConnectedSkills()
         {
             SkillConnections = new List<SkillConnection>();
             foreach (var sk in ConnectedSkillsDoc.Descendants().Where(x => x.Name == "Skill"))
@@ -254,7 +259,8 @@ namespace TCC.Data.Databases
                 SkillConnections.Add(skc);
             }
         }
-        static string FindSkillNameByIdClass(uint id, Class c)
+
+        private static string FindSkillNameByIdClass(uint id, Class c)
         {
             if (Skills[c].TryGetValue(id, out var sk))
             {
@@ -263,7 +269,8 @@ namespace TCC.Data.Databases
             else return "Not found";
 
         }
-        static int GetSkillIdByConnectedId(uint id, Class c)
+
+        private static int GetSkillIdByConnectedId(uint id, Class c)
         {
             foreach (var skillConnection in SkillConnections.Where(x => x.Class == c))
             {

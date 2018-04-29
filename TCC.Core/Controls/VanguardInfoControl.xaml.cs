@@ -13,13 +13,13 @@ namespace TCC.Controls
     /// </summary>
     public partial class VanguardInfoControl : UserControl
     {
-        TimeSpan growDuration;
-        DoubleAnimation scaleUp;
-        DoubleAnimation moveUp;
-        DoubleAnimation scaleDown;
-        DoubleAnimation moveDown;
-        DoubleAnimation scaleRipple;
-        DoubleAnimation fadeRipple;
+        private TimeSpan growDuration;
+        private DoubleAnimation scaleUp;
+        private DoubleAnimation moveUp;
+        private DoubleAnimation scaleDown;
+        private DoubleAnimation moveDown;
+        private DoubleAnimation scaleRipple;
+        private DoubleAnimation fadeRipple;
 
 
         public VanguardInfoControl()
@@ -74,7 +74,8 @@ namespace TCC.Controls
             i.Click += RemoveCharacter;
             ContextMenu.Items.Add(i);
         }
-        void AnimateSel()
+
+        private void AnimateSel()
         {
             if ((DataContext as Character).IsSelected) sel.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty,
             new DoubleAnimation(1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
@@ -87,7 +88,7 @@ namespace TCC.Controls
             InfoWindowViewModel.Instance.Characters.Remove((Character)DataContext);
         }
 
-        bool _animDown = true;
+        private bool _animDown = true;
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             //_animDown = false;

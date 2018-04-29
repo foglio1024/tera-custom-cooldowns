@@ -41,7 +41,7 @@ namespace NetworkSniffer
             Task.Run(()=>ReadAsync(_socket));
         }
 
-        async Task ReadAsync(Socket s)
+        private async Task ReadAsync(Socket s)
         {
             // Reusable SocketAsyncEventArgs and awaitable wrapper 
             var args = new SocketAsyncEventArgs();

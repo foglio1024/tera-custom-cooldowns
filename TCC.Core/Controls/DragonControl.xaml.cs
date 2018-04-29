@@ -23,7 +23,7 @@ namespace TCC.Controls
 
         }
 
-        Npc dc;
+        private Npc dc;
         private string _enrageLabel;
         public string EnrageLabel
         {
@@ -44,7 +44,7 @@ namespace TCC.Controls
 
         }
 
-        DoubleAnimation shieldArcAn;
+        private DoubleAnimation shieldArcAn;
         private void Dc_DeleteEvent() => Dispatcher.Invoke(() =>
         {
             try

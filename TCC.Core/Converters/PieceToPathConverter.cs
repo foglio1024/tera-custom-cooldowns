@@ -4,7 +4,7 @@ using System.Windows.Data;
 
 namespace TCC.Converters
 {
-    class PieceToPathConverter : IValueConverter
+    internal class PieceToPathConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

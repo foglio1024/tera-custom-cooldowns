@@ -17,8 +17,9 @@ namespace TCC.Controls
             scaleRipple = new DoubleAnimation(0, 20, TimeSpan.FromMilliseconds(650)) { EasingFunction = new QuadraticEase() };
             fadeRipple = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(650)) { EasingFunction = new QuadraticEase() };
         }
-        DoubleAnimation scaleRipple;
-        DoubleAnimation fadeRipple;
+
+        private DoubleAnimation scaleRipple;
+        private DoubleAnimation fadeRipple;
         private void UserControl_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var scaleTrans = (ripple.RenderTransform as TransformGroup).Children[0];

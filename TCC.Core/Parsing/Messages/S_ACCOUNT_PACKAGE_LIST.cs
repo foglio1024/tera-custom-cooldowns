@@ -4,10 +4,10 @@ using Tera.Game.Messages;
 
 namespace TCC.Parsing.Messages
 {
-    class S_ACCOUNT_PACKAGE_LIST : ParsedMessage
+    internal class S_ACCOUNT_PACKAGE_LIST : ParsedMessage
     {
         public bool IsElite { get; }
-        List<uint> packageIDs;
+        private List<uint> packageIDs;
         public S_ACCOUNT_PACKAGE_LIST(TeraMessageReader reader) : base(reader)
         {
             packageIDs = new List<uint>();

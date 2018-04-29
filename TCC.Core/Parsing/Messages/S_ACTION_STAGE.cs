@@ -3,7 +3,7 @@ using Tera.Game.Messages;
 
 namespace TCC.Parsing.Messages
 {
-    class S_ACTION_STAGE : ParsedMessage
+    internal class S_ACTION_STAGE : ParsedMessage
     {
         public ulong GameId { get;  }
         public uint TemplateId { get; }

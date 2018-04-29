@@ -5,7 +5,7 @@ using System.Windows.Data;
 
 namespace TCC.Converters
 {
-    class DungeonIdToImageConverter : IValueConverter
+    internal class DungeonIdToImageConverter : IValueConverter
     {
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

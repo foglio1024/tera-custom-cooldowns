@@ -48,7 +48,7 @@ namespace TCC
                    (zoneId == 38 && templateId == 35);
         }
 
-        static bool Filter(uint zoneId, uint templateId)
+        private static bool Filter(uint zoneId, uint templateId)
         {
             if (zoneId == 950 && templateId == 1002) return false; //skip HHP4 lament warriors
 

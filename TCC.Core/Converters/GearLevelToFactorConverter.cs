@@ -5,7 +5,7 @@ using TCC.Data;
 
 namespace TCC.Converters
 {
-    class GearLevelToFactorConverter : IValueConverter
+    internal class GearLevelToFactorConverter : IValueConverter
     {
         private const int Levels = 37;
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

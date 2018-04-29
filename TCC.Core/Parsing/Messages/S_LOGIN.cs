@@ -5,90 +5,90 @@ namespace TCC.Parsing.Messages
 {
     public class S_LOGIN : ParsedMessage
     {
-        short nameOffset { get; set; }
-        short detailsOffset { get; set; }
-        short detailsCount { get; set; }
-        short details2Offset { get; set; }
-        short details2Count { get; set; }
+        private short nameOffset { get; set; }
+        private short detailsOffset { get; set; }
+        private short detailsCount { get; set; }
+        private short details2Offset { get; set; }
+        private short details2Count { get; set; }
         public ulong entityId { get; set; }
         public uint ServerId { get; set; }
         public uint PlayerId { get; set; }
-        int unk1 { get; set; }
-        int unk3 { get; set; }
-        int unk4 { get; set; }
-        int unk5 { get; set; }
-        byte unk2 { get; set; }
-        ulong appearance { get; set; }
-        short unk6 { get; set; }
+        private int unk1 { get; set; }
+        private int unk3 { get; set; }
+        private int unk4 { get; set; }
+        private int unk5 { get; set; }
+        private byte unk2 { get; set; }
+        private ulong appearance { get; set; }
+        private short unk6 { get; set; }
         public short Level { get; set; }
-        short gatherEn { get; set; }
-        short gatherUnk { get; set; }
-        short gatherPl { get; set; }
-        short gatherMin { get; set; }
-        int unk7 { get; set; }
-        int unk8 { get; set; }
-        short unk9 { get; set; }
-        uint model { get; set; }
-        long expTot { get; set; }
-        long expShown { get; set; }
-        long expNeeded { get; set; }
-        int unk10 { get; set; }
-        int unk10b { get; set; }
-        int unk10c { get; set; }
-        int unk10d { get; set; }
-        int restCurr { get; set; }
-        int restMax { get; set; }
-        float unk11 { get; set; }
-        int unk12 { get; set; }
-        int weap { get; set; }
-        int chest { get; set; }
-        int gloves { get; set; }
-        int boots { get; set; }
-        int innerWear { get; set; }
-        int head { get; set; }
-        int face { get; set; }
-        int unk13 { get; set; }
-        int unk14 { get; set; }
-        int unk16 { get; set; }
-        int unk17 { get; set; }
-        int title { get; set; }
-        int weapMod { get; set; }
-        int chestMod { get; set; }
-        int glovesMod { get; set; }
-        int bootsMod { get; set; }
-        int unk19 { get; set; }
-        int unk20 { get; set; }
-        int unk21 { get; set; }
-        int unk22 { get; set; }
-        int unk23 { get; set; }
-        int unk24 { get; set; }
-        int unk25 { get; set; }
-        int unk26 { get; set; }
-        int weapEnch { get; set; }
-        int unk27 { get; set; }
-        byte unk15 { get; set; }
-        byte unk28 { get; set; }
-        byte unk29 { get; set; }
-        int hairAdorn { get; set; }
-        int mask { get; set; }
-        int back { get; set; }
-        int weapSkin { get; set; }
-        int costume { get; set; }
-        int unk30 { get; set; }
-        int unk31 { get; set; }
-        int unk32 { get; set; }
-        int unk33 { get; set; }
-        int unk35 { get; set; }
-        int unk36 { get; set; }
-        short unk37 { get; set; }
-        float unk38 { get; set; }
-        int unk39 { get; set; }
-        byte unk40 { get; set; }
-        int unk41 { get; set; }
+        private short gatherEn { get; set; }
+        private short gatherUnk { get; set; }
+        private short gatherPl { get; set; }
+        private short gatherMin { get; set; }
+        private int unk7 { get; set; }
+        private int unk8 { get; set; }
+        private short unk9 { get; set; }
+        private uint model { get; set; }
+        private long expTot { get; set; }
+        private long expShown { get; set; }
+        private long expNeeded { get; set; }
+        private int unk10 { get; set; }
+        private int unk10b { get; set; }
+        private int unk10c { get; set; }
+        private int unk10d { get; set; }
+        private int restCurr { get; set; }
+        private int restMax { get; set; }
+        private float unk11 { get; set; }
+        private int unk12 { get; set; }
+        private int weap { get; set; }
+        private int chest { get; set; }
+        private int gloves { get; set; }
+        private int boots { get; set; }
+        private int innerWear { get; set; }
+        private int head { get; set; }
+        private int face { get; set; }
+        private int unk13 { get; set; }
+        private int unk14 { get; set; }
+        private int unk16 { get; set; }
+        private int unk17 { get; set; }
+        private int title { get; set; }
+        private int weapMod { get; set; }
+        private int chestMod { get; set; }
+        private int glovesMod { get; set; }
+        private int bootsMod { get; set; }
+        private int unk19 { get; set; }
+        private int unk20 { get; set; }
+        private int unk21 { get; set; }
+        private int unk22 { get; set; }
+        private int unk23 { get; set; }
+        private int unk24 { get; set; }
+        private int unk25 { get; set; }
+        private int unk26 { get; set; }
+        private int weapEnch { get; set; }
+        private int unk27 { get; set; }
+        private byte unk15 { get; set; }
+        private byte unk28 { get; set; }
+        private byte unk29 { get; set; }
+        private int hairAdorn { get; set; }
+        private int mask { get; set; }
+        private int back { get; set; }
+        private int weapSkin { get; set; }
+        private int costume { get; set; }
+        private int unk30 { get; set; }
+        private int unk31 { get; set; }
+        private int unk32 { get; set; }
+        private int unk33 { get; set; }
+        private int unk35 { get; set; }
+        private int unk36 { get; set; }
+        private short unk37 { get; set; }
+        private float unk38 { get; set; }
+        private int unk39 { get; set; }
+        private byte unk40 { get; set; }
+        private int unk41 { get; set; }
         public string Name { get; set; }
-        byte[] details { get; set; }
-        byte[] details2 { get; set; }
-        byte unk34 { get; set; }
+        private byte[] details { get; set; }
+        private byte[] details2 { get; set; }
+        private byte unk34 { get; set; }
 
 
         public Class CharacterClass

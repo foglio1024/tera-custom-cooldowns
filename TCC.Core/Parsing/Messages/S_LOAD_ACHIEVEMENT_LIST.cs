@@ -5,12 +5,12 @@ namespace TCC
 {
     internal class S_LOAD_ACHIEVEMENT_LIST : ParsedMessage
     {
-        const int ACHIEVEMENT_LENGHT = 12;
-        short achiCount, achiOffset, historyCount, historyOffset;
-        long cid;
-        int unk1, achis, unk3, unk4;
+        private const int ACHIEVEMENT_LENGHT = 12;
+        private short achiCount, achiOffset, historyCount, historyOffset;
+        private long cid;
+        private int unk1, achis, unk3, unk4;
 
-        int laurel;
+        private int laurel;
         public Laurel Laurel
         {
             get

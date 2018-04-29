@@ -272,9 +272,6 @@
     <Compile Include="Controls\ChatControls\ChatMessageHeader.xaml.cs">
       <DependentUpon>ChatMessageHeader.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ChatControls\CustomMessageBody.xaml.cs">
-      <DependentUpon>CustomMessageBody.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\ChatControls\FriendMessageDialog.xaml.cs">
       <DependentUpon>FriendMessageDialog.xaml</DependentUpon>
     </Compile>
@@ -413,9 +410,6 @@
     </Compile>
     <Compile Include="Controls\BarCooldown.xaml.cs">
       <DependentUpon>BarCooldown.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ArcherStanceIndicator.xaml.cs">
-      <DependentUpon>ArcherStanceIndicator.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\MysticAurasIndicator.xaml.cs">
       <DependentUpon>MysticAurasIndicator.xaml</DependentUpon>
@@ -725,6 +719,7 @@
     <Compile Include="TimeManager.cs" />
     <Compile Include="TwitchConnector.cs" />
     <Compile Include="ViewModels\CharacterWindowViewModel.cs" />
+    <Compile Include="ViewModels\ChatViewModel.cs" />
     <Compile Include="ViewModels\ClassManagers\BerserkerBarManager.cs" />
     <Compile Include="ViewModels\ClassManagers\BrawlerBarManager.cs" />
     <Compile Include="ViewModels\ChatWindowViewModel.cs" />
@@ -905,10 +900,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ChatControls\CustomMessageBody.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\ChatControls\DefaultMessageBody.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -966,10 +957,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\CircularGauge.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\ArcherStanceIndicator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

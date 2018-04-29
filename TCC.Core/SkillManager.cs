@@ -9,7 +9,7 @@ namespace TCC
         public const int LongSkillTreshold = 40000;
         public const int Ending = 120;
 
-        static bool Filter(string name)
+        private static bool Filter(string name)
         {
             if (name != "Unknown" &&
                 !name.Contains("Summon:") &&
@@ -25,7 +25,7 @@ namespace TCC
             RouteSkill(new SkillCooldown(sk, cd, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher()));
         }
 
-        static void RouteSkill(SkillCooldown skillCooldown)
+        private static void RouteSkill(SkillCooldown skillCooldown)
         {
             if (skillCooldown.Cooldown == 0)
             {

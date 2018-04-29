@@ -6,7 +6,7 @@ namespace TCC.Data
 {
     public class Player : TSPropertyChanged
     {
-        string name;
+        private string name;
         public string Name
         {
             get => name;
@@ -20,7 +20,7 @@ namespace TCC.Data
             }
         }
 
-        ulong entityId;
+        private ulong entityId;
         public ulong EntityId
         {
             get => entityId;
@@ -36,7 +36,7 @@ namespace TCC.Data
         public uint PlayerId { get; internal set; }
         public uint ServerId { get; internal set; }
 
-        Class playerclass;
+        private Class playerclass;
         public Class Class
         {
             get => playerclass;
@@ -50,7 +50,7 @@ namespace TCC.Data
             }
         }
 
-        Laurel laurel;
+        private Laurel laurel;
         public Laurel Laurel
         {
             get => laurel;
@@ -64,7 +64,7 @@ namespace TCC.Data
             }
         }
 
-        int level;
+        private int level;
         public int Level
         {
             get => level;
@@ -257,7 +257,7 @@ namespace TCC.Data
         }
         public bool IsDebuffed => _debuffList.Count != 0;
 
-        bool isInCombat;
+        private bool isInCombat;
         public bool IsInCombat
         {
             get => isInCombat;

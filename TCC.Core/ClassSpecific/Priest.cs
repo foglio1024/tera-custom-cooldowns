@@ -14,8 +14,8 @@ namespace TCC.ClassSpecific
             800300, 800301, 800302,800303, 800304
         };
 
-        static readonly uint[] EnergyStarsIDs = { 801500, 801501 , 801502 , 801503, 98000107 };
-        static readonly int GraceId = 801700;
+        private static readonly uint[] EnergyStarsIDs = { 801500, 801501 , 801502 , 801503, 98000107 };
+        private static readonly int GraceId = 801700;
         internal static void CheckBuff(S_ABNORMALITY_BEGIN p)
         {
             if(p.TargetId == SessionManager.CurrentPlayer.EntityId && EnergyStarsIDs.Contains(p.AbnormalityId))

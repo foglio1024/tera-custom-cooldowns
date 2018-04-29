@@ -16,7 +16,8 @@ namespace TCC.Controls
         {
             InitializeComponent();
         }
-        DurationCooldownIndicator _context;
+
+        private DurationCooldownIndicator _context;
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
@@ -49,7 +50,7 @@ namespace TCC.Controls
             }
         }
 
-        bool _running = false;
+        private bool _running = false;
         public bool Running
         {
             get => _running;

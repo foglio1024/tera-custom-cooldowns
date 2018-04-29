@@ -5,9 +5,9 @@ namespace TCC.Parsing.Messages
 {
     public class S_NPC_STATUS : ParsedMessage
     {
-        ulong entityId, targetId;
-        bool enraged;
-        int unk1, unk2;
+        private ulong entityId, targetId;
+        private bool enraged;
+        private int unk1, unk2;
 
         public ulong EntityId { get => entityId; }
         public ulong Target { get => targetId; }

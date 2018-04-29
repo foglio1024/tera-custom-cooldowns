@@ -8,7 +8,7 @@ namespace TCC.Data.Databases
 {
     public class DungeonDatabase
     {
-        static DungeonDatabase _instance;
+        private static DungeonDatabase _instance;
         public static DungeonDatabase Instance => _instance ?? (_instance = new DungeonDatabase(SettingsManager.LastRegion));
         public Dictionary<uint, Dungeon> Dungeons;
         //public Dictionary<uint, Dungeon> DungeonDefinitions;

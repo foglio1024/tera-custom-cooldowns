@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -14,27 +13,28 @@ namespace TCC.Controls.ChatControls
     /// <summary>
     /// Logica di interazione per PlayerTooltip.xaml
     /// </summary>
-    public partial class PlayerTooltip : UserControl
+    public partial class PlayerTooltip
     {
-        DoubleAnimation expandAnim, rippleScale, rippleFade;
+        private readonly DoubleAnimation _expandAnim;
+        private readonly DoubleAnimation _rippleScale;
+
         public PlayerTooltip()
         {
             InitializeComponent();
-            expandAnim = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() };
-            rippleScale = new DoubleAnimation(1, 50, TimeSpan.FromMilliseconds(650)) { EasingFunction = new QuadraticEase() };
-            rippleFade = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(650)) { EasingFunction = new QuadraticEase() };
+            _expandAnim = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() };
+            _rippleScale = new DoubleAnimation(1, 50, TimeSpan.FromMilliseconds(650)) { EasingFunction = new QuadraticEase() };
         }
         private void UserControl_MouseLeave(object sender, MouseEventArgs e)
         {
             KickText.Text = "Kick";
-            ripple.Opacity = 0;
+            Ripple.Opacity = 0;
             _kicking = false;
             ChatWindowManager.Instance.CloseTooltip();
         }
 
         public void AnimateOpening()
         {
-            rootBorder.BeginAnimation(OpacityProperty, expandAnim);
+            RootBorder.BeginAnimation(OpacityProperty, _expandAnim);
         }
 
         private void InspectClick(object sender, RoutedEventArgs e)
@@ -80,7 +80,10 @@ namespace TCC.Controls.ChatControls
                     var i = ChatWindowManager.Instance.Friends.IndexOf(ChatWindowManager.Instance.Friends.FirstOrDefault(x => x.Name == ChatWindowManager.Instance.TooltipInfo.Name));
                     ChatWindowManager.Instance.Friends.RemoveAt(i);
                 }
-                catch (Exception) { }
+                catch
+                {
+                    // ignored
+                }
             }
             else
             {
@@ -92,7 +95,8 @@ namespace TCC.Controls.ChatControls
             ChatWindowManager.Instance.CloseTooltip();
 
         }
-        void SendString(string s)
+
+        private void SendString(string s)
         {
             var teraWindow = FocusManager.FindTeraWindow();
             if (teraWindow == IntPtr.Zero) { return; }
@@ -136,14 +140,14 @@ namespace TCC.Controls.ChatControls
             ChatWindowManager.Instance.CloseTooltip();
         }
 
-        bool _kicking;
+        private bool _kicking;
         private void KickClick(object sender, RoutedEventArgs e)
         {
             if (_kicking)
             {
                 ChatWindowManager.Instance.CloseTooltip();
                 KickText.Text = "Kick";
-                ripple.Opacity = 0;
+                Ripple.Opacity = 0;
                 _kicking = false;
                 if (GroupWindowViewModel.Instance.TryGetUser(ChatWindowManager.Instance.TooltipInfo.Name, out var u))
                 {
@@ -153,12 +157,12 @@ namespace TCC.Controls.ChatControls
             else
             {
                 KickText.Text = "Are you sure?";
-                var scaleTrans = (ripple.RenderTransform as TransformGroup).Children[0];
-                (ripple.RenderTransform as TransformGroup).Children[1] = new TranslateTransform(Mouse.GetPosition(kickGrid).X - ripple.Width / 2,
-                    Mouse.GetPosition(kickGrid).Y - ripple.Height / 2);
-                ripple.Opacity = 1;
-                scaleTrans.BeginAnimation(ScaleTransform.ScaleXProperty, rippleScale);
-                scaleTrans.BeginAnimation(ScaleTransform.ScaleYProperty, rippleScale);
+                var scaleTrans = (Ripple.RenderTransform as TransformGroup)?.Children[0];
+                ((TransformGroup) Ripple.RenderTransform).Children[1] = new TranslateTransform(Mouse.GetPosition(KickGrid).X - Ripple.Width / 2,
+                    Mouse.GetPosition(KickGrid).Y - Ripple.Height / 2);
+                Ripple.Opacity = 1;
+                scaleTrans?.BeginAnimation(ScaleTransform.ScaleYProperty, _rippleScale);
+                scaleTrans?.BeginAnimation(ScaleTransform.ScaleXProperty, _rippleScale);
                 _kicking = true;
             }
         }

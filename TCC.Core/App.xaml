@@ -803,7 +803,7 @@
                                         />
             </DataTemplate>
             <DataTemplate x:Key="MoneyTemplate">
-                <controls:MoneyMessagePiece />
+                <chatcontrols:MoneyMessagePiece />
             </DataTemplate>
             <templateselectors:MessagePieceDataTemplateSelector x:Key="PieceTemplateSelector"
                                                    SimpleTemplate="{StaticResource SimpleTemplate}"
@@ -815,10 +815,10 @@
 
 
             <DataTemplate x:Key="MessageHeaderTemplate">
-                <controls:ChatMessageHeader />
+                <chatcontrols:ChatMessageHeader />
             </DataTemplate>
             <DataTemplate x:Key="MessageBodyTemplate">
-                <controls:MessagePieceControl  />
+                <chatcontrols:MessagePieceControl  />
             </DataTemplate>
             <DataTemplate x:Key="DefaultBody">
                 <chatcontrols:DefaultMessageBody />

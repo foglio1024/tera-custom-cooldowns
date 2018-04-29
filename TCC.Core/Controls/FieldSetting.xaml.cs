@@ -31,10 +31,10 @@ namespace TCC.Controls
         }
         public static readonly DependencyProperty SettingImageProperty = DependencyProperty.Register("SettingImage", typeof(ImageSource), typeof(FieldSetting));
 
-        ColorAnimation glow;
-        ColorAnimation unglow;
-        DoubleAnimation fadeIn;
-        DoubleAnimation fadeOut;
+        private ColorAnimation glow;
+        private ColorAnimation unglow;
+        private DoubleAnimation fadeIn;
+        private DoubleAnimation fadeOut;
 
         public FieldSetting()
         {

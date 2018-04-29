@@ -5,8 +5,8 @@ namespace TCC.Parsing.Messages
 {
     public class S_PARTY_MEMBER_CHANGE_MP : ParsedMessage
     {
-        uint serverId, playerId;
-        int currentMP, maxMP;
+        private uint serverId, playerId;
+        private int currentMP, maxMP;
         public uint ServerId { get { return serverId; } }
         public uint PlayerId { get { return playerId; } }
         public int CurrentMP { get { return currentMP; } }

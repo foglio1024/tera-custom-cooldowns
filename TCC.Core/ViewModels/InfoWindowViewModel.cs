@@ -16,8 +16,8 @@ namespace TCC.ViewModels
 {
     public class InfoWindowViewModel : TSPropertyChanged
     {
-        static InfoWindowViewModel _instance;
-        uint _selectedCharacterId;
+        private static InfoWindowViewModel _instance;
+        private uint _selectedCharacterId;
         public bool DiscardFirstVanguardPacket = true;
         public static InfoWindowViewModel Instance => _instance ?? (_instance = new InfoWindowViewModel());
         public SynchronizedObservableCollection<Character> Characters { get; set; }

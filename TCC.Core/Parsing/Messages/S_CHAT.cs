@@ -5,12 +5,12 @@ namespace TCC.Parsing.Messages
 {
     public class S_CHAT : ParsedMessage
     {
-        ushort authorNameOffset, messageOffset;
-        uint ch;
-        ulong authorId;
-        byte unk1, gm, unk2;
-        string authorName;
-        string message;
+        private ushort authorNameOffset, messageOffset;
+        private uint ch;
+        private ulong authorId;
+        private byte unk1, gm, unk2;
+        private string authorName;
+        private string message;
 
         public ChatChannel Channel { get => (ChatChannel)ch; }
         public ulong AuthorId { get => authorId; }

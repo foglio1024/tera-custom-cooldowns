@@ -7,14 +7,15 @@ namespace TCC.Controls.ChatControls
     /// <summary>
     /// Logica di interazione per FriendMessageDialog.xaml
     /// </summary>
-    public partial class FriendMessageDialog : Window
+    public partial class FriendMessageDialog
     {
         public FriendMessageDialog()
         {
             InitializeComponent();
             TargetName = ChatWindowManager.Instance.TooltipInfo.Name;
         }
-        string _message = "Friend me?";
+
+        private string _message = "Friend me?";
         public string TargetName { get; set; }
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -24,14 +25,14 @@ namespace TCC.Controls.ChatControls
         private void CancelClick(object sender, RoutedEventArgs e)
         {
             _message = "Friend me?";
-            ChatWindowManager.Instance.LockTooltip(false);
+            ChatWindowManager.Instance.LockTooltip();
             Close();
         }
 
         private void OkClick(object sender, RoutedEventArgs e)
         {
             Proxy.FriendRequest(ChatWindowManager.Instance.TooltipInfo.Name, _message);
-            ChatWindowManager.Instance.LockTooltip(false);
+            ChatWindowManager.Instance.LockTooltip();
             Close();
             _message = "Friend me?";
             ChatWindowManager.Instance.CloseTooltip();

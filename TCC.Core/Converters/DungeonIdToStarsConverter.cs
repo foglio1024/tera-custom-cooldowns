@@ -5,7 +5,7 @@ using TCC.Data.Databases;
 
 namespace TCC.Converters
 {
-    class DungeonIdToStarsConverter : IValueConverter
+    internal class DungeonIdToStarsConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

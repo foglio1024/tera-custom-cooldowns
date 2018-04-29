@@ -15,7 +15,7 @@ namespace TCC.Controls
             InitializeComponent();
         }
 
-        AurasTracker _context;
+        private AurasTracker _context;
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {

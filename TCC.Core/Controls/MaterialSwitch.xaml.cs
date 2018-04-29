@@ -11,20 +11,20 @@ namespace TCC.Controls
     /// </summary>
     public partial class MaterialSwitch : UserControl
     {
-        DoubleAnimation on;
-        DoubleAnimation off;
+        private DoubleAnimation on;
+        private DoubleAnimation off;
 
-        ColorAnimation fillOn;
-        ColorAnimation fillOff;
-        ColorAnimation backFillOff;
+        private ColorAnimation fillOn;
+        private ColorAnimation fillOff;
+        private ColorAnimation backFillOff;
 
-        Color onColor = Color.FromRgb(255, 56, 34);
-        Color offColor = ((SolidColorBrush)Application.Current.Resources["DefaultBackgroundColor"]).Color;
-        Color backOffColor = Colors.Black;
+        private Color onColor = Color.FromRgb(255, 56, 34);
+        private Color offColor = ((SolidColorBrush)Application.Current.Resources["DefaultBackgroundColor"]).Color;
+        private Color backOffColor = Colors.Black;
 
         private TimeSpan animationDuration = TimeSpan.FromMilliseconds(150);
 
-        DependencyPropertyWatcher<bool> statusWatcher;
+        private DependencyPropertyWatcher<bool> statusWatcher;
 
         public MaterialSwitch()
         {

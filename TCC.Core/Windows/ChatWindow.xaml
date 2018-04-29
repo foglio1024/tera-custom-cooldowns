@@ -3,54 +3,52 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:w="clr-namespace:TCC.Windows" 
+             xmlns:w="clr-namespace:TCC.Windows"
              xmlns:vm="clr-namespace:TCC.ViewModels"
-             xmlns:data="clr-namespace:TCC.Data"
              xmlns:c="clr-namespace:TCC.Controls"
              xmlns:chatcontrols="clr-namespace:TCC.Controls.ChatControls"
              xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
              xmlns:dockablz="http://dragablz.net/winfx/xaml/dockablz"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              Style="{StaticResource BaseWindowStyle}"
-             MouseDoubleClick="TccWindow_MouseDoubleClick" 
-             MouseLeave="TccWindow_MouseLeave" 
+             MouseDoubleClick="TccWindow_MouseDoubleClick"
+             MouseLeave="TccWindow_MouseLeave"
              MouseEnter="TccWindow_MouseEnter"
-             Title="ChatWindow" 
+             Title="ChatWindow"
              MinWidth="350" MinHeight="110"
-             Loaded="TccWindow_Loaded" 
+             Loaded="TccWindow_Loaded"
              ResizeMode="CanResize"
              SizeToContent="Manual">
     <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5,5,5,5" GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5,5,5,5" GlassFrameThickness="0,0,0,1" CornerRadius="0" />
     </WindowChrome.WindowChrome>
     <w:TccWindow.DataContext>
         <vm:ChatViewModel />
     </w:TccWindow.DataContext>
     <w:TccWindow.Resources>
         <DataTemplate x:Key="ChatMessageTemplate">
-            <c:ChatMessageControl VerticalAlignment="Top">
-                <c:ChatMessageControl.LayoutTransform>
+            <chatcontrols:ChatMessageControl VerticalAlignment="Top">
+                <chatcontrols:ChatMessageControl.LayoutTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="1"></ScaleTransform>
                         <RotateTransform Angle="180"></RotateTransform>
                     </TransformGroup>
-                </c:ChatMessageControl.LayoutTransform>
-            </c:ChatMessageControl>
+                </chatcontrols:ChatMessageControl.LayoutTransform>
+            </chatcontrols:ChatMessageControl>
         </DataTemplate>
         <Style TargetType="ItemsControl" x:Key="LfgItemsControl">
-            <Setter Property="Height" Value="Auto"/>
+            <Setter Property="Height" Value="Auto" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
                         <Border SnapsToDevicePixels="True"
-                                        BorderThickness="{TemplateBinding Border.BorderThickness}"
-                                        Padding="{TemplateBinding Control.Padding}"
-                                        BorderBrush="{TemplateBinding Border.BorderBrush}"
-                                        Background="{TemplateBinding Panel.Background}">
+                                BorderThickness="{TemplateBinding Border.BorderThickness}"
+                                Padding="{TemplateBinding Control.Padding}"
+                                BorderBrush="{TemplateBinding Border.BorderBrush}"
+                                Background="{TemplateBinding Panel.Background}">
                             <ScrollViewer Padding="{TemplateBinding Control.Padding}" Focusable="False"
-                                                  VerticalContentAlignment="Top" VerticalAlignment="Top" Height="Auto"
-                                                  CanContentScroll="True" VerticalScrollBarVisibility="Auto" 
-                                          >
+                                          VerticalContentAlignment="Top" VerticalAlignment="Top" Height="Auto"
+                                          CanContentScroll="True" VerticalScrollBarVisibility="Auto">
                                 <ItemsPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
                             </ScrollViewer>
                         </Border>
@@ -60,9 +58,9 @@
             </Setter>
         </Style>
         <Style TargetType="ItemsControl" x:Key="ChatItemsControl">
-            <Setter Property="VirtualizingPanel.IsVirtualizing" Value="True"/>
-            <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling"/>
-            <Setter Property="Height" Value="Auto"/>
+            <Setter Property="VirtualizingPanel.IsVirtualizing" Value="True" />
+            <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling" />
+            <Setter Property="Height" Value="Auto" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
@@ -71,10 +69,13 @@
                                 Padding="{TemplateBinding Control.Padding}"
                                 BorderBrush="{TemplateBinding Border.BorderBrush}"
                                 Background="{TemplateBinding Panel.Background}">
-                            <ScrollViewer Padding="{TemplateBinding Control.Padding}" Focusable="False" PreviewMouseWheel="SWPreviewMouseWheel"
-                                          FlowDirection="RightToLeft" VerticalContentAlignment="Top" VerticalAlignment="Top" Height="Auto"
+                            <ScrollViewer Padding="{TemplateBinding Control.Padding}" Focusable="False"
+                                          PreviewMouseWheel="SwPreviewMouseWheel"
+                                          FlowDirection="RightToLeft" VerticalContentAlignment="Top"
+                                          VerticalAlignment="Top" Height="Auto"
                                           CanContentScroll="True" ScrollChanged="ScrollViewer_ScrollChanged">
-                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" FlowDirection="LeftToRight" />
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"
+                                                FlowDirection="LeftToRight" />
                             </ScrollViewer>
                         </Border>
 
@@ -83,17 +84,18 @@
             </Setter>
         </Style>
         <DataTemplate x:Key="TabContentTemplate">
+            <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
             <ItemsControl Name="itemsControl" VerticalAlignment="Stretch"
                           VerticalContentAlignment="Top"
                           Style="{StaticResource ChatItemsControl}"
-                          ItemsSource="{Binding Content.Messages}"  
-                          ItemTemplate="{StaticResource ChatMessageTemplate}" 
+                          ItemsSource="{Binding Content.Messages}"
+                          ItemTemplate="{StaticResource ChatMessageTemplate}"
                           Width="Auto">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <VirtualizingStackPanel Margin="0,0,0,0" 
+                        <VirtualizingStackPanel Margin="0,0,0,0"
                                                 VerticalAlignment="Stretch"
-                                                Background="#01000000" 
+                                                Background="#01000000"
                                                 VirtualizationMode="Standard">
                             <VirtualizingStackPanel.LayoutTransform>
                                 <RotateTransform Angle="180"></RotateTransform>
@@ -106,20 +108,21 @@
     </w:TccWindow.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <!--<c:WindowButtons  WindowName="Chat window" x:Name="buttons" AutoDimButtonVisiblity="Collapsed" HideButtonVisibility="Collapsed"
                           DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWindow}}" />-->
+        <!-- ReSharper disable once InconsistentNaming -->
         <dockablz:Layout Name="content" Grid.Row="1">
-            <Grid Margin="0" Width="Auto" Name="root" Grid.Row="1" MouseLeftButtonDown="Drag">
+            <Grid Margin="0" Width="Auto" Name="Root" MouseLeftButtonDown="Drag">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Border Background="{StaticResource DefaultBackgroundColor}" Opacity="{Binding BackgroundOpacity}" 
-                    CornerRadius="1" Grid.ColumnSpan="2" Grid.RowSpan="2" BorderThickness="1" BorderBrush="Black" 
-                    Margin="0,0,0,0" Grid.Row="0" VerticalAlignment="Stretch"  />
+                <Border Background="{StaticResource DefaultBackgroundColor}" Opacity="{Binding BackgroundOpacity}"
+                        CornerRadius="1" Grid.ColumnSpan="2" Grid.RowSpan="2" BorderThickness="1" BorderBrush="Black"
+                        Margin="0,0,0,0" Grid.Row="0" VerticalAlignment="Stretch" />
                 <!--Message counter-->
                 <!--<TextBlock VerticalAlignment="Top"
                    HorizontalAlignment="Right"
@@ -129,34 +132,34 @@
                    FontFamily="{DynamicResource Frutiger}"
                    Text="{Binding MessageCount}" 
                    Margin="3,3,23,3"/>-->
-                <dragablz:TabablzControl Grid.Row="1" 
-                        Background="Transparent"  
-                        
-                        BorderBrush="#0000" 
-                        BorderThickness="0,0,0,0"
-                        Margin="1,0,0,0" 
-                        ScrollViewer.CanContentScroll="False"
-                        HeaderMemberPath="Header"
-                        DisplayMemberPath="Content"
-                        ItemsSource="{Binding TabVMs, Mode=TwoWay}"
-                        ContentTemplate="{StaticResource TabContentTemplate}"
-                        x:Name="tabControl" IsDraggingWindowChanged="tabControl_IsDraggingWindowChanged"
-                        DragOver="tabControl_Drop"
-                        ShowDefaultAddButton="True"
-                        NewItemFactory="{Binding AddNewTabCommand}"
-                        ShowDefaultCloseButton="True"
-                        Style="{DynamicResource ChatTabablzControlStyle}" >
+                <dragablz:TabablzControl Grid.Row="1"
+                                         Background="Transparent"
+
+                                         BorderBrush="#0000"
+                                         BorderThickness="0,0,0,0"
+                                         Margin="1,0,0,0"
+                                         ScrollViewer.CanContentScroll="False"
+                                         HeaderMemberPath="Header"
+                                         DisplayMemberPath="Content"
+                                         ItemsSource="{Binding TabVMs, Mode=TwoWay}"
+                                         ContentTemplate="{StaticResource TabContentTemplate}"
+                                         x:Name="TabControl"
+                                         ShowDefaultAddButton="True"
+                                         NewItemFactory="{Binding AddNewTabCommand}"
+                                         ShowDefaultCloseButton="True"
+                                         Style="{DynamicResource ChatTabablzControlStyle}">
                     <!--ItemContainerStyle="{StaticResource ChatDragableTabItemStyle}"-->
                     <dragablz:TabablzControl.ItemContainerStyle>
-                        <Style TargetType="{x:Type dragablz:DragablzItem}" BasedOn="{StaticResource ChatDragableTabItemStyle}">
-                            <EventSetter Event="PreviewMouseRightButtonDown" Handler="OpenTabSettings"/>
-                            <EventSetter Event="PreviewMouseLeftButtonDown" Handler="TabClicked"/>
+                        <Style TargetType="{x:Type dragablz:DragablzItem}"
+                               BasedOn="{StaticResource ChatDragableTabItemStyle}">
+                            <EventSetter Event="PreviewMouseRightButtonDown" Handler="OpenTabSettings" />
+                            <EventSetter Event="PreviewMouseLeftButtonDown" Handler="TabClicked" />
                         </Style>
                     </dragablz:TabablzControl.ItemContainerStyle>
                     <!--ContentTemplate="{StaticResource TabContentTemplate}"-->
                     <dragablz:TabablzControl.InterTabController>
                         <dragablz:InterTabController Partition="2AE89D18-F236-4D20-9605-6C03319038E6"
-                            InterTabClient="{Binding InterTabClient}"/>
+                                                     InterTabClient="{Binding InterTabClient}" />
                     </dragablz:TabablzControl.InterTabController>
                     <!--<dragablz:TabablzControl.ItemContainerStyle>
                         <Style TargetType="{x:Type dragablz:DragablzItem}">
@@ -268,9 +271,9 @@
                         <TranslateTransform X="0"/>
                     </Rectangle.RenderTransform>
                 </Rectangle>-->
-                <Image Source="/TCC;component/resources/images/ic_pause_white_24dp_2x.png" VerticalAlignment="Bottom" 
-                   HorizontalAlignment="Right"  Height="40" Width="40" Grid.Row="1" Opacity=".2"
-                   Visibility="{Binding Paused, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"/>
+                <Image Source="/TCC;component/resources/images/ic_pause_white_24dp_2x.png" VerticalAlignment="Bottom"
+                       HorizontalAlignment="Right" Height="40" Width="40" Grid.Row="1" Opacity=".2"
+                       Visibility="{Binding Paused, Converter={StaticResource Converters.BoolToVisibleCollapsed}}" />
                 <!--<Ellipse HorizontalAlignment="Right"
                      VerticalAlignment="Top" Width="18" Height="18"
                      Fill="#1fff"
@@ -290,11 +293,11 @@
                   Opacity=".4"
                   ></Path>-->
                 <Border Background="{StaticResource DefaultBackgroundColor}" Width="Auto"
-                    Grid.Column="0" Grid.Row="0" Opacity=".0" MouseEnter="SettingsButtonEnter"
-                    Visibility="{Binding LfgOn, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"/>
-                <ItemsControl ItemsSource="{Binding LFGs}" 
-                              ItemTemplate="{StaticResource LfgTemplate}" 
-                              Margin="2" 
+                        Grid.Column="0" Grid.Row="0" Opacity="0"
+                        Visibility="{Binding LfgOn, Converter={StaticResource Converters.BoolToVisibleCollapsed}}" />
+                <ItemsControl Grid.Row="0" ItemsSource="{Binding LFGs}"
+                              ItemTemplate="{StaticResource LfgTemplate}"
+                              Margin="2"
                               HorizontalAlignment="Left"
                               Width="Auto"
                               Height="18"
@@ -302,13 +305,14 @@
                               Visibility="{Binding LfgOn, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Horizontal" ></WrapPanel>
+                            <WrapPanel Orientation="Horizontal"></WrapPanel>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
-                <Button  x:Name="Settings"   Margin="5"  HorizontalAlignment="Right" Click="Settings_Click" Opacity="0"
-                         Style="{StaticResource ButtonContentOpacityStyle}" Grid.Row="1" Height="14" VerticalAlignment="Top">
-                    <Path Data="{StaticResource SvgSettings}"/>
+                <Button x:Name="Settings" Margin="5" HorizontalAlignment="Right" Click="Settings_Click" Opacity="0"
+                        Style="{StaticResource ButtonContentOpacityStyle}" Grid.Row="1" Height="14"
+                        VerticalAlignment="Top">
+                    <Path Data="{StaticResource SvgSettings}" />
                 </Button>
 
 
@@ -413,23 +417,27 @@
                 </Popup>-->
             </Grid>
         </dockablz:Layout>
-        <Popup Name="playerInfo" StaysOpen="True" Placement="MousePoint"  IsOpen="False"
-                       AllowsTransparency="True" Width="Auto" HorizontalOffset="0" UseLayoutRounding="True"
-                       VerticalAlignment="Center"
-                       VerticalOffset="0">
-                    <chatcontrols:PlayerTooltip />
-                </Popup>
-        <Popup Placement="Relative" x:Name="SettingsPopup" Focusable="True" HorizontalOffset="20" MouseLeave="SettingsPopup_MouseLeave"
-                       MouseLeftButtonDown="SettingsPopup_PreviewMouseLeftButtonDown"
-                       MouseLeftButtonUp="SettingsPopup_PreviewMouseLeftButtonUp"
-                       AllowsTransparency="True" PlacementTarget="{Binding ElementName=Settings}" StaysOpen="True"
-                       PopupAnimation="Slide" >
+        <Popup Grid.Row="0" Name="PlayerInfo" StaysOpen="True" Placement="MousePoint" IsOpen="False"
+               AllowsTransparency="True" Width="Auto" HorizontalOffset="0" UseLayoutRounding="True"
+               VerticalAlignment="Center"
+               VerticalOffset="0">
+            <chatcontrols:PlayerTooltip />
+        </Popup>
+        <Popup Grid.Row="0" Placement="Relative" x:Name="SettingsPopup" Focusable="True" HorizontalOffset="20"
+               MouseLeave="SettingsPopup_MouseLeave"
+               MouseLeftButtonDown="SettingsPopup_PreviewMouseLeftButtonDown"
+               MouseLeftButtonUp="SettingsPopup_PreviewMouseLeftButtonUp"
+               AllowsTransparency="True" PlacementTarget="{Binding ElementName=Settings}" StaysOpen="True"
+               PopupAnimation="Slide">
             <Border Style="{StaticResource Styles.DefaultBorder}" CornerRadius="2" Margin="3">
                 <StackPanel Width="350" Margin="-30 0 0 0">
-                    <c:ValueSetting SettingName="Background opacity" Foreground="#9fff" TextBoxVisibility="Collapsed" Value="{Binding BackgroundOpacity, Mode=TwoWay}" Min="0.01" Max="1"/>
-                    <c:BoolSetting SettingName="LFG bar" Foreground="#9fff" IsOn="{Binding LfgOn, Mode=TwoWay}"/>
-                    <c:BoolSetting SettingName="Show always" Foreground="#9fff" IsOn="{Binding RelativeSource={RelativeSource AncestorType={x:Type w:TccWindow}}, Path=WindowSettings.ShowAlways, Mode=TwoWay}"/>
-                    <c:BoolSetting SettingName="Enabled" Foreground="#9fff" IsOn="{Binding RelativeSource={RelativeSource AncestorType={x:Type w:TccWindow}}, Path=WindowSettings.Enabled, Mode=TwoWay}"/>
+                    <c:ValueSetting SettingName="Background opacity" Foreground="#9fff" TextBoxVisibility="Collapsed"
+                                    Value="{Binding BackgroundOpacity, Mode=TwoWay}" Min="0.01" Max="1" />
+                    <c:BoolSetting SettingName="LFG bar" Foreground="#9fff" IsOn="{Binding LfgOn, Mode=TwoWay}" />
+                    <c:BoolSetting SettingName="Show always" Foreground="#9fff"
+                                   IsOn="{Binding RelativeSource={RelativeSource AncestorType={x:Type w:TccWindow}}, Path=WindowSettings.ShowAlways, Mode=TwoWay}" />
+                    <c:BoolSetting SettingName="Enabled" Foreground="#9fff"
+                                   IsOn="{Binding RelativeSource={RelativeSource AncestorType={x:Type w:TccWindow}}, Path=WindowSettings.Enabled, Mode=TwoWay}" />
                 </StackPanel>
             </Border>
         </Popup>

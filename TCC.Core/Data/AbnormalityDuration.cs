@@ -65,7 +65,7 @@ namespace TCC
         //}
         //public double BackgroundEllipseSize { get; set; }
         //public Thickness IndicatorMargin { get; set; }
-        static int _count = 0;
+        private static int _count = 0;
         public bool Animated { get; private set; }
         public AbnormalityDuration(Abnormality b, uint d, int s, ulong t, Dispatcher disp, bool animated/*,double iconSize, double bgEllSize, Thickness margin*/)
         {
@@ -91,7 +91,8 @@ namespace TCC
                 timer.Start();
             }
         }
-        bool _isTimerDisposed;
+
+        private bool _isTimerDisposed;
         private void SetDisposed(object sender, EventArgs e)
         {
             _isTimerDisposed = true;

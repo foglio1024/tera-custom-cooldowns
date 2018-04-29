@@ -2,11 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TCC.Controls.ChatControls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
-             xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
-             xmlns:tcc="clr-namespace:TCC"
              mc:Ignorable="d" Loaded="TabSettingControl_OnLoaded" d:DataContext="{d:DesignInstance viewModels:Tab }" Margin="0">
     <UserControl.Resources>
         <DataTemplate x:Key="ChannelSettingTemplate">
@@ -111,7 +108,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBox Grid.Column="0" Background="Transparent" Foreground="White" FontSize="14" CaretBrush="White" ToolTip="Tab name"
                        Text="{Binding TabName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" Margin="5"/>
-                    <Path Data="{StaticResource SvgPen}" HorizontalAlignment="Right" Grid.Column="1" Margin="10 5" Height="15" IsHitTestVisible="False" Opacity=".3"/>
+                    <Path Data="{StaticResource SvgPen}" HorizontalAlignment="Right" Grid.Column="0" Margin="10 5" Height="15" IsHitTestVisible="False" Opacity=".3"/>
                     <!--<Button Grid.Column="0" VerticalAlignment="Stretch" FontSize="15" Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" 
                     HorizontalAlignment="Stretch" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="RemoveTab">
                         <Path Data="{StaticResource SvgClose}" Stretch="Uniform" Fill="{StaticResource HpColor}"/>

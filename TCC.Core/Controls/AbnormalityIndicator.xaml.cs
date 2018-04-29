@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+// ReSharper disable PossibleNullReferenceException
 
 namespace TCC.Controls
 {
@@ -37,7 +38,7 @@ namespace TCC.Controls
 
             var an = new DoubleAnimation(0, 359.9, TimeSpan.FromMilliseconds(_context.DurationLeft));
             var fps = _context.DurationLeft > 20000 ? 1 : 10;
-            DoubleAnimation.SetDesiredFrameRate(an, fps);
+            Timeline.SetDesiredFrameRate(an, fps);
             Arc.BeginAnimation(Arc.EndAngleProperty, an);
 
         }
@@ -75,23 +76,13 @@ namespace TCC.Controls
 
         public double Size
         {
-            get { return (double)GetValue(SizeProperty); }
-            set { SetValue(SizeProperty, value); }
+            get => (double)GetValue(SizeProperty);
+            set => SetValue(SizeProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for Size.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SizeProperty =
             DependencyProperty.Register("Size", typeof(double), typeof(AbnormalityIndicator));
-
-        private void ToolTip_OnOpened(object sender, RoutedEventArgs e)
-        {
-            FocusManager.Running = false;
-        }
-
-        private void ToolTip_OnClosed(object sender, RoutedEventArgs e)
-        {
-            FocusManager.Running = true;
-        }
     }
 }
 namespace TCC.Converters
@@ -137,7 +128,7 @@ namespace TCC.Converters
             switch (val)
             {
                 case AbnormalityType.Stun:
-                    return new SolidColorBrush(Colors.Red);
+                    return new SolidColorBrush(Colors.Red); //TODO: convert to resources
                 case AbnormalityType.DOT:
                     return new SolidColorBrush(Color.FromRgb(0x98, 0x42, 0xf4));
                 case AbnormalityType.Debuff:

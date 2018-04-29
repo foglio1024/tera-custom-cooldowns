@@ -18,7 +18,7 @@ namespace TCC
 {
     public static class Utils
     {
-        static MemoryStream ms;
+        private static MemoryStream ms;
 
         public static BitmapImage BitmapToImageSource(System.Drawing.Bitmap bitmap)
         {

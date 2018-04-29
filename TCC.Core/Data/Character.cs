@@ -11,14 +11,14 @@ namespace TCC
 {
     public class Character : TSPropertyChanged, IComparable
     {
-        string _name;
-        Class _class;
-        Laurel _laurel;
-        int _dailiesDone;
-        int _weekliesDone;
-        int _credits;
-        bool _isLoggedIn;
-        bool _isSelected;
+        private string _name;
+        private Class _class;
+        private Laurel _laurel;
+        private int _dailiesDone;
+        private int _weekliesDone;
+        private int _credits;
+        private bool _isLoggedIn;
+        private bool _isSelected;
         private uint _guardianPoints;
         private uint _maxGuardianPoints;
         private uint _elleonMarks;

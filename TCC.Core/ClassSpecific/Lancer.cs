@@ -6,9 +6,9 @@ namespace TCC.ClassSpecific
 {
     public static class Lancer
     {
-        static readonly uint[] ARushIDs = { 200700, 200701, 200731, 200732 };
-        static readonly uint[] GShoutIDs = { 200200, 200201, 200202 };
-        static readonly uint LineHeldId = 201701;
+        private static readonly uint[] ARushIDs = { 200700, 200701, 200731, 200732 };
+        private static readonly uint[] GShoutIDs = { 200200, 200201, 200202 };
+        private static readonly uint LineHeldId = 201701;
 
         public static void CheckArush(S_ABNORMALITY_BEGIN p)
         {

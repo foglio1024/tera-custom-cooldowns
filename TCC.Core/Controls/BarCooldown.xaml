@@ -4,27 +4,24 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
-             xmlns:converters="clr-namespace:TCC.Converters"
              mc:Ignorable="d" Loaded="UserControl_Loaded" Width="Auto"
             >
 
     <Grid  HorizontalAlignment="Stretch">
         <!--Top Styles.DefaultBorder-->
         <Border BorderBrush="#0555"  
-                Width="{Binding ElementName=cdBar, Path=ActualWidth}" 
+                Width="{Binding ElementName=CdBar, Path=ActualWidth}" 
                 Background="#303037" 
                 Height="5" 
                 BorderThickness="0,0,0,0" 
                 Grid.Column="0" 
                 Grid.Row="0" 
-                Opacity="0"
-                Grid.RowSpan="1" 
-                Grid.ColumnSpan="2"/>
+                Opacity="0" />
 
         <Rectangle Fill="{Binding Color, RelativeSource={RelativeSource AncestorType=local:BarCooldown}}" 
-                   Name="cdBar" 
+                   Name="CdBar" 
                    Height="5"/>
-        <Grid x:Name="circle" 
+        <Grid x:Name="Circle" 
               HorizontalAlignment="Left" 
               Margin="-12.5,0" 
               Opacity="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=local:BarCooldown}, Converter={StaticResource Converters.BoolToOpacity}}">
@@ -45,7 +42,7 @@
                        TextAlignment="Center" 
                        VerticalAlignment="Center" 
                        Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=local:BarCooldown}}" 
-                       Text="{Binding CurrentCD, RelativeSource={RelativeSource AncestorType=local:BarCooldown}, StringFormat={}{0:N0}}"
+                       Text="{Binding CurrentCd, RelativeSource={RelativeSource AncestorType=local:BarCooldown}, StringFormat={}{0:N0}}"
                        FontSize="12" 
                        FontWeight="SemiBold" 
                        />

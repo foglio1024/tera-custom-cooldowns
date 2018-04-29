@@ -66,11 +66,10 @@ namespace TCC.Controls
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(double), typeof(ValueSetting));
 
 
-
-        ColorAnimation glow;
-        ColorAnimation unglow;
-        DoubleAnimation fadeIn;
-        DoubleAnimation fadeOut;
+        private ColorAnimation glow;
+        private ColorAnimation unglow;
+        private DoubleAnimation fadeIn;
+        private DoubleAnimation fadeOut;
 
 
 

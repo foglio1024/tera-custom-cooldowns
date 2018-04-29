@@ -57,7 +57,7 @@ namespace TCC.Controls
             _currentRunes = newRunes;
         }
 
-        Counter _context;
+        private Counter _context;
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {

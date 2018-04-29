@@ -15,11 +15,11 @@ namespace TCC.Controls
     /// </summary>
     public partial class FixedSkillControl : UserControl, INotifyPropertyChanged
     {
-        FixedSkillCooldown _context;
-        DispatcherTimer warnTimer;
-        DoubleAnimation ExpandWarn;
-        DoubleAnimation ExpandWarnInner;
-        DoubleAnimation ArcAnimation;
+        private FixedSkillCooldown _context;
+        private DispatcherTimer warnTimer;
+        private DoubleAnimation ExpandWarn;
+        private DoubleAnimation ExpandWarnInner;
+        private DoubleAnimation ArcAnimation;
         public event PropertyChangedEventHandler PropertyChanged;
 
         private bool isRunning = false;
@@ -52,13 +52,14 @@ namespace TCC.Controls
             Timeline.SetDesiredFrameRate(ExpandWarnInner, 30);
         }
 
-        void Control_Loaded(object sender, RoutedEventArgs e)
+        private void Control_Loaded(object sender, RoutedEventArgs e)
         {
             if (DesignerProperties.GetIsInDesignMode(this) || DataContext == null) return;
             _context = (FixedSkillCooldown)DataContext;
             _context.PropertyChanged += _context_PropertyChanged;
         }
-        void _context_PropertyChanged(object sender, PropertyChangedEventArgs e)
+
+        private void _context_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             Dispatcher.InvokeIfRequired(() =>
             {
@@ -112,8 +113,7 @@ namespace TCC.Controls
         }
 
 
-
-        void AnimateArcAngle(double val = 1)
+        private void AnimateArcAngle(double val = 1)
         {
             ArcAnimation.Duration = TimeSpan.FromMilliseconds(_context.Cooldown);
             ArcAnimation.From = 359.9 * val;

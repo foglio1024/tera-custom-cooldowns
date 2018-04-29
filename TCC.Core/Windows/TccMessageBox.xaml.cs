@@ -16,8 +16,9 @@ namespace TCC.Windows
         {
             InitializeComponent();
         }
-        static TccMessageBox _messageBox;
-        static MessageBoxResult _result = MessageBoxResult.No;
+
+        private static TccMessageBox _messageBox;
+        private static MessageBoxResult _result = MessageBoxResult.No;
         public static MessageBoxResult Show
         (string caption, string msg, MessageBoxType type)
         {

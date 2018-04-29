@@ -10,11 +10,11 @@ namespace TCC
 {
     public static class UpdateManager
     {
-        static System.Timers.Timer checkTimer;
-        static string databasePath = "https://github.com/Foglio1024/tera-used-icons/archive/master.zip";
-        static string databaseVersion = "https://raw.githubusercontent.com/Foglio1024/tera-used-icons/master/current_version";
-        static string appVersion = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/master/version";
-        static string baseDatabaseDir = "tera-used-icons-master";
+        private static System.Timers.Timer checkTimer;
+        private static string databasePath = "https://github.com/Foglio1024/tera-used-icons/archive/master.zip";
+        private static string databaseVersion = "https://raw.githubusercontent.com/Foglio1024/tera-used-icons/master/current_version";
+        private static string appVersion = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/master/version";
+        private static string baseDatabaseDir = "tera-used-icons-master";
         public static void CheckDatabaseVersion()
         {
             using (var c = new WebClient())
@@ -65,7 +65,8 @@ namespace TCC
                 }
             }
         }
-        static void DownloadDatabase()
+
+        private static void DownloadDatabase()
         {
             using (var c = new WebClient())
             {
@@ -93,7 +94,8 @@ namespace TCC
                 }
             }
         }
-        static void ExtractDatabase()
+
+        private static void ExtractDatabase()
         {
             if (Directory.Exists(baseDatabaseDir))
             {
@@ -122,7 +124,8 @@ namespace TCC
 
             //MessageBox.Show("Database updated.", "TCC", MessageBoxButton.OK, MessageBoxImage.Information);
         }
-        static void CleanTempDatabase()
+
+        private static void CleanTempDatabase()
         {
             try
             {
@@ -147,7 +150,8 @@ namespace TCC
             CheckAppVersionPeriodic();
             checkTimer.Start();
         }
-        static void CheckAppVersionPeriodic()
+
+        private static void CheckAppVersionPeriodic()
         {
             using (var c = new WebClient())
             {

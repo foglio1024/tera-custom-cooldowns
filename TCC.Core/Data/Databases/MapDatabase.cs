@@ -90,7 +90,7 @@ namespace TCC.Data.Databases
 
         }
 
-        static void LoadNames(string lang)
+        private static void LoadNames(string lang)
         {
             var f = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + $"/resources/data/regions/regions-{lang}.tsv");
             while (true)

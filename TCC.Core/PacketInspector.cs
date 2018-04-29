@@ -12,8 +12,8 @@ namespace TCC
 {
     public static class PacketInspector
     {
-        static bool running;
-        static Dictionary<string, MessageStats> Stats;
+        private static bool running;
+        private static Dictionary<string, MessageStats> Stats;
         public static void NewStat()
         {
             if (running) return;

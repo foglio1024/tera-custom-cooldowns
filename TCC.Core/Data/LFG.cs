@@ -6,13 +6,13 @@ namespace TCC.Data
 {
     public class LFG : TSPropertyChanged
     {
-        uint _id;
-        string _name;
-        string _message;
-        bool _raid;
-        string _dungeonName;
-        int _membersCount;
-        Timer _removeTimer;
+        private uint _id;
+        private string _name;
+        private string _message;
+        private bool _raid;
+        private string _dungeonName;
+        private int _membersCount;
+        private Timer _removeTimer;
 
         public uint Id
         {

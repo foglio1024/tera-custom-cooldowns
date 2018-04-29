@@ -5,9 +5,9 @@ namespace TCC
 {
     public class S_PLAYER_CHANGE_MP : ParsedMessage
     {
-        int currentMP, maxMP, diff;
-        uint type;
-        ulong target, source;
+        private int currentMP, maxMP, diff;
+        private uint type;
+        private ulong target, source;
 
         public int CurrentMP { get => currentMP; }
         public int MaxMP { get => maxMP; }

@@ -5,7 +5,7 @@ namespace TCC
 {
     public class S_PLAYER_CHANGE_STAMINA : ParsedMessage
     {
-        int currentStamina, maxStamina, unk1, unk2, unk3;
+        private int currentStamina, maxStamina, unk1, unk2, unk3;
 
         public int CurrentST { get => currentStamina; }
         public int MaxST { get => maxStamina; }

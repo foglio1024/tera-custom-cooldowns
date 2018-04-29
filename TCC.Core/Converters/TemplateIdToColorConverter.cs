@@ -5,7 +5,7 @@ using System.Windows.Media;
 
 namespace TCC.Converters
 {
-    class DragonIdToColorConverter : IValueConverter
+    internal class DragonIdToColorConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

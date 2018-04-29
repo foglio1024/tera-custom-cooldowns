@@ -5,10 +5,10 @@ namespace TCC
 {
     public class S_CREATURE_CHANGE_HP : ParsedMessage
     {
-        long currentHP, maxHP, diff;
-        uint type;
-        ulong target, source;
-        byte crit;
+        private long currentHP, maxHP, diff;
+        private uint type;
+        private ulong target, source;
+        private byte crit;
 
         public long CurrentHP { get => currentHP; }
         public long MaxHP { get => maxHP; }

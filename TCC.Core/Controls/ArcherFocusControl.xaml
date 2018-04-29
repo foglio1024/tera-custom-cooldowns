@@ -13,7 +13,7 @@
         <local:Arc StrokeThickness="5" Margin="-5"
                    EndAngle="0"
                    Stroke="#eee" 
-                   Width="60" Height="60" x:Name="externalArc"/>
+                   Width="60" Height="60" x:Name="ExternalArc"/>
         <Ellipse Width="51" 
                  Height="{Binding Path=Width, RelativeSource={RelativeSource Self}}" 
                  Margin="2" 

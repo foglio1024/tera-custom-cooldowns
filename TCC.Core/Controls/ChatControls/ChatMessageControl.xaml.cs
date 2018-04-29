@@ -1,26 +1,26 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using TCC.Data;
 
-namespace TCC.Controls
+namespace TCC.Controls.ChatControls
 {
     /// <summary>
     /// Logica di interazione per ChatMessageControl.xaml
     /// </summary>
-    public partial class ChatMessageControl : UserControl
+    public partial class ChatMessageControl
     {
+        private readonly DoubleAnimation _anim;
+
         public ChatMessageControl()
         {
             InitializeComponent();
-            da = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(250)){EasingFunction = new QuadraticEase()};
-            da.Completed += Da_Completed;
-            Timeline.SetDesiredFrameRate(da, 30);
+            _anim = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(250)){EasingFunction = new QuadraticEase()};
+            _anim.Completed += AnimCompleted;
+            Timeline.SetDesiredFrameRate(_anim, 30);
         }
-
-        private void Da_Completed(object sender, EventArgs e)
+        private void AnimCompleted(object sender, EventArgs e)
         {
             SetAnimated();
         }
@@ -41,13 +41,13 @@ namespace TCC.Controls
         {
             if (((ChatMessage)DataContext).IsContracted)
             {
-                popup.IsOpen = true;
+                Popup.IsOpen = true;
             }
         }
 
-        private void popup_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        private void Popup_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            popup.IsOpen = false;
+            Popup.IsOpen = false;
         }
 
         private void UserControl_Loaded(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
@@ -62,21 +62,8 @@ namespace TCC.Controls
                 tg.Children[0] = sc2;
                 return;
             }
-            sc.BeginAnimation(ScaleTransform.ScaleYProperty, da);
+            sc.BeginAnimation(ScaleTransform.ScaleYProperty, _anim);
         }
 
-        private DoubleAnimation da;
-        private void ChatMessageControl_OnUnloaded(object sender, RoutedEventArgs e)
-        {
-            if (!(DataContext is ChatMessage)) return;
-            var dc = ((ChatMessage)DataContext);
-            var tg = (TransformGroup)LayoutTransform;
-            var sc = tg.Children[0];
-            sc.BeginAnimation(ScaleTransform.ScaleYProperty, null);
-            //Debug.WriteLine($"{dc.RawMessage} -- unloaded");
-
-            SetAnimated();
-
-        }
     }
 }

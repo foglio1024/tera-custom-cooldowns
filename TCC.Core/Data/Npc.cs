@@ -269,7 +269,7 @@ namespace TCC.Data
         }
 
         ///////////////////////////////////////////
-        Timer ShieldDuration;
+        private Timer ShieldDuration;
 
         private ShieldStatus _shield;
         public ShieldStatus Shield

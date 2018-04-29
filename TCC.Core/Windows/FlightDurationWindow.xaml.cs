@@ -11,8 +11,8 @@ namespace TCC.Windows
     /// </summary>
     public partial class FlightDurationWindow : TccWindow
     {
-        DoubleAnimation _arcAn, _winShow, _winHide;
-        bool _firstLoad = true;
+        private DoubleAnimation _arcAn, _winShow, _winHide;
+        private bool _firstLoad = true;
         public FlightDurationWindow()
         {
             InitializeComponent();
@@ -66,11 +66,12 @@ namespace TCC.Windows
             _firstLoad = false;
         }
 
-        void HideWindow()
+        private void HideWindow()
         {
             this.BeginAnimation(OpacityProperty, _winHide);
         }
-        void ShowWindow()
+
+        private void ShowWindow()
         {
             FocusManager.MakeTransparent(this._handle);
             this.Opacity = 0;

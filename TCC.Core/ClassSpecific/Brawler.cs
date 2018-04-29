@@ -15,13 +15,10 @@ namespace TCC.ClassSpecific
                 ((BrawlerBarManager)ClassManager.CurrentClassManager).IsGfOn = true;
                 return;
             }
-            if (p.AbnormalityId == CounterGlyphId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
-            {
-                ((BrawlerBarManager)ClassManager.CurrentClassManager).Counter.Start(p.Duration);
-                ((BrawlerBarManager)ClassManager.CurrentClassManager).CounterProc = true;
 
-                return;
-            }
+            if (p.AbnormalityId != CounterGlyphId || p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
+            ((BrawlerBarManager)ClassManager.CurrentClassManager).Counter.Start(p.Duration);
+            ((BrawlerBarManager)ClassManager.CurrentClassManager).CounterProc = true;
         }
         public static void CheckBrawlerAbnormal(S_ABNORMALITY_REFRESH p)
         {
@@ -30,13 +27,10 @@ namespace TCC.ClassSpecific
                 ((BrawlerBarManager)ClassManager.CurrentClassManager).IsGfOn = true;
                 return;
             }
-            if (p.AbnormalityId == CounterGlyphId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
-            {
-                ((BrawlerBarManager)ClassManager.CurrentClassManager).CounterProc = true;
-                ((BrawlerBarManager)ClassManager.CurrentClassManager).Counter.Start(p.Duration);
 
-                return;
-            }
+            if (p.AbnormalityId != CounterGlyphId || p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
+            ((BrawlerBarManager)ClassManager.CurrentClassManager).CounterProc = true;
+            ((BrawlerBarManager)ClassManager.CurrentClassManager).Counter.Start(p.Duration);
         }
         public static void CheckBrawlerAbnormalEnd(S_ABNORMALITY_END p)
         {

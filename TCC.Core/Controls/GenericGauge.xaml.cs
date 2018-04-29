@@ -39,7 +39,8 @@ namespace TCC.Controls
 
 
         }
-        double factor;
+
+        private double factor;
         public double Factor
         {
             get

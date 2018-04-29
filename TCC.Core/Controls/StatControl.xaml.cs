@@ -52,7 +52,7 @@ namespace TCC.Controls
         public static readonly DependencyProperty StatusColorProperty = DependencyProperty.Register("StatusColor", typeof(SolidColorBrush), typeof(StatControl));
 
 
-        StatTracker _context;
+        private StatTracker _context;
 
         public event PropertyChangedEventHandler PropertyChanged;
 

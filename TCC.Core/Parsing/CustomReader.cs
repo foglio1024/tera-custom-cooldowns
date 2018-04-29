@@ -4,7 +4,7 @@ using Tera.Game;
 
 namespace TCC
 {
-    class CustomReader : BinaryReader
+    internal class CustomReader : BinaryReader
     {
         public CustomReader(Tera.Message message)
         : base(GetStream(message), Encoding.Unicode)

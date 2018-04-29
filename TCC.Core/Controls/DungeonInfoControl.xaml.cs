@@ -12,13 +12,13 @@ namespace TCC.Controls
     /// </summary>
     public partial class DungeonInfoControl : UserControl
     {
-        TimeSpan growDuration;
-        DoubleAnimation scaleUp;
-        DoubleAnimation moveUp;
-        DoubleAnimation scaleDown;
-        DoubleAnimation moveDown;
-        DoubleAnimation bubbleScale;
-        DoubleAnimation fadeIn;
+        private TimeSpan growDuration;
+        private DoubleAnimation scaleUp;
+        private DoubleAnimation moveUp;
+        private DoubleAnimation scaleDown;
+        private DoubleAnimation moveDown;
+        private DoubleAnimation bubbleScale;
+        private DoubleAnimation fadeIn;
 
         public DungeonInfoControl()
         {

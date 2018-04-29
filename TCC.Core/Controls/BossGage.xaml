@@ -4,9 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC"
-             xmlns:controls="clr-namespace:TCC.Controls"
              xmlns:data="clr-namespace:TCC.Data"
-             xmlns:converters="clr-namespace:TCC.Converters"
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded"
              Unloaded="UserControl_Unloaded"
@@ -31,7 +29,7 @@
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
-    <Grid Width="Auto" Name="rootGrid"  Margin="0">
+    <Grid Width="Auto" Margin="0">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
@@ -40,16 +38,16 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid  Grid.Row="1" Height="Auto" Margin="12,0,6,0" HorizontalAlignment="Left" Name="abnormalitiesGrid">
-            <ItemsControl Name="Abnormalities" ItemTemplate="{StaticResource BossAbnormality}" ItemsSource="{Binding Buffs}">
+        <Grid  Grid.Row="1" Height="Auto" Margin="12,0,6,0" HorizontalAlignment="Left">
+            <ItemsControl ItemTemplate="{StaticResource BossAbnormality}" ItemsSource="{Binding Buffs}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0" Width="{Binding ElementName=mainBorder, Path=ActualWidth}"/>
+                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0" Width="{Binding ElementName=MainBorder, Path=ActualWidth}"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
         </Grid>
-        <Grid Width="Auto" Height="Auto" Margin="6,0,6,2" Name="topGrid">
+        <Grid Grid.Row="0" Grid.Column="0" Width="Auto" Height="Auto" Margin="6,0,6,2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -71,20 +69,22 @@
                 </Grid>
             </Border>-->
 
-            <Grid Margin="6,2" Name="mainGrid" ClipToBounds="False">
+            <Grid Margin="6,2" ClipToBounds="False">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Border Margin="0,0,0,-1" CornerRadius="4,4,0,0" Opacity=".7"  RenderTransformOrigin="0,0"
-                        Style="{StaticResource Styles.DefaultBorder}" x:Name="mainBorder" Grid.RowSpan="2" Grid.Row="1" 
+                        Style="{StaticResource Styles.DefaultBorder}" x:Name="MainBorder" Grid.RowSpan="2" Grid.Row="1" 
                         HorizontalAlignment="Stretch" >
                     <Border.RenderTransform>
                         <ScaleTransform ScaleY="0"></ScaleTransform>
                     </Border.RenderTransform>
                 </Border>
-                <Border Background="Red" Margin="0,0,0,-1" CornerRadius="4,4,0,0" Opacity="0"  Style="{StaticResource Styles.DefaultBorder}" x:Name="enrageBorder" Grid.RowSpan="2" Grid.Row="1" HorizontalAlignment="Stretch"/>
+                <Border Background="Red" Margin="0,0,0,-1" CornerRadius="4,4,0,0" Opacity="0"
+                        Style="{StaticResource Styles.DefaultBorder}" x:Name="EnrageBorder" Grid.RowSpan="2"
+                        Grid.Row="1" HorizontalAlignment="Stretch" />
                 <Grid Grid.Row="0" Name="BossNameGrid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -92,20 +92,20 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Name="BossNameTB" Style="{StaticResource Styles.DefaultText}"
+                    <TextBlock Style="{StaticResource Styles.DefaultText}"
                                HorizontalAlignment="Left" 
                                VerticalAlignment="Center" 
                                FontSize="15" 
                                Text="{Binding Name}" 
                                Grid.Row="0"/>
-                    <Polygon Points="0,10 5,0 10,10"  Margin="10,0"  Fill="{Binding CurrentAggroType, Converter={StaticResource Converters.AggroTypeToFill}}" Name="aggroArrow"
-                                 VerticalAlignment="Center" Height="Auto"  HorizontalAlignment="Center"
+                    <Polygon Points="0,10 5,0 10,10"  Margin="10,0"  Fill="{Binding CurrentAggroType, Converter={StaticResource Converters.AggroTypeToFill}}"
+                             VerticalAlignment="Center" Height="Auto"  HorizontalAlignment="Center"
                                  Grid.Column="1" RenderTransformOrigin=".5,.5">
                         <Polygon.RenderTransform>
                             <RotateTransform Angle="90"/>
                         </Polygon.RenderTransform>
                     </Polygon>
-                    <TextBlock Name="AggroHolderNameTB" Style="{StaticResource Styles.DefaultText}"
+                    <TextBlock Style="{StaticResource Styles.DefaultText}"
                                HorizontalAlignment="Left" 
                                VerticalAlignment="Center" 
                                FontWeight="Normal" 
@@ -115,7 +115,7 @@
                                Grid.Row="0" Grid.Column="2" TextTrimming="WordEllipsis" MaxWidth="200"/>
 
                 </Grid>
-                <Grid Margin="9,2" Name="topInfoGrid" Grid.Row="1" UseLayoutRounding="True" >
+                <Grid Margin="9,2" Name="TopInfoGrid" Grid.Row="1" UseLayoutRounding="True" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
@@ -174,7 +174,7 @@
                         <Path Data="{StaticResource SvgInfo}" Stretch="Uniform" Fill="#2fff"></Path>
                     </Button>-->
                 </Grid>
-                <Grid Grid.Row="2" Margin="1,0,1,0" Name="hpBarGrid" Width="406"  VerticalAlignment="Bottom" ClipToBounds="False" Background="#5000">
+                <Grid Grid.Row="2" Margin="1,0,1,0" Name="HpBarGrid" Width="406"  VerticalAlignment="Bottom" ClipToBounds="False" Background="#5000">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition />
@@ -201,7 +201,8 @@
                                            />-->
                     
                     <!--Enrage history-->
-                    <ItemsControl ItemsSource="{Binding EnrageHistory, RelativeSource={RelativeSource AncestorType=local:BossGage}}"
+                    <ItemsControl Grid.Row="0"
+                                  ItemsSource="{Binding EnrageHistory, RelativeSource={RelativeSource AncestorType=local:BossGage}}"
                                   ItemTemplate="{StaticResource EnrageHistoryItem}"
                                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
                         <ItemsControl.ItemsPanel>
@@ -223,20 +224,20 @@
                         </StackPanel.RenderTransform>
                         <!--<Polygon Points="0,7 5,0 10,7"  Margin="0,0,0,0"  Fill="Orange" VerticalAlignment="Center" Height="Auto"  HorizontalAlignment="Center" Grid.Column="1" >
                         </Polygon>-->
-                        <Border Background="White" Width="6" Height="6" Name="enrageEll" CornerRadius="0" 
+                        <Border Background="White" Width="6" Height="6" CornerRadius="0" 
                                 Effect="{StaticResource DropShadow}" Margin="0,1,0,0"/>
                         <!--<TextBlock Width="Auto" FontSize="12" Style="{StaticResource Styles.DefaultText}"
                                    TextAlignment="Center" VerticalAlignment="Top" Margin="0,3,0,0" Padding="0"
                                    Text="{Binding EnrageTBtext, RelativeSource={RelativeSource AncestorType=local:BossGage}}"/>-->
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <FrameworkElement Width="{Binding ElementName=hpBarGrid, Path=ActualWidth}" Name="DotPusher">
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                        <FrameworkElement Width="{Binding ElementName=HpBarGrid, Path=ActualWidth}" Name="DotPusher">
                             <FrameworkElement.LayoutTransform>
                                 <ScaleTransform ScaleX="1"></ScaleTransform>
                             </FrameworkElement.LayoutTransform>
                         </FrameworkElement>
-                        <Rectangle Name="Dot"
-                                 Height="6"
+                        <Rectangle
+                            Height="6"
                                  Width="2"
                                  
                                  Fill="#dfff"

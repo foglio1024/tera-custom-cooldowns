@@ -3,22 +3,16 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
-using System.Net.Http;
 using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
-using TCC.Data;
-using TCC.Data.Databases;
 using TCC.Parsing;
-using TCC.Parsing.Messages;
 using TCC.ViewModels;
 using TCC.Windows;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Linq;
-using System.Collections.Generic;
 
 namespace TCC
 {
@@ -27,9 +21,9 @@ namespace TCC
     /// </summary>
     public partial class App
     {
-        public static bool Debug = false;
-        public static TCC.Windows.SplashScreen SplashScreen;
-        public static string Version;
+        public const bool Debug = false;
+        public static Windows.SplashScreen SplashScreen;
+        private static string _version;
         private static void GlobalUnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
         {
             var ex = (Exception)e.ExceptionObject;
@@ -44,7 +38,9 @@ namespace TCC
             }
             catch (Exception)
             {
+                // ignored
             }
+
             TccMessageBox.Show("TCC", "An error occured and TCC will now close. Check error.txt for more info.",
                 MessageBoxButton.OK, MessageBoxImage.Error);
 
@@ -53,7 +49,8 @@ namespace TCC
             {
                 WindowManager.TrayIcon.Dispose();
             }
-            try { WindowManager.Dispose(); } catch { }
+            try { WindowManager.Dispose(); } catch { /* ignored*/ }
+
             Environment.Exit(-1);
         }
         private static void UploadCrashDump(UnhandledExceptionEventArgs e)
@@ -66,10 +63,10 @@ namespace TCC
             var full = ex.Message + "\r\n" +
                 ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" + ex.InnerException +
                 "\r\n" + ex.TargetSite;
-            js.Add("tcc_version", new JValue(Version));
+            js.Add("tcc_version", new JValue(_version));
             js.Add("full_exception", new JValue(full.Replace(@"C:\Users\Vincenzo\Documents\Progetti VS\", "")));
-            js.Add("inner_exception", new JValue(ex.InnerException != null ? ex.InnerException.Message.ToString() : "undefined"));
-            js.Add("exception", new JValue(ex.Message.ToString()));
+            js.Add("inner_exception", new JValue(ex.InnerException != null ? ex.InnerException.Message : "undefined"));
+            js.Add("exception", new JValue(ex.Message));
             js.Add("game_version", new JValue(PacketProcessor.Version));
             if (PacketProcessor.Server != null)
             {
@@ -90,20 +87,21 @@ namespace TCC
             Process.Start("TCC.exe");
             CloseApp();
         }
-        private static void InitSS()
+        private static void InitSplashScreen()
         {
             var waiting = true;
-            var ssThread = new Thread(new ThreadStart(() =>
+            var ssThread = new Thread(() =>
             {
-                SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
-                SplashScreen = new TCC.Windows.SplashScreen();
+                SynchronizationContext.SetSynchronizationContext(
+                    new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                SplashScreen = new Windows.SplashScreen();
                 SplashScreen.SetText("Initializing...");
-                SplashScreen.SetVer(Version);
+                SplashScreen.SetVer(_version);
                 SplashScreen.Show();
                 waiting = false;
                 Dispatcher.Run();
-            }));
-            ssThread.Name = "SplashScreen window thread";
+            })
+            { Name = "SplashScreen window thread" };
             ssThread.SetApartmentState(ApartmentState.STA);
             ssThread.Start();
             while (waiting)
@@ -123,7 +121,14 @@ namespace TCC
                 var js = new JObject()
                 {
                     { "server", PacketProcessor.Server.ServerId},
-                    { "id", InfoWindowViewModel.Instance.Characters == null ?0 : InfoWindowViewModel.Instance.Characters.Count == 0 ? 0 : InfoWindowViewModel.Instance.Characters.FirstOrDefault(x => x.Position == 1).Id },
+                    {
+                        "id",
+                        InfoWindowViewModel.Instance.Characters == null ? 0 :
+                        InfoWindowViewModel.Instance.Characters.Count == 0 ? 0 :
+                        // ReSharper disable once PossibleNullReferenceException
+                        InfoWindowViewModel.Instance.Characters
+                            .FirstOrDefault(x => x.Position == 1).Id
+                    },
                     { "region", PacketProcessor.Server.Region },
                 };
                 c.Encoding = Encoding.UTF8;
@@ -135,9 +140,12 @@ namespace TCC
         }
         private void OnStartup(object sender, StartupEventArgs e)
         {
+            //TcpListener tcpListener = new TcpListener(new IPEndPoint(IPAddress.Loopback, 11111));
+            //tcpListener.Start();
+            //tcpListener.AcceptSocket();
             var v = Assembly.GetExecutingAssembly().GetName().Version;
-            Version = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
-            InitSS();
+            _version = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
+            InitSplashScreen();
             var cd = AppDomain.CurrentDomain;
             cd.UnhandledException += GlobalUnhandledExceptionHandler;
             Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.Normal;
@@ -145,7 +153,8 @@ namespace TCC
             {
                 File.Delete(AppDomain.CurrentDomain.BaseDirectory + "/TCCupdater.exe");
             }
-            catch (Exception) { }
+            catch { /* ignored*/ }
+
             SplashScreen.SetText("Checking for application updates...");
 
             UpdateManager.CheckAppVersion();
@@ -193,18 +202,18 @@ namespace TCC
 
             TimeManager.Instance.SetServerTimeZone(SettingsManager.LastRegion);
 
-            ChatWindowManager.Instance.AddTccMessage(Version);
+            ChatWindowManager.Instance.AddTccMessage(_version);
             SplashScreen.CloseWindowSafe();
             UpdateManager.StartCheck();
 
-            if (!Debug) return;
+/*
             SessionManager.CurrentPlayer = new Player(1, "Foglio");
             SessionManager.CurrentPlayer.Class = Class.Priest;
             SkillsDatabase.Load("EU-EN");
             CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(Class.Priest).ToLower() + "-skills.xml", Class.Priest);
             AbnormalityManager.CurrentDb = new AbnormalityDatabase("EU-EN");
             var s = AbnormalityManager.CurrentDb.Abnormalities[4];
-            BuffBarWindowViewModel.Instance.Player.AddOrRefreshBuff(s, Int32.MaxValue, 5);
+            BuffBarWindowViewModel.Instance.Player.AddOrRefreshBuff(s, int.MaxValue, 5);
             //ss.Dispatcher.Invoke(new Action(() => ss.Close()));
 
 
@@ -255,6 +264,7 @@ namespace TCC
             {
                 GroupWindowViewModel.Instance.AddOrUpdateMember(item);
             }
+*/
         }
 
         public static void CloseApp()
@@ -278,5 +288,4 @@ namespace TCC
 
         }
     }
-
 }

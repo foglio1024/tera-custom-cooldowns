@@ -13,10 +13,10 @@ namespace TCC.Controls
     /// </summary>
     public partial class SelectionSetting : UserControl
     {
-        ColorAnimation glow;
-        ColorAnimation unglow;
-        DoubleAnimation fadeIn;
-        DoubleAnimation fadeOut;
+        private ColorAnimation glow;
+        private ColorAnimation unglow;
+        private DoubleAnimation fadeIn;
+        private DoubleAnimation fadeOut;
 
         public string SettingName
         {

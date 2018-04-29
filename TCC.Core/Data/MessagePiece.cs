@@ -8,7 +8,7 @@ namespace TCC.Data
     {
         public  ChatChannel Channel;
 
-        long itemUid;
+        private long itemUid;
         public long ItemUid
         {
             get => itemUid;
@@ -19,7 +19,7 @@ namespace TCC.Data
             }
         }
 
-        uint itemId;
+        private uint itemId;
         public uint ItemId
         {
             get => itemId;
@@ -38,7 +38,7 @@ namespace TCC.Data
 
         public Thickness Spaces { get; set; }
 
-        string ownerName;
+        private string ownerName;
         public string OwnerName
         {
             get => ownerName;
@@ -49,7 +49,7 @@ namespace TCC.Data
             }
         }
 
-        MessagePieceType type;
+        private MessagePieceType type;
         public MessagePieceType Type
         {
             get => type;
@@ -60,7 +60,7 @@ namespace TCC.Data
             }
         }
 
-        string text;
+        private string text;
         public string Text
         {
             get => text;
@@ -79,7 +79,7 @@ namespace TCC.Data
             }
         }
 
-        SolidColorBrush color;
+        private SolidColorBrush color;
         public SolidColorBrush Color
         {
             get => color;

@@ -5,10 +5,10 @@ namespace TCC.Parsing.Messages
 {
     public class S_BOSS_GAGE_INFO : ParsedMessage
     {
-        ulong id, targetId;
-        int templateId, huntingZoneId;//, unk1;
-        float /*hpDiff,*/ currHp, maxHp;
-        byte enrage/*, unk3*/;
+        private ulong id, targetId;
+        private int templateId, huntingZoneId;//, unk1;
+        private float /*hpDiff,*/ currHp, maxHp;
+        private byte enrage/*, unk3*/;
 
         public ulong EntityId { get => id; } 
         public int TemplateId { get => templateId; }

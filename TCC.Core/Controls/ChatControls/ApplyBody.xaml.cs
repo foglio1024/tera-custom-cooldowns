@@ -1,5 +1,4 @@
-﻿using System.Windows.Controls;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using TCC.Data;
 
 namespace TCC.Controls.ChatControls
@@ -7,7 +6,7 @@ namespace TCC.Controls.ChatControls
     /// <summary>
     /// Interaction logic for ApplyBody.xaml
     /// </summary>
-    public partial class ApplyBody : UserControl
+    public partial class ApplyBody
     {
         public ApplyBody()
         {

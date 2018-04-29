@@ -11,15 +11,15 @@ namespace TCC.Parsing.Messages
 {
     public class S_GET_USER_LIST : ParsedMessage
     {
-        short count, offset;
-        byte unkh1;
-        int unkh2;//, unkh3;
-        int maxChar;
-        int unkh4;
-        short unkh5;
-        int unkh6;
-        int unkh7;
-        int unkh8;
+        private short count, offset;
+        private byte unkh1;
+        private int unkh2;//, unkh3;
+        private int maxChar;
+        private int unkh4;
+        private short unkh5;
+        private int unkh6;
+        private int unkh7;
+        private int unkh8;
 
         public List<Character> CharacterList;
         public List<RawChar> RawCharacters;

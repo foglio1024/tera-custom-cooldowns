@@ -2,14 +2,13 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TCC.Controls.ChatControls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:TCC.ViewModels"
              xmlns:controls="clr-namespace:TCC.Controls" 
              mc:Ignorable="d" MouseLeave="UserControl_MouseLeave" DataContext="{Binding Source={x:Static vm:ChatWindowManager.Instance}}">
     <Grid>
-        <Border CornerRadius="1" Background="#444" Grid.RowSpan="10" Margin="6" BorderBrush="#666" BorderThickness="0" Width="Auto" Name="rootBorder">
-            <Grid Margin="5" Height="Auto" Name="g">
+        <Border CornerRadius="1" Background="#444" Grid.RowSpan="10" Margin="6" BorderBrush="#666" BorderThickness="0" Width="Auto" Name="RootBorder">
+            <Grid Margin="5" Height="Auto">
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition />
@@ -26,20 +25,22 @@
                     </Style>
                 </Grid.Resources>
                 <Border Grid.RowSpan="2" Grid.ColumnSpan="2" Background="#2000" Margin="-5"></Border>
-                <Image Grid.RowSpan="2" Width="44" Height="44" RenderOptions.BitmapScalingMode="HighQuality"
+                <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Width="44" Height="44"
+                       RenderOptions.BitmapScalingMode="HighQuality"
                        Source="{Binding TooltipInfo.Class, Converter={StaticResource Converters.ClassToImage}}" Margin="3" VerticalAlignment="Top"></Image>
-                <Border Background="{StaticResource MpColor}" Height="20" Width="20" CornerRadius="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.RowSpan="2" Margin="0,0">
+                <Border Background="{StaticResource MpColor}" Height="20" Width="20" CornerRadius="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"
+                        Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Margin="0,0">
                     <TextBlock  Text="{Binding TooltipInfo.Level}" Margin="0,0,0,0" TextAlignment="Center" FontSize="12" VerticalAlignment="Center"></TextBlock>
                     <Border.Effect>
                         <DropShadowEffect ShadowDepth="1" BlurRadius="2" Opacity=".7"></DropShadowEffect>
                     </Border.Effect>
                 </Border>
                 <TextBlock Text="{Binding TooltipInfo.Name}" FontWeight="DemiBold" FontSize="14"
-                           Grid.Column="1" Margin="5,0"></TextBlock>
+                           Grid.Row="0" Grid.Column="1" Margin="5,0" />
                 <TextBlock Text="{Binding TooltipInfo.Info}" Grid.Row="1" Grid.Column="1" Margin="5,0" Foreground="#9fff" TextWrapping="Wrap" Width="100" 
                            TextAlignment="Left" FontSize="11">
                 </TextBlock>
-                <StackPanel Grid.ColumnSpan="2" Grid.Row="2" Margin="-5,5,-5,-5">
+                <StackPanel Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="2" Margin="-5,5,-5,-5">
                     <StackPanel.Resources>
                         <SolidColorBrush x:Key="Button.Static.Background" Color="#00DDDDDD"/>
                         <SolidColorBrush x:Key="Button.Static.Border" Color="#00707070"/>
@@ -140,10 +141,10 @@
                             <TextBlock Text="Guild invite" Margin="3"></TextBlock>
                         </StackPanel>
                     </Button>
-                    <Grid ClipToBounds="True" x:Name="kickGrid" Visibility="{Binding TooltipInfo.ShowKick, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
+                    <Grid ClipToBounds="True" x:Name="KickGrid" Visibility="{Binding TooltipInfo.ShowKick, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
                         <Ellipse Fill="{StaticResource HpColor}" RenderTransformOrigin=".5 .5" Width="10" Height="10"
                                  
-                                     x:Name="ripple" Opacity="0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                     x:Name="Ripple" Opacity="0" HorizontalAlignment="Left" VerticalAlignment="Top">
                             <Ellipse.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform ScaleX="1" ScaleY="1"/>
@@ -183,3 +184,4 @@
         </Border>
     </Grid>
 </UserControl>
+

@@ -17,7 +17,8 @@ namespace TCC.Controls
 
         }
         private int _currentEdge = 0;
-        void SetEdge(int newEdge)
+
+        private void SetEdge(int newEdge)
         {
             var diff = newEdge - _currentEdge;
 
@@ -42,7 +43,7 @@ namespace TCC.Controls
             _currentEdge = newEdge;
         }
 
-        Counter _context;
+        private Counter _context;
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {

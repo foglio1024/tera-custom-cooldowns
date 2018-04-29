@@ -13,8 +13,8 @@ namespace TCC.Controls
     /// </summary>
     public partial class EventControl : UserControl
     {
-        DoubleAnimation scaleUp;
-        DoubleAnimation scaleDown;
+        private DoubleAnimation scaleUp;
+        private DoubleAnimation scaleDown;
         public EventControl()
         {
             InitializeComponent();

@@ -4,12 +4,12 @@ namespace TCC.Data
 {
     public class FixedSkillCooldown : TSPropertyChanged
     {
-        CooldownType _type;
-        DispatcherTimer _secondsTimer;
-        DispatcherTimer _offsetTimer;
-        DispatcherTimer _shortTimer;
+        private CooldownType _type;
+        private DispatcherTimer _secondsTimer;
+        private DispatcherTimer _offsetTimer;
+        private DispatcherTimer _shortTimer;
         public Skill Skill { get; set; }
-        ulong cooldown;
+        private ulong cooldown;
         public ulong Cooldown
         {
             get => cooldown; set
@@ -19,7 +19,7 @@ namespace TCC.Data
             }
         }
         public ulong OriginalCooldown { get; set; }
-        bool isAvailable = true;
+        private bool isAvailable = true;
         public bool IsAvailable
         {
             get => isAvailable;
@@ -31,7 +31,7 @@ namespace TCC.Data
             }
         }
 
-        ulong seconds = 0;
+        private ulong seconds = 0;
         private bool _flashOnAvailable;
 
         public ulong Seconds

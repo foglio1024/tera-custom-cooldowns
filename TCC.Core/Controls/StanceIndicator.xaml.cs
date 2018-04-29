@@ -15,7 +15,8 @@ namespace TCC.Controls
         {
             InitializeComponent();
         }
-        StanceTracker<WarriorStance> _context;
+
+        private StanceTracker<WarriorStance> _context;
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;

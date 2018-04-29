@@ -13,7 +13,8 @@ namespace TCC
         public List<FixedSkillCooldown> Main;
         public List<FixedSkillCooldown> Secondary;
         public List<FixedSkillCooldown> Hidden;
-        void ParseSkillConfig(string filename, Class c)
+
+        private void ParseSkillConfig(string filename, Class c)
         {
             var skillsDoc = XDocument.Load("resources/config/skills/" + filename);
             foreach (var skillElement in skillsDoc.Descendants("Skills").Descendants())

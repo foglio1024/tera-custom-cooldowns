@@ -8,10 +8,10 @@ using TCC.Parsing.Messages;
 
 namespace TCC.Converters
 {
-    class LogoInfoToImageConverter : IValueConverter
+    internal class LogoInfoToImageConverter : IValueConverter
     {
         [DllImport("gdi32")]
-        static extern int DeleteObject(IntPtr o);
+        private static extern int DeleteObject(IntPtr o);
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var guildId = (uint) value;

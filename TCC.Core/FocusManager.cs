@@ -10,10 +10,10 @@ namespace TCC
 
     public static class FocusManager
     {
-        const uint WS_EX_TRANSPARENT = 0x20;      //clickthru
-        const uint WS_EX_NOACTIVATE = 0x08000000; //don't focus
-        const uint WS_EX_TOOLWINDOW = 0x00000080; //don't show in alt-tab
-        const int GWL_EXSTYLE = (-20);           //set new exStyle
+        private const uint WS_EX_TRANSPARENT = 0x20;      //clickthru
+        private const uint WS_EX_NOACTIVATE = 0x08000000; //don't focus
+        private const uint WS_EX_TOOLWINDOW = 0x00000080; //don't show in alt-tab
+        private const int GWL_EXSTYLE = (-20);           //set new exStyle
         public const int WM_CHAR = 0x0102;
         private const int WM_KEYDOWN = 0x0100;
         private const int WM_KEYUP = 0x0101;
@@ -29,10 +29,10 @@ namespace TCC
         public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
 
         [DllImport("user32.dll")]
-        static extern uint GetWindowLong(IntPtr hwnd, int index);
+        private static extern uint GetWindowLong(IntPtr hwnd, int index);
 
         [DllImport("user32.dll")]
-        static extern uint SetWindowLong(IntPtr hwnd, int index, uint newStyle);
+        private static extern uint SetWindowLong(IntPtr hwnd, int index, uint newStyle);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         private static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
@@ -41,7 +41,7 @@ namespace TCC
         public static extern bool PostMessage(IntPtr hWnd, uint msg, int wParam, int lParam);
 
         [DllImport("user32.dll", EntryPoint = "FindWindow", SetLastError = true)]
-        static extern IntPtr FindWindowByCaption(IntPtr ZeroOnly, string lpWindowName);
+        private static extern IntPtr FindWindowByCaption(IntPtr ZeroOnly, string lpWindowName);
 
         public static IntPtr FindTeraWindow()
         {

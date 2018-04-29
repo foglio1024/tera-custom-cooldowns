@@ -22,10 +22,11 @@ namespace TCC.ViewModels
             }
         }
 
-        DispatcherTimer _expire;
-        int _max;
-        bool _autoexpire;
-        void RefreshTimer()
+        private DispatcherTimer _expire;
+        private int _max;
+        private bool _autoexpire;
+
+        private void RefreshTimer()
         {
             _expire.Stop();
             if (val == 0) return;

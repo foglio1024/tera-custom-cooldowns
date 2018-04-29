@@ -12,10 +12,10 @@ namespace TCC.Controls
     /// </summary>
     public partial class DragonSmallGauge : UserControl
     {
-        int AnimationTime = 350;
-        float LastEnragePercent = 100;
-        int CurrentEnrageTime = 50;
-        Timer NumberTimer = new Timer(1000);
+        private int AnimationTime = 350;
+        private float LastEnragePercent = 100;
+        private int CurrentEnrageTime = 50;
+        private Timer NumberTimer = new Timer(1000);
 
         public DragonSmallGauge()
         {
@@ -38,7 +38,7 @@ namespace TCC.Controls
         }
 
 
-        bool enraged;
+        private bool enraged;
         public bool Enraged
         {
             get { return enraged; }
@@ -54,7 +54,8 @@ namespace TCC.Controls
                 }
             }
         }
-        float CurrentPercentage
+
+        private float CurrentPercentage
         {
             get
             {
@@ -103,8 +104,8 @@ namespace TCC.Controls
             set { SetValue(DragonColorProperty, value); }
         }
         public static readonly DependencyProperty DragonColorProperty =DependencyProperty.Register("DragonColor", typeof(SolidColorBrush), typeof(DragonSmallGauge));
-        
-        void GlowOn()
+
+        private void GlowOn()
         {
             Dispatcher.Invoke(() =>
             {
@@ -115,7 +116,8 @@ namespace TCC.Controls
                 HPrect.Fill.BeginAnimation(SolidColorBrush.ColorProperty, ColorChangeAnimation);
             });
         }
-        void GlowOff()
+
+        private void GlowOff()
         {
             Dispatcher.Invoke(() =>
             {
@@ -126,7 +128,8 @@ namespace TCC.Controls
                 HPrect.Fill.BeginAnimation(SolidColorBrush.ColorProperty, ColorChangeAnimation);
             });
         }
-        void SetEnragePercTB(double v)
+
+        private void SetEnragePercTB(double v)
         {
             Dispatcher.Invoke(() =>
             {
@@ -134,7 +137,8 @@ namespace TCC.Controls
                 //NextEnrage.Text = String.Format("{0:0.#}", v);
             });
         }
-        void SlideNextEnrage(double val)
+
+        private void SlideNextEnrage(double val)
         {
             Dispatcher.Invoke(() =>
             {
@@ -226,7 +230,7 @@ namespace TCC.Controls
             BossGage_EnragedUpdated(EntityId, false);
         }
 
-        double ValueToLength(double value, double maxValue)
+        private double ValueToLength(double value, double maxValue)
         {
             if (maxValue == 0)
             {
@@ -240,9 +244,9 @@ namespace TCC.Controls
 
         }
 
-        static DoubleAnimation SlideAnimation = new DoubleAnimation();
-        static ColorAnimation ColorChangeAnimation = new ColorAnimation();
-        static DoubleAnimation DoubleAnimation = new DoubleAnimation();
+        private static DoubleAnimation SlideAnimation = new DoubleAnimation();
+        private static ColorAnimation ColorChangeAnimation = new ColorAnimation();
+        private static DoubleAnimation DoubleAnimation = new DoubleAnimation();
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {

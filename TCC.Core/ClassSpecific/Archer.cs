@@ -6,9 +6,9 @@ namespace TCC.ClassSpecific
 {
     public static class Archer
     {
-        static readonly uint FocusId = 601400;
-        static readonly uint FocusXId = 601450;
-        static readonly uint[] SniperEyeIDs = { 601100, 601101 };
+        private static readonly uint FocusId = 601400;
+        private static readonly uint FocusXId = 601450;
+        private static readonly uint[] SniperEyeIDs = { 601100, 601101 };
 
         public static void CheckFocus(S_ABNORMALITY_BEGIN p)
         {

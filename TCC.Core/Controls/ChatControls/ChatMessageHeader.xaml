@@ -1,15 +1,9 @@
-﻿<UserControl x:Class="TCC.Controls.ChatMessageHeader"
+﻿<UserControl x:Class="TCC.Controls.ChatControls.ChatMessageHeader"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:c="clr-namespace:TCC.Converters"
-             xmlns:local="clr-namespace:TCC.Controls"
-             xmlns:ts="clr-namespace:TCC.TemplateSelectors"
-             xmlns:windows="clr-namespace:TCC.Windows"
-             xmlns:vm ="clr-namespace:TCC.ViewModels"
-             mc:Ignorable="d" 
-             >
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" d:DataContext="{d:DesignData Type=ChatMessage}">
     <Grid Width="Auto" MinWidth="0" Margin="0,0,0,0" VerticalAlignment="Stretch" Height="Auto">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -24,13 +18,13 @@
                             CornerRadius="3" 
                             Visibility="Visible"
                             Margin="0,0" 
-                            Grid.ColumnSpan="5"
+                            Grid.ColumnSpan="4"
                             Grid.Column="0"
                             VerticalAlignment="Stretch"/>
         <!--Background tip-->
-        <Border Width="4" Background="{Binding ContainsPlayerName,Converter={StaticResource Converters.MentionToColor}}" Grid.Column="4" 
+        <Border Width="4" Background="{Binding ContainsPlayerName,Converter={StaticResource Converters.MentionToColor}}" Grid.Column="3" 
                             CornerRadius="0,3,3,0" Margin="0,0" />
-        <Border Width="4" Background="#999" Grid.Column="4" Opacity="{Binding IsContracted, Converter={StaticResource Converters.BoolToOpacity}}"
+        <Border Width="4" Background="#999" Grid.Column="3" Opacity="{Binding IsContracted, Converter={StaticResource Converters.BoolToOpacity}}"
                             CornerRadius="0,3,3,0" Margin="0,0"/>
         <!--Author-->
         <ContentControl ContentTemplateSelector="{StaticResource AuthorTemplateSelector}" 

@@ -7,7 +7,7 @@ using TCC.Data.Databases;
 
 namespace TCC.Converters
 {
-    class LocationToMarkerPositionConverter : IValueConverter
+    internal class LocationToMarkerPositionConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

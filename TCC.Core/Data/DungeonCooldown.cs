@@ -6,8 +6,8 @@ namespace TCC.Data
 {
     public class DungeonCooldown : TSPropertyChanged
     {
-        short _entries;
-        int _total;
+        private short _entries;
+        private int _total;
         public uint Id { get; }
         public short Entries
         {

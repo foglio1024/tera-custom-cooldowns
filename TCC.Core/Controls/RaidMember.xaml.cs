@@ -17,7 +17,8 @@ namespace TCC.Controls
         {
             InitializeComponent();
         }
-        User dc;
+
+        private User dc;
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             dc = (User)DataContext;

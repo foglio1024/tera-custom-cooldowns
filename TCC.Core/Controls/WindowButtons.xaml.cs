@@ -10,7 +10,7 @@ namespace TCC.Controls
     /// </summary>
     public partial class WindowButtons : UserControl, INotifyPropertyChanged
     {
-        WindowSettings _dc => this.DataContext as WindowSettings;
+        private WindowSettings _dc => this.DataContext as WindowSettings;
         public WindowButtons()
         {
             InitializeComponent();

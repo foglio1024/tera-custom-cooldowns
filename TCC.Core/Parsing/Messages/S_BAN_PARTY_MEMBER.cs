@@ -5,8 +5,8 @@ namespace TCC.Parsing.Messages
 {
     public class S_BAN_PARTY_MEMBER : ParsedMessage
     {
-        uint serverId, playerId;
-        string name;
+        private uint serverId, playerId;
+        private string name;
 
         public uint ServerId { get { return serverId; } }
         public uint PlayerId { get { return playerId; } }

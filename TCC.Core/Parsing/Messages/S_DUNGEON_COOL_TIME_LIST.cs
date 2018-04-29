@@ -4,7 +4,7 @@ using Tera.Game.Messages;
 
 namespace TCC.Parsing.Messages
 {
-    class S_DUNGEON_COOL_TIME_LIST : ParsedMessage
+    internal class S_DUNGEON_COOL_TIME_LIST : ParsedMessage
     {
         public Dictionary<uint, short> DungeonCooldowns;
         public S_DUNGEON_COOL_TIME_LIST(TeraMessageReader reader) : base(reader)

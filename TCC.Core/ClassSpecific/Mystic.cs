@@ -9,9 +9,9 @@ namespace TCC.ClassSpecific
 {
     public static class Mystic
     {
-        const int HurricaneId = 60010;
-        const int HurricaneDuration = 120000;
-        static readonly int VowId = 700100;
+        private const int HurricaneId = 60010;
+        private const int HurricaneDuration = 120000;
+        private static readonly int VowId = 700100;
 
         public static List<uint> CommonBuffs = new List<uint>
         {
@@ -24,10 +24,10 @@ namespace TCC.ClassSpecific
             700730, 700731          //aura swift
         };
 
-        static readonly uint[] CritAuraIDs = { 700600, 700601, 700602, 700603 };
-        static readonly uint[] ManaAuraIDs = { 700300 };
-        static readonly uint[] CritResAuraIDs = { 700200, 700201, 700202, 700203 };
-        static readonly uint[] SwiftAuraIDs = { 700700, 700701 };
+        private static readonly uint[] CritAuraIDs = { 700600, 700601, 700602, 700603 };
+        private static readonly uint[] ManaAuraIDs = { 700300 };
+        private static readonly uint[] CritResAuraIDs = { 700200, 700201, 700202, 700203 };
+        private static readonly uint[] SwiftAuraIDs = { 700700, 700701 };
 
         public static void CheckHurricane(S_ABNORMALITY_BEGIN msg)
         {

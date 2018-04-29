@@ -58,9 +58,8 @@ namespace TCC.ViewModels
 
     public class SortCommand : ICommand
     {
-
-        ICollectionViewLiveShaping _view;
-        ListSortDirection _direction = ListSortDirection.Ascending;
+        private ICollectionViewLiveShaping _view;
+        private ListSortDirection _direction = ListSortDirection.Ascending;
         public event EventHandler CanExecuteChanged;
 
         public bool CanExecute(object parameter)

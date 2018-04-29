@@ -5,10 +5,9 @@ namespace TCC.Parsing.Messages
 {
     public class S_SPAWN_NPC : ParsedMessage
     {
-
-        ulong id;
-        uint templateId;
-        ushort huntingZoneId;
+        private ulong id;
+        private uint templateId;
+        private ushort huntingZoneId;
 
         public ulong EntityId { get => id;}
         public uint TemplateId { get => templateId;  }

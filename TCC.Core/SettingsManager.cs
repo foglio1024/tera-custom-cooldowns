@@ -15,7 +15,7 @@ namespace TCC
 {
     public static class SettingsManager
     {
-        static Rectangle _screen = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
+        private static Rectangle _screen = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
         public static XDocument SettingsDoc;
 
         public static WindowSettings GroupWindowSettings;

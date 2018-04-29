@@ -5,7 +5,7 @@ using System.Windows.Data;
 
 namespace TCC.Converters
 {
-    class DirectionToHorAlignConveter : IValueConverter
+    internal class DirectionToHorAlignConveter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

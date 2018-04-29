@@ -5,20 +5,20 @@ namespace TCC.Parsing.Messages
 {
     public class S_PLAYER_STAT_UPDATE : ParsedMessage
     {
-        int currHp, currMp, unk1, maxHp, maxMp, basePower, baseEndu, baseImpactFactor, baseBalanceFactor;
-        short baseMovSpeed, unk2, baseAtkSpeed;
-        float baseCritRate, baseCritResist, baseCritPower;
-        int baseAttack, baseAttack2, baseDefense, baseImpact, baseBalance;
-        float baseResistWeak, baseResistPeriodic, baseResistStun;
-        int bonusPower, bonusEndu, bonusImpactFac, bonusBalanceFac;
-        short bonusMovSpeed, unk3, bonusAtkSpeed;
-        float bonusCritRate, bonusCritResist, bonusCritPower;
-        int bonusAttack, bonusAttack2, bonusDefense, bonusImpact, bonusBalance;
-        float bonusResistWeak, bonusResistPeriodic, bonusResistStun;
-        int level;
-        byte status;
-        short vitality;
-        int bonusHp, bonusMp, currStamina, maxStamina, currRe, maxRe, bonusRe, unk6, ilvlInven, ilvl, edge, unk8, unk9, unk10, unk11;
+        private int currHp, currMp, unk1, maxHp, maxMp, basePower, baseEndu, baseImpactFactor, baseBalanceFactor;
+        private short baseMovSpeed, unk2, baseAtkSpeed;
+        private float baseCritRate, baseCritResist, baseCritPower;
+        private int baseAttack, baseAttack2, baseDefense, baseImpact, baseBalance;
+        private float baseResistWeak, baseResistPeriodic, baseResistStun;
+        private int bonusPower, bonusEndu, bonusImpactFac, bonusBalanceFac;
+        private short bonusMovSpeed, unk3, bonusAtkSpeed;
+        private float bonusCritRate, bonusCritResist, bonusCritPower;
+        private int bonusAttack, bonusAttack2, bonusDefense, bonusImpact, bonusBalance;
+        private float bonusResistWeak, bonusResistPeriodic, bonusResistStun;
+        private int level;
+        private byte status;
+        private short vitality;
+        private int bonusHp, bonusMp, currStamina, maxStamina, currRe, maxRe, bonusRe, unk6, ilvlInven, ilvl, edge, unk8, unk9, unk10, unk11;
 
         public int CurrentHP { get => currHp; }
         public int CurrentMP { get => currMp; }

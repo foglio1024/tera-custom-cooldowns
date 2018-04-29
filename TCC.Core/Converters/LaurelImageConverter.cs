@@ -36,7 +36,7 @@ namespace TCC.Converters
         }
 
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
-        static extern bool DeleteObject(IntPtr hObject);
+        private static extern bool DeleteObject(IntPtr hObject);
 
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

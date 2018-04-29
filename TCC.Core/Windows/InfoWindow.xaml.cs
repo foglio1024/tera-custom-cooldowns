@@ -17,12 +17,12 @@ namespace TCC.Windows
     /// </summary>
     public partial class InfoWindow : Window
     {
-        System.Timers.Timer t;
-        int itemIndex = 0;
-        int icIndex = 0;
-        List<ItemsControl> ICs;
-        ColorAnimation mainBorderfadeIn, mainBorderFadeOut;
-        Color borderFull, borderTransp;
+        private System.Timers.Timer t;
+        private int itemIndex = 0;
+        private int icIndex = 0;
+        private List<ItemsControl> ICs;
+        private ColorAnimation mainBorderfadeIn, mainBorderFadeOut;
+        private Color borderFull, borderTransp;
         public InfoWindow()
         {
             InitializeComponent();
@@ -122,8 +122,9 @@ namespace TCC.Windows
             //Task.Delay(50).ContinueWith(task => t.Start());
         }
 
-        DoubleAnimation _expW, _expH, _expO;
-        ThicknessAnimation _expM;
+        private DoubleAnimation _expW, _expH, _expO;
+
+        private ThicknessAnimation _expM;
         //internal void ExpandCharacter(Point relativePoint, double actualWidth, double actualHeight)
         //{
         //    relPoint = relativePoint;
@@ -182,8 +183,9 @@ namespace TCC.Windows
         //{
         //    ExpandCharacter(Mouse.GetPosition(this), 50, 50);
         //}
-        Point relPoint = new Point();
-        double w, h = 0;
+        private Point relPoint = new Point();
+
+        private double w, h = 0;
         //private void b_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         //{
         //    b.BeginAnimation(WidthProperty, new DoubleAnimation(w, TimeSpan.FromMilliseconds(150))

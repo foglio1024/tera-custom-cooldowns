@@ -5,7 +5,7 @@ namespace TCC.Data
 {
     public class BrokerChatMessage : ChatMessage
     {
-        MessagePiece startingPrice;
+        private MessagePiece startingPrice;
         public MessagePiece StartingPrice
         {
             get => startingPrice;
@@ -16,7 +16,7 @@ namespace TCC.Data
             }
         }
 
-        MessagePiece offeredPrice;
+        private MessagePiece offeredPrice;
         public MessagePiece OfferedPrice
         {
             get => offeredPrice;
@@ -27,7 +27,7 @@ namespace TCC.Data
             }
         }
 
-        MessagePiece listing;
+        private MessagePiece listing;
         public MessagePiece Listing
         {
             get => listing;
@@ -38,7 +38,7 @@ namespace TCC.Data
             }
         }
 
-        MessagePiece amount;
+        private MessagePiece amount;
         public MessagePiece Amount
         {
             get => amount;

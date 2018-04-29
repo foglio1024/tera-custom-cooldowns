@@ -4,7 +4,7 @@ using Tera.Game.Messages;
 
 namespace TCC.Parsing.Messages
 {
-    class S_DUNGEON_CLEAR_COUNT_LIST : ParsedMessage
+    internal class S_DUNGEON_CLEAR_COUNT_LIST : ParsedMessage
     {
         public Dictionary<uint, int> DungeonClears { get; set; }
         public S_DUNGEON_CLEAR_COUNT_LIST(TeraMessageReader reader) : base(reader)

@@ -7,9 +7,9 @@ namespace TCC.Parsing.Messages
 {
     public class S_PARTY_MEMBER_LIST : ParsedMessage
     {
-        bool im, raid;
-        uint leaderServerId;
-        uint leaderPlayerId;
+        private bool im, raid;
+        private uint leaderServerId;
+        private uint leaderPlayerId;
 
         public bool Im { get { return im; } }
         public bool Raid { get { return raid; } }

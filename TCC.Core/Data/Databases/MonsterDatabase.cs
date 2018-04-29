@@ -7,9 +7,9 @@ namespace TCC.Data.Databases
 {
     public class MonsterDatabase
     {
-        XDocument MonstersDoc;
-        XDocument OverrideDoc;
-        Dictionary<uint, Zone> Zones;
+        private XDocument MonstersDoc;
+        private XDocument OverrideDoc;
+        private Dictionary<uint, Zone> Zones;
 
         public MonsterDatabase(string lang)
         {
@@ -20,12 +20,13 @@ namespace TCC.Data.Databases
             MonstersDoc = null;
         }
 
-        void LoadDoc(string region)
+        private void LoadDoc(string region)
         {
             MonstersDoc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"/resources/data/monsters/monsters-" + region + ".xml");
             OverrideDoc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"/resources/data/monsters/monsters-override.xml");
         }
-        void ParseDoc()
+
+        private void ParseDoc()
         {
             foreach (var zone in MonstersDoc.Descendants().Where(x => x.Name == "Zone"))
             {
@@ -120,7 +121,7 @@ namespace TCC.Data.Databases
         }
     }
 
-    class Zone
+    internal class Zone
     {
         public uint Id { get; private set; } //templateId / type
         public string Name { get; private set; }
