@@ -49,6 +49,8 @@ namespace TCC
         public static SettingsWindow Settings;
         public static InfoWindow InfoWindow;
         public static FloatingButtonWindow FloatingButton;
+        public static FlightDurationWindow FlightDurationWindow;
+
         public static ContextMenu ContextMenu;
 
         public static NotifyIcon TrayIcon;
@@ -224,6 +226,7 @@ namespace TCC
             CharacterWindow = new CharacterWindow();
             ClassWindow = new ClassWindow();
             InfoWindow = new InfoWindow();
+            FlightDurationWindow = new FlightDurationWindow();
             GroupWindow.Show();     
             //ChatWindow.Show();      
             CooldownWindow.Show();  

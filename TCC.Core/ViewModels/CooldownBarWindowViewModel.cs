@@ -111,7 +111,7 @@ namespace TCC.ViewModels
 
         private void FindAndUpdate(SynchronizedObservableCollection<SkillCooldown> list, SkillCooldown sk)
         {
-            var existing = list.ToSyncArray().FirstOrDefault(x => x.Skill.Name == sk.Skill.Name);
+            var existing = list.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
             if (existing == null)
             {
                 list.Add(sk);

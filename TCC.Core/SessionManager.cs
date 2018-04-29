@@ -108,6 +108,7 @@ namespace TCC
         {
             CurrentPlayer.FlightEnergy = en;
             CharacterWindowViewModel.Instance.Player.FlightEnergy = en;
+            WindowManager.FlightDurationWindow.SetEnergy(en);
         }
         public static void SetPlayerLaurel(Player p)
         {

@@ -149,6 +149,8 @@ namespace TCC.Parsing
             {typeof(S_ABNORMALITY_DAMAGE_ABSORB), new Action<S_ABNORMALITY_DAMAGE_ABSORB>(x => PacketProcessor.HandleShieldDamageAbsorb(x)) },
             {typeof(S_IMAGE_DATA), new Action<S_IMAGE_DATA>(x => PacketProcessor.HandleImageData(x)) },
             {typeof(S_GET_USER_GUILD_LOGO), new Action<S_GET_USER_GUILD_LOGO>(x => PacketProcessor.HandleUserGuildLogo(x)) },
+            {typeof(S_PLAYER_CHANGE_FLIGHT_ENERGY), new Action<S_PLAYER_CHANGE_FLIGHT_ENERGY>(x => PacketProcessor.HandlePlayerChangeFlightEnergy(x)) },
+
             //{typeof(S_EACH_SKILL_RESULT), new Action<S_EACH_SKILL_RESULT>(x => PacketProcessor.HandleSkillResult(x)) },
 
             //{typeof(C_LOAD_TOPO_FIN), new Action<C_LOAD_TOPO_FIN>(x => PacketProcessor.HandleLoadTopoFin(x)) },
@@ -233,7 +235,6 @@ namespace TCC.Parsing
         };
         private static readonly Dictionary<Type, Delegate> CharacterWindow = new Dictionary<Type, Delegate>
         {
-            {typeof(S_PLAYER_CHANGE_FLIGHT_ENERGY), new Action<S_PLAYER_CHANGE_FLIGHT_ENERGY>(x => PacketProcessor.HandlePlayerChangeFlightEnergy(x)) },
 
         };
         private static readonly Dictionary<Type, Delegate> BossWindow = new Dictionary<Type, Delegate>

@@ -22,8 +22,11 @@ namespace TCC.Windows
         DoubleAnimation opacityUp;
         DoubleAnimation opacityDown;
         bool _bottom = true;
+        bool _locked;
         int _testCounter = 0;
+        VirtualizingStackPanel _currentPanel;
         public ChatViewModel VM => Dispatcher.Invoke(() => DataContext as ChatViewModel);
+        public bool IsPaused => Dispatcher.Invoke(() => VM.Paused);
         public ChatWindow(ChatWindowSettings ws)
         {
             InitializeComponent();
@@ -65,13 +68,9 @@ namespace TCC.Windows
             }
             //Console.WriteLine("drag completed");
         }
-
         public object CurrentSender { get; internal set; }
-        public bool IsPaused => Dispatcher.Invoke(() => VM.Paused);
-
         private void TccWindow_Loaded(object sender, RoutedEventArgs e)
         {
-
             //_currentContent = itemsControl;
         }
         public void UpdateSettings()
@@ -115,7 +114,6 @@ namespace TCC.Windows
             });
         }
 
-        bool _locked;
         internal void LockTooltip(bool locked)
         {
             _locked = locked;
@@ -199,8 +197,6 @@ namespace TCC.Windows
         }
 
 
-        //ItemsControl _currentContent;
-        VirtualizingStackPanel _currentPanel;
         private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             return;
