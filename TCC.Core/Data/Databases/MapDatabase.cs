@@ -36,7 +36,7 @@ namespace TCC.Data.Databases
                     //var gHeight = g.Attribute("height") != null ? Double.Parse(g.Attribute("height").Value, CultureInfo.InvariantCulture) : 0;
 
                     var guard = new Guard(gId, gNameId, gMapId/*, gLeft, gTop, gWidth, gHeight*/);
-                    guard.ContinentId = g.Attribute("continentId") != null? Convert.ToUInt32(g.Attribute("continentId").Value) : 0;
+                    guard.ContinentId = g.Attribute("continentId") != null ? Convert.ToUInt32(g.Attribute("continentId").Value) : 0;
 
                     foreach (var s in g.Descendants().Where(x => x.Name == "Section"))
                     {
@@ -77,12 +77,12 @@ namespace TCC.Data.Databases
             return true;
 
         }
+
         internal static bool GetDungeon(Location loc)
         {
             if (loc.World == 9999) return true;
             return Worlds[loc.World].Guards[loc.Guard].Sections[loc.Section].IsDungeon;
         }
-
         internal static Point GetMarkerPosition(Location loc)
         {
             var section = Worlds[loc.World].Guards[loc.Guard].Sections[loc.Section];
@@ -112,6 +112,31 @@ namespace TCC.Data.Databases
         public static string GetMapId(uint w, uint g, uint s)
         {
             return Worlds[w].Guards[g].Sections[s].MapId;
+        }
+
+        public static string GetName(uint guardId, uint sectionId)
+        {
+            string ret = "Unknown;";
+            try
+            {
+                Worlds.ToList().ForEach(w =>
+                {
+                    if (w.Value.Guards.ContainsKey(guardId))
+                    {
+                        var g = w.Value.Guards[guardId];
+                        if (g.Sections.ContainsKey(sectionId))
+                        {
+                            var name = g.Sections[sectionId].NameId;
+                            ret = Names[name];
+                            return;
+                        }
+                    }
+                });
+            }
+            catch (Exception)
+            {
+            }
+            return ret;
         }
     }
 
