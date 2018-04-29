@@ -29,6 +29,14 @@ namespace TCC.Windows
             InitializeComponent();
             InitWindow(new WindowSettings(this.Left, this.Top, this.Height, this.Width, true, ClickThruMode.Always, 1, false, 1, false, true, true));
             this.Hide();
+            WindowManager.TccVisibilityChanged += (s, ev) =>
+            {
+                if (WindowManager.IsTccVisible)
+                {
+                    this.RefreshTopmost();
+                }
+            };
+
             _b = null;
             _c = this.Content as UIElement;
             _winHide = new DoubleAnimation(0, TimeSpan.FromMilliseconds(250));
