@@ -31,7 +31,7 @@ namespace TCC.Parsing.Messages
                 u.UserClass = (Class)reader.ReadUInt16();
                 reader.Skip(2 + 2);
                 u.Level = Convert.ToUInt32(reader.ReadUInt16());
-                u.Online = reader.ReadBoolean();
+                reader.ReadBoolean();
                 reader.Skip(1);
                 u.Order = Convert.ToInt32(reader.ReadInt16());
                 var gId = reader.ReadUInt32();
@@ -40,7 +40,7 @@ namespace TCC.Parsing.Messages
                 u.IsLeader = reader.ReadBoolean();
                 //u.Laurel = (Laurel)reader.ReadUInt32();
                 Console.WriteLine("---");
-                Console.WriteLine(reader.ReadByte());
+                u.Online = reader.ReadBoolean();
                 Console.WriteLine(reader.ReadByte());
                 Console.WriteLine(reader.ReadByte());
                 reader.BaseStream.Position = nameOffset - 4;

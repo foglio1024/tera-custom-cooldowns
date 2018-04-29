@@ -6,15 +6,15 @@ namespace TCC.Data
 {
     public class LFG : TSPropertyChanged
     {
-        int _id;
+        uint _id;
         string _name;
         string _message;
         bool _raid;
         string _dungeonName;
-        ushort _membersCount;
+        int _membersCount;
         Timer _removeTimer;
 
-        public int Id
+        public uint Id
         {
             get => _id; set
             {
@@ -62,7 +62,7 @@ namespace TCC.Data
             }
         }
 
-        public ushort MembersCount
+        public int MembersCount
         {
             get => _membersCount; set
             {
@@ -76,7 +76,7 @@ namespace TCC.Data
         {
             get { return MembersCount == 0 ? "" : MembersCount.ToString(); }
         }
-        public LFG(int id, string name, string msg, bool raid)
+        public LFG(uint id, string name, string msg, bool raid)
         {
             _dispatcher = ChatWindowManager.Instance.GetDispatcher();
 

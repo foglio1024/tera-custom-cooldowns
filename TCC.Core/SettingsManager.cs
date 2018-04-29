@@ -66,6 +66,7 @@ namespace TCC
         public static bool ChatEnabled { get; set; } = true;
         public static bool StatSent { get; set; } = false;
         public static bool ShowFlightEnergy { get; set; } = true;
+        public static bool LfgEnabled { get; set; } = true;
 
         public static void LoadWindowSettings()
         {
@@ -337,6 +338,11 @@ namespace TCC
                     ShowFlightEnergy = Boolean.Parse(b.Attribute(nameof(ShowFlightEnergy)).Value);
                 }
                 catch (Exception) { }
+                try
+                {
+                    LfgEnabled = Boolean.Parse(b.Attribute(nameof(LfgEnabled)).Value);
+                }
+                catch (Exception) { }
                 //add settings here
 
                 try
@@ -446,7 +452,8 @@ namespace TCC
                 new XAttribute(nameof(AnimateChatMessages), AnimateChatMessages),
                 new XAttribute(nameof(ShowItemsCooldown), ShowItemsCooldown),
                 new XAttribute(nameof(StatSent), StatSent),
-                new XAttribute(nameof(ShowFlightEnergy), ShowFlightEnergy)
+                new XAttribute(nameof(ShowFlightEnergy), ShowFlightEnergy),
+                new XAttribute(nameof(LfgEnabled), LfgEnabled)
                 //add setting here
                 ),
                 BuildChannelsXElement(),

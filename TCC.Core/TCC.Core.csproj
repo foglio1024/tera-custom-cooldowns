@@ -312,9 +312,11 @@
     <Compile Include="Controls\Phase4BossControl.xaml.cs">
       <DependentUpon>Phase4BossControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\LfgVmToButtonLabelConverter.cs" />
     <Compile Include="Converters\LogoInfoToImageConverter.cs" />
     <Compile Include="Converters\NullToVisibleCollapsedConverter.cs" />
     <Compile Include="Converters\PieceToPathConverter.cs" />
+    <Compile Include="Converters\RaidToColorConverter.cs" />
     <Compile Include="Converters\ReadyToColorConverter.cs" />
     <Compile Include="Converters\ReadyToIconConverter.cs" />
     <Compile Include="Converters\ReadyToOpacityConverter.cs" />
@@ -358,6 +360,7 @@
     <Compile Include="Data\Guard.cs" />
     <Compile Include="Data\InventoryManager.cs" />
     <Compile Include="Data\LFG.cs" />
+    <Compile Include="Data\Listing.cs" />
     <Compile Include="Data\Location.cs" />
     <Compile Include="Data\Section.cs" />
     <Compile Include="Data\StanceTracker.cs" />
@@ -367,6 +370,7 @@
     <Compile Include="Parsing\Messages\S_ABNORMALITY_DAMAGE_ABSORB.cs" />
     <Compile Include="Parsing\Messages\S_ACCOMPLISH_ACHIEVEMENT.cs" />
     <Compile Include="Parsing\Messages\S_ACCOUNT_PACKAGE_LIST.cs" />
+    <Compile Include="Parsing\Messages\S_ACTION_STAGE.cs" />
     <Compile Include="Parsing\Messages\S_ANSWER_INTERACTIVE.cs" />
     <Compile Include="Parsing\Messages\S_AVAILABLE_EVENT_MATCHING_LIST.cs" />
     <Compile Include="Parsing\Messages\S_BAN_PARTY.cs" />
@@ -384,6 +388,7 @@
     <Compile Include="Parsing\Messages\S_PARTY_MATCH_LINK.cs" />
     <Compile Include="Parsing\Messages\S_PARTY_MEMBER_INTERVAL_POS_UPDATE.cs" />
     <Compile Include="Parsing\Messages\S_RESPONSE_GAMESTAT_PONG.cs" />
+    <Compile Include="Parsing\Messages\S_SHOW_PARTY_MATCH_INFO.cs" />
     <Compile Include="Parsing\Messages\S_TRADE_BROKER_DEAL_SUGGESTED.cs" />
     <Compile Include="Parsing\Messages\S_UPDATE_FRIEND_INFO.cs" />
     <Compile Include="Parsing\Messages\S_USER_BLOCK_LIST.cs" />
@@ -732,6 +737,7 @@
     <Compile Include="Data\EventGroup.cs" />
     <Compile Include="ViewModels\DailyEvent.cs" />
     <Compile Include="ViewModels\InfoWindowViewModel.cs" />
+    <Compile Include="ViewModels\LfgListViewModel.cs" />
     <Compile Include="ViewModels\Tab.cs" />
     <Compile Include="ViewModels\TccWindowViewModel.cs" />
     <Compile Include="ViewModels\TimeMarker.cs" />
@@ -827,6 +833,9 @@
     <Compile Include="Converters\SentReceivedToAngleConverter.cs" />
     <Compile Include="Windows\InfoWindow.xaml.cs">
       <DependentUpon>InfoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\LfgListWindow.xaml.cs">
+      <DependentUpon>LfgListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\NewDungeonInfoControl.xaml.cs">
       <DependentUpon>NewDungeonInfoControl.xaml</DependentUpon>
@@ -1214,6 +1223,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\InfoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\LfgListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

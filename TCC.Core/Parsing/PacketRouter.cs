@@ -2,6 +2,7 @@
 using Data;
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace TCC.Parsing
 
     public static class PacketProcessor
     {
-        public static uint Version ;
+        public static uint Version;
         public static Server Server;
         public static string Language => new TeraData(Server.Region).GetLanguage(Server.Region);
         public static OpCodeNamer OpCodeNamer;
@@ -49,7 +50,7 @@ namespace TCC.Parsing
         private static void InitDb()
         {
 
-            if(!SettingsManager.StatSent) App.SendUsageStat();
+            if (!SettingsManager.StatSent) App.SendUsageStat();
 
             TimeManager.Instance.SetServerTimeZone(Language);
             SettingsManager.LastRegion = Language;
@@ -89,7 +90,7 @@ namespace TCC.Parsing
                 }
                 OpCodeNamer = new OpCodeNamer(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/{message.Versions[0]}.txt"));
                 SystemMessageNamer = new OpCodeNamer(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/smt_{message.Versions[0]}.txt"));
-                Factory = new TCC.Parsing.MessageFactory(OpCodeNamer,Server.Region, message.Versions[0], sysMsgNamer: SystemMessageNamer);
+                Factory = new TCC.Parsing.MessageFactory(OpCodeNamer, Server.Region, message.Versions[0], sysMsgNamer: SystemMessageNamer);
                 TeraSniffer.Instance.Connected = true;
                 Proxy.ConnectToProxy();
 
@@ -241,6 +242,7 @@ namespace TCC.Parsing
         public static void HandleLogin(S_LOGIN p)
         {
             InitDb();
+            st = new Stopwatch();
             CooldownWindowViewModel.Instance.ClearSkills();
             CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(p.CharacterClass).ToLower() + "-skills.xml", p.CharacterClass);
             if (SettingsManager.ClassWindowSettings.Enabled) WindowManager.ClassWindow.Context.CurrentClass = p.CharacterClass;
@@ -269,6 +271,55 @@ namespace TCC.Parsing
             SessionManager.SetPlayerLaurel(CharacterWindowViewModel.Instance.Player);
             InfoWindowViewModel.Instance.SetLoggedIn(p.PlayerId);
         }
+
+        internal static void HandleLfgList(S_SHOW_PARTY_MATCH_INFO x)
+        {
+            if (!SettingsManager.LfgEnabled) return;
+                if (!x.IsLast) return;
+            //WindowManager.LfgListWindow.VM.Listings.Clear();
+            S_SHOW_PARTY_MATCH_INFO.Listings.ForEach(l =>
+            {
+                if (WindowManager.LfgListWindow.VM.Listings.Any(toFind => toFind.LeaderId == l.LeaderId))
+                {
+                    var target = WindowManager.LfgListWindow.VM.Listings.FirstOrDefault(t => t.LeaderId == l.LeaderId);
+                    target.LeaderId = l.LeaderId;
+                    target.Message = l.Message;
+                    target.IsRaid = l.IsRaid;
+                    target.LeaderName = l.LeaderName;
+                    if(target.PlayerCount != l.PlayerCount)
+                    {
+                        Proxy.RequestPartyInfo(l.LeaderId);
+                    }
+                }
+                else WindowManager.LfgListWindow.VM.Listings.Add(l);
+            });
+            var toRemove = new List<uint>();
+            WindowManager.LfgListWindow.VM.Listings.ToList().ForEach(l =>
+            {
+                if (!S_SHOW_PARTY_MATCH_INFO.Listings.Any(f => f.LeaderId == l.LeaderId)) toRemove.Add(l.LeaderId);
+            });
+            toRemove.ForEach(r =>
+            {
+                var target = WindowManager.LfgListWindow.VM.Listings.FirstOrDefault(rm => rm.LeaderId == r);
+                if (target != null) WindowManager.LfgListWindow.VM.Listings.Remove(target);
+            });
+            WindowManager.LfgListWindow.VM.NotifyMyLfg();
+            WindowManager.LfgListWindow.ShowWindow();
+        }
+
+        static Stopwatch st;
+        internal static void HandleActionStage(S_ACTION_STAGE x)
+        {
+            st.Stop();
+            Console.WriteLine("- S_ACTION_STAGE -");
+            Console.WriteLine($"GameId: {x.GameId}");
+            Console.WriteLine($"Target: {x.Target}");
+            Console.WriteLine($"Id:     {x.Id}");
+            Console.WriteLine($"Speed:  {x.Speed * 1.1}");
+            Console.WriteLine($"Elaps:  {st.ElapsedMilliseconds}");
+            st.Restart();
+        }
+
         public static void SendTestMessage()
         {
             //var str = "@3947questNameDefeat HumedraszoneName@zoneName:181npcName@creature:181#2050";
@@ -821,7 +872,7 @@ namespace TCC.Parsing
             GroupWindowViewModel.Instance.SetRaid(p.Raid);
             foreach (var user in p.Members)
             {
-                    GroupWindowViewModel.Instance.AddOrUpdateMember(user);
+                GroupWindowViewModel.Instance.AddOrUpdateMember(user);
             }
         }
         public static void HandlePartyMemberLeave(S_LEAVE_PARTY_MEMBER p)
@@ -872,9 +923,36 @@ namespace TCC.Parsing
         }
 
         //for lfg, not used
-        public static void HandlePartyMemberInfo(S_PARTY_MEMBER_INFO p)
+        public static void HandlePartyMemberInfo(S_PARTY_MEMBER_INFO packet)
         {
-            ChatWindowManager.Instance.UpdateLfgMembers(p);
+            ChatWindowManager.Instance.UpdateLfgMembers(packet);
+            if (!SettingsManager.LfgEnabled) return;
+
+            var lfg = WindowManager.LfgListWindow.VM.Listings.FirstOrDefault(listing => listing.LeaderId == packet.Id || packet.Members.Any(member => member.PlayerId == listing.LeaderId));
+            if (lfg == null) return;
+            //lfg.Players.Clear();
+            packet.Members.ForEach(member =>
+            {
+                if (lfg.Players.Any(toFind => toFind.PlayerId == member.PlayerId))
+                {
+                    var target = lfg.Players.FirstOrDefault(player => player.PlayerId == member.PlayerId);
+                    target.IsLeader = member.IsLeader;
+                    target.Online = member.Online;
+                }
+                else lfg.Players.Add(member);
+            });
+            var toDelete = new List<uint>();
+            lfg.Players.ToList().ForEach(player =>
+            {
+                if (!packet.Members.Any(newMember => newMember.PlayerId == player.PlayerId)) toDelete.Add(player.PlayerId);
+                toDelete.ForEach(targetId => lfg.Players.Remove(lfg.Players.FirstOrDefault(playerToRemove => playerToRemove.PlayerId == targetId)));
+            });
+            lfg.LeaderId = packet.Id;
+            var leader = lfg.Players.FirstOrDefault(u => u.IsLeader);
+            if (leader != null) lfg.LeaderName = leader.Name;
+            if(WindowManager.LfgListWindow.VM._lastClicked != null && WindowManager.LfgListWindow.VM._lastClicked.LeaderId == lfg.LeaderId) lfg.IsExpanded = true;
+            lfg.PlayerCount = packet.Members.Count;
+            WindowManager.LfgListWindow.VM.NotifyMyLfg();
         }
 
         //public static void Debug(bool x)

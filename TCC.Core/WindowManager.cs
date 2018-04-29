@@ -50,6 +50,7 @@ namespace TCC
         public static InfoWindow InfoWindow;
         public static FloatingButtonWindow FloatingButton;
         public static FlightDurationWindow FlightDurationWindow;
+        public static LfgListWindow LfgListWindow;
 
         public static ContextMenu ContextMenu;
 
@@ -227,6 +228,7 @@ namespace TCC
             ClassWindow = new ClassWindow();
             InfoWindow = new InfoWindow();
             FlightDurationWindow = new FlightDurationWindow();
+            if (SettingsManager.LfgEnabled) LfgListWindow = new LfgListWindow();
             GroupWindow.Show();     
             //ChatWindow.Show();      
             CooldownWindow.Show();  
