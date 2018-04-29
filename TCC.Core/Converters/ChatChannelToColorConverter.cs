@@ -97,21 +97,21 @@ namespace TCC.Converters
                 case ChatChannel.RaidLeader:
                     return (SolidColorBrush)App.Current.FindResource("Colors.Chat.RaidNotice");
                 case ChatChannel.TCC:
-                    return (SolidColorBrush)App.Current.FindResource("Colors.App.Main");
+                    return (SolidColorBrush)App.Current.FindResource("MainColor");
                 case ChatChannel.Bargain:
                     return (SolidColorBrush)App.Current.FindResource("Colors.Chat.System.Bargain");
                 case ChatChannel.Apply:
                     return (SolidColorBrush)App.Current.FindResource("Colors.Chat.Megaphone");
                 case ChatChannel.Death:
-                    return (SolidColorBrush)App.Current.FindResource("Colors.App.HP");
+                    return (SolidColorBrush)App.Current.FindResource("HpColor");
                 case ChatChannel.Ress:
-                    return (SolidColorBrush)App.Current.FindResource("Colors.App.LightGreen");
+                    return (SolidColorBrush)App.Current.FindResource("LightGreenColor");
                 case ChatChannel.Quest:
                     return (SolidColorBrush)App.Current.FindResource("Colors.Chat.System.Quest");
                 case ChatChannel.Friend:
                     return (SolidColorBrush)App.Current.FindResource("Colors.Chat.System.Friend");
                 case ChatChannel.Twitch:
-                    return (SolidColorBrush)App.Current.FindResource("Colors.App.Twitch");
+                    return (SolidColorBrush)App.Current.FindResource("TwitchColor");
                 case ChatChannel.WorldBoss:
                     return (SolidColorBrush)App.Current.FindResource("Colors.Chat.System.WorldBoss");
                 case ChatChannel.Laurel:

@@ -20,21 +20,21 @@
         <Grid >
             <StackPanel Width="35">
                 <Button VerticalContentAlignment="Center" Style="{StaticResource ButtonMainStyle}" Click="Button_Click_2" ToolTip="LFG" Height="{Binding ElementName=infoBtn, Path=ActualHeight}">
-                    <Path Data="{StaticResource SVG.Users}" Fill="White" 
+                    <Path Data="{StaticResource SvgUsers}" Fill="White" 
                           Stretch="Uniform" Margin="5" 
                           IsHitTestVisible="False" ></Path>
                 </Button>
                 <Button Style="{StaticResource ButtonMainStyle}" Click="Button_Click" x:Name="infoBtn">
-                    <Path Data="{StaticResource SVG.Info}" Fill="White" x:Name="infoPath" Stretch="UniformToFill" Margin="5" IsHitTestVisible="False"></Path>
+                    <Path Data="{StaticResource SvgInfo}" Fill="White" x:Name="infoPath" Stretch="UniformToFill" Margin="5" IsHitTestVisible="False"></Path>
                 </Button>
                 <Button Style="{StaticResource ButtonMainStyle}" Click="Button_Click_1">
-                    <Path Data="{StaticResource SVG.Settings}" Fill="White" Stretch="UniformToFill" Margin="5" IsHitTestVisible="False"></Path>
+                    <Path Data="{StaticResource SvgSettings}" Fill="White" Stretch="UniformToFill" Margin="5" IsHitTestVisible="False"></Path>
                 </Button>
             </StackPanel>
             <Border x:Name="NotificationBubble"
                     Width="20"
                     Height="20"
-                    Background="{StaticResource Colors.App.HP}"
+                    Background="{StaticResource HpColor}"
                     CornerRadius="10"
                     VerticalAlignment="Top" HorizontalAlignment="Right"
                     Margin="0,-8,-12,0"

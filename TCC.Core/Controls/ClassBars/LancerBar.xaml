@@ -46,29 +46,29 @@
                                     Width="46" Height="46" Stroke="#2fff" StrokeThickness="5">
                         </local:Arc>
                         <local:Arc  EndAngle="{Binding LH.Factor, Converter={StaticResource Converters.FactorToAngle}}" 
-                                    Width="46" Height="46" Stroke="{StaticResource Colors.ClassWindow.AssaultStance}" StrokeThickness="5">
+                                    Width="46" Height="46" Stroke="{StaticResource AssaultStanceColor}" StrokeThickness="5">
                         </local:Arc>
-                        <Rectangle Height="48" Width="2" Fill="{StaticResource Colors.App.DefaultBackground}">
+                        <Rectangle Height="48" Width="2" Fill="{StaticResource DefaultBackgroundColor}">
                             <Rectangle.LayoutTransform>
                                 <RotateTransform Angle="0"></RotateTransform>
                             </Rectangle.LayoutTransform>
                         </Rectangle>
-                        <Rectangle Height="48" Width="2" Fill="{StaticResource Colors.App.DefaultBackground}">
+                        <Rectangle Height="48" Width="2" Fill="{StaticResource DefaultBackgroundColor}">
                             <Rectangle.LayoutTransform>
                                 <RotateTransform Angle="36"></RotateTransform>
                             </Rectangle.LayoutTransform>
                         </Rectangle>
-                        <Rectangle Height="48" Width="2" Fill="{StaticResource Colors.App.DefaultBackground}">
+                        <Rectangle Height="48" Width="2" Fill="{StaticResource DefaultBackgroundColor}">
                             <Rectangle.LayoutTransform>
                                 <RotateTransform Angle="72"></RotateTransform>
                             </Rectangle.LayoutTransform>
                         </Rectangle>
-                        <Rectangle Height="48" Width="2" Fill="{StaticResource Colors.App.DefaultBackground}">
+                        <Rectangle Height="48" Width="2" Fill="{StaticResource DefaultBackgroundColor}">
                             <Rectangle.LayoutTransform>
                                 <RotateTransform Angle="108"></RotateTransform>
                             </Rectangle.LayoutTransform>
                         </Rectangle>
-                        <Rectangle Height="48" Width="2" Fill="{StaticResource Colors.App.DefaultBackground}">
+                        <Rectangle Height="48" Width="2" Fill="{StaticResource DefaultBackgroundColor}">
                             <Rectangle.LayoutTransform>
                                 <RotateTransform Angle="144"></RotateTransform>
                             </Rectangle.LayoutTransform>

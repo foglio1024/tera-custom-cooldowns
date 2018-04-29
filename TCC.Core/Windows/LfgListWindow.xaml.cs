@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using TCC.Data;
 using TCC.ViewModels;
 
@@ -39,8 +31,8 @@ namespace TCC.Windows
                 var colAn = new ColorAnimation() { Duration = TimeSpan.FromMilliseconds(200) };
                 if (VM.Creating)
                 {
-                    if (string.IsNullOrEmpty(VM.NewMessage)) colAn.To = (App.Current.FindResource("Colors.App.HP") as SolidColorBrush).Color;
-                    else colAn.To = (App.Current.FindResource("Colors.App.Green") as SolidColorBrush).Color;
+                    if (string.IsNullOrEmpty(VM.NewMessage)) colAn.To = (App.Current.FindResource("HpColor") as SolidColorBrush).Color;
+                    else colAn.To = (App.Current.FindResource("GreenColor") as SolidColorBrush).Color;
                 }
                 else
                 {

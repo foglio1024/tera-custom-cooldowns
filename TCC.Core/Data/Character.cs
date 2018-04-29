@@ -128,8 +128,8 @@ namespace TCC
                 NPC(nameof(IsSelected));
             }
         }
-        public double VanguardWeeklyCompletion => (double)WeekliesDone / (double)SessionManager.MAX_WEEKLY;
-        public double VanguardDailyCompletion => (double)DailiesDone / (double)SessionManager.MAX_DAILY;
+        public double VanguardWeeklyCompletion => (double)WeekliesDone / (double)SessionManager.MaxWeekly;
+        public double VanguardDailyCompletion => (double)DailiesDone / (double)SessionManager.MaxDaily;
         public double GuardianCompletion => (double)GuardianPoints / (double)MaxGuardianPoints;
 
         public SynchronizedObservableCollection<DungeonCooldown> Dungeons { get; set; }
@@ -188,7 +188,7 @@ namespace TCC
             WeekliesDone = 0;
             Id = id;
             Position = pos;
-            MaxGuardianPoints = SessionManager.MAX_GUARDIAN_POINTS;
+            MaxGuardianPoints = SessionManager.MaxGuardianPoints;
             foreach (var dg in DungeonDatabase.Instance.Dungeons)
             {
                 Dungeons.Add(new DungeonCooldown(dg.Key, _dispatcher));

@@ -171,7 +171,7 @@
                     </Grid>
                     <!--<Button Style="{StaticResource ButtonMainStyle}"  Grid.Row="1" Click="UIElement_OnMouseLeftButtonDown"
                           HorizontalAlignment="Right" Height="16" Margin="0,0,-5,0" Grid.Column="3">
-                        <Path Data="{StaticResource SVG.Info}" Stretch="Uniform" Fill="#2fff"></Path>
+                        <Path Data="{StaticResource Svg_Info}" Stretch="Uniform" Fill="#2fff"></Path>
                     </Button>-->
                 </Grid>
                 <Grid Grid.Row="2" Margin="1,0,1,0" Name="hpBarGrid" Width="406"  VerticalAlignment="Bottom" ClipToBounds="False" Background="#5000">
@@ -224,7 +224,7 @@
                         <!--<Polygon Points="0,7 5,0 10,7"  Margin="0,0,0,0"  Fill="Orange" VerticalAlignment="Center" Height="Auto"  HorizontalAlignment="Center" Grid.Column="1" >
                         </Polygon>-->
                         <Border Background="White" Width="6" Height="6" Name="enrageEll" CornerRadius="0" 
-                                Effect="{StaticResource dropShadow}" Margin="0,1,0,0"/>
+                                Effect="{StaticResource DropShadow}" Margin="0,1,0,0"/>
                         <!--<TextBlock Width="Auto" FontSize="12" Style="{StaticResource Styles.DefaultText}"
                                    TextAlignment="Center" VerticalAlignment="Top" Margin="0,3,0,0" Padding="0"
                                    Text="{Binding EnrageTBtext, RelativeSource={RelativeSource AncestorType=local:BossGage}}"/>-->

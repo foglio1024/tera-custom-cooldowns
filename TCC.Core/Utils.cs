@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using System.Runtime.CompilerServices;
 using TCC.Data;
-using System.Windows.Controls;
 
 namespace TCC
 {

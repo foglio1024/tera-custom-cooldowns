@@ -80,7 +80,7 @@
                                                 <Run Text="lv." Foreground="#5999" FontSize="10"/><Run Text="{Binding Level, Mode=OneWay}" Foreground="#5999" FontSize="10"/>
                                                 <Run Text="{Binding Name, Mode=OneWay}"/>
                     </TextBlock>
-                    <Path Data="{StaticResource SVG.DelegateLeader}" Fill="{StaticResource Colors.App.Gold}" Height="8"
+                    <Path Data="{StaticResource Svg_DelegateLeader}" Fill="{StaticResource GoldColor}" Height="8"
                                                   Visibility="{Binding IsLeader, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Column="1"
                                                   HorizontalAlignment="Right" Margin="5 0 5 1"></Path>
                 </StackPanel>
@@ -179,7 +179,7 @@
                     </ListBox.LayoutTransform>
                 </ListBox>
                 <controls:Arc StrokeThickness="10" 
-                              Stroke="{StaticResource Colors.DungeonTier.5}" 
+                              Stroke="{StaticResource Tier5DungeonColor}" 
                               Grid.Column="4"
                               Width="22" 
                               Height="22" 
@@ -197,7 +197,7 @@
                         Style="{StaticResource ButtonContentOpacityStyle}" 
                         IsEnabled="{Binding CanApply}" 
                         Command="{Binding Apply}">
-                    <Path Data="{StaticResource SVG.AddUser}" Margin="3" Width="15" Stretch="Uniform" ToolTip="Apply" Fill="White"/>
+                    <Path Data="{StaticResource Svg_AddUser}" Margin="3" Width="15" Stretch="Uniform" ToolTip="Apply" Fill="White"/>
                 </Button>
             </Grid>
             <DataTemplate.Triggers>
@@ -263,7 +263,7 @@
             </DataTemplate.Triggers>
         </DataTemplate>
     </Window.Resources>
-    <Border Background="{StaticResource Colors.App.DefaultBackground}" CornerRadius="5" Effect="{StaticResource dropShadow}"
+    <Border Background="{StaticResource DefaultBackgroundColor}" CornerRadius="5" Effect="{StaticResource DropShadow}"
             Margin="6"  Width="600" HorizontalAlignment="Stretch">
         <Grid HorizontalAlignment="Stretch">
             <Grid.RowDefinitions>
@@ -273,12 +273,12 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <!--Title-->
-            <Path Data="{StaticResource SVG.Users}" HorizontalAlignment="Left" Margin="8 9 5 7" VerticalAlignment="Center" Fill="#3fff"></Path>
+            <Path Data="{StaticResource Svg_Users}" HorizontalAlignment="Left" Margin="8 9 5 7" VerticalAlignment="Center" Fill="#3fff"></Path>
             <TextBlock Text="Looking for group" VerticalAlignment="Center" Opacity=".4" FontSize="24" 
                        FontWeight="Thin" IsHitTestVisible="False" Foreground="#ddd" Grid.Row="0" Margin="50 0"/>
             <Rectangle MouseLeftButtonDown="Border_MouseLeftButtonDown" Fill="Transparent"></Rectangle>
             <Button Style="{StaticResource ButtonContentOpacityStyle}" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0" Click="Button_Click">
-                <Path Data="{StaticResource SVG.Close}" Stretch="Uniform" Fill="#fff" Margin="12" ></Path>
+                <Path Data="{StaticResource Svg_Close}" Stretch="Uniform" Fill="#fff" Margin="12" ></Path>
             </Button>
             <!--Header-->
             <Grid Grid.Row="1" VerticalAlignment="Stretch" Margin="0 0 5 0">
@@ -315,13 +315,13 @@
                 </ListBox.ItemsPanel>
             </ListBox>
             <!--Footer-->
-            <Grid Grid.Row="2" VerticalAlignment="Bottom" Background="{StaticResource Colors.App.DefaultBackground}">
+            <Grid Grid.Row="2" VerticalAlignment="Bottom" Background="{StaticResource DefaultBackgroundColor}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Grid ClipToBounds="True" Background="{StaticResource Colors.App.DefaultBackground}" x:Name="NewMessageGrid" Margin="5 0" >
+                <Grid ClipToBounds="True" Background="{StaticResource DefaultBackgroundColor}" x:Name="NewMessageGrid" Margin="5 0" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="Auto"/>
@@ -350,7 +350,7 @@
                         HorizontalContentAlignment="Center"
                         Margin="4"
                         Padding="0 4"
-                        Effect="{StaticResource dropShadow}"
+                        Effect="{StaticResource DropShadow}"
                         x:Name="CreateMessageBtn"
                         Click="CreateMessageBtn_Click"
                         FontSize="15"
@@ -369,12 +369,12 @@
                 </Button>
                 <UniformGrid Grid.Row="2" Rows="1" x:Name="LfgMgmtBtn">
                     <Button Style="{StaticResource ButtonMainStyle}" x:Name="RemoveMessageButton" Click="RemoveMessageButton_Click"
-                            Margin="5" Background="{StaticResource Colors.App.HP}" 
+                            Margin="5" Background="{StaticResource HpColor}" 
                             tcc:ButtonExtensions.CornerRadius="3" FontSize="15" FontWeight="Thin"
                             Content="Remove message" HorizontalContentAlignment="Center" Padding="0 4"/>
                     <Grid Margin="5" >
                         <Button Style="{StaticResource ButtonMainStyle}" 
-                            Background="{StaticResource Colors.App.Green}"  FontSize="15" FontWeight="Thin"
+                            Background="{StaticResource GreenColor}"  FontSize="15" FontWeight="Thin"
                             tcc:ButtonExtensions.CornerRadius="3" Padding="0 4" Click="PublicizeBtn_Click"
                             Content="Publicize" HorizontalContentAlignment="Center" x:Name="PublicizeBtn"/>
                         <Border Background="#6fff" CornerRadius="3" HorizontalAlignment="Left" Margin=" 0" IsHitTestVisible="False">

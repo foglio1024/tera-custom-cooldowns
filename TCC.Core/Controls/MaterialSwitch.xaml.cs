@@ -19,7 +19,7 @@ namespace TCC.Controls
         ColorAnimation backFillOff;
 
         Color onColor = Color.FromRgb(255, 56, 34);
-        Color offColor = ((SolidColorBrush)Application.Current.Resources["Colors.App.DefaultBackground"]).Color;
+        Color offColor = ((SolidColorBrush)Application.Current.Resources["DefaultBackgroundColor"]).Color;
         Color backOffColor = Colors.Black;
 
         private TimeSpan animationDuration = TimeSpan.FromMilliseconds(150);

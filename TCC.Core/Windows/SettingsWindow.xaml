@@ -212,9 +212,9 @@
                                 <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Switch between"/>
-                                    <Run Text="normal" FontWeight="Bold" Foreground="{StaticResource Colors.App.HP}"/>
+                                    <Run Text="normal" FontWeight="Bold" Foreground="{StaticResource HpColor}"/>
                                     <Run Text="layout (skills only visible when in cooldown) and"/>
-                                    <Run Text="fixed" FontWeight="Bold" Foreground="{StaticResource Colors.App.MP}"/>
+                                    <Run Text="fixed" FontWeight="Bold" Foreground="{StaticResource MpColor}"/>
                                     <Run Text="layout (configurable via xml file, check wiki for more info)"/>
                                     <LineBreak/>
                                     <LineBreak/>
@@ -617,7 +617,7 @@
                     <controls:FieldSetting SettingName="Twitch channel name" Value="{Binding TwitchChannelName, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_label_white_24dp_2x.png"></controls:FieldSetting>
                     <Button Style="{StaticResource ButtonMainStyle}" Click="ConnectToTwitch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
                             VerticalContentAlignment="Center" HorizontalContentAlignment="Center" >
-                        <TextBlock Margin="0,5" Foreground="{StaticResource Colors.App.Twitch}" Text="Connect"></TextBlock>
+                        <TextBlock Margin="0,5" Foreground="{StaticResource TwitchColor}" Text="Connect"></TextBlock>
                     </Button>
 
                 </StackPanel>
@@ -722,7 +722,7 @@
                                    Padding="0" 
                                    TextAlignment="Left" 
                                    Opacity=".9"/>
-                        <Path Width="22" Height="22" Margin="16,4,0,4" Stretch="Uniform" Fill="White" HorizontalAlignment="Center" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality" Data="{StaticResource SVG.Paypal}" ></Path>
+                        <Path Width="22" Height="22" Margin="16,4,0,4" Stretch="Uniform" Fill="White" HorizontalAlignment="Center" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality" Data="{StaticResource Svg_Paypal}" ></Path>
                         <Border Grid.ColumnSpan="2">
                             <Border.Style>
                                 <Style>
@@ -759,7 +759,7 @@
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Style="{StaticResource ButtonMainStyle}" VerticalAlignment="Stretch" Margin="0" Click="OpenSettingsFolder" 
                         HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" Width="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}">
-                    <Path Data="{StaticResource SVG.Folder}" Fill="White" Stretch="Uniform" Opacity=".9"></Path>
+                    <Path Data="{StaticResource Svg_Folder}" Fill="White" Stretch="Uniform" Opacity=".9"></Path>
                     <Button.ToolTip>
                         <Grid Margin="5">
                             <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
@@ -770,7 +770,7 @@
                 <Button Grid.Column="1" Style="{StaticResource ButtonMainStyle}" VerticalAlignment="Stretch"
                    HorizontalContentAlignment="Center" Opacity=".9" Width="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}"
                         Click="Image_MouseLeftButtonDown" VerticalContentAlignment="Center">
-                    <Path Data="{StaticResource SVG.Close}" Fill="White" Stretch="Uniform" Margin="5" Opacity=".9" ></Path>
+                    <Path Data="{StaticResource Svg_Close}" Fill="White" Stretch="Uniform" Margin="5" Opacity=".9" ></Path>
                 </Button>
             </StackPanel>
         </Grid>

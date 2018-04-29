@@ -98,16 +98,16 @@
             <!--Exp-->
                 <Grid Margin="5 0" Background="Transparent" ToolTip="Gear experience."
                   HorizontalAlignment="Right" VerticalAlignment="Center" >
-                <Ellipse Fill="{StaticResource Colors.App.MP}" Opacity=".2" Margin="2"></Ellipse>
+                <Ellipse Fill="{StaticResource MpColor}" Opacity=".2" Margin="2"></Ellipse>
                     <Viewbox StretchDirection="DownOnly" Width="22">
                         <TextBlock Text="{Binding ExperienceFactor, StringFormat={}{0:N2}}" 
-                                   Foreground="{StaticResource Colors.App.MP}" 
+                                   Foreground="{StaticResource MpColor}" 
                                    TextAlignment="Center" FontSize="15" VerticalAlignment="Center"></TextBlock>
                     </Viewbox>
                     <local:Arc
                            Width="32" 
                            Height="32" 
-                           Stroke="{StaticResource Colors.App.MP}" 
+                           Stroke="{StaticResource MpColor}" 
                            StrokeThickness="3" 
                            Margin="0" 
                            Opacity=".8"
@@ -130,7 +130,7 @@
             <BitmapCache/>
         </local:Arc.CacheMode>
     </local:Arc>
-    <local:Arc Width="68" Height="68" Stroke="{StaticResource Colors.App.MP}"   StrokeThickness="10" RenderTransformOrigin=".5,.5" Opacity=".7"
+    <local:Arc Width="68" Height="68" Stroke="{StaticResource MpColor}"   StrokeThickness="10" RenderTransformOrigin=".5,.5" Opacity=".7"
                    EndAngle="{Binding ExperienceFactor, Converter={StaticResource Converters.FactorToAngle}, ConverterParameter=4}">
         <local:Arc.RenderTransform>
             <TransformGroup>

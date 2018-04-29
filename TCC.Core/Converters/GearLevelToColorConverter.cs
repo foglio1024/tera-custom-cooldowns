@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
-using TCC.Data;
 
 namespace TCC.Converters
 {
@@ -17,15 +12,15 @@ namespace TCC.Converters
             switch (val)
             {
                 case GearTier.Low:
-                    return App.Current.FindResource("Colors.DungeonTier.2");
+                    return App.Current.FindResource("Tier2DungeonColor");
                 case GearTier.Mid:
-                    return App.Current.FindResource("Colors.DungeonTier.3");
+                    return App.Current.FindResource("Tier3DungeonColor");
                 case GearTier.High:
-                    return App.Current.FindResource("Colors.DungeonTier.4");
+                    return App.Current.FindResource("Tier4DungeonColor");
                 case GearTier.Top:
-                    return App.Current.FindResource("Colors.DungeonTier.5");
+                    return App.Current.FindResource("Tier5DungeonColor");
                 default:
-                    return App.Current.FindResource("Colors.DungeonTier.Solo");
+                    return App.Current.FindResource("TierSoloDungeonColor");
             }
         }
 

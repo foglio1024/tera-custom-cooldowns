@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace TCC.Data.Databases
+﻿namespace TCC.Data.Databases
 {
     public static class ItemSkillsDatabase
     {

@@ -1,54 +1,47 @@
 ﻿using System;
 using System.Linq;
 using TCC.Data;
-using TCC.Data.Databases;
 using TCC.ViewModels;
 
 namespace TCC
 {
-    public delegate void HarrowholdModeEventHandler(bool val);
-
     public static class SessionManager
     {
-        public static readonly int MAX_WEEKLY = 16;
-        public static readonly int MAX_DAILY = 16;
-        public static readonly uint MAX_GUARDIAN_POINTS = 100000;
-        private static bool logged = false || !App.Debug;
+        public const int MaxWeekly = 16;
+        public const int MaxDaily = 16;
+        public const uint MaxGuardianPoints = 100000;
+        private static bool _logged = !App.Debug;
         public static bool Logged
         {
-            get => logged;
+            get => _logged;
             set
             {
-                if (logged != value)
-                {
-                    logged = value;
-                    WindowManager.NotifyVisibilityChanged();
-                }
+                if (_logged == value) return;
+                _logged = value;
+                WindowManager.NotifyVisibilityChanged();
             }
         }
-        private static bool loadingScreen = true || !App.Debug;
+        private static bool _loadingScreen = true;
         public static bool LoadingScreen
         {
-            get => loadingScreen;
+            get => _loadingScreen;
             set
             {
-                if (loadingScreen != value)
-                {
-                    loadingScreen = value;
-                    WindowManager.NotifyVisibilityChanged();
-                }
+                if (_loadingScreen == value) return;
+                _loadingScreen = value;
+                WindowManager.NotifyVisibilityChanged();
             }
         }
         
-        private static bool encounter;
+        private static bool _encounter;
         public static bool Encounter
         {
-            get => encounter;
+            get => _encounter;
             set
             {
-                if (encounter == value) return;
-                encounter = value;
-                if (!encounter)
+                if (_encounter == value) return;
+                _encounter = value;
+                if (!_encounter)
                 {
                     WindowManager.SkillsEnded = true;
                 }
@@ -78,7 +71,7 @@ namespace TCC
 
 
         }
-        public static void SetPlayerHP(ulong target, float hp)
+        public static void SetPlayerHp(float hp)
         {
             CurrentPlayer.CurrentHP = hp;
             CharacterWindowViewModel.Instance.Player.CurrentHP = hp;
@@ -86,25 +79,21 @@ namespace TCC
 
 
         }
-        public static void SetPlayerMP(ulong target, float mp)
+        public static void SetPlayerMp(ulong target, float mp)
         {
-            if (target == CurrentPlayer.EntityId)
-            {
-                CurrentPlayer.CurrentMP = mp;
-                CharacterWindowViewModel.Instance.Player.CurrentMP = mp;
-                ClassManager.SetMP(Convert.ToInt32(mp));
-            }
+            if (target != CurrentPlayer.EntityId) return;
+            CurrentPlayer.CurrentMP = mp;
+            CharacterWindowViewModel.Instance.Player.CurrentMP = mp;
+            ClassManager.SetMP(Convert.ToInt32(mp));
         }
-        public static void SetPlayerST(ulong target, float st)
+        public static void SetPlayerSt(ulong target, float st)
         {
-            if (target == CurrentPlayer.EntityId)
-            {
-                CurrentPlayer.CurrentST = st;
-                CharacterWindowViewModel.Instance.Player.CurrentST = st;
-                ClassManager.SetST(Convert.ToInt32(st));
-            }
+            if (target != CurrentPlayer.EntityId) return;
+            CurrentPlayer.CurrentST = st;
+            CharacterWindowViewModel.Instance.Player.CurrentST = st;
+            ClassManager.SetST(Convert.ToInt32(st));
         }
-        public static void SetPlayerFE(float en)
+        public static void SetPlayerFe(float en)
         {
             CurrentPlayer.FlightEnergy = en;
             CharacterWindowViewModel.Instance.Player.FlightEnergy = en;
@@ -122,37 +111,30 @@ namespace TCC
             }
         }
 
-        public static void SetPlayerMaxHP(ulong target, long maxHP)
+        public static void SetPlayerMaxHp(ulong target, long maxHp)
         {
-            if (target == CurrentPlayer.EntityId)
-            {
-                CurrentPlayer.MaxHP = maxHP;
-                CharacterWindowViewModel.Instance.Player.MaxHP = maxHP;
-                ClassManager.SetMaxHP(Convert.ToInt32(maxHP));
-            }
+            if (target != CurrentPlayer.EntityId) return;
+            CurrentPlayer.MaxHP = maxHp;
+            CharacterWindowViewModel.Instance.Player.MaxHP = maxHp;
+            ClassManager.SetMaxHP(Convert.ToInt32(maxHp));
         }
-        public static void SetPlayerMaxMP(ulong target, int maxMP)
+        public static void SetPlayerMaxMp(ulong target, int maxMp)
         {
-            if (target == CurrentPlayer.EntityId)
-            {
-                CurrentPlayer.MaxMP = maxMP;
-                CharacterWindowViewModel.Instance.Player.MaxMP = maxMP;
-                ClassManager.SetMaxMP(Convert.ToInt32(maxMP));
-            }
+            if (target != CurrentPlayer.EntityId) return;
+            CurrentPlayer.MaxMP = maxMp;
+            CharacterWindowViewModel.Instance.Player.MaxMP = maxMp;
+            ClassManager.SetMaxMP(Convert.ToInt32(maxMp));
         }
-        public static void SetPlayerMaxST(ulong target, int maxST)
+        public static void SetPlayerMaxSt(ulong target, int maxSt)
         {
-            if (target == CurrentPlayer.EntityId)
-            {
-                CurrentPlayer.MaxST = maxST;
-                CharacterWindowViewModel.Instance.Player.MaxST = maxST;
-                ClassManager.SetMaxST(Convert.ToInt32(maxST));
-            }
+            if (target != CurrentPlayer.EntityId) return;
+            CurrentPlayer.MaxST = maxSt;
+            CharacterWindowViewModel.Instance.Player.MaxST = maxSt;
+            ClassManager.SetMaxST(Convert.ToInt32(maxSt));
         }
 
         public static void SetPlayerShield(uint damage)
         {
-            //CurrentPlayer.CurrentShield -= damage;
             if (CharacterWindowViewModel.Instance.Player.CurrentShield < 0) return;
             CharacterWindowViewModel.Instance.Player.CurrentShield -= damage;
         }

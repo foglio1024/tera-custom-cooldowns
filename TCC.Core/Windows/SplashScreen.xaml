@@ -7,7 +7,7 @@
         mc:Ignorable="d" Loaded="Window_Loaded" WindowStyle="None" WindowStartupLocation="CenterScreen" Topmost="False"
         Title="SplashScreen" Height="Auto" Width="420" Background="Transparent" MouseLeftButtonDown="Drag">
     
-    <Grid VerticalAlignment="Top" Background="{StaticResource Colors.App.Main}" Margin="10">
+    <Grid VerticalAlignment="Top" Background="{StaticResource MainColor}" Margin="10">
         <Grid.Effect>
             <DropShadowEffect Opacity=".5" ShadowDepth="3"/>
         </Grid.Effect>
@@ -26,13 +26,13 @@
         <UniformGrid Grid.Row="2"  Rows="1" Name="buttonsGrid" Margin="80,0">
             <Button Height="20" Margin="5" Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Center"
                     VerticalContentAlignment="Center" Click="NoClick">
-                <!--<Path Data="{StaticResource SVG.Close}" Fill="White" Stretch="Uniform" Margin="3"></Path>-->
+                <!--<Path Data="{StaticResource Svg_Close}" Fill="White" Stretch="Uniform" Margin="3"></Path>-->
                 <TextBlock Foreground="#90ffffff" FontWeight="Bold">NO</TextBlock>
 
             </Button>
             <Button Height="20" Margin="5" Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Center"
                     VerticalContentAlignment="Center" Click="OkClick">
-                <!--<Path Data="{StaticResource SVG.Confirm}" Fill="White" Stretch="Uniform" Margin="3"></Path>-->
+                <!--<Path Data="{StaticResource Svg_Confirm}" Fill="White" Stretch="Uniform" Margin="3"></Path>-->
                 <TextBlock Foreground="#90ffffff" FontWeight="Bold">YES</TextBlock>
             </Button>
             <UniformGrid.LayoutTransform>

@@ -14,15 +14,15 @@ namespace TCC.Converters
             switch (t)
             {
                 case DungeonTier.Tier2:
-                    return App.Current.FindResource("Colors.DungeonTier.2");
+                    return App.Current.FindResource("Tier2DungeonColor");
                 case DungeonTier.Tier3:
-                    return App.Current.FindResource("Colors.DungeonTier.3");
+                    return App.Current.FindResource("Tier3DungeonColor");
                 case DungeonTier.Tier4:
-                    return App.Current.FindResource("Colors.DungeonTier.4");
+                    return App.Current.FindResource("Tier4DungeonColor");
                 case DungeonTier.Tier5:
-                    return App.Current.FindResource("Colors.DungeonTier.5");
+                    return App.Current.FindResource("Tier5DungeonColor");
                 default:
-                    return App.Current.FindResource("Colors.DungeonTier.Solo");
+                    return App.Current.FindResource("TierSoloDungeonColor");
             }
         }
 

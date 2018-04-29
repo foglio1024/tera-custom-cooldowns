@@ -45,35 +45,35 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-            <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Row="0" Background="{StaticResource Colors.App.FadedBackground}" 
-                BorderBrush="{StaticResource Colors.App.FadedBorderBrush}"
+            <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Row="0" Background="{StaticResource FadedDefaultBackgroundColor}" 
+                BorderBrush="{StaticResource FadedBorderColor}"
                 Grid.ColumnSpan="1" Grid.Column="3"  Margin="4,0" CornerRadius="3"
                 Width="Auto" VerticalAlignment="Top" HorizontalAlignment="Left"
                 Padding="5,1" Visibility="{Binding Instance.Formed, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"
                     >
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,2" ToolTip="Total members">
-                        <Path Data="{StaticResource SVG.Users}"
-                          Fill="{StaticResource Colors.App.Silver}" Stretch="Uniform" Width="15" Margin="0"></Path>
+                        <Path Data="{StaticResource Svg_Users}"
+                          Fill="{StaticResource SilverColor}" Stretch="Uniform" Width="15" Margin="0"></Path>
                         <TextBlock Text="{Binding Instance.Size, Mode=OneWay}" FontWeight="DemiBold" Margin="6,0,0,0" Foreground="#afff"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,2" ToolTip="Alive members">
-                        <Path Data="{StaticResource SVG.Heart}"
-                          Fill="{StaticResource Colors.App.HP}" Stretch="Uniform" Width="15" Margin="0"></Path>
+                        <Path Data="{StaticResource Svg_Heart}"
+                          Fill="{StaticResource HpColor}" Stretch="Uniform" Width="15" Margin="0"></Path>
                         <TextBlock Text="{Binding Instance.AliveCount, Mode=OneWay}" FontWeight="DemiBold" Margin="6,0,0,0" Foreground="#afff"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,2" ToolTip="Ready members" Visibility="{Binding Instance.Raid,Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
-                        <Path Data="{StaticResource SVG.CheckCircle}"
-                          Fill="{StaticResource Colors.App.LightGreen}" Stretch="Uniform" Width="15" Margin="0"></Path>
+                        <Path Data="{StaticResource Svg_CheckCircle}"
+                          Fill="{StaticResource LightGreenColor}" Stretch="Uniform" Width="15" Margin="0"></Path>
                         <TextBlock Text="{Binding Instance.ReadyCount, Mode=OneWay}" FontWeight="DemiBold" Margin="6,0,0,0" Foreground="#afff"/>
                     </StackPanel>
                 </StackPanel>
             </Border>
-            <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Row="1" Background="{StaticResource Colors.App.FadedBackground}"
-                    BorderBrush="{StaticResource Colors.App.FadedBorderBrush}" Margin="4 4 4 0" CornerRadius="3" Visibility="{Binding Instance.AmILeader, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
+            <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Row="1" Background="{StaticResource FadedDefaultBackgroundColor}"
+                    BorderBrush="{StaticResource FadedBorderColor}" Margin="4 4 4 0" CornerRadius="3" Visibility="{Binding Instance.AmILeader, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
                 <Button Style="{StaticResource ButtonContentOpacityStyle}" x:Name="LootSettingsButton" 
                         ToolTip="Loot options" Click="LootSettingsButtonClicked" HorizontalAlignment="Center">
-                    <Path Data="{StaticResource SVG.Settings}" Fill="#fff" Margin="3" Width="15" />
+                    <Path Data="{StaticResource Svg_Settings}" Fill="#fff" Margin="3" Width="15" />
                 </Button>
             </Border>
 

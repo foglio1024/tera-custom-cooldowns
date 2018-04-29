@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Threading;
 using TCC.Parsing;
-using TCC.Windows;
 
 namespace TCC.ViewModels
 {

@@ -100,8 +100,8 @@
 
         <!--Main Styles.DefaultBorder-->
         <Border Style="{StaticResource Styles.DefaultBorder}" Grid.ColumnSpan="3" Margin="0" Opacity="1" 
-                BorderBrush="{StaticResource Colors.App.FadedBorderBrush}"
-                Background="{StaticResource Colors.App.FadedBackground}" BorderThickness="1" CornerRadius="5,5,0,5"/>
+                BorderBrush="{StaticResource FadedBorderColor}"
+                Background="{StaticResource FadedDefaultBackgroundColor}" BorderThickness="1" CornerRadius="5,5,0,5"/>
 
         <Border BorderBrush="{Binding UserClass, Converter={StaticResource Converters.ClassToFill}}" BorderThickness="1" Height="Auto" 
                 Width="Auto" Grid.ColumnSpan="1" Margin="0" CornerRadius="5,5,0,5" Grid.Column="0" Opacity=".7"
@@ -257,7 +257,7 @@
 
                                     <StackPanel Orientation="Horizontal" Margin="0,5,0,0" Visibility="{Binding Online, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
                                         <!--map marker icon-->
-                                        <Path Data="{StaticResource SVG.MapMarker}" Fill="#6fff" Stretch="Uniform" Height="12" Margin="3"/>
+                                        <Path Data="{StaticResource SvgMapMarker}" Fill="#6fff" Stretch="Uniform" Height="12" Margin="3"/>
                                         <TextBlock Foreground="#7fff" VerticalAlignment="Center" Margin="3,0,0,0">
                                             <Run Text="{Binding Location, Mode=OneWay}" />
                                         </TextBlock>
@@ -321,7 +321,7 @@
                             <ScaleTransform ScaleX="{Binding HpFactor}"/>
                         </Rectangle.RenderTransform>
                     </Rectangle>
-                    <Path  Fill="{StaticResource Colors.App.DefaultBackground}" Data="M0,0 2,0 1,1 0,0" 
+                    <Path  Fill="{StaticResource DefaultBackgroundColor}" Data="M0,0 2,0 1,1 0,0" 
                           Stretch="Uniform" Opacity="1"
                           VerticalAlignment="Top"
                           Height="4" Margin="0,1,0,0" 
@@ -352,7 +352,7 @@
 
 
         <!--Ready check grid-->
-        <Grid Margin="-5,-5" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2"  Opacity="{Binding Ready, Converter={StaticResource readyToOpacityConv}}">
+        <Grid Margin="-5,-5" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2"  Opacity="{Binding Ready, Converter={StaticResource ReadyToOpacityConv}}">
             <Grid.Effect>
                 <DropShadowEffect ShadowDepth="1" RenderingBias="Performance" BlurRadius="3"/>
             </Grid.Effect>

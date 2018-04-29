@@ -18,7 +18,7 @@
 
             </StackPanel>
         </Border>
-        <Border Background="{StaticResource Colors.App.Green}" Margin="2,0" CornerRadius="11" Padding="6,0" Opacity=".9" Cursor="Hand" PreviewMouseLeftButtonDown="AcceptApplyBtn">
+        <Border Background="{StaticResource GreenColor}" Margin="2,0" CornerRadius="11" Padding="6,0" Opacity=".9" Cursor="Hand" PreviewMouseLeftButtonDown="AcceptApplyBtn">
             <StackPanel Orientation="Horizontal">
                 <Image Height="19" Source="/TCC;component/resources/images/ic_done_white_24dp_2x.png" Margin="0,0,2,0" ></Image>
                 <TextBlock Text="ACCEPT" Foreground="White" VerticalAlignment="Center"></TextBlock>
@@ -32,7 +32,7 @@
                 
             </StackPanel>
         </Border>
-        <Border Background="{StaticResource Colors.App.HP}" Margin="2,0" CornerRadius="11" Opacity=".9" Padding="6,0" Cursor="Hand" PreviewMouseLeftButtonDown="DeclineApplyBtn">
+        <Border Background="{StaticResource HpColor}" Margin="2,0" CornerRadius="11" Opacity=".9" Padding="6,0" Cursor="Hand" PreviewMouseLeftButtonDown="DeclineApplyBtn">
             <StackPanel Orientation="Horizontal">
                 <Image Height="19" Source="/TCC;component/resources/images/ic_close_white_24dp_2x.png" Margin="0,0,2,0"></Image>
 

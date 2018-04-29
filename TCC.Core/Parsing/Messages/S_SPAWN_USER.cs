@@ -1,5 +1,4 @@
-﻿using System;
-using TCC.Data;
+﻿using TCC.Data;
 using TCC.ViewModels;
 using Tera.Game;
 using Tera.Game.Messages;

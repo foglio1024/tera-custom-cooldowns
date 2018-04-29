@@ -1,10 +1,4 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Media.Animation;
-using System.Windows.Threading;
-using TCC.Controls;
-using TCC.ViewModels;
-using TCC.Windows;
+﻿using TCC.Windows;
 
 namespace TCC
 {

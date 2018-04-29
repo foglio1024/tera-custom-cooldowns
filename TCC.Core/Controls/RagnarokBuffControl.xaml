@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:TCC.Controls"
              Loaded="UserControl_Loaded"
              mc:Ignorable="d" >
-    <Grid Margin="0,0,0,0" Effect="{StaticResource dropShadow}">
+    <Grid Margin="0,0,0,0" Effect="{StaticResource DropShadow}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>

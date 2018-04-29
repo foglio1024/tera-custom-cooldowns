@@ -23,7 +23,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Rectangle Grid.ColumnSpan="3" Fill="#1fff" Opacity="0" x:Name="glow"/>
-            <Rectangle Grid.ColumnSpan="3" Fill="{StaticResource Colors.App.Main}" Width="3" Margin="0" 
+            <Rectangle Grid.ColumnSpan="3" Fill="{StaticResource MainColor}" Width="3" Margin="0" 
                        HorizontalAlignment="Left" x:Name="sel" RenderTransformOrigin=".5 .5">
                 <Rectangle.RenderTransform>
                     <ScaleTransform ScaleY="0"/>
@@ -101,16 +101,16 @@
                 <!--Vanguard credits-->
                 <Grid Margin="5 0" Background="Transparent" ToolTip="Vanguard credits."
                   HorizontalAlignment="Right" VerticalAlignment="Center" >
-                    <Ellipse Fill="{StaticResource Colors.DungeonTier.3}" Opacity=".2" Margin="2"></Ellipse>
+                    <Ellipse Fill="{StaticResource Tier3DungeonColor}" Opacity=".2" Margin="2"></Ellipse>
                     <Viewbox StretchDirection="DownOnly" Width="19">
                         <TextBlock Text="{Binding Credits, Converter={StaticResource GuardianPointsStringConverter}}"
-                                   Foreground="{StaticResource Colors.DungeonTier.3}" 
+                                   Foreground="{StaticResource Tier3DungeonColor}" 
                                    TextAlignment="Center" FontSize="15" VerticalAlignment="Center"></TextBlock>
                     </Viewbox>
                     <local:Arc x:Name="creditsArc"
                            Width="30" 
                            Height="30" 
-                           Stroke="{StaticResource Colors.DungeonTier.3}" 
+                           Stroke="{StaticResource Tier3DungeonColor}" 
                            StrokeThickness="3" 
                            Margin="0" 
                            Opacity=".8"
@@ -160,10 +160,10 @@
                     </TransformGroup>
                 </Ellipse.RenderTransform>
             </Ellipse>
-            <Border Background="{StaticResource Colors.App.MP}" CornerRadius="2,0,10,0" Opacity="1"  Width="10" 
+            <Border Background="{StaticResource MpColor}" CornerRadius="2,0,10,0" Opacity="1"  Width="10" 
                     Height="10" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0" 
                     Visibility="{Binding IsLoggedIn, Converter={StaticResource Converters.BoolToVisibleHidden}}"/>
-            <Border Background="{StaticResource Colors.App.HP}" CornerRadius="0,2,0,10" Opacity="1"  Width="10" 
+            <Border Background="{StaticResource HpColor}" CornerRadius="0,2,0,10" Opacity="1"  Width="10" 
                     Height="10" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,0,0" 
                     Visibility="{Binding IsSelected, Converter={StaticResource Converters.BoolToVisibleHidden}}"/>
 

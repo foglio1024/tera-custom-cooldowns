@@ -38,7 +38,7 @@
                     <Border Background="{StaticResource BackgroundDarkColor}" CornerRadius="2 2 0 0"></Border>
                 <Button HorizontalAlignment="Right" Margin="0" Style="{StaticResource ButtonContentOpacityStyle}" VerticalAlignment="Stretch"
                                Click="CloseChannelSettings" VerticalContentAlignment="Center">
-                    <Path Data="{StaticResource SVG.Close}" Margin="10 0" />
+                    <Path Data="{StaticResource SvgClose}" Margin="10 0" />
                 </Button>
                 <Image Source="/TCC;component/resources/images/tera-logo-flat.png" Width="30" RenderOptions.BitmapScalingMode="HighQuality"
                        VerticalAlignment="Center" HorizontalAlignment="Left" Opacity=".4" Margin="3 3"></Image>

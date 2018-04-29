@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Forms;
 using System.Windows.Threading;
-using System.Xml;
 using System.Xml.Linq;
 using TCC.Data;
 using TCC.Data.Databases;

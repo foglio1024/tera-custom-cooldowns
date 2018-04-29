@@ -118,8 +118,8 @@
                     <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource NormalScrollBar}"/>
                 </Popup.Resources>
                 <ListBox SelectionChanged="ListBox_SelectionChanged" SelectionMode="Single" Padding="5" ScrollViewer.CanContentScroll="True" 
-                              Background="{StaticResource Colors.App.DefaultBackground}" BorderThickness="0" 
-                             Effect="{StaticResource dropShadow}" Margin="15" x:Name="ChoiceListBox">
+                              Background="{StaticResource DefaultBackgroundColor}" BorderThickness="0" 
+                             Effect="{StaticResource DropShadow}" Margin="15" x:Name="ChoiceListBox">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate DataType="tcc:Skill">
                             <Grid>

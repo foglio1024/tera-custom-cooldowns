@@ -3,13 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using Tera.Game;
 using Tera.Game.Messages;
-using GuildId = System.UInt32;
 
 namespace TCC.Parsing.Messages
 {

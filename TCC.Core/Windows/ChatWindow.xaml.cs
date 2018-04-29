@@ -9,8 +9,6 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using TCC.Controls.ChatControls;
-using TCC.Data;
-using TCC.Parsing;
 using TCC.ViewModels;
 
 namespace TCC.Windows

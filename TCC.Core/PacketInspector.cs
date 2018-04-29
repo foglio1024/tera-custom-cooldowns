@@ -5,10 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using TCC.Parsing;
-using TCC.ViewModels;
 using Tera;
 using Tera.Game;
-using Tera.PacketLog;
 
 namespace TCC
 {

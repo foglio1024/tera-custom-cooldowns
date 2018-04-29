@@ -28,7 +28,7 @@
                 <Border Grid.RowSpan="2" Grid.ColumnSpan="2" Background="#2000" Margin="-5"></Border>
                 <Image Grid.RowSpan="2" Width="44" Height="44" RenderOptions.BitmapScalingMode="HighQuality"
                        Source="{Binding TooltipInfo.Class, Converter={StaticResource Converters.ClassToImage}}" Margin="3" VerticalAlignment="Top"></Image>
-                <Border Background="{StaticResource Colors.App.MP}" Height="20" Width="20" CornerRadius="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.RowSpan="2" Margin="0,0">
+                <Border Background="{StaticResource MpColor}" Height="20" Width="20" CornerRadius="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.RowSpan="2" Margin="0,0">
                     <TextBlock  Text="{Binding TooltipInfo.Level}" Margin="0,0,0,0" TextAlignment="Center" FontSize="12" VerticalAlignment="Center"></TextBlock>
                     <Border.Effect>
                         <DropShadowEffect ShadowDepth="1" BlurRadius="2" Opacity=".7"></DropShadowEffect>
@@ -106,42 +106,42 @@
                     </StackPanel.Resources>
                     <Button Click="InspectClick">
                         <StackPanel Orientation="Horizontal" >
-                            <Path Data="{StaticResource SVG.Eye}"/>
+                            <Path Data="{StaticResource Svg_Eye}"/>
                             <TextBlock Text="Inspect" Margin="3"></TextBlock>
                         </StackPanel>
                     </Button>
                     <Button Click="WhisperClick" Visibility="{Binding TooltipInfo.ShowWhisper, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
                         <StackPanel Orientation="Horizontal">
-                            <Path Data="{StaticResource SVG.ChatMessage}"/>
+                            <Path Data="{StaticResource Svg_ChatMessage}"/>
                             <TextBlock Text="Whisper" Margin="3"></TextBlock>
                         </StackPanel>
                     </Button>
                     <Button Click="PartyInviteClick" Visibility="{Binding TooltipInfo.ShowPartyInvite, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
                         <StackPanel Orientation="Horizontal">
-                            <Path Data="{StaticResource SVG.AddUser}"/>
+                            <Path Data="{StaticResource Svg_AddUser}"/>
                             <TextBlock Text="Party invite" Margin="3"></TextBlock>
                         </StackPanel>
                     </Button>
                     <Button Click="GrantInviteClick" Visibility="{Binding TooltipInfo.ShowGrantPowers, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
                         <StackPanel Orientation="Horizontal">
-                            <Path Data="{StaticResource SVG.Achievements}"/>
+                            <Path Data="{StaticResource Svg_Achievements}"/>
                             <TextBlock Text="{Binding TooltipInfo.PowersLabelText}" Margin="3"></TextBlock>
                         </StackPanel>
                     </Button>
                     <Button Click="DelegateLeaderClick" Visibility="{Binding TooltipInfo.ShowDelegateLeader, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
                         <StackPanel Orientation="Horizontal">
-                            <Path Margin="4,3,2,3" Data="{StaticResource SVG.DelegateLeader}"/>
+                            <Path Margin="4,3,2,3" Data="{StaticResource Svg_DelegateLeader}"/>
                             <TextBlock Text="Delegate leader" Margin="3"></TextBlock>
                         </StackPanel>
                     </Button>
                     <Button Click="GuildInviteClick" Visibility="{Binding TooltipInfo.ShowGuildInvite, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
                         <StackPanel Orientation="Horizontal">
-                            <Path  Data="{StaticResource SVG.AddUsers}"/>
+                            <Path  Data="{StaticResource Svg_AddUsers}"/>
                             <TextBlock Text="Guild invite" Margin="3"></TextBlock>
                         </StackPanel>
                     </Button>
                     <Grid ClipToBounds="True" x:Name="kickGrid" Visibility="{Binding TooltipInfo.ShowKick, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
-                        <Ellipse Fill="{StaticResource Colors.App.HP}" RenderTransformOrigin=".5 .5" Width="10" Height="10"
+                        <Ellipse Fill="{StaticResource HpColor}" RenderTransformOrigin=".5 .5" Width="10" Height="10"
                                  
                                      x:Name="ripple" Opacity="0" HorizontalAlignment="Left" VerticalAlignment="Top">
                             <Ellipse.RenderTransform>
@@ -154,7 +154,7 @@
                         <Button Click="KickClick" 
                             >
                             <StackPanel Orientation="Horizontal">
-                                <Path  Data="{StaticResource SVG.RemoveUser}" Fill="{StaticResource Colors.App.HP}"/>
+                                <Path  Data="{StaticResource Svg_RemoveUser}" Fill="{StaticResource HpColor}"/>
                                 <TextBlock Text="Kick" Margin="3" x:Name="KickText"/>
                             </StackPanel>
                         </Button>
@@ -162,13 +162,13 @@
 
                     <Button Click="AddFriendClick" Visibility="{Binding TooltipInfo.ShowAddFriend, Converter={StaticResource Converters.BoolToVisibleCollapsed}}">
                         <StackPanel Orientation="Horizontal">
-                            <Path Data="{StaticResource SVG.Star}"/>
+                            <Path Data="{StaticResource Svg_Star}"/>
                             <TextBlock Text="{Binding TooltipInfo.FriendLabelText}" Margin="3"></TextBlock>
                         </StackPanel>
                     </Button>
                     <Button Click="BlockClick">
                         <StackPanel Orientation="Horizontal">
-                            <Path  Fill="{StaticResource Colors.App.HP}" Data="{StaticResource SVG.Block}"/>
+                            <Path  Fill="{StaticResource HpColor}" Data="{StaticResource Svg_Block}"/>
                             <TextBlock Text="{Binding TooltipInfo.BlockLabelText}" Margin="3"></TextBlock>
                         </StackPanel>
                     </Button>

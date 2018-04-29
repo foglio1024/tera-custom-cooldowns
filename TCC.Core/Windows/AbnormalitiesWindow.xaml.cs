@@ -1,6 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Input;
-using TCC.ViewModels;
+﻿using System.Windows.Input;
 
 namespace TCC.Windows
 {

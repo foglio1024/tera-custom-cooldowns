@@ -49,8 +49,8 @@
 
         <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Width="20" Height="20" ToolTip="Hide" Cursor="Hand" Visibility="Collapsed"  Name="HideButton"
               MouseLeftButtonDown="HideButton_MouseLeftButtonDown">
-                <Ellipse Fill="DarkOrange" Effect="{StaticResource dropShadow}"></Ellipse>
-                <Path Data="{StaticResource SVG.Hide}" Fill="White" Stretch="Uniform" Margin="3"></Path>
+                <Ellipse Fill="DarkOrange" Effect="{StaticResource DropShadow}"></Ellipse>
+                <Path Data="{StaticResource Svg_Hide}" Fill="White" Stretch="Uniform" Margin="3"></Path>
             </Grid>
         <!--<Grid.CacheMode>
             <BitmapCache RenderAtScale="2"></BitmapCache>

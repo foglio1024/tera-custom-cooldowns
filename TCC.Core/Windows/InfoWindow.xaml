@@ -85,7 +85,7 @@
             <Button Style="{StaticResource ButtonMainStyle}" Grid.Column="2" 
                     VerticalAlignment="Stretch" Width="40" Margin="0" Click="CloseWindow" VerticalContentAlignment="Center">
                 <Button.Content>
-                    <Path Fill="#2fff" Data="{StaticResource SVG.Close}" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="12"></Path>
+                    <Path Fill="#2fff" Data="{StaticResource SvgClose}" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="12"></Path>
                 </Button.Content>
             </Button>
         </Grid>

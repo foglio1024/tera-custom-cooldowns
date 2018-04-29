@@ -7,7 +7,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using TCC.Data;
 using TCC.ViewModels;
 
 namespace TCC.Controls.ChatControls

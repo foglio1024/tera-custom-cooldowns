@@ -35,9 +35,9 @@ namespace TCC.Controls
                     default:
                         return Brushes.DimGray;
                     case WarriorStance.Assault:
-                        return Application.Current.FindResource("Colors.ClassWindow.AssaultStance");
+                        return Application.Current.FindResource("AssaultStanceColor");
                     case WarriorStance.Defensive:
-                        return Application.Current.FindResource("Colors.ClassWindow.DefensiveStance");
+                        return Application.Current.FindResource("DefensiveStanceColor");
                 }
             }
             else return Brushes.Transparent;
@@ -60,7 +60,7 @@ namespace TCC.Controls
                     default:
                         return Brushes.DimGray;
                     case ArcherStance.SniperEye:
-                        return Application.Current.FindResource("Colors.ClassWindow.SniperEye");
+                        return Application.Current.FindResource("SniperEyeColor");
                 }
             }
             else return Brushes.Transparent;

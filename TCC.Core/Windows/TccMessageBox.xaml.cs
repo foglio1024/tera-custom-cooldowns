@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace TCC.Windows
 {
@@ -122,12 +113,12 @@ namespace TCC.Windows
                     //_messageBox.SetImage("Question.png");
                     break;
                 case MessageBoxImage.Information:
-                    _messageBox.BG.Background = App.Current.FindResource("Colors.App.MP") as SolidColorBrush;
+                    _messageBox.BG.Background = App.Current.FindResource("MpColor") as SolidColorBrush;
                     //_messageBox.SetImage("Information.png");
                     break;
                 case MessageBoxImage.Error:
                     //_messageBox.SetImage("Error.png");
-                    _messageBox.BG.Background = App.Current.FindResource("Colors.App.HP") as SolidColorBrush;
+                    _messageBox.BG.Background = App.Current.FindResource("HpColor") as SolidColorBrush;
                     break;
                 default:
                     //_messageBox.img.Visibility = Visibility.Collapsed;

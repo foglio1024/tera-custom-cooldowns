@@ -129,7 +129,7 @@
                         </Border>
 
                         <Border Grid.Row="1" 
-                            Background="{StaticResource Colors.App.MP}" 
+                            Background="{StaticResource MpColor}" 
                             Height="14" 
                             Margin="-14,0,0,0" 
                             VerticalAlignment="Top" 
@@ -160,7 +160,7 @@
                                 </FrameworkElement.LayoutTransform>
                             </FrameworkElement>
                         </Border>
-                        <Path Fill="{StaticResource Colors.App.DefaultBackground}" 
+                        <Path Fill="{StaticResource DefaultBackgroundColor}" 
                           Data="M0,0 2,0 1,1 0,0" 
                           Stretch="Uniform" 
                           HorizontalAlignment="Center" 

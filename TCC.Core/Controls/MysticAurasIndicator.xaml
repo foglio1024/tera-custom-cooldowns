@@ -23,8 +23,8 @@
     <Grid>
         <UniformGrid  UseLayoutRounding="True"  Rows="2" Width="Auto" HorizontalAlignment="Center">
             <!--<local:Arc EndAngle="359.9" Stroke="Gray" Opacity=".2" />
-        <local:Arc StartAngle="271" EndAngle="359" x:Name="crit" Stroke="{StaticResource Colors.App.HP}" Visibility="Hidden"/>
-        <local:Arc StartAngle="1" EndAngle="88" x:Name="mp" Stroke="{StaticResource Colors.App.MP}" Visibility="Hidden"/>
+        <local:Arc StartAngle="271" EndAngle="359" x:Name="crit" Stroke="{StaticResource HpColor}" Visibility="Hidden"/>
+        <local:Arc StartAngle="1" EndAngle="88" x:Name="mp" Stroke="{StaticResource MpColor}" Visibility="Hidden"/>
         <local:Arc StartAngle="181" EndAngle="269" x:Name="critRes" Stroke="#f97" Visibility="Hidden"/>
         <local:Arc StartAngle="91" EndAngle="179" x:Name="swift" Stroke="#7f9" Visibility="Hidden"/>-->
             <Border Style="{StaticResource aura}" Background="#454545" Visibility="Visible"/>
@@ -34,8 +34,8 @@
 
         <UniformGrid  UseLayoutRounding="True"  Rows="2" Width="Auto" HorizontalAlignment="Center">
             <!--<local:Arc EndAngle="359.9" Stroke="Gray" Opacity=".2" />
-        <local:Arc StartAngle="271" EndAngle="359" x:Name="crit" Stroke="{StaticResource Colors.App.HP}" Visibility="Hidden"/>
-        <local:Arc StartAngle="1" EndAngle="88" x:Name="mp" Stroke="{StaticResource Colors.App.MP}" Visibility="Hidden"/>
+        <local:Arc StartAngle="271" EndAngle="359" x:Name="crit" Stroke="{StaticResource HpColor}" Visibility="Hidden"/>
+        <local:Arc StartAngle="1" EndAngle="88" x:Name="mp" Stroke="{StaticResource MpColor}" Visibility="Hidden"/>
         <local:Arc StartAngle="181" EndAngle="269" x:Name="critRes" Stroke="#f97" Visibility="Hidden"/>
         <local:Arc StartAngle="91" EndAngle="179" x:Name="swift" Stroke="#7f9" Visibility="Hidden"/>-->
             <Border Style="{StaticResource aura}" x:Name="swift" Background="#7f9" Visibility="Hidden"/>
@@ -44,12 +44,12 @@
         </UniformGrid>
         <UniformGrid  UseLayoutRounding="True"  Rows="2" Width="Auto" HorizontalAlignment="Center">
             <!--<local:Arc EndAngle="359.9" Stroke="Gray" Opacity=".2" />
-        <local:Arc StartAngle="271" EndAngle="359" x:Name="crit" Stroke="{StaticResource Colors.App.HP}" Visibility="Hidden"/>
-        <local:Arc StartAngle="1" EndAngle="88" x:Name="mp" Stroke="{StaticResource Colors.App.MP}" Visibility="Hidden"/>
+        <local:Arc StartAngle="271" EndAngle="359" x:Name="crit" Stroke="{StaticResource HpColor}" Visibility="Hidden"/>
+        <local:Arc StartAngle="1" EndAngle="88" x:Name="mp" Stroke="{StaticResource MpColor}" Visibility="Hidden"/>
         <local:Arc StartAngle="181" EndAngle="269" x:Name="critRes" Stroke="#f97" Visibility="Hidden"/>
         <local:Arc StartAngle="91" EndAngle="179" x:Name="swift" Stroke="#7f9" Visibility="Hidden"/>-->
-            <Border Style="{StaticResource aura}" x:Name="crit" Background="{StaticResource Colors.App.HP}" Visibility="Hidden"/>
-            <Border Style="{StaticResource aura}" x:Name="mp" Background="{StaticResource Colors.App.MP}" Visibility="Hidden"/>
+            <Border Style="{StaticResource aura}" x:Name="crit" Background="{StaticResource HpColor}" Visibility="Hidden"/>
+            <Border Style="{StaticResource aura}" x:Name="mp" Background="{StaticResource MpColor}" Visibility="Hidden"/>
 
         </UniformGrid>
 <Grid.Effect>
