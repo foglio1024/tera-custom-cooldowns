@@ -26,7 +26,7 @@
             </Style>
         </Grid.Resources>
         <Border Style="{StaticResource Styles.DefaultBorder}" 
-                CornerRadius="2" Grid.ColumnSpan="20" Opacity=".4"
+                CornerRadius="2" Grid.ColumnSpan="20" Opacity=".5"
                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
         <Button Visibility="{Binding HideButtonVisibility, RelativeSource={RelativeSource AncestorType=c:WindowButtons}}"
                 Click="Hide" ToolTip="Hide">
@@ -47,7 +47,7 @@
 
         <!--<Path Fill="#3fff" Data="{StaticResource SvgMove}" Height="22" Width="22" Stretch="Uniform" Grid.Column="1" Margin="5 5 10 5" VerticalAlignment="Center"></Path>-->
         <TextBlock Text="{Binding WindowName, RelativeSource={RelativeSource AncestorType=c:WindowButtons}}"
-                   Grid.Column="10" Foreground="#2fff" VerticalAlignment="Center" Margin="5 0 10 1" FontSize="14"></TextBlock>
+                   Grid.Column="10" Foreground="#5fff" VerticalAlignment="Center" Margin="5 0 10 1" FontSize="14"></TextBlock>
 
     </Grid>
 </UserControl>
