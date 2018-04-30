@@ -5,10 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
-             mc:Ignorable="d" Loaded="BrawlerBar_OnLoaded">
-    <UserControl.DataContext>
-        <viewModels:BrawlerBarManager/>
-    </UserControl.DataContext>
+             mc:Ignorable="d" Loaded="BrawlerBar_OnLoaded" d:DataContext="{d:DesignData BrawlerBarManager}">
     <Grid Width="Auto" Margin="10,10,20,20" Name="Root">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -53,7 +50,7 @@
             </Grid.Effect>
         </Grid>
         <Border Grid.Column="0" Style="{StaticResource Styles.DefaultBorder}" VerticalAlignment="Center" Margin="-0,0,0,-75" Padding="1,1"  HorizontalAlignment="Center" CornerRadius="10" Opacity="1" Background="#222222">
-            <TextBlock Style="{StaticResource Styles.DefaultText}" TextAlignment="Center" Margin="0,-1,0,-2" FontSize="16" FontWeight="DemiBold" Foreground="Orange" Text="{Binding ST.Val}" Width="45"></TextBlock>
+            <TextBlock Style="{StaticResource Styles.DefaultText}" TextAlignment="Center" Margin="0,-1,0,-2" FontSize="16" FontWeight="DemiBold" Foreground="Orange" Text="{Binding StaminaTracker.Val}" Width="45"></TextBlock>
         </Border>
 
     </Grid>

@@ -20,12 +20,12 @@ namespace TCC.ClassSpecific
         {
             if(p.TargetId == SessionManager.CurrentPlayer.EntityId && EnergyStarsIDs.Contains(p.AbnormalityId))
             {
-                ((PriestBarManager)ClassManager.CurrentClassManager).EnergyStars.Buff.Start(p.Duration);
+                ((PriestBarManager)ClassWindowViewModel.Instance.CurrentManager).EnergyStars.Buff.Start(p.Duration);
                 return;
             }
             if (p.TargetId == SessionManager.CurrentPlayer.EntityId && p.AbnormalityId == GraceId)
             {
-                ((PriestBarManager)ClassManager.CurrentClassManager).Grace.Buff.Start(p.Duration);
+                ((PriestBarManager)ClassWindowViewModel.Instance.CurrentManager).Grace.Buff.Start(p.Duration);
             }
 
         }
@@ -34,12 +34,12 @@ namespace TCC.ClassSpecific
         {
             if (p.TargetId == SessionManager.CurrentPlayer.EntityId && EnergyStarsIDs.Contains(p.AbnormalityId))
             {
-                ((PriestBarManager)ClassManager.CurrentClassManager).EnergyStars.Buff.Refresh(p.Duration);
+                ((PriestBarManager)ClassWindowViewModel.Instance.CurrentManager).EnergyStars.Buff.Refresh(p.Duration);
                 return;
             }
             if (p.TargetId == SessionManager.CurrentPlayer.EntityId && p.AbnormalityId == GraceId)
             {
-                ((PriestBarManager)ClassManager.CurrentClassManager).Grace.Buff.Refresh(p.Duration);
+                ((PriestBarManager)ClassWindowViewModel.Instance.CurrentManager).Grace.Buff.Refresh(p.Duration);
             }
         }
 
@@ -47,12 +47,12 @@ namespace TCC.ClassSpecific
         {
             if (p.TargetId == SessionManager.CurrentPlayer.EntityId && EnergyStarsIDs.Contains(p.AbnormalityId))
             {
-                ((PriestBarManager)ClassManager.CurrentClassManager).EnergyStars.Buff.Refresh(0);
+                ((PriestBarManager)ClassWindowViewModel.Instance.CurrentManager).EnergyStars.Buff.Refresh(0);
                 return;
             }
             if (p.TargetId == SessionManager.CurrentPlayer.EntityId && p.AbnormalityId == GraceId)
             {
-                ((PriestBarManager)ClassManager.CurrentClassManager).Grace.Buff.Refresh(0);
+                ((PriestBarManager)ClassWindowViewModel.Instance.CurrentManager).Grace.Buff.Refresh(0);
             }
         }
     }

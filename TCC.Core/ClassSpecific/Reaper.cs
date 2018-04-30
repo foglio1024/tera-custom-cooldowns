@@ -11,21 +11,21 @@ namespace TCC.ClassSpecific
         {
             if (ShadowReapingId == p.AbnormalityId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
             {
-                ((ReaperBarManager)ClassManager.CurrentClassManager).ShadowReaping.Buff.Start(p.Duration);
+                ((ReaperBarManager)ClassWindowViewModel.Instance.CurrentManager).ShadowReaping.Buff.Start(p.Duration);
             }
         }
         public static void CheckBuff(S_ABNORMALITY_REFRESH p)
         {
             if (ShadowReapingId == p.AbnormalityId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
             {
-                ((ReaperBarManager)ClassManager.CurrentClassManager).ShadowReaping.Buff.Refresh(p.Duration);
+                ((ReaperBarManager)ClassWindowViewModel.Instance.CurrentManager).ShadowReaping.Buff.Refresh(p.Duration);
             }
         }
         public static void CheckBuffEnd(S_ABNORMALITY_END p)
         {
             if (ShadowReapingId == p.AbnormalityId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
             {
-                ((ReaperBarManager)ClassManager.CurrentClassManager).ShadowReaping.Buff.Refresh(0);
+                ((ReaperBarManager)ClassWindowViewModel.Instance.CurrentManager).ShadowReaping.Buff.Refresh(0);
             }
         }
     }

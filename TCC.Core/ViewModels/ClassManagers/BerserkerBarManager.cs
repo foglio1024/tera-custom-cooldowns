@@ -5,8 +5,6 @@ namespace TCC.ViewModels
 {
     public class BerserkerBarManager : ClassManager
     {
-        private static BerserkerBarManager _instance;
-        public static BerserkerBarManager Instance => _instance ?? (_instance = new BerserkerBarManager());
 
         public DurationCooldownIndicator FieryRage { get; set; }
         public DurationCooldownIndicator Bloodlust { get; set; }
@@ -15,8 +13,7 @@ namespace TCC.ViewModels
 
         public BerserkerBarManager() : base()
         {
-            _instance = this;
-            CurrentClassManager = this;
+            //CurrentClassManager = this;
             LoadSpecialSkills();
         }
 

@@ -247,7 +247,7 @@ namespace TCC
             //u.UserClass = Class.Lancer;
 
             GroupWindowViewModel.Instance.AddOrUpdateMember(u);
-            WindowManager.ClassWindow.Context.CurrentClass = Class.Priest;
+            WindowManager.ClassWindow.VM.CurrentClass = Class.Priest;
             var l = new List<User>();
             for (uint i = 0; i < 10; i++)
             {

@@ -6,26 +6,28 @@
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              xmlns:classBars="clr-namespace:TCC.Controls.ClassBars"
-             mc:Ignorable="d" Loaded="UserControl_Loaded">
-    <UserControl.DataContext>
-        <viewModels:WarriorBarManager/>
-    </UserControl.DataContext>
-<UserControl.Resources>
-    <classBars:WarriorStanceToColorConverter x:Key="StanceToColorConverter"></classBars:WarriorStanceToColorConverter>
-</UserControl.Resources>
-    <Grid Width="Auto"  Name="Root" ClipToBounds="False" Margin="5">
+             mc:Ignorable="d" Loaded="UserControl_Loaded" d:DataContext="{d:DesignData WarriorBarManager}">
+    <UserControl.Resources>
+        <classBars:WarriorStanceToColorConverter x:Key="StanceToColorConverter"/>
+    </UserControl.Resources>
+    <Grid Width="Auto" Name="Root" ClipToBounds="False" Margin="5">
         <Grid HorizontalAlignment="Center" Margin="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-                <Border Grid.RowSpan="2" Grid.Column="1" Height="5" Width="50" BorderThickness="0" Opacity="1" Style="{StaticResource Styles.DefaultBorder}"
-                        CornerRadius="0,0,10,0" HorizontalAlignment="Left" Margin="-15,35,0,0" Background="{Binding Stance.CurrentStance, Converter={StaticResource StanceToColorConverter}}"></Border>
-<Border Style="{StaticResource Styles.DefaultBorder}" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" CornerRadius="50" Margin="-4"></Border>
+            <Border Grid.RowSpan="2" Grid.Column="1" Height="5" Width="50" BorderThickness="0" Opacity="1"
+                    Style="{StaticResource Styles.DefaultBorder}"
+                    CornerRadius="0,0,10,0" HorizontalAlignment="Left" Margin="-15,35,0,0"
+                    Background="{Binding Stance.CurrentStance, Converter={StaticResource StanceToColorConverter}}">
+            </Border>
+            <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0"
+                    CornerRadius="50" Margin="-4">
+            </Border>
             <Border Style="{StaticResource Styles.DefaultBorder}"
                     Grid.Row="0"
                     Grid.Column="0"
@@ -34,24 +36,23 @@
                     CornerRadius="15"
                     Height="30"
                     Margin="25,0,0,0"
-                    VerticalAlignment="Center"/>
+                    VerticalAlignment="Center" />
 
             <!--Edge-->
-            <local:EdgeControl x:Name="EdgeBar" 
-                               DataContext="{Binding EdgeCounter}" 
+            <local:EdgeControl x:Name="EdgeBar"
+                               DataContext="{Binding EdgeCounter}"
                                Grid.Column="1"
                                Grid.Row="0" Grid.RowSpan="2"
                                Width="270"
                                Margin="-0,0,0,0"
-                               VerticalAlignment="Center"
-                               />
+                               VerticalAlignment="Center" />
 
             <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" ClipToBounds="False">
                 <!--Gamble-->
                 <local:BuffCooldownControl DataContext="{Binding DeadlyGamble}" ClipToBounds="False"
-                                                Margin="0" Padding="0"
-                                               Grid.RowSpan="10"/>
+                                           Margin="0" Padding="0"
+                                           Grid.RowSpan="10" />
             </Grid>
         </Grid>
-        </Grid>
+    </Grid>
 </UserControl>

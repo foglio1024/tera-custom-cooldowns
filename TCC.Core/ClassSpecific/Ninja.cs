@@ -9,12 +9,12 @@ namespace TCC.ClassSpecific
         public static void CheckFocus(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId == FocusId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
-                ((NinjaBarManager)ClassManager.CurrentClassManager).FocusOn = true;
+                ((NinjaBarManager)ClassWindowViewModel.Instance.CurrentManager).FocusOn = true;
         }
         public static void CheckFocusEnd(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId == FocusId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
-                ((NinjaBarManager)ClassManager.CurrentClassManager).FocusOn = false;
+                ((NinjaBarManager)ClassWindowViewModel.Instance.CurrentManager).FocusOn = false;
         }
     }
 }

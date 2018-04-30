@@ -5,8 +5,6 @@ namespace TCC.ViewModels
 {
     internal class MysticBarManager : ClassManager
     {
-        private static MysticBarManager _instance;
-        public static MysticBarManager Instance => _instance ?? (_instance = new MysticBarManager());
 
         public AurasTracker Auras { get; private set; }
         public FixedSkillCooldown Contagion { get; private set; }
@@ -14,8 +12,6 @@ namespace TCC.ViewModels
 
         public MysticBarManager() : base()
         {
-            _instance = this;
-            CurrentClassManager = this;
             Auras = new AurasTracker();
 
             LoadSpecialSkills();

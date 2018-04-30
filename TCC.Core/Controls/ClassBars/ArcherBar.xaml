@@ -6,10 +6,7 @@
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              xmlns:classBars="clr-namespace:TCC.Controls.ClassBars"
-             mc:Ignorable="d"  Loaded="UserControl_Loaded">
-    <UserControl.DataContext>
-        <viewModels:ArcherBarManager/>
-    </UserControl.DataContext>
+             mc:Ignorable="d"  Loaded="UserControl_Loaded" d:DataContext="{d:DesignData ArcherBarManager}">
     <UserControl.Resources>
         <classBars:ArcherStanceToColorConverter x:Key="ArcherStanceToColor"></classBars:ArcherStanceToColorConverter>
     </UserControl.Resources>

@@ -5,14 +5,10 @@ namespace TCC.ViewModels
 {
     public class ReaperBarManager : ClassManager
     {
-        private static ReaperBarManager _instance;
-        public static ReaperBarManager Instance => _instance ?? (_instance = new ReaperBarManager());
 
         public DurationCooldownIndicator ShadowReaping { get; set; }
         public ReaperBarManager() : base()
         {
-            _instance = this;
-            CurrentClassManager = this;
             LoadSpecialSkills();
         }
         protected override void LoadSpecialSkills()

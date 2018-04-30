@@ -5,14 +5,10 @@ namespace TCC.ViewModels
 {
     public class BrawlerBarManager : ClassManager
     {
-        private static BrawlerBarManager _instance;
         private bool _isGfOn;
         private bool _counterProc;
-        public static BrawlerBarManager Instance => _instance ?? (_instance = new BrawlerBarManager());
         public BrawlerBarManager() : base()
         {
-            _instance = this;
-            CurrentClassManager = this;
             LoadSpecialSkills();
         }
 

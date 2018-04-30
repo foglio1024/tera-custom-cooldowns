@@ -15,7 +15,9 @@
              mc:Ignorable="d" 
              Title="WarriorBar" 
              UseLayoutRounding="True"
-             x:Name="Win">
+             x:Name="Win"
+             BorderBrush="Red"
+             BorderThickness="0">
     <w:TccWindow.DataContext>
         <wm:ClassWindowViewModel />
     </w:TccWindow.DataContext>
@@ -61,31 +63,22 @@
         </DataTemplate>
         <DataTemplate x:Key="EmptyTemplate">
         </DataTemplate>
-        <Style x:Key="OpacityAnimatedContainer" TargetType="FrameworkElement">
-            <Setter Property="Opacity" Value="0"/>
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding IsTeraOnTop}" Value="True">
-                    <DataTrigger.EnterActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation From="0" To="1"
-                                     Duration="0:0:0.2"
-                                     Storyboard.TargetProperty="Opacity"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </DataTrigger.EnterActions>
-                    <DataTrigger.ExitActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation From="1" To="0"
-                                                 Duration="0:0:0.2"
-                                                 Storyboard.TargetProperty="Opacity"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </DataTrigger.ExitActions>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
+        <wm:ClassWindowTemplateSelector x:Key="ClassWindowTemplateSelector"
+                                        Warrior="{StaticResource Warrior}"
+                                        Valkyrie="{StaticResource Valkyrie}"
+                                        Archer="{StaticResource Archer}"
+                                        Lancer="{StaticResource Lancer}"
+                                        Priest="{StaticResource Priest}"
+                                        Mystic="{StaticResource Mystic}"
+                                        Ninja="{StaticResource Ninja}"
+                                        Gunner="{StaticResource Gunner}"
+                                        Brawler="{StaticResource Brawler}"
+                                        Reaper="{StaticResource Reaper}"
+                                        Sorcerer="{StaticResource Sorcerer}"
+                                        Berserker="{StaticResource Berserker}"
+                                        Slayer="{StaticResource Slayer}"
+                                        None="{StaticResource EmptyTemplate}"
+                                        />
 
     </w:TccWindow.Resources>
     <Grid>
@@ -97,7 +90,8 @@
                          DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWindow}}" 
                          />
 
-        <ContentControl x:Name="content" Content="{Binding CurrentManager}" Margin="5" Background="Transparent" Grid.Row="1">
+        <ContentControl x:Name="content" Content="{Binding Instance.CurrentManager}"
+                        ContentTemplateSelector="{StaticResource ClassWindowTemplateSelector}" Margin="5" Background="Transparent" Grid.Row="1">
         <ContentControl.LayoutTransform>
             <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
         </ContentControl.LayoutTransform>

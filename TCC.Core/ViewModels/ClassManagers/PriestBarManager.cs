@@ -5,16 +5,12 @@ namespace TCC.ViewModels
 {
     public class PriestBarManager : ClassManager
     {
-        private static PriestBarManager _instance;
-        public static PriestBarManager Instance => _instance ?? (_instance = new PriestBarManager());
 
         public DurationCooldownIndicator EnergyStars { get; private set; }
         public DurationCooldownIndicator Grace { get; private set; }
 
         public PriestBarManager() : base()
         {
-            _instance = this;
-            CurrentClassManager = this;
             LoadSpecialSkills();
             Grace.Buff.PropertyChanged += GracePropertyChanged;
         }

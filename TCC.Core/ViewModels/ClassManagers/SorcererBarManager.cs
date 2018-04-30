@@ -5,14 +5,10 @@ namespace TCC.ViewModels
 {
     public class SorcererBarManager : ClassManager
     {
-        private static SorcererBarManager _instance;
-        public static SorcererBarManager Instance => _instance ?? (_instance = new SorcererBarManager());
         public DurationCooldownIndicator ManaBoost { get; set; }
 
         public SorcererBarManager() : base()
         {
-            _instance = this;
-            CurrentClassManager = this;
             LoadSpecialSkills();
 
         }

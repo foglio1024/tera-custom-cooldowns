@@ -5,27 +5,24 @@ namespace TCC.ViewModels
 {
     public class GunnerBarManager : ClassManager
     {
-        private static GunnerBarManager _instance;
-        public static GunnerBarManager Instance => _instance ?? (_instance = new GunnerBarManager());
 
         public DurationCooldownIndicator BurstFire { get; set; }
         public DurationCooldownIndicator Balder { get; set; }
         public DurationCooldownIndicator Bombardment { get; set; }
         public GunnerBarManager() : base()
         {
-            _instance = this;
-            CurrentClassManager = this;
+            //CurrentClassManager = this;
             LoadSpecialSkills();
-            ST.PropertyChanged += FlashBfIfFullWp;
+            StaminaTracker.PropertyChanged += FlashBfIfFullWp;
         }
 
         private void FlashBfIfFullWp(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(ST.Maxed))
+            if (e.PropertyName == nameof(StaminaTracker.Maxed))
             {
-                BurstFire.Cooldown.ForceAvailable(ST.Maxed);
-                Balder.Cooldown.FlashOnAvailable = ST.Maxed;
-                Bombardment.Cooldown.FlashOnAvailable = ST.Maxed;
+                BurstFire.Cooldown.ForceAvailable(StaminaTracker.Maxed);
+                Balder.Cooldown.FlashOnAvailable = StaminaTracker.Maxed;
+                Bombardment.Cooldown.FlashOnAvailable = StaminaTracker.Maxed;
             }
         }
 

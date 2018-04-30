@@ -5,10 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
-             mc:Ignorable="d" Loaded="NinjaBar_OnLoaded">
-    <UserControl.DataContext>
-        <viewModels:NinjaBarManager/>
-    </UserControl.DataContext>
+             mc:Ignorable="d" Loaded="NinjaBar_OnLoaded" d:DataContext="{d:DesignData NinjaBarManager}">
     <Grid Width="Auto" Margin="5,5,5,15" Name="Root">
         <Grid HorizontalAlignment="Center" Margin="0,0,0,0">
             <Grid.ColumnDefinitions>
@@ -72,7 +69,7 @@
             </Border>
 
             <Border Grid.Column="0" Style="{StaticResource Styles.DefaultBorder}" VerticalAlignment="Center" Margin="-0,0,0,-75" Padding="1,1"  HorizontalAlignment="Center" CornerRadius="10" Opacity="1" Background="#222222">
-                <TextBlock Style="{StaticResource Styles.DefaultText}" TextAlignment="Center" Margin="0,-1,0,-2" FontSize="16" FontWeight="DemiBold" Foreground="#c387ff" Text="{Binding ST.Val}" Width="45"></TextBlock>
+                <TextBlock Style="{StaticResource Styles.DefaultText}" TextAlignment="Center" Margin="0,-1,0,-2" FontSize="16" FontWeight="DemiBold" Foreground="#c387ff" Text="{Binding StaminaTracker.Val}" Width="45"></TextBlock>
             </Border>
         </Grid>
 

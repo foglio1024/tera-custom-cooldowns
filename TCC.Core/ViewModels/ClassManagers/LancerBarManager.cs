@@ -18,12 +18,8 @@ namespace TCC.ViewModels
     }
     internal class LancerBarManager : ClassManager
     {
-        private static LancerBarManager _instance;
-        public static LancerBarManager Instance => _instance ?? (_instance = new LancerBarManager());
         public LancerBarManager() : base()
         {
-            _instance = this;
-            CurrentClassManager = this;
             LoadSpecialSkills();
             LH = new StatTracker()
             {

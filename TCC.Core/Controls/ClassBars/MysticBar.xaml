@@ -6,10 +6,7 @@
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <UserControl.DataContext>
-        <viewModels:MysticBarManager/>
-    </UserControl.DataContext>
+             d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignData MysticBarManager}">
     <Grid Margin="5" Name="Root" ClipToBounds="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

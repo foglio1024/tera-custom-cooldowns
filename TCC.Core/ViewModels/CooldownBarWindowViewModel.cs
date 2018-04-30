@@ -102,7 +102,7 @@ namespace TCC.ViewModels
             }
         }
 
-        private static ClassManager _classManager => ClassManager.CurrentClassManager;
+        private static ClassManager _classManager => ClassWindowViewModel.Instance.CurrentManager;
 
         private void FindAndUpdate(SynchronizedObservableCollection<SkillCooldown> list, SkillCooldown sk)
         {

@@ -5,19 +5,47 @@ namespace TCC.ViewModels
 {
     public class ArcherBarManager : ClassManager
     {
-        private static ArcherBarManager _instance;
-        public static ArcherBarManager Instance => _instance ?? (_instance = new ArcherBarManager());
+        private ArcherFocusTracker _focus;
+        private StanceTracker<ArcherStance> _stance;
+        private FixedSkillCooldown _thunderbolt;
 
-        public ArcherFocusTracker Focus { get; set; }
-        public StanceTracker<ArcherStance> Stance { get; set; }
-        public FixedSkillCooldown Thunderbolt { get; set; }
+        public ArcherFocusTracker Focus
+        {
+            get => _focus;
+            set
+            {
+                if (_focus == value) return;
+                _focus = value;
+                NPC();
+            }
+        }
+        public StanceTracker<ArcherStance> Stance
+        {
+            get => _stance;
+            set
+            {
+                if(_stance== value) return;
+                _stance = value;
+                NPC();
+            }
+        }
+        public FixedSkillCooldown Thunderbolt
+        {
+            get => _thunderbolt;
+            set
+            {
+                if(_thunderbolt == value) return;
+                _thunderbolt = value;
+                NPC();
+            }
+        }
+
         public ArcherBarManager() : base()
         {
-            _instance = this;
             Focus = new ArcherFocusTracker();
             Stance = new StanceTracker<ArcherStance>();
             LoadSpecialSkills();
-            CurrentClassManager = this;
+            //CurrentClassManager = this;
         }
 
         protected override void LoadSpecialSkills()
@@ -29,7 +57,7 @@ namespace TCC.ViewModels
 
         public override bool StartSpecialSkill(SkillCooldown sk)
         {
-            if(sk.Skill.IconName == Thunderbolt.Skill.IconName)
+            if (sk.Skill.IconName == Thunderbolt.Skill.IconName)
             {
                 Thunderbolt.Start(sk.Cooldown);
                 return true;

@@ -5,9 +5,7 @@ namespace TCC.ViewModels
 {
     public class NinjaBarManager : ClassManager
     {
-        private static NinjaBarManager _instance;
         private bool _focusOn;
-        public static NinjaBarManager Instance => _instance ?? (_instance = new NinjaBarManager());
 
         public FixedSkillCooldown BurningHeart { get; set; }
         public FixedSkillCooldown FireAvalanche { get; set; }
@@ -26,18 +24,16 @@ namespace TCC.ViewModels
 
         public NinjaBarManager() : base()
         {
-            _instance = this;
-            CurrentClassManager = this;
             LoadSpecialSkills();
-            ST.PropertyChanged += FlashOnMaxSt;
+            StaminaTracker.PropertyChanged += FlashOnMaxSt;
         }
 
         private void FlashOnMaxSt(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(ST.Maxed))
+            if (e.PropertyName == nameof(StaminaTracker.Maxed))
             {
-                BurningHeart.FlashOnAvailable = ST.Maxed;
-                FireAvalanche.FlashOnAvailable = ST.Maxed;
+                BurningHeart.FlashOnAvailable = StaminaTracker.Maxed;
+                FireAvalanche.FlashOnAvailable = StaminaTracker.Maxed;
             }
         }
 

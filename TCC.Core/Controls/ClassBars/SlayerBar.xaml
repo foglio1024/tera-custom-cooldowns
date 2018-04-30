@@ -5,10 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
-             mc:Ignorable="d" >
-    <UserControl.DataContext>
-        <viewModels:SlayerBarManager/>
-    </UserControl.DataContext>
+             mc:Ignorable="d" d:DataContext="{d:DesignData SlayerBarManager}">
     <Grid Width="Auto" Margin="5" Name="Root">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

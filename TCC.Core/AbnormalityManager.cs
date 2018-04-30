@@ -64,7 +64,7 @@ namespace TCC
             {
                 BuffBarWindowViewModel.Instance.Player.AddOrRefreshDebuff(ab, duration, stacks);
                 CharacterWindowViewModel.Instance.Player.AddToDebuffList(ab);
-                ClassManager.SetStatus(ab, true);
+                //ClassManager.SetStatus(ab, true);
             }
             CheckPassivity(ab);
             //var sysMsg = new ChatMessage("@661\vAbnormalName\v" + ab.Name, SystemMessages.Messages["SMT_BATTLE_BUFF_DEBUFF"]);
@@ -101,7 +101,7 @@ namespace TCC
             {
                 BuffBarWindowViewModel.Instance.Player.RemoveDebuff(ab);
                 CharacterWindowViewModel.Instance.Player.RemoveFromDebuffList(ab);
-                ClassManager.SetStatus(ab, false);
+                //ClassManager.SetStatus(ab, false);
             }
         }
 

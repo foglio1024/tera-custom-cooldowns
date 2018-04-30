@@ -90,7 +90,7 @@ namespace TCC
         {
             CurrentPlayer.CurrentHP = hp;
             CharacterWindowViewModel.Instance.Player.CurrentHP = hp;
-            ClassManager.SetHP(Convert.ToInt32(hp));
+            //ClassManager.SetHP(Convert.ToInt32(hp));
 
 
         }
@@ -99,14 +99,14 @@ namespace TCC
             if (target != CurrentPlayer.EntityId) return;
             CurrentPlayer.CurrentMP = mp;
             CharacterWindowViewModel.Instance.Player.CurrentMP = mp;
-            ClassManager.SetMP(Convert.ToInt32(mp));
+            //ClassManager.SetMP(Convert.ToInt32(mp));
         }
         public static void SetPlayerSt(ulong target, float st)
         {
             if (target != CurrentPlayer.EntityId) return;
             CurrentPlayer.CurrentST = st;
             CharacterWindowViewModel.Instance.Player.CurrentST = st;
-            ClassManager.SetST(Convert.ToInt32(st));
+            ClassWindowViewModel.Instance.CurrentManager.SetST(Convert.ToInt32(st));
         }
         public static void SetPlayerFe(float en)
         {
@@ -131,21 +131,21 @@ namespace TCC
             if (target != CurrentPlayer.EntityId) return;
             CurrentPlayer.MaxHP = maxHp;
             CharacterWindowViewModel.Instance.Player.MaxHP = maxHp;
-            ClassManager.SetMaxHP(Convert.ToInt32(maxHp));
+            //ClassManager.SetMaxHP(Convert.ToInt32(maxHp));
         }
         public static void SetPlayerMaxMp(ulong target, int maxMp)
         {
             if (target != CurrentPlayer.EntityId) return;
             CurrentPlayer.MaxMP = maxMp;
             CharacterWindowViewModel.Instance.Player.MaxMP = maxMp;
-            ClassManager.SetMaxMP(Convert.ToInt32(maxMp));
+            //ClassManager.SetMaxMP(Convert.ToInt32(maxMp));
         }
         public static void SetPlayerMaxSt(ulong target, int maxSt)
         {
             if (target != CurrentPlayer.EntityId) return;
             CurrentPlayer.MaxST = maxSt;
             CharacterWindowViewModel.Instance.Player.MaxST = maxSt;
-            ClassManager.SetMaxST(Convert.ToInt32(maxSt));
+            ClassWindowViewModel.Instance.CurrentManager.SetMaxST(Convert.ToInt32(maxSt));
         }
 
         public static void SetPlayerShield(uint damage)

@@ -20,15 +20,15 @@ namespace TCC.Controls.ClassBars
         private void GunnerBar_OnLoaded(object sender, RoutedEventArgs e)
         {
             _dc = (GunnerBarManager) DataContext;
-            _an = new DoubleAnimation(_dc.ST.Factor * 359.99, TimeSpan.FromMilliseconds(150));
-            _dc.ST.PropertyChanged += ST_PropertyChanged;
+            _an = new DoubleAnimation(_dc.StaminaTracker.Factor * 359.99, TimeSpan.FromMilliseconds(150));
+            _dc.StaminaTracker.PropertyChanged += ST_PropertyChanged;
 
         }
 
         private void ST_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName != nameof(_dc.ST.Factor)) return;
-            _an.To = _dc.ST.Factor*359.99;
+            if (e.PropertyName != nameof(_dc.StaminaTracker.Factor)) return;
+            _an.To = _dc.StaminaTracker.Factor*359.99;
             MainReArc.BeginAnimation(Arc.EndAngleProperty, _an);
         }
     }

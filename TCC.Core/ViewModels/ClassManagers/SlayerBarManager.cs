@@ -5,15 +5,11 @@ namespace TCC.ViewModels
 {
     public class SlayerBarManager : ClassManager
     {
-        private static SlayerBarManager _instance;
-        public static SlayerBarManager Instance => _instance ?? (_instance = new SlayerBarManager());
 
         public DurationCooldownIndicator InColdBlood { get; set; }
         public FixedSkillCooldown OverhandStrike { get; set; }
         public SlayerBarManager() : base()
         {
-            _instance = this;
-            CurrentClassManager = this;
             LoadSpecialSkills();
         }
 

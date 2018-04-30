@@ -5,15 +5,11 @@ namespace TCC.ViewModels
 {
     public class ValkyrieBarManager : ClassManager
     {
-        private static ValkyrieBarManager _instance;
-        public static ValkyrieBarManager Instance => _instance ?? (_instance = new ValkyrieBarManager());
         public Counter RunemarksCounter { get; set; }
         public DurationCooldownIndicator Ragnarok { get; private set; }
 
         public ValkyrieBarManager() : base()
         {
-            _instance = this;
-            CurrentClassManager = this;
             RunemarksCounter = new Counter(7, false);
             LoadSpecialSkills();
         }
