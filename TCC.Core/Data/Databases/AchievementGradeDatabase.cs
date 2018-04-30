@@ -3,10 +3,10 @@ using System.IO;
 
 namespace TCC.Data.Databases
 {
-    public static class AchievementGradeDatabase
+    public class AchievementGradeDatabase
     {
-        public static Dictionary<uint, string> Grades;
-        public static void Load(string lang)
+        public Dictionary<uint, string> Grades { get; }
+        public AchievementGradeDatabase(string lang)
         {
             var f = File.OpenText($"resources/data/achi_grade/achi_grade-{lang}.tsv");
             Grades = new Dictionary<uint, string>();

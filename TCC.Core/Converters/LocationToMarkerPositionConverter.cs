@@ -12,8 +12,8 @@ namespace TCC.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var loc = (Location)value;
-            var point = MapDatabase.GetMarkerPosition(loc);
-            Console.WriteLine("{0},{1}", point.X, point.Y);
+            var point = SessionManager.MapDatabase.GetMarkerPosition(loc);
+            Console.WriteLine($"{point.X},{point.Y}");
             return new Thickness(point.Y,point.X, 0, 0);
 
         }

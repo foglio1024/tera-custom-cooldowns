@@ -346,6 +346,7 @@
     <Compile Include="Data\Databases\MapDatabase.cs" />
     <Compile Include="Data\Databases\PassivityDatabase.cs" />
     <Compile Include="Data\Databases\QuestDatabase.cs" />
+    <Compile Include="Data\SystemMessage.cs" />
     <Compile Include="Data\Dungeon.cs" />
     <Compile Include="Data\EnragePattern.cs" />
     <Compile Include="Data\Friend.cs" />
@@ -460,8 +461,8 @@
     <Compile Include="Data\MessagePieceType.cs" />
     <Compile Include="Data\Money.cs" />
     <Compile Include="Data\PrivateChatChannel.cs" />
-    <Compile Include="Data\SocialDatabase.cs" />
-    <Compile Include="Data\Databases\SystemMessages.cs" />
+    <Compile Include="Data\Databases\SocialDatabase.cs" />
+    <Compile Include="Data\Databases\SystemMessagesDatabase.cs" />
     <Compile Include="Data\User.cs" />
     <Compile Include="EntitiesManager.cs" />
     <Compile Include="PacketInspector.cs" />

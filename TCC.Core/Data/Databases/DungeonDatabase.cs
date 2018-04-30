@@ -8,8 +8,6 @@ namespace TCC.Data.Databases
 {
     public class DungeonDatabase
     {
-        private static DungeonDatabase _instance;
-        public static DungeonDatabase Instance => _instance ?? (_instance = new DungeonDatabase(SettingsManager.LastRegion));
         public Dictionary<uint, Dungeon> Dungeons;
         //public Dictionary<uint, Dungeon> DungeonDefinitions;
         public DungeonDatabase(string lang)
@@ -48,11 +46,6 @@ namespace TCC.Data.Databases
                     //var dg = new Dungeon(id, name, t, 0, false);
                 }
             }
-        }
-
-        internal static void Reload(string language)
-        {
-            _instance = new DungeonDatabase(language);
         }
 
         public string GetDungeonNameOrOpenWorld(uint continentId)

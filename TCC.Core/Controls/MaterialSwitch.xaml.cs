@@ -23,6 +23,8 @@ namespace TCC.Controls
 
         private readonly TimeSpan _animationDuration = TimeSpan.FromMilliseconds(150);
 
+        private readonly DependencyPropertyWatcher<bool> _dpw;
+
         public MaterialSwitch()
         {
             InitializeComponent();
@@ -37,8 +39,8 @@ namespace TCC.Controls
             SwitchHead.Fill = new SolidColorBrush(_offColor);
             SwitchBack.Fill = new SolidColorBrush(_backOffColor);
 
-            var statusWatcher = new DependencyPropertyWatcher<bool>(this, "Status");
-            statusWatcher.PropertyChanged += StatusWatcher_PropertyChanged;
+            _dpw= new DependencyPropertyWatcher<bool>(this, "Status");
+            _dpw.PropertyChanged += StatusWatcher_PropertyChanged;
         }
 
         private void StatusWatcher_PropertyChanged(object sender, EventArgs e)

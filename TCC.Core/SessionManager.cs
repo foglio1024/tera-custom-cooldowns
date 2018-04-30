@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using TCC.Data;
+using TCC.Data.Databases;
 using TCC.ViewModels;
 
 namespace TCC
@@ -11,17 +12,9 @@ namespace TCC
         public const int MaxDaily = 16;
         public const uint MaxGuardianPoints = 100000;
         private static bool _logged = !App.Debug;
-        public static bool Logged
-        {
-            get => _logged;
-            set
-            {
-                if (_logged == value) return;
-                _logged = value;
-                WindowManager.NotifyVisibilityChanged();
-            }
-        }
         private static bool _loadingScreen = true;
+        
+        private static bool _encounter;
         public static bool LoadingScreen
         {
             get => _loadingScreen;
@@ -32,8 +25,7 @@ namespace TCC
                 WindowManager.NotifyVisibilityChanged();
             }
         }
-        
-        private static bool _encounter;
+
         public static bool Encounter
         {
             get => _encounter;
@@ -48,10 +40,33 @@ namespace TCC
                 WindowManager.NotifyDimChanged();
             }
         }
-
+        public static bool Logged
+        {
+            get => _logged;
+            set
+            {
+                if (_logged == value) return;
+                _logged = value;
+                WindowManager.NotifyVisibilityChanged();
+            }
+        }
         public static bool IsElite { get; set; }
 
-        public static Player CurrentPlayer = new Player();
+        public static readonly Player CurrentPlayer = new Player();
+
+        public static AccountBenefitDatabase AccountBenefitDatabase { get; private set; }
+        public static MonsterDatabase MonsterDatabase { get; private set; }
+        public static ItemsDatabase ItemsDatabase { get; private set; }
+        public static SkillsDatabase SkillsDatabase { get;  private set; }
+        public static SystemMessagesDatabase SystemMessagesDatabase { get; private set; }
+        public static GuildQuestDatabase GuildQuestDatabase { get; private set; }
+        public static AchievementDatabase AchievementDatabase { get; private set; }
+        public static AchievementGradeDatabase AchievementGradeDatabase { get; private set; }
+        public static MapDatabase MapDatabase { get; private set; }
+        public static QuestDatabase QuestDatabase { get; private set; }
+        public static AbnormalityDatabase AbnormalityDatabase { get; private set; }
+        public static DungeonDatabase DungeonDatabase { get; private set; }
+        public static SocialDatabase SocialDatabase { get; private set; }
 
         public static void SetCombatStatus(ulong target, bool combat)
         {
@@ -144,6 +159,24 @@ namespace TCC
             CharacterWindowViewModel.Instance.Player.MaxShield = shield;
             CharacterWindowViewModel.Instance.Player.CurrentShield = shield;
 
+        }
+
+        public static void InitDatabases(string lang)
+        {
+            MonsterDatabase = new MonsterDatabase(lang);
+            AccountBenefitDatabase = new AccountBenefitDatabase(lang);
+            ItemsDatabase = new ItemsDatabase(lang);
+            SkillsDatabase = new SkillsDatabase(lang);
+            AbnormalityDatabase = new AbnormalityDatabase(lang);
+            DungeonDatabase = new  DungeonDatabase(lang);
+            SocialDatabase = new SocialDatabase(lang);
+            SkillsDatabase = new SkillsDatabase(lang);
+            SystemMessagesDatabase = new SystemMessagesDatabase(lang);
+            GuildQuestDatabase = new GuildQuestDatabase(lang);
+            AchievementDatabase = new AchievementDatabase(lang);
+            AchievementGradeDatabase =new AchievementGradeDatabase(lang);
+            MapDatabase= new MapDatabase(lang);
+            QuestDatabase= new QuestDatabase(lang);
         }
     }
 

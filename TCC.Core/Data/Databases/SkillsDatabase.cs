@@ -6,10 +6,10 @@ using System.Xml.Linq;
 
 namespace TCC.Data.Databases
 {
-    public static class SkillsDatabase
+    public class SkillsDatabase
     {
-        public static Dictionary<Class, Dictionary<uint, Skill>> Skills;
-        private static List<SkillConnection> SkillConnections;
+        public Dictionary<Class, Dictionary<uint, Skill>> Skills { get; }
+        private List<SkillConnection> SkillConnections { get; }
 
         private class SkillConnection
         {
@@ -29,7 +29,7 @@ namespace TCC.Data.Databases
             }
         }
 
-        public static void Load(string lang)
+        public SkillsDatabase(string lang)
         {
             var f = File.OpenText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory , $"resources/data/skills/skills-{lang}.tsv"));
 
@@ -83,7 +83,7 @@ namespace TCC.Data.Databases
 
         }
 
-        private static string FindSkillNameByIdClass(uint id, Class c)
+        private string FindSkillNameByIdClass(uint id, Class c)
         {
             if (Skills[c].TryGetValue(id, out var sk))
             {
@@ -93,7 +93,7 @@ namespace TCC.Data.Databases
 
         }
 
-        private static int GetSkillIdByConnectedId(uint id, Class c)
+        private int GetSkillIdByConnectedId(uint id, Class c)
         {
             foreach (var skillConnection in SkillConnections.Where(x => x.Class == c))
             {
@@ -107,7 +107,7 @@ namespace TCC.Data.Databases
             }
             return -1;
         }
-        public static string SkillIdToName(uint id, Class c)
+        public string SkillIdToName(uint id, Class c)
         {
             var name = FindSkillNameByIdClass(id, c);
             var connSkill = GetSkillIdByConnectedId(id, c);
@@ -122,7 +122,7 @@ namespace TCC.Data.Databases
             }
             return name;
         }
-        public static bool TryGetSkill(uint id, Class c, out Skill sk)
+        public bool TryGetSkill(uint id, Class c, out Skill sk)
         {
             var result = false;
             //var connSkills = GetSkillIdByConnectedId(id, c);
@@ -142,7 +142,7 @@ namespace TCC.Data.Databases
             return result;
 
         }
-        public static bool TryGetSkillByName(string name, Class c, out Skill sk)
+        public bool TryGetSkillByName(string name, Class c, out Skill sk)
         {
             var classSkills = Skills[c];
             sk = classSkills.FirstOrDefault(x => x.Value.Name.Contains(name) || x.Value.Name.Equals(name)).Value;

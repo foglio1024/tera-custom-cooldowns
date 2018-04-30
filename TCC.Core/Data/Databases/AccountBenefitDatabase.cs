@@ -4,10 +4,15 @@ using System.IO;
 
 namespace TCC.Data.Databases
 {
-    public static class AccountBenefitDatabase
+    public class AccountBenefitDatabase
     {
-        public static Dictionary<uint, string> Benefits;
-        public static void Load(string lang)
+        public Dictionary<uint, string> Benefits;
+
+        public AccountBenefitDatabase(string lang)
+        {
+            Load(lang);
+        }
+        public void Load(string lang)
         {
             Benefits = new Dictionary<uint, string>();
             var f = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + $"/resources/data/acc_benefits/acc_benefits-{lang}.tsv");

@@ -67,7 +67,7 @@ namespace TCC.Data
         {
             foreach (var keyVal in dungeonCooldowns)
             {
-                if (!DungeonDatabase.Instance.Dungeons.ContainsKey(keyVal.Key)) continue;
+                if (!SessionManager.DungeonDatabase.Dungeons.ContainsKey(keyVal.Key)) continue;
                 var dg = Dungeons.FirstOrDefault(x => x.Id == keyVal.Key);
                 if (dg != null)
                 {
@@ -188,13 +188,13 @@ namespace TCC.Data
             Id = id;
             Position = pos;
             MaxGuardianPoints = SessionManager.MaxGuardianPoints;
-            foreach (var dg in DungeonDatabase.Instance.Dungeons)
+            foreach (var dg in SessionManager.DungeonDatabase.Dungeons)
             {
                 Dungeons.Add(new DungeonCooldown(dg.Key, _dispatcher));
             }
             VisibleDungeons = new CollectionViewSource() { Source = Dungeons }.View;
-            VisibleDungeons.Filter = dc => DungeonDatabase.Instance.Dungeons.ContainsKey(((DungeonCooldown)dc).Id) &&
-            DungeonDatabase.Instance.Dungeons[((DungeonCooldown)dc).Id].Show;
+            VisibleDungeons.Filter = dc => SessionManager.DungeonDatabase.Dungeons.ContainsKey(((DungeonCooldown)dc).Id) &&
+                                           SessionManager.DungeonDatabase.Dungeons[((DungeonCooldown)dc).Id].Show;
             VisibleDungeons.SortDescriptions.Add(new SortDescription("Tier", ListSortDirection.Ascending));
 
             Jewels = new CollectionViewSource() { Source = Gear }.View;

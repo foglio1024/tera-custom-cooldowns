@@ -3,11 +3,11 @@ using System.IO;
 
 namespace TCC.Data.Databases
 {
-    public static class SystemMessages
+    public class SystemMessagesDatabase
     {
-        public static Dictionary<string, SystemMessage> Messages;
+        public Dictionary<string, SystemMessage> Messages { get; }
 
-        public static void Load(string lang)
+        public SystemMessagesDatabase(string lang)
         {
             var f = File.OpenText($"resources/data/sys_msg/sys_msg-{lang}.tsv");
             Messages = new Dictionary<string, SystemMessage>();
@@ -26,17 +26,5 @@ namespace TCC.Data.Databases
                 Messages.Add(opcodeName, sm);
             }
         }
-    }
-    public struct SystemMessage
-    {
-        public string Message;
-        public int ChatChannel;
-
-        public SystemMessage(string s, int ch)
-        {
-            Message = s;
-            ChatChannel = ch;
-        }
-
     }
 }

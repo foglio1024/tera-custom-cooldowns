@@ -25,58 +25,67 @@ namespace TCC
 
                 var skillId = Convert.ToUInt32(skillElement.Attribute("id").Value);
                 var row = Convert.ToInt32(skillElement.Attribute("row").Value);
-                if (type == CooldownType.Skill)
+                switch (type)
                 {
-                    if (SkillsDatabase.TryGetSkill(skillId, c, out var sk))
+                    case CooldownType.Skill:
                     {
-                        switch (row)
+                        if (SessionManager.SkillsDatabase.TryGetSkill(skillId, c, out var sk))
                         {
-                            case 1:
-                                Main.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
-                                break;
-                            case 2:
-                                Secondary.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
-                                break;
-                            case 3:
-                                Hidden.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
-                                break;
+                            switch (row)
+                            {
+                                case 1:
+                                    Main.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                    break;
+                                case 2:
+                                    Secondary.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                    break;
+                                case 3:
+                                    Hidden.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                    break;
+                            }
                         }
+                        break;
                     }
-                }
-                else if (type == CooldownType.Item)
-                {
-                    if (ItemSkillsDatabase.TryGetItemSkill(skillId, out var sk))
+                    case CooldownType.Item:
                     {
-                        switch (row)
+                        if (SessionManager.ItemsDatabase.TryGetItemSkill(skillId, out var sk))
                         {
-                            case 1:
-                                Main.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
-                                break;
-                            case 2:
-                                Secondary.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
-                                break;
-                            case 3:
-                                Hidden.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
-                                break;
+                            switch (row)
+                            {
+                                case 1:
+                                    Main.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                    break;
+                                case 2:
+                                    Secondary.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                    break;
+                                case 3:
+                                    Hidden.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                    break;
+                            }
                         }
+                        break;
                     }
-                }
-                else if (type == CooldownType.Passive)
-                {
-                    if (PassivityDatabase.TryGetPassivitySkill(skillId, out var sk))
+                    case CooldownType.Passive:
                     {
-                        switch (row)
+                        if (SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(skillId, out var ab))
                         {
-                            case 1:
-                                Main.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
-                                break;
-                            case 2:
-                                Secondary.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
-                                break;
-                            case 3:
-                                Hidden.Add(new FixedSkillCooldown(sk, type, CooldownWindowViewModel.Instance.GetDispatcher(), false));
-                                break;
+                            var sk = new Skill(ab.Id, Class.None, ab.Name, ab.ToolTip);
+                            PassivityDatabase.Passivities.Add(ab.Id);
+                            sk.SetSkillIcon((ab.IconName));
+                            switch (row)
+                            {
+                                case 1:
+                                    Main.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                    break;
+                                case 2:
+                                    Secondary.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                    break;
+                                case 3:
+                                    Hidden.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                    break;
+                            }
                         }
+                        break;
                     }
                 }
 

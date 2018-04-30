@@ -29,7 +29,7 @@ namespace TCC.Data
             }
         }
 
-        public DungeonTier Tier => DungeonDatabase.Instance.Dungeons[Id].Tier;
+        public DungeonTier Tier => SessionManager.DungeonDatabase.Dungeons[Id].Tier;
 
 
         public DungeonCooldown(uint id, Dispatcher d)
@@ -46,7 +46,7 @@ namespace TCC.Data
 
         internal int GetMaxBaseRuns()
         {
-            return DungeonDatabase.Instance.Dungeons[Id].MaxBaseRuns;
+            return SessionManager.DungeonDatabase.Dungeons[Id].MaxBaseRuns;
         }
         public int GetRuns()
         {

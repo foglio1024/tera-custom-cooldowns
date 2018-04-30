@@ -33,46 +33,46 @@ namespace TCC.Windows
                 switch (Context.CurrentClass)
                 {
                     case Class.Warrior:
-                        content.ContentTemplate = FindResource("warrior") as DataTemplate;
+                        content.ContentTemplate = FindResource("Warrior") as DataTemplate;
                         break;
                     case Class.Glaiver:
-                        content.ContentTemplate = FindResource("valkyrie") as DataTemplate;
+                        content.ContentTemplate = FindResource("Valkyrie") as DataTemplate;
                         break;
                     case Class.Archer:
-                        content.ContentTemplate = FindResource("archer") as DataTemplate;
+                        content.ContentTemplate = FindResource("Archer") as DataTemplate;
                         break;
                     case Class.Lancer:
-                        content.ContentTemplate = FindResource("lancer") as DataTemplate;
+                        content.ContentTemplate = FindResource("Lancer") as DataTemplate;
                         break;
                     case Class.Priest:
-                        content.ContentTemplate = FindResource("priest") as DataTemplate;
+                        content.ContentTemplate = FindResource("Priest") as DataTemplate;
                         break;
                     case Class.Elementalist:
-                        content.ContentTemplate = FindResource("mystic") as DataTemplate;
+                        content.ContentTemplate = FindResource("Mystic") as DataTemplate;
                         break;
                     case Class.Assassin:
-                        content.ContentTemplate = FindResource("ninja") as DataTemplate;
+                        content.ContentTemplate = FindResource("Ninja") as DataTemplate;
                         break;
                     case Class.Engineer:
-                        content.ContentTemplate = FindResource("gunner") as DataTemplate;
+                        content.ContentTemplate = FindResource("Gunner") as DataTemplate;
                         break;
                     case Class.Fighter:
-                        content.ContentTemplate = FindResource("brawler") as DataTemplate;
+                        content.ContentTemplate = FindResource("Brawler") as DataTemplate;
                         break;
                     case Class.Soulless:
-                        content.ContentTemplate = FindResource("reaper") as DataTemplate;
+                        content.ContentTemplate = FindResource("Reaper") as DataTemplate;
                         break;
                     case Class.Sorcerer:
-                        content.ContentTemplate = FindResource("sorcerer") as DataTemplate;
+                        content.ContentTemplate = FindResource("Sorcerer") as DataTemplate;
                         break;
                     case Class.Berserker:
-                        content.ContentTemplate = FindResource("berserker") as DataTemplate;
+                        content.ContentTemplate = FindResource("Berserker") as DataTemplate;
                         break;
                     case Class.Slayer:
-                        content.ContentTemplate = FindResource("slayer") as DataTemplate;
+                        content.ContentTemplate = FindResource("Slayer") as DataTemplate;
                         break;
                     default:
-                        content.ContentTemplate = FindResource("emptyTemplate") as DataTemplate;
+                        content.ContentTemplate = FindResource("EmptyTemplate") as DataTemplate;
                         break;
                 }
             }

@@ -22,7 +22,7 @@ namespace TCC.ViewModels
 
         protected override void LoadSpecialSkills()
         {
-            SkillsDatabase.TryGetSkill(290100, Class.Archer, out var tb);
+            SessionManager.SkillsDatabase.TryGetSkill(290100, Class.Archer, out var tb);
             Thunderbolt = new FixedSkillCooldown(tb, _dispatcher, true);
 
         }

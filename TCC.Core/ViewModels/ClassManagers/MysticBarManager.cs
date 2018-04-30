@@ -32,12 +32,14 @@ namespace TCC.ViewModels
 
         protected override void LoadSpecialSkills()
         {
-            SkillsDatabase.TryGetSkill(410100, Class.Elementalist, out var cont);
-            SkillsDatabase.TryGetSkill(120100, Class.Elementalist, out var vow);
+            SessionManager.SkillsDatabase.TryGetSkill(410100, Class.Elementalist, out var cont);
+            SessionManager.SkillsDatabase.TryGetSkill(120100, Class.Elementalist, out var vow);
             Contagion = new FixedSkillCooldown(cont, _dispatcher, true);
-            Vow = new DurationCooldownIndicator(_dispatcher);
-            Vow.Buff = new FixedSkillCooldown(vow, _dispatcher, false);
-            Vow.Cooldown = new FixedSkillCooldown(vow,_dispatcher,false);
+            Vow = new DurationCooldownIndicator(_dispatcher)
+            {
+                Buff = new FixedSkillCooldown(vow, _dispatcher, false),
+                Cooldown = new FixedSkillCooldown(vow, _dispatcher, false)
+            };
         }
 
         public override bool StartSpecialSkill(SkillCooldown sk)

@@ -88,7 +88,7 @@ namespace TCC.ViewModels
             {
                 var list = new SynchronizedObservableCollection<Skill>();
                 var c = SessionManager.CurrentPlayer.Class;
-                var skillsForClass = SkillsDatabase.Skills[c];
+                var skillsForClass = SessionManager.SkillsDatabase.Skills[c];
                 foreach (var skill in skillsForClass.Values)
                 {
                     if (MainSkills.Any(x => x.Skill.IconName == skill.IconName)) continue;

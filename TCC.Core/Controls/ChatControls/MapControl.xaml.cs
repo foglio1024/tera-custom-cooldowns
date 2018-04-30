@@ -54,7 +54,7 @@ namespace TCC.Controls.ChatControls
         internal void OnDataChanged()
         {           
             var c = (MessagePiece)DataContext;
-            var isDg = MapDatabase.GetDungeon(c.Location);
+            var isDg = SessionManager.MapDatabase.GetDungeon(c.Location);
             if (MapImg.Source == null) return;
             var ratio = MapImg.Source.Width / MapImg.Source.Height;
 

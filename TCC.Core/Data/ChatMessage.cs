@@ -460,7 +460,7 @@ namespace TCC.Data
             }
             start += header.Length;
             var id = uint.Parse(msg.Substring(start));
-            var text = SocialDatabase.Social[id].Replace("{Name}", Author);
+            var text = SessionManager.SocialDatabase.Social[id].Replace("{Name}", Author);
             AddPiece(new MessagePiece(text, MessagePieceType.Simple, Channel, SettingsManager.FontSize, false));
 
         }
@@ -695,13 +695,13 @@ namespace TCC.Data
             var text = a.Substring(textStart, textEnd - textStart); //get actual map name from database
             text = ReplaceEscapes(text);
 
-            var world = MapDatabase.Worlds[worldId];
+            var world = SessionManager.MapDatabase.Worlds[worldId];
             var guard = world.Guards[guardId];
             var section = guard.Sections[sectionId];
             var sb = new StringBuilder();
 
-            var guardName = guard.NameId != 0 ? MapDatabase.Names[guard.NameId] : "";
-            var sectionName = MapDatabase.Names[section.NameId];
+            var guardName = guard.NameId != 0 ? SessionManager.MapDatabase.Names[guard.NameId] : "";
+            var sectionName = SessionManager.MapDatabase.Names[section.NameId];
             //sb.Append(MapDatabase.Names[world.NameId]);
             sb.Append("<");
 
@@ -729,7 +729,7 @@ namespace TCC.Data
         protected MessagePiece ParseSysMsgZone(Dictionary<string, string> dictionary)
         {
             var zoneId = uint.Parse(dictionary["zoneName"]);
-            var zoneName = EntitiesManager.CurrentDatabase.GetZoneName(zoneId);
+            var zoneName = SessionManager.MonsterDatabase.GetZoneName(zoneId);
             var txt = zoneId.ToString();
             if (zoneName != null) txt = zoneName;
             var mp = new MessagePiece(txt)
@@ -747,7 +747,7 @@ namespace TCC.Data
 
             var txt = creatureId;
 
-            if (EntitiesManager.CurrentDatabase.TryGetMonster(templateId, zoneId, out var m))
+            if (SessionManager.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m))
             {
                 txt = m.Name;
             }
@@ -777,7 +777,7 @@ namespace TCC.Data
                 rawLink.Append("@" + username);
             }
             var mp = new MessagePiece(id.ToString());
-            if (ItemsDatabase.Instance.Items.TryGetValue(id, out var i))
+            if (SessionManager.ItemsDatabase.Items.TryGetValue(id, out var i))
             {
                 var txt = $"<{i.Name}>";
                 mp = new MessagePiece(txt)
@@ -797,7 +797,7 @@ namespace TCC.Data
         {
             var id = GetId(info, "achievement");
             var achiName = id.ToString();
-            if (AchievementDatabase.Achievements.TryGetValue(id, out var g))
+            if (SessionManager.AchievementDatabase.Achievements.TryGetValue(id, out var g))
             {
                 achiName = $"[{g}]";
             }
@@ -807,7 +807,7 @@ namespace TCC.Data
         {
             var id = GetId(info, "quest");
             var txt = id.ToString();
-            if (QuestDatabase.Quests.TryGetValue(id, out var q))
+            if (SessionManager.QuestDatabase.Quests.TryGetValue(id, out var q))
             {
                 txt = q;
             }
@@ -819,7 +819,7 @@ namespace TCC.Data
             var txt = id.ToString();
             var col = "fcb06f";
 
-            if (AchievementGradeDatabase.Grades.TryGetValue(id, out var g))
+            if (SessionManager.AchievementGradeDatabase.Grades.TryGetValue(id, out var g))
             {
                 txt = g;
                 if(id == 104) col = "38bde5";
@@ -832,7 +832,7 @@ namespace TCC.Data
         {
             var id = GetId(info, "dungeon");
             var txt = id.ToString();
-            if (DungeonDatabase.Instance.Dungeons.TryGetValue(id, out var dngName))
+            if (SessionManager.DungeonDatabase.Dungeons.TryGetValue(id, out var dngName))
             {
                 txt = dngName.Name;
             }
@@ -842,7 +842,7 @@ namespace TCC.Data
         {
             var id = GetId(info, "accountBenefit");
             var txt = id.ToString();
-            if (AccountBenefitDatabase.Benefits.TryGetValue(id, out var ab))
+            if (SessionManager.AccountBenefitDatabase.Benefits.TryGetValue(id, out var ab))
             {
                 txt = ab;
             }
@@ -852,7 +852,7 @@ namespace TCC.Data
         {
             var id = GetId(info, "GuildQuest");
             var questName = id.ToString();
-            if (GuildQuestDatabase.GuildQuests.TryGetValue(id, out var q))
+            if (SessionManager.GuildQuestDatabase.GuildQuests.TryGetValue(id, out var q))
             {
                 questName = q.Title;
             }

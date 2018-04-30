@@ -229,7 +229,7 @@ namespace TCC.ViewModels
                 opcode = "SMT_JOIN_PARTY_PARTYPLAYER";
                 msg = "@0\vPartyPlayerName\v" + name + "\vparty\vparty";
             }
-            SystemMessages.Messages.TryGetValue(opcode, out var m);
+            SessionManager.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
         }
         private void SendLeaveMessage(string name)
@@ -246,7 +246,7 @@ namespace TCC.ViewModels
                 opcode = "SMT_LEAVE_PARTY_PARTYPLAYER";
                 msg = "@0\vPartyPlayerName\v" + name + "\vparty\vparty";
             }
-            SystemMessages.Messages.TryGetValue(opcode, out var m);
+            SessionManager.SystemMessagesDatabase.Messages.TryGetValue(opcode, out var m);
             SystemMessagesProcessor.AnalyzeMessage(msg, m, opcode);
 
         }
@@ -440,7 +440,7 @@ namespace TCC.ViewModels
             u = Members.ToSyncArray().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
             if (u == null) return;
             var ch = p.Channel > 1000 ? "" : " ch." + p.Channel;
-            u.Location = MapDatabase.TryGetGuardOrDungeonNameFromContinentId(p.ContinentId, out var l) ? l + ch : "Unknown";
+            u.Location = SessionManager.MapDatabase.TryGetGuardOrDungeonNameFromContinentId(p.ContinentId, out var l) ? l + ch : "Unknown";
         }
 
     }

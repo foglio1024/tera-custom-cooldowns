@@ -58,10 +58,9 @@ namespace TCC.ViewModels
 
         protected override void LoadSpecialSkills()
         {
-
-            SkillsDatabase.TryGetSkill(70300, Class.Lancer, out var gshout);
-            SkillsDatabase.TryGetSkill(170200, Class.Lancer, out var arush);
-            SkillsDatabase.TryGetSkill(120100, Class.Lancer, out var infu);
+            SessionManager.SkillsDatabase.TryGetSkill(70300, Class.Lancer, out var gshout);
+            SessionManager.SkillsDatabase.TryGetSkill(170200, Class.Lancer, out var arush);
+            SessionManager.SkillsDatabase.TryGetSkill(120100, Class.Lancer, out var infu);
 
             GuardianShout = new DurationCooldownIndicator(_dispatcher);
             AdrenalineRush = new DurationCooldownIndicator(_dispatcher);

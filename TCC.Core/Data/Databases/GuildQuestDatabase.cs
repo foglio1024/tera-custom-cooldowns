@@ -4,10 +4,10 @@ using System.IO;
 
 namespace TCC.Data.Databases
 {
-    public static class GuildQuestDatabase
+    public class GuildQuestDatabase
     {
-        public static Dictionary<uint, GuildQuest> GuildQuests;
-        public static void Load(string lang)
+        public Dictionary<uint, GuildQuest> GuildQuests { get; }
+        public GuildQuestDatabase(string lang)
         {
             GuildQuests = new Dictionary<uint, GuildQuest>();
             var f = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + $"/resources/data/guild_quests/guild_quests-{lang}.tsv");

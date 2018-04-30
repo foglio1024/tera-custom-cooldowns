@@ -36,7 +36,7 @@ namespace TCC.Parsing.Messages
                 u.Order = Convert.ToInt32(reader.ReadInt16());
                 var gId = reader.ReadUInt32();
                 var aId = reader.ReadUInt32();
-                u.Location = TCC.Data.Databases.MapDatabase.GetName(gId, aId);
+                u.Location = SessionManager.MapDatabase.GetName(gId, aId);
                 u.IsLeader = reader.ReadBoolean();
                 //u.Laurel = (Laurel)reader.ReadUInt32();
                 Console.WriteLine("---");

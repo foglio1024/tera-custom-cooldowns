@@ -3,10 +3,10 @@ using System.IO;
 
 namespace TCC.Data.Databases
 {
-    public static class QuestDatabase
+    public class QuestDatabase
     {
-        public static Dictionary<uint, string> Quests;
-        public static void Load(string lang)
+        public Dictionary<uint, string> Quests { get; }
+        public QuestDatabase(string lang)
         {
             var f = File.OpenText($"resources/data/quests/quests-{lang}.tsv");
             Quests = new Dictionary<uint, string>();

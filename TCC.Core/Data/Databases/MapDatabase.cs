@@ -8,14 +8,14 @@ using System.Xml.Linq;
 
 namespace TCC.Data.Databases
 {
-    public static class MapDatabase
+    public class MapDatabase
     {
-        public static Dictionary<uint, World> Worlds;
-        public static Dictionary<uint, string> Names;
+        public Dictionary<uint, World> Worlds { get; }
+        public Dictionary<uint, string> Names { get; }
 
         [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
         [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
-        public static void Load(string lang)
+        public MapDatabase(string lang)
         {
             Worlds = new Dictionary<uint, World>();
             Names = new Dictionary<uint, string>();
@@ -67,11 +67,11 @@ namespace TCC.Data.Databases
             LoadNames(lang);
         }
 
-        public static bool TryGetGuardOrDungeonNameFromContinentId(uint continent, out string s)
+        public bool TryGetGuardOrDungeonNameFromContinentId(uint continent, out string s)
         {
-            if (DungeonDatabase.Instance.Dungeons.ContainsKey(continent))
+            if (SessionManager.DungeonDatabase.Dungeons.ContainsKey(continent))
             {
-                s = DungeonDatabase.Instance.Dungeons[continent].Name;
+                s = SessionManager.DungeonDatabase.Dungeons[continent].Name;
                 return true;
             }
             var guard = Worlds[1].Guards.FirstOrDefault(x => x.Value.ContinentId == continent);
@@ -83,20 +83,18 @@ namespace TCC.Data.Databases
             s = Names[guard.Value.NameId];
             return true;
         }
-
-        internal static bool GetDungeon(Location loc)
+        public bool GetDungeon(Location loc)
         {
             if (loc.World == 9999) return true;
             return Worlds[loc.World].Guards[loc.Guard].Sections[loc.Section].IsDungeon;
         }
-        internal static Point GetMarkerPosition(Location loc)
+        public Point GetMarkerPosition(Location loc)
         {
             var section = Worlds[loc.World].Guards[loc.Guard].Sections[loc.Section];
             var offset = new Point(section.Left, section.Top);
             return new Point((offset.Y - loc.Position.X) / section.Scale, (-offset.X + loc.Position.Y) / section.Scale);
         }
-
-        private static void LoadNames(string lang)
+        private void LoadNames(string lang)
         {
             var f = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + $"/resources/data/regions/regions-{lang}.tsv");
             while (true)
@@ -113,13 +111,11 @@ namespace TCC.Data.Databases
             }
 
         }
-
-        public static string GetMapId(uint w, uint g, uint s)
+        public string GetMapId(uint w, uint g, uint s)
         {
             return Worlds[w].Guards[g].Sections[s].MapId;
         }
-
-        public static string GetName(uint guardId, uint sectionId)
+        public string GetName(uint guardId, uint sectionId)
         {
             var ret = "Unknown;";
             try

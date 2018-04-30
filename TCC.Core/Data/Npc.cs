@@ -213,7 +213,7 @@ namespace TCC.Data
         //{
         //    _dispatcher = BossGageWindowViewModel.Instance.GetDispatcher();
         //    EntityId = eId;
-        //    Name = EntitiesManager.CurrentDatabase.GetName(tId, zId);
+        //    Name = EntitiesManager.MonsterDatabase.GetName(tId, zId);
         //    ZoneId = zId;
         //    TemplateId = tId;
         //    MaxHP = maxHP;
@@ -235,8 +235,8 @@ namespace TCC.Data
         {
             _dispatcher = BossGageWindowViewModel.Instance.GetDispatcher();
             EntityId = eId;
-            Name = EntitiesManager.CurrentDatabase.GetName(tId, zId);
-            MaxHP = EntitiesManager.CurrentDatabase.GetMaxHP(tId, zId);
+            Name = SessionManager.MonsterDatabase.GetName(tId, zId);
+            MaxHP = SessionManager.MonsterDatabase.GetMaxHP(tId, zId);
             ZoneId = zId;
             IsBoss = boss;
             TemplateId = tId;

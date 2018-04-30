@@ -167,6 +167,9 @@ namespace TCC
             SplashScreen.SetText("Loading settings...");
             SettingsManager.LoadWindowSettings();
             SettingsManager.LoadSettings();
+            //preload databases
+            SplashScreen.SetText("Pre-loading databases...");
+            SessionManager.InitDatabases(SettingsManager.LastRegion == "" ? "EU-EN" : SettingsManager.LastRegion);
             SplashScreen.SetText("Initializing windows...");
             WindowManager.Init();
             WindowManager.Settings = new SettingsWindow() { Name = "Settings" };

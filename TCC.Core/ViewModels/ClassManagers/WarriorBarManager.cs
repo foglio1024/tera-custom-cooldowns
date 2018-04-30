@@ -28,7 +28,7 @@ namespace TCC.ViewModels
         {
             //Deadly gamble
             DeadlyGamble = new DurationCooldownIndicator(_dispatcher);
-            SkillsDatabase.TryGetSkill(200200, Class.Warrior, out var dg);
+            SessionManager.SkillsDatabase.TryGetSkill(200200, Class.Warrior, out var dg);
             DeadlyGamble.Buff = new FixedSkillCooldown(dg, _dispatcher, false);
             DeadlyGamble.Cooldown = new FixedSkillCooldown(dg, _dispatcher, true);
         }

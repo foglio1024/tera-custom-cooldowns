@@ -9,8 +9,6 @@ namespace TCC.Data.Databases
 {
     public class ItemsDatabase
     {
-        private static ItemsDatabase _instance;
-        public static ItemsDatabase Instance => _instance ?? (_instance = new ItemsDatabase());
         public Dictionary<uint, Item> Items;
         public Dictionary<uint, Dictionary<int, int>> ExpData;
         public ItemsDatabase(string lang = "EU-EN")
@@ -26,22 +24,15 @@ namespace TCC.Data.Databases
 
                 var id = Convert.ToUInt32(s[0]);
                 var grad = Convert.ToUInt32(s[1]);
-                //var bound = s[2];
                 var name = s[2];
                 var expId = Convert.ToUInt32(s[3]);
                 var cd = Convert.ToUInt32(s[4]);
                 var icon = s[5];
-                //lazy raw overrides because BHS can't do stuff right .-.
-
-                //if (bound == "EquipToItem") bound = "Equip";
-                //if (bound == "none") bound = "None";
-                //if (bound == "NONE") bound = "None";
-                //if (bound == "EQUIP") bound = "Equip";
 
                 var item = new Item(id, name, grad, expId, cd, icon);
                 Items.Add(id, item);
             }
-            var xpFile = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory +$"/resources/data/equip_exp/equip_exp-{lang}.xml");
+            var xpFile = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + $"/resources/data/equip_exp/equip_exp-{lang}.xml");
             ExpData = new Dictionary<uint, Dictionary<int, int>>();
             foreach (var xElement in xpFile.Descendants().Where(x => x.Name == "EquipmentExp"))
             {
@@ -55,10 +46,7 @@ namespace TCC.Data.Databases
                 }
                 ExpData.Add(id, d);
             }
-            Debug.WriteLine("Loaded {0} items.", Items.Count);
-
         }
-
         public int GetMaxExp(uint id, int enchant)
         {
             if (!Items.ContainsKey(id)) return 0;
@@ -69,11 +57,22 @@ namespace TCC.Data.Databases
         {
             return Items.ContainsKey(id) ? Items[id].Name : "Unknown";
         }
-
-        public static void Reload(string lang)
+        public bool TryGetItemSkill(uint itemId, out Skill sk)
         {
-            _instance = new ItemsDatabase(lang);
+            var result = false;
+            sk = new Skill(0, Class.None, string.Empty, string.Empty);
+
+            if (Items.ContainsKey(itemId))
+            {
+                var item = Items[itemId];
+                result = true;
+                sk = new Skill(itemId, Class.Common, item.Name, "");
+                sk.SetSkillIcon(item.Icon);
+            }
+            return result;
+
         }
+
     }
 
     public class Item
@@ -82,8 +81,8 @@ namespace TCC.Data.Databases
         public uint ExpId { get; private set; }
         public string Name { get; private set; }
         public RareGrade RareGrade { get; private set; }
-        public  uint Cooldown { get; private set; }
-        public  string Icon { get; private set; }
+        public uint Cooldown { get; private set; }
+        public string Icon { get; private set; }
         public Item(uint id, string name, uint g, uint expId, uint cd, string icon)
         {
             Id = id;
