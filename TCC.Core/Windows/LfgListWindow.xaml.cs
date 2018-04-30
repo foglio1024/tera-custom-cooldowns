@@ -88,9 +88,9 @@ namespace TCC.Windows
 
         internal void ShowWindow()
         {
-            var animation = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));
             Dispatcher.Invoke(() =>
             {
+                var animation = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));
                 if (IsVisible) return;
                 Opacity = 0;
                 Show();
