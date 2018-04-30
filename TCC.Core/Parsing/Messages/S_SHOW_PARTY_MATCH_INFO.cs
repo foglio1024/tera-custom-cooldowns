@@ -20,6 +20,7 @@ namespace TCC.Parsing.Messages
             if (count == 0)
             {
                 Listings.Clear();
+                IsLast = true;
                 return;
             }
 
