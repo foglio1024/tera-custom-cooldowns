@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using TCC.ViewModels;
 
-namespace TCC.Controls
+namespace TCC.Controls.ClassBars
 {
     /// <summary>
     /// Logica di interazione per BrawlerBar.xaml
     /// </summary>
-    public partial class BrawlerBar : UserControl
+    public partial class BrawlerBar
     {
         public BrawlerBar()
         {
@@ -26,11 +25,9 @@ namespace TCC.Controls
 
         private void ST_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(_dc.ST.Factor))
-            {
-                _an.To = _dc.ST.Factor*359.99;
-                MainReArc.BeginAnimation(Arc.EndAngleProperty,_an);
-            }
+            if (e.PropertyName != nameof(_dc.ST.Factor)) return;
+            _an.To = _dc.ST.Factor*359.99;
+            MainReArc.BeginAnimation(Arc.EndAngleProperty,_an);
         }
 
     }

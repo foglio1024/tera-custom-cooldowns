@@ -151,7 +151,7 @@ namespace TCC
             ContextMenu = new ContextMenu();
             DefaultIcon = new Icon(Application.GetResourceStream(new Uri("resources/tcc-logo.ico", UriKind.Relative)).Stream);
             ConnectedIcon = new Icon(Application.GetResourceStream(new Uri("resources/tcc-logo-on.ico", UriKind.Relative)).Stream);
-            TrayIcon = new System.Windows.Forms.NotifyIcon()
+            TrayIcon = new NotifyIcon()
             {
                 Icon = DefaultIcon,
                 Visible = true
@@ -167,7 +167,7 @@ namespace TCC
 
             _undimTimer.Elapsed += _undimTimer_Elapsed;
 
-            FocusManager.FocusTimer = new System.Timers.Timer(1000);
+            FocusManager.FocusTimer = new Timer(1000);
             FocusManager.FocusTimer.Elapsed += FocusManager.CheckForegroundWindow;
 
             //ClickThruChanged += (s, ev) => UpdateClickThru();

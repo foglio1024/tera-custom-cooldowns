@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 
 namespace TCC.Data
 {
@@ -16,7 +17,7 @@ namespace TCC.Data
         {
             get
             {
-                return Width / (double)App.Current.FindResource("MapWidth");
+                return Width / (double)Application.Current.FindResource("MapWidth");
             }
         }
         public Section(uint sId, uint sNameId, string mapId, bool dg, double top = 0, double left = 0, double width = 0, double height = 0)

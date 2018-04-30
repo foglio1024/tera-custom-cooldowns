@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TCC.Windows"
         xmlns:controls="clr-namespace:TCC.Controls"
         xmlns:vm="clr-namespace:TCC.ViewModels"
-        xmlns:tcc="clr-namespace:TCC"
+        xmlns:data="clr-namespace:TCC.Data"
         Topmost="True"
         mc:Ignorable="d" WindowStyle="None" AllowsTransparency="True" 
         Title="Settings" Height="Auto" Width="Auto" ResizeMode="NoResize" Loaded="Window_Loaded" SizeToContent="WidthAndHeight" 
@@ -28,16 +28,16 @@
             <Setter Property="ToolTipService.ShowDuration" Value="5000000"></Setter>
             <Setter Property="ToolTipService.InitialShowDelay" Value="0"></Setter>
         </Style>
-        <Style x:Key="{x:Type ToolTip}" TargetType="{x:Type ToolTip}">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-        </Style>
-        <Style x:Key="settingsGrid" TargetType="StackPanel">
+        <Style x:Key="SettingsGrid" TargetType="StackPanel">
             <Setter Property="Margin" Value="-2,-2,-1,0"/>
         </Style>
         <Style TargetType="{x:Type Separator}">
             <Setter Property="Background" Value="#3999"/>
             <Setter Property="Margin" Value="10,1"/>
+        </Style>
+        <Style TargetType="{x:Type ToolTip}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
         </Style>
         <ToolTip x:Key="EnabledSettingTooltip">
             <Grid Margin="5">
@@ -104,19 +104,6 @@
                 <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                     <Run Text="Sets the window opacity to this when TCC is dimmed."/>
-                </TextBlock>
-            </Grid>
-        </ToolTip>
-        <ToolTip x:Key="TransparencySettingTooltip">
-            <Grid Margin="5">
-                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
-                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
-                    <Run Text="Turns window transparency on/off."/>
-                    <Run Text="It's advised to keep this setting on, unless you want to stream and your video capture software doesen't support transparent windows."/>
-                    <LineBreak/>
-                    <LineBreak/>
-                    <Run Text="Warning:" Foreground="DarkOrange"/>
-                    <Run Text="it requires TCC restart to take effect."/>
                 </TextBlock>
             </Grid>
         </ToolTip>
@@ -196,17 +183,17 @@
                 <!-- Cooldown window settings -->
 
                 <!--Settings-->
-                <StackPanel Grid.Row="1" Name="cooldownSettingsGrid" Style="{StaticResource settingsGrid}">
+                <StackPanel Name="CooldownSettingsGrid" Style="{StaticResource SettingsGrid}">
                     <controls:BoolSetting SettingName="Enabled" IsOn="{Binding CooldownWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" ToolTip="{StaticResource EnabledSettingTooltip}"/>
                     <controls:BoolSetting SettingName="Visibility" IsOn="{Binding CooldownWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource VisibilitySettingTooltip}"/>
                     <controls:BoolSetting SettingName="Show always" IsOn="{Binding CooldownWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource ShowAlwaysSettingTooltip}"/>
-                    <controls:SelectionSetting SettingName="Click through mode" Grid.Row="1" SelectedItem="{Binding CooldownWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type tcc:ClickThruMode}"  Choices="{Binding ClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" ToolTip="{StaticResource ClickThruModeSettingTooltip}"/>
+                    <controls:SelectionSetting SettingName="Click through mode" Grid.Row="1" SelectedItem="{Binding CooldownWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type data:ClickThruMode}"  Choices="{Binding ClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" ToolTip="{StaticResource ClickThruModeSettingTooltip}"/>
                     <controls:ValueSetting SettingName="Scale"  Min="0" Max="3" Value="{Binding CooldownWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png" />
                     <controls:BoolSetting SettingName="Auto dim"  IsOn="{Binding CooldownWindowSettings.AutoDim, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png"  ToolTip="{StaticResource AutoDimSettingTooltip}"/>
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Value="{Binding CooldownWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png" ToolTip="{StaticResource DimOpacitySettingTooltip}"/>
                     <!--<controls:BoolSetting SettingName="Transparency" IsOn="{Binding CooldownWindowSettings.AllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource TransparencySettingTooltip}"/>-->
                     <Separator/>
-                    <controls:SelectionSetting SettingName="Cooldown bar mode" SelectedItem="{Binding CooldownBarMode, Mode=TwoWay}" Choices="{Binding CooldownBarModes}" ChoicesType="{x:Type tcc:CooldownBarMode}"  ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_timelapse_white_24dp_2x.png" >
+                    <controls:SelectionSetting SettingName="Cooldown bar mode" SelectedItem="{Binding CooldownBarMode, Mode=TwoWay}" Choices="{Binding CooldownBarModes}" ChoicesType="{x:Type data:CooldownBarMode}"  ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_timelapse_white_24dp_2x.png" >
                         <controls:SelectionSetting.ToolTip>
                             <Grid Margin="5">
                                 <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
@@ -241,11 +228,11 @@
                     </Grid>
                 </TabItem.Header>
                 <!-- Boss window settings-->
-                <StackPanel Style="{StaticResource settingsGrid}">
+                <StackPanel Style="{StaticResource SettingsGrid}">
                     <controls:BoolSetting SettingName="Enabled" IsOn="{Binding BossWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" ToolTip="{StaticResource EnabledSettingTooltip}"/>
                     <controls:BoolSetting SettingName="Visibility" IsOn="{Binding BossWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource VisibilitySettingTooltip}"/>
                     <controls:BoolSetting SettingName="Show always" IsOn="{Binding BossWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource ShowAlwaysSettingTooltip}"/>
-                    <controls:SelectionSetting SettingName="Click through mode" SelectedItem="{Binding BossWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type tcc:ClickThruMode}"  Choices="{Binding ClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" ToolTip="{StaticResource ClickThruModeSettingTooltip}"/>
+                    <controls:SelectionSetting SettingName="Click through mode" SelectedItem="{Binding BossWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type data:ClickThruMode}"  Choices="{Binding ClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" ToolTip="{StaticResource ClickThruModeSettingTooltip}"/>
                     <controls:ValueSetting SettingName="Scale" Min="0" Max="3" Value="{Binding BossWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"/>
                     <controls:BoolSetting SettingName="Auto dim" IsOn="{Binding BossWindowSettings.AutoDim, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" ToolTip="{StaticResource AutoDimSettingTooltip}"/>
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1"  Value="{Binding BossWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png" ToolTip="{StaticResource DimOpacitySettingTooltip}"/>
@@ -263,7 +250,7 @@
                             </ToolTip>
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
-                    <controls:SelectionSetting SettingName="Enrage label mode" SelectedItem="{Binding EnrageLabelMode, Mode=TwoWay}" ChoicesType="{x:Type tcc:EnrageLabelMode}" Choices="{Binding EnrageLabelModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
+                    <controls:SelectionSetting SettingName="Enrage label mode" SelectedItem="{Binding EnrageLabelMode, Mode=TwoWay}" ChoicesType="{x:Type data:EnrageLabelMode}" Choices="{Binding EnrageLabelModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
 
                 </StackPanel>
             </TabItem>
@@ -280,11 +267,11 @@
                     </Grid>
                 </TabItem.Header>
                 <!-- Character window settings -->
-                <StackPanel Name="characterSettingsGrid" Style="{StaticResource settingsGrid}">
+                <StackPanel Name="CharacterSettingsGrid" Style="{StaticResource SettingsGrid}">
                     <controls:BoolSetting SettingName="Enabled" IsOn="{Binding CharacterWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" ToolTip="{StaticResource EnabledSettingTooltip}"/>
                     <controls:BoolSetting  SettingName="Visibility" IsOn="{Binding CharacterWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource VisibilitySettingTooltip}"/>
                     <controls:BoolSetting SettingName="Show always" IsOn="{Binding CharacterWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource ShowAlwaysSettingTooltip}"/>
-                    <controls:SelectionSetting SettingName="Click through mode" SelectedItem="{Binding CharacterWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type tcc:ClickThruMode}"  Choices="{Binding ClickThruModes, Mode=OneWay}" ToolTip="{StaticResource ClickThruModeSettingTooltip}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
+                    <controls:SelectionSetting SettingName="Click through mode" SelectedItem="{Binding CharacterWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type data:ClickThruMode}"  Choices="{Binding ClickThruModes, Mode=OneWay}" ToolTip="{StaticResource ClickThruModeSettingTooltip}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
                     <controls:ValueSetting SettingName="Scale" Min="0" Max="3" Value="{Binding CharacterWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"/>
                     <controls:BoolSetting SettingName="Auto dim" IsOn="{Binding CharacterWindowSettings.AutoDim, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" ToolTip="{StaticResource AutoDimSettingTooltip}"/>
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Value="{Binding CharacterWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png" ToolTip="{StaticResource DimOpacitySettingTooltip}"/>
@@ -305,11 +292,11 @@
 
                 </TabItem.Header>
                 <!-- Buffs window settings -->
-                <StackPanel Name="buffsSettingsGrid" Style="{StaticResource settingsGrid}">
+                <StackPanel Name="BuffsSettingsGrid" Style="{StaticResource SettingsGrid}">
                     <controls:BoolSetting SettingName="Enabled" IsOn="{Binding BuffWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" ToolTip="{StaticResource EnabledSettingTooltip}"/>
                     <controls:BoolSetting SettingName="Visibility" IsOn="{Binding BuffWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource VisibilitySettingTooltip}"/>
                     <controls:BoolSetting SettingName="Show always" IsOn="{Binding BuffWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource ShowAlwaysSettingTooltip}"/>
-                    <controls:SelectionSetting SettingName="Click through mode" SelectedItem="{Binding BuffWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type tcc:ClickThruMode}" ToolTip="{StaticResource ClickThruModeSettingTooltip}" Choices="{Binding ClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
+                    <controls:SelectionSetting SettingName="Click through mode" SelectedItem="{Binding BuffWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type data:ClickThruMode}" ToolTip="{StaticResource ClickThruModeSettingTooltip}" Choices="{Binding ClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
                     <controls:ValueSetting SettingName="Scale" Min="0" Max="3" Value="{Binding BuffWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"/>
                     <controls:BoolSetting SettingName="Auto dim" IsOn="{Binding BuffWindowSettings.AutoDim, Mode=TwoWay}" ToolTip="{StaticResource AutoDimSettingTooltip}" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" />
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Value="{Binding BuffWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png" ToolTip="{StaticResource DimOpacitySettingTooltip}"/>
@@ -330,11 +317,11 @@
                     </Grid>
                 </TabItem.Header>
                 <!-- Class window settings -->
-                <StackPanel Style="{StaticResource settingsGrid}">
+                <StackPanel Style="{StaticResource SettingsGrid}">
                     <controls:BoolSetting SettingName="Enabled" IsOn="{Binding ClassWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" ToolTip="{StaticResource EnabledSettingTooltip}"/>
                     <controls:BoolSetting SettingName="Visibility" IsOn="{Binding ClassWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource VisibilitySettingTooltip}"/>
                     <controls:BoolSetting SettingName="Show always" IsOn="{Binding ClassWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource ShowAlwaysSettingTooltip}"/>
-                    <controls:SelectionSetting SettingName="Click through mode" SelectedItem="{Binding ClassWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type tcc:ClickThruMode}" ToolTip="{StaticResource ClickThruModeSettingTooltip}" Choices="{Binding ClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
+                    <controls:SelectionSetting SettingName="Click through mode" SelectedItem="{Binding ClassWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type data:ClickThruMode}" ToolTip="{StaticResource ClickThruModeSettingTooltip}" Choices="{Binding ClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
                     <controls:ValueSetting SettingName="Scale" Min="0" Max="3" Value="{Binding ClassWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"/>
                     <controls:BoolSetting SettingName="Auto dim" IsOn="{Binding ClassWindowSettings.AutoDim, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" ToolTip="{StaticResource AutoDimSettingTooltip}"/>
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Grid.Row="4" Value="{Binding ClassWindowSettings.DimOpacity, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png" ToolTip="{StaticResource DimOpacitySettingTooltip}"/>
@@ -354,11 +341,11 @@
 
                 </TabItem.Header>
                 <!-- Group window settings -->
-                <StackPanel Style="{StaticResource settingsGrid}">
+                <StackPanel Style="{StaticResource SettingsGrid}">
                     <controls:BoolSetting SettingName="Enabled" IsOn="{Binding GroupWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" ToolTip="{StaticResource EnabledSettingTooltip}"/>
                     <controls:BoolSetting SettingName="Visibility" IsOn="{Binding GroupWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource VisibilitySettingTooltip}"/>
                     <controls:BoolSetting SettingName="Show always" IsOn="{Binding GroupWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource ShowAlwaysSettingTooltip}"/>
-                    <controls:SelectionSetting SettingName="Click through mode" SelectedItem="{Binding GroupWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type tcc:ClickThruMode}" ToolTip="{StaticResource ClickThruModeSettingTooltip}" Choices="{Binding ClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
+                    <controls:SelectionSetting SettingName="Click through mode" SelectedItem="{Binding GroupWindowSettings.ClickThruMode, Mode=TwoWay}" ChoicesType="{x:Type data:ClickThruMode}" ToolTip="{StaticResource ClickThruModeSettingTooltip}" Choices="{Binding ClickThruModes, Mode=OneWay}" SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
                     <controls:ValueSetting SettingName="Scale" Min="0" Max="3" Value="{Binding GroupWindowSettings.Scale, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_aspect_ratio_white_24dp_2x.png"/>
                     <controls:BoolSetting SettingName="Auto dim" IsOn="{Binding GroupWindowSettings.AutoDim, Mode=TwoWay}" ToolTip="{StaticResource AutoDimSettingTooltip}" SettingImage="/TCC;component/resources/images/ic_blur_on_white_24dp_2x.png" />
                     <controls:ValueSetting SettingName="Dim opacity" Min="0" Max="1" Value="{Binding GroupWindowSettings.DimOpacity, Mode=TwoWay}" ToolTip="{StaticResource DimOpacitySettingTooltip}" SettingImage="/TCC;component/resources/images/ic_opacity_white_24dp_2x.png"/>
@@ -476,7 +463,7 @@
 
                 </TabItem.Header>
                 <!-- Chat window settings -->
-                <StackPanel Style="{StaticResource settingsGrid}">
+                <StackPanel Style="{StaticResource SettingsGrid}">
                     <controls:BoolSetting SettingName="Enabled" IsOn="{Binding ChatWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" ToolTip="{StaticResource EnabledSettingTooltip}"/>
                     <controls:BoolSetting SettingName="Visibility" IsOn="{Binding ChatWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource VisibilitySettingTooltip}"/>
                     <controls:BoolSetting SettingName="Show always" IsOn="{Binding ChatWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource ShowAlwaysSettingTooltip}"/>
@@ -590,7 +577,7 @@
 
                 </TabItem.Header>
                 <!-- Other settings -->
-                <StackPanel Style="{StaticResource settingsGrid}">
+                <StackPanel Style="{StaticResource SettingsGrid}">
                     <controls:FieldSetting SettingImage="/TCC;component/resources/images/ic_insert_link_white_24dp_2x.png" SettingName="Webhook" 
                                            Value="{Binding Webhook, Mode=TwoWay}"></controls:FieldSetting>
                     <controls:FieldSetting SettingName="Message" Value="{Binding WebhookMessage, Mode=TwoWay}"></controls:FieldSetting>
@@ -637,7 +624,7 @@
 
                 </TabItem.Header>
                 <!-- Other settings -->
-                <StackPanel Grid.Row="3" Grid.Column="0" Style="{StaticResource settingsGrid}">
+                <StackPanel Style="{StaticResource SettingsGrid}">
                     <!--GitHub link-->
                     <Grid Height="35" MouseDown="GitHubLink_MouseDown" Cursor="Hand" Grid.Row="0">
                         <Grid.ColumnDefinitions>
@@ -757,7 +744,7 @@
                 <TextBlock Style="{StaticResource Styles.DefaultText}" Text="{Binding Path=Title, RelativeSource={RelativeSource AncestorType=local:SettingsWindow}}" VerticalAlignment="Center" Margin="12,0" FontSize="16"></TextBlock>
             </StackPanel>
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Style="{StaticResource ButtonMainStyle}" VerticalAlignment="Stretch" Margin="0" Click="OpenSettingsFolder" 
+                <Button Style="{StaticResource ButtonMainStyle}" VerticalAlignment="Stretch" Click="OpenSettingsFolder" 
                         HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" Width="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}">
                     <Path Data="{StaticResource SvgFolder}" Fill="White" Stretch="Uniform" Opacity=".9"></Path>
                     <Button.ToolTip>
@@ -767,7 +754,7 @@
                         </Grid>
                     </Button.ToolTip>
                 </Button>
-                <Button Grid.Column="1" Style="{StaticResource ButtonMainStyle}" VerticalAlignment="Stretch"
+                <Button Style="{StaticResource ButtonMainStyle}" VerticalAlignment="Stretch"
                    HorizontalContentAlignment="Center" Opacity=".9" Width="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}"
                         Click="Image_MouseLeftButtonDown" VerticalContentAlignment="Center">
                     <Path Data="{StaticResource SvgClose}" Fill="White" Stretch="Uniform" Margin="5" Opacity=".9" ></Path>

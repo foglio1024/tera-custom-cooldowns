@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -12,9 +14,11 @@ namespace TCC.Windows
     /// <summary>
     /// Logica di interazione per LfgListWindow.xaml
     /// </summary>
-    public partial class LfgListWindow : Window
+    public partial class LfgListWindow
     {
-        public LfgListViewModel VM => Dispatcher.Invoke(() => this.DataContext as LfgListViewModel);
+        public LfgListViewModel VM => Dispatcher.Invoke(() => DataContext as LfgListViewModel);
+
+        private readonly ColorAnimation _colAn = new ColorAnimation { Duration = TimeSpan.FromMilliseconds(200) };
 
 
         public LfgListWindow()
@@ -24,40 +28,45 @@ namespace TCC.Windows
             VM.PropertyChanged += VM_PropertyChanged;
         }
 
-        private void VM_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
+        private void VM_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(VM.Creating) || e.PropertyName == nameof(VM.NewMessage))
+            switch (e.PropertyName)
             {
-                var colAn = new ColorAnimation() { Duration = TimeSpan.FromMilliseconds(200) };
-                if (VM.Creating)
-                {
-                    if (string.IsNullOrEmpty(VM.NewMessage)) colAn.To = (App.Current.FindResource("HpColor") as SolidColorBrush).Color;
-                    else colAn.To = (App.Current.FindResource("GreenColor") as SolidColorBrush).Color;
-                }
-                else
-                {
-                    colAn.To = (App.Current.FindResource("BackgroundDarkColor") as SolidColorBrush).Color;
-                }
-                var currBg = CreateMessageBtn.Background as SolidColorBrush;
-                var currCol = currBg.Color;
-                var newBg = new SolidColorBrush(currCol);
-                CreateMessageBtn.Background = newBg;
-                CreateMessageBtn.Background.BeginAnimation(SolidColorBrush.ColorProperty, colAn);
-            }
-            if (e.PropertyName == nameof(VM.AmIinLfg))
-            {
-                if (VM.AmIinLfg)
-                {
-                    LfgMgmtBtn.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
-                    CreateMessageBtn.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
+                case nameof(VM.Creating):
+                case nameof(VM.NewMessage):
+                    if (VM.Creating)
+                    {
+                        _colAn.To = string.IsNullOrEmpty(VM.NewMessage)
+                            ? ((SolidColorBrush) Application.Current.FindResource("HpColor")).Color
+                            : ((SolidColorBrush) Application.Current.FindResource("GreenColor")).Color;
+                    }
+                    else
+                    {
+                        _colAn.To = (Application.Current.FindResource("BackgroundDarkColor") as SolidColorBrush).Color;
+                    }
+                    var currBg = CreateMessageBtn.Background as SolidColorBrush;
+                    var currCol = currBg.Color;
+                    var newBg = new SolidColorBrush(currCol);
+                    CreateMessageBtn.Background = newBg;
+                    CreateMessageBtn.Background.BeginAnimation(SolidColorBrush.ColorProperty, _colAn);
+                    break;
+                case nameof(VM.AmIinLfg) when VM.AmIinLfg:
+                    LfgMgmtBtn.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty,
+                        new DoubleAnimation(1,
+                            TimeSpan.FromMilliseconds(150))
+                        { EasingFunction = new QuadraticEase() });
+                    CreateMessageBtn.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty,
+                        new DoubleAnimation(0,
+                            TimeSpan.FromMilliseconds(150))
+                        { EasingFunction = new QuadraticEase() });
                     CreateMessageBtn.BeginAnimation(MarginProperty, new ThicknessAnimation(new Thickness(4,0,4,0), TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
-                }
-                else
-                {
+                    break;
+                case nameof(VM.AmIinLfg):
                     LfgMgmtBtn.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
                     CreateMessageBtn.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(1, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
                     CreateMessageBtn.BeginAnimation(MarginProperty, new ThicknessAnimation(new Thickness(4), TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
-                }
+                    break;
             }
         }
 
@@ -74,45 +83,43 @@ namespace TCC.Windows
         {
             var a = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(150));
             a.Completed += (s, ev) => { Hide(); };
-            this.BeginAnimation(OpacityProperty, a);
+            BeginAnimation(OpacityProperty, a);
         }
 
         internal void ShowWindow()
         {
+            var animation = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));
             Dispatcher.Invoke(() =>
             {
-                if (this.IsVisible) return;
+                if (IsVisible) return;
                 Opacity = 0;
                 Show();
                 Activate();
-                BeginAnimation(Window.OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
+                BeginAnimation(OpacityProperty, animation);
             });
         }
 
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var l = ((sender as FrameworkElement).DataContext as Listing);
+            if(!((sender as FrameworkElement)?.DataContext is Listing l)) return;
             if (l.IsExpanded)
             {
                 l.IsExpanded = false;
-                return;
             }
-            var id = l.LeaderId;
-            VM._lastClicked = l;
-            Proxy.RequestPartyInfo(id);
+            else
+            {
+                var id = l.LeaderId;
+                VM._lastClicked = l;
+                Proxy.RequestPartyInfo(id);
+            }
         }
 
         private void Grid_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var dc = (sender as FrameworkElement).DataContext as User;
-            Proxy.AskInteractive(SessionManager.CurrentPlayer.ServerId, dc.Name);
+            if ((sender as FrameworkElement)?.DataContext is User dc)
+                Proxy.AskInteractive(SessionManager.CurrentPlayer.ServerId, dc.Name);
         }
 
-        private void btn_Click(object sender, RoutedEventArgs e)
-        {
-            var l = ((sender as FrameworkElement).DataContext as Listing);
-            Proxy.ApplyToLfg(l.LeaderId);
-        }
         private void CreateMessageBtn_Click(object sender, RoutedEventArgs e)
         {
             if (!VM.Creating)

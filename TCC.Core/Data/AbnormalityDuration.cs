@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Timers;
 using System.Windows.Threading;
-using TCC.Data;
 
-namespace TCC
+namespace TCC.Data
 {
     public class AbnormalityDuration : TSPropertyChanged, IDisposable
     {
@@ -40,7 +39,7 @@ namespace TCC
                 NPC("Stacks");
             }
         }
-        private readonly System.Timers.Timer timer;
+        private readonly Timer timer;
         private uint _durationLeft;
         public uint DurationLeft
         {
@@ -85,7 +84,7 @@ namespace TCC
             DurationLeft = d;
             if (!Abnormality.Infinity)
             {
-                timer = new System.Timers.Timer(1000);
+                timer = new Timer(1000);
                 timer.Elapsed += DecreaseDuration;
                 timer.Disposed += SetDisposed;
                 timer.Start();

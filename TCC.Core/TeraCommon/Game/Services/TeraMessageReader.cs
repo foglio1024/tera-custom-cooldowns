@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Text;
 
-namespace Tera.Game
+namespace TCC.TeraCommon.Game.Services
 {
     // Used by `ParsedMessage`s to parse themselves
     public class TeraMessageReader : BinaryReader

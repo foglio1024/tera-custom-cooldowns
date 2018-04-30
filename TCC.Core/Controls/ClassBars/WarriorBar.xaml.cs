@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 using TCC.Data;
 
-namespace TCC.Controls
+namespace TCC.Controls.ClassBars
 {
     /// <summary>
     /// Logica di interazione per WarriorBar.xaml
     /// </summary>
-    public partial class WarriorBar : UserControl
+    public partial class WarriorBar
     {
         public WarriorBar()
         {

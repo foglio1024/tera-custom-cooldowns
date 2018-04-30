@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Tera.Game.Abnormality
+namespace TCC.TeraCommon.Game.Abnormality
 {
     public class PlayerAbnormals
     {

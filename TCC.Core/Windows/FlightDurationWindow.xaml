@@ -1,23 +1,23 @@
 ﻿<w:TccWindow x:Class="TCC.Windows.FlightDurationWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:w="clr-namespace:TCC.Windows"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:w="clr-namespace:TCC.Windows"
              xmlns:c="clr-namespace:TCC.Controls"
              Loaded="TccWindow_Loaded"
-             mc:Ignorable="d" WindowStartupLocation="CenterScreen" Background="Transparent"
-        Style="{StaticResource BaseWindowStyle}"
-        Title="FlightDurationWindow" Height="300" Width="300" d:DataContext="{x:Type w:FlightDurationWindow}"
-             >
+             mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+             Style="{StaticResource BaseWindowStyle}"
+             Title="FlightDurationWindow" Height="300" Width="300" d:DataContext="{x:Type w:FlightDurationWindow}">
     <Grid>
         <c:Arc RenderTransformOrigin=".5 .5" StrokeThickness="6" EndAngle="90" Direction="Counterclockwise"
-               StrokeStartLineCap="Round" Stroke="#5fff" x:Name="arc" Height="300" Width="300" OriginRotationDegrees="-45">
+               StrokeStartLineCap="Round" Stroke="#5fff" x:Name="Arc" Height="300" Width="300"
+               OriginRotationDegrees="-45">
         </c:Arc>
 
-        <c:Arc RenderTransformOrigin=".5 .5" StrokeThickness="1" StrokeEndLineCap="Round" 
+        <c:Arc RenderTransformOrigin=".5 .5" StrokeThickness="1" StrokeEndLineCap="Round"
                StrokeStartLineCap="Round" Stroke="#3fff" Height="288" Width="288" OriginRotationDegrees="-45">
         </c:Arc>
-    
+
     </Grid>
 </w:TccWindow>

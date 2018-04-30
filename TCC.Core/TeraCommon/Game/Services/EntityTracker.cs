@@ -4,9 +4,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Tera.Game.Messages;
+using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Messages.Client;
+using TCC.TeraCommon.Game.Messages.Server;
 
-namespace Tera.Game
+namespace TCC.TeraCommon.Game.Services
 {
     // Tracks which entities we have seen so far and what their properties are
     public class EntityTracker : IEnumerable<Entity>

@@ -2,9 +2,9 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
-using Tera.Game;
+using TCC.TeraCommon.Game;
 
-namespace Tera.Sniffing
+namespace TCC.TeraCommon.Sniffing
 {
     public interface ITeraSniffer
     {

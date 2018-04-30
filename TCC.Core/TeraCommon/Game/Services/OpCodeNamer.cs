@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Tera.Game
+namespace TCC.TeraCommon.Game.Services
 {
     // Maps between numeric OpCodes and OpCode names
     // Since this mapping is version dependent, we can't use a sing global instance of this

@@ -4,10 +4,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
 using System.Windows.Threading;
-using TCC.Data;
 using TCC.Data.Databases;
 
-namespace TCC
+namespace TCC.Data
 {
     public class Character : TSPropertyChanged, IComparable
     {

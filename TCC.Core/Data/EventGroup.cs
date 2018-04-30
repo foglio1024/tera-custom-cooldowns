@@ -1,6 +1,7 @@
 ﻿using System;
+using TCC.ViewModels;
 
-namespace TCC.ViewModels
+namespace TCC.Data
 {
     public class EventGroup : TSPropertyChanged
     {

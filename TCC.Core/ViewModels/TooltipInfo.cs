@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Windows.Threading;
+using TCC.Data;
 
 namespace TCC.ViewModels
 {

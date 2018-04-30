@@ -23,8 +23,8 @@ namespace TCC.ViewModels
             //Ragnarok
             Ragnarok = new DurationCooldownIndicator(_dispatcher);
             SkillsDatabase.TryGetSkill(120100, Class.Glaiver, out var rag);
-            Ragnarok.Cooldown = new FixedSkillCooldown(rag, CooldownType.Skill, _dispatcher, true);
-            Ragnarok.Buff = new FixedSkillCooldown(rag, CooldownType.Skill, _dispatcher, false);
+            Ragnarok.Cooldown = new FixedSkillCooldown(rag, _dispatcher, true);
+            Ragnarok.Buff = new FixedSkillCooldown(rag, _dispatcher, false);
         }
         public override bool StartSpecialSkill(SkillCooldown sk)
         {

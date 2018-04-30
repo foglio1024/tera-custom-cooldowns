@@ -1,60 +1,42 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Globalization;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
 namespace TCC.Controls
 {
-    public partial class GenericGauge : UserControl, INotifyPropertyChanged
+    public partial class GenericGauge : INotifyPropertyChanged
     {
-
-        private int animTime = 200;
-        private DoubleAnimation a;
-        private DependencyPropertyWatcher<float> curValwatcher; //https://blogs.msdn.microsoft.com/flaviencharlon/2012/12/07/getting-change-notifications-from-any-dependency-property-in-windows-store-apps/
+        private const int AnimTime = 200;
+        private readonly DoubleAnimation _a;
+        private readonly DependencyPropertyWatcher<float> _curValwatcher; //https://blogs.msdn.microsoft.com/flaviencharlon/2012/12/07/getting-change-notifications-from-any-dependency-property-in-windows-store-apps/
         public GenericGauge()
         {
             InitializeComponent();
             
-            curValwatcher = new DependencyPropertyWatcher<float>(this, "CurrentVal");
-            curValwatcher.PropertyChanged += CurValWatcher_PropertyChanged;
-            a = new DoubleAnimation(0, TimeSpan.FromMilliseconds(animTime)) { EasingFunction = new QuadraticEase() };
-            bar.RenderTransform = new ScaleTransform(1, 1, 0, .5);
+            _curValwatcher = new DependencyPropertyWatcher<float>(this, "CurrentVal");
+            _curValwatcher.PropertyChanged += CurValWatcher_PropertyChanged;
+            _a = new DoubleAnimation(0, TimeSpan.FromMilliseconds(AnimTime)) { EasingFunction = new QuadraticEase() };
+            Bar.RenderTransform = new ScaleTransform(1, 1, 0, .5);
 
         }
 
         private void CurValWatcher_PropertyChanged(object sender, EventArgs e)
         {
-            if (MaxVal > 0)
-            {
-                Factor = curValwatcher.Value / MaxVal;
-            }
-            else
-            {
-                Factor = 0;
-            }
-
-
+            Factor = MaxVal > 0 ? _curValwatcher.Value / MaxVal : 0;
         }
 
-        private double factor;
+        private double _factor;
         public double Factor
         {
-            get
-            {
-                return factor;
-            }
+            get => _factor;
             set
             {
-                if(factor != value)
-                {
-                    factor = value;               
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Factor"));
-                    AnimateBar(value);
-                }
+                if (_factor == value) return;
+                _factor = value;               
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Factor)));
+                AnimateBar(value);
             }
         }
 
@@ -62,63 +44,63 @@ namespace TCC.Controls
         {
             if (factor > 1)
             {
-                a.To = 1;
+                _a.To = 1;
             }
             else
             {
-                a.To = factor;
+                _a.To = factor;
             }
 
-            bar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, a);
+            Bar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _a);
 
         }
 
         public SolidColorBrush BarColor
         {
-            get { return (SolidColorBrush)GetValue(BarColorProperty); }
-            set { SetValue(BarColorProperty, value); }
+            get => (SolidColorBrush)GetValue(BarColorProperty);
+            set => SetValue(BarColorProperty, value);
         }
         public static readonly DependencyProperty BarColorProperty = DependencyProperty.Register("BarColor", typeof(SolidColorBrush), typeof(GenericGauge));
 
         public string GaugeName
         {
-            get { return (string)GetValue(GaugeNameProperty); }
-            set { SetValue(GaugeNameProperty, value); }
+            get => (string)GetValue(GaugeNameProperty);
+            set => SetValue(GaugeNameProperty, value);
         }
         public static readonly DependencyProperty GaugeNameProperty = DependencyProperty.Register("GaugeName", typeof(string), typeof(GenericGauge));
 
         public int MaxVal
         {
-            get { return (int)GetValue(MaxValProperty); }
-            set { SetValue(MaxValProperty, value); }
+            get => (int)GetValue(MaxValProperty);
+            set => SetValue(MaxValProperty, value);
         }
         public static readonly DependencyProperty MaxValProperty = DependencyProperty.Register("MaxVal", typeof(int), typeof(GenericGauge));
         
         public float CurrentVal
         {
-            get { return (float)GetValue(CurrentValProperty); }
-            set { SetValue(CurrentValProperty, value); }
+            get => (float)GetValue(CurrentValProperty);
+            set => SetValue(CurrentValProperty, value);
         }
         public static readonly DependencyProperty CurrentValProperty = DependencyProperty.Register("CurrentVal", typeof(float), typeof(GenericGauge));
 
         public bool ShowPercentage
         {
-            get { return (bool)GetValue(ShowPercentageProperty); }
-            set { SetValue(ShowPercentageProperty, value); }
+            get => (bool)GetValue(ShowPercentageProperty);
+            set => SetValue(ShowPercentageProperty, value);
         }
         public static readonly DependencyProperty ShowPercentageProperty = DependencyProperty.Register("ShowPercentage", typeof(bool), typeof(GenericGauge));
                
         public bool ShowValues
         {
-            get { return (bool)GetValue(ShowValuesProperty); }
-            set { SetValue(ShowValuesProperty, value); }
+            get => (bool)GetValue(ShowValuesProperty);
+            set => SetValue(ShowValuesProperty, value);
         }
         public static readonly DependencyProperty ShowValuesProperty = DependencyProperty.Register("ShowValues", typeof(bool), typeof(GenericGauge));
 
         public bool ShowName
         {
-            get { return (bool)GetValue(ShowNameProperty); }
-            set { SetValue(ShowNameProperty, value); }
+            get => (bool)GetValue(ShowNameProperty);
+            set => SetValue(ShowNameProperty, value);
         }
         public static readonly DependencyProperty ShowNameProperty = DependencyProperty.Register("ShowName", typeof(bool), typeof(GenericGauge));
 
@@ -126,28 +108,6 @@ namespace TCC.Controls
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-        }
-    }
-}
-namespace TCC.Converters
-{
-    public class PercentageVisibiltyConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if ((bool)value)
-            {
-                return Visibility.Visible;
-            }
-            else
-            {
-                return Visibility.Hidden;
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
         }
     }
 }

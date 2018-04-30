@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace TCC
+namespace TCC.Parsing
 {
     public static class StringUtils
     {

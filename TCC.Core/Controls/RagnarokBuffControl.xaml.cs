@@ -37,15 +37,15 @@ namespace TCC.Controls
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SecondsText"));
                 if(ClassManager.CurrentClassManager.ST.Factor == 1)
                 {
-                    iconGlow.Opacity = 1;
+                    IconGlow.Opacity = 1;
                 }
                 else
                 {
-                    iconGlow.Opacity = 0;
+                    IconGlow.Opacity = 0;
                 }
                 if (Running) return;
                 var an = new DoubleAnimation((1-ClassManager.CurrentClassManager.ST.Factor) * 359.9, TimeSpan.FromMilliseconds(50));
-                internalArc.BeginAnimation(Arc.EndAngleProperty, an);
+                InternalArc.BeginAnimation(Arc.EndAngleProperty, an);
 
             }
         }
@@ -60,13 +60,13 @@ namespace TCC.Controls
                 _running = value;
                 if (_running)
                 {
-                    secondaryGrid.Opacity = 1;
-                    internalArc.Opacity = 0;
+                    SecondaryGrid.Opacity = 1;
+                    InternalArc.Opacity = 0;
                 }
                 else
                 {
-                    secondaryGrid.Opacity = 0;
-                    internalArc.Opacity = 1;
+                    SecondaryGrid.Opacity = 0;
+                    InternalArc.Opacity = 1;
                 }
             }
         }
@@ -83,7 +83,7 @@ namespace TCC.Controls
                 {
                     Running = false;
                 };
-                externalArc.BeginAnimation(Arc.EndAngleProperty, an);
+                ExternalArc.BeginAnimation(Arc.EndAngleProperty, an);
             }
         }
 

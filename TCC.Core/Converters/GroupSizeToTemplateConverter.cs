@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
 
 namespace TCC.Converters
@@ -12,11 +13,11 @@ namespace TCC.Converters
 
             if(val > SettingsManager.GroupSizeThreshold)
             {
-                return App.Current.FindResource("RaidDataTemplate");
+                return Application.Current.FindResource("RaidDataTemplate");
             }
             else
             {
-                return App.Current.FindResource("PartyDataTemplate");
+                return Application.Current.FindResource("PartyDataTemplate");
             }
         }
 

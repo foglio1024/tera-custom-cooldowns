@@ -1,6 +1,6 @@
 ﻿using System.Windows.Threading;
 
-namespace TCC.ViewModels
+namespace TCC.Data
 {
     public class StatTracker : TSPropertyChanged
     {

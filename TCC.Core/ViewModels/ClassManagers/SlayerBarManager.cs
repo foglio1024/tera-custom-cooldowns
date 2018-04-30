@@ -25,12 +25,12 @@ namespace TCC.ViewModels
             InColdBlood =
                 new DurationCooldownIndicator(_dispatcher)
                 {
-                    Buff = new FixedSkillCooldown(icb, CooldownType.Skill, _dispatcher, false),
-                    Cooldown = new FixedSkillCooldown(icb, CooldownType.Skill, _dispatcher, true)
+                    Buff = new FixedSkillCooldown(icb, _dispatcher, false),
+                    Cooldown = new FixedSkillCooldown(icb, _dispatcher, true)
                 };
 
             OverhandStrike =
-                new FixedSkillCooldown(ohs, CooldownType.Skill, _dispatcher, false);
+                new FixedSkillCooldown(ohs, _dispatcher, false);
 
         }
 

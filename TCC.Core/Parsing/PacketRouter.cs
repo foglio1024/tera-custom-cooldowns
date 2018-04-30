@@ -1,6 +1,4 @@
-﻿using DamageMeter.Sniffing;
-using Data;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,10 +10,14 @@ using TCC.ClassSpecific;
 using TCC.Data;
 using TCC.Data.Databases;
 using TCC.Parsing.Messages;
+using TCC.Sniffing;
+using TCC.Tera.Data;
+using TCC.TeraCommon;
+using TCC.TeraCommon.Game;
+using TCC.TeraCommon.Game.Services;
 using TCC.ViewModels;
 using TCC.Windows;
-using Tera.Game;
-using S_GET_USER_GUILD_LOGO = Tera.Game.Messages.S_GET_USER_GUILD_LOGO;
+using S_GET_USER_GUILD_LOGO = TCC.TeraCommon.Game.Messages.Server.S_GET_USER_GUILD_LOGO;
 
 namespace TCC.Parsing
 {
@@ -29,7 +31,7 @@ namespace TCC.Parsing
         public static OpCodeNamer OpCodeNamer;
         public static OpCodeNamer SystemMessageNamer;
         public static MessageFactory Factory;
-        private static readonly ConcurrentQueue<Tera.Message> Packets = new ConcurrentQueue<Tera.Message>();
+        private static readonly ConcurrentQueue<Message> Packets = new ConcurrentQueue<Message>();
         private static System.Timers.Timer _x;
         public static void Init()
         {
@@ -69,9 +71,9 @@ namespace TCC.Parsing
             QuestDatabase.Load(Language);
         }
 
-        private static void MessageReceived(Tera.Message obj)
+        private static void MessageReceived(Message obj)
         {
-            if (obj.Direction == Tera.MessageDirection.ClientToServer && obj.OpCode == 19900)
+            if (obj.Direction == MessageDirection.ClientToServer && obj.OpCode == 19900)
             {
                 var message = new C_CHECK_VERSION_CUSTOM(new CustomReader(obj));
                 Version = message.Versions[0];
@@ -329,7 +331,7 @@ namespace TCC.Parsing
 
             var seg = new ArraySegment<byte>(arr);
 
-            var sysMsg = new S_SYSTEM_MESSAGE(new TeraMessageReader(new Tera.Message(DateTime.Now, Tera.MessageDirection.ServerToClient, seg), OpCodeNamer, Factory, SystemMessageNamer));
+            var sysMsg = new S_SYSTEM_MESSAGE(new TeraMessageReader(new Message(DateTime.Now, MessageDirection.ServerToClient, seg), OpCodeNamer, Factory, SystemMessageNamer));
             HandleSystemMessage(sysMsg);
 
         }

@@ -33,13 +33,13 @@ namespace TCC.Controls
                     switch (_context.CurrentStance)
                     {
                         case WarriorStance.None:
-                            rect.Background = new SolidColorBrush(Colors.Transparent);
+                            Rect.Background = new SolidColorBrush(Colors.Transparent);
                             break;
                         case WarriorStance.Assault:
-                            rect.Background = TryFindResource("AssaultStanceColor") as SolidColorBrush;
+                            Rect.Background = TryFindResource("AssaultStanceColor") as SolidColorBrush;
                             break;
                         case WarriorStance.Defensive:
-                            rect.Background = TryFindResource("DefensiveStanceColor") as SolidColorBrush;
+                            Rect.Background = TryFindResource("DefensiveStanceColor") as SolidColorBrush;
                             break;
                     }
                 }

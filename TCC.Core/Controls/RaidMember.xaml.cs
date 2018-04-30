@@ -56,7 +56,7 @@ namespace TCC.Controls
                 {
                     if (!(DataContext is User user)) return;
 
-                    buffs.ItemsSource = SettingsManager.IgnoreGroupBuffs ? null : user.Buffs;
+                    Buffs.ItemsSource = SettingsManager.IgnoreGroupBuffs ? null : user.Buffs;
                     BuffGrid.Visibility = SettingsManager.IgnoreGroupBuffs
                         ? Visibility.Collapsed
                         : Visibility.Visible;
@@ -76,7 +76,7 @@ namespace TCC.Controls
                 Dispatcher.Invoke(() =>
                 {
                     if(!(dc is User)) return;
-                    debuffs.ItemsSource = SettingsManager.IgnoreGroupDebuffs ? null : dc.Debuffs;
+                    Debuffs.ItemsSource = SettingsManager.IgnoreGroupDebuffs ? null : dc.Debuffs;
                     DebuffGrid.Visibility = SettingsManager.IgnoreGroupDebuffs
                         ? Visibility.Collapsed
                         : Visibility.Visible;
@@ -109,14 +109,14 @@ namespace TCC.Controls
         {
             Dispatcher.Invoke(() =>
             {
-                mpGrid.Visibility = !SettingsManager.DisablePartyMP ? Visibility.Visible : Visibility.Collapsed;
+                MpGrid.Visibility = !SettingsManager.DisablePartyMP ? Visibility.Visible : Visibility.Collapsed;
             });
         }
         private void SetHP()
         {
             Dispatcher.Invoke(() =>
             {
-                hpGrid.Visibility = !SettingsManager.DisablePartyHP ? Visibility.Visible : Visibility.Collapsed;
+                HpGrid.Visibility = !SettingsManager.DisablePartyHP ? Visibility.Visible : Visibility.Collapsed;
             });
         }
         private void ToolTip_OnOpened(object sender, RoutedEventArgs e)

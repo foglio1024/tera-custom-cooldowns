@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace Tera.Game
+namespace TCC.TeraCommon.Game.Services
 {
     public class QuestInfoDatabase
     {

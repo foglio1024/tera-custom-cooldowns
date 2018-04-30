@@ -2,6 +2,8 @@
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
+using TCC.Data;
+
 namespace TCC.Converters
 {
     public class StaminaBarColorConverter : IValueConverter

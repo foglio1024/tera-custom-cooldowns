@@ -1,11 +1,9 @@
-﻿using System.Windows.Controls;
-
-namespace TCC.Controls
+﻿namespace TCC.Controls.ClassBars
 {
     /// <summary>
     /// Logica di interazione per SorcererBar.xaml
     /// </summary>
-    public partial class SorcererBar : UserControl
+    public partial class SorcererBar
     {
         public SorcererBar()
         {

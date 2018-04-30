@@ -10,7 +10,7 @@ namespace TCC.Windows
     /// <summary>
     /// Logica di interazione per SettingsWindow.xaml
     /// </summary>
-    public partial class SettingsWindow : Window
+    public partial class SettingsWindow
     {
         public SettingsWindow()
         {
@@ -27,7 +27,7 @@ namespace TCC.Windows
             SettingsManager.SaveSettings();
             var a = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200));
             a.Completed += (s, ev) => Hide();
-            this.BeginAnimation(OpacityProperty, a);
+            BeginAnimation(OpacityProperty, a);
             WindowManager.IsTccVisible = false;
             WindowManager.IsTccVisible = true;
 
@@ -51,14 +51,14 @@ namespace TCC.Windows
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            ((FrameworkElement)this.Content).Focus();
+            ((FrameworkElement)Content).Focus();
         }
         public void ShowWindow()
         {
             Opacity = 0;
             Activate();
             Show();
-            BeginAnimation(Window.OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
+            BeginAnimation(OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
 
         }
 

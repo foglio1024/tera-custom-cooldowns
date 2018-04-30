@@ -1,7 +1,7 @@
-﻿using Tera.Game;
-using Tera.Game.Messages;
+﻿using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Services;
 
-namespace TCC
+namespace TCC.Parsing.Messages
 {
     public class S_PLAYER_CHANGE_STAMINA : ParsedMessage
     {

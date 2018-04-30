@@ -1,7 +1,8 @@
-﻿using Tera.Game;
-using Tera.Game.Messages;
+﻿using TCC.Data;
+using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Services;
 
-namespace TCC
+namespace TCC.Parsing.Messages
 {
     internal class S_LOAD_ACHIEVEMENT_LIST : ParsedMessage
     {

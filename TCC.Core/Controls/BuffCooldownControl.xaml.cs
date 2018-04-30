@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
-using TCC.Annotations;
+using TCC.Properties;
 using TCC.ViewModels;
 
 namespace TCC.Controls

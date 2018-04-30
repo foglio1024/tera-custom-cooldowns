@@ -1,9 +1,9 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using TCC.TeraCommon.Game.Services;
 
-namespace Tera.Game.Messages
+namespace TCC.TeraCommon.Game.Messages.Server
 {
     public class S_SYSTEM_MESSAGE : ParsedMessage
     {

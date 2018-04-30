@@ -3,19 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Tera;
-using Tera.Game;
+using TCC.Data;
 using TCC.Parsing.Messages;
+using TCC.TeraCommon;
+using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Messages.Client;
+using TCC.TeraCommon.Game.Services;
+using C_PLAYER_LOCATION = TCC.Parsing.Messages.C_PLAYER_LOCATION;
 //using Tera.Game.Messages;
-using S_GET_USER_GUILD_LOGO = Tera.Game.Messages.S_GET_USER_GUILD_LOGO;
-using ParsedMessage = Tera.Game.Messages.ParsedMessage;
+using S_GET_USER_GUILD_LOGO = TCC.TeraCommon.Game.Messages.Server.S_GET_USER_GUILD_LOGO;
+using ParsedMessage = TCC.TeraCommon.Game.Messages.ParsedMessage;
 
 namespace TCC.Parsing
 {
     public class MessageFactory 
     {
-        private static readonly Delegate UnknownMessageDelegate = Contructor<Func<TeraMessageReader, Tera.Game.Messages.UnknownMessage>>();
-        private static readonly Dictionary<ushort, Delegate> OpcodeNameToType = new Dictionary<ushort, Delegate> { { 19900, Contructor<Func<TeraMessageReader, Tera.Game.Messages.C_CHECK_VERSION>>() } };
+        private static readonly Delegate UnknownMessageDelegate = Contructor<Func<TeraMessageReader, UnknownMessage>>();
+        private static readonly Dictionary<ushort, Delegate> OpcodeNameToType = new Dictionary<ushort, Delegate> { { 19900, Contructor<Func<TeraMessageReader, C_CHECK_VERSION>>() } };
         private static readonly Dictionary<string, Delegate> TeraMessages = new Dictionary<string, Delegate>
         {
             { "S_LOGIN" , Contructor<Func<TeraMessageReader,S_LOGIN>>()},
@@ -290,7 +294,7 @@ namespace TCC.Parsing
             Delegate type;
             if (!OpcodeNameToType.TryGetValue(opCode, out type))
                 type = UnknownMessageDelegate;
-            return (Tera.Game.Messages.ParsedMessage)type.DynamicInvoke(reader);
+            return (ParsedMessage)type.DynamicInvoke(reader);
         }
         public ParsedMessage Create(Message message)
         {
@@ -311,7 +315,7 @@ namespace TCC.Parsing
             var parameters = ctrArgs.Select(Expression.Parameter).ToList();
             return Expression.Lambda(Expression.New(constructorInfo, parameters), parameters).Compile() as TDelegate;
         }
-        public bool Process(Tera.Game.Messages.ParsedMessage message)
+        public bool Process(ParsedMessage message)
         {
             Delegate type;
             MainProcessor.TryGetValue(message.GetType(), out type);

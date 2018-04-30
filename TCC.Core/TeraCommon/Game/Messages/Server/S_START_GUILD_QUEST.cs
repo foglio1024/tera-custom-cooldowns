@@ -1,6 +1,7 @@
 ﻿using System;
+using TCC.TeraCommon.Game.Services;
 
-namespace Tera.Game.Messages
+namespace TCC.TeraCommon.Game.Messages.Server
 {
     public class S_START_GUILD_QUEST : ParsedMessage
     {

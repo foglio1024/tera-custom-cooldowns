@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using TCC.Data;
 using TCC.ViewModels;
 
 namespace TCC.Windows
@@ -11,8 +12,8 @@ namespace TCC.Windows
         public ClassWindow()
         {
             InitializeComponent();
-            _b = buttons;
-            _c = content;
+            ButtonsRef = Buttons;
+            MainContentRef = content;
             InitWindow(SettingsManager.ClassWindowSettings, ignoreSize: true);
         }
 

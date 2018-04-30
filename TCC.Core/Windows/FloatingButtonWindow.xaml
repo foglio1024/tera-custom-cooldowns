@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TCC.Windows"
         mc:Ignorable="d" MouseEnter="Window_MouseEnter"
         MouseLeave="Window_MouseLeave"
         Loaded="FloatinButtonLoaded"
@@ -16,16 +15,16 @@
         Background="Transparent"
         Topmost="True">
     <Border Style="{StaticResource Styles.DefaultBorder}" CornerRadius="0,2,2,0"
-            x:Name="rootBorder" Margin="0,10" HorizontalAlignment="Left">
+            x:Name="RootBorder" Margin="0,10" HorizontalAlignment="Left">
         <Grid >
             <StackPanel Width="35">
-                <Button VerticalContentAlignment="Center" Style="{StaticResource ButtonMainStyle}" Click="Button_Click_2" ToolTip="LFG" Height="{Binding ElementName=infoBtn, Path=ActualHeight}">
+                <Button VerticalContentAlignment="Center" Style="{StaticResource ButtonMainStyle}" Click="Button_Click_2" ToolTip="LFG" Height="{Binding ElementName=InfoBtn, Path=ActualHeight}">
                     <Path Data="{StaticResource SvgUsers}" Fill="White" 
                           Stretch="Uniform" Margin="5" 
                           IsHitTestVisible="False" ></Path>
                 </Button>
-                <Button Style="{StaticResource ButtonMainStyle}" Click="Button_Click" x:Name="infoBtn">
-                    <Path Data="{StaticResource SvgInfo}" Fill="White" x:Name="infoPath" Stretch="UniformToFill" Margin="5" IsHitTestVisible="False"></Path>
+                <Button Style="{StaticResource ButtonMainStyle}" Click="Button_Click" x:Name="InfoBtn">
+                    <Path Data="{StaticResource SvgInfo}" Fill="White" x:Name="InfoPath" Stretch="UniformToFill" Margin="5" IsHitTestVisible="False"></Path>
                 </Button>
                 <Button Style="{StaticResource ButtonMainStyle}" Click="Button_Click_1">
                     <Path Data="{StaticResource SvgSettings}" Fill="White" Stretch="UniformToFill" Margin="5" IsHitTestVisible="False"></Path>
@@ -41,7 +40,7 @@
                     RenderTransformOrigin=".5,.5"
                     Visibility="Hidden"
                     ToolTip="There are events starting in 5 minutes.">
-                <TextBlock Foreground="White" FontSize="14" TextAlignment="Center" Margin="0,0,0,0" x:Name="EventAmountTB" >0</TextBlock>
+                <TextBlock Foreground="White" FontSize="14" TextAlignment="Center" Margin="0,0,0,0" x:Name="EventAmountTb" >0</TextBlock>
                 <Border.Effect>
                     <DropShadowEffect Opacity=".8" ShadowDepth="1" BlurRadius="3"></DropShadowEffect>
                 </Border.Effect>

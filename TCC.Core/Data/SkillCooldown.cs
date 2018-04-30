@@ -2,7 +2,7 @@
 using System.Timers;
 using System.Windows.Threading;
 
-namespace TCC
+namespace TCC.Data
 {
     public class SkillCooldown : TSPropertyChanged, IDisposable
     {

@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 
-namespace Tera.Game
+namespace TCC.TeraCommon.Game.Services
 {
     public enum LangEnum
     {

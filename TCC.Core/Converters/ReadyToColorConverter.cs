@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
+using TCC.Data;
+
 namespace TCC.Converters
 {
     public class ReadyToColorConverter : IValueConverter
@@ -11,11 +14,11 @@ namespace TCC.Converters
             switch ((ReadyStatus)value)
             {
                 case ReadyStatus.NotReady:
-                    return App.Current.FindResource("HpColor");
+                    return Application.Current.FindResource("HpColor");
                 case ReadyStatus.Ready:
-                    return App.Current.FindResource("LightGreenColor");
+                    return Application.Current.FindResource("LightGreenColor");
                 case ReadyStatus.Undefined:
-                    return App.Current.FindResource("GoldColor");
+                    return Application.Current.FindResource("GoldColor");
                 default:
                     return Brushes.Transparent;
             }

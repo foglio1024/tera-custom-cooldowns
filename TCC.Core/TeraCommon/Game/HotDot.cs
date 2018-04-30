@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Tera.Game
+namespace TCC.TeraCommon.Game
 {
     public class HotDot : IEquatable<object>
     {

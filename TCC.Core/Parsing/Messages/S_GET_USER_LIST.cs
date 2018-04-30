@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TCC.Data;
+using TCC.TeraCommon.Game.Messages;
+using TCC.TeraCommon.Game.Services;
 using TCC.ViewModels;
-using Tera.Game;
-using Tera.Game.Messages;
 
 namespace TCC.Parsing.Messages
 {
@@ -162,10 +162,6 @@ namespace TCC.Parsing.Messages
             CharacterList = CharacterList.OrderBy(ch => ch.Position).ToList();
         }
     }
-}
-namespace TCC.Data
-{
-
 
     public class RawChar
     {

@@ -7,86 +7,86 @@ namespace TCC.Data
 {
     public class Listing : TSPropertyChanged
     {
-        private uint playerId;
-        private bool isRaid;
-        private string message;
-        private string leaderName;
-        private bool isExpanded;
-        private int playerCount;
-        private SynchronizedObservableCollection<User> players;
+        private uint _playerId;
+        private bool _isRaid;
+        private string _message;
+        private string _leaderName;
+        private bool _isExpanded;
+        private int _playerCount;
+        private SynchronizedObservableCollection<User> _players;
         private bool _canApply = true;
 
         public uint LeaderId
         {
-            get => Players.ToSyncArray().Count() == 0 ? playerId : Players.ToSyncArray().FirstOrDefault(x => x.IsLeader).PlayerId;
+            get => Players.ToSyncArray().Length == 0
+                ? _playerId
+                // ReSharper disable once PossibleNullReferenceException
+                : Players.ToSyncArray().FirstOrDefault(x => x.IsLeader).PlayerId;
             set
             {
-                if (playerId == value) return;
-                playerId = value;
+                if (_playerId == value) return;
+                _playerId = value;
                 NPC();
             }
         }
         public bool IsRaid
         {
-            get => isRaid;
+            get => _isRaid;
             set
             {
-                if (isRaid == value) return;
-                isRaid = value;
+                if (_isRaid == value) return;
+                _isRaid = value;
                 NPC();
                 NPC(nameof(MaxCount));
             }
         }
         public int PlayerCount
         {
-            get
-            {
-                return playerCount;
-            }
+            get => _playerCount;
             set
             {
-                if (playerCount == value) return;
-                playerCount = value;
+                if (_playerCount == value) return;
+                _playerCount = value;
                 NPC();
             }
         }
         public string Message
         {
-            get => message;
+            get => _message;
             set
             {
-                if (message == value) return;
-                message = value;
+                if (_message == value) return;
+                _message = value;
                 NPC();
             }
         }
         public string LeaderName
         {
-            get => Players.ToSyncArray().Count() == 0 ? leaderName : Players.ToSyncArray().FirstOrDefault(x => x.IsLeader).Name;
+            get => Players.ToSyncArray().Length == 0 ? _leaderName : Players.ToSyncArray().FirstOrDefault(x => x.IsLeader)?.Name;
             set
             {
-                if (leaderName == value) return;
-                leaderName = value;
+                if (_leaderName == value) return;
+                _leaderName = value;
                 NPC();
             }
         }
         public bool IsExpanded
         {
-            get { return isExpanded; }
+            get => _isExpanded;
             set
             {
-                if (isExpanded == value) return;
-                isExpanded = value;
+                if (_isExpanded == value) return;
+                _isExpanded = value;
                 NPC();
             }
         }
         public SynchronizedObservableCollection<User> Players
         {
-            get => players;
+            get => _players;
             set
             {
-                if (players == value) return;
-                players = value;
+                if (_players == value) return;
+                _players = value;
                 NPC();
             }
         }
@@ -97,7 +97,7 @@ namespace TCC.Data
             get => _canApply;
             set
             {
-                if (_canApply == value) return; ;
+                if (_canApply == value) return;
                 _canApply = value;
                 NPC();
             }
@@ -112,15 +112,15 @@ namespace TCC.Data
 
     public class ApplyCommand : ICommand
     {
-        private Listing listing;
-        private Timer t;
+        private readonly Listing _listing;
+        private readonly Timer _t;
         public ApplyCommand(Listing listing)
         {
-            this.listing = listing;
-            t = new Timer() { Interval = 5000 };
-            t.Elapsed += (s, ev) =>
+            _listing = listing;
+            _t = new Timer() { Interval = 5000 };
+            _t.Elapsed += (s, ev) =>
             {
-                t.Stop();
+                _t.Stop();
                 listing.CanApply = true;
             };
         }
@@ -129,14 +129,14 @@ namespace TCC.Data
 
         public bool CanExecute(object parameter)
         {
-            return listing.CanApply;
+            return _listing.CanApply;
         }
 
         public void Execute(object parameter)
         {
-            Proxy.ApplyToLfg(listing.LeaderId);
-            listing.CanApply = false;
-            t.Start();
+            Proxy.ApplyToLfg(_listing.LeaderId);
+            _listing.CanApply = false;
+            _t.Start();
         }
     }
 

@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace TCC
+namespace TCC.Data
 {
     public class Skill
     {
@@ -50,7 +50,7 @@ namespace TCC
         public void SetSkillIcon(string iconName)
         {
             //if (!iconName.Contains("Icon_Skills.")) return;
-            this.IconName = iconName.ToLower();//.Replace("Icon_Skills.", "");
+            IconName = iconName.ToLower();//.Replace("Icon_Skills.", "");
 
             //CooldownWindow.Instance.Dispatcher.BeginInvoke(new Action(() =>
             //{

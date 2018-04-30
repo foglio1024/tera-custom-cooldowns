@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
-namespace Tera.Game.Messages
+using TCC.TeraCommon.Game.Services;
+
+namespace TCC.TeraCommon.Game.Messages.Server
 {
     public class S_REQUEST_CONTRACT : ParsedMessage
     {

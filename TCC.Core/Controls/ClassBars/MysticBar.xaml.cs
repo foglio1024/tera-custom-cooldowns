@@ -1,11 +1,9 @@
-﻿using System.Windows.Controls;
-
-namespace TCC.Controls
+﻿namespace TCC.Controls.ClassBars
 {
     /// <summary>
     /// Logica di interazione per MysticBar.xaml
     /// </summary>
-    public partial class MysticBar : UserControl
+    public partial class MysticBar
     {
         public MysticBar()
         {

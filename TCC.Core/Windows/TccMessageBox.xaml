@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TCC.Windows"
         mc:Ignorable="d" WindowStyle="None" IsVisibleChanged="Window_IsVisibleChanged" RenderTransformOrigin=".5 .5" Background="Transparent" AllowsTransparency="True"
         Title="TccMessageBox" Height="190" Width="340" SizeToContent="Height" Topmost="True" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.RenderTransform>
@@ -16,10 +15,10 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Foreground="#6fff" FontSize="16" x:Name="MessageTitle" Grid.Row="0" Margin="5"></TextBlock>
-        <Border Background="{StaticResource MainColor}" Grid.RowSpan="3" CornerRadius="2" x:Name="BG" MouseLeftButtonDown="BG_MouseLeftButtonDown"></Border>
+        <Border Background="{StaticResource MainColor}" Grid.RowSpan="3" CornerRadius="2" x:Name="Bg" MouseLeftButtonDown="BG_MouseLeftButtonDown"></Border>
         <Border Background="{StaticResource CardDarkColor}" Grid.Row="2" CornerRadius="0 0 2 2"/>
         <!--<Path Data="{StaticResource SvgInfo}" Fill="#4fff" VerticalAlignment="Center" Grid.Row="1" Height="50" HorizontalAlignment="Left" Margin="10"/>-->
-        <TextBlock Foreground="#bfff" x:Name="txtMsg" Grid.Row="1" VerticalAlignment="Center" TextAlignment="Center" Margin="10 10" TextWrapping="WrapWithOverflow" IsHitTestVisible="False"/>
+        <TextBlock Foreground="#bfff" x:Name="TxtMsg" Grid.Row="1" VerticalAlignment="Center" TextAlignment="Center" Margin="10 10" TextWrapping="WrapWithOverflow" IsHitTestVisible="False"/>
         <UniformGrid Rows="1" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <UniformGrid.Resources>
                 <Style TargetType="Button" BasedOn="{StaticResource ButtonMainStyle}">
@@ -29,16 +28,16 @@
                     <EventSetter Event="Click" Handler="Button_Click"/>
                 </Style>
             </UniformGrid.Resources>
-            <Button x:Name="btnOk">
+            <Button x:Name="BtnOk">
                 <TextBlock Margin="10 3">OK</TextBlock>
             </Button>
-            <Button x:Name="btnYes">
+            <Button x:Name="BtnYes">
                 <TextBlock Margin="10 3">YES</TextBlock>
             </Button>
-            <Button x:Name="btnNo">
+            <Button x:Name="BtnNo">
                 <TextBlock Margin="10 3">NO</TextBlock>
             </Button>
-            <Button x:Name="btnCancel">
+            <Button x:Name="BtnCancel">
                 <TextBlock Margin="10 3">CANCEL</TextBlock>
             </Button>
         </UniformGrid>

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Media.Imaging;
-using Tera.Game;
+using TCC.TeraCommon.Game;
 using Image = System.Windows.Controls.Image;
 
-namespace Data
+namespace TCC.Tera.Data
 {
     public class ClassIcons
     {

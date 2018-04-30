@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tera.Game.Abnormality
+namespace TCC.TeraCommon.Game.Abnormality
 {
     public class Duration : ICloneable
     {

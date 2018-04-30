@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="TCC.Controls.GunnerBar"
+﻿<UserControl x:Class="TCC.Controls.ClassBars.GunnerBar"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,7 +9,7 @@
     <UserControl.DataContext>
         <viewModels:GunnerBarManager/>
     </UserControl.DataContext>
-    <Grid Width="Auto" Margin="5,5,5,20" Name="root" ClipToBounds="False">
+    <Grid Width="Auto" Margin="5,5,5,20" Name="Root" ClipToBounds="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -63,7 +63,7 @@
 
         </Grid>
         <Grid.CacheMode>
-            <BitmapCache RenderAtScale="2"></BitmapCache>
+            <BitmapCache RenderAtScale="2"/>
         </Grid.CacheMode>
 
     </Grid>

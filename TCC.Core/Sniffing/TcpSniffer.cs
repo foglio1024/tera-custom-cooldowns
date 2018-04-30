@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using PacketDotNet;
 
-namespace NetworkSniffer
+namespace TCC.Sniffing
 {
     public class TcpSniffer
     {
@@ -71,7 +71,7 @@ namespace NetworkSniffer
 
         private void Receive(IPv4Packet ipData)
         {
-            var tcpPacket = ipData.PayloadPacket as PacketDotNet.TcpPacket;
+            var tcpPacket = ipData.PayloadPacket as TcpPacket;
             if (tcpPacket == null || tcpPacket.DataOffset*4 > ipData.PayloadLength) return;
             //if (tcpPacket.Checksum!=0 && !tcpPacket.ValidTCPChecksum) return;
             var isFirstPacket = tcpPacket.Syn;

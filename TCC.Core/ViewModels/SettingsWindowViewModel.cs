@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Threading;
+using TCC.Data;
 using TCC.Parsing;
 
 namespace TCC.ViewModels

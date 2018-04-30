@@ -17,7 +17,7 @@ namespace TCC.Converters
             var guildId = (uint) value;
             if (!S_IMAGE_DATA.Database.ContainsKey(guildId))
             {
-                return App.Current.FindResource("DefaultGuildLogo");
+                return Application.Current.FindResource("DefaultGuildLogo");
 
             }
 
@@ -27,7 +27,7 @@ namespace TCC.Converters
             {
                 bs = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(ip,
                     IntPtr.Zero, Int32Rect.Empty,
-                    System.Windows.Media.Imaging.BitmapSizeOptions.FromEmptyOptions());
+                    BitmapSizeOptions.FromEmptyOptions());
             }
             finally
             {

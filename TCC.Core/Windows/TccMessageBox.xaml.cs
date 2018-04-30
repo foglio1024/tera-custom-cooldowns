@@ -1,16 +1,19 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using TCC.Data;
+using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC.Windows
 {
     /// <summary>
     /// Logica di interazione per TccMessageBox.xaml
     /// </summary>
-    public partial class TccMessageBox : Window
+    public partial class TccMessageBox
     {
         private TccMessageBox()
         {
@@ -69,7 +72,7 @@ namespace TCC.Windows
         MessageBoxButton button, MessageBoxImage image)
         {
             _messageBox = new TccMessageBox
-            { txtMsg = { Text = text }, MessageTitle = { Text = caption } };
+            { TxtMsg = { Text = text }, MessageTitle = { Text = caption } };
             SetVisibilityOfButtons(button);
             SetImageOfMessageBox(image);
             _messageBox.ShowDialog();
@@ -80,26 +83,24 @@ namespace TCC.Windows
             switch (button)
             {
                 case MessageBoxButton.OK:
-                    _messageBox.btnCancel.Visibility = Visibility.Collapsed;
-                    _messageBox.btnNo.Visibility = Visibility.Collapsed;
-                    _messageBox.btnYes.Visibility = Visibility.Collapsed;
-                    _messageBox.btnOk.Focus();
+                    _messageBox.BtnCancel.Visibility = Visibility.Collapsed;
+                    _messageBox.BtnNo.Visibility = Visibility.Collapsed;
+                    _messageBox.BtnYes.Visibility = Visibility.Collapsed;
+                    _messageBox.BtnOk.Focus();
                     break;
                 case MessageBoxButton.OKCancel:
-                    _messageBox.btnNo.Visibility = Visibility.Collapsed;
-                    _messageBox.btnYes.Visibility = Visibility.Collapsed;
-                    _messageBox.btnCancel.Focus();
+                    _messageBox.BtnNo.Visibility = Visibility.Collapsed;
+                    _messageBox.BtnYes.Visibility = Visibility.Collapsed;
+                    _messageBox.BtnCancel.Focus();
                     break;
                 case MessageBoxButton.YesNo:
-                    _messageBox.btnOk.Visibility = Visibility.Collapsed;
-                    _messageBox.btnCancel.Visibility = Visibility.Collapsed;
-                    _messageBox.btnNo.Focus();
+                    _messageBox.BtnOk.Visibility = Visibility.Collapsed;
+                    _messageBox.BtnCancel.Visibility = Visibility.Collapsed;
+                    _messageBox.BtnNo.Focus();
                     break;
                 case MessageBoxButton.YesNoCancel:
-                    _messageBox.btnOk.Visibility = Visibility.Collapsed;
-                    _messageBox.btnCancel.Focus();
-                    break;
-                default:
+                    _messageBox.BtnOk.Visibility = Visibility.Collapsed;
+                    _messageBox.BtnCancel.Focus();
                     break;
             }
         }
@@ -114,27 +115,25 @@ namespace TCC.Windows
                     //_messageBox.SetImage("Question.png");
                     break;
                 case MessageBoxImage.Information:
-                    _messageBox.BG.Background = App.Current.FindResource("MpColor") as SolidColorBrush;
+                    _messageBox.Bg.Background = Application.Current.FindResource("MpColor") as SolidColorBrush;
                     //_messageBox.SetImage("Information.png");
                     break;
                 case MessageBoxImage.Error:
                     //_messageBox.SetImage("Error.png");
-                    _messageBox.BG.Background = App.Current.FindResource("HpColor") as SolidColorBrush;
-                    break;
-                default:
-                    //_messageBox.img.Visibility = Visibility.Collapsed;
+                    _messageBox.Bg.Background = Application.Current.FindResource("HpColor") as SolidColorBrush;
                     break;
             }
         }
+        [SuppressMessage("ReSharper", "PossibleUnintendedReferenceComparison")]
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (sender == btnOk)
+            if (sender == BtnOk)
                 _result = MessageBoxResult.OK;
-            else if (sender == btnYes)
+            else if (sender == BtnYes)
                 _result = MessageBoxResult.Yes;
-            else if (sender == btnNo)
+            else if (sender == BtnNo)
                 _result = MessageBoxResult.No;
-            else if (sender == btnCancel)
+            else if (sender == BtnCancel)
                 _result = MessageBoxResult.Cancel;
             else
                 _result = MessageBoxResult.None;
@@ -150,9 +149,11 @@ namespace TCC.Windows
                 });
             });
         }
+        // ReSharper disable once UnusedMember.Local
         private void SetImage(string imageName)
         {
-            var uri = string.Format("/Resources/images/{0}", imageName);
+            var uri = $"/Resources/images/{imageName}";
+            // ReSharper disable once UnusedVariable
             var uriSource = new Uri(uri, UriKind.RelativeOrAbsolute);
             //img.Source = new BitmapImage(uriSource);
         }

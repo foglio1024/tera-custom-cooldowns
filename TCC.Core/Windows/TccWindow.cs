@@ -9,30 +9,31 @@ using System.Windows.Interop;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using TCC.Controls;
+using TCC.Data;
 using TCC.ViewModels;
 
 namespace TCC.Windows
 {
     public class TccWindow : Window, INotifyPropertyChanged
     {
-        protected IntPtr _handle;
-        protected WindowSettings _settings;
-        protected WindowButtons _b;
-        protected UIElement _c;
+        private WindowSettings _settings;
+        private bool _ignoreSize;
+        private bool _clickThru;
         private DispatcherTimer _t;
         private DoubleAnimation _showButtons;
         private DoubleAnimation _hideButtons;
-        protected bool _ignoreSize;
-        protected bool clickThru;
+        protected IntPtr Handle;
+        protected WindowButtons ButtonsRef;
+        protected UIElement MainContentRef;
         public bool ClickThru
         {
-            get { return clickThru; }
+            get => _clickThru;
             set
             {
-                clickThru = value;
+                _clickThru = value;
 
-                if (clickThru) FocusManager.MakeTransparent(_handle);
-                else FocusManager.UndoTransparent(_handle);
+                if (_clickThru) FocusManager.MakeTransparent(Handle);
+                else FocusManager.UndoTransparent(Handle);
 
                 NPC();
             }
@@ -65,22 +66,22 @@ namespace TCC.Windows
             Closed += TccWindow_Closed;
             Loaded += TccWindow_Loaded;
 
-            if (_b == null) return;
+            if (ButtonsRef == null) return;
 
             _hideButtons = new DoubleAnimation(0, TimeSpan.FromMilliseconds(1000));
             _showButtons = new DoubleAnimation(1, TimeSpan.FromMilliseconds(150));
 
-            _t = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(2) };
+            _t = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
             _t.Tick += (s, ev) =>
             {
                 _t.Stop();
-                if (this.IsMouseOver) return;
-                _b.BeginAnimation(OpacityProperty, _hideButtons);
+                if (IsMouseOver) return;
+                ButtonsRef.BeginAnimation(OpacityProperty, _hideButtons);
             };
 
-            MouseEnter += (s, ev) => _b.BeginAnimation(OpacityProperty, _showButtons);
+            MouseEnter += (s, ev) => ButtonsRef.BeginAnimation(OpacityProperty, _showButtons);
             MouseLeave += (s, ev) => _t.Start();
-            _b.MouseLeftButtonDown += Drag;
+            ButtonsRef.MouseLeftButtonDown += Drag;
         }
 
         private void _settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -90,18 +91,18 @@ namespace TCC.Windows
                 switch (_settings.ClickThruMode)
                 {
                     case ClickThruMode.Never:
-                        FocusManager.UndoTransparent(_handle);
+                        FocusManager.UndoTransparent(Handle);
                         break;
                     case ClickThruMode.Always:
-                        FocusManager.MakeTransparent(_handle);
+                        FocusManager.MakeTransparent(Handle);
                         break;
                     case ClickThruMode.WhenDim:
-                        if (WindowManager.IsTccDim) FocusManager.MakeTransparent(_handle);
-                        else FocusManager.UndoTransparent(_handle);
+                        if (WindowManager.IsTccDim) FocusManager.MakeTransparent(Handle);
+                        else FocusManager.UndoTransparent(Handle);
                         break;
                     case ClickThruMode.WhenUndim:
-                        if (WindowManager.IsTccDim) FocusManager.UndoTransparent(_handle);
-                        else FocusManager.MakeTransparent(_handle);
+                        if (WindowManager.IsTccDim) FocusManager.UndoTransparent(Handle);
+                        else FocusManager.MakeTransparent(Handle);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -123,9 +124,9 @@ namespace TCC.Windows
 
         protected void TccWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            _handle = new WindowInteropHelper(this).Handle;
-            FocusManager.MakeUnfocusable(_handle);
-            FocusManager.HideFromToolBar(_handle);
+            Handle = new WindowInteropHelper(this).Handle;
+            FocusManager.MakeUnfocusable(Handle);
+            FocusManager.HideFromToolBar(Handle);
 
             if (!_settings.Enabled) CloseWindowSafe();
         }
@@ -188,7 +189,8 @@ namespace TCC.Windows
                 }
             }
         }
-        public void SetClickThru(bool t)
+
+        private void SetClickThru(bool t)
         {
             ClickThru = t;
         }
@@ -201,10 +203,11 @@ namespace TCC.Windows
             Dispatcher.Invoke(() =>
             {
                 Visibility = v;
-                NPC("Visibility");
+                NPC(nameof(Visibility));
             });
         }
-        public void SetVisibility(bool v)
+
+        private void SetVisibility(bool v)
         {
             if (!Dispatcher.Thread.IsAlive)
             {
@@ -214,22 +217,22 @@ namespace TCC.Windows
             {
                 Visibility = !v ? Visibility.Visible : Visibility.Collapsed; // meh ok
                 Visibility = v ? Visibility.Visible : Visibility.Collapsed;
-                NPC("Visibility");
+                NPC(nameof(Visibility));
             });
         }
 
-        public void AnimateContentOpacity(double opacity)
+        private void AnimateContentOpacity(double opacity)
         {
-            if (_c == null) return;
+            if (MainContentRef == null) return;
             Dispatcher.InvokeIfRequired(() =>
             {
                 //var grid = ((Grid)this.Content);
-                _c.BeginAnimation(OpacityProperty, new DoubleAnimation(opacity, TimeSpan.FromMilliseconds(250)));
-            }, System.Windows.Threading.DispatcherPriority.DataBind);
+                MainContentRef.BeginAnimation(OpacityProperty, new DoubleAnimation(opacity, TimeSpan.FromMilliseconds(250)));
+            }, DispatcherPriority.DataBind);
         }
         public void RefreshTopmost()
         {
-            Dispatcher.InvokeIfRequired(() => { Topmost = false; Topmost = true; }, System.Windows.Threading.DispatcherPriority.DataBind);
+            Dispatcher.InvokeIfRequired(() => { Topmost = false; Topmost = true; }, DispatcherPriority.DataBind);
         }
         public void RefreshSettings(WindowSettings ws)
         {
@@ -244,7 +247,7 @@ namespace TCC.Windows
                 DragMove();
                 CheckBounds();
                 if (!_ignoreSize) ResizeMode = ResizeMode.CanResize;
-                var screen = Screen.FromHandle(new WindowInteropHelper(this).Handle);
+                var unused = Screen.FromHandle(new WindowInteropHelper(this).Handle);
                 var source = PresentationSource.FromVisual(this);
                 if (source?.CompositionTarget == null) return;
                 var m = source.CompositionTarget.TransformToDevice;
@@ -257,7 +260,10 @@ namespace TCC.Windows
 
                 SettingsManager.SaveSettings();
             }
-            catch (Exception) { }
+            catch
+            {
+                // ignored
+            }
         }
 
         private void CheckBounds()

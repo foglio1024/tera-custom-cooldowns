@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace Tera.Game
+namespace TCC.TeraCommon.Game.Services
 {
     public class NpcDatabase
     {

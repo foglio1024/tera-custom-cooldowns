@@ -1,14 +1,13 @@
 ﻿using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
-using TCC.ViewModels;
+using TCC.Data;
 
 namespace TCC.Controls
 {
     /// <summary>
     /// Logica di interazione per EdgeControl.xaml
     /// </summary>
-    public partial class EdgeControl : UserControl
+    public partial class EdgeControl
     {
         public EdgeControl()
         {
@@ -16,7 +15,7 @@ namespace TCC.Controls
             //baseBorder.Background = (SolidColorBrush)App.Current.FindResource("DefaultBackgroundColor");
 
         }
-        private int _currentEdge = 0;
+        private int _currentEdge;
 
         private void SetEdge(int newEdge)
         {
@@ -27,17 +26,17 @@ namespace TCC.Controls
             {
                 for (var i = 0; i < diff; i++)
                 {
-                    edgeContainer.Children[_currentEdge + i].Opacity = 1;
+                    EdgeContainer.Children[_currentEdge + i].Opacity = 1;
                 }
             }
             else
             {
                 //baseBorder.Background = (SolidColorBrush)App.Current.FindResource("DefaultBackgroundColor");
-                maxBorder.Opacity = 0;
+                MaxBorder.Opacity = 0;
 
-                for (var i = edgeContainer.Children.Count - 1; i >= 0; i--)
+                for (var i = EdgeContainer.Children.Count - 1; i >= 0; i--)
                 {
-                    edgeContainer.Children[i].Opacity = 0;
+                    EdgeContainer.Children[i].Opacity = 0;
                 }
             }
             _currentEdge = newEdge;
@@ -52,16 +51,16 @@ namespace TCC.Controls
             _context.PropertyChanged += _context_PropertyChanged;
         }
 
-        private void _context_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void _context_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Val")
+            switch (e.PropertyName)
             {
-                SetEdge(_context.Val);
-            }
-            else if (e.PropertyName == "Maxed")
-            {
-                //baseBorder.Background = new SolidColorBrush(Colors.Red);
-                maxBorder.Opacity = 1;
+                case "Val":
+                    SetEdge(_context.Val);
+                    break;
+                case "Maxed":
+                    MaxBorder.Opacity = 1;
+                    break;
             }
         }
 

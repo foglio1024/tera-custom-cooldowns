@@ -1,7 +1,8 @@
+﻿
+ using System;
+ using TCC.TeraCommon.Game.Services;
 
-﻿using System;
-
-namespace Tera.Game.Messages
+namespace TCC.TeraCommon.Game.Messages.Server
 {
     public class S_BEGIN_THROUGH_ARBITER_CONTRACT : ParsedMessage
     {

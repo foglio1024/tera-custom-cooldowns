@@ -284,16 +284,12 @@
     <Compile Include="Controls\ChatControls\PlayerTooltip.xaml.cs">
       <DependentUpon>PlayerTooltip.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ChatControls\testctrl.xaml.cs">
-      <DependentUpon>testctrl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\DefaultEnemyWindowLayout.xaml.cs">
       <DependentUpon>DefaultEnemyWindowLayout.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\DragonControl.xaml.cs">
       <DependentUpon>DragonControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\NonReloadingTabControl.cs" />
     <Compile Include="Controls\Phase1BossControl.xaml.cs">
       <DependentUpon>Phase1BossControl.xaml</DependentUpon>
     </Compile>
@@ -561,17 +557,8 @@
     <Compile Include="Parsing\Messages\S_BOSS_GAGE_INFO.cs" />
     <Compile Include="Parsing\Messages\S_PLAYER_CHANGE_FLIGHT_ENERGY.cs" />
     <Compile Include="Parsing\Messages\S_NPC_STATUS.cs" />
-    <Compile Include="Controls\CircularGauge.xaml.cs">
-      <DependentUpon>CircularGauge.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\DragonSmallGauge.xaml.cs">
-      <DependentUpon>DragonSmallGauge.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\GenericGauge.xaml.cs">
       <DependentUpon>GenericGauge.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\HarrowholdBossesControl.xaml.cs">
-      <DependentUpon>HarrowholdBossesControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\MaterialSwitch.xaml.cs">
       <DependentUpon>MaterialSwitch.xaml</DependentUpon>
@@ -803,9 +790,6 @@
     <Compile Include="Controls\ClassBars\WarriorBar.xaml.cs">
       <DependentUpon>WarriorBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\DebugWindow.xaml.cs">
-      <DependentUpon>DebugWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows\FlightDurationWindow.xaml.cs">
       <DependentUpon>FlightDurationWindow.xaml</DependentUpon>
     </Compile>
@@ -831,9 +815,6 @@
     </Compile>
     <Compile Include="Windows\LfgListWindow.xaml.cs">
       <DependentUpon>LfgListWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\NewDungeonInfoControl.xaml.cs">
-      <DependentUpon>NewDungeonInfoControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
@@ -924,10 +905,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ChatControls\testctrl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\ClassBars\BerserkerBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -953,10 +930,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\BossGage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\CircularGauge.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1036,10 +1009,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\DragonSmallGauge.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\FixedSkillControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1049,10 +1018,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\ClassBars\GunnerBar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\HarrowholdBossesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1181,10 +1146,6 @@
       <DependentUpon>CooldownWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Windows\DebugWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Windows\FlightDurationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1214,10 +1175,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\LfgListWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\NewDungeonInfoControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

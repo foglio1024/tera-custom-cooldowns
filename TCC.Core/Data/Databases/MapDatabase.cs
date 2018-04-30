@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -11,6 +12,9 @@ namespace TCC.Data.Databases
     {
         public static Dictionary<uint, World> Worlds;
         public static Dictionary<uint, string> Names;
+
+        [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
+        [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
         public static void Load(string lang)
         {
             Worlds = new Dictionary<uint, World>();
@@ -20,7 +24,7 @@ namespace TCC.Data.Databases
 
             foreach (var w in xdoc.Descendants().Where(x => x.Name == "World"))
             {
-                var wId = uint.Parse(w.Attribute("id").Value);
+                var wId = uint.Parse(w.Attribute("id")?.Value);
                 var wNameId = w.Attribute("nameId") != null ? uint.Parse(w.Attribute("nameId").Value) : 0;
                 var world = new World(wId, wNameId);
 
@@ -34,8 +38,12 @@ namespace TCC.Data.Databases
                     //var gWidth = g.Attribute("width") != null ? Double.Parse(g.Attribute("width").Value, CultureInfo.InvariantCulture) : 0;
                     //var gHeight = g.Attribute("height") != null ? Double.Parse(g.Attribute("height").Value, CultureInfo.InvariantCulture) : 0;
 
-                    var guard = new Guard(gId, gNameId, gMapId/*, gLeft, gTop, gWidth, gHeight*/);
-                    guard.ContinentId = g.Attribute("continentId") != null ? Convert.ToUInt32(g.Attribute("continentId").Value) : 0;
+                    var guard = new Guard(gId, gNameId, gMapId /*, gLeft, gTop, gWidth, gHeight*/)
+                    {
+                        ContinentId = g.Attribute("continentId") != null
+                            ? Convert.ToUInt32(g.Attribute("continentId").Value)
+                            : 0
+                    };
 
                     foreach (var s in g.Descendants().Where(x => x.Name == "Section"))
                     {
@@ -46,7 +54,7 @@ namespace TCC.Data.Databases
                         //var sWidth = s.Attribute("width") != null ? Double.Parse(s.Attribute("width").Value, CultureInfo.InvariantCulture) : 0;
                         //var sHeight = s.Attribute("height") != null ? Double.Parse(s.Attribute("height").Value, CultureInfo.InvariantCulture) : 0;
                         var sMapId = s.Attribute("mapId") != null ? s.Attribute("mapId").Value : "";
-                        var dg = s.Attribute("type") != null && s.Attribute("type").Value == "dungeon" ? true : false;
+                        var dg = s.Attribute("type") != null && s.Attribute("type").Value == "dungeon";
                         //var cId = s.Descendants().Any()? uint.Parse(s.Descendants().FirstOrDefault(x => x.Name == "Npc").Attribute("continentId").Value) : 0;
 
                         var section = new Section(sId, sNameId, sMapId/*, sTop, sLeft, sWidth, sHeight*/, dg);
@@ -74,7 +82,6 @@ namespace TCC.Data.Databases
             }
             s = Names[guard.Value.NameId];
             return true;
-
         }
 
         internal static bool GetDungeon(Location loc)
@@ -87,7 +94,6 @@ namespace TCC.Data.Databases
             var section = Worlds[loc.World].Guards[loc.Guard].Sections[loc.Section];
             var offset = new Point(section.Left, section.Top);
             return new Point((offset.Y - loc.Position.X) / section.Scale, (-offset.X + loc.Position.Y) / section.Scale);
-
         }
 
         private static void LoadNames(string lang)
@@ -120,24 +126,18 @@ namespace TCC.Data.Databases
             {
                 Worlds.ToList().ForEach(w =>
                 {
-                    if (w.Value.Guards.ContainsKey(guardId))
-                    {
-                        var g = w.Value.Guards[guardId];
-                        if (g.Sections.ContainsKey(sectionId))
-                        {
-                            var name = g.Sections[sectionId].NameId;
-                            ret = Names[name];
-                            return;
-                        }
-                    }
+                    if (!w.Value.Guards.ContainsKey(guardId)) return;
+                    var g = w.Value.Guards[guardId];
+                    if (!g.Sections.ContainsKey(sectionId)) return;
+                    var name = g.Sections[sectionId].NameId;
+                    ret = Names[name];
                 });
             }
-            catch (Exception)
+            catch
             {
+                // ignored
             }
             return ret;
         }
     }
-
-
 }

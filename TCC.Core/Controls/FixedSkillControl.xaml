@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
-             xmlns:converters="clr-namespace:TCC.Converters"
              mc:Ignorable="d" Loaded="Control_Loaded"
              ClipToBounds="False" 
              MouseLeave="UserControl_MouseLeave">
@@ -15,18 +14,18 @@
     
     <Grid Width="55" Height="55" Margin="2" HorizontalAlignment="Left" Name="MainGrid" ClipToBounds="False">
         <Grid ClipToBounds="False">
-            <Ellipse Width="51" Height="{Binding ElementName=icon, Path=ActualWidth}" x:Name="icon" Stroke="#7fff" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Ellipse Width="51" Height="{Binding ElementName=Icon, Path=ActualWidth}" x:Name="Icon" Stroke="#7fff" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Ellipse.Fill>
                     <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource Converters.IconNameToPath}}"/>
                 </Ellipse.Fill>
             </Ellipse>
-            <local:Arc Margin="-500" x:Name="warnArc" Opacity=".8" EndAngle="359.9" Stroke="White" StrokeThickness="30" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <local:Arc Margin="-500" x:Name="WarnArc" Opacity=".8" EndAngle="359.9" Stroke="White" StrokeThickness="30" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <local:Arc.LayoutTransform>
                     <ScaleTransform ScaleX="0" ScaleY="0"/>
                 </local:Arc.LayoutTransform>
             </local:Arc>
         </Grid>
-        <local:Arc x:Name="arc" 
+        <local:Arc x:Name="Arc" 
                    Opacity="1" 
                    UseLayoutRounding="False" 
                    Width="Auto" 
@@ -36,7 +35,7 @@
                    EndAngle="0.01" 
                    HorizontalAlignment="Stretch" 
                    VerticalAlignment="Stretch" />
-        <Ellipse x:Name="growEllipse" UseLayoutRounding="False"
+        <Ellipse x:Name="GrowEllipse" UseLayoutRounding="False"
                  Fill="#9000"
                  Width="48"
                  Height="48"
@@ -49,11 +48,11 @@
                                 ScaleY="0"/>
             </Ellipse.LayoutTransform>
         </Ellipse>
-        <Ellipse Fill="White" Name="glow" Opacity="0"/>
+        <Ellipse Fill="White" Name="Glow" Opacity="0"/>
         <Grid Width="Auto" 
               MinWidth="12"
               Height="Auto" 
-              x:Name="g" 
+              x:Name="G" 
               HorizontalAlignment="Right" 
               VerticalAlignment="Bottom"
               ClipToBounds="False"
@@ -64,7 +63,7 @@
                            VerticalAlignment="Center" 
                            TextAlignment="Center"
                            FontSize="15" 
-                           x:Name="number" 
+                           x:Name="Number" 
                            Opacity="1" 
                            FontFamily="{StaticResource ArialMonoBold}"
                            Margin="0,0"

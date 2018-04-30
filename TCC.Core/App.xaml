@@ -327,18 +327,18 @@
             <converters:LogoInfoToImageConverter x:Key="Converters.LogoInfoToImage"/>
             <converters:DirectionToHorAlignConveter x:Key="Converters.DirectionToHorAlignConveter"/>
             <!--AbnormalityIndicator resources-->
-            <converters:AbnormalityStrokeConverter x:Key="Converters.AbnormalityTypeToStrokeColor"/>
-            <converters:DurationLabelConverter x:Key="Converters.DurationToTimeFormat"/>
-            <converters:StacksToVisibilityConverter x:Key="Converters.StacksToLabelVisibility"/>
-            <converters:DurationToVisibilityConverter x:Key="Converters.DurationToLabelVisibility"/>
-            <converters:SizeToStackLabelSizeConverter x:Key="Converters.MainSizeToStackLabelSize"/>
-            <converters:SizeToDurationLabelSizeConverter x:Key="Converters.MainSizeToDurationLabelSize"/>
-            <converters:SizeToDurationLabelMarginConverter x:Key="Converters.MainSizeToDurationLabelMargin"/>
+            <controls:AbnormalityStrokeConverter x:Key="Converters.AbnormalityTypeToStrokeColor"/>
+            <controls:DurationLabelConverter x:Key="Converters.DurationToTimeFormat"/>
+            <controls:StacksToVisibilityConverter x:Key="Converters.StacksToLabelVisibility"/>
+            <controls:DurationToVisibilityConverter x:Key="Converters.DurationToLabelVisibility"/>
+            <controls:SizeToStackLabelSizeConverter x:Key="Converters.MainSizeToStackLabelSize"/>
+            <controls:SizeToDurationLabelSizeConverter x:Key="Converters.MainSizeToDurationLabelSize"/>
+            <controls:SizeToDurationLabelMarginConverter x:Key="Converters.MainSizeToDurationLabelMargin"/>
 
             <!--BossGage resources-->
-            <converters:EntityIdToNameConverter x:Key="Converters.EntityIdToName"/>
-            <converters:AggroTypeToFillConverter x:Key="Converters.AggroTypeToFill"/>
-            <converters:BossHPbarColorConverter x:Key="Converters.EnrageToHpColor"/>
+            <controls:EntityIdToNameConverter x:Key="Converters.EntityIdToName"/>
+            <controls:AggroTypeToFillConverter x:Key="Converters.AggroTypeToFill"/>
+            <controls:BossHPbarColorConverter x:Key="Converters.EnrageToHpColor"/>
             <converters:DragonIdToColorConverter x:Key="Converters.DragonIdToColor"/>
             <converters:HHphaseToEnemyWindowTemplate x:Key="Converters.HarrowholdPhaseToLayout"/>
 
@@ -941,7 +941,7 @@
 
             <!--Boss template-->
             <DataTemplate x:Key="BossDataTemplate">
-                <local:BossGage/>
+                <controls:BossGage/>
             </DataTemplate>
             <!--Mob template-->
             <DataTemplate x:Key="MobDataTemplate">

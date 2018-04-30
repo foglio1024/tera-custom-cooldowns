@@ -4,9 +4,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Tera.Game.Messages;
+using TCC.TeraCommon.Game.Messages.Server;
 
-namespace Tera.Game
+namespace TCC.TeraCommon.Game.Services
 {
     // Contains information about skills
     // Currently this is limited to the name of the skill

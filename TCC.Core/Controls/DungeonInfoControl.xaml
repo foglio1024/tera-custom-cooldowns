@@ -2,10 +2,9 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TCC.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" Loaded="UserControl_Loaded" Opacity="1" >
-    <Border  Margin="2" Padding="0" CornerRadius="2" Width="Auto" Height="Auto" x:Name="rootBorder">
+    <Border  Margin="2" Padding="0" CornerRadius="2" Width="Auto" Height="Auto" x:Name="RootBorder">
         <Grid >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -33,7 +32,7 @@
                 </Rectangle>
             </Border>
             <Border Height="26" Width="26" Effect="{StaticResource DropShadow}" Background="{Binding Id, Converter={StaticResource Converters.DungeonIdToTierColor}}" Padding="0" CornerRadius="15" 
-                    HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-3,-3,0,0" Grid.Column="0" x:Name="entriesBubble" RenderTransformOrigin=".5,.5">
+                    HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-3,-3,0,0" Grid.Column="0" x:Name="EntriesBubble" RenderTransformOrigin=".5,.5">
                 <Grid Opacity="1">
                     <TextBlock Text="{Binding Entries}" FontWeight="Normal" HorizontalAlignment="Center" 
                                VerticalAlignment="Bottom" Margin="0,0,0,1" FontSize="18" Foreground="#d000"/>
@@ -42,7 +41,7 @@
                     <ScaleTransform ScaleX="1" ScaleY="1"/>
                 </Border.RenderTransform>
             </Border>
-            <TextBlock Foreground="#afff"  VerticalAlignment="Bottom" Margin="7,2,15,2" FontWeight="Normal" HorizontalAlignment="Left" 
+            <TextBlock Grid.Column="0" Foreground="#afff"  VerticalAlignment="Bottom" Margin="7,2,15,2" FontWeight="Normal" HorizontalAlignment="Left" 
                                    FontSize="13" TextWrapping="WrapWithOverflow" Text="{Binding Id, Converter={StaticResource Converters.DungeonIdToName},ConverterParameter=False}"></TextBlock>
         </Grid>
         <Border.RenderTransform>

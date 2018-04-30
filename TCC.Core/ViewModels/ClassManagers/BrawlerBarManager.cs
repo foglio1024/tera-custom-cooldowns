@@ -46,8 +46,8 @@ namespace TCC.ViewModels
             
             SkillsDatabase.TryGetSkill(180100, Class.Fighter, out var gf);
             SkillsDatabase.TryGetSkill(21200, Class.Fighter, out var c);
-            GrowingFury = new FixedSkillCooldown(gf, CooldownType.Skill, _dispatcher, false);
-            Counter = new FixedSkillCooldown(c, CooldownType.Skill, _dispatcher, false);
+            GrowingFury = new FixedSkillCooldown(gf, _dispatcher, false);
+            Counter = new FixedSkillCooldown(c, _dispatcher, false);
         }
 
     }

@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using TCC.Data;
 using TCC.ViewModels;
 
 namespace TCC.Controls
@@ -111,8 +112,8 @@ namespace TCC.Controls
         {
             var an = new DoubleAnimation(angle*359.9, 0, TimeSpan.FromMilliseconds(_context.Cooldown));
             var fps = _context.Cooldown > 80000 ? 1 : 30;
-            DoubleAnimation.SetDesiredFrameRate(an, fps);
-            arc.BeginAnimation(Arc.EndAngleProperty, an);
+            Timeline.SetDesiredFrameRate(an, fps);
+            Arc.BeginAnimation(Arc.EndAngleProperty, an);
             NumberTimer.IsEnabled = true;
         }
 

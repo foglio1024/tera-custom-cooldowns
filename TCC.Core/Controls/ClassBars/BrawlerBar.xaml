@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="TCC.Controls.BrawlerBar"
+﻿<UserControl x:Class="TCC.Controls.ClassBars.BrawlerBar"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,7 +9,7 @@
     <UserControl.DataContext>
         <viewModels:BrawlerBarManager/>
     </UserControl.DataContext>
-    <Grid Width="Auto" Margin="10,10,20,20" Name="root">
+    <Grid Width="Auto" Margin="10,10,20,20" Name="Root">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
@@ -26,7 +26,7 @@
             </local:FixedSkillControl>
         </Grid>
         </Border>
-        <Grid ClipToBounds="False">
+        <Grid Grid.Column="0" ClipToBounds="False">
             <Border Style="{StaticResource Styles.DefaultBorder}"
                     CornerRadius="70"
                     Margin="0"

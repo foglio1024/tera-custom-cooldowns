@@ -12,7 +12,7 @@ using System.Windows.Threading;
 using TCC.Data;
 using TCC.ViewModels;
 
-namespace TCC
+namespace TCC.Controls
 {
     /// <inheritdoc cref="UserControl" />
     /// <summary>
@@ -149,7 +149,7 @@ namespace TCC
                     AnimateHp();
                     NotifyPropertyChanged(nameof(EnrageTBtext));
                     NotifyPropertyChanged(nameof(RemainingPercentage));
-                    //NotifyPropertyChanged(nameof(AverageEnrage));
+                    //NPC(nameof(AverageEnrage));
                     NotifyPropertyChanged(nameof(TotalEnrage));
                     NotifyPropertyChanged(nameof(MainPercDec));
                     NotifyPropertyChanged(nameof(MainPercInt));
@@ -370,10 +370,7 @@ namespace TCC
             NPC(nameof(StartFactor));
         }
     }
-}
 
-namespace TCC.Converters
-{
     public class EntityIdToNameConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

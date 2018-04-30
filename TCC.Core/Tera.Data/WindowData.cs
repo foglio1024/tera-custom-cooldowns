@@ -8,7 +8,7 @@ using System.Windows.Media;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace Data
+namespace TCC.Tera.Data
 {
     public class WindowData
     {
@@ -120,7 +120,7 @@ namespace Data
             EnableChat = true;
             CopyInspect = true;
             ShowAfkEventsIngame = false;
-            DiscordInfoByGuild = new Dictionary<string, Data.DiscordInfoByGuild>();
+            DiscordInfoByGuild = new Dictionary<string, DiscordInfoByGuild>();
             DiscordLogin = "";
             DiscordPassword = "";
             DisablePartyEvent = false;
@@ -220,7 +220,7 @@ namespace Data
             var root = _xml.Root;
             var xml = root?.Element(xmlName);
             if (xml == null) return;
-            var setting = this.GetType().GetProperty(settingName);
+            var setting = GetType().GetProperty(settingName);
             setting.SetValue(this, (Color)ColorConverter.ConvertFromString(xml.Value), null);
         }
 
@@ -564,7 +564,7 @@ namespace Data
             var root = _xml.Root;
             var xml = root?.Element(xmlName);
             if (xml == null) return;
-            var setting = this.GetType().GetProperty(settingName);
+            var setting = GetType().GetProperty(settingName);
             if (setting.PropertyType == typeof(int))
             {
                 int value;

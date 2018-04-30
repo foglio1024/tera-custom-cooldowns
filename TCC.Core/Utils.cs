@@ -161,7 +161,7 @@ namespace TCC
         }
         public static Color ParseColor(string col)
         {
-            return System.Windows.Media.Color.FromRgb(
+            return Color.FromRgb(
                                 Convert.ToByte(col.Substring(0, 2), 16),
                                 Convert.ToByte(col.Substring(2, 2), 16),
                                 Convert.ToByte(col.Substring(4, 2), 16));
@@ -235,7 +235,7 @@ namespace TCC
 
         public DependencyPropertyWatcher(DependencyObject target, string propertyPath)
         {
-            this.Target = target;
+            Target = target;
             BindingOperations.SetBinding(
                 this,
                 ValueProperty,
@@ -246,7 +246,7 @@ namespace TCC
 
         public T Value
         {
-            get { return (T)this.GetValue(ValueProperty); }
+            get { return (T)GetValue(ValueProperty); }
         }
 
         public static void OnPropertyChanged(object sender, DependencyPropertyChangedEventArgs args)
@@ -261,7 +261,7 @@ namespace TCC
 
         public void Dispose()
         {
-            this.ClearValue(ValueProperty);
+            ClearValue(ValueProperty);
         }
     }
     public static class DispatcherExtensions
@@ -299,110 +299,110 @@ namespace TCC
 
         public SynchronizedObservableCollection()
         {
-            this._dispatcher = Dispatcher.CurrentDispatcher;
-            this._lock = new ReaderWriterLockSlim();
+            _dispatcher = Dispatcher.CurrentDispatcher;
+            _lock = new ReaderWriterLockSlim();
         }
         public SynchronizedObservableCollection(Dispatcher d)
         {
-            this._dispatcher = d;
-            this._lock = new ReaderWriterLockSlim();
+            _dispatcher = d;
+            _lock = new ReaderWriterLockSlim();
         }
         protected override void ClearItems()
         {
-            this._dispatcher.InvokeIfRequired((Action)(() =>
+            _dispatcher.InvokeIfRequired((Action)(() =>
             {
-                this._lock.EnterWriteLock();
+                _lock.EnterWriteLock();
                 try
                 {
                     base.ClearItems();
                 }
                 finally
                 {
-                    this._lock.ExitWriteLock();
+                    _lock.ExitWriteLock();
                 }
             }), DispatcherPriority.DataBind);
         }
         protected override void InsertItem(int index, T item)
         {
-            this._dispatcher.InvokeIfRequired((Action)(() =>
+            _dispatcher.InvokeIfRequired((Action)(() =>
             {
-                if (index > this.Count)
+                if (index > Count)
                     return;
-                this._lock.EnterWriteLock();
+                _lock.EnterWriteLock();
                 try
                 {
                     base.InsertItem(index, item);
                 }
                 finally
                 {
-                    this._lock.ExitWriteLock();
+                    _lock.ExitWriteLock();
                 }
             }), DispatcherPriority.DataBind);
         }
         protected override void MoveItem(int oldIndex, int newIndex)
         {
-            this._dispatcher.InvokeIfRequired((Action)(() =>
+            _dispatcher.InvokeIfRequired((Action)(() =>
             {
-                this._lock.EnterReadLock();
-                var count = this.Count;
-                this._lock.ExitReadLock();
+                _lock.EnterReadLock();
+                var count = Count;
+                _lock.ExitReadLock();
                 if (oldIndex >= count | newIndex >= count | oldIndex == newIndex)
                     return;
-                this._lock.EnterWriteLock();
+                _lock.EnterWriteLock();
                 try
                 {
                     base.MoveItem(oldIndex, newIndex);
                 }
                 finally
                 {
-                    this._lock.ExitWriteLock();
+                    _lock.ExitWriteLock();
                 }
             }), DispatcherPriority.DataBind);
         }
         protected override void RemoveItem(int index)
         {
-            this._dispatcher.InvokeIfRequired((Action)(() =>
+            _dispatcher.InvokeIfRequired((Action)(() =>
             {
-                if (index >= this.Count)
+                if (index >= Count)
                     return;
-                this._lock.EnterWriteLock();
+                _lock.EnterWriteLock();
                 try
                 {
                     base.RemoveItem(index);
                 }
                 finally
                 {
-                    this._lock.ExitWriteLock();
+                    _lock.ExitWriteLock();
                 }
             }), DispatcherPriority.DataBind);
         }
         protected override void SetItem(int index, T item)
         {
-            this._dispatcher.InvokeIfRequired((Action)(() =>
+            _dispatcher.InvokeIfRequired((Action)(() =>
             {
-                this._lock.EnterWriteLock();
+                _lock.EnterWriteLock();
                 try
                 {
                     base.SetItem(index, item);
                 }
                 finally
                 {
-                    this._lock.ExitWriteLock();
+                    _lock.ExitWriteLock();
                 }
             }), DispatcherPriority.DataBind);
         }
         public T[] ToSyncArray()
         {
-            this._lock.EnterReadLock();
+            _lock.EnterReadLock();
             try
             {
-                var array = new T[this.Count];
-                this.CopyTo(array, 0);
+                var array = new T[Count];
+                CopyTo(array, 0);
                 return array;
             }
             finally
             {
-                this._lock.ExitReadLock();
+                _lock.ExitReadLock();
             }
         }
     }

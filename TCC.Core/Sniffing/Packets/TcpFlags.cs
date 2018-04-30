@@ -3,7 +3,7 @@
 
 using System;
 
-namespace NetworkSniffer.Packets
+namespace TCC.Sniffing.Packets
 {
     [Flags]
     public enum TcpFlags : byte

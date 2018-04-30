@@ -1,9 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Shapes;
 using System.Windows.Threading;
 using TCC.Data;
 using TCC.ViewModels;
@@ -11,51 +13,50 @@ using TCC.ViewModels;
 namespace TCC.Controls
 {
     /// <summary>
-    /// Logica di interazione per FixedSkillControl.xaml
+    ///     Logica di interazione per FixedSkillControl.xaml
     /// </summary>
-    public partial class FixedSkillControl : UserControl, INotifyPropertyChanged
+    public partial class FixedSkillControl : INotifyPropertyChanged
     {
         private FixedSkillCooldown _context;
-        private DispatcherTimer warnTimer;
-        private DoubleAnimation ExpandWarn;
-        private DoubleAnimation ExpandWarnInner;
-        private DoubleAnimation ArcAnimation;
+        private readonly DispatcherTimer _warnTimer;
+        private readonly DoubleAnimation _expandWarn;
+        private readonly DoubleAnimation _expandWarnInner;
+        private readonly DoubleAnimation _arcAnimation;
         public event PropertyChangedEventHandler PropertyChanged;
+        private bool _isRunning;
 
-        private bool isRunning = false;
         public bool IsRunning
         {
-            get { return isRunning; }
+            get => _isRunning;
             set
             {
-                if (isRunning == value) return;
-                isRunning = value;
-                if (!isRunning) warnTimer.Stop();
-                NotifyPropertyChanged("IsRunning");
+                if (_isRunning == value) return;
+                _isRunning = value;
+                if (!_isRunning) _warnTimer.Stop();
+                NPC();
             }
         }
 
-        public string SecondsText => _context == null? "" : Utils.TimeFormatter(Convert.ToUInt32(_context.Seconds));
+        public string SecondsText => _context == null ? "" : Utils.TimeFormatter(Convert.ToUInt32(_context.Seconds));
 
         public FixedSkillControl()
         {
             InitializeComponent();
-            warnTimer = new DispatcherTimer();
-            warnTimer.Interval = TimeSpan.FromMilliseconds(1000);
-            warnTimer.Tick += WarnTimer_Tick;
-
-
-            ArcAnimation = new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(1));
-            ExpandWarn = new DoubleAnimation(0, 1.5, TimeSpan.FromMilliseconds(300)) { EasingFunction = new QuadraticEase() };
-            ExpandWarnInner = new DoubleAnimation(35, 0, TimeSpan.FromMilliseconds(400)) { EasingFunction = new QuadraticEase() };
-            Timeline.SetDesiredFrameRate(ExpandWarn, 30);
-            Timeline.SetDesiredFrameRate(ExpandWarnInner, 30);
+            _warnTimer = new DispatcherTimer {Interval = TimeSpan.FromMilliseconds(1000)};
+            _warnTimer.Tick += WarnTimer_Tick;
+            _arcAnimation = new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(1));
+            _expandWarn =
+                new DoubleAnimation(0, 1.5, TimeSpan.FromMilliseconds(300)) {EasingFunction = new QuadraticEase()};
+            _expandWarnInner =
+                new DoubleAnimation(35, 0, TimeSpan.FromMilliseconds(400)) {EasingFunction = new QuadraticEase()};
+            Timeline.SetDesiredFrameRate(_expandWarn, 30);
+            Timeline.SetDesiredFrameRate(_expandWarnInner, 30);
         }
 
         private void Control_Loaded(object sender, RoutedEventArgs e)
         {
             if (DesignerProperties.GetIsInDesignMode(this) || DataContext == null) return;
-            _context = (FixedSkillCooldown)DataContext;
+            _context = (FixedSkillCooldown) DataContext;
             _context.PropertyChanged += _context_PropertyChanged;
         }
 
@@ -63,107 +64,98 @@ namespace TCC.Controls
         {
             Dispatcher.InvokeIfRequired(() =>
             {
-                if (e.PropertyName == "Refresh")
+                switch (e.PropertyName)
                 {
-                    if (_context.Cooldown == _context.OriginalCooldown) return;
-                    var newVal = (double)_context.Cooldown / (double)_context.OriginalCooldown;
-                    if (newVal > 1) newVal = 1;
-                    if (_context.Cooldown == 0)
-                    {
+                    case "Refresh" when _context.Cooldown == _context.OriginalCooldown: return;
+                    case "Refresh":
+                        var newVal = _context.Cooldown / (double) _context.OriginalCooldown;
+                        if (newVal > 1) newVal = 1;
+                        if (_context.Cooldown == 0)
+                        {
+                            IsRunning = false;
+                            AnimateAvailableSkill();
+                            return;
+                        }
+
+                        AnimateArcAngle(newVal);
+                        break;
+                    case "Start":
+                        IsRunning = true;
+                        AnimateArcAngle();
+                        break;
+                    case "IsAvailable" when _context.IsAvailable:
                         IsRunning = false;
                         AnimateAvailableSkill();
-                        return;
-                    }
-
-                    AnimateArcAngle(newVal);
+                        break;
+                    case "IsAvailable":
+                        _warnTimer.Stop();
+                        break;
+                    case nameof(_context.Seconds):
+                        NPC(nameof(SecondsText));
+                        break;
                 }
-                else if (e.PropertyName == "Start")
-                {
-                    IsRunning = true;
-                    AnimateArcAngle();
-                }
-                else if (e.PropertyName == "IsAvailable")
-                {
-                    if (_context.IsAvailable)
-                    {
-                        IsRunning = false;
-                        AnimateAvailableSkill();
-                    }
-                    else
-                    {
-                        warnTimer.Stop();
-                    }
-                }
-                else if (e.PropertyName == nameof(_context.Seconds))
-                {
-                    NotifyPropertyChanged(nameof(SecondsText));
-                }
-            },
-            DispatcherPriority.DataBind);
-
+            }, DispatcherPriority.DataBind);
         }
 
-        public void NotifyPropertyChanged(string p)
+        private void NPC([CallerMemberName] string p = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
         }
+
         private void WarnTimer_Tick(object sender, EventArgs e)
         {
             WarnAvailableSkill();
         }
 
-
         private void AnimateArcAngle(double val = 1)
         {
-            ArcAnimation.Duration = TimeSpan.FromMilliseconds(_context.Cooldown);
-            ArcAnimation.From = 359.9 * val;
+            _arcAnimation.Duration = TimeSpan.FromMilliseconds(_context.Cooldown);
+            _arcAnimation.From = 359.9 * val;
             var fps = _context.Cooldown > 80000 ? 1 : 30;
-            Timeline.SetDesiredFrameRate(ArcAnimation, fps);
-            arc.BeginAnimation(Arc.EndAngleProperty, ArcAnimation);
+            Timeline.SetDesiredFrameRate(_arcAnimation, fps);
+            Arc.BeginAnimation(Arc.EndAngleProperty, _arcAnimation);
         }
 
         private void AnimateAvailableSkill()
         {
-            arc.BeginAnimation(Arc.EndAngleProperty, null); //stop any arc animations
+            Arc.BeginAnimation(Arc.EndAngleProperty, null); //stop any arc animations
             if (!_context.FlashOnAvailable)
             {
                 var an = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200));
-                glow.BeginAnimation(OpacityProperty, an);
+                Glow.BeginAnimation(OpacityProperty, an);
             }
+
             WarnAvailableSkill();
             StartWarning();
         }
+
         private void StartWarning()
         {
-            warnTimer.Start();
+            _warnTimer.Start();
         }
+
         private void WarnAvailableSkill()
         {
             if (!SessionManager.Encounter) return;
             if (!_context.FlashOnAvailable) return;
-            warnArc.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, ExpandWarn);
-            warnArc.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, ExpandWarn);
-            warnArc.BeginAnimation(Arc.StrokeThicknessProperty, ExpandWarnInner);
+            WarnArc.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _expandWarn);
+            WarnArc.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, _expandWarn);
+            WarnArc.BeginAnimation(Shape.StrokeThicknessProperty, _expandWarnInner);
         }
 
-        private void UserControl_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        private void UserControl_MouseEnter(object sender, MouseEventArgs e)
         {
             DeleteButton.Visibility = Visibility.Visible;
         }
 
-        private void UserControl_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        private void UserControl_MouseLeave(object sender, MouseEventArgs e)
         {
             DeleteButton.Visibility = Visibility.Collapsed;
-
         }
 
-        private void DeleteButton_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void DeleteButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             CooldownWindowViewModel.Instance.DeleteFixedSkill(_context);
-        }
-        private void HideButton_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            CooldownWindowViewModel.Instance.AddHiddenSkill(_context);
         }
     }
 }

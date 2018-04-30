@@ -26,13 +26,13 @@ namespace TCC.ViewModels
             SkillsDatabase.TryGetSkill(210200, Class.Berserker, out var bl);
             FieryRage = new DurationCooldownIndicator(_dispatcher)
             {
-                Cooldown = new FixedSkillCooldown(fr, CooldownType.Skill, _dispatcher, true),
-                Buff = new FixedSkillCooldown(fr, CooldownType.Skill, _dispatcher, true)
+                Cooldown = new FixedSkillCooldown(fr, _dispatcher, true),
+                Buff = new FixedSkillCooldown(fr, _dispatcher, true)
             };
             Bloodlust = new DurationCooldownIndicator(_dispatcher)
             {
-                Cooldown = new FixedSkillCooldown(bl, CooldownType.Skill, _dispatcher, true),
-                Buff = new FixedSkillCooldown(bl, CooldownType.Skill, _dispatcher, true)
+                Cooldown = new FixedSkillCooldown(bl, _dispatcher, true),
+                Buff = new FixedSkillCooldown(bl, _dispatcher, true)
             };
         }
 

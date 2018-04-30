@@ -6,13 +6,13 @@
              xmlns:controls="clr-namespace:TCC.Controls"
              mc:Ignorable="d"
              Loaded="UserControl_Loaded">
-    <Grid Width="Auto" Name="rootGrid" DataContext="{Binding Vergos}"            
+    <Grid Width="Auto" Name="RootGrid" DataContext="{Binding Vergos}"            
 >
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Grid Width="Auto" Height="Auto" Margin="0,0,0,2" Name="topGrid">
+        <Grid Width="Auto" Height="Auto" Margin="0,0,0,2" Name="TopGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -23,13 +23,13 @@
             </Grid.ColumnDefinitions>
 
 
-            <Grid Margin="2,2" Name="mainGrid">
+            <Grid Margin="2,2" Name="MainGrid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Border Margin="0,0,0,0" Style="{StaticResource Styles.DefaultBorder}" x:Name="mainBorder" Grid.RowSpan="2" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <Border Margin="0,0,0,0" Style="{StaticResource Styles.DefaultBorder}" x:Name="MainBorder" Grid.RowSpan="2" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -37,7 +37,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Name="BossNameTB" Style="{StaticResource Styles.DefaultText}"
+                    <TextBlock Name="BossNameTb" Style="{StaticResource Styles.DefaultText}"
                                HorizontalAlignment="Left" 
                                VerticalAlignment="Center" 
                                FontSize="15" 
@@ -45,7 +45,7 @@
                                Grid.Row="0"/>
                 </Grid>
 
-                <Grid Margin="5,2" Name="topInfoGrid" Grid.Row="1" UseLayoutRounding="True">
+                <Grid Margin="5,2" Name="TopInfoGrid" Grid.Row="1" UseLayoutRounding="True">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -69,7 +69,7 @@
                                Text="{Binding CurrentFactor, StringFormat=##0.# %}"
                                Grid.Row="1"/>
                 </Grid>
-                <Grid Grid.Row="2" Margin="1,3,1,1" Name="hpBarGrid" >
+                <Grid Grid.Row="2" Margin="1,3,1,1" Name="HpBarGrid" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition />
@@ -110,7 +110,7 @@
                         <Rectangle Grid.ColumnSpan="4" Fill="#202027"></Rectangle>
                     </Grid>
 
-                    <Path Fill="OrangeRed" Width="11" Stretch="Uniform" Height="8"  Data="M0,0 2,0 1,1 0,0" Name="enrageEll" HorizontalAlignment="Left" Margin="155,-8,-5,-5">
+                    <Path Fill="OrangeRed" Width="11" Stretch="Uniform" Height="8"  Data="M0,0 2,0 1,1 0,0" Name="EnrageEll" HorizontalAlignment="Left" Margin="155,-8,-5,-5">
                         <Path.RenderTransform>
                             <TranslateTransform X="240" Y="-5"></TranslateTransform>
                         </Path.RenderTransform>

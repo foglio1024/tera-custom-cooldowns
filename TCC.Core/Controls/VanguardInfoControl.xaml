@@ -8,7 +8,7 @@
              Cursor="Hand" Background="Transparent"
              mc:Ignorable="d" MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave" Loaded="UserControl_Loaded"
              MouseLeftButtonDown="UserControl_MouseLeftButtonDown">
-    <Border  Margin="0" x:Name="rootBorder" RenderTransformOrigin=".5,.5" 
+    <Border  Margin="0" x:Name="RootBorder" RenderTransformOrigin=".5,.5" 
             UseLayoutRounding="True"  CornerRadius="2" 
             PreviewMouseRightButtonDown="RootBorder_OnPreviewMouseRightButtonDown">
         <Grid Width="Auto" ClipToBounds="True">
@@ -22,14 +22,14 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Rectangle Grid.ColumnSpan="3" Fill="#1fff" Opacity="0" x:Name="glow"/>
+            <Rectangle Grid.ColumnSpan="3" Fill="#1fff" Opacity="0" x:Name="Glow"/>
             <Rectangle Grid.ColumnSpan="3" Fill="{StaticResource MainColor}" Width="3" Margin="0" 
-                       HorizontalAlignment="Left" x:Name="sel" RenderTransformOrigin=".5 .5">
+                       HorizontalAlignment="Left" x:Name="Sel" RenderTransformOrigin=".5 .5">
                 <Rectangle.RenderTransform>
                     <ScaleTransform ScaleY="0"/>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <Ellipse VerticalAlignment="Top" HorizontalAlignment="Left" Width="10" Height="10" x:Name="ripple" Opacity="0" RenderTransformOrigin=".5,.5" Fill="#5999" IsHitTestVisible="False">
+            <Ellipse VerticalAlignment="Top" HorizontalAlignment="Left" Width="10" Height="10" x:Name="Ripple" Opacity="0" RenderTransformOrigin=".5,.5" Fill="#5999" IsHitTestVisible="False">
                 <Ellipse.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="1" ScaleY="1"/>
@@ -68,7 +68,7 @@
                                    Foreground="{StaticResource MarksColor}" 
                                    TextAlignment="Center" FontSize="15" VerticalAlignment="Center"></TextBlock>
                     </Viewbox>
-                    <local:Arc x:Name="elleonArc"
+                    <local:Arc x:Name="ElleonArc"
                            Width="30" 
                            Height="30" 
                            Stroke="{StaticResource MarksColor}" 
@@ -88,7 +88,7 @@
                                    Foreground="{StaticResource GuardianColor}" 
                                    TextAlignment="Center" FontSize="15" VerticalAlignment="Center"></TextBlock>
                     </Viewbox>
-                    <local:Arc x:Name="guardianArc"
+                    <local:Arc x:Name="GuardianArc"
                            Width="30" 
                            Height="30" 
                            Stroke="{StaticResource GuardianColor}" 
@@ -107,7 +107,7 @@
                                    Foreground="{StaticResource Tier3DungeonColor}" 
                                    TextAlignment="Center" FontSize="15" VerticalAlignment="Center"></TextBlock>
                     </Viewbox>
-                    <local:Arc x:Name="creditsArc"
+                    <local:Arc x:Name="CreditsArc"
                            Width="30" 
                            Height="30" 
                            Stroke="{StaticResource Tier3DungeonColor}" 
@@ -123,7 +123,7 @@
                   HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="Completed daily Vanguard quests.">
                     <Ellipse Fill="{StaticResource DailyColor}" Opacity=".2" Margin="2"></Ellipse>
                     <TextBlock Text="{Binding DailiesDone}" Foreground="{StaticResource DailyColor}" TextAlignment="Center" FontSize="15" VerticalAlignment="Center"></TextBlock>
-                    <local:Arc x:Name="dailyArc"
+                    <local:Arc x:Name="DailyArc"
                            Width="30" 
                            Height="30" 
                            Stroke="{StaticResource DailyColor}"
@@ -138,7 +138,7 @@
                   HorizontalAlignment="Right" VerticalAlignment="Center"  ToolTip="Completed weekly Vanguard quests.">
                     <Ellipse Fill="{StaticResource WeeklyColor}" Opacity=".2" Margin="2"/>
                     <TextBlock Text="{Binding WeekliesDone}" Foreground="{StaticResource WeeklyColor}" TextAlignment="Center" FontSize="15" VerticalAlignment="Center"></TextBlock>
-                    <local:Arc x:Name="weeklyArc"
+                    <local:Arc x:Name="WeeklyArc"
                            Width="30" 
                            Height="30" 
                            Stroke="{StaticResource WeeklyColor}" 

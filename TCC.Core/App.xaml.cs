@@ -1,5 +1,4 @@
-﻿using DamageMeter.Sniffing;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
@@ -13,6 +12,9 @@ using TCC.ViewModels;
 using TCC.Windows;
 using Newtonsoft.Json.Linq;
 using System.Linq;
+using TCC.Data;
+using TCC.Sniffing;
+using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC
 {

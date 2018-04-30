@@ -11,6 +11,7 @@ using System.Xml.Linq;
 using TCC.Data;
 using TCC.Parsing.Messages;
 using TCC.Windows;
+using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC.ViewModels
 {

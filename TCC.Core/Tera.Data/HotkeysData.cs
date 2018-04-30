@@ -6,9 +6,10 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
+
 //using Lang;
 
-namespace Data
+namespace TCC.Tera.Data
 {
     public class HotkeysData
     {

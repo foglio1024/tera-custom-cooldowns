@@ -1,4 +1,4 @@
-﻿<w:TccWindow x:Class="TCC.CooldownWindow"
+﻿<w:TccWindow x:Class="TCC.Windows.CooldownWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -31,7 +31,7 @@
                             ScaleY="{Binding Scale}"/>
             </ContentControl.LayoutTransform>
         </ContentControl>
-        <c:WindowButtons WindowName="Cooldown bar" x:Name="buttons" 
+        <c:WindowButtons WindowName="Cooldown bar" x:Name="Buttons" 
                          DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWindow}}"/>
     </Grid>
 </w:TccWindow>

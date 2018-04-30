@@ -20,8 +20,8 @@ namespace TCC.ViewModels
         {
             ManaBoost = new DurationCooldownIndicator(_dispatcher);
             SkillsDatabase.TryGetSkill(340200, Class.Sorcerer, out var mb);
-            ManaBoost.Cooldown = new FixedSkillCooldown(mb, CooldownType.Skill, _dispatcher, true);
-            ManaBoost.Buff = new FixedSkillCooldown(mb, CooldownType.Skill, _dispatcher, false);
+            ManaBoost.Cooldown = new FixedSkillCooldown(mb, _dispatcher, true);
+            ManaBoost.Buff = new FixedSkillCooldown(mb, _dispatcher, false);
         }
 
         public override bool StartSpecialSkill(SkillCooldown sk)

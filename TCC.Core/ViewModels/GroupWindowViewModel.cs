@@ -448,8 +448,8 @@ namespace TCC.ViewModels
     public class DragBehavior
     {
         public readonly TranslateTransform Transform = new TranslateTransform();
-        private System.Windows.Point _elementStartPosition2;
-        private System.Windows.Point _mouseStartPosition2;
+        private Point _elementStartPosition2;
+        private Point _mouseStartPosition2;
         private static DragBehavior _instance = new DragBehavior();
         public static DragBehavior Instance
         {

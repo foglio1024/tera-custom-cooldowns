@@ -1,6 +1,7 @@
 ﻿using System;
+using TCC.TeraCommon.Game.Services;
 
-namespace Tera.Game
+namespace TCC.TeraCommon.Game
 {
     public class Player : IEquatable<object>
     {

@@ -18,12 +18,12 @@
         </Grid.RowDefinitions>
         <Image Source="/TCC;component/resources/images/tera-logo-flat.png" Opacity=".9"/>
         <Border Grid.Row="1" Grid.RowSpan="2" Background="#333"/>
-        <TextBlock Name="txt" Grid.Row="1" VerticalAlignment="Center" Margin="0,3" TextWrapping="WrapWithOverflow"
+        <TextBlock Name="Txt" Grid.Row="1" VerticalAlignment="Center" Margin="0,3" TextWrapping="WrapWithOverflow"
                    HorizontalAlignment="Center" TextAlignment="Center" Foreground="#afff" >TCC</TextBlock>
-        <ProgressBar Name="bar" Grid.Row="1" Background="Transparent" BorderThickness="0" Foreground="#1fff" />
-        <TextBlock Name="ver" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+        <ProgressBar Name="Bar" Grid.Row="1" Background="Transparent" BorderThickness="0" Foreground="#1fff" />
+        <TextBlock Name="Ver" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Bottom"
                    Foreground="#90ffffff" Margin="3,2"/>
-        <UniformGrid Grid.Row="2"  Rows="1" Name="buttonsGrid" Margin="80,0">
+        <UniformGrid Grid.Row="2"  Rows="1" Name="ButtonsGrid" Margin="80,0">
             <Button Height="20" Margin="5" Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Center"
                     VerticalContentAlignment="Center" Click="NoClick">
                 <!--<Path Data="{StaticResource SvgClose}" Fill="White" Stretch="Uniform" Margin="3"></Path>-->

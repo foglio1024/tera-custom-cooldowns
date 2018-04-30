@@ -5,13 +5,15 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using TCC.TeraCommon.Game;
+using TCC.TeraCommon.Game.Services;
 //using log4net;
 //using log4net.Config;
-using Tera.Game;
+
 //using DamageMeter.AutoUpdate;
 //using Lang;
 
-namespace Data
+namespace TCC.Tera.Data
 {
     public class BasicTeraData
     {

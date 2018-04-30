@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Management;
 using System.Net;
-using Data;
+using TCC.Tera.Data;
 
-namespace NetworkSniffer
+namespace TCC.Sniffing
 {
     public class TcpConnection
     {

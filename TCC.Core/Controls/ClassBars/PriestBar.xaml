@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="TCC.Controls.PriestBar"
+﻿<UserControl x:Class="TCC.Controls.ClassBars.PriestBar"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,7 +9,7 @@
     <UserControl.DataContext>
         <viewModels:PriestBarManager/>
     </UserControl.DataContext>
-    <Grid Margin="5" Name="root">
+    <Grid Margin="5" Name="Root">
         <Grid HorizontalAlignment="Center" Margin="0">
             <Border Style="{StaticResource Styles.DefaultBorder}"
                     Grid.Row="0"

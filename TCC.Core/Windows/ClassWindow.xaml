@@ -9,58 +9,59 @@
              xmlns:data="clr-namespace:TCC.Data"
              xmlns:tcc="clr-namespace:TCC"
              xmlns:c="clr-namespace:TCC.Controls"
+             xmlns:classBars="clr-namespace:TCC.Controls.ClassBars"
              Style="{StaticResource BaseWindowStyle}"
              Loaded="TccWindow_Loaded"
              mc:Ignorable="d" 
              Title="WarriorBar" 
              UseLayoutRounding="True"
-             x:Name="win">
+             x:Name="Win">
     <w:TccWindow.DataContext>
         <wm:ClassWindowViewModel />
     </w:TccWindow.DataContext>
     <w:TccWindow.Resources>
-        <DataTemplate x:Key="warrior">
-            <c:WarriorBar />
+        <DataTemplate x:Key="Warrior">
+            <classBars:WarriorBar />
         </DataTemplate>
-        <DataTemplate x:Key="valkyrie">
-            <c:ValkyrieBar />
+        <DataTemplate x:Key="Valkyrie">
+            <classBars:ValkyrieBar />
         </DataTemplate>
-        <DataTemplate x:Key="archer">
-            <c:ArcherBar />
+        <DataTemplate x:Key="Archer">
+            <classBars:ArcherBar />
         </DataTemplate>
-        <DataTemplate x:Key="lancer">
-            <c:LancerBar/>
+        <DataTemplate x:Key="Lancer">
+            <classBars:LancerBar/>
         </DataTemplate>
-        <DataTemplate x:Key="priest">
-            <c:PriestBar />
+        <DataTemplate x:Key="Priest">
+            <classBars:PriestBar />
         </DataTemplate>
-        <DataTemplate x:Key="mystic">
-            <c:MysticBar/>
+        <DataTemplate x:Key="Mystic">
+            <classBars:MysticBar/>
         </DataTemplate>
-        <DataTemplate x:Key="ninja">
-            <c:NinjaBar/>
+        <DataTemplate x:Key="Ninja">
+            <classBars:NinjaBar/>
         </DataTemplate>
-        <DataTemplate x:Key="gunner">
-            <c:GunnerBar/>
+        <DataTemplate x:Key="Gunner">
+            <classBars:GunnerBar/>
         </DataTemplate>
-        <DataTemplate x:Key="brawler">
-            <c:BrawlerBar/>
+        <DataTemplate x:Key="Brawler">
+            <classBars:BrawlerBar/>
         </DataTemplate>
-        <DataTemplate x:Key="reaper">
-            <c:ReaperBar/>
+        <DataTemplate x:Key="Reaper">
+            <classBars:ReaperBar/>
         </DataTemplate>
-        <DataTemplate x:Key="sorcerer">
-            <c:SorcererBar/>
+        <DataTemplate x:Key="Sorcerer">
+            <classBars:SorcererBar/>
         </DataTemplate>
-        <DataTemplate x:Key="berserker">
-            <c:BerserkerBar/>
+        <DataTemplate x:Key="Berserker">
+            <classBars:BerserkerBar/>
         </DataTemplate>
-        <DataTemplate x:Key="slayer">
-            <c:SlayerBar/>
+        <DataTemplate x:Key="Slayer">
+            <classBars:SlayerBar/>
         </DataTemplate>
-        <DataTemplate x:Key="emptyTemplate">
+        <DataTemplate x:Key="EmptyTemplate">
         </DataTemplate>
-        <Style x:Key="opacityAnimatedContainer" TargetType="FrameworkElement">
+        <Style x:Key="OpacityAnimatedContainer" TargetType="FrameworkElement">
             <Setter Property="Opacity" Value="0"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsTeraOnTop}" Value="True">
@@ -92,7 +93,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <c:WindowButtons VerticalAlignment="Top" Opacity="0" HorizontalAlignment="Left" WindowName="Class window" x:Name="buttons"
+        <c:WindowButtons VerticalAlignment="Top" Opacity="0" HorizontalAlignment="Left" WindowName="Class window" x:Name="Buttons"
                          DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWindow}}" 
                          />
 

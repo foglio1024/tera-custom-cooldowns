@@ -32,13 +32,13 @@ namespace TCC.ViewModels
             //Energy Stars
             EnergyStars = new DurationCooldownIndicator(_dispatcher);
             SkillsDatabase.TryGetSkill(350410, Class.Priest, out var es);
-            EnergyStars.Cooldown = new FixedSkillCooldown(es, CooldownType.Skill, _dispatcher, true);
-            EnergyStars.Buff = new FixedSkillCooldown(es, CooldownType.Skill, _dispatcher, false);
+            EnergyStars.Cooldown = new FixedSkillCooldown(es, _dispatcher, true);
+            EnergyStars.Buff = new FixedSkillCooldown(es, _dispatcher, false);
 
             Grace = new DurationCooldownIndicator(_dispatcher);
             SkillsDatabase.TryGetSkill(390100, Class.Priest, out var gr);
-            Grace.Cooldown = new FixedSkillCooldown(gr, CooldownType.Skill, _dispatcher, false);
-            Grace.Buff = new FixedSkillCooldown(gr, CooldownType.Skill, _dispatcher, false);
+            Grace.Cooldown = new FixedSkillCooldown(gr, _dispatcher, false);
+            Grace.Buff = new FixedSkillCooldown(gr, _dispatcher, false);
 
         }
 

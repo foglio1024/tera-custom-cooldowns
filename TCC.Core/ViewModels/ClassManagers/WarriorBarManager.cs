@@ -24,13 +24,13 @@ namespace TCC.ViewModels
             LoadSpecialSkills();
         }
 
-        protected override void LoadSpecialSkills()
+        protected sealed override void LoadSpecialSkills()
         {
             //Deadly gamble
             DeadlyGamble = new DurationCooldownIndicator(_dispatcher);
             SkillsDatabase.TryGetSkill(200200, Class.Warrior, out var dg);
-            DeadlyGamble.Buff = new FixedSkillCooldown(dg, CooldownType.Skill, _dispatcher, false);
-            DeadlyGamble.Cooldown = new FixedSkillCooldown(dg, CooldownType.Skill, _dispatcher, true);
+            DeadlyGamble.Buff = new FixedSkillCooldown(dg, _dispatcher, false);
+            DeadlyGamble.Cooldown = new FixedSkillCooldown(dg, _dispatcher, true);
         }
 
         public override bool StartSpecialSkill(SkillCooldown sk)

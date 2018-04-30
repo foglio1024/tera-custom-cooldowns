@@ -1,11 +1,9 @@
-﻿using System.Windows.Controls;
-
-namespace TCC.Controls
+﻿namespace TCC.Controls
 {
     /// <summary>
     /// Interaction logic for DefaultEnemyWindowLayout.xaml
     /// </summary>
-    public partial class DefaultEnemyWindowLayout : UserControl
+    public partial class DefaultEnemyWindowLayout
     {
         public DefaultEnemyWindowLayout()
         {

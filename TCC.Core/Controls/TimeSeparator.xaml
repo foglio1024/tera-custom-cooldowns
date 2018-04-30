@@ -10,7 +10,7 @@
     <Border BorderBrush="#3aaa" BorderThickness="{Binding Borders, RelativeSource={RelativeSource AncestorType=local:TimeSeparator}}" 
             
            >
-        <TextBlock x:Name="TimeTB" Opacity="1" VerticalAlignment="Bottom"  FontSize="11"
+        <TextBlock x:Name="TimeTb" Opacity="1" VerticalAlignment="Bottom"  FontSize="11"
                    IsHitTestVisible="False" Margin="-4,0,0,-13" Foreground="#3aaa"
                    Text="{Binding TimeText, RelativeSource={RelativeSource AncestorType=local:TimeSeparator}}" />
     </Border>

@@ -11,8 +11,8 @@ namespace TCC.Windows
         public CharacterWindow()
         {
             InitializeComponent();
-            _b = buttons;
-            _c = content;
+            ButtonsRef = Buttons;
+            MainContentRef = content;
             InitWindow(SettingsManager.CharacterWindowSettings, ignoreSize: true);
         }
 

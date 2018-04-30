@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
+using TCC.Data;
 
 namespace TCC.Converters
 {
@@ -12,9 +14,9 @@ namespace TCC.Converters
             switch ((ShieldStatus)value)
             {
                 case ShieldStatus.On:
-                    return App.Current.FindResource("MpColor");
+                    return Application.Current.FindResource("MpColor");
                 case ShieldStatus.Broken:
-                    return App.Current.FindResource("GreenColor");
+                    return Application.Current.FindResource("GreenColor");
                 case ShieldStatus.Failed:
                     return Brushes.Red;
                 default:

@@ -4,7 +4,7 @@
 using System;
 using PacketDotNet;
 
-namespace NetworkSniffer
+namespace TCC.Sniffing
 {
     public abstract class IpSniffer
     {

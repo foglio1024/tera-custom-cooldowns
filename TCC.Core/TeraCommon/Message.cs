@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tera
+namespace TCC.TeraCommon
 {
     public class Message
     {

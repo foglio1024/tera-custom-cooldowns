@@ -1,4 +1,6 @@
-﻿namespace Tera.Game.Messages
+﻿using TCC.TeraCommon.Game.Services;
+
+namespace TCC.TeraCommon.Game.Messages.Server
 {
     public class StartUserProjectileServerMessage : ParsedMessage
     {

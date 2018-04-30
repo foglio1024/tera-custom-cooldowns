@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
+using TCC.Data;
 
 namespace TCC.Converters
 {
@@ -8,20 +10,21 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            // ReSharper disable once PossibleNullReferenceException
             switch ((HarrowholdPhase)value)
             {
                 case HarrowholdPhase.Phase1:
-                    return App.Current.FindResource("Phase1EnemyWindowLayout");
+                    return Application.Current.FindResource("Phase1EnemyWindowLayout");
                 case HarrowholdPhase.Phase2:
-                    return App.Current.FindResource("Phase2EnemyWindowLayout");
+                    return Application.Current.FindResource("Phase2EnemyWindowLayout");
                 case HarrowholdPhase.Phase3:
-                    return App.Current.FindResource("Phase3EnemyWindowLayout");
+                    return Application.Current.FindResource("Phase3EnemyWindowLayout");
                 case HarrowholdPhase.Phase4:
-                    return App.Current.FindResource("Phase4EnemyWindowLayout");
+                    return Application.Current.FindResource("Phase4EnemyWindowLayout");
                 case HarrowholdPhase.Balistas:
-                    return App.Current.FindResource("Phase2BEnemyWindowLayout");
+                    return Application.Current.FindResource("Phase2BEnemyWindowLayout");
                 default:
-                    return App.Current.FindResource("DefaultEnemyWindowLayout");
+                    return Application.Current.FindResource("DefaultEnemyWindowLayout");
             }
         }
 

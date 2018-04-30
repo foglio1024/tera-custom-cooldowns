@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
+using TCC.Data;
 
 namespace TCC.Converters
 {
@@ -12,15 +14,15 @@ namespace TCC.Converters
             switch (c)
             {
                 case Class.Lancer:
-                    return App.Current.FindResource("TankRoleColor");
+                    return Application.Current.FindResource("TankRoleColor");
                 case Class.Fighter:
-                    return App.Current.FindResource("TankRoleColor");
+                    return Application.Current.FindResource("TankRoleColor");
                 case Class.Priest:
-                    return App.Current.FindResource("HealerRoleColor");
+                    return Application.Current.FindResource("HealerRoleColor");
                 case Class.Elementalist:
-                    return App.Current.FindResource("HealerRoleColor");
+                    return Application.Current.FindResource("HealerRoleColor");
                 default:
-                    return App.Current.FindResource("DpsRoleColor");
+                    return Application.Current.FindResource("DpsRoleColor");
             }
         }
 

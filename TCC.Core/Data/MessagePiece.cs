@@ -6,30 +6,10 @@ namespace TCC.Data
 {
     public class MessagePiece : TSPropertyChanged
     {
-        public  ChatChannel Channel;
+        public ChatChannel Channel;
 
-        private long itemUid;
-        public long ItemUid
-        {
-            get => itemUid;
-            set
-            {
-                if (itemUid == value) return;
-                itemUid = value;
-            }
-        }
-
-        private uint itemId;
-        public uint ItemId
-        {
-            get => itemId;
-            set
-            {
-                if (itemId == value) return;
-                itemId = value;
-            }
-        }
-
+        public long ItemUid { get; set; }
+        public uint ItemId { get; set; }
         public Location Location { get; set; }
         public string RawLink { get; set; }
         public Money Money { get; set; }
@@ -38,57 +18,15 @@ namespace TCC.Data
 
         public Thickness Spaces { get; set; }
 
-        private string ownerName;
-        public string OwnerName
-        {
-            get => ownerName;
-            set
-            {
-                if (ownerName == value) return;
-                ownerName = value;
-            }
-        }
+        public string OwnerName { get; set; }
 
-        private MessagePieceType type;
-        public MessagePieceType Type
-        {
-            get => type;
-            set
-            {
-                if (type == value) return;
-                type = value;
-            }
-        }
+        public MessagePieceType Type { get; set; }
 
-        private string text;
-        public string Text
-        {
-            get => text;
-            set
-            {
-                if (text == value) return;
-                text = value;
-            }
-        }
+        public string Text { get; set; }
 
-        public string PlainText
-        {
-            get
-            {
-                return Text.StartsWith("<")? Text.Substring(1, Text.Length - 2) : Text;
-            }
-        }
+        public string PlainText => Text.StartsWith("<") ? Text.Substring(1, Text.Length - 2) : Text;
 
-        private SolidColorBrush color;
-        public SolidColorBrush Color
-        {
-            get => color;
-            set
-            {
-                if (color == value) return;
-                color = value;
-            }
-        }
+        public SolidColorBrush Color { get; set; }
 
         private int _size = 18;
         private bool _customSize;
@@ -127,7 +65,7 @@ namespace TCC.Data
         {
             _dispatcher.Invoke(() =>
             {
-                if(color == "")
+                if (color == "")
                 {
                     var conv = new Converters.ChatChannelToColor();
                     var col = ((SolidColorBrush)conv.Convert(Channel, null, null, null));
@@ -139,7 +77,7 @@ namespace TCC.Data
                     {
                         Color = new SolidColorBrush(Utils.ParseColor(color));
                     }
-                    catch 
+                    catch
                     {
                         var conv = new Converters.ChatChannelToColor();
                         var col = ((SolidColorBrush)conv.Convert(Channel, null, null, null));
@@ -177,9 +115,9 @@ namespace TCC.Data
             }
         }
 
-        public MessagePiece(Money money, ChatChannel ch) : this(text:"")
+        public MessagePiece(Money money) : this(text: "")
         {
-            SetColor("");
+            SetColor();
             Type = MessagePieceType.Money;
             Money = money;
             _customSize = false;

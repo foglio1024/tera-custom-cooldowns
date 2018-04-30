@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
+using TCC.Data;
 
 namespace TCC.Converters
 {
@@ -12,31 +14,31 @@ namespace TCC.Converters
             switch (p)
             {
                 case GearPiece.Weapon:
-                    return App.Current.FindResource("SvgWeapon");
+                    return Application.Current.FindResource("SvgWeapon");
                 case GearPiece.Armor:
-                    return App.Current.FindResource("SvgArmor");
+                    return Application.Current.FindResource("SvgArmor");
                 case GearPiece.Hands:
-                    return App.Current.FindResource("SvgHands");
+                    return Application.Current.FindResource("SvgHands");
                 case GearPiece.Feet:
-                    return App.Current.FindResource("SvgFeet");
+                    return Application.Current.FindResource("SvgFeet");
                 case GearPiece.CritNecklace:
-                    return App.Current.FindResource("SvgNecklace");
+                    return Application.Current.FindResource("SvgNecklace");
                 case GearPiece.CritEarring:
-                    return App.Current.FindResource("SvgEarring");
+                    return Application.Current.FindResource("SvgEarring");
                 case GearPiece.CritRing:
-                    return App.Current.FindResource("SvgRing");
+                    return Application.Current.FindResource("SvgRing");
                 case GearPiece.PowerNecklace:
-                    return App.Current.FindResource("SvgNecklace");
+                    return Application.Current.FindResource("SvgNecklace");
                 case GearPiece.PowerEarring:
-                    return App.Current.FindResource("SvgEarring");
+                    return Application.Current.FindResource("SvgEarring");
                 case GearPiece.PowerRing:
-                    return App.Current.FindResource("SvgRing");
+                    return Application.Current.FindResource("SvgRing");
                 case GearPiece.Circlet:
-                    return App.Current.FindResource("SvgCirclet");
+                    return Application.Current.FindResource("SvgCirclet");
                 case GearPiece.Belt:
-                    return App.Current.FindResource("SvgBelt");
+                    return Application.Current.FindResource("SvgBelt");
             }
-            return App.Current.FindResource("SvgClose");
+            return Application.Current.FindResource("SvgClose");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

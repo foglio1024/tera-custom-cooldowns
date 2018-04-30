@@ -1,18 +1,19 @@
-﻿<UserControl x:Class="TCC.Controls.ArcherBar"
+﻿<UserControl x:Class="TCC.Controls.ClassBars.ArcherBar"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
+             xmlns:classBars="clr-namespace:TCC.Controls.ClassBars"
              mc:Ignorable="d"  Loaded="UserControl_Loaded">
     <UserControl.DataContext>
         <viewModels:ArcherBarManager/>
     </UserControl.DataContext>
     <UserControl.Resources>
-        <local:ArcherStanceToColorConverter x:Key="archerStanceToColor"></local:ArcherStanceToColorConverter>
+        <classBars:ArcherStanceToColorConverter x:Key="ArcherStanceToColor"></classBars:ArcherStanceToColorConverter>
     </UserControl.Resources>
-    <Grid Width="Auto" Margin="5" Name="root" ClipToBounds="False">
+    <Grid Width="Auto" Margin="5" Name="Root" ClipToBounds="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -23,27 +24,26 @@
             <Border Style="{StaticResource Styles.DefaultBorder}"
                     Grid.Row="0"
                     Grid.Column="0"
-                    Grid.ColumnSpan="3"
                     CornerRadius="29"
                     Margin="0"
-                    VerticalAlignment="Stretch"
-                    Height="Auto">
+                    VerticalAlignment="Stretch">
             <UniformGrid Grid.Column="1" Rows="1" Margin="-8,-10,-9,-11" ClipToBounds="False">
-                <local:ArcherFocusControl x:Name="focusControl" 
+                <local:ArcherFocusControl x:Name="FocusControl" 
                                       Margin="-5,-1,0,0" Padding="0,0"
                                       DataContext="{Binding Focus}" 
                                       VerticalAlignment="Center"
                                       HorizontalAlignment="Center"/>
 
-                <local:FixedSkillControl x:Name="thunderbolt"
+                <local:FixedSkillControl x:Name="Thunderbolt"
                                      DataContext="{Binding Thunderbolt}"
                                      HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Padding="10"/>
             </UniformGrid>
                 
             </Border>
-            <Border Background="{Binding Stance.CurrentStance, Converter={StaticResource archerStanceToColor}}" Height="30" 
+            <Border Background="{Binding Stance.CurrentStance, Converter={StaticResource ArcherStanceToColor}}" Height="30" 
                     Width="6" Margin="0,0,0,0"
                     CornerRadius="3" VerticalAlignment="Center" HorizontalAlignment="Center" ></Border>
         </Grid>
     </Grid>
 </UserControl>
+

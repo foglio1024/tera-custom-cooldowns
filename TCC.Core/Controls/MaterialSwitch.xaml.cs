@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
@@ -9,38 +8,36 @@ namespace TCC.Controls
     /// <summary>
     /// Logica di interazione per MaterialSwitch.xaml
     /// </summary>
-    public partial class MaterialSwitch : UserControl
+    public partial class MaterialSwitch
     {
-        private DoubleAnimation on;
-        private DoubleAnimation off;
+        private readonly DoubleAnimation _on;
+        private readonly DoubleAnimation _off;
 
-        private ColorAnimation fillOn;
-        private ColorAnimation fillOff;
-        private ColorAnimation backFillOff;
+        private readonly ColorAnimation _fillOn;
+        private readonly ColorAnimation _fillOff;
+        private readonly ColorAnimation _backFillOff;
 
-        private Color onColor = Color.FromRgb(255, 56, 34);
-        private Color offColor = ((SolidColorBrush)Application.Current.Resources["DefaultBackgroundColor"]).Color;
-        private Color backOffColor = Colors.Black;
+        private readonly Color _onColor = Color.FromRgb(255, 56, 34);
+        private readonly Color _offColor = ((SolidColorBrush)Application.Current.Resources["DefaultBackgroundColor"]).Color;
+        private readonly Color _backOffColor = Colors.Black;
 
-        private TimeSpan animationDuration = TimeSpan.FromMilliseconds(150);
-
-        private DependencyPropertyWatcher<bool> statusWatcher;
+        private readonly TimeSpan _animationDuration = TimeSpan.FromMilliseconds(150);
 
         public MaterialSwitch()
         {
             InitializeComponent();
 
-            on = new DoubleAnimation(20, animationDuration) { EasingFunction = new QuadraticEase() };
-            off = new DoubleAnimation(0, animationDuration) { EasingFunction = new QuadraticEase() };
+            _on = new DoubleAnimation(20, _animationDuration) { EasingFunction = new QuadraticEase() };
+            _off = new DoubleAnimation(0, _animationDuration) { EasingFunction = new QuadraticEase() };
 
-            fillOn = new ColorAnimation(onColor, animationDuration) {EasingFunction = new QuadraticEase() };
-            fillOff = new ColorAnimation(offColor, animationDuration) { EasingFunction = new QuadraticEase() };
-            backFillOff = new ColorAnimation(backOffColor, animationDuration) { EasingFunction = new QuadraticEase() };
-            switchHead.RenderTransform = new TranslateTransform(0, 0);
-            switchHead.Fill = new SolidColorBrush(offColor);
-            switchBack.Fill = new SolidColorBrush(backOffColor);
+            _fillOn = new ColorAnimation(_onColor, _animationDuration) {EasingFunction = new QuadraticEase() };
+            _fillOff = new ColorAnimation(_offColor, _animationDuration) { EasingFunction = new QuadraticEase() };
+            _backFillOff = new ColorAnimation(_backOffColor, _animationDuration) { EasingFunction = new QuadraticEase() };
+            SwitchHead.RenderTransform = new TranslateTransform(0, 0);
+            SwitchHead.Fill = new SolidColorBrush(_offColor);
+            SwitchBack.Fill = new SolidColorBrush(_backOffColor);
 
-            statusWatcher = new DependencyPropertyWatcher<bool>(this, "Status");
+            var statusWatcher = new DependencyPropertyWatcher<bool>(this, "Status");
             statusWatcher.PropertyChanged += StatusWatcher_PropertyChanged;
         }
 
@@ -58,35 +55,32 @@ namespace TCC.Controls
 
         public bool Status
         {
-            get { return (bool)GetValue(StatusProperty); }
-            set { SetValue(StatusProperty, value); }
+            get => (bool)GetValue(StatusProperty);
+            set => SetValue(StatusProperty, value);
         }
         public static readonly DependencyProperty StatusProperty = DependencyProperty.Register("Status", typeof(bool), typeof(MaterialSwitch), new PropertyMetadata(false));
 
 
-        public void AnimateOn()
+        private void AnimateOn()
         {
-            switchHead.RenderTransform.BeginAnimation(TranslateTransform.XProperty, on);
-            switchHead.Fill.BeginAnimation(SolidColorBrush.ColorProperty, fillOn);
-            switchBack.Fill.BeginAnimation(SolidColorBrush.ColorProperty, fillOn);
+            SwitchHead.RenderTransform.BeginAnimation(TranslateTransform.XProperty, _on);
+            SwitchHead.Fill.BeginAnimation(SolidColorBrush.ColorProperty, _fillOn);
+            SwitchBack.Fill.BeginAnimation(SolidColorBrush.ColorProperty, _fillOn);
         }
-        public void AnimateOff()
+
+        private void AnimateOff()
         {
-            switchHead.RenderTransform.BeginAnimation(TranslateTransform.XProperty, off);
-            switchHead.Fill.BeginAnimation(SolidColorBrush.ColorProperty, fillOff);
-            switchBack.Fill.BeginAnimation(SolidColorBrush.ColorProperty, backFillOff);
+            SwitchHead.RenderTransform.BeginAnimation(TranslateTransform.XProperty, _off);
+            SwitchHead.Fill.BeginAnimation(SolidColorBrush.ColorProperty, _fillOff);
+            SwitchBack.Fill.BeginAnimation(SolidColorBrush.ColorProperty, _backFillOff);
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             if (Status)
-            {
                 AnimateOn();
-            }
             else
-            {
                 AnimateOff();
-            }
         }
     }
 }

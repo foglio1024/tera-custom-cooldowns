@@ -5,8 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using TCC.Parsing;
-using Tera;
-using Tera.Game;
+using TCC.TeraCommon;
+using TCC.TeraCommon.Game.Services;
 
 namespace TCC
 {

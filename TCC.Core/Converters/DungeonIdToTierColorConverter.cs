@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
+using TCC.Data;
 using TCC.Data.Databases;
 
 namespace TCC.Converters
@@ -14,15 +16,15 @@ namespace TCC.Converters
             switch (t)
             {
                 case DungeonTier.Tier2:
-                    return App.Current.FindResource("Tier2DungeonColor");
+                    return Application.Current.FindResource("Tier2DungeonColor");
                 case DungeonTier.Tier3:
-                    return App.Current.FindResource("Tier3DungeonColor");
+                    return Application.Current.FindResource("Tier3DungeonColor");
                 case DungeonTier.Tier4:
-                    return App.Current.FindResource("Tier4DungeonColor");
+                    return Application.Current.FindResource("Tier4DungeonColor");
                 case DungeonTier.Tier5:
-                    return App.Current.FindResource("Tier5DungeonColor");
+                    return Application.Current.FindResource("Tier5DungeonColor");
                 default:
-                    return App.Current.FindResource("TierSoloDungeonColor");
+                    return Application.Current.FindResource("TierSoloDungeonColor");
             }
         }
 

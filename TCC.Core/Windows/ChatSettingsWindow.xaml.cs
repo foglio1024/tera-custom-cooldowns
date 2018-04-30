@@ -21,7 +21,7 @@ namespace TCC.Windows
         private void CloseChannelSettings(object sender, RoutedEventArgs e)
         {
             var an = new DoubleAnimation(0, TimeSpan.FromMilliseconds(200));
-            an.Completed += (s,ev) => this.Close();
+            an.Completed += (s,ev) => Close();
             BeginAnimation(OpacityProperty, an);
         }
 

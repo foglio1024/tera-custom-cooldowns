@@ -1,4 +1,4 @@
-﻿namespace Tera
+﻿namespace TCC.TeraCommon
 {
     public enum MessageDirection
     {

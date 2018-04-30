@@ -10,6 +10,7 @@ using System.Xml.Linq;
 using TCC.Data;
 using TCC.ViewModels;
 using TCC.Windows;
+using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC
 {
@@ -185,7 +186,7 @@ namespace TCC
                 try
                 {
                     //ClassWindowOn = Boolean.Parse(b.Attribute("ClassWindowOn").Value);
-                    CooldownBarMode = (TCC.CooldownBarMode)Enum.Parse(typeof(CooldownBarMode), b.Attribute(nameof(TCC.CooldownBarMode)).Value);
+                    CooldownBarMode = (CooldownBarMode)Enum.Parse(typeof(CooldownBarMode), b.Attribute(nameof(Data.CooldownBarMode)).Value);
                 }
                 catch { }
                 try

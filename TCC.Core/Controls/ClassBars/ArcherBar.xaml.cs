@@ -1,12 +1,11 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 
-namespace TCC.Controls
+namespace TCC.Controls.ClassBars
 {
     /// <summary>
     /// Logica di interazione per ArcherBar.xaml
     /// </summary>
-    public partial class ArcherBar : UserControl
+    public partial class ArcherBar
     {
         public ArcherBar()
         {

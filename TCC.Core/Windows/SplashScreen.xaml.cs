@@ -21,11 +21,11 @@ namespace TCC.Windows
 
         public void SetText(string t)
         {
-            Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => txt.Text = t));
+            Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => Txt.Text = t));
         }
         public void SetVer(string t)
         {
-            Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => ver.Text = t));
+            Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => Ver.Text = t));
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -45,8 +45,8 @@ namespace TCC.Windows
                 BeginAnimation(OpacityProperty, an);
             });
         }
-        private bool waiting = true;
-        private bool updateAnswer = false;
+        private bool _waiting = true;
+        private bool _updateAnswer;
         public bool AskUpdate(string updateText)
         {
             Dispatcher.Invoke(() =>
@@ -56,41 +56,41 @@ namespace TCC.Windows
             });
             SetText(updateText);
             Dispatcher.Invoke(() => ShowHideButton(true));
-            while (waiting)
+            while (_waiting)
             {
                 Thread.Sleep(1);
             }
-            waiting = true;
-            return updateAnswer;
+            _waiting = true;
+            return _updateAnswer;
         }
         private void ShowHideButton(bool show)
         {
             var scale = show ? 1 : 0;
-            Dispatcher.Invoke(() => buttonsGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty,
+            Dispatcher.Invoke(() => ButtonsGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty,
                 new DoubleAnimation(scale, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() }));
         }
 
         private void NoClick(object sender, RoutedEventArgs e)
         {
             ShowHideButton(false);
-            updateAnswer = false;
-            waiting = false;
+            _updateAnswer = false;
+            _waiting = false;
         }
 
         private void OkClick(object sender, RoutedEventArgs e)
         {
             ShowHideButton(false);
 
-            updateAnswer = true;
-            waiting = false;
+            _updateAnswer = true;
+            _waiting = false;
         }
 
         internal void UpdateProgress(object sender, DownloadProgressChangedEventArgs e)
         {
             Dispatcher.Invoke(() =>
             {
-                bar.Value = e.ProgressPercentage;
-                if (bar.Value == 100) bar.Value = 0;
+                Bar.Value = e.ProgressPercentage;
+                if (Bar.Value == 100) Bar.Value = 0;
             });
         }
     }

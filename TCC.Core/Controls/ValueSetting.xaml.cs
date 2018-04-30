@@ -81,7 +81,7 @@ namespace TCC.Controls
             fadeIn = new DoubleAnimation(.3, .9, TimeSpan.FromMilliseconds(200));
             fadeOut = new DoubleAnimation(.9, .3, TimeSpan.FromMilliseconds(200));
 
-            mainGrid.Background = new SolidColorBrush(Colors.Transparent);
+            MainGrid.Background = new SolidColorBrush(Colors.Transparent);
 
         }
 
@@ -96,14 +96,14 @@ namespace TCC.Controls
         private void Grid_MouseEnter(object sender, MouseEventArgs e)
         {
             (sender as Grid).Background.BeginAnimation(SolidColorBrush.ColorProperty, glow);
-            img.BeginAnimation(OpacityProperty, fadeIn);
+            Img.BeginAnimation(OpacityProperty, fadeIn);
 
         }
 
         private void Grid_MouseLeave(object sender, MouseEventArgs e)
         {
             (sender as Grid).Background.BeginAnimation(SolidColorBrush.ColorProperty, unglow);
-            img.BeginAnimation(OpacityProperty, fadeOut);
+            Img.BeginAnimation(OpacityProperty, fadeOut);
 
         }
 

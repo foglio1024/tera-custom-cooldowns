@@ -5,10 +5,12 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-// ReSharper disable PossibleNullReferenceException
+using TCC.Data;
 
 namespace TCC.Controls
 {
+// ReSharper disable PossibleNullReferenceException
+
     /// <summary>
     /// Logica di interazione per AbnormalityIndicator.xaml
     /// </summary>
@@ -84,9 +86,7 @@ namespace TCC.Controls
         public static readonly DependencyProperty SizeProperty =
             DependencyProperty.Register("Size", typeof(double), typeof(AbnormalityIndicator));
     }
-}
-namespace TCC.Converters
-{
+
     public class DurationLabelConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -224,5 +224,4 @@ namespace TCC.Converters
             throw new NotImplementedException();
         }
     }
-
 }

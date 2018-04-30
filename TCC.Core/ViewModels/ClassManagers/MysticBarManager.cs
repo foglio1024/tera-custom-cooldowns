@@ -34,10 +34,10 @@ namespace TCC.ViewModels
         {
             SkillsDatabase.TryGetSkill(410100, Class.Elementalist, out var cont);
             SkillsDatabase.TryGetSkill(120100, Class.Elementalist, out var vow);
-            Contagion = new FixedSkillCooldown(cont, CooldownType.Skill, _dispatcher, true);
+            Contagion = new FixedSkillCooldown(cont, _dispatcher, true);
             Vow = new DurationCooldownIndicator(_dispatcher);
-            Vow.Buff = new FixedSkillCooldown(vow, CooldownType.Skill, _dispatcher, false);
-            Vow.Cooldown = new FixedSkillCooldown(vow, CooldownType.Skill,_dispatcher,false);
+            Vow.Buff = new FixedSkillCooldown(vow, _dispatcher, false);
+            Vow.Cooldown = new FixedSkillCooldown(vow,_dispatcher,false);
         }
 
         public override bool StartSpecialSkill(SkillCooldown sk)

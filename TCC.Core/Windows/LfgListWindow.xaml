@@ -3,13 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TCC.Windows"
         xmlns:data="clr-namespace:TCC.Data"
         xmlns:tcc="clr-namespace:TCC"
         xmlns:vm="clr-namespace:TCC.ViewModels"
         xmlns:controls="clr-namespace:TCC.Controls" Style="{StaticResource BaseWindowStyle}"
         mc:Ignorable="d" d:DataContext="{d:DesignInstance {x:Type vm:LfgListViewModel}}"
-        Title="LfgListWindow" Height="800" Width="Auto">
+        Title="LfgListWindow" Height="800">
     <Window.Resources>
         <Style TargetType="ListBoxItem" x:Key="ListingListItemStyle">
             <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
@@ -17,13 +16,13 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ListBoxItem}">
                         <Grid>
-                            <Rectangle x:Name="hl" Fill="#1fff" Opacity="0" IsHitTestVisible="False"/>
-                            <Rectangle x:Name="alt" Fill="#1999" Opacity="0" IsHitTestVisible="False"/>
-                            <ContentPresenter Margin="5 0"/>
+                            <Rectangle x:Name="hl" Fill="#1fff" Opacity="0" IsHitTestVisible="False" />
+                            <Rectangle x:Name="alt" Fill="#1999" Opacity="0" IsHitTestVisible="False" />
+                            <ContentPresenter Margin="5 0" />
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Opacity" TargetName="hl" Value="1"/>
+                                <Setter Property="Opacity" TargetName="hl" Value="1" />
                             </Trigger>
                             <Trigger Property="ItemsControl.AlternationIndex" Value="0">
                                 <Setter Property="Opacity" TargetName="alt" Value="0"></Setter>
@@ -31,14 +30,10 @@
                             <Trigger Property="ItemsControl.AlternationIndex" Value="1">
                                 <Setter Property="Opacity" TargetName="alt" Value="1"></Setter>
                             </Trigger>
-
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
-
             </Setter>
-            <Style.Triggers>
-            </Style.Triggers>
         </Style>
         <Style TargetType="ListBoxItem" x:Key="PlayerListItemStyle">
             <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
@@ -47,7 +42,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">
                         <Grid>
-                            <Rectangle x:Name="hl" Fill="#1fff" Opacity="0"/>
+                            <Rectangle x:Name="hl" Fill="#1fff" Opacity="0" />
                             <ContentPresenter />
                         </Grid>
                         <ControlTemplate.Triggers>
@@ -60,32 +55,38 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <DataTemplate x:Key="PlayerDT">
+        <DataTemplate x:Key="PlayerDt" DataType="data:User">
             <Grid Background="Transparent" MouseRightButtonDown="Grid_MouseRightButtonDown">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
                 </Grid.ColumnDefinitions>
                 <StackPanel Orientation="Horizontal" Grid.Column="1">
                     <Rectangle Fill="#cfff" Opacity="1"
-                                                   Margin="2" RenderOptions.BitmapScalingMode="Fant" UseLayoutRounding="True" HorizontalAlignment="Left" VerticalAlignment="Center"
-                                                   Width="20" Height="20"  Stretch="Uniform">
+                               Margin="2" RenderOptions.BitmapScalingMode="Fant" UseLayoutRounding="True"
+                               HorizontalAlignment="Left" VerticalAlignment="Center"
+                               Width="20" Height="20" Stretch="Uniform">
                         <Rectangle.OpacityMask>
-                            <ImageBrush ImageSource="{Binding UserClass, Converter={StaticResource Converters.ClassToImage}}" />
+                            <ImageBrush
+                                ImageSource="{Binding UserClass, Converter={StaticResource Converters.ClassToImage}}" />
                         </Rectangle.OpacityMask>
                     </Rectangle>
 
-                    <TextBlock Grid.Column="1" Foreground="#6fff" Style="{StaticResource Styles.DefaultText}" Margin="0 0 0 0" VerticalAlignment="Center">
-                                                <Run Text="lv." Foreground="#5999" FontSize="10"/><Run Text="{Binding Level, Mode=OneWay}" Foreground="#5999" FontSize="10"/>
-                                                <Run Text="{Binding Name, Mode=OneWay}"/>
+                    <TextBlock Foreground="#6fff" Style="{StaticResource Styles.DefaultText}" Margin="0 0 0 0"
+                               VerticalAlignment="Center">
+                        <Run Text="lv." Foreground="#5999" FontSize="10" />
+                        <Run Text="{Binding Level, Mode=OneWay}" Foreground="#5999" FontSize="10" />
+                        <Run Text="{Binding Name, Mode=OneWay}" />
                     </TextBlock>
                     <Path Data="{StaticResource SvgDelegateLeader}" Fill="{StaticResource GoldColor}" Height="8"
-                                                  Visibility="{Binding IsLeader, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Column="1"
-                                                  HorizontalAlignment="Right" Margin="5 0 5 1"></Path>
+                          Visibility="{Binding IsLeader, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          HorizontalAlignment="Right" Margin="5 0 5 1" />
                 </StackPanel>
 
-                <TextBlock Text="{Binding Location}" Grid.Column="2" Foreground="#6fff" Style="{StaticResource Styles.DefaultText}" Margin="0 0 0 0" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Text="{Binding Location}" Grid.Column="2" Foreground="#6fff"
+                           Style="{StaticResource Styles.DefaultText}" Margin="0 0 0 0" VerticalAlignment="Center">
+                </TextBlock>
             </Grid>
             <DataTemplate.Triggers>
                 <DataTrigger Binding="{Binding Online}" Value="False">
@@ -93,8 +94,8 @@
                         <BeginStoryboard>
                             <Storyboard>
                                 <DoubleAnimation From="1" To=".3"
-                                                             Duration="0:0:0.2"
-                                                             Storyboard.TargetProperty="Opacity"/>
+                                                 Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="Opacity" />
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.EnterActions>
@@ -102,8 +103,8 @@
                         <BeginStoryboard>
                             <Storyboard>
                                 <DoubleAnimation From=".3" To="1"
-                                                             Duration="0:0:0.2"
-                                                             Storyboard.TargetProperty="Opacity"/>
+                                                 Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="Opacity" />
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.ExitActions>
@@ -111,93 +112,95 @@
 
             </DataTemplate.Triggers>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type data:Listing}" x:Key="ListingDT">
-            <Grid HorizontalAlignment="Stretch" Height="Auto" Background="Transparent" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+        <DataTemplate DataType="{x:Type data:Listing}" x:Key="ListingDt">
+            <Grid HorizontalAlignment="Stretch" Height="Auto" Background="Transparent"
+                  MouseLeftButtonDown="Grid_MouseLeftButtonDown">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="345" />
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="30"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="28"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="28" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <Ellipse HorizontalAlignment="Left" 
-                                     Fill="{Binding IsRaid, Converter={StaticResource Converters.RaidToColor}}" 
-                                     Width="11" Height="11"/>
-                <TextBlock Text="{Binding Message}" 
-                                       FontSize="14" 
-                                       FontWeight="Thin" 
-                                       Style="{StaticResource Styles.DefaultText}"
-                                       HorizontalAlignment="Left" 
-                                       Margin="6 0 0 0" 
-                                       VerticalAlignment="Center" 
-                                       Grid.Column="1" />
-                <TextBlock Text="{Binding LeaderName}" 
-                                       Style="{StaticResource Styles.DefaultText}" 
-                                       Grid.Column="2" 
-                                       VerticalAlignment="Center" 
-                                       HorizontalAlignment="Left"/>
-                <TextBlock Style="{StaticResource Styles.DefaultText}" 
-                                       Grid.Column="3"
-                                       HorizontalAlignment="Right" 
-                                       VerticalAlignment="Center">
-                                <Run Text="{Binding PlayerCount, Mode=OneWay}"/>
-                                <!--<Run>/</Run><Run Text="{Binding MaxCount, Mode=OneWay}"/>-->
+                <Ellipse HorizontalAlignment="Left"
+                         Fill="{Binding IsRaid, Converter={StaticResource Converters.RaidToColor}}"
+                         Width="11" Height="11" />
+                <TextBlock Text="{Binding Message}"
+                           FontSize="14"
+                           FontWeight="Thin"
+                           Style="{StaticResource Styles.DefaultText}"
+                           HorizontalAlignment="Left"
+                           Margin="6 0 0 0"
+                           VerticalAlignment="Center"
+                           Grid.Column="1" />
+                <TextBlock Text="{Binding LeaderName}"
+                           Style="{StaticResource Styles.DefaultText}"
+                           Grid.Column="2"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left" />
+                <TextBlock Style="{StaticResource Styles.DefaultText}"
+                           Grid.Column="3"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center">
+                    <Run Text="{Binding PlayerCount, Mode=OneWay}" />
+                    <!--<Run>/</Run><Run Text="{Binding MaxCount, Mode=OneWay}"/>-->
                 </TextBlock>
                 <!--<Separator Background="#1fff" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="0" VerticalAlignment="Bottom"></Separator>-->
-                <Rectangle Grid.Row="0" 
-                                       Width="5"  
-                                       Grid.RowSpan="2"
-                                       Fill="{Binding IsRaid, Converter={StaticResource Converters.RaidToColor}}"
-                                       HorizontalAlignment="Left"
-                                       Margin="3 8 0 5" 
-                                       Opacity=".5" 
-                                       RadiusX="2" 
-                                       RadiusY="2"/>
+                <Rectangle Grid.Row="0"
+                           Width="5"
+                           Grid.RowSpan="2"
+                           Fill="{Binding IsRaid, Converter={StaticResource Converters.RaidToColor}}"
+                           HorizontalAlignment="Left"
+                           Margin="3 8 0 5"
+                           Opacity=".5"
+                           RadiusX="2"
+                           RadiusY="2" />
                 <ListBox ItemsSource="{Binding Players}"
-                         x:Name="players" 
-                         Grid.Row="1" 
-                         Padding="0 0 0 5" 
+                         x:Name="players"
+                         Grid.Row="1"
+                         Padding="0 0 0 5"
                          Grid.ColumnSpan="5"
                          Grid.Column="0"
-                         Margin="15 -5 15 0" 
-                         Background="Transparent" 
+                         Margin="15 -5 15 0"
+                         Background="Transparent"
                          BorderThickness="0"
                          HorizontalAlignment="Stretch"
-                         ItemTemplate="{StaticResource PlayerDT}"
+                         ItemTemplate="{StaticResource PlayerDt}"
                          ItemContainerStyle="{StaticResource PlayerListItemStyle}">
                     <ListBox.Template>
                         <ControlTemplate TargetType="ListBox">
-                            <ItemsPresenter/>
+                            <ItemsPresenter />
                         </ControlTemplate>
                     </ListBox.Template>
                     <ListBox.LayoutTransform>
-                        <ScaleTransform ScaleY="0"/>
+                        <ScaleTransform ScaleY="0" />
                     </ListBox.LayoutTransform>
                 </ListBox>
-                <controls:Arc StrokeThickness="10" 
-                              Stroke="{StaticResource Tier5DungeonColor}" 
+                <controls:Arc StrokeThickness="10"
+                              Stroke="{StaticResource Tier5DungeonColor}"
                               Grid.Column="4"
-                              Width="22" 
-                              Height="22" 
-                              EndAngle="0" 
+                              Width="22"
+                              Height="22"
+                              EndAngle="0"
                               Opacity=".8"
-                              HorizontalAlignment="Center" 
-                              Margin="4 0 -4 0" 
-                              x:Name="cdArc"/>
+                              HorizontalAlignment="Center"
+                              Margin="4 0 -4 0"
+                              x:Name="cdArc" />
 
-                <Button x:Name="btn" 
-                        Grid.Row="0" 
-                        VerticalAlignment="Center" 
-                        Grid.Column="4" 
-                        Margin=" 5 -2 0 0" 
-                        Style="{StaticResource ButtonContentOpacityStyle}" 
-                        IsEnabled="{Binding CanApply}" 
+                <Button x:Name="btn"
+                        Grid.Row="0"
+                        VerticalAlignment="Center"
+                        Grid.Column="4"
+                        Margin=" 5 -2 0 0"
+                        Style="{StaticResource ButtonContentOpacityStyle}"
+                        IsEnabled="{Binding CanApply}"
                         Command="{Binding Apply}">
-                    <Path Data="{StaticResource SvgAddUser}" Margin="3" Width="15" Stretch="Uniform" ToolTip="Apply" Fill="White"/>
+                    <Path Data="{StaticResource SvgAddUser}" Margin="3" Width="15" Stretch="Uniform" ToolTip="Apply"
+                          Fill="White" />
                 </Button>
             </Grid>
             <DataTemplate.Triggers>
@@ -206,9 +209,9 @@
                         <BeginStoryboard>
                             <Storyboard>
                                 <DoubleAnimation Storyboard.TargetName="cdArc"
-                                                             Storyboard.TargetProperty="EndAngle"
-                                                             From="359.9" To="0"
-                                                             Duration="0:0:5">
+                                                 Storyboard.TargetProperty="EndAngle"
+                                                 From="359.9" To="0"
+                                                 Duration="0:0:5">
                                 </DoubleAnimation>
                             </Storyboard>
                         </BeginStoryboard>
@@ -219,19 +222,19 @@
                         <BeginStoryboard>
                             <Storyboard>
                                 <DoubleAnimation Storyboard.TargetName="players"
-                                                             Storyboard.TargetProperty="(LayoutTransform).(ScaleTransform.ScaleY)"
-                                                             To="1"
-                                                             Duration="0:0:0.15">
+                                                 Storyboard.TargetProperty="(LayoutTransform).(ScaleTransform.ScaleY)"
+                                                 To="1"
+                                                 Duration="0:0:0.15">
                                     <DoubleAnimation.EasingFunction>
-                                        <QuadraticEase/>
+                                        <QuadraticEase />
                                     </DoubleAnimation.EasingFunction>
                                 </DoubleAnimation>
                                 <DoubleAnimation Storyboard.TargetName="btn"
-                                                             Storyboard.TargetProperty="(LayoutTransform).(ScaleTransform.ScaleY)"
-                                                             To="1"
-                                                             Duration="0:0:0.15">
+                                                 Storyboard.TargetProperty="(LayoutTransform).(ScaleTransform.ScaleY)"
+                                                 To="1"
+                                                 Duration="0:0:0.15">
                                     <DoubleAnimation.EasingFunction>
-                                        <QuadraticEase/>
+                                        <QuadraticEase />
                                     </DoubleAnimation.EasingFunction>
                                 </DoubleAnimation>
                             </Storyboard>
@@ -241,19 +244,19 @@
                         <BeginStoryboard>
                             <Storyboard>
                                 <DoubleAnimation Storyboard.TargetName="players"
-                                                             Storyboard.TargetProperty="(LayoutTransform).(ScaleTransform.ScaleY)"
-                                                             To="0"
-                                                             Duration="0:0:0.15">
+                                                 Storyboard.TargetProperty="(LayoutTransform).(ScaleTransform.ScaleY)"
+                                                 To="0"
+                                                 Duration="0:0:0.15">
                                     <DoubleAnimation.EasingFunction>
-                                        <QuadraticEase/>
+                                        <QuadraticEase />
                                     </DoubleAnimation.EasingFunction>
                                 </DoubleAnimation>
                                 <DoubleAnimation Storyboard.TargetName="btn"
-                                                             Storyboard.TargetProperty="(LayoutTransform).(ScaleTransform.ScaleY)"
-                                                             To="0"
-                                                             Duration="0:0:0.15">
+                                                 Storyboard.TargetProperty="(LayoutTransform).(ScaleTransform.ScaleY)"
+                                                 To="0"
+                                                 Duration="0:0:0.15">
                                     <DoubleAnimation.EasingFunction>
-                                        <QuadraticEase/>
+                                        <QuadraticEase />
                                     </DoubleAnimation.EasingFunction>
                                 </DoubleAnimation>
                             </Storyboard>
@@ -264,21 +267,24 @@
         </DataTemplate>
     </Window.Resources>
     <Border Background="{StaticResource DefaultBackgroundColor}" CornerRadius="5" Effect="{StaticResource DropShadow}"
-            Margin="6"  Width="600" HorizontalAlignment="Stretch">
+            Margin="6" Width="600" HorizontalAlignment="Stretch">
         <Grid HorizontalAlignment="Stretch">
             <Grid.RowDefinitions>
                 <RowDefinition Height="38" />
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <!--Title-->
-            <Path Data="{StaticResource SvgUsers}" HorizontalAlignment="Left" Margin="8 9 5 7" VerticalAlignment="Center" Fill="#3fff"></Path>
-            <TextBlock Text="Looking for group" VerticalAlignment="Center" Opacity=".4" FontSize="24" 
-                       FontWeight="Thin" IsHitTestVisible="False" Foreground="#ddd" Grid.Row="0" Margin="50 0"/>
+            <Path Data="{StaticResource SvgUsers}" HorizontalAlignment="Left" Margin="8 9 5 7"
+                  VerticalAlignment="Center" Fill="#3fff">
+            </Path>
+            <TextBlock Text="Looking for group" VerticalAlignment="Center" Opacity=".4" FontSize="24"
+                       FontWeight="Thin" IsHitTestVisible="False" Foreground="#ddd" Grid.Row="0" Margin="50 0" />
             <Rectangle MouseLeftButtonDown="Border_MouseLeftButtonDown" Fill="Transparent"></Rectangle>
-            <Button Style="{StaticResource ButtonContentOpacityStyle}" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0" Click="Button_Click">
-                <Path Data="{StaticResource SvgClose}" Stretch="Uniform" Fill="#fff" Margin="12" ></Path>
+            <Button Style="{StaticResource ButtonContentOpacityStyle}" HorizontalAlignment="Right"
+                    VerticalAlignment="Stretch" Click="Button_Click">
+                <Path Data="{StaticResource SvgClose}" Stretch="Uniform" Fill="#fff" Margin="12"></Path>
             </Button>
             <!--Header-->
             <Grid Grid.Row="1" VerticalAlignment="Stretch" Margin="0 0 5 0">
@@ -286,66 +292,79 @@
                     <ColumnDefinition Width="20" />
                     <ColumnDefinition Width="341" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <Button Command="{Binding SortCommand}" CommandParameter="Message" Padding="5 3 5 3" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Stretch" Grid.Column="0" Grid.ColumnSpan="2" Margin="5 0 0 -5" Foreground="#5aaa" HorizontalContentAlignment="Left">Message</Button>
-                <Button Command="{Binding SortCommand}" CommandParameter="LeaderName" Padding="5 3 5 3" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Stretch" Grid.Column="2" Margin="0 0 0 -5" Foreground="#5aaa" HorizontalContentAlignment="Left">Leader</Button>
-                <Button Command="{Binding SortCommand}" CommandParameter="PlayerCount" Padding="16 3" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Stretch" Grid.Column="3" Margin="0 0 0 -5" Foreground="#5aaa" HorizontalContentAlignment="Left">Count</Button>
+                <Button Command="{Binding SortCommand}" CommandParameter="Message" Padding="5 3 5 3"
+                        Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Stretch" Grid.Column="0"
+                        Grid.ColumnSpan="2" Margin="5 0 0 -5" Foreground="#5aaa" HorizontalContentAlignment="Left">
+                    Message
+                </Button>
+                <Button Command="{Binding SortCommand}" CommandParameter="LeaderName" Padding="5 3 5 3"
+                        Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Stretch" Grid.Column="2"
+                        Margin="0 0 0 -5" Foreground="#5aaa" HorizontalContentAlignment="Left">
+                    Leader
+                </Button>
+                <Button Command="{Binding SortCommand}" CommandParameter="PlayerCount" Padding="16 3"
+                        Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Stretch" Grid.Column="3"
+                        Margin="0 0 0 -5" Foreground="#5aaa" HorizontalContentAlignment="Left">
+                    Count
+                </Button>
             </Grid>
             <!--Main List-->
-            <ListBox Background="#3000" 
-                     Padding="-1 -1 -1 5" 
-                     ScrollViewer.CanContentScroll="False" 
-                     Height="600" 
+            <ListBox Background="#3000"
+                     Padding="-1 -1 -1 5"
+                     ScrollViewer.CanContentScroll="False"
+                     Height="600"
                      ItemContainerStyle="{StaticResource ListingListItemStyle}"
-                     BorderThickness="0" 
-                     Grid.Row="2" 
-                     ItemsSource="{Binding ListingsView}" 
-                     HorizontalAlignment="Stretch" 
-                     Margin="5 5 5 30" 
+                     BorderThickness="0"
+                     Grid.Row="2"
+                     ItemsSource="{Binding ListingsView}"
+                     HorizontalAlignment="Stretch"
+                     Margin="5 5 5 30"
                      AlternationCount="2"
-                     ItemTemplate="{StaticResource ListingDT}">
+                     ItemTemplate="{StaticResource ListingDt}">
                 <ListBox.Resources>
                     <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource NormalScrollBar}"></Style>
                 </ListBox.Resources>
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel HorizontalAlignment="Stretch"/>
+                        <StackPanel HorizontalAlignment="Stretch" />
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
             </ListBox>
             <!--Footer-->
             <Grid Grid.Row="2" VerticalAlignment="Bottom" Background="{StaticResource DefaultBackgroundColor}">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
-                <Grid ClipToBounds="True" Background="{StaticResource DefaultBackgroundColor}" x:Name="NewMessageGrid" Margin="5 0" >
+                <Grid ClipToBounds="True" Background="{StaticResource DefaultBackgroundColor}" x:Name="NewMessageGrid"
+                      Margin="5 0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBox Background="#3000" 
-                         Visibility="Visible" 
-                         Height="Auto"
-                         VerticalContentAlignment="Center"
-                         Foreground="#9fff"
-                         FontSize="18"
-                         Margin="0 5"
-                         BorderThickness="0"
-                         x:Name="NewMessageTextBox"
-                         Text="{Binding NewMessage, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}">
+                    <TextBox Background="#3000"
+                             Visibility="Visible"
+                             Height="Auto"
+                             VerticalContentAlignment="Center"
+                             Foreground="#9fff"
+                             FontSize="18"
+                             Margin="0 5"
+                             BorderThickness="0"
+                             x:Name="NewMessageTextBox"
+                             Text="{Binding NewMessage, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}">
                     </TextBox>
                     <Grid Grid.Column="1" ClipToBounds="True" Margin="0 5">
                         <controls:BoolSetting Margin="-40 -4 -8 -4" SettingName="Raid" HorizontalAlignment="Right"
-                                          VerticalContentAlignment="Center" x:Name="RaidSwitch"/>
+                                              VerticalContentAlignment="Center" x:Name="RaidSwitch" />
                     </Grid>
                     <Grid.LayoutTransform>
-                        <ScaleTransform ScaleY="0"/>
+                        <ScaleTransform ScaleY="0" />
                     </Grid.LayoutTransform>
                 </Grid>
-                <Button tcc:ButtonExtensions.CornerRadius="3" 
+                <Button tcc:ButtonExtensions.CornerRadius="3"
                         Grid.Row="1"
                         HorizontalContentAlignment="Center"
                         Margin="4"
@@ -359,38 +378,41 @@
                         Background="{StaticResource BackgroundDarkColor}">
                     <Button.Content>
                         <MultiBinding Converter="{StaticResource Converters.LfgVmToButtonLabel}">
-                            <Binding Path="Creating"/>
+                            <Binding Path="Creating" />
                             <Binding Path="NewMessage" />
                         </MultiBinding>
                     </Button.Content>
                     <Button.LayoutTransform>
-                        <ScaleTransform ScaleY="1"/>
+                        <ScaleTransform ScaleY="1" />
                     </Button.LayoutTransform>
                 </Button>
                 <UniformGrid Grid.Row="2" Rows="1" x:Name="LfgMgmtBtn">
-                    <Button Style="{StaticResource ButtonMainStyle}" x:Name="RemoveMessageButton" Click="RemoveMessageButton_Click"
-                            Margin="5" Background="{StaticResource HpColor}" 
+                    <Button Style="{StaticResource ButtonMainStyle}" x:Name="RemoveMessageButton"
+                            Click="RemoveMessageButton_Click"
+                            Margin="5" Background="{StaticResource HpColor}"
                             tcc:ButtonExtensions.CornerRadius="3" FontSize="15" FontWeight="Thin"
-                            Content="Remove message" HorizontalContentAlignment="Center" Padding="0 4"/>
-                    <Grid Margin="5" >
-                        <Button Style="{StaticResource ButtonMainStyle}" 
-                            Background="{StaticResource GreenColor}"  FontSize="15" FontWeight="Thin"
-                            tcc:ButtonExtensions.CornerRadius="3" Padding="0 4" Click="PublicizeBtn_Click"
-                            Content="Publicize" HorizontalContentAlignment="Center" x:Name="PublicizeBtn"/>
-                        <Border Background="#6fff" CornerRadius="3" HorizontalAlignment="Left" Margin=" 0" IsHitTestVisible="False">
-                            <FrameworkElement Width="{Binding ElementName=PublicizeBtn, Path=ActualWidth}" x:Name="PublicizeBarGovernor">
+                            Content="Remove message" HorizontalContentAlignment="Center" Padding="0 4" />
+                    <Grid Margin="5">
+                        <Button Style="{StaticResource ButtonMainStyle}"
+                                Background="{StaticResource GreenColor}" FontSize="15" FontWeight="Thin"
+                                tcc:ButtonExtensions.CornerRadius="3" Padding="0 4" Click="PublicizeBtn_Click"
+                                Content="Publicize" HorizontalContentAlignment="Center" x:Name="PublicizeBtn" />
+                        <Border Background="#6fff" CornerRadius="3" HorizontalAlignment="Left" Margin=" 0"
+                                IsHitTestVisible="False">
+                            <FrameworkElement Width="{Binding ElementName=PublicizeBtn, Path=ActualWidth}"
+                                              x:Name="PublicizeBarGovernor">
                                 <FrameworkElement.LayoutTransform>
-                                    <ScaleTransform ScaleX="0"/>
+                                    <ScaleTransform ScaleX="0" />
                                 </FrameworkElement.LayoutTransform>
                             </FrameworkElement>
                         </Border>
                     </Grid>
                     <UniformGrid.LayoutTransform>
-                        <ScaleTransform ScaleY="0"/>
+                        <ScaleTransform ScaleY="0" />
                     </UniformGrid.LayoutTransform>
-
                 </UniformGrid>
             </Grid>
         </Grid>
     </Border>
 </Window>
+

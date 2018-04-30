@@ -1,4 +1,4 @@
-﻿namespace TCC
+﻿namespace TCC.Data
 {
     public enum DungeonTier
     {

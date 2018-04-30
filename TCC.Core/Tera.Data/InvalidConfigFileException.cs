@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Data
+namespace TCC.Tera.Data
 {
     public class InvalidConfigFileException : Exception
     {

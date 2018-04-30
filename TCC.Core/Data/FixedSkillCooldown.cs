@@ -4,53 +4,50 @@ namespace TCC.Data
 {
     public class FixedSkillCooldown : TSPropertyChanged
     {
-        private CooldownType _type;
-        private DispatcherTimer _secondsTimer;
-        private DispatcherTimer _offsetTimer;
-        private DispatcherTimer _shortTimer;
-        public Skill Skill { get; set; }
-        private ulong cooldown;
+        private readonly DispatcherTimer _secondsTimer;
+        private readonly DispatcherTimer _offsetTimer;
+        private readonly DispatcherTimer _shortTimer;
+        public Skill Skill { get; }
+        private ulong _cooldown;
         public ulong Cooldown
         {
-            get => cooldown; set
-            {
-                if (cooldown == value) return;
-                cooldown = value;
-            }
-        }
-        public ulong OriginalCooldown { get; set; }
-        private bool isAvailable = true;
-        public bool IsAvailable
-        {
-            get => isAvailable;
+            get => _cooldown;
             private set
             {
-                if (isAvailable == value) return;
-                isAvailable = value;
-                NPC("IsAvailable");
+                if (_cooldown == value) return;
+                _cooldown = value;
+            }
+        }
+        public ulong OriginalCooldown { get; private set; }
+        private bool _isAvailable = true;
+        public bool IsAvailable
+        {
+            get => _isAvailable;
+            private set
+            {
+                if (_isAvailable == value) return;
+                _isAvailable = value;
+                NPC();
             }
         }
 
-        private ulong seconds = 0;
+        private ulong _seconds;
         private bool _flashOnAvailable;
 
         public ulong Seconds
         {
-            get
+            get => _seconds;
+            private set
             {
-                return seconds;
-            }
-            set
-            {
-                if (seconds == value) return;
-                seconds = value;
-                NPC("Seconds");
+                if (_seconds == value) return;
+                _seconds = value;
+                NPC();
             }
         }
 
         public bool FlashOnAvailable
         {
-            get { return _flashOnAvailable; }
+            get => _flashOnAvailable;
             set
             {
                 if (_flashOnAvailable == value) return;
@@ -63,7 +60,7 @@ namespace TCC.Data
         {
             return Skill.Name;
         }
-        public FixedSkillCooldown(Skill sk, CooldownType t, Dispatcher d, bool flashOnAvailable)
+        public FixedSkillCooldown(Skill sk, Dispatcher d, bool flashOnAvailable)
         {
             _dispatcher = d;
 
@@ -79,7 +76,6 @@ namespace TCC.Data
             _offsetTimer = new DispatcherTimer(DispatcherPriority.Background, _dispatcher);
             _offsetTimer.Tick += _offsetTimer_Tick;
 
-            _type = t;
             Skill = sk;
 
             FlashOnAvailable = flashOnAvailable;

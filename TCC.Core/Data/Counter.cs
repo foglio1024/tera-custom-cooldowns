@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Threading;
 
-namespace TCC.ViewModels
+namespace TCC.Data
 {
     public class Counter : TSPropertyChanged
     {

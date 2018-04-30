@@ -8,14 +8,7 @@
              mc:Ignorable="d"  d:DataContext="{d:DesignInstance data:GearItem}" 
              Loaded="GearItemControl_OnLoaded" >
     <UserControl.Resources>
-        <Style x:Key="GridRect" TargetType="Rectangle">
-            <Setter Property="Width" Value="2"></Setter>
-            <Setter Property="Height" Value="2"></Setter>
-            <Setter Property="VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="HorizontalAlignment" Value="Right"></Setter>
-            <Setter Property="Fill" Value="#1000"></Setter>
-        </Style>
-        <ToolTip Background="Transparent" BorderBrush="Transparent" x:Key="tooltip">
+        <ToolTip Background="Transparent" BorderBrush="Transparent" x:Key="Tooltip">
             <Grid >
                 <Border Background="#556" CornerRadius="5" Padding="10,5" Effect="{StaticResource FadedDropShadow}" >
                     <StackPanel Orientation="Horizontal">
@@ -42,7 +35,7 @@
         </ToolTip>
 
     </UserControl.Resources>
-    <Grid ToolTipService.InitialShowDelay="0" ToolTipService.ShowDuration="50000" ToolTip="{StaticResource tooltip}" Margin="0 3">
+    <Grid ToolTipService.InitialShowDelay="0" ToolTipService.ShowDuration="50000" ToolTip="{StaticResource Tooltip}" Margin="0 3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -60,7 +53,7 @@
             </Path.CacheMode>
         </Path>
 
-            <Ellipse VerticalAlignment="Top" HorizontalAlignment="Left" Width="10" Height="10" x:Name="ripple" Opacity="0" RenderTransformOrigin=".5,.5" Fill="#5999" IsHitTestVisible="False">
+            <Ellipse Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="10" Height="10" x:Name="Ripple" Opacity="0" RenderTransformOrigin=".5,.5" Fill="#5999" IsHitTestVisible="False">
                 <Ellipse.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="1" ScaleY="1"/>
@@ -68,9 +61,9 @@
                     </TransformGroup>
                 </Ellipse.RenderTransform>
             </Ellipse>
-            <TextBlock Grid.Column="1" Text="{Binding Name}" Grid.RowSpan="1" HorizontalAlignment="Left" 
+            <TextBlock Grid.Column="1" Text="{Binding Name}" Grid.Row="0" HorizontalAlignment="Left" 
                        VerticalAlignment="Center" FontSize="16" Margin="10 0" Foreground="#ccc"></TextBlock>
-            <StackPanel Grid.Column="2" VerticalAlignment="Center" Grid.RowSpan="3"
+            <StackPanel Grid.Column="2" VerticalAlignment="Center" Grid.Row="0" Grid.RowSpan="3"
                         Orientation="Horizontal" HorizontalAlignment="Right">
             <!--Exp-->
             <Grid Margin="5 0" Background="Transparent" ToolTip="Gear enchantment."

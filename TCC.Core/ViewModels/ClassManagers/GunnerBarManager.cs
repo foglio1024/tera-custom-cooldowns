@@ -39,12 +39,12 @@ namespace TCC.ViewModels
             Balder = new DurationCooldownIndicator(_dispatcher);
             Bombardment = new DurationCooldownIndicator(_dispatcher);
 
-            BurstFire.Buff = new FixedSkillCooldown(bfire, CooldownType.Skill, _dispatcher, false);
-            Balder.Buff = new FixedSkillCooldown(balder, CooldownType.Skill, _dispatcher, false);
-            Bombardment.Buff = new FixedSkillCooldown(bombard, CooldownType.Skill, _dispatcher, false);
-            BurstFire.Cooldown = new FixedSkillCooldown(bfire, CooldownType.Skill, _dispatcher, true);
-            Balder.Cooldown = new FixedSkillCooldown(balder, CooldownType.Skill, _dispatcher, false);
-            Bombardment.Cooldown = new FixedSkillCooldown(bombard, CooldownType.Skill, _dispatcher, false);
+            BurstFire.Buff = new FixedSkillCooldown(bfire, _dispatcher, false);
+            Balder.Buff = new FixedSkillCooldown(balder, _dispatcher, false);
+            Bombardment.Buff = new FixedSkillCooldown(bombard, _dispatcher, false);
+            BurstFire.Cooldown = new FixedSkillCooldown(bfire, _dispatcher, true);
+            Balder.Cooldown = new FixedSkillCooldown(balder, _dispatcher, false);
+            Bombardment.Cooldown = new FixedSkillCooldown(bombard, _dispatcher, false);
 
         }
 

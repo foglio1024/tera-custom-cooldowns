@@ -17,18 +17,18 @@
     </UserControl.LayoutTransform>
     <Grid Width="55" Height="55" Margin="2" HorizontalAlignment="Left" Name="MainGrid">
         <Grid>
-            <Ellipse Width="51" Height="{Binding ElementName=icon, Path=ActualWidth}" x:Name="icon" Stroke="#7fff" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Ellipse Width="51" Height="{Binding ElementName=Icon, Path=ActualWidth}" x:Name="Icon" Stroke="#7fff" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Ellipse.Fill>
                     <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource Converters.IconNameToPath}}"/>
                 </Ellipse.Fill>
             </Ellipse>
         </Grid>
-        <local:Arc x:Name="arc" Opacity="1" Width="Auto" Height="Auto" StrokeThickness="26" Margin="2"
+        <local:Arc x:Name="Arc" Opacity="1" Width="Auto" Height="Auto" StrokeThickness="26" Margin="2"
                    Stroke="#a000" EndAngle="359.9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
         </local:Arc>
 
         <Grid Width="Auto" MinWidth="12" 
-              Height="Auto" x:Name="g" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0" >
+              Height="Auto" x:Name="G" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0" >
             <Border Background="#fff" CornerRadius="5"  BorderBrush="#404047" BorderThickness="1"  Padding="4,0" Effect="{StaticResource FadedDropShadow}">
 
                 <TextBlock Foreground="#d000" 
@@ -36,7 +36,7 @@
                    VerticalAlignment="Center" 
                    TextAlignment="Center"
                    FontSize="15" 
-                   x:Name="number" 
+                   x:Name="Number" 
                    FontFamily="{StaticResource ArialMonoBold}"
                    Opacity="1" 
                    Margin="0,0"

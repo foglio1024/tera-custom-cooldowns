@@ -19,8 +19,8 @@ namespace TCC.ViewModels
         {
             ShadowReaping = new DurationCooldownIndicator(_dispatcher);
             SkillsDatabase.TryGetSkill(160100, Class.Soulless, out var sr);
-            ShadowReaping.Cooldown = new FixedSkillCooldown(sr, CooldownType.Skill, _dispatcher, true);
-            ShadowReaping.Buff= new FixedSkillCooldown(sr, CooldownType.Skill, _dispatcher, true);
+            ShadowReaping.Cooldown = new FixedSkillCooldown(sr, _dispatcher, true);
+            ShadowReaping.Buff= new FixedSkillCooldown(sr, _dispatcher, true);
         }
 
         public override bool StartSpecialSkill(SkillCooldown sk)
