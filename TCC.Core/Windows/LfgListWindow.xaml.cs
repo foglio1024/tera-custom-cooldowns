@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Threading;
 using TCC.Data;
 using TCC.ViewModels;
 
@@ -38,8 +39,8 @@ namespace TCC.Windows
                     if (VM.Creating)
                     {
                         _colAn.To = string.IsNullOrEmpty(VM.NewMessage)
-                            ? ((SolidColorBrush) Application.Current.FindResource("HpColor")).Color
-                            : ((SolidColorBrush) Application.Current.FindResource("GreenColor")).Color;
+                            ? ((SolidColorBrush)Application.Current.FindResource("HpColor")).Color
+                            : ((SolidColorBrush)Application.Current.FindResource("GreenColor")).Color;
                     }
                     else
                     {
@@ -60,7 +61,7 @@ namespace TCC.Windows
                         new DoubleAnimation(0,
                             TimeSpan.FromMilliseconds(150))
                         { EasingFunction = new QuadraticEase() });
-                    CreateMessageBtn.BeginAnimation(MarginProperty, new ThicknessAnimation(new Thickness(4,0,4,0), TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
+                    CreateMessageBtn.BeginAnimation(MarginProperty, new ThicknessAnimation(new Thickness(4, 0, 4, 0), TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
                     break;
                 case nameof(VM.AmIinLfg):
                     LfgMgmtBtn.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(150)) { EasingFunction = new QuadraticEase() });
@@ -79,11 +80,14 @@ namespace TCC.Windows
         {
             CloseWindow();
         }
-        private void CloseWindow()
+        public void CloseWindow()
         {
-            var a = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(150));
-            a.Completed += (s, ev) => { Hide(); };
-            BeginAnimation(OpacityProperty, a);
+            Dispatcher.InvokeIfRequired(() =>
+            {
+                var a = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(150));
+                a.Completed += (s, ev) => { Hide(); };
+                BeginAnimation(OpacityProperty, a);
+            }, DispatcherPriority.DataBind);
         }
 
         internal void ShowWindow()
@@ -101,7 +105,7 @@ namespace TCC.Windows
 
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if(!((sender as FrameworkElement)?.DataContext is Listing l)) return;
+            if (!((sender as FrameworkElement)?.DataContext is Listing l)) return;
             if (l.IsExpanded)
             {
                 l.IsExpanded = false;
