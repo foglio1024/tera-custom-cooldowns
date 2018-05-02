@@ -832,7 +832,7 @@ namespace TCC.Data
         {
             var id = GetId(info, "dungeon");
             var txt = id.ToString();
-            if (SessionManager.DungeonDatabase.Dungeons.TryGetValue(id, out var dngName))
+            if (SessionManager.DungeonDatabase.DungeonDefs.TryGetValue(id, out var dngName))
             {
                 txt = dngName.Name;
             }

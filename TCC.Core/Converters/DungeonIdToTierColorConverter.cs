@@ -12,7 +12,7 @@ namespace TCC.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var id = (uint)value;
-            var t = SessionManager.DungeonDatabase.Dungeons[id].Tier;
+            var t = SessionManager.DungeonDatabase.DungeonDefs[id].Tier;
             switch (t)
             {
                 case DungeonTier.Tier2:

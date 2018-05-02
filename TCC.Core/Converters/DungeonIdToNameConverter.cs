@@ -13,9 +13,9 @@ namespace TCC.Converters
             if (parameter != null && bool.Parse((string)parameter))
             {
                 //use short names
-                if (SessionManager.DungeonDatabase.Dungeons.ContainsKey(dgId)) return SessionManager.DungeonDatabase.Dungeons[dgId].Name;//.DungeonDefinitions[dgId].ShortName;
+                if (SessionManager.DungeonDatabase.DungeonDefs.ContainsKey(dgId)) return SessionManager.DungeonDatabase.DungeonDefs[dgId].Name;//.DungeonDefinitions[dgId].ShortName;
             }
-            if (SessionManager.DungeonDatabase.Dungeons.ContainsKey(dgId)) return SessionManager.DungeonDatabase.Dungeons[dgId].Name;
+            if (SessionManager.DungeonDatabase.DungeonDefs.ContainsKey(dgId)) return SessionManager.DungeonDatabase.DungeonDefs[dgId].Name;
             else return "Dungeon "+ dgId.ToString(); ;
         }
 

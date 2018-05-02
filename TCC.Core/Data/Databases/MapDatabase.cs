@@ -69,9 +69,9 @@ namespace TCC.Data.Databases
 
         public bool TryGetGuardOrDungeonNameFromContinentId(uint continent, out string s)
         {
-            if (SessionManager.DungeonDatabase.Dungeons.ContainsKey(continent))
+            if (SessionManager.DungeonDatabase.DungeonDefs.ContainsKey(continent))
             {
-                s = SessionManager.DungeonDatabase.Dungeons[continent].Name;
+                s = SessionManager.DungeonDatabase.DungeonDefs[continent].Name;
                 return true;
             }
             var guard = Worlds[1].Guards.FirstOrDefault(x => x.Value.ContinentId == continent);
