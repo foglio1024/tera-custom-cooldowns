@@ -7,12 +7,12 @@ using System.Windows;
 
 namespace TCC.Updater
 {
-    class Program
+    internal class Program
     {
-        static string SourcePath = AppDomain.CurrentDomain.BaseDirectory + "/tmp";
-        static string DestinationPath = AppDomain.CurrentDomain.BaseDirectory;
+        private static string SourcePath = AppDomain.CurrentDomain.BaseDirectory + "/tmp";
+        private static string DestinationPath = AppDomain.CurrentDomain.BaseDirectory;
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             if (!args.Any(x => x == "update"))
             {
@@ -21,13 +21,13 @@ namespace TCC.Updater
             }
             Thread.Sleep(2000);
             //Create all of the directories
-            foreach (string dirPath in Directory.GetDirectories(SourcePath, "*", SearchOption.AllDirectories))
+            foreach (var dirPath in Directory.GetDirectories(SourcePath, "*", SearchOption.AllDirectories))
             {
                 Directory.CreateDirectory(dirPath.Replace(SourcePath, DestinationPath));
             }
 
             //Copy all the files & Replaces any files with the same name
-            foreach (string newPath in Directory.GetFiles(SourcePath, "*.*", SearchOption.AllDirectories))
+            foreach (var newPath in Directory.GetFiles(SourcePath, "*.*", SearchOption.AllDirectories))
             {
                 if (newPath.Contains(@"\config\")) continue;
                 File.Copy(newPath, newPath.Replace(SourcePath, DestinationPath), true);
