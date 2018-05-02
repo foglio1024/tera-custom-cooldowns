@@ -222,7 +222,7 @@ namespace TCC.Data.Databases
                 {
                     toolTip = s.Attribute("toolTip").Value;
                 }
-                if((s.Attribute("class").Value != "Common") && (!name.Contains("Summon: ") || name == "Summon: Party"))
+                if((s.Attribute("class").Value != "Common"))
                 {
                     var skill = new Skill(id, c, name, toolTip);
                     Skills[c].Add(id, skill);
