@@ -10,16 +10,15 @@ namespace TCC
         public const int LongSkillTreshold = 40000;
         public const int Ending = 120;
 
-        private static bool Filter(string name)
+        private static bool Pass(Skill  sk)
         {
-            if (name != "Unknown" &&
-                !name.Contains("Summon:") &&
-                !name.Contains("Flight:") &&
-                !name.Contains("Super Rocket Jump") &&
-                !name.Contains("greeting") ||
-                name == "Summon: Party") return true;
-            else return false;
-
+            //if (sk != "Unknown" &&
+                //!name.Contains("Summon:") &&
+                //!name.Contains("Flight:") &&
+                //!name.Contains("Super Rocket Jump") &&
+                //!name.Contains("greeting") ||
+                //name == "Summon: Party") return true;
+            return sk.Class != Class.Common && sk.Class != Class.None;
         }
         public static void AddSkillDirectly(Skill sk, uint cd)
         {
@@ -44,10 +43,7 @@ namespace TCC
         {
             if (SessionManager.SkillsDatabase.TryGetSkill(id, SessionManager.CurrentPlayer.Class, out var skill))
             {
-                if (!Filter(skill.Name))
-                {
-                    return;
-                }
+                if (!Pass(skill)) return;
                 RouteSkill(new SkillCooldown(skill, cd, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher()));
                 //WindowManager.SkillsEnded = false;
             }
