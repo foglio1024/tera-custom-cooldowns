@@ -29,6 +29,7 @@ namespace TCC.Controls
             get
             {
                 double val = (Npc.CurrentFactor*100) %1 * 100;
+                val = val > 99 ? 99: val;
                 return $"{val:00}";
 
             }
@@ -140,6 +141,7 @@ namespace TCC.Controls
 
         private void Boss_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+
             switch (e.PropertyName)
             {
                 case "CurrentHP":
@@ -273,7 +275,7 @@ namespace TCC.Controls
                 BeginAnimation(OpacityProperty, fade);
 
             };
-            if (Npc.Visible == Visibility.Visible)
+            if (Npc.Visible == Visibility.Visible || true)
             {
                 AnimateAppear();            
             }
