@@ -15,6 +15,7 @@ namespace TCC
         private static bool _loadingScreen = true;
         
         private static bool _encounter;
+        private static bool _inGameChatOpen;
         public static bool LoadingScreen
         {
             get => _loadingScreen;
@@ -25,7 +26,6 @@ namespace TCC
                 WindowManager.NotifyVisibilityChanged();
             }
         }
-
         public static bool Encounter
         {
             get => _encounter;
@@ -51,7 +51,20 @@ namespace TCC
             }
         }
         public static bool IsElite { get; set; }
+        public static bool InGameUiOn { get; set; }
 
+        public static bool InGameChatOpen
+        {
+            get => _inGameChatOpen;
+            set
+            {
+                if(_inGameChatOpen == value) return;
+                _inGameChatOpen = value;
+                ChatModeChanged?.Invoke();
+            }
+        }
+
+        public static event Action ChatModeChanged;
         public static readonly Player CurrentPlayer = new Player();
 
         public static AccountBenefitDatabase AccountBenefitDatabase { get; private set; }
