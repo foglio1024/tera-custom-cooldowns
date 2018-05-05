@@ -6,14 +6,27 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Windows.Input;
 using System.Xml.Linq;
 using TCC.Data;
 using TCC.ViewModels;
 using TCC.Windows;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
-
+using ModifierKeys = TCC.Tera.Data.HotkeysData.ModifierKeys;
+using Key = System.Windows.Forms.Keys;
 namespace TCC
 {
+    public struct HotKey
+    {
+        public HotKey(Key k, ModifierKeys m) : this()
+        {
+            Key = k;
+            Modifier = m;
+        }
+
+        public Key Key { get; set; }
+        public ModifierKeys Modifier { get; set; }
+    }
     public static class SettingsManager
     {
         private static Rectangle _screen = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
@@ -68,6 +81,12 @@ namespace TCC
         public static bool StatSent { get; set; } = false;
         public static bool ShowFlightEnergy { get; set; } = true;
         public static bool LfgEnabled { get; set; } = true;
+        public static bool ShowGroupWindowDetails { get; set; } = true;
+        public static bool UseHotkeys { get; set; } = true;
+        public static HotKey LfgHotkey { get; set; } = new HotKey(Key.Y, ModifierKeys.None);
+        public static HotKey InfoWindowHotkey { get; set; } = new HotKey(Key.I, ModifierKeys.Control);
+        public static HotKey SettingsHotkey { get; set; } = new HotKey(Key.O, ModifierKeys.Control);
+        public static HotKey ShowAllHotkey { get; set; } = new HotKey(Key.NumPad5, ModifierKeys.Control);
 
         public static void LoadWindowSettings()
         {
@@ -143,11 +162,11 @@ namespace TCC
                                           sett.Scale, sett.AutoDim, sett.DimOpacity,
                                           sett.ShowAlways, sett.AllowTransparency,
                                           sett.Enabled)
-                                          {
-                                              Tabs = tabs,
-                                              LfgOn = lfg != null? bool.Parse(lfg.Value) : true,
-                                              BackgroundOpacity = op != null? double.Parse(op.Value, CultureInfo.InvariantCulture) : 0.3
-                                          };
+            {
+                Tabs = tabs,
+                LfgOn = lfg != null ? bool.Parse(lfg.Value) : true,
+                BackgroundOpacity = op != null ? double.Parse(op.Value, CultureInfo.InvariantCulture) : 0.3
+            };
         }
 
         public static void LoadSettings()
@@ -344,6 +363,13 @@ namespace TCC
                     LfgEnabled = bool.Parse(b.Attribute(nameof(LfgEnabled)).Value);
                 }
                 catch (Exception) { }
+                try
+                {
+                    ShowGroupWindowDetails = bool.Parse(b.Attribute(nameof(ShowGroupWindowDetails)).Value);
+                }
+                catch (Exception) { }
+                try { UseHotkeys = bool.Parse(b.Attribute(nameof(UseHotkeys)).Value); }
+                catch (Exception) { }
                 //add settings here
 
                 try
@@ -454,7 +480,9 @@ namespace TCC
                 new XAttribute(nameof(ShowItemsCooldown), ShowItemsCooldown),
                 new XAttribute(nameof(StatSent), StatSent),
                 new XAttribute(nameof(ShowFlightEnergy), ShowFlightEnergy),
-                new XAttribute(nameof(LfgEnabled), LfgEnabled)
+                new XAttribute(nameof(LfgEnabled), LfgEnabled),
+                new XAttribute(nameof(ShowGroupWindowDetails), ShowGroupWindowDetails),
+                new XAttribute(nameof(UseHotkeys), UseHotkeys)
                 //add setting here
                 ),
                 BuildChannelsXElement(),
@@ -473,7 +501,7 @@ namespace TCC
             }
             catch (Exception)
             {
-                var res = TccMessageBox.Show("TCC", "Could not write settings data to tcc-config.xml. File is being used by another process. Try again?",  MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                var res = TccMessageBox.Show("TCC", "Could not write settings data to tcc-config.xml. File is being used by another process. Try again?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (res == MessageBoxResult.Yes) SaveSettingsDoc(doc);
             }
 
@@ -640,7 +668,7 @@ namespace TCC
             var result = new XElement("ChatWindows");
             ChatWindowManager.Instance.ChatWindows.ToList().ForEach(cw =>
             {
-                if(cw.VM.Tabs.Count == 0) return;
+                if (cw.VM.Tabs.Count == 0) return;
                 cw.UpdateSettings();
                 result.Add(new XElement("ChatWindow", cw.WindowSettings.ToXElement("Settings")));
             });

@@ -1150,6 +1150,17 @@ namespace TCC.ViewModels
                 NPC(nameof(ShowItemsCooldown));
             }
         }
+        public bool ShowGroupWindowDetails
+        {
+            get => SettingsManager.ShowGroupWindowDetails;
+            set
+            {
+                if(SettingsManager.ShowGroupWindowDetails == value) return;
+                SettingsManager.ShowGroupWindowDetails = value;
+                GroupWindowViewModel.Instance.NotifySettingUpdated();
+                NPC(nameof(ShowGroupWindowDetails));
+            }
+        }
         public bool ShowMembersLaurels
         {
             get => SettingsManager.ShowMembersLaurels;

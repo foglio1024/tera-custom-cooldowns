@@ -126,7 +126,7 @@
         <Image RenderOptions.BitmapScalingMode="HighQuality"  Opacity=".02" Margin="0" Width="128" Height="128" Grid.ColumnSpan="10" Grid.RowSpan="10" HorizontalAlignment="Right" 
                VerticalAlignment="Bottom" Source="/TCC;component/resources/images/tera-logo-flat.png" ClipToBounds="False"/>
 
-        <TabControl TabStripPlacement="Left" Grid.Row="1" Grid.ColumnSpan="2" Background="#1aaa" BorderThickness="0,0,0,0" Height="563"  >
+        <TabControl TabStripPlacement="Left" Grid.Row="1" Grid.ColumnSpan="2" Background="#1aaa" BorderThickness="0,0,0,0" Height="598"  >
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Template">
@@ -439,6 +439,14 @@
                         </controls:ValueSetting.ToolTip>
                     </controls:ValueSetting>
                     <controls:BoolSetting SettingName="Show group members' laurels" IsOn="{Binding ShowMembersLaurels, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
+                        <controls:BoolSetting.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
+                                <TextBlock Foreground="LightGray" Text="Enables party members' laurels." Margin="10" TextWrapping="Wrap" MaxWidth="200"/>
+                            </Grid>
+                        </controls:BoolSetting.ToolTip>
+                    </controls:BoolSetting>
+                    <controls:BoolSetting SettingName="Show group info" IsOn="{Binding ShowGroupWindowDetails, Mode=TwoWay}" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
                         <controls:BoolSetting.ToolTip>
                             <Grid Margin="5">
                                 <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
