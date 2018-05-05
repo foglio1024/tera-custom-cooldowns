@@ -39,9 +39,12 @@ namespace TCC.ViewModels
             }
         }
         public int Size => Members.Count;
-        public int ReadyCount => Members.ToSyncArray().Count(x => x.Ready == ReadyStatus.Ready);
-        public int AliveCount => Members.ToSyncArray().Count(x => x.Alive);
+        public int ReadyCount => Members.Count(x => x.Ready == ReadyStatus.Ready);
+        public int AliveCount => Members.Count(x => x.Alive);
         public bool Formed => Size > 0;
+        public bool ShowDetails => Formed && SettingsManager.ShowGroupWindowDetails;
+        public bool ShowLeaveButton => Formed && Proxy.IsConnected;
+        public bool ShowLeaderButtons => Formed && Proxy.IsConnected && AmILeader;
         public bool Rolling { get; set; }
 
         public GroupWindowViewModel()
@@ -61,23 +64,29 @@ namespace TCC.ViewModels
             Members = new SynchronizedObservableCollection<User>(_dispatcher);
             Members.CollectionChanged += Members_CollectionChanged;
 
-            Dps = Utils.InitLiveView(o => ((User)o).Role == Role.Dps, Members, new string[] { nameof(User.Role) }, new string[] { });
-            Tanks = Utils.InitLiveView(o => ((User)o).Role == Role.Tank, Members, new string[] { nameof(User.Role) }, new string[] { });
-            Healers = Utils.InitLiveView(o => ((User)o).Role == Role.Healer, Members, new string[] { nameof(User.Role) }, new string[] { });
+            Dps = Utils.InitLiveView(o => ((User)o).Role == Role.Dps, Members, new string[] { nameof(User.Role) }, new string[] { nameof(User.UserClass) });
+            Tanks = Utils.InitLiveView(o => ((User)o).Role == Role.Tank, Members, new string[] { nameof(User.Role) }, new string[] { nameof(User.UserClass) });
+            Healers = Utils.InitLiveView(o => ((User)o).Role == Role.Healer, Members, new string[] { nameof(User.Role) }, new string[] { nameof(User.UserClass) });
 
         }
 
         private void Members_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            Task.Delay(100).ContinueWith(t => NPC(nameof(Size)));
+            //Task.Delay(0).ContinueWith(t =>
+            //{
+            //});
+            NPC(nameof(Size));
             NPC(nameof(Formed));
+            NPC(nameof(AmILeader));
+            NPC(nameof(ShowDetails));
             NPC(nameof(AliveCount));
             NPC(nameof(ReadyCount));
-
         }
         public void NotifySettingUpdated()
         {
             SettingsUpdated?.Invoke();
+
+            NPC(nameof(ShowDetails));
         }
         public bool Exists(ulong id)
         {
@@ -212,6 +221,7 @@ namespace TCC.ViewModels
                 user.Online = p.Online;
                 user.EntityId = p.EntityId;
                 user.IsLeader = p.IsLeader;
+                user.Order = p.Order;
             }
         }
         private void SendAddMessage(string name)
@@ -307,6 +317,8 @@ namespace TCC.ViewModels
             {
                 m.IsLeader = m.Name == name;
             }
+
+            NPC(nameof(AmILeader));
         }
         public void StartRoll()
         {
