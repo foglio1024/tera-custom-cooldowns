@@ -195,19 +195,19 @@ namespace TCC
             if (!liveView.CanChangeLiveFiltering) return null;
             if (filters.Count() > 0)
             {
-                liveView.IsLiveFiltering = true;
                 foreach (var filter in filters)
                 {
                     liveView.LiveFilteringProperties.Add(filter);
                 }
+                liveView.IsLiveFiltering = true;
             }
             if (sortFilters.Count() > 0)
             {
-                liveView.IsLiveSorting = true;
                 foreach (var filter in sortFilters)
                 {
-                    liveView.LiveSortingProperties.Add(filter);
+                    (liveView as ICollectionView).SortDescriptions.Add(new SortDescription(filter, ListSortDirection.Ascending));
                 }
+                liveView.IsLiveSorting = true;
             }
             return liveView;
         }
