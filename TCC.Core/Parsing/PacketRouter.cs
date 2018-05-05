@@ -213,6 +213,7 @@ namespace TCC.Parsing
         }
         public static void HandleLogin(S_LOGIN p)
         {
+            if(SettingsManager.UseHotkeys) WindowManager.FlightDurationWindow.Dispatcher.Invoke(() => KeyboardHook.Instance.RegisterKeyboardHook());
             if (!SettingsManager.StatSent) App.SendUsageStat();
             SettingsManager.LastRegion = Language;
             TimeManager.Instance.SetServerTimeZone(Language);
@@ -444,7 +445,6 @@ namespace TCC.Parsing
         }
         public static void HandleCommandOutput(string msg)
         {
-
             var ch = (ChatChannel)(ChatWindowManager.Instance.PrivateChannels[7].Index + 11);
 
             ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ch, "System", msg));
@@ -1022,6 +1022,24 @@ namespace TCC.Parsing
         {
             if (S_IMAGE_DATA.Database.ContainsKey(sGetUserGuildLogo.GuildId)) return;
             S_IMAGE_DATA.Database.Add(sGetUserGuildLogo.GuildId, sGetUserGuildLogo.GuildLogo);
+        }
+
+        public static void HandleGpkData(string data)
+        {
+            const string chatModeCmd = ":tcc-chatMode:";
+            const string uiModeCmd = ":tcc-uiMode:";
+            const string unkString = "Unknown command ";
+            data = data.Replace(unkString, "").Replace("\"", "").Replace(".", "");
+            if (data.StartsWith(chatModeCmd))
+            {
+                var chatMode = data.Replace(chatModeCmd, "");
+                SessionManager.InGameChatOpen = chatMode == "1"; //too lazy
+            }
+            else if (data.StartsWith(uiModeCmd))
+            {
+                var uiMode = data.Replace(uiModeCmd, "");
+                SessionManager.InGameUiOn = uiMode == "1"; //too lazy
+            }
         }
     }
 }
