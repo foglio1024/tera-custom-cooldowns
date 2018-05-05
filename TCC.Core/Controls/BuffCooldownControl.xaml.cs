@@ -26,9 +26,9 @@ namespace TCC.Controls
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             //externalArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(50000)));
-
             if (DesignerProperties.GetIsInDesignMode(this) || DataContext == null) return;
             _context = (DurationCooldownIndicator)DataContext;
+            cd.DataContext = _context.Cooldown;
             _context.Buff.PropertyChanged += Buff_PropertyChanged;
             _anim = new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(_context.Buff.Cooldown));
         }

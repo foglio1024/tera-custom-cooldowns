@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
-             mc:Ignorable="d" Loaded="UserControl_Loaded" >
+             xmlns:viewModels="clr-namespace:TCC.ViewModels"
+             mc:Ignorable="d" Loaded="UserControl_Loaded" d:DataContext="{d:DesignInstance viewModels:DurationCooldownIndicator}">
     <Grid Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" ClipToBounds="False">
         <local:Arc Width="58" 
                    Height="58" 
@@ -19,7 +20,9 @@
         <local:FixedSkillControl HorizontalAlignment="Center" 
                                            IsHitTestVisible="False"
                                  VerticalAlignment="Center" Padding="25" Margin="-25"
-                                 DataContext="{Binding Cooldown}" >
+                                 DataContext="{Binding Cooldown}" 
+                                    x:Name="cd"
+                                 >
             <local:FixedSkillControl.LayoutTransform>
                 <ScaleTransform ScaleX=".95" ScaleY=".95"></ScaleTransform>
             </local:FixedSkillControl.LayoutTransform>
