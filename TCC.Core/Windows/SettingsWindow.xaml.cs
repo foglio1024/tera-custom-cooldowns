@@ -17,6 +17,8 @@ namespace TCC.Windows
             InitializeComponent();
         }
 
+        public IntPtr Handle => Dispatcher.Invoke(() => new WindowInteropHelper(this).Handle);
+
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
@@ -35,7 +37,7 @@ namespace TCC.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            FocusManager.settingsWindowHandle = new WindowInteropHelper(this).Handle;
+            //FocusManager.settingsWindowHandle = new WindowInteropHelper(this).Handle;
 
         }
 
