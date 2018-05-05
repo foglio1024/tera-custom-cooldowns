@@ -9,9 +9,8 @@ namespace TCC.ViewModels
         public DurationCooldownIndicator ShadowReaping { get; set; }
         public ReaperBarManager() : base()
         {
-            LoadSpecialSkills();
         }
-        protected override void LoadSpecialSkills()
+        public override void LoadSpecialSkills()
         {
             ShadowReaping = new DurationCooldownIndicator(_dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(160100, Class.Soulless, out var sr);

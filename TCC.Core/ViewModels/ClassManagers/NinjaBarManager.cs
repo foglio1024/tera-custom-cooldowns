@@ -24,8 +24,6 @@ namespace TCC.ViewModels
 
         public NinjaBarManager() : base()
         {
-            LoadSpecialSkills();
-            StaminaTracker.PropertyChanged += FlashOnMaxSt;
         }
 
         private void FlashOnMaxSt(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -37,12 +35,13 @@ namespace TCC.ViewModels
             }
         }
 
-        protected override void LoadSpecialSkills()
+        public override void LoadSpecialSkills()
         {
             SessionManager.SkillsDatabase.TryGetSkill(150700, Class.Assassin, out var bh);
             SessionManager.SkillsDatabase.TryGetSkill(80200, Class.Assassin, out var fa);
             BurningHeart = new FixedSkillCooldown(bh, _dispatcher, false);
             FireAvalanche = new FixedSkillCooldown(fa, _dispatcher, false);
+            StaminaTracker.PropertyChanged += FlashOnMaxSt;
 
         }
 

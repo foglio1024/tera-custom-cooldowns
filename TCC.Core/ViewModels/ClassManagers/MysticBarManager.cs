@@ -13,9 +13,6 @@ namespace TCC.ViewModels
         public MysticBarManager() : base()
         {
             Auras = new AurasTracker();
-
-            LoadSpecialSkills();
-            Vow.Buff.PropertyChanged += Vow_PropertyChanged;
         }
 
         private void Vow_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -26,7 +23,7 @@ namespace TCC.ViewModels
             }
         }
 
-        protected override void LoadSpecialSkills()
+        public override void LoadSpecialSkills()
         {
             SessionManager.SkillsDatabase.TryGetSkill(410100, Class.Elementalist, out var cont);
             SessionManager.SkillsDatabase.TryGetSkill(120100, Class.Elementalist, out var vow);
@@ -36,6 +33,7 @@ namespace TCC.ViewModels
                 Buff = new FixedSkillCooldown(vow, _dispatcher, false),
                 Cooldown = new FixedSkillCooldown(vow, _dispatcher, false)
             };
+            Vow.Buff.PropertyChanged += Vow_PropertyChanged;
         }
 
         public override bool StartSpecialSkill(SkillCooldown sk)

@@ -1,4 +1,5 @@
-﻿using TCC.Data;
+﻿using System;
+using TCC.Data;
 using TCC.Data.Databases;
 
 namespace TCC.ViewModels
@@ -13,14 +14,11 @@ namespace TCC.ViewModels
 
         public WarriorBarManager() : base()
         {
-            //CurrentClassManager = this;
             EdgeCounter = new Counter(10, true);
             Stance = new StanceTracker<WarriorStance>();
-            //LoadSkills("warrior-skills.xml", Class.Warrior);
-            LoadSpecialSkills();
         }
 
-        protected sealed override void LoadSpecialSkills()
+        public sealed override void LoadSpecialSkills()
         {
             //Deadly gamble
             DeadlyGamble = new DurationCooldownIndicator(_dispatcher);

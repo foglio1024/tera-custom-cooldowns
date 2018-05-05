@@ -9,10 +9,9 @@ namespace TCC.ViewModels
 
         public SorcererBarManager() : base()
         {
-            LoadSpecialSkills();
 
         }
-        protected override void LoadSpecialSkills()
+        public override void LoadSpecialSkills()
         {
             ManaBoost = new DurationCooldownIndicator(_dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(340200, Class.Sorcerer, out var mb);

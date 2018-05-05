@@ -11,10 +11,9 @@ namespace TCC.ViewModels
         public ValkyrieBarManager() : base()
         {
             RunemarksCounter = new Counter(7, false);
-            LoadSpecialSkills();
         }
 
-        protected override void LoadSpecialSkills()
+        public override void LoadSpecialSkills()
         {
             //Ragnarok
             Ragnarok = new DurationCooldownIndicator(_dispatcher);

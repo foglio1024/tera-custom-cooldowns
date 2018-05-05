@@ -10,10 +10,9 @@ namespace TCC.ViewModels
         public FixedSkillCooldown OverhandStrike { get; set; }
         public SlayerBarManager() : base()
         {
-            LoadSpecialSkills();
         }
 
-        protected override void LoadSpecialSkills()
+        public override void LoadSpecialSkills()
         {
             SessionManager.SkillsDatabase.TryGetSkill(200200, Class.Slayer, out var icb);
             SessionManager.SkillsDatabase.TryGetSkill(80900, Class.Slayer, out var ohs);

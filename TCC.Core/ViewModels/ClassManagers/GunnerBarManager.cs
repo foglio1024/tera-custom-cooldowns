@@ -11,9 +11,6 @@ namespace TCC.ViewModels
         public DurationCooldownIndicator Bombardment { get; set; }
         public GunnerBarManager() : base()
         {
-            //CurrentClassManager = this;
-            LoadSpecialSkills();
-            StaminaTracker.PropertyChanged += FlashBfIfFullWp;
         }
 
         private void FlashBfIfFullWp(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -26,7 +23,7 @@ namespace TCC.ViewModels
             }
         }
 
-        protected override void LoadSpecialSkills()
+        public override void LoadSpecialSkills()
         {
             SessionManager.SkillsDatabase.TryGetSkill(51000, Class.Engineer, out var bfire);
             SessionManager.SkillsDatabase.TryGetSkill(130200, Class.Engineer, out var balder);
@@ -42,6 +39,7 @@ namespace TCC.ViewModels
             BurstFire.Cooldown = new FixedSkillCooldown(bfire, _dispatcher, true);
             Balder.Cooldown = new FixedSkillCooldown(balder, _dispatcher, false);
             Bombardment.Cooldown = new FixedSkillCooldown(bombard, _dispatcher, false);
+            StaminaTracker.PropertyChanged += FlashBfIfFullWp;
 
         }
 

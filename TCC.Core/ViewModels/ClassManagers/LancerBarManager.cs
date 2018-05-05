@@ -6,8 +6,29 @@ namespace TCC.ViewModels
 {
     public class DurationCooldownIndicator : TSPropertyChanged
     {
-        public FixedSkillCooldown Cooldown { get; set; }
-        public FixedSkillCooldown Buff { get; set; }
+        private FixedSkillCooldown _cooldown;
+        private FixedSkillCooldown _buff;
+
+        public FixedSkillCooldown Cooldown
+        {
+            get => _cooldown;
+            set
+            {
+                if(_cooldown == value) return;
+                _cooldown = value;
+                NPC();
+            }
+        }
+        public FixedSkillCooldown Buff
+        {
+            get => _buff;
+            set
+            {
+                if(_buff == value) return;
+                _buff = value;
+                NPC();
+            }
+        }
 
         public DurationCooldownIndicator(Dispatcher d)
         {
@@ -20,7 +41,6 @@ namespace TCC.ViewModels
     {
         public LancerBarManager() : base()
         {
-            LoadSpecialSkills();
             LH = new StatTracker()
             {
                 Max = 10
@@ -52,7 +72,7 @@ namespace TCC.ViewModels
             return false;
         }
 
-        protected override void LoadSpecialSkills()
+        public override void LoadSpecialSkills()
         {
             SessionManager.SkillsDatabase.TryGetSkill(70300, Class.Lancer, out var gshout);
             SessionManager.SkillsDatabase.TryGetSkill(170200, Class.Lancer, out var arush);

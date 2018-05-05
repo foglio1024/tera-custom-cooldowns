@@ -44,11 +44,10 @@ namespace TCC.ViewModels
         {
             Focus = new ArcherFocusTracker();
             Stance = new StanceTracker<ArcherStance>();
-            LoadSpecialSkills();
             //CurrentClassManager = this;
         }
 
-        protected override void LoadSpecialSkills()
+        public override void LoadSpecialSkills()
         {
             SessionManager.SkillsDatabase.TryGetSkill(290100, Class.Archer, out var tb);
             Thunderbolt = new FixedSkillCooldown(tb, _dispatcher, true);

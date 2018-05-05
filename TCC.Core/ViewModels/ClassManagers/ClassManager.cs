@@ -14,7 +14,7 @@ namespace TCC.ViewModels
             return false;
         }
 
-        protected abstract void LoadSpecialSkills();
+        public abstract void LoadSpecialSkills();
 
 
 

@@ -14,10 +14,9 @@ namespace TCC.ViewModels
         public BerserkerBarManager() : base()
         {
             //CurrentClassManager = this;
-            LoadSpecialSkills();
         }
 
-        protected override void LoadSpecialSkills()
+        public override void LoadSpecialSkills()
         {
             SessionManager.SkillsDatabase.TryGetSkill(80600, Class.Berserker, out var fr);
             SessionManager.SkillsDatabase.TryGetSkill(210200, Class.Berserker, out var bl);

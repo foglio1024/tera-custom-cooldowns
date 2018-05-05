@@ -9,7 +9,6 @@ namespace TCC.ViewModels
         private bool _counterProc;
         public BrawlerBarManager() : base()
         {
-            LoadSpecialSkills();
         }
 
         public FixedSkillCooldown GrowingFury { get; set; }
@@ -37,7 +36,7 @@ namespace TCC.ViewModels
             }
         }
 
-        protected override void LoadSpecialSkills()
+        public override void LoadSpecialSkills()
         {
 
             SessionManager.SkillsDatabase.TryGetSkill(180100, Class.Fighter, out var gf);

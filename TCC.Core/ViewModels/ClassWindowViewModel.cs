@@ -96,6 +96,7 @@ namespace TCC.ViewModels
                 _currentManager = value;
                 Instance.CurrentManager = _currentManager;
                 NPC();
+                CurrentManager.LoadSpecialSkills();
             }
         }
 

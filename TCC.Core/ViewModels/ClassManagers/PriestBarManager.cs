@@ -1,18 +1,29 @@
-﻿using TCC.Data;
+﻿using System;
+using System.Threading;
+using TCC.Data;
 using TCC.Data.Databases;
 
 namespace TCC.ViewModels
 {
     public class PriestBarManager : ClassManager
     {
+        private DurationCooldownIndicator _energyStars;
 
-        public DurationCooldownIndicator EnergyStars { get; private set; }
-        public DurationCooldownIndicator Grace { get; private set; }
+        public DurationCooldownIndicator EnergyStars
+        {
+            get => _energyStars;
+            set
+            {
+                if(_energyStars == value) return;
+                _energyStars = value;
+                NPC();
+            }
+        }
+
+        public DurationCooldownIndicator Grace { get; set; }
 
         public PriestBarManager() : base()
         {
-            LoadSpecialSkills();
-            Grace.Buff.PropertyChanged += GracePropertyChanged;
         }
 
         private void GracePropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -23,19 +34,20 @@ namespace TCC.ViewModels
             }
         }
 
-        protected override void LoadSpecialSkills()
+        public sealed override void LoadSpecialSkills()
         {
             //Energy Stars
             EnergyStars = new DurationCooldownIndicator(_dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(350410, Class.Priest, out var es);
-            EnergyStars.Cooldown = new FixedSkillCooldown(es, _dispatcher, true);
             EnergyStars.Buff = new FixedSkillCooldown(es, _dispatcher, false);
+            EnergyStars.Cooldown = new FixedSkillCooldown(es, _dispatcher, true);
 
             Grace = new DurationCooldownIndicator(_dispatcher);
             SessionManager.SkillsDatabase.TryGetSkill(390100, Class.Priest, out var gr);
-            Grace.Cooldown = new FixedSkillCooldown(gr, _dispatcher, false);
             Grace.Buff = new FixedSkillCooldown(gr, _dispatcher, false);
+            Grace.Cooldown = new FixedSkillCooldown(gr, _dispatcher, false);
 
+            Grace.Buff.PropertyChanged += GracePropertyChanged;
         }
 
         public override bool StartSpecialSkill(SkillCooldown sk)
