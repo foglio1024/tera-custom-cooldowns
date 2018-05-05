@@ -77,9 +77,16 @@ namespace TCC
                 {
                     var size = _client.GetStream().Read(buffer, 0, buffer.Length);
                     var data = Encoding.UTF8.GetString(buffer.Take(size).ToArray());
-                    var msg = data.StartsWith("<font", StringComparison.InvariantCultureIgnoreCase) ? data : "<FONT>" + data;
-                    msg = msg.EndsWith("</font>", StringComparison.InvariantCultureIgnoreCase) ? msg : msg + "</FONT>";
-                    PacketProcessor.HandleCommandOutput(msg);
+                    if (data.Contains(":tcc"))
+                    {
+                        PacketProcessor.HandleGpkData(data);
+                    }
+                    else
+                    {
+                        var msg = data.StartsWith("<font", StringComparison.InvariantCultureIgnoreCase) ? data : "<FONT>" + data;
+                        msg = msg.EndsWith("</font>", StringComparison.InvariantCultureIgnoreCase) ? msg : msg + "</FONT>";
+                        PacketProcessor.HandleCommandOutput(msg);
+                    }
                 }
             }
             catch (Exception e)
@@ -329,6 +336,24 @@ namespace TCC
             sb.Append("&use_lfg=");
             sb.Append(SettingsManager.LfgEnabled);
 
+            SendData(sb.ToString());
+        }
+
+        public static void DisbandParty()
+        {
+            var sb = new StringBuilder("disband_group");
+            SendData(sb.ToString());
+        }
+
+        public static void ResetInstance()
+        {
+            var sb = new StringBuilder("reset_instance");
+            SendData(sb.ToString());
+        }
+
+        public static void LeaveParty()
+        {
+            var sb = new StringBuilder("leave_party");
             SendData(sb.ToString());
         }
     }
