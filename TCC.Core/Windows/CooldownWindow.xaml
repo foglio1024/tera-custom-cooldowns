@@ -22,10 +22,8 @@
         <ContentControl x:Name="content" 
                         Margin="5" 
                         Grid.Row="1"
-                        DataContext="{Binding Instance}" 
-                        Content="{Binding}"
+                        Content="{Binding Instance}"
                         ContentTemplate="{Binding Instance.Mode, Converter={StaticResource Converters.CooldowWindowModeToTemplate}}" >
-
             <ContentControl.LayoutTransform>
                 <ScaleTransform ScaleX="{Binding Scale}" 
                             ScaleY="{Binding Scale}"/>
