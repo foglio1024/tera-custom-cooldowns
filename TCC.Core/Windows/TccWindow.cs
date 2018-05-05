@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Net.Configuration;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows;
@@ -285,6 +286,34 @@ namespace TCC.Windows
                 Close();
             else
                 Dispatcher.Invoke(DispatcherPriority.Normal, new ThreadStart(Close));
+        }
+
+        private bool _isTempShow;
+
+        private ClickThruMode _oldCt;
+        private bool _oldDim;
+        private bool _oldShowAlways;
+
+        public void TempShow()
+        {
+            _isTempShow = !_isTempShow;
+            if (!_settings.Enabled || !_settings.Visible) return;
+            if (_isTempShow)
+            {
+                _oldCt = _settings.ClickThruMode;
+                _oldDim = _settings.AutoDim;
+                _oldShowAlways = _settings.ShowAlways;
+
+                _settings.ClickThruMode = ClickThruMode.Never;
+                _settings.AutoDim = false;
+                _settings.ShowAlways = true;
+            }
+            else
+            {
+                _settings.ClickThruMode = _oldCt;
+                _settings.AutoDim = _oldDim;
+                _settings.ShowAlways = _oldShowAlways;
+            }
         }
     }
 }

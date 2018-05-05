@@ -228,13 +228,13 @@ namespace TCC
             InfoWindow = new InfoWindow();
             FlightDurationWindow = new FlightDurationWindow();
             if (SettingsManager.LfgEnabled) LfgListWindow = new LfgListWindow();
-            GroupWindow.Show();     
+            GroupWindow.Show();
             //ChatWindow.Show();      
-            CooldownWindow.Show();  
-            BossWindow.Show();      
-            BuffWindow.Show();      
-            CharacterWindow.Show(); 
-            ClassWindow.Show();     
+            CooldownWindow.Show();
+            BossWindow.Show();
+            BuffWindow.Show();
+            CharacterWindow.Show();
+            ClassWindow.Show();
             Debug.WriteLine("Windows loaded");
 
         }
@@ -436,6 +436,17 @@ namespace TCC
             {
                 ContextMenu.IsOpen = false;
             }
+        }
+
+        public static void TempShowAll()
+        {
+            CooldownWindow.TempShow();
+            CharacterWindow.TempShow();
+            BossWindow.TempShow();
+            BuffWindow.TempShow();
+            ClassWindow.TempShow();
+            GroupWindow.TempShow();
+            ChatWindowManager.Instance.TempShow();
         }
     }
 }

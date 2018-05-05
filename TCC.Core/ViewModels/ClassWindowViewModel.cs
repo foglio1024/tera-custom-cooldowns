@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using TCC.Data;
@@ -171,36 +173,36 @@ namespace TCC.ViewModels
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             switch (ClassWindowViewModel.Instance.CurrentClass)
-            {
-                case Class.Warrior:
-                    return Warrior;
-                case Class.Lancer:
-                    return Lancer;
-                case Class.Slayer:
-                    return Slayer;
-                case Class.Berserker:
-                    return Berserker;
-                case Class.Sorcerer:
-                    return Sorcerer;
-                case Class.Archer:
-                    return Archer;
-                case Class.Priest:
-                    return Priest;
-                case Class.Elementalist:
-                    return Mystic;
-                case Class.Soulless:
-                    return Reaper;
-                case Class.Engineer:
-                    return Gunner;
-                case Class.Fighter:
-                    return Brawler;
-                case Class.Assassin:
-                    return Ninja;
-                case Class.Glaiver:
-                    return Valkyrie;
-                default:
-                    return None;
-            }
+                {
+                    case Class.Warrior:
+                        return Warrior;
+                    case Class.Lancer:
+                        return Lancer;
+                    case Class.Slayer:
+                        return Slayer;
+                    case Class.Berserker:
+                        return Berserker;
+                    case Class.Sorcerer:
+                        return Sorcerer;
+                    case Class.Archer:
+                        return Archer;
+                    case Class.Priest:
+                        return Priest;
+                    case Class.Elementalist:
+                        return Mystic;
+                    case Class.Soulless:
+                        return Reaper;
+                    case Class.Engineer:
+                        return Gunner;
+                    case Class.Fighter:
+                        return Brawler;
+                    case Class.Assassin:
+                        return Ninja;
+                    case Class.Glaiver:
+                        return Valkyrie;
+                    default:
+                        return None;
+                }
         }
     }
 }

@@ -373,6 +373,14 @@ namespace TCC.ViewModels
         {
             ChatWindows[0].OpenTooltip();
         }
+
+        public void TempShow()
+        {
+            foreach (var chatWindow in ChatWindows)
+            {
+                chatWindow.TempShow();
+            }
+        }
     }
 
     public class ChatTabClient : IInterTabClient
