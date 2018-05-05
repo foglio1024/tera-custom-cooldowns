@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TCC.Tera.Data;
+using TCC.ViewModels;
+using TCC.Windows;
 
 namespace TCC
 {
@@ -18,7 +20,7 @@ namespace TCC
         private int _currentId;
 
         private bool _isRegistered;
-
+        private bool _isInitialized;
         private KeyboardHook()
         {
             // register the event of the inner native window.
@@ -34,52 +36,38 @@ namespace TCC
             if (value && !_isRegistered)
             {
                 Register();
+                Console.WriteLine("Setting hotkeys");
                 return true;
+
             }
-            if (!value && _isRegistered) { ClearHotkeys(); return true; }
+            if (!value && _isRegistered) { ClearHotkeys(); Console.WriteLine("Clearing hotkeys"); return true; }
             return false;
         }
 
         private static void hook_KeyPressed(object sender, KeyPressedEventArgs e)
         {
-            if (!Proxy.IsConnected) return;
-            if (!FocusManager.IsActive()) return;
-            if(!WindowManager.LfgListWindow.IsVisible) Proxy.RequestLfgList();
-            else WindowManager.LfgListWindow.CloseWindow();
-            //if (e.Key == BasicTeraData.Instance.HotkeysData.Topmost.Key && e.Modifier == BasicTeraData.Instance.HotkeysData.Topmost.Value)
-            //{
-            //    Instance.SwitchTopMost?.Invoke();
-            //}
-            //else if (e.Key == BasicTeraData.Instance.HotkeysData.Paste.Key && e.Modifier == BasicTeraData.Instance.HotkeysData.Paste.Value)
-            //{
-            //    var text = Clipboard.GetText();
-            //    var pasteThread = new Thread(() => CopyPaste.Paste(text));
-            //    pasteThread.Start();
-            //}
-            //else if (e.Key == BasicTeraData.Instance.HotkeysData.Reset.Key && e.Modifier == BasicTeraData.Instance.HotkeysData.Reset.Value)
-            //{
-            //    //Can't call directly NetworkController.Instance.Reset() => threading problem
-            //    PacketProcessor.Instance.NeedToReset = true;
-            //}
-            //else if (e.Key == BasicTeraData.Instance.HotkeysData.ResetCurrent.Key && e.Modifier == BasicTeraData.Instance.HotkeysData.ResetCurrent.Value)
-            //{
-            //    //Can't call directly NetworkController.Instance.ResetCurrent() => threading problem
-            //    PacketProcessor.Instance.NeedToResetCurrent = true;
-            //}
-            //else if (e.Key == BasicTeraData.Instance.HotkeysData.ExcelSave.Key && e.Modifier == BasicTeraData.Instance.HotkeysData.ExcelSave.Value)
-            //{
-            //    //Can't call directly Export => threading problem
-            //    PacketProcessor.Instance.NeedToExport = DataExporter.Dest.Excel | DataExporter.Dest.Manual;
-            //}
-            //else if (e.Key == BasicTeraData.Instance.HotkeysData.ClickThrou.Key && e.Modifier == BasicTeraData.Instance.HotkeysData.ClickThrou.Value)
-            //{
-            //    PacketProcessor.Instance.SwitchClickThrou();
-            //}
-            //foreach (var copy in BasicTeraData.Instance.HotkeysData.Copy.Where(copy => e.Key == copy.Key && e.Modifier == copy.Modifier))
-            ////Can't copy directly, => threading problem
-            //{
-            //    PacketProcessor.Instance.NeedToCopy = copy;
-            //}
+            if (e.Key == SettingsManager.LfgHotkey.Key &&
+                e.Modifier == SettingsManager.LfgHotkey.Modifier)
+            {
+                if (!Proxy.IsConnected) return;
+                if (!WindowManager.LfgListWindow.IsVisible) Proxy.RequestLfgList();
+                else WindowManager.LfgListWindow.CloseWindow();
+            }
+            if (e.Key == SettingsManager.SettingsHotkey.Key &&
+                e.Modifier == SettingsManager.SettingsHotkey.Modifier)
+            {
+                WindowManager.Settings.ShowWindow();
+            }
+            if (e.Key == SettingsManager.InfoWindowHotkey.Key &&
+                e.Modifier == SettingsManager.InfoWindowHotkey.Modifier)
+            {
+                InfoWindowViewModel.Instance.ShowWindow();
+            }
+            if (e.Key == SettingsManager.ShowAllHotkey.Key &&
+                e.Modifier == SettingsManager.ShowAllHotkey.Modifier)
+            {
+                WindowManager.TempShowAll();
+            }
         }
 
 
@@ -91,31 +79,34 @@ namespace TCC
 
         public void RegisterKeyboardHook()
         {
-            // register the event that is fired after the key press.
-            Instance.KeyPressed += hook_KeyPressed;
+            if (_isInitialized) return;
+            WindowManager.FloatingButton.Dispatcher.Invoke(() =>
+            {
+                // register the event that is fired after the key press.
+                Instance.KeyPressed += hook_KeyPressed;
+                if (!_isRegistered) { Register(); }
+                SessionManager.ChatModeChanged += CheckHotkeys;
+                FocusManager.ForegroundChanged += CheckHotkeys;
+                _isInitialized = true;
+            });
+        }
 
-            if (!_isRegistered) { Register(); }
+        private void CheckHotkeys()
+        {
+            WindowManager.FloatingButton.Dispatcher.Invoke(() =>
+            {
+                SetHotkeys(!SessionManager.InGameChatOpen && FocusManager.IsActive());
+            });
         }
 
         private void Register()
         {
-            RegisterHotKey(HotkeysData.ModifierKeys.Control, Keys.Y);
+            RegisterHotKey(SettingsManager.LfgHotkey.Modifier, SettingsManager.LfgHotkey.Key);
+            RegisterHotKey(SettingsManager.InfoWindowHotkey.Modifier, SettingsManager.InfoWindowHotkey.Key);
+            RegisterHotKey(SettingsManager.SettingsHotkey.Modifier, SettingsManager.SettingsHotkey.Key);
+            RegisterHotKey(SettingsManager.ShowAllHotkey.Modifier, SettingsManager.ShowAllHotkey.Key);
 
-            //MessageBox.Show("PASSE" + Environment.StackTrace, "ERROR: "+ Environment.StackTrace, MessageBoxButtons.OKCancel);
-
-            //RegisterHotKey(BasicTeraData.Instance.HotkeysData.Topmost.Value, BasicTeraData.Instance.HotkeysData.Topmost.Key);
-            //RegisterHotKey(BasicTeraData.Instance.HotkeysData.Paste.Value, BasicTeraData.Instance.HotkeysData.Paste.Key);
-            //RegisterHotKey(BasicTeraData.Instance.HotkeysData.Reset.Value, BasicTeraData.Instance.HotkeysData.Reset.Key);
-            //RegisterHotKey(BasicTeraData.Instance.HotkeysData.ResetCurrent.Value, BasicTeraData.Instance.HotkeysData.ResetCurrent.Key);
-            //RegisterHotKey(BasicTeraData.Instance.HotkeysData.ExcelSave.Value, BasicTeraData.Instance.HotkeysData.ExcelSave.Key);
-            //RegisterHotKey(BasicTeraData.Instance.HotkeysData.ClickThrou.Value, BasicTeraData.Instance.HotkeysData.ClickThrou.Key);
-            //if (BasicTeraData.Instance.WindowData.RemoveTeraAltEnterHotkey)
-            //{
-            //    RegisterHotKey(HotkeysData.ModifierKeys.Alt, Keys.Enter);
-            //    RegisterHotKey(HotkeysData.ModifierKeys.Alt | HotkeysData.ModifierKeys.Control, Keys.Enter);
-            //}
-            //foreach (var copy in BasicTeraData.Instance.HotkeysData.Copy) { RegisterHotKey(copy.Modifier, copy.Key); }
-            //_isRegistered = true;
+            _isRegistered = true;
         }
 
         // Registers a hot key with Windows.
@@ -141,7 +132,10 @@ namespace TCC
             _currentId++;
 
             // register the hot key.
-            if (!RegisterHotKey(_window.Handle, _currentId, (uint)modifier, (uint)key)) { MessageBox.Show("Error"); }
+            if (!RegisterHotKey(_window.Handle, _currentId, (uint)modifier, (uint)key))
+            {
+                Console.WriteLine("Error");
+            }
         }
 
         /// <summary>
@@ -207,7 +201,7 @@ namespace TCC
 
         private void ClearHotkeys()
         {
-            for (var i = _currentId; i > 0; i--) { UnregisterHotKey(_window.Handle, i); }
+            for (var i = _currentId; i > 0; i--) { var v = UnregisterHotKey(_window.Handle, i); }
             _currentId = 0;
             _isRegistered = false;
         }
