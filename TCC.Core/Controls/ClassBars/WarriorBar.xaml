@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              xmlns:classBars="clr-namespace:TCC.Controls.ClassBars"
-             mc:Ignorable="d" Loaded="UserControl_Loaded" d:DataContext="{d:DesignData WarriorBarManager}">
+             mc:Ignorable="d" Loaded="UserControl_Loaded" d:DataContext="{d:DesignInstance viewModels:WarriorBarManager}">
     <UserControl.Resources>
         <classBars:WarriorStanceToColorConverter x:Key="StanceToColorConverter"/>
     </UserControl.Resources>

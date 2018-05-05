@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
-             mc:Ignorable="d" d:DataContext="{d:DesignData PriestBarManager}">
+             Loaded="PriestBar_OnLoaded"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:PriestBarManager}">
     <Grid Margin="5" Name="Root">
         <Grid HorizontalAlignment="Center" Margin="0">
             <Border Style="{StaticResource Styles.DefaultBorder}"
@@ -14,9 +15,9 @@
                     CornerRadius="29"
                     Margin="2"
                     VerticalAlignment="Stretch"/>
-            <UniformGrid Rows="1">
-                <local:BuffCooldownControl DataContext="{Binding EnergyStars}" Margin="-20" Padding="20"/>
-                <local:BuffCooldownControl DataContext="{Binding Grace}" Margin="-20" Padding="20"/>
+            <UniformGrid Rows="1" >
+                <local:BuffCooldownControl x:Name="Es" DataContext="{Binding EnergyStars}" ClipToBounds="False" Margin="-20" Padding="20"/>
+                <local:BuffCooldownControl x:Name="GoR" DataContext="{Binding Grace}" ClipToBounds="False" Margin="-20" Padding="20"/>
 
             </UniformGrid>
         </Grid>
