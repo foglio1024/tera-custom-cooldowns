@@ -1,4 +1,5 @@
-﻿using TCC.Data;
+﻿using System.Linq;
+using TCC.Data;
 using TCC.Data.Databases;
 using TCC.ViewModels;
 
@@ -66,17 +67,24 @@ namespace TCC
                 CharacterWindowViewModel.Instance.Player.AddToDebuffList(ab);
                 //ClassManager.SetStatus(ab, true);
             }
-            CheckPassivity(ab);
+            CheckPassivity(ab, duration);
             //var sysMsg = new ChatMessage("@661\vAbnormalName\v" + ab.Name, SystemMessages.Messages["SMT_BATTLE_BUFF_DEBUFF"]);
             //ChatWindowManager.Instance.AddChatMessage(sysMsg);
 
         }
 
-        private static void CheckPassivity(Abnormality ab)
+        private static void CheckPassivity(Abnormality ab, uint duration)
         {
-            if (PassivityDatabase.Passivities.Contains(ab.Id))
+            if (PassivityDatabase.Passivities.Contains(ab.Id) )
             {
                 SkillManager.AddPassivitySkill(ab.Id, 60);
+            }
+            else if (CooldownWindowViewModel.Instance.MainSkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id) ||
+                CooldownWindowViewModel.Instance.SecondarySkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id))
+
+            {
+                //TODO: can't do this correctly since we don't know passivity cooldown from database so we just add duration
+                SkillManager.AddPassivitySkill(ab.Id, duration/1000);
             }
         }
 
