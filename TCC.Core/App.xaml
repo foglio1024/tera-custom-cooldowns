@@ -5,6 +5,7 @@
              xmlns:converters="clr-namespace:TCC.Converters"
              xmlns:chatcontrols="clr-namespace:TCC.Controls.ChatControls"
              xmlns:templateselectors="clr-namespace:TCC.TemplateSelectors"
+             xmlns:vm="clr-namespace:TCC.ViewModels"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
              xmlns:data="clr-namespace:TCC.Data"
@@ -305,6 +306,7 @@
             <PathGeometry x:Key="SvgDisband">M17,3A2,2 0 0,1 19,5V21L12,18L5,21V5C5,3.89 5.9,3 7,3H17M8.17,8.58L10.59,11L8.17,13.41L9.59,14.83L12,12.41L14.41,14.83L15.83,13.41L13.41,11L15.83,8.58L14.41,7.17L12,9.58L9.59,7.17L8.17,8.58Z</PathGeometry>
             <PathGeometry x:Key="SvgRemoveCircle">M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z</PathGeometry>
             <PathGeometry x:Key="SvgSearch">M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z</PathGeometry>
+            <PathGeometry x:Key="SvgCheckAll">M0.41,13.41L6,19L7.41,17.58L1.83,12M22.24,5.58L11.66,16.17L7.5,12L6.07,13.41L11.66,19L23.66,7M18,7L16.59,5.58L10.24,11.93L11.66,13.34L18,7Z</PathGeometry>
             <PathGeometry x:Key="Svg"></PathGeometry>
             <!--Converters-->
             <converters:BoolToOpacityConverter x:Key="Converters.BoolToOpacity"/>
@@ -696,7 +698,7 @@
                                         <Thumb Grid.Column="0" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" 
                                                x:Name="PART_Thumb"
                                                Style="{StaticResource MaterialDesignInvisibleThumbStyle}" >
-                                            
+
                                         </Thumb>
                                         <Button Grid.Column="1" x:Name="CloseButton" VerticalAlignment="Center"
                                                 Style="{StaticResource MaterialDesignCloseItemCommandButtonStyle}"  
@@ -833,7 +835,7 @@
                     <TextBlock Grid.Column="1" Foreground="#9fff" Text="{Binding ShortName}"
                                VerticalAlignment="Center" Margin="5 0" />
                 </Grid>
-            </DataTemplate>          
+            </DataTemplate>
             <DataTemplate x:Key="ItemDataTemplate" DataType="data:Item">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -851,7 +853,7 @@
                     <TextBlock Grid.Column="1" Foreground="#9fff" Text="{Binding Name}"
                                VerticalAlignment="Center" Margin="5 0" />
                 </Grid>
-            </DataTemplate>          
+            </DataTemplate>
             <DataTemplate x:Key="AbnormalityDataTemplate" DataType="data:Abnormality">
                 <Grid Background="Transparent" ToolTip="{Binding ToolTip}">
                     <Grid.ColumnDefinitions>
@@ -869,10 +871,67 @@
                     </Ellipse>
                     <TextBlock Grid.Column="1" Foreground="#9fff" Text="{Binding Name}"
                                VerticalAlignment="Center" Margin="5 0" />
-<TextBlock Grid.Column="2" Foreground="#3fff" Text="{Binding Id}"
+                    <TextBlock Grid.Column="2" Foreground="#3fff" Text="{Binding Id}"
                                VerticalAlignment="Center" Margin="5 0" />
                 </Grid>
-            </DataTemplate>          
+            </DataTemplate>
+            <DataTemplate x:Key="GroupAbnormalitySelectorDataTemplate" DataType="vm:GroupAbnormalityVM">
+                <Grid Background="Transparent" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="350" />
+                        <ColumnDefinition Width="450" />
+                        <ColumnDefinition Width="80" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.ToolTip>
+                        <ToolTip Background="Transparent" BorderBrush="Transparent">
+                            <Grid>
+                                <controls:AbnormalityToolTipControl AbnormalityName="{Binding Abnormality.Name}" 
+                                                                    AbnormalityToolTip="{Binding Abnormality.ToolTip}"
+                                                                    Id="{Binding Abnormality.Id}"/>
+                            </Grid>
+                        </ToolTip>
+                    </Grid.ToolTip>
+                    <Ellipse Width="30" Height="{Binding ElementName=icon, Path=ActualWidth}" x:Name="icon"
+                             Stroke="#7fff"
+                             StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Ellipse.Fill>
+                            <ImageBrush
+                                ImageSource="{Binding Abnormality.IconName, Converter={StaticResource Converters.IconNameToPath}}" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <TextBlock Grid.Column="1" Foreground="#9fff" Text="{Binding Abnormality.Name}"
+                               VerticalAlignment="Center" Margin="5 0" />
+                    <ItemsControl ItemsSource="{Binding Classes}" Grid.Column="2" >
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Rows="1"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button Style="{StaticResource ButtonContentOpacityStyle}" Command="{Binding ToggleCommand}" Width="30" HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center">
+                                    <Path Data="{StaticResource SvgCheckCircle}"  Opacity="{Binding Selected, Converter={StaticResource Converters.BoolToOpacity}, ConverterParameter=0.1_1}" Fill="#fff"
+                                          Stretch="Uniform" Height="16" Width="16" VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"></Path>
+                                    <!--<Rectangle Fill="#fff" Opacity="{Binding Selected, Converter={StaticResource Converters.BoolToOpacity}, ConverterParameter=0.3_1}" x:Name="rect"
+                                               Margin="2" RenderOptions.BitmapScalingMode="HighQuality" UseLayoutRounding="True" 
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"
+                                               Width="30" Height="30"  Stretch="Uniform">
+                                        <Rectangle.OpacityMask>
+                                            <ImageBrush ImageSource="{Binding Class, Converter={StaticResource Converters.ClassToImage}}" />
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>-->
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <TextBlock Grid.Column="3" Foreground="#3fff" Text="{Binding Abnormality.Id}"
+                               VerticalAlignment="Center" Margin="5 0" HorizontalAlignment="Right" />
+                </Grid>
+            </DataTemplate>
             <DataTemplate x:Key="FixedSkillDataTemplate" DataType="data:FixedSkillCooldown">
                 <Grid>
                     <Grid.ColumnDefinitions>
