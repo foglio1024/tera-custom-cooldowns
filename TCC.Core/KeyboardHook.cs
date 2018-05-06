@@ -83,7 +83,6 @@ namespace TCC
             {
                 // register the event that is fired after the key press.
                 Instance.KeyPressed += hook_KeyPressed;
-                if (!_isRegistered) { Register(); }
                 SessionManager.ChatModeChanged += CheckHotkeys;
                 FocusManager.ForegroundChanged += CheckHotkeys;
                 _isInitialized = true;
