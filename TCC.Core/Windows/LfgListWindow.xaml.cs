@@ -27,6 +27,22 @@ namespace TCC.Windows
             InitializeComponent();
             DataContext = new LfgListViewModel();
             VM.PropertyChanged += VM_PropertyChanged;
+            WindowManager.TccVisibilityChanged += (s, ev) =>
+            {
+                if (WindowManager.IsTccVisible)
+                {
+                    RefreshTopmost();
+                }
+            };
+        }
+
+        private void RefreshTopmost()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                Topmost = false;
+                Topmost = true;
+            });
         }
 
         [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
