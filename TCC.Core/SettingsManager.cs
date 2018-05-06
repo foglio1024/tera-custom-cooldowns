@@ -14,6 +14,7 @@ using TCC.Windows;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
 using ModifierKeys = TCC.Tera.Data.HotkeysData.ModifierKeys;
 using Key = System.Windows.Forms.Keys;
+
 namespace TCC
 {
     public struct HotKey
@@ -71,7 +72,23 @@ namespace TCC
         public static string TwitchChannelName { get; set; } = "";
         public static bool ChatFadeOut { get; set; } = true;
 
-        public static Dictionary<Class, List<uint>> GroupAbnormals = new Dictionary<Class, List<uint>>();
+        public static Dictionary<Class, List<uint>> GroupAbnormals = new Dictionary<Class, List<uint>>()
+        {
+            {(Class)0, new List<uint>()},
+            {(Class)1, new List<uint>()},
+            {(Class)2, new List<uint>()},
+            {(Class)3, new List<uint>()},
+            {(Class)4, new List<uint>()},
+            {(Class)5, new List<uint>()},
+            {(Class)6, new List<uint>()},
+            {(Class)7, new List<uint>()},
+            {(Class)8, new List<uint>()},
+            {(Class)9, new List<uint>()},
+            {(Class)10, new List<uint>()},
+            {(Class)11, new List<uint>()},
+            {(Class)12, new List<uint>()},
+            {(Class)255, new List<uint>()},
+        };
         public static uint GroupSizeThreshold = 7;
         public static EnrageLabelMode EnrageLabelMode { get; set; } = EnrageLabelMode.Remaining;
         public static bool ShowItemsCooldown { get; set; } = true;
@@ -380,17 +397,13 @@ namespace TCC
 
                 try
                 {
-                    ParseGroupAbnormalSettings(SettingsDoc.Descendants()
-                        .FirstOrDefault(x => x.Name == nameof(GroupAbnormals)));
+                    ParseGroupAbnormalSettings(SettingsDoc.Descendants() .FirstOrDefault(x => x.Name == nameof(GroupAbnormals)));
                 }
                 catch
                 {
-                    GroupAbnormals = new Dictionary<Class, List<uint>>
-                    {
-                        { Class.Common, new List<uint>{ 4000,4001,4010,4011,4020,4021,4030,4031,4600,4610,4611,4613,5000003, 4830, 4831, 4833, 4841, 4886, 4861, 4953, 4955, 7777015,902,910,911,912,913,916,920,921,922, 999010000 } },
-                        { Class.Priest, new List<uint>{ 201,202,805100,805101,805102,98000109,805600,805601,805602,805603,805604,98000110,800300,800301,800302,800303,800304,801500,801501,801502,801503,98000107} },
-                        { Class.Elementalist, new List<uint>{ 27120,700630,700631, 601,602,603, 700330, 700230,700231,800132,700233,700730,700731, 700100 } }
-                    };
+                    CommonDefault.ForEach(x => GroupAbnormals[Class.Common].Add(x));
+                    PriestDefault.ForEach(x => GroupAbnormals[Class.Priest].Add(x));
+                    MysticDefault.ForEach(x => GroupAbnormals[Class.Elementalist].Add(x));
                 }
             }
         }
@@ -585,26 +598,31 @@ namespace TCC
         }
         private static void ParseGroupAbnormalSettings(XElement el)
         {
-            GroupAbnormals = new Dictionary<Class, List<uint>>();
+            //GroupAbnormals = new Dictionary<Class, List<uint>>();
+            foreach (var groupAbnormalList in GroupAbnormals)
+            {
+                groupAbnormalList.Value.Clear();
+            }
+
             foreach (var abEl in el.Descendants().Where(x => x.Name == "Abnormals"))
             {
                 var c = abEl.Attribute("class").Value;
                 var cl = (Class)Enum.Parse(typeof(Class), c);
                 var abs = abEl.Value.Split(',');
-                var l = abs.Select(uint.Parse).ToList();
-                GroupAbnormals.Add(cl, l);
+                var l = abs.Length == 1 && abs[0] == "" ? new List<uint>() : abs.Select(uint.Parse).ToList();
+                l.ForEach(ab => GroupAbnormals[cl].Add(ab));
+                //GroupAbnormals.Add(cl, l);
             }
             if (GroupAbnormals.Count == 0)
             {
-                GroupAbnormals = new Dictionary<Class, List<uint>>
-                {
-                    { Class.Common, new List<uint>{ 4000,4001,4010,4011,4020,4021,4030,4031,4600,4610,4611,4613,5000003, 4830, 4831, 4833, 4841, 4886, 4861, 4953, 4955, 7777015,902,910,911,912,913,916,920,921,922, 999010000 } },
-                    { Class.Priest, new List<uint>{ 201,202,805100,805101,805102,98000109,805600,805601,805602,805603,805604,98000110,800300,800301,800302,800303,800304,801500,801501,801502,801503,98000107} },
-                    { Class.Elementalist, new List<uint>{ 27120,700630,700631, 601,602,603, 700330, 700230,700231,800132,700233,700730,700731, 700100 } }
-                };
+                CommonDefault.ForEach(x => GroupAbnormals[Class.Common].Add(x));
+                PriestDefault.ForEach(x => GroupAbnormals[Class.Priest].Add(x));
+                MysticDefault.ForEach(x => GroupAbnormals[Class.Elementalist].Add(x));
             }
         }
-
+        static List<uint> CommonDefault = new List<uint> { 4000, 4001, 4010, 4011, 4020, 4021, 4030, 4031, 4600, 4610, 4611, 4613, 5000003, 4830, 4831, 4833, 4841, 4886, 4861, 4953, 4955, 7777015, 902, 910, 911, 912, 913, 916, 920, 921, 922, 999010000 };
+        static List<uint> PriestDefault = new List<uint> { 201, 202, 805100, 805101, 805102, 98000109, 805600, 805601, 805602, 805603, 805604, 98000110, 800300, 800301, 800302, 800303, 800304, 801500, 801501, 801502, 801503, 98000107 };
+        static List<uint> MysticDefault = new List<uint> { 27120, 700630, 700631, 601, 602, 603, 700330, 700230, 700231, 800132, 700233, 700730, 700731, 700100 };
         public static XElement BuildChatTabsXElement(List<Tab> tabList)
         {
             var result = new XElement("Tabs");
