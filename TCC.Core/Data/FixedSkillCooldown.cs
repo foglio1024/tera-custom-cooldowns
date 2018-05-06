@@ -30,6 +30,18 @@ namespace TCC.Data
                 NPC();
             }
         }
+        private CooldownType _cooldownType;
+
+        public CooldownType CooldownType
+        {
+            get => _cooldownType;
+            set
+            {
+                if(_cooldownType == value) return;
+                _cooldownType = value;
+                NPC();
+            }
+        }
 
         private ulong _seconds;
         private bool _flashOnAvailable;
@@ -60,10 +72,11 @@ namespace TCC.Data
         {
             return Skill.Name;
         }
-        public FixedSkillCooldown(Skill sk, Dispatcher d, bool flashOnAvailable)
+        public FixedSkillCooldown(Skill sk, Dispatcher d, bool flashOnAvailable, CooldownType t = CooldownType.Skill)
         {
             _dispatcher = d;
 
+            _cooldownType = t;
             _shortTimer = new DispatcherTimer(DispatcherPriority.Background, _dispatcher);
             _shortTimer.Tick += _shortTimer_Tick;
 
@@ -138,7 +151,7 @@ namespace TCC.Data
             NPC("Start");
 
         }
-        public void Refresh(uint cd)
+        public void Refresh(ulong cd)
         {
             _secondsTimer.Stop();
             if (cd == 0)
