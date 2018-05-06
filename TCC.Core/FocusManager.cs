@@ -3,10 +3,10 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Timers;
+using System.Windows.Interop;
 
 namespace TCC
 {
-    public delegate void ForegroundWindowChangedEventHandler(bool visible);
 
     public static class FocusManager
     {
@@ -18,6 +18,8 @@ namespace TCC
         private const int WM_KEYDOWN = 0x0100;
         private const int WM_KEYUP = 0x0101;
         private const int VK_RETURN = 0x0D;
+
+        public static event Action ForegroundChanged;
 
         public static System.Timers.Timer FocusTimer;
         public static bool Running { get; set; } = true;
@@ -58,15 +60,15 @@ namespace TCC
             return result;
         }
 
-        public static IntPtr settingsWindowHandle = IntPtr.Zero;
-
+        private static bool _isActive;
         public static bool IsActive()
         {
-            var teraWindow = FindTeraWindow();
-            var meterWindow = FindMeterWindow();
-            var activeWindow = GetForegroundWindow();
-            return teraWindow != IntPtr.Zero && (teraWindow == activeWindow || settingsWindowHandle == activeWindow ) ||
-                   meterWindow != IntPtr.Zero && (meterWindow == activeWindow || settingsWindowHandle == activeWindow);
+                //TODO: add TCC windows here
+                var settingsWindowHandle = WindowManager.Settings.Handle;
+                return FindTeraWindow() != IntPtr.Zero &&
+                          (FindTeraWindow() == GetForegroundWindow() || settingsWindowHandle == GetForegroundWindow()) ||
+                           FindMeterWindow() != IntPtr.Zero && 
+                          (FindMeterWindow() == GetForegroundWindow() || settingsWindowHandle == GetForegroundWindow());
         }
 
         public static void MakeUnfocusable(IntPtr hwnd)
@@ -98,6 +100,9 @@ namespace TCC
         {
 
             WindowManager.IsFocused = IsActive();
+            if(IsActive() != _isActive) ForegroundChanged?.Invoke();
+            _isActive = IsActive();
+
         }
 
         public static void NewLine(IntPtr hWnd)
