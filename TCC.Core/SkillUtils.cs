@@ -53,13 +53,13 @@ namespace TCC
                             switch (row)
                             {
                                 case 1:
-                                    Main.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                    Main.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false, CooldownType.Item));
                                     break;
                                 case 2:
-                                    Secondary.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                    Secondary.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false, CooldownType.Item));
                                     break;
                                 case 3:
-                                    Hidden.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                    Hidden.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false, CooldownType.Item));
                                     break;
                             }
                         }
@@ -69,19 +69,18 @@ namespace TCC
                     {
                         if (SessionManager.AbnormalityDatabase.Abnormalities.TryGetValue(skillId, out var ab))
                         {
-                            var sk = new Skill(ab.Id, Class.None, ab.Name, ab.ToolTip);
+                            var sk = new Skill(ab.Id, Class.None, ab.Name, ab.ToolTip) {IconName = ab.IconName};
                             PassivityDatabase.Passivities.Add(ab.Id);
-                            sk.SetSkillIcon((ab.IconName));
                             switch (row)
                             {
                                 case 1:
-                                    Main.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                    Main.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false, CooldownType.Passive));
                                     break;
                                 case 2:
-                                    Secondary.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                    Secondary.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false, CooldownType.Passive));
                                     break;
                                 case 3:
-                                    Hidden.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                                    Hidden.Add(new FixedSkillCooldown(sk, CooldownWindowViewModel.Instance.GetDispatcher(), false, CooldownType.Passive));
                                     break;
                             }
                         }
