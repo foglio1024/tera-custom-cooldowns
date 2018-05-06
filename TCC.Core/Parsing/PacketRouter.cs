@@ -220,6 +220,7 @@ namespace TCC.Parsing
             TimeManager.Instance.SetGuildBamTime(false);
             SessionManager.InitDatabases(Language);
             CooldownWindowViewModel.Instance.ClearSkills();
+            SessionManager.CurrentPlayer.Class = p.CharacterClass;
             CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(p.CharacterClass).ToLower() + "-skills.xml", p.CharacterClass);
             if (SettingsManager.ClassWindowSettings.Enabled) ClassWindowViewModel.Instance.CurrentClass = p.CharacterClass;
 
@@ -232,7 +233,6 @@ namespace TCC.Parsing
             SessionManager.LoadingScreen = true;
             SessionManager.Logged = true;
             SessionManager.Encounter = false;
-            SessionManager.CurrentPlayer.Class = p.CharacterClass;
             MessageFactory.Update();
             SessionManager.CurrentPlayer.EntityId = p.entityId;
             SessionManager.CurrentPlayer.PlayerId = p.PlayerId;
