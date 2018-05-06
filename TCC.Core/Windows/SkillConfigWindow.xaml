@@ -160,7 +160,6 @@
                            Opacity=".5" FontWeight="Thin" FontSize="16">
                     Items
                 </TextBlock>
-
                 <Grid Grid.Row="1">
                     <Path Data="{StaticResource SvgSearch}" Margin="0 3 10 3" Height="15" VerticalAlignment="Center"
                           HorizontalAlignment="Right">

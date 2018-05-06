@@ -50,15 +50,7 @@ namespace TCC.Windows
             BeginAnimation(OpacityProperty, an);
             CooldownWindowViewModel.Instance.Save();
         }
-        public void CloseWindow()
-        {
-            Dispatcher.InvokeIfRequired(() =>
-            {
-                var a = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(150));
-                a.Completed += (s, ev) => { Hide(); };
-                BeginAnimation(OpacityProperty, a);
-            }, DispatcherPriority.DataBind);
-        }
+
         internal void ShowWindow()
         {
             Dispatcher.Invoke(() =>
