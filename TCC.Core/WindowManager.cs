@@ -46,6 +46,7 @@ namespace TCC
         public static ClassWindow ClassWindow;
         //public static ChatWindow ChatWindow;
         public static SettingsWindow Settings;
+        public static SkillConfigWindow SkillConfigWindow;
         public static InfoWindow InfoWindow;
         public static FloatingButtonWindow FloatingButton;
         public static FlightDurationWindow FlightDurationWindow;
@@ -169,7 +170,7 @@ namespace TCC
 
             FocusManager.FocusTimer = new Timer(1000);
             FocusManager.FocusTimer.Elapsed += FocusManager.CheckForegroundWindow;
-
+            Settings = new SettingsWindow();
             //ClickThruChanged += (s, ev) => UpdateClickThru();
 
         }
@@ -228,6 +229,7 @@ namespace TCC
             InfoWindow = new InfoWindow();
             FlightDurationWindow = new FlightDurationWindow();
             if (SettingsManager.LfgEnabled) LfgListWindow = new LfgListWindow();
+            SkillConfigWindow = new SkillConfigWindow();
             GroupWindow.Show();
             //ChatWindow.Show();      
             CooldownWindow.Show();
