@@ -67,31 +67,31 @@ namespace TCC.Data.Databases
                 var item = Items[itemId];
                 result = true;
                 sk = new Skill(itemId, Class.Common, item.Name, "");
-                sk.SetSkillIcon(item.Icon);
+                sk.IconName = item.IconName;
             }
             return result;
 
         }
 
-    }
-
-    public class Item
-    {
-        public uint Id { get; private set; }
-        public uint ExpId { get; private set; }
-        public string Name { get; private set; }
-        public RareGrade RareGrade { get; private set; }
-        public uint Cooldown { get; private set; }
-        public string Icon { get; private set; }
-        public Item(uint id, string name, uint g, uint expId, uint cd, string icon)
+        public IEnumerable<Item> ItemSkills
         {
-            Id = id;
-            Name = name;
-            RareGrade = (RareGrade)g;
-            ExpId = expId;
-            Cooldown = cd;
-            Icon = icon;
+            get
+            {
+                var ret = new List<Item>();
+                //foreach (var item in Items.Values)
+                //{
+                //    var iconName = "unknown";
+                //    if (item.IconName.ToString() != "")
+                //    {
+                //        iconName = item.IconName.ToString();
+                //        iconName = iconName.Replace(".", "/");
+                //    }
+                //    if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "/resources/images/" + iconName+ ".png")) ret.Add(item);
+                //}
+
+                //return ret;
+                return Items.Values.Where(x => x.Cooldown > 0);
+            }
         }
     }
-
 }
