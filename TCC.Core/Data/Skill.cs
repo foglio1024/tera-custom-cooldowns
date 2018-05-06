@@ -4,7 +4,14 @@ namespace TCC.Data
 {
     public class Skill
     {
-        public string IconName { get; set; }
+
+        private string _iconName;
+        public string IconName
+        {
+            get => _iconName;
+            set => _iconName = value.ToLower();
+        }
+
         public uint Id { get; set; }
         public Class Class { get; set; }
         public string Name { get; set; }
@@ -47,16 +54,16 @@ namespace TCC.Data
             ToolTip = toolTip;
         }
 
-        public void SetSkillIcon(string iconName)
-        {
-            //if (!iconName.Contains("Icon_Skills.")) return;
-            IconName = iconName.ToLower();//.Replace("Icon_Skills.", "");
+        //public void SetSkillIcon(string iconName)
+        //{
+        //    //if (!iconName.Contains("Icon_Skills.")) return;
+        //    IconName = iconName.ToLower();//.Replace("Icon_Skills.", "");
 
-            //CooldownWindow.Instance.Dispatcher.BeginInvoke(new Action(() =>
-            //{
-            //    iconBitmap = (Bitmap)Properties.Icon_Skills.ResourceManager.GetObject(iconName);
-            //}));
-        }
+        //    //CooldownWindow.Instance.Dispatcher.BeginInvoke(new Action(() =>
+        //    //{
+        //    //    iconBitmap = (Bitmap)Properties.Icon_Skills.ResourceManager.GetObject(iconName);
+        //    //}));
+        //}
 
     }
 }
