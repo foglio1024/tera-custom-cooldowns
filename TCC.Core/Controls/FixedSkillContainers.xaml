@@ -7,8 +7,9 @@
              xmlns:vm="clr-namespace:TCC.ViewModels"
              xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
              xmlns:data="clr-namespace:TCC.Data"
+             xmlns:dd="urn:gong-wpf-dragdrop"
              PreviewMouseLeftButtonUp="UserControl_MouseLeftButtonUp"
-
+             PreviewDragEnter="FixedSkillContainers_OnDragOver"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance vm:CooldownWindowViewModel}">
     <UserControl.Resources>
         <DataTemplate x:Key="DefaultSkillIndicator">
@@ -107,12 +108,18 @@
 
         <!--Main Styles.DefaultBorder-->
         <Border Style="{StaticResource Styles.DefaultBorder}" Opacity=".4" Grid.Row="1" Margin="0" CornerRadius="29"
-                x:Name="MainBorder"
+                x:Name="MainBorder" Effect="{x:Null}"
                 HorizontalAlignment="Left" Width="{Binding ElementName=MainSkillsGrid, Path=ActualWidth}" />
-
+        <Border Style="{StaticResource Styles.DefaultBorder}" Opacity=".3"  Margin="0" CornerRadius="29"
+                PreviewDragLeave="FixedSkillContainers_OnDragLeave" Grid.RowSpan="2" Grid.Row="1" Effect="{x:Null}"  
+                x:Name="MainBorderSec" HorizontalAlignment="Left"  Width="{Binding ElementName=MainSkillsGrid, Path=ActualWidth}" />
+        <Button Style="{StaticResource ButtonContentOpacityStyle}" Click="OpenCooldownSettings" ToolTip="Configure skills" VerticalAlignment="Bottom" x:Name="SettingsButton">
+            <Path Data="{StaticResource SvgSettings}"/>
+        </Button>
+        <!--<Button Width="20" Click="ButtonBase_OnClick"></Button>-->
         <!--Main skills grid-->
-        <Grid Grid.Row="1" Width="Auto" Height="Auto" HorizontalAlignment="Left" MouseEnter="MainSkillsGrid_MouseEnter"
-              Background="#01000000" MouseLeave="MainSkillsGrid_MouseLeave"
+        <Grid Grid.Row="1" Width="Auto" Height="Auto" HorizontalAlignment="Left" 
+              Background="#00000000" 
               VerticalAlignment="Center" Margin="0" x:Name="MainSkillsGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -130,34 +137,18 @@
                 <ListBox SelectionChanged="ListBox_SelectionChanged" SelectionMode="Single" Padding="5"
                          ScrollViewer.CanContentScroll="True"
                          Background="{StaticResource DefaultBackgroundColor}" BorderThickness="0"
-                         Effect="{StaticResource DropShadow}" Margin="15" x:Name="ChoiceListBox">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate DataType="data:Skill">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Width="30" Height="{Binding ElementName=icon, Path=ActualWidth}" x:Name="icon"
-                                         Stroke="#7fff"
-                                         StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Ellipse.Fill>
-                                        <ImageBrush
-                                            ImageSource="{Binding IconName, Converter={StaticResource Converters.IconNameToPath}}" />
-                                    </Ellipse.Fill>
-                                </Ellipse>
-                                <TextBlock Grid.Column="1" Foreground="#9fff" Text="{Binding ShortName}"
-                                           VerticalAlignment="Center" Margin="5 0" />
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
+                         Effect="{StaticResource DropShadow}" Margin="15" x:Name="ChoiceListBox"
+                         ItemTemplate="{StaticResource SkillDataTemplate}">
                 </ListBox>
             </Popup>
 
             <dragablz:DragablzItemsControl Grid.Row="0" Grid.Column="0" Name="MainSkills"
                                            ItemsSource="{Binding MainSkills}"
                                            VerticalAlignment="Top" HorizontalAlignment="Left" BorderThickness="0"
-                                           BorderBrush="Red" Margin="0">
+                                           BorderBrush="Red" Margin="0"
+                                           dd:DragDrop.IsDropTarget="True"
+                                           dd:DragDrop.DropHandler="{Binding DropHandler, RelativeSource={RelativeSource AncestorType=local:FixedSkillContainers}}"
+                                           dd:DragDrop.ItemsPanelOrientation="Horizontal">
                 <dragablz:DragablzItemsControl.ItemContainerStyle>
                     <Style TargetType="dragablz:DragablzItem">
                         <Setter Property="Padding" Value="0 4 0 4" />
@@ -173,8 +164,8 @@
                 </dragablz:DragablzItemsControl.PositionMonitor>
 
             </dragablz:DragablzItemsControl>
-            <Grid Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Right" Cursor="Hand"
-                  Opacity="0" x:Name="AddButtonGrid"
+            <Grid IsHitTestVisible="False" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Right" Cursor="Hand"
+                  Opacity="0" x:Name="AddButtonGrid" 
                   MouseLeftButtonDown="AddButtonPressed">
                 <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Stretch="Uniform" Width="20" Fill="#9fff" />
                 <Ellipse Width="50" Margin="5 0 5 0" Height="50" Stroke="#3fff" Fill="#1fff" StrokeThickness="1" />
@@ -192,7 +183,7 @@
               HorizontalAlignment="Left"
               VerticalAlignment="Center" UseLayoutRounding="False" Opacity=".9"
               x:Name="SecSkillsGrid"
-              MouseLeave="SecSkillsGrid_MouseLeave">
+              >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -209,9 +200,11 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>-->
             <dragablz:DragablzItemsControl Name="SecSkills" ItemsSource="{Binding SecondarySkills}" Grid.Column="0"
-                                           MouseEnter="SecondarySkillsGridMouseEnter"
                                            VerticalAlignment="Top" HorizontalAlignment="Left" BorderThickness="0"
-                                           BorderBrush="Red" Margin="0">
+                                           BorderBrush="Red" Margin="0"
+                                           dd:DragDrop.IsDropTarget="True"
+                                           dd:DragDrop.DropHandler="{Binding DropHandler, RelativeSource={RelativeSource AncestorType=local:FixedSkillContainers}}"
+                                           Background="Transparent" PreviewDrop="FixedSkillContainers_OnDragLeave">
                 <dragablz:DragablzItemsControl.ItemContainerStyle>
                     <Style TargetType="dragablz:DragablzItem">
                         <Setter Property="Padding" Value="0 4 0 4" />
@@ -227,7 +220,7 @@
                     <dragablz:HorizontalPositionMonitor OrderChanged="SecondarySkillOrderChanged" />
                 </dragablz:DragablzItemsControl.PositionMonitor>
             </dragablz:DragablzItemsControl>
-            <Grid Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Right" Cursor="Hand" Opacity="0"
+            <Grid Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Right" Cursor="Hand" Opacity="0" IsHitTestVisible="False"
                   x:Name="AddButtonGrid2" Margin="0 0 0 0"
                   MouseLeftButtonDown="AddButtonPressed">
                 <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Stretch="Uniform" Width="20" Fill="#9fff" />
@@ -255,7 +248,7 @@
 
         </Grid>
         <!--Item skills grid-->
-        <Grid Grid.Row="0" UseLayoutRounding="True">
+        <Grid Grid.Row="0" UseLayoutRounding="True" >
             <ItemsControl Name="ItemSkills" ItemTemplate="{StaticResource DefaultSkillIndicator}" Width="Auto"
                           Height="50" VerticalAlignment="Stretch"
                           HorizontalAlignment="Right" ItemsSource="{Binding ItemSkills}" BorderBrush="Red"
