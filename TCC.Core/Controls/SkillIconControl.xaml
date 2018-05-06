@@ -29,21 +29,22 @@
 
         <Grid Width="Auto" MinWidth="12" 
               Height="Auto" x:Name="G" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0" >
-            <Border Background="#fff" CornerRadius="5"  BorderBrush="#404047" BorderThickness="1"  Padding="4,0" Effect="{StaticResource FadedDropShadow}">
+            <Border Background="#fff" CornerRadius="5"  BorderBrush="#404047" BorderThickness="1"  Padding="4,0" >
 
-                <TextBlock Foreground="#d000" 
-                   HorizontalAlignment="Center" 
-                   VerticalAlignment="Center" 
-                   TextAlignment="Center"
-                   FontSize="15" 
-                   x:Name="Number" 
-                   FontFamily="{StaticResource ArialMonoBold}"
-                   Opacity="1" 
-                   Margin="0,0"
-                   Text="{Binding CurrentCD, RelativeSource={RelativeSource AncestorType=local:SkillIconControl}}">
-                </TextBlock>
 
             </Border>
+            <TextBlock Foreground="#d000" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" 
+                       TextAlignment="Center"
+                       FontSize="15" 
+                       x:Name="Number" 
+                       FontFamily="{StaticResource ArialMonoBold}"
+                       Opacity="1" 
+                       Margin="4,0"
+                       Text="{Binding CurrentCD, RelativeSource={RelativeSource AncestorType=local:SkillIconControl}}">
+            </TextBlock>
+
         </Grid>
         <Rectangle Height="20" VerticalAlignment="Top" MouseEnter="Rectangle_MouseEnter" Fill="#01000000"></Rectangle>
 
