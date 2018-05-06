@@ -10,31 +10,6 @@
         mc:Ignorable="d" d:DataContext="{d:DesignInstance {x:Type vm:LfgListViewModel}}"
         Title="LfgListWindow" Height="800">
     <Window.Resources>
-        <Style TargetType="ListBoxItem" x:Key="ListingListItemStyle">
-            <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                        <Grid>
-                            <Rectangle x:Name="hl" Fill="#1fff" Opacity="0" IsHitTestVisible="False" />
-                            <Rectangle x:Name="alt" Fill="#1999" Opacity="0" IsHitTestVisible="False" />
-                            <ContentPresenter Margin="5 0" />
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Opacity" TargetName="hl" Value="1" />
-                            </Trigger>
-                            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
-                                <Setter Property="Opacity" TargetName="alt" Value="0"></Setter>
-                            </Trigger>
-                            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
-                                <Setter Property="Opacity" TargetName="alt" Value="1"></Setter>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
         <Style TargetType="ListBoxItem" x:Key="PlayerListItemStyle">
             <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
             <!--<Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>-->
@@ -315,7 +290,7 @@
                      Padding="-1 -1 -1 5"
                      ScrollViewer.CanContentScroll="False"
                      Height="600"
-                     ItemContainerStyle="{StaticResource ListingListItemStyle}"
+                     ItemContainerStyle="{StaticResource DefaultListItemStyle}"
                      BorderThickness="0"
                      Grid.Row="2"
                      ItemsSource="{Binding ListingsView}"
