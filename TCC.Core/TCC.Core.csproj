@@ -86,6 +86,9 @@
     <Reference Include="Dragablz, Version=0.0.3.203, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dragablz.0.0.3.203\lib\net45\Dragablz.dll</HintPath>
     </Reference>
+    <Reference Include="GongSolutions.Wpf.DragDrop, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\gong-wpf-dragdrop.1.1.0\lib\net46\GongSolutions.Wpf.DragDrop.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -342,6 +345,7 @@
     <Compile Include="Data\Databases\AchievementGradeDatabase.cs" />
     <Compile Include="Data\Databases\DungeonDatabase.cs" />
     <Compile Include="Data\Databases\GuildQuestDatabase.cs" />
+    <Compile Include="Data\Item.cs" />
     <Compile Include="Data\Databases\ItemsDatabase.cs" />
     <Compile Include="Data\Databases\MapDatabase.cs" />
     <Compile Include="Data\Databases\PassivityDatabase.cs" />
@@ -842,6 +846,9 @@
     <Compile Include="Parsing\StringUtils.cs" />
     <Compile Include="Parsing\Messages\S_USER_STATUS.cs" />
     <Compile Include="WindowManager.cs" />
+    <Compile Include="Windows\SkillConfigWindow.xaml.cs">
+      <DependentUpon>SkillConfigWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
@@ -1189,6 +1196,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ChatControls\MoneyMessagePiece.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\SkillConfigWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
