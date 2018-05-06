@@ -54,6 +54,7 @@ namespace TCC.ViewModels
             {
                 if (mainSkills == value) return;
                 mainSkills = value;
+                NPC();
             }
         }
         public SynchronizedObservableCollection<FixedSkillCooldown> SecondarySkills
@@ -63,6 +64,7 @@ namespace TCC.ViewModels
             {
                 if (secondarySkills == value) return;
                 secondarySkills = value;
+                NPC();
             }
         }
         public SynchronizedObservableCollection<SkillCooldown> OtherSkills
@@ -283,7 +285,7 @@ namespace TCC.ViewModels
 
         private void FixedMode_Update(SkillCooldown sk)
         {
-            if (SettingsManager.ClassWindowSettings.Enabled && _classManager.StartSpecialSkill(sk)) return;
+            //if (SettingsManager.ClassWindowSettings.Enabled && _classManager.StartSpecialSkill(sk)) return;
             if (!SettingsManager.CooldownWindowSettings.Enabled) return;
 
             var hSkill = HiddenSkills.ToSyncArray().FirstOrDefault(x => x.IconName == sk.Skill.IconName);
@@ -533,14 +535,5 @@ namespace TCC.ViewModels
         {
             NPC(nameof(ShowItems));
         }
-
-        public event Action RefreshItemSourcesEvent;
-        public void RefreshItemSources()
-        {
-            RefreshItemSourcesEvent?.Invoke();
-            NPC(nameof(MainSkills));
-            NPC(nameof(SecondarySkills));
-        }
-
     }
 }

@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -26,6 +28,8 @@ namespace TCC.Controls
         private object[] _secondaryOrder;
         private readonly DispatcherTimer _mainButtonTimer;
         private readonly DispatcherTimer _secButtonTimer;
+        private readonly DoubleAnimation _opacityUp;
+        private readonly DoubleAnimation _opacityDown;
         private static readonly Action EmptyDelegate = delegate { };
         private string _lastSender = "";
 
@@ -38,21 +42,23 @@ namespace TCC.Controls
             _secButtonTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
             _mainButtonTimer.Tick += MainButtonTimer_Tick;
             _secButtonTimer.Tick += SecButtonTimer_Tick;
+            _opacityUp = new DoubleAnimation(1, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() };
+            _opacityDown = new DoubleAnimation(0, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() , BeginTime = TimeSpan.FromMilliseconds(1000)};
             SelectionPopup.Closed += SelectionPopup_Closed;
             SelectionPopup.Opened += SelectionPopup_Opened;
             CooldownWindowViewModel.Instance.SecondarySkills.CollectionChanged += SecondarySkills_CollectionChanged;
             CooldownWindowViewModel.Instance.MainSkills.CollectionChanged += MainSkills_CollectionChanged;
         }
 
+
         public SkillDropHandler DropHandler => new SkillDropHandler();
 
         private void MainSkills_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (e.Action == NotifyCollectionChangedAction.Remove)
-            {
-                MainSkills.InvalidateMeasure();
-                MainSkills.Dispatcher.Invoke(DispatcherPriority.Render, EmptyDelegate);
-            }
+            if (e.Action != NotifyCollectionChangedAction.Remove) return;
+            MainSkills.InvalidateMeasure();
+            MainSkills.Dispatcher.Invoke(DispatcherPriority.Render, EmptyDelegate);
+            CooldownWindowViewModel.Instance.Save();
         }
 
         private void SecondarySkills_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -61,6 +67,7 @@ namespace TCC.Controls
             {
                 SecSkills.InvalidateMeasure();
                 SecSkills.Dispatcher.Invoke(DispatcherPriority.Render, EmptyDelegate);
+                CooldownWindowViewModel.Instance.Save();
             }
 
             OtherSkills.Margin = ((SynchronizedObservableCollection<FixedSkillCooldown>)sender).Count == 0
@@ -108,6 +115,8 @@ namespace TCC.Controls
 
         private void AnimateAddButton(bool open, Grid targetspacer, Grid addButtonGrid)
         {
+            SettingsButton.BeginAnimation(OpacityProperty, open ? _opacityUp : _opacityDown);
+            return;
             if (open && ((ScaleTransform)targetspacer.LayoutTransform).ScaleX == 1) return;
             if (!open && ((ScaleTransform)targetspacer.LayoutTransform).ScaleX == 0) return;
             var to = open ? 1 : 0;
@@ -118,8 +127,10 @@ namespace TCC.Controls
                 new DoubleAnimation(to, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() });
         }
 
+        private bool _isDragging;
         private void ItemDragStarted(object sender, DragablzDragStartedEventArgs e)
         {
+            _isDragging = true;
             FocusManager.FocusTimer.Enabled = false;
             WindowManager.IsFocused = true;
         }
@@ -148,11 +159,24 @@ namespace TCC.Controls
 
             CooldownWindowViewModel.Instance.Save();
             FocusManager.FocusTimer.Enabled = true;
+            _isDragging = false;
         }
 
         private void MainSkillOrderChanged(object sender, OrderChangedEventArgs e)
         {
             _mainOrder = e.NewOrder;
+            foreach (var item in e.NewOrder)
+            {
+                Console.WriteLine(item);
+            }
+
+            Console.WriteLine($" -----");
+            if (_mainOrder.Length < 2) return;
+            if (!_isDragging)
+            {
+                //force it here
+                //InstanceOnRefreshItemSourcesEvent();
+            }
         }
 
         private void SecondarySkillOrderChanged(object sender, OrderChangedEventArgs e)
@@ -175,13 +199,17 @@ namespace TCC.Controls
         private void MainSkillsGrid_MouseEnter(object sender, MouseEventArgs e)
         {
             AnimateAddButton(true, Spacer, AddButtonGrid);
+            return;
+            CooldownWindowViewModel.Instance.AddOrRefresh(new SkillCooldown(new Skill(0, Class.Warrior, "BD", "BD") { IconName = "icon_skills.dualslash_tex" }, 900000, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher()));
+
             if (CooldownWindowViewModel.Instance.SecondarySkills.Count == 0)
                 AnimateAddButton(true, Spacer2, AddButtonGrid2);
         }
 
         private void MainSkillsGrid_MouseLeave(object sender, MouseEventArgs e)
         {
-            _mainButtonTimer.Start();
+            //_mainButtonTimer.Start();
+            AnimateAddButton(false, null, null);
         }
 
         private void SecondarySkillsGridMouseEnter(object sender, MouseEventArgs e)
@@ -234,14 +262,14 @@ namespace TCC.Controls
                 {
                     if (!target.Any(x => x.Skill.IconName == sk.IconName))
                     {
-                        target.Add(new FixedSkillCooldown((Skill)dropInfo.Data, CooldownWindowViewModel.Instance.GetDispatcher(), false));
+                        target.Insert(dropInfo.InsertIndex, new FixedSkillCooldown((Skill)dropInfo.Data, CooldownWindowViewModel.Instance.GetDispatcher(), false));
                     }
                 }
                 else if (dropInfo.Data is Abnormality ab)
                 {
                     if (!target.Any(x => x.Skill.IconName == ab.IconName))
                     {
-                        target.Add(
+                        target.Insert(dropInfo.InsertIndex,
                             new FixedSkillCooldown(new Skill(ab.Id, Class.None, ab.Name, ab.ToolTip) { IconName = ab.IconName },
                                 CooldownWindowViewModel.Instance.GetDispatcher(), false, CooldownType.Passive));
                     }
@@ -251,10 +279,42 @@ namespace TCC.Controls
                     if (!target.Any(x => x.Skill.IconName == i.IconName))
                     {
                         SessionManager.ItemsDatabase.TryGetItemSkill(i.Id, out var s);
-                        target.Add(new FixedSkillCooldown(s, CooldownWindowViewModel.Instance.GetDispatcher(), false, CooldownType.Item));
+                        target.Insert(dropInfo.InsertIndex, new FixedSkillCooldown(s, CooldownWindowViewModel.Instance.GetDispatcher(), false, CooldownType.Item));
                     }
-
                 }
+                var tmp = new List<FixedSkillCooldown>();
+
+                //force correct order as it's not preserved
+                foreach (var fixedSkillCooldown in target)
+                {
+                    tmp.Add(fixedSkillCooldown);
+                }
+                target.Clear();
+                tmp.ForEach(x =>
+                {
+                    target.Add(x);
+                });
+
+                ulong delay = 500;
+                //wait a bit and restart any running skill
+                Task.Delay(TimeSpan.FromMilliseconds(delay)).ContinueWith(t =>
+                {
+                    CooldownWindowViewModel.Instance.MainSkills.ToList().ForEach(x =>
+                    {
+                        if (x.Seconds > 0)
+                        {
+                            x.Start((x.Seconds)*1000 - delay);
+                        }
+                    });
+                    CooldownWindowViewModel.Instance.SecondarySkills.ToList().ForEach(x =>
+                    {
+                        if (x.Seconds > 0)
+                        {
+                            x.Start((x.Seconds)*1000 - delay);
+                        }
+                    });
+                });
+
                 CooldownWindowViewModel.Instance.Save();
             }
         }
@@ -277,11 +337,26 @@ namespace TCC.Controls
         private bool a;
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
+
+            CooldownWindowViewModel.Instance.AddOrRefresh(new SkillCooldown(new Skill(0, Class.Warrior, "BD", "BD") { IconName = "icon_skills.dualslash_tex" }, 50000, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher()));
+            return;
             if (a) SessionManager.CurrentPlayer.Class = Class.Warrior;
             else SessionManager.CurrentPlayer.Class = Class.Archer;
             CooldownWindowViewModel.Instance.ClearSkills();
             CooldownWindowViewModel.Instance.LoadSkills($"{SessionManager.CurrentPlayer.Class.ToString().ToLower()}-skills.xml", SessionManager.CurrentPlayer.Class);
             a = !a;
+        }
+
+        private void MainSkills_OnDrop(object sender, DragEventArgs e)
+        {
+            MainSkills.InvalidateArrange();
+            MainSkills.InvalidateMeasure();
+            MainSkills.Dispatcher.Invoke(DispatcherPriority.Render, EmptyDelegate);
+        }
+
+        private void FixedSkillContainers_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            //CooldownWindowViewModel.Instance.AddOrRefresh(new SkillCooldown(new Skill(0, Class.Warrior, "BD", "BD") { IconName = "icon_skills.dualslash_tex" }, 900000, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher()));
         }
     }
 }

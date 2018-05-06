@@ -1,4 +1,6 @@
-﻿namespace TCC.Windows
+﻿using System;
+
+namespace TCC.Windows
 {
     public partial class CooldownWindow : TccWindow
     {

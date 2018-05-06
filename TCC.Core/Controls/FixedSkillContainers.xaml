@@ -7,9 +7,11 @@
              xmlns:vm="clr-namespace:TCC.ViewModels"
              xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
              xmlns:data="clr-namespace:TCC.Data"
-             xmlns:dd="urn:gong-wpf-dragdrop"
+             xmlns:dd="urn:gong-wpf-dragdrop" 
+             Loaded="FixedSkillContainers_OnLoaded"
              PreviewMouseLeftButtonUp="UserControl_MouseLeftButtonUp"
-             PreviewDragEnter="FixedSkillContainers_OnDragOver"
+             PreviewDragEnter="FixedSkillContainers_OnDragOver" MouseEnter="MainSkillsGrid_MouseEnter"
+             MouseLeave="MainSkillsGrid_MouseLeave"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance vm:CooldownWindowViewModel}">
     <UserControl.Resources>
         <DataTemplate x:Key="DefaultSkillIndicator">
@@ -113,7 +115,7 @@
         <Border Style="{StaticResource Styles.DefaultBorder}" Opacity=".3"  Margin="0" CornerRadius="29"
                 PreviewDragLeave="FixedSkillContainers_OnDragLeave" Grid.RowSpan="2" Grid.Row="1" Effect="{x:Null}"  
                 x:Name="MainBorderSec" HorizontalAlignment="Left"  Width="{Binding ElementName=MainSkillsGrid, Path=ActualWidth}" />
-        <Button Style="{StaticResource ButtonContentOpacityStyle}" Click="OpenCooldownSettings" ToolTip="Configure skills" VerticalAlignment="Bottom" x:Name="SettingsButton">
+        <Button Style="{StaticResource ButtonContentOpacityStyle}" Click="OpenCooldownSettings" ToolTip="Configure skills" VerticalAlignment="Bottom" x:Name="SettingsButton" Opacity="0">
             <Path Data="{StaticResource SvgSettings}"/>
         </Button>
         <!--<Button Width="20" Click="ButtonBase_OnClick"></Button>-->
@@ -143,10 +145,11 @@
             </Popup>
 
             <dragablz:DragablzItemsControl Grid.Row="0" Grid.Column="0" Name="MainSkills"
-                                           ItemsSource="{Binding MainSkills}"
+                                           ItemsSource="{Binding Instance.MainSkills}" Background="Transparent"
                                            VerticalAlignment="Top" HorizontalAlignment="Left" BorderThickness="0"
-                                           BorderBrush="Red" Margin="0"
+                                           BorderBrush="Red" Margin="0" MinWidth="60" MinHeight="60"
                                            dd:DragDrop.IsDropTarget="True"
+                                           Drop="MainSkills_OnDrop"
                                            dd:DragDrop.DropHandler="{Binding DropHandler, RelativeSource={RelativeSource AncestorType=local:FixedSkillContainers}}"
                                            dd:DragDrop.ItemsPanelOrientation="Horizontal">
                 <dragablz:DragablzItemsControl.ItemContainerStyle>
@@ -160,7 +163,7 @@
                     <dragablz:HorizontalOrganiser />
                 </dragablz:DragablzItemsControl.ItemsOrganiser>
                 <dragablz:DragablzItemsControl.PositionMonitor>
-                    <dragablz:HorizontalPositionMonitor OrderChanged="MainSkillOrderChanged" />
+                    <dragablz:HorizontalPositionMonitor  OrderChanged="MainSkillOrderChanged" />
                 </dragablz:DragablzItemsControl.PositionMonitor>
 
             </dragablz:DragablzItemsControl>
@@ -199,7 +202,7 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>-->
-            <dragablz:DragablzItemsControl Name="SecSkills" ItemsSource="{Binding SecondarySkills}" Grid.Column="0"
+            <dragablz:DragablzItemsControl Name="SecSkills" ItemsSource="{Binding Instance.SecondarySkills}" Grid.Column="0"
                                            VerticalAlignment="Top" HorizontalAlignment="Left" BorderThickness="0"
                                            BorderBrush="Red" Margin="0"
                                            dd:DragDrop.IsDropTarget="True"
@@ -235,7 +238,7 @@
             <!--Other skills-->
             <ItemsControl Name="OtherSkills" ItemTemplate="{StaticResource DefaultSkillIndicator}" Width="Auto"
                           VerticalAlignment="Stretch"
-                          Grid.Column="2" HorizontalAlignment="Left" ItemsSource="{Binding OtherSkills}"
+                          Grid.Column="2" HorizontalAlignment="Left" ItemsSource="{Binding Instance.OtherSkills}"
                           BorderBrush="Green" BorderThickness="0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
