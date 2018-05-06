@@ -222,12 +222,7 @@ namespace TCC.ViewModels
             if (MainSkills.Contains(context)) MainSkills.Remove(context);
             else if (SecondarySkills.Contains(context)) SecondarySkills.Remove(context);
 
-            SaveSkillsConfig();
-        }
-
-        private void SaveSkillsConfig()
-        {
-            //throw new NotImplementedException();
+            Save();
         }
 
         private void NormalMode_Remove(Skill sk)
@@ -280,12 +275,12 @@ namespace TCC.ViewModels
             {
                 root.Add(new XElement("Skill", new XAttribute("id", sk.Id), new XAttribute("row", 3), new XAttribute("name", sk.ShortName)));
             });
-            root.Save(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources/config/skills", $"{SessionManager.CurrentPlayer.Class.ToString().ToLowerInvariant()}-skills.xml"));
+            root.Save(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources/config/skills", $"{Utils.ClassEnumToString(SessionManager.CurrentPlayer.Class).ToLower()}-skills.xml"));
         }
 
         private void FixedMode_Update(SkillCooldown sk)
         {
-            //if (SettingsManager.ClassWindowSettings.Enabled && _classManager.StartSpecialSkill(sk)) return;
+            if (SettingsManager.ClassWindowSettings.Enabled && _classManager.StartSpecialSkill(sk)) return;
             if (!SettingsManager.CooldownWindowSettings.Enabled) return;
 
             var hSkill = HiddenSkills.ToSyncArray().FirstOrDefault(x => x.IconName == sk.Skill.IconName);
