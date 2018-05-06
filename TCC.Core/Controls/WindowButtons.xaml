@@ -27,7 +27,8 @@
         </Grid.Resources>
         <Border Style="{StaticResource Styles.DefaultBorder}" 
                 CornerRadius="2" Grid.ColumnSpan="20" Opacity=".5"
-                VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                Effect="{x:Null}"/>
         <Button Visibility="{Binding HideButtonVisibility, RelativeSource={RelativeSource AncestorType=c:WindowButtons}}"
                 Click="Hide" ToolTip="Hide">
             <Path Fill="White" Data="{StaticResource SvgHide}" Stretch="Uniform" Margin="2"/>
