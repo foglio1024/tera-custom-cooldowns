@@ -7,6 +7,7 @@
         xmlns:controls="clr-namespace:TCC.Controls"
         xmlns:vm="clr-namespace:TCC.ViewModels"
         xmlns:data="clr-namespace:TCC.Data"
+        xmlns:tcc="clr-namespace:TCC"
         Topmost="True"
         mc:Ignorable="d" WindowStyle="None" AllowsTransparency="True" 
         Title="Settings" Height="Auto" Width="Auto" ResizeMode="NoResize" Loaded="Window_Loaded" SizeToContent="WidthAndHeight" 
@@ -126,7 +127,7 @@
         <Image RenderOptions.BitmapScalingMode="HighQuality"  Opacity=".02" Margin="0" Width="128" Height="128" Grid.ColumnSpan="10" Grid.RowSpan="10" HorizontalAlignment="Right" 
                VerticalAlignment="Bottom" Source="/TCC;component/resources/images/tera-logo-flat.png" ClipToBounds="False"/>
 
-        <TabControl TabStripPlacement="Left" Grid.Row="1" Grid.ColumnSpan="2" Background="#1aaa" BorderThickness="0,0,0,0" Height="598"  >
+        <TabControl TabStripPlacement="Left" Grid.Row="1" Grid.ColumnSpan="2" Background="#1aaa" BorderThickness="0,0,0,0" Height="640"  >
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Template">
@@ -454,7 +455,12 @@
                             </Grid>
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
-
+                    <Button Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" tcc:ButtonExtensions.CornerRadius="3" Margin="3"
+                            Click="ButtonBase_OnClick">
+                        <Border Background="{StaticResource MainColor}" HorizontalAlignment="Stretch" Padding="5" CornerRadius="3">
+                            <TextBlock HorizontalAlignment="Center">Open buff settings</TextBlock>
+                        </Border>
+                    </Button>
                 </StackPanel>
             </TabItem>
             <TabItem Margin="-1,0,0,0">

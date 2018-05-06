@@ -83,5 +83,10 @@ namespace TCC.Windows
         {
             Process.Start("https://paypal.me/foglio1024");
         }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            WindowManager.GroupAbnormalConfigWindow.ShowWindow();
+        }
     }
 }

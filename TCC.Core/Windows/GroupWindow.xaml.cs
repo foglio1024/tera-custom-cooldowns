@@ -35,17 +35,24 @@ namespace TCC.Windows
 
         private void GroupWindow_OnMouseEnter(object sender, MouseEventArgs e)
         {
+            GroupButtonsSingle.BeginAnimation(OpacityProperty, new DoubleAnimation(1, TimeSpan.FromMilliseconds(300)));
             GroupButtons.BeginAnimation(OpacityProperty, new DoubleAnimation(1, TimeSpan.FromMilliseconds(300)));
         }
 
         private void GroupWindow_OnMouseLeave(object sender, MouseEventArgs e)
         {
+            GroupButtonsSingle.BeginAnimation(OpacityProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(300)){BeginTime = TimeSpan.FromMilliseconds(500)});
             GroupButtons.BeginAnimation(OpacityProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(300)){BeginTime = TimeSpan.FromMilliseconds(500)});
         }
 
         private void LeaveParty(object sender, RoutedEventArgs e)
         {
             Proxy.LeaveParty();
+        }
+
+        private void ShowAbnormalSettings(object sender, RoutedEventArgs e)
+        {
+            WindowManager.GroupAbnormalConfigWindow.ShowWindow();
         }
     }
 }

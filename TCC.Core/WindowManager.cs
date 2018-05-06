@@ -47,6 +47,7 @@ namespace TCC
         //public static ChatWindow ChatWindow;
         public static SettingsWindow Settings;
         public static SkillConfigWindow SkillConfigWindow;
+        public static GroupAbnormalConfigWindow GroupAbnormalConfigWindow;
         public static InfoWindow InfoWindow;
         public static FloatingButtonWindow FloatingButton;
         public static FlightDurationWindow FlightDurationWindow;
@@ -232,6 +233,7 @@ namespace TCC
             FlightDurationWindow = new FlightDurationWindow();
             if (SettingsManager.LfgEnabled) LfgListWindow = new LfgListWindow();
             SkillConfigWindow = new SkillConfigWindow();
+            GroupAbnormalConfigWindow = new GroupAbnormalConfigWindow();
             GroupWindow.Show();
             //ChatWindow.Show();      
             CooldownWindow.Show();

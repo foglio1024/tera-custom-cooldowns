@@ -43,6 +43,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -76,14 +77,28 @@
                             <TextBlock Text="{Binding Instance.ReadyCount, Mode=OneWay}" FontWeight="DemiBold"
                                        Margin="6,0,0,0" Foreground="#afff" />
                         </StackPanel>
-                        <Button Style="{StaticResource ButtonContentOpacityStyle}" x:Name="LeaveButton"
-                                ToolTip="Leave party" Click="LeaveParty" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
-                            <Path Data="{StaticResource SvgRemoveCircle}" Fill="#fff" Margin="3 6" Width="15" Visibility="{Binding ShowLeaveButton}" />
-                        </Button>
 
                     </StackPanel>
                 </Border>
                 <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Column="1"
+                        Background="{StaticResource FadedDefaultBackgroundColor}" Width="46"
+                        BorderBrush="{StaticResource FadedBorderColor}" Margin="4 0 0 0" CornerRadius="3"
+                        Visibility="{Binding Formed, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"
+                        x:Name="GroupButtonsSingle" VerticalAlignment="Top">
+                    <StackPanel >
+                        <Button Style="{StaticResource ButtonContentOpacityStyle}" x:Name="LeaveButton"
+                                ToolTip="Leave party" Click="LeaveParty" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
+                            <Path Data="{StaticResource SvgRemoveCircle}" Fill="#fff" Margin="3 3" Width="15" Visibility="{Binding ShowLeaveButton}" />
+                        </Button>
+
+                        <Button Style="{StaticResource ButtonContentOpacityStyle}" x:Name="SettingsButton"
+                                ToolTip="Configure buffs" Click="ShowAbnormalSettings" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
+                            <Path Data="{StaticResource SvgSettings}" Fill="#fff" Margin="3 3" Width="15"  />
+                        </Button>
+
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Styles.DefaultBorder}" Grid.Column="2"
                         Background="{StaticResource FadedDefaultBackgroundColor}" Width="46"
                         BorderBrush="{StaticResource FadedBorderColor}" Margin="4 0 0 0" CornerRadius="3"
                         Visibility="{Binding ShowLeaderButtons, Converter={StaticResource Converters.BoolToVisibleCollapsed}}"
