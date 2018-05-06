@@ -79,7 +79,7 @@ namespace TCC
             CooldownWindowViewModel.Instance.ShortSkills.Clear();
             CooldownWindowViewModel.Instance.LongSkills.Clear();
 
-            SessionManager.CurrentPlayer.Class = Class.None;
+            //SessionManager.CurrentPlayer.Class = Class.None;
             SessionManager.CurrentPlayer.EntityId = 0;
             SessionManager.Logged = false;
         }
