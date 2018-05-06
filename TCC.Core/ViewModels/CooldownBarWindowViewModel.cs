@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Threading;
 using System.Xml.Linq;
 using TCC.Data;
@@ -82,25 +85,30 @@ namespace TCC.ViewModels
         }
         public SynchronizedObservableCollection<Skill> HiddenSkills { get; }
 
-        public SynchronizedObservableCollection<Skill> ChoiceList
-        {
-            get
-            {
-                var list = new SynchronizedObservableCollection<Skill>();
-                var c = SessionManager.CurrentPlayer.Class;
-                var skillsForClass = SessionManager.SkillsDatabase.Skills[c];
-                foreach (var skill in skillsForClass.Values)
-                {
-                    if (MainSkills.Any(x => x.Skill.IconName == skill.IconName)) continue;
-                    if (SecondarySkills.Any(x => x.Skill.IconName == skill.IconName)) continue;
-                    if (list.All(x => x.IconName != skill.IconName))
-                    {
-                        list.Add(skill);
-                    }
-                }
-                return list;
-            }
-        }
+        public ICollectionViewLiveShaping SkillsView { get; set; }
+        public ICollectionViewLiveShaping ItemsView { get; set; }
+        public ICollectionViewLiveShaping AbnormalitiesView { get; set; }
+        public SynchronizedObservableCollection<Skill> SkillChoiceList { get; set; }
+        public IEnumerable<Item> Items => SessionManager.ItemsDatabase.ItemSkills;
+        public IEnumerable<Abnormality> Passivities => SessionManager.AbnormalityDatabase.Abnormalities.Values.ToList();
+        //{
+        //    get
+        //    {
+        //        var list = new SynchronizedObservableCollection<Skill>();
+        //        var c = SessionManager.CurrentPlayer.Class;
+        //        var skillsForClass = SessionManager.SkillsDatabase.Skills[c];
+        //        foreach (var skill in skillsForClass.Values)
+        //        {
+        //            if (MainSkills.Any(x => x.Skill.IconName == skill.IconName)) continue;
+        //            if (SecondarySkills.Any(x => x.Skill.IconName == skill.IconName)) continue;
+        //            if (list.All(x => x.IconName != skill.IconName))
+        //            {
+        //                list.Add(skill);
+        //            }
+        //        }
+        //        return list;
+        //    }
+        //}
 
         private static ClassManager _classManager => ClassWindowViewModel.Instance.CurrentManager;
 
@@ -258,11 +266,13 @@ namespace TCC.ViewModels
             var root = new XElement("Skills");
             MainSkills.ToList().ForEach(mainSkill =>
             {
-                root.Add(new XElement("Skill", new XAttribute("id", mainSkill.Skill.Id), new XAttribute("row", 1)));
+                var tag = mainSkill.CooldownType.ToString();
+                root.Add(new XElement(tag, new XAttribute("id", mainSkill.Skill.Id), new XAttribute("row", 1)));
             });
             SecondarySkills.ToList().ForEach(secSkill =>
             {
-                root.Add(new XElement("Skill", new XAttribute("id", secSkill.Skill.Id), new XAttribute("row", 2)));
+                var tag = secSkill.CooldownType.ToString();
+                root.Add(new XElement(tag, new XAttribute("id", secSkill.Skill.Id), new XAttribute("row", 2)));
             });
             HiddenSkills.ToList().ForEach(sk =>
             {
@@ -467,6 +477,19 @@ namespace TCC.ViewModels
             {
                 HiddenSkills.Add(sk.Skill);
             }
+
+            _dispatcher.Invoke(() =>
+            {
+                SkillChoiceList.Clear();
+                foreach (var skill in SkillsDatabase.SkillsForClass)
+                {
+                    SkillChoiceList.Add(skill);
+                }
+                SkillsView = Utils.InitLiveView(null, SkillChoiceList, new string[] { }, new string[] { });
+            });
+            NPC(nameof(SkillsView));
+            NPC(nameof(MainSkills));
+            NPC(nameof(SecondarySkills));
         }
 
         public CooldownBarMode Mode => SettingsManager.CooldownBarMode;
@@ -482,7 +505,7 @@ namespace TCC.ViewModels
         //}
         public CooldownWindowViewModel()
         {
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            _dispatcher = App.BaseDispatcher;
             _scale = SettingsManager.CooldownWindowSettings.Scale;
             ShortSkills = new SynchronizedObservableCollection<SkillCooldown>(_dispatcher);
             LongSkills = new SynchronizedObservableCollection<SkillCooldown>(_dispatcher);
@@ -491,7 +514,8 @@ namespace TCC.ViewModels
             OtherSkills = new SynchronizedObservableCollection<SkillCooldown>(_dispatcher);
             HiddenSkills = new SynchronizedObservableCollection<Skill>(_dispatcher);
             ItemSkills = new SynchronizedObservableCollection<SkillCooldown>(_dispatcher);
-            //ChoiceList = new SynchronizedObservableCollection<FixedSkillCooldown>(_dispatcher);
+            SkillChoiceList = new SynchronizedObservableCollection<Skill>(_dispatcher);
+
             WindowManager.TccVisibilityChanged += (s, ev) =>
             {
                 NPC("IsTeraOnTop");
@@ -500,13 +524,24 @@ namespace TCC.ViewModels
                     WindowManager.CooldownWindow.RefreshTopmost();
                 }
             };
-
-
+            SkillsView = Utils.InitLiveView(null, SkillChoiceList, new string[] { }, new string[] { });
+            ItemsView = Utils.InitLiveView(null, Items.ToList(), new string[] { }, new string[] { });
+            AbnormalitiesView = Utils.InitLiveView(null, Passivities, new string[] { }, new string[] { });
         }
 
         public void NotifyItemsDisplay()
         {
             NPC(nameof(ShowItems));
+        }
+
+        public void RefreshAll(SynchronizedObservableCollection<FixedSkillCooldown> skillList)
+        {
+            return;
+            foreach (var skill in skillList)
+            {
+                if(skill.Seconds > 0) skill.Start(skill.Seconds);
+            }
+
         }
     }
 }
