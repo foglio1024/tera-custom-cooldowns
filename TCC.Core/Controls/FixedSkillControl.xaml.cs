@@ -37,7 +37,7 @@ namespace TCC.Controls
             }
         }
 
-        public string SecondsText => _context == null ? "" : Utils.TimeFormatter(Convert.ToUInt32(_context.Seconds));
+        public string SecondsText => _context == null ? "" : Utils.TimeFormatter(Convert.ToUInt32(_context.Seconds > UInt32.MaxValue ? 0 : _context.Seconds));
 
         public FixedSkillControl()
         {
