@@ -802,6 +802,9 @@
     <Compile Include="Windows\FloatingButtonWindow.xaml.cs">
       <DependentUpon>FloatingButtonWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\GroupAbnormalConfigWindow.xaml.cs">
+      <DependentUpon>GroupAbnormalConfigWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\GroupWindow.xaml.cs">
       <DependentUpon>GroupWindow.xaml</DependentUpon>
     </Compile>
@@ -1160,6 +1163,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\FloatingButtonWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\GroupAbnormalConfigWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
