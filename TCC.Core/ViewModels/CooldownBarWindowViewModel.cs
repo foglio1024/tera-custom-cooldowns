@@ -267,16 +267,16 @@ namespace TCC.ViewModels
             MainSkills.ToList().ForEach(mainSkill =>
             {
                 var tag = mainSkill.CooldownType.ToString();
-                root.Add(new XElement(tag, new XAttribute("id", mainSkill.Skill.Id), new XAttribute("row", 1)));
+                root.Add(new XElement(tag, new XAttribute("id", mainSkill.Skill.Id), new XAttribute("row", 1), new XAttribute("name", mainSkill.Skill.ShortName)));
             });
             SecondarySkills.ToList().ForEach(secSkill =>
             {
                 var tag = secSkill.CooldownType.ToString();
-                root.Add(new XElement(tag, new XAttribute("id", secSkill.Skill.Id), new XAttribute("row", 2)));
+                root.Add(new XElement(tag, new XAttribute("id", secSkill.Skill.Id), new XAttribute("row", 2), new XAttribute("name", secSkill.Skill.ShortName)));
             });
             HiddenSkills.ToList().ForEach(sk =>
             {
-                root.Add(new XElement("Skill", new XAttribute("id", sk.Id), new XAttribute("row", 3)));
+                root.Add(new XElement("Skill", new XAttribute("id", sk.Id), new XAttribute("row", 3), new XAttribute("name", sk.ShortName)));
             });
             root.Save(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources/config/skills", $"{SessionManager.CurrentPlayer.Class.ToString().ToLowerInvariant()}-skills.xml"));
         }
@@ -534,14 +534,13 @@ namespace TCC.ViewModels
             NPC(nameof(ShowItems));
         }
 
-        public void RefreshAll(SynchronizedObservableCollection<FixedSkillCooldown> skillList)
+        public event Action RefreshItemSourcesEvent;
+        public void RefreshItemSources()
         {
-            return;
-            foreach (var skill in skillList)
-            {
-                if(skill.Seconds > 0) skill.Start(skill.Seconds);
-            }
-
+            RefreshItemSourcesEvent?.Invoke();
+            NPC(nameof(MainSkills));
+            NPC(nameof(SecondarySkills));
         }
+
     }
 }
