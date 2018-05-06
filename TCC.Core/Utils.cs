@@ -87,6 +87,7 @@ namespace TCC
             var result = input.Substring(0, pos) + replacement + input.Substring(pos + search.Length);
             return result;
         }
+
         public static string ReplaceCaseInsensitive(string input, string search, string replacement)
         {
             var result = Regex.Replace(
@@ -102,6 +103,7 @@ namespace TCC
         {
             return zoneId == 950 && templateId >= 1100 && templateId <= 1103 ? true : false;
         }
+
         public static bool IsGuildTower(uint zoneId, uint templateId)
         {
             return zoneId == 152 && templateId == 5001 ? true : false;
@@ -115,6 +117,7 @@ namespace TCC
             {
                 result.Add(new ChatChannelOnOff(c));
             }
+
             return result;
         }
 
@@ -122,6 +125,7 @@ namespace TCC
         {
             return Enum.GetValues(typeof(T)).Cast<T>().ToList();
         }
+
         public static T FindVisualParent<T>(DependencyObject sender) where T : DependencyObject
         {
             if (sender == null)
@@ -138,6 +142,7 @@ namespace TCC
                 return (FindVisualParent<T>(parent));
             }
         }
+
         public static T GetChild<T>(DependencyObject obj) where T : DependencyObject
         {
             DependencyObject child = null;
@@ -157,22 +162,25 @@ namespace TCC
                     }
                 }
             }
+
             return child as T;
         }
+
         public static Color ParseColor(string col)
         {
             return Color.FromRgb(
-                                Convert.ToByte(col.Substring(0, 2), 16),
-                                Convert.ToByte(col.Substring(2, 2), 16),
-                                Convert.ToByte(col.Substring(4, 2), 16));
+                Convert.ToByte(col.Substring(0, 2), 16),
+                Convert.ToByte(col.Substring(2, 2), 16),
+                Convert.ToByte(col.Substring(4, 2), 16));
         }
+
         public static double FactorCalc(double val, double max)
         {
-            return max > 0 ?
-                    val / max > 1 ?
-                        1 : val / max
-                    : 1;
+            return max > 0
+                ? val / max > 1 ? 1 : val / max
+                : 1;
         }
+
         public static DateTime FromUnixTime(long unixTime)
         {
             var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
@@ -187,9 +195,10 @@ namespace TCC
             return seconds / (60 * 60 * 24) + "d";
         }
 
-        public static ICollectionViewLiveShaping InitLiveView<T>(Predicate<object> predicate, IEnumerable<T> source, string[] filters, string[] sortFilters)
+        public static ICollectionViewLiveShaping InitLiveView<T>(Predicate<object> predicate, IEnumerable<T> source,
+            string[] filters, string[] sortFilters)
         {
-            var cv = new CollectionViewSource { Source = source }.View;
+            var cv = new CollectionViewSource {Source = source}.View;
             cv.Filter = predicate;
             var liveView = cv as ICollectionViewLiveShaping;
             if (!liveView.CanChangeLiveFiltering) return null;
@@ -199,19 +208,23 @@ namespace TCC
                 {
                     liveView.LiveFilteringProperties.Add(filter);
                 }
+
                 liveView.IsLiveFiltering = true;
             }
+
             if (sortFilters.Count() > 0)
             {
                 foreach (var filter in sortFilters)
                 {
-                    (liveView as ICollectionView).SortDescriptions.Add(new SortDescription(filter, ListSortDirection.Ascending));
+                    (liveView as ICollectionView).SortDescriptions.Add(new SortDescription(filter,
+                        ListSortDirection.Ascending));
                 }
+
                 liveView.IsLiveSorting = true;
             }
+
             return liveView;
         }
-
     }
 
     public static class EventUtils
