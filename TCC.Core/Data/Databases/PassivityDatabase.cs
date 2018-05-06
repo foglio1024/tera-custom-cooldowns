@@ -18,7 +18,7 @@ namespace TCC.Data.Databases
                 var ab = SessionManager.AbnormalityDatabase.Abnormalities[id];
                 result = true;
                 sk = new Skill(id, Class.Common, ab.Name, "");
-                sk.SetSkillIcon(ab.IconName);
+                sk.IconName = ab.IconName;
             }
             return result;
 
