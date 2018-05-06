@@ -141,6 +141,7 @@ namespace TCC.Controls
         private void HideButton_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             CooldownWindowViewModel.Instance.AddHiddenSkill(_context);
+            CloseTimer_Tick(null,null);
         }
 
         private void Rectangle_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
