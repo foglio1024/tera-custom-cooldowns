@@ -213,7 +213,6 @@ namespace TCC.Parsing
         }
         public static void HandleLogin(S_LOGIN p)
         {
-            if(SettingsManager.UseHotkeys) WindowManager.FlightDurationWindow.Dispatcher.Invoke(() => KeyboardHook.Instance.RegisterKeyboardHook());
             if (!SettingsManager.StatSent) App.SendUsageStat();
             SettingsManager.LastRegion = Language;
             TimeManager.Instance.SetServerTimeZone(Language);

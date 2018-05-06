@@ -171,7 +171,9 @@ namespace TCC
             FocusManager.FocusTimer = new Timer(1000);
             FocusManager.FocusTimer.Elapsed += FocusManager.CheckForegroundWindow;
             Settings = new SettingsWindow();
-            //ClickThruChanged += (s, ev) => UpdateClickThru();
+
+            if (SettingsManager.UseHotkeys) KeyboardHook.Instance.RegisterKeyboardHook();
+
 
         }
         public static void NotifyDimChanged()

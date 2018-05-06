@@ -466,17 +466,12 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Image Source="/TCC;component/resources/images/chat.png" Margin="5,2" RenderOptions.BitmapScalingMode="Fant" Opacity=".6"/>
-                        <TextBlock Text="Chat window settings" Style="{StaticResource Styles.DefaultText}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Text="Chat windows settings" Style="{StaticResource Styles.DefaultText}" Opacity=".3" Margin="0,0" VerticalAlignment="Center" Grid.Column="1"/>
                     </Grid>
 
                 </TabItem.Header>
                 <!-- Chat window settings -->
                 <StackPanel Style="{StaticResource SettingsGrid}">
-                    <controls:BoolSetting SettingName="Enabled" IsOn="{Binding ChatWindowSettings.Enabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" ToolTip="{StaticResource EnabledSettingTooltip}"/>
-                    <controls:BoolSetting SettingName="Visibility" IsOn="{Binding ChatWindowSettings.Visible, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource VisibilitySettingTooltip}"/>
-                    <controls:BoolSetting SettingName="Show always" IsOn="{Binding ChatWindowSettings.ShowAlways, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource ShowAlwaysSettingTooltip}"/>
-                    <!--<controls:BoolSetting SettingName="Transparency" Grid.Row="1" IsOn="{Binding ChatWindowSettings.AllowTransparency, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" ToolTip="{StaticResource TransparencySettingTooltip}"/>-->
-                    <Separator />
                     <controls:ValueSetting SettingName="Max messages" Min="0" Max="10000" Value="{Binding MaxMessages, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/chat.png" >
                         <controls:ValueSetting.ToolTip>
                             <Grid Margin="5">
@@ -533,16 +528,6 @@
                                 <Border Style="{StaticResource Styles.DefaultBorder}"/>
                                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
                                     <Run Text="Turns messages' channel label on/off."/>
-                                </TextBlock>
-                            </Grid>
-                        </controls:BoolSetting.ToolTip>
-                    </controls:BoolSetting>
-                    <controls:BoolSetting SettingName="Enable LFG bar" IsOn="{Binding LfgOn, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
-                        <controls:BoolSetting.ToolTip>
-                            <Grid Margin="5">
-                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
-                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
-                                    <Run Text="Turns LFG bar on/off."/>
                                 </TextBlock>
                             </Grid>
                         </controls:BoolSetting.ToolTip>
@@ -614,7 +599,17 @@
                             VerticalContentAlignment="Center" HorizontalContentAlignment="Center" >
                         <TextBlock Margin="0,5" Foreground="{StaticResource TwitchColor}" Text="Connect"></TextBlock>
                     </Button>
-
+                    <Separator></Separator>
+                    <controls:BoolSetting SettingName="Use hotkeys" IsOn="{Binding UseHotkeys, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png">
+                        <controls:BoolSetting.ToolTip>
+                            <Grid Margin="5">
+                                <Border Style="{StaticResource Styles.DefaultBorder}"/>
+                                <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
+                                    <Run Text="Enables/disables keyboard hook."/>
+                                </TextBlock>
+                            </Grid>
+                        </controls:BoolSetting.ToolTip>
+                    </controls:BoolSetting>
                 </StackPanel>
 
             </TabItem>

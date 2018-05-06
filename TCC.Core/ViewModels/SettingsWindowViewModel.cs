@@ -14,7 +14,6 @@ namespace TCC.ViewModels
         public WindowSettings BuffWindowSettings => SettingsManager.BuffWindowSettings;
         public WindowSettings CharacterWindowSettings => SettingsManager.CharacterWindowSettings;
         public WindowSettings BossWindowSettings => SettingsManager.BossWindowSettings;
-        public SynchronizedObservableCollection<ChatWindowSettings> ChatWindowSettings => SettingsManager.ChatWindowsSettings;
 
         //enable settings
         //public bool IsCooldownWindowEnabled
@@ -1148,6 +1147,18 @@ namespace TCC.ViewModels
                 SettingsManager.ShowItemsCooldown = value;
                 CooldownWindowViewModel.Instance.NotifyItemsDisplay();
                 NPC(nameof(ShowItemsCooldown));
+            }
+        }
+        public bool UseHotkeys
+        {
+            get => SettingsManager.UseHotkeys;
+            set
+            {
+                if(SettingsManager.UseHotkeys == value) return;
+                SettingsManager.UseHotkeys = value;
+                if(value) KeyboardHook.Instance.RegisterKeyboardHook();
+                else KeyboardHook.Instance.UnRegisterKeyboardHook();
+                NPC(nameof(UseHotkeys));
             }
         }
         public bool ShowGroupWindowDetails

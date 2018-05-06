@@ -36,11 +36,10 @@ namespace TCC
             if (value && !_isRegistered)
             {
                 Register();
-                Console.WriteLine("Setting hotkeys");
                 return true;
 
             }
-            if (!value && _isRegistered) { ClearHotkeys(); Console.WriteLine("Clearing hotkeys"); return true; }
+            if (!value && _isRegistered) { ClearHotkeys(); return true; }
             return false;
         }
 
@@ -90,7 +89,19 @@ namespace TCC
                 _isInitialized = true;
             });
         }
-
+        public void UnRegisterKeyboardHook()
+        {
+            if (!_isInitialized) return;
+            WindowManager.FloatingButton.Dispatcher.Invoke(() =>
+            {
+                // register the event that is fired after the key press.
+                Instance.KeyPressed -= hook_KeyPressed;
+                if (_isRegistered) { ClearHotkeys(); }
+                SessionManager.ChatModeChanged -= CheckHotkeys;
+                FocusManager.ForegroundChanged -= CheckHotkeys;
+                _isInitialized = false;
+            });
+        }
         private void CheckHotkeys()
         {
             WindowManager.FloatingButton.Dispatcher.Invoke(() =>
