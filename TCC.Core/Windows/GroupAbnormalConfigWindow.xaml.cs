@@ -2,17 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using TCC.Data;
 using TCC.ViewModels;
@@ -24,6 +18,8 @@ namespace TCC.Windows
     /// </summary>
     public partial class GroupAbnormalConfigWindow : Window
     {
+        private Class _currentFilter;
+
         public GroupConfigVM DC => Dispatcher.Invoke(() => DataContext as GroupConfigVM);
 
         public GroupAbnormalConfigWindow()
@@ -32,28 +28,7 @@ namespace TCC.Windows
             Dispatcher.Invoke(() => DataContext = new GroupConfigVM());
         }
 
-        private void PassivitySearch_OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-            var view = DC.AbnormalitiesView;
-            view.Filter = o =>
-                ((GroupAbnormalityVM)o).Abnormality.Name.IndexOf(((TextBox)sender).Text, StringComparison.InvariantCultureIgnoreCase) !=
-                -1;
-            view.Refresh();
-        }
-
-        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
-        private void Close(object sender, RoutedEventArgs e)
-        {
-            var an = new DoubleAnimation(0, TimeSpan.FromMilliseconds(200));
-            an.Completed += (s, ev) => Hide();
-            BeginAnimation(OpacityProperty, an);
-            SettingsManager.SaveSettings();
-        }
-
-        internal void ShowWindow()
+        public void ShowWindow()
         {
             Dispatcher.Invoke(() =>
             {
@@ -65,6 +40,43 @@ namespace TCC.Windows
                 BeginAnimation(OpacityProperty, animation);
             });
         }
+
+        private void PassivitySearch_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            var txt = ((TextBox)sender).Text;
+            var view = DC.AbnormalitiesView;
+            view.Filter = o => ((GroupAbnormalityVM)o).Abnormality.Name.IndexOf(txt, StringComparison.InvariantCultureIgnoreCase) != -1;
+            view.Refresh();
+        }
+
+        private void Drag(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+        private void Close(object sender, RoutedEventArgs e)
+        {
+            var an = new DoubleAnimation(0, TimeSpan.FromMilliseconds(200));
+            an.Completed += (s, ev) => Hide();
+            BeginAnimation(OpacityProperty, an);
+            SettingsManager.SaveSettings();
+        }
+
+        private void FilterByClass(object sender, RoutedEventArgs e)
+        {
+            var c = (Class)(sender as FrameworkElement).DataContext;
+            var view = DC.AbnormalitiesView;
+            if (SearchBox.Text.Length > 0)
+            {
+                SearchBox.Clear();
+                view.Filter = null;
+            }
+            if (view.Filter == null || c != _currentFilter)
+                view.Filter = o => ((GroupAbnormalityVM)o).Classes.Any(x => x.Class == c && x.Selected);
+            else view.Filter = null;
+            view.Refresh();
+            _currentFilter = c;
+        }
     }
 }
 
@@ -75,6 +87,15 @@ namespace TCC.ViewModels
         public SynchronizedObservableCollection<GroupAbnormalityVM> GroupAbnormals;
         public IEnumerable<Abnormality> Abnormalities => SessionManager.AbnormalityDatabase.Abnormalities.Values.ToList();
         public ICollectionView AbnormalitiesView { get; set; }
+        public List<Class> Classes
+        {
+            get
+            {
+                var l = Utils.ListFromEnum<Class>();
+                l.Remove(Class.None);
+                return l;
+            }
+        }
         public GroupConfigVM()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
@@ -130,7 +151,7 @@ namespace TCC.ViewModels
             {
                 if (_selected == value) return;
                 _selected = value;
-                if(_selected) Console.WriteLine($"[{Class}] {AbnormalityId} set to True");
+                if (_selected) Console.WriteLine($"[{Class}] {AbnormalityId} set to True");
                 NPC();
 
             }

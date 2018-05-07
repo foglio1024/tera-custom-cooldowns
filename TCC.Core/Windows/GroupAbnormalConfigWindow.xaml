@@ -6,9 +6,10 @@
         xmlns:local="clr-namespace:TCC.Windows"
         xmlns:dd="urn:gong-wpf-dragdrop"
         xmlns:viewModels="clr-namespace:TCC.ViewModels"
+        SizeToContent="Height"
         mc:Ignorable="d"
          Style="{StaticResource BaseWindowStyle}" DataContext="{Binding DC, RelativeSource={RelativeSource Self}}"
-        Title="TCC" Height="Auto" Width="800" d:DataContext="{d:DesignData GroupConfigVM}">
+        Title="TCC" Height="Auto" Width="950" d:DataContext="{d:DesignData GroupConfigVM}">
     <Window.Resources>
         <Style TargetType="ListBox">
             <Setter Property="ItemTemplate" Value="{StaticResource FixedSkillDataTemplate}"></Setter>
@@ -27,7 +28,7 @@
         </Grid.RowDefinitions>
         <Border Grid.RowSpan="2" Background="{StaticResource BackgroundDarkColor}" CornerRadius="2"></Border>
 
-        <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+        <Grid MouseLeftButtonDown="Drag">
             <Border Background="{StaticResource BackgroundDarkColor}" CornerRadius="2 2 0 0"></Border>
             <Button HorizontalAlignment="Right" Margin="0" Style="{StaticResource ButtonContentOpacityStyle}"
                     VerticalAlignment="Stretch"
@@ -60,94 +61,49 @@
                        Opacity=".5" FontWeight="Thin" FontSize="16">
                 Abnormalities
                 </TextBlock>
-                <UniformGrid Rows="1" Grid.Column="1" Width="450">
-                    <UniformGrid.Resources>
-                        <Style TargetType="Rectangle">
-                            <Setter Property="Width" Value="22"></Setter>
-                            <Setter Property="Height" Value="22"></Setter>
-                            <Setter Property="Fill" Value="#2fff"></Setter>
-                            <Setter Property="RenderOptions.BitmapScalingMode" Value="Fant"></Setter>
-                            <Setter Property="Stretch" Value="Uniform"></Setter>
-                            <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-                        </Style>
-                    </UniformGrid.Resources>
-                    <Rectangle>
-                        <Rectangle.OpacityMask>
-                            <ImageBrush ImageSource="/TCC;component/resources/images/Icon_Classes/warrior.png" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <Rectangle>
-                        <Rectangle.OpacityMask>
-                            <ImageBrush ImageSource="/TCC;component/resources/images/Icon_Classes/lancer.png" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <Rectangle>
-                        <Rectangle.OpacityMask>
-                            <ImageBrush ImageSource="/TCC;component/resources/images/Icon_Classes/slayer.png" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <Rectangle>
-                        <Rectangle.OpacityMask>
-                            <ImageBrush ImageSource="/TCC;component/resources/images/Icon_Classes/berserker.png" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <Rectangle>
-                        <Rectangle.OpacityMask>
-                            <ImageBrush ImageSource="/TCC;component/resources/images/Icon_Classes/sorcerer.png"></ImageBrush>
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <Rectangle>
-                        <Rectangle.OpacityMask>
-                            <ImageBrush ImageSource="/TCC;component/resources/images/Icon_Classes/archer.png" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <Rectangle>
-                        <Rectangle.OpacityMask>
-                            <ImageBrush ImageSource="/TCC;component/resources/images/Icon_Classes/priest.png" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <Rectangle>
-                        <Rectangle.OpacityMask>
-                            <ImageBrush ImageSource="/TCC;component/resources/images/Icon_Classes/mystic.png" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <Rectangle>
-                        <Rectangle.OpacityMask>
-                            <ImageBrush ImageSource="/TCC;component/resources/images/Icon_Classes/reaper.png" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <Rectangle>
-                        <Rectangle.OpacityMask>
-                            <ImageBrush ImageSource="/TCC;component/resources/images/Icon_Classes/gunner.png" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <Rectangle>
-                        <Rectangle.OpacityMask>
-                            <ImageBrush ImageSource="/TCC;component/resources/images/Icon_Classes/brawler.png" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <Rectangle>
-                        <Rectangle.OpacityMask>
-                            <ImageBrush ImageSource="/TCC;component/resources/images/Icon_Classes/ninja.png" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <Rectangle>
-                        <Rectangle.OpacityMask>
-                            <ImageBrush ImageSource="/TCC;component/resources/images/Icon_Classes/glaiver.png" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <Path Width="22" Height="22" Data="{StaticResource SvgCheckAll}" Fill="#2fff"
-                          ToolTip="All classes"></Path>
+                <ItemsControl Grid.Column="1" Width="451" ItemsSource="{Binding Classes}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Rows="1"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <DataTemplate.Resources>
+                                <Style TargetType="Rectangle">
+                                    <Setter Property="Fill" Value="#9fff"></Setter>
+                                    <Setter Property="RenderOptions.BitmapScalingMode" Value="Fant"></Setter>
+                                    <Setter Property="Stretch" Value="Fill"></Setter>
+                                    <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
+                                    <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+                                    <Setter Property="Height" Value="24"></Setter>
+                                    <Setter Property="Width" Value="24"></Setter>
+                                </Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource ButtonContentOpacityStyle}">
+                                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                                    <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                                    <Setter Property="Height" Value="24"></Setter>
+                                    <Setter Property="Width" Value="24"></Setter>
+                                </Style>
+                            </DataTemplate.Resources>
+                            <Button Click="FilterByClass">
+                                <Rectangle>
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush ImageSource="{Binding Converter={StaticResource Converters.ClassToImage}}" />
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
 
-                </UniformGrid>
+                </ItemsControl>
             </Grid>
 
             <Grid Grid.Row="2" Margin="0 0 0 5">
                 <Path Data="{StaticResource SvgSearch}" Margin="10 3 10 3" Height="15" VerticalAlignment="Center"
                       HorizontalAlignment="Right">
                 </Path>
-                <TextBox Margin="5 0" BorderThickness="0"
+                <TextBox Margin="5 0" BorderThickness="0" x:Name="SearchBox"
                          Foreground="#bfff" Background="#1fff" Padding="0 3"
                          CaretBrush="#8fff" TextChanged="PassivitySearch_OnTextChanged">
                 </TextBox>
@@ -155,6 +111,7 @@
             <ListBox Grid.Row="1" ItemsSource="{Binding AbnormalitiesView}" 
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                      Height="500" ItemTemplate="{StaticResource GroupAbnormalitySelectorDataTemplate}"
+                     AlternationCount="2" VirtualizingStackPanel.IsVirtualizing="True"  VirtualizingStackPanel.VirtualizationMode="Recycling"
                      >
                 <ListBox.Resources>
                     <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource NormalScrollBar}"></Style>
