@@ -9,6 +9,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (value == null) value = Class.Common;
             var c = (Class)value;
             //System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(50, 50);
             var className = "common";
