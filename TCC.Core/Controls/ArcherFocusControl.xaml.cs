@@ -50,19 +50,16 @@ namespace TCC.Controls
 
         private void ResetArc()
         {
-            ExternalArc.Stroke = new SolidColorBrush(Colors.White);
-            ExternalArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(100)) {EasingFunction = new QuadraticEase() });
+            InternalArc.BeginAnimation(Arc.StartAngleProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(100)) {EasingFunction = new QuadraticEase() });
         }
 
         private void AnimateArc()
         {
-            ExternalArc.Stroke = new SolidColorBrush(Color.FromRgb(0xff, 0xcc, 0x30));
-
             ExternalArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9,0, TimeSpan.FromMilliseconds(_context.Duration)));
         }
         private void AnimateArcPartial(int newStacks)
         {
-            ExternalArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(newStacks*36, TimeSpan.FromMilliseconds(100)) { EasingFunction = new QuadraticEase() });
+            InternalArc.BeginAnimation(Arc.StartAngleProperty, new DoubleAnimation(newStacks*36, TimeSpan.FromMilliseconds(100)) { EasingFunction = new QuadraticEase() });
         }
     }
 }

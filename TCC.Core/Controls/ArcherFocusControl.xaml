@@ -12,7 +12,7 @@
     <Grid Margin="0,0,0,0" Width="55" Height="55">
         <local:Arc StrokeThickness="5" Margin="-5"
                    EndAngle="0"
-                   Stroke="#eee" 
+                   Stroke="#fc3" 
                    Width="60" Height="60" x:Name="ExternalArc"/>
         <Ellipse Width="51" 
                  Height="{Binding Path=Width, RelativeSource={RelativeSource Self}}" 
@@ -23,6 +23,14 @@
                 <ImageBrush ImageSource="{Binding Icon, Converter={StaticResource Converters.IconNameToPath}}" />
             </Ellipse.Fill>
         </Ellipse>
+        <local:Arc StrokeThickness="25" Margin="0"
+                   EndAngle="359.9" Opacity="1" StartAngle="0"
+                   Stroke="#a000"  VerticalAlignment="Center" HorizontalAlignment="Center"
+                   Width="51" Height="51" x:Name="InternalArc" RenderTransformOrigin=".5 .5">
+            <local:Arc.RenderTransform>
+                <ScaleTransform ScaleX="-1"></ScaleTransform>
+            </local:Arc.RenderTransform>
+        </local:Arc>
 
         <Grid Width="22" Height="22"  
               HorizontalAlignment="Right" 

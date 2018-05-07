@@ -696,7 +696,6 @@ namespace TCC.Parsing
         {
             AbnormalityManager.BeginAbnormality(p.AbnormalityId, p.TargetId, p.Duration, p.Stacks);
             if (!SettingsManager.ClassWindowSettings.Enabled) return;
-
             switch (SessionManager.CurrentPlayer.Class)
             {
                 case Class.Elementalist:
@@ -754,6 +753,7 @@ namespace TCC.Parsing
                     break;
                 case Class.Archer:
                     Archer.CheckFocus(p);
+                    Archer.CheckFocusX(p);
                     Archer.CheckSniperEye(p);
                     break;
                 case Class.Lancer:
