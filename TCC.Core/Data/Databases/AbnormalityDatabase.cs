@@ -48,7 +48,7 @@ namespace TCC.Data.Databases
                     {
                         if (!Abnormalities[id].Infinity)
                         {
-                            Abnormalities[id].Infinity = true;
+                            Abnormalities[id].Infinity = false;
                         }
                     }
                     continue;
