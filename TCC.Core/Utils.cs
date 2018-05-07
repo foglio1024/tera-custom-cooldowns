@@ -75,6 +75,8 @@ namespace TCC
                     return "Ninja";
                 case Class.Glaiver:
                     return "Valkyrie";
+                case Class.Common:
+                    return "All classes";
                 default:
                     return "";
             }

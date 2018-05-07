@@ -72,10 +72,24 @@ namespace TCC.Windows
                 view.Filter = null;
             }
             if (view.Filter == null || c != _currentFilter)
+            {
                 view.Filter = o => ((GroupAbnormalityVM)o).Classes.Any(x => x.Class == c && x.Selected);
-            else view.Filter = null;
+                _currentFilter = c;
+            }
+            else
+            {
+                view.Filter = null;
+                _currentFilter = Class.None;
+            }
             view.Refresh();
-            _currentFilter = c;
+            foreach (var x in ClassesButtons.Items)
+            {
+                var cp = (ContentPresenter) ClassesButtons.ItemContainerGenerator.ContainerFromItem(x);
+                var btn = cp.ContentTemplate.FindName("Btn", cp) as Button;
+                var dc = ((Class) btn.DataContext);
+                if (dc == _currentFilter) btn.Opacity = 1;
+                else btn.Opacity = .3;
+            }
         }
     }
 }

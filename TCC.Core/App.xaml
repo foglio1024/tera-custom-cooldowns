@@ -21,12 +21,12 @@
             <DropShadowEffect x:Key="DropShadow" BlurRadius="4" ShadowDepth="2" Opacity=".4" />
             <DropShadowEffect x:Key="FadedDropShadow" BlurRadius="3" ShadowDepth="1" Opacity=".3" />
 
-            <SolidColorBrush x:Key="MainColor" Color="#ff6822"/>
+            <SolidColorBrush x:Key="MainColor" Color="#ff3822"/>
             <SolidColorBrush x:Key="GreenColor" Color="#00A561"/>
             <SolidColorBrush x:Key="LightGreenColor" Color="#55ff77"/>
             <SolidColorBrush x:Key="TwitchColor" Color="#975eff "/>
             <SolidColorBrush x:Key="CardDarkColor" Color="#424245"/>
-            <SolidColorBrush x:Key="BackgroundDarkColor" Color="#303033"/>
+            <SolidColorBrush x:Key="BackgroundDarkColor" Color="#2a2a30"/>
             <SolidColorBrush x:Key="WeeklyColor" Color="#2f9952"/>
             <SolidColorBrush x:Key="DailyColor" Color="#42b0f4"/>
             <SolidColorBrush x:Key="MarksColor" Color="#aad"/>
@@ -382,6 +382,7 @@
             <converters:StringToFillConverter x:Key="Converters.StringToFill"/>
             <converters:GuardianPointsStringConverter x:Key="GuardianPointsStringConverter"/>
             <converters:LfgVmToButtonLabelConverter x:Key="Converters.LfgVmToButtonLabel"/>
+            <converters:ClassToNameConverter x:Key="Converters.ClassToName" />
             <!--Scrollbar Thumbs-->
             <Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">
                 <Setter Property="Template">

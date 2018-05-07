@@ -26,10 +26,10 @@
             <RowDefinition  Height="Auto"/>
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Border Grid.RowSpan="2" Background="{StaticResource BackgroundDarkColor}" CornerRadius="2"></Border>
+        <Border Grid.RowSpan="2" Opacity=".95" CornerRadius="2" Style="{StaticResource Styles.DefaultBorder}"></Border>
 
         <Grid MouseLeftButtonDown="Drag">
-            <Border Background="{StaticResource BackgroundDarkColor}" CornerRadius="2 2 0 0"></Border>
+            <Border Background="#1aaa" CornerRadius="2 2 0 0"></Border>
             <Button HorizontalAlignment="Right" Margin="0" Style="{StaticResource ButtonContentOpacityStyle}"
                     VerticalAlignment="Stretch"
                     Click="Close" VerticalContentAlignment="Center">
@@ -61,7 +61,7 @@
                        Opacity=".5" FontWeight="Thin" FontSize="16">
                 Abnormalities
                 </TextBlock>
-                <ItemsControl Grid.Column="1" Width="451" ItemsSource="{Binding Classes}">
+                <ItemsControl Grid.Column="1" Width="451" ItemsSource="{Binding Classes}" x:Name="ClassesButtons">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Rows="1"/>
@@ -71,7 +71,7 @@
                         <DataTemplate>
                             <DataTemplate.Resources>
                                 <Style TargetType="Rectangle">
-                                    <Setter Property="Fill" Value="#9fff"></Setter>
+                                    <Setter Property="Fill" Value="#fff"></Setter>
                                     <Setter Property="RenderOptions.BitmapScalingMode" Value="Fant"></Setter>
                                     <Setter Property="Stretch" Value="Fill"></Setter>
                                     <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
@@ -86,12 +86,20 @@
                                     <Setter Property="Width" Value="24"></Setter>
                                 </Style>
                             </DataTemplate.Resources>
-                            <Button Click="FilterByClass">
+                            <Button Click="FilterByClass" Opacity=".3" x:Name="Btn">
                                 <Rectangle>
                                     <Rectangle.OpacityMask>
                                         <ImageBrush ImageSource="{Binding Converter={StaticResource Converters.ClassToImage}}" />
                                     </Rectangle.OpacityMask>
                                 </Rectangle>
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <TextBlock>
+                                            <Run>Display active buffs for</Run>
+                                            <Run Text="{Binding Converter={StaticResource Converters.ClassToName}, ConverterParameter=true, Mode=OneWay}"></Run>
+                                        </TextBlock>
+                                    </ToolTip>
+                                </Button.ToolTip>
                             </Button>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

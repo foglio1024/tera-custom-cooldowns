@@ -123,11 +123,11 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <Border Style="{StaticResource Styles.DefaultBorder}" Grid.ColumnSpan="10" Grid.RowSpan="10"  Opacity=".95"/>
-        <Image RenderOptions.BitmapScalingMode="HighQuality"  Opacity=".02" Margin="0" Width="128" Height="128" Grid.ColumnSpan="10" Grid.RowSpan="10" HorizontalAlignment="Right" 
+        <Border Style="{StaticResource Styles.DefaultBorder}"  Grid.ColumnSpan="10" Grid.RowSpan="10"  Opacity=".95" CornerRadius="2"/>
+        <Image RenderOptions.BitmapScalingMode="HighQuality"  Opacity=".02" Width="128" Height="128" Grid.ColumnSpan="10" Grid.RowSpan="10" HorizontalAlignment="Right" 
                VerticalAlignment="Bottom" Source="/TCC;component/resources/images/tera-logo-flat.png" ClipToBounds="False"/>
 
-        <TabControl TabStripPlacement="Left" Grid.Row="1" Grid.ColumnSpan="2" Background="#1aaa" BorderThickness="0,0,0,0" Height="640"  >
+        <TabControl TabStripPlacement="Left" Grid.Row="1" Margin="-1 0 0 0"  Grid.ColumnSpan="2" Background="#1fff" BorderThickness="0,0,0,0" Height="640"  >
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Template">
@@ -156,7 +156,7 @@
                                 </Grid>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsSelected" Value="True">
-                                        <Setter TargetName="Panel" Property="Background" Value="#1aaa" />
+                                        <Setter TargetName="Panel" Property="Background" Value="#1fff" />
                                     </Trigger>
                                     <Trigger Property="IsSelected" Value="False">
                                         <Setter TargetName="Panel" Property="Background" Value="Transparent"/>
@@ -737,23 +737,24 @@
 
             </TabItem>
         </TabControl>
-
-        <Grid Grid.ColumnSpan="2"  MouseLeftButtonDown="Window_MouseLeftButtonDown">
+    <!--Title bar-->
+        <Grid Grid.ColumnSpan="2"  MouseLeftButtonDown="Window_MouseLeftButtonDown" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Border Grid.ColumnSpan="2" Background="#1c1c22" BorderBrush="#303036" BorderThickness="1,1,1,0"  >
-                <Border.Effect>
+            <Border Grid.ColumnSpan="2" Background="#1aaa" BorderThickness="0"  CornerRadius="2 2 0 0">
+                <!--<Border.Effect>
                     <DropShadowEffect Direction="270" Opacity=".5" BlurRadius="4" ShadowDepth="3"/>
-                </Border.Effect>
+                </Border.Effect>-->
             </Border>
             <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Height="Auto" Margin="0,0">
-                <Image Source="/TCC;component/resources/tcc-logo.ico" Width="Auto" Height="32" Margin="0,0,0,0" RenderOptions.BitmapScalingMode="HighQuality"/>
-                <TextBlock Style="{StaticResource Styles.DefaultText}" Text="{Binding Path=Title, RelativeSource={RelativeSource AncestorType=local:SettingsWindow}}" VerticalAlignment="Center" Margin="12,0" FontSize="16"></TextBlock>
+                <Image Source="/TCC;component/resources/images/tera-logo-flat.png" Opacity=".4" Width="Auto" Height="32" Margin="2" RenderOptions.BitmapScalingMode="HighQuality"/>
+                <TextBlock Foreground="#999" Style="{StaticResource Styles.DefaultText}"  Text="{Binding Path=Title, RelativeSource={RelativeSource AncestorType=local:SettingsWindow}}"
+                           VerticalAlignment="Center"  FontSize="16"></TextBlock>
             </StackPanel>
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Style="{StaticResource ButtonMainStyle}" VerticalAlignment="Stretch" Click="OpenSettingsFolder" 
+                <Button Style="{StaticResource ButtonContentOpacityStyle}" VerticalAlignment="Stretch" Click="OpenSettingsFolder" 
                         HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" Width="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}">
                     <Path Data="{StaticResource SvgFolder}" Fill="White" Stretch="Uniform" Opacity=".9"></Path>
                     <Button.ToolTip>
@@ -763,7 +764,7 @@
                         </Grid>
                     </Button.ToolTip>
                 </Button>
-                <Button Style="{StaticResource ButtonMainStyle}" VerticalAlignment="Stretch"
+                <Button Style="{StaticResource ButtonContentOpacityStyle}" VerticalAlignment="Stretch"
                    HorizontalContentAlignment="Center" Opacity=".9" Width="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}"
                         Click="Image_MouseLeftButtonDown" VerticalContentAlignment="Center">
                     <Path Data="{StaticResource SvgClose}" Fill="White" Stretch="Uniform" Margin="5" Opacity=".9" ></Path>

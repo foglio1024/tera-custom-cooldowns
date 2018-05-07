@@ -252,6 +252,7 @@
     </Compile>
     <Compile Include="Converters\BoolToBrushConverter.cs" />
     <Compile Include="Converters\BoolToPinIconConverter.cs" />
+    <Compile Include="Converters\ClassToNameConverter.cs" />
     <Compile Include="Converters\DirectionToHorAlignConveter.cs" />
     <Compile Include="Converters\DungeonIdToStarsConverter.cs" />
     <Compile Include="Converters\DungeonIdToImageConverter.cs" />
