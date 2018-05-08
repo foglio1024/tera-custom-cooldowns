@@ -40,12 +40,13 @@ namespace TCC.Windows
             }
         }
         public WindowSettings WindowSettings => _settings;
-
+        public static event Action<TccWindow> RecreateWindow;
         protected void InitWindow(WindowSettings ws, bool canClickThru = true, bool canHide = true, bool ignoreSize = true)
         {
             Topmost = true;
             _settings = ws;
             _settings.NotifyWindowSafeClose += CloseWindowSafe;
+            _settings.NotifyEnableWindow += EnableWindow;
             _settings.PropertyChanged += _settings_PropertyChanged;
             Left = ws.X;
             Top = ws.Y;
@@ -83,6 +84,14 @@ namespace TCC.Windows
             MouseEnter += (s, ev) => ButtonsRef.BeginAnimation(OpacityProperty, _showButtons);
             MouseLeave += (s, ev) => _t.Start();
             ButtonsRef.MouseLeftButtonDown += Drag;
+
+            Show();
+
+        }
+
+        private void EnableWindow()
+        {
+            RecreateWindow?.Invoke(this);
         }
 
         private void _settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -128,8 +137,7 @@ namespace TCC.Windows
             Handle = new WindowInteropHelper(this).Handle;
             FocusManager.MakeUnfocusable(Handle);
             FocusManager.HideFromToolBar(Handle);
-
-            if (!_settings.Enabled) CloseWindowSafe();
+            if (!_settings.Enabled) Hide();
         }
 
         private void TccWindow_SizeChanged(object sender, SizeChangedEventArgs e)

@@ -174,9 +174,22 @@ namespace TCC
             Settings = new SettingsWindow();
 
             if (SettingsManager.UseHotkeys) KeyboardHook.Instance.RegisterKeyboardHook();
+            TccWindow.RecreateWindow += TccWindow_RecreateWindow;
 
 
         }
+
+        private static void TccWindow_RecreateWindow(TccWindow obj)
+        {
+            if (obj is CooldownWindow) CooldownWindow = new CooldownWindow();
+            if (obj is GroupWindow) GroupWindow = new GroupWindow();
+            if (obj is BossWindow) BossWindow = new BossWindow();
+            if (obj is BuffWindow) BuffWindow = new BuffWindow();
+            if (obj is CharacterWindow) CharacterWindow = new CharacterWindow();
+            if (obj is ClassWindow) ClassWindow = new ClassWindow();
+            if (obj is ChatWindow) ChatWindowManager.Instance.InitWindows();
+        }
+
         public static void NotifyDimChanged()
         {
             TccDimChanged?.Invoke(null, new PropertyChangedEventArgs(nameof(IsTccDim)));
@@ -222,7 +235,6 @@ namespace TCC
             //    while (waiting) { }
             //}
             GroupWindow = new GroupWindow();
-            //ChatWindow = new ChatWindow(); 
             ChatWindowManager.Instance.InitWindows();
             CooldownWindow = new CooldownWindow();
             BossWindow = new BossWindow();
@@ -234,15 +246,12 @@ namespace TCC
             if (SettingsManager.LfgEnabled) LfgListWindow = new LfgListWindow();
             SkillConfigWindow = new SkillConfigWindow();
             GroupAbnormalConfigWindow = new GroupAbnormalConfigWindow();
-            GroupWindow.Show();
-            //ChatWindow.Show();      
-            CooldownWindow.Show();
-            BossWindow.Show();
-            BuffWindow.Show();
-            CharacterWindow.Show();
-            ClassWindow.Show();
-            Debug.WriteLine("Windows loaded");
-
+            //GroupWindow.Show();
+            //CooldownWindow.Show();
+            //BossWindow.Show();
+            //BuffWindow.Show();
+            //CharacterWindow.Show();
+            //ClassWindow.Show();
         }
         private static void LoadCharWindow()
         {

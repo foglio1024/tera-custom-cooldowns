@@ -44,11 +44,11 @@
             <Grid Margin="5">
                 <Border Style="{StaticResource Styles.DefaultBorder}" Grid.RowSpan="2"/>
                 <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="200">
-                <Run Text="Completely disables this window, turning off related packet processors if possible. You'll be asked confirmation when turning this off."/>
+                <Run Text="Completely disables this window, turning off related packet processors if possible."/>
                 <LineBreak/>
                 <LineBreak/>
                 <Run Text="Warning:" Foreground="DarkOrange"/>
-                <Run Text="Re-enabling this later will restart TCC." />
+                <Run Text="Disabled windows will not track data in background." />
                 </TextBlock>
             </Grid>
         </ToolTip>
@@ -478,6 +478,8 @@
                 </TabItem.Header>
                 <!-- Chat window settings -->
                 <StackPanel Style="{StaticResource SettingsGrid}">
+                    <controls:BoolSetting SettingName="Enabled" IsOn="{Binding ChatWindowEnabled, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_done_white_24dp_2x.png" ToolTip="{StaticResource EnabledSettingTooltip}"/>
+
                     <controls:ValueSetting SettingName="Max messages" Min="0" Max="10000" Value="{Binding MaxMessages, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/chat.png" >
                         <controls:ValueSetting.ToolTip>
                             <Grid Margin="5">

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -112,6 +113,11 @@ namespace TCC.ViewModels
 
         private void ChatWindows_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
+            if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                if (e.OldItems.Count == 0) return;
+                SettingsManager.ChatWindowsSettings.Remove((e.OldItems[0] as ChatWindow).WindowSettings as ChatWindowSettings);
+            }
             //Console.WriteLine($"Chat windows list changed; count: {ChatWindows.Count}");
 
 
@@ -228,8 +234,10 @@ namespace TCC.ViewModels
 
         internal void InitWindows()
         {
+            ChatWindows.Clear();
             SettingsManager.ChatWindowsSettings.ToList().ForEach(s =>
             {
+                if (s.Tabs.Count == 0) return;
                 var w = new ChatWindow(s);
                 var m = new ChatViewModel();
                 w.DataContext = m;
@@ -237,13 +245,13 @@ namespace TCC.ViewModels
                 m.LoadTabs(s.Tabs);
                 m.LfgOn = s.LfgOn;
                 m.BackgroundOpacity = s.BackgroundOpacity;
-                w.Show();
             });
             if (ChatWindows.Count == 0)
             {
                 var w = new ChatWindow(
                     new ChatWindowSettings(0, 0, 200, 500, true, ClickThruMode.Never, 1, false, 1, false, true, true)
                     );
+                SettingsManager.ChatWindowsSettings.Add(w.WindowSettings as ChatWindowSettings);
                 var m = new ChatViewModel();
                 w.DataContext = m;
                 ChatWindows.Add(w);
@@ -385,8 +393,10 @@ namespace TCC.ViewModels
 
     public class ChatTabClient : IInterTabClient
     {
+        public static ChatWindow LastSource;
         public INewTabHost<Window> GetNewHost(IInterTabClient interTabClient, object partition, TabablzControl source)
         {
+            LastSource = Window.GetWindow(source) as ChatWindow;
             var model = new ChatViewModel();
             var view = new ChatWindow(new ChatWindowSettings(0, 0, 200, 500, true, ClickThruMode.Never,
                 1, false, 1, false, true, true), model);

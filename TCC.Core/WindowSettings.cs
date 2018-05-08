@@ -26,6 +26,7 @@ namespace TCC
         private bool _allowTransparency;
         private bool _enabled;
 
+        public event Action NotifyEnableWindow;
         public event Action NotifyWindowSafeClose;
 
         public double X
@@ -143,28 +144,37 @@ namespace TCC
             set
             {
                 if (_enabled == value) return;
-                if (value == false && TccMessageBox.Show("TCC",
-                        "Re-enabling this later will require TCC restart.\nDo you want to continue?",
-                        MessageBoxButton.OKCancel, MessageBoxImage.Question) ==
-                    MessageBoxResult.Cancel)
+                //if (value == false && TccMessageBox.Show("TCC",
+                //        "Re-enabling this later will require TCC restart.\nDo you want to continue?",
+                //        MessageBoxButton.OKCancel, MessageBoxImage.Question) ==
+                //    MessageBoxResult.Cancel)
+                //{
+                //    return;
+                //}
+                //else if (value == false)
+                //{
+                //    Visible = false;
+                //    _enabled = false;
+                //    NotifyWindowSafeClose?.Invoke();
+                //}
+                //else
+                //{
+                //    TccMessageBox.Show("TCC", "TCC will now be restarted.", MessageBoxButton.OK,
+                //        MessageBoxImage.Information);
+                //    Visible = true;
+                //    _enabled = true;
+                //    App.Restart();
+                //}
+                _enabled = value;
+                if (_enabled)
                 {
-                    return;
-                }
-                else if (value == false)
-                {
-                    Visible = false;
-                    _enabled = false;
-                    NotifyWindowSafeClose?.Invoke();
+                    NotifyEnableWindow?.Invoke();
+                    Visible = true;
                 }
                 else
                 {
-                    TccMessageBox.Show("TCC", "TCC will now be restarted.", MessageBoxButton.OK,
-                        MessageBoxImage.Information);
-                    Visible = true;
-                    _enabled = true;
-                    App.Restart();
+                    NotifyWindowSafeClose?.Invoke();
                 }
-
                 MessageFactory.Update();
                 NPC(nameof(Enabled));
             }
@@ -212,6 +222,19 @@ namespace TCC
         public double BackgroundOpacity { get; set; } = .3;
         public List<Tab> Tabs { get; set; }
         public bool LfgOn { get; set; } = true;
+        public new bool Enabled
+        {
+            get => SettingsManager.ChatEnabled;
+            set
+            {
+                if (SettingsManager.ChatEnabled == value) return;
+                SettingsManager.ChatEnabled = value;
+                if(!value) ChatWindowManager.Instance.CloseAllWindows();
+                else ChatWindowManager.Instance.InitWindows();
+                NPC();
+            }
+        }
+
         public ChatWindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool allowTransparency, bool enabled) : base(x, y, h, w, visible, ctm, scale, autoDim, dimOpacity, showAlways, allowTransparency, enabled)
         {
             Tabs = new List<Tab>();

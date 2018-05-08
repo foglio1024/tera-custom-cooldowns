@@ -64,10 +64,29 @@ namespace TCC.Windows
 
         public void UpdateSettings()
         {
-            ((ChatWindowSettings) WindowSettings).Tabs.Clear();
-            ((ChatWindowSettings) WindowSettings).Tabs.AddRange(VM.Tabs);
-            ((ChatWindowSettings) WindowSettings).LfgOn = VM.LfgOn;
-            ((ChatWindowSettings) WindowSettings).BackgroundOpacity = VM.BackgroundOpacity;
+            if (VM.TabVMs.Count == 0)
+            {
+                foreach (var tab in TabControl.ItemsSource)
+                {
+                    VM.TabVMs.Add(tab as HeaderedItemViewModel);
+                }
+            }
+
+            ((ChatWindowSettings)WindowSettings).Tabs.Clear();
+            ((ChatWindowSettings)WindowSettings).Tabs.AddRange(VM.Tabs);
+            ((ChatWindowSettings)WindowSettings).LfgOn = VM.LfgOn;
+            ((ChatWindowSettings)WindowSettings).BackgroundOpacity = VM.BackgroundOpacity;
+            ((ChatWindowSettings)WindowSettings).X = Left;
+            ((ChatWindowSettings)WindowSettings).Y= Top;
+            var v = SettingsManager.ChatWindowsSettings;
+            var s = v.FirstOrDefault(x => x == WindowSettings);
+            if (s == null) v.Add(WindowSettings as ChatWindowSettings);
+            else s = WindowSettings as ChatWindowSettings;
+
+            if (ChatTabClient.LastSource != this && ChatTabClient.LastSource != null)
+            {
+                ChatTabClient.LastSource.UpdateSettings();
+            }
         }
         private void Instance_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -127,8 +146,8 @@ namespace TCC.Windows
         private void TabClicked(object sender, MouseButtonEventArgs e)
         {
             if (!(sender is FrameworkElement s) || !(s.DataContext is HeaderedItemViewModel t)) return;
-            ((Tab) t.Content).Attention = false;
-            ((ChatViewModel) DataContext).CurrentTab = (Tab) t.Content;
+            ((Tab)t.Content).Attention = false;
+            ((ChatViewModel)DataContext).CurrentTab = (Tab)t.Content;
         }
 
 
@@ -207,7 +226,7 @@ namespace TCC.Windows
         {
             ChatWindowManager.Instance.RefreshTimer();
             Settings.BeginAnimation(OpacityProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(300)));
-
+            if(e.LeftButton == MouseButtonState.Pressed) UpdateSettings();
         }
 
         private void TccWindow_MouseEnter(object sender, MouseEventArgs e)
@@ -220,7 +239,7 @@ namespace TCC.Windows
         {
             if (!(sender is FrameworkElement s)) return;
             if (!(s.DataContext is HeaderedItemViewModel dc)) return;
-            var t = (Tab) dc.Content;
+            var t = (Tab)dc.Content;
             var sw = new ChatSettingsWindow(t);
             sw.Show();
             sw.Activate();
@@ -246,6 +265,16 @@ namespace TCC.Windows
         {
             (sender as FrameworkElement)?.ReleaseMouseCapture();
 
+        }
+
+        private void ChatWindow_OnPreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            UpdateSettings();
+        }
+
+        private void ChatWindow_OnDragLeave(object sender, DragEventArgs e)
+        {
+            
         }
     }
 

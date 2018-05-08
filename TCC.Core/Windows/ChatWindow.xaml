@@ -14,6 +14,7 @@
              MouseDoubleClick="TccWindow_MouseDoubleClick"
              MouseLeave="TccWindow_MouseLeave"
              MouseEnter="TccWindow_MouseEnter"
+             PreviewMouseUp="ChatWindow_OnPreviewMouseUp"
              Title="ChatWindow"
              MinWidth="350" MinHeight="110"
              Loaded="TccWindow_Loaded"

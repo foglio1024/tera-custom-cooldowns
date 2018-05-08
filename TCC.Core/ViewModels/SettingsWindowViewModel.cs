@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
 using TCC.Data;
@@ -1384,5 +1385,16 @@ namespace TCC.ViewModels
         public List<CooldownBarMode> CooldownBarModes => Utils.ListFromEnum<CooldownBarMode>();
         public List<FlowDirection> FlowDirections => Utils.ListFromEnum<FlowDirection>();
         public List<EnrageLabelMode> EnrageLabelModes => Utils.ListFromEnum<EnrageLabelMode>();
+
+        public bool ChatWindowEnabled
+        {
+            get => SettingsManager.ChatWindowsSettings[0].Enabled;
+            set
+            {
+                if (SettingsManager.ChatWindowsSettings[0].Enabled == value) return;
+                SettingsManager.ChatWindowsSettings.ToList().ForEach(x => x.Enabled = value);
+                NPC();
+            }
+        }
     }
 }
