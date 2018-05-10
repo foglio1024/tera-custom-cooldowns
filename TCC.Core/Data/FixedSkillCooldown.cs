@@ -4,6 +4,8 @@ namespace TCC.Data
 {
     public class FixedSkillCooldown : TSPropertyChanged
     {
+        //TODO: remove this NPC thing and use proper events
+
         private readonly DispatcherTimer _secondsTimer;
         private readonly DispatcherTimer _offsetTimer;
         private readonly DispatcherTimer _shortTimer;
@@ -16,9 +18,11 @@ namespace TCC.Data
             {
                 if (_cooldown == value) return;
                 _cooldown = value;
+                NPC();
             }
         }
         public ulong OriginalCooldown { get; private set; }
+        public ulong PreCooldown { get; private set; }
         private bool _isAvailable = true;
         public bool IsAvailable
         {
@@ -30,6 +34,8 @@ namespace TCC.Data
                 NPC();
             }
         }
+
+        private bool _isPreRunning;
         private CooldownType _cooldownType;
 
         public CooldownType CooldownType
@@ -130,6 +136,7 @@ namespace TCC.Data
 
         public void Start(ulong cd)
         {
+            if (_isPreRunning) NPC("StopPre");
             if (cd > 1000)
             {
                 Cooldown = cd;//_type == CooldownType.Skill ? cd : cd * 1000;
@@ -149,7 +156,6 @@ namespace TCC.Data
                 IsAvailable = false;
             }
             NPC("Start");
-
         }
         public void Refresh(ulong cd)
         {
@@ -177,6 +183,32 @@ namespace TCC.Data
         public void ForceAvailable(bool available)
         {
             IsAvailable = available;
+        }
+
+        public void StartPre(ulong cd)
+        {
+            if (cd > 1000)
+            {
+                PreCooldown = cd;//_type == CooldownType.Skill ? cd : cd * 1000;
+                OriginalCooldown = Cooldown;
+                Seconds = 1 + (PreCooldown / 1000);
+                var offset = PreCooldown % 1000;
+                _offsetTimer.Interval = TimeSpan.FromMilliseconds(offset);
+                _offsetTimer.Start();
+                IsAvailable = false;
+                _isPreRunning = true;
+            }
+            else
+            {
+                PreCooldown = cd;
+                _shortTimer.Interval = TimeSpan.FromMilliseconds(cd);
+                _shortTimer.Start();
+                Seconds = 0;
+                IsAvailable = false;
+                _isPreRunning = true;
+            }
+            NPC("StartPre");
+
         }
     }
 }

@@ -42,13 +42,13 @@ namespace TCC.Controls
         public FixedSkillControl()
         {
             InitializeComponent();
-            _warnTimer = new DispatcherTimer {Interval = TimeSpan.FromMilliseconds(1000)};
+            _warnTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(1000) };
             _warnTimer.Tick += WarnTimer_Tick;
             _arcAnimation = new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(1));
             _expandWarn =
-                new DoubleAnimation(0, 1.5, TimeSpan.FromMilliseconds(300)) {EasingFunction = new QuadraticEase()};
+                new DoubleAnimation(0, 1.5, TimeSpan.FromMilliseconds(300)) { EasingFunction = new QuadraticEase() };
             _expandWarnInner =
-                new DoubleAnimation(35, 0, TimeSpan.FromMilliseconds(400)) {EasingFunction = new QuadraticEase()};
+                new DoubleAnimation(35, 0, TimeSpan.FromMilliseconds(400)) { EasingFunction = new QuadraticEase() };
             Timeline.SetDesiredFrameRate(_expandWarn, 30);
             Timeline.SetDesiredFrameRate(_expandWarnInner, 30);
         }
@@ -56,7 +56,7 @@ namespace TCC.Controls
         private void Control_Loaded(object sender, RoutedEventArgs e)
         {
             if (DesignerProperties.GetIsInDesignMode(this) || DataContext == null) return;
-            _context = (FixedSkillCooldown) DataContext;
+            _context = (FixedSkillCooldown)DataContext;
             _context.PropertyChanged += _context_PropertyChanged;
         }
 
@@ -68,7 +68,7 @@ namespace TCC.Controls
                 {
                     case "Refresh" when _context.Cooldown == _context.OriginalCooldown: return;
                     case "Refresh":
-                        var newVal = _context.Cooldown / (double) _context.OriginalCooldown;
+                        var newVal = _context.Cooldown / (double)_context.OriginalCooldown;
                         if (newVal > 1) newVal = 1;
                         if (_context.Cooldown == 0)
                         {
@@ -93,6 +93,15 @@ namespace TCC.Controls
                     case nameof(_context.Seconds):
                         NPC(nameof(SecondsText));
                         break;
+                    case "StartPre":
+                        IsRunning = true;
+                        AnimatePreArcAngle();
+                        break;
+                    case "StopPre":
+                        IsRunning = false;
+                        PreArc.BeginAnimation(Arc.EndAngleProperty, null); //stop any arc animations
+                        PreArc.EndAngle = 0.01;
+                        break;
                 }
             }, DispatcherPriority.DataBind);
         }
@@ -114,6 +123,14 @@ namespace TCC.Controls
             var fps = _context.Cooldown > 80000 ? 1 : 30;
             Timeline.SetDesiredFrameRate(_arcAnimation, fps);
             Arc.BeginAnimation(Arc.EndAngleProperty, _arcAnimation);
+        }
+        private void AnimatePreArcAngle(double val = 1)
+        {
+            _arcAnimation.Duration = TimeSpan.FromMilliseconds(_context.PreCooldown);
+            _arcAnimation.From = 359.9 * val;
+            var fps = _context.PreCooldown > 80000 ? 1 : 30;
+            Timeline.SetDesiredFrameRate(_arcAnimation, fps);
+            PreArc.BeginAnimation(Arc.EndAngleProperty, _arcAnimation);
         }
 
         private void AnimateAvailableSkill()

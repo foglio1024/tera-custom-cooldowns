@@ -11,12 +11,13 @@ namespace TCC.Data
         public ulong Cooldown { get; set; }
         public ulong OriginalCooldown { get; set; }
         public CooldownType Type { get; set; }
+        public bool Pre { get; set; }
         private Timer _timer;
 
-        public SkillCooldown(Skill sk, ulong cd, CooldownType t, Dispatcher d)
+        public SkillCooldown(Skill sk, ulong cd, CooldownType t, Dispatcher d, bool autostart = true, bool pre = false)
         {
             _dispatcher = d;
-
+            Pre = pre;
             var cooldown = cd > int.MaxValue ? int.MaxValue : cd;
 
             Skill = sk;
@@ -27,7 +28,7 @@ namespace TCC.Data
             if (cooldown == 0) return;
             _timer = new Timer(Cooldown);
             _timer.Elapsed += _timer_Elapsed;
-            _timer.Start();
+            if(autostart) Start();
 
         }
 
@@ -37,9 +38,14 @@ namespace TCC.Data
             _timer?.Stop();
         }
 
+        public void Start()
+        {
+            _timer.Start();
+        }
         public void Refresh(ulong cd)
         {
             Cooldown = cd;
+            Pre = false;
             NPC("Refresh");
             if (_timer == null) return;
             _timer.Stop();

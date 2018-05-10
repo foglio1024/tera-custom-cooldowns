@@ -113,7 +113,13 @@ namespace TCC.Controls
             var an = new DoubleAnimation(angle*359.9, 0, TimeSpan.FromMilliseconds(_context.Cooldown));
             var fps = _context.Cooldown > 80000 ? 1 : 30;
             Timeline.SetDesiredFrameRate(an, fps);
-            Arc.BeginAnimation(Arc.EndAngleProperty, an);
+            if(_context.Pre) PreArc.BeginAnimation(Arc.EndAngleProperty, an);
+            else
+            {
+                PreArc.BeginAnimation(Arc.EndAngleProperty, null);
+                PreArc.EndAngle = 0.01;
+                Arc.BeginAnimation(Arc.EndAngleProperty, an);
+            }
             NumberTimer.IsEnabled = true;
         }
 
