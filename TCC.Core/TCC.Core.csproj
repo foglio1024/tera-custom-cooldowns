@@ -247,9 +247,6 @@
     <Compile Include="Controls\TimeSeparator.xaml.cs">
       <DependentUpon>TimeSeparator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TraverseCutControl.xaml.cs">
-      <DependentUpon>TraverseCutControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\VanguardInfoControl.xaml.cs">
       <DependentUpon>VanguardInfoControl.xaml</DependentUpon>
     </Compile>
@@ -1090,10 +1087,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\TimeSeparator.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\TraverseCutControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
