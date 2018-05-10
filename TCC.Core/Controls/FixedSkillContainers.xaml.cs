@@ -43,13 +43,47 @@ namespace TCC.Controls
             _mainButtonTimer.Tick += MainButtonTimer_Tick;
             _secButtonTimer.Tick += SecButtonTimer_Tick;
             _opacityUp = new DoubleAnimation(1, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() };
-            _opacityDown = new DoubleAnimation(0, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() , BeginTime = TimeSpan.FromMilliseconds(1000)};
+            _opacityDown = new DoubleAnimation(0, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase(), BeginTime = TimeSpan.FromMilliseconds(1000) };
             SelectionPopup.Closed += SelectionPopup_Closed;
             SelectionPopup.Opened += SelectionPopup_Opened;
             CooldownWindowViewModel.Instance.SecondarySkills.CollectionChanged += SecondarySkills_CollectionChanged;
             CooldownWindowViewModel.Instance.MainSkills.CollectionChanged += MainSkills_CollectionChanged;
+            CooldownWindowViewModel.Instance.SkillsLoaded += OnSkillsLoaded;
         }
 
+        //really absurd way of fixing order issue
+        private void OnSkillsLoaded()
+        {
+            ReorderSkillContainer(MainSkills, CooldownWindowViewModel.Instance.MainSkills);
+            ReorderSkillContainer(SecSkills, CooldownWindowViewModel.Instance.SecondarySkills);
+        }
+
+        //really absurd way of fixing order issue
+        public void ReorderSkillContainer(DragablzItemsControl container, SynchronizedObservableCollection<FixedSkillCooldown> collection)
+        {
+            var positions = new Dictionary<int, double>(); //index, X
+            for (var i = 0; i < container.Items.Count; i++)
+            {
+                var curr = container.ItemContainerGenerator.ContainerFromIndex(i) as UIElement;
+                var p = curr.TransformToAncestor(this).Transform(new Point(0, 0));
+                positions.Add(i, p.X);
+            }
+
+            var needsReorder = false;
+            for (var j = 0; j < positions.Count; j++)
+            {
+                if (j + 1 == positions.Count) continue;
+                if (positions[j] > positions[j + 1])
+                {
+                    needsReorder = true;
+                    break;
+                }
+            }
+
+            if (!needsReorder) return;
+            container.ItemsSource = null;
+            container.ItemsSource = collection;
+        }
 
         public SkillDropHandler DropHandler => new SkillDropHandler();
 
@@ -199,17 +233,13 @@ namespace TCC.Controls
         private void MainSkillsGrid_MouseEnter(object sender, MouseEventArgs e)
         {
             AnimateAddButton(true, Spacer, AddButtonGrid);
-            return;
-            CooldownWindowViewModel.Instance.AddOrRefresh(new SkillCooldown(new Skill(0, Class.Warrior, "BD", "BD") { IconName = "icon_skills.dualslash_tex" }, 900000, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher()));
-
-            if (CooldownWindowViewModel.Instance.SecondarySkills.Count == 0)
-                AnimateAddButton(true, Spacer2, AddButtonGrid2);
         }
 
         private void MainSkillsGrid_MouseLeave(object sender, MouseEventArgs e)
         {
             //_mainButtonTimer.Start();
-            AnimateAddButton(false, null, null);
+            //AnimateAddButton(false, null, null);
+            OnSkillsLoaded();
         }
 
         private void SecondarySkillsGridMouseEnter(object sender, MouseEventArgs e)
@@ -303,14 +333,14 @@ namespace TCC.Controls
                     {
                         if (x.Seconds > 0)
                         {
-                            x.Start((x.Seconds)*1000 - delay);
+                            x.Start((x.Seconds) * 1000 - delay);
                         }
                     });
                     CooldownWindowViewModel.Instance.SecondarySkills.ToList().ForEach(x =>
                     {
                         if (x.Seconds > 0)
                         {
-                            x.Start((x.Seconds)*1000 - delay);
+                            x.Start((x.Seconds) * 1000 - delay);
                         }
                     });
                 });
@@ -332,19 +362,6 @@ namespace TCC.Controls
         private void OpenCooldownSettings(object sender, RoutedEventArgs e)
         {
             WindowManager.SkillConfigWindow.ShowWindow();
-        }
-
-        private bool a;
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-
-            CooldownWindowViewModel.Instance.AddOrRefresh(new SkillCooldown(new Skill(0, Class.Warrior, "BD", "BD") { IconName = "icon_skills.dualslash_tex" }, 50000, CooldownType.Skill, CooldownWindowViewModel.Instance.GetDispatcher()));
-            return;
-            if (a) SessionManager.CurrentPlayer.Class = Class.Warrior;
-            else SessionManager.CurrentPlayer.Class = Class.Archer;
-            CooldownWindowViewModel.Instance.ClearSkills();
-            CooldownWindowViewModel.Instance.LoadSkills($"{SessionManager.CurrentPlayer.Class.ToString().ToLower()}-skills.xml", SessionManager.CurrentPlayer.Class);
-            a = !a;
         }
 
         private void MainSkills_OnDrop(object sender, DragEventArgs e)
