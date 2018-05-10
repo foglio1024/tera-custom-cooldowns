@@ -145,7 +145,9 @@ namespace TCC.Data
             _dispatcher = ChatWindowManager.Instance.GetDispatcher();
             Pieces = new SynchronizedObservableCollection<MessagePiece>(_dispatcher);
             Timestamp = DateTime.Now.ToShortTimeString();
-            WindowManager.Settings.Dispatcher.Invoke(() => ((SettingsWindowViewModel)WindowManager.Settings.DataContext).PropertyChanged += VM_PropChanged);
+            //WindowManager.Settings.Dispatcher.Invoke(() => ((SettingsWindowViewModel)WindowManager.Settings.DataContext).PropertyChanged += VM_PropChanged);
+            SettingsWindowViewModel.ChatShowChannelChanged += () => NPC(nameof(ShowChannel));
+            SettingsWindowViewModel.ChatShowTimestampChanged += () => NPC(nameof(ShowTimestamp));
             RawMessage = "";
         }
         public ChatMessage(ChatChannel ch, string auth, string msg) : this()
@@ -420,17 +422,6 @@ namespace TCC.Data
                     index = chatMessage.Pieces.IndexOf(mp) + 1;
                 }
                 chatMessage.RemovePiece(simplePieces[i]);
-            }
-        }
-        private void VM_PropChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(ShowChannel))
-            {
-                NPC(nameof(ShowChannel));
-            }
-            else if (e.PropertyName == nameof(ShowTimestamp))
-            {
-                NPC(nameof(ShowTimestamp));
             }
         }
         public override string ToString()
