@@ -11,10 +11,13 @@ namespace TCC.ViewModels
         public DurationCooldownIndicator DeadlyGamble { get; set; }
         public Counter EdgeCounter { get; set; }
         public StanceTracker<WarriorStance> Stance { get; set; }
-
+        public StatTracker TraverseCut { get; set; }
+        public StatTracker TempestAura { get; set; }
         public WarriorBarManager() : base()
         {
             EdgeCounter = new Counter(10, true);
+            TraverseCut = new StatTracker {Max = 13, Val = 0};
+            TempestAura = new StatTracker {Max = 50, Val = 0};
             Stance = new StanceTracker<WarriorStance>();
         }
 
