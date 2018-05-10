@@ -26,7 +26,7 @@ namespace TCC.Controls
             {
                 for (var i = 0; i < diff; i++)
                 {
-                    EdgeContainer.Children[_currentEdge + i].Opacity = 1;
+                    if (_currentEdge + i < EdgeContainer.Children.Count - 1) EdgeContainer.Children[_currentEdge + i].Opacity = 1;
                 }
             }
             else
