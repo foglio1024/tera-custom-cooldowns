@@ -69,7 +69,7 @@ namespace TCC.ViewModels
 
         internal void ScrollToBottom()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public int MessageCount => ChatMessages.Count;
