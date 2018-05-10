@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
@@ -9,6 +10,9 @@ namespace TCC.ViewModels
 {
     public class SettingsWindowViewModel : TSPropertyChanged
     {
+        public static event Action ChatShowChannelChanged;
+        public static event Action ChatShowTimestampChanged;
+
         public WindowSettings CooldownWindowSettings => SettingsManager.CooldownWindowSettings;
         public WindowSettings ClassWindowSettings => SettingsManager.ClassWindowSettings;
         public WindowSettings GroupWindowSettings => SettingsManager.GroupWindowSettings;
@@ -902,7 +906,7 @@ namespace TCC.ViewModels
         //other settings
         public bool HideMe
         {
-            get { return SettingsManager.IgnoreMeInGroupWindow; }
+            get => SettingsManager.IgnoreMeInGroupWindow;
             set
             {
                 if (SettingsManager.IgnoreMeInGroupWindow == value) return;
@@ -935,7 +939,7 @@ namespace TCC.ViewModels
         }
         public bool DisableAllPartyAbnormals
         {
-            get { return SettingsManager.DisablePartyAbnormals; }
+            get => SettingsManager.DisablePartyAbnormals;
             set
             {
                 if (SettingsManager.DisablePartyAbnormals == value) return;
@@ -1025,13 +1029,13 @@ namespace TCC.ViewModels
             {
                 if (SettingsManager.ChatFadeOut == value) return;
                 SettingsManager.ChatFadeOut = value;
-                if(value) ChatWindowManager.Instance.RefreshTimer();
+                if (value) ChatWindowManager.Instance.RefreshTimer();
                 NPC(nameof(ChatFadeOut));
             }
         }
         public bool ClickThruWhenDim
         {
-            get { return SettingsManager.ClickThruWhenDim; }
+            get => SettingsManager.ClickThruWhenDim;
             set
             {
                 if (SettingsManager.ClickThruWhenDim == value) return;
@@ -1059,7 +1063,7 @@ namespace TCC.ViewModels
         }
         public int MaxMessages
         {
-            get { return SettingsManager.MaxMessages; }
+            get => SettingsManager.MaxMessages;
             set
             {
                 if (SettingsManager.MaxMessages == value) return;
@@ -1074,7 +1078,7 @@ namespace TCC.ViewModels
         }
         public int SpamThreshold
         {
-            get { return SettingsManager.SpamThreshold; }
+            get => SettingsManager.SpamThreshold;
             set
             {
                 if (SettingsManager.SpamThreshold == value) return;
@@ -1084,22 +1088,24 @@ namespace TCC.ViewModels
         }
         public bool ShowTimestamp
         {
-            get { return SettingsManager.ShowTimestamp; }
+            get => SettingsManager.ShowTimestamp;
             set
             {
                 if (SettingsManager.ShowTimestamp == value) return;
                 SettingsManager.ShowTimestamp = value;
                 NPC(nameof(ShowTimestamp));
+                ChatShowTimestampChanged?.Invoke();
             }
 
         }
         public bool ShowChannel
         {
-            get { return SettingsManager.ShowChannel; }
+            get => SettingsManager.ShowChannel;
             set
             {
                 if (SettingsManager.ShowChannel == value) return;
                 SettingsManager.ShowChannel = value;
+                ChatShowChannelChanged?.Invoke();
                 NPC(nameof(ShowChannel));
             }
 
@@ -1144,7 +1150,7 @@ namespace TCC.ViewModels
             get => SettingsManager.ShowItemsCooldown;
             set
             {
-                if(SettingsManager.ShowItemsCooldown == value) return;
+                if (SettingsManager.ShowItemsCooldown == value) return;
                 SettingsManager.ShowItemsCooldown = value;
                 CooldownWindowViewModel.Instance.NotifyItemsDisplay();
                 NPC(nameof(ShowItemsCooldown));
@@ -1155,9 +1161,9 @@ namespace TCC.ViewModels
             get => SettingsManager.UseHotkeys;
             set
             {
-                if(SettingsManager.UseHotkeys == value) return;
+                if (SettingsManager.UseHotkeys == value) return;
                 SettingsManager.UseHotkeys = value;
-                if(value) KeyboardHook.Instance.RegisterKeyboardHook();
+                if (value) KeyboardHook.Instance.RegisterKeyboardHook();
                 else KeyboardHook.Instance.UnRegisterKeyboardHook();
                 NPC(nameof(UseHotkeys));
             }
@@ -1167,7 +1173,7 @@ namespace TCC.ViewModels
             get => SettingsManager.ShowGroupWindowDetails;
             set
             {
-                if(SettingsManager.ShowGroupWindowDetails == value) return;
+                if (SettingsManager.ShowGroupWindowDetails == value) return;
                 SettingsManager.ShowGroupWindowDetails = value;
                 GroupWindowViewModel.Instance.NotifySettingUpdated();
                 NPC(nameof(ShowGroupWindowDetails));
@@ -1269,7 +1275,7 @@ namespace TCC.ViewModels
         }
         public uint GroupSizeThreshold
         {
-            get { return SettingsManager.GroupSizeThreshold; }
+            get => SettingsManager.GroupSizeThreshold;
             set
             {
                 if (SettingsManager.GroupSizeThreshold == value) return;
