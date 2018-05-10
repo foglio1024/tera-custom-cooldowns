@@ -31,7 +31,7 @@ namespace TCC.Data.Databases
 
         public SkillsDatabase(string lang)
         {
-            var f = File.OpenText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory , $"resources/data/skills/skills-{lang}.tsv"));
+            var f = File.OpenText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"resources/data/skills/skills-{lang}.tsv"));
 
             SkillConnections = new List<SkillConnection>();
             Skills = new Dictionary<Class, Dictionary<uint, Skill>>();
@@ -50,7 +50,7 @@ namespace TCC.Data.Databases
                 var s = line.Split('\t');
                 var id = Convert.ToUInt32(s[0]);
                 var cString = s[3];
-                if(!Enum.TryParse(s[3], out Class c))
+                if (!Enum.TryParse(s[3], out Class c))
                 {
                     if (cString == "Mystic") cString = "Elementalist";
                     if (cString == "Reaper") cString = "Soulless";
@@ -125,20 +125,11 @@ namespace TCC.Data.Databases
         public bool TryGetSkill(uint id, Class c, out Skill sk)
         {
             var result = false;
-            //var connSkills = GetSkillIdByConnectedId(id, c);
             sk = new Skill(0, Class.None, String.Empty, String.Empty);
             if (Skills[c].TryGetValue(id, out sk))
             {
-                //sk = Skills.Where(x => x.Id == id).Where(x => x.Class == c).First();
                 result = true;
             }
-            //else if (connSkills != -1)
-            //{
-            //    if (Skills[c].TryGetValue((uint)connSkills, out sk))
-            //    {
-            //        result = true;
-            //    }
-            //}
             return result;
 
         }
@@ -290,5 +281,13 @@ namespace TCC.Data.Databases
                 }
             },
         };
+
+        public bool TryGetSkillByIconName(string iconName, Class c, out Skill sk)
+        {
+            var result = false;
+            sk = Skills[c].Values.ToList().FirstOrDefault(x => x.IconName == iconName);
+            if (sk != null) result = true;
+            return result;
+        }
     }
 }
