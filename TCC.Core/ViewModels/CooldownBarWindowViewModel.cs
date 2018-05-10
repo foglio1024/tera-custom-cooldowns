@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Threading;
@@ -21,6 +22,8 @@ namespace TCC.ViewModels
         public static CooldownWindowViewModel Instance => _instance ?? (_instance = new CooldownWindowViewModel());
         public bool IsTeraOnTop => WindowManager.IsTccVisible;
         public bool ShowItems => SettingsManager.ShowItemsCooldown;
+
+        public event Action SkillsLoaded;
 
         private SynchronizedObservableCollection<SkillCooldown> _shortSkills;
         private SynchronizedObservableCollection<SkillCooldown> _longSkills;
@@ -289,13 +292,15 @@ namespace TCC.ViewModels
             var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
             if (skill != null)
             {
-                skill.Start(sk.Cooldown);
+                if (sk.Pre) skill.StartPre(sk.Cooldown);
+                else skill.Start(sk.Cooldown);
                 return;
             }
             skill = SecondarySkills.ToSyncArray().FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
             if (skill != null)
             {
-                skill.Start(sk.Cooldown);
+                if (sk.Pre) skill.StartPre(sk.Cooldown);
+                else skill.Start(sk.Cooldown);
                 return;
             }
 
@@ -487,6 +492,7 @@ namespace TCC.ViewModels
             NPC(nameof(SkillsView));
             NPC(nameof(MainSkills));
             NPC(nameof(SecondarySkills));
+            SkillsLoaded?.Invoke();
         }
 
         public CooldownBarMode Mode => SettingsManager.CooldownBarMode;
