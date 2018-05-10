@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
+using System.Xml;
 using System.Xml.Linq;
 using TCC.Data;
 using TCC.ViewModels;
@@ -137,10 +138,6 @@ namespace TCC
                     {
                         ClassWindowSettings = ParseWindowSettings(ws);
                     }
-                    //else if (ws.Attribute("Name").Value == "ChatWindow")
-                    //{
-                    //    ChatWindowSettings = ParseWindowSettings(ws);
-                    //}
                     //add window here
                 }
 
@@ -188,223 +185,234 @@ namespace TCC
 
         public static void LoadSettings()
         {
-            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml"))
+            try
             {
-                SettingsDoc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml");
+                if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml"))
+                {
+                    SettingsDoc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml");
 
-                var b = SettingsDoc.Descendants("OtherSettings").FirstOrDefault();
-                if (b == null) return;
-                try
-                {
-                    IgnoreMeInGroupWindow = bool.Parse(b.Attribute("IgnoreMeInGroupWindow").Value);
-                }
-                catch { }
-                try
-                {
-                    IgnoreGroupBuffs = bool.Parse(b.Attribute(nameof(IgnoreGroupBuffs)).Value);
-                }
-                catch { }
-                try
-                {
-                    IgnoreGroupDebuffs = bool.Parse(b.Attribute(nameof(IgnoreGroupDebuffs)).Value);
-                }
-                catch { }
-                try
-                {
-                    IgnoreRaidAbnormalitiesInGroupWindow = bool.Parse(b.Attribute("IgnoreRaidAbnormalitiesInGroupWindow").Value);
-                }
-                catch { }
-                try
-                {
-                    BuffsDirection = (FlowDirection)Enum.Parse(typeof(FlowDirection), b.Attribute("BuffsDirection").Value);
-                }
-                catch { }
-                try
-                {
-                    //ClassWindowOn = Boolean.Parse(b.Attribute("ClassWindowOn").Value);
-                    CooldownBarMode = (CooldownBarMode)Enum.Parse(typeof(CooldownBarMode), b.Attribute(nameof(Data.CooldownBarMode)).Value);
-                }
-                catch { }
-                try
-                {
-                    ClickThruWhenDim = bool.Parse(b.Attribute("ClickThruWhenDim").Value);
-                }
-                catch { }
-                try
-                {
-                    ClickThruInCombat = bool.Parse(b.Attribute(nameof(ClickThruInCombat)).Value);
-                }
-                catch { }
-                try
-                {
-                    MaxMessages = int.Parse(b.Attribute(nameof(MaxMessages)).Value);
-                }
-                catch { }
-                try
-                {
-                    SpamThreshold = int.Parse(b.Attribute(nameof(SpamThreshold)).Value);
-                }
-                catch { }
-                try
-                {
-                    FontSize = int.Parse(b.Attribute(nameof(FontSize)).Value);
-                }
-                catch { }
-                try
-                {
-                    ShowChannel = bool.Parse(b.Attribute(nameof(ShowChannel)).Value);
-                }
-                catch { }
-                try
-                {
-                    ShowTimestamp = bool.Parse(b.Attribute(nameof(ShowTimestamp)).Value);
-                }
-                catch { }
-                try
-                {
-                    ShowOnlyBosses = bool.Parse(b.Attribute(nameof(ShowOnlyBosses)).Value);
-                }
-                catch { }
-                try
-                {
-                    DisablePartyMP = bool.Parse(b.Attribute(nameof(DisablePartyMP)).Value);
-                }
-                catch { }
-                try
-                {
-                    DisablePartyHP = bool.Parse(b.Attribute(nameof(DisablePartyHP)).Value);
-                }
-                catch { }
-                try
-                {
-                    ShowOnlyAggroStacks = bool.Parse(b.Attribute(nameof(ShowOnlyAggroStacks)).Value);
-                }
-                catch { }
-                try
-                {
-                    DisablePartyAbnormals = bool.Parse(b.Attribute(nameof(DisablePartyAbnormals)).Value);
-                }
-                catch (Exception) { }
-                try
-                {
-                    LfgOn = bool.Parse(b.Attribute(nameof(LfgOn)).Value);
-                }
-                catch (Exception) { }
-                try
-                {
-                    ChatFadeOut = bool.Parse(b.Attribute(nameof(ChatFadeOut)).Value);
-                }
-                catch (Exception) { }
-                try
-                {
-                    ChatWindowOpacity = double.Parse(b.Attribute(nameof(ChatWindowOpacity)).Value, CultureInfo.InvariantCulture);
-                }
-                catch (Exception) { }
-                try
-                {
-                    LastRun = DateTime.Parse(b.Attribute(nameof(LastRun)).Value);
-                }
-                catch (Exception) { }
-                try
-                {
-                    LastRegion = b.Attribute(nameof(LastRegion)).Value;
-                }
-                catch (Exception) { }
-                try
-                {
-                    Webhook = b.Attribute(nameof(Webhook)).Value;
-                }
-                catch (Exception) { }
-                try
-                {
-                    WebhookMessage = b.Attribute(nameof(WebhookMessage)).Value;
-                }
-                catch (Exception) { }
-                try
-                {
-                    TwitchName = b.Attribute(nameof(TwitchName)).Value;
-                }
-                catch (Exception) { }
-                try
-                {
-                    TwitchToken = b.Attribute(nameof(TwitchToken)).Value;
-                }
-                catch (Exception) { }
-                try
-                {
-                    TwitchChannelName = b.Attribute(nameof(TwitchChannelName)).Value;
-                }
-                catch (Exception) { }
-                try
-                {
-                    GroupSizeThreshold = uint.Parse(b.Attribute(nameof(GroupSizeThreshold)).Value);
-                }
-                catch { }
-                try
-                {
-                    EnrageLabelMode = (EnrageLabelMode)Enum.Parse(typeof(EnrageLabelMode), b.Attribute(nameof(EnrageLabelMode)).Value);
-                }
-                catch { }
-                try
-                {
-                    ShowItemsCooldown = bool.Parse(b.Attribute(nameof(ShowItemsCooldown)).Value);
-                }
-                catch (Exception) { }
-                try
-                {
-                    ShowMembersLaurels = bool.Parse(b.Attribute(nameof(ShowMembersLaurels)).Value);
-                }
-                catch (Exception) { }
-                try
-                {
-                    AnimateChatMessages = bool.Parse(b.Attribute(nameof(AnimateChatMessages)).Value);
-                }
-                catch (Exception) { }
-                try
-                {
-                    StatSent = bool.Parse(b.Attribute(nameof(StatSent)).Value);
-                }
-                catch (Exception) { }
-                try
-                {
-                    StatSent = bool.Parse(b.Attribute(nameof(StatSent)).Value);
-                }
-                catch (Exception) { }
-                try
-                {
-                    ShowFlightEnergy = bool.Parse(b.Attribute(nameof(ShowFlightEnergy)).Value);
-                }
-                catch (Exception) { }
-                try
-                {
-                    LfgEnabled = bool.Parse(b.Attribute(nameof(LfgEnabled)).Value);
-                }
-                catch (Exception) { }
-                try
-                {
-                    ShowGroupWindowDetails = bool.Parse(b.Attribute(nameof(ShowGroupWindowDetails)).Value);
-                }
-                catch (Exception) { }
-                try { UseHotkeys = bool.Parse(b.Attribute(nameof(UseHotkeys)).Value); }
-                catch (Exception) { }
-                //add settings here
+                    var b = SettingsDoc.Descendants("OtherSettings").FirstOrDefault();
+                    if (b == null) return;
+                    try
+                    {
+                        IgnoreMeInGroupWindow = bool.Parse(b.Attribute("IgnoreMeInGroupWindow").Value);
+                    }
+                    catch { }
+                    try
+                    {
+                        IgnoreGroupBuffs = bool.Parse(b.Attribute(nameof(IgnoreGroupBuffs)).Value);
+                    }
+                    catch { }
+                    try
+                    {
+                        IgnoreGroupDebuffs = bool.Parse(b.Attribute(nameof(IgnoreGroupDebuffs)).Value);
+                    }
+                    catch { }
+                    try
+                    {
+                        IgnoreRaidAbnormalitiesInGroupWindow = bool.Parse(b.Attribute("IgnoreRaidAbnormalitiesInGroupWindow").Value);
+                    }
+                    catch { }
+                    try
+                    {
+                        BuffsDirection = (FlowDirection)Enum.Parse(typeof(FlowDirection), b.Attribute("BuffsDirection").Value);
+                    }
+                    catch { }
+                    try
+                    {
+                        //ClassWindowOn = Boolean.Parse(b.Attribute("ClassWindowOn").Value);
+                        CooldownBarMode = (CooldownBarMode)Enum.Parse(typeof(CooldownBarMode), b.Attribute(nameof(Data.CooldownBarMode)).Value);
+                    }
+                    catch { }
+                    try
+                    {
+                        ClickThruWhenDim = bool.Parse(b.Attribute("ClickThruWhenDim").Value);
+                    }
+                    catch { }
+                    try
+                    {
+                        ClickThruInCombat = bool.Parse(b.Attribute(nameof(ClickThruInCombat)).Value);
+                    }
+                    catch { }
+                    try
+                    {
+                        MaxMessages = int.Parse(b.Attribute(nameof(MaxMessages)).Value);
+                    }
+                    catch { }
+                    try
+                    {
+                        SpamThreshold = int.Parse(b.Attribute(nameof(SpamThreshold)).Value);
+                    }
+                    catch { }
+                    try
+                    {
+                        FontSize = int.Parse(b.Attribute(nameof(FontSize)).Value);
+                    }
+                    catch { }
+                    try
+                    {
+                        ShowChannel = bool.Parse(b.Attribute(nameof(ShowChannel)).Value);
+                    }
+                    catch { }
+                    try
+                    {
+                        ShowTimestamp = bool.Parse(b.Attribute(nameof(ShowTimestamp)).Value);
+                    }
+                    catch { }
+                    try
+                    {
+                        ShowOnlyBosses = bool.Parse(b.Attribute(nameof(ShowOnlyBosses)).Value);
+                    }
+                    catch { }
+                    try
+                    {
+                        DisablePartyMP = bool.Parse(b.Attribute(nameof(DisablePartyMP)).Value);
+                    }
+                    catch { }
+                    try
+                    {
+                        DisablePartyHP = bool.Parse(b.Attribute(nameof(DisablePartyHP)).Value);
+                    }
+                    catch { }
+                    try
+                    {
+                        ShowOnlyAggroStacks = bool.Parse(b.Attribute(nameof(ShowOnlyAggroStacks)).Value);
+                    }
+                    catch { }
+                    try
+                    {
+                        DisablePartyAbnormals = bool.Parse(b.Attribute(nameof(DisablePartyAbnormals)).Value);
+                    }
+                    catch (Exception) { }
+                    try
+                    {
+                        LfgOn = bool.Parse(b.Attribute(nameof(LfgOn)).Value);
+                    }
+                    catch (Exception) { }
+                    try
+                    {
+                        ChatFadeOut = bool.Parse(b.Attribute(nameof(ChatFadeOut)).Value);
+                    }
+                    catch (Exception) { }
+                    try
+                    {
+                        ChatWindowOpacity = double.Parse(b.Attribute(nameof(ChatWindowOpacity)).Value, CultureInfo.InvariantCulture);
+                    }
+                    catch (Exception) { }
+                    try
+                    {
+                        LastRun = DateTime.Parse(b.Attribute(nameof(LastRun)).Value);
+                    }
+                    catch (Exception) { }
+                    try
+                    {
+                        LastRegion = b.Attribute(nameof(LastRegion)).Value;
+                    }
+                    catch (Exception) { }
+                    try
+                    {
+                        Webhook = b.Attribute(nameof(Webhook)).Value;
+                    }
+                    catch (Exception) { }
+                    try
+                    {
+                        WebhookMessage = b.Attribute(nameof(WebhookMessage)).Value;
+                    }
+                    catch (Exception) { }
+                    try
+                    {
+                        TwitchName = b.Attribute(nameof(TwitchName)).Value;
+                    }
+                    catch (Exception) { }
+                    try
+                    {
+                        TwitchToken = b.Attribute(nameof(TwitchToken)).Value;
+                    }
+                    catch (Exception) { }
+                    try
+                    {
+                        TwitchChannelName = b.Attribute(nameof(TwitchChannelName)).Value;
+                    }
+                    catch (Exception) { }
+                    try
+                    {
+                        GroupSizeThreshold = uint.Parse(b.Attribute(nameof(GroupSizeThreshold)).Value);
+                    }
+                    catch { }
+                    try
+                    {
+                        EnrageLabelMode = (EnrageLabelMode)Enum.Parse(typeof(EnrageLabelMode), b.Attribute(nameof(EnrageLabelMode)).Value);
+                    }
+                    catch { }
+                    try
+                    {
+                        ShowItemsCooldown = bool.Parse(b.Attribute(nameof(ShowItemsCooldown)).Value);
+                    }
+                    catch (Exception) { }
+                    try
+                    {
+                        ShowMembersLaurels = bool.Parse(b.Attribute(nameof(ShowMembersLaurels)).Value);
+                    }
+                    catch (Exception) { }
+                    try
+                    {
+                        AnimateChatMessages = bool.Parse(b.Attribute(nameof(AnimateChatMessages)).Value);
+                    }
+                    catch (Exception) { }
+                    try
+                    {
+                        StatSent = bool.Parse(b.Attribute(nameof(StatSent)).Value);
+                    }
+                    catch (Exception) { }
+                    try
+                    {
+                        StatSent = bool.Parse(b.Attribute(nameof(StatSent)).Value);
+                    }
+                    catch (Exception) { }
+                    try
+                    {
+                        ShowFlightEnergy = bool.Parse(b.Attribute(nameof(ShowFlightEnergy)).Value);
+                    }
+                    catch (Exception) { }
+                    try
+                    {
+                        LfgEnabled = bool.Parse(b.Attribute(nameof(LfgEnabled)).Value);
+                    }
+                    catch (Exception) { }
+                    try
+                    {
+                        ShowGroupWindowDetails = bool.Parse(b.Attribute(nameof(ShowGroupWindowDetails)).Value);
+                    }
+                    catch (Exception) { }
+                    try { UseHotkeys = bool.Parse(b.Attribute(nameof(UseHotkeys)).Value); }
+                    catch (Exception) { }
+                    //add settings here
 
-                try
-                {
-                    ParseChannelsSettings(SettingsDoc.Descendants().FirstOrDefault(x => x.Name == nameof(EnabledChatChannels)));
-                }
-                catch (Exception) { }
+                    try
+                    {
+                        ParseChannelsSettings(SettingsDoc.Descendants().FirstOrDefault(x => x.Name == nameof(EnabledChatChannels)));
+                    }
+                    catch (Exception) { }
 
-                try
-                {
-                    ParseGroupAbnormalSettings(SettingsDoc.Descendants() .FirstOrDefault(x => x.Name == nameof(GroupAbnormals)));
+                    try
+                    {
+                        ParseGroupAbnormalSettings(SettingsDoc.Descendants().FirstOrDefault(x => x.Name == nameof(GroupAbnormals)));
+                    }
+                    catch
+                    {
+                        CommonDefault.ForEach(x => GroupAbnormals[Class.Common].Add(x));
+                        PriestDefault.ForEach(x => GroupAbnormals[Class.Priest].Add(x));
+                        MysticDefault.ForEach(x => GroupAbnormals[Class.Elementalist].Add(x));
+                    }
                 }
-                catch
-                {
-                    CommonDefault.ForEach(x => GroupAbnormals[Class.Common].Add(x));
-                    PriestDefault.ForEach(x => GroupAbnormals[Class.Priest].Add(x));
-                    MysticDefault.ForEach(x => GroupAbnormals[Class.Elementalist].Add(x));
-                }
+            }
+            catch (XmlException)
+            {
+                var res = TccMessageBox.Show("TCC",
+                    "Cannot load settings file. Do you want TCC to delete it and recreate a default file?",
+                    MessageBoxButton.YesNo);
+                if(res == MessageBoxResult.Yes) File.Delete(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml");
+                LoadSettings();
             }
         }
 
