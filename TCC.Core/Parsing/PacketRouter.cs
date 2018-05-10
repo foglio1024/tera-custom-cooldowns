@@ -59,7 +59,6 @@ namespace TCC.Parsing
                     || !File.Exists(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/smt_{message.Versions[0]}.txt")) && !File.Exists(Path.Combine(BasicTeraData.Instance.ResourceDirectory, $"data/opcodes/sysmsg.{message.Versions[0]}.map")))
                 {
                     {
-                        BasicTeraData.LogError("Unknown client version: " + message.Versions[0]);
                         TccMessageBox.Show("Unknown client version: " + message.Versions[0], MessageBoxType.Error);
                         App.CloseApp();
                         return;
@@ -70,7 +69,7 @@ namespace TCC.Parsing
                 Factory = new MessageFactory(OpCodeNamer, Server.Region, message.Versions[0], sysMsgNamer: SystemMessageNamer);
                 TeraSniffer.Instance.Connected = true;
                 Proxy.ConnectToProxy();
-
+                return;
             }
             Packets.Enqueue(obj);
         }
