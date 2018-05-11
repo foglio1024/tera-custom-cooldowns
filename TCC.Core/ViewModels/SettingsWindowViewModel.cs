@@ -19,6 +19,7 @@ namespace TCC.ViewModels
         public WindowSettings BuffWindowSettings => SettingsManager.BuffWindowSettings;
         public WindowSettings CharacterWindowSettings => SettingsManager.CharacterWindowSettings;
         public WindowSettings BossWindowSettings => SettingsManager.BossWindowSettings;
+        public WindowSettings FlightWindowSettings => SettingsManager.FlightGaugeWindowSettings;
 
         //enable settings
         //public bool IsCooldownWindowEnabled

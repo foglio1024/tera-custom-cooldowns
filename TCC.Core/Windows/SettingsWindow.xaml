@@ -618,6 +618,13 @@
                             </Grid>
                         </controls:BoolSetting.ToolTip>
                     </controls:BoolSetting>
+                    <controls:SelectionSetting SettingName="Flight gauge click through mode"
+                                               SelectedItem="{Binding FlightWindowSettings.ClickThruMode, Mode=TwoWay}"
+                                               ChoicesType="{x:Type data:ClickThruMode}"
+                                               ToolTip="{StaticResource ClickThruModeSettingTooltip}"
+                                               Choices="{Binding ClickThruModes, Mode=OneWay}"
+                                               SettingImage="/TCC;component/resources/images/ic_touch_app_white_24dp_2x.png" />
+
                 </StackPanel>
 
             </TabItem>
@@ -739,7 +746,7 @@
 
             </TabItem>
         </TabControl>
-    <!--Title bar-->
+        <!--Title bar-->
         <Grid Grid.ColumnSpan="2"  MouseLeftButtonDown="Window_MouseLeftButtonDown" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

@@ -6,7 +6,7 @@
              xmlns:w="clr-namespace:TCC.Windows"
              xmlns:c="clr-namespace:TCC.Controls"
              Loaded="TccWindow_Loaded"
-             mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+             mc:Ignorable="d" MouseLeftButtonDown="Drag"
              Style="{StaticResource BaseWindowStyle}"
              Title="FlightDurationWindow" Height="300" Width="300" d:DataContext="{x:Type w:FlightDurationWindow}">
     <Grid>

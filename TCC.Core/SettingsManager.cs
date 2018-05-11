@@ -40,6 +40,8 @@ namespace TCC
         public static WindowSettings BuffWindowSettings;
         public static WindowSettings CharacterWindowSettings;
         public static WindowSettings ClassWindowSettings;
+        public static WindowSettings FlightGaugeWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Always, 1, false, 1, false, true, true);
+
         public static SynchronizedObservableCollection<ChatWindowSettings> ChatWindowsSettings = new SynchronizedObservableCollection<ChatWindowSettings>();
 
         public static bool IgnoreMeInGroupWindow { get; set; }
@@ -157,6 +159,7 @@ namespace TCC
                 BuffWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.WhenDim, 1, true, .2, false, true, true);
                 CharacterWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Always, 1, true, .2, false, true, true);
                 ClassWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Always, 1, true, .2, false, true, true);
+                FlightGaugeWindowSettings = new WindowSettings(0, 0, 0, 0, true, ClickThruMode.Always, 1, false, 1, false, true, true);
                 //ChatWindowSettings = new WindowSettings(0, 0, 200, 600, true, ClickThruMode.Never, 1, false, 1, false, true, true);
             }
         }

@@ -19,7 +19,7 @@ namespace TCC.Windows
         public FlightDurationWindow()
         {
             InitializeComponent();
-            InitWindow(new WindowSettings(Left, Top, Height, Width, true, ClickThruMode.Always, 1, false, 1, false, true, true));
+            InitWindow(SettingsManager.FlightGaugeWindowSettings);
             Hide();
             WindowManager.TccVisibilityChanged += (s, ev) =>
             {
@@ -77,7 +77,7 @@ namespace TCC.Windows
 
         private void ShowWindow()
         {
-            FocusManager.MakeTransparent(Handle);
+            //FocusManager.MakeTransparent(Handle);
             Opacity = 0;
             Show();
             BeginAnimation(OpacityProperty, _winShow);
