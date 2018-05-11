@@ -16,12 +16,13 @@ using ParsedMessage = TCC.TeraCommon.Game.Messages.ParsedMessage;
 
 namespace TCC.Parsing
 {
-    public class MessageFactory 
+    public class MessageFactory
     {
         private static readonly Delegate UnknownMessageDelegate = Contructor<Func<TeraMessageReader, UnknownMessage>>();
         private static readonly Dictionary<ushort, Delegate> OpcodeNameToType = new Dictionary<ushort, Delegate> { { 19900, Contructor<Func<TeraMessageReader, C_CHECK_VERSION>>() } };
         private static readonly Dictionary<string, Delegate> TeraMessages = new Dictionary<string, Delegate>
         {
+            {"C_LOGIN_ARBITER", Contructor<Func<TeraMessageReader,C_LOGIN_ARBITER>>()},
             { "S_LOGIN" , Contructor<Func<TeraMessageReader,S_LOGIN>>()},
             { "S_START_COOLTIME_SKILL" , Contructor<Func<TeraMessageReader,S_START_COOLTIME_SKILL>>()},
             { "S_DECREASE_COOLTIME_SKILL" , Contructor<Func<TeraMessageReader,S_DECREASE_COOLTIME_SKILL>>()},
@@ -136,6 +137,7 @@ namespace TCC.Parsing
             {typeof(S_GET_USER_GUILD_LOGO), new Action<S_GET_USER_GUILD_LOGO>(x => PacketProcessor.HandleUserGuildLogo(x)) },
             {typeof(S_PLAYER_CHANGE_FLIGHT_ENERGY), new Action<S_PLAYER_CHANGE_FLIGHT_ENERGY>(x => PacketProcessor.HandlePlayerChangeFlightEnergy(x)) },
             {typeof(S_SHOW_PARTY_MATCH_INFO), new Action<S_SHOW_PARTY_MATCH_INFO>(x => PacketProcessor.HandleLfgList(x)) },
+            {typeof(C_LOGIN_ARBITER), Helpers.Contructor<Func<C_LOGIN_ARBITER, LoginArbiterMessage>>()},
             //{typeof(S_ACTION_STAGE), new Action<S_ACTION_STAGE>(x => PacketProcessor.HandleActionStage(x)) }, //nvm
             //{typeof(S_EACH_SKILL_RESULT), new Action<S_EACH_SKILL_RESULT>(x => PacketProcessor.HandleSkillResult(x)) },
             //{typeof(C_LOAD_TOPO_FIN), new Action<C_LOAD_TOPO_FIN>(x => PacketProcessor.HandleLoadTopoFin(x)) },
@@ -323,5 +325,7 @@ namespace TCC.Parsing
             type.DynamicInvoke(message);
             return true;
         }
+
+        public void ReloadSysMsg() { _sysMsgNamer?.Reload(Version, ReleaseVersion); }
     }
 }

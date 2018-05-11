@@ -7,7 +7,6 @@ namespace TCC.Parsing
         public static void DownloadIfNotExist(uint version, string directory)
         {
             DownloadOpcode(version, directory);
-            DownloadSysmsg(version, directory);
         }
 
         private static void DownloadOpcode(uint version, string directory)
@@ -44,38 +43,63 @@ namespace TCC.Parsing
             catch { }
         }
 
-        private static void DownloadSysmsg(uint version, string directory)
+        public static bool DownloadSysmsg(uint version,int revision, string directory)
         {
             Directory.CreateDirectory(directory);
 
             var filename = directory + Path.DirectorySeparatorChar + "smt_" + version + ".txt";
             if (File.Exists(filename))
             {
-                return;
+                return false;
             }
             filename = directory + Path.DirectorySeparatorChar + "sysmsg." + version + ".map";
             if (File.Exists(filename))
             {
-                return;
+                return false;
+            }
+            filename = directory + Path.DirectorySeparatorChar + "sysmsg." + revision / 100 + ".map";
+            if (File.Exists(filename))
+            {
+                return false;
             }
             try
             {
                 Download("https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/sysmsg." + version + ".map", filename);
-                return;
+                return true;
             }
             catch { }
             try
             {
                 Download("https://raw.githubusercontent.com/hackerman-caali/tera-data/master/map_base/sysmsg." + version + ".map", filename);
-                return;
+                return true;
             }
             catch { }
             try
             {
                 Download("https://raw.githubusercontent.com/meishuu/tera-data/master/map/sysmsg." + version + ".map", filename);
-                return;
+                return true;
             }
             catch { }
+            try
+            {
+                Download("https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/sysmsg." + revision/100 + ".map", filename);
+                return true;
+            }
+            catch { }
+            try
+            {
+                Download("https://raw.githubusercontent.com/hackerman-caali/tera-data/master/map_base/sysmsg." + revision / 100 + ".map", filename);
+                return true;
+            }
+            catch { }
+            try
+            {
+                Download("https://raw.githubusercontent.com/meishuu/tera-data/master/map/sysmsg." + revision / 100 + ".map", filename);
+                return true;
+            }
+            catch { }
+
+            return false;
         }
 
         private static void Download(string remote, string local)

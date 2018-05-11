@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -9,8 +10,9 @@ namespace TCC.TeraCommon.Game.Services
     // Since this mapping is version dependent, we can't use a sing global instance of this
     public class OpCodeNamer
     {
-        private readonly Dictionary<string, ushort> _opCodeCodes;
-        private readonly Dictionary<ushort, string> _opCodeNames;
+        private Dictionary<string, ushort> _opCodeCodes;
+        private Dictionary<ushort, string> _opCodeNames;
+        private readonly string _path;
 
         public OpCodeNamer(IEnumerable<KeyValuePair<ushort, string>> names)
         {
@@ -22,6 +24,7 @@ namespace TCC.TeraCommon.Game.Services
         public OpCodeNamer(string filename)
             : this(ReadOpCodeFile(filename))
         {
+            _path = Path.GetDirectoryName(filename);
         }
 
         public string GetName(ushort opCode)
@@ -37,12 +40,14 @@ namespace TCC.TeraCommon.Game.Services
             if (!File.Exists(filename))
             {
                 filename = filename.Contains("smt_")
-                                    ? filename.Replace("smt_", "sysmsg.").Replace(".txt", ".map")
-                                    : Path.GetDirectoryName(filename) + "/protocol." + Path.GetFileName(filename).Replace(".txt", ".map");
+                    ? filename.Replace("smt_", "sysmsg.").Replace(".txt", ".map")
+                    : Path.GetDirectoryName(filename) + "/protocol." + Path.GetFileName(filename).Replace(".txt", ".map");
             }
+
+            if (!File.Exists(filename)) { return new List<KeyValuePair<ushort, string>>(); }
             var names = File.ReadLines(filename)
-                            .Select(s => Regex.Replace(s.Replace("=", " "), @"\s+", " ").Split(' ').ToArray())
-                            .Select(parts => new KeyValuePair<ushort, string>(ushort.Parse(parts[1]), parts[0]));
+                .Select(s => Regex.Replace(s.Replace("=", " "), @"\s+", " ").Split(' ').ToArray())
+                .Select(parts => new KeyValuePair<ushort, string>(ushort.Parse(parts[1]), parts[0]));
             return names;
         }
 
@@ -51,8 +56,19 @@ namespace TCC.TeraCommon.Game.Services
             ushort code;
             if (_opCodeCodes.TryGetValue(name, out code))
                 return code;
-            //throw new ArgumentException($"Unknown name '{name}'");
+            Debug.WriteLine("Missing opcode: " + name);
             return 0;
+            //throw new ArgumentException($"Unknown name '{name}'");
+        }
+
+        public void Reload(uint version, int releaseVersion)
+        {
+            var filename = _path + "/sysmsg." + version + ".map";
+            if (!File.Exists(filename)) filename = _path + "/sysmsg." + (releaseVersion / 100) + ".map";
+            if (!File.Exists(filename)) return;
+            var namesArray = ReadOpCodeFile(filename).ToArray();
+            _opCodeNames = namesArray.ToDictionary(parts => parts.Key, parts => parts.Value);
+            _opCodeCodes = namesArray.ToDictionary(parts => parts.Value, parts => parts.Key);
         }
     }
 }
