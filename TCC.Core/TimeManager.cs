@@ -20,7 +20,8 @@ namespace TCC
             {"TW", new TeraServerTimeInfo("China Standard Time", 6, DayOfWeek.Wednesday) },
             {"JP", new TeraServerTimeInfo("Tokyo Standard Time", 6, DayOfWeek.Wednesday) },
             {"THA", new TeraServerTimeInfo("Indochina Time", 6, DayOfWeek.Wednesday) },
-            {"KR", new TeraServerTimeInfo("Korea Standard Time", 6, DayOfWeek.Wednesday) }
+            {"KR", new TeraServerTimeInfo("Korea Standard Time", 6, DayOfWeek.Wednesday) },
+            {"KR-PTS", new TeraServerTimeInfo("Korea Standard Time", 6, DayOfWeek.Wednesday) }
         };
 
         public const double SecondsInDay = 60 * 60 * 24;
