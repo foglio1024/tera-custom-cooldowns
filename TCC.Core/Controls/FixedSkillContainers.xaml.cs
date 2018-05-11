@@ -54,8 +54,11 @@ namespace TCC.Controls
         //really absurd way of fixing order issue
         private void OnSkillsLoaded()
         {
-            ReorderSkillContainer(MainSkills, CooldownWindowViewModel.Instance.MainSkills);
-            ReorderSkillContainer(SecSkills, CooldownWindowViewModel.Instance.SecondarySkills);
+            Dispatcher.Invoke(() =>
+            {
+                ReorderSkillContainer(MainSkills, CooldownWindowViewModel.Instance.MainSkills);
+                ReorderSkillContainer(SecSkills, CooldownWindowViewModel.Instance.SecondarySkills);
+            });
         }
 
         //really absurd way of fixing order issue
