@@ -5,6 +5,8 @@ namespace TCC.Data
 {
     public class Counter : TSPropertyChanged
     {
+
+        //TODO use events here
         private int val = 0;
         public int Val
         {
