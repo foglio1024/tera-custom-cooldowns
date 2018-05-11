@@ -101,7 +101,7 @@ namespace TCC
         public static bool LfgEnabled { get; set; } = true;
         public static bool ShowGroupWindowDetails { get; set; } = true;
         public static bool UseHotkeys { get; set; } = true;
-        public static HotKey LfgHotkey { get; set; } = new HotKey(Key.Y, ModifierKeys.None);
+        public static HotKey LfgHotkey { get; set; } = new HotKey(Key.Y, ModifierKeys.Control);
         public static HotKey InfoWindowHotkey { get; set; } = new HotKey(Key.I, ModifierKeys.Control);
         public static HotKey SettingsHotkey { get; set; } = new HotKey(Key.O, ModifierKeys.Control);
         public static HotKey ShowAllHotkey { get; set; } = new HotKey(Key.NumPad5, ModifierKeys.Control);
