@@ -699,7 +699,7 @@ namespace TCC.Parsing
             {
                 case Class.Elementalist:
                     Mystic.CheckHurricane(p);
-                    Mystic.CheckAura(p);
+                    Mystic.CheckBuff(p);
                     break;
                 case Class.Warrior:
                     Warrior.CheckBuff(p);
@@ -762,7 +762,7 @@ namespace TCC.Parsing
                     Priest.CheckBuff(p);
                     break;
                 case Class.Elementalist:
-                    Mystic.CheckAura(p);
+                    Mystic.CheckBuff(p);
                     break;
                 case Class.Sorcerer:
                     Sorcerer.CheckBuff(p);
@@ -803,7 +803,7 @@ namespace TCC.Parsing
                     Lancer.CheckGshoutEnd(p);
                     break;
                 case Class.Elementalist:
-                    Mystic.CheckAuraEnd(p);
+                    Mystic.CheckBuffEnd(p);
                     break;
                 case Class.Fighter:
                     Brawler.CheckBrawlerAbnormalEnd(p);

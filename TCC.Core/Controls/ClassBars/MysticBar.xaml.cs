@@ -1,4 +1,6 @@
-﻿namespace TCC.Controls.ClassBars
+﻿using TCC.ViewModels;
+
+namespace TCC.Controls.ClassBars
 {
     /// <summary>
     /// Logica di interazione per MysticBar.xaml

@@ -29,87 +29,101 @@ namespace TCC.ClassSpecific
         private static readonly uint[] ManaAuraIDs = { 700300 };
         private static readonly uint[] CritResAuraIDs = { 700200, 700201, 700202, 700203 };
         private static readonly uint[] SwiftAuraIDs = { 700700, 700701 };
+        private static readonly uint[] ElementalizeIDs = { 702000 };
 
         public static void CheckHurricane(S_ABNORMALITY_BEGIN msg)
         {
-            if(msg.AbnormalityId == HurricaneId) Debug.WriteLine("Checking hurricane; id={0} caster={1} player={2}", msg.AbnormalityId, msg.CasterId, SessionManager.CurrentPlayer.EntityId);
-            if (msg.AbnormalityId == HurricaneId && msg.CasterId == SessionManager.CurrentPlayer.EntityId)
-            {
-                SessionManager.SkillsDatabase.TryGetSkill(HurricaneId, Class.Common, out var hurricane);
-                SkillManager.AddSkillDirectly(hurricane, HurricaneDuration);
-            }
+            if (msg.AbnormalityId != HurricaneId || msg.CasterId != SessionManager.CurrentPlayer.EntityId) return;
+            SessionManager.SkillsDatabase.TryGetSkill(HurricaneId, Class.Common, out var hurricane);
+            SkillManager.AddSkillDirectly(hurricane, HurricaneDuration);
 
         }
-        public static void CheckAura(S_ABNORMALITY_BEGIN p)
+        public static void CheckBuff(S_ABNORMALITY_BEGIN p)
         {
-            if(CritAuraIDs.Contains(p.AbnormalityId) && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            if (p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
+            if (CritAuraIDs.Contains(p.AbnormalityId))
             {
                 ((MysticBarManager)ClassWindowViewModel.Instance.CurrentManager).Auras.CritAura = true;
             }
-            else if (ManaAuraIDs.Contains(p.AbnormalityId) && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            else if (ManaAuraIDs.Contains(p.AbnormalityId) )
             {
                 ((MysticBarManager)ClassWindowViewModel.Instance.CurrentManager).Auras.ManaAura = true;
             }
-            else if (CritResAuraIDs.Contains(p.AbnormalityId) && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            else if (CritResAuraIDs.Contains(p.AbnormalityId) )
             {
                 ((MysticBarManager)ClassWindowViewModel.Instance.CurrentManager).Auras.CritResAura = true;
             }
-            else if (SwiftAuraIDs.Contains(p.AbnormalityId) && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            else if (SwiftAuraIDs.Contains(p.AbnormalityId) )
             {
                 ((MysticBarManager)ClassWindowViewModel.Instance.CurrentManager).Auras.SwiftAura = true;
             }
-            else if (p.AbnormalityId == VowId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            else if (p.AbnormalityId == VowId )
             {
                 ((MysticBarManager)ClassWindowViewModel.Instance.CurrentManager).Vow.Buff.Start(p.Duration);
             }
+            else if (ElementalizeIDs.Contains(p.AbnormalityId) )
+            {
+                ((MysticBarManager)ClassWindowViewModel.Instance.CurrentManager).Elementalize = true;
+            }
+
         }
-        public static void CheckAura(S_ABNORMALITY_REFRESH p)
+        public static void CheckBuff(S_ABNORMALITY_REFRESH p)
         {
-            if (CritAuraIDs.Contains(p.AbnormalityId) && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            if (p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
+
+            if (CritAuraIDs.Contains(p.AbnormalityId) )
             {
                 ((MysticBarManager)ClassWindowViewModel.Instance.CurrentManager).Auras.CritAura = true;
             }
-            else if (ManaAuraIDs.Contains(p.AbnormalityId) && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            else if (ManaAuraIDs.Contains(p.AbnormalityId) )
             {
                 ((MysticBarManager)ClassWindowViewModel.Instance.CurrentManager).Auras.ManaAura = true;
             }
-            else if (CritResAuraIDs.Contains(p.AbnormalityId) && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            else if (CritResAuraIDs.Contains(p.AbnormalityId) )
             {
                 ((MysticBarManager)ClassWindowViewModel.Instance.CurrentManager).Auras.CritResAura = true;
             }
-            else if (SwiftAuraIDs.Contains(p.AbnormalityId) && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            else if (SwiftAuraIDs.Contains(p.AbnormalityId) )
             {
                 ((MysticBarManager)ClassWindowViewModel.Instance.CurrentManager).Auras.SwiftAura = true;
             }
-            else if (p.AbnormalityId == VowId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            else if (p.AbnormalityId == VowId )
             {
                 ((MysticBarManager)ClassWindowViewModel.Instance.CurrentManager).Vow.Buff.Refresh(p.Duration);
             }
-
+            else if (ElementalizeIDs.Contains(p.AbnormalityId))
+            {
+                ((MysticBarManager)ClassWindowViewModel.Instance.CurrentManager).Elementalize = true;
+            }
         }
-        public static void CheckAuraEnd(S_ABNORMALITY_END p)
+        public static void CheckBuffEnd(S_ABNORMALITY_END p)
         {
-            if (CritAuraIDs.Contains(p.AbnormalityId) && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            if (p.TargetId != SessionManager.CurrentPlayer.EntityId) return;
+
+            if (CritAuraIDs.Contains(p.AbnormalityId) )
             {
                 ((MysticBarManager)ClassWindowViewModel.Instance.CurrentManager).Auras.CritAura = false;
             }
-            else if (ManaAuraIDs.Contains(p.AbnormalityId) && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            else if (ManaAuraIDs.Contains(p.AbnormalityId) )
             {
                 ((MysticBarManager)ClassWindowViewModel.Instance.CurrentManager).Auras.ManaAura = false;
             }
-            else if (CritResAuraIDs.Contains(p.AbnormalityId) && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            else if (CritResAuraIDs.Contains(p.AbnormalityId) )
             {
                 ((MysticBarManager)ClassWindowViewModel.Instance.CurrentManager).Auras.CritResAura = false;
             }
-            else if (SwiftAuraIDs.Contains(p.AbnormalityId) && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            else if (SwiftAuraIDs.Contains(p.AbnormalityId) )
             {
                 ((MysticBarManager)ClassWindowViewModel.Instance.CurrentManager).Auras.SwiftAura = false;
             }
-            else if (p.AbnormalityId == VowId && p.TargetId == SessionManager.CurrentPlayer.EntityId)
+            else if (p.AbnormalityId == VowId )
             {
                 ((MysticBarManager)ClassWindowViewModel.Instance.CurrentManager).Vow.Buff.Refresh(0);
             }
-
+            else if (ElementalizeIDs.Contains(p.AbnormalityId))
+            {
+                ((MysticBarManager)ClassWindowViewModel.Instance.CurrentManager).Elementalize = false;
+            }
         }
 
     }

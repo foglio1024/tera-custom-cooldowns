@@ -5,10 +5,21 @@ namespace TCC.ViewModels
 {
     internal class MysticBarManager : ClassManager
     {
-
+        private bool _elementalize;
         public AurasTracker Auras { get; private set; }
         public FixedSkillCooldown Contagion { get; private set; }
         public DurationCooldownIndicator Vow { get; private set; }
+
+        public bool Elementalize
+        {
+            get => _elementalize;
+            set
+            {
+                if(_elementalize == value) return;
+                _elementalize = value;
+                NPC();
+            }
+        }
 
         public MysticBarManager() : base()
         {
@@ -34,6 +45,8 @@ namespace TCC.ViewModels
                 Cooldown = new FixedSkillCooldown(vow, _dispatcher, false)
             };
             Vow.Buff.PropertyChanged += Vow_PropertyChanged;
+
+
         }
 
         public override bool StartSpecialSkill(SkillCooldown sk)
