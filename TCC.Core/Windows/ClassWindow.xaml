@@ -90,7 +90,7 @@
                          DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWindow}}" 
                          />
 
-        <ContentControl x:Name="content" Content="{Binding Instance.CurrentManager}"
+        <ContentControl x:Name="content" Content="{Binding Instance.CurrentManager}" HorizontalAlignment="Center"
                         ContentTemplateSelector="{StaticResource ClassWindowTemplateSelector}" Margin="5" Background="Transparent" Grid.Row="1">
         <ContentControl.LayoutTransform>
             <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
