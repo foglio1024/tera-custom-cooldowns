@@ -931,11 +931,9 @@ namespace TCC.Parsing
         public static void HandleInventory(S_INVEN x)
         {
             if (!x.IsOpen) return;
-            //if (BuffBarWindowViewModel.Instance.Player.InfBuffs.Any(b => AbnormalityDatabase.NoctIds.Contains(b.Abnormality.Id))) return;
-            //if (BuffBarWindowViewModel.Instance.Player.Buffs.Any(b => AbnormalityDatabase.BlueNoctIds.Contains(b.Abnormality.Id))) return;
-
             if (x.First && x.More) return;
             if (S_INVEN.Items == null) return;
+            if (InfoWindowViewModel.Instance.CurrentCharacter == null) return;
             InfoWindowViewModel.Instance.CurrentCharacter.ClearGear();
             foreach (var tuple in S_INVEN.Items)
             {
