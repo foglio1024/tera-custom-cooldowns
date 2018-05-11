@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:TCC.Windows" ResizeMode="NoResize" AllowsTransparency="True" SizeToContent="Height" ShowInTaskbar="False"
         mc:Ignorable="d" Loaded="Window_Loaded" WindowStyle="None" WindowStartupLocation="CenterScreen" Topmost="False"
         Title="SplashScreen" Height="Auto" Width="420" Background="Transparent" MouseLeftButtonDown="Drag">
-    
-    <Grid VerticalAlignment="Top" Background="{StaticResource MainColor}" Margin="10">
+
+    <Grid VerticalAlignment="Top" Background="{StaticResource Colors.Chat.Party}" Margin="10">
         <Grid.Effect>
             <DropShadowEffect Opacity=".5" ShadowDepth="3"/>
         </Grid.Effect>
@@ -16,7 +16,9 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Image Source="/TCC;component/resources/images/tera-logo-flat.png" Opacity=".9"/>
+        <Image x:Name="img" HorizontalAlignment="Stretch" Stretch="UniformToFill" Opacity=".2"/>
+
+        <Image Source="/TCC;component/resources/images/tera-logo-flat.png" Opacity=".9" />
         <Border Grid.Row="1" Grid.RowSpan="2" Background="#333"/>
         <TextBlock Name="Txt" Grid.Row="1" VerticalAlignment="Center" Margin="0,3" TextWrapping="WrapWithOverflow"
                    HorizontalAlignment="Center" TextAlignment="Center" Foreground="#afff" >TCC</TextBlock>

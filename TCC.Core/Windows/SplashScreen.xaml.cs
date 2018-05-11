@@ -1,9 +1,11 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using System.Threading;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
 namespace TCC.Windows
@@ -17,6 +19,10 @@ namespace TCC.Windows
         public SplashScreen()
         {
             InitializeComponent();
+            var r = new Random();
+
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"resources/images/splash/{r.Next(1, 15)}.jpg");
+            img.Source = new BitmapImage(new Uri(path, UriKind.Relative));
         }
 
         public void SetText(string t)
