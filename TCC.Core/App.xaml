@@ -21,8 +21,10 @@
             <DropShadowEffect x:Key="DropShadow" BlurRadius="4" ShadowDepth="2" Opacity=".4" />
             <DropShadowEffect x:Key="FadedDropShadow" BlurRadius="3" ShadowDepth="1" Opacity=".3" />
 
+            <Color x:Key="GreenColorBase">#00a561</Color>
+
             <SolidColorBrush x:Key="MainColor" Color="#ff3822"/>
-            <SolidColorBrush x:Key="GreenColor" Color="#00A561"/>
+            <SolidColorBrush x:Key="GreenColor" Color="{StaticResource GreenColorBase}"/>
             <SolidColorBrush x:Key="LightGreenColor" Color="#55ff77"/>
             <SolidColorBrush x:Key="TwitchColor" Color="#975eff "/>
             <SolidColorBrush x:Key="CardDarkColor" Color="#424245"/>
