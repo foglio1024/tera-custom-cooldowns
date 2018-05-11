@@ -96,28 +96,12 @@ namespace TCC.Controls.ChatControls
 
         }
 
-        private void SendString(string s)
-        {
-            var teraWindow = FocusManager.FindTeraWindow();
-            if (teraWindow == IntPtr.Zero) { return; }
 
-            PasteString(teraWindow, s);
-
-        }
-        private static void PasteString(IntPtr hWnd, string s)
-        {
-            Thread.Sleep(100);
-            foreach (var character in s)
-            {
-                if (!FocusManager.PostMessage(hWnd, FocusManager.WM_CHAR, character, 0)) { throw new Win32Exception(); }
-                Thread.Sleep(1);
-            }
-        }
 
         private void WhisperClick(object sender, RoutedEventArgs e)
         {
             ChatWindowManager.Instance.CloseTooltip();
-            SendString("/w " + ChatWindowManager.Instance.TooltipInfo.Name + " ");
+            WindowManager.SendString("/w " + ChatWindowManager.Instance.TooltipInfo.Name + " ");
         }
 
         private void GrantInviteClick(object sender, RoutedEventArgs e)
