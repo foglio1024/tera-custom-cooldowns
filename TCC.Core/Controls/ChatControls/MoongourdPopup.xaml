@@ -13,7 +13,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Border Background="{StaticResource MoongourdBgColor}" Grid.RowSpan="3" CornerRadius="2"/>
-        <Border Background="{StaticResource MoongourdHeaderColor}" CornerRadius="2 2 0 0" BorderThickness="0 2 0 0" BorderBrush="{StaticResource MoongourdAccentColor}" />
+        <Border Background="{StaticResource MoongourdHeaderColor}"  BorderThickness="0 2 0 0" Grid.Row="1" BorderBrush="{StaticResource MoongourdAccentColor}" />
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -28,7 +28,7 @@
         <Grid Margin="6 0" Grid.Row="1" Visibility="{Binding ElementName=List, Path=HasItems,Converter={StaticResource Converters.BoolToVisibleCollapsed}}"
               >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="230"/>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="50"/>
                 <ColumnDefinition Width="40"/>
