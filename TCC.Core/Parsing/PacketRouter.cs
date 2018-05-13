@@ -214,9 +214,9 @@ namespace TCC.Parsing
         {
             if (!SettingsManager.StatSent) App.SendUsageStat();
             SettingsManager.LastRegion = Language;
-            TimeManager.Instance.SetServerTimeZone(Language);
+            TimeManager.Instance.SetServerTimeZone(SettingsManager.LastRegion);
             TimeManager.Instance.SetGuildBamTime(false);
-            SessionManager.InitDatabases(Language);
+            SessionManager.InitDatabases(SettingsManager.LastRegion);
             CooldownWindowViewModel.Instance.ClearSkills();
             SessionManager.CurrentPlayer.Class = p.CharacterClass;
             CooldownWindowViewModel.Instance.LoadSkills(Utils.ClassEnumToString(p.CharacterClass).ToLower() + "-skills.xml", p.CharacterClass);
@@ -861,7 +861,7 @@ namespace TCC.Parsing
             foreach (var user in p.Members)
                 GroupWindowViewModel.Instance.AddOrUpdateMember(user);
 
-            if (notifyLfg) WindowManager.LfgListWindow.VM.NotifyMyLfg();
+            if (notifyLfg && WindowManager.LfgListWindow != null && WindowManager.LfgListWindow.VM != null) WindowManager.LfgListWindow.VM.NotifyMyLfg();
             if (Proxy.IsConnected)
             {
                 Proxy.RequestCandidates();
