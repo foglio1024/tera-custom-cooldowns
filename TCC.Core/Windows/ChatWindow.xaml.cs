@@ -76,8 +76,8 @@ namespace TCC.Windows
             ((ChatWindowSettings)WindowSettings).Tabs.AddRange(VM.Tabs);
             ((ChatWindowSettings)WindowSettings).LfgOn = VM.LfgOn;
             ((ChatWindowSettings)WindowSettings).BackgroundOpacity = VM.BackgroundOpacity;
-            ((ChatWindowSettings)WindowSettings).X = Left;
-            ((ChatWindowSettings)WindowSettings).Y= Top;
+            ((ChatWindowSettings)WindowSettings).X = Left/SettingsManager.ScreenW;
+            ((ChatWindowSettings)WindowSettings).Y= Top/SettingsManager.ScreenH;
             var v = SettingsManager.ChatWindowsSettings;
             var s = v.FirstOrDefault(x => x == WindowSettings);
             if (s == null) v.Add(WindowSettings as ChatWindowSettings);

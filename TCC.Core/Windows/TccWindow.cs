@@ -48,8 +48,8 @@ namespace TCC.Windows
             _settings.NotifyWindowSafeClose += CloseWindowSafe;
             _settings.NotifyEnableWindow += EnableWindow;
             _settings.PropertyChanged += _settings_PropertyChanged;
-            Left = ws.X;
-            Top = ws.Y;
+            Left = ws.X*SettingsManager.ScreenW;
+            Top = ws.Y*SettingsManager.ScreenH;
             if (!ignoreSize)
             {
                 if (ws.H != 0) Height = ws.H;
@@ -264,9 +264,12 @@ namespace TCC.Windows
                 var dy = m.M22;
                 var newLeft = Left * dx;
                 var newTop = Top * dx;
-                _settings.X = newLeft / dx;
-                _settings.Y = newTop / dy;
+                //_settings.X = newLeft / dx;
+                //_settings.Y = newTop / dy;
 
+                _settings.X = Left / SettingsManager.ScreenW;
+                _settings.Y = Top / SettingsManager.ScreenH;
+                Console.WriteLine($"Pos: {_settings.X}, {_settings.Y}");
                 SettingsManager.SaveSettings();
             }
             catch

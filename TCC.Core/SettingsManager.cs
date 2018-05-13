@@ -15,6 +15,7 @@ using TCC.Windows;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
 using ModifierKeys = TCC.Tera.Data.HotkeysData.ModifierKeys;
 using Key = System.Windows.Forms.Keys;
+using Size = System.Drawing.Size;
 
 namespace TCC
 {
@@ -31,7 +32,8 @@ namespace TCC
     }
     public static class SettingsManager
     {
-        private static Rectangle _screen = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
+        public static double ScreenW => SystemParameters.VirtualScreenWidth;
+        public static double ScreenH => SystemParameters.VirtualScreenHeight;
         public static XDocument SettingsDoc;
 
         public static WindowSettings GroupWindowSettings;
@@ -414,7 +416,7 @@ namespace TCC
                 var res = TccMessageBox.Show("TCC",
                     "Cannot load settings file. Do you want TCC to delete it and recreate a default file?",
                     MessageBoxButton.YesNo);
-                if(res == MessageBoxResult.Yes) File.Delete(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml");
+                if (res == MessageBoxResult.Yes) File.Delete(AppDomain.CurrentDomain.BaseDirectory + @"/tcc-config.xml");
                 LoadSettings();
             }
         }
@@ -539,11 +541,13 @@ namespace TCC
             try
             {
                 x = double.Parse(ws.Attribute("X").Value, CultureInfo.InvariantCulture);
+                if (x > 1) x = x / ScreenW;
             }
             catch (Exception) { }
             try
             {
                 y = double.Parse(ws.Attribute("Y").Value, CultureInfo.InvariantCulture);
+                if (y > 1) y = y / ScreenH;
             }
             catch (Exception) { }
             try
