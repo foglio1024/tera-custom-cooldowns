@@ -1157,6 +1157,16 @@ namespace TCC.ViewModels
                 NPC(nameof(ShowItemsCooldown));
             }
         }
+        public bool UseLfg
+        {
+            get => SettingsManager.LfgEnabled;
+            set
+            {
+                if (SettingsManager.LfgEnabled == value) return;
+                SettingsManager.LfgEnabled = value;
+                NPC();
+            }
+        }
         public bool UseHotkeys
         {
             get => SettingsManager.UseHotkeys;
