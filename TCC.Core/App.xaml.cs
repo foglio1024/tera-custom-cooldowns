@@ -34,10 +34,9 @@ namespace TCC
         private void OnStartup(object sender, StartupEventArgs e)
         {
             BaseDispatcher = Dispatcher.CurrentDispatcher;
-
             var v = Assembly.GetExecutingAssembly().GetName().Version;
             _version = $"TCC v{v.Major}.{v.Minor}.{v.Build}";
-
+            
             InitSplashScreen();
             AppDomain.CurrentDomain.UnhandledException += GlobalUnhandledExceptionHandler;
             Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.Normal;
@@ -72,29 +71,35 @@ namespace TCC
             SplashScreen.SetText("Starting");
             SessionManager.CurrentPlayer.Class = Class.None;
             SessionManager.CurrentPlayer.Name = "player";
+            SessionManager.CurrentPlayer.PlayerId = 10;
             TimeManager.Instance.SetServerTimeZone(SettingsManager.LastRegion);
             ChatWindowManager.Instance.AddTccMessage(_version);
-
             SplashScreen.CloseWindowSafe();
 
             UpdateManager.StartCheck();
 
-            return;
-            SessionManager.CurrentPlayer.Class = Class.Warrior;
-            CooldownWindowViewModel.Instance.LoadSkills("warrior-skills.xml", Class.Warrior);
-            var w = new SkillConfigWindow();
-            w.Show();
-            var l = new List<User>();
-            var r = new Random();
-            for (uint i = 0; i < 30; i++)
-                GroupWindowViewModel.Instance.AddOrUpdateMember(new User(GroupWindowViewModel.Instance.GetDispatcher())
-                {
-                    Name = i.ToString(),
-                    PlayerId = i,
-                    ServerId = i,
-                    EntityId = i,
-                    UserClass = (Class) r.Next(0, 12)
-                });
+           //WindowManager.LfgListWindow.ShowWindow();
+           // var l = new Listing();
+           // l.LeaderId = 10;
+           // l.Message = "SJG exp only";
+           // l.LeaderName = "Foglio";
+           // l.Players.Add(new User(WindowManager.LfgListWindow.Dispatcher){PlayerId = 10, IsLeader = true, Online = true});
+           // l.Applicants.Add(new User(WindowManager.LfgListWindow.Dispatcher){PlayerId = 1, Name = "Applicant", Online = true, UserClass = Class.Priest});
+           // WindowManager.LfgListWindow.VM.Listings.Add(l);
+            //var l = new List<User>();
+            //var r = new Random();
+            //for (uint i = 0; i < 30; i++)
+            //    GroupWindowViewModel.Instance.AddOrUpdateMember(new User(GroupWindowViewModel.Instance.GetDispatcher())
+            //    {
+            //        Name = i.ToString(),
+            //        PlayerId = i,
+            //        ServerId = i,
+            //        EntityId = i,
+            //        UserClass = (Class)r.Next(0, 12)
+            //    });
+            //GroupWindowViewModel.Instance.SetRaid(true);
+            //GroupWindowViewModel.Instance.SetNewLeader(10, "player");
+
         }
 
         private static void TeraSniffer_OnNewConnection(Server srv)
@@ -103,11 +108,14 @@ namespace TCC
             SkillManager.Clear();
             WindowManager.TrayIcon.Icon = WindowManager.ConnectedIcon;
             ChatWindowManager.Instance.AddTccMessage($"Connected to {srv.Name}.");
+            WindowManager.FloatingButton.NotifyExtended($"TCC", $"Connected to {srv.Name}");
         }
 
         private static void TeraSniffer_OnEndConnection()
         {
             ChatWindowManager.Instance.AddTccMessage("Disconnected from the server.");
+            WindowManager.FloatingButton.NotifyExtended($"TCC", "Disconnected");
+
             GroupWindowViewModel.Instance.ClearAllAbnormalities();
             BuffBarWindowViewModel.Instance.Player.ClearAbnormalities();
             EntitiesManager.ClearNPC();
@@ -118,7 +126,7 @@ namespace TCC
 
         private static void GlobalUnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
         {
-            var ex = (Exception) e.ExceptionObject;
+            var ex = (Exception)e.ExceptionObject;
             File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "/error.txt",
                 "##### CRASH #####\r\n" + ex.Message + "\r\n" +
                 ex.StackTrace + "\r\n" + ex.Source + "\r\n" + ex + "\r\n" + ex.Data + "\r\n" + ex.InnerException +
@@ -152,7 +160,7 @@ namespace TCC
 
         private static void UploadCrashDump(UnhandledExceptionEventArgs e)
         {
-            var ex = (Exception) e.ExceptionObject;
+            var ex = (Exception)e.ExceptionObject;
             var c = new WebClient();
             c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
             c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
@@ -195,7 +203,7 @@ namespace TCC
                     waiting = false;
                     Dispatcher.Run();
                 })
-                {Name = "SplashScreen window thread"};
+            { Name = "SplashScreen window thread" };
             ssThread.SetApartmentState(ApartmentState.STA);
             ssThread.Start();
             while (waiting) Thread.Sleep(1);
