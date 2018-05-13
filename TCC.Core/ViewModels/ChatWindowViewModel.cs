@@ -9,6 +9,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Threading;
+using TCC.Controls.ChatControls;
 using TCC.Data;
 using TCC.Parsing.Messages;
 using TCC.Windows;
@@ -30,6 +31,7 @@ namespace TCC.ViewModels
         }
         internal void CloseTooltip()
         {
+            if ((ChatWindows[0].PlayerInfo.Child as PlayerTooltip).MgPopup.IsMouseOver) return;
             ChatWindows[0].CloseTooltip();
         }
 

@@ -213,6 +213,9 @@
     <Compile Include="Controls\ChatControls\DefaultMessageBody.xaml.cs">
       <DependentUpon>DefaultMessageBody.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ChatControls\MoongourdPopup.xaml.cs">
+      <DependentUpon>MoongourdPopup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ChatControls\TabSettingControl.xaml.cs">
       <DependentUpon>TabSettingControl.xaml</DependentUpon>
     </Compile>
@@ -366,6 +369,7 @@
     <Compile Include="Data\World.cs" />
     <Compile Include="Data\DungeonCooldown.cs" />
     <Compile Include="KeyboardHook.cs" />
+    <Compile Include="MoongourdManager.cs" />
     <Compile Include="Parsing\Messages\C_LOGIN_ARBITER.cs" />
     <Compile Include="Parsing\Messages\S_ABNORMALITY_DAMAGE_ABSORB.cs" />
     <Compile Include="Parsing\Messages\S_ACCOMPLISH_ACHIEVEMENT.cs" />
@@ -388,6 +392,7 @@
     <Compile Include="Parsing\Messages\S_PARTY_MATCH_LINK.cs" />
     <Compile Include="Parsing\Messages\S_PARTY_MEMBER_INTERVAL_POS_UPDATE.cs" />
     <Compile Include="Parsing\Messages\S_RESPONSE_GAMESTAT_PONG.cs" />
+    <Compile Include="Parsing\Messages\S_SHOW_CANDIDATE_LIST.cs" />
     <Compile Include="Parsing\Messages\S_SHOW_PARTY_MATCH_INFO.cs" />
     <Compile Include="Parsing\Messages\S_TRADE_BROKER_DEAL_SUGGESTED.cs" />
     <Compile Include="Parsing\Messages\S_UPDATE_FRIEND_INFO.cs" />
@@ -395,6 +400,7 @@
     <Compile Include="Parsing\OpcodeDownloader.cs" />
     <Compile Include="Parsing\SystemMessagesProcessor.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Properties\Annotations1.cs" />
     <Compile Include="TemplateSelectors\EnemyTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\EnemyWindowTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\MessageBodyDataTemplateSelector.cs" />
@@ -910,6 +916,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\ChatControls\MoongourdPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\ChatControls\PlayerTooltip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1236,6 +1246,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="resources\images\moongourd.png" />
     <None Include="resources\data\equip_exp\equip_exp-EU-EN.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

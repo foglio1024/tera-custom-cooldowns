@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:TCC.ViewModels"
-             xmlns:controls="clr-namespace:TCC.Controls" 
+             xmlns:controls="clr-namespace:TCC.Controls"
+             xmlns:chatControls="clr-namespace:TCC.Controls.ChatControls"
              mc:Ignorable="d" MouseLeave="UserControl_MouseLeave" DataContext="{Binding Source={x:Static vm:ChatWindowManager.Instance}}">
     <Grid>
         <Border CornerRadius="1" Background="#444" Grid.RowSpan="10" Margin="6" BorderBrush="#666" BorderThickness="0" Width="Auto" Name="RootBorder">
@@ -166,6 +167,23 @@
                             <Path Data="{StaticResource SvgStar}"/>
                             <TextBlock Text="{Binding TooltipInfo.FriendLabelText}" Margin="3"></TextBlock>
                         </StackPanel>
+                    </Button>
+                    <Button MouseEnter="MoongourdButtonMouseEnter" Margin="-1 0 -1 0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Popup Placement="Right" HorizontalOffset="5" VerticalOffset="-5" x:Name="MgPopup" AllowsTransparency="True">
+                                <chatControls:MoongourdPopup />
+                            </Popup>
+                            <StackPanel Orientation="Horizontal" >
+                                <Image Source="/TCC;component/resources/images/moongourd.png" Margin="4 6 3 6"></Image>
+                                <TextBlock Text="Moongourd info" Margin="3"></TextBlock>
+                            </StackPanel>
+                                <Path Data="{StaticResource SvgMenuRight}" HorizontalAlignment="Right" 
+                                      Opacity=".5" Margin="3 10 0 10" Height="Auto" Grid.Column="1"></Path>
+                        </Grid>
                     </Button>
                     <Button Click="BlockClick">
                         <StackPanel Orientation="Horizontal">

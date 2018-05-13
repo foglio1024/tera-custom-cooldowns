@@ -150,5 +150,12 @@ namespace TCC.Controls.ChatControls
                 _kicking = true;
             }
         }
+
+        private void MoongourdButtonMouseEnter(object sender, MouseEventArgs e)
+        {
+            var p = (MgPopup.Child as MoongourdPopup);
+            p.SetInfo(ChatWindowManager.Instance.TooltipInfo.Name, SettingsManager.LastRegion);
+            MgPopup.IsOpen = true;
+        }
     }
 }
