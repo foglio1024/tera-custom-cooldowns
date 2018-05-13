@@ -14,6 +14,7 @@ namespace TCC.Data
         private bool _isExpanded;
         private int _playerCount;
         private SynchronizedObservableCollection<User> _players;
+        private SynchronizedObservableCollection<User> _applicants;
         private bool _canApply = true;
 
         public uint LeaderId
@@ -80,6 +81,9 @@ namespace TCC.Data
                 NPC();
             }
         }
+
+        public bool IsMyLfg => Players.Any(x => x.PlayerId == SessionManager.CurrentPlayer.PlayerId) || 
+                               LeaderId == SessionManager.CurrentPlayer.PlayerId;
         public SynchronizedObservableCollection<User> Players
         {
             get => _players;
@@ -90,8 +94,19 @@ namespace TCC.Data
                 NPC();
             }
         }
+        public SynchronizedObservableCollection<User> Applicants
+        {
+            get => _applicants;
+            set
+            {
+                if (_applicants == value) return;
+                _applicants= value;
+                NPC();
+            }
+        }
         public int MaxCount => IsRaid ? 30 : 5;
         public ApplyCommand Apply { get; }
+        public RefreshApplicantsCommand RefreshApplicants { get; }
         public bool CanApply
         {
             get => _canApply;
@@ -102,11 +117,15 @@ namespace TCC.Data
                 NPC();
             }
         }
+
+
         public Listing()
         {
             _dispatcher = WindowManager.LfgListWindow.Dispatcher;
             Players = new SynchronizedObservableCollection<User>(_dispatcher);
+            Applicants = new SynchronizedObservableCollection<User>(_dispatcher);
             Apply = new ApplyCommand(this);
+            RefreshApplicants = new RefreshApplicantsCommand(this);
         }
     }
 
@@ -137,6 +156,26 @@ namespace TCC.Data
             Proxy.ApplyToLfg(_listing.LeaderId);
             _listing.CanApply = false;
             _t.Start();
+        }
+    }
+    public class RefreshApplicantsCommand : ICommand
+    {
+        private readonly Listing _listing;
+        public RefreshApplicantsCommand(Listing listing)
+        {
+            _listing = listing;
+        }
+
+        public event EventHandler CanExecuteChanged;
+
+        public bool CanExecute(object parameter)
+        {
+            return _listing.IsMyLfg;
+        }
+
+        public void Execute(object parameter)
+        {
+            Proxy.RequestCandidates();
         }
     }
 
