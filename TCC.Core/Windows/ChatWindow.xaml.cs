@@ -63,29 +63,33 @@ namespace TCC.Windows
 
         public void UpdateSettings()
         {
-            if (VM.TabVMs.Count == 0)
+            Dispatcher.Invoke(() =>
             {
-                foreach (var tab in TabControl.ItemsSource)
+
+                if (VM.TabVMs.Count == 0)
                 {
-                    VM.TabVMs.Add(tab as HeaderedItemViewModel);
+                    foreach (var tab in TabControl.ItemsSource)
+                    {
+                        VM.TabVMs.Add(tab as HeaderedItemViewModel);
+                    }
                 }
-            }
 
             ((ChatWindowSettings)WindowSettings).Tabs.Clear();
-            ((ChatWindowSettings)WindowSettings).Tabs.AddRange(VM.Tabs);
-            ((ChatWindowSettings)WindowSettings).LfgOn = VM.LfgOn;
-            ((ChatWindowSettings)WindowSettings).BackgroundOpacity = VM.BackgroundOpacity;
-            ((ChatWindowSettings)WindowSettings).X = Left/SettingsManager.ScreenW;
-            ((ChatWindowSettings)WindowSettings).Y= Top/SettingsManager.ScreenH;
-            var v = SettingsManager.ChatWindowsSettings;
-            var s = v.FirstOrDefault(x => x == WindowSettings);
-            if (s == null) v.Add(WindowSettings as ChatWindowSettings);
-            else s = WindowSettings as ChatWindowSettings;
+                ((ChatWindowSettings)WindowSettings).Tabs.AddRange(VM.Tabs);
+                ((ChatWindowSettings)WindowSettings).LfgOn = VM.LfgOn;
+                ((ChatWindowSettings)WindowSettings).BackgroundOpacity = VM.BackgroundOpacity;
+                ((ChatWindowSettings)WindowSettings).X = Left / SettingsManager.ScreenW;
+                ((ChatWindowSettings)WindowSettings).Y = Top / SettingsManager.ScreenH;
+                var v = SettingsManager.ChatWindowsSettings;
+                var s = v.FirstOrDefault(x => x == WindowSettings);
+                if (s == null) v.Add(WindowSettings as ChatWindowSettings);
+                else s = WindowSettings as ChatWindowSettings;
 
-            if (ChatTabClient.LastSource != this && ChatTabClient.LastSource != null)
-            {
-                ChatTabClient.LastSource.UpdateSettings();
-            }
+                if (ChatTabClient.LastSource != this && ChatTabClient.LastSource != null)
+                {
+                    ChatTabClient.LastSource.UpdateSettings();
+                }
+            });
         }
         private void Instance_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -225,7 +229,7 @@ namespace TCC.Windows
         {
             ChatWindowManager.Instance.RefreshTimer();
             Settings.BeginAnimation(OpacityProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(300)));
-            if(e.LeftButton == MouseButtonState.Pressed) UpdateSettings();
+            if (e.LeftButton == MouseButtonState.Pressed) UpdateSettings();
         }
 
         private void TccWindow_MouseEnter(object sender, MouseEventArgs e)
@@ -273,7 +277,7 @@ namespace TCC.Windows
 
         private void ChatWindow_OnDragLeave(object sender, DragEventArgs e)
         {
-            
+
         }
     }
 
