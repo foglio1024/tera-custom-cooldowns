@@ -53,7 +53,7 @@ namespace TCC
             SettingsManager.LoadSettings();
 
             SplashScreen.SetText("Pre-loading databases...");
-            SessionManager.InitDatabases(SettingsManager.LastRegion == "" ? "EU-EN" : SettingsManager.LastRegion);
+            SessionManager.InitDatabases( string.IsNullOrEmpty(SettingsManager.LastRegion ) ? "EU-EN" : SettingsManager.LastRegion);
 
             SplashScreen.SetText("Initializing windows...");
             WindowManager.Init();
