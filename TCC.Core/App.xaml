@@ -65,6 +65,12 @@
             <SolidColorBrush x:Key="Tier4DungeonColor" Color="#fc946f"/>
             <SolidColorBrush x:Key="Tier5DungeonColor" Color="#fc6f6f"/>
 
+            <SolidColorBrush x:Key="MoongourdBgColorDark" Color="#2a3f54"/>
+            <SolidColorBrush x:Key="MoongourdBgColor" Color="#34495e"/>
+            <SolidColorBrush x:Key="MoongourdHeaderColor" Color="#3b5167"/>
+            <SolidColorBrush x:Key="MoongourdAccentColor" Color="#26b99a"/>
+            <SolidColorBrush x:Key="MoongourdFadedAccentColor" Color="#1b9190"/>
+
             <system:Double x:Key="MapWidth">800</system:Double>
             <system:Double x:Key="MapHeight">600</system:Double>
 
@@ -309,6 +315,9 @@
             <PathGeometry x:Key="SvgRemoveCircle">M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z</PathGeometry>
             <PathGeometry x:Key="SvgSearch">M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z</PathGeometry>
             <PathGeometry x:Key="SvgCheckAll">M0.41,13.41L6,19L7.41,17.58L1.83,12M22.24,5.58L11.66,16.17L7.5,12L6.07,13.41L11.66,19L23.66,7M18,7L16.59,5.58L10.24,11.93L11.66,13.34L18,7Z</PathGeometry>
+            <PathGeometry x:Key="SvgMenuRight">M10,17L15,12L10,7V17Z</PathGeometry>
+            <PathGeometry x:Key="SvgOpenLink">M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z</PathGeometry>
+            <PathGeometry x:Key="SvgWarning">M13,14H11V10H13M13,18H11V16H13M1,21H23L12,2L1,21Z</PathGeometry>
             <PathGeometry x:Key="Svg"></PathGeometry>
             <!--Converters-->
             <converters:BoolToOpacityConverter x:Key="Converters.BoolToOpacity"/>
@@ -911,7 +920,6 @@
                                 <UniformGrid Rows="1"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
-
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Button Style="{StaticResource ButtonContentOpacityStyle}" Command="{Binding ToggleCommand}" Width="30" HorizontalContentAlignment="Center"
@@ -1473,6 +1481,33 @@
                            Foreground="#8fff" Text="{Binding Channel, Converter={StaticResource Converters.ChatChannelToName}}"></TextBlock>
                 </Grid>
             </DataTemplate>
+            <DataTemplate  x:Key="EncounterDt" DataType="local:MoongourdEncounter" >
+                <Grid VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="40"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel HorizontalAlignment="Left">
+
+                        <TextBlock Text="{Binding BossName}"  HorizontalAlignment="Left" TextAlignment="Left" FontSize="13"
+                                   Foreground="{StaticResource MoongourdAccentColor}" VerticalAlignment="Center" Margin="5 0"/>
+                        <TextBlock Text="{Binding DungeonName}"  TextAlignment="Left" FontSize="11" HorizontalAlignment="Left"
+                                   Foreground="{StaticResource MoongourdFadedAccentColor}" VerticalAlignment="Center" Margin="5 0"/>
+                    </StackPanel>
+                    <TextBlock Text="{Binding PlayerDps, StringFormat={}{0:#,#}}" Grid.Column="1" Margin="5 0" 
+                               VerticalAlignment="Center" Foreground="#fff" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{Binding PlayerDeaths}" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"
+                               Foreground="#9fff"/>
+                    <Button Style="{StaticResource ButtonContentOpacityStyle}" Grid.Column="3" VerticalAlignment="Center" Margin="5"
+                            HorizontalAlignment="Center" Command="{Binding Browse}">
+                        <Path Data="{StaticResource SvgOpenLink}" Fill="#fff" Stretch="Uniform" Height="15"
+                              VerticalAlignment="Center"/>
+                    </Button>
+                </Grid>
+            </DataTemplate>
+
         </ResourceDictionary>
 
     </Application.Resources>
