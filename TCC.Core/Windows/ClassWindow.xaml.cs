@@ -15,6 +15,9 @@ namespace TCC.Windows
             ButtonsRef = Buttons;
             MainContentRef = content;
             InitWindow(SettingsManager.ClassWindowSettings, ignoreSize: true);
+            if (!SessionManager.Logged) return;
+            if (ClassWindowViewModel.Instance.CurrentManager == null)
+                ClassWindowViewModel.Instance.CurrentClass = SessionManager.CurrentPlayer.Class;
         }
     }
 }
