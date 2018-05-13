@@ -185,5 +185,29 @@ namespace TCC.Windows
             Proxy.RequestLfgList();
             Proxy.RequestLfgList();
         }
+
+        private void AcceptApply(object sender, RoutedEventArgs e)
+        {
+            var user = (sender as FrameworkElement).DataContext as User;
+            Proxy.PartyInvite(user.Name);
+        }
+
+        private void InspectApplicant(object sender, RoutedEventArgs e)
+        {
+            var user = (sender as FrameworkElement).DataContext as User;
+            Proxy.Inspect(user.Name);
+        }
+
+        private void RefuseApplicant(object sender, RoutedEventArgs e)
+        {
+            var user = (sender as FrameworkElement).DataContext as User;
+            Proxy.DeclineApply(user.PlayerId);
+            Proxy.RequestCandidates();
+        }
+
+        private void ReloadLfgList(object sender, RoutedEventArgs e)
+        {
+            Proxy.RequestLfgList();
+        }
     }
 }

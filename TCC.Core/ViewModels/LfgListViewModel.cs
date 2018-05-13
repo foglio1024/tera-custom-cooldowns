@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
@@ -41,14 +43,30 @@ namespace TCC.ViewModels
         public bool AmIinLfg => (Listings.ToSyncArray().Any(listing =>  listing.LeaderId == SessionManager.CurrentPlayer.PlayerId 
                                                                      || listing.LeaderName == SessionManager.CurrentPlayer.Name
                                                                      || listing.Players.ToSyncArray().Any(player => player.PlayerId == SessionManager.CurrentPlayer.PlayerId)));
-        public void NotifyMyLfg() => NPC(nameof(AmIinLfg));
+        public void NotifyMyLfg()
+        {
+            NPC(nameof(AmIinLfg));
+            NPC(nameof(MyLfg));
+        }
+
+        public Listing MyLfg => Listings.FirstOrDefault(x => x.Players.Any(p => p.PlayerId == SessionManager.CurrentPlayer.PlayerId) ||
+                                                             x.LeaderId == SessionManager.CurrentPlayer.PlayerId);
         public LfgListViewModel()
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
             Listings = new SynchronizedObservableCollection<Listing>(_dispatcher);
             ListingsView = Utils.InitLiveView<Listing>(null, Listings, new string[] { }, new string[] { });
             SortCommand = new SortCommand(ListingsView);
+            Listings.CollectionChanged += ListingsOnCollectionChanged;
         }
+
+        private void ListingsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            //NotifyMyLfg();
+            Task.Delay(500).ContinueWith(t => { _dispatcher.Invoke(NotifyMyLfg); });
+
+        }
+
         internal void RemoveDeadLfg()
         {
             Listings.Remove(_lastClicked);

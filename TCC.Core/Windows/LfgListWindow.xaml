@@ -87,6 +87,92 @@
 
             </DataTemplate.Triggers>
         </DataTemplate>
+        <DataTemplate x:Key="ApplicantDt" DataType="data:User">
+            <Grid Background="Transparent" MouseRightButtonDown="Grid_MouseRightButtonDown">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="Path" BasedOn="{StaticResource {x:Type Path}}">
+                        <Setter Property="Margin" Value="2"></Setter>
+                        <Setter Property="Height" Value="12"></Setter>
+                        <Setter Property="Fill" Value="#bfff"></Setter>
+                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                    </Style>
+                </Grid.Resources>
+                <StackPanel Orientation="Horizontal" Grid.Column="1">
+                    <Rectangle Fill="#cfff" Opacity="1"
+                               Margin="2" RenderOptions.BitmapScalingMode="Fant" UseLayoutRounding="True"
+                               HorizontalAlignment="Left" VerticalAlignment="Center"
+                               Width="20" Height="20" Stretch="Uniform">
+                        <Rectangle.OpacityMask>
+                            <ImageBrush
+                                ImageSource="{Binding UserClass, Converter={StaticResource Converters.ClassToImage}}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Foreground="{StaticResource GoldColor}" Style="{StaticResource Styles.DefaultText}" Margin="0 0 0 0"
+                               VerticalAlignment="Center">
+                        <Run Text="lv." Foreground="#5999" FontSize="10" />
+                        <Run Text="{Binding Level, Mode=OneWay}" Foreground="#5999" FontSize="10" />
+                        <Run Text="{Binding Name, Mode=OneWay}" />
+                    </TextBlock>
+                    <Path Data="{StaticResource SvgDelegateLeader}" Fill="{StaticResource GoldColor}" Height="8"
+                          Visibility="{Binding IsLeader, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          HorizontalAlignment="Right" Margin="5 0 5 1" />
+                </StackPanel>
+
+                <TextBlock Text="{Binding Location}" Grid.Column="2" Foreground="#6fff"
+                           Style="{StaticResource Styles.DefaultText}" Margin="0 0 0 0" VerticalAlignment="Center">
+                </TextBlock>
+                <UniformGrid Grid.Column="3" Rows="1">
+                    <UniformGrid.Resources>
+                        <Style TargetType="Button" BasedOn="{StaticResource ButtonMainStyle}">
+                            <Setter Property="tcc:ButtonExtensions.CornerRadius" Value="2"></Setter>
+                            <Setter Property="Margin" Value="2 3"></Setter>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                        </Style>
+                    </UniformGrid.Resources>
+                    <Button Background="{StaticResource GreenColor}" Click="AcceptApply" >
+                        <Path Data="{StaticResource SvgCheckCircle}"/>
+                    </Button>
+                    <Button Background="{StaticResource Colors.Chat.Party}" Click="InspectApplicant">
+                        <Path Data="{StaticResource SvgEye}" />
+                    </Button>
+                    <Button Background="{StaticResource HpColor}" Click="RefuseApplicant">
+                        <Path Data="{StaticResource SvgClose}"/>
+                    </Button>
+                </UniformGrid>
+
+            </Grid>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Online}" Value="False">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation From="1" To=".3"
+                                                 Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="Opacity" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation From=".3" To="1"
+                                                 Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="Opacity" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+
+            </DataTemplate.Triggers>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type data:Listing}" x:Key="ListingDt">
             <Grid HorizontalAlignment="Stretch" Height="Auto" Background="Transparent"
                   MouseLeftButtonDown="Grid_MouseLeftButtonDown">
@@ -100,11 +186,13 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="28" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <Ellipse HorizontalAlignment="Left"
+                <Ellipse HorizontalAlignment="Left" x:Name="Ell"
                          Fill="{Binding IsRaid, Converter={StaticResource Converters.RaidToColor}}"
                          Width="11" Height="11" />
                 <TextBlock Text="{Binding Message}"
+                           x:Name="MessageTb"
                            FontSize="14"
                            FontWeight="Thin"
                            Style="{StaticResource Styles.DefaultText}"
@@ -115,6 +203,7 @@
                 <TextBlock Text="{Binding LeaderName}"
                            Style="{StaticResource Styles.DefaultText}"
                            Grid.Column="2"
+                           x:Name="LeaderNameTb"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Left" />
                 <TextBlock Style="{StaticResource Styles.DefaultText}"
@@ -127,10 +216,11 @@
                 <!--<Separator Background="#1fff" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="0" VerticalAlignment="Bottom"></Separator>-->
                 <Rectangle Grid.Row="0"
                            Width="5"
-                           Grid.RowSpan="2"
+                           Grid.RowSpan="3"
                            Fill="{Binding IsRaid, Converter={StaticResource Converters.RaidToColor}}"
                            HorizontalAlignment="Left"
                            Margin="3 8 0 5"
+                           x:Name="EllExt"
                            Opacity=".5"
                            RadiusX="2"
                            RadiusY="2" />
@@ -155,6 +245,28 @@
                         <ScaleTransform ScaleY="0" />
                     </ListBox.LayoutTransform>
                 </ListBox>
+                <ListBox ItemsSource="{Binding Applicants}"
+                         x:Name="applicants"
+                         Grid.Row="2"
+                         Padding="0 0 0 5"
+                         Grid.ColumnSpan="5"
+                         Grid.Column="0"
+                         Visibility="Collapsed"
+                         Margin="15 0 15 0"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         HorizontalAlignment="Stretch"
+                         ItemTemplate="{StaticResource ApplicantDt}"
+                         ItemContainerStyle="{StaticResource PlayerListItemStyle}">
+                    <ListBox.Template>
+                        <ControlTemplate TargetType="ListBox">
+                            <ItemsPresenter />
+                        </ControlTemplate>
+                    </ListBox.Template>
+                    <ListBox.LayoutTransform>
+                        <ScaleTransform ScaleY="0" />
+                    </ListBox.LayoutTransform>
+                </ListBox>
                 <controls:Arc StrokeThickness="10"
                               Stroke="{StaticResource Tier5DungeonColor}"
                               Grid.Column="4"
@@ -165,7 +277,6 @@
                               HorizontalAlignment="Center"
                               Margin="4 0 -4 0"
                               x:Name="cdArc" />
-
                 <Button x:Name="btn"
                         Grid.Row="0"
                         VerticalAlignment="Center"
@@ -175,6 +286,17 @@
                         IsEnabled="{Binding CanApply}"
                         Command="{Binding Apply}">
                     <Path Data="{StaticResource SvgAddUser}" Margin="3" Width="15" Stretch="Uniform" ToolTip="Apply"
+                          Fill="White" />
+                </Button>
+                <Button x:Name="ApplicantsBtn"
+                        Grid.Row="0"
+                        VerticalAlignment="Center"
+                        Visibility="Hidden"
+                        Grid.Column="4"
+                        Margin=" 5 -2 0 0"
+                        Style="{StaticResource ButtonContentOpacityStyle}"
+                        Command="{Binding RefreshApplicants}">
+                    <Path Data="{StaticResource SvgReload}" Margin="3" Width="15" Stretch="Uniform" ToolTip="Refresh applicants list"
                           Fill="White" />
                 </Button>
             </Grid>
@@ -204,6 +326,14 @@
                                         <QuadraticEase />
                                     </DoubleAnimation.EasingFunction>
                                 </DoubleAnimation>
+                                <DoubleAnimation Storyboard.TargetName="applicants"
+                                                 Storyboard.TargetProperty="(LayoutTransform).(ScaleTransform.ScaleY)"
+                                                 To="1"
+                                                 Duration="0:0:0.15">
+                                    <DoubleAnimation.EasingFunction>
+                                        <QuadraticEase />
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
                                 <DoubleAnimation Storyboard.TargetName="btn"
                                                  Storyboard.TargetProperty="(LayoutTransform).(ScaleTransform.ScaleY)"
                                                  To="1"
@@ -226,6 +356,14 @@
                                         <QuadraticEase />
                                     </DoubleAnimation.EasingFunction>
                                 </DoubleAnimation>
+                                <DoubleAnimation Storyboard.TargetName="applicants"
+                                                 Storyboard.TargetProperty="(LayoutTransform).(ScaleTransform.ScaleY)"
+                                                 To="0"
+                                                 Duration="0:0:0.15">
+                                    <DoubleAnimation.EasingFunction>
+                                        <QuadraticEase />
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
                                 <DoubleAnimation Storyboard.TargetName="btn"
                                                  Storyboard.TargetProperty="(LayoutTransform).(ScaleTransform.ScaleY)"
                                                  To="0"
@@ -238,6 +376,15 @@
                         </BeginStoryboard>
                     </DataTrigger.ExitActions>
                 </DataTrigger>
+                <DataTrigger Binding="{Binding IsMyLfg}" Value="True">
+                    <Setter Property="Visibility" TargetName="btn" Value="Hidden"></Setter>
+                    <Setter Property="Visibility" TargetName="ApplicantsBtn" Value="Visible"></Setter>
+                    <Setter Property="Visibility" TargetName="cdArc" Value="Collapsed"></Setter>
+                    <Setter Property="Visibility" TargetName="applicants" Value="Visible"></Setter>
+                    <!--<Setter Property="Fill" TargetName="Ell" Value="{StaticResource GoldColor}"></Setter>
+                    <Setter Property="Fill" TargetName="EllExt" Value="{StaticResource GoldColor}"></Setter>-->
+                    <Setter Property="Foreground" TargetName="MessageTb" Value="{StaticResource GoldColor}"></Setter>
+                </DataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
     </Window.Resources>
@@ -248,7 +395,6 @@
                 <RowDefinition Height="38" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <!--Title-->
             <Path Data="{StaticResource SvgUsers}" HorizontalAlignment="Left" Margin="8 9 5 7"
@@ -257,10 +403,16 @@
             <TextBlock Text="Looking for group" VerticalAlignment="Center" Opacity=".4" FontSize="24"
                        FontWeight="Thin" IsHitTestVisible="False" Foreground="#ddd" Grid.Row="0" Margin="50 0" />
             <Rectangle MouseLeftButtonDown="Border_MouseLeftButtonDown" Fill="Transparent"></Rectangle>
-            <Button Style="{StaticResource ButtonContentOpacityStyle}" HorizontalAlignment="Right"
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Style="{StaticResource ButtonContentOpacityStyle}" HorizontalAlignment="Right" 
+                    VerticalAlignment="Stretch" Click="ReloadLfgList">
+                    <Path Data="{StaticResource SvgReload}" Stretch="Uniform" Fill="#fff" Margin="12"></Path>
+                </Button>
+                <Button Style="{StaticResource ButtonContentOpacityStyle}" HorizontalAlignment="Right"
                     VerticalAlignment="Stretch" Click="Button_Click">
-                <Path Data="{StaticResource SvgClose}" Stretch="Uniform" Fill="#fff" Margin="12"></Path>
-            </Button>
+                    <Path Data="{StaticResource SvgClose}" Stretch="Uniform" Fill="#fff" Margin="12"></Path>
+                </Button>
+            </StackPanel>
             <!--Header-->
             <Grid Grid.Row="1" VerticalAlignment="Stretch" Margin="0 0 5 0">
                 <Grid.ColumnDefinitions>
@@ -308,7 +460,7 @@
                 </ListBox.ItemsPanel>
             </ListBox>
             <!--Footer-->
-            <Grid Grid.Row="2" VerticalAlignment="Bottom" Background="{StaticResource DefaultBackgroundColor}">
+            <Grid Grid.Row="2" VerticalAlignment="Bottom" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition />
@@ -342,7 +494,7 @@
                 <Button tcc:ButtonExtensions.CornerRadius="3"
                         Grid.Row="1"
                         HorizontalContentAlignment="Center"
-                        Margin="4"
+                        Margin="5"
                         Padding="0 4"
                         Effect="{StaticResource DropShadow}"
                         x:Name="CreateMessageBtn"
@@ -367,6 +519,11 @@
                             Margin="5" Background="{StaticResource HpColor}"
                             tcc:ButtonExtensions.CornerRadius="3" FontSize="15" FontWeight="Thin"
                             Content="Remove message" HorizontalContentAlignment="Center" Padding="0 4" />
+                    <Button Style="{StaticResource ButtonMainStyle}" x:Name="EditMessageButton"
+                            Click="CreateMessageBtn_Click"
+                            Margin="5" Background="{StaticResource  IgnidraxColor}"
+                            tcc:ButtonExtensions.CornerRadius="3" FontSize="15" FontWeight="Thin"
+                            Content="Edit message" HorizontalContentAlignment="Center" Padding="0 4" />
                     <Grid Margin="5">
                         <Button Style="{StaticResource ButtonMainStyle}"
                                 Background="{StaticResource GreenColor}" FontSize="15" FontWeight="Thin"

@@ -398,7 +398,7 @@ namespace TCC.Parsing
 
         public static void HandleRunemark(S_WEAK_POINT x)
         {
-            if (SessionManager.CurrentPlayer.Class != Class.Glaiver) return;
+            if (SessionManager.CurrentPlayer.Class != Class.Valkyrie) return;
             if (ClassWindowViewModel.Instance.CurrentManager.GetType() != typeof(ValkyrieBarManager)) return;
             ((ValkyrieBarManager)ClassWindowViewModel.Instance.CurrentManager).RunemarksCounter.Val = (int)x.TotalRunemarks;
         }
@@ -574,6 +574,18 @@ namespace TCC.Parsing
         internal static void HandleUserApplyToParty(S_OTHER_USER_APPLY_PARTY x)
         {
             ChatWindowManager.Instance.AddChatMessage(new ApplyMessage(x));
+            if (WindowManager.LfgListWindow.VM.MyLfg == null) return;
+            var dest = WindowManager.LfgListWindow.VM.MyLfg.Applicants;
+            if (dest.Any(u => u.PlayerId == x.PlayerId)) return;
+            dest.Add(new User(WindowManager.LfgListWindow.Dispatcher)
+            {
+                PlayerId = x.PlayerId,
+                UserClass = x.Class,
+                Level = Convert.ToUInt32(x.Level),
+                Name = x.Name,
+                Online = true
+
+            });
         }
 
         internal static void HandleFriendStatus(S_UPDATE_FRIEND_INFO x)
@@ -697,14 +709,14 @@ namespace TCC.Parsing
             if (!SettingsManager.ClassWindowSettings.Enabled) return;
             switch (SessionManager.CurrentPlayer.Class)
             {
-                case Class.Elementalist:
+                case Class.Mystic:
                     Mystic.CheckHurricane(p);
                     Mystic.CheckBuff(p);
                     break;
                 case Class.Warrior:
                     Warrior.CheckBuff(p);
                     break;
-                case Class.Glaiver:
+                case Class.Valkyrie:
                     Valkyrie.CheckRagnarok(p);
                     break;
                 case Class.Archer:
@@ -720,16 +732,16 @@ namespace TCC.Parsing
                 case Class.Priest:
                     Priest.CheckBuff(p);
                     break;
-                case Class.Fighter:
+                case Class.Brawler:
                     Brawler.CheckBrawlerAbnormal(p);
                     break;
-                case Class.Assassin:
+                case Class.Ninja:
                     Ninja.CheckFocus(p);
                     break;
                 case Class.Sorcerer:
                     Sorcerer.CheckBuff(p);
                     break;
-                case Class.Soulless:
+                case Class.Reaper:
                     Reaper.CheckBuff(p);
                     break;
                 case Class.Slayer:
@@ -761,13 +773,13 @@ namespace TCC.Parsing
                 case Class.Priest:
                     Priest.CheckBuff(p);
                     break;
-                case Class.Elementalist:
+                case Class.Mystic:
                     Mystic.CheckBuff(p);
                     break;
                 case Class.Sorcerer:
                     Sorcerer.CheckBuff(p);
                     break;
-                case Class.Soulless:
+                case Class.Reaper:
                     Reaper.CheckBuff(p);
                     break;
                 case Class.Slayer:
@@ -776,7 +788,7 @@ namespace TCC.Parsing
                 case Class.Berserker:
                     Berserker.CheckBuff(p);
                     break;
-                case Class.Fighter:
+                case Class.Brawler:
                     Brawler.CheckBrawlerAbnormal(p);
                     break;
 
@@ -802,13 +814,13 @@ namespace TCC.Parsing
                     Lancer.CheckArushEnd(p);
                     Lancer.CheckGshoutEnd(p);
                     break;
-                case Class.Elementalist:
+                case Class.Mystic:
                     Mystic.CheckBuffEnd(p);
                     break;
-                case Class.Fighter:
+                case Class.Brawler:
                     Brawler.CheckBrawlerAbnormalEnd(p);
                     break;
-                case Class.Assassin:
+                case Class.Ninja:
                     Ninja.CheckFocusEnd(p);
                     break;
                 case Class.Priest:
@@ -817,7 +829,7 @@ namespace TCC.Parsing
                 case Class.Sorcerer:
                     Sorcerer.CheckBuffEnd(p);
                     break;
-                case Class.Soulless:
+                case Class.Reaper:
                     Reaper.CheckBuffEnd(p);
                     break;
                 case Class.Slayer:
@@ -842,10 +854,18 @@ namespace TCC.Parsing
         }
         public static void HandlePartyMemberList(S_PARTY_MEMBER_LIST p)
         {
+            var notifyLfg = GroupWindowViewModel.Instance.Members.Count == 0;
+
             GroupWindowViewModel.Instance.SetRaid(p.Raid);
+
             foreach (var user in p.Members)
-            {
                 GroupWindowViewModel.Instance.AddOrUpdateMember(user);
+
+            if (notifyLfg) WindowManager.LfgListWindow.VM.NotifyMyLfg();
+            if (Proxy.IsConnected)
+            {
+                Proxy.RequestCandidates();
+                if(WindowManager.LfgListWindow.IsVisible) Proxy.RequestLfgList();
             }
         }
         public static void HandlePartyMemberLeave(S_LEAVE_PARTY_MEMBER p)
@@ -1036,6 +1056,24 @@ namespace TCC.Parsing
                 var uiMode = data.Replace(uiModeCmd, "");
                 SessionManager.InGameUiOn = uiMode == "1"; //too lazy
             }
+        }
+
+        public static void HandleApplicantsList(S_SHOW_CANDIDATE_LIST p)
+        {
+            if (WindowManager.LfgListWindow.VM.MyLfg == null) return;
+            var dest = WindowManager.LfgListWindow.VM.MyLfg.Applicants;
+            //TODO refactoring: method that does this "merge" thing
+            foreach (var applicant in p.Candidates)
+            {
+                if (dest.All(x => x.PlayerId != applicant.PlayerId)) dest.Add(applicant);
+            }
+
+            var toRemove = new List<User>();
+            foreach (var user in dest)
+            {
+                if (p.Candidates.All(x => x.PlayerId != user.PlayerId)) toRemove.Add(user);
+            }
+            toRemove.ForEach(r => dest.Remove(r));
         }
     }
 }

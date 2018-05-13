@@ -15,43 +15,6 @@ namespace TCC
         private static TcpClient _client = new TcpClient();
         private static int _retries = 2;
 
-        public static bool IsConnected => _client.Connected;
-
-        public static void ConnectToProxy()
-        {
-            try
-            {
-                if (_client.Client != null && _client.Connected) return;
-                Debug.WriteLine("Connecting...");
-                ChatWindowManager.Instance.AddTccMessage("Trying to connect to tera-proxy...");
-
-                _client = new TcpClient();
-                _client.Connect("127.0.0.50", 9550);
-                Debug.WriteLine("Connected");
-                ChatWindowManager.Instance.AddTccMessage("Connected to tera-proxy.");
-                var t = new Thread(ReceiveData);
-                t.Start();
-            }
-            catch (Exception e)
-            {
-                _retries--;
-                Debug.WriteLine(e.Message);
-                Task.Delay(2000).ContinueWith(t =>
-                {
-                    if (_retries <= 0)
-                    {
-                        Debug.WriteLine("Maximum retries exceeded...");
-                        ChatWindowManager.Instance.AddTccMessage("Maximum retries exceeded. tera-proxy functionalities won't be available.");
-
-                        _retries = 2;
-                        return;
-                    }
-                    ConnectToProxy();
-                });
-            }
-        }
-
-
         private static void SendData(string data)
         {
             try
@@ -94,6 +57,43 @@ namespace TCC
                 Console.WriteLine(e.ToString());
             }
         }
+
+        public static bool IsConnected => _client.Connected;
+
+        public static void ConnectToProxy()
+        {
+            try
+            {
+                if (_client.Client != null && _client.Connected) return;
+                Debug.WriteLine("Connecting...");
+                ChatWindowManager.Instance.AddTccMessage("Trying to connect to tera-proxy...");
+
+                _client = new TcpClient();
+                _client.Connect("127.0.0.50", 9550);
+                Debug.WriteLine("Connected");
+                ChatWindowManager.Instance.AddTccMessage("Connected to tera-proxy.");
+                var t = new Thread(ReceiveData);
+                t.Start();
+                InitStub();
+            }
+            catch (Exception e)
+            {
+                _retries--;
+                Debug.WriteLine(e.Message);
+                Task.Delay(2000).ContinueWith(t =>
+                {
+                    if (_retries <= 0)
+                    {
+                        Debug.WriteLine("Maximum retries exceeded...");
+                        ChatWindowManager.Instance.AddTccMessage("Maximum retries exceeded. tera-proxy functionalities won't be available.");
+
+                        _retries = 2;
+                        return;
+                    }
+                    ConnectToProxy();
+                });
+            }
+        }
         public static void CloseConnection()
         {
             try
@@ -108,6 +108,14 @@ namespace TCC
             }
         }
 
+        public static void InitStub()
+        {
+            var sb = new StringBuilder("init_stub");
+            sb.Append("&use_lfg=");
+            sb.Append(SettingsManager.LfgEnabled.ToString().ToLower());
+
+            SendData(sb.ToString());
+        }
         public static void ChatLinkData(string linkData)
         {
             // linkData = T#####DATA
@@ -179,18 +187,16 @@ namespace TCC
 
             SendData(sb.ToString());
         }
-
-        internal static void PublicizeLfg()
+        public static void PublicizeLfg()
         {
             var sb = new StringBuilder("lfg_publicize");
             SendData(sb.ToString());
         }
-        internal static void RemoveLfg()
+        public static void RemoveLfg()
         {
             var sb = new StringBuilder("lfg_remove");
             SendData(sb.ToString());
         }
-
         public static void UnblockUser(string name)
         {
             var sb = new StringBuilder("unblock");
@@ -199,8 +205,7 @@ namespace TCC
 
             SendData(sb.ToString());
         }
-
-        internal static void RequestLfgList(int min = 60, int max = 65)
+        public static void RequestLfgList(int min = 60, int max = 65)
         {
             var sb = new StringBuilder("lfg_request_list");
             sb.Append("&minlvl=");
@@ -209,7 +214,6 @@ namespace TCC
             sb.Append(max);
             SendData(sb.ToString());
         }
-
         public static void AskInteractive(uint srvId, string name)
         {
             var sb = new StringBuilder("ask_int");
@@ -330,30 +334,24 @@ namespace TCC
             sb.Append(raid.ToString().ToLower());
             SendData(sb.ToString());
         }
-        public static void InitStub()
-        {
-            var sb = new StringBuilder("init_stub");
-            sb.Append("&use_lfg=");
-            sb.Append(SettingsManager.LfgEnabled);
-
-            SendData(sb.ToString());
-        }
-
         public static void DisbandParty()
         {
             var sb = new StringBuilder("disband_group");
             SendData(sb.ToString());
         }
-
         public static void ResetInstance()
         {
             var sb = new StringBuilder("reset_instance");
             SendData(sb.ToString());
         }
-
         public static void LeaveParty()
         {
             var sb = new StringBuilder("leave_party");
+            SendData(sb.ToString());
+        }
+        public static void RequestCandidates()
+        {
+            var sb = new StringBuilder("request_candidates");
             SendData(sb.ToString());
         }
     }
