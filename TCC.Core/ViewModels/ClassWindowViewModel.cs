@@ -36,7 +36,7 @@ namespace TCC.ViewModels
             {
                 if (_currentClass == value) return;
                 _currentClass = value;
-                WindowManager.ClassWindow.Dispatcher.Invoke(() =>
+                _dispatcher.Invoke(() =>
                 {
                     switch (_currentClass)
                     {
