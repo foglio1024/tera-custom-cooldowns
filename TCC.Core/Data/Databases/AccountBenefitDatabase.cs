@@ -19,7 +19,7 @@ namespace TCC.Data.Databases
             while (true)
             {
                 var line = f.ReadLine();
-                if (line == null) return;
+                if (string.IsNullOrEmpty(line)) return;
                 var s = line.Split('\t');
                 Benefits.Add(uint.Parse(s[0]), s[1]);
             }
